@@ -10,7 +10,7 @@ namespace Z0
     using System.Reflection;
     using System.Runtime.CompilerServices;
 
-    partial class XReflex
+    partial class XClrQuery
     {
         /// <summary>
         /// For the generic methods in a stream, selects their respective definitions

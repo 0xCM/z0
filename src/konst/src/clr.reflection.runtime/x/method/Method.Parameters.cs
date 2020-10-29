@@ -12,7 +12,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class XReflex
+    partial class XClrQuery
     {
         /// <summary>
         /// Selects the method parameters that satisfy a predicate

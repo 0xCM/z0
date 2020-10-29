@@ -12,7 +12,7 @@ namespace Z0
     using static Konst;
     using static ReflectionFlags;
 
-    partial class XReflex
+    partial class XClrQuery
     {
         /// <summary>
         /// All of the methods belong to us

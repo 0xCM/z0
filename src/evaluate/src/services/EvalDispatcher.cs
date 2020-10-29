@@ -103,7 +103,7 @@ namespace Z0
         public Bit32 EvalFixedOperator(BufferTokens buffers, in ApiMemberCode api)
         {
             var nk = api.Method.ReturnType.NumericKind();
-            var kid = api.Member.KindId;
+            var kid = api.Member.ApiKind;
             var count = 128;
             var n = n2;
 
@@ -202,7 +202,7 @@ namespace Z0
 
         public void Dispatch(BufferTokens buffers, in ApiMemberCode api, UnaryOpClass k)
         {
-            var kid = api.Member.KindId;
+            var kid = api.Member.ApiKind;
             int count = 128;
             if(kid == 0 || kid == ApiOpId.Div || kid == ApiOpId.Mod)
                 return;
@@ -254,7 +254,7 @@ namespace Z0
 
         public void Dispatch(BufferTokens buffers, in ApiMemberCode api, BinaryOpClass k)
         {
-            var kid = api.Member.KindId;
+            var kid = api.Member.ApiKind;
             int count = 128;
             if(kid == 0 || kid == ApiOpId.Div || kid == ApiOpId.Mod)
                 return;
@@ -337,7 +337,7 @@ namespace Z0
                 var x0 = eval[n0];
                 var x1 = eval[n1];
                 var x2 = eval[n2];
-                Sink.EvaluatedPoint(api.Member.KindId.Format(), x0,x1,x2);
+                Sink.EvaluatedPoint(api.Member.ApiKind.Format(), x0,x1,x2);
             }
         }
 
@@ -357,7 +357,7 @@ namespace Z0
                 var x0 = eval[n0];
                 var x1 = eval[n1];
                 var x2 = eval[n2];
-                Sink.EvaluatedPoint(api.Member.KindId.Format(),x0,x1,x2);
+                Sink.EvaluatedPoint(api.Member.ApiKind.Format(),x0,x1,x2);
             }
         }
 

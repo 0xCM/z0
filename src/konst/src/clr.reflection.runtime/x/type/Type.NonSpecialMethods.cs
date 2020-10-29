@@ -10,7 +10,7 @@ namespace Z0
 
     using static ReflectionFlags;
 
-    partial class XReflex
+    partial class XClrQuery
     {
         /// <summary>
         /// Selects all methods declared by a type; however, property getters/setters and other

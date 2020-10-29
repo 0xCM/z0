@@ -11,7 +11,7 @@ namespace Z0
 
     using static ReflectionFlags;
 
-    partial class XReflex
+    partial class XClrQuery
     {
         /// <summary>
         /// Attempts to retrieve a name-identified field from a type

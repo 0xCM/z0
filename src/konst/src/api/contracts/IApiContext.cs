@@ -4,16 +4,15 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    using static Konst;
-
+    [Free]
     public interface IApiContext
     {
 
     }
 
+    [Free]
     public interface IApiContext<H,C> : IApiContext, IStateful<C>
         where H : struct, IApiContext<H,C>
     {

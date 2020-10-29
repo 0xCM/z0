@@ -4,14 +4,15 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Reflection;
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
+    [Free]
     public interface IApiView<S>
     {
         S Source {get;}
     }
 
+    [Free]
     public interface IApiView<H,S> : IApiView<S>
         where H : IApiView<H,S>, new()
     {

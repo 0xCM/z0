@@ -12,7 +12,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class XReflex
+    partial class XClrQuery
     {
         /// <summary>
         ///  Selects methods from a stream that declare a parameter that has a specified type

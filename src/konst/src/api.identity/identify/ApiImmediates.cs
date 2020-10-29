@@ -42,7 +42,7 @@ namespace Z0
 
         static DirectApiGroup ImmGroup(IApiHost host, DirectApiGroup g, ScalarRefinementKind kind)
             => new DirectApiGroup(g.GroupId, host,
-                g.Members.Where(m => m.Method.AcceptsImmediate(kind) && m.Method.ReturnsVector()));
+                g.Members.Storage.Where(m => m.Method.AcceptsImmediate(kind) && m.Method.ReturnsVector()));
 
        static IMultiDiviner Diviner
             => MultiDiviner.Service;

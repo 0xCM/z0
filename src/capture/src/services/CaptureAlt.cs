@@ -27,7 +27,7 @@ namespace Z0
             ref var located = ref first(span(buffer));
 
             for(var i=0u; i<count; i++)
-                seek(located, i) = ApiDynamic.jit(skip(src,i));
+                seek(located, i) = ClrDynamic.jit(skip(src,i));
             Array.Sort(buffer);
 
             return buffer;
@@ -101,7 +101,7 @@ namespace Z0
         [Op]
         public static ApiMemberCapture capture(in ApiMember src, Span<byte> buffer)
         {
-            var summary = capture(buffer, src.Id, ApiDynamic.jit(src));
+            var summary = capture(buffer, src.Id, ClrDynamic.jit(src));
             var size = summary.Data.Length;
             var code = new ApiCaptureBlock(src.Id, src.Method, summary.Encoded.Input, summary.Encoded.Output, summary.Outcome.TermCode);
             return new ApiMemberCapture(src, code);
@@ -117,7 +117,7 @@ namespace Z0
         [Op]
         public static ApiCaptureBlock capture(IdentifiedMethod src, Span<byte> buffer)
         {
-            var located = ApiDynamic.jit(src);
+            var located = ClrDynamic.jit(src);
             var summary = capture(buffer, src.Id, located.Address);
             return block(located.Id, located.Method, summary.Encoded, summary.Outcome.TermCode);
         }

@@ -15,10 +15,6 @@ namespace Z0
     [ApiDataType(ApiNames.ClrEnumLiteral, true)]
     public readonly struct ClrEnumLiteral
     {
-        [MethodImpl(Inline)]
-        public static ClrEnumLiteral from(FieldInfo src)
-            => new ClrEnumLiteral(src);
-
         public FieldInfo Definition {get;}
 
         [MethodImpl(Inline)]
@@ -29,14 +25,9 @@ namespace Z0
         public string Format()
             => Definition.Name;
 
-        public override bool Equals(object obj)
-            => Definition.Equals(obj);
-
-        public override int GetHashCode()
-            => Definition.GetHashCode();
-
-        public override string ToString()
-            => Format();
+        [MethodImpl(Inline)]
+        public bool Equals(ClrEnumLiteral src)
+            => Definition.Equals(src.Definition);
 
         [MethodImpl(Inline)]
         public static bool operator ==(ClrEnumLiteral lhs, ClrEnumLiteral rhs)
@@ -52,6 +43,15 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator ClrEnumLiteral(FieldInfo src)
-            => from(src);
+            => new ClrEnumLiteral(src);
+
+        public override bool Equals(object obj)
+            => Definition.Equals(obj);
+
+        public override int GetHashCode()
+            => Definition.GetHashCode();
+
+        public override string ToString()
+            => Format();
     }
 }

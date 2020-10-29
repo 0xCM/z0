@@ -12,7 +12,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class XReflex
+    partial class XClrQuery
     {
         /// <summary>
         /// Returns the arguments supplied to a constructed generic method; if the method is

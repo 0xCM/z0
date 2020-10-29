@@ -9,7 +9,7 @@ namespace Z0
     using System.Linq;
     using System.Reflection;
 
-    partial class XReflex
+    partial class XClrQuery
     {
         /// <summary>
         /// Selects properaties from a source stream to which a parametrically-identified attribute is attached

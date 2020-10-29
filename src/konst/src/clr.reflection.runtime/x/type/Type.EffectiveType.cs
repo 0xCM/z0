@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class XReflex
+    partial class XClrQuery
     {
         /// <summary>
         /// Computes the effective type of the source <see cref='Type'/>

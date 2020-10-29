@@ -22,11 +22,11 @@ namespace Z0
 
         public MethodInfo Method {get;}
 
-        public ApiOpId KindId {get;}
+        public ApiOpId ApiKind {get;}
 
         public MemoryAddress Address {get;}
 
-        public ApiHostUri HostUri {get;}
+        public ApiHostUri Host {get;}
 
         public CilMethod Cil {get;}
 
@@ -40,11 +40,11 @@ namespace Z0
         {
             Id = uri.OpId;
             OpUri = uri;
-            KindId = kindId;
+            ApiKind = kindId;
             Method = z.insist(method);
             Address = address;
-            HostUri = OpUri.Host;
-            Cil = ApiDynamic.cil(method);
+            Host = OpUri.Host;
+            Cil = ClrDynamic.cil(method);
         }
 
         [MethodImpl(Inline)]
@@ -52,11 +52,11 @@ namespace Z0
         {
             Id = uri.OpId;
             OpUri = uri;
-            KindId = kindId;
+            ApiKind = kindId;
             Method = method.Method;
             Address = method.Address;
-            HostUri = OpUri.Host;
-            Cil = ApiDynamic.cil(Method);
+            Host = OpUri.Host;
+            Cil = ClrDynamic.cil(Method);
         }
 
         [MethodImpl(Inline)]
@@ -65,9 +65,9 @@ namespace Z0
             var result = Id.Equals(src.Id);
             result &= OpUri.Equals(src.OpUri);
             result &= Method.Equals(src.Method);
-            result &= KindId.Equals(src.KindId);
+            result &= ApiKind.Equals(src.ApiKind);
             result &= Address.Equals(src.Address);
-            result &= HostUri.Equals(src.HostUri);
+            result &= Host.Equals(src.Host);
             return result;
         }
 

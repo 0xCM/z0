@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
 
     public readonly struct DirectApiMethod : IHostedApiMethod
-    {        
+    {
         /// <summary>
         /// The delcaring host
         /// </summary>
@@ -20,12 +20,12 @@ namespace Z0
         /// <summary>
         /// The operation identity
         /// </summary>
-        public OpIdentity Id {get;}            
+        public OpIdentity Id {get;}
 
         /// <summary>
         /// The concrete method that defines the operation
         /// </summary>
-        public MethodInfo Method {get;}        
+        public MethodInfo Method {get;}
 
         [MethodImpl(Inline)]
         public DirectApiMethod(IApiHost host, OpIdentity id, MethodInfo method)
@@ -35,10 +35,7 @@ namespace Z0
             Method = method;
         }
 
-        /// <summary>
-        /// The hosting type uri
-        /// </summary>
-        public ApiHostUri HostUri 
+        ApiHostUri IApiMethod.Host
             => Host.Uri;
 
         public override string ToString()

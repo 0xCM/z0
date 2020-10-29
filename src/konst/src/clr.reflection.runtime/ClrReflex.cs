@@ -11,8 +11,8 @@ namespace Z0
     using static Konst;
     using static z;
 
-    [ApiHost(ApiNames.ClrReflex, true)]
-    public readonly partial struct ClrReflex
+    [ApiHost(ApiNames.ClrQuery, true)]
+    public readonly partial struct ClrQuery
     {
         [MethodImpl(Inline), Op]
         public static ClrMemberIdentity identity(FieldInfo src)

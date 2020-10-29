@@ -19,6 +19,17 @@ namespace Z0
     public readonly struct ApiCatalogs
     {
         [Op]
+        public static IDictionary<MethodInfo,Type> ClosureProviders(IEnumerable<Type> src)
+        {
+            var query = from t in src
+                        from m in t.DeclaredStaticMethods()
+                        let tag = m.Tag<ClosureProviderAttribute>()
+                        where tag.IsSome()
+                        select (m, tag.Value.ProviderType);
+            return query.ToDictionary();
+        }
+
+        [Op]
         public static ApiHostMembers members(IApiHost src)
         {
             var generic = HostedGeneric(src);
@@ -33,7 +44,7 @@ namespace Z0
                 let id = MultiDiviner.Service.Identify(m)
                 let im = new IdentifiedMethod(id,m)
                 let uri = OpUri.Define(ApiUriScheme.Type, src.Uri, m.Name, id)
-                let located = ApiDynamic.jit(im)
+                let located = ClrDynamic.jit(im)
                 select new ApiMember(uri, located,  m.KindId());
 
         [Op]
@@ -44,7 +55,7 @@ namespace Z0
                 let id = MultiDiviner.Service.Identify(reified)
                 let im = new IdentifiedMethod(id,m)
                 let uri = OpUri.Define(ApiUriScheme.Type, src.Uri, m.Name, id)
-                let located = ApiDynamic.jit(im)
+                let located = ClrDynamic.jit(im)
                 select new ApiMember(uri, located, m.KindId());
 
         [MethodImpl(Inline), Op]

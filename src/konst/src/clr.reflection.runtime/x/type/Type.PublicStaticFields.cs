@@ -9,7 +9,7 @@ namespace Z0
 
     using static ReflectionFlags;
 
-    partial class XReflex
+    partial class XClrQuery
     {
         public static FieldInfo[] PublicStaticFields(this Type src)
             => src.GetFields(BF_PublicStatic);

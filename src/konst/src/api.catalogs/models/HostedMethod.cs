@@ -12,12 +12,13 @@ namespace Z0
 
     public readonly struct HostedMethod : IComparable<HostedMethod>
     {
-        public readonly ApiHostUri Host;
+        public ApiHostUri Host {get;}
 
-        public readonly MethodInfo Method;
+        public MethodInfo Method {get;}
 
-        public readonly MemoryAddress Location;
-        
+        public MemoryAddress Location {get;}
+
+        [MethodImpl(Inline)]
         public HostedMethod(ApiHostUri host, MethodInfo method, MemoryAddress location = default)
         {
             Host = host;
@@ -28,8 +29,8 @@ namespace Z0
         public HostedMethod WithLocation(MemoryAddress location)
             => new HostedMethod(Host, Method, location);
 
-       [MethodImpl(Inline)]
+        [MethodImpl(Inline)]
         public int CompareTo(HostedMethod src)
-            => Location.CompareTo(src.Location);            
+            => Location.CompareTo(src.Location);
     }
 }

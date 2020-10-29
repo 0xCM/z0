@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class XReflex
+    partial class XClrQuery
     {
         /// <summary>
         /// If the source type is a pointer, returns the type to which the pointer points; otherwise, returns the empty type

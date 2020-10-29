@@ -5,13 +5,19 @@
 namespace Z0
 {
     using System;
-    using System.Reflection;
 
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
+    [Free]
     public interface IHostedApiMethod : IApiMethod
     {
-        IApiHost Host {get;}
+        new IApiHost Host {get;}
+
+        ApiHostUri IApiMethod.Host
+            => Host.Uri;
     }
 
+    [Free]
     public interface IApiMember<T> : IApiMember, IEquatable<T>, ITextual<T>, INullary<T>, IComparable<T>
         where T : struct, IApiMember<T>
     {

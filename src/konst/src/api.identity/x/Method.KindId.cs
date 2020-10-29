@@ -11,7 +11,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class XTend
+    partial class XApiIdentity
     {
         /// <summary>
         /// Returns the source method's kind identifier if it exists
@@ -20,6 +20,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ApiOpId KindId(this MethodInfo src)
             => ApiIdentify.kind(src);
-
     }
 }

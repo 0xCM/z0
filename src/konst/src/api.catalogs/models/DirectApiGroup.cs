@@ -15,11 +15,11 @@ namespace Z0
     /// Defines a grouping construct for relating non-generic operations
     /// </summary>
     public readonly struct DirectApiGroup
-    {        
+    {
         /// <summary>
         /// The group identity
         /// </summary>
-        public OpIdentity GroupId {get;}            
+        public OpIdentity GroupId {get;}
 
         /// <summary>
         /// The delcaring host
@@ -29,7 +29,7 @@ namespace Z0
         /// <summary>
         /// The grouped operations
         /// </summary>
-        public DirectApiMethod[] Members {get;}
+        public TableSpan<DirectApiMethod> Members {get;}
 
         [MethodImpl(Inline)]
         public DirectApiGroup(OpIdentity group, IApiHost host, IEnumerable<DirectApiMethod> members)
@@ -39,9 +39,9 @@ namespace Z0
             Members = members.ToArray();
         }
 
-        public bool IsEmpty 
-            => Members.Length == 0;
-        
+        public bool IsEmpty
+            => Members.IsEmpty;
+
         public override string ToString()
             => GroupId;
     }

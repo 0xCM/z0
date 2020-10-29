@@ -12,7 +12,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct ClrReflexSvc
+    partial struct ClrQuerySvc
     {
         [MethodImpl(Inline)]
         public static bool tagged<T,A>(T member, A a = default)

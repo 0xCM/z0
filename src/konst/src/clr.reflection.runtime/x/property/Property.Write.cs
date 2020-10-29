@@ -11,7 +11,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class XReflex
+    partial class XClrQuery
     {
         [Op]
         public static Option<object> Write(this PropertyInfo p, object src, object dst)

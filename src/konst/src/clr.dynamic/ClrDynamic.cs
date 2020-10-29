@@ -12,7 +12,7 @@ namespace Z0
     using static Konst;
 
     [ApiHost]
-    public readonly struct ApiDynamic
+    public readonly struct ClrDynamic
     {
         /// <summary>
         /// Finds the magical function pointer for a dynamic method

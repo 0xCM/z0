@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class XReflex
+    partial class XClrQuery
     {
         /// <summary>
         /// Determines whether an assembly has an attribute of a given type

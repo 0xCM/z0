@@ -7,7 +7,7 @@ namespace Z0
 {
     using System;
 
-    partial class XReflex
+    partial class XClrQuery
     {
        /// <summary>
         /// Determines whether an attribute is applied to a type

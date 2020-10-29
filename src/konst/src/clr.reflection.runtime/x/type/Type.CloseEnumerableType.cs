@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Collections.Generic;
 
-    partial class XReflex
+    partial class XClrQuery
     {
         /// <summary>
         /// Recursively close an IEnumerable generic type

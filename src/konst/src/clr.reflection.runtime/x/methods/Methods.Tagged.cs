@@ -9,7 +9,7 @@ namespace Z0
     using System.Linq;
     using System.Reflection;
 
-    partial class XReflex
+    partial class XClrQuery
     {
         /// <summary>
         /// Selects the methods that are adorned with parametrically-identified attribute

@@ -8,8 +8,9 @@ namespace Z0
 
     using static Konst;
 
-    partial class XTend
+    partial class XApiIdentity
     {
+        [Op]
         public static FileName ToFileName(this OpIdentity src, FileExtension ext)
             => FileName.define(LegalIdentityBuilder.file(src), ext);
     }

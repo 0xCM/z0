@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class XReflex
+    partial class XClrQuery
     {
         /// <summary>
         /// Returns true if the source type is either non-generic or a generic type that has been closed over all parameters

@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    partial class XReflex
+    partial class XClrQuery
     {
         /// <summary>
         /// Selects the static types from a stream

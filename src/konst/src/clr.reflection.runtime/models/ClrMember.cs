@@ -10,17 +10,17 @@ namespace Z0
 
     using static Konst;
 
-    [ApiDataType(ApiNames.ClrField, true)]
-    public readonly struct ClrField : IClrMember<ClrField,FieldInfo>
+    [ApiDataType(ApiNames.ClrMember, true)]
+    public readonly struct ClrMember : IClrMember<ClrMember, MemberInfo>
     {
         [MethodImpl(Inline)]
-        public static ClrField from(FieldInfo src)
-            => new ClrField(src);
+        public static ClrMember from(MemberInfo src)
+            => new ClrMember(src);
 
-        public FieldInfo Definition {get;}
+        public MemberInfo Definition {get;}
 
         [MethodImpl(Inline)]
-        public ClrField(FieldInfo src)
+        public ClrMember(MemberInfo src)
             => Definition = src;
 
         public ClrArtifactKey Id
@@ -35,10 +35,9 @@ namespace Z0
             get => Definition;
         }
 
-        public ClrType FieldType
-        {
-            get => Definition.FieldType;
-        }
+        [Ignore]
+        MemberInfo IClrMember<MemberInfo>.Definition
+            => Definition;
 
         [MethodImpl(Inline)]
         public string Format()
@@ -54,19 +53,27 @@ namespace Z0
             => Format();
 
         [MethodImpl(Inline)]
-        public static bool operator ==(ClrField a, ClrField b)
+        public static bool operator ==(ClrMember a, ClrMember b)
             => a.Equals(b);
 
         [MethodImpl(Inline)]
-        public static bool operator !=(ClrField a, ClrField b)
+        public static bool operator !=(ClrMember a, ClrMember b)
             => !a.Equals(b);
 
         [MethodImpl(Inline)]
-        public static implicit operator FieldInfo(ClrField src)
+        public static implicit operator MemberInfo(ClrMember src)
             => src.Definition;
 
         [MethodImpl(Inline)]
-        public static implicit operator ClrField(FieldInfo src)
+        public static implicit operator ClrMember(FieldInfo src)
+            => from(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator ClrMember(MethodInfo src)
+            => from(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator ClrMember(PropertyInfo src)
             => from(src);
     }
 }

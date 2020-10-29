@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class XReflex
+    partial class XClrQuery
     {
         /// <summary>
         /// If source type is an enum, returns the integral base type; otherwise returns the empty type

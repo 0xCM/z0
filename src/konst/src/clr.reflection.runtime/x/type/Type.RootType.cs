@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class XReflex
+    partial class XClrQuery
     {
         /// <summary>
         /// If a value type and not an enum, returns the type;

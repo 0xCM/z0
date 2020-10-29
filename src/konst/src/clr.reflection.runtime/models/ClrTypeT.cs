@@ -35,7 +35,7 @@ namespace Z0
         public ReadOnlySpan<ClrType> NestedTypes
         {
             [MethodImpl(Inline)]
-            get => z.recover<Type,ClrType>(ClrReflexSvc.nested(Definition));
+            get => z.recover<Type,ClrType>(ClrQuerySvc.nested(Definition));
         }
 
         [MethodImpl(Inline)]

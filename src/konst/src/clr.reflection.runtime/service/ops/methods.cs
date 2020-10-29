@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct ClrReflexSvc
+    partial struct ClrQuerySvc
     {
         /// Selects all instance/static and public/non-public fields declared or inherited by a type
         /// </summary>

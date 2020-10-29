@@ -7,6 +7,9 @@ namespace Z0
     using System;
     using System.Reflection;
 
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
+    [Free]
     public interface IIdentityDiviner
     {
 
@@ -18,6 +21,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="S">The type of the thing to identify</typeparam>
     /// <typeparam name="T">The target identity type</typeparam>
+    [Free]
     public interface IIdentityDiviner<S,T> : IIdentityDiviner
         where T : IIdentified
     {
@@ -31,6 +35,7 @@ namespace Z0
     /// <summary>
     /// Characterizes a services that attempts to assign a reasonable identity to a type
     /// </summary>
+    [Free]
     public interface ITypeIdentityDiviner : IIdentityDiviner<Type,TypeIdentity>
     {
 
@@ -39,15 +44,19 @@ namespace Z0
     /// <summary>
     /// Characterizes a service that attempts to assign a reasonable identity to a method
     /// </summary>
+    [Free]
     public interface IMethodIdentityDiviner : IIdentityDiviner<MethodInfo,OpIdentity>
     {
+
     }
 
+    [Free]
     public interface IDelegateIdentityDiviner : IIdentityDiviner<Delegate,OpIdentity>
     {
 
     }
 
+    [Free]
     public interface IMultiDiviner : ITypeIdentityDiviner, IMethodIdentityDiviner, IDelegateIdentityDiviner
     {
         OpIdentity Identify(MethodInfo src)

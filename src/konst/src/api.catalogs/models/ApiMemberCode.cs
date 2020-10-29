@@ -106,7 +106,7 @@ namespace Z0
         }
 
         public ApiOpId KindId
-             => Member.KindId;
+             => Member.ApiKind;
 
         public OpIdentity Id
             => Member.Id;

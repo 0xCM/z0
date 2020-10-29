@@ -7,9 +7,12 @@ namespace Z0
     using System;
     using System.Reflection;
 
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
     /// <summary>
     /// Characterizes the api set exposed by a part
     /// </summary>
+    [Free]
     public interface IApiPartCatalog
     {
         /// <summary>

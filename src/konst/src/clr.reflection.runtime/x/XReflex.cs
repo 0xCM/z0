@@ -10,8 +10,8 @@ namespace Z0
     using static Konst;
     using static z;
 
-    [ApiHost(ApiNames.XRelflex, true)]
-    public static partial class XReflex
+    [ApiHost(ApiNames.XClrQuery, true)]
+    public static partial class XClrQuery
     {
         const NumericKind Closure = AllNumeric;
     }

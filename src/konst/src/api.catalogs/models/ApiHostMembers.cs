@@ -15,7 +15,7 @@ namespace Z0
     /// </summary>
     public readonly struct ApiHostMembers : ITableSpan<ApiMember>
     {
-        readonly IApiHost Host;
+        public IApiHost Host {get;}
 
         readonly TableSpan<ApiMember> Data;
 

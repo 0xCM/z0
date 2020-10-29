@@ -9,7 +9,7 @@ namespace Z0
 
     using static ReflectionFlags;
 
-    partial class XReflex
+    partial class XClrQuery
     {
        /// <summary>
         /// Selects all public instance fields from the source

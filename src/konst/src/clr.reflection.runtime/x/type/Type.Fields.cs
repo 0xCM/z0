@@ -11,7 +11,7 @@ namespace Z0
     using static ReflectionFlags;
     using static Konst;
 
-    partial class XReflex
+    partial class XClrQuery
     {
         /// <summary>
         /// Queries the source <see cref='Type'/> for the <see cref='FieldInfo'/> members determined by the <see cref='BF_All'/> flags

@@ -8,7 +8,7 @@ namespace Z0
     using System.Reflection;
     using System.ComponentModel;
 
-    partial class XReflex
+    partial class XClrQuery
     {
         /// <summary>
         /// Constructs a display name for a type

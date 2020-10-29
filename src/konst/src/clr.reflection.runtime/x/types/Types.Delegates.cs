@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    partial class XReflex
+    partial class XClrQuery
     {
         /// <summary>
         /// Returns all source types which are delegates

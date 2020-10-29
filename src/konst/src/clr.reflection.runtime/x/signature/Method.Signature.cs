@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    partial class XReflex
+    partial class XClrQuery
     {
         /// <summary>
         /// Describes a method's type parameters, if any

@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class XReflex
+    partial class XClrQuery
     {
         /// <summary>
         /// Gets the identified assembly attribute if present, otherwise NULL

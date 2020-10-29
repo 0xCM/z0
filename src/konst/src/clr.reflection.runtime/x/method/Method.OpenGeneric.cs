@@ -9,7 +9,7 @@ namespace Z0
     using System.Linq;
     using System.Reflection;
 
-    partial class XReflex
+    partial class XClrQuery
     {
         /// <summary>
         /// Queries the source for open generic methods

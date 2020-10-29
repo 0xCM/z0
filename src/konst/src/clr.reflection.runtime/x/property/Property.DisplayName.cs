@@ -9,7 +9,7 @@ namespace Z0
     using System.Reflection;
     using System.ComponentModel;
 
-    partial class XReflex
+    partial class XClrQuery
     {
         /// <summary>
         /// Gets the display name specified by the eponymous attribute, if attributed; otherwise, returns the reflected property name

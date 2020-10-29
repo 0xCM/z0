@@ -7,12 +7,11 @@ namespace Z0
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Runtime.CompilerServices;
-
-    using static Konst;
 
     using api = ApiIdentify;
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
+    [Free]
     public interface ITypeIdentityProvider : IIdentityProvider<Type,TypeIdentity>
     {
         IEnumerable<Type> Identifiable
@@ -32,6 +31,7 @@ namespace Z0
     /// Characterizes a type identity provider than can define an identity predicated solely on a parametric type
     /// </summary>
     /// <typeparam name="S">The type for which identity will be defined</typeparam>
+    [Free]
     public interface ITypeIdentityProvider<S> : ITypeIdentityProvider
     {
         TypeIdentity Identity();
@@ -43,6 +43,7 @@ namespace Z0
             => Identity();
     }
 
+    [Free]
     public interface ITypeIdentityProvider<F,T> : ITypeIdentityProvider
         where F : struct, ITypeIdentityProvider<F,T>
         where T : struct, IIdentifiedType
@@ -51,18 +52,5 @@ namespace Z0
 
         TypeIdentity IIdentityProvider<Type,TypeIdentity>.Identify(Type src)
             => api.type(Identify(src).Identifier);
-    }
-
-    public readonly struct TypeIdentityProvider : ITypeIdentityProvider
-    {
-        readonly Func<Type,TypeIdentity> f;
-
-        [MethodImpl(Inline)]
-        public TypeIdentityProvider(Func<Type, TypeIdentity> f)
-            => this.f = f;
-
-        [MethodImpl(Inline)]
-        public TypeIdentity Identify(Type src)
-            => f(src);
     }
 }

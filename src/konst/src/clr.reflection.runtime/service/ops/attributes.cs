@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct ClrReflexSvc
+    partial struct ClrQuerySvc
     {
         [MethodImpl(Inline), Op]
         public static Indexed<object> attributes(Type src)

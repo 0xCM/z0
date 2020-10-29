@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class XReflex
+    partial class XClrQuery
     {
         /// <summary>
         /// Queries the source <see cref='Type'/> for the <see cref='Type'/> it wraps

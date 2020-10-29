@@ -11,7 +11,7 @@ namespace Z0
 
     using static ReflectionFlags;
 
-    partial class XReflex
+    partial class XClrQuery
     {
         public static Option<PropertyInfo> Property(this Type src, string name)
             => src.GetProperties(BF_All).Where(p => p.Name == name).FirstOrDefault();

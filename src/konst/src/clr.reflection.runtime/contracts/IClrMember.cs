@@ -4,11 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-
     using System;
     using System.Reflection;
-
-    using static Konst;
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 

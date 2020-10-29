@@ -21,12 +21,9 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ClrStruct(Type src)
-        {
-            Definition = src;
-        }
+            => Definition = src;
 
         public ClrArtifactKey Id
-
         {
             [MethodImpl(Inline)]
             get => Definition.MetadataToken;
@@ -38,7 +35,7 @@ namespace Z0
             get => new ClrStruct(Definition);
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Closures(AllNumeric)]
         public static implicit operator ClrStruct(ClrStruct<T> src)
             => src.Untyped;
 
@@ -46,7 +43,7 @@ namespace Z0
         public static implicit operator Type(ClrStruct<T> src)
             => src.Definition;
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Closures(AllNumeric)]
         public static implicit operator ClrType<T>(ClrStruct<T> src)
             => ClrType.From<T>();
 

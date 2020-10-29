@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct ClrReflexSvc
+    partial struct ClrQuerySvc
     {
         public static ReadOnlySpan<FieldValue> FieldValues<T>(in T src)
             where T : struct

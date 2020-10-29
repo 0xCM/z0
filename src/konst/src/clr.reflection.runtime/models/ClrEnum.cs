@@ -15,11 +15,11 @@ namespace Z0
     [ApiDataType(ApiNames.ClrEnum, true)]
     public readonly struct ClrEnum
     {
+        public Type Definition {get;}
+
         [MethodImpl(Inline)]
         public static ClrEnum from(Type src)
             => new ClrEnum(src);
-
-        public Type Definition {get;}
 
         [MethodImpl(Inline)]
         public ClrEnum(Type src)
@@ -53,11 +53,15 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator ClrEnum(Type src)
-            => from(src);
+            => new ClrEnum(src);
 
-        [MethodImpl(Inline), Ignore]
+        [MethodImpl(Inline)]
         public string Format()
             => Definition.FullName;
+
+        [MethodImpl(Inline)]
+        public bool Equals(ClrEnum src)
+            => Definition.Equals(src.Definition);
 
         public override string ToString()
             => Format();

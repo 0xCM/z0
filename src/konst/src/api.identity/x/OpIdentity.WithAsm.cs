@@ -8,11 +8,12 @@ namespace Z0
 
     using static Konst;
 
-    partial class XTend
+    partial class XApiIdentity
     {
         /// <summary>
         /// Enables the assembly indicator
         /// </summary>
+        [Op]
         public static OpIdentity WithAsm(this OpIdentity src)
         {
             if(src.Identifier.Contains(IDI.AsmLocator))

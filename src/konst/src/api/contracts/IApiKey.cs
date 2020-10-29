@@ -5,9 +5,8 @@
 namespace Z0
 {
     using System;
-    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    using static Konst;
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
     public interface IApiKey : IKind, ITextual

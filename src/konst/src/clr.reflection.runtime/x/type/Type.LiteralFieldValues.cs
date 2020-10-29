@@ -12,7 +12,7 @@ namespace Z0
     using static ReflectionFlags;
     using static z;
 
-    partial class XReflex
+    partial class XClrQuery
     {
         /// <summary>
         /// Fetches the values of literal fields declared by a specified type that are of specified parametric type

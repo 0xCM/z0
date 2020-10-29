@@ -24,7 +24,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static MemorySlots slots(Type src)
-            => ApiDynamic.jit(src).Map(m => new SegRef(m.Address, m.Size));
+            => ClrDynamic.jit(src).Map(m => new SegRef(m.Address, m.Size));
 
         [MethodImpl(Inline)]
         public static MemorySlots<E> slots<E,T>(T src)

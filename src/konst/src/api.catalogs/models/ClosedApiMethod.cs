@@ -36,11 +36,6 @@ namespace Z0
         public MethodInfo Method {get;}
 
         /// <summary>
-        /// The hosting type uri
-        /// </summary>
-        public ApiHostUri HostUri => Host.Uri;
-
-        /// <summary>
         /// Initializes a closure specification
         /// </summary>
         /// <param name="id">The assigned identity</param>
@@ -53,13 +48,6 @@ namespace Z0
             Id = id;
             Kind = kind;
             Method = method;
-        }
-
-        public void Deconstruct(out OpIdentity id, out NumericKind k, out MethodInfo closed)
-        {
-            id = Id;
-            k = Kind;
-            closed = Method;
         }
     }
 }

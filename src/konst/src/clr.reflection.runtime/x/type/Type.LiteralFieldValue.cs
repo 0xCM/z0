@@ -12,7 +12,7 @@ namespace Z0
     using static Konst;
     using static ReflectionFlags;
 
-    partial class XReflex
+    partial class XClrQuery
     {
         /// <summary>
         /// Queries the source <see cref='Type'/> for the value of a name-identified literal <see cref='FieldInfo'/>

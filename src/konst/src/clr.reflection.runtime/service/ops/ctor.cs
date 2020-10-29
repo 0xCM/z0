@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
     using static ReflectionFlags;
 
-    partial struct ClrReflexSvc
+    partial struct ClrQuerySvc
     {
         /// <summary>
         /// Searches a type for an instance constructor that matches a specified signature

@@ -80,7 +80,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public ApiMembers OfKind<K>(K kind)
             where K : unmanaged, Enum
-                => Members.Where(m =>  text.equals(m.KindId.ToString(),kind.ToString()));
+                => Members.Where(m =>  text.equals(m.ApiKind.ToString(),kind.ToString()));
 
         [MethodImpl(Inline)]
         public ApiMembers Kind<K>(W128 w, K k, GenericState g = default)

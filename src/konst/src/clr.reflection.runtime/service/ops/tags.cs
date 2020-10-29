@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct ClrReflexSvc
+    partial struct ClrQuerySvc
     {
         public static TaggedMembers<MethodInfo,A> tags<A>(Type src)
             where A : Attribute

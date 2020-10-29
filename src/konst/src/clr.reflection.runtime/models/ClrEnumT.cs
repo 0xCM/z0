@@ -20,7 +20,8 @@ namespace Z0
     {
         public Type Definition => TD;
 
-        public static ClrEnum<T> create() => default;
+        public static ClrEnum<T> create()
+            => default;
 
         public ClrArtifactKey Id
         {

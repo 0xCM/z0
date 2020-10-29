@@ -9,6 +9,8 @@ namespace Z0
 
     using static Konst;
 
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
     public interface IIdentification : IIdentified, ITextual, IComparable
     {
         IdentityTargetKind TargetKind

@@ -6,6 +6,9 @@ namespace Z0
 {
     using System;
 
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
+    [Free]
     public interface IApiUri : IIdentified
     {
         string UriText {get;}
@@ -14,6 +17,7 @@ namespace Z0
             => UriText;
     }
 
+    [Free]
     public interface IApiUri<T> : IApiUri, IIdentification<T>
         where T : IApiUri<T>, new()
     {

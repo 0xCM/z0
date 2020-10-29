@@ -7,6 +7,9 @@ namespace Z0
     using System;
     using System.Reflection;
 
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
+    [Free]
     public interface IApiHost
     {
         Type HostType {get;}
@@ -26,6 +29,7 @@ namespace Z0
             => HostType.DeclaredMethods();
     }
 
+    [Free]
     public interface IApiHost<F> : IApiHost
         where F : IApiHost<F>, new()
     {

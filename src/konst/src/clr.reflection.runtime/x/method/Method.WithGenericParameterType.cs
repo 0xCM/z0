@@ -12,7 +12,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class XReflex
+    partial class XClrQuery
     {
         /// <summary>
         /// Selects generic methods from a stream that have a specified generic type definition parameter

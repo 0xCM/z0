@@ -10,19 +10,18 @@ namespace Z0
 
     using static Konst;
 
+    [ApiHost("api.parsers.part")]
     public readonly struct ApiPartIdParser : IPartIdParser
     {
-        public static IPartIdParser Service => default(ApiPartIdParser);
-
+        [Op]
         public static PartId part(FilePath src)
-            => ApiPartIdParser.single(src.FileName.Name.Replace("z0.", EmptyString).Replace(".dll", EmptyString).Replace(".exe", EmptyString));
+            => single(src.FileName.Name.Replace("z0.", EmptyString).Replace(".dll", EmptyString).Replace(".exe", EmptyString));
 
+        [Op]
         public static PartId part(FS.FilePath src)
             => part(FilePath.Define(src.Name));
 
-        public ParseResult<PartId> Parse(string src)
-            => parse<PartId>(src);
-
+        [Op]
         public static PartId single(string src)
             => parse<PartId>(src).ValueOrDefault(PartId.None);
 
@@ -31,6 +30,7 @@ namespace Z0
         /// is None-populated
         /// </summary>
         /// <param name="parts">The part identifiers</param>
+        [Op]
         public static PartId[] parse(params string[] parts)
         {
             var dst = sys.alloc<PartId>(parts.Length);
@@ -38,6 +38,9 @@ namespace Z0
                 dst[i] = parse<PartId>(parts[i]).ValueOrDefault();
             return dst;
         }
+
+        public ParseResult<PartId> Parse(string src)
+            => parse<PartId>(src);
 
         public PartId[] ParseValid(params string[] args)
             => WhereSome(args.Map(arg => parse<PartId>(arg).ValueOrDefault()));

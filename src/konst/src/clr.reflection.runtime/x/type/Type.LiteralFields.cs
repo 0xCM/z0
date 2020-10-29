@@ -12,7 +12,7 @@ namespace Z0
     using static ReflectionFlags;
     using static z;
 
-    partial class XReflex
+    partial class XClrQuery
     {
         /// <summary>
         /// Queries the source <see cref='Type'/> for <see cref='FieldInfo'/> members determined by the

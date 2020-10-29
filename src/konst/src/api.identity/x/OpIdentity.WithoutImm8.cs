@@ -6,11 +6,12 @@ namespace Z0
 {
     using System;
 
-    partial class XTend
+    partial class XApiIdentity
     {
         /// <summary>
         /// Clears an attached immediate suffix, if any
         /// </summary>
+        [Op]
         public static OpIdentity WithoutImm8(this OpIdentity src)
         {
             var perhaps = src.ExtractImm8();

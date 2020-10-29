@@ -34,7 +34,7 @@ namespace Z0
                 {
                     ref readonly var parsed = ref skip(view,i);
 
-                    var cil = ApiDynamic.cil(parsed.Address, parsed.OpUri, parsed.Method);
+                    var cil = ClrDynamic.cil(parsed.Address, parsed.OpUri, parsed.Method);
                     writer.WriteLine(cil.Format());
                 }
 

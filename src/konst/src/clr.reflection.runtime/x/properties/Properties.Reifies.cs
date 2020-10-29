@@ -10,7 +10,7 @@ namespace Z0
     using System.Reflection;
     using System.Runtime.CompilerServices;
 
-    partial class XReflex
+    partial class XClrQuery
     {
         /// <summary>
         /// Selects the properties from a stream that reify a specified interface type

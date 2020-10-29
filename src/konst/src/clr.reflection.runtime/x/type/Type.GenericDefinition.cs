@@ -9,7 +9,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial class XReflex
+    partial class XClrQuery
     {
         /// <summary>
         /// For a generic type or reference to a generic type, retrieves the generic type definition;

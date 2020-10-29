@@ -78,7 +78,7 @@ namespace Z0
         public ApiHostUri Host
         {
             [MethodImpl(Inline)]
-            get => Member.HostUri;
+            get => Member.Host;
         }
 
         [MethodImpl(Inline)]

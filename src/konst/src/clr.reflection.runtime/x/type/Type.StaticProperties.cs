@@ -9,7 +9,7 @@ namespace Z0
 
     using static ReflectionFlags;
 
-    partial class XReflex
+    partial class XClrQuery
     {
         /// <summary>
         /// Gets the static properties declared by a specified type

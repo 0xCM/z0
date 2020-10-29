@@ -30,7 +30,7 @@ namespace Z0
 
         public const string ApiIdentity = api + dot + identity;
 
-        public const string ApiIdentityX = api + dot + identity + dot + extensions;
+        public const string XApiIdentity = api + dot + identity + dot + extensions;
 
         public const string ApiIdentify = api + dot + identify;
 
@@ -150,11 +150,11 @@ namespace Z0
 
         public const string ClrMember = ClrRuntime + dot + member;
 
-        public const string ClrReflexSvc = ClrRuntime + dot + reflex + dot + svc;
+        public const string ClrQuery = ClrRuntime + dot + query;
 
-        public const string ClrReflex = ClrRuntime + dot + reflex;
+        public const string ClrQuerySvc = ClrRuntime + dot + query + dot + svc;
 
-        public const string XRelflex = ClrRuntime + dot + reflex + dot + extensions;
+        public const string XClrQuery = ClrRuntime + dot + query + dot + extensions;
 
         // ~~ Clr Metadata
         // ~~ -----------------------------------------------------------------------------------------

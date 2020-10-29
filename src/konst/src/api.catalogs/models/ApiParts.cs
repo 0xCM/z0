@@ -18,20 +18,11 @@ namespace Z0
         /// </summary>
         public FS.FolderPath Source {get;}
 
-        public readonly FS.Files ManagedSources;
+        public FS.Files ManagedSources {get;}
 
-        public readonly Assembly[] Components;
+        public Assembly[] Components {get;}
 
-        public readonly SystemApiCatalog Api;
-
-        FS.Files IApiParts.ManagedSources
-            => ManagedSources;
-
-        Assembly[] IApiParts.Components
-            => Components;
-
-        ISystemApiCatalog IApiParts.Api
-            => Api;
+        public SystemApiCatalog Api {get;}
 
         public ApiPartSet(FS.FolderPath src)
         {
@@ -56,5 +47,14 @@ namespace Z0
             Api =  ApiCatalogs.system(ManagedSources);
             Components = Api.Components;
         }
+
+        FS.Files IApiParts.ManagedSources
+            => ManagedSources;
+
+        Assembly[] IApiParts.Components
+            => Components;
+
+        ISystemApiCatalog IApiParts.Api
+            => Api;
     }
 }

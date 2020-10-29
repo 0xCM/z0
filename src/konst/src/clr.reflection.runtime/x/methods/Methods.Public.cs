@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Reflection;
 
-    partial class XReflex
+    partial class XClrQuery
     {
         /// <summary>
         /// Selects the public methods from a stream

@@ -14,14 +14,15 @@ namespace Z0
     /// </summary>
     public readonly struct LocatedPart
     {
-        public readonly IPart Part;
+        public IPart Part {get;}
 
-        public readonly FilePath ImagePath;
+        public FilePath ImagePath {get;}
 
-        public readonly MemoryAddress BaseAddress;
+        public MemoryAddress BaseAddress {get;}
 
-        public readonly ByteSize Size;
+        public ByteSize Size {get;}
 
+        [MethodImpl(Inline)]
         public LocatedPart(IPart part, MemoryAddress @base, ByteSize size)
         {
             Part = part;

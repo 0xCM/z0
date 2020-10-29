@@ -11,7 +11,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class XReflex
+    partial class XClrQuery
     {
         /// <summary>
         /// For a non-constructed generic method or a generic method definition, returns an array of the method's type parameters; otherwise, returns an empty array

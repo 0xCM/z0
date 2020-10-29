@@ -24,7 +24,7 @@ namespace Z0.Dynamics.Operators
             {
 
                 case TypeCode.String:
-                    return fx(ClrReflexSvc.method<T,T,T>(nameof(String.Concat)).Require().Func<T,T,T>()).Compile();
+                    return fx(ClrQuerySvc.method<T,T,T>(nameof(String.Concat)).Require().Func<T,T,T>()).Compile();
                 case TypeCode.Byte:
                     return cast<Func<T,T,T>>(Ops8u.Mul.Compile());
                 case TypeCode.SByte:

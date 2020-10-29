@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
 
     [ApiDataType(ApiNames.ClrMethod, true)]
-    public readonly struct ClrMethod : IClrMember<ClrMethod, MethodInfo>
+    public readonly struct ClrMethod : IClrMember<ClrMethod,MethodInfo>
     {
         [MethodImpl(Inline)]
         public static ClrMethod from(MethodInfo src)
@@ -66,6 +66,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public string Format()
             => Definition.Name;
+
+        [Ignore]
+        MethodInfo IClrMember<MethodInfo>.Definition
+            => Definition;
 
         public override bool Equals(object obj)
             => Definition.Equals(obj);

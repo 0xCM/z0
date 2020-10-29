@@ -8,7 +8,7 @@ namespace Z0
     using System.Reflection;
     using System.Linq;
 
-    partial class XReflex
+    partial class XClrQuery
     {
         /// <summary>
         /// Selects all literal fields from the source types

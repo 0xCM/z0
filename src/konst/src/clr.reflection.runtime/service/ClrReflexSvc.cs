@@ -11,8 +11,8 @@ namespace Z0
     using static Konst;
     using static z;
 
-    [ApiHost(ApiNames.ClrReflexSvc)]
-    public readonly partial struct ClrReflexSvc
+    [ApiHost(ApiNames.ClrQuerySvc)]
+    public readonly partial struct ClrQuerySvc
     {
         const NumericKind Closure = UnsignedInts;
 

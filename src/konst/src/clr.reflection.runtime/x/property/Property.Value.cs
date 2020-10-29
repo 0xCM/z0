@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Reflection;
 
-    partial class XReflex
+    partial class XClrQuery
     {
         /// <summary>
         /// Attempts to retrieves the value of a static or instance property

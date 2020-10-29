@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Reflection;
 
-    partial class XReflex
+    partial class XClrQuery
     {
         /// <summary>
         /// Gets the value of a member attribute if it exists

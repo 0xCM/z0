@@ -12,7 +12,7 @@ namespace Z0
     using static Konst;
     using static Option;
 
-    partial class XReflex
+    partial class XClrQuery
     {
         /// <summary>
         /// Attempts to retrieve the value of an instance or static property

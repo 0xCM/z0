@@ -7,6 +7,9 @@ namespace Z0
     using System;
     using System.Reflection;
 
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
+    [Free]
     public interface IApiMethod : ITextual
     {
         OpIdentity Id {get;}
@@ -14,7 +17,7 @@ namespace Z0
         /// <summary>
         /// The globally-unique host uri
         /// </summary>
-        ApiHostUri HostUri {get;}
+        ApiHostUri Host {get;}
 
         /// <summary>
         /// The hosted method
@@ -29,13 +32,13 @@ namespace Z0
         /// <summary>
         /// The method's kind identifier if it exists
         /// </summary>
-        ApiOpId KindId
+        ApiOpId ApiKind
             => ApiOpId.None;
 
         /// The globally-unique operation uri
         /// </summary>
         OpUri OpUri
-            => OpUri.hex(HostUri, Method.Name, Id);
+            => OpUri.hex(Host, Method.Name, Id);
 
         string ITextual.Format()
             => OpUri.Format();

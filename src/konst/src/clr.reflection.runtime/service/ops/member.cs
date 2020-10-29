@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct ClrReflexSvc
+    partial struct ClrQuerySvc
     {
         /// <summary>
         /// Defines a tagged member

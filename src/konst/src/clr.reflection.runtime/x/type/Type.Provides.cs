@@ -11,7 +11,7 @@ namespace Z0
 
     using static ReflectionFlags;
 
-    partial class XReflex
+    partial class XClrQuery
     {
         public static bool Provides(this Type src, string name)
             => src.GetMembers(BF_World).Any(x => x.Name == name);

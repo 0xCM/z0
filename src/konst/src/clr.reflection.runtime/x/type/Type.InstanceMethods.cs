@@ -12,7 +12,7 @@ namespace Z0
 
     using static ReflectionFlags;
 
-    partial class XReflex
+    partial class XClrQuery
     {
         /// <summary>
         /// Retrieves the public and non-public instance methods declared by a type

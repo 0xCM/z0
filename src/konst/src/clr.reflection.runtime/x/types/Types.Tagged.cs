@@ -9,7 +9,7 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
 
-    partial class XReflex
+    partial class XClrQuery
     {
         /// <summary>
         /// Selects source types from the stream to which a parametrically-identified attribute is applied

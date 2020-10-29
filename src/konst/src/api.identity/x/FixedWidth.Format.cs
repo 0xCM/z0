@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class XTend
+    partial class XApiIdentity
     {
         /// <summary>
         /// Produces a canonical text representation of the source kind

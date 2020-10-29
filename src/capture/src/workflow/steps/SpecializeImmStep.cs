@@ -8,7 +8,6 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
     using System.Reflection;
     using System.Linq;
-    using System.Collections.Generic;
 
     using static Konst;
 
@@ -92,7 +91,7 @@ namespace Z0.Asm
             foreach(var g in groups)
             {
                 var gid = g.GroupId;
-                foreach(var member in g.Members)
+                foreach(var member in g.Members.Storage)
                 {
                     if(member.Method.IsVectorizedUnaryImm(ScalarRefinementKind.Refined))
                     {
@@ -130,10 +129,10 @@ namespace Z0.Asm
             }
         }
 
-        IEnumerable<ApiHost> Hosts(params PartId[] parts)
-            => from h in Wf.Api.PartHosts(parts)
+        ApiHost[] Hosts(params PartId[] parts)
+            => (from h in Wf.Api.PartHosts(parts)
                 where h is ApiHost
-                select (ApiHost)h;
+                select (ApiHost)h).Array();
 
         AsmImmWriter Archive(IApiHost host)
             => AsmServices.Services.HostArchiver(host.Uri, Formatter, CodeArchive.ArchiveRoot);
@@ -164,14 +163,14 @@ namespace Z0.Asm
             }
         }
 
-        void EmitUnrefinedDirect(in CaptureExchange exchange, IEnumerable<DirectApiGroup> groups, Imm8R[] imm8, IAsmImmWriter dst)
+        void EmitUnrefinedDirect(in CaptureExchange exchange, DirectApiGroup[] groups, Imm8R[] imm8, IAsmImmWriter dst)
         {
             var unary = from g in groups
                         let members = g.Members.Where(m => m.Method.IsVectorizedUnaryImm(ScalarRefinementKind.Unrefined))
                         select (g,members);
 
             foreach(var (g,members) in unary)
-                EmitUnrefinedUnary(exchange, g.GroupId, members, imm8, dst);
+                EmitUnrefinedUnary(exchange, g.GroupId, members.Storage, imm8, dst);
 
             var binary = from g in groups
                         let members = g.Members.Where(m => m.Method.IsVectorizedBinaryImm(ScalarRefinementKind.Unrefined))
@@ -204,66 +203,69 @@ namespace Z0.Asm
             }
         }
 
-        void EmitUnrefinedGeneric(in CaptureExchange exchange, GenericApiMethod f,  Imm8R[] imm8, IAsmImmWriter dst)
+        void EmitUnrefinedGeneric(in CaptureExchange exchange, GenericApiMethod src,  Imm8R[] imm8, IAsmImmWriter dst)
         {
-            if(f.Method.IsVectorizedUnaryImm(ScalarRefinementKind.Unrefined))
-                EmitUnary(exchange, f, imm8, dst);
-            else if(f.Method.IsVectorizedBinaryImm(ScalarRefinementKind.Unrefined))
-                EmitBinary(exchange, f, imm8, dst);
+            if(src.Method.IsVectorizedUnaryImm(ScalarRefinementKind.Unrefined))
+                EmitUnary(exchange, src, imm8, dst);
+            else if(src.Method.IsVectorizedBinaryImm(ScalarRefinementKind.Unrefined))
+                EmitBinary(exchange, src, imm8, dst);
         }
 
-        void EmitUnrefinedUnary(in CaptureExchange exchange, OpIdentity gid, IEnumerable<DirectApiMethod> unary, Imm8R[] imm8, IAsmImmWriter dst)
+        void EmitUnrefinedUnary(in CaptureExchange exchange, OpIdentity gid, DirectApiMethod[] methods, Imm8R[] imm8, IAsmImmWriter dst)
         {
             var generic = false;
-            foreach(var f in unary)
+            foreach(var f in methods)
             {
-                var host = f.HostUri;
+                var host = f.Host;
+                var uri = host.Uri;
                 var functions = Specializer.UnaryOps(exchange, f.Method, f.Id, imm8);
                 if(functions.Length != 0)
                 {
-                    dst.SaveHexImm(gid, functions, Append).OnSome(path => Wf.Raise(default(SpecializedImmEvent).literal(Host, host, generic, path, Wf.Ct)));
-                    dst.SaveAsmImm(gid, functions, Append).OnSome(path => Wf.Raise(default(SpecializedImmEvent).literal(Host, host, generic, path, Wf.Ct)));
+                    dst.SaveHexImm(gid, functions, Append).OnSome(path => Wf.Raise(default(SpecializedImmEvent).literal(Host, uri, generic, path, Wf.Ct)));
+                    dst.SaveAsmImm(gid, functions, Append).OnSome(path => Wf.Raise(default(SpecializedImmEvent).literal(Host, uri, generic, path, Wf.Ct)));
                 }
             }
         }
 
-        void EmitUnrefinedBinary(in CaptureExchange exchange, OpIdentity gid, IEnumerable<DirectApiMethod> binary, Imm8R[] imm8, IAsmImmWriter dst)
+        void EmitUnrefinedBinary(in CaptureExchange exchange, OpIdentity gid, DirectApiMethod[] methods, Imm8R[] imm8, IAsmImmWriter dst)
         {
             var generic = false;
-            foreach(var f in binary)
+
+            foreach(var f in methods)
             {
-                var host = f.HostUri;
+                var host = f.Host;
+                var uri = host.Uri;
                 var functions = Specializer.BinaryOps(exchange, f.Method, f.Id, imm8);
                 if(functions.Length != 0)
                 {
-                    dst.SaveHexImm(gid, functions, Append).OnSome(path => Wf.Raise(default(SpecializedImmEvent).literal(Host, host, generic, path, Wf.Ct)));
-                    dst.SaveAsmImm(gid, functions, Append).OnSome(path => Wf.Raise(default(SpecializedImmEvent).literal(Host, host, generic, path, Wf.Ct)));
+                    dst.SaveHexImm(gid, functions, Append).OnSome(path => Wf.Raise(default(SpecializedImmEvent).literal(Host, uri, generic, path, Wf.Ct)));
+                    dst.SaveAsmImm(gid, functions, Append).OnSome(path => Wf.Raise(default(SpecializedImmEvent).literal(Host, uri, generic, path, Wf.Ct)));
                 }
             }
         }
 
-        void EmitUnary(in CaptureExchange exchange, GenericApiMethod f, Imm8R[] imm8, IAsmImmWriter dst, Type refinement = null)
+        void EmitUnary(in CaptureExchange exchange, GenericApiMethod src, Imm8R[] imm8, IAsmImmWriter dst, Type refinement = null)
         {
-            var gid = f.Id;
-            var host = f.HostUri;
+            var gid = src.Id;
+            var uri = src.Host.Uri;
             var generic = true;
-            foreach(var closure in f.Close())
+            foreach(var closure in src.Close())
             {
                 var functions = Specializer.UnaryOps(exchange, closure.Method, closure.Id, imm8);
                 if(functions.Length != 0)
                 {
-                    dst.SaveHexImm(gid, functions, Append).OnSome(path => Wf.Raise(default(SpecializedImmEvent).define(Host, host, generic, path, refinement, Wf.Ct)));
-                    dst.SaveAsmImm(gid, functions, Append).OnSome(path => Wf.Raise(default(SpecializedImmEvent).define(Host, host, generic, path, refinement, Wf.Ct)));
+                    dst.SaveHexImm(gid, functions, Append).OnSome(path => Wf.Raise(default(SpecializedImmEvent).define(Host, uri, generic, path, refinement, Wf.Ct)));
+                    dst.SaveAsmImm(gid, functions, Append).OnSome(path => Wf.Raise(default(SpecializedImmEvent).define(Host, uri, generic, path, refinement, Wf.Ct)));
                 }
             }
         }
 
-        void EmitBinary(in CaptureExchange exchange, GenericApiMethod f, Imm8R[] imm8, IAsmImmWriter dst, Type refinement = null)
+        void EmitBinary(in CaptureExchange exchange, GenericApiMethod src, Imm8R[] imm8, IAsmImmWriter dst, Type refinement = null)
         {
-            var gid = f.Id;
-            var host = f.HostUri;
+            var gid = src.Id;
+            var host = src.Host.Uri;
             var generic = true;
-            foreach(var closure in f.Close())
+            foreach(var closure in src.Close())
             {
                 var functions = Specializer.BinaryOps(exchange, closure.Method, closure.Id, imm8);
                 if(functions.Length != 0)

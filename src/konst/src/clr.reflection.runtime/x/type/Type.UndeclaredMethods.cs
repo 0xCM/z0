@@ -11,7 +11,7 @@ namespace Z0
 
     using static ReflectionFlags;
 
-    partial class XReflex
+    partial class XClrQuery
     {
         /// <summary>
         /// Selects the methods available through the type that were not declared by the type

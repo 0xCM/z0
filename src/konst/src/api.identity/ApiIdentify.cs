@@ -45,10 +45,4 @@ namespace Z0
         public static IMultiDiviner diviner()
             => new ArtifactIdentities();
     }
-
-    [ApiHost(ApiNames.ApiIdentityX)]
-    public static partial class XApiIdentity
-    {
-
-    }
 }

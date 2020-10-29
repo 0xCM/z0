@@ -12,7 +12,7 @@ namespace Z0
     using static Konst;
     using static ReflectionFlags;
 
-    partial class XReflex
+    partial class XClrQuery
     {
         /// <summary>
         /// Queries the source <see cref='Type'/> for the <see cref='EventInfo'/> members determined by the <see cref='BF_World'/> flags

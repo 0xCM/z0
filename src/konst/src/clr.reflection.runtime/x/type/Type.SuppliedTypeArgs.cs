@@ -8,7 +8,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
-    partial class XReflex
+    partial class XClrQuery
     {
         public static Type[] SuppliedTypeArgs(this Type t)
         {

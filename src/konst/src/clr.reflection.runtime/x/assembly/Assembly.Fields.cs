@@ -11,7 +11,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class XReflex
+    partial class XClrQuery
     {
         [MethodImpl(Inline), Op]
         public static FieldInfo[] Fields(this Assembly a)

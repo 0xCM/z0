@@ -4,23 +4,21 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    using static z;
-    using static Konst;
-
+    [Free]
     public interface IApiSig
     {
 
     }
 
+    [Free]
     public interface IApiTypeSig : IApiSig
     {
 
     }
 
+    [Free]
     public interface IApiOpSig : IApiSig
     {
         /// <summary>
@@ -29,12 +27,14 @@ namespace Z0
         ClrArtifactKey Host {get;}
     }
 
+    [Free]
     public interface IApiOpSig<S> : IApiOpSig
         where S : struct, IApiOpSig<S>
     {
 
     }
 
+    [Free]
     public interface IApiOpSig<S,T0> : IApiOpSig
         where S : struct, IApiOpSig<S,T0>
         where T0: IApiTypeSig
@@ -42,6 +42,7 @@ namespace Z0
 
     }
 
+    [Free]
     public interface IApiOpSig<S,T0,T1> : IApiOpSig
         where S : struct, IApiOpSig<S,T0,T1>
         where T0: IApiTypeSig
@@ -50,6 +51,7 @@ namespace Z0
 
     }
 
+    [Free]
     public interface IApiOpSig<S,T0,T1,T2> : IApiOpSig
         where S : struct, IApiOpSig<S,T0,T1,T2>
         where T0: IApiTypeSig
@@ -59,6 +61,7 @@ namespace Z0
 
     }
 
+    [Free]
     public interface IApiOpSig<S,T0,T1,T2,T3> : IApiOpSig
         where T1: IApiTypeSig
         where T0: IApiTypeSig
@@ -67,5 +70,4 @@ namespace Z0
     {
 
     }
-
 }

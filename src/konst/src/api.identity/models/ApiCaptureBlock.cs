@@ -41,7 +41,7 @@ namespace Z0
             insist(extracted.Base, parsed.Base);
             OpUri = OpUri.hex(ApiQuery.uri(method.DeclaringType), method.Name, id);
             TermCode = term;
-            Cil = ApiDynamic.cil(method);
+            Cil = ClrDynamic.cil(method);
         }
 
         public ReadOnlySpan<byte> InputData

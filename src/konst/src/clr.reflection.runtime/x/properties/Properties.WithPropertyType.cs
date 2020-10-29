@@ -8,7 +8,7 @@ namespace Z0
     using System.Reflection;
     using System.Linq;
 
-    partial class XReflex
+    partial class XClrQuery
     {
         /// <summary>
         /// Selects the source properties with property types that match one of the types in a caller-supplied parameter array

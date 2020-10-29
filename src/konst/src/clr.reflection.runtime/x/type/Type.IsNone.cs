@@ -12,7 +12,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class XReflex
+    partial class XClrQuery
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static bool IsNone<T>(this T? src)

@@ -4,9 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Collections.Generic;
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
+    [Free]
     public interface IApiMemberLocator
     {
         ApiHostMembers Locate(IApiHost src);

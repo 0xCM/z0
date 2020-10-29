@@ -11,7 +11,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class XReflex
+    partial class XClrQuery
     {
         /// <summary>
         /// Selects the first method found on the type, if any, that has a specified name

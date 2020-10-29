@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    partial class XReflex
+    partial class XClrQuery
     {
         /// <summary>
         /// Selects the public types from a stream

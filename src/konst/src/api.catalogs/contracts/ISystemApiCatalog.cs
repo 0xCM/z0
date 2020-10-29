@@ -9,8 +9,9 @@ namespace Z0
     using System.Reflection;
     using System.Linq;
 
-    using static Konst;
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
+    [Free]
     public interface ISystemApiCatalog
     {
         IPart[] Parts {get;}

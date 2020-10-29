@@ -13,10 +13,6 @@ namespace Z0
     [ApiDataType(ApiNames.ClrAssembly, true)]
     public readonly struct ClrAssembly
     {
-        [MethodImpl(Inline)]
-        public static ClrAssembly from(Assembly src)
-            => new ClrAssembly(src);
-
         public Assembly Definition {get;}
 
         public ClrArtifactKey Id

@@ -16,7 +16,6 @@ namespace Z0
         public PropertyInfo Definition {get;}
 
         public ClrArtifactKey Id
-
         {
             [MethodImpl(Inline)]
             get => Definition.MetadataToken;
@@ -47,6 +46,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public string Format()
             => Definition.Name;
+
+        [Ignore]
+        PropertyInfo IClrMember<PropertyInfo>.Definition
+            => Definition;
 
         public override bool Equals(object obj)
             => Definition.Equals(obj);

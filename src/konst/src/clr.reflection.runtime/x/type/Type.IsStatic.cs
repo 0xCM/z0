@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class XReflex
+    partial class XClrQuery
     {
         /// <summary>
         /// Determines whether a type is static
@@ -17,6 +17,6 @@ namespace Z0
         /// <param name="t">The type to examine</param>
         [MethodImpl(Inline), Op]
         public static bool IsStatic(this Type t)
-            => ClrReflexSvc.IsStatic(t);
+            => ClrQuerySvc.IsStatic(t);
     }
 }

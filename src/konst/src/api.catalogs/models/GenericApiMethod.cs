@@ -42,12 +42,6 @@ namespace Z0
         /// </summary>
         public MethodInfo Method {get;}
 
-        /// <summary>
-        /// The hosting type uri
-        /// </summary>
-        public ApiHostUri HostUri
-            => Host.Uri;
-
         [MethodImpl(Inline)]
         public GenericApiMethod(IApiHost host, ApiGenericOpIdentity id, MethodInfo method, NumericKind[] kinds)
         {
