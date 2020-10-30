@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class KXTend
+    partial class XKinds
     {
         [MethodImpl(Inline), Op]
         public static string Format(this SpanKind kind)
@@ -20,32 +20,23 @@ namespace Z0
             where K : IApiKey
                 => kind.Format();
 
-        /// <summary>
-        /// Determines whether the kind has a nonzero value
-        /// </summary>
-        /// <param name="src">The source kind</param>
-        [MethodImpl(Inline), Op]
-        public static bool IsSome(this CellWidth src)
-            => src != 0;
-
         [MethodImpl(Inline), Op]
         public static string Format(this ComparisonApiKey kind)
             => kind.ToString().ToLower();
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [Op, Closures(Closure)]
         public static string Format<T>(this ComparisonApiKey kind, T arg1, T arg2)
             => $"{kind.Format()}({arg1}, {arg2})";
 
-
-        [MethodImpl(Inline), Op]
+        [Op]
         public static string Format(this ApiOpId id, bool vectorized)
             => vectorized ? $"v{id.Format()}" : id.Format();
 
-        [MethodImpl(Inline), Op]
+        [Op]
         public static string Format(this ApiOpId? id)
             => id.HasValue ? id.Value.Format() : "unkinded";
 
-        [MethodImpl(Inline), Op]
+        [Op]
         public static string Format(this ArithmeticApiKey key)
             => key switch {
                 ArithmeticApiKey.Inc => "++",
@@ -54,7 +45,7 @@ namespace Z0
                 _ => key.ToString()
             };
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [Op, Closures(Closure)]
         public static string Format<T>(this ArithmeticApiKey key, T a, T b)
             => $"{key.Format()}({a}, {b})";
 
@@ -68,14 +59,15 @@ namespace Z0
                 _ => kind.ToString()
             };
 
+        [Op]
         public static string Format<S,T>(this BitShiftApiKey key, S a, T b)
             => $"{a} {key.Format()} {b}";
 
-        [MethodImpl(Inline), Op]
+        [Op]
         public static string Format(this BinaryBitLogicApiKey key)
             => key.ToString().ToLower();
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [Op, Closures(Closure)]
         public static string Format<T>(this BinaryBitLogicApiKey key, T a, T b)
             => text.format("{0}({1}, {2})", key.Format(), a, b);
     }

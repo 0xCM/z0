@@ -40,5 +40,8 @@ namespace Z0
 
         public string Format()
             => K.Format();
+
+        public override string ToString()
+            => Format();
     }
 }

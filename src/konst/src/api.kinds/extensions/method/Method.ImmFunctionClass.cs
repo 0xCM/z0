@@ -10,12 +10,13 @@ namespace Z0
 
     using static ImmFunctionClass;
 
-    partial class XTend
+    partial class XKinds
     {
         /// <summary>
         /// Calculates a method's immediate class
         /// </summary>
         /// <param name="src">The method to classify</param>
+        [Op]
         public static ImmFunctionClass ImmFunctionClass(this MethodInfo src, ScalarRefinementKind refinement)
         {
             var found = src.ImmParameters(refinement);

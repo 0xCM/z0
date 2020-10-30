@@ -21,7 +21,6 @@ namespace Z0
         where D : unmanaged, ITypeNat
         where T : unmanaged
     {
-
         public const string RenderPattern = "f:({0}, d:{1}, t:{2})";
 
         public const BitMaskKind M = BitMaskKind.Jsb;
@@ -31,10 +30,6 @@ namespace Z0
         public D d => default;
 
         public T t => default;
-
-        [MethodImpl(Inline)]
-        public static implicit operator MaskSpec(JsbMask<F,D,T> src)
-            => MaskSpec.define<F,D,T>(M);
 
         BitMaskKind IMaskSpec.M => M;
 
@@ -61,11 +56,14 @@ namespace Z0
             where S : unmanaged
                 => default;
 
-        [MethodImpl(Inline)]
         public string Format()
             => text.format(RenderPattern, nat64u<F>(), nat64u<D>(), typeof(T).NumericKind().Format());
 
         public override string ToString()
             => Format();
+
+        [MethodImpl(Inline)]
+        public static implicit operator MaskSpec(JsbMask<F,D,T> src)
+            => MaskSpec.define<F,D,T>(M);
     }
 }

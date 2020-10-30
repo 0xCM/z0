@@ -31,9 +31,6 @@ namespace Z0
 
         public T t => default;
 
-        [MethodImpl(Inline)]
-        public static implicit operator MaskSpec(CentralMask<F,D,T> src)
-            => MaskSpec.define<F,D,T>(M);
 
         BitMaskKind IMaskSpec.M => M;
 
@@ -49,5 +46,9 @@ namespace Z0
 
         public override string ToString()
             => Format();
+
+        [MethodImpl(Inline)]
+        public static implicit operator MaskSpec(CentralMask<F,D,T> src)
+            => MaskSpec.define<F,D,T>(M);
    }
 }

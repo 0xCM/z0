@@ -66,8 +66,9 @@ namespace Z0
             return total;
         }
 
+        [Op]
         public static string format(in BitFieldModel src)
-            => lines(src).Intersperse("\r\n").Concat();
+            => lines(src).Intersperse(Eol).Concat();
 
         [Op]
         public static string[] lines(in BitFieldModel src)
@@ -97,13 +98,15 @@ namespace Z0
             where T : unmanaged
             where S : IBitFieldSegment<T>
         {
+            var count = src.Length;
+            var last = count - 1;
             var sep =$"{Chars.Comma}{Chars.Space}";
-            var formatted = new StringBuilder();
+            var formatted = text.build();
             formatted.Append(Chars.LBracket);
-            for(var i=0; i< src.Length; i++)
+            for(var i=0; i<count; i++)
             {
                 formatted.Append(Format(src[(byte)i]));
-                if(i != src.Length - 1)
+                if(i != last)
                     formatted.Append(sep);
             }
 
@@ -111,6 +114,7 @@ namespace Z0
             return formatted.ToString();
         }
 
+        [Op, Closures(UnsignedInts)]
         static string Format<T>(IBitFieldSegment<T> src)
             where T : unmanaged
                 => $"[{src.Width}:{src.StartPos}..{src.EndPos}]";

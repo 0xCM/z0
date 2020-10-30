@@ -6,15 +6,14 @@ namespace Z0
 {
     using System;
     using System.Reflection;
-    using System.Linq;
-    using System.Collections.Generic;
 
-    partial class XTend
+    partial class XKinds
     {
         /// <summary>
         /// Determines the imm refinement type, if any
         /// </summary>
         /// <param name="src">The source parameter</param>
+        [Op]
         public static Option<Type> ImmRefinementType(this ParameterInfo src)
             => src.IsRefinedImmediate() ? Option.some(src.ParameterType) : Option.none<Type>();
     }

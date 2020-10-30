@@ -28,10 +28,6 @@ namespace Z0
 
         public T t => default;
 
-        [MethodImpl(Inline)]
-        public static implicit operator MaskSpec(MsbMask<F,D,T> src)
-            => MaskSpec.define<F,D,T>(M);
-
         BitMaskKind IMaskSpec.M => M;
 
         [MethodImpl(Inline)]
@@ -39,7 +35,14 @@ namespace Z0
             where S : unmanaged
                 => default;
 
+        public string Format()
+            => $"msb(f:{Typed.value<F>()}, d:{Typed.value<D>()}, t:{typeof(T).NumericKind().Format()})";
+
         public override string ToString()
-            => (this as ITextual).Format();
+            => Format();
+
+        [MethodImpl(Inline)]
+        public static implicit operator MaskSpec(MsbMask<F,D,T> src)
+            => MaskSpec.define<F,D,T>(M);
     }
 }

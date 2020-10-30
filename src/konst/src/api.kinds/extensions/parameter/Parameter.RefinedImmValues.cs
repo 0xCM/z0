@@ -8,8 +8,9 @@ namespace Z0
     using System.Reflection;
     using System.Linq;
 
-    partial class XTend
+    partial class XKinds
     {
+        [Op]
         public static Imm8R[] RefinedImmValues(this ParameterInfo param)
         {
             if(param.IsRefinedImmediate())

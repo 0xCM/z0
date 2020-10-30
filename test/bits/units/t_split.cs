@@ -12,7 +12,7 @@ namespace Z0
         {
             var src = ulong.MaxValue;
             Span<Bit32> dst = new Bit32[64];
-            BitMasks.part64x1(src,dst);
+            BitParts.part64x1(src,dst);
             for(var i=0; i< dst.Length; i++)
                 Claim.Require(dst[i]);
         }

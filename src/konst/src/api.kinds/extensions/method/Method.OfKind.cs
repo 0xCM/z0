@@ -8,13 +8,14 @@ namespace Z0
     using System.Reflection;
     using System.Linq;
     using System.Collections.Generic;
- 
-    partial class XTend
+
+    partial class XKinds
     {
         /// <summary>
         /// Selects methods from a stream that accept and/or return intrinsic vectors
         /// </summary>
         /// <param name="src">The methods to examine</param>
+        [Op]
         public static MethodInfo[] OfKind(this MethodInfo[] src, Vec128Type vk, bool total = false)
             => src.Where(m => m.IsKind(vk,total));
 
@@ -22,6 +23,7 @@ namespace Z0
         /// Selects methods from a stream that accept and/or return intrinsic vectors
         /// </summary>
         /// <param name="src">The methods to examine</param>
+        [Op]
         public static MethodInfo[] OfKind(this MethodInfo[] src, Vec256Type vk, bool total = false)
             => src.Where(m => m.IsKind(vk,total));
 
@@ -29,6 +31,7 @@ namespace Z0
         /// Selects methods from a stream that accept and/or return intrinsic vectors
         /// </summary>
         /// <param name="src">The methods to examine</param>
+        [Op, Closures(Closure)]
         public static MethodInfo[] OfKind<T>(this MethodInfo[] src, Vec128Kind<T> vk)
             where T : unmanaged
                 => src.Where(m => m.IsKind(vk));
@@ -37,6 +40,7 @@ namespace Z0
         /// Selects methods from a stream that accept and/or return intrinsic vectors
         /// </summary>
         /// <param name="src">The methods to examine</param>
+        [Op, Closures(Closure)]
         public static MethodInfo[] OfKind<T>(this MethodInfo[] src, Vec256Kind<T> vk)
             where T : unmanaged
                 => src.Where(m => m.IsKind(vk));

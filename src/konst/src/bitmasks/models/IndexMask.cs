@@ -19,7 +19,6 @@ namespace Z0
         where N : unmanaged, ITypeNat
         where T : unmanaged
     {
-
         public const string RenderPattern = "n(f:{0}, t:{1})";
 
         public const BitMaskKind M = BitMaskKind.Index;
@@ -30,5 +29,8 @@ namespace Z0
 
         public string Format()
             => text.format(RenderPattern, nat64u<N>(), NumericKinds.kind<T>().Format());
+
+        public override string ToString()
+            => Format();
     }
 }

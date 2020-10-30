@@ -49,41 +49,41 @@ namespace Z0
         public static UnaryOp64 define(UnaryOp<ulong> f)
             => a => f(a.Content);
 
-        [MethodImpl(Inline), Op]
-        public static UnaryOp1 define(MethodInfo f, UnaryOpClass<Bit32> k)
-            => define(uFx(f,k));
+        // [MethodImpl(Inline), Op]
+        // public static UnaryOp1 define(MethodInfo f, UnaryOpClass<Bit32> k)
+        //     => define(uFx(f,k));
 
-        [MethodImpl(Inline), Op]
-        public static UnaryOp8 define(MethodInfo f, UnaryOpClass<sbyte> k)
-            => unary(uFx(f,k));
+        // [MethodImpl(Inline), Op]
+        // public static UnaryOp8 define(MethodInfo f, UnaryOpClass<sbyte> k)
+        //     => unary(uFx(f,k));
 
-        [MethodImpl(Inline), Op]
-        public static UnaryOp8 define(MethodInfo f, UnaryOpClass<byte> k)
-            => unary(uFx(f,k));
+        // [MethodImpl(Inline), Op]
+        // public static UnaryOp8 define(MethodInfo f, UnaryOpClass<byte> k)
+        //     => unary(uFx(f,k));
 
-        [MethodImpl(Inline), Op]
-        public static UnaryOp16 define(MethodInfo f, UnaryOpClass<short> k)
-            => define(uFx(f,k));
+        // [MethodImpl(Inline), Op]
+        // public static UnaryOp16 define(MethodInfo f, UnaryOpClass<short> k)
+        //     => define(uFx(f,k));
 
-        [MethodImpl(Inline), Op]
-        public static UnaryOp16 define(MethodInfo f, UnaryOpClass<ushort> k)
-            => define(uFx(f,k));
+        // [MethodImpl(Inline), Op]
+        // public static UnaryOp16 define(MethodInfo f, UnaryOpClass<ushort> k)
+        //     => define(uFx(f,k));
 
-        [MethodImpl(Inline), Op]
-        public static UnaryOp32 define(MethodInfo f, UnaryOpClass<uint> k)
-            => unary(uFx(f,k));
+        // [MethodImpl(Inline), Op]
+        // public static UnaryOp32 define(MethodInfo f, UnaryOpClass<uint> k)
+        //     => unary(uFx(f,k));
 
-        [MethodImpl(Inline), Op]
-        public static UnaryOp32 define(MethodInfo f, UnaryOpClass<int> k)
-            => define(uFx(f,k));
+        // [MethodImpl(Inline), Op]
+        // public static UnaryOp32 define(MethodInfo f, UnaryOpClass<int> k)
+        //     => define(uFx(f,k));
 
-        [MethodImpl(Inline), Op]
-        public static UnaryOp64 define(MethodInfo f, UnaryOpClass<ulong> k)
-            => define(uFx(f,k));
+        // [MethodImpl(Inline), Op]
+        // public static UnaryOp64 define(MethodInfo f, UnaryOpClass<ulong> k)
+        //     => define(uFx(f,k));
 
-        [MethodImpl(Inline), Op]
-        public static UnaryOp64 define(MethodInfo f, UnaryOpClass<long> k )
-            => define(uFx(f,k));
+        // [MethodImpl(Inline), Op]
+        // public static UnaryOp64 define(MethodInfo f, UnaryOpClass<long> k )
+        //     => define(uFx(f,k));
 
         /// <summary>
         /// Creates a fixed 128-bit unary operator from caller-supplied delegate

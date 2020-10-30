@@ -11,7 +11,7 @@ namespace Z0
 
     using K = Kinds;
 
-    partial class KXTend
+    partial class XKinds
     {
         [MethodImpl(Inline)]
         public static BinaryOpClass<W> Fixed<W>(this BinaryOpClass src)

@@ -355,4 +355,6 @@ readonly struct ApiNames
     public const string GridCells = grid + dot + cells;
 
     public const string GridMetrics = grid + dot + metrics;
+
+    public const string XKinds = kinds + dot + extensions;
 }

@@ -8,7 +8,6 @@ namespace Z0
     {
         partial struct Literals
         {
-
             // ~ 8x1: The greatest bit of each 8-bit segment is enabled
             // ~ ------------------------------------------------------------------
 

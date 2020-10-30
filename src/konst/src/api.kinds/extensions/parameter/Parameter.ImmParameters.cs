@@ -8,12 +8,13 @@ namespace Z0
     using System.Reflection;
     using System.Linq;
 
-    partial class XTend
+    partial class XKinds
     {
         /// <summary>
         /// Selects parameters from a method, if any, that acceptrequire an immediate value
         /// </summary>
         /// <param name="m">The method to examine</param>
+        [Op]
         public static ParameterInfo[] ImmParameters(this MethodInfo src, ScalarRefinementKind refinement)
         {
             var refined = src.GetParameters().Where(p => p.IsRefinedImmediate());

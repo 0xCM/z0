@@ -31,23 +31,21 @@ namespace Z0
 
         public T t => default;
 
-        [MethodImpl(Inline)]
-        public static implicit operator MaskSpec(LsbMask<F,D,T> src)
-            => MaskSpec.define<F,D,T>(M);
-
         BitMaskKind IMaskSpec.M => M;
-
-        //$"lsb(f:{Typed.value<F>()}, d:{Typed.value<D>()}, t:{typeof(T).NumericKind().Format()})";
 
         [MethodImpl(Inline)]
         public LsbMask<F,D,S> As<S>(S s = default)
             where S : unmanaged
                 => default;
 
-        public override string ToString()
-            => (this as ITextual).Format();
-
         public string Format()
             => text.format(RenderPattern, nat64u<F>(), nat64u<D>(), typeof(T).NumericKind().Format());
+
+        public override string ToString()
+            => Format();
+
+        [MethodImpl(Inline)]
+        public static implicit operator MaskSpec(LsbMask<F,D,T> src)
+            => MaskSpec.define<F,D,T>(M);
     }
 }

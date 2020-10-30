@@ -14,11 +14,11 @@ namespace Z0
     public readonly ref struct CellBuffers<F>
         where F : unmanaged, IDataCell
     {
-        readonly Span<F> View;
+        readonly Span<F> Cover;
 
         readonly Span<CellBufferToken<F>> Tokens;
 
-        readonly NativeBuffer Buffered;
+        readonly NativeBuffer Allocation;
 
         readonly byte BufferCount;
 
@@ -26,14 +26,25 @@ namespace Z0
 
         readonly uint TotalSize;
 
-        public unsafe CellBuffers(byte count)
+        // public unsafe CellBuffers(byte count)
+        // {
+        //     BufferCount = count;
+        //     BufferSize = (uint)default(F).Size;
+        //     TotalSize = BufferCount*BufferSize;
+        //     Allocation = Buffers.native(TotalSize);
+        //     Cover = new Span<F>(Allocation.Handle.ToPointer(), (int)TotalSize);
+        //     Tokens = Buffers.tokenize<F>(Allocation.Handle, BufferSize, BufferCount);
+        // }
+
+        [MethodImpl(Inline)]
+        internal unsafe CellBuffers(NativeBuffer allocation, byte bufferCount, uint bufferSize, uint totalSize)
         {
-            BufferCount = count;
-            BufferSize = (uint)default(F).Size;
-            TotalSize = BufferCount*BufferSize;
-            Buffered = Buffers.native(TotalSize);
-            View = new Span<F>(Buffered.Handle.ToPointer(), (int)TotalSize);
-            Tokens = Buffers.tokenize<F>(Buffered.Handle, BufferSize, BufferCount);
+            Allocation = allocation;
+            BufferSize = bufferSize;
+            BufferCount = bufferCount;
+            TotalSize = totalSize;
+            Cover = new Span<F>(allocation.Handle.ToPointer(), (int)TotalSize);
+            Tokens = Buffers.tokenize<F>(Allocation.Handle, BufferSize, BufferCount);
         }
 
         /// <summary>
@@ -42,7 +53,7 @@ namespace Z0
         ref F Head
         {
             [MethodImpl(Inline)]
-            get => ref MemoryMarshal.GetReference(View);
+            get => ref MemoryMarshal.GetReference(Cover);
         }
 
         /// <summary>
@@ -101,6 +112,6 @@ namespace Z0
                 => Token(index).Fill(src);
 
         public void Dispose()
-            => Buffered.Dispose();
+            => Allocation.Dispose();
     }
 }

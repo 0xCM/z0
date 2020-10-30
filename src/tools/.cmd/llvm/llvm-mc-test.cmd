@@ -1,0 +1,1 @@
+llvm-mc --disassemble --x86-asm-syntax=intel test.hex -triple=x86_64 > test.asm

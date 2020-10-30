@@ -6,13 +6,14 @@ namespace Z0
 {
     using System;
     using System.Reflection;
-    
-    partial class XTend
+
+    partial class XKinds
     {
         /// <summary>
         /// Determines whether a method defines a unary function
         /// </summary>
         /// <param name="m">The method to examine</param>
+        [Op]
         public static bool IsUnaryFunction(this MethodInfo m)
             => m.IsFunction() && m.HasArityValue(1);
 
@@ -20,6 +21,7 @@ namespace Z0
         /// Determines whether a method is a unary operator
         /// </summary>
         /// <param name="m">The method to examine</param>
+        [Op]
         public static bool IsUnaryOperator(this MethodInfo m)
             => m.IsHomogenous() && m.IsUnaryFunction();
 
@@ -27,6 +29,7 @@ namespace Z0
         /// Selects unary operators from a stream
         /// </summary>
         /// <param name="src">The methods to examine</param>
+        [Op]
         public static MethodInfo[] UnaryOperators(this MethodInfo[] src)
             => src.Where(x => x.IsUnaryOperator());
     }

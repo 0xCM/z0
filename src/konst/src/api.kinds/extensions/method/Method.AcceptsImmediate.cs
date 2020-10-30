@@ -8,12 +8,13 @@ namespace Z0
     using System.Reflection;
     using System.Linq;
 
-    partial class XTend
+    partial class XKinds
     {
         /// <summary>
         /// Determines whether a method defines a parameter that requires an 8-bit immediate immediate
         /// </summary>
         /// <param name="m">The method to examine</param>
+        [Op]
         public static bool AcceptsImmediate(this MethodInfo src, ScalarRefinementKind refinement)
             => src.ImmParameters(refinement).Any();
 
@@ -21,6 +22,7 @@ namespace Z0
         /// Determines whether a method defines a parameter that requires an 8-bit immediate immediate
         /// </summary>
         /// <param name="m">The method to examine</param>
+        [Op]
         public static bool AcceptsImmediate(this MethodInfo src)
             => src.Parameters(p => p.Tagged<ImmAttribute>()).Any();
 
@@ -28,6 +30,7 @@ namespace Z0
         /// Determines whether a method defines an index-identified parameter that requires an 8-bit immediate immediate
         /// </summary>
         /// <param name="m">The method to examine</param>
+        [Op]
         public static bool AcceptsImmediate(this MethodInfo m, int index, ScalarRefinementKind refinement)
         {
             var parameters = m.GetParameters().ToArray();

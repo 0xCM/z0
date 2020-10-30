@@ -11,12 +11,13 @@ namespace Z0
 
     using static ImmFunctionClass;
 
-    partial class XTend
+    partial class XKinds
     {
         /// <summary>
         /// Determines whether a parameters is an immediate
         /// </summary>
         /// <param name="src">The source parameter</param>
+        [Op]
         public static bool IsImmediate(this ParameterInfo param, ScalarRefinementKind refinement)
         {
             if(param.Tagged<ImmAttribute>())
@@ -37,9 +38,11 @@ namespace Z0
             return false;
         }
 
+        [Op]
         public static Imm8R[] ToImm8Values(this byte[] src, ScalarRefinementKind kind)
             => src.Map(x => new Imm8R(x, kind != 0));
 
+        [Op]
         public static Imm8R[] ToImm8Values(this IEnumerable<byte> src, ScalarRefinementKind kind)
             => src.Map(x => new Imm8R(x, kind != 0));
 
@@ -47,6 +50,7 @@ namespace Z0
         /// Determines whether a parameters is an unrefined immediate
         /// </summary>
         /// <param name="src">The source parameter</param>
+        [Op]
         public static bool IsUnrefinedImmediate(this ParameterInfo src)
             => src.Tagged<ImmAttribute>() && !src.ParameterType.IsEnum;
 
@@ -54,6 +58,7 @@ namespace Z0
         /// Determines whether a parameters is a refined immediate
         /// </summary>
         /// <param name="src">The source parameter</param>
+        [Op]
         public static bool IsRefinedImmediate(this ParameterInfo src)
             => src.Tagged<ImmAttribute>() && src.ParameterType.IsEnum;
 
@@ -61,9 +66,11 @@ namespace Z0
         /// Returns a method's immediate parameter types
         /// </summary>
         /// <param name="m">The method to examine</param>
+        [Op]
         public static Type[] ImmParameterTypes(this MethodInfo src, ScalarRefinementKind kind)
             => src.ImmParameters(kind).Select(p => p.ParameterType);
 
+        [Op]
         static ImmFunctionClass ImmSlot(this ParameterInfo p)
         {
             switch(p.Position)

@@ -6,11 +6,10 @@ namespace Z0
 {
     using System;
     using System.Reflection;
-    using System.Linq;
-    using System.Collections.Generic;
 
-    partial class XTend
+    partial class XKinds
     {
+        [Op]
         public static ScalarRefinementKind ClassifyImmRefinement(this ParameterInfo src)
         {
             if(!src.Tagged<ImmAttribute>())

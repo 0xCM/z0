@@ -11,12 +11,13 @@ namespace Z0
 
     using OC = ApiOperatorClass;
 
-    partial class XTend
+    partial class XKinds
     {
         /// <summary>
         /// Determines whether a method defines an operator over a (common) domain
         /// </summary>
         /// <param name="src">The method to examine</param>
+        [Op]
         public static bool IsOperator(this MethodInfo src)
             => src.IsFunction() && src.IsHomogenous() && src.ArityValue() >= 1;
 
@@ -24,6 +25,7 @@ namespace Z0
         /// Returns true if all non-void input/output values are of the same type
         /// </summary>
         /// <param name="src">The method to examine</param>
+        [Op]
         public static bool IsHomogenous(this MethodInfo src)
         {
             var inputs = src.ParameterTypes().ToHashSet();
@@ -39,6 +41,7 @@ namespace Z0
         /// Classifies a methods that is an operator and has arity between 1 and 3; otherwise, returns None
         /// </summary>
         /// <param name="src">The method to examine</param>
+        [Op]
         public static ApiOperatorClass ClassifyOperator(this MethodInfo src)
         {
             if(IsOperator(src))
