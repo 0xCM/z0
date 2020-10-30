@@ -27,7 +27,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public WfSettings(Dictionary<string,string> src)
-            => Index = KeyedValues.from(src);
+            => Index = Seq.keyed(src);
 
         public string this[string key]
         {

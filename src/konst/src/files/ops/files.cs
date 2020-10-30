@@ -14,23 +14,23 @@ namespace Z0
     partial struct FS
     {
         [MethodImpl(Inline), Op]
-        public static Source<FilePath> files(FolderPath src, bool recurse)
+        public static Deferred<FilePath> files(FolderPath src, bool recurse)
             => files(src, "*.*", recurse);
 
         [MethodImpl(Inline), Op]
-        public static Source<FilePath> files(FolderPath src, bool recurse, FileExt ext)
+        public static Deferred<FilePath> files(FolderPath src, bool recurse, FileExt ext)
             => files(src, ext.SearchPattern, recurse);
 
         [MethodImpl(Inline), Op]
-        public static Source<FilePath> files(FolderPath src, bool recurse, params FileExt[] ext)
+        public static Deferred<FilePath> files(FolderPath src, bool recurse, params FileExt[] ext)
             => files(src, pattern(ext), recurse);
 
         [MethodImpl(Inline), Op]
-        public static Source<FilePath> files(FolderPath src, string pattern, bool recurse)
+        public static Deferred<FilePath> files(FolderPath src, string pattern, bool recurse)
             => EnumerateFiles(src, pattern, recurse);
 
-        static Source<FilePath> EnumerateFiles(FolderPath src, string pattern, bool recurse, bool casematch = false)
-            => missing(src) ? Seq.empty<FilePath>() : Seq.from(from f in Directory.EnumerateFiles(src.Name, pattern, SearchOptions(recurse, casematch)) select path(f));
+        static Deferred<FilePath> EnumerateFiles(FolderPath src, string pattern, bool recurse, bool casematch = false)
+            => missing(src) ? Seq.EmptyDeferral<FilePath>() : Seq.defer(from f in Directory.EnumerateFiles(src.Name, pattern, SearchOptions(recurse, casematch)) select path(f));
 
         [MethodImpl(Inline)]
         static EnumerationOptions SearchOptions(bool recurse, bool casematch = false, FileAttributes? skip = null)

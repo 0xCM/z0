@@ -10,8 +10,6 @@ namespace Z0
     using static Konst;
     using static z;
 
-    using api = Cmd;
-
     public struct CmdOption : ICmdOption
     {
         public string Name;
@@ -38,7 +36,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => api.format(this);
+            => string.Format(RP.Setting, Name, Value);
 
         public override string ToString()
             => Format();

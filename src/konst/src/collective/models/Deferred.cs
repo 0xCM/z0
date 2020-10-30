@@ -15,12 +15,12 @@ namespace Z0
     /// <summary>
     /// Defines a LINQ-monadic cover for a deferred finite or infinite parametric sequence
     /// </summary>
-    public readonly struct Source<T> : IDeferred<Source<T>,T>
+    public readonly struct Deferred<T> : IDeferred<Deferred<T>,T>
     {
         readonly IEnumerable<T> E;
 
         [MethodImpl(Inline)]
-        public Source(IEnumerable<T> src)
+        public Deferred(IEnumerable<T> src)
             => E = src;
 
         public readonly IEnumerable<T> Content
@@ -30,40 +30,40 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static Source<T> operator + (Source<T> lhs, Source<T> rhs)
+        public static Deferred<T> operator + (Deferred<T> lhs, Deferred<T> rhs)
             => lhs.Concat(rhs);
 
         /// <summary>
         /// Implicitly constructs a sequence from an array
         /// </summary>
         /// <param name="src">The source array</param>
-        public static implicit operator Source<T>(T[] src)
-            => new Source<T>(src);
+        public static implicit operator Deferred<T>(T[] src)
+            => new Deferred<T>(src);
 
         [MethodImpl(Inline)]
-        public Source<T> WithContent(IEnumerable<T> src)
-            => new Source<T>(src);
+        public Deferred<T> WithContent(IEnumerable<T> src)
+            => new Deferred<T>(src);
 
-        public Source<T> Concat(Source<T> rhs)
-            => new Source<T>(Content.Concat(rhs.Content));
+        public Deferred<T> Concat(Deferred<T> rhs)
+            => new Deferred<T>(Content.Concat(rhs.Content));
 
-        public Source<Y> Select<Y>(Func<T,Y> selector)
-             => from(from x in Content select selector(x));
+        public Deferred<Y> Select<Y>(Func<T,Y> selector)
+             => defer(from x in Content select selector(x));
 
-        public Source<Z> SelectMany<Y,Z>(Func<T,Source<Y>> lift, Func<T,Y,Z> project)
-            => from(from x in Content
+        public Deferred<Z> SelectMany<Y,Z>(Func<T,Deferred<Y>> lift, Func<T,Y,Z> project)
+            => defer(from x in Content
                           from y in lift(x).Content
                           select project(x, y));
 
-        public Source<Y> SelectMany<Y>(Func<T,Source<Y>> lift)
-            => from(from x in Content
+        public Deferred<Y> SelectMany<Y>(Func<T,Deferred<Y>> lift)
+            => defer(from x in Content
                           from y in lift(x).Content
                           select y);
 
-        public Source<T> Where(Func<T,bool> predicate)
-            => from(from x in Content where predicate(x) select x);
+        public Deferred<T> Where(Func<T,bool> predicate)
+            => defer(from x in Content where predicate(x) select x);
 
-        public static Source<T> Empty
-            => new Source<T>(sys.empty<T>());
+        public static Deferred<T> Empty
+            => new Deferred<T>(sys.empty<T>());
     }
 }

@@ -145,7 +145,7 @@ namespace Z0
             var x = from part in  src.Parts
                     let enums = part.Owner.Enums()
                         orderby part.Id
-                        select KeyedValues.@from(part.Id, enums);
+                        select Seq.keyed(part.Id, enums);
             return x;
         }
 

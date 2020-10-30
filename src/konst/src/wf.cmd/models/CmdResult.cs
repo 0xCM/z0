@@ -14,11 +14,19 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static CmdResult win(CmdId id, params byte[] data)
-            => new CmdResult(id,true,data);
+            => new CmdResult(id, true, data);
 
         [MethodImpl(Inline)]
         public static CmdResult fail(CmdId id, params byte[] data)
-            => new CmdResult(id,false,data);
+            => new CmdResult(id, false,data);
+
+        [MethodImpl(Inline)]
+        public static CmdResult win(CmdSpec cmd, params byte[] data)
+            => new CmdResult(cmd.Id, true,data);
+
+        [MethodImpl(Inline)]
+        public static CmdResult fail(CmdSpec cmd, params byte[] data)
+            => new CmdResult(cmd.Id, false,data);
 
         public CmdId CmdId {get;}
 

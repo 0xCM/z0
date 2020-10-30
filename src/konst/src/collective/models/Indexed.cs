@@ -11,9 +11,11 @@ namespace Z0
     using static Konst;
     using static z;
 
+    using api = Seq;
+
     public readonly struct Indexed<T> : IIndex<T>
     {
-        public readonly T[] Data;
+        internal readonly T[] Data;
 
         public ReadOnlySpan<T> View
         {
@@ -34,21 +36,8 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public bool Search(Func<T,bool> predicate, out T found)
-        {
-            var view = View;
-            for(var i=0; i<view.Length; i++)
-            {
-                ref readonly var candidate = ref skip(view,i);
-                if(predicate(candidate))
-                {
-                    found = candidate;
-                    return true;
-                }
-            }
-            found = default;
-            return false;
-        }
+        public bit Search(Func<T,bool> predicate, out T found)
+            => api.search(this, predicate, out found);
 
         [MethodImpl(Inline)]
         public static implicit operator Span<T>(Indexed<T> src)
@@ -103,19 +92,21 @@ namespace Z0
         }
 
         public Indexed<Y> Select<Y>(Func<T,Y> selector)
-             => new Indexed<Y>(from x in Data select selector(x));
+             => api.map(this, selector);
 
         public Indexed<Z> SelectMany<Y,Z>(Func<T,Indexed<Y>> lift, Func<T,Y,Z> project)
-            => new Indexed<Z>((from x in Data
-                          from y in lift(x).Data
-                          select project(x, y)).Array());
+             => api.map(this, lift, project);
 
         public Indexed<Y> SelectMany<Y>(Func<T,Indexed<Y>> lift)
-            => new Indexed<Y>((from x in Data
-                          from y in lift(x).Data
-                          select y).Array());
+             => api.map(this, lift);
 
         public Indexed<T> Where(Func<T,bool> predicate)
-            => new Indexed<T>(from x in Data where predicate(x) select x);
+            => api.filter(this, predicate);
+
+        public static Indexed<T> Empty
+        {
+           [MethodImpl(Inline)]
+           get => api.EmptyIndex<T>();
+        }
     }
 }

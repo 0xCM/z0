@@ -14,39 +14,24 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static DelimitedList<object> delimit(params object[] src)
-            => Listings.create(src);
+            => Seq.delimited(src);
 
         [MethodImpl(Inline)]
         public static DelimitedList<T> delimit<T>(IList<T> src, char delimiter = FieldDelimiter)
-            => Listings.create<T>(src.Array());
+            => Seq.delimited(src.Array(), delimiter);
 
         [MethodImpl(Inline)]
         public static DelimitedList<T> delimit<T>(params T[] src)
             where T : unmanaged
-                => Listings.create(src);
+                => Seq.delimited(src);
 
         [MethodImpl(Inline)]
         public static DelimitedList<object> delimit(char delimiter, params object[] src)
-                => Listings.create(delimiter, src);
+                => Seq.delimited(delimiter, src);
 
         [MethodImpl(Inline)]
         public static DelimitedList<T> delimit<T>(char delimiter, params T[] src)
             where T : unmanaged
-                => Listings.create(delimiter, src);
-
-        [MethodImpl(Inline)]
-        public static EnclosedList<T> enclose<T>(params T[] src)
-            where T : unmanaged
-                => Listings.create(ListEnclosureKind.Embraced, Chars.Comma, src);
-
-        [MethodImpl(Inline)]
-        public static EnclosedList<T> enclose<T>(ListEnclosureKind kind, params T[] src)
-            where T : unmanaged
-                => Listings.create(kind, Chars.Comma, src);
-
-        [MethodImpl(Inline)]
-        public static EnclosedList<T> enclose<T>(ListEnclosureKind kind, char delimiter, params T[] src)
-            where T : unmanaged
-                => Listings.create(kind, delimiter, src);
+                => Seq.delimited(delimiter, src);
     }
 }

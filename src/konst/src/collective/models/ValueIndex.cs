@@ -6,72 +6,58 @@ namespace Z0
 {
     using System;
     using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static ValueIndex;
     using static z;
-    
+
+    using api = Seq;
+
     public readonly struct ValueIndex<T> : IIndex<T>
         where T : struct
     {
-        public readonly T[] Data;
-        
-        [MethodImpl(Inline)]
-        public static implicit operator ValueIndex<T>(T[] src)
-            => new ValueIndex<T>(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator T[](ValueIndex<T> src)
-            => src.Data;
-
-        [MethodImpl(Inline)]   
-        public static ValueIndex<T> operator + (ValueIndex<T> lhs, ValueIndex<T> rhs)
-            => lhs.Concat(rhs);
+        internal readonly T[] Data;
 
         [MethodImpl(Inline)]
         public ValueIndex(T[] src)
-        {
-            Data = insist(src);
-        }
+            => Data = insist(src);
 
         public int Length
         {
             [MethodImpl(Inline)]
             get => Data.Length;
         }
-        
+
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Empty(this);
+            get => api.empty(this);
         }
-        
+
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => NonEmpty(this);
+            get => api.nonempty(this);
         }
 
         [MethodImpl(Inline)]
-        public ref T Lookup(byte index) 
+        public ref T Lookup(byte index)
             => ref Data[index];
 
         [MethodImpl(Inline)]
-        public ref T Lookup(ushort index) 
+        public ref T Lookup(ushort index)
             => ref Data[index];
 
         [MethodImpl(Inline)]
-        public ref T Lookup(uint index) 
+        public ref T Lookup(uint index)
             => ref Data[index];
 
         [MethodImpl(Inline)]
-        public ref T Lookup(ulong index) 
+        public ref T Lookup(ulong index)
             => ref Data[index];
 
         [MethodImpl(Inline)]
-        public ref T Lookup(long index) 
+        public ref T Lookup(long index)
             => ref Data[index];
 
         public ref T this[byte index]
@@ -115,7 +101,7 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Data;
         }
-        
+
         public ref T Head
         {
             [MethodImpl(Inline)]
@@ -130,8 +116,8 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ValueIndex<T> Replace(T[] data)
-            => Indexed.values(data);
-        
+            => api.values(data);
+
         [MethodImpl(Inline)]
         public ValueIndex<T> Reverse()
         {
@@ -140,33 +126,46 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public bool Equals(ValueIndex<T> rhs)        
+        public bool Equals(ValueIndex<T> rhs)
             => Data.Equals(rhs.Data);
-            
+
         [MethodImpl(Inline)]
         public ValueIndex<T> Concat(in ValueIndex<T> rhs)
-            => Indexed.values(concat(Data,rhs.Data));
+            => api.values(concat(Data,rhs.Data));
 
         [MethodImpl(Inline)]
         public unsafe ValueIndex<S> Cast<S>()
             where S : struct
-                => Indexed.values(@as<T[],S[]>(edit(Data)));
+                => api.values(@as<T[],S[]>(edit(Data)));
 
         public ValueIndex<Y> Select<Y>(Func<T,Y> selector)
-            where Y : struct       
-             => Indexed.values(from x in Data select selector(x));
+            where Y : struct
+             => api.values(from x in Data select selector(x));
 
         public ValueIndex<Z> SelectMany<Y,Z>(Func<T,ValueIndex<Y>> lift, Func<T,Y,Z> project)
-            where Y : struct       
-            where Z : struct       
-                => Indexed.values(from x in Data from y in lift(x).Data select project(x, y));
+            where Y : struct
+            where Z : struct
+                => api.values(from x in Data from y in lift(x).Data select project(x, y));
 
         public ValueIndex<Y> SelectMany<Y>(Func<T,ValueIndex<Y>> lift)
-            where Y : struct 
-                 => Indexed.values(from x in Data from y in lift(x).Data select y);
+            where Y : struct
+                 => api.values(from x in Data from y in lift(x).Data select y);
 
         public ValueIndex<T> Where(Func<T,bool> predicate)
-            => Indexed.values(from x in Data where predicate(x) select x);
+            => api.values(from x in Data where predicate(x) select x);
+
+
+        [MethodImpl(Inline)]
+        public static implicit operator ValueIndex<T>(T[] src)
+            => new ValueIndex<T>(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator T[](ValueIndex<T> src)
+            => src.Data;
+
+        [MethodImpl(Inline)]
+        public static ValueIndex<T> operator + (ValueIndex<T> lhs, ValueIndex<T> rhs)
+            => lhs.Concat(rhs);
 
         public static ValueIndex<T> Empty
         {

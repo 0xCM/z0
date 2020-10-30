@@ -7,14 +7,13 @@ namespace Z0
     using System;
     using System.Linq;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
 
     using static Konst;
 
     partial struct z
     {
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Source<T> seq<T>(IEnumerable<T> src)
-            => new Source<T>(src);
+        [MethodImpl(Inline), Op]
+        public static IndexedSeq<T> seq<T>(params T[] src)
+            => new IndexedSeq<T>(src);
     }
 }

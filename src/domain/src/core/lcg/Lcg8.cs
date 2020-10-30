@@ -10,7 +10,6 @@ namespace Z0
     using static Konst;
     using static z;
 
-    using G = Lcg8;
     using api = Lcg8Ops;
 
     public struct Lcg8

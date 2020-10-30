@@ -25,15 +25,15 @@ namespace Z0
 
         readonly ConcurrentDictionary<ulong,IWfHost> Hosts;
 
-        readonly CmdRouter Router;
+        readonly ICmdRouter Router;
 
         [MethodImpl(Inline)]
         public WfSteps(IWfShell wf)
         {
             Host = WfSelfHost.create(typeof(WfSteps));
             Wf = wf.WithHost(Host);
-            Hosts = new ConcurrentDictionary<ulong, IWfHost>();
-            Router = Cmd.router(Wf);
+            Hosts = new ConcurrentDictionary<ulong,IWfHost>();
+            Router = CmdRouter.service(wf);
         }
      }
 }

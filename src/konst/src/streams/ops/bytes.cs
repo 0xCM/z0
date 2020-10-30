@@ -18,8 +18,8 @@ namespace Z0
         /// </summary>
         /// <param name="source">The random source</param>
         [Op]
-        public static Source<byte> bytes(IValueSource source)
-            => z.seq(stream(w8, source));
+        public static Deferred<byte> bytes(IValueSource source)
+            => defer(stream(w8, source));
 
         [Op]
         static IEnumerable<byte> stream(W8 w, IValueSource source)

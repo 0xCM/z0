@@ -15,7 +15,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static CmdBuilder CmdBuilder(this IWfShell wf)
             => new CmdBuilder(wf);
-
     }
 
     public readonly struct CmdBuilder

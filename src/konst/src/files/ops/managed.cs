@@ -36,7 +36,7 @@ namespace Z0
         /// <param name="dst">The buffer to populate</param>
         /// <param name="recurse">Specifies whether subdirectories should be searched</param>
         [MethodImpl(Inline), Op]
-        public static Source<FilePath> managed(FolderPath src, bool recurse = false)
+        public static Deferred<FilePath> managed(FolderPath src, bool recurse = false)
             => files(src, recurse, Dll, Exe).Where(managed);
     }
 }

@@ -12,12 +12,14 @@ namespace Z0
     using static Konst;
     using static z;
 
+    using api = Seq;
+
     /// <summary>
     /// Reifies a canonical indexed sequence container
     /// </summary>
     public readonly struct IndexedSeq<T> : IIndex<T>
     {
-        readonly T[] Data;
+        internal readonly T[] Data;
 
         /// <summary>
         /// Implicitly constructs a sequence from an array
@@ -25,19 +27,15 @@ namespace Z0
         /// <param name="src">The source array</param>
         [MethodImpl(Inline)]
         public static implicit operator IndexedSeq<T>(T[] src)
-            => new IndexedSeq<T>(src);
+            => api.indexed(src);
 
         [MethodImpl(Inline)]
         public IndexedSeq(T[] src)
-        {
-            Data = insist(src);
-        }
+            => Data = insist(src);
 
         [MethodImpl(Inline)]
-        internal IndexedSeq(IEnumerable<T> src)
-        {
-            Data = insist(src).Array();
-        }
+        public IndexedSeq(T[] src, bool @internal)
+            => Data = src;
 
         public T[] Content
         {
@@ -103,7 +101,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public IndexedSeq<T> WithContent(IEnumerable<T> content)
-            => Indexed.seq(content);
+            => api.indexed(content);
 
         [MethodImpl(Inline)]
         public bool Equals(IndexedSeq<T> rhs)
@@ -111,22 +109,22 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public IndexedSeq<T> Concat(IndexedSeq<T> rhs)
-            => new IndexedSeq<T>(Data.Concat(rhs.Data));
+            => api.concat(this, rhs);
 
         public IndexedSeq<Y> Select<Y>(Func<T,Y> selector)
-             => Indexed.seq(from x in Data select selector(x));
+             => api.indexed(from x in Data select selector(x));
 
         public IndexedSeq<Z> SelectMany<Y,Z>(Func<T,IndexedSeq<Y>> lift, Func<T,Y,Z> project)
-            => Indexed.seq(from x in Data
+            => api.indexed(from x in Data
                           from y in lift(x).Data
                           select project(x, y));
 
         public IndexedSeq<Y> SelectMany<Y>(Func<T,IndexedSeq<Y>> lift)
-            => Indexed.seq(from x in Data
+            => api.indexed(from x in Data
                           from y in lift(x).Data
                           select y);
 
         public IndexedSeq<T> Where(Func<T,bool> predicate)
-            => Indexed.seq(from x in Data where predicate(x) select x);
+            => api.indexed(from x in Data where predicate(x) select x);
     }
 }

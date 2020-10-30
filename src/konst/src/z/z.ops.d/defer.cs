@@ -13,16 +13,16 @@ namespace Z0
 
     partial struct z
     {
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Lazy<T> defer<T>(Func<T> factory)
             => new Lazy<T>(factory);
 
         [MethodImpl(Inline)]
-        public static Source<T> defer<T>(IEnumerable<T> src)
-            => new Source<T>(src);
+        public static Deferred<T> defer<T>(IEnumerable<T> src)
+            => new Deferred<T>(src);
 
         [MethodImpl(Inline)]
-        public static Source<T> defer<T>(params T[] src)
-            => new Source<T>(src);
+        public static Deferred<T> defer<T>(params T[] src)
+            => new Deferred<T>(src);
     }
 }

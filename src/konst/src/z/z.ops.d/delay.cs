@@ -17,7 +17,7 @@ namespace Z0
         /// Returns after specified duration has elapsed
         /// </summary>
         /// <param name="duration">The time to wait before returning</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static void delay(TimeSpan duration)
             => Task.Delay(duration).RunSynchronously();
 
@@ -25,6 +25,7 @@ namespace Z0
         /// Introduces an asynchronous delay
         /// </summary>
         /// <param name="duration">The length of the delay to introduce</param>
+        [MethodImpl(Inline), Op]
         public static async Task delayAsync(TimeSpan duration)
             => await Task.Delay(duration);
     }

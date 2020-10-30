@@ -34,52 +34,6 @@ namespace Z0
         public IEnumerable<T> Next()
             => Data;
 
-        [MethodImpl(Inline)]
-        public static implicit operator ValueSet<T>(HashSet<T> src)
-            => new ValueSet<T>(src);
-
-        [MethodImpl(Inline)]
-        public static ValueSet<T> operator +(ValueSet<T> a, ValueSet<T> b)
-            => a.Union(b);
-
-        [MethodImpl(Inline)]
-        public static ValueSet<T> operator -(ValueSet<T> a, ValueSet<T> b)
-            => a.Difference(b,false);
-
-        [MethodImpl(Inline)]
-        public static ValueSet<T> operator *(ValueSet<T> a, ValueSet<T> b)
-            => a.Intersect(b);
-
-        [MethodImpl(Inline)]
-        public static bool operator <(ValueSet<T> a, ValueSet<T> b)
-            => b.IsSuperset(a, true);
-
-        [MethodImpl(Inline)]
-        public static bool operator >(ValueSet<T> a, ValueSet<T> b)
-            => a.IsSuperset(b, true);
-
-        [MethodImpl(Inline)]
-        public static bool operator <=(ValueSet<T> a, ValueSet<T> b)
-            => b.IsSuperset(a, false);
-
-        [MethodImpl(Inline)]
-        public static bool operator >=(ValueSet<T> a, ValueSet<T> b)
-            => a.IsSuperset(b, false);
-
-        public static bool operator <(T a, ValueSet<T> b)
-            => b.Contains(a);
-
-        [MethodImpl(Inline)]
-        public static bool operator >(T a, ValueSet<T> b)
-            => b.Contains(a) && b.Count == 1;
-
-        [MethodImpl(Inline)]
-        public static bool operator ==(ValueSet<T> a, ValueSet<T> b)
-            => a.Equals(b);
-
-        [MethodImpl(Inline)]
-        public static bool operator !=(ValueSet<T> a, ValueSet<T> b)
-            => !a.Equals(b);
 
         public uint Count
         {
@@ -200,5 +154,53 @@ namespace Z0
 
         bool IValueSet<ValueSet<T>,T>.IsSuperset(in ValueSet<T> rhs, bool proper)
             => IsSuperset(rhs,proper);
+
+
+        [MethodImpl(Inline)]
+        public static implicit operator ValueSet<T>(HashSet<T> src)
+            => new ValueSet<T>(src);
+
+        [MethodImpl(Inline)]
+        public static ValueSet<T> operator +(ValueSet<T> a, ValueSet<T> b)
+            => a.Union(b);
+
+        [MethodImpl(Inline)]
+        public static ValueSet<T> operator -(ValueSet<T> a, ValueSet<T> b)
+            => a.Difference(b,false);
+
+        [MethodImpl(Inline)]
+        public static ValueSet<T> operator *(ValueSet<T> a, ValueSet<T> b)
+            => a.Intersect(b);
+
+        [MethodImpl(Inline)]
+        public static bool operator <(ValueSet<T> a, ValueSet<T> b)
+            => b.IsSuperset(a, true);
+
+        [MethodImpl(Inline)]
+        public static bool operator >(ValueSet<T> a, ValueSet<T> b)
+            => a.IsSuperset(b, true);
+
+        [MethodImpl(Inline)]
+        public static bool operator <=(ValueSet<T> a, ValueSet<T> b)
+            => b.IsSuperset(a, false);
+
+        [MethodImpl(Inline)]
+        public static bool operator >=(ValueSet<T> a, ValueSet<T> b)
+            => a.IsSuperset(b, false);
+
+        public static bool operator <(T a, ValueSet<T> b)
+            => b.Contains(a);
+
+        [MethodImpl(Inline)]
+        public static bool operator >(T a, ValueSet<T> b)
+            => b.Contains(a) && b.Count == 1;
+
+        [MethodImpl(Inline)]
+        public static bool operator ==(ValueSet<T> a, ValueSet<T> b)
+            => a.Equals(b);
+
+        [MethodImpl(Inline)]
+        public static bool operator !=(ValueSet<T> a, ValueSet<T> b)
+            => !a.Equals(b);
     }
 }

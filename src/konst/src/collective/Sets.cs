@@ -10,9 +10,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static z;
 
-    public readonly partial struct Collective
+    [ApiHost(ApiNames.Sets, true)]
+    public readonly struct Sets
     {
         const NumericKind Closure = UInt64k;
 
@@ -36,22 +36,5 @@ namespace Z0
         [Op, Closures(Closure)]
         public static Multiset<T> multiset<T>(IEnumerable<T> src)
             => new Multiset<T>(src);
-
-        /// <summary>
-        /// Reverses an array in-place
-        /// </summary>
-        /// <param name="src">The source array</param>
-        /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static T[] reverse<T>(T[] src)
-        {
-            Array.Reverse(src);
-            return src;
-        }
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static IEnumerable<T> singletons<T>(params IEnumerable<T>[] src)
-            where T : unmanaged
-                => src.SelectMany(x => x);
     }
 }

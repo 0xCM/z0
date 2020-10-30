@@ -330,6 +330,10 @@ readonly struct ApiNames
 
     public const string Seq = collective + dot + seq;
 
+    public const string Strings = collective + dot + strings;
+
+    public const string Sets = collective + dot + sets;
+
     public const string CmdHosts = cmd + dot + hosts;
 
     public const string Utf8Data = text + dot + utf8;
@@ -339,4 +343,7 @@ readonly struct ApiNames
     public const string ConstBytesReader = @const + dot + bytes + dot + reader;
 
     public const string ConstBytesCache = @const + dot + bytes + dot + cache;
+
+    const string sets = nameof(sets);
+
 }

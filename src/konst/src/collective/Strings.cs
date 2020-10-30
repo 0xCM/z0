@@ -10,9 +10,32 @@ namespace Z0
     using static Konst;
     using static z;
 
-    [ApiHost("collective.strings")]
-    public readonly partial struct Strings
+    [ApiHost(ApiNames.Strings, true)]
+    public readonly struct Strings
     {
+        const NumericKind Closure = UnsignedInts;
+
+        [MethodImpl(Inline), Op]
+        public static StringLookup lookup(ReadOnlySpan<StringRef> src)
+            => new StringLookup(src);
+
+        [MethodImpl(Inline), Op]
+        public static StringTableCell cell(string data)
+            => data;
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static StringTableCell<T> cell<T>(in T data)
+            => data;
+
+        [MethodImpl(Inline), Op]
+        public static StringTable table(string name, TableHeader header, StringTableRow[] rows)
+            => new StringTable(name, header,rows);
+
+        [MethodImpl(Inline), Op]
+        public static StringTable table(string name, HeaderCell[] cells, StringTableRow[] rows)
+            => new StringTable(name, cells, rows);
+
+
         [MethodImpl(Inline), Op]
         public static StringIndex index(params string[] src)
             => new StringIndex(src.Select(z.hash), src);
@@ -34,7 +57,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static string value(StringIndex src, uint key)
+        public static string value(in StringIndex src, uint key)
         {
             value(src,key, out var s);
             return s;
@@ -65,6 +88,48 @@ namespace Z0
             else
                 value = EmptyString;
             return false;
+        }
+
+        [MethodImpl(Inline), Op]
+        public static ref StringTable fill(StringTableRow[] src, ref StringTable dst)
+        {
+            dst.Fill(src);
+            return ref dst;
+        }
+
+        [MethodImpl(Inline), Op]
+        public static ref StringTableRow fill(StringTableCell[] src, ref StringTableRow dst)
+        {
+            dst.Fill(src);
+            return ref dst;
+        }
+
+        [MethodImpl(Inline), Op]
+        public static ref StringTableCell fill(in string src, ref StringTableCell dst)
+        {
+            dst.Fill(src);
+            return ref dst;
+        }
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref StringTableCell<T> fill<T>(in T src, ref StringTableCell<T> dst)
+        {
+            dst.Fill(src);
+            return ref dst;
+        }
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref StringTableCells<T> fill<T>(StringTableCell<T>[] src, ref StringTableCells<T> dst)
+        {
+            dst.Fill(src);
+            return ref dst;
+        }
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref StringTableRows<T> Fill<T>(StringTableRow<T>[] src, ref StringTableRows<T> dst)
+        {
+            dst.Fill(src);
+            return ref dst;
         }
     }
 }
