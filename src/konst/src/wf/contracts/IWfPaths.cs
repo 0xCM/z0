@@ -22,43 +22,43 @@ namespace Z0
         /// The executing application's data directory
         /// </summary>
         FS.FolderPath AppDataDir
-            => (LogDir + FS.folder(AppsFolder)) + FS.folder(AppName);
+            => (RuntimeData + FS.folder(AppsFolder)) + FS.folder(AppName);
 
         /// <summary>
         /// The path to the root development directory
         /// </summary>
-        FolderPath DevRoot
+        FS.FolderPath DevRoot
             => EnvVars.Common.DevRoot;
 
         /// <summary>
         /// The name of the folder into which test results are deposited
         /// </summary>
-        FolderName OutcomeFolder
-            => FolderName.Define(Results);
+        FS.FolderName OutcomeFolder
+            => FS.folder(Results);
 
         /// <summary>
         /// The name of the development source folder
         /// </summary>
-        FolderName DevSrcFolder
-            => FolderName.Define("src");
+        FS.FolderName DevSrcFolder
+            => FS.folder("src");
 
         /// <summary>
         /// The name of an application configuration file
         /// </summary>
-        FileName ConfigFileName
-            => FileName.define("config.json");
+        FS.FileName ConfigFileName
+            => FS.file("config.json");
 
         /// <summary>
         /// The path to the directory that contains runtime configuration data
         /// </summary>
-        FolderPath ConfigRoot
-            => DevRoot + FolderName.Define(".settings");
+        FS.FolderPath ConfigRoot
+            => DevRoot + FS.folder(".settings");
 
         /// <summary>
         /// The path to the root application resource directory
         /// </summary>
-        FolderPath ResourceRoot
-            => LogRoot + FolderName.Define(RespackContent);
+        FS.FolderPath ResourceRoot
+            => RuntimeLogs + FS.folder(RespackContent);
 
         /// <summary>
         /// The path to the resource index directory
@@ -69,32 +69,32 @@ namespace Z0
         /// <summary>
         /// The executing application's folder name
         /// </summary>
-        FolderName AppFolder
-            => FolderName.Define(AppName);
+        FS.FolderName AppFolder
+            => FS.folder(AppName);
 
         /// <summary>
         /// The application-relative source code directory
         /// </summary>
-        FolderPath AppDevRoot
+        FS.FolderPath AppDevRoot
             => (DevRoot +  DevSrcFolder) + AppFolder;
 
         /// <summary>
         /// The executing application's configuration file path
         /// </summary>
-        FilePath AppConfigPath
+        FS.FilePath AppConfigPath
             => AppDevRoot + ConfigFileName;
 
         /// <summary>
         /// The executing application's data directory
         /// </summary>
-        FolderPath AppDataRoot
-            => (LogRoot + AppLogFolder) + AppFolder;
+        FS.FolderPath AppDataRoot
+            => (RuntimeLogs + AppLogFolder) + AppFolder;
 
         /// <summary>
         /// The application-relative capture directory
         /// </summary>
-        FolderPath AppCaptureRoot
-            => AppDataRoot + FolderName.Define(Capture);
+        FS.FolderPath AppCaptureRoot
+            => AppDataRoot + FS.folder(Capture);
 
         /// <summary>
         /// Creates a path provider for the controlling application

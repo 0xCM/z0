@@ -8,30 +8,43 @@ namespace Z0
 
     public readonly struct RenderSlots
     {
+        [FormatArg(0, s0x8)]
         public const string s0x8 = "{0,-8}";
 
+        [FormatArg(1, s1x8)]
         public const string s1x8 = "{1,-8}";
 
+        [FormatArg(2, s2x8)]
         public const string s2x8 = "{2,-8}";
 
+        [FormatArg(3, s3x8)]
         public const string s3x8 = "{3,-8}";
 
+        [FormatArg(4, s4x8)]
         public const string s4x8 = "{4,-8}";
 
+        [FormatArg(5, s5x8)]
         public const string s5x8 = "{5,-8}";
 
+        [FormatArg(6, s6x8)]
         public const string s6x8 = "{6,-8}";
 
+        [FormatArg(7, s7x8)]
         public const string s7x8 = "{7,-8}";
 
+        [FormatArg(8, s8x8)]
         public const string s8x8 = "{8,-8}";
 
+        [FormatArg(0, s0x12)]
         public const string s0x12 = "{0,-12}";
 
+        [FormatArg(1, s1x12)]
         public const string s1x12 = "{1,-12}";
 
+        [FormatArg(2, s2x12)]
         public const string s2x12 = "{2,-12}";
 
+        [FormatArg(3, s3x12)]
         public const string s3x12 = "{3,-12}";
 
         public const string s4x12 = "{4,-12}";

@@ -212,7 +212,7 @@ namespace Z0
 
             using var step = new CapturePartStep(Wf, State.Asm, new CapturePartHost());
             var captured = step.Capture(part);
-            var dst = Wf.Paths.AppCaptureRoot + FileName.define(id.Format(), FileExtensions.Asm);
+            var dst = Wf.Paths.AppCaptureRoot + FS.file(id.Format(), FileExtensions.Asm);
             using var writer = dst.Writer();
             var count = captured.Length;
             // if(count != 0)

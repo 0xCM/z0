@@ -33,7 +33,7 @@ namespace Z0
 
         LogLevel Verbosity {get;}
 
-        IWfShell WithSource(IPolyrand random);
+        IWfShell WithRandom(IPolyrand random);
 
         IWfShell WithHost(WfHost host);
 

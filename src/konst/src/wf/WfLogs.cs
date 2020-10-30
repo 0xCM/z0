@@ -23,9 +23,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static IWfEventLog events(WfLogConfig config)
             => new WfEventLog(config);
-
-        [MethodImpl(Inline), Op]
-        public static IAppMsgLog app(FS.FilePath std, FS.FilePath err)
-            => new AppMsgLog(std, err);
     }
 }

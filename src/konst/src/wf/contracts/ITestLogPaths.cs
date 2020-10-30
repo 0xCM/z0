@@ -24,7 +24,7 @@ namespace Z0
             => TestLogRootDir + TestDataFolder;
 
         FS.FolderPath TestLogRootDir
-            => LogDir + FS.folder(Test);
+            => RuntimeData + FS.folder(Test);
 
         /// <summary>
         /// The root test directory

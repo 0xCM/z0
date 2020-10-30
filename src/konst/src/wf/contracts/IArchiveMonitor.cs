@@ -8,6 +8,9 @@ namespace Z0
 
     public interface IArchiveMonitor : IMonitor<FS.FolderPath>
     {
+        FS.FolderPath ArchiveRoot {get;}
 
+        FS.FolderPath IMonitor<FS.FolderPath>.Subject
+            => ArchiveRoot;
     }
 }

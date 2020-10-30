@@ -12,43 +12,31 @@ namespace Z0
 
     class App : IDisposable
     {
-        readonly WfHost Host;
-
-        readonly IWfShell Wf;
-
-        App(IWfShell wf)
+        static IWfShell describe(IWfShell wf)
         {
-            Host = WfSelfHost.create(typeof(App));
-            Wf = wf.WithHost(Host);
-            PrintContextSummary();
+            iter(wf.Settings, s => wf.Status(string.Format("{0}:{1}", s.Name, s.Value )));
+            return wf;
         }
 
-        void PrintContextSummary()
-            => iter(Wf.Settings, s => Wf.Status(string.Format("{0}:{1}", s.Name, s.Value )));
-
-        public void Run()
+        static IWfShell Configure(IWfShell wf)
+            => describe(wf.WithRandom(Polyrand.@default())
+                 .WithHost(WfSelfHost.create(typeof(App)))
+                 .WithVerbosity(LogLevel.Babble));
+        static void Run(string[] args)
         {
-            try
-            {
-                var app = Apps.context(Wf);
-                var asm = new AsmContext(app, Wf);
-                var cstate = new WfCaptureState(Wf, asm);
-                using var control = CaptureWorkflow.create(cstate);
-                control.Run();
-            }
-            catch(Exception e)
-            {
-                Wf.Error(e);
-            }
+            using var wf = Configure(WfShell.create(args));
+            var app = Apps.context(wf);
+            var asm = new AsmContext(app, wf);
+            var cstate = new WfCaptureState(wf, asm);
+            using var control = CaptureWorkflow.create(cstate);
+            control.Run();
         }
 
         public static void Main(params string[] args)
         {
             try
             {
-                using var wf = Polyrand.install(WfShell.create(args));
-                using var host = new App(wf);
-                host.Run();
+                Run(args);
             }
             catch(Exception e)
             {

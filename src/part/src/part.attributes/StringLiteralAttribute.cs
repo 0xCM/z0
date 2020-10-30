@@ -120,7 +120,6 @@ namespace Z0
             Length = Text.Length;
         }
 
-
         public StringLiteralAttribute(string value, uint length)
         {
             Text = value ?? "";

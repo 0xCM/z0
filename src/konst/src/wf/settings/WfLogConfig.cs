@@ -13,6 +13,8 @@ namespace Z0
 
     public struct WfLogConfig : ITextual
     {
+        const string FormatPattern = "{0}:{1} | {2}:{3} | {4}:{5} | {6}:{7}";
+
         /// <summary>
         /// The controlling part identifier
         /// </summary>
@@ -49,9 +51,12 @@ namespace Z0
             DbRoot = dbRoot;
         }
 
-        [MethodImpl(Inline)]
         public string Format()
-            => Render.format(Root, StatusLog, ErrorLog, DbRoot);
+            => string.Format(RP.Settings4,
+                nameof(Root), Root.Format(),
+                nameof(StatusLog), StatusLog.Format(),
+                nameof(ErrorLog), ErrorLog.Format(),
+                nameof(DbRoot), DbRoot.Format());
 
         public override string ToString()
             => Format();

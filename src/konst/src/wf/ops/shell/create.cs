@@ -40,25 +40,31 @@ namespace Z0
         {
             var dst = z.dict<string,string>();
             var assname = Assembly.GetEntryAssembly().GetSimpleName();
-            var filename = FileName.define(assname, FileExtensions.Json);
+            var filename = FS.file(assname, FileExtensions.Json);
             var src = context.Paths.ConfigRoot + filename;
             JsonSettings.absorb(src, dst);
             return new WfSettings(dst);
         }
 
+        public static FS.FolderPath DbRoot()
+            => EnvVars.Common.DbRoot;
+
+        public static FS.FolderPath LogRoot()
+            => DbRoot() + FS.folder("logs") + FS.folder("wf");
+
         [MethodImpl(Inline), Op]
         public static IWfPaths paths()
-            => new WfPaths(config(controller().Id(), EnvVars.Common.LogRoot, dbRoot()));
+            => new WfPaths(logs(controller().Id(), LogRoot(), DbRoot()));
 
         [Op]
         public static IWfContext context()
             => new WfContext();
 
-        public static WfLogConfig config(PartId part, FS.FolderPath logRoot, FS.FolderPath dbRoot)
+        public static WfLogConfig logs(PartId part, FS.FolderPath logRoot, FS.FolderPath dbRoot)
             => new WfLogConfig(part, logRoot, dbRoot);
 
-        public static FS.FolderPath dbRoot()
-            => FS.dir(@"j:\database\logs\wf");
+        public static WfLogConfig logs(PartId part, FS.FolderPath root)
+            => logs(part, root, DbRoot());
 
         [MethodImpl(Inline), Op]
         public static string[] args()
@@ -88,12 +94,13 @@ namespace Z0
             configured.Add(string.Format("{0}:{1}", "logs.root", logRoot));
 
             var api = parts(control, args);
-            var partIdList = api.Api.PartIdentities;
-            configured.Add(string.Format("{0}:{1}", "api.components.length", partIdList.Length));
-            configured.Add(string.Format("{0}:{1}", "api.components", delimit(partIdList)));
+            var partList = api.Api.PartIdentities;
+            var partCount = partList.Length;
+            configured.Add(string.Format("{0}:{1}", "PartCount", partCount));
+            configured.Add(string.Format("{0}:{1}", "PartList", delimit(partList)));
 
-            var logConfig = config(controlId, logRoot, dbRoot());
-            configured.Add(string.Format("{0}:{1}", "logs.config", logConfig.Format()));
+            var logConfig = logs(controlId, logRoot);
+            configured.Add(string.Format("{0}:{1}", nameof(WfLogConfig), logConfig.Format()));
 
             IWfPaths _paths = new WfPaths(logConfig);
             var ctx = new WfContext();
@@ -105,7 +112,7 @@ namespace Z0
             ctx.TestLogPaths = new TestLogPaths(logRoot);
             ctx.Controller = control;
 
-            var init = new WfInit(ctx, logConfig, partIdList);
+            var init = new WfInit(ctx, logConfig, partList);
             configured.Add(string.Format("{0}:{1}", "wf.init", init.ControlId));
 
             IWfShell wf = new WfShell(init);

@@ -8,12 +8,6 @@ namespace Z0
 
     partial struct RP
     {
-        /// <summary>
-        /// Defines the canonical setting format
-        /// </summary>
-        [StringLiteral(Setting, 2)]
-        public const string Setting = "{0}:{1}";
-
         [StringLiteral(Dash2, 1)]
         public const string Dash1 = Dash;
 
@@ -88,18 +82,6 @@ namespace Z0
         /// </summary>
         [StringLiteral(ExtSep)]
         public const string ExtSep = Dot;
-
-        /// <summary>
-        /// Defines the literal '('
-        /// </summary>
-        [StringLiteral(OpenTuple)]
-        public const string OpenTuple = "(";
-
-        /// <summary>
-        /// Defines the literal ')'
-        /// </summary>
-        [StringLiteral(CloseTuple)]
-        public const string CloseTuple = ")";
 
         /// <summary>
         /// Defines the default extension for structured data

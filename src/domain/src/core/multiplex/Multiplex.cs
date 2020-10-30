@@ -25,7 +25,7 @@ namespace Z0
         public void monitor(IWfShell wf, params string[] args)
         {
             var path = args.Length != 0 ? FS.dir(args[0]) : wf.Db().Root;
-            using var monitor = ArchiveMonitor.create(path, OnChange);
+            using var monitor = ArchiveMonitor.create(wf, path, OnChange);
             monitor.Start();
             Console.ReadKey();
         }

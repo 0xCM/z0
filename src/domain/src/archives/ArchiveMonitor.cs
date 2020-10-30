@@ -10,25 +10,77 @@ namespace Z0
 
     using static Konst;
 
+    using CK = FS.ChangeKind;
+
+    public struct FileSystemChange
+    {
+        public FS.ChangeKind ChangeKind;
+
+        public FS.ObjectKind ObjectKind;
+
+        public AsciEncoded ObjectName;
+    }
+
     public readonly struct ArchiveMonitor : IArchiveMonitor
     {
         [MethodImpl(Inline), Op]
-        public static IArchiveMonitor create(FS.FolderPath src, FS.ChangeHandler handler, bool recursive = true, string filter = null)
-            => new ArchiveMonitor(src, handler, recursive, filter);
+        public static IArchiveMonitor create(IWfShell wf, FS.FolderPath src, FS.ChangeHandler handler = null, bool recursive = true, string filter = null)
+            => new ArchiveMonitor(wf, src, handler, recursive, filter);
 
-        public FS.FolderPath Subject {get;}
+        public FS.FolderPath ArchiveRoot {get;}
 
         readonly FileSystemWatcher Watcher;
 
         readonly FS.ChangeHandler Handler;
 
-        public ArchiveMonitor(FS.FolderPath subject, FS.ChangeHandler handler, bool recursive = true, string filter = null)
+        readonly IWfShell Wf;
+
+        public ArchiveMonitor(IWfShell wf, FS.FolderPath subject, FS.ChangeHandler handler, bool recursive = true, string filter = null)
+            : this()
         {
-            Subject = subject;
+            Wf = wf;
+            ArchiveRoot = subject;
             Watcher = new FileSystemWatcher(subject.Name, filter ?? EmptyString);
             Watcher.IncludeSubdirectories = recursive;
-            Handler = handler;
+            Handler = handler ?? OnChange;
             Subscribe();
+        }
+
+        void OnChange(FsEntry subject, FS.ChangeKind kind)
+        {
+            try
+            {
+                if(kind != 0)
+                {
+                    Log(subject, kind);
+
+                    switch(kind)
+                    {
+                        case CK.Created:
+                        break;
+                        case CK.Deleted:
+                        break;
+                        case CK.Modified:
+                        break;
+                        case CK.Renamed:
+                        break;
+                    }
+                }
+            }
+            catch(Exception e)
+            {
+                Wf.Error(e);
+            }
+        }
+
+        FileSystemChange Log(FsEntry subject, FS.ChangeKind kind)
+        {
+            var record = new FileSystemChange();
+            record.ChangeKind = kind;
+            record.ObjectKind = subject.Kind;
+            record.ObjectName = subject.Name;
+            return record;
+
         }
 
         [MethodImpl(Inline)]
@@ -70,15 +122,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public void Start()
-        {
-            Watcher.EnableRaisingEvents = true;
-        }
+            => Watcher.EnableRaisingEvents = true;
 
         [MethodImpl(Inline)]
         public void Stop()
-        {
-            Watcher.EnableRaisingEvents = false;
-        }
+            => Watcher.EnableRaisingEvents = false;
 
         public void Dispose()
         {
@@ -87,7 +135,7 @@ namespace Z0
 
         void Error(object sender, ErrorEventArgs e)
         {
-            term.error(e.GetException());
+            Wf.Error(e.GetException());
         }
     }
 }

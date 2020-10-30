@@ -14,17 +14,24 @@ namespace Z0
     /// </summary>
     public readonly struct WfPaths : IWfPaths
     {
-        public FolderPath LogRoot {get;}
+        public FS.FolderPath RuntimeLogs {get;}
 
-        public FS.FolderPath LogDir {get;}
+        public FS.FolderPath RuntimeData {get;}
 
         public FS.FolderPath DbRoot {get;}
 
         public WfPaths(WfLogConfig logs)
         {
-            LogDir = logs.Root;
-            LogRoot = FolderPath.Define(LogDir.Name);
+            RuntimeData = logs.Root;
+            RuntimeLogs = RuntimeData;
             DbRoot = logs.DbRoot;
+        }
+
+        public WfPaths(FS.FolderPath logs, FS.FolderPath data,  FS.FolderPath db)
+        {
+            RuntimeLogs = logs;
+            RuntimeData = data;
+            DbRoot = db;
         }
     }
 }

@@ -93,7 +93,7 @@ namespace Z0
             => new WfShell(src.Init, src.Ct, src.WfSink, src.Broker, host, random, verbosity);
 
         [MethodImpl(Inline)]
-        public IWfShell WithSource(IPolyrand random)
+        public IWfShell WithRandom(IPolyrand random)
             => clone(this, Host, random, Verbosity);
 
         [MethodImpl(Inline)]

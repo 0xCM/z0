@@ -6,8 +6,6 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
-    using System.Linq;
 
     using static Konst;
     using static RegisterBitFields;
@@ -35,89 +33,6 @@ namespace Z0.Asm
         /// </summary>
         public readonly RegisterWidth Width;
 
-        /// <summary>
-        /// Determines the register code from the kind
-        /// </summary>
-        /// <param name="src">The source kind</param>
-        [MethodImpl(Inline), Op]
-        public static RegisterIndex code(RegisterKind src)
-            => (RegisterIndex)((byte)src >> CodeIndex);
-
-        /// <summary>
-        /// Determines the register class from the kind
-        /// </summary>
-        /// <param name="src">The source kind</param>
-        [MethodImpl(Inline), Op]
-        public static RegisterClass @class(RegisterKind src)
-            => (RegisterClass)((uint)src >> ClassIndex);
-
-        /// <summary>
-        /// Determines the register width from the kind
-        /// </summary>
-        /// <param name="src">The source kind</param>
-        [MethodImpl(Inline), Op]
-        public static RegisterWidth width(RegisterKind src)
-            => (RegisterWidth)((uint)src >> WidthIndex);
-
-        [MethodImpl(Inline), Op]
-        public static RegisterKind join(RegisterIndex c, RegisterClass k, RegisterWidth w)
-            => (RegisterKind)((uint)c  << CodeIndex | (uint)k << ClassIndex | (uint)w << WidthIndex);
-
-        [MethodImpl(Inline), Op]
-        public static RegisterIndex code1(RegisterKind src)
-            => (RegisterIndex)Bits.slice((uint)src, (byte)FI.C, (byte)FW.C);
-
-        [MethodImpl(Inline), Op]
-        public static RegisterClass @class1(RegisterKind src)
-            => (RegisterClass)Bits.slice((uint)src, (byte)FI.K, (byte)FW.K);
-
-        [MethodImpl(Inline), Op]
-        public static RegisterKind code(RegisterIndex src, RegisterKind dst)
-            => (RegisterKind)(Bits.copy((uint)src, (byte)FI.C, (byte)(FW.C), (uint)dst));
-
-        [MethodImpl(Inline), Op]
-        public static RegisterKind @class(RegisterClass src, RegisterKind dst)
-            => (RegisterKind)(Bits.copy((uint)src, (byte)FI.K, (byte)(FW.K), (uint)dst));
-
-        [MethodImpl(Inline), Op]
-        public static RegisterKind width(RegisterWidth src, RegisterKind dst)
-            => (RegisterKind)(Bits.copy((uint)src, (byte)FI.K, (byte)(FW.W), (uint)dst));
-
-        public static RegisterKind[] SymbolKinds
-            => Enums.literals<RegisterKind>();
-
-        public static IEnumerable<RegisterKind> Gp8
-            => SymbolKinds.Where(r => width(r) == W.W8);
-
-        public static IEnumerable<RegisterKind> Gp16
-            => SymbolKinds.Where(r => width(r) == W.W16);
-
-        public static IEnumerable<RegisterKind> Gp32
-            => SymbolKinds.Where(r => width(r) == W.W32);
-
-        public static IEnumerable<RegisterKind> Gp64
-            => SymbolKinds.Where(r => width(r) == W.W64);
-
-        public static IEnumerable<RegisterKind> V128
-            => SymbolKinds.Where(r => width(r) == W.W128);
-
-        public static IEnumerable<RegisterKind> V256
-            => SymbolKinds.Where(r => width(r) == W.W256);
-
-        public static IEnumerable<RegisterKind> V512
-            => SymbolKinds.Where(r => width(r) == W.W512);
-
-        [MethodImpl(Inline)]
-        public static void split(RegisterKind src, out RegisterIndex c, out RegisterClass k, out RegisterWidth w)
-        {
-            c = code(src);
-            k = @class(src);
-            w = width(src);
-        }
-
-        [MethodImpl(Inline)]
-        public static implicit operator X86RegBits(RegisterKind src)
-            => new X86RegBits(src);
 
         [MethodImpl(Inline)]
         public X86RegBits(RegisterIndex c, RegisterClass k, RegisterWidth w)
@@ -129,13 +44,18 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         public X86RegBits(RegisterKind src)
-            => split(src, out Code, out Class, out Width);
+            => RegisterQuery.split(src, out Code, out Class, out Width);
 
         public RegisterKind Joined
         {
             [MethodImpl(Inline)]
-            get => join(Code,Class,Width);
+            get => RegisterQuery.join(Code,Class,Width);
         }
+
+        [MethodImpl(Inline)]
+        public static implicit operator X86RegBits(RegisterKind src)
+            => new X86RegBits(src);
+
     }
 
     enum FI : byte

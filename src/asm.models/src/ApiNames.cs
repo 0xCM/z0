@@ -30,5 +30,9 @@ namespace Z0
         public const string AsmMachines = asm + dot + machines;
 
         const string machines = nameof(machines);
+
+        const string registers = nameof(registers);
+
+        public const string RegisterQuery = asm + dot + registers + dot + query;
     }
 }

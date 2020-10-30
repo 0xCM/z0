@@ -15,7 +15,7 @@ namespace Z0
     {
         protected override ref TableSpan<ApiMemberExtract> Execute(IWfShell wf, in IApiHost api, out TableSpan<ApiMemberExtract> dst)
         {
-            using var step = new ExtractHostMembersStep(wf,this, api);
+            using var step = new ExtractHostMembersStep(wf, this, api);
             step.Run();
             dst = step.Extracts;
             return ref dst;

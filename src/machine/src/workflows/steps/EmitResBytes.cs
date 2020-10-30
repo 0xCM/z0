@@ -52,7 +52,7 @@ namespace Z0
             Host = host;
             Index = index;
             SourceDir = FS.dir(context.Paths.AppCaptureRoot.Name);
-            TargetDir = FS.dir((context.Paths.ResourceRoot + FolderName.Define(ProjectName)).Name);
+            TargetDir = context.Paths.ResourceRoot + FS.folder(ProjectName);
             Archive = ApiFiles.hex(FS.dir(SourceDir.Name));
             Wf.Created(Host);
         }

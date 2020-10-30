@@ -19,10 +19,10 @@ namespace Z0
             => Polyrand.Pcg64(seed);
 
         public static IWfShell install(IWfShell dst)
-            => dst.WithSource(@default());
+            => dst.WithRandom(@default());
 
         public static IWfShell install(IPolyrand src, IWfShell dst)
-            => dst.WithSource(src);
+            => dst.WithRandom(src);
 
         /// <summary>
         /// Creates a 64-bit Pcg RNG

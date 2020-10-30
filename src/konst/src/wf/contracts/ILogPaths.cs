@@ -14,23 +14,18 @@ namespace Z0
         /// <summary>
         /// The global application log root
         /// </summary>
-        FS.FolderPath LogDir
-            => EnvVars.Common.LogRoot;
+        FS.FolderPath RuntimeLogs {get;}
 
         /// <summary>
         /// The global application log root
         /// </summary>
-        FolderPath LogRoot
-            => FolderPath.Define(LogDir.Name);
-
-        FS.FolderPath AppLogRoot
-            => FS.dir(text.format("{0}/applogs", LogRoot.Name));
+        FS.FolderPath RuntimeData {get;}
 
         /// <summary>
         /// The name of the runtime log folder
         /// </summary>
-        FolderName AppLogFolder
-            => FolderName.Define(AppsFolder);
+        FS.FolderName AppLogFolder
+            => FS.folder(AppsFolder);
 
         string AppName
             => Assembly.GetEntryAssembly().GetSimpleName();

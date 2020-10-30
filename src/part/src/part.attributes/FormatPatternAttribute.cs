@@ -30,7 +30,6 @@ namespace Z0
             : base(pattern)
         {
             ArgCount = args;
-
         }
 
         public byte ArgCount {get;}

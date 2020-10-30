@@ -22,7 +22,7 @@ namespace Z0.Asm
         public RegisterIndex Index
         {
             [MethodImpl(Inline)]
-            get => X86RegBits.code(Kind);
+            get => RegisterQuery.code(Kind);
         }
 
         [MethodImpl(Inline)]

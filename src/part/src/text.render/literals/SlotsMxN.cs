@@ -2,15 +2,12 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Konst;
-
-    public readonly partial struct X86Registers
+    partial struct RP
     {
+        [FormatPattern(2)]
+        public const string AxB = "{0}x{1}";
 
     }
 }
