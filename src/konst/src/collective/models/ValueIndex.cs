@@ -25,7 +25,7 @@ namespace Z0
         public int Length
         {
             [MethodImpl(Inline)]
-            get => Data.Length;
+            get => Data?.Length ?? 0;
         }
 
         public bool IsEmpty

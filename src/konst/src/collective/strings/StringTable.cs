@@ -11,9 +11,9 @@ namespace Z0
 
     public struct StringTable
     {
-        string _Name;
+        readonly string _Name;
 
-        TableHeader _Header;
+        readonly TableHeader _Header;
 
         StringTableRows _Rows;
 

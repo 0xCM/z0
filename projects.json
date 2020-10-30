@@ -348,5 +348,12 @@
 		"paths": [],
 		"group": "",
 		"enabled": true
+	},
+	{
+		"name": "acl2",
+		"rootPath": "j:\\lang\\lisp\\acl2",
+		"paths": [],
+		"group": "",
+		"enabled": true
 	}
 ]

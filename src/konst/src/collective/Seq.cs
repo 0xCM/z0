@@ -22,9 +22,19 @@ namespace Z0
         /// <param name="src">The index to test</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
+        public static uint count<T>(in ValueIndex<T> src)
+            where T : struct
+                => (uint)(src.Data?.Length ?? 0);
+
+        /// <summary>
+        /// Tests the source index for non-emptiness
+        /// </summary>
+        /// <param name="src">The index to test</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static bool nonempty<T>(in ValueIndex<T> src)
             where T : struct
-                => src.Data != null && src.Data.Length != 0;
+                => count(src) == 0;
 
         /// <summary>
         /// Tests the source index for emptiness

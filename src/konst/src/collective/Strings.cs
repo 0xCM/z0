@@ -28,13 +28,12 @@ namespace Z0
             => data;
 
         [MethodImpl(Inline), Op]
-        public static StringTable table(string name, TableHeader header, StringTableRow[] rows)
-            => new StringTable(name, header,rows);
+        public static StringTable table(string name, in TableHeader header, StringTableRow[] rows)
+            => new StringTable(name, header, rows);
 
         [MethodImpl(Inline), Op]
         public static StringTable table(string name, HeaderCell[] cells, StringTableRow[] rows)
             => new StringTable(name, cells, rows);
-
 
         [MethodImpl(Inline), Op]
         public static StringIndex index(params string[] src)

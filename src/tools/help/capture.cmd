@@ -39,3 +39,10 @@ llvm-pdbutil dump --help >> llvm-pdbutil.help
 llvm-pdbutil diadump --help-hidden >> llvm-pdbutil.help
 
 clang --help-hidden > clang.help
+
+dir %path_llvm_build% > llvm-tools.log
+
+clangd --help-hidden > clangd.help
+
+clangd --help-list-hidden > clangd-list.help
+clangd-indexer --help-hidden > clangd-indexer.help
