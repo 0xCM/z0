@@ -111,7 +111,9 @@ readonly struct ApiNames
 
     public const string CellSource = cells + dot + source;
 
-    public const string CellsX = cells + dot + extensions;
+    public const string XCell = cells + dot + extensions;
+
+    public const string CellVecs = cells + dot + "vectors";
 
 
     // ~~ Clr Runtime
@@ -346,4 +348,11 @@ readonly struct ApiNames
 
     const string sets = nameof(sets);
 
+    const string grid = nameof(grid);
+
+    const string metrics = nameof(metrics);
+
+    public const string GridCells = grid + dot + cells;
+
+    public const string GridMetrics = grid + dot + metrics;
 }
