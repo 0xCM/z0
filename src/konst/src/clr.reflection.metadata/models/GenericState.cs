@@ -9,13 +9,33 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct GenericState
+    public readonly struct GenericState : ITextual
     {
-        public readonly byte State;
+        public readonly GenericStateKind State;
 
-        public const byte NonGeneric = 0;
+        [MethodImpl(Inline)]
+        public GenericState(byte state)
+            => State = (GenericStateKind)state;
 
-        public const byte Generic = 1;
+        [MethodImpl(Inline)]
+        public GenericState(GenericStateKind state)
+            => State = state;
+
+        public string Format()
+            => State.ToString();
+
+        public override string ToString()
+            => Format();
+
+        [MethodImpl(Inline)]
+        public bool IsGeneric()
+            => State == GenericStateKind.OpenGeneric;
+
+        public override int GetHashCode()
+            => State.GetHashCode();
+
+        public override bool Equals(object src)
+            => src is GenericState p && p.State == State;
 
         [MethodImpl(Inline)]
         public static bool operator ==(GenericState g1, GenericState g2)
@@ -35,24 +55,14 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator byte(GenericState src)
-            => src.State;
+            => (byte)src.State;
 
         [MethodImpl(Inline)]
         public static implicit operator GenericState(bool src)
             => new GenericState(src ? (byte)1 : (byte)0);
 
         [MethodImpl(Inline)]
-        public GenericState(byte state)
-            => State = state;
-
-        [MethodImpl(Inline)]
-        public bool IsGeneric()
-            => State == GenericState.Generic;
-
-        public override int GetHashCode()
-            => State.GetHashCode();
-
-        public override bool Equals(object src)
-            => src is GenericState p && p.State == State;
+        public static implicit operator GenericState(GenericStateKind src)
+            => new GenericState(src);
     }
 }

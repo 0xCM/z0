@@ -39,6 +39,9 @@ namespace Z0
         protected virtual void Execute(IWfShell wf, in S src)
             => Execute(wf);
 
+        protected override void Execute(IWfShell wf)
+            => Execute(wf);
+
         public void Run(IWfShell wf, in S src)
         {
             try

@@ -89,10 +89,6 @@ namespace Z0
             }
         }
 
-
-        void EmitApiList()
-            => ApiSummaries.emit(Wf.Api,Wf.Db().IndexFile("z0.api"));
-
         FS.FilePath AppDataPath(FS.FileName file)
             => Wf.AppData + file;
 

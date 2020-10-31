@@ -23,13 +23,15 @@ namespace Z0
 
     readonly struct Dynexus : IDynexus
     {
+        [MethodImpl(Inline)]
+        public static IDynexus service()
+            => new Dynexus(MultiDiviner.Service);
+
         readonly IMultiDiviner Diviner;
 
         [MethodImpl(Inline)]
         internal Dynexus(IMultiDiviner diviner)
-        {
-            Diviner = diviner;
-        }
+            => Diviner = diviner;
 
         [MethodImpl(Inline)]
         OpIdentity Identify(MethodInfo src)

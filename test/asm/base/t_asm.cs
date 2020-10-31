@@ -41,10 +41,7 @@ namespace Z0.Asm
         }
 
         protected IAsmWriter AsmWriter([Caller] string caller = null)
-        {
-            var dst = TargetArchive.AsmPath(FileName.define($"{caller}", FileExtensions.Asm));
-            return AsmServices.Services.AsmWriter(dst, AsmFormatConfig.DefaultStreamFormat);
-        }
+            => ApiAsm.writer(TargetArchive.AsmPath(FileName.define($"{caller}", FileExtensions.Asm)), AsmFormatConfig.DefaultStreamFormat);
 
         protected ApiCodeBlock[] ReadHostBits(ApiHostUri host)
         {

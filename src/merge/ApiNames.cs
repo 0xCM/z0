@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static ApiNameAtoms;
+    using static ApiNameParts;
 
     [ApiNameProvider]
     readonly struct ApiNames

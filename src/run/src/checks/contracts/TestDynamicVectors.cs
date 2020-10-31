@@ -28,7 +28,7 @@ namespace Z0
         }
 
         IDynexus Dynamic
-            => Dynops.Services.Dynexus;
+            => Dynops.Dynexus;
 
         uint PointCount<T>()
             => (uint)Root.size<T>()/Buffer.BufferSize;

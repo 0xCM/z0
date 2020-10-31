@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    using static ApiNameAtoms;
+    using static ApiNameParts;
 
     readonly struct ApiNames
     {

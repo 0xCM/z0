@@ -14,7 +14,7 @@ namespace Z0
     /// <summary>
     /// Unifies fields and properties from a structural metadata represetnation perspective
     /// </summary>
-    public readonly struct DataMember
+    public readonly struct ClrDataMember
     {
         /// <summary>
         /// The represented member
@@ -26,19 +26,19 @@ namespace Z0
         public readonly Option<FieldInfo> BackingField;
 
         [MethodImpl(Inline)]
-        public static implicit operator DataMember(PropertyInfo src)
-            => new DataMember(src);
+        public static implicit operator ClrDataMember(PropertyInfo src)
+            => new ClrDataMember(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator DataMember(FieldInfo src)
-            => new DataMember(src);
+        public static implicit operator ClrDataMember(FieldInfo src)
+            => new ClrDataMember(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator MemberInfo(DataMember src)
+        public static implicit operator MemberInfo(ClrDataMember src)
             => src.Member;
 
         [MethodImpl(Inline)]
-        public DataMember(PropertyInfo src)
+        public ClrDataMember(PropertyInfo src)
         {
             Member = src;
             IsField = false;
@@ -46,7 +46,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public DataMember(FieldInfo src)
+        public ClrDataMember(FieldInfo src)
         {
             Member = src;
             IsField = true;
@@ -54,7 +54,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public DataMember(PropertyInfo prop, FieldInfo field)
+        public ClrDataMember(PropertyInfo prop, FieldInfo field)
         {
             Member = prop;
             IsField = false;

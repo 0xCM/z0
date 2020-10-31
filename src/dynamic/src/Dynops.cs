@@ -4,13 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static ApiNameAtoms;
-
-    public readonly struct Dynops : IDynamic
+    public readonly struct Dynops
     {
-        public static IDynamic Services => default(Dynops);
+        public static IDynexus Dynexus => Z0.Dynexus.service();
     }
-
-
-
 }

@@ -18,18 +18,18 @@ namespace Z0
         public ClrArtifactKey Key {get;}
 
         [MethodImpl(Inline)]
+        public ClrArtifactIdentity(ClrArtifactKind kind, ClrArtifactKey key)
+        {
+            Kind = kind;
+            Key = key;
+        }
+
+        [MethodImpl(Inline)]
         public static implicit operator ClrArtifactIdentity(ArtifactIdentity<ClrArtifactKind,ClrArtifactKey> src)
             => new ClrArtifactIdentity(src.Kind, src.Key);
 
         [MethodImpl(Inline)]
         public static implicit operator ArtifactIdentity<ClrArtifactKind,ClrArtifactKey>(ClrArtifactIdentity src)
             => new ArtifactIdentity<ClrArtifactKind,ClrArtifactKey>(src.Kind, src.Key);
-
-        [MethodImpl(Inline)]
-        public ClrArtifactIdentity(ClrArtifactKind kind, ClrArtifactKey key)
-        {
-            Kind = kind;
-            Key = key;
-        }
     }
 }

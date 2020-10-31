@@ -32,6 +32,11 @@ namespace Z0
                 term.error(e);
             }
         }
+
+        protected override void Execute(IWfShell shell)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     ref struct AppRunner
@@ -111,17 +116,8 @@ namespace Z0
 
         }
 
-        void EmitApiSummaries()
-        {
-            var api = Wf.Api;
-            var parts = api.PartIdentities;
-            var data = ApiSummaries.parts(Wf, parts);
-            var dst = ApiSummaries.target(Db);
-            Wf.EmittingTable(typeof(ApiSummaryInfo), dst);
-            ApiSummaries.emit(data,dst);
-            Wf.EmittedTable(typeof(ApiSummaryInfo), data.Length, dst);
-
-        }
+        void EmitApiInfo()
+            => EmitApiSummaries.create().Run(Wf);
 
         void RunAll()
         {
@@ -133,7 +129,7 @@ namespace Z0
             EmitScripts();
             EmitAsmRefs();
             EmitPeHeaders();
-            EmitApiSummaries();
+            EmitApiInfo();
         }
 
         void ShowCases()
@@ -150,38 +146,12 @@ namespace Z0
                     line = reader.ReadLine();
                 }
             }
-
         }
 
-        public unsafe void Run()
+        public void Run()
         {
-            var hosts = @readonly(Wf.Api.ApiHosts);
-            var kHost = hosts.Length;
-            for(var i=0; i<kHost; i++)
-            {
-                var catalog = ApiCatalogs.members(skip(hosts,i));
-                var members = catalog.Members;
-                var kMember = members.Length;
-                for(var j=0; j<kMember; j++)
-                {
-                    ref readonly var member = ref skip(members,i);
-                    var method = member.Method;
-                    if(method.IsNonGeneric())
-                    {
-                        try
-                        {
-                            var metdata = method.Metadata();
-                            // var sig = ClrSigs.resolve(member.Method);
-                            // var row = delimit(method.Signature(), sig);
-                            // Wf.Row(row);
-                        }
-                        catch(Exception e)
-                        {
-                            Wf.Error($"{method.Name}:{e.Message}");
-                        }
-                    }
-                }
-            }
+
+            EmitApiInfo();
         }
 
 

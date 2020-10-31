@@ -12,12 +12,10 @@ namespace Z0
 
     partial class XClrQuery
     {
-        [Op]
-        public static GenericState GenericPartition(this MethodInfo src)
-            => src.IsNonGeneric() ? GenericStateKind.Nongeneric : GenericStateKind.OpenGeneric;
-
-        [Op]
-        public static bool IsMemberOf(this MethodInfo src, GenericState g)
-            => src.GenericPartition().State == g.State;
+        [MethodImpl(Inline), Op]
+        public static GenericState GenericState(this MethodInfo src)
+            =>  src.IsClosedGeneric() ? GenericStateKind.ClosedGeneric
+               : src.IsOpenGeneric() ? GenericStateKind.OpenGeneric
+               : GenericStateKind.Nongeneric;
     }
 }

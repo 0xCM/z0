@@ -6,8 +6,12 @@ using static Z0.CsKeywords;
 using static Z0.AsciCharText;
 
 [ApiNameProvider]
-public readonly struct ApiNameAtoms
+public readonly struct ApiNameParts
 {
+    public const string @static = Static;
+
+    public const string @fixed = Fixed;
+
     public const string @const = Const;
 
     public const string @char = Char;
@@ -319,4 +323,35 @@ public readonly struct ApiNameAtoms
     public const string n256 = nameof(n256);
 
     public const string cache = nameof(cache);
+
+    public const string sets = nameof(sets);
+
+    public const string grid = nameof(grid);
+
+    public const string metrics = nameof(metrics);
+
+    public const string jit = nameof(jit);
+
+    public const string codes = nameof(codes);
+
+    public const string io = nameof(io);
+
+    public const string machines = nameof(machines);
+
+    public const string registers = nameof(registers);
+
+    public const string syntax = nameof(syntax);
+
+    public const string parse = nameof(parse);
+
+    public const string patterns = nameof(patterns);
+
+    public const string json = nameof(json);
+
+    public const string binary = nameof(binary);
+
+    public const string unary = nameof(unary);
+
+    public const string ternary = nameof(ternary);
+
 }

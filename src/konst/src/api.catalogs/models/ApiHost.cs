@@ -26,18 +26,6 @@ namespace Z0
         public MethodInfo[] DeclaredMethods {get;}
 
         [MethodImpl(Inline)]
-        public static implicit operator ApiHostUri(ApiHost src)
-            => src.Uri;
-
-        [MethodImpl(Inline)]
-        public static bool operator==(ApiHost a, ApiHost b)
-            => a.Equals(b);
-
-        [MethodImpl(Inline)]
-        public static bool operator!=(ApiHost a, ApiHost b)
-            => !a.Equals(b);
-
-        [MethodImpl(Inline)]
         public ApiHost(Type type, string name, PartId part, ApiHostUri uri)
         {
             Name = name;
@@ -79,5 +67,20 @@ namespace Z0
 
         public override bool Equals(object src)
             => src is ApiHost t && Equals(t);
+
+        [MethodImpl(Inline)]
+        public static implicit operator ApiHostUri(ApiHost src)
+            => src.Uri;
+
+        [MethodImpl(Inline)]
+        public static bool operator==(ApiHost a, ApiHost b)
+            => a.Equals(b);
+
+        [MethodImpl(Inline)]
+        public static bool operator!=(ApiHost a, ApiHost b)
+            => !a.Equals(b);
+
+        public static ApiHost Empty
+            => new ApiHost(EmptyType, EmptyString, 0, ApiHostUri.Empty);
     }
 }

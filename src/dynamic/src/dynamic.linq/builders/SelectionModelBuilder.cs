@@ -109,7 +109,7 @@ namespace Z0.Dynamics
             if (selector.Parameters.Count != 1)
                 return;
 
-            var property = selector.AccesedProperty().ValueOrDefault();
+            var property = selector.AccessedProperty().ValueOrDefault();
             if (property == null)
                 return;
 

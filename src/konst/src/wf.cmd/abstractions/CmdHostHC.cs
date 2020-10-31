@@ -43,6 +43,8 @@ namespace Z0
 
         protected abstract CmdResult Execute(IWfShell wf, in C spec);
 
+        protected override void Execute(IWfShell wf)
+            => Execute(wf, Spec());
 
         public virtual CmdResult Run(IWfShell wf, CmdData spec)
         {

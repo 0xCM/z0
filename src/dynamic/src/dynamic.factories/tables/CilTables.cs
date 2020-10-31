@@ -17,7 +17,6 @@ namespace Z0
     [ApiHost(ApiNames.CilTables, true)]
     public readonly struct CilTables
     {
-
         const TypeAttributes Default = BeforeFieldInit | Public | Sealed | AnsiClass;
 
         public const TypeAttributes ExplicitAnsi

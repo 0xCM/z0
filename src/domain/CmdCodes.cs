@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    using static ApiNameAtoms;
+    using static ApiNameParts;
     using static CmdCodeAtoms;
 
     public readonly struct CmdCodeAtoms

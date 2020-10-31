@@ -10,24 +10,24 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct FieldValues
+    public readonly struct ClrFieldValues
     {
-        readonly FieldValue[] Data;
+        readonly ClrFieldValue[] Data;
 
         [MethodImpl(Inline)]
-        public static implicit operator FieldValues(FieldValue[] src)
-            => new FieldValues(src);
+        public static implicit operator ClrFieldValues(ClrFieldValue[] src)
+            => new ClrFieldValues(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator FieldValues((FieldInfo field, object value)[] src)
-            => new FieldValues(src.Select(x => new FieldValue(x.field, x.value)));
+        public static implicit operator ClrFieldValues((FieldInfo field, object value)[] src)
+            => new ClrFieldValues(src.Select(x => new ClrFieldValue(x.field, x.value)));
 
         [MethodImpl(Inline)]
-        public static implicit operator FieldValue[](FieldValues src)
+        public static implicit operator ClrFieldValue[](ClrFieldValues src)
             => src.Data;
 
         [MethodImpl(Inline)]
-        public FieldValues(params FieldValue[] src)
+        public ClrFieldValues(params ClrFieldValue[] src)
             => Data = src;
 
         public int Length
@@ -42,19 +42,19 @@ namespace Z0
             get => (uint)Data.Length;
         }
 
-        public ReadOnlySpan<FieldValue> View
+        public ReadOnlySpan<ClrFieldValue> View
         {
             [MethodImpl(Inline)]
             get => Data;
         }
 
-        public ref FieldValue this[long index]
+        public ref ClrFieldValue this[long index]
         {
             [MethodImpl(Inline)]
             get => ref Data[index];
         }
 
-        public ref FieldValue this[ulong index]
+        public ref ClrFieldValue this[ulong index]
         {
             [MethodImpl(Inline)]
             get => ref Data[index];

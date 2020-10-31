@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-using static ApiNameAtoms;
+using static ApiNameParts;
 
 [ApiNameProvider]
 readonly struct ApiNames
@@ -32,7 +32,6 @@ readonly struct ApiNames
 
     public const string ApiTestIdentity = api + dot + identity + dot + tests;
 
-    const string reflector = nameof(reflector);
 
     public const string ApiIdentityReflector = api + dot + identity + dot + reflector;
 
@@ -51,6 +50,8 @@ readonly struct ApiNames
     public const string ApiPartCatalogQuery = api + dot + query + dot + parts;
 
     public const string ApiHostMemberQuery = api + dot + query + dot + hosts;
+
+    public const string ApiJit = api + dot + jit;
 
     // ~~ Bitlogic
     // ~~ -----------------------------------------------------------------------------------------
@@ -167,8 +168,6 @@ readonly struct ApiNames
     public const string ClrEnums = ClrMetadata + dot + enums;
 
     public const string ClrSigs = ClrMetadata + dot + signatures;
-
-    const string signatures = nameof(signatures);
 
     // ~~ Delegates
     // ~~ -----------------------------------------------------------------------------------------
@@ -342,18 +341,9 @@ readonly struct ApiNames
 
     public const string ConstBytesCache = @const + dot + bytes + dot + cache;
 
-    const string sets = nameof(sets);
-
-    const string grid = nameof(grid);
-
-    const string metrics = nameof(metrics);
-
     public const string GridCells = grid + dot + cells;
 
     public const string GridMetrics = grid + dot + metrics;
 
     public const string XKinds = kinds + dot + extensions;
-
-
-    const string codes = nameof(codes);
 }

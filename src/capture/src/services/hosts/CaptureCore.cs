@@ -118,7 +118,7 @@ namespace Z0.Asm
             if(src.IsOpenGeneric())
             {
                 var target = src.Reify(args);
-                var id = Identities.Services.Diviner.DivineIdentity(target);
+                var id = MultiDiviner.Service.DivineIdentity(target);
                 return Capture(exchange, id, target);
             }
             else

@@ -22,55 +22,12 @@ namespace Z0
         public static ClrTypeName from(Type src)
             => new ClrTypeName(src.AssemblyQualifiedName);
 
-        [MethodImpl(Inline)]
-        public static ClrTypeName define(string src)
-            => new ClrTypeName(string.Intern(src));
-
-        [MethodImpl(Inline)]
-        public static ClrTypeName define(StringRef src)
-            => new ClrTypeName(src);
-
         readonly StringRef Content;
 
         [MethodImpl(Inline)]
         internal ClrTypeName(string src)
             => Content = src;
 
-        [MethodImpl(Inline)]
-        public static implicit operator string(ClrTypeName src)
-            => src.Content;
-
-        [MethodImpl(Inline)]
-        public static implicit operator ClrTypeName(Type src)
-            => from(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator ReadOnlySpan<char>(ClrTypeName src)
-            => src.Content.View;
-
-        [MethodImpl(Inline)]
-        public static bool operator <(ClrTypeName x, ClrTypeName y)
-            => x.CompareTo(y) < 0;
-
-        [MethodImpl(Inline)]
-        public static bool operator <=(ClrTypeName x, ClrTypeName y)
-            => x.CompareTo(y) <= 0;
-
-        [MethodImpl(Inline)]
-        public static bool operator >(ClrTypeName x, ClrTypeName y)
-            => x.CompareTo(y) > 0;
-
-        [MethodImpl(Inline)]
-        public static bool operator >=(ClrTypeName x, ClrTypeName y)
-            => x.CompareTo(y) >= 0;
-
-        [MethodImpl(Inline)]
-        public static bool operator ==(ClrTypeName x, ClrTypeName y)
-            => x.Equals(y);
-
-        [MethodImpl(Inline)]
-        public static bool operator !=(ClrTypeName x, ClrTypeName y)
-            => !x.Equals(y);
 
         [MethodImpl(Inline)]
         public string Format()
@@ -125,5 +82,41 @@ namespace Z0
 
         string IContented<string>.Content
             => Content;
+
+        [MethodImpl(Inline)]
+        public static implicit operator string(ClrTypeName src)
+            => src.Content;
+
+        [MethodImpl(Inline)]
+        public static implicit operator ClrTypeName(Type src)
+            => from(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator ReadOnlySpan<char>(ClrTypeName src)
+            => src.Content.View;
+
+        [MethodImpl(Inline)]
+        public static bool operator <(ClrTypeName x, ClrTypeName y)
+            => x.CompareTo(y) < 0;
+
+        [MethodImpl(Inline)]
+        public static bool operator <=(ClrTypeName x, ClrTypeName y)
+            => x.CompareTo(y) <= 0;
+
+        [MethodImpl(Inline)]
+        public static bool operator >(ClrTypeName x, ClrTypeName y)
+            => x.CompareTo(y) > 0;
+
+        [MethodImpl(Inline)]
+        public static bool operator >=(ClrTypeName x, ClrTypeName y)
+            => x.CompareTo(y) >= 0;
+
+        [MethodImpl(Inline)]
+        public static bool operator ==(ClrTypeName x, ClrTypeName y)
+            => x.Equals(y);
+
+        [MethodImpl(Inline)]
+        public static bool operator !=(ClrTypeName x, ClrTypeName y)
+            => !x.Equals(y);
     }
 }

@@ -91,7 +91,6 @@ namespace Z0
             where T : struct
                 => new ValueIndex<T>(src);
 
-
         /// <summary>
         /// Creates an index from a stream
         /// </summary>

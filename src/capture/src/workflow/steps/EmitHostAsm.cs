@@ -53,7 +53,6 @@ namespace Z0
             Wf.Created();
         }
 
-
         public void Dispose()
         {
             Wf.Disposed();
@@ -64,7 +63,7 @@ namespace Z0
             var flow = Wf.Running();
 
             DecodeApiHost.create(Context.Decoder, Uri).Run(Wf, src, out dst);
-            var emitted = AsmServices.emit(Wf, Uri, dst.Storage, Context.Formatter.Config);
+            var emitted = ApiAsm.emit(Wf, Uri, dst.Storage, Context.Formatter.Config);
             if(emitted.IsNonEmpty)
                 Wf.EmittedFile(dst, dst.Count, emitted);
 

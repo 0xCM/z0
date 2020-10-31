@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static ApiNameAtoms;
+    using static ApiNameParts;
 
     class App : TestApp<App>
     {
@@ -17,12 +17,6 @@ namespace Z0
         const string bitlogix = nameof(bitlogix);
 
         const string checks = nameof(checks);
-
-        const string binary = nameof(binary);
-
-        const string unary = nameof(unary);
-
-        const string ternary = nameof(ternary);
 
         public const string BinaryBitLogixCheck = bitlogix + dot + checks + binary;
     }

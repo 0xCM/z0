@@ -64,10 +64,9 @@ namespace Z0
 
             try
             {
-
-                using var extract = new ExtractHostMembersStep(Wf, new ExtractHostMembers(), Api);
+                using var extract = new ExtractHostMembersStep(Wf, Host, Api);
                 extract.Run();
-                using var emit = new EmitCaptureArtifactsStep(State, new EmitCaptureArtifacts(), Api.Uri, extract.Extracts);
+                using var emit = new EmitCaptureArtifactsStep(State, Host, Api.Uri, extract.Extracts);
                 emit.Run();
             }
             catch(Exception e)

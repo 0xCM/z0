@@ -28,6 +28,5 @@ namespace Z0
         /// <param name="selector">The selecting expression that identifies the desired member</param>
         public static PropertyInfo GetProperty<T,P>(this Expression<Func<T,P>> selector)
             => LinqXQuery.property(selector);
-
     }
 }

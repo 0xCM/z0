@@ -67,5 +67,8 @@ namespace Z0
 
         public ApiMembers Where(Func<ApiMember,bool> predicate)
             => Data.Storage.Where(predicate);
+
+        public static ApiMembers Empty
+            => new ApiMembers(TableSpan<ApiMember>.Empty);
     }
 }

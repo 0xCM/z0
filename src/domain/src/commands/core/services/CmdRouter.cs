@@ -15,7 +15,7 @@ namespace Z0
         public static ICmdRouter service(IWfShell wf, params CmdHandler[] handlers)
             => new CmdRouter(wf, handlers);
 
-        readonly CmdHost Host;
+        readonly WfHost Host;
 
         readonly IWfShell Wf;
 
@@ -25,7 +25,7 @@ namespace Z0
 
         internal CmdRouter(IWfShell wf, params CmdHandler[] handlers)
         {
-            Host = new CmdHost();
+            Host = WfSelfHost.create();
             Wf = wf.WithHost(Host);
             Handlers = new ConcurrentDictionary<CmdId, CmdHandler>();
             Enlist(handlers);

@@ -108,7 +108,7 @@ namespace Z0
             EmitHostAsm.create(State.CWf.Context, HostUri).Run(Wf, ParsedBlocks, out var decoded);
             if(decoded.Count != 0)
             {
-                using var match = new MatchAddressesStep(State, new MatchAddresses(), Extracts, decoded.Storage, Ct);
+                using var match = new MatchAddressesStep(State, Host, Extracts, decoded.Storage, Ct);
                 match.Run();
             }
        }

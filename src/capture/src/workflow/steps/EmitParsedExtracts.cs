@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using Z0.Asm;
-
     using static Konst;
     using static z;
 
@@ -41,8 +39,6 @@ namespace Z0
     {
         public ApiParseBlock[] Emitted;
 
-        public ApiCodeTableSaved Event;
-
         readonly IWfShell Wf;
 
         readonly WfHost Host;
@@ -58,7 +54,6 @@ namespace Z0
             Uri = uri;
             Source = src;
             Emitted = default;
-            Event = default;
             Wf.Created();
         }
 

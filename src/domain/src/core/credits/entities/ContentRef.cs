@@ -18,7 +18,7 @@ namespace Z0
     /// <summary>
     /// Defines a reference to specialized content within a document, such as figures and tables
     /// that often, as a flagrant display of idiocy, have numbering schemes that are content-type
-    /// independent and even doucment-location independent
+    /// independent and even document-location independent
     /// </summary>
     public readonly struct ContentRef : IDataEntity<E>
     {
@@ -108,6 +108,5 @@ namespace Z0
             [MethodImpl(Inline)]
             get => API.type(this);
         }
-
     }
 }

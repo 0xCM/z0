@@ -35,21 +35,21 @@ namespace Z0
             get => z.address(Data);
         }
 
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Data == null || Data.Length == 0;
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => !IsNonEmpty;
+        }
+
         [MethodImpl(Inline)]
         public bit Search(Func<T,bool> predicate, out T found)
             => api.search(this, predicate, out found);
-
-        [MethodImpl(Inline)]
-        public static implicit operator Span<T>(Indexed<T> src)
-            => src.Edit;
-
-        [MethodImpl(Inline)]
-        public static implicit operator ReadOnlySpan<T>(Indexed<T> src)
-            => src.View;
-
-        [MethodImpl(Inline)]
-        public static implicit operator Indexed<T>(T[] src)
-            => new Indexed<T>(src);
 
         [MethodImpl(Inline)]
         public Indexed(T[] content)
@@ -108,5 +108,21 @@ namespace Z0
            [MethodImpl(Inline)]
            get => api.EmptyIndex<T>();
         }
+
+        [MethodImpl(Inline)]
+        public static implicit operator Span<T>(Indexed<T> src)
+            => src.Edit;
+
+        [MethodImpl(Inline)]
+        public static implicit operator ReadOnlySpan<T>(Indexed<T> src)
+            => src.View;
+
+        [MethodImpl(Inline)]
+        public static implicit operator Indexed<T>(T[] src)
+            => new Indexed<T>(src);
+
+       [MethodImpl(Inline)]
+        public static implicit operator T[](Indexed<T> src)
+            => src.Data;
     }
 }

@@ -17,6 +17,8 @@ namespace Z0
     [ApiHost(ApiNames.ApiHostMemberQuery, true)]
     public readonly struct ApiHostMemberQuery : IApiView<ApiHostMemberQuery,IApiHost>
     {
+        const NumericKind Closure = UnsignedInts;
+
         /// <summary>
         /// The host to interrogate
         /// </summary>
@@ -30,26 +32,26 @@ namespace Z0
         /// All hosted methods
         /// </summary>
         public MethodInfo[] Hosted
-            => Source.DeclaredMethods;
+            => ApiHostMethods.create(Source, Source.DeclaredMethods);
 
         /// <summary>
         /// All hosted generic methods
         /// </summary>
-        public MethodInfo[] Generic
-            => Hosted.OpenGeneric();
+        public ApiHostMethods Generic
+            => ApiHostMethods.create(Source, Hosted.OpenGeneric());
 
         /// <summary>
         /// All hosted non-generic methods
         /// </summary>
-        public MethodInfo[] Direct
-            => Hosted.NonGeneric();
+        public ApiHostMethods Direct
+            => ApiHostMethods.create(Source, Hosted.NonGeneric());
 
         /// <summary>
         /// Queries the host for operations of specified kind
         /// </summary>
         /// <param name="k">The kind classifier</param>
         /// <typeparam name="K">The kind type</typeparam>
-        [Op, MethodImpl(NotInline), Closures(UnsignedInts)]
+        [Op, MethodImpl(NotInline), Closures(Closure)]
         public MethodInfo[] OfKind<K>(K k)
             where K : unmanaged
                 => (from m in Hosted.Tagged(typeof(OpKindAttribute))
@@ -62,7 +64,7 @@ namespace Z0
         /// </summary>
         /// <param name="k">The kind classifier</param>
         /// <typeparam name="K">The kind type</typeparam>
-        [Op, MethodImpl(NotInline), Closures(UnsignedInts)]
+        [Op, MethodImpl(NotInline), Closures(Closure)]
         public MethodInfo[] OfKind<K>(K k, GenericState g)
             where K : unmanaged
                 => OfKind(k).MemberOf(g).Array();
@@ -73,7 +75,7 @@ namespace Z0
         /// <param name="g">The generic partition</param>
         [Op, MethodImpl(NotInline)]
         public MethodInfo[] UnaryOps(GenericState g = default)
-            => Hosted.MemberOf(g).UnaryOperators();
+            => ApiHostMethods.create(Source, Hosted.MemberOf(g).UnaryOperators());
 
         /// <summary>
         /// Queries the host for binary operators belonging to a specified generic partition
@@ -81,7 +83,7 @@ namespace Z0
         /// <param name="g">The generic partition</param>
         [Op, MethodImpl(NotInline)]
         public MethodInfo[] BinaryOps(GenericState g = default)
-            => Hosted.MemberOf(g).BinaryOperators();
+            => ApiHostMethods.create(Source, Hosted.MemberOf(g).BinaryOperators());
 
         /// <summary>
         /// Queries the host for binary operators belonging to a specified generic partition
@@ -98,7 +100,7 @@ namespace Z0
         /// <param name="generic">Whether generic or non-generic methods should be selected</param>
         [Op, MethodImpl(NotInline)]
         public MethodInfo[] Vectorized(W128 w, GenericState g = default)
-            => g.IsGeneric() ? Hosted.VectorizedGeneric(w) : Hosted.VectorizedDirect(w);
+            => ApiHostMethods.create(Source, g.IsGeneric() ? Hosted.VectorizedGeneric(w) : Hosted.VectorizedDirect(w));
 
         /// <summary>
         /// Queries the host for operations vectorized over 128-bit vectors
@@ -107,7 +109,7 @@ namespace Z0
         /// <param name="generic">Whether generic or non-generic methods should be selected</param>
         [Op, MethodImpl(NotInline)]
         public MethodInfo[] Vectorized(W256 w, GenericState g = default)
-            => g.IsGeneric() ? Hosted.VectorizedGeneric(w) : Hosted.VectorizedDirect(w);
+            => ApiHostMethods.create(Source, g.IsGeneric() ? Hosted.VectorizedGeneric(w) : Hosted.VectorizedDirect(w));
 
         /// <summary>
         /// Queries the host for vectorized methods of specified vector width, name and generic partition
@@ -117,7 +119,7 @@ namespace Z0
         /// <param name="g">The generic partition to consider</param>
         [Op, MethodImpl(NotInline)]
         public MethodInfo[] Vectorized(W128 w, string name, GenericState g = default)
-            => Hosted.Vectorized(w,name,g);
+            => ApiHostMethods.create(Source, Hosted.Vectorized(w,name,g));
 
         /// <summary>
         /// Queries the host for vectorized methods of specified vector width, name and generic partition
@@ -127,7 +129,7 @@ namespace Z0
         /// <param name="g">The generic partition to consider</param>
         [Op, MethodImpl(NotInline)]
         public MethodInfo[] Vectorized(W256 w, string name, GenericState g = default)
-            => Hosted.Vectorized(w,name,g);
+            => ApiHostMethods.create(Source, Hosted.Vectorized(w,name,g));
 
         /// <summary>
         /// Queries the host for vectorized methods of specified vector width, name and generic partition
@@ -137,42 +139,47 @@ namespace Z0
         /// <param name="g">The generic partition to consider</param>
         [Op, MethodImpl(NotInline)]
         public MethodInfo[] Vectorized(W512 w, string name, GenericState g = default)
-            => Hosted.Vectorized(w,name,g);
+            => ApiHostMethods.create(Source, Hosted.Vectorized(w,name,g));
 
+        [MethodImpl(NotInline), Op, Closures(Closure)]
         public MethodInfo[] OfKind<K>(W128 w, K kind, GenericState g = default)
-            where K : unmanaged, Enum
-                => OfKind(kind,g).VectorizedDirect(w);
+            where K : unmanaged
+                => ApiHostMethods.create(Source, OfKind(kind,g).VectorizedDirect(w));
 
+        [MethodImpl(NotInline), Op, Closures(Closure)]
         public MethodInfo[] OfKind<K>(W256 w, K kind, GenericState g = default)
-            where K : unmanaged, Enum
-                => OfKind(kind,g).VectorizedDirect(w);
+            where K : unmanaged
+                => ApiHostMethods.create(Source, OfKind(kind,g).VectorizedDirect(w));
 
         /// <summary>
         /// Queries the host for vectorized methods closed over cells of specified parametric type
         /// </summary>
         /// <param name="w">The width to match</param>
         /// <typeparam name="T">The cell type to match</typeparam>
+        [MethodImpl(NotInline), Op, Closures(Closure)]
         public MethodInfo[] Vectorized<T>(W128 w)
             where T : unmanaged
-                => Hosted.VectorizedDirect<T>(w);
+                => ApiHostMethods.create(Source, Hosted.VectorizedDirect<T>(w));
 
         /// <summary>
         /// Queries the host for vectorized methods closed over cells of specified parametric type
         /// </summary>
         /// <param name="w">The width to match</param>
         /// <typeparam name="T">The cell type to match</typeparam>
+        [MethodImpl(NotInline), Op, Closures(Closure)]
         public MethodInfo[] Vectorized<T>(W256 w)
             where T : unmanaged
-                => Hosted.VectorizedDirect<T>(w);
+                => ApiHostMethods.create(Source, Hosted.VectorizedDirect<T>(w));
 
         /// <summary>
         /// Queries the host for vectorized methods closed over cells of specified parametric type
         /// </summary>
         /// <param name="w">The width to match</param>
         /// <typeparam name="T">The cell type to match</typeparam>
+        [MethodImpl(NotInline), Op, Closures(Closure)]
         public MethodInfo[] Vectorized<T>(W512 w)
             where T : unmanaged
-                => Hosted.VectorizedDirect<T>(w);
+                => ApiHostMethods.create(Source, Hosted.VectorizedDirect<T>(w));
 
         /// <summary>
         /// Queries the host for vectorized methods closed over cells of specified parametric type and that have a specified name
@@ -180,9 +187,10 @@ namespace Z0
         /// <param name="w">The width to match</param>
         /// <param name="name">The name to match</param>
         /// <typeparam name="T">The cell type to match</typeparam>
-        public MethodInfo[] Vectorized<T>(W128 w, string name)
+        [MethodImpl(NotInline), Op, Closures(Closure)]
+        public ApiHostMethods Vectorized<T>(W128 w, string name)
             where T : unmanaged
-                => Vectorized<T>(w).WithName(name);
+                => ApiHostMethods.create(Source, Vectorized<T>(w).WithName(name));
 
         /// <summary>
         /// Queries the host for vectorized methods closed over cells of specified parametric type and that have a specified name
@@ -190,6 +198,7 @@ namespace Z0
         /// <param name="w">The width to match</param>
         /// <param name="name">The name to match</param>
         /// <typeparam name="T">The cell type to match</typeparam>
+        [MethodImpl(NotInline), Op, Closures(Closure)]
         public MethodInfo[] Vectorized<T>(W256 w, string name)
             where T : unmanaged
                 => Vectorized<T>(w).WithName(name);
@@ -200,8 +209,9 @@ namespace Z0
         /// <param name="w">The width to match</param>
         /// <param name="name">The name to match</param>
         /// <typeparam name="T">The cell type to match</typeparam>
-        public MethodInfo[] Vectorized<T>(W512 w, string name)
+        [MethodImpl(NotInline), Op, Closures(Closure)]
+        public ApiHostMethods Vectorized<T>(W512 w, string name)
             where T : unmanaged
-                => Vectorized<T>(w).WithName(name);
+                => ApiHostMethods.create(Source, Vectorized<T>(w).WithName(name));
     }
 }

@@ -29,24 +29,25 @@ namespace Z0
         public void SignalRan()
             => Wf.Raise(new RanEvent(Host, Ct));
 
-        [MethodImpl(Inline)]
-        WfExecToken NextExecToken()
-            => new WfExecToken((ulong)atomic(ref SourceToken));
-
-        [MethodImpl(Inline)]
-        WfExecToken CloseExecToken(in WfExecToken src)
-            => src.WithTarget((ulong)atomic(ref TargetToken));
+        public void SignalTableEmitting(Type type, FS.FilePath dst)
+            => Wf.Raise(new EmittingTableEvent(Host, type, dst, Ct));
 
         public WfExecFlow Running<T>(T src)
         {
             SignalRunning(src);
+            return Flow();
+        }
+
+        public WfExecFlow EmittingTable(Type type, FS.FilePath dst)
+        {
+            SignalTableEmitting(type, dst);
             return new WfExecFlow(this, NextExecToken());
         }
 
         public WfExecFlow Running()
         {
             SignalRunning();
-            return new WfExecFlow(this, NextExecToken());
+            return Flow();
         }
 
         public WfExecToken Ran(WfExecFlow src)
@@ -59,5 +60,17 @@ namespace Z0
 
         public void Ran()
             => SignalRan();
+
+        [MethodImpl(Inline)]
+        WfExecToken NextExecToken()
+            => new WfExecToken((ulong)atomic(ref SourceToken));
+
+        [MethodImpl(Inline)]
+        WfExecToken CloseExecToken(in WfExecToken src)
+            => src.WithTarget((ulong)atomic(ref TargetToken));
+
+        [MethodImpl(Inline)]
+        WfExecFlow Flow()
+            => new WfExecFlow(this, NextExecToken());
     }
 }

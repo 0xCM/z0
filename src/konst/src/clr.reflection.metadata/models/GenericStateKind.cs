@@ -9,9 +9,12 @@ namespace Z0
 
     using static Konst;
 
-    public class CmdHost<T> : WfHost<CmdHost<T>>
-        where T : struct
+    public enum GenericStateKind
     {
+        Nongeneric = 0,
 
+        OpenGeneric = 1,
+
+        ClosedGeneric = 2
     }
 }

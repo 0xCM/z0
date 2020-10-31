@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-using static ApiNameAtoms;
+using static ApiNameParts;
 
 namespace Z0
 {
@@ -16,7 +16,7 @@ namespace System.IO
 {
     readonly struct ApiNames
     {
-        public const string TempFiles =  system + dot + "io" + dot + "tempfiles";
+        public const string TempFiles =  system + dot + io + dot + "tempfiles";
     }
 }
 

@@ -36,7 +36,6 @@ namespace Z0.Dynamics.Operators
                 }
             });
 
-
         /// <summary>
         /// Specifies whether the operator exists for <typeparamref name="T"/>
         /// </summary>

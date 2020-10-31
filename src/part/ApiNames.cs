@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-using static ApiNameAtoms;
+using static ApiNameParts;
 
 [ApiNameProvider]
 readonly struct ApiNames

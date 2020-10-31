@@ -33,6 +33,7 @@ namespace Z0
         /// Extracts property info from a member expression, if possbile, and otherwise returns null
         /// </summary>
         /// <param name="x">The expression to examine</param>
+        [Op]
         public static PropertyInfo GetAccessedProperty(this Expression x)
             => cast<PropertyInfo>(cast<MemberExpression>(x)?.Member);
 
@@ -40,6 +41,7 @@ namespace Z0
         /// Extracts member info from an expression, if possbile; otherwise returns none
         /// </summary>
         /// <param name="x">The expression to examine</param>
+        [Op]
         public static Option<MemberInfo> AccessedMember(this Expression X)
         {
             var M = TryCast<MemberExpression>(X).ValueOrDefault();
@@ -49,6 +51,7 @@ namespace Z0
                 return TryCast<LambdaExpression>(X).Select(y => y.Body.AccessedMember().ValueOrDefault());
         }
 
+        [Op]
         public static Option<MemberInfo> AccessedMember(this BinaryExpression X)
             => X.Left.AccessedMember().ValueOrElse(() => X.Right.AccessedMember().ValueOrDefault());
 
@@ -56,13 +59,14 @@ namespace Z0
         /// Extracts property info from an expression, if possbile; otherwise returns none
         /// </summary>
         /// <param name="x">The expression to examine</param>
-        public static Option<PropertyInfo> AccesedProperty(this Expression x)
+        [Op]
+        public static Option<PropertyInfo> AccessedProperty(this Expression x)
         {
-            var candiate = TryCast<MemberExpression>(x).Select(GetAccessedProperty);
-            if (candiate)
-                return candiate;
+            var candidate = TryCast<MemberExpression>(x).Select(GetAccessedProperty);
+            if (candidate)
+                return candidate;
             else
-                return TryCast<LambdaExpression>(x).Select(y => y.Body.AccesedProperty().ValueOrDefault());
+                return TryCast<LambdaExpression>(x).Select(y => y.Body.AccessedProperty().ValueOrDefault());
         }
     }
 }

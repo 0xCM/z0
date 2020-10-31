@@ -89,6 +89,7 @@
         "Expressional",
         "FNPTR",
         "FROUND",
+        "Genericity",
         "Globbing",
         "HASMODRM",
         "HOSTFXR",

@@ -9,12 +9,6 @@ namespace Z0
     using static Konst;
     using static z;
 
-    [WfHost]
-    sealed class AppHost : WfHost<AppHost>
-    {
-
-    }
-
     class App : AppShell<App,IAppContext>
     {
         public const PartId Part = PartId.Run;
@@ -33,7 +27,7 @@ namespace Z0
 
         public override void RunShell(params string[] args)
         {
-            using var wf = WfShell.create(args).WithHost(new AppHost());
+            using var wf = WfShell.create(args);
             using var state = AsmWorkflows.state(wf, AsmWorkflows.context(Context));
 
             try

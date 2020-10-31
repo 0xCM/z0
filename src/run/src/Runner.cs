@@ -412,7 +412,7 @@ namespace Z0
 
         public const string x8 = nameof(x8);
 
-        public const string dot = ApiNameAtoms.dot;
+        public const string dot = ApiNameParts.dot;
 
         const string sep ="_";
 

@@ -12,12 +12,6 @@ namespace Z0
     using static Konst;
     using static z;
 
-    [Step]
-    public sealed class MatchAddresses : WfHost<MatchAddresses>
-    {
-
-    }
-
     ref struct MatchAddressesStep
     {
         readonly IWfCaptureState State;

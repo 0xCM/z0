@@ -14,8 +14,5 @@ namespace Z0.Asm
 
         void Raise<E>(E e)
             where E : IAppEvent;
-
-        IAsmWriter AsmWriter(FS.FilePath dst)
-            => AsmServices.writer(dst,Formatter);
     }
 }

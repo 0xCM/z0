@@ -3,9 +3,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
     [LiteralProvider]
     public readonly struct CsKeywords
     {
@@ -18,5 +15,9 @@ namespace Z0
         public const string Struct = "struct";
 
         public const string Case = "case";
+
+        public const string Fixed = "fixed";
+
+        public const string Static = "static";
     }
 }

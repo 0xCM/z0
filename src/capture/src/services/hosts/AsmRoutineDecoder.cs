@@ -18,12 +18,6 @@ namespace Z0.Asm
     {
         readonly AsmFormatConfig AsmFormat;
 
-        public static AsmRoutineDecoder Default
-        {
-            [MethodImpl(Inline)]
-            get => new AsmRoutineDecoder(AsmFormatConfig.Default);
-        }
-
         [MethodImpl(Inline)]
         public AsmRoutineDecoder(in AsmFormatConfig format)
             => AsmFormat = format;
@@ -31,7 +25,7 @@ namespace Z0.Asm
         public Option<AsmRoutine> Decode(ApiCaptureBlock src)
             => from i in Decode(src.Parsed)
                 let block = asm.block(src.UriHex, i, src.TermCode)
-                select AsmServices.routine(src.MetaUri, src.OpUri, src.Method.Metadata().Format(), block);
+                select ApiAsm.routine(src.MetaUri, src.OpUri, src.Method.Metadata().Format(), block);
 
         public Option<AsmFxList> Decode(BasedCodeBlock src)
             => Decode(src.Encoded, src.Base).TryMap(x => asm.list(x, src));
@@ -40,7 +34,7 @@ namespace Z0.Asm
             => Decode(src.Encoded, src.Base);
 
         public Option<AsmRoutine> Decode(ApiCaptureBlock src, Action<Asm.Instruction> f)
-            => Decode(src.Parsed,f).TryMap(x => AsmServices.routine(src,x));
+            => Decode(src.Parsed,f).TryMap(x => ApiAsm.routine(src,x));
 
         public Option<AsmFxList> Decode(BasedCodeBlock src, Action<Asm.Instruction> f)
         {
@@ -118,7 +112,7 @@ namespace Z0.Asm
         {
             var result = Decode(src.Encoded);
             if(result)
-                return AsmServices.routine(src, result.Value);
+                return ApiAsm.routine(src, result.Value);
             else
                 return none<AsmRoutine>();
         }

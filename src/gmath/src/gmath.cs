@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static ApiNameAtoms;
+    using static ApiNameParts;
 
     [ApiHost(ApiNames.gmath)]
     public partial class gmath : IApiHost<gmath>

@@ -46,7 +46,7 @@ namespace Z0
                 throw no<T>();
         }
 
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static GtEq<T> gteq<T>()
             where T : unmanaged
         {

@@ -6,6 +6,6 @@ namespace Z0
 {
     public interface TCheckDynamic : TValidator
     {
-        IDynexus Dynamic => Dynops.Services.Dynexus;
+        IDynexus Dynamic => Dynops.Dynexus;
     }
 }

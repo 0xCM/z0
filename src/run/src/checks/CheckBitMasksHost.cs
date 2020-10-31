@@ -20,5 +20,10 @@ namespace Z0
             using var step = new BitMaskChecker(wf, host, source, log);
             step.Run();
         }
+
+        protected override void Execute(IWfShell shell)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -13,7 +13,7 @@ namespace Z0
     using static z;
 
     [WfHost]
-    public sealed class DecodeApiHost : WfHost<DecodeApiHost,ApiMemberCodeBlocks, AsmRoutines>
+    public sealed class DecodeApiHost : WfHost<DecodeApiHost, ApiMemberCodeBlocks, AsmRoutines>
     {
         IAsmDecoder Decoder;
 

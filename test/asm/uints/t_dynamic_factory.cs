@@ -20,7 +20,7 @@ namespace Z0.Asm
     {
         public override bool Enabled => true;
 
-        IDynexus Dynamic => Dynops.Services.Dynexus;
+        IDynexus Dynamic => Dynops.Dynexus;
 
         public void create_emitter()
         {

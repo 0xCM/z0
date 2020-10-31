@@ -16,6 +16,11 @@ namespace Z0
         public static WfSelfHost create(Type self)
             => new WfSelfHost(self);
 
+        protected override void Execute(IWfShell shell)
+        {
+
+        }
+
         Type HostType;
 
         public override WfStepId Id

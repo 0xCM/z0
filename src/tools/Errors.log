@@ -52,3 +52,13 @@ System.ArgumentException: The type or method has 1 generic parameter(s), but 10 
    at Z0.AppRunner.Run() in J:\dev\projects\z0\src\tools\app\App.cs:line 163
    at Z0.App.Main(String[] args) in J:\dev\projects\z0\src\tools\app\App.cs:line 28
 
+Failure trapped by Main at j:\dev\projects\z0\src\tools\app\App.cs 32
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Z0.AppRunner.Run() in j:\dev\projects\z0\src\tools\app\App.cs:line 178
+   at Z0.App.Main(String[] args) in j:\dev\projects\z0\src\tools\app\App.cs:line 28
+
+Failure trapped by Main at J:\dev\projects\z0\src\tools\app\App.cs 32
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Z0.AppRunner.Run() in J:\dev\projects\z0\src\tools\app\App.cs:line 179
+   at Z0.App.Main(String[] args) in J:\dev\projects\z0\src\tools\app\App.cs:line 28
+

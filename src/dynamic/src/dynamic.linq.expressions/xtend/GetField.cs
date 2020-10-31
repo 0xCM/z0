@@ -17,6 +17,7 @@ namespace Z0
         /// </summary>
         /// <typeparam name="F">The field type</typeparam>
         /// <param name="selector">The selecting expression that identifies the desired member</param>
+        [Op]
         public static FieldInfo GetField<F>(this Expression<Func<F>> selector)
             => LinqXQuery.field(selector);
 
@@ -26,6 +27,7 @@ namespace Z0
         /// <typeparam name="T">The declaring type</typeparam>
         /// <typeparam name="P">The property type</typeparam>
         /// <param name="selector">The selecting expression that identifies the desired member</param>
+        [Op]
         public static FieldInfo GetField<T,P>(this Expression<Func<T,P>> selector)
             => LinqXQuery.field(selector);
     }

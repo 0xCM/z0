@@ -68,54 +68,8 @@ namespace Z0
         [Op]
         public static ApiHostCatalog members(IApiHost src)
         {
-            var generic = HostedGeneric(src);
-            var direct = HostedDirect(src);
-            var all = direct.Concat(generic).Array();
-            return new ApiHostCatalog(src, all.OrderBy(x => x.Method.MetadataToken));
-        }
-
-        [Op]
-        static ApiMember[] HostedDirect(IApiHost src)
-        {
-            var methods = @readonly(ApiQuery.DirectApiMethods(src).Array());
-            var count = methods.Length;
-            var members = alloc<ApiMember>(count);
-            var dst = span(members);
-            for(var i=0u; i<count; i++)
-            {
-                ref readonly var m = ref skip(methods,i);
-                var id = MultiDiviner.Service.Identify(m);
-                var im = new IdentifiedMethod(id,m);
-                var uri = OpUri.Define(ApiUriScheme.Type, src.Uri, m.Name, id);
-                var located = ClrDynamic.jit(im);
-                var mKind = m.KindId();
-                var member = new ApiMember(uri, located,  mKind);
-                seek(dst,i) = member;
-            }
-            return members;
-        }
-
-        [Op]
-        static ApiMember[] HostedGeneric(IApiHost src)
-        {
-            var methods = @readonly(ApiQuery.GenericApiMethods(src).Array());
-            var count = methods.Length;
-            var members = alloc<ApiMember>(count);
-            var dst = span(members);
-            for(var i=0u; i<count; i++)
-            {
-                ref readonly var m = ref skip(methods,i);
-                var closure = ApiQuery.NumericClosureTypes(m);
-                var reified = m.MakeGenericMethod(closure);
-                var id = MultiDiviner.Service.Identify(reified);
-                var im = new IdentifiedMethod(id,m);
-                var uri = OpUri.Define(ApiUriScheme.Type, src.Uri, m.Name, id);
-                var located = ClrDynamic.jit(im);
-                var mKind = m.KindId();
-                var member = new ApiMember(uri, located, mKind);
-                seek(dst,i) = member;
-            }
-            return members;
+            var members = ApiJit.jit(src);
+            return members.Length == 0 ? ApiHostCatalog.Empty : new ApiHostCatalog(src, members);
         }
 
         /// <summary>

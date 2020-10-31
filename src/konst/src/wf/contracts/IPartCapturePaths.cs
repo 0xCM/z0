@@ -23,8 +23,8 @@ namespace Z0
         FolderPath AsmDir
             => AsmDirPath(ArchiveRoot);
 
-        FilePath AsmPath(FileName name)
-            => AsmFilePath(ArchiveRoot, name);
+        FS.FilePath AsmPath(FileName name)
+            => FS.path(AsmFilePath(ArchiveRoot, name).Name);
 
         FilePath HexPath(FileName name)
             => HexFilePath(ArchiveRoot, name);

@@ -6,7 +6,7 @@ namespace Z0.Tools
 {
     using System;
 
-    using static ApiNameAtoms;
+    using static ApiNameParts;
     using static ToolNames;
 
     public readonly struct ToolApiNames

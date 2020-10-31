@@ -35,7 +35,16 @@ namespace Z0
         }
 
         public int EntryCount
-            => Hashtable.Count;
+        {
+            [MethodImpl(Inline)]
+            get => Hashtable?.Count ?? 0;
+        }
+
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => EntryCount == 0;
+        }
 
         public IEnumerable<OpIdentity> Keys
             => Hashtable.Keys;
@@ -88,5 +97,11 @@ namespace Z0
             => from code in Values
                 where code.Method.IsKindedOperator() && code.Method.ArityValue() == arity
                 select code;
+
+        public static ApiMemberCodeIndex Empty
+        {
+            [MethodImpl(Inline)]
+            get => new ApiMemberCodeIndex(ApiOpIndex<ApiMemberCode>.Empty);
+        }
     }
 }

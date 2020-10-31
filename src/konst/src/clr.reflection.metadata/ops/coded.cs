@@ -16,13 +16,8 @@ namespace Z0
         public static ref readonly Type coded(in ClrTypeCodes src, TypeCode tc)
             => ref src[tc];
 
-        [MethodImpl(Inline), Op]
-        public static ref readonly Type coded(in TypeCodeIndex src, TypeCode tc)
-            => ref src[tc];
-
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Type coded<T>(in ClrTypeCodes src)
             => src.type_u<T>();
-
     }
 }

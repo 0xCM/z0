@@ -22,7 +22,6 @@ namespace Z0
             => Workflow.step<ProcessAsmStep>();
     }
 
-
     public readonly struct ProcessAsm
     {
         readonly Dictionary<Mnemonic, ArrayBuilder<AsmRow>> Index;

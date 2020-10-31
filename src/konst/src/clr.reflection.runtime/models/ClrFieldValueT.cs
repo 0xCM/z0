@@ -14,18 +14,18 @@ namespace Z0
     /// Covers a field along with a value that was either extracted from a field instance or that may be pushed into a field instance
     /// </summary>
     /// <typeparam name="T">The field value type</param>
-    public readonly struct FieldValue<T>
+    public readonly struct ClrFieldValue<T>
     {
         public readonly FieldInfo Field;
 
         public readonly T Value;
 
         [MethodImpl(Inline)]
-        public static implicit operator FieldValue<T>((FieldInfo field, T value) src)
-            => new FieldValue<T>(src.field, src.value);
+        public static implicit operator ClrFieldValue<T>((FieldInfo field, T value) src)
+            => new ClrFieldValue<T>(src.field, src.value);
 
         [MethodImpl(Inline)]
-        public FieldValue(FieldInfo field, T value)
+        public ClrFieldValue(FieldInfo field, T value)
         {
             Field = field;
             Value = value;

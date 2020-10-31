@@ -14,19 +14,10 @@ namespace Z0
     using W = CliStringRecord.RenderWidths;
     using R = CliStringRecord;
 
-    [WfHost]
-    public sealed class EmitPartStrings : WfHost<EmitPartStrings>
-    {
-
-
-    }
-
     ref struct EmitPartStringsStep
     {
         readonly WfHost Host;
-        /// <summary>
-        /// Indicates the number of records emitted after running
-        /// </summary>
+
         public uint EmissionCount;
 
         readonly IWfShell Wf;
@@ -40,7 +31,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public EmitPartStringsStep(IWfShell wf, IPart part, R.Kind sk, CorrelationToken ct)
         {
-            Host = new EmitPartStrings();
+            Host = WfSelfHost.create(typeof(EmitPartStringsStep));
             Wf = wf.WithHost(Host);
             Part = part;
             if(sk == R.Kind.System)

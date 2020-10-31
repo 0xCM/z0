@@ -9,6 +9,9 @@ namespace Z0
 
     public sealed class CheckCreditsHost : WfHost<CheckCreditsHost>
     {
-
+        protected override void Execute(IWfShell shell)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

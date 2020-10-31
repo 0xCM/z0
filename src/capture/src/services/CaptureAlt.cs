@@ -54,7 +54,7 @@ namespace Z0
         [Op]
         public static ApiCaptureBlock capture(MethodInfo src, OpIdentity id, Span<byte> buffer)
         {
-            var summary = capture(buffer, id, ApiMemberJit.jit(src));
+            var summary = capture(buffer, id, ApiJit.jit(src));
             var outcome = summary.Outcome;
             return block(id, src, summary.Encoded, outcome.TermCode);
         }
@@ -69,7 +69,7 @@ namespace Z0
         public static ApiCaptureBlock capture(MethodInfo src, OpIdentity? id = null, uint buffersize = Pow2.T14)
         {
             var _id = id ?? OpIdentity.define(src.MetadataToken.ToString());
-            var summary = capture(alloc<byte>(buffersize), _id, ApiMemberJit.jit(src));
+            var summary = capture(alloc<byte>(buffersize), _id, ApiJit.jit(src));
             var outcome = summary.Outcome;
             return block(_id, src, summary.Encoded, outcome.TermCode);
         }

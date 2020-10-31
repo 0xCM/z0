@@ -5,7 +5,7 @@
 namespace Z0.Refs
 {
 
-    using static ApiNameAtoms;
+    using static ApiNameParts;
 
     [LiteralProvider]
     public readonly struct Intel

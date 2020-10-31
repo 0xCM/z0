@@ -33,10 +33,11 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator Delegate(ActionDelegate src)
-            => src.DynamicOp;
-
         public void Invoke()
             => DynamicOp.Invoke();
+
+        [MethodImpl(Inline)]
+        public static implicit operator Delegate(ActionDelegate src)
+            => src.DynamicOp;
     }
 }

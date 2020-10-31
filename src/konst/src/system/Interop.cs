@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
     using static System.Runtime.InteropServices.Marshal;
-    using static System.Runtime.InteropServices.MemoryMarshal;
 
     using static Konst;
     using static z;

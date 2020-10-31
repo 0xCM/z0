@@ -10,18 +10,6 @@ namespace Z0
     using static Konst;
     using static z;
 
-    [WfHost]
-    public sealed class ExtractHostMembers : WfHost<ExtractHostMembers, IApiHost, TableSpan<ApiMemberExtract>>
-    {
-        protected override ref TableSpan<ApiMemberExtract> Execute(IWfShell wf, in IApiHost api, out TableSpan<ApiMemberExtract> dst)
-        {
-            using var step = new ExtractHostMembersStep(wf, this, api);
-            step.Run();
-            dst = step.Extracts;
-            return ref dst;
-        }
-    }
-
     ref struct ExtractHostMembersStep
     {
         readonly IWfShell Wf;
@@ -55,7 +43,6 @@ namespace Z0
             {
                 using var step = new ExtractMembers(Wf, new ExtractMembersHost());
                 Extracts = step.Extract(Api);
-
             }
             catch(Exception e)
             {

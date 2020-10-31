@@ -10,14 +10,13 @@ namespace Z0
 
     using static Konst;
 
-    using XPR = System.Linq.Expressions.Expression;
-
     partial class XFuncX
     {
         /// <summary>
         /// Tests whether an expression is a conversion
         /// </summary>
         /// <param name="x">The expression to examine</param>
+        [Op]
         public static bool IsConversion(this Expression x)
             => LinqXQuery.IsConversion(x);
 
@@ -27,6 +26,7 @@ namespace Z0
         /// <typeparam name="T">The declaring type</typeparam>
         /// <typeparam name="R">The member type</typeparam>
         /// <param name="selector">Expression that identifies the member</param>
+        [Op]
         public static bool IsConversion<T,R>(this Expression<Func<T,R>> selector)
             => LinqXQuery.IsConversion(selector);
 
@@ -34,6 +34,7 @@ namespace Z0
         /// Tests whether the test expression is a member access expression
         /// </summary>
         /// <param name="x">The expression to examine</param>
+        [Op]
         public static bool IsMemberAccess(this Expression x)
             => LinqXQuery.IsAccess(x);
 
@@ -41,6 +42,7 @@ namespace Z0
         /// Tests whether the test expression is a function call
         /// </summary>
         /// <param name="x">The expression to examine</param>
+        [Op]
         public static bool IsCall(this Expression x)
             => LinqXQuery.IsCall(x);
 
@@ -48,6 +50,7 @@ namespace Z0
         /// Tests whether an expression is an application of the LINQ select operator
         /// </summary>
         /// <param name="x">The expression to test</param>
+        [Op]
         public static bool IsSelect(this Expression x)
             => LinqXQuery.IsSelect(x);
 
@@ -55,6 +58,7 @@ namespace Z0
         /// Tests whether an expression is a logical operator
         /// </summary>
         /// <param name="x">The expression to examine</param>
+        [Op]
         public static bool IsLogical(this Expression x)
             => LinqXQuery.IsLogical(x);
 
@@ -62,6 +66,7 @@ namespace Z0
         /// Tests whether an expression is a lambda expression
         /// </summary>
         /// <param name="x">The expression to examine</param>
+        [Op]
         public static bool IsLambda(this Expression x)
             => LinqXQuery.IsLambda(x);
 
@@ -69,6 +74,7 @@ namespace Z0
         /// Tests whether an expression is a logical disjunction
         /// </summary>
         /// <param name="x">The expression to examine</param>
+        [Op]
         public static bool IsDisjunction<X>(this X x)
             where X : Expression
                 => LinqXQuery.disjunction(x).Exists;
@@ -77,6 +83,7 @@ namespace Z0
         /// Tests whether an expression is a logical conjunction
         /// </summary>
         /// <param name="x">The expression to examine</param>
+        [Op]
         public static bool IsConjunction<X>(this X x)
             where X : Expression
                 => LinqXQuery.conjunction(x).Exists;
@@ -85,6 +92,7 @@ namespace Z0
         /// Deterines whether the test expression is either a logical conjuntion or disjunction
         /// </summary>
         /// <param name="X">The expression to examine</param>
+        [Op]
         public static bool IsJunction(this Expression x)
             => LinqXQuery.junction(x).Exists;
 

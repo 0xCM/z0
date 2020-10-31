@@ -30,5 +30,17 @@ namespace Z0
             Host = host;
             Members = members;
         }
+
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Host.IsEmpty || Members.IsEmpty;
+        }
+
+        public static ApiHostMemberCode Empty
+        {
+            [MethodImpl(Inline)]
+            get => new ApiHostMemberCode(ApiHostUri.Empty, ApiMemberCodeIndex.Empty);
+        }
     }
 }

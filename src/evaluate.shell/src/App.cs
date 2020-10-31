@@ -26,6 +26,11 @@ namespace Z0
                 term.error(e);
             }
         }
+
+        protected override void Execute(IWfShell shell)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public static partial class XTend { }

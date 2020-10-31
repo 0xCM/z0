@@ -20,6 +20,11 @@ namespace Z0
 
         public static CaptureWorkflowMain create(IAsmWf asm)
             => new CaptureWorkflowMain(asm, new CaptureWorkflow());
+
+        protected override void Execute(IWfShell shell)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public readonly ref struct CaptureWorkflowMain

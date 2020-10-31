@@ -15,11 +15,10 @@ namespace Z0
     using NK = PrimalNumericKind;
     using TC = System.TypeCode;
 
-
     [ApiHost(ApiNames.ClrPrimitives, true)]
     public readonly struct ClrPrimitives
     {
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static PrimalKindInfo describe(PrimalKind src)
             => new PrimalKindInfo(src, width(src), sign(src), (PrimalTypeCode)code(src));
 
@@ -54,11 +53,11 @@ namespace Z0
         /// Computes the bit-width of the represented primitive
         /// </summary>
         /// <param name="f">The literal's bitfield</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static TypeWidth width(PrimalKind f)
             => (TypeWidth)Pow2.pow(select(f, Field.Width));
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static TypeCode code(PrimalKind f)
             => (TypeCode)select(f, Field.KindId);
 
@@ -79,23 +78,23 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source bitfield</param>
         /// <param name="i">The segment identifier</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static byte select(PrimalKind src, Field i)
             => (byte)view(filter(src,i), index(i));
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ref readonly SegMask filter(Field i)
             => ref skip(Masks, (byte)i);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static PrimalKind filter(byte src, SegMask mask)
             => (PrimalKind)(src & (byte)mask);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ref readonly SegPos index(Field i)
             => ref skip(Positions, (byte)i);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static PrimalKind view(PrimalKind src, SegPos offset)
             => (PrimalKind)((byte)src >> (byte)offset);
 
@@ -104,7 +103,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source bitfield</param>
         /// <param name="i">The segment identifier</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static PrimalKind filter(PrimalKind src, Field i)
             => filter((byte)src, filter(i));
     }

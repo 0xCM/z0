@@ -9,7 +9,7 @@ namespace Z0
     using static z;
 
     [WfHost]
-    public sealed class EmitHostCil : WfHost<EmitHostCil, ApiMemberCodeBlocks, FS.FilePath>
+    public sealed class EmitHostCil : WfHost<EmitHostCil,ApiMemberCodeBlocks,FS.FilePath>
     {
         ApiHostUri Uri;
 

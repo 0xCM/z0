@@ -11,10 +11,8 @@ namespace Z0.Asm
     using static AsmFxCheck;
     using static z;
 
-    public readonly struct AsmServices : IAsmServices
+    public readonly struct ApiAsm
     {
-        public static IAsmServices Services => default(AsmServices);
-
         public static FS.FilePath emit(IWfShell wf, ApiHostUri uri, ReadOnlySpan<AsmRoutine> src, in AsmFormatConfig format)
         {
             var count = src.Length;

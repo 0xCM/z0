@@ -7,47 +7,50 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Linq;
+    using System.Reflection;
 
     using static Konst;
 
     /// <summary>
     /// Defines a catalog over <see cref='ApiMember'/> values for a specified <see cref='IApiHost'/>
     /// </summary>
-    public readonly struct ApiHostCatalog
+    public readonly struct ApiHostMethods
     {
+        [MethodImpl(Inline)]
+        public static ApiHostMethods create(IApiHost host, params MethodInfo[] src)
+            => new ApiHostMethods(host, src);
+
         public IApiHost Host {get;}
 
-        public ApiMembers Members {get;}
+        public Indexed<MethodInfo> Methods {get;}
 
         [MethodImpl(Inline)]
-        public ApiHostCatalog(IApiHost host, ApiMembers src)
+        public ApiHostMethods(IApiHost host, MethodInfo[] src)
         {
             Host = host;
-            Members = src;
-        }
-
-        public ApiMember[] Storage
-        {
-            [MethodImpl(Inline)]
-            get => Members.Storage;
+            Methods = src;
         }
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Members.Count == 0;
+            get => Methods.IsEmpty;
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => Members.Count != 0;
+            get => Methods.IsNonEmpty;
         }
 
-        public static ApiHostCatalog Empty
+        public static ApiHostMethods Empty
         {
             [MethodImpl(Inline)]
-            get => new ApiHostCatalog(ApiHost.Empty, ApiMembers.Empty);
+            get => new ApiHostMethods(ApiHost.Empty, Array.Empty<MethodInfo>());
         }
+
+        [MethodImpl(Inline)]
+        public static implicit operator MethodInfo[](ApiHostMethods src)
+            => src.Methods;
     }
 }

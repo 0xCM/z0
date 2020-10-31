@@ -31,7 +31,7 @@ namespace Z0
             var t = typeof(T);
             var fields = ClrQuery.fields(t);
             var count = fields.Length;
-            var reflected = alloc<FieldValue>(count);
+            var reflected = alloc<ClrFieldValue>(count);
             ClrQuery.values(spec, fields, reflected);
             var buffer = alloc<CmdOption>(count);
             var target = span(buffer);

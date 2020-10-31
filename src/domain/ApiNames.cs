@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    using static ApiNameAtoms;
+    using static ApiNameParts;
 
     readonly struct ApiNames
     {
@@ -35,18 +35,6 @@ namespace Z0
         public const string FixedBuffers = buffers + dot + @fixed;
 
         public const string JsonData = data + dot + json;
-
-        const string syntax = nameof(syntax);
-
-        const string parse = nameof(parse);
-
-        const string patterns = nameof(patterns);
-
-        const string json = nameof(json);
-
-        const string @static = "static";
-
-        const string @fixed = "fixed";
 
         public const string ApiData = api + dot + data;
     }

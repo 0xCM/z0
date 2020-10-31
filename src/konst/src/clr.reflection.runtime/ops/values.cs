@@ -13,16 +13,16 @@ namespace Z0
 
     partial struct ClrQuery
     {
-        public static ReadOnlySpan<FieldValue> FieldValues<T>(in T src)
+        public static ReadOnlySpan<ClrFieldValue> FieldValues<T>(in T src)
             where T : struct
         {
             var fields = span(typeof(T).DeclaredFields());
-            var dst = alloc<FieldValue>(fields.Length);
+            var dst = alloc<ClrFieldValue>(fields.Length);
             values(src, fields, dst);
             return dst;
         }
 
-        public static void values<T>(in T src, Span<FieldValue> dst)
+        public static void values<T>(in T src, Span<ClrFieldValue> dst)
             where T : struct
         {
             var fields = span(typeof(T).DeclaredFields());
@@ -30,7 +30,7 @@ namespace Z0
         }
 
         [Op, Closures(Closure)]
-        public static void values<T>(in T src, ReadOnlySpan<FieldInfo> fields, Span<FieldValue> dst)
+        public static void values<T>(in T src, ReadOnlySpan<FieldInfo> fields, Span<ClrFieldValue> dst)
             where T : struct
         {
             ref var target = ref first(dst);
@@ -44,10 +44,10 @@ namespace Z0
         }
 
         [Op, Closures(Closure)]
-        public static FieldValue<T>[] values<T>(Type src)
+        public static ClrFieldValue<T>[] values<T>(Type src)
         {
             var fields = @readonly(search<T>(src));
-            var buffer = alloc<FieldValue<T>>(fields.Length);
+            var buffer = alloc<ClrFieldValue<T>>(fields.Length);
             var dst = span(buffer);
             ref var target = ref first(dst);
             var tRef = __makeref(src);
@@ -60,7 +60,7 @@ namespace Z0
             return buffer;
         }
 
-        public static void values<S,T>(Span<FieldValue<T>> dst)
+        public static void values<S,T>(Span<ClrFieldValue<T>> dst)
             where S : struct
         {
             var src = typeof(S);

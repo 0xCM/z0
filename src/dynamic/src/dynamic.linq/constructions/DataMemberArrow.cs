@@ -12,23 +12,23 @@ namespace Z0.Dynamics
     /// <summary>
     /// Defines a directed association between two data members
     /// </summary>
-    public class DataMemberArrow : IArrow<DataMember>
+    public class DataMemberArrow : IArrow<ClrDataMember>
     {
         /// <summary>
         /// The supplier member
         /// </summary>
-        public readonly DataMember Source;
+        public readonly ClrDataMember Source;
 
         /// <summary>
         /// The client member
         /// </summary>
-        public readonly DataMember Target;
+        public readonly ClrDataMember Target;
 
         public string Identifier
             => text.concat(Source.Name, Colon, Source.DataType.Name, " -> ", Target.Name, Colon, Target.DataType.Name);
 
         [MethodImpl(Inline)]
-        public DataMemberArrow(DataMember s, DataMember t)
+        public DataMemberArrow(ClrDataMember s, ClrDataMember t)
         {
             Source = s;
             Target = t;
@@ -36,10 +36,10 @@ namespace Z0.Dynamics
 
         const char Colon = ':';
 
-         DataMember IArrow<DataMember,DataMember>.Source
+         ClrDataMember IArrow<ClrDataMember,ClrDataMember>.Source
             => Source;
 
-        DataMember IArrow<DataMember,DataMember>.Target
+        ClrDataMember IArrow<ClrDataMember,ClrDataMember>.Target
             => Target;
 
         public string Format()
@@ -64,7 +64,7 @@ namespace Z0.Dynamics
             => src.Arrow;
 
         [MethodImpl(Inline)]
-        public DataMemberArrow(DataMember s, DataMember t)
+        public DataMemberArrow(ClrDataMember s, ClrDataMember t)
         {
             Arrow = new DataMemberArrow(s,t);
         }
@@ -72,7 +72,7 @@ namespace Z0.Dynamics
         /// <summary>
         /// The supplier member
         /// </summary>
-        public DataMember Source
+        public ClrDataMember Source
         {
             [MethodImpl(Inline)]
             get => Arrow.Source;
@@ -81,7 +81,7 @@ namespace Z0.Dynamics
         /// <summary>
         /// The client member
         /// </summary>
-        public DataMember Target
+        public ClrDataMember Target
         {
             [MethodImpl(Inline)]
             get => Arrow.Target;

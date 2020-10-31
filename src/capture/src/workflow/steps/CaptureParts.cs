@@ -84,12 +84,12 @@ namespace Z0
 
         void Capture(ApiDataTypes src)
         {
-            using var step = new ExtractMembers(Wf, new ExtractMembersHost());
+            using var step = new ExtractMembers(Wf, Host);
             var extracted = @readonly(step.Extract(src).GroupBy(x => x.Host).Select(x => kvp(x.Key, x.Array())).Array());
             for(var i=0; i<extracted.Length; i++)
             {
                 ref readonly var x = ref skip(extracted,i);
-                using var emit = new EmitCaptureArtifactsStep(State, new EmitCaptureArtifacts(), x.Key, x.Value);
+                using var emit = new EmitCaptureArtifactsStep(State, Host, x.Key, x.Value);
                 emit.Run();
             }
         }

@@ -28,7 +28,7 @@ namespace Z0
             => src.WriteValues(dst);
 
         [MethodImpl(Inline)]
-        public static void values<T>(ref T src, Span<FieldValue> dst)
+        public static void values<T>(ref T src, Span<ClrFieldValue> dst)
             where T : struct
         {
             var fields = span(typeof(T).DeclaredFields());
@@ -36,7 +36,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static void values<T>(ref T src, ReadOnlySpan<FieldInfo> fields, Span<FieldValue> dst)
+        public static void values<T>(ref T src, ReadOnlySpan<FieldInfo> fields, Span<ClrFieldValue> dst)
             where T : struct
         {
             ref var target = ref first(dst);
@@ -54,10 +54,10 @@ namespace Z0
             => map(search<T>(src),value<T>);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static FieldValue<T>[] values2<T>(Type src)
+        public static ClrFieldValue<T>[] values2<T>(Type src)
         {
             var fields = @readonly(search<T>(src));
-            var buffer = alloc<FieldValue<T>>(fields.Length);
+            var buffer = alloc<ClrFieldValue<T>>(fields.Length);
             var dst = span(buffer);
             ref var target = ref first(dst);
             var tRef = __makeref(src);
@@ -71,7 +71,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static void values<S,T>(Span<FieldValue<T>> dst)
+        public static void values<S,T>(Span<ClrFieldValue<T>> dst)
             where S : struct
         {
             var src = typeof(S);

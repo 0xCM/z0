@@ -13,7 +13,7 @@ namespace Z0
 
     using api = Literals;
 
-    [ApiHost(ApiNames.LiteralFields)]
+    [ApiHost(ApiNames.LiteralFields, true)]
     public readonly struct LiteralFields
     {
         [MethodImpl(Inline), Op]
@@ -63,16 +63,16 @@ namespace Z0
         /// <param name="src"></param>
         /// <typeparam name="T"></typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static FieldValues<T> values<T>(Type src)
+        public static ClrFieldValues<T> values<T>(Type src)
             where T : unmanaged
                 => api.search<T>(src).Select(f => (f, sys.constant<T>(f)));
 
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public FieldValues<T> values<T>(Type[] types)
+        public ClrFieldValues<T> values<T>(Type[] types)
             where T : unmanaged
         {
-            var literals = list<FieldValue<T>>();
+            var literals = list<ClrFieldValue<T>>();
             for(var i=0u; i<types.Length; i++)
             {
                 var values = values<T>(types[i]).ToSpan();

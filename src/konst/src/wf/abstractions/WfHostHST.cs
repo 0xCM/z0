@@ -10,8 +10,9 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public abstract class WfHost<H,S,T> : WfHost<H>, IWfHost<H,S,T>
+    public abstract class WfHost<H,S,T> : WfHost<H,S>, IWfHost<H,S,T>
         where H : WfHost<H,S,T>, new()
+        where S : new()
     {
         [MethodImpl(Inline)]
         protected WfHost()
@@ -22,10 +23,6 @@ namespace Z0
 
         public static new H create()
             => new H();
-
-        [MethodImpl(Inline)]
-        public void Run(IWfShell wf, in S src)
-            => Run(wf,src, out var _);
 
         [MethodImpl(Inline)]
         public ref T Run(IWfShell wf, in S src, out T dst)

@@ -16,7 +16,10 @@ namespace Z0.Asm
     [Step]
     public sealed class SpecializeImm : WfHost<SpecializeImm>
     {
-
+        protected override void Execute(IWfShell shell)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public class SpecializeImmStep : IImmEmitter
@@ -67,6 +70,9 @@ namespace Z0.Asm
                 EmitUnrefined(exchange, imm8.ToImm8Values(ScalarRefinementKind.Unrefined), parts);
             }
         }
+
+        AsmImmWriter HostArchiver(ApiHostUri host, IAsmFormatter formatter, FolderPath dst)
+            => new AsmImmWriter(host, formatter, z.insist(dst));
 
         public void EmitRefined(params PartId[] parts)
         {
@@ -135,7 +141,7 @@ namespace Z0.Asm
                 select (ApiHost)h).Array();
 
         AsmImmWriter Archive(IApiHost host)
-            => AsmServices.Services.HostArchiver(host.Uri, Formatter, CodeArchive.ArchiveRoot);
+            => HostArchiver(host.Uri, Formatter, CodeArchive.ArchiveRoot);
 
         void EmitUnrefined(in CaptureExchange exchange, Imm8R[] imm8, params PartId[] parts)
         {

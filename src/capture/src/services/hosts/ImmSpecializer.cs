@@ -30,7 +30,7 @@ namespace Z0.Asm
         {
             Decoder = decoder;
             Capture = new CaptureCore();
-            Dynamic = Dynops.Services.Dynexus;
+            Dynamic = Dynops.Dynexus;
         }
 
         public Option<AsmRoutine> UnaryOp(in CaptureExchange exchange, MethodInfo src, byte imm)

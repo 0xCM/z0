@@ -68,6 +68,6 @@ namespace Z0
             return dst;
         }
 
-        IDynexus Dynamic => Dynops.Services.Dynexus;
+        IDynexus Dynamic => Dynops.Dynexus;
     }
 }

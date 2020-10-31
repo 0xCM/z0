@@ -13,18 +13,18 @@ namespace Z0
     /// <summary>
     /// Pairs a field with a weakly-typed value
     /// </summary>
-    public readonly struct FieldValue
+    public readonly struct ClrFieldValue
     {
         public readonly FieldInfo Field;
 
         public readonly object Value;
 
         [MethodImpl(Inline)]
-        public static implicit operator FieldValue((FieldInfo field, object value) src)
-            => new FieldValue(src.field, src.value);
+        public static implicit operator ClrFieldValue((FieldInfo field, object value) src)
+            => new ClrFieldValue(src.field, src.value);
 
         [MethodImpl(Inline)]
-        public FieldValue(FieldInfo field, object value)
+        public ClrFieldValue(FieldInfo field, object value)
         {
             Field = field;
             Value = value;

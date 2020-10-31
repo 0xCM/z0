@@ -11,19 +11,19 @@ namespace Z0
     using static Konst;
     using static z;
 
-    [WfHost]
-    public sealed class EmitImageData : WfHost<EmitImageData,IPart,MemoryAddress>
-    {
-        protected override ref MemoryAddress Execute(IWfShell wf, in IPart src, out MemoryAddress dst)
-        {
-            using var step = new EmitImageDataStep(wf, this, src);
-            step.Run();
-            dst = step.OffsetAddress;
-            return ref dst;
-        }
-    }
+    // [WfHost]
+    // public sealed class EmitImageData : WfHost<EmitImageData,IPart,MemoryAddress>
+    // {
+    //     protected override ref MemoryAddress Execute(IWfShell wf, in IPart src, out MemoryAddress dst)
+    //     {
+    //         using var step = new EmitImageDataStep(wf, this, src);
+    //         step.Run();
+    //         dst = step.OffsetAddress;
+    //         return ref dst;
+    //     }
+    // }
 
-    public ref struct EmitImageDataStep
+    public ref struct EmitImageData
     {
         readonly IWfShell Wf;
 
@@ -48,10 +48,10 @@ namespace Z0
         readonly HexDataFormatter Formatter;
 
         [MethodImpl(Inline)]
-        public EmitImageDataStep(IWfShell wf, WfHost host, IPart part)
+        public EmitImageData(IWfShell wf, IPart part)
         {
-            Wf = wf.WithHost(host);
-            Host = host;
+            Host = WfSelfHost.create(typeof(EmitImageData));
+            Wf = wf.WithHost(Host);
             Part = part;
             BaseAddress = ProcessImages.@base(Part);
             TargetPath = Wf.Db().Table(ImageContentRecord.TableId, part.Id);

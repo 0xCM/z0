@@ -43,13 +43,13 @@ namespace Z0
             where K : unmanaged, IApiKey
             where T : unmanaged
         {
-            var operand = Identities.Services.Diviner.Identify(typeof(T));
+            var operand = MultiDiviner.Service.Identify(typeof(T));
             return ApiIdentify.build(k.Id, NumericKinds.from<T>(),generic);
         }
 
         static OpIdentity identify<T>(string name)
         {
-            var operand = Identities.Services.Diviner.Identify(typeof(T));
+            var operand = MultiDiviner.Service.Identify(typeof(T));
             return OpIdentityParser.Service.Parse($"{name}_({operand},{operand})");
         }
 

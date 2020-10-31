@@ -46,7 +46,7 @@ namespace Z0
         {
             try
             {
-                return Extractor.Extract(ApiMemberJit.jit(host));
+                return Extractor.Extract(ApiJit.jit(host));
             }
             catch(Exception e)
             {
@@ -59,7 +59,7 @@ namespace Z0
         {
             try
             {
-                return Extractor.Extract(ApiMemberJit.jit(types));
+                return Extractor.Extract(ApiJit.jit(types));
             }
             catch(Exception e)
             {

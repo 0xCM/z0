@@ -198,11 +198,6 @@ namespace Z0
                 Raise(running(step, content, Ct));
         }
 
-        // {
-        //     if(Verbosity.Babble())
-        //         Raise(running(Host, content, Ct));
-        // }
-
         void ProcessingFile<T>(FS.FilePath src, T kind)
         {
             if(Verbosity.Babble())
@@ -214,9 +209,6 @@ namespace Z0
 
         void EmittingFile(Count measure, FS.FilePath dst)
             => Raise(new EmittingFileEvent<Count>(Host, measure, dst, Ct));
-
-        void EmittingTable(Type type, FS.FilePath dst)
-            => Raise(new EmittingTableEvent(Host, type, dst, Ct));
 
         void EmittingTable<T>(FS.FilePath dst, T t = default)
             where T : struct
@@ -233,6 +225,8 @@ namespace Z0
         WfExecFlow Running<T>(T worker);
 
         WfExecToken Ran(WfExecFlow src);
+
+        WfExecFlow EmittingTable(Type type, FS.FilePath dst);
 
         void Ran();
 

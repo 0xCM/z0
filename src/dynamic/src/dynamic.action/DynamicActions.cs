@@ -11,7 +11,8 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct ActionFactory
+    [ApiHost]
+    public readonly struct DynamicActions
     {
         public static unsafe ActionDelegate define(string id, ReadOnlySpan<byte> f)
             => define(id, Buffers.liberate(f));
