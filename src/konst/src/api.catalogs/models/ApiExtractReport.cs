@@ -44,7 +44,7 @@ namespace Z0
                     Address : op.Member.Address,
                     Length : op.Encoded.Length,
                     Uri : op.OpUri,
-                    OpSig : op.Member.Method.Signature().Format(),
+                    OpSig : op.Member.Method.Metadata().Format(),
                     Data : op.Encoded
                     );
             }

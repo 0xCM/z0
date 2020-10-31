@@ -23,8 +23,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source method</param>
         [Op]
-        public static MethodSig Signature(this MethodInfo src)
-            => new MethodSig(
+        public static MethodMetadata Metadata(this MethodInfo src)
+            => new MethodMetadata(
                 MethodId: src.MetadataToken,
                 DefiningAssembly: src.Module.Assembly.GetSimpleName(),
                 DefiningModule: src.Module.Name,

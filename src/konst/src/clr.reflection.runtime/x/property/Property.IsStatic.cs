@@ -12,7 +12,6 @@ namespace Z0
 
     partial class XClrQuery
     {
-
         [MethodImpl(Inline), Op]
         public static bool IsStatic(this PropertyInfo p)
             => p.GetGetMethod()?.IsStatic == true

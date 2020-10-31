@@ -19,16 +19,6 @@ namespace Z0
 
         const BindingFlags BF = ReflectionFlags.BF_All;
 
-        public ClrSig sig(MethodInfo src)
-        {
-            var helper = SignatureHelper.GetMethodSigHelper(src.CallingConvention, src.ReturnType);
-            var @params = @readonly(src.GetParameters());
-            var count = @params.Length;
-            for(var i=0; i<count; i++)
-                helper.AddArgument(skip(@params,i).ParameterType);
-            return new ClrSig(ClrArtifactKind.Method, helper.GetSignature());
-        }
-
         [MethodImpl(Inline), Op]
         public static ClrMemberIdentity identity(FieldInfo src)
             => ClrMemberIdentity.from(src);

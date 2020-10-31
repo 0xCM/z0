@@ -6,24 +6,21 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
 
     using static Konst;
 
-    using D = WfDelegates;
-
-    partial struct Delegated
+    public readonly struct WfController<P> : IWfControl<P>
+        where P : IPart<P>, new()
     {
-        public readonly struct EventHandler : IWfEventReceiver
+        public Assembly Component
         {
-            readonly D.EventHandler Fx;
-
             [MethodImpl(Inline)]
-            internal EventHandler(D.EventHandler fx)
-                => Fx = fx;
-
-            [MethodImpl(Inline)]
-            public void Accept(in IWfEvent src)
-                => Fx(src);
+            get => typeof(P).Assembly;
         }
+
+        [MethodImpl(Inline)]
+        public static implicit operator WfController(WfController<P> src)
+            => new WfController(src.Component);
     }
 }

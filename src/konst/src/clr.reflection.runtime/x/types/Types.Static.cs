@@ -12,6 +12,7 @@ namespace Z0
         /// Selects the static types from a stream
         /// </summary>
         /// <param name="src">The source stream</param>
+        [Op]
         public static Type[] Static(this Type[] src)
             => src.Where(p => p.IsStatic());
     }

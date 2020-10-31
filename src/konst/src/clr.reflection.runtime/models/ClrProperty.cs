@@ -11,11 +11,11 @@ namespace Z0
     using static Konst;
 
     [ApiDataType(ApiNames.ClrProperty, true)]
-    public readonly struct ClrProperty : IClrMember<ClrProperty, PropertyInfo>
+    public readonly struct ClrProperty : IClrRuntimeMember<ClrProperty, PropertyInfo>
     {
         public PropertyInfo Definition {get;}
 
-        public ClrArtifactKey Id
+        public ClrArtifactKey ClrKey
         {
             [MethodImpl(Inline)]
             get => Definition.MetadataToken;
@@ -48,8 +48,12 @@ namespace Z0
             => Definition.Name;
 
         [Ignore]
-        PropertyInfo IClrMember<PropertyInfo>.Definition
+        PropertyInfo IClrRuntimeObject<PropertyInfo>.Definition
             => Definition;
+
+        [Ignore]
+        ClrArtifactKind IClrRuntimeObject.ClrKind
+            => ClrArtifactKind.Property;
 
         public override bool Equals(object obj)
             => Definition.Equals(obj);

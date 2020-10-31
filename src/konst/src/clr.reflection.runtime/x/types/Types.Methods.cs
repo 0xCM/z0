@@ -14,7 +14,8 @@ namespace Z0
         /// Selects all methods from the source types
         /// </summary>
         /// <param name="src">The types to search</param>
+        [Op]
         public static MethodInfo[] Methods(this Type[] src)
-            => src.SelectMany(x => x.Methods()).ToArray();
+            => src.SelectMany(x => x.Methods());
     }
 }

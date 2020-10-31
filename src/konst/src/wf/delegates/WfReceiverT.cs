@@ -11,19 +11,17 @@ namespace Z0
 
     using D = WfDelegates;
 
-    public readonly struct DataHandler<T> : IDataHandler<T>
+    public readonly struct WfReceiver<E> : IWfEventReceiver<E>
+        where E : struct, IWfEvent<E>
     {
-        readonly DataReceiver<T> Receiver;
+        readonly D.EventHandler<E> Fx;
 
         [MethodImpl(Inline)]
-        public DataHandler(DataReceiver<T> receiver)
-            => Receiver = receiver;
+        internal WfReceiver(D.EventHandler<E> fx)
+            => Fx = fx;
 
         [MethodImpl(Inline)]
-        public void Handle(T data)
-            => Receiver(data);
-
-        public static DataHandler<T> Empty
-            => new DataHandler<T>(t => {});
+        public void Accept(in E src)
+            => Fx(src);
     }
 }

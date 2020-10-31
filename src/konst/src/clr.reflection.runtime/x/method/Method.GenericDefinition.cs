@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The methods to examine</param>
         [Op]
-        public static IEnumerable<MethodInfo> GenericDefinitions(this MethodInfo[] src)
-            => src.Where(m => m.IsOpenGeneric() || m.IsClosedGeneric()).Select(m => m.GetGenericMethodDefinition()).Distinct();
+        public static MethodInfo[] GenericDefinitions(this MethodInfo[] src)
+            => src.Where(m => m.IsOpenGeneric() || m.IsClosedGeneric()).Select(m => m.GetGenericMethodDefinition()).Distinct().Array();
     }
 }

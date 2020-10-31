@@ -5,15 +5,24 @@
 namespace Z0
 {
     using System;
-    using System.Reflection;
     using System.Runtime.CompilerServices;
 
     using static Konst;
 
-    partial class XClrQuery
+    public struct WfExecFlow : IDisposable
     {
-        [Op, MethodImpl(Inline)]
-        public static bool IsConcrete(this MethodInfo src)
-            => !src.IsAbstract && !src.ContainsGenericParameters;
+        readonly IWfShell Wf;
+
+        public WfExecToken Token {get;}
+
+        [MethodImpl(Inline)]
+        internal WfExecFlow(IWfShell wf, in WfExecToken token)
+        {
+            Wf = wf;
+            Token = token;
+        }
+
+        public void Dispose()
+            => Wf.Ran(this);
     }
 }

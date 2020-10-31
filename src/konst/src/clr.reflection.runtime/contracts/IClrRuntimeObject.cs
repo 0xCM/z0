@@ -10,26 +10,23 @@ namespace Z0
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface IClrMember
+    public interface IClrRuntimeObject
     {
-        MemberInfo Definition {get;}
+        ClrArtifactKind ClrKind {get;}
+
+        ClrArtifactKey ClrKey {get;}
+
     }
 
     [Free]
-    public interface IClrMember<D> : IClrMember
-        where D : MemberInfo
-
+    public interface IClrRuntimeObject<D> : IClrRuntimeObject
     {
-        new D Definition {get;}
-
-        MemberInfo IClrMember.Definition
-            => Definition;
+        D Definition {get;}
     }
 
     [Free]
-    public interface IClrMember<H,D> : IClrMember<D>
-        where D : MemberInfo
-        where H : struct, IClrMember<H,D>
+    public interface IClrRuntimeObject<H,D> : IClrRuntimeObject<D>
+        where H : IClrRuntimeObject<H,D>
     {
 
     }

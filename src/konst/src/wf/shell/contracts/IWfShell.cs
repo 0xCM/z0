@@ -198,11 +198,10 @@ namespace Z0
                 Raise(running(step, content, Ct));
         }
 
-        void Running<T>(T content)
-        {
-            if(Verbosity.Babble())
-                Raise(running(Host, content, Ct));
-        }
+        // {
+        //     if(Verbosity.Babble())
+        //         Raise(running(Host, content, Ct));
+        // }
 
         void ProcessingFile<T>(FS.FilePath src, T kind)
         {
@@ -226,12 +225,14 @@ namespace Z0
         void Running(CmdId cmd)
             => Raise(new RunningCmdEvent(cmd, Ct));
 
-        // ~ Ran
+        // ~ Flow
         // ~ ---------------------------------------------------------------------------
 
-        ExecutionFlow Running();
+        WfExecFlow Running();
 
-        ExecutionFlow Ran(ExecutionFlow src);
+        WfExecFlow Running<T>(T worker);
+
+        WfExecToken Ran(WfExecFlow src);
 
         void Ran();
 
@@ -250,7 +251,7 @@ namespace Z0
         void Ran2<T>(T content)
             => Raise(ran(Host, content, Ct));
 
-        void Ran2<T>(ExecutionFlow flow, T content)
+        void Ran2<T>(WfExecFlow flow, T content)
         {
             Raise(ran(Host, content, Ct));
             Ran(flow);

@@ -75,15 +75,6 @@ namespace Z0
             return new ApiHostCatalog(src, all.OrderBy(x => x.Method.MetadataToken));
         }
 
-        // [Op]
-        // static IEnumerable<ApiMember> HostedDirect(IApiHost src)
-        //     => from m in ApiQuery.DirectApiMethods(src)
-        //         let id = MultiDiviner.Service.Identify(m)
-        //         let im = new IdentifiedMethod(id,m)
-        //         let uri = OpUri.Define(ApiUriScheme.Type, src.Uri, m.Name, id)
-        //         let located = ClrDynamic.jit(im)
-        //         select new ApiMember(uri, located,  m.KindId());
-
         [Op]
         static ApiMember[] HostedDirect(IApiHost src)
         {
@@ -105,17 +96,6 @@ namespace Z0
             return members;
         }
 
-        // [Op]
-        // static IEnumerable<ApiMember> HostedGeneric(IApiHost src)
-        //     =>  from m in ApiQuery.GenericApiMethods(src)
-        //         from closure in ApiQuery.NumericClosureTypes(m)
-        //         let reified = m.MakeGenericMethod(closure)
-        //         let id = MultiDiviner.Service.Identify(reified)
-        //         let im = new IdentifiedMethod(id,m)
-        //         let uri = OpUri.Define(ApiUriScheme.Type, src.Uri, m.Name, id)
-        //         let located = ClrDynamic.jit(im)
-        //         select new ApiMember(uri, located, m.KindId());
-
         [Op]
         static ApiMember[] HostedGeneric(IApiHost src)
         {
@@ -125,7 +105,6 @@ namespace Z0
             var dst = span(members);
             for(var i=0u; i<count; i++)
             {
-
                 ref readonly var m = ref skip(methods,i);
                 var closure = ApiQuery.NumericClosureTypes(m);
                 var reified = m.MakeGenericMethod(closure);

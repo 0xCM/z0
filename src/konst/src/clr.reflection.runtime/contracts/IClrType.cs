@@ -14,20 +14,16 @@ namespace Z0
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     /// <summary>
-    /// Characterizes a model of a CLR type
+    /// Characterizes a model of a CLR type during runtime
     /// </summary>
     [Free]
-    public interface IClrType
+    public interface IClrRuntimeType : IClrRuntimeObject
     {
-        ClrTypeKind Kind {get;}
-
-        ClrArtifactKey Id {get;}
-
         /// <summary>
         /// Models of the types nested within the subject, if any
         /// </summary>
-        IEnumerable<IClrType> NestedTypes
-            => z.stream<IClrType>();
+        IEnumerable<IClrRuntimeType> NestedTypes
+            => z.stream<IClrRuntimeType>();
     }
 
     /// <summary>
@@ -35,16 +31,16 @@ namespace Z0
     /// </summary>
     /// <typeparam name="M">The reifying type</typeparam>
     [Free]
-    public interface IClrType<T> : IClrType
-        where T : struct, IClrType<T>
+    public interface IClrRuntimeType<T> : IClrRuntimeType
+        where T : struct, IClrRuntimeType<T>
     {
-        IClrType Generalized {get;}
+        IClrRuntimeType Generalized {get;}
 
         new IEnumerable<T> NestedTypes
             => z.stream<T>();
 
-        IEnumerable<IClrType> IClrType.NestedTypes
-            => NestedTypes.Cast<IClrType>();
+        IEnumerable<IClrRuntimeType> IClrRuntimeType.NestedTypes
+            => NestedTypes.Cast<IClrRuntimeType>();
     }
 
     /// <summary>
@@ -53,17 +49,16 @@ namespace Z0
     /// <typeparam name="M">The reified model type</typeparam>
     /// <typeparam name="T">The subject of the model</typeparam>
     [Free]
-    public interface IClrType<M,T> : IClrType<M>
-        where M : struct, IClrType<M>
+    public interface IClrRuntimeType<M,T> : IClrRuntimeType<M>
+        where M : struct, IClrRuntimeType<M>
     {
         /// <summary>
         /// The equivalent non-parametric model
         /// </summary>
         M Untyped {get;}
 
-        IClrType IClrType<M>.Generalized
+        IClrRuntimeType IClrRuntimeType<M>.Generalized
             => Untyped.Generalized;
-
     }
 
     /// <summary>
@@ -73,9 +68,9 @@ namespace Z0
     /// <typeparam name="M">The reifying type of the equivalent non-parametric model</typeparam>
     /// <typeparam name="T">The subject of the model</typeparam>
     [Free]
-    public interface IClrType<X,M,T> : IClrType<M,T>
-        where M : struct, IClrType<M>
-        where X : struct, IClrType<X,M,T>
+    public interface IClrRuntimeType<X,M,T> : IClrRuntimeType<M,T>
+        where M : struct, IClrRuntimeType<M>
+        where X : struct, IClrRuntimeType<X,M,T>
     {
 
     }

@@ -40,7 +40,7 @@ namespace Z0.Asm
         public static AsmRoutine routine(ApiCaptureBlock captured, AsmFxList src)
         {
             var code = new ApiCodeBlock(captured.OpUri, captured.Parsed);
-            var sig = captured.Method.Signature().Format();
+            var sig = captured.Method.Metadata().Format();
             return new AsmRoutine(captured.MetaUri, captured.OpUri, sig, code, captured.TermCode, src);
         }
 
@@ -48,7 +48,7 @@ namespace Z0.Asm
         public static AsmRoutine routine(ApiMemberCode member, AsmInstructions asm)
         {
             var code = new ApiCodeBlock(member.OpUri, member.Encoded);
-            var sig = member.Method.Signature().Format();
+            var sig = member.Method.Metadata().Format();
             return new AsmRoutine(member.MetaUri, member.OpUri, sig, code, member.TermCode, new AsmFxList(asm, member.Encoded));
         }
 

@@ -31,7 +31,7 @@ namespace Z0.Asm
         public Option<AsmRoutine> Decode(ApiCaptureBlock src)
             => from i in Decode(src.Parsed)
                 let block = asm.block(src.UriHex, i, src.TermCode)
-                select AsmServices.routine(src.MetaUri, src.OpUri, src.Method.Signature().Format(), block);
+                select AsmServices.routine(src.MetaUri, src.OpUri, src.Method.Metadata().Format(), block);
 
         public Option<AsmFxList> Decode(BasedCodeBlock src)
             => Decode(src.Encoded, src.Base).TryMap(x => asm.list(x, src));

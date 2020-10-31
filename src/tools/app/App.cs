@@ -94,8 +94,6 @@ namespace Z0
             EmitImageHeaders.run(Wf, EmitImageHeadersCmd.specify(Wf, build.ExeFiles().Array(), exeTarget));
         }
 
-            //ListBuildFiles(Wf, BuildArchiveSpecs.Runtime);
-
         static CmdResult ListBuildFiles(IWfShell wf, BuildArchiveSettings spec)
         {
             var archive = BuildArchive.create(wf, spec);
@@ -113,6 +111,18 @@ namespace Z0
 
         }
 
+        void EmitApiSummaries()
+        {
+            var api = Wf.Api;
+            var parts = api.PartIdentities;
+            var data = ApiSummaries.parts(Wf, parts);
+            var dst = ApiSummaries.target(Db);
+            Wf.EmittingTable(typeof(ApiSummaryInfo), dst);
+            ApiSummaries.emit(data,dst);
+            Wf.EmittedTable(typeof(ApiSummaryInfo), data.Length, dst);
+
+        }
+
         void RunAll()
         {
             EmitOpCodes();
@@ -123,6 +133,7 @@ namespace Z0
             EmitScripts();
             EmitAsmRefs();
             EmitPeHeaders();
+            EmitApiSummaries();
         }
 
         void ShowCases()
@@ -144,13 +155,33 @@ namespace Z0
 
         public unsafe void Run()
         {
-            var api = Wf.Api;
-            var parts = api.PartIdentities;
-            var data = ApiSummaries.parts(Wf, parts);
-            var dst = ApiSummaries.target(Db);
-            Wf.EmittingTable(typeof(ApiSummaryInfo), dst);
-            ApiSummaries.emit(data,dst);
-            Wf.EmittedTable(typeof(ApiSummaryInfo), data.Length, dst);
+            var hosts = @readonly(Wf.Api.ApiHosts);
+            var kHost = hosts.Length;
+            for(var i=0; i<kHost; i++)
+            {
+                var catalog = ApiCatalogs.members(skip(hosts,i));
+                var members = catalog.Members;
+                var kMember = members.Length;
+                for(var j=0; j<kMember; j++)
+                {
+                    ref readonly var member = ref skip(members,i);
+                    var method = member.Method;
+                    if(method.IsNonGeneric())
+                    {
+                        try
+                        {
+                            var metdata = method.Metadata();
+                            // var sig = ClrSigs.resolve(member.Method);
+                            // var row = delimit(method.Signature(), sig);
+                            // Wf.Row(row);
+                        }
+                        catch(Exception e)
+                        {
+                            Wf.Error($"{method.Name}:{e.Message}");
+                        }
+                    }
+                }
+            }
         }
 
 

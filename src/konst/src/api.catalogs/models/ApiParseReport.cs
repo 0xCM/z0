@@ -37,7 +37,7 @@ namespace Z0
                     Length : extract.Encoded.Length,
                     TermCode: extract.TermCode,
                     Uri : extract.OpUri,
-                    OpSig : extract.Method.Signature().Format(),
+                    OpSig : extract.Method.Metadata().Format(),
                     Data : extract.Encoded
                 );
 

@@ -12,6 +12,7 @@ namespace Z0
         /// Selects the public types from a stream
         /// </summary>
         /// <param name="src">The source stream</param>
+        [Op]
         public static Type[] Public(this Type[] src)
             => src.Where(t => t.IsPublic);
     }

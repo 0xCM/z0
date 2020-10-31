@@ -19,6 +19,5 @@ namespace Z0
         public static MethodInfo[] Tagged<A>(this MethodInfo[] src)
             where A : Attribute
                 => src.Where(m => m.Tagged<A>());
-
     }
 }

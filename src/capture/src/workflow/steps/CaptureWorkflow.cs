@@ -20,7 +20,6 @@ namespace Z0
 
         public static CaptureWorkflowMain create(IAsmWf asm)
             => new CaptureWorkflowMain(asm, new CaptureWorkflow());
-
     }
 
     public readonly ref struct CaptureWorkflowMain
@@ -65,8 +64,6 @@ namespace Z0
             try
             {
                 ManageCapture.create(State).Run(Wf);
-                // using var host = new ManageCaptureStep(State, Wf.Ct);
-                // host.Run();
             }
             catch(Exception e)
             {

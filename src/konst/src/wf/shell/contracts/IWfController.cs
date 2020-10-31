@@ -5,15 +5,20 @@
 namespace Z0
 {
     using System;
-    using System.Reflection;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
 
     using static Konst;
 
-    partial class XClrQuery
+
+    public interface IWfController
     {
-        [Op, MethodImpl(Inline)]
-        public static bool IsConcrete(this MethodInfo src)
-            => !src.IsAbstract && !src.ContainsGenericParameters;
+        Assembly Component {get;}
+    }
+
+    public interface IWfControl<P> : IWfController
+        where P : IPart<P>, new()
+    {
+
     }
 }

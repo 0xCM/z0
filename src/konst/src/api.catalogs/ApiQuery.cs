@@ -45,7 +45,6 @@ namespace Z0
             return new ApiMemberCodeIndex(create(apicode.Select(c => (c.Id, c))));
         }
 
-
         /// <summary>
         /// Creates an operation index from a uri bitstream
         /// </summary>

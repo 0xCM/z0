@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
 
     using Z0.Asm;
 
@@ -66,28 +67,40 @@ namespace Z0
             Wf.Disposed();
         }
 
+        void RunPrimary()
+        {
+            using var flow = Wf.Running(nameof(CaptureParts));
+            CaptureParts.create().Run(Wf, State);
+        }
+
+        void RunImm()
+        {
+            using var flow = Wf.Running(nameof(SpecializeImm));
+            using var step = new SpecializeImmStep(Wf, new SpecializeImm(), State.Asm, State.Formatter, State.RoutineDecoder, Wf.Db().CaptureRoot());
+            step.ClearArchive(Parts);
+            step.EmitRefined(Parts);
+        }
+
+        void RunEvaluate()
+        {
+            using var flow = Wf.Running(nameof(Evaluate));
+            var evaluate = Evaluate.control(App, Wf.Paths.AppCaptureRoot, Pow2.T14);
+            evaluate.Execute();
+        }
+
+        void EmitReports()
+        {
+            using var flow = Wf.Running(MethodInfo.GetCurrentMethod().Name);
+            EmitCodeBlockReport.create().Run(Wf);
+        }
+
         public void Run()
         {
-            var flow = Wf.Running();
-
-            CaptureParts.create().Run(Wf, State);
-
-            {
-                using var step = new SpecializeImmStep(Wf, new SpecializeImm(), State.Asm, State.Formatter, State.RoutineDecoder, Wf.Db().CaptureRoot());
-                step.ClearArchive(Parts);
-                step.EmitRefined(Parts);
-            }
-
-            {
-                var inner = Wf.Running();
-                var evaluate = Evaluate.control(App, Wf.Paths.AppCaptureRoot, Pow2.T14);
-                evaluate.Execute();
-                Wf.Ran(inner);
-            }
-
-            EmitCodeBlockReport.create().Run(Wf);
-
-            Wf.Ran(flow);
+            using var flow = Wf.Running();
+            RunPrimary();
+            RunImm();
+            RunEvaluate();
+            EmitReports();
         }
     }
 }

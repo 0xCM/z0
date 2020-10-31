@@ -7,11 +7,10 @@ namespace Z0
     using System;
     using System.Reflection;
     using System.Runtime.CompilerServices;
-
     using static Konst;
 
     [ApiDataType(ApiNames.ClrMember, true)]
-    public readonly struct ClrMember : IClrMember<ClrMember, MemberInfo>
+    public readonly struct ClrMember : IClrRuntimeMember<ClrMember, MemberInfo>
     {
         [MethodImpl(Inline)]
         public static ClrMember from(MemberInfo src)
@@ -23,11 +22,12 @@ namespace Z0
         public ClrMember(MemberInfo src)
             => Definition = src;
 
-        public ClrArtifactKey Id
+        public ClrArtifactKey ClrKey
         {
             [MethodImpl(Inline)]
             get => Definition.MetadataToken;
         }
+
 
         public ClrMemberName Name
         {
@@ -36,8 +36,12 @@ namespace Z0
         }
 
         [Ignore]
-        MemberInfo IClrMember<MemberInfo>.Definition
+        MemberInfo IClrRuntimeObject<MemberInfo>.Definition
             => Definition;
+
+        [Ignore]
+        ClrArtifactKind IClrRuntimeObject.ClrKind
+            => throw new NotImplementedException();
 
         [MethodImpl(Inline)]
         public string Format()

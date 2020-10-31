@@ -10,31 +10,6 @@ namespace Z0
 
     using static Konst;
 
-    public interface IWfController
-    {
-        Assembly Component {get;}
-    }
-
-    public interface IWfControl<P> : IWfController
-        where P : IPart<P>, new()
-    {
-
-    }
-
-    public readonly struct WfController<P> : IWfControl<P>
-        where P : IPart<P>, new()
-    {
-        public Assembly Component
-        {
-            [MethodImpl(Inline)]
-            get => typeof(P).Assembly;
-        }
-
-        [MethodImpl(Inline)]
-        public static implicit operator WfController(WfController<P> src)
-            => new WfController(src.Component);
-    }
-
     public readonly struct WfController
     {
         public Assembly Component {get;}

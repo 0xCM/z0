@@ -62,50 +62,6 @@ namespace Z0
             => new ClrArtifactKey(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator ClrArtifactKey(int src)
-            => new ClrArtifactKey(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator ClrArtifactKey(uint src)
-            => new ClrArtifactKey(src);
-
-        [MethodImpl(Inline)]
-        public static bool operator ==(ClrArtifactKey x, ClrArtifactKey y)
-            => x.Equals(y);
-
-        [MethodImpl(Inline)]
-        public static bool operator !=(ClrArtifactKey x, ClrArtifactKey y)
-            => !x.Equals(y);
-
-        [MethodImpl(Inline)]
-        public static implicit operator ClrArtifactKey(Type src)
-            => from(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator ClrArtifactKey(FieldInfo src)
-            => from(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator ClrArtifactKey(PropertyInfo src)
-            => from(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator ClrArtifactKey(MethodInfo src)
-            => from(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator ClrArtifactKey(ParameterInfo src)
-            => from(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator uint(ClrArtifactKey src)
-            => (uint)src.Data.Location;
-
-        [MethodImpl(Inline)]
-        public static explicit operator int(ClrArtifactKey src)
-            => (int)src.Data.Location;
-
-        [MethodImpl(Inline)]
         internal ClrArtifactKey(Type src)
             : this(src.MetadataToken)
         {
@@ -156,15 +112,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         internal ClrArtifactKey(int token)
-        {
-            Data = (uint)token;
-        }
+            => Data = (uint)token;
 
         [MethodImpl(Inline)]
         internal ClrArtifactKey(uint token)
-        {
-            Data = token;
-        }
+            => Data = token;
 
         public override string ToString()
             => Format();
@@ -178,6 +130,51 @@ namespace Z0
 
         public override bool Equals(object src)
             => src is ClrArtifactKey t && Equals(t);
+
+
+         [MethodImpl(Inline)]
+        public static implicit operator ClrArtifactKey(int src)
+            => new ClrArtifactKey(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator ClrArtifactKey(uint src)
+            => new ClrArtifactKey(src);
+
+        [MethodImpl(Inline)]
+        public static bool operator ==(ClrArtifactKey x, ClrArtifactKey y)
+            => x.Equals(y);
+
+        [MethodImpl(Inline)]
+        public static bool operator !=(ClrArtifactKey x, ClrArtifactKey y)
+            => !x.Equals(y);
+
+        [MethodImpl(Inline)]
+        public static implicit operator ClrArtifactKey(Type src)
+            => from(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator ClrArtifactKey(FieldInfo src)
+            => from(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator ClrArtifactKey(PropertyInfo src)
+            => from(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator ClrArtifactKey(MethodInfo src)
+            => from(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator ClrArtifactKey(ParameterInfo src)
+            => from(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator uint(ClrArtifactKey src)
+            => (uint)src.Data.Location;
+
+        [MethodImpl(Inline)]
+        public static explicit operator int(ClrArtifactKey src)
+            => (int)src.Data.Location;
 
         public static ClrArtifactKey Empty
             => default;

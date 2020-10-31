@@ -14,7 +14,7 @@ namespace Z0
     partial struct ClrQuery
     {
         [Op]
-        public static string format(in MethodSig src)
+        public static string format(in MethodMetadata src)
         {
             var dst = Buffers.text();
             render(src, dst);
@@ -22,7 +22,7 @@ namespace Z0
         }
 
         [Op]
-        public static void render(in MethodSig src, ITextBuffer dst)
+        public static void render(in MethodMetadata src, ITextBuffer dst)
         {
             dst.Append(src.ReturnType.Format());
             dst.Append(Chars.Space);

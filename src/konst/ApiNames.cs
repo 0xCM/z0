@@ -166,6 +166,9 @@ readonly struct ApiNames
 
     public const string ClrEnums = ClrMetadata + dot + enums;
 
+    public const string ClrSigs = ClrMetadata + dot + signatures;
+
+    const string signatures = nameof(signatures);
 
     // ~~ Delegates
     // ~~ -----------------------------------------------------------------------------------------

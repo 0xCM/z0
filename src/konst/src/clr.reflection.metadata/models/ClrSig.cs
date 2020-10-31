@@ -10,16 +10,29 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct ClrSig
+    public readonly struct ClrSig : ITextual
     {
         public ClrArtifactKind ElementType {get;}
 
-        public byte[] Data {get;}
+        public BinaryCode Data {get;}
 
-        public ClrSig(ClrArtifactKind kind, byte[] src)
+        [MethodImpl(Inline)]
+        public ClrSig(ClrArtifactKind kind, BinaryCode src)
         {
             ElementType = kind;
             Data = src;
         }
+
+        public static ClrSig Empty
+        {
+            [MethodImpl(Inline)]
+            get => new ClrSig(0, BinaryCode.Empty);
+        }
+
+        public string Format()
+            => Data.Format();
+
+        public override string ToString()
+            => Format();
     }
 }

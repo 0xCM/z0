@@ -5,15 +5,22 @@
 namespace Z0
 {
     using System;
-    using System.Reflection;
     using System.Runtime.CompilerServices;
 
     using static Konst;
 
-    partial class XClrQuery
+    using D = WfDelegates;
+
+    public readonly struct WfReceiver : IWfEventReceiver
     {
-        [Op, MethodImpl(Inline)]
-        public static bool IsConcrete(this MethodInfo src)
-            => !src.IsAbstract && !src.ContainsGenericParameters;
+        readonly D.EventHandler Fx;
+
+        [MethodImpl(Inline)]
+        internal WfReceiver(D.EventHandler fx)
+            => Fx = fx;
+
+        [MethodImpl(Inline)]
+        public void Accept(in IWfEvent src)
+            => Fx(src);
     }
 }

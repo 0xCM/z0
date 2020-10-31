@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The methods to examine</param>
         [Op]
-        public static IEnumerable<MethodInfo> ClosedGeneric(this MethodInfo[] src)
+        public static MethodInfo[] ClosedGeneric(this MethodInfo[] src)
             => src.Where(t => t.IsConstructedGenericMethod);
     }
 }

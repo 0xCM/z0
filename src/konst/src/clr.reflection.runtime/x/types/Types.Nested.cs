@@ -12,6 +12,7 @@ namespace Z0
         /// Selects all nested types declared by an array of source types
         /// </summary>
         /// <param name="src">The source types</param>
+        [Op]
         public static Type[] Nested(this Type[] src)
             => src.Where(t => t.IsNested);
     }

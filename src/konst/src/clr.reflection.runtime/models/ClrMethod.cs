@@ -7,11 +7,10 @@ namespace Z0
     using System;
     using System.Reflection;
     using System.Runtime.CompilerServices;
-
     using static Konst;
 
     [ApiDataType(ApiNames.ClrMethod, true)]
-    public readonly struct ClrMethod : IClrMember<ClrMethod,MethodInfo>
+    public readonly struct ClrMethod : IClrRuntimeMember<ClrMethod,MethodInfo>
     {
         [MethodImpl(Inline)]
         public static ClrMethod from(MethodInfo src)
@@ -23,7 +22,7 @@ namespace Z0
         public ClrMethod(MethodInfo src)
             => Definition = src;
 
-        public ClrArtifactKey Id
+        public ClrArtifactKey ClrKey
         {
             [MethodImpl(Inline)]
             get => Definition.MetadataToken;
@@ -68,8 +67,12 @@ namespace Z0
             => Definition.Name;
 
         [Ignore]
-        MethodInfo IClrMember<MethodInfo>.Definition
+        MethodInfo IClrRuntimeObject<MethodInfo>.Definition
             => Definition;
+
+        [Ignore]
+        ClrArtifactKind IClrRuntimeObject.ClrKind
+            => ClrArtifactKind.Method;
 
         public override bool Equals(object obj)
             => Definition.Equals(obj);

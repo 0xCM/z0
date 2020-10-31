@@ -22,6 +22,7 @@ namespace Z0
             => describe(wf.WithRandom(Polyrand.@default())
                  .WithHost(WfSelfHost.create(typeof(App)))
                  .WithVerbosity(LogLevel.Babble));
+
         static void Run(string[] args)
         {
             using var wf = Configure(WfShell.create(args));

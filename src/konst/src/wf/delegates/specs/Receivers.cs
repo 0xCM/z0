@@ -4,8 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Security;
+
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
@@ -20,4 +19,17 @@ namespace Z0
     [Free]
     public delegate void EventReceiver<E>(in E e)
         where E : struct, IDataEvent;
+
+    partial struct WfDelegates
+    {
+        [Free]
+        public delegate void DataReceiver<C,T>(C context,T data);
+
+        [Free]
+        public delegate void EventReceiver(IDataEvent e);
+
+        [Free]
+        public delegate void EventReceiver<E>(in E e)
+            where E : struct, IDataEvent;
+    }
 }

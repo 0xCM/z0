@@ -15,6 +15,7 @@ namespace Z0
         /// Selects the static methods from a stream
         /// </summary>
         /// <param name="src">The methods to examine</param>
+        [Op]
         public static MethodInfo[] Static(this MethodInfo[] src)
             => src.Where(x => x.IsStatic);
     }

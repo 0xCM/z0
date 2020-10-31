@@ -30,7 +30,7 @@ namespace Z0
             => db.IndexFile(id);
 
         [MethodImpl(Inline), Op]
-        public static ApiSummaryInfo row(in ApiMetadataUri uri, in MethodSig sig)
+        public static ApiSummaryInfo row(in ApiMetadataUri uri, in MethodMetadata sig)
         {
             var dst = new ApiSummaryInfo();
             dst.Uri = uri;
@@ -47,7 +47,7 @@ namespace Z0
         {
             var ops = src;
             var identities = ops.Map(ApiIdentity.identify);
-            var sigs = ops.Map(x => x.Signature());
+            var sigs = ops.Map(x => x.Metadata());
             var count = ops.Length;
             var buffer = alloc<ApiSummaryInfo>(count);
             var dst = span(buffer);

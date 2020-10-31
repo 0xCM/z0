@@ -7,11 +7,10 @@ namespace Z0
     using System;
     using System.Reflection;
     using System.Runtime.CompilerServices;
-
     using static Konst;
 
     [ApiDataType(ApiNames.ClrField, true)]
-    public readonly struct ClrField : IClrMember<ClrField,FieldInfo>
+    public readonly struct ClrField : IClrRuntimeMember<ClrField,FieldInfo>
     {
         [MethodImpl(Inline)]
         public static ClrField from(FieldInfo src)
@@ -23,7 +22,7 @@ namespace Z0
         public ClrField(FieldInfo src)
             => Definition = src;
 
-        public ClrArtifactKey Id
+        public ClrArtifactKey ClrKey
         {
             [MethodImpl(Inline)]
             get => Definition.MetadataToken;
@@ -45,8 +44,12 @@ namespace Z0
             => Definition.Name;
 
         [Ignore]
-        FieldInfo IClrMember<FieldInfo>.Definition
+        FieldInfo IClrRuntimeObject<FieldInfo>.Definition
             => Definition;
+
+        [Ignore]
+        ClrArtifactKind IClrRuntimeObject.ClrKind
+            => ClrArtifactKind.Field;
 
         public override bool Equals(object obj)
             => Definition.Equals(obj);

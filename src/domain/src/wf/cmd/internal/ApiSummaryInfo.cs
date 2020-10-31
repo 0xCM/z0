@@ -16,7 +16,7 @@ namespace Z0
         const string RenderPattern = "| {0,-64} | {1}";
 
         [MethodImpl(Inline)]
-        public static ApiSummaryInfo define(in ApiMetadataUri uri, in MethodSig sig)
+        public static ApiSummaryInfo define(in ApiMetadataUri uri, in MethodMetadata sig)
         {
             var dst = new ApiSummaryInfo();
             dst.Uri = uri;
@@ -26,7 +26,7 @@ namespace Z0
 
         public ApiMetadataUri Uri;
 
-        public MethodSig Sig;
+        public MethodMetadata Sig;
 
         public string Format()
             => string.Format(RenderPattern, Uri,Sig);

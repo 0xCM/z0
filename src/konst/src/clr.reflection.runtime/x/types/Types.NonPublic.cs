@@ -12,6 +12,7 @@ namespace Z0
         /// Selects the non-public types from a stream
         /// </summary>
         /// <param name="src">The source stream</param>
+        [Op]
         public static Type[] NonPublic(this Type[] src)
             => src.Where(t => !t.IsPublic);
     }

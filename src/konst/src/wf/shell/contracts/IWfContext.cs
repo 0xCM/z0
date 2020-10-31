@@ -24,7 +24,6 @@ namespace Z0
         CorrelationToken Ct
             => z.correlate(Controller.Id);
 
-
         ITestLogPaths TestLogPaths
             => new TestLogPaths();
 

@@ -14,7 +14,8 @@ namespace Z0
         /// Selects all static properties declared by the source types
         /// </summary>
         /// <param name="src">The types to search</param>
+        [Op]
         public static PropertyInfo[] StaticProperties(this Type[] src)
-            => src.SelectMany(x => x.StaticProperties()).ToArray();
+            => src.SelectMany(x => x.StaticProperties());
     }
 }

@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
 
     public readonly struct MemberAddress<T> : IAddressable<MemberAddress<T>, MemoryAddress>
-        where T : IClrMember
+        where T : IClrRuntimeMember
     {
         public T Member {get;}
 

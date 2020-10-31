@@ -9,10 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    /// <summary>
-    /// Identifies and describes a method that, whithin some useful scope, is unique
-    /// </summary>
-    public struct MethodSig : ITextual
+    public struct MethodMetadata : ITextual
     {
         public ClrArtifactKey MethodId;
 
@@ -30,7 +27,7 @@ namespace Z0
 
         public TypeParameters TypeParams;
 
-        public MethodSig(
+        public MethodMetadata(
             int MethodId,
             string DefiningAssembly,
             string DefiningModule,

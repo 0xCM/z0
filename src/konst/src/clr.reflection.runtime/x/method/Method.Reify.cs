@@ -19,7 +19,7 @@ namespace Z0
         /// </summary>
         /// <param name="m">The source method</param>
         /// <param name="args">The types over which to close the method</param>
-        [MethodImpl(Inline)]
+        [Op]
         public static MethodInfo Reify(this MethodInfo m, params Type[] args)
         {
             if(m.IsGenericMethodDefinition)
