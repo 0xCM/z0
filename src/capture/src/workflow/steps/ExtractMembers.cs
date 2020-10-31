@@ -21,25 +21,25 @@ namespace Z0
     {
         readonly IWfShell Wf;
 
-        readonly ExtractMembersHost Host;
+        readonly WfHost Host;
 
         readonly CorrelationToken Ct;
 
         readonly MemberExtractor Extractor;
 
         [MethodImpl(Inline)]
-        public ExtractMembers(IWfShell wf, ExtractMembersHost host)
+        public ExtractMembers(IWfShell wf, WfHost host)
         {
-            Wf = wf;
             Host = host;
+            Wf = wf.WithHost(host);
             Ct = Wf.Ct;
             Extractor = ApiCodeExtractors.service(ApiCodeExtractors.DefaultBufferLength);
-            Wf.Created(Host);
+            Wf.Created();
         }
 
         public void Dispose()
         {
-            Wf.Disposed(Host);
+            Wf.Disposed();
         }
 
         public ApiMemberExtract[] Extract(IApiHost host)
@@ -50,21 +50,20 @@ namespace Z0
             }
             catch(Exception e)
             {
-                Wf.Error(Host, e);
+                Wf.Error(e);
                 return sys.empty<ApiMemberExtract>();
             }
         }
 
         public ApiMemberExtract[] Extract(ApiDataTypes types)
         {
-            var extracted = sys.empty<ApiMemberExtract>();
             try
             {
                 return Extractor.Extract(ApiMemberJit.jit(types));
             }
             catch(Exception e)
             {
-                Wf.Error(Host, e);
+                Wf.Error(e);
                 return sys.empty<ApiMemberExtract>();
             }
         }

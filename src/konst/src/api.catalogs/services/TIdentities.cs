@@ -8,8 +8,5 @@ namespace Z0
     {
         IMultiDiviner Diviner
             => MultiDiviner.Service;
-
-        MemberLocator Locator
-            => MemberLocator.Service;
     }
 }

@@ -10,8 +10,6 @@ namespace Z0
     using System.Reflection;
     using System.Collections.Generic;
 
-    using Z0.Events;
-
     using static Konst;
     using static z;
 
@@ -29,16 +27,6 @@ namespace Z0
             var direct = JitLocatedDirect(src).Array();
             var generic = JitGeneric(src).Array();
             var all = direct.Concat(generic).Array();
-            return all.OrderBy(x => x.Address);
-        }
-
-        public static ApiMembers jit(IApiHost[] src, IWfEventSink sink)
-        {
-            var xyz = src.Where(h => h.IsDataType).Cast<ApiDataType>().GroupBy(x => x.PartId).Select(x => new ApiDataTypes(x.Key, x.ToArray())).Array();
-            var datatypes = jit(xyz);
-            var direct = JitDirectMembers(src, sink);
-            var generic = JitGenericMembers(src, sink);
-            var all = datatypes.Concat(direct).Concat(generic).Array();
             return all.OrderBy(x => x.Address);
         }
 
@@ -77,28 +65,14 @@ namespace Z0
             return collected;
         }
 
-        public static ApiMember[] JitGenericMembers(IApiHost[] src, IWfEventSink sink)
-            => members(JitGeneric(src, sink));
-
-        public static HostedMethod[] JitDirect(IApiHost[] src, IWfEventSink sink)
-        {
-            var methods = DirectMethods(src, sink);
-            var located = methods.Select(m => m.WithLocation(Root.address(Jit(m.Method))));
-            Array.Sort(located);
-            return located;
-        }
-
-        public static ApiMember[] JitDirectMembers(IApiHost[] src, IWfEventSink sink)
-            => members(JitDirect(src, sink));
-
-        public static HostedMethod[] JitGeneric(IApiHost[] src, IWfEventSink sink)
-        {
-            var methods = GenericMethods(src, sink);
-            var closed = methods.SelectMany(m => (from t in ApiQuery.NumericClosureTypes(m.Method) select new HostedMethod(m.Host, m.Method.MakeGenericMethod(t))));
-            var located = closed.Select(m => m.WithLocation(Root.address(Jit(m.Method))));
-            Array.Sort(located);
-            return located;
-        }
+        // public static HostedMethod[] JitGeneric(IApiHost[] src, IWfEventSink sink)
+        // {
+        //     var methods = GenericMethods(src, sink);
+        //     var closed = methods.SelectMany(m => (from t in ApiQuery.NumericClosureTypes(m.Method) select new HostedMethod(m.Host, m.Method.MakeGenericMethod(t))));
+        //     var located = closed.Select(m => m.WithLocation(z.address(Jit(m.Method))));
+        //     Array.Sort(located);
+        //     return located;
+        // }
 
         public static ApiMember[] members(HostedMethod[] located)
         {
@@ -130,41 +104,25 @@ namespace Z0
                 let kid = m.Method.KindId()
                 from t in ApiQuery.NumericClosureTypes(m.Method)
                 let reified = m.Method.MakeGenericMethod(t)
-                let address = Root.address(Jit(reified))
+                let address = z.address(Jit(reified))
                 let id = Diviner.Identify(reified)
                 let uri = OpUri.Define(ApiUriScheme.Located, src.Uri, m.Method.Name, id)
                 select new ApiMember(uri, reified, kid, address)).Array();
 
-
-        public static HostedMethod[] DirectMethods(IApiHost[] src, IWfEventSink broker)
-        {
-            var dst = z.list<HostedMethod>();
-            foreach(var host in src)
-            {
-                var methods = ApiQuery.DirectMethods(host);
-                if(methods.Length != 0)
-                {
-                    broker.Deposit(new MethodsPrepared(WfActor.create(), host.Uri, methods.Length, correlate(0ul)));
-                    dst.AddRange(methods);
-                }
-            }
-            return dst.ToArray();
-        }
-
-        public static HostedMethod[] GenericMethods(IApiHost[] src, IWfEventSink broker)
-        {
-            var dst = z.list<HostedMethod>();
-            foreach(var host in src)
-            {
-                var methods = ApiQuery.GenericMethods(host);
-                if(methods.Length != 0)
-                {
-                    broker.Deposit(new MethodsPrepared(WfActor.create(), host.Uri, methods.Length, correlate(0ul)));
-                    dst.AddRange(methods);
-                }
-            }
-            return dst.ToArray();
-        }
+        // public static HostedMethod[] GenericMethods(IApiHost[] src, IWfEventSink broker)
+        // {
+        //     var dst = z.list<HostedMethod>();
+        //     foreach(var host in src)
+        //     {
+        //         var methods = ApiQuery.GenericMethods(host);
+        //         if(methods.Length != 0)
+        //         {
+        //             broker.Deposit(new MethodsPrepared(WfActor.create(), host.Uri, methods.Length, correlate(0ul)));
+        //             dst.AddRange(methods);
+        //         }
+        //     }
+        //     return dst.ToArray();
+        // }
 
         static IMultiDiviner Diviner
             => MultiDiviner.Service;

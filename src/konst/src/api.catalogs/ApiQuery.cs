@@ -20,10 +20,6 @@ namespace Z0
     [ApiHost(ApiNames.ApiQuery, true)]
     public readonly partial struct ApiQuery
     {
-        /// <summary>
-        /// Creates a view over a specified catalog
-        /// </summary>
-        /// <param name="src">The catalog to query</param>
         [MethodImpl(Inline), Op]
         public static ApiPartCatalogQuery catalog(IApiPartCatalog src)
             => new ApiPartCatalogQuery(src);
@@ -174,15 +170,7 @@ namespace Z0
         }
 
         [Op]
-        public static ApiHostMemberCode code(IApiMemberLocator locator, ISystemApiCatalog api, ApiHostUri host, FilePath src)
-        {
-            var code = index(ApiHexReader.Service.Read(src));
-            var members = index(ApiCatalogs.members(api.FindHost(host).Require()));
-            return new ApiHostMemberCode(host, index(members, code));
-        }
-
-        [Op]
-        public static ApiHostMemberCode code(IApiMemberLocator locator, ISystemApiCatalog api, ApiHostUri host, FolderPath root)
+        public static ApiHostMemberCode code(ISystemApiCatalog api, ApiHostUri host, FolderPath root)
         {
             var members = ApiCatalogs.members(api.FindHost(host).Require());
             var idx = ApiQuery.index(members);

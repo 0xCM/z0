@@ -45,9 +45,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public ApiMemberExtract[] Extract(IApiHost src, IWfBroker broker)
             => ApiCodeExtractors.extract(ApiMemberJit.jit(src), Buffer);
-
-        [MethodImpl(Inline)]
-        public ApiMemberExtract[] Extract(IApiHost[] src, IWfBroker broker)
-            => ApiCodeExtractors.extract(ApiMemberJit.jit(src, broker.Sink), Buffer);
     }
 }

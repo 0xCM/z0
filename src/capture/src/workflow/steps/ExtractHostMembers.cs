@@ -49,7 +49,7 @@ namespace Z0
 
         public void Run()
         {
-            Wf.Running();
+            using var flow = Wf.Running();
 
             try
             {
@@ -61,8 +61,6 @@ namespace Z0
             {
                 Wf.Error(e);
             }
-
-            Wf.Ran();
         }
     }
 }

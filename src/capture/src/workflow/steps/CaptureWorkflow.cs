@@ -57,20 +57,9 @@ namespace Z0
 
         public void Run()
         {
-            var flow = Wf.Running();
-
+            using var flow = Wf.Running();
             Wf.Status(enclose(Wf.Api.PartIdentities));
-
-            try
-            {
-                ManageCapture.create(State).Run(Wf);
-            }
-            catch(Exception e)
-            {
-                Wf.Error(e);
-            }
-
-            Wf.Ran(flow);
+            ManageCapture.create(State).Run(Wf);
         }
     }
 }

@@ -33,15 +33,12 @@ namespace Z0
                 for(var i=0u; i<count; i++)
                 {
                     ref readonly var parsed = ref skip(view,i);
-
                     var cil = ClrDynamic.cil(parsed.Address, parsed.OpUri, parsed.Method);
                     writer.WriteLine(cil.Format());
                 }
 
                 wf.EmittedFile(src, count, dst);
             }
-
-            //EmitDecoded(wf, src, out var _);
 
             return ref dst;
         }
