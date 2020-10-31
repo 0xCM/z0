@@ -51,6 +51,12 @@ namespace Z0
         MethodInfo[] Operations {get;}
 
         /// <summary>
+        /// The component's manifest module
+        /// </summary>
+        Module ManifestModule
+            => Owner.ManifestModule;
+
+        /// <summary>
         /// Specifies whether the catalog contains content from an identified assembly
         /// </summary>
         bool IsIdentified

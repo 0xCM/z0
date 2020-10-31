@@ -53,7 +53,7 @@ namespace Z0
             => entity(in src);
 
         [Op]
-        public static ApiHostMemberEntities entities(in ApiHostMembers src)
+        public static ApiHostMemberEntities entities(in ApiHostCatalog src)
         {
             var dst = new ApiHostMemberEntities();
             dst.Host = src.Host.Uri;

@@ -87,7 +87,7 @@ namespace Z0
         [Op]
         public static void emit(IWfShell wf)
         {
-            var parts = ApiCatalogs.types(ClrTypeKind.Enum, wf.Api);
+            var parts = ApiQuery.types(ClrTypeKind.Enum, wf.Api);
             var target = wf.Db().Table(EnumLiteralRow.TableId);
             var dst = list<EnumLiteralRow>();
             for(var i=0; i<parts.Length; i++)

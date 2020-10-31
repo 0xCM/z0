@@ -22,6 +22,8 @@ readonly struct ApiNames
     // ~~ Api
     // ~~ -----------------------------------------------------------------------------------------
 
+    public const string ApiServices = api + dot + services;
+
     public const string ApiIdentity = api + dot + identity;
 
     public const string XApiIdentity = api + dot + identity + dot + extensions;

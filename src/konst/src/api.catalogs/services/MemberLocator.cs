@@ -17,10 +17,10 @@ namespace Z0
         public static MemberLocator Service
             => default;
 
-        public static ApiHostMembers locate(IApiHost src)
+        public static ApiHostCatalog locate(IApiHost src)
             => api.members(src);
 
-        public ApiHostMembers Locate(IApiHost src)
+        public ApiHostCatalog Locate(IApiHost src)
             => api.members(src);
     }
 }

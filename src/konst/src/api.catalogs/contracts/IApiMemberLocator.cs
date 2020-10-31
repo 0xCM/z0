@@ -9,6 +9,6 @@ namespace Z0
     [Free]
     public interface IApiMemberLocator
     {
-        ApiHostMembers Locate(IApiHost src);
+        ApiHostCatalog Locate(IApiHost src);
     }
 }

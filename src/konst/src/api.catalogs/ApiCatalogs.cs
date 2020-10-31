@@ -18,135 +18,126 @@ namespace Z0
     [ApiHost(ApiNames.ApiCatalogs, true)]
     public readonly struct ApiCatalogs
     {
+        /// <summary>
+        /// Creates a system-level api catalog over a set of path-identified components
+        /// </summary>
+        /// <param name="paths">The source paths</param>
         [Op]
-        public static IDictionary<MethodInfo,Type> ClosureProviders(IEnumerable<Type> src)
+        public static SystemApiCatalog system(FS.Files paths)
+            => new SystemApiCatalog(parts(paths.Data));
+
+        [Op]
+        public static ISystemApiCatalog siblings(Assembly src, PartId[] parts)
         {
-            var query = from t in src
-                        from m in t.DeclaredStaticMethods()
-                        let tag = m.Tag<ClosureProviderAttribute>()
-                        where tag.IsSome()
-                        select (m, tag.Value.ProviderType);
-            return query.ToDictionary();
+            var path = FS.path(src.Location).FolderPath;
+            var managed = path.Exclude("System.Private.CoreLib").Where(f => FS.managed(f));
+            var catalog =
+                parts.Length != 0
+                ? new SystemApiCatalog(system(managed).Parts.Where(x => parts.Contains(x.Id)))
+                : system(managed);
+            return catalog;
         }
 
+        /// <summary>
+        /// Creates a system-level api catalog over a specified component set
+        /// </summary>
+        /// <param name="src">The source components</param>
         [Op]
-        public static ApiHostMembers members(IApiHost src)
-        {
-            var generic = HostedGeneric(src);
-            var direct = HostedDirect(src);
-            var all = direct.Concat(generic).Array();
-            return new ApiHostMembers(src, all.OrderBy(x => x.Method.MetadataToken));
-        }
-
-        [Op]
-        static IEnumerable<ApiMember> HostedDirect(IApiHost src)
-            => from m in ApiQuery.DirectApiMethods(src)
-                let id = MultiDiviner.Service.Identify(m)
-                let im = new IdentifiedMethod(id,m)
-                let uri = OpUri.Define(ApiUriScheme.Type, src.Uri, m.Name, id)
-                let located = ClrDynamic.jit(im)
-                select new ApiMember(uri, located,  m.KindId());
-
-        [Op]
-        static IEnumerable<ApiMember> HostedGeneric(IApiHost src)
-            =>  from m in ApiQuery.GenericApiMethods(src)
-                from closure in ApiQuery.NumericClosureTypes(m)
-                let reified = m.MakeGenericMethod(closure)
-                let id = MultiDiviner.Service.Identify(reified)
-                let im = new IdentifiedMethod(id,m)
-                let uri = OpUri.Define(ApiUriScheme.Type, src.Uri, m.Name, id)
-                let located = ClrDynamic.jit(im)
-                select new ApiMember(uri, located, m.KindId());
-
-        [MethodImpl(Inline), Op]
-        public static ApiUriParser UriParser()
-            => new ApiUriParser();
-
-        [MethodImpl(Inline), Op]
-        public static ApiPartIdParser PartIdParser()
-            => new ApiPartIdParser();
-
-        [MethodImpl(Inline), Op]
-        public static LegalIdentityBuilder CodeIdentity()
-            => LegalIdentity(CodeIdentityOptions());
-
-        [MethodImpl(Inline), Op]
-        public static LegalIdentityBuilder FileIdentity()
-            => LegalIdentity(FileIdentityOptions());
-
-        [MethodImpl(Inline), Op]
-        public static LegalIdentityBuilder LegalIdentity(LegalIdentityOptions options)
-            => new LegalIdentityBuilder(options);
-
-        [MethodImpl(Inline), Op]
-        public static ApiIdentities IdentityManager(IWfShell wf)
-            => new ApiIdentities(wf);
-
-        [MethodImpl(Inline), Op]
-        static LegalIdentityOptions FileIdentityOptions()
-            => new LegalIdentityOptions(
-                TypeArgsOpen: Chars.LBracket,
-                TypeArgsClose: Chars.RBracket,
-                ArgsOpen: Chars.LParen,
-                ArgsClose: Chars.RParen,
-                ArgSep: Chars.Comma,
-                ModSep: IDI.ModSep);
-
-        [MethodImpl(Inline), Op]
-        internal static LegalIdentityOptions CodeIdentityOptions()
-            => new LegalIdentityOptions(
-            TypeArgsOpen: SymNot.Lt,
-            TypeArgsClose: SymNot.Gt,
-            ArgsOpen: SymNot.Circle,
-            ArgsClose: SymNot.Circle,
-            ArgSep: SymNot.Dot,
-            ModSep: (char)SymNotKind.Plus
-            );
-
-        [Op]
-        public static ApiPartCatalog part(IPart src)
-            => part(src.Owner);
-
-        [Op]
-        public static ApiPartCatalog part(Assembly src)
-            => new ApiPartCatalog(src.Id(), src, datatypes(src), apiHosts(src), svcHostTypes(src));
-
-        [Op]
-        static ApiPartCatalog[] parts(params IPart[] parts)
-            => parts.Select(part);
-
-        [Op]
-        static ISystemApiCatalog system(Assembly[] src)
+        public static ISystemApiCatalog system(Assembly[] src)
         {
             var candidates = src.Where(Q.isPart);
             var parts = candidates.Select(TryGetPart).Where(x => x.IsSome()).Select(x => x.Value).OrderBy(x => x.Id);
             return new SystemApiCatalog(parts);
         }
 
-        public static SystemApiCatalog system(FS.Files paths)
-            => new SystemApiCatalog(parts(paths.Data));
+        /// <summary>
+        /// Defines a <see cref='ApiPartCatalog'/> over a specified assembly
+        /// </summary>
+        /// <param name="src">The source assembly</param>
+        [Op]
+        public static IApiPartCatalog part(Assembly src)
+            => new ApiPartCatalog(src.Id(), src, datatypes(src), apiHosts(src), svcHostTypes(src));
 
+        /// <summary>
+        /// Defines a <see cref='ApiPartCatalog'/> over a specified part
+        /// </summary>
+        /// <param name="src">The source assembly</param>
+        [Op]
+        public static IApiPartCatalog part(IPart src)
+            => part(src.Owner);
 
         [Op]
-        public static KeyedValues<PartId,Type>[] types(ClrTypeKind kind, ISystemApiCatalog src)
+        public static ApiHostCatalog members(IApiHost src)
         {
-            switch(kind)
-            {
-                case ClrTypeKind.Enum:
-                    return enums(src);
-                default:
-                    return default;
-            }
+            var generic = HostedGeneric(src);
+            var direct = HostedDirect(src);
+            var all = direct.Concat(generic).Array();
+            return new ApiHostCatalog(src, all.OrderBy(x => x.Method.MetadataToken));
         }
 
+        // [Op]
+        // static IEnumerable<ApiMember> HostedDirect(IApiHost src)
+        //     => from m in ApiQuery.DirectApiMethods(src)
+        //         let id = MultiDiviner.Service.Identify(m)
+        //         let im = new IdentifiedMethod(id,m)
+        //         let uri = OpUri.Define(ApiUriScheme.Type, src.Uri, m.Name, id)
+        //         let located = ClrDynamic.jit(im)
+        //         select new ApiMember(uri, located,  m.KindId());
+
         [Op]
-        static KeyedValues<PartId,Type>[] enums(ISystemApiCatalog src)
+        static ApiMember[] HostedDirect(IApiHost src)
         {
-            var x = from part in  src.Parts
-                    let enums = part.Owner.Enums()
-                        orderby part.Id
-                        select Seq.keyed(part.Id, enums);
-            return x;
+            var methods = @readonly(ApiQuery.DirectApiMethods(src).Array());
+            var count = methods.Length;
+            var members = alloc<ApiMember>(count);
+            var dst = span(members);
+            for(var i=0u; i<count; i++)
+            {
+                ref readonly var m = ref skip(methods,i);
+                var id = MultiDiviner.Service.Identify(m);
+                var im = new IdentifiedMethod(id,m);
+                var uri = OpUri.Define(ApiUriScheme.Type, src.Uri, m.Name, id);
+                var located = ClrDynamic.jit(im);
+                var mKind = m.KindId();
+                var member = new ApiMember(uri, located,  mKind);
+                seek(dst,i) = member;
+            }
+            return members;
+        }
+
+        // [Op]
+        // static IEnumerable<ApiMember> HostedGeneric(IApiHost src)
+        //     =>  from m in ApiQuery.GenericApiMethods(src)
+        //         from closure in ApiQuery.NumericClosureTypes(m)
+        //         let reified = m.MakeGenericMethod(closure)
+        //         let id = MultiDiviner.Service.Identify(reified)
+        //         let im = new IdentifiedMethod(id,m)
+        //         let uri = OpUri.Define(ApiUriScheme.Type, src.Uri, m.Name, id)
+        //         let located = ClrDynamic.jit(im)
+        //         select new ApiMember(uri, located, m.KindId());
+
+        [Op]
+        static ApiMember[] HostedGeneric(IApiHost src)
+        {
+            var methods = @readonly(ApiQuery.GenericApiMethods(src).Array());
+            var count = methods.Length;
+            var members = alloc<ApiMember>(count);
+            var dst = span(members);
+            for(var i=0u; i<count; i++)
+            {
+
+                ref readonly var m = ref skip(methods,i);
+                var closure = ApiQuery.NumericClosureTypes(m);
+                var reified = m.MakeGenericMethod(closure);
+                var id = MultiDiviner.Service.Identify(reified);
+                var im = new IdentifiedMethod(id,m);
+                var uri = OpUri.Define(ApiUriScheme.Type, src.Uri, m.Name, id);
+                var located = ClrDynamic.jit(im);
+                var mKind = m.KindId();
+                var member = new ApiMember(uri, located, mKind);
+                seek(dst,i) = member;
+            }
+            return members;
         }
 
         /// <summary>

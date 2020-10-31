@@ -24,20 +24,11 @@ namespace Z0
         public static IApiHost Single(this IApiHost[] src, Type t)
             => src.Where(x => x.GetType() == t).Single();
     }
+
     [ApiHost("vex.examples.runner")]
     public sealed class VexExampleRunner: t_inx<VexExampleRunner>
     {
         uint Counter;
-
-        void CollectExamples()
-        {
-            var catalog = ApiCatalogs.part(typeof(VexExampleRunner).Assembly);
-            if(catalog.ApiHosts.Host(typeof(VexExamples), out var host))
-            {
-                var methods = host.DeclaredMethods;
-            }
-
-        }
 
         [Op]
         public uint Run1()

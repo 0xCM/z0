@@ -11,16 +11,16 @@ namespace Z0
     using static Konst;
 
     /// <summary>
-    /// Defines and index over <see cref='ApiMember'/> values for a specified <see cref='IApiHost'/>
+    /// Defines a catalog over <see cref='ApiMember'/> values for a specified <see cref='IApiHost'/>
     /// </summary>
-    public readonly struct ApiHostMembers : ITableSpan<ApiMember>
+    public readonly struct ApiHostCatalog : ITableSpan<ApiMember>
     {
         public IApiHost Host {get;}
 
         readonly TableSpan<ApiMember> Data;
 
         [MethodImpl(Inline)]
-        public ApiHostMembers(IApiHost host, params ApiMember[] src)
+        public ApiHostCatalog(IApiHost host, params ApiMember[] src)
         {
             Host = host;
             Data = src;

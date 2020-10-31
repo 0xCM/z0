@@ -11,6 +11,9 @@ namespace Z0
     using static Konst;
     using static z;
 
+    /// <summary>
+    /// Associates a collection of components along with a<see cref = 'ISystemApiCatalog'/>
+    /// </summary>
     public readonly struct ApiPartSet : IApiParts
     {
         /// <summary>
@@ -22,7 +25,7 @@ namespace Z0
 
         public Assembly[] Components {get;}
 
-        public SystemApiCatalog Api {get;}
+        public ISystemApiCatalog Api {get;}
 
         public ApiPartSet(FS.FolderPath src)
         {
@@ -36,7 +39,7 @@ namespace Z0
         {
             Source = FS.path(src.Location).FolderPath;
             ManagedSources = Source.Exclude("System.Private.CoreLib").Where(f => FS.managed(f));
-            Api =  parts.Length != 0 ? new SystemApiCatalog(ApiCatalogs.system(ManagedSources).Parts.Where(x => parts.Contains(x.Id))) : ApiCatalogs.system(ManagedSources);
+            Api = ApiCatalogs.siblings(src,parts);
             Components = Api.Components;
         }
 
@@ -53,8 +56,5 @@ namespace Z0
 
         Assembly[] IApiParts.Components
             => Components;
-
-        ISystemApiCatalog IApiParts.Api
-            => Api;
     }
 }
