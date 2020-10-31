@@ -12,24 +12,22 @@ namespace Z0
 
     public readonly struct FileTypeList
     {
-        readonly Type[] KindReps;
+        readonly Type[] FileTypes;
 
         [MethodImpl(Inline)]
         public FileTypeList(Type[] src)
-        {
-            KindReps = src;
-        }
+            => FileTypes = src;
 
         public uint Count
         {
             [MethodImpl(Inline)]
-            get => (uint)KindReps.Length;
+            get => (uint)FileTypes.Length;
         }
 
         public ReadOnlySpan<Type> Reps
         {
             [MethodImpl(Inline)]
-            get => KindReps;
+            get => FileTypes;
         }
     }
 }

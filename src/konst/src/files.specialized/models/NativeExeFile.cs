@@ -23,6 +23,9 @@ namespace Z0
         public FileModuleKind ModuleKind
             => FileModuleKind.NativeExe;
 
+        public FS.FileExt DefaultExt
+            =>  ArchiveFileKinds.Exe;
+
         [MethodImpl(Inline)]
         public static implicit operator FileModule(NativeExeFile src)
             => new FileModule(src.Path, src.ModuleKind);

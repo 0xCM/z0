@@ -9,22 +9,31 @@ namespace Z0
 
     using static Konst;
 
+    using api = NativeModules;
+
     /// <summary>
-    /// Identifies and represents a native static library
+    /// Represents a native dll
     /// </summary>
-    public readonly struct NativeLibFile : IFileModule<NativeLibFile>
+    public readonly struct NativeDllFile : IFileModule<NativeDllFile>
     {
         public FS.FilePath Path {get;}
 
+        public FileModuleKind ModuleKind
+            => FileModuleKind.NativeDll;
+
         [MethodImpl(Inline)]
-        public NativeLibFile(FS.FilePath path)
+        public NativeDllFile(FS.FilePath path)
             => Path = path;
 
-        public FileModuleKind ModuleKind
-            => FileModuleKind.NativeLib;
+        public FS.FileExt DefaultExt
+            =>  ArchiveFileKinds.Dll;
 
         [MethodImpl(Inline)]
-        public static implicit operator FileModule(NativeLibFile src)
+        public static implicit operator FileModule(NativeDllFile src)
             => new FileModule(src.Path, src.ModuleKind);
+
+        [MethodImpl(Inline)]
+        public NativeModule Load()
+            => api.load(Path);
     }
 }

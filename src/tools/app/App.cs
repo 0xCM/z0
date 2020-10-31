@@ -92,17 +92,11 @@ namespace Z0
 
         void EmitPeHeaders()
         {
-            var build = BuildArchiveFactory.Z(Wf);
+            var build = BuildArchives.create(Wf);
             var dllTarget = Wf.Db().Table(ImageSectionHeader.TableId, "z0.dll.headers");
             var exeTarget = Wf.Db().Table(ImageSectionHeader.TableId, "z0.exe.headers");
             EmitImageHeaders.run(Wf, EmitImageHeadersCmd.specify(Wf, build.DllFiles().Array(), dllTarget));
             EmitImageHeaders.run(Wf, EmitImageHeadersCmd.specify(Wf, build.ExeFiles().Array(), exeTarget));
-        }
-
-        static CmdResult ListBuildFiles(IWfShell wf, BuildArchiveSettings spec)
-        {
-            var archive = BuildArchive.create(wf, spec);
-            return  EmitFileListing.run(wf, EmitFileListing.specify(wf, spec.Label + ".artifacts", archive.Root, array(archive.Dll, archive.Exe, archive.Pdb, archive.Lib)));
         }
 
         void PrintArgs()

@@ -16,7 +16,6 @@ namespace Z0
         {
             public PathPart Name {get;}
 
-
             [MethodImpl(Inline)]
             public FileName(PathPart name)
                 => Name = name;

@@ -11,12 +11,12 @@ namespace Z0
     using static Konst;
 
     /// <summary>
-    /// Identifies and represents and managaged module that lacks an entry point
+    /// Represents a managed executable
     /// </summary>
-    public readonly struct ManagedDllFile : IFileModule<ManagedDllFile>
+    public readonly struct ManagedExeFile : IFileModule<ManagedExeFile>
     {
         /// <summary>
-        /// The file's path
+        /// The path to the represented file
         /// </summary>
         public FS.FilePath Path {get;}
 
@@ -26,17 +26,20 @@ namespace Z0
         public AssemblyName Name {get;}
 
         [MethodImpl(Inline)]
-        public ManagedDllFile(FS.FilePath path, AssemblyName name)
+        public ManagedExeFile(FS.FilePath path, AssemblyName name)
         {
             Path = path;
             Name = name;
         }
 
+        public FS.FileExt DefaultExt
+            =>  ArchiveFileKinds.Exe;
+
         public FileModuleKind ModuleKind
-            => FileModuleKind.ManagedDll;
+            => FileModuleKind.ManagedExe;
 
         [MethodImpl(Inline)]
-        public static implicit operator FileModule(ManagedDllFile src)
+        public static implicit operator FileModule(ManagedExeFile src)
             => new FileModule(src.Path, src.ModuleKind);
 
         public Assembly Load()

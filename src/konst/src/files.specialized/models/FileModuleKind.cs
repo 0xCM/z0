@@ -71,5 +71,4 @@ namespace Z0
         /// </summary>
         ManagedExe = Managed | Exe
     }
-
 }

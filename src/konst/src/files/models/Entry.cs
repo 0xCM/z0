@@ -13,13 +13,12 @@ namespace Z0
     public readonly struct FsEntry : IEquatable<FsEntry>, ITextual
     {
         const string FormatPattern = "{0}: {1}";
+        public readonly FS.PathPart Name;
 
         public readonly ObjectKind Kind;
 
-        public readonly AsciEncoded Name;
-
         [MethodImpl(Inline)]
-        public FsEntry(string name, ObjectKind kind)
+        public FsEntry(FS.PathPart name, ObjectKind kind)
         {
             Name = name;
             Kind = kind;

@@ -4,12 +4,13 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
     public interface IKindedFile<K>
     {
         K FileKind {get;}
+
+        FS.FileExt DefaultExt  => FS.FileExt.Empty;
     }
 }

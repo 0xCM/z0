@@ -12,15 +12,6 @@ namespace Z0
 
     using CK = FS.ChangeKind;
 
-    public struct FileSystemChange
-    {
-        public FS.ChangeKind ChangeKind;
-
-        public FS.ObjectKind ObjectKind;
-
-        public AsciEncoded ObjectName;
-    }
-
     public readonly struct ArchiveMonitor : IArchiveMonitor
     {
         [MethodImpl(Inline), Op]
@@ -73,14 +64,11 @@ namespace Z0
             }
         }
 
-        FileSystemChange Log(FsEntry subject, FS.ChangeKind kind)
+        FS.Change Log(FsEntry subject, FS.ChangeKind kind)
         {
-            var record = new FileSystemChange();
-            record.ChangeKind = kind;
-            record.ObjectKind = subject.Kind;
-            record.ObjectName = subject.Name;
-            return record;
+            var record = new FS.Change(subject.Name, subject.Kind, kind);
 
+            return record;
         }
 
         [MethodImpl(Inline)]

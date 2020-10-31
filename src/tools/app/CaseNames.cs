@@ -9,10 +9,6 @@ namespace Z0
 
     using static Konst;
     using static z;
-    using static BuildArchiveLabels;
-
-    using AN = BuildArchiveNames;
-    using AP = BuildArchivePaths;
 
     public readonly struct CaseNames
     {
@@ -39,55 +35,4 @@ namespace Z0
     // llvm-pdbutil dump --all J:\dev\projects\z0\.build\bin\netcoreapp3.1\win-x64\z0.math.pdb > z0.math.pdb.all.log
     // llvm-pdbutil diadump --funcsigs J:\dev\projects\z0\.build\bin\netcoreapp3.1\win-x64\z0.math.pdb > z0.math.pdb.funcsigs.log
     // llvm-pdbutil dump --all J:\lang\net\runtime\artifacts\bin\coreclr\Windows_NT.x64.Release\PDB\ildasm.pdb > J:\database\tools\llvm-pdbutil\output\ildasm.pdb.log
-
-    public readonly struct BuildArchiveLabels
-    {
-        public const string roslyn = nameof(roslyn);
-
-        public const string runtime = nameof(runtime);
-    }
-
-    readonly struct BuildArchiveNames
-    {
-        const string NetLang = "j:/lang/net";
-
-        const string artifacts = nameof(artifacts);
-
-        const string PS = "/";
-
-        public const string Roslyn = NetLang + PS + roslyn + PS + artifacts;
-
-        public const string Runtime = NetLang + PS + runtime + PS + artifacts;
-    }
-
-    readonly struct BuildArchivePaths
-    {
-        public static FS.FolderPath Roslyn => FS.dir(AN.Roslyn);
-
-        public static FS.FolderPath Runtime => FS.dir(AN.Runtime);
-    }
-
-    readonly struct BuildArchiveFactory
-    {
-        public static IBuildArchive create(IWfShell wf, FS.FolderPath src)
-            => BuildArchive.create(wf, src);
-
-        public static IBuildArchive Roslyn(IWfShell wf)
-            =>  BuildArchive.create(wf, AP.Roslyn);
-
-        public static IBuildArchive Z(IWfShell wf)
-            => BuildArchive.create(wf, FS.path(wf.Controller.Component.Location).FolderPath);
-
-        public static IBuildArchive Runtime(IWfShell wf)
-            => BuildArchive.create(wf, AP.Runtime);
-    }
-
-    readonly struct BuildArchiveSpecs
-    {
-        public static BuildArchiveSettings Roslyn
-            => new BuildArchiveSettings(BuildArchiveLabels.roslyn, BuildArchivePaths.Roslyn);
-
-        public static BuildArchiveSettings Runtime
-            => new BuildArchiveSettings(BuildArchiveLabels.runtime, BuildArchivePaths.Runtime);
-    }
 }

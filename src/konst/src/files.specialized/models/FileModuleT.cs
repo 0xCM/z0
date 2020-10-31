@@ -23,6 +23,13 @@ namespace Z0
             ModuleKind = kind;
         }
 
+        public FS.FileExt DefaultExt
+            => ModuleKind switch {
+                FileModuleKind.Dll => ArchiveFileKinds.Dll,
+                FileModuleKind.Exe => ArchiveFileKinds.Exe,
+                FileModuleKind.Lib => ArchiveFileKinds.Lib,
+                _ =>  FS.FileExt.Empty
+            };
         [MethodImpl(Inline)]
         public static implicit operator FileModule(FileModule<T> src)
             => new FileModule(src.Path,src.ModuleKind);

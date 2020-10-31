@@ -58,7 +58,7 @@ namespace Z0
 
             Host = WfSelfHost.create(typeof(Multiplex));
             Wf = wf.WithHost(Host);
-            BuildArchive = Z0.BuildArchive.create(wf, settings.BuildRoot);
+            BuildArchive = BuildArchives.create(wf, settings.BuildRoot);
         }
 
         [MethodImpl(Inline)]
