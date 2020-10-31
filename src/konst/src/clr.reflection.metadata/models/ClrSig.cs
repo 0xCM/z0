@@ -5,18 +5,21 @@
 namespace Z0
 {
     using System;
+    using System.Reflection.Metadata.Ecma335;
     using System.Runtime.CompilerServices;
 
     using static Konst;
 
-    partial class XClrQuery
+    public readonly struct ClrSig
     {
-        /// <summary>
-        /// Determines whether a type is static
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        [MethodImpl(Inline), Op]
-        public static bool IsStatic(this Type t)
-            => ClrQuery.IsStatic(t);
+        public ClrArtifactKind ElementType {get;}
+
+        public byte[] Data {get;}
+
+        public ClrSig(ClrArtifactKind kind, byte[] src)
+        {
+            ElementType = kind;
+            Data = src;
+        }
     }
 }

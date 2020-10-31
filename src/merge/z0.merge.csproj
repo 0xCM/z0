@@ -7,7 +7,7 @@
   <ItemGroup>
     <ProjectReference Include="$(Konst)" />
     <ProjectReference Include="$(Capture)" />
-    <ProjectReference Include="$(Flow)" />
+    <ProjectReference Include="$(Domain)" />
     <ProjectReference Include="$(AsmServices)" />
     <ProjectReference Include="$(Apps)" />
     <ProjectReference Include="$(BitVectors)" />

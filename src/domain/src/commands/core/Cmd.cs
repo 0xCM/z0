@@ -29,10 +29,10 @@ namespace Z0
             where T : struct
         {
             var t = typeof(T);
-            var fields = ClrQuerySvc.fields(t);
-            var count = fields.Count;
+            var fields = ClrQuery.fields(t);
+            var count = fields.Length;
             var reflected = alloc<FieldValue>(count);
-            ClrQuerySvc.values(spec, fields, reflected);
+            ClrQuery.values(spec, fields, reflected);
             var buffer = alloc<CmdOption>(count);
             var target = span(buffer);
             var source = @readonly(reflected);

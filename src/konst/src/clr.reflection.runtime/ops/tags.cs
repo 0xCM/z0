@@ -6,17 +6,14 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
 
     using static Konst;
 
-    partial class XClrQuery
+    partial struct ClrQuery
     {
-        /// <summary>
-        /// Determines whether a type is static
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        [MethodImpl(Inline), Op]
-        public static bool IsStatic(this Type t)
-            => ClrQuery.IsStatic(t);
+        public static TaggedMembers<MethodInfo,A> tags<A>(Type src)
+            where A : Attribute
+                => src.DeclaredMethods().Where(m => m.Tagged<A>()).Select(x => member(x, x.Tag<A>().Require()));
     }
 }

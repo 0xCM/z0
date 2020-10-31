@@ -8,15 +8,12 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static z;
 
-    partial class XClrQuery
+    partial struct ClrQuery
     {
-        /// <summary>
-        /// Determines whether a type is static
-        /// </summary>
-        /// <param name="t">The type to examine</param>
         [MethodImpl(Inline), Op]
-        public static bool IsStatic(this Type t)
-            => ClrQuery.IsStatic(t);
+        public static Indexed<object> attributes(Type src)
+            => src.GetCustomAttributes(false);
     }
 }

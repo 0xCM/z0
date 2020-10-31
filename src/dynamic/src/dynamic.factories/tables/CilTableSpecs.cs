@@ -48,7 +48,7 @@ namespace Z0
             var count = declared.Length;
             var buffer = alloc<CilFieldSpec>(count);
             var fields = @readonly(declared);
-            var fieldOffsets = span(ClrQuerySvc.offsets(src, declared));
+            var fieldOffsets = span(ClrQuery.offsets(src, declared));
 
             var dst = span(buffer);
             for(ushort i=0; i<count; i++)

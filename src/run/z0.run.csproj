@@ -9,7 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="$(Konst)" />
     <ProjectReference Include="$(Apps)" />
-    <ProjectReference Include="$(Flow)" />
+    <ProjectReference Include="$(Domain)" />
     <ProjectReference Include="$(AsmServices)" />
     <ProjectReference Include="$(Check)" />
 

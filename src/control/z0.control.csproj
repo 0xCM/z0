@@ -9,7 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="$(Apps)" />
     <ProjectReference Include="$(Capture)" />
-    <ProjectReference Include="$(Flow)" />
+    <ProjectReference Include="$(Domain)" />
   </ItemGroup>
 
 </Project>

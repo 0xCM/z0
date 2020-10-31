@@ -129,8 +129,6 @@ readonly struct ApiNames
 
     public const string ClrEnum = ClrRuntime + dot + @enum;
 
-    public const string ClrEnums = ClrRuntime + dot + enums + dot + api;
-
     public const string ClrEnumLiteral = ClrRuntime + dot + @enum + dot + literal;
 
     public const string ClrStruct = ClrRuntime + dot + @struct;
@@ -142,7 +140,6 @@ readonly struct ApiNames
     public const string ClrMethod = ClrRuntime + dot + method;
 
     public const string ClrProperty = ClrRuntime + dot + property;
-
 
     public const string ClrHandles = ClrRuntime + dot + handles;
 
@@ -163,7 +160,12 @@ readonly struct ApiNames
 
     public const string ClrRecords = ClrMetadata + dot + records;
 
+    public const string ClrTypeCodes = ClrMetadata + dot + codes + dot + types;
+
     public const string ClrPrimitives = ClrMetadata + dot + primitives;
+
+    public const string ClrEnums = ClrMetadata + dot + enums;
+
 
     // ~~ Delegates
     // ~~ -----------------------------------------------------------------------------------------
@@ -193,17 +195,6 @@ readonly struct ApiNames
     public const string BitFieldParts = bits + dot + bitfields + dot + parts;
 
     public const string BitFieldSpecs = bits + dot + bitfields + dot + specs;
-
-    // ~~ Linq
-    // ~~ -----------------------------------------------------------------------------------------
-
-    public const string LinqXPress = linq + dot + expressions;
-
-    public const string LinqXQuery = linq + dot + expressions + dot + query;
-
-    public const string LinqXFunc = linq + dot + expressions + dot + functions;
-
-    public const string LinqXFuncX = linq + dot + expressions + dot + extensions;
 
     // ~~ Memory
     // ~~ -----------------------------------------------------------------------------------------
@@ -359,4 +350,7 @@ readonly struct ApiNames
     public const string GridMetrics = grid + dot + metrics;
 
     public const string XKinds = kinds + dot + extensions;
+
+
+    const string codes = nameof(codes);
 }

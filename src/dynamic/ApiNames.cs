@@ -44,6 +44,16 @@ namespace Z0
         public const string CilTableBuilder = cil + dot + tables + dot + builder;
 
         public const string CilTables = cil + dot + tables;
+
+        // ~~ LinqX
+        // ~~ -----------------------------------------------------------------------------------------
+
+        public const string LinqXPress = linq + dot + expressions;
+
+        public const string LinqXQuery = linq + dot + expressions + dot + query;
+
+        public const string LinqXFunc = linq + dot + expressions + dot + functions;
+
+        public const string LinqXFuncX = linq + dot + expressions + dot + extensions;
     }
 }
-
