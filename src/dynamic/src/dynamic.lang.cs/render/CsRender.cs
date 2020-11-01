@@ -4,15 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Lang.Cs
 {
-    using System;
-    using System.Runtime.CompilerServices;
-    using Microsoft.CodeAnalysis;
-    using Microsoft.CodeAnalysis.CSharp;
-
-    using static Konst;
-    using static z;
-
-
     public readonly struct CsRender
     {
 
@@ -20,7 +11,5 @@ namespace Z0.Lang.Cs
         {
 
         }
-
     }
-
 }

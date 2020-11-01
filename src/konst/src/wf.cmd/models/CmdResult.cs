@@ -12,22 +12,6 @@ namespace Z0
 
     public readonly struct CmdResult : ITextual
     {
-        [MethodImpl(Inline)]
-        public static CmdResult win(CmdId id, params byte[] data)
-            => new CmdResult(id, true, data);
-
-        [MethodImpl(Inline)]
-        public static CmdResult fail(CmdId id, params byte[] data)
-            => new CmdResult(id, false,data);
-
-        [MethodImpl(Inline)]
-        public static CmdResult win(CmdSpec cmd, params byte[] data)
-            => new CmdResult(cmd.Id, true,data);
-
-        [MethodImpl(Inline)]
-        public static CmdResult fail(CmdSpec cmd, params byte[] data)
-            => new CmdResult(cmd.Id, false,data);
-
         public CmdId CmdId {get;}
 
         public bit Succeeded {get;}

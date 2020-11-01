@@ -24,6 +24,16 @@ namespace Z0
             => new CreatedEvent(id, ct, flair);
 
         /// <summary>
+        /// Defines a <see cref='CreatedToolCmd'/> event
+        /// </summary>
+        /// <param name="id">The step identifier</param>
+        /// <param name="ct">The correlation token</param>
+        /// <param name="flair">The flair</param>
+        [MethodImpl(Inline), Op]
+        public static CreatedToolCmd created(CmdToolId id, CorrelationToken ct, FlairKind flair = Created)
+            => new CreatedToolCmd(id,ct,flair);
+
+        /// <summary>
         /// Defines a <see cref='CreatedEvent{T}'/> event
         /// </summary>
         /// <param name="id">The step identifier</param>
@@ -32,15 +42,5 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UInt64k)]
         public static CreatedEvent<T> created<T>(WfStepId id, T content, CorrelationToken ct, FlairKind flair = Created)
             => new CreatedEvent<T>(id, content, ct, flair);
-
-        /// <summary>
-        /// Defines a <see cref='ToolCreatedEvent'/> event
-        /// </summary>
-        /// <param name="tool"></param>
-        /// <param name="ct"></param>
-        /// <param name="flair"></param>
-        [MethodImpl(Inline), Op]
-        public static ToolCreatedEvent created(ToolId tool, CorrelationToken ct, FlairKind flair = Created)
-            => new ToolCreatedEvent(tool, ct, flair);
     }
 }

@@ -21,5 +21,18 @@ namespace Z0
         public static CmdVar<K> var<K>(K id, string value)
             where K : unmanaged
                 => new CmdVar<K>(id, value);
+
+        [Op]
+        public static CmdVars vars(byte count)
+            => new CmdVars(new CmdVar[count]);
+
+        [Op]
+        public static CmdVars vars()
+            => new CmdVars(new CmdVar[MaxVarCount]);
+
+        [Op, Closures(Closure)]
+        public static CmdVars<K> vars<K>()
+            where K : unmanaged
+                => new CmdVars<K>(new CmdVar<K>[MaxVarCount]);
     }
 }

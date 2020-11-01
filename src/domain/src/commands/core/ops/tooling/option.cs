@@ -12,7 +12,7 @@ namespace Z0
 
     partial struct Tooling
     {
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ToolOption option<K>(K kind, string value)
             where K : unmanaged
                 => new ToolOption(kind.ToString(), value);

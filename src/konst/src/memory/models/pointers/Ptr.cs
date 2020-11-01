@@ -22,26 +22,6 @@ namespace Z0
         public Ptr(void* src)
             => P = src;
 
-        [MethodImpl(Inline)]
-        public static implicit operator Ptr(void* src)
-            => new Ptr(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator Ptr(IntPtr src)
-            => new Ptr(src.ToPointer());
-
-        [MethodImpl(Inline)]
-        public static implicit operator IntPtr(Ptr src)
-            => (IntPtr)src.P;
-
-        [MethodImpl(Inline)]
-        public static implicit operator void*(Ptr src)
-            => src.P;
-
-        [MethodImpl(Inline)]
-        public static implicit operator MemoryAddress(Ptr src)
-            => src.Address;
-
         public uint Hash
         {
             [MethodImpl(Inline)]
@@ -67,5 +47,29 @@ namespace Z0
 
         public override string ToString()
             => Format();
+
+       [MethodImpl(Inline)]
+        public static implicit operator Ptr(void* src)
+            => new Ptr(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Ptr(IntPtr src)
+            => new Ptr(src.ToPointer());
+
+        [MethodImpl(Inline)]
+        public static implicit operator IntPtr(Ptr src)
+            => (IntPtr)src.P;
+
+        [MethodImpl(Inline)]
+        public static implicit operator void*(Ptr src)
+            => src.P;
+
+        [MethodImpl(Inline)]
+        public static implicit operator MemoryAddress(Ptr src)
+            => src.Address;
+
+        [MethodImpl(Inline)]
+        public static implicit operator Ptr(MemoryAddress src)
+            => new Ptr(src.Pointer());
     }
 }

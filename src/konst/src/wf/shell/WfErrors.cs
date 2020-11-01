@@ -61,7 +61,7 @@ namespace Z0
             const string CallerPattern = "An error was trapped by {0} on line {1} in {2}";
             const string Pattern = "{0}" + Eol + "{1}";
             var where = text.format(CallerPattern, caller, line, file);
-            var what = e.ToString();
+            var what = e?.ToString() ?? EmptyString;
             var msg = text.format(Pattern, where, what);
             return error(caller, msg, ct);
         }

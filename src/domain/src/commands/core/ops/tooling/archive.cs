@@ -18,10 +18,9 @@ namespace Z0
                 => new ToolArchive<T,F>(id, root);
 
         [MethodImpl(Inline)]
-        public static ToolArchive<T> archive<T>(FS.FolderPath src, FS.FolderPath dst)
+        public static ToolArchive<T> archive<T>(CmdToolId tool, FS.FolderPath src, FS.FolderPath dst)
             where T : struct, ITool<T>
-                => new ToolArchive<T>(default(T).ToolId, src, dst);
-
+                => new ToolArchive<T>(tool, src, dst);
 
         [MethodImpl(Inline)]
         public static FS.Files output<T>(IToolArchive<T> archive)

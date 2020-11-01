@@ -49,7 +49,7 @@ namespace Z0
             => ApiHexReader.read(src).Where(x => x.IsNonEmpty);
 
         public ListedFiles List()
-            => FS.dir(ArchiveRoot.Name).Files(X.Hex);
+            => FS.list(FS.dir(ArchiveRoot.Name).Files(X.Hex));
 
         /// <summary>
         /// Enumerates the archived files

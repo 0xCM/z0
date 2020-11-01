@@ -17,22 +17,6 @@ namespace Z0
     {
         internal readonly Vector128<ulong> Segment;
 
-        /// <summary>
-        /// Dereferences the reference
-        /// </summary>
-        /// <param name="src">The source reference</param>
-        [MethodImpl(Inline)]
-        public static Span<byte> operator !(Ref src)
-            => src.Buffer;
-
-        [MethodImpl(Inline)]
-        public static bool operator ==(Ref lhs, Ref rhs)
-            => lhs.Equals(rhs);
-
-        [MethodImpl(Inline)]
-        public static bool operator !=(Ref lhs, Ref rhs)
-            => !lhs.Equals(rhs);
-
         [MethodImpl(Inline)]
         public Ref(Vector128<ulong> src)
             => Segment = src;
@@ -57,7 +41,7 @@ namespace Z0
             get => (uint)Segment.GetElement(1);
         }
 
-        public ulong Location
+        public MemoryAddress Location
         {
             [MethodImpl(Inline)]
             get => Segment.GetElement(0);
@@ -94,6 +78,22 @@ namespace Z0
 
         public override int GetHashCode()
             => (int) Location;
+
+        /// <summary>
+        /// Dereferences the reference
+        /// </summary>
+        /// <param name="src">The source reference</param>
+        [MethodImpl(Inline)]
+        public static Span<byte> operator !(Ref src)
+            => src.Buffer;
+
+        [MethodImpl(Inline)]
+        public static bool operator ==(Ref lhs, Ref rhs)
+            => lhs.Equals(rhs);
+
+        [MethodImpl(Inline)]
+        public static bool operator !=(Ref lhs, Ref rhs)
+            => !lhs.Equals(rhs);
 
         [MethodImpl(Inline)]
         static uint size<T>()

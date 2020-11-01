@@ -15,7 +15,7 @@ namespace Z0
     {
         public IWfShell Wf {get;}
 
-        public ToolId ToolId {get;}
+        public CmdToolId ToolId {get;}
 
         public FS.FolderPath SourceDir {get;}
 
@@ -28,7 +28,7 @@ namespace Z0
         public ToolFlags<F> AvailableFlags {get;}
 
         [MethodImpl(Inline)]
-        public Tool(IWfShell wf, ToolId id, FS.FolderPath src, FS.FolderPath dst)
+        public Tool(IWfShell wf, CmdToolId id, FS.FolderPath src, FS.FolderPath dst)
         {
             Wf = wf;
             ToolId = id;

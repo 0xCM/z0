@@ -21,6 +21,8 @@ namespace Z0
         {
             Pattern = src;
             Range = range;
+
+
         }
 
         public uint StartPos

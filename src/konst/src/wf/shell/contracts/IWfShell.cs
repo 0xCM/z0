@@ -118,7 +118,7 @@ namespace Z0
         // ~ Lifecycle
         // ~ ---------------------------------------------------------------------------
 
-        void Created(ToolId tool)
+        void Created(CmdToolId tool)
             => Raise(created(tool, Ct));
 
         void Created(WfStepId id)

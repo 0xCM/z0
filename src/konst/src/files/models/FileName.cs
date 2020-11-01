@@ -12,7 +12,7 @@ namespace Z0
 
     partial struct FS
     {
-        public readonly struct FileName : IFsEntry<FileName>
+        public readonly struct FileName : IFsEntry<FileName>, IComparable<FileName>
         {
             public PathPart Name {get;}
 
@@ -112,6 +112,9 @@ namespace Z0
 
             public override string ToString()
                 => Format();
+
+           public int CompareTo(FileName src)
+                => Name.CompareTo(src.Name);
 
             [MethodImpl(Inline)]
             public static implicit operator Z0.FileName(FileName src)

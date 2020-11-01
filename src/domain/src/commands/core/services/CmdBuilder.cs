@@ -10,12 +10,6 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial class XTend
-    {
-        [MethodImpl(Inline)]
-        public static CmdBuilder CmdBuilder(this IWfShell wf)
-            => new CmdBuilder(wf);
-    }
 
     public readonly struct CmdBuilder
     {

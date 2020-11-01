@@ -18,6 +18,8 @@ namespace Z0
 
         public const string CmdPatterns = cmd + dot + patterns;
 
+        public const string CmdRunners = cmd + dot + "runners";
+
         public const string FilePathParser = parsers + dot + files + dot + paths;
 
         public const string EnumCatalogs = enums + dot + catalogs;

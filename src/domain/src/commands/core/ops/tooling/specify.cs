@@ -26,6 +26,5 @@ namespace Z0
             where T : unmanaged
             where F : unmanaged
                 => new ToolSpec(typeof(T).Name, flags.Map(f => flag(f.ToString())), options);
-
     }
 }

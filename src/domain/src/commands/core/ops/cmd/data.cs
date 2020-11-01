@@ -34,8 +34,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref CmdOption data<T>(in CmdOption<T> src, ref CmdOption dst)
         {
-            dst.Name = src.Name;
-            dst.Value = src.Value.ToString();
+            dst = new CmdOption(src.Name, src.Value.ToString());
             return ref dst;
         }
 
@@ -65,8 +64,7 @@ namespace Z0
         public static ref CmdOption data<K,T>(in CmdOption<K,T> src, ref CmdOption dst)
             where K : unmanaged
         {
-            dst.Name = src.Kind.ToString();
-            dst.Value = src.Value.ToString();
+            dst = new CmdOption(src.Kind.ToString(), src.Value.ToString());
             return ref dst;
         }
     }

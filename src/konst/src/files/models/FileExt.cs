@@ -11,7 +11,7 @@ namespace Z0
 
     partial struct FS
     {
-        public readonly struct FileExt : IFsEntry<FileExt>
+        public readonly struct FileExt : IFsEntry<FileExt>, IComparable<FileExt>
         {
             public PathPart Name {get;}
 
@@ -93,12 +93,6 @@ namespace Z0
                 get => Name.IsNonEmpty;
             }
 
-            public static FileExt Empty
-            {
-                [MethodImpl(Inline)]
-                get => new FileExt(PathPart.Empty);
-            }
-
             public string SearchPattern
             {
                 [MethodImpl(Inline)]
@@ -122,11 +116,14 @@ namespace Z0
             public override bool Equals(object src)
                 => src is FileExt x && Equals(x);
 
+            public int CompareTo(FileExt src)
+                => Name.CompareTo(src.Name);
 
-        //     [MethodImpl(Inline)]
-        //     public static implicit operator Z0.FileExtension(FileExt src)
-        //         => Z0.FileExtension.Define(src.Name);
-        // }
-        }
+            public static FileExt Empty
+            {
+                [MethodImpl(Inline)]
+                get => new FileExt(PathPart.Empty);
+            }
+       }
     }
 }

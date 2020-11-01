@@ -4,10 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Lang.Cs
 {
-    using System;
-    using System.Diagnostics;
-    using System.Linq;
-    using System.Runtime.CompilerServices;
 
     using static Prototypes.Branch02;
 

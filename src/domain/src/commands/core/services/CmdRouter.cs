@@ -12,9 +12,6 @@ namespace Z0
 
     public sealed class CmdRouter : ICmdRouter<CmdRouter>
     {
-        public static ICmdRouter service(IWfShell wf, params CmdHandler[] handlers)
-            => new CmdRouter(wf, handlers);
-
         readonly WfHost Host;
 
         readonly IWfShell Wf;
@@ -45,7 +42,7 @@ namespace Z0
             {
                 if(Runners.TryGetValue(cmd.Id, out var runner))
                 {
-                    return CmdResult.win(cmd.Id);
+                    return Cmd.win(cmd.Id);
                 }
                 else if(Handlers.TryGetValue(cmd.Id, out var handler))
                 {
@@ -54,13 +51,13 @@ namespace Z0
                 else
                 {
                     Wf.Error(WfErrors.missing(cmd.Id));
-                    return CmdResult.fail(cmd);
+                    return Cmd.fail(cmd.Id);
                 }
             }
             catch(Exception e)
             {
                 Wf.Error(e);
-                return CmdResult.fail(cmd.Id);
+                return Cmd.fail(cmd.Id);
             }
         }
     }

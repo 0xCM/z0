@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Lang.Cs
 {
-    using System;
-    using System.Runtime.CompilerServices;
-    using Microsoft.CodeAnalysis;
     using Microsoft.CodeAnalysis.CSharp;
 
     public readonly struct Keywords

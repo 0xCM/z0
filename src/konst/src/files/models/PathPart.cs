@@ -14,7 +14,7 @@ namespace Z0
         /// <summary>
         /// Defines the content of file path component
         /// </summary>
-        public readonly struct PathPart : ITextual
+        public readonly struct PathPart : ITextual, IComparable<PathPart>
         {
             public string Text {get;}
 
@@ -144,6 +144,9 @@ namespace Z0
                 else
                     return this;
             }
+
+            public int CompareTo(PathPart src)
+                => (Text == null || src.Text == null) ? 0 : Text.CompareTo(src.Text);
         }
     }
 }

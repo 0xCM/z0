@@ -16,6 +16,10 @@ namespace Z0
         public static CmdId id<T>()
             => CmdId.from<T>();
 
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static CmdId id<T>(T t)
+            => CmdId.from<T>();
+
         [MethodImpl(Inline), Op]
         public static CmdId id(Type spec)
             => CmdId.from(spec);

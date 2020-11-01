@@ -46,6 +46,12 @@ namespace Z0
             get => Definition.DeclaringType;
         }
 
+        public CallingConventions CallingConvention
+        {
+            [MethodImpl(Inline)]
+            get => Definition.CallingConvention;
+        }
+
         [MethodImpl(Inline)]
         public static bool operator ==(ClrMethod lhs, ClrMethod rhs)
             => lhs.Equals(rhs);

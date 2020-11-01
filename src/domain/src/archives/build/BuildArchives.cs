@@ -34,8 +34,8 @@ namespace Z0
         {
             var archive = BuildArchives.create(wf, spec);
             var types = array(archive.Dll, archive.Exe, archive.Pdb, archive.Lib);
-            var cmd = EmitFileListing.specify(wf, spec.Label + ".artifacts", archive.Root, types);
-            EmitFileListing.run(wf, cmd);
+            var cmd = EmitFileList.specify(wf, spec.Label + ".artifacts", archive.Root, types);
+            EmitFileList.run(wf, cmd);
         }
     }
 }

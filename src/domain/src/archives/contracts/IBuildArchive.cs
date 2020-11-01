@@ -14,19 +14,22 @@ namespace Z0
     [Free]
     public interface IBuildArchive : IFileArchive<BuildArchive>
     {
+        IEnumerable<FS.FilePath> BuildFiles(FS.FileExt ext)
+            => Root.EnumerateFiles(ext, true);
+
         IEnumerable<FS.FilePath> ExeFiles()
-            => Files(Exe);
+            => BuildFiles(Exe);
 
         IEnumerable<FS.FilePath> JsonDepsFiles()
-            => Files(JsonDeps);
+            => BuildFiles(JsonDeps);
 
         IEnumerable<FS.FilePath> DllFiles()
-            => Files(Dll);
+            => BuildFiles(Dll);
 
         IEnumerable<FS.FilePath> PdbFiles()
-            => Files(Pdb);
+            => BuildFiles(Pdb);
 
         IEnumerable<FS.FilePath> LibFiles()
-            => Files(Lib);
+            => BuildFiles(Lib);
     }
 }

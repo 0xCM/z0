@@ -11,10 +11,6 @@ namespace Z0
 
     public unsafe readonly struct MemoryAddress : IAddress<MemoryAddress,W64,ulong>, IAddressable
     {
-        [MethodImpl(Inline)]
-        public static MemoryAddress from(Ref src)
-            => new MemoryAddress(src.Location);
-
         public ulong Location {get;}
 
         public bool IsEmpty
@@ -59,6 +55,72 @@ namespace Z0
                     return NumericWidth.W64;
             }
         }
+
+
+        [MethodImpl(Inline)]
+        public MemoryAddress(ulong absolute)
+            => Location = absolute;
+
+        [MethodImpl(Inline)]
+        public MemoryAddress(void* pSrc)
+            => Location = (ulong)pSrc;
+
+        public string Format()
+            => Location.ToString("x") + HexFormatSpecs.PostSpec;
+
+        public string Format(NumericWidth width)
+        {
+            return width switch{
+                    NumericWidth.W8 => ((byte)Location).FormatAsmHex(),
+                    NumericWidth.W16 => ((ushort)Location).FormatAsmHex(),
+                    NumericWidth.W32 => ((uint)Location).FormatAsmHex(),
+                    _ => Location.FormatAsmHex(),
+            };
+        }
+
+        [MethodImpl(Inline)]
+        public string FormatMinimal()
+            => Format(MinWidth);
+
+        [MethodImpl(Inline)]
+        public ReadOnlySpan<char> Format(byte pad)
+            => Format().PadRight(pad);
+
+        [MethodImpl(Inline)]
+        public int CompareTo(MemoryAddress src)
+            => Location == src.Location ? 0 : Location < src.Location ? -1 : 1;
+
+        [MethodImpl(Inline)]
+        public bool Equals(MemoryAddress src)
+            => Location == src.Location;
+
+        public uint Hash
+        {
+            [MethodImpl(Inline)]
+            get => z.hash(Location);
+        }
+
+        public override int GetHashCode()
+            => (int)Hash;
+
+        public override bool Equals(object obj)
+            => obj is MemoryAddress a && Equals(a);
+
+        public override string ToString()
+            => Format();
+
+        [MethodImpl(Inline)]
+        public unsafe ref T Ref<T>()
+            => ref Unsafe.AsRef<T>((void*)Location);
+
+        [MethodImpl(Inline)]
+        public unsafe T* Pointer<T>()
+            where T : unmanaged
+                => (T*)Location;
+
+        [MethodImpl(Inline)]
+        public unsafe void* Pointer()
+            => (void*)Location;
 
         [MethodImpl(Inline)]
         public static implicit operator MemoryAddress(void* pSrc)
@@ -191,67 +253,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static MemoryAddress operator-(MemoryAddress a, MemoryAddress b)
             => new MemoryAddress(a.Location - b.Location);
-
-        [MethodImpl(Inline)]
-        public MemoryAddress(ulong absolute)
-            => Location = absolute;
-
-        [MethodImpl(Inline)]
-        public MemoryAddress(void* pSrc)
-            => Location = (ulong)pSrc;
-
-        public string Format()
-            => Location.ToString("x") + HexFormatSpecs.PostSpec;
-
-        public string Format(NumericWidth width)
-        {
-            return width switch{
-                    NumericWidth.W8 => ((byte)Location).FormatAsmHex(),
-                    NumericWidth.W16 => ((ushort)Location).FormatAsmHex(),
-                    NumericWidth.W32 => ((uint)Location).FormatAsmHex(),
-                    _ => Location.FormatAsmHex(),
-            };
-        }
-
-        [MethodImpl(Inline)]
-        public string FormatMinimal()
-            => Format(MinWidth);
-
-        [MethodImpl(Inline)]
-        public ReadOnlySpan<char> Format(byte pad)
-            => Format().PadRight(pad);
-
-        [MethodImpl(Inline)]
-        public int CompareTo(MemoryAddress src)
-            => Location == src.Location ? 0 : Location < src.Location ? -1 : 1;
-
-        [MethodImpl(Inline)]
-        public bool Equals(MemoryAddress src)
-            => Location == src.Location;
-
-        public uint Hash
-        {
-            [MethodImpl(Inline)]
-            get => z.hash(Location);
-        }
-
-        public override int GetHashCode()
-            => (int)Hash;
-
-        public override bool Equals(object obj)
-            => obj is MemoryAddress a && Equals(a);
-
-        public override string ToString()
-            => Format();
-
-        [MethodImpl(Inline)]
-        public unsafe ref T Ref<T>()
-            => ref Unsafe.AsRef<T>((void*)Location);
-
-        [MethodImpl(Inline)]
-        public unsafe T* Pointer<T>()
-            where T : unmanaged
-                => (T*)Location;
 
         public static MemoryAddress Empty
             => new MemoryAddress(0);

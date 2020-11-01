@@ -6,36 +6,17 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.IO;
 
     using static Konst;
     using static z;
 
     public readonly struct ListedFiles
     {
-        [MethodImpl(Inline)]
-        static SearchOption option(bool recurse)
-            => recurse ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly;
-
-        [Op]
-        public static ListedFiles search(FileArchive src, string pattern, bool recurse)
-            => Directory.EnumerateFiles(src.Root.Name, pattern, option(recurse))
-                        .Array()
-                        .Select(x => FS.path(pattern));
-
         readonly TableSpan<ListedFile> Data;
 
         [MethodImpl(Inline)]
         public ListedFiles(ListedFile[] src)
             => Data = src;
-
-        [MethodImpl(Inline)]
-        public static implicit operator ListedFiles(ListedFile[] src)
-            => new ListedFiles(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator ListedFiles(FS.FilePath[] src)
-            => new ListedFiles(src.Mapi((i,x) => new ListedFile(i,x)));
 
         public uint Count
         {
@@ -78,5 +59,9 @@ namespace Z0
             [MethodImpl(Inline)]
             get => ref Data.First;
         }
+
+        [MethodImpl(Inline)]
+        public static implicit operator ListedFiles(ListedFile[] src)
+            => new ListedFiles(src);
     }
 }

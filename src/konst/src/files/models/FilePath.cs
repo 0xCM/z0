@@ -10,10 +10,11 @@ namespace Z0
 
     using static Konst;
     using static z;
+    using System.Diagnostics.CodeAnalysis;
 
     partial struct FS
     {
-        public readonly struct FilePath : IFsEntry<FilePath>
+        public readonly struct FilePath : IFsEntry<FilePath>, IComparable<FilePath>
         {
             public PathPart Name {get;}
 
@@ -146,19 +147,22 @@ namespace Z0
             public override string ToString()
                 => Format();
 
+            public int CompareTo(FilePath src)
+                => Name.CompareTo(src.Name);
+
             [MethodImpl(Inline)]
             public static implicit operator Z0.FilePath(FilePath src)
                 => Z0.FilePath.Define(src.Name);
+
+            [MethodImpl(Inline)]
+            public static FileName operator +(FilePath a, FileExt b)
+                => file(text.format("{0}.{1}",a,b));
 
             public static FilePath Empty
             {
                 [MethodImpl(Inline)]
                 get => new FilePath(PathPart.Empty);
             }
-
-            [MethodImpl(Inline)]
-            public static FileName operator +(FilePath a, FileExt b)
-                => file(text.format("{0}.{1}",a,b));
         }
     }
 }

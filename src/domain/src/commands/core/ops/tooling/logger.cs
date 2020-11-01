@@ -12,7 +12,7 @@ namespace Z0
 
     partial struct Tooling
     {
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ToolLogger logger<T>(IWfShell wf, T id)
             where T : unmanaged
                 => logger(wf, id.ToString());

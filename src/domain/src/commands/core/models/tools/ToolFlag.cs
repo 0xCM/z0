@@ -9,9 +9,19 @@ namespace Z0
 
     using static Konst;
     using static z;
-    
+
     public readonly struct ToolFlag
     {
+        /// <summary>
+        /// The flag name
+        /// </summary>
+        public string Name {get;}
+
+        /// <summary>
+        /// Whether the flag is emitted
+        /// </summary>
+        public bool Emit {get;}
+
         [MethodImpl(Inline)]
         public static implicit operator ToolFlag(string name)
             => new ToolFlag(name);
@@ -22,27 +32,17 @@ namespace Z0
             Name = name;
             Emit = true;
         }
-        
+
         [MethodImpl(Inline)]
         public ToolFlag(string name, bool emit)
         {
             Name = name;
             Emit = emit;
         }
-        
-        /// <summary>
-        /// The flag name
-        /// </summary>
-        public readonly StringRef Name;
-
-        /// <summary>
-        /// Whether the flag is emitted
-        /// </summary>
-        public readonly bool Emit;
 
         [MethodImpl(Inline)]
         public string Format()
-            => Emit ? Name.Format() : EmptyString;
+            => Emit ? Name ?? EmptyString : EmptyString;
 
         public override string ToString()
             => Format();

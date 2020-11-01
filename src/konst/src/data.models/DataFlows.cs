@@ -13,6 +13,10 @@ namespace Z0
     [ApiHost]
     public readonly struct DataFlows
     {
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static DataRef<T> reference<T>(in T src)
+            where T : struct
+                => new DataRef<T>(typeof(T).MetadataToken);
         public static TypeArrow<S,T> connect<S,T>()
             => default;
 

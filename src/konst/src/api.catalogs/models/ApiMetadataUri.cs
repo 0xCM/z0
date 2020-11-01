@@ -9,7 +9,6 @@ namespace Z0
     using System.Linq;
     using System.Reflection;
     using System.Runtime.Intrinsics;
-    using System.Reflection.Metadata.Ecma335;
 
     using static Konst;
     using static z;
@@ -37,12 +36,6 @@ namespace Z0
             get => api.part(this);
         }
 
-        public ArtifactKey HostKey
-        {
-            [MethodImpl(Inline)]
-            get => api.host(this);
-        }
-
         public ClrArtifactKey HostId
         {
             [MethodImpl(Inline)]
@@ -55,21 +48,11 @@ namespace Z0
             get => api.kind(this);
         }
 
-        public ArtifactKey OperationKey
-        {
-            [MethodImpl(Inline)]
-            get => api.operation(this);
-        }
-
         public ClrArtifactKey OperationId
         {
             [MethodImpl(Inline)]
             get => vcell(Data, OpIndex);
         }
-
-        [MethodImpl(Inline)]
-        public static implicit operator ApiMetadataUri(MethodInfo src)
-            => api.identify(src);
 
         [MethodImpl(Inline)]
         public string Format()
@@ -99,6 +82,10 @@ namespace Z0
             [MethodImpl(Inline)]
             get => !vnonz(Data);
         }
+
+        [MethodImpl(Inline)]
+        public static implicit operator ApiMetadataUri(MethodInfo src)
+            => api.identify(src);
 
         public static ApiMetadataUri Empty => default;
     }

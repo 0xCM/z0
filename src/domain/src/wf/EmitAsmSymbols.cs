@@ -17,8 +17,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public static EmitAsmSymbolsCmd EmitAsmSymbols(this CmdBuilder builder)
             => new EmitAsmSymbolsCmd();
-
     }
+
     public struct EmitAsmSymbolsCmd : ICmdSpec<EmitAsmSymbolsCmd>
     {
 

@@ -14,4 +14,3 @@ set ToolCmd=%ToolName% %ToolOptions% %SrcPath%
 echo on
 call %ToolCmd% > %OutPath%
 
-: objdump --archive-headers --disassemble-all --wide ucrtbase.dll > ucrtbase.asm

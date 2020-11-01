@@ -62,6 +62,9 @@ namespace Z0
         FS.FolderPath JobQueue()
             => JobRoot() + FS.folder(PN.Queue);
 
+        FS.FilePath JobPath(FS.FileName file)
+            => JobQueue() + file;
+
         FS.FolderPath StageRoot()
             => Root + FS.folder(PN.Stage);
 

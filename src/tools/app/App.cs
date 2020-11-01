@@ -107,11 +107,8 @@ namespace Z0
                 ref readonly var arg = ref skip(AppArgs,i);
                 Wf.Status(arg);
             }
-
         }
 
-        // void EmitApiInfo()
-        //     => EmitApiSummaries.create().Run(Wf);
 
         void RunAll()
         {
@@ -143,8 +140,14 @@ namespace Z0
 
         public void Run()
         {
-
-
+            var cmd = new EmitFileListCmd();
+            cmd.ListName = "tests";
+            cmd.SourceDir = FS.dir(@"J:\lang\net\runtime\artifacts\tests\coreclr\Windows_NT.x64.Debug");
+            cmd.TargetPath = Db.JobPath(FS.file("coreclr.tests", ArchiveFileKinds.Cmd));
+            cmd.FileUriMode = false;
+            cmd.WithKinds(ArchiveFileKinds.Cmd);
+            cmd.LimitEmissions(20);
+            FileEmissions.exec(cmd);
         }
 
 

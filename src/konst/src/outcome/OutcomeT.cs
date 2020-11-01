@@ -22,7 +22,7 @@ namespace Z0
 
         public readonly T Data;
 
-        public readonly Option<Exception> Error;
+        public readonly Exception Error;
 
         public readonly ulong MessageCode;
 
@@ -31,7 +31,6 @@ namespace Z0
             [MethodImpl(Inline)]
             get => MessageCode == 0;
         }
-
 
         [MethodImpl(Inline)]
         public Outcome(bool ok, T data, ulong code = default)

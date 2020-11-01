@@ -12,9 +12,9 @@ namespace Z0
 
     public struct CmdOption : ICmdOption
     {
-        public string Name;
+        public string Name {get;}
 
-        public string Value;
+        public string Value {get;}
 
         [MethodImpl(Inline)]
         public CmdOption(string name, string value)

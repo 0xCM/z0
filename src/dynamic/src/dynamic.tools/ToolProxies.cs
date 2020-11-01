@@ -15,6 +15,8 @@ namespace Z0
     using static Konst;
     using static z;
 
+    using Z0.Lang.Cs;
+
     public readonly struct ToolProxies
     {
         public static EmitResult create(ToolProxySpec config)

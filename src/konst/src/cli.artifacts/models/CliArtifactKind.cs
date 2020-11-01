@@ -1,0 +1,38 @@
+//-----------------------------------------------------------------------------
+// Copyright   :  (c) Chris Moore, 2020
+// License     :  MIT
+//-----------------------------------------------------------------------------
+namespace Z0
+{
+    using System;
+    using System.Runtime.CompilerServices;
+    using System.Reflection.Metadata.Ecma335;
+
+    using static Konst;
+
+    public readonly struct CliArtifactKind : ICliArtifactKind<CliArtifactKind>
+    {
+        public TableIndex Index {get;}
+
+        [MethodImpl(Inline)]
+        public static implicit operator TableIndex(CliArtifactKind src)
+            => src.Index;
+
+        [MethodImpl(Inline)]
+        public static implicit operator CliArtifactKind(TableIndex src)
+            => new CliArtifactKind(src);
+
+        [MethodImpl(Inline)]
+        public CliArtifactKind(TableIndex src)
+        {
+            Index = src;
+        }
+
+        [MethodImpl(Inline)]
+        public string Format()
+            => Index.ToString();
+
+        public override string ToString()
+            => Format();
+    }
+}

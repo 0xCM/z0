@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
     using static z;
-    using static ClrRecords;
+    using static CliRecords;
 
     [WfHost(CommandName)]
     public sealed class EmitEnums : WfHost<EmitEnums,ClrAssembly>

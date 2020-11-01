@@ -15,7 +15,7 @@ namespace Z0
         /// <summary>
         /// The tool identifier
         /// </summary>
-        public ToolId OwnerId {get;}
+        public CmdToolId ToolId {get;}
 
         /// <summary>
         /// The tool output directory
@@ -28,10 +28,10 @@ namespace Z0
         public FS.FolderPath Processed {get;}
 
         [MethodImpl(Inline)]
-        public ToolArchive(ToolId tool, FS.FolderPath src, FS.FolderPath dst)
+        public ToolArchive(CmdToolId tool, FS.FolderPath src, FS.FolderPath dst)
         {
             ToolOutput = src;
-            OwnerId = tool;
+            ToolId = tool;
             Processed = dst;
         }
 

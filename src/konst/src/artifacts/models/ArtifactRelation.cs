@@ -13,22 +13,22 @@ namespace Z0
     /// <summary>
     /// Defines a directed association from one artifact to another
     /// </summary>
-    public readonly struct ArtifactRelation
+    public readonly struct CliDependency
     {
         public readonly ClrArtifactKey Source;
 
         public readonly ClrArtifactKey Target;
 
         [MethodImpl(Inline)]
-        public static implicit operator ArtifactRelation((ClrArtifactKey src, ClrArtifactKey dst) x)
-            => new ArtifactRelation(x.src, x.dst);
+        public static implicit operator CliDependency((ClrArtifactKey src, ClrArtifactKey dst) x)
+            => new CliDependency(x.src, x.dst);
 
         [MethodImpl(Inline)]
-        public static implicit operator Pair<ClrArtifactKey>(ArtifactRelation r)
+        public static implicit operator Pair<ClrArtifactKey>(CliDependency r)
             =>  pair(r.Source, r.Target);
 
         [MethodImpl(Inline)]
-        public ArtifactRelation(ClrArtifactKey src, ClrArtifactKey dst)
+        public CliDependency(ClrArtifactKey src, ClrArtifactKey dst)
         {
             Source = src;
             Target = dst;

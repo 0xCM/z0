@@ -12,12 +12,12 @@ namespace Z0
 
     public readonly struct ToolPaths
     {
-        readonly TableSpan<ToolId> Tools;
+        readonly TableSpan<CmdToolId> Tools;
 
         readonly TableSpan<FS.FilePath> Paths;
 
         [MethodImpl(Inline)]
-        public ToolPaths(ToolId[] tools, FS.FilePath[] paths)
+        public ToolPaths(CmdToolId[] tools, FS.FilePath[] paths)
         {
             Tools = tools;
             Paths = paths;

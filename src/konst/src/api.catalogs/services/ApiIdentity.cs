@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Reflection;
-    using System.Reflection.Metadata.Ecma335;
 
     using static Konst;
     using static z;
@@ -46,14 +45,6 @@ namespace Z0
                     return name;
             }
         }
-
-        [MethodImpl(Inline), Op]
-        public static ArtifactKey operation(in ApiMetadataUri src)
-            => new ArtifactKey(TableIndex.MethodDef, (ClrArtifactKey)vcell(src.Data, OpIndex));
-
-        [MethodImpl(Inline), Op]
-        public static ArtifactKey host(in ApiMetadataUri src)
-            => new ArtifactKey(TableIndex.TypeDef, (ClrArtifactKey)vcell(src.Data, HostIndex));
 
         [MethodImpl(Inline), Op]
         public static ApiOpId kind(in ApiMetadataUri src)

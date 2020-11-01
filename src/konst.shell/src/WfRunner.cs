@@ -141,8 +141,6 @@ namespace Z0
         {
             var hosts = CmdRunners.discover(Parts.Domain.Assembly);
             Wf.Status($"Found {hosts.Length} hosts");
-
-            //ShowDependencies(Wf.Controller);
         }
     }
 

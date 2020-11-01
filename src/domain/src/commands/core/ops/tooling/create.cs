@@ -13,7 +13,7 @@ namespace Z0
     partial struct Tooling
     {
         [MethodImpl(Inline)]
-        public static Tool<T,F> create<T,F>(IWfShell wf, ToolId id, FS.FolderPath src, FS.FolderPath dst)
+        public static Tool<T,F> create<T,F>(IWfShell wf, CmdToolId id, FS.FolderPath src, FS.FolderPath dst)
             where T : struct, ITool<T,F>
             where F : unmanaged, Enum
                 => new Tool<T,F>(wf, id, src, dst);

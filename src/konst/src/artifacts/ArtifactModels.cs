@@ -10,16 +10,8 @@ namespace Z0
     using static Konst;
     using static z;
 
-    [ApiHost]
     public readonly partial struct ArtifactModels
     {
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static TypeRef<T> reference<T>(T t = default)
-            => default;
-
-        [MethodImpl(Inline), Op]
-        public static ArtifactKey key(ArtifactKind kind, ClrArtifactKey id)
-            => new ArtifactKey(kind,id);
 
         [MethodImpl(Inline)]
         public static ArtifactTable<H,A,T> table<H,A,T>(A artifact, T table, H host = default)

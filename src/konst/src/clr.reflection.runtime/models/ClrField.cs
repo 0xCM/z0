@@ -7,7 +7,10 @@ namespace Z0
     using System;
     using System.Reflection;
     using System.Runtime.CompilerServices;
+
     using static Konst;
+
+    using R = System.Reflection;
 
     [ApiDataType(ApiNames.ClrField, true)]
     public readonly struct ClrField : IClrRuntimeMember<ClrField,FieldInfo>
@@ -37,6 +40,31 @@ namespace Z0
         public ClrType FieldType
         {
             get => Definition.FieldType;
+        }
+
+        public R.FieldAttributes Attributes
+        {
+            [MethodImpl(Inline)]
+            get => Definition.Attributes;
+        }
+
+
+        public ClrType DeclaringType
+        {
+            [MethodImpl(Inline)]
+            get => Definition.DeclaringType;
+        }
+
+        public MemoryAddress Address
+        {
+            [MethodImpl(Inline)]
+            get => Definition.FieldHandle.Value;
+        }
+
+        public bool IsStatic
+        {
+            [MethodImpl(Inline)]
+            get => Definition.IsStatic;
         }
 
         [MethodImpl(Inline)]
