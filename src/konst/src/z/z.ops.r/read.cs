@@ -11,37 +11,21 @@ namespace Z0
 
     partial struct z
     {
-        /// <summary>
-        /// Reads a T-cell from a bytespan
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <typeparam name="T">The target type</typeparam>
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline)]
         public static T read<T>(ReadOnlySpan<byte> src)
             where T : struct
                 => memory.read<T>(src);
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline)]
         public static ref readonly T read2<T>(ReadOnlySpan<byte> src)
             => ref memory.read2<T>(src);
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline)]
         public static ref T read2<T>(Span<byte> src)
             => ref memory.read2<T>(src);
 
-        /// <summary>
-        /// Deposits a source value, identified by pointer and offset, into a target reference
-        /// </summary>
-        /// <param name="pSrc">The data source</param>
-        /// <param name="offset">The value offset</param>
-        /// <param name="dst">The receiving reference</param>
-        /// <typeparam name="T">The value type</typeparam>
-        /// <remarks>u8:  movsxd rax,edx -> movzx eax,byte ptr [rcx+rax] -> mov [r8],al -> mov rax,r8 </remarks>
-        /// <remarks>u16: movsxd rax,edx -> movzx eax,word ptr [rcx+rax*2] -> mov [r8],ax -> mov rax,r8 </remarks>
-        /// <remarks>u32: movsxd rax,edx -> mov eax,[rcx+rax*4] -> mov [r8],eax -> mov rax,r8 </remarks>
-        /// <remarks>u64: movsxd rax,edx -> mov rax,[rcx+rax*8] -> mov [r8],rax -> mov rax,r8 </remarks>
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline)]
         public unsafe static ref T read<T>(T* pSrc, int offset, ref T dst)
             where T : unmanaged
                 => ref memory.read(pSrc, offset, ref dst);
@@ -115,11 +99,6 @@ namespace Z0
         public static ref readonly T read<T>(in byte src, int offset)
             => ref memory.read<T>(src, offset);
 
-        /// <summary>
-        /// Reads a T-cell from a specified data source after skipping a specified number of source cells
-        /// </summary>
-        /// <param name="src">The data source</param>
-        /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline)]
         public static ref readonly T read<T>(in sbyte src, int offset)
             => ref memory.read<T>(src, offset);

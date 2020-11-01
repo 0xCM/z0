@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class XTend
+    partial class XSpan
     {
         /// <summary>
         /// Evaluates whether two spans have identical content
@@ -17,12 +17,13 @@ namespace Z0
         /// <param name="lhs">The left span</param>
         /// <param name="rhs">The right span</param>
         /// <typeparam name="T">The value type</typeparam>
+        [Op, Closures(Closure)]
         public static bool ValuesEqual<T>(this ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs)
             where T : unmanaged, IEquatable<T>
         {
             if(lhs.Length != rhs.Length)
                 return false;
-            
+
             for(var i=0; i<lhs.Length; i++)
                 if(!lhs[i].Equals(rhs[i]))
                     return false;
@@ -35,9 +36,9 @@ namespace Z0
         /// <param name="lhs">The left span</param>
         /// <param name="rhs">The right span</param>
         /// <typeparam name="T">The value type</typeparam>
-        [MethodImpl(Inline)]
+        [Op, Closures(Closure)]
         public static bool ValuesEqual<T>(this Span<T> lhs, ReadOnlySpan<T> rhs)
             where T : unmanaged, IEquatable<T>
-                => lhs.ReadOnly().ValuesEqual(rhs);        
+                => lhs.ReadOnly().ValuesEqual(rhs);
     }
 }

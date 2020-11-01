@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial class XTend
+    partial class XSpan
     {
        /// <summary>
         /// Projects a range of elements from a source span to a target span
@@ -40,7 +40,7 @@ namespace Z0
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline)]
         public static Span<T> MapRange<S,T>(this Span<S> src, int offset, int length, Func<S,T> f)
-            => src.ReadOnly().MapRange(offset,length, f);     
+            => src.ReadOnly().MapRange(offset,length, f);
 
         /// <summary>
         /// Projects a source span to target span via a supplied transformation

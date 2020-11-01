@@ -8,12 +8,13 @@ namespace Z0
 
     using static Konst;
 
-    partial class XTend
+    partial class XSpan
     {
         /// <summary>
         /// Eliminates trailing zeros in the source span
         /// </summary>
         /// <param name="src">The source span</param>
+        [Op]
         public static Span<byte> TrimEnd(this Span<byte> src)
         {
             var length = src.Length;

@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class XTend
+    partial class XSpan
     {
         /// <summary>
         /// Formats a span as a table
@@ -22,7 +22,8 @@ namespace Z0
         /// <param name="padlen">The optional padding for each cell; if less than zero the calls are left-padded; if greater than zero, the cells are right-padded</param>
         /// <param name="padchar">The optional pad character; if unspecified and padlen is specified it defaults to a space</param>
         /// <typeparam name="T">The span element type</typeparam>
-        public static string FormatTable<T>(this Span<T> src, int rowcount, int colcount, 
+        [Op, Closures(Closure)]
+        public static string FormatTable<T>(this Span<T> src, int rowcount, int colcount,
             int? padlen = null, char? padchar = null, char? rowsep = null, char? cellsep = null)
                 where T : unmanaged
         {
@@ -33,7 +34,7 @@ namespace Z0
             const char pipe = '|';
 
             var rowlen = colcount;
-            var cells = rowcount * colcount;            
+            var cells = rowcount * colcount;
             var sb = string.Empty.Build();
             var lastIx = cells - 1;
             var nextrow = rowsep ?? lf;
@@ -58,14 +59,14 @@ namespace Z0
                         sb.Append(cell.PadLeft(pad, fill));
                     else
                         sb.Append(cell.PadRight(pad, fill));
-                }             
+                }
             }
 
             return sb.ToString();
-        }          
+        }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         static bool IsRowHead(int index, int rowlen)
-            => index == 0 || index % rowlen == 0; 
+            => index == 0 || index % rowlen == 0;
     }
 }

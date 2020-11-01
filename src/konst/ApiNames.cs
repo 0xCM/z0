@@ -32,6 +32,7 @@ readonly struct ApiNames
 
     public const string ApiTestIdentity = api + dot + identity + dot + tests;
 
+    public const string ApiSigs = api + dot + signatures;
 
     public const string ApiIdentityReflector = api + dot + identity + dot + reflector;
 
@@ -96,6 +97,11 @@ readonly struct ApiNames
     public const string CharBlocks = blocks + dot + chars;
 
     public const string SpanBlocks = blocks + dot + spans;
+
+
+    public const string Spans = spans;
+
+    public const string XSpans = spans + dot + extensions;
 
     // ~~ Cells
     // ~~ -----------------------------------------------------------------------------------------

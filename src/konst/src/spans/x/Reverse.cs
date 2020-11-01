@@ -10,14 +10,14 @@ namespace Z0
 
     using static Konst;
 
-    partial class XTend
+    partial class XSpan
     {
         /// <summary>
         /// Produces a reversed span from a readonly span
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline)]
+        [Op, Closures(Closure)]
         public static Span<T> Reverse<T>(this ReadOnlySpan<T> src)
         {
             var dst = src.ToSpan();

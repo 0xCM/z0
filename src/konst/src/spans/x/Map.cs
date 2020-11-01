@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial class XTend
+    partial class XSpan
     {
         /// <summary>
         /// Projects a source span to target span via a supplied transformation

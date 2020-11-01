@@ -20,6 +20,12 @@ namespace Z0
         /// </summary>
         public byte[] Encoded {get;}
 
+        public byte[] Storage
+        {
+            [MethodImpl(Inline)]
+            get => Encoded;
+        }
+
         /// <summary>
         /// The encoded content as byte array
         /// </summary>
@@ -96,29 +102,6 @@ namespace Z0
         public BinaryCode(byte[] bytes)
             => Encoded = z.insist(bytes);
 
-        [MethodImpl(Inline)]
-        public static implicit operator BinaryCode(Span<byte> src)
-            => new BinaryCode(src.ToArray());
-
-        [MethodImpl(Inline)]
-        public static implicit operator byte[](BinaryCode src)
-            => src.Encoded;
-
-        [MethodImpl(Inline)]
-        public static implicit operator BinaryCode(byte[] src)
-            => new BinaryCode(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator ReadOnlySpan<byte>(BinaryCode src)
-            => src.Encoded;
-
-        [MethodImpl(Inline)]
-        public static bool operator==(BinaryCode a, BinaryCode b)
-            => a.Equals(b);
-
-        [MethodImpl(Inline)]
-        public static bool operator!=(BinaryCode a, BinaryCode b)
-            => !a.Equals(b);
 
         public bool Equals(BinaryCode src)
         {
@@ -151,6 +134,30 @@ namespace Z0
         [MethodImpl(Inline)]
         public EncodedStream Stream()
             => new EncodedStream(this);
+
+        [MethodImpl(Inline)]
+        public static implicit operator BinaryCode(Span<byte> src)
+            => new BinaryCode(src.ToArray());
+
+        [MethodImpl(Inline)]
+        public static implicit operator byte[](BinaryCode src)
+            => src.Encoded;
+
+        [MethodImpl(Inline)]
+        public static implicit operator BinaryCode(byte[] src)
+            => new BinaryCode(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator ReadOnlySpan<byte>(BinaryCode src)
+            => src.Encoded;
+
+        [MethodImpl(Inline)]
+        public static bool operator==(BinaryCode a, BinaryCode b)
+            => a.Equals(b);
+
+        [MethodImpl(Inline)]
+        public static bool operator!=(BinaryCode a, BinaryCode b)
+            => !a.Equals(b);
 
         /// <summary>
         /// The canonical zero

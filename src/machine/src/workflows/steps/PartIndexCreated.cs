@@ -31,6 +31,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.format(SSx2, EventId, ApiIndexMetrics.from(Index).Format());
+            => text.format(SSx2, EventId, MemoryIndexMetrics.from(Index).Format());
     }
 }

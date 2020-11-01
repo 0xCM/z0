@@ -5,11 +5,11 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;    
+    using System.Runtime.InteropServices;
 
     using static Konst;
 
-    partial class XTend
+    partial class XSpan
     {
         /// <summary>
         /// Renders a non-allocating mutable view over a source span segment that is presented as an individual target value

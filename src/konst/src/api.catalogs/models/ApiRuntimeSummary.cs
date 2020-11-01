@@ -8,12 +8,20 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static z;
 
-    partial class XTend
+    public struct ApiRuntimeSummary
     {
+        public const string TableId = "z0.api";
 
-        [MethodImpl(Inline)]
-        public static void Iter<T>(this Span<T> src, Action<T> f)
-            => z.iter(src,f); 
+        public MemoryAddress Address;
+
+        public ApiMetadataUri Uri;
+
+        public GenericState Genericity;
+
+        public ApiSig Sig;
+
+        public MethodMetadata Metadata;
     }
 }

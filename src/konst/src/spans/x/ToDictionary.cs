@@ -9,19 +9,22 @@ namespace Z0
     using System.Collections.Generic;
 
     using static Konst;
+    using static z;
 
-    partial class XTend
+    partial class XSpan
     {
         /// <summary>
         /// Creates a dictionary from a span using the element indices as keys
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The element type</typeparam>
+        [Op, Closures(Closure)]
         public static IDictionary<int,T> ToDictionary<T>(this ReadOnlySpan<T> src)
         {
-            var dst = new Dictionary<int,T>(src.Length);
-            for(var i = 0u; i< src.Length; i++)
-                dst[(int)i] = z.skip(src,i);
+            var count = src.Length;
+            var dst = dict<int,T>(count);
+            for(var i = 0u; i<count; i++)
+                dst[(int)i] = skip(src,i);
             return dst;
         }
 
@@ -30,8 +33,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline)]
-        public static IDictionary<int,T> ToDictionary<T>(this Span<T> src)        
+        [Op, Closures(Closure)]
+        public static IDictionary<int,T> ToDictionary<T>(this Span<T> src)
             => src.ReadOnly().ToDictionary();
     }
 }

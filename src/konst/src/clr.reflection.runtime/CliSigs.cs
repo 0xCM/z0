@@ -13,22 +13,22 @@ namespace Z0
     using static z;
 
     [ApiHost]
-    public readonly struct ClrSigs
+    public readonly struct CliSigs
     {
         [MethodImpl(Inline), Op]
-        public static byte[] data(Module src, ClrArtifactKey key)
+        public static CliSig resolve(MethodInfo src)
+            =>  new CliSig(data(src.Module, src.MetadataToken));
+
+        [MethodImpl(Inline), Op]
+        public static CliSig resolve(Type src)
+            => new CliSig(data(src.Module, src.MetadataToken));
+
+        [MethodImpl(Inline), Op]
+        public static CliSig resolve(FieldInfo src)
+            => new CliSig(data(src.Module, src.MetadataToken));
+
+        [MethodImpl(Inline), Op]
+        internal static byte[] data(Module src, ClrArtifactKey key)
             => src.ResolveSignature((int)key);
-
-        [MethodImpl(Inline), Op]
-        public static ClrSig resolve(MethodInfo src)
-            =>  new ClrSig(ClrArtifactKind.Method, data(src.Module, src.MetadataToken));
-
-        [MethodImpl(Inline), Op]
-        public static ClrSig resolve(Type src)
-            => new ClrSig(ClrArtifactKind.Type, data(src.Module, src.MetadataToken));
-
-        [MethodImpl(Inline), Op]
-        public static ClrSig resolve(FieldInfo src)
-            => new ClrSig(ClrArtifactKind.Field, data(src.Module, src.MetadataToken));
     }
 }

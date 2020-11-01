@@ -6,22 +6,28 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
+    using System.IO;
 
     using static Konst;
     using static z;
 
-    public struct ApiSummaryInfo
+    public struct ApiRuntimeMember
     {
-        public const string TableId = "z0.api";
-
         public MemoryAddress Address;
 
         public ApiMetadataUri Uri;
 
         public GenericState Genericity;
 
-        public ClrSig Sig;
+        public ApiSig Sig;
+
+        public MethodInfo Definition;
 
         public MethodMetadata Metadata;
+
+        public X86Function x86Fx;
+
+        public CilFunction CilFx;
     }
 }

@@ -10,14 +10,15 @@ namespace Z0
 
     using static Konst;
 
-    partial class XTend
+    partial class XSpan
     {
         /// <summary>
         /// Constructs a hash set from span content
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The item type</typeparam>
-        public static ISet<T> ToSet<T>(this Span<T> src)        
+        [Op, Closures(Closure)]
+        public static ISet<T> ToSet<T>(this Span<T> src)
             where T : unmanaged
                 => Spans.set(src.ReadOnly());
 
@@ -26,7 +27,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The item type</typeparam>
-        public static ISet<T> ToSet<T>(this ReadOnlySpan<T> src)        
+        [Op, Closures(Closure)]
+        public static ISet<T> ToSet<T>(this ReadOnlySpan<T> src)
             where T : unmanaged
                 => Spans.set(src);
 
@@ -35,7 +37,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The item type</typeparam>
-        public static ISet<T> ToSet<T>(this ReadOnlySpan<T> a, ReadOnlySpan<T> b)        
+        [Op, Closures(Closure)]
+        public static ISet<T> ToSet<T>(this ReadOnlySpan<T> a, ReadOnlySpan<T> b)
             where T : unmanaged
                 => Spans.set(a,b);
 
@@ -44,9 +47,9 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The item type</typeparam>
-        public static ISet<T> ToSet<T>(this Span<T> src, ReadOnlySpan<T> b)        
+        [Op, Closures(Closure)]
+        public static ISet<T> ToSet<T>(this Span<T> src, ReadOnlySpan<T> b)
             where T : unmanaged
                 => src.ReadOnly().ToSet(b);
-
     }
 }

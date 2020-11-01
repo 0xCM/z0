@@ -39,7 +39,7 @@ namespace Z0
         public static ApiCodeBlockIndex BuildIndex(IWfShell wf, WfHost host)
         {
             wf = wf.WithHost(host);
-            using var builder = new ApiIndexBuilder(wf, host);
+            using var builder = new MemoryIndexBuilder(wf, host);
             builder.Run();
             var target = builder.Product;
             wf.Raise(new PartIndexCreated(host, target, wf.Ct));

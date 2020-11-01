@@ -110,8 +110,8 @@ namespace Z0
 
         }
 
-        void EmitApiInfo()
-            => EmitApiSummaries.create().Run(Wf);
+        // void EmitApiInfo()
+        //     => EmitApiSummaries.create().Run(Wf);
 
         void RunAll()
         {
@@ -123,7 +123,6 @@ namespace Z0
             EmitScripts();
             EmitAsmRefs();
             EmitPeHeaders();
-            EmitApiInfo();
         }
 
         void ShowCases()
@@ -145,7 +144,7 @@ namespace Z0
         public void Run()
         {
 
-            EmitApiInfo();
+
         }
 
 

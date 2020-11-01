@@ -17,8 +17,8 @@ namespace Z0
         /// </summary>
         /// <param name="length">The number cells to allocate</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Closures(AllNumeric), Op]
-        public static Span<T> alloc<T>(int length)
+        [MethodImpl(Inline)]
+        public static Span<T> alloc<T>(ulong length)
             => sys.alloc<T>(length);
 
         /// <summary>
@@ -26,8 +26,8 @@ namespace Z0
         /// </summary>
         /// <param name="length">The number cells to allocate</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
-        public static Span<T> alloc<T>(ulong length)
-            => sys.alloc<T>(length);
+        [MethodImpl(Inline), Closures(Closure), Op]
+        public static Span<T> alloc<T>(int length)
+            => alloc<T>((ulong)length);
     }
 }

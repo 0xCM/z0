@@ -26,6 +26,24 @@ namespace Z0
             Members = src;
         }
 
+        /// <summary>
+        /// The defining part
+        /// </summary>
+        public PartId Part
+        {
+            [MethodImpl(Inline)]
+            get => Host.PartId;
+        }
+
+        /// <summary>
+        /// The defining part
+        /// </summary>
+        public Type HostType
+        {
+            [MethodImpl(Inline)]
+            get => Host.HostType;
+        }
+
         public ApiMember[] Storage
         {
             [MethodImpl(Inline)]

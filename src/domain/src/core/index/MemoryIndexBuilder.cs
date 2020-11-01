@@ -13,7 +13,7 @@ namespace Z0
     using static z;
     using static ApiCaptureIndexParts;
 
-    public class ApiIndexBuilder : IDisposable
+    public class MemoryIndexBuilder : IDisposable
     {
         public ApiCodeBlockIndex Product;
 
@@ -34,7 +34,7 @@ namespace Z0
             Wf.Disposed(Host);
         }
 
-        public ApiIndexBuilder(IWfShell wf, WfHost host)
+        public MemoryIndexBuilder(IWfShell wf, WfHost host)
         {
             Host = host;
             Wf = wf.WithHost(Host);

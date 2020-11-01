@@ -10,22 +10,23 @@ namespace Z0
 
     using static Konst;
 
-    partial class XTend
+    partial class XSpan
     {
         /// <summary>
         /// Lifts span content into the LINQ monad
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The element type</typeparam>
+        [Op, Closures(Closure)]
         public static IEnumerable<T> ToEnumerable<T>(this ReadOnlySpan<T> src)
             => src.ToArray();
-            
+
         /// <summary>
         /// Lifts span content into the LINQ monad
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline)]
+        [Op, Closures(Closure)]
         public static IEnumerable<T> ToEnumerable<T>(this Span<T> src)
             => src.ToArray();
     }

@@ -6,18 +6,17 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
     using static Konst;
 
-    partial class XTend
+    partial class XSpan
     {
         /// <summary>
         /// Presents a u8 span as a T-span
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The Target type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<T> Cast<T>(this Span<byte> src)
             where T : struct
                 => z.recover<byte,T>(src);
@@ -27,7 +26,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The Target type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<T> Cast<T>(this Span<ushort> src)
             where T : struct
                 => z.recover<ushort,T>(src);
@@ -37,7 +36,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The Target type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<T> Cast<T>(this Span<uint> src)
             where T : struct
                 => z.recover<uint,T>(src);
@@ -47,7 +46,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The Target type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<T> Cast<T>(this Span<ulong> src)
             where T : struct
                 => z.recover<ulong,T>(src);
@@ -57,7 +56,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The Target type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<T> Cast<T>(this Span<char> src)
             where T : struct
                 => z.recover<char,T>(src);
@@ -67,7 +66,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The Target type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ReadOnlySpan<T> Cast<T>(this ReadOnlySpan<byte> src)
             where T : struct
                 => z.recover<byte,T>(src);
@@ -77,7 +76,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The Target type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ReadOnlySpan<T> Cast<T>(this ReadOnlySpan<ushort> src)
             where T : struct
                 => z.recover<ushort,T>(src);
@@ -87,7 +86,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The Target type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ReadOnlySpan<T> Cast<T>(this ReadOnlySpan<uint> src)
             where T : struct
                 => z.recover<uint,T>(src);
@@ -97,7 +96,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The Target type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ReadOnlySpan<T> Cast<T>(this ReadOnlySpan<ulong> src)
             where T : struct
                 => z.recover<ulong,T>(src);
@@ -107,7 +106,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The Target type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ReadOnlySpan<T> Cast<T>(this ReadOnlySpan<char> src)
             where T : struct
                 => z.recover<char,T>(src);
@@ -118,7 +117,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="S">The source cell type</typeparam>
         /// <typeparam name="T">The target cell type</typeparam>
-        [MethodImpl(Inline)]        
+        [MethodImpl(Inline)]
         public static Span<T> Cast<S,T>(this Span<S> src)
             where S : struct
             where T : struct
@@ -130,7 +129,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="S">The source cell type</typeparam>
         /// <typeparam name="T">The target cell type</typeparam>
-        [MethodImpl(Inline)]        
+        [MethodImpl(Inline)]
         public static ReadOnlySpan<T> Cast<S,T>(this ReadOnlySpan<S> src)
             where S : struct
             where T : struct

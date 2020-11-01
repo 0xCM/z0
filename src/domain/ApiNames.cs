@@ -37,5 +37,7 @@ namespace Z0
         public const string JsonData = data + dot + json;
 
         public const string ApiData = api + dot + data;
+
+        public const string ApiRuntime = api + dot + runtime;
     }
 }

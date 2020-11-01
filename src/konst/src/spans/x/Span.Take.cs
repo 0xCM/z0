@@ -9,24 +9,26 @@ namespace Z0
 
     using static Konst;
     using static z;
+    using static Spans;
 
-    public static class SpanTake
+    partial class XSpan
     {
         /// <summary>
         /// Reads a partial value if there aren't a sufficient number of bytes to comprise a target value
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The target type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static T Take<T>(this Span<byte> src)
             where T : struct
-                => z.partial<T>(src);
+                => partial<T>(src);
 
         /// <summary>
         /// Copies at most n bytes from the source span to the target span where n is the length of the target span
         /// </summary>
         /// <param name="src">The source span</param>
         /// <param name="dst">The target span</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Span<byte> TakeBytes(this ReadOnlySpan<byte> src, Span<byte> dst)
         {
             if(src.Length > dst.Length)
@@ -36,27 +38,27 @@ namespace Z0
             return dst;
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static byte TakeUInt8<T>(this ReadOnlySpan<T> src)
             where T : unmanaged
                 => first(w8, src);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static byte TakeUInt8<T>(this Span<T> src)
             where T : unmanaged
                 => first(w8, src);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ushort TakeUInt16<T>(this Span<T> src)
             where T : unmanaged
                 => first(w16, src);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static uint TakeUInt32<T>(this ReadOnlySpan<T> src)
             where T : unmanaged
                 => first(w32, src);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static uint TakeUInt24<T>(this ReadOnlySpan<T> src)
             where T : unmanaged
         {
@@ -74,22 +76,22 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The primal source type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static uint TakeUInt24<T>(this Span<T> src)
             where T : unmanaged
                 => src.ReadOnly().TakeUInt24();
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static uint TakeUInt32<T>(this Span<T> src)
             where T : unmanaged
                 => first(w32, src);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ulong TakeUInt64<T>(this ReadOnlySpan<T> src)
             where T : unmanaged
                 => first(w64, src);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ulong TakeUInt64<T>(this Span<T> src)
             where T : unmanaged
                 => first(w64, src);

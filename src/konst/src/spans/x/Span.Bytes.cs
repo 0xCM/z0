@@ -6,11 +6,10 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
     using static Konst;
 
-    partial class XTend
+    partial class XSpan
     {
         /// <summary>
         /// Presents selected span content as a span of bytes
@@ -25,7 +24,7 @@ namespace Z0
                 => z.bytes(src, offset,length);
 
         /// <summary>
-        /// Reimagines a span of generic values as a span of bytes
+        /// Presents a span of generic values as a span of bytes
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The source value type</typeparam>
@@ -35,7 +34,7 @@ namespace Z0
                 => z.bytes(src);
 
         /// <summary>
-        /// Reimagines a readonly span of generic values as a span of readonly bytes
+        /// Presents a readonly span of generic values as a span of readonly bytes
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The source span element type</typeparam>

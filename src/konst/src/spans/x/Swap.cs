@@ -8,8 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static  z;
 
-    partial class XTend
+    partial class XSpan
     {
         /// <summary>
         /// Interchanges span elements i and j
@@ -18,9 +19,9 @@ namespace Z0
         /// <param name="i">An index of a span element</param>
         /// <param name="j">An index of a span element</param>
         /// <typeparam name="T">The span element type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static void Swap<T>(this Span<T> src, uint i, uint j)
             where T : unmanaged
-                => z.swap(src,i,j);
+                => swap(src,i,j);
     }
 }

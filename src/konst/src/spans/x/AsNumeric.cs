@@ -10,14 +10,14 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial class XTend
+    partial class XSpan
     {
         /// <summary>
         /// Presents a span of generic values as a span of signed 8-bit integers
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The source value type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<sbyte> AsInt8<T>(this Span<T> src)
             where T : struct
                 => recover<T,sbyte>(src);
@@ -27,7 +27,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The source value type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<byte> AsUInt8<T>(this Span<T> src)
             where T : struct
                 => recover<T,byte>(src);
@@ -37,7 +37,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The source value type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<short> AsInt16<T>(this Span<T> src)
             where T : struct
                 => recover<T,short>(src);
@@ -47,7 +47,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The source value type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<ushort> AsUInt16<T>(this Span<T> src)
             where T : struct
                 => recover<T,ushort>(src);
@@ -57,7 +57,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The source value type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<int> AsInt32<T>(this Span<T> src)
             where T : struct
                 => recover<T,int>(src);
@@ -67,7 +67,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The source value type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<uint> AsUInt32<T>(this Span<T> src)
             where T : struct
                 => recover<T,uint>(src);
@@ -77,7 +77,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The source value type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<long> AsInt64<T>(this Span<T> src)
             where T : struct
                 => recover<T,long>(src);
@@ -87,7 +87,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The source value type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<ulong> AsUInt64<T>(this Span<T> src)
             where T : struct
                 => recover<T,ulong>(src);
@@ -97,7 +97,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The source value type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<float> AsFloat32<T>(this Span<T> src)
             where T : struct
                 => recover<T,float>(src);
@@ -107,7 +107,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The source value type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<double> AsFloat64<T>(this Span<T> src)
             where T : struct
                 => recover<T,double>(src);
@@ -117,27 +117,37 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The source value type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<decimal> AsFloat128<T>(this Span<T> src)
             where T : struct
                 => recover<T,decimal>(src);
 
         /// <summary>
-        /// Presents a span of generic values as a span of bools
+        /// Presents a span of generic values as a span of bool
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The source value type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<bool> AsBool<T>(this Span<T> src)
             where T : struct
                 => recover<T,bool>(src);
+
+        /// <summary>
+        /// Presents a span of generic values as a span of <see cref='bit'/>
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The source value type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Span<bit> AsBit8u<T>(this Span<T> src)
+            where T : struct
+                => recover<T,bit>(src);
 
         /// <summary>
         /// Presents a span of generic values as a span of 64-bit floats
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The source value type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<char> AsChar<T>(this Span<T> src)
             where T : struct
                 => recover<T,char>(src);
@@ -158,7 +168,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The source span element type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ReadOnlySpan<sbyte> AsInt8<T>(this ReadOnlySpan<T> src)
             where T : struct
                 => recover<T,sbyte>(src);
@@ -168,7 +178,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The source value type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ReadOnlySpan<short> AsInt16<T>(this ReadOnlySpan<T> src)
             where T : struct
                 => recover<T,short>(src);
@@ -178,7 +188,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The source value type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ReadOnlySpan<ushort> AsUInt16<T>(this ReadOnlySpan<T> src)
             where T : struct
                 => recover<T,ushort>(src);
@@ -188,7 +198,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The source value type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ReadOnlySpan<int> AsInt32<T>(this ReadOnlySpan<T> src)
             where T : struct
                 => recover<T,int>(src);
@@ -198,7 +208,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The source value type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ReadOnlySpan<uint> AsUInt32<T>(this ReadOnlySpan<T> src)
             where T : struct
                 => recover<T,uint>(src);
@@ -208,7 +218,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The source value type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ReadOnlySpan<long> AsInt64<T>(this ReadOnlySpan<T> src)
             where T : struct
                 => recover<T,long>(src);
@@ -218,7 +228,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The source value type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ReadOnlySpan<ulong> AsUInt64<T>(this ReadOnlySpan<T> src)
             where T : struct
                 => recover<T,ulong>(src);
@@ -228,7 +238,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The source value type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ReadOnlySpan<float> AsFloat32<T>(this ReadOnlySpan<T> src)
             where T : struct
                 => recover<T,float>(src);
@@ -238,7 +248,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The source value type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ReadOnlySpan<double> AsFloat64<T>(this ReadOnlySpan<T> src)
             where T : struct
                 => recover<T,double>(src);
@@ -248,7 +258,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The source value type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ReadOnlySpan<decimal> AsFloat128<T>(this ReadOnlySpan<T> src)
             where T : struct
                 => recover<T,decimal>(src);
@@ -258,7 +268,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The source value type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ReadOnlySpan<bool> AsBool<T>(this ReadOnlySpan<T> src)
             where T : struct
                 => recover<T,bool>(src);
@@ -268,7 +278,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The source value type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ReadOnlySpan<char> AsChar<T>(this ReadOnlySpan<T> src)
             where T : struct
                 => recover<T,char>(src);

@@ -5,8 +5,11 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
 
-    partial class XTend
+    using static Konst;
+
+    partial class XSpan
     {
         /// <summary>
         /// Determines whether any elements of a span satisfy a supplied predicate
@@ -14,6 +17,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <param name="f">The predicate</param>
         /// <typeparam name="T">The element type</typeparam>
+        [Op, Closures(Closure)]
         public static bool Any<T>(this ReadOnlySpan<T> src, Func<T,bool> f)
         {
             var it = src.GetEnumerator();
@@ -29,8 +33,15 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <param name="f">The predicate</param>
         /// <typeparam name="T">The element type</typeparam>
+        [Op, Closures(Closure)]
         public static bool Any<T>(this Span<T> src, Func<T,bool> f)
              where T : unmanaged
-                => src.ReadOnly().Any(f);
+        {
+            var it = src.GetEnumerator();
+            while(it.MoveNext())
+                if(f(it.Current))
+                    return true;
+            return false;
+        }
     }
 }

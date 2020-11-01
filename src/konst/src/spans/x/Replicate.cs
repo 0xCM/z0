@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class XTend
+    partial class XSpan
     {
         /// <summary>
         /// Clones the source span into a new span
@@ -17,6 +17,7 @@ namespace Z0
         /// <param name="src">The span to replicate</param>
         /// <typeparam name="T">The element type</typeparam>
         /// <returns>Returns the replicated span</returns>
+        [Op, Closures(Closure)]
         public static Span<T> Replicate<T>(this ReadOnlySpan<T> src)
         {
             Span<T> dst = new T[src.Length];
@@ -30,7 +31,7 @@ namespace Z0
         /// <param name="src">The span to replicate</param>
         /// <typeparam name="T">The element type</typeparam>
         /// <returns>Returns the replicated span</returns>
-        [MethodImpl(Inline)]
+        [Op, Closures(Closure)]
         public static Span<T> Replicate<T>(this Span<T> src)
             => src.ReadOnly().Replicate();
     }

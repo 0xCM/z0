@@ -7,18 +7,18 @@ namespace Z0
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Runtime.CompilerServices;    
-    
+    using System.Runtime.CompilerServices;
+
     using static Konst;
-    
-    partial class XTend
+
+    partial class XSpan
     {
         /// <summary>
         ///  Constructs a memory segment from the content of the (hopefully finite) stream (allocating)
         /// </summary>
         /// <param name="src">The source stream</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
+        [Op, Closures(Closure)]
         public static Memory<T> ToMemory<T>(this IEnumerable<T> src)
             => src.ToArray();
 
@@ -27,7 +27,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source stream</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
+        [Op, Closures(Closure)]
         public static ReadOnlyMemory<T> ToReadOnlyMemory<T>(this IEnumerable<T> src)
             => src.ToArray();
     }

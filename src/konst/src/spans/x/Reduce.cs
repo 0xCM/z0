@@ -5,27 +5,32 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;    
+    using System.Runtime.InteropServices;
 
     using static Konst;
+    using static z;
 
-    partial class XTend
-    {            
+    partial class XSpan
+    {
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static T Reduce<T>(this ReadOnlySpan<T> src, Func<T,T,T> f)
         {
-            if(src.IsEmpty)
-                ThrowEmptySpanError();
-            else if(src.Length == 1)
-                return MemoryMarshal.GetReference(src);
-            
-            var x = src[0];
-            for(var i=1; i<src.Length; i++)
-                x = f(x,src[i]);
-            return x;            
+            var count = src.Length;
+            if(count == 0)
+                return default;
+            else if(count == 1)
+                return first(src);
+            else
+            {
+                var x = first(src);
+                for(var i=1; i<count; i++)
+                    x = f(x, skip(src,i));
+                return x;
+            }
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static T Reduce<T>(this Span<T> src, Func<T,T,T> f)
-            => src.ReadOnly().Reduce(f);        
+            => src.ReadOnly().Reduce(f);
     }
 }

@@ -16,7 +16,7 @@ namespace Z0
 
         public static ReadOnlySpan<byte> RenderWidths => new byte[]{16,64,16,64,32};
 
-        public static string format(in ApiSummaryInfo src)
+        public static string format(in ApiRuntimeSummary src)
             => string.Format(RenderPattern, src.Address, src.Uri, src.Genericity, src.Sig, src.Metadata);
     }
 }

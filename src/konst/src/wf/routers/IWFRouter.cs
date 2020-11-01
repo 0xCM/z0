@@ -4,23 +4,27 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
+
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface IWfRunner : IWfActor
+    public interface IWfRouter : IDisposable
     {
-        void Run();
+        WfRouterId RouterId {get;}
+
+        Type RouterType {get;}
     }
 
     [Free]
-    public interface IWfRunner<A>
+    public interface IWfRouter<S> : IWfRouter
     {
-        void Run(A args);
+        Outcome Route(S src);
     }
 
     [Free]
-    public interface IWfRunner<H,A> : IWfRunner<H>
-        where H : IWfRunner<H,A>
+    public interface IWfRouter<S,T> : IWfRouter
     {
+        Outcome Route(S src, out T dst);
     }
 }

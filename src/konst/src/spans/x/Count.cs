@@ -9,8 +9,8 @@ namespace Z0
 
     using static Konst;
 
-    partial class XTend
-    {    
+    partial class XSpan
+    {
         /// <summary>
         /// Counts the number of values in the source that satisfy the predicate
         /// </summary>

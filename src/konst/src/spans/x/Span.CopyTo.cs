@@ -9,9 +9,8 @@ namespace Z0
 
     using static Konst;
 
-    partial class XTend
+    partial class XSpan
     {
-        
         /// <summary>
         /// Copies the source span to a target span begininning at a specified target offset
         /// </summary>
@@ -19,7 +18,7 @@ namespace Z0
         /// <param name="dst">The target span</param>
         /// <param name="offset">The target offset</param>
         /// <typeparam name="T">The span cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static void CopyTo<T>(this Span<T> src, Span<T> dst, int offset)
             => src.CopyTo(dst.Slice(offset));
 
@@ -30,7 +29,7 @@ namespace Z0
         /// <param name="dst">The target span</param>
         /// <param name="offset">The target offset</param>
         /// <typeparam name="T">The span cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static void CopyTo<T>(this ReadOnlySpan<T> src, Span<T> dst, int offset)
             => src.CopyTo(dst.Slice(offset));
     }

@@ -75,6 +75,10 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
+        public static ApiMetadataUri identify(Type src)
+            => new ApiMetadataUri(vparts(w128, (uint)src.Assembly.Id(), (uint)src.MetadataToken, (uint)0, (uint)0));
+
+        [MethodImpl(Inline), Op]
         public static ref ApiMetadataUri identify(MethodInfo src, out ApiMetadataUri dst)
         {
             dst = identify(src);

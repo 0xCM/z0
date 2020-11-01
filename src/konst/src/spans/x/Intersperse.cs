@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    partial class XTend
+    partial class XSpan
     {
         /// <summary>
         /// Creates a new span by interposing a specified element between each element of an existing span
@@ -14,6 +14,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <param name="x">The value to place between each element in the new span</param>
         /// <typeparam name="T">The element type</typeparam>
+        [Op, Closures(Closure)]
         public static Span<T> Intersperse<T>(this ReadOnlySpan<T> src, T x)
         {
             var len = src.Length;
@@ -23,9 +24,9 @@ namespace Z0
             Span<T> dst = new T[len*2 - 1];
             for(int i=0, j=0; i<len; i++, j+= 2)
             {
-                dst[j] = src[i];                
+                dst[j] = src[i];
                 if(i != src.Length - 1)
-                    dst[j + 1] = x;                    
+                    dst[j + 1] = x;
             }
             return dst;
         }
@@ -36,6 +37,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <param name="x">The value to place between each element in the new span</param>
         /// <typeparam name="T">The element type</typeparam>
+        [Op, Closures(Closure)]
         public static Span<T> Intersperse<T>(this Span<T> src, T x)
             => src.ReadOnly().Intersperse(x);
     }

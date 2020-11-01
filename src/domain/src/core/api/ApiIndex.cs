@@ -8,8 +8,10 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static z;
 
-    partial struct z
+    public abstract class ApiIndex<T>
+        where T : ApiIndex<T>
     {
 
     }

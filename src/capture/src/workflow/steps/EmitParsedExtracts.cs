@@ -71,8 +71,6 @@ namespace Z0
             else
                 Wf.Error($"Could not save {target}");
 
-            //Emitted = ApiCodeBlocks.save(Source.Storage.Map(x => new ApiCodeBlock(x.Uri, x.Address, x.Encoded)), target);
-            //Event = new ApiCodeTableSaved(Host.Id, Uri, Emitted, target, Wf.Ct);
         }
     }
 }
