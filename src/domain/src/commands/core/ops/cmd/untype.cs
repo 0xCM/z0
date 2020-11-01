@@ -21,13 +21,13 @@ namespace Z0
             var count = fields.Length;
             var reflected = alloc<ClrFieldValue>(count);
             ClrQuery.values(spec, fields, reflected);
-            var buffer = alloc<CmdOption>(count);
+            var buffer = alloc<CmdArg>(count);
             var target = span(buffer);
             var source = @readonly(reflected);
             for(var i=0u; i<count; i++)
             {
                 ref readonly var fv = ref skip(source,i);
-                seek(target,i) = new CmdOption(fv.Field.Name, fv.Value?.ToString() ?? EmptyString);
+                seek(target,i) = new CmdArg(fv.Field.Name, fv.Value?.ToString() ?? EmptyString);
             }
             return new CmdSpec(Cmd.id(t), buffer);
         }

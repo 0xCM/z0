@@ -8,19 +8,16 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static z;
 
-    public struct CmdSpec
+    public struct CmdTarget<T> : ICmdTarget<T>
+        where T : struct, ITool<T>
     {
-        public CmdId Id {get;}
-
-        public CmdArgs Options {get;}
+        public FS.FilePath Path {get;}
 
         [MethodImpl(Inline)]
-        public CmdSpec(CmdId id, params CmdArg[] options)
+        public CmdTarget(FS.FilePath path)
         {
-            Id = id;
-            Options = options;
+            Path = Files.normalize(path);
         }
     }
 }

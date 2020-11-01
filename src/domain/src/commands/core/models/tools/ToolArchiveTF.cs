@@ -13,7 +13,7 @@ namespace Z0
         where T : struct, ITool<T>
         where F : unmanaged, Enum
     {
-        public ToolId Id {get;}
+        public CmdToolId Id {get;}
 
         public FS.FolderPath ToolOutput {get;}
 
@@ -22,7 +22,7 @@ namespace Z0
         readonly F[] Flags;
 
         [MethodImpl(Inline)]
-        public ToolArchive(ToolId id, FS.FolderPath root)
+        public ToolArchive(CmdToolId id, FS.FolderPath root)
         {
             Id = id;
             ToolOutput = root;
@@ -30,7 +30,7 @@ namespace Z0
             Flags = Enums.literals<F>();
         }
 
-        public ToolArchive(ToolId id, FS.FolderPath root, IExtensionMap<F> map)
+        public ToolArchive(CmdToolId id, FS.FolderPath root, IExtensionMap<F> map)
         {
             Id = id;
             ToolOutput = root;

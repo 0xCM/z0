@@ -13,7 +13,7 @@ namespace Z0
     partial struct Cmd
     {
         [MethodImpl(Inline)]
-        public static string name<K,T>(in CmdOption<K,T> src)
+        public static string name<K,T>(in CmdArg<K,T> src)
             where K : unmanaged
                 => src.Kind.ToString();
     }

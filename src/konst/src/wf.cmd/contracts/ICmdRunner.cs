@@ -18,5 +18,4 @@ namespace Z0
     {
         CmdResult Run(IWfShell wf, in C spec);
     }
-
 }

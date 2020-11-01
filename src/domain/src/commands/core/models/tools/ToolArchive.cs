@@ -35,10 +35,10 @@ namespace Z0
             Processed = dst;
         }
 
-        public ToolEmissions<T> Dir()
-            => ToolOutput.AllFiles.Map(f => new ToolEmission<T>(f));
+        public CmdOutput<T> Dir()
+            => ToolOutput.AllFiles.Map(f => new CmdTarget<T>(f));
 
-        public ToolEmissions<T> Dir(string pattern)
-            => ToolOutput.Files(pattern, true).Map(f => new ToolEmission<T>(f));
+        public CmdOutput<T> Dir(string pattern)
+            => ToolOutput.Files(pattern, true).Map(f => new CmdTarget<T>(f));
     }
 }

@@ -59,7 +59,7 @@ namespace Z0
         Pos6 = P.Pos6,
 
         /// <summary>
-        /// Rquires an argument to be non-null
+        /// Requires an argument to be non-null
         /// </summary>
         NonNull = I.NonNull,
 

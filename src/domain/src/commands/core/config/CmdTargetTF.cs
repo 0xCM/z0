@@ -8,19 +8,20 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static z;
 
-    public struct CmdSpec
+    public struct CmdTarget<T,F>
+        where T : struct, ITool<T>
+        where F : unmanaged
     {
-        public CmdId Id {get;}
+        public FS.FilePath Path {get;}
 
-        public CmdArgs Options {get;}
+        public F Kind {get;}
 
         [MethodImpl(Inline)]
-        public CmdSpec(CmdId id, params CmdArg[] options)
+        public CmdTarget(F kind, FS.FilePath path)
         {
-            Id = id;
-            Options = options;
+            Kind = kind;
+            Path = Files.normalize(path);
         }
     }
 }

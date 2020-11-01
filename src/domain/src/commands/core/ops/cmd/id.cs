@@ -28,14 +28,8 @@ namespace Z0
         /// Parses a <see cref='CmdId'/> from a command identifier
         /// </summary>
         /// <param name="src">The command identifier</param>
-        [Op]
-        public static ParseResult<CmdId> id(string src)
-        {
-            var id = string.IsInterned(src);
-            if(id != null)
-                return parsed(src, new CmdId(src));
-            else
-                return unparsed<CmdId>(src,CmdIdNotFound);
-        }
+        [MethodImpl(Inline), Op]
+        public static CmdId id(string src)
+            => new CmdId(src);
     }
 }

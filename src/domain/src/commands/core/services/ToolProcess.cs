@@ -56,15 +56,15 @@ namespace Z0
         public Process Process { get; }
 
         [MethodImpl(Inline)]
-        public ToolStatus Status()
+        public CmdExecStatus Status()
         {
-            var dst = new ToolStatus();
+            var dst = new CmdExecStatus();
             Status(ref dst);
             return dst;
         }
 
         [MethodImpl(Inline)]
-        public ref ToolStatus Status(ref ToolStatus dst)
+        public ref CmdExecStatus Status(ref CmdExecStatus dst)
         {
             dst.Id = Process.Id;
             dst.StartTime = Process.StartTime;

@@ -8,9 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static ArgValidity;
+    using static CmdArgValidity;
     using static ArgValidityState;
-    
+
     [ApiHost]
     public readonly struct Args
     {
@@ -21,7 +21,7 @@ namespace Z0
             checks |= require(startIndex >= 0, NonNeg);
             checks |= require(length >= 0, NonNeg);
             checks |= require(startIndex <= value.Length - length, ArgValidityState.LtEq);
-            
+
             if(!checks)
                 return checks;
 
@@ -38,6 +38,6 @@ namespace Z0
                 newLength == 0 ? string.Empty :
                 newLength == value.Length ? value :
                 value.Substring(startIndex, newLength);
-        }            
+        }
     }
 }

@@ -15,6 +15,7 @@ namespace Z0
         CmdId Id {get;}
 
         bool Succeeded {get;}
+
     }
 
     public interface ICmdResult<P> : ICmdResult

@@ -17,20 +17,11 @@ namespace Z0
 
         readonly IWfShell Wf;
 
-        readonly ToolPaths Paths;
-
         [MethodImpl(Inline)]
-        public Tooling(IWfShell wf, in ToolPaths paths)
-        {
-            Wf = wf;
-            Paths = paths;
-        }
-
-        [MethodImpl(Inline)]
-        public static ToolEmission<T,F> file<T,F>(F kind, FS.FilePath path)
+        public static CmdTarget<T,F> target<T,F>(F kind, FS.FilePath path)
             where T : struct, ITool<T>
             where F : unmanaged, Enum
-                => new ToolEmission<T,F>(kind, path);
+                => new CmdTarget<T,F>(kind, path);
 
         /// <summary>
         /// Creates a tool process
@@ -60,15 +51,11 @@ namespace Z0
             =>  src.Name;
 
         [MethodImpl(Inline), Op]
-        public static string format(ToolCommand src)
-            => src.Format();
-
-        [MethodImpl(Inline), Op]
-        public static ToolStatus status(ToolProcess runner)
+        public static CmdExecStatus status(ToolProcess runner)
             => runner.Status();
 
         [MethodImpl(Inline), Op]
-        public static ref ToolStatus status(ToolProcess runner, ref ToolStatus dst)
+        public static ref CmdExecStatus status(ToolProcess runner, ref CmdExecStatus dst)
             => ref runner.Status(ref dst);
     }
 }

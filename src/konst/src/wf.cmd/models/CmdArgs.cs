@@ -10,29 +10,34 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct CmdBuilder
+    public readonly struct CmdArgs
     {
-        readonly IWfShell _Wf;
-
-        readonly IFileDb _Db;
+        readonly TableSpan<CmdArg> Data;
 
         [MethodImpl(Inline)]
-        internal CmdBuilder(IWfShell wf)
-        {
-            _Wf = wf;
-            _Db = wf.Db();
-        }
+        public CmdArgs(CmdArg[] src)
+            => Data = src;
 
-        public IWfShell Wf
+        public ReadOnlySpan<CmdArg> View
         {
             [MethodImpl(Inline)]
-            get => _Wf;
+            get => Data.View;
         }
 
-        public IFileDb Db
+        public Span<CmdArg> Edit
         {
             [MethodImpl(Inline)]
-            get => _Db;
+            get => Data.Edit;
         }
+
+        public byte Count
+        {
+            [MethodImpl(Inline)]
+            get => (byte)Data.Length;
+        }
+
+        [MethodImpl(Inline)]
+        public static implicit operator CmdArgs(CmdArg[] src)
+            => new CmdArgs(src);
     }
 }

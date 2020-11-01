@@ -21,7 +21,6 @@ namespace Z0
         public static CmdVar<K> var<K>(K id, string value)
             where K : unmanaged
                 => new CmdVar<K>(id, value);
-
         [Op]
         public static CmdVars vars(byte count)
             => new CmdVars(new CmdVar[count]);

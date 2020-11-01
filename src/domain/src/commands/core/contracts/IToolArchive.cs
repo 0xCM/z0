@@ -38,7 +38,7 @@ namespace Z0
         ToolId IToolArchive.OwnerId
             => Owner.ToolId;
 
-        ToolEmissions<T> Dir()
-            => Tooling.output(this).Map(f => new ToolEmission<T>(f));
+        CmdOutput<T> Dir()
+            => Tooling.output(this).Map(f => new CmdTarget<T>(f));
     }
 }

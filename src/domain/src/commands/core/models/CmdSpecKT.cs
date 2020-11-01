@@ -18,13 +18,13 @@ namespace Z0
         public CmdOptions<K,T> Options;
 
         [MethodImpl(Inline)]
-        public CmdSpec(CmdId id, params CmdOption<K,T>[] options)
+        public CmdSpec(CmdId id, params CmdArg<K,T>[] options)
         {
             Id = id;
             Options = options;
         }
 
-        CmdId ICmdSpec.Id
+        CmdId ICmdSpec.CmdId
             => Id;
     }
 }

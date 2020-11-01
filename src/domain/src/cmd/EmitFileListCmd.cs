@@ -24,6 +24,18 @@ namespace Z0
         public FS.FilePath TargetPath;
 
         public uint EmissionLimit;
+
+        public static EmitFileListCmd sample(IWfShell wf)
+        {
+            var cmd = new EmitFileListCmd();
+            cmd.ListName = "tests";
+            cmd.SourceDir = FS.dir(@"J:\lang\net\runtime\artifacts\tests\coreclr\Windows_NT.x64.Debug");
+            cmd.TargetPath = wf.Db().JobPath(FS.file("coreclr.tests", ArchiveFileKinds.Cmd));
+            cmd.FileUriMode = false;
+            cmd.WithKinds(ArchiveFileKinds.Cmd);
+            cmd.LimitEmissions(20);
+            return cmd;
+        }
     }
 
     partial class XCmdFactory

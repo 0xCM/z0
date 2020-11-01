@@ -10,9 +10,12 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct CaseNames
+    public readonly struct CmdCases
     {
         public const string CoreClrBuildLog = "CoreCLR_Windows_NT__x64__Debug.log";
+
+        public const string Case0 = @"llvm-pdbutil dump --streams J:\dev\projects\z0\.build\bin\netcoreapp3.1\win-x64\z0.math.pdb > z0.math.pdb.streams.log";
+
     }
 
     // dumpbin /SYMBOLS /OUT:j:\database\tools\DumpBin\output\CommandLine\CommandLine.disasm.nobytes.asm J:\lang\net\runtime\artifacts\bin\coreclr\Windows_NT.x64.Release\PDB\ildasm.pdb

@@ -14,7 +14,7 @@ namespace Z0
         where H : CmdHost<H,C>, new()
         where C : struct, ICmdSpec<C>
     {
-        public CmdId CmdId => new C().Id;
+        public CmdId CmdId => new C().CmdId;
 
         protected static C Spec() => new C();
 
@@ -46,7 +46,7 @@ namespace Z0
         protected override void Execute(IWfShell wf)
             => Execute(wf, Spec());
 
-        public virtual CmdResult Run(IWfShell wf, CmdData spec)
+        public virtual CmdResult Run(IWfShell wf, CmdSpec spec)
         {
             return Execute(wf, Spec());
         }

@@ -9,7 +9,7 @@ namespace Z0
     [Free]
     public interface ICmdSpec
     {
-        CmdId Id {get;}
+        CmdId CmdId {get;}
 
         utf8 Content {get;}
     }
@@ -18,7 +18,7 @@ namespace Z0
     public interface ICmdSpec<T> : ICmdSpec
         where T : struct
     {
-        CmdId ICmdSpec.Id
+        CmdId ICmdSpec.CmdId
             => CmdId.from<T>();
 
         utf8 ICmdSpec.Content
@@ -29,7 +29,6 @@ namespace Z0
     public interface ICmdSpec<K,T> : ICmdSpec<T>
         where K : unmanaged
         where T : struct
-
     {
 
     }

@@ -8,19 +8,18 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static z;
 
-    public struct CmdSpec
+    public struct CmdOutput<T>
+        where T : struct, ITool<T>
     {
-        public CmdId Id {get;}
-
-        public CmdArgs Options {get;}
+        public readonly TableSpan<CmdTarget<T>> Table;
 
         [MethodImpl(Inline)]
-        public CmdSpec(CmdId id, params CmdArg[] options)
-        {
-            Id = id;
-            Options = options;
-        }
+        public static implicit operator CmdOutput<T>(CmdTarget<T>[] src)
+            => new CmdOutput<T>(src);
+
+        [MethodImpl(Inline)]
+        public CmdOutput(CmdTarget<T>[] src)
+            => Table = src;
     }
 }

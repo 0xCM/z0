@@ -26,12 +26,6 @@ namespace Z0
 
         const NumericKind Closure = UnsignedInts;
 
-        [Op]
-        public static int execute(IWfShell wf, CmdSpec spec)
-        {
-            return 0;
-        }
-
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static CmdJob<T> job<T>(string name, T spec)
             where T : struct, ITextual

@@ -10,17 +10,14 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public struct CmdSpec
+    partial struct Cmd
     {
-        public CmdId Id {get;}
-
-        public CmdArgs Options {get;}
-
-        [MethodImpl(Inline)]
-        public CmdSpec(CmdId id, params CmdArg[] options)
-        {
-            Id = id;
-            Options = options;
-        }
+        /// <summary>
+        /// Creates a <see cref='CmdArgs'/> collection from an array
+        /// </summary>
+        /// <param name="src">The source array</param>
+        [MethodImpl(Inline), Op]
+        public static CmdArgs args(params CmdArg[] src)
+            => new CmdArgs(src);
     }
 }

@@ -14,12 +14,4 @@ namespace Z0
     {
 
     }
-
-    public interface ICmdRouter<H,T> : ICmdRouter<H>
-        where H : ICmdRouter<H>
-        where T : struct, ICmdSpec<T>
-    {
-
-    }
-
 }

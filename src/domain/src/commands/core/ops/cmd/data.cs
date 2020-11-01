@@ -13,58 +13,58 @@ namespace Z0
     partial struct Cmd
     {
         /// <summary>
-        /// Populates a <see cref='CmdOption'/> structure from a specified source
+        /// Populates a <see cref='CmdArg'/> structure from a specified source
         /// </summary>
         /// <param name="src">The data source</param>
         /// <typeparam name="T">The option value type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static CmdOption data<T>(in CmdOption<T> src)
+        public static CmdArg data<T>(in CmdArg<T> src)
         {
-            var dst = new CmdOption();
+            var dst = new CmdArg();
             data(src,ref dst);
             return dst;
         }
 
         /// <summary>
-        /// Populates a <see cref='CmdOption'/> structure from a specified source
+        /// Populates a <see cref='CmdArg'/> structure from a specified source
         /// </summary>
         /// <param name="src">The data source</param>
         /// <param name="dst">The data target</param>
         /// <typeparam name="T">The option value type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref CmdOption data<T>(in CmdOption<T> src, ref CmdOption dst)
+        public static ref CmdArg data<T>(in CmdArg<T> src, ref CmdArg dst)
         {
-            dst = new CmdOption(src.Name, src.Value.ToString());
+            dst = new CmdArg(src.Name, src.Value.ToString());
             return ref dst;
         }
 
         /// <summary>
-        /// Populates a <see cref='CmdOption'/> structure from a specified source
+        /// Populates a <see cref='CmdArg'/> structure from a specified source
         /// </summary>
         /// <param name="src">The data source</param>
         /// <typeparam name="K">The option kind type</typeparam>
         /// <typeparam name="T">The option value type</typeparam>
         [MethodImpl(Inline)]
-        public static CmdOption data<K,T>(in CmdOption<K,T> src)
+        public static CmdArg data<K,T>(in CmdArg<K,T> src)
             where K : unmanaged
         {
-            var dst = new CmdOption();
+            var dst = new CmdArg();
             data(src,ref dst);
             return dst;
         }
 
         /// <summary>
-        /// Populates a <see cref='CmdOption'/> structure from a specified source
+        /// Populates a <see cref='CmdArg'/> structure from a specified source
         /// </summary>
         /// <param name="src">The data source</param>
         /// <param name="dst">The data target</param>
         /// <typeparam name="K">The option kind type</typeparam>
         /// <typeparam name="T">The option value type</typeparam>
         [MethodImpl(Inline)]
-        public static ref CmdOption data<K,T>(in CmdOption<K,T> src, ref CmdOption dst)
+        public static ref CmdArg data<K,T>(in CmdArg<K,T> src, ref CmdArg dst)
             where K : unmanaged
         {
-            dst = new CmdOption(src.Kind.ToString(), src.Value.ToString());
+            dst = new CmdArg(src.Kind.ToString(), src.Value.ToString());
             return ref dst;
         }
     }

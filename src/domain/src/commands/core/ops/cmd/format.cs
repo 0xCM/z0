@@ -40,7 +40,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
-        public static string format(in CmdOption src)
+        public static string format(in CmdArg src)
             => Render.setting(src.Name, src.Value);
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace Z0
         /// <param name="src">The data source</param>
         /// <typeparam name="T">The option value type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static string format<T>(in CmdOption<T> src)
+        public static string format<T>(in CmdArg<T> src)
             => Render.setting(src.Name, src.Value);
 
         /// <summary>
@@ -59,9 +59,17 @@ namespace Z0
         /// <typeparam name="K">The option kind</typeparam>
         /// <typeparam name="T">The option value type</typeparam>
         [MethodImpl(Inline)]
-        public static string format<K,T>(in CmdOption<K,T> src)
+        public static string format<K,T>(in CmdArg<K,T> src)
             where K : unmanaged
-                => Render.setting(src.Name, src.Value);
+                => Render.setting(src.Key, src.Value);
+        [Op]
+        public static string format(in CmdSpec src)
+        {
+            var dst = Buffers.text();
+            dst.Append(src.Id.Format());
+            render(src.Options, dst);
+            return dst.Emit();
+        }
 
         public static string format<K,T>(in CmdOptions<K,T> src)
             where K : unmanaged
@@ -75,10 +83,10 @@ namespace Z0
         }
 
         [Op]
-        public static string format(in CmdOptions src)
+        public static string format(in CmdArgs src)
         {
             var dst = Buffers.text();
-            render(src,dst);
+            render(src, dst);
             return dst.Emit();
         }
 
@@ -86,8 +94,29 @@ namespace Z0
         public static string format(in CmdScript src)
         {
             var dst = Buffers.text();
-            render(src,dst);
+            render(src, dst);
             return dst.Emit();
+        }
+
+        [Op]
+        public static void render(in CmdScript src, ITextBuffer dst)
+        {
+            var count = src.Length;
+            var parts = src.Content.View;
+            for(var i=0; i<count; i++)
+                dst.AppendLine(skip(parts,i).Format());
+        }
+
+        [Op]
+        public static void render(in CmdArgs src, ITextBuffer dst)
+        {
+            var view = src.View;
+            var count = view.Length;
+            for(var i=0; i<count; i++)
+            {
+                dst.Append(Space);
+                dst.Append(skip(view,i).Format());
+            }
         }
     }
 }

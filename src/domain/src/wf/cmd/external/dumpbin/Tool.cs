@@ -17,7 +17,7 @@ namespace Z0.Tools
 
         public ToolInfo Description {get;}
 
-        public FS.FolderPath ToolOutput {get;}
+        public FS.FolderPath OutputDir {get;}
 
         [Op]
         public static DumpBin create(IWfShell wf)
@@ -55,10 +55,10 @@ namespace Z0.Tools
         {
             Wf = wf;
             Id = Tooling.identify<DumpBin>();;
-            Args =  alloc<CmdOption<Flag,object>>(MaxVarCount);
+            Args =  alloc<CmdArg<Flag,object>>(MaxVarCount);
             ArgIndex = 0;
             Description = describe();
-            ToolOutput = Wf.Db().ToolOutput(Id);
+            OutputDir = Wf.Db().ToolOutput(Id);
 
         }
 
@@ -66,7 +66,7 @@ namespace Z0.Tools
         {
             if(ArgIndex < MaxVarIndex)
             {
-                Args[ArgIndex++] = Cmd.option(option, (object)value);
+                Args[ArgIndex++] = Cmd.arg(option, (object)value);
             }
             return this;
         }

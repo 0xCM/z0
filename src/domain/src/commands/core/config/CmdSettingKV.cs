@@ -8,19 +8,23 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static z;
 
-    public struct CmdSpec
+    public readonly struct CmdSetting<K,V>
+        where K : unmanaged
     {
-        public CmdId Id {get;}
+        public K Name {get;}
 
-        public CmdArgs Options {get;}
+        public V Value {get;}
 
         [MethodImpl(Inline)]
-        public CmdSpec(CmdId id, params CmdArg[] options)
+        public CmdSetting(K key, V value)
         {
-            Id = id;
-            Options = options;
+            Name = key;
+            Value = value;
         }
+
+        [MethodImpl(Inline)]
+        public static implicit operator CmdSetting<K,V>((K key, V value) src)
+            => new CmdSetting<K, V>(src.key, src.value);
     }
 }

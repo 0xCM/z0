@@ -18,9 +18,9 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static CmdId from<T>()
-            => from(typeof(T));
+            => new CmdId(typeof(T).Name);
 
-        readonly StringRef Data;
+        readonly string Data;
 
         [MethodImpl(Inline)]
         public CmdId(string src)
@@ -29,13 +29,13 @@ namespace Z0
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Data.IsEmpty;
+            get => text.empty(Data);
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => Data.IsNonEmpty;
+            get => text.nonempty(Data);
         }
 
         [MethodImpl(Inline)]
@@ -44,7 +44,10 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => Data.Format();
+            => Data;
+
+        public override string ToString()
+            => Format();
 
         public static CmdId Empty => default;
     }

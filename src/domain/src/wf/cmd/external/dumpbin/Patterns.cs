@@ -51,7 +51,7 @@ namespace Z0.Tools
 
         public CmdExpr Command(CmdId id, FS.FilePath src)
         {
-            var subdir = ToolOutput + FS.folder(src.FileName.WithoutExtension.Name);
+            var subdir = OutputDir + FS.folder(src.FileName.WithoutExtension.Name);
             subdir.Create();
             var x = OutputExt(id);
             var output = subdir + src.FileName.ChangeExtension(x);

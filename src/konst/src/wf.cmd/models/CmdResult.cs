@@ -16,13 +16,13 @@ namespace Z0
 
         public bit Succeeded {get;}
 
-        public BinaryCode Content {get;}
+        public BinaryCode Payload {get;}
 
         [MethodImpl(Inline)]
         public CmdResult(CmdId id, bit success, byte[] content)
         {
             CmdId = id;
-            Content = content;
+            Payload = content;
             Succeeded = success;
         }
 

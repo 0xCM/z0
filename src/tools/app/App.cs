@@ -81,6 +81,9 @@ namespace Z0
         CmdResult EmitCaseLogs()
             => EmitResData.run(Wf, CmdBuilder.EmitResData(Parts.Tools.Assembly, "res/tools/caselogs", ".log"));
 
+        CmdResult EmitFileList()
+            => FileEmissions.exec(EmitFileListCmd.sample(Wf));
+
         CmdResult EmitAsmRefs()
         {
             var srcDir = FS.dir("k:/z0/builds/nca.3.1.win-x64");
@@ -124,7 +127,7 @@ namespace Z0
 
         void ShowCases()
         {
-            var query = Resources.query(Wf.Controller, CaseNames.CoreClrBuildLog);
+            var query = Resources.query(Wf.Controller, CmdCases.CoreClrBuildLog);
             if(query.ResourceCount == 1)
             {
                 var data = query.Descriptor(0).Utf8();
@@ -140,14 +143,16 @@ namespace Z0
 
         public void Run()
         {
-            var cmd = new EmitFileListCmd();
-            cmd.ListName = "tests";
-            cmd.SourceDir = FS.dir(@"J:\lang\net\runtime\artifacts\tests\coreclr\Windows_NT.x64.Debug");
-            cmd.TargetPath = Db.JobPath(FS.file("coreclr.tests", ArchiveFileKinds.Cmd));
-            cmd.FileUriMode = false;
-            cmd.WithKinds(ArchiveFileKinds.Cmd);
-            cmd.LimitEmissions(20);
-            FileEmissions.exec(cmd);
+            var result = Cmd.parse(CmdCases.Case0);
+            if(result.Succeeded)
+            {
+                var value = result.Value;
+                var msg = string.Format("cmd:{0} | options:{1}", value.Id, Cmd.format(value.Options));
+                Wf.Status(msg);
+
+            }
+            else
+                Wf.Error(result.Reason);
         }
 
 
