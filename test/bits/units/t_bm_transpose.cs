@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
 
     public class t_bm_transpose : t_bitmatrix<t_bm_transpose>
     {
@@ -20,7 +19,7 @@ namespace Z0
             for(var i=0; i<n; i++)
             for(var j=0; j<n; j++)
                 Claim.Eq(m1[i,j], m2[j,i]);
-            
+
             var m3 = BitMatrix.transpose_v2(m2);
             Claim.Require(m3 == m1);
         }
@@ -58,7 +57,7 @@ namespace Z0
             var m1 = Random.BitMatrix(n);
             var m2 = m1.Transpose();
             var m3 = m2.Transpose();
-            Claim.Require(m3 == m1);    
+            Claim.Require(m3 == m1);
         }
 
         public void bm_transpose_n12x14x16()

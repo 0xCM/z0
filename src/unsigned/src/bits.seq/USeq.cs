@@ -11,7 +11,7 @@ namespace Z0
     using static z;
 
     [ApiHost(ApiNames.BitSeq, true)]
-    public readonly partial struct BitSeq
+    public readonly partial struct USeq
     {
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<uint1> bits(W1 w)

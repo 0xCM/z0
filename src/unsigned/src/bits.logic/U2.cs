@@ -9,77 +9,79 @@ namespace Z0
 
     using static Konst;
 
-    partial struct UBits
+    using U = uint2;
+
+    partial struct ULogix
     {
         [ApiHost(ApiNames.BitLogicU2, true)]
         public readonly struct U2
         {
             [MethodImpl(Inline), Op]
-            public static uint2 @false(uint2 a, uint2 b)
-                => uint2.Min;
+            public static U @false(U a, U b)
+                => U.Min;
 
             [MethodImpl(Inline), Op]
-            public static uint2 @true(uint2 a, uint2 b)
-                => uint2.Max;
+            public static U @true(U a, U b)
+                => U.Max;
 
             [MethodImpl(Inline), Op]
-            public static uint2 and(uint2 a, uint2 b)
+            public static U and(U a, U b)
                 => a & b;
 
             [MethodImpl(Inline), Op]
-            public static uint2 nand(uint2 a, uint2 b)
+            public static U nand(U a, U b)
                 => ~(a & b);
 
             [MethodImpl(Inline), Op]
-            public static uint2 or(uint2 a, uint2 b)
+            public static U or(U a, U b)
                 => a | b;
 
             [MethodImpl(Inline), Op]
-            public static uint2 nor(uint2 a, uint2 b)
+            public static U nor(U a, U b)
                 => ~(a | b);
 
             [MethodImpl(Inline), Op]
-            public static uint2 xor(uint2 a, uint2 b)
+            public static U xor(U a, U b)
                 => a ^ b;
 
             [MethodImpl(Inline), Op]
-            public static uint2 xnor(uint2 a, uint2 b)
+            public static U xnor(U a, U b)
                 => ~(a ^ b);
 
             [MethodImpl(Inline), Op]
-            public static uint2 impl(uint2 a, uint2 b)
+            public static U impl(U a, U b)
                 => a | ~b;
 
             [MethodImpl(Inline), Op]
-            public static uint2 nonimpl(uint2 a, uint2 b)
+            public static U nonimpl(U a, U b)
                 => ~a & b;
 
             [MethodImpl(Inline), Op]
-            public static uint2 left(uint2 a, uint2 b)
+            public static U left(U a, U b)
                 => a;
 
             [MethodImpl(Inline), Op]
-            public static uint2 right(uint2 a, uint2 b)
+            public static U right(U a, U b)
                 => b;
 
             [MethodImpl(Inline), Op]
-            public static uint2 lnot(uint2 a, uint2 b)
+            public static U lnot(U a, U b)
                 => ~a;
 
             [MethodImpl(Inline), Op]
-            public static uint2 rnot(uint2 a, uint2 b)
+            public static U rnot(U a, U b)
                 => ~b;
 
             [MethodImpl(Inline), Op]
-            public static uint2 cimpl(uint2 a, uint2 b)
+            public static U cimpl(U a, U b)
                 => ~a | b;
 
             [MethodImpl(Inline), Op]
-            public static uint2 cnonimpl(uint2 a, uint2 b)
+            public static U cnonimpl(U a, U b)
                 => a & ~b;
 
             [MethodImpl(Inline)]
-            public static uint2 same(uint2 a, uint2 b)
+            public static U same(U a, U b)
                 => z.@byte(a == b);
         }
     }

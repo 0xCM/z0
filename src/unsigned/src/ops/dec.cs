@@ -11,7 +11,7 @@ namespace Z0
 
     using Q = Z0;
 
-    partial struct Sized
+    partial struct UBits
     {
         [MethodImpl(Inline), Op]
         public static uint2 dec(uint2 x)

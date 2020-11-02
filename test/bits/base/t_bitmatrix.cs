@@ -17,39 +17,7 @@ namespace Z0
 
         protected override int CycleCount => Pow2.T03;
 
-        protected void bm_and_check<N,T>(N n = default, T t = default)
-            where N : unmanaged, ITypeNat
-            where T : unmanaged
-        {
-            for(var i=0; i<RepCount; i++)
-            {
-                var A = Random.BitMatrix(n,t);
-                var B = Random.BitMatrix(n,t);
-                var C1 = BitMatrixA.and(A,B).Content;
-                var C2 = and(A.Content, B.Content);
-                ClaimNumeric.eq((ulong)A.Order, nat64u<N>());
-                ClaimNumeric.eq((ulong)B.Order, nat64u<N>());
-                ClaimNumeric.Eq(C1,C2);
-            }
-        }
 
-        protected void bm_and_check<T>(T t = default)
-            where T : unmanaged
-        {
-            for(var i = 0; i< RepCount; i++)
-            {
-                var A = Random.BitMatrix<T>();
-                var B = Random.BitMatrix<T>();
-                var C = BitMatrix.alloc<T>();
-                BitMatrix.and(A,B,C);
-
-                var rbA = A.ToRowBits();
-                var rbB = B.ToRowBits();
-                var rbC = rbA & rbB;
-
-                Claim.Require(BitMatrix.same(rbC.ToBitMatrix(),C));
-            }
-        }
 
         Span<T> xor<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst)
             where T : unmanaged

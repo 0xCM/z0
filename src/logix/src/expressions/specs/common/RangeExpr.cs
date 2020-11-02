@@ -44,7 +44,7 @@ namespace Z0.Logix
         }
 
         public IEnumerable<T> Terms
-            => gmath.range(Min,Max,Step);
+            => Algorithmic.stream(Min,Max,Step);
 
         public int? Length
             => force<T,int>(gmath.sub(Max,Min));

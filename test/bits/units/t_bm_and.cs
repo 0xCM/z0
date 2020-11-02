@@ -7,6 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using static Konst;
+    using static z;
+
     public class t_bm_and : t_bitmatrix<t_bm_and>
     {
         public void bm_and_n64x64x64()
@@ -28,7 +31,7 @@ namespace Z0
             => bm_and_check<uint>();
 
         public void bm_and_g64x64x64()
-            => bm_and_check<ulong>();        
+            => bm_and_check<ulong>();
 
         void gbm_and_8x8g_bench()
             => bm_and_bench<byte>();
@@ -42,6 +45,40 @@ namespace Z0
         void gbm_and_64x64g_bench()
             => bm_and_bench<ulong>();
 
+        protected void bm_and_check<T>(T t = default)
+            where T : unmanaged
+        {
+            for(var i = 0; i< RepCount; i++)
+            {
+                var A = Random.BitMatrix<T>();
+                var B = Random.BitMatrix<T>();
+                var C = BitMatrix.alloc<T>();
+                BitMatrix.and(A,B,C);
+
+                var rbA = A.ToRowBits();
+                var rbB = B.ToRowBits();
+                var rbC = rbA & rbB;
+
+                Claim.Require(BitMatrix.same(rbC.ToBitMatrix(),C));
+            }
+        }
+
+        protected void bm_and_check<N,T>(N n = default, T t = default)
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+        {
+            for(var i=0; i<RepCount; i++)
+            {
+                var A = Random.BitMatrix(n,t);
+                var B = Random.BitMatrix(n,t);
+                var C1 = BitMatrixA.and(A,B).Content;
+                var C2 = and(A.Content, B.Content);
+                ClaimNumeric.eq((ulong)A.Order, nat64u<N>());
+                ClaimNumeric.eq((ulong)B.Order, nat64u<N>());
+                ClaimNumeric.Eq(C1,C2);
+            }
+        }
+
         public void bm_and_4x4x4()
         {
             var n = n4;
@@ -50,7 +87,7 @@ namespace Z0
                 var A = Random.BitMatrix(n);
                 var B = Random.BitMatrix(n);
                 var Z = A & B;
-                
+
                 var a = (ushort)A;
                 var b = (ushort)B;
                 var z = (ushort)Z;
@@ -72,7 +109,7 @@ namespace Z0
                     dst[j] = (byte)(A.Bytes[j] & B.Bytes[j]);
 
                 var D = BitMatrix.primal(n,dst);
-                Claim.Require(D == C);                
+                Claim.Require(D == C);
             }
         }
 

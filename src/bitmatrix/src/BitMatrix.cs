@@ -28,11 +28,6 @@ namespace Z0
 
     }
 
-    [ApiHost]
-    public partial class BitBlocks : IApiHost<BitBlocks>
-    {
-
-    }
 
     public interface IBitMatrixServices
     {

@@ -14,20 +14,20 @@ namespace Z0
         public static GridWriter Create()
             => default(GridWriter);
 
-        public void Save(int segwidth, int minsegs, int maxsegs, FolderPath dst)
+        public void Save(int segwidth, int kMinSegs, int mkMaxSgs, FolderPath dst)
         {
             var filename = FileName.define($"GridMap{segwidth}.csv");
             var dstpath = dst + filename;
-            Save(segwidth,minsegs,maxsegs, dstpath);
+            Save(segwidth,kMinSegs,mkMaxSgs, dstpath);
         }
 
-        public void Save(int segwidth, int minsegs, int maxsegs, FilePath path)
+        public void Save(int segwidth, int kMinSegs, int mkMaxSgs, FilePath path)
         {
             using var dst = path.Writer();
             dst.WriteLine(GridHeader());
             var points = (
-                from row in gmath.range(minsegs,maxsegs)
-                from col in gmath.range(minsegs,maxsegs)
+                from row in Algorithmic.stream(kMinSegs, mkMaxSgs)
+                from col in Algorithmic.stream(kMinSegs, mkMaxSgs)
                 let count = row*col
                 orderby count
                 select (row, col)).ToArray();

@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct Sized
+    partial struct UBits
     {
         /// <summary>
         /// Converts a source integral value to an enum value

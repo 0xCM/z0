@@ -9,77 +9,79 @@ namespace Z0
 
     using static Konst;
 
-    partial struct BitLogic
+    using U = uint7;
+
+    partial struct ULogix
     {
         [ApiHost(ApiNames.BitLogicU7, true)]
         public readonly struct U7
         {
             [MethodImpl(Inline), Op]
-            public static uint7 @false(uint7 a, uint7 b)
-                => uint7.Min;
+            public static U @false(U a, U b)
+                => U.Min;
 
             [MethodImpl(Inline), Op]
-            public static uint7 @true(uint7 a, uint7 b)
-                => uint7.Max;
+            public static U @true(U a, U b)
+                => U.Max;
 
             [MethodImpl(Inline), Op]
-            public static uint7 and(uint7 a, uint7 b)
+            public static U and(U a, U b)
                 => a & b;
 
             [MethodImpl(Inline), Op]
-            public static uint7 nand(uint7 a, uint7 b)
+            public static U nand(U a, U b)
                 => ~(a & b);
 
             [MethodImpl(Inline), Op]
-            public static uint7 or(uint7 a, uint7 b)
+            public static U or(U a, U b)
                 => a | b;
 
             [MethodImpl(Inline), Op]
-            public static uint7 nor(uint7 a, uint7 b)
+            public static U nor(U a, U b)
                 => ~(a | b);
 
             [MethodImpl(Inline), Op]
-            public static uint7 xor(uint7 a, uint7 b)
+            public static U xor(U a, U b)
                 => a ^ b;
 
             [MethodImpl(Inline), Op]
-            public static uint7 xnor(uint7 a, uint7 b)
+            public static U xnor(U a, U b)
                 => ~(a ^ b);
 
             [MethodImpl(Inline), Op]
-            public static uint7 impl(uint7 a, uint7 b)
+            public static U impl(U a, U b)
                 => a | ~b;
 
             [MethodImpl(Inline), Op]
-            public static uint7 nonimpl(uint7 a, uint7 b)
+            public static U nonimpl(U a, U b)
                 => ~a & b;
 
             [MethodImpl(Inline), Op]
-            public static uint7 left(uint7 a, uint7 b)
+            public static U left(U a, U b)
                 => a;
 
             [MethodImpl(Inline), Op]
-            public static uint7 right(uint7 a, uint7 b)
+            public static U right(U a, U b)
                 => b;
 
             [MethodImpl(Inline), Op]
-            public static uint7 lnot(uint7 a, uint7 b)
+            public static U lnot(U a, U b)
                 => ~a;
 
             [MethodImpl(Inline), Op]
-            public static uint7 rnot(uint7 a, uint7 b)
+            public static U rnot(U a, U b)
                 => ~b;
 
             [MethodImpl(Inline), Op]
-            public static uint7 cimpl(uint7 a, uint7 b)
+            public static U cimpl(U a, U b)
                 => ~a | b;
 
             [MethodImpl(Inline), Op]
-            public static uint7 cnonimpl(uint7 a, uint7 b)
+            public static U cnonimpl(U a, U b)
                 => a & ~b;
 
             [MethodImpl(Inline)]
-            public static uint7 same(uint7 a, uint7 b)
+            public static U same(U a, U b)
                 => z.@byte(a == b);
         }
     }

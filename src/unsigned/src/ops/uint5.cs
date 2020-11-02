@@ -11,7 +11,7 @@ namespace Z0
 
     using U = uint5;
 
-    partial struct Sized
+    partial struct UBits
     {
         /// <summary>
         /// Creates a 5-bit unsigned integer, equal to zero or one, if the source value is respectively false or true

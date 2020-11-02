@@ -6,14 +6,11 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+
     using static Konst;
     using static z;
 
-    public readonly struct CreateBitBlock
-    {
-
-    }
-
+    [ApiDataType]
     public class t_bb_create : t_bitspans<t_bb_create>
     {
         CallingMember Caller;
@@ -63,7 +60,8 @@ namespace Z0
         public void bb_create_n32x32u()
             => check_bitblock_range<N32,uint>();
 
-         protected void check_bitblock_create<T>(int bitcount, in CallingMember caller)
+         [MethodImpl(Inline), Ignore]
+        protected void check_bitblock_create<T>(int bitcount, in CallingMember caller)
             where T : unmanaged
         {
             var kCells = (int)GridCells.mincells<T>((ulong)bitcount);
@@ -87,7 +85,8 @@ namespace Z0
         }
 
 
-        protected void check_bitblock_range<N,T>(N _ = default, T t = default)
+         [MethodImpl(Inline), Ignore]
+         protected void check_bitblock_range<N,T>(N _ = default, T t = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {

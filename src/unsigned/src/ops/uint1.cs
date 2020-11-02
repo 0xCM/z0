@@ -8,11 +8,27 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static z;
 
     using U = uint1;
 
-    partial struct Sized
+    partial struct UBits
     {
+        [MethodImpl(Inline), Op]
+        public static U maxval(W1 w)
+            => maxval<U>();
+
+        /// <summary>
+        /// Converts an to sized integral value
+        /// </summary>
+        /// <param name="src">The source enum value</param>
+        /// <param name="n">The target integer width</param>
+        /// <typeparam name="K">The source enum type</typeparam>
+        [MethodImpl(Inline)]
+        public static ref U scalar<K>(in K src, N1 n)
+            where K : unmanaged, Enum
+                => ref @as<K,U>(src);
+
         [MethodImpl(Inline), Op]
         public static U uint1(bool src)
             => new U(z.bitstate(src));

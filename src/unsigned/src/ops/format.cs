@@ -9,10 +9,12 @@ namespace Z0
 
     using static Konst;
 
-    partial class Bit
+    using U = uint2;
+
+    partial struct UBits
     {
         static BitFormat FormatConfig2
-            => BitFormatter.limited(uint2.Width, uint2.Width);
+            => BitFormatter.limited(U.Width, U.Width);
 
         [MethodImpl(Inline), Op]
         public static string format(uint2 src)

@@ -21,6 +21,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static IEnumerable<T> counted<T>(T count)
             where T : unmanaged
-                => Algorithms.counted(count);
+                => Algorithmic.stream(count);
     }
 }

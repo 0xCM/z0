@@ -24,11 +24,6 @@ namespace Z0
                 => sub_u(a,b);
 
         [MethodImpl(Inline)]
-        public static Interval<T> sub<S,T>(Interval<T> lhs, Interval<T> rhs)
-            where T : unmanaged, IComparable<T>, IEquatable<T>
-                => lhs.WithEndpoints(gmath.sub(lhs.Left, rhs.Left), gmath.sub(lhs.Right, rhs.Right));
-
-        [MethodImpl(Inline)]
         static T sub_u<T>(T a, T b)
             where T : unmanaged
         {

@@ -9,77 +9,79 @@ namespace Z0
 
     using static Konst;
 
-    partial struct UBits
+    using U = octet;
+
+    partial struct ULogix
     {
         [ApiHost(ApiNames.BitLogicO8, true)]
-        public partial struct Octets
+        public readonly struct U8
         {
             [MethodImpl(Inline), Op]
-            public static octet @false(octet a, octet b)
-                => octet.Min;
+            public static U @false(U a, U b)
+                => U.Min;
 
             [MethodImpl(Inline), Op]
-            public static octet @true(octet a, octet b)
-                => octet.Max;
+            public static U @true(U a, U b)
+                => U.Max;
 
             [MethodImpl(Inline), Op]
-            public static octet and(octet a, octet b)
+            public static U and(U a, U b)
                 => a & b;
 
             [MethodImpl(Inline), Op]
-            public static octet nand(octet a, octet b)
+            public static U nand(U a, U b)
                 => ~(a & b);
 
             [MethodImpl(Inline), Op]
-            public static octet or(octet a, octet b)
+            public static U or(U a, U b)
                 => a | b;
 
             [MethodImpl(Inline), Op]
-            public static octet nor(octet a, octet b)
+            public static U nor(U a, U b)
                 => ~(a | b);
 
             [MethodImpl(Inline), Op]
-            public static octet xor(octet a, octet b)
+            public static U xor(U a, U b)
                 => a ^ b;
 
             [MethodImpl(Inline), Op]
-            public static octet xnor(octet a, octet b)
+            public static U xnor(U a, U b)
                 => ~(a ^ b);
 
             [MethodImpl(Inline), Op]
-            public static octet impl(octet a, octet b)
+            public static U impl(U a, U b)
                 => a | ~b;
 
             [MethodImpl(Inline), Op]
-            public static octet nonimpl(octet a, octet b)
+            public static U nonimpl(U a, U b)
                 => ~a & b;
 
             [MethodImpl(Inline), Op]
-            public static octet left(octet a, octet b)
+            public static U left(U a, U b)
                 => a;
 
             [MethodImpl(Inline), Op]
-            public static octet right(octet a, octet b)
+            public static U right(U a, U b)
                 => b;
 
             [MethodImpl(Inline), Op]
-            public static octet lnot(octet a, octet b)
+            public static U lnot(U a, U b)
                 => ~a;
 
             [MethodImpl(Inline), Op]
-            public static octet rnot(octet a, octet b)
+            public static U rnot(U a, U b)
                 => ~b;
 
             [MethodImpl(Inline), Op]
-            public static octet cimpl(octet a, octet b)
+            public static U cimpl(U a, U b)
                 => ~a | b;
 
             [MethodImpl(Inline), Op]
-            public static octet cnonimpl(octet a, octet b)
+            public static U cnonimpl(U a, U b)
                 => a & ~b;
 
             [MethodImpl(Inline)]
-            public static octet same(octet a, octet b)
+            public static U same(U a, U b)
                 => z.@byte(a == b);
         }
     }

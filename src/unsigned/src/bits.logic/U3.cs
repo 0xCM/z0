@@ -9,80 +9,80 @@ namespace Z0
 
     using static Konst;
 
-    partial struct UBits
+    using U = uint3;
+
+    partial struct ULogix
     {
         [ApiHost(ApiNames.BitLogicU3,true)]
         public readonly struct U3
         {
             [MethodImpl(Inline), Op]
-            public static uint3 @false(uint3 a, uint3 b)
-                => uint3.Min;
+            public static U @false(U a, U b)
+                => U.Min;
 
             [MethodImpl(Inline), Op]
-            public static uint3 @true(uint3 a, uint3 b)
-                => uint3.Max;
+            public static U @true(U a, U b)
+                => U.Max;
 
             [MethodImpl(Inline), Op]
-            public static uint3 and(uint3 a, uint3 b)
+            public static U and(U a, U b)
                 => a & b;
 
             [MethodImpl(Inline), Op]
-            public static uint3 nand(uint3 a, uint3 b)
+            public static U nand(U a, U b)
                 => ~(a & b);
 
             [MethodImpl(Inline), Op]
-            public static uint3 or(uint3 a, uint3 b)
+            public static U or(U a, U b)
                 => a | b;
 
             [MethodImpl(Inline), Op]
-            public static uint3 nor(uint3 a, uint3 b)
+            public static U nor(U a, U b)
                 => ~(a | b);
 
             [MethodImpl(Inline), Op]
-            public static uint3 xor(uint3 a, uint3 b)
+            public static U xor(U a, U b)
                 => a ^ b;
 
             [MethodImpl(Inline), Op]
-            public static uint3 xnor(uint3 a, uint3 b)
+            public static U xnor(U a, U b)
                 => ~(a ^ b);
 
             [MethodImpl(Inline), Op]
-            public static uint3 impl(uint3 a, uint3 b)
+            public static U impl(U a, U b)
                 => a | ~b;
 
             [MethodImpl(Inline), Op]
-            public static uint3 nonimpl(uint3 a, uint3 b)
+            public static U nonimpl(U a, U b)
                 => ~a & b;
 
             [MethodImpl(Inline), Op]
-            public static uint3 left(uint3 a, uint3 b)
+            public static U left(U a, U b)
                 => a;
 
             [MethodImpl(Inline), Op]
-            public static uint3 right(uint3 a, uint3 b)
+            public static U right(U a, U b)
                 => b;
 
             [MethodImpl(Inline), Op]
-            public static uint3 lnot(uint3 a, uint3 b)
+            public static U lnot(U a, U b)
                 => ~a;
 
             [MethodImpl(Inline), Op]
-            public static uint3 rnot(uint3 a, uint3 b)
+            public static U rnot(U a, U b)
                 => ~b;
 
             [MethodImpl(Inline), Op]
-            public static uint3 cimpl(uint3 a, uint3 b)
+            public static U cimpl(U a, U b)
                 => ~a | b;
 
             [MethodImpl(Inline), Op]
-            public static uint3 cnonimpl(uint3 a, uint3 b)
+            public static U cnonimpl(U a, U b)
                 => a & ~b;
 
             [MethodImpl(Inline)]
-            public static uint3 same(uint3 a, uint3 b)
+            public static U same(U a, U b)
                 => z.@byte(a == b);
         }
-
     }
-
 }

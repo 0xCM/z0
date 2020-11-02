@@ -19,6 +19,16 @@ namespace Z0
     {
         static int MachineCounter = 0;
 
+        const NumericKind Closure = UInt16k;
+
+        /// <summary>
+        /// Creates a machine context
+        /// </summary>
+        /// <param name="random">The random source</param>
+        [MethodImpl(Inline), Op]
+        public static IFsmContext context(IPolyrand random, ulong? receiptLimit = null)
+            => new FsmContext(random, receiptLimit);
+
         /// <summary>
         /// Defines a primal state machine
         /// </summary>
@@ -29,6 +39,7 @@ namespace Z0
         /// <param name="maxSamples">The maximum number of events that will be sampled for each state</param>
         /// <param name="maxReceipts">The maximum number of events that the machine will accept</param>
         /// <typeparam name="T">A scalar type of sufficient size to accommodate specified characteristics</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static PrimalFsmSpec<T> primal<T>(string classifier, T states, T events, T minSamples, T maxSamples, ulong maxReceipts)
             where T : unmanaged
                 => new PrimalFsmSpec<T>(classifier, states, events, minSamples, maxSamples, maxReceipts);
@@ -40,6 +51,7 @@ namespace Z0
         /// <param name="seed">The rng seed</param>
         /// <param name="index">The rng stream index</param>
         /// <typeparam name="T">The primal fsm type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Fsm<T,T> create<T>(PrimalFsmSpec<T> spec, ulong seed, ulong index)
             where T : unmanaged
         {
@@ -55,12 +67,12 @@ namespace Z0
         /// <param name="seed">The rng seed</param>
         /// <param name="index">The rng stream index</param>
         /// <typeparam name="T">The primal fsm type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Fsm<T,T> create<T>(IWfShell wf, PrimalFsmSpec<T> spec, ulong seed, ulong index)
             where T : unmanaged
                 => create(wf, Polyrand.Pcg64(seed, index),spec);
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         static string identify<T>(PrimalFsmSpec<T> spec)
             where T : unmanaged
                 => $"{spec.Classifier}-{Interlocked.Increment(ref MachineCounter)}";
@@ -70,7 +82,7 @@ namespace Z0
         /// </summary>
         /// <param name="spec">The FSM definition</param>
         /// <typeparam name="T">The primal fsm type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Fsm<T,T> create<T>(IWfShell wf, IPolyrand random, PrimalFsmSpec<T> spec)
             where T : unmanaged
                 => Fsm.machine(identify(spec), wf, random, spec.StartState, spec.EndState, transition(random, spec), spec.ReceiptLimit);
@@ -82,11 +94,12 @@ namespace Z0
         /// <param name="machineCount">The number of machines to execute</param>
         /// <param name="sequential">Specifies whether the machines will be executed sequentially</param>
         /// <typeparam name="T">The primal type</typeparam>
+        [Op, Closures(Closure)]
         public static IEnumerable<FsmStats> run<T>(PrimalFsmSpec<T> spec, int machineCount, bool sequential = false)
             where T : unmanaged
         {
             var seeds = Entropy.Values<ulong>(machineCount);
-            var indices = gmath.range(0xFFFFul, 0xFFFFFFFFul).Where(x => x % 2 != 0).Take(machineCount).ToArray();
+            var indices = Algorithmic.stream(0xFFFFul, 0xFFFFFFFFul).Where(x => x % 2 != 0).Take(machineCount).ToArray();
             if(sequential)
                 return Fsm.sequential(spec, seeds, indices).Force();
             else
@@ -100,6 +113,7 @@ namespace Z0
         /// <param name="seeds">The rng seeds that determine initial states of the randomizers</param>
         /// <param name="indices">The rng stream position indices</param>
         /// <typeparam name="T">The primal FSM type</typeparam>
+        [Op, Closures(Closure)]
         static IEnumerable<FsmStats> concurrent<T>(PrimalFsmSpec<T> spec, Span<ulong> seeds, Span<ulong> indices)
             where T : unmanaged
         {
@@ -122,6 +136,7 @@ namespace Z0
         /// <param name="seeds">The rng seeds that determine initial states of the randomizers</param>
         /// <param name="indices">The rng stream position indices</param>
         /// <typeparam name="T">The primal FSM type</typeparam>
+        [Op, Closures(Closure)]
         static IEnumerable<FsmStats> sequential<T>(PrimalFsmSpec<T> spec, Span<ulong> seeds, Span<ulong> indices)
             where T : unmanaged
         {
@@ -135,10 +150,11 @@ namespace Z0
             return stats;
         }
 
+        [Op, Closures(Closure)]
         static MachineTransition<T,T> transition<T>(IFsmContext context, PrimalFsmSpec<T> spec)
             where T : unmanaged
         {
-            var sources = gmath.range<T>(spec.StateCount).ToArray();
+            var sources = Algorithmic.stream<T>(spec.StateCount).ToArray();
             var random = context.Random;
             var rules = new List<TransitionRule<T,T>>();
             foreach(var source in sources)
@@ -151,10 +167,11 @@ namespace Z0
             return rules.ToFunction();
         }
 
+        [Op, Closures(Closure)]
         static MachineTransition<T,T> transition<T>(IPolyrand random, PrimalFsmSpec<T> spec)
             where T : unmanaged
         {
-            var sources = gmath.range<T>(spec.StateCount).ToArray();
+            var sources = Algorithmic.stream<T>(spec.StateCount).ToArray();
             var rules = new List<TransitionRule<T,T>>();
             foreach(var source in sources)
             {
@@ -174,8 +191,9 @@ namespace Z0
         /// <param name="target">The target state</param>
         /// <typeparam name="E">The event type</typeparam>
         /// <typeparam name="S">The state type</typeparam>
+        [MethodImpl(Inline)]
         public static TransitionRule<E,S> transition<E,S>(E trigger, S source, S target)
-            => new TransitionRule<E, S>(trigger,source,target);
+            => new TransitionRule<E,S>(trigger,source,target);
 
         /// <summary>
         /// Defines a machine transition function (trigger : E, source: S) -> target : S
@@ -184,6 +202,7 @@ namespace Z0
         /// <param name="rules">The rules that comprise the function</param>
         /// <typeparam name="E">The event type</typeparam>
         /// <typeparam name="S">The state type</typeparam>
+        [MethodImpl(Inline)]
         public static MachineTransition<E,S> transition<E,S>(IEnumerable<ITransitionRule<E,S>> rules)
             => new MachineTransition<E,S>(rules);
 
@@ -196,6 +215,7 @@ namespace Z0
         /// <param name="output">The output value</param>
         /// <typeparam name="E">The event type</typeparam>
         /// <typeparam name="S">The state type</typeparam>
+        [MethodImpl(Inline)]
         public static OutputRule<E,S,O> output<E,S,O>(E trigger, S source, O output)
             => (trigger, source, output);
 
@@ -206,6 +226,7 @@ namespace Z0
         /// <param name="rules"></param>
         /// <typeparam name="E">The event type</typeparam>
         /// <typeparam name="S">The state type</typeparam>
+        [MethodImpl(Inline)]
         public static MachineOutput<E,S,O> output<E,S,O>(IEnumerable<IOutputRule<E,S,O>> rules)
             => new MachineOutput<E, S, O>(rules);
 
@@ -216,6 +237,7 @@ namespace Z0
         /// <param name="target">The the entry action</param>
         /// <typeparam name="S">The state type</typeparam>
         /// <typeparam name="A">The action type</typeparam>
+        [MethodImpl(Inline)]
         public static ActionRule<S,A> entry<S,A>(S source, A action)
             => new ActionRule<S,A>(source,action);
 
@@ -225,6 +247,7 @@ namespace Z0
         /// <param name="rules">The state entry rules</param>
         /// <typeparam name="S">The state type</typeparam>
         /// <typeparam name="A">The action type</typeparam>
+        [MethodImpl(Inline)]
         public static EntryFunction<S,A> entry<S,A>(IEnumerable<IFsmActionRule<S,A>> rules)
             => new EntryFunction<S, A>(rules);
 
@@ -235,6 +258,7 @@ namespace Z0
         /// <param name="target">The the exit action</param>
         /// <typeparam name="S">The state type</typeparam>
         /// <typeparam name="A">The action type</typeparam>
+        [MethodImpl(Inline)]
         public static ActionRule<S,A> exit<S,A>(S source, A action)
             => new ActionRule<S,A>(source,action);
 
@@ -244,8 +268,9 @@ namespace Z0
         /// <param name="rules">The state exit rules</param>
         /// <typeparam name="S">The state type</typeparam>
         /// <typeparam name="A">The action type</typeparam>
+        [MethodImpl(Inline)]
         public static ExitFunction<S,A> exit<S,A>(IEnumerable<IFsmActionRule<S,A>> rules)
-            => new ExitFunction<S, A>(rules);
+            => new ExitFunction<S,A>(rules);
 
         /// <summary>
         /// Defines the most basic FSM, predicated only on ground-state, end-state and transition function
@@ -256,6 +281,7 @@ namespace Z0
         /// <param name="f">The transition function</param>
         /// <typeparam name="E">The event type</typeparam>
         /// <typeparam name="S">The state type</typeparam>
+        [MethodImpl(Inline)]
         public static Fsm<E,S> machine<E,S>(string id, IFsmContext context, S s0, S sZ, MachineTransition<E,S> f)
             => new Fsm<E,S>(id, context, s0, sZ, f);
 
@@ -268,6 +294,7 @@ namespace Z0
         /// <param name="f">The transition function</param>
         /// <typeparam name="E">The event type</typeparam>
         /// <typeparam name="S">The state type</typeparam>
+        [MethodImpl(Inline)]
         public static Fsm<E,S> machine<E,S>(string id, IWfShell wf, IPolyrand random, S s0, S sZ, MachineTransition<E,S> f, ulong? limit = null)
             => new Fsm<E,S>(id, wf, random, s0, sZ, f, limit);
 
@@ -277,6 +304,7 @@ namespace Z0
         /// <param name="source">The antecedent state</param>
         /// <param name="input">The output value</param>
         /// <typeparam name="S">The state type</typeparam>
+        [MethodImpl(Inline)]
         public static OutputRuleKey<E,S> outKey<E,S>(E trigger, S source)
             => (trigger,source);
 
@@ -287,6 +315,7 @@ namespace Z0
         /// <param name="input">The output value</param>
         /// <typeparam name="E">The input event type</typeparam>
         /// <typeparam name="S">The state type</typeparam>
+        [MethodImpl(Inline)]
         public static ActionRuleKey<S> entryKey<S>(S source)
             => source;
 
@@ -297,6 +326,7 @@ namespace Z0
         /// <param name="input">The output value</param>
         /// <typeparam name="E">The input event type</typeparam>
         /// <typeparam name="S">The state type</typeparam>
+        [MethodImpl(Inline)]
         public static ActionRuleKey<S> exitKey<S>(S source)
             => source;
 
@@ -307,6 +337,7 @@ namespace Z0
         /// <param name="source">The source state</param>
         /// <typeparam name="E">The event type</typeparam>
         /// <typeparam name="S">The state type</typeparam>
+        [MethodImpl(Inline)]
         public static TransitionRuleKey<E,S> transitionKey<E,S>(E trigger, S source)
             => (trigger,source);
 
@@ -322,8 +353,9 @@ namespace Z0
         /// <typeparam name="E">The event type</typeparam>
         /// <typeparam name="S">The state type</typeparam>
         /// <typeparam name="A">The entry action type</typeparam>
+        [MethodImpl(Inline)]
         public static Fsm<E,S,A> machine<E,S,A>(string id, IWfShell wf, IPolyrand random, S s0, S sZ, MachineTransition<E,S> t, EntryFunction<S,A> entry, ExitFunction<S,A> exit, ulong? limit = null)
-            =>  new Fsm<E,S,A>(id, wf, random, s0, sZ, t, entry,exit, limit);
+            => new Fsm<E,S,A>(id, wf, random, s0, sZ, t, entry,exit, limit);
 
         /// <summary>
         /// Creates a default machine observer
@@ -332,15 +364,9 @@ namespace Z0
         /// <param name="trace">Whether to emit trace messages</param>
         /// <typeparam name="E">The event type</typeparam>
         /// <typeparam name="S">The state type</typeparam>
+        [MethodImpl(Inline)]
         public static FsmObserver<E,S> observer<E,S>(Fsm<E,S> fsm, ObserverTrace? tracing = null)
-            => new FsmObserver<E, S>(fsm, tracing);
-
-        /// <summary>
-        /// Creates a machine context
-        /// </summary>
-        /// <param name="random">The random source</param>
-        public static IFsmContext context(IPolyrand random, ulong? receiptLimit = null)
-            => new FsmContext(random, receiptLimit);
+            => new FsmObserver<E,S>(fsm, tracing);
 
         /// <summary>
         /// Runs a machine

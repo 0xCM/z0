@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct Sized
+    partial struct UBits
     {
         [MethodImpl(Inline), Op]
         public static uint u32(ReadOnlySpan<byte> src, int offset = 0)

@@ -27,7 +27,7 @@ namespace Z0
         {
             var spec = new Fsm1Spec();
             var tasks = new Task[Pow2.T08];
-            var indices = gmath.range(0xFFFFul, 0xFFFFFFFFul).Where(x => x % 2 != 0).Take(Pow2.T08).ToArray();
+            var indices = Algorithmic.stream(0xFFFFul, 0xFFFFFFFFul).Where(x => x % 2 != 0).Take(Pow2.T08).ToArray();
             for(var i=0u; i< tasks.Length; i++)
             {
                 var random = Polyrand.Pcg64(0,indices[i]);

@@ -9,13 +9,13 @@ namespace Z0
 
     using static Konst;
 
-    partial class XTend
+    partial class XBitBlocks
     {
         /// <summary>
         /// Converts the source bitvector to bit cells
         /// </summary>
         /// <param name="src">The source vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static BitBlock<N8,byte> ToNatBits(this BitVector8 src)
             => new BitBlock<N8, byte>(src);
 
@@ -23,7 +23,7 @@ namespace Z0
         /// Converts the source bitvector to an equivalent natural/generic bitvector
         /// </summary>
         /// <param name="src">The source vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static BitBlock<N16,ushort> ToNatBits(this BitVector16 src)
             => new BitBlock<N16, ushort>(src);
 
@@ -31,7 +31,7 @@ namespace Z0
         /// Converts the source bitvector it the equivalent natural/generic bitvector
         /// </summary>
         /// <param name="src">The source vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static BitBlock<N64,ulong> ToNatBits(this BitVector64 src)
             => new BitBlock<N64, ulong>(src);
 

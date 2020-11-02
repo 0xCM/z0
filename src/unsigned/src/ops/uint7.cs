@@ -11,7 +11,7 @@ namespace Z0
 
     using U = uint7;
 
-    partial struct Sized
+    partial struct UBits
     {
         /// <summary>
         /// Creates a 7-bit unsigned integer, equal to zero or one, according to whether the source is respectively false or true

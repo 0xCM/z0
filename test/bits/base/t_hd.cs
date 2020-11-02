@@ -11,7 +11,7 @@ namespace Z0
     /// </summary>
     public static class t_hd
     {
-        public static uint compress(uint x, uint m) 
+        public static uint compress(uint x, uint m)
         {
             uint mk, mp, mv, t;
             int i;
@@ -19,7 +19,7 @@ namespace Z0
             x = x & m;           // Clear irrelevant bits.
             mk = ~m << 1;        // We will count 0's to right.
 
-            for (i = 0; i < 5; i++) 
+            for (i = 0; i<5; i++)
             {
                 mp = mk ^ (mk << 1);              // Parallel suffix.
                 mp = mp ^ (mp << 2);
@@ -35,7 +35,7 @@ namespace Z0
             return x;
         }
 
-        public static uint compress_left(uint x, uint m) 
+        public static uint compress_left(uint x, uint m)
         {
             uint mk, mp, mv, t;
             int i;
@@ -43,7 +43,7 @@ namespace Z0
             x = x & m;           // Clear irrelevant bits.
             mk = ~m >> 1;        // We will count 0's to left.
 
-            for (i = 0; i < 5; i++) 
+            for (i = 0; i < 5; i++)
             {
                 mp = mk ^ (mk >> 1);              // Parallel prefix.
                 mp = mp ^ (mp >> 2);
@@ -59,7 +59,7 @@ namespace Z0
             return x;
         }
 
-        public static uint SAG(uint x, uint m)         
+        public static uint SAG(uint x, uint m)
             => compress_left(x, m) | compress(x, ~m);
     }
 }

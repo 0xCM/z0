@@ -7,7 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using static Konst;
 
+    [ApiDataType]
     public class t_bb_dot : t_bitspans<t_bb_dot>
     {
         public void gbb_dot_10x32()
@@ -92,6 +94,7 @@ namespace Z0
         /// <param name="zero">A scalar representative</param>
         /// <typeparam name="N">The bitvector width type</typeparam>
         /// <typeparam name="T">The scalar type</typeparam>
+        [MethodImpl(Inline), Ignore]
         protected void bitblock_dot_check<N,T>(N n = default, T zero = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged

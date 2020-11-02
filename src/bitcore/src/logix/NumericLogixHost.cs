@@ -61,7 +61,7 @@ namespace Z0
         /// Advertises the supported ternary bitlogic operators
         /// </summary>
         public static ReadOnlySpan<TLK> TernaryLogicKinds
-            => gmath.range((byte)1,(byte)TLK.X5F).Cast<TLK>().ToArray();
+            => Algorithmic.stream((byte)1,(byte)TLK.X5F).Cast<TLK>().ToArray();
 
         /// <summary>
         /// Advertises the supported unary arithmetic operators

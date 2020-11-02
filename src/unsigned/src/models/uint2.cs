@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    using static Sized;
+    using static UBits;
 
     using U = uint2;
     using W = W2;

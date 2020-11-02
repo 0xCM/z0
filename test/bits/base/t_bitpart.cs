@@ -9,7 +9,7 @@ namespace Z0
 
     public abstract class t_bitpart<X> : t_bitgrids_base<X>
         where X : t_bitpart<X>, new()
-    {        
+    {
         protected void bitpart_check<A,B>(SpanPartitioner<A,B> part, int count, int width)
             where A : unmanaged
             where B : unmanaged
@@ -19,10 +19,9 @@ namespace Z0
             for(var sample = 0; sample < RepCount; sample++)
             {
                 var x = Random.Next<A>();
-                
                 part(x, dst);
                 var y = BitString.scalar(x).Partition(width).Map(bs => bs.ToBitVector(n8));
-                for(var i=0; i<count; i++)  
+                for(var i=0; i<count; i++)
                     Claim.eq(y[i], BitString.scalar(dst[i]).ToBitVector(n8));
             }
         }
@@ -39,10 +38,10 @@ namespace Z0
             for(var inner = 0; inner < 32; inner +=4)
                 *(pDst++) = ((*pSrc) >> inner) % (1u << 4);
         }
-        
+
         protected unsafe void fastunpack4(uint* pSrc, uint* pDst)
         {
-           for(var outer = 0; outer < 4; ++outer) 
+           for(var outer = 0; outer<4; ++outer)
                 unpack32x4(pSrc++,pDst);
         }
     }

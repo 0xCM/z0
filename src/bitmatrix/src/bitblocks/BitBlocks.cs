@@ -10,7 +10,13 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial class BitBlocks
+    public static partial class XBitBlocks
+    {
+
+    }
+
+    [ApiHost]
+    public partial class BitBlocks
     {
         /// <summary>
         /// Reads a cell determined by a linear bit position

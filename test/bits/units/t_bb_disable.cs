@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
 
+    [ApiDataType]
     public class t_bb_disable : t_bitspans<t_bb_disable>
     {
         public void bb_disable_16x16()
@@ -54,7 +55,6 @@ namespace Z0
             bitblock_disable_check(n707, (ulong)0);
         }
 
-
         protected void bitblock_disable_check<N,T>(N n = default, T rep = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
@@ -74,7 +74,5 @@ namespace Z0
                 Claim.eq(bc.ToBitString(),bs);
             }
         }
-
     }
-
 }

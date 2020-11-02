@@ -9,15 +9,15 @@ namespace Z0
 
     using static Konst;
 
-    partial class XTend
+    partial class XBitBlocks
     {
         /// <summary>
         /// Converts the least significant elements of a generic natural bitvector to a 8-bit primal bitvector
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <typeparam name="T">The primal source type</typeparam>        
+        /// <typeparam name="T">The primal source type</typeparam>
         [MethodImpl(Inline)]
-        public static BitVector8 ToBitVector<N,T>(this BitBlock<N,T> src, N8 n)        
+        public static BitVector8 ToBitVector<N,T>(this BitBlock<N,T> src, N8 n)
             where T : unmanaged
             where N : unmanaged, ITypeNat
                 => src.Data.TakeUInt8();
@@ -26,9 +26,9 @@ namespace Z0
         /// Converts the least significant elements of a generic natural bitvector to a 16-bit primal bitvector
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <typeparam name="T">The primal source type</typeparam>        
+        /// <typeparam name="T">The primal source type</typeparam>
         [MethodImpl(Inline)]
-        public static BitVector16 ToBitVector<N,T>(this BitBlock<N,T> src, N16 n)        
+        public static BitVector16 ToBitVector<N,T>(this BitBlock<N,T> src, N16 n)
             where T : unmanaged
             where N : unmanaged, ITypeNat
                 => src.Data.TakeUInt16();

@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class XTend
+    partial class XBitBlocks
     {
          /// <summary>
         /// Extracts a 128-bit cpu vector from a bitsring of sufficient length

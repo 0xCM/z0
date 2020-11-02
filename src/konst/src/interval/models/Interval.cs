@@ -6,19 +6,19 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
     using static NumericLiterals;
 
     using K = IntervalKind;
 
     /// <summary>
-    /// Defines a contiguous segment of homogenous values that lie within left and right boundaries 
+    /// Defines a contiguous segment of homogenous values that lie within left and right boundaries
     /// </summary>
     /// <remarks>
     /// Note that models of extended real numbers may also serve as endpoints, enabling representations such as (-∞,3] and (-3, ∞).
     /// </remarks>
-    public readonly struct Interval<T> : IInterval<Interval<T>,T>
+    public readonly struct Interval<T>
         where T : unmanaged
     {
         /// <summary>
@@ -40,17 +40,17 @@ namespace Z0
         /// Specifies the canonical closed unit interval over the underlying primitive
         /// </summary>
         /// <typeparam name="T">The primal type</typeparam>
-        public static Interval<T> U01 
+        public static Interval<T> U01
             => new Interval<T>(zero<T>(), one<T>(), K.Closed);
 
         /// <summary>
         /// Defines a closed interval that subsumes all points representable by the primal type
         /// </summary>
-        public static Interval<T> Full 
+        public static Interval<T> Full
             => new Interval<T>(minval<T>(), maxval<T>(), K.Closed);
 
         /// <summary>
-        /// Defines an open interval that subsumes all points representable by the primal type and all points represented 
+        /// Defines an open interval that subsumes all points representable by the primal type and all points represented
         /// by increasing the size of the primal type without altering other characteristics
         /// </summary>
         public static Interval<T> Unbound
@@ -63,7 +63,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Interval<T> RightUnbound(T left)
             => new Interval<T>(left, maxval<T>(), K.RightOpen);
-        
+
         [MethodImpl(Inline)]
         public static implicit operator Interval<T>((T left, T right) x)
             => new Interval<T>(x.left, true, x.right, true);
@@ -77,7 +77,7 @@ namespace Z0
         {
             var closed = leftclosed && rightclosed;
             var open =  !leftclosed && !rightclosed;
-            return    
+            return
                   closed ? K.Closed
                 : open ? K.Open
                 : leftclosed && !rightclosed ? K.LeftClosed
@@ -109,7 +109,7 @@ namespace Z0
         /// <summary>
         /// Specifies whether the interval is left-closed, or equivalently right-open, denoted by [Left,Right),
         /// </summary>
-        public bool LeftClosed 
+        public bool LeftClosed
         {
             [MethodImpl(Inline)]
             get => Kind == K.LeftClosed;
@@ -213,11 +213,6 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Empty;
         }
-        T IInterval<T>.Left 
-            => Left;
-
-        T IInterval<T>.Right 
-            => Right;
 
         /// <summary>
         /// Creates an open interval with endpoints from the existing interval
@@ -258,8 +253,8 @@ namespace Z0
         /// Creates a closed interval with endpoints from the existing interval
         /// </summary>
         [MethodImpl(Inline)]
-        public Interval<T> ToClosed()
-            => new Interval<T>(Left, Right, K.Closed);
+        public ClosedInterval<T> ToClosed()
+            => new ClosedInterval<T>(Left, Right);
 
         /// <summary>
         /// Converts the left and right underlying values
@@ -296,7 +291,7 @@ namespace Z0
             => text.concat(LeftSymbol, LeftFormat, Chars.Comma, RightFormat, RightSymbol);
 
         public override string ToString()
-            => Format();        
+            => Format();
 
         [MethodImpl(Inline)]
         public string Format(TupleFormat style)
@@ -306,40 +301,28 @@ namespace Z0
         public bool Equals(Interval<T> src)
             => Kind == src.Kind && Left.Equals(src.Left) && Right.Equals(src.Right);
 
-        string LeftFormat 
+        string LeftFormat
         {
             [MethodImpl(Inline)]
             get => LeftUnbounded ? "-∞" : Left.ToString();
         }
 
-        string RightFormat 
+        string RightFormat
         {
             [MethodImpl(Inline)]
             get => RightUnbounded ? "∞" : Right.ToString();
         }
 
-        char LeftSymbol 
+        char LeftSymbol
         {
             [MethodImpl(Inline)]
             get => (LeftClosed  || Closed) ? Chars.LBracket : Chars.LParen;
         }
 
-        char RightSymbol 
+        char RightSymbol
         {
             [MethodImpl(Inline)]
             get => (RightClosed || Closed) ? Chars.RBracket : Chars.RParen;
-        }
-        
-        T IPair<Interval<T>,T>.Left 
-        {
-            [MethodImpl(Inline)]
-            get => Left;
-        }
-
-        T IPair<Interval<T>,T>.Right 
-        {
-            [MethodImpl(Inline)]
-            get => Right;
         }
 
         /// <summary>

@@ -4,8 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    [ApiHost]
-    public readonly partial struct Sized
+    [ApiHost(ApiNames.UBits)]
+    public readonly partial struct UBits
     {
         public const NumericKind Closure = NumericKind.UnsignedInts;
     }

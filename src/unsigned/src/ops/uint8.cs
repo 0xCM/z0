@@ -11,7 +11,7 @@ namespace Z0
 
     using U = octet;
 
-    partial struct Sized
+    partial struct UBits
     {
         /// <summary>
         /// Creates a 8-bit unsigned integer, equal to zero or one, according to whether the source is respectively false or true
@@ -97,5 +97,47 @@ namespace Z0
             else
                 return src;
         }
+
+        /// <summary>
+        /// Promotes a <see cref='U2'/> to a <see cref='octet'/>, as indicated by the <see cref='W8'/> selector
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="w">The target width</param>
+        [MethodImpl(Inline), Op]
+        public static octet extend(W8 w, uint2 src)
+            => src;
+
+        /// <summary>
+        /// Promotes a <see cref='U2'/> to a <see cref='octet'/>, as indicated by the <see cref='W8'/> selector,
+        /// and shifts the result <see cref='N2'/> bits leftward
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="w">The target width</param>
+        /// <param name="n">The leftward shift count</param>
+        [MethodImpl(Inline), Op]
+        public static octet extend(W8 w, N2 n, uint2 src)
+            => (octet)src << 2;
+
+        /// <summary>
+        /// Promotes a <see cref='U2'/> to a <see cref='octet'/>, as indicated by the <see cref='W8'/> selector,
+        /// and shifts the result <see cref='N3'/> bits leftward
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="w">The target width</param>
+        /// <param name="n">The leftward shift count</param>
+        [MethodImpl(Inline), Op]
+        public static octet extend(W8 w, N3 n, uint2 src)
+            => (octet)src << 3;
+
+        /// <summary>
+        /// Promotes a <see cref='U2'/> to a <see cref='octet'/> as indicated by the <see cref='W8'/> selector
+        /// and shifts the result <see cref='N4'/> bits bits leftward
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="w">The target width</param>
+        /// <param name="n">The leftward shift count</param>
+        [MethodImpl(Inline), Op]
+        public static octet extend(W8 w, N4 n, uint2 src)
+            => (octet)src << 4;
     }
 }

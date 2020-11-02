@@ -12,7 +12,7 @@ namespace Z0
 
     using U = uint24;
 
-    partial struct Sized
+    partial struct UBits
     {
         /// <summary>
         /// Creates a 24-bit unsigned integer, equal to zero or one, according to whether the source is respectively false or true

@@ -24,11 +24,6 @@ namespace Z0
                 => add_u(a,b);
 
         [MethodImpl(Inline)]
-        public static Interval<T> add<T>(Interval<T> lhs, Interval<T> rhs)
-            where T : unmanaged, IComparable<T>, IEquatable<T>
-                => lhs.WithEndpoints(gmath.add(lhs.Left, rhs.Left), gmath.add(lhs.Right, rhs.Right));
-
-        [MethodImpl(Inline)]
         static T add_u<T>(T a, T b)
             where T : unmanaged
         {

@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Sized;
+    using static UBits;
 
     using S = octet;
     using W = W8;

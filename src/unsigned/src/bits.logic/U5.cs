@@ -9,77 +9,79 @@ namespace Z0
 
     using static Konst;
 
-    partial struct UBits
+    using U = uint5;
+
+    partial struct ULogix
     {
         [ApiHost(ApiNames.BitLogicU5, true)]
         public readonly struct U5
         {
             [MethodImpl(Inline), Op]
-            public static uint5 @false(uint5 a, uint5 b)
-                => uint5.Min;
+            public static U @false(U a, U b)
+                => U.Min;
 
             [MethodImpl(Inline), Op]
-            public static uint5 @true(uint5 a, uint5 b)
-                => uint5.Max;
+            public static U @true(U a, U b)
+                => U.Max;
 
             [MethodImpl(Inline), Op]
-            public static uint5 and(uint5 a, uint5 b)
+            public static U and(U a, U b)
                 => a & b;
 
             [MethodImpl(Inline), Op]
-            public static uint5 nand(uint5 a, uint5 b)
+            public static U nand(U a, U b)
                 => ~(a & b);
 
             [MethodImpl(Inline), Op]
-            public static uint5 or(uint5 a, uint5 b)
+            public static U or(U a, U b)
                 => a | b;
 
             [MethodImpl(Inline), Op]
-            public static uint5 nor(uint5 a, uint5 b)
+            public static U nor(U a, U b)
                 => ~(a | b);
 
             [MethodImpl(Inline), Op]
-            public static uint5 xor(uint5 a, uint5 b)
+            public static U xor(U a, U b)
                 => a ^ b;
 
             [MethodImpl(Inline), Op]
-            public static uint5 xnor(uint5 a, uint5 b)
+            public static U xnor(U a, U b)
                 => ~(a ^ b);
 
             [MethodImpl(Inline), Op]
-            public static uint5 impl(uint5 a, uint5 b)
+            public static U impl(U a, U b)
                 => a | ~b;
 
             [MethodImpl(Inline), Op]
-            public static uint5 nonimpl(uint5 a, uint5 b)
+            public static U nonimpl(U a, U b)
                 => ~a & b;
 
             [MethodImpl(Inline), Op]
-            public static uint5 left(uint5 a, uint5 b)
+            public static U left(U a, U b)
                 => a;
 
             [MethodImpl(Inline), Op]
-            public static uint5 right(uint5 a, uint5 b)
+            public static U right(U a, U b)
                 => b;
 
             [MethodImpl(Inline), Op]
-            public static uint5 lnot(uint5 a, uint5 b)
+            public static U lnot(U a, U b)
                 => ~a;
 
             [MethodImpl(Inline), Op]
-            public static uint5 rnot(uint5 a, uint5 b)
+            public static U rnot(U a, U b)
                 => ~b;
 
             [MethodImpl(Inline), Op]
-            public static uint5 cimpl(uint5 a, uint5 b)
+            public static U cimpl(U a, U b)
                 => ~a | b;
 
             [MethodImpl(Inline), Op]
-            public static uint5 cnonimpl(uint5 a, uint5 b)
+            public static U cnonimpl(U a, U b)
                 => a & ~b;
 
             [MethodImpl(Inline)]
-            public static uint5 same(uint5 a, uint5 b)
+            public static U same(U a, U b)
                 => z.@byte(a == b);
         }
     }

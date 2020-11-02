@@ -6,7 +6,7 @@ namespace Z0
 {
     using B = UInt1;
 
-    partial struct BitSeq
+    partial struct USeq
     {
         public const B b0 = B.b0;
 

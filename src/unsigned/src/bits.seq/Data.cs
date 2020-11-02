@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly partial struct BitSeq
+    public readonly partial struct USeq
     {
         static ReadOnlySpan<byte> W1
             => new byte[2]{0b00,0b01};

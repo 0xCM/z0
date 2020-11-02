@@ -354,4 +354,13 @@ public readonly struct ApiNameParts
 
     public const string ternary = nameof(ternary);
 
+    public const string close = nameof(close);
+
+    public const string partition = nameof(partition);
+
+    public const string generic = nameof(generic);
+
+    public const string math = nameof(math);
+
+    public const string checks = nameof(checks);
 }

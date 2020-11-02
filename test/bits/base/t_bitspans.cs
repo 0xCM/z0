@@ -32,7 +32,6 @@ namespace Z0
             }
         }
 
-
         /// <summary>
         /// Verifies the generic bit cell dot product operation
         /// </summary>

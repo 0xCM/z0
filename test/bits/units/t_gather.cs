@@ -8,13 +8,12 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     public class t_gather : t_bitcore<t_gather>
     {
         public void gather_masks()
         {
-
             var m2 = BitMasks.Literals.Lsb32x8x1;
             var x2 = BitMasks.gather(UInt32.MaxValue, m2);
             var y2 = BitMasks.scatter(x2, m2).ToBitVector();

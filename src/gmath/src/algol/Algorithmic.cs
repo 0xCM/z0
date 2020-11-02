@@ -11,33 +11,11 @@ namespace Z0
 
     using static Konst;
     using static gmath;
+    using static z;
 
     [ApiHost]
-    class Algorithms
+    public readonly partial struct Algorithmic
     {
-        [Op, Closures(UnsignedInts)]
-        public static Span<T> increments<T>(Interval<T> src)
-            where T : unmanaged
-        {
-            var min = src.Left;
-            var max = src.Right;
-            var current = min;
-            var count = z.force<T,int>(src.Length()) + 1;
-            Span<T> increments = sys.alloc<T>(count);
-            var index = 0u;
-            while(lteq(current,max) && index < increments.Length)
-            {
-                //increments.Add(current);
-                z.seek(increments, index++) = current;
-
-                if(lt(current, max))
-                    current = inc(current);
-                else
-                    break;
-            }
-
-            return increments;
-        }
 
         /// <summary>
         /// Creates an enumerable sequence that ranges between inclusive upper and lower bounds
@@ -46,7 +24,7 @@ namespace Z0
         /// <param name="x1">The upper bound</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static IEnumerable<T> sequence<T>(T x0, T x1)
+        public static IEnumerable<T> stream<T>(T x0, T x1)
             where T : unmanaged
                 => range_1(x0,x1,null);
 
@@ -56,20 +34,9 @@ namespace Z0
         /// <param name="count">The number of elements in the sequence</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static IEnumerable<T> counted<T>(T count)
+        public static IEnumerable<T> stream<T>(T count)
             where T : unmanaged
-                => sequence(default(T), count);
-
-        /// <summary>
-        /// Creates a numeric sequence that ranges between inclusive upper and lower bounds
-        /// </summary>
-        /// <param name="x0">The lower bound</param>
-        /// <param name="x1">The upper bound</param>
-        /// <typeparam name="T">The numeric type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static IEnumerable<T> range<T>(T x0, T x1)
-            where T : unmanaged
-                => sequence(x0,x1);
+                => stream(default(T), count);
 
         /// <summary>
         /// Creates a numeric sequence that ranges between inclusive upper and lower bounds
@@ -79,7 +46,7 @@ namespace Z0
         /// <param name="step">The step size</param>
         /// <typeparam name="T">The numeric type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static IEnumerable<T> range<T>(T x0, T x1, T step)
+        public static IEnumerable<T> stream<T>(T x0, T x1, T step)
             where T : unmanaged
                 => range_1(x0, x1, step);
 
@@ -124,7 +91,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return range64f(x0,x1,step);
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
         static IEnumerable<T> range8i<T>(T x0, T x1, T? step = null)
@@ -234,12 +201,12 @@ namespace Z0
         /// <param name="ys">The right span</param>
         /// <typeparam name="T">The span cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static Bit32 identical<T>(Span<T> xs, Span<T> ys)
+        public static bit identical<T>(Span<T> xs, Span<T> ys)
             where T : unmanaged
         {
             if(xs.Length != ys.Length)
                 return false;
-            return Algorithms.identical(ref z.first(xs), ref z.first(ys), (uint)xs.Length);
+            return Algorithmic.identical(ref z.first(xs), ref z.first(ys), (uint)xs.Length);
         }
 
         /// <summary>
@@ -249,19 +216,19 @@ namespace Z0
         /// <param name="ys">The right span</param>
         /// <typeparam name="T">The span cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static Bit32 identical<T>(ReadOnlySpan<T> xs, ReadOnlySpan<T> ys)
+        public static bit identical<T>(ReadOnlySpan<T> xs, ReadOnlySpan<T> ys)
             where T : unmanaged
         {
             if(xs.Length != ys.Length)
                 return false;
-            return Algorithms.identical(ref z.edit(in z.first(xs)), ref z.edit(in z.first(ys)), (uint)xs.Length);
+            return Algorithmic.identical(ref z.edit(in z.first(xs)), ref z.edit(in z.first(ys)), (uint)xs.Length);
         }
 
         /// <summary>
         ///  Adapted from corefx repo
         /// </summary>
         [Op, Closures(UnsignedInts)]
-        public static Bit32 identical<T>(ref T first, ref T second, uint length)
+        public static bit identical<T>(ref T first, ref T second, uint length)
             where T : unmanaged
         {
             if (Unsafe.AreSame(ref first, ref second))

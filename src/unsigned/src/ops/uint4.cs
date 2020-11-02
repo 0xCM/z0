@@ -11,8 +11,18 @@ namespace Z0
 
     using U = uint4;
 
-    partial struct Sized
+    partial struct UBits
     {
+        /// <summary>
+        /// Shifts the source a rightwards by a specified bit count and shears the result to a specified width
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="n">The number of bits to shift</param>
+        /// <param name="w">The target width</param>
+        [MethodImpl(Inline), Op]
+        public static U srl(byte src, N4 n, W4 w)
+            => cut(Bytes.srl(src,4), w);
+
         /// <summary>
         /// Creates a 4-bit unsigned integer, equal to zero or one, if the source value is respectively false or true
         /// </summary>

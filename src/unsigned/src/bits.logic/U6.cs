@@ -9,77 +9,79 @@ namespace Z0
 
     using static Konst;
 
-    partial struct UBits
+    using U = uint6;
+
+    partial struct ULogix
     {
         [ApiHost(ApiNames.BitLogicU6, true)]
         public readonly struct U6
         {
             [MethodImpl(Inline), Op]
-            public static uint6 @false(uint6 a, uint6 b)
-                => uint6.Min;
+            public static U @false(U a, U b)
+                => U.Min;
 
             [MethodImpl(Inline), Op]
-            public static uint6 @true(uint6 a, uint6 b)
-                => uint6.Max;
+            public static U @true(U a, U b)
+                => U.Max;
 
             [MethodImpl(Inline), Op]
-            public static uint6 and(uint6 a, uint6 b)
+            public static U and(U a, U b)
                 => a & b;
 
             [MethodImpl(Inline), Op]
-            public static uint6 nand(uint6 a, uint6 b)
+            public static U nand(U a, U b)
                 => ~(a & b);
 
             [MethodImpl(Inline), Op]
-            public static uint6 or(uint6 a, uint6 b)
+            public static U or(U a, U b)
                 => a | b;
 
             [MethodImpl(Inline), Op]
-            public static uint6 nor(uint6 a, uint6 b)
+            public static U nor(U a, U b)
                 => ~(a | b);
 
             [MethodImpl(Inline), Op]
-            public static uint6 xor(uint6 a, uint6 b)
+            public static U xor(U a, U b)
                 => a ^ b;
 
             [MethodImpl(Inline), Op]
-            public static uint6 xnor(uint6 a, uint6 b)
+            public static U xnor(U a, U b)
                 => ~(a ^ b);
 
             [MethodImpl(Inline), Op]
-            public static uint6 impl(uint6 a, uint6 b)
+            public static U impl(U a, U b)
                 => a | ~b;
 
             [MethodImpl(Inline), Op]
-            public static uint6 nonimpl(uint6 a, uint6 b)
+            public static U nonimpl(U a, U b)
                 => ~a & b;
 
             [MethodImpl(Inline), Op]
-            public static uint6 left(uint6 a, uint6 b)
+            public static U left(U a, U b)
                 => a;
 
             [MethodImpl(Inline), Op]
-            public static uint6 right(uint6 a, uint6 b)
+            public static U right(U a, U b)
                 => b;
 
             [MethodImpl(Inline), Op]
-            public static uint6 lnot(uint6 a, uint6 b)
+            public static U lnot(U a, U b)
                 => ~a;
 
             [MethodImpl(Inline), Op]
-            public static uint6 rnot(uint6 a, uint6 b)
+            public static U rnot(U a, U b)
                 => ~b;
 
             [MethodImpl(Inline), Op]
-            public static uint6 cimpl(uint6 a, uint6 b)
+            public static U cimpl(U a, U b)
                 => ~a | b;
 
             [MethodImpl(Inline), Op]
-            public static uint6 cnonimpl(uint6 a, uint6 b)
+            public static U cnonimpl(U a, U b)
                 => a & ~b;
 
             [MethodImpl(Inline)]
-            public static uint6 same(uint6 a, uint6 b)
+            public static U same(U a, U b)
                 => z.@byte(a == b);
         }
     }

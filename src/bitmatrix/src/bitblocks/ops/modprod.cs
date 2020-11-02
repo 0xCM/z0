@@ -18,6 +18,7 @@ namespace Z0
         /// <param name="x">The first vector</param>
         /// <param name="y">The second vector</param>
         /// <remarks>This should be considered a reference implementation; the dot operation is considerably faster</remarks>
+
         public static Bit32 modprod<T>(in BitBlock<T> x, in BitBlock<T> y)
             where T : unmanaged
         {

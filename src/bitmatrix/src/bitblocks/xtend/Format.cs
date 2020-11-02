@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class XTend
+    partial class XBitBlocks
     {
         /// <summary>
         /// Formats a span as a bitmatrix
@@ -18,6 +18,7 @@ namespace Z0
         /// <param name="rowlen">The number of bits in each row</param>
         /// <param name="maxbits">The maximum number of bits to format</param>
         /// <param name="showrow">Indicates whether the content of each row shold be preceded by the row index</param>
+        [Op]
         public static string FormatMatrixBits(this Span<byte> src, int rowlen, int? maxbits = null, bool showrow = false)
         {
             var dst = BitString.bitchars(src);

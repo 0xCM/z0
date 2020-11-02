@@ -12,8 +12,97 @@ namespace Z0
 
     using U = uint1;
 
-    partial struct Sized
+    partial struct UBits
     {
+        [MethodImpl(Inline), Op]
+        public static uint2 maxval(W2 w)
+            => maxval<uint2>();
+
+       [MethodImpl(Inline)]
+        internal static U wrap(W2 w, int src)
+            => new U((byte)src,false);
+
+        /// <summary>
+        /// Creates a 2-bit unsigned integer, equal to zero or one, if the source value is respectively false or true
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline), Op]
+        public static U create(W2 w, bool src)
+            => new U(z.bitstate(src));
+
+        /// <summary>
+        /// Creates a 2-bit unsigned integer from the least 2 source bits
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline), Op]
+        public static U create(W2 w, byte src)
+            => new U(src);
+
+        /// <summary>
+        /// Creates a 2-bit unsigned integer from the least 2 source bits
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline), Op]
+        public static U create(W2 w, sbyte src)
+            => new U(src);
+
+        /// <summary>
+        /// Creates a 2-bit unsigned integer from the least 2 source bits
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline), Op]
+        public static U create(W2 w, ushort src)
+            => new U(src);
+
+        /// <summary>
+        /// Creates a 2-bit unsigned integer from the least 2 source bits
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline), Op]
+        public static U create(W2 w, short src)
+            => new U(src);
+
+        /// <summary>
+        /// Creates a 2-bit unsigned integer from the least 2 source bits
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline), Op]
+        public static U create(W2 w, int src)
+            => new U(src);
+
+        /// <summary>
+        /// Creates a 2-bit unsigned integer from the least 2 source bits
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline), Op]
+        public static U create(W2 w, uint src)
+            => new U(src);
+
+        /// <summary>
+        /// Creates a 2-bit unsigned integer from the least 2 source bits
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline), Op]
+        public static U create(W2 w, long src)
+            => new U(src);
+
+        /// <summary>
+        /// Creates a 2-bit unsigned integer from the least 2 source bits
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline), Op]
+        public static U create(W2 w, ulong src)
+            => new U((byte)((byte)src & U.MaxLiteral));
+
+        /// <summary>
+        /// Creates a 2-bit unsigned integer from a 2-term bit sequence
+        /// </summary>
+        /// <param name="x0">The term at index 0</param>
+        /// <param name="x1">The term at index 1</param>
+        [MethodImpl(Inline), Op]
+        public static U create(W2 w, bit x0, bit x1 = default)
+             => new U(((uint)x0 << 0) | ((uint)x1 << 1), true);
+
         [MethodImpl(Inline), Op]
         public static U uint2(bool src)
             => new U(z.bitstate(src));

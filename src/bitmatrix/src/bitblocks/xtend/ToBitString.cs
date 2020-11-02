@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class XTend
+    partial class XBitBlocks
     {
         [MethodImpl(Inline)]
         public static BitString ToBitString<N,T>(this BitBlock<N,T> src)

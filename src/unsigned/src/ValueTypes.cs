@@ -57,8 +57,8 @@ namespace Z0
             for(var i=0u; i<count; i++)
             {
                 ref readonly var d = ref skip(bytes,i);
-                seek(dst, j--) = code(LowerCase, Sized.cut(d, w4));
-                seek(dst, j--) = code(LowerCase, Sized.srl(d, n4, w4));
+                seek(dst, j--) = code(LowerCase, UBits.cut(d, w4));
+                seek(dst, j--) = code(LowerCase, UBits.srl(d, n4, w4));
             }
         }
 
@@ -84,8 +84,8 @@ namespace Z0
             for(var i=0u; i<count; i++)
             {
                 ref readonly var d = ref skip(bytes,i);
-                seek(dst, j--) = (char)code(LowerCase, Sized.cut(d, w4));
-                seek(dst, j--) = (char)code(LowerCase, Sized.srl(d, n4, w4));
+                seek(dst, j--) = (char)code(LowerCase, UBits.cut(d, w4));
+                seek(dst, j--) = (char)code(LowerCase, UBits.srl(d, n4, w4));
             }
 
             return Render.format(dst);

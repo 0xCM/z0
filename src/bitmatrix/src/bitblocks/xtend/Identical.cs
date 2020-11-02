@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class XTend
+    partial class XBitBlocks
     {
         [MethodImpl(Inline)]
         public static Bit32 Identical<T>(this SpanBlock128<T> xb, SpanBlock128<T> yb)

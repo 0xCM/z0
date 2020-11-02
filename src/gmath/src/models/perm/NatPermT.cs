@@ -39,7 +39,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static T[] AllocIdentity()
-            => gmath.range<T>(default, force<T>(n - 1)).ToArray();
+            => Algorithmic.stream<T>(default, force<T>(n - 1)).ToArray();
 
         /// <summary>
         /// Allocates an empty permutation

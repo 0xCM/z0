@@ -11,15 +11,9 @@ namespace Z0
 
     using Q = Z0;
 
-    partial struct Sized
+    partial struct UBits
     {
-        [MethodImpl(Inline), Op]
-        public static uint1 maxval(W1 w)
-            => maxval<uint1>();
 
-        [MethodImpl(Inline), Op]
-        public static uint2 maxval(W2 w)
-            => maxval<uint2>();
 
         [MethodImpl(Inline), Op]
         public static uint3 maxval(W3 w)

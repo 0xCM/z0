@@ -8,10 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
 
     public class t_bm_extract : t_bitmatrix<t_bm_extract>
-    {    
+    {
         public void bm_extract_n9x9x16()
             => bm_extract_check(Random.BitMatrix<N9,N9,ushort>());
 
@@ -60,7 +59,7 @@ namespace Z0
         }
 
         public void bm_not_64x64x64()
-        {            
+        {
             var x = Random.BitMatrix(n64);
             var y = x.Replicate();
             var xff = ~(~x);
@@ -71,7 +70,7 @@ namespace Z0
             for(var i = 0; i<64; i++)
                 a[i] = ~ c[i];
             var b = BitMatrix.primal(n64,a);
-            Claim.Require(b == ~c);        
+            Claim.Require(b == ~c);
         }
 
         public void bm_getcol_8x8x8()

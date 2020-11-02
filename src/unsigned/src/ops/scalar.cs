@@ -10,19 +10,8 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct Sized
+    partial struct UBits
     {
-        /// <summary>
-        /// Converts an to sized integral value
-        /// </summary>
-        /// <param name="src">The source enum value</param>
-        /// <param name="n">The target integer width</param>
-        /// <typeparam name="K">The source enum type</typeparam>
-        [MethodImpl(Inline)]
-        public static ref uint1 scalar<K>(in K src, N1 n)
-            where K : unmanaged, Enum
-                =>ref @as<K,uint1>(src);
-
         /// <summary>
         /// Converts an to sized integral value
         /// </summary>

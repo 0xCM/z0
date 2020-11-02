@@ -24,13 +24,12 @@ namespace Z0
         void perm_create<T>(T m, T n)
             where T : unmanaged
         {
-            
             var perm = Perm.identity(n);
-            var lengths = gmath.range(m,n);
+            var lengths = Algorithmic.stream(m,n);
             Root.iter(lengths, i => {
                 var p = Perm.identity(i);
                 var cycle = p.Cycle(default(T));
-                Claim.eq(cycle.Length, 1);                            
+                Claim.eq(cycle.Length, 1);
             });
 
         }

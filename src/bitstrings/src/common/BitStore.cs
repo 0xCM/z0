@@ -174,11 +174,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static unsafe void bitchars(float src, Span<char> dst, int offset)
-            => bitchars(Sized.u32(src), dst, offset);
+            => bitchars(UBits.u32(src), dst, offset);
 
         [MethodImpl(Inline)]
         static unsafe void bitchars(double src, Span<char> dst, int offset)
-            => bitchars(Sized.u64(src), dst, offset);
+            => bitchars(UBits.u64(src), dst, offset);
 
         [MethodImpl(Inline)]
         static unsafe void bitseq(byte src, Span<byte> dst, int offset)
@@ -226,11 +226,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static unsafe void bitseq(float src, Span<byte> dst, int offset)
-            => bitseq(Sized.u32(src), dst, offset);
+            => bitseq(UBits.u32(src), dst, offset);
 
         [MethodImpl(Inline)]
         static unsafe void bitseq(double src, Span<byte> dst, int offset)
-            => bitseq(Sized.u64(src), dst, offset);
+            => bitseq(UBits.u64(src), dst, offset);
 
         [MethodImpl(Inline)]
         static void bitseq_i<T>(T src, Span<byte> dst, int offset)
