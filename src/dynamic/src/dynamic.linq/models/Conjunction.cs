@@ -5,7 +5,7 @@
 namespace Z0.Dynamics
 {
     using System;
-    using System.Collections.Generic;    
+    using System.Collections.Generic;
 
     /// <summary>
     /// Represents a logical conjunction; i.e., the and conective that evaluates to true if and only if all of its operands are true
@@ -13,10 +13,10 @@ namespace Z0.Dynamics
     public sealed class Conjunction : Junction
     {
         public Conjunction(Junction parent = null)
-            : base(new IPredicateAplication[] { }, parent)
+            : base(new IPredicateApplication[] { }, parent)
         { }
 
-        public Conjunction(IEnumerable<IPredicateAplication> predicates, Junction parent = null)
+        public Conjunction(IEnumerable<IPredicateApplication> predicates, Junction parent = null)
             : base(predicates, parent)
         { }
 

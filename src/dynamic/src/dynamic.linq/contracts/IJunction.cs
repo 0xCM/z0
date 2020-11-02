@@ -10,6 +10,6 @@ namespace Z0.Dynamics
 
     public interface IJunction
     {
-        IReadOnlyList<IPredicateAplication> Criteria { get; }
+        IReadOnlyList<IPredicateApplication> Criteria { get; }
     }
 }

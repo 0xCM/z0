@@ -9,7 +9,8 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct BinaryOpEvaluator
+    [ApiHost]
+    public readonly struct FunctionEvaluator
     {
         [MethodImpl(Inline)]
         public static T eval<K,T>(K k, ReadOnlySpan<byte> code, T x, T y)
@@ -26,12 +27,12 @@ namespace Z0
         [MethodImpl(Inline)]
         public static T eval<T>(T x, T y, string name, ReadOnlySpan<byte> code)
             where T : unmanaged
-            => create(x, y, name, code)(x,y);
+                => create(x, y, name, code)(x,y);
 
         [MethodImpl(Inline)]
         public static T eval<T>(T x, T y, string name, BinaryCode code)
             where T : unmanaged
-            => create(x, y, name, code)(x,y);
+                => create(x, y, name, code)(x,y);
 
         [MethodImpl(Inline)]
         static BinaryOp<T>  create<T>(T x, T y, string name, ReadOnlySpan<byte> f)

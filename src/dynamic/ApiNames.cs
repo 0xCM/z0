@@ -14,7 +14,6 @@ namespace Z0
 
         public const string Asm = A.lang + dot + A.asm;
 
-
         public const string DynamicOperators = dynamic + dot + operators;
 
         public const string AlgorithmDynamic = dynamic + dot + algorithms;

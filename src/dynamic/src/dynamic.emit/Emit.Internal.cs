@@ -106,40 +106,5 @@ namespace Z0
             g.Emit(OpCodes.Ret);
             return CellDelegate.define(id, src, method, method.CreateDelegate(functype));
         }
-
-        /// <summary>
-        /// Creates a binary operator delegate from a conforming method that is optionally invoked via the Calli opcode
-        /// </summary>
-        /// <param name="src">The methodd that defines a binary operator</param>
-        /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline)]
-        internal static Func<T,T,T> EmitBinaryOp<T>(this MethodInfo src, bool calli)
-        {
-            if(calli)
-            {
-                var operand = typeof(T);
-                var args = new Type[]{operand, operand};
-                var method = new DynamicMethod($"{src.Name}", operand, args, operand.Module);
-                var gen = method.GetILGenerator();
-                gen.Emit(OpCodes.Ldarg_0);
-                gen.Emit(OpCodes.Ldarg_1);
-                gen.EmitCall(OpCodes.Call, src, null);
-                gen.Emit(OpCodes.Ret);
-                return (Func<T,T,T>) method.CreateDelegate(typeof(Func<T,T,T>));
-            }
-            else
-            {
-                var operand = typeof(T);
-                var args = new Type[]{operand, operand};
-                var returnType = operand;
-                var method = new DynamicMethod($"{src.Name}", returnType, args, operand.Module);
-                var g = method.GetILGenerator();
-                g.Emit(OpCodes.Ldarg_0);
-                g.Emit(OpCodes.Ldarg_1);
-                g.EmitCalli(OpCodes.Calli, CallingConvention.StdCall, returnType, args);
-                g.Emit(OpCodes.Ret);
-                return (Func<T,T,T>)method.CreateDelegate(typeof(Func<T,T,T>));
-            }
-        }
     }
 }

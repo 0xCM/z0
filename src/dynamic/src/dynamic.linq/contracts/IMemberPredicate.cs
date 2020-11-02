@@ -8,7 +8,7 @@ namespace Z0.Dynamics
     using System;
     using System.Reflection;
 
-    public interface IMemberPredicate : IPredicateAplication
+    public interface IMemberPredicate : IPredicateApplication
     {
 
         MemberInfo Member { get; }

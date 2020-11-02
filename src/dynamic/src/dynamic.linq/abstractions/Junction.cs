@@ -8,13 +8,13 @@ namespace Z0.Dynamics
     using System.Collections.Generic;
     using System.Text;
     using System.Linq;
-    
+
     /// <summary>
     /// Represents a logical connective where each constituent is a member predicate
     /// </summary>
     public abstract class Junction : IJunction
     {
-        protected Junction(IEnumerable<IPredicateAplication> Criteria, Junction Parent = null)
+        protected Junction(IEnumerable<IPredicateApplication> Criteria, Junction Parent = null)
         {
             this.Criteria = Criteria.ToList();
             this.Parent = Parent;
@@ -23,13 +23,13 @@ namespace Z0.Dynamics
 
         protected abstract ILogicalOperator Connective { get; }
 
-        public List<IPredicateAplication> Criteria { get; }
+        public List<IPredicateApplication> Criteria { get; }
 
         public Option<Junction> Parent { get; }
 
         public List<Junction> Children { get; }
 
-        IReadOnlyList<IPredicateAplication> IJunction.Criteria
+        IReadOnlyList<IPredicateApplication> IJunction.Criteria
             => Criteria;
 
         public void Flatten()

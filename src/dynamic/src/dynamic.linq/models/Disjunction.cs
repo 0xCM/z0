@@ -9,20 +9,19 @@ namespace Z0.Dynamics
     using System.Text;
 
     /// <summary>
-    /// Represents a logical disjunction; i.e., the or conective that evaluates to true if and only if one or more of it's operands are true
+    /// Represents a logical disjunction; i.e., the or connective that evaluates to true if and only if one or more of it's operands are true
     /// </summary>
     public sealed class Disjunction : Junction
     {
         public Disjunction(Junction Parent = null)
-            : base(new IPredicateAplication[] { }, Parent)
+            : base(new IPredicateApplication[] { }, Parent)
         { }
 
-        public Disjunction(IEnumerable<IPredicateAplication> Predicates, Junction Parent = null)
+        public Disjunction(IEnumerable<IPredicateApplication> Predicates, Junction Parent = null)
             : base(Predicates, Parent)
         { }
 
         protected override ILogicalOperator Connective
             => StandardOperators.Or;
-
     }
 }

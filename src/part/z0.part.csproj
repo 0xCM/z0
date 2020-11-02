@@ -12,17 +12,16 @@
 
     <PackageReference Include="Markdig" Version="0.22.0" />
 
-    <PackageReference Include="Microsoft.Win32.Registry" Version="4.7.0" />
-    <PackageReference Include="Microsoft.Diagnostics.Tracing.TraceEvent" Version="2.0.44" />
-
     <PackageReference Include="Microsoft.CodeAnalysis" Version="3.8.0-5.final" />
-
+    <PackageReference Include="Microsoft.Diagnostics.Tracing.TraceEvent" Version="2.0.44" />
     <PackageReference Include="Microsoft.DiaSymReader.Native" Version="1.7.0" />
+    <PackageReference Include="Microsoft.DotNet.PlatformAbstractions" Version="3.1.6" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.9" />
     <PackageReference Include="Microsoft.Extensions.Primitives" Version="3.1.9" />
     <PackageReference Include="Microsoft.Extensions.FileSystemGlobbing" Version="3.1.9" />
     <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="3.1.6" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="3.1.9" />
+    <PackageReference Include="Microsoft.Win32.Registry" Version="4.7.0" />
 
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
 

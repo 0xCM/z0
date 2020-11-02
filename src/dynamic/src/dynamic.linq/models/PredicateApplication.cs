@@ -8,7 +8,7 @@ namespace Z0.Dynamics
     using System.Collections.Generic;
     using System.Text;
 
-    public class PredicateApplication<F,T> : IPredicateAplication
+    public class PredicateApplication<F,T> : IPredicateApplication
         where F : Operator<F>
     {
 

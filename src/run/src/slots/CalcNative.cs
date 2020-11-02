@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static CalculatorCode;
 
-    using E = BinaryOpEvaluator;
+    using E = FunctionEvaluator;
 
     public readonly struct CalcNative
     {
