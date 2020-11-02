@@ -6,8 +6,8 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Konst)" />
-    <ProjectReference Include="$(Lang)" />
     <ProjectReference Include="$(Derivatives)" />
+
   </ItemGroup>
 
 </Project>

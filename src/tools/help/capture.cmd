@@ -2,22 +2,27 @@ bugpoint --help-hidden > bugpoint.help
 dsymutil --help > dsymutil.help
 filecheck --help-hidden > filecheck.help
 llc --help-hidden > llc.help
-lld-link -help > lld-link.help
 lli --help-hidden > lli.help
+
+lld-link -help > lld-link.help
 llvm-addr2line --help > llvm-addr2line.help
 llvm-ar --help-hidden > llvm-ar.help
 llvm-as --help-hidden > llvm-as.help
 llvm-bcanalyzer --help-hidden > llvm-bcanalyzer.help
+llvm-cat --help-hidden > llvm-cat.help
 llvm-cxxfilt --help-hidden > llvm-cxxfilt.help
 llvm-cxxmap --help-hidden > llvm-cxxmap.help
 llvm-diff --help-hidden > llvm-diff.help
 llvm-dis --help-hidden > llvm-dis.help
 llvm-exegesis --help-hidden > llvm-exegesis.help
 llvm-extract --help-hidden > llvm-extract.help
+llvm-jitlink --help-hidden > llvm-jitlink.help
 llvm-link --help-hidden > llvm-link.help
 llvm-lipo --help > llvm-lipo.help
-llvm-mc --help-hidden > llvm-mc.help
 llvm-mca --help-hidden > llvm-mca.help
+llvm-ml --help-hidden > llvm-ml.help
+llvm-modextract --help-hidden > llvm-modextract.help
+
 llvm-readobj --help-hidden > llvm-readobj.help
 llvm-stress --help-hidden > llvm-stress.help
 llvm-symbolizer --help-hidden > llvm-symbolizer.help
@@ -46,3 +51,5 @@ clangd --help-hidden > clangd.help
 
 clangd --help-list-hidden > clangd-list.help
 clangd-indexer --help-hidden > clangd-indexer.help
+
+mt -? > mt.help

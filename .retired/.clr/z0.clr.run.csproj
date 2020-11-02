@@ -1,13 +1,17 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
   <PropertyGroup>
-    <OutputType>Library</OutputType>
+    <OutputType>Exe</OutputType>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="$(Konst)" />
-    <ProjectReference Include="$(Lang)" />
-    <ProjectReference Include="$(Derivatives)" />
   </ItemGroup>
+
+   <ItemGroup>
+    <Compile Include="run/**/*.cs" />
+   </ItemGroup>
 
 </Project>

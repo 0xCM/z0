@@ -9,7 +9,6 @@
     <ProjectReference Include="$(Sys)" />
     <ProjectReference Include="$(Konst)" />
     <ProjectReference Include="$(math)" />
-    <ProjectReference Include="$(Clr)" />
     <ProjectReference Include="$(gmath)" />
     <ProjectReference Include="$(MathSvc)" />
     <ProjectReference Include="$(Xed)" />

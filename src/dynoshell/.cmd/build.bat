@@ -1,9 +1,11 @@
 echo off
-
 set ProjectId=dynoshell
 
-call .cmd\setup.g.cmd
-echo %BuildCmd%
+set SetupCmd=%ZDev%\.cmd\setup.cmd
+echo SetupCmd:%SetupCmd%
+
+echo on
+call %SetupCmd%
 call %BuildCmd%
 
-z0 domain dynamic evaluate
+:: z0 domain dynamic evaluate

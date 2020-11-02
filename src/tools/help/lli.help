@@ -42,6 +42,8 @@ General options:
   --basic-aa-force-at-least-64b                                         - 
   --basic-aa-recphi                                                     - 
   --basic-block-sections=<all | <function list (file)> | labels | none> - Emit basic blocks into separate sections
+  --bbsections-cold-text-prefix=<string>                                - The text prefix to use for cold basic block clusters
+  --bitcode-flush-threshold=<uint>                                      - The threshold (unit M) for flushing LLVM bitcode.
   --bitcode-mdindex-threshold=<uint>                                    - Number of metadatas above which we emit an index to enable lazy-loading
   --block-freq-ratio-threshold=<uint>                                   - Do not hoist instructions if targetblock is N times hotter than the source.
   --block-placement-exit-block-bias=<uint>                              - Block frequency percentage a loop exit block needs over the original exit to be considered the new exit.
@@ -138,6 +140,7 @@ General options:
   --disable-dfa-sched                                                   - Disable use of DFA during scheduling
   --disable-early-ifcvt                                                 - Disable Early If-conversion
   --disable-early-taildup                                               - Disable pre-register allocation tail duplication
+  --disable-expand-reductions                                           - Disable the expand reduction intrinsics pass from running
   --disable-gep-const-evaluation                                        - Disables evaluation of GetElementPtr with constant operands
   --disable-gisel-legality-check                                        - Don't verify that MIR is fully legal between GlobalISel passes
   --disable-hoisting-to-hotter-blocks=<value>                           - Disable hoisting instructions to hotter blocks
@@ -202,6 +205,10 @@ General options:
     =Default                                                            -   Default for platform
     =All                                                                -   All
     =Abstract                                                           -   Abstract subprograms
+  --dwarf-op-convert=<value>                                            - Enable use of the DWARFv5 DW_OP_convert operator
+    =Default                                                            -   Default for platform
+    =Enable                                                             -   Enabled
+    =Disable                                                            -   Disabled
   --dwarf-sections-as-references=<value>                                - Use sections+offset as references rather than labels.
     =Default                                                            -   Default for platform
     =Enable                                                             -   Enabled
@@ -280,7 +287,7 @@ General options:
     =asm                                                                -   Emit an assembly ('.s') file
     =obj                                                                -   Emit a native object ('.o') file
     =null                                                               -   Emit nothing, for performance testing
-  --filter-print-funcs=<function names>                                 - Only print IR for functions whose name match this for all print-[before|after][-all] options
+  --filter-print-funcs=<function names>                                 - Only print IR for functions whose name match this for all print-[before|after][-all] and change reporter options
   --fixup-allow-gcptr-in-csr                                            - Allow passing GC Pointer arguments in callee saved registers
   --fixup-byte-word-insts                                               - Change byte and word instructions to larger sizes
   --fixup-max-csr-statepoints=<uint>                                    - Max number of statepoints allowed to pass GC Ptrs in registers
@@ -337,6 +344,7 @@ General options:
   --ifcvt-fn-start=<int>                                                - 
   --ifcvt-fn-stop=<int>                                                 - 
   --ifcvt-limit=<int>                                                   - 
+  --ignore-xcoff-visibility                                             - Not emit the visibility attribute for asm in AIX OS or give all symbols 'unspecified' visibility in XCOFF object file
   --imp-null-check-page-size=<int>                                      - The page size of the target in bytes
   --imp-null-max-insts-to-consider=<uint>                               - The max number of instructions to consider hoisting loads over (the algorithm is quadratic over this number)
   --import-constants-with-refs                                          - Import constant global variables with references
@@ -354,7 +362,6 @@ General options:
   --jd=<string>                                                         - Specifies the JITDylib to be used for any subsequent -extra-module arguments.
   --jit-kind=<value>                                                    - Choose underlying JIT kind.
     =mcjit                                                              -   MCJIT
-    =orc-mcjit                                                          -   Orc-based MCJIT replacement (deprecated)
     =orc-lazy                                                           -   Orc-based lazy JIT.
   --join-globalcopies                                                   - Coalesce copies that span blocks (default=subtarget)
   --join-liveintervals                                                  - Coalesce copies (default=true)
@@ -425,6 +432,7 @@ General options:
   --min-predictable-branch=<int>                                        - Minimum percentage (0-100) that a condition must be either true or false to assume that the condition is predictable
   --mir-debug-loc                                                       - Print MIR debug-locations
   --mir-strip-debugify-only                                             - Should mir-strip-debug only strip debug info from debugified modules by default
+  --mir-vreg-namer-use-stable-hash                                      - Use Stable Hashing for MIR VReg Renaming
   --misched=<value>                                                     - Machine instruction scheduler to use
     =default                                                            -   Use the target's default scheduler choice.
     =converge                                                           -   Standard converging scheduler.
@@ -488,6 +496,7 @@ General options:
   --phi-elim-split-all-critical-edges                                   - Split all critical edges during PHI elimination
   --phi-node-folding-threshold=<uint>                                   - Control the amount of phi node folding to perform (default = 2)
   --phicse-debug-hash                                                   - Perform extra assertion checking to verify that PHINodes's hash function is well-behaved w.r.t. its isEqual predicate
+  --phicse-num-phi-smallsize=<uint>                                     - When the basic block contains not more than this number of PHI nodes, perform a (faster!) exhaustive search instead of set-driven one.
   --pipeliner-annotate-for-testing                                      - Instead of emitting the pipelined code, annotate instructions with the generated schedule for feeding into the -modulo-schedule-test pass
   --pipeliner-dbg-res                                                   - 
   --pipeliner-experimental-cg                                           - Use the experimental peeling code generator for software pipelining
@@ -516,6 +525,8 @@ General options:
     =assumption-cache-tracker                                           -   Assumption Cache Tracker
     =basic-aa                                                           -   Basic Alias Analysis (stateless AA impl)
     =basiccg                                                            -   CallGraph Construction
+    =block-freq                                                         -   Block Frequency Analysis
+    =branch-prob                                                        -   Branch Probability Analysis
     =cfl-anders-aa                                                      -   Inclusion-Based CFL Alias Analysis
     =cfl-steens-aa                                                      -   Unification-Based CFL Alias Analysis
     =check-debugify                                                     -   Check debug info from -debugify
@@ -540,11 +551,13 @@ General options:
     =machinedomtree                                                     -   MachineDominator Tree Construction
     =objc-arc-aa                                                        -   ObjC-ARC-Based Alias Analysis
     =phi-values                                                         -   Phi Values Analysis
+    =postdomtree                                                        -   Post-Dominator Tree Construction
     =reaching-deps-analysis                                             -   ReachingDefAnalysis
     =regbankselect                                                      -   Assign register bank of generic virtual registers
     =scalar-evolution                                                   -   Scalar Evolution Analysis
     =scev-aa                                                            -   ScalarEvolution-based Alias Analysis
     =scoped-noalias-aa                                                  -   Scoped NoAlias Alias Analysis
+    =stack-protector                                                    -   Insert stack protectors
     =targetlibinfo                                                      -   Target Library Information
     =targetpassconfig                                                   -   Target Pass Configuration
     =tbaa                                                               -   Type-Based Alias Analysis
@@ -576,6 +589,8 @@ General options:
     =assumption-cache-tracker                                           -   Assumption Cache Tracker
     =basic-aa                                                           -   Basic Alias Analysis (stateless AA impl)
     =basiccg                                                            -   CallGraph Construction
+    =block-freq                                                         -   Block Frequency Analysis
+    =branch-prob                                                        -   Branch Probability Analysis
     =cfl-anders-aa                                                      -   Inclusion-Based CFL Alias Analysis
     =cfl-steens-aa                                                      -   Unification-Based CFL Alias Analysis
     =check-debugify                                                     -   Check debug info from -debugify
@@ -600,11 +615,13 @@ General options:
     =machinedomtree                                                     -   MachineDominator Tree Construction
     =objc-arc-aa                                                        -   ObjC-ARC-Based Alias Analysis
     =phi-values                                                         -   Phi Values Analysis
+    =postdomtree                                                        -   Post-Dominator Tree Construction
     =reaching-deps-analysis                                             -   ReachingDefAnalysis
     =regbankselect                                                      -   Assign register bank of generic virtual registers
     =scalar-evolution                                                   -   Scalar Evolution Analysis
     =scev-aa                                                            -   ScalarEvolution-based Alias Analysis
     =scoped-noalias-aa                                                  -   Scoped NoAlias Alias Analysis
+    =stack-protector                                                    -   Insert stack protectors
     =targetlibinfo                                                      -   Target Library Information
     =targetpassconfig                                                   -   Target Pass Configuration
     =tbaa                                                               -   Type-Based Alias Analysis
@@ -641,7 +658,7 @@ General options:
   --print-isel-input                                                    - Print LLVM IR input to isel pass
   --print-lsr-output                                                    - Print LLVM IR produced by the loop-reduce pass
   --print-machine-bfi                                                   - Print the machine block frequency info.
-  --print-module-scope                                                  - When printing IR for print-[before|after]{-all} always print a module IR
+  --print-module-scope                                                  - When printing IR for print-[before|after]{-all} and change reporters, always print a module IR
   --print-regmask-num-regs=<int>                                        - Number of registers to limit to when printing regmask operands in IR dumps. unlimited = -1
   --print-regusage                                                      - print register usage details collected for analysis.
   --print-slotindexes                                                   - When printing machine IR, annotate instructions and blocks with SlotIndexes when available
@@ -655,6 +672,7 @@ General options:
   --profile-unknown-in-special-section                                  - In profiling mode like sampleFDO, if a function doesn't have profile, we cannot tell the function is cold for sure because it may be a function newly added without ever being sampled. With the flag enabled, compiler can put such profile unknown functions into a special section, so runtime system can choose to handle it in a different way than .text section, to save RAM for example. 
   --propagate-attrs                                                     - Propagate attributes in index
   --protect-from-escaped-allocas                                        - Do not optimize lifetime zones that are broken
+  --rafast-ignore-missing-defs                                          - 
   --rdf-liveness-max-rec=<uint>                                         - Maximum recursion level
   --recurrence-chain-limit=<uint>                                       - Maximum length of recurrence chain when evaluating the benefit of commuting operands
   --regalloc=<value>                                                    - Register allocator to use
@@ -695,6 +713,7 @@ General options:
   --scalar-evolution-max-scev-compare-depth=<uint>                      - Maximum depth of recursive SCEV complexity comparisons
   --scalar-evolution-max-scev-operations-implication-depth=<uint>       - Maximum depth of recursive SCEV operations implication analysis
   --scalar-evolution-max-value-compare-depth=<uint>                     - Maximum depth of recursive value complexity comparisons
+  --scalar-evolution-use-expensive-range-sharpening                     - Use more powerful methods of sharpening expression ranges. May be costly in terms of compile time
   --scale-partial-sample-profile-working-set-size                       - If true, scale the working set size of the partial sample profile by the partial profile ratio to reflect the size of the program being compiled.
   --scev-addops-inline-threshold=<uint>                                 - Threshold for inlining addition operands into a SCEV
   --scev-cheap-expansion-budget=<uint>                                  - When performing SCEV expansion only if it is cheap to do, this controls the budget that is considered cheap (default = 4)
@@ -705,6 +724,7 @@ General options:
   --scheditins                                                          - Use InstrItineraryData for latency lookup
   --schedmodel                                                          - Use TargetSchedModel for latency lookup
   --simplify-mir                                                        - Leave out unnecessary information when printing MIR
+  --simplifycfg-branch-fold-threshold=<uint>                            - Maximum cost of combining conditions when folding branches
   --simplifycfg-dup-ret                                                 - Duplicate return instructions into unconditional branches
   --simplifycfg-hoist-common                                            - Hoist common instructions up to the parent block
   --simplifycfg-hoist-cond-stores                                       - Hoist conditional stores if an unconditional store precedes
@@ -723,6 +743,9 @@ General options:
     =speed                                                              -   Optimize for speed
   --ssc-dce-limit=<int>                                                 - 
   --stack-alignment=<uint>                                              - Override default stack alignment
+  --stack-protector-guard=<string>                                      - Stack protector guard mode
+  --stack-protector-guard-offset=<uint>                                 - Stack protector guard offset
+  --stack-protector-guard-reg=<string>                                  - Stack protector guard register
   --stack-safety-max-iterations=<int>                                   - 
   --stack-safety-print                                                  - 
   --stack-safety-run                                                    - 
@@ -799,6 +822,7 @@ General options:
   --vector-library=<value>                                              - Vector functions library
     =none                                                               -   No vector functions library
     =Accelerate                                                         -   Accelerate framework
+    =LIBMVEC-X86                                                        -   GLIBC Vector Math library
     =MASSV                                                              -   IBM MASS vector library
     =SVML                                                               -   Intel SVML library
   --verify-assumption-cache                                             - Enable verification of assumption cache
@@ -883,6 +907,7 @@ General options:
   --x86-slh-post-load                                                   - Harden the value loaded *after* it is loaded by flushing the loaded bits to 1. This is hard to do in general but can be done easily for GPRs.
   --x86-speculative-load-hardening                                      - Force enable speculative load hardening
   --x86-use-base-pointer                                                - Enable use of a base pointer for complex stack frames
+  --x86-use-fsrm-for-memcpy                                             - Use fast short rep mov in memcpy lowering
   --x86-use-vzeroupper                                                  - Minimize AVX to SSE transition penalty
 
 Generic Options:

@@ -26,7 +26,7 @@ namespace Z0
 
         public MethodMetadata Metadata;
 
-        public X86Function x86Fx;
+        public MachineFunction x86Fx;
 
         public CilFunction CilFx;
     }

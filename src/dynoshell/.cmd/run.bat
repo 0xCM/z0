@@ -1,8 +1,9 @@
 echo off
+set ProjectId=dynoshell
 
-set ProjectId=evaluate.shell
+set SetupCmd=%ZDev%\.cmd\setup.cmd
+echo SetupCmd:%SetupCmd%
 
-call .cmd\setup.g.cmd
-
-echo Executing %RunCmd%
+echo on
+call %SetupCmd%
 call %RunCmd%

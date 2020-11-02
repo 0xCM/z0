@@ -369,4 +369,10 @@ public readonly struct ApiNameParts
     public const string algorithms = nameof(algorithms);
 
     public const string factories = nameof(factories);
+
+    public const string cs = nameof(cs);
+
+    public const string render = nameof(render);
+
+    public const string cil = nameof(cil);
 }

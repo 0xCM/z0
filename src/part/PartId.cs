@@ -36,11 +36,9 @@ public enum PartId : ulong
 
     KonstShell = 21,
 
+    Lang = 22,
+
     Memories = 24,
-
-    Json = 28,
-
-    Artifacts = 32,
 
     GMath = 34,
 
@@ -57,13 +55,7 @@ public enum PartId : ulong
 
     ToolCli = 43,
 
-    Flow = 45,
-
-    Lang = 46,
-
     Run = 50,
-
-    Data = 51,
 
     Canonical = 63,
 

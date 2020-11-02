@@ -1,9 +1,9 @@
 echo off
 
-set ProjectId=dynoshell
+set ProjectId=lang
 
 set SetupCmd=%ZDev%\.cmd\setup.cmd
-echo SetupCmd:%SetupCmd%
+echo SetupCmd:%CmdPath%
 
 echo on
 call %SetupCmd%

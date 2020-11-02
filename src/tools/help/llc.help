@@ -47,9 +47,11 @@ General options:
   --aarch64-fix-cortex-a53-835769                                       - Work around Cortex-A53 erratum 835769
   --aarch64-load-store-renaming                                         - 
   --aarch64-load-store-scan-limit=<uint>                                - 
+  --aarch64-mark-bti-property                                           - Add .note.gnu.property with BTI to assembly files
   --aarch64-neon-syntax=<value>                                         - Choose style of NEON code to emit from AArch64 backend:
     =generic                                                            -   Emit generic NEON assembly
     =apple                                                              -   Emit Apple-style NEON assembly
+  --aarch64-order-frame-objects                                         - sort stack allocations
   --aarch64-redzone                                                     - enable use of redzone on AArch64
   --aarch64-simd-scalar-force-all                                       - Force use of AdvSIMD scalar instructions everywhere
   --aarch64-slh-loads                                                   - Sanitize loads from memory.
@@ -60,6 +62,7 @@ General options:
   --aarch64-tbz-offset-bits=<uint>                                      - Restrict range of TB[N]Z instructions (DEBUG)
   --aarch64-update-scan-limit=<uint>                                    - 
   --aarch64-use-tbi                                                     - Assume that top byte of an address is ignored
+  --abort-on-max-devirt-iterations-reached                              - Abort when the max iterations for devirtualization CGSCC repeat pass is reached
   --accel-tables=<value>                                                - Output dwarf accelerator tables.
     =Default                                                            -   Default for platform
     =Disable                                                            -   Disabled.
@@ -98,6 +101,7 @@ General options:
   --amdgpu-dump-hsa-metadata                                            - Dump AMDGPU HSA Metadata
   --amdgpu-early-ifcvt                                                  - Run early if-conversion
   --amdgpu-early-inline-all                                             - Inline all functions early
+  --amdgpu-enable-flat-scratch                                          - Use flat scratch instructions
   --amdgpu-enable-merge-m0                                              - Merge and hoist M0 initializations
   --amdgpu-enable-structurizer-workarounds                              - Enable workarounds for the StructurizeCFG pass
   --amdgpu-fixed-function-abi                                           - Enable all implicit function arguments
@@ -135,6 +139,7 @@ General options:
   --amdgpu-unroll-threshold-if=<uint>                                   - Unroll threshold increment for AMDGPU for each if statement inside loop
   --amdgpu-unroll-threshold-local=<uint>                                - Unroll threshold for AMDGPU if local memory used in a loop
   --amdgpu-unroll-threshold-private=<uint>                              - Unroll threshold for AMDGPU if private memory used in a loop
+  --amdgpu-use-aa-in-codegen                                            - Enable the use of AA during codegen.
   --amdgpu-use-divergent-register-indexing                              - Use indirect register addressing for divergent indexes
   --amdgpu-use-legacy-divergence-analysis                               - Enable legacy divergence analysis for AMDGPU
   --amdgpu-use-native[=<string>]                                          - Comma separated list of functions to replace with native, or all
@@ -142,6 +147,7 @@ General options:
   --amdgpu-verify-regbanks-reassign=<0|1|2>                             - Verify stall cycles in the regbanks reassign pass
   --amdgpu-vgpr-index-mode                                              - Use GPR indexing mode instead of movrel for vector indexing
   --amdgpu-waitcnt-forcezero                                            - Force all waitcnt instrs to be emitted as s_waitcnt vmcnt(0) expcnt(0) lgkmcnt(0)
+  --amdhsa-code-object-version=<uint>                                   - AMDHSA Code Object Version
   --arm-add-build-attributes                                            - 
   --arm-adjust-jump-tables                                              - Adjust basic block layout to better use TB[BH]
   --arm-assume-misaligned-load-store                                    - Be more conservative in ARM load/store opt
@@ -157,6 +163,7 @@ General options:
     =thumb                                                              -   Warn in ARM, emit implicit ITs in Thumb
   --arm-interworking                                                    - Enable / disable ARM interworking (for debugging only)
   --arm-load-store-opt                                                  - Enable ARM load/store optimization pass
+  --arm-loloops-disable-tailpred                                        - Disable tail-predication in the ARM LowOverheadLoop pass
   IT block support
       --arm-default-it                                                     - Generate IT block based on arch
       --arm-restrict-it                                                    - Disallow deprecated IT based on ARMv8
@@ -186,6 +193,7 @@ General options:
     =cgscc                                                              -   enable call graph SCC attributor runs
     =none                                                               -   disable attributor runs
   --attributor-manifest-internal                                        - Manifest Attributor internal string attributes.
+  --attributor-max-initialization-chain-length=<uint>                   - Maximal number of chained initializations (to avoid stack overflows)
   --attributor-max-iterations=<uint>                                    - Maximal number of fixpoint iterations.
   --attributor-max-iterations-verify                                    - Verify that max-iterations is a tight bound for a fixpoint
   --attributor-max-potential-values=<uint>                              - Maximum number of potential values to be tracked for each position.
@@ -197,10 +205,14 @@ General options:
   --basic-aa-force-at-least-64b                                         - 
   --basic-aa-recphi                                                     - 
   --basic-block-sections=<all | <function list (file)> | labels | none> - Emit basic blocks into separate sections
+  --bbsections-cold-text-prefix=<string>                                - The text prefix to use for cold basic block clusters
+  --bitcode-flush-threshold=<uint>                                      - The threshold (unit M) for flushing LLVM bitcode.
   --bitcode-mdindex-threshold=<uint>                                    - Number of metadatas above which we emit an index to enable lazy-loading
   --block-freq-ratio-threshold=<uint>                                   - Do not hoist instructions if targetblock is N times hotter than the source.
   --block-placement-exit-block-bias=<uint>                              - Block frequency percentage a loop exit block needs over the original exit to be considered the new exit.
   --bonus-inst-threshold=<uint>                                         - Control the number of bonus instructions (default = 1)
+  --bpf-disable-avoid-speculation                                       - BPF: Disable Avoiding Speculative Code Motion.
+  --bpf-disable-serialize-icmp                                          - BPF: Disable Serializing ICMP insns.
   --bpf-expand-memcpy-in-order                                          - Expand memcpy into load/store pairs in order
   --branch-fold-placement                                               - Perform branch folding during placement. Reduces code size.
   --branch-relax-asm-large                                              - branch relax asm
@@ -273,9 +285,11 @@ General options:
     =dse-memoryssa                                                      -   Controls which MemoryDefs are eliminated.
     =newgvn-vn                                                          -   Controls which instructions are value numbered
     =newgvn-phi                                                         -   Controls which instructions we create phi of ops for
+    =conds-eliminated                                                   -   Controls which conditions are eliminated
     =div-rem-pairs-transform                                            -   Controls transformations in div-rem-pairs pass
     =assume-builder-counter                                             -   Controls which assumes gets created
     =predicateinfo-rename                                               -   Controls which variables are renamed with predicateinfo
+    =attributor-manifest                                                -   Determine what attributes are manifested in the IR
     =instcombine-visit                                                  -   Controls which instructions are visited
     =instcombine-negator                                                -   Controls Negator transformations in InstCombine pass
   --debug-entry-values                                                  - Enable debug info for the debug entry values.
@@ -309,6 +323,7 @@ General options:
   --disable-2addr-hack                                                  - Disable scheduler's two-address hack
   --disable-a15-sd-optimization                                         - Inhibit optimization of S->D register accesses on A15
   --disable-adv-copy-opt                                                - Disable advanced copy optimization
+  --disable-always-inliner-in-module-wrapper                            - 
   --disable-arm-loloops                                                 - Disable the generation of low-overhead loops
   --disable-arm-parallel-dsp                                            - Disable the ARM Parallel DSP pass
   --disable-basic-aa                                                    - 
@@ -332,6 +347,7 @@ General options:
   --disable-dfa-sched                                                   - Disable use of DFA during scheduling
   --disable-early-ifcvt                                                 - Disable Early If-conversion
   --disable-early-taildup                                               - Disable pre-register allocation tail duplication
+  --disable-expand-reductions                                           - Disable the expand reduction intrinsics pass from running
   --disable-gep-const-evaluation                                        - Disables evaluation of GetElementPtr with constant operands
   --disable-gisel-legality-check                                        - Don't verify that MIR is fully legal between GlobalISel passes
   --disable-hcp                                                         - Disable Hexagon constant propagation
@@ -456,7 +472,7 @@ General options:
   --dse-memoryssa-path-check-limit=<uint>                               - The maximum number of blocks to check when trying to prove that all paths to an exit go through a killing block (default = 50)
   --dse-memoryssa-samebb-cost=<uint>                                    - The cost of a step in the same basic block as the killing MemoryDef(default = 1)
   --dse-memoryssa-scanlimit=<uint>                                      - The number of memory instructions to scan for dead store elimination (default = 100)
-  --dse-memoryssa-walklimit=<uint>                                      - The maximum number of steps while walking upwards to find MemoryDefs that may be killed (default = 70)
+  --dse-memoryssa-walklimit=<uint>                                      - The maximum number of steps while walking upwards to find MemoryDefs that may be killed (default = 90)
   --dwarf-extended-loc=<value>                                          - Disable emission of the extended flags in .loc directives.
     =Default                                                            -   Default for platform
     =Enable                                                             -   Enabled
@@ -469,6 +485,10 @@ General options:
     =Default                                                            -   Default for platform
     =All                                                                -   All
     =Abstract                                                           -   Abstract subprograms
+  --dwarf-op-convert=<value>                                            - Enable use of the DWARFv5 DW_OP_convert operator
+    =Default                                                            -   Default for platform
+    =Enable                                                             -   Enabled
+    =Disable                                                            -   Disabled
   --dwarf-sections-as-references=<value>                                - Use sections+offset as references rather than labels.
     =Default                                                            -   Default for platform
     =Enable                                                             -   Enabled
@@ -499,6 +519,7 @@ General options:
   --enable-cold-section                                                 - Enable placement of extracted cold functions into a separate section after hot-cold splitting.
   --enable-coldcc-stress-test                                           - Enable stress test of coldcc by adding calling conv to all internal functions.
   --enable-cond-stores-vec                                              - Enable if predication of stores during vectorization.
+  --enable-constraint-elimination                                       - Enable pass to eliminate conditions based on linear constraints.
   --enable-cse-in-irtranslator                                          - Should enable CSE in irtranslator
   --enable-cse-in-legalizer                                             - Should enable CSE in Legalizer
   --enable-cur-sched                                                    - Enable the scheduler to generate .cur
@@ -533,6 +554,7 @@ General options:
   --enable-loadstore-runtime-interleave                                 - Enable runtime interleaving until load/store ports are saturated
   --enable-local-reassign                                               - Local reassignment can yield better allocation decisions, but may be compile time intensive
   --enable-loop-distribute                                              - Enable the new, experimental LoopDistribution Pass
+  --enable-loop-flatten                                                 - Enable the LoopFlatten Pass
   --enable-loop-simplifycfg-term-folding                                - 
   --enable-loop-versioning-licm                                         - Enable the experimental Loop Versioning LICM pass
   --enable-loopinterchange                                              - Enable the new, experimental LoopInterchange Pass
@@ -545,6 +567,7 @@ General options:
   --enable-matrix                                                       - Enable lowering of the matrix intrinsics
   --enable-mem-access-versioning                                        - Enable symbolic stride memory access versioning
   --enable-memcpy-dag-opt                                               - Gang up loads and stores generated by inlining of memcpy
+  --enable-memcpyopt-memoryssa                                          - Use MemorySSA-backed MemCpyOpt.
   --enable-misched                                                      - Enable the machine instruction scheduling pass.
   --enable-mssa-loop-dependency                                         - Enable MemorySSA dependency for loop pass manager
   --enable-name-compression                                             - Enable name/filename string compression
@@ -566,7 +589,6 @@ General options:
   --enable-post-misched                                                 - Enable the post-ra machine instruction scheduling pass.
   --enable-ppc-branch-coalesce                                          - enable coalescing of duplicate branches for PPC
   --enable-ppc-extra-toc-reg-deps                                       - Add extra TOC register dependencies
-  --enable-ppc-pcrel-tls                                                - enable the use of PC relative memops in TLS instructions on PPC
   --enable-ppc-prefetching                                              - enable software prefetching on PPC
   --enable-pre                                                          - 
   --enable-save-restore-long                                            - Enable long calls for save-restore stubs.
@@ -575,6 +597,7 @@ General options:
   --enable-shrink-wrap                                                  - enable the shrink-wrapping pass
   --enable-sign-dependent-rounding-fp-math                              - Force codegen to assume rounding mode can change dynamically
   --enable-simple-loop-unswitch                                         - Enable the simple loop unswitch pass. Also enables independent cleanup passes integrated into the loop pass manager pipeline.
+  --enable-split-backedge-in-load-pre                                   - 
   --enable-split-machine-functions                                      - Split out cold blocks from machine functions based on profile information.
   --enable-stackovf-sanitizer                                           - Enable runtime checks for stack overflow.
   --enable-store-refinement                                             - 
@@ -618,7 +641,7 @@ General options:
     =asm                                                                -   Emit an assembly ('.s') file
     =obj                                                                -   Emit a native object ('.o') file
     =null                                                               -   Emit nothing, for performance testing
-  --filter-print-funcs=<function names>                                 - Only print IR for functions whose name match this for all print-[before|after][-all] options
+  --filter-print-funcs=<function names>                                 - Only print IR for functions whose name match this for all print-[before|after][-all] and change reporter options
   --fixup-allow-gcptr-in-csr                                            - Allow passing GC Pointer arguments in callee saved registers
   --fixup-byte-word-insts                                               - Change byte and word instructions to larger sizes
   --fixup-max-csr-statepoints=<uint>                                    - Max number of statepoints allowed to pass GC Ptrs in registers
@@ -658,7 +681,7 @@ General options:
   --force-target-num-vector-regs=<uint>                                 - A flag that overrides the target's number of vector registers.
   --force-vector-interleave=<uint>                                      - Sets the vectorization interleave count. Zero is autoselect.
   --force-vector-width=<uint>                                           - Sets the SIMD width. Zero is autoselect.
-  --forget-scev-loop-unroll                                             - Forget everything in SCEV when doing LoopUnroll, instead of just the current top-most loop. This is somtimes preferred to reduce compile time.
+  --forget-scev-loop-unroll                                             - Forget everything in SCEV when doing LoopUnroll, instead of just the current top-most loop. This is sometimes preferred to reduce compile time.
   --forward-switch-cond                                                 - Forward switch condition to phi ops (default = false)
   --fp-contract=<value>                                                 - Enable aggressive formation of fused FP ops
     =fast                                                               -   Fuse FP ops whenever profitable
@@ -749,7 +772,7 @@ General options:
   --hexbit-max-extract=<uint>                                           - 
   --hlir-simplify-limit=<uint>                                          - Maximum number of simplification steps in HLIR
   --hoist-cheap-insts                                                   - MachineLICM should hoist even cheap instructions
-  --hoist-common-insts                                                  - hoist common instructions (default = true)
+  --hoist-common-insts                                                  - hoist common instructions (default = false)
   --hoist-const-stores                                                  - Hoist invariant stores
   --hot-callsite-rel-freq=<int>                                         - Minimum block frequency, expressed as a multiple of caller's entry frequency, for a callsite to be hot in the absence of profile information.
   --hot-callsite-threshold=<int>                                        - Threshold for hot callsites 
@@ -777,6 +800,7 @@ General options:
   --ifcvt-fn-stop=<int>                                                 - 
   --ifcvt-limit=<int>                                                   - 
   --ignore-bb-reg-pressure                                              - 
+  --ignore-xcoff-visibility                                             - Not emit the visibility attribute for asm in AIX OS or give all symbols 'unspecified' visibility in XCOFF object file
   --imp-null-check-page-size=<int>                                      - The page size of the target in bytes
   --imp-null-max-insts-to-consider=<uint>                               - The max number of instructions to consider hoisting loads over (the algorithm is quadratic over this number)
   --import-constants-with-refs                                          - Import constant global variables with references
@@ -784,6 +808,7 @@ General options:
   --incremental-linker-compatible                                       - When used with filetype=obj, emit an object file which can be used with an incremental linker
   --indvars-post-increment-ranges                                       - Use post increment control-dependent ranges in IndVarSimplify
   --indvars-predicate-loops                                             - Predicate conditions in read only loops
+  --indvars-widen-indvars                                               - Allow widening of indvars to eliminate s/zext
   --info-output-file=<filename>                                         - File to append -stats and -timer output to
   --inline-caller-superset-nobuiltin                                    - Allow inlining when caller has a superset of callee's nobuiltin attributes.
   --inline-cold-callsite-threshold=<int>                                - Threshold for inlining cold callsites
@@ -836,6 +861,7 @@ General options:
   --jump-is-expensive                                                   - Do not create extra branches to split comparison logic.
   --jump-table-density=<uint>                                           - Minimum density for building a jump table in a normal function
   --jump-threading-across-loop-headers                                  - Allow JumpThreading to thread across loop headers, for testing
+  --jump-threading-freeze-select-cond                                   - Freeze the condition when unfolding select
   --jump-threading-implication-search-threshold=<uint>                  - The number of predecessors to search for a stronger condition to use to thread over a weaker condition
   --jump-threading-threshold=<uint>                                     - Max block size to duplicate for jump threading
   --keep-loops                                                          - Preserve canonical loop structure (default = true)
@@ -848,6 +874,7 @@ General options:
   --lcr-max-depth=<uint>                                                - Last chance recoloring max depth
   --lcr-max-interf=<uint>                                               - Last chance recoloring maximum number of considered interference at a time
   --ldstmemcpy-glue-max=<int>                                           - Number limit for gluing ld/st of memcpy.
+  --licm-coldness-threshold=<uint>                                      - Relative coldness Threshold of hoisting/sinking destination block for LICM to be considered beneficial
   --licm-control-flow-hoisting                                          - Enable control flow (and PHI) hoisting in LICM
   --licm-max-num-uses-traversed=<uint>                                  - Max num uses visited for identifying load invariance in loop using invariant start (default = 8)
   --licm-mssa-max-acc-promotion=<uint>                                  - [LICM & MemorySSA] When MSSA in LICM is disabled, this has no effect. When MSSA in LICM is enabled, then this is the maximum number of accesses allowed to be present in a loop in order to enable memory promotion.
@@ -866,6 +893,8 @@ General options:
   --loop-distribute-scev-check-threshold=<uint>                         - The maximum number of SCEV checks allowed for Loop Distribution
   --loop-distribute-scev-check-threshold-with-pragma=<uint>             - The maximum number of SCEV checks allowed for Loop Distribution for loop marked with #pragma loop distribute(enable)
   --loop-distribute-verify                                              - Turn on DominatorTree and LoopInfo verification after Loop Distribution
+  --loop-flatten-assume-no-overflow                                     - Assume that the product of the two iteration limits will never overflow
+  --loop-flatten-cost-threshold=<uint>                                  - Limit on the cost of instructions that can be repeated due to loop flattening
   --loop-fusion-dependence-analysis=<value>                             - Which dependence analysis should loop fusion use?
     =scev                                                               -   Use the scalar evolution interface
     =da                                                                 -   Use the dependence analysis interface
@@ -950,8 +979,6 @@ General options:
   --memdep-block-number-limit=<uint>                                    - The number of blocks to scan during memory dependency analysis (default = 1000)
   --memdep-block-scan-limit=<uint>                                      - The number of instructions to scan in a block in memory dependency analysis (default = 100)
   --memop-max-annotations=<uint>                                        - Max number of preicise value annotations for a single memopintrinsic
-  --memop-size-large=<uint>                                             - Set large value thresthold in memory intrinsic size profiling. Value of 0 disables the large value profiling.
-  --memop-size-range=<string>                                           - Set the range of size in memory intrinsic calls to be profiled precisely, in a format of <start_val>:<end_val>
   --memop-value-prof-max-opt-size=<uint>                                - Optimize the memop size <= this value
   --memory-check-merge-threshold=<uint>                                 - Maximum number of comparisons done when trying to merge runtime memory checks. (default = 100)
   --memssa-check-limit=<uint>                                           - The maximum number of stores/phis MemorySSAwill consider trying to walk past (default = 100)
@@ -982,6 +1009,7 @@ General options:
   --min-predictable-branch=<int>                                        - Minimum percentage (0-100) that a condition must be either true or false to assume that the condition is predictable
   --min-prefetch-stride=<uint>                                          - Min stride to add prefetches
   --min-region-size-ratio=<number>                                      - Minimum ratio comparing relative sizes of each outline candidate and original function
+  --min-runtime-iterations=<uint>                                       - 
   --minimum-jump-tables=<int>                                           - Set minimum jump tables
   --mips-align-constant-islands                                         - Align constant islands in code
   --mips-compact-branches=<value>                                       - MIPS Specific: Compact branch policy.
@@ -1005,6 +1033,7 @@ General options:
   --mips32-function-mask=<string>                                       - Force function to be mips32
   --mir-debug-loc                                                       - Print MIR debug-locations
   --mir-strip-debugify-only                                             - Should mir-strip-debug only strip debug info from debugified modules by default
+  --mir-vreg-namer-use-stable-hash                                      - Use Stable Hashing for MIR VReg Renaming
   --misched=<value>                                                     - Machine instruction scheduler to use
     =ppc-postra                                                         -   Run PowerPC PostRA specific scheduler
     =ppc-prera                                                          -   Run PowerPC PreRA specific scheduler
@@ -1087,6 +1116,7 @@ General options:
   --openmp-hide-memory-transfer-latency                                 - [WIP] Tries to hide the latency of host to device memory transfers
   --openmp-ir-builder-optimistic-attributes                             - Use optimistic attributes describing 'as-if' properties of runtime calls.
   --openmp-opt-disable                                                  - Disable OpenMP specific optimizations.
+  --openmp-opt-enable-merging                                           - Enable the OpenMP region merging optimization.
   --openmp-print-gpu-kernels                                            - 
   --openmp-print-icv-values                                             - 
   --opt-bisect-limit=<int>                                              - Maximum optimization to perform
@@ -1142,6 +1172,7 @@ General options:
   --phi-elim-split-all-critical-edges                                   - Split all critical edges during PHI elimination
   --phi-node-folding-threshold=<uint>                                   - Control the amount of phi node folding to perform (default = 2)
   --phicse-debug-hash                                                   - Perform extra assertion checking to verify that PHINodes's hash function is well-behaved w.r.t. its isEqual predicate
+  --phicse-num-phi-smallsize=<uint>                                     - When the basic block contains not more than this number of PHI nodes, perform a (faster!) exhaustive search instead of set-driven one.
   --pi-force-live-exit-outline                                          - Force outline regions with live exits
   --pi-mark-coldcc                                                      - Mark outline function calls with ColdCC
   --pipeliner-annotate-for-testing                                      - Instead of emitting the pipelined code, annotate instructions with the generated schedule for feeding into the -modulo-schedule-test pass
@@ -1250,7 +1281,9 @@ General options:
     =aarch64-jump-tables                                                -   AArch64 compress jump tables pass
     =aarch64-ldst-opt                                                   -   AArch64 load / store optimization pass
     =aarch64-local-dynamic-tls-cleanup                                  -   AArch64 Local Dynamic TLS Access Clean-up
+    =aarch64-post-select-optimize                                       -   Optimize AArch64 selected instructions
     =aarch64-postlegalizer-combiner                                     -   Combine AArch64 MachineInstrs after legalization
+    =aarch64-postlegalizer-lowering                                     -   Lower AArch64 MachineInstrs after legalization
     =aarch64-prelegalizer-combiner                                      -   Combine AArch64 machine instrs before legalization
     =aarch64-promote-const                                              -   AArch64 Promote Constant Pass
     =aarch64-simd-scalar                                                -   AdvSIMD Scalar Operation Optimization
@@ -1276,6 +1309,7 @@ General options:
     =amdgpu-fix-function-bitcasts                                       -   Fix function bitcasts for AMDGPU
     =amdgpu-inline                                                      -   AMDGPU Function Integration/Inlining
     =amdgpu-isel                                                        -   AMDGPU DAG->DAG Pattern Instruction Selection
+    =amdgpu-late-codegenprepare                                         -   AMDGPU IR late optimizations
     =amdgpu-lower-enqueued-block                                        -   Lower OpenCL enqueued blocks
     =amdgpu-lower-intrinsics                                            -   Lower intrinsics
     =amdgpu-lower-kernel-arguments                                      -   AMDGPU Lower Kernel Arguments
@@ -1319,10 +1353,12 @@ General options:
     =block-freq                                                         -   Block Frequency Analysis
     =block-placement                                                    -   Branch Probability Basic Block Placement
     =block-placement-stats                                              -   Basic Block Placement Stats
-    =bpf-abstract-member-access                                         -   abstracting struct/union member accessees
+    =bpf-abstract-member-access                                         -   BPF Abstract Member Access
+    =bpf-adjust-opt                                                     -   BPF Adjust Optimization
+    =bpf-check-and-opt-ir                                               -   BPF Check And Adjust IR
     =bpf-mi-trunc-elim                                                  -   BPF MachineSSA Peephole Optimization For TRUNC Eliminate
     =bpf-mi-zext-elim                                                   -   BPF MachineSSA Peephole Optimization For ZEXT Eliminate
-    =bpf-preserve-di-type                                               -   preserve debuginfo type
+    =bpf-preserve-di-type                                               -   BPF Preserve Debuginfo Type
     =branch-folder                                                      -   Control Flow Optimizer
     =branch-prob                                                        -   Branch Probability Analysis
     =branch-relaxation                                                  -   Branch relaxation pass
@@ -1338,6 +1374,7 @@ General options:
     =codegenprepare                                                     -   Optimize for code generation
     =collector-metadata                                                 -   Create Garbage Collector Module Metadata
     =consthoist                                                         -   Constant Hoisting
+    =constraint-elimination                                             -   Constraint Elimination
     =correlated-propagation                                             -   Value Propagation
     =cseinfo                                                            -   Analysis containing CSE Info
     =da                                                                 -   Dependence Analysis
@@ -1347,7 +1384,6 @@ General options:
     =debugify-function                                                  -   Attach debug info to a function
     =demanded-bits                                                      -   Demanded bits analysis
     =detect-dead-lanes                                                  -   Detect Dead Lanes
-    =die                                                                -   Dead Instruction Elimination
     =div-rem-pairs                                                      -   Hoist/decompose integer division and remainder
     =divergence                                                         -   Legacy Divergence Analysis
     =domfrontier                                                        -   Dominance Frontier Construction
@@ -1435,6 +1471,7 @@ General options:
     =loop-data-prefetch                                                 -   Loop Data Prefetch
     =loop-deletion                                                      -   Delete dead loops
     =loop-distribute                                                    -   Loop Distribution
+    =loop-flatten                                                       -   Flattens loops
     =loop-fusion                                                        -   Loop Fusion
     =loop-guard-widening                                                -   Widen guards (within a single loop, as a loop pass)
     =loop-idiom                                                         -   Recognize loop idioms
@@ -1712,7 +1749,9 @@ General options:
     =aarch64-jump-tables                                                -   AArch64 compress jump tables pass
     =aarch64-ldst-opt                                                   -   AArch64 load / store optimization pass
     =aarch64-local-dynamic-tls-cleanup                                  -   AArch64 Local Dynamic TLS Access Clean-up
+    =aarch64-post-select-optimize                                       -   Optimize AArch64 selected instructions
     =aarch64-postlegalizer-combiner                                     -   Combine AArch64 MachineInstrs after legalization
+    =aarch64-postlegalizer-lowering                                     -   Lower AArch64 MachineInstrs after legalization
     =aarch64-prelegalizer-combiner                                      -   Combine AArch64 machine instrs before legalization
     =aarch64-promote-const                                              -   AArch64 Promote Constant Pass
     =aarch64-simd-scalar                                                -   AdvSIMD Scalar Operation Optimization
@@ -1738,6 +1777,7 @@ General options:
     =amdgpu-fix-function-bitcasts                                       -   Fix function bitcasts for AMDGPU
     =amdgpu-inline                                                      -   AMDGPU Function Integration/Inlining
     =amdgpu-isel                                                        -   AMDGPU DAG->DAG Pattern Instruction Selection
+    =amdgpu-late-codegenprepare                                         -   AMDGPU IR late optimizations
     =amdgpu-lower-enqueued-block                                        -   Lower OpenCL enqueued blocks
     =amdgpu-lower-intrinsics                                            -   Lower intrinsics
     =amdgpu-lower-kernel-arguments                                      -   AMDGPU Lower Kernel Arguments
@@ -1781,10 +1821,12 @@ General options:
     =block-freq                                                         -   Block Frequency Analysis
     =block-placement                                                    -   Branch Probability Basic Block Placement
     =block-placement-stats                                              -   Basic Block Placement Stats
-    =bpf-abstract-member-access                                         -   abstracting struct/union member accessees
+    =bpf-abstract-member-access                                         -   BPF Abstract Member Access
+    =bpf-adjust-opt                                                     -   BPF Adjust Optimization
+    =bpf-check-and-opt-ir                                               -   BPF Check And Adjust IR
     =bpf-mi-trunc-elim                                                  -   BPF MachineSSA Peephole Optimization For TRUNC Eliminate
     =bpf-mi-zext-elim                                                   -   BPF MachineSSA Peephole Optimization For ZEXT Eliminate
-    =bpf-preserve-di-type                                               -   preserve debuginfo type
+    =bpf-preserve-di-type                                               -   BPF Preserve Debuginfo Type
     =branch-folder                                                      -   Control Flow Optimizer
     =branch-prob                                                        -   Branch Probability Analysis
     =branch-relaxation                                                  -   Branch relaxation pass
@@ -1800,6 +1842,7 @@ General options:
     =codegenprepare                                                     -   Optimize for code generation
     =collector-metadata                                                 -   Create Garbage Collector Module Metadata
     =consthoist                                                         -   Constant Hoisting
+    =constraint-elimination                                             -   Constraint Elimination
     =correlated-propagation                                             -   Value Propagation
     =cseinfo                                                            -   Analysis containing CSE Info
     =da                                                                 -   Dependence Analysis
@@ -1809,7 +1852,6 @@ General options:
     =debugify-function                                                  -   Attach debug info to a function
     =demanded-bits                                                      -   Demanded bits analysis
     =detect-dead-lanes                                                  -   Detect Dead Lanes
-    =die                                                                -   Dead Instruction Elimination
     =div-rem-pairs                                                      -   Hoist/decompose integer division and remainder
     =divergence                                                         -   Legacy Divergence Analysis
     =domfrontier                                                        -   Dominance Frontier Construction
@@ -1897,6 +1939,7 @@ General options:
     =loop-data-prefetch                                                 -   Loop Data Prefetch
     =loop-deletion                                                      -   Delete dead loops
     =loop-distribute                                                    -   Loop Distribution
+    =loop-flatten                                                       -   Flattens loops
     =loop-fusion                                                        -   Loop Fusion
     =loop-guard-widening                                                -   Widen guards (within a single loop, as a loop pass)
     =loop-idiom                                                         -   Recognize loop idioms
@@ -2167,7 +2210,7 @@ General options:
   --print-lsr-output                                                    - Print LLVM IR produced by the loop-reduce pass
   --print-lvi-after-jump-threading                                      - Print the LazyValueInfo cache after JumpThreading
   --print-machine-bfi                                                   - Print the machine block frequency info.
-  --print-module-scope                                                  - When printing IR for print-[before|after]{-all} always print a module IR
+  --print-module-scope                                                  - When printing IR for print-[before|after]{-all} and change reporters, always print a module IR
   --print-region-style=<value>                                          - style of printing regions
     =none                                                               -   print no details
     =bb                                                                 -   print regions in detail with block_iterator
@@ -2189,6 +2232,7 @@ General options:
   --propagate-attrs                                                     - Propagate attributes in index
   --protect-from-escaped-allocas                                        - Do not optimize lifetime zones that are broken
   --r600-ir-structurize                                                 - Use StructurizeCFG IR pass
+  --rafast-ignore-missing-defs                                          - 
   --rdf-dump                                                            - 
   --rdf-limit=<uint>                                                    - 
   --rdf-liveness-max-rec=<uint>                                         - Maximum recursion level
@@ -2263,6 +2307,7 @@ General options:
   --scalar-evolution-max-scev-compare-depth=<uint>                      - Maximum depth of recursive SCEV complexity comparisons
   --scalar-evolution-max-scev-operations-implication-depth=<uint>       - Maximum depth of recursive SCEV operations implication analysis
   --scalar-evolution-max-value-compare-depth=<uint>                     - Maximum depth of recursive value complexity comparisons
+  --scalar-evolution-use-expensive-range-sharpening                     - Use more powerful methods of sharpening expression ranges. May be costly in terms of compile time
   --scalarize-load-store                                                - Allow the scalarizer pass to scalarize loads and store
   --scalarize-variable-insert-extract                                   - Allow the scalarizer pass to scalarize insertelement/extractelement with variable index
   --scale-partial-sample-profile-working-set-size                       - If true, scale the working set size of the partial sample profile by the partial profile ratio to reflect the size of the program being compiled.
@@ -2282,6 +2327,7 @@ General options:
   --simple-loop-unswitch-drop-non-trivial-implicit-null-checks          - If enabled, drop make.implicit metadata in unswitched implicit null checks to save time analyzing if we can keep it.
   --simple-loop-unswitch-guards                                         - If enabled, simple loop unswitching will also consider llvm.experimental.guard intrinsics as unswitch candidates.
   --simplify-mir                                                        - Leave out unnecessary information when printing MIR
+  --simplifycfg-branch-fold-threshold=<uint>                            - Maximum cost of combining conditions when folding branches
   --simplifycfg-dup-ret                                                 - Duplicate return instructions into unconditional branches
   --simplifycfg-hoist-common                                            - Hoist common instructions up to the parent block
   --simplifycfg-hoist-cond-stores                                       - Hoist conditional stores if an unconditional store precedes
@@ -2337,13 +2383,18 @@ General options:
   --sroa-strict-inbounds                                                - 
   --ssc-dce-limit=<int>                                                 - 
   --stack-alignment=<uint>                                              - Override default stack alignment
+  --stack-protector-guard=<string>                                      - Stack protector guard mode
+  --stack-protector-guard-offset=<uint>                                 - Stack protector guard offset
+  --stack-protector-guard-reg=<string>                                  - Stack protector guard register
   --stack-safety-max-iterations=<int>                                   - 
   --stack-safety-print                                                  - 
   --stack-safety-run                                                    - 
   --stack-size-section                                                  - Emit a section containing stack size metadata
   --stack-symbol-ordering                                               - Order local stack symbols.
+  --stack-tagging-first-slot-opt                                        - Apply first slot optimization for stack tagging (eliminate ADDG Rt, Rn, 0, 0).
   --stack-tagging-merge-init                                            - merge stack variable initializers with tagging when possible
   --stack-tagging-merge-init-scan-limit=<uint>                          - 
+  --stack-tagging-merge-init-size-limit=<uint>                          - 
   --stack-tagging-merge-settag                                          - merge settag instruction in function epilog
   --stack-tagging-unchecked-ld-st=<value>                               - Unconditionally apply unchecked-ld-st optimization (even for large stack frames, or in the presence of variable sized allocas).
     =never                                                              -   never apply unchecked-ld-st
@@ -2387,7 +2438,7 @@ General options:
   --tail-dup-verify                                                     - Verify sanity of PHI instructions during taildup
   --tail-merge-size=<uint>                                              - Min number of instructions to consider tail merging
   --tail-merge-threshold=<uint>                                         - Max number of predecessors to consider tail merging
-  --tail-predication=<value>                                            - MVE tail-predication options
+  --tail-predication=<value>                                            - MVE tail-predication pass options
     =disabled                                                           -   Don't tail-predicate loops
     =enabled-no-reductions                                              -   Enable tail-predication, but not for reduction loops
     =enabled                                                            -   Enable tail-predication, including reduction loops
@@ -2466,7 +2517,6 @@ General options:
   --use-lir-code-size-heurs                                             - Use loop idiom recognition code size heuristics when compilingwith -Os/-Oz
   --use-mbpi                                                            - use Machine Branch Probability Info
   --use-newer-candidate                                                 - 
-  --use-old-memop-value-prof                                            - Use the old memop value profiling buckets. This is transitional and to be removed after switching. 
   --use-registers-for-deopt-values                                      - Allow using registers for non pointer deopt args
   --use-segment-set-for-physregs                                        - Use segment set for the computation of the live ranges of physregs.
   --use-tbaa-in-sched-mi                                                - Enable use of TBAA during MI DAG construction
@@ -2477,6 +2527,7 @@ General options:
   --vector-library=<value>                                              - Vector functions library
     =none                                                               -   No vector functions library
     =Accelerate                                                         -   Accelerate framework
+    =LIBMVEC-X86                                                        -   GLIBC Vector Math library
     =MASSV                                                              -   IBM MASS vector library
     =SVML                                                               -   Intel SVML library
   --vectorize-loops                                                     - Run the Loop vectorization passes
@@ -2589,6 +2640,7 @@ General options:
   --x86-slh-post-load                                                   - Harden the value loaded *after* it is loaded by flushing the loaded bits to 1. This is hard to do in general but can be done easily for GPRs.
   --x86-speculative-load-hardening                                      - Force enable speculative load hardening
   --x86-use-base-pointer                                                - Enable use of a base pointer for complex stack frames
+  --x86-use-fsrm-for-memcpy                                             - Use fast short rep mov in memcpy lowering
   --x86-use-vzeroupper                                                  - Minimize AVX to SSE transition penalty
   --xcore-max-threads=<number>                                          - Maximum number of threads (for emulation thread-local storage)
 
@@ -2608,6 +2660,8 @@ Control the rules which are enabled. These options all take a comma separated li
 
   --aarch64postlegalizercombinerhelper-disable-rule=<string>            - Disable one or more combiner rules temporarily in the AArch64PostLegalizerCombinerHelper pass
   --aarch64postlegalizercombinerhelper-only-enable-rule=<string>        - Disable all rules in the AArch64PostLegalizerCombinerHelper pass then re-enable the specified ones
+  --aarch64postlegalizerloweringhelper-disable-rule=<string>            - Disable one or more combiner rules temporarily in the AArch64PostLegalizerLoweringHelper pass
+  --aarch64postlegalizerloweringhelper-only-enable-rule=<string>        - Disable all rules in the AArch64PostLegalizerLoweringHelper pass then re-enable the specified ones
   --aarch64prelegalizercombinerhelper-disable-rule=<string>             - Disable one or more combiner rules temporarily in the AArch64PreLegalizerCombinerHelper pass
   --aarch64prelegalizercombinerhelper-only-enable-rule=<string>         - Disable all rules in the AArch64PreLegalizerCombinerHelper pass then re-enable the specified ones
   --amdgpupostlegalizercombinerhelper-disable-rule=<string>             - Disable one or more combiner rules temporarily in the AMDGPUPostLegalizerCombinerHelper pass
