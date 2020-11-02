@@ -15,9 +15,7 @@ namespace Z0.Lang
 
         [MethodImpl(Inline)]
         public Input(T src)
-        {
-            Value = src;
-        }
+            => Value = src;
 
         [MethodImpl(Inline)]
         public static implicit operator Input<T>(T src)

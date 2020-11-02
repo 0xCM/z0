@@ -9,7 +9,6 @@ namespace Z0.Lang
     public abstract class CodeModel<T>
         where T : CodeModel<T>, new()
     {
-
         public string Name {get;set;}
     }
 }

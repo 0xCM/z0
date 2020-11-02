@@ -11,8 +11,9 @@ namespace Z0
     using DnLib = dnlib.DotNet.Emit;
     using R = System.Reflection;
 
-    public readonly partial struct CilApi
+    public readonly partial struct Cil
     {
+        [Op]
         public static ICilIndex index(R.Assembly src)
             => CilIndex.create(src);
 
@@ -20,6 +21,7 @@ namespace Z0
         /// Converts the dnlib-defined data structure to a Z0-defined replication of the dnlib structure
         /// </summary>
         /// <param name="src">The dnlib source value</param>
+        [Op]
         internal static Instruction describe(DnLib.Instruction src)
             => new Instruction{
                 OpCode = describe(src.OpCode),
@@ -32,6 +34,7 @@ namespace Z0
         /// Converts the dnlib-defined data structure to a Z0-defined replication of the dnlib structure
         /// </summary>
         /// <param name="src">The dnlib source value</param>
+        [Op]
         internal static OpCode describe(DnLib.OpCode src)
             => new OpCode(
                 name: src.Name,

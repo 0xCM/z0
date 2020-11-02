@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    using api = CilTableSpecs;
+    using api = CilTables;
 
     /// <summary>
     /// Defines a field

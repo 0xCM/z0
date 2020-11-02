@@ -26,6 +26,28 @@ namespace Z0
             = Default | SequentialLayout;
 
         [Op]
+        public static string format(in CilTableSpec src)
+        {
+            var dst = text.build();
+            dst.AppendLine(src.TableName.ShortName);
+            for(var i=0; i<src.Fields.Length; i++)
+                dst.AppendLine(src.Fields[i].ToString());
+            return dst.ToString();
+        }
+
+        [Op]
+        public static string format(in CilFieldSpec src)
+            => string.Format(RP.PSx4, src.FieldName, src.Position, src.Offset, src.TypeName);
+
+        [MethodImpl(Inline), Op]
+        public static CilTableSpec table(ClrTypeName type, params CilFieldSpec[] Fields)
+            => new CilTableSpec(type, Fields);
+
+        [MethodImpl(Inline), Op]
+        public static CilFieldSpec field(ClrMemberName name, ClrTypeName type, ushort position, Address16 offset = default)
+            => new CilFieldSpec(name, type, position, offset);
+
+        [Op]
         public static TypeBuilder type(ModuleBuilder mb, ClrTypeName fullName, TypeAttributes attributes, Type parent)
             => mb.DefineType(fullName, attributes, parent);
 
@@ -47,6 +69,27 @@ namespace Z0
         {
             var ab = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName(name), AssemblyBuilderAccess.Run);
             return ab.DefineDynamicModule("Primary");
+        }
+
+        [Op]
+        public static CilTableSpec clone(Type src)
+        {
+            var name = ClrTypeName.from(src);
+            var declared = src.DeclaredInstanceFields();
+            var count = declared.Length;
+            var buffer = alloc<CilFieldSpec>(count);
+            var fields = @readonly(declared);
+            var fieldOffsets = span(ClrQuery.offsets(src, declared));
+
+            var dst = span(buffer);
+            for(ushort i=0; i<count; i++)
+            {
+                ref readonly var f = ref skip(fields, i);
+                var offset = skip(fieldOffsets,i);
+                seek(dst,i) = field(f, name, i, skip(fieldOffsets,i));
+            }
+
+            return new CilTableSpec(name, buffer);
         }
 
         /// <summary>

@@ -52,7 +52,7 @@ namespace Z0
                 var module = src.First.Method.DeclaringType.Assembly.ManifestModule;
                 var count = src.Count;
                 var methods = src.Storage.Map(x => new LocatedMethod(x.OpUri.OpId, x.Method, x.Address));
-                var cilFx = @readonly(CilApi.functions(module, methods));
+                var cilFx = @readonly(Cil.functions(module, methods));
                 using var writer = dst.Writer();
                 for(var i=0u; i<count; i++)
                 {

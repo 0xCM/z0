@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct CilApi
+    partial struct Cil
     {
         [MethodImpl(Inline), Op]
         public static CilOpCodeRow pack(ILOpCode id, string name, CilOpCodeType type, CilOperandType optype, byte opcount, ushort code, CilStackBehaviour sb1, CilStackBehaviour sb2)

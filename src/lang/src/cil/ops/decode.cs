@@ -16,7 +16,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct CilApi
+    partial struct Cil
     {
         public static CilFunction[] functions(R.Module module, LocatedMethod[] src)
         {
@@ -24,7 +24,7 @@ namespace Z0
             var buffer = z.alloc<CilFunction>(count);
             var dst = span(buffer);
             var methods = @readonly(src);
-            var formatter = CilApi.formatter();
+            var formatter = Cil.formatter();
             var lookup = Dn.ModuleDefMD.Load(module).GetTypes().SelectMany(t => t.Methods).Select(m => ((uint)m.MDToken.Raw, m)).ToDictionary();
 
             for(var i=0u; i<count; i++)

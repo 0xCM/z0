@@ -12,7 +12,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct CilApi
+    partial struct Cil
     {
         [MethodImpl(Inline), Op]
         public static CilOpCodeSymbol symbol(ILOpCode id)

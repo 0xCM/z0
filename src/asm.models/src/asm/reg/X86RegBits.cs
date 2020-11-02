@@ -8,9 +8,6 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static RegisterBitFields;
-
-    using W = RegisterWidth;
 
     /// <summary>
     /// The register bitfield
@@ -33,7 +30,6 @@ namespace Z0.Asm
         /// </summary>
         public readonly RegisterWidth Width;
 
-
         [MethodImpl(Inline)]
         public X86RegBits(RegisterIndex c, RegisterClass k, RegisterWidth w)
         {
@@ -55,7 +51,6 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public static implicit operator X86RegBits(RegisterKind src)
             => new X86RegBits(src);
-
     }
 
     enum FI : byte

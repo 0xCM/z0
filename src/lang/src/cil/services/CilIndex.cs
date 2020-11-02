@@ -15,7 +15,7 @@ namespace Z0
     using static z;
 
     using Dn = dnlib.DotNet;
-    using api = CilApi;
+    using api = Cil;
 
     class CilIndex : ICilIndex
     {

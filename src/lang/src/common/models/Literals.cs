@@ -17,10 +17,6 @@ namespace Z0.Lang
         public Literals(Literal<C,T>[] src)
             => Data = src;
 
-        [MethodImpl(NotInline)]
-        public Literals(uint count)
-            => Data = sys.alloc<Literal<C,T>>(count);
-
         [MethodImpl(Inline)]
         public static implicit operator Literals<C,T>(Literal<C,T>[] src)
             => new Literals<C,T>(src);

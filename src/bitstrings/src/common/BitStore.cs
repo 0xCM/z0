@@ -9,8 +9,7 @@ namespace Z0
     using System.Runtime.InteropServices;
 
     using static Konst;
-    using static In;
-    using static Root;
+    using static z;
 
     public static class BitStore
     {
@@ -22,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ReadOnlySpan<byte> storeseq<T>(T src)
             where T : unmanaged
-                => BitStore.bitseq(src);
+                => bitseq(src);
 
         /// <summary>
         /// Constructs a bitsequence via the bitstore and populates a caller-supplied target with the result
@@ -32,16 +31,20 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static void storeseq<T>(T src, Span<byte> dst, int offset = 0)
             where T : unmanaged
-                => BitStore.bitseq(src, dst, offset);
+                => bitseq(src, dst, offset);
 
         /// <summary>
         /// Constructs a sequence of 8 characters {ci} := [c7,...c0] over the domain {'0','1'} according to whether the
-        /// bit in the i'th position of the source is respecively disabled/enabled
+        /// bit in the i'th position of the source is respectively disabled/enabled
         /// </summary>
         /// <param name="value">The source value</param>
         [MethodImpl(Inline)]
         public static unsafe ReadOnlySpan<char> bitchars(byte value)
             => MemoryMarshal.Cast<byte,char>(new ReadOnlySpan<byte>((byte*)bitcharP(value), 16));
+
+        [MethodImpl(Inline)]
+        static unsafe char* bitcharP(byte value)
+            => (char*)gptr(skip(first(BitChars), 16*value));
 
         /// <summary>
         /// Selects an identified bit sequence
@@ -120,14 +123,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static unsafe byte* bitseqP(byte value)
-            => AsDeprecated.gptr(in skip(in head(BitSeqData), 8*value));
-
-        [MethodImpl(Inline)]
-        static unsafe char* bitcharP(byte value)
-        {
-            ref readonly var start = ref skip(head(BitChars), 16*value);
-            return (char*)AsDeprecated.gptr(start);
-        }
+            => gptr(skip(first(BitSeqData), 8*value));
 
         [MethodImpl(Inline)]
         static unsafe void bitchars(byte src, Span<char> dst, int offset)
@@ -189,7 +185,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static unsafe void bitseq(ushort src, Span<byte> dst, int offset)
         {
-            ref var target = ref head(dst);
+            ref var target = ref first(dst);
             MemCopy.copy(bitseqP((byte)(src >> seglen*0)), dst, offset + seglen*0, seglen);
             MemCopy.copy(bitseqP((byte)(src >> seglen*1)), dst, offset + seglen*1, seglen);
         }
@@ -269,7 +265,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 bitseq(float64(src),dst,offset);
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
         [MethodImpl(Inline)]
@@ -309,50 +305,12 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 bitchars(float64(src),dst,offset);
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
-
-        static ReadOnlySpan<byte> PopCounts => new byte[]
-        {
-            0x00, 0x01, 0x01, 0x02, 0x01, 0x02, 0x02, 0x03,
-            0x01, 0x02, 0x02, 0x03, 0x02, 0x03, 0x03, 0x04,
-            0x01, 0x02, 0x02, 0x03, 0x02, 0x03, 0x03, 0x04,
-            0x02, 0x03, 0x03, 0x04, 0x03, 0x04, 0x04, 0x05,
-            0x01, 0x02, 0x02, 0x03, 0x02, 0x03, 0x03, 0x04,
-            0x02, 0x03, 0x03, 0x04, 0x03, 0x04, 0x04, 0x05,
-            0x02, 0x03, 0x03, 0x04, 0x03, 0x04, 0x04, 0x05,
-            0x03, 0x04, 0x04, 0x05, 0x04, 0x05, 0x05, 0x06,
-            0x01, 0x02, 0x02, 0x03, 0x02, 0x03, 0x03, 0x04,
-            0x02, 0x03, 0x03, 0x04, 0x03, 0x04, 0x04, 0x05,
-            0x02, 0x03, 0x03, 0x04, 0x03, 0x04, 0x04, 0x05,
-            0x03, 0x04, 0x04, 0x05, 0x04, 0x05, 0x05, 0x06,
-            0x02, 0x03, 0x03, 0x04, 0x03, 0x04, 0x04, 0x05,
-            0x03, 0x04, 0x04, 0x05, 0x04, 0x05, 0x05, 0x06,
-            0x03, 0x04, 0x04, 0x05, 0x04, 0x05, 0x05, 0x06,
-            0x04, 0x05, 0x05, 0x06, 0x05, 0x06, 0x06, 0x07,
-            0x01, 0x02, 0x02, 0x03, 0x02, 0x03, 0x03, 0x04,
-            0x02, 0x03, 0x03, 0x04, 0x03, 0x04, 0x04, 0x05,
-            0x02, 0x03, 0x03, 0x04, 0x03, 0x04, 0x04, 0x05,
-            0x03, 0x04, 0x04, 0x05, 0x04, 0x05, 0x05, 0x06,
-            0x02, 0x03, 0x03, 0x04, 0x03, 0x04, 0x04, 0x05,
-            0x03, 0x04, 0x04, 0x05, 0x04, 0x05, 0x05, 0x06,
-            0x03, 0x04, 0x04, 0x05, 0x04, 0x05, 0x05, 0x06,
-            0x04, 0x05, 0x05, 0x06, 0x05, 0x06, 0x06, 0x07,
-            0x02, 0x03, 0x03, 0x04, 0x03, 0x04, 0x04, 0x05,
-            0x03, 0x04, 0x04, 0x05, 0x04, 0x05, 0x05, 0x06,
-            0x03, 0x04, 0x04, 0x05, 0x04, 0x05, 0x05, 0x06,
-            0x04, 0x05, 0x05, 0x06, 0x05, 0x06, 0x06, 0x07,
-            0x03, 0x04, 0x04, 0x05, 0x04, 0x05, 0x05, 0x06,
-            0x04, 0x05, 0x05, 0x06, 0x05, 0x06, 0x06, 0x07,
-            0x04, 0x05, 0x05, 0x06, 0x05, 0x06, 0x06, 0x07,
-            0x05, 0x06, 0x06, 0x07, 0x06, 0x07, 0x07, 0x08,
-
-        };
 
         static ReadOnlySpan<byte> BitSeqData
             => new byte[]
             {
-
                 0,0,0,0,0,0,0,0,
                 1,0,0,0,0,0,0,0,
                 0,1,0,0,0,0,0,0,

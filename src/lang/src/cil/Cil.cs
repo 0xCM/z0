@@ -11,22 +11,22 @@ namespace Z0
     using static Konst;
     using static z;
 
-    [ApiHost(ApiNames.CilApi, true)]
-    public readonly partial struct CilApi
+    [ApiHost(ApiNames.Cil, true)]
+    public readonly partial struct Cil
     {
         readonly CilOpCodes Data;
 
         [Op]
-        public static CilApi init()
+        public static Cil init()
         {
             var buffer = sys.alloc<CilOpCodeRow>(300);
             ref var dst = ref first(span(buffer));
             load(ref dst);
-            return new CilApi(buffer);
+            return new Cil(buffer);
         }
 
         [MethodImpl(Inline)]
-        CilApi(CilOpCodeRow[] src)
+        Cil(CilOpCodeRow[] src)
         {
             Data = src;
         }

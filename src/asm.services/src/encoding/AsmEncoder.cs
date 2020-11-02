@@ -30,7 +30,6 @@ namespace Z0.Asm
             return dst;
         }
 
-
         /// <summary>
         /// Presents encoded content as a bytespan of variable length from 0 to 15 bytes
         /// </summary>
@@ -39,7 +38,6 @@ namespace Z0.Asm
         public static ReadOnlySpan<byte> bytes(in EncodedInstruction src)
             => Cells.view<byte>(Cells.from(src.Data)).Slice(size(src));
 
-
         /// <summary>
         /// Computes the length, in bytes, of the encoded content
         /// </summary>
@@ -47,7 +45,6 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public static byte size(in EncodedInstruction src)
             => vcell(src.Data, 15);
-
 
         [Op]
         public static string format(in EncodedInstruction src)

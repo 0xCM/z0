@@ -79,7 +79,7 @@ namespace Z0
                 summary.WriteLine(line);
             }
 
-            var decoded = CilApi.decode(mod,props.Select(x => x.GetGetMethod())).ToArray();
+            var decoded = Cil.decode(mod,props.Select(x => x.GetGetMethod())).ToArray();
             var path = FS.path(CasePath(FileExtensions.Il).Name);
             var cilWriter = new CilFunctionWriter(path);
             cilWriter.Write(decoded);

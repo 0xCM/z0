@@ -18,7 +18,10 @@ namespace Z0
 
         public const string CsPrototypes = lang + dot + cs + dot + "prototypes";
 
-        public const string CilApi = cil + dot + api;
+        public const string Cil = cil + dot + api;
 
+        public const string CilTableBuilder = cil + dot + tables + dot + builder;
+
+        public const string CilTables = cil + dot + tables;
     }
 }

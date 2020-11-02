@@ -30,7 +30,7 @@ namespace Z0.Asm
             ArchiveRoot = root;
             AsmFormatter = formatter;
             HostArchive = HostCaptureArchive.create(root, host);
-            CilFormatter =  CilApi.formatter();
+            CilFormatter =  Cil.formatter();
         }
 
         public Option<FilePath> SaveAsmImm(OpIdentity id, AsmRoutine[] src, bool append)

@@ -25,7 +25,6 @@ namespace Z0.Lang
             => new Identifier(src);
     }
 
-
     /// <summary>
     /// Represents a legal identifier
     /// </summary>

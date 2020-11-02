@@ -130,7 +130,7 @@ namespace Z0
 
         void SaveCilOpCodes()
         {
-            var cil = CilApi.init();
+            var cil = Cil.init();
         }
 
         static string format<T>(in T src)
