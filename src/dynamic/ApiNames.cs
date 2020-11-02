@@ -41,6 +41,8 @@ namespace Z0
 
         public const string DynamicOperators = dynamic + dot + operators;
 
+        public const string AlgorithmDynamic = dynamic + dot + algorithms;
+
         public const string CilTableBuilder = cil + dot + tables + dot + builder;
 
         public const string CilTables = cil + dot + tables;

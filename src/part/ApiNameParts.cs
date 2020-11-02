@@ -363,4 +363,10 @@ public readonly struct ApiNameParts
     public const string math = nameof(math);
 
     public const string checks = nameof(checks);
+
+    public const string structured = nameof(structured);
+
+    public const string algorithms = nameof(algorithms);
+
+    public const string factories = nameof(factories);
 }

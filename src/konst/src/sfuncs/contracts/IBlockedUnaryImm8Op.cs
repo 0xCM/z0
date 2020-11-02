@@ -7,6 +7,12 @@ namespace Z0
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
+    partial struct SFxShape
+    {
+
+
+    }
+
     [Free, SFx]
     public interface IBlockedUnaryImm8Op8<T> : IBlockedFunc<W8,T>
         where T : unmanaged

@@ -6,14 +6,15 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-        
+
     using static Konst;
+    using static SFx;
 
     partial class MSvcHosts
     {
         [Closures(Integers)]
         public readonly struct ModMul<T> : ITernaryOp<T>, ITernarySpanOp<T>
-            where T : unmanaged        
+            where T : unmanaged
         {
             [MethodImpl(Inline)]
             public readonly T Invoke(T a, T b, T m) => gmath.modmul(a,b,m);

@@ -8,13 +8,10 @@ namespace Z0
 
     partial struct SFx
     {
+        [Free, SFx]
+        public interface IBinaryImm8Op<A> : IFunc<A,A,byte,A>
+        {
 
-
-    }
-
-    [Free, SFx]
-    public interface IBinaryImm8Op<A> : IFunc<A,A,byte,A>
-    {
-
+        }
     }
 }

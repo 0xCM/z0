@@ -11,8 +11,8 @@ namespace Z0
 
     using D = Z0;
 
-    [ApiHost]
-    public static partial class SFXTend
+    [ApiHost(ApiNames.XSFx, true)]
+    public static partial class XSFx
     {
 
     }
@@ -20,7 +20,7 @@ namespace Z0
     /// <summary>
     /// Defines surrogate api - a facility for defining structural functions over delegates
     /// </summary>
-    [ApiHost]
+    [ApiHost(ApiNames.SFxSurrogates, true)]
     public partial class Surrogates
     {
         /// <summary>

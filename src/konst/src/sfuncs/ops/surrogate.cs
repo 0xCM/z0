@@ -8,10 +8,24 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+
     using S = Surrogates;
+    using R = System;
 
     partial struct SFx
     {
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static S.Action<A0> surrogate<A0>(string name, R.Action<A0> src)
+            => new S.Action<A0>(name, src);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static S.Action<A0,A1> surrogate<A0,A1>(string name, R.Action<A0,A1> src)
+            => new S.Action<A0,A1>(name, src);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static S.Action<A0,A1,A3> surrogate<A0,A1,A3>(string name, R.Action<A0,A1,A3> src)
+            => new S.Action<A0,A1,A3>(name, src);
+
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static S.Func<T,T,bool> surrogate<T>(S.BinaryPredicate8<T> src)
             => new S.Func<T,T,bool>(Delegates.func(src.Subject), src.Id);

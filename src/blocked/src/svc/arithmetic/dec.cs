@@ -7,11 +7,10 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
 
     using static Konst;
     using static z;
-    using static SBlock;
+    using static SFx;
 
     partial class BSvcHosts
     {

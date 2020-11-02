@@ -10,6 +10,7 @@ namespace Z0
 
     using static Konst;
     using static z;
+    using static SFxShape;
 
     partial class VServices
     {

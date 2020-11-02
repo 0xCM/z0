@@ -219,12 +219,6 @@ readonly struct ApiNames
     public const string TextResources = resources + dot + text;
 
 
-    // ~~ SFunc
-    // ~~ -----------------------------------------------------------------------------------------
-
-    public const string SFxSurrogates = sfunc + dot + surrogates;
-
-    public const string SFxProjectors = sfunc + dot + projectors;
 
     // ~~ Symbolic
     // ~~ -----------------------------------------------------------------------------------------
@@ -337,4 +331,17 @@ readonly struct ApiNames
     public const string GridMetrics = grid + dot + metrics;
 
     public const string XKinds = kinds + dot + extensions;
+
+    // ~~ SFunc
+    // ~~ -----------------------------------------------------------------------------------------
+
+    public const string SFx = sfunc + dot + core;
+
+    public const string XSFx = sfunc + dot + core + extensions;
+
+    public const string SFxSurrogates = sfunc + dot + surrogates;
+
+    public const string SFxProjectors = sfunc + dot + projectors;
+
+    public const string SFxFactories = sfunc + dot + functions + dot + factories;
 }

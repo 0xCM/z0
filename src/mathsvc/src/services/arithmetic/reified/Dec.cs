@@ -6,14 +6,15 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-        
+
     using static Konst;
+    using static SFx;
 
     partial class MSvcHosts
     {
         [Closures(AllNumeric), Dec]
         public readonly struct Dec<T> : IUnaryOp<T>, IUnarySpanOp<T>
-            where T : unmanaged        
+            where T : unmanaged
         {
             [MethodImpl(Inline)]
             public readonly T Invoke(T a) => gmath.dec(a);

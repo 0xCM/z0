@@ -46,10 +46,9 @@ public enum PartId : ulong
 
     Polyrand = 36,
 
-    EvaluateShell = 40,
+    DynoShell = 40,
 
     Tools = 41,
-
 
     // ~ 50
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

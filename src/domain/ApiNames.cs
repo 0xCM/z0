@@ -18,15 +18,17 @@ namespace Z0
 
         public const string CmdRunners = cmd + dot + "runners";
 
+        public const string sequences = nameof(sequences);
+
         public const string FilePathParser = parsers + dot + files + dot + paths;
 
         public const string EnumCatalogs = enums + dot + catalogs;
 
         public const string SyntaxModels = syntax + dot + models;
 
-        public const string UnmanagedParsers = parsers + dot + unmanaged;
+        public const string SyntaxParsers = syntax + dot + parsers;
 
-        public const string UnmanagedParserCases = parsers + dot + unmanaged + dot + cases;
+        public const string SyntaxParserCases = syntax + dot + parsers + dot + cases;
 
         public const string BufferSegments = buffers + dot + segments;
 

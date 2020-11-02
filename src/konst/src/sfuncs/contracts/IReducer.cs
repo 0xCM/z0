@@ -8,20 +8,18 @@ namespace Z0
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    partial struct SFx
+    partial struct SFxShape
     {
+        /// <summary>
+        /// Characterizes a function that produces a 128-bit vector from a 256-bit vector
+        /// </summary>
+        /// <typeparam name="T">The vector component type</typeparam>
+        [Free, SFx]
+        public interface IReducer256<T> : IFunc<Vector256<T>,Vector128<T>>
+            where T : unmanaged
+        {
 
-
+        }
     }
 
-    /// <summary>
-    /// Characterizes a function that produces a 128-bit vector from a 256-bit vector
-    /// </summary>
-    /// <typeparam name="T">The vector component type</typeparam>
-    [Free, SFx]
-    public interface IReducer256<T> : IFunc<Vector256<T>,Vector128<T>>
-        where T : unmanaged
-    {
-
-    }
 }

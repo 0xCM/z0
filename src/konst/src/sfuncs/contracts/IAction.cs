@@ -4,22 +4,26 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    partial struct SFx
+    partial struct SFxShape
     {
+        [Free, SFx]
+        public interface IAction<A> : IOperation
+        {
+            void Invoke(A a);
+        }
 
+        [Free, SFx]
+        public interface IAction<A0,A1> : IOperation
+        {
+            void Invoke(A0 a0, A1 a1);
+        }
 
-    }
-
-    [Free, SFx]
-    public interface IAction<A> : IFunc
-    {
-        void Invoke(A a);
-
-        Action<A> Operation
-            => Invoke;
+        [Free, SFx]
+        public interface IAction<A0,A1,A2> : IOperation
+        {
+            void Invoke(A0 a0, A1 a1, A2 a2);
+        }
     }
 }

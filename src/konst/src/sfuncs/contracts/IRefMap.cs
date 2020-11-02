@@ -8,20 +8,17 @@ namespace Z0
 
     partial struct SFx
     {
+        [Free, SFx]
+        public interface IRefMap<S,T>
+        {
+            void Map(in S src, ref T dst);
+        }
 
+        [Free, SFx]
+        public interface IRefMap<H,S,T> : IRefMap<S,T>
+            where H : struct, IRefMap<H,S,T>
+        {
 
-    }
-
-    [Free, SFx]
-    public interface IRefMap<S,T>
-    {
-        void Map(in S src, ref T dst);
-    }
-
-    [Free, SFx]
-    public interface IRefMap<H,S,T> : IRefMap<S,T>
-        where H : struct, IRefMap<H,S,T>
-    {
-
+        }
     }
 }

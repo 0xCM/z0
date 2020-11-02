@@ -6,21 +6,26 @@ namespace Z0
 {
     using System;
 
+    using static SFxShape;
+
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    partial struct SFx
+    partial struct SFxShape
     {
-
-
+        [Free]
+        public interface IOperation
+        {
+            string Name => GetType().Name;
+        }
     }
 
     /// <summary>
     /// Characterizes a function reified as a (structural) type, referred to as a structural function
     /// </summary>
     [Free, SFx]
-    public interface IFunc
+    public interface IFunc : IOperation
     {
-        string Name
+        string IOperation.Name
             => GetType().Tag<OpKindAttribute>().MapValueOrDefault(a => GetType().Name, GetType().Name);
 
         /// <summary>

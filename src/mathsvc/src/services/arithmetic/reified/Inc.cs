@@ -6,15 +6,16 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-        
+
     using static Konst;
+    using static SFx;
 
     partial class MSvcHosts
     {
         [Closures(AllNumeric), Inc]
         public readonly struct Inc<T> : IUnaryOp<T>, IUnarySpanOp<T>
-            where T : unmanaged        
-        {        
+            where T : unmanaged
+        {
             [MethodImpl(Inline)]
             public readonly T Invoke(T a) => gmath.inc(a);
 

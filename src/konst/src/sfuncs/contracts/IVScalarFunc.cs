@@ -14,6 +14,8 @@ namespace Z0
 
     }
 
+
+
     /// <summary>
     /// Defines trait for a vectorized unary scalar function that supports componentwise decomposition/evaluation
     /// </summary>

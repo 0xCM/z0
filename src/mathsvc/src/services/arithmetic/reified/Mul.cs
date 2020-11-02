@@ -6,17 +6,16 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-        
-    using static Konst;
 
-    using K = Kinds;
+    using static Konst;
+    using static SFx;
 
     partial class MSvcHosts
     {
         [Closures(AllNumeric), Mul]
         public readonly struct Mul<T> : IBinaryOp<T>, IBinarySpanOp<T>
-            where T : unmanaged        
-        {    
+            where T : unmanaged
+        {
             [MethodImpl(Inline)]
             public readonly T Invoke(T a, T b) => gmath.mul(a, b);
 
