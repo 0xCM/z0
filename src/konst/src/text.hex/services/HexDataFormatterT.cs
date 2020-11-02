@@ -27,18 +27,6 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public void Symbols(in T src, Span<HexSymLo> dst)
-        {
-            ref readonly var b = ref @as<T,byte>(src);
-            for(var i=0u; i<CellSize; i++)
-            {
-                var symbols = SymbolStore.hex(skip(b,i), LowerCase);
-                for(var j=0u; j<CellSize; j++)
-                    seek(dst,j) = skip(symbols, j);
-            }
-        }
-
-        [MethodImpl(Inline)]
         public void Format(ReadOnlySpan<T> src, StringBuilder dst)
             => api.hex(src,Config,dst);
 

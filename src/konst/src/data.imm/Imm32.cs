@@ -14,7 +14,7 @@ namespace Z0
     /// <summary>
     /// Defines a refined 32-bit immediate value
     /// </summary>
-    public readonly struct Imm32<E> : ISized<Imm32<E>,W32>
+    public readonly struct Imm32<E> //: ISized<Imm32<E>,W32>
         where E : unmanaged
     {
         public readonly E Data;

@@ -8,7 +8,6 @@
     <ProjectReference Include="$(Konst)" />
     <ProjectReference Include="$(Polyrand)" />
     <ProjectReference Include="$(BitCore)" />
-    <ProjectReference Include="$(Symbolic)" />
   </ItemGroup>
 
 </Project>

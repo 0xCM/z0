@@ -14,7 +14,7 @@ namespace Z0
     /// <summary>
     /// Defines a refined 64-bit immediate value
     /// </summary>
-    public readonly struct Imm64<E> : ISized<Imm64<E>,W64>
+    public readonly struct Imm64<E> //: ISized<Imm64<E>,W64>
         where E : unmanaged
     {
         public readonly E Data;

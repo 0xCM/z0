@@ -13,7 +13,11 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static ReadOnlySpan<T> slice<T>(ReadOnlySpan<T> src, uint offset)
-            => memory.slice(src,offset);
+            => memory.slice(src, offset);
+
+        [MethodImpl(Inline)]
+        public static ReadOnlySpan<T> slice<T>(ReadOnlySpan<T> src, ulong offset)
+            => memory.slice(src, offset);
 
         [MethodImpl(Inline)]
         public static ReadOnlySpan<T> slice<T>(ReadOnlySpan<T> src, int offset)

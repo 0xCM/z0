@@ -7,44 +7,43 @@ namespace Z0
     using System;
 
     using static Perm16L;
-    using static BitSeq4;
 
     /// <summary>
     /// Defines canonical literals for representing terms of permutations on 16 symbols
     /// </summary>
     public enum Perm16L : ulong
     {
-        X0 = b0000,
-        
-        X1 = b0001,
-        
-        X2 = b0010,
+        X0 = 0b0001,
 
-        X3 = b0011,
+        X1 = 0b0001,
 
-        X4 = b0100,
+        X2 = 0b0010,
 
-        X5 = b0101,
+        X3 = 0b0011,
 
-        X6 = b0110,
+        X4 = 0b0100,
 
-        X7 = b0111,
+        X5 = 0b0101,
 
-        X8 = b1000,
+        X6 = 0b0110,
 
-        X9 = b1001,
+        X7 = 0b0111,
 
-        XA = b1010,
+        X8 = 0b1000,
 
-        XB = b1011,
+        X9 = 0b1001,
 
-        XC = b1100,
+        XA = 0b1010,
 
-        XD = b1101,
+        XB = 0b1011,
 
-        XE = b1110,
+        XC = 0b1100,
 
-        XF = b1111,
+        XD = 0b1101,
+
+        XE = 0b1110,
+
+        XF = 0b1111,
     }
 
 

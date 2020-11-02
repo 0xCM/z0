@@ -14,8 +14,6 @@ namespace Z0
 
         public const string Cmd = cmd + dot + core;
 
-        public const string CmdParse = cmd + dot + parse;
-
         public const string CmdPatterns = cmd + dot + patterns;
 
         public const string CmdRunners = cmd + dot + "runners";

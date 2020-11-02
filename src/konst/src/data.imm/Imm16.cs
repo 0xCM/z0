@@ -14,7 +14,7 @@ namespace Z0
     /// <summary>
     /// Defines a refined 16-bit immediate value
     /// </summary>
-    public readonly struct Imm16<E> : ISized<Imm16<E>,W16>
+    public readonly struct Imm16<E> //: ISized<Imm16<E>,W16>
         where E : unmanaged
     {
         public readonly E Data;

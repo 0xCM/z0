@@ -23,7 +23,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static uint1 eq<T>(T x, T y)
+        public static bit eq<T>(T x, T y)
             where T : unmanaged
                 => PrimalKinds.eq(x,y);
 

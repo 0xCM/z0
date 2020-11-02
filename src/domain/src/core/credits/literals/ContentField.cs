@@ -3,11 +3,11 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
-    using static BitSeq4;        
+{
+    using static UInt4;
 
     using L = CreditTypes.ContentLevel;
-    
+
     partial class CreditTypes
     {
         /// <summary>
@@ -15,7 +15,7 @@ namespace Z0
         /// </summary>
         [BitField(0,15)]
         public enum ContentField : ushort
-        {                
+        {
             /// <summary>
             /// Defines the (uniform) bitfield segment width
             /// </summary>

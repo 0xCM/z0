@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    public struct Imm<W,T> : ISized<Imm<W,T>,W>
+    public struct Imm<W,T> //: ISized<Imm<W,T>,W>
         where W : unmanaged, INumericWidth
         where T : unmanaged
     {

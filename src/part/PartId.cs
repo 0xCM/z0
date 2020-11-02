@@ -165,7 +165,7 @@ public enum PartId : ulong
 
     Circuits = 154,
 
-    Symbolic = 157,
+    Unsigned = 157,
 
     Identify = 158,
 
@@ -283,10 +283,9 @@ public enum PartId : ulong
 
     AsmDTest = AsmModels | Test,
 
-    SymbolicTest = Symbolic | Test,
+    UnsignedTest = Unsigned | Test,
 
     GVecTest = GVec | Test,
-
 
     // ~ Classifiers
     // ~ -------------------------------------------------------------------------------

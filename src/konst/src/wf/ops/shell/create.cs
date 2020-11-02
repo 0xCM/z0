@@ -56,10 +56,6 @@ namespace Z0
         public static IWfPaths paths()
             => new WfPaths(logs(controller().Id(), LogRoot(), DbRoot()));
 
-        [Op]
-        public static IWfContext context()
-            => new WfContext();
-
         public static WfLogConfig logs(PartId part, FS.FolderPath logRoot, FS.FolderPath dbRoot)
             => new WfLogConfig(part, logRoot, dbRoot);
 
@@ -71,23 +67,17 @@ namespace Z0
             => Environment.GetCommandLineArgs();
 
         [MethodImpl(Inline), Op]
-        public static PartId[] parse(string[] args, PartId[] fallback)
-            => ApiPartIdParser.parse(args,fallback);
-
-        [MethodImpl(Inline), Op]
         public static Assembly controller()
             => Assembly.GetEntryAssembly();
-
-        public static IWfShell create()
-            => create(args());
 
         [Op]
         public static IWfShell create(string[] args)
         {
             var control = controller();
             var controlId = control.Id();
-            var logRoot = EnvVars.Common.LogRoot;
             var configured = list<string>();
+
+            var logRoot = EnvVars.Common.DbRoot + FS.folder("logs") + FS.folder("apps");
 
             configured.Add(string.Format("{0}:{1}", "control", controlId));
             configured.Add(string.Format("{0}:{1}", "args", delimit(args)));

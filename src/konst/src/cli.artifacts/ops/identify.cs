@@ -15,8 +15,8 @@ namespace Z0
 
     partial struct ClrArtifacts
     {
-        [MethodImpl(Inline), Op]
-        public static ArtifactIdentity<ClrArtifactKind,ClrArtifactKey> identify(FieldInfo src)
-            => (ClrArtifactKind.Field, src.MetadataToken);
+        // [MethodImpl(Inline), Op]
+        // public static ArtifactIdentity<ClrArtifactKind,ClrArtifactKey> identify(FieldInfo src)
+        //     => (ClrArtifactKind.Field, src.MetadataToken);
     }
 }

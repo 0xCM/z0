@@ -14,10 +14,6 @@ namespace Z0
         readonly StringRef PatternRef;
 
         [MethodImpl(Inline)]
-        public static implicit operator RenderPattern(string src)
-            => new RenderPattern(src);
-
-        [MethodImpl(Inline)]
         public RenderPattern(string src)
             => PatternRef = src;
 
@@ -29,5 +25,12 @@ namespace Z0
 
         public string Format()
             => PatternText;
+
+        public override string ToString()
+            => Format();
+
+        [MethodImpl(Inline)]
+        public static implicit operator RenderPattern(string src)
+            => new RenderPattern(src);
     }
 }

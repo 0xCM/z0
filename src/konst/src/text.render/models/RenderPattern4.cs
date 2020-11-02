@@ -13,13 +13,6 @@ namespace Z0
     {
         readonly RenderPattern Pattern;
 
-        [MethodImpl(Inline)]
-        public static implicit operator RenderPattern<A0,A1,A2,A3>(string src)
-            => new RenderPattern<A0,A1,A2,A3>(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator RenderPattern<A0,A1,A2,A3>(RenderPattern src)
-            => new RenderPattern<A0,A1,A2,A3>(src);
 
         [MethodImpl(Inline)]
         public RenderPattern(string src)
@@ -38,5 +31,14 @@ namespace Z0
         [MethodImpl(Inline)]
         public string Apply(in A0 a0, in A1 a1, in A2 a2, in A3 a3)
             => text.format(PatternText, a0, a1, a2, a3);
+
+        [MethodImpl(Inline)]
+        public static implicit operator RenderPattern<A0,A1,A2,A3>(string src)
+            => new RenderPattern<A0,A1,A2,A3>(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator RenderPattern<A0,A1,A2,A3>(RenderPattern src)
+            => new RenderPattern<A0,A1,A2,A3>(src);
+
     }
 }

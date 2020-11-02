@@ -10,7 +10,6 @@ namespace Z0
     using static Konst;
 
     using analog = uint8_t;
-    using BK = BitSeq8;
 
     public struct uint8_t : IEquatable<analog>
     {
@@ -20,21 +19,14 @@ namespace Z0
 
         public static analog one => 1;
 
-        [MethodImpl(Inline)]
-        public static implicit operator analog(BK src)
-            => new analog(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator BK(analog src)
-            => (BK)src.data;
+        public static implicit operator byte(analog src)
+            => src.data;
 
         [MethodImpl(Inline)]
         public uint8_t(byte x)
             => data =x;
-
-        [MethodImpl(Inline)]
-        public uint8_t(BK x)
-            => data =(byte)x;
 
         [MethodImpl(Inline)]
         public static analog @bool(bool x)
@@ -51,10 +43,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator analog(byte src)
             => new analog(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator byte(analog src)
-            => src.data;
 
         [MethodImpl(Inline)]
         public static explicit operator sbyte(analog src)

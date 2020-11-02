@@ -52,7 +52,7 @@
     <Text>$(Src)text/z0.text.csproj</Text>
     <Memories>$(Src)memories/z0.memories.csproj</Memories>
     <Seed>$(Src)seed/z0.seed.csproj</Seed>
-    <Symbolic>$(Src)symbolic/z0.symbolic.csproj</Symbolic>
+    <Unsigned>$(Src)unsigned/z0.unsigned.csproj</Unsigned>
     <Artifacts>$(Src)artifacts/z0.artifacts.csproj</Artifacts>
     <Stores>$(Src)stores/z0.stores.csproj</Stores>
     <Kinds>$(Src)kinds/z0.kinds.csproj</Kinds>

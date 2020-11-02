@@ -8,25 +8,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Linq;
 
-    using CL = System.CommandLine;
-    using CLP = System.CommandLine.Parsing;
-
     using static Konst;
     using static z;
 
     partial struct Cmd
     {
-        [Op]
-        public static CmdSpec parse2(string src)
-        {
-            var args = CommandLines.split(src);
-            var parser = new CL.Parsing.Parser();
-            var result = parser.Parse(args.ToArray());
-            var options = result.Directives.Map(x => arg(x.Key, x.Value.ToArray()));
-            var command = result.CommandResult;
-            return new CmdSpec(id(""), options);
-        }
-
         [Op]
         public static ParseResult<CmdSpec> parse(string src)
         {

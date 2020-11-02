@@ -10,28 +10,26 @@ namespace Z0.Asm
     using static Konst;
     using static z;
 
-    using Types;
-
     partial struct AsmSemantic
     {
         [MethodImpl(Inline), Op]
-        public MOVZX<R8,R16> movzx(R8 src, R16 dst)
-            => MOVZX.create(src,dst);
+        public Movzx<R8,R16> movzx(R8 src, R16 dst)
+            => Movzx.create(src,dst);
 
         [MethodImpl(Inline), Op]
-        public MOVZX<R8,R32> movzx(R8 src, R32 dst)
-            => MOVZX.create(src,dst);
+        public Movzx<R8,R32> movzx(R8 src, R32 dst)
+            => Movzx.create(src,dst);
 
         [MethodImpl(Inline), Op]
-        public MOVZX<R8,R64> movzx(R8 src, R64 dst)
-            => MOVZX.create(src,dst);
+        public Movzx<R8,R64> movzx(R8 src, R64 dst)
+            => Movzx.create(src,dst);
 
         [MethodImpl(Inline), Op]
-        public MOVZX<R16,R32> movzx(R16 src, R32 dst)
-            => MOVZX.create(src,dst);
+        public Movzx<R16,R32> movzx(R16 src, R32 dst)
+            => Movzx.create(src,dst);
 
         [MethodImpl(Inline), Op]
-        public MOVZX<R16,R64> movzx(R16 src, R64 dst)
-            => MOVZX.create(src,dst);
+        public Movzx<R16,R64> movzx(R16 src, R64 dst)
+            => Movzx.create(src,dst);
     }
 }

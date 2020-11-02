@@ -7,7 +7,6 @@
   <ItemGroup>
     <ProjectReference Include="$(Imagine)" />
     <ProjectReference Include="$(Numeric)" />
-    <ProjectReference Include="$(Symbolic)" />
     <ProjectReference Include="$(MathSvc)" />
     <ProjectReference Include="$(Polyrand)" />
     <ProjectReference Include="$(Matrix)" />

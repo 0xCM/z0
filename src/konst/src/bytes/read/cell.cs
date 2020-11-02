@@ -35,9 +35,6 @@ namespace Z0
         public static ulong cell(ReadOnlySpan<byte> src, N2 n)
             => first(recover<byte,ushort>(slice(src,2)));
 
-        [MethodImpl(Inline), Op]
-        public static ulong cell(ReadOnlySpan<byte> src, N3 n)
-            => first(recover<byte,uint24>(slice(src,3)));
 
         [MethodImpl(Inline), Op]
         public static ulong cell(ReadOnlySpan<byte> src, N4 n)
@@ -61,14 +58,18 @@ namespace Z0
             return dst;
         }
 
-        [MethodImpl(Inline), Op]
-        public static ulong cell(ReadOnlySpan<byte> src, N7 n)
-        {
-            var dst = 0ul;
-            seek32(dst, 0) = (uint)cell(src, n4);
-            seek32(dst, 1) = (uint)cell(src, n3);
-            return dst;
-        }
+        // [MethodImpl(Inline), Op]
+        // public static ulong cell(ReadOnlySpan<byte> src, N3 n)
+        //     => first(recover<byte,uint24>(slice(src,3)));
+
+        // [MethodImpl(Inline), Op]
+        // public static ulong cell(ReadOnlySpan<byte> src, N7 n)
+        // {
+        //     var dst = 0ul;
+        //     seek32(dst, 0) = (uint)cell(src, n4);
+        //     seek32(dst, 1) = (uint)cell(src, n3);
+        //     return dst;
+        // }
 
         [MethodImpl(Inline), Op]
         public static ulong cell(ReadOnlySpan<byte> src, N8 n)

@@ -62,12 +62,12 @@ namespace Z0
         /// <param name="b">The second operand</param>
         /// <typeparam name="T">The numeric type</typeparam>
         [MethodImpl(Inline), Eq, Closures(AllNumeric)]
-        public static uint1 eq<T>(T a, T b)
+        public static bit eq<T>(T a, T b)
             where T : unmanaged
                 => eq_1(a,b);
 
         [MethodImpl(Inline)]
-        static uint1 eq_1<T>(T a, T b)
+        static bit eq_1<T>(T a, T b)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -83,7 +83,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static uint1 eq_2<T>(T a, T b)
+        static bit eq_2<T>(T a, T b)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -99,7 +99,7 @@ namespace Z0
        }
 
         [MethodImpl(Inline)]
-        static uint1 eq_3<T>(T a, T b)
+        static bit eq_3<T>(T a, T b)
             where T : unmanaged
         {
             if(typeof(T) == typeof(bool))

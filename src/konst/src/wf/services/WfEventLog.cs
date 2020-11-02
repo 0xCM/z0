@@ -17,13 +17,10 @@ namespace Z0
 
         readonly FS.FilePath Error;
 
-        readonly FS.FolderPath Target;
-
         readonly FileStream Status;
 
         public WfEventLog(WfLogConfig config)
         {
-            Target = config.DbRoot;
             config.StatusLog.Delete();
             config.ErrorLog.Delete();
             StatusPath = FS.path(config.StatusLog.Name);
@@ -35,7 +32,6 @@ namespace Z0
         {
             Status?.Flush();
             Status?.Dispose();
-            StatusPath.CopyTo(Target);
         }
 
         [MethodImpl(Inline)]

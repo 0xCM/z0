@@ -26,11 +26,6 @@ namespace Z0
 
         const NumericKind Closure = UnsignedInts;
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static CmdJob<T> job<T>(string name, T spec)
-            where T : struct, ITextual
-                => new CmdJob<T>(name, spec);
-
         [Op]
         public static CmdScript<CmdScriptPattern> init(IFileDb db, string root, string name, string arg, string delimiter = null, string type = null)
         {

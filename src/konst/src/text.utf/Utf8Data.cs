@@ -41,10 +41,6 @@ namespace Z0
             => new utf8x1<W16,ushort>(src);
 
         [MethodImpl(Inline), Op]
-        public static utf8x1<W24,uint24> define(W24 w, N1 n, uint24 a)
-            => new utf8x1<W24,uint24>(a);
-
-        [MethodImpl(Inline), Op]
         public static utf8x1<W32,uint> define(W8 w, N1 n, uint a)
             => new utf8x1<W32,uint>(a);
 

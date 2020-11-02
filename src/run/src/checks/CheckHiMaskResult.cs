@@ -14,13 +14,13 @@ namespace Z0
 
         public T Mask;
 
-        public uint1 Check1;
+        public bit Check1;
 
-        public uint1 Check2;
+        public bit Check2;
 
         public T Lowered;
 
-        public uint1 Check3;
+        public bit Check3;
 
         public byte EffectiveWidth;
     }

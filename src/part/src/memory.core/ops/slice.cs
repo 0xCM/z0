@@ -29,6 +29,16 @@ namespace Z0
         /// <param name="offset">The T-measured offset count</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ReadOnlySpan<T> slice<T>(ReadOnlySpan<T> src, ulong offset)
+            => cover(skip(src,offset), (ulong)((ulong)src.Length - offset));
+
+        /// <summary>
+        /// Selects a segment [offset, length(src) - 1] from a source span src:ReadOnlySpan[T]
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <param name="offset">The T-measured offset count</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ReadOnlySpan<T> slice<T>(ReadOnlySpan<T> src, int offset)
             => cover(skip(src,(uint)offset), src.Length - offset);
 

@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Konst;
     using static z;
-    using static BitSeq4;
+    using static UInt4;
 
     [ApiHost]
     public readonly struct AsmDecoder

@@ -13,12 +13,6 @@ namespace Z0
     [ApiHost(ApiNames.Relations, true)]
     public readonly struct Relations
     {
-        [MethodImpl(Inline)]
-        public static ArtifactIdentity<K,A> identify<K,A>(K kind, A id)
-            where K : unmanaged
-            where A : unmanaged
-                => (kind, id);
-
         [MethodImpl(Inline), Op]
         public static ObjectName name(string src)
             => new ObjectName(src);

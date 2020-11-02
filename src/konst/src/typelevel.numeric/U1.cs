@@ -9,8 +9,6 @@ namespace Z0
 
     using static Konst;
 
-    using T = uint1;
-
     public readonly struct U1
     {
 

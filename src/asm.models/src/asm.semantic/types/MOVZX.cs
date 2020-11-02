@@ -2,33 +2,35 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm.Types
+namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
 
     using static Konst;
 
-    public readonly struct MOVZX
+    partial struct AsmSemantic
     {
-
-
-        [MethodImpl(Inline)]
-        public static MOVZX<S,T> create<S,T>(S src, T dst)
-            => new MOVZX<S,T>(src,dst);
-    }
-
-    public readonly struct MOVZX<S,T>
-    {
-        public readonly S Source;
-
-        public readonly T Target;
-
-        [MethodImpl(Inline)]
-        public MOVZX(S src, T dst)
+        public readonly struct Movzx
         {
-            Source = src;
-            Target = dst;
+
+            [MethodImpl(Inline)]
+            public static Movzx<S,T> create<S,T>(S src, T dst)
+                => new Movzx<S,T>(src,dst);
+        }
+
+        public readonly struct Movzx<S,T>
+        {
+            public readonly S Source;
+
+            public readonly T Target;
+
+            [MethodImpl(Inline)]
+            public Movzx(S src, T dst)
+            {
+                Source = src;
+                Target = dst;
+            }
         }
     }
 }

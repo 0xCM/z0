@@ -3,11 +3,11 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{         
+{
     using P = CreditTypes.DocFieldDelimiter;
 
-    using static BitSeq8;
- 
+    using static Octet;
+
     partial class CreditTypes
     {
         /// <summary>
@@ -15,7 +15,7 @@ namespace Z0
         /// </summary>
         [BitField(0,47)]
         public enum DocField : ulong
-        {                
+        {
             /// <summary>
             /// Defines the (uniform) bitfield segment width
             /// </summary>
