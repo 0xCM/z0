@@ -39,6 +39,7 @@ namespace Z0
 
         IWfShell WithVerbosity(LogLevel level);
 
+
         IPolySource PolySource
             => Random;
 
@@ -230,14 +231,14 @@ namespace Z0
 
         void Ran();
 
+        void Succeeded<T>(CmdSpec cmd, T payload)
+            => Raise(succeeded(cmd, payload, Ct));
+
+        void Succeeded<T>(CmdSpec cmd)
+            => Raise(succeeded(cmd, Ct));
+
         void Ran(CmdResult cmd)
             => Raise(new RanCmdEvent(cmd, Ct));
-
-        void Ran(ToolId tool)
-            => Raise(ran(tool, Ct));
-
-        void Ran<T>(WfStepId step, T content)
-            => Raise(ran<T>(step, content, Ct));
 
         void Ran(WfStepId step)
             => Raise(ran(step, Ct));
@@ -271,9 +272,6 @@ namespace Z0
         void EmittedTable<T>(Count count, FS.FilePath dst, T t = default)
             where T : struct
                 => Raise(tableOut<T>(Host, count, dst, Ct));
-
-        void EmittedTable(WfStepId step, Type type, Count count, FS.FilePath dst)
-            => Raise(tableOut(step, type, count, dst, Ct));
 
         void EmittedTable(Type type, Count count, FS.FilePath dst)
             => Raise(tableOut(Host, type, count, dst, Ct));

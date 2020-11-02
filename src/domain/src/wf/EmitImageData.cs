@@ -11,18 +11,6 @@ namespace Z0
     using static Konst;
     using static z;
 
-    // [WfHost]
-    // public sealed class EmitImageData : WfHost<EmitImageData,IPart,MemoryAddress>
-    // {
-    //     protected override ref MemoryAddress Execute(IWfShell wf, in IPart src, out MemoryAddress dst)
-    //     {
-    //         using var step = new EmitImageDataStep(wf, this, src);
-    //         step.Run();
-    //         dst = step.OffsetAddress;
-    //         return ref dst;
-    //     }
-    // }
-
     public ref struct EmitImageData
     {
         readonly IWfShell Wf;

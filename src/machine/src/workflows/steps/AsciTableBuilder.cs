@@ -6,23 +6,28 @@ namespace Z0
 {
     using System;
 
-    public readonly struct EmitAsciTables
+    using C = Chars;
+
+    public readonly struct AsciTableBuilder
     {
-        public static void Emit(FolderPath root)
+        public static void Emit(FS.FolderPath root)
         {
-            var dst = root + FileName.define("asci", FileExtensions.Txt);
+            var dst = root + FS.file("asci", FileExtensions.Txt);
             using var writer = dst.Writer();
             writer.Write(BuildAsciData(false));
             writer.Write(BuildAsciData(true));
-            writer.Write(BuildAsciByteSpan());
+            writer.Write(BuildAsciByteSpan(256));
         }
+
+        const char BS = '\\';
+
+        const char SQ = '\'';
+
+        const char QU = '\"';
 
         static string BuildAsciData(bool span)
         {
             var sb = text.build();
-            const char BS = '\\';
-            const char SQ = '\'';
-            const char QU = '\"';
 
             var count = 128;
             var name = span ? "AsciData" : "AsciDataString";
@@ -32,8 +37,8 @@ namespace Z0
             var propDecl = span ? spanPropDecl : constPropDecl;
             var charFence = span ? "'" : "";
             var spanPropClose = "};";
-            var constPropCose = "\";";
-            var propClose = span ? spanPropClose : constPropCose;
+            var constPropClose = "\";";
+            var propClose = span ? spanPropClose : constPropClose;
 
             sb.Append(propDecl);
             if(span)
@@ -45,9 +50,9 @@ namespace Z0
                 sb.Append(charFence);
 
                 if(c == 0)
-                    sb.Append('0');
+                    sb.Append(C.D0);
                 else if(c == 10 || c == 13)
-                    sb.Append('0');
+                    sb.Append(C.D0);
                 else if(c == QU)
                     sb.Append($"\\{c}");
                 else if(Char.IsControl(c) || c == BS || c == SQ)
@@ -69,26 +74,18 @@ namespace Z0
             return sb.ToString();
         }
 
-        static string BuildAsciByteSpan()
+        static string BuildAsciByteSpan(uint size, string name = "AsciBytes")
         {
             var sb = text.build();
-            const char BS = '\\';
-            const char SQ = '\'';
-            const char QU = '\"';
 
-            var count = 256;
-            var span = true;
-            var name = "AsciBytes";
-            var access = "public";
-            var propDecl = $"{access} static ReadOnlySpan<byte> {name} => new " + $"byte[{count}]" +"{";
+            var propDecl = $"publid static ReadOnlySpan<byte> {name} => new " + $"byte[{size}]" +"{";
             var propClose = "};";
 
             sb.Append(propDecl);
-            if(span)
-                sb.AppendLine();
+            sb.AppendLine();
 
             var j =0;
-            for(int i=0; i<count; i++)
+            for(int i=0; i<size; i++)
             {
                 if(i % 2 == 0)
                     sb.Append($"{j++},");
@@ -97,7 +94,6 @@ namespace Z0
 
                 if((i + 1) % 16 == 0 && i != 0)
                     sb.AppendLine();
-
             }
 
             sb.AppendLine(propClose);

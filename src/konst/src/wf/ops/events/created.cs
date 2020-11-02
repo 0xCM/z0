@@ -24,14 +24,14 @@ namespace Z0
             => new CreatedEvent(id, ct, flair);
 
         /// <summary>
-        /// Defines a <see cref='CreatedToolCmd'/> event
+        /// Defines a <see cref='CmdCreated'/> event
         /// </summary>
         /// <param name="id">The step identifier</param>
         /// <param name="ct">The correlation token</param>
         /// <param name="flair">The flair</param>
         [MethodImpl(Inline), Op]
-        public static CreatedToolCmd created(CmdToolId id, CorrelationToken ct, FlairKind flair = Created)
-            => new CreatedToolCmd(id,ct,flair);
+        public static CmdCreated created(CmdToolId id, CorrelationToken ct, FlairKind flair = Created)
+            => new CmdCreated(id,ct,flair);
 
         /// <summary>
         /// Defines a <see cref='CreatedEvent{T}'/> event

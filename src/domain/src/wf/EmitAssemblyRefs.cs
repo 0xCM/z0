@@ -6,18 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
     using static Konst;
     using static z;
-
-    [StructLayout(LayoutKind.Sequential), Cmd]
-    public struct EmitAssemblyRefsCmd  : ICmdSpec<EmitAssemblyRefsCmd>
-    {
-        public Files Sources;
-
-        public FS.FilePath Target;
-    }
 
     [CmdHost, ApiHost]
     public sealed class EmitAssemblyRefs : CmdHost<EmitAssemblyRefs, EmitAssemblyRefsCmd>

@@ -8,29 +8,29 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static RP;
+    using static z;
 
-    [Event]
-    public readonly struct PartIndexCreated : IWfEvent<PartIndexCreated>
+    [Event(EventName)]
+    public readonly struct CmdSucceeded : IWfEvent<CmdSucceeded>
     {
-        public const string EventName = nameof(PartIndexCreated);
+        public const string EventName = nameof(GlobalEvents.CmdExec);
 
         public WfEventId EventId {get;}
 
-        public readonly ApiCodeBlockIndex Index;
+        public CmdSpec Cmd {get;}
 
         public FlairKind Flair {get;}
 
         [MethodImpl(Inline)]
-        public PartIndexCreated(WfStepId step, ApiCodeBlockIndex index, CorrelationToken ct, FlairKind flair = FlairKind.Ran)
+        public CmdSucceeded(CmdSpec cmd, CorrelationToken ct, FlairKind flair = FlairKind.Ran)
         {
-            EventId = (EventName, step, ct);
-            Index = index;
+            EventId = (EventName, cmd.Id, ct);
+            Cmd = cmd;
             Flair = flair;
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.format(SSx2, EventId, MemoryIndexMetrics.from(Index).Format());
+            => Render.format(EventId);
     }
 }

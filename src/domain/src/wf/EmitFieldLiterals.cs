@@ -10,6 +10,7 @@ namespace Z0
     using static z;
     using static Konst;
 
+
     [WfHost]
     public sealed class EmitFieldLiterals : WfHost<EmitFieldLiterals>
     {

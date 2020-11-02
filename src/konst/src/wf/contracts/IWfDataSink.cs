@@ -5,12 +5,13 @@
 namespace Z0
 {
     using System;
-
-    using Free =System.Security.SuppressUnmanagedCodeSecurityAttribute;
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface IWfActor : IWfWorker, IDisposable
+    public interface IWfDataSink<H,T> : IDataSink<T>
+        where T : struct
+        where H : struct, IWfDataSink<H,T>
     {
-
+        void Deposit(ReadOnlySpan<T> src);
     }
 }

@@ -12,28 +12,6 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial class XCmdFactory
-    {
-        [MethodImpl(Inline), Op]
-        public static EmitAsmOpCodesCmd EmitAsmOpCodes(this CmdBuilder builder)
-            => new EmitAsmOpCodesCmd(builder.Db.RefDataPath("asm.opcodes"));
-    }
-
-    /// <summary>
-    /// When executed, emits an x86 opcode set from embedded resources
-    /// </summary>
-    [Cmd(Code)]
-    public struct EmitAsmOpCodesCmd : ICmdSpec<EmitAsmOpCodesCmd>
-    {
-        public const string Code = CmdCodes.EmitAsmOpCodes;
-
-        public FS.FilePath Target;
-
-        [MethodImpl(Inline)]
-        public EmitAsmOpCodesCmd(FS.FilePath dst)
-            => Target = dst;
-    }
-
     public sealed class EmitAsmOpCodes : CmdHost<EmitAsmOpCodes, EmitAsmOpCodesCmd>
     {
         public static CmdResult run(IWfShell wf)

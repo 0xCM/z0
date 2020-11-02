@@ -40,7 +40,6 @@ namespace Z0
         }
     }
 
-
     public ref struct EmitImageSummariesStep
     {
         readonly IWfShell Wf;

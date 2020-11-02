@@ -11,14 +11,72 @@ namespace Z0
     using static Konst;
     using static z;
 
-    [WfHost]
-    public sealed class BuildCaptureIndex : WfHost<BuildCaptureIndex>
+    public delegate ApiHostRoutines HostBlockDecoder(in ApiHostCodeBlocks blocks);
+
+    public readonly struct CaptureProcessors
     {
-        public static void EmitAsmTables(IWfShell wf, IWfCaptureState state, in ApiCodeBlockIndex encoded)
+        public static ApiHostRoutines DecodeBlocks(IAsmDecoder decoder, in ApiHostCodeBlocks blocks)
+        {
+            var instructions = list<ApiRoutineObsolete>();
+            var ip = MemoryAddress.Empty;
+            var target = list<Instruction>();
+            var count = blocks.Length;
+
+            for(var i=0; i<count; i++)
+            {
+                target.Clear();
+
+                ref readonly var block = ref blocks[i];
+                decoder.Decode(block, x => target.Add(x));
+
+                if(i == 0)
+                    ip = target[0].IP;
+
+                instructions.Add(AsmProjections.project(ip, block, target.ToArray()));
+            }
+
+            return new ApiHostRoutines(blocks.Host, instructions.ToArray());
+        }
+
+        public static ApiCodeBlockIndex BuildIndex(IWfShell wf, WfHost host)
+        {
+            using var builder = new MemoryIndexBuilder(wf, host);
+            builder.Run();
+            var target = builder.Product;
+            var metrics = MemoryIndexMetrics.from(target);
+            wf.Status(MemoryIndexMetrics.from(target));
+            return target;
+        }
+
+        public static void Run(IWfShell wf, in WfCaptureState state)
+        {
+            var index = BuildIndex(wf, WfSelfHost.create(typeof(CaptureProcessors)));
+            run(wf, state, index);
+            process(wf, DecodeIndex(wf, state.RoutineDecoder, index));
+            ResBytesEmitter.create().WithIndex(index).Run(wf);
+        }
+
+        public static void DecodePart(PartId part, HostBlockDecoder decoder, in ApiCodeBlockIndex src, ref ApiPartRoutines dst)
+        {
+            var hosts = @readonly(src.Hosts.Where(h => h.Owner == part));
+            var count = hosts.Length;
+            var buffer = alloc<ApiHostRoutines>(count);
+            ref var _dst = ref first(span(buffer));
+            for(var j=0; j<count; j++)
+            {
+                ref readonly var host = ref skip(hosts,j);
+                var blocks = src[host];
+                var decoded = decoder(blocks);
+                seek(_dst,j) = decoded;
+            }
+            dst = new ApiPartRoutines(part, buffer);
+        }
+
+        public static void run(IWfShell wf, IWfCaptureState state, in ApiCodeBlockIndex encoded)
         {
             try
             {
-                var processor = new ProcessAsm(state, encoded);
+                var processor = new AsmProcessDriver(state, encoded);
                 var result = processor.Process();
 
                 wf.Processed(delimit(nameof(AsmRow), encoded.Hosts.Length, result.Count));
@@ -26,7 +84,7 @@ namespace Z0
                 var sets = result.View;
                 var count = result.Count;
                 for(var i=0; i<count; i++)
-                    process(wf, skip(sets,i));
+                    ProcessEnlisted(wf, skip(sets,i));
             }
             catch(Exception e)
             {
@@ -34,7 +92,7 @@ namespace Z0
             }
         }
 
-        public static void process(IWfShell wf, in AsmRowSet<Mnemonic> src)
+        public static void ProcessEnlisted(IWfShell wf, in AsmRowSet<Mnemonic> src)
         {
             var count = src.Count;
             var records = span(src.Sequenced);
@@ -50,7 +108,7 @@ namespace Z0
             wf.EmittedTable<AsmRow>(count, dst);
         }
 
-        public static Span<ApiPartRoutines> DecodeParts(IWfShell wf, IAsmDecoder decoder, in ApiCodeBlockIndex src)
+        public static Span<ApiPartRoutines> DecodeIndex(IWfShell wf, IAsmDecoder decoder, in ApiCodeBlockIndex src)
         {
             var parts = src.Parts;
             var partCount = parts.Length;
@@ -77,7 +135,7 @@ namespace Z0
                     {
                         var host = hosts[j];
                         var members = src[host];
-                        var fx = CaptureIndexBuilder.DecodeBlocks(decoder, members);
+                        var fx = DecodeBlocks(decoder, members);
                         hostFx.Add(fx);
                         kHosts++;
                         kMembers += fx.RoutineCount;
@@ -98,25 +156,17 @@ namespace Z0
 
         public static void process(IWfShell wf, ReadOnlySpan<ApiPartRoutines> src)
         {
+            var processors = ProcessInstructions.create();
             try
             {
                 var count = src.Length;
                 for(var i=0; i<count; i++)
-                    process(wf, skip(src,i));
-
+                    processors.Run(wf, skip(src,i));
             }
             catch(Exception e)
             {
                 wf.Error(e);
             }
-        }
-
-        static void process(IWfShell wf, in ApiPartRoutines src)
-            => ProcessInstructions.create().Run(wf, src);
-
-        protected override void Execute(IWfShell shell)
-        {
-            throw new NotImplementedException();
         }
     }
 }

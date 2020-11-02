@@ -14,12 +14,6 @@ namespace Z0
     using static Konst;
     using static z;
 
-    [StructLayout(LayoutKind.Sequential), Cmd]
-    public struct EmitToolScriptsCmd : ICmdSpec<EmitToolScriptsCmd>
-    {
-
-    }
-
     [CmdHost, ApiHost]
     public sealed class EmitToolScripts : CmdHost<EmitToolScripts, EmitToolScriptsCmd>
     {

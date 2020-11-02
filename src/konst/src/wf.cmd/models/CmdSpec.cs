@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public struct CmdSpec
+    public struct CmdSpec : ITextual
     {
         public CmdId Id {get;}
 
@@ -22,5 +22,10 @@ namespace Z0
             Id = id;
             Options = options;
         }
+        public string Format()
+            => Id.Format();
+
+        public override string ToString()
+            => Format();
     }
 }

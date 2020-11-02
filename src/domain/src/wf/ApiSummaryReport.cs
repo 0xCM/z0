@@ -18,5 +18,18 @@ namespace Z0
 
         public static string format(in ApiRuntimeSummary src)
             => string.Format(RenderPattern, src.Address, src.Uri, src.Genericity, src.Sig, src.Metadata);
+
+        [MethodImpl(Inline), Op]
+        public static FS.FilePath target(IFileDb db, string id)
+            => db.IndexFile(id);
+
+        [Op]
+        public static void emit(ReadOnlySpan<ApiRuntimeSummary> src, FS.FilePath dst)
+        {
+            var count = src.Length;
+            using var writer = dst.Writer();
+            for(var i=0; i<count; i++)
+                writer.WriteLine(ApiSummaryReport.format(skip(src,i)));
+        }
     }
 }

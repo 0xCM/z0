@@ -9,17 +9,17 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct TableSinks<T>
+    public readonly struct WfDataSinks<T>
         where T : struct
     {
-        readonly TableSink<T>[] Data;
+        readonly WfDataSink<T>[] Data;
 
         [MethodImpl(Inline)]
-        public static implicit operator TableSinks<T>(TableSink<T>[] src)
-            => new TableSinks<T>(src);
+        public static implicit operator WfDataSinks<T>(WfDataSink<T>[] src)
+            => new WfDataSinks<T>(src);
 
         [MethodImpl(Inline)]
-        public TableSinks(params TableSink<T>[] src)
+        public WfDataSinks(params WfDataSink<T>[] src)
             => Data = src;
 
         public Count Count
@@ -34,25 +34,25 @@ namespace Z0
             get => Data.Length;
         }
 
-        public ReadOnlySpan<TableSink<T>> View
+        public ReadOnlySpan<WfDataSink<T>> View
         {
             [MethodImpl(Inline)]
             get => Data;
         }
 
-        public Span<TableSink<T>> Edit
+        public Span<WfDataSink<T>> Edit
         {
             [MethodImpl(Inline)]
             get => Data;
         }
 
-        public ref TableSink<T> this[uint index]
+        public ref WfDataSink<T> this[uint index]
         {
             [MethodImpl(Inline)]
             get => ref z.seek(Edit, index);
         }
 
-        public ref TableSink<T> this[int index]
+        public ref WfDataSink<T> this[int index]
         {
             [MethodImpl(Inline)]
             get => ref z.seek(Edit, (uint)index);

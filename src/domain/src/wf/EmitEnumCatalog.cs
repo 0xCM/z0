@@ -11,12 +11,6 @@ namespace Z0
     using static Konst;
     using static z;
 
-    [Cmd]
-    public struct EmitEnumCatalogCmd : ICmdSpec<EmitEnumCatalogCmd>
-    {
-
-    }
-
     [WfHost]
     public sealed class EmitEnumCatalog : WfHost<EmitEnumCatalog>
     {

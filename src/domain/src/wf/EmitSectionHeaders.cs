@@ -46,7 +46,7 @@ namespace Z0
 
         public void Run()
         {
-            Wf.Running();
+            using var flow = Wf.Running();
 
             var pCount = Parts.Length;
             var total = 0u;

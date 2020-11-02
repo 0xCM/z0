@@ -6,26 +6,15 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
 
     using static Konst;
     using static z;
 
-    public readonly partial struct ApiCommands
+    partial class WfShell
     {
-
-
+       [MethodImpl(Inline), Op]
+        public static string[] args()
+            => Environment.GetCommandLineArgs();
     }
-
-    public readonly struct ApiCmd
-    {
-
-    }
-
-
-    public readonly struct ApiCmdEncoder
-    {
-
-
-    }
-
 }

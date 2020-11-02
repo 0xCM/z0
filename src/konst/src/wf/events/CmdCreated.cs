@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.IO;
     using System.Runtime.CompilerServices;
 
     using static Konst;
@@ -13,29 +12,23 @@ namespace Z0
     using static z;
 
     [Event(EventName)]
-    public readonly struct ProcessingFileEvent<T> : IWfEvent<ProcessingFileEvent<T>>
+    public readonly struct CmdCreated : IWfEvent<CmdCreated>
     {
-        public const string EventName = GlobalEvents.ProcessingFile;
+        public const string EventName = nameof(GlobalEvents.CreatedToolCmd);
 
         public WfEventId EventId {get;}
-
-        public T FileKind {get;}
-
-        public FS.FilePath SourcePath {get;}
 
         public FlairKind Flair {get;}
 
         [MethodImpl(Inline)]
-        public ProcessingFileEvent(WfStepId step, T kind, FS.FilePath src, CorrelationToken ct, FlairKind flair = Running)
+        public CmdCreated(CmdToolId id, CorrelationToken ct, FlairKind flair = Created)
         {
-            EventId = (EventName, step, ct);
-            SourcePath = src;
-            FileKind = kind;
+            EventId = (EventName, id, ct);
             Flair = flair;
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => Render.format(EventId, SourcePath.ToUri());
+            => EventId.Format();
     }
 }

@@ -21,6 +21,8 @@ namespace Z0
 
         public const string RunningCmd = nameof(RunningCmd);
 
+        public const string CmdExec = nameof(CmdExec);
+
         public const string Trace = nameof(Trace);
 
         public const string Status = nameof(Status);

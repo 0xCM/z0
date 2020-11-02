@@ -51,7 +51,7 @@ namespace Z0
         [Op]
         public void Run()
         {
-            Wf.Running();
+            using var flow = Wf.Running();
             try
             {
                 var buffer =  Buffers.Run();
@@ -65,8 +65,6 @@ namespace Z0
             {
                 Wf.Error(error);
             }
-
-            Wf.Ran();
         }
 
         [Op, MethodImpl(Inline)]

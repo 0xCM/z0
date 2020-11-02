@@ -9,8 +9,6 @@ namespace Z0
 
     using Free =System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    using static Konst;
-
     [Free]
     public interface IWfInit
     {

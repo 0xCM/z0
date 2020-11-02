@@ -13,62 +13,25 @@ namespace Z0
 
     partial class WfShell
     {
-        [Op]
-        public static ApiPartSet parts()
-            => parts(controller(), args());
-
-        [Op]
-        public static ApiPartSet parts(Assembly control, string[] args)
-        {
-            var parts = ApiPartIdParser.parse(args);
-            if(parts.Length != 0)
-               return new ApiPartSet(control, parts);
-            else
-                return new ApiPartSet(control);
-        }
-
-        [Op]
-        public static ApiPartSet parts(Assembly control)
-            => parts(control, args());
+        /// <summary>
+        /// Creates a T-parametric sink predicated on a <see cref='ValueReceiver{T}'/> process function
+        /// </summary>
+        /// <param name="wf">The workflow context</param>
+        /// <param name="f">The process function</param>
+        /// <typeparam name="T">The data type</typeparam>
+        public static WfDataSink<T> sink<T>(IWfShell wf, ValueReceiver<T> f)
+            where T : struct
+                => new WfDataSink<T>(wf, f);
 
         [MethodImpl(Inline), Op]
         public static IJsonSettings json(IWfPaths paths)
             => JsonSettings.Load(paths.AppConfigPath);
-
-        [Op]
-        public static WfSettings settings(IWfContext context)
-        {
-            var dst = z.dict<string,string>();
-            var assname = Assembly.GetEntryAssembly().GetSimpleName();
-            var filename = FS.file(assname, FileExtensions.Json);
-            var src = context.Paths.ConfigRoot + filename;
-            JsonSettings.absorb(src, dst);
-            return new WfSettings(dst);
-        }
 
         public static FS.FolderPath DbRoot()
             => EnvVars.Common.DbRoot;
 
         public static FS.FolderPath LogRoot()
             => DbRoot() + FS.folder("logs") + FS.folder("wf");
-
-        [MethodImpl(Inline), Op]
-        public static IWfPaths paths()
-            => new WfPaths(logs(controller().Id(), LogRoot(), DbRoot()));
-
-        public static WfLogConfig logs(PartId part, FS.FolderPath logRoot, FS.FolderPath dbRoot)
-            => new WfLogConfig(part, logRoot, dbRoot);
-
-        public static WfLogConfig logs(PartId part, FS.FolderPath root)
-            => logs(part, root, DbRoot());
-
-        [MethodImpl(Inline), Op]
-        public static string[] args()
-            => Environment.GetCommandLineArgs();
-
-        [MethodImpl(Inline), Op]
-        public static Assembly controller()
-            => Assembly.GetEntryAssembly();
 
         [Op]
         public static IWfShell create(string[] args)

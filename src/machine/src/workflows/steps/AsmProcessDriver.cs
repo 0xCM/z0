@@ -13,16 +13,8 @@ namespace Z0
 
     using static Konst;
     using static z;
-    using static ProcessAsmStep;
 
-    [Step]
-    public readonly struct ProcessAsmStep : IWfStep<ProcessAsmStep>
-    {
-        public static WfStepId StepId
-            => Workflow.step<ProcessAsmStep>();
-    }
-
-    public readonly struct ProcessAsm
+    public readonly struct AsmProcessDriver
     {
         readonly Dictionary<Mnemonic, ArrayBuilder<AsmRow>> Index;
 
@@ -54,7 +46,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public ProcessAsm(IWfCaptureState state, in ApiCodeBlockIndex encoded)
+        public AsmProcessDriver(IWfCaptureState state, in ApiCodeBlockIndex encoded)
         {
             Wf = state.Wf;
             Asm = state.Asm;
@@ -67,19 +59,17 @@ namespace Z0
 
         public AsmRowSets<Mnemonic> Process()
         {
-            Wf.Running(StepId);
+            using var flow = Wf.Running();
             var locations = span(Encoded.Locations);
             var count = locations.Length;
+
             for(var i=0u; i<count; i++)
             {
                 ref readonly var address = ref skip(locations,i);
                 Process(Encoded[address]);
             }
 
-            var result = Processed();
-            Wf.Ran(StepId, result.Count);
-
-            return result;
+            return Processed();
         }
 
         [MethodImpl(Inline)]

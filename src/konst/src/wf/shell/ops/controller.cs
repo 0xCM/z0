@@ -5,13 +5,16 @@
 namespace Z0
 {
     using System;
-    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+    using System.Runtime.CompilerServices;
+    using System.Reflection;
 
-    [Free]
-    public interface ITableSink<H,T> : IDataSink<T>
-        where T : struct
-        where H : struct, ITableSink<H,T>
+    using static Konst;
+    using static z;
+
+    partial class WfShell
     {
-        void Deposit(ReadOnlySpan<T> src);
+        [MethodImpl(Inline), Op]
+        public static Assembly controller()
+            => Assembly.GetEntryAssembly();
     }
 }

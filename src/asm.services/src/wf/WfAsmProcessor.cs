@@ -26,8 +26,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public void Process(ApiInstruction src)
-        {
-            Broker.Relay(src.Mnemonic, src);
-        }
+            => Broker.Relay(src.Mnemonic, src);
     }
 }

@@ -9,6 +9,7 @@ namespace Z0
     /// <summary>
     /// Defines an untyped characterization of a wokflow operand
     /// </summary>
+    [Free]
     public interface IWfStepArg
     {
         /// <summary>
@@ -26,6 +27,7 @@ namespace Z0
     /// Characterizes a workflow operand
     /// </summary>
     /// <typeparam name="T">The operand type</typeparam>
+    [Free]
     public interface IWfStepArg<T> : IWfStepArg
     {
         new T Value {get;}
@@ -39,6 +41,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The operand type</typeparam>
     /// <typeparam name="H">The operand type</typeparam>
+    [Free]
     public interface IWfStepArg<I,T> : IWfStepArg<T>
         where I : unmanaged
     {
@@ -53,6 +56,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The operand type</typeparam>
     /// <typeparam name="H">The operand type</typeparam>
+    [Free]
     public interface IWfStepArg<H,I,T> : IWfStepArg<I,T>
         where I : unmanaged
         where H : struct, IWfStepArg<H,I,T>

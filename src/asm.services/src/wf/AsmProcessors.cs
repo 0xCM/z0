@@ -18,13 +18,6 @@ namespace Z0
     public readonly struct AsmProcessors
     {
         /// <summary>
-        /// Creates a nonparametric process state
-        /// </summary>
-        [MethodImpl(Inline), Op]
-        public static AsmWorkerState<T> state<T>(T s0)
-            => new AsmWorkerState<T>(s0);
-
-        /// <summary>
         /// Creates an asm processor
         /// </summary>
         /// <param name="context">The process context</param>
@@ -43,11 +36,6 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static PartAsmProcessor parts(IWfShell wf)
             => new PartAsmProcessor(wf);
-
-        static void OnStep(Vector128<byte> src)
-        {
-
-        }
 
         public static void save(ReadOnlySpan<CapturedApiResource> src, FS.FilePath dst)
         {

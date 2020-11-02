@@ -12,33 +12,6 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial class XCmdFactory
-    {
-        [MethodImpl(Inline), Op]
-        public static EmitResDataCmd EmitResData(this CmdBuilder builder, Assembly src, string id, string match = null)
-            => new EmitResDataCmd(src, builder.Db.RefDataRoot() + FS.folder(id), match);
-    }
-
-    [Cmd(Code)]
-    public struct EmitResDataCmd : ICmdSpec<EmitResDataCmd>
-    {
-        public const string Code = CmdCodes.EmitRes;
-
-        public Assembly Source;
-
-        public FS.FolderPath Target;
-
-        public string Match;
-
-        [MethodImpl(Inline)]
-        public EmitResDataCmd(Assembly src, FS.FolderPath dst, string filter = null)
-        {
-            Source = src;
-            Target = dst;
-            Match = filter ?? EmptyString;
-        }
-    }
-
     [CmdHost, ApiHost]
     public sealed class EmitResData : CmdHost<EmitResData, EmitResDataCmd>
     {

@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Defines a canonical table sink predicated on a process function
     /// </summary>
-    public readonly struct TableSink<T> : ITableSink<TableSink<T>,T>
+    public readonly struct WfDataSink<T> : IWfDataSink<WfDataSink<T>,T>
         where T : struct
     {
         public IWfShell Wf {get;}
@@ -21,7 +21,7 @@ namespace Z0
         readonly ValueReceiver<T> Fx;
 
         [MethodImpl(Inline)]
-        public TableSink(IWfShell wf, ValueReceiver<T> f)
+        public WfDataSink(IWfShell wf, ValueReceiver<T> f)
         {
             Wf = wf;
             Fx = f;
