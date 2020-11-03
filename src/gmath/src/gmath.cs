@@ -5,7 +5,7 @@
 namespace Z0
 {
     [ApiHost(ApiNames.gmath)]
-    public partial class gmath : IApiHost<gmath>
+    public partial class gmath
     {
 
     }

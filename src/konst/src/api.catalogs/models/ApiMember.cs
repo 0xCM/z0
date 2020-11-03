@@ -30,7 +30,8 @@ namespace Z0
 
         public CilMethod Cil {get;}
 
-        public ApiMetadataUri MetaUri => Method;
+        public ApiMetadataUri MetaUri
+            => Method;
 
         public ApiMember Zero
             => Empty;

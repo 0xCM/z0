@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    [CmdHost, ApiHost]
+    [ApiHost]
     public sealed class EmitAssemblyRefs : CmdHost<EmitAssemblyRefs, EmitAssemblyRefsCmd>
     {
         [Op]
@@ -22,7 +22,7 @@ namespace Z0
             return cmd;
         }
 
-        [Op]
+        [CmdWorker]
         public static CmdResult run(IWfShell wf, in EmitAssemblyRefsCmd cmd)
         {
             var sources = @readonly(cmd.Sources.Storage);

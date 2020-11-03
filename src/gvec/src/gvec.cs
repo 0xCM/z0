@@ -8,8 +8,8 @@ namespace Z0
     /// Generic vectorized intrinsics
     /// </summary>
     [ApiHost("api")]
-    public partial class gvec : IApiHost<gvec>
-    {        
-        
+    public partial class gvec
+    {
+
     }
 }

@@ -10,7 +10,7 @@ namespace Z0
     /// Defines canonical states in the lifecycle of an agent
     /// </summary>
     public enum AgentStatus : uint
-    {        
+    {
         /// <summary>
         /// The agent state after instantiation. If configuration data is available,
         /// the agent transitions automatically to the <see cref='Configuring' state/>
@@ -18,29 +18,29 @@ namespace Z0
         Created = T00,
 
         /// <summary>
-        /// The state in which the agent is consuming configurating data and adusting
-        /// internal state accordingly and, upon successful completion, transitions to the 
+        /// The state in which the agent is consuming configuration data and adusting
+        /// internal state accordingly and, upon successful completion, transitions to the
         /// <see cref='Configured'/> state
         /// </summary>
         Configuring = T01,
-                
+
         /// <summary>
-        /// The state to which the agent transitions after successful completion of the 
+        /// The state to which the agent transitions after successful completion of the
         /// <see cref='Configuring' state/>. Transition to this state is a precondition
         /// to transition to the <see cref='Starting'/> state
         /// </summary>
         Configured = T02,
-            
+
         /// <summary>
-        /// The state in which the agent is initialzing internal state, predicated on configuation
-        /// data, if any. Upon successufl completion, the agent tansitions to the <see cref='Started' state/>
+        /// The state in which the agent is initialzing internal state, predicated on configuration
+        /// data, if any. Upon successful completion, the agent tansitions to the <see cref='Started' state/>
         /// </summary>
         Starting = T03,
-        
+
         /// <summary>
-        /// The state in which the agent has been initialized and, once entered, immediately transitions to 
+        /// The state in which the agent has been initialized and, once entered, immediately transitions to
         /// the <see cref='Running'/> state unless the agent is configured to be inactive; if inactive,
-        /// the agent remains in this state until the agent receives an administrative-level event 
+        /// the agent remains in this state until the agent receives an administrative-level event
         /// that specifies the next state
         /// </summary>
         Started  = T04,

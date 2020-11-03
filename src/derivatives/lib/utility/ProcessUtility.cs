@@ -39,7 +39,6 @@ namespace Z0.X
                 ProcessStartInfo processInfo = new ProcessStartInfo(programName, programArguments);
                 processInfo.WindowStyle = ProcessWindowStyle.Hidden;
                 processInfo.UseShellExecute = true;
-
                 Process executingProcess = new Process();
                 executingProcess.StartInfo = processInfo;
                 executingProcess.Start();

@@ -10,24 +10,29 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public struct CmdResult<P> : ICmdResult<P>
+    public struct CmdResult<C,P> : ICmdResult<C,P>
         where P : struct
+        where C : struct, ICmdSpec<C>
     {
-        public CmdId Id {get;}
+        public C Cmd;
 
         public bit Succeeded {get;}
 
         public P Payload {get;}
 
         [MethodImpl(Inline)]
-        public CmdResult(CmdId id, bool success, P payload)
+        public CmdResult(C cmd, bool succeeded, P payload)
         {
-            Id = id;
+            Cmd = cmd;
             Payload = payload;
-            Succeeded = success;
+            Succeeded = succeeded;
         }
 
-        public static CmdResult<P> Empty
+        [MethodImpl(Inline)]
+        public static implicit operator CmdResult<C,P>((C cmd, P payload) src)
+            => new CmdResult<C,P>(src.cmd, true, src.payload);
+
+        public static CmdResult<C,P> Empty
             => default;
     }
 }

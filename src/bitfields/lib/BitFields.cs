@@ -11,7 +11,7 @@ namespace Z0
     using static z;
 
     [ApiHost("api")]
-    public partial class BitFields : IApiHost<BitFields>
+    public partial class BitFields
     {
         const NumericKind Closure = UnsignedInts;
 

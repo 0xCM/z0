@@ -6,20 +6,19 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Reflection;
     using System.IO;
 
     using static Konst;
     using static z;
 
-    [CmdHost, ApiHost]
+    [ApiHost]
     public sealed class EmitResData : CmdHost<EmitResData, EmitResDataCmd>
     {
         protected override CmdResult Execute(IWfShell wf, in EmitResDataCmd spec)
             => run(wf, spec);
 
-        [Op]
-        public static CmdResult run(IWfShell wf, in EmitResDataCmd spec)
+        [CmdWorker]
+        public static CmdResult run(IWfShell wf, EmitResDataCmd spec)
         {
             var query = Resources.query(spec.Source, spec.Match);
             var count = query.ResourceCount;

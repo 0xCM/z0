@@ -12,20 +12,17 @@ namespace Z0
     using static Konst;
     using static ApiDataModel;
 
-    [Cmd(Code)]
-    public struct EmitHexIndexCmd : ICmdSpec<EmitHexIndexCmd>
-    {
-        public const string Code = CmdCodes.EmitHexIndex;
-    }
-
-    [CmdHost]
     public sealed class EmitHexIndex : CmdHost<EmitHexIndex, EmitHexIndexCmd>
     {
         protected override CmdResult Execute(IWfShell wf, in EmitHexIndexCmd spec)
+            => exec(wf,spec);
+
+        [CmdWorker]
+        public static CmdResult exec(IWfShell wf, EmitHexIndexCmd cmd)
         {
             var dst = wf.Db().Table("apihex.index");
-            var descriptors = ApiData.BlockDescriptors(wf);
-            var count= ApiData.emit(descriptors, dst);
+            var descriptors = ApiCode.BlockDescriptors(wf);
+            var count= ApiCode.emit(descriptors, dst);
             wf.EmittedTable<CodeBlockDescriptor>(count, dst);
             return Win();
         }

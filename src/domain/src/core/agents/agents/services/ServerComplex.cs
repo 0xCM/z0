@@ -34,11 +34,11 @@ namespace Z0
                 return Complex.ValueOrDefault();
 
             var servers = 20;
-            var complex = ServerComplex.Define(context);                
+            var complex = ServerComplex.Define(context);
             var configs = new List<ServerConfig>();
             var processors = Environment.ProcessorCount;
             term.inform($"Server complex using {processors} processor cores");
-            
+
             for(uint i = 0, corenum = 1; i <= servers; i++, corenum++)
             {
                 var sid = ServiceIdentityPool.NextServerId();
@@ -48,7 +48,7 @@ namespace Z0
                 if(corenum == processors)
                     corenum = 0;
             }
-            
+
             var eventSink = TraceEventSink.Define(context, (complex.ServerId, complex.AgentId));
             complex.Configure(configs, eventSink);
             await complex.Start();
@@ -56,9 +56,9 @@ namespace Z0
             return complex;
         }
 
-        static AgentIdentity Identity 
+        static AgentIdentity Identity
             => (UInt32.MaxValue, UInt32.MaxValue);
-        
+
 
         ServerComplex(AgentContext Context)
             : base(Context, Identity)
@@ -66,13 +66,13 @@ namespace Z0
             Servers = new ServerAgent[]{};
         }
 
-        public void Configure(IEnumerable<ServerConfig> sconfig, ISystemAgent sink)
+        public void Configure(IEnumerable<ServerConfig> config, ISystemAgent sink)
         {
-            var configs = sconfig.ToArray();
+            var configs = config.ToArray();
             Servers = new ServerAgent[configs.Length];
             for(var i=0; i<configs.Length; i++)
                 Servers[i] = ServerAgent.create(Context, configs[i]);
-         
+
             EventSink = sink;
         }
 

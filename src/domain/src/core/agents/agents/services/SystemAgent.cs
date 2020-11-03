@@ -6,14 +6,13 @@ namespace Z0
 {
     using System;
     using System.Threading.Tasks;
-    using System.Runtime.CompilerServices;
 
     /// <summary>
     /// Defines base system agent abstraction
-    /// </summary>    
+    /// </summary>
     public abstract class SystemAgent : ISystemAgent
     {
-        public AgentContext Context {get;}
+        public IAgentContext Context {get;}
 
         public event OnAgentTransition StateChanged;
 
@@ -28,7 +27,7 @@ namespace Z0
         /// Identifies the agent relative to the server
         /// </summary>
         /// <remarks>
-        /// There are three special cases to note: 
+        /// There are three special cases to note:
         /// 1. The server itself is a service agent and will always be assigned and Id of 0
         /// 2. The server process, which more or less serves the same role as the Windows SCM,
         /// is always assigned an agent id of 1
@@ -38,7 +37,7 @@ namespace Z0
         /// </remarks>
         public uint AgentId {get;}
 
-        protected SystemAgent(AgentContext context, AgentIdentity id)
+        protected SystemAgent(IAgentContext context, AgentIdentity id)
         {
             ServerId = id.ServerId;
             AgentId = id.AgentId;
@@ -46,14 +45,14 @@ namespace Z0
             context.Register(this);
             State = AgentStatus.Created;
         }
-           
+
         /// <summary>
         /// Specifies the current agent status
         /// </summary>
-        public AgentStatus State 
+        public AgentStatus State
         {
             get => _State;
-            
+
             protected set
             {
                 if(_State == value)
@@ -92,7 +91,7 @@ namespace Z0
         }
 
         void DoTerminate()
-        {            
+        {
             if(State == AgentStatus.Running)
                 Stop().Wait();
 
@@ -128,7 +127,7 @@ namespace Z0
         /// Starts the agent from a running state
         /// </summary>
         public async Task Start()
-            => await Task.Factory.StartNew(DoStart);   
+            => await Task.Factory.StartNew(DoStart);
 
         /// <summary>
         /// Starts the agent from a stopped state
@@ -139,20 +138,20 @@ namespace Z0
         /// <summary>
         /// Terminates the agent
         /// </summary>
-        public virtual void Dispose() 
-            => Terminate().Wait();            
+        public virtual void Dispose()
+            => Terminate().Wait();
 
-        protected virtual void OnConfigure(dynamic config) 
+        protected virtual void OnConfigure(dynamic config)
         {
 
         }
 
-        protected virtual void OnRun() 
+        protected virtual void OnRun()
         {
 
         }
 
-        protected virtual void OnStop() 
+        protected virtual void OnStop()
         {
 
         }

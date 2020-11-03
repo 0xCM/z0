@@ -29,9 +29,9 @@ namespace Z0
         public ApiHost(Type type, string name, PartId part, ApiHostUri uri)
         {
             Name = name;
+            HostType = type;
             PartId = part;
             Uri = uri;
-            HostType = type;
             DeclaredMethods = HostType.DeclaredMethods();
         }
 

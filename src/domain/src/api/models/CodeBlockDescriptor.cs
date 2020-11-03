@@ -27,7 +27,6 @@ namespace Z0
             public ByteSize Size;
 
             public ApiUri<string> Uri;
-
         }
     }
 }

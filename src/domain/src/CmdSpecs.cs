@@ -12,6 +12,48 @@ namespace Z0
     using static Konst;
 
     [Cmd]
+    public struct EmitFileListCmd : ICmdSpec<EmitFileListCmd>
+    {
+        public string ListName;
+
+        public FS.FolderPath SourceDir;
+
+        public FS.FileExt[] FileKinds;
+
+        public bool FileUriMode;
+
+        public FS.FilePath TargetPath;
+
+        public uint EmissionLimit;
+    }
+
+    [Cmd]
+    public struct EmitClrHandlesCmd : ICmdSpec<EmitClrHandlesCmd>
+    {
+
+    }
+
+    [Cmd]
+    public struct EmitHostCilCmd : ICmdSpec<EmitHostCilCmd>
+    {
+
+    }
+
+    [Cmd]
+    public struct EmitHostHexCmd : ICmdSpec<EmitHostHexCmd>
+    {
+        public ApiHostUri ApiHost;
+
+        public ApiMemberCodeBlocks Source;
+    }
+
+    [Cmd(Code)]
+    public struct EmitHexIndexCmd : ICmdSpec<EmitHexIndexCmd>
+    {
+        public const string Code = CmdCodes.EmitHexIndex;
+    }
+
+    [Cmd]
     public struct EmitRuntimeIndexCmd : ICmdSpec<EmitRuntimeIndexCmd>
     {
 
@@ -74,7 +116,7 @@ namespace Z0
 
     }
 
-    [StructLayout(LayoutKind.Sequential), Cmd]
+    [Cmd]
     public struct EmitAssemblyRefsCmd  : ICmdSpec<EmitAssemblyRefsCmd>
     {
         public Files Sources;
@@ -168,7 +210,7 @@ namespace Z0
         }
     }
 
-    [StructLayout(LayoutKind.Sequential), Cmd]
+    [Cmd]
     public struct EmitToolScriptsCmd : ICmdSpec<EmitToolScriptsCmd>
     {
 

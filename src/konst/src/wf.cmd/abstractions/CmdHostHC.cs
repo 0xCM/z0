@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public abstract class CmdHost<H,C> : WfHost<H>, ICmdHost<H,C>
+    public abstract class CmdHost<H,C> : WfHost<H>
         where H : CmdHost<H,C>, new()
         where C : struct, ICmdSpec<C>
     {

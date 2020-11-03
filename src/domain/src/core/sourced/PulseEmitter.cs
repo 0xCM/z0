@@ -12,10 +12,10 @@ namespace Z0
     /// </summary>
     public class PulseEmitter : EventEmitter<PulseEvent>
     {
-        public static PulseEmitter create(AgentContext context, AgentIdentity identity, PulseEmitterConfig config)
+        public static PulseEmitter create(IAgentContext context, AgentIdentity identity, PulseEmitterConfig config)
             => new PulseEmitter(context, identity, config);
 
-        public PulseEmitter(AgentContext context, AgentIdentity identity, PulseEmitterConfig config)
+        public PulseEmitter(IAgentContext context, AgentIdentity identity, PulseEmitterConfig config)
             : base(context,identity)
         {
             Timer = new Timer(config.Frequency.TotalMilliseconds);

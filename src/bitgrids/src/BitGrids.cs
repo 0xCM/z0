@@ -9,13 +9,13 @@ namespace Z0
 
 
     [ApiHost("api")]
-    public partial class BitGrid : IApiHost<BitGrid>
+    public partial class BitGrid
     {
-        //internal const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
+
     }
 
     [ApiHost("allocating")]
-    public partial class BitGridA : IApiHost<BitGridA>
+    public partial class BitGridA
     {
         internal const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
 
@@ -23,18 +23,18 @@ namespace Z0
 
     public partial class BGI
     {
-        
+
     }
 
     [ApiHost("patterns")]
-    public partial class GridPatterns : IApiHost<GridPatterns>
+    public partial class GridPatterns
     {
         internal const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
 
     }
 
     [ApiHost]
-    public partial class SubGrid : IApiHost<SubGrid>
+    public partial class SubGrid
     {
         internal const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
 
@@ -42,17 +42,17 @@ namespace Z0
 
     [ApiHost]
     public static partial class GridLoad
-    {   
+    {
         internal const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
     }
 
     public static partial class BitGridX
-    {   
+    {
 
     }
 
     public static partial class XTend
-    {   
+    {
 
     }
 

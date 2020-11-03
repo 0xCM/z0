@@ -4,23 +4,39 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    using static Konst;
-    using static z;
+    [Free]
+    public delegate CmdResult CmdWorkerFunction(IWfShell wf, CmdSpec cmd);
+
+    [Free]
+    public delegate CmdResult CmdWorkerFunction<C>(IWfShell wf, C cmd)
+        where C : struct, ICmdSpec<C>;
 
     [Free]
     public interface ICmdWorker
     {
+        CmdId CmdId {get;}
+
         CmdResult Invoke(IWfShell wf, CmdSpec cmd);
     }
 
     [Free]
     public interface ICmdWorkerHost<H> : ICmdWorker
         where H : ICmdWorkerHost<H>
+    {
+
+    }
+
+    [Free]
+    public interface ICmdRunner
+    {
+        CmdId CmdId {get;}
+    }
+
+    [Free]
+    public interface ICmdRunner<C> : ICmdRunner
+        where C : struct, ICmdSpec<C>
     {
 
     }

@@ -1,0 +1,22 @@
+Failure trapped by Main at j:\dev\projects\z0\src\dynoshell\src\App.cs 25
+System.Reflection.ReflectionTypeLoadException: Unable to load one or more of the requested types.
+Could not load type 'Z0.IApiHost`1' from assembly 'z0.konst, Version=1.0.43.0, Culture=neutral, PublicKeyToken=null'.
+Could not load type 'Z0.IApiHost`1' from assembly 'z0.konst, Version=1.0.43.0, Culture=neutral, PublicKeyToken=null'.
+Could not load type 'Z0.IApiHost`1' from assembly 'z0.konst, Version=1.0.43.0, Culture=neutral, PublicKeyToken=null'.
+Could not load type 'Z0.IApiHost`1' from assembly 'z0.konst, Version=1.0.43.0, Culture=neutral, PublicKeyToken=null'.
+   at System.Reflection.RuntimeModule.GetTypes(RuntimeModule module)
+   at System.Reflection.RuntimeModule.GetTypes()
+   at System.Reflection.Assembly.GetTypes()
+   at Z0.ApiCatalogs.resolve(Assembly src) in j:\dev\projects\z0\src\konst\src\api.catalogs\ApiCatalogs.cs:line 111
+   at Z0.ApiCatalogs.part(FilePath src) in j:\dev\projects\z0\src\konst\src\api.catalogs\ApiCatalogs.cs:line 101
+   at Z0.ApiCatalogs.parts(FilePath[] paths) in j:\dev\projects\z0\src\konst\src\api.catalogs\ApiCatalogs.cs:line 94
+   at Z0.ApiCatalogs.system(Files paths) in j:\dev\projects\z0\src\konst\src\api.catalogs\ApiCatalogs.cs:line 26
+   at Z0.ApiPartSet..ctor(Assembly src) in j:\dev\projects\z0\src\konst\src\api.catalogs\models\ApiPartSet.cs:line 48
+   at Z0.WfShell.parts(Assembly control, String[] args) in j:\dev\projects\z0\src\konst\src\wf.shell\ops\parts.cs:line 27
+   at Z0.WfShell.create(String[] args) in j:\dev\projects\z0\src\konst\src\wf.shell\ops\create.cs:line 18
+   at Z0.App.Main(String[] args) in j:\dev\projects\z0\src\dynoshell\src\App.cs:line 20
+System.TypeLoadException: Could not load type 'Z0.IApiHost`1' from assembly 'z0.konst, Version=1.0.43.0, Culture=neutral, PublicKeyToken=null'.
+System.TypeLoadException: Could not load type 'Z0.IApiHost`1' from assembly 'z0.konst, Version=1.0.43.0, Culture=neutral, PublicKeyToken=null'.
+System.TypeLoadException: Could not load type 'Z0.IApiHost`1' from assembly 'z0.konst, Version=1.0.43.0, Culture=neutral, PublicKeyToken=null'.
+System.TypeLoadException: Could not load type 'Z0.IApiHost`1' from assembly 'z0.konst, Version=1.0.43.0, Culture=neutral, PublicKeyToken=null'.
+

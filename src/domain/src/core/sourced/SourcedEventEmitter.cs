@@ -11,11 +11,11 @@ namespace Z0
     /// Defines base type for event originators
     /// </summary>
     public abstract class SourcedEventEmitter : SystemAgent, IEventEmitter
-    {        
-        protected SourcedEventEmitter(AgentContext Context, AgentIdentity Identity)
+    {
+        protected SourcedEventEmitter(IAgentContext Context, AgentIdentity Identity)
             :base(Context,Identity)
         {
-            
+
         }
     }
 }

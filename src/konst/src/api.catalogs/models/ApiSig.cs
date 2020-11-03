@@ -12,36 +12,24 @@ namespace Z0
 
     public readonly struct ApiSig : ITextual
     {
-        public ClrArtifactKind SubjectType {get;}
+        public PartId Part {get;}
 
-        public CliSig Part {get;}
+        public utf8 HostName {get;}
 
-        public CliSig Host {get;}
-
-        public CliSig Member {get;}
+        public CliSig MemberSig {get;}
 
         [MethodImpl(Inline)]
-        public ApiSig(ClrArtifactKind kind, CliSig member)
+        public ApiSig(PartId part, string host, CliSig member)
         {
-            SubjectType = kind;
-            Part = CliSig.Empty;
-            Host = CliSig.Empty;
-            Member = member;
-        }
-
-        [MethodImpl(Inline)]
-        public ApiSig(ClrArtifactKind kind, CliSig part, CliSig host, CliSig member)
-        {
-            SubjectType = kind;
             Part = part;
-            Host = host;
-            Member = member;
+            HostName = host;
+            MemberSig = member;
         }
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Member.IsEmpty;
+            get => MemberSig.IsEmpty;
         }
 
         public bool IsNonEmpty
@@ -53,23 +41,16 @@ namespace Z0
         public uint Hash
         {
             [MethodImpl(Inline)]
-            get => hash(Member.Data);
+            get => hash(MemberSig.Data);
         }
-
-        public bool Rooted
-        {
-            [MethodImpl(Inline)]
-            get => Part.IsNonEmpty && Host.IsNonEmpty;
-        }
-
         public string Format()
-            => Member.Format();
+            => MemberSig.Format();
 
         public override string ToString()
             => Format();
 
         public bool Equals(ApiSig src)
-            => Member.Equals(src.Member);
+            => MemberSig.Equals(src.MemberSig);
 
         public override bool Equals(object obj)
             => obj is ApiSig s && Equals(s);
@@ -88,7 +69,7 @@ namespace Z0
         public static ApiSig Empty
         {
             [MethodImpl(Inline)]
-            get => new ApiSig(0, CliSig.Empty);
+            get => new ApiSig(0, EmptyString, CliSig.Empty);
         }
     }
 }

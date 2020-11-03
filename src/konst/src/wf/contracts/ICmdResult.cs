@@ -14,7 +14,7 @@ namespace Z0
     {
         CmdId Id {get;}
 
-        bool Succeeded {get;}
+        bit Succeeded {get;}
 
     }
 
@@ -22,5 +22,13 @@ namespace Z0
         where P : struct
     {
         P Payload {get;}
+    }
+
+    public interface ICmdResult<C,P> : ICmdResult<P>
+        where P : struct
+        where C : struct, ICmdSpec<C>
+    {
+        CmdId ICmdResult.Id
+            => default(C).CmdId;
     }
 }

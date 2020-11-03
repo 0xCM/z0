@@ -6,13 +6,12 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
     using System.Linq;
 
     using static Konst;
     using static z;
 
-    [CmdHost, ApiHost]
+    [ApiHost]
     public sealed class EmitFileList : CmdHost<EmitFileList, EmitFileListCmd>
     {
         [Op]
@@ -26,7 +25,8 @@ namespace Z0
             return cmd;
         }
 
-        public static CmdResult run(IWfShell wf, in EmitFileListCmd spec)
+        [CmdWorker]
+        public static CmdResult run(IWfShell wf, EmitFileListCmd spec)
         {
             var archive = FS.archive(spec.SourceDir);
             var files = archive.Files(true, spec.FileKinds).Where(f => !f.Name.EndsWith(".resources.dll"));

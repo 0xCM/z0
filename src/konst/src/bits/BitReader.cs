@@ -3,11 +3,11 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     [ApiHost]
-    public readonly partial struct BitReader : IApiHost<BitReader>
+    public readonly partial struct BitReader
     {
- 
+
 
     }
 }

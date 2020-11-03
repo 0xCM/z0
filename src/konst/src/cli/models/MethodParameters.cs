@@ -13,7 +13,7 @@ namespace Z0
 
     public readonly struct MethodParameters : ITextual
     {
-        public readonly MethodParameter[] Index;
+        public readonly TableSpan<MethodParameter> Index;
 
         [MethodImpl(Inline)]
         public static implicit operator MethodParameters(MethodParameter[] src)
@@ -29,8 +29,13 @@ namespace Z0
 
         public string Format(bool fence)
         {
-            var content = string.Join(", ", Index.Select(x => x.Format()));
-            return fence ?  (Chars.LParen + content + Chars.RParen) : content;
+            if(Index.IsNonEmpty)
+            {
+                var content = string.Join(", ", Index.Storage. Select(x => x.Format()));
+                return fence ?  (Chars.LParen + content + Chars.RParen) : content;
+            }
+            else
+                return EmptyString;
         }
 
         public string Format()

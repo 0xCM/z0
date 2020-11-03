@@ -11,21 +11,21 @@ namespace Z0
     /// </summary>
     public class ServerAgent : SystemAgent
     {
-        public static ServerAgent create(AgentContext context, ServerConfig config)
+        public static ServerAgent create(IAgentContext context, ServerConfig config)
             => new ServerAgent(context, config);
 
         ServerConfig Config {get;}
 
         ServerProcess Worker {get; }
 
-        ServerAgent(AgentContext Context, ServerConfig Config)
+        internal ServerAgent(IAgentContext Context, ServerConfig Config)
             : base(Context, (Config.ServerId, 0u))
         {
             this.Config = Config;
             var hearbeat = PulseEmitter.create(Context,
                 ServiceIdentityPool.NextAgentId(ServerId),
                 new PulseEmitterConfig(new TimeSpan(0,0,1)));
-            this.Worker = ServerProcess.Define(Context, ServerId, Config.CoreNumber, new ISystemAgent[]{hearbeat});
+            this.Worker = ServerProcess.create(Context, ServerId, Config.CoreNumber, new ISystemAgent[]{hearbeat});
         }
 
         protected override async void OnStart()

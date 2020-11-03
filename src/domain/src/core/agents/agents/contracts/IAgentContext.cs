@@ -12,5 +12,7 @@ namespace Z0
         IEnumerable<ISystemAgent> Members {get;}
 
         IAgentEventSink EventLog {get;}
+
+        void Register(ISystemAgent agent);
     }
 }

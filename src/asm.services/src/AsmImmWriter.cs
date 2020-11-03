@@ -49,7 +49,7 @@ namespace Z0.Asm
         public Option<FilePath> SaveHexImm(OpIdentity id, AsmRoutine[] src, bool append)
         {
             var path = HostArchive.HexImmPath(Uri.Owner, Uri, id);
-            ApiCodeBlocks.save(src.Map(x => x.Code), FS.path(path.Name),append);
+            ApiCode.save(src.Map(x => x.Code), FS.path(path.Name),append);
             return path;
         }
     }

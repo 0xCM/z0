@@ -12,11 +12,10 @@ namespace Z0
     /// </summary>
     public abstract class EventEmitter<E> : SourcedEventEmitter
     {
-        protected EventEmitter(AgentContext Context, AgentIdentity Identity)
+        protected EventEmitter(IAgentContext Context, AgentIdentity Identity)
             :base(Context,Identity)
         {
-            
-        }
 
+        }
     }
 }

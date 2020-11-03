@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct DirectiveIdentity : IModelIdentity<DirectiveIdentity>
+    public readonly struct DirectiveIdentity
     {
         readonly Vector128<uint> Components;
 
@@ -54,7 +54,7 @@ namespace Z0
         }
     }
 
-    public readonly struct ActorIdentity: IModelIdentity<ActorIdentity>
+    public readonly struct ActorIdentity
     {
         [MethodImpl(Inline)]
         public static implicit operator ActorIdentity(in ConstQuad<ClrArtifactKey> src)

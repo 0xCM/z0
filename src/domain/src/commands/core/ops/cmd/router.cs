@@ -13,7 +13,7 @@ namespace Z0
     partial struct Cmd
     {
         [Op]
-        public static ICmdRouter router(IWfShell wf, params CmdHandler[] handlers)
-            => new CmdRouter(wf, handlers);
+        public static ICmdRouter router(IWfShell wf, params CmdWorker[] workers)
+            => new CmdRouter(wf, workers);
     }
 }

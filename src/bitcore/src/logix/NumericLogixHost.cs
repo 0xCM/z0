@@ -43,7 +43,7 @@ namespace Z0
         where T : unmanaged;
 
     [ApiHost]
-    public readonly struct NumericLogixHost : IApiHost<NumericLogixHost>
+    public readonly struct NumericLogixHost
     {
         /// <summary>
         /// Advertises the supported unary bitlogic operators

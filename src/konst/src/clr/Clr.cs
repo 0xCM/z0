@@ -18,9 +18,19 @@ namespace Z0
         public static CliSig sig(MethodInfo src)
             => new CliSig(src.Module.ResolveSignature(src.MetadataToken));
 
-        [MethodImpl(Inline), Op]
+        [Op]
         public static CliSig sig(Type src)
-            => new CliSig(src.Module.ResolveSignature(src.MetadataToken));
+        {
+            var module = src.Module;
+            try
+            {
+                return new CliSig(module.ResolveSignature(src.MetadataToken));
+            }
+            catch(Exception)
+            {
+                throw new AppException(AppMsg.error($"Signature resolution failure: The signature of the type {src.AssemblyQualifiedName} was not found in the module {src.Module}"));
+            }
+        }
 
         [MethodImpl(Inline), Op]
         public static CliSig sig(FieldInfo src)

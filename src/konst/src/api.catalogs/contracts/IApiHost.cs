@@ -28,12 +28,4 @@ namespace Z0
         MethodInfo[] DeclaredMethods
             => HostType.DeclaredMethods();
     }
-
-    [Free]
-    public interface IApiHost<F> : IApiHost
-        where F : IApiHost<F>, new()
-    {
-        Type IApiHost.HostType
-            => typeof(F);
-    }
 }

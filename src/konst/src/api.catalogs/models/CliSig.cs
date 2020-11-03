@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Defines a cli signature
     /// </summary>
-    public readonly struct CliSig : ITextual
+    public readonly struct CliSig : ITextual, IComparable<CliSig>
     {
         public BinaryCode Data {get;}
 
@@ -46,7 +46,10 @@ namespace Z0
             => Format();
 
         public bool Equals(ApiSig src)
-            => Data.Equals(src.Member);
+            => Data.Equals(src.MemberSig);
+
+        public int CompareTo(CliSig src)
+            => Data.CompareTo(src.Data);
 
         public override bool Equals(object obj)
             => obj is ApiSig s && Equals(s);

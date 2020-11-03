@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Encoded x86 bytes extracted from a memory source
     /// </summary>
-    public readonly struct BinaryCode : IEncoded<BinaryCode,byte[]>
+    public readonly struct BinaryCode : IEncoded<BinaryCode,byte[]>, IComparable<BinaryCode>
     {
         /// <summary>
         /// The encoded bytes
@@ -134,6 +134,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public EncodedStream Stream()
             => new EncodedStream(this);
+
+        public int CompareTo(BinaryCode src)
+            => View.SequenceCompareTo(src.View);
 
         [MethodImpl(Inline)]
         public static implicit operator BinaryCode(Span<byte> src)

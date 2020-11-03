@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct KindIdentity : IModelIdentity<KindIdentity>
+    public readonly struct KindIdentity
     {
         [MethodImpl(Inline)]
         public static implicit operator KindIdentity(in Pair<ClrArtifactKey> src)

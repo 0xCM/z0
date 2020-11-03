@@ -30,7 +30,6 @@ namespace Z0
         {
             using var runner = new Runner(wf);
             runner.Run();
-
         }
     }
 

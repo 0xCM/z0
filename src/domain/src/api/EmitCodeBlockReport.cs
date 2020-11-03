@@ -50,8 +50,8 @@ namespace Z0
         public void Run()
         {
             var dst = Wf.Db().Table("apihex.index");
-            Descriptors = ApiData.BlockDescriptors(Wf);
-            EmissionCount = ApiData.emit(Descriptors.Storage, dst);
+            Descriptors = ApiCode.BlockDescriptors(Wf);
+            EmissionCount = ApiCode.emit(Descriptors.Storage, dst);
             Wf.EmittedTable<CodeBlockDescriptor>(EmissionCount, dst);
         }
     }

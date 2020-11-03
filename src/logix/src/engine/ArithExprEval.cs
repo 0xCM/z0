@@ -15,7 +15,7 @@ namespace Z0.Logix
     using UAR = UnaryArithmeticApiKey;
 
     [ApiHost("expr.arith.eval")]
-    public class ArithExprEval : IApiHost<ArithExprEval>
+    public class ArithExprEval
     {
 
         [Op, NumericClosures(UnsignedInts)]

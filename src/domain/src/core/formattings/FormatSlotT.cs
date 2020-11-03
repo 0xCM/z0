@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// Represents a slot within a format pattern
     /// </summary>
-    public readonly struct FormatSlot
+    public readonly struct FormatSlot<T>
     {
         public byte Position {get;}
 
@@ -24,6 +24,10 @@ namespace Z0
             Position = pos;
             Pattern = pattern;
         }
+
+        [MethodImpl(Inline)]
+        public string Format(T arg)
+            => Pattern.Format(arg);
 
         public bool IsEmpty
         {
@@ -44,15 +48,15 @@ namespace Z0
         }
 
        [MethodImpl(Inline)]
-       public static implicit operator FormatSlot(Paired<byte,string> src)
-            => new FormatSlot(src.Left, src.Right);
+       public static implicit operator FormatSlot<T>(Paired<byte,string> src)
+            => new FormatSlot<T>(src.Left, src.Right);
 
        [MethodImpl(Inline)]
-       public static implicit operator FormatSlot((byte pos, string pattern) src)
-            => new FormatSlot(src.pos, src.pattern);
+       public static implicit operator FormatSlot<T>((byte pos, string pattern) src)
+            => new FormatSlot<T>(src.pos, src.pattern);
 
        [MethodImpl(Inline)]
-       public static implicit operator FormatSlot((byte pos, FormatPattern pattern) src)
-            => new FormatSlot(src.pos, src.pattern);
+       public static implicit operator FormatSlot<T>((byte pos, FormatPattern pattern) src)
+            => new FormatSlot<T>(src.pos, src.pattern);
     }
 }

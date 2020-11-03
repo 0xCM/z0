@@ -10,24 +10,17 @@ namespace Z0
     using static Konst;
     using static RP;
 
-    public struct EmitHostCodeBlockSpec
-    {
-        public ApiHostUri ApiHost;
-
-        public ApiMemberCodeBlocks Source;
-    }
-
     public struct EmitHostCodeBlockPayload
     {
         public ApiParseBlock[] Emitted;
     }
 
     [WfHost]
-    public sealed class EmitHostHex : WfHost<EmitHostHex,EmitHostCodeBlockSpec,EmitHostCodeBlockPayload>
+    public sealed class EmitHostHex : WfHost<EmitHostHex,EmitHostHexCmd,EmitHostCodeBlockPayload>
     {
         public static ref EmitHostCodeBlockPayload run(IWfShell wf, ApiHostUri uri, in ApiMemberCodeBlocks src, out EmitHostCodeBlockPayload payload)
         {
-            var spec = new EmitHostCodeBlockSpec();
+            var spec = new EmitHostHexCmd();
             spec.ApiHost = uri;
             spec.Source = src;
             var host = create();
@@ -35,7 +28,7 @@ namespace Z0
             return ref payload;
         }
 
-        protected override ref EmitHostCodeBlockPayload Execute(IWfShell wf, in EmitHostCodeBlockSpec spec, out EmitHostCodeBlockPayload dst)
+        protected override ref EmitHostCodeBlockPayload Execute(IWfShell wf, in EmitHostHexCmd spec, out EmitHostCodeBlockPayload dst)
         {
             dst = default;
             using var step = new EmitHostHexStep(wf, this, spec);
@@ -51,12 +44,12 @@ namespace Z0
 
         readonly WfHost Host;
 
-        readonly EmitHostCodeBlockSpec Spec;
+        readonly EmitHostHexCmd Spec;
 
         public ApiParseBlock[] Emitted;
 
         [MethodImpl(Inline)]
-        public EmitHostHexStep(IWfShell wf, WfHost host, EmitHostCodeBlockSpec spec)
+        public EmitHostHexStep(IWfShell wf, WfHost host, EmitHostHexCmd spec)
         {
             Host = host;
             Wf = wf.WithHost(Host);

@@ -13,7 +13,7 @@ namespace Z0
     using static Circuits;
 
     [ApiHost]
-    public readonly struct HalfAdder : IApiHost<HalfAdder>, IHalfAdder
+    public readonly struct HalfAdder : IHalfAdder
     {
         [MethodImpl(Inline), Op]
         public ConstPair<Bit32> Invoke(Bit32 a, Bit32 b)

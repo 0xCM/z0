@@ -18,8 +18,32 @@ namespace Z0
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
     [ApiHost(ApiNames.ApiQuery, true)]
-    public readonly partial struct ApiQuery
+    public readonly struct ApiQuery
     {
+        [Op]
+        public static ApiHostInfo host(Type tHost)
+        {
+            var ass = tHost.Assembly;
+            var part = id(ass);
+            var u = uri(tHost);
+            var methods = tHost.DeclaredMethods();
+            return new ApiHostInfo(tHost, u, part, methods);
+        }
+
+        /// <summary>
+        /// Describes an api host
+        /// </summary>
+        /// <param name="part">The defining part</param>
+        /// <param name="tHost">The reifying type</param>
+        [Op]
+        public static ApiHost host(PartId part, Type tHost)
+        {
+            var attrib = tHost.Tag<ApiHostAttribute>();
+            var name =  text.ifempty(attrib.MapValueOrDefault(a => a.HostName, tHost.Name), tHost.Name).ToLower();
+            var uri = new ApiHostUri(part, name);
+            return new ApiHost(tHost, name, part, uri);
+        }
+
         [MethodImpl(Inline), Op]
         public static ApiPartCatalogQuery catalog(IApiPartCatalog src)
             => new ApiPartCatalogQuery(src);
@@ -196,30 +220,6 @@ namespace Z0
         public static ApiHostInfo host<H>()
             => host(typeof(H));
 
-        [Op]
-        public static ApiHostInfo host(Type t)
-        {
-            var ass = t.Assembly;
-            var part = id(ass);
-            var u = uri(t);
-            var methods = t.DeclaredMethods();
-            return new ApiHostInfo(t, u, part, methods);
-        }
-
-        /// <summary>
-        /// Describes an api host
-        /// </summary>
-        /// <param name="part">The defining part</param>
-        /// <param name="t">The reifying type</param>
-        [Op]
-        public static ApiHost host(PartId part, Type t)
-        {
-            var attrib = t.Tag<ApiHostAttribute>();
-            var name =  text.ifempty(attrib.MapValueOrDefault(a => a.HostName, t.Name),t.Name).ToLower();
-            var uri = new ApiHostUri(part, name);
-            return new ApiHost(t, name, part, uri);
-        }
-
         /// <summary>
         /// Determines the api host that owns the file, if any
         /// </summary>
@@ -275,7 +275,6 @@ namespace Z0
                let t = c.SystemType()
                where t != typeof(void)
                select t;
-
 
         [Op]
         static Exception DuplicateKeyException(IEnumerable<object> keys, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
@@ -338,32 +337,6 @@ namespace Z0
         [Op]
         static ApiOpIndex<ApiCodeBlock> CodeBlockIndex(ApiCodeBlock[] src)
             => index(src.Select(x => (x.OpUri.OpId, x)));
-
-        /// <summary>
-        /// Determines the api host that owns the file, if any
-        /// </summary>
-        /// <param name="src">The source file</param>
-        [Op]
-        static Option<ApiHostUri> host(FS.FilePath src)
-            => host(src.FileName);
-
-        [Op]
-        static ApiPartSet components(FS.FolderPath src)
-            => new ApiPartSet(src);
-
-        [Op]
-        static IEnumerable<MethodInfo> DirectApiMethods(IApiHost src)
-            => from m in src.HostType.DeclaredMethods().NonGeneric()
-                where m.Tagged<OpAttribute>() && !m.AcceptsImmediate()
-                select m;
-
-        [Op]
-        static IEnumerable<MethodInfo> GenericApiMethods(IApiHost src)
-                => from m in src.HostType.DeclaredMethods().OpenGeneric(1)
-                    where m.Tagged<OpAttribute>()
-                    && m.Tagged<ClosuresAttribute>()
-                    && !m.AcceptsImmediate()
-                    select m;
 
         /// <summary>
         /// Creates an operation index from an api member span, readonly that is

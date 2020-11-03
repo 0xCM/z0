@@ -17,6 +17,7 @@ namespace Z0
         public static CmdResult run(IWfShell wf)
             => run(wf, wf.CmdBuilder().EmitAsmOpCodes());
 
+        [CmdWorker]
         public static CmdResult run(IWfShell wf, in EmitAsmOpCodesCmd spec)
         {
             var data = AsmOpCodes.dataset().Entries;

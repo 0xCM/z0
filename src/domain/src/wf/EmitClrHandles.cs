@@ -23,7 +23,8 @@ namespace Z0
             step.Run();
         }
 
-        public static void run(IWfShell wf)
+        [CmdWorker]
+        public static CmdResult run(IWfShell wf, EmitClrHandlesCmd cmd)
         {
             wf.Db().Clear(HandleRecord.TableId);
             var components = wf.Api.Components;
@@ -31,6 +32,7 @@ namespace Z0
             {
                 EmitClrHandles.create().Run(wf, component);
             }
+            return new CmdResult(cmd, true);
         }
     }
 

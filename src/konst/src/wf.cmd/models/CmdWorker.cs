@@ -14,16 +14,17 @@ namespace Z0
     {
         readonly CmdWorkerFunction Fx;
 
+        public CmdId CmdId {get;}
+
         [MethodImpl(Inline)]
-        public CmdWorker(CmdWorkerFunction fx)
-            => Fx = fx;
+        public CmdWorker(CmdId id, CmdWorkerFunction fx)
+        {
+            CmdId = id;
+            Fx = fx;
+        }
 
         [MethodImpl(Inline)]
         public CmdResult Invoke(IWfShell wf, CmdSpec cmd)
             => Fx(wf,cmd);
-
-        [MethodImpl(Inline)]
-        public static implicit operator CmdWorker(CmdWorkerFunction fx)
-            => new CmdWorker(fx);
     }
 }

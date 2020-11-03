@@ -8,13 +8,13 @@ namespace Z0
      using System.Runtime.CompilerServices;
 
     [ApiHost("api")]
-    public partial class BitMatrix : IApiHost<BitMatrix>
+    public partial class BitMatrix
     {
         const NumericKind Closure = NumericKind.UnsignedInts;
     }
 
     [ApiHost("logix")]
-    public partial class SquareBitLogix : IApiHost<SquareBitLogix>
+    public partial class SquareBitLogix
     {
 
     }
@@ -23,7 +23,7 @@ namespace Z0
     /// Defines primary api surface for rowbit manipulation
     /// </summary>
     [ApiHost]
-    public partial class RowBits : IApiHost<RowBits>
+    public partial class RowBits
     {
 
     }

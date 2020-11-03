@@ -4,30 +4,31 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
     using System.Runtime.InteropServices;
+    using System.Reflection;
+
+    using static Konst;
+    using static z;
 
     partial struct ApiDataModel
     {
         [StructLayout(LayoutKind.Sequential)]
-        public struct ApiMemberEntity
+        public struct RuntimeMember
         {
             public MemoryAddress Address;
 
-            public ApiMetadataUri MetaUri;
+            public ApiMetadataUri Uri;
 
-            public ApiHostUri Host;
+            public GenericState Genericity;
 
-            public ApiOpId ApiKind;
+            public MethodMetadata Metadata;
+
+            public ApiSig Sig;
 
             public CilMethod Cil;
-        }
 
-        [StructLayout(LayoutKind.Sequential)]
-        public struct ApiHostMemberEntities
-        {
-            public ApiHostUri Host;
-
-            public TableSpan<ApiMemberEntity> Members;
+            public MachineFunction x86Fx;
         }
     }
 }

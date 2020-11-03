@@ -18,7 +18,7 @@ namespace Z0
                 => new CmdWorker<C>(fx);
 
         [MethodImpl(Inline), Op]
-        public static CmdWorker worker(CmdWorkerFunction fx)
-            => new CmdWorker(fx);
+        public static CmdWorker worker(CmdId id, CmdWorkerFunction fx)
+            => new CmdWorker(id, fx);
     }
 }

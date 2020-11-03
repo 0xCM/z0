@@ -139,8 +139,7 @@ namespace Z0
         [Op]
         public void Run()
         {
-            var hosts = CmdRunners.discover(Parts.Domain.Assembly);
-            Wf.Status($"Found {hosts.Length} hosts");
+
         }
     }
 

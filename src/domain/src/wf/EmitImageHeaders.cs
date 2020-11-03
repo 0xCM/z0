@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.IO;
+    using System.Runtime.CompilerServices;
 
     using PEReader = System.Reflection.PortableExecutable.PEReader;
 
@@ -14,7 +15,17 @@ namespace Z0
 
     public sealed class EmitImageHeaders : CmdHost<EmitImageHeaders, EmitImageHeadersCmd>
     {
-        public static CmdResult run(IWfShell wf, in EmitImageHeadersCmd spec)
+        [MethodImpl(Inline)]
+        public static EmitImageHeadersCmd specify(IWfShell wf, FS.FilePath[] src, FS.FilePath dst)
+        {
+            var cmd = new EmitImageHeadersCmd();
+            cmd.Sources = src;
+            cmd.Target = dst;
+            return cmd;
+        }
+
+        [CmdWorker]
+        public static CmdResult run(IWfShell wf, EmitImageHeadersCmd spec)
         {
             var total = Count.Zero;
             var formatter = TableRows.formatter<ImageSectionHeader>(ImageSectionHeader.RenderWidths);

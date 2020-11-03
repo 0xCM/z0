@@ -9,8 +9,8 @@ namespace Z0
 
     using static Konst;
 
-    [ApiHost("bitvectors")]
-    public readonly struct BvServices : IApiHost<BvServices>
+    [ApiHost("bitvectors.services")]
+    public readonly struct BvServices
     {
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public BitVector<T> add<T>(BitVector<T> x, BitVector<T> y)

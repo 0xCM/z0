@@ -11,7 +11,7 @@ namespace Z0
 
     /// <summary>
     /// Uniquely identifies an agent throughout a server complex
-    /// </summary>    
+    /// </summary>
     public readonly struct AgentIdentity
     {
         /// <summary>
@@ -42,7 +42,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator AgentIdentity((uint server, uint agent) src)
             => new AgentIdentity(src.server,src.agent);
-        
+
         [MethodImpl(Inline)]
         public static implicit operator ulong(AgentIdentity identity)
             => identity.Identifier;
@@ -66,7 +66,7 @@ namespace Z0
         {
             server = ServerId;
             agent = AgentId;
-        }    
+        }
 
         public override string ToString()
             => $"{ServerId}/{AgentId}";

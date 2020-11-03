@@ -27,6 +27,7 @@ namespace Z0
 
         public void Dispose()
         {
+            Wf.Disposed();
         }
 
 
@@ -38,7 +39,6 @@ namespace Z0
             var libs = archive.StaticLibs().Array();
             var managed = archive.Files().Where(f => f.IsManaged).Array();
             var modules = managed;
-
 
             Emit(tool.Script("dumpbin.headers",  DumpBin.CmdId.EmitHeaders, modules));
             Emit(tool.Script("dumpbin.exports",  DumpBin.CmdId.EmitExports, modules));
@@ -52,25 +52,15 @@ namespace Z0
         void Emit(CmdScript script)
         {
             Wf.EmittedFile(script.GetType(), script.Length, Cmd.enqueue(Cmd.job(script.Id, script), Wf.Db()));
-
         }
 
         public void Run()
         {
-
             using var flow = Wf.Running();
             var cmd = Wf.CmdCatalog.EmitRuntimeIndex();
             var worker = cmd.Worker();
             var result  = worker.Invoke(Wf, cmd);
             Wf.Status(result);
-
-            //SequenceParserCases.create(Wf).Run();
         }
-
-    }
-
-    public readonly struct CmdScriptBuilder
-    {
-
     }
 }

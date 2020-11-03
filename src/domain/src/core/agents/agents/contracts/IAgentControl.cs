@@ -7,13 +7,12 @@ namespace Z0
     using System;
     using System.Threading.Tasks;
 
-
     /// <summary>
     /// Defines a means by which agents can be queried and directed
     /// </summary>
     public interface IAgentControl : IDisposable
     {
-        AgentStats SummaryStats {get;}        
+        AgentStats SummaryStats {get;}
 
         Task Configure(IAgentContext config);
     }
@@ -27,6 +26,6 @@ namespace Z0
         Task IAgentControl.Configure(IAgentContext context)
             => Configure(context);
 
-        event Action<C> Configured;        
+        event Action<C> Configured;
     }
 }

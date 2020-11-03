@@ -3,8 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
-
+{
     public partial class CreditTypes
     {
 
@@ -14,7 +13,7 @@ namespace Z0
     /// Defines document reference specification operations
     /// </summary>
     [ApiHost]
-    public partial class Credits : IApiHost<Credits>
+    public partial class Credits
     {
 
     }

@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Collections.Concurrent;
 
+    using System.Reflection;
     using static Konst;
     using static z;
 
@@ -16,38 +17,26 @@ namespace Z0
 
         readonly IWfShell Wf;
 
-        readonly ConcurrentDictionary<CmdId,CmdHandler> Handlers;
+        readonly ConcurrentDictionary<CmdId,CmdWorker> Handlers;
 
-        readonly ConcurrentDictionary<CmdId,ICmdRunner> Runners;
-
-        internal CmdRouter(IWfShell wf, params CmdHandler[] handlers)
+        internal CmdRouter(IWfShell wf, params CmdWorker[] handlers)
         {
             Host = WfSelfHost.create();
             Wf = wf.WithHost(Host);
-            Handlers = new ConcurrentDictionary<CmdId, CmdHandler>();
+            Handlers = new ConcurrentDictionary<CmdId, CmdWorker>();
             Enlist(handlers);
-
-            var runners = CmdRunners.discover(Parts.Domain.Assembly);
-            var lookup = new ConcurrentDictionary<CmdId,ICmdRunner>();
-            iter(runners, r => lookup.TryAdd(r.CmdId, r));
-            Runners = lookup;
         }
 
-        public void Enlist(params CmdHandler[] src)
-            => iter(src,cmd => Handlers.TryAdd(cmd.Id,cmd));
+        public void Enlist(params CmdWorker[] src)
+            => iter(src,cmd => Handlers.TryAdd(cmd.CmdId, cmd));
+
 
         public CmdResult Dispatch(CmdSpec cmd)
         {
             try
             {
-                if(Runners.TryGetValue(cmd.Id, out var runner))
-                {
-                    return Cmd.win(cmd.Id);
-                }
-                else if(Handlers.TryGetValue(cmd.Id, out var handler))
-                {
-                    return handler.Exec(cmd);
-                }
+                if(Handlers.TryGetValue(cmd.Id, out var handler))
+                    return handler.Invoke(Wf,cmd);
                 else
                 {
                     Wf.Error(WfEvents.missing(cmd.Id));
@@ -58,6 +47,44 @@ namespace Z0
             {
                 Wf.Error(e);
                 return Cmd.fail(cmd.Id);
+            }
+        }
+
+        public static CmdWorkers discover(IWfShell wf)
+        {
+            var nodes = @readonly(wf.Components);
+            var count = nodes.Length;
+            for(var i=0; i<count; i++)
+                Visit(skip(nodes,i));
+            return default;
+        }
+
+        static void Visit(Assembly src)
+        {
+            var nodes = @readonly(src.GetTypes());
+            var count = nodes.Length;
+            for(var i=0; i<count; i++)
+                Visit(skip(nodes,i));
+        }
+
+        static void Visit(Type src)
+        {
+            var nodes = @readonly(src.StaticMethods());
+            var count = nodes.Length;
+            for(var i=0; i<count; i++)
+                Visit(skip(nodes,i));
+        }
+
+        static void Visit(MethodInfo src)
+        {
+            if(src.Tagged<CmdWorkerAttribute>() && src.IsStatic)
+            {
+                var pTypes = src.ParameterTypes();
+                if(pTypes.Length == 2 && pTypes[0].Reifies<IWfShell>())
+                {
+                    var cType = pTypes[1];
+                    var dType = typeof(CmdWorkerFunction<>).MakeGenericType(cType);
+                }
             }
         }
     }
