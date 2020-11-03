@@ -12,19 +12,18 @@ namespace Z0
     using static Konst;
     using static z;
 
-    [ApiHost]
-    public readonly struct CliSigs
+    public readonly struct Clr
     {
         [MethodImpl(Inline), Op]
-        public static CliSig resolve(MethodInfo src)
+        public static CliSig sig(MethodInfo src)
             => new CliSig(src.Module.ResolveSignature(src.MetadataToken));
 
         [MethodImpl(Inline), Op]
-        public static CliSig resolve(Type src)
+        public static CliSig sig(Type src)
             => new CliSig(src.Module.ResolveSignature(src.MetadataToken));
 
         [MethodImpl(Inline), Op]
-        public static CliSig resolve(FieldInfo src)
+        public static CliSig sig(FieldInfo src)
             => new CliSig(src.Module.ResolveSignature(src.MetadataToken));
     }
 }

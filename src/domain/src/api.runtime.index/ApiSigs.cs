@@ -20,19 +20,19 @@ namespace Z0
 
         [Op]
         public static ApiSig define(MethodInfo src)
-            =>  new ApiSig(ClrArtifactKind.Method, CliSigs.resolve(src));
+            =>  new ApiSig(ClrArtifactKind.Method, Clr.sig(src));
 
         [Op]
         public static ApiSig define(Type src)
-            => new ApiSig(ClrArtifactKind.Type, CliSigs.resolve(src));
+            => new ApiSig(ClrArtifactKind.Type, Clr.sig(src));
 
         [Op]
         public static ApiSig define(FieldInfo src)
-            => new ApiSig(ClrArtifactKind.Field, CliSigs.resolve(src));
+            => new ApiSig(ClrArtifactKind.Field, Clr.sig(src));
 
         [Op]
         public static ApiSig define(PartId part, Type host, MethodInfo src)
-            => new ApiSig(ClrArtifactKind.Method, CliSig.Empty, CliSigs.resolve(host), CliSigs.resolve(src));
+            => new ApiSig(ClrArtifactKind.Method, CliSig.Empty, Clr.sig(host), Clr.sig(src));
 
         // /// <summary>
         // /// Creates a sequence of bytes conforming to the pattern [bytes(value(t:T)) {32 zero bits} ClrSig]
