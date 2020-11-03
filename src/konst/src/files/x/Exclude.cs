@@ -9,9 +9,9 @@ namespace Z0
 
     using static Konst;
 
-    partial class XTendFS
+    partial class XFs
     {
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static FS.FilePath[] Exclude(this FS.FilePath[] src, string match)
             => FS.exclude(src,match);
     }

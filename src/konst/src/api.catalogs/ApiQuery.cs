@@ -25,8 +25,8 @@ namespace Z0
             => new ApiPartCatalogQuery(src);
 
         [MethodImpl(Inline), Op]
-        public static ApiHostMemberQuery host(IApiHost host)
-            => new ApiHostMemberQuery(host);
+        public static ApiHostQuery host(IApiHost host)
+            => new ApiHostQuery(host);
 
         [MethodImpl(Inline), Op]
         public static ApiQueries over(ApiMembers src)

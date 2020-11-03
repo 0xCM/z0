@@ -380,17 +380,25 @@ namespace Z0
 
         public void Run()
         {
-            Wf.Running();
 
-            //Wf.Rows(Blm32u.Addresses);
 
-            var counts = FixedBuffer256<byte>.fetch();
-            var dst = list<byte>();
-            counts.Enumerate(c => dst.Add(c));
-            Wf.Status(counts.BufferAddress);
-            Wf.Status(delimit(dst));
+            var api = Wf.Api;
+            var catalogs = api.Catalogs;
+            if(catalogs.Terms.Length == 0)
+                Wf.Warn("No catalogs");
 
-            Wf.Ran();
+            foreach(var c in catalogs.Terms)
+            {
+                Wf.Row(delimit(c.PartId, c.ApiHosts.Count));
+            }
+
+            // //Wf.Rows(Blm32u.Addresses);
+
+            // var counts = FixedBuffer256<byte>.fetch();
+            // var dst = list<byte>();
+            // counts.Enumerate(c => dst.Add(c));
+            // Wf.Status(counts.BufferAddress);
+            // Wf.Status(delimit(dst));
 
         }
     }

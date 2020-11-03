@@ -32,9 +32,6 @@ namespace Z0
 
         IEnumerable<IApiHost> PartHosts(params PartId[] parts);
 
-        /// <summary>
-        /// The host-defined operations
-        /// </summary>
         MethodInfo[] Operations {get;}
     }
 }

@@ -10,15 +10,9 @@ namespace Z0
     using static Konst;
     using static z;
 
-    [ApiHost(HostName)]
+    [ApiHost(ApiNames.FS, true)]
     public readonly partial struct FS
     {
-        public const string HostName = "fs";
-    }
 
-    [ApiHost(HostName)]
-    public static partial class XTendFS
-    {
-        public const string HostName = FS.HostName + AsciCharText.Dot + AsciCharText.x;
     }
 }

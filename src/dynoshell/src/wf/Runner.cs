@@ -57,7 +57,14 @@ namespace Z0
 
         public void Run()
         {
-            SequenceParserCases.create(Wf).Run();
+
+            using var flow = Wf.Running();
+            var cmd = Wf.CmdCatalog.EmitRuntimeIndex();
+            var worker = cmd.Worker();
+            var result  = worker.Invoke(Wf, cmd);
+            Wf.Status(result);
+
+            //SequenceParserCases.create(Wf).Run();
         }
 
     }

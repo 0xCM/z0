@@ -4,11 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-
-    using static Konst;
+    using System;
 
     partial struct FS
     {
+        [Flags]
         public enum ChangeKind : byte
         {
             None = 0,
@@ -20,6 +20,6 @@ namespace Z0
             Modified = 4,
 
             Renamed = 8,
-        }                
+        }
     }
 }

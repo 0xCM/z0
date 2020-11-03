@@ -15,6 +15,8 @@ namespace Z0
 
         public readonly AppMsg Message;
 
+        public bool Fail => !Ok;
+
         [MethodImpl(Inline)]
         public static implicit operator Outcome(bool success)
             => new Outcome(success);
@@ -38,6 +40,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool operator false(Outcome src)
             => src.Ok == false;
+
+        [MethodImpl(Inline)]
+        public static implicit operator bool(Outcome src)
+            => src.Ok;
 
         [MethodImpl(Inline)]
         public Outcome(bool success)

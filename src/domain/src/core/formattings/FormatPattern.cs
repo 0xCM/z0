@@ -37,6 +37,10 @@ namespace Z0
             => Content;
 
         [MethodImpl(Inline)]
+        public string Format(params object[] args)
+            => string.Format(Content,args);
+
+        [MethodImpl(Inline)]
         public static implicit operator FormatPattern(string src)
             => new FormatPattern(src);
     }

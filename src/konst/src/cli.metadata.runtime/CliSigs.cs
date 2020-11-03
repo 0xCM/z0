@@ -17,18 +17,14 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static CliSig resolve(MethodInfo src)
-            =>  new CliSig(data(src.Module, src.MetadataToken));
+            => new CliSig(src.Module.ResolveSignature(src.MetadataToken));
 
         [MethodImpl(Inline), Op]
         public static CliSig resolve(Type src)
-            => new CliSig(data(src.Module, src.MetadataToken));
+            => new CliSig(src.Module.ResolveSignature(src.MetadataToken));
 
         [MethodImpl(Inline), Op]
         public static CliSig resolve(FieldInfo src)
-            => new CliSig(data(src.Module, src.MetadataToken));
-
-        [MethodImpl(Inline), Op]
-        internal static byte[] data(Module src, ClrArtifactKey key)
-            => src.ResolveSignature((int)key);
+            => new CliSig(src.Module.ResolveSignature(src.MetadataToken));
     }
 }

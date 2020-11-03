@@ -14,18 +14,18 @@ namespace Z0
     [ApiHost]
     public readonly partial struct ApiFiles
     {
-        public static Dictionary<PartId,PartFile[]> index(ArchiveFileKindId kind, PartFiles src, params PartId[] parts)
+        public static Dictionary<PartId,PartFile[]> index(CoreFileKind kind, PartFiles src, params PartId[] parts)
         {
             switch(kind)
             {
-                case ArchiveFileKindId.Parsed:
-                    return select(ArchiveFileKindId.Parsed, src.Parsed, parts);
+                case CoreFileKind.Parsed:
+                    return select(CoreFileKind.Parsed, src.Parsed, parts);
                 default:
                     return dict<PartId,PartFile[]>();
             }
         }
 
-        static Dictionary<PartId,PartFile[]> select(ArchiveFileKindId kind, FS.Files src, PartId[] parts)
+        static Dictionary<PartId,PartFile[]> select(CoreFileKind kind, FS.Files src, PartId[] parts)
         {
             var partSet = parts.ToHashSet();
             var files = (from f in src

@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.IO;
 
-    partial class XTendFS
+    partial class XFs
     {
         public static StreamWriter Writer(this FS.FilePath dst, bool append)
             => FS.writer(dst, append ? FileWriteMode.Append : FileWriteMode.Overwrite);

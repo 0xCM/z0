@@ -32,8 +32,6 @@ readonly struct ApiNames
 
     public const string ApiTestIdentity = api + dot + identity + dot + tests;
 
-    public const string ApiSigs = api + dot + signatures;
-
     public const string ApiIdentityReflector = api + dot + identity + dot + reflector;
 
     public const string ApiCatalogs = api + dot + catalogs;
@@ -344,4 +342,11 @@ readonly struct ApiNames
     public const string SFxProjectors = sfunc + dot + projectors;
 
     public const string SFxFactories = sfunc + dot + functions + dot + factories;
+
+    const string fs = nameof(fs);
+
+    public const string FS = fs;
+
+    public const string XFs = fs + dot + extensions;
+
 }

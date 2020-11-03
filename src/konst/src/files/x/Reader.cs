@@ -9,12 +9,13 @@ namespace Z0
 
     using static Konst;
 
-    partial class XTend
+    partial class XFs
     {
         /// <summary>
         /// Reads the full content of a text file
         /// </summary>
         /// <param name="src">The file path</param>
+        [Op]
         public static string ReadText(this FS.FilePath src)
             => src.Exists ? File.ReadAllText(src.Name) : EmptyString;
 
@@ -22,6 +23,7 @@ namespace Z0
         /// Reads the line-partitioned content of a text file
         /// </summary>
         /// <param name="src">The file path</param>
+        [Op]
         public static string[] ReadLines(this FS.FilePath src)
             => src.Exists ? File.ReadAllLines(src.Name) : sys.empty<string>();
 
@@ -29,6 +31,7 @@ namespace Z0
         /// Reads the full content of a file into a byte array
         /// </summary>
         /// <param name="src">The file path</param>
+        [Op]
         public static byte[] ReadBytes(this FS.FilePath src)
             => src.Exists ? File.ReadAllBytes(src.Name) : sys.empty<byte>();
 
@@ -36,9 +39,11 @@ namespace Z0
         /// Creates a reader initialized with the source file; caller-disposal required
         /// </summary>
         /// <param name="src">The file path</param>
+        [Op]
         public static StreamReader Reader(this FS.FilePath src)
             => FS.reader(src);
 
+        [Op]
         public static FS.FolderPath Normalize(this FS.FolderPath src)
             => new FS.FolderPath(src.Name.Replace(Chars.BSlash, Chars.FSlash));
     }

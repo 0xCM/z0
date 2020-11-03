@@ -19,7 +19,7 @@ namespace Z0
         public BinaryCode Payload {get;}
 
         [MethodImpl(Inline)]
-        public CmdResult(CmdId id, bit success, byte[] content)
+        public CmdResult(CmdId id, bit success, params byte[] content)
         {
             CmdId = id;
             Payload = content;

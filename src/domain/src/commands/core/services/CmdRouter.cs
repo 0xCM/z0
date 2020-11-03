@@ -50,7 +50,7 @@ namespace Z0
                 }
                 else
                 {
-                    Wf.Error(WfErrors.missing(cmd.Id));
+                    Wf.Error(WfEvents.missing(cmd.Id));
                     return Cmd.fail(cmd.Id);
                 }
             }

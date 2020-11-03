@@ -14,7 +14,7 @@ namespace Z0
     /// Applied to a method to indicate that it can execute a <see cref='CmdSpec'/>
     /// </summary>
     [AttributeUsage(AttributeTargets.Method)]
-    public class CmdWorkerAttribute : Attribute
+    public class CmdWorkerAttribute : OpAttribute
     {
         public CmdWorkerAttribute()
         {

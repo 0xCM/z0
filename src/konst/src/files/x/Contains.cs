@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class XTendFS
+    partial class XFs
     {
         /// <summary>
         /// Determines whether some line of a text file contains a specified substring
@@ -17,6 +17,7 @@ namespace Z0
         /// <param name="file">The source file</param>
         /// <param name="match">The substring to match</param>
         /// <param name="lineNumber">The line number of the first match, if found</param>
+        [Op]
         public static bool Contains(this FS.FilePath file, string match, out uint lineNumber)
         {
             lineNumber = 0u;
@@ -37,6 +38,7 @@ namespace Z0
         /// <param name="file">The source file</param>
         /// <param name="predicate">The adjudicating predicate</param>
         /// <param name="lineNumber">The line number of the first match, if found</param>
+        [Op]
         public static bool Contains(this FS.FilePath file, Func<string,bool> predicate, out uint lineNumber)
         {
             lineNumber = 0u;
@@ -49,7 +51,6 @@ namespace Z0
                     return true;
             }
             return false;
-
         }
     }
 }

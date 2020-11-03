@@ -82,7 +82,7 @@ namespace Z0
             => EmitResData.run(Wf, CmdBuilder.EmitResData(Parts.Tools.Assembly, "res/tools/caselogs", ".log"));
 
         CmdResult EmitFileList()
-            => FileEmissions.exec(EmitFileListCmd.sample(Wf));
+            => FileEmissions.exec(Wf.EmitFileListCmdSample());
 
         CmdResult EmitAsmRefs()
         {

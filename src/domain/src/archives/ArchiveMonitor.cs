@@ -12,10 +12,10 @@ namespace Z0
 
     using CK = FS.ChangeKind;
 
-    public readonly struct ArchiveMonitor : IArchiveMonitor
+    public readonly struct ArchiveMonitor : IFileArchiveMonitor
     {
         [MethodImpl(Inline), Op]
-        public static IArchiveMonitor create(IWfShell wf, FS.FolderPath src, FS.ChangeHandler handler = null, bool recursive = true, string filter = null)
+        public static IFileArchiveMonitor create(IWfShell wf, FS.FolderPath src, FS.ChangeHandler handler = null, bool recursive = true, string filter = null)
             => new ArchiveMonitor(wf, src, handler, recursive, filter);
 
         public FS.FolderPath ArchiveRoot {get;}

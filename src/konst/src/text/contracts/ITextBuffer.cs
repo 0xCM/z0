@@ -9,7 +9,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public interface ITextBuffer : IBuffered<string,string>
+    public interface ITextBuffer : IRenderBuffer<string,string>
     {
         void AppendLine(string src)
         {

@@ -6,8 +6,9 @@ namespace Z0
 {
     using Free =System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    using static ArchiveFolderNames;
+    using static CoreFolderNames;
 
+    [Free]
     public interface IWfPaths : ILogPaths
     {
         /// <summary>
