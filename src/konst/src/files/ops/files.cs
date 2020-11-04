@@ -14,6 +14,10 @@ namespace Z0
     partial struct FS
     {
         [MethodImpl(Inline), Op]
+        public static Files files(params FilePath[] src)
+                => new Files(src);
+
+        [MethodImpl(Inline), Op]
         public static Deferred<FilePath> files(FolderPath src, bool recurse)
             => files(src, "*.*", recurse);
 

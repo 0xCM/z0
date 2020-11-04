@@ -132,7 +132,7 @@ public enum PartId : ulong
 
     Asm = 140,
 
-    AsmCode = 141,
+    External = 141,
 
     Machine = 143,
 

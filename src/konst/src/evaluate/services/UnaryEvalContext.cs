@@ -17,7 +17,7 @@ namespace Z0
         public readonly UnaryEvaluations<T> Target;
 
         [MethodImpl(Inline)]
-        internal UnaryEvalContext(in EvalContext context, in UnaryEvaluations<T> dst)
+        public UnaryEvalContext(in EvalContext context, in UnaryEvaluations<T> dst)
         {
             Demands.insist(dst.Source.Length, dst.Target.PointCount);
             Context = context;

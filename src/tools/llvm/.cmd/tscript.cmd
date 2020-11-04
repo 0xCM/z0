@@ -1,0 +1,1 @@
+npx gluegun new toolscript

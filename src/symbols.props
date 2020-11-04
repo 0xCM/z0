@@ -10,7 +10,10 @@
   <PropertyGroup>
     <Part>$(Src)part/z0.part.csproj</Part>
 
+
     <Derivatives>$(Src)derivatives/z0.derivatives.csproj</Derivatives>
+
+    <External>$(Src)external/project/z0.external.csproj</External>
 
     <Sys>$(Src)sys/z0.sys.csproj</Sys>
     <Domain>$(Src)domain/z0.domain.csproj</Domain>

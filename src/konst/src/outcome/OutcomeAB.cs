@@ -28,7 +28,7 @@ namespace Z0
         public readonly Option<B> Error;
 
         [MethodImpl(Inline)]
-        internal Outcome(bool ok, A data, B error)
+        public Outcome(bool ok, A data, B error)
         {
             Ok = ok;
             if(ok)

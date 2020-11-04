@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Konst)" />
-    <ProjectReference Include="$(Derivatives)" />
     <ProjectReference Include="$(Domain)" />
   </ItemGroup>
 

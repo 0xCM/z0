@@ -27,21 +27,16 @@ namespace Z0
                     Directory.CreateDirectory(dst.Name);
             }
 
-            var result = Try(f);
-            return result.Ok ? dst : FolderPath.Empty;
-        }
-
-        static Outcome<string> Try(Action f)
-        {
             try
             {
                 f();
-                return Eval.success(EmptyString);
+                return dst;
             }
             catch(Exception e)
             {
                 term.error(e);
-                return Eval.fail(e.ToString());
+                return FolderPath.Empty;
+
             }
         }
     }

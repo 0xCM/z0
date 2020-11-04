@@ -49,6 +49,7 @@ namespace Z0
 
             return buffer;
         }
+
         public static CilFunction? decode(R.MethodInfo src)
         {
             var mod = src.DeclaringType.Module;

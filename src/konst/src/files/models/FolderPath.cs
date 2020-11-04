@@ -81,24 +81,32 @@ namespace Z0
             /// Nonrecursively enumerates all files in the folder
             /// </summary>
             public Files AllFiles
-                => Directory.Exists(Name) ? Directory.EnumerateFiles(Name).Map(FS.path) : FS.Files.Empty;
+                => Directory.Exists(Name)
+                ? files(Directory.EnumerateFiles(Name).Map(path))
+                : FS.Files.Empty;
 
             public Files Files(string pattern, bool recurse)
-                => Exists ? Directory.EnumerateFiles(Name, pattern, option(recurse)).Map(f => FS.path(f)) : FS.Files.Empty;
+                => Exists
+                ? files(Directory.EnumerateFiles(Name, pattern, option(recurse)).Map(path))
+                : FS.Files.Empty;
 
             public Files Files(bool recurse)
-                => Exists ? Directory.EnumerateFiles(Name, SearchAll, option(recurse)).Map(f => FS.path(f)) : FS.Files.Empty;
+                => Exists
+                ? files(Directory.EnumerateFiles(Name, SearchAll, option(recurse)).Map(path))
+                : FS.Files.Empty;
 
             public FolderPath[] SubDirs(bool recurse = false)
-                => Directory.Exists(Name) ? Directory.EnumerateDirectories(Name, SearchAll, option(recurse)).Map(x => FS.dir(x)) : sys.empty<FolderPath>();
+                => Directory.Exists(Name)
+                ? Directory.EnumerateDirectories(Name, SearchAll, option(recurse)).Map(dir)
+                : sys.empty<FolderPath>();
 
-            public IEnumerable<FS.FilePath> EnumerateFiles(bool recurse)
+            public IEnumerable<FilePath> EnumerateFiles(bool recurse)
                 => EnumerateFiles(this, recurse);
 
-            public IEnumerable<FS.FilePath> EnumerateFiles(bool recurse, params FileExt[] ext)
+            public IEnumerable<FilePath> EnumerateFiles(bool recurse, params FileExt[] ext)
                 => EnumerateFiles(this, recurse, ext);
 
-            public IEnumerable<FS.FilePath> EnumerateFiles(FileExt ext, bool recurse)
+            public IEnumerable<FilePath> EnumerateFiles(FileExt ext, bool recurse)
                 => EnumerateFiles(this, ext, recurse);
 
             public IEnumerable<FilePath> EnumerateFiles(string pattern, bool recurse)
@@ -167,26 +175,26 @@ namespace Z0
             public static implicit operator Z0.FolderPath(FolderPath src)
                 => Z0.FolderPath.Define(src.Name);
 
-            static FilePath[] Files(FS.FolderPath src, bool recurse, params FileExt[] ext)
+            static FilePath[] Files(FolderPath src, bool recurse, params FileExt[] ext)
                 => ext.SelectMany(x => Directory.EnumerateFiles(src.Name, x.SearchPattern, option(recurse))).Map(FS.path);
 
             static FilePath[] Files(FolderPath src, FileExt ext, bool recurse = false)
                 => src.Exists ? Directory.GetFiles(src.Name, ext.SearchPattern, option(recurse)).Map(FS.path) : sys.empty<FilePath>();
 
-            static IEnumerable<FilePath> EnumerateFiles(FS.FolderPath src, string pattern, bool recurse)
+            static IEnumerable<FilePath> EnumerateFiles(FolderPath src, string pattern, bool recurse)
             {
                 if(src.Exists)
                     foreach(var file in Directory.EnumerateFiles(src.Name, pattern, option(recurse)))
-                        yield return FS.path(file);
+                        yield return path(file);
             }
 
-            static IEnumerable<FilePath> EnumerateFiles(FS.FolderPath src, bool recurse, FileExt[] ext)
+            static IEnumerable<FilePath> EnumerateFiles(FolderPath src, bool recurse, FileExt[] ext)
             {
                 var selected =
                         from x in ext
                         where src.Exists
                         from f in Directory.EnumerateFiles(src.Name, x.SearchPattern, option(recurse))
-                        select  FS.path(f);
+                        select  path(f);
                 return selected;
 
             }
@@ -195,14 +203,14 @@ namespace Z0
             {
                 if(src.Exists)
                     foreach(var file in Directory.GetFiles(src.Name, ext.SearchPattern, option(recurse)))
-                        yield return FS.path(file);
+                        yield return path(file);
             }
 
-            static IEnumerable<FS.FilePath> EnumerateFiles(FS.FolderPath src, bool recurse)
+            static IEnumerable<FilePath> EnumerateFiles(FolderPath src, bool recurse)
             {
                 if(src.Exists)
                     foreach(var file in Directory.EnumerateFiles(src.Name, SearchAll, option(recurse)))
-                        yield return FS.path(file);
+                        yield return path(file);
             }
         }
     }

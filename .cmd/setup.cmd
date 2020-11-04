@@ -26,3 +26,6 @@ echo BuildCmd:%BuildCmd%
 
 set AddCmd=%ScriptDir%\add.cmd
 echo AddCmd:%AddCmd%
+
+set RemoveCmd=%ScriptDir%\remove.cmd
+echo RemoveCmd:%RemoveCmd%
