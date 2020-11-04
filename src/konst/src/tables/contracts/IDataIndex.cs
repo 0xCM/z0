@@ -7,7 +7,9 @@ namespace Z0
     using System;
     using System.Security;
 
-    [SuppressUnmanagedCodeSecurity]
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
+    [Free]
     public interface IDataIndex
     {
         Count Count {get;}
@@ -15,7 +17,7 @@ namespace Z0
         int Length {get;}
     }
 
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public interface IDataIndex<T> : IDataIndex
     {
         T[] Data {get;}

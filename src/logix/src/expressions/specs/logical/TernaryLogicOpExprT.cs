@@ -18,7 +18,7 @@ namespace Z0.Logix
         /// <summary>
         /// The operator kind
         /// </summary>
-        public TernaryBitLogicKind OpKind {get;}
+        public TernaryBitLogicKind ApiClass {get;}
 
         /// <summary>
         /// The first operand
@@ -38,7 +38,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public TernaryLogicOpExpr(TernaryBitLogicKind op, ILogicExpr<T> arg1, ILogicExpr<T> arg2, ILogicExpr<T> arg3)
         {
-            this.OpKind = op;
+            this.ApiClass = op;
             this.FirstArg = arg1;
             this.SecondArg = arg2;
             this.ThirdArg = arg3;
@@ -54,7 +54,7 @@ namespace Z0.Logix
             => ThirdArg;
 
         public string Format()
-            => OpKind.Format(FirstArg,SecondArg,ThirdArg);
+            => ApiClass.Format(FirstArg,SecondArg,ThirdArg);
 
         public override string ToString()
             => Format();

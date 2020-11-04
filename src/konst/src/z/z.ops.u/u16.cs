@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
 
     partial struct z
-    {                
+    {
         /// <summary>
         /// Converts a <see cref='bool'/> to a <see cref='ushort'/>
         /// </summary>

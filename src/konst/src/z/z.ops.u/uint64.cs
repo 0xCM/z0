@@ -36,16 +36,6 @@ namespace Z0
             where T : unmanaged
                 => As<T?, ulong?>(ref src);
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Span<ulong> uint64<T>(Span<T> src)
-            where T : struct
-                => recover<T,ulong>(src);
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ReadOnlySpan<ulong> uint64<T>(ReadOnlySpan<T> src)
-            where T : struct
-                => recover<T,ulong>(src);
-
         /// <summary>
         /// Converts a <see cref='sbyte'/> to a <see cref='ulong'/>
         /// </summary>

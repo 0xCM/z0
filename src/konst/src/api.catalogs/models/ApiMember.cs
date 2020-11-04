@@ -22,7 +22,7 @@ namespace Z0
 
         public MethodInfo Method {get;}
 
-        public ApiOpId ApiKind {get;}
+        public ApiClass ApiKind {get;}
 
         public MemoryAddress Address {get;}
 
@@ -37,7 +37,7 @@ namespace Z0
             => Empty;
 
         [MethodImpl(Inline)]
-        public ApiMember(OpUri uri, MethodInfo method, ApiOpId kindId, MemoryAddress address)
+        public ApiMember(OpUri uri, MethodInfo method, ApiClass kindId, MemoryAddress address)
         {
             Id = uri.OpId;
             OpUri = uri;
@@ -49,7 +49,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public ApiMember(OpUri uri, LocatedMethod method, ApiOpId kindId)
+        public ApiMember(OpUri uri, LocatedMethod method, ApiClass kindId)
         {
             Id = uri.OpId;
             OpUri = uri;

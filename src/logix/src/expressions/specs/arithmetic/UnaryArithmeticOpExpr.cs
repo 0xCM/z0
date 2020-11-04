@@ -10,27 +10,27 @@ namespace Z0.Logix
     /// <summary>
     /// Defines a typed unary arithmetic operator expression
     /// </summary>
-    public readonly struct UnaryAritheticOpExpr<T> : IUnaryArithmeticOpExpr<T>
+    public readonly struct UnaryArithmeticOpExpr<T> : IUnaryArithmeticOpExpr<T>
         where T : unmanaged
     {
         /// <summary>
         /// The operator kind
         /// </summary>
-        public UnaryArithmeticApiKey OpKind {get;}
+        public UnaryArithmeticApiClass ApiClass {get;}
 
         /// <summary>
         /// The operand
         /// </summary>
         public IExpr<T> Arg {get;}
 
-        public UnaryAritheticOpExpr(UnaryArithmeticApiKey op, IExpr<T> operand)
+        public UnaryArithmeticOpExpr(UnaryArithmeticApiClass op, IExpr<T> operand)
         {
-            this.OpKind = op;
+            this.ApiClass = op;
             this.Arg = operand;
         }
 
         public string Format()
-            => OpKind.Format(Arg);
+            => ApiClass.Format(Arg);
 
         public override string ToString()
             => Format();

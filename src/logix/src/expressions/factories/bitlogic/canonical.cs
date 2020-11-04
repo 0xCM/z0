@@ -161,7 +161,6 @@ namespace Z0.Logix
             where T : unmanaged
                 => binary<T>(Or, a, b);
 
-
         /// <summary>
         /// Defines a nor operator over expression operands
         /// </summary>

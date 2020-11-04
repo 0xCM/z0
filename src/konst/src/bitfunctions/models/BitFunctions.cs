@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static Kinds;
 
-    using K = BitFunctionApiKey;
+    using K = BitFunctionApiClass;
     using I = IBitFunctionApiKey;
 
     partial struct BitFunctions

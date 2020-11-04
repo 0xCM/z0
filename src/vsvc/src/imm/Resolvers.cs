@@ -22,10 +22,10 @@ namespace Z0
         public DynamicDelegate<UnaryOp<Vector128<T>>> @delegate(byte count)
             => Dynop.EmbedVUnaryOpImm<T>(K.vk128<T>(), id, gApiMethod(K.vk128<T>(), id.Name),count);
 
-        static string name(ApiOpId k)
+        static string name(ApiClass k)
             => $"v{k.Format()}";
 
-        public DynamicDelegate<UnaryOp<Vector128<T>>> inject(byte imm8, ApiOpId kind)
+        public DynamicDelegate<UnaryOp<Vector128<T>>> inject(byte imm8, ApiClass kind)
             => Dynop.EmbedVUnaryOpImm<T>(K.vk128<T>(),
                 ApiIdentify.build(name(kind), TypeWidth.W128, typeof(T).NumericKind(), true), gApiMethod(K.vk128<T>(), name(kind)),imm8);
 

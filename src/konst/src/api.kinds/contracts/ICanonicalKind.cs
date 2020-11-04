@@ -6,22 +6,22 @@ namespace Z0
 {
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
     using I = ICanonicalKind;
-    using K = CanonicalApiKey;
+    using K = CanonicalApiClass;
 
     [Free]
     public interface ICanonicalKind : IApiKey, IOpKind<K>
     {
         K Kind {get;}
 
-        ApiOpId IApiKey.Id
-            => (ApiOpId)Kind;
+        ApiClass IApiKey.Id
+            => (ApiClass)Kind;
     }
 
     [Free]
     public interface ICanonicalKind<F> : I, IOpKind<F,K>
         where F : unmanaged, I
     {
-        ApiOpId IApiKey.Id
+        ApiClass IApiKey.Id
             => default(F).Id;
     }
 

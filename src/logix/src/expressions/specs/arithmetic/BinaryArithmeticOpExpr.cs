@@ -16,7 +16,7 @@ namespace Z0.Logix
         /// <summary>
         /// The operator kind
         /// </summary>
-        public BinaryArithmeticApiKey OpKind {get;}
+        public BinaryArithmeticApiClass ApiClass {get;}
 
         /// <summary>
         /// The left operand
@@ -28,9 +28,9 @@ namespace Z0.Logix
         /// </summary>
         public IExpr<T> RightArg {get;}
 
-        public BinaryArithmeticOpExpr(BinaryArithmeticApiKey op, IExpr<T> lhs, IExpr<T> rhs)
+        public BinaryArithmeticOpExpr(BinaryArithmeticApiClass op, IExpr<T> lhs, IExpr<T> rhs)
         {
-            this.OpKind = op;
+            this.ApiClass = op;
             this.LeftArg= lhs;
             this.RightArg = rhs;
         }
@@ -39,7 +39,7 @@ namespace Z0.Logix
         /// Renders the expression in canonical form
         /// </summary>
         public string Format()
-            => OpKind.Format(LeftArg, RightArg);
+            => ApiClass.Format(LeftArg, RightArg);
 
         public override string ToString()
             => Format();

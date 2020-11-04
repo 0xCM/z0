@@ -18,7 +18,7 @@ namespace Z0
             GroupName = "";
         }
 
-        public OpAttribute(ApiOpId id)
+        public OpAttribute(ApiClass id)
             : base((ulong)id)
         {
 

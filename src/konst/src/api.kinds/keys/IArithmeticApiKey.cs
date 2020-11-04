@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using K = ArithmeticApiKey;
+    using K = ArithmeticApiClass;
     using I = IArithmeticApiKey;
 
     /// <summary>
@@ -20,8 +20,8 @@ namespace Z0
         NumericKind OperandKind
             => default;
 
-        ApiOpId IApiKey.Id
-            => (ApiOpId)Kind;
+        ApiClass IApiKey.Id
+            => (ApiClass)Kind;
     }
 
     /// <summary>
@@ -31,7 +31,7 @@ namespace Z0
     public interface IArithmeticKind<F> : I, IOpKind<F,K>
         where F : unmanaged, I
     {
-        ApiOpId IApiKey.Id
+        ApiClass IApiKey.Id
             => default(F).Id;
     }
 

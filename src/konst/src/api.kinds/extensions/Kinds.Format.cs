@@ -21,54 +21,54 @@ namespace Z0
                 => kind.Format();
 
         [MethodImpl(Inline), Op]
-        public static string Format(this ComparisonApiKey kind)
+        public static string Format(this ComparisonApiClass kind)
             => kind.ToString().ToLower();
 
         [Op, Closures(Closure)]
-        public static string Format<T>(this ComparisonApiKey kind, T arg1, T arg2)
+        public static string Format<T>(this ComparisonApiClass kind, T arg1, T arg2)
             => $"{kind.Format()}({arg1}, {arg2})";
 
         [Op]
-        public static string Format(this ApiOpId id, bool vectorized)
+        public static string Format(this ApiClass id, bool vectorized)
             => vectorized ? $"v{id.Format()}" : id.Format();
 
         [Op]
-        public static string Format(this ApiOpId? id)
+        public static string Format(this ApiClass? id)
             => id.HasValue ? id.Value.Format() : "unkinded";
 
         [Op]
-        public static string Format(this ArithmeticApiKey key)
+        public static string Format(this ArithmeticApiClass key)
             => key switch {
-                ArithmeticApiKey.Inc => "++",
-                ArithmeticApiKey.Dec => "--",
-                ArithmeticApiKey.Negate => "-",
+                ArithmeticApiClass.Inc => "++",
+                ArithmeticApiClass.Dec => "--",
+                ArithmeticApiClass.Negate => "-",
                 _ => key.ToString()
             };
 
         [Op, Closures(Closure)]
-        public static string Format<T>(this ArithmeticApiKey key, T a, T b)
+        public static string Format<T>(this ArithmeticApiClass key, T a, T b)
             => $"{key.Format()}({a}, {b})";
 
         [Op]
-        public static string Format(this BitShiftApiKey kind)
+        public static string Format(this BitShiftApiClass kind)
             => kind switch {
-                BitShiftApiKey.Sll => "<<",
-                BitShiftApiKey.Srl => ">>",
-                BitShiftApiKey.Rotl => "<<>",
-                BitShiftApiKey.Rotr => ">><",
+                BitShiftApiClass.Sll => "<<",
+                BitShiftApiClass.Srl => ">>",
+                BitShiftApiClass.Rotl => "<<>",
+                BitShiftApiClass.Rotr => ">><",
                 _ => kind.ToString()
             };
 
         [Op]
-        public static string Format<S,T>(this BitShiftApiKey key, S a, T b)
+        public static string Format<S,T>(this BitShiftApiClass key, S a, T b)
             => $"{a} {key.Format()} {b}";
 
         [Op]
-        public static string Format(this BinaryBitLogicApiKey key)
+        public static string Format(this BinaryBitLogicApiClass key)
             => key.ToString().ToLower();
 
         [Op, Closures(Closure)]
-        public static string Format<T>(this BinaryBitLogicApiKey key, T a, T b)
+        public static string Format<T>(this BinaryBitLogicApiClass key, T a, T b)
             => text.format("{0}({1}, {2})", key.Format(), a, b);
     }
 }

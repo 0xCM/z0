@@ -21,6 +21,6 @@ namespace Z0
 
         }
 
-        public ApiOpId Id {get;}
+        public ApiClass Id {get;}
     }
 }

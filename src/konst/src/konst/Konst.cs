@@ -183,7 +183,7 @@ namespace Z0
         /// </summary>
         public static Base16 base16 => default;
 
-        public const OpacityApiKey Opaque = OpacityApiKey.Closure;
+        public const OpacityApiClass Opaque = OpacityApiClass.Closure;
 
         public const string Connector = " -> ";
 

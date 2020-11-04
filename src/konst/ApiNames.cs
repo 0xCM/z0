@@ -308,8 +308,6 @@ readonly struct ApiNames
 
     public const string Listings = collective + dot + listings;
 
-    public const string Seq = collective + dot + seq;
-
     public const string Strings = collective + dot + strings;
 
     public const string Sets = collective + dot + sets;
@@ -345,8 +343,14 @@ readonly struct ApiNames
 
     const string fs = nameof(fs);
 
+    const string map = nameof(map);
+
     public const string FS = fs;
 
     public const string XFs = fs + dot + extensions;
+
+    public const string Seq = seq;
+
+    public const string SeqMap = seq + dot + map;
 
 }

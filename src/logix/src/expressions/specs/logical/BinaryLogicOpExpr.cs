@@ -17,7 +17,7 @@ namespace Z0.Logix
         /// <summary>
         /// The operator kind
         /// </summary>
-        public BinaryBitLogicKind OpKind {get;}
+        public BinaryBitLogicKind ApiClass {get;}
 
         /// <summary>
         /// The left operand
@@ -32,13 +32,13 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public BinaryLogicOpExpr(BinaryBitLogicKind op, ILogicExpr lhs, ILogicExpr rhs)
         {
-            OpKind = op;
+            ApiClass = op;
             LeftArg = lhs;
             RightArg = rhs;
         }
 
         public string Format()
-            => OpKind.Format(LeftArg,RightArg);
+            => ApiClass.Format(LeftArg,RightArg);
 
         public override string ToString()
             => Format();

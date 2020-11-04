@@ -10,135 +10,136 @@ namespace Z0.Logix
 
     using static TypedLogicSpec;
 
-    using KK = BitShiftApiKey;
+    using AK = BitShiftApiClass;
+
     public class t_shift_expr : TypedLogixTest<t_shift_expr>
     {
        // ~ sll
 
         public void sll_8u()
-            => check_op<byte>(KK.Sll);
+            => check_op<byte>(AK.Sll);
 
         public void sll_128x8u()
-            => check_op_128<byte>(KK.Sll);
+            => check_op_128<byte>(AK.Sll);
 
         public void sll_256x8u()
-            => check_op_256<byte>(KK.Sll);
+            => check_op_256<byte>(AK.Sll);
 
         public void sll_32u()
-            => check_op<uint>(KK.Sll);
+            => check_op<uint>(AK.Sll);
 
         public void sll_128x32u()
-            => check_op_128<uint>(KK.Sll);
+            => check_op_128<uint>(AK.Sll);
 
         public void sll_256x32u()
-            => check_op_256<uint>(KK.Sll);
+            => check_op_256<uint>(AK.Sll);
 
         public void sll_64u()
-            => check_op<ulong>(KK.Sll);
+            => check_op<ulong>(AK.Sll);
 
         public void sll_128x64u()
-            => check_op_128<ulong>(KK.Sll);
+            => check_op_128<ulong>(AK.Sll);
 
         public void sll_256x64u()
-            => check_op_256<ulong>(KK.Sll);
+            => check_op_256<ulong>(AK.Sll);
 
         // ~ srl
 
         public void srl_8u()
-            => check_op<byte>(KK.Srl);
+            => check_op<byte>(AK.Srl);
 
         public void srl_128x8u()
-            => check_op_128<byte>(KK.Srl);
+            => check_op_128<byte>(AK.Srl);
 
         public void srl_256x8u()
-            => check_op_256<byte>(KK.Srl);
+            => check_op_256<byte>(AK.Srl);
 
         public void check_srl_32u()
-            => check_op<uint>(KK.Srl);
+            => check_op<uint>(AK.Srl);
 
         public void srl_128x32u()
-            => check_op_128<uint>(KK.Srl);
+            => check_op_128<uint>(AK.Srl);
 
         public void srl_256x32u()
-            => check_op_256<uint>(KK.Srl);
+            => check_op_256<uint>(AK.Srl);
 
         public void check_srl_64u()
-            => check_op<ulong>(KK.Srl);
+            => check_op<ulong>(AK.Srl);
 
         public void srl_128x64u()
-            => check_op_128<ulong>(KK.Srl);
+            => check_op_128<ulong>(AK.Srl);
 
         public void srl_256x64u()
-            => check_op_256<ulong>(KK.Srl);
+            => check_op_256<ulong>(AK.Srl);
 
         // ~ rotl
 
         public void rotl_8u()
-            => check_op<byte>(KK.Rotl);
+            => check_op<byte>(AK.Rotl);
 
         public void rotl_128x8u()
-            => check_op_128<byte>(KK.Rotl);
+            => check_op_128<byte>(AK.Rotl);
 
         public void rotl_256x8u()
-            => check_op_256<byte>(KK.Rotl);
+            => check_op_256<byte>(AK.Rotl);
 
         public void rotl_32u()
-            => check_op<uint>(KK.Rotl);
+            => check_op<uint>(AK.Rotl);
 
         public void rotl_128x32u()
-            => check_op_128<uint>(KK.Rotl);
+            => check_op_128<uint>(AK.Rotl);
 
         public void rotl_256x32u()
-            => check_op_256<uint>(KK.Rotl);
+            => check_op_256<uint>(AK.Rotl);
 
         public void rotl_64u()
-            => check_op<ulong>(KK.Rotl);
+            => check_op<ulong>(AK.Rotl);
 
         public void check_rotl_128x64u()
-            => check_op_128<ulong>(KK.Rotl);
+            => check_op_128<ulong>(AK.Rotl);
 
         public void rotl_256x64u()
-            => check_op_256<ulong>(KK.Rotl);
+            => check_op_256<ulong>(AK.Rotl);
 
         // ~ rotr
 
         public void rotr_8u()
-            => check_op<byte>(KK.Rotr);
+            => check_op<byte>(AK.Rotr);
 
         public void rotr_128x8u()
-            => check_op_128<byte>(KK.Rotr);
+            => check_op_128<byte>(AK.Rotr);
 
         public void rotr_256x8u()
-            => check_op_256<byte>(KK.Rotr);
+            => check_op_256<byte>(AK.Rotr);
 
         public void rotr_16u()
-            => check_op<ushort>(KK.Rotr);
+            => check_op<ushort>(AK.Rotr);
 
         public void rotr_128x16u()
-            => check_op_128<ushort>(KK.Rotr);
+            => check_op_128<ushort>(AK.Rotr);
 
         public void rotr_256x16u()
-            => check_op_256<ushort>(KK.Rotr);
+            => check_op_256<ushort>(AK.Rotr);
 
         public void rotr_32u()
-            => check_op<uint>(KK.Rotr);
+            => check_op<uint>(AK.Rotr);
 
         public void rotr_128x32u()
-            => check_op_128<uint>(KK.Rotr);
+            => check_op_128<uint>(AK.Rotr);
 
         public void rotr_256x32u()
-            => check_op_256<uint>(KK.Rotr);
+            => check_op_256<uint>(AK.Rotr);
 
         public void rotr_64u()
-            => check_op<ulong>(KK.Rotr);
+            => check_op<ulong>(AK.Rotr);
 
         public void rotr_128x64u()
-            => check_op_128<ulong>(KK.Rotr);
+            => check_op_128<ulong>(AK.Rotr);
 
         public void check_rotr_256x64u()
-            => check_op_256<ulong>(KK.Rotr);
+            => check_op_256<ulong>(AK.Rotr);
 
-        void check_op<T>(KK op)
+        void check_op<T>(AK op)
             where T : unmanaged
         {
             var v1 = variable<T>(1);
@@ -155,7 +156,7 @@ namespace Z0.Logix
             }
         }
 
-        void check_op_256<T>(KK op)
+        void check_op_256<T>(AK op)
             where T : unmanaged
         {
             var v1 = variable(1, default(Vector256<T>));
@@ -172,7 +173,7 @@ namespace Z0.Logix
             }
         }
 
-        protected void check_op_128<T>(KK op)
+        protected void check_op_128<T>(AK op)
             where T : unmanaged
         {
             var v1 = variable(1, default(Vector128<T>));

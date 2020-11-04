@@ -7,7 +7,7 @@ namespace Z0
     using System;
 
     using W = DataWidth;
-    using ID = NumericApiKey;
+    using ID = NumericApiClass;
 
     /// <summary>
     /// Classifies system-defined numeric primitive types

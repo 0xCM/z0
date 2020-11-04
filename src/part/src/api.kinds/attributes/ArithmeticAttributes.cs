@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using K = ArithmeticApiKey;
+    using K = ArithmeticApiClass;
     using A = OpKindAttribute;
 
     public sealed class AddAttribute : A { public AddAttribute() : base(K.Add) {} }

@@ -62,7 +62,7 @@ namespace Z0
             var dst = z.vcover<uint>(w128, ref first(src));
             var a = Spans.alloc<uint>(4);
             z.vsave(dst, ref first(a));
-            var b = uint32(src);
+            var b = SeqMap.u32(src);
 
             Claim.eq(a,b);
         }

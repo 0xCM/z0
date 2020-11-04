@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
 
-    using static OpacityApiKey;
+    using static OpacityApiClass;
 
     partial struct proxy
     {

@@ -7,10 +7,10 @@ namespace Z0
     using System.Linq;
     using System.Collections;
     using System.Collections.Generic;
-    using System.Security;
 
-    using static Konst;
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
+    [Free]
     public interface IIndex<T> : IMeasured, IEnumerable<T>
     {
         ref T this[int index] {get;}

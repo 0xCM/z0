@@ -10,15 +10,15 @@ namespace Z0
     /// Characterizes a bitlogic operation classifier
     /// </summary>
     [Free]
-    public interface IBitLogicKind : IApiKey, IOpKind<BinaryBitLogicApiKey>
+    public interface IBitLogicKind : IApiKey, IOpKind<BinaryBitLogicApiClass>
     {
-        BinaryBitLogicApiKey Kind {get;}
+        BinaryBitLogicApiClass Kind {get;}
 
         NumericKind NumericKind
             => default;
 
-        ApiOpId IApiKey.Id
-            => (ApiOpId)Kind;
+        ApiClass IApiKey.Id
+            => (ApiClass)Kind;
     }
 
     /// <summary>
@@ -26,10 +26,10 @@ namespace Z0
     /// </summary>
     /// <typeparam name="F">The reification type</typeparam>
     [Free]
-    public interface IBitLogicKind<F> : IBitLogicKind, IOpKind<F,BinaryBitLogicApiKey>
+    public interface IBitLogicKind<F> : IBitLogicKind, IOpKind<F,BinaryBitLogicApiClass>
         where F : unmanaged, IBitLogicKind
     {
-        ApiOpId IApiKey.Id
+        ApiClass IApiKey.Id
             => default(F).Id;
     }
 
@@ -42,7 +42,7 @@ namespace Z0
     public interface IBitLogicKind<F,T> : IBitLogicKind<F>
         where F : unmanaged, IBitLogicKind
     {
-        BinaryBitLogicApiKey IBitLogicKind.Kind
+        BinaryBitLogicApiClass IBitLogicKind.Kind
             => default(F).Kind;
     }
 }

@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
 
     partial struct z
-    {                
+    {
         [MethodImpl(Inline), Op]
         public static unsafe sbyte i8(bool on)
             => *((sbyte*)(&on));

@@ -19,9 +19,7 @@ namespace Z0.Logix
 
         [MethodImpl(Inline)]
         internal LiteralLogicSeqExpr(Bit32[] terms)
-        {
-            this.Terms = terms;
-        }
+            => Terms = terms;
 
         public Bit32 this[int index]
         {

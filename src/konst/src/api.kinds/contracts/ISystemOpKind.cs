@@ -5,7 +5,7 @@
 namespace Z0
 {
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
-    using K = SystemApiKey;
+    using K = SystemApiClass;
     using I = ISystemOpKind;
 
     /// <summary>
@@ -15,8 +15,8 @@ namespace Z0
     {
         K Kind {get;}
 
-        ApiOpId IApiKey.Id
-            => (ApiOpId)Kind;
+        ApiClass IApiKey.Id
+            => (ApiClass)Kind;
     }
 
     /// <summary>
@@ -26,7 +26,7 @@ namespace Z0
     public interface ISystemOpKind<F> : I, IOpKind<F,K>
         where F : unmanaged, I
     {
-        ApiOpId IApiKey.Id
+        ApiClass IApiKey.Id
             => default(F).Id;
     }
 

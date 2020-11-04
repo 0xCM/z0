@@ -36,16 +36,6 @@ namespace Z0
             where T : struct
                 => As<T?, byte?>(ref src);
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Span<byte> uint8<T>(Span<T> src)
-            where T : struct
-                => recover<T,byte>(src);
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ReadOnlySpan<byte> uint8<T>(ReadOnlySpan<T> src)
-            where T : struct
-                => recover<T,byte>(src);
-
         /// <summary>
         /// Converts a <see cref='sbyte'/> to a <see cref='byte'/>
         /// </summary>

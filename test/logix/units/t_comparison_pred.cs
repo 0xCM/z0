@@ -9,7 +9,7 @@ namespace Z0.Logix
 
     using static LogicEngine;
     using static PredicateSpec;
-    using static BinaryComparisonApiKey;
+    using static BinaryComparisonApiClass;
     using static NumericLogixHost;
     using static BitLogix;
 
@@ -105,9 +105,9 @@ namespace Z0.Logix
             var va = var_a<T>();
             var vb = var_b<T>();
             var vc = var_c<T>();
-            var x = compare(BinaryComparisonApiKey.Lt,va,vb);
-            var y = compare(BinaryComparisonApiKey.Lt,vb,vc);
-            var z = compare(BinaryComparisonApiKey.Lt,vc,va);
+            var x = compare(BinaryComparisonApiClass.Lt,va,vb);
+            var y = compare(BinaryComparisonApiClass.Lt,vb,vc);
+            var z = compare(BinaryComparisonApiClass.Lt,vc,va);
             for(var i=0; i<RepCount; i++)
             {
                 var a = va.Set(Random);
@@ -129,7 +129,7 @@ namespace Z0.Logix
 
         }
 
-        void predicate_check<T>(BinaryComparisonApiKey kind)
+        void predicate_check<T>(BinaryComparisonApiClass kind)
             where T : unmanaged
         {
             var va = var_a<T>();

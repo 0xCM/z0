@@ -42,7 +42,7 @@ namespace Z0
         /// <param name="src">The source methods</param>
         /// <param name="kind">The kind to match</param>
         [Op]
-        public static MethodInfo[] Kinded(MethodInfo[] src, ApiOpId kind)
+        public static MethodInfo[] Kinded(MethodInfo[] src, ApiClass kind)
             => from m in src where m.KindId() == kind select m;
 
         /// <summary>

@@ -110,7 +110,7 @@ namespace Z0
         /// <param name="generic">Whether the operation should include a generic marker</param>
         /// <param name="kinds">The numeric argument kinds</param>
         [Op]
-        public static OpIdentity NumericOp(ApiOpId id, bool generic, params NumericKind[] kinds)
+        public static OpIdentity NumericOp(ApiClass id, bool generic, params NumericKind[] kinds)
         {
             var result = text.build();
             result.Append(id.Format());
@@ -141,7 +141,7 @@ namespace Z0
         /// <param name="id">The operation kind id</param>
         /// <param name="kinds">The numeric argument kinds</param>
         [Op]
-        public static OpIdentity NumericOp(ApiOpId id, params NumericKind[] kinds)
+        public static OpIdentity NumericOp(ApiClass id, params NumericKind[] kinds)
             => NumericOp(id,false,kinds);
     }
 }

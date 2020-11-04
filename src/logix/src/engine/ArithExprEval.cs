@@ -12,7 +12,7 @@ namespace Z0.Logix
 
     using static LogicSig;
 
-    using UAR = UnaryArithmeticApiKey;
+    using UAR = UnaryArithmeticApiClass;
 
     [ApiHost("expr.arith.eval")]
     public class ArithExprEval
@@ -81,11 +81,11 @@ namespace Z0.Logix
                 case IComparisonExpr<T> x:
                     return eval(x);
                 default:
-                    switch(expr.OpKind)
+                    switch(expr.ApiClass)
                     {
-                        case BinaryArithmeticApiKey.Add: return add(expr);
-                        case BinaryArithmeticApiKey.Sub: return sub(expr);
-                        default: throw new NotSupportedException(sig<T>(expr.OpKind));
+                        case BinaryArithmeticApiClass.Add: return add(expr);
+                        case BinaryArithmeticApiClass.Sub: return sub(expr);
+                        default: throw new NotSupportedException(sig<T>(expr.ApiClass));
                     }
             }
         }
@@ -94,12 +94,12 @@ namespace Z0.Logix
         static LiteralExpr<T> eval<T>(IUnaryArithmeticOpExpr<T> expr)
             where T : unmanaged
         {
-            switch(expr.OpKind)
+            switch(expr.ApiClass)
             {
                 case UAR.Inc: return inc(expr);
                 case UAR.Dec: return dec(expr);
                 case UAR.Negate: return negate(expr);
-                default: throw new NotSupportedException(sig<T>(expr.OpKind));
+                default: throw new NotSupportedException(sig<T>(expr.ApiClass));
             }
         }
 

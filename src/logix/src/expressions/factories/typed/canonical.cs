@@ -9,6 +9,7 @@ namespace Z0.Logix
     using System.Runtime.Intrinsics;
 
     using static Konst;
+
     using BLK = BinaryBitLogicKind;
 
     partial class TypedLogicSpec

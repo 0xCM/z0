@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Logix
 {
-    using System;    
+    using System;
     /// <summary>
     /// Characterizes an operator reified as a boolean function
     /// </summary>
@@ -16,7 +16,7 @@ namespace Z0.Logix
     public interface ILogicOpExpr<K> : ILogicOpExpr
         where K : unmanaged, Enum
     {
-        K OpKind {get;}
+        K ApiClass {get;}
     }
 
     /// <summary>

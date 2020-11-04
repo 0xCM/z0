@@ -67,16 +67,16 @@ namespace Z0
 
         public void check_numeric_identity()
         {
-            Claim.Eq(NumericApiKey.U8, NumericKind.U8.NumericId());
-            Claim.Eq(NumericApiKey.I8, NumericKind.I8.NumericId());
-            Claim.Eq(NumericApiKey.U16, NumericKind.U16.NumericId());
-            Claim.Eq(NumericApiKey.I16, NumericKind.I16.NumericId());
-            Claim.Eq(NumericApiKey.U32, NumericKind.U32.NumericId());
-            Claim.Eq(NumericApiKey.I32, NumericKind.I32.NumericId());
-            Claim.Eq(NumericApiKey.U64, NumericKind.U64.NumericId());
-            Claim.Eq(NumericApiKey.I64, NumericKind.I64.NumericId());
-            Claim.Eq(NumericApiKey.F32, NumericKind.F32.NumericId());
-            Claim.Eq(NumericApiKey.F64, NumericKind.F64.NumericId());
+            Claim.Eq(NumericApiClass.U8, NumericKind.U8.NumericId());
+            Claim.Eq(NumericApiClass.I8, NumericKind.I8.NumericId());
+            Claim.Eq(NumericApiClass.U16, NumericKind.U16.NumericId());
+            Claim.Eq(NumericApiClass.I16, NumericKind.I16.NumericId());
+            Claim.Eq(NumericApiClass.U32, NumericKind.U32.NumericId());
+            Claim.Eq(NumericApiClass.I32, NumericKind.I32.NumericId());
+            Claim.Eq(NumericApiClass.U64, NumericKind.U64.NumericId());
+            Claim.Eq(NumericApiClass.I64, NumericKind.I64.NumericId());
+            Claim.Eq(NumericApiClass.F32, NumericKind.F32.NumericId());
+            Claim.Eq(NumericApiClass.F64, NumericKind.F64.NumericId());
         }
 
         public void classify_block_segment_16()

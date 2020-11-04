@@ -42,7 +42,7 @@ namespace Z0
             get => vcell(Data, HostIndex);
         }
 
-        public ApiOpId KindKey
+        public ApiClass KindKey
         {
             [MethodImpl(Inline)]
             get => api.kind(this);

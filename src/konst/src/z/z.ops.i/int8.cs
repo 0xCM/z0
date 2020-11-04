@@ -12,60 +12,51 @@ namespace Z0
     using static Konst;
 
     partial struct z
-    {                
-        [MethodImpl(Inline), Op, Closures(Closure)]   
+    {
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static sbyte int8<T>(T src)
-            => As<T,sbyte>(ref src);        
+            => As<T,sbyte>(ref src);
 
-        [MethodImpl(Inline), Op, Closures(Closure)]   
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static sbyte? int8<T>(T? src)
             where T : unmanaged
                 => As<T?, sbyte?>(ref src);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref sbyte int8<T>(ref T src)
-            => ref As<T,sbyte>(ref src);                
+            => ref As<T,sbyte>(ref src);
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Span<sbyte> int8<T>(Span<T> src)
-            where T : struct
-                => recover<T,sbyte>(src);
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ReadOnlySpan<sbyte> int8<T>(ReadOnlySpan<T> src)
-            where T : struct
-                => recover<T,sbyte>(src);                
 
         [MethodImpl(Inline), Op]
-        public static sbyte int8(sbyte src)        
+        public static sbyte int8(sbyte src)
             => (sbyte)src;
 
         [MethodImpl(Inline), Op]
-        public static sbyte int8(byte src)        
-            => (sbyte)src;
-        
-        [MethodImpl(Inline), Op]
-        public static sbyte int8(short src)        
+        public static sbyte int8(byte src)
             => (sbyte)src;
 
         [MethodImpl(Inline), Op]
-        public static sbyte int8(ushort src)        
+        public static sbyte int8(short src)
             => (sbyte)src;
 
         [MethodImpl(Inline), Op]
-        public static sbyte int8(int src)        
+        public static sbyte int8(ushort src)
             => (sbyte)src;
 
         [MethodImpl(Inline), Op]
-        public static sbyte int8(uint src)        
+        public static sbyte int8(int src)
             => (sbyte)src;
 
         [MethodImpl(Inline), Op]
-        public static sbyte int8(long src)        
+        public static sbyte int8(uint src)
             => (sbyte)src;
 
         [MethodImpl(Inline), Op]
-        public static sbyte int8(ulong src)        
+        public static sbyte int8(long src)
+            => (sbyte)src;
+
+        [MethodImpl(Inline), Op]
+        public static sbyte int8(ulong src)
             => (sbyte)src;
 
         [MethodImpl(Inline), Op]

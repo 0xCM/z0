@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="k">The operation kind id</param>
         [MethodImpl(Inline)]
-        public static string name(ApiOpId k)
+        public static string name(ApiClass k)
             => k.Format();
 
         /// <summary>
@@ -25,7 +25,7 @@ namespace Z0
         /// </summary>
         /// <param name="k">The operation kind id</param>
         [MethodImpl(Inline)]
-        public static string vname(ApiOpId k)
+        public static string vname(ApiClass k)
             => k.Format(true);
     }
 }

@@ -36,15 +36,6 @@ namespace Z0
             where T : unmanaged
                 => As<T?, uint?>(ref src);
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Span<uint> uint32<T>(Span<T> src)
-            where T : struct
-                => recover<T,uint>(src);
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ReadOnlySpan<uint> uint32<T>(ReadOnlySpan<T> src)
-            where T : struct
-                => recover<T,uint>(src);
 
         /// <summary>
         /// Converts a <see cref='sbyte'/> to a <see cref='uint'/>

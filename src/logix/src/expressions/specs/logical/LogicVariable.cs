@@ -18,6 +18,7 @@ namespace Z0.Logix
         /// The variable's symbolic identifier
         /// </summary>
         public uint Symbol {get;}
+
         /// <summary>
         /// The variable value
         /// </summary>

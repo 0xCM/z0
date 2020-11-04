@@ -12,7 +12,7 @@ namespace Z0
 
     public interface ICodeBlockIndex : IBinaryResourceIndex
     {
-        BasedCodeBlock Case(ApiOpId k, params NumericKind[] kinds)
+        BasedCodeBlock Case(ApiClass k, params NumericKind[] kinds)
         {
             var id = Signatures.NumericOp(k, kinds).ToPropertyName();
             var resource = TryFind(id);

@@ -41,11 +41,11 @@ namespace Z0.Logix
             switch(expr)
             {
                 case IUnaryLogicOpExpr x:
-                    return bitlogix.Evaluate(x.OpKind, eval(x.Arg));
+                    return bitlogix.Evaluate(x.ApiClass, eval(x.Arg));
                 case IBinaryLogicOpExpr x:
-                    return bitlogix.Evaluate(x.OpKind, eval(x.LeftArg), eval(x.RightArg));
+                    return bitlogix.Evaluate(x.ApiClass, eval(x.LeftArg), eval(x.RightArg));
                 case ITernaryLogicOpExpr x:
-                    return bitlogix.Evaluate(x.OpKind, eval(x.FirstArg), eval(x.SecondArg), eval(x.ThirdArg));
+                    return bitlogix.Evaluate(x.ApiClass, eval(x.FirstArg), eval(x.SecondArg), eval(x.ThirdArg));
                default: throw new NotSupportedException(expr.GetType().Name);
             }
         }

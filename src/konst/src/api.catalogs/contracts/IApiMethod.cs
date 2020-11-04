@@ -32,8 +32,8 @@ namespace Z0
         /// <summary>
         /// The method's kind identifier if it exists
         /// </summary>
-        ApiOpId ApiKind
-            => ApiOpId.None;
+        ApiClass ApiKind
+            => ApiClass.None;
 
         /// The globally-unique operation uri
         /// </summary>

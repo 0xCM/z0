@@ -17,7 +17,7 @@ namespace Z0.Logix
         /// <summary>
         /// The operator kind
         /// </summary>
-        public UnaryBitLogicKind OpKind {get;}
+        public UnaryBitLogicKind ApiClass {get;}
 
         /// <summary>
         /// The operand
@@ -27,12 +27,12 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public UnaryLogicOpExpr(UnaryBitLogicKind op, ILogicExpr arg)
         {
-            this.OpKind = op;
+            this.ApiClass = op;
             this.Arg = arg;
         }
 
         public string Format()
-            => OpKind.Format(Arg);
+            => ApiClass.Format(Arg);
     }
 
 }

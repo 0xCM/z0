@@ -6,7 +6,7 @@ namespace Z0
 {
     using static Konst;
 
-    using K = PredicateApiKey;
+    using K = PredicateApiClass;
     using I = IPredicateApiKey;
 
     /// <summary>
@@ -16,8 +16,8 @@ namespace Z0
     {
         K Kind {get;}
 
-        ApiOpId IApiKey.Id
-            => (ApiOpId)Kind;
+        ApiClass IApiKey.Id
+            => (ApiClass)Kind;
     }
 
     /// <summary>
@@ -27,7 +27,7 @@ namespace Z0
     public interface IBooleanPredicateKind<F> : I, IOpKind<F,K>
         where F : unmanaged, I
     {
-        ApiOpId IApiKey.Id
+        ApiClass IApiKey.Id
             => default(F).Id;
     }
 

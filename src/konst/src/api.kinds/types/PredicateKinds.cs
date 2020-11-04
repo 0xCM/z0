@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using K = PredicateApiKey;
+    using K = PredicateApiClass;
     using I = IPredicateApiKey;
 
     partial class Kinds

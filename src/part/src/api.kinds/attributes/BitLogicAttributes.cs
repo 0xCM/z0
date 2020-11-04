@@ -5,7 +5,7 @@
 namespace Z0
 {
     using A = OpKindAttribute;
-    using K = BinaryBitLogicApiKey;
+    using K = BinaryBitLogicApiClass;
 
     public sealed class AndAttribute : A { public AndAttribute() : base(K.And) {} }
 
@@ -39,7 +39,7 @@ namespace Z0
 
     public sealed class FalseAttribute : A { public FalseAttribute() : base(K.False) {} }
 
-    public sealed class SelectAttribute : A { public SelectAttribute() : base(TernaryBitLogicApiKey.Select) {} }
+    public sealed class SelectAttribute : A { public SelectAttribute() : base(TernaryBitLogicApiClass.Select) {} }
 
     public sealed class NotAttribute : A { public NotAttribute() : base(K.Not) {} }
 

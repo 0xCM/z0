@@ -17,7 +17,7 @@ namespace Z0
 
             public ApiHostUri Host;
 
-            public ApiOpId ApiKind;
+            public ApiClass ApiKind;
 
             public CilMethod Cil;
         }

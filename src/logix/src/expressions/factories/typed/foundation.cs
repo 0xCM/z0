@@ -53,7 +53,7 @@ namespace Z0.Logix
         /// <param name="right">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static ComparisonExpr<T> binary<T>(BinaryComparisonApiKey op, IExpr<T> left, IExpr<T> right)
+        public static ComparisonExpr<T> binary<T>(BinaryComparisonApiClass op, IExpr<T> left, IExpr<T> right)
             where T : unmanaged
                 => new ComparisonExpr<T>(op,left,right);
 

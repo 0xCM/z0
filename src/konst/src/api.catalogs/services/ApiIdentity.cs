@@ -47,8 +47,8 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static ApiOpId kind(in ApiMetadataUri src)
-            => (ApiOpId)vcell(src.Data, KeyIndex);
+        public static ApiClass kind(in ApiMetadataUri src)
+            => (ApiClass)vcell(src.Data, KeyIndex);
 
         [MethodImpl(Inline), Op]
         public static PartId part(in ApiMetadataUri src)
@@ -85,7 +85,7 @@ namespace Z0
             => a.Data.Equals(b.Data);
 
         [MethodImpl(Inline), Op]
-        public static string identifier(ApiOpId src)
+        public static string identifier(ApiClass src)
             => string.Format("{0}", src != 0 ? src.Format() : "unkinded");
 
         [MethodImpl(Inline), Op]

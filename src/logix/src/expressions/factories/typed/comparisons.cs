@@ -13,7 +13,7 @@ namespace Z0.Logix
     using static TypedLogicSpec;
 
     using TLS = TypedLogicSpec;
-    using BCK = BinaryComparisonApiKey;
+    using BCK = BinaryComparisonApiClass;
 
     /// <summary>
     /// Constructs type operator comparison expressions

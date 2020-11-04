@@ -40,11 +40,11 @@ namespace Z0
         /// </summary>
         /// <param name="kind">The source kind</param>
         [MethodImpl(Inline)]
-        public static NumericApiKey NumericId(this NumericKind kind)
+        public static NumericApiClass NumericId(this NumericKind kind)
         {
             var noClass = ((uint)kind << 3) >> 3;
             var noWidth = (noClass >> 16) << 16;
-            var key = (NumericApiKey)noWidth;
+            var key = (NumericApiClass)noWidth;
             return key;
         }
     }

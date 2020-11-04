@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
 
     partial struct z
-    {                
+    {
         [MethodImpl(Inline), Op]
         public static unsafe long i64(bool on)
             => *((sbyte*)(&on));
@@ -23,6 +23,5 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref long i64<T>(in T src)
             => ref @as<T,long>(src);
-
     }
 }

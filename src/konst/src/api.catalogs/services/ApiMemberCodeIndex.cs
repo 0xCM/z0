@@ -67,7 +67,7 @@ namespace Z0
                 where method.ClassifyOperator() == @class
                 select code;
 
-        public IEnumerable<ApiMemberCode> Search(ApiOpId id)
+        public IEnumerable<ApiMemberCode> Search(ApiClass id)
             => from code in  Values
                 let method = code.Member.Method
                 where method.KindId() == id

@@ -89,7 +89,7 @@ namespace Z0.Asm
             const byte imm8 = 9;
 
             var resolver = default(VImm8UnaryResolver128<uint>);
-            var vbsll = resolver.inject(imm8, ApiOpId.Bsll).DynamicOp;
+            var vbsll = resolver.inject(imm8, ApiClass.Bsll).DynamicOp;
 
             for(var i=0; i<RepCount; i++)
             {

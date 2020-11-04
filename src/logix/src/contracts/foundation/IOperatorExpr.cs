@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Logix
+namespace Z0
 {
     using System;
 
@@ -36,6 +36,6 @@ namespace Z0.Logix
         /// <summary>
         /// Specifies the class to which the operator belongs
         /// </summary>
-        K OpKind {get;}
+        K ApiClass {get;}
     }
 }

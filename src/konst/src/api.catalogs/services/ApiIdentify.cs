@@ -14,7 +14,7 @@ namespace Z0
     public readonly partial struct ApiIdentify
     {
         [MethodImpl(Inline), Op]
-        public static string identifier(ApiOpId src)
+        public static string identifier(ApiClass src)
             => string.Format("k{0}", src != 0 ? src.Format() : "0");
 
         [MethodImpl(Inline), Op]

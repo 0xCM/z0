@@ -36,15 +36,6 @@ namespace Z0
             where T : unmanaged
                 => As<T?, ushort?>(ref src);
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Span<ushort> uint16<T>(Span<T> src)
-            where T : struct
-                => recover<T,ushort>(src);
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ReadOnlySpan<ushort> uint16<T>(ReadOnlySpan<T> src)
-            where T : struct
-                => recover<T,ushort>(src);
 
         [MethodImpl(Inline), Op]
         public static ushort uint16(sbyte src)

@@ -5,7 +5,7 @@
 namespace Z0
 {
 
-    using K = CanonicalApiKey;
+    using K = CanonicalApiClass;
     using I = ICanonicalKind;
 
     partial class Kinds

@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-using static Z0.CsKeywords;
+using static CsKeywords;
 using static Z0.AsciCharText;
 
 [ApiNameProvider]

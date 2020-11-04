@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    using K = BitShiftApiKey;
+    using K = BitShiftApiClass;
     using I = IBitShiftApiKey;
 
     partial struct BitShifts

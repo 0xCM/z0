@@ -6,6 +6,9 @@ namespace Z0
 {
     using static Konst;
 
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
+    [Free]
     public interface IReport
     {
         string[] HeaderLabels {get;}
@@ -13,20 +16,5 @@ namespace Z0
         string ReportName {get;}
 
         int RecordCount {get;}
-    }
-        
-    public readonly struct EmptyReport : IReport
-    {
-        public string[] HeaderLabels 
-            => sys.empty<string>();
-
-        public string ReportName 
-            => EmptyString;
-
-        public int RecordCount 
-            => 0;
-
-        public ITabular[] Records 
-            => sys.empty<ITabular>();
     }
 }

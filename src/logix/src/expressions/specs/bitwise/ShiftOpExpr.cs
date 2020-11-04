@@ -18,7 +18,7 @@ namespace Z0.Logix
         /// <summary>
         /// The operator kind
         /// </summary>
-        public BitShiftApiKey OpKind {get;}
+        public BitShiftApiClass ApiClass {get;}
 
         /// <summary>
         /// The operand
@@ -31,15 +31,15 @@ namespace Z0.Logix
         public IExpr<byte> Offset {get;}
 
         [MethodImpl(Inline)]
-        public ShiftOpExpr(BitShiftApiKey op, IExpr<T> subject, IExpr<byte> offset)
+        public ShiftOpExpr(BitShiftApiClass op, IExpr<T> subject, IExpr<byte> offset)
         {
-            this.OpKind = op;
-            this.Subject = subject;
-            this.Offset = offset;
+            ApiClass = op;
+            Subject = subject;
+            Offset = offset;
         }
 
         public string Format()
-            => OpKind.Format(Subject,Offset);
+            => ApiClass.Format(Subject,Offset);
 
         public override string ToString()
             => Format();

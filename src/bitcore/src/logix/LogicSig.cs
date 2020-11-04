@@ -34,7 +34,7 @@ namespace Z0
             => text.concat(format(kind), Chars.Colon, nameof(Bit32));
 
         [MethodImpl(Inline)]
-        public static string sig(BinaryBitLogicApiKey kind)
+        public static string sig(BinaryBitLogicApiClass kind)
             => text.concat(format(kind), Chars.Colon, nameof(Bit32));
 
         [MethodImpl(Inline)]
@@ -52,22 +52,22 @@ namespace Z0
                 => text.concat(format(kind), Chars.Colon, keyword<T>());
 
         [MethodImpl(Inline), Op, Closures(Integers)]
-        public static string sig<T>(BitShiftApiKey kind)
+        public static string sig<T>(BitShiftApiClass kind)
             where T : unmanaged
                 => $"{kind}:{typeof(T).NumericKind().Keyword()}";
 
         [MethodImpl(Inline), Op, Closures(Integers)]
-        public static string sig<T>(BinaryComparisonApiKey kind)
+        public static string sig<T>(BinaryComparisonApiClass kind)
             where T : unmanaged
                 => $"{kind}:{typeof(T).NumericKind().Keyword()}";
 
         [MethodImpl(Inline), Op, Closures(Integers)]
-        public static string sig<T>(UnaryArithmeticApiKey kind)
+        public static string sig<T>(UnaryArithmeticApiClass kind)
             where T : unmanaged
                 => $"{kind}:{typeof(T).NumericKind().Keyword()}";
 
         [MethodImpl(Inline), Op, NumericClosures(Integers)]
-        public static string sig<T>(BinaryArithmeticApiKey kind)
+        public static string sig<T>(BinaryArithmeticApiClass kind)
             where T : unmanaged
                 => $"{kind}:{typeof(T).NumericKind().Keyword()}";
 
@@ -80,7 +80,7 @@ namespace Z0
         public static string format(BLK kind)
             => kind.ToString().ToLower();
 
-        public static string format(BinaryBitLogicApiKey kind)
+        public static string format(BinaryBitLogicApiClass kind)
             => kind.Format();
     }
 }

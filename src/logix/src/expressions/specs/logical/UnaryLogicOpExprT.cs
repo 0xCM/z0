@@ -12,7 +12,7 @@ namespace Z0.Logix
     public readonly struct UnaryLogicOpExpr<T> :  IUnaryLogicOpExpr<T>
         where T : unmanaged
     {
-        public UnaryBitLogicKind OpKind {get;}
+        public UnaryBitLogicKind ApiClass {get;}
 
         public ILogicExpr<T> Arg{get;}
 
@@ -20,13 +20,13 @@ namespace Z0.Logix
         internal UnaryLogicOpExpr(UnaryBitLogicKind kind, ILogicExpr<T> arg)
         {
             this.Arg = arg;
-            this.OpKind = kind;
+            this.ApiClass = kind;
         }
 
         ILogicExpr IUnaryOpExpr<ILogicExpr>.Arg
             => Arg;
 
         public string Format()
-            => OpKind.Format(Arg);
+            => ApiClass.Format(Arg);
     }
 }

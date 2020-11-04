@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using K = CanonicalApiKey;
+    using K = CanonicalApiClass;
     using A = OpKindAttribute;
 
     public sealed class IdentityFunctionAttribute : A { public IdentityFunctionAttribute() : base(K.Identity) {} }
