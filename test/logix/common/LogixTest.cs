@@ -9,7 +9,7 @@ namespace Z0.Logix
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     using static BitLogicSpec;
     using static LogicEngine;
@@ -81,7 +81,7 @@ namespace Z0.Logix
             var A = Random.BitMatrix<T>();
             var B = Random.BitMatrix<T>();
             var C = BitMatrix.alloc<T>();
-            var n = nati<N>();
+            var n = nat32i<N>();
 
             for(var sample=0; sample< RepCount; sample++)
             {
@@ -106,7 +106,7 @@ namespace Z0.Logix
             var A = Random.BitMatrix<T>();
             var B = Random.BitMatrix<T>();
             var C = BitMatrix.alloc<T>();
-            var n = nati<N>();
+            var n = nat32i<N>();
 
             for(var sample=0; sample< RepCount; sample++)
             {
@@ -131,7 +131,7 @@ namespace Z0.Logix
             var A = Random.BitMatrix<T>();
             var B = Random.BitMatrix<T>();
             var C = BitMatrix.alloc<T>();
-            var n = nati<N>();
+            var n = nat32i<N>();
 
             for(var sample=0; sample< RepCount; sample++)
             {
@@ -156,7 +156,7 @@ namespace Z0.Logix
             var A = Random.BitMatrix<T>();
             var B = Random.BitMatrix<T>();
             var C = BitMatrix.alloc<T>();
-            var n = nati<N>();
+            var n = nat32i<N>();
 
             for(var sample=0; sample< RepCount; sample++)
             {
@@ -181,7 +181,7 @@ namespace Z0.Logix
             var A = Random.BitMatrix<T>();
             var B = Random.BitMatrix<T>();
             var C = BitMatrix.alloc<T>();
-            var n = nati<N>();
+            var n = nat32i<N>();
 
             for(var sample=0; sample < RepCount; sample++)
             {
@@ -206,7 +206,7 @@ namespace Z0.Logix
             var A = Random.BitMatrix<T>();
             var B = Random.BitMatrix<T>();
             var C = BitMatrix.alloc<T>();
-            var n = nati<N>();
+            var n = nat32i<N>();
 
             for(var sample=0; sample < RepCount; sample++)
             {
@@ -232,7 +232,7 @@ namespace Z0.Logix
             var A = Random.BitMatrix<T>();
             var B = Random.BitMatrix<T>();
             var C = BitMatrix.alloc<T>();
-            var n = nati<N>();
+            var n = nat32i<N>();
 
             for(var sample=0; sample < RepCount; sample++)
             {
@@ -257,7 +257,7 @@ namespace Z0.Logix
             var A = Random.BitMatrix<T>();
             var B = Random.BitMatrix<T>();
             var C = BitMatrix.alloc<T>();
-            var n = nati<N>();
+            var n = nat32i<N>();
 
             for(var sample=0; sample < RepCount; sample++)
             {
@@ -282,7 +282,7 @@ namespace Z0.Logix
             var A = Random.BitMatrix<T>();
             var B = Random.BitMatrix<T>();
             var C = BitMatrix.alloc<T>();
-            var n = nati<N>();
+            var n = nat32i<N>();
 
             for(var sample=0; sample < RepCount; sample++)
             {

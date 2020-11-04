@@ -2,7 +2,7 @@ using static ApiNameParts;
 
 readonly struct ApiNames
 {
-    public const string ApiCalls = api + dot + calls;
+    public const string ApiSpecs = api + dot + specs;
 
     const string format = nameof(format);
 
@@ -11,6 +11,12 @@ readonly struct ApiNames
     const string router = nameof(router);
 
     const string routes = nameof(routes);
+
+    const string actions = nameof(actions);
+
+    const string functions = nameof(functions);
+
+    const string operations = nameof(operations);
 
     public const string ApiCallMap = api + dot + calls + dot + "map";
 

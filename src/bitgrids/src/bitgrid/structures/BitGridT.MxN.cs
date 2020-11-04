@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     /// <summary>
     /// Defines a maximally packed data structure of natural dimensions over a primal type
@@ -55,12 +55,12 @@ namespace Z0
         /// <summary>
         /// The number of grid rows
         /// </summary>
-        public int RowCount => nati<M>();
+        public int RowCount => nat32i<M>();
 
         /// <summary>
         /// The number of grid columns
         /// </summary>
-        public int ColCount => nati<N>();
+        public int ColCount => nat32i<N>();
 
         /// <summary>
         /// The number of allocated 256-bit blocks

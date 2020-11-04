@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     partial class BitGrid
     {
@@ -51,6 +51,6 @@ namespace Z0
         public static void setbit<N,T>(N width, int row, int col, Bit32 state, ref T dst)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => setbit(GridCells.linear(nati(width),row,col), state, ref dst);
+                => setbit(GridCells.linear(nat32i(width),row,col), state, ref dst);
     }
 }

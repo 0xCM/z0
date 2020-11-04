@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.InteropServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     /// <summary>
     /// A grid of natural dimensions M and N such that M*N = W := 16
@@ -72,7 +72,7 @@ namespace Z0
         /// <summary>
         /// The number of allocated cells
         /// </summary>
-        public int CellCount
+        public uint CellCount
         {
             [MethodImpl(Inline)]
             get => ByteCount/size<T>();
@@ -99,18 +99,18 @@ namespace Z0
         public ref T Head
         {
             [MethodImpl(Inline)]
-            get => ref head(Cells);
+            get => ref first(Cells);
         }
 
         /// <summary>
         /// The number of rows in the grid
         /// </summary>
-        public int RowCount => nati<M>();
+        public int RowCount => nat32i<M>();
 
         /// <summary>
         /// The number of columns in the grid
         /// </summary>
-        public int ColCount => nati<N>();
+        public int ColCount => nat32i<N>();
 
         /// <summary>
         /// Reads/writes an index-identified cell

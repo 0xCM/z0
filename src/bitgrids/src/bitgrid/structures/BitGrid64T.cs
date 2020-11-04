@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.InteropServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     /// <summary>
     /// Defines a 64-bit grid
@@ -28,11 +28,11 @@ namespace Z0
 
         public ulong Content { [MethodImpl(Inline)] get => Data; }
 
-        public int CellCount { [MethodImpl(Inline)] get => 8/size<T>(); }
+        public uint CellCount { [MethodImpl(Inline)] get => 8/size<T>(); }
 
         public Span<T> Cells { [MethodImpl(Inline)] get => Data.Bytes().Cast<T>(); }
 
-        public ref T Head { [MethodImpl(Inline)] get => ref head(Cells); }
+        public ref T Head { [MethodImpl(Inline)] get => ref first(Cells); }
 
         [MethodImpl(Inline)]
         public static implicit operator ulong(BitGrid64<T> src)

@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     /// <summary>
     /// Defines a 16x16 matrix of bits
@@ -49,49 +49,6 @@ namespace Z0
             => new BitMatrix16(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator BitMatrix<ushort>(in BitMatrix16 src)
-            => BitMatrix.load(src.Data);
-
-        /// <summary>
-        /// Computes the bitwise and of the operands
-        /// </summary>
-        [MethodImpl(Inline)]
-        public static BitMatrix16 operator & (in BitMatrix16 A, in BitMatrix16 B)
-            => BitMatrix.and(A,B);
-
-        [MethodImpl(Inline)]
-        public static BitMatrix16 operator | (in BitMatrix16 A, in BitMatrix16 B)
-            => BitMatrix.or(A,B);
-
-        [MethodImpl(Inline)]
-        public static BitMatrix16 operator ^ (in BitMatrix16 A, in BitMatrix16 B)
-            => BitMatrixA.xor(A,B);
-
-        [MethodImpl(Inline)]
-        public static BitMatrix16 operator ~ (in BitMatrix16 A)
-            => BitMatrix.not(A);
-
-        [MethodImpl(Inline)]
-        public static BitMatrix16 operator - (in BitMatrix16 A, in BitMatrix16 B)
-            => BitMatrix.xornot(A,B);
-
-        [MethodImpl(Inline)]
-        public static BitMatrix16 operator * (in BitMatrix16 A, in BitMatrix16 B)
-            => BitMatrix.mul(A, B);
-
-        [MethodImpl(Inline)]
-        public static BitVector16 operator * (in BitMatrix16 A, in BitVector16 B)
-            => BitMatrix.mul(A, B);
-
-        [MethodImpl(Inline)]
-        public static Bit32 operator ==(in BitMatrix16 A, in BitMatrix16 B)
-            => BitMatrix.same(A,B);
-
-        [MethodImpl(Inline)]
-        public static Bit32 operator !=(in BitMatrix16 A, in BitMatrix16 B)
-            => !BitMatrix.same(A,B);
-
-        [MethodImpl(Inline)]
         internal BitMatrix16(Span<ushort> src)
             => this.Data = src;
 
@@ -126,7 +83,7 @@ namespace Z0
         public ref ushort Head
         {
             [MethodImpl(Inline)]
-            get => ref head(Data);
+            get => ref first(Data);
         }
 
         public readonly int Order
@@ -147,7 +104,7 @@ namespace Z0
             get => Bit32.test(skip(in Head, row), col);
 
             [MethodImpl(Inline)]
-            set => seek(ref Head, row) = Bit32.set(seek(ref Head, row), (byte)col, value);
+            set => seek(Head, row) = Bit32.set(seek(Head, row), (byte)col, value);
         }
 
         /// <summary>
@@ -157,7 +114,7 @@ namespace Z0
         public ref BitVector16 this[int row]
         {
             [MethodImpl(Inline)]
-            get => ref Unsafe.As<ushort,BitVector16>(ref seek(ref Head, row));
+            get => ref Unsafe.As<ushort,BitVector16>(ref seek(Head, row));
         }
 
         [MethodImpl(Inline)]
@@ -206,5 +163,48 @@ namespace Z0
 
         public override int GetHashCode()
             => throw new NotSupportedException();
+
+        [MethodImpl(Inline)]
+        public static implicit operator BitMatrix<ushort>(in BitMatrix16 src)
+            => BitMatrix.load(src.Data);
+
+        /// <summary>
+        /// Computes the bitwise and of the operands
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static BitMatrix16 operator & (in BitMatrix16 A, in BitMatrix16 B)
+            => BitMatrix.and(A,B);
+
+        [MethodImpl(Inline)]
+        public static BitMatrix16 operator | (in BitMatrix16 A, in BitMatrix16 B)
+            => BitMatrix.or(A,B);
+
+        [MethodImpl(Inline)]
+        public static BitMatrix16 operator ^ (in BitMatrix16 A, in BitMatrix16 B)
+            => BitMatrixA.xor(A,B);
+
+        [MethodImpl(Inline)]
+        public static BitMatrix16 operator ~ (in BitMatrix16 A)
+            => BitMatrix.not(A);
+
+        [MethodImpl(Inline)]
+        public static BitMatrix16 operator - (in BitMatrix16 A, in BitMatrix16 B)
+            => BitMatrix.xornot(A,B);
+
+        [MethodImpl(Inline)]
+        public static BitMatrix16 operator * (in BitMatrix16 A, in BitMatrix16 B)
+            => BitMatrix.mul(A, B);
+
+        [MethodImpl(Inline)]
+        public static BitVector16 operator * (in BitMatrix16 A, in BitVector16 B)
+            => BitMatrix.mul(A, B);
+
+        [MethodImpl(Inline)]
+        public static Bit32 operator ==(in BitMatrix16 A, in BitMatrix16 B)
+            => BitMatrix.same(A,B);
+
+        [MethodImpl(Inline)]
+        public static Bit32 operator !=(in BitMatrix16 A, in BitMatrix16 B)
+            => !BitMatrix.same(A,B);
    }
 }

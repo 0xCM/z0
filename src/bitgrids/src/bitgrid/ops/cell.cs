@@ -55,8 +55,8 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
         {
-            int rowcells = (nati<N>() / 8)/size<T>();
-            int rowoffset = ((row*nati<N>())/8)/size<T>();
+            int rowcells = (nat32i<N>() / 8)/size<T>();
+            int rowoffset = ((row*nat32i<N>())/8)/size<T>();
             return RowBits.load(g.Content.Slice(rowoffset, rowcells));
         }
     }

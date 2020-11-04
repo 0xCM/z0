@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst; 
+    using static Konst;
     using static Memories;
 
     partial class BitVector
@@ -60,7 +60,7 @@ namespace Z0
         public static BitVector<N,T> natural<N,T>(BitString src, N n = default, T t = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => BvUtil.packseq(src.Slice(0, nati(n)).BitSeq, out T _);
+                => BvUtil.packseq(src.Slice(0, nat32i(n)).BitSeq, out T _);
     }
 
     static class BvUtil
@@ -77,10 +77,10 @@ namespace Z0
                 dst = generic<T>(ref packseq(src, out uint _));
             else if(typeof(T) == typeof(ulong) || typeof(T) == typeof(long))
                 dst = generic<T>(ref packseq(src, out ulong _));
-            else            
-                throw Unsupported.define<T>();            
+            else
+                throw Unsupported.define<T>();
             return ref dst;
-        }        
+        }
 
         /// <summary>
         /// Packs a bitsequence determined by the first 8 (or fewer) bytes from the source into a single byte

@@ -40,7 +40,7 @@ namespace Z0
         public ref T Head
         {
             [MethodImpl(Inline)]
-            get => ref head(Data);
+            get => ref first(Data);
         }
 
         public Span<byte> Bytes

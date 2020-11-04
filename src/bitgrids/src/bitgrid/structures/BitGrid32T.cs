@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.InteropServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     /// <summary>
     /// Defines a 32-bit grid
@@ -29,13 +29,13 @@ namespace Z0
         /// <summary>
         /// The number of grid cells := {1 | 2 | 4}
         /// </summary>
-        public int CellCount { [MethodImpl(Inline)] get => 4/size<T>(); }
+        public uint CellCount { [MethodImpl(Inline)] get => 4/size<T>(); }
 
         public uint Content { [MethodImpl(Inline)] get => Data; }
 
         public Span<T> Cells { [MethodImpl(Inline)] get => Data.Bytes().Cast<T>(); }
 
-        public ref T Head { [MethodImpl(Inline)] get => ref head(Cells); }
+        public ref T Head { [MethodImpl(Inline)] get => ref first(Cells); }
 
         [MethodImpl(Inline)]
         public static implicit operator uint(BitGrid32<T> src)

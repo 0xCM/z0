@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     /// <summary>
     /// Defines an 8x8 matrix of bits
@@ -106,7 +106,7 @@ namespace Z0
         public unsafe ref byte Head
         {
             [MethodImpl(Inline)]
-            get => ref head(Data);
+            get => ref first(Data);
         }
 
         /// <summary>
@@ -130,7 +130,7 @@ namespace Z0
             get => Bit32.test(skip(in Head,row), col);
 
             [MethodImpl(Inline)]
-            set => seek(ref Head, row) = Bit32.set(seek(ref Head, row), (byte)col, value);
+            set => seek(Head, row) = Bit32.set(seek(Head, row), (byte)col, value);
         }
 
         /// <summary>
@@ -140,7 +140,7 @@ namespace Z0
         public ref BitVector8 this[int index]
         {
             [MethodImpl(Inline)]
-            get => ref Unsafe.As<byte,BitVector8>(ref seek(ref Head, index));
+            get => ref Unsafe.As<byte,BitVector8>(ref seek(Head, index));
         }
 
         [MethodImpl(Inline)]

@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.InteropServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     /// <summary>
     /// Defines a 16-bit grid of caller-interpreted dimension
@@ -37,7 +37,7 @@ namespace Z0
         /// <summary>
         /// The number of grid cells := {1 | 2}
         /// </summary>
-        public int CellCount { [MethodImpl(Inline)] get => 2/size<T>(); }
+        public uint CellCount { [MethodImpl(Inline)] get => 2/size<T>(); }
 
         /// <summary>
         /// Covers grid content with a span that defines cells of width := {1 | 2}
@@ -47,10 +47,10 @@ namespace Z0
         /// <summary>
         /// Yields a mutable reference to the grid's leading storage cell
         /// </summary>
-        public ref T Head { [MethodImpl(Inline)] get => ref head(Cells); }
+        public ref T Head { [MethodImpl(Inline)] get => ref first(Cells); }
 
         /// <summary>
-        /// Maninulates an index-identified cell, where index := {0 | 1}
+        /// Manipulates an index-identified cell, where index := {0 | 1}
         /// </summary>
         public ref T this[int index] { [MethodImpl(Inline)] get => ref Cell(index);}
 

@@ -19,7 +19,7 @@ namespace Z0
         /// <typeparam name="T">The source element type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ref readonly T skip<T>(in T src, int count)
-            => ref Unsafe.Add(ref edit(in src), count); 
+            => ref Unsafe.Add(ref edit(in src), count);
 
         /// <summary>
         /// Adds an offset to the head of a span, measured relative to the reference type
@@ -29,7 +29,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ref readonly T skip<T>(Span<T> src, int count)
-            => ref seek(ref head(src), count);
+            => ref seek(ref first(src), count);
 
         /// <summary>
         /// Skips a specified number of source segments and returns a readonly reference to the leading element following the advance

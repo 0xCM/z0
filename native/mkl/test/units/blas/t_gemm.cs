@@ -13,10 +13,10 @@ namespace Z0.Mkl.Test
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
     using static Konst;
-    using static Memories;
-    
+    using static z;
+
     public class t_gemm : UnitTest<t_gemm>
-    {        
+    {
         // /// <summary>
         // /// Asserts that corresponding elements of two source spans of the same length are "close" as determined by a specified tolerance
         // /// </summary>
@@ -26,9 +26,9 @@ namespace Z0.Mkl.Test
         // /// <param name="caller">The invoking function</param>
         // /// <param name="file">The file in which the invoking function is defined </param>
         // /// <param name="line">The file line number of invocation</param>
-        // /// <typeparam name="T">The element type</typeparam>        
+        // /// <typeparam name="T">The element type</typeparam>
         // public void close<T>(Span<T> lhs, Span<T> rhs, T tolerance, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-        //     where T : unmanaged 
+        //     where T : unmanaged
         // {
         //     for(var i = 0; i< Claim.length(lhs,rhs); i++)
         //         if(!gmath.within(lhs[i],rhs[i],tolerance))
@@ -40,9 +40,9 @@ namespace Z0.Mkl.Test
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
-            var m = nati<M>();
+            var m = nat32i<M>();
             for(var i = 0; i< m; i++)
-                X[i] = t_dot.dot(A.GetRow(i), B);                    
+                X[i] = t_dot.dot(A.GetRow(i), B);
         }
 
         public void dot()
@@ -60,12 +60,12 @@ namespace Z0.Mkl.Test
             gemm_check(Interval.closed((byte)0, (byte)byte.MaxValue));
         }
 
-        
+
         public void gemm16u()
         {
             gemm_check(Interval.closed((ushort)0, ushort.MaxValue));
         }
-        
+
         public void gemm32u()
         {
             gemm_check(Interval.closed(0u, 1024u));
@@ -128,7 +128,7 @@ namespace Z0.Mkl.Test
         void gemm_check<T>(Interval<T> domain,  T epsilon = default)
             where T : unmanaged
         {
-            
+
             var src = Random.Stream(domain);
             gemm_check(src, epsilon, n64,  n64, n64);
             gemm_check(src, epsilon, n3,  n3, n3);
@@ -142,7 +142,7 @@ namespace Z0.Mkl.Test
             gemm_check(src, epsilon, n16, n16, n16);
             gemm_check(src, epsilon, n32, n32, n32);
         }
-    
+
         BenchmarkRecord gemm_check<M,K,N,T>(IEnumerable<T> src, T epsilon = default, M m = default, K k = default, N n = default, bool trace = false)
             where M : unmanaged, ITypeNat
             where K : unmanaged, ITypeNat
@@ -157,32 +157,32 @@ namespace Z0.Mkl.Test
             var E = Matrix.blockalloc<M,N,T>();
             var EU = E.Unblocked;
             var collect = false;
-            var label = $"gemm<N{nati<M>()},N{nati<K>()},N{nati<N>()},{typeof(T).Name}>";
+            var label = $"gemm<N{nat32i<M>()},N{nat32i<K>()},N{nat32i<N>()},{typeof(T).Name}>";
 
             var runtime = Duration.Zero;
             for(var i=0; i<CycleCount; i++)
             {
                 src.StreamTo(A.Unblocked);
-                src.StreamTo(B.Unblocked);                
+                src.StreamTo(B.Unblocked);
 
                 var sw = stopwatch();
-                mkl.gemm(A, B, ref X);            
+                mkl.gemm(A, B, ref X);
                 runtime += snapshot(sw);
-                
+
                 Matrix.mul(A, B, ref E);
 
-                if(trace)       
+                if(trace)
                 {
                     var padlen = Int32.MinValue.ToString().Length + 2;
                     Notify($"X = {X.Format()}");
                     Notify($"E = {E.Format()}");
                 }
-                
+
                 Claim.close(E.Unblocked, X.Unblocked, epsilon);
             }
 
             BenchmarkRecord timing = Benchmark(CycleCount, runtime, label);
-            
+
             if(collect)
                 ReportBenchmark(label,CycleCount, TimeSpan.FromMilliseconds(runtime.Ms));
             return timing;
@@ -199,18 +199,18 @@ namespace Z0.Mkl.Test
             var X = Matrix.blockalloc<M,N,float>();
             var E = Matrix.blockalloc<M,N,float>();
             var collect = false;
-        
+
             var runtime = Duration.Zero;
             for(var i=0; i<CycleCount; i++)
             {
                 src.StreamTo(A.Unblocked);
                 src.StreamTo(B.Unblocked);
                 var sw = stopwatch();
-                mkl.gemm(A,B,ref X);            
+                mkl.gemm(A,B,ref X);
                 runtime += snapshot(sw);
             }
 
-            var label = $"gemm<{nati<M>()},{nati<K>()},{nati<N>()}>";
+            var label = $"gemm<{nat32i<M>()},{nat32i<K>()},{nat32i<N>()}>";
             BenchmarkRecord timing = Benchmark(CycleCount, runtime, label);
 
             if(collect)
@@ -229,22 +229,22 @@ namespace Z0.Mkl.Test
             var X = Matrix.blockalloc<M,N,double>();
             var E = Matrix.blockalloc<M,N,double>();
             var collect = false;
-        
+
             var runtime = Duration.Zero;
             for(var i=0; i<CycleCount; i++)
             {
                 src.StreamTo(A.Unblocked);
                 src.StreamTo(B.Unblocked);
                 var sw = stopwatch();
-                mkl.gemm(A,B,ref X);            
+                mkl.gemm(A,B,ref X);
                 runtime += snapshot(sw);
-                
+
                 Mul(A, B, ref E);
                 Claim.Require(E == X);
 
             }
 
-            var label = $"gemm<{nati<M>()},{nati<K>()},{nati<N>()}>";
+            var label = $"gemm<{nat32i<M>()},{nat32i<K>()},{nat32i<N>()}>";
             var timing = Benchmark(CycleCount, runtime, label);
 
             if(collect)
@@ -268,15 +268,15 @@ namespace Z0.Mkl.Test
                 src.StreamTo(A.Unsized);
                 src.StreamTo(x.Unsized);
                 src.StreamTo(y.Unsized);
-                
+
                 sw.Start();
-                mkl.gemv(A,x, ref y);                
+                mkl.gemv(A,x, ref y);
                 sw.Stop();
                 refmul(A,x,z);
                 Claim.Require(z == y);
             }
 
-            var label = $"gemv<{nati<M>()},{nati<N>()},{typeof(double).DisplayName()}>";
+            var label = $"gemv<{nat32i<M>()},{nat32i<N>()},{typeof(double).DisplayName()}>";
             return Benchmark(cycles, snapshot(sw), label);
         }
 
@@ -284,7 +284,7 @@ namespace Z0.Mkl.Test
             where N : unmanaged, ITypeNat
         {
             var result = 0d;
-            for(var i=0; i< nati<N>(); i++)
+            for(var i=0; i< nat32i<N>(); i++)
             {
                 result += x[i]*y[i];
             }
@@ -295,7 +295,7 @@ namespace Z0.Mkl.Test
             where N : unmanaged, ITypeNat
         {
             var result = 0f;
-            for(var i=0; i< nati<N>(); i++)
+            for(var i=0; i< nat32i<N>(); i++)
             {
                 result += x[i]*y[i];
             }
@@ -327,11 +327,11 @@ namespace Z0.Mkl.Test
             where K : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
         {
-            var m = nati<M>();
-            var n = nati<N>();
+            var m = nat32i<M>();
+            var n = nat32i<N>();
             for(var i=0; i< m; i++)
             {
-                var row = A.GetRow(i);                
+                var row = A.GetRow(i);
                 for(var j=0; j< n; j++)
                 {
                     var col = B.GetCol(j);
@@ -346,11 +346,11 @@ namespace Z0.Mkl.Test
             where K : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
         {
-            var m = nati<M>();
-            var n = nati<N>();
+            var m = nat32i<M>();
+            var n = nat32i<N>();
             for(var i=0; i< m; i++)
             {
-                var row = A.GetRow(i);                
+                var row = A.GetRow(i);
                 for(var j=0; j< n; j++)
                 {
                     var col = B.GetCol(j);

@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static ref T head<T>(Span<T> src)
+        public static ref T first<T>(Span<T> src)
             => ref MemoryMarshal.GetReference<T>(src);
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ref T head<T>(Span<T> src, int offset)
-            => ref Unsafe.Add(ref head(src), offset);        
+            => ref Unsafe.Add(ref first(src), offset);
 
         /// <summary>
         /// Returns a reference to the head of a readonly span
@@ -39,14 +39,5 @@ namespace Z0
         public static ref readonly T head<T>(ReadOnlySpan<T> src)
             => ref MemoryMarshal.GetReference<T>(src);
 
-        /// <summary>
-        /// Returns a readonly reference to the head of a readonly span, offset by a specified amount
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static ref readonly T head<T>(ReadOnlySpan<T> src, int offset)
-            where T : unmanaged
-                => ref Unsafe.Add(ref MemoryMarshal.GetReference<T>(src), offset);
    }
 }

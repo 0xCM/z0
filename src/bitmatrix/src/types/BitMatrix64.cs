@@ -7,7 +7,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     /// <summary>
     /// Defines a 64x64 matrix of bits
@@ -21,46 +21,6 @@ namespace Z0
         /// The matrix order
         /// </summary>
         public const uint N = 64;
-
-        [MethodImpl(Inline)]
-        public static implicit operator BitMatrix<ulong>(in BitMatrix64 src)
-            => BitMatrix.load(src.Data);
-
-        [MethodImpl(Inline)]
-        public static BitMatrix64 operator & (BitMatrix64 A, BitMatrix64 B)
-            => BitMatrix.and(A,B);
-
-        [MethodImpl(Inline)]
-        public static BitMatrix64 operator | (BitMatrix64 A, BitMatrix64 B)
-            => BitMatrix.or(A,B);
-
-        [MethodImpl(Inline)]
-        public static BitMatrix64 operator ^ (BitMatrix64 A, BitMatrix64 B)
-            => BitMatrixA.xor(A,B);
-
-        [MethodImpl(Inline)]
-        public static BitMatrix64 operator ~ (BitMatrix64 A)
-            => BitMatrix.not(A);
-
-        [MethodImpl(Inline)]
-        public static BitMatrix64 operator - (BitMatrix64 A, BitMatrix64 B)
-            => BitMatrix.xornot(A,B);
-
-        [MethodImpl(Inline)]
-        public static BitMatrix64 operator * (BitMatrix64 A, BitMatrix64 B)
-            => BitMatrix.mul(A,B);
-
-        [MethodImpl(Inline)]
-        public static BitVector64 operator * (BitMatrix64 A, BitVector64 B)
-            => BitMatrix.mul(A,B);
-
-        [MethodImpl(Inline)]
-        public static Bit32 operator ==(BitMatrix64 A, BitMatrix64 B)
-            => BitMatrix.same(A,B);
-
-        [MethodImpl(Inline)]
-        public static Bit32 operator !=(BitMatrix64 A, BitMatrix64 B)
-            => !BitMatrix.same(A,B);
 
         [MethodImpl(Inline)]
         internal BitMatrix64(Span<ulong> src)
@@ -107,7 +67,7 @@ namespace Z0
         public ref ulong Head
         {
             [MethodImpl(Inline)]
-            get => ref head(Data);
+            get => ref first(Data);
         }
 
         /// <summary>
@@ -132,7 +92,7 @@ namespace Z0
         public ref BitVector64 this[int row]
         {
             [MethodImpl(Inline)]
-            get => ref Unsafe.As<ulong,BitVector64>(ref seek(ref Head, row));
+            get => ref Unsafe.As<ulong,BitVector64>(ref seek(Head, row));
         }
 
         [MethodImpl(Inline)]
@@ -177,6 +137,46 @@ namespace Z0
 
         public override string ToString()
             => throw new NotSupportedException();
+
+        [MethodImpl(Inline)]
+        public static implicit operator BitMatrix<ulong>(in BitMatrix64 src)
+            => BitMatrix.load(src.Data);
+
+        [MethodImpl(Inline)]
+        public static BitMatrix64 operator & (BitMatrix64 A, BitMatrix64 B)
+            => BitMatrix.and(A,B);
+
+        [MethodImpl(Inline)]
+        public static BitMatrix64 operator | (BitMatrix64 A, BitMatrix64 B)
+            => BitMatrix.or(A,B);
+
+        [MethodImpl(Inline)]
+        public static BitMatrix64 operator ^ (BitMatrix64 A, BitMatrix64 B)
+            => BitMatrixA.xor(A,B);
+
+        [MethodImpl(Inline)]
+        public static BitMatrix64 operator ~ (BitMatrix64 A)
+            => BitMatrix.not(A);
+
+        [MethodImpl(Inline)]
+        public static BitMatrix64 operator - (BitMatrix64 A, BitMatrix64 B)
+            => BitMatrix.xornot(A,B);
+
+        [MethodImpl(Inline)]
+        public static BitMatrix64 operator * (BitMatrix64 A, BitMatrix64 B)
+            => BitMatrix.mul(A,B);
+
+        [MethodImpl(Inline)]
+        public static BitVector64 operator * (BitMatrix64 A, BitVector64 B)
+            => BitMatrix.mul(A,B);
+
+        [MethodImpl(Inline)]
+        public static Bit32 operator ==(BitMatrix64 A, BitMatrix64 B)
+            => BitMatrix.same(A,B);
+
+        [MethodImpl(Inline)]
+        public static Bit32 operator !=(BitMatrix64 A, BitMatrix64 B)
+            => !BitMatrix.same(A,B);
 
         /// <summary>
         /// Defines the 64x64 identity bitmatrix

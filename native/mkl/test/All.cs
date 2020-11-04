@@ -9,7 +9,7 @@ namespace Z0.Mkl
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
     using static Examples;
 
     static class Examples
@@ -222,8 +222,8 @@ namespace Z0.Mkl
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
         {
-            var m = nati<M>();
-            var n = nati<N>();
+            var m = nat32i<M>();
+            var n = nat32i<N>();
             (var method, var introMsg) = varintro($"{m}x{n} * {n}x{m} = {m}x{m}", silent);
             var count = m*n;
 

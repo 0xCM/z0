@@ -10,60 +10,9 @@ namespace Z0
 
     using static Konst;
 
-    [ApiHost(ApiNames.ApiCalls, true)]
-    public readonly struct ApiCalls
-    {
-        [MethodImpl(Inline), Op]
-        public static ApiCall define(ApiClass @class)
-        {
-            var call = new ApiCall();
-            call.Class = @class;
-            return call;
-        }
-
-        [MethodImpl(Inline)]
-        public static ApiCall<A0> define<A0>(ApiClass @class, A0 a0)
-        {
-            var call = new ApiCall<A0>();
-            call.Class = @class;
-            call.Arg0 = a0;
-            return call;
-        }
-
-        [MethodImpl(Inline)]
-        public static ApiCall<A0,A1> define<A0,A1>(ApiClass @class, A0 a0, A1 a1)
-        {
-            var call = new ApiCall<A0,A1>();
-            call.Class = @class;
-            call.Arg0 = a0;
-            call.Arg1 = a1;
-            return call;
-        }
-
-        [MethodImpl(Inline)]
-        public static ApiCall<A0,A1,A2> define<A0,A1,A2>(ApiClass @class, A0 a0, A1 a1, A2 a2)
-        {
-            var call = new ApiCall<A0,A1,A2>();
-            call.Class = @class;
-            call.Arg0 = a0;
-            call.Arg1 = a1;
-            call.Arg2 = a2;
-            return call;
-        }
-
-        [MethodImpl(Inline)]
-        public static ApiCall<A0,A1,A2,A3> define<A0,A1,A2,A3>(ApiClass @class, A0 a0, A1 a1, A2 a2, A3 a3)
-        {
-            var call = new ApiCall<A0,A1,A2,A3>();
-            call.Class = @class;
-            call.Arg0 = a0;
-            call.Arg1 = a1;
-            call.Arg2 = a2;
-            call.Arg3 = a3;
-            return call;
-        }
-    }
-
+    /// <summary>
+    /// Represents a call to a classified operation that accepts no arguments
+    /// </summary>
     [StructLayout(LayoutKind.Sequential)]
     public struct ApiCall
     {
@@ -73,6 +22,10 @@ namespace Z0
         public ApiClass Class;
     }
 
+    /// <summary>
+    /// Represents a call to a classified operation that accepts 1 argument
+    /// </summary>
+    /// <typeparam name="A0">The argument type</typeparam>
     [StructLayout(LayoutKind.Sequential)]
     public struct ApiCall<A0>
     {
@@ -87,6 +40,11 @@ namespace Z0
         public A0 Arg0;
     }
 
+    /// <summary>
+    /// Represents a call to a classified operation that accepts 2 arguments
+    /// </summary>
+    /// <typeparam name="A0">The first argument type</typeparam>
+    /// <typeparam name="A1">The second argument type</typeparam>
     [StructLayout(LayoutKind.Sequential)]
     public struct ApiCall<A0,A1>
     {
@@ -106,6 +64,12 @@ namespace Z0
         public A1 Arg1;
     }
 
+    /// <summary>
+    /// Represents a call to a classified operation that accepts 3 arguments
+    /// </summary>
+    /// <typeparam name="A0">The first argument type</typeparam>
+    /// <typeparam name="A1">The second argument type</typeparam>
+    /// <typeparam name="A2">The third argument type</typeparam>
     [StructLayout(LayoutKind.Sequential)]
     public struct ApiCall<A0,A1,A2>
     {
@@ -130,6 +94,13 @@ namespace Z0
         public A2 Arg2;
     }
 
+    /// <summary>
+    /// Represents a call to a classified operation that accepts 4 arguments
+    /// </summary>
+    /// <typeparam name="A0">The first argument type</typeparam>
+    /// <typeparam name="A1">The second argument type</typeparam>
+    /// <typeparam name="A2">The third argument type</typeparam>
+    /// <typeparam name="A3">The fourth argument type</typeparam>
     [StructLayout(LayoutKind.Sequential)]
     public struct ApiCall<A0,A1,A2,A3>
     {

@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     public class t_bitstring2 : t_bitvectors<t_bitstring2>
     {
@@ -287,7 +287,7 @@ namespace Z0
 
         public void bs_40x64()
             => bs_check<N40,ulong>();
-        
+
         public void bs_41x64()
             => bs_check<N41,ulong>();
 
@@ -350,7 +350,7 @@ namespace Z0
 
         public void bs_61x64()
             => bs_check<N61,ulong>();
-        
+
         public void bs_62x64()
             => bs_check<N62,ulong>();
 
@@ -359,23 +359,23 @@ namespace Z0
 
         public void bs_64x64()
             => bs_check<N64,ulong>();
- 
+
         protected void bs_check<N,T>()
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
-            
-            var storage = new byte[value<N>()];
+
+            var storage = new byte[nat32i<N>()];
             for(var i=0; i< RepCount; i++)
             {
                 var x = Random.BitVector<N,T>();
                 var y = x.ToBitString(storage);
-                Claim.eq(nati<N>(), x.Width);
+                Claim.eq(nat32i<N>(), x.Width);
                 Claim.eq(x.Width, y.Length);
-                
-                var z = y.ToBitVector<N,T>();                        
+
+                var z = y.ToBitVector<N,T>();
                 Claim.eq(x,z);
-            }           
+            }
         }
     }
 }

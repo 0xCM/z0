@@ -9,7 +9,7 @@ namespace Z0
     using System.IO;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     public class t_vblock_and : UnitTest<t_vblock_and>
     {
@@ -49,7 +49,7 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
         {
-            var length = nati(n);
+            var length = nat32i(n);
             var u = Random.VectorBlock(n,t);
             var v = Random.VectorBlock(n,t);
             var result = BlockVectorOps.and(u, v);

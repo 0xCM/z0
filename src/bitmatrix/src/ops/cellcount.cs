@@ -7,11 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst; 
-    using static Memories;    
+    using static Konst;
+    using static z;
 
     partial class BitMatrix
-    {        
+    {
         /// <summary>
         /// Computes the minimum number of cells required to store a bitmatrix of natural dimensions where each row is data-type aligned
         /// </summary>
@@ -26,6 +26,6 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => GridCells.minimum<N,T>() * nati<M>();
+                => GridCells.minimum<N,T>() * nat32i<M>();
     }
 }

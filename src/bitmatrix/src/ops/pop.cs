@@ -7,11 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;    
-    using static Memories;
+    using static Konst;
+    using static z;
 
     partial class BitMatrix
-    {        
+    {
         /// <summary>
         /// Counts the number of enabled bits in the matrix
         /// </summary>
@@ -25,13 +25,13 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static uint pop(in BitMatrix16 A)
         {
-            ref readonly var src = ref head(A.Content.AsUInt64());
+            ref readonly var src = ref first(A.Content.AsUInt64());
             var count = 0u;
             count += Bits.pop(skip(in src, 0));
             count += Bits.pop(skip(in src, 1));
             count += Bits.pop(skip(in src, 2));
             count += Bits.pop(skip(in src, 3));
-            return count;            
+            return count;
         }
 
         /// <summary>
@@ -41,10 +41,10 @@ namespace Z0
         public static uint pop(in BitMatrix32 A)
         {
             const uint bytes = BitMatrix32.N * 3;
-            
-            ref readonly var src = ref head(A.Content.AsUInt64());
+
+            ref readonly var src = ref first(A.Content.AsUInt64());
             var count = 0u;
-            return count;            
+            return count;
         }
 
         /// <summary>

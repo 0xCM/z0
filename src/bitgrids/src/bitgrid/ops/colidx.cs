@@ -8,21 +8,20 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     partial class BitGrid
-    {                
+    {
         [MethodImpl(Inline)]
         public static int colidx<W>(int row, int col, W width = default)
             where W : unmanaged, ITypeWidth
-                => ((int)Widths.type(width) * row) + col;        
+                => ((int)Widths.type(width) * row) + col;
 
         [MethodImpl(Inline)]
         public static int colidx<M,N,W>(M row = default, N col = default, W width = default)
             where W : unmanaged, ITypeWidth
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
-                => ((int)Widths.type(width) * nati(row)) + nati(col);
-
+                => ((int)Widths.type(width) * nat32i(row)) + nat32i(col);
     }
 }

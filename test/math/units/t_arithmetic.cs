@@ -9,7 +9,7 @@ namespace Z0
     using System.Reflection;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     using S = Surrogates;
 
@@ -324,11 +324,11 @@ namespace Z0
         {
             var count = Random.Next(21u, 256u);
             Span<T> data = new T[count];
-            ref var src = ref head(data);
+            ref var src = ref Memories.first(data);
             gmath.increments(first, count, ref src);
 
             for(var i=0; i < count; i++)
-                Claim.Eq(gmath.add(first, convert<T>(i)), data[i]);
+                Claim.Eq(gmath.add(first, force<T>(i)), data[i]);
         }
 
         public void signum_8i()

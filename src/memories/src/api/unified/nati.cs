@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <typeparam name="N">The nat type</typeparam>
         [MethodImpl(Inline)]
-        public static int nati<N>(N n = default)
+        public static int nat32i<N>(N n = default)
             where N : unmanaged, ITypeNat
                 => z.nat32i(n);
     }
