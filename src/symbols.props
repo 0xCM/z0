@@ -17,6 +17,7 @@
 
     <Tables>$(Src)tables/z0.tables.csproj</Tables>
     <Konst>$(Src)konst/z0.konst.csproj</Konst>
+    <Api>$(Src)api/z0.api.csproj</Api>
 
     <Xed>$(Src)xed/z0.xed.csproj</Xed>
     <Lang>$(Src)lang/z0.lang.csproj</Lang>

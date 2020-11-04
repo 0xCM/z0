@@ -112,8 +112,6 @@ namespace Z0.Logix
             var v2_name = v2.Format(false);
             var v3_name = v3.Format(false);
             var method = MethodInfo.GetCurrentMethod().DisplayName<T>();
-            // var msg = AppMsg.Babble($"{method}");
-            // Deposit(msg);
 
             var expr = binary(k1, binary(k0, v0,v1), binary(k0, v2,v3));
             var op0 = NumericLogixHost.lookup<T>(k0);

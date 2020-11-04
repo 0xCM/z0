@@ -11,12 +11,15 @@ namespace Z0
     using static Konst;
     using static z;
 
-    [ApiHost(ApiNames.BitFormatter)]
+    [ApiHost(ApiNames.BitFormatter, true)]
     public readonly struct BitFormatter : IBitFormatter
     {
+        const NumericKind Closure = UnsignedInts;
+
         public static BitFormatter Service => default;
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static BitFormatter<T> create<T>()
             where T : struct
                 => default;
@@ -53,6 +56,34 @@ namespace Z0
         public static void format(byte src, uint maxbits, Span<char> dst, ref int k)
             => bits(src, maxbits, dst, ref k);
 
+        [Op]
+        public static string format(params Bit32[] src)
+        {
+            var count = src.Length;
+            if(count == 0)
+                return EmptyString;
+
+            var terms = @readonly(src);
+            Span<char> dst = stackalloc char[count];
+            for(var i=0u; i<count; i++)
+                seek(dst,i) = skip(terms,i).ToChar();
+            return new string(dst);
+        }
+
+        [Op]
+        public static string format(params bit[] src)
+        {
+            var count = src.Length;
+            if(count == 0)
+                return EmptyString;
+
+            var terms = @readonly(src);
+            Span<char> dst = stackalloc char[count];
+            for(var i=0u; i<count; i++)
+                seek(dst,i) = skip(terms,i).ToChar();
+            return new string(dst);
+        }
+
         [MethodImpl(Inline)]
         public static uint format(ReadOnlySpan<byte> src, uint maxbits, Span<char> dst)
         {
@@ -61,12 +92,12 @@ namespace Z0
             return (uint)k;
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static string format<T>(T src, in BitFormat config)
             where T : struct
                 => format(z.bytes(src), config);
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static string format<T>(T src)
             where T : struct
                 => format(src, BitFormatter.configure());
@@ -135,12 +166,12 @@ namespace Z0
             }
         }
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static string bits<T>(T src)
             where T : struct
                 => bits(src, BitFormatter.configure());
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static string bits<T>(T src, in BitFormat config)
             where T : struct
                 => bits(bytes(src), config);

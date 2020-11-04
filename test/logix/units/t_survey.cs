@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0.Logix
-{        
+{
     using System;
 
 
@@ -11,12 +11,12 @@ namespace Z0.Logix
     {
 
         void emit_asci_table()
-        {            
+        {
             using var dst = CaseWriter(FileExtensions.Csv);
 
             var min = (int)'A';
             var max = (int)'Z';
-            
+
             for(var i = min; i<=max; i++)
             {
                 dst.Write(Convert.ToChar(i).ToString().PadRight(4));
@@ -24,7 +24,7 @@ namespace Z0.Logix
                 dst.Write(Chars.Space);
             }
             dst.WriteLine();
-            
+
             for(var i = min; i<=max; i++)
             {
                 dst.Write(i.ToString().PadRight(4));
@@ -35,37 +35,37 @@ namespace Z0.Logix
 
         public void survey_8u()
         {
-            var survey = Survey.Template<byte>(1, "Survey 8u");
-            var matrix = Survey.Matrix(survey); 
-            
+            var survey = SurveyBuilder.template<byte>(1, "Survey 8u");
+            var matrix = Survey.Matrix(survey);
+
         }
 
         public void survey_16u()
         {
-            var survey = Survey.Template<ushort>(1, "Survey 16u", 11, 5);
+            var survey = SurveyBuilder.template<ushort>(1, "Survey 16u", 11, 5);
             var matrix = Survey.Matrix(survey);
 
             using var dst = BitMatrixServices.Factory.Writer(CasePath(FileExtension.Define("survey.table")));
             dst.Write(matrix);
 
             var response = Survey.Respond(survey, Random);
-            
+
 
         }
 
         public void survey_max32()
         {
-            var survey = Survey.Template<uint>(1, "Survey 32u", 20);
-            var matrix = Survey.Matrix(survey);            
+            var survey = SurveyBuilder.template<uint>(1, "Survey 32u", 20);
+            var matrix = Survey.Matrix(survey);
         }
 
         public void survey_max64()
         {
-            var survey = Survey.Template<ulong>(1, "Survey 64u", 60, 10);
+            var survey = SurveyBuilder.template<ulong>(1, "Survey 64u", 60, 10);
             var matrix = Survey.Matrix(survey);
             using var dst = BitMatrixServices.Factory.Writer(CasePath(FileExtension.Define("table")));
             dst.Write(matrix);
-            
+
         }
     }
 }

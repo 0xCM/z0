@@ -74,7 +74,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public byte Index(T src)
-            => (byte)Pow2.log(uint64(src));
+            => (byte)Pow2.log2(uint64(src));
 
         [MethodImpl(Inline)]
         public string Format()

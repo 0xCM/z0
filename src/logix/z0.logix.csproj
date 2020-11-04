@@ -12,6 +12,7 @@
     <ProjectReference Include="$(Circuits)" />
     <ProjectReference Include="$(Matrix)" />
     <ProjectReference Include="$(BitGrids)" />
+    <ProjectReference Include="$(Api)" />
   </ItemGroup>
 
 </Project>

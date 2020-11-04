@@ -50,7 +50,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
-        public static byte log(byte src)
+        public static byte log2(byte src)
             => (byte)BitOperations.Log2((uint)src);
 
         /// <summary>
@@ -58,7 +58,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
-        public static ushort log(ushort src)
+        public static ushort log2(ushort src)
             => (ushort)BitOperations.Log2((uint)src);
 
         /// <summary>
@@ -66,7 +66,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
-        public static uint log(uint src)
+        public static uint log2(uint src)
             => (uint)BitOperations.Log2(src);
 
         /// <summary>
@@ -74,8 +74,9 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
-        public static ulong log(ulong src)
+        public static ulong log2(ulong src)
             => (ulong)BitOperations.Log2(src);
+
 
         [MethodImpl(Inline), Op]
         public static ulong lookup(byte i)

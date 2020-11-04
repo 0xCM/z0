@@ -172,10 +172,12 @@ readonly struct ApiNames
 
     public const string DbArtifacts = db + dot + artifacts;
 
+    const string formatter = nameof(formatter);
+
     // ~~ Bits
     // ~~ -----------------------------------------------------------------------------------------
 
-    public const string BitFormatter = bits + dot + formatters;
+    public const string BitFormatter = bits + dot + formatter;
 
     public const string BitStream = bits + dot + stream;
 

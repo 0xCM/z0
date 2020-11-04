@@ -25,7 +25,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(math.log2(uint64(a)));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
     }
 }
