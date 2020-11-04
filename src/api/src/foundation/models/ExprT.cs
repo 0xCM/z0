@@ -5,15 +5,17 @@
 namespace Z0
 {
     using System;
-    using static z;
 
-    readonly struct App
+    public readonly struct Expr<T> : IExpr<Expr<T>,T>
+        where T : unmanaged
     {
-        public static int Main(params string[] args)
-        {
-            using var wf = WfShell.create(args);
-            iter(wf.ApiParts.ManagedSources, m => wf.Raise(WfEvents.rows(m)));
-            return 0;
-        }
+
+        /// <summary>
+        /// The identified expression
+        /// </summary>
+        public IExpr<T> Encoding {get;}
+
+        public string Format()
+            => string.Empty;
     }
 }

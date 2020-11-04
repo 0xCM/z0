@@ -2,14 +2,17 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-
-[assembly: PartId(PartId.Unity)]
-
-namespace Z0.Parts
+namespace Z0
 {
-    public sealed class Unity : Part<Unity>
+    using System;
+    using System.Runtime.CompilerServices;
+
+    using static Konst;
+
+    [ApiHost(ApiNames.ApiCallRoutes, true)]
+    public readonly partial struct ApiCallRoutes
     {
-        public override PartId[] Needs
-            => parts(PartId.Konst);
+
+
     }
 }

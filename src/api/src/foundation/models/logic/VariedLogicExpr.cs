@@ -27,8 +27,8 @@ namespace Z0
         [MethodImpl(Inline)]
         internal VariedLogicExpr(ILogicExpr baseExpr, params LogicVariable[] variables)
         {
-            this.BaseExpr = baseExpr;
-            this.Vars = variables;
+            BaseExpr = baseExpr;
+            Vars = variables;
         }
 
         public void SetVars(params ILogicExpr[] values)

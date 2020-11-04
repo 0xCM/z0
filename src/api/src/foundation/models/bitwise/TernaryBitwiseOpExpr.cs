@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// Defines a typed ternary bitwise operator expression
     /// </summary>
-    public sealed class TernaryBitwiseOpExpr<T> : ITernaryBitwiseOpExpr<T>
+    public readonly struct TernaryBitwiseOpExpr<T> : ITernaryBitwiseOpExpr<T>
         where T : unmanaged
     {
         /// <summary>

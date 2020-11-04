@@ -19,8 +19,8 @@ namespace Z0
         [MethodImpl(Inline)]
         internal UnaryLogicOpExpr(UnaryBitLogicKind kind, ILogicExpr<T> arg)
         {
-            this.Arg = arg;
-            this.ApiClass = kind;
+            Arg = arg;
+            ApiClass = kind;
         }
 
         ILogicExpr IUnaryOpExpr<ILogicExpr>.Arg

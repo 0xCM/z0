@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Konst)" />
+    <ProjectReference Include="$(Api)" />
     <ProjectReference Include="$(Domain)" />
   </ItemGroup>
 

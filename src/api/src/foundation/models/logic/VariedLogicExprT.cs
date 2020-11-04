@@ -30,8 +30,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public VariedLogicExpr(ILogicExpr<T> baseExpr, params ILogicVarExpr<T>[] variables)
         {
-            this.BaseExpr = baseExpr;
-            this.Vars = variables;
+            BaseExpr = baseExpr;
+            Vars = variables;
         }
 
         ILogicExpr IVariedLogicExpr.BaseExpr

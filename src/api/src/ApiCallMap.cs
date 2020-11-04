@@ -4,11 +4,16 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static ApiNameParts;
+    using System;
+    using System.Runtime.CompilerServices;
 
-    [LiteralProvider]
-    readonly struct ApiNames
+    using static Konst;
+
+    [ApiHost(ApiNames.ApiCallMap, true)]
+    public readonly partial struct ApiCallMap
     {
 
+
     }
+
 }

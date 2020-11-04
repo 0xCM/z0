@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// Captures a binary bitwise operator along with with its operands
     /// </summary>
-    public sealed class BinaryBitwiseOpExpr<T> : IBinaryBitwiseOpExpr<T>
+    public readonly struct BinaryBitwiseOpExpr<T> : IBinaryBitwiseOpExpr<T>
         where T : unmanaged
     {
         /// <summary>
@@ -42,7 +42,7 @@ namespace Z0
         /// Renders the expression in canonical form
         /// </summary>
         public string Format()
-            => ApiClass.Format(LeftArg,RightArg);
+            => ApiClass.Format(LeftArg, RightArg);
 
         public override string ToString()
             => Format();

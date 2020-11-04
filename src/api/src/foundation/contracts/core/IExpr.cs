@@ -20,17 +20,16 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The type over which the expression is defined</typeparam>
     public interface IExpr<T> : IExpr
-        where T : unmanaged
+        where T : struct
     {
 
     }
 
     public interface IExpr<F,T>
-        where T : unmanaged
-        where F : unmanaged, IExpr<F,T>
+        where T : struct
+        where F : struct, IExpr<F,T>
     {
 
 
     }
-
 }
