@@ -1,1 +1,0 @@
-{"version":3,"file":"crossgen.js","sourceRoot":"","sources":["../../src/crossgen.ts"],"names":[],"mappings":";;;AAEA,kBAAe,QAAQ,CAAA;AAEvB,IAAI,IAAI,GAAQ,UAAU,CAAA;AA2Bf,QAAA,IAAI,GAA8B;IACzC,IAAI;IACJ;QACI,IAAI;QACJ,OAAO;QACP,UAAU;QACV,SAAS;QACT,SAAS;QACT,aAAa;QACb,CAAC,KAAK,EAAE,EAAE,CAAC;KAEd;CAEJ,CAAA;AACU,QAAA,GAAG,GAAsB;IAChC,IAAI;IACJ;;;;;;;;;;;;;;;;;;;;;KAqBC;CACJ,CAAA"}

@@ -6,7 +6,6 @@
     <AssemblyName>ztool</AssemblyName>
   </PropertyGroup>
 
-
   <ItemGroup>
     <ProjectReference Include="$(Konst)" />
     <ProjectReference Include="$(Api)" />
@@ -15,7 +14,6 @@
 
    <ItemGroup>
     <EmbeddedResource Include="help/**/*.help" />
-    <EmbeddedResource Include="cases/**/*.log" />
    </ItemGroup>
 
 </Project>
