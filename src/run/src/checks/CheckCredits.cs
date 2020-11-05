@@ -67,7 +67,7 @@ namespace Z0
             where R : ITextual
         {
             var fx = new WfFunc<C,R>(f.Method.Name);
-            Wf.Status(fx, f());
+            Wf.Status($"{f()}");
         }
 
         void Status<C,R>(WfFunc<C> fx, R src)

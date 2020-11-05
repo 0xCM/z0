@@ -21,7 +21,7 @@ namespace Z0
         public FlairKind Flair {get;}
 
         [MethodImpl(Inline)]
-        public CmdCreatedEvent(CmdToolId id, CorrelationToken ct, FlairKind flair = Created)
+        public CmdCreatedEvent(ToolId id, CorrelationToken ct, FlairKind flair = Created)
         {
             EventId = (EventName, id, ct);
             Flair = flair;

@@ -4,6 +4,7 @@
 //-----------------------------------------------------------------------------
 using static ApiNameParts;
 
+[ApiNameProvider]
 readonly struct ApiNames
 {
     public const string Signatures = signatures;
@@ -38,15 +39,32 @@ readonly struct ApiNames
 
     public const string ApiRuntime = api + dot + runtime;
 
-    public const string XCmdWorkers = api + dot + cmd + dot + workers;
-
-    public const string XCmdSamples = api + dot + cmd + dot + samples;
-
-    public const string XCmdCatalog = api + dot + cmd + dot + catalog;
-
     public const string ApiSigs = api + dot + signatures;
 
     const string samples = nameof(samples);
 
     const string catalog = nameof(catalog);
+
+    public const string ToolCmd = nameof(cmd) + dot + tools;
+
+    public const string XCmdWorkers = cmd + dot + workers + dot + extensions;
+
+    public const string XCmdSamples = cmd + dot + samples + dot + extensions;
+
+    public const string XCmdCatalog = cmd + dot + catalog + dot + extensions;
+
+}
+
+[ToolNameProvider]
+readonly struct ToolNames
+{
+    public const string echo = nameof(echo);
+
+    public const string dumpbin = nameof(dumpbin);
+
+    public const string procdump = nameof(procdump);
+
+    public const string ildasm = nameof(ildasm);
+
+    public const string ilasm = nameof(ilasm);
 }

@@ -23,34 +23,31 @@ namespace Z0
         public IndexedSeq(T[] src)
             => Data = src;
 
+        [MethodImpl(Inline)]
+        public void Clear()
+            => Terms.Clear();
         public Span<T> Terms
         {
             [MethodImpl(Inline)]
-            get => Data;
+            get => Data ?? EmptyTermSeq;
         }
 
         public ReadOnlySpan<T> View
         {
             [MethodImpl(Inline)]
-            get => Data;
+            get => Terms;
         }
 
         public T[] Storage
         {
             [MethodImpl(Inline)]
-            get => Data;
+            get => Data ?? Array.Empty<T>();
         }
 
         public ref T this[I index]
         {
             [MethodImpl(Inline)]
             get => ref seek(Terms, @as<I,uint>(index));
-        }
-
-        uint Length
-        {
-            [MethodImpl(Inline)]
-            get => (uint)(Data?.Length ?? 0);
         }
 
         public I Count
@@ -64,12 +61,6 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Length == 0;
         }
-
-        int IMeasured.Length
-            => (int)Length;
-
-        ref T IIndex<T>.this[int index]
-            => ref Data[index];
 
         [MethodImpl(Inline)]
         public bool Equals(IndexedSeq<I,T> rhs)
@@ -104,6 +95,18 @@ namespace Z0
         public IndexedSeq<I,T> Where(Func<T,bool> predicate)
             => view(from x in Data where predicate(x) select x);
 
+        int IMeasured.Length
+            => (int)Length;
+
+        ref T IIndex<T>.this[int index]
+            => ref Data[index];
+
+        uint Length
+        {
+            [MethodImpl(Inline)]
+            get => (uint)(Data?.Length ?? 0);
+        }
+
         [MethodImpl(Inline)]
         public static implicit operator IndexedSeq<I,T>(T[] src)
             => new IndexedSeq<I,T>(src);
@@ -111,5 +114,17 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator T[](IndexedSeq<I,T> src)
             => src.Data;
+
+        static Span<T> EmptyTermSeq
+        {
+            [MethodImpl(Inline)]
+            get => Span<T>.Empty;
+        }
+
+        public static IndexedSeq<I,T> Empty
+        {
+            [MethodImpl(Inline)]
+            get => new IndexedSeq<I,T>(Array.Empty<T>());
+        }
     }
 }

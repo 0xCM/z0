@@ -131,12 +131,19 @@ namespace Z0
         public IndexedSeq<T> Where(Func<T,bool> predicate)
             => api.indexed(from x in Data where predicate(x) select x);
 
-        /// <summary>
-        /// Implicitly constructs a sequence from an array
-        /// </summary>
-        /// <param name="src">The source array</param>
         [MethodImpl(Inline)]
         public static implicit operator IndexedSeq<T>(T[] src)
             => api.indexed(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator T[](IndexedSeq<T> src)
+            => src.Data;
+
+        static Span<T> EmptyTermSeq
+        {
+            [MethodImpl(Inline)]
+            get => Span<T>.Empty;
+        }
+
     }
 }

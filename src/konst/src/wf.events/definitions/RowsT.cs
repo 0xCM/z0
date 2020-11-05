@@ -28,7 +28,7 @@ namespace Z0
         public RowsEvent(T data)
         {
             DataType = typeof(T);
-            EventId = (DataType, CorrelationToken.Empty);
+            EventId = DataType;
             Content = data;
             Flair = FlairKind.DataRow;
         }

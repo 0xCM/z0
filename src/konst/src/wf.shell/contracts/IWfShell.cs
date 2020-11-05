@@ -88,11 +88,6 @@ namespace Z0
         void Status<T>(T data)
             => Status(Host,data);
 
-        void Status<C,R>(WfFunc<C,R> f, R result)
-            where C : IWfStep<C>, new()
-            where R : ITextual
-                => Raise(new StatusEvent<C,R>(f, result, Ct));
-
         void Warn<T>(WfStepId step, T content)
             => Raise(warn(step, content, Ct));
 
@@ -121,7 +116,7 @@ namespace Z0
         // ~ Lifecycle
         // ~ ---------------------------------------------------------------------------
 
-        void Created(CmdToolId tool)
+        void Created(ToolId tool)
             => Raise(created(tool, Ct));
 
         void Created(WfStepId id)

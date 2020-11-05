@@ -49,13 +49,16 @@ namespace Z0
             => new WfEventId(src.name, src.cmd, src.ct);
 
         [MethodImpl(Inline)]
-        public static implicit operator WfEventId((ToolId tool, CorrelationToken ct) src)
-            => new WfEventId(src.tool, src.ct);
+        public static implicit operator WfEventId(Type row)
+            => new WfEventId(row);
 
         [MethodImpl(Inline)]
-        public static implicit operator WfEventId((WfFunc fx, CorrelationToken ct) src)
-            => new WfEventId(src.fx, src.ct);
-
+        public WfEventId(Type type)
+        {
+            Ts = timestamp();
+            Ct = CorrelationToken.Empty;;
+            Identifier = text.format("{0} | {1} | {2}Row", Ts, Ct, type.Name);
+        }
 
         [MethodImpl(Inline)]
         public WfEventId(string name, CorrelationToken ct, Timestamp? ts = null)
@@ -63,14 +66,6 @@ namespace Z0
             Ts = ts ?? timestamp();
             Ct = ct;
             Identifier = text.format("{0} | {1} | {2}", Ts, Ct, name);
-        }
-
-        [MethodImpl(Inline)]
-        public WfEventId(ToolId tool, CorrelationToken ct, Timestamp? ts = null)
-        {
-            Ts = ts ?? timestamp();
-            Ct = ct;
-            Identifier = text.format("{0} | {1} | {2}", Ts, Ct, tool);
         }
 
         [MethodImpl(Inline)]

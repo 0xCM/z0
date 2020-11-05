@@ -9,7 +9,7 @@ namespace Z0
     [Free]
     public interface ICmdScript : ITextual
     {
-        CmdToolId CmdId {get;}
+        ToolId CmdId {get;}
     }
 
     [Free]
