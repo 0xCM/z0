@@ -27,23 +27,14 @@ namespace Z0
 
         const NumericKind Closure = UnsignedInts;
 
-        [Op]
-        public static CmdEngine engine(IWfShell wf, CmdEngineMessage onMsg, CmdEngineError onError)
-        {
-            var settings = new CmdEngineSettings();
-            settings.EngineKind = CmdEngineKind.CmdExe;
-            settings.Path = FS.path("cmd.exe");
+        [MethodImpl(Inline), Op]
+        public static ICmdCatalog catalog(IWfShell wf)
+            => new CmdCatalog(wf);
 
-            var info = new ProcessStartInfo(settings.Path.Name);
-            info.UseShellExecute = false;
-            info.RedirectStandardInput = true;
-            info.RedirectStandardOutput = true;
-            info.RedirectStandardError = true;
-            info.WindowStyle = ProcessWindowStyle.Hidden;
-            info.CreateNoWindow = true;
-            info.Arguments = EmptyString;
-            return new CmdEngine(wf, settings, info, onMsg, onError);
-        }
+        [MethodImpl(Inline), Op]
+        public static CmdBuilder builder(IWfShell wf)
+            => new CmdBuilder(wf);
+
 
         [Op]
         public static CmdScript<CmdScriptPattern> init(IFileDb db, string root, string name, string arg, string delimiter = null, string type = null)

@@ -7,7 +7,7 @@ namespace Z0
     [Cmd]
     public struct EmitFileListCmd : ICmdSpec<EmitFileListCmd>
     {
-        public string ListName;
+        public utf8 ListName;
 
         public FS.FolderPath SourceDir;
 

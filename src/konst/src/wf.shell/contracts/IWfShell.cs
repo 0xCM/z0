@@ -42,6 +42,7 @@ namespace Z0
 
         ICmdCatalog CmdCatalog
             => new CmdCatalog(this);
+
         Assembly[] Components
             => Context.ApiParts.Components;
 

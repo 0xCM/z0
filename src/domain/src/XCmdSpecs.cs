@@ -9,13 +9,18 @@ namespace Z0
     using System.Reflection;
 
     using static Konst;
+    using api = Cmd;
 
-    [ApiHost(ApiNames.XCmdCatalog)]
-    public static partial class XCmdCatalog
+    [ApiHost(ApiNames.XCmdSpecs)]
+    public static partial class XCmdSpecs
     {
         [MethodImpl(Inline), Op]
         public static CmdBuilder CmdBuilder(this IWfShell wf)
             => new CmdBuilder(wf);
+
+        [MethodImpl(Inline), Op]
+        public static ICmdCatalog CmdSpecs(this IWfShell wf)
+            => api.catalog(wf);
 
         [MethodImpl(Inline), Op]
         public static EmitApiSummariesCmd EmitApiSummaries(this ICmdCatalog wf)
@@ -38,6 +43,10 @@ namespace Z0
             => default;
 
         [MethodImpl(Inline), Op]
+        public static EmitAsmOpCodesCmd EmitAsmOpCodes(this ICmdCatalog wf)
+            => default;
+
+        [MethodImpl(Inline), Op]
         public static EmitRenderPatternsCmd EmitRenderPatterns(this ICmdCatalog builder, Type src)
         {
             var cmd = new EmitRenderPatternsCmd();
@@ -51,8 +60,11 @@ namespace Z0
             => new EmitAsmSymbolsCmd();
 
         [MethodImpl(Inline), Op]
-        public static EmitAsmOpCodesCmd EmitAsmOpCodes(this CmdBuilder builder)
-            => new EmitAsmOpCodesCmd(builder.Db.RefDataPath("asm.opcodes"));
+        public static ref EmitAsmOpCodesCmd WithTarget(this ref EmitAsmOpCodesCmd cmd, FS.FilePath dst)
+        {
+            cmd.Target = dst;
+            return ref cmd;
+        }
 
         [MethodImpl(Inline), Op]
         public static EmitResDataCmd EmitResData(this CmdBuilder builder, Assembly src, string id, string match = null)

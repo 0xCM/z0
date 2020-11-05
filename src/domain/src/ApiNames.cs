@@ -51,7 +51,9 @@ readonly struct ApiNames
 
     public const string XCmdSamples = cmd + dot + samples + dot + extensions;
 
-    public const string XCmdCatalog = cmd + dot + catalog + dot + extensions;
+    public const string CmdSpecs = cmd + dot + specs;
+
+    public const string XCmdSpecs = cmd + dot + specs + dot + extensions;
 
 }
 

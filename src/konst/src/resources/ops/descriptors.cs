@@ -16,7 +16,7 @@ namespace Z0
     partial struct Resources
     {
         [Op]
-        public static unsafe ResourceDescriptor[] descriptors(Assembly src, string match = null)
+        public static unsafe ResourceDescriptor[] descriptors(Assembly src, utf8? match = null)
         {
             var resnames = Resources.names(src, match);
             var count = resnames.Length;

@@ -32,6 +32,10 @@ namespace Z0
             => new utf8(src);
 
         [MethodImpl(Inline)]
+        public static implicit operator string(utf8 src)
+            => src.Format();
+
+        [MethodImpl(Inline)]
         public static implicit operator utf8(byte[] src)
             => new utf8(src);
 

@@ -14,9 +14,9 @@ namespace Z0
     partial struct Resources
     {
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<string> names(Assembly src, string match = null)
-            => !text.blank(match)
-            ? src.GetManifestResourceNames().Where(n => n.Contains(match))
+        public static ReadOnlySpan<string> names(Assembly src, utf8? match = null)
+            => match != null && match.Value.IsNonEmpty
+            ? src.GetManifestResourceNames().Where(n => n.Contains(match.Value))
             : src.GetManifestResourceNames();
     }
 }

@@ -6,18 +6,18 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Reflection;
 
     using static Konst;
 
-    partial struct Resources
+    [ApiHost(ApiNames.CmdSpecs, true)]
+    public readonly partial struct CmdSpecs
     {
         [MethodImpl(Inline), Op]
-        public static ResourceQuery query(Assembly src)
-            => new ResourceQuery(src, Resources.descriptors(src));
+        public static ICmdCatalog catalog(IWfShell wf)
+            => new CmdCatalog(wf);
 
         [MethodImpl(Inline), Op]
-        public static ResourceQuery query(Assembly src, utf8 match)
-            => new ResourceQuery(src, Resources.descriptors(src, match));
+        public static CmdBuilder builder(IWfShell wf)
+            => new CmdBuilder(wf);
     }
 }

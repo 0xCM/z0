@@ -15,7 +15,11 @@ namespace Z0
     public sealed class EmitAsmOpCodes : CmdHost<EmitAsmOpCodes, EmitAsmOpCodesCmd>
     {
         public static CmdResult run(IWfShell wf)
-            => run(wf, wf.CmdBuilder().EmitAsmOpCodes());
+        {
+            var spec = wf.CmdSpecs().EmitAsmOpCodes();
+            spec.WithTarget(wf.Db().RefDataPath("asm.opcodes"));
+            return run(wf,spec);
+        }
 
         [CmdWorker]
         public static CmdResult run(IWfShell wf, in EmitAsmOpCodesCmd spec)

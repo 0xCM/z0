@@ -17,9 +17,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public CmdWorker(CmdWorkerFunction<C> fx)
-        {
-            Fx = fx;
-        }
+            => Fx = fx;
 
         public CmdId CmdId
             => default(C).CmdId;

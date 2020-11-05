@@ -6,25 +6,22 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
 
     using static Konst;
     using static z;
 
-    public readonly struct CmdHandler : ICmdExec<CmdHandler>
+    public readonly struct CmdModel : ICmdModel
     {
-        public CmdId Id {get;}
+        public Type DataType {get;}
 
-        readonly Func<CmdSpec,CmdResult> Fx;
+        public IndexedView<FieldInfo> Fields {get;}
 
         [MethodImpl(Inline)]
-        public CmdHandler(CmdId id, Func<CmdSpec,CmdResult> fx)
+        public CmdModel(Type type, FieldInfo[] fields)
         {
-            Id = id;
-            Fx = fx;
+            DataType = type;
+            Fields = fields;
         }
-
-        [MethodImpl(Inline)]
-        public CmdResult Exec(CmdSpec cmd)
-            => Fx(cmd);
     }
 }
