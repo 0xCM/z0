@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static BitSpans;
 
-    partial class XTend
+    partial class XBitSpans
     {
         /// <summary>
         /// Loads a natspan from a bitspan (nonallocating)
@@ -27,7 +27,7 @@ namespace Z0
         /// Obliterates all bitspan content
         /// </summary>
         /// <param name="src">The source bits</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ref readonly BitSpan Clear(this in BitSpan src)
         {
             clear(src);
@@ -40,7 +40,7 @@ namespace Z0
         /// <param name="src">The source bits</param>
         /// <param name="i0">The index of the first bit to clear</param>
         /// <param name="i1">The index of the last bit to clear</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ref readonly BitSpan Clear(this in BitSpan src, int i0, int i1)
         {
             clear(src, i0, i1);
@@ -52,7 +52,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source bits</param>
         /// <param name="count">The number of source copies to produce</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static BitSpan Replicate(this in BitSpan src, int copies = 1)
             => replicate(src,copies);
 
@@ -60,17 +60,17 @@ namespace Z0
         /// Computes the number of enabled bits covered by source
         /// </summary>
         /// <param name="src">The bit source</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static int PopCount(this in BitSpan src)
             => pop(src);
 
         /// <summary>
-        /// Extracts and packs bitsize[T] source bits; will fail if data are insufficent
+        /// Extracts and packs bitsize[T] source bits
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <param name="t">A target scalar type representative</param>
         /// <typeparam name="T">The target scalar type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static T Extract<T>(this in BitSpan src, T t = default)
             where T : unmanaged
                 => BitSpans.extract<T>(src);
@@ -80,7 +80,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <typeparam name="T">The scalar type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static T Convert<T>(this in BitSpan src)
             where T : unmanaged
                 => BitSpans.bitslice<T>(src);
@@ -91,12 +91,12 @@ namespace Z0
         /// <param name="src">The bit source</param>
         /// <param name="offset">The index of the first bit</param>
         /// <typeparam name="T">The scalar type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static T BitSlice<T>(this in BitSpan src, int offset)
             where T : unmanaged
                 => BitSpans.bitslice<T>(src, offset);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static T BitSlice<T>(this in BitSpan src, int offset, int count)
             where T : unmanaged
                 => BitSpans.bitslice<T>(src, offset, count);
@@ -105,7 +105,7 @@ namespace Z0
         /// Eliminates leading zeroes, if any, from the source
         /// </summary>
         /// <param name="src">The bit source</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static BitSpan Trim(this in BitSpan src)
             => BitSpans.trim(src);
 
@@ -114,7 +114,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source bitstring</param>
         /// <param name="maxbits">The maximum length of the target bitstring</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static BitSpan Truncate(this in BitSpan src, int maxbits)
             => BitSpans.truncate(src,maxbits);
 
@@ -123,7 +123,7 @@ namespace Z0
         /// </summary>
         /// <param name="head">The leading bits</param>
         /// <param name="tail">The trailing bits</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static BitSpan Concat(this in BitSpan head, in BitSpan tail)
             => BitSpans.concat(head,tail);
     }

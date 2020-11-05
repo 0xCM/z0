@@ -65,7 +65,7 @@ namespace Z0
         {
             ref var data = ref cmd.Content;
             data.CmdRootName = root == null ? data.CmdRootName : FS.folder(root);
-            data.CmdId = name == null ? data.CmdId : name;
+            data.CmdId = cmd.CmdId;
             data.CmdArgName = arg == null ? data.CmdArgName : arg;
             data.ArgDelimiter = delimiter == null ? data.ArgDelimiter : delimiter;
             data.CmdType = type == null ? data.CmdType : FS.ext(type);

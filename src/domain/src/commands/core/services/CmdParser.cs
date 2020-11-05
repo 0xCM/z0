@@ -8,15 +8,23 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static z;
 
-    partial class BitSpans
+
+    public struct CmdParser
     {
-        /// <summary>
-        /// Creates a bitspan from a parameter array
-        /// </summary>
-        /// <param name="src">The source bits</param>
-        [MethodImpl(Inline), Op]
-        public static BitSpan parts(params Bit32[] src)
-            => new BitSpan(src);
+        CmdId Id;
+
+        TableSpan<CmdArg> Args;
+
+        CmdParser(byte args)
+        {
+            Args = alloc<CmdArg>(args);
+        }
+        public CmdSpec Parse(CmdLine src)
+        {
+            return default;
+        }
     }
+
 }

@@ -33,9 +33,9 @@ namespace Z0
         /// Produces a bitspan with randomized length
         /// </summary>
         /// <param name="random">The random source</param>
-        /// <param name="minlen">The mininimum bitspan length</param>
+        /// <param name="minlen">The minimum bitspan length</param>
         /// <param name="maxlen">The maximum bitspan length</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static BitSpan BitSpan(this IPolyrand random, int minlen, int maxlen)
             => random.BitSpan(random.Next<int>(minlen, maxlen + 1));
 

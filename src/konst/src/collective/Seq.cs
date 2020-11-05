@@ -73,6 +73,16 @@ namespace Z0
             => new IndexedSeq<T>(array(src));
 
         /// <summary>
+        /// Creates an indexed sequence from a stream
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static IndexedSeq<I,T> indexed<I,T>(IEnumerable<T> src)
+            where I : unmanaged
+                => new IndexedSeq<I,T>(array(src));
+
+        /// <summary>
         /// Creates an indexed sequence from a parameter array
         /// </summary>
         /// <param name="src">The data source</param>
@@ -131,8 +141,13 @@ namespace Z0
                 => new IndexedView<I,T>(src);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
+        public static IndexedSeq<I,T> concat<I,T>(IndexedSeq<I,T> head, IndexedSeq<I,T> tail)
+            where I : unmanaged
+                => new IndexedSeq<I,T>(array(head.Storage.Concat(tail.Storage)));
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static IndexedSeq<T> concat<T>(IndexedSeq<T> head, IndexedSeq<T> tail)
-            => new IndexedSeq<T>(array(head.Data.Concat(tail.Data)));
+            => new IndexedSeq<T>(array(head.Storage.Concat(tail.Storage)));
 
         /// <summary>
         /// Constructs a nonempty stream

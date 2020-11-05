@@ -9,6 +9,7 @@ namespace Z0
 
     using static Konst;
     using static z;
+
     using api = FixedBuffers;
 
     public abstract class FixedBuffer<T> : IFixedBuffer<T>

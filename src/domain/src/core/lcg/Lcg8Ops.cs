@@ -18,7 +18,7 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static byte min(in G g)
-            => g.Inc == 0 ? 1 : 0;
+            => g.Inc == 0 ? (byte)1 : (byte)0;
 
         [MethodImpl(Inline), Op]
         public static byte max(in G g)

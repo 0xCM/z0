@@ -21,7 +21,7 @@ namespace Z0
 
     }
 
-    public interface IToken<K,S> : IConstIndex<byte,K,S>
+    public interface IToken<K,S> : IToken<K>
         where S : unmanaged, ISymbol
         where K : unmanaged
     {

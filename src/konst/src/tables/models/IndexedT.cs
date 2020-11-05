@@ -23,7 +23,13 @@ namespace Z0
             get => Data;
         }
 
-        public Span<T> Edit
+        public Span<T> Terms
+        {
+            [MethodImpl(Inline)]
+            get => Data;
+        }
+
+        public T[] Storage
         {
             [MethodImpl(Inline)]
             get => Data;
@@ -111,7 +117,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator Span<T>(Indexed<T> src)
-            => src.Edit;
+            => src.Terms;
 
         [MethodImpl(Inline)]
         public static implicit operator ReadOnlySpan<T>(Indexed<T> src)

@@ -34,11 +34,11 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static BitSpan trim(in BitSpan src)
         {
-            var msbpos = msb(src);
-            if(msbpos != 0 && msbpos != src.Length - 1)
-                return BitSpans.load(src.Data.Slice(0, msbpos + 1));
+            var pos = msb(src);
+            if(pos != 0 && pos != src.Length - 1)
+                return BitSpans.load(src.Data.Slice(0, pos + 1));
             else
-                return src;            
-        }         
+                return src;
+        }
     }
 }

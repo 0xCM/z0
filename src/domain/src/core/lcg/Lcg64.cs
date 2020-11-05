@@ -71,7 +71,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static ulong min(in G g)
-            => g.Inc == 0 ? 1 : 0;
+            => g.Inc == 0 ? 1ul : 0ul;
 
         [MethodImpl(Inline), Op]
         public static ulong max(in G g)

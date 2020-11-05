@@ -54,7 +54,7 @@ namespace Z0
         public static T extract<T>(Span<T> src, BitPos<T> firstpos, BitPos<T> lastpos)
             where T : unmanaged
         {
-            var bitcount = lastpos - firstpos;
+            var bitcount = (uint)(lastpos - firstpos);
             if(bitcount > bitwidth<T>())
                 return NumericLiterals.maxval<T>();
 

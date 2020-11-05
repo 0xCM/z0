@@ -22,6 +22,18 @@ namespace Z0
         public ValueIndex(T[] src)
             => Data = insist(src);
 
+        public T[] Storage
+        {
+            [MethodImpl(Inline)]
+            get => Data;
+        }
+
+        public Span<T> Terms
+        {
+            [MethodImpl(Inline)]
+            get => Data;
+        }
+
         public int Length
         {
             [MethodImpl(Inline)]
@@ -153,7 +165,6 @@ namespace Z0
 
         public ValueIndex<T> Where(Func<T,bool> predicate)
             => api.values(from x in Data where predicate(x) select x);
-
 
         [MethodImpl(Inline)]
         public static implicit operator ValueIndex<T>(T[] src)

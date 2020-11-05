@@ -201,5 +201,11 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Count != 0;
         }
+
+        public KeyedValue<K,V>[] Storage
+            => Pairs;
+
+        public Span<KeyedValue<K,V>> Terms
+            => Pairs;
     }
 }

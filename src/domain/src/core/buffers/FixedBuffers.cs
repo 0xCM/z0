@@ -26,7 +26,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<T> covered<T>(in FixedBuffer<T> src)
-            => first(cover<IndexedSeq<T>>(src.BufferAddress, 1)).Content;
+            => first(cover<IndexedSeq<T>>(src.BufferAddress, 1)).Storage;
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T cell<T>(in FixedBuffer<T> src, uint index, out T value)

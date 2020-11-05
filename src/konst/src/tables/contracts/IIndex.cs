@@ -13,6 +13,13 @@ namespace Z0
     [Free]
     public interface IIndex<T> : IMeasured, IEnumerable<T>
     {
+        T[] Storage {get;}
+
+        Span<T> Terms {get;}
+
+        Deferred<T> Deferred
+            => new Deferred<T>(Storage);
+
         ref T this[int index] {get;}
 
         ref T Lookup(int index)
@@ -27,23 +34,26 @@ namespace Z0
         bool INullity.IsEmpty
             => false;
 
-        IEnumerable<T> Deferred
-        {
-            get
-            {  var count = Count;
-                if(count != 0)
-                {
-                    for(var i=0; i<count; i++)
-                        yield return z.skip(First,i);
-
-                }
-            }
-        }
-
         IEnumerator IEnumerable.GetEnumerator()
-            => Deferred.GetEnumerator();
+            => Deferred.Content.GetEnumerator();
 
         IEnumerator<T> IEnumerable<T>.GetEnumerator()
             => Deferred.ToList().GetEnumerator();
+    }
+
+    public interface IIndex<I,T> : IIndex<T>
+        where I : unmanaged
+    {
+        ref T this[I index] => ref this[z.i32(index)];
+
+        ref T Lookup(I index)
+            => ref this[index];
+    }
+
+    public interface IIndex<H,I,T> : IIndex<I,T>
+        where I : unmanaged
+        where H : struct, IIndex<H,I,T>
+    {
+
     }
 }

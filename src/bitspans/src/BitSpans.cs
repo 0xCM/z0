@@ -10,16 +10,21 @@ namespace Z0
     {
         const NumericKind Closure = Konst.UnsignedInts;
     }
-    
+
     [ApiHost("direct")]
     public partial class SpannedBits
     {
-        const NumericKind Closure = Konst.UnsignedInts;
+
     }
-    
+
 
     public static partial class XTend
     {
 
+    }
+
+    public static partial class XBitSpans
+    {
+        const NumericKind Closure = Konst.UnsignedInts;
     }
 }

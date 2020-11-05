@@ -1,4 +1,4 @@
-<Project  xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
   <PropertyGroup>
     <ToolCoreId>tool.core</ToolCoreId>
@@ -9,7 +9,6 @@
 
   <PropertyGroup>
     <Part>$(Src)part/z0.part.csproj</Part>
-
 
     <Derivatives>$(Src)derivatives/z0.derivatives.csproj</Derivatives>
 
