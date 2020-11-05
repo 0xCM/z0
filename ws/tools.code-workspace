@@ -1,0 +1,20 @@
+{
+	"folders": [
+		{
+			"path": "..\\src\\tools"
+		},
+		{
+			"path": "..\\src\\sys"
+		},
+		{
+			"path": "..\\src\\part"
+		},
+		{
+			"path": "..\\src\\konst"
+		},
+		{
+			"path": "..\\src\\domain"
+		}
+	],
+	"settings": {}
+}

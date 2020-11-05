@@ -15,15 +15,31 @@ namespace Z0
     {
         CmdId Id;
 
-        TableSpan<CmdArg> Args;
+        uint5 Pos;
 
-        CmdParser(byte args)
+        IndexedSeq<uint5,CmdArg> Args;
+
+        public static CmdParser create()
+            => new CmdParser(uint5.Count);
+
+        [MethodImpl(Inline)]
+        CmdParser(uint5 args)
         {
+            Id = CmdId.Empty;
             Args = alloc<CmdArg>(args);
+            Pos = 0;
         }
+
+        [MethodImpl(Inline)]
         public CmdSpec Parse(CmdLine src)
         {
             return default;
+        }
+
+        ref CmdArg Current
+        {
+            [MethodImpl(Inline)]
+            get => ref Args[Pos];
         }
     }
 

@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "..\\src\\konst"
+		},
+		{
+			"path": "..\\src\\sys"
+		},
+		{
+			"path": "..\\src\\part"
+		}
+	],
+	"settings": {}
+}

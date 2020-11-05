@@ -1,6 +1,6 @@
 echo off
 
-set SlnId=konst
+set SlnId=tools
 call new.cmd
 
 set ProjectId=part
@@ -10,4 +10,10 @@ set ProjectId=sys
 call add.cmd
 
 set ProjectId=konst
+call add.cmd
+
+set ProjectId=domain
+call add.cmd
+
+set ProjectId=tools
 call add.cmd

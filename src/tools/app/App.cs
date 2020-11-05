@@ -112,7 +112,6 @@ namespace Z0
             }
         }
 
-
         void RunAll()
         {
             EmitOpCodes();
