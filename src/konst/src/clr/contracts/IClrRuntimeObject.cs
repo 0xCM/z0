@@ -14,7 +14,7 @@ namespace Z0
     {
         ClrArtifactKind ClrKind {get;}
 
-        ClrArtifactKey ClrKey {get;}
+        ClrArtifactKey Token {get;}
 
     }
 

@@ -7,5 +7,3 @@ echo SetupCmd:%SetupCmd%
 echo on
 call %SetupCmd%
 call %BuildCmd%
-
-:: z0 domain dynamic evaluate

@@ -19,6 +19,11 @@ namespace Z0
     [Free]
     public interface IClrRuntimeType : IClrRuntimeObject
     {
+        ClrTypeKind TypeKind {get;}
+
+        ClrArtifactKind IClrRuntimeObject.ClrKind
+            => (ClrArtifactKind)TypeKind;
+
         /// <summary>
         /// Models of the types nested within the subject, if any
         /// </summary>
@@ -34,8 +39,6 @@ namespace Z0
     public interface IClrRuntimeType<T> : IClrRuntimeType
         where T : struct, IClrRuntimeType<T>
     {
-        IClrRuntimeType Generalized {get;}
-
         new IEnumerable<T> NestedTypes
             => z.stream<T>();
 
@@ -56,9 +59,6 @@ namespace Z0
         /// The equivalent non-parametric model
         /// </summary>
         M Untyped {get;}
-
-        IClrRuntimeType IClrRuntimeType<M>.Generalized
-            => Untyped.Generalized;
     }
 
     /// <summary>

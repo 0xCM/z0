@@ -10,14 +10,17 @@ namespace Z0
     using static Konst;
     using static z;
 
-    [CmdHost, ApiHost]
+    [ApiHost]
     public sealed class EmitRenderPatterns : CmdHost<EmitRenderPatterns, EmitRenderPatternsCmd>
     {
         [Op]
         public static EmitRenderPatternsCmd specify(IWfShell wf, Type src)
         {
             var dst = wf.Db().Doc("render.patterns", src.Name, ArchiveFileKinds.Csv);
-            return new EmitRenderPatternsCmd(src,dst);
+            var cmd = new EmitRenderPatternsCmd();
+            cmd.Source = src;
+            cmd.Target = dst;
+            return cmd;
         }
 
         [Op]

@@ -75,6 +75,15 @@ namespace Z0
             get => PartIndex.Hosts;
         }
 
+        /// <summary>
+        /// Hosts with at least one archived code block
+        /// </summary>
+        public ApiHostUri[] NonemptyHosts
+        {
+            [MethodImpl(Inline)]
+            get => PartIndex.Hosts.Where(h => h.IsNonEmpty);
+        }
+
         [MethodImpl(Inline)]
         public ApiCodeBlock Code(MemoryAddress location)
             => Memories[location];

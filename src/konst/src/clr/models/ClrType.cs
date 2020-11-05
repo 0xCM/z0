@@ -9,13 +9,15 @@ namespace Z0
 
     using static Konst;
 
+    using api = ClrQuery;
+
     [ApiDataType(ApiNames.ClrType, true)]
-    public readonly struct ClrType
+    public readonly struct ClrType : IClrRuntimeType<ClrType>
     {
         public Type Definition {get;}
 
-        public ClrTypeKind Kind
-            => default;
+        public ClrTypeKind TypeKind
+            => api.kind(Definition);
 
         [MethodImpl(Inline)]
         public ClrType(Type src)
@@ -27,7 +29,7 @@ namespace Z0
             get => Definition.Assembly;
         }
 
-        public ClrArtifactKey Id
+        public ClrArtifactKey Token
         {
             [MethodImpl(Inline)]
             get => Definition.MetadataToken;

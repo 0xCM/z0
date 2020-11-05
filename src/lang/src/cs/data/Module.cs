@@ -13,7 +13,6 @@ namespace Z0.Lang.Cs
 
     partial struct DataModel
     {
-
         public struct Module : ICsRecord<Module>
         {
             public INamespaceSymbol GlobalNamespace;

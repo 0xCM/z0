@@ -67,7 +67,7 @@ namespace Z0
             => EmitAsmOpCodes.run(Wf);
 
         CmdResult EmitPatterns()
-            => EmitRenderPatterns.run(Wf, CmdBuilder.EmitRenderPatterns(typeof(RP)));
+            => EmitRenderPatterns.run(Wf, Wf.CmdCatalog.EmitRenderPatterns(typeof(RP)));
 
         CmdResult EmitSymbols()
             => EmitAsmSymbols.run(Wf, CmdBuilder.EmitAsmSymbols());
@@ -108,8 +108,15 @@ namespace Z0
             var build = BuildArchives.create(Wf);
             var dllTarget = Wf.Db().Table(ImageSectionHeader.TableId, "z0.dll.headers");
             var exeTarget = Wf.Db().Table(ImageSectionHeader.TableId, "z0.exe.headers");
-            EmitImageHeaders.run(Wf, EmitImageHeadersCmd.specify(Wf, build.DllFiles().Array(), dllTarget));
-            EmitImageHeaders.run(Wf, EmitImageHeadersCmd.specify(Wf, build.ExeFiles().Array(), exeTarget));
+
+            var cmd = Wf.CmdCatalog.EmitImageHeaders();
+            cmd.Sources = build.DllFiles().Array();
+            cmd.Target = Wf.Db().Table(ImageSectionHeader.TableId, "z0.dll.headers");
+            EmitImageHeaders.run(Wf, cmd);
+
+            cmd.Sources = build.ExeFiles().Array();
+            cmd.Target = Wf.Db().Table(ImageSectionHeader.TableId, "z0.exe.headers");
+            EmitImageHeaders.run(Wf, cmd);
         }
 
         void PrintArgs()

@@ -30,7 +30,6 @@ namespace Z0
             Wf.Disposed();
         }
 
-
         public void EmitScripts()
         {
             var tool = DumpBin.create(Wf);
@@ -54,13 +53,24 @@ namespace Z0
             Wf.EmittedFile(script.GetType(), script.Length, Cmd.enqueue(Cmd.job(script.Id, script), Wf.Db()));
         }
 
-        public void Run()
+        public void EmitRuntimeIndex()
         {
             using var flow = Wf.Running();
             var cmd = Wf.CmdCatalog.EmitRuntimeIndex();
             var worker = cmd.Worker();
             var result  = worker.Invoke(Wf, cmd);
             Wf.Status(result);
+
+        }
+
+        void EmitFileLists()
+        {
+            //var cmd1 =
+
+        }
+        public void Run()
+        {
+            EmitScripts();
         }
     }
 }

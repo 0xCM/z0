@@ -19,6 +19,9 @@ namespace Z0
         FS.FolderPath CaptureRoot
             => DbRoot + FS.folder("capture");
 
+        FS.FolderPath CodeGenRoot
+            => FS.dir(@"j:\dev\projects\z0.generated");
+
         /// <summary>
         /// The executing application's data directory
         /// </summary>

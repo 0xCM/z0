@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    [ApiHost(ApiNames.FxSlots)]
+    [ApiHost]
     public readonly struct FxSlots
     {
         [Op]
@@ -38,7 +38,7 @@ namespace Z0
             return z;
         }
 
-        [ApiDataType(ApiNames.FxSlots_n16x8x8x8, true)]
+        [ApiDataType]
         public readonly struct Slots_n16x8x8x8
         {
             [Op]

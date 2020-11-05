@@ -381,7 +381,6 @@ namespace Z0
         public void Run()
         {
 
-
             var api = Wf.Api;
             var catalogs = api.Catalogs;
             if(catalogs.Terms.Length == 0)

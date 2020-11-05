@@ -27,7 +27,7 @@ namespace Z0
         public static ApiMembers jit(IApiHost src)
         {
             var direct = JitDirect(src);
-            var generic = JitGeneric(src);
+            var generic = _JitGeneric(src);
             var all = direct.Concat(generic).Array();
             return all.OrderBy(x => x.Address);
         }
@@ -87,6 +87,47 @@ namespace Z0
                 let uri = OpUri.Define(ApiUriScheme.Located, src.Uri, m.Method.Name, id)
                 let address = z.address(Jit(m.Method))
                 select new ApiMember(uri, m.Method, kid, address);
+
+        static ApiMember[] _JitGeneric(IApiHost src)
+        {
+            var generic = @readonly(ApiQuery.GenericMethods(src));
+            var gCount = generic.Length;
+            var buffer = list<ApiMember>();
+            for(var i=0; i<gCount; i++)
+            {
+                buffer.AddRange(reify(skip(generic,i)));
+            }
+            return buffer.ToArray();
+        }
+
+        [Op]
+        static ApiMember[] reify(HostedMethod src)
+        {
+            var method = src.Method;
+            var types = @readonly(ApiQuery.NumericClosureTypes(method));
+            var count = types.Length;
+            var buffer = alloc<ApiMember>(count);
+            var dst = span(buffer);
+            var @class = method.KindId();
+            try
+            {
+                for(var i=0u; i<count; i++)
+                {
+                    ref readonly var t = ref skip(types, i);
+                    var reified = src.Method.MakeGenericMethod(t);
+                    var address = z.address(Jit(reified));
+                    var id = Diviner.Identify(reified);
+                    var uri = OpUri.Define(ApiUriScheme.Located, src.Host, method.Name, id);
+                    seek(dst,i) = new ApiMember(uri, reified, @class, address);
+                }
+            }
+            catch(Exception e)
+            {
+                term.warn(string.Format("Attempt to create closures over the source method {0} dit not go as anticipated: {1}", method.Name, e));
+                return sys.empty<ApiMember>();
+            }
+            return buffer;
+        }
 
         [Op]
         static ApiMember[] JitGeneric(IApiHost src)

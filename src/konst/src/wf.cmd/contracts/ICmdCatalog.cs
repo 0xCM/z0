@@ -11,6 +11,8 @@ namespace Z0
     public interface ICmdCatalog
     {
         IWfShell Wf {get;}
+
+        IFileDb Db => Wf.Db();
     }
 
     public interface ICmdCatalog<H> : ICmdCatalog

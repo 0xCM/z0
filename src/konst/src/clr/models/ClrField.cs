@@ -25,7 +25,7 @@ namespace Z0
         public ClrField(FieldInfo src)
             => Definition = src;
 
-        public ClrArtifactKey ClrKey
+        public ClrArtifactKey Token
         {
             [MethodImpl(Inline)]
             get => Definition.MetadataToken;

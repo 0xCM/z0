@@ -22,12 +22,11 @@ namespace Z0
         public ClrMember(MemberInfo src)
             => Definition = src;
 
-        public ClrArtifactKey ClrKey
+        public ClrArtifactKey Token
         {
             [MethodImpl(Inline)]
             get => Definition.MetadataToken;
         }
-
 
         public ClrMemberName Name
         {

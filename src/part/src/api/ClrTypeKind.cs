@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
 
-    using p = Pow2x8;
     using static Pow2x8;
 
     /// <summary>

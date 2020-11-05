@@ -24,8 +24,8 @@ namespace Z0
 
         void Display1()
         {
-            var x = AsDeprecated.uint8(4);
-            var y = AsDeprecated.uint8(16);
+            var x = uint8(4);
+            var y = uint8(16);
             var f = K.mul();
 
             var expect = M.eval(f, x, y);

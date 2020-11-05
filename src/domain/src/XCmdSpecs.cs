@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
     using System.Reflection;
 
     using static Konst;
@@ -35,8 +34,17 @@ namespace Z0
             => default;
 
         [MethodImpl(Inline), Op]
-        public static EmitRenderPatternsCmd EmitRenderPatterns(this CmdBuilder builder, Type src)
-            => new EmitRenderPatternsCmd(src, builder.Db.Doc("render.patterns", src.Name, ArchiveFileKinds.Csv));
+        public static EmitImageHeadersCmd EmitImageHeaders(this ICmdCatalog wf)
+            => default;
+
+        [MethodImpl(Inline), Op]
+        public static EmitRenderPatternsCmd EmitRenderPatterns(this ICmdCatalog builder, Type src)
+        {
+            var cmd = new EmitRenderPatternsCmd();
+            cmd.Source = src;
+            cmd.Target = builder.Db.Doc("render.patterns", src.Name, ArchiveFileKinds.Csv);
+            return cmd;
+        }
 
         [MethodImpl(Inline)]
         public static EmitAsmSymbolsCmd EmitAsmSymbols(this CmdBuilder builder)
@@ -48,7 +56,13 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static EmitResDataCmd EmitResData(this CmdBuilder builder, Assembly src, string id, string match = null)
-            => new EmitResDataCmd(src, builder.Db.RefDataRoot() + FS.folder(id), match);
+        {
+            var dst = new EmitResDataCmd();
+            dst.Source = src;
+            dst.Target = builder.Db.RefDataRoot() + FS.folder(id);
+            dst.Match = match ?? EmptyString;
+            return dst;
+        }
 
         public static ref EmitFileListCmd WithKinds(this ref EmitFileListCmd cmd, params FS.FileExt[] ext)
         {

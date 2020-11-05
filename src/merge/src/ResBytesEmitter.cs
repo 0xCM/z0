@@ -36,6 +36,7 @@ namespace Z0
             var hostname = src.Host.Name.ReplaceAny(array('.'), '_');
             var typename = text.concat(src.Host.Owner.Format(), Chars.Underscore, hostname);
             var members = new HashSet<string>();
+
             using var writer = target.Writer();
             EmitFileHeader(writer);
             OpenFileNamespace(writer, "Z0.ByteCode");
@@ -56,6 +57,15 @@ namespace Z0
 
             return resources;
         }
+
+        public static void emit(IWfShell wf, in ApiCodeBlockIndex index, FS.FolderPath dst)
+        {
+            foreach(var host in index.NonemptyHosts)
+            {
+                var emitted = emit(index.HostCodeBlocks(host), dst);
+                wf.Processed(host, emitted.Count);
+            }
+        }
     }
 
     readonly ref struct EmitResBytesStep
@@ -74,43 +84,45 @@ namespace Z0
 
         readonly ApiCodeBlockIndex Index;
 
-        public EmitResBytesStep(IWfShell context, WfHost host, in ApiCodeBlockIndex index)
+        public EmitResBytesStep(IWfShell wf, WfHost host, in ApiCodeBlockIndex index)
         {
-            Wf = context;
             Host = host;
+            Wf = wf.WithHost(Host);
             Index = index;
-            SourceDir = FS.dir(context.Paths.AppCaptureRoot.Name);
-            TargetDir = context.Paths.ResourceRoot + FS.folder(ProjectName);
+            SourceDir = FS.dir(wf.Paths.AppCaptureRoot.Name);
+            TargetDir = wf.Paths.CodeGenRoot + FS.folder(ProjectName);
             Archive = ApiFiles.hex(FS.dir(SourceDir.Name));
             Wf.Created(Host);
         }
 
+        public void Dispose()
+        {
+            Wf.Disposed();
+        }
+
+        void Emitted(HostResources src)
+            => Wf.Processed(src.Host, src.Count);
+
         public void Run()
         {
-            Wf.Running(Host, flow(SourceDir, TargetDir));
+            using var exec = Wf.Running(flow(SourceDir, TargetDir));
 
             try
             {
-                foreach(var host in Index.Hosts)
-                {
-                    if(host.IsNonEmpty)
-                    {
-                        var resources = ResBytesEmitter.emit(Index.HostCodeBlocks(host), TargetDir);
-                        Wf.Processed(host, resources.Count);
-                    }
-                }
+                ResBytesEmitter.emit(Wf, Index, TargetDir);
+                // foreach(var host in Index.Hosts)
+                // {
+                //     if(host.IsNonEmpty)
+                //     {
+                //         var resources = ResBytesEmitter.emit(Index.HostCodeBlocks(host), TargetDir);
+                //         Emitted(resources);
+                //     }
+                // }
             }
             catch(Exception e)
             {
-                Wf.Error(Host, e);
+                Wf.Error(e);
             }
-
-            Wf.Ran(Host, flow(SourceDir, TargetDir));
-        }
-
-        public void Dispose()
-        {
-            Wf.Disposed(Host);
         }
     }
 }
