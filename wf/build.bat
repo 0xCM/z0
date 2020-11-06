@@ -13,7 +13,7 @@ echo BinLog:%BinLog% >> %CmdLog%
 ::set CmdExec=dotnet build %SlnPath% -c Custom -bl:%BinLog%;ProjectImports=ZipFile -m -detailedSummary -graph:true
 set TextLog="%ZDb%\logs\build\z0.machine.log"
 
-set CmdExec=dotnet build %SlnPath% -c Custom -fl -flp:logfile=%TextLog%;verbosity=normal -m -graph:true
+set CmdExec=dotnet build %SlnPath% -c Release -fl -flp:logfile=%TextLog%;verbosity=normal -m -graph:true
 echo CmdExec:%CmdExec% >> %CmdLog%
 
 echo on
