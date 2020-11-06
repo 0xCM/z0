@@ -1,0 +1,2353 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>z0.bitcore</name>
+    </assembly>
+    <members>
+        <member name="M:Z0.Bits.bitclear(System.Byte,System.Byte,System.Byte)">
+            <summary>
+            Disables a sequence of bits starting at a specified index
+            </summary>
+            <param name="src">The bit source</param>
+            <param name="index">The index at which to begin clearing bits</param>
+            <param name="count">The number of bits to clear</param>
+        </member>
+        <member name="M:Z0.Bits.bitclear(System.SByte,System.Byte,System.Byte)">
+            <summary>
+            Disables a sequence of bits starting at a specified index
+            </summary>
+            <param name="src">The bit source</param>
+            <param name="index">The index at which to begin clearing bits</param>
+            <param name="count">The number of bits to clear</param>
+        </member>
+        <member name="M:Z0.Bits.bitclear(System.UInt16,System.Byte,System.Byte)">
+            <summary>
+            Disables a sequence of bits starting at a specified index
+            </summary>
+            <param name="src">The bit source</param>
+            <param name="index">The index at which to begin clearing bits</param>
+            <param name="count">The number of bits to clear</param>
+        </member>
+        <member name="M:Z0.Bits.bitclear(System.Int16,System.Byte,System.Byte)">
+            <summary>
+            Disables a sequence of bits starting at a specified index
+            </summary>
+            <param name="src">The bit source</param>
+            <param name="index">The index at which to begin clearing bits</param>
+            <param name="count">The number of bits to clear</param>
+        </member>
+        <member name="M:Z0.Bits.bitclear(System.UInt32,System.Byte,System.Byte)">
+            <summary>
+            Disables a sequence of bits starting at a specified index
+            </summary>
+            <param name="src">The bit source</param>
+            <param name="index">The index at which to begin clearing bits</param>
+            <param name="count">The number of bits to clear</param>
+        </member>
+        <member name="M:Z0.Bits.bitclear(System.Int32,System.Byte,System.Byte)">
+            <summary>
+            Disables a sequence of bits starting at a specified index
+            </summary>
+            <param name="src">The bit source</param>
+            <param name="index">The index at which to begin clearing bits</param>
+            <param name="count">The number of bits to clear</param>
+        </member>
+        <member name="M:Z0.Bits.bitclear(System.Int64,System.Byte,System.Byte)">
+            <summary>
+            Disables a sequence of bits starting at a specified index
+            </summary>
+            <param name="src">The bit source</param>
+            <param name="index">The index at which to begin clearing bits</param>
+            <param name="count">The number of bits to clear</param>
+        </member>
+        <member name="M:Z0.Bits.bitclear(System.UInt64,System.Byte,System.Byte)">
+            <summary>
+            Disables a sequence of bits starting at a specified index
+            </summary>
+            <param name="src">The bit source</param>
+            <param name="index">The index at which to begin clearing bits</param>
+            <param name="count">The number of bits to clear</param>
+        </member>
+        <member name="M:Z0.Bits.clear8(System.UInt16,System.Byte)">
+            <summary>
+            Disables a sequence of 8 source bits starting at a specified index
+            </summary>
+            <param name="src">The bit source</param>
+            <param name="index">The index at which to begin clearing bits</param>
+        </member>
+        <member name="M:Z0.Bits.clear8(System.UInt32,System.Byte)">
+            <summary>
+            Disables a sequence of 8 source bits starting at a specified index
+            </summary>
+            <param name="src">The bit source</param>
+            <param name="index">The index at which to begin clearing bits</param>
+        </member>
+        <member name="M:Z0.Bits.clear8(System.UInt64,System.Byte)">
+            <summary>
+            Disables a sequence of 8 source bits starting at a specified index
+            </summary>
+            <param name="src">The bit source</param>
+            <param name="index">The index at which to begin clearing bits</param>
+        </member>
+        <member name="M:Z0.Bits.concat(System.Byte,System.Byte)">
+            <summary>
+            Concatenates the bits of 2 unsigned 8-bit integers to produce an unsigned 16-bit integer
+            [a b] -> ab
+            </summary>
+        </member>
+        <member name="M:Z0.Bits.concat(System.UInt16,System.UInt16)">
+            <summary>
+            Concatenates the bits of 2 unsigned 16-bit integers to produce and unsigned 32-bit integer
+            [a b] -> ab
+            </summary>
+        </member>
+        <member name="M:Z0.Bits.concat(System.UInt32@,System.UInt32@)">
+            <summary>
+            Concatenates the bits of 2 unsigned 32-bit integers to produce an unsigned 64-bit integer
+            [a b] -> ab
+            </summary>
+        </member>
+        <member name="M:Z0.Bits.concat(System.Byte,System.Byte,System.Byte,System.Byte)">
+            <summary>
+            Concatenates the bits of 4 unsigned 8-bit integers to produce an unsigned 64-bit integer
+            [a b c d] -> abcd
+            </summary>
+        </member>
+        <member name="M:Z0.Bits.concat(System.UInt16,System.UInt16,System.UInt16,System.UInt16)">
+            <summary>
+            Concatenates the bits of 4 unsigned 16-bit integers to produce an unsigned 64-bit integer
+            [a b c d] -> abcd
+            </summary>
+        </member>
+        <member name="M:Z0.Bits.concat(System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte)">
+            <summary>
+            Concatenates the bits of 8 unsigned 8-bit integers to produce an unsigned 64-bit integer
+            [a b c d] -> abcd
+            </summary>
+        </member>
+        <member name="M:Z0.Bits.copy(System.Byte,System.Byte,System.Byte,System.Byte)">
+            <summary>
+            Overwrites a target bit segment dst[index..(start + count)] with the corresponding source segment src[index..(start + count)]
+            </summary>
+            <param name="src">The source</param>
+            <param name="index">The source/target start index</param>
+            <param name="count">The number of bits to copy</param>
+            <param name="dst">The target</param>
+        </member>
+        <member name="M:Z0.Bits.copy(System.UInt16,System.Byte,System.Byte,System.UInt16)">
+            <summary>
+            Overwrites a target bit segment dst[index..(start + count)] with the corresponding source segment src[index..(start + count)]
+            </summary>
+            <param name="src">The source</param>
+            <param name="index">The source/target start index</param>
+            <param name="count">The number of bits to copy</param>
+            <param name="dst">The target</param>
+        </member>
+        <member name="M:Z0.Bits.copy(System.UInt32,System.Byte,System.Byte,System.UInt32)">
+            <summary>
+            Overwrites a target bit segment dst[index..(start + count)] with the corresponding source segment src[index..(start + count)]
+            </summary>
+            <param name="src">The source</param>
+            <param name="index">The source/target start index</param>
+            <param name="count">The number of bits to copy</param>
+            <param name="dst">The target</param>
+        </member>
+        <member name="M:Z0.Bits.copy(System.UInt64,System.Byte,System.Byte,System.UInt64)">
+            <summary>
+            Overwrites a target bit segment dst[index..(start + count)] with the corresponding source segment src[index..(start + count)]
+            </summary>
+            <param name="src">The source</param>
+            <param name="index">The source/target start index</param>
+            <param name="count">The number of bits to copy</param>
+            <param name="dst">The target</param>
+        </member>
+        <member name="M:Z0.Bits.disable(System.SByte,System.Int32)">
+            <summary>
+            Disables a specified source bit
+            </summary>
+            <param name="src">The source value to manipulate</param>
+            <param name="pos">The position of the bit to disable</param>
+        </member>
+        <member name="M:Z0.Bits.disable(System.Byte,System.Int32)">
+            <summary>
+            Disables a specified source bit
+            </summary>
+            <param name="src">The source value to manipulate</param>
+            <param name="pos">The position of the bit to disable</param>
+        </member>
+        <member name="M:Z0.Bits.disable(System.Int16,System.Int32)">
+            <summary>
+            Disables a specified source bit
+            </summary>
+            <param name="src">The source value to manipulate</param>
+            <param name="pos">The position of the bit to disable</param>
+        </member>
+        <member name="M:Z0.Bits.disable(System.UInt16,System.Int32)">
+            <summary>
+            Disables a specified source bit
+            </summary>
+            <param name="src">The source value to manipulate</param>
+            <param name="pos">The position of the bit to disable</param>
+        </member>
+        <member name="M:Z0.Bits.disable(System.Int32,System.Int32)">
+            <summary>
+            Disables a specified source bit
+            </summary>
+            <param name="src">The source value to manipulate</param>
+            <param name="pos">The position of the bit to disable</param>
+        </member>
+        <member name="M:Z0.Bits.disable(System.UInt32,System.Int32)">
+            <summary>
+            Disables a specified source bit
+            </summary>
+            <param name="src">The source value to manipulate</param>
+            <param name="pos">The position of the bit to disable</param>
+        </member>
+        <member name="M:Z0.Bits.disable(System.Int64,System.Int32)">
+            <summary>
+            Disables a specified source bit
+            </summary>
+            <param name="src">The source value to manipulate</param>
+            <param name="pos">The position of the bit to disable</param>
+        </member>
+        <member name="M:Z0.Bits.disable(System.UInt64,System.Int32)">
+            <summary>
+            Disables a specified source bit
+            </summary>
+            <param name="src">The source value to manipulate</param>
+            <param name="pos">The position of the bit to disable</param>
+        </member>
+        <member name="M:Z0.Bits.disable(System.Single,System.Int32)">
+            <summary>
+            Disables a specified source bit
+            </summary>
+            <param name="src">The source value to manipulate</param>
+            <param name="pos">The position of the bit to disable</param>
+        </member>
+        <member name="M:Z0.Bits.disable(System.Double,System.Int32)">
+            <summary>
+            Disables a specified source bit
+            </summary>
+            <param name="src">The source value to manipulate</param>
+            <param name="pos">The position of the bit to disable</param>
+        </member>
+        <member name="M:Z0.Bits.effsize(System.Byte)">
+            <summary>
+            Computes the minimum number of bytes required to represent the source value
+            </summary>
+            <param name="src">The source value</param>
+        </member>
+        <member name="M:Z0.Bits.effsize(System.UInt16)">
+            <summary>
+            Computes the minimum number of bytes required to represent the source value
+            </summary>
+            <param name="src">The source value</param>
+        </member>
+        <member name="M:Z0.Bits.effsize(System.UInt32)">
+            <summary>
+            Computes the minimum number of bytes required to represent the source value
+            </summary>
+            <param name="src">The source value</param>
+        </member>
+        <member name="M:Z0.Bits.effsize_baseline(System.UInt64)">
+            <summary>
+            Computes the minimum number of bytes required to represent the source value
+            </summary>
+            <param name="src">The source value</param>
+        </member>
+        <member name="M:Z0.Bits.effsize(System.UInt64)">
+            <summary>
+            Computes the minimum number of bytes required to represent the source value
+            </summary>
+            <param name="src">The source value</param>
+        </member>
+        <member name="M:Z0.Bits.effsize(System.SByte)">
+            <summary>
+            Computes the minimum number of bytes required to represent a value
+            </summary>
+            <param name="src">The source value</param>
+        </member>
+        <member name="M:Z0.Bits.effsize(System.Int16)">
+            <summary>
+            Computes the minimum number of bytes required to represent the source value
+            </summary>
+            <param name="src">The source value</param>
+        </member>
+        <member name="M:Z0.Bits.effsize(System.Int32)">
+            <summary>
+            Computes the minimum number of bytes required to represent the source value
+            </summary>
+            <param name="src">The source value</param>
+        </member>
+        <member name="M:Z0.Bits.effsize(System.Int64)">
+            <summary>
+            Computes the minimum number of bytes required to represent the source value
+            </summary>
+            <param name="src">The source value</param>
+        </member>
+        <member name="M:Z0.Bits.bitcount(System.UInt32)">
+             <summary>
+            
+             </summary>
+             <param name="src"></param>
+             <Remarks>Adapted from .Net Core project System.Reflection.Metadata, BitArithmetic class</Remarks>
+        </member>
+        <member name="M:Z0.Bits.bitcount(System.UInt64)">
+             <summary>
+            
+             </summary>
+             <param name="src"></param>
+             <Remarks>Adapted from .Net Core project System.Reflection.Metadata, BitArithmetic class</Remarks>
+        </member>
+        <member name="M:Z0.Bits.effwidth(System.Byte)">
+            <summary>
+            Computes the minimum number of bits required to represent the source value
+            </summary>
+            <param name="src">The source value</param>
+        </member>
+        <member name="M:Z0.Bits.effwidth(System.UInt16)">
+            <summary>
+            Computes the minimum number of bits required to represent the source value
+            </summary>
+            <param name="src">The source value</param>
+        </member>
+        <member name="M:Z0.Bits.effwidth(System.UInt32)">
+            <summary>
+            Computes the minimum number of bits required to represent the source value
+            </summary>
+            <param name="src">The source value</param>
+        </member>
+        <member name="M:Z0.Bits.effwidth(System.UInt64)">
+            <summary>
+            Computes the minimum number of bits required to represent the source value
+            </summary>
+            <param name="src">The source value</param>
+        </member>
+        <member name="M:Z0.Bits.enable(System.SByte,System.Int32)">
+            <summary>
+            Enables a specified source bit
+            </summary>
+            <param name="src">The source value to manipulate</param>
+            <param name="pos">The position of the bit to enable</param>
+        </member>
+        <member name="M:Z0.Bits.enable(System.Byte,System.Int32)">
+            <summary>
+            Enables a specified source bit
+            </summary>
+            <param name="src">The source value to manipulate</param>
+            <param name="pos">The position of the bit to enable</param>
+        </member>
+        <member name="M:Z0.Bits.enable(System.Int16,System.Int32)">
+            <summary>
+            Enables a specified source bit
+            </summary>
+            <param name="src">The source value to manipulate</param>
+            <param name="pos">The position of the bit to enable</param>
+        </member>
+        <member name="M:Z0.Bits.enable(System.UInt16,System.Int32)">
+            <summary>
+            Enables a specified source bit
+            </summary>
+            <param name="src">The source value to manipulate</param>
+            <param name="pos">The position of the bit to enable</param>
+        </member>
+        <member name="M:Z0.Bits.enable(System.Int32,System.Int32)">
+            <summary>
+            Enables a specified source bit
+            </summary>
+            <param name="src">The source value to manipulate</param>
+            <param name="pos">The position of the bit to enable</param>
+        </member>
+        <member name="M:Z0.Bits.enable(System.UInt32,System.Int32)">
+            <summary>
+            Enables a specified source bit
+            </summary>
+            <param name="src">The source value to manipulate</param>
+            <param name="pos">The position of the bit to enable</param>
+        </member>
+        <member name="M:Z0.Bits.enable(System.Int64,System.Int32)">
+            <summary>
+            Enables a specified source bit
+            </summary>
+            <param name="src">The source value to manipulate</param>
+            <param name="pos">The position of the bit to enable</param>
+        </member>
+        <member name="M:Z0.Bits.enable(System.UInt64,System.Int32)">
+            <summary>
+            Enables a specified source bit
+            </summary>
+            <param name="src">The source value to manipulate</param>
+            <param name="pos">The position of the bit to enable</param>
+        </member>
+        <member name="M:Z0.Bits.enable(System.Single,System.Int32)">
+            <summary>
+            Enables a specified source bit
+            </summary>
+            <param name="src">The source value to manipulate</param>
+            <param name="pos">The position of the bit to enable</param>
+        </member>
+        <member name="M:Z0.Bits.enable(System.Double,System.Int32)">
+            <summary>
+            Enables a specified source bit
+            </summary>
+            <param name="src">The source value to manipulate</param>
+            <param name="pos">The position of the bit to enable</param>
+        </member>
+        <member name="M:Z0.Bits.extract(System.SByte,System.Byte,System.Byte)">
+            <summary>
+            Extracts a contiguous range of bits from the source inclusively between two index positions
+            </summary>
+            <param name="src">The source value</param>
+            <param name="k0">The bit position within the source where extraction should begin</param>
+            <param name="k1">The bit position within the source where extraction should end</param>
+        </member>
+        <member name="M:Z0.Bits.extract(System.Byte,System.Byte,System.Byte)">
+            <summary>
+            Extracts a contiguous range of bits from the source inclusively between two index positions
+            </summary>
+            <param name="src">The source value</param>
+            <param name="k0">The bit position within the source where extraction should begin</param>
+            <param name="k1">The bit position within the source where extraction should end</param>
+        </member>
+        <member name="M:Z0.Bits.extract(System.Int16,System.Byte,System.Byte)">
+            <summary>
+            Extracts a contiguous range of bits from the source inclusively between two index positions
+            </summary>
+            <param name="src">The source value</param>
+            <param name="k0">The bit position within the source where extraction should begin</param>
+            <param name="k1">The bit position within the source where extraction should end</param>
+        </member>
+        <member name="M:Z0.Bits.extract(System.UInt16,System.Byte,System.Byte)">
+            <summary>
+            Extracts a contiguous range of bits from the source inclusively between two index positions
+            </summary>
+            <param name="src">The source value</param>
+            <param name="k0">The bit position within the source where extraction should begin</param>
+            <param name="k1">The bit position within the source where extraction should end</param>
+        </member>
+        <member name="M:Z0.Bits.extract(System.UInt32,System.Byte,System.Byte)">
+            <summary>
+            Extracts a contiguous range of bits from the source inclusively between two index positions
+            </summary>
+            <param name="src">The source value</param>
+            <param name="k0">The bit position within the source where extraction should begin</param>
+            <param name="k1">The bit position within the source where extraction should end</param>
+        </member>
+        <member name="M:Z0.Bits.extract(System.Int32,System.Byte,System.Byte)">
+            <summary>
+            Extracts a contiguous range of bits from the source inclusively between two index positions
+            </summary>
+            <param name="src">The source value</param>
+            <param name="k0">The bit position within the source where extraction should begin</param>
+            <param name="k1">The bit position within the source where extraction should end</param>
+        </member>
+        <member name="M:Z0.Bits.extract(System.UInt64,System.Byte,System.Byte)">
+            <summary>
+            Extracts a contiguous range of bits from the source inclusively between two index positions
+            </summary>
+            <param name="src">The source value</param>
+            <param name="k0">The bit position within the source where extraction should begin</param>
+            <param name="k1">The bit position within the source where extraction should end</param>
+        </member>
+        <member name="M:Z0.Bits.extract(System.Int64,System.Byte,System.Byte)">
+            <summary>
+            Extracts a contiguous range of bits from the source inclusively between two index positions
+            </summary>
+            <param name="src">The source value</param>
+            <param name="k0">The bit position within the source where extraction should begin</param>
+            <param name="k1">The bit position within the source where extraction should end</param>
+        </member>
+        <member name="M:Z0.Bits.extract(System.Single,System.Byte,System.Byte)">
+            <summary>
+            Extracts a contiguous range of bits from the source inclusively between two index positions
+            </summary>
+            <param name="src">The source value</param>
+            <param name="k0">The bit position within the source where extraction should begin</param>
+            <param name="k1">The bit position within the source where extraction should end</param>
+        </member>
+        <member name="M:Z0.Bits.extract(System.Double,System.Byte,System.Byte)">
+            <summary>
+            Extracts a contiguous range of bits from the source inclusively between two index positions
+            </summary>
+            <param name="src">The source value</param>
+            <param name="k0">The bit position within the source where extraction should begin</param>
+            <param name="k1">The bit position within the source where extraction should end</param>
+        </member>
+        <member name="M:Z0.Bits.fill(System.Byte,System.Byte,System.Byte)">
+            <summary>
+            Enables a contiguous sequence of source bits starting at a specified index
+            </summary>
+            <param name="src">The bit source</param>
+            <param name="index">The index at which to begin</param>
+            <param name="count">The number of bits to fill</param>
+        </member>
+        <member name="M:Z0.Bits.fill(System.SByte,System.Byte,System.Byte)">
+            <summary>
+            Enables a contiguous sequence of source bits starting at a specified index
+            </summary>
+            <param name="src">The bit source</param>
+            <param name="index">The index at which to begin</param>
+            <param name="count">The number of bits to fill</param>
+        </member>
+        <member name="M:Z0.Bits.fill(System.UInt16,System.Byte,System.Byte)">
+            <summary>
+            Enables a contiguous sequence of source bits starting at a specified index
+            </summary>
+            <param name="src">The bit source</param>
+            <param name="index">The index at which to begin</param>
+            <param name="count">The number of bits to fill</param>
+        </member>
+        <member name="M:Z0.Bits.fill(System.Int16,System.Byte,System.Byte)">
+            <summary>
+            Enables a contiguous sequence of source bits starting at a specified index
+            </summary>
+            <param name="src">The bit source</param>
+            <param name="index">The index at which to begin clearing bits</param>
+            <param name="count">The number of bits to clear</param>
+        </member>
+        <member name="M:Z0.Bits.fill(System.UInt32,System.Byte,System.Byte)">
+            <summary>
+            Enables a contiguous sequence of source bits starting at a specified index
+            </summary>
+            <param name="src">The bit source</param>
+            <param name="index">The index at which to begin</param>
+            <param name="count">The number of bits to fill</param>
+        </member>
+        <member name="M:Z0.Bits.fill(System.Int32,System.Byte,System.Byte)">
+            <summary>
+            Enables a contiguous sequence of source bits starting at a specified index
+            </summary>
+            <param name="src">The bit source</param>
+            <param name="index">The index at which to begin</param>
+            <param name="count">The number of bits to fill</param>
+        </member>
+        <member name="M:Z0.Bits.fill(System.UInt64,System.Byte,System.Byte)">
+            <summary>
+            Enables a contiguous sequence of source bits starting at a specified index
+            </summary>
+            <param name="src">The bit source</param>
+            <param name="index">The index at which to begin</param>
+            <param name="count">The number of bits to fill</param>
+        </member>
+        <member name="M:Z0.Bits.fill(System.Int64,System.Byte,System.Byte)">
+            <summary>
+            Enables a contiguous sequence of source bits starting at a specified index
+            </summary>
+            <param name="src">The bit source</param>
+            <param name="index">The index at which to begin</param>
+            <param name="count">The number of bits to fill</param>
+        </member>
+        <member name="M:Z0.Bits.hi(System.Byte)">
+            <summary>
+            Extracts the upper 4 bits from the source
+            </summary>
+            <param name="src">The source value</param>
+        </member>
+        <member name="M:Z0.Bits.hi(System.UInt16)">
+            <summary>
+            Extracts the upper 8 bits from the source
+            </summary>
+            <param name="src">The source value</param>
+        </member>
+        <member name="M:Z0.Bits.hi(System.UInt32)">
+            <summary>
+            Extracts the upper 16 bits from the source
+            </summary>
+            <param name="src">The bit source</param>
+        </member>
+        <member name="M:Z0.Bits.hi(System.UInt64)">
+            <summary>
+            Extracts the upper 16 bits from the source
+            </summary>
+            <param name="src">The bit source</param>
+        </member>
+        <member name="M:Z0.Bits.hipos(System.Byte)">
+            <summary>
+            Computes the position of the highest enabled source bit, a number between 0 and 7
+            </summary>
+            <param name="src">The source bit</param>
+        </member>
+        <member name="M:Z0.Bits.hipos(System.UInt16)">
+            <summary>
+            Computes the position of the highest enabled source bit, a number between 0 and 15
+            </summary>
+            <param name="src">The source bit</param>
+        </member>
+        <member name="M:Z0.Bits.hipos(System.UInt32)">
+            <summary>
+            Computes the position of the highest enabled source bit, a number between 0 and 31
+            </summary>
+            <param name="src">The source bit</param>
+        </member>
+        <member name="M:Z0.Bits.hipos(System.UInt64)">
+            <summary>
+            Computes the position of the highest enabled source bit, a number between 0 and 63
+            </summary>
+            <param name="src">The source bit</param>
+        </member>
+        <member name="M:Z0.Bits.lo(System.Byte)">
+            <summary>
+            Extracts the lower 4 bits from the source
+            </summary>
+            <param name="src">The source value</param>
+        </member>
+        <member name="M:Z0.Bits.lo(System.UInt16)">
+            <summary>
+            Extracts the lower 8 bits from the source
+            </summary>
+            <param name="src">The source value</param>
+        </member>
+        <member name="M:Z0.Bits.lo(System.UInt32)">
+            <summary>
+            Extracts the lower 16 bits from the source
+            </summary>
+            <param name="src">The bit source</param>
+        </member>
+        <member name="M:Z0.Bits.lo(System.UInt64)">
+            <summary>
+            Extracts the lower half of the bits from the source
+            </summary>
+            <param name="src">The bit source</param>
+        </member>
+        <member name="M:Z0.Bits.msb(System.Byte)">
+            <summary>
+            Returns the state of the most significant bit
+            </summary>
+            <param name="src">The bit source</param>
+        </member>
+        <member name="M:Z0.Bits.msb(System.SByte)">
+            <summary>
+            Returns the state of the most significant bit
+            </summary>
+            <param name="src">The bit source</param>
+        </member>
+        <member name="M:Z0.Bits.msb(System.UInt16)">
+            <summary>
+            Returns the state of the most significant bit
+            </summary>
+            <param name="src">The bit source</param>
+        </member>
+        <member name="M:Z0.Bits.msb(System.Int16)">
+            <summary>
+            Returns the state of the most significant bit
+            </summary>
+            <param name="src">The bit source</param>
+        </member>
+        <member name="M:Z0.Bits.msb(System.UInt32)">
+            <summary>
+            Returns the state of the most significant bit
+            </summary>
+            <param name="src">The bit source</param>
+        </member>
+        <member name="M:Z0.Bits.msb(System.Int32)">
+            <summary>
+            Returns the state of the most significant bit
+            </summary>
+            <param name="src">The bit source</param>
+        </member>
+        <member name="M:Z0.Bits.msb(System.UInt64)">
+            <summary>
+            Returns the state of the most significant bit
+            </summary>
+            <param name="src">The bit source</param>
+        </member>
+        <member name="M:Z0.Bits.msb(System.Int64)">
+            <summary>
+            Returns the state of the most significant bit
+            </summary>
+            <param name="src">The bit source</param>
+        </member>
+        <member name="M:Z0.Bits.nlz(System.Byte)">
+            <summary>
+            Counts the number of leading zero bits in the source
+            </summary>
+            <param name="src">The bit source</param>
+        </member>
+        <member name="M:Z0.Bits.nlz(System.UInt16)">
+            <summary>
+            Counts the number of leading zero bits in the source
+            </summary>
+            <param name="src">The bit source</param>
+        </member>
+        <member name="M:Z0.Bits.nlz(System.UInt32)">
+            <summary>
+            _lzcnt_u32
+            Counts the number of 0 bits prior to the first most significant 1 bit
+            </summary>
+            <param name="src">The source value</param>
+        </member>
+        <member name="M:Z0.Bits.nlz(System.UInt64)">
+            <summary>
+            _lzcnt_u64:
+            Counts the number of 0 bits prior to the first most significant 1 bit
+            </summary>
+            <param name="src">The source value</param>
+        </member>
+        <member name="M:Z0.Bits.ntz(System.SByte)">
+            <summary>
+            int _mm_tzcnt_32 (unsigned int a) TZCNT reg, reg/m32
+            Counts the number of trailing zero bits in the source
+            </summary>
+            <param name="src">The bit source</param>
+        </member>
+        <member name="M:Z0.Bits.ntz(System.Byte)">
+            <summary>
+            int _mm_tzcnt_32 (unsigned int a) TZCNT reg, reg/m32
+            Counts the number of trailing zero bits in the source
+            </summary>
+            <param name="src">The bit source</param>
+        </member>
+        <member name="M:Z0.Bits.ntz(System.Int16)">
+            <summary>
+            int _mm_tzcnt_32 (unsigned int a) TZCNT reg, reg/m32
+            Counts the number of trailing zero bits in the source
+            </summary>
+            <param name="src">The bit source</param>
+        </member>
+        <member name="M:Z0.Bits.ntz(System.UInt16)">
+            <summary>
+            int _mm_tzcnt_32 (unsigned int a) TZCNT reg, reg/m32
+            Counts the number of trailing zero bits in the source
+            </summary>
+            <param name="src">The bit source</param>
+        </member>
+        <member name="M:Z0.Bits.ntz(System.Int32)">
+            <summary>
+            int _mm_tzcnt_32 (unsigned int a) TZCNT reg, reg/m32
+            Counts the number of trailing zero bits in the source
+            </summary>
+            <param name="src">The bit source</param>
+        </member>
+        <member name="M:Z0.Bits.ntz(System.UInt32)">
+            <summary>
+            int _mm_tzcnt_32 (unsigned int a) TZCNT reg, reg/m32
+            Counts the number of trailing zero bits in the source
+            </summary>
+            <param name="src">The bit source</param>
+        </member>
+        <member name="M:Z0.Bits.ntz(System.Int64)">
+            <summary>
+            Counts the number of trailing zero bits in the source
+            </summary>
+            <param name="src">The bit source</param>
+        </member>
+        <member name="M:Z0.Bits.ntz(System.UInt64)">
+            <summary>
+            __int64 _mm_tzcnt_64 (unsigned __int64 a) TZCNT reg, reg/m64
+            Counts the number of trailing zero bits in the source
+            </summary>
+            <param name="src">The bit source</param>
+        </member>
+        <member name="M:Z0.Bits.pack(Z0.Bit32,Z0.Bit32)">
+            <summary>
+            Packs 2 bits into the least bits of an unsigned integer
+            </summary>
+        </member>
+        <member name="M:Z0.Bits.pack(Z0.Bit32,Z0.Bit32,Z0.Bit32)">
+            <summary>
+            Packs 3 bits into the least bits of an unsigned integer
+            </summary>
+        </member>
+        <member name="M:Z0.Bits.pack(Z0.Bit32,Z0.Bit32,Z0.Bit32,Z0.Bit32)">
+            <summary>
+            Packs 4 bits into the least bits of an unsigned integer
+            </summary>
+        </member>
+        <member name="M:Z0.Bits.pack(Z0.bit,Z0.bit,Z0.bit,Z0.bit)">
+            <summary>
+            Packs 4 bits into the least bits of an unsigned integer
+            </summary>
+        </member>
+        <member name="M:Z0.Bits.pack(Z0.bit,Z0.bit,Z0.bit,Z0.bit,Z0.bit)">
+            <summary>
+            Packs 5 bits into the least bits of an unsigned integer
+            </summary>
+        </member>
+        <member name="M:Z0.Bits.pack(Z0.bit,Z0.bit,Z0.bit,Z0.bit,Z0.bit,Z0.bit,Z0.bit,Z0.bit)">
+            <summary>
+            Packs 8 bits into the least bits of an unsigned integer
+            </summary>
+        </member>
+        <member name="M:Z0.Bits.pop(System.SByte)">
+            <summary>
+            Counts the enabled bits in the source
+            </summary>
+            <param name="src">The source bits</param>
+        </member>
+        <member name="M:Z0.Bits.pop(System.Byte)">
+            <summary>
+            Counts the enabled bits in the source
+            </summary>
+            <param name="src">The source bits</param>
+        </member>
+        <member name="M:Z0.Bits.pop(System.Int16)">
+            <summary>
+            Counts the enabled bits in the source
+            </summary>
+            <param name="src">The source bits</param>
+        </member>
+        <member name="M:Z0.Bits.pop(System.UInt16)">
+            <summary>
+            Counts the enabled bits in the source
+            </summary>
+            <param name="src">The source bits</param>
+        </member>
+        <member name="M:Z0.Bits.pop(System.Int32)">
+            <summary>
+            Counts the enabled bits in the source
+            </summary>
+            <param name="src">The source bits</param>
+        </member>
+        <member name="M:Z0.Bits.pop(System.UInt32)">
+            <summary>
+            Counts the enabled bits in the source
+            </summary>
+            <param name="src">The source bits</param>
+        </member>
+        <member name="M:Z0.Bits.pop(System.Int64)">
+            <summary>
+            Counts the enabled bits in the source
+            </summary>
+            <param name="src">The source bits</param>
+        </member>
+        <member name="M:Z0.Bits.pop(System.UInt64)">
+            <summary>
+            Counts the enabled bits in the source
+            </summary>
+            <param name="src">The source bits</param>
+        </member>
+        <member name="M:Z0.Bits.pop(System.UInt64,System.UInt64,System.UInt64)">
+            <summary>
+            Computes the population count of the content of 3 64-bit unsigned integers
+            </summary>
+            <param name="x"></param>
+            <param name="y"></param>
+            <param name="z"></param>
+            <remarks>Reference: https://www.chessprogramming.org/Population_Count</remarks>
+        </member>
+        <member name="M:Z0.Bits.rank(System.Byte,System.Int32)">
+            <summary>
+            Calculates the number of bits set up to and including the specified position
+            </summary>
+            <param name="src">The bit source</param>
+            <param name="pos">The position of the bit for which rank will be calculated</param>
+        </member>
+        <member name="M:Z0.Bits.rank(System.UInt16,System.Int32)">
+            <summary>
+            Calculates the number of bits set up to and including the specified position
+            </summary>
+            <param name="src">The bit source</param>
+            <param name="pos">The position of the bit for which rank will be calculated</param>
+        </member>
+        <member name="M:Z0.Bits.rank(System.UInt32,System.Int32)">
+            <summary>
+            Calculates the number of bits set up to and including the specified position
+            </summary>
+            <param name="src">The bit source</param>
+            <param name="pos">The position of the bit for which rank will be calculated</param>
+        </member>
+        <member name="M:Z0.Bits.rank(System.UInt64,System.Int32)">
+            <summary>
+            Calculates the number of bits set up to and including the specified position
+            </summary>
+            <param name="src">The bit source</param>
+            <param name="pos">The position of the bit for which rank will be calculated</param>
+        </member>
+        <member name="M:Z0.Bits.replicate(System.Byte,System.Byte,System.Byte,System.Int32)">
+            <summary>
+            Replicates source bits [from..to] a specified number of times subject to the constraints imposed by the replicant type
+            </summary>
+            <param name="src">The bit source</param>
+            <param name="from">The first source bit</param>
+            <param name="to">The last source bit</param>
+            <param name="reps">The number of times to clone the defined segment</param>
+        </member>
+        <member name="M:Z0.Bits.replicate(System.UInt16,System.Byte,System.Byte,System.Int32)">
+            <summary>
+            Replicates source bits [from..to] a specified number of times subject to the constraints imposed by the replicant type
+            </summary>
+            <param name="src">The bit source</param>
+            <param name="from">The first source bit</param>
+            <param name="to">The last source bit</param>
+            <param name="reps">The number of times to clone the defined segment</param>
+        </member>
+        <member name="M:Z0.Bits.replicate(System.UInt32,System.Byte,System.Byte,System.Int32)">
+            <summary>
+            Replicates source bits [from..to] a specified number of times subject to the constraints imposed by the replicant type
+            </summary>
+            <param name="src">The bit source</param>
+            <param name="from">The first source bit</param>
+            <param name="to">The last source bit</param>
+            <param name="reps">The number of times to clone the defined segment</param>
+        </member>
+        <member name="M:Z0.Bits.replicate(System.UInt64,System.Byte,System.Byte,System.Int32)">
+            <summary>
+            Replicates source bits [from..to] a specified number of times subject to the constraints imposed by the replicant type
+            </summary>
+            <param name="src">The bit source</param>
+            <param name="from">The first source bit</param>
+            <param name="to">The last source bit</param>
+            <param name="reps">The number of times to clone the defined segment</param>
+        </member>
+        <member name="M:Z0.Bits.reverse(System.Byte)">
+            <summary>
+            Reverses the bits in a byte
+            </summary>
+            <param name="src">The source bits</param>
+            <reference>https://graphics.stanford.edu/~seander/bithacks.htm</reference>
+        </member>
+        <member name="M:Z0.Bits.reverse(System.UInt16)">
+            <summary>
+            Reverses the bits in the source
+            </summary>
+            <param name="src">The source bits</param>
+        </member>
+        <member name="M:Z0.Bits.reverse(System.UInt32)">
+            <summary>
+            Reverses the bits in the source
+            </summary>
+            <param name="x"></param>
+            <remarks>BAD</remarks>
+        </member>
+        <member name="M:Z0.Bits.reverse(System.UInt64)">
+            <summary>
+            Reverses the bits in the source
+            </summary>
+            <param name="src">The source bits</param>
+            <remarks>BAD</remarks>
+        </member>
+        <member name="M:Z0.Bits.rotl(System.Byte,System.Byte)">
+            <summary>
+            Rotates the source bits leftward by a specified offset amount
+            </summary>
+            <param name="src">The source value</param>
+            <param name="offset">The magnitude of the rotation</param>
+        </member>
+        <member name="M:Z0.Bits.rotl(System.UInt16,System.Byte)">
+            <summary>
+            Rotates the source bits leftward by a specified offset amount
+            </summary>
+            <param name="src">The source value</param>
+            <param name="offset">The magnitude of the rotation</param>
+        </member>
+        <member name="M:Z0.Bits.rotl(System.UInt32,System.Byte)">
+            <summary>
+            Rotates the source bits leftward by a specified offset amount
+            </summary>
+            <param name="src">The source value</param>
+            <param name="offset">The magnitude of the rotation</param>
+        </member>
+        <member name="M:Z0.Bits.rotl(System.UInt64,System.Byte)">
+            <summary>
+            Rotates the source bits leftward by a specified offset amount
+            </summary>
+            <param name="src">The source value</param>
+            <param name="offset">The magnitude of the rotation</param>
+        </member>
+        <member name="M:Z0.Bits.rotl(System.Byte,System.Byte,System.Int32)">
+            <summary>
+            Rotates the source bits leftward by a specified offset amount
+            </summary>
+            <param name="src">The source value</param>
+            <param name="offset">The magnitude of the rotation</param>
+            <param name="width">The effective bit-width of the source value</param>
+        </member>
+        <member name="M:Z0.Bits.rotl(System.UInt16,System.Byte,System.Int32)">
+            <summary>
+            Rotates the source bits leftward by a specified offset amount
+            </summary>
+            <param name="src">The source value</param>
+            <param name="offset">The magnitude of the rotation</param>
+            <param name="width">The effective bit-width of the source value</param>
+        </member>
+        <member name="M:Z0.Bits.rotl(System.UInt32,System.Byte,System.Int32)">
+            <summary>
+            Rotates the source bits leftward by a specified offset amount
+            </summary>
+            <param name="src">The source value</param>
+            <param name="offset">The magnitude of the rotation</param>
+            <param name="width">The effective bit-width of the source value</param>
+        </member>
+        <member name="M:Z0.Bits.rotl(System.UInt64,System.Byte,System.Int32)">
+            <summary>
+            Rotates the source bits leftward by a specified offset amount
+            </summary>
+            <param name="src">The source value</param>
+            <param name="offset">The magnitude of the rotation</param>
+            <param name="width">The effective bit-width of the source value</param>
+        </member>
+        <member name="M:Z0.Bits.rotr(System.Byte,System.Byte)">
+            <summary>
+            Rotates the source bits rightward by a specified offset
+            </summary>
+            <param name="src">The source value</param>
+            <param name="offset">The magnitude of the rotation</param>
+        </member>
+        <member name="M:Z0.Bits.rotr(System.UInt16,System.Byte)">
+            <summary>
+            Rotates the source bits rightward by a specified offset
+            </summary>
+            <param name="src">The source value</param>
+            <param name="offset">The magnitude of the rotation</param>
+        </member>
+        <member name="M:Z0.Bits.rotr(System.UInt32,System.Byte)">
+            <summary>
+            Rotates the source bits rightward by a specified offset
+            </summary>
+            <param name="src">The source value</param>
+            <param name="offset">The magnitude of the rotation</param>
+        </member>
+        <member name="M:Z0.Bits.rotr(System.UInt64,System.Byte)">
+            <summary>
+            Rotates the source bits rightward by a specified offset
+            </summary>
+            <param name="src">The source value</param>
+            <param name="offset">The magnitude of the rotation</param>
+        </member>
+        <member name="M:Z0.Bits.rotr(System.Byte,System.Int32,System.Int32)">
+            <summary>
+            Rotates the source bits rightward by a specified offset
+            </summary>
+            <param name="src">The source value</param>
+            <param name="shift">The magnitude of the rotation</param>
+            <param name="width">The effective bit-width of the source value</param>
+        </member>
+        <member name="M:Z0.Bits.rotr(System.UInt16,System.Int32,System.Int32)">
+            <summary>
+            Rotates the source bits rightward by a specified offset
+            </summary>
+            <param name="src">The source value</param>
+            <param name="shift">The magnitude of the rotation</param>
+            <param name="width">The effective bit-width of the source value</param>
+        </member>
+        <member name="M:Z0.Bits.rotr(System.UInt32,System.Int32,System.Int32)">
+            <summary>
+            Rotates the source bits rightward by a specified offset
+            </summary>
+            <param name="src">The source value</param>
+            <param name="shift">The magnitude of the rotation</param>
+            <param name="width">The effective bit-width of the source value</param>
+        </member>
+        <member name="M:Z0.Bits.rotr(System.UInt64,System.Int32,System.Int32)">
+            <summary>
+            Rotates the source bits rightward by a specified offset
+            </summary>
+            <param name="src">The source value</param>
+            <param name="shift">The magnitude of the rotation</param>
+            <param name="width">The effective bit-width of the source value</param>
+        </member>
+        <member name="M:Z0.Bits.setif(System.Byte,System.Int32,System.Byte,System.Int32)">
+            <summary>
+            Enables a bit in the target if it is enabled in the source
+            </summary>
+            <param name="src">The source value</param>
+            <param name="srcpos">The source bit position</param>
+            <param name="dst">The target value</param>
+            <param name="dstpos">The target bit position</param>
+        </member>
+        <member name="M:Z0.Bits.setif(System.UInt16,System.Int32,System.UInt16,System.Int32)">
+            <summary>
+            Enables a bit in the target if it is enabled in the source
+            </summary>
+            <param name="src">The source value</param>
+            <param name="srcpos">The source bit position</param>
+            <param name="dst">The target value</param>
+            <param name="dstpos">The target bit position</param>
+        </member>
+        <member name="M:Z0.Bits.setif(System.UInt32,System.Int32,System.UInt32,System.Int32)">
+            <summary>
+            Enables a specified bit in the target if a specified bit is enabled in the source
+            </summary>
+            <param name="src">The source value</param>
+            <param name="srcpos">The source bit position</param>
+            <param name="dst">The target value</param>
+            <param name="dstpos">The target bit position</param>
+        </member>
+        <member name="M:Z0.Bits.setif(System.UInt64,System.Int32,System.UInt64,System.Int32)">
+            <summary>
+            Enables a specified bit in the target if a specified bit is enabled in the source
+            </summary>
+            <param name="src">The source value</param>
+            <param name="srcpos">The source bit position</param>
+            <param name="dst">The target value</param>
+            <param name="dstpos">The target bit position</param>
+        </member>
+        <member name="M:Z0.Bits.slice(System.SByte,System.Byte,System.Byte)">
+            <summary>
+            Extracts a contiguous range of bits from the source
+            </summary>
+            <param name="src">The source value</param>
+            <param name="start">The bit position within the source where extraction should benin</param>
+            <param name="length">The number of bits that should be extracted</param>
+        </member>
+        <member name="M:Z0.Bits.slice(System.Byte,System.Byte,System.Byte)">
+            <summary>
+            Extracts a contiguous range of bits from the source
+            </summary>
+            <param name="src">The source value</param>
+            <param name="start">The bit position within the source where extraction should benin</param>
+            <param name="length">The number of bits that should be extracted</param>
+        </member>
+        <member name="M:Z0.Bits.slice(System.Int16,System.Byte,System.Byte)">
+            <summary>
+            Extracts a contiguous range of bits from the source
+            </summary>
+            <param name="src">The source value</param>
+            <param name="start">The bit position within the source where extraction should benin</param>
+            <param name="length">The number of bits that should be extracted</param>
+        </member>
+        <member name="M:Z0.Bits.slice(System.UInt16,System.Byte,System.Byte)">
+            <summary>
+            Extracts a contiguous range of bits from the source
+            </summary>
+            <param name="src">The source value</param>
+            <param name="start">The bit position within the source where extraction should benin</param>
+            <param name="length">The number of bits that should be extracted</param>
+        </member>
+        <member name="M:Z0.Bits.slice(System.Int32,System.Byte,System.Byte)">
+            <summary>
+            Extracts a contiguous range of bits from the source
+            </summary>
+            <param name="src">The source value</param>
+            <param name="start">The bit position within the source where extraction should benin</param>
+            <param name="length">The number of bits that should be extracted</param>
+        </member>
+        <member name="M:Z0.Bits.slice(System.UInt32,System.Byte,System.Byte)">
+            <summary>
+            Extracts a contiguous range of bits from the source
+            </summary>
+            <param name="src">The source value</param>
+            <param name="start">The bit position within the source where extraction should benin</param>
+            <param name="length">The number of bits that should be extracted</param>
+        </member>
+        <member name="M:Z0.Bits.slice(System.Int64,System.Byte,System.Byte)">
+            <summary>
+            Extracts a contiguous range of bits from the source
+            </summary>
+            <param name="src">The source value</param>
+            <param name="start">The bit position within the source where extraction should benin</param>
+            <param name="length">The number of bits that should be extracted</param>
+        </member>
+        <member name="M:Z0.Bits.slice(System.UInt64,System.Byte,System.Byte)">
+            <summary>
+            Extracts a contiguous range of bits from the source
+            </summary>
+            <param name="src">The source value</param>
+            <param name="start">The bit position within the source where extraction should benin</param>
+            <param name="length">The number of bits that should be extracted</param>
+        </member>
+        <member name="M:Z0.Bits.split(System.UInt16,Z0.N2)">
+            <summary>
+            Splits a 16-bit integer into lo/hi parts
+            </summary>
+            <param name="src">The source value</param>
+            <param name="n">The target partition count</param>
+        </member>
+        <member name="M:Z0.Bits.split(System.UInt32,Z0.N2)">
+            <summary>
+            Splits a 32-bit integer into lo/hi parts
+            </summary>
+            <param name="src">The source value</param>
+            <param name="n">The target partition count</param>
+        </member>
+        <member name="M:Z0.Bits.split(System.UInt32,Z0.N4)">
+            <summary>
+            Splits a 32-bit integer into four parts of equal width, from lo to hi
+            </summary>
+            <param name="src">The source value</param>
+            <param name="n">The target partition count</param>
+        </member>
+        <member name="M:Z0.Bits.split(System.UInt64,Z0.N2)">
+            <summary>
+            Splits a 64-bit integer into hi/lo parts
+            </summary>
+            <param name="src">The source value</param>
+            <param name="n">The target partition count</param>
+        </member>
+        <member name="M:Z0.Bits.split(System.UInt64,Z0.N4)">
+            <summary>
+            Splits a 64-bit integer into four parts of equal width, from lo to hi
+            </summary>
+            <param name="src">The source value</param>
+            <param name="n">The target partition count</param>
+        </member>
+        <member name="M:Z0.Bits.split(System.Byte,System.Int32,System.Byte@,System.Byte@)">
+            <summary>
+            Partitions the source value into two parts predicated on an index
+            [1010 11111 0011] |> split 4 = [1010 1111] [0011]
+            </summary>
+            <param name="src">The source value</param>
+            <param name="index">The index that partitions the source</param>
+            <param name="x0">The lo partition</param>
+            <param name="x1">The hi partition</param>
+        </member>
+        <member name="M:Z0.Bits.split(System.UInt16,System.Int32,System.UInt16@,System.UInt16@)">
+            <summary>
+            Partitions the source value into two parts predicated on an index
+            [1010 11111 0011] |> split 4 = [1010 1111] [0011]
+            </summary>
+            <param name="src">The source value</param>
+            <param name="index">The index that partitions the source</param>
+            <param name="x0">The lo partition</param>
+            <param name="x1">The hi partition</param>
+        </member>
+        <member name="M:Z0.Bits.split(System.UInt32,System.Int32,System.UInt32@,System.UInt32@)">
+            <summary>
+            Partitions the source value into two parts predicated on an index
+            [1010 11111 0011] |> split 4 = [1010 1111] [0011]
+            </summary>
+            <param name="src">The source value</param>
+            <param name="index">The index that partitions the source</param>
+            <param name="x0">The lo partition</param>
+            <param name="x1">The hi partition</param>
+        </member>
+        <member name="M:Z0.Bits.split(System.UInt64,System.Int32,System.UInt64@,System.UInt64@)">
+            <summary>
+            Partitions the source value into two parts predicated on an index
+            [1010 11111 0011] |> split 4 = [1010 1111] [0011]
+            </summary>
+            <param name="src">The source value</param>
+            <param name="index">The index that partitions the source</param>
+            <param name="x0">The lo partition</param>
+            <param name="x1">The hi partition</param>
+        </member>
+        <member name="M:Z0.Bits.split(System.Byte,System.Byte@,System.Byte@)">
+            <summary>
+            Partitions an 8-bit source upper and lower parts, each with an effective width of 4 bits
+            </summary>
+            <param name="src">The source value</param>
+            <param name="x0">Receives sourc bits [0..3]</param>
+            <param name="x1">Receives sourc bits [4..7]</param>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Z0.Bits.split(System.Byte,System.Byte@)" -->
+        <member name="M:Z0.Bits.split(System.UInt16,System.Byte@,System.Byte@)">
+            <summary>
+            Partitions a 16-bit source value into upper and lower 8-bit parts
+            </summary>
+            <param name="src">The source value</param>
+            <param name="x0">Receives source bits [0..7]</param>
+            <param name="x1">Receives source bits [8..15]</param>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Z0.Bits.split(System.UInt16,System.Byte@)" -->
+        <member name="M:Z0.Bits.split(System.UInt32,System.UInt16@,System.UInt16@)">
+            <summary>
+            Partitions a 32-bit source value into upper and lower 16-bit parts
+            </summary>
+            <param name="src">The source value</param>
+            <param name="x0">Receives source bits [0..15]</param>
+            <param name="x1">Receives source bits [16..31]</param>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Z0.Bits.split(System.UInt32,System.UInt16@)" -->
+        <!-- Badly formed XML comment ignored for member "M:Z0.Bits.split(System.UInt64,System.UInt32@,System.UInt32@)" -->
+        <!-- Badly formed XML comment ignored for member "M:Z0.Bits.split(System.UInt64,System.UInt32@)" -->
+        <member name="M:Z0.Bits.split(System.UInt64,System.UInt16@,System.UInt16@,System.UInt16@,System.UInt16@)">
+            <summary>
+            Partitions a 64-bit source value into 4 16-bit parts
+            </summary>
+            <param name="src">The source value</param>
+            <param name="x0">Receives source bits [0..15]</param>
+            <param name="x1">Receives source bits [16..31]</param>
+            <param name="x2">Receives source bits [32..47]</param>
+            <param name="x3">Receives source bits [48..63]</param>
+        </member>
+        <member name="M:Z0.Bits.split(System.UInt32,System.Byte@,System.Byte@,System.Byte@,System.Byte@)">
+            <summary>
+            Partitions a 32-bit source value into 4 8-bit parts
+            </summary>
+            <param name="src">The source value</param>
+            <param name="x0">Receives source bits [0..7]</param>
+            <param name="x1">Receives source bits [8..15]</param>
+            <param name="x2">Receives source bits [16..23]</param>
+            <param name="x3">Receives source bits [24..31]</param>
+        </member>
+        <member name="M:Z0.Bits.split(System.UInt64,System.Byte@,System.Byte@,System.Byte@,System.Byte@,System.Byte@,System.Byte@,System.Byte@,System.Byte@)">
+            <summary>
+            Partitions a 32-bit source value into 8 8-bit parts
+            </summary>
+            <param name="src">The source value</param>
+            <param name="x0">Receives source bits [0..7]</param>
+            <param name="x1">Receives source bits [8..15]</param>
+            <param name="x2">Receives source bits [16..23]</param>
+            <param name="x3">Receives source bits [24..31]</param>
+            <param name="x4">Receives source bits [32..39]</param>
+            <param name="x5">Receives source bits [40..47]</param>
+            <param name="x6">Receives source bits [48..55]</param>
+            <param name="x7">Receives source bits [56..63]</param>
+        </member>
+        <member name="M:Z0.Bits.testbit(System.SByte,System.Byte)">
+            <summary>
+            Returns 1 if an index-identified bit is enabled, 0 otherwise
+            </summary>
+            <param name="src">The value to test</param>
+            <param name="pos">The bit index to check</param>
+        </member>
+        <member name="M:Z0.Bits.testbit(System.Byte,System.Byte)">
+            <summary>
+            Returns 1 if an index-identified bit is enabled, 0 otherwise
+            </summary>
+            <param name="src">The value to test</param>
+            <param name="pos">The bit index to check</param>
+        </member>
+        <member name="M:Z0.Bits.testbit(System.Int16,System.Byte)">
+            <summary>
+            Returns 1 if an index-identified bit is enabled, 0 otherwise
+            </summary>
+            <param name="src">The value to test</param>
+            <param name="pos">The bit index to check</param>
+        </member>
+        <member name="M:Z0.Bits.testbit(System.UInt16,System.Byte)">
+            <summary>
+            Returns 1 if an index-identified bit is enabled, 0 otherwise
+            </summary>
+            <param name="src">The value to test</param>
+            <param name="pos">The bit index to check</param>
+        </member>
+        <member name="M:Z0.Bits.testbit(System.Int32,System.Byte)">
+            <summary>
+            Returns 1 if an index-identified bit is enabled, 0 otherwise
+            </summary>
+            <param name="src">The value to test</param>
+            <param name="pos">The bit index to check</param>
+        </member>
+        <member name="M:Z0.Bits.testbit(System.UInt32,System.Byte)">
+            <summary>
+            Returns 1 if an index-identified bit is enabled, 0 otherwise
+            </summary>
+            <param name="src">The value to test</param>
+            <param name="pos">The bit index to check</param>
+        </member>
+        <member name="M:Z0.Bits.testbit(System.Int64,System.Byte)">
+            <summary>
+            Returns 1 if an index-identified bit is enabled, 0 otherwise
+            </summary>
+            <param name="src">The value to test</param>
+            <param name="pos">The bit index to check</param>
+        </member>
+        <member name="M:Z0.Bits.testbit(System.UInt64,System.Byte)">
+            <summary>
+            Returns 1 if an index-identified bit is enabled, 0 otherwise
+            </summary>
+            <param name="src">The value to test</param>
+            <param name="pos">The bit index to check</param>
+        </member>
+        <member name="M:Z0.Bits.testbit(System.Single,System.Byte)">
+            <summary>
+            Returns 1 if an index-identified bit is enabled, false otherwise
+            </summary>
+            <param name="src">The value to test</param>
+            <param name="pos">The bit index to check</param>
+        </member>
+        <member name="M:Z0.Bits.testbit(System.Double,System.Byte)">
+            <summary>
+            Returns 1 if an index-identified bit is enabled, false otherwise
+            </summary>
+            <param name="src">The value to test</param>
+            <param name="pos">The bit index to check</param>
+        </member>
+        <member name="M:Z0.Bits.testbit32(System.SByte,System.Byte)">
+            <summary>
+            Returns 1 if an index-identified bit is enabled, 0 otherwise
+            </summary>
+            <param name="src">The value to test</param>
+            <param name="pos">The bit index to check</param>
+        </member>
+        <member name="M:Z0.Bits.testbit32(System.Byte,System.Byte)">
+            <summary>
+            Returns 1 if an index-identified bit is enabled, 0 otherwise
+            </summary>
+            <param name="src">The value to test</param>
+            <param name="pos">The bit index to check</param>
+        </member>
+        <member name="M:Z0.Bits.testbit32(System.Int16,System.Byte)">
+            <summary>
+            Returns 1 if an index-identified bit is enabled, 0 otherwise
+            </summary>
+            <param name="src">The value to test</param>
+            <param name="pos">The bit index to check</param>
+        </member>
+        <member name="M:Z0.Bits.testbit32(System.UInt16,System.Byte)">
+            <summary>
+            Returns 1 if an index-identified bit is enabled, 0 otherwise
+            </summary>
+            <param name="src">The value to test</param>
+            <param name="pos">The bit index to check</param>
+        </member>
+        <member name="M:Z0.Bits.testbit32(System.Int32,System.Byte)">
+            <summary>
+            Returns 1 if an index-identified bit is enabled, 0 otherwise
+            </summary>
+            <param name="src">The value to test</param>
+            <param name="pos">The bit index to check</param>
+        </member>
+        <member name="M:Z0.Bits.testbit32(System.UInt32,System.Byte)">
+            <summary>
+            Returns 1 if an index-identified bit is enabled, 0 otherwise
+            </summary>
+            <param name="src">The value to test</param>
+            <param name="pos">The bit index to check</param>
+        </member>
+        <member name="M:Z0.Bits.testbit32(System.Int64,System.Byte)">
+            <summary>
+            Returns 1 if an index-identified bit is enabled, 0 otherwise
+            </summary>
+            <param name="src">The value to test</param>
+            <param name="pos">The bit index to check</param>
+        </member>
+        <member name="M:Z0.Bits.testbit32(System.UInt64,System.Byte)">
+            <summary>
+            Returns 1 if an index-identified bit is enabled, 0 otherwise
+            </summary>
+            <param name="src">The value to test</param>
+            <param name="pos">The bit index to check</param>
+        </member>
+        <member name="M:Z0.Bits.testbit32(System.Single,System.Byte)">
+            <summary>
+            Returns 1 if an index-identified bit is enabled, false otherwise
+            </summary>
+            <param name="src">The value to test</param>
+            <param name="pos">The bit index to check</param>
+        </member>
+        <member name="M:Z0.Bits.testbit32(System.Double,System.Byte)">
+            <summary>
+            Returns 1 if an index-identified bit is enabled, false otherwise
+            </summary>
+            <param name="src">The value to test</param>
+            <param name="pos">The bit index to check</param>
+        </member>
+        <member name="M:Z0.Bits.toggle(System.Single,System.Int32)">
+            <summary>
+            Flips an identified source bit
+            </summary>
+            <param name="src">The bit source</param>
+            <param name="pos">The position of the bit to toggle</param>
+        </member>
+        <member name="M:Z0.Bits.toggle(System.Double,System.Int32)">
+            <summary>
+            Flips an identified source bit
+            </summary>
+            <param name="src">The bit source</param>
+            <param name="pos">The position of the bit to toggle</param>
+        </member>
+        <member name="M:Z0.Bits.unpack16x1(System.UInt16,System.Span{System.Byte})">
+            <summary>
+            Sends each source bit to a corresponding target cell
+            </summary>
+            <param name="src">The bit source</param>
+            <param name="dst">The bit target</param>
+        </member>
+        <member name="M:Z0.Bits.unpack16x1(System.UInt16,Z0.SpanBlock128{System.Byte}@)">
+            <summary>
+            Sends each source bit to a corresponding target cell
+            </summary>
+            <param name="src">The bit source</param>
+            <param name="dst">The bit target</param>
+        </member>
+        <member name="M:Z0.Bits.unpack32x1(System.UInt32,System.Span{System.Byte})">
+            <summary>
+            Sends each source bit to a corresponding target cell
+            </summary>
+            <param name="src">The bit source</param>
+            <param name="dst">The bit target</param>
+        </member>
+        <member name="M:Z0.Bits.unpack32x1(System.UInt32,Z0.SpanBlock256{System.Byte}@)">
+            <summary>
+            Sends each source bit to a corresponding target cell
+            </summary>
+            <param name="src">The bit source</param>
+            <param name="dst">The bit target</param>
+        </member>
+        <member name="M:Z0.Bits.unpack64x1(System.UInt64,System.Span{System.Byte})">
+            <summary>
+            Sends each source bit to a corresponding target cell
+            </summary>
+            <param name="src">The bit source</param>
+            <param name="dst">The bit target</param>
+        </member>
+        <member name="M:Z0.Bits.unpack8x1(System.Byte,System.UInt64@)">
+            <summary>
+            Sends each source bit to to last bit of each 8-bit segment in the target
+            </summary>
+            <param name="src">The bit source</param>
+            <param name="dst">The bit target</param>
+        </member>
+        <member name="M:Z0.Bits.unpack8x1(System.Byte,System.Span{System.Byte})">
+            <summary>
+            Sends each source bit to a corresponding target cell
+            </summary>
+            <param name="src">The bit source</param>
+            <param name="dst">The bit target</param>
+        </member>
+        <member name="M:Z0.Bits.zhi(System.Byte,System.Int32)">
+            <summary>
+            unsigned int _bzhi_u32 (unsigned int a, unsigned int index) BZHI r32a, reg/m32, r32b
+            Replicates the source bits to the target and disables the high target bits starting at a specified index.
+            </summary>
+            <param name="src">The bit source</param>
+        </member>
+        <member name="M:Z0.Bits.zhi(System.UInt16,System.Int32)">
+            <summary>
+            unsigned int _bzhi_u32 (unsigned int a, unsigned int index) BZHI r32a, reg/m32, r32b
+            Replicates the source bits to the target and disables the high target bits starting at a specified index.
+            </summary>
+            <param name="src">The bit source</param>
+        </member>
+        <member name="M:Z0.Bits.zhi(System.UInt32,System.Int32)">
+            <summary>
+            unsigned int _bzhi_u32 (unsigned int a, unsigned int index) BZHI r32a, reg/m32, r32b
+            Replicates the source bits to the target and disables the high target bits starting at a specified index.
+            </summary>
+            <param name="src">The bit source</param>
+        </member>
+        <member name="M:Z0.Bits.zhi(System.UInt64,System.Int32)">
+            <summary>
+            unsigned __int64 _bzhi_u64 (unsigned __int64 a, unsigned int index) BZHI r64a,reg/m32, r64b 
+            Disables the high target bits starting at a specified index.
+            </summary>
+            <param name="src">The bit source</param>
+            <param name="index">The index at which to begin disabling bits</param>
+        </member>
+        <member name="M:Z0.Bits.bfly(Z0.N1,System.Byte)">
+            <summary>
+            Effects a butterfly permutation on the source that swaps the interior two bits of each 4-bit segment.
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+        </member>
+        <member name="M:Z0.Bits.bfly(Z0.N1,System.UInt16)">
+            <summary>
+            Effects a butterfly permutation on the source that swaps the interior two bits of each 4-bit segment.
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+        </member>
+        <member name="M:Z0.Bits.bfly(Z0.N1,System.UInt32)">
+            <summary>
+            Effects a butterfly permutation on the source that swaps the interior two bits of each 4-bit segment.
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+        </member>
+        <member name="M:Z0.Bits.bfly(Z0.N1,System.UInt64)">
+            <summary>
+            Effects a butterfly permutation on the source that swaps the interior two bits of each 4-bit segment.
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+        </member>
+        <member name="M:Z0.Bits.bfly(Z0.N2,System.Byte)">
+            <summary>
+            Effects a butterfly permutation on the source that swaps the interior 2-bit segments
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+        </member>
+        <member name="M:Z0.Bits.bfly(Z0.N2,System.UInt16)">
+            <summary>
+            Effects a butterfly permutation on the bit source that swaps the interior 2-bit segments of each 8-bit segment.
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+        </member>
+        <member name="M:Z0.Bits.bfly(Z0.N2,System.UInt32)">
+            <summary>
+            Effects a butterfly permutation on the bit source that swaps the interior 2-bit segments of each 8-bit segment.
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+        </member>
+        <member name="M:Z0.Bits.bfly(Z0.N2,System.UInt64)">
+            <summary>
+            Effects a butterfly permutation on the bit source that swaps the interior 2-bit segments of each 8-bit segment.
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+        </member>
+        <member name="M:Z0.Bits.bfly(Z0.N4,System.UInt16)">
+            <summary>
+            Effects a butterfly permutation on the bit source that swaps the interior 4-bit segments
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+            <remarks> [0 1 2 3 ] -> [0 2 1 3] </remarks>
+        </member>
+        <member name="M:Z0.Bits.bfly(Z0.N4,System.UInt32)">
+            <summary>
+            Effects a butterfly permutation on the bit source that swaps the interior 4-bit segments of each 16-bit segment.
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+            <remarks>
+            [0 | 1 2 | 3 || 4 | 5 6 | 7] -> [0 | 2 1 | 3 || 4 | 6 5 | 7]
+            </remarks>
+        </member>
+        <member name="M:Z0.Bits.bfly(Z0.N4,System.UInt64)">
+            <summary>
+            Effects a butterfly permutation on the bit source that swaps the interior 4-bit segments of each 16-bit segment.
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+            <remarks>
+            [0 | 1 2 | 3 || 4 | 5 6 | 7 || 8 | 9 A | B || C | D E | F] -> [0 | 2 1 | 3 || 4 | 6 5 | 7 || 8 | A 9 | B || C | E D | F]
+            </remarks>
+        </member>
+        <member name="M:Z0.Bits.bfly(Z0.N8,System.UInt32)">
+            <summary>
+            Effects a butterfly permutation on the bit source that swaps the interior 8-bit segments
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+            <remarks>[0 1 2 3] -> [0 2 1 3]</remarks>
+        </member>
+        <member name="M:Z0.Bits.bfly(Z0.N8,System.UInt64)">
+            <summary>
+            Effects a butterfly permutation on the bit source that swaps the interior 8-bit segments of each 32-bit segment.
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+            <remarks> [0 1 2 3 | 4 5 6 7] -> [0 2 1 3 | 4 6 5 7]</remarks>
+        </member>
+        <member name="M:Z0.Bits.bfly(Z0.N16,System.UInt64)">
+            <summary>
+            Effects a butterfly permutation on the source that swaps the interior 16-bit segments
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+            <remarks>[0 1 2 3] -> [0 2 1 3]</remarks>
+        </member>
+        <member name="M:Z0.Bits.bfly``1(``0,``0,System.Byte)">
+            <summary>
+            Effects a butterfly permutation on the source value, predicated on a supplied mask and shift amount
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+            <remarks>The algorithm follows that of Arndt's Matters Computational, bitbutterfly.h.</remarks>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Z0.Bits.blsr(System.Byte)" -->
+        <!-- Badly formed XML comment ignored for member "M:Z0.Bits.blsr(System.UInt16)" -->
+        <!-- Badly formed XML comment ignored for member "M:Z0.Bits.blsr(System.UInt32)" -->
+        <!-- Badly formed XML comment ignored for member "M:Z0.Bits.blsr(System.UInt64)" -->
+        <member name="M:Z0.gbits.bfly``1(Z0.N1,``0)">
+            <summary>
+            Effects a butterfly permutation on the source that swaps the interior two bits of each 4-bit segment.
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+        </member>
+        <member name="M:Z0.gbits.bfly``1(Z0.N2,``0)">
+            <summary>
+            Effects a butterfly permutation on the source that swaps the interior 2-bit segments of each 8-bit segment.
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+        </member>
+        <member name="M:Z0.gbits.bfly``1(Z0.N4,``0)">
+            <summary>
+            [0 1 2 3 | 4 5 6 7 ] -> [0 2 1 3 | 4 6 5 7 ]
+            Swaps the interior 4-bit segments of each 16-bit segment.
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+        </member>
+        <member name="M:Z0.gbits.bfly``1(Z0.N8,``0)">
+            <summary>
+            [0 1 2 3 | 4 5 6 7] -> [0 2 1 3 | 4 6 5 7]
+            Swaps the interior 8-bit segments of each 32-bit segment.
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+        </member>
+        <member name="M:Z0.gbits.bfly``1(Z0.N16,``0)">
+            <summary>
+            Effects a butterfly permutation on the source that swaps the interior 16-bit segments
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+        </member>
+        <member name="M:Z0.gbits.bitcell``1(System.Span{``0},Z0.BitPos{``0})">
+            <summary>
+            Queries/manipulates a source cell that covers a position-identified bit
+            </summary>
+            <param name="src">The bit source</param>
+            <param name="pos">The sequence-relative position of the target bit</param>
+            <typeparam name="T">The cell type</typeparam>
+        </member>
+        <member name="M:Z0.gbits.bitcell``1(System.ReadOnlySpan{``0},Z0.BitPos{``0})">
+            <summary>
+            Queries/manipulates a source cell that covers a position-identified bit
+            </summary>
+            <param name="src">The bit source</param>
+            <param name="pos">The sequence-relative position of the target bit</param>
+            <typeparam name="T">The cell type</typeparam>
+        </member>
+        <member name="M:Z0.gbits.bitmap``1(``0,``0,System.Byte,System.Byte)">
+            <summary>
+            Maps bits from a source segment src[0..(count-1)] to a target segment dst[index..(index+count)]
+            </summary>
+            <param name="src">The bit source</param>
+            <param name="dst">The target</param>
+            <param name="count">The number bits to read from the source an replace in the target</param>
+            <param name="index">The target-relative index at which to begin the overwrite</param>
+            <typeparam name="T">The primal scalar type</typeparam>
+        </member>
+        <member name="M:Z0.gbits.bitmatch``2(``0,System.Byte,``1,System.Byte)">
+            <summary>
+            Determines whether identified bits in the operands agree.
+            </summary>
+            <param name="a">The first bit source</param>
+            <param name="i">The first bit position</param>
+            <param name="b">The second bit source</param>
+            <param name="j">The second bit position</param>
+            <typeparam name="S">The left operand type</typeparam>
+            <typeparam name="T">The right operand type</typeparam>
+        </member>
+        <member name="M:Z0.gbits.bitpos``1(System.Int32)">
+            <summary>
+            Defines a bit position, relative to a T-valued sequence, predicated on a linear index
+            </summary>
+            <param name="index">The sequence-relative index of the target bit</param>
+            <typeparam name="T">The sequence element type</typeparam>
+        </member>
+        <member name="M:Z0.gbits.blsic``1(``0)">
+            <summary>
+            Isolate least set bit and complement, computed by dst := ~src | (src - 1),
+            where all bits in the target are set except for the least set bit in the source
+            For example, [11101010] |> blsic = [11111101]
+            </summary>
+            <param name="src">The source value</param>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Z0.gbits.blsr``1(``0)" -->
+        <member name="M:Z0.gbits.clearbyte``1(``0,System.Byte)">
+            <summary>
+            Disables a sequence of 8 source bits starting at a specified index
+            </summary>
+            <param name="src">The bit source</param>
+            <param name="index">The index at which to begin clearing bits</param>
+            <typeparam name="T">The primal type</typeparam>
+        </member>
+        <member name="M:Z0.gbits.clear``1(``0,System.Byte,System.Byte)">
+            <summary>
+            Disables a sequence of bits starting at a specified index
+            </summary>
+            <param name="src">The bit source</param>
+            <param name="index">The index at which to begin clearing bits</param>
+            <param name="count">The number of bits to clear</param>
+            <typeparam name="T">The primal type</typeparam>
+        </member>
+        <member name="M:Z0.gbits.copy``1(``0,System.Byte,System.Byte,``0)">
+            <summary>
+            Overwrites a target bit segment dst[index..(start + count)] with a corresponding
+            segment src[index..(start + count)] in the source
+            </summary>
+            <param name="src">The bit source</param>
+            <param name="index">The source/target start index</param>
+            <param name="count">The number of bits to copy</param>
+            <param name="dst">The bit target</param>
+            <typeparam name="T">The numeric type</typeparam>
+        </member>
+        <member name="M:Z0.gbits.copy``1(``0,System.Byte,System.Byte,``0@)">
+            <summary>
+            Overwrites a target bit segment dst[index..(start + count)] with a corresponding
+            segment src[index..(start + count)] in the source
+            </summary>
+            <param name="src">The bit source</param>
+            <param name="index">The source/target start index</param>
+            <param name="count">The number of bits to copy</param>
+            <param name="dst">The bit target</param>
+            <typeparam name="T">The numeric type</typeparam>
+        </member>
+        <member name="M:Z0.gbits.copy``1(``0,System.Byte,System.Byte,System.Byte,``0)">
+            <summary>
+            Overwrites a target bit segment dst[dstidx..(dstidx + count)] with a corresponding
+            segment src[srcidx..(srcidx + count)] in the source
+            </summary>
+            <param name="src">The bit source</param>
+            <param name="srcIdx">The source start index</param>
+            <param name="dstIdx">The target start index</param>
+            <param name="count">The number of bits to copy</param>
+            <param name="dst">The bit target</param>
+            <typeparam name="T">The numeric type</typeparam>
+        </member>
+        <member name="M:Z0.gbits.copy``1(``0,System.Byte,System.Byte,System.Byte,``0@)">
+            <summary>
+            Overwrites a target bit segment dst[dstidx..(dstidx + count)] with a corresponding
+            segment src[srcidx..(srcidx + count)] in the source
+            </summary>
+            <param name="src">The bit source</param>
+            <param name="srcidx">The source start index</param>
+            <param name="dstidx">The target start index</param>
+            <param name="count">The number of bits to copy</param>
+            <param name="dst">The bit target</param>
+            <typeparam name="T">The numeric type</typeparam>
+        </member>
+        <member name="M:Z0.gbits.disable``1(``0,System.Int32)">
+            <summary>
+            Disables an identified source bit
+            </summary>
+            <param name="src">The source segment</param>
+            <param name="pos">The 0-based index of the bit to change</param>
+            <typeparam name="T">The source element type</typeparam>
+        </member>
+        <member name="M:Z0.gbits.dot``1(``0,``0)">
+            <summary>
+            Pretends that the operands are bitvectors and computes their scalar product
+            </summary>
+            <param name="x">The left scalar</param>
+            <param name="y">The right scalar</param>
+            <typeparam name="T">The primal unsigned integral type</typeparam>
+        </member>
+        <member name="M:Z0.gbits.effsize``1(``0)">
+            <summary>
+            Computes the minimum number of bytes required to represent the source value
+            </summary>
+            <param name="src">The source value</param>
+            <typeparam name="T">The source type</typeparam>
+        </member>
+        <member name="M:Z0.gbits.effwidth``1(``0)">
+            <summary>
+            Computes the minimum number of bits required to represent the source value
+            </summary>
+            <param name="src">The source value</param>
+            <typeparam name="T">The source type</typeparam>
+        </member>
+        <member name="M:Z0.gbits.enable``1(``0,System.Int32)">
+            <summary>
+            Enables an index-identified source bit
+            </summary>
+            <param name="src">The source segment</param>
+            <param name="pos">The 0-based index of the bit to change</param>
+            <typeparam name="T">The source element type</typeparam>
+        </member>
+        <member name="M:Z0.gbits.eraser``1(System.Byte,System.Byte)">
+            <summary>
+            Defines a mask that disables a sequence of bits
+            </summary>
+            <param name="start">The index at which to begin</param>
+            <param name="count">The number of bits to disable</param>
+            <typeparam name="T">The primal type over which the mask is defined</typeparam>
+        </member>
+        <member name="M:Z0.gbits.extract``1(``0,System.Byte,System.Byte)">
+            <summary>
+            Extracts a contiguous range of bits from a primal source inclusively between two index positions
+            </summary>
+            <param name="src">The bit source</param>
+            <param name="rhs">The left bit position</param>
+            <param name="dst">The right bit position</param>
+            <typeparam name="T">The primal type</typeparam>
+        </member>
+        <member name="M:Z0.gbits.extract``1(``0,System.Byte,System.Byte,System.Span{System.Byte},System.Int32)">
+            <summary>
+            Extracts a contiguous sequence of bits from a source and deposits the result to a caller-supplied target
+            </summary>
+            <param name="a">The bit source</param>
+            <param name="first">The 0-based index of the first selected bit</param>
+            <param name="last">The 0-based index of the last selected bit</param>
+            <param name="dst">The target that receives the sequence</param>
+            <param name="offset">The target offset</param>
+            <typeparam name="T">The primal bit source type</typeparam>
+        </member>
+        <member name="M:Z0.gbits.extract``1(System.Span{``0},Z0.BitPos{``0},Z0.BitPos{``0})">
+            <summary>
+            Extracts a T-valued segment, cross-cell or same-cell, from the source as determined by an inclusive position range
+            </summary>
+            <param name="src">The bit source</param>
+            <param name="firstpos">The sequence-relative position of the first bit</param>
+            <param name="lastpos">The sequence-relative position of the last bit</param>
+            <typeparam name="T">The cell type</typeparam>
+        </member>
+        <member name="M:Z0.gbits.extract``1(System.Span{``0},System.Int32,System.Int32)">
+            <summary>
+            Extracts a T-valued segment, cross-cell or same-cell, from the source as determined by
+            an inclusive linear index range
+            </summary>
+            <param name="src">The bit source</param>
+            <param name="first">The sequence-relative index of the first bit</param>
+            <param name="last">The sequence-relative index of the last bit</param>
+            <typeparam name="T">The cell type</typeparam>
+        </member>
+        <member name="M:Z0.gbits.fill``1(``0,System.Byte,System.Byte)">
+            <summary>
+            Enables a contiguous sequence of source bits starting at a specified index
+            </summary>
+            <param name="src">The bit source</param>
+            <param name="index">The index at which to begin</param>
+            <param name="count">The number of bits to fill</param>
+        </member>
+        <member name="M:Z0.gbits.gather``1(``0,``0)">
+            <summary>
+            Extracts mask-identified bits from the source and deposits the result to the contiguous low bits of a zero-initialied target
+            </summary>
+            <param name="src">The source vale</param>
+            <typeparam name="T">The source type</typeparam>
+        </member>
+        <member name="M:Z0.gbits.hi``1(``0)">
+            <summary>
+            Extracts the upper source bits
+            </summary>
+            <param name="src">The bit source</param>
+        </member>
+        <member name="M:Z0.gbits.hipos``1(``0)">
+            <summary>
+            Computes the position of the highest enabled source bit, a number in the inclusive range [0 , bitsize[T] - 1]
+            </summary>
+            <param name="src">The source bit</param>
+        </member>
+        <member name="M:Z0.gbits.lo``1(``0)">
+            <summary>
+            Extracts the lower source bits
+            </summary>
+            <param name="src">The bit source</param>
+        </member>
+        <member name="M:Z0.gbits.mix``1(Z0.N0,``0,``0)">
+            <summary>
+            Blends alternating even operand bits
+            </summary>
+            <param name="parity">The parity selector</param>
+            <param name="x">The left operand</param>
+            <param name="y">The right operand</param>
+            <typeparam name="T">The primal type</typeparam>
+        </member>
+        <member name="M:Z0.gbits.mix``1(Z0.N1,``0,``0)">
+            <summary>
+            Blends alternating odd operand bits
+            </summary>
+            <param name="parity">The parity selector</param>
+            <param name="x">The left operand</param>
+            <param name="y">The right operand</param>
+            <typeparam name="T">The primal type</typeparam>
+        </member>
+        <member name="M:Z0.gbits.nlz``1(``0)">
+            <summary>
+            Counts the number of leading zero bits the source
+            </summary>
+            <param name="src">The bit source</param>
+        </member>
+        <member name="M:Z0.gbits.ntz``1(``0)">
+            <summary>
+            Counts the number of trailing zero bits in the source
+            </summary>
+            <param name="src">The bit source</param>
+            <typeparam name="T">The primal type</typeparam>
+        </member>
+        <member name="M:Z0.gbits.pop``1(``0)">
+            <summary>
+            Counts the number enabled source bits
+            </summary>
+            <param name="src">The source value</param>
+            <typeparam name="T">The source value type</typeparam>
+        </member>
+        <member name="M:Z0.gbits.pop``1(``0,``0,``0)">
+            <summary>
+            Counts the number of enabled primal operand bits
+            </summary>
+            <typeparam name="T">The primal type</typeparam>
+        </member>
+        <member name="M:Z0.gbits.pop``1(``0,``0,``0,``0)">
+            <summary>
+            Counts the number of enabled primal operand bits
+            </summary>
+            <typeparam name="T">The primal type</typeparam>
+        </member>
+        <member name="M:Z0.gbits.pop``1(``0,``0,``0,``0,``0,``0,``0,``0)">
+            <summary>
+            Counts the number of enabled primal operand bits
+            </summary>
+            <typeparam name="T">The primal type</typeparam>
+        </member>
+        <member name="M:Z0.gbits.rank``1(``0,System.Int32)">
+            <summary>
+            Calculates the number of bits set up to and including the current bit
+            </summary>
+            <param name="src">The bit source</param>
+            <param name="pos">The position of the bit for which rank will be calculated</param>
+        </member>
+        <member name="M:Z0.gbits.replicate``1(``0,System.Byte,System.Byte,System.Int32)">
+            <summary>
+            Replicates an index-defined bitpattern a specified number of times
+            </summary>
+            <param name="src">The bit source</param>
+            <param name="i0">The index of the first bit to include in the pattern</param>
+            <param name="i1">The index of the last bit to include in the pattern</param>
+            <param name="reps">The number of times to repeat the pattern</param>
+            <typeparam name="T">The source/target type</typeparam>
+        </member>
+        <member name="M:Z0.gbits.replicate``1(``0)">
+            <summary>
+            [000...000101] -> [101101...101101]
+            Replicates a source bit pattern, determined by the most significant enabled bit,  throughout the range of the type
+            </summary>
+            <param name="src">The value defining the pattern to replicate</param>
+            <typeparam name="T">The source/target type</typeparam>
+        </member>
+        <member name="M:Z0.gbits.replicate``1(System.Byte)">
+            <summary>
+            Replicates the bit pattern defined by a byte either 2,4 or 8 times as determined by the primal target type
+            </summary>
+            <param name="src">The bit source</param>
+            <param name="t">A target type representative</param>
+            <typeparam name="T">The target type</typeparam>
+        </member>
+        <member name="M:Z0.gbits.reverse``1(``0)">
+            <summary>
+            Reverses the bits in the source
+            </summary>
+            <param name="src">The bit source</param>
+            <remarks>BAD</remarks>
+        </member>
+        <member name="M:Z0.gbits.rotl``1(``0@,System.Byte,``0@,System.Int32)">
+            <summary>
+            Rotates source cells leftward and deposits the result in a caller-supplied target
+            </summary>
+            <param name="src">The leading source cell</param>
+            <param name="offset">The amount to rotate</param>
+            <param name="dst">The leading target cell</param>
+            <param name="count">The cell count</param>
+            <typeparam name="T">The primal cell type</typeparam>
+        </member>
+        <member name="M:Z0.gbits.rotl``1(``0,System.Byte)">
+            <summary>
+            Rotates the source bits leftward by a specified shift amount
+            </summary>
+            <param name="src">The source value</param>
+            <param name="offset">The magnitude of the rotation</param>
+        </member>
+        <member name="M:Z0.gbits.rotl``1(``0,System.Byte,System.Int32)">
+            <summary>
+            Rotates the source bits leftward by a specified shift amount
+            </summary>
+            <param name="src">The source value</param>
+            <param name="offset">The magnitude of the rotation</param>
+            <param name="width">The effective bit-width of the source value</param>
+        </member>
+        <member name="M:Z0.gbits.rotr``1(``0@,System.Byte,``0@,System.Int32)">
+            <summary>
+            Rotates source cells rightward and deposits the result in a caller-supplied target
+            </summary>
+            <param name="src">The leading source cell</param>
+            <param name="offset">The amount to rotate</param>
+            <param name="dst">The leading target cell</param>
+            <param name="count">The cell count</param>
+            <typeparam name="T">The primal cell type</typeparam>
+        </member>
+        <member name="M:Z0.gbits.rotr``1(``0,System.Byte)">
+            <summary>
+            Rotates bits in the source rightwards by a specified shift amount
+            </summary>
+            <param name="src">The source value</param>
+            <param name="offset">The magnitude of the rotation</param>
+            <typeparam name="T">The source type</typeparam>
+        </member>
+        <member name="M:Z0.gbits.rotr``1(``0,System.Byte,System.Byte)">
+            <summary>
+            Rotates bits in the source rightwards by a specified shift amount
+            </summary>
+            <param name="src">The source value</param>
+            <param name="offset">The magnitude of the rotation</param>
+            <typeparam name="T">The source type</typeparam>
+        </member>
+        <member name="M:Z0.gbits.scatter``1(``0,``0)">
+            <summary>
+            Scatters contiguous low bits from the source across a target according to a mask
+            </summary>
+            <param name="src">The bit source</param>
+            <param name="mask">The scatter spec</param>
+            <typeparam name="T">The mask type</typeparam>
+        </member>
+        <member name="M:Z0.gbits.setbit``1(``0,System.Int32,Z0.Bit32)">
+            <summary>
+            Sets an identified bit to a supplied value
+            </summary>
+            <param name="src">The source segment</param>
+            <param name="pos">The bit position</param>
+            <param name="value">The value to be applied</param>
+            <typeparam name="T">The source element type</typeparam>
+        </member>
+        <member name="M:Z0.gbits.setbit``1(``0,System.Byte,Z0.bit)">
+            <summary>
+            Sets an identified bit to a supplied value
+            </summary>
+            <param name="src">The source segment</param>
+            <param name="pos">The bit position</param>
+            <param name="state">The value to be applied</param>
+            <typeparam name="T">The source element type</typeparam>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Z0.gbits.setnb``1(``0,System.Byte,Z0.bit)" -->
+        <member name="M:Z0.gbits.slice``1(``0,System.Byte,System.Byte)">
+            <summary>
+            Extracts a contiguous range of bits from the source
+            </summary>
+            <param name="src">The source value</param>
+            <param name="start">The bit position  within the source where extraction should begin</param>
+            <param name="length">The number of bits that should be extracted</param>
+        </member>
+        <member name="M:Z0.gbits.split``1(``0,System.Int32,``0@,``0@)">
+            <summary>
+            Partitions the source value into two parts predicated on an index
+            [1010 11111 0011] |> split 4 = [1010 1111] [0011]
+            </summary>
+            <param name="src">The source value</param>
+            <param name="index">The index that partitions the source</param>
+            <param name="x0">The lo partition</param>
+            <param name="x1">The hi partition</param>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Z0.gbits.stitch``1(``0,System.Int32,``0,System.Int32)" -->
+        <member name="M:Z0.gbits.testbit``1(``0,System.Byte)">
+            <summary>
+            Returns 1 if an index-identified bit is enabled, false otherwise
+            </summary>
+            <param name="src">The value to test</param>
+            <param name="pos">The bit index to check</param>
+        </member>
+        <member name="M:Z0.gbits.testbit32``1(``0,System.Byte)">
+            <summary>
+            Returns 1 if an index-identified bit is enabled, false otherwise
+            </summary>
+            <param name="src">The value to test</param>
+            <param name="pos">The bit index to check</param>
+        </member>
+        <member name="M:Z0.gbits.testbits``1(``0,System.Span{System.Byte},System.Int32)">
+            <summary>
+            Constructs a bitsequence by interrogating the source with bit state tests
+            and populates a caller-supplied target with the result
+            </summary>
+            <param name="src">The source value</param>
+            <typeparam name="T">The primal source type</typeparam>
+        </member>
+        <member name="M:Z0.gbits.testbits``1(``0)">
+            <summary>
+            Calculates a bit sequence and populates an allocated target with the result
+            </summary>
+            <param name="src">The source value</param>
+            <typeparam name="T">The primal source type</typeparam>
+        </member>
+        <member name="M:Z0.gbits.toggle``1(``0,System.Int32)">
+            <summary>
+            Inverts an index-identified source bit
+            </summary>
+            <param name="src">The source value</param>
+            <param name="pos">The bit position</param>
+            <typeparam name="T">The source type</typeparam>
+        </member>
+        <member name="M:Z0.gbits.unpack``1(System.Span{``0},System.Span{Z0.Bit32})">
+            <summary>
+            Extracts each bit from each source element into caller-supplied target at the corresponding index
+            </summary>
+            <param name="src">The source values to be unpacked</param>
+            <param name="dst">The target span of length at least bitsize[T]*length(Span[T])</param>
+            <typeparam name="T">The source value type</typeparam>
+        </member>
+        <member name="M:Z0.gbits.unpack``1(System.Span{``0},Z0.Bit32[])">
+            <summary>
+            Extracts each bit from each source element into caller-supplied target at the corresponding index
+            </summary>
+            <param name="src">The source values to be unpacked</param>
+            <param name="dst">The target array of length at least bitsize[T]*length(Span[T])</param>
+            <typeparam name="T">The source value type</typeparam>
+        </member>
+        <member name="M:Z0.gbits.unpack``2(``0,System.Span{``1},System.UInt32)">
+            <summary>
+            Projects each bit from a source value into target span element at the corresponding index
+            </summary>
+            <param name="src">The bit source</param>
+            <param name="dst">The bit target</param>
+            <typeparam name="T">The bit source type</typeparam>
+            <typeparam name="T">The target type</typeparam>
+        </member>
+        <member name="M:Z0.gbits.unpack``2(System.ReadOnlySpan{``0},System.Span{``1})">
+            <summary>
+            Projects each source bit from each source element into an element of the target span at the corresponding index
+            </summary>
+            <param name="src">The bit source</param>
+            <param name="dst">The bit target</param>
+            <typeparam name="T">The bit source type</typeparam>
+            <typeparam name="T">The target type</typeparam>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Z0.gbits.xlsb``1(``0)" -->
+        <member name="M:Z0.gbits.zhi``1(``0,System.Int32)">
+            <summary>
+            Replicates the source bits to the target and disables the high target bits starting at a specified index.
+            </summary>
+            <param name="src">The source bits</param>
+            <param name="index">The index at which to begin disabling target bits</param>
+            <typeparam name="T">The primal type</typeparam>
+        </member>
+        <member name="M:Z0.BitLogixOps.eval(Z0.BinaryBitLogicKind,Z0.Bit32,Z0.Bit32)">
+            <summary>
+            Evaluates a binary operator without lookup/delegate indirection
+            </summary>
+            <param name="op">The operator classifier</param>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+            <param name="c">The third operand</param>
+        </member>
+        <member name="M:Z0.BitLogixOps.lookup(Z0.BinaryBitLogicKind)">
+            <summary>
+            Returns a kind-identified binary operator
+            </summary>
+            <param name="kind">The operator kind</param>
+        </member>
+        <member name="M:Z0.BitLogixOps.eval(Z0.TernaryBitLogicKind,Z0.Bit32,Z0.Bit32,Z0.Bit32)">
+            <summary>
+            Evaluates an identified ternary operator
+            </summary>
+            <param name="op">The ternary operator classifier</param>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+            <param name="c">The third operand</param>
+        </member>
+        <member name="M:Z0.BitLogixOps.lookup(Z0.TernaryBitLogicKind)">
+            <summary>
+            Returns a kind-identified ternary operator
+            </summary>
+            <param name="kind">The operator kind</param>
+        </member>
+        <member name="M:Z0.XTend.BitSeg``1(System.Span{``0},System.Int32,System.Int32)">
+            <summary>
+            Retrieves, at most, one cell's worth of bits defined by an inclusive bit index range
+            </summary>
+            <param name="first">The linear index of the first bit</param>
+            <param name="last">The linear index of the last bit</param>
+        </member>
+        <member name="M:Z0.Mux.mux(System.Byte,System.Byte)">
+            <summary>
+            Uses the first three bits of the control operand to select one of 8 bits from the input operand
+            </summary>
+            <param name="control">Specifies the output selection</param>
+            <param name="src">The input from which a bit will be selected</param>
+        </member>
+        <member name="M:Z0.Mux.mux(System.UInt16,System.Byte)">
+            <summary>
+            Uses the four bits of the control operand to select one of 16 bits from the input operand
+            </summary>
+            <param name="src">The input from which a bit will be selected</param>
+            <param name="control">Specifies the output selection</param>
+        </member>
+        <member name="M:Z0.Mux.mux(System.UInt32,System.Byte)">
+            <summary>
+            Uses the first 5 bits of the control operand to select one of 32 bits from the input operand
+            </summary>
+            <param name="src">The input from which a bit will be selected</param>
+            <param name="control">Specifies the output selection</param>
+        </member>
+        <member name="M:Z0.Mux.mux(System.UInt64,System.Byte)">
+            <summary>
+            Uses the first 6 bits of the control operand to select one of 64 bits from the source operand
+            </summary>
+            <param name="src">The input from which a bit will be selected</param>
+            <param name="control">Specifies the output selection</param>
+        </member>
+        <member name="T:Z0.BitLogix">
+            <summary>
+            Defines logical operations over 1, 2 or 3 bits
+            </summary>
+        </member>
+        <member name="P:Z0.BitLogix.UnaryOpKinds">
+            <summary>
+            Advertises the supported unary operators
+            </summary>
+        </member>
+        <member name="P:Z0.BitLogix.BinaryOpKinds">
+            <summary>
+            Advertises the supported binary operators
+            </summary>
+        </member>
+        <member name="P:Z0.BitLogix.TernaryOpKinds">
+            <summary>
+            Advertises the supported ternary operators
+            </summary>
+        </member>
+        <member name="M:Z0.BitLogix.Lookup(Z0.UnaryBitLogicKind)">
+            <summary>
+            Returns a kind-identified unary operator
+            </summary>
+            <param name="kind">The operator kind</param>
+        </member>
+        <member name="M:Z0.BitLogix.Lookup(Z0.BinaryBitLogicKind)">
+            <summary>
+            Returns a kind-identified binary operator
+            </summary>
+            <param name="kind">The operator kind</param>
+        </member>
+        <member name="M:Z0.BitLogix.Lookup(Z0.TernaryBitLogicKind)">
+            <summary>
+            Returns a kind-identified ternary operator
+            </summary>
+            <param name="kind">The operator kind</param>
+        </member>
+        <member name="M:Z0.BitLogix.Evaluate(Z0.UnaryBitLogicKind,Z0.Bit32)">
+            <summary>
+            Evaluates a unary operator over a supplied operand
+            </summary>
+            <param name="kind">The operator kind</param>
+            <param name="a">The operand</param>
+        </member>
+        <member name="M:Z0.BitLogix.Evaluate(Z0.BinaryBitLogicKind,Z0.Bit32,Z0.Bit32)">
+            <summary>
+            Evaluates a binary operator over supplied operands
+            </summary>
+            <param name="kind">The operator kind</param>
+            <param name="a">The operand</param>
+        </member>
+        <member name="M:Z0.BitLogix.Evaluate(Z0.TernaryBitLogicKind,Z0.Bit32,Z0.Bit32,Z0.Bit32)">
+            <summary>
+            Evaluates a ternary operator over supplied operands
+            </summary>
+            <param name="kind">The operator kind</param>
+            <param name="a">The operand</param>
+        </member>
+        <member name="T:Z0.BinaryPred`1">
+            <summary>
+            Defines the canonical shape of a 2-argument function over a parametric domain and boolean codomain
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+            <typeparam name="T">The domain over which the predicate is evaluated</typeparam>
+        </member>
+        <member name="T:Z0.Shifter`1">
+            <summary>
+            Defines the canonical shape of a bitwise shift function
+            </summary>
+            <param name="a">The source value</param>
+            <param name="count">The shift amount, typically in bits</param>
+            <typeparam name="T">The operand type</typeparam>
+        </member>
+        <member name="P:Z0.NumericLogixHost.UnaryLogicKinds">
+            <summary>
+            Advertises the supported unary bitlogic operators
+            </summary>
+        </member>
+        <member name="P:Z0.NumericLogixHost.BinaryLogicKinds">
+            <summary>
+            Advertises the supported binary bitlogic operators
+            </summary>
+        </member>
+        <member name="P:Z0.NumericLogixHost.TernaryLogicKinds">
+            <summary>
+            Advertises the supported ternary bitlogic operators
+            </summary>
+        </member>
+        <member name="P:Z0.NumericLogixHost.UnaryAritmeticKinds">
+            <summary>
+            Advertises the supported unary arithmetic operators
+            </summary>
+        </member>
+        <member name="P:Z0.NumericLogixHost.BinaryArithmeticKinds">
+            <summary>
+            Advertises the supported binary arithmetic operators
+            </summary>
+        </member>
+        <member name="P:Z0.NumericLogixHost.BinaryComparisonKinds">
+            <summary>
+            Advertises the supported comparison operators
+            </summary>
+        </member>
+        <member name="M:Z0.NumericLogixHost.eval``1(Z0.TernaryBitLogicKind,``0,``0,``0)">
+            <summary>
+            Evaluates an identified ternary operator
+            </summary>
+            <param name="op">The ternary operator classifier</param>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+            <param name="c">The third operand</param>
+        </member>
+    </members>
+</doc>

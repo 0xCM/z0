@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>z0.refs</name>
+    </assembly>
+    <members>
+        <member name="T:TableIndex">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:TableIndex.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:TableIndex.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:TableIndex.AsmTAddressingModRm32">
+            <summary>
+              Looks up a localized string similar to asmt/AsmT.Addressing.ModRm32.csv.
+            </summary>
+        </member>
+        <member name="P:TableIndex.AsmTAddressingModRm32x64">
+            <summary>
+              Looks up a localized string similar to asmt/AsmT.Addressing.ModRm32x64.csv.
+            </summary>
+        </member>
+        <member name="P:TableIndex.AsmTAddressingSib32">
+            <summary>
+              Looks up a localized string similar to asmt/AsmT.Addressing.Sib32.csv.
+            </summary>
+        </member>
+    </members>
+</doc>

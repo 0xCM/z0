@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>z0.validity</name>
+    </assembly>
+    <members>
+        <member name="T:Z0.TestApp`1">
+            <summary>
+            Base type for test applications
+            </summary>
+            <typeparam name="A">The concrete subtype</typeparam>
+        </member>
+        <member name="P:Z0.TestContext`1.RepCount">
+            <summary>
+            The number of elements to be selected from some sort of stream
+            </summary>
+        </member>
+        <member name="P:Z0.TestContext`1.CycleCount">
+            <summary>
+            The number times to repeat an action
+            </summary>
+        </member>
+        <member name="P:Z0.TestContext`1.RoundCount">
+            <summary>
+            The number of times to repeat a cycle
+            </summary>
+        </member>
+        <member name="P:Z0.TestContext`1.OpCount">
+            <summary>
+            The number of operations performed in a benchmarking exercise
+            </summary>
+        </member>
+        <member name="M:Z0.TestContext`1.counter(System.Boolean)">
+            <summary>
+            Allocates and optionally starts a system counter
+            </summary>
+        </member>
+        <member name="M:Z0.TestContext`1.stopwatch(System.Boolean)">
+            <summary>
+            Creates a new stopwatch and optionally start it
+            </summary>
+            <param name="start">Whether to start the new stopwatch</param>
+        </member>
+        <member name="M:Z0.TestContext`1.snapshot(System.Diagnostics.Stopwatch)">
+            <summary>
+            Captures a stopwatch duration
+            </summary>
+            <param name="sw">A running/stopped stopwatch</param>
+        </member>
+        <member name="M:Z0.ITestQueue.Benchmark(System.Int64,Z0.Duration,System.String)">
+            <summary>
+            Captures a duration and the number of operations executed within the period
+            </summary>
+            <param name="time">The running time</param>
+            <param name="opcount">The operation count</param>
+            <param name="label">The label associated with the measure, if specified</param>
+        </member>
+        <member name="T:Z0.ITestService">
+            <summary>
+            Defines a test service which is, by definition, a contextual service of test context kind
+            </summary>
+        </member>
+    </members>
+</doc>

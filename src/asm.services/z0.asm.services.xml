@@ -1,0 +1,407 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>z0.asm.services</name>
+    </assembly>
+    <members>
+        <member name="M:Z0.Asm.AsmFormatter.FormatFunction(Z0.Asm.AsmRoutine)">
+            <summary>
+            Formats the assembly function detail
+            </summary>
+            <param name="src">The source function</param>
+            <param name="fmt">The format configuration</param>
+        </member>
+        <member name="M:Z0.Asm.AsmQueries.calls(Z0.Asm.AsmRoutine)">
+            <summary>
+            Selects a (non-distinct) sequence of far addresses that are target by call instructions in the source function
+            </summary>
+            <param name="src">The source functions</param>
+        </member>
+        <member name="M:Z0.Asm.AsmQueries.calls(Z0.Asm.AsmRoutines)">
+            <summary>
+            Selects a (non-distinct) sequence of addresses targeted by functions in the source
+            </summary>
+            <param name="src">The source functions</param>
+        </member>
+        <member name="M:Z0.Asm.AsmRender.header(Z0.Asm.AsmRoutine,Z0.Asm.AsmFormatConfig@)">
+            <summary>
+            Formats the function header
+            </summary>
+            <param name="src">The source function</param>
+        </member>
+        <member name="M:Z0.Asm.AsmRender.lines(Z0.Asm.AsmRoutine@,Z0.Asm.AsmFormatConfig@)">
+            <summary>
+            Formats the instructions in a function
+            </summary>
+            <param name="src">The source function</param>
+            <param name="config">An optional format configuration</param>
+        </member>
+        <member name="M:Z0.Asm.AsmRender.label(System.UInt16)">
+            <summary>
+            Formats a line label
+            </summary>
+            <param name="src">The relative line location</param>
+        </member>
+        <member name="F:Z0.Asm.CaptureExchange.TargetBuffer">
+            <summary>
+            The buffer that receives the captured data
+            </summary>
+        </member>
+        <member name="F:Z0.Asm.CaptureExchange.Service">
+            <summary>
+            The juncture-coincident operation set
+            </summary>
+        </member>
+        <member name="M:Z0.Asm.CaptureExchange.Target(System.Int32)">
+            <summary>
+            Queries and manipulates an index-identified target buffer byte
+            </summary>
+            <param name="index">The cell index to query/manipulate</param>
+        </member>
+        <member name="M:Z0.Asm.CaptureExchange.Target(System.Int32,System.Int32)">
+            <summary>
+            Slices a section of the target buffer
+            </summary>
+            <param name="start">The start index</param>
+            <param name="length">The slice length</param>
+        </member>
+        <member name="P:Z0.Asm.CaptureExchangeProxy.Service">
+            <summary>
+            The juncture-coincident operation set
+            </summary>
+        </member>
+        <member name="P:Z0.Asm.CaptureExchangeProxy.TargetBuffer">
+            <summary>
+            The buffer that receives the captured data
+            </summary>
+        </member>
+        <member name="T:Z0.Asm.IAsmContext">
+            <summary>
+            Defines a nexus of shared state and services for assembly-related services
+            </summary>
+        </member>
+        <member name="P:Z0.Asm.IAsmContext.ContextRoot">
+            <summary>
+            The root of this context
+            </summary>
+        </member>
+        <member name="P:Z0.Asm.IAsmContext.CaptureCore">
+            <summary>
+            The capture service
+            </summary>
+        </member>
+        <member name="P:Z0.Asm.IAsmContext.DefaultBufferLength">
+            <summary>
+            The buffer length to use whenever a buffer length is unspecified
+            </summary>
+        </member>
+        <member name="P:Z0.Asm.IAsmContext.FormatConfig">
+            <summary>
+            The default asm formatting configuration
+            </summary>
+        </member>
+        <member name="P:Z0.Asm.IAsmContext.Formatter">
+            <summary>
+            The context formatter
+            </summary>
+        </member>
+        <member name="P:Z0.Asm.IAsmContext.RoutineDecoder">
+            <summary>
+            The context decoder
+            </summary>
+        </member>
+        <member name="T:Z0.Asm.IAsmDecoder">
+            <summary>
+            Characterizes function-centric asm decoding operations
+            </summary>
+        </member>
+        <member name="M:Z0.Asm.IAsmDecoder.Decode(Z0.ApiCaptureBlock)">
+            <summary>
+            Decodes a function from member capture data
+            </summary>
+            <param name="src">The source data</param>
+        </member>
+        <member name="M:Z0.Asm.IAsmDecoder.Decode(Z0.ApiMemberCode)">
+            <summary>
+            Decodes a function from member capture data
+            </summary>
+            <param name="src">The source data</param>
+        </member>
+        <member name="M:Z0.Asm.IAsmDecoder.Decode(Z0.BasedCodeBlock)">
+            <summary>
+            Decodes an instruction list
+            </summary>
+            <param name="src">The code source</param>
+        </member>
+        <member name="T:Z0.Asm.IAsmImmWriter">
+            <summary>
+            Defines service contract for persisting asm functions which are derived from .net member functions
+            </summary>
+        </member>
+        <member name="P:Z0.Asm.IAsmImmWriter.Uri">
+            <summary>
+            The api host
+            </summary>
+        </member>
+        <member name="M:Z0.Asm.IAsmImmWriter.SaveAsmImm(Z0.OpIdentity,Z0.Asm.AsmRoutine[],System.Boolean)">
+            <summary>
+            Saves an array of functions as formatted asm
+            </summary>
+            <param name="src">The source functions</param>
+            <param name="append">Whether to append to an existing file or else overwrite</param>
+        </member>
+        <member name="M:Z0.Asm.IAsmImmWriter.SaveHexImm(Z0.OpIdentity,Z0.Asm.AsmRoutine[],System.Boolean)">
+            <summary>
+            Saves the encoded data contained in an array of decded functions
+            </summary>
+            <param name="src">The source functions</param>
+            <param name="append">Whether to append to an existing file or else overwrite</param>
+        </member>
+        <member name="M:Z0.Asm.IAsmServices.Formatter(System.Nullable{Z0.Asm.AsmFormatConfig}@)">
+            <summary>
+            Creates an asm formatter with an optional configuration
+            </summary>
+            <param name="config">The format configuration, if any</param>
+        </member>
+        <member name="M:Z0.Asm.IAsmServices.AsmWriter(Z0.FilePath,Z0.Asm.AsmFormatConfig@)">
+            <summary>
+            Allocates a caller-disposed asm text writer with a customized format configuration
+            </summary>
+            <param name="config">The format configuration</param>
+            <param name="dst">The target path</param>
+        </member>
+        <member name="T:Z0.Asm.ICaptureCore">
+            <summary>
+            Defines supported x86-encoding capture operations
+            </summary>
+        </member>
+        <member name="M:Z0.Asm.ICaptureCore.Capture(Z0.Asm.CaptureExchange@,Z0.ApiMember@)">
+            <summary>
+            Captures an api member that has already been jitted
+            </summary>
+            <param name="exchange">The selected exchange</param>
+            <param name="src">The api member</param>
+        </member>
+        <member name="M:Z0.Asm.ICaptureCore.Capture(Z0.Asm.CaptureExchange@,Z0.OpIdentity,System.Reflection.MethodInfo)">
+            <summary>
+            Captures jitted x86 encoded assembly for nongeneric methods
+            </summary>
+            <param name="exchange">The selected exchange</param>
+            <param name="id">The identity to confer to the captured member</param>
+            <param name="src">The source method</param>
+        </member>
+        <member name="M:Z0.Asm.ICaptureCore.Capture(Z0.Asm.CaptureExchange@,System.Reflection.MethodInfo,System.Type[])">
+            <summary>
+            Captures jitted x86 encoded assembly for generic or nongeneric methods
+            </summary>
+            <param name="exchange">The selected exchange</param>
+            <param name="src">The source method</param>
+            <param name="args">The types over which to close open generic methods, if applicable</param>
+            <remarks>
+            If the method is open generic, it is closed over supplied type arguments or
+            If the method is nongeneric or closed-generic, the method is captured as-is
+            </remarks>
+        </member>
+        <member name="M:Z0.Asm.ICaptureCore.Capture(Z0.Asm.CaptureExchange@,Z0.OpIdentity,Z0.DynamicDelegate@)">
+            <summary>
+            Captures jitted x86 encoded assembly for a dynamic delegate
+            </summary>
+            <param name="exchange">The selected exchange</param>
+            <param name="id">The operation identity to confer</param>
+            <param name="src">The dynamic delegate to capture</param>
+        </member>
+        <member name="M:Z0.Asm.ICaptureCore.Capture(Z0.Asm.CaptureExchange@,Z0.OpIdentity,System.Delegate)">
+            <summary>
+            Captures jitted x86 encoded assembly for a delegate
+            </summary>
+            <param name="exchange">The selected exchange</param>
+            <param name="id">The operation identity to confer</param>
+            <param name="src">The delegate to capture</param>
+        </member>
+        <member name="M:Z0.Asm.ICaptureCore.ParseBuffer(Z0.Asm.CaptureExchange@,Z0.OpIdentity,System.Span{System.Byte})">
+            <summary>
+            Captures encoded data from a caller-supplied source buffer.
+            </summary>
+            <param name="exchange">The selected exchange</param>
+            <param name="id">The operation identity to confer</param>
+            <param name="src">The source buffer</param>
+        </member>
+        <member name="M:Z0.Asm.ICaptureCore.Capture``1(Z0.Asm.CaptureExchange@,Z0.OpIdentity,Z0.DynamicDelegate{``0})">
+            <summary>
+            Captures jitted x86 encoded assembly for a dynamic delegate
+            </summary>
+            <param name="exchange">The selected exchange</param>
+            <param name="id">The operation identity to confer</param>
+            <param name="src">The dynamic delegate to capture</param>
+        </member>
+        <member name="P:Z0.Asm.ICaptureExchange.Service">
+            <summary>
+            The capture service in use
+            </summary>
+        </member>
+        <member name="P:Z0.Asm.ICaptureExchange.TargetBuffer">
+            <summary>
+            The buffer that receives the captured data
+            </summary>
+        </member>
+        <member name="T:Z0.Asm.ICaptureServiceProxy">
+            <summary>
+            Exposes capture services without the hassle of passing a ref struct about hither thither and yon
+            </summary>
+        </member>
+        <member name="P:Z0.Asm.ICaptureServiceProxy.CaptureExchange">
+            <summary>
+            The capture exchange
+            </summary>
+        </member>
+        <member name="P:Z0.Asm.ICaptureServiceProxy.CaptureService">
+            <summary>
+            The exchange service
+            </summary>
+        </member>
+        <member name="M:Z0.Asm.ICaptureServiceProxy.Capture(Z0.ApiMember@)">
+            <summary>
+            Captures an api member that has already been jitted
+            </summary>
+            <param name="exchange">The selected exchange</param>
+            <param name="src">The api member</param>
+        </member>
+        <member name="M:Z0.Asm.ICaptureServiceProxy.Capture(Z0.OpIdentity,System.Reflection.MethodInfo)">
+            <summary>
+            Captures jitted x86 encoded assembly for nongeneric methods
+            </summary>
+            <param name="id">The identity to confer to the captured member</param>
+            <param name="src">The source method</param>
+        </member>
+        <member name="M:Z0.Asm.ICaptureServiceProxy.Capture(System.Reflection.MethodInfo,System.Type[])">
+            <summary>
+            Captures jitted x86 encoded assembly for generic or nongeneric methods
+            </summary>
+            <param name="src">The source method</param>
+            <param name="args">The types over which to close open generic methods, if applicable</param>
+            <remarks>
+            If the method is open generic, it is closed over supplied type arguments or
+            If the method is nongeneric or closed-generic, the method is captured as-is
+            </remarks>
+        </member>
+        <member name="M:Z0.Asm.ICaptureServiceProxy.Capture(Z0.OpIdentity,Z0.DynamicDelegate@)">
+            <summary>
+            Captures jitted x86 encoded assembly for a dynamic delegate
+            </summary>
+            <param name="id">The identity to confer to the captured member</param>
+            <param name="src">The dynamic delegate to capture</param>
+        </member>
+        <member name="M:Z0.Asm.ICaptureServiceProxy.Capture(Z0.OpIdentity,System.Delegate)">
+            <summary>
+            Captures jitted x86 encoded assembly for a delegate
+            </summary>
+            <param name="id">The identity to confer to the captured member</param>
+            <param name="src">The delegate to capture</param>
+        </member>
+        <member name="M:Z0.Asm.ICaptureServiceProxy.ParseBuffer(Z0.OpIdentity,System.Span{System.Byte})">
+            <summary>
+            Captures encoded data from a caller-supplied source buffer.
+            </summary>
+            <param name="id">The identity to confer to the parsed buffer</param>
+            <param name="src">The source buffer</param>
+        </member>
+        <member name="M:Z0.Asm.ICaptureServiceProxy.Capture``1(Z0.OpIdentity,Z0.DynamicDelegate{``0})">
+            <summary>
+            Captures jitted x86 encoded assembly for a dynamic delegate
+            </summary>
+            <param name="id">The identity to confer to the captured member</param>
+            <param name="src">The dynamic delegate to capture</param>
+        </member>
+        <member name="M:Z0.Asm.ICaptureServices.RoutineDecoder(System.Nullable{Z0.Asm.AsmFormatConfig}@)">
+            <summary>
+            Creates a function decoder
+            </summary>
+            <param name="context">The source context</param>
+            <param name="format">The format configuration</param>
+        </member>
+        <member name="M:Z0.Asm.AsmEncoder.bytes(Z0.Asm.EncodedInstruction@)">
+            <summary>
+            Presents encoded content as a bytespan of variable length from 0 to 15 bytes
+            </summary>
+            <param name="src">The command source</param>
+        </member>
+        <member name="M:Z0.Asm.AsmEncoder.size(Z0.Asm.EncodedInstruction@)">
+            <summary>
+            Computes the length, in bytes, of the encoded content
+            </summary>
+            <param name="src">The command source</param>
+        </member>
+        <member name="M:Z0.Asm.AsmEncoder.encode(System.ReadOnlySpan{System.Byte})">
+            <summary>
+            Defines a command from data supplied by a bytespan
+            </summary>
+            <param name="src">The data source</param>
+        </member>
+        <member name="M:Z0.Asm.AsmEncoder.encode(System.UInt64)">
+            <summary>
+            Creates a command from data supplied in a 64-bit unsigned integer
+            </summary>
+            <param name="lo64">The data source</param>
+        </member>
+        <member name="M:Z0.Asm.AsmEncoder.encode(System.UInt32)">
+            <summary>
+            Creates a command from the data supplied in a 64-bit unsigned integer
+            </summary>
+            <param name="lo32">The data source</param>
+        </member>
+        <member name="T:Z0.Asm.ModRm">
+            <summary>
+            Defines a byte that follows an opcode that specifies either
+            a) two register operands or,
+            b) one register operand and a memory operand together with an addressing mode
+            ModRM = [Mod:[7 6] | Reg:[5 4 3] | Rm:[2 1 0] ]
+            </summary>
+        </member>
+        <member name="P:Z0.Asm.ModRm.Rm">
+            <summary>
+            Defines bits [2:0] of the modrm byte
+            </summary>
+        </member>
+        <member name="P:Z0.Asm.ModRm.Reg">
+            <summary>
+            Defines bits [5:3] of the modrm byte
+            </summary>
+        </member>
+        <member name="P:Z0.Asm.ModRm.Mod">
+            <summary>
+            Defines bits [7:6] of the modrm byte
+            </summary>
+        </member>
+        <member name="P:Z0.Asm.ModRm.Encoded">
+            <summary>
+            The encoded bitfield value
+            </summary>
+        </member>
+        <member name="T:Z0.Asm.ModRmEncoding">
+            <summary>
+            Captures both the input and encoding for a modrm prefix
+            </summary>
+        </member>
+        <member name="M:Z0.AsmProcessors.create(Z0.IWfShell)">
+            <summary>
+            Creates an asm processor
+            </summary>
+            <param name="context">The process context</param>
+        </member>
+        <member name="P:Z0.AsmRecapture.ResBytesCompiled">
+            <summary>
+            The x86 resource assembly output path - which was created by disassembling most of z0
+            </summary>
+        </member>
+        <member name="P:Z0.AsmRecapture.ResBytesUncompiled">
+            <summary>
+            The target directory that receives data obtained by disassembling the resource disassembly file <see cref='P:Z0.AsmRecapture.ResBytesCompiled'/>
+            </summary>
+        </member>
+        <member name="M:Z0.CaptureResBytes.Run">
+            <summary>
+            All of your resbytes belong to us
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,390 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>z0.bitfields</name>
+    </assembly>
+    <members>
+        <member name="M:Z0.BitFields.create``1(Z0.BitFieldSpec@)">
+            <summary>
+            Creates a stateful bitfield api surface
+            </summary>
+            <param name="spec">The bitfield definition</param>
+            <typeparam name="T">The type over which the bitfield is defined</typeparam>
+        </member>
+        <member name="M:Z0.BitFields.create``3">
+            <summary>
+            Creates a stateful numeric bitfield api surface
+            </summary>
+            <param name="spec">The bitfield definition</param>
+            <typeparam name="E">A index-defining enumeration</typeparam>
+            <typeparam name="T">The numeric type</typeparam>
+            <typeparam name="W">A width-defining enumeration</typeparam>
+        </member>
+        <member name="M:Z0.BitFields.create``3(Z0.BitFieldSpec@)">
+            <summary>
+            Creates a stateful numeric bitfield api surface
+            </summary>
+            <param name="spec">The bitfield definition</param>
+            <typeparam name="S">The type over which the bitfield is defined</typeparam>
+            <typeparam name="E">A index-defining enumeration</typeparam>
+            <typeparam name="T">The numeric type</typeparam>
+        </member>
+        <member name="M:Z0.BitFields.create``3(System.UInt32)">
+            <summary>
+            Defines and creates a fixed-width bitfield
+            </summary>
+            <param name="bitcount">The total field bit-width</param>
+            <typeparam name="E">A index-defining enumeration</typeparam>
+            <typeparam name="T">The numeric type</typeparam>
+            <typeparam name="W"></typeparam>
+            <typeparam name="W">A width-defining enumeration</typeparam>
+        </member>
+        <member name="M:Z0.BitFields.create``4">
+            <summary>
+            Creates a stateful numeric bitfield api surface
+            </summary>
+            <param name="spec">The bitfield definition</param>
+            <typeparam name="S">The type over which the bitfield is defined</typeparam>
+            <typeparam name="E">A index-defining enumeration</typeparam>
+            <typeparam name="T">The numeric type</typeparam>
+            <typeparam name="W">A width-defining enumeration</typeparam>
+        </member>
+        <member name="M:Z0.BitFields.extract``2(``0,System.Byte,System.Byte)">
+            <summary>
+            Extracts a primal bitfield segment
+            </summary>
+            <param name="src">The source field</param>
+            <param name="i0">The index of the first bit</param>
+            <param name="i1">The index of the last bit</param>
+            <typeparam name="F">The primal field type</typeparam>
+            <typeparam name="T">The segment type</typeparam>
+        </member>
+        <member name="M:Z0.BitFields.format``2(``0)">
+            <summary>
+            Formats a field segments as {typeof(V):Name}:{TrimmedBits}
+            </summary>
+            <param name="value">The field value</param>
+            <typeparam name="E">The field value type</typeparam>
+            <typeparam name="T">The field data type</typeparam>
+        </member>
+        <member name="M:Z0.BitFields.format``2(System.ReadOnlySpan{``0})">
+            <summary>
+            Computes the canonical format for a contiguous field segment sequence
+            </summary>
+            <param name="src">The source segment</param>
+            <typeparam name="T">The type over which the segment is defined</typeparam>
+        </member>
+        <member name="M:Z0.BitFields.segment(System.Byte,Z0.ConstPair{System.UInt32}@)">
+            <summary>
+            Defines a bitfield segment
+            </summary>
+            <param name="id">The segment identifier</param>
+            <param name="width">The segment width</param>
+            <param name="seg">The inclusive left/right segment index boundaries</param>
+        </member>
+        <member name="M:Z0.BitFields.segment(Z0.BitFieldModel@,System.Int32)">
+            <summary>
+            Describes an index-identified model segment
+            </summary>
+            <param name="src">The source model</param>
+            <param name="index">The field index</param>
+        </member>
+        <member name="M:Z0.BitFields.segments``2(Z0.BitFieldIndex{``0,``1}@)">
+            <summary>
+            Creates the field segment array as determined by a field index
+            </summary>
+            <param name="index">The source index</param>
+            <typeparam name="W">The enum type with width-defining literals</typeparam>
+        </member>
+        <member name="M:Z0.BitFields.specify(Z0.BitFieldSegment[])">
+            <summary>
+            Defines a bitfield predicated on explicitly-specified segments
+            </summary>
+            <param name="segments">The defining segments</param>
+        </member>
+        <member name="M:Z0.BitFields.specify``2">
+            <summary>
+            Defines a bitfield predicated on an indexing enumeration I, with an assumed underlying
+            numeric type of byte, and a width-defining enumeration W
+            </summary>
+            <typeparam name="I">The indexing enum type</typeparam>
+            <typeparam name="U">The underlying type of the indexing enum</typeparam>
+            <typeparam name="W">The width enum type</typeparam>
+        </member>
+        <member name="M:Z0.BitFields.specify``3">
+            <summary>
+            Defines a bitfield predicated on an indexing enumeration I, the underlying numeric type of I, T, and a width-defining enumeration W
+            </summary>
+            <typeparam name="E">The indexing enum type</typeparam>
+            <typeparam name="T">The underlying type of the indexing enum</typeparam>
+            <typeparam name="W">The width enum type</typeparam>
+        </member>
+        <member name="T:Z0.BitBroker`3">
+            <summary>
+            Mediates parametric data exchange for up to 64 enumeration-predicated classifiers
+            </summary>
+        </member>
+        <member name="T:Z0.BitBroker`2">
+            <summary>
+            Mediates parametric data exchange for up to 64 enumeration-predicated classifiers
+            </summary>
+        </member>
+        <member name="T:Z0.BitField32">
+            <summary>
+            Defines a minimalistic 32-bit bitfield
+            </summary>
+        </member>
+        <member name="T:Z0.BitField32`1">
+            <summary>
+            Defines a T-parametric 32-bit bitfields
+            </summary>
+        </member>
+        <member name="M:Z0.BitField64`1.Test(System.Byte)">
+            <summary>
+            Determines whether an index-identified bit is enabled
+            </summary>
+            <param name="index">An integer in the range [0,63]</param>
+        </member>
+        <member name="M:Z0.BitField64`1.Set(System.Byte,Z0.bit)">
+            <summary>
+            Enables or disables an index-identified bit
+            </summary>
+            <param name="index">An integer in the range [0,63]</param>
+            <param name="state">If 1, turns the bit on; otherwise, the bit is turned off</param>
+        </member>
+        <member name="M:Z0.BitField64`1.enable(System.UInt64,System.Byte)">
+            <summary>
+            Enables a specified source bit
+            </summary>
+            <param name="src">The source value to manipulate</param>
+            <param name="pos">The position of the bit to enable</param>
+        </member>
+        <member name="M:Z0.BitField64`1.Enable(System.Byte)">
+            <summary>
+            Enables an index-identified bit
+            </summary>
+            <param name="index">An integer in the range [0,63]</param>
+        </member>
+        <member name="M:Z0.BitField64`1.Disable(System.Byte)">
+            <summary>
+            Enables an index-identified bit
+            </summary>
+            <param name="index">An integer in the range [0,63]</param>
+        </member>
+        <member name="T:Z0.BitField`2">
+            <summary>
+            Defines a stateful numeric bitfield api surface parametrized by an indexing enum and numeric type
+            </summary>
+            <typeparam name="E">A indexing enumeration</typeparam>
+            <typeparam name="T">The numeric type over which the bitfield is defined</typeparam>
+        </member>
+        <member name="F:Z0.BitField`2.Spec">
+            <summary>
+            The bitfield definition upon which the reader is predicated
+            </summary>
+        </member>
+        <member name="M:Z0.BitField`2.Segment(`0)">
+            <summary>
+            Fetches an index-identified segment
+            </summary>
+            <param name="index">The segment index</param>
+        </member>
+        <member name="M:Z0.BitField`2.Extract(Z0.BitFieldSegment@,`1@)">
+            <summary>
+            Extracts a contiguous range of bits from the source value per the segment specification
+            </summary>
+            <param name="segment">The segment spec</param>
+            <param name="src">The value from which the segment will be extracted</param>
+        </member>
+        <member name="M:Z0.BitField`2.Extract(`0,`1@)">
+            <summary>
+            Extracts a contiguous range of bits from the source value per the segment specification
+            </summary>
+            <param name="index">The segment index</param>
+            <param name="src">The value from which the segment will be extracted</param>
+        </member>
+        <member name="M:Z0.BitField`2.Deposit(`1@,System.Span{`1})">
+            <summary>
+            Extracts all segments from the source value and deposits the result in a caller-suppled span
+            </summary>
+            <param name="src">The source value</param>
+            <param name="dst">The target span</param>
+        </member>
+        <member name="M:Z0.BitField`2.Extract(Z0.BitFieldSegment@,`1@,System.Boolean)">
+            <summary>
+            Extracts a source segment to the least bits of the target then shifts the target by a specified offset
+            </summary>
+            <param name="segment">The segment spec</param>
+            <param name="src">The source value</param>
+            <param name="offset">The offset amount</param>
+        </member>
+        <member name="M:Z0.BitField`2.Extract(`0,`1@,System.Boolean)">
+            <summary>
+            Extracts a source segment to the least bits of the target then shifts the target by a specified offset
+            </summary>
+            <param name="index">The segment index</param>
+            <param name="src">The source value</param>
+            <param name="offset">The offset amount</param>
+        </member>
+        <member name="M:Z0.BitField`2.Deposit(Z0.BitFieldSegment@,`1@,`1@)">
+            <summary>
+            Overwrites an identified target segment with the bits from the corresponding source segment
+            </summary>
+            <param name="segment">The segment spec</param>
+            <param name="src">The source value</param>
+            <param name="dst">The target value</param>
+        </member>
+        <member name="M:Z0.BitField`2.Deposit(`0,`1@,`1@)">
+            <summary>
+            Overwrites an identified target segment with the bits from the corresponding source segment
+            </summary>
+            <param name="segment">The segment spec</param>
+            <param name="src">The source value</param>
+            <param name="dst">The target value</param>
+        </member>
+        <member name="T:Z0.BitFieldIndexEntry`2">
+            <summary>
+            Associates the declaration order of an enum literal with the corresponding literal value
+            </summary>
+        </member>
+        <member name="T:Z0.BitFieldIndexEntry`1">
+            <summary>
+            Associates the declaration order of an enum literal with the corresponding literal value
+            </summary>
+        </member>
+        <member name="T:Z0.BitField`3">
+            <summary>
+            Defines the (stateful) bitfield api surface parametrized by an indexing enum
+            </summary>
+            <typeparam name="T">The type over which the bitfield is defined</typeparam>
+            <typeparam name="E">A indexing enumeration</typeparam>
+        </member>
+        <member name="F:Z0.BitField`3.Spec">
+            <summary>
+            The bitfield definition upon which the reader is predicated
+            </summary>
+        </member>
+        <member name="M:Z0.BitField`3.Segment(`1)">
+            <summary>
+            Fetches an index-identified segment
+            </summary>
+            <param name="index">The segment index</param>
+        </member>
+        <member name="M:Z0.BitField`3.Read(Z0.BitFieldSegment@,`0@)">
+            <summary>
+            Extracts a contiguous range of bits from the source value per the segment specification
+            </summary>
+            <param name="segment">The segment spec</param>
+            <param name="src">The value from which the segment will be extracted</param>
+        </member>
+        <member name="M:Z0.BitField`3.Read(`1,`0@)">
+            <summary>
+            Extracts a contiguous range of bits from the source value per the segment specification
+            </summary>
+            <param name="index">The segment index</param>
+            <param name="src">The value from which the segment will be extracted</param>
+        </member>
+        <member name="M:Z0.BitField`3.Read(`0@,System.Span{`2})">
+            <summary>
+            Extracts all segments from the source value and deposits the result in a caller-suppled span
+            </summary>
+            <param name="src">The source value</param>
+            <param name="dst">The target span</param>
+        </member>
+        <member name="M:Z0.BitField`3.Read(Z0.BitFieldSegment@,`0@,System.Boolean)">
+            <summary>
+            Extracts a source segment to the least bits of the target then shifts the target by a specified offset
+            </summary>
+            <param name="segment">The segment spec</param>
+            <param name="src">The source value</param>
+            <param name="offset">The offset amount</param>
+        </member>
+        <member name="M:Z0.BitField`3.Read(`1,`0@,System.Boolean)">
+            <summary>
+            Extracts a source segment to the least bits of the target then shifts the target by a specified offset
+            </summary>
+            <param name="index">The segment index</param>
+            <param name="src">The source value</param>
+            <param name="offset">The offset amount</param>
+        </member>
+        <member name="M:Z0.BitField`3.Write(Z0.BitFieldSegment@,`0@,`2@)">
+            <summary>
+            Overwrites an identified target segment with the bits from the corresponding source segment
+            </summary>
+            <param name="segment">The segment spec</param>
+            <param name="src">The source value</param>
+            <param name="dst">The target value</param>
+        </member>
+        <member name="M:Z0.BitField`3.Write(Z0.BitFieldSegment@,`0@,`0@)">
+            <summary>
+            Overwrites an identified target segment with the bits from the corresponding source segment
+            </summary>
+            <param name="segment">The segment spec</param>
+            <param name="src">The source value</param>
+            <param name="dst">The target value</param>
+        </member>
+        <member name="M:Z0.BitField`3.Write(`1,`0@,`0@)">
+            <summary>
+            Overwrites an identified target segment with the bits from the corresponding source segment
+            </summary>
+            <param name="segment">The segment spec</param>
+            <param name="src">The source value</param>
+            <param name="dst">The target value</param>
+        </member>
+        <member name="M:Z0.BitField`3.Write(`1,`0@,`2@)">
+            <summary>
+            Overwrites an index-identified target segment with the bits from the corresponding source segment
+            </summary>
+            <param name="segment">The segment spec</param>
+            <param name="src">The source value</param>
+            <param name="dst">The target value</param>
+        </member>
+        <member name="T:Z0.BitField`1">
+            <summary>
+            Defines the (stateful) bitfield api surface
+            </summary>
+            <typeparam name="T">The type over which the bitfield is defined</typeparam>
+        </member>
+        <member name="F:Z0.BitField`1.Spec">
+            <summary>
+            The bitfield definition upon which the reader is predicated
+            </summary>
+        </member>
+        <member name="M:Z0.BitField`1.Segment(System.Int32)">
+            <summary>
+            Fetches an index-identified segment
+            </summary>
+            <param name="index">The segment index</param>
+        </member>
+        <member name="M:Z0.BitField`1.Extract(Z0.BitFieldSegment@,`0)">
+            <summary>
+            Extracts a contiguous range of bits from the source value per the segment specification
+            </summary>
+            <param name="seg">The segment spec</param>
+            <param name="src">The value from which the segment will be extracted</param>
+        </member>
+        <member name="M:Z0.BitField`1.Deposit(`0,System.Span{`0})">
+            <summary>
+            Extracts all segments from the source value and deposits the result in a caller-suppled span
+            </summary>
+            <param name="src">The source value</param>
+            <param name="dst">The target span</param>
+        </member>
+        <member name="M:Z0.BitField`1.Extract(Z0.BitFieldSegment@,`0,System.Boolean)">
+            <summary>
+            Extracts a source segment to the least bits of the target then shifts the target by a specified offset
+            </summary>
+            <param name="segment">The segment spec</param>
+            <param name="src">The source value</param>
+            <param name="offset">The offset amount</param>
+        </member>
+        <member name="M:Z0.BitFieldFormatter.format``2(``0)">
+            <summary>
+            Formats a field segments as {typeof(V):Name}:{TrimmedBits}
+            </summary>
+            <param name="value">The field value</param>
+            <typeparam name="V">The field value type</typeparam>
+            <typeparam name="T">The field data type</typeparam>
+        </member>
+    </members>
+</doc>

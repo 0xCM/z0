@@ -1,0 +1,281 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>z0.check.dynamic</name>
+    </assembly>
+    <members>
+        <member name="M:Z0.TTestAction.TestAction(System.Action,System.String)">
+            <summary>
+            Captures the outcome of an action invocation, identified by a supplied label
+            </summary>
+            <param name="f">The action to invoke</param>
+            <param name="label">The case label</param>
+        </member>
+        <member name="M:Z0.TTestAction.TestAction``1(System.Action{``0},``0,System.String)">
+            <summary>
+            Captures the outcome of an action invocation, identified by a supplied label
+            </summary>
+            <param name="f">The action to invoke</param>
+            <param name="label">The case label</param>
+        </member>
+        <member name="M:Z0.TTestAction.TestAction``1(System.Action,System.String)">
+            <summary>
+            Captures the outcome of action invocation, identified by a parametrically-specialized label
+            </summary>
+            <param name="f">The action to invoke</param>
+            <param name="label">The case label to specialize</param>
+            <typeparam name="T">The label specialization type</typeparam>
+        </member>
+        <member name="M:Z0.TTestCaseIdentity.CaseName(Z0.OpIdentity)">
+            <summary>
+            Produces a test case name predicated on an operation identity
+            </summary>
+            <param name="id">Identifies the operation under test</param>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Z0.TTestCaseIdentity.CaseOpId``1(System.String)" -->
+        <member name="M:Z0.TTestCaseIdentity.CaseName``1(System.String)">
+            <summary>
+            Produces a test case name predicated on a parametrically-specialized label
+            </summary>
+            <param name="label">The case label</param>
+            <typeparam name="T">The label specialization type</typeparam>
+        </member>
+        <member name="M:Z0.TTestCaseIdentity.CaseName``1(System.Type,System.String)">
+            <summary>
+            Produces the name of the test case predicated on a root name and parametric type
+            </summary>
+            <param name="label">The root name</param>
+        </member>
+        <member name="M:Z0.TTestCaseIdentity.CaseName``2(Z0.IFunc,``0,System.Boolean)">
+            <summary>
+            Computes a test case identifier for a segmented structured function
+            </summary>
+            <param name="f">The function under test</param>
+            <param name="w">The domainant operand width</param>
+            <param name="generic">Whether the test subject is generic</param>
+            <typeparam name="W">The type width</typeparam>
+            <typeparam name="T">The cell width</typeparam>
+        </member>
+        <member name="M:Z0.TTestCaseIdentity.MatchCaseName(Z0.OpIdentity,Z0.OpIdentity)">
+            <summary>
+            Produces a case name for an identified operation match test
+            </summary>
+            <param name="f">The left operation</param>
+            <param name="g">The right operation</param>
+        </member>
+        <member name="M:Z0.TTestFixedBinaryOp.Match(Z0.BinaryOp8,Z0.OpIdentity,Z0.BinaryOp8,Z0.OpIdentity)">
+            <summary>
+            Verifies that two 8-bit binary operators agree over a random set of points
+            </summary>
+            <param name="f">The first operator</param>
+            <param name="fId">The identity of the first operator</param>
+            <param name="g">The second operator</param>
+            <param name="gId">The identity of the second operator</param>
+        </member>
+        <member name="M:Z0.TTestFixedBinaryOp.Match(Z0.BinaryOp16,Z0.OpIdentity,Z0.BinaryOp16,Z0.OpIdentity)">
+            <summary>
+            Verifies that two 16-bit binary operators agree over a random set of points
+            </summary>
+            <param name="f">The first operator</param>
+            <param name="fId">The identity of the first operator</param>
+            <param name="g">The second operator</param>
+            <param name="gId">The identity of the second operator</param>
+        </member>
+        <member name="M:Z0.TTestFixedBinaryOp.Match(Z0.BinaryOp32,Z0.OpIdentity,Z0.BinaryOp32,Z0.OpIdentity)">
+            <summary>
+            Verifies that two 32-bit binary operators agree over a random set of points
+            </summary>
+            <param name="f">The first operator</param>
+            <param name="fId">The identity of the first operator</param>
+            <param name="g">The second operator</param>
+            <param name="gId">The identity of the second operator</param>
+        </member>
+        <member name="M:Z0.TTestFixedBinaryOp.Match(Z0.BinaryOp64,Z0.OpIdentity,Z0.BinaryOp64,Z0.OpIdentity)">
+            <summary>
+            Verifies that two 64-bit binary operators agree over a random set of points
+            </summary>
+            <param name="f">The first operator</param>
+            <param name="fId">The identity of the first operator</param>
+            <param name="g">The second operator</param>
+            <param name="gId">The identity of the second operator</param>
+        </member>
+        <member name="M:Z0.TTestFixedBinaryOp.Match(Z0.BinaryOp128,Z0.OpIdentity,Z0.BinaryOp128,Z0.OpIdentity)">
+            <summary>
+            Verifies that two 128-bit binary operators agree over a random set of points
+            </summary>
+            <param name="f">The first operator</param>
+            <param name="fId">The identity of the first operator</param>
+            <param name="g">The second operator</param>
+            <param name="gId">The identity of the second operator</param>
+        </member>
+        <member name="M:Z0.TTestFixedBinaryOp.Match(Z0.BinaryOp256,Z0.OpIdentity,Z0.BinaryOp256,Z0.OpIdentity)">
+            <summary>
+            Verifies that two 128-bit binary operators agree over a random set of points
+            </summary>
+            <param name="f">The first operator</param>
+            <param name="fId">The identity of the first operator</param>
+            <param name="g">The second operator</param>
+            <param name="gId">The identity of the second operator</param>
+        </member>
+        <member name="M:Z0.TTestNumericMatch.MatchNumeric``1(System.String,Z0.UnaryOp{``0},Z0.UnaryOp{``0})">
+            <summary>
+            Evaluates a pair of unary operators and asserts their equality over a random sequence
+            </summary>
+            <param name="label">The case label</param>
+            <param name="f">The first operator, often interpreted as the reference implementation</param>
+            <param name="g">The second operator, often interpreted as the operator under test</param>
+            <typeparam name="T">The operator domain type</typeparam>
+        </member>
+        <member name="M:Z0.TTestNumericMatch.MatchNumeric``1(System.String,Z0.BinaryOp{``0},Z0.BinaryOp{``0})">
+            <summary>
+            Evaluates a pair of binary operators and asserts their equality over a random sequence
+            </summary>
+            <param name="label">The case label</param>
+            <param name="f">The first operator, often interpreted as the reference implementation</param>
+            <param name="g">The second operator, often interpreted as the operator under test</param>
+            <typeparam name="T">The operator domain type</typeparam>
+        </member>
+        <member name="M:Z0.TTestUnaryFixedMatch.Match(Z0.UnaryOp8,Z0.OpIdentity,Z0.UnaryOp8,Z0.OpIdentity)">
+            <summary>
+            Verifies that two 8-bit binary operators agree over a random set of points
+            </summary>
+            <param name="f">The first operator</param>
+            <param name="fId">The identity of the first operator</param>
+            <param name="g">The second operator</param>
+            <param name="gId">The identity of the second operator</param>
+        </member>
+        <member name="M:Z0.TTestUnaryFixedMatch.Match(Z0.UnaryOp16,Z0.OpIdentity,Z0.UnaryOp16,Z0.OpIdentity)">
+            <summary>
+            Verifies that two 16-bit binary operators agree over a random set of points
+            </summary>
+            <param name="f">The first operator</param>
+            <param name="fId">The identity of the first operator</param>
+            <param name="g">The second operator</param>
+            <param name="gId">The identity of the second operator</param>
+        </member>
+        <member name="M:Z0.TTestUnaryFixedMatch.Match(Z0.UnaryOp32,Z0.OpIdentity,Z0.UnaryOp32,Z0.OpIdentity)">
+            <summary>
+            Verifies that two 32-bit binary operators agree over a random set of points
+            </summary>
+            <param name="f">The first operator</param>
+            <param name="fId">The identity of the first operator</param>
+            <param name="g">The second operator</param>
+            <param name="gId">The identity of the second operator</param>
+        </member>
+        <member name="M:Z0.TTestUnaryFixedMatch.Match(Z0.UnaryOp64,Z0.OpIdentity,Z0.UnaryOp64,Z0.OpIdentity)">
+            <summary>
+            Verifies that two 64-bit binary operators agree over a random set of points
+            </summary>
+            <param name="f">The first operator</param>
+            <param name="fId">The identity of the first operator</param>
+            <param name="g">The second operator</param>
+            <param name="gId">The identity of the second operator</param>
+        </member>
+        <member name="M:Z0.TTestUnaryFixedMatch.Match(Z0.UnaryOp128,Z0.OpIdentity,Z0.UnaryOp128,Z0.OpIdentity)">
+            <summary>
+            Verifies that two 128-bit binary operators agree over a random set of points
+            </summary>
+            <param name="f">The first operator</param>
+            <param name="fId">The identity of the first operator</param>
+            <param name="g">The second operator</param>
+            <param name="gId">The identity of the second operator</param>
+        </member>
+        <member name="M:Z0.TTestUnaryFixedMatch.Match(Z0.UnaryOp256,Z0.OpIdentity,Z0.UnaryOp256,Z0.OpIdentity)">
+            <summary>
+            Verifies that two 128-bit binary operators agree over a random set of points
+            </summary>
+            <param name="f">The first operator</param>
+            <param name="fId">The identity of the first operator</param>
+            <param name="g">The second operator</param>
+            <param name="gId">The identity of the second operator</param>
+        </member>
+        <member name="M:Z0.TCheckAction.CheckAction(System.Action,System.String)">
+            <summary>
+            Manages the execution of an action that performs a validation exercise
+            </summary>
+            <param name="f">The action under test</param>
+            <param name="name">The action name</param>
+        </member>
+        <member name="M:Z0.TestCaseIdentity.owner(System.Type)">
+            <summary>
+            Produces the formatted identifier of the declaring assembly
+            </summary>
+            <param name="host">The source type</param>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Z0.TestCaseIdentity.id``1(System.String)" -->
+        <member name="M:Z0.TestCaseIdentity.name(System.Type,Z0.OpIdentity)">
+            <summary>
+            Produces a test case name predicated on an operation identity
+            </summary>
+            <param name="id">Identifies the operation under test</param>
+        </member>
+        <member name="M:Z0.TestCaseIdentity.name``1(System.Type,System.String)">
+            <summary>
+            Produces a test case name predicated on a parametrically-specialized label
+            </summary>
+            <param name="label">The case label</param>
+            <typeparam name="T">The label specialization type</typeparam>
+        </member>
+        <member name="M:Z0.TestCaseIdentity.match(System.Type,Z0.OpIdentity,Z0.OpIdentity)">
+            <summary>
+            Produces a case name for an identified operation match test
+            </summary>
+            <param name="f">The left operation</param>
+            <param name="g">The right operation</param>
+        </member>
+        <member name="M:Z0.TestFixedBinaryOp.Match(Z0.BinaryOp8,Z0.OpIdentity,Z0.BinaryOp8,Z0.OpIdentity)">
+            <summary>
+            Verifies that two 8-bit binary operators agree over a random set of points
+            </summary>
+            <param name="f">The first operator</param>
+            <param name="fId">The identity of the first operator</param>
+            <param name="g">The second operator</param>
+            <param name="gId">The identity of the second operator</param>
+        </member>
+        <member name="M:Z0.TestFixedBinaryOp.Match(Z0.BinaryOp16,Z0.OpIdentity,Z0.BinaryOp16,Z0.OpIdentity)">
+            <summary>
+            Verifies that two 16-bit binary operators agree over a random set of points
+            </summary>
+            <param name="f">The first operator</param>
+            <param name="fId">The identity of the first operator</param>
+            <param name="g">The second operator</param>
+            <param name="gId">The identity of the second operator</param>
+        </member>
+        <member name="M:Z0.TestFixedBinaryOp.Match(Z0.BinaryOp32,Z0.OpIdentity,Z0.BinaryOp32,Z0.OpIdentity)">
+            <summary>
+            Verifies that two 32-bit binary operators agree over a random set of points
+            </summary>
+            <param name="f">The first operator</param>
+            <param name="fId">The identity of the first operator</param>
+            <param name="g">The second operator</param>
+            <param name="gId">The identity of the second operator</param>
+        </member>
+        <member name="M:Z0.TestFixedBinaryOp.Match(Z0.BinaryOp64,Z0.OpIdentity,Z0.BinaryOp64,Z0.OpIdentity)">
+            <summary>
+            Verifies that two 64-bit binary operators agree over a random set of points
+            </summary>
+            <param name="f">The first operator</param>
+            <param name="fId">The identity of the first operator</param>
+            <param name="g">The second operator</param>
+            <param name="gId">The identity of the second operator</param>
+        </member>
+        <member name="M:Z0.TestFixedBinaryOp.Match(Z0.BinaryOp128,Z0.OpIdentity,Z0.BinaryOp128,Z0.OpIdentity)">
+            <summary>
+            Verifies that two 128-bit binary operators agree over a random set of points
+            </summary>
+            <param name="f">The first operator</param>
+            <param name="fId">The identity of the first operator</param>
+            <param name="g">The second operator</param>
+            <param name="gId">The identity of the second operator</param>
+        </member>
+        <member name="M:Z0.TestFixedBinaryOp.Match(Z0.BinaryOp256,Z0.OpIdentity,Z0.BinaryOp256,Z0.OpIdentity)">
+            <summary>
+            Verifies that two 128-bit binary operators agree over a random set of points
+            </summary>
+            <param name="f">The first operator</param>
+            <param name="fId">The identity of the first operator</param>
+            <param name="g">The second operator</param>
+            <param name="gId">The identity of the second operator</param>
+        </member>
+    </members>
+</doc>

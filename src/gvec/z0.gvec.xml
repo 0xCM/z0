@@ -1,0 +1,2135 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>z0.gvec</name>
+    </assembly>
+    <members>
+        <member name="T:Z0.gvec">
+            <summary>
+            Generic vectorized intrinsics
+            </summary>
+        </member>
+        <member name="M:Z0.gvec.vadd``1(System.Runtime.Intrinsics.Vector128{``0},System.Runtime.Intrinsics.Vector128{``0})">
+            <summary>
+            Computes the component-wise sum of two vectors
+            </summary>
+            <param name="x">The left vector</param>
+            <param name="y">The right vector</param>
+            <typeparam name="T">The cell type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vadd``1(System.Runtime.Intrinsics.Vector256{``0},System.Runtime.Intrinsics.Vector256{``0})">
+            <summary>
+            Computes the component-wise sum of two vectors
+            </summary>
+            <param name="x">The left vector</param>
+            <param name="y">The right vector</param>
+            <typeparam name="T">The cell type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vadd``1(Z0.Vector512{``0}@,Z0.Vector512{``0}@)">
+            <summary>
+            Computes the component-wise sum of two vectors
+            </summary>
+            <param name="x">The left vector</param>
+            <param name="y">The right vector</param>
+            <typeparam name="T">The cell type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vadd``1(System.Runtime.Intrinsics.Vector128{``0},``0)">
+            <summary>
+            Adds a constant value to each source vector component
+            </summary>
+            <param name="x">The source vector</param>
+            <param name="a">The value to add to each component</param>
+            <typeparam name="T">The cell type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vadd``1(System.Runtime.Intrinsics.Vector256{``0},``0)">
+            <summary>
+            Adds a constant value to each vector component
+            </summary>
+            <param name="x">The source vector</param>
+            <param name="a">The value to add to each component</param>
+            <typeparam name="T">The cell type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vadd``1(Z0.Vector512{``0},``0)">
+            <summary>
+            Adds a constant value to each source vector component
+            </summary>
+            <param name="x">The source vector</param>
+            <param name="a">The value to add to each component</param>
+            <typeparam name="T">The cell type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.csa``1(``0,``0,``0,``0@,``0@)">
+            <summary>
+            Implements a carry-save adder that deposits the bitwise sum of three input scalars into two output scalars
+            </summary>
+            <param name="a">The first input vector</param>
+            <param name="b">The second input vector</param>
+            <param name="c">The third input vector</param>
+            <param name="lo">The lo part of the result</param>
+            <param name="hi">THe hi part of the result</param>
+            <typeparam name="T">The primal type</typeparam>
+            <remarks>See:
+            https://arxiv.org/pdf/1611.07612.pdf 
+            https://github.com/WojciechMula/sse-popcount
+            </remarks>
+        </member>
+        <member name="M:Z0.gvec.vcsa``1(System.Runtime.Intrinsics.Vector256{``0},System.Runtime.Intrinsics.Vector256{``0},System.Runtime.Intrinsics.Vector256{``0})">
+            <summary>
+            Implements a carry-save adder that deposits the bitwise sum of three input vectors into two output vectors
+            </summary>
+            <param name="a">The first input vector</param>
+            <param name="b">The second input vector</param>
+            <param name="c">The third input vector</param>
+            <param name="lo">The lo part of the result</param>
+            <param name="hi">THe hi part of the result</param>
+            <typeparam name="T">The primal type</typeparam>
+            <remarks>See:
+            https://arxiv.org/pdf/1611.07612.pdf 
+            https://github.com/WojciechMula/sse-popcount
+            </remarks>
+        </member>
+        <member name="M:Z0.gvec.vdec``1(System.Runtime.Intrinsics.Vector128{``0})">
+            <summary>
+            Decrements each component by unit value
+            </summary>
+            <param name="src">The source vector</param>
+            <typeparam name="T">The component type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vdec``1(System.Runtime.Intrinsics.Vector256{``0})">
+            <summary>
+            Decrements each component by unit value
+            </summary>
+            <param name="src">The source vector</param>
+            <typeparam name="T">The component type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vdec``1(Z0.N128,``0)">
+            <summary>
+            Creates a 128-bit vector with components that decrease by unit step from an initial value
+            </summary>
+            <param name="first">The value of the first component</param>
+            <param name="step">The distance between adjacent components</param>
+            <typeparam name="T">The primal component type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vdec``1(Z0.N256,``0)">
+            <summary>
+            Creates a 256-bit vector with components that decrease by unit step from an initial value
+            </summary>
+            <param name="first">The value of the first component</param>
+            <param name="step">The distance between adjacent components</param>
+            <typeparam name="T">The primal component type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vinc``1(System.Runtime.Intrinsics.Vector128{``0})">
+            <summary>
+            Increments each component by unit value
+            </summary>
+            <param name="src">The source vector</param>
+            <typeparam name="T">The component type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vinc``1(System.Runtime.Intrinsics.Vector256{``0})">
+            <summary>
+            Increments each component by unit value
+            </summary>
+            <param name="src">The source vector</param>
+            <typeparam name="T">The component type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vinc``1(Z0.N128,``0)">
+            <summary>
+            Creates a 128-bit vector with components that increase by unit step from an initial value
+            </summary>
+            <param name="x0">The value of the first component</param>
+            <param name="step">The distance between adjacent components</param>
+            <typeparam name="T">The primal component type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vinc``1(Z0.N256,``0)">
+            <summary>
+            Creates a 256-bit vector with components that increase by unit step from an initial value
+            </summary>
+            <param name="x0">The value of the first component</param>
+            <param name="step">The distance between adjacent components</param>
+            <typeparam name="T">The primal component type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vinc``1(Z0.W512,``0)">
+            <summary>
+            Creates a 256-bit vector with components that increase by unit step from an initial value
+            </summary>
+            <param name="x0">The value of the first component</param>
+            <param name="step">The distance between adjacent components</param>
+            <typeparam name="T">The primal component type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vones``1(Z0.W128,``0)">
+            <summary>
+            Creates a 128-bit vector with all bits enabled
+            </summary>
+            <param name="w">The vector width</param>
+            <typeparam name="T">The primal component type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vones``1(Z0.W256,``0)">
+            <summary>
+            Creates a 256-bit vector with all bits enabled
+            </summary>
+            <param name="n">The vector width</param>
+            <typeparam name="T">The primal component type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vones``1(Z0.W512,``0)">
+            <summary>
+            Creates a 512-bit vector with all bits enabled
+            </summary>
+            <param name="n">The vector width selector</param>
+            <typeparam name="T">The primal component type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vsub``1(System.Runtime.Intrinsics.Vector128{``0},System.Runtime.Intrinsics.Vector128{``0})">
+            <summary>
+            Computes the component-wise difference between two vectors
+            </summary>
+            <param name="x">The left vector</param>
+            <param name="y">The right vector</param>
+            <typeparam name="T">The cell type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vsub``1(System.Runtime.Intrinsics.Vector256{``0},System.Runtime.Intrinsics.Vector256{``0})">
+            <summary>
+            Computes the component-wise difference between two vectors
+            </summary>
+            <param name="x">The left vector</param>
+            <param name="y">The right vector</param>
+            <typeparam name="T">The cell type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vsub``1(System.Runtime.Intrinsics.Vector128{``0},``0)">
+            <summary>
+            Subtracts a constant value from each vector component
+            </summary>
+            <param name="x">The source vector</param>
+            <param name="a">The value to add to each component</param>
+            <typeparam name="T">The cell type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vsub``1(``0,System.Runtime.Intrinsics.Vector128{``0})">
+            <summary>
+            Subtracts each vector component from a constant value
+            </summary>
+            <param name="a">The constant</param>
+            <param name="x">The source vector</param>
+            <typeparam name="T">The cell type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vsub``1(System.Runtime.Intrinsics.Vector256{``0},``0)">
+            <summary>
+            Subtracts a constant value from each vector component
+            </summary>
+            <param name="x">The source vector</param>
+            <param name="a">The value to add to each component</param>
+            <typeparam name="T">The cell type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vsub``1(``0,System.Runtime.Intrinsics.Vector256{``0})">
+            <summary>
+            Subtracts each vector component from a constant value
+            </summary>
+            <param name="a">The constant</param>
+            <param name="x">The source vector</param>
+            <typeparam name="T">The cell type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.valignr``1(System.Runtime.Intrinsics.Vector128{``0},System.Runtime.Intrinsics.Vector128{``0},System.Byte)">
+             <summary>
+            
+             </summary>
+             <param name="x">The left vector</param>
+             <param name="y">The right vector</param>
+             <param name="offset">The rightward shift amount, in bytes</param>
+        </member>
+        <member name="M:Z0.gvec.valignr``1(System.Runtime.Intrinsics.Vector256{``0},System.Runtime.Intrinsics.Vector256{``0},System.Byte)">
+             <summary>
+            
+             </summary>
+             <param name="x">The left vector</param>
+             <param name="y">The right vector</param>
+             <param name="offset">The rightward shift amount, in bytes</param>
+        </member>
+        <member name="M:Z0.gvec.vbfly``1(Z0.N1,System.Runtime.Intrinsics.Vector128{``0})">
+            <summary>
+            Effects a butterfly permutation on the source that swaps the interior two bits of each 4-bit segment.
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+        </member>
+        <member name="M:Z0.gvec.vbfly``1(Z0.N2,System.Runtime.Intrinsics.Vector128{``0})">
+            <summary>
+            Effects a butterfly permutation on the source that swaps the interior 2-bit segments of each 8-bit segment.
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+        </member>
+        <member name="M:Z0.gvec.vbfly``1(Z0.N4,System.Runtime.Intrinsics.Vector128{``0})">
+            <summary>
+            Effects a butterfly permutation on the bit source that swaps the interior 4-bit segments of each 16-bit segment.
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+            <remarks> [0 1 2 3 | 4 5 6 7 | 8 9 A B | C D E F] -> [0 2 1 3 | 4 6 5 7 | 8 A 9 B | C E D F]</remarks>
+        </member>
+        <member name="M:Z0.gvec.vbfly``1(Z0.N8,System.Runtime.Intrinsics.Vector128{``0})">
+            <summary>
+            Effects a butterfly permutation on the bit source that swaps the interior 8-bit segments of each 32-bit segment.
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+            <remarks> [0 1 2 3 | 4 5 6 7] -> [0 2 1 3 | 4 6 5 7]</remarks>
+        </member>
+        <member name="M:Z0.gvec.vbfly``1(Z0.N16,System.Runtime.Intrinsics.Vector128{``0})">
+            <summary>
+            Effects a butterfly permutation on the source that swaps the interior 16-bit segments
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+        </member>
+        <member name="M:Z0.gvec.vbfly``1(Z0.N1,System.Runtime.Intrinsics.Vector256{``0})">
+            <summary>
+            Effects a butterfly permutation on the source that swaps the interior two bits of each 4-bit segment.
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+        </member>
+        <member name="M:Z0.gvec.vbfly``1(Z0.N2,System.Runtime.Intrinsics.Vector256{``0})">
+            <summary>
+            Effects a butterfly permutation on the source that swaps the interior 2-bit segments of each 8-bit segment.
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+        </member>
+        <member name="M:Z0.gvec.vbfly``1(Z0.N4,System.Runtime.Intrinsics.Vector256{``0})">
+            <summary>
+            Effects a butterfly permutation on the bit source that swaps the interior 4-bit segments of each 16-bit segment.
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+            <remarks> [0 1 2 3 | 4 5 6 7 | 8 9 A B | C D E F] -> [0 2 1 3 | 4 6 5 7 | 8 A 9 B | C E D F]</remarks>
+        </member>
+        <member name="M:Z0.gvec.vbfly``1(Z0.N8,System.Runtime.Intrinsics.Vector256{``0})">
+            <summary>
+            Effects a butterfly permutation on the bit source that swaps the interior 8-bit segments of each 32-bit segment.
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+            <remarks> [0 1 2 3 | 4 5 6 7] -> [0 2 1 3 | 4 6 5 7]</remarks>
+        </member>
+        <member name="M:Z0.gvec.vbfly``1(Z0.N16,System.Runtime.Intrinsics.Vector256{``0})">
+            <summary>
+            Effects a butterfly permutation on the source that swaps the interior 16-bit segments
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+        </member>
+        <member name="M:Z0.gvec.vbfly(Z0.N1,System.Runtime.Intrinsics.Vector128{System.Byte})">
+            <summary>
+            Effects a butterfly permutation on the source that swaps the interior two bits of each 4-bit segment.
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+        </member>
+        <member name="M:Z0.gvec.vbfly(Z0.N1,System.Runtime.Intrinsics.Vector128{System.UInt16})">
+            <summary>
+            Effects a butterfly permutation on the source that swaps the interior two bits of each 4-bit segment.
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+        </member>
+        <member name="M:Z0.gvec.vbfly(Z0.N1,System.Runtime.Intrinsics.Vector128{System.UInt32})">
+            <summary>
+            Effects a butterfly permutation on the source that swaps the interior two bits of each 4-bit segment.
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+        </member>
+        <member name="M:Z0.gvec.vbfly(Z0.N1,System.Runtime.Intrinsics.Vector128{System.UInt64})">
+            <summary>
+            Effects a butterfly permutation on the source that swaps the interior two bits of each 4-bit segment.
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+        </member>
+        <member name="M:Z0.gvec.vbfly(Z0.N2,System.Runtime.Intrinsics.Vector128{System.Byte})">
+            <summary>
+            Effects a butterfly permutation on the source that swaps the interior 2-bit segments
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+        </member>
+        <member name="M:Z0.gvec.vbfly(Z0.N2,System.Runtime.Intrinsics.Vector128{System.UInt16})">
+            <summary>
+            Effects a butterfly permutation on the bit source that swaps the interior 2-bit segments of each 8-bit segment.
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+        </member>
+        <member name="M:Z0.gvec.vbfly(Z0.N2,System.Runtime.Intrinsics.Vector128{System.UInt32})">
+            <summary>
+            Effects a butterfly permutation on the bit source that swaps the interior 2-bit segments of each 8-bit segment.
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+        </member>
+        <member name="M:Z0.gvec.vbfly(Z0.N2,System.Runtime.Intrinsics.Vector128{System.UInt64})">
+            <summary>
+            Effects a butterfly permutation on the bit source that swaps the interior 2-bit segments of each 8-bit segment.
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+        </member>
+        <member name="M:Z0.gvec.vbfly(Z0.N4,System.Runtime.Intrinsics.Vector128{System.UInt16})">
+            <summary>
+            Effects a butterfly permutation on the bit source that swaps the interior 4-bit segments
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+            <remarks> [0 1 2 3 ] -> [0 2 1 3] </remarks>
+        </member>
+        <member name="M:Z0.gvec.vbfly(Z0.N4,System.Runtime.Intrinsics.Vector128{System.UInt32})">
+            <summary>
+            Effects a butterfly permutation on the bit source that swaps the interior 4-bit segments of each 16-bit segment.
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+            <remarks>
+            [0 | 1 2 | 3 || 4 | 5 6 | 7] ->
+            [0 | 2 1 | 3 || 4 | 6 5 | 7]
+            </remarks>
+        </member>
+        <member name="M:Z0.gvec.vbfly(Z0.N4,System.Runtime.Intrinsics.Vector128{System.UInt64})">
+            <summary>
+            Effects a butterfly permutation on the bit source that swaps the interior 4-bit segments of each 16-bit segment.
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+            <remarks>
+            [0 | 1 2 | 3 || 4 | 5 6 | 7 || 8 | 9 A | B || C | D E | F] ->
+            [0 | 2 1 | 3 || 4 | 6 5 | 7 || 8 | A 9 | B || C | E D | F]
+            </remarks>
+        </member>
+        <member name="M:Z0.gvec.vbfly(Z0.N8,System.Runtime.Intrinsics.Vector128{System.UInt32})">
+            <summary>
+            Effects a butterfly permutation on the bit source that swaps the interior 8-bit segments
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+            <remarks>[0 1 2 3] -> [0 2 1 3]</remarks>
+        </member>
+        <member name="M:Z0.gvec.vbfly(Z0.N8,System.Runtime.Intrinsics.Vector128{System.UInt64})">
+            <summary>
+            Effects a butterfly permutation on the bit source that swaps the interior 8-bit segments of each 32-bit segment.
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+            <remarks> [0 1 2 3 | 4 5 6 7] -> [0 2 1 3 | 4 6 5 7]</remarks>
+        </member>
+        <member name="M:Z0.gvec.vbfly(Z0.N16,System.Runtime.Intrinsics.Vector128{System.UInt64})">
+            <summary>
+            Effects a butterfly permutation on the source that swaps the interior 16-bit segments
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+            <remarks>[0 1 2 3] -> [0 2 1 3]</remarks>
+        </member>
+        <member name="M:Z0.gvec.vbfly(Z0.N1,System.Runtime.Intrinsics.Vector256{System.Byte})">
+            <summary>
+            Effects a butterfly permutation on the source that swaps the interior two bits of each 4-bit segment.
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+        </member>
+        <member name="M:Z0.gvec.vbfly(Z0.N1,System.Runtime.Intrinsics.Vector256{System.UInt16})">
+            <summary>
+            Effects a butterfly permutation on the source that swaps the interior two bits of each 4-bit segment.
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+        </member>
+        <member name="M:Z0.gvec.vbfly(Z0.N1,System.Runtime.Intrinsics.Vector256{System.UInt32})">
+            <summary>
+            Effects a butterfly permutation on the source that swaps the interior two bits of each 4-bit segment.
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+        </member>
+        <member name="M:Z0.gvec.vbfly(Z0.N1,System.Runtime.Intrinsics.Vector256{System.UInt64})">
+            <summary>
+            Effects a butterfly permutation on the source that swaps the interior two bits of each 4-bit segment.
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+        </member>
+        <member name="M:Z0.gvec.vbfly(Z0.N2,System.Runtime.Intrinsics.Vector256{System.Byte})">
+            <summary>
+            Effects a butterfly permutation on the source that swaps the interior 2-bit segments
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+        </member>
+        <member name="M:Z0.gvec.vbfly(Z0.N2,System.Runtime.Intrinsics.Vector256{System.UInt16})">
+            <summary>
+            Effects a butterfly permutation on the bit source that swaps the interior 2-bit segments of each 8-bit segment.
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+        </member>
+        <member name="M:Z0.gvec.vbfly(Z0.N2,System.Runtime.Intrinsics.Vector256{System.UInt32})">
+            <summary>
+            Effects a butterfly permutation on the bit source that swaps the interior 2-bit segments of each 8-bit segment.
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+        </member>
+        <member name="M:Z0.gvec.vbfly(Z0.N2,System.Runtime.Intrinsics.Vector256{System.UInt64})">
+            <summary>
+            Effects a butterfly permutation on the bit source that swaps the interior 2-bit segments of each 8-bit segment.
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+        </member>
+        <member name="M:Z0.gvec.vbfly(Z0.N4,System.Runtime.Intrinsics.Vector256{System.UInt16})">
+            <summary>
+            Effects a butterfly permutation on the bit source that swaps the interior 4-bit segments
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+            <remarks> [0 1 2 3 ] -> [0 2 1 3] </remarks>
+        </member>
+        <member name="M:Z0.gvec.vbfly(Z0.N4,System.Runtime.Intrinsics.Vector256{System.UInt32})">
+            <summary>
+            Effects a butterfly permutation on the bit source that swaps the interior 4-bit segments of each 16-bit segment.
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+            <remarks>
+            [0 | 1 2 | 3 || 4 | 5 6 | 7] ->
+            [0 | 2 1 | 3 || 4 | 6 5 | 7]
+            </remarks>
+        </member>
+        <member name="M:Z0.gvec.vbfly(Z0.N4,System.Runtime.Intrinsics.Vector256{System.UInt64})">
+            <summary>
+            Effects a butterfly permutation on the bit source that swaps the interior 4-bit segments of each 16-bit segment.
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+            <remarks>
+            [0 | 1 2 | 3 || 4 | 5 6 | 7 || 8 | 9 A | B || C | D E | F] ->
+            [0 | 2 1 | 3 || 4 | 6 5 | 7 || 8 | A 9 | B || C | E D | F]
+            </remarks>
+        </member>
+        <member name="M:Z0.gvec.vbfly(Z0.N8,System.Runtime.Intrinsics.Vector256{System.UInt32})">
+            <summary>
+            Effects a butterfly permutation on the bit source that swaps the interior 8-bit segments
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+            <remarks>[0 1 2 3] -> [0 2 1 3]</remarks>
+        </member>
+        <member name="M:Z0.gvec.vbfly(Z0.N8,System.Runtime.Intrinsics.Vector256{System.UInt64})">
+            <summary>
+            Effects a butterfly permutation on the bit source that swaps the interior 8-bit segments of each 32-bit segment.
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+            <remarks> [0 1 2 3 | 4 5 6 7] -> [0 2 1 3 | 4 6 5 7]</remarks>
+        </member>
+        <member name="M:Z0.gvec.vbfly(Z0.N16,System.Runtime.Intrinsics.Vector256{System.UInt64})">
+            <summary>
+            Effects a butterfly permutation on the source that swaps the interior 16-bit segments
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+            <remarks>[0 1 2 3] -> [0 2 1 3]</remarks>
+        </member>
+        <member name="M:Z0.gvec.VBF``1(System.Runtime.Intrinsics.Vector128{``0},System.Runtime.Intrinsics.Vector128{``0},System.Byte)">
+            <summary>
+            Effects a butterfly permutation on the source value, predicated on a supplied mask and shift amount
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+            <remarks>The algorithm follows that of Arndt's Matters Computational, bitbutterfly.h.</remarks>
+        </member>
+        <member name="M:Z0.gvec.VBF``1(System.Runtime.Intrinsics.Vector256{``0},System.Runtime.Intrinsics.Vector256{``0},System.Byte)">
+            <summary>
+            Effects a butterfly permutation on the source value, predicated on a supplied mask and shift amount
+            </summary>
+            <param name="n">The interior segment width selector</param>
+            <param name="x">The bit source</param>
+            <remarks>The algorithm follows that of Arndt's Matters Computational, bitbutterfly.h.</remarks>
+        </member>
+        <member name="M:Z0.gvec.vbroadcast``2(Z0.N128,``0,``1)">
+            <summary>
+            Expands a bit-level S-pattern to a vector-level T-pattern
+            </summary>
+            <param name="w">The vector width selector</param>
+            <param name="src">The source pattern</param>
+            <param name="enabled">The value to assign to a block when the corresponding index-identified bit is enabled</param>
+            <typeparam name="S">The source type</typeparam>
+            <typeparam name="T">The target cell type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vbroadcast``2(Z0.N256,``0,``1)">
+            <summary>
+            Expands a bit-level S-pattern to a vector-level T-pattern
+            </summary>
+            <param name="w">The vector width selector</param>
+            <param name="src">The source pattern</param>
+            <param name="enabled">The value to assign to a block when the corresponding index-identified bit is enabled</param>
+            <typeparam name="S">The source type</typeparam>
+            <typeparam name="T">The target cell type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.broadcast``2(``0,``1,Z0.SpanBlock128{``1}@)">
+            <summary>
+            Expands a bit-level S-pattern to a block-level T-pattern
+            </summary>
+            <param name="src">The source pattern</param>
+            <param name="enabled">The value to assign to a block when the corresponding index-identified bit is enabled</param>
+            <param name="dst">The target pattern receiver</param>
+            <typeparam name="S">The source type</typeparam>
+            <typeparam name="T">The target cell type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.broadcast``2(``0,``1,Z0.SpanBlock256{``1}@)">
+            <summary>
+            Expands a bit-level S-pattern to a block-level T-pattern
+            </summary>
+            <param name="src">The source pattern</param>
+            <param name="enabled">The value to assign to a block when the corresponding index-identified bit is enabled</param>
+            <param name="dst">The target pattern receiver</param>
+            <typeparam name="S">The source type</typeparam>
+            <typeparam name="T">The target cell type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.broadcast``2(``0,``1)">
+            <summary>
+            Broadcasts an S-cell over a T-cell
+            </summary>
+            <param name="src">The source cell value</param>
+            <param name="dst">The target cell</param>
+            <typeparam name="S">The source cell type</typeparam>
+            <typeparam name="T">The target cell type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vbyteswap``1(System.Runtime.Intrinsics.Vector128{``0})">
+            <summary>
+            Effects the reversal of the byte-level representation of each component in the source vector
+            </summary>
+            <param name="x">The source vector</param>
+        </member>
+        <member name="M:Z0.gvec.vbyteswap``1(System.Runtime.Intrinsics.Vector256{``0})">
+            <summary>
+            Effects the reversal of the byte-level representation of each component in the source vector
+            </summary>
+            <param name="x">The source vector</param>
+        </member>
+        <member name="M:Z0.gvec.vhi``1(System.Runtime.Intrinsics.Vector128{``0})">
+            <summary>
+            Moves the hi 64 bits of the source vector the the lo 64 bits of a target vector
+            </summary>
+            <param name="src">The source vector</param>
+            <typeparam name="T">The vector component type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vhi``1(System.Runtime.Intrinsics.Vector256{``0},System.UInt64@,System.UInt64@)">
+            <summary>
+            Extracts the hi 128-bit lane of the source vector to scalar targets
+            </summary>
+            <param name="src">The source vector</param>
+        </member>
+        <member name="M:Z0.gvec.vhi``1(System.Runtime.Intrinsics.Vector256{``0},Z0.Pair{System.UInt64}@)">
+            <summary>
+            Extracts the hi 128-bit lane of the source vector to a pair
+            </summary>
+            <param name="src">The source vector</param>
+        </member>
+        <member name="M:Z0.gvec.vhi``1(Z0.Vector512{``0})">
+            <summary>
+            Extracts the upper 256-bits from the source vector
+            </summary>
+            <param name="src">The source vector</param>
+        </member>
+        <member name="M:Z0.gvec.vhi``1(Z0.Vector1024{``0})">
+            <summary>
+            Extracts the lower 256-bits from the source vector
+            </summary>
+            <param name="src">The source vector</param>
+        </member>
+        <member name="M:Z0.gvec.vhi``1(System.Runtime.Intrinsics.Vector256{``0})">
+            <summary>
+            Extracts hi 128-bit lane of the source vector
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="pos">The index of the lane to extract</param>
+        </member>
+        <member name="M:Z0.gvec.vinsert``1(System.Runtime.Intrinsics.Vector128{``0},System.Runtime.Intrinsics.Vector256{``0},System.Byte)">
+            <summary>
+            Overwrites a 128-bit lane in the target with the content of the source vector
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The target vector</param>
+            <param name="index">Identifies the lane in the target to overwrite, either 0 or 1 respectively designating low or hi</param>
+        </member>
+        <member name="M:Z0.gvec.vinsert``1(System.Runtime.Intrinsics.Vector128{``0},System.Runtime.Intrinsics.Vector256{``0},Z0.BitState)">
+            <summary>
+            Overwrites a 128-bit lane in the target with the content of the source vector
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="dst">The target vector</param>
+            <param name="index">Identifies the lane in the target to overwrite, either 0 or 1 respectively designating low or hi</param>
+        </member>
+        <member name="M:Z0.gvec.vlo``1(System.Runtime.Intrinsics.Vector128{``0})">
+            <summary>
+            Creates a scalar vector from the lower 64 bits of the source vector
+            </summary>
+            <param name="src">The source vector</param>
+        </member>
+        <member name="M:Z0.gvec.vlo``1(System.Runtime.Intrinsics.Vector256{``0},System.UInt64@,System.UInt64@)">
+            <summary>
+            Extracts the lo 128-bit lane of the source vector to scalar targets
+            </summary>
+            <param name="src">The source vector</param>
+        </member>
+        <member name="M:Z0.gvec.vlo``1(System.Runtime.Intrinsics.Vector256{``0},Z0.Pair{System.UInt64}@)">
+            <summary>
+            Extracts the lo 128-bit lane of the source vector to a pair
+            </summary>
+            <param name="src">The source vector</param>
+        </member>
+        <member name="M:Z0.gvec.vlo``1(Z0.Vector512{``0})">
+            <summary>
+            Extracts the lower 256-bits from the source vector
+            </summary>
+            <param name="src">The source vector</param>
+        </member>
+        <member name="M:Z0.gvec.vlo``1(Z0.Vector1024{``0})">
+            <summary>
+            Extracts the lower 256-bits from the source vector
+            </summary>
+            <param name="src">The source vector</param>
+        </member>
+        <member name="M:Z0.gvec.vlo``1(System.Runtime.Intrinsics.Vector256{``0})">
+            <summary>
+            Extracts the lo 128-bit lane of the source vector
+            </summary>
+            <param name="src">The source vector</param>
+        </member>
+        <member name="M:Z0.gvec.vmakemask``1(System.UInt16)">
+            <summary>
+            Distributes each bit of the source to the hi bit of each byte in a 128-bit target vector
+            </summary>
+            <param name="src">The source bits</param>
+        </member>
+        <member name="M:Z0.gvec.vmakemask``1(System.UInt16,System.Byte)">
+            <summary>
+            Distributes each bit of the source to a specified bit of each byte in a 128-bit target vector
+            </summary>
+            <param name="src">The source bits</param>
+            <param name="index">The byte-relative bit position index in the range [0,7]</param>
+        </member>
+        <member name="M:Z0.gvec.vmakemask``1(System.UInt32)">
+            <summary>
+            Distributes each bit of the source to the hi bit of each byte a 256-bit target vector
+            </summary>
+            <param name="src">The source bits</param>
+        </member>
+        <member name="M:Z0.gvec.vmakemask``1(System.UInt32,System.Byte)">
+            <summary>
+            Distributes each bit of the source to a specified bit of each byte in a 256-bit target vector
+            </summary>
+            <param name="src">The source bits</param>
+            <param name="index">The byte-relative bit position index in the range [0,7]</param>
+        </member>
+        <member name="M:Z0.gvec.vmerge``1(System.Runtime.Intrinsics.Vector128{``0},System.Runtime.Intrinsics.Vector128{``0})">
+            <summary>
+            [A,B,C,D] x [E,F,G,H] -> [A,E,B,F,C,G,D,H]
+            </summary>
+            <param name="x">The left vector</param>
+            <param name="y">The right vector</param>
+        </member>
+        <member name="M:Z0.gvec.vmerge``1(System.Runtime.Intrinsics.Vector256{``0},System.Runtime.Intrinsics.Vector256{``0})">
+            <summary>
+            [A,B,C,D] x [E,F,G,H] -> [A,E,B,F,C,G,D,H]
+            </summary>
+            <param name="x">The left vector</param>
+            <param name="y">The right vector</param>
+        </member>
+        <member name="M:Z0.gvec.vmergehi``1(System.Runtime.Intrinsics.Vector128{``0},System.Runtime.Intrinsics.Vector128{``0})">
+             <summary>
+            
+             </summary>
+             <param name="x">The left source vector</param>
+             <param name="y">The right source vector</param>
+             <typeparam name="T">The primal component type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vmergehi``1(System.Runtime.Intrinsics.Vector256{``0},System.Runtime.Intrinsics.Vector256{``0})">
+             <summary>
+            
+             </summary>
+             <param name="x">The left source vector</param>
+             <param name="y">The right source vector</param>
+             <typeparam name="T">The primal component type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vmergelo``1(System.Runtime.Intrinsics.Vector128{``0},System.Runtime.Intrinsics.Vector128{``0})">
+            <summary>
+            ([A,B,C,D], [E,F,G,H]) -> [A,E,B,F]
+            </summary>
+            <param name="x">The left source vector</param>
+            <param name="y">The right source vector</param>
+            <typeparam name="T">The primal component type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vmergelo``1(System.Runtime.Intrinsics.Vector256{``0},System.Runtime.Intrinsics.Vector256{``0})">
+            <summary>
+            ([A,B,C,D], [E,F,G,H]) -> [A,E,B,F]
+            </summary>
+            <param name="x">The left source vector</param>
+            <param name="y">The right source vector</param>
+            <typeparam name="T">The primal component type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vmovelo``1(System.Runtime.Intrinsics.Vector128{``0})">
+            <summary>
+            src[0..n-1] -> rm[n]:[0..n-1] where m = bitsize[T]
+            Extracts/moves the first vector cell to a non-vector register of commensurate size
+            </summary>
+            <param name="src">The source vector</param>
+            <typeparam name="T">The component type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vperm16x8``1(System.Runtime.Intrinsics.Vector128{``0},System.Runtime.Intrinsics.Vector128{System.Byte})">
+            <summary>
+            Permutes 16 8-bit source vector segments
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="spec">The perm spec</param>
+            <typeparam name="T">The vector component type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vperm16x8``1(System.Runtime.Intrinsics.Vector256{``0},System.Runtime.Intrinsics.Vector256{System.Byte})">
+            <summary>
+            Applies independent 128-bit lane permutations over 16 8-bit source vector segments
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="spec">The perm spec</param>
+            <typeparam name="T">The vector component type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vperm2x128``1(System.Runtime.Intrinsics.Vector256{``0},System.Runtime.Intrinsics.Vector256{``0},Z0.Perm2x4)">
+            <summary>
+            Permutes 4 128-bit source lanes from 2 256-bit vectors as described by the perm spec
+            </summary>
+            <param name="x">The first source vector</param>
+            <param name="y">The second source vector</param>
+            <param name="spec">The perm spec</param>
+            <typeparam name="T">The primal component type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vperm8x32``1(System.Runtime.Intrinsics.Vector256{``0},System.Runtime.Intrinsics.Vector256{System.UInt32})">
+            <summary>
+            Applies a cross-lane permutation over 8 32-bit source vector segments
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="spec">The perm spec</param>
+            <typeparam name="T">The vector component type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vputcell``1(``0,System.Int32,System.Runtime.Intrinsics.Vector128{``0})">
+            <summary>
+            Inserts a cell into the target at an index-identified location of a target vector
+            </summary>
+            <param name="src">The source cell</param>
+            <param name="index">The 0-based component index</param>
+            <param name="dst">The target vector</param>
+            <typeparam name="T">The cell type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vputcell``1(``0,System.Int32,System.Runtime.Intrinsics.Vector256{``0})">
+            <summary>
+            Inserts a cell into the target at an index-identified location of a target vector
+            </summary>
+            <param name="src">The source cell</param>
+            <param name="index">The 0-based component index</param>
+            <param name="dst">The target vector</param>
+            <typeparam name="T">The cell type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vreverse``1(System.Runtime.Intrinsics.Vector128{``0})">
+            <summary>
+            Reverses the source vector components
+            </summary>
+            <param name="src">The source vector</param>
+            <typeparam name="T">The vector component type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vreverse``1(System.Runtime.Intrinsics.Vector256{``0})">
+            <summary>
+            Reverses the source vector components
+            </summary>
+            <param name="src">The source vector</param>
+            <typeparam name="T">The vector component type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vshuf4x32``1(System.Runtime.Intrinsics.Vector128{``0},System.Byte)">
+            <summary>
+            Shuffles unsigned 32-bit source segments to/from arbitrary locations according to the shuffle spec
+            </summary>
+            <param name="src">The content vector</param>
+            <param name="spec">The shuffle spec</param>
+            <typeparam name="T">The vector component type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vshuf4x32``1(System.Runtime.Intrinsics.Vector256{``0},System.Byte)">
+            <summary>
+            Shuffles unsigned 32-bit source segments within 128-bit lanes according to the shuffle spec
+            </summary>
+            <param name="src">The content vector</param>
+            <param name="spec">The shuffle spec</param>
+            <typeparam name="T">The vector component type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vshuf16x8``1(System.Runtime.Intrinsics.Vector128{``0},System.Runtime.Intrinsics.Vector128{System.Byte})">
+            <summary>
+            Shuffles unsigned 8-bit source segments according to the shuffle spec
+            </summary>
+            <param name="src">The content vector</param>
+            <param name="spec">The shuffle spec</param>
+            <typeparam name="T">The vector component type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vshuf16x8``1(System.Runtime.Intrinsics.Vector256{``0},System.Runtime.Intrinsics.Vector256{System.Byte})">
+            <summary>
+            Shuffles unsigned 8-bit source segments within 128-bit lanes according to the shuffle spec
+            </summary>
+            <param name="src">The content vector</param>
+            <param name="spec">The shuffle spec</param>
+        </member>
+        <member name="M:Z0.gvec.vshuf32x8``1(System.Runtime.Intrinsics.Vector256{``0},System.Runtime.Intrinsics.Vector256{System.Byte})">
+            <summary>
+            Shuffles unsigned 8-bit source segments to/from arbitrary locations according to the shuffle spec
+            </summary>
+            <param name="src">The content vector</param>
+            <param name="spec">The shuffle spec</param>
+        </member>
+        <member name="M:Z0.gvec.vswaphl``1(System.Runtime.Intrinsics.Vector128{``0})">
+            <summary>
+            Swaps hi/lo 64 bit segments of the source vector
+            </summary>
+            <param name="x">The source vector</param>
+            <typeparam name="T">The primal component type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vswaphl``1(System.Runtime.Intrinsics.Vector256{``0})">
+            <summary>
+            Swaps hi/lo 128-bit lanes of the source vector
+            </summary>
+            <param name="x">The source vector</param>
+            <typeparam name="T">The primal component type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vtakemask``1(System.Runtime.Intrinsics.Vector128{``0})">
+            <summary>
+            _mm_movemask_epi8 (__m128i a) PMOVMSKB reg, xmm
+            Creates a 16-bit mask from the most significant bit of each byte in the source vector
+            </summary>
+            <param name="src">The source vector</param>
+        </member>
+        <member name="M:Z0.gvec.vtakemask``1(System.Runtime.Intrinsics.Vector256{``0})">
+            <summary>
+            int _mm256_movemask_epi8 (__m256i a) VPMOVMSKB reg, ymm
+            Creates a 32-bit mask from the most significant bit of each byte in the source vector
+            </summary>
+            <param name="src">The source vector</param>
+        </member>
+        <member name="M:Z0.gvec.vtakemask``1(System.Runtime.Intrinsics.Vector128{``0},System.Byte)">
+            <summary>
+            Creates a 16-bit mask from each byte in the source vector at a byte-relative bit index
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="index">An integer between 0 and 7</param>
+        </member>
+        <member name="M:Z0.gvec.vtakemask``1(System.Runtime.Intrinsics.Vector256{``0},System.Byte)">
+            <summary>
+            Creates a 32-bit mask from each byte in the source vector at a byte-relative bit index
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="index">An integer between 0 and 7</param>
+        </member>
+        <member name="M:Z0.gvec.vtakemask``1(System.Runtime.Intrinsics.Vector128{``0},Z0.HexDigit)">
+            <summary>
+            Creates a 16-bit mask from each byte in the source vector at a byte-relative bit index
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="index">An integer between 0 and 7</param>
+        </member>
+        <member name="M:Z0.gvec.vblendbits``1(System.Runtime.Intrinsics.Vector128{``0},System.Runtime.Intrinsics.Vector128{``0},System.Runtime.Intrinsics.Vector128{``0})">
+            <summary>
+            Blends the left and right vectors at the bit-level as specified by the mask operand.
+            </summary>
+            <param name="x">The left vector</param>
+            <param name="y">The right vector</param>
+            <param name="mask">The selection mask</param>
+            <typeparam name="T">The cell type</typeparam>
+            <remarks>Equivalent to select</remarks>
+        </member>
+        <member name="M:Z0.gvec.vblendbits``1(System.Runtime.Intrinsics.Vector256{``0},System.Runtime.Intrinsics.Vector256{``0},System.Runtime.Intrinsics.Vector256{``0})">
+            <summary>
+            Blends the left and right vectors at the bit-level as specified by the mask operand.
+            </summary>
+            <param name="x">The left vector</param>
+            <param name="y">The right vector</param>
+            <param name="mask">The selection mask</param>
+            <typeparam name="T">The cell type</typeparam>
+            <remarks>Equivalent to select</remarks>
+        </member>
+        <member name="M:Z0.gvec.vbitclear``1(System.Runtime.Intrinsics.Vector128{``0},System.Byte,System.Byte)">
+            <summary>
+            Clears a sequence of bits from each component
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="start">The cell-relative start index</param>
+            <param name="count">The number of bits to disable</param>
+            <typeparam name="T">The cell type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vbitclear``1(System.Runtime.Intrinsics.Vector256{``0},System.Byte,System.Byte)">
+            <summary>
+            Clears a sequence of bits from each component
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="start">The cell-relative start index</param>
+            <param name="count">The number of bits to disable</param>
+            <typeparam name="T">The cell type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vzerohi``1(System.Runtime.Intrinsics.Vector128{``0})">
+            <summary>
+            __m128i _mm_move_epi64 (__m128i a) MOVQ xmm, xmm
+            Clears the high 64 bits of the source vector
+            </summary>
+            <param name="src">The source vector</param>
+            <typeparam name="T">The component type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vzerohi``1(System.Runtime.Intrinsics.Vector256{``0})">
+            <summary>
+            Clears the high 128 bits of the source vector
+            </summary>
+            <param name="src">The source vector</param>
+            <typeparam name="T">The component type</typeparam>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Z0.gvec.vand``1(System.Runtime.Intrinsics.Vector128{``0},System.Runtime.Intrinsics.Vector128{``0})" -->
+        <!-- Badly formed XML comment ignored for member "M:Z0.gvec.vand``1(System.Runtime.Intrinsics.Vector256{``0},System.Runtime.Intrinsics.Vector256{``0})" -->
+        <!-- Badly formed XML comment ignored for member "M:Z0.gvec.vand``1(Z0.Vector512{``0}@,Z0.Vector512{``0}@)" -->
+        <member name="M:Z0.gvec.vcimpl``1(System.Runtime.Intrinsics.Vector128{``0},System.Runtime.Intrinsics.Vector128{``0})">
+            <summary>
+            Computes the converse implication, ~x | y for vectors x and y
+            </summary>
+            <param name="x">The left operand</param>
+            <param name="y">The right operand</param>
+            <typeparam name="T">The primal component type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vcimpl``1(System.Runtime.Intrinsics.Vector256{``0},System.Runtime.Intrinsics.Vector256{``0})">
+            <summary>
+            Computes the converse implication, ~x | y for vectors x and y
+            </summary>
+            <param name="x">The left operand</param>
+            <param name="y">The right operand</param>
+            <typeparam name="T">The primal component type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vcimpl``1(Z0.Vector512{``0}@,Z0.Vector512{``0}@)">
+            <summary>
+            Computes the converse implication, ~x | y for vectors x and y
+            </summary>
+            <param name="x">The left vector</param>
+            <param name="y">The right vector</param>
+            <typeparam name="T">The component type</typeparam>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Z0.gvec.vcnonimpl``1(System.Runtime.Intrinsics.Vector128{``0},System.Runtime.Intrinsics.Vector128{``0})" -->
+        <!-- Badly formed XML comment ignored for member "M:Z0.gvec.vcnonimpl``1(System.Runtime.Intrinsics.Vector256{``0},System.Runtime.Intrinsics.Vector256{``0})" -->
+        <!-- Badly formed XML comment ignored for member "M:Z0.gvec.vcnonimpl``1(Z0.Vector512{``0}@,Z0.Vector512{``0}@)" -->
+        <member name="M:Z0.gvec.vimpl``1(System.Runtime.Intrinsics.Vector128{``0},System.Runtime.Intrinsics.Vector128{``0})">
+            <summary>
+            Computes the material implication, x | ~y for vectors x and y
+            </summary>
+            <param name="x">The left vector</param>
+            <param name="y">The right vector</param>
+            <typeparam name="T">The primal component type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vimpl``1(System.Runtime.Intrinsics.Vector256{``0},System.Runtime.Intrinsics.Vector256{``0})">
+            <summary>
+            Computes the material implication, x | ~y for vectors x and y
+            </summary>
+            <param name="x">The left vector</param>
+            <param name="y">The right vector</param>
+            <typeparam name="T">The primal component type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vimpl``1(Z0.Vector512{``0}@,Z0.Vector512{``0}@)">
+            <summary>
+            Computes the material implication, x | ~y for vectors x and y
+            </summary>
+            <param name="x">The left vector</param>
+            <param name="y">The right vector</param>
+            <typeparam name="T">The component type</typeparam>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Z0.gvec.vnand``1(System.Runtime.Intrinsics.Vector128{``0},System.Runtime.Intrinsics.Vector128{``0})" -->
+        <!-- Badly formed XML comment ignored for member "M:Z0.gvec.vnand``1(System.Runtime.Intrinsics.Vector256{``0},System.Runtime.Intrinsics.Vector256{``0})" -->
+        <!-- Badly formed XML comment ignored for member "M:Z0.gvec.vnand``1(Z0.Vector512{``0}@,Z0.Vector512{``0}@)" -->
+        <!-- Badly formed XML comment ignored for member "M:Z0.gvec.vnonimpl``1(System.Runtime.Intrinsics.Vector128{``0},System.Runtime.Intrinsics.Vector128{``0})" -->
+        <!-- Badly formed XML comment ignored for member "M:Z0.gvec.vnonimpl``1(System.Runtime.Intrinsics.Vector256{``0},System.Runtime.Intrinsics.Vector256{``0})" -->
+        <!-- Badly formed XML comment ignored for member "M:Z0.gvec.vnonimpl``1(Z0.Vector512{``0}@,Z0.Vector512{``0}@)" -->
+        <member name="M:Z0.gvec.vnor``1(System.Runtime.Intrinsics.Vector128{``0},System.Runtime.Intrinsics.Vector128{``0})">
+            <summary>
+            Computes ~(x | y) for vectors x and y
+            </summary>
+            <param name="x">The left vector</param>
+            <param name="y">The right vector</param>
+        </member>
+        <member name="M:Z0.gvec.vnor``1(System.Runtime.Intrinsics.Vector256{``0},System.Runtime.Intrinsics.Vector256{``0})">
+            <summary>
+            Computes ~(x | y) for vectors x and y
+            </summary>
+            <param name="x">The left vector</param>
+            <param name="y">The right vector</param>
+        </member>
+        <member name="M:Z0.gvec.vnor``1(Z0.Vector512{``0}@,Z0.Vector512{``0}@)">
+            <summary>
+            Computes ~(x | y) for vectors x and y
+            </summary>
+            <param name="x">The left vector</param>
+            <param name="y">The right vector</param>
+            <typeparam name="T">The component type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vnot``1(System.Runtime.Intrinsics.Vector128{``0})">
+            <summary>
+            Computes the bitwise complement ~x for a vector x
+            </summary>
+            <param name="x">The left vector</param>
+            <param name="y">The right vector</param>
+            <typeparam name="T">The component type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vnot``1(System.Runtime.Intrinsics.Vector256{``0})">
+            <summary>
+            Computes the bitwise complement ~x for a vector x
+            </summary>
+            <param name="x">The left vector</param>
+            <param name="y">The right vector</param>
+            <typeparam name="T">The component type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vnot``1(Z0.Vector512{``0}@)">
+            <summary>
+            Computes the bitwise complement ~x for a vector x
+            </summary>
+            <param name="x">The left vector</param>
+            <param name="y">The right vector</param>
+            <typeparam name="T">The component type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vor``1(System.Runtime.Intrinsics.Vector128{``0},System.Runtime.Intrinsics.Vector128{``0})">
+            <summary>
+            Computes the bitwise or x | y for vectors x and y
+            </summary>
+            <param name="x">The left vector</param>
+            <param name="y">The right vector</param>
+            <typeparam name="T">The primal component type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vor``1(System.Runtime.Intrinsics.Vector256{``0},System.Runtime.Intrinsics.Vector256{``0})">
+            <summary>
+            Computes the bitwise or x | y for vectors x and y
+            </summary>
+            <param name="x">The left vector</param>
+            <param name="y">The right vector</param>
+            <typeparam name="T">The component type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vor``1(Z0.Vector512{``0}@,Z0.Vector512{``0}@)">
+            <summary>
+            Computes the bitwise or x | y for vectors x and y
+            </summary>
+            <param name="x">The left vector</param>
+            <param name="y">The right vector</param>
+            <typeparam name="T">The component type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vpop``1(System.Runtime.Intrinsics.Vector128{``0},System.Runtime.Intrinsics.Vector128{``0},System.Runtime.Intrinsics.Vector128{``0})">
+            <summary>
+            Computes the population count of the content of 3 128-bit vectors
+            </summary>
+            <param name="x">The first vector</param>
+            <param name="y">The second vector</param>
+            <param name="z">The third vector</param>
+        </member>
+        <member name="M:Z0.gvec.vpop``1(System.Runtime.Intrinsics.Vector256{``0},System.Runtime.Intrinsics.Vector256{``0},System.Runtime.Intrinsics.Vector256{``0})">
+            <summary>
+            Computes the population count of the content of 3 128-bit vectors
+            </summary>
+            <param name="x">The first vector</param>
+            <param name="y">The second vector</param>
+            <param name="z">The third vector</param>
+        </member>
+        <member name="M:Z0.gvec.vselect``1(System.Runtime.Intrinsics.Vector128{``0},System.Runtime.Intrinsics.Vector128{``0},System.Runtime.Intrinsics.Vector128{``0})">
+            <summary>
+            Defines the ternary bitwise select operator over three vectors,
+            select(x, y, z) := or(and(x, y), and(not(x), z)) = or(and(x,y), notimply(x,z));
+            </summary>
+            <param name="x">The first vector</param>
+            <param name="y">The second vector</param>
+            <param name="z">The third vector</param>
+            <typeparam name="T">The primal component type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vselect``1(System.Runtime.Intrinsics.Vector256{``0},System.Runtime.Intrinsics.Vector256{``0},System.Runtime.Intrinsics.Vector256{``0})">
+            <summary>
+            Defines the ternary bitwise select operator over three vectors,
+            select(x, y, z) := or(and(x, y), and(not(x), z)) = or(and(x,y), notimply(x,z));
+            </summary>
+            <param name="x">The first vector</param>
+            <param name="y">The second vector</param>
+            <param name="z">The third vector</param>
+            <typeparam name="T">The primal component type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vselect``1(Z0.Vector512{``0}@,Z0.Vector512{``0}@,Z0.Vector512{``0}@)">
+            <summary>
+            Defines the ternary bitwise select operator over three vectors,
+            select(x, y, z) := or(and(x, y), and(not(x), z)) = or(and(x,y), notimply(x,z));
+            </summary>
+            <param name="x">The first vector</param>
+            <param name="y">The second vector</param>
+            <param name="z">The third vector</param>
+            <typeparam name="T">The primal component type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vxnor``1(System.Runtime.Intrinsics.Vector128{``0},System.Runtime.Intrinsics.Vector128{``0})">
+            <summary>
+            Computes ~ (x ^ y) for vectors x and y
+            </summary>
+            <param name="x">The left operand</param>
+            <param name="y">The right operand</param>
+        </member>
+        <member name="M:Z0.gvec.vxnor``1(System.Runtime.Intrinsics.Vector256{``0},System.Runtime.Intrinsics.Vector256{``0})">
+            <summary>
+            Computes ~ (x ^ y) for vectors x and y
+            </summary>
+            <param name="x">The left operand</param>
+            <param name="y">The right operand</param>
+        </member>
+        <member name="M:Z0.gvec.vxnor``1(Z0.Vector512{``0}@,Z0.Vector512{``0}@)">
+            <summary>
+            Computes ~ (x ^ y) for vectors x and y
+            </summary>
+            <param name="x">The left vector</param>
+            <param name="y">The right vector</param>
+            <typeparam name="T">The component type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vxor``1(System.Runtime.Intrinsics.Vector128{``0},System.Runtime.Intrinsics.Vector128{``0})">
+            <summary>
+            Computes x ^ y for vectors x and y
+            </summary>
+            <param name="x">The left operand</param>
+            <param name="y">The right operand</param>
+        </member>
+        <member name="M:Z0.gvec.vxor``1(System.Runtime.Intrinsics.Vector256{``0},System.Runtime.Intrinsics.Vector256{``0})">
+            <summary>
+            Computes x ^ y for vectors x and y
+            </summary>
+            <param name="x">The left operand</param>
+            <param name="y">The right operand</param>
+        </member>
+        <member name="M:Z0.gvec.vxor``1(Z0.Vector512{``0}@,Z0.Vector512{``0}@)">
+            <summary>
+            Computes the bitwise xor
+            </summary>
+            <param name="x">The left vector</param>
+            <param name="y">The right vector</param>
+            <typeparam name="T">The component type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vxornot``1(System.Runtime.Intrinsics.Vector128{``0},System.Runtime.Intrinsics.Vector128{``0})">
+            <summary>
+            Computes x ^ ~y for vectors x and y
+            </summary>
+            <param name="x">The left operand</param>
+            <param name="y">The right operand</param>
+        </member>
+        <member name="M:Z0.gvec.vxornot``1(System.Runtime.Intrinsics.Vector256{``0},System.Runtime.Intrinsics.Vector256{``0})">
+            <summary>
+            Computes x ^ ~y for vectors x and y
+            </summary>
+            <param name="x">The left operand</param>
+            <param name="y">The right operand</param>
+        </member>
+        <member name="M:Z0.gvec.vbsll``1(System.Runtime.Intrinsics.Vector128{``0},System.Byte)">
+            <summary>
+            Applies a leftward shift over the full 128 vector bits at byte-level resolution
+            </summary>
+            <param name="x">The source vector</param>
+            <param name="count">The number of bytes to shift</param>
+            <typeparam name="T">THe primal component type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vbsll``1(System.Runtime.Intrinsics.Vector256{``0},System.Byte)">
+            <summary>
+            Applies a leftward shift to each 128-bit lane at byte-level resolution
+            </summary>
+            <param name="x">The source vector</param>
+            <param name="count">The number of bytes to shift</param>
+            <typeparam name="T">THe primal component type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vbsrl``1(System.Runtime.Intrinsics.Vector128{``0},System.Byte)">
+            <summary>
+            Applies a rigtward shift over the full 128 vector bits at byte-level resolution
+            </summary>
+            <param name="x">The source vector</param>
+            <param name="count">The number of bytes to shift</param>
+            <typeparam name="T">THe primal component type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vbsrl``1(System.Runtime.Intrinsics.Vector256{``0},System.Byte)">
+            <summary>
+            Applies a rightward shift to each 128-bit lane at byte-level resolution
+            </summary>
+            <param name="x">The source vector</param>
+            <param name="count">The number of bytes to shift</param>
+            <typeparam name="T">THe primal component type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vrotl``1(System.Runtime.Intrinsics.Vector128{``0},System.Byte)">
+            <summary>
+            Rotates each component the source vector leftwards by a constant amount
+            </summary>
+            <param name="x">The source vector</param>
+            <param name="count">The magnitude of the rotation</param>
+        </member>
+        <member name="M:Z0.gvec.vrotl``1(System.Runtime.Intrinsics.Vector256{``0},System.Byte)">
+            <summary>
+            Rotates each component the source vector leftwards by a constant count
+            </summary>
+            <param name="x">The source vector</param>
+            <param name="count">The magnitude of the rotation</param>
+        </member>
+        <member name="M:Z0.gvec.vrotlx``1(System.Runtime.Intrinsics.Vector128{``0},System.Byte)">
+            <summary>
+            Rotates the full 128 bits of a vector leftward at bit-level resolution
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="count">The number of bits to shift</param>
+        </member>
+        <member name="M:Z0.gvec.vrotlx``1(System.Runtime.Intrinsics.Vector256{``0},System.Byte)">
+            <summary>
+            Rotates each 128 bit lane vector leftward at bit-level resolution
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="count">The number of bits to shift</param>
+        </member>
+        <member name="M:Z0.gvec.vrotr``1(System.Runtime.Intrinsics.Vector128{``0},System.Byte)">
+            <summary>
+            Rotates each component in the source vector rightwards by a constant offset
+            </summary>
+            <param name="x">The source vector</param>
+            <param name="count">The magnitude of the rotation</param>
+        </member>
+        <member name="M:Z0.gvec.vrotr``1(System.Runtime.Intrinsics.Vector256{``0},System.Byte)">
+            <summary>
+            Rotates each component in the source vector rightwards by a constant offset
+            </summary>
+            <param name="x">The source vector</param>
+            <param name="count">The magnitude of the rotation</param>
+        </member>
+        <member name="M:Z0.gvec.vrotrx``1(System.Runtime.Intrinsics.Vector128{``0},System.Byte)">
+            <summary>
+            Rotates the full 128 bits of a vector rightward at bit-level resolution
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="count">The number of bits to shift</param>
+        </member>
+        <member name="M:Z0.gvec.vrotrx``1(System.Runtime.Intrinsics.Vector256{``0},System.Byte)">
+            <summary>
+            Rotates the each 128-bit lane rightward at bit-level resolution
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="count">The number of bits to shift</param>
+        </member>
+        <member name="M:Z0.gvec.vsll``1(System.Runtime.Intrinsics.Vector128{``0},System.Byte)">
+            <summary>
+            Shifts each source vector component leftwards by a specified number of bits
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="count">The shift offset</param>
+            <typeparam name="T">The vector component type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vsll``1(System.Runtime.Intrinsics.Vector256{``0},System.Byte)">
+            <summary>
+            Shifts each source vector component leftwards by a specified number of bits
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="count">The shift offset</param>
+            <typeparam name="T">The vector component type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vsllr``1(System.Runtime.Intrinsics.Vector128{``0},System.Runtime.Intrinsics.Vector128{``0})">
+            <summary>
+            A register-based shift (as opposed to immediate-based) that shifts each source vector component rightwards
+            by an amount specified in the first component of the offset vector
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="offset">The offset vector</param>
+            <typeparam name="T">The vector component type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vsllr``1(System.Runtime.Intrinsics.Vector256{``0},System.Runtime.Intrinsics.Vector256{``0})">
+            <summary>
+            A register-based shift (as opposed to immediate-based) that shifts each source vector component rightwards
+            by an amount specified in the first component of the offset vector
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="offset">The offset vector</param>
+            <typeparam name="T">The vector component type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vsllr``1(System.Runtime.Intrinsics.Vector128{``0},``0)">
+            <summary>
+            Shifts each source vector component rightwards by a specified offset via the register-based shift-right instruction
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="offset">The offset amount</param>
+            <typeparam name="T">The vector component type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vsllr``1(System.Runtime.Intrinsics.Vector256{``0},``0)">
+            <summary>
+            Shifts each source vector component rightwards by a specified offset via the register-based shift-right instruction
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="offset">The offset amount</param>
+            <typeparam name="T">The vector component type</typeparam>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Z0.gvec.vsllv``1(System.Runtime.Intrinsics.Vector128{``0},System.Runtime.Intrinsics.Vector128{``0})" -->
+        <!-- Badly formed XML comment ignored for member "M:Z0.gvec.vsllv``1(System.Runtime.Intrinsics.Vector256{``0},System.Runtime.Intrinsics.Vector256{``0})" -->
+        <member name="M:Z0.gvec.vsllx``1(System.Runtime.Intrinsics.Vector128{``0},System.Byte)">
+            <summary>
+            Shifts the full 128 bits of a vector leftward at bit-level resolution
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="count">The number of bits to shift</param>
+        </member>
+        <member name="M:Z0.gvec.vsllx``1(System.Runtime.Intrinsics.Vector256{``0},System.Byte)">
+            <summary>
+            Shifts each 128 bit lane leftward at bit-level resolution
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="count">The number of bits to shift</param>
+        </member>
+        <member name="M:Z0.gvec.vsrlr``1(System.Runtime.Intrinsics.Vector128{``0},System.Runtime.Intrinsics.Vector128{``0})">
+            <summary>
+            A register-based shift (as opposed to immediate-based) that shifts each source vector component rightwards
+            by an amount specified in the first component of the offset vector
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="count">The offset vector</param>
+            <typeparam name="T">The vector component type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vsrlr``1(System.Runtime.Intrinsics.Vector256{``0},System.Runtime.Intrinsics.Vector256{``0})">
+            <summary>
+            A register-based shift (as opposed to immediate-based) that shifts each source vector component rightwards
+            by an amount specified in the first component of the offset vector
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="count">The offset vector</param>
+            <typeparam name="T">The vector component type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vsrlr``1(System.Runtime.Intrinsics.Vector128{``0},``0)">
+            <summary>
+            Shifts each source vector component rightwards by a specified offset via the register-based shift-right instruction
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="count">The offset amount</param>
+            <typeparam name="T">The vector component type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vsrlr``1(System.Runtime.Intrinsics.Vector256{``0},``0)">
+            <summary>
+            Shifts each source vector component rightwards by a specified offset via the register-based shift-right instruction
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="count">The offset amount</param>
+            <typeparam name="T">The vector component type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vsrlv``1(System.Runtime.Intrinsics.Vector128{``0},System.Runtime.Intrinsics.Vector128{``0})">
+            <summary>
+            Computes z[i] := x[i] >> s[i] for i = 0..n-1 for vectors of length n
+            </summary>
+            <param name="x">The source vector</param>
+            <param name="counts">The offset vector</param>
+        </member>
+        <member name="M:Z0.gvec.vsrlv``1(System.Runtime.Intrinsics.Vector256{``0},System.Runtime.Intrinsics.Vector256{``0})">
+            <summary>
+            Computes z[i] := x[i] >> s[i] for i = 0..n-1 vectors of length n
+            </summary>
+            <param name="x">The source vector</param>
+            <param name="counts">The offset vector</param>
+        </member>
+        <member name="M:Z0.gvec.vsrlx``1(System.Runtime.Intrinsics.Vector128{``0},System.Byte)">
+            <summary>
+            Shifts the full 128 bits of a vector rightward at bit-level resolution
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="count">The number of bits to shift</param>
+        </member>
+        <member name="M:Z0.gvec.vsrlx``1(System.Runtime.Intrinsics.Vector256{``0},System.Byte)">
+            <summary>
+            Shifts each 128 bit lane rightward at bit-level resolution
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="count">The number of bits to shift</param>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Z0.gvec.vxors``1(System.Runtime.Intrinsics.Vector128{``0},System.Byte)" -->
+        <!-- Badly formed XML comment ignored for member "M:Z0.gvec.vxors``1(System.Runtime.Intrinsics.Vector256{``0},System.Byte)" -->
+        <!-- Badly formed XML comment ignored for member "M:Z0.gvec.vxorsl``1(System.Runtime.Intrinsics.Vector128{``0},System.Byte)" -->
+        <!-- Badly formed XML comment ignored for member "M:Z0.gvec.vxorsl``1(System.Runtime.Intrinsics.Vector256{``0},System.Byte)" -->
+        <member name="M:Z0.gvec.vxorsr``1(System.Runtime.Intrinsics.Vector128{``0},System.Byte)">
+            <summary>
+            Computes x^(x >> offset)
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="count">The amount by which to shift each component</param>
+        </member>
+        <member name="M:Z0.gvec.vxorsr``1(System.Runtime.Intrinsics.Vector256{``0},System.Byte)">
+            <summary>
+            Computes x^(x >> offset)
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="count">The amount by which to shift each component</param>
+        </member>
+        <member name="M:Z0.gvec.vblend8x32``1(System.Runtime.Intrinsics.Vector256{``0},System.Runtime.Intrinsics.Vector256{``0},System.Byte)">
+            <summary>
+            Forms a vector z[i] := testbit(spec,i) ? x[i] : y[i], i = 0,...7
+            </summary>
+            <param name="x">The left vector</param>
+            <param name="y">The right vector</param>
+            <param name="spec">The blend specification</param>
+        </member>
+        <member name="M:Z0.gvec.vblend8x32``1(System.Runtime.Intrinsics.Vector256{``0},System.Runtime.Intrinsics.Vector256{``0},Z0.Blend8x32)">
+            <summary>
+            Forms a vector z[i] := testbit(spec,i) ? x[i] : y[i], i = 0,...7
+            </summary>
+            <param name="x">The left vector</param>
+            <param name="y">The right vector</param>
+            <param name="spec">The blend specification</param>
+        </member>
+        <member name="M:Z0.gvec.vblend``1(System.Runtime.Intrinsics.Vector128{``0},System.Runtime.Intrinsics.Vector128{``0},System.Runtime.Intrinsics.Vector128{System.Byte})">
+            <summary>
+            Forms a vector z[i] = testbit(spec[i],7) ? x[i] : y[i] where i = 0,...15
+            </summary>
+            <param name="x">The left vector</param>
+            <param name="y">The right vector</param>
+            <param name="spec">The blend specification</param>
+        </member>
+        <member name="M:Z0.gvec.vblend``1(System.Runtime.Intrinsics.Vector256{``0},System.Runtime.Intrinsics.Vector256{``0},System.Runtime.Intrinsics.Vector256{System.Byte})">
+            <summary>
+            Forms a vector z[i] = testbit(spec[i],7) ? x[i] : y[i] where i = 0,...31
+            </summary>
+            <param name="x">The left vector</param>
+            <param name="y">The right vector</param>
+            <param name="spec">The blend specification</param>
+        </member>
+        <member name="M:Z0.gvec.vblend``1(System.Runtime.Intrinsics.Vector128{``0},System.Runtime.Intrinsics.Vector128{``0},System.UInt16)">
+            <summary>
+            Forms a vector z[i] = testbit(spec,i) ? x[i] : y[i] where i = 0,...15
+            </summary>
+            <param name="x">The left vector</param>
+            <param name="y">The right vector</param>
+            <param name="spec">The blend specification</param>
+        </member>
+        <member name="M:Z0.gvec.vblend``1(System.Runtime.Intrinsics.Vector256{``0},System.Runtime.Intrinsics.Vector256{``0},System.UInt32)">
+            <summary>
+            Forms a vector z[i] = testbit(spec,i) ? x[i] : y[i] where i = 0,...31
+            </summary>
+            <param name="x">The left vector</param>
+            <param name="y">The right vector</param>
+            <param name="spec">The blend specification</param>
+        </member>
+        <member name="M:Z0.gvec.vblendp``1(System.Runtime.Intrinsics.Vector256{``0},System.Runtime.Intrinsics.Vector256{``0},System.Runtime.Intrinsics.Vector256{``0})">
+            <summary>
+            Efects a "paired" or "permutation" blend that computes vectors
+            lo := vblendv(x,y,spec)
+            hi := vblendv(x,y,vnot(spec))
+            that, taken together, define a permutation on the source vector components
+            </summary>
+            <param name="x">The first vector</param>
+            <param name="y">The second vector</param>
+            <param name="spec">The blend spec</param>
+            <typeparam name="T">The vector component type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vblendp``1(Z0.Vector512{``0},System.Runtime.Intrinsics.Vector256{``0})">
+            <summary>
+            Efects a "paired" or "permutation" blend that computes vectors
+            lo := vblendv(x,y,spec)
+            hi := vblendv(x,y,vnot(spec))
+            that, taken together, define a permutation on the source vector components
+            </summary>
+            <param name="x">The first vector</param>
+            <param name="y">The second vector</param>
+            <param name="spec">The blend spec</param>
+            <typeparam name="T">The vector component type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vblendp``1(System.Runtime.Intrinsics.Vector128{``0},System.Runtime.Intrinsics.Vector128{``0},System.Runtime.Intrinsics.Vector128{``0})">
+            <summary>
+            Efects a "paired" or "permutation" blend that computes vectors
+            lo := vblendv(x,y,spec)
+            hi := vblendv(x,y,vnot(spec))
+            that, taken together, define a permutation on the source vector components
+            </summary>
+            <param name="x">The first vector</param>
+            <param name="y">The second vector</param>
+            <param name="spec">The blend spec</param>
+            <typeparam name="T">The vector component type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vblendp``1(System.Runtime.Intrinsics.Vector256{``0},System.Runtime.Intrinsics.Vector128{``0})">
+            <summary>
+            Efects a "paired" or "permutation" blend that computes vectors
+            lo := vblendv(x,y,spec)
+            hi := vblendv(x,y,vnot(spec))
+            that, taken together, define a permutation on the source vector components
+            </summary>
+            <param name="x">The first vector</param>
+            <param name="y">The second vector</param>
+            <param name="spec">The blend spec</param>
+            <typeparam name="T">The vector component type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.valt``1(Z0.W256,``0,``0)">
+            <summary>
+            Creates a vector populated with component values that alternate between the first operand and the second
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+            <typeparam name="T">The primal component type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vblendv``1(System.Runtime.Intrinsics.Vector128{``0},System.Runtime.Intrinsics.Vector128{``0},System.Runtime.Intrinsics.Vector128{``0})">
+             <summary>
+            
+             </summary>
+             <param name="x">The left vector</param>
+             <param name="y">The right vector</param>
+             <param name="spec">The blend specification</param>
+        </member>
+        <member name="M:Z0.gvec.vblendv``1(System.Runtime.Intrinsics.Vector256{``0},System.Runtime.Intrinsics.Vector256{``0},System.Runtime.Intrinsics.Vector256{``0})">
+             <summary>
+            
+             </summary>
+             <param name="x">The left vector</param>
+             <param name="y">The right vector</param>
+             <param name="spec">The blend specification</param>
+        </member>
+        <member name="M:Z0.gvec.veq``1(System.Runtime.Intrinsics.Vector128{``0},System.Runtime.Intrinsics.Vector128{``0})">
+            <summary>
+            Compares corresponding components in each vector for equality. For equal
+            components, the corresponding component the result vector has all bits
+            enabled; otherwise, all component bits are are disabled
+            </summary>
+            <param name="x">The left vector</param>
+            <param name="y">The right vector</param>
+        </member>
+        <member name="M:Z0.gvec.veq``1(System.Runtime.Intrinsics.Vector256{``0},System.Runtime.Intrinsics.Vector256{``0})">
+            <summary>
+            Compares corresponding components in each vector for equality. For equal
+            components, the corresponding component the result vector has all bits
+            enabled; otherwise, all bits the component are disabled
+            </summary>
+            <param name="x">The left vector</param>
+            <param name="y">The right vector</param>
+        </member>
+        <member name="M:Z0.gvec.veq``1(Z0.Vector512{``0}@,Z0.Vector512{``0}@)">
+            <summary>
+            Compares corresponding components in each vector for equality. For equal
+            components, the corresponding component the result vector has all bits
+            enabled; otherwise, all bits the component are disabled
+            </summary>
+            <param name="x">The left vector</param>
+            <param name="y">The right vector</param>
+        </member>
+        <member name="M:Z0.gvec.vnonz``1(System.Runtime.Intrinsics.Vector128{``0})">
+            <summary>
+            Returns true if at least one of the components of the source vector is nonzero, false otherwise
+            </summary>
+            <param name="src">The source vector</param>
+            <typeparam name="T">The primal type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vnonz``1(System.Runtime.Intrinsics.Vector256{``0})">
+            <summary>
+            Returns true if at least one of the components of the source vector is nonzero, false otherwise
+            </summary>
+            <param name="src">The source vector</param>
+            <typeparam name="T">The primal type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vnonz``1(Z0.Vector512{``0}@)">
+            <summary>
+            Returns true if at least one of the components of the source vector is nonzero, false otherwise
+            </summary>
+            <param name="src">The source vector</param>
+            <typeparam name="T">The primal type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vsame``1(System.Runtime.Intrinsics.Vector128{``0},System.Runtime.Intrinsics.Vector128{``0})">
+            <summary>
+            Returns 1 if the left vector is identical to the right vector and 0 otherwise
+            </summary>
+            <param name="x">The left vector</param>
+            <param name="y">The right vector</param>
+            <typeparam name="T">The component type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vsame``1(System.Runtime.Intrinsics.Vector256{``0},System.Runtime.Intrinsics.Vector256{``0})">
+            <summary>
+            Returns 1 if the left vector is identical to the right vector and 0 otherwise
+            </summary>
+            <param name="x">The left vector</param>
+            <param name="y">The right vector</param>
+            <typeparam name="T">The component type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vsame``1(Z0.Vector512{``0}@,Z0.Vector512{``0}@)">
+            <summary>
+            Returns 1 if the left vector is identical to the right vector and 0 otherwise
+            </summary>
+            <param name="x">The left vector</param>
+            <param name="y">The right vector</param>
+            <typeparam name="T">The component type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vtestc``1(System.Runtime.Intrinsics.Vector128{``0},System.Runtime.Intrinsics.Vector128{``0})">
+            <summary>
+            Returns 1 if all mask-identified source bits are all enabled and 0 otherwise
+            </summary>
+            <param name="src">The source bits</param>
+            <param name="mask">Specifies the bits in the source to test</param>
+            <typeparam name="T">The primal component type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vtestc``1(System.Runtime.Intrinsics.Vector256{``0},System.Runtime.Intrinsics.Vector256{``0})">
+            <summary>
+            Returns 1 if all mask-identified source bits are all enabled and 0 otherwise
+            </summary>
+            <param name="src">The source bits</param>
+            <param name="mask">Specifies the bits the source to test</param>
+            <typeparam name="T">The primal component type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vtestc``1(Z0.Vector512{``0}@,Z0.Vector512{``0}@)">
+            <summary>
+            Returns 1 if all mask-identified source bits are all enabled and 0 otherwise
+            </summary>
+            <param name="src">The source bits</param>
+            <param name="mask">Specifies the bits the source to test</param>
+            <typeparam name="T">The primal component type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vtestc``1(System.Runtime.Intrinsics.Vector128{``0})">
+            <summary>
+            Returns 1 if all source bits are enabled and 0 otherwise
+            </summary>
+            <param name="src">The source bits</param>
+            <param name="mask">Specifies the bits in the source to test</param>
+            <typeparam name="T">The primal component type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vtestc``1(System.Runtime.Intrinsics.Vector256{``0})">
+            <summary>
+            Returns 1 if all source bits are enabled and 0 otherwise
+            </summary>
+            <param name="src">The source bits</param>
+            <typeparam name="T">The primal component type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vtestc``1(Z0.Vector512{``0})">
+            <summary>
+            Returns 1 if all source bits are enabled and 0 otherwise
+            </summary>
+            <param name="src">The source bits</param>
+            <typeparam name="T">The primal component type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vtestz``1(System.Runtime.Intrinsics.Vector128{``0},System.Runtime.Intrinsics.Vector128{``0})">
+            <summary>
+            Returns 1 if all mask-identified source bits are disabled, 0 otherwise
+            </summary>
+            <param name="src">The bit source</param>
+            <param name="mask">The mask</param>
+        </member>
+        <member name="M:Z0.gvec.vtestz``1(System.Runtime.Intrinsics.Vector256{``0},System.Runtime.Intrinsics.Vector256{``0})">
+            <summary>
+            Returns 1 if all mask-identified source bits are disabled, 0 otherwise
+            </summary>
+            <param name="src">The bit source</param>
+            <param name="mask">The mask</param>
+        </member>
+        <member name="M:Z0.gvec.vtestz``1(Z0.Vector512{``0}@,Z0.Vector512{``0}@)">
+            <summary>
+            Returns 1 if all mask-identified source bits are disabled, 0 otherwise
+            </summary>
+            <param name="src">The bit source</param>
+            <param name="mask">The mask</param>
+        </member>
+        <member name="M:Z0.gvec.vmaskstore8``1(System.Runtime.Intrinsics.Vector128{``0},System.Runtime.Intrinsics.Vector128{System.Byte},Z0.SpanBlock128{System.Byte}@)">
+            <summary>
+            Conditionally stores 8-bit segments from the source vector to memory according to a vectorized mask
+            where the hi bit of each corresponding 8-bit segment determines whether the source data is written
+            If the hi bit is enabled, content is written, otherwise it is not
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="mask">The source content selector</param>
+            <param name="dst">The target memory</param>
+            <typeparam name="T">The primal component type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vmaskstore8``1(System.Runtime.Intrinsics.Vector256{``0},System.Runtime.Intrinsics.Vector256{System.Byte},Z0.SpanBlock256{System.Byte}@)">
+            <summary>
+            Conditionally stores 8-bit segments from the source vector to memory according to a vectorized mask
+            where the hi bit of each corresponding 8-bit segment determines whether the source data is written
+            If the hi bit is enabled, content is written, otherwise it is not
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="mask">The source content selector</param>
+            <param name="dst">The target memory</param>
+            <typeparam name="T">The primal component type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vmaskstore32``1(System.Runtime.Intrinsics.Vector128{``0},System.Runtime.Intrinsics.Vector128{System.UInt32},Z0.SpanBlock128{System.UInt32}@)">
+            <summary>
+            Conditionally stores 32-bit segments from the source vector to memory according to a vectorized mask
+            where the hi bit of each corresponding 32-bit segment determines whether the source data is written
+            If the hi bit is enabled, content is written, otherwise it is not
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="mask">The source content selector</param>
+            <param name="dst">The target memory</param>
+            <typeparam name="T">The primal component type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vmaskstore32``1(System.Runtime.Intrinsics.Vector256{``0},System.Runtime.Intrinsics.Vector256{System.UInt32},Z0.SpanBlock256{System.UInt32}@)">
+            <summary>
+            Conditionally stores 32-bit segments from the source vector to memory according to a vectorized mask
+            where the hi bit of each corresponding 32-bit segment determines whether the source data is written
+            If the hi bit is enabled, content is written, otherwise it is not
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="mask">The source content selector</param>
+            <param name="dst">The target memory</param>
+            <typeparam name="T">The primal component type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vmaskstore64``1(System.Runtime.Intrinsics.Vector128{``0},System.Runtime.Intrinsics.Vector128{System.UInt64},Z0.SpanBlock128{System.UInt64}@)">
+            <summary>
+            Conditionally stores 64-bit segments from the source vector to memory according to a vectorized mask
+            where the hi bit of each corresponding 64-bit segment determines whether the source data is written
+            If the hi bit is enabled, content is written, otherwise it is not
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="mask">The source content selector</param>
+            <param name="dst">The target memory</param>
+            <typeparam name="T">The primal component type</typeparam>
+        </member>
+        <member name="M:Z0.gvec.vmaskstore64``1(System.Runtime.Intrinsics.Vector256{``0},System.Runtime.Intrinsics.Vector256{System.UInt64},Z0.SpanBlock256{System.UInt64}@)">
+            <summary>
+            Conditionally stores 64-bit segments from the source vector to memory according to a vectorized mask
+            where the hi bit of each corresponding 64-bit segment determines whether the source data is written
+            If the hi bit is enabled, content is written, otherwise it is not
+            </summary>
+            <param name="src">The source vector</param>
+            <param name="mask">The source content selector</param>
+            <param name="dst">The target memory</param>
+            <typeparam name="T">The primal component type</typeparam>
+        </member>
+        <member name="M:Z0.ICheckVectors.veq``1(System.Runtime.Intrinsics.Vector128{``0},System.Runtime.Intrinsics.Vector128{``0},System.String,System.String,System.Nullable{System.Int32})">
+            <summary>
+            Asserts the equality of two vectors
+            </summary>
+            <param name="lhs">The left vector</param>
+            <param name="rhs">The right vector</param>
+            <param name="caller">The caller member name</param>
+            <param name="file">The source file of the calling function</param>
+            <param name="line">The source file line number where invocation ocurred</param>
+        </member>
+        <member name="M:Z0.ICheckVectors.veq``1(System.Runtime.Intrinsics.Vector256{``0},System.Runtime.Intrinsics.Vector256{``0},System.String,System.String,System.Nullable{System.Int32})">
+            <summary>
+            Asserts the equality of two vectors
+            </summary>
+            <param name="lhs">The left vector</param>
+            <param name="rhs">The right vector</param>
+            <param name="caller">The caller member name</param>
+            <param name="file">The source file of the calling function</param>
+            <param name="line">The source file line number where invocation ocurred</param>
+        </member>
+        <member name="P:Z0.VLogix.UnaryBitLogicKinds">
+            <summary>
+            Advertises the supported unary bitlogic operators
+            </summary>
+        </member>
+        <member name="P:Z0.VLogix.BinaryBitLogicKinds">
+            <summary>
+            Advertises the supported binary bitlogic operators
+            </summary>
+        </member>
+        <member name="P:Z0.VLogix.TernaryBitLogicKinds">
+            <summary>
+            Advertises the supported ternary bitlogic operators
+            </summary>
+        </member>
+        <member name="P:Z0.VLogix.ComparisonKinds">
+            <summary>
+            Specifies the supported comparison operators
+            </summary>
+        </member>
+        <member name="M:Z0.VLogix.lookup``1(Z0.N128,Z0.UnaryBitLogicKind)">
+            <summary>
+            Returns a kind-identified delegate if possible; otherwise, raises an exception
+            </summary>
+            <param name="kind">The operator kind</param>
+            <typeparam name="T">The primal vector component type</typeparam>
+        </member>
+        <member name="M:Z0.VLogix.lookup``1(Z0.N256,Z0.UnaryBitLogicKind)">
+            <summary>
+            Returns a kind-identified delegate if possible; otherwise, raises an exception
+            </summary>
+            <param name="kind">The operator kind</param>
+            <typeparam name="T">The primal vector component type</typeparam>
+        </member>
+        <member name="M:Z0.VLogix.lookup``1(Z0.N128,Z0.BitShiftApiClass)">
+            <summary>
+            Returns a kind-identified delegate if possible; otherwise, raises an exception
+            </summary>
+            <param name="kind">The operator kind</param>
+            <typeparam name="T">The primal vector component type</typeparam>
+        </member>
+        <member name="M:Z0.VLogix.lookup``1(Z0.N256,Z0.BitShiftApiClass)">
+            <summary>
+            Returns a kind-identified delegate if possible; otherwise, raises an exception
+            </summary>
+            <param name="kind">The operator kind</param>
+            <typeparam name="T">The primal vector component type</typeparam>
+        </member>
+        <member name="M:Z0.VLogix.eval``1(Z0.UnaryBitLogicKind,System.Runtime.Intrinsics.Vector128{``0})">
+            <summary>
+            Evaluates an identified unary operator over a supplied operand
+            </summary>
+            <param name="kind">The operator kind</param>
+            <param name="a">The operand</param>
+            <typeparam name="T">The primal vector component type</typeparam>
+        </member>
+        <member name="M:Z0.VLogix.eval``1(Z0.BinaryComparisonApiClass,System.Runtime.Intrinsics.Vector128{``0},System.Runtime.Intrinsics.Vector128{``0})">
+            <summary>
+            Evaluates a comparison operator over supplied operands
+            </summary>
+            <param name="kind">The operator kind</param>
+            <param name="a">The left operand</param>
+            <param name="b">The right operand</param>
+            <typeparam name="T">The primal vector component type</typeparam>
+        </member>
+        <member name="M:Z0.VLogix.eval``1(Z0.BitShiftApiClass,System.Runtime.Intrinsics.Vector128{``0},System.Byte)">
+            <summary>
+            Evaluates an identified shift operator over supplied operands
+            </summary>
+            <param name="kind">The operator kind</param>
+            <param name="a">The subject</param>
+            <param name="count">The shift bit count</param>
+            <typeparam name="T">The primal vector component type</typeparam>
+        </member>
+        <member name="M:Z0.VLogix.eval``1(Z0.BinaryBitLogicKind,System.Runtime.Intrinsics.Vector128{``0},System.Runtime.Intrinsics.Vector128{``0})">
+            <summary>
+            Evaluates an identified binary bitwise operator over supplied operands
+            </summary>
+            <param name="kind">The operator kind</param>
+            <param name="a">The left operand</param>
+            <param name="b">The right operand</param>
+            <typeparam name="T">The primal vector component type</typeparam>
+        </member>
+        <member name="M:Z0.VLogix.lookup``1(Z0.N128,Z0.BinaryBitLogicKind)">
+            <summary>
+            Returns a kind-identified delegate if possible; otherwise, raises an exception
+            </summary>
+            <param name="kind">The operator kind</param>
+            <typeparam name="T">The primal vector component type</typeparam>
+        </member>
+        <member name="M:Z0.VLogix.eval``1(Z0.TernaryBitLogicKind,System.Runtime.Intrinsics.Vector128{``0},System.Runtime.Intrinsics.Vector128{``0},System.Runtime.Intrinsics.Vector128{``0})">
+            <summary>
+            Evaluates an ternary operator over supplied operands
+            </summary>
+            <param name="kind">The operator kind</param>
+            <param name="x">The first operand</param>
+            <param name="y">The second operand</param>
+            <param name="z">The third operand</param>
+            <typeparam name="T">The primal vector component type</typeparam>
+        </member>
+        <member name="M:Z0.VLogix.lookup``1(Z0.N128,Z0.TernaryBitLogicKind)">
+            <summary>
+            Returns a kind-identified delegate if possible; otherwise, raises an exception
+            </summary>
+            <param name="kind">The operator kind</param>
+            <typeparam name="T">The primal vector component type</typeparam>
+        </member>
+        <member name="M:Z0.VLogix.eval``1(Z0.UnaryBitLogicKind,System.Runtime.Intrinsics.Vector256{``0})">
+            <summary>
+            Evaluates an identified unary operator over a supplied operand
+            </summary>
+            <param name="kind">The operator kind</param>
+            <param name="a">The operand</param>
+            <typeparam name="T">The primal vector component type</typeparam>
+        </member>
+        <member name="M:Z0.VLogix.eval``1(Z0.BinaryComparisonApiClass,System.Runtime.Intrinsics.Vector256{``0},System.Runtime.Intrinsics.Vector256{``0})">
+            <summary>
+            Evaluates a comparison operator over supplied operands
+            </summary>
+            <param name="kind">The operator kind</param>
+            <param name="a">The left operand</param>
+            <param name="b">The right operand</param>
+            <typeparam name="T">The primal vector component type</typeparam>
+        </member>
+        <member name="M:Z0.VLogix.eval``1(Z0.BitShiftApiClass,System.Runtime.Intrinsics.Vector256{``0},System.Byte)">
+            <summary>
+            Evaluates an identified shift operator over supplied operands
+            </summary>
+            <param name="kind">The operator kind</param>
+            <param name="a">The subject</param>
+            <param name="count">The shift amount</param>
+            <typeparam name="T">The primal vector component type</typeparam>
+        </member>
+        <member name="M:Z0.VLogix.eval``1(Z0.BinaryBitLogicKind,System.Runtime.Intrinsics.Vector256{``0},System.Runtime.Intrinsics.Vector256{``0})">
+            <summary>
+            Evaluates an identified binary operator over supplied operands
+            </summary>
+            <param name="kind">The operator kind</param>
+            <param name="a">The left operand</param>
+            <param name="b">The right operand</param>
+            <typeparam name="T">The primal vector component type</typeparam>
+        </member>
+        <member name="M:Z0.VLogix.eval``1(Z0.TernaryBitLogicKind,System.Runtime.Intrinsics.Vector256{``0},System.Runtime.Intrinsics.Vector256{``0},System.Runtime.Intrinsics.Vector256{``0})">
+            <summary>
+            Evaluates an ternary operator over supplied operands
+            </summary>
+            <param name="kind">The operator kind</param>
+            <param name="x">The first operand</param>
+            <param name="y">The second operand</param>
+            <param name="z">The third operand</param>
+            <typeparam name="T">The primal vector component type</typeparam>
+        </member>
+        <member name="M:Z0.VLogix.lookup``1(Z0.N256,Z0.BinaryBitLogicKind)">
+            <summary>
+            Returns a kind-identified delegate if possible; otherwise, raises an exception
+            </summary>
+            <param name="kind">The operator kind</param>
+            <typeparam name="T">The primal vector component type</typeparam>
+        </member>
+        <member name="M:Z0.VLogix.lookup``1(Z0.N256,Z0.TernaryBitLogicKind)">
+            <summary>
+            Returns a kind-identified delegate if possible; otherwise, raises an exception
+            </summary>
+            <param name="kind">The operator kind</param>
+            <typeparam name="T">The primal vector component type</typeparam>
+        </member>
+        <member name="P:Z0.VLogixOps.UnaryBitLogicKinds">
+            <summary>
+            Advertises the supported unary bitlogic operators
+            </summary>
+        </member>
+        <member name="P:Z0.VLogixOps.BinaryBitLogicKinds">
+            <summary>
+            Advertises the supported binary bitlogic operators
+            </summary>
+        </member>
+        <member name="P:Z0.VLogixOps.TernaryBitLogicKinds">
+            <summary>
+            Advertises the supported ternary bitlogic operators
+            </summary>
+        </member>
+        <member name="P:Z0.VLogixOps.ComparisonKinds">
+            <summary>
+            Specifies the supported comparison operators
+            </summary>
+        </member>
+        <member name="M:Z0.VLogixOps.eval``1(Z0.UnaryBitLogicKind,System.Runtime.Intrinsics.Vector128{``0})">
+            <summary>
+            Evaluates an identified unary operator over a supplied operand
+            </summary>
+            <param name="kind">The operator kind</param>
+            <param name="a">The operand</param>
+            <typeparam name="T">The primal vector component type</typeparam>
+        </member>
+        <member name="M:Z0.VLogixOps.eval``1(Z0.UnaryBitLogicKind,System.Runtime.Intrinsics.Vector256{``0})">
+            <summary>
+            Evaluates an identified unary operator over a supplied operand
+            </summary>
+            <param name="kind">The operator kind</param>
+            <param name="a">The operand</param>
+            <typeparam name="T">The primal vector component type</typeparam>
+        </member>
+        <member name="M:Z0.VLogixOps.eval``1(Z0.BinaryComparisonApiClass,System.Runtime.Intrinsics.Vector128{``0},System.Runtime.Intrinsics.Vector128{``0})">
+            <summary>
+            Evaluates a comparison operator over supplied operands
+            </summary>
+            <param name="kind">The operator kind</param>
+            <param name="a">The left operand</param>
+            <param name="b">The right operand</param>
+            <typeparam name="T">The primal vector component type</typeparam>
+        </member>
+        <member name="M:Z0.VLogixOps.eval``1(Z0.BinaryComparisonApiClass,System.Runtime.Intrinsics.Vector256{``0},System.Runtime.Intrinsics.Vector256{``0})">
+            <summary>
+            Evaluates a comparison operator over supplied operands
+            </summary>
+            <param name="kind">The operator kind</param>
+            <param name="a">The left operand</param>
+            <param name="b">The right operand</param>
+            <typeparam name="T">The primal vector component type</typeparam>
+        </member>
+        <member name="M:Z0.VLogixOps.eval``1(Z0.BinaryBitLogicKind,System.Runtime.Intrinsics.Vector128{``0},System.Runtime.Intrinsics.Vector128{``0})">
+            <summary>
+            Evaluates an identified binary bitwise operator over supplied operands
+            </summary>
+            <param name="kind">The operator kind</param>
+            <param name="a">The left operand</param>
+            <param name="b">The right operand</param>
+            <typeparam name="T">The primal vector component type</typeparam>
+        </member>
+        <member name="M:Z0.VLogixOps.eval``1(Z0.BinaryBitLogicKind,System.Runtime.Intrinsics.Vector256{``0},System.Runtime.Intrinsics.Vector256{``0})">
+            <summary>
+            Evaluates an identified binary operator over supplied operands
+            </summary>
+            <param name="kind">The operator kind</param>
+            <param name="a">The left operand</param>
+            <param name="b">The right operand</param>
+            <typeparam name="T">The primal vector component type</typeparam>
+        </member>
+        <member name="M:Z0.VLogixOps.eval``1(Z0.TernaryBitLogicKind,System.Runtime.Intrinsics.Vector128{``0},System.Runtime.Intrinsics.Vector128{``0},System.Runtime.Intrinsics.Vector128{``0})">
+            <summary>
+            Evaluates an ternary operator over supplied operands
+            </summary>
+            <param name="kind">The operator kind</param>
+            <param name="x">The first operand</param>
+            <param name="y">The second operand</param>
+            <param name="z">The third operand</param>
+            <typeparam name="T">The primal vector component type</typeparam>
+        </member>
+        <member name="M:Z0.VLogixOps.eval``1(Z0.TernaryBitLogicKind,System.Runtime.Intrinsics.Vector256{``0},System.Runtime.Intrinsics.Vector256{``0},System.Runtime.Intrinsics.Vector256{``0})">
+            <summary>
+            Evaluates an ternary operator over supplied operands
+            </summary>
+            <param name="kind">The operator kind</param>
+            <param name="x">The first operand</param>
+            <param name="y">The second operand</param>
+            <param name="z">The third operand</param>
+            <typeparam name="T">The primal vector component type</typeparam>
+        </member>
+        <member name="M:Z0.VLogixOps.eval``1(Z0.BitShiftApiClass,System.Runtime.Intrinsics.Vector128{``0},System.Byte)">
+            <summary>
+            Evaluates an identified shift operator over supplied operands
+            </summary>
+            <param name="kind">The operator kind</param>
+            <param name="a">The subject</param>
+            <param name="count">The shift bit count</param>
+            <typeparam name="T">The primal vector component type</typeparam>
+        </member>
+        <member name="M:Z0.VLogixOps.eval``1(Z0.BitShiftApiClass,System.Runtime.Intrinsics.Vector256{``0},System.Byte)">
+            <summary>
+            Evaluates an identified shift operator over supplied operands
+            </summary>
+            <param name="kind">The operator kind</param>
+            <param name="a">The subject</param>
+            <param name="count">The shift amount</param>
+            <typeparam name="T">The primal vector component type</typeparam>
+        </member>
+        <member name="M:Z0.VLogixOps.lookup``1(Z0.N128,Z0.UnaryBitLogicKind)">
+            <summary>
+            Returns a kind-identified delegate if possible; otherwise, raises an exception
+            </summary>
+            <param name="kind">The operator kind</param>
+            <typeparam name="T">The primal vector component type</typeparam>
+        </member>
+        <member name="M:Z0.VLogixOps.lookup``1(Z0.N256,Z0.UnaryBitLogicKind)">
+            <summary>
+            Returns a kind-identified delegate if possible; otherwise, raises an exception
+            </summary>
+            <param name="kind">The operator kind</param>
+            <typeparam name="T">The primal vector component type</typeparam>
+        </member>
+        <member name="M:Z0.VLogixOps.lookup``1(Z0.N128,Z0.BitShiftApiClass)">
+            <summary>
+            Returns a kind-identified delegate if possible; otherwise, raises an exception
+            </summary>
+            <param name="kind">The operator kind</param>
+            <typeparam name="T">The primal vector component type</typeparam>
+        </member>
+        <member name="M:Z0.VLogixOps.lookup``1(Z0.N256,Z0.BitShiftApiClass)">
+            <summary>
+            Returns a kind-identified delegate if possible; otherwise, raises an exception
+            </summary>
+            <param name="kind">The operator kind</param>
+            <typeparam name="T">The primal vector component type</typeparam>
+        </member>
+        <member name="M:Z0.VLogixOps.lookup``1(Z0.N128,Z0.BinaryBitLogicKind)">
+            <summary>
+            Returns a kind-identified delegate if possible; otherwise, raises an exception
+            </summary>
+            <param name="kind">The operator kind</param>
+            <typeparam name="T">The primal vector component type</typeparam>
+        </member>
+        <member name="M:Z0.VLogixOps.lookup``1(Z0.N256,Z0.BinaryBitLogicKind)">
+            <summary>
+            Returns a kind-identified delegate if possible; otherwise, raises an exception
+            </summary>
+            <param name="kind">The operator kind</param>
+            <typeparam name="T">The primal vector component type</typeparam>
+        </member>
+        <member name="M:Z0.VLogixOps.lookup``1(Z0.N128,Z0.TernaryBitLogicKind)">
+            <summary>
+            Returns a kind-identified delegate if possible; otherwise, raises an exception
+            </summary>
+            <param name="kind">The operator kind</param>
+            <typeparam name="T">The primal vector component type</typeparam>
+        </member>
+        <member name="M:Z0.VLogixOps.lookup``1(Z0.N256,Z0.TernaryBitLogicKind)">
+            <summary>
+            Returns a kind-identified delegate if possible; otherwise, raises an exception
+            </summary>
+            <param name="kind">The operator kind</param>
+            <typeparam name="T">The primal vector component type</typeparam>
+        </member>
+    </members>
+</doc>

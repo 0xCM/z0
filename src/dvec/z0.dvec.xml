@@ -1,0 +1,361 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>z0.dvec</name>
+    </assembly>
+    <members>
+        <member name="M:Z0.Permute.natural(Z0.Perm4L,Z0.NatPerm{Z0.N4}@)">
+            <summary>
+            Reifies a permutation of length 8 from its canonical scalar specification
+            </summary>
+            <param name="spec">The representative</param>
+        </member>
+        <member name="M:Z0.Permute.natural(Z0.Perm8L)">
+            <summary>
+            Reifies a permutation of length 8 from its canonical scalar specification
+            </summary>
+            <param name="spec">The representative</param>
+        </member>
+        <member name="M:Z0.Permute.natural(Z0.Perm16L,Z0.NatPerm{Z0.N16}@)">
+            <summary>
+            Reifies a permutation of length 16 from its canonical scalar representative
+            </summary>
+            <param name="spec">The representative</param>
+        </member>
+        <member name="M:Z0.Permute.natural(Z0.Perm16L)">
+            <summary>
+            Reifies a permutation of length 16 from its canonical scalar representative
+            </summary>
+            <param name="spec">The representative</param>
+        </member>
+        <member name="M:Z0.Permute.natural``1(``0)">
+            <summary>
+            Creates a new identity permutation of natural length
+            </summary>
+            <typeparam name="N">The length type</typeparam>
+            <typeparam name="T">The term type</typeparam>
+        </member>
+        <member name="M:Z0.Permute.natural``1(``0,Z0.NatSwap{``0}[])">
+            <summary>
+            Defines an identity permutation of natural length and applies a specified sequence of transpostions
+            </summary>
+            <param name="length">The length of the permutation</param>
+            <param name="terms">The ordered sequence of terms that specify the permutation</param>
+            <typeparam name="N">The length type</typeparam>
+        </member>
+        <member name="M:Z0.Permute.natural``1(Z0.NatSwap{``0}[])">
+            <summary>
+            Defines an identity permutation of natural length and applies a specified sequence of transpostions
+            </summary>
+            <param name="length">The length of the permutation</param>
+            <param name="terms">The ordered sequence of terms that specify the permutation</param>
+            <typeparam name="N">The length type</typeparam>
+        </member>
+        <member name="M:Z0.Permute.natural``1(``0,System.ReadOnlySpan{System.Int32})">
+            <summary>
+            Defines a permutation of natural length
+            </summary>
+            <param name="n">The length of the permutation</param>
+            <param name="terms">The ordered sequence of terms that define the permutation</param>
+            <typeparam name="N">The length type</typeparam>
+        </member>
+        <member name="M:Z0.Permute.natural``1(``0,System.Int32[])">
+            <summary>
+            Defines a permutation of natural length
+            </summary>
+            <param name="n">The length of the permutation</param>
+            <param name="terms">The ordered sequence of terms that specify the permutation</param>
+            <typeparam name="N">The length type</typeparam>
+            <typeparam name="T">The symbol type</typeparam>
+        </member>
+        <member name="M:Z0.Permute.vinit(Z0.W128,Z0.Perm{System.Byte})">
+            <summary>
+            Creates a fixed 16-bit permutation over a generic permutation over 16 elements
+            </summary>
+            <param name="src">The source permutation</param>
+        </member>
+        <member name="M:Z0.Permute.vinit(Z0.W256,Z0.Perm{System.Byte})">
+            <summary>
+            Creates a fixed 32-bit permutation over a generic permutation over 32 elements
+            </summary>
+            <param name="src">The source permutation</param>
+        </member>
+        <member name="M:Z0.Permute.symbols(Z0.N4)">
+            <summary>
+            Enumerates all permutation map format strings on 4 symbols
+            </summary>
+        </member>
+        <member name="M:Z0.Permute.symbols(Z0.Perm2x4)">
+            <summary>
+            Deconstructs a permutation literal into an ordered sequence of symbols that define the permutation
+            </summary>
+            <param name="src">The perm literal</param>
+        </member>
+        <member name="M:Z0.Permute.symbols(Z0.Perm4L)">
+            <summary>
+            Deconstructs a permutation literal into an ordered sequence of symbols that define the permutation
+            </summary>
+            <param name="src">The perm literal</param>
+        </member>
+        <member name="M:Z0.Permute.symbols(Z0.Perm8L)">
+            <summary>
+            Deconstructs a permutation literal into an ordered sequence of symbols that define the permutation
+            </summary>
+            <param name="src">The perm literal</param>
+        </member>
+        <member name="M:Z0.Permute.symbols(Z0.Perm16L)">
+            <summary>
+            Deconstructs a permutation literal into an ordered sequence of symbols that define the permutation
+            </summary>
+            <param name="src">The perm literal</param>
+        </member>
+        <member name="M:Z0.Permute.mincells(System.UInt64,System.UInt64)">
+            <summary>
+            Computes the minimum number of cells required to store a specified number of bits
+            </summary>
+            <param name="w">The cell width</param>
+            <param name="n">The bit count/number of matrix columns</param>
+        </member>
+        <member name="M:Z0.Permute.symbols``2(``1,System.UInt32,System.UInt32)">
+            <summary>
+            Assumes that
+            1. The source data source is a tape upon which fixed-width symbols are sequentially recorded
+            2. The symbol alphabet is defined by the last character of the literals defined by an enumeration
+            With these preconditions, the operation returns the ordered sequence of symbols written to the tape
+            </summary>
+            <param name="src">The data source</param>
+            <param name="segwidth">The number of bits designated to represent/define a symbol value</param>
+            <param name="maxbits">The maximum number bits to use if less than the bit width of the vector</param>
+            <typeparam name="E">The enumeration type that defines the symbols</typeparam>
+            <typeparam name="T">The cell type</typeparam>
+        </member>
+        <member name="M:Z0.Permute.shuffle(Z0.Perm@,Z0.IPolySourced)">
+            <summary>
+            Shuffles the permutation in-place using a provided random source.
+            </summary>
+            <param name="random">The random source</param>
+        </member>
+        <member name="M:Z0.Permute.shuffle``1(Z0.Perm{``0}@,Z0.IPolySourced)">
+            <summary>
+            Shuffles the permutation in-place using a provided random source.
+            </summary>
+            <param name="random">The random source</param>
+        </member>
+        <member name="M:Z0.XTend.Format(Z0.Perm4L)">
+            <summary>
+            Formats a permutation literal as one would hope
+            </summary>
+            <param name="src">The literal definition</param>
+        </member>
+        <member name="M:Z0.XTend.Format(Z0.Perm8L)">
+            <summary>
+            Formats a permutation literal as one would hope
+            </summary>
+            <param name="src">The literal definition</param>
+        </member>
+        <member name="M:Z0.XTend.Format(Z0.Perm16L)">
+            <summary>
+            Formats a permutation literal as one would hope
+            </summary>
+            <param name="src">The literal definition</param>
+        </member>
+        <member name="M:Z0.XTend.FormatMap(Z0.Perm4L)">
+            <summary>
+            Formats the value as a permutation map, i.e., [00 01 10 11]: ABCD -> ABDC
+            </summary>
+            <param name="src">The permutation spec</param>
+        </member>
+        <member name="M:Z0.PermX.Permute(Z0.BitString,Z0.Perm)">
+            <summary>
+            Shuffles bitstring content as determined by a permutation
+            </summary>
+            <param name="src">The source span</param>
+            <param name="p">The permutation to apply</param>
+        </member>
+        <member name="M:Z0.PermX.ToLiteral(Z0.NatPerm{Z0.N4})">
+            <summary>
+            Constructs the canonical literal representation of a natural permutation on 4 symbols
+            </summary>
+            <param name="src">The natural permutation</param>
+        </member>
+        <member name="M:Z0.PermX.ToLiteral(Z0.NatPerm{Z0.N8})">
+            <summary>
+            Constructs the canonical literal representation of a natural permutation on 8 symbols
+            </summary>
+            <param name="src">The natural permutation</param>
+        </member>
+        <member name="M:Z0.PermX.ToLiteral(Z0.NatPerm{Z0.N16})">
+            <summary>
+            Constructs the canonical literal representation of a natural permutation on 16 symbols
+            </summary>
+            <param name="src">The natural permutation</param>
+        </member>
+        <member name="M:Z0.PermX.ToDigits(Z0.Perm4L)">
+            <summary>
+            Computes the digits corresponding to each 2-bit segment of the permutation spec
+            </summary>
+            <param name="src">The perm spec</param>
+        </member>
+        <member name="M:Z0.PermX.ToDigits(Z0.Perm8L)">
+            <summary>
+            Computes the digits corresponding to each 3-bit segment of the permutation spec
+            </summary>
+            <param name="src">The perm spec</param>
+        </member>
+        <member name="M:Z0.PermX.ToDigits(Z0.Perm16L)">
+            <summary>
+            Computes the digits corresponding to each 4-bit segment of the permutation spec
+            </summary>
+            <param name="src">The perm spec</param>
+        </member>
+        <member name="M:Z0.PermX.ToShuffleSpec(Z0.NatPerm{Z0.N16})">
+            <summary>
+            Defines a shuffle spec from a permutation
+            </summary>
+            <param name="src">The defining permutation</param>
+        </member>
+        <member name="M:Z0.PRngX.Perm(Z0.IPolyrand,System.Int32)">
+            <summary>
+            Produces a random permutation of a specified length
+            </summary>
+            <param name="random">The random source</param>
+            <param name="n">The permutation length</param>
+        </member>
+        <member name="M:Z0.PRngX.Perm(Z0.IPolyrand,System.UInt32)">
+            <summary>
+            Produces a random permutation of a specified length
+            </summary>
+            <param name="random">The random source</param>
+            <param name="n">The permutation length</param>
+        </member>
+        <member name="M:Z0.PRngX.Perms(Z0.IPolyrand,System.Int32)">
+            <summary>
+            Produces a stream of random permutation of a specified length
+            </summary>
+            <param name="random">The random source</param>
+            <param name="n">The length representative</param>
+            <param name="rep">A primal type representative</param>
+            <typeparam name="N">The length type</typeparam>
+            <typeparam name="T">The primal symbol type</typeparam>
+        </member>
+        <member name="M:Z0.PRngX.Shuffle22``1(Z0.NatPerm{``0},Z0.IPolyrand)">
+            <summary>
+            Shuffles the permutation in-place using a provided random source.
+            </summary>
+            <param name="random">The random source</param>
+        </member>
+        <member name="M:Z0.PRngX.Perm``1(Z0.IPolyrand,``0)">
+            <summary>
+            Produces a random permutation of natural length N
+            </summary>
+            <param name="random">The random source</param>
+            <param name="n">The length representative</param>
+            <param name="rep">A primal type representative</param>
+            <typeparam name="N">The length type</typeparam>
+            <typeparam name="T">The primal symbol type</typeparam>
+        </member>
+        <member name="M:Z0.PRngX.Perms``1(Z0.IPolyrand,``0)">
+            <summary>
+            Produces a stream of random permutation of natural length N
+            </summary>
+            <param name="random">The random source</param>
+            <param name="n">The length representative</param>
+            <param name="rep">A primal type representative</param>
+            <typeparam name="N">The length type</typeparam>
+            <typeparam name="T">The primal symbol type</typeparam>
+        </member>
+        <member name="M:Z0.PRngX.Shuffle(Z0.IPolyrand,Z0.Perm@)">
+            <summary>
+            Shuffles a copy of the source permutation, leaving the original intact.
+            </summary>
+            <param name="random">The random source</param>
+            <param name="src">The permutation</param>
+        </member>
+        <member name="M:Z0.PRngX.Shuffle``1(Z0.IPolyrand,Z0.NatPerm{``0}@)">
+            <summary>
+            Shuffles a copy of the source permutation, leaving the original intact.
+            </summary>
+            <param name="random">The random source</param>
+            <param name="src">The permutation</param>
+            <typeparam name="N">The permutation length</typeparam>
+        </member>
+        <member name="M:Z0.PRngX.Shuffle``1(Z0.NatPerm{``0},Z0.IPolyrand)">
+            <summary>
+            Shuffles the permutation in-place using a provided random source.
+            </summary>
+            <param name="random">The random source</param>
+        </member>
+        <member name="T:Z0.VDataGen">
+            <summary>
+            Generates the data presented by VData
+            </summary>
+        </member>
+        <member name="M:Z0.VDataGen.vpalt``1(Z0.N128,``0,``0)">
+            <summary>
+            Creates a vector populated with component values that alternate between the first operand and the second
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+            <typeparam name="T">The primal component type</typeparam>
+        </member>
+        <member name="M:Z0.VDataGen.vdecrements``1(Z0.N128,``0)">
+            <summary>
+            Creates a 128-bit vector with components that decrease by uint step from an initial value
+            </summary>
+            <param name="first">The value of the first component</param>
+            <param name="step">The distance between adjacent components</param>
+            <typeparam name="T">The primal component type</typeparam>
+        </member>
+        <member name="M:Z0.VDataGen.vdecrements``1(Z0.N256,``0)">
+            <summary>
+            Creates a 128-bit vector with components that decrease by uint step from an initial value
+            </summary>
+            <param name="first">The value of the first component</param>
+            <param name="step">The distance between adjacent components</param>
+            <typeparam name="T">The primal component type</typeparam>
+        </member>
+        <member name="M:Z0.VDataGen.vdecrements``1(Z0.N128,``0,``0)">
+            <summary>
+            Creates a 128-bit vector with components that decrease by a specified step from an initial value
+            </summary>
+            <param name="first">The value of the first component</param>
+            <param name="step">The distance between adjacent components</param>
+            <typeparam name="T">The primal component type</typeparam>
+        </member>
+        <member name="M:Z0.VDataGen.vdecrements``1(Z0.N256,``0,``0)">
+            <summary>
+            Creates a 256-bit vector with components that decrease by a specified step from an initial value
+            </summary>
+            <param name="first">The value of the first component</param>
+            <param name="step">The distance between adjacent components</param>
+            <typeparam name="T">The primal component type</typeparam>
+        </member>
+        <member name="M:Z0.VDataGen.vincrements``1(Z0.N128,``0,``0)">
+            <summary>
+            Creates a 128-bit vector with components that increase by a specified step from an initial value
+            </summary>
+            <param name="first">The value of the first component</param>
+            <param name="step">The distance between adjacent components</param>
+            <typeparam name="T">The primal component type</typeparam>
+        </member>
+        <member name="M:Z0.VDataGen.vincrements``1(Z0.N256,``0,``0)">
+            <summary>
+            Creates a 256-bit vector with components that increase by a specified step from an initial value
+            </summary>
+            <param name="first">The value of the first component</param>
+            <param name="step">The distance between adjacent components</param>
+            <typeparam name="T">The primal component type</typeparam>
+        </member>
+        <member name="M:Z0.VDataGen.DefineClearAlt``1">
+            <summary>
+            Creates a shuffle mask that zeroes-out ever-other vector component
+            </summary>
+            <typeparam name="T">The primal component type</typeparam>
+        </member>
+        <member name="T:Z0.dvec">
+            <summary>
+            Direct vectorized intrinsics
+            </summary>
+        </member>
+    </members>
+</doc>

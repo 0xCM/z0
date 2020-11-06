@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>z0.apps</name>
+    </assembly>
+    <members>
+        <member name="T:Z0.IAppContext">
+            <summary>
+            Characterizes a context that carries and provides access to a composition
+            </summary>
+        </member>
+        <member name="T:Z0.IAppShell`1">
+            <summary>
+            Characterizes a shell with api composition support
+            </summary>
+            <typeparam name="A">The reification type</typeparam>
+        </member>
+    </members>
+</doc>

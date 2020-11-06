@@ -1,0 +1,2392 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>z0.gmath</name>
+    </assembly>
+    <members>
+        <member name="M:Z0.Algorithmic.stream``1(``0,``0)">
+            <summary>
+            Creates an enumerable sequence that ranges between inclusive upper and lower bounds
+            </summary>
+            <param name="x0">The lower bound</param>
+            <param name="x1">The upper bound</param>
+            <typeparam name="T">The primal type</typeparam>
+        </member>
+        <member name="M:Z0.Algorithmic.stream``1(``0)">
+            <summary>
+            Defines a scalar sequence {0,1,...,count-1}
+            </summary>
+            <param name="count">The number of elements in the sequence</param>
+            <typeparam name="T">The primal type</typeparam>
+        </member>
+        <member name="M:Z0.Algorithmic.stream``1(``0,``0,``0)">
+            <summary>
+            Creates a numeric sequence that ranges between inclusive upper and lower bounds
+            </summary>
+            <param name="x0">The lower bound</param>
+            <param name="x1">The upper bound</param>
+            <param name="step">The step size</param>
+            <typeparam name="T">The numeric type</typeparam>
+        </member>
+        <member name="M:Z0.Algorithmic.identical``1(System.Span{``0},System.Span{``0})">
+            <summary>
+            Returns 1 if the left and right spans contain identical content and 0 otherwise
+            </summary>
+            <param name="xs">The left span</param>
+            <param name="ys">The right span</param>
+            <typeparam name="T">The span cell type</typeparam>
+        </member>
+        <member name="M:Z0.Algorithmic.identical``1(System.ReadOnlySpan{``0},System.ReadOnlySpan{``0})">
+            <summary>
+            Returns 1 if the left and right spans contain identical content and 0 otherwise
+            </summary>
+            <param name="xs">The left span</param>
+            <param name="ys">The right span</param>
+            <typeparam name="T">The span cell type</typeparam>
+        </member>
+        <member name="M:Z0.Algorithmic.identical``1(``0@,``0@,System.UInt32)">
+            <summary>
+             Adapted from corefx repo
+            </summary>
+        </member>
+        <member name="M:Z0.CheckClose.close``1(System.Span{``0},System.Span{``0},``0,System.String,System.String,System.Nullable{System.Int32})">
+            <summary>
+            Asserts that corresponding elements of two source spans of the same length are "close" as determined by a specified tolerance
+            </summary>
+            <param name="lhs">The left span</param>
+            <param name="rhs">The right span</param>
+            <param name="tolerance">The acceptable difference between corresponding left/right elements</param>
+            <param name="caller">The invoking function</param>
+            <param name="file">The file in which the invoking function is defined </param>
+            <param name="line">The file line number of invocation</param>
+            <typeparam name="T">The element type</typeparam>
+        </member>
+        <member name="T:Z0.enum`2">
+            <summary>
+            Defines a model of an enum literal that is parametric in both the declaring enum
+            and the underlying primal type it refines
+            </summary>
+        </member>
+        <member name="M:Z0.gmath.abs``1(``0)">
+            <summary>
+            Computes the absolute value of a primal operand
+            </summary>
+            <param name="src">The source value</param>
+            <typeparam name="T">The primal type</typeparam>
+        </member>
+        <member name="M:Z0.gmath.add``1(``0,``0)">
+            <summary>
+            Adds two primal values
+            </summary>
+            <param name="a">The left value</param>
+            <param name="b">The right value</param>
+            <typeparam name="T">The primal type</typeparam>
+        </member>
+        <member name="M:Z0.gmath.avgz``1(``0,``0)">
+            <summary>
+            Computes the average of unsigned integral operands, rounding toward zero
+            </summary>
+            <param name="a">The left operand</param>
+            <param name="b">The right operand</param>
+            <typeparam name="T">The primal type</typeparam>
+        </member>
+        <member name="M:Z0.gmath.avgi``1(``0,``0)">
+            <summary>
+            Computes the average of unsigned integral operands, rounding toward infinity
+            </summary>
+            <param name="a">The left operand</param>
+            <param name="b">The right operand</param>
+            <typeparam name="T">The primal type</typeparam>
+        </member>
+        <member name="M:Z0.gmath.clamp``1(``0,``0)">
+            <summary>
+            Clamps the source value to an inclusive maximum
+            </summary>
+            <param name="src">The source value</param>
+            <param name="max">The maximum value</param>
+            <typeparam name="T">The primal type</typeparam>
+        </member>
+        <member name="M:Z0.gmath.dist``1(``0,``0)">
+            <summary>
+            Computes the nonnegative distance between two values
+            </summary>
+            <param name="a">The first value</param>
+            <param name="b">The second value</param>
+            <typeparam name="T">The value type</typeparam>
+        </member>
+        <member name="M:Z0.gmath.div``1(``0,``0)">
+            <summary>
+            Divides the first value by the second
+            </summary>
+            <param name="a">The left value</param>
+            <param name="b">The right value</param>
+            <typeparam name="T">The primal type</typeparam>
+        </member>
+        <member name="M:Z0.gmath.divmod``1(``0,``0)">
+            <summary>
+            Computes dst = (div(a,b), mod(a,b))
+            </summary>
+            <param name="a">The dividend</param>
+            <param name="b">The divisor</param>
+            <typeparam name="T">The primal type</typeparam>
+        </member>
+        <member name="M:Z0.gmath.dot``1(System.ReadOnlySpan{``0},System.ReadOnlySpan{``0})">
+            <summary>
+            Imagines the source operands are vectors of identical length and computes their canonical scalar product
+            </summary>
+            <param name="lhs">The left vector</param>
+            <param name="rhs">The right vector</param>
+            <typeparam name="T">The primal scalar type</typeparam>
+        </member>
+        <member name="M:Z0.gmath.fma``1(``0,``0,``0)">
+            <summary>
+            Computes r := x*y + z for primal values x, y, and z
+            </summary>
+            <param name="x">The left factor</param>
+            <param name="y">The right factor</param>
+            <param name="z">The summand</param>
+            <typeparam name="T">The primal type</typeparam>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Z0.gmath.lteq``1(``0,``0)" -->
+        <member name="M:Z0.gmath.mod``1(``0,``0)">
+            <summary>
+            Computes b := a % m
+            </summary>
+            <param name="a">The source value</param>
+            <param name="m">The modulus</param>
+            <typeparam name="T">The primal type</typeparam>
+        </member>
+        <member name="M:Z0.gmath.modmul``1(``0,``0,``0)">
+            <summary>
+            Computes z := (a*b) mod m
+            </summary>
+            <param name="a">The first factor</param>
+            <param name="b">The second factor</param>
+            <param name="m">The modulus</param>
+            <typeparam name="T">The primal type</typeparam>
+        </member>
+        <member name="M:Z0.gmath.mul``1(``0,``0)">
+            <summary>
+            Multiplies two primal values
+            </summary>
+            <param name="a">The left value</param>
+            <param name="b">The right value</param>
+            <typeparam name="T">The primal type</typeparam>
+        </member>
+        <member name="M:Z0.gmath.negate``1(``0)">
+            <summary>
+            If the source value is signed, negates it; otherwise, computes
+            the two's complement negation
+            </summary>
+            <param name="src">The source value</param>
+            <typeparam name="T">The primal type</typeparam>
+            <remarks>See https://en.wikipedia.org/wiki/Two%27s_complement</remarks>
+        </member>
+        <member name="M:Z0.gmath.odd``1(``0)">
+            <summary>
+            Returns true if a primal integer is odd; false otherwise
+            </summary>
+            <param name="a">The value to test</param>
+            <typeparam name="T">The primal integer type</typeparam>
+        </member>
+        <member name="M:Z0.gmath.even``1(``0)">
+            <summary>
+            Returns true if a primal integer is even; false otherwise
+            </summary>
+            <param name="a">The value to test</param>
+            <typeparam name="T">The primal integer type</typeparam>
+        </member>
+        <member name="M:Z0.gmath.pow2``1(System.Byte)">
+            <summary>
+            Computes 2^i where i is an integer value in the interval [0,63]
+            and 2^i does not exceed the maximum value of T
+            </summary>
+            <param name="i">The exponent</param>
+        </member>
+        <member name="M:Z0.gmath.signum``1(``0)">
+            <summary>
+            Computes the sign of a primal operand
+            </summary>
+            <param name="a">The source value</param>
+            <typeparam name="T">The primal type</typeparam>
+        </member>
+        <member name="M:Z0.gmath.steps``1(``0,``0,System.Int32,``0@)">
+            <summary>
+            Populates a memory target with values first, first + 1*step, first + 2*step ... first + (n - 1)*step
+            </summary>
+            <param name="first">The first value</param>
+            <param name="step">The step size</param>
+            <param name="count">The number of values to produce</param>
+            <param name="dst">The memory target</param>
+            <typeparam name="T">The target value type</typeparam>
+        </member>
+        <member name="M:Z0.gmath.sub``1(``0,``0)">
+            <summary>
+            Subtracts the right value from the left
+            </summary>
+            <param name="a">The left value</param>
+            <param name="b">The right value</param>
+            <typeparam name="T">The primal type</typeparam>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Z0.gmath.and``1(``0,``0)" -->
+        <member name="M:Z0.gmath.cimpl``1(``0,``0)">
+            <summary>
+            Computes the converse implication c := ~a | b integral values a and b
+            </summary>
+            <param name="a">The left operand</param>
+            <param name="b">The right operand</param>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Z0.gmath.cnonimpl``1(``0,``0)" -->
+        <member name="M:Z0.gmath.impl``1(``0,``0)">
+            <summary>
+            Computes the material implication c := a | ~b for integral values a and b
+            </summary>
+            <param name="a">The left operand</param>
+            <param name="b">The right operand</param>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Z0.gmath.nand``1(``0,``0)" -->
+        <!-- Badly formed XML comment ignored for member "M:Z0.gmath.nonimpl``1(``0,``0)" -->
+        <member name="M:Z0.gmath.nor``1(``0,``0)">
+            <summary>
+            Computes the bitwise nor c := ~(a | b) for integral values a and b
+            </summary>
+            <param name="a">The left operand</param>
+            <param name="b">The right operand</param>
+        </member>
+        <member name="M:Z0.gmath.or``1(``0,``0)">
+            <summary>
+            Computes the bitwise or between two primal values
+            </summary>
+            <param name="a">The left value</param>
+            <param name="b">The right value</param>
+            <typeparam name="T">The primal type</typeparam>
+        </member>
+        <member name="M:Z0.gmath.or``1(``0,``0,``0)">
+            <summary>
+            Computes the bitwise or among three primal values
+            </summary>
+            <param name="a">The left value</param>
+            <param name="b">The right value</param>
+            <typeparam name="T">The primal type</typeparam>
+        </member>
+        <member name="M:Z0.gmath.or``1(``0,``0,``0,``0)">
+            <summary>
+            Computes the bitwise or among four primal values
+            </summary>
+            <param name="a">The left value</param>
+            <param name="b">The right value</param>
+            <typeparam name="T">The primal type</typeparam>
+        </member>
+        <member name="M:Z0.gmath.or``1(``0,``0,``0,``0,``0)">
+            <summary>
+            Computes the bitwise or among five primal values
+            </summary>
+            <param name="a">The left value</param>
+            <param name="b">The right value</param>
+            <typeparam name="T">The primal type</typeparam>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Z0.gmath.select``1(``0,``0,``0)" -->
+        <member name="M:Z0.gmath.blend``1(``0,``0,``0)">
+            <summary>
+             This operator is equivalent to select, but is implemented xor(b, and(xor(b,a),  mask))
+            </summary>
+            <param name="mask">Mask that identifies which of the two source operands to choose a given bit</param>
+            <param name="a">The first operand, a bit from which is chosen if the corresponding mask bit is enabled</param>
+            <param name="b">The second operand, a bit from which is chosen if the corresponding mask bit is disabled</param>
+            <typeparam name="T">The primal type</typeparam>
+            <remarks>Code generation for this is good; type-specific specializations exist for convenience. Algorithm
+            taken from https://graphics.stanford.edu/~seander/bithacks.html</remarks>
+        </member>
+        <member name="M:Z0.gmath.xor``1(``0,``0)">
+            <summary>
+            Computes the XOR of two primal values
+            </summary>
+            <param name="a">The left value</param>
+            <param name="b">The right value</param>
+            <typeparam name="T">The primal type</typeparam>
+        </member>
+        <member name="M:Z0.gmath.xornot``1(``0,``0)">
+            <summary>
+            Computes xor(a,not(b))
+            </summary>
+            <param name="a">The left value</param>
+            <param name="b">The right value</param>
+            <typeparam name="T">The primal type</typeparam>
+        </member>
+        <member name="M:Z0.gmath.sal``1(``0,System.Byte)">
+            <summary>
+            Applies an arithmetic left-shift to an integer
+            </summary>
+            <param name="src">The value to shift</param>
+            <param name="offset">The number of bits to shift</param>
+            <typeparam name="T">The primal integer type</typeparam>
+        </member>
+        <member name="M:Z0.gmath.sra``1(``0,System.Byte)">
+            <summary>
+            Applies an arithmetic left-shift to an integer
+            </summary>
+            <param name="src">The value to shift</param>
+            <param name="offset">The number of bits to shift</param>
+            <typeparam name="T">The primal integer type</typeparam>
+        </member>
+        <member name="M:Z0.gmath.sll``1(``0,System.Byte)">
+            <summary>
+            Applies a logical left-shift to an integral value
+            </summary>
+            <param name="a">The value to shift</param>
+            <param name="count">The number of bits to shift</param>
+            <typeparam name="T">The primal integer type</typeparam>
+        </member>
+        <member name="M:Z0.gmath.srl``1(``0,System.Byte)">
+            <summary>
+            Applies a logical right-shift to an integral value
+            </summary>
+            <param name="a">The value to shift</param>
+            <param name="count">The number of bits to shift</param>
+            <typeparam name="T">The primal integer type</typeparam>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Z0.gmath.xors``1(``0,System.Byte)" -->
+        <member name="M:Z0.gmath.xorsl``1(``0,System.Byte)">
+            <summary>
+            Computes a^(a >> offset)
+            </summary>
+            <param name="a">The source value</param>
+            <param name="offset">The number of bits to shift the source value rightwards</param>
+        </member>
+        <member name="M:Z0.gmath.xorsr``1(``0,System.Byte)">
+            <summary>
+            Computes a^(a >> offset)
+            </summary>
+            <param name="a">The source value</param>
+            <param name="offset">The number of bits to shift the source value rightwards</param>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Z0.gmath.between``1(``0,``0,``0)" -->
+        <member name="M:Z0.gmath.eqz``1(``0,``0)">
+            <summary>
+            Defines the operator eqz:T = eq(a,b) ? ones[T] : zero[T]
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+            <typeparam name="T">The numeric type</typeparam>
+        </member>
+        <member name="M:Z0.gmath.ltz``1(``0,``0)">
+            <summary>
+            Defines the operator ltz:T = lt(a,b) ? ones[T] : zero[T]
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+            <typeparam name="T">The numeric type</typeparam>
+        </member>
+        <member name="M:Z0.gmath.gtz``1(``0,``0)">
+            <summary>
+            Defines the operator gtz:T = gt(a,b) ? ones[T] : zero[T]
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+            <typeparam name="T">The numeric type</typeparam>
+        </member>
+        <member name="M:Z0.gmath.comparer``1">
+            <summary>
+            Creates a parametric numeric comparer
+            </summary>
+            <typeparam name="T">The numeric type to compare</typeparam>
+        </member>
+        <member name="M:Z0.gmath.contains``1(Z0.Interval{``0},``0)">
+            <summary>
+            Determines whether an interval contains a specified point
+            </summary>
+            <param name="src">The source interval</param>
+            <param name="point">The point to test</param>
+            <typeparam name="T">The primal numeric type over which the interval is defined</typeparam>
+        </member>
+        <member name="M:Z0.gmath.contains``1(``0@,``0,System.UInt32)">
+            <summary>
+             Adapted from corefx repo
+            </summary>
+        </member>
+        <member name="M:Z0.gmath.eq``1(``0,``0)">
+            <summary>
+            Defines the test eq:bit := a == b, succeeding if numeric equality holds between the operands
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+            <typeparam name="T">The numeric type</typeparam>
+        </member>
+        <member name="M:Z0.gmath.gt``1(``0,``0)">
+            <summary>
+            Defines the test gt:bit := a > b, succeeding if the left operand is larger than the right operand
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+            <typeparam name="T">The operand type</typeparam>
+        </member>
+        <member name="M:Z0.gmath.gteq``1(``0,``0)">
+            <summary>
+            Defines the test gt:bit := a >= b, succeeding if the first operand is larger than or equal to the second
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="a">The second operand</param>
+            <typeparam name="T">The numeric type</typeparam>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Z0.gmath.lt``1(``0,``0)" -->
+        <!-- Badly formed XML comment ignored for member "M:Z0.gmath.negative``1(``0)" -->
+        <member name="M:Z0.gmath.neq``1(``0,``0)">
+            <summary>
+            Defines the test neq:bit := a != b, succeeding if the operands are not equal
+            </summary>
+            <param name="a">The left operand</param>
+            <param name="b">The right operand</param>
+        </member>
+        <member name="M:Z0.gmath.nonz``1(``0,``0)">
+            <summary>
+            Returns an alternate value if the nonz test succeeds for the source value
+            </summary>
+            <param name="src">The test value</param>
+            <param name="alt">The alternative value to return if the test succeeds</param>
+            <typeparam name="T">The source numeric type</typeparam>
+        </member>
+        <member name="M:Z0.gmath.nonz``1(``0)">
+            <summary>
+            Defines the test nonz:bit := a != 0, succeeding if the source operand is nonzero
+            </summary>
+            <param name="src">The source operand</param>
+            <typeparam name="T">The operand type</typeparam>
+        </member>
+        <member name="M:Z0.gmath.positive``1(``0)">
+            <summary>
+            Defines the test t:bit = src > 0
+            </summary>
+            <param name="a">The source value</param>
+            <typeparam name="T">The source type</typeparam>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Z0.gmath.within``1(``0,``0,``0)" -->
+        <member name="M:Z0.gmath.counted``1(``0)">
+            <summary>
+            Defines a scalar sequence {0,1,...,count-1}
+            </summary>
+            <param name="count">The number of elements in the sequence</param>
+            <typeparam name="T">The primal type</typeparam>
+        </member>
+        <member name="M:Z0.gmath.decrements``1(System.Int32,``0@)">
+            <summary>
+            Populates a memory target with consecutive values count-1, count - 2, ..., 0
+            </summary>
+            <param name="count">The number of values to populate</param>
+            <param name="dst">The target memory reference</param>
+            <typeparam name="T">The target value type</typeparam>
+        </member>
+        <member name="M:Z0.gmath.decrements``1(``0,System.Int32,``0@)">
+            <summary>
+            Populates a memory target with consecutive values first, first - 1, ... first - (n - 1)
+            </summary>
+            <param name="first">The first value</param>
+            <param name="count">The number of values to populate</param>
+            <param name="dst">The target memory reference</param>
+            <typeparam name="T">The target value type</typeparam>
+        </member>
+        <member name="M:Z0.gmath.decrements``1(``0,System.Span{``0})">
+            <summary>
+            Populates a span with consecutive values first, first - 1, ... first - (n - 1)
+            </summary>
+            <param name="first">The first value</param>
+            <param name="dst">The target span</param>
+            <typeparam name="T">The target value type</typeparam>
+        </member>
+        <member name="M:Z0.gmath.increments``1(System.Span{``0})">
+            <summary>
+            Populates a span of length n with consecutive values 0,1,...n - 1
+            </summary>
+            <param name="dst">The target span</param>
+            <typeparam name="T">The target value type</typeparam>
+        </member>
+        <member name="M:Z0.gmath.increments``1(``0,System.UInt32,``0@)">
+            <summary>
+            Populates a memory target with values first, first + 1, ... first + (n - 1)
+            </summary>
+            <param name="first">The first value</param>
+            <param name="count">The number of values to populate</param>
+            <param name="dst">The target memory reference</param>
+            <typeparam name="T">The target value type</typeparam>
+        </member>
+        <member name="M:Z0.gmath.increments``1(System.UInt32,``0@)">
+            <summary>
+            Emits a monotonic integral sequence with a specified number of terms to a target reference
+            </summary>
+            <param name="count">The number of terms to populate</param>
+            <param name="dst">The target reference</param>
+            <typeparam name="T">The sequence term type</typeparam>
+        </member>
+        <member name="M:Z0.gmath.increments``1(``0,System.Span{``0})">
+            <summary>
+            Produces a monotonic sequence k, k + 1, ... k + (N - 1) where N denotes the length of the target
+            </summary>
+            <param name="k">The value of the first term</param>
+            <param name="dst">The target span</param>
+            <typeparam name="T">The target value type</typeparam>
+        </member>
+        <member name="M:Z0.gmath.squeeze``1(``0,``0)">
+            <summary>
+            Evenly projects points from the interval [0,maxval[T]] onto the interval [0,max]
+            </summary>
+            <param name="src">The value to contract</param>
+            <param name="max">The maximum value in the target interval</param>
+        </member>
+        <member name="M:Z0.gmath.zclear``1(``0)">
+            <summary>
+            If the source value is nonzero, it is returned unmolested; otherwise, -1 is returned
+            </summary>
+            <param name="src">The source value</param>
+            <typeparam name="T">The numeric type</typeparam>
+        </member>
+        <member name="M:Z0.Partition.stream``1(Z0.Interval{``0},``0,System.Nullable{System.Int32})">
+            <summary>
+            Slices an interval into manageable pieces, disjoint even
+            </summary>
+            <param name="src">The source interval</param>
+            <param name="width">The partition width</param>
+            <param name="precision">The precision with which the calculations are carried out</param>
+            <typeparam name="T">The primal numeric type over which the interval is defined</typeparam>
+        </member>
+        <member name="M:Z0.Partition.measured``1(Z0.Interval{``0},``0)">
+            <summary>
+            Computes the points that determine a partitioning predicated on partition width
+            </summary>
+            <param name="src">The source interval</param>
+            <param name="width">The partition width</param>
+            <typeparam name="T">The interval primal type</typeparam>
+        </member>
+        <member name="M:Z0.Partition.counted``1(Z0.Interval{``0},System.Int32)">
+            <summary>
+            Calculates the points that determine a partitioning predicated on partition count
+            </summary>
+            <param name="src">The source interval</param>
+            <param name="count">The number of desired partitions</param>
+            <typeparam name="T">The interval primal type</typeparam>
+        </member>
+        <member name="M:Z0.Partition.counted``2(Z0.Interval{``1},System.Int32)">
+            <summary>
+            Partitions an interval predicated on a specified partition count
+            </summary>
+            <param name="src">The source interval</param>
+            <param name="count">The number of partitions</param>
+            <typeparam name="T">The interval primal type</typeparam>
+        </member>
+        <member name="M:Z0.Partition.width``1(Z0.Interval{``0},``0)">
+            <summary>
+            Partitions an interval predicated on a specified partition width
+            </summary>
+            <param name="src">The source interval</param>
+            <param name="width">The partition width</param>
+            <typeparam name="T">The interval primal type</typeparam>
+        </member>
+        <member name="M:Z0.Partition.integral``1(Z0.Interval{``0},``0)">
+            <summary>
+            Computes the points that determine a partitioning predicated on partition width
+            </summary>
+            <param name="src">The source interval</param>
+            <param name="width">The partition width</param>
+            <typeparam name="T">The interval primal type</typeparam>
+        </member>
+        <member name="M:Z0.XTend.Permute``1(System.ReadOnlySpan{``0},Z0.Perm)">
+            <summary>
+            Shuffles span content as determined by a permutation
+            </summary>
+            <param name="src">The source span</param>
+            <param name="p">The permutation to apply</param>
+        </member>
+        <member name="M:Z0.XTend.Permute``1(System.Span{``0},Z0.Perm)">
+            <summary>
+            Shuffles span content as determined by a permutation
+            </summary>
+            <param name="src">The source span</param>
+            <param name="p">The permutation to apply</param>
+        </member>
+        <member name="M:Z0.XTend.Swap``1(System.Span{``0},Z0.Swap[])">
+            <summary>
+            Applies a sequence of transpositions to source span elements
+            </summary>
+            <param name="src">The source and target span</param>
+            <param name="i">The first index</param>
+            <param name="j">The second index</param>
+            <typeparam name="T">The element type</typeparam>
+        </member>
+        <member name="M:Z0.XTend.FormatAsPerm``1(System.Span{``0},System.Nullable{System.Int32})">
+            <summary>
+            Formats the terms of a permutation
+            </summary>
+            <param name="terms">The permutation terms</param>
+            <param name="colwidth">The width of each column</param>
+            <typeparam name="T">The term type</typeparam>
+        </member>
+        <member name="M:Z0.XTend.FormatAsPerm``1(System.ReadOnlySpan{``0},System.Nullable{System.Int32})">
+            <summary>
+            Formats the terms of a permutation
+            </summary>
+            <param name="terms">The permutation terms</param>
+            <param name="colwidth">The width of each column</param>
+            <typeparam name="T">The term type</typeparam>
+        </member>
+        <member name="M:Z0.XTend.Format(Z0.Swap[])">
+            <summary>
+            Formats a sequence of successive transpositions (a chain)
+            </summary>
+            <param name="src">The transpositions</param>
+        </member>
+        <member name="M:Z0.XTend.Swap``1(Z0.SpanBlock128{``0},Z0.Swap[])">
+            <summary>
+            Applies a sequence of transpositions to a blocked container
+            </summary>
+            <param name="src">The source and target span</param>
+            <param name="i">The first index</param>
+            <param name="j">The second index</param>
+            <typeparam name="T">The element type</typeparam>
+        </member>
+        <member name="M:Z0.XTend.Swap``1(Z0.SpanBlock256{``0},Z0.Swap[])">
+            <summary>
+            Applies a sequence of transpositions to a blocked container
+            </summary>
+            <param name="src">The source and target span</param>
+            <param name="i">The first index</param>
+            <param name="j">The second index</param>
+            <typeparam name="T">The element type</typeparam>
+        </member>
+        <member name="M:Z0.XTend.Contains``1(Z0.Interval{``0},``0)">
+            <summary>
+            Determines whether an interval contains a specified point
+            </summary>
+            <param name="src">The source interval</param>
+            <param name="point">The point to test</param>
+            <typeparam name="T">The primal numeric type over which the interval is defined</typeparam>
+        </member>
+        <member name="M:Z0.XTend.Contains``1(System.ReadOnlySpan{``0},``0)">
+            <summary>
+            Determines whether any elements of the source match the target
+            </summary>
+            <param name="src">The source values</param>
+            <param name="target">The target value to match</param>
+            <typeparam name="T">The value type</typeparam>
+        </member>
+        <member name="M:Z0.XTend.Identical``1(System.Span{``0},System.Span{``0})">
+            <summary>
+            Returns 1 if the left and right spans contain identical content and 0 otherwise
+            </summary>
+            <param name="xs">The left span</param>
+            <param name="ys">The right span</param>
+            <typeparam name="T">The span cell type</typeparam>
+        </member>
+        <member name="M:Z0.XTend.Identical``1(System.ReadOnlySpan{``0},System.ReadOnlySpan{``0})">
+            <summary>
+            Returns 1 if the left and right spans contain identical content and 0 otherwise
+            </summary>
+            <param name="xs">The left span</param>
+            <param name="ys">The right span</param>
+            <typeparam name="T">The span cell type</typeparam>
+        </member>
+        <member name="M:Z0.XTend.WithEndpoints``2(``0,``1,``1)">
+            <summary>
+            Creates the same kind of interval with alternate endpoints
+            </summary>
+            <param name="left">The left endpoint</param>
+            <param name="right">The right endpoint</param>
+        </member>
+        <member name="M:Z0.BitCalcs.tablesize``1(``0,``0)">
+            <summary>
+            Computes the number of bytes required to cover a grid, predicated on row/col counts
+            </summary>
+            <param name="rows">The number of grid rows</param>
+            <param name="cols">The number of grid columns</param>
+        </member>
+        <member name="M:Z0.BitCalcs.tablecells``1(System.UInt32,System.UInt32)">
+            <summary>
+            Computes the number of cells required to cover a rectangular region predicated on the
+            parametric cell type and supplied row/col dimensions
+            </summary>
+            <param name="rows">The number of rows in the grid</param>
+            <param name="cols">The number of columns in the grid</param>
+            <typeparam name="T">The storage cell type</typeparam>
+        </member>
+        <member name="M:Z0.BitCalcs.tableblocks``1(Z0.N256,System.UInt32,System.UInt32)">
+            <summary>
+            Calculates the number of 256-bit blocks reqired to cover a grid with a specified number of rows/cols
+            </summary>
+            <param name="w">The block width selctor</param>
+            <param name="rows">The row count</param>
+            <param name="cols">The col count</param>
+            <typeparam name="T">The cell type</typeparam>
+        </member>
+        <member name="M:Z0.BitCalcs.tablebits``2(``0,``1)">
+            <summary>
+            Computes the number of bits covered by a rectangular region and predicated on natural dimensions
+            </summary>
+            <param name="rows">The grid row count</param>
+            <param name="cols">The grid col count</param>
+        </member>
+        <member name="M:Z0.BitCalcs.tablecells``3(``0,``1,``2)">
+            <summary>
+            Computes the number of segments required cover a grid as characterized by parametric type information
+            </summary>
+            <param name="m">The row count representative</param>
+            <param name="n">The col count representative</param>
+            <param name="t">The segment type zero representative</param>
+            <typeparam name="M">The row type</typeparam>
+            <typeparam name="N">The col type</typeparam>
+            <typeparam name="T">The storage segment type</typeparam>
+        </member>
+        <member name="M:Z0.BitCalcs.tableblocks``3(Z0.N256,``0,``1,``2)">
+            <summary>
+            Calculates the number of 256-bit blocks reqired to cover a grid with natural dimensions
+            </summary>
+            <param name="w">The block width selctor</param>
+            <param name="m">The row count representative</param>
+            <param name="n">The col count representative</param>
+            <param name="t">The cell type representative</param>
+            <typeparam name="M">The row count type</typeparam>
+            <typeparam name="N">The col count type</typeparam>
+            <typeparam name="T">The cell type</typeparam>
+        </member>
+        <member name="F:Z0.BitPos.CellIndex">
+            <summary>
+            The container-relative 0-based offset of the cell
+            </summary>
+        </member>
+        <member name="F:Z0.BitPos.BitOffset">
+            <summary>
+            The cell-relative offset of the bit
+            </summary>
+        </member>
+        <member name="F:Z0.BitPos.CellWidth">
+            <summary>
+            The bit-width of a cell
+            </summary>
+        </member>
+        <member name="M:Z0.BitPos.FromBitIndex(System.Byte,System.UInt32)">
+            <summary>
+            Defines a bit position predicated on the width of a storage cell and the 0-based linear bit index
+            </summary>
+            <param name="w">The storage cell width</param>
+            <param name="index">The linear bit index</param>
+        </member>
+        <member name="M:Z0.BitPos.FromCellIndex(System.Byte,System.UInt16,System.Byte)">
+            <summary>
+            Defines a bit position predicated on the width and container-relative index of a storage cell and a cell-relative bit offset
+            </summary>
+            <param name="w">The storage cell width</param>
+            <param name="cellindex">The container-relative cell index</param>
+            <param name="offset">The cell-relative bit offset</param>
+        </member>
+        <member name="M:Z0.BitPos.FromCellIndex``1(System.UInt16,System.Byte)">
+            <summary>
+            Defines a bit position predicated on a parametric cell type and a cell-relative bit offset
+            </summary>
+            <param name="cellindex">The container-relative cell index</param>
+            <param name="offset">The cell-relative bit offset</param>
+        </member>
+        <member name="M:Z0.BitPos.FromBitIndex``1(System.UInt32)">
+            <summary>
+            Defines a bit position predicated on a parametric cell type and linear bit index
+            </summary>
+            <param name="index">The linear bit index</param>
+        </member>
+        <member name="M:Z0.BitPos.linear(System.Byte,System.UInt32)">
+            <summary>
+            Computes the cell index of a linear bit index
+            </summary>
+            <param name="w">The width of a storage cell</param>
+            <param name="index">The linear bit index</param>
+        </member>
+        <member name="M:Z0.BitPos.offset(System.Byte,System.UInt32)">
+            <summary>
+            Computes the offset of a linear bit index over storage cells of specified width
+            </summary>
+            <param name="w">The cell width</param>
+            <param name="index">The linear bit index</param>
+        </member>
+        <member name="M:Z0.BitPos.linear(System.Byte,System.UInt32,System.Byte)">
+            <summary>
+            Computes a linear bit index from a cell index and cell-relative offset
+            </summary>
+            <param name="w">The cell width</param>
+            <param name="cellindex">The cell index</param>
+            <param name="offset">The cell-relative offset of the bit</param>
+        </member>
+        <member name="M:Z0.BitPos.delta(Z0.BitPos,Z0.BitPos)">
+            <summary>
+            Computes the order-invariant absolute distance between two positions
+            </summary>
+            <param name="lhs">The left position</param>
+            <param name="rhs">The right position</param>
+        </member>
+        <member name="P:Z0.BitPos.BitIndex">
+            <summary>
+            The linear/absolute bit index of the represented position
+            </summary>
+        </member>
+        <member name="T:Z0.BitPos`1">
+            <summary>
+            Identifies a bit position within a contiguous sequence of T-element values together with their cell index/bit offsets
+            </summary>
+        </member>
+        <member name="F:Z0.BitPos`1.CellIndex">
+            <summary>
+            The container-relative 0-based offset of the segment
+            </summary>
+        </member>
+        <member name="F:Z0.BitPos`1.BitOffset">
+            <summary>
+            The segment-relative offset of the bit
+            </summary>
+        </member>
+        <member name="P:Z0.BitPos`1.Zero">
+            <summary>
+            The zero position
+            </summary>
+        </member>
+        <member name="P:Z0.BitPos`1.CellWidth">
+            <summary>
+            Specifies the number of bits that can be placed in one segment
+            </summary>
+        </member>
+        <member name="M:Z0.BitPos`1.FromLinearIndex(System.UInt32)">
+            <summary>
+            Constructs a bit position from a linear/absolute index
+            </summary>
+            <param name="bitindex">The linear index</param>
+        </member>
+        <member name="T:Z0.DivisorIndex`1">
+            <summary>
+            Associates a contiguous sequence of dividends with their divisor lists
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:Z0.DivisorList`1">
+            <summary>
+            Encapsulates a divisor along with its dividends
+            </summary>
+        </member>
+        <member name="P:Z0.DivisorList`1.Dividend">
+            <summary>
+            The dividend
+            </summary>
+        </member>
+        <member name="P:Z0.DivisorList`1.Divisors">
+            <summary>
+            The values that divide the dividend
+            </summary>
+        </member>
+        <member name="M:Z0.Divisors.DefineList``1(``0,``0[])">
+            <summary>
+            Constructs a divisor list
+            </summary>
+            <param name="dividend">The dividend</param>
+            <param name="divisors">The values that divide the dividend</param>
+            <typeparam name="T">The numeric type</typeparam>
+        </member>
+        <member name="M:Z0.Divisors`1.index(Z0.Interval{`0})">
+            <summary>
+            Computes the divisors for each number in a specified interval
+            </summary>
+            <param name="min">The minimum dividend</param>
+            <param name="max">The maximum dividend</param>
+            <typeparam name="T"></typeparam>
+            <typeparam name="T">The numeric type</typeparam>
+        </member>
+        <member name="M:Z0.Divisors`1.indices(Z0.Interval{`0},`0)">
+            <summary>
+            Computes a divisor index stream
+            </summary>
+            <param name="step"></param>
+            <param name="min"></param>
+            <param name="max"></param>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:Z0.IntervalOps.Length``1(Z0.Interval{``0})">
+            <summary>
+            Computes the length of the interval by finding the magnitude of the difference
+            between its left/right endpoints
+            </summary>
+            <param name="src">The source interval</param>
+            <typeparam name="T">The primal numeric type over which the interval is defined</typeparam>
+        </member>
+        <member name="M:Z0.NatPerm.pack(Z0.NatPerm{Z0.N4})">
+            <summary>
+            Distills a natural permutation on 4 symbols to its canonical literal specification
+            </summary>
+            <param name="src">The source permutation</param>
+        </member>
+        <member name="M:Z0.NatPerm.pack(Z0.NatPerm{Z0.N8})">
+            <summary>
+            Distills a natural permutation on 8 symbols to its canonical literal specification
+            </summary>
+            <param name="src">The source permutation</param>
+        </member>
+        <member name="M:Z0.NatPerm.pack(Z0.NatPerm{Z0.N16})">
+            <summary>
+            Distills a natural permutation on 16 symbols to its canonical literal specification
+            </summary>
+            <param name="src">The source permutation</param>
+        </member>
+        <member name="M:Z0.NatSwap.swap``2(``1,``1,``0)">
+            <summary>
+            Defines a transposition for a permutation of natural length
+            </summary>
+            <param name="i">The first index</param>
+            <param name="j">The second index</param>
+            <typeparam name="N">The length type</typeparam>
+        </member>
+        <member name="M:Z0.NatSwap.swap``1(System.Int32,System.Int32)">
+            <summary>
+            Defines a transposition for a permutation of natural length
+            </summary>
+            <param name="i">The first index</param>
+            <param name="j">The second index</param>
+            <typeparam name="N">The length type</typeparam>
+        </member>
+        <member name="M:Z0.nonzero.create``1(``0)">
+            <summary>
+            Manufactures a numeric proxy defined over the punctured domain T / {0}. If a
+            zero value is supplied, it is replaced with -1
+            </summary>
+            <param name="value">The nonzero value</param>
+            <typeparam name="T">The numeric type</typeparam>
+        </member>
+        <member name="T:Z0.NatPerm`1">
+            <summary>
+            Defines a permutation of natural length N over the natural numbers 0,1,...,N-1
+            </summary>
+        </member>
+        <member name="P:Z0.NatPerm`1.Identity">
+            <summary>
+            The canonical identity permutation of length N
+            </summary>
+        </member>
+        <member name="P:Z0.NatPerm`1.Empty">
+            <summary>
+            The empty permutation of length N
+            </summary>
+        </member>
+        <member name="M:Z0.NatPerm`1.Alloc">
+            <summary>
+            Allocates an empty permutation
+            </summary>
+        </member>
+        <member name="M:Z0.NatPerm`1.op_Implicit(Z0.NatPerm{`0})~Z0.Perm">
+            <summary>
+            Implicitly converts the source to an unsized permutation
+            </summary>
+            <param name="f">The permutation to convert</param>
+        </member>
+        <member name="M:Z0.NatPerm`1.op_Multiply(Z0.NatPerm{`0},Z0.NatPerm{`0})">
+            <summary>
+            Computes the composition h of f and g where h(i) = g(f(i)) for i = 0, ... n
+            </summary>
+            <param name="f">The left permutation</param>
+            <param name="g">The right permutation</param>
+        </member>
+        <member name="M:Z0.NatPerm`1.op_OnesComplement(Z0.NatPerm{`0})">
+            <summary>
+            Computes the inverse of f
+            </summary>
+            <param name="f">The source permutation</param>
+        </member>
+        <member name="M:Z0.NatPerm`1.#ctor(Z0.NatSwap{`0}[])">
+            <summary>
+            Initializes a permutation with the identity followed by a sequence of transpostions
+            </summary>
+            <param name="swaps">The transpositions to apply to the identity</param>
+        </member>
+        <member name="M:Z0.NatPerm`1.#ctor(System.Int32[])">
+            <summary>
+            Initializes a permutation with array content that implicitly defines a permutation
+            </summary>
+            <param name="src">The source array</param>
+        </member>
+        <member name="P:Z0.NatPerm`1.Item(System.Int32)">
+            <summary>
+            Term evaluator/manipulator where
+            </summary>
+        </member>
+        <member name="P:Z0.NatPerm`1.Length">
+            <summary>
+            The permutation length
+            </summary>
+        </member>
+        <member name="M:Z0.NatPerm`1.Swap(Z0.NatSwap{`0}@)">
+            <summary>
+            Effects a transposition (i,j) -> (j, i)
+            </summary>
+            <param name="swap">The transposition to apply</param>
+        </member>
+        <member name="M:Z0.NatPerm`1.Swap(System.Int32,System.Int32)">
+            <summary>
+            Effects a transposition (i,j) -> (j, i)
+            </summary>
+            <param name="swap">The transposition to apply</param>
+        </member>
+        <member name="M:Z0.NatPerm`1.Swap(System.ValueTuple{System.Int32,System.Int32}[])">
+            <summary>
+            Effects a sequence of transpositions
+            </summary>
+            <param name="specs">The transpositions to apply</param>
+        </member>
+        <member name="M:Z0.NatPerm`1.Swap(Z0.NatSwap{`0}[])">
+            <summary>
+            Effects a sequence of transpositions
+            </summary>
+        </member>
+        <member name="M:Z0.NatPerm`1.Replicate">
+            <summary>
+            Clones the permutation
+            </summary>
+        </member>
+        <member name="M:Z0.NatPerm`1.Replicate(Z0.NatSwap{`0}@)">
+            <summary>
+            Clones the permutation and applies the transposition (i,j)
+            </summary>
+            <param name="i">The first term index</param>
+            <param name="j">The second term index</param>
+        </member>
+        <member name="M:Z0.NatPerm`1.Reverse">
+            <summary>
+            Reverses the permutation in-place
+            </summary>
+        </member>
+        <member name="M:Z0.NatPerm`1.Invert">
+            <summary>
+            Computes the inverse permutation t of the current permutation p
+            such that p*t = t*p = I where I denotes the identity permutation
+            </summary>
+        </member>
+        <member name="M:Z0.NatPerm`1.Compose(Z0.NatPerm{`0})">
+            <summary>
+            Creates a new permutation p via composition, p[i] = g(f(i)) for i = 0, ... n
+            where f denotes the current permutation
+            </summary>
+            <param name="f">The left permutation</param>
+            <param name="g">The right permutation</param>
+        </member>
+        <member name="M:Z0.NatPerm`1.Inc">
+            <summary>
+            Applies a modular increment to the permutation in-place
+            </summary>
+        </member>
+        <member name="M:Z0.NatPerm`1.Dec">
+            <summary>
+            Applies a modular decrement to the permutation in-place
+            </summary>
+        </member>
+        <member name="M:Z0.NatPerm`1.Cycle(System.Int32)">
+            <summary>
+            Computes a permutation cycle originating at a specified point
+            </summary>
+            <param name="start">The domain point at which evaluation will begin</param>
+        </member>
+        <member name="M:Z0.NatPerm`1.Format(System.Nullable{System.Int32})">
+            <summary>
+            Formats a permutation as a 2-column matrix
+            </summary>
+            <param name="src">The source permutation</param>
+            <param name="colwidth">The width of the matrix columns, if specified</param>
+        </member>
+        <member name="T:Z0.NatPerm`2">
+            <summary>
+            Defines a permutation of natural length N over the natural numbers 0,1,...,N-1
+            </summary>
+        </member>
+        <member name="P:Z0.NatPerm`2.Identity">
+            <summary>
+            The canonical identity permutation of length N
+            </summary>
+        </member>
+        <member name="P:Z0.NatPerm`2.Empty">
+            <summary>
+            The empty permutation of length N
+            </summary>
+        </member>
+        <member name="M:Z0.NatPerm`2.Alloc">
+            <summary>
+            Allocates an empty permutation
+            </summary>
+        </member>
+        <member name="M:Z0.NatPerm`2.op_Implicit(Z0.NatPerm{`0,`1})~Z0.Perm{`1}">
+            <summary>
+            Implicitly converts the source to an unsized permutation
+            </summary>
+            <param name="f">The permutation to convert</param>
+        </member>
+        <member name="M:Z0.NatPerm`2.op_Multiply(Z0.NatPerm{`0,`1},Z0.NatPerm{`0,`1})">
+            <summary>
+            Computes the composition h of f and g where h(i) = g(f(i)) for i = 0, ... n
+            </summary>
+            <param name="f">The left permutation</param>
+            <param name="g">The right permutation</param>
+        </member>
+        <member name="M:Z0.NatPerm`2.op_OnesComplement(Z0.NatPerm{`0,`1})">
+            <summary>
+            Computes the inverse of f
+            </summary>
+            <param name="f">The source permutation</param>
+        </member>
+        <member name="M:Z0.NatPerm`2.#ctor(Z0.NatSwap{`0,`1}[])">
+            <summary>
+            Initializes a permutation with the identity followed by a sequence of transpostions
+            </summary>
+            <param name="swaps">The transpositions to apply to the identity</param>
+        </member>
+        <member name="M:Z0.NatPerm`2.#ctor(`1[])">
+            <summary>
+            Initializes a permutation with array content that implicitly defines a permutation
+            </summary>
+            <param name="src">The source array</param>
+        </member>
+        <member name="P:Z0.NatPerm`2.Item(System.Int32)">
+            <summary>
+            Term evaluator/manipulator
+            </summary>
+        </member>
+        <member name="P:Z0.NatPerm`2.Item(`1)">
+            <summary>
+            Term evaluator/manipulator
+            </summary>
+        </member>
+        <member name="P:Z0.NatPerm`2.Length">
+            <summary>
+            The permutation length
+            </summary>
+        </member>
+        <member name="M:Z0.NatPerm`2.Swap(Z0.NatSwap{`0}@)">
+            <summary>
+            Effects a transposition (i,j) -> (j, i)
+            </summary>
+            <param name="swap">The transposition to apply</param>
+        </member>
+        <member name="M:Z0.NatPerm`2.Swap(System.Int32,System.Int32)">
+            <summary>
+            Effects a transposition (i,j) -> (j, i)
+            </summary>
+            <param name="swap">The transposition to apply</param>
+        </member>
+        <member name="M:Z0.NatPerm`2.Swap(System.ValueTuple{System.Int32,System.Int32}[])">
+            <summary>
+            Effects a sequence of transpositions
+            </summary>
+            <param name="specs">The transpositions to apply</param>
+        </member>
+        <member name="M:Z0.NatPerm`2.Swap(Z0.NatSwap{`0}[])">
+            <summary>
+            Effects a sequence of transpositions
+            </summary>
+        </member>
+        <member name="M:Z0.NatPerm`2.Swap(Z0.NatSwap{`0,`1}[])">
+            <summary>
+            Effects a sequence of transpositions
+            </summary>
+        </member>
+        <member name="M:Z0.NatPerm`2.Replicate">
+            <summary>
+            Clones the permutation
+            </summary>
+        </member>
+        <member name="M:Z0.NatPerm`2.Replicate(Z0.NatSwap{`0}@)">
+            <summary>
+            Clones the permutation and applies the transposition (i,j)
+            </summary>
+            <param name="i">The first term index</param>
+            <param name="j">The second term index</param>
+        </member>
+        <member name="M:Z0.NatPerm`2.Reverse">
+            <summary>
+            Reverses the permutation in-place
+            </summary>
+        </member>
+        <member name="M:Z0.NatPerm`2.Invert">
+            <summary>
+            Computes the inverse permutation t of the current permutation p
+            such that p*t = t*p = I where I denotes the identity permutation
+            </summary>
+        </member>
+        <member name="M:Z0.NatPerm`2.Compose(Z0.NatPerm{`0,`1})">
+            <summary>
+            Creates a new permutation p via composition, p[i] = g(f(i)) for i = 0, ... n
+            where f denotes the current permutation
+            </summary>
+            <param name="f">The left permutation</param>
+            <param name="g">The right permutation</param>
+        </member>
+        <member name="M:Z0.NatPerm`2.Inc">
+            <summary>
+            Applies a modular increment to the permutation in-place
+            </summary>
+        </member>
+        <member name="M:Z0.NatPerm`2.Dec">
+            <summary>
+            Applies a modular decrement to the permutation in-place
+            </summary>
+        </member>
+        <member name="M:Z0.NatPerm`2.Cycle(System.Int32)">
+            <summary>
+            Computes a permutation cycle originating at a specified point
+            </summary>
+            <param name="start">The domain point at which evaluation will begin</param>
+        </member>
+        <member name="M:Z0.NatPerm`2.Cycle(`1)">
+            <summary>
+            Computes a permutation cycle originating at a specified point
+            </summary>
+            <param name="start">The domain point at which evaluation will begin</param>
+        </member>
+        <member name="M:Z0.NatPerm`2.Format(System.Nullable{System.Int32})">
+            <summary>
+            Formats a permutation as a 2-column matrix
+            </summary>
+            <param name="src">The source permutation</param>
+            <param name="colwidth">The width of the matrix columns, if specified</param>
+        </member>
+        <member name="T:Z0.NatSwap`1">
+            <summary>
+            Defines a transposition in the context of a permutation of natural length
+            </summary>
+        </member>
+        <member name="F:Z0.NatSwap`1.i">
+            <summary>
+            The first index
+            </summary>
+        </member>
+        <member name="F:Z0.NatSwap`1.j">
+            <summary>
+            The second index
+            </summary>
+        </member>
+        <member name="P:Z0.NatSwap`1.Empty">
+            <summary>
+            The empty element
+            </summary>
+        </member>
+        <member name="P:Z0.NatSwap`1.Zero">
+            <summary>
+            The monodial zero
+            </summary>
+        </member>
+        <member name="M:Z0.NatSwap`1.Chain(Z0.NatSwap{`0},System.Int32)">
+            <summary>
+            Creates a chain of transpositions, that includes the initial transposition
+            </summary>
+            <param name="s0">The leading transposition</param>
+            <param name="len">The length of the chain</param>
+        </member>
+        <member name="M:Z0.NatSwap`1.Parse(System.String)">
+            <summary>
+            Parses a transposition in canonical form (i j), if possible; otherwise
+            returns the empty transposition
+            </summary>
+            <param name="src">The source text</param>
+        </member>
+        <member name="M:Z0.NatSwap`1.Format">
+            <summary>
+            Renders the tranposition as text in canonical form
+            </summary>
+        </member>
+        <member name="M:Z0.NatSwap`1.Equals(Z0.NatSwap{`0})">
+            <summary>
+            Determines whether this transposition is identical to another.
+            Note that the order of indices is immaterial
+            </summary>
+            <param name="rhs">The right transposition</param>
+        </member>
+        <member name="M:Z0.NatSwap`1.Replicate">
+            <summary>
+            Creates a copy
+            </summary>
+        </member>
+        <member name="T:Z0.NatSwap`2">
+            <summary>
+            Defines a transposition in the context of a permutation of natural length
+            </summary>
+        </member>
+        <member name="F:Z0.NatSwap`2.i">
+            <summary>
+            The first index
+            </summary>
+        </member>
+        <member name="F:Z0.NatSwap`2.j">
+            <summary>
+            The second index
+            </summary>
+        </member>
+        <member name="P:Z0.NatSwap`2.Zero">
+            <summary>
+            The monodial zero
+            </summary>
+        </member>
+        <member name="M:Z0.NatSwap`2.Chain(Z0.NatSwap{`0,`1},System.Int32)">
+            <summary>
+            Creates a chain of transpositions, that includes the initial transposition
+            </summary>
+            <param name="t0">The leading transposition</param>
+            <param name="len">The length of the chain</param>
+        </member>
+        <member name="M:Z0.NatSwap`2.Parse(System.String)">
+            <summary>
+            Parses a transposition in canonical form (i j), if possible; otherwise
+            returns the empty transposition
+            </summary>
+            <param name="src">The source text</param>
+        </member>
+        <member name="M:Z0.NatSwap`2.FromTuple(System.ValueTuple{`1,`1})">
+            <summary>
+            Converts a tuple representation to a swap
+            </summary>
+            <param name="i">The first term index</param>
+            <param name="j">The second term index</param>
+        </member>
+        <member name="M:Z0.NatSwap`2.op_Implicit(Z0.NatSwap{`0,`1})~Z0.Swap{`1}">
+            <summary>
+            Implicitly converts the transpostion to its unsized representation
+            </summary>
+            <param name="i">The first term index</param>
+            <param name="j">The second term index</param>
+        </member>
+        <member name="M:Z0.NatSwap`2.op_Implicit(Z0.NatSwap{`0,`1})~System.ValueTuple{`1,`1}">
+            <summary>
+            Implicitly converts the transpostion to its canonical tuple representation
+            </summary>
+            <param name="i">The first term index</param>
+            <param name="j">The second term index</param>
+        </member>
+        <member name="M:Z0.NatSwap`2.Format">
+            <summary>
+            Renders the tranposition as text in canonical form
+            </summary>
+        </member>
+        <member name="M:Z0.NatSwap`2.Equals(Z0.NatSwap{`0,`1})">
+            <summary>
+            Determines whether this transposition is identical to another.
+            Note that the order of indices is immaterial
+            </summary>
+            <param name="rhs">The right transposition</param>
+        </member>
+        <member name="M:Z0.NatSwap`2.ToTuple">
+            <summary>
+            Converts the transpostion to its canonical tuple representation
+            </summary>
+            <param name="i">The first term index</param>
+            <param name="j">The second term index</param>
+        </member>
+        <member name="M:Z0.NatSwap`2.Replicate">
+            <summary>
+            Creates a copy
+            </summary>
+        </member>
+        <member name="T:Z0.Perm">
+            <summary>
+            Defines a permutation over the integers [0, 1, ..., n - 1] where n is the permutation length
+            </summary>
+        </member>
+        <member name="F:Z0.Perm.terms">
+            <summary>
+            Defines the permutation (0 -> terms[0], 1 -> terms[1], ..., n - 1 -> terms[n-1])
+            where n is the length of the array
+            </summary>
+        </member>
+        <member name="M:Z0.Perm.apply``1(Z0.Perm,System.ReadOnlySpan{``0},System.Span{``0})">
+            <summary>
+            Shuffles span content as determined by a permutation
+            </summary>
+            <param name="src">The source span</param>
+            <param name="p">The permutation to apply</param>
+        </member>
+        <member name="M:Z0.Perm.apply``1(System.Span{``0},Z0.Swap[])">
+            <summary>
+            Applies a sequence of transpositions to source span elements
+            </summary>
+            <param name="src">The source and target span</param>
+            <param name="i">The first index</param>
+            <param name="j">The second index</param>
+            <typeparam name="T">The element type</typeparam>
+        </member>
+        <member name="M:Z0.Perm.Build``1(``0,System.ValueTuple{``0,``0}[])">
+            <summary>
+            Creates a generic permutation by application of a sequence of transpositions to the identity permutation
+            </summary>
+            <param name="n">The permutation length</param>
+            <param name="swaps">Pairs of permutation indices (i,j) to be transposed</param>
+            <typeparam name="T">The integral type</typeparam>
+        </member>
+        <member name="M:Z0.Perm.Build``1(``0,Z0.Swap{``0}[])">
+            <summary>
+            Creates a generic permutation by application of a sequence of transpositions to the identity permutation
+            </summary>
+            <param name="n">The permutation length</param>
+            <param name="swaps">Pairs of permutation indices (i,j) to be transposed</param>
+            <typeparam name="T">The integral type</typeparam>
+        </member>
+        <member name="M:Z0.Perm.Alloc(System.Int32)">
+            <summary>
+            Allocates an empty permutation
+            </summary>
+        </member>
+        <member name="M:Z0.Perm.Alloc``1(System.UInt32)">
+            <summary>
+            Allocates an empty permutation of specified length
+            </summary>
+        </member>
+        <member name="M:Z0.Perm.Identity(System.Int32)">
+            <summary>
+            Defines an untyped identity permutation
+            </summary>
+            <param name="n">The permutation length</param>
+        </member>
+        <member name="M:Z0.Perm.Identity(System.UInt32)">
+            <summary>
+            Defines an untyped identity permutation
+            </summary>
+            <param name="n">The permutation length</param>
+        </member>
+        <member name="M:Z0.Perm.identity``1(``0)">
+            <summary>
+            Defines an identity permutation on n symbols
+            </summary>
+            <param name="n">The permutation length</param>
+        </member>
+        <member name="M:Z0.Perm.Init(System.ReadOnlySpan{System.Int32})">
+            <summary>
+            Defines an untyped permutation determined by values in a source span
+            </summary>
+            <param name="src">The source span</param>
+        </member>
+        <member name="M:Z0.Perm.Init``1(System.ReadOnlySpan{``0})">
+            <summary>
+            Creates a permutation from the elements in a readonly span
+            </summary>
+            <param name="src">The source span</param>
+            <typeparam name="T">The integral type</typeparam>
+        </member>
+        <member name="M:Z0.Perm.Init``1(``0,System.ValueTuple{``0,``0}[])">
+            <summary>
+            Initializes permutation with the identity followed by a sequence of transpostions
+            </summary>
+            <param name="n">The length of the permutation</param>
+            <param name="swaps">The transpositions applied to the identity</param>
+        </member>
+        <member name="M:Z0.Perm.Init``1(``0,Z0.Swap{``0}[])">
+            <summary>
+             Initializes permutation with the identity followed by a sequence of transpostions
+            </summary>
+            <param name="n">The length of the permutation</param>
+            <param name="swaps">The transpositions applied to the identity</param>
+        </member>
+        <member name="M:Z0.Perm.Init``1(System.Span{``0})">
+            <summary>
+            Creates a permutation from the elements in a span
+            </summary>
+            <param name="src">The source span</param>
+            <typeparam name="T">The integral type</typeparam>
+        </member>
+        <member name="M:Z0.Perm.Init``1(``0[])">
+            <summary>
+            Creates a permutation from the elements in a parameter array
+            </summary>
+            <param name="src">The source array</param>
+            <typeparam name="T">The integral type</typeparam>
+        </member>
+        <member name="M:Z0.Perm.Identity``1(``0)">
+            <summary>
+            Defines an identity permutation on n symbols
+            </summary>
+            <param name="n">The permutation length</param>
+        </member>
+        <member name="M:Z0.Perm.op_Multiply(Z0.Perm,Z0.Perm)">
+            <summary>
+            Computes the composition h of f and g where f and g have common length n and
+            h(i) = g(f(i)) for i = 0, ... n-1
+            </summary>
+            <param name="f">The left permutation</param>
+            <param name="g">The right permutation</param>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Z0.Perm.#ctor(System.Int32,System.ValueTuple{System.Int32,System.Int32}[])" -->
+        <member name="P:Z0.Perm.Item(System.Int32)">
+            <summary>
+            Term accessor where the term index is in the inclusive range [0, N-1]
+            </summary>
+        </member>
+        <member name="P:Z0.Perm.Item(System.UInt32)">
+            <summary>
+            Term accessor where the term index is in the inclusive range [0, N-1]
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Z0.Perm.Swap(System.Int32,System.Int32)" -->
+        <member name="M:Z0.Perm.Swap(System.ValueTuple{System.Int32,System.Int32}[])">
+            <summary>
+            Effects a sequence of in-place transpositions
+            </summary>
+        </member>
+        <member name="M:Z0.Perm.Apply(Z0.Swap[])">
+            <summary>
+            Effects a sequence of in-place transpositions
+            </summary>
+        </member>
+        <member name="P:Z0.Perm.Length">
+            <summary>
+            The length of the permutation
+            </summary>
+        </member>
+        <member name="M:Z0.Perm.Replicate">
+            <summary>
+            Clones the permutation
+            </summary>
+        </member>
+        <member name="M:Z0.Perm.Compose(Z0.Perm)">
+            <summary>
+            Creates a new permutation p via composition, p[i] = g(f(i)) for i = 0, ... n
+            where f denotes the current permutation
+            </summary>
+            <param name="f">The left permutation</param>
+            <param name="g">The right permutation</param>
+        </member>
+        <member name="M:Z0.Perm.Reverse">
+            <summary>
+            Reverses the permutation in-place
+            </summary>
+        </member>
+        <member name="M:Z0.Perm.Invert">
+            <summary>
+            Computes the inverse permutation t of the current permutation p
+            such that p*t = t*p = I where I denotes the identity permutation
+            </summary>
+        </member>
+        <member name="M:Z0.Perm.Inc">
+            <summary>
+            Applies a modular increment to the permutation in-place
+            </summary>
+        </member>
+        <member name="M:Z0.Perm.Dec">
+            <summary>
+            Applies a modular decrement to the permutation in-place
+            </summary>
+        </member>
+        <member name="M:Z0.Perm.Convert``1">
+            <summary>
+            Converts the permutation to a generic permutation over the specified target type
+            </summary>
+            <typeparam name="T">The target type</typeparam>
+        </member>
+        <member name="M:Z0.Perm.Cycle(System.Int32)">
+            <summary>
+            Computes a permutation cycle originating at a specified point
+            </summary>
+            <param name="start">The domain point at which evaluation will begin</param>
+        </member>
+        <member name="M:Z0.Perm.Format(System.Nullable{System.Int32})">
+            <summary>
+            Formats a permutation as a 2-column matrix
+            </summary>
+            <param name="src">The source permutation</param>
+            <param name="colwidth">The width of the matrix columns, if specified</param>
+        </member>
+        <member name="T:Z0.PermCycle`1">
+            <summary>
+            Describes cycle in a perutation
+            </summary>
+        </member>
+        <member name="F:Z0.PermCycle`1.Terms">
+            <summary>
+            The terms that define the cycle
+            </summary>
+        </member>
+        <member name="T:Z0.Perm`1">
+            <summary>
+            Defines a permutation over an integral type based at 0, [0, 1, ..., n - 1] where n is the permutation length
+            </summary>
+            <typeparam name="T">The integral type</typeparam>
+        </member>
+        <member name="F:Z0.Perm`1.terms">
+            <summary>
+            Defines the permutation (0 -> terms[0], 1 -> terms[1], ..., n - 1 -> terms[n-1]) where n is the length of the array
+            </summary>
+        </member>
+        <member name="M:Z0.Perm`1.From(System.ReadOnlySpan{`0})">
+            <summary>
+            Defines an untyped permutation determined by values in a source span
+            </summary>
+            <param name="src">The source span</param>
+        </member>
+        <member name="M:Z0.Perm`1.op_Implicit(`0)~Z0.Perm{`0}">
+            <summary>
+            Implicitly converts an integral value n into an identity permutation of length n
+            </summary>
+            <param name="n">The permutation length</param>
+        </member>
+        <member name="M:Z0.Perm`1.op_Multiply(Z0.Perm{`0}@,Z0.Perm{`0}@)">
+            <summary>
+            Computes the composition h of f and g where f and g have common length n and h(i) = g(f(i)) for i = 0, ... n-1
+            </summary>
+            <param name="f">The left permutation</param>
+            <param name="g">The right permutation</param>
+        </member>
+        <member name="M:Z0.Perm`1.#ctor(`0,System.ValueTuple{`0,`0}[])">
+            <summary>
+            Initializes permutation with the identity followed by a sequence of transpostions
+            </summary>
+            <param name="n">The length of the permutation</param>
+            <param name="swaps">The transpositions applied to the identity</param>
+        </member>
+        <member name="M:Z0.Perm`1.#ctor(`0,Z0.Swap{`0}[])">
+            <summary>
+             Initializes permutation with the identity followed by a sequence of transpostions
+            </summary>
+            <param name="n">The length of the permutation</param>
+            <param name="swaps">The transpositions applied to the identity</param>
+        </member>
+        <member name="P:Z0.Perm`1.Item(System.Int32)">
+            <summary>
+            Term accessor where the term index is in the inclusive range [0, N-1]
+            </summary>
+        </member>
+        <member name="P:Z0.Perm`1.Item(`0)">
+            <summary>
+            Term accessor where the term index is in the inclusive range [0, N-1]
+            </summary>
+        </member>
+        <member name="M:Z0.Perm`1.Swap(System.ValueTuple{`0,`0}[])">
+            <summary>
+            Effects a sequence of in-place transpositions
+            </summary>
+        </member>
+        <member name="M:Z0.Perm`1.Swap(System.ValueTuple{System.Int32,System.Int32}[])">
+            <summary>
+            Effects a sequence of in-place transpositions
+            </summary>
+        </member>
+        <member name="M:Z0.Perm`1.Swap(Z0.Swap[])">
+            <summary>
+            Effects a sequence of in-place transpositions
+            </summary>
+        </member>
+        <member name="M:Z0.Perm`1.Swap(Z0.Swap{`0}[])">
+            <summary>
+            Effects a sequence of in-place transpositions
+            </summary>
+        </member>
+        <member name="P:Z0.Perm`1.Length">
+            <summary>
+            The length of the permutation
+            </summary>
+        </member>
+        <member name="M:Z0.Perm`1.Inc">
+            <summary>
+            Applies a modular increment to the permutation in-place
+            </summary>
+        </member>
+        <member name="M:Z0.Perm`1.Dec">
+            <summary>
+            Applies a modular decrement to the permutation in-place
+            </summary>
+        </member>
+        <member name="M:Z0.Perm`1.Replicate">
+            <summary>
+            Clones the permutation
+            </summary>
+        </member>
+        <member name="M:Z0.Perm`1.Compose(Z0.Perm{`0}@)">
+            <summary>
+            Creates a new permutation p via composition, p[i] = g(f(i)) for i = 0, ... n where f denotes the current permutation
+            </summary>
+            <param name="f">The left permutation</param>
+            <param name="g">The right permutation</param>
+        </member>
+        <member name="M:Z0.Perm`1.Reverse">
+            <summary>
+            Reverses the permutation in-place
+            </summary>
+        </member>
+        <member name="M:Z0.Perm`1.Invert">
+            <summary>
+            Computes the inverse permutation t of the current permutation p such that p*t = t*p = I where I denotes the identity permutation
+            </summary>
+        </member>
+        <member name="M:Z0.Perm`1.Cycle(`0)">
+            <summary>
+            Computes a permutation cycle originating at a specified point
+            </summary>
+            <param name="start">The domain point at which evaluation will begin</param>
+        </member>
+        <member name="T:Z0.PermTerm`1">
+            <summary>
+            Describes an individual term of a permutation p: the point of evaluation i and its image p(i)
+            </summary>
+        </member>
+        <member name="F:Z0.PermTerm`1.Source">
+            <summary>
+            The point at which the permutation is evaluated
+            </summary>
+        </member>
+        <member name="F:Z0.PermTerm`1.Target">
+            <summary>
+            The result of evaluating the permutation over the source
+            </summary>
+        </member>
+        <member name="T:Z0.Swap`1">
+            <summary>
+            Defines a transposition, i.e. a specification for the transposition
+            of two elements, denoted by an ordered pair of space-delimited indices (i j)
+            </summary>
+        </member>
+        <member name="F:Z0.Swap`1.i">
+            <summary>
+            The first index
+            </summary>
+        </member>
+        <member name="F:Z0.Swap`1.j">
+            <summary>
+            The second index
+            </summary>
+        </member>
+        <member name="P:Z0.Swap`1.Zero">
+            <summary>
+            The monodial zero
+            </summary>
+        </member>
+        <member name="M:Z0.Swap`1.Chain(Z0.Swap{`0},System.Int32)">
+            <summary>
+            Creates a chain of transpositions, that includes the initial transposition
+            </summary>
+            <param name="s0">The leading transposition</param>
+            <param name="len">The length of the chain</param>
+        </member>
+        <member name="M:Z0.Swap`1.Format">
+            <summary>
+            Renders the tranposition as text in canonical form
+            </summary>
+        </member>
+        <member name="M:Z0.Swap`1.Equals(Z0.Swap{`0})">
+            <summary>
+            Determines whether this transposition is identical to another.
+            Note that the order of indices is immaterial
+            </summary>
+            <param name="rhs">The right transposition</param>
+        </member>
+        <member name="M:Z0.Swap`1.Replicate">
+            <summary>
+            Creates a copy
+            </summary>
+        </member>
+        <member name="T:Z0.Monomial`1">
+            <summary>
+            Represents a one-term polynomial or component of a polynomial with more than one term
+            </summary>
+        </member>
+        <member name="F:Z0.Monomial`1.Scalar">
+            <summary>
+            The monomial coefficient
+            </summary>
+        </member>
+        <member name="F:Z0.Monomial`1.Exp">
+            <summary>
+            The monomial exponent/order
+            </summary>
+        </member>
+        <member name="M:Z0.Monomial`1.Zero(System.UInt32)">
+            <summary>
+            Produces the zero monomial of a given order
+            </summary>
+            <param name="exp">The monomial exponent/order</param>
+        </member>
+        <member name="P:Z0.Monomial`1.Nonzero">
+            <summary>
+            Specifies whether the coeifficient, and thus the monomial, is nonzero
+            </summary>
+        </member>
+        <member name="M:Z0.Monomial`1.Eval(`0)">
+            <summary>
+            Evaluates the monomial at a specified point
+            </summary>
+            <param name="x">The point of evaluation</param>
+        </member>
+        <member name="T:Z0.Monomial`2">
+            <summary>
+            Represents a one-term polynomial or component of a polynomial with more than one term
+            where the scalar coefficient has modulus M
+            </summary>
+        </member>
+        <member name="F:Z0.Monomial`2.Scalar">
+            <summary>
+            The monomial coefficient
+            </summary>
+        </member>
+        <member name="F:Z0.Monomial`2.Exp">
+            <summary>
+            The monomial exponent/order
+            </summary>
+        </member>
+        <member name="P:Z0.Monomial`2.Nonzero">
+            <summary>
+            Specifies whether the coeifficient, and thus the monomial, is nonzero
+            </summary>
+        </member>
+        <member name="T:Z0.Polynomial`1">
+            <summary>
+            Represents a polynomial
+            </summary>
+            <typeparam name="M">The coefficient modulus</typeparam>
+            <typeparam name="N">The polynomial degree</typeparam>
+            <typeparam name="T">The primal coefficient type</typeparam>
+        </member>
+        <member name="F:Z0.Polynomial`1.Zero">
+            <summary>
+            The canonical zero polynomial - with one term of order 0 with coefficient 0
+            </summary>
+        </member>
+        <member name="M:Z0.Polynomial`1.Define(System.ValueTuple{`0,System.UInt32}[])">
+            <summary>
+            Constructs a polynomial from a sparse term sequence of scalar coefficients  paired with the
+            corresponding term exponent value
+            </summary>
+        </member>
+        <member name="M:Z0.Polynomial`1.#ctor(Z0.Monomial{`0}[])">
+            <summary>
+            Initializes a polynomial from a dense sequence of monomials
+            </summary>
+        </member>
+        <member name="P:Z0.Polynomial`1.Degree">
+            <summary>
+            Specifies the degree of the polynomial as determined by the value of
+            the exponent of greatest order
+            </summary>
+        </member>
+        <member name="P:Z0.Polynomial`1.Terms">
+            <summary>
+            The dense sequence of terms that define the polynomial
+            </summary>
+        </member>
+        <member name="P:Z0.Polynomial`1.Item(System.UInt32)">
+            <summary>
+            Selects the term with the specified order if it exists; otherwise, returns the zero monomial
+            </summary>
+        </member>
+        <member name="P:Z0.Polynomial`1.Item(System.Int32)">
+            <summary>
+            Selects the term with the specified order if it exists; otherwise, returns the zero monomial
+            </summary>
+        </member>
+        <member name="P:Z0.Polynomial`1.Nonzero">
+            <summary>
+            Specifies whether some term has a nonzero coeficient value
+            </summary>
+        </member>
+        <member name="M:Z0.Polynomial`1.Term(System.UInt32)">
+            <summary>
+            Selects the term with the specified order if it exists;
+            otherwise, returns the zero monomial
+            </summary>
+        </member>
+        <member name="M:Z0.Polynomial`1.Eval(`0)">
+            <summary>
+            Evaluates the polynomial at a specified point
+            </summary>
+            <param name="x">The value at which to evaluate the polynomial</param>
+        </member>
+        <member name="M:Z0.Polynomial`1.Format(System.Nullable{System.Char})">
+            <summary>
+            Formats the polynomial in canonical form
+            </summary>
+            <param name="variable">The name of the placeholder variable</param>
+        </member>
+        <member name="T:Z0.Polynomial`3">
+            <summary>
+            Represents a base-M polynomial of degree N over values of primal type T
+            </summary>
+            <typeparam name="M">The coefficient modulus</typeparam>
+            <typeparam name="N">The polynomial degree</typeparam>
+            <typeparam name="T">The primal coefficient type</typeparam>
+        </member>
+        <member name="F:Z0.Polynomial`3.Zero">
+            <summary>
+            The zero polynomial of degree N
+            </summary>
+        </member>
+        <member name="P:Z0.Polynomial`3.Item(System.UInt32)">
+            <summary>
+            Selects the term with the specified order if it exists;
+            otherwise, returns the zero monomial
+            </summary>
+        </member>
+        <member name="M:Z0.Polynomial`3.Term(System.UInt32)">
+            <summary>
+            Selects the term with the specified order if it exists;
+            otherwise, returns the zero monomial
+            </summary>
+        </member>
+        <member name="P:Z0.Block256`2.Length">
+            <summary>
+            Specifies the length of the vector, i.e. its component count
+            </summary>
+        </member>
+        <member name="M:Z0.Block256`2.op_Implicit(Z0.Block256{`0,`1})~Z0.NatSpan{`0,`1}">
+            <summary>
+            Vec => Slice
+            </summary>
+            <param name="src">The source vector</param>
+            <typeparam name="N">The natural length</typeparam>
+            <typeparam name="T">THe component type</typeparam>
+        </member>
+        <member name="M:Z0.Block256`2.op_Implicit(Z0.NatSpan{`0,`1})~Z0.Block256{`0,`1}">
+            <summary>
+            Slice => Vec
+            </summary>
+            <param name="src">The source vector</param>
+            <typeparam name="N">The natural length</typeparam>
+            <typeparam name="T">THe component type</typeparam>
+        </member>
+        <member name="M:Z0.Block256`2.Map``1(System.Func{`1,``0})">
+            <summary>
+            Projects the source vector onto a target vector of the same length
+            via a supplied transformation
+            </summary>
+            <param name="f">The transformation function</param>
+            <typeparam name="U">The target vector element type</typeparam>
+        </member>
+        <member name="M:Z0.Block256`2.Map``1(System.Func{`1,``0},Z0.Block256{`0,``0}@)">
+            <summary>
+            Projects the source vector onto a caller-supplied target vector of the same length
+            via a supplied transformation
+            </summary>
+            <param name="f">The transformation function</param>
+            <typeparam name="U">The target vector element type</typeparam>
+        </member>
+        <member name="T:Z0.RowVector`1">
+            <summary>
+            Defines a vector over cells of unmanaged type
+            </summary>
+        </member>
+        <member name="M:Z0.RowVector`1.op_Implicit(`0[])~Z0.RowVector{`0}">
+            <summary>
+            Implicitly converts an array to a vector
+            </summary>
+            <param name="src">The source array</param>
+            <typeparam name="T">The component type</typeparam>
+        </member>
+        <member name="M:Z0.RowVector`1.op_Implicit(Z0.RowVector{`0})~System.Span{`0}">
+            <summary>
+            Implicitly reveals a vector's underlying memory span
+            </summary>
+            <param name="src">The source vector</param>
+            <typeparam name="T">The component type</typeparam>
+        </member>
+        <member name="M:Z0.RowVector`1.op_Implicit(Z0.RowVector{`0})~System.ReadOnlySpan{`0}">
+            <summary>
+            Implicitly provies a readonly-view of a vector's underlying data
+            </summary>
+            <param name="src">The source vector</param>
+            <typeparam name="T">The component type</typeparam>
+        </member>
+        <member name="M:Z0.RowVector`1.op_BitwiseAnd(Z0.RowVector{`0},Z0.RowVector{`0})">
+            <summary>
+            Calculates the scalar product between the operands
+            </summary>
+            <param name="lhs">The left vector</param>
+            <param name="rhs">The right vector</param>
+        </member>
+        <member name="M:Z0.RowVector`1.op_Equality(Z0.RowVector{`0},Z0.RowVector{`0})">
+            <summary>
+            Deems vectors are equal if they have the same number of components
+            and corresponding components have identical content
+            </summary>
+            <param name="lhs">The left vector</param>
+            <param name="rhs">Teh right vector</param>
+        </member>
+        <member name="M:Z0.RowVector`1.#ctor(`0[])">
+            <summary>
+            Initializes a vector from array content
+            </summary>
+            <param name="src">The source array</param>
+        </member>
+        <member name="P:Z0.RowVector`1.Item(System.Int32)">
+            <summary>
+            Queries/manipulates component values
+            </summary>
+        </member>
+        <member name="P:Z0.RowVector`1.Data">
+            <summary>
+            The data wrapped by the vector
+            </summary>
+        </member>
+        <member name="P:Z0.RowVector`1.Length">
+            <summary>
+            The count of vector components, otherwise known as its dimension
+            </summary>
+        </member>
+        <member name="M:Z0.RowVector`1.Format">
+            <summary>
+            Formats components as a list
+            </summary>
+            <param name="sep">The component delimiter</param>
+        </member>
+        <member name="M:Z0.RowVector`1.CopyTo(System.Span{`0})">
+            <summary>
+            Copies vector content into a caller-provided span
+            </summary>
+            <param name="dst">The target span</param>
+        </member>
+        <member name="P:Z0.RowVector`2.Dim">
+            <summary>
+            The vector's dimension
+            </summary>
+        </member>
+        <member name="P:Z0.RowVector`2.Zero">
+            <summary>
+            The zero vector
+            </summary>
+        </member>
+        <member name="M:Z0.RowVector`2.#ctor(`1[])">
+            <summary>
+            Initializes a vector with an array
+            </summary>
+            <param name="src">The data source</param>
+        </member>
+        <member name="P:Z0.RowVector`2.Item(System.Int32)">
+            <summary>
+            Queries/manipulates component values
+            </summary>
+        </member>
+        <member name="P:Z0.RowVector`2.Data">
+            <summary>
+            The vector data
+            </summary>
+        </member>
+        <member name="P:Z0.RowVector`2.Length">
+            <summary>
+            The count of vector components, otherwise known as its dimension
+            </summary>
+        </member>
+        <member name="M:Z0.RowVector`2.Map``1(System.Func{`1,``0})">
+            <summary>
+            Projects the source vector onto a target vector of the same length
+            via a supplied transformation
+            </summary>
+            <param name="f">The transformation function</param>
+            <typeparam name="U">The target vector element type</typeparam>
+        </member>
+        <member name="M:Z0.RowVector`2.Map``1(System.Func{`1,``0},Z0.RowVector{`0,``0}@)">
+            <summary>
+            Projects the source vector onto a caller-supplied target vector of the same length
+            via a supplied transformation
+            </summary>
+            <param name="f">The transformation function</param>
+            <typeparam name="U">The target vector element type</typeparam>
+        </member>
+        <member name="T:Z0.RowVectors">
+            <summary>
+            Defines the vector api surface
+            </summary>
+        </member>
+        <member name="M:Z0.RowVectors.natspan``2(Z0.SpanBlock256{``1}@,``0)">
+            <summary>
+            Loads a natural block from blocked storage
+            </summary>
+            <param name="src">The source reference</param>
+            <param name="n">The length representative</param>
+            <typeparam name="N">The length type</typeparam>
+            <typeparam name="T">The cell type</typeparam>
+        </member>
+        <member name="M:Z0.RowVectors.safeload``2(Z0.N256,Z0.NatSpan{``0,``1}@)">
+            <summary>
+            Loads an unsized 256-bit blocked span from a sized unblocked span
+            </summary>
+            <param name="src">The source span</param>
+            <param name="offset">The span index at which to begin the load</param>
+            <typeparam name="T">The element type</typeparam>
+        </member>
+        <member name="M:Z0.RowVectors.load``2(``1[],``0)">
+            <summary>
+            Loads a vector of natural length
+            </summary>
+            <param name="src">The source span</param>
+            <param name="length">The natural length</param>
+            <typeparam name="N">The length type</typeparam>
+            <typeparam name="T">The element type</typeparam>
+        </member>
+        <member name="M:Z0.RowVectors.load``2(``0,``1[])">
+            <summary>
+            Loads a vector of natural length
+            </summary>
+            <param name="src">The source span</param>
+            <param name="length">The natural length</param>
+            <typeparam name="N">The length type</typeparam>
+            <typeparam name="T">The element type</typeparam>
+        </member>
+        <member name="M:Z0.RowVectors.range``2(``1,``0)">
+            <summary>
+            Defines a scalar sequence [first, ..., (first + N)]
+            </summary>
+            <param name="first">The first value in the sequence</param>
+            <typeparam name="N">The count type</typeparam>
+            <typeparam name="T">The primal type</typeparam>
+        </member>
+        <member name="M:Z0.RowVectors.blockalloc``2(``0)">
+            <summary>
+            Allocates a block vector of natural length
+            </summary>
+            <param name="n">The length</param>
+            <typeparam name="N">The length type</typeparam>
+            <typeparam name="T">The element type</typeparam>
+        </member>
+        <member name="M:Z0.RowVectors.blockalloc``1(System.Int32)">
+            <summary>
+            Allocates a block vector optionally filled with a specified value
+            </summary>
+            <param name="length">The (minimum) length</param>
+            <param name="fill">The fill value, if any</param>
+            <typeparam name="N">The length type</typeparam>
+            <typeparam name="T">The element type</typeparam>
+        </member>
+        <member name="M:Z0.RowVectors.blockload``2(System.Span{``1},``0)">
+            <summary>
+            Loads a vector of natural length from a span that may not be aligned (Allocating if unaligned)
+            </summary>
+            <param name="src">The source span</param>
+            <param name="n">The natural length</param>
+            <typeparam name="N">The length type</typeparam>
+            <typeparam name="T">The element type</typeparam>
+        </member>
+        <member name="T:Z0.Seq`1">
+            <summary>
+            Defines a data structure for sparse/partial sequence representation
+            </summary>
+        </member>
+        <member name="P:Z0.Seq`1.Length">
+            <summary>
+            The number of terms in the sequence
+            </summary>
+        </member>
+        <member name="P:Z0.Seq`1.Item(System.Int64)">
+            <summary>
+            Returns a reference to an index-identified term
+            </summary>
+        </member>
+        <member name="P:Z0.Seq`1.Item(System.UInt64)">
+            <summary>
+            Returns a reference to an index-identified term
+            </summary>
+        </member>
+        <member name="P:Z0.Seq`1.First">
+            <summary>
+            Returns a reference to the first term of the sequence
+            </summary>
+        </member>
+        <member name="T:Z0.SeqTerm`1">
+            <summary>
+            Defines a sequence term
+            </summary>
+        </member>
+        <member name="F:Z0.SeqTerm`1.Index">
+            <summary>
+            The integer that maps to the term value
+            </summary>
+        </member>
+        <member name="F:Z0.SeqTerm`1.Value">
+            <summary>
+            The term's value
+            </summary>
+        </member>
+        <member name="P:Z0.SeqTerm`1.IsEmpty">
+            <summary>
+            Specifies whether the term is empty
+            </summary>
+        </member>
+        <member name="M:Z0.SeqTerm`1.Format(System.Nullable{System.Char})">
+            <summary>
+            Renders the term by default as 'a_i = Value' where i denotes the term index
+            </summary>
+            <param name="name">The sequence identifier, if specified</param>
+        </member>
+        <member name="T:Z0.SeqTerm`2">
+            <summary>
+            Defines a sequence term
+            </summary>
+        </member>
+        <member name="F:Z0.SeqTerm`2.Index">
+            <summary>
+            The sequence index
+            </summary>
+        </member>
+        <member name="F:Z0.SeqTerm`2.Value">
+            <summary>
+            The term value
+            </summary>
+        </member>
+        <member name="P:Z0.SeqTerm`2.IsEmpty">
+            <summary>
+            Specifies whether the term is empty
+            </summary>
+        </member>
+        <member name="M:Z0.SeqTerm`2.Format(System.Nullable{System.Char})">
+            <summary>
+            Renders the term by default as 'a_i = Value' where i denotes the term index
+            </summary>
+            <param name="id">The sequence identifier, if specified</param>
+        </member>
+        <member name="M:Z0.gfp.abs``1(``0)">
+            <summary>
+            Computes the absolute value of a primal FP scalar
+            </summary>
+            <param name="src">The source value</param>
+            <typeparam name="T">The FP type</typeparam>
+        </member>
+        <member name="M:Z0.gfp.dec``1(``0)">
+            <summary>
+            Decrements the source value
+            </summary>
+            <param name="src">The source value</param>
+            <typeparam name="T">The primal type</typeparam>
+        </member>
+        <member name="M:Z0.gfp.div``1(``0,``0)">
+            <summary>
+            Computes the quotient of floating-point operands
+            </summary>
+            <param name="a">The left operand</param>
+            <param name="b">The right operand</param>
+            <typeparam name="T">The primal floating-point type</typeparam>
+        </member>
+        <member name="M:Z0.gfp.divmod``1(``0,``0)">
+            <summary>
+            Computes dst = (div(a,b), mod(a,b)) for floating-point numeric types
+            </summary>
+            <param name="a">The dividend</param>
+            <param name="b">The divisor</param>
+        </member>
+        <member name="M:Z0.gfp.fma``1(``0,``0,``0)">
+            <summary>
+            Computes and returns the result r = x*y + z
+            </summary>
+            <param name="x">The first operand</param>
+            <param name="y">The second operand</param>
+            <param name="z">The third operand</param>
+            <typeparam name="T">The floating point operand type</typeparam>
+        </member>
+        <member name="M:Z0.gfp.inc``1(``0)">
+            <summary>
+            Increments the source value
+            </summary>
+            <param name="src">The source value</param>
+            <typeparam name="T">The primal type</typeparam>
+        </member>
+        <member name="M:Z0.gfp.mod``1(``0,``0)">
+            <summary>
+            Computes the modulus of floating-point operands
+            </summary>
+            <param name="a">The left operand</param>
+            <param name="b">The right operand</param>
+            <typeparam name="T">The primal floating-point type</typeparam>
+        </member>
+        <member name="M:Z0.gfp.exp``1(``0)">
+            <summary>
+            Raises e to a specified exponent
+            </summary>
+            <param name="src">The soruce value</param>
+            <typeparam name="T">The FP type</typeparam>
+        </member>
+        <member name="T:Z0.Collector">
+            <summary>
+            A basic statistical accumulator that accrues information over an arbitrary number of input sequences
+            </summary>
+        </member>
+        <member name="M:Z0.Collector.Create``1(``0)">
+            <summary>
+            Creates a collector seeded with the first value
+            </summary>
+        </member>
+        <member name="P:Z0.Collector.Count">
+            <summary>
+            The number of accumulated observations
+            </summary>
+        </member>
+        <member name="P:Z0.Collector.Mean">
+            <summary>
+            The accumulated mean
+            </summary>
+        </member>
+        <member name="P:Z0.Collector.Variance">
+            <summary>
+            The accumulated variance
+            </summary>
+        </member>
+        <member name="P:Z0.Collector.Stdev">
+            <summary>
+            The accumulated standard deviation
+            </summary>
+        </member>
+        <member name="P:Z0.Collector.Min">
+            <summary>
+            The accumulated minimum
+            </summary>
+        </member>
+        <member name="P:Z0.Collector.Max">
+            <summary>
+            The accumulated maximum
+            </summary>
+        </member>
+        <member name="M:Z0.Collector.Collect``1(``0)">
+            <summary>
+            Accumulates a single value
+            </summary>
+            <param name="src">The source value</param>
+            <typeparam name="T">The source type</typeparam>
+        </member>
+        <member name="M:Z0.Collector.Collect``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Accumulates a stream of values
+            </summary>
+            <param name="src">The source stream</param>
+            <typeparam name="T">The source element type</typeparam>
+        </member>
+        <member name="M:Z0.Collector.CollectItems``1(``0[])">
+            <summary>
+            Accumulates a span of values
+            </summary>
+            <param name="src">The source span</param>
+            <typeparam name="T">The source cell type</typeparam>
+        </member>
+        <member name="M:Z0.Collector.Collect``1(System.ReadOnlySpan{``0})">
+            <summary>
+            Accumulates a span of values
+            </summary>
+            <param name="src">The source span</param>
+            <typeparam name="T">The source cell type</typeparam>
+        </member>
+        <member name="M:Z0.Collector.Collect``1(System.Span{``0})">
+            <summary>
+            Accumulates a span of values
+            </summary>
+            <param name="src">The source span</param>
+            <typeparam name="T">The source cell type</typeparam>
+        </member>
+        <member name="M:Z0.genum.sll``3(``0,System.Byte,``1,``2)">
+            <summary>
+            Converts a source enume value src:E to a parametrically-identified numeric type S,
+            shifts the converted value to the left a specified number of bits then converts
+            the outcome of this computation to a numeric type T
+            </summary>
+            <param name="src">The source enum value</param>
+            <param name="count">The nuumber of bits to shift</param>
+            <param name="s">A representative for the numeric source</param>
+            <param name="t">A representative for the numeric target</param>
+            <typeparam name="E">The source enum type</typeparam>
+            <typeparam name="S">The source numeric type</typeparam>
+            <typeparam name="T">The target numeric type</typeparam>
+        </member>
+        <member name="M:Z0.genum.sll``4(``0,``1,``2,``3)">
+            <summary>
+            Converts a source enume value src:E to a parametrically-identified numeric type S,
+            shifts the converted value to the left a specified number of bits then converts
+            the outcome of this computation to a numeric type T
+            </summary>
+            <param name="src">The source enum value</param>
+            <param name="count">The number of bits to shift</param>
+            <param name="s">A representative for the numeric source</param>
+            <param name="t">A representative for the numeric target</param>
+            <typeparam name="E">The source enum type</typeparam>
+            <typeparam name="C">The shift count enum type, which must have an underlying type of byte</typeparam>
+            <typeparam name="S">The source numeric type</typeparam>
+            <typeparam name="T">The target numeric type</typeparam>
+        </member>
+    </members>
+</doc>

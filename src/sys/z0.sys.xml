@@ -1,0 +1,107 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>z0.sys</name>
+    </assembly>
+    <members>
+        <member name="M:Z0.sys.alloc(System.Int32)">
+            <summary>
+            Allocates a specified number of bytes
+            </summary>
+            <param name="count">The number of bytes to allocate</param>
+        </member>
+        <member name="M:Z0.sys.array``1(``0[])">
+            <summary>
+            Produces an array from a parameter array
+            </summary>
+            <param name="src">The source items</param>
+            <typeparam name="T">The item type</typeparam>
+        </member>
+        <member name="M:Z0.sys.fill``1(``0,System.Span{``0})">
+            <summary>
+            Populates each cell of a target span with a specified value
+            </summary>
+            <param name="src">The source value</param>
+            <param name="dst">The target span</param>
+            <typeparam name="T">The cell type</typeparam>
+        </member>
+        <member name="M:Z0.sys.fill(System.Byte,System.Byte@,System.UInt32)">
+            <summary>
+            Overwrites a reference-identified memory segment with a specified value
+            </summary>
+            <param name="src">The source value</param>
+            <param name="dst">The leading target cell</param>
+            <param name="length">The byte-measured segment length</param>
+        </member>
+        <member name="M:Z0.sys.blank(System.String)">
+            <summary>
+            Tests whether the source string is null or empty
+            </summary>
+            <param name="src">The string to evaluate</param>
+        </member>
+        <member name="M:Z0.sys.empty``1">
+            <summary>
+            Returns an empty array
+            </summary>
+            <typeparam name="T">The cell type</typeparam>
+        </member>
+        <member name="M:Z0.sys.format(System.ReadOnlySpan{System.Char})">
+            <summary>
+            Formats a character span as a string
+            </summary>
+            <param name="src">The source characters</param>
+        </member>
+        <member name="M:Z0.sys.list``1(``0[])">
+            <summary>
+            Creates a list from a parameter array
+            </summary>
+            <param name="src">The source items</param>
+            <typeparam name="T">The item type</typeparam>
+        </member>
+        <member name="M:Z0.sys.nonempty(System.String)">
+            <summary>
+            Tests whether the source string is non-blank where blank := {null | whitespace}
+            </summary>
+            <param name="src">The string to evaluate</param>
+        </member>
+        <member name="M:Z0.sys.span``1(System.Int32)">
+            <summary>
+            Allocates storage for a specified number of T-cells
+            </summary>
+            <param name="count">The cell allocation count</param>
+            <typeparam name="T">The cell type</typeparam>
+        </member>
+        <member name="M:Z0.sys.span``1(System.UInt32)">
+            <summary>
+            Allocates storage for a specified number of T-cells
+            </summary>
+            <param name="count">The cell allocation count</param>
+            <typeparam name="T">The cell type</typeparam>
+        </member>
+        <member name="M:Z0.sys.string``1(``0)">
+            <summary>
+            Projects the source onto its textual representation
+            </summary>
+            <param name="src">The source</param>
+            <typeparam name="T">The source type</typeparam>
+        </member>
+        <member name="M:Z0.XTend.OrderBy``2(``0[],System.Func{``0,``1})">
+            <summary>
+            Linq orderby operator specialized for arrays
+            </summary>
+            <param name="src">The source array</param>
+            <param name="f">The order criterion selector</param>
+            <typeparam name="T">The array element type</typeparam>
+            <typeparam name="K">The order criterion type</typeparam>
+        </member>
+        <member name="M:Z0.XTend.OrderBy``3(``0[],System.Func{``0,``1},System.Func{``0,``2})">
+            <summary>
+            Linq orderby operator specialized for arrays
+            </summary>
+            <param name="src">The source array</param>
+            <param name="f">The order criterion selector</param>
+            <typeparam name="T">The array element type</typeparam>
+            <typeparam name="K">The order criterion type</typeparam>
+        </member>
+    </members>
+</doc>

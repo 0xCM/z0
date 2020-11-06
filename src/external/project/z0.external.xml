@@ -1,0 +1,333 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>z0.external</name>
+    </assembly>
+    <members>
+        <member name="M:Z0.CilQueries.branch(System.Reflection.Metadata.ILOpCode)">
+            <summary>
+            Returns true of the specified op-code is a branch to a label.
+            </summary>
+        </member>
+        <member name="M:Z0.CilQueries.longBranch(System.Reflection.Metadata.ILOpCode)">
+            <summary>
+            Get a long form of the specified branch op-code.
+            </summary>
+            <param name="opCode">Branch op-code.</param>
+            <returns>Long form of the branch op-code.</returns>
+            <exception cref="T:System.ArgumentException">Specified <paramref name="opCode"/> is not a branch op-code.</exception>
+        </member>
+        <member name="M:Z0.CilQueries.shortbranch(System.Reflection.Metadata.ILOpCode)">
+            <summary>
+            Get a short form of the specified branch op-code.
+            </summary>
+            <param name="opCode">Branch op-code.</param>
+            <returns>Short form of the branch op-code.</returns>
+            <exception cref="T:System.ArgumentException">Specified <paramref name="opCode"/> is not a branch op-code.</exception>
+        </member>
+        <member name="M:Z0.CilQueries.branchOpSize(System.Reflection.Metadata.ILOpCode)">
+            <summary>
+            Calculate the size of the specified branch instruction operand.
+            </summary>
+            <param name="opCode">Branch op-code.</param>
+            <returns>1 if <paramref name="opCode"/> is a short branch or 4 if it is a long branch.</returns>
+            <exception cref="T:System.ArgumentException">Specified <paramref name="opCode"/> is not a branch op-code.</exception>
+        </member>
+        <member name="T:Z0.DnCilModel.Code">
+            <summary>
+            A CIL opcode. If the high byte is 0 or if it's <see cref="F:Z0.DnCilModel.Code.UNKNOWN1"/>, it's a 1-byte opcode,
+            else it's a two-byte opcode and the highest byte is the first byte of the opcode.
+            </summary>
+        </member>
+        <member name="T:Z0.DnCilModel.FlowControl">
+            <summary>
+            CIL opcode flow control
+            </summary>
+        </member>
+        <member name="F:Z0.DnCilModel.FlowControl.Branch">
+            <summary/>
+        </member>
+        <member name="F:Z0.DnCilModel.FlowControl.Break">
+            <summary/>
+        </member>
+        <member name="F:Z0.DnCilModel.FlowControl.Call">
+            <summary/>
+        </member>
+        <member name="F:Z0.DnCilModel.FlowControl.Cond_Branch">
+            <summary/>
+        </member>
+        <member name="F:Z0.DnCilModel.FlowControl.Meta">
+            <summary/>
+        </member>
+        <member name="F:Z0.DnCilModel.FlowControl.Next">
+            <summary/>
+        </member>
+        <member name="F:Z0.DnCilModel.FlowControl.Phi">
+            <summary/>
+        </member>
+        <member name="F:Z0.DnCilModel.FlowControl.Return">
+            <summary/>
+        </member>
+        <member name="F:Z0.DnCilModel.FlowControl.Throw">
+            <summary/>
+        </member>
+        <member name="T:Z0.DnCilModel.Instruction">
+            <summary>
+            A CIL instruction (opcode + operand)
+            </summary>
+        </member>
+        <member name="F:Z0.DnCilModel.Instruction.OpCode">
+            <summary>
+            The opcode
+            </summary>
+        </member>
+        <member name="F:Z0.DnCilModel.Instruction.Operand">
+            <summary>
+            The opcode operand
+            </summary>
+        </member>
+        <member name="F:Z0.DnCilModel.Instruction.Offset">
+            <summary>
+            Offset of the instruction in the method body
+            </summary>
+        </member>
+        <member name="T:Z0.DnCilModel.OpCode">
+            <summary>
+            A CIL opcode
+            </summary>
+        </member>
+        <member name="F:Z0.DnCilModel.OpCode.Name">
+            <summary>
+            The opcode name
+            </summary>
+        </member>
+        <member name="F:Z0.DnCilModel.OpCode.Code">
+            <summary>
+            The opcode as a <see cref="F:Z0.DnCilModel.OpCode.Code"/> enum
+            </summary>
+        </member>
+        <member name="F:Z0.DnCilModel.OpCode.OperandType">
+            <summary>
+            Operand type
+            </summary>
+        </member>
+        <member name="F:Z0.DnCilModel.OpCode.FlowControl">
+            <summary>
+            Flow control info
+            </summary>
+        </member>
+        <member name="F:Z0.DnCilModel.OpCode.OpCodeType">
+            <summary>
+            Opcode type
+            </summary>
+        </member>
+        <member name="F:Z0.DnCilModel.OpCode.StackBehaviourPush">
+            <summary>
+            Push stack behavior
+            </summary>
+        </member>
+        <member name="F:Z0.DnCilModel.OpCode.StackBehaviourPop">
+            <summary>
+            Pop stack behavior
+            </summary>
+        </member>
+        <member name="M:Z0.DnCilModel.OpCode.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="T:Z0.DnCilModel.OpCodes">
+            <summary>
+            Contains all valid CIL opcodes
+            </summary>
+        </member>
+        <member name="F:Z0.DnCilModel.OpCodes.OneByteOpCodes">
+            <summary>
+            All one-byte opcodes
+            </summary>
+        </member>
+        <member name="F:Z0.DnCilModel.OpCodes.TwoByteOpCodes">
+            <summary>
+            All two-byte opcodes (first byte is <c>0xFE</c>)
+            </summary>
+        </member>
+        <member name="T:Z0.DnCilModel.OpCodeType">
+            <summary>
+            CIL opcode type
+            </summary>
+        </member>
+        <member name="F:Z0.DnCilModel.OpCodeType.Annotation">
+            <summary/>
+        </member>
+        <member name="F:Z0.DnCilModel.OpCodeType.Macro">
+            <summary/>
+        </member>
+        <member name="F:Z0.DnCilModel.OpCodeType.Nternal">
+            <summary/>
+        </member>
+        <member name="F:Z0.DnCilModel.OpCodeType.Objmodel">
+            <summary/>
+        </member>
+        <member name="F:Z0.DnCilModel.OpCodeType.Prefix">
+            <summary/>
+        </member>
+        <member name="F:Z0.DnCilModel.OpCodeType.Primitive">
+            <summary/>
+        </member>
+        <member name="T:Z0.DnCilModel.OperandType">
+            <summary>
+            CIL opcode operand type
+            </summary>
+        </member>
+        <member name="F:Z0.DnCilModel.OperandType.InlineBrTarget">
+            <summary>4-byte relative instruction offset</summary>
+        </member>
+        <member name="F:Z0.DnCilModel.OperandType.InlineField">
+            <summary>4-byte field token</summary>
+        </member>
+        <member name="F:Z0.DnCilModel.OperandType.InlineI">
+            <summary>int32</summary>
+        </member>
+        <member name="F:Z0.DnCilModel.OperandType.InlineI8">
+            <summary>int64</summary>
+        </member>
+        <member name="F:Z0.DnCilModel.OperandType.InlineMethod">
+            <summary>4-byte method token </summary>
+        </member>
+        <member name="F:Z0.DnCilModel.OperandType.InlineNone">
+            <summary>No operand</summary>
+        </member>
+        <member name="F:Z0.DnCilModel.OperandType.InlinePhi">
+            <summary>Never used</summary>
+        </member>
+        <member name="F:Z0.DnCilModel.OperandType.InlineR">
+            <summary>64-bit real</summary>
+        </member>
+        <member name="F:Z0.DnCilModel.OperandType.NOT_USED_8">
+            <summary/>
+        </member>
+        <member name="F:Z0.DnCilModel.OperandType.InlineSig">
+            <summary>4-byte method sig token</summary>
+        </member>
+        <member name="F:Z0.DnCilModel.OperandType.InlineString">
+            <summary>4-byte string token (<c>0x70xxxxxx</c>)</summary>
+        </member>
+        <member name="F:Z0.DnCilModel.OperandType.InlineSwitch">
+            <summary>4-byte count N followed by N 4-byte relative instruction offsets</summary>
+        </member>
+        <member name="F:Z0.DnCilModel.OperandType.InlineTok">
+            <summary>4-byte token </summary>
+        </member>
+        <member name="F:Z0.DnCilModel.OperandType.InlineType">
+            <summary>4-byte type token </summary>
+        </member>
+        <member name="F:Z0.DnCilModel.OperandType.InlineVar">
+            <summary>2-byte param/local index</summary>
+        </member>
+        <member name="F:Z0.DnCilModel.OperandType.ShortInlineBrTarget">
+            <summary>1-byte relative instruction offset</summary>
+        </member>
+        <member name="F:Z0.DnCilModel.OperandType.ShortInlineI">
+            <summary>1-byte sbyte (<see cref="F:Z0.DnCilModel.Code.Ldc_I4_S"/>) or byte (the rest)</summary>
+        </member>
+        <member name="F:Z0.DnCilModel.OperandType.ShortInlineR">
+            <summary>32-bit real</summary>
+        </member>
+        <member name="F:Z0.DnCilModel.OperandType.ShortInlineVar">
+            <summary>1-byte param/local index</summary>
+        </member>
+        <member name="T:Z0.DnCilModel.StackBehaviour">
+            <summary>
+            CIL opcode stack behavior
+            </summary>
+        </member>
+        <member name="F:Z0.DnCilModel.StackBehaviour.Pop0">
+            <summary/>
+        </member>
+        <member name="F:Z0.DnCilModel.StackBehaviour.Pop1">
+            <summary/>
+        </member>
+        <member name="F:Z0.DnCilModel.StackBehaviour.Pop1_pop1">
+            <summary/>
+        </member>
+        <member name="F:Z0.DnCilModel.StackBehaviour.Popi">
+            <summary/>
+        </member>
+        <member name="F:Z0.DnCilModel.StackBehaviour.Popi_pop1">
+            <summary/>
+        </member>
+        <member name="F:Z0.DnCilModel.StackBehaviour.Popi_popi">
+            <summary/>
+        </member>
+        <member name="F:Z0.DnCilModel.StackBehaviour.Popi_popi8">
+            <summary/>
+        </member>
+        <member name="F:Z0.DnCilModel.StackBehaviour.Popi_popi_popi">
+            <summary/>
+        </member>
+        <member name="F:Z0.DnCilModel.StackBehaviour.Popi_popr4">
+            <summary/>
+        </member>
+        <member name="F:Z0.DnCilModel.StackBehaviour.Popi_popr8">
+            <summary/>
+        </member>
+        <member name="F:Z0.DnCilModel.StackBehaviour.Popref">
+            <summary/>
+        </member>
+        <member name="F:Z0.DnCilModel.StackBehaviour.Popref_pop1">
+            <summary/>
+        </member>
+        <member name="F:Z0.DnCilModel.StackBehaviour.Popref_popi">
+            <summary/>
+        </member>
+        <member name="F:Z0.DnCilModel.StackBehaviour.Popref_popi_popi">
+            <summary/>
+        </member>
+        <member name="F:Z0.DnCilModel.StackBehaviour.Popref_popi_popi8">
+            <summary/>
+        </member>
+        <member name="F:Z0.DnCilModel.StackBehaviour.Popref_popi_popr4">
+            <summary/>
+        </member>
+        <member name="F:Z0.DnCilModel.StackBehaviour.Popref_popi_popr8">
+            <summary/>
+        </member>
+        <member name="F:Z0.DnCilModel.StackBehaviour.Popref_popi_popref">
+            <summary/>
+        </member>
+        <member name="F:Z0.DnCilModel.StackBehaviour.Push0">
+            <summary/>
+        </member>
+        <member name="F:Z0.DnCilModel.StackBehaviour.Push1">
+            <summary/>
+        </member>
+        <member name="F:Z0.DnCilModel.StackBehaviour.Push1_push1">
+            <summary/>
+        </member>
+        <member name="F:Z0.DnCilModel.StackBehaviour.Pushi">
+            <summary/>
+        </member>
+        <member name="F:Z0.DnCilModel.StackBehaviour.Pushi8">
+            <summary/>
+        </member>
+        <member name="F:Z0.DnCilModel.StackBehaviour.Pushr4">
+            <summary/>
+        </member>
+        <member name="F:Z0.DnCilModel.StackBehaviour.Pushr8">
+            <summary/>
+        </member>
+        <member name="F:Z0.DnCilModel.StackBehaviour.Pushref">
+            <summary/>
+        </member>
+        <member name="F:Z0.DnCilModel.StackBehaviour.Varpop">
+            <summary/>
+        </member>
+        <member name="F:Z0.DnCilModel.StackBehaviour.Varpush">
+            <summary/>
+        </member>
+        <member name="F:Z0.DnCilModel.StackBehaviour.Popref_popi_pop1">
+            <summary/>
+        </member>
+        <member name="F:Z0.DnCilModel.StackBehaviour.PopAll">
+            <summary/>
+        </member>
+    </members>
+</doc>

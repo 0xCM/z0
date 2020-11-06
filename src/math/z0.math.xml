@@ -1,0 +1,2303 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>z0.math</name>
+    </assembly>
+    <members>
+        <member name="M:Z0.math.abs(System.SByte)">
+            <summary>
+            Computes the absolute value of the source without branching
+            </summary>
+            <param name="a">The source value</param>
+        </member>
+        <member name="M:Z0.math.abs(System.Int16)">
+            <summary>
+            Computes the absolute value of the source without branching
+            </summary>
+            <param name="a">The source value</param>
+        </member>
+        <member name="M:Z0.math.abs(System.Int32)">
+            <summary>
+            Computes the absolute value of the source without branching
+            </summary>
+            <param name="a">The source value</param>
+        </member>
+        <member name="M:Z0.math.abs(System.Int64)">
+            <summary>
+            Computes the absolute value of the source without branching
+            </summary>
+            <param name="a">The source value</param>
+        </member>
+        <member name="M:Z0.math.add(Z0.ConstPair{System.UInt64}@,Z0.ConstPair{System.UInt64}@)">
+            <summary>
+            Computes the sum of two 128-bit integers
+            </summary>
+            <param name="x">The first integer, represented via paired hi/lo components</param>
+            <param name="y">The second integer, represented via paired hi/lo components</param>
+            <remarks>Follows https://github.com/chfast/intx/include/intx/int128.hpp</remarks>
+        </member>
+        <member name="M:Z0.math.add(System.UInt64@,System.UInt64@,System.UInt64@)">
+            <summary>
+            Computes the sum c := a + b of 128-bit unsigned integers a and b
+            </summary>
+            <param name="a">A reference to the left 128-bits</param>
+            <param name="b">A reference to the right 128-bits</param>
+            <param name="c">A reference to the target 128-bits</param>
+            <remarks>Follows https://github.com/chfast/intx/include/intx/int128.hpp</remarks>
+        </member>
+        <member name="M:Z0.math.add128(System.UInt64@,System.UInt64@,System.UInt64)">
+            <summary>
+            Addition mod 2^128.
+            </summary>
+            <remarks>Taken from IntUtils.cs / Microsoft Machine Learning repository</remarks>
+        </member>
+        <member name="M:Z0.math.add128(System.UInt64@,System.UInt64@,System.UInt64,System.UInt64)">
+            <summary>
+            Addition mod 2^128.
+            </summary>
+            <remarks>Taken from IntUtils.cs / Microsoft Machine Learning repository</remarks>
+        </member>
+        <member name="M:Z0.math.avgz(System.Byte,System.Byte)">
+            <summary>
+            Computes the average of the operands, rounding toward zero
+            </summary>
+            <param name="a">The left operand</param>
+            <param name="b">The right operand</param>
+            <remarks>Algorithm adapted from Arndt, Matters Computational</remarks>
+        </member>
+        <member name="M:Z0.math.avgz(System.UInt16,System.UInt16)">
+            <summary>
+            Takes the average of the operands, rounding toward zero
+            </summary>
+            <param name="a">The left operand</param>
+            <param name="b">The right operand</param>
+            <remarks>Algorithm adapted from Arndt, Matters Computational</remarks>
+        </member>
+        <member name="M:Z0.math.avgz(System.UInt32,System.UInt32)">
+            <summary>
+            Takes the average of the operands, rounding toward zero
+            </summary>
+            <param name="a">The left operand</param>
+            <param name="b">The right operand</param>
+            <remarks>Algorithm adapted from Arndt, Matters Computational</remarks>
+        </member>
+        <member name="M:Z0.math.avgz(System.UInt64,System.UInt64)">
+            <summary>
+            Takes the average of the operands, rounding toward zero
+            </summary>
+            <param name="a">The left operand</param>
+            <param name="b">The right operand</param>
+            <remarks>Algorithm adapted from Arndt, Matters Computational</remarks>
+        </member>
+        <member name="M:Z0.math.avgi(System.Byte,System.Byte)">
+            <summary>
+            Takes the average of the operands, rounding toward infinity
+            </summary>
+            <param name="a">The left operand</param>
+            <param name="b">The right operand</param>
+            <remarks>Algorithm adapted from Arndt, Matters Computational</remarks>
+        </member>
+        <member name="M:Z0.math.avgi(System.UInt16,System.UInt16)">
+            <summary>
+            Takes the average of the operands, rounding toward infinity
+            </summary>
+            <param name="a">The left operand</param>
+            <param name="b">The right operand</param>
+            <remarks>Algorithm adapted from Arndt, Matters Computational</remarks>
+        </member>
+        <member name="M:Z0.math.avgi(System.UInt32,System.UInt32)">
+            <summary>
+            Takes the average of the operands, rounding toward infinity
+            </summary>
+            <param name="a">The left operand</param>
+            <param name="b">The right operand</param>
+            <remarks>Algorithm adapted from Arndt, Matters Computational</remarks>
+        </member>
+        <member name="M:Z0.math.avgi(System.UInt64,System.UInt64)">
+            <summary>
+            Takes the average of the operands, rounding toward infinity
+            </summary>
+            <param name="a">The left operand</param>
+            <param name="b">The right operand</param>
+            <remarks>Algorithm adapted from Arndt, Matters Computational</remarks>
+        </member>
+        <member name="M:Z0.math.clamp(System.SByte,System.SByte)">
+            <summary>
+            Clamps the source value to an inclusive maximum
+            </summary>
+            <param name="src">The source value</param>
+            <param name="max">The maximum value</param>
+        </member>
+        <member name="M:Z0.math.clamp(System.Byte,System.Byte)">
+            <summary>
+            Clamps the source value to an inclusive maximum
+            </summary>
+            <param name="src">The source value</param>
+            <param name="max">The maximum value</param>
+        </member>
+        <member name="M:Z0.math.clamp(System.Int16,System.Int16)">
+            <summary>
+            Clamps the source value to an inclusive maximum
+            </summary>
+            <param name="src">The source value</param>
+            <param name="max">The maximum value</param>
+        </member>
+        <member name="M:Z0.math.clamp(System.UInt16,System.UInt16)">
+            <summary>
+            Clamps the source value to an inclusive maximum
+            </summary>
+            <param name="src">The source value</param>
+            <param name="max">The maximum value</param>
+        </member>
+        <member name="M:Z0.math.clamp(System.Int32,System.Int32)">
+            <summary>
+            Clamps the source value to an inclusive maximum
+            </summary>
+            <param name="src">The source value</param>
+            <param name="max">The maximum value</param>
+        </member>
+        <member name="M:Z0.math.clamp(System.UInt32,System.UInt32)">
+            <summary>
+            Clamps the source value to an inclusive maximum
+            </summary>
+            <param name="src">The source value</param>
+            <param name="max">The maximum value</param>
+        </member>
+        <member name="M:Z0.math.clamp(System.Int64,System.Int64)">
+            <summary>
+            Clamps the source value to an inclusive maximum
+            </summary>
+            <param name="src">The source value</param>
+            <param name="max">The maximum value</param>
+        </member>
+        <member name="M:Z0.math.clamp(System.UInt64,System.UInt64)">
+            <summary>
+            Clamps the source value to an inclusive maximum
+            </summary>
+            <param name="src">The source value</param>
+            <param name="max">The maximum value</param>
+        </member>
+        <member name="M:Z0.math.dec(System.SByte)">
+            <summary>
+            Decrements the source value
+            </summary>
+            <param name="src">The source value</param>
+        </member>
+        <member name="M:Z0.math.dec(System.Byte)">
+            <summary>
+            Decrements the source value
+            </summary>
+            <param name="src">The source value</param>
+        </member>
+        <member name="M:Z0.math.dec(System.Int16)">
+            <summary>
+            Decrements the source value
+            </summary>
+            <param name="src">The source value</param>
+        </member>
+        <member name="M:Z0.math.dec(System.UInt16)">
+            <summary>
+            Decrements the source value
+            </summary>
+            <param name="src">The source value</param>
+        </member>
+        <member name="M:Z0.math.dec(System.Int32)">
+            <summary>
+            Decrements the source value
+            </summary>
+            <param name="src">The source value</param>
+        </member>
+        <member name="M:Z0.math.dec(System.UInt32)">
+            <summary>
+            Decrements the source value
+            </summary>
+            <param name="src">The source value</param>
+        </member>
+        <member name="M:Z0.math.dec(System.Int64)">
+            <summary>
+            Decrements the source value
+            </summary>
+            <param name="src">The source value</param>
+        </member>
+        <member name="M:Z0.math.dec(System.UInt64)">
+            <summary>
+            Decrements the source value
+            </summary>
+            <param name="src">The source value</param>
+        </member>
+        <member name="M:Z0.math.dist(System.Byte,System.Byte)">
+            <summary>
+            Computes the nonnegative distance between two numbers
+            </summary>
+            <param name="a">The first number</param>
+            <param name="b">The second number</param>
+        </member>
+        <member name="M:Z0.math.dist(System.SByte,System.SByte)">
+            <summary>
+            Computes the nonnegative distance between two numbers
+            </summary>
+            <param name="a">The first number</param>
+            <param name="b">The second number</param>
+        </member>
+        <member name="M:Z0.math.dist(System.Int16,System.Int16)">
+            <summary>
+            Computes the nonnegative distance between two numbers
+            </summary>
+            <param name="a">The first number</param>
+            <param name="b">The second number</param>
+        </member>
+        <member name="M:Z0.math.dist(System.UInt16,System.UInt16)">
+            <summary>
+            Computes the nonnegative distance between two numbers
+            </summary>
+            <param name="a">The first number</param>
+            <param name="b">The second number</param>
+        </member>
+        <member name="M:Z0.math.dist(System.Int32,System.Int32)">
+            <summary>
+            Computes the nonnegative distance between two numbers
+            </summary>
+            <param name="a">The first number</param>
+            <param name="b">The second number</param>
+        </member>
+        <member name="M:Z0.math.dist(System.UInt32,System.UInt32)">
+            <summary>
+            Computes the nonnegative distance between two numbers
+            </summary>
+            <param name="a">The first number</param>
+            <param name="b">The second number</param>
+        </member>
+        <member name="M:Z0.math.dist(System.Int64,System.Int64)">
+            <summary>
+            Computes the nonnegative distance between two numbers
+            </summary>
+            <param name="a">The first number</param>
+            <param name="b">The second number</param>
+        </member>
+        <member name="M:Z0.math.dist(System.UInt64,System.UInt64)">
+            <summary>
+            Computes the nonnegative distance between two numbers
+            </summary>
+            <param name="a">The first number</param>
+            <param name="b">The second number</param>
+        </member>
+        <member name="M:Z0.math.divmod(System.SByte,System.SByte)">
+            <summary>
+            Computes dst = (div(a,b), mod(a,b))
+            </summary>
+            <param name="a">The dividend</param>
+            <param name="b">The divisor</param>
+        </member>
+        <member name="M:Z0.math.divmod(System.Byte,System.Byte)">
+            <summary>
+            Computes dst = (div(a,b), mod(a,b))
+            </summary>
+            <param name="a">The dividend</param>
+            <param name="b">The divisor</param>
+        </member>
+        <member name="M:Z0.math.divmod(System.Int16,System.Int16)">
+            <summary>
+            Computes dst = (div(a,b), mod(a,b))
+            </summary>
+            <param name="a">The dividend</param>
+            <param name="b">The divisor</param>
+        </member>
+        <member name="M:Z0.math.divmod(System.UInt16,System.UInt16)">
+            <summary>
+            Computes dst = (div(a,b), mod(a,b))
+            </summary>
+            <param name="a">The dividend</param>
+            <param name="b">The divisor</param>
+        </member>
+        <member name="M:Z0.math.divmod(System.Int32,System.Int32)">
+            <summary>
+            Computes dst = (div(a,b), mod(a,b))
+            </summary>
+            <param name="a">The dividend</param>
+            <param name="b">The divisor</param>
+        </member>
+        <member name="M:Z0.math.divmod(System.UInt32,System.UInt32)">
+            <summary>
+            Computes dst = (div(a,b), mod(a,b))
+            </summary>
+            <param name="a">The dividend</param>
+            <param name="b">The divisor</param>
+        </member>
+        <member name="M:Z0.math.divmod(System.Int64,System.Int64)">
+            <summary>
+            Computes dst = (div(a,b), mod(a,b))
+            </summary>
+            <param name="a">The dividend</param>
+            <param name="b">The divisor</param>
+        </member>
+        <member name="M:Z0.math.divmod(System.UInt64,System.UInt64)">
+            <summary>
+            Computes dst = (div(a,b), mod(a,b))
+            </summary>
+            <param name="a">The dividend</param>
+            <param name="b">The divisor</param>
+        </member>
+        <member name="M:Z0.math.gcdbin(System.UInt32,System.UInt32)">
+            <summary>
+            Binary gcd, Wikipedia version
+            </summary>
+            <param name="u"></param>
+            <param name="v"></param>
+            <remarks>See https://en.wikipedia.org/wiki/Binary_GCD_algorithm</remarks>
+        </member>
+        <member name="M:Z0.math.gcdbin(System.UInt64,System.UInt64)">
+            <summary>
+            Binary gcd, Wikipedia version
+            </summary>
+            <param name="u"></param>
+            <param name="v"></param>
+            <remarks>See https://en.wikipedia.org/wiki/Binary_GCD_algorithm</remarks>
+        </member>
+        <member name="M:Z0.math.inc(System.SByte)">
+            <summary>
+            Increments the source value
+            </summary>
+            <param name="src">The source value</param>
+        </member>
+        <member name="M:Z0.math.inc(System.Byte)">
+            <summary>
+            Increments the source value
+            </summary>
+            <param name="src">The source value</param>
+        </member>
+        <member name="M:Z0.math.inc(System.Int16)">
+            <summary>
+            Increments the source value
+            </summary>
+            <param name="src">The source value</param>
+        </member>
+        <member name="M:Z0.math.inc(System.UInt16)">
+            <summary>
+            Increments the source value
+            </summary>
+            <param name="src">The source value</param>
+        </member>
+        <member name="M:Z0.math.inc(System.Int32)">
+            <summary>
+            Increments the source value
+            </summary>
+            <param name="src">The source value</param>
+        </member>
+        <member name="M:Z0.math.inc(System.UInt32)">
+            <summary>
+            Increments the source value
+            </summary>
+            <param name="src">The source value</param>
+        </member>
+        <member name="M:Z0.math.inc(System.Int64)">
+            <summary>
+            Increments the source value
+            </summary>
+            <param name="src">The source value</param>
+        </member>
+        <member name="M:Z0.math.inc(System.UInt64)">
+            <summary>
+            Increments the source value
+            </summary>
+            <param name="src">The source value</param>
+        </member>
+        <member name="M:Z0.math.ispow2(System.SByte)">
+            <summary>
+            Returns 1 if the source value is a power of 2 and 0 otherwise
+            </summary>
+            <param name="x">The value to test</param>
+        </member>
+        <member name="M:Z0.math.ispow2(System.Byte)">
+            <summary>
+            Returns 1 if the source value is a power of 2 and 0 otherwise
+            </summary>
+            <param name="x">The value to test</param>
+        </member>
+        <member name="M:Z0.math.ispow2(System.Int16)">
+            <summary>
+            Returns 1 if the source value is a power of 2 and 0 otherwise
+            </summary>
+            <param name="x">The value to test</param>
+        </member>
+        <member name="M:Z0.math.ispow2(System.UInt16)">
+            <summary>
+            Returns 1 if the source value is a power of 2 and 0 otherwise
+            </summary>
+            <param name="x">The value to test</param>
+        </member>
+        <member name="M:Z0.math.ispow2(System.Int32)">
+            <summary>
+            Returns 1 if the source value is a power of 2 and 0 otherwise
+            </summary>
+            <param name="x">The value to test</param>
+        </member>
+        <member name="M:Z0.math.ispow2(System.UInt32)">
+            <summary>
+            Returns 1 if the source value is a power of 2 and 0 otherwise
+            </summary>
+            <param name="x">The value to test</param>
+        </member>
+        <member name="M:Z0.math.ispow2(System.Int64)">
+            <summary>
+            Returns 1 if the source value is a power of 2 and 0 otherwise
+            </summary>
+            <param name="x">The value to test</param>
+        </member>
+        <member name="M:Z0.math.ispow2(System.UInt64)">
+            <summary>
+            Returns 1 if the source value is a power of 2 and 0 otherwise
+            </summary>
+            <param name="x">The value to test</param>
+        </member>
+        <member name="M:Z0.math.log2(System.Byte)">
+            <summary>
+            Computes floor(log(src,2))
+            </summary>
+            <param name="src">The source value</param>
+        </member>
+        <member name="M:Z0.math.log2(System.UInt16)">
+            <summary>
+            Computes floor(log(src,2))
+            </summary>
+            <param name="src">The source value</param>
+        </member>
+        <member name="M:Z0.math.log2(System.UInt32)">
+            <summary>
+            Computes floor(log(src,2))
+            </summary>
+            <param name="src">The source value</param>
+        </member>
+        <member name="M:Z0.math.log2(System.UInt64)">
+            <summary>
+            Computes floor(log(src,2))
+            </summary>
+            <param name="src">The source value</param>
+        </member>
+        <member name="M:Z0.math.mod(System.SByte,System.SByte)">
+            <summary>
+            Computes b := a % m
+            </summary>
+            <param name="a">The source value</param>
+            <param name="m">The modulus</param>
+        </member>
+        <member name="M:Z0.math.mod(System.Byte,System.Byte)">
+            <summary>
+            Computes b := a % m
+            </summary>
+            <param name="a">The source value</param>
+            <param name="m">The modulus</param>
+        </member>
+        <member name="M:Z0.math.mod(System.Int16,System.Int16)">
+            <summary>
+            Computes b := a % m
+            </summary>
+            <param name="a">The source value</param>
+            <param name="m">The modulus</param>
+        </member>
+        <member name="M:Z0.math.mod(System.UInt16,System.UInt16)">
+            <summary>
+            Computes b := a % m
+            </summary>
+            <param name="a">The source value</param>
+            <param name="m">The modulus</param>
+        </member>
+        <member name="M:Z0.math.mod(System.Int32,System.Int32)">
+            <summary>
+            Computes b := a % m
+            </summary>
+            <param name="a">The source value</param>
+            <param name="m">The modulus</param>
+        </member>
+        <member name="M:Z0.math.mod(System.UInt32,System.UInt32)">
+            <summary>
+            Computes b := a % m
+            </summary>
+            <param name="a">The source value</param>
+            <param name="m">The modulus</param>
+        </member>
+        <member name="M:Z0.math.mod(System.Int64,System.Int64)">
+            <summary>
+            Computes b := a % m
+            </summary>
+            <param name="a">The source value</param>
+            <param name="m">The modulus</param>
+        </member>
+        <member name="M:Z0.math.mod(System.UInt64,System.UInt64)">
+            <summary>
+            Computes b := a % m
+            </summary>
+            <param name="a">The source value</param>
+            <param name="m">The modulus</param>
+        </member>
+        <member name="M:Z0.math.modmul(System.SByte,System.SByte,System.SByte)">
+            <summary>
+            Computes z := (a*b) mod m
+            </summary>
+            <param name="a">The first factor</param>
+            <param name="b">The second factor</param>
+            <param name="m">The modulus</param>
+        </member>
+        <member name="M:Z0.math.modmul(System.Byte,System.Byte,System.Byte)">
+            <summary>
+            Computes z := (a*b) mod m
+            </summary>
+            <param name="a">The first factor</param>
+            <param name="b">The second factor</param>
+            <param name="m">The modulus</param>
+        </member>
+        <member name="M:Z0.math.modmul(System.Int16,System.Int16,System.Int16)">
+            <summary>
+            Computes z := (a*b) mod m
+            </summary>
+            <param name="a">The first factor</param>
+            <param name="b">The second factor</param>
+            <param name="m">The modulus</param>
+        </member>
+        <member name="M:Z0.math.modmul(System.UInt16,System.UInt16,System.UInt16)">
+            <summary>
+            Computes z := (a*b) mod m
+            </summary>
+            <param name="a">The first factor</param>
+            <param name="b">The second factor</param>
+            <param name="m">The modulus</param>
+        </member>
+        <member name="M:Z0.math.modmul(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Computes z := (a*b) mod m
+            </summary>
+            <param name="a">The first factor</param>
+            <param name="b">The second factor</param>
+            <param name="m">The modulus</param>
+        </member>
+        <member name="M:Z0.math.modmul(System.UInt32,System.UInt32,System.UInt32)">
+            <summary>
+            Computes z := (a*b) mod m
+            </summary>
+            <param name="a">The first factor</param>
+            <param name="b">The second factor</param>
+            <param name="m">The modulus</param>
+        </member>
+        <member name="M:Z0.math.modmul(System.Int64,System.Int64,System.Int64)">
+            <summary>
+            Computes z := (a*b) mod m
+            </summary>
+            <param name="a">The first factor</param>
+            <param name="b">The second factor</param>
+            <param name="m">The modulus</param>
+        </member>
+        <member name="M:Z0.math.modmul(System.UInt64,System.UInt64,System.UInt64)">
+            <summary>
+            Computes z := (a*b) mod m
+            </summary>
+            <param name="a">The first factor</param>
+            <param name="b">The second factor</param>
+            <param name="m">The modulus</param>
+        </member>
+        <member name="M:Z0.math.mod(Z0.ModN@,System.UInt32)">
+            <summary>
+            Computes a % N
+            </summary>
+            <param name="a">The dividend</param>
+        </member>
+        <member name="M:Z0.math.div(Z0.ModN@,System.UInt32)">
+            <summary>
+            Computes the quotient a / N
+            </summary>
+            <param name="a">The dividend</param>
+        </member>
+        <member name="M:Z0.math.divisible(Z0.ModN@,System.UInt32)">
+            <summary>
+            Computes whether a % n == 0
+            </summary>
+            <param name="a">The dividend</param>
+        </member>
+        <member name="M:Z0.math.mul128(System.UInt64,System.UInt64)">
+            <summary>
+            64x64 -> 128 multiplication, reference implementation
+            </summary>
+            <param name="x"></param>
+            <param name="y"></param>
+            <returns>
+            Taken from https://github.com/chfast/intx/blob/master/include/intx/int128.hpp
+            </returns>
+        </member>
+        <member name="M:Z0.math.mul32x64(Z0.Pair{System.UInt32}@,Z0.Pair{System.UInt32}@)">
+            <summary>
+            Computes the full 64-bit product between two unsigned 32-bit integers
+            </summary>
+            <param name="src">The source integers</param>
+            <param name="dst">The multiplication result, partitioned into lo/hi parts</param>
+        </member>
+        <member name="M:Z0.math.mul32x64(Z0.Pair{System.UInt32}@)">
+            <summary>
+            Computes the full 64-bit product between two unsigned 32-bit integers
+            </summary>
+            <param name="src">The source integers</param>
+            <param name="dst">The multiplication result, partitioned into lo/hi parts</param>
+        </member>
+        <member name="M:Z0.math.mul64x128(Z0.Pair{System.UInt64}@)">
+            <summary>
+            Computes the full 128-bit product between two unsigned 64-bit integers
+            </summary>
+            <param name="src">The source integers</param>
+            <param name="dst">The multiplication result, partitioned into lo/hi parts</param>
+        </member>
+        <member name="M:Z0.math.mul64(System.UInt32,System.UInt32)">
+            <summary>
+            Computes the unsigned 64-bit product of two unsigned 32-bit integers
+            </summary>
+            <param name="x">The left operand</param>
+            <param name="y">The right operand</param>
+        </member>
+        <member name="M:Z0.math.mul64x128(Z0.Pair{System.UInt64}@,Z0.Pair{System.UInt64}@)">
+            <summary>
+            Computes the full 128-bit product between two unsigned 64-bit integers
+            </summary>
+            <param name="src">The source integers</param>
+            <param name="dst">The multiplication result, partitioned into lo/hi parts</param>
+        </member>
+        <member name="M:Z0.math.mul64x128(System.UInt64@,System.UInt64@,Z0.Pair{System.UInt64}@)">
+            <summary>
+            Computes the full 128-bit product between two unsigned 64-bit integers
+            </summary>
+            <param name="src">The source integers</param>
+            <param name="z">The multiplication result, partitioned into lo/hi parts</param>
+        </member>
+        <member name="M:Z0.math.mul64x128(System.ReadOnlySpan{System.UInt64},System.ReadOnlySpan{System.UInt64},System.Span{Z0.Pair{System.UInt64}})">
+            <summary>
+            Computes the full 128-bit products between corresponding 64-bit span elements
+            </summary>
+            <param name="xs">The left operands</param>
+            <param name="xs">The right operands</param>
+            <param name="zs">The multiplication result, partitioned into lo/hi parts</param>
+        </member>
+        <member name="M:Z0.math.mul64x128(System.ReadOnlySpan{System.UInt64},System.UInt64,System.Span{Z0.Pair{System.UInt64}})">
+            <summary>
+            Computes the full 128-bit products between 64-bit span elements and a 64-bit scalar
+            </summary>
+            <param name="xs">The left operands</param>
+            <param name="xs">The scalar value</param>
+            <param name="zs">The multiplication result, partitioned into lo/hi parts</param>
+        </member>
+        <member name="M:Z0.math.negate(System.SByte)">
+            <summary>
+            Negates the source value
+            </summary>
+            <param name="src">The source value</param>
+        </member>
+        <member name="M:Z0.math.negate(System.Byte)">
+            <summary>
+            Computes the two's complement negation of the source value
+            For example, -3 = -0b00000010 = 0b11111101
+            </summary>
+            <param name="src">The source value</param>
+            <remarks>See https://en.wikipedia.org/wiki/Two%27s_complement</remarks>
+        </member>
+        <member name="M:Z0.math.negate(System.Int16)">
+            <summary>
+            Negates the source value
+            </summary>
+            <param name="src">The source value</param>
+        </member>
+        <member name="M:Z0.math.negate(System.UInt16)">
+            <summary>
+            Computes the two's complement negation of the source value
+            </summary>
+            <param name="src">The source value</param>
+            <remarks>See https://en.wikipedia.org/wiki/Two%27s_complement</remarks>
+        </member>
+        <member name="M:Z0.math.negate(System.Int32)">
+            <summary>
+            Negates the source value
+            </summary>
+            <param name="src">The source value</param>
+        </member>
+        <member name="M:Z0.math.negate(System.UInt32)">
+            <summary>
+            Computes the two's complement negation of the source value
+            </summary>
+            <param name="src">The source value</param>
+            <remarks>See https://en.wikipedia.org/wiki/Two%27s_complement</remarks>
+        </member>
+        <member name="M:Z0.math.negate(System.Int64)">
+            <summary>
+            Negates the source value
+            </summary>
+            <param name="src">The source value</param>
+        </member>
+        <member name="M:Z0.math.negate(System.UInt64)">
+            <summary>
+            Computes the two's complement negation of the source value
+            </summary>
+            <param name="src">The source value</param>
+            <remarks>See https://en.wikipedia.org/wiki/Two%27s_complement</remarks>
+        </member>
+        <member name="M:Z0.math.negate(System.Single)">
+            <summary>
+            Negates the source value
+            </summary>
+            <param name="src">The source value</param>
+        </member>
+        <member name="M:Z0.math.negate(System.Double)">
+            <summary>
+            Negates the source value
+            </summary>
+            <param name="src">The source value</param>
+        </member>
+        <member name="M:Z0.math.even(System.SByte)">
+            <summary>
+            Returns true if the test value is even by examining the least significant bit
+            </summary>
+            <param name="test">The value to test</param>
+        </member>
+        <member name="M:Z0.math.even(System.Byte)">
+            <summary>
+            Returns true if the test value is even by examining the least significant bit
+            </summary>
+            <param name="test">The value to test</param>
+        </member>
+        <member name="M:Z0.math.even(System.Int16)">
+            <summary>
+            Returns true if the test value is even by examining the least significant bit
+            </summary>
+            <param name="test">The value to test</param>
+        </member>
+        <member name="M:Z0.math.even(System.Int32)">
+            <summary>
+            Returns true if the test value is even by examining the least significant bit
+            </summary>
+            <param name="test">The value to test</param>
+        </member>
+        <member name="M:Z0.math.even(System.UInt16)">
+            <summary>
+            Returns true if the test value is even by examining the least significant bit
+            </summary>
+            <param name="test">The value to test</param>
+        </member>
+        <member name="M:Z0.math.even(System.UInt32)">
+            <summary>
+            Returns true if the test value is even by examining the least significant bit
+            </summary>
+            <param name="test">The value to test</param>
+        </member>
+        <member name="M:Z0.math.even(System.Int64)">
+            <summary>
+            Returns true if the test value is even by examining the least significant bit
+            </summary>
+            <param name="test">The value to test</param>
+        </member>
+        <member name="M:Z0.math.even(System.UInt64)">
+            <summary>
+            Returns true if the test value is even by examining the least significant bit
+            </summary>
+            <param name="test">The value to test</param>
+        </member>
+        <member name="M:Z0.math.odd(System.SByte)">
+            <summary>
+            Returns true if the test value is odd by examining the least significant bit
+            </summary>
+            <param name="test">The value to test</param>
+        </member>
+        <member name="M:Z0.math.odd(System.Byte)">
+            <summary>
+            Returns true if the test value is odd by examining the least significant bit
+            </summary>
+            <param name="test">The value to test</param>
+        </member>
+        <member name="M:Z0.math.odd(System.Int16)">
+            <summary>
+            Returns true if the test value is odd by examining the least significant bit
+            </summary>
+            <param name="test">The value to test</param>
+        </member>
+        <member name="M:Z0.math.odd(System.UInt16)">
+            <summary>
+            Returns true if the test value is odd by examining the least significant bit
+            </summary>
+            <param name="test">The value to test</param>
+        </member>
+        <member name="M:Z0.math.odd(System.Int32)">
+            <summary>
+            Returns true if the test value is odd by examining the least significant bit
+            </summary>
+            <param name="test">The value to test</param>
+        </member>
+        <member name="M:Z0.math.odd(System.UInt32)">
+            <summary>
+            Returns true if the test value is odd by examining the least significant bit
+            </summary>
+            <param name="test">The value to test</param>
+        </member>
+        <member name="M:Z0.math.odd(System.Int64)">
+            <summary>
+            Returns true if the test value is odd by examining the least significant bit
+            </summary>
+            <param name="test">The value to test</param>
+        </member>
+        <member name="M:Z0.math.odd(System.UInt64)">
+            <summary>
+            Returns true if the test value is odd by examining the least significant bit
+            </summary>
+            <param name="test">The value to test</param>
+        </member>
+        <member name="M:Z0.math.squeeze(System.Byte,System.Byte)">
+            <summary>
+            Evenly projects points from the interval [0,2^8 - 1] onto the interval [0,max]
+            </summary>
+            <param name="src">The value to contract</param>
+            <param name="max">The maximum value in the target interval</param>
+        </member>
+        <member name="M:Z0.math.squeeze(System.UInt16,System.UInt16)">
+            <summary>
+            Evenly projects points from the interval [0,2^15 - 1] onto the interval [0,max]
+            </summary>
+            <param name="src">The value to contract</param>
+            <param name="max">The maximum value in the target interval</param>
+        </member>
+        <member name="M:Z0.math.squeeze(System.UInt32,System.UInt32)">
+            <summary>
+            Evenly projects points from the interval [0,2^31 - 1] onto the interval [0,max]
+            </summary>
+            <param name="src">The value to contract</param>
+            <param name="max">The maximum value in the target interval</param>
+        </member>
+        <member name="M:Z0.math.squeeze(System.UInt64,System.UInt64)">
+            <summary>
+            Evenly projects points from the interval [0,2^63 - 1] onto the interval [0,max]
+            </summary>
+            <param name="src">The value to contract</param>
+            <param name="max">The maximum value in the target interval</param>
+        </member>
+        <member name="M:Z0.math.sub(Z0.ConstPair{System.UInt64}@,Z0.ConstPair{System.UInt64}@)">
+            <summary>
+            Computes the difference of two 128-bit integers
+            </summary>
+            <param name="x">The first integer, represented via paired hi/lo components</param>
+            <param name="y">The second integer, represented via paired hi/lo components</param>
+            <remarks>Follows https://github.com/chfast/intx/include/intx/int128.hpp</remarks>
+        </member>
+        <member name="M:Z0.math.sub(System.UInt64@,System.UInt64@,System.UInt64@)">
+            <summary>
+            Computes the difference c := a - b between 128-bit unsigned integers a and b
+            </summary>
+            <param name="a">A reference to the left 128-bits</param>
+            <param name="b">A reference to the right 128-bits</param>
+            <param name="c">A reference to the target 128-bits</param>
+            <remarks>Follows https://github.com/chfast/intx/include/intx/int128.hpp</remarks>
+        </member>
+        <member name="M:Z0.math.sub128(System.UInt64@,System.UInt64@,System.UInt64)">
+            <summary>
+            Subtraction mod 2^128.
+            </summary>
+            <remarks>Taken from IntUtils.cs / Microsoft Machine Learning repository</remarks>
+        </member>
+        <member name="M:Z0.math.sub128(System.UInt64,System.UInt64,System.UInt64@,System.UInt64@)">
+            <summary>
+            Subtraction mod 2^128.
+            </summary>
+            <remarks>Taken from IntUtils.cs / Microsoft Machine Learning repository</remarks>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Z0.math.nand(System.SByte,System.SByte)" -->
+        <!-- Badly formed XML comment ignored for member "M:Z0.math.nand(System.Byte,System.Byte)" -->
+        <!-- Badly formed XML comment ignored for member "M:Z0.math.nand(System.Int16,System.Int16)" -->
+        <!-- Badly formed XML comment ignored for member "M:Z0.math.nand(System.UInt16,System.UInt16)" -->
+        <!-- Badly formed XML comment ignored for member "M:Z0.math.nand(System.Int32,System.Int32)" -->
+        <!-- Badly formed XML comment ignored for member "M:Z0.math.nand(System.UInt32,System.UInt32)" -->
+        <!-- Badly formed XML comment ignored for member "M:Z0.math.nand(System.Int64,System.Int64)" -->
+        <!-- Badly formed XML comment ignored for member "M:Z0.math.nand(System.UInt64,System.UInt64)" -->
+        <!-- Badly formed XML comment ignored for member "M:Z0.math.slor(System.Byte,System.Byte,System.Byte,System.Byte)" -->
+        <member name="M:Z0.math.sal(System.SByte,System.Byte)">
+            <summary>
+            Shifts the source value arithmetically leftwards by a specified offset
+            </summary>
+            <param name="src">The source value</param>
+            <param name="offset">The offset</param>
+            <typeparam name="T">The primal type</typeparam>
+        </member>
+        <member name="M:Z0.math.sal(System.Byte,System.Byte)">
+            <summary>
+            Shifts the source value arithmetically leftwards by a specified offset
+            </summary>
+            <param name="src">The source value</param>
+            <param name="offset">The offset</param>
+            <typeparam name="T">The primal type</typeparam>
+        </member>
+        <member name="M:Z0.math.sal(System.Int16,System.Byte)">
+            <summary>
+            Shifts the source value arithmetically leftwards by a specified offset
+            </summary>
+            <param name="src">The source value</param>
+            <param name="offset">The offset</param>
+            <typeparam name="T">The primal type</typeparam>
+        </member>
+        <member name="M:Z0.math.sal(System.UInt16,System.Byte)">
+            <summary>
+            Shifts the source value arithmetically leftwards by a specified offset
+            </summary>
+            <param name="src">The source value</param>
+            <param name="offset">The offset</param>
+            <typeparam name="T">The primal type</typeparam>
+        </member>
+        <member name="M:Z0.math.sal(System.Int32,System.Byte)">
+            <summary>
+            Shifts the source value arithmetically leftwards by a specified offset
+            </summary>
+            <param name="src">The source value</param>
+            <param name="offset">The offset</param>
+            <typeparam name="T">The primal type</typeparam>
+        </member>
+        <member name="M:Z0.math.sal(System.UInt32,System.Byte)">
+            <summary>
+            Shifts the source value arithmetically leftwards by a specified offset
+            </summary>
+            <param name="src">The source value</param>
+            <param name="offset">The offset</param>
+            <typeparam name="T">The primal type</typeparam>
+        </member>
+        <member name="M:Z0.math.sal(System.Int64,System.Byte)">
+            <summary>
+            Shifts the source value arithmetically leftwards by a specified offset
+            </summary>
+            <param name="src">The source value</param>
+            <param name="offset">The offset</param>
+            <typeparam name="T">The primal type</typeparam>
+        </member>
+        <member name="M:Z0.math.sal(System.UInt64,System.Byte)">
+            <summary>
+            Shifts the source value arithmetically leftwards by a specified offset
+            </summary>
+            <param name="src">The source value</param>
+            <param name="offset">The offset</param>
+            <typeparam name="T">The primal type</typeparam>
+        </member>
+        <member name="M:Z0.math.sra(System.SByte,System.Byte)">
+            <summary>
+            Computes the arithmetic right shift z := src >> offset
+            </summary>
+            <param name="src">The source operand</param>
+            <param name="offset">The number of bits to shift</param>
+        </member>
+        <member name="M:Z0.math.sra(System.Byte,System.Byte)">
+            <summary>
+            Computes the arithmetic right shift z := src >> offset
+            </summary>
+            <param name="src">The source operand</param>
+            <param name="offset">The number of bits to shift</param>
+        </member>
+        <member name="M:Z0.math.sra(System.Int16,System.Byte)">
+            <summary>
+            Computes the arithmetic right shift z := src >> offset
+            </summary>
+            <param name="src">The source operand</param>
+            <param name="offset">The number of bits to shift</param>
+        </member>
+        <member name="M:Z0.math.sra(System.UInt16,System.Byte)">
+            <summary>
+            Computes the arithmetic right shift z := src >> offset
+            </summary>
+            <param name="src">The source operand</param>
+            <param name="offset">The number of bits to shift</param>
+        </member>
+        <member name="M:Z0.math.sra(System.Int32,System.Byte)">
+            <summary>
+            Computes the arithmetic right shift z := src >> offset
+            </summary>
+            <param name="src">The source operand</param>
+            <param name="offset">The number of bits to shift</param>
+        </member>
+        <member name="M:Z0.math.sra(System.UInt32,System.Byte)">
+            <summary>
+            Computes the arithmetic right shift z := src >> offset
+            </summary>
+            <param name="src">The source operand</param>
+            <param name="offset">The number of bits to shift</param>
+        </member>
+        <member name="M:Z0.math.sra(System.Int64,System.Byte)">
+            <summary>
+            Computes the arithmetic right shift z := src >> offset
+            </summary>
+            <param name="src">The source operand</param>
+            <param name="offset">The number of bits to shift</param>
+        </member>
+        <member name="M:Z0.math.sra(System.UInt64,System.Byte)">
+            <summary>
+            Computes the arithmetic right shift z := src >> offset
+            </summary>
+            <param name="src">The source operand</param>
+            <param name="offset">The number of bits to shift</param>
+        </member>
+        <member name="M:Z0.math.sll(System.SByte,System.Byte)">
+            <summary>
+            Applies a logical left shift to the source value
+            </summary>
+            <param name="src">The source value</param>
+            <param name="offset">The number of bits to shift leftwards</param>
+        </member>
+        <member name="M:Z0.math.sll(System.Byte,System.Byte)">
+            <summary>
+            Applies a logical left shift to the source value
+            </summary>
+            <param name="src">The source value</param>
+            <param name="offset">The number of bits to shift leftwards</param>
+        </member>
+        <member name="M:Z0.math.sll(System.Int16,System.Byte)">
+            <summary>
+            Applies a logical left shift to the source value
+            </summary>
+            <param name="src">The source value</param>
+            <param name="offset">The number of bits to shift leftwards</param>
+        </member>
+        <member name="M:Z0.math.sll(System.UInt16,System.Byte)">
+            <summary>
+            Applies a logical left shift to the source value
+            </summary>
+            <param name="src">The source value</param>
+            <param name="offset">The number of bits to shift leftwards</param>
+        </member>
+        <member name="M:Z0.math.sll(System.Int32,System.Byte)">
+            <summary>
+            Applies a logical left shift to the source value
+            </summary>
+            <param name="src">The source value</param>
+            <param name="offset">The number of bits to shift leftwards</param>
+        </member>
+        <member name="M:Z0.math.sll(System.UInt32,System.Byte)">
+            <summary>
+            Applies a logical left shift to the source value
+            </summary>
+            <param name="src">The source value</param>
+            <param name="offset">The number of bits to shift leftwards</param>
+        </member>
+        <member name="M:Z0.math.sll(System.Int64,System.Byte)">
+            <summary>
+            Applies a logical left shift to the source value
+            </summary>
+            <param name="src">The source value</param>
+            <param name="offset">The number of bits to shift leftwards</param>
+        </member>
+        <member name="M:Z0.math.sll(System.UInt64,System.Byte)">
+            <summary>
+            Applies a logical left shift to the source value
+            </summary>
+            <param name="src">The source value</param>
+            <param name="offset">The number of bits to shift leftwards</param>
+        </member>
+        <member name="M:Z0.math.srl(System.SByte,System.Byte)">
+            <summary>
+            Applies a logical right shift to the source value
+            </summary>
+            <param name="src">The source value</param>
+            <param name="offset">The number of bits to shift rightwards</param>
+        </member>
+        <member name="M:Z0.math.srl(System.Byte,System.Byte)">
+            <summary>
+            Applies a logical right shift to the source value
+            </summary>
+            <param name="src">The source value</param>
+            <param name="offset">The number of bits to shift rightwards</param>
+        </member>
+        <member name="M:Z0.math.srl(System.Int16,System.Byte)">
+            <summary>
+            Applies a logical right shift to the source value
+            </summary>
+            <param name="src">The source value</param>
+            <param name="offset">The number of bits to shift rightwards</param>
+        </member>
+        <member name="M:Z0.math.srl(System.UInt16,System.Byte)">
+            <summary>
+            Applies a logical right shift to the source value
+            </summary>
+            <param name="src">The source value</param>
+            <param name="offset">The number of bits to shift rightwards</param>
+        </member>
+        <member name="M:Z0.math.srl(System.Int32,System.Byte)">
+            <summary>
+            Applies a logical right shift to the source value
+            </summary>
+            <param name="src">The source value</param>
+            <param name="offset">The number of bits to shift rightwards</param>
+        </member>
+        <member name="M:Z0.math.srl(System.UInt32,System.Byte)">
+            <summary>
+            Applies a logical right shift to the source value
+            </summary>
+            <param name="src">The source value</param>
+            <param name="offset">The number of bits to shift rightwards</param>
+        </member>
+        <member name="M:Z0.math.srl(System.Int64,System.Byte)">
+            <summary>
+            Applies a logical right shift to the source value
+            </summary>
+            <param name="src">The source value</param>
+            <param name="offset">The number of bits to shift rightwards</param>
+        </member>
+        <member name="M:Z0.math.srl(System.UInt64,System.Byte)">
+            <summary>
+            Applies a logical right shift to the source value
+            </summary>
+            <param name="src">The source value</param>
+            <param name="offset">The number of bits to shift rightwards</param>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Z0.math.xors(System.Byte,System.Byte)" -->
+        <!-- Badly formed XML comment ignored for member "M:Z0.math.xors(System.SByte,System.Byte)" -->
+        <!-- Badly formed XML comment ignored for member "M:Z0.math.xors(System.UInt16,System.Byte)" -->
+        <!-- Badly formed XML comment ignored for member "M:Z0.math.xors(System.Int16,System.Byte)" -->
+        <!-- Badly formed XML comment ignored for member "M:Z0.math.xors(System.UInt32,System.Byte)" -->
+        <!-- Badly formed XML comment ignored for member "M:Z0.math.xors(System.Int32,System.Byte)" -->
+        <!-- Badly formed XML comment ignored for member "M:Z0.math.xors(System.Int64,System.Byte)" -->
+        <!-- Badly formed XML comment ignored for member "M:Z0.math.xors(System.UInt64,System.Byte)" -->
+        <!-- Badly formed XML comment ignored for member "M:Z0.math.xorsl(System.Byte,System.Byte)" -->
+        <!-- Badly formed XML comment ignored for member "M:Z0.math.xorsl(System.SByte,System.Byte)" -->
+        <!-- Badly formed XML comment ignored for member "M:Z0.math.xorsl(System.UInt16,System.Byte)" -->
+        <!-- Badly formed XML comment ignored for member "M:Z0.math.xorsl(System.Int16,System.Byte)" -->
+        <!-- Badly formed XML comment ignored for member "M:Z0.math.xorsl(System.Int32,System.Byte)" -->
+        <!-- Badly formed XML comment ignored for member "M:Z0.math.xorsl(System.UInt32,System.Byte)" -->
+        <!-- Badly formed XML comment ignored for member "M:Z0.math.xorsl(System.Int64,System.Byte)" -->
+        <!-- Badly formed XML comment ignored for member "M:Z0.math.xorsl(System.UInt64,System.Byte)" -->
+        <member name="M:Z0.math.xorsr(System.Byte,System.Byte)">
+            <summary>
+            Computes a^(a >> offset)
+            </summary>
+            <param name="a">The source value</param>
+            <param name="offset">The number of bits to shift the source value rightwards</param>
+        </member>
+        <member name="M:Z0.math.xorsr(System.SByte,System.Byte)">
+            <summary>
+            Computes a^(a >> offset)
+            </summary>
+            <param name="a">The source value</param>
+            <param name="offset">The number of bits to shift the source value rightwards</param>
+        </member>
+        <member name="M:Z0.math.xorsr(System.Int16,System.Byte)">
+            <summary>
+            Computes a^(a >> offset)
+            </summary>
+            <param name="a">The source value</param>
+            <param name="offset">The number of bits to shift the source value rightwards</param>
+        </member>
+        <member name="M:Z0.math.xorsr(System.UInt16,System.Byte)">
+            <summary>
+            Computes a^(a >> offset)
+            </summary>
+            <param name="a">The source value</param>
+            <param name="offset">The number of bits to shift the source value rightwards</param>
+        </member>
+        <member name="M:Z0.math.xorsr(System.Int32,System.Byte)">
+            <summary>
+            Computes a^(a >> offset)
+            </summary>
+            <param name="a">The source value</param>
+            <param name="offset">The number of bits to shift the source value rightwards</param>
+        </member>
+        <member name="M:Z0.math.xorsr(System.UInt32,System.Byte)">
+            <summary>
+            Computes a^(a >> offset)
+            </summary>
+            <param name="a">The source value</param>
+            <param name="offset">The number of bits to shift the source value rightwards</param>
+        </member>
+        <member name="M:Z0.math.xorsr(System.Int64,System.Byte)">
+            <summary>
+            Computes a^(a >> offset)
+            </summary>
+            <param name="a">The source value</param>
+            <param name="offset">The number of bits to shift the source value rightwards</param>
+        </member>
+        <member name="M:Z0.math.xorsr(System.UInt64,System.Byte)">
+            <summary>
+            Computes a^(a >> offset)
+            </summary>
+            <param name="a">The source value</param>
+            <param name="offset">The number of bits to shift the source value rightwards</param>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Z0.math.between(System.Byte,System.Byte,System.Byte)" -->
+        <!-- Badly formed XML comment ignored for member "M:Z0.math.between(System.SByte,System.SByte,System.SByte)" -->
+        <!-- Badly formed XML comment ignored for member "M:Z0.math.between(System.Int16,System.Int16,System.Int16)" -->
+        <!-- Badly formed XML comment ignored for member "M:Z0.math.between(System.UInt16,System.UInt16,System.UInt16)" -->
+        <!-- Badly formed XML comment ignored for member "M:Z0.math.between(System.Int32,System.Int32,System.Int32)" -->
+        <!-- Badly formed XML comment ignored for member "M:Z0.math.between(System.UInt32,System.UInt32,System.UInt32)" -->
+        <!-- Badly formed XML comment ignored for member "M:Z0.math.between(System.Int64,System.Int64,System.Int64)" -->
+        <!-- Badly formed XML comment ignored for member "M:Z0.math.between(System.UInt64,System.UInt64,System.UInt64)" -->
+        <member name="M:Z0.math.eq(System.SByte,System.SByte)">
+            <summary>
+            Defines the test eq:bit := a == b, succeeding if the first operand is equal to the second
+            </summary>
+            <param name="a">The left operand</param>
+            <param name="b">The right operand</param>
+        </member>
+        <member name="M:Z0.math.eq(System.Byte,System.Byte)">
+            <summary>
+            Defines the test eq:bit := a == b, succeeding if the first operand is equal to the second
+            </summary>
+            <param name="a">The left operand</param>
+            <param name="b">The right operand</param>
+        </member>
+        <member name="M:Z0.math.eq(System.Int16,System.Int16)">
+            <summary>
+            Defines the test eq:bit := a == b, succeeding if the first operand is equal to the second
+            </summary>
+            <param name="a">The left operand</param>
+            <param name="b">The right operand</param>
+        </member>
+        <member name="M:Z0.math.eq(System.UInt16,System.UInt16)">
+            <summary>
+            Defines the test eq:bit := a == b, succeeding if the first operand is equal to the second
+            </summary>
+            <param name="a">The left operand</param>
+            <param name="b">The right operand</param>
+        </member>
+        <member name="M:Z0.math.eq(System.Int32,System.Int32)">
+            <summary>
+            Defines the test eq:bit := a == b, succeeding if the first operand is equal to the second
+            </summary>
+            <param name="a">The left operand</param>
+            <param name="b">The right operand</param>
+        </member>
+        <member name="M:Z0.math.eq(System.UInt32,System.UInt32)">
+            <summary>
+            Defines the test eq:bit := a == b, succeeding if the first operand is equal to the second
+            </summary>
+            <param name="a">The left operand</param>
+            <param name="b">The right operand</param>
+        </member>
+        <member name="M:Z0.math.eq(System.Int64,System.Int64)">
+            <summary>
+            Defines the test eq:bit := a == b, succeeding if the first operand is equal to the second
+            </summary>
+            <param name="a">The left operand</param>
+            <param name="b">The right operand</param>
+        </member>
+        <member name="M:Z0.math.eq(System.UInt64,System.UInt64)">
+            <summary>
+            Defines the test eq:bit := a == b, succeeding if the first operand is equal to the second
+            </summary>
+            <param name="a">The left operand</param>
+            <param name="b">The right operand</param>
+        </member>
+        <member name="M:Z0.math.eqb(System.SByte,System.SByte)">
+            <summary>
+            Defines a binary operator that returns 1 if the operands are equal 0 otherwise
+            </summary>
+            <param name="a">The left operand</param>
+            <param name="b">The right operand</param>
+        </member>
+        <member name="M:Z0.math.eqb(System.Byte,System.Byte)">
+            <summary>
+            Defines a binary operator that returns 1 if the operands are equal 0 otherwise
+            </summary>
+            <param name="a">The left operand</param>
+            <param name="b">The right operand</param>
+        </member>
+        <member name="M:Z0.math.eqb(System.Int16,System.Int16)">
+            <summary>
+            Defines a binary operator that returns 1 if the operands are equal 0 otherwise
+            </summary>
+            <param name="a">The left operand</param>
+            <param name="b">The right operand</param>
+        </member>
+        <member name="M:Z0.math.eqb(System.UInt16,System.UInt16)">
+            <summary>
+            Defines a binary operator that returns 1 if the operands are equal 0 otherwise
+            </summary>
+            <param name="a">The left operand</param>
+            <param name="b">The right operand</param>
+        </member>
+        <member name="M:Z0.math.eqb(System.Int32,System.Int32)">
+            <summary>
+            Defines a binary operator that returns 1 if the operands are equal 0 otherwise
+            </summary>
+            <param name="a">The left operand</param>
+            <param name="b">The right operand</param>
+        </member>
+        <member name="M:Z0.math.eqb(System.UInt32,System.UInt32)">
+            <summary>
+            Defines a binary operator that returns 1 if the operands are equal 0 otherwise
+            </summary>
+            <param name="a">The left operand</param>
+            <param name="b">The right operand</param>
+        </member>
+        <member name="M:Z0.math.eqb(System.Int64,System.Int64)">
+            <summary>
+            Defines a binary operator that returns 1 if the operands are equal 0 otherwise
+            </summary>
+            <param name="a">The left operand</param>
+            <param name="b">The right operand</param>
+        </member>
+        <member name="M:Z0.math.eqb(System.UInt64,System.UInt64)">
+            <summary>
+            Defines a binary operator that returns 1 if the operands are equal 0 otherwise
+            </summary>
+            <param name="a">The left operand</param>
+            <param name="b">The right operand</param>
+        </member>
+        <member name="M:Z0.math.eqz(System.SByte,System.SByte)">
+            <summary>
+            Defines the operator eqz(a,b) := a == b ? Min : Zero
+            </summary>
+            <param name="a">The left operand</param>
+            <param name="b">The right operand</param>
+        </member>
+        <member name="M:Z0.math.eqz(System.Byte,System.Byte)">
+            <summary>
+            Defines the operator eqz(a,b) := a == b ? Min : Zero
+            </summary>
+            <param name="a">The left operand</param>
+            <param name="b">The right operand</param>
+        </member>
+        <member name="M:Z0.math.eqz(System.Int16,System.Int16)">
+            <summary>
+            Defines the operator eqz(a,b) := a == b ? Min : Zero
+            </summary>
+            <param name="a">The left operand</param>
+            <param name="b">The right operand</param>
+        </member>
+        <member name="M:Z0.math.eqz(System.UInt16,System.UInt16)">
+            <summary>
+            Defines the operator eqz(a,b) := a == b ? Min : Zero
+            </summary>
+            <param name="a">The left operand</param>
+            <param name="b">The right operand</param>
+        </member>
+        <member name="M:Z0.math.eqz(System.Int32,System.Int32)">
+            <summary>
+            Defines the operator eqz(a,b) := a == b ? Min : Zero
+            </summary>
+            <param name="a">The left operand</param>
+            <param name="b">The right operand</param>
+        </member>
+        <member name="M:Z0.math.eqz(System.UInt32,System.UInt32)">
+            <summary>
+            Defines the operator eqz(a,b) := a == b ? Min : Zero
+            </summary>
+            <param name="a">The left operand</param>
+            <param name="b">The right operand</param>
+        </member>
+        <member name="M:Z0.math.eqz(System.Int64,System.Int64)">
+            <summary>
+            Defines the operator eqz(a,b) := a == b ? Min : Zero
+            </summary>
+            <param name="a">The left operand</param>
+            <param name="b">The right operand</param>
+        </member>
+        <member name="M:Z0.math.eqz(System.UInt64,System.UInt64)">
+            <summary>
+            Defines the operator eqz(a,b) := a == b ? Min : Zero
+            </summary>
+            <param name="a">The left operand</param>
+            <param name="b">The right operand</param>
+        </member>
+        <member name="M:Z0.math.gt(System.SByte,System.SByte)">
+            <summary>
+            Defines the test gt:bit := a > b, succeeding if the left operand is larger than the right operand
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+        </member>
+        <member name="M:Z0.math.gt(System.Byte,System.Byte)">
+            <summary>
+            Defines the test gt:bit := a > b, succeeding if the left operand is larger than the right operand
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+        </member>
+        <member name="M:Z0.math.gt(System.Int16,System.Int16)">
+            <summary>
+            Defines the test gt:bit := a > b, succeeding if the left operand is larger than the right operand
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+        </member>
+        <member name="M:Z0.math.gt(System.UInt16,System.UInt16)">
+            <summary>
+            Defines the test gt:bit := a > b, succeeding if the left operand is larger than the right operand
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+        </member>
+        <member name="M:Z0.math.gt(System.Int32,System.Int32)">
+            <summary>
+            Defines the test gt:bit := a > b, succeeding if the left operand is larger than the right operand
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+        </member>
+        <member name="M:Z0.math.gt(System.UInt32,System.UInt32)">
+            <summary>
+            Defines the test gt:bit := a > b, succeeding if the left operand is larger than the right operand
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+        </member>
+        <member name="M:Z0.math.gt(System.Int64,System.Int64)">
+            <summary>
+            Defines the test gt:bit := a > b, succeeding if the left operand is larger than the right operand
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+        </member>
+        <member name="M:Z0.math.gt(System.UInt64,System.UInt64)">
+            <summary>
+            Defines the test gt:bit := a > b, succeeding if the left operand is larger than the right operand
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+        </member>
+        <member name="M:Z0.math.gteq(System.SByte,System.SByte)">
+            <summary>
+            Defines the test gt:bit := a >= b, succeeding if the first operand is larger than or equal to the second
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="a">The second operand</param>
+        </member>
+        <member name="M:Z0.math.gteq(System.Byte,System.Byte)">
+            <summary>
+            Defines the test gt:bit := a >= b, succeeding if the first operand is larger than or equal to the second
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="a">The second operand</param>
+        </member>
+        <member name="M:Z0.math.gteq(System.Int16,System.Int16)">
+            <summary>
+            Defines the test gt:bit := a >= b, succeeding if the first operand is larger than or equal to the second
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="a">The second operand</param>
+        </member>
+        <member name="M:Z0.math.gteq(System.UInt16,System.UInt16)">
+            <summary>
+            Defines the test gt:bit := a >= b, succeeding if the first operand is larger than or equal to the second
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="a">The second operand</param>
+        </member>
+        <member name="M:Z0.math.gteq(System.Int32,System.Int32)">
+            <summary>
+            Defines the test gt:bit := a >= b, succeeding if the first operand is larger than or equal to the second
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="a">The second operand</param>
+        </member>
+        <member name="M:Z0.math.gteq(System.UInt32,System.UInt32)">
+            <summary>
+            Defines the test gt:bit := a >= b, succeeding if the first operand is larger than or equal to the second
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="a">The second operand</param>
+        </member>
+        <member name="M:Z0.math.gteq(System.Int64,System.Int64)">
+            <summary>
+            Defines the test gt:bit := a >= b, succeeding if the first operand is larger than or equal to the second
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="a">The second operand</param>
+        </member>
+        <member name="M:Z0.math.gteq(System.UInt64,System.UInt64)">
+            <summary>
+            Defines the test gt:bit := a >= b, succeeding if the first operand is larger than or equal to the second
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="a">The second operand</param>
+        </member>
+        <member name="M:Z0.math.negative(System.SByte)">
+            <summary>
+            Returns true if the source value is less than zero, false otherwise
+            </summary>
+            <param name="x">The value to inspect</param>
+        </member>
+        <member name="M:Z0.math.negative(System.Int16)">
+            <summary>
+            Returns true if the source value is less than zero, false otherwise
+            </summary>
+            <param name="x">The value to inspect</param>
+        </member>
+        <member name="M:Z0.math.negative(System.Int32)">
+            <summary>
+            Returns true if the source value is less than zero, false otherwise
+            </summary>
+            <param name="x">The value to inspect</param>
+        </member>
+        <member name="M:Z0.math.negative(System.Int64)">
+            <summary>
+            Returns true if the source value is less than zero, false otherwise
+            </summary>
+            <param name="x">The value to inspect</param>
+        </member>
+        <member name="M:Z0.math.neq(System.SByte,System.SByte)">
+            <summary>
+            Defines the test neq:bit := a != b, succeeding if the operands are not equal
+            </summary>
+            <param name="a">The left operand</param>
+            <param name="b">The right operand</param>
+        </member>
+        <member name="M:Z0.math.neq(System.Byte,System.Byte)">
+            <summary>
+            Defines the test neq:bit := a != b, succeeding if the operands are not equal
+            </summary>
+            <param name="a">The left operand</param>
+            <param name="b">The right operand</param>
+        </member>
+        <member name="M:Z0.math.neq(System.Int16,System.Int16)">
+            <summary>
+            Defines the test neq:bit := a != b, succeeding if the operands are not equal
+            </summary>
+            <param name="a">The left operand</param>
+            <param name="b">The right operand</param>
+        </member>
+        <member name="M:Z0.math.neq(System.UInt16,System.UInt16)">
+            <summary>
+            Defines the test neq:bit := a != b, succeeding if the operands are not equal
+            </summary>
+            <param name="a">The left operand</param>
+            <param name="b">The right operand</param>
+        </member>
+        <member name="M:Z0.math.neq(System.Int32,System.Int32)">
+            <summary>
+            Defines the test neq:bit := a != b, succeeding if the operands are not equal
+            </summary>
+            <param name="a">The left operand</param>
+            <param name="b">The right operand</param>
+        </member>
+        <member name="M:Z0.math.neq(System.UInt32,System.UInt32)">
+            <summary>
+            Defines the test neq:bit := a != b, succeeding if the operands are not equal
+            </summary>
+            <param name="a">The left operand</param>
+            <param name="b">The right operand</param>
+        </member>
+        <member name="M:Z0.math.neq(System.Int64,System.Int64)">
+            <summary>
+            Defines the test neq:bit := a != b, succeeding if the operands are not equal
+            </summary>
+            <param name="a">The left operand</param>
+            <param name="b">The right operand</param>
+        </member>
+        <member name="M:Z0.math.neq(System.UInt64,System.UInt64)">
+            <summary>
+            Defines the test neq:bit := a != b, succeeding if the operands are not equal
+            </summary>
+            <param name="a">The left operand</param>
+            <param name="b">The right operand</param>
+        </member>
+        <member name="M:Z0.math.nonz(System.SByte)">
+            <summary>
+            Defines the test nonz:bit := src != 0, succeeding if the source operand is nonzero
+            </summary>
+            <param name="src">The value to test</param>
+        </member>
+        <member name="M:Z0.math.nonz(System.Byte)">
+            <summary>
+            Defines the test nonz:bit := src != 0, succeeding if the source operand is nonzero
+            </summary>
+            <param name="src">The value to test</param>
+        </member>
+        <member name="M:Z0.math.nonz(System.Int16)">
+            <summary>
+            Defines the test nonz:bit := src != 0, succeeding if the source operand is nonzero
+            </summary>
+            <param name="src">The value to test</param>
+        </member>
+        <member name="M:Z0.math.nonz(System.UInt16)">
+            <summary>
+            Defines the test nonz:bit := src != 0, succeeding if the source operand is nonzero
+            </summary>
+            <param name="src">The value to test</param>
+        </member>
+        <member name="M:Z0.math.nonz(System.Int32)">
+            <summary>
+            Defines the test nonz:bit := src != 0, succeeding if the source operand is nonzero
+            </summary>
+            <param name="src">The value to test</param>
+        </member>
+        <member name="M:Z0.math.nonz(System.UInt32)">
+            <summary>
+            Defines the test nonz:bit := src != 0, succeeding if the source operand is nonzero
+            </summary>
+            <param name="src">The value to test</param>
+        </member>
+        <member name="M:Z0.math.nonz(System.Int64)">
+            <summary>
+            Defines the test nonz:bit := src != 0, succeeding if the source operand is nonzero
+            </summary>
+            <param name="src">The value to test</param>
+        </member>
+        <member name="M:Z0.math.nonz(System.UInt64)">
+            <summary>
+            Defines the test nonz:bit := src != 0, succeeding if the source operand is nonzero
+            </summary>
+            <param name="src">The value to test</param>
+        </member>
+        <member name="M:Z0.math.nonz(System.SByte,System.SByte)">
+            <summary>
+            Defines the operator nonz(src,alt) := nonz(src) ? alt : src, returning the alternate
+            value if the nonz test succeeds and the source value otherwise
+            </summary>
+            <param name="src">The test value</param>
+            <param name="alt">The alternative value to return if the test succeeds</param>
+        </member>
+        <member name="M:Z0.math.nonz(System.Byte,System.Byte)">
+            <summary>
+            Defines the operator nonz(src,alt) := nonz(src) ? alt : src, returning the alternate
+            value if the nonz test succeeds and the source value otherwise
+            </summary>
+            <param name="src">The test value</param>
+            <param name="alt">The alternative value to return if the test succeeds</param>
+        </member>
+        <member name="M:Z0.math.nonz(System.Int16,System.Int16)">
+            <summary>
+            Defines the operator nonz(src,alt) := nonz(src) ? alt : src, returning the alternate
+            value if the nonz test succeeds and the source value otherwise
+            </summary>
+            <param name="src">The test value</param>
+            <param name="alt">The alternative value to return if the test succeeds</param>
+        </member>
+        <member name="M:Z0.math.nonz(System.UInt16,System.UInt16)">
+            <summary>
+            Defines the operator nonz(src,alt) := nonz(src) ? alt : src, returning the alternate
+            value if the nonz test succeeds and the source value otherwise
+            </summary>
+            <param name="src">The test value</param>
+            <param name="alt">The alternative value to return if the test succeeds</param>
+        </member>
+        <member name="M:Z0.math.nonz(System.Int32,System.Int32)">
+            <summary>
+            Defines the operator nonz(src,alt) := nonz(src) ? alt : src, returning the alternate
+            value if the nonz test succeeds and the source value otherwise
+            </summary>
+            <param name="src">The test value</param>
+            <param name="alt">The alternative value to return if the test succeeds</param>
+        </member>
+        <member name="M:Z0.math.nonz(System.UInt32,System.UInt32)">
+            <summary>
+            Defines the operator nonz(src,alt) := nonz(src) ? alt : src, returning the alternate
+            value if the nonz test succeeds and the source value otherwise
+            </summary>
+            <param name="src">The test value</param>
+            <param name="alt">The alternative value to return if the test succeeds</param>
+        </member>
+        <member name="M:Z0.math.nonz(System.Int64,System.Int64)">
+            <summary>
+            Defines the operator nonz(src,alt) := nonz(src) ? alt : src, returning the alternate
+            value if the nonz test succeeds and the source value otherwise
+            </summary>
+            <param name="src">The test value</param>
+            <param name="alt">The alternative value to return if the test succeeds</param>
+        </member>
+        <member name="M:Z0.math.nonz(System.UInt64,System.UInt64)">
+            <summary>
+            Defines the operator nonz(src,alt) := nonz(src) ? alt : src, returning the alternate
+            value if the nonz test succeeds and the source value otherwise
+            </summary>
+            <param name="src">The test value</param>
+            <param name="alt">The alternative value to return if the test succeeds</param>
+        </member>
+        <member name="M:Z0.math.positive(System.SByte)">
+            <summary>
+            Returns true if the source value is greater than zero, false otherwise
+            </summary>
+            <param name="a">The value to inspect</param>
+        </member>
+        <member name="M:Z0.math.positive(System.Byte)">
+            <summary>
+            Returns true if the source value is greater than zero, false otherwise
+            </summary>
+            <param name="a">The value to inspect</param>
+        </member>
+        <member name="M:Z0.math.positive(System.Int16)">
+            <summary>
+            Returns true if the source value is greater than zero, false otherwise
+            </summary>
+            <param name="a">The value to inspect</param>
+        </member>
+        <member name="M:Z0.math.positive(System.UInt16)">
+            <summary>
+            Returns true if the source value is greater than zero, false otherwise
+            </summary>
+            <param name="a">The value to inspect</param>
+        </member>
+        <member name="M:Z0.math.positive(System.Int32)">
+            <summary>
+            Returns true if the source value is greater than zero, false otherwise
+            </summary>
+            <param name="a">The value to inspect</param>
+        </member>
+        <member name="M:Z0.math.positive(System.UInt32)">
+            <summary>
+            Returns true if the source value is greater than zero, false otherwise
+            </summary>
+            <param name="a">The value to inspect</param>
+        </member>
+        <member name="M:Z0.math.positive(System.Int64)">
+            <summary>
+            Returns true if the source value is greater than zero, false otherwise
+            </summary>
+            <param name="a">The value to inspect</param>
+        </member>
+        <member name="M:Z0.math.positive(System.UInt64)">
+            <summary>
+            Returns true if the source value is greater than zero, false otherwise
+            </summary>
+            <param name="a">The value to inspect</param>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Z0.math.within(System.SByte,System.SByte,System.SByte)" -->
+        <!-- Badly formed XML comment ignored for member "M:Z0.math.within(System.Byte,System.Byte,System.Byte)" -->
+        <!-- Badly formed XML comment ignored for member "M:Z0.math.within(System.Int16,System.Int16,System.Int16)" -->
+        <!-- Badly formed XML comment ignored for member "M:Z0.math.within(System.UInt16,System.UInt16,System.UInt16)" -->
+        <!-- Badly formed XML comment ignored for member "M:Z0.math.within(System.Int32,System.Int32,System.Int32)" -->
+        <!-- Badly formed XML comment ignored for member "M:Z0.math.within(System.UInt32,System.UInt32,System.UInt32)" -->
+        <!-- Badly formed XML comment ignored for member "M:Z0.math.within(System.Int64,System.Int64,System.Int64)" -->
+        <!-- Badly formed XML comment ignored for member "M:Z0.math.within(System.UInt64,System.UInt64,System.UInt64)" -->
+        <member name="T:Z0.ModN">
+            <summary>
+            Implements basic arithmetic operations relative to a fixed modulus
+            </summary>
+            <remarks>See https://arxiv.org/pdf/1902.01961.pdf</remarks>
+        </member>
+        <member name="M:Z0.ModN.mod(System.UInt32)">
+            <summary>
+            Computes a % N
+            </summary>
+            <param name="a">The dividend</param>
+        </member>
+        <member name="M:Z0.ModN.div(System.UInt32)">
+            <summary>
+            Computes the quotient a / N
+            </summary>
+            <param name="a">The dividend</param>
+        </member>
+        <member name="M:Z0.ModN.divisible(System.UInt32)">
+            <summary>
+            Computes whether a % n == 0
+            </summary>
+            <param name="a">The dividend</param>
+        </member>
+        <member name="M:Z0.ModN.divrem(System.UInt32,System.UInt32@,System.UInt32@)">
+            <summary>
+            Computes both the quotient and remainder
+            </summary>
+            <param name="a">The dividend</param>
+        </member>
+        <member name="M:Z0.fmathx.IsNaN(System.Single)">
+            <summary>
+            Returns true if a value is the NaN representative
+            </summary>
+            <param name="src">The source value</param>
+        </member>
+        <member name="M:Z0.fmathx.IsNaN(System.Double)">
+            <summary>
+            Returns true if a value is the NaN representative
+            </summary>
+            <param name="src">The source value</param>
+        </member>
+        <member name="M:Z0.fmathx.Infinite(System.Single)">
+            <summary>
+            Returns true if a floating point value represents an infinite value, false otherwise
+            </summary>
+            <param name="src">The source value</param>
+        </member>
+        <member name="M:Z0.fmathx.Infinite(System.Double)">
+            <summary>
+            Returns true if a floating point value represents an infinite value, false otherwise
+            </summary>
+            <param name="src">The source value</param>
+        </member>
+        <member name="M:Z0.fmathx.Finite(System.Single)">
+            <summary>
+            Returns true if a floating point value is non-infinite
+            </summary>
+            <param name="src">The source value</param>
+        </member>
+        <member name="M:Z0.fmathx.Finite(System.Double)">
+            <summary>
+            Returns true if a floating point value is non-infinite
+            </summary>
+            <param name="src">The source value</param>
+        </member>
+        <member name="T:Z0.fmath">
+            <summary>
+            Defines floating-point operations
+            </summary>
+        </member>
+        <member name="M:Z0.fmath.abs(System.Single)">
+            <summary>
+            Computes the absolute value of the source
+            </summary>
+            <param name="a">The source value</param>
+        </member>
+        <member name="M:Z0.fmath.abs(System.Double)">
+            <summary>
+            Computes the absolute value of the source
+            </summary>
+            <param name="a">The source value</param>
+        </member>
+        <member name="M:Z0.fmath.dec(System.Single)">
+            <summary>
+            Decrements the source value
+            </summary>
+            <param name="src">The source value</param>
+        </member>
+        <member name="M:Z0.fmath.dec(System.Double)">
+            <summary>
+            Decrements the source value
+            </summary>
+            <param name="src">The source value</param>
+        </member>
+        <member name="M:Z0.fmath.inc(System.Single)">
+            <summary>
+            Increments the operand
+            </summary>
+            <param name="src">The source value</param>
+        </member>
+        <member name="M:Z0.fmath.inc(System.Double)">
+            <summary>
+            Increments the operand
+            </summary>
+            <param name="src">The source value</param>
+        </member>
+        <member name="M:Z0.fmath.negate(System.Single)">
+            <summary>
+            Negates the operand
+            </summary>
+            <param name="src">The source value</param>
+        </member>
+        <member name="M:Z0.fmath.negate(System.Double)">
+            <summary>
+            Negates the operand
+            </summary>
+            <param name="src">The source value</param>
+        </member>
+        <member name="M:Z0.fmath.add(System.Single,System.Single)">
+            <summary>
+            Computes the arithmetic sum of the source operands
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+        </member>
+        <member name="M:Z0.fmath.add(System.Double,System.Double)">
+            <summary>
+            Computes the arithmetic sum of the source operands
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+        </member>
+        <member name="M:Z0.fmath.sub(System.Single,System.Single)">
+            <summary>
+            Computes the arithmetic difference between the first operand and the second
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+        </member>
+        <member name="M:Z0.fmath.sub(System.Double,System.Double)">
+            <summary>
+            Computes the arithmetic difference between the first operand and the second
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+        </member>
+        <member name="M:Z0.fmath.mul(System.Single,System.Single)">
+            <summary>
+            Computes the arithmetic product of the operands
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+        </member>
+        <member name="M:Z0.fmath.mul(System.Double,System.Double)">
+            <summary>
+            Computes the arithmetic product of the operands
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+        </member>
+        <member name="M:Z0.fmath.div(System.Single,System.Single)">
+            <summary>
+            Computes the arithmetic quotient of the first operand over the second
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+        </member>
+        <member name="M:Z0.fmath.div(System.Double,System.Double)">
+            <summary>
+            Computes the arithmetic quotient of the first operand over the second
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+        </member>
+        <member name="M:Z0.fmath.mod(System.Single,System.Single)">
+            <summary>
+            Computes the modulus of the first operand over the second
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+        </member>
+        <member name="M:Z0.fmath.mod(System.Double,System.Double)">
+            <summary>
+            Computes the modulus of the first operand over the second
+            </summary>
+            <param name="a">The first operand</param>
+            <param name="b">The second operand</param>
+        </member>
+        <member name="M:Z0.fmath.modmul(System.Single,System.Single,System.Single)">
+            <summary>
+            Computes z := (a*b) mod m
+            </summary>
+            <param name="a">The first factor</param>
+            <param name="b">The second factor</param>
+            <param name="m">The modulus</param>
+        </member>
+        <member name="M:Z0.fmath.modmul(System.Double,System.Double,System.Double)">
+            <summary>
+            Computes z := (a*b) mod m
+            </summary>
+            <param name="a">The first factor</param>
+            <param name="b">The second factor</param>
+            <param name="m">The modulus</param>
+        </member>
+        <member name="M:Z0.fmath.divmod(System.Single,System.Single)">
+            <summary>
+            Computes dst = (div(a,b), mod(a,b))
+            </summary>
+            <param name="a">The dividend</param>
+            <param name="b">The divisor</param>
+        </member>
+        <member name="M:Z0.fmath.divmod(System.Double,System.Double)">
+            <summary>
+            Computes dst = (div(a,b), mod(a,b))
+            </summary>
+            <param name="a">The dividend</param>
+            <param name="b">The divisor</param>
+        </member>
+        <member name="M:Z0.fmath.ceil(System.Single)">
+            <summary>
+            Computes the smallest integral value greater than or equal to the source value
+            </summary>
+            <param name="src">The source value</param>
+        </member>
+        <member name="M:Z0.fmath.ceil(System.Double)">
+            <summary>
+            Computes the smallest integral value greater than or equal to the source value
+            </summary>
+            <param name="src">The source value</param>
+        </member>
+        <member name="M:Z0.fmath.floor(System.Single)">
+            <summary>
+            Computes the largest integral value less than or equal to the source value
+            </summary>
+            <param name="src">The source value</param>
+        </member>
+        <member name="M:Z0.fmath.floor(System.Double)">
+            <summary>
+            Computes the largest integral value less than or equal to the source value
+            </summary>
+            <param name="src">The source value</param>
+        </member>
+        <member name="M:Z0.fmath.clamp(System.Single,System.Single)">
+            <summary>
+            Clamps the source value to an inclusive maximum
+            </summary>
+            <param name="src">The source value</param>
+            <param name="max">The maximum value</param>
+        </member>
+        <member name="M:Z0.fmath.clamp(System.Double,System.Double)">
+            <summary>
+            Clamps the source value to an inclusive maximum
+            </summary>
+            <param name="src">The source value</param>
+            <param name="max">The maximum value</param>
+        </member>
+        <member name="M:Z0.fmath.dist(System.Single,System.Single)">
+            <summary>
+            Computes the nonnegative distance between two values
+            </summary>
+            <param name="a">The first number</param>
+            <param name="b">The second number</param>
+        </member>
+        <member name="M:Z0.fmath.dist(System.Double,System.Double)">
+            <summary>
+            Computes the nonnegative distance between two values
+            </summary>
+            <param name="a">The first number</param>
+            <param name="b">The second number</param>
+        </member>
+        <member name="M:Z0.fmath.fmod(System.Single,System.Single)">
+            <summary>
+            Computes the remainder of the quotient of the operands
+            </summary>
+            <param name="a">The dividend</param>
+            <param name="b">The divisor</param>
+        </member>
+        <member name="M:Z0.fmath.fmod(System.Double,System.Double)">
+            <summary>
+            Computes the remainder of the quotient of the operands
+            </summary>
+            <param name="a">The dividend</param>
+            <param name="b">The divisor</param>
+        </member>
+        <member name="M:Z0.fmath.signum(System.Single)">
+            <summary>
+            Computes the sign of the operand
+            </summary>
+            <param name="src">The operand</param>
+        </member>
+        <member name="M:Z0.fmath.signum(System.Double)">
+            <summary>
+            Computes the sign of the operand
+            </summary>
+            <param name="src">The operand</param>
+        </member>
+        <member name="M:Z0.fmath.sqrt(System.Single)">
+            <summary>
+            Computes the square root of the source value
+            </summary>
+            <param name="src">The source value</param>
+        </member>
+        <member name="M:Z0.fmath.sqrt(System.Double)">
+            <summary>
+            Computes the square root of the source value
+            </summary>
+            <param name="src">The source value</param>
+        </member>
+        <member name="M:Z0.fmath.positive(System.Single)">
+            <summary>
+            Returns true if the source value is greater than zero, false otherwise
+            </summary>
+            <param name="a">The value to inspect</param>
+        </member>
+        <member name="M:Z0.fmath.positive(System.Double)">
+            <summary>
+            Returns true if the source value is greater than zero, false otherwise
+            </summary>
+            <param name="a">The value to inspect</param>
+        </member>
+        <member name="M:Z0.fmath.negative(System.Single)">
+            <summary>
+            Returns true if the source value is less than zero, false otherwise
+            </summary>
+            <param name="x">The value to inspect</param>
+        </member>
+        <member name="M:Z0.fmath.negative(System.Double)">
+            <summary>
+            Returns true if the source value is less than zero, false otherwise
+            </summary>
+            <param name="x">The value to inspect</param>
+        </member>
+        <member name="M:Z0.fmath.between(System.Single,System.Single,System.Single)">
+            <summary>
+            Returns true if the the test value lies in the closed interval formed by lower and upper bounds
+            </summary>
+            <param name="x">The test value</param>
+            <param name="a">The lower bound</param>
+            <param name="b">The uppper bound</param>
+        </member>
+        <member name="M:Z0.fmath.between(System.Double,System.Double,System.Double)">
+            <summary>
+            Returns true if the the test value lies in the closed interval formed by lower and upper bounds
+            </summary>
+            <param name="x">The test value</param>
+            <param name="a">The lower bound</param>
+            <param name="b">The uppper bound</param>
+        </member>
+        <member name="M:Z0.fmath.cbrt(System.Single)">
+            <summary>
+            Computes the cube root of the source value
+            </summary>
+            <param name="src">The source value</param>
+        </member>
+        <member name="M:Z0.fmath.cbrt(System.Double)">
+            <summary>
+            Computes the cube root of the source value
+            </summary>
+            <param name="src">The source value</param>
+        </member>
+        <member name="M:Z0.fmath.exp(System.Single)">
+            <summary>
+            Raises e to a specified exponent
+            </summary>
+            <param name="pow">The exponent</param>
+        </member>
+        <member name="M:Z0.fmath.exp(System.Double)">
+            <summary>
+            Raises e to a specified exponent
+            </summary>
+            <param name="pow">The exponent</param>
+        </member>
+        <member name="M:Z0.fmath.relerr(System.Single,System.Single)">
+            <summary>
+            Computes the relative error between a one floating-point calculation and another
+            </summary>
+            <param name="lhs">The result of the first calculation</param>
+            <param name="rhs">The result of the second calculation</param>
+        </member>
+        <member name="M:Z0.fmath.relerr(System.Double,System.Double)">
+            <summary>
+            Computes the relative error between a one floating-point calculation and another
+            </summary>
+            <param name="lhs">The result of the first calculation</param>
+            <param name="rhs">The result of the second calculation</param>
+        </member>
+        <member name="M:Z0.fmath.fcsum(System.Double@,System.Double@,System.Double@)">
+            <summary>
+            Impelements compensated floating-point summation
+            </summary>
+            <param name="src">The value to add to the total</param>
+            <param name="delta">The last compensation amount</param>
+            <param name="total">The running total</param>
+            <remarks>See https://en.wikipedia.org/wiki/Kahan_summation_algorithm</remarks>
+        </member>
+        <member name="M:Z0.fmath.log2(System.Single)">
+            <summary>
+            Computes the base-2 log of the operand
+            </summary>
+            <param name="src">The source value</param>
+        </member>
+        <member name="M:Z0.fmath.log2(System.Double)">
+            <summary>
+            Computes the base-2 log of the operand
+            </summary>
+            <param name="src">The source value</param>
+        </member>
+        <member name="M:Z0.fmath.ln(System.Single)">
+            <summary>
+            Computes the base-e log of the operand
+            </summary>
+            <param name="src">The source value</param>
+        </member>
+        <member name="M:Z0.fmath.ln(System.Double)">
+            <summary>
+            Computes the base-e log of the operand
+            </summary>
+            <param name="src">The source value</param>
+        </member>
+        <member name="M:Z0.fmath.log(System.Single,System.Nullable{System.Single})">
+            <summary>
+            Computes the log of the source value relative to an optionally-specified base
+            which otherwise defaults to base-10
+            </summary>
+            <param name="src">The source value</param>
+            <param name="b">The log base</param>
+        </member>
+        <member name="M:Z0.fmath.log(System.Double,System.Nullable{System.Double})">
+            <summary>
+            Computes the log of the source value relative to an optionally-specified base
+            which otherwise defaults to base-10
+            </summary>
+            <param name="src">The source value</param>
+            <param name="b">The log base</param>
+        </member>
+        <member name="P:Z0.tmath.Zero">
+            <summary>
+            Zero, the the one and only.
+            </summary>
+        </member>
+        <member name="P:Z0.tmath.One">
+            <summary>
+            One, just.
+            </summary>
+        </member>
+        <member name="P:Z0.tmath.Ones">
+            <summary>
+            One, so many
+            </summary>
+        </member>
+        <member name="M:Z0.tmath.negate(Z0.ConstPair{System.UInt64})">
+            <summary>
+            Computes the two's complement of a 128-bit integer
+            </summary>
+            <param name="x">The integer, represented via paired hi/lo components</param>
+        </member>
+        <member name="M:Z0.tmath.eq(Z0.ConstPair{System.UInt64}@,Z0.ConstPair{System.UInt64}@)">
+            <summary>
+            Determines whether the left and right operands define the same value
+            </summary>
+            <param name="x">The first integer, represented via paired hi/lo components</param>
+            <param name="y">The second integer, represented via paired hi/lo components</param>
+        </member>
+        <member name="M:Z0.tmath.lt(Z0.ConstPair{System.UInt64}@,Z0.ConstPair{System.UInt64}@)">
+            <summary>
+            Determines whether the left operand is less than the right operand
+            </summary>
+            <param name="x">The first integer, represented via paired hi/lo components</param>
+            <param name="y">The second integer, represented via paired hi/lo components</param>
+            <remarks>Follows https://github.com/chfast/intx/include/intx/int128.hpp</remarks>
+        </member>
+        <member name="M:Z0.tmath.lteq(Z0.ConstPair{System.UInt64}@,Z0.ConstPair{System.UInt64}@)">
+            <summary>
+            Determines whether the left operand is less than or equal the right operand
+            </summary>
+            <param name="x">The first integer, represented via paired hi/lo components</param>
+            <param name="y">The second integer, represented via paired hi/lo components</param>
+            <remarks>Follows https://github.com/chfast/intx/include/intx/int128.hpp</remarks>
+        </member>
+        <member name="M:Z0.tmath.gteq(Z0.ConstPair{System.UInt64}@,Z0.ConstPair{System.UInt64}@)">
+            <summary>
+            Determines whether the left operand is greater than or equal the right operand
+            </summary>
+            <param name="x">The first integer, represented via paired hi/lo components</param>
+            <param name="y">The second integer, represented via paired hi/lo components</param>
+            <remarks>Follows https://github.com/chfast/intx/include/intx/int128.hpp</remarks>
+        </member>
+        <member name="M:Z0.tmath.gt(Z0.ConstPair{System.UInt64}@,Z0.ConstPair{System.UInt64}@)">
+            <summary>
+            Determines whether the left operand is greater than the right operand
+            </summary>
+            <param name="x">The first integer, represented via paired hi/lo components</param>
+            <param name="y">The second integer, represented via paired hi/lo components</param>
+            <remarks>Follows https://github.com/chfast/intx/include/intx/int128.hpp</remarks>
+        </member>
+        <member name="M:Z0.tmath.sll(Z0.ConstPair{System.UInt64}@,System.Byte)">
+            <summary>
+            Shifts the source integer leftwards
+            </summary>
+            <param name="x">The integer, represented via paired hi/lo components</param>
+            <param name="offset">The number of bits to shift letward</param>
+            <remarks>Follows https://github.com/chfast/intx/include/intx/int128.hpp</remarks>
+        </member>
+        <member name="M:Z0.tmath.srl(Z0.ConstPair{System.UInt64}@,System.Byte)">
+            <summary>
+            Shifts the source integer leftwards
+            </summary>
+            <param name="x">The integer, represented via paired hi/lo components</param>
+            <param name="offset">The number of bits to shift letward</param>
+            <remarks>Follows https://github.com/chfast/intx/include/intx/int128.hpp</remarks>
+        </member>
+        <member name="M:Z0.tmath.or(Z0.ConstPair{System.UInt64}@,Z0.ConstPair{System.UInt64}@)">
+            <summary>
+            Computes the bitwise OR of two 128-bit integers
+            </summary>
+            <param name="x">The first integer, represented via paired hi/lo components</param>
+            <param name="y">The second integer, represented via paired hi/lo components</param>
+        </member>
+        <member name="M:Z0.tmath.not(Z0.ConstPair{System.UInt64}@)">
+            <summary>
+            Computes the bitwise complement of a 128-bit integer
+            </summary>
+            <param name="x">The integer, represented via paired hi/lo components</param>
+        </member>
+        <member name="M:Z0.tmath.xor(Z0.ConstPair{System.UInt64}@,Z0.ConstPair{System.UInt64}@)">
+            <summary>
+            Computes the bitwise XOR of two 128-bit integers
+            </summary>
+            <param name="x">The first integer, represented via paired hi/lo components</param>
+            <param name="y">The second integer, represented via paired hi/lo components</param>
+        </member>
+        <member name="M:Z0.tmath.and(Z0.ConstPair{System.UInt64}@,Z0.ConstPair{System.UInt64}@)">
+            <summary>
+            Computes the bitwise AND of two 128-bit integers
+            </summary>
+            <param name="x">The first integer, represented via paired hi/lo components</param>
+            <param name="y">The second integer, represented via paired hi/lo components</param>
+        </member>
+        <member name="M:Z0.tmath.nand(Z0.ConstPair{System.UInt64}@,Z0.ConstPair{System.UInt64}@)">
+            <summary>
+            Computes the bitwise NAND of two 128-bit integers
+            </summary>
+            <param name="x">The first integer, represented via paired hi/lo components</param>
+            <param name="y">The second integer, represented via paired hi/lo components</param>
+        </member>
+        <member name="M:Z0.tmath.xnor(Z0.ConstPair{System.UInt64}@,Z0.ConstPair{System.UInt64}@)">
+            <summary>
+            Computes the bitwise XNOR of two 128-bit integers
+            </summary>
+            <param name="x">The first integer, represented via paired hi/lo components</param>
+            <param name="y">The second integer, represented via paired hi/lo components</param>
+        </member>
+    </members>
+</doc>

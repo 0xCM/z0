@@ -1,0 +1,290 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>z0.check</name>
+    </assembly>
+    <members>
+        <member name="T:Z0.IBufferedChecker">
+            <summary>
+            Characterizes a test service that provides access to a buffer sequence
+            </summary>
+        </member>
+        <member name="P:Z0.IBufferedChecker.Tokens">
+            <summary>
+            All the buffers belong to this
+            </summary>
+        </member>
+        <member name="P:Z0.IBufferedChecker.Z0#IBufferTokenSource#Item(Z0.BufferSeqId)">
+            <summary>
+            Returns the token of an index-identified buffer
+            </summary>
+        </member>
+        <member name="T:Z0.IJudgement">
+            <summary>
+            Characterizes a boolean outcome
+            </summary>
+        </member>
+        <member name="T:Z0.ISequenceJudgement`2">
+            <summary>
+            Characterizes a reified boolean outcome
+            </summary>
+        </member>
+        <member name="P:Z0.TCheckOptions.Enabled">
+            <summary>
+            Specifies whether the test is enabled
+            </summary>
+        </member>
+        <member name="P:Z0.TCheckOptions.CycleCount">
+            <summary>
+            The number times to repeat an action
+            </summary>
+        </member>
+        <member name="P:Z0.TCheckOptions.RoundCount">
+            <summary>
+            The number of times to repeat a cycle
+            </summary>
+        </member>
+        <member name="M:Z0.CheckPrimal.yea(System.Boolean,System.String,System.String,System.String,System.Nullable{System.Int32})">
+            <summary>
+            Asserts the operand is true
+            </summary>
+            <param name="src">The value claimed to be false</param>
+            <param name="msg">An optional message describint the assertion</param>
+            <param name="caller">The caller member name</param>
+            <param name="file">The source file of the calling function</param>
+            <param name="line">The source file line number where invocation ocurred</param>
+        </member>
+        <member name="M:Z0.CheckPrimal.Failed(Z0.ClaimKind,Z0.IAppMsg)">
+            <summary>
+            Creates, but does not throw, a claim exception
+            </summary>
+            <param name="claim">The sort of claim that failed</param>
+            <param name="msg">The failure description</param>
+        </member>
+        <member name="T:Z0.EqualityChecks">
+            <summary>
+            Defines common equality check contracts
+            </summary>
+        </member>
+        <member name="M:Z0.Validator.failed(Z0.ClaimKind,Z0.IAppMsg)">
+            <summary>
+            Creates, but does not throw, a claim exception
+            </summary>
+            <param name="claim">The sort of claim that failed</param>
+            <param name="msg">The failure description</param>
+        </member>
+        <member name="M:Z0.Validator.failed(Z0.ClaimKind,System.String,System.String,System.Nullable{System.Int32})">
+            <summary>
+            Creates, but does not throw, a claim exception
+            </summary>
+            <param name="claim">The sort of claim that failed</param>
+        </member>
+        <member name="M:Z0.Validator.require(System.Boolean,Z0.ClaimKind,System.String,System.String,System.Nullable{System.Int32})">
+            <summary>
+            Raises an exception if an invariant does not hold
+            </summary>
+            <param name="condition">The invariant state</param>
+            <param name="claim">The sort of claim that failed</param>
+        </member>
+        <member name="M:Z0.Validator.failmsg(System.String,System.String,System.String,System.Nullable{System.Int32})">
+            <summary>
+            Fails unconditionally with a message
+            </summary>
+            <param name="msg">The failure reason</param>
+            <param name="caller">The caller member name</param>
+            <param name="file">The source file of the calling function</param>
+            <param name="line">The source file line number where invocation ocurred</param>
+        </member>
+        <member name="M:Z0.TCheckInvariant.yea(System.Boolean,System.String,System.String,System.String,System.Nullable{System.Int32})">
+            <summary>
+            Asserts the operand is true
+            </summary>
+            <param name="src">The value claimed to be false</param>
+            <param name="msg">An optional message describint the assertion</param>
+            <param name="caller">The caller member name</param>
+            <param name="file">The source file of the calling function</param>
+            <param name="line">The source file line number where invocation ocurred</param>
+        </member>
+        <member name="M:Z0.TCheckInvariant.nea(System.Boolean,System.String,System.String,System.String,System.Nullable{System.Int32})">
+            <summary>
+            Asserts the operand is false
+            </summary>
+            <param name="src">The value claimed to be false</param>
+            <param name="msg">An optional message describint the assertion</param>
+            <param name="caller">The caller member name</param>
+            <param name="file">The source file of the calling function</param>
+            <param name="line">The source file line number where invocation ocurred</param>
+        </member>
+        <member name="M:Z0.TCheckNull.notnull(System.Void*,System.String,System.String,System.String,System.Nullable{System.Int32})">
+            <summary>
+            Asserts the pointer is not null
+            </summary>
+            <param name="p">The pointer to check</param>
+            <param name="msg">An optional message describint the assertion</param>
+            <param name="caller">The caller member name</param>
+            <param name="file">The source file of the calling function</param>
+            <param name="line">The source file line number where invocation ocurred</param>
+        </member>
+        <member name="M:Z0.TCheckPrimalSeq.ContentEqual(System.ReadOnlySpan{System.Char},System.ReadOnlySpan{System.Char})">
+            <summary>
+            Returns true if the character spans are equal as strings, false otherwise
+            </summary>
+            <param name="lhs">The left operand</param>
+            <param name="rhs">The right operand</param>
+        </member>
+        <member name="M:Z0.TCheckPrimalSeq.ContentEqual(System.ReadOnlySpan{System.Byte},System.ReadOnlySpan{System.Byte})">
+            <summary>
+            Returns true if the character spans are equal as strings, false otherwise
+            </summary>
+            <param name="lhs">The left operand</param>
+            <param name="rhs">The right operand</param>
+        </member>
+        <member name="M:Z0.TCheckPrimalSeq.ContentEqual(System.ReadOnlySpan{System.Int32},System.ReadOnlySpan{System.Int32})">
+            <summary>
+            Returns true if the character spans are equal as strings, false otherwise
+            </summary>
+            <param name="lhs">The left operand</param>
+            <param name="rhs">The right operand</param>
+        </member>
+        <member name="M:Z0.TCheckPrimalSeq.ContentEqual(System.ReadOnlySpan{System.UInt32},System.ReadOnlySpan{System.UInt32})">
+            <summary>
+            Returns true if the character spans are equal as strings, false otherwise
+            </summary>
+            <param name="lhs">The left operand</param>
+            <param name="rhs">The right operand</param>
+        </member>
+        <member name="M:Z0.TCheckPrimalSeq.ContentEqual(System.ReadOnlySpan{System.UInt64},System.ReadOnlySpan{System.UInt64})">
+            <summary>
+            Returns true if the character spans are equal as strings, false otherwise
+            </summary>
+            <param name="lhs">The left operand</param>
+            <param name="rhs">The right operand</param>
+        </member>
+        <member name="M:Z0.TCheckPrimalSeq.eq(System.Boolean[],System.Boolean[],System.String,System.String,System.Nullable{System.Int32})">
+            <summary>
+            Asserts the equality of two boolean arrays
+            </summary>
+            <param name="lhs">The left operand</param>
+            <param name="rhs">The right operand</param>
+            <param name="caller">The caller member name</param>
+            <param name="file">The source file of the calling function</param>
+            <param name="line">The source file line number where invocation ocurred</param>
+        </member>
+        <member name="M:Z0.TCheckPrimalSeq.eq(System.ReadOnlySpan{System.Char},System.ReadOnlySpan{System.Char},System.String,System.String,System.Nullable{System.Int32})">
+            <summary>
+            Asserts content equality for two character spans
+            </summary>
+            <param name="lhs">The left span</param>
+            <param name="rhs">The right span</param>
+            <param name="caller">The invoking function</param>
+            <param name="file">The file in which the invoking function is defined </param>
+            <param name="line">The file line number of invocation</param>
+            <typeparam name="T">The element type</typeparam>
+        </member>
+        <member name="M:Z0.TCheckPrimalSeq.eq(System.ReadOnlySpan{System.Byte},System.ReadOnlySpan{System.Byte},System.String,System.String,System.Nullable{System.Int32})">
+            <summary>
+            Asserts content equality for two byte spans
+            </summary>
+            <param name="lhs">The left span</param>
+            <param name="rhs">The right span</param>
+            <param name="caller">The invoking function</param>
+            <param name="file">The file in which the invoking function is defined </param>
+            <param name="line">The file line number of invocation</param>
+            <typeparam name="T">The element type</typeparam>
+        </member>
+        <member name="M:Z0.TCheckPrimalSeq.eq(System.ReadOnlySpan{System.Int32},System.ReadOnlySpan{System.Int32},System.String,System.String,System.Nullable{System.Int32})">
+            <summary>
+            Asserts content equality for two byte spans
+            </summary>
+            <param name="lhs">The left span</param>
+            <param name="rhs">The right span</param>
+            <param name="caller">The invoking function</param>
+            <param name="file">The file in which the invoking function is defined </param>
+            <param name="line">The file line number of invocation</param>
+            <typeparam name="T">The element type</typeparam>
+        </member>
+        <member name="M:Z0.TCheckPrimalSeq.eq(System.ReadOnlySpan{System.UInt32},System.ReadOnlySpan{System.UInt32},System.String,System.String,System.Nullable{System.Int32})">
+            <summary>
+            Asserts content equality for two byte spans
+            </summary>
+            <param name="lhs">The left span</param>
+            <param name="rhs">The right span</param>
+            <param name="caller">The invoking function</param>
+            <param name="file">The file in which the invoking function is defined </param>
+            <param name="line">The file line number of invocation</param>
+            <typeparam name="T">The element type</typeparam>
+        </member>
+        <member name="M:Z0.TCheckPrimalSeq.eq(System.ReadOnlySpan{System.UInt64},System.ReadOnlySpan{System.UInt64},System.String,System.String,System.Nullable{System.Int32})">
+            <summary>
+            Asserts content equality for two byte spans
+            </summary>
+            <param name="lhs">The left span</param>
+            <param name="rhs">The right span</param>
+            <param name="caller">The invoking function</param>
+            <param name="file">The file in which the invoking function is defined </param>
+            <param name="line">The file line number of invocation</param>
+            <typeparam name="T">The element type</typeparam>
+        </member>
+        <member name="M:Z0.TCheckSets.seteq``1(System.Collections.Generic.ISet{``0},System.Collections.Generic.ISet{``0},System.String,System.String,System.Nullable{System.Int32})">
+            <summary>
+            Asserts the equality of two sets
+            </summary>
+            <param name="lhs">The left operand</param>
+            <param name="rhs">The right operand</param>
+            <param name="caller">The caller member name</param>
+            <param name="file">The source file of the calling function</param>
+            <param name="line">The source file line number where invocation ocurred</param>
+        </member>
+        <member name="M:Z0.TCheckSets.contains``1(System.Collections.Generic.ISet{``0},``0,System.String,System.String,System.Nullable{System.Int32})">
+            <summary>
+            Asserts that a set contains a specified element
+            </summary>
+            <param name="set">The set</param>
+            <param name="item">The test element</param>
+            <param name="caller">The caller member name</param>
+            <param name="file">The source file of the calling function</param>
+            <param name="line">The source file line number where invocation ocurred</param>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:Z0.TCheckSets.contains``1(System.Collections.Generic.ISet{``0},``0[])">
+            <summary>
+            Asserts that a set contains a specified element
+            </summary>
+            <param name="set">The set</param>
+            <param name="item">The test element</param>
+            <param name="caller">The caller member name</param>
+            <param name="file">The source file of the calling function</param>
+            <param name="line">The source file line number where invocation ocurred</param>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:Z0.TValidator.Failed(Z0.ClaimKind,Z0.IAppMsg)">
+            <summary>
+            Creates, but does not throw, a claim exception
+            </summary>
+            <param name="claim">The sort of claim that failed</param>
+            <param name="msg">The failure description</param>
+        </member>
+        <member name="M:Z0.TValidator.Require(System.Boolean,Z0.ClaimKind,System.String,System.String,System.Nullable{System.Int32})">
+            <summary>
+            Raises an exception if an invariant does not hold
+            </summary>
+            <param name="condition">The invariant state</param>
+            <param name="claim">The sort of claim that failed</param>
+        </member>
+        <member name="M:Z0.TValidator.Failed(Z0.ClaimKind,System.String,System.String,System.Nullable{System.Int32})">
+            <summary>
+            Creates, but does not throw, a claim exception
+            </summary>
+            <param name="claim">The sort of claim that failed</param>
+        </member>
+        <member name="M:Z0.TValidator.FailWith(System.String,System.String,System.String,System.Nullable{System.Int32})">
+            <summary>
+            Fails unconditionally with a message
+            </summary>
+            <param name="msg">The failure reason</param>
+            <param name="caller">The caller member name</param>
+            <param name="file">The source file of the calling function</param>
+            <param name="line">The source file line number where invocation ocurred</param>
+        </member>
+    </members>
+</doc>
