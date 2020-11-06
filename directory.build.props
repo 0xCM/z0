@@ -1,8 +1,17 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
   <PropertyGroup>
+    <Platform>x64</Platform>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <TopDir>$(MSBuildThisFileDirectory)</TopDir>
     <BuildRootDir>$(TopDir).build\</BuildRootDir>
+    <OutputPath>$(BuildRootDir)bin\$(Configuration)\$(MsBuildProjectName)\</OutputPath>
+    <DocumentationFile>$(OutputPath)$(TargetFramework)\$(MsBuildProjectName).xml</DocumentationFile>
+    <IntermediateRoot>$(BuildRootDir)obj\$(Configuration)\$(MsBuildProjectName)\</IntermediateRoot>
+    <IntermediateBuildDir>$(IntermediateRoot)</IntermediateBuildDir>
+    <BaseIntermediateOutputPath>$(IntermediateRoot)</BaseIntermediateOutputPath>
+    <IntermediateOutputPath>$(IntermediateRoot)</IntermediateOutputPath>
+
     <Src>$(TopDir)src\</Src>
     <Test>$(TopDir)test\</Test>
     <Native>$(TopDir)native\</Native>
@@ -10,8 +19,6 @@
     <TestDir>$(TopDir)test\</TestDir>
     <NativeDir>$(TopDir)native\</NativeDir>
     <BuildRootDir>$(TopDir).build\</BuildRootDir>
-    <ResBytesLib>z0.res</ResBytesLib>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <LangVersion>preview</LangVersion>
     <NullableReferenceTypes>true</NullableReferenceTypes>
@@ -23,13 +30,6 @@
     <DebugSymbols>true</DebugSymbols>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <IncludeSymbols>true</IncludeSymbols>
-    <Platforms>AnyCPU;x64</Platforms>
-    <OutputPath>$(BuildRootDir)bin\$(Configuration)\$(MsBuildProjectName)\</OutputPath>
-    <DocumentationFile>$(OutputPath)$(TargetFramework)\$(MsBuildProjectName).xml</DocumentationFile>
-    <IntermediateRoot>$(BuildRootDir)obj\$(Configuration)\$(MsBuildProjectName)\</IntermediateRoot>
-    <IntermediateBuildDir>$(IntermediateRoot)</IntermediateBuildDir>
-    <BaseIntermediateOutputPath>$(IntermediateRoot)</BaseIntermediateOutputPath>
-    <IntermediateOutputPath>$(IntermediateRoot)</IntermediateOutputPath>
   </PropertyGroup>
 
   <Import Project="$(Src)symbols.props"/>
