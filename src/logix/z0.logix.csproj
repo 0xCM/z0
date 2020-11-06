@@ -9,7 +9,6 @@
     <ProjectReference Include="$(BitCore)" />
     <ProjectReference Include="$(BitVectors)" />
     <ProjectReference Include="$(GVec)" />
-    <ProjectReference Include="$(Circuits)" />
     <ProjectReference Include="$(Matrix)" />
     <ProjectReference Include="$(BitGrids)" />
     <ProjectReference Include="$(Api)" />
