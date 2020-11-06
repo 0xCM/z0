@@ -14,7 +14,7 @@ namespace Z0
     partial struct Cmd
     {
         [Op]
-        public static CmdEngine engine(IWfShell wf, CmdEngineMessage onMsg, CmdEngineError onError)
+        public static CmdEngine engine(IWfShell wf, ICmdObserver observer)
         {
             var settings = new CmdEngineSettings();
             settings.EngineKind = CmdEngineKind.CmdExe;
@@ -28,7 +28,7 @@ namespace Z0
             info.WindowStyle = ProcessWindowStyle.Hidden;
             info.CreateNoWindow = true;
             info.Arguments = EmptyString;
-            return new CmdEngine(wf, settings, info, onMsg, onError);
+            return new CmdEngine(wf, settings, info, observer);
         }
     }
 }

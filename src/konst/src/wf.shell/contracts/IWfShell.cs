@@ -293,6 +293,9 @@ namespace Z0
             where T : ITextual
                 => Raise(rows(content));
 
+        void RowData<T>(T data)
+            => Raise(row(data));
+
         void Rows<T>(params T[] src)
             where T : ITextual
                 => Rows(@readonly(src));

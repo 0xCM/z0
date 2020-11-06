@@ -10,7 +10,7 @@ namespace Z0
     {
         int ProcessId {get;}
 
-        ToolProcessOptions Options {get;}
+        CmdProcessOptions Options {get;}
 
         /// <summary>
         /// Gets the time the process started.

@@ -18,7 +18,7 @@ namespace Z0
     /// on Command itself), because it is reasonably common to want to have a set
     /// of options passed to several commands, which is not easily possible otherwise.
     /// </summary>
-    public sealed class ToolProcessOptions
+    public sealed class CmdProcessOptions
     {
         public bool noThrow;
 
@@ -49,7 +49,7 @@ namespace Z0
         /// CommanOptions holds a set of options that can be passed to the constructor
         /// to the Command Class as well as Command.Run*.
         /// </summary>
-        public ToolProcessOptions()
+        public CmdProcessOptions()
         {
             timeoutMSec = 600000;
         }
@@ -58,9 +58,9 @@ namespace Z0
         /// Return a copy an existing set of command options.
         /// </summary>
         /// <returns>The copy of the command options.</returns>
-        public ToolProcessOptions Clone()
+        public CmdProcessOptions Clone()
         {
-            return (ToolProcessOptions)MemberwiseClone();
+            return (CmdProcessOptions)MemberwiseClone();
         }
 
         /// <summary>
@@ -77,7 +77,7 @@ namespace Z0
         /// Updates the NoThrow property and returns the updated commandOptions.
         /// <returns>Updated command options</returns>
         /// </summary>
-        public ToolProcessOptions AddNoThrow()
+        public CmdProcessOptions AddNoThrow()
         {
             noThrow = true;
             return this;
@@ -98,7 +98,7 @@ namespace Z0
         /// <summary>
         /// Updates the Start property and returns the updated commandOptions.
         /// </summary>
-        public ToolProcessOptions AddStart()
+        public CmdProcessOptions AddStart()
         {
             Start = true;
             return this;
@@ -118,7 +118,7 @@ namespace Z0
         /// <summary>
         /// Updates the Start property and returns the updated commandOptions.
         /// </summary>
-        public ToolProcessOptions AddUseShellExecute()
+        public CmdProcessOptions AddUseShellExecute()
         {
             useShellExecute = true;
             return this;
@@ -136,7 +136,7 @@ namespace Z0
         /// <summary>
         /// Updates the NoWindow property and returns the updated commandOptions.
         /// </summary>
-        public ToolProcessOptions AddNoWindow()
+        public CmdProcessOptions AddNoWindow()
         {
             noWindow = true;
             return this;
@@ -155,7 +155,7 @@ namespace Z0
         /// <summary>
         /// Updates the Elevate property and returns the updated commandOptions.
         /// </summary>
-        public ToolProcessOptions AddElevate()
+        public CmdProcessOptions AddElevate()
         {
             elevate = true;
             return this;
@@ -177,7 +177,7 @@ namespace Z0
         /// Updates the Timeout property and returns the updated commandOptions.
         /// CommandOptions.Infinite can be used for infinite.
         /// </summary>
-        public ToolProcessOptions AddTimeout(int milliseconds)
+        public CmdProcessOptions AddTimeout(int milliseconds)
         {
             timeoutMSec = milliseconds;
             return this;
@@ -195,7 +195,7 @@ namespace Z0
         /// <summary>
         /// Updates the Input property and returns the updated commandOptions.
         /// </summary>
-        public ToolProcessOptions AddInput(string input)
+        public CmdProcessOptions AddInput(string input)
         {
             this.input = input;
             return this;
@@ -213,7 +213,7 @@ namespace Z0
         /// <summary>
         /// Updates the CurrentDirectory property and returns the updated commandOptions.
         /// </summary>
-        public ToolProcessOptions AddCurrentDirectory(string directoryPath)
+        public CmdProcessOptions AddCurrentDirectory(string directoryPath)
         {
             currentDirectory = directoryPath;
             return this;
@@ -241,7 +241,7 @@ namespace Z0
         /// <summary>
         /// Updates the OutputFile property and returns the updated commandOptions.
         /// </summary>
-        public ToolProcessOptions AddOutputFile(string outputFile)
+        public CmdProcessOptions AddOutputFile(string outputFile)
         {
             OutputFile = outputFile;
             return this;
@@ -267,7 +267,7 @@ namespace Z0
         /// <summary>
         /// Updates the OutputStream property and returns the updated commandOptions.
         /// </summary>
-        public ToolProcessOptions AddOutputStream(TextWriter outputStream)
+        public CmdProcessOptions AddOutputStream(TextWriter outputStream)
         {
             OutputStream = outputStream;
             return this;
@@ -299,7 +299,7 @@ namespace Z0
         /// command is launched.  This is useful for example to update the PATH
         /// environment variable eg. "%PATH%;someNewPath".
         /// </summary>
-        public ToolProcessOptions AddEnvironmentVariable(string variable, string value)
+        public CmdProcessOptions AddEnvironmentVariable(string variable, string value)
         {
             EnvironmentVariables[variable] = value;
             return this;

@@ -8,6 +8,10 @@ namespace Z0
     using System.Reflection;
     using System.IO;
     using System.Text;
+    using System.Linq;
+    using System.Diagnostics;
+
+    using D = ApiDataModel;
 
     using static z;
 
@@ -103,6 +107,22 @@ namespace Z0
             return EmitAssemblyRefs.run(Wf,cmd);
         }
 
+        void Summarize(ApiCodeBlock src)
+        {
+            Wf.Status(Host, src.OpUri);
+        }
+
+        void Emit(ReadOnlySpan<D.CodeBlockDescriptor> src, FS.FilePath dst)
+        {
+            using var writer = dst.Writer();
+            var count = src.Length;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var block = ref skip(src,i);
+                writer.WriteLine(string.Format(D.CodeBlockDescriptor.FormatPattern, block.Part, block.Host, block.Base, block.Size, block.Uri));
+            }
+        }
+
         void EmitPeHeaders()
         {
             var build = BuildArchives.create(Wf);
@@ -129,9 +149,87 @@ namespace Z0
             }
         }
 
+        void ShowLetters()
+        {
+            using var flow = Wf.Running();
+            var data = Resources.strings(typeof(AsciLetterLoText));
+            var resources = @readonly(data);
+            var rows = Resources.rows(data).View;
+            var count = resources.Length;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var res = ref skip(resources,i);
+                ref readonly var row = ref skip(rows,i);
+                Wf.RowData(row);
+            }
+        }
+
+        void Show(in ListedFiles src)
+        {
+            for(var i=0; i<src.Count; i++)
+                Wf.RowData(src[i]);
+        }
+
+        FS.FilePath AppDataPath(FS.FileName file)
+            => Wf.AppData + file;
+
+        void ShowRuntimeArchive()
+        {
+            var archive = RuntimeArchive.create();
+            var resolver = new PathAssemblyResolver(archive.Files.Select(x => x.Name.Text));
+            using var context = new MetadataLoadContext(resolver);
+            iter(archive.ManagedLibraries, path => context.LoadFromAssemblyPath(path.Name));
+            var assemblies = context.GetAssemblies();
+            foreach(var a in assemblies)
+                Wf.Status(a.GetSimpleName());
+        }
+
+        void ShowDebugFlags()
+        {
+            var archive = RuntimeArchive.create();
+            var src = archive.ManagedLibraries.Select(x => Assembly.LoadFrom(x.Name));
+            var rows = map(src, f => delimit(f.GetSimpleName(), delimit(f.DebugFlags())));
+            Wf.Rows(rows);
+        }
+
+        void ShowTokens()
+        {
+            var tokens = array<int>(typeof(byte).MetadataToken, typeof(sbyte).MetadataToken, typeof(char).MetadataToken);
+            Wf.Status(delimit(tokens.Map(t => t.FormatHex())));
+        }
+
+        void ShowApiHex()
+        {
+            var archive = ApiFiles.hex(Wf);
+            var listing = archive.List();
+            if(listing.Count == 0)
+                Wf.Warn(Host, $"No files found in archive with root {archive.Root}");
+            Show(listing);
+        }
+
         public void Run(CmdSpec spec)
         {
 
+        }
+
+        void ShowDependencies(Assembly src)
+        {
+            var deps = JsonDeps.dependencies(src);
+            var options = deps.OptionData();
+            var json = JsonData.serialize(options);
+            Wf.Row(json);
+
+        }
+
+        void ShowCmdModels()
+        {
+            var models = @readonly(Cmd.models(Wf));
+            var buffer = Buffers.text();
+            for(var i=0; i<models.Length; i++)
+            {
+                Cmd.render(skip(models,i), buffer);
+                Wf.RowData(buffer.Emit());
+            }
         }
 
         void RunAll()
@@ -144,6 +242,7 @@ namespace Z0
             EmitScripts();
             EmitAsmRefs();
             EmitPeHeaders();
+
         }
 
         void ShowCases()
@@ -183,5 +282,10 @@ namespace Z0
         }
     }
 
-    public static partial class XTend { }
+    public static partial class XTend
+    {
+        public static string[] DebugFlags(this Assembly src)
+            => src.GetCustomAttributes<DebuggableAttribute>().Select(a => a.DebuggingFlags.ToString()).Array();
+    }
+
 }

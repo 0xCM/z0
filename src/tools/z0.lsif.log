@@ -1,0 +1,9 @@
+Using the MSBuild instance located at J:\lang\net\CsWinRT\.buildtools\MSBuild\Current\Bin.
+Unhandled exception: System.ArgumentException: Directory "J:\lang\net\CsWinRT\.buildtools\MSBuild\Current\Bin" does not exist
+Parameter name: msbuildPath
+   at Microsoft.Build.Locator.MSBuildLocator.RegisterMSBuildPath(String msbuildPath)
+   at Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator.Program.<GenerateFromSolutionAsync>d__2.MoveNext() in J:\lang\net\roslyn\src\Features\Lsif\Generator\Program.cs:line 96
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator.Program.<GenerateAsync>d__1.MoveNext() in J:\lang\net\roslyn\src\Features\Lsif\Generator\Program.cs:line 57

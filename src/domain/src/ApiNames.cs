@@ -54,7 +54,6 @@ readonly struct ApiNames
     public const string CmdSpecs = cmd + dot + specs;
 
     public const string XCmdSpecs = cmd + dot + specs + dot + extensions;
-
 }
 
 [ToolNameProvider]

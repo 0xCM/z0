@@ -5,19 +5,19 @@
 namespace Z0
 {
     using System;
+    using System.IO;
     using System.Runtime.CompilerServices;
+    using System.Text;
+    using System.Diagnostics;
 
     using static Konst;
 
-    [ApiHost(ApiNames.CmdSpecs, true)]
-    public readonly partial struct CmdSpecs
+    public interface ICmdObserver
     {
-        [MethodImpl(Inline), Op]
-        public static ICmdCatalog catalog(IWfShell wf)
-            => new CmdCatalog(wf);
 
-        [MethodImpl(Inline), Op]
-        public static CmdBuilder builder(IWfShell wf)
-            => new CmdBuilder(wf);
+        void OnInfo(string data);
+
+
+        void OnError(string data);
     }
 }

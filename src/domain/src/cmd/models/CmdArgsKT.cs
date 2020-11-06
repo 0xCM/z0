@@ -12,18 +12,18 @@ namespace Z0
 
     using api = Cmd;
 
-    public readonly struct CmdOptions<K,T> : ITextual
+    public readonly struct CmdArgs<K,T> : ITextual
         where K : unmanaged
     {
         readonly TableSpan<CmdArg<K,T>> Data;
 
         [MethodImpl(Inline)]
-        public CmdOptions(CmdArg<K,T>[] src)
+        public CmdArgs(CmdArg<K,T>[] src)
             => Data = src;
 
         [MethodImpl(Inline)]
-        public static implicit operator CmdOptions<K,T>(CmdArg<K,T>[] src)
-            => new CmdOptions<K,T>(src);
+        public static implicit operator CmdArgs<K,T>(CmdArg<K,T>[] src)
+            => new CmdArgs<K,T>(src);
 
         public ReadOnlySpan<CmdArg<K,T>> View
         {

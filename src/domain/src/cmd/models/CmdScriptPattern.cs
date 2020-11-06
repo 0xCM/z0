@@ -14,7 +14,7 @@ namespace Z0
     {
         public FS.FolderName CmdRootName;
 
-        public ToolId CmdId;
+        public ToolId Tool;
 
         public string CmdArgName;
 
@@ -46,6 +46,6 @@ namespace Z0
             => Format();
 
         ToolId ICmdScript.CmdId
-            => CmdId;
+            => Tool;
     }
 }

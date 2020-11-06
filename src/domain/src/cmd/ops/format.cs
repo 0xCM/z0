@@ -13,6 +13,14 @@ namespace Z0
     partial struct Cmd
     {
         [Op]
+        public static string format(CmdModel src)
+        {
+            var buffer = Buffers.text();
+            render(src,buffer);
+            return buffer.Emit();
+        }
+
+        [Op]
         public static string format(in CmdExpr src)
             => format(src.Pattern, src.Variables.Storage);
 
@@ -71,7 +79,7 @@ namespace Z0
             return dst.Emit();
         }
 
-        public static string format<K,T>(in CmdOptions<K,T> src)
+        public static string format<K,T>(in CmdArgs<K,T> src)
             where K : unmanaged
         {
             var dst = text.build();

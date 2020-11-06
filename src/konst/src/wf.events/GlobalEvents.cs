@@ -49,6 +49,8 @@ namespace Z0
 
         public const string Rows = nameof(Rows);
 
+        public const string Row = nameof(Row);
+
         public const string EmittingTable = nameof(EmittingTable);
 
         public const string CreatedToolCmd = nameof(CreatedToolCmd);

@@ -32,5 +32,18 @@ namespace Z0
                 dst.Append(skip(view,i).Format());
             }
         }
+
+        [Op]
+        public static void render(CmdModel src, ITextBuffer dst)
+        {
+            dst.Append(src.DataType.Name);
+            var fields = src.Fields.Terms;;
+            var count = fields.Length;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var field = ref skip(fields,count);
+                dst.Append(string.Format(" | {0}:{1}", field.Name, field.FieldType.Name));
+            }
+        }
     }
 }

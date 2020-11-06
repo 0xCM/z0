@@ -5,51 +5,42 @@
 namespace Z0
 {
     using System;
-    using System.IO;
     using System.Runtime.CompilerServices;
-    using System.Text;
     using System.Diagnostics;
 
     using static Konst;
 
-    public enum CmdEngineKind : byte
-    {
-        CmdExe = 1,
-
-        Bash = 2,
-
-        Custom = 4
-    }
-
-    public delegate void CmdEngineMessage(string content);
-
-    public delegate void CmdEngineError(string content);
-
-    public class CmdEngine : SystemAgent
+    public class CmdEngine : SystemAgent, ICmdObserver
     {
         CmdEngineSettings Settings {get;}
 
         ProcessStartInfo StartInfo {get;}
 
-        CmdEngineMessage MessageReceiver {get;}
+        ICmdObserver Observer {get;}
 
-        CmdEngineError ErrorReceiver {get;}
+        WfHost Host {get;}
+
+        IWfShell Wf {get;}
 
         [MethodImpl(Inline)]
-        public CmdEngine(IWfShell wf, CmdEngineSettings settings, ProcessStartInfo start,  CmdEngineMessage message, CmdEngineError error)
+        public CmdEngine(IWfShell wf, CmdEngineSettings settings, ProcessStartInfo start, ICmdObserver observer = null)
             : base(new WfAgentContext(wf), new AgentIdentity(10u,10u))
         {
+            Host = WfSelfHost.create(typeof(CmdEngine));
+            Wf = wf.WithHost(Host);
             Settings = settings;
             StartInfo = start;
-            MessageReceiver += message;
-            ErrorReceiver += error;
+            Observer = observer ?? this;
         }
-    }
 
-    public struct CmdEngineSettings
-    {
-        public CmdEngineKind EngineKind;
+        public void OnInfo(string data)
+        {
+            Wf.Status(data);
+        }
 
-        public FS.FilePath Path;
+        public void OnError(string data)
+        {
+            Wf.Error(data);
+        }
     }
 }

@@ -12,7 +12,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct Tooling
+    partial struct Cmd
     {
         public static async Task<int> start(ToolCmdSpec spec, WfStatusRelay dst)
         {

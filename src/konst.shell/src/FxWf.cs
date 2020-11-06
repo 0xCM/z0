@@ -11,8 +11,19 @@ namespace Z0
     using static Konst;
 
     [ApiHost]
-    public ref struct FunctionWorkflows
+    public ref struct FxWf
     {
+        [Op]
+        public static void run(IWfShell wf)
+        {
+            var fx = new FxWf(wf);
+            var f = fx.RunF();
+            var g = fx.RunG();
+            wf.Status(f.Delimit());
+            wf.Status(g.Delimit());
+            f.SequenceEqual(g);
+        }
+
         const byte i0 = 0;
 
         const byte i1 = 1;
@@ -31,7 +42,7 @@ namespace Z0
 
         Span<byte> Target;
 
-        public FunctionWorkflows(IWfShell wf)
+        public FxWf(IWfShell wf)
         {
             Wf = wf;
             Left = array<byte>(1,2,4,8);

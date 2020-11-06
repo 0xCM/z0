@@ -12,6 +12,10 @@ namespace Z0
     partial struct WfEvents
     {
         [MethodImpl(Inline)]
+        public static RowEvent<T> row<T>(T data)
+            => new RowEvent<T>(data);
+
+        [MethodImpl(Inline)]
         public static RowsEvent<T> rows<T>(T content)
             where T : ITextual
                 => new RowsEvent<T>(content);

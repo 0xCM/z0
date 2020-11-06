@@ -32,11 +32,11 @@ namespace Z0
         /// <param variable="commandLine">The command lineNumber to run as a subprocess</param>
         /// <param variable="options">Additional qualifiers that control how the process is run</param>
         /// <returns>A Command structure that can be queried to determine ExitCode, Output, etc.</returns>
-        public static ToolProcess create(string commandLine, ToolProcessOptions options)
+        public static ToolProcess create(string commandLine, CmdProcessOptions options)
             => new ToolProcess(commandLine, options);
 
         public static ToolProcess create(string commandLine)
-            => create(commandLine, new ToolProcessOptions());
+            => create(commandLine, new CmdProcessOptions());
 
         readonly string _commandLine;
 
@@ -48,7 +48,7 @@ namespace Z0
         /// Gets that CommandOptions structure that holds all the options that affect
         /// the running of the command (like Timeout, Input ...)
         /// </summary>
-        public ToolProcessOptions Options {get;}
+        public CmdProcessOptions Options {get;}
 
         /// <summary>
         /// Gets the underlying process object.  Generally not used.
@@ -141,7 +141,7 @@ namespace Z0
         /// <param variable="commandLine">The command lineNumber to run as a subprocess</param>
         /// <param variable="options">Additional qualifiers that control how the process is run</param>
         /// <returns>A Command structure that can be queried to determine ExitCode, Output, etc.</returns>
-        public ToolProcess(string commandLine, ToolProcessOptions options)
+        public ToolProcess(string commandLine, CmdProcessOptions options)
         {
             Options = options;
             _commandLine = commandLine;
@@ -256,7 +256,7 @@ namespace Z0
         /// <param variable="commandLine">The command lineNumber to run as a subprocess</param>
         /// </summary>
         public ToolProcess(string commandLine)
-            : this(commandLine, new ToolProcessOptions())
+            : this(commandLine, new CmdProcessOptions())
         {
         }
 

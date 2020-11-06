@@ -12,9 +12,9 @@ namespace Z0
 
     using api = Cmd;
 
-    public readonly struct CmdScript : ITextual, IContented<TableSpan<CmdExpr>>, IIdentified<asci32>
+    public readonly struct CmdScript : ITextual, IContented<TableSpan<CmdExpr>>, IIdentified<utf8>
     {
-        public asci32 Id {get;}
+        public utf8 Id {get;}
 
         readonly TableSpan<CmdExpr> Data;
 
@@ -27,13 +27,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public CmdScript(string id, CmdExpr[] src)
-        {
-            Id = id;
-            Data = src;
-        }
-
-        [MethodImpl(Inline)]
-        internal CmdScript(asci32 id, CmdExpr[] src)
         {
             Id = id;
             Data = src;

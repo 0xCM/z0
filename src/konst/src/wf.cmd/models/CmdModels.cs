@@ -6,28 +6,27 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Reflection;
 
     using static Konst;
-    using static z;
 
-    public readonly struct CmdModel : ICmdModel
+    public struct CmdModels
     {
-        public Type DataType {get;}
-
-        public IndexedView<FieldInfo> Fields {get;}
+        IndexedSeq<CmdModel> Data;
 
         [MethodImpl(Inline)]
-        public CmdModel(Type type, FieldInfo[] fields)
+        public CmdModels(CmdModel[] src)
         {
-            DataType = type;
-            Fields = fields;
+            Data = src;
         }
 
-        public uint FieldCount
+        [MethodImpl(Inline)]
+        public static implicit operator CmdModels(CmdModel[] src)
+            => new CmdModels(src);
+
+        public Span<CmdModel> Terms
         {
             [MethodImpl(Inline)]
-            get => Fields.Count;
+            get => Data.Terms;
         }
     }
 }

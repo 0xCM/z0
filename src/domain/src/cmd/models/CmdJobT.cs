@@ -12,7 +12,7 @@ namespace Z0
     public readonly struct CmdJob<T> : ITextual
         where T : struct, ITextual
     {
-        public asci32 Name {get;}
+        public utf8 Name {get;}
 
         public T Spec {get;}
 
@@ -24,7 +24,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public CmdJob(in asci32 name, T spec)
+        public CmdJob(in utf8 name, T spec)
         {
             Spec = spec;
             Name = name;

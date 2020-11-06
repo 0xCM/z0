@@ -38,7 +38,7 @@ namespace Z0
         /// <param variable="commandLine">The command line to run as a subprocess</param>
         /// <param variable="options">Options for the process</param>
         [Op]
-        public static ToolProcess process(IWfShell context, string command, ToolProcessOptions config)
+        public static ToolProcess process(IWfShell context, string command, CmdProcessOptions config)
             => ToolProcess.create(command, config);
 
         [MethodImpl(Inline)]

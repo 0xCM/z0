@@ -15,7 +15,7 @@ namespace Z0
     {
         public CmdId Id;
 
-        public CmdOptions<K,T> Options;
+        public CmdArgs<K,T> Options;
 
         [MethodImpl(Inline)]
         public CmdSpec(CmdId id, params CmdArg<K,T>[] options)
