@@ -32,6 +32,11 @@ namespace Z0
 
     struct App
     {
+        static void RunCapture(WfCaptureState cstate)
+        {
+            using var control = CaptureWorkflow.create(cstate);
+            control.Run();
+        }
         public static void Main(params string[] args)
         {
             try
@@ -40,8 +45,8 @@ namespace Z0
                 var app = Apps.context(wf);
                 var asm = new AsmContext(app, wf);
                 var state = new WfCaptureState(wf, asm);
-                var host = Runner.create(state);
-                host.Run(wf);
+                RunCapture(state);
+                Runner.create(state).Run(wf);
             }
             catch(Exception e)
             {

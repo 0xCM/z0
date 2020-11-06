@@ -1,9 +1,8 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
-  <Import Project="z0.props"/>
-
   <PropertyGroup>
     <TopDir>$(MSBuildThisFileDirectory)</TopDir>
+    <BuildRootDir>$(TopDir).build\</BuildRootDir>
     <Src>$(TopDir)src\</Src>
     <Test>$(TopDir)test\</Test>
     <Native>$(TopDir)native\</Native>
@@ -12,12 +11,29 @@
     <NativeDir>$(TopDir)native\</NativeDir>
     <BuildRootDir>$(TopDir).build\</BuildRootDir>
     <ResBytesLib>z0.res</ResBytesLib>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <LangVersion>preview</LangVersion>
+    <NullableReferenceTypes>true</NullableReferenceTypes>
+    <NullableContextOptions>disable</NullableContextOptions>
+    <SuppressNETCoreSdkPreviewMessage>true</SuppressNETCoreSdkPreviewMessage>
+    <NoWarn>1591;1572;1573;1701;1702;1712;1711;1570;1571;1574;1710;8321;NETSDK1057;0169;0414;0219;649;8632;SYSLIB0001;IDE0060;IDE0059;MSB3026</NoWarn>
+      <Optimize>true</Optimize>
+      <DebugType>pdbonly</DebugType>
+      <DebugSymbols>true</DebugSymbols>
+      <EmbedUntrackedSources>true</EmbedUntrackedSources>
+      <IncludeSymbols>true</IncludeSymbols>
+
+      <Platforms>AnyCPU;x64</Platforms>
+    <OutputPath>$(BuildRootDir)bin\$(Configuration)\$(MsBuildProjectName)\</OutputPath>
+    <DocumentationFile>$(OutputPath)$(MsBuildProjectName).xml</DocumentationFile>
+    <IntermediateRoot>$(BuildRootDir)obj\$(Configuration)\$(MsBuildProjectName)\</IntermediateRoot>
+    <IntermediateBuildDir>$(IntermediateRoot)</IntermediateBuildDir>
+    <BaseIntermediateOutputPath>$(IntermediateRoot)</BaseIntermediateOutputPath>
+    <IntermediateOutputPath>$(IntermediateRoot)</IntermediateOutputPath>      
   </PropertyGroup>
 
-  <Import Project=".props/options.props"/>
   <Import Project="$(Src)symbols.props"/>
   <Import Project="$(Native)symbols.props"/>
-  <Import Project=".props/version.props"/>
-  <Import Project=".props/locations.props"/>
 
 </Project>

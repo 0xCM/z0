@@ -15,8 +15,7 @@ namespace Z0
     /// <summary>
     /// Represents an iterable K-indexed bijection
     /// </summary>
-    public ref struct Bijection<K,S,T>
-        where K : unmanaged
+    public ref struct Bijection<S,T>
     {
         readonly Span<Paired<S,T>> Pairs;
 
@@ -64,12 +63,6 @@ namespace Z0
             ref var x = ref seek(Pairs, NextPos());
             last = Current == Last;
             return ref x;
-        }
-
-        public ref Paired<S,T> this[K index]
-        {
-            [MethodImpl(Inline)]
-            get => ref seek(Pairs,uint64(index));
         }
     }
 }
