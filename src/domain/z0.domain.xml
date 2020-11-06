@@ -67,6 +67,469 @@
             </summary>
             <param name="root">The archive root</param>
         </member>
+        <member name="P:Z0.FixedBuffer`1.BufferAddress">
+            <summary>
+            Specifies the address of the buffer, not its content
+            </summary>
+        </member>
+        <member name="T:Z0.BufferSegment`2">
+            <summary>
+            Defines a segment over a buffer
+            </summary>
+        </member>
+        <member name="T:Z0.BufferSegments`1">
+            <summary>
+            Defines a segmented partition over a contiguous buffer
+            </summary>
+        </member>
+        <member name="T:Z0.BufferSegment`1">
+            <summary>
+            Defines a segment over a buffer
+            </summary>
+        </member>
+        <member name="T:Z0.IFixedBuffer`1">
+            <summary>
+            Characterizes a buffer with an invariant address
+            </summary>
+            <typeparam name="T">The buffer cell type</typeparam>
+        </member>
+        <member name="P:Z0.IFixedBuffer`1.BufferAddress">
+            <summary>
+            The buffer's address which should remain unchanged throughout its lifetime
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:Z0.IFixedBuffer`1.CellCount">
+            <summary>
+            The number of cells held in the buffer
+            </summary>
+        </member>
+        <member name="F:Z0.CpuBuffer.BufferSize">
+            <summary>
+            The number of bytes covered by the buffer
+            </summary>
+        </member>
+        <member name="F:Z0.CpuBuffer.Buffer16">
+            <summary>
+            The number of 16-bit elements covered by the buffer
+            </summary>
+        </member>
+        <member name="F:Z0.CpuBuffer.Buffer32">
+            <summary>
+            The number of 32-bit elements covered by the buffer
+            </summary>
+        </member>
+        <member name="F:Z0.CpuBuffer.Buffer64">
+            <summary>
+            The number of 64-bit elements covered by the buffer
+            </summary>
+        </member>
+        <member name="F:Z0.CpuBuffer.Buffer128">
+            <summary>
+            The number of 128-bit elements covered by the buffer
+            </summary>
+        </member>
+        <member name="F:Z0.CpuBuffer.Buffer256">
+            <summary>
+            The number of 256-bit elements covered by the buffer
+            </summary>
+        </member>
+        <member name="F:Z0.CpuBuffer.Buffer512">
+            <summary>
+            The number of 512-bit elements covered by the buffer
+            </summary>
+        </member>
+        <member name="T:Z0.FixedBuffer256`1">
+            <summary>
+            A buffer that contains 256 <typeparamref name='T'/> cells
+            </summary>
+            <typeparam name="T">The cell type</typeparam>
+        </member>
+        <member name="T:Z0.CliAssemblyReference">
+            <summary>
+            Captures <see cref='T:System.Reflection.Metadata.AssemblyReference'/> data in usable form
+            </summary>
+        </member>
+        <member name="T:Z0.CliManifestResourceInfo">
+            <summary>
+            Captures <see cref='T:System.Reflection.Metadata.ManifestResource'/> data in usable form
+            </summary>
+        </member>
+        <member name="T:Z0.CliMethodDefinition">
+            <summary>
+            Captures <see cref='T:System.Reflection.Metadata.MethodDefinition'/> data in usable form
+            </summary>
+        </member>
+        <member name="T:Z0.CliMethodImport">
+            <summary>
+            Captures <see cref='T:System.Reflection.Metadata.MethodImport'/> data in usable form
+            </summary>
+        </member>
+        <member name="M:Z0.PeTableReader.open(Z0.FS.FilePath)">
+            <summary>
+            Allocates a <see cref='T:Z0.PeTableReader'/> for a specified file
+            </summary>
+            <param name="src">The source path</param>
+        </member>
+        <member name="T:Z0.LocatedImage">
+            <summary>
+            Describes a PE image from the perspective of process entry point
+            </summary>
+        </member>
+        <member name="F:Z0.LocatedImage.ImagePath">
+            <summary>
+            The image source path
+            </summary>
+        </member>
+        <member name="F:Z0.LocatedImage.PartId">
+            <summary>
+            The image part identifier, if any
+            </summary>
+        </member>
+        <member name="F:Z0.LocatedImage.EntryAddress">
+            <summary>
+            The process entry point
+            </summary>
+        </member>
+        <member name="F:Z0.LocatedImage.BaseAddress">
+            <summary>
+            The image's memory base
+            </summary>
+        </member>
+        <member name="F:Z0.LocatedImage.Size">
+            <summary>
+            The image size
+            </summary>
+        </member>
+        <member name="P:Z0.LocatedImage.Name">
+            <summary>
+            The <see cref='F:Z0.LocatedImage.ImagePath'/> filename without the extension
+            </summary>
+        </member>
+        <member name="P:Z0.LocatedImage.EndAddress">
+            <summary>
+            The terminal address as determined by <see cref='F:Z0.LocatedImage.BaseAddress'/> + <see cref='F:Z0.LocatedImage.Size'/>
+            </summary>
+        </member>
+        <member name="P:Z0.LocatedImage.Range">
+            <summary>
+            The memory range occupied by the image
+            </summary>
+        </member>
+        <member name="F:Z0.LocatedImage`1.ImagePath">
+            <summary>
+            The image source path
+            </summary>
+        </member>
+        <member name="F:Z0.LocatedImage`1.StartAddress">
+            <summary>
+            The address at which image data begins
+            </summary>
+        </member>
+        <member name="F:Z0.LocatedImage`1.EndAddress">
+            <summary>
+            The address at which image data ends
+            </summary>
+        </member>
+        <member name="M:Z0.ProcessImages.locate(System.Diagnostics.ProcessModule)">
+            <summary>
+            Creates a <see cref='T:Z0.LocatedImage'/> description from a specified <see cref='T:System.Diagnostics.ProcessModule'/>
+            </summary>
+            <param name="src">The source module</param>
+        </member>
+        <member name="M:Z0.ProcessImages.structured(System.Reflection.Assembly,System.String)">
+            <summary>
+            Searches for an embedded document with a matching identifier and, if found,
+            returns the first match; otherwise returns an empty document
+            </summary>
+            <param name="match">The resource identifier to match</param>
+        </member>
+        <member name="T:Z0.CorSigParser">
+            <summary>
+            Defines a CLI signature parser
+            </summary>
+            <remarks>
+            [CliSpec, II.23.2] The value of the first byte of a Signature 'blob' indicates what kind of Signature it is. Its lowest 4 bits hold one of the following:
+            <see cref='F:Z0.Cor.CorUnmanagedCallingConvention.IMAGE_CEE_CS_CALLCONV_C'/>
+            <see cref='F:Z0.Cor.CorCallingConvention.IMAGE_CEE_CS_CALLCONV_DEFAULT'/>
+            <see cref='F:Z0.Cor.CorUnmanagedCallingConvention.IMAGE_CEE_UNMANAGED_CALLCONV_FASTCALL'/>
+            <see cref='F:Z0.Cor.CorUnmanagedCallingConvention.IMAGE_CEE_CS_CALLCONV_STDCALL'/>
+            <see cref='F:Z0.Cor.CorUnmanagedCallingConvention.IMAGE_CEE_CS_CALLCONV_THISCALL'/>
+            <see cref='F:Z0.Cor.CorCallingConvention.IMAGE_CEE_CS_CALLCONV_VARARG'/>
+            </remarks>
+        </member>
+        <member name="T:Z0.CorSigParser.MethodDef">
+            <summary>
+            Parses a method signature without VARARG
+            </summary>
+        </member>
+        <member name="T:Z0.CorSigParser.MethodRef">
+            <summary>
+            Parses a method signature with VARARG calls
+            </summary>
+        </member>
+        <member name="T:Z0.Cor">
+            <summary>
+            Transpiled from corhdr.h
+            </summary>
+        </member>
+        <member name="T:Z0.Cor.CorElementType">
+            <summary>
+            Runtime element classifier
+            </summary>
+            <remarks>CLI spec, Partition II, section 23.1.16</remarks>
+        </member>
+        <member name="M:Z0.Signatures.duplicates(Z0.OpIdentity[])">
+            <summary>
+            Returns the duplicate identities found in the source stream, if any; otherwise, returns an empty array
+            </summary>
+            <param name="src">The identities to search for duplicates</param>
+        </member>
+        <member name="M:Z0.Signatures.define(System.String)">
+            <summary>
+            Defines an identity, bypassing validation
+            </summary>
+            <param name="src">The identity text</param>
+        </member>
+        <member name="M:Z0.Signatures.define(System.String,System.String,System.String,System.Boolean,System.Boolean,System.String[])">
+            <summary>
+            Defines an operation identifier with all aspects explicitly specified
+            </summary>
+            <param name="text">The identity text</param>
+            <param name="name">The operation name</param>
+            <param name="suffix">The operaion suffix</param>
+            <param name="generic">The operation's generic status</param>
+            <param name="imm">Specifies whether the operation requires one or more immediate values</param>
+            <param name="components">The identity components</param>
+        </member>
+        <member name="M:Z0.Signatures.vsfunc(ApiClass,Z0.TypeWidth,Z0.NumericKind,System.Boolean)">
+            <summary>
+            Produces an identifier for a kinded vectorized structural function
+            </summary>
+            <param name="k">The operation kind id</param>
+            <param name="w">The vector width</param>
+            <param name="nk">The cell numeric kind</param>
+            <param name="generic">Whether the produced identity has a generic marker</param>
+        </member>
+        <member name="M:Z0.Signatures.vsfunc``1(ApiClass,Z0.TypeWidth,``0,System.Boolean)">
+            <summary>
+            Produces an identifier for a kinded vectorized structural function
+            </summary>
+            <param name="k">The operation kind id</param>
+            <param name="w">The vector width</param>
+            <param name="nk">The cell numeric kind</param>
+            <param name="generic">Whether the produced identity has a generic marker</param>
+            <typeparam name="T">The vector cell type</typeparam>
+        </member>
+        <member name="M:Z0.Signatures.vsfunc``2(ApiClass,``0,``1,System.Boolean)">
+            <summary>
+            Produces an identifier for a kinded vectorized structural function
+            </summary>
+            <param name="k">The operation kind id</param>
+            <param name="w">A vector width representative</param>
+            <param name="t">A cell type representative</param>
+            <param name="generic">Whether the produced identity has a generic marker</param>
+            <typeparam name="W">The vector width type</typeparam>
+            <typeparam name="T">The vector cell type</typeparam>
+        </member>
+        <member name="M:Z0.Signatures.sfunc``1(ApiClass,Z0.TypeWidth,``0,System.Boolean)">
+            <summary>
+            Produces an identifier for a kinded structural function of segmented type
+            </summary>
+            <param name="k">The operation kind id</param>
+            <param name="w">A segment width representative</param>
+            <param name="t">A cell type representative</param>
+            <param name="generic">Whether the produced identity has a generic marker</param>
+        </member>
+        <member name="M:Z0.Signatures.sfunc``2(ApiClass,``0,``1,System.Boolean)">
+            <summary>
+            Produces an identifier for a kinded structural function of segmented type
+            </summary>
+            <param name="k">The operation kind id</param>
+            <param name="w">A segment width representative</param>
+            <param name="t">A cell type representative</param>
+            <param name="generic">Whether the produced identity has a generic marker</param>
+            <typeparam name="W">The width type</typeparam>
+            <typeparam name="T">The numeric type</typeparam>
+        </member>
+        <member name="M:Z0.Signatures.sfunc``1(ApiClass,``0)">
+            <summary>
+            Produces an identifier for a kinded numeric structural function
+            </summary>
+            <param name="k">The operation kind id</param>
+            <typeparam name="T">The numeric type</typeparam>
+        </member>
+        <member name="M:Z0.Signatures.sfunc(ApiClass,Z0.NumericKind)">
+            <summary>
+            Produces an identifier for a kinded numeric structural function
+            </summary>
+            <param name="k">The operation kind id</param>
+            <param name="nk">The operation numeric kind</param>
+        </member>
+        <member name="M:Z0.Signatures.sfunc(ApiClass,Z0.TypeWidth,Z0.NumericKind,System.Boolean)">
+            <summary>
+            Produces an identifier for a kinded structural function of segmented type
+            </summary>
+            <param name="k">The operation kind id</param>
+            <param name="w">A segment width representative</param>
+            <param name="t">A cell type representative</param>
+            <param name="generic">Whether the produced identity has a generic marker</param>
+        </member>
+        <member name="M:Z0.Signatures.NumericOp(ApiClass,Z0.NumericKind[])">
+            <summary>
+            Defines kinded identifiers for nongeneric numeric functions
+            </summary>
+            <param name="id">The operation kind id</param>
+            <param name="kinds">The numeric argument kinds</param>
+        </member>
+        <member name="M:Z0.Signatures.numeric(Z0.NumericKind)">
+            <summary>
+            Defines a scalar type identity
+            </summary>
+            <param name="width">The scalar bit-width</param>
+        </member>
+        <member name="M:Z0.Signatures.numeric``1(ApiClass,``0,System.Boolean)">
+            <summary>
+            Produces an identifer for a kinded numeric operation
+            </summary>
+            <param name="k">The operation kind id</param>
+            <param name="generic">Whether the produced identity has a generic marker</param>
+            <typeparam name="T">The operation numeric kind</typeparam>
+        </member>
+        <member name="M:Z0.Signatures.segmented(Z0.OpIdentity,System.Int32)">
+            <summary>
+            Extracts an index-identified segmented identity part from an operation identity
+            </summary>
+            <param name="src">The source identity</param>
+            <param name="index">The 0-based part index</param>
+        </member>
+        <member name="M:Z0.Signatures.segmented(System.String,Z0.TypeWidth,Z0.NumericKind)">
+            <summary>
+            Defines a segmented type identity predicated on type width numeric kind specifications
+            </summary>
+            <param name="name">The type name</param>
+            <param name="wk">The width kind</param>
+            <param name="nk">The numeric kind</param>
+        </member>
+        <member name="M:Z0.Signatures.resource(System.String,Z0.ITypeWidth,Z0.NumericKind)">
+            <summary>
+            Defines a type resource identity
+            </summary>
+            <param name="basename">The base name of the resource</param>
+            <param name="w">The resource bit width</param>
+            <param name="kind">The numeric kind of the resource</param>
+        </member>
+        <member name="M:Z0.Signatures.resource(System.String,Z0.ITypeWidth,Z0.ITypeWidth,Z0.NumericKind)">
+            <summary>
+            Defines a type resource identity
+            </summary>
+            <param name="basename">The base name of the resource</param>
+            <param name="w1">The first bit width</param>
+            <param name="w2">The second bit width</param>
+            <param name="kind">The numeric kind of the resource</param>
+        </member>
+        <member name="M:Z0.Signatures.resource(System.String,Z0.ITypeNat,Z0.NumericKind)">
+            <summary>
+            Defines a type resource identity
+            </summary>
+            <param name="basename">The base name of the resource</param>
+            <param name="w">The resource bit width</param>
+            <param name="kind">The numeric kind of the resource</param>
+        </member>
+        <member name="M:Z0.Signatures.resource(System.String,Z0.ITypeNat,Z0.ITypeNat,Z0.NumericKind)">
+            <summary>
+            Defines a type resource identity
+            </summary>
+            <param name="basename">The base name of the resource</param>
+            <param name="w1">The first bit width</param>
+            <param name="w2">The second bit width</param>
+            <param name="kind">The numeric kind of the resource</param>
+        </member>
+        <member name="M:Z0.Signatures.vgeneric``2(ApiClass,``0,``1)">
+            <summary>
+            Produces an identifier for a kinded generic vectorized operation
+            </summary>
+            <param name="k">The operation kind id</param>
+            <param name="w">The vector operand width</param>
+            <typeparam name="W">The vector operand width</typeparam>
+            <typeparam name="T">The vector cell type</typeparam>
+        </member>
+        <member name="M:Z0.Signatures.vectorized(ApiClass,Z0.TypeWidth,Z0.NumericKind,System.Boolean)">
+            <summary>
+            Produces an identifier for a kinded vectorized operation
+            </summary>
+            <param name="k">The operation kind id</param>
+            <param name="w">The vector operand width</param>
+            <param name="nk">The vector cell kind</param>
+            <param name="generic">Whether the produced identity has a generic marker</param>
+        </member>
+        <member name="M:Z0.Signatures.vdirect``1(ApiClass,Z0.TypeWidth,``0)">
+            <summary>
+            Produces an identifier for a kinded nongeneric vectorized operation
+            </summary>
+            <param name="k">The operation kind id</param>
+            <param name="w">The vector operand width</param>
+            <typeparam name="W">The vector operand width</typeparam>
+            <typeparam name="T">The vector cell type</typeparam>
+        </member>
+        <member name="M:Z0.Signatures.vdirect``2(ApiClass,``0,``1)">
+            <summary>
+            Produces an identifier for a kinded nongeneric vectorized operation
+            </summary>
+            <param name="k">The operation kind id</param>
+            <param name="w">The vector operand width</param>
+            <typeparam name="W">The vector operand width</typeparam>
+            <typeparam name="T">The vector cell type</typeparam>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Z0.Signatures.numeric(ApiClass,Z0.NumericKind,System.Boolean)" -->
+        <member name="M:Z0.Signatures.NumericOp``1(System.String,Z0.NK{``0},System.Boolean)">
+            <summary>
+            Produces an identifier of the form {opname}_g{kind}{u | i | f}
+            </summary>
+            <param name="opname">The base operator name</param>
+            <param name="t">A primal type representative</param>
+            <typeparam name="T">The primal type</typeparam>
+        </member>
+        <member name="M:Z0.Signatures.WithoutGeneric(Z0.OpIdentity)">
+            <summary>
+            Disables the generic indicator
+            </summary>
+        </member>
+        <member name="P:Z0.ToolArchive`1.ToolId">
+            <summary>
+            The tool identifier
+            </summary>
+        </member>
+        <member name="P:Z0.ToolArchive`1.ToolOutput">
+            <summary>
+            The tool output directory
+            </summary>
+        </member>
+        <member name="P:Z0.ToolArchive`1.Processed">
+            <summary>
+            The process root folder
+            </summary>
+        </member>
+        <member name="T:Z0.ToolFlag">
+            <summary>
+            Reprents a tool command operand that accepts no arguments; the presence of a flag is the argument
+            </summary>
+        </member>
+        <member name="T:Z0.ToolFlag`1">
+            <summary>
+            Reprents a tool command operand that accepts no arguments; the presence of a flag is the argument
+            </summary>
+        </member>
+        <member name="F:Z0.ToolOption.Name">
+            <summary>
+            The option name
+            </summary>
+        </member>
+        <member name="F:Z0.ToolOption.Value">
+            <summary>
+            The option value
+            </summary>
+        </member>
         <member name="M:Z0.Cmd.arg(System.String,System.String)">
             <summary>
             Defines a <see cref='T:Z0.CmdArg'/>
@@ -800,6 +1263,1213 @@
             <summary>
             Given a string 'commandExe' look for it on the path the way cmd.exe would.
             Returns <see langword="null"/> if it was not found.
+            </summary>
+        </member>
+        <member name="T:Z0.MemoryIndexMetrics">
+            <summary>
+            Collects statistics of encoded data known to a <see cref='T:Z0.ApiCodeBlockIndex'/>
+            </summary>
+        </member>
+        <member name="M:Z0.DataLayouts.width(System.ReadOnlySpan{Z0.DataLayout})">
+            <summary>
+            Computes the aggregate width of a <see cref='T:Z0.DataLayout'/> sequence
+            </summary>
+            <param name="src">The source sequence</param>
+        </member>
+        <member name="M:Z0.DataLayouts.width(System.ReadOnlySpan{Z0.LayoutPartition})">
+            <summary>
+            Computes the aggregate width of a <see cref='T:Z0.LayoutPartition'/> sequence
+            </summary>
+            <param name="src">The source sequence</param>
+        </member>
+        <member name="M:Z0.DataLayouts.width``1(System.ReadOnlySpan{Z0.LayoutPartition{``0}})">
+            <summary>
+            Computes the aggregate width of a <see cref='T:Z0.LayoutPartition`1'/> sequence
+            </summary>
+            <param name="src">The source sequence</param>
+            <typeparam name="T">The partition kind</typeparam>
+        </member>
+        <member name="T:Z0.BitFieldIndex">
+            <summary>
+            Defines a sequence of contiguous bitfield segments
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:Z0.LayoutIdentity" -->
+        <!-- Badly formed XML comment ignored for member "T:Z0.LayoutIdentity`1" -->
+        <member name="P:Z0.LayoutPartition.Id">
+            <summary>
+            Defines enclosure-relative partition identity
+            </summary>
+        </member>
+        <member name="P:Z0.LayoutPartition.Index">
+            <summary>
+            The enclosure-relative partition index
+            </summary>
+        </member>
+        <member name="T:Z0.LayoutPartition`1">
+            <summary>
+            Defines a <typeparamref name='T'/> kinded segment partition
+            </summary>
+        </member>
+        <member name="P:Z0.LayoutPartition`1.Index">
+            <summary>
+            The enclosure-relative partition index
+            </summary>
+        </member>
+        <member name="P:Z0.LayoutPartition`1.Left">
+            <summary>
+            The inclusive lower index
+            </summary>
+        </member>
+        <member name="P:Z0.LayoutPartition`1.Right">
+            <summary>
+            The inclusive upper index
+            </summary>
+        </member>
+        <member name="P:Z0.LayoutPartition`1.Width">
+            <summary>
+            The partition width determined by <see cref='P:Z0.LayoutPartition`1.Right'/> - <see cref='P:Z0.LayoutPartition`1.Left'/>
+            </summary>
+        </member>
+        <member name="T:Z0.LayoutRange">
+            <summary>
+            Defines the range of a layout segment
+            </summary>
+        </member>
+        <member name="F:Z0.LayoutRange.Left">
+            <summary>
+            The postion of the least-significant bit
+            </summary>
+        </member>
+        <member name="F:Z0.LayoutRange.Right">
+            <summary>
+            The postion of the most-significant bit
+            </summary>
+        </member>
+        <member name="T:Z0.Credits">
+            <summary>
+            Defines document reference specification operations
+            </summary>
+        </member>
+        <member name="M:Z0.Credits.define(Z0.CreditTypes.Vendor,Z0.CreditTypes.Volume,Z0.CreditTypes.Chapter,Z0.CreditTypes.Section,Z0.CreditTypes.Topic,Z0.ContentRef)">
+            <summary>
+            Defines a reference to a topic in a chapter
+            </summary>
+            <param name="v">The document vendor</param>
+            <param name="vol">The referenced volume</param>
+            <param name="c">The referenced chapter</param>
+            <param name="s">The referenced section</param>
+            <param name="t">The referenced topic</param>
+        </member>
+        <member name="M:Z0.Credits.define(Z0.CreditTypes.Vendor,Z0.CreditTypes.Volume,Z0.CreditTypes.Appendix,Z0.CreditTypes.Section,Z0.CreditTypes.Topic,Z0.ContentRef)">
+            <summary>
+            Defines a reference to a topic in an appendix
+            </summary>
+            <param name="v">The document vendor</param>
+            <param name="vol">The referenced volume</param>
+            <param name="a">The referenced appendix</param>
+            <param name="s">The referenced section</param>
+            <param name="t">The referenced topic</param>
+        </member>
+        <member name="M:Z0.Credits.define(Z0.CreditTypes.Vendor,Z0.CreditTypes.Volume,Z0.CreditTypes.Division,Z0.CreditTypes.Section,Z0.CreditTypes.Topic,Z0.ContentRef)">
+            <summary>
+            Defines a reference to a topic in either a chapter or appendix
+            </summary>
+            <param name="v">The document vendor</param>
+            <param name="vol">The referenced volume</param>
+            <param name="d">The referenced chapter or appendix</param>
+            <param name="s">The referenced section</param>
+            <param name="t">The referenced topic</param>
+        </member>
+        <member name="M:Z0.Credits.vendor(Z0.DocRef)">
+            <summary>
+            Extracts the Vendor segment value
+            </summary>
+            <param name="src">The bitfield source</param>
+        </member>
+        <member name="M:Z0.Credits.vendor(Z0.CreditTypes.Vendor)">
+            <summary>
+            Initializes an empty bitfield with a Vendor segment value
+            </summary>
+            <param name="src">The source value</param>
+        </member>
+        <member name="M:Z0.Credits.volume(Z0.DocRef)">
+            <summary>
+            Extracts the Volume segment value
+            </summary>
+            <param name="src">The bitfield source</param>
+        </member>
+        <member name="M:Z0.Credits.volume(Z0.CreditTypes.Volume)">
+            <summary>
+            Initializes an empty bitfield with a Volume segment value
+            </summary>
+            <param name="src">The source value</param>
+        </member>
+        <member name="M:Z0.Credits.division(Z0.DocRef)">
+            <summary>
+            Extracts the Division segment value
+            </summary>
+            <param name="src">The bitfield source</param>
+        </member>
+        <member name="M:Z0.Credits.division(Z0.CreditTypes.Division)">
+            <summary>
+            Initializes an empty bitfield with a Division segment value
+            </summary>
+            <param name="src">The source value</param>
+        </member>
+        <member name="M:Z0.Credits.chapter(Z0.DocRef)">
+            <summary>
+            Extracts the Chapter segment value
+            </summary>
+            <param name="src">The bitfield source</param>
+        </member>
+        <member name="M:Z0.Credits.chapter(Z0.CreditTypes.Chapter)">
+            <summary>
+            Initializes an empty bitfield with a Chapter segment value
+            </summary>
+            <param name="src">The source value</param>
+        </member>
+        <member name="M:Z0.Credits.appendix(Z0.DocRef)">
+            <summary>
+            Extracts the Appendix segment value
+            </summary>
+            <param name="src">The bitfield source</param>
+        </member>
+        <member name="M:Z0.Credits.appendix(Z0.CreditTypes.Appendix)">
+            <summary>
+            Initializes an empty bitfield with an Appendix segment value
+            </summary>
+            <param name="src">The source value</param>
+        </member>
+        <member name="M:Z0.Credits.section(Z0.DocRef)">
+            <summary>
+            Extracts the Section segment value
+            </summary>
+            <param name="src">The bitfield source</param>
+        </member>
+        <member name="M:Z0.Credits.section(Z0.CreditTypes.Section)">
+            <summary>
+            Initializes an empty bitfield with a Section segment value
+            </summary>
+            <param name="src">The source value</param>
+        </member>
+        <member name="M:Z0.Credits.topic(Z0.DocRef)">
+            <summary>
+            Extracts the Topic segment value
+            </summary>
+            <param name="src">The bitfield source</param>
+        </member>
+        <member name="M:Z0.Credits.topic(Z0.CreditTypes.Topic)">
+            <summary>
+            Initializes an empty bitfield with a Topic segment value
+            </summary>
+            <param name="src">The source value</param>
+        </member>
+        <member name="T:Z0.ContentRef">
+            <summary>
+            Defines a reference to specialized content within a document, such as figures and tables
+            that often, as a flagrant display of idiocy, have numbering schemes that are content-type
+            independent and even document-location independent
+            </summary>
+        </member>
+        <member name="P:Z0.ContentRef.Level0">
+            <summary>
+            The level-0 content number
+            </summary>
+        </member>
+        <member name="P:Z0.ContentRef.Level1">
+            <summary>
+            The level-1 content number (if any)
+            </summary>
+        </member>
+        <member name="P:Z0.ContentRef.Level2">
+            <summary>
+            The level-2 content number (if any)
+            </summary>
+        </member>
+        <member name="P:Z0.ContentRef.ContentType">
+            <summary>
+            The type of referenced content
+            </summary>
+        </member>
+        <member name="T:Z0.DocRef">
+            <summary>
+            Defines a reference to document content
+            </summary>
+        </member>
+        <member name="T:Z0.CreditTypes.Appendix">
+            <summary>
+            Defines appendix reference component values
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Appendix.AppendixA">
+            <summary>
+            Appendix A
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Appendix.AppendixB">
+            <summary>
+            Appendix B
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Appendix.AppendixC">
+            <summary>
+            Appendix C
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Appendix.AppendixD">
+            <summary>
+            Appendix D
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Appendix.AppendixE">
+            <summary>
+            Appendix E
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Appendix.AppendixF">
+            <summary>
+            Appendix F
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Appendix.AppendixG">
+            <summary>
+            Appendix G
+            </summary>
+        </member>
+        <member name="T:Z0.CreditTypes.Chapter">
+            <summary>
+            Defines chapter reference component values
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Chapter.Chapter1">
+            <summary>
+            Chapter 1
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Chapter.Chapter2">
+            <summary>
+            Chapter 2
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Chapter.Chapter3">
+            <summary>
+            Chapter 3
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Chapter.Chapter4">
+            <summary>
+            Chapter 4
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Chapter.Chapter5">
+            <summary>
+            Chapter 5
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Chapter.Chapter6">
+            <summary>
+            Chapter 6
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Chapter.Chapter7">
+            <summary>
+            Chapter 7
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Chapter.Chapter8">
+            <summary>
+            Chapter 8
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Chapter.Chapter9">
+            <summary>
+            Chapter 9
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Chapter.Chapter10">
+            <summary>
+            Chapter 10
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Chapter.Chapter11">
+            <summary>
+            Chapter 11
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Chapter.Chapter12">
+            <summary>
+            Chapter a2
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Chapter.Chapter13">
+            <summary>
+            Chapter 13
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Chapter.Chapter14">
+            <summary>
+            Chapter 14
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Chapter.Chapter15">
+            <summary>
+            Chapter 15
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Chapter.Chapter16">
+            <summary>
+            Chapter 16
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Chapter.Chapter17">
+            <summary>
+            Chapter 17
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Chapter.Chapter18">
+            <summary>
+            Chapter 18
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Chapter.Chapter19">
+            <summary>
+            Chapter 19
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Chapter.Chapter20">
+            <summary>
+            Chapter 20
+            </summary>
+        </member>
+        <member name="T:Z0.CreditTypes.ContentField">
+            <summary>
+            Defines literals that isolate content reference components
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.ContentField.SegWidth">
+            <summary>
+            Defines the (uniform) bitfield segment width
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.ContentField.L0">
+            <summary>
+            Defines the L0 bitfield segment
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.ContentField.L1">
+            <summary>
+            Defines the L1 bitfield segment
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.ContentField.L2">
+            <summary>
+            Defines the L2 bitfield segment
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.ContentField.Type">
+            <summary>
+            Defines the Type bitfield segment
+            </summary>
+        </member>
+        <member name="T:Z0.CreditTypes.ContentLevel">
+            <summary>
+            Defines level hierarchy component values
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.ContentLevel.L0">
+            <summary>
+            type: [a].b.c
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.ContentLevel.L1">
+            <summary>
+            type: a.[b].c
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.ContentLevel.L2">
+            <summary>
+            type: a.b.[c]
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.ContentLevel.Type">
+            <summary>
+            [type]: a.b.c
+            </summary>
+        </member>
+        <member name="T:Z0.CreditTypes.ContentNumber">
+            <summary>
+            Defines level-relative content number components
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.ContentNumber.d1">
+            <summary>
+            1, decimal
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.ContentNumber.d2">
+            <summary>
+            2, decimal
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.ContentNumber.d3">
+            <summary>
+            3, decimal
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.ContentNumber.d4">
+            <summary>
+            4, decimal
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.ContentNumber.d5">
+            <summary>
+            5, decimal
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.ContentNumber.d6">
+            <summary>
+            6, decimal
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.ContentNumber.d7">
+            <summary>
+            7, decimal
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.ContentNumber.d8">
+            <summary>
+            8, decimal
+            </summary>
+        </member>
+        <member name="T:Z0.CreditTypes.ContentType">
+            <summary>
+            Defines content type classifiers, and occupies at most 3 bits
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.ContentType.Text">
+            <summary>
+            Text content
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.ContentType.Table">
+            <summary>
+            A table
+            </summary>
+        </member>
+        <member name="T:Z0.CreditTypes.Division">
+            <summary>
+            Defines division reference component values
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Division.Chapter1">
+            <summary>
+            Chapter 1
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Division.Chapter2">
+            <summary>
+            Chapter 2
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Division.Chapter3">
+            <summary>
+            Chapter 3
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Division.Chapter4">
+            <summary>
+            Chapter 4
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Division.Chapter5">
+            <summary>
+            Chapter 5
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Division.Chapter6">
+            <summary>
+            Chapter 6
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Division.Chapter7">
+            <summary>
+            Chapter 7
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Division.Chapter8">
+            <summary>
+            Chapter 8
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Division.Chapter9">
+            <summary>
+            Chapter 9
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Division.Chapter10">
+            <summary>
+            Chapter 10
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Division.Chapter11">
+            <summary>
+            Chapter 11
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Division.Chapter12">
+            <summary>
+            Chapter 12
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Division.Chapter13">
+            <summary>
+            Chapter 13
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Division.Chapter14">
+            <summary>
+            Chapter 14
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Division.Chapter15">
+            <summary>
+            Chapter 15
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Division.AppendixA">
+            <summary>
+            Appendix A
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Division.AppendixB">
+            <summary>
+            Appendix B
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Division.AppendixC">
+            <summary>
+            Appendix C
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Division.AppendixD">
+            <summary>
+            Appendix D
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Division.AppendixE">
+            <summary>
+            Appendix E
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Division.AppendixF">
+            <summary>
+            Appendix F
+            </summary>
+        </member>
+        <member name="T:Z0.CreditTypes.DocField">
+            <summary>
+            Defines literals that isolate reference components
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.DocField.SegWidth">
+            <summary>
+            Defines the (uniform) bitfield segment width
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.DocField.Vendor">
+            <summary>
+            Defines the Vendor bitfield segment
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.DocField.Volume">
+            <summary>
+            Defines the Volume bitfield segment
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.DocField.Division">
+            <summary>
+            Defines the Division bitfield segment
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.DocField.Chapter">
+            <summary>
+            Defines the Chapter bitfield segment
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.DocField.Appendix">
+            <summary>
+            Defines the Appendix bitfield segment
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.DocField.Section">
+            <summary>
+            Defines the Section bitfield segment
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.DocField.Topic">
+            <summary>
+            Defines the Topic bitfield segment
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.DocField.Content">
+            <summary>
+            Defines the Content bitfield segment
+            </summary>
+        </member>
+        <member name="T:Z0.CreditTypes.DocFieldDelimiter">
+            <summary>
+            Defines document field parts
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.DocFieldDelimiter.Vendor">
+            <summary>
+            The vendor component
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.DocFieldDelimiter.Volume">
+            <summary>
+            The volume component
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.DocFieldDelimiter.Division">
+            <summary>
+            The Division component
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.DocFieldDelimiter.Chapter">
+            <summary>
+            The Chapter component
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.DocFieldDelimiter.Appendix">
+            <summary>
+            The Appendix component
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.DocFieldDelimiter.Section">
+            <summary>
+            The Section component
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.DocFieldDelimiter.Topic">
+            <summary>
+            The Topic component
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.DocFieldDelimiter.Content">
+            <summary>
+            The content reference component
+            </summary>
+        </member>
+        <member name="T:Z0.CreditTypes.Section">
+            <summary>
+            Defines section reference component values
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Section.Section1">
+            <summary>
+            Chapter/appendix section 1
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Section.Section2">
+            <summary>
+            Chapter/appendix section 2
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Section.Section3">
+            <summary>
+            Chapter/appendix section 3
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Section.Section4">
+            <summary>
+            Chapter/appendix section 4
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Section.Section5">
+            <summary>
+            Chapter/appendix section 5
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Section.Section6">
+            <summary>
+            Chapter/appendix section 6
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Section.Section7">
+            <summary>
+            Chapter/appendix section 7
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Section.Section8">
+            <summary>
+            Chapter/appendix section 8
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Section.Section9">
+            <summary>
+            Chapter/appendix section 9
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Section.Section10">
+            <summary>
+            Chapter/appendix section 10
+            </summary>
+        </member>
+        <member name="T:Z0.CreditTypes.Topic">
+            <summary>
+            Defines topic reference component values
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Topic.Topic1">
+            <summary>
+            Section topic 1
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Topic.Topic2">
+            <summary>
+            Section topic 2
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Topic.Topic3">
+            <summary>
+            Section topic 3
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Topic.Topic4">
+            <summary>
+            Section topic 4
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Topic.Topic5">
+            <summary>
+            Section topic 5
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Topic.Topic6">
+            <summary>
+            Section topic 6
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Topic.Topic7">
+            <summary>
+            Section topic 7
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Topic.Topic8">
+            <summary>
+            Section topic 8
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Topic.Topic9">
+            <summary>
+            Section topic 9
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Topic.Topic10">
+            <summary>
+            Section topic 10
+            </summary>
+        </member>
+        <member name="T:Z0.CreditTypes.Vendor">
+            <summary>
+            Defines vendor reference component values
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Vendor.Intel">
+            <summary>
+            Intel documentation
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Vendor.Amd">
+            <summary>
+            AMD documentation
+            </summary>
+        </member>
+        <member name="T:Z0.CreditTypes.Volume">
+            <summary>
+            Defines volume reference component values
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Volume.V1">
+            <summary>
+            Volume 1
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Volume.V2">
+            <summary>
+            Volume 2
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Volume.V3">
+            <summary>
+            Volume 3
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Volume.V4">
+            <summary>
+            Volume 4
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Volume.V5">
+            <summary>
+            Volume 5
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Volume.V6">
+            <summary>
+            Volume 6
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Volume.V7">
+            <summary>
+            Volume 7
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Volume.Vol1">
+            <summary>
+            Volume 1
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Volume.Vol2A">
+            <summary>
+            Volume 2A
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Volume.Vol2B">
+            <summary>
+            Volume 2B
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Volume.Vol2C">
+            <summary>
+            Volume 2C
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Volume.Vol2D">
+            <summary>
+            Volume 2D
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Volume.Vol3A">
+            <summary>
+            Volume 3A
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Volume.Vol3B">
+            <summary>
+            Volume 3B
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Volume.Vol3C">
+            <summary>
+            Volume 3C
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Volume.Vol4">
+            <summary>
+            Volume 4
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Volume.VPA">
+            <summary>
+            Volume Part A
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Volume.VPB">
+            <summary>
+            Volume Part B
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Volume.VPC">
+            <summary>
+            Volume Part C
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Volume.VPD">
+            <summary>
+            Volume Part D
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.Volume.VPE">
+            <summary>
+            Volume Part E
+            </summary>
+        </member>
+        <member name="T:Z0.CreditTypes.VolumePart">
+            <summary>
+            Defines volume segmentation classes
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.VolumePart.VA">
+            <summary>
+            Volume part A
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.VolumePart.VB">
+            <summary>
+            Volume part B
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.VolumePart.VC">
+            <summary>
+            Volume part C
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.VolumePart.VD">
+            <summary>
+            Volume part D
+            </summary>
+        </member>
+        <member name="F:Z0.CreditTypes.VolumePart.VE">
+            <summary>
+            Volume part E
+            </summary>
+        </member>
+        <member name="T:Z0.EventEmitter`1">
+            <summary>
+            Base type for event type-specific event originators
+            </summary>
+        </member>
+        <member name="T:Z0.FsmFx.InputReceipt`1">
+            <summary>
+            Delegate for event that fires when an input event has been received
+            </summary>
+            <param name="input">The input event</param>
+            <typeparam name="E">The input event type</typeparam>
+        </member>
+        <member name="T:Z0.FsmFx.Transitioned`1">
+            <summary>
+            Delegate for event that fires when a state transition occurs
+            </summary>
+            <param name="source">The source/antecedent state</param>
+            <param name="target">The target state</param>
+            <typeparam name="S">The state type</typeparam>
+        </member>
+        <member name="T:Z0.FsmFx.Completed">
+            <summary>
+            Delegate for event that fires when a machine attains endstate
+            </summary>
+            <param name="endstate"></param>
+            <param name="asPlanned"></param>
+            <typeparam name="S"></typeparam>
+        </member>
+        <member name="T:Z0.FsmFx.MachineError">
+            <summary>
+            Delegate for error event
+            </summary>
+            <param name="error">The trapped exception</param>
+        </member>
+        <member name="T:Z0.FsmFx.StateEntry`2">
+            <summary>
+            Delegate that fires upon state entry
+            </summary>
+            <param name="entry"></param>
+            <typeparam name="S">The state type</typeparam>
+            <typeparam name="A">The action type</typeparam>
+        </member>
+        <member name="T:Z0.FsmFx.StateExit`2">
+            <summary>
+            Delegate that fires upon state exit
+            </summary>
+            <param name="entry"></param>
+            <typeparam name="S">The state type</typeparam>
+            <typeparam name="A">The action type</typeparam>
+        </member>
+        <member name="T:Z0.Heartbeat">
+            <summary>
+            Captures an instant in time with respect to a server/agent
+            </summary>
+        </member>
+        <member name="F:Z0.Heartbeat.ServerId">
+            <summary>
+            The originating server
+            </summary>
+        </member>
+        <member name="F:Z0.Heartbeat.AgentId">
+            <summary>
+            The originating agent
+            </summary>
+        </member>
+        <member name="F:Z0.Heartbeat.Timestamp">
+            <summary>
+            Represents the time at which the event originated
+            </summary>
+        </member>
+        <member name="T:Z0.IntrinsicEvents">
+            <summary>
+            Defines identifiers for intrinsic system events
+            </summary>
+        </member>
+        <member name="M:Z0.SystemEventWriter.Receive(Z0.PulseEvent)">
+            <summary>
+            Writes a system heartbeat event
+            </summary>
+            <param name="e">The event to write</param>    
+        </member>
+        <member name="T:Z0.PulseEmitter">
+            <summary>
+            Produces a periodic pulse event
+            </summary>
+        </member>
+        <member name="T:Z0.PulseEmitterConfig">
+            <summary>
+            Defines configuration parameters for pulse emission
+            </summary>
+        </member>
+        <member name="P:Z0.PulseEmitterConfig.Frequency">
+            <summary>
+            Specifies the emission frequency
+            </summary>
+        </member>
+        <member name="T:Z0.PulseEvent">
+            <summary>
+            Represents a pulse/tick/heartbeat relative to some frequency
+            </summary>
+        </member>
+        <member name="T:Z0.SourcedEvent">
+            <summary>
+            Identifies an application-level/logical event
+            </summary>
+        </member>
+        <member name="T:Z0.SourcedEventEmitter">
+            <summary>
+            Defines base type for event originators
+            </summary>
+        </member>
+        <member name="T:Z0.SourcedEvent`1">
+            <summary>
+            Represents an application-level/logical event with which data specific to an event class is associated
+            </summary>
+        </member>
+        <member name="F:Z0.SourcedEvent`1.Payload">
+            <summary>
+            Data specific to an event class
+            </summary>
+        </member>
+        <member name="M:Z0.SourcedEvent`1.materialize(System.Span{System.Byte})">
+            <summary>
+            Reconstitutes an event from a sequence of bytes
+            </summary>
+        </member>
+        <member name="M:Z0.SourcedEvent`1.Serialize">
+            <summary>
+            Renders the event as a sequence of bytes
+            </summary>
+        </member>
+        <member name="T:Z0.DelimitedSplitter`1">
+            <summary>
+            Partitions T-cell sequences predicated on a supplied delimiter
+            </summary>
+        </member>
+        <member name="M:Z0.TableContentProvider.structured(System.String)">
+            <summary>
+            Searches for an embedded document with a matching identifier and, if found,
+            returns the first match; otherwise returns an empty document
+            </summary>
+            <param name="match">The resource identifier to match</param>
+        </member>
+        <member name="M:Z0.Generate.BitSetGenerator.TypeNameLiteral(System.Byte,System.Byte)">
+            <summary>
+            Generates public const string TypeName = "B{m}{n}";
+            </summary>
+            <param name="m"></param>
+            <param name="n"></param>
+        </member>
+        <member name="M:Z0.Generate.BitSetGenerator.ValueNameLiteral(System.Byte,System.Byte)">
+            <summary>
+            Generates: public const string ValueName = "b{m}{n}";
+            </summary>
+            <param name="m"></param>
+            <param name="n"></param>
+        </member>
+        <!-- Badly formed XML comment ignored for member "F:Z0.ProjectModel.OpenTagFormat" -->
+        <!-- Badly formed XML comment ignored for member "F:Z0.ProjectModel.CloseTagFormat" -->
+        <!-- Badly formed XML comment ignored for member "F:Z0.ProjectModel.TagFormat" -->
+        <member name="T:Z0.ProjectFile">
+            <summary>
+            Represents a path to a file that defines a project
+            </summary>
+        </member>
+        <member name="T:Z0.BuildVersion">
+            <summary>
+            Defines a symver-aligned build/publication version specifier
+            </summary>
+        </member>
+        <member name="T:Z0.FormatPattern">
+            <summary>
+            Captures an untyped format pattern
+            </summary>
+        </member>
+        <member name="T:Z0.FormatPattern`1">
+            <summary>
+            Captures an untyped format pattern
+            </summary>
+        </member>
+        <member name="T:Z0.FormatPattern`2">
+            <summary>
+            Captures an untyped format pattern
+            </summary>
+        </member>
+        <member name="T:Z0.FormatPattern`3">
+            <summary>
+            Captures an untyped format pattern
+            </summary>
+        </member>
+        <member name="T:Z0.FormatSlot">
+            <summary>
+            Represents a slot within a format pattern
+            </summary>
+        </member>
+        <member name="T:Z0.FormatSlot`1">
+            <summary>
+            Represents a slot within a format pattern
+            </summary>
+        </member>
+        <member name="T:Z0.FileEmission">
+            <summary>
+            Defines a file emission payload
+            </summary>
+        </member>
+        <member name="P:Z0.FileEmission.Target">
+            <summary>
+            The emission target
+            </summary>
+        </member>
+        <member name="F:Z0.EmitStringRecordsStep.PartCount">
+            <summary>
+            The number of processed parts
+            </summary>
+        </member>
+        <member name="F:Z0.EmitStringRecordsStep.EmissionCount">
+            <summary>
+            The number of emitted records after the run step has completed
+            </summary>
+        </member>
+        <member name="T:Z0.IntelIntrinsicsDoc.Parameter">
+            <summary>
+            [parameter type="unsigned char" varname="c_in" etype="UI8"]
+            </summary>
+        </member>
+        <member name="T:Z0.IntelIntrinsicsDoc.Return">
+            <summary>
+            [return type="unsigned char" varname="c_in" etype="UI8"]
+            </summary>
+        </member>
+        <member name="T:Z0.IntelIntrinsicsDoc.instruction">
+            <summary>
+            [instruction name="ADCX" form="r32, r32" xed="ADCX_GPR32d_GPR32d"
+            </summary>
+        </member>
+        <member name="T:Z0.IntelIntrinsicsDoc.intrinsic">
+            <summary>
+            [intrinsic tech="Other" name="_addcarryx_u32">]
+            </summary>
+        </member>
+        <member name="T:Z0.IntelIntrinsicsDocReader">
+            <summary>
+            [intrinsics_list version="3.5.3" date="06/30/2020">]
             </summary>
         </member>
         <member name="T:Z0.AgentEventId">
@@ -2018,84 +3688,6 @@
             Defines common messages that are issued during setup/execution
             </summary>
         </member>
-        <member name="P:Z0.FixedBuffer`1.BufferAddress">
-            <summary>
-            Specifies the address of the buffer, not its content
-            </summary>
-        </member>
-        <member name="T:Z0.BufferSegment`2">
-            <summary>
-            Defines a segment over a buffer
-            </summary>
-        </member>
-        <member name="T:Z0.BufferSegments`1">
-            <summary>
-            Defines a segmented partition over a contiguous buffer
-            </summary>
-        </member>
-        <member name="T:Z0.BufferSegment`1">
-            <summary>
-            Defines a segment over a buffer
-            </summary>
-        </member>
-        <member name="T:Z0.IFixedBuffer`1">
-            <summary>
-            Characterizes a buffer with an invariant address
-            </summary>
-            <typeparam name="T">The buffer cell type</typeparam>
-        </member>
-        <member name="P:Z0.IFixedBuffer`1.BufferAddress">
-            <summary>
-            The buffer's address which should remain unchanged throughout its lifetime
-            </summary>
-            <value></value>
-        </member>
-        <member name="P:Z0.IFixedBuffer`1.CellCount">
-            <summary>
-            The number of cells held in the buffer
-            </summary>
-        </member>
-        <member name="T:Z0.FixedBuffer256`1">
-            <summary>
-            A buffer that contains 256 <typeparamref name='T'/> cells
-            </summary>
-            <typeparam name="T">The cell type</typeparam>
-        </member>
-        <member name="F:Z0.CpuBuffer.BufferSize">
-            <summary>
-            The number of bytes covered by the buffer
-            </summary>
-        </member>
-        <member name="F:Z0.CpuBuffer.Buffer16">
-            <summary>
-            The number of 16-bit elements covered by the buffer
-            </summary>
-        </member>
-        <member name="F:Z0.CpuBuffer.Buffer32">
-            <summary>
-            The number of 32-bit elements covered by the buffer
-            </summary>
-        </member>
-        <member name="F:Z0.CpuBuffer.Buffer64">
-            <summary>
-            The number of 64-bit elements covered by the buffer
-            </summary>
-        </member>
-        <member name="F:Z0.CpuBuffer.Buffer128">
-            <summary>
-            The number of 128-bit elements covered by the buffer
-            </summary>
-        </member>
-        <member name="F:Z0.CpuBuffer.Buffer256">
-            <summary>
-            The number of 256-bit elements covered by the buffer
-            </summary>
-        </member>
-        <member name="F:Z0.CpuBuffer.Buffer512">
-            <summary>
-            The number of 512-bit elements covered by the buffer
-            </summary>
-        </member>
         <member name="M:Z0.CpuWorkers.thread(System.UInt32)">
             <summary>
             Searches for a thread given an OS-assigned id
@@ -2117,1598 +3709,6 @@
         <member name="T:Z0.CpuWorker`1">
             <summary>
             Embodies an asynchronous thread of execution that is assigned to a specific CPU core
-            </summary>
-        </member>
-        <member name="T:Z0.Credits">
-            <summary>
-            Defines document reference specification operations
-            </summary>
-        </member>
-        <member name="M:Z0.Credits.define(Z0.CreditTypes.Vendor,Z0.CreditTypes.Volume,Z0.CreditTypes.Chapter,Z0.CreditTypes.Section,Z0.CreditTypes.Topic,Z0.ContentRef)">
-            <summary>
-            Defines a reference to a topic in a chapter
-            </summary>
-            <param name="v">The document vendor</param>
-            <param name="vol">The referenced volume</param>
-            <param name="c">The referenced chapter</param>
-            <param name="s">The referenced section</param>
-            <param name="t">The referenced topic</param>
-        </member>
-        <member name="M:Z0.Credits.define(Z0.CreditTypes.Vendor,Z0.CreditTypes.Volume,Z0.CreditTypes.Appendix,Z0.CreditTypes.Section,Z0.CreditTypes.Topic,Z0.ContentRef)">
-            <summary>
-            Defines a reference to a topic in an appendix
-            </summary>
-            <param name="v">The document vendor</param>
-            <param name="vol">The referenced volume</param>
-            <param name="a">The referenced appendix</param>
-            <param name="s">The referenced section</param>
-            <param name="t">The referenced topic</param>
-        </member>
-        <member name="M:Z0.Credits.define(Z0.CreditTypes.Vendor,Z0.CreditTypes.Volume,Z0.CreditTypes.Division,Z0.CreditTypes.Section,Z0.CreditTypes.Topic,Z0.ContentRef)">
-            <summary>
-            Defines a reference to a topic in either a chapter or appendix
-            </summary>
-            <param name="v">The document vendor</param>
-            <param name="vol">The referenced volume</param>
-            <param name="d">The referenced chapter or appendix</param>
-            <param name="s">The referenced section</param>
-            <param name="t">The referenced topic</param>
-        </member>
-        <member name="M:Z0.Credits.vendor(Z0.DocRef)">
-            <summary>
-            Extracts the Vendor segment value
-            </summary>
-            <param name="src">The bitfield source</param>
-        </member>
-        <member name="M:Z0.Credits.vendor(Z0.CreditTypes.Vendor)">
-            <summary>
-            Initializes an empty bitfield with a Vendor segment value
-            </summary>
-            <param name="src">The source value</param>
-        </member>
-        <member name="M:Z0.Credits.volume(Z0.DocRef)">
-            <summary>
-            Extracts the Volume segment value
-            </summary>
-            <param name="src">The bitfield source</param>
-        </member>
-        <member name="M:Z0.Credits.volume(Z0.CreditTypes.Volume)">
-            <summary>
-            Initializes an empty bitfield with a Volume segment value
-            </summary>
-            <param name="src">The source value</param>
-        </member>
-        <member name="M:Z0.Credits.division(Z0.DocRef)">
-            <summary>
-            Extracts the Division segment value
-            </summary>
-            <param name="src">The bitfield source</param>
-        </member>
-        <member name="M:Z0.Credits.division(Z0.CreditTypes.Division)">
-            <summary>
-            Initializes an empty bitfield with a Division segment value
-            </summary>
-            <param name="src">The source value</param>
-        </member>
-        <member name="M:Z0.Credits.chapter(Z0.DocRef)">
-            <summary>
-            Extracts the Chapter segment value
-            </summary>
-            <param name="src">The bitfield source</param>
-        </member>
-        <member name="M:Z0.Credits.chapter(Z0.CreditTypes.Chapter)">
-            <summary>
-            Initializes an empty bitfield with a Chapter segment value
-            </summary>
-            <param name="src">The source value</param>
-        </member>
-        <member name="M:Z0.Credits.appendix(Z0.DocRef)">
-            <summary>
-            Extracts the Appendix segment value
-            </summary>
-            <param name="src">The bitfield source</param>
-        </member>
-        <member name="M:Z0.Credits.appendix(Z0.CreditTypes.Appendix)">
-            <summary>
-            Initializes an empty bitfield with an Appendix segment value
-            </summary>
-            <param name="src">The source value</param>
-        </member>
-        <member name="M:Z0.Credits.section(Z0.DocRef)">
-            <summary>
-            Extracts the Section segment value
-            </summary>
-            <param name="src">The bitfield source</param>
-        </member>
-        <member name="M:Z0.Credits.section(Z0.CreditTypes.Section)">
-            <summary>
-            Initializes an empty bitfield with a Section segment value
-            </summary>
-            <param name="src">The source value</param>
-        </member>
-        <member name="M:Z0.Credits.topic(Z0.DocRef)">
-            <summary>
-            Extracts the Topic segment value
-            </summary>
-            <param name="src">The bitfield source</param>
-        </member>
-        <member name="M:Z0.Credits.topic(Z0.CreditTypes.Topic)">
-            <summary>
-            Initializes an empty bitfield with a Topic segment value
-            </summary>
-            <param name="src">The source value</param>
-        </member>
-        <member name="T:Z0.ContentRef">
-            <summary>
-            Defines a reference to specialized content within a document, such as figures and tables
-            that often, as a flagrant display of idiocy, have numbering schemes that are content-type
-            independent and even document-location independent
-            </summary>
-        </member>
-        <member name="P:Z0.ContentRef.Level0">
-            <summary>
-            The level-0 content number
-            </summary>
-        </member>
-        <member name="P:Z0.ContentRef.Level1">
-            <summary>
-            The level-1 content number (if any)
-            </summary>
-        </member>
-        <member name="P:Z0.ContentRef.Level2">
-            <summary>
-            The level-2 content number (if any)
-            </summary>
-        </member>
-        <member name="P:Z0.ContentRef.ContentType">
-            <summary>
-            The type of referenced content
-            </summary>
-        </member>
-        <member name="T:Z0.DocRef">
-            <summary>
-            Defines a reference to document content
-            </summary>
-        </member>
-        <member name="T:Z0.CreditTypes.Appendix">
-            <summary>
-            Defines appendix reference component values
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Appendix.AppendixA">
-            <summary>
-            Appendix A
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Appendix.AppendixB">
-            <summary>
-            Appendix B
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Appendix.AppendixC">
-            <summary>
-            Appendix C
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Appendix.AppendixD">
-            <summary>
-            Appendix D
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Appendix.AppendixE">
-            <summary>
-            Appendix E
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Appendix.AppendixF">
-            <summary>
-            Appendix F
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Appendix.AppendixG">
-            <summary>
-            Appendix G
-            </summary>
-        </member>
-        <member name="T:Z0.CreditTypes.Chapter">
-            <summary>
-            Defines chapter reference component values
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Chapter.Chapter1">
-            <summary>
-            Chapter 1
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Chapter.Chapter2">
-            <summary>
-            Chapter 2
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Chapter.Chapter3">
-            <summary>
-            Chapter 3
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Chapter.Chapter4">
-            <summary>
-            Chapter 4
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Chapter.Chapter5">
-            <summary>
-            Chapter 5
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Chapter.Chapter6">
-            <summary>
-            Chapter 6
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Chapter.Chapter7">
-            <summary>
-            Chapter 7
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Chapter.Chapter8">
-            <summary>
-            Chapter 8
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Chapter.Chapter9">
-            <summary>
-            Chapter 9
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Chapter.Chapter10">
-            <summary>
-            Chapter 10
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Chapter.Chapter11">
-            <summary>
-            Chapter 11
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Chapter.Chapter12">
-            <summary>
-            Chapter a2
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Chapter.Chapter13">
-            <summary>
-            Chapter 13
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Chapter.Chapter14">
-            <summary>
-            Chapter 14
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Chapter.Chapter15">
-            <summary>
-            Chapter 15
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Chapter.Chapter16">
-            <summary>
-            Chapter 16
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Chapter.Chapter17">
-            <summary>
-            Chapter 17
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Chapter.Chapter18">
-            <summary>
-            Chapter 18
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Chapter.Chapter19">
-            <summary>
-            Chapter 19
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Chapter.Chapter20">
-            <summary>
-            Chapter 20
-            </summary>
-        </member>
-        <member name="T:Z0.CreditTypes.ContentField">
-            <summary>
-            Defines literals that isolate content reference components
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.ContentField.SegWidth">
-            <summary>
-            Defines the (uniform) bitfield segment width
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.ContentField.L0">
-            <summary>
-            Defines the L0 bitfield segment
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.ContentField.L1">
-            <summary>
-            Defines the L1 bitfield segment
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.ContentField.L2">
-            <summary>
-            Defines the L2 bitfield segment
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.ContentField.Type">
-            <summary>
-            Defines the Type bitfield segment
-            </summary>
-        </member>
-        <member name="T:Z0.CreditTypes.ContentLevel">
-            <summary>
-            Defines level hierarchy component values
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.ContentLevel.L0">
-            <summary>
-            type: [a].b.c
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.ContentLevel.L1">
-            <summary>
-            type: a.[b].c
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.ContentLevel.L2">
-            <summary>
-            type: a.b.[c]
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.ContentLevel.Type">
-            <summary>
-            [type]: a.b.c
-            </summary>
-        </member>
-        <member name="T:Z0.CreditTypes.ContentNumber">
-            <summary>
-            Defines level-relative content number components
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.ContentNumber.d1">
-            <summary>
-            1, decimal
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.ContentNumber.d2">
-            <summary>
-            2, decimal
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.ContentNumber.d3">
-            <summary>
-            3, decimal
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.ContentNumber.d4">
-            <summary>
-            4, decimal
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.ContentNumber.d5">
-            <summary>
-            5, decimal
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.ContentNumber.d6">
-            <summary>
-            6, decimal
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.ContentNumber.d7">
-            <summary>
-            7, decimal
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.ContentNumber.d8">
-            <summary>
-            8, decimal
-            </summary>
-        </member>
-        <member name="T:Z0.CreditTypes.ContentType">
-            <summary>
-            Defines content type classifiers, and occupies at most 3 bits
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.ContentType.Text">
-            <summary>
-            Text content
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.ContentType.Table">
-            <summary>
-            A table
-            </summary>
-        </member>
-        <member name="T:Z0.CreditTypes.Division">
-            <summary>
-            Defines division reference component values
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Division.Chapter1">
-            <summary>
-            Chapter 1
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Division.Chapter2">
-            <summary>
-            Chapter 2
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Division.Chapter3">
-            <summary>
-            Chapter 3
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Division.Chapter4">
-            <summary>
-            Chapter 4
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Division.Chapter5">
-            <summary>
-            Chapter 5
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Division.Chapter6">
-            <summary>
-            Chapter 6
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Division.Chapter7">
-            <summary>
-            Chapter 7
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Division.Chapter8">
-            <summary>
-            Chapter 8
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Division.Chapter9">
-            <summary>
-            Chapter 9
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Division.Chapter10">
-            <summary>
-            Chapter 10
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Division.Chapter11">
-            <summary>
-            Chapter 11
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Division.Chapter12">
-            <summary>
-            Chapter 12
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Division.Chapter13">
-            <summary>
-            Chapter 13
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Division.Chapter14">
-            <summary>
-            Chapter 14
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Division.Chapter15">
-            <summary>
-            Chapter 15
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Division.AppendixA">
-            <summary>
-            Appendix A
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Division.AppendixB">
-            <summary>
-            Appendix B
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Division.AppendixC">
-            <summary>
-            Appendix C
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Division.AppendixD">
-            <summary>
-            Appendix D
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Division.AppendixE">
-            <summary>
-            Appendix E
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Division.AppendixF">
-            <summary>
-            Appendix F
-            </summary>
-        </member>
-        <member name="T:Z0.CreditTypes.DocField">
-            <summary>
-            Defines literals that isolate reference components
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.DocField.SegWidth">
-            <summary>
-            Defines the (uniform) bitfield segment width
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.DocField.Vendor">
-            <summary>
-            Defines the Vendor bitfield segment
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.DocField.Volume">
-            <summary>
-            Defines the Volume bitfield segment
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.DocField.Division">
-            <summary>
-            Defines the Division bitfield segment
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.DocField.Chapter">
-            <summary>
-            Defines the Chapter bitfield segment
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.DocField.Appendix">
-            <summary>
-            Defines the Appendix bitfield segment
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.DocField.Section">
-            <summary>
-            Defines the Section bitfield segment
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.DocField.Topic">
-            <summary>
-            Defines the Topic bitfield segment
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.DocField.Content">
-            <summary>
-            Defines the Content bitfield segment
-            </summary>
-        </member>
-        <member name="T:Z0.CreditTypes.DocFieldDelimiter">
-            <summary>
-            Defines document field parts
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.DocFieldDelimiter.Vendor">
-            <summary>
-            The vendor component
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.DocFieldDelimiter.Volume">
-            <summary>
-            The volume component
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.DocFieldDelimiter.Division">
-            <summary>
-            The Division component
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.DocFieldDelimiter.Chapter">
-            <summary>
-            The Chapter component
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.DocFieldDelimiter.Appendix">
-            <summary>
-            The Appendix component
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.DocFieldDelimiter.Section">
-            <summary>
-            The Section component
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.DocFieldDelimiter.Topic">
-            <summary>
-            The Topic component
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.DocFieldDelimiter.Content">
-            <summary>
-            The content reference component
-            </summary>
-        </member>
-        <member name="T:Z0.CreditTypes.Section">
-            <summary>
-            Defines section reference component values
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Section.Section1">
-            <summary>
-            Chapter/appendix section 1
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Section.Section2">
-            <summary>
-            Chapter/appendix section 2
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Section.Section3">
-            <summary>
-            Chapter/appendix section 3
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Section.Section4">
-            <summary>
-            Chapter/appendix section 4
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Section.Section5">
-            <summary>
-            Chapter/appendix section 5
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Section.Section6">
-            <summary>
-            Chapter/appendix section 6
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Section.Section7">
-            <summary>
-            Chapter/appendix section 7
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Section.Section8">
-            <summary>
-            Chapter/appendix section 8
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Section.Section9">
-            <summary>
-            Chapter/appendix section 9
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Section.Section10">
-            <summary>
-            Chapter/appendix section 10
-            </summary>
-        </member>
-        <member name="T:Z0.CreditTypes.Topic">
-            <summary>
-            Defines topic reference component values
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Topic.Topic1">
-            <summary>
-            Section topic 1
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Topic.Topic2">
-            <summary>
-            Section topic 2
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Topic.Topic3">
-            <summary>
-            Section topic 3
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Topic.Topic4">
-            <summary>
-            Section topic 4
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Topic.Topic5">
-            <summary>
-            Section topic 5
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Topic.Topic6">
-            <summary>
-            Section topic 6
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Topic.Topic7">
-            <summary>
-            Section topic 7
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Topic.Topic8">
-            <summary>
-            Section topic 8
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Topic.Topic9">
-            <summary>
-            Section topic 9
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Topic.Topic10">
-            <summary>
-            Section topic 10
-            </summary>
-        </member>
-        <member name="T:Z0.CreditTypes.Vendor">
-            <summary>
-            Defines vendor reference component values
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Vendor.Intel">
-            <summary>
-            Intel documentation
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Vendor.Amd">
-            <summary>
-            AMD documentation
-            </summary>
-        </member>
-        <member name="T:Z0.CreditTypes.Volume">
-            <summary>
-            Defines volume reference component values
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Volume.V1">
-            <summary>
-            Volume 1
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Volume.V2">
-            <summary>
-            Volume 2
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Volume.V3">
-            <summary>
-            Volume 3
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Volume.V4">
-            <summary>
-            Volume 4
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Volume.V5">
-            <summary>
-            Volume 5
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Volume.V6">
-            <summary>
-            Volume 6
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Volume.V7">
-            <summary>
-            Volume 7
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Volume.Vol1">
-            <summary>
-            Volume 1
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Volume.Vol2A">
-            <summary>
-            Volume 2A
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Volume.Vol2B">
-            <summary>
-            Volume 2B
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Volume.Vol2C">
-            <summary>
-            Volume 2C
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Volume.Vol2D">
-            <summary>
-            Volume 2D
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Volume.Vol3A">
-            <summary>
-            Volume 3A
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Volume.Vol3B">
-            <summary>
-            Volume 3B
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Volume.Vol3C">
-            <summary>
-            Volume 3C
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Volume.Vol4">
-            <summary>
-            Volume 4
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Volume.VPA">
-            <summary>
-            Volume Part A
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Volume.VPB">
-            <summary>
-            Volume Part B
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Volume.VPC">
-            <summary>
-            Volume Part C
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Volume.VPD">
-            <summary>
-            Volume Part D
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.Volume.VPE">
-            <summary>
-            Volume Part E
-            </summary>
-        </member>
-        <member name="T:Z0.CreditTypes.VolumePart">
-            <summary>
-            Defines volume segmentation classes
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.VolumePart.VA">
-            <summary>
-            Volume part A
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.VolumePart.VB">
-            <summary>
-            Volume part B
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.VolumePart.VC">
-            <summary>
-            Volume part C
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.VolumePart.VD">
-            <summary>
-            Volume part D
-            </summary>
-        </member>
-        <member name="F:Z0.CreditTypes.VolumePart.VE">
-            <summary>
-            Volume part E
-            </summary>
-        </member>
-        <member name="T:Z0.MemoryIndexMetrics">
-            <summary>
-            Collects statistics of encoded data known to a <see cref='T:Z0.ApiCodeBlockIndex'/>
-            </summary>
-        </member>
-        <member name="T:Z0.DelimitedSplitter`1">
-            <summary>
-            Partitions T-cell sequences predicated on a supplied delimiter
-            </summary>
-        </member>
-        <member name="M:Z0.DataLayouts.width(System.ReadOnlySpan{Z0.DataLayout})">
-            <summary>
-            Computes the aggregate width of a <see cref='T:Z0.DataLayout'/> sequence
-            </summary>
-            <param name="src">The source sequence</param>
-        </member>
-        <member name="M:Z0.DataLayouts.width(System.ReadOnlySpan{Z0.LayoutPartition})">
-            <summary>
-            Computes the aggregate width of a <see cref='T:Z0.LayoutPartition'/> sequence
-            </summary>
-            <param name="src">The source sequence</param>
-        </member>
-        <member name="M:Z0.DataLayouts.width``1(System.ReadOnlySpan{Z0.LayoutPartition{``0}})">
-            <summary>
-            Computes the aggregate width of a <see cref='T:Z0.LayoutPartition`1'/> sequence
-            </summary>
-            <param name="src">The source sequence</param>
-            <typeparam name="T">The partition kind</typeparam>
-        </member>
-        <member name="T:Z0.BitFieldIndex">
-            <summary>
-            Defines a sequence of contiguous bitfield segments
-            </summary>
-        </member>
-        <!-- Badly formed XML comment ignored for member "T:Z0.LayoutIdentity" -->
-        <!-- Badly formed XML comment ignored for member "T:Z0.LayoutIdentity`1" -->
-        <member name="P:Z0.LayoutPartition.Id">
-            <summary>
-            Defines enclosure-relative partition identity
-            </summary>
-        </member>
-        <member name="P:Z0.LayoutPartition.Index">
-            <summary>
-            The enclosure-relative partition index
-            </summary>
-        </member>
-        <member name="T:Z0.LayoutPartition`1">
-            <summary>
-            Defines a <typeparamref name='T'/> kinded segment partition
-            </summary>
-        </member>
-        <member name="P:Z0.LayoutPartition`1.Index">
-            <summary>
-            The enclosure-relative partition index
-            </summary>
-        </member>
-        <member name="P:Z0.LayoutPartition`1.Left">
-            <summary>
-            The inclusive lower index
-            </summary>
-        </member>
-        <member name="P:Z0.LayoutPartition`1.Right">
-            <summary>
-            The inclusive upper index
-            </summary>
-        </member>
-        <member name="P:Z0.LayoutPartition`1.Width">
-            <summary>
-            The partition width determined by <see cref='P:Z0.LayoutPartition`1.Right'/> - <see cref='P:Z0.LayoutPartition`1.Left'/>
-            </summary>
-        </member>
-        <member name="T:Z0.LayoutRange">
-            <summary>
-            Defines the range of a layout segment
-            </summary>
-        </member>
-        <member name="F:Z0.LayoutRange.Left">
-            <summary>
-            The postion of the least-significant bit
-            </summary>
-        </member>
-        <member name="F:Z0.LayoutRange.Right">
-            <summary>
-            The postion of the most-significant bit
-            </summary>
-        </member>
-        <member name="M:Z0.Generate.BitSetGenerator.TypeNameLiteral(System.Byte,System.Byte)">
-            <summary>
-            Generates public const string TypeName = "B{m}{n}";
-            </summary>
-            <param name="m"></param>
-            <param name="n"></param>
-        </member>
-        <member name="M:Z0.Generate.BitSetGenerator.ValueNameLiteral(System.Byte,System.Byte)">
-            <summary>
-            Generates: public const string ValueName = "b{m}{n}";
-            </summary>
-            <param name="m"></param>
-            <param name="n"></param>
-        </member>
-        <!-- Badly formed XML comment ignored for member "F:Z0.ProjectModel.OpenTagFormat" -->
-        <!-- Badly formed XML comment ignored for member "F:Z0.ProjectModel.CloseTagFormat" -->
-        <!-- Badly formed XML comment ignored for member "F:Z0.ProjectModel.TagFormat" -->
-        <member name="T:Z0.ProjectFile">
-            <summary>
-            Represents a path to a file that defines a project
-            </summary>
-        </member>
-        <member name="T:Z0.BuildVersion">
-            <summary>
-            Defines a symver-aligned build/publication version specifier
-            </summary>
-        </member>
-        <member name="T:Z0.CorSigParser">
-            <summary>
-            Defines a CLI signature parser
-            </summary>
-            <remarks>
-            [CliSpec, II.23.2] The value of the first byte of a Signature 'blob' indicates what kind of Signature it is. Its lowest 4 bits hold one of the following:
-            <see cref='F:Z0.Cor.CorUnmanagedCallingConvention.IMAGE_CEE_CS_CALLCONV_C'/>
-            <see cref='F:Z0.Cor.CorCallingConvention.IMAGE_CEE_CS_CALLCONV_DEFAULT'/>
-            <see cref='F:Z0.Cor.CorUnmanagedCallingConvention.IMAGE_CEE_UNMANAGED_CALLCONV_FASTCALL'/>
-            <see cref='F:Z0.Cor.CorUnmanagedCallingConvention.IMAGE_CEE_CS_CALLCONV_STDCALL'/>
-            <see cref='F:Z0.Cor.CorUnmanagedCallingConvention.IMAGE_CEE_CS_CALLCONV_THISCALL'/>
-            <see cref='F:Z0.Cor.CorCallingConvention.IMAGE_CEE_CS_CALLCONV_VARARG'/>
-            </remarks>
-        </member>
-        <member name="T:Z0.CorSigParser.MethodDef">
-            <summary>
-            Parses a method signature without VARARG
-            </summary>
-        </member>
-        <member name="T:Z0.CorSigParser.MethodRef">
-            <summary>
-            Parses a method signature with VARARG calls
-            </summary>
-        </member>
-        <member name="T:Z0.Cor">
-            <summary>
-            Transpiled from corhdr.h
-            </summary>
-        </member>
-        <member name="T:Z0.Cor.CorElementType">
-            <summary>
-            Runtime element classifier
-            </summary>
-            <remarks>CLI spec, Partition II, section 23.1.16</remarks>
-        </member>
-        <member name="M:Z0.Signatures.duplicates(Z0.OpIdentity[])">
-            <summary>
-            Returns the duplicate identities found in the source stream, if any; otherwise, returns an empty array
-            </summary>
-            <param name="src">The identities to search for duplicates</param>
-        </member>
-        <member name="M:Z0.Signatures.define(System.String)">
-            <summary>
-            Defines an identity, bypassing validation
-            </summary>
-            <param name="src">The identity text</param>
-        </member>
-        <member name="M:Z0.Signatures.define(System.String,System.String,System.String,System.Boolean,System.Boolean,System.String[])">
-            <summary>
-            Defines an operation identifier with all aspects explicitly specified
-            </summary>
-            <param name="text">The identity text</param>
-            <param name="name">The operation name</param>
-            <param name="suffix">The operaion suffix</param>
-            <param name="generic">The operation's generic status</param>
-            <param name="imm">Specifies whether the operation requires one or more immediate values</param>
-            <param name="components">The identity components</param>
-        </member>
-        <member name="M:Z0.Signatures.vsfunc(ApiClass,Z0.TypeWidth,Z0.NumericKind,System.Boolean)">
-            <summary>
-            Produces an identifier for a kinded vectorized structural function
-            </summary>
-            <param name="k">The operation kind id</param>
-            <param name="w">The vector width</param>
-            <param name="nk">The cell numeric kind</param>
-            <param name="generic">Whether the produced identity has a generic marker</param>
-        </member>
-        <member name="M:Z0.Signatures.vsfunc``1(ApiClass,Z0.TypeWidth,``0,System.Boolean)">
-            <summary>
-            Produces an identifier for a kinded vectorized structural function
-            </summary>
-            <param name="k">The operation kind id</param>
-            <param name="w">The vector width</param>
-            <param name="nk">The cell numeric kind</param>
-            <param name="generic">Whether the produced identity has a generic marker</param>
-            <typeparam name="T">The vector cell type</typeparam>
-        </member>
-        <member name="M:Z0.Signatures.vsfunc``2(ApiClass,``0,``1,System.Boolean)">
-            <summary>
-            Produces an identifier for a kinded vectorized structural function
-            </summary>
-            <param name="k">The operation kind id</param>
-            <param name="w">A vector width representative</param>
-            <param name="t">A cell type representative</param>
-            <param name="generic">Whether the produced identity has a generic marker</param>
-            <typeparam name="W">The vector width type</typeparam>
-            <typeparam name="T">The vector cell type</typeparam>
-        </member>
-        <member name="M:Z0.Signatures.sfunc``1(ApiClass,Z0.TypeWidth,``0,System.Boolean)">
-            <summary>
-            Produces an identifier for a kinded structural function of segmented type
-            </summary>
-            <param name="k">The operation kind id</param>
-            <param name="w">A segment width representative</param>
-            <param name="t">A cell type representative</param>
-            <param name="generic">Whether the produced identity has a generic marker</param>
-        </member>
-        <member name="M:Z0.Signatures.sfunc``2(ApiClass,``0,``1,System.Boolean)">
-            <summary>
-            Produces an identifier for a kinded structural function of segmented type
-            </summary>
-            <param name="k">The operation kind id</param>
-            <param name="w">A segment width representative</param>
-            <param name="t">A cell type representative</param>
-            <param name="generic">Whether the produced identity has a generic marker</param>
-            <typeparam name="W">The width type</typeparam>
-            <typeparam name="T">The numeric type</typeparam>
-        </member>
-        <member name="M:Z0.Signatures.sfunc``1(ApiClass,``0)">
-            <summary>
-            Produces an identifier for a kinded numeric structural function
-            </summary>
-            <param name="k">The operation kind id</param>
-            <typeparam name="T">The numeric type</typeparam>
-        </member>
-        <member name="M:Z0.Signatures.sfunc(ApiClass,Z0.NumericKind)">
-            <summary>
-            Produces an identifier for a kinded numeric structural function
-            </summary>
-            <param name="k">The operation kind id</param>
-            <param name="nk">The operation numeric kind</param>
-        </member>
-        <member name="M:Z0.Signatures.sfunc(ApiClass,Z0.TypeWidth,Z0.NumericKind,System.Boolean)">
-            <summary>
-            Produces an identifier for a kinded structural function of segmented type
-            </summary>
-            <param name="k">The operation kind id</param>
-            <param name="w">A segment width representative</param>
-            <param name="t">A cell type representative</param>
-            <param name="generic">Whether the produced identity has a generic marker</param>
-        </member>
-        <member name="M:Z0.Signatures.NumericOp(ApiClass,Z0.NumericKind[])">
-            <summary>
-            Defines kinded identifiers for nongeneric numeric functions
-            </summary>
-            <param name="id">The operation kind id</param>
-            <param name="kinds">The numeric argument kinds</param>
-        </member>
-        <member name="M:Z0.Signatures.numeric(Z0.NumericKind)">
-            <summary>
-            Defines a scalar type identity
-            </summary>
-            <param name="width">The scalar bit-width</param>
-        </member>
-        <member name="M:Z0.Signatures.numeric``1(ApiClass,``0,System.Boolean)">
-            <summary>
-            Produces an identifer for a kinded numeric operation
-            </summary>
-            <param name="k">The operation kind id</param>
-            <param name="generic">Whether the produced identity has a generic marker</param>
-            <typeparam name="T">The operation numeric kind</typeparam>
-        </member>
-        <member name="M:Z0.Signatures.segmented(Z0.OpIdentity,System.Int32)">
-            <summary>
-            Extracts an index-identified segmented identity part from an operation identity
-            </summary>
-            <param name="src">The source identity</param>
-            <param name="index">The 0-based part index</param>
-        </member>
-        <member name="M:Z0.Signatures.segmented(System.String,Z0.TypeWidth,Z0.NumericKind)">
-            <summary>
-            Defines a segmented type identity predicated on type width numeric kind specifications
-            </summary>
-            <param name="name">The type name</param>
-            <param name="wk">The width kind</param>
-            <param name="nk">The numeric kind</param>
-        </member>
-        <member name="M:Z0.Signatures.resource(System.String,Z0.ITypeWidth,Z0.NumericKind)">
-            <summary>
-            Defines a type resource identity
-            </summary>
-            <param name="basename">The base name of the resource</param>
-            <param name="w">The resource bit width</param>
-            <param name="kind">The numeric kind of the resource</param>
-        </member>
-        <member name="M:Z0.Signatures.resource(System.String,Z0.ITypeWidth,Z0.ITypeWidth,Z0.NumericKind)">
-            <summary>
-            Defines a type resource identity
-            </summary>
-            <param name="basename">The base name of the resource</param>
-            <param name="w1">The first bit width</param>
-            <param name="w2">The second bit width</param>
-            <param name="kind">The numeric kind of the resource</param>
-        </member>
-        <member name="M:Z0.Signatures.resource(System.String,Z0.ITypeNat,Z0.NumericKind)">
-            <summary>
-            Defines a type resource identity
-            </summary>
-            <param name="basename">The base name of the resource</param>
-            <param name="w">The resource bit width</param>
-            <param name="kind">The numeric kind of the resource</param>
-        </member>
-        <member name="M:Z0.Signatures.resource(System.String,Z0.ITypeNat,Z0.ITypeNat,Z0.NumericKind)">
-            <summary>
-            Defines a type resource identity
-            </summary>
-            <param name="basename">The base name of the resource</param>
-            <param name="w1">The first bit width</param>
-            <param name="w2">The second bit width</param>
-            <param name="kind">The numeric kind of the resource</param>
-        </member>
-        <member name="M:Z0.Signatures.vgeneric``2(ApiClass,``0,``1)">
-            <summary>
-            Produces an identifier for a kinded generic vectorized operation
-            </summary>
-            <param name="k">The operation kind id</param>
-            <param name="w">The vector operand width</param>
-            <typeparam name="W">The vector operand width</typeparam>
-            <typeparam name="T">The vector cell type</typeparam>
-        </member>
-        <member name="M:Z0.Signatures.vectorized(ApiClass,Z0.TypeWidth,Z0.NumericKind,System.Boolean)">
-            <summary>
-            Produces an identifier for a kinded vectorized operation
-            </summary>
-            <param name="k">The operation kind id</param>
-            <param name="w">The vector operand width</param>
-            <param name="nk">The vector cell kind</param>
-            <param name="generic">Whether the produced identity has a generic marker</param>
-        </member>
-        <member name="M:Z0.Signatures.vdirect``1(ApiClass,Z0.TypeWidth,``0)">
-            <summary>
-            Produces an identifier for a kinded nongeneric vectorized operation
-            </summary>
-            <param name="k">The operation kind id</param>
-            <param name="w">The vector operand width</param>
-            <typeparam name="W">The vector operand width</typeparam>
-            <typeparam name="T">The vector cell type</typeparam>
-        </member>
-        <member name="M:Z0.Signatures.vdirect``2(ApiClass,``0,``1)">
-            <summary>
-            Produces an identifier for a kinded nongeneric vectorized operation
-            </summary>
-            <param name="k">The operation kind id</param>
-            <param name="w">The vector operand width</param>
-            <typeparam name="W">The vector operand width</typeparam>
-            <typeparam name="T">The vector cell type</typeparam>
-        </member>
-        <!-- Badly formed XML comment ignored for member "M:Z0.Signatures.numeric(ApiClass,Z0.NumericKind,System.Boolean)" -->
-        <member name="M:Z0.Signatures.NumericOp``1(System.String,Z0.NK{``0},System.Boolean)">
-            <summary>
-            Produces an identifier of the form {opname}_g{kind}{u | i | f}
-            </summary>
-            <param name="opname">The base operator name</param>
-            <param name="t">A primal type representative</param>
-            <typeparam name="T">The primal type</typeparam>
-        </member>
-        <member name="M:Z0.Signatures.WithoutGeneric(Z0.OpIdentity)">
-            <summary>
-            Disables the generic indicator
-            </summary>
-        </member>
-        <member name="T:Z0.EventEmitter`1">
-            <summary>
-            Base type for event type-specific event originators
-            </summary>
-        </member>
-        <member name="T:Z0.FsmFx.InputReceipt`1">
-            <summary>
-            Delegate for event that fires when an input event has been received
-            </summary>
-            <param name="input">The input event</param>
-            <typeparam name="E">The input event type</typeparam>
-        </member>
-        <member name="T:Z0.FsmFx.Transitioned`1">
-            <summary>
-            Delegate for event that fires when a state transition occurs
-            </summary>
-            <param name="source">The source/antecedent state</param>
-            <param name="target">The target state</param>
-            <typeparam name="S">The state type</typeparam>
-        </member>
-        <member name="T:Z0.FsmFx.Completed">
-            <summary>
-            Delegate for event that fires when a machine attains endstate
-            </summary>
-            <param name="endstate"></param>
-            <param name="asPlanned"></param>
-            <typeparam name="S"></typeparam>
-        </member>
-        <member name="T:Z0.FsmFx.MachineError">
-            <summary>
-            Delegate for error event
-            </summary>
-            <param name="error">The trapped exception</param>
-        </member>
-        <member name="T:Z0.FsmFx.StateEntry`2">
-            <summary>
-            Delegate that fires upon state entry
-            </summary>
-            <param name="entry"></param>
-            <typeparam name="S">The state type</typeparam>
-            <typeparam name="A">The action type</typeparam>
-        </member>
-        <member name="T:Z0.FsmFx.StateExit`2">
-            <summary>
-            Delegate that fires upon state exit
-            </summary>
-            <param name="entry"></param>
-            <typeparam name="S">The state type</typeparam>
-            <typeparam name="A">The action type</typeparam>
-        </member>
-        <member name="T:Z0.Heartbeat">
-            <summary>
-            Captures an instant in time with respect to a server/agent
-            </summary>
-        </member>
-        <member name="F:Z0.Heartbeat.ServerId">
-            <summary>
-            The originating server
-            </summary>
-        </member>
-        <member name="F:Z0.Heartbeat.AgentId">
-            <summary>
-            The originating agent
-            </summary>
-        </member>
-        <member name="F:Z0.Heartbeat.Timestamp">
-            <summary>
-            Represents the time at which the event originated
-            </summary>
-        </member>
-        <member name="T:Z0.IntrinsicEvents">
-            <summary>
-            Defines identifiers for intrinsic system events
-            </summary>
-        </member>
-        <member name="M:Z0.SystemEventWriter.Receive(Z0.PulseEvent)">
-            <summary>
-            Writes a system heartbeat event
-            </summary>
-            <param name="e">The event to write</param>    
-        </member>
-        <member name="T:Z0.PulseEmitter">
-            <summary>
-            Produces a periodic pulse event
-            </summary>
-        </member>
-        <member name="T:Z0.PulseEmitterConfig">
-            <summary>
-            Defines configuration parameters for pulse emission
-            </summary>
-        </member>
-        <member name="P:Z0.PulseEmitterConfig.Frequency">
-            <summary>
-            Specifies the emission frequency
-            </summary>
-        </member>
-        <member name="T:Z0.PulseEvent">
-            <summary>
-            Represents a pulse/tick/heartbeat relative to some frequency
-            </summary>
-        </member>
-        <member name="T:Z0.SourcedEvent">
-            <summary>
-            Identifies an application-level/logical event
-            </summary>
-        </member>
-        <member name="T:Z0.SourcedEventEmitter">
-            <summary>
-            Defines base type for event originators
-            </summary>
-        </member>
-        <member name="T:Z0.SourcedEvent`1">
-            <summary>
-            Represents an application-level/logical event with which data specific to an event class is associated
-            </summary>
-        </member>
-        <member name="F:Z0.SourcedEvent`1.Payload">
-            <summary>
-            Data specific to an event class
-            </summary>
-        </member>
-        <member name="M:Z0.SourcedEvent`1.materialize(System.Span{System.Byte})">
-            <summary>
-            Reconstitutes an event from a sequence of bytes
-            </summary>
-        </member>
-        <member name="M:Z0.SourcedEvent`1.Serialize">
-            <summary>
-            Renders the event as a sequence of bytes
-            </summary>
-        </member>
-        <member name="T:Z0.CliAssemblyReference">
-            <summary>
-            Captures <see cref='T:System.Reflection.Metadata.AssemblyReference'/> data in usable form
-            </summary>
-        </member>
-        <member name="T:Z0.CliManifestResourceInfo">
-            <summary>
-            Captures <see cref='T:System.Reflection.Metadata.ManifestResource'/> data in usable form
-            </summary>
-        </member>
-        <member name="T:Z0.CliMethodDefinition">
-            <summary>
-            Captures <see cref='T:System.Reflection.Metadata.MethodDefinition'/> data in usable form
-            </summary>
-        </member>
-        <member name="T:Z0.CliMethodImport">
-            <summary>
-            Captures <see cref='T:System.Reflection.Metadata.MethodImport'/> data in usable form
-            </summary>
-        </member>
-        <member name="M:Z0.PeTableReader.open(Z0.FS.FilePath)">
-            <summary>
-            Allocates a <see cref='T:Z0.PeTableReader'/> for a specified file
-            </summary>
-            <param name="src">The source path</param>
-        </member>
-        <member name="T:Z0.LocatedImage">
-            <summary>
-            Describes a PE image from the perspective of process entry point
-            </summary>
-        </member>
-        <member name="F:Z0.LocatedImage.ImagePath">
-            <summary>
-            The image source path
-            </summary>
-        </member>
-        <member name="F:Z0.LocatedImage.PartId">
-            <summary>
-            The image part identifier, if any
-            </summary>
-        </member>
-        <member name="F:Z0.LocatedImage.EntryAddress">
-            <summary>
-            The process entry point
-            </summary>
-        </member>
-        <member name="F:Z0.LocatedImage.BaseAddress">
-            <summary>
-            The image's memory base
-            </summary>
-        </member>
-        <member name="F:Z0.LocatedImage.Size">
-            <summary>
-            The image size
-            </summary>
-        </member>
-        <member name="P:Z0.LocatedImage.Name">
-            <summary>
-            The <see cref='F:Z0.LocatedImage.ImagePath'/> filename without the extension
-            </summary>
-        </member>
-        <member name="P:Z0.LocatedImage.EndAddress">
-            <summary>
-            The terminal address as determined by <see cref='F:Z0.LocatedImage.BaseAddress'/> + <see cref='F:Z0.LocatedImage.Size'/>
-            </summary>
-        </member>
-        <member name="P:Z0.LocatedImage.Range">
-            <summary>
-            The memory range occupied by the image
-            </summary>
-        </member>
-        <member name="F:Z0.LocatedImage`1.ImagePath">
-            <summary>
-            The image source path
-            </summary>
-        </member>
-        <member name="F:Z0.LocatedImage`1.StartAddress">
-            <summary>
-            The address at which image data begins
-            </summary>
-        </member>
-        <member name="F:Z0.LocatedImage`1.EndAddress">
-            <summary>
-            The address at which image data ends
-            </summary>
-        </member>
-        <member name="M:Z0.ProcessImages.locate(System.Diagnostics.ProcessModule)">
-            <summary>
-            Creates a <see cref='T:Z0.LocatedImage'/> description from a specified <see cref='T:System.Diagnostics.ProcessModule'/>
-            </summary>
-            <param name="src">The source module</param>
-        </member>
-        <member name="M:Z0.ProcessImages.structured(System.Reflection.Assembly,System.String)">
-            <summary>
-            Searches for an embedded document with a matching identifier and, if found,
-            returns the first match; otherwise returns an empty document
-            </summary>
-            <param name="match">The resource identifier to match</param>
-        </member>
-        <member name="T:Z0.FileEmission">
-            <summary>
-            Defines a file emission payload
-            </summary>
-        </member>
-        <member name="P:Z0.FileEmission.Target">
-            <summary>
-            The emission target
-            </summary>
-        </member>
-        <member name="T:Z0.IntelIntrinsicsDoc.Parameter">
-            <summary>
-            [parameter type="unsigned char" varname="c_in" etype="UI8"]
-            </summary>
-        </member>
-        <member name="T:Z0.IntelIntrinsicsDoc.Return">
-            <summary>
-            [return type="unsigned char" varname="c_in" etype="UI8"]
-            </summary>
-        </member>
-        <member name="T:Z0.IntelIntrinsicsDoc.instruction">
-            <summary>
-            [instruction name="ADCX" form="r32, r32" xed="ADCX_GPR32d_GPR32d"
-            </summary>
-        </member>
-        <member name="T:Z0.IntelIntrinsicsDoc.intrinsic">
-            <summary>
-            [intrinsic tech="Other" name="_addcarryx_u32">]
-            </summary>
-        </member>
-        <member name="T:Z0.IntelIntrinsicsDocReader">
-            <summary>
-            [intrinsics_list version="3.5.3" date="06/30/2020">]
-            </summary>
-        </member>
-        <member name="M:Z0.TableContentProvider.structured(System.String)">
-            <summary>
-            Searches for an embedded document with a matching identifier and, if found,
-            returns the first match; otherwise returns an empty document
-            </summary>
-            <param name="match">The resource identifier to match</param>
-        </member>
-        <member name="T:Z0.FormatPattern">
-            <summary>
-            Captures an untyped format pattern
-            </summary>
-        </member>
-        <member name="T:Z0.FormatPattern`1">
-            <summary>
-            Captures an untyped format pattern
-            </summary>
-        </member>
-        <member name="T:Z0.FormatPattern`2">
-            <summary>
-            Captures an untyped format pattern
-            </summary>
-        </member>
-        <member name="T:Z0.FormatPattern`3">
-            <summary>
-            Captures an untyped format pattern
-            </summary>
-        </member>
-        <member name="T:Z0.FormatSlot">
-            <summary>
-            Represents a slot within a format pattern
-            </summary>
-        </member>
-        <member name="T:Z0.FormatSlot`1">
-            <summary>
-            Represents a slot within a format pattern
-            </summary>
-        </member>
-        <member name="P:Z0.ToolArchive`1.ToolId">
-            <summary>
-            The tool identifier
-            </summary>
-        </member>
-        <member name="P:Z0.ToolArchive`1.ToolOutput">
-            <summary>
-            The tool output directory
-            </summary>
-        </member>
-        <member name="P:Z0.ToolArchive`1.Processed">
-            <summary>
-            The process root folder
-            </summary>
-        </member>
-        <member name="T:Z0.ToolFlag">
-            <summary>
-            Reprents a tool command operand that accepts no arguments; the presence of a flag is the argument
-            </summary>
-        </member>
-        <member name="T:Z0.ToolFlag`1">
-            <summary>
-            Reprents a tool command operand that accepts no arguments; the presence of a flag is the argument
-            </summary>
-        </member>
-        <member name="F:Z0.ToolOption.Name">
-            <summary>
-            The option name
-            </summary>
-        </member>
-        <member name="F:Z0.ToolOption.Value">
-            <summary>
-            The option value
-            </summary>
-        </member>
-        <member name="F:Z0.EmitStringRecordsStep.PartCount">
-            <summary>
-            The number of processed parts
-            </summary>
-        </member>
-        <member name="F:Z0.EmitStringRecordsStep.EmissionCount">
-            <summary>
-            The number of emitted records after the run step has completed
             </summary>
         </member>
     </members>

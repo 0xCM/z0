@@ -10,14 +10,14 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct KindIdentity
+    public readonly struct CliKindIdentity
     {
         [MethodImpl(Inline)]
-        public static implicit operator KindIdentity(in Pair<ClrArtifactKey> src)
-            => new KindIdentity(src);
+        public static implicit operator CliKindIdentity(in Pair<ClrArtifactKey> src)
+            => new CliKindIdentity(src);
 
         [MethodImpl(Inline)]
-        public KindIdentity(in Pair<ClrArtifactKey> src)
+        public CliKindIdentity(in Pair<ClrArtifactKey> src)
             => Components = (ulong)src.Left | ((ulong)src.Right << 32);
 
         readonly ulong Components;

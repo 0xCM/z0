@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-
     [Cmd]
     public struct EmitClrArtifactReportCmd : ICmdSpec<EmitClrArtifactReportCmd>
     {

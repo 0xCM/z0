@@ -11,16 +11,16 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct DirectiveIdentity
+    public readonly struct CliIdentityVector
     {
         readonly Vector128<uint> Components;
 
         [MethodImpl(Inline)]
-        public static implicit operator DirectiveIdentity(in ConstQuad<ClrArtifactKey> src)
-            => new DirectiveIdentity(src);
+        public static implicit operator CliIdentityVector(in ConstQuad<ClrArtifactKey> src)
+            => new CliIdentityVector(src);
 
         [MethodImpl(Inline)]
-        public DirectiveIdentity(in ConstQuad<ClrArtifactKey> src)
+        public CliIdentityVector(in ConstQuad<ClrArtifactKey> src)
             => Components = vparts(n128,(uint)src.First, (uint)src.Second, (uint)src.Third, (uint)src.Fourth);
 
         public ClrArtifactKey Kind
