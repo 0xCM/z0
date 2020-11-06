@@ -12,6 +12,10 @@
     <ProjectReference Include="$(Apps)" />
     <ProjectReference Include="$(BitVectors)" />
     <ProjectReference Include="$(Xed)" />
+    <ProjectReference Include="$(Check)" />
+    <ProjectReference Include="$(CheckDynamic)" />
+    <ProjectReference Include="$(Canonical)" />
+
   </ItemGroup>
 
 </Project>
