@@ -25,7 +25,7 @@
     <IncludeSymbols>true</IncludeSymbols>
     <Platforms>AnyCPU;x64</Platforms>
     <OutputPath>$(BuildRootDir)bin\$(Configuration)\$(MsBuildProjectName)\</OutputPath>
-    <DocumentationFile>$(MsBuildProjectName).xml</DocumentationFile>
+    <DocumentationFile>$(OutputPath)$(TargetFramework)\$(MsBuildProjectName).xml</DocumentationFile>
     <IntermediateRoot>$(BuildRootDir)obj\$(Configuration)\$(MsBuildProjectName)\</IntermediateRoot>
     <IntermediateBuildDir>$(IntermediateRoot)</IntermediateBuildDir>
     <BaseIntermediateOutputPath>$(IntermediateRoot)</BaseIntermediateOutputPath>
