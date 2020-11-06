@@ -13,7 +13,6 @@ namespace Z0.Tools
     {
         public const string Dumpbin = tools + dot + dumpbin;
 
-        public const string DumpbinPatterns = tools + dot + dumpbin + dot + patterns;
 
         const string patterns = nameof(patterns);
     }

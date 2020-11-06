@@ -4,20 +4,13 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.IO;
-    using System.Runtime.CompilerServices;
-    using System.Text;
-    using System.Diagnostics;
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    using static Konst;
-
+    [Free]
     public interface ICmdObserver
     {
+        void Information(string data);
 
-        void OnInfo(string data);
-
-
-        void OnError(string data);
+        void Error(string data);
     }
 }

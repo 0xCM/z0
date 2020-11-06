@@ -6,8 +6,9 @@ namespace Z0
 {
     using System;
 
-    using static Konst;
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
+    [Free]
     public interface IToolFlags<F> : ITool
         where F : unmanaged, Enum
     {

@@ -6,7 +6,10 @@ namespace Z0
 {
     using System;
 
-    public interface IToolProcess
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
+    [Free]
+    public interface ICmdProcess
     {
         int ProcessId {get;}
 
@@ -54,7 +57,7 @@ namespace Z0
         /// Wait for a started process to complete (HasExited will be <see langword="true"/> on return)
         /// </summary>
         /// <returns>Wait returns that 'this' pointer.</returns>
-        ToolProcess Wait();
+        CmdProcess Wait();
 
         /// <summary>
         /// Throw a error if the command exited with a non-zero exit code

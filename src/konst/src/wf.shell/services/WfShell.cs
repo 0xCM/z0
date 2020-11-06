@@ -25,7 +25,7 @@ namespace Z0
 
         public IWfBroker Broker {get;}
 
-        public string[] Args {get;}
+        public AppArgs Args {get;}
 
         public IWfPaths Paths {get;}
 

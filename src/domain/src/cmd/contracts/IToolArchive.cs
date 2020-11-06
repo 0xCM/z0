@@ -4,8 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
+    [Free]
     public interface IToolArchive
     {
         /// <summary>
@@ -24,6 +25,7 @@ namespace Z0
         FS.FolderPath Processed {get;}
     }
 
+    [Free]
     public interface IToolArchive<T> : IToolArchive
         where T : struct, ITool<T>
     {
@@ -31,7 +33,6 @@ namespace Z0
         /// The tool that owns the archive
         /// </summary>
         T Owner => default(T);
-
 
         CmdOutput<T> Dir()
             => Tooling.output(this).Map(f => new CmdTarget<T>(f));

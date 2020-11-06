@@ -12,6 +12,12 @@ namespace Z0
 
     partial struct Cmd
     {
+        [MethodImpl(Inline)]
+        public static CmdTarget<T,F> target<T,F>(F kind, FS.FilePath path)
+            where T : struct, ITool<T>
+            where F : unmanaged
+                => new CmdTarget<T,F>(kind, path);
+
         /// <summary>
         /// Creates a <see cref='ToolSpec'/>
         /// </summary>
@@ -25,6 +31,15 @@ namespace Z0
         public static ToolSpec tool<T>(ToolFlag[] flags)
             where T : unmanaged
                 => new ToolSpec(typeof(T).Name, flags);
+
+        /// <summary>
+        /// Creates a parametrically-predicated tool identifier
+        /// </summary>
+        /// <typeparam name="T">The tool type</typeparam>
+        [MethodImpl(Inline)]
+        public static ToolId<T> toolid<T>()
+            where T : struct
+                => default;
 
         [MethodImpl(Inline)]
         public static ToolSpec tool<T,F>(F[] flags, CmdArg[] options, T tool = default)

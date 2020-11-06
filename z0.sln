@@ -117,8 +117,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "z0.run", "src\run\z0.run.cs
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "z0.blocked", "src\blocked\z0.blocked.csproj", "{1983EEB4-CD36-4813-8CA4-CD978FB7711B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "z0.konst.shell", "src\konst.shell\z0.konst.shell.csproj", "{9073D980-EA20-48A7-AE93-371C20CC78EF}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "z0.check", "src\check\z0.check.csproj", "{E354AFC9-9C1A-49B8-A5B5-3A50C979E7B8}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "z0.asm", "src\asm\z0.asm.csproj", "{FB88FB86-1F58-40E0-BA96-F23218BD23DF}"

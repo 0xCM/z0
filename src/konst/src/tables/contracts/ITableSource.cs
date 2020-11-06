@@ -6,6 +6,9 @@ namespace Z0
 {
     using System;
 
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
+    [Free]
     public interface ITableSource<T>
         where T : struct
     {
@@ -14,6 +17,7 @@ namespace Z0
         uint Pull(uint requested, ref T dst);
     }
 
+    [Free]
     public interface ITableTarget<T>
         where T : struct
     {
@@ -22,6 +26,7 @@ namespace Z0
         void Push(in T src);
     }
 
+    [Free]
     public interface ITableExchange<S,T> : ITableSource<S>, ITableTarget<T>
         where S : struct
         where T : struct

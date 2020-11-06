@@ -16,20 +16,26 @@ namespace Z0
 
         internal IJsonSettings Settings;
 
-        internal string[] Args;
+        internal AppArgs Args;
 
         internal WfController Controller;
 
-        IWfPaths IWfContext.Paths => Paths;
+        IWfPaths IWfContext.Paths
+            => Paths;
 
-        IApiParts IWfContext.ApiParts => ApiParts;
+        IApiParts IWfContext.ApiParts
+            => ApiParts;
 
-        ITestLogPaths IWfContext.TestLogPaths => TestLogPaths;
+        ITestLogPaths IWfContext.TestLogPaths
+            => TestLogPaths;
 
-        IJsonSettings IWfContext.Settings => Settings;
+        IJsonSettings IWfContext.Settings
+            => Settings;
 
-        string[] IWfContext.Args => Args;
+        AppArgs IWfContext.Args
+            => Args;
 
-        WfController IWfContext.Controller => Controller;
+        WfController IWfContext.Controller
+            => Controller;
     }
 }

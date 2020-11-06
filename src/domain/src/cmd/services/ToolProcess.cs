@@ -22,7 +22,7 @@ namespace Z0
     /// of System.Diagnostics.Process, and knows how to capture output and otherwise
     /// makes calling commands very easy.
     /// </summary>
-    public sealed class ToolProcess : IToolProcess
+    public sealed class CmdProcess : ICmdProcess
     {
         /// <summary>
         /// Run 'commandLine' as a subprocess
@@ -32,13 +32,13 @@ namespace Z0
         /// <param variable="commandLine">The command lineNumber to run as a subprocess</param>
         /// <param variable="options">Additional qualifiers that control how the process is run</param>
         /// <returns>A Command structure that can be queried to determine ExitCode, Output, etc.</returns>
-        public static ToolProcess create(string commandLine, CmdProcessOptions options)
-            => new ToolProcess(commandLine, options);
+        public static CmdProcess create(CmdLine commandLine, CmdProcessOptions options)
+            => new CmdProcess(commandLine, options);
 
-        public static ToolProcess create(string commandLine)
+        public static CmdProcess create(CmdLine commandLine)
             => create(commandLine, new CmdProcessOptions());
 
-        readonly string _commandLine;
+        readonly CmdLine _commandLine;
 
         readonly StringBuilder _output;
 
@@ -141,15 +141,15 @@ namespace Z0
         /// <param variable="commandLine">The command lineNumber to run as a subprocess</param>
         /// <param variable="options">Additional qualifiers that control how the process is run</param>
         /// <returns>A Command structure that can be queried to determine ExitCode, Output, etc.</returns>
-        public ToolProcess(string commandLine, CmdProcessOptions options)
+        public CmdProcess(CmdLine commandLine, CmdProcessOptions options)
         {
             Options = options;
             _commandLine = commandLine;
 
             // See if the command is quoted and match it in that case
-            Match m = Regex.Match(commandLine, "^\\s*\"(.*?)\"\\s*(.*)");
+            Match m = Regex.Match(commandLine.Content, "^\\s*\"(.*?)\"\\s*(.*)");
             if (!m.Success)
-                m = Regex.Match(commandLine, @"\s*(\S*)\s*(.*)"); // thing before first space is command
+                m = Regex.Match(commandLine.Content, @"\s*(\S*)\s*(.*)"); // thing before first space is command
 
             ProcessStartInfo startInfo = new ProcessStartInfo(m.Groups[1].Value, m.Groups[2].Value)
             {
@@ -255,7 +255,7 @@ namespace Z0
         /// Create a subprocess to run 'commandLine' with no special options.
         /// <param variable="commandLine">The command lineNumber to run as a subprocess</param>
         /// </summary>
-        public ToolProcess(string commandLine)
+        public CmdProcess(string commandLine)
             : this(commandLine, new CmdProcessOptions())
         {
         }
@@ -264,7 +264,7 @@ namespace Z0
         /// Wait for a started process to complete (HasExited will be <see langword="true"/> on return)
         /// </summary>
         /// <returns>Wait returns that 'this' pointer.</returns>
-        public ToolProcess Wait()
+        public CmdProcess Wait()
         {
             bool waitReturned = false;
             bool killed = false;

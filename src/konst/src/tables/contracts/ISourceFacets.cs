@@ -16,12 +16,14 @@ namespace Z0
         uint RowSize {get;}
     }
 
+    [Free]
     public interface ISourceFacets<F> : ISourceFacets
         where F : struct
     {
 
     }
 
+    [Free]
     public interface ISourceFacets<S,F> : ISourceFacets<F>
         where S : struct, ISourceFacets<S,F>
         where F : struct

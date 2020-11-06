@@ -17,6 +17,9 @@ namespace Z0
 
         Span<T> Terms {get;}
 
+        int IMeasured.Length
+            => Storage.Length;
+
         Deferred<T> Deferred
             => new Deferred<T>(Storage);
 
@@ -44,7 +47,8 @@ namespace Z0
     public interface IIndex<I,T> : IIndex<T>
         where I : unmanaged
     {
-        ref T this[I index] => ref this[z.i32(index)];
+        ref T this[I index]
+            => ref this[z.i32(index)];
 
         ref T Lookup(I index)
             => ref this[index];

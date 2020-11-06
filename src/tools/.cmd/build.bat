@@ -7,4 +7,3 @@ echo %BuildCmd%
 call %BuildCmd%
 
 ztool
-: z0 domain tools

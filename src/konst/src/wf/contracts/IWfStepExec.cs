@@ -5,10 +5,10 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
 
     using Free =System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
+    [Free]
     public interface IWfStepExec<T> : IWfStep
     {
         T Run(IWfShell wf, WfStepArgs args)
@@ -34,11 +34,13 @@ namespace Z0
         }
     }
 
+    [Free]
     public interface IWfStepExec<S,T> : IWfStep<S>, IWfStepExec<T>
         where S : struct, IWfStepExec<S,T>
     {
     }
 
+    [Free]
     public interface IWfStepExec<H,S,T> : IWfStep<H>
         where H : struct, IWfStepExec<H,S,T>
     {

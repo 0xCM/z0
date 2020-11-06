@@ -13,6 +13,10 @@ namespace Z0
 
     partial struct Cmd
     {
+        [MethodImpl(Inline), Op]
+        public static CmdParser parser()
+            => CmdParser.create();
+
         [Op]
         public static ParseResult<CmdSpec> parse(string src)
         {

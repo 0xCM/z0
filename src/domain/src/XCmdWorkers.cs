@@ -14,6 +14,6 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static CmdWorker<EmitRuntimeIndexCmd> Worker(this EmitRuntimeIndexCmd cmd)
-            => Cmd.worker(new CmdWorkerFunction<EmitRuntimeIndexCmd>(ApiRuntime.execute));
+            => Cmd.worker(new CmdWorkerFunction<EmitRuntimeIndexCmd>(Workers.exec));
     }
 }

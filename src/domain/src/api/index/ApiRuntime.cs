@@ -16,27 +16,6 @@ namespace Z0
     [ApiHost(ApiNames.ApiRuntime, true)]
     public readonly struct ApiRuntime
     {
-        [CmdWorker]
-        public static CmdResult execute(IWfShell wf, EmitRuntimeIndexCmd cmd)
-        {
-            var hosts = wf.Api.ApiHosts;
-            var kHost = (uint)hosts.Length;
-            wf.Status(Status.IndexingHosts.Format(kHost));
-
-            var members  = @readonly(index(wf));
-            var target = wf.Db().IndexFile("api.members");
-            using var writer = target.Writer();
-            var count = members.Length;
-            var buffer = Buffers.text();
-            for(var i=0; i<count; i++)
-            {
-                render(skip(members, i), buffer);
-                writer.WriteLine(buffer.Emit());
-            }
-
-            return new CmdResult(Cmd.id(cmd), true);
-        }
-
         [RenderFunction]
         public static Count render(in RuntimeMember src, ITextBuffer dst)
         {
@@ -96,12 +75,6 @@ namespace Z0
             var subject = Hex.format(src.MemberSig.Data, Space, true, false);
             dst.Append(subject);
             count += subject.Length;
-            // count += render(src.Part, dst);
-            // count += render(src.HostName, dst);
-            // var filler = Hex.format(bytes(0u), Space, true, false);
-            // dst.Append(filler);
-            // count += filler.Length;
-            // count += render(src.MemberSig, dst);
             return count;
         }
 

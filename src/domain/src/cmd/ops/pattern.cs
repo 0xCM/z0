@@ -25,7 +25,6 @@ namespace Z0
         public static CmdPattern<K> pattern<K>(K id, string content)
             where K : unmanaged
                 => new CmdPattern<K>(id,content);
-
         [Op]
         public static CmdScript<CmdScriptPattern> pattern(IFileDb db, string root, string name, string arg, string delimiter = null, string type = null)
         {

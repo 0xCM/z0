@@ -10,8 +10,6 @@ namespace Z0
     using static Konst;
     using static z;
 
-    using api = Cmd;
-
     /// <summary>
     /// Captures the content of a command-line
     /// </summary>
@@ -24,14 +22,18 @@ namespace Z0
             => Content = content;
 
         [MethodImpl(Inline)]
-        public static implicit operator CmdLine(string src)
-            => new CmdLine(src);
-
-        [MethodImpl(Inline)]
         public string Format()
             => Content;
 
         public override string ToString()
             => Format();
+
+        [MethodImpl(Inline)]
+        public static implicit operator CmdLine(string src)
+            => new CmdLine(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator string(CmdLine src)
+            => src.Content;
     }
 }

@@ -13,7 +13,7 @@ namespace Z0
     partial class WfShell
     {
         [Op]
-        public static IWfShell create(string[] args)
+        public static IWfShell create(string[] args, bool verbose = false)
         {
             var control = controller();
             var controlId = control.Id();
@@ -49,7 +49,9 @@ namespace Z0
 
             IWfShell wf = new WfShell(init);
             configured.Add(string.Format("{0}:{1}", "wf", wf.AppName));
-            wf.Status(configured.FormatList(FieldDelimiter));
+
+            if(verbose)
+                wf.Status(configured.FormatList(FieldDelimiter));
             return wf;
         }
     }

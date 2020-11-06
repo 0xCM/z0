@@ -6,13 +6,15 @@ namespace Z0
 {
     using System;
 
-    using static Konst;
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
+    [Free]
     public interface ICmdTarget
     {
         FS.FilePath Path {get;}
     }
 
+    [Free]
     public interface ICmdTarget<T> : ICmdTarget
         where T : struct, ITool<T>
     {
@@ -20,6 +22,7 @@ namespace Z0
 
     }
 
+    [Free]
     public interface ICmdTarget<T,F> : ICmdTarget<T>
         where T : struct, ITool<T>
         where F : unmanaged, Enum

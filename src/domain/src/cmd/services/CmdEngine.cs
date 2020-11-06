@@ -33,12 +33,12 @@ namespace Z0
             Observer = observer ?? this;
         }
 
-        public void OnInfo(string data)
+        public void Information(string data)
         {
             Wf.Status(data);
         }
 
-        public void OnError(string data)
+        public void Error(string data)
         {
             Wf.Error(data);
         }

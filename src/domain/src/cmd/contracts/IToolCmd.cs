@@ -4,13 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Part;
-
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
+    [Free]
     public interface IToolCmd : ICmdSpec
     {
         ToolId ToolId {get;}
@@ -21,10 +17,10 @@ namespace Z0
         where T : struct, IToolCmd<T>
     {
         ToolId IToolCmd.ToolId
-            => ToolCmd.toolid<T>();
+            => Cmd.toolid<T>();
 
         CmdId ICmdSpec.CmdId
-            => ToolCmd.cmdid<T>();
+            => Cmd.id<T>();
     }
 
     [Free]

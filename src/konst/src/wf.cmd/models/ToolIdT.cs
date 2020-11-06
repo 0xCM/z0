@@ -14,5 +14,9 @@ namespace Z0
     {
         public string Id
             => typeof(T).Name;
+
+        [MethodImpl(Inline)]
+        public static implicit operator ToolId(ToolId<T> src)
+            => new ToolId(src.Id);
     }
 }

@@ -12,6 +12,10 @@ namespace Z0
 
     partial struct Cmd
     {
+        [MethodImpl(Inline), Op]
+        public static string format(in ToolOption src, char specifier)
+            => string.Format("{0}{1}{2}", src.Name, specifier, src.Value);
+
         [Op]
         public static string format(CmdModel src)
         {

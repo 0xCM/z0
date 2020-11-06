@@ -36,6 +36,7 @@ namespace Z0
             => z.delimit(Storage).Format();
     }
 
+    [Free]
     public interface IIndexedView<I,T> : IIndexedView<T>, IMeasured<I>
         where I : unmanaged
     {
@@ -52,6 +53,7 @@ namespace Z0
             => z.@as<uint,I>((uint)Terms.Length);
     }
 
+    [Free]
     public interface IIndexedView<H,I,T> : IIndexedView<I,T>
         where I : unmanaged
         where H : IIndexedView<H,I,T>, new()

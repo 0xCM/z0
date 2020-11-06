@@ -7,13 +7,17 @@ namespace Z0
     using System;
     using System.Runtime.InteropServices;
 
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
+    [Free]
     public interface ISpan : IMeasured, INullity
-    {        
+    {
         Span<byte> Bytes {get;}
 
         void Clear();
-    }    
+    }
 
+    [Free]
     public interface ISpan<T> : ISpan
         where T : struct
     {
@@ -23,17 +27,18 @@ namespace Z0
 
         Span<T> Slice(int offset);
 
-        Span<T> Slice(int offset, int length);   
-        
-        ref T GetPinnableReference();             
-    }    
-    
+        Span<T> Slice(int offset, int length);
+
+        ref T GetPinnableReference();
+    }
+
+    [Free]
     public interface ISpan<F,T> : ISpan<T>, IReified<F>, INullary<F,T>
         where F : struct, ISpan<F,T>
         where T : struct
     {
         Span<T> Data {get;}
-        
+
         Span<byte> ISpan.Bytes
             => MemoryMarshal.AsBytes(Data);
 
@@ -46,22 +51,22 @@ namespace Z0
         Span<T> ISpan<T>.Slice(int offset)
             => Data.Slice(offset);
 
-        ref T ISpan<T>.GetPinnableReference()     
+        ref T ISpan<T>.GetPinnableReference()
             => ref Data.GetPinnableReference();
 
         Span<T> ISpan<T>.Slice(int offset, int length)
             => Data.Slice(offset, length);
 
-        bool INullity.IsEmpty 
+        bool INullity.IsEmpty
             => Data.Length == 0;
 
         ref T ISpan<T>.this[int index]
             => ref Data[index];
 
-        ref T ISpan<T>.Cell(int index) 
+        ref T ISpan<T>.Cell(int index)
             => ref this[index];
 
-        int IMeasured.Length 
+        int IMeasured.Length
             => Data.Length;
-    }    
+    }
 }

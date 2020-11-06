@@ -29,28 +29,18 @@ namespace Z0
         }
 
         public Files ManagedLibraries
-        {
-            get => Files.Where(x => FS.managed(x) && x.Is(Dll)).Array();
-        }
+            => Files.Where(x => FS.managed(x) && x.Is(Dll)).Array();
 
         public Files ManagedExecutables
-        {
-            get => Files.Where(x => FS.managed(x) && x.Is(Exe)).Array();
-        }
+            => Files.Where(x => FS.managed(x) && x.Is(Exe)).Array();
 
         public Files NativeLibraries
-        {
-            get => Files.Where(x => !FS.managed(x) && x.Is(ArchiveFileKinds.Dll)).Array();
-        }
+            => Files.Where(x => !FS.managed(x) && x.Is(ArchiveFileKinds.Dll)).Array();
 
         public Files NativeExecutables
-        {
-            get => Files.Where(x => !FS.managed(x) && x.Is(Exe)).Array();
-        }
+            => Files.Where(x => !FS.managed(x) && x.Is(Exe)).Array();
 
         public Files PdbFiles
-        {
-            get => Files.Where(x => x.Is(Pdb)).Array();
-        }
+            => Files.Where(x => x.Is(Pdb)).Array();
     }
 }

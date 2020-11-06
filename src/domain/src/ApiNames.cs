@@ -54,6 +54,10 @@ readonly struct ApiNames
     public const string CmdSpecs = cmd + dot + specs;
 
     public const string XCmdSpecs = cmd + dot + specs + dot + extensions;
+
+    public const string JsonDeps = "builds" + dot + archives + dot + "dependencies";
+
+    public const string Workers = workers;
 }
 
 [ToolNameProvider]

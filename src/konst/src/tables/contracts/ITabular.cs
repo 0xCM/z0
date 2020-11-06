@@ -8,6 +8,9 @@ namespace Z0
 
     using static Konst;
 
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
+    [Free]
     public interface ITabular : ITextual
     {
         /// <summary>
@@ -21,6 +24,7 @@ namespace Z0
             => DelimitedText(FieldDelimiter);
     }
 
+    [Free]
     public interface ITabular<F,R> : ITabular
         where F : unmanaged, Enum
         where R : struct
