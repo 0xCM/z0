@@ -7,18 +7,16 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using System.Linq;
-
     using static Part;
 
-    partial class XTend
+    partial class XArray
     {
         /// <summary>
         /// Linq where operator specialized for arrays
         /// </summary>
         /// <param name="src">The source array</param>
         /// <param name="f"></param>
-        /// <typeparam name="T">The array element type</typeparam>        
+        /// <typeparam name="T">The array element type</typeparam>
         [MethodImpl(Inline)]
         public static T[] Where<T>(this T[] src, Func<T,bool> f)
             => where(src,f);

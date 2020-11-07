@@ -5,9 +5,7 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Concurrent;
 
-    using System.Reflection;
     using static Konst;
     using static z;
 
@@ -17,25 +15,27 @@ namespace Z0
 
         readonly IWfShell Wf;
 
-        readonly ConcurrentDictionary<CmdId,CmdWorker> Handlers;
+        readonly CmdWorkers Workers;
 
-        internal CmdRouter(IWfShell wf, params CmdWorker[] handlers)
+        public IndexedView<CmdId> SupportedCommands
+            => Workers.Keys.Array();
+
+        internal CmdRouter(IWfShell wf, params ICmdWorker[] workers)
         {
             Host = WfSelfHost.create();
             Wf = wf.WithHost(Host);
-            Handlers = new ConcurrentDictionary<CmdId, CmdWorker>();
-            Enlist(handlers);
+            Workers = CmdWorkers.create();
+            Enlist(workers);
         }
 
-        public void Enlist(params CmdWorker[] src)
-            => iter(src,cmd => Handlers.TryAdd(cmd.CmdId, cmd));
-
+        public void Enlist(params ICmdWorker[] src)
+            => iter(src,cmd => Workers.TryAdd(cmd.CmdId, cmd));
 
         public CmdResult Dispatch(CmdSpec cmd)
         {
             try
             {
-                if(Handlers.TryGetValue(cmd.Id, out var handler))
+                if(Workers.TryGetValue(cmd.Id, out var handler))
                     return handler.Invoke(Wf,cmd);
                 else
                 {
@@ -47,44 +47,6 @@ namespace Z0
             {
                 Wf.Error(e);
                 return Cmd.fail(cmd.Id);
-            }
-        }
-
-        public static CmdWorkers discover(IWfShell wf)
-        {
-            var nodes = @readonly(wf.Components);
-            var count = nodes.Length;
-            for(var i=0; i<count; i++)
-                Visit(skip(nodes,i));
-            return default;
-        }
-
-        static void Visit(Assembly src)
-        {
-            var nodes = @readonly(src.GetTypes());
-            var count = nodes.Length;
-            for(var i=0; i<count; i++)
-                Visit(skip(nodes,i));
-        }
-
-        static void Visit(Type src)
-        {
-            var nodes = @readonly(src.StaticMethods());
-            var count = nodes.Length;
-            for(var i=0; i<count; i++)
-                Visit(skip(nodes,i));
-        }
-
-        static void Visit(MethodInfo src)
-        {
-            if(src.Tagged<CmdWorkerAttribute>() && src.IsStatic)
-            {
-                var pTypes = src.ParameterTypes();
-                if(pTypes.Length == 2 && pTypes[0].Reifies<IWfShell>())
-                {
-                    var cType = pTypes[1];
-                    var dType = typeof(CmdWorkerFunction<>).MakeGenericType(cType);
-                }
             }
         }
     }

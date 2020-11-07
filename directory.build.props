@@ -12,6 +12,14 @@
     <BaseIntermediateOutputPath>$(IntermediateRoot)</BaseIntermediateOutputPath>
     <IntermediateOutputPath>$(IntermediateRoot)</IntermediateOutputPath>
 
+    <SuppressNETCoreSdkPreviewMessage>true</SuppressNETCoreSdkPreviewMessage>
+    <NoWarn>1591;1572;1573;1701;1702;1712;1711;1570;1571;1574;1710;8321;NETSDK1057;0169;0414;0219;649;8632;SYSLIB0001;IDE0060;IDE0059;MSB3026</NoWarn>
+    <Optimize>true</Optimize>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <LangVersion>preview</LangVersion>
+    <DebugType>pdbonly</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+
     <Src>$(TopDir)src\</Src>
     <Test>$(TopDir)test\</Test>
     <Native>$(TopDir)native\</Native>
@@ -19,15 +27,8 @@
     <TestDir>$(TopDir)test\</TestDir>
     <NativeDir>$(TopDir)native\</NativeDir>
     <BuildRootDir>$(TopDir).build\</BuildRootDir>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <LangVersion>preview</LangVersion>
     <NullableReferenceTypes>true</NullableReferenceTypes>
     <NullableContextOptions>disable</NullableContextOptions>
-    <SuppressNETCoreSdkPreviewMessage>true</SuppressNETCoreSdkPreviewMessage>
-    <NoWarn>1591;1572;1573;1701;1702;1712;1711;1570;1571;1574;1710;8321;NETSDK1057;0169;0414;0219;649;8632;SYSLIB0001;IDE0060;IDE0059;MSB3026</NoWarn>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <DebugSymbols>true</DebugSymbols>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <IncludeSymbols>true</IncludeSymbols>
   </PropertyGroup>

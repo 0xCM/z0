@@ -8,8 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    
-    partial class XTend
+
+    partial class XArray
     {
         /// <summary>
         /// Populates a target array by casting each elements of a source aray to the target element type

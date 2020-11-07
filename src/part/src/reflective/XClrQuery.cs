@@ -6,14 +6,10 @@ namespace Z0
 {
     using System;
     using System.Reflection;
-    using System.Runtime.CompilerServices;
 
-    using static Konst;
-
-    partial class XClrQuery
+    [ApiHost]
+    public static partial class XClrQuery
     {
-        [Op]
-        public static Type[] Enums(this Assembly a)
-            => a.GetTypes().Enums();
+
     }
 }

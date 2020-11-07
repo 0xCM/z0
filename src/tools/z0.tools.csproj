@@ -12,8 +12,4 @@
     <ProjectReference Include="$(Domain)" />
   </ItemGroup>
 
-   <ItemGroup>
-    <EmbeddedResource Include="help/**/*.help" />
-   </ItemGroup>
-
 </Project>

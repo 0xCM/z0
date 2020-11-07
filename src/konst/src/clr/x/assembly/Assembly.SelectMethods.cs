@@ -6,18 +6,18 @@ namespace Z0
 {
     using System;
     using System.Reflection;
-    using System.Runtime.CompilerServices;
 
     using static Konst;
 
     partial class XClrQuery
     {
         /// <summary>
-        /// Gets the simple name of an assembly
+        /// Selects the methods from an assembly that satisfy a specified predicate
         /// </summary>
-        /// <param name="a">The source assembly</param>
-        [MethodImpl(Inline), Op]
-        public static string GetSimpleName(this Assembly a)
-            => a?.GetName()?.Name ?? string.Empty;
+        /// <param name="src">The source assembly</param>
+        /// <param name="pred">The adjudicating predicate</param>
+        [Op]
+        public static MethodInfo[] SelectMethods(this Assembly src, Func<MethodInfo,bool> pred)
+            => src.Types().Methods().Where(pred);
     }
 }

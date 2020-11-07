@@ -1,9 +1,2 @@
-echo off
-
-set ProjectId=tools
-call .cmd\setup.g.cmd
-
-echo %BuildCmd%
-call %BuildCmd%
-
-ztool
+dotnet build %ZDev%\src\tools\z0.tools.csproj -c Release
+z.tool

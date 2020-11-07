@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-
     ref struct AppRunner
     {
         readonly WfHost Host;
@@ -19,6 +18,8 @@ namespace Z0
 
         readonly IFileDb Db;
 
+        readonly ICmdRouter Router;
+
         public AppRunner(IWfShell wf, WfHost host)
         {
             Host = host;
@@ -27,6 +28,7 @@ namespace Z0
             Args = wf.Args;
             CmdBuilder = wf.CmdBuilder();
             Db = Wf.Db();
+            Router = Cmd.router(wf);
         }
 
         public void Dispose()
@@ -36,6 +38,7 @@ namespace Z0
 
         public void Run()
         {
+            Wf.Status(string.Format("Supported Command Count: {0}",Router.SupportedCommands.Count));
             using var runner = new ToolRunner(Wf, Host);
             runner.Run();
         }

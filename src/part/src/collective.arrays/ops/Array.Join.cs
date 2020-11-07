@@ -9,7 +9,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
-    partial class XTend
+    partial class XArray
     {
         /// <summary>
         /// Defines an array-specific join operator
@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="selector"></param>
         /// <typeparam name="S"></typeparam>
         /// <typeparam name="T"></typeparam>
-        public static T[] SelectMany<S,T>(this S[] source, Func<S, IEnumerable<T>> selector)
+        public static T[] SelectMany<S,T>(this S[] source, Func<S,IEnumerable<T>> selector)
             => Enumerable.SelectMany(source,selector).ToArray();
 
         /// <summary>

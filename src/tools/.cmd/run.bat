@@ -1,11 +1,1 @@
-echo off
-
-set ProjectId=tools
-set ExeName=ztool
-
-call .cmd\setup.g.cmd
-
-echo Executing %BuildCmd%
-call %BuildCmd%
-
-call %ExeName%
+dotnet run %ZDev%\src\tools\z0.tools.csproj -c Release

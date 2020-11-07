@@ -11,7 +11,6 @@ namespace Z0
 
     partial class XClrQuery
     {
-
         /// <summary>
         /// Gets the static methods defined on a specified type
         /// </summary>

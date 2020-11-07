@@ -12,7 +12,7 @@ namespace Z0
 
     partial class XClrQuery
     {
-        [MethodImpl(Inline), Op]
+        [Op]
         public static Type[] Delegates(this Assembly a)
             => a.Types().Delegates();
     }

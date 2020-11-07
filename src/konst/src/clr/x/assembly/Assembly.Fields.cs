@@ -13,8 +13,8 @@ namespace Z0
 
     partial class XClrQuery
     {
-        [MethodImpl(Inline), Op]
+        [Op]
         public static FieldInfo[] Fields(this Assembly a)
-            => a.GetTypes().SelectMany(x => x.Fields()).ToArray();
+            => a.GetTypes().SelectMany(x => x.Fields());
     }
 }

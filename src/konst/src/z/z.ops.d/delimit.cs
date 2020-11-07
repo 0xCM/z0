@@ -12,26 +12,24 @@ namespace Z0
 
     partial struct z
     {
-        [MethodImpl(Inline)]
+        [Op]
         public static DelimitedList<object> delimit(params object[] src)
             => Seq.delimited(src);
 
-        [MethodImpl(Inline)]
+        [Op, Closures(Closure)]
         public static DelimitedList<T> delimit<T>(IList<T> src, char delimiter = FieldDelimiter)
             => Seq.delimited(src.Array(), delimiter);
 
-        [MethodImpl(Inline)]
+        [Op, Closures(Closure)]
         public static DelimitedList<T> delimit<T>(params T[] src)
-            where T : unmanaged
-                => Seq.delimited(src);
+            => Seq.delimited(src);
 
-        [MethodImpl(Inline)]
+        [Op]
         public static DelimitedList<object> delimit(char delimiter, params object[] src)
-                => Seq.delimited(delimiter, src);
+            => Seq.delimited(delimiter, src);
 
-        [MethodImpl(Inline)]
+        [Op, Closures(Closure)]
         public static DelimitedList<T> delimit<T>(char delimiter, params T[] src)
-            where T : unmanaged
-                => Seq.delimited(delimiter, src);
+            => Seq.delimited(delimiter, src);
     }
 }

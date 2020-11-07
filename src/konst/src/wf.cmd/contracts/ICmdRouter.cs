@@ -10,6 +10,8 @@ namespace Z0
     public interface ICmdRouter
     {
         CmdResult Dispatch(CmdSpec cmd);
+
+        IndexedView<CmdId> SupportedCommands {get;}
     }
 
     [Free]

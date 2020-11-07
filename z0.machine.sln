@@ -107,6 +107,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "z0.mkl", "native\mkl\src\z0
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "z0.circuits", "src\circuits\z0.circuits.csproj", "{6D76ECBC-ACE5-4F0F-ADB5-DF9E82E02017}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{0206A0AB-B712-44D9-9AA3-47083407706E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.tools", "src\tools\z0.tools.csproj", "{138FAA88-9BA1-417C-8B75-594CFA561F2B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -531,11 +535,22 @@ Global
 		{6D76ECBC-ACE5-4F0F-ADB5-DF9E82E02017}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6D76ECBC-ACE5-4F0F-ADB5-DF9E82E02017}.Release|x64.ActiveCfg = Release|x64
 		{6D76ECBC-ACE5-4F0F-ADB5-DF9E82E02017}.Release|x64.Build.0 = Release|x64
+		{138FAA88-9BA1-417C-8B75-594CFA561F2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{138FAA88-9BA1-417C-8B75-594CFA561F2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{138FAA88-9BA1-417C-8B75-594CFA561F2B}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{138FAA88-9BA1-417C-8B75-594CFA561F2B}.Debug|x64.Build.0 = Debug|Any CPU
+		{138FAA88-9BA1-417C-8B75-594CFA561F2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{138FAA88-9BA1-417C-8B75-594CFA561F2B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{138FAA88-9BA1-417C-8B75-594CFA561F2B}.Release|x64.ActiveCfg = Release|Any CPU
+		{138FAA88-9BA1-417C-8B75-594CFA561F2B}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D767EDB2-B78D-42E2-9870-58D037514F33}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{138FAA88-9BA1-417C-8B75-594CFA561F2B} = {0206A0AB-B712-44D9-9AA3-47083407706E}
 	EndGlobalSection
 EndGlobal

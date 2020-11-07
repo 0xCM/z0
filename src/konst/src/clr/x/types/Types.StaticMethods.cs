@@ -16,6 +16,14 @@ namespace Z0
         /// <param name="src">The types to search</param>
         [Op]
         public static MethodInfo[] StaticMethods(this Type[] src)
-            => src.SelectMany(x => x.StaticMethods()).ToArray();
+            => src.SelectMany(x => x.StaticMethods());
+
+        /// <summary>
+        /// Selects all static methods declared by the source types
+        /// </summary>
+        /// <param name="src">The types to search</param>
+        [Op]
+        public static MethodInfo[] DeclaredStaticMethods(this Type[] src)
+            => src.SelectMany(x => x.DeclaredStaticMethods());
     }
 }

@@ -5,15 +5,13 @@
 namespace Z0
 {
     using System;
-    using System.Reflection;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
-    partial class XClrQuery
+    [ApiHost(ApiNames.XArray, true)]
+    public static partial class XArray
     {
-        [Op]
-        public static Type[] Enums(this Assembly a)
-            => a.GetTypes().Enums();
+
     }
 }

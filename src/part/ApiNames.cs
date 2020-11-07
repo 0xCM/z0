@@ -17,7 +17,9 @@ readonly struct ApiNames
 
     public const string LiteralKinds = literals + dot + kinds;
 
-    public const string Arrays = memory + dot + arrays;
+    public const string Arrays = collective + dot + arrays;
 
-    public const string ArrayBuilder = memory + dot + arrays + dot + builder;
+    public const string ArrayBuilder = collective + dot + arrays + dot + builder;
+
+    public const string XArray = collective + dot + arrays + dot + extensions;
 }

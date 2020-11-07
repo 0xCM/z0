@@ -13,6 +13,7 @@ namespace Z0
         /// Convenience accessor for the assembly's version
         /// </summary>
         /// <param name="a">The source assembly</param>
+        [Op]
         public static Version AssemblyVersion(this Assembly a)
             => a.GetName().Version;
     }

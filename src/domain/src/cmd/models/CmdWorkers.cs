@@ -10,9 +10,9 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public sealed class CmdWorkers : ConcurrentDictionary<CmdId,CmdWorker>
+    public sealed class CmdWorkers : ConcurrentDictionary<CmdId,ICmdWorker>
     {
-        public static CmdWorkers create(params KeyedValue<CmdId,CmdWorker>[] src)
+        public static CmdWorkers create(params KeyedValue<CmdId,ICmdWorker>[] src)
         {
             var dst = new CmdWorkers();
             iter(src, kv => dst.TryAdd(kv.Key, kv.Value));

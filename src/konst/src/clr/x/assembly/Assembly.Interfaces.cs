@@ -12,7 +12,7 @@ namespace Z0
 
     partial class XClrQuery
     {
-        [MethodImpl(Inline), Op]
+        [Op]
         public static Type[] Interfaces(this Assembly a)
             => a.Types().Interfaces();
     }

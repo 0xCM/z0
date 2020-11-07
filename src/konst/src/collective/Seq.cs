@@ -272,8 +272,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static DelimitedList<T> delimited<T>(char delimiter, params T[] src)
-            where T : unmanaged
-                => new DelimitedList<T>(src, text.delimit, delimiter);
+            => new DelimitedList<T>(src, text.delimit, delimiter);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static EnclosedList<T> enclosed<T>(ListEnclosureKind kind, char delimiter, params T[] src)

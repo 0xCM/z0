@@ -12,7 +12,7 @@ namespace Z0
 
     partial class XClrQuery
     {
-        [MethodImpl(Inline), Op]
+        [Op]
         public static Type[] PublicTypes(this Assembly a)
             => a.Types().Public();
     }

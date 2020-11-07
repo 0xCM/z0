@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    partial class XTend
+    partial class XArray
     {
         /// <summary>
         /// Reverses an array in-place
