@@ -17,7 +17,7 @@ namespace Z0
     public struct ApiCall
     {
         /// <summary>
-        /// The operator class
+        /// The operation class
         /// </summary>
         public ApiClass Class;
     }

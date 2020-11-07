@@ -95,6 +95,5 @@ namespace Z0.Asm
            this.SectionDelimiter  = SectionSep;
            this.HeaderEncodingFormat = HexFormatOptions.define();
        }
-
     }
 }

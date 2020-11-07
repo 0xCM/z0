@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Linq;
 
     using static Konst;
     using static z;
@@ -33,6 +32,12 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => Data;
+        }
+
+        public Deferred<T> Deferred
+        {
+            [MethodImpl(Inline)]
+            get => new Deferred<T>(Storage);
         }
 
         public MemoryAddress Address
@@ -96,6 +101,9 @@ namespace Z0
             Array.Reverse(Data);
             return this;
         }
+
+        public Indexed<Y> Cast<Y>()
+            => new Indexed<Y>(Storage.Select(x => cast<Y>(x)));
 
         public Indexed<Y> Select<Y>(Func<T,Y> selector)
              => api.map(this, selector);

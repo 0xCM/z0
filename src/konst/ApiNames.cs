@@ -48,7 +48,7 @@ readonly struct ApiNames
 
     public const string ApiPartCatalogQuery = api + dot + query + dot + parts;
 
-    public const string ApiHostMemberQuery = api + dot + query + dot + hosts;
+    public const string ApiHostQuery = api + dot + query + dot + hosts;
 
     public const string ApiJit = api + dot + jit;
 

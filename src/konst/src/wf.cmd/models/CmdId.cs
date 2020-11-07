@@ -38,6 +38,12 @@ namespace Z0
             get => text.nonempty(Data);
         }
 
+        public uint Hash
+        {
+            [MethodImpl(Inline)]
+            get => text.hash(Data);
+        }
+
         [MethodImpl(Inline)]
         public static implicit operator CmdId(Type spec)
             => from(spec);
@@ -48,6 +54,9 @@ namespace Z0
 
         public override string ToString()
             => Format();
+
+        public override int GetHashCode()
+            => (int)Hash;
 
         public static CmdId Empty => default;
     }

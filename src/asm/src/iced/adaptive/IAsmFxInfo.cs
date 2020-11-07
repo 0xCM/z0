@@ -6,12 +6,6 @@ namespace Z0.Asm
 {
     using System;
 
-    public interface IAsmFxInfo<T>
-        where T : IAsmFxInfo
-    {
-        T Instruction {get;}
-    }
-
     public interface IAsmFxInfo :
         IAsmFxFlags,
         IAsmFxBranching,

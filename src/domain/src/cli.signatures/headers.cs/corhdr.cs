@@ -14,7 +14,6 @@ namespace Z0
     using static Cor.CorCallingConvention;
     using static Win.Nt;
 
-
     /// <summary>
     /// Transpiled from corhdr.h
     /// </summary>

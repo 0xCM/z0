@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     using static RP;
 
     public readonly struct AsmRenderPatterns

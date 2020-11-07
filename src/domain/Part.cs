@@ -10,8 +10,8 @@ using static Z0.Part;
 [assembly: AssemblyDescription("Sequences of bits covered with semantic fabric")]
 [assembly: PartId(PartId.Domain)]
 namespace Z0.Parts
-{        
-    public sealed class Domain : Part<Domain> 
+{
+    public sealed class Domain : Part<Domain>
     {
     }
 }
@@ -26,22 +26,22 @@ namespace Z0
             => ref RT.Box;
 
         [MethodImpl(Inline)]
-        internal static ref T slot<T>(byte index, Func<T> factory)
+        internal static ref T slot<T>(PartBoxSlot index, Func<T> factory)
             => ref RT.Box.Slot(index,factory);
 
         [MethodImpl(Inline)]
-        internal static ref T slot<T>(byte index)
+        internal static ref T slot<T>(PartBoxSlot index)
             => ref RT.Box.Slot<T>(index);
 
         static readonly Runtime RT = new Runtime();
-        
+
         readonly PartBox Box;
 
         [MethodImpl(Inline), Op]
         Runtime()
         {
             Box = new PartBox();
-        }    
+        }
     }
 
     public static partial class XTend{}

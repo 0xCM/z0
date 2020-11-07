@@ -58,6 +58,10 @@ readonly struct ApiNames
     public const string JsonDeps = "builds" + dot + archives + dot + "dependencies";
 
     public const string Workers = workers;
+
+    const string scripts = nameof(scripts);
+
+    public const string Scripts = scripts;
 }
 
 [ToolNameProvider]

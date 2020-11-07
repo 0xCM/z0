@@ -8,15 +8,24 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
 
+    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
+
     using static Konst;
 
     partial struct z
     {
         [MethodImpl(Inline), Op]
-        static void require(bool invariant, in Func<string> f)
+        public static void require(bool invariant, in Func<string> f)
         {
             if(!invariant)
                 sys.@throw(f);
+        }
+
+        [Op]
+        public static void require(bool invariant, [Caller] string caller = null)
+        {
+            if(!invariant)
+                sys.@throw(AppErrors.InvariantFailure(caller));
         }
 
         [MethodImpl(Inline), Op, Closures(UInt8k)]

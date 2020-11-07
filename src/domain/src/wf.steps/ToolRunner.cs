@@ -14,7 +14,7 @@ namespace Z0
 
     using static z;
 
-    public ref struct ToolRunner
+    public struct ToolRunner : IDisposable
     {
         readonly WfHost Host;
 
@@ -61,16 +61,16 @@ namespace Z0
         CmdResult EmitFileList()
             => FileEmissions.exec(Wf.EmitFileListCmdSample());
 
-        CmdResult EmitRuntimeIndex()
-        {
-            using var flow = Wf.Running();
-            var cmd = Wf.CmdCatalog.EmitRuntimeIndex();
-            var worker = cmd.Worker();
-            var result  = worker.Invoke(Wf, cmd);
-            Wf.Status(result);
-            return result;
+        // CmdResult EmitRuntimeIndex()
+        // {
+        //     using var flow = Wf.Running();
+        //     var cmd = Wf.CmdCatalog.EmitRuntimeIndex();
+        //     var worker = cmd.Worker(Wf);
+        //     var result  = worker.Invoke(Wf, cmd);
+        //     Wf.Status(result);
+        //     return result;
 
-        }
+        // }
         CmdResult EmitAsmRefs()
         {
             var srcDir = FS.dir("k:/z0/builds/nca.3.1.win-x64");

@@ -1,1 +1,1 @@
-dotnet clean %ProjectPath%
+rmdir %ZDev%\.build /s/q

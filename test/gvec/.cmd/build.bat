@@ -1,0 +1,1 @@
+dotnet build %ZDev%\test\gvec\z0.gvec.csproj -c Release

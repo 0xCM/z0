@@ -4,10 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
+
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface ICmdRouter
+    public interface ICmdRouter : IWfService
     {
         CmdResult Dispatch(CmdSpec cmd);
 
@@ -15,8 +17,8 @@ namespace Z0
     }
 
     [Free]
-    public interface ICmdRouter<H> : ICmdRouter
-        where H : ICmdRouter<H>
+    public interface ICmdRouter<H> : ICmdRouter, IWfService<H>
+        where H : ICmdRouter<H>, new()
     {
 
     }

@@ -27,11 +27,9 @@ namespace Z0
         public static string format<T>(BinaryBitLogicKind kind, T arg1, T arg2)
             => $"{kind.Format()}({arg1}, {arg2})";
 
-
         [MethodImpl(Inline)]
         public static string format(BinaryComparisonApiClass kind)
             => kind.ToString().ToLower();
-
 
         [MethodImpl(Inline)]
         public static string format(UnaryArithmeticApiClass kind)

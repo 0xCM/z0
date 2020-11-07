@@ -119,6 +119,7 @@ namespace Z0
                 if(records.Count == 0)
                     return;
 
+                dst.CreateParentIfMissing();
                 if(header)
                     dst.AppendLine(string.Join(delimiter, records[0].HeaderNames));
 

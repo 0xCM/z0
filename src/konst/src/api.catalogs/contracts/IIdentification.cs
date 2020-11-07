@@ -11,6 +11,7 @@ namespace Z0
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
+    [Free]
     public interface IIdentification : IIdentified, ITextual, IComparable
     {
         IdentityTargetKind TargetKind
@@ -38,6 +39,7 @@ namespace Z0
     /// <summary>
     /// Specifies what it means to be a reified identifier
     /// </summary>
+    [Free]
     public interface IIdentification<T> : IIdentification, IEquatable<T>, IComparable<T>
         where T : IIdentification<T>, new()
     {
@@ -49,5 +51,4 @@ namespace Z0
         int IComparable<T>.CompareTo(T src)
             => DenullifiedIdentity.CompareTo(src.DenullifiedIdentity);
     }
-
 }

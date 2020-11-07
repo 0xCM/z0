@@ -1,0 +1,1 @@
+call "bash.exe" "%ZDev%\.cmd\commit.sh"

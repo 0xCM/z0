@@ -37,6 +37,9 @@ namespace Z0
         bool INullity.IsEmpty
             => false;
 
+        Indexed<Y> Cast<Y>()
+            => new Indexed<Y>(Storage.Select(x => z.cast<Y>(x)));
+
         IEnumerator IEnumerable.GetEnumerator()
             => Deferred.Content.GetEnumerator();
 

@@ -8,20 +8,25 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-            
+
+    public enum PartBoxSlot : byte
+    {
+        Services = 0,
+    }
+
     public class PartBox
-    {        
+    {
         const sbyte EmptySlot = sbyte.MinValue;
 
         const byte SlotCount = byte.MaxValue;
-        
+
         object[] Slots;
 
         public PartBox()
         {
             Slots = new object[SlotCount];
             Span<object> dst =  Slots;
-            dst.Fill(EmptySlot);            
+            dst.Fill(EmptySlot);
         }
 
         public ReadOnlySpan<object> View
@@ -29,29 +34,29 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Slots;
         }
-        
+
         public Span<object> Edit
         {
             [MethodImpl(Inline)]
             get => Slots;
         }
-        
-        [MethodImpl(Inline)]
-        public ref T Slot<T>(byte index)
-            => ref Unsafe.As<object,T>(ref Slots[index]);
 
         [MethodImpl(Inline)]
-        public void Clear<T>(byte index)
-            => Slots[index] = EmptySlot;
+        public ref T Slot<T>(PartBoxSlot slot)
+            => ref Unsafe.As<object,T>(ref Slots[(byte)slot]);
 
         [MethodImpl(Inline)]
-        public bool IsEmpty(byte index)
-            => Slots[index] is sbyte x && x == EmptySlot;
+        public void Clear<T>(PartBoxSlot index)
+            => Slots[(byte)index] = EmptySlot;
 
         [MethodImpl(Inline)]
-        public ref T Slot<T>(byte index, Func<T> factory)
+        public bool IsEmpty(PartBoxSlot index)
+            => Slots[(byte)index] is sbyte x && x == EmptySlot;
+
+        [MethodImpl(Inline)]
+        public ref T Slot<T>(PartBoxSlot index, Func<T> factory)
         {
-            ref var slot = ref Unsafe.As<object,T>(ref Slots[index]);
+            ref var slot = ref Unsafe.As<object,T>(ref Slots[(byte)index]);
             if(IsEmpty(index))
                 slot = factory();
             return ref slot;

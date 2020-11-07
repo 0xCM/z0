@@ -24,6 +24,7 @@ namespace Z0
         /// Assigns identity to a <see cref='MemorySize'/> specification
         /// </summary>
         /// <param name="src">A memory size specification</param>
+        [Op]
         public static SegmentedIdentity identify(MemorySize src)
             => src switch {
                     MZ.UInt8 => NK.U8,

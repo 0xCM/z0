@@ -14,7 +14,7 @@ namespace Z0
     /// <summary>
     /// Defines api queries over a specific host
     /// </summary>
-    [ApiHost(ApiNames.ApiHostMemberQuery, true)]
+    [ApiHost(ApiNames.ApiHostQuery, true)]
     public readonly struct ApiHostQuery : IApiView<ApiHostQuery,IApiHost>
     {
         const NumericKind Closure = UnsignedInts;
@@ -51,7 +51,6 @@ namespace Z0
         /// </summary>
         /// <param name="k">The kind classifier</param>
         /// <typeparam name="K">The kind type</typeparam>
-        [Op, MethodImpl(NotInline), Closures(Closure)]
         public MethodInfo[] OfKind<K>(K k)
             where K : unmanaged
                 => (from m in Hosted.Tagged(typeof(OpKindAttribute))

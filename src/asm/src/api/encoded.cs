@@ -15,7 +15,6 @@ namespace Z0
 
     partial struct asm
     {
-
         /// <summary>
         /// Defines an encoded instruction from the lower 15 source bytes
         /// </summary>

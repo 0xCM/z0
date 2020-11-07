@@ -12,7 +12,6 @@ namespace Z0
 
     partial struct asm
     {
-
         [Op]
         public static InstructionInfo details(in Instruction src)
         {

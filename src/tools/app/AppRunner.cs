@@ -28,7 +28,7 @@ namespace Z0
             Args = wf.Args;
             CmdBuilder = wf.CmdBuilder();
             Db = Wf.Db();
-            Router = Cmd.router(wf);
+            Router = CmdRouter.create(wf);
         }
 
         public void Dispose()
@@ -36,9 +36,13 @@ namespace Z0
             Wf.Disposed();
         }
 
+        void Run(ToolCmd src)
+        {
+
+        }
+
         public void Run()
         {
-            Wf.Status(string.Format("Supported Command Count: {0}",Router.SupportedCommands.Count));
             using var runner = new ToolRunner(Wf, Host);
             runner.Run();
         }

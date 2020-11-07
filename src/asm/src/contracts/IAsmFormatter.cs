@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-
     /// <summary>
     /// Defines service contract for asm text formatting support
     /// </summary>

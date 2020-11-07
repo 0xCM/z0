@@ -18,12 +18,12 @@ namespace Z0
             var clock = counter(false);
             var casename = TestActionName;
             var control = unit as ITestQueue;
-            
+
             try
-            {                                
+            {
                 var tsStart = Time.now();
-                messages.Add(PreCase(casename, tsStart));                
-                
+                messages.Add(PreCase(casename, tsStart));
+
                 clock.Start();
                 exec();
                 clock.Stop();
@@ -31,26 +31,26 @@ namespace Z0
                 messages.AddRange(unit.Dequeue());
                 messages.Add(PostCase(casename, clock.Time, tsStart, Time.now()));
 
-                var outcomes = control.TakeOutcomes().ToArray();                
+                var outcomes = control.TakeOutcomes().ToArray();
                 if(outcomes.Length != 0)
                     PostTestResults(outcomes);
                 else
-                    PostTestResult(TestCaseRecord.Define(casename,true,clock.Time));                              
+                    PostTestResult(TestCaseRecord.Define(casename,true,clock.Time));
 
             }
             catch(Exception e)
             {
                 clock.Stop();
-                messages.AddRange(unit.Dequeue());                
+                messages.AddRange(unit.Dequeue());
                 messages.AddRange(FormatErrors(casename,e));
-                PostTestResult(TestCaseRecord.Define(casename,false,clock.Time));                
+                PostTestResult(TestCaseRecord.Define(casename,false,clock.Time));
             }
             finally
-            {            
+            {
                 term.print(messages);
             }
             return clock.Time;
-        }    
+        }
 
         Duration ExecExplicit(IExplicitTest unit, string hostpath, IList<TestCaseRecord> results)
         {
@@ -65,7 +65,7 @@ namespace Z0
                 clock.Stop();
 
                 messages = CollectMessages(unit, casename,clock);
-                results.WithItems(CollectResults(unit, casename, clock));                
+                results.WithItems(CollectResults(unit, casename, clock));
 
             }
             catch(Exception e)
@@ -75,11 +75,9 @@ namespace Z0
                 results.WithItems(CollectResults(unit,casename, clock,e));
             }
             finally
-            {            
-                Log.Deposit(messages);                
-                //Root.iter(messages.Where(m => !m.Displayed), term.print);
+            {
+                Log.Deposit(messages);
             }
-
             return clock;
         }
 
