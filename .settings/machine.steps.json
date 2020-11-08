@@ -1,9 +1,0 @@
-{
-    "EmitPeHeaders": "True",
-
-    "RunProcessors": "True",
-
-    "CaptureArtifacts": "False",
-
-    "EmitDatasets": "True"
-}

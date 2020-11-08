@@ -1,0 +1,586 @@
+NuGet Version: 5.9.0.6929
+  GET https://pkgs.dev.azure.com/dnceng/9ee6d478-d288-47f7-aacc-f6e6d082ae6d/_packaging/89836ee7-f4d9-4429-90a9-9e9005780b57/nuget/v2/$metadata
+  OK https://pkgs.dev.azure.com/dnceng/9ee6d478-d288-47f7-aacc-f6e6d082ae6d/_packaging/89836ee7-f4d9-4429-90a9-9e9005780b57/nuget/v2/$metadata 56ms
+  GET https://pkgs.dev.azure.com/dnceng/9ee6d478-d288-47f7-aacc-f6e6d082ae6d/_packaging/825db618-e3eb-4426-ba54-b1d6e6c944d8/nuget/v2/$metadata
+  OK https://pkgs.dev.azure.com/dnceng/9ee6d478-d288-47f7-aacc-f6e6d082ae6d/_packaging/825db618-e3eb-4426-ba54-b1d6e6c944d8/nuget/v2/$metadata 69ms
+  GET https://pkgs.dev.azure.com/dnceng/9ee6d478-d288-47f7-aacc-f6e6d082ae6d/_packaging/7d9f5c21-0d79-403f-bfe3-9a4506529760/nuget/v2/$metadata
+  OK https://pkgs.dev.azure.com/dnceng/9ee6d478-d288-47f7-aacc-f6e6d082ae6d/_packaging/7d9f5c21-0d79-403f-bfe3-9a4506529760/nuget/v2/$metadata 70ms
+  GET https://dotnet.myget.org/F/dotnet-corefxlab/api/v2/$metadata
+  OK https://dotnet.myget.org/F/dotnet-corefxlab/api/v2/$metadata 71ms
+  GET https://pkgs.dev.azure.com/dnceng/9ee6d478-d288-47f7-aacc-f6e6d082ae6d/_packaging/d1622942-d16f-48e5-bc83-96f4539e7601/nuget/v2/$metadata
+  OK https://pkgs.dev.azure.com/dnceng/9ee6d478-d288-47f7-aacc-f6e6d082ae6d/_packaging/d1622942-d16f-48e5-bc83-96f4539e7601/nuget/v2/$metadata 62ms
+  GET https://pkgs.dev.azure.com/dnceng/9ee6d478-d288-47f7-aacc-f6e6d082ae6d/_packaging/1a5f89f6-d8da-4080-b15f-242650c914a8/nuget/v2/$metadata
+  OK https://pkgs.dev.azure.com/dnceng/9ee6d478-d288-47f7-aacc-f6e6d082ae6d/_packaging/1a5f89f6-d8da-4080-b15f-242650c914a8/nuget/v2/$metadata 65ms
+  GET https://pkgs.dev.azure.com/dnceng/9ee6d478-d288-47f7-aacc-f6e6d082ae6d/_packaging/a8a526e9-91b3-4569-ba2d-ff08dbb7c110/nuget/v2/$metadata
+  OK https://pkgs.dev.azure.com/dnceng/9ee6d478-d288-47f7-aacc-f6e6d082ae6d/_packaging/a8a526e9-91b3-4569-ba2d-ff08dbb7c110/nuget/v2/$metadata 53ms
+  GET https://pkgs.dev.azure.com/dnceng/9ee6d478-d288-47f7-aacc-f6e6d082ae6d/_packaging/c9f8ac11-6bd8-4926-8306-f075241547f7/nuget/v2/$metadata
+  OK https://pkgs.dev.azure.com/dnceng/9ee6d478-d288-47f7-aacc-f6e6d082ae6d/_packaging/c9f8ac11-6bd8-4926-8306-f075241547f7/nuget/v2/$metadata 56ms
+  GET https://pkgs.dev.azure.com/dnceng/9ee6d478-d288-47f7-aacc-f6e6d082ae6d/_packaging/89836ee7-f4d9-4429-90a9-9e9005780b57/nuget/v2/Search()?$filter=IsAbsoluteLatestVersion&$orderby=Id&searchTerm='runtime.win-x64'&targetFramework=''&includePrerelease=true&$skip=0&$top=30&semVerLevel=2.0.0
+  OK https://pkgs.dev.azure.com/dnceng/9ee6d478-d288-47f7-aacc-f6e6d082ae6d/_packaging/89836ee7-f4d9-4429-90a9-9e9005780b57/nuget/v2/Search()?$filter=IsAbsoluteLatestVersion&$orderby=Id&searchTerm='runtime.win-x64'&targetFramework=''&includePrerelease=true&$skip=0&$top=30&semVerLevel=2.0.0 186ms
+  GET https://pkgs.dev.azure.com/dnceng/9ee6d478-d288-47f7-aacc-f6e6d082ae6d/_packaging/825db618-e3eb-4426-ba54-b1d6e6c944d8/nuget/v2/Search()?$filter=IsAbsoluteLatestVersion&$orderby=Id&searchTerm='runtime.win-x64'&targetFramework=''&includePrerelease=true&$skip=0&$top=30&semVerLevel=2.0.0
+  OK https://pkgs.dev.azure.com/dnceng/9ee6d478-d288-47f7-aacc-f6e6d082ae6d/_packaging/825db618-e3eb-4426-ba54-b1d6e6c944d8/nuget/v2/Search()?$filter=IsAbsoluteLatestVersion&$orderby=Id&searchTerm='runtime.win-x64'&targetFramework=''&includePrerelease=true&$skip=0&$top=30&semVerLevel=2.0.0 442ms
+  GET https://pkgs.dev.azure.com/dnceng/9ee6d478-d288-47f7-aacc-f6e6d082ae6d/_packaging/7d9f5c21-0d79-403f-bfe3-9a4506529760/nuget/v2/Search()?$filter=IsAbsoluteLatestVersion&$orderby=Id&searchTerm='runtime.win-x64'&targetFramework=''&includePrerelease=true&$skip=0&$top=30&semVerLevel=2.0.0
+  OK https://pkgs.dev.azure.com/dnceng/9ee6d478-d288-47f7-aacc-f6e6d082ae6d/_packaging/7d9f5c21-0d79-403f-bfe3-9a4506529760/nuget/v2/Search()?$filter=IsAbsoluteLatestVersion&$orderby=Id&searchTerm='runtime.win-x64'&targetFramework=''&includePrerelease=true&$skip=0&$top=30&semVerLevel=2.0.0 1723ms
+  GET https://dotnet.myget.org/F/dotnet-corefxlab/api/v2/Search()?$filter=IsAbsoluteLatestVersion&$orderby=Id&searchTerm='runtime.win-x64'&targetFramework=''&includePrerelease=true&$skip=0&$top=30&semVerLevel=2.0.0
+  OK https://dotnet.myget.org/F/dotnet-corefxlab/api/v2/Search()?$filter=IsAbsoluteLatestVersion&$orderby=Id&searchTerm='runtime.win-x64'&targetFramework=''&includePrerelease=true&$skip=0&$top=30&semVerLevel=2.0.0 1544ms
+  GET https://pkgs.dev.azure.com/dnceng/9ee6d478-d288-47f7-aacc-f6e6d082ae6d/_packaging/d1622942-d16f-48e5-bc83-96f4539e7601/nuget/v2/Search()?$filter=IsAbsoluteLatestVersion&$orderby=Id&searchTerm='runtime.win-x64'&targetFramework=''&includePrerelease=true&$skip=0&$top=30&semVerLevel=2.0.0
+  OK https://pkgs.dev.azure.com/dnceng/9ee6d478-d288-47f7-aacc-f6e6d082ae6d/_packaging/d1622942-d16f-48e5-bc83-96f4539e7601/nuget/v2/Search()?$filter=IsAbsoluteLatestVersion&$orderby=Id&searchTerm='runtime.win-x64'&targetFramework=''&includePrerelease=true&$skip=0&$top=30&semVerLevel=2.0.0 89ms
+  GET https://pkgs.dev.azure.com/dnceng/9ee6d478-d288-47f7-aacc-f6e6d082ae6d/_packaging/1a5f89f6-d8da-4080-b15f-242650c914a8/nuget/v2/Search()?$filter=IsAbsoluteLatestVersion&$orderby=Id&searchTerm='runtime.win-x64'&targetFramework=''&includePrerelease=true&$skip=0&$top=30&semVerLevel=2.0.0
+  OK https://pkgs.dev.azure.com/dnceng/9ee6d478-d288-47f7-aacc-f6e6d082ae6d/_packaging/1a5f89f6-d8da-4080-b15f-242650c914a8/nuget/v2/Search()?$filter=IsAbsoluteLatestVersion&$orderby=Id&searchTerm='runtime.win-x64'&targetFramework=''&includePrerelease=true&$skip=0&$top=30&semVerLevel=2.0.0 132ms
+  GET https://pkgs.dev.azure.com/dnceng/9ee6d478-d288-47f7-aacc-f6e6d082ae6d/_packaging/a8a526e9-91b3-4569-ba2d-ff08dbb7c110/nuget/v2/Search()?$filter=IsAbsoluteLatestVersion&$orderby=Id&searchTerm='runtime.win-x64'&targetFramework=''&includePrerelease=true&$skip=0&$top=30&semVerLevel=2.0.0
+  OK https://pkgs.dev.azure.com/dnceng/9ee6d478-d288-47f7-aacc-f6e6d082ae6d/_packaging/a8a526e9-91b3-4569-ba2d-ff08dbb7c110/nuget/v2/Search()?$filter=IsAbsoluteLatestVersion&$orderby=Id&searchTerm='runtime.win-x64'&targetFramework=''&includePrerelease=true&$skip=0&$top=30&semVerLevel=2.0.0 948ms
+  GET https://pkgs.dev.azure.com/dnceng/9ee6d478-d288-47f7-aacc-f6e6d082ae6d/_packaging/c9f8ac11-6bd8-4926-8306-f075241547f7/nuget/v2/Search()?$filter=IsAbsoluteLatestVersion&$orderby=Id&searchTerm='runtime.win-x64'&targetFramework=''&includePrerelease=true&$skip=0&$top=30&semVerLevel=2.0.0
+  OK https://pkgs.dev.azure.com/dnceng/9ee6d478-d288-47f7-aacc-f6e6d082ae6d/_packaging/c9f8ac11-6bd8-4926-8306-f075241547f7/nuget/v2/Search()?$filter=IsAbsoluteLatestVersion&$orderby=Id&searchTerm='runtime.win-x64'&targetFramework=''&includePrerelease=true&$skip=0&$top=30&semVerLevel=2.0.0 165ms
+Microsoft.AspNetCore.App.Runtime.win-x64
+ 3.1.1-servicing.19614.11
+ Provides a default set of APIs for building an ASP.NET Core application. Contains assets used for self-contained deployments.
+
+ This package is an internal implementation of the .NET Core SDK and is not meant to be used as a normal PackageReference.
+
+
+ This package was built from the source code at https://github.com/aspnet/AspNetCore/tree/e6af4bfe7e022e2c3b32c583b280965041c3d15c
+ License url: https://licenses.nuget.org/Apache-2.0
+
+Microsoft.AspNetCore.App.Runtime.win-x64
+ 5.0.0-rc.2.20513.11
+ Provides a default set of APIs for building an ASP.NET Core application. Contains assets used for self-contained deployments.
+
+ This package is an internal implementation of the .NET Core SDK and is not meant to be used as a normal PackageReference.
+
+
+ This package was built from the source code at https://github.com/dotnet/aspnetcore/tree/c5302e8ed164a260c53ac0a4e83d5d98cfc3f608
+ License url: https://licenses.nuget.org/Apache-2.0
+
+Microsoft.AspNetCore.App.Runtime.win-x64
+ 5.0.0-rtm.20512.8
+ Provides a default set of APIs for building an ASP.NET Core application. Contains assets used for self-contained deployments.
+
+ This package is an internal implementation of the .NET Core SDK and is not meant to be used as a normal PackageReference.
+
+
+ This package was built from the source code at https://github.com/dotnet/aspnetcore/tree/944c964339195823f6aa66fee02de8ab16b6790a
+ License url: https://licenses.nuget.org/Apache-2.0
+
+Microsoft.AspNetCore.App.Runtime.win-x64
+ 6.0.0-alpha.1.20556.12
+ Provides a default set of APIs for building an ASP.NET Core application. Contains assets used for self-contained deployments.
+
+ This package is an internal implementation of the .NET Core SDK and is not meant to be used as a normal PackageReference.
+
+
+ This package was built from the source code at https://github.com/dotnet/aspnetcore/tree/6140012133df2d8f619ca26dadd42c190dbd2c1c
+ License url: https://licenses.nuget.org/Apache-2.0
+
+Microsoft.NETCore.App.Runtime.win-x64
+ 3.1.4-servicing.20176.4
+ Internal implementation package not meant for direct consumption. Please do not reference directly.
+ 08b96bae4b5127c9ab110182fdd51e6a045803cf
+ When using NuGet 3.x this package requires at least version 3.4.
+ License url: https://licenses.nuget.org/MIT
+
+Microsoft.NETCore.App.Runtime.win-x64
+ 5.0.0-alpha.1.19618.1
+ Internal implementation package not meant for direct consumption. Please do not reference directly.
+ d86d0668bbb1c51695b7b914e60e49aec1fdefbb
+ When using NuGet 3.x this package requires at least version 3.4.
+ License url: https://licenses.nuget.org/MIT
+
+Microsoft.NETCore.App.Runtime.win-x64
+ 6.0.0-alpha.1.20420.3
+ Internal implementation package not meant for direct consumption. Please do not reference directly.
+ 2e68b6e642fef547c3a6c7a4e665994e7c8aefae
+ When using NuGet 3.x this package requires at least version 3.4.
+ License url: https://licenses.nuget.org/MIT
+
+Microsoft.NETCore.App.Runtime.win-x64
+ 6.0.0-alpha.1.20557.2
+ Internal implementation package not meant for direct consumption. Please do not reference directly.
+ 6cfef20c1524b8d4c1495a652dfe9e898c5a486b
+ When using NuGet 3.x this package requires at least version 3.4.
+ License url: https://licenses.nuget.org/MIT
+
+Microsoft.WindowsDesktop.App.Runtime.win-x64
+ 3.1.4-servicing.20176.4
+ Internal implementation package not meant for direct consumption. Please do not reference directly.
+ 08b96bae4b5127c9ab110182fdd51e6a045803cf
+ When using NuGet 3.x this package requires at least version 3.4.
+ License url: https://licenses.nuget.org/MIT
+
+Microsoft.WindowsDesktop.App.Runtime.win-x64
+ 5.0.0-rtm.20511.1
+ Internal implementation package not meant for direct consumption. Please do not reference directly.
+ 6701d2fbe2b75a180c2720cd43b1e975bd0ea3c7
+ When using NuGet 3.x this package requires at least version 3.4.
+ License url: https://github.com/dotnet/core-setup/blob/master/LICENSE.TXT
+
+Microsoft.WindowsDesktop.App.Runtime.win-x64
+ 6.0.0-alpha.1.20556.3
+ Internal implementation package not meant for direct consumption. Please do not reference directly.
+ 36913196a28a2495b0ee709ebc15d4b4e5d7da0d
+ When using NuGet 3.x this package requires at least version 3.4.
+ License url: https://github.com/dotnet/core-setup/blob/master/LICENSE.TXT
+
+runtime.win-x64.Microsoft.DotNet.Wpf.DncEng
+ 6.0.0-alpha.1.20418.4
+ WPF Transport Package from dotnet-wpf-int Repository
+ License url: https://licenses.nuget.org/MIT
+
+runtime.win-x64.Microsoft.DotNet.Wpf.DncEng
+ 6.0.0-alpha.1.20554.3
+ WPF Transport Package from dotnet-wpf-int Repository
+ License url: https://licenses.nuget.org/MIT
+
+runtime.win-x64.Microsoft.DotNet.Wpf.DncEng.Debug
+ 6.0.0-alpha.1.20418.4
+ WPF Transport Package from dotnet-wpf-int Repository
+ License url: https://licenses.nuget.org/MIT
+
+runtime.win-x64.Microsoft.DotNet.Wpf.DncEng.Debug
+ 6.0.0-alpha.1.20554.3
+ WPF Transport Package from dotnet-wpf-int Repository
+ License url: https://licenses.nuget.org/MIT
+
+runtime.win-x64.Microsoft.DotNet.Wpf.GitHub
+ 6.0.0-alpha.1.20418.2
+ WPF Transport Package from dotnet/wpf repository
+ License url: https://licenses.nuget.org/MIT
+
+runtime.win-x64.Microsoft.DotNet.Wpf.GitHub
+ 6.0.0-alpha.1.20556.2
+ WPF Transport Package from dotnet/wpf repository
+ License url: https://licenses.nuget.org/MIT
+
+runtime.win-x64.Microsoft.DotNet.Wpf.GitHub.Debug
+ 5.0.0-preview.5.20227.6
+ WPF Transport Package from dotnet/wpf repository
+ License url: https://licenses.nuget.org/MIT
+
+runtime.win-x64.Microsoft.DotNet.Wpf.Test
+ 1.0.0-beta.19263.1
+ WPF Test infra and DRTs
+ License url: https://licenses.nuget.org/MIT
+
+runtime.win-x64.Microsoft.NETCore.App
+ 5.0.0-alpha.1.19618.1
+ Internal implementation package not meant for direct consumption. Please do not reference directly.
+ A set of .NET APIs that are included in the default .NET Core application model.
+ d86d0668bbb1c51695b7b914e60e49aec1fdefbb
+ When using NuGet 3.x this package requires at least version 3.4.
+ License url: https://licenses.nuget.org/MIT
+
+runtime.win-x64.Microsoft.NETCore.App
+ 6.0.0-alpha.1.20420.3
+ Internal implementation package not meant for direct consumption. Please do not reference directly.
+ A set of .NET APIs that are included in the default .NET application model.
+ 2e68b6e642fef547c3a6c7a4e665994e7c8aefae
+ When using NuGet 3.x this package requires at least version 3.4.
+ License url: https://licenses.nuget.org/MIT
+
+runtime.win-x64.Microsoft.NETCore.App
+ 6.0.0-alpha.1.20557.2
+ Internal implementation package not meant for direct consumption. Please do not reference directly.
+ A set of .NET APIs that are included in the default .NET application model.
+ 6cfef20c1524b8d4c1495a652dfe9e898c5a486b
+ When using NuGet 3.x this package requires at least version 3.4.
+ License url: https://licenses.nuget.org/MIT
+
+runtime.win-x64.Microsoft.NETCore.CoreDisTools
+ 1.0.1-prerelease-00005
+ Disassembly Tools for CoreCLR
+ License url: http://go.microsoft.com/fwlink/?LinkId=329770
+
+runtime.win-x64.Microsoft.NETCore.Crossgen2
+ 5.0.0-alpha.1.20104.1
+ Internal implementation package not meant for direct consumption.  Please do not reference directly.
+ The .NET Crossgen2 compiler.
+ When using NuGet 3.x this package requires at least version 3.4.
+ License url: https://licenses.nuget.org/MIT
+
+runtime.win-x64.Microsoft.NETCore.Crossgen2
+ 5.0.0-alpha1.19564.1
+ Internal implementation package not meant for direct consumption.  Please do not reference directly.
+ The .NET Crossgen2 compiler.
+ When using NuGet 3.x this package requires at least version 3.4.
+ License url: https://licenses.nuget.org/MIT
+
+runtime.win-x64.Microsoft.NETCore.DotNetAppHost
+ 3.1.4-servicing.20176.4
+ Internal implementation package not meant for direct consumption. Please do not reference directly.
+ Provides the .NET Core app bootstrapper intended for use in the application directory
+ 08b96bae4b5127c9ab110182fdd51e6a045803cf
+ When using NuGet 3.x this package requires at least version 3.4.
+ License url: https://licenses.nuget.org/MIT
+
+runtime.win-x64.Microsoft.NETCore.DotNetAppHost
+ 5.0.0-alpha.1.19618.1
+ Internal implementation package not meant for direct consumption. Please do not reference directly.
+ Provides the .NET Core app bootstrapper intended for use in the application directory
+ d86d0668bbb1c51695b7b914e60e49aec1fdefbb
+ When using NuGet 3.x this package requires at least version 3.4.
+ License url: https://licenses.nuget.org/MIT
+
+runtime.win-x64.Microsoft.NETCore.DotNetAppHost
+ 6.0.0-alpha.1.20420.3
+ Internal implementation package not meant for direct consumption. Please do not reference directly.
+ Provides the .NET app bootstrapper intended for use in the application directory
+ 2e68b6e642fef547c3a6c7a4e665994e7c8aefae
+ When using NuGet 3.x this package requires at least version 3.4.
+ License url: https://licenses.nuget.org/MIT
+
+runtime.win-x64.Microsoft.NETCore.DotNetAppHost
+ 6.0.0-alpha.1.20557.2
+ Internal implementation package not meant for direct consumption. Please do not reference directly.
+ Provides the .NET app bootstrapper intended for use in the application directory
+ 6cfef20c1524b8d4c1495a652dfe9e898c5a486b
+ When using NuGet 3.x this package requires at least version 3.4.
+ License url: https://licenses.nuget.org/MIT
+
+runtime.win-x64.Microsoft.NETCore.DotNetHost
+ 3.1.4-servicing.20176.4
+ Internal implementation package not meant for direct consumption. Please do not reference directly.
+ Provides an executable implementation of the Microsoft DotNet Framework and SDK launcher module
+ 08b96bae4b5127c9ab110182fdd51e6a045803cf
+ When using NuGet 3.x this package requires at least version 3.4.
+ License url: https://licenses.nuget.org/MIT
+
+runtime.win-x64.Microsoft.NETCore.DotNetHost
+ 5.0.0-alpha.1.19618.1
+ Internal implementation package not meant for direct consumption. Please do not reference directly.
+ Provides an executable implementation of the Microsoft DotNet Framework and SDK launcher module
+ d86d0668bbb1c51695b7b914e60e49aec1fdefbb
+ When using NuGet 3.x this package requires at least version 3.4.
+ License url: https://licenses.nuget.org/MIT
+
+runtime.win-x64.Microsoft.NETCore.DotNetHost
+ 6.0.0-alpha.1.20420.3
+ Internal implementation package not meant for direct consumption. Please do not reference directly.
+ Provides an executable implementation of the Microsoft DotNet Framework and SDK launcher module
+ 2e68b6e642fef547c3a6c7a4e665994e7c8aefae
+ When using NuGet 3.x this package requires at least version 3.4.
+ License url: https://licenses.nuget.org/MIT
+
+runtime.win-x64.Microsoft.NETCore.DotNetHost
+ 6.0.0-alpha.1.20557.2
+ Internal implementation package not meant for direct consumption. Please do not reference directly.
+ Provides an executable implementation of the Microsoft DotNet Framework and SDK launcher module
+ 6cfef20c1524b8d4c1495a652dfe9e898c5a486b
+ When using NuGet 3.x this package requires at least version 3.4.
+ License url: https://licenses.nuget.org/MIT
+
+runtime.win-x64.Microsoft.NETCore.DotNetHostPolicy
+ 3.1.4-servicing.20176.4
+ Internal implementation package not meant for direct consumption. Please do not reference directly.
+ Provides a CoreCLR hosting policy implementation -- configuration settings, assembly paths and assembly servicing
+ 08b96bae4b5127c9ab110182fdd51e6a045803cf
+ When using NuGet 3.x this package requires at least version 3.4.
+ License url: https://licenses.nuget.org/MIT
+
+runtime.win-x64.Microsoft.NETCore.DotNetHostPolicy
+ 5.0.0-alpha.1.19618.1
+ Internal implementation package not meant for direct consumption. Please do not reference directly.
+ Provides a CoreCLR hosting policy implementation -- configuration settings, assembly paths and assembly servicing
+ d86d0668bbb1c51695b7b914e60e49aec1fdefbb
+ When using NuGet 3.x this package requires at least version 3.4.
+ License url: https://licenses.nuget.org/MIT
+
+runtime.win-x64.Microsoft.NETCore.DotNetHostPolicy
+ 6.0.0-alpha.1.20420.3
+ Internal implementation package not meant for direct consumption. Please do not reference directly.
+ Provides a CoreCLR hosting policy implementation -- configuration settings, assembly paths and assembly servicing
+ 2e68b6e642fef547c3a6c7a4e665994e7c8aefae
+ When using NuGet 3.x this package requires at least version 3.4.
+ License url: https://licenses.nuget.org/MIT
+
+runtime.win-x64.Microsoft.NETCore.DotNetHostPolicy
+ 6.0.0-alpha.1.20557.2
+ Internal implementation package not meant for direct consumption. Please do not reference directly.
+ Provides a CoreCLR hosting policy implementation -- configuration settings, assembly paths and assembly servicing
+ 6cfef20c1524b8d4c1495a652dfe9e898c5a486b
+ When using NuGet 3.x this package requires at least version 3.4.
+ License url: https://licenses.nuget.org/MIT
+
+runtime.win-x64.Microsoft.NETCore.DotNetHostResolver
+ 3.1.4-servicing.20176.4
+ Internal implementation package not meant for direct consumption. Please do not reference directly.
+ Provides an implementation of framework resolution strategy used by Microsoft.NETCore.DotNetHost
+ 08b96bae4b5127c9ab110182fdd51e6a045803cf
+ When using NuGet 3.x this package requires at least version 3.4.
+ License url: https://licenses.nuget.org/MIT
+
+runtime.win-x64.Microsoft.NETCore.DotNetHostResolver
+ 5.0.0-alpha.1.19618.1
+ Internal implementation package not meant for direct consumption. Please do not reference directly.
+ Provides an implementation of framework resolution strategy used by Microsoft.NETCore.DotNetHost
+ d86d0668bbb1c51695b7b914e60e49aec1fdefbb
+ When using NuGet 3.x this package requires at least version 3.4.
+ License url: https://licenses.nuget.org/MIT
+
+runtime.win-x64.Microsoft.NETCore.DotNetHostResolver
+ 6.0.0-alpha.1.20420.3
+ Internal implementation package not meant for direct consumption. Please do not reference directly.
+ Provides an implementation of framework resolution strategy used by Microsoft.NETCore.DotNetHost
+ 2e68b6e642fef547c3a6c7a4e665994e7c8aefae
+ When using NuGet 3.x this package requires at least version 3.4.
+ License url: https://licenses.nuget.org/MIT
+
+runtime.win-x64.Microsoft.NETCore.DotNetHostResolver
+ 6.0.0-alpha.1.20557.2
+ Internal implementation package not meant for direct consumption. Please do not reference directly.
+ Provides an implementation of framework resolution strategy used by Microsoft.NETCore.DotNetHost
+ 6cfef20c1524b8d4c1495a652dfe9e898c5a486b
+ When using NuGet 3.x this package requires at least version 3.4.
+ License url: https://licenses.nuget.org/MIT
+
+runtime.win-x64.Microsoft.NETCore.ILAsm
+ 5.0.0-alpha1.19564.1
+ Internal implementation package not meant for direct consumption.  Please do not reference directly.
+ The .NET IL Assembler.
+ When using NuGet 3.x this package requires at least version 3.4.
+ License url: https://licenses.nuget.org/MIT
+
+runtime.win-x64.Microsoft.NETCore.ILAsm
+ 6.0.0-alpha.1.20420.3
+ Internal implementation package not meant for direct consumption.  Please do not reference directly.
+ The .NET IL Assembler.
+ When using NuGet 3.x this package requires at least version 3.4.
+ License url: https://licenses.nuget.org/MIT
+
+runtime.win-x64.Microsoft.NETCore.ILAsm
+ 6.0.0-alpha.1.20557.2
+ Internal implementation package not meant for direct consumption.  Please do not reference directly.
+ The .NET IL Assembler.
+ When using NuGet 3.x this package requires at least version 3.4.
+ License url: https://licenses.nuget.org/MIT
+
+runtime.win-x64.Microsoft.NETCore.ILDAsm
+ 5.0.0-alpha1.19564.1
+ Internal implementation package not meant for direct consumption.  Please do not reference directly.
+ The .NET IL Disassembler.
+ When using NuGet 3.x this package requires at least version 3.4.
+ License url: https://licenses.nuget.org/MIT
+
+runtime.win-x64.Microsoft.NETCore.ILDAsm
+ 6.0.0-alpha.1.20420.3
+ Internal implementation package not meant for direct consumption.  Please do not reference directly.
+ The .NET IL Disassembler.
+ When using NuGet 3.x this package requires at least version 3.4.
+ License url: https://licenses.nuget.org/MIT
+
+runtime.win-x64.Microsoft.NETCore.ILDAsm
+ 6.0.0-alpha.1.20557.2
+ Internal implementation package not meant for direct consumption.  Please do not reference directly.
+ The .NET IL Disassembler.
+ When using NuGet 3.x this package requires at least version 3.4.
+ License url: https://licenses.nuget.org/MIT
+
+runtime.win-x64.Microsoft.NETCore.Jit
+ 5.0.0-alpha.1.20104.1
+ Internal implementation package not meant for direct consumption.  Please do not reference directly.
+ The .NET JIT compiler.
+ When using NuGet 3.x this package requires at least version 3.4.
+ License url: https://licenses.nuget.org/MIT
+
+runtime.win-x64.Microsoft.NETCore.Jit
+ 5.0.0-alpha1.19564.1
+ Internal implementation package not meant for direct consumption.  Please do not reference directly.
+ The .NET JIT compiler.
+ When using NuGet 3.x this package requires at least version 3.4.
+ License url: https://licenses.nuget.org/MIT
+
+runtime.win-x64.Microsoft.NETCore.Runtime.CoreCLR
+ 5.0.0-alpha.1.20104.1
+ Internal implementation package not meant for direct consumption.  Please do not reference directly.
+ The .NET Core runtime, called CoreCLR, and the base library, called System.Private.CoreLib. It includes the garbage collector, JIT compiler, base .NET data types and man
+ y low-level classes.
+ When using NuGet 3.x this package requires at least version 3.4.
+ License url: https://licenses.nuget.org/MIT
+
+runtime.win-x64.Microsoft.NETCore.Runtime.CoreCLR
+ 5.0.0-alpha1.19564.1
+ Internal implementation package not meant for direct consumption.  Please do not reference directly.
+ The .NET Core runtime, called CoreCLR, and the base library, called System.Private.CoreLib. It includes the garbage collector, JIT compiler, base .NET data types and man
+ y low-level classes.
+ When using NuGet 3.x this package requires at least version 3.4.
+ License url: https://licenses.nuget.org/MIT
+
+runtime.win-x64.Microsoft.NETCore.Runtime.Mono
+ 6.11.0.264-preview
+ Internal implementation package not meant for direct consumption.  Please do not reference directly.
+ The Mono runtime, and the base library, called mscorlib. It includes the garbage collector, JIT compiler, base .NET data types and many low-level classes.
+ License url: https://github.com/mono/mono/blob/master/LICENSE
+
+runtime.win-x64.Microsoft.NETCore.Runtime.Mono.LLVM.Sdk
+ 9.0.1-alpha.1.20505.1
+ Internal implementation package not meant for direct consumption.  Please do not reference directly.
+ The .NET Core fork of the LLVM project, used to compile the Mono .NET Core runtime in LLVM JIT mode. Internal implementation package not meant for direct consumption.  P
+ lease do not reference directly.
+ When using NuGet 3.x this package requires at least version 3.4.
+ License url: https://github.com/dotnet/llvm-project/blob/master/llvm/LICENSE.TXT
+
+runtime.win-x64.Microsoft.NETCore.Runtime.Mono.LLVM.Sdk
+ 9.0.1-alpha.1.20552.1
+ Internal implementation package not meant for direct consumption.  Please do not reference directly.
+ The .NET Core fork of the LLVM project, used to compile the Mono .NET Core runtime in LLVM JIT mode. Internal implementation package not meant for direct consumption.  P
+ lease do not reference directly.
+ When using NuGet 3.x this package requires at least version 3.4.
+ License url: https://github.com/dotnet/llvm-project/blob/master/llvm/LICENSE.TXT
+
+runtime.win-x64.Microsoft.NETCore.Runtime.Mono.LLVM.Tools
+ 9.0.1-alpha.1.20505.1
+ Internal implementation package not meant for direct consumption.  Please do not reference directly.
+ The llvm-as, llc and opt tools, used by the Mono .NET Core runtime in LLVM AOT mode.
+ When using NuGet 3.x this package requires at least version 3.4.
+ License url: https://github.com/dotnet/llvm-project/blob/master/llvm/LICENSE.TXT
+
+runtime.win-x64.Microsoft.NETCore.Runtime.Mono.LLVM.Tools
+ 9.0.1-alpha.1.20552.1
+ Internal implementation package not meant for direct consumption.  Please do not reference directly.
+ The llvm-as, llc and opt tools, used by the Mono .NET Core runtime in LLVM AOT mode.
+ When using NuGet 3.x this package requires at least version 3.4.
+ License url: https://github.com/dotnet/llvm-project/blob/master/llvm/LICENSE.TXT
+
+runtime.win-x64.Microsoft.NETCore.TestHost
+ 5.0.0-alpha1.19564.1
+ Internal implementation package not meant for direct consumption.  Please do not reference directly.
+ CoreCLR application host for test applications
+ When using NuGet 3.x this package requires at least version 3.4.
+ License url: https://licenses.nuget.org/MIT
+
+runtime.win-x64.Microsoft.NETCore.TestHost
+ 6.0.0-alpha.1.20420.3
+ Internal implementation package not meant for direct consumption.  Please do not reference directly.
+ CoreCLR application host for test applications
+ When using NuGet 3.x this package requires at least version 3.4.
+ License url: https://licenses.nuget.org/MIT
+
+runtime.win-x64.Microsoft.NETCore.TestHost
+ 6.0.0-alpha.1.20557.2
+ Internal implementation package not meant for direct consumption.  Please do not reference directly.
+ CoreCLR application host for test applications
+ When using NuGet 3.x this package requires at least version 3.4.
+ License url: https://licenses.nuget.org/MIT
+
+runtime.win-x64.Microsoft.Private.CoreFx.NETCoreApp
+ 5.0.0-alpha.1.19618.1
+ Internal implementation package not meant for direct consumption.  Please do not reference directly.
+ Package used to represent the portions of NETCoreApp that come from CoreFx.
+ When using NuGet 3.x this package requires at least version 3.4.
+ License url: https://licenses.nuget.org/MIT
+
+runtime.win-x64.Microsoft.Private.CoreFx.NETCoreApp
+ 5.0.0-alpha1.19523.8
+ Internal implementation package not meant for direct consumption.  Please do not reference directly.
+ Package used to represent the portions of NETCoreApp that come from CoreFx.
+ When using NuGet 3.x this package requires at least version 3.4.
+ License url: https://github.com/dotnet/corefx/blob/master/LICENSE.TXT
+
+runtime.win-x64.Microsoft.WindowsDesktop.App
+ 5.0.0-rtm.20529.4
+ Internal implementation package not meant for direct consumption. Please do not reference directly.
+ Shared Framework for Windows Forms and WPF.
+ 5848b16d1fc803ea4892692b3b5dd9ee79955428
+ When using NuGet 3.x this package requires at least version 3.4.
+ License url: https://github.com/dotnet/core-setup/blob/master/LICENSE.TXT
+
+runtime.win-x64.Microsoft.WindowsDesktop.App
+ 6.0.0-alpha.1.20556.3
+ Internal implementation package not meant for direct consumption. Please do not reference directly.
+ Shared Framework for Windows Forms and WPF.
+ 36913196a28a2495b0ee709ebc15d4b4e5d7da0d
+ When using NuGet 3.x this package requires at least version 3.4.
+ License url: https://github.com/dotnet/core-setup/blob/master/LICENSE.TXT
+
+transport.runtime.win-x64.Microsoft.NETCore.Crossgen2
+ 5.0.0-alpha.1.20104.1
+ Internal implementation package not meant for direct consumption.  Please do not reference directly.
+ The .NET Crossgen2 compiler.
+ When using NuGet 3.x this package requires at least version 3.4.
+ License url: https://licenses.nuget.org/MIT
+
+transport.runtime.win-x64.Microsoft.NETCore.Crossgen2
+ 5.0.0-alpha1.19564.1
+ Internal implementation package not meant for direct consumption.  Please do not reference directly.
+ The .NET Crossgen2 compiler.
+ When using NuGet 3.x this package requires at least version 3.4.
+ License url: https://licenses.nuget.org/MIT
+
+transport.runtime.win-x64.Microsoft.NETCore.ILAsm
+ 5.0.0-alpha1.19564.1
+ Internal implementation package not meant for direct consumption.  Please do not reference directly.
+ The .NET IL Assembler.
+ When using NuGet 3.x this package requires at least version 3.4.
+ License url: https://licenses.nuget.org/MIT
+
+transport.runtime.win-x64.Microsoft.NETCore.ILAsm
+ 5.0.0-rc.1.20378.14
+ Internal implementation package not meant for direct consumption.  Please do not reference directly.
+ The .NET IL Assembler.
+ When using NuGet 3.x this package requires at least version 3.4.
+ License url: https://licenses.nuget.org/MIT
+
+transport.runtime.win-x64.Microsoft.NETCore.ILDAsm
+ 5.0.0-alpha1.19564.1
+ Internal implementation package not meant for direct consumption.  Please do not reference directly.
+ The .NET IL Disassembler.
+ When using NuGet 3.x this package requires at least version 3.4.
+ License url: https://licenses.nuget.org/MIT
+
+transport.runtime.win-x64.Microsoft.NETCore.ILDAsm
+ 5.0.0-rc.1.20378.14
+ Internal implementation package not meant for direct consumption.  Please do not reference directly.
+ The .NET IL Disassembler.
+ When using NuGet 3.x this package requires at least version 3.4.
+ License url: https://licenses.nuget.org/MIT
+
+transport.runtime.win-x64.Microsoft.NETCore.Jit
+ 5.0.0-alpha.1.20104.1
+ Internal implementation package not meant for direct consumption.  Please do not reference directly.
+ The .NET JIT compiler.
+ When using NuGet 3.x this package requires at least version 3.4.
+ License url: https://licenses.nuget.org/MIT
+
+transport.runtime.win-x64.Microsoft.NETCore.Jit
+ 5.0.0-alpha1.19564.1
+ Internal implementation package not meant for direct consumption.  Please do not reference directly.
+ The .NET JIT compiler.
+ When using NuGet 3.x this package requires at least version 3.4.
+ License url: https://licenses.nuget.org/MIT
+
+transport.runtime.win-x64.Microsoft.NETCore.Runtime.CoreCLR
+ 5.0.0-alpha.1.20104.1
+ Internal implementation package not meant for direct consumption.  Please do not reference directly.
+ The .NET Core runtime, called CoreCLR, and the base library, called System.Private.CoreLib. It includes the garbage collector, JIT compiler, base .NET data types and man
+ y low-level classes.
+ When using NuGet 3.x this package requires at least version 3.4.
+ License url: https://licenses.nuget.org/MIT
+
+transport.runtime.win-x64.Microsoft.NETCore.Runtime.CoreCLR
+ 5.0.0-alpha1.19564.1
+ Internal implementation package not meant for direct consumption.  Please do not reference directly.
+ The .NET Core runtime, called CoreCLR, and the base library, called System.Private.CoreLib. It includes the garbage collector, JIT compiler, base .NET data types and man
+ y low-level classes.
+ When using NuGet 3.x this package requires at least version 3.4.
+ License url: https://licenses.nuget.org/MIT
+
+transport.runtime.win-x64.Microsoft.NETCore.Runtime.Mono
+ 5.0.0-preview.3.20214.6
+ Internal implementation package not meant for direct consumption.  Please do not reference directly.
+ The Mono .NET Runtime and the base library, called System.Private.CoreLib. It includes the garbage collector, JIT compiler, base .NET data types and many low-level class
+ es.
+ When using NuGet 3.x this package requires at least version 3.4.
+ License url: https://licenses.nuget.org/MIT
+
+transport.runtime.win-x64.Microsoft.NETCore.TestHost
+ 5.0.0-alpha1.19564.1
+ Internal implementation package not meant for direct consumption.  Please do not reference directly.
+ CoreCLR application host for test applications
+ When using NuGet 3.x this package requires at least version 3.4.
+ License url: https://licenses.nuget.org/MIT
+
+transport.runtime.win-x64.Microsoft.NETCore.TestHost
+ 5.0.0-rc.1.20378.14
+ Internal implementation package not meant for direct consumption.  Please do not reference directly.
+ CoreCLR application host for test applications
+ When using NuGet 3.x this package requires at least version 3.4.
+ License url: https://licenses.nuget.org/MIT
+

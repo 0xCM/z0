@@ -4,6 +4,7 @@
 //-----------------------------------------------------------------------------
 using System;
 using System.Reflection;
+using System.IO;
 
 [assembly: AssemblyDescription("I am a part, a harbinger of the many")]
 [assembly: PartId(PartId.Part)]

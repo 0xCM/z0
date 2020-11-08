@@ -10,133 +10,136 @@ namespace Z0
     using System.Xml;
     using System.IO;
 
-    public readonly struct Comments
+    partial struct Projects
     {
-        public enum CommentTargetKind : byte
+        public readonly struct Comments
         {
-            None = 0,
-
-            Type = 1,
-
-            Method = 2,
-
-            Field = 3,
-
-            Property = 4,
-        }
-
-        [Table(TableId, FieldCount)]
-        public struct SummaryComment
-        {
-            public const string TableId = "comments";
-
-            public const byte FieldCount = 3;
-
-            public CommentTargetKind Kind;
-
-            public string Identifer;
-
-            public string Summary;
-
-            public SummaryComment(CommentTargetKind kind, string identifier, string summary)
+            public enum CommentTargetKind : byte
             {
-                Kind = kind;
-                Identifer = identifier;
-                Summary = summary;
+                None = 0,
+
+                Type = 1,
+
+                Method = 2,
+
+                Field = 3,
+
+                Property = 4,
             }
-        }
 
-        static CommentTargetKind kind(char src)
-            => src switch {
-                'T' => CommentTargetKind.Type,
-                'M' => CommentTargetKind.Method,
-                'P' => CommentTargetKind.Property,
-                'F' => CommentTargetKind.Field,
-                _ => CommentTargetKind.None,
-            };
-
-        const string Sep = "| ";
-
-        static string format(SummaryComment src)
-            => text.concat(src.Kind.ToString().PadRight(12), Sep, src.Identifer.PadRight(70), Sep, src.Summary);
-
-        public static Dictionary<PartId, Dictionary<string,string>> collect(IWfShell wf)
-        {
-            var dir = wf.Db().TableDir<SummaryComment>();
-            var src = collect(wf, wf.ApiParts.ManagedSources);
-            var dst = new Dictionary<PartId, Dictionary<string,SummaryComment>>();
-            foreach(var part in src.Keys)
+            [Table(TableId, FieldCount)]
+            public struct SummaryComment
             {
-                var path = wf.Db().Table<SummaryComment>(part);
-                var docs = new Dictionary<string, SummaryComment>();
-                dst[part] = docs;
-                using var writer = path.Writer();
+                public const string TableId = "comments";
 
-                var kvp = src[part];
-                foreach(var key in kvp.Keys)
+                public const byte FieldCount = 3;
+
+                public CommentTargetKind Kind;
+
+                public string Identifer;
+
+                public string Summary;
+
+                public SummaryComment(CommentTargetKind kind, string identifier, string summary)
                 {
-                    var member = parse(key, kvp[key]).OnSuccess(d => docs[d.Identifer] = d);
-                    if(member.Succeeded)
-                        writer.WriteLine(format(member.Value));
+                    Kind = kind;
+                    Identifer = identifier;
+                    Summary = summary;
                 }
-                wf.EmittedTable<SummaryComment>(kvp.Count, path);
             }
-            return src;
-        }
 
-        static Dictionary<PartId, Dictionary<string,string>> collect(IWfShell wf, FS.FilePath[] paths)
-        {
-            var dst = new Dictionary<PartId, Dictionary<string,string>>();
-            var t = default(SummaryComment);
-            foreach(var path in paths)
+            static CommentTargetKind kind(char src)
+                => src switch {
+                    'T' => CommentTargetKind.Type,
+                    'M' => CommentTargetKind.Method,
+                    'P' => CommentTargetKind.Property,
+                    'F' => CommentTargetKind.Field,
+                    _ => CommentTargetKind.None,
+                };
+
+            const string Sep = "| ";
+
+            static string format(SummaryComment src)
+                => text.concat(src.Kind.ToString().PadRight(12), Sep, src.Identifer.PadRight(70), Sep, src.Summary);
+
+            public static Dictionary<PartId, Dictionary<string,string>> collect(IWfShell wf)
             {
-
-                var id = path.Owner;
-                if(id.IsSome())
+                var dir = wf.Db().TableDir<SummaryComment>();
+                var src = collect(wf, wf.ApiParts.ManagedSources);
+                var dst = new Dictionary<PartId, Dictionary<string,SummaryComment>>();
+                foreach(var part in src.Keys)
                 {
-                    var xmlfile = path.ChangeExtension(ArchiveFileKinds.Xml);
-                    if(xmlfile.Exists)
+                    var path = wf.Db().Table<SummaryComment>(part);
+                    var docs = new Dictionary<string, SummaryComment>();
+                    dst[part] = docs;
+                    using var writer = path.Writer();
+
+                    var kvp = src[part];
+                    foreach(var key in kvp.Keys)
                     {
-                        var data = xmlfile.ReadText();
-                        var parsed = parse(data);
-                        if(parsed.Count != 0)
+                        var member = parse(key, kvp[key]).OnSuccess(d => docs[d.Identifer] = d);
+                        if(member.Succeeded)
+                            writer.WriteLine(format(member.Value));
+                    }
+                    wf.EmittedTable<SummaryComment>(kvp.Count, path);
+                }
+                return src;
+            }
+
+            static Dictionary<PartId, Dictionary<string,string>> collect(IWfShell wf, FS.FilePath[] paths)
+            {
+                var dst = new Dictionary<PartId, Dictionary<string,string>>();
+                var t = default(SummaryComment);
+                foreach(var path in paths)
+                {
+
+                    var id = path.Owner;
+                    if(id.IsSome())
+                    {
+                        var xmlfile = path.ChangeExtension(ArchiveFileKinds.Xml);
+                        if(xmlfile.Exists)
                         {
-                            dst[id] = parsed;
-                            wf.ProcessedFile(path, t, dst[id].Count);
+                            var data = xmlfile.ReadText();
+                            var parsed = parse(data);
+                            if(parsed.Count != 0)
+                            {
+                                dst[id] = parsed;
+                                wf.ProcessedFile(path, t, dst[id].Count);
+                            }
                         }
                     }
                 }
+                return dst;
             }
-            return dst;
-        }
 
-        static Dictionary<string,string> parse(string src)
-        {
-            var index = new Dictionary<string, string>();
-            using var xmlReader = XmlReader.Create(new StringReader(src));
-            while (xmlReader.Read())
+            static Dictionary<string,string> parse(string src)
             {
-                if (xmlReader.NodeType == XmlNodeType.Element && xmlReader.Name == "member")
+                var index = new Dictionary<string, string>();
+                using var xmlReader = XmlReader.Create(new StringReader(src));
+                while (xmlReader.Read())
                 {
-                    string raw_name = xmlReader["name"];
-                    index[raw_name] = xmlReader.ReadInnerXml();
+                    if (xmlReader.NodeType == XmlNodeType.Element && xmlReader.Name == "member")
+                    {
+                        string raw_name = xmlReader["name"];
+                        index[raw_name] = xmlReader.ReadInnerXml();
+                    }
                 }
+                return index;
             }
-            return index;
-        }
 
-        static ParseResult<SummaryComment> parse(string key, string value)
-        {
-            var components = key.SplitClean(Chars.Colon);
-            if(components.Length == 2 && components[0].Length == 1)
+            static ParseResult<SummaryComment> parse(string key, string value)
             {
-                var k = kind(components[0][0]);
-                var name = components[1];
-                var summary = text.content(value, "<summary>", "</summary>").RemoveAny((char)AsciControl.CR, (char)AsciControl.NL).Trim();
-                return ParseResult.Success(key, new SummaryComment(k, name, summary));
+                var components = key.SplitClean(Chars.Colon);
+                if(components.Length == 2 && components[0].Length == 1)
+                {
+                    var k = kind(components[0][0]);
+                    var name = components[1];
+                    var summary = text.content(value, "<summary>", "</summary>").RemoveAny((char)AsciControl.CR, (char)AsciControl.NL).Trim();
+                    return ParseResult.Success(key, new SummaryComment(k, name, summary));
+                }
+                else
+                    return ParseResult.Fail<SummaryComment>(key);
             }
-            else
-                return ParseResult.Fail<SummaryComment>(key);
         }
     }
 }

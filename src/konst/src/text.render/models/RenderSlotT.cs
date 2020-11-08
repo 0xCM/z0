@@ -10,16 +10,16 @@ namespace Z0
     using static Part;
 
     /// <summary>
-    /// Represents a slot within a format pattern
+    /// Represents a slot within a render pattern
     /// </summary>
-    public readonly struct FormatSlot<T>
+    public readonly struct RenderSlot<T>
     {
         public byte Position {get;}
 
-        public FormatPattern Pattern {get;}
+        public RenderPattern Pattern {get;}
 
         [MethodImpl(Inline)]
-        internal FormatSlot(byte pos, FormatPattern pattern)
+        internal RenderSlot(byte pos, RenderPattern pattern)
         {
             Position = pos;
             Pattern = pattern;
@@ -27,7 +27,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format(T arg)
-            => Pattern.Format(arg);
+            => Pattern.Apply(arg);
 
         public bool IsEmpty
         {
@@ -41,22 +41,22 @@ namespace Z0
             get => !IsEmpty;
         }
 
-        public static FormatSlot Empty
+        public static RenderSlot Empty
         {
             [MethodImpl(Inline)]
-            get => new FormatSlot(0, EmptyString);
+            get => new RenderSlot(0, EmptyString);
         }
 
        [MethodImpl(Inline)]
-       public static implicit operator FormatSlot<T>(Paired<byte,string> src)
-            => new FormatSlot<T>(src.Left, src.Right);
+       public static implicit operator RenderSlot<T>(Paired<byte,string> src)
+            => new RenderSlot<T>(src.Left, src.Right);
 
        [MethodImpl(Inline)]
-       public static implicit operator FormatSlot<T>((byte pos, string pattern) src)
-            => new FormatSlot<T>(src.pos, src.pattern);
+       public static implicit operator RenderSlot<T>((byte pos, string pattern) src)
+            => new RenderSlot<T>(src.pos, src.pattern);
 
        [MethodImpl(Inline)]
-       public static implicit operator FormatSlot<T>((byte pos, FormatPattern pattern) src)
-            => new FormatSlot<T>(src.pos, src.pattern);
+       public static implicit operator RenderSlot<T>((byte pos, RenderPattern pattern) src)
+            => new RenderSlot<T>(src.pos, src.pattern);
     }
 }

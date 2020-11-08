@@ -30,7 +30,6 @@ namespace Z0
     public interface ICmdArg<K,T> : ICmdArg<T>
     {
         new K Key {get;}
-
         string ICmdArg.Key
             => Key.ToString();
     }

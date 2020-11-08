@@ -4,15 +4,18 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System.Reflection;
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    [Cmd]
-    public struct EmitResDataCmd : ICmdSpec<EmitResDataCmd>
+    [Free]
+    public interface ILanguageTable
     {
-        public Assembly Source;
 
-        public FS.FolderPath Target;
+    }
 
-        public utf8 Match;
+    [Free]
+    public interface ILanguageTable<R> : ILanguageTable
+        where R : struct, ILanguageTable<R>
+    {
+
     }
 }

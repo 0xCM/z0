@@ -14,7 +14,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    [CmdHost, ApiHost]
+    [ApiHost]
     public sealed class EmitToolScripts : CmdHost<EmitToolScripts, EmitToolScriptsCmd>
     {
         public static EmitToolScriptsCmd specify(IWfShell wf)

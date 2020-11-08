@@ -11,7 +11,7 @@ namespace Z0
     [Free]
     public interface ICmdRouter : IWfService
     {
-        CmdResult Dispatch(CmdSpec cmd);
+        CmdResult Dispatch(ICmdSpec cmd);
 
         IndexedView<CmdId> SupportedCommands {get;}
     }

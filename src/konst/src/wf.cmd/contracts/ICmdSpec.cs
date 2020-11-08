@@ -7,11 +7,14 @@ namespace Z0
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface ICmdSpec
+    public interface ICmdSpec : IIdentified<CmdId>
     {
         CmdId CmdId {get;}
 
-        utf8 Content {get;}
+        CmdArgs Args {get;}
+
+        CmdId IIdentified<CmdId>.Id
+            => CmdId;
     }
 
     [Free]
@@ -21,8 +24,8 @@ namespace Z0
         CmdId ICmdSpec.CmdId
             => CmdId.from<T>();
 
-        utf8 ICmdSpec.Content
-            => utf8.Empty;
+        CmdArgs ICmdSpec.Args
+            => CmdArgs.Empty;
     }
 
     [Free]

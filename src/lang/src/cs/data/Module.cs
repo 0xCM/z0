@@ -6,14 +6,13 @@ namespace Z0.Lang.Cs
 {
     using System;
 
-    using R = System.Reflection;
     using CA = Microsoft.CodeAnalysis;
 
     using Microsoft.CodeAnalysis;
 
     partial struct DataModel
     {
-        public struct Module : ICsRecord<Module>
+        public struct Module : ILanguageTable<Module>
         {
             public INamespaceSymbol GlobalNamespace;
 

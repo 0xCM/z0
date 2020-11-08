@@ -8,7 +8,7 @@ namespace Z0.Lang.Cs
 
     partial struct DataModel
     {
-        public struct Namespace : ICsRecord<Namespace>
+        public struct Namespace : ILanguageTable<Namespace>
         {
 
         }

@@ -78,8 +78,8 @@ namespace Z0
         public static string format(in CmdSpec src)
         {
             var dst = Buffers.text();
-            dst.Append(src.Id.Format());
-            render(src.Options, dst);
+            dst.Append(src.CmdId.Format());
+            render(src.Args, dst);
             return dst.Emit();
         }
 

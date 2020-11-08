@@ -114,6 +114,21 @@ namespace Z0
             where H : WfHost<H>, new()
                 => Raise(error(host.Id, e, Ct));
 
+        IWfService Service(Type host)
+        {
+            var service = (IWfService)Activator.CreateInstance(host);
+            service.Init(this);
+            return service;
+        }
+
+        H Service<H>()
+            where H : IWfService<H>, new()
+        {
+            var svc = new H();
+            svc.Init(this);
+            return svc;
+        }
+
         // ~ Lifecycle
         // ~ ---------------------------------------------------------------------------
 

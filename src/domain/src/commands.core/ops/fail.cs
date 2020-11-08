@@ -14,12 +14,12 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static CmdResult fail<T>(T spec)
-            where T : struct, ICmdSpec<T>
-                => new CmdResult(spec.CmdId, false);
+            where T : ICmdSpec
+                => new CmdResult(spec.Id, false);
 
         public static CmdResult fail<T>(T spec, string message)
             where T : struct, ICmdSpec<T>
-                => new CmdResult(spec.CmdId, false, TextEncoders.utf8().GetBytes(message));
+                => new CmdResult(spec.Id, false, TextEncoders.utf8().GetBytes(message));
 
         [Op]
         public static CmdResult fail(CmdId id, string message)
@@ -32,6 +32,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static CmdResult fail(CmdId id, params byte[] data)
             => new CmdResult(id, false,data);
-
     }
 }

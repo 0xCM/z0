@@ -12,6 +12,8 @@ namespace Z0
 
     public sealed class CmdWorkers : ConcurrentDictionary<CmdId,ICmdWorker>
     {
+        public static CmdWorkers Empty => create();
+
         public static CmdWorkers create(params KeyedValue<CmdId,ICmdWorker>[] src)
         {
             var dst = new CmdWorkers();

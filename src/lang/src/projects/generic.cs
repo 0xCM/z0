@@ -20,11 +20,11 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ProjectProperty<T> property<T>(T src)
             where T : struct, IProjectProperty<T>
-                => new ProjectProperty<T>(src);     
+                => new ProjectProperty<T>(src);
 
         [MethodImpl(Inline)]
         public static string format<T>(T src)
             where T : struct, IProjectElement<T>
-                => src.Render();                   
+                => src.Render();
     }
 }

@@ -14,7 +14,7 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static CmdResult ok<T>(T spec)
-            where T : struct, ICmdSpec<T>
-                => new CmdResult(spec.CmdId, true);
+            where T : ICmdSpec
+                => new CmdResult(spec.Id, true);
     }
 }

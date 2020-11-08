@@ -7,6 +7,12 @@
   <ItemGroup>
     <ProjectReference Include="$(Konst)" />
     <ProjectReference Include="$(External)" />
+    <ProjectReference Include="$(Unsigned)" />
+    <ProjectReference Include="$(GMath)" />
   </ItemGroup>
+
+   <ItemGroup>
+    <EmbeddedResource Include="assets/**/*.*" />
+   </ItemGroup>
 
 </Project>

@@ -31,6 +31,12 @@ namespace Z0
             get => Data.View;
         }
 
+        public CmdArg<K,T>[] Storage
+        {
+            [MethodImpl(Inline)]
+            get => Data.Storage;
+        }
+
         public ref CmdArg<K,T> this[uint index]
         {
             [MethodImpl(Inline)]

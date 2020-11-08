@@ -11,18 +11,32 @@ namespace Z0
 
     public readonly struct RenderPattern : ITextual
     {
-        readonly StringRef PatternRef;
+        readonly string Content;
 
         [MethodImpl(Inline)]
         public RenderPattern(string src)
-            => PatternRef = src;
+            => Content = src;
 
         public string PatternText
         {
             [MethodImpl(Inline)]
-            get => PatternRef;
+            get => Content;
         }
 
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => text.empty(Content);
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => text.nonempty(Content);
+        }
+
+        public string Apply(params object[] args)
+            => string.Format(Content, args);
         public string Format()
             => PatternText;
 

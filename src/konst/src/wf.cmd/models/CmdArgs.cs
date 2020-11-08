@@ -39,5 +39,23 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator CmdArgs(CmdArg[] src)
             => new CmdArgs(src);
+
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Data.IsEmpty;
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Data.IsNonEmpty;
+        }
+
+        public static CmdArgs Empty
+        {
+            [MethodImpl(Inline)]
+            get => new CmdArgs(sys.empty<CmdArg>());
+        }
     }
 }

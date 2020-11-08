@@ -6,45 +6,27 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.IO;
 
     using static z;
     using static Konst;
     using static ApiDataModel;
 
-    [PartService(ApiNames.Workers)]
-    struct Workers : ICmdRouter<Workers>
+    struct Workers : IWfService<Workers>
     {
+        WfHost Host;
+
         IWfShell Wf;
-
-        CmdWorkers WorkerIndex;
-
-        IndexedView<CmdId> Commands;
-
-        public IndexedView<CmdId> SupportedCommands
-            => Commands;
-
-        bool Accepting;
-
-        public static Workers init(IWfShell wf)
-        {
-            var workers = default(Workers);
-            workers.Init(wf);
-            return workers;
-        }
 
         public void Init(IWfShell wf)
         {
-            Wf = wf;
-            WorkerIndex = default;
-            WorkerIndex = CmdWorkers.create();
-            Commands = array(Cmd.id<EmitHexIndexCmd>(), Cmd.id<EmitRuntimeIndexCmd>());
-            Accepting = true;
+            Host = WfSelfHost.create(typeof(Workers));
+            Wf = wf.WithHost(Host);
         }
 
         [CmdWorker]
-        public CmdResult exec(EmitHexIndexCmd cmd)
+        public CmdResult Route(EmitHexIndexCmd cmd)
         {
-            require(Accepting);
             var dst = Wf.Db().Table("apihex.index");
             var descriptors = ApiCode.BlockDescriptors(Wf);
             var count= ApiCode.emit(descriptors, dst);
@@ -53,13 +35,11 @@ namespace Z0
         }
 
         [CmdWorker]
-        public CmdResult exec(EmitRuntimeIndexCmd cmd)
+        public CmdResult Route(EmitRuntimeIndexCmd cmd)
         {
-            require(Accepting);
-
             var hosts = Wf.Api.ApiHosts;
             var kHost = (uint)hosts.Length;
-            Wf.Status(Status.IndexingHosts.Format(kHost));
+            Wf.Status(Status.IndexingHosts.Apply(kHost));
 
             var members  = @readonly(ApiRuntime.index(Wf));
             var target = Wf.Db().IndexFile("api.members");
@@ -75,9 +55,36 @@ namespace Z0
             return Cmd.ok(cmd);
         }
 
-        public CmdResult Dispatch(CmdSpec cmd)
+        [CmdWorker]
+        public CmdResult Route(EmitResourceDataCmd cmd)
+            => exec(Wf, cmd);
+
+        public static CmdResult exec(IWfShell wf, EmitResourceDataCmd cmd)
         {
-            return default;
+            var query = cmd.Match.IsEmpty ? Resources.query(cmd.Source) : Resources.query(cmd.Source, cmd.Match);
+            var count = query.ResourceCount;
+
+            if(count == 0)
+                wf.Warn(Warnings.NoMatchingResources.Apply(cmd.Source, cmd.Match));
+            else
+                wf.Status(Status.EmittingResources.Apply(cmd.Source, count));
+
+            if(cmd.ClearTarget)
+                cmd.Target.Clear();
+
+            var invalid = Path.GetInvalidPathChars();
+            var descriptors = query.Descriptors();
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var descriptor = ref skip(descriptors,i);
+                var name =  descriptor.Name.ToString().ReplaceAny(invalid, Chars.Underscore);
+                var target = cmd.Target + FS.file(name);
+                var utf = Resources.utf8(descriptor);
+                using var writer = target.Writer();
+                writer.Write(utf);
+                wf.EmittedFile(utf.Length, target);
+            }
+            return Cmd.ok(cmd);
         }
     }
 }

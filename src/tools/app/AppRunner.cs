@@ -18,7 +18,6 @@ namespace Z0
 
         readonly IFileDb Db;
 
-        readonly ICmdRouter Router;
 
         public AppRunner(IWfShell wf, WfHost host)
         {
@@ -28,7 +27,6 @@ namespace Z0
             Args = wf.Args;
             CmdBuilder = wf.CmdBuilder();
             Db = Wf.Db();
-            Router = CmdRouter.create(wf);
         }
 
         public void Dispose()
@@ -36,15 +34,16 @@ namespace Z0
             Wf.Disposed();
         }
 
-        void Run(ToolCmd src)
-        {
-
-        }
 
         public void Run()
         {
             using var runner = new ToolRunner(Wf, Host);
-            runner.Run();
+            var cmd = Wf.CmdCatalog.EmitResourceData();
+            cmd.Source = Parts.Refs.Assembly;
+            cmd.Target = Wf.Db().RefDataRoot() + FS.folder("test.emission");
+            cmd.ClearTarget = true;
+
+            runner.Run(cmd);
         }
     }
 }

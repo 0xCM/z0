@@ -29,6 +29,6 @@ namespace Z0
         where C : struct, ICmdSpec<C>
     {
         CmdId ICmdResult.Id
-            => default(C).CmdId;
+            => default(C).Id;
     }
 }

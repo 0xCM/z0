@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct CmdWorker<C> : ICmdWorkerHost<CmdWorker<C>, C>
+    public readonly struct CmdWorker<C> : ICmdWorker<CmdWorker<C>, C>
         where C : struct, ICmdSpec<C>
     {
         readonly CmdWorkerFunction<C> Fx;
@@ -20,14 +20,11 @@ namespace Z0
             => Fx = fx;
 
         public CmdId CmdId
-            => default(C).CmdId;
+            => default(C).Id;
 
         [MethodImpl(Inline)]
-        public CmdResult Invoke(IWfShell wf, C cmd)
-            => Fx(wf,cmd);
-
-        public CmdResult Invoke(IWfShell wf, CmdSpec cmd)
-            => @throw<CmdResult>(missing());
+        public CmdResult Invoke(C cmd)
+            => Fx(cmd);
 
         [MethodImpl(Inline)]
         public static implicit operator CmdWorker<C>(CmdWorkerFunction<C> fx)

@@ -6,7 +6,6 @@ namespace Z0
 {
     using Free =System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-
     public enum WfServiceRole : uint
     {
         Unspecified = 0,
@@ -17,9 +16,13 @@ namespace Z0
     [Free]
     public interface IWfService
     {
-        WfServiceRole Role => WfServiceRole.Unspecified;
+        void Init(IWfShell wf);
 
-        ClrArtifactKey ServiceId => GetType().MetadataToken;
+        WfServiceRole Role
+            => WfServiceRole.Unspecified;
+
+        ClrArtifactKey ServiceId
+            => GetType().MetadataToken;
     }
 
     /// <summary>
@@ -30,6 +33,6 @@ namespace Z0
     public interface IWfService<H> : IWfService
         where H : IWfService<H>, new()
     {
-        void Init(IWfShell wf);
+
     }
 }

@@ -26,6 +26,10 @@ namespace Z0
         public static EmitApiSummariesCmd EmitApiSummaries(this ICmdCatalog wf)
             => default;
 
+        [MethodImpl(Inline), Op]
+        public static EmitResourceDataCmd EmitResourceData(this ICmdCatalog wf)
+            => default;
+
         [MethodImpl(Inline)]
         public static EmitAsmSymbolsCmd EmitAsmSymbols(this ICmdCatalog wf)
             => default;
@@ -67,9 +71,9 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static EmitResDataCmd EmitResData(this CmdBuilder builder, Assembly src, string id, string match = null)
+        public static EmitResourceDataCmd EmitResourceData(this CmdBuilder builder, Assembly src, string id, string match = null)
         {
-            var dst = new EmitResDataCmd();
+            var dst = new EmitResourceDataCmd();
             dst.Source = src;
             dst.Target = builder.Db.RefDataRoot() + FS.folder(id);
             dst.Match = match ?? EmptyString;

@@ -13,7 +13,6 @@ namespace Z0
     {
         readonly RenderPattern Pattern;
 
-
         [MethodImpl(Inline)]
         public RenderPattern(string src)
             => Pattern = src;
@@ -39,6 +38,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator RenderPattern<A0,A1,A2,A3>(RenderPattern src)
             => new RenderPattern<A0,A1,A2,A3>(src);
-
     }
 }

@@ -10,22 +10,26 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public struct CmdSpec : ICmdSpec, ITextual
+    /// <summary>
+    /// Represents a path to a file that defines a solution
+    /// </summary>
+    public readonly struct SolutionFile : ITextual
     {
-        public CmdId CmdId {get;}
-
-        public CmdArgs Args {get;}
+        public FS.FilePath Path {get;}
 
         [MethodImpl(Inline)]
-        public CmdSpec(CmdId id, params CmdArg[] args)
-        {
-            CmdId = id;
-            Args = args;
-        }
+        public SolutionFile(FS.FilePath src)
+            => Path = src;
+
+        [MethodImpl(Inline)]
         public string Format()
-            => CmdId.Format();
+            => Path.Format();
 
         public override string ToString()
             => Format();
+
+        [MethodImpl(Inline)]
+        public static implicit operator SolutionFile(FS.FilePath src)
+            => new SolutionFile(src);
     }
 }

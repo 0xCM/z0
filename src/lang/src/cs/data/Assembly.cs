@@ -7,13 +7,10 @@ namespace Z0.Lang.Cs
     using System;
 
     using R = System.Reflection;
-    using CA = Microsoft.CodeAnalysis;
-
-    using Microsoft.CodeAnalysis;
 
     partial struct DataModel
     {
-        public struct Assembly : ICsRecord<Assembly>
+        public struct Assembly : ILanguageTable<Assembly>
         {
 
         }

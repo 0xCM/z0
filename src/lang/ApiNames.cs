@@ -23,5 +23,19 @@ namespace Z0
         public const string CilTableBuilder = cil + dot + tables + dot + builder;
 
         public const string CilTables = cil + dot + tables;
+
+        public const string FilePathParser = parsers + dot + files + dot + paths;
+
+        public const string SyntaxModels = syntax + dot + models;
+
+        public const string SyntaxParsers = syntax + dot + parsers;
+
+        public const string SyntaxParserCases = syntax + dot + parsers + dot + cases;
+
+        public const string BufferSegments = buffers + dot + segments;
+
+        public const string StateBuffers = buffers + dot + states;
+
+        public const string FixedBuffers = buffers + dot + @fixed;
     }
 }

@@ -62,10 +62,10 @@ namespace Z0
                 receiver(skip(buffer, i));
         }
 
-        public static void apply<I,T>(Loop<I> loop, in FixedBuffer<T> src)
-            where I : unmanaged
-        {
+        // public static void apply<I,T>(Loop<I> loop, in FixedBuffer<T> src)
+        //     where I : unmanaged
+        // {
 
-        }
+        // }
     }
 }

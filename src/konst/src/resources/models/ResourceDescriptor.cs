@@ -12,14 +12,14 @@ namespace Z0
 
     public readonly struct ResourceDescriptor : IComparable<ResourceDescriptor>, IEquatable<ResourceDescriptor>, ITextual, IAddressable
     {
-        public StringRef Name {get;}
+        public utf8 Name {get;}
 
         public MemoryAddress Address {get;}
 
         public ByteSize Size {get;}
 
         [MethodImpl(Inline)]
-        public ResourceDescriptor(string name, MemoryAddress address, ByteSize size)
+        public ResourceDescriptor(utf8 name, MemoryAddress address, ByteSize size)
         {
             Name = name;
             Address = address;
@@ -40,7 +40,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => Render.format(Address, Size, Name);
+            => string.Format(RP.PSx3, Address, Size, Name);
 
         public override string ToString()
             => Format();

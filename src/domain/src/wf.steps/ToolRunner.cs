@@ -28,6 +28,8 @@ namespace Z0
 
         readonly IFileDb Db;
 
+        readonly ICmdRouter Router;
+
         public ToolRunner(IWfShell wf, WfHost host)
         {
             Host = host;
@@ -36,6 +38,8 @@ namespace Z0
             Args = wf.Args;
             CmdBuilder = wf.CmdBuilder();
             Db = Wf.Db();
+            Router = Cmd.router(wf);
+
         }
 
         public void Dispose()
@@ -56,7 +60,7 @@ namespace Z0
             => EmitToolScripts.run(Wf, EmitToolScripts.specify(Wf));
 
         CmdResult EmitToolHelp()
-            => EmitResData.run(Wf, CmdBuilder.EmitResData(Parts.Refs.Assembly, "tools/help", ".help"));
+            => EmitResourceData.run(Wf, CmdBuilder.EmitResourceData(Parts.Refs.Assembly, "tools/help", ".help"));
 
         CmdResult EmitFileList()
             => FileEmissions.exec(Wf.EmitFileListCmdSample());
@@ -184,9 +188,16 @@ namespace Z0
             Show(listing);
         }
 
-        public void Run(CmdSpec spec)
+        public void Run(ICmdSpec spec)
         {
+            Router.Dispatch(spec);
+        }
 
+        public void Run<T>(T spec)
+            where T : struct, ICmdSpec<T>
+        {
+            Wf.Status(Status.Dispatching<T>().Apply(spec));
+            Router.Dispatch(spec);
         }
 
         void ShowDependencies()
@@ -231,7 +242,7 @@ namespace Z0
             if(result.Succeeded)
             {
                 var value = result.Value;
-                var msg = string.Format("cmd:{0} | options:{1}", value.Id, Cmd.format(value.Options));
+                var msg = string.Format("cmd:{0} | options:{1}", value.CmdId, Cmd.format(value.Args));
                 Wf.Status(msg);
 
             }

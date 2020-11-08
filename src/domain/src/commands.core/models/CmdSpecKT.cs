@@ -13,18 +13,18 @@ namespace Z0
         where K : unmanaged
         where T : struct
     {
-        public CmdId Id;
+        public CmdId Id {get;}
 
-        public CmdArgs<K,T> Options;
+        public CmdArgs<K,T> Args;
 
         [MethodImpl(Inline)]
         public CmdSpec(CmdId id, params CmdArg<K,T>[] options)
         {
             Id = id;
-            Options = options;
+            Args = options;
         }
 
-        CmdId ICmdSpec.CmdId
-            => Id;
+        CmdArgs ICmdSpec.Args
+            => Cmd.args(this);
     }
 }

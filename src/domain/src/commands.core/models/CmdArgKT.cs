@@ -15,9 +15,9 @@ namespace Z0
     public struct CmdArg<K,T> : ICmdArg<K,T>
         where K : unmanaged
     {
-        public K Kind;
+        public K Kind {get;}
 
-        public T Value;
+        public T Value {get;}
 
         [MethodImpl(Inline)]
         public CmdArg(K kind, T value)
@@ -39,7 +39,7 @@ namespace Z0
         public override string ToString()
             => Format();
 
-        K ICmdArg<K, T>.Key
+        K ICmdArg<K,T>.Key
             => Kind;
 
         T ICmdArg<T>.Value

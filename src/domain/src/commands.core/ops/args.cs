@@ -12,6 +12,11 @@ namespace Z0
 
     partial struct Cmd
     {
+        public static CmdArgs args<K,T>(CmdSpec<K,T> src)
+            where K : unmanaged
+            where T : struct
+                => new CmdArgs(src.Args.Storage.Map(x => new CmdArg(x.Kind.ToString(), x.Value.ToString())));
+
         /// <summary>
         /// Creates a <see cref='CmdArgs'/> collection from an array
         /// </summary>

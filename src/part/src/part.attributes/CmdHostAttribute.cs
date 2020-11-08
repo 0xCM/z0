@@ -9,9 +9,15 @@ namespace Z0
     /// <summary>
     /// Identifies a command host
     /// </summary>
-    public class CmdHostAttribute : Attribute
+    public class CmdRouterAttribute : PartServiceAttribute
     {
-        public CmdHostAttribute()
+        public CmdRouterAttribute(string name)
+            : base(name)
+        {
+
+        }
+
+        public CmdRouterAttribute()
         {
 
         }

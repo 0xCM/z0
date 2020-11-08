@@ -4,11 +4,17 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    [Cmd]
-    public struct EmitRenderPatternsCmd : ICmdSpec<EmitRenderPatternsCmd>
-    {
-        public ClrType Source;
+    using System.Reflection;
 
-        public FS.FilePath Target;
+    [Cmd]
+    public struct EmitResourceDataCmd : ICmdSpec<EmitResourceDataCmd>
+    {
+        public Assembly Source;
+
+        public FS.FolderPath Target;
+
+        public utf8 Match;
+
+        public bool ClearTarget;
     }
 }

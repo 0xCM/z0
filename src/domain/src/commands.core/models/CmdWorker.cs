@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct CmdWorker : ICmdWorkerHost<CmdWorker>
+    public readonly struct CmdWorker : ICmdWorker
     {
         readonly CmdWorkerFunction Fx;
 
@@ -24,7 +24,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public CmdResult Invoke(IWfShell wf, CmdSpec cmd)
-            => Fx(wf,cmd);
+        public CmdResult Invoke(ICmdSpec cmd)
+            => Fx(cmd);
     }
 }

@@ -19,7 +19,7 @@ namespace Z0
         ToolId IToolCmd.ToolId
             => Cmd.toolid<T>();
 
-        CmdId ICmdSpec.CmdId
+        CmdId IIdentified<CmdId>.Id
             => Cmd.id<T>();
     }
 

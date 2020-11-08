@@ -24,7 +24,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public CmdSucceeded(CmdSpec cmd, CorrelationToken ct, FlairKind flair = FlairKind.Ran)
         {
-            EventId = (EventName, cmd.Id, ct);
+            EventId = (EventName, cmd.CmdId, ct);
             Cmd = cmd;
             Flair = flair;
         }
