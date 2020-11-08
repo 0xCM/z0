@@ -4,14 +4,13 @@
 //-----------------------------------------------------------------------------
 using System;
 using System.Reflection;
-using System.IO;
 
 [assembly: AssemblyDescription("I am a part, a harbinger of the many")]
 [assembly: PartId(PartId.Part)]
 
 namespace Z0.Parts
 {
-    public sealed class Part : Part<Part>
+    public sealed partial class Part : Part<Part>
     {
 
     }

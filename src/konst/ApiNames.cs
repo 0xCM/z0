@@ -7,6 +7,10 @@ using static ApiNameParts;
 [ApiNameProvider]
 readonly struct ApiNames
 {
+    public const string DataFlows = data + dot + flow;
+
+    public const string Rules = rules;
+
     public const string AppMsg = app + dot + msg;
 
     public const string AppErrors = app + dot + errors;
@@ -70,7 +74,6 @@ readonly struct ApiNames
     public const string BitLogicScalar = bitlogic + dot + scalar;
 
     public const string BitLogicBytes = bitlogic + dot + bytes;
-
 
     // ~~ Blocks
     // ~~ -----------------------------------------------------------------------------------------
@@ -219,7 +222,6 @@ readonly struct ApiNames
     public const string TextResources = resources + dot + text;
 
 
-
     // ~~ Symbolic
     // ~~ -----------------------------------------------------------------------------------------
 
@@ -343,10 +345,6 @@ readonly struct ApiNames
 
     public const string SFxFactories = sfunc + dot + functions + dot + factories;
 
-    const string fs = nameof(fs);
-
-    const string map = nameof(map);
-
     public const string FS = fs;
 
     public const string XFs = fs + dot + extensions;
@@ -354,5 +352,4 @@ readonly struct ApiNames
     public const string Seq = seq;
 
     public const string SeqMap = seq + dot + map;
-
 }

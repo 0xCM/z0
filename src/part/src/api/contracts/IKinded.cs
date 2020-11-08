@@ -6,14 +6,19 @@ namespace Z0
 {
     using System;
 
-    public interface IKinded<K> : ITypedLiteral<K>, ITextual
-        where K : unmanaged, Enum
-    {
-        K Literal {get;}
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-        K ITypedLiteral<K>.Class
-            => Literal;
+    /// <summary>
+    /// Characterizes a kinded thing
+    /// </summary>
+    /// <typeparam name="K">The classifier type</typeparam>
+    [Free]
+    public interface IKinded<K> : ITextual
+        where K : unmanaged
+    {
+        K Kind {get;}
+
         string ITextual.Format()
-            => Literal.ToString();
+            => Kind.ToString();
     }
 }

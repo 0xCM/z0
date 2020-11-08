@@ -6,11 +6,12 @@ namespace Z0
 {
     using System;
 
-    using static Part;
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     /// <summary>
     /// Characterizes a render buffer
     /// </summary>
+    [Free]
     public interface IRenderBuffer
     {
         void Clear();
@@ -20,6 +21,7 @@ namespace Z0
     /// Characterizes an that produces accumulated content as T-cells
     /// </summary>
     /// <typeparam name="T">The emission target type</typeparam>
+    [Free]
     public interface IRenderBuffer<T> : IRenderBuffer
     {
         T Emit(bool reset = true);
@@ -30,6 +32,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="S">The input source type</typeparam>
     /// <typeparam name="T">The emission target type</typeparam>
+    [Free]
     public interface IRenderBuffer<S,T> : IRenderBuffer<T>
     {
         void Append(S src);

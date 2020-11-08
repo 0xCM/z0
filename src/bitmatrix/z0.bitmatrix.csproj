@@ -8,11 +8,11 @@
     <ProjectReference Include="$(Imagine)" />
     <ProjectReference Include="$(Matrix)" />
     <ProjectReference Include="$(Numeric)" />
-    <ProjectReference Include="$(Blocked)" />
     <ProjectReference Include="$(BitCore)" />
     <ProjectReference Include="$(BitVectors)" />
     <ProjectReference Include="$(GVec)" />
     <ProjectReference Include="$(LSquare)" />
+    <ProjectReference Include="$(Blocked)" />
 
   </ItemGroup>
 

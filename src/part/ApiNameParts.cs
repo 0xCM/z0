@@ -375,4 +375,14 @@ public readonly struct ApiNameParts
     public const string render = nameof(render);
 
     public const string cil = nameof(cil);
+
+    public const string rules = nameof(rules);
+
+    public const string fs = nameof(fs);
+
+    public const string map = nameof(map);
+
+    public const string flow = nameof(flow);
+
+    public const string flows= nameof(flows);
 }

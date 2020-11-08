@@ -4,11 +4,15 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
+    [Free]
     public interface IStateful
     {
         object State {get;}
     }
 
+    [Free]
     public interface IStateful<S> : IStateful
     {
         new S State {get;}
@@ -17,10 +21,10 @@ namespace Z0
             => State;
     }
 
+    [Free]
     public interface IStateful<H,C> : IStateful<C>
         where H : struct, IStateful<H,C>
     {
-
 
     }
 }

@@ -12,9 +12,10 @@
     <ProjectReference Include="$(Dynamic)" />
     <ProjectReference Include="$(GVec)" />
     <ProjectReference Include="$(Blocked)" />
-    <ProjectReference Include="$(Machine)" />
-    <ProjectReference Include="$(Run)" />
     <ProjectReference Include="$(VSvc)" />
+    <ProjectReference Include="$(BitSvc)" />
+    <ProjectReference Include="$(Merge)" />
+
   </ItemGroup>
 
 </Project>
