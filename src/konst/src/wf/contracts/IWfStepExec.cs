@@ -59,7 +59,7 @@ namespace Z0
             }
         }
 
-        FlowType<S,T> Type
+        LinkType<S,T> Type
             => DataFlows.type<S,T>();
     }
 }

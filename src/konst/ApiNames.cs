@@ -352,4 +352,6 @@ readonly struct ApiNames
     public const string Seq = seq;
 
     public const string SeqMap = seq + dot + map;
+
+    public const string DataModels = data + dot + models;
 }

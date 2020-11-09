@@ -11,7 +11,7 @@ namespace Z0
 
     using api = DataFlows;
 
-    public readonly struct FlowType : IEquatable<FlowType>
+    public readonly struct LinkType : IEquatable<LinkType>
     {
         public Type Source {get;}
 
@@ -20,7 +20,7 @@ namespace Z0
         public Type Kind {get;}
 
         [MethodImpl(Inline)]
-        internal FlowType(Type src, Type dst)
+        internal LinkType(Type src, Type dst)
         {
             Source = src;
             Target = dst;
@@ -28,7 +28,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        internal FlowType(Type kind, Type src, Type dst)
+        internal LinkType(Type kind, Type src, Type dst)
         {
             Kind = kind;
             Source = src;
@@ -36,7 +36,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public bool Equals(FlowType src)
+        public bool Equals(LinkType src)
             => api.eq(this, src);
 
         [MethodImpl(Inline)]
@@ -50,22 +50,22 @@ namespace Z0
             => (int)api.hash32(this);
 
         public override bool Equals(object src)
-            => src is FlowType x && Equals(x);
+            => src is LinkType x && Equals(x);
 
         [MethodImpl(Inline)]
-        public static bool operator ==(FlowType a, FlowType b)
+        public static bool operator ==(LinkType a, LinkType b)
             => a.Equals(b);
 
         [MethodImpl(Inline)]
-        public static bool operator !=(FlowType a, FlowType b)
+        public static bool operator !=(LinkType a, LinkType b)
             => !a.Equals(b);
 
         [MethodImpl(Inline)]
-        public static implicit operator FlowType((Type src, Type dst) x)
-            => new FlowType(x.src, x.dst);
+        public static implicit operator LinkType((Type src, Type dst) x)
+            => new LinkType(x.src, x.dst);
 
         [MethodImpl(Inline)]
-        public static implicit operator FlowType((Type src, Type dst, Type kind) x)
-            => new FlowType(x.src, x.dst, x.kind);
+        public static implicit operator LinkType((Type src, Type dst, Type kind) x)
+            => new LinkType(x.src, x.dst, x.kind);
     }
 }

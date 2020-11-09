@@ -27,7 +27,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator FlowType<S,T>(WfStepId<S,T> src)
+        public static implicit operator LinkType<S,T>(WfStepId<S,T> src)
             => src.Type;
 
         [MethodImpl(Inline)]
@@ -36,7 +36,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator Type(WfStepId<S,T> src)
-            => FlowType<S,T>.Type;
+            => LinkType<S,T>.Type;
 
         /// <summary>
         /// The step controller
@@ -50,7 +50,7 @@ namespace Z0
         public Type Target
             => typeof(S);
 
-        public FlowType<S,T> Type
+        public LinkType<S,T> Type
             => default;
 
         /// <summary>
@@ -77,7 +77,7 @@ namespace Z0
         public uint Hashed
         {
             [MethodImpl(Inline)]
-            get => default(FlowType<S,T>).Hashed;
+            get => default(LinkType<S,T>).Hashed;
         }
 
         public ulong Hash64

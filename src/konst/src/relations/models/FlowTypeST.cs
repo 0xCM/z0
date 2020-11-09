@@ -10,24 +10,24 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct FlowType<S,T>
+    public readonly struct LinkType<S,T>
     {
         public Type Source {get;}
 
         public Type Target {get;}
 
         public static Type Type
-            => typeof(FlowType<S,T>);
+            => typeof(LinkType<S,T>);
 
         [MethodImpl(Inline)]
-        internal FlowType(Type src, Type dst)
+        internal LinkType(Type src, Type dst)
         {
             Source = src;
             Target = dst;
         }
 
         [MethodImpl(Inline)]
-        public bool Equals(FlowType src)
+        public bool Equals(LinkType src)
             => DataFlows.eq(this, src);
 
         [MethodImpl(Inline)]
@@ -37,7 +37,7 @@ namespace Z0
         public uint Hashed
         {
             [MethodImpl(Inline)]
-            get => (uint)typeof(FlowType<S,T>).GetHashCode();
+            get => (uint)typeof(LinkType<S,T>).GetHashCode();
         }
 
         public ulong Hash64
@@ -49,11 +49,11 @@ namespace Z0
         public override int GetHashCode()
             => (int)Hashed;
 
-        public static implicit operator Type(FlowType<S,T> src)
-            => typeof(FlowType<S,T>);
+        public static implicit operator Type(LinkType<S,T> src)
+            => typeof(LinkType<S,T>);
 
         [MethodImpl(Inline)]
-        public static implicit operator FlowType(FlowType<S,T> src)
-            => new FlowType(src.Source, src.Target);
+        public static implicit operator LinkType(LinkType<S,T> src)
+            => new LinkType(src.Source, src.Target);
     }
 }

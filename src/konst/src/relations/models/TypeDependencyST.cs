@@ -23,7 +23,7 @@ namespace Z0
             => string.Format(RP.ArrowAxB, Source.Name, Target.Name);
 
         [MethodImpl(Inline)]
-        public static implicit operator FlowType<S,T>(TypeDependency<S,T> src)
+        public static implicit operator LinkType<S,T>(TypeDependency<S,T> src)
             => default;
 
         [MethodImpl(Inline)]

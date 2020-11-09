@@ -28,7 +28,7 @@ namespace Z0
         public string Format()
             => text.format("{0} -> {1}", Source, Target);
 
-        public FlowType<S,T> Type
+        public LinkType<S,T> Type
         {
             [MethodImpl(Inline)]
             get => api.type(Source,Target);
@@ -43,7 +43,7 @@ namespace Z0
             => new DataFlow<S,T>(x.Left, x.Right);
 
         [MethodImpl(Inline)]
-        public static implicit operator FlowType<S,T>(DataFlow<S,T> x)
+        public static implicit operator LinkType<S,T>(DataFlow<S,T> x)
             => x.Type;
     }
 }

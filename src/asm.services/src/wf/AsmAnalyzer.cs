@@ -13,7 +13,7 @@ namespace Z0.Asm
     public readonly struct AsmAnalyzer
     {
         [MethodImpl(Inline)]
-        public static ReadOnlySpan<Arrow<Imm64,IceRegister>> moves(in AsmRoutine src, int capacity = 10)
+        public static ReadOnlySpan<Link<Imm64,IceRegister>> moves(in AsmRoutine src, int capacity = 10)
         {
             var hander = new AsmMovHandler(capacity);
             var fx = span(src.Instructions.Data);

@@ -22,7 +22,7 @@ namespace Z0
     }
 
     [Free]
-    public interface IArrow<T> : IArrow<T,T>
+    public interface ILink<T> : IArrow<T,T>
     {
 
     }
@@ -40,8 +40,8 @@ namespace Z0
     }
 
     [Free]
-    public interface IArrow<F,S,T> : IArrow<S,T>
-        where F : IArrow<F,S,T>
+    public interface ILink<F,S,T> : IArrow<S,T>
+        where F : ILink<F,S,T>
     {
 
     }

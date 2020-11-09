@@ -15,7 +15,7 @@ namespace Z0
     /// </summary>
     public readonly struct ApiDependency<T>
     {
-        public static implicit operator Arrow<T>(ApiDependency<T> src)
+        public static implicit operator Link<T>(ApiDependency<T> src)
             => src.Arrow;
 
         readonly Pair<T> Data;
@@ -36,7 +36,7 @@ namespace Z0
             get => Data.Right;
         }
 
-        public Arrow<T> Arrow
+        public Link<T> Arrow
         {
             [MethodImpl(Inline)]
             get => Data;

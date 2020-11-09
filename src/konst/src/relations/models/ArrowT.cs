@@ -9,14 +9,14 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct Arrow<T> : IArrow<T>
+    public readonly struct Link<T> : ILink<T>
     {
         public T Source {get;}
 
         public T Target {get;}
 
         [MethodImpl(Inline)]
-        public Arrow(T src, T dst)
+        public Link(T src, T dst)
         {
             Source = src;
             Target = dst;
@@ -42,15 +42,15 @@ namespace Z0
             => Format();
 
         [MethodImpl(Inline)]
-        public static implicit operator Arrow<T>((T src, T dst) x)
-            => new Arrow<T>(x.src,x.dst);
+        public static implicit operator Link<T>((T src, T dst) x)
+            => new Link<T>(x.src,x.dst);
 
         [MethodImpl(Inline)]
-        public static implicit operator Arrow<T>(Pair<T> x)
-            => new Arrow<T>(x.Left,x.Right);
+        public static implicit operator Link<T>(Pair<T> x)
+            => new Link<T>(x.Left,x.Right);
 
         [MethodImpl(Inline)]
-        public static implicit operator (T src, T dst)(Arrow<T> a)
+        public static implicit operator (T src, T dst)(Link<T> a)
             => (a.Source, a.Target);
     }
 }

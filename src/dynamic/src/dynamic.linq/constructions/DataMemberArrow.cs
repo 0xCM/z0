@@ -12,7 +12,7 @@ namespace Z0.Dynamics
     /// <summary>
     /// Defines a directed association between two data members
     /// </summary>
-    public class DataMemberArrow : IArrow<ClrDataMember>
+    public class DataMemberArrow : ILink<ClrDataMember>
     {
         /// <summary>
         /// The supplier member

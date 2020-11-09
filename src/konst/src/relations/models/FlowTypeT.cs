@@ -11,23 +11,23 @@ namespace Z0
     using static z;
 
     /// <summary>
-    /// Defines the type signature for a node-homogenous arrow
+    /// Defines the type signature for a node-homogenous link
     /// </summary>
-    public readonly struct FlowType<T>
+    public readonly struct LinkType<T>
     {
         public Type Source {get;}
 
         public Type Target {get;}
 
         [MethodImpl(Inline)]
-        internal FlowType(Type src, Type dst)
+        internal LinkType(Type src, Type dst)
         {
             Source = src;
             Target = dst;
         }
 
         [MethodImpl(Inline)]
-        public bool Equals(FlowType src)
+        public bool Equals(LinkType src)
             => DataFlows.eq(this, src);
 
         [MethodImpl(Inline)]
@@ -37,7 +37,7 @@ namespace Z0
         public uint Hashed
         {
             [MethodImpl(Inline)]
-            get => (uint)typeof(FlowType<T>).GetHashCode();
+            get => (uint)typeof(LinkType<T>).GetHashCode();
         }
 
         public ulong Hash64
@@ -49,14 +49,14 @@ namespace Z0
         public override int GetHashCode()
             => (int)Hashed;
 
-        public static implicit operator Type(FlowType<T> src)
-            => typeof(FlowType<T>);
+        public static implicit operator Type(LinkType<T> src)
+            => typeof(LinkType<T>);
 
         [MethodImpl(Inline)]
-        public static implicit operator FlowType(FlowType<T> src)
-            => new FlowType(src.Source, src.Target);
+        public static implicit operator LinkType(LinkType<T> src)
+            => new LinkType(src.Source, src.Target);
 
         public static Type Type
-            => typeof(FlowType<T>);
+            => typeof(LinkType<T>);
     }
 }

@@ -32,43 +32,43 @@ namespace Z0
                 => z.paired(src,dst);
 
         [MethodImpl(Inline), Op]
-        public static uint hash32(FlowType src)
+        public static uint hash32(LinkType src)
             => hash(src.Source) ^ hash(src.Target) ^ hash(src.Kind);
 
         [MethodImpl(Inline), Op]
-        public static ulong hash64(FlowType src)
+        public static ulong hash64(LinkType src)
             => hash(src.Kind, src.Source, src.Target);
 
         [MethodImpl(Inline), Op]
-        public static bool eq(FlowType a, FlowType b)
+        public static bool eq(LinkType a, LinkType b)
             => a.Source == b.Source && a.Target == b.Target;
 
         [MethodImpl(Inline), Op]
-        public static string format(FlowType t)
+        public static string format(LinkType t)
             => text.format("{0} -> {1}", t.Source.Name, t.Target.Name);
 
         [MethodImpl(Inline), Op]
-        public static string format<S,T>(FlowType<S,T> t)
+        public static string format<S,T>(LinkType<S,T> t)
             => text.format("{0} -> {1}", t.Source.Name, t.Target.Name);
 
         [MethodImpl(Inline)]
-        public static FlowType<S,T> type<S,T>(S s = default, T t = default)
-            => new FlowType<S,T>(typeof(S),typeof(T));
+        public static LinkType<S,T> type<S,T>(S s = default, T t = default)
+            => new LinkType<S,T>(typeof(S),typeof(T));
 
         [MethodImpl(Inline), Op]
-        public static FlowType type(Type src, Type dst)
-            => new FlowType(src,dst);
+        public static LinkType type(Type src, Type dst)
+            => new LinkType(src,dst);
 
         [MethodImpl(Inline)]
         public static string identify<S,T>(T src, S dst)
             => string.Format("{0} -> {1}", src, dst);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Arrow<T> link<T>(T src, T dst)
-            => new Arrow<T>(src,dst);
+        public static Link<T> link<T>(T src, T dst)
+            => new Link<T>(src,dst);
 
         [MethodImpl(Inline)]
-        public static Arrow<S,T> connect<S,T>(S src, T dst)
-            => new Arrow<S,T>(src, dst);
+        public static Link<S,T> connect<S,T>(S src, T dst)
+            => new Link<S,T>(src, dst);
     }
 }
