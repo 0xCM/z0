@@ -18,8 +18,11 @@ namespace Z0
         [Op]
         public static unsafe ResourceDescriptor[] descriptors(Assembly src, utf8? match = null)
         {
-            var resnames = Resources.names(src, match);
+            var resnames = Resources.names(insist(src), match);
             var count = resnames.Length;
+            if(count == 0)
+                return sys.empty<ResourceDescriptor>();
+
             var buffer = alloc<ResourceDescriptor>(count);
             var target = span(buffer);
             for(var i=0u; i<count; i++)

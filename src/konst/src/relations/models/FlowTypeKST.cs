@@ -14,21 +14,14 @@ namespace Z0
     public readonly struct FlowType<K,S,T>
         where K : unmanaged
     {
-        public readonly Type Kind;
+        public Type Kind {get;}
 
-        public readonly Type Source;
+        public Type Source {get;}
 
-        public readonly Type Target;
+        public Type Target {get;}
 
         public static Type Type
             => typeof(Arrow<K,S,T>);
-
-        public static implicit operator Type(FlowType<K,S,T> src)
-            => typeof(Arrow<K,S,T>);
-
-        [MethodImpl(Inline)]
-        public static implicit operator FlowType(FlowType<K,S,T> src)
-            => new FlowType(src.Kind, src.Source, src.Target);
 
         [MethodImpl(Inline)]
         internal FlowType(Type kind, Type src, Type dst)
@@ -48,5 +41,12 @@ namespace Z0
 
         public override int GetHashCode()
             => (int)api.hash32(this);
+
+        public static implicit operator Type(FlowType<K,S,T> src)
+            => typeof(Arrow<K,S,T>);
+
+        [MethodImpl(Inline)]
+        public static implicit operator FlowType(FlowType<K,S,T> src)
+            => new FlowType(src.Source, src.Target, src.Kind);
     }
 }

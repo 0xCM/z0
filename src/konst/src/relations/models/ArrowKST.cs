@@ -16,21 +16,30 @@ namespace Z0
         where K : unmanaged
     {
         /// <summary>
-        /// The kind classifier
-        /// </summary>
-        public readonly K Kind;
-
-        /// <summary>
         /// The source
         /// </summary>
-        public readonly S Source;
+        public S Source {get;}
 
         /// <summary>
         /// The target
         /// </summary>
-        public readonly T Target;
+        public T Target {get;}
 
-        public static Type Type => FlowType<K,S,T>.Type;
+        /// <summary>
+        /// The kind classifier
+        /// </summary>
+        public K Kind {get;}
+
+        [MethodImpl(Inline)]
+        public Arrow(K kind, S src, T dst)
+        {
+            Kind = kind;
+            Source = src;
+            Target = dst;
+        }
+
+        public static Type Type
+            => FlowType<K,S,T>.Type;
 
         [MethodImpl(Inline)]
         public static implicit operator Arrow<K,S,T>((K kind, S client, T supplier) x)
@@ -43,21 +52,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator Tripled<K,S,T>(Arrow<K,S,T> x)
             => (x.Kind, x.Source, x.Target);
-
-        [MethodImpl(Inline)]
-        public Arrow(K kind, S src, T dst)
-        {
-            Kind = kind;
-            Source = src;
-            Target = dst;
-        }
-
-        [MethodImpl(Inline)]
-        public void Deconstruct(out K kind, out S src, out T dst)
-        {
-            kind  = Kind;
-            src = Source;
-            dst = Target;
-        }
     }
 }

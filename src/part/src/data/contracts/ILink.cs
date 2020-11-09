@@ -21,12 +21,12 @@ namespace Z0
     [Free]
     public interface ILink<S,T> : ILink
     {
-        S A {get;}
+        S Source {get;}
 
-        T B {get;}
+        T Target {get;}
 
         string IIdentified.Identifier
-            => string.Format("{0} -- {1}", A, B);
+            => string.Format("{0} -- {1}", Source, Target);
     }
 
     /// <summary>

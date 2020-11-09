@@ -42,11 +42,4 @@ namespace Z0
     {
 
     }
-
-    [Free]
-    public interface IDataFlowHost<H,S,T,R> : IDataFlow<S,T,R>
-        where H : struct, IDataFlowHost<H,S,T,R>
-    {
-
-    }
 }

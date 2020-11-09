@@ -13,32 +13,66 @@ namespace Z0
     using static Konst;
     using static ArchiveFileKinds;
 
+    [ApiHost]
     public readonly struct RuntimeArchive : IFileArchive<RuntimeArchive>
     {
         public FS.FolderPath Root {get;}
 
         public FS.Files Files {get;}
 
+        [MethodImpl(Inline)]
         public static RuntimeArchive create()
             => new RuntimeArchive(FS.dir(RuntimeEnvironment.GetRuntimeDirectory()));
 
-        public Assembly MsBuild => Assembly.LoadFile((Root + FS.file("MsBuild", Dll)).Name);
+        [MethodImpl(Inline)]
+        public static RuntimeArchive create(FS.FolderPath src)
+            => new RuntimeArchive(src);
 
-        public Assembly MsBuildFramework => typeof(Microsoft.Build.Framework.BuildEngineResult).Assembly;
+        [Op]
+        public static string format(RuntimeAssembly src)
+            => string.Format("{0}:{1}", src.Component.GetSimpleName(), src.Path.ToUri());
 
-        public Assembly MsBuildTasks => typeof(Microsoft.Build.Tasks.AssignCulture).Assembly;
+        [MethodImpl(Inline)]
+        public static RuntimeAssembly assembly(Assembly component)
+            => new RuntimeAssembly(component, FS.path(component.Location));
 
-        public Assembly MsBuildUtilities => typeof(Microsoft.Build.Utilities.MuxLogger).Assembly;
+        [MethodImpl(Inline)]
+        public static RuntimeAssembly assembly(Assembly component, FS.FilePath path)
+            => new RuntimeAssembly(component, path);
 
-        public Assembly MsCSharp => Assembly.LoadFile((Root + FS.file("Microsoft.CSharp", Dll)).Name);
+        [MethodImpl(Inline)]
+        public static RuntimeAssembly assembly(FS.FilePath src)
+            => new RuntimeAssembly(Assembly.LoadFile(src.Name), src);
 
-        public Assembly Dia2Lib => typeof(Dia2Lib._FILETIME).Assembly;
+        public RuntimeAssembly MsBuild
+            => assembly(Root + FS.file("MsBuild", Dll));
 
-        public Assembly MsTraceEvent => typeof(Microsoft.Diagnostics.Symbols.NativeSymbolModule).Assembly;
+        public Assembly MsBuildFramework
+            => typeof(Microsoft.Build.Framework.BuildEngineResult).Assembly;
 
-        public Assembly CSharpWorkspaces => typeof(Microsoft.CodeAnalysis.CSharp.Formatting.BinaryOperatorSpacingOptions).Assembly;
+        public Assembly MsBuildTasks
+            => typeof(Microsoft.Build.Tasks.AssignCulture).Assembly;
 
-        public Assembly CodeAnalysis => typeof(Microsoft.CodeAnalysis.Emit.InstrumentationKind).Assembly;
+        public Assembly MsBuildUtilities
+            => typeof(Microsoft.Build.Utilities.MuxLogger).Assembly;
+
+        public Assembly MsCSharp
+            => assembly(Root + FS.file("Microsoft.CSharp", Dll));
+
+        public Assembly Dia2Lib
+            => typeof(Dia2Lib._FILETIME).Assembly;
+
+        public Assembly MsTraceEvent
+            => typeof(Microsoft.Diagnostics.Symbols.NativeSymbolModule).Assembly;
+
+        public Assembly CSharpWorkspaces
+            => typeof(Microsoft.CodeAnalysis.CSharp.Formatting.BinaryOperatorSpacingOptions).Assembly;
+
+        public Assembly CodeAnalysis
+            => typeof(Microsoft.CodeAnalysis.Emit.InstrumentationKind).Assembly;
+
+        public Assembly Srm
+            => typeof(System.Reflection.Metadata.AssemblyDefinition).Assembly;
 
         [MethodImpl(Inline)]
         internal RuntimeArchive(FS.FolderPath root)

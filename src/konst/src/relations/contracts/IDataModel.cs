@@ -23,10 +23,10 @@ namespace Z0
     }
 
     [Free]
-    public interface IDataModel<M,K> : IDataModel<M>
+    public interface IDataModel<M,K> : IDataModel<M>, IKinded<K>
         where M : struct, IDataModel<M,K>
-        where K : unmanaged, Enum
+        where K : unmanaged
     {
-        K Kind {get;}
+
     }
 }

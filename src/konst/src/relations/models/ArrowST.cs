@@ -11,9 +11,9 @@ namespace Z0
 
     public readonly struct Arrow<S,T> : IArrow<Arrow<S,T>,S,T>
     {
-        public readonly S Source;
+        public S Source {get;}
 
-        public readonly T Target;
+        public T Target {get;}
 
         [MethodImpl(Inline)]
         public Arrow(S src, T dst)
@@ -22,36 +22,25 @@ namespace Z0
             Target = dst;
         }
 
-        public void Deconstruct(out S src, out T dst)
-        {
-            src = Source;
-            dst = Target;
-        }
-
-        [MethodImpl(Inline)]
-        public static implicit operator Arrow<S,T>((S src, T dst) x)
-            => new Arrow<S,T>(x.src, x.dst);
-
-        [MethodImpl(Inline)]
-        public static implicit operator (S src, T dst)(Arrow<S,T> a)
-            => (a.Source, a.Target);
-
         public string Identifier
         {
             [MethodImpl(Inline)]
             get => string.Concat(Source, Connector, Target);
         }
 
-        S IArrow<S,T>.Source
-            => Source;
-
-        T IArrow<S,T>.Target
-            => Target;
-
+       [MethodImpl(Inline)]
         public string Format()
             => Identifier;
 
         public override string ToString()
             => Format();
+
+       [MethodImpl(Inline)]
+        public static implicit operator Arrow<S,T>((S src, T dst) x)
+            => new Arrow<S,T>(x.src, x.dst);
+
+        [MethodImpl(Inline)]
+        public static implicit operator (S src, T dst)(Arrow<S,T> a)
+            => (a.Source, a.Target);
     }
 }

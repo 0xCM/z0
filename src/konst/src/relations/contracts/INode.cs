@@ -10,22 +10,8 @@ namespace Z0
     using static Konst;
     using static z;
 
-    /// <summary>
-    /// Chracterizes an atomic value
-    /// </summary>
-    /// <typeparam name="T">The value type</typeparam>
-    public interface INode<T>
+    public interface INode
     {
-        /// <summary>
-        /// The defining content
-        /// </summary>
-        T Content {get;}
-
-        /// <summary>
-        /// Specifies whether the node is terminal within the defining context
-        /// </summary>
-        bool IsTerminal {get;}
-
         /// <summary>
         /// Specifies whether the node covers nonempty content
         /// </summary>
@@ -35,6 +21,18 @@ namespace Z0
         /// Specifies whether the node covers nempty content
         /// </summary>
         bool IsEmpty => !IsNonEmpty;
+    }
+
+    /// <summary>
+    /// Chracterizes an atomic value
+    /// </summary>
+    /// <typeparam name="T">The value type</typeparam>
+    public interface INode<T> : INode
+    {
+        /// <summary>
+        /// The defining content
+        /// </summary>
+        T Content {get;}
     }
 
     /// <summary>

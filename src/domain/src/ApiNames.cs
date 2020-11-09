@@ -48,6 +48,8 @@ readonly struct ApiNames
     const string scripts = nameof(scripts);
 
     public const string Scripts = scripts;
+
+    public const string WfServices = workflow + dot + services;
 }
 
 [ToolNameProvider]

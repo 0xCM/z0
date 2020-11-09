@@ -23,4 +23,3 @@ namespace Z0
             => new DataRef<T>(dst);
     }
 }
-

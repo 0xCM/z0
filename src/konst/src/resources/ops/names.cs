@@ -16,7 +16,14 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<string> names(Assembly src, utf8? match = null)
             => match != null && match.Value.IsNonEmpty
-            ? src.GetManifestResourceNames().Where(n => n.Contains(match.Value))
-            : src.GetManifestResourceNames();
+            ? src.ManifestResourceNames().Where(n => n.Contains(match.Value))
+            : src.ManifestResourceNames();
+    }
+
+    partial class XTend
+    {
+        [MethodImpl(Inline)]
+        public static string[] ManifestResourceNames(this Assembly src)
+            => src.GetManifestResourceNames() ?? sys.empty<string>();
     }
 }

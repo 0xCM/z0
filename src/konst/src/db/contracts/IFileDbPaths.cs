@@ -5,6 +5,7 @@
 namespace Z0
 {
     using System;
+    using System.Reflection;
 
     using X = ArchiveFileKinds;
     using PN = DbNames;
@@ -22,6 +23,12 @@ namespace Z0
 
         FS.FolderPath RefDataRoot()
             => Root + FS.folder(PN.Refs);
+
+        FS.FolderPath ReflectedRoot()
+            => Root + FS.folder("reflected");
+
+        FS.FolderPath Reflected(Assembly src)
+            => ReflectedRoot() + FS.folder(src.GetSimpleName());
 
         FS.FolderPath EtlRoot()
             => Root + FS.folder(PN.Etl);

@@ -11,21 +11,9 @@ namespace Z0
 
     public readonly struct Arrow<T> : IArrow<T>
     {
-        public readonly T Source;
+        public T Source {get;}
 
-        public readonly T Target;
-
-        [MethodImpl(Inline)]
-        public static implicit operator Arrow<T>((T src, T dst) x)
-            => new Arrow<T>(x.src,x.dst);
-
-        [MethodImpl(Inline)]
-        public static implicit operator Arrow<T>(Pair<T> x)
-            => new Arrow<T>(x.Left,x.Right);
-
-        [MethodImpl(Inline)]
-        public static implicit operator (T src, T dst)(Arrow<T> a)
-            => (a.Source, a.Target);
+        public T Target {get;}
 
         [MethodImpl(Inline)]
         public Arrow(T src, T dst)
@@ -53,10 +41,16 @@ namespace Z0
         public override string ToString()
             => Format();
 
-        T IArrow<T,T>.Source
-            => Source;
+        [MethodImpl(Inline)]
+        public static implicit operator Arrow<T>((T src, T dst) x)
+            => new Arrow<T>(x.src,x.dst);
 
-        T IArrow<T,T>.Target
-            => Target;
+        [MethodImpl(Inline)]
+        public static implicit operator Arrow<T>(Pair<T> x)
+            => new Arrow<T>(x.Left,x.Right);
+
+        [MethodImpl(Inline)]
+        public static implicit operator (T src, T dst)(Arrow<T> a)
+            => (a.Source, a.Target);
     }
 }

@@ -19,7 +19,7 @@ namespace Z0
         public static DataRef<T> reference<T>(in T src)
             where T : struct
                 => new DataRef<T>(typeof(T).MetadataToken);
-        public static TypeArrow<S,T> connect<S,T>()
+        public static TypeDependency<S,T> connect<S,T>()
             => default;
 
         [MethodImpl(Inline), Op]

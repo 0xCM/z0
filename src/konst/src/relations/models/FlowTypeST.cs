@@ -12,19 +12,12 @@ namespace Z0
 
     public readonly struct FlowType<S,T>
     {
-        public readonly Type Source;
+        public Type Source {get;}
 
-        public readonly Type Target;
+        public Type Target {get;}
 
         public static Type Type
             => typeof(FlowType<S,T>);
-
-        public static implicit operator Type(FlowType<S,T> src)
-            => typeof(FlowType<S,T>);
-
-        [MethodImpl(Inline)]
-        public static implicit operator FlowType(FlowType<S,T> src)
-            => new FlowType(src.Source, src.Target);
 
         [MethodImpl(Inline)]
         internal FlowType(Type src, Type dst)
@@ -55,5 +48,12 @@ namespace Z0
 
         public override int GetHashCode()
             => (int)Hashed;
+
+        public static implicit operator Type(FlowType<S,T> src)
+            => typeof(FlowType<S,T>);
+
+        [MethodImpl(Inline)]
+        public static implicit operator FlowType(FlowType<S,T> src)
+            => new FlowType(src.Source, src.Target);
     }
 }

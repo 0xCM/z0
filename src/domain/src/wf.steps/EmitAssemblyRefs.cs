@@ -29,7 +29,7 @@ namespace Z0
             var srcCount = sources.Length;
 
             using var writer = cmd.Target.Writer();
-            var formatter = TableRows.formatter<CliAssemblyReference>(CliAssemblyReference.RenderWidths);
+            var formatter = TableRows.formatter<AssemblyDependency>(AssemblyDependency.RenderWidths);
             writer.WriteLine(formatter.FormatHeader());
 
             for(var k=0u; k<srcCount; k++)
@@ -37,7 +37,7 @@ namespace Z0
                 ref readonly var source = ref skip(sources,k);
                 wf.Status(string.Format("Emitting {0} assembly references", source.Name));
                 using var reader = EmitAssemblyRefs.reader(wf, source);
-                var data = reader.AssemblyReferences();
+                var data = reader.AssemblyDependencies();
                 var count = data.Length;
                 for(var i=0; i<count; i++)
                     writer.WriteLine(formatter.FormatRow(skip(data,i)));

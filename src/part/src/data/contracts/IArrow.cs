@@ -17,16 +17,6 @@ namespace Z0
     [Free]
     public interface IArrow<S,T> : IArrow, ILink<S,T>
     {
-        S Source {get;}
-
-        T Target {get;}
-
-        S ILink<S,T>.A
-            => Source;
-
-        T ILink<S,T>.B
-            => Target;
-
         string IIdentified.Identifier
             => string.Format("{0} -> {1}", Source, Target);
     }
@@ -41,18 +31,12 @@ namespace Z0
     public interface IArrows<T> : IArrow<T,T[]>
     {
         T[] Targets {get;}
-
-        T[] IArrow<T,T[]>.Target
-            => Targets;
     }
 
     [Free]
     public interface IArrows<S,T> : IArrow<S,T[]>
     {
         T[] Targets {get;}
-
-        T[] IArrow<S,T[]>.Target
-            => Targets;
     }
 
     [Free]
@@ -63,29 +47,15 @@ namespace Z0
     }
 
     [Free]
-    public interface IPath<T>
+    public interface IKindedArrow<K> : IArrow, IKinded<K>
+        where K : unmanaged
     {
-        T[]  Nodes {get;}
-    }
 
-    [Free]
-    public interface IKindedArrow<K> : IArrow
-        where K : unmanaged, Enum
-    {
-        K Kind {get;}
     }
 
     [Free]
     public interface IKindedArrow<K,S,T> : IKindedArrow<K>, IArrow<S,T>
-        where K : unmanaged, Enum
-    {
-
-    }
-
-    [Free]
-    public interface IKindedArrowHost<H,K,S,T> : IKindedArrow<K,S,T>
-        where H : struct, IKindedArrowHost<H,K,S,T>
-        where K : unmanaged, Enum
+        where K : unmanaged
     {
 
     }

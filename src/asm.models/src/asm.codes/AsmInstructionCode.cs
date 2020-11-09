@@ -19,24 +19,23 @@ namespace Z0.Asm
 
         public readonly AsmStatementCode SourceCode;
 
+        public PackedInstruction Source
+            => Instruction;
+
+        public AsmStatementCode Target
+            => SourceCode;
+
         [MethodImpl(Inline)]
         public AsmInstructionCode(in PackedInstruction detail, in AsmStatementCode asm)
         {
             Instruction = detail;
             SourceCode = asm;
         }
+        public string Format()
+            => Render.format(SourceCode, Instruction);
 
         [MethodImpl(Inline)]
         public static implicit operator AsmInstructionCode(Paired<PackedInstruction,AsmStatementCode> src)
             => new AsmInstructionCode(src.Left, src.Right);
-
-        public string Format()
-            => Render.format(SourceCode, Instruction);
-
-        PackedInstruction IArrow<PackedInstruction, AsmStatementCode>.Source
-            => Instruction;
-
-        AsmStatementCode IArrow<PackedInstruction, AsmStatementCode>.Target
-            => SourceCode;
     }
 }

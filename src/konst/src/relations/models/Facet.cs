@@ -16,14 +16,14 @@ namespace Z0
         public readonly variant Value;
 
         [MethodImpl(Inline)]
-        public static implicit operator Facet((string name, variant value) src)
-            => new Facet(src.name, src.value);
-
-        [MethodImpl(Inline)]
         public Facet(string name, variant value)
         {
             Name = name;
             Value = value;
         }
+
+        [MethodImpl(Inline)]
+        public static implicit operator Facet((string name, variant value) src)
+            => new Facet(src.name, src.value);
     }
 }

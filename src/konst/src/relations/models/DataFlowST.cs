@@ -13,21 +13,9 @@ namespace Z0
 
     public readonly struct DataFlow<S,T> : IDataFlow<S,T>
     {
-        public readonly S Source;
+        public S Source {get;}
 
-        public readonly T Target;
-
-        [MethodImpl(Inline)]
-        public static implicit operator DataFlow<S,T>((S src, T dst) x)
-            => new DataFlow<S,T>(x.src, x.dst);
-
-        [MethodImpl(Inline)]
-        public static implicit operator DataFlow<S,T>(Paired<S,T> x)
-            => new DataFlow<S,T>(x.Left, x.Right);
-
-        [MethodImpl(Inline)]
-        public static implicit operator FlowType<S,T>(DataFlow<S,T> x)
-            => x.Type;
+        public T Target {get;}
 
         [MethodImpl(Inline)]
         public DataFlow(S src, T dst)
@@ -46,10 +34,16 @@ namespace Z0
             get => api.type(Source,Target);
         }
 
-        S IArrow<S,T>.Source
-            => Source;
+        [MethodImpl(Inline)]
+        public static implicit operator DataFlow<S,T>((S src, T dst) x)
+            => new DataFlow<S,T>(x.src, x.dst);
 
-        T IArrow<S,T>.Target
-            => Target;
+        [MethodImpl(Inline)]
+        public static implicit operator DataFlow<S,T>(Paired<S,T> x)
+            => new DataFlow<S,T>(x.Left, x.Right);
+
+        [MethodImpl(Inline)]
+        public static implicit operator FlowType<S,T>(DataFlow<S,T> x)
+            => x.Type;
     }
 }

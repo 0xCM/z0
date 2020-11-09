@@ -27,6 +27,12 @@ namespace Z0.Dynamics
         public string Identifier
             => text.concat(Source.Name, Colon, Source.DataType.Name, " -> ", Target.Name, Colon, Target.DataType.Name);
 
+        ClrDataMember ILink<ClrDataMember, ClrDataMember>.Source
+            => Source;
+
+        ClrDataMember ILink<ClrDataMember, ClrDataMember>.Target
+            => Target;
+
         [MethodImpl(Inline)]
         public DataMemberArrow(ClrDataMember s, ClrDataMember t)
         {
@@ -35,12 +41,6 @@ namespace Z0.Dynamics
         }
 
         const char Colon = ':';
-
-         ClrDataMember IArrow<ClrDataMember,ClrDataMember>.Source
-            => Source;
-
-        ClrDataMember IArrow<ClrDataMember,ClrDataMember>.Target
-            => Target;
 
         public string Format()
             => Identifier;

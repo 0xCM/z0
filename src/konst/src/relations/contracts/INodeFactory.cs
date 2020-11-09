@@ -18,6 +18,6 @@ namespace Z0
     public interface INodeFactory<H,T>
         where H : INode<H,T>, new()
     {
-        H Create(T content, bool terminal, bool empty);
+        H Create(T content);
     }
 }

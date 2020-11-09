@@ -1,6 +1,0 @@
-digraph "advapi32" {
-node [
-  fontsize = "12"
-];
-    "node6" [ label = "advapi32", shape = septagon ];
-}

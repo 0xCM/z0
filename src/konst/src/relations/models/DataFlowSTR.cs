@@ -11,11 +11,11 @@ namespace Z0
 
     public readonly struct DataFlow<S,T,R> : IDataFlow<S,T,R>
     {
-        public readonly S Source;
+        public S Source {get;}
 
-        public readonly T Target;
+        public T Target {get;}
 
-        public readonly Outcome<R> Outcome;
+        public R Result {get;}
 
         [MethodImpl(Inline)]
         public static implicit operator DataFlow<S,T,R>((S src, T dst, R result) x)
@@ -30,25 +30,17 @@ namespace Z0
         {
             Source = src;
             Target = dst;
-            Outcome = result;
+            Result = result;
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.format("{0} -> {1} | {2}", Source, Target, Outcome);
+            => text.format("{0} -> {1} | {2}", Source, Target, Result);
 
         public FlowType<S,T> Type
         {
             [MethodImpl(Inline)]
             get => DataFlows.type(Source,Target);
         }
-
-        S IArrow<S,T>.Source
-            => Source;
-
-        T IArrow<S,T>.Target
-            => Target;
-        R IDataFlow<S,T,R>.Result
-            => Outcome;
     }
 }

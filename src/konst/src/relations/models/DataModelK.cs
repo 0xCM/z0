@@ -3,18 +3,18 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0.Data
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
 
     using static Konst;
 
     public readonly struct DataModel<K> : IDataModel<DataModel<K>, K>
-        where K : unmanaged, Enum
+        where K : unmanaged
     {
-        public readonly StringRef Name;
-        
-        public readonly K Kind;
+        public utf8 Name {get;}
+
+        public K Kind {get;}
 
         [MethodImpl(Inline)]
         public DataModel(string name, K kind)
@@ -22,8 +22,5 @@ namespace Z0.Data
             Name = name;
             Kind = kind;
         }
-
-        K IDataModel<DataModel<K>, K>.Kind 
-            => Kind;
     }
 }

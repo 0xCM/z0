@@ -36,10 +36,6 @@ namespace Z0
             Output = new BasedCodeBlock(@base, output);
         }
 
-        [MethodImpl(Inline)]
-        public static implicit operator DataFlow<BasedCodeBlock> (CapturedCodeBlock src)
-            => (src.Input,src.Output);
-
         public int Length
         {
             [MethodImpl(Inline)]
@@ -64,12 +60,11 @@ namespace Z0
             get => Output.IsNonEmpty;
         }
 
-        BasedCodeBlock IArrow<BasedCodeBlock, BasedCodeBlock>.Source
+        public BasedCodeBlock Source
             => Input;
 
-        BasedCodeBlock IArrow<BasedCodeBlock, BasedCodeBlock>.Target
+        public BasedCodeBlock Target
             => Output;
-
 
         [MethodImpl(Inline)]
         public bool Equals(CapturedCodeBlock src)
@@ -80,5 +75,9 @@ namespace Z0
 
         public override string ToString()
             => Format();
+
+        [MethodImpl(Inline)]
+        public static implicit operator DataFlow<BasedCodeBlock>(CapturedCodeBlock src)
+            => (src.Input,src.Output);
     }
 }

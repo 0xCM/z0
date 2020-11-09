@@ -11,9 +11,9 @@ namespace Z0
 
     public readonly struct Projected<S,T>
     {
-        public readonly S Source;
+        public S Source {get;}
 
-        public readonly T Target;
+        public T Target {get;}
 
         [MethodImpl(Inline)]
         public Projected(S src, T dst)
@@ -21,5 +21,9 @@ namespace Z0
             Source = src;
             Target = dst;
         }
+
+        [MethodImpl(Inline)]
+        public static implicit operator Projected<S,T>(Paired<S,T> src)
+            => new Projected<S,T>(src.Left, src.Right);
     }
 }

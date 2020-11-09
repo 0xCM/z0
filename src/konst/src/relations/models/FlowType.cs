@@ -13,34 +13,18 @@ namespace Z0
 
     public readonly struct FlowType : IEquatable<FlowType>
     {
-        public readonly Type Kind;
+        public Type Source {get;}
 
-        public readonly Type Source;
+        public Type Target {get;}
 
-        public readonly Type Target;
-
-        [MethodImpl(Inline)]
-        public static bool operator ==(FlowType a, FlowType b)
-            => a.Equals(b);
-
-        [MethodImpl(Inline)]
-        public static bool operator !=(FlowType a, FlowType b)
-            => !a.Equals(b);
-
-        [MethodImpl(Inline)]
-        public static implicit operator FlowType((Type src, Type dst) x)
-            => new FlowType(x.src, x.dst);
-
-        [MethodImpl(Inline)]
-        public static implicit operator FlowType((Type kind, Type src, Type dst) x)
-            => new FlowType(x.kind, x.src, x.dst);
+        public Type Kind {get;}
 
         [MethodImpl(Inline)]
         internal FlowType(Type src, Type dst)
         {
-            Kind = typeof(void);
             Source = src;
             Target = dst;
+            Kind = typeof(void);
         }
 
         [MethodImpl(Inline)]
@@ -67,5 +51,21 @@ namespace Z0
 
         public override bool Equals(object src)
             => src is FlowType x && Equals(x);
+
+        [MethodImpl(Inline)]
+        public static bool operator ==(FlowType a, FlowType b)
+            => a.Equals(b);
+
+        [MethodImpl(Inline)]
+        public static bool operator !=(FlowType a, FlowType b)
+            => !a.Equals(b);
+
+        [MethodImpl(Inline)]
+        public static implicit operator FlowType((Type src, Type dst) x)
+            => new FlowType(x.src, x.dst);
+
+        [MethodImpl(Inline)]
+        public static implicit operator FlowType((Type src, Type dst, Type kind) x)
+            => new FlowType(x.src, x.dst, x.kind);
     }
 }
