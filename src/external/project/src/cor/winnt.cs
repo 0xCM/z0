@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-
     public readonly partial struct Win
     {
         public readonly struct Nt

@@ -8,8 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
 
     /*****************************************************************************\
@@ -215,9 +214,7 @@ namespace Z0
             => new byte[16]{0x06, 0x21, 0x14, 0xd0, 0xbd,0x20,0x48,0x3f,0x8a, 0x3e, 0xc4, 0xee, 0x39, 0x70, 0x6a, 0xe8};
 
         public ref readonly Guid JITEEVersionIdentifier
-            => ref @as<byte,Guid>(first(JITEEVersionIdentifier_Data));
-
-
+            => ref memory.@as<byte,Guid>(memory.first(JITEEVersionIdentifier_Data));
 
         // CorInfoHelpFunc defines the set of helpers (accessed via the ICorDynamicInfo::getHelperFtn())
         // These helpers can be called by native code which executes in the runtime.
@@ -544,6 +541,5 @@ namespace Z0
 
             CORINFO_HELP_COUNT,
         }
-
     }
 }

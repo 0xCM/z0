@@ -18,7 +18,7 @@ echo SlnPath:%SlnPath% >> %CmdLog%
 set TextLog="%ZDb%\logs\build\%SlnId%.log"
 ::set CmdExec=msbuild %SlnPath% /p:Configuration=Release /p:Platform="Any CPU" -fl -flp:logfile=%TextLog%;verbosity=normal -m:1
 
-set CmdExec=dotnet build %SlnPath% /p:Configuration=Release /p:Platform="Any CPU" -fl -flp:logfile=%TextLog%;verbosity=detailed -m:1 -graph:true
+set CmdExec=dotnet build %SlnPath% /p:Configuration=Release /p:Platform="Any CPU" -fl -flp:logfile=%TextLog%;verbosity=detailed -m:6 -graph:true
 
 echo CmdExec:%CmdExec% >> %CmdLog%
 
