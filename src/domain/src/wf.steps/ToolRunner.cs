@@ -181,7 +181,7 @@ namespace Z0
 
         void ShowApiHex()
         {
-            var archive = ApiFiles.hex(Wf);
+            var archive = ApiArchives.hex(Wf);
             var listing = archive.List();
             if(listing.Count == 0)
                 Wf.Warn(Host, $"No files found in archive with root {archive.Root}");

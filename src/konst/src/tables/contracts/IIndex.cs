@@ -50,8 +50,10 @@ namespace Z0
     public interface IIndex<I,T> : IIndex<T>
         where I : unmanaged
     {
-        ref T this[I index]
-            => ref this[z.i32(index)];
+        ref T this[I index] {get;}
+
+        ref T IIndex<T>.this[int index]
+            => ref this[z.@as<int,I>(index)];
 
         ref T Lookup(I index)
             => ref this[index];

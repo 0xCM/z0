@@ -5,8 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Part)" />
-    <ProjectReference Include="$(Sys)" />
     <ProjectReference Include="$(Konst)" />
   </ItemGroup>
 

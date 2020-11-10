@@ -2,17 +2,12 @@
 
   <PropertyGroup>
     <OutputType>Library</OutputType>
-    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Part)" />
-    <ProjectReference Include="$(External)" />
+      <ProjectReference Include="$(External)" />
 
+      <ProjectReference Include="$(Part)" />
   </ItemGroup>
-
-   <ItemGroup>
-    <Compile Include="lib/**/*.cs" />
-   </ItemGroup>
 
 </Project>

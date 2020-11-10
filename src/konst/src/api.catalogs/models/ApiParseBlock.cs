@@ -51,19 +51,6 @@ namespace Z0
 
         public BasedCodeBlock Data;
 
-        public ApiParseBlock(int Seq, int SourceSequence, MemoryAddress Address, int Length,
-            ExtractTermCode TermCode, OpUri Uri, string OpSig, BasedCodeBlock Data)
-        {
-            this.Seq = Seq;
-            this.SourceSeq = SourceSequence;
-            this.Address = Address;
-            this.Length = Length;
-            this.TermCode = TermCode;
-            this.Uri = Uri;
-            this.OpSig = OpSig;
-            this.Data = Data;
-        }
-
         public string DelimitedText(char delimiter)
         {
             var dst = Table.formatter<F>(delimiter);

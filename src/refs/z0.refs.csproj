@@ -4,15 +4,15 @@
     <OutputType>Library</OutputType>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="$(Part)" />
-  </ItemGroup>
-
    <ItemGroup>
     <EmbeddedResource Include="content/**/*.*" />
    </ItemGroup>
 
-  <ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="$(Part)" />
+    </ItemGroup>
+
+    <ItemGroup>
     <EmbeddedResource Include="resources/TableIndex.resources">
       <LogicalName>TableIndex.resources</LogicalName>
     </EmbeddedResource>

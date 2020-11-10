@@ -143,7 +143,7 @@ namespace Z0
         [Op]
         public static CodeBlockDescriptor[] BlockDescriptors(IWfShell wf)
         {
-            var archive = ApiFiles.hex(wf);
+            var archive = ApiArchives.hex(wf);
             var files = @readonly(archive.List().Storage);
             var dst = list<CodeBlockDescriptor>();
             var count = files.Length;
@@ -164,7 +164,7 @@ namespace Z0
         [Op]
         public static CodeBlockDescriptor[] BlockDescriptors(FS.FolderPath src)
         {
-            var archive = ApiFiles.hex(src);
+            var archive = ApiArchives.hex(src);
             var files = archive.List();
             var dst = list<ApiDataModel.CodeBlockDescriptor>();
             foreach(var file in files.Storage)

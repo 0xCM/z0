@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="$(Konst)" />
     <ProjectReference Include="$(Validity)" />
     <ProjectReference Include="$(AsmServices)" />
     <ProjectReference Include="$(Capture)" />
@@ -15,7 +16,6 @@
     <ProjectReference Include="$(VSvc)" />
     <ProjectReference Include="$(BitSvc)" />
     <ProjectReference Include="$(Merge)" />
-
   </ItemGroup>
 
 </Project>

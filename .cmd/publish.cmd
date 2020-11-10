@@ -1,9 +1,9 @@
 echo off
 
-set CopySrc=j:\dev\projects\z0\.build\bin\netcoreapp3.1\win-x64
+set CopySrc=j:\dev\projects\z0\.build\bin\Release
 echo CopySrc:%CopySrc%
 
-set CopyDst=k:\z0\builds\nca.3.1.win-x64
+set CopyDst=k:\z0\builds\release
 echo CopyDst:%CopyDst%
 
 set CopyLog=%ZDb%\etl\build-publish.log

@@ -65,12 +65,11 @@ namespace Z0
         public void Run()
         {
             var target = Wf.Db().ParsedExtractFile(Uri);
-            Emitted = ApiParseReport.create(Uri, Source);
-            if(ApiParseReport.save(Emitted,target))
+            Emitted = ApiParseBlocks.create(Uri, Source);
+            if(ApiParseBlocks.save(Emitted,target))
                 Wf.EmittedTable<ApiParseBlock>(Emitted.Length, target);
             else
                 Wf.Error($"Could not save {target}");
-
         }
     }
 }

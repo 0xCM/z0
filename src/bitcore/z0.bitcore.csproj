@@ -5,9 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Konst)" />
     <ProjectReference Include="$(GMath)" />
-
   </ItemGroup>
 
 </Project>

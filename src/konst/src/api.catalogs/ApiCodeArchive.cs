@@ -70,13 +70,13 @@ namespace Z0
         /// Enumerates the content of all archived files
         /// </summary>
         public IEnumerable<ApiCodeBlock> Read()
-            => ApiFiles.read(this);
+            => ApiArchives.read(this);
 
         /// <summary>
         /// Enumerates the content of archived files owned by a specified part
         /// </summary>
         public IEnumerable<ApiCodeBlock> Read(PartId owner)
-            => ApiFiles.read(this, owner);
+            => ApiArchives.read(this, owner);
 
         /// <summary>
         /// Reads the archived files with names that satisfy a specified predicate
@@ -110,7 +110,7 @@ namespace Z0
         }
 
         public ApiHostCodeBlocks Index(FilePath src)
-            => ApiFiles.index(this, src);
+            => ApiArchives.index(this, FS.path(src.Name));
 
         public ApiHostCodeBlocks Index(FS.FilePath src)
             => ApiFiles.index(this, src);

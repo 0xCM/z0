@@ -32,20 +32,6 @@ namespace Z0
             return index(uri.Value, dst.Array());
         }
 
-        public static ApiHostCodeBlocks index(ApiCodeArchive src, FilePath path)
-        {
-            var uri = ApiUri.host(path.FileName);
-            if(uri.Failed || uri.Value.IsEmpty)
-                return default;
-
-            var dst = z.list<ApiCodeBlock>();
-            foreach(var item in read(src))
-                if(item.IsNonEmpty)
-                    dst.Add(item);
-
-            return index(uri.Value, dst.Array());
-        }
-
         public static IEnumerable<ApiHostCodeBlocks> indices(ApiCodeArchive src, params PartId[] owners)
         {
             if(owners.Length != 0)

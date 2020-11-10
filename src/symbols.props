@@ -8,13 +8,13 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <Part>$(Src)part/z0.part.csproj</Part>
+    <ZRoot>$(Src)part/z0.part.csproj</ZRoot>
 
+    <Part>$(Src)part/z0.part.csproj</Part>
+    <External>$(Src)external/project/z0.external.csproj</External>
+    <Sys>$(Src)sys/z0.sys.csproj</Sys>
     <Derivatives>$(Src)derivatives/z0.derivatives.csproj</Derivatives>
 
-    <External>$(Src)external/project/z0.external.csproj</External>
-
-    <Sys>$(Src)sys/z0.sys.csproj</Sys>
     <Domain>$(Src)domain/z0.domain.csproj</Domain>
 
     <Tables>$(Src)tables/z0.tables.csproj</Tables>

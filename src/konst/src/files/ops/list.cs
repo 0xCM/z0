@@ -12,6 +12,10 @@ namespace Z0
 
     partial struct FS
     {
+        [Op]
+        public static ListedFiles list(FilePath[] src)
+            => new ListedFiles(src.Mapi((i,x) => new ListedFile(i,x)));
+
         [MethodImpl(Inline), Op]
         public static ListedFiles list(Files src)
             => new ListedFiles(src.Data.Storage.Mapi((i,x) => new ListedFile((uint)i,x)));

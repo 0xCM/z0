@@ -20,6 +20,10 @@ namespace Z0
     [ApiHost(ApiNames.ApiQuery, true)]
     public readonly struct ApiQuery
     {
+        [MethodImpl(Inline), Op]
+        public static ApiComponent component(Assembly src)
+            => new ApiComponent(src);
+
         [Op]
         public static ApiHostInfo host(Type tHost)
         {
@@ -142,7 +146,7 @@ namespace Z0
                 return ApiHostMemberCode.Empty;
 
             var idx = index(catalog);
-            var archive =  ApiFiles.capture(root);
+            var archive =  ApiArchives.capture(root);
             var paths =  HostCaptureArchive.create(root, host);
             var code = ApiHexReader.Service.Read(paths.HostX86Path);
             var opIndex =  CodeBlockIndex(code);

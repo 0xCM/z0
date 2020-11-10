@@ -5,9 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Konst)" />
-    <ProjectReference Include="$(AsmModels)" />
-    <ProjectReference Include="$(BitCore)" />
+     <ProjectReference Include="$(BitCore)" />
+      <ProjectReference Include="$(AsmModels)" />
     <ProjectReference Include="$(BitFields)" />
   </ItemGroup>
 

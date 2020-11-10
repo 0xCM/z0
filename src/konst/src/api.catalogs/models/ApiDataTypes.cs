@@ -52,7 +52,5 @@ namespace Z0
             [MethodImpl(Inline)]
             get => ref z.first(Data.Edit);
         }
-
-
     }
 }

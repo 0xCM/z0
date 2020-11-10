@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Reflection;
-    using System.Collections.Generic;
-    using System.Linq;
 
     using static Konst;
     using static z;
@@ -19,8 +17,12 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ApiComponent(Assembly src)
-        {
-            Assembly = src;
-        }
+            => Assembly = src;
+
+        public FS.FilePath Location
+            => FS.path(Assembly.Location);
+
+        public PartId Id
+            => Assembly.Id();
     }
 }

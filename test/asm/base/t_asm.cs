@@ -15,7 +15,7 @@ namespace Z0.Asm
         where U : t_asm<U>
     {
         protected IPartCapturePaths TargetArchive
-            => ApiFiles.capture(UnitDataDir);
+            => ApiArchives.capture(UnitDataDir);
 
         protected new IAsmContext Context;
 
@@ -47,8 +47,8 @@ namespace Z0.Asm
         {
             var paths = AppPaths.ForApp();
             var root = paths.AppCaptureRoot;
-            var capture = ApiFiles.capture(root);
-            var archive = ApiFiles.hex(FS.dir(root.Name));
+            var capture = ApiArchives.capture(root);
+            var archive = ApiArchives.hex(FS.dir(root.Name));
             return archive.Read(capture.HexPath(host)).ToArray();
         }
 

@@ -12,10 +12,17 @@ namespace Z0
 
     partial struct FS
     {
-        [Op]
-        public static ListedFiles list(FS.FilePath[] src)
-            => new ListedFiles(src.Mapi((i,x) => new ListedFile(i,x)));
+        [MethodImpl(Inline), Op]
+        public static IFileArchive archive(FS.FolderPath root)
+            => new FileArchive(root);
 
+        [MethodImpl(Inline), Op]
+        public static IFileArchive archive(FolderPath root, string filter)
+            => new FilteredArchive(root, filter);
+
+        [MethodImpl(Inline), Op]
+        public static IFileArchive archive(FolderPath root, params FileExt[] ext)
+            => new FileKinds(root, ext);
         [Op]
         public static ListedFiles search(FileArchive src, string pattern, bool recurse)
             => list(Directory.EnumerateFiles(src.Root.Name, pattern, option(recurse)).Array().Select(x => FS.path(pattern)));
@@ -23,13 +30,5 @@ namespace Z0
         [MethodImpl(Inline)]
         internal static SearchOption option(bool recurse)
             => recurse ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly;
-
-        [MethodImpl(Inline), Op]
-        public static IFileArchive archive(FS.FolderPath root)
-            => new FileArchive(root);
-
-        [MethodImpl(Inline), Op]
-        public static IFileArchive archive(FS.FolderPath root, params FS.FileExt[] ext)
-            => new FileKinds(root,ext);
     }
 }

@@ -5,10 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Part)" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="dnlib" Version="3.3.1" />
     <PackageReference Include="ICSharpCode.Decompiler" Version="6.1.0.5902" />
     <PackageReference Include="Iced" Version="1.4.0" />
@@ -39,5 +35,9 @@
     <PackageReference Include="System.Reflection.MetadataLoadContext" Version="4.7.2" />
     <PackageReference Include="System.Runtime.InteropServices.RuntimeInformation" Version="4.3.0" />
   </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="$(Part)" />
+    </ItemGroup>
 
 </Project>

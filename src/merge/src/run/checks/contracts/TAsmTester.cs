@@ -26,9 +26,6 @@ namespace Z0.Asm
         ICaptureCore ICaptureServiceProxy.CaptureService
             => Context.CaptureCore;
 
-        IPartCapturePaths CaptureArchive(FolderPath root)
-            => ApiFiles.capture(root);
-
         void WriteAsm(ApiCaptureBlock capture, StreamWriter dst)
         {
             var asm = Decoder.Decode(capture).Require();

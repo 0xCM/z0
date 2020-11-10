@@ -6,9 +6,9 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Part)" />
-    <ProjectReference Include="$(Sys)" />
     <ProjectReference Include="$(External)" />
-
+    <ProjectReference Include="$(Sys)" />
+    <ProjectReference Include="$(Refs)" />
   </ItemGroup>
 
 </Project>

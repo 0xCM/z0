@@ -56,7 +56,7 @@ namespace Z0
             {
                 ref readonly var path = ref skip(parsed,i);
 
-                var result = ApiParseReport.load(path);
+                var result = ApiParseBlocks.load(path);
                 if(result)
                 {
                     var blocks = result.Value;

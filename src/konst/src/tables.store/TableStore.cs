@@ -74,6 +74,34 @@ namespace Z0
             return (src,dst);
         }
 
+        public static Option<FilePath> save<R,F>(R[] data, TableRenderSpec<F> format, FormatFunctions.FormatDelimited<R> fx, FilePath dst, FileWriteMode mode = Overwrite)
+            where F : unmanaged, Enum
+            where R : struct
+       {
+            if(data == null || data.Length == 0)
+                return Option.none<FilePath>();
+
+            try
+            {
+                dst.FolderPath.Create();
+                var overwrite = mode == FileWriteMode.Overwrite;
+                var emitHeader = format.EmitHeader && (overwrite || !dst.Exists);
+
+                using var writer = dst.Writer(mode);
+
+                if(emitHeader)
+                    writer.WriteLine(format.FormatHeader());
+
+                z.iter(data, r => writer.WriteLine(fx(r,format.Delimiter)));
+                return dst;
+            }
+            catch(Exception e)
+            {
+                term.error(e);
+                return Option.none<FilePath>();
+            }
+        }
+
         static string FormatSequential<E>(int seq, E value)
             => text.concat(seq.ToString().PadRight(10), SpacePipe, value.ToString());
     }

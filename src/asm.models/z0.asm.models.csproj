@@ -5,13 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Konst)" />
-    <ProjectReference Include="$(Unsigned)" />
     <ProjectReference Include="$(Math)" />
     <ProjectReference Include="$(BitCore)" />
-    <ProjectReference Include="$(Refs)" />
     <ProjectReference Include="$(BitFields)" />
-
   </ItemGroup>
 
 </Project>

@@ -5,10 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Konst)" />
-    <ProjectReference Include="$(External)" />
-    <ProjectReference Include="$(Unsigned)" />
-    <ProjectReference Include="$(GMath)" />
+      <ProjectReference Include="$(GMath)" />
   </ItemGroup>
 
    <ItemGroup>

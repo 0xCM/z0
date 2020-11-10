@@ -91,7 +91,7 @@ namespace Z0
             Index = index;
             SourceDir = FS.dir(wf.Paths.AppCaptureRoot.Name);
             TargetDir = wf.Paths.CodeGenRoot + FS.folder(ProjectName);
-            Archive = ApiFiles.hex(FS.dir(SourceDir.Name));
+            Archive = ApiArchives.hex(FS.dir(SourceDir.Name));
             Wf.Created(Host);
         }
 

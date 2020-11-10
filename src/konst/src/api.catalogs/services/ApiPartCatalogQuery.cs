@@ -11,6 +11,98 @@ namespace Z0
     using System.Reflection;
 
     using static Konst;
+    using static z;
+
+    using F = ApiParseField;
+
+    [ApiHost(ApiNames.ApiParseBlocks, true)]
+    public readonly struct ApiParseBlocks
+    {
+        public static string format(in ApiParseBlock src, char delimiter)
+        {
+            var dst = Table.formatter<F>(delimiter);
+            dst.Delimit(F.Seq, src.Seq);
+            dst.Delimit(F.SourceSeq, src.SourceSeq);
+            dst.Delimit(F.Address, src.Address);
+            dst.Delimit(F.Length, src.Length);
+            dst.Delimit(F.TermCode, src.TermCode);
+            dst.Delimit(F.Uri, src.Uri);
+            dst.Delimit(F.OpSig, src.OpSig);
+            dst.Delimit(F.Data, src.Data.Format());
+            return dst.Format();
+        }
+        [Op]
+        public static ParseResult<ApiParseBlock[]> load(FS.FilePath src)
+        {
+            var attempts = src.ReadLines().Skip(1).Select(row);
+            var failed = attempts.Where(r => !r.Succeeded);
+            var success = attempts.Where(r => r.Succeeded).Select(r => r.Value);
+            if(failed.Length != 0 && success.Length == 0)
+                return ParseResult.Fail<ApiParseBlock[]>(src.Name, failed[0].Reason);
+            else
+                return ParseResult.Success<ApiParseBlock[]>(src.Name, success);
+        }
+
+        [Op]
+        public static ApiParseBlock[] create(ApiHostUri host, ApiMemberCodeBlocks members)
+        {
+            var count = members.Count;
+            var buffer = alloc<ApiParseBlock>(count);
+            var dst = span(buffer);
+            var src = members.View;
+            for(var i=0u; i<count; i++)
+                seek(dst,i) = record(skip(src,i), i);
+            return buffer;
+        }
+
+        [MethodImpl(Inline)]
+        public static ApiParseBlock record(in ApiMemberCode src, uint seq)
+        {
+            var dst = new ApiParseBlock();
+            dst.Seq = (int)seq;
+            dst.SourceSeq = (int)src.Sequence;
+            dst.Address = src.Address;
+            dst.Length = src.Encoded.Length;
+            dst.TermCode = src.TermCode;
+            dst.Uri = src.OpUri;
+            dst.OpSig = src.Method.Metadata().Format();
+            dst.Data = src.Encoded;
+            return dst;
+        }
+
+        static TableStore<ApiParseField,ApiParseBlock> Store => default;
+
+        [MethodImpl(Inline), Op]
+        public static Option<FilePath> save(ApiParseBlock[] src, FS.FilePath dst)
+            => Store.Save(src, dst);
+
+        [Op]
+        static ParseResult<ApiParseBlock> row(string src)
+        {
+            try
+            {
+                var fields = src.SplitClean(FieldDelimiter);
+                if(fields.Length !=  (uint)ApiParseBlock.FieldCount)
+                    return ParseResult.Fail<ApiParseBlock>(src,"No data");
+
+                var dst = new ApiParseBlock();
+                var index = 0;
+                dst.Seq = NumericParser.succeed<int>(fields[index++]);
+                dst.SourceSeq = NumericParser.succeed<int>(fields[index++]);
+                dst.Address = MemoryAddressParser.succeed(fields[index++]);
+                dst.Length = NumericParser.succeed<int>(fields[index++]);
+                dst.TermCode = Enums.parse(fields[index++], ExtractTermCode.None);
+                dst.Uri = ApiUriParser.Service.Parse(fields[index++]).Require();
+                dst.OpSig = fields[index++];
+                dst.Data = new BasedCodeBlock(dst.Address, Parsers.hex(true).ParseData(fields[index++], sys.empty<byte>()));
+                return ParseResult.Success(src, dst);
+            }
+            catch(Exception e)
+            {
+                return ParseResult.Fail<ApiParseBlock>(src, e);
+            }
+        }
+    }
 
     /// <summary>
     /// Defines a view over a <see cref='IApiPartCatalog'/>
