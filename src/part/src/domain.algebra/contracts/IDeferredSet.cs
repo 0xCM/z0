@@ -4,11 +4,14 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
     /// <summary>
     /// Characterizes a reified set over elements of parametric type
     /// </summary>
     /// <typeparam name="F">The reifying type</typeparam>
     /// <typeparam name="T">The element type</typeparam>
+    [Free]
     public interface IDeferredSet<F,T> : IFiniteDeferral<F,T>, ICounted, INullity
         where F : IDeferredSet<F,T>, new()
     {

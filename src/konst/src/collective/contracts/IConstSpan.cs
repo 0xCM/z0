@@ -13,7 +13,7 @@ namespace Z0
     }
 
     [Free]
-    public interface IMaterialized<F,T> : IMaterialied<T>, IReified<F>
+    public interface IMaterialized<F,T> : IMaterialied<T>
         where T : IFiniteDeferral<T>
         where F : IMaterialized<F,T>, new()
     {

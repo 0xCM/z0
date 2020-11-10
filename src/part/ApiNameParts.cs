@@ -385,4 +385,9 @@ public readonly struct ApiNameParts
     public const string flow = nameof(flow);
 
     public const string flows= nameof(flows);
+
+    public const string links = nameof(links);
+
+    public const string nodes = nameof(nodes);
+
 }

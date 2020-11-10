@@ -9,17 +9,11 @@ namespace Z0
 
     using static Konst;
 
-    using E = ExtractParseFailed;
-
     public readonly struct ExtractParseFailed : IWfEvent<ExtractParseFailed>
     {
         public const string EventName = nameof(ExtractParseFailed);
         
-        public WfEventId EventId {get;}
-        
-        [MethodImpl(Inline)]
-        public static E create(ExtractParseFailure data)
-            => new E(data);
+        public WfEventId EventId {get;}                
         
         [MethodImpl(Inline)]
         public ExtractParseFailed(ExtractParseFailure data)
@@ -45,9 +39,9 @@ namespace Z0
                     text.assign(UriLabel, Data.OpUri)
                     ));
             
-        public E Zero => Empty;            
+        public ExtractParseFailed Zero => Empty;            
 
-        public static E Empty 
-            => new E(ExtractParseFailure.Empty);
+        public static ExtractParseFailed Empty 
+            => new ExtractParseFailed(ExtractParseFailure.Empty);
     }    
 }

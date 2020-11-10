@@ -9,7 +9,11 @@ readonly struct ApiNames
 {
     public const string DataFlows = data + dot + flow;
 
+    public const string DataModels = data + dot + models;
+
     public const string Rules = rules;
+
+    public const string Nodes = data + dot +  nodes;
 
     public const string AppMsg = app + dot + msg;
 
@@ -353,9 +357,10 @@ readonly struct ApiNames
 
     public const string SeqMap = seq + dot + map;
 
-    public const string DataModels = data + dot + models;
 
     public const string ApiParseBlocks = api + dot + blocks + parse;
 
     public const string ApiArchives = api + dot + archives;
+
+    public const string Links = links;
 }

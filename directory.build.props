@@ -1,8 +1,6 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
   <PropertyGroup>
-
-    <!-- <Platform>x64</Platform> -->
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <TopDir>$(MSBuildThisFileDirectory)</TopDir>
     <BuildRootDir>$(TopDir).build\</BuildRootDir>

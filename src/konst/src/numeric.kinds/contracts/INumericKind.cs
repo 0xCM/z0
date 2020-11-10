@@ -8,22 +8,22 @@ namespace Z0
 
     public interface INumericKind : IKind, ILiteralKind<NumericKind>
     {
-        
+
     }
 
     public interface INumericKind<T> : INumericKind
         where T : unmanaged
     {
-        TypeWidth Width 
-            => (TypeWidth)(Unsafe.SizeOf<T>()*8);            
-                
-        NumericKind ITypedLiteral<NumericKind>.Class 
+        TypeWidth Width
+            => (TypeWidth)(Unsafe.SizeOf<T>()*8);
+
+        NumericKind ITypedLiteral<NumericKind>.Class
             => NumericKinds.kind<T>();
     }
 
-    public interface INumericKind<F,T> : INumericKind<T>, IReified<F>
+    public interface INumericKind<F,T> : INumericKind<T>
         where F : unmanaged, INumericKind<F,T>
-        where T : unmanaged 
+        where T : unmanaged
     {
 
     }

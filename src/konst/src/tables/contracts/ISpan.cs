@@ -33,7 +33,7 @@ namespace Z0
     }
 
     [Free]
-    public interface ISpan<F,T> : ISpan<T>, IReified<F>, INullary<F,T>
+    public interface ISpan<F,T> : ISpan<T>, INullary<F,T>
         where F : struct, ISpan<F,T>
         where T : struct
     {

@@ -29,13 +29,30 @@ namespace Z0
             => string.Format("{0} -- {1}", Source, Target);
     }
 
-    // /// <summary>
-    // /// Characterizes an association between two parties of homogenous type
-    // /// </summary>
-    // /// <typeparam name="T">The party type</typeparam>
-    // [Free]
-    // public interface ILink<T> : ILink<T,T>
-    // {
+    [Free]
+    public interface ILink<T> : ILink<T,T>
+    {
 
-    // }
+    }
+
+    [Free]
+    public interface ILink<F,S,T> : ILink<S,T>
+        where F : ILink<F,S,T>
+    {
+
+    }
+
+    [Free]
+    public interface IKindedLink<K> : ILink, IKinded<K>
+        where K : unmanaged
+    {
+
+    }
+
+    [Free]
+    public interface IKindedLink<K,S,T> : IKindedLink<K>, ILink<S,T>
+        where K : unmanaged
+    {
+
+    }
 }

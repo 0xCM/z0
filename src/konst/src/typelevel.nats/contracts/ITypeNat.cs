@@ -5,24 +5,6 @@
 namespace Z0
 {
     /// <summary>
-    /// Characterizes an individual that can be uniquely associatd with an integer in the range 0..n-1 
-    /// within the context of a container with a capacity of n items
-    /// </summary>
-    public interface IPositional
-    {
-        /// <summary>
-        /// The 0-based position of the item in an enclosing container
-        /// </summary>
-        int Position {get;}
-    }
-
-    public interface IPositional<F> : IPositional, IReified<F>
-        where F : IPositional<F>, new()
-    {
-        
-    }
-
-    /// <summary>
     /// Characterizes a type-level natural number, a *typenat*
     /// </summary>
     public interface ITypeNat
@@ -67,11 +49,11 @@ namespace Z0
 
     }
 
-    public interface IIndexed<F,N> : IPositional<F>, ITypeNat<N>
+    public interface IIndexed<F,N> : IPositioned<F>, ITypeNat<N>
         where F : struct, IIndexed<F,N>
         where N : unmanaged, ITypeNat
     {
-        ulong ITypeNat.NatValue 
+        ulong ITypeNat.NatValue
             => default(N).NatValue;
     }
 
@@ -82,15 +64,15 @@ namespace Z0
     public interface INatPrimitive<N> : INatNumber<N>, INatSeq<N>
         where N : unmanaged, INatPrimitive<N>
     {
-        
-    }   
+
+    }
 
     /// <summary>
     /// Requires that the natural representative is nonzero
     /// </summary>
     public interface INatNonZero : ITypeNat
     {
-        
+
     }
 
     /// <summary>
@@ -101,7 +83,7 @@ namespace Z0
         where K : unmanaged, ITypeNat
     {
 
-    }    
+    }
 
     public interface INatDigit<N,S,T>
         where N : unmanaged, ITypeNat
@@ -109,7 +91,7 @@ namespace Z0
         where S : INatDigit<N,S,T>
     {
 
-    }    
+    }
 
     /// <summary>
     /// Characterizes binary relationship between two type naturals
@@ -120,7 +102,7 @@ namespace Z0
         where K1 : unmanaged, ITypeNat
         where K2 : unmanaged, ITypeNat
     {
-        
+
     }
 
     /// <summary>
@@ -134,8 +116,8 @@ namespace Z0
         where K2 : unmanaged, ITypeNat
         where K3 : unmanaged, ITypeNat
     {
-        
-    }    
+
+    }
 
     /// <summary>
     /// Requires k1 = n*k2 for some n>= 1
@@ -147,7 +129,7 @@ namespace Z0
         where K2: unmanaged, ITypeNat
     {
 
-    }    
+    }
 
     /// <summary>
     /// Requires k1 <= k <= k2
@@ -159,8 +141,8 @@ namespace Z0
         where K1: unmanaged, ITypeNat
         where K2: unmanaged, ITypeNat
     {
-        
-    }    
+
+    }
 
     /// <summary>
     /// Requires k1 > k2
@@ -171,7 +153,7 @@ namespace Z0
         where K1: unmanaged, ITypeNat
         where K2: unmanaged, ITypeNat
     {
-        
+
     }
 
     /// <summary>
@@ -183,8 +165,8 @@ namespace Z0
         where K1: unmanaged, ITypeNat
         where K2: unmanaged, ITypeNat
     {
-        
-    }    
+
+    }
 
     /// <summary>
     /// Requires k1 == k2
@@ -195,7 +177,7 @@ namespace Z0
         where K1: unmanaged, ITypeNat
         where K2: unmanaged, ITypeNat
     {
-        
+
     }
 
     /// <summary>
@@ -207,8 +189,8 @@ namespace Z0
         where K1: unmanaged, ITypeNat
         where K2: unmanaged, ITypeNat
     {
-        
-    }    
+
+    }
 
     /// <summary>
     /// Requires k1 < k2
@@ -217,7 +199,7 @@ namespace Z0
         where K1: unmanaged, ITypeNat
         where K2: unmanaged, ITypeNat
     {
-        
+
     }
 
     /// <summary>
@@ -227,8 +209,8 @@ namespace Z0
         where K1: unmanaged, ITypeNat
         where K2: unmanaged, ITypeNat
     {
-        
-    }    
+
+    }
 
     /// <summary>
     /// Requires k1:K1 & k2:K2 & k3:K3 => k1 % k2 = k3
@@ -242,7 +224,7 @@ namespace Z0
         where K3 : unmanaged, ITypeNat
     {
 
-    }    
+    }
 
     /// <summary>
     /// Requires k:K => k % 2 != 0
@@ -261,8 +243,8 @@ namespace Z0
     public interface INatPrime<K> : ITypeNat
         where K : unmanaged, ITypeNat
     {
-        
-    }    
+
+    }
 
     /// <summary>
     /// Characterizes a natural k such that b:B & e:E => k = b^e
@@ -273,11 +255,11 @@ namespace Z0
         where B : unmanaged, ITypeNat
         where E : unmanaged, ITypeNat
     {
-        
+
     }
 
     /// <summary>
-    /// Characterizes the reification of a natural k such that 
+    /// Characterizes the reification of a natural k such that
     /// b:B & e:E => k = b^e
     /// </summary>
     /// <typeparam name="B">The base type</typeparam>
@@ -287,7 +269,7 @@ namespace Z0
         where B : unmanaged, ITypeNat
         where E : unmanaged, ITypeNat
     {
-        
+
     }
 
     /// <summary>
@@ -300,7 +282,7 @@ namespace Z0
         where K2 : unmanaged, ITypeNat
     {
 
-    }           
+    }
 
     /// <summary>
     /// Characterizes a reified 2-term natural sequence
@@ -315,7 +297,7 @@ namespace Z0
     {
 
     }
-     
+
     /// <summary>
     /// Characterizes a reified 3-term natural sequence
     /// </summary>
@@ -330,5 +312,5 @@ namespace Z0
         where K3 : unmanaged, INatPrimitive<K3>
     {
 
-    }    
+    }
 }

@@ -22,7 +22,7 @@ namespace Z0
     /// <typeparam name="F">The reifying type</typeparam>
     /// <typeparam name="C">The content type</typeparam>
     [Free]
-    public interface IContented<F,C> : IContented<C>, IReified<F>
+    public interface IContented<F,C> : IContented<C>
         where F : IContented<F,C>, new()
     {
         /// <summary>

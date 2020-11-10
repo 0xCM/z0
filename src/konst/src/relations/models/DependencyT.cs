@@ -10,6 +10,8 @@ namespace Z0
     using static Konst;
     using static z;
 
+    using api = Relations;
+
     /// <summary>
     /// Captures a node-homogenous directed relation
     /// </summary>
@@ -46,7 +48,7 @@ namespace Z0
         }
 
         public string Format()
-            => Rules.format(this);
+            => api.format(this);
 
         [MethodImpl(Inline)]
         public bool Equals(Dependency<T> src)

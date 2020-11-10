@@ -20,5 +20,16 @@ namespace Z0
             for(var i=0u; i<count; i++)
                 seek(dst,i) = paired(skip(a,i), skip(b,i));
         }
+
+        [MethodImpl(Inline)]
+        public static string format<T>(Dependency<T> src)
+            where T : INode<T>
+                => text.format("{0} -> {1}", src.Source, src.Target);
+
+        [MethodImpl(Inline)]
+        public static string format<S,T>(Dependency<S,T> src)
+            where S : INode<S>
+            where T : INode<T>
+                => text.format("{0} -> {1}", src.Source, src.Target);
     }
 }

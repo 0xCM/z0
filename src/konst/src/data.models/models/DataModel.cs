@@ -23,5 +23,12 @@ namespace Z0
             Name = name;
             Kind = kind;
         }
+
+        [MethodImpl(Inline)]
+        public DataModel(utf8 name, K kind)
+        {
+            Name = name;
+            Kind = kind;
+        }
     }
 }

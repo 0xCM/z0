@@ -31,7 +31,7 @@ namespace Z0
     /// <typeparam name="F">The reifying type</typeparam>
     /// <typeparam name="T">The element type</typeparam>
     [Free]
-    public interface IDeferred<F,T> : IDeferred<T>, IContented<F,IEnumerable<T>,T>, IReified<F>, IConcatenable<F,T>
+    public interface IDeferred<F,T> : IDeferred<T>, IContented<F,IEnumerable<T>,T>, IConcatenable<F,T>
         where F : IDeferred<F,T>, new()
     {
         F IConcatenable<F,T>.Concat(F rhs)

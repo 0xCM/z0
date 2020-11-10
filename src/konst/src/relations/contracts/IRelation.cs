@@ -7,10 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
-    using static Rules;
-
     /// <summary>
     /// Characterizes a directed relation from a source to a target
     /// </summary>

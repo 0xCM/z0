@@ -3,9 +3,6 @@ echo off
 set ProjectId=konst
 echo ProjectId:%ProjectId%
 
-set ConfigPath=%ZDev%\src\%ProjectId%\.cmd\config.cmd
-echo ConfigPath:%ConfigPath%
-
-call %ConfigPath%
+call %ZDev%\.cmd\project-config.cmd
 
 dotnet build %ProjectPath% -c Release
