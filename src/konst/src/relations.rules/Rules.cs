@@ -20,8 +20,12 @@ namespace Z0
             => new Rule<T>(id, operands, effect);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
+        public static RangeRule<T> range<T>(RuleId id, T min, T max)
+            where T : unmanaged
+                => new RangeRule<T>(id, min,max);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static RuleEffect<T> effect<T>(T[] spec)
             => new RuleEffect<T>(spec);
-
     }
 }

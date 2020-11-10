@@ -302,13 +302,6 @@ readonly struct ApiNames
 
     public const string MemorySlots = memory + dot + slots;
 
-    public const string VexKinds = vex + dot + kinds;
-
-    public const string VexKindX = vex + dot + kinds + dot + extensions;
-
-    public const string VexFpS = vex + dot + fp + dot + scalar;
-
-    public const string VexReflex = vex + dot + reflex;
 
     public const string VexPop = vex + dot + "pop";
 
@@ -357,10 +350,26 @@ readonly struct ApiNames
 
     public const string SeqMap = seq + dot + map;
 
-
     public const string ApiParseBlocks = api + dot + blocks + parse;
 
     public const string ApiArchives = api + dot + archives;
 
     public const string Links = links;
+
+    const string v512 = nameof(v512);
+
+    public const string Vex512 = vex + dot + v512;
+
+    public const string VexKinds = vex + dot + kinds;
+
+    public const string VexLookup = vex + dot + lookups;
+
+    public const string VexKindX = vex + dot + kinds + dot + extensions;
+
+    public const string VexFpS = vex + dot + scalar + dot + fp;
+
+    public const string VexReflex = vex + dot + reflex;
+
+    public const string XVex = vex + dot + extensions;
+
 }

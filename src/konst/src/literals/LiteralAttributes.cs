@@ -17,7 +17,7 @@ namespace Z0
             if(!HasBinaryLiteral(target))
                 return NumericLiteral.Empty;
 
-            return NumericLiteral.base2(target.Name, value, target.Tag<BinaryLiteralAttribute>().Value.Text);
+            return NumericLiterals.base2(target.Name, value, target.Tag<BinaryLiteralAttribute>().Value.Text);
         }
 
         public static bool HasBinaryLiteral(FieldInfo target)

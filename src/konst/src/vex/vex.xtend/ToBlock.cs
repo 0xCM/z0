@@ -11,14 +11,14 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial class XTend
+    partial class XVex
     {
         /// <summary>
         /// Allocates and deposits vector content to a data block
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static SpanBlock128<T> ToBlock<T>(this Vector128<T> src)
             where T : unmanaged
         {
@@ -32,7 +32,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The primitive type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static SpanBlock256<T> ToBlock<T>(this Vector256<T> src)
             where T : unmanaged
         {
@@ -46,7 +46,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The primitive type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static SpanBlock512<T> ToBlock<T>(this Vector512<T> src)
             where T : unmanaged
         {

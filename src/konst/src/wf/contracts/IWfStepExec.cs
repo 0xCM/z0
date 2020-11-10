@@ -58,8 +58,5 @@ namespace Z0
                 return e;
             }
         }
-
-        LinkType<S,T> Type
-            => Links.type<S,T>();
     }
 }

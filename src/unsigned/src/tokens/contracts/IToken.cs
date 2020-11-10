@@ -5,22 +5,24 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.InteropServices;
-    using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
+
+    [Free]
     public interface IToken
     {
 
     }
 
+    [Free]
     public interface IToken<K> : IToken, IIdentified<K>
         where K : unmanaged
     {
 
     }
 
+    [Free]
     public interface IToken<K,S> : IToken<K>
         where S : unmanaged, ISymbol
         where K : unmanaged

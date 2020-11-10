@@ -20,14 +20,20 @@ namespace Z0
         public T Target {get;}
 
         [MethodImpl(Inline)]
-        public static implicit operator FsFlow<T>((T src, T dst) x)
-            => new FsFlow<T>(x.src, x.dst);
-
-        [MethodImpl(Inline)]
         public FsFlow(T src, T dst)
         {
             Source = src;
             Target = dst;
         }
+
+        public string Identifier
+        {
+            [MethodImpl(Inline)]
+            get => string.Format("{0} -> {1}", Source, Target);
+        }
+
+        [MethodImpl(Inline)]
+        public static implicit operator FsFlow<T>((T src, T dst) x)
+            => new FsFlow<T>(x.src, x.dst);
     }
 }

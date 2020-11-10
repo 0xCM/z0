@@ -28,10 +28,16 @@ namespace Z0
         public string Format()
             => api.format(this);
 
-        public LinkType<S,T> Type
+        public LinkType Type
         {
             [MethodImpl(Inline)]
-            get => api.type(this);
+            get => DataFlows.type(this);
+        }
+
+        public string Identifier
+        {
+            [MethodImpl(Inline)]
+            get => api.identifier(this);
         }
 
         [MethodImpl(Inline)]
@@ -41,9 +47,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator DataFlow<S,T>(Paired<S,T> x)
             => new DataFlow<S,T>(x.Left, x.Right);
-
-        [MethodImpl(Inline)]
-        public static implicit operator LinkType<S,T>(DataFlow<S,T> x)
-            => x.Type;
     }
 }

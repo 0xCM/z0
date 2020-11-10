@@ -4,26 +4,24 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    using static Konst;
-    using static z;
-
+    [Free]
     public interface ICmdResult
     {
         CmdId Id {get;}
 
         bit Succeeded {get;}
-
     }
 
+    [Free]
     public interface ICmdResult<P> : ICmdResult
         where P : struct
     {
         P Payload {get;}
     }
 
+    [Free]
     public interface ICmdResult<C,P> : ICmdResult<P>
         where P : struct
         where C : struct, ICmdSpec<C>

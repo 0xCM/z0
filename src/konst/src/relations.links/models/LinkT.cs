@@ -27,10 +27,9 @@ namespace Z0
         public string Identifier
         {
             [MethodImpl(Inline)]
-            get => api.identifier(Source, Target);
+            get => api.identifier(this);
         }
 
-        [MethodImpl(Inline)]
         public string Format()
             => Identifier;
 

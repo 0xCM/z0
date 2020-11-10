@@ -10,13 +10,12 @@ namespace Z0
 
     using static Konst;
 
-    [ApiHost]
-    public static partial class VXTend
+    [ApiHost(ApiNames.XVex, true)]
+    public static partial class XVex
     {
         /// <summary>
         /// Specifies unsigned integral types of widths <see cref='NumericWidths'/>
         /// </summary>
-        public const NumericKind Closure = NumericKind.UnsignedInts;
-
+        const NumericKind Closure = NumericKind.UnsignedInts;
     }
 }

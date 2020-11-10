@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class VXTend
+    partial class XVex
     {
         /// <summary>
         /// Loads a 128-bit vector from the first 128-bit block

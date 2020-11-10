@@ -60,19 +60,6 @@ namespace Z0.Asm
         public static void emit(FS.FilePath dst)
             => emit(AsmOpCodes.dataset(), dst);
 
-        public static void emit(ReadOnlySpan<TokenRecord> src, FS.FilePath dst)
-        {
-            var count = src.Length;
-            using var writer = dst.Writer();
-            var header = text.concat($"Identifier".PadRight(20), "| ", "Token".PadRight(20), "| ", "Meaning");
-            writer.WriteLine(header);
-            for(var i=1; i<count; i++)
-            {
-                ref readonly var token = ref skip(src,i);
-                var line = text.concat(token.Identifier.Format().PadRight(20), "| ", token.Value.Format().PadRight(20), "| ", token.Description);
-                writer.WriteLine(line);
-            }
-        }
 
         [Op]
         public static void emit(in AsmOpCodeDataset src, FS.FilePath dst)

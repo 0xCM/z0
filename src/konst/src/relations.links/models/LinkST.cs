@@ -9,6 +9,8 @@ namespace Z0
 
     using static Part;
 
+    using api = Links;
+
     public readonly struct Link<S,T> : ILink<Link<S,T>,S,T>
     {
         public S Source {get;}
@@ -25,7 +27,7 @@ namespace Z0
         public string Identifier
         {
             [MethodImpl(Inline)]
-            get => string.Concat(Source, Connector, Target);
+            get => api.identifier(this);
         }
 
        [MethodImpl(Inline)]

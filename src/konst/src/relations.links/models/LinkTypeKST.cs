@@ -11,7 +11,7 @@ namespace Z0
 
     using api = Links;
 
-    public readonly struct LinkType<K,S,T>
+    public readonly struct LinkType<S,T,K>
         where K : unmanaged
     {
         public Type Kind {get;}
@@ -21,7 +21,7 @@ namespace Z0
         public Type Target {get;}
 
         public static Type Type
-            => typeof(Link<K,S,T>);
+            => typeof(Link<S,T,K>);
 
         [MethodImpl(Inline)]
         internal LinkType(Type kind, Type src, Type dst)
@@ -42,11 +42,11 @@ namespace Z0
         public override int GetHashCode()
             => (int)api.hash32(this);
 
-        public static implicit operator Type(LinkType<K,S,T> src)
-            => typeof(Link<K,S,T>);
+        public static implicit operator Type(LinkType<S,T,K> src)
+            => typeof(Link<S,T,K>);
 
         [MethodImpl(Inline)]
-        public static implicit operator LinkType(LinkType<K,S,T> src)
+        public static implicit operator LinkType(LinkType<S,T,K> src)
             => new LinkType(src.Source, src.Target, src.Kind);
     }
 }

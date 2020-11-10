@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
 
 
-    partial class VXTend
+    partial class XVex
     {
         /// <summary>
         /// Extracts an index-identified component from the source vector
@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="index">The index of the component to extract</param>
         /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static T Cell<T>(this Vector128<T> src, int index)
             where T : unmanaged
                 => src.GetElement(index);
@@ -31,7 +31,7 @@ namespace Z0
         /// <param name="index">The index of the component to extract</param>
         /// <param name="value">The new component value</param>
         /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Vector128<T> Cell<T>(this Vector128<T> src, int index, T value)
             where T : unmanaged
                 => src.WithElement(index,value);
@@ -43,7 +43,7 @@ namespace Z0
         /// <param name="index">The index of the component to extract</param>
         /// <param name="value">The new component value</param>
         /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Vector256<T> Cell<T>(this Vector256<T> src, int index, T value)
             where T : unmanaged
                 => src.WithElement(index,value);
@@ -54,7 +54,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="index">The index of the component to extract</param>
         /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static T Cell<T>(this Vector256<T> src, int index)
             where T : unmanaged
                 => src.GetElement(index);

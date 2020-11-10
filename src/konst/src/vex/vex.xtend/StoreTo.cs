@@ -7,18 +7,17 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    using System.Runtime.Intrinsics.X86;
 
     using static Konst;
 
-    partial class VXTend
+    partial class XVex
     {
         /// <summary>
         /// Stores vector content to a caller-supplied span
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target memory</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static void StoreTo<T>(this Vector128<T> src, Span<T> dst, int offset = 0)
             where T : unmanaged
                 => z.vsave(src,dst,offset);
@@ -28,7 +27,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target memory</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static void StoreTo<T>(this Vector256<T> src, Span<T> dst, int offset = 0)
             where T : unmanaged
                 => z.vsave(src,dst,offset);
@@ -38,7 +37,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target memory</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static void StoreTo<T>(this Vector512<T> src, Span<T> dst, int offset = 0)
             where T : unmanaged
                 => z.vsave(src,dst,offset);
@@ -49,7 +48,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target memory</param>
         /// <param name="offset">The target offset</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static void StoreTo<T>(this Vector128<T> src, ref T dst, int offset = 0)
             where T : unmanaged
                 => z.vsave(src, ref dst, offset);
@@ -60,7 +59,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target memory</param>
         /// <param name="offset">The target offset</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static void StoreTo<T>(this Vector256<T> src, ref T dst, int offset = 0)
             where T : unmanaged
                 => z.vsave(src, ref dst, offset);

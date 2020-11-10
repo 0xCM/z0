@@ -13,6 +13,21 @@ namespace Z0
     [ApiHost]
     public readonly struct Tokens
     {
+        [Op]
+        public static void emit(ReadOnlySpan<TokenRecord> src, FS.FilePath dst)
+        {
+            var count = src.Length;
+            using var writer = dst.Writer();
+            var header = text.concat($"Identifier".PadRight(20), "| ", "Token".PadRight(20), "| ", "Meaning");
+            writer.WriteLine(header);
+            for(var i=1; i<count; i++)
+            {
+                ref readonly var token = ref skip(src,i);
+                var line = text.concat(token.Identifier.Format().PadRight(20), "| ", token.Value.Format().PadRight(20), "| ", token.Description);
+                writer.WriteLine(line);
+            }
+        }
+
         [MethodImpl(Inline)]
         public void Symbols<T>(in T src, Span<HexSymLo> dst)
             where T : unmanaged
@@ -28,7 +43,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static ArtifactIdentity<K,A> identify<K,A>(K kind, A id)
+        public static KindedIdentity<K,A> identify<K,A>(K kind, A id)
             where K : unmanaged
             where A : unmanaged
                 => (kind, id);
@@ -69,6 +84,12 @@ namespace Z0
                 seek(dst,i) = Symbolic.render(skip(symbols,i));
             return dst;
         }
+
+        [MethodImpl(Inline)]
+        public static TokenSpec<K,S> spec<K,S>(uint index, K kind, string id, params S[] symbols)
+            where K : unmanaged
+            where S : unmanaged, ISymbol<S>
+                => new TokenSpec<K,S>(index, kind, id, symbols);
 
         [MethodImpl(Inline)]
         public static TokenRecord token<T>(T index, string id, string value, string description)

@@ -24,9 +24,6 @@ namespace Z0
         S Source {get;}
 
         T Target {get;}
-
-        string IIdentified.Identifier
-            => string.Format("{0} -- {1}", Source, Target);
     }
 
     [Free]

@@ -52,7 +52,7 @@ namespace Z0
                 else if(LiteralAttributes.HasBinaryLiteral(field))
                     dst.Add(LiteralAttributes.BinaryLiteral(field,vRaw));
                 else
-                    dst.Add(NumericLiteral.base2(field.Name, vRaw, BitFormatter.bits(vRaw, tc)));
+                    dst.Add(NumericLiterals.base2(field.Name, vRaw, BitFormatter.bits(vRaw, tc)));
             }
             return dst.ToArray();
         }
@@ -76,12 +76,12 @@ namespace Z0
                             var indicator = NumericBases.indicator(component[0]);
 
                             if(indicator != 0)
-                                dst[i] = NumericLiteral.define(src.Name, value, component.Substring(1), NumericBases.kind(indicator));
+                                dst[i] = NumericLiterals.define(src.Name, value, component.Substring(1), NumericBases.kind(indicator));
                             else
                             {
                                 indicator = NumericBases.indicator(component[length - 1]);
                                 indicator = indicator != 0 ? indicator : NBI.Base2;
-                                dst[i] = NumericLiteral.define(
+                                dst[i] = NumericLiterals.define(
                                     src.Name,
                                     value,
                                     component.Substring(0, length - 1),

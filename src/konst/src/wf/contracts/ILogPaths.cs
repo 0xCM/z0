@@ -9,6 +9,9 @@ namespace Z0
 
     using static CoreFolderNames;
 
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
+    [Free]
     public interface ILogPaths
     {
         /// <summary>

@@ -5,12 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
 
     using static Konst;
-
-    using api = Symbolic;
 
     public readonly struct Tokens<K,S>
         where K : unmanaged
@@ -34,10 +31,6 @@ namespace Z0
             get => Data.Edit;
         }
 
-        [MethodImpl(Inline)]
-        public static implicit operator Tokens<K,S>(Token<K,S>[] src)
-            => new Tokens<K,S>(src);
-
         public ushort Count
         {
             [MethodImpl(Inline)]
@@ -49,5 +42,9 @@ namespace Z0
             [MethodImpl(Inline)]
             get => ref Data.First;
         }
+
+        [MethodImpl(Inline)]
+        public static implicit operator Tokens<K,S>(Token<K,S>[] src)
+            => new Tokens<K,S>(src);
     }
 }

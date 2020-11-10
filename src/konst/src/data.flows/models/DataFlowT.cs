@@ -24,11 +24,16 @@ namespace Z0
             Target = dst;
         }
 
-        [MethodImpl(Inline)]
+        public string Identifier
+        {
+            [MethodImpl(Inline)]
+            get => api.identifier(this);
+        }
+
         public string Format()
             => api.format(this);
 
-        public LinkType<T> Type
+        public LinkType Type
         {
             [MethodImpl(Inline)]
             get => api.type(this);
@@ -37,9 +42,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator DataFlow<T>((T src, T dst) x)
             => new DataFlow<T>(x.src, x.dst);
-
-        [MethodImpl(Inline)]
-        public static implicit operator LinkType<T>(DataFlow<T> x)
-            => x.Type;
     }
 }

@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct CapturedCodeBlock : IDataFlow<BasedCodeBlock>
+    public readonly struct CapturedCodeBlock
     {
         public readonly MemoryAddress Base;
 

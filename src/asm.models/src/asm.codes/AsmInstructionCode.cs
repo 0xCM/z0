@@ -13,7 +13,7 @@ namespace Z0.Asm
     /// <summary>
     /// Pairs an instruction definition together with the corresponding source code representation
     /// </summary>
-    public readonly struct AsmInstructionCode : IDataFlow<PackedInstruction,AsmStatementCode>
+    public readonly struct AsmInstructionCode
     {
         public readonly PackedInstruction Instruction;
 
@@ -31,6 +31,7 @@ namespace Z0.Asm
             Instruction = detail;
             SourceCode = asm;
         }
+
         public string Format()
             => Render.format(SourceCode, Instruction);
 

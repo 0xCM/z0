@@ -28,18 +28,17 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        internal LinkType(Type kind, Type src, Type dst)
+        internal LinkType(Type src, Type dst, Type kind)
         {
-            Kind = kind;
             Source = src;
             Target = dst;
+            Kind = kind;
         }
 
         [MethodImpl(Inline)]
         public bool Equals(LinkType src)
             => api.eq(this, src);
 
-        [MethodImpl(Inline)]
         public string Format()
             => api.format(this);
 

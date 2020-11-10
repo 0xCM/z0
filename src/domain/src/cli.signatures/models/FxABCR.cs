@@ -51,5 +51,4 @@ namespace Z0
         public static ReadOnlySpan<Type> Types
             => _Types;
     }
-
 }

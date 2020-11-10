@@ -25,11 +25,11 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator ClrArtifactIdentity(ArtifactIdentity<ClrArtifactKind,ClrArtifactKey> src)
+        public static implicit operator ClrArtifactIdentity(KindedIdentity<ClrArtifactKind,ClrArtifactKey> src)
             => new ClrArtifactIdentity(src.Kind, src.Key);
 
         [MethodImpl(Inline)]
-        public static implicit operator ArtifactIdentity<ClrArtifactKind,ClrArtifactKey>(ClrArtifactIdentity src)
-            => new ArtifactIdentity<ClrArtifactKind,ClrArtifactKey>(src.Kind, src.Key);
+        public static implicit operator KindedIdentity<ClrArtifactKind,ClrArtifactKey>(ClrArtifactIdentity src)
+            => new KindedIdentity<ClrArtifactKind,ClrArtifactKey>(src.Kind, src.Key);
     }
 }

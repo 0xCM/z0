@@ -4,20 +4,23 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
+    [Free]
     public interface IDataHandler
     {
 
-    }    
-   
-    public interface IDataHandler<T> : IDataHandler
-    {
-        void Handle(T data);    
     }
 
+    [Free]
+    public interface IDataHandler<T> : IDataHandler
+    {
+        void Handle(T data);
+    }
+
+    [Free]
     public interface IDataHandler<C,T> : IDataHandler
     {
-        void Handle(C context, T data);    
+        void Handle(C context, T data);
     }
 }

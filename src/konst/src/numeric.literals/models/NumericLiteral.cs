@@ -25,22 +25,6 @@ namespace Z0
         public readonly NBK Base;
 
         [MethodImpl(Inline)]
-        public static NumericLiteral base2(string Name, object Value, string Text)
-            => new NumericLiteral(Name, Value, Text, NBK.Base2);
-
-        [MethodImpl(Inline)]
-        public static NumericLiteral base10(string Name, object Value, string Text)
-            => new NumericLiteral(Name, Value, Text, NBK.Base10);
-
-        [MethodImpl(Inline)]
-        public static NumericLiteral base16(string Name, object Value, string Text)
-            => new NumericLiteral(Name, Value, Text, NBK.Base16);
-
-        [MethodImpl(Inline)]
-        public static NumericLiteral define(string Name, object Value, string Text, NBK NumericBase)
-            => new NumericLiteral(Name,Value,Text,NumericBase);
-
-        [MethodImpl(Inline)]
         public NumericLiteral(string name, object data, string text, NBK @base)
         {
             Name = name;
@@ -100,9 +84,6 @@ namespace Z0
         public bool Equals(NumericLiteral src)
             => object.Equals(Data, src.Data);
 
-        public static NumericLiteral Empty
-            => new NumericLiteral(EmptyString, EmptyString, EmptyString, 0);
-
         string ILiteral.Name
             => Name;
 
@@ -111,5 +92,8 @@ namespace Z0
 
         string ILiteral.Text
             => Text;
+
+       public static NumericLiteral Empty
+            => new NumericLiteral(EmptyString, EmptyString, EmptyString, 0);
     }
 }

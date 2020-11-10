@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class VXTend
+    partial class XVex
     {
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T LastCell<T>(this Vector128<T> src)

@@ -13,6 +13,8 @@ namespace Z0
     [ApiHost]
     public readonly struct ValueTypes
     {
+        const NumericKind Closure = Integers;
+
         /// <summary>
         /// Returns the hex character code for a <see cref='uint4'/> value
         /// </summary>
@@ -34,7 +36,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The value to evaluate</param>
         /// <typeparam name="T">The structure type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static bool nonempty<T>(in T src)
             where T : struct
         {
@@ -46,7 +48,7 @@ namespace Z0
             return false;
         }
 
-        [MethodImpl(Inline), Op, Closures(Integers)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static void digits<T>(in T src, Span<HexCodeLo> dst)
             where T : struct
         {
@@ -62,7 +64,7 @@ namespace Z0
             }
         }
 
-        [MethodImpl(Inline), Op, Closures(Integers)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ReadOnlySpan<HexCodeLo> digits<T>(in T src, LowerCased @case)
             where T : struct
         {
@@ -72,7 +74,7 @@ namespace Z0
             return dst;
         }
 
-        [MethodImpl(Inline), Op, Closures(Integers)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static string format<T>(in T src)
             where T : struct
         {
@@ -97,7 +99,7 @@ namespace Z0
         /// <param name="x">The first value</param>
         /// <param name="y">The second value</param>
         /// <typeparam name="T">The structure type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static bool neq<T>(in T x, in T y)
             where T : struct
         {
@@ -117,7 +119,7 @@ namespace Z0
         /// <param name="x">The first value</param>
         /// <param name="y">The second value</param>
         /// <typeparam name="T">The structure type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static bool eq<T>(in T x, in T y)
             where T : struct
         {
@@ -136,7 +138,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The value to evaluate</param>
         /// <typeparam name="T">The structure type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static bool empty<T>(in T src)
             where T : struct
         {

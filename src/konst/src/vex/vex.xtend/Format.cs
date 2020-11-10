@@ -11,9 +11,9 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial class VXTend
+    partial class XVex
     {
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [Op, Closures(Closure)]
         public static string Format<T>(SpanBlock128<T> x, SpanBlock128<T> y, Vector128<T> expect, Vector128<T> actual, Vector128<T> result)
             where T : unmanaged
         {
@@ -26,7 +26,7 @@ namespace Z0
             return dst.ToString();
         }
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [Op, Closures(Closure)]
         public static string Format<T>(SpanBlock256<T> x, SpanBlock256<T> y, Vector256<T> expect, Vector256<T> actual, Vector256<T> result)
             where T : unmanaged
         {
@@ -39,13 +39,13 @@ namespace Z0
             return dst.ToString();
         }
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [Op, Closures(Closure)]
         public static string FormatHex<T>(this Vector128<T> src, char sep = ItemDelimiter, bool specifier = false)
             where T : unmanaged
                 => vspan(src).FormatHex(sep, specifier);
 
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [Op, Closures(Closure)]
         public static string FormatHex<T>(this Vector256<T> src, char sep = ItemDelimiter, bool specifier = false)
              where T : unmanaged
                 => vspan(src).FormatHex(sep, specifier);
@@ -55,12 +55,12 @@ namespace Z0
             where T : unmanaged
                 => vspan(src).Format(sep,0,pad,true);
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [Op, Closures(Closure)]
         public static string Format<T>(this Vector256<T> src, char sep = ItemDelimiter, int pad = 2)
             where T : unmanaged
                 => vspan(src).Format(sep, 0, pad, true);
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [Op, Closures(Closure)]
         public static string Format<T>(this Vector512<T> src, char sep = ItemDelimiter, int pad = 2)
             where T : unmanaged
                 => text.bracket(
@@ -71,7 +71,7 @@ namespace Z0
                         )
                     );
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [Op, Closures(Closure)]
         public static string FormatLanes<T>(this Vector256<T> src, char sep = ItemDelimiter, int pad = 2)
             where T : unmanaged
                 => text.concat(
@@ -79,17 +79,17 @@ namespace Z0
                     src.GetUpper().Format(sep, pad));
 
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [Op, Closures(Closure)]
         public static string FormatAsmHex<T>(this Vector128<T> src)
             where T : unmanaged
                 => vspan(src).FormatHex(Chars.Space, false);
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [Op, Closures(Closure)]
         public static string FormatAsmHex<T>(this Vector256<T> src)
             where T : unmanaged
                 => vspan(src).FormatHex(Chars.Space, false);
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [Op, Closures(Closure)]
         public static string FormatAsmHex<T>(this Vector512<T> src)
             where T : unmanaged
                 => vspan(src).FormatHex(Chars.Space, false);

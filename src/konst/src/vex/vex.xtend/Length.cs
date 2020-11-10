@@ -7,19 +7,18 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    using System.Runtime.Intrinsics.X86;
 
     using static Konst;
     using static z;
 
-    partial class VXTend
+    partial class XVex
     {
-       /// <summary>
+        /// <summary>
         /// Returns the number of source vector components
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static int Length<T>(this Vector128<T> src)
             where T : unmanaged
                 => z.vcount<T>(w128);
@@ -29,7 +28,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static int Length<T>(this Vector256<T> src)
             where T : unmanaged
                 => z.vcount<T>(w256);

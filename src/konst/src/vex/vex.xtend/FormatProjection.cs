@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class VXTend
+    partial class XVex
     {
        public static string FormatProjection<S,T>(this Vector128<S> x, Vector128<T> y)
             where S : unmanaged

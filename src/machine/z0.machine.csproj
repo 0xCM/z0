@@ -8,6 +8,9 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Merge)" />
+      <ProjectReference Include="$(VSvc)" />
+      <ProjectReference Include="$(Logix)" />
+
   </ItemGroup>
 
   <ItemGroup>

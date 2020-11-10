@@ -18,6 +18,12 @@ namespace Z0
         public RuleId(string id)
             => Identifier = id;
 
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => text.empty(Identifier);
+        }
+
         [MethodImpl(Inline)]
         public static implicit operator RuleId(string src)
             => new RuleId(src);

@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// Defines kinded link
     /// </summary>
-    public readonly struct Link<K,S,T>
+    public readonly struct Link<S,T,K>
         where K : unmanaged
     {
         /// <summary>
@@ -31,7 +31,7 @@ namespace Z0
         public K Kind {get;}
 
         [MethodImpl(Inline)]
-        public Link(K kind, S src, T dst)
+        public Link(S src, T dst, K kind)
         {
             Kind = kind;
             Source = src;
@@ -39,18 +39,14 @@ namespace Z0
         }
 
         public static Type Type
-            => LinkType<K,S,T>.Type;
+            => LinkType<S,T,K>.Type;
 
         [MethodImpl(Inline)]
-        public static implicit operator Link<K,S,T>((K kind, S client, T supplier) x)
-            => new Link<K,S,T>(x.kind, x.client, x.supplier);
+        public static implicit operator Link<S,T,K>(Tripled<S,T,K> src)
+            => new Link<S,T,K>(src.First, src.Second, src.Third);
 
         [MethodImpl(Inline)]
-        public static implicit operator Link<K,S,T>(Tripled<K,S,T> src)
-            => new Link<K,S,T>(src.First, src.Second, src.Third);
-
-        [MethodImpl(Inline)]
-        public static implicit operator Tripled<K,S,T>(Link<K,S,T> x)
+        public static implicit operator Tripled<K,S,T>(Link<S,T,K> x)
             => (x.Kind, x.Source, x.Target);
     }
 }

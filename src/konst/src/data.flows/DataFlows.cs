@@ -15,12 +15,19 @@ namespace Z0
     {
         const NumericKind Closure = UnsignedInts;
 
+        public static string identifier<S,T>(DataFlow<S,T> flow)
+            => text.format("{0} -> {1}", flow.Source, flow.Target);
+
+        [MethodImpl(Inline)]
+        public static string identifier<T>(DataFlow<T> flow)
+            => text.format("{0} -> {1}", flow.Source, flow.Target);
+
         [MethodImpl(Inline)]
         public static string format<T>(DataFlow<T> flow)
             => text.format("{0} -> {1}", flow.Source, flow.Target);
 
         [MethodImpl(Inline)]
-        public static LinkType<T> type<T>(DataFlow<T> flow)
+        public static LinkType type<T>(DataFlow<T> flow)
             => Links.type<T>();
 
         [MethodImpl(Inline)]
@@ -28,7 +35,7 @@ namespace Z0
             => text.format("{0} -> {1}", flow.Source, flow.Target);
 
         [MethodImpl(Inline)]
-        public static LinkType<S,T> type<S,T>(DataFlow<S,T> flow)
-            => Links.type(flow.Source, flow.Target);
+        public static LinkType type<S,T>(DataFlow<S,T> flow)
+            => Links.type<S,T>();
     }
 }

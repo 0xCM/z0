@@ -9,8 +9,8 @@ namespace Z0
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface IProject<T> : IVersioned
-        where T : struct, IProject<T>
+    public interface IDevProject<T> : IVersioned
+        where T : struct, IDevProject<T>
     {
 
     }

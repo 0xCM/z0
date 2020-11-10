@@ -15,15 +15,14 @@ namespace Z0
     {
         const NumericKind Closure = UnsignedInts;
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [Op, Closures(Closure)]
         public static string format(LinkType t)
             => text.format("{0} -> {1}", t.Source.Name, t.Target.Name);
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [Op, Closures(Closure)]
         public static string format<T>(LinkType<T> src)
             => text.format("{0} -> {1}", src.Source.Name, src.Target.Name);
 
-        [MethodImpl(Inline)]
         public static string format<S,T>(LinkType<S,T> src)
             => text.format("{0} -> {1}", src.Source.Name, src.Target.Name);
 
@@ -34,6 +33,11 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Link<S,T> link<S,T>(S src, T dst)
             => new Link<S,T>(src, dst);
+
+        [MethodImpl(Inline)]
+        public static Link<S,T,K> link<S,T,K>(S src, T dst, K kind)
+            where K : unmanaged
+                => new Link<S,T,K>(src, dst, kind);
 
         [MethodImpl(Inline), Op]
         public static uint hash32(LinkType src)
@@ -48,19 +52,32 @@ namespace Z0
             => a.Source == b.Source && a.Target == b.Target;
 
         [MethodImpl(Inline)]
-        public static LinkType<T> type<T>(T t = default)
+        public static LinkType type<T>(T t = default)
             => new LinkType<T>(typeof(T), typeof(T));
-
-        [MethodImpl(Inline)]
-        public static LinkType<S,T> type<S,T>(S s = default, T t = default)
-            => new LinkType<S,T>(typeof(S),typeof(T));
 
         [MethodImpl(Inline), Op]
         public static LinkType type(Type src, Type dst)
             => new LinkType(src,dst);
 
+        [MethodImpl(Inline), Op]
+        public static LinkType type(Type src, Type dst, Type kind)
+            => new LinkType(src,dst, kind);
+
         [MethodImpl(Inline)]
-        public static string identifier<S,T>(T src, S dst)
-            => string.Format("{0} -> {1}", src, dst);
+        public static LinkType type<S,T>()
+            => new LinkType<S,T>(typeof(S), typeof(T));
+
+        [MethodImpl(Inline)]
+        public static LinkType type<S,T,K>()
+            where K : unmanaged
+                => new LinkType<S,T,K>(typeof(S), typeof(T), typeof(K));
+
+        [MethodImpl(Inline)]
+        public static string identifier<S,T>(Link<S,T> link)
+            => string.Format("{0} -> {1}", link.Source, link.Target);
+
+        [MethodImpl(Inline), Closures(Closure)]
+        public static string identifier<T>(Link<T> link)
+            => string.Format("{0} -> {1}", link.Source, link.Target);
     }
 }
