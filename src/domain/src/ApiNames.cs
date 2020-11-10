@@ -9,11 +9,6 @@ readonly struct ApiNames
 {
     public const string Signatures = signatures;
 
-    public const string Cmd = cmd + dot + core;
-
-    public const string CmdPatterns = cmd + dot + patterns;
-
-    public const string CmdRunners = cmd + dot + "runners";
 
     public const string sequences = nameof(sequences);
 
@@ -45,9 +40,6 @@ readonly struct ApiNames
 
     public const string Workers = workers;
 
-    const string scripts = nameof(scripts);
-
-    public const string Scripts = scripts;
 
     public const string WfServices = workflow + dot + services;
 }

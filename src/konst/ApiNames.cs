@@ -372,4 +372,12 @@ readonly struct ApiNames
 
     public const string XVex = vex + dot + extensions;
 
+    public const string Scripts = scripts;
+
+    public const string Cmd = cmd + dot + core;
+
+    public const string CmdPatterns = cmd + dot + patterns;
+
+    public const string CmdRunners = cmd + dot + "runners";
+
 }

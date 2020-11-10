@@ -57,9 +57,9 @@ namespace Z0
         {
             using var flow = Wf.Running();
             var cmd = Wf.CmdCatalog.EmitRuntimeIndex();
-            var worker = cmd.Worker();
-            var result  = worker.Invoke(Wf, cmd);
-            Wf.Status(result);
+            //var worker = cmd.Worker();
+            //var result  = worker.Invoke(Wf, cmd);
+            //Wf.Status(result);
 
         }
 

@@ -1,9 +1,0 @@
-Usage: llvm-cov {export|gcov|report|show} [OPTION]...
-
-Shows code coverage information.
-
-Subcommands:
-  export: Export instrprof file to structured format.
-  gcov:   Work with the gcov format.
-  report: Summarize instrprof style coverage information.
-  show:   Annotate source files using instrprof style coverage.

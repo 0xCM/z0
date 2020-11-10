@@ -1,7 +1,0 @@
-OVERVIEW: LLVM profile data tools
-
-USAGE: llvm-profdata.exe <command> [args...]
-USAGE: llvm-profdata.exe <command> -help
-
-See each individual command --help for more details.
-Available commands: merge, show, overlap

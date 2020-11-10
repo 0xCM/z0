@@ -390,4 +390,6 @@ public readonly struct ApiNameParts
 
     public const string nodes = nameof(nodes);
 
+    public const string scripts = nameof(scripts);
+
 }

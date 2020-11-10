@@ -12,13 +12,14 @@ namespace Z0
     public interface ISymbolicTest<S>
         where S : unmanaged
     {
-        bool Check(S s);
+        bit Check(S s);
     }
 
-    public interface ISymbolicTest<H,S> : ISymbolicTest<S>
+    public interface ISymbolicTest<H,S> : ISymbolicTest<S>, IKeyed<string>
         where H : unmanaged, ISymbolicTest<H,S>
         where S : unmanaged
     {
-
+        string IKeyed<string>.Key
+                => typeof(H).AssemblyQualifiedName;
     }
 }

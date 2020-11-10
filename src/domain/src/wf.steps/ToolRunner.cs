@@ -38,7 +38,7 @@ namespace Z0
             Args = wf.Args;
             CmdBuilder = wf.CmdBuilder();
             Db = Wf.Db();
-            Router = Cmd.router(wf);
+            Router = Cmd.router(wf,typeof(Workers));
 
         }
 
