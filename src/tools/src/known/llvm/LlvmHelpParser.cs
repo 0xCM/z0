@@ -4,11 +4,14 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    [Cmd]
-    public struct EmitToolScriptsCmd : ICmdSpec<EmitToolScriptsCmd>
-    {
-        public ToolId Tool;
+    using System;
+    using System.Runtime.CompilerServices;
 
-        public CmdArgs Args {get;}
+    using static Konst;
+    using static z;
+
+    public class LlvmHelpParser
+    {
+        
     }
 }

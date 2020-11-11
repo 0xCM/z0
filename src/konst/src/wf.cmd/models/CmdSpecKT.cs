@@ -15,13 +15,13 @@ namespace Z0
     {
         public CmdId Id {get;}
 
-        public CmdArgs<K,T> Args;
+        public CmdArgs<K,T> Args {get;}
 
         [MethodImpl(Inline)]
-        public CmdSpec(CmdId id, params CmdArg<K,T>[] options)
+        public CmdSpec(CmdId id, params CmdArg<K,T>[] args)
         {
             Id = id;
-            Args = options;
+            Args = args;
         }
 
         CmdArgs ICmdSpec.Args

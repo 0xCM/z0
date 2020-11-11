@@ -31,10 +31,6 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator CmdArg(Pair<string> src)
-            => new CmdArg(src.Left, src.Right);
-
-        [MethodImpl(Inline)]
         public string Format()
             => string.Format(RP.Setting, Name, Value);
 
@@ -46,5 +42,9 @@ namespace Z0
 
         string ICmdArg.Value
             => Value;
+
+        [MethodImpl(Inline)]
+        public static implicit operator CmdArg(Pair<string> src)
+            => new CmdArg(src.Left, src.Right);
     }
 }

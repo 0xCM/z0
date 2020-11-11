@@ -4,11 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    [Cmd]
-    public struct EmitToolScriptsCmd : ICmdSpec<EmitToolScriptsCmd>
-    {
-        public ToolId Tool;
+    using System;
 
-        public CmdArgs Args {get;}
+    using static z;
+
+    readonly struct Msg
+    {
+        public static RenderPattern<ToolId> ToolHelpNotFound => "Tool {0} help not found";
     }
 }

@@ -22,12 +22,4 @@ namespace Z0
         CmdId IIdentified<CmdId>.Id
             => Cmd.id<T>();
     }
-
-    [Free]
-    public interface IToolCmd<K,C> : IToolCmd<C>, ICmdSpec<K,C>
-        where C : struct, IToolCmd<K,C>
-        where K : unmanaged
-    {
-
-    }
 }

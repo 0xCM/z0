@@ -33,13 +33,16 @@ namespace Z0
         where K : unmanaged
         where T : struct
     {
+        new CmdArgs<K,T> Args {get;}
 
+        CmdArgs ICmdSpec.Args
+            => Args;
     }
 
     [Free]
     public interface ICmdSpec<H,K,T> : ICmdSpec<K,T>
-        where K : unmanaged
         where H : struct, ICmdSpec<H,K,T>
+        where K : unmanaged
         where T : struct
     {
 

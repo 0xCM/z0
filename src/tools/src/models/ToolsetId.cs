@@ -7,19 +7,17 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Konst;
+    using static z;
 
-    public readonly struct ToolCmd
+    public enum ToolsetId : uint
     {
-        public ToolId Id {get;}
+        None,
 
-        public CmdLine Spec {get;}
+        Llvm,
 
-        [MethodImpl(Inline)]
-        public ToolCmd(ToolId id, CmdLine spec)
-        {
-            Id = id;
-            Spec = spec;
-        }
+        CoreRoot,
+
+        Msys64,
     }
 }

@@ -10,25 +10,18 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct WfRunSpec
+    public readonly struct Toolsets
     {
-
-    }
-
-    public readonly struct WfRunSpec<C,S,T>
-    {
-        public readonly C Config;
-
-        public readonly S Source;
-
-        public readonly T Target;
+        readonly Indexed<Toolset> Data;
 
         [MethodImpl(Inline)]
-        public WfRunSpec(in C config, in S source, in T target)
+        internal Toolsets(Toolset[] src)
+            => Data = src;
+
+        public ref Toolset this[ToolsetId id]
         {
-            Config = config;
-            Source = source;
-            Target = target;
-        }
+            [MethodImpl(Inline)]
+            get => ref Data[(uint)id];
+        }        
     }
 }

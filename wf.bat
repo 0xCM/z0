@@ -1,1 +1,0 @@
-call wf\wf.bat

@@ -32,6 +32,12 @@ namespace Z0
         public override string ToString()
             => Format();
 
+        string ICmdArg.Key
+            => Name;
+
+        T ICmdArg<T>.Value
+            => Value;
+
         [MethodImpl(Inline)]
         public static implicit operator CmdArg<T>((string name, T value) src)
             => new CmdArg<T>(src.name, src.value);
@@ -39,11 +45,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator CmdArg(CmdArg<T> src)
             => new CmdArg(src.Name, src.Value?.ToString() ?? EmptyString);
-
-        string ICmdArg.Key
-            => Name;
-
-        T ICmdArg<T>.Value
-            => Value;
     }
 }

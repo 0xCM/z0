@@ -21,10 +21,6 @@ namespace Z0
         public CmdArgs(CmdArg<K,T>[] src)
             => Data = src;
 
-        [MethodImpl(Inline)]
-        public static implicit operator CmdArgs<K,T>(CmdArg<K,T>[] src)
-            => new CmdArgs<K,T>(src);
-
         public ReadOnlySpan<CmdArg<K,T>> View
         {
             [MethodImpl(Inline)]
@@ -42,10 +38,19 @@ namespace Z0
             [MethodImpl(Inline)]
             get => ref Data[index];
         }
+
         public string Format()
             => api.format(this);
 
         public override string ToString()
             => Format();
+
+        [MethodImpl(Inline)]
+        public static implicit operator CmdArgs<K,T>(CmdArg<K,T>[] src)
+            => new CmdArgs<K,T>(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator CmdArgs(CmdArgs<K,T> src)
+            => new CmdArgs(src.Storage.Select(x => (CmdArg)x));
     }
 }

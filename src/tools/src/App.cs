@@ -19,7 +19,7 @@ namespace Z0
         {
             try
             {
-                using var wf = WfShell.create(args);
+                using var wf = WfShellInit.create(args);
                 create().Run(wf);
             }
             catch(Exception e)
@@ -34,6 +34,7 @@ namespace Z0
             runner.Run();
         }
     }
+
 
     public static partial class XTend
     {

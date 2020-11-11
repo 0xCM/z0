@@ -52,5 +52,13 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator CmdArg<K,T>(Paired<K,T> src)
             => new CmdArg<K,T>(src.Left, src.Right);
+
+        [MethodImpl(Inline)]
+        public static implicit operator CmdArg(CmdArg<K,T> src)
+            => new CmdArg(src.Key, src.Value?.ToString() ?? EmptyString);
+
+        [MethodImpl(Inline)]
+        public static implicit operator CmdArg<T>(CmdArg<K,T> src)
+            => new CmdArg<T>(src.Key, src.Value);
     }
 }
