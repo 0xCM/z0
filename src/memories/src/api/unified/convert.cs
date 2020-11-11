@@ -23,7 +23,6 @@ namespace Z0
             where S : unmanaged
                 => z.force<S,T>(src);
 
-
         /// <summary>
         /// If possible, applies the conversion int -> T
         /// </summary>

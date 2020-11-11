@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm.Data
+namespace Z0.Asm
 {
     using System;
     using System.Collections.Generic;
@@ -19,7 +19,7 @@ namespace Z0.Asm.Data
     using static CreditTypes.ContentType;
 
     public class t_docref : t_asmd<t_docref>
-    {         
+    {
         public void t_component_encode()
         {
             Claim.Eq(Credits.vendor(Intel).Vendor, Intel);
@@ -34,7 +34,7 @@ namespace Z0.Asm.Data
             Claim.Eq(Credits.chapter(Chapter8).Chapter, Chapter8);
             Claim.Eq(Credits.appendix(AppendixA).Appendix, AppendixA);
             Claim.Eq(Credits.appendix(AppendixB).Appendix, AppendixB);
-            Claim.Eq(Credits.appendix(AppendixD).Appendix, AppendixD);            
+            Claim.Eq(Credits.appendix(AppendixD).Appendix, AppendixD);
             Claim.Eq(Credits.section(Section2).Section, Section2);
             Claim.Eq(Credits.section(Section3).Section, Section3);
             Claim.Eq(Credits.section(Section10).Section, Section10);
@@ -71,7 +71,7 @@ namespace Z0.Asm.Data
             Claim.Eq(tr.Level0, d2);
             Claim.Eq(tr.Level1, d3);
             Claim.Eq(tr.Level2, d1);
-            Claim.Eq(tr.ContentType, Table);                     
+            Claim.Eq(tr.ContentType, Table);
         }
 
         public void t_docref_bitfield()
@@ -82,7 +82,7 @@ namespace Z0.Asm.Data
             {
                 var literal = literals[i];
                 var bits = BitSpans.parse(literal.Text);
-                var bitval = bits.Convert<ulong>();                
+                var bitval = bits.Convert<ulong>();
                 Claim.yea(gmath.eq(bitval, literal.Data));
             }
         }

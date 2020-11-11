@@ -30,11 +30,9 @@ readonly struct ApiNames
 
     public const string XCmdWorkers = cmd + dot + workers + dot + extensions;
 
-    public const string XCmdSamples = cmd + dot + samples + dot + extensions;
 
     public const string CmdSpecs = cmd + dot + specs;
 
-    public const string XCmdSpecs = cmd + dot + specs + dot + extensions;
 
     public const string JsonDeps = "builds" + dot + archives + dot + "dependencies";
 
@@ -42,18 +40,4 @@ readonly struct ApiNames
 
 
     public const string WfServices = workflow + dot + services;
-}
-
-[ToolNameProvider]
-readonly struct ToolNames
-{
-    public const string echo = nameof(echo);
-
-    public const string dumpbin = nameof(dumpbin);
-
-    public const string procdump = nameof(procdump);
-
-    public const string ildasm = nameof(ildasm);
-
-    public const string ilasm = nameof(ilasm);
 }

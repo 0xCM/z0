@@ -13,7 +13,6 @@ namespace Z0.Asm
 
     public class t_legal_identity : t_asm<t_legal_identity>
     {
-
         public void check_code_identity()
         {
             var catalog = ApiCatalogs.part(Parts.Math.Resolved);

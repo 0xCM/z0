@@ -15,7 +15,7 @@ namespace Z0
         /// <summary>
         /// Constructs a sequence of n characters {ci} := [c_n-1,..., c_0]
         /// over the domain {'0','1'} according to whether the bit in the i'th
-        /// position of the source is respecively disabled/enabled
+        /// position of the source is respectively disabled/enabled
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The source type</typeparam>
@@ -27,7 +27,7 @@ namespace Z0
         /// <summary>
         /// Constructs a sequence of n characters {ci} := [c_n-1,..., c_0]
         /// over the domain {'0','1'} according to whether the bit in the i'th
-        /// position of the source is respecively disabled/enabled
+        /// position of the source is respectively disabled/enabled
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The source type</typeparam>
@@ -74,7 +74,7 @@ namespace Z0
             => src.RemoveAny(Chars.LBracket, Chars.RBracket, Chars.Space, Chars.Underscore, (char)AsciLetter.b);
 
         /// <summary>
-        /// Assembles a bistring given parts ordered from lo to hi
+        /// Assembles a bitstring given parts ordered from lo to hi
         /// </summary>
         /// <param name="parts">The source parts</param>
         [MethodImpl(Inline)]

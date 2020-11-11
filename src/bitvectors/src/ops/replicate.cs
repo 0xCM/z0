@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;    
-    using static Memories;
+    using static Konst;
+    using static z;
 
     partial class BitVector
     {
@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), Replicate, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Replicate, Closures(Closure)]
         public static BitVector<T> replicate<T>(BitVector<T> x)
             where T : unmanaged
                 => x.Data;
@@ -42,8 +42,8 @@ namespace Z0
         public static BitVector128<N,T> replicate<N,T>(in BitVector128<N,T> src)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => src.Data;        
- 
+                => src.Data;
+
 
         /// <summary>
         /// Creates a copy of the source vector

@@ -14,7 +14,7 @@ namespace Z0
         /// <summary>
         /// Counts the number of trailing zero bits
         /// </summary>
-        [MethodImpl(Inline), Nlz, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Nlz, Closures(Closure)]
         public static T ntz<T>(in BitVector<T> x)
             where T : unmanaged
                 => gbits.ntz(x.Data);
@@ -38,9 +38,9 @@ namespace Z0
         {
             var lo = x.Lo;
             if(lo != 0)
-                return AsDeprecated.generic<T>(gbits.ntz(lo.Data));
+                return z.generic<T>(gbits.ntz(lo.Data));
             else
-                return AsDeprecated.generic<T>(gmath.add(gbits.ntz(x.Hi.Data), 64ul));
+                return z.generic<T>(gmath.add(gbits.ntz(x.Hi.Data), 64ul));
         }
 
         /// <summary>

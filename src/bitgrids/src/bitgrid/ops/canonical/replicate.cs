@@ -6,13 +6,12 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     partial class BitGrid
-    {                
+    {
         [MethodImpl(Inline), Replicate, NumericClosures(UnsignedInts)]
         public static BitGrid<T> replicate<T>(BitGrid<T> src)
             where T : unmanaged
@@ -21,7 +20,7 @@ namespace Z0
         public static BitGrid<M,N,T> replicate<M,N,T>(in BitGrid<M,N,T> src)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-            where T : unmanaged 
+            where T : unmanaged
                 => new BitGrid<M,N,T>(src.Data.Replicate());
 
         [MethodImpl(Inline)]

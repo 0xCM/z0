@@ -7,12 +7,12 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst; using static Memories;
+    using static Konst;
 
     partial class BitVector
     {
         /// <summary>
-        /// Computes the GF(256) product of the operands. 
+        /// Computes the GF(256) product of the operands.
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>

@@ -43,9 +43,6 @@ namespace Z0
         public static long int64<T>(T src)
             => z.int64(src);
 
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static float float32<T>(T src)
-            => AsDeprecated.float32(src);
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static double float64<T>(T src)

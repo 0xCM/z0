@@ -9,8 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static AsDeprecated;
-    using static Root;
+    using static z;
 
     partial struct BitString
     {
@@ -126,15 +125,15 @@ namespace Z0
         {
             var cellbits = bitsize<T>();
             var bitcount = maxbits ?? cellbits*src.Length;
-            var k = 0;
+            var k = 0u;
             var buffer = sys.alloc(bitcount);
             var dst = span(buffer);
 
             for(int i=0; i<src.Length; i++)
             {
                 var bits = BitStore.bitseq(skip(src,i));
-                for(var j = 0; j<cellbits && k<bitcount; j++, k++)
-                    seek(dst,k) = skip(bits,j);
+                for(var j=0u; j<cellbits && k<bitcount; j++, k++)
+                    seek(dst, k) = skip(bits,j);
             }
             return new BitString(buffer);
         }
@@ -153,7 +152,7 @@ namespace Z0
         /// <summary>
         /// Constructs a bitstring from a power of 2
         /// </summary>
-        /// <param name="exp">The value of the expoonent</param>
+        /// <param name="exp">The value of the exponent</param>
         [MethodImpl(Inline)]
         public static BitString pow2(int exp)
         {
@@ -360,7 +359,7 @@ namespace Z0
         /// <summary>
         /// Clears a contiguous sequence of bits between two indices
         /// </summary>
-        /// <param name="src">The source bistring</param>
+        /// <param name="src">The source bitstring</param>
         /// <param name="i0">The index of the first bit to clear</param>
         /// <param name="i1">The index of the last bit to clear</param>
         public static BitString clear(BitString src, int i0, int i1)

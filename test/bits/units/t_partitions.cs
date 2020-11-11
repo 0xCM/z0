@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static AsDeprecated;
+    using static z;
 
     public class t_partitions : t_bitcore<t_partitions>
     {

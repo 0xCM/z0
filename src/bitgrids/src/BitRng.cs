@@ -9,7 +9,7 @@ namespace Z0
     using System.Collections.Generic;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     using BG = Z0.BitGrid;
     using BS = Z0.BitBlocks;

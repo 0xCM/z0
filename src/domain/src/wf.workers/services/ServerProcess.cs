@@ -22,10 +22,10 @@ namespace Z0
         /// <param name="Context">The context to which the server process will be assigned</param>
         /// <param name="ServerId">The server id</param>
         /// <param name="ServerAgents">The agents to be managed on behalf of the server</param>
-        public static ServerProcess create(IAgentContext Context, uint ServerId, uint CoreNumber, params ISystemAgent[] ServerAgents)
+        public static ServerProcess create(IAgentContext Context, uint ServerId, uint CoreNumber, params IWorkflowAgent[] ServerAgents)
             => new ServerProcess(Context, ServerId, CoreNumber, ServerAgents);
 
-        internal ServerProcess(IAgentContext context, uint server, uint core, params ISystemAgent[] agents)
+        internal ServerProcess(IAgentContext context, uint server, uint core, params IWorkflowAgent[] agents)
             : base(context, (server, 1u))
         {
             Agents = agents.ToList();
@@ -37,11 +37,11 @@ namespace Z0
         /// <summary>
         /// Exposes a readonly stream of the agents under management on behalf of the server
         /// </summary>
-        public IEnumerable<ISystemAgent> ServerAgents
+        public IEnumerable<IWorkflowAgent> ServerAgents
             => Agents;
 
-        List<ISystemAgent> Agents {get;}
-            = new List<ISystemAgent>();
+        List<IWorkflowAgent> Agents {get;}
+            = new List<IWorkflowAgent>();
 
         protected override void OnStart()
         {

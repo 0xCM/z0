@@ -7,8 +7,7 @@ namespace Z0
     using System;
 
     using static Konst;
-    using static Root;
-    using static AsDeprecated;
+    using static z;
 
     public class t_unpack : t_bitcore<t_unpack>
     {

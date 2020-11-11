@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     partial class BitVector
     {
@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), Reverse, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Reverse, Closures(Closure)]
         public static BitVector<T> reverse<T>(BitVector<T> x)
             where T : unmanaged
                 => gbits.reverse(x.Data);

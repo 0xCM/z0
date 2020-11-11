@@ -62,6 +62,5 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
                 => gvec.vtestc(src.Data);
-
     }
 }

@@ -13,14 +13,5 @@ namespace Z0
     partial class Root
     {
 
-        [MethodImpl(Inline)]
-        public static Span<byte> bytes<T>(in T src)
-            where T : struct
-                => AsDeprecated.bytes(src);
-
-        [MethodImpl(Inline)]
-        public static ReadOnlySpan<byte> bytes<T>(ReadOnlySpan<T> src)
-            where T : struct
-                => AsDeprecated.bytes(src);
     }
 }

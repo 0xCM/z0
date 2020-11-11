@@ -60,7 +60,7 @@ namespace Z0
             var rng = Polyrand.XOrShift1024(seed);
             if(!States.TryAdd(id,rng))
                 throw new Exception($"Key {id} already exists");
-            return new TimeSeries<T>(id, domain, Term(0, AsDeprecated.zero<T>()));
+            return new TimeSeries<T>(id, domain, Term(0, z.zero<T>()));
         }
 
         public static void EvolveSeries<T>(Interval<T> domain, ulong[] seed, int count, Action<TimeSeries<T>,Duration> complete)

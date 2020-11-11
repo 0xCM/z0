@@ -36,7 +36,7 @@ namespace Z0
                 var x = Random.Next<T>();
                 var ntzX = gbits.ntz(x);
                 var y = BitString.scalar(x);
-                var ntzY = AsDeprecated.generic<T>(y.Ntz());
+                var ntzY = z.generic<T>(y.Ntz());
 
                 if(gmath.neq(ntzX, ntzY))
                 {

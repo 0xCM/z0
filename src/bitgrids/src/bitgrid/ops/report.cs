@@ -9,15 +9,15 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     partial class BitGrid
-    {                
+    {
         /// <summary>
         /// Formats a grid with a title and the option to display row indices
         /// </summary>
         /// <param name="g">The grid to render</param>
-        /// <param name="showrow">Whether grid row indicies should be displayed</param>
+        /// <param name="showrow">Whether grid row indices should be displayed</param>
         /// <param name="label">The grid label</param>
         /// <typeparam name="M">The row count type</typeparam>
         /// <typeparam name="N">The col count type</typeparam>
@@ -32,7 +32,7 @@ namespace Z0
         /// Formats a grid with a title and the option to display row indices
         /// </summary>
         /// <param name="g">The grid to render</param>
-        /// <param name="showrow">Whether grid row indicies should be displayed</param>
+        /// <param name="showrow">Whether grid row indices should be displayed</param>
         /// <param name="label">The grid label</param>
         /// <typeparam name="M">The row count type</typeparam>
         /// <typeparam name="N">The col count type</typeparam>
@@ -42,12 +42,12 @@ namespace Z0
             where N: unmanaged, ITypeNat
             where T: unmanaged
                 => report<M,N>(g.Content, showrow, label);
-        
+
         /// <summary>
         /// Formats a grid with a title and the option to display row indices
         /// </summary>
         /// <param name="g">The grid to render</param>
-        /// <param name="showrow">Whether grid row indicies should be displayed</param>
+        /// <param name="showrow">Whether grid row indices should be displayed</param>
         /// <param name="label">The grid label</param>
         /// <typeparam name="M">The row count type</typeparam>
         /// <typeparam name="N">The col count type</typeparam>
@@ -62,7 +62,7 @@ namespace Z0
         /// Formats a grid with a title and the option to display row indices
         /// </summary>
         /// <param name="g">The grid to render</param>
-        /// <param name="showrow">Whether grid row indicies should be displayed</param>
+        /// <param name="showrow">Whether grid row indices should be displayed</param>
         /// <param name="label">The grid label</param>
         /// <typeparam name="M">The row count type</typeparam>
         /// <typeparam name="N">The col count type</typeparam>
@@ -77,7 +77,7 @@ namespace Z0
         /// Formats a grid with a title and the option to display row indices
         /// </summary>
         /// <param name="g">The grid to render</param>
-        /// <param name="showrow">Whether grid row indicies should be displayed</param>
+        /// <param name="showrow">Whether grid row indices should be displayed</param>
         /// <param name="label">The grid label</param>
         /// <typeparam name="M">The row count type</typeparam>
         /// <typeparam name="N">The col count type</typeparam>
@@ -92,7 +92,7 @@ namespace Z0
         /// Formats a grid with a title and the option to display row indices
         /// </summary>
         /// <param name="g">The grid to render</param>
-        /// <param name="showrow">Whether grid row indicies should be displayed</param>
+        /// <param name="showrow">Whether grid row indices should be displayed</param>
         /// <param name="label">The grid label</param>
         /// <typeparam name="M">The row count type</typeparam>
         /// <typeparam name="N">The col count type</typeparam>
@@ -107,7 +107,7 @@ namespace Z0
         /// Formats a grid with a title and the option to display row indices
         /// </summary>
         /// <param name="g">The grid to render</param>
-        /// <param name="showrow">Whether grid row indicies should be displayed</param>
+        /// <param name="showrow">Whether grid row indices should be displayed</param>
         /// <param name="label">The grid label</param>
         /// <typeparam name="M">The row count type</typeparam>
         /// <typeparam name="N">The col count type</typeparam>
@@ -117,12 +117,12 @@ namespace Z0
             where N: unmanaged, ITypeNat
             where T: unmanaged
                 => report<M,N>(g.Content, showrow, label);
-        
+
         /// <summary>
         /// Formats a grid with a title and the option to display row indices
         /// </summary>
         /// <param name="g">The grid to render</param>
-        /// <param name="showrow">Whether grid row indicies should be displayed</param>
+        /// <param name="showrow">Whether grid row indices should be displayed</param>
         /// <param name="label">The grid label</param>
         /// <typeparam name="M">The row count type</typeparam>
         /// <typeparam name="N">The col count type</typeparam>
@@ -137,7 +137,7 @@ namespace Z0
         /// Formats a grid with a title and the option to display row indices
         /// </summary>
         /// <param name="g">The grid to render</param>
-        /// <param name="showrow">Whether grid row indicies should be displayed</param>
+        /// <param name="showrow">Whether grid row indices should be displayed</param>
         /// <param name="label">The grid label</param>
         /// <typeparam name="M">The row count type</typeparam>
         /// <typeparam name="N">The col count type</typeparam>
@@ -152,7 +152,7 @@ namespace Z0
         /// Formats a grid with a title and the option to display row indices
         /// </summary>
         /// <param name="g">The grid to render</param>
-        /// <param name="showrow">Whether grid row indicies should be displayed</param>
+        /// <param name="showrow">Whether grid row indices should be displayed</param>
         /// <param name="label">The grid label</param>
         /// <typeparam name="M">The row count type</typeparam>
         /// <typeparam name="N">The col count type</typeparam>
@@ -167,7 +167,7 @@ namespace Z0
         /// Renders grid data
         /// </summary>
         /// <param name="g">The grid to render</param>
-        /// <param name="showrow">Whether grid row indicies should be displayed</param>
+        /// <param name="showrow">Whether grid row indices should be displayed</param>
         /// <param name="label">The grid label</param>
         /// <typeparam name="M">The row count type</typeparam>
         /// <typeparam name="N">The col count type</typeparam>
@@ -181,7 +181,7 @@ namespace Z0
         /// Renders grid data
         /// </summary>
         /// <param name="g">The grid to render</param>
-        /// <param name="showrow">Whether grid row indicies should be displayed</param>
+        /// <param name="showrow">Whether grid row indices should be displayed</param>
         /// <param name="label">The grid label</param>
         /// <typeparam name="M">The row count type</typeparam>
         /// <typeparam name="N">The col count type</typeparam>
@@ -195,7 +195,7 @@ namespace Z0
         /// Renders grid data
         /// </summary>
         /// <param name="g">The grid to render</param>
-        /// <param name="showrow">Whether grid row indicies should be displayed</param>
+        /// <param name="showrow">Whether grid row indices should be displayed</param>
         /// <param name="label">The grid label</param>
         /// <typeparam name="M">The row count type</typeparam>
         /// <typeparam name="N">The col count type</typeparam>
@@ -209,7 +209,7 @@ namespace Z0
         /// Renders grid data
         /// </summary>
         /// <param name="g">The grid to render</param>
-        /// <param name="showrow">Whether grid row indicies should be displayed</param>
+        /// <param name="showrow">Whether grid row indices should be displayed</param>
         /// <param name="label">The grid label</param>
         /// <typeparam name="M">The row count type</typeparam>
         /// <typeparam name="N">The col count type</typeparam>
@@ -224,7 +224,7 @@ namespace Z0
         /// Renders grid data
         /// </summary>
         /// <param name="g">The grid to render</param>
-        /// <param name="showrow">Whether grid row indicies should be displayed</param>
+        /// <param name="showrow">Whether grid row indices should be displayed</param>
         /// <param name="label">The grid label</param>
         /// <typeparam name="M">The row count type</typeparam>
         /// <typeparam name="N">The col count type</typeparam>

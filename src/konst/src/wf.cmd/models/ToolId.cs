@@ -10,12 +10,16 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public struct ToolId : IIdentified<ToolId,string>
+    public struct ToolId : IIdentified<ToolId,utf8>
     {
-        public string Id {get;}
+        public utf8 Id {get;}
 
         [MethodImpl(Inline)]
         public ToolId(string id)
+            => Id = id;
+
+        [MethodImpl(Inline)]
+        public ToolId(utf8 id)
             => Id = id;
 
         public bool IsEmpty
@@ -38,11 +42,11 @@ namespace Z0
             => Id;
 
         [MethodImpl(Inline)]
-        public bool Equals(string src)
-            => text.equals(Id, src);
+        public bool Equals(ToolId src)
+            => Id.Equals(src.Id);
 
         public override int GetHashCode()
-            => Id?.GetHashCode() ?? 0;
+            => Id.GetHashCode();
 
         public override bool Equals(object src)
             => src is ToolId x && Equals(x);

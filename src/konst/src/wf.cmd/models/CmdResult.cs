@@ -33,7 +33,7 @@ namespace Z0
             Payload = content;
             Succeeded = success;
         }
-
+        
         [MethodImpl(Inline)]
         public string Format()
             => string.Format(Succeeded ?"{0} executed successfully" : "{0} execution failed", CmdId);

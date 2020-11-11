@@ -8,10 +8,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst; using static Memories;    
+    using static Konst;
 
     partial class BitVector
-    {   
+    {
         /// <summary>
         /// Returns a generic vector with all bits disabled
         /// </summary>

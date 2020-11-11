@@ -7,11 +7,11 @@ namespace Z0
     /// <summary>
     /// Defines a server configuration record
     /// </summary>
-    public readonly struct ServerConfig 
+    public readonly struct ServerConfig
     {
         /// <summary>
-        /// Identifes the server to which the configuration applies
-        /// </summary>        
+        /// Identifies the server to which the configuration applies
+        /// </summary>
         public readonly uint ServerId;
 
         /// <summary>

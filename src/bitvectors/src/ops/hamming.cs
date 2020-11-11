@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left bitvector</param>
         /// <param name="y">The right bitvector</param>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static uint hamming<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
             => pop(xor(x,y));
@@ -88,6 +88,6 @@ namespace Z0
         /// <param name="y">The right bitvector</param>
         [MethodImpl(Inline), Op]
         public static uint hamming(BitVector64 x, BitVector64 y)
-            => pop(xor(x,y)); 
+            => pop(xor(x,y));
     }
 }

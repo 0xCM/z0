@@ -8,8 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static z;
 
-    public readonly struct utf8 : ITextual
+    public readonly struct utf8 : ITextual, IEquatable<utf8>
     {
         static TextEncoder Encoder => TextEncoders.utf8();
 
@@ -26,26 +27,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public utf8(char[] src)
             => Data = Encoder.GetBytes(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator utf8(string src)
-            => new utf8(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator string(utf8 src)
-            => src.Format();
-
-        [MethodImpl(Inline)]
-        public static implicit operator utf8(byte[] src)
-            => new utf8(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator utf8(char[] src)
-            => new utf8(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator utf8(BinaryCode src)
-            => new utf8(src);
 
         public ReadOnlySpan<byte> View
         {
@@ -71,12 +52,54 @@ namespace Z0
             get => !IsEmpty;
         }
 
+        public uint Hash
+        {
+            [MethodImpl(Inline)]
+            get => hash(Data);
+        }
+
+        [MethodImpl(Inline)]
+        public bool Equals(utf8 src)
+            => span(Data).SequenceEqual(src.Data);
+
         [MethodImpl(Inline)]
         public string Format()
             => Encoder.Decode(Data, out string _);
 
+        public override int GetHashCode()
+            => (int)Hash;
+
         public override string ToString()
             => Format();
+
+        public override bool Equals(object src)
+          => src is utf8 x && Equals(x);
+
+        public static bool operator ==(utf8 a, utf8 b)
+            => a.Equals(b);
+
+        public static bool operator !=(utf8 a, utf8 b)
+            => !a.Equals(b);
+
+        [MethodImpl(Inline)]
+        public static implicit operator utf8(string src)
+            => new utf8(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator string(utf8 src)
+            => src.Format();
+
+        [MethodImpl(Inline)]
+        public static implicit operator utf8(byte[] src)
+            => new utf8(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator utf8(char[] src)
+            => new utf8(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator utf8(BinaryCode src)
+            => new utf8(src);
 
         public static utf8 Empty
         {

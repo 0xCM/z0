@@ -4,6 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
+
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     /// <summary>
@@ -31,7 +33,7 @@ namespace Z0
     }
 
     [Free]
-    public interface IIdentified<H,T> : IIdentified<T>
+    public interface IIdentified<H,T> : IIdentified<T>, IEquatable<H>
         where H : struct, IIdentified<H,T>
     {
 

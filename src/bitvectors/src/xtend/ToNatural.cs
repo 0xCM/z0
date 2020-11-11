@@ -7,11 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst; 
-    using static Memories;
+    using static Konst;
+    using static z;
 
     partial class XTend
-    {    
+    {
         /// <summary>
         /// Converts the source bitvector to an equivalent natural bitvector
         /// </summary>
@@ -54,6 +54,6 @@ namespace Z0
         public static BitVector<N,T> ToNatural<N,T>(this BitVector<T> src, N n = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => BitVector.natural<N,T>(src.Scalar);     
+                => BitVector.natural<N,T>(src.Scalar);
     }
 }

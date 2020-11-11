@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static AsDeprecated;
     using static Konst;
 
     partial class BitGrid

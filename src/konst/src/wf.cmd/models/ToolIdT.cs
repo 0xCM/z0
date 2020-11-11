@@ -9,11 +9,14 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct ToolId<T> : IIdentified<ToolId<T>, string>
+    public readonly struct ToolId<T> : IIdentified<ToolId<T>, utf8>
         where T : struct
     {
-        public string Id
+        public utf8 Id
             => typeof(T).Name;
+
+        public bool Equals(ToolId<T> src)
+            => true;    
 
         [MethodImpl(Inline)]
         public static implicit operator ToolId(ToolId<T> src)

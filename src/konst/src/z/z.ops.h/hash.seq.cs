@@ -31,5 +31,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static uint hash<T>(Span<T> src)
             => hash(@readonly(src));
+
+
+        [MethodImpl(Inline)]
+        public static uint hash<T>(T[] src)
+            => hash(span(src));
     }
 }

@@ -56,8 +56,8 @@ namespace Z0
         CmdResult EmitSymbols()
             => EmitAsmSymbols.run(Wf, CmdBuilder.EmitAsmSymbols());
 
-        void EmitScripts()
-            => EmitToolScripts.run(Wf, EmitToolScripts.specify(Wf));
+        //void EmitScripts()
+        //    => EmitToolScripts.run(Wf, EmitToolScripts.specify(Wf));
 
         CmdResult EmitToolHelp()
             => EmitResourceData.run(Wf, CmdBuilder.EmitResourceData(Parts.Refs.Assembly, "tools/help", ".help"));
@@ -231,7 +231,6 @@ namespace Z0
             EmitPatterns();
             EmitToolHelp();
             EmitSymbols();
-            EmitScripts();
             EmitAsmRefs();
             EmitPeHeaders();
         }

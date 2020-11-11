@@ -2,13 +2,16 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm.Data
-{
-    using System;
-    using System.Runtime.CompilerServices;
+using System;
+using System.Reflection;
 
-    public class t_procesor : t_asmd<t_procesor>
+[assembly: PartId(PartId.Commands)]
+
+namespace Z0.Parts
+{
+    public sealed class Commands : Part<Commands>
     {
+
 
     }
 }

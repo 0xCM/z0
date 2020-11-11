@@ -19,7 +19,7 @@ namespace Z0
         /// The parity function p:{0,1}x...x{0,1} -> {0,1} is a boolean function that attains the
         /// value 1 when an odd number of its input values are 1 and 0 otherwise.
         /// </remarks>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Bit32 parity<T>(BitVector<T> src)
             where T : unmanaged
                 => odd(gbits.pop(src.Data));

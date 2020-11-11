@@ -12,7 +12,6 @@ namespace Z0
 
     public class CmdEngine : SystemAgent, ICmdObserver
     {
-
         [Op]
         public static CmdEngine create(IWfShell wf, ICmdObserver observer)
         {

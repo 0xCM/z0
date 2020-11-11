@@ -9,8 +9,6 @@ namespace Z0.Asm
     using static Konst;
     using static Memories;
 
-    using Z0.Asm.Data;
-
     public class t_opcodes : t_asmd<t_opcodes>
     {
         void emit(ReadOnlySpan<AsmInstructionPattern> src)

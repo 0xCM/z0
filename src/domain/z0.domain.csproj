@@ -5,17 +5,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Sys)" />
     <ProjectReference Include="$(Konst)" />
+    <ProjectReference Include="$(Commands)" />
     <ProjectReference Include="$(math)" />
     <ProjectReference Include="$(gmath)" />
     <ProjectReference Include="$(MathSvc)" />
     <ProjectReference Include="$(Xed)" />
-    <ProjectReference Include="$(Refs)" />
     <ProjectReference Include="$(AsmModels)" />
     <ProjectReference Include="$(Dynamic)" />
     <ProjectReference Include="$(Polyrand)" />
-
   </ItemGroup>
 
    <ItemGroup>

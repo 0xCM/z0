@@ -37,7 +37,7 @@ namespace Z0
         /// <summary>
         /// Constructs an identity from server and agent id's
         /// </summary>
-        /// <param name="loc">The location of occurence</param>
+        /// <param name="loc">The agent server</param>
         /// <param name="time">The time of occurrence</param>
         [MethodImpl(Inline)]
         public static implicit operator AgentIdentity((uint server, uint agent) src)

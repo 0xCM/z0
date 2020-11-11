@@ -6,20 +6,11 @@ namespace Z0
 {
     using System;
 
-    // using static Typed;
-    // using static As;
     using static Konst;
     using static z;
 
     public class t_vwrite : t_vcheck<t_vwrite>
     {
-        // public void primal_kind()
-        // {
-        //     var f = PrimalBits.from(PrimalKind.I16);
-        //     var width = PrimalBits.width(f);
-        //     Claim.Eq(width, TypeWidth.W16);
-        // }
-
         static void asci_format_16()
         {
             term.print(AsciFormatter.format((asci2)"01"));
@@ -35,8 +26,8 @@ namespace Z0
         {
             const string Buffer = "                                                                                                                                ";
 
-            var pDst = AsDeprecated.pchar(Buffer);
-            var pSrc = AsDeprecated.gptr(first(src));
+            var pDst = z.pchar(Buffer);
+            var pSrc = z.gptr(first(src));
             var count = Math.Min(src.Length, Buffer.Length);
             for(var i=0; i<count; i++)
                 *pDst++ = *pSrc++;

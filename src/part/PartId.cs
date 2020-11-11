@@ -69,16 +69,12 @@ public enum PartId : ulong
 
     MathTest = 73,
 
-    Clr = 75,
-
-    ClrRun = 76,
+    Commands = 75,
 
     // ~ 100
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     BitVectors = 100,
-
-    VBits = 101,
 
     BitSpans = 102,
 
@@ -116,8 +112,6 @@ public enum PartId : ulong
 
     Blocked = 125,
 
-    MetaReader = 126,
-
     Nats = 133,
 
     Mkl = 134,
@@ -140,13 +134,9 @@ public enum PartId : ulong
 
     Capture = 144,
 
-    Cil = 145,
-
     Evaluate = 146,
 
     Extract = 148,
-
-    VData = 149,
 
     FVec = 150,
 
@@ -168,11 +158,7 @@ public enum PartId : ulong
 
     Validity = 163,
 
-    VCheck = 164,
-
     Xed = 165,
-
-    V0 = 170,
 
     Control = 180,
 
@@ -181,10 +167,6 @@ public enum PartId : ulong
     AsmServices = 186,
 
     Derivatives = 190,
-
-    DerivativesRunner = 191,
-
-    BitFieldsRun = 192,
 
     // ~ 200
     // ~ -------------------------------------------------------------------------------
@@ -197,58 +179,6 @@ public enum PartId : ulong
 
     // ~ 300
     // ~ -------------------------------------------------------------------------------
-
-    Basement = 300,
-
-    Substructure = 301,
-
-    Dynamo = 302,
-
-    Collections = 303,
-
-    Floor = 305,
-
-    //Json = 306,
-
-    //Lang = 307,
-
-    Messaging = 308,
-
-    Files = 310,
-
-    Processes = 311,
-
-    Command = 312,
-
-    Commands = 313,
-
-    Agents = 315,
-
-    Etude = 325,
-
-    Services = 326,
-
-    // ~ 400
-    // ~ -------------------------------------------------------------------------------
-    Part400,
-
-    Part401,
-
-    Part402,
-
-    Part403,
-
-    Part404,
-
-    Part405,
-
-    Part406,
-
-    Part407,
-
-    Part408,
-
-    Part409,
 
     // ~ 512
     // ~ -------------------------------------------------------------------------------
@@ -270,11 +200,7 @@ public enum PartId : ulong
 
     MklApiTest = Mkl | Test,
 
-    DynopsTest = Dynamic | Test,
-
     AsmTest = Asm | Test,
-
-    AsmDTest = AsmModels | Test,
 
     UnsignedTest = Unsigned | Test,
 

@@ -14,8 +14,8 @@ namespace Z0
     using static Konst;
 
     public sealed class TraceEventSink : SystemAgent
-    {        
-        public static ISystemAgent Define(AgentContext Context, AgentIdentity Identity)
+    {
+        public static IWorkflowAgent Define(AgentContext Context, AgentIdentity Identity)
             => new TraceEventSink(Context, Identity);
 
         TraceEventSink(AgentContext Context, AgentIdentity Identity)
@@ -25,12 +25,12 @@ namespace Z0
         }
 
         TraceEventSession Session;
-        
+
         ConcurrentQueue<AgentEventId> RecieptQueue = new ConcurrentQueue<AgentEventId>();
 
         void OnPulse(TraceEvent data)
         {
-            AgentEventId identity = data.EventIdentity();            
+            AgentEventId identity = data.EventIdentity();
             term.magenta($"Received event {identity}");
 
             RecieptQueue.Enqueue(identity);
@@ -54,12 +54,12 @@ namespace Z0
             Session = new TraceEventSession(nameof(TraceEventSink));
             var restarted = Session.EnableProvider(SystemEventWriter.SourceName);
             if(restarted)
-                term.warn($"Session was already in progress");            
+                term.warn($"Session was already in progress");
 
             Session.Source.UnhandledEvents += OnUnhandled;
 
             Session.Source.Dynamic.AddCallbackForProviderEvent(SystemEventWriter.SourceName, "Pulse", OnPulse);
-            Session.Source.Dynamic.AddCallbackForProviderEvent(SystemEventWriter.SourceName, "AgentTransitioned", OnAgentTransitioned);            
+            Session.Source.Dynamic.AddCallbackForProviderEvent(SystemEventWriter.SourceName, "AgentTransitioned", OnAgentTransitioned);
         }
 
         protected override void OnStart()
@@ -72,7 +72,7 @@ namespace Z0
 
         protected override void OnRun()
         {
-            Task.Factory.StartNew(() => 
+            Task.Factory.StartNew(() =>
             {
                 term.babble("Processing events");
                 Session.Source.Process();

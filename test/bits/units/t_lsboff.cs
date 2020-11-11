@@ -29,7 +29,7 @@ namespace Z0
             {
                 var x = Random.Next<T>();
                 var y0 = gbits.blsr(x);
-                var y1 = gmath.and(gmath.sub(x, AsDeprecated.one<T>()), x);
+                var y1 = gmath.and(gmath.sub(x, z.one<T>()), x);
                 Claim.Eq(y0,y1);
             }
         }

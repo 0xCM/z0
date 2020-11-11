@@ -9,7 +9,7 @@ namespace Z0
 
     using static z;
 
-    using Z0.Asm.Data;
+    using Z0.Asm;
 
     public class t_memstore : t_asmd<t_memstore>
     {

@@ -11,7 +11,7 @@ namespace Z0
     using static z;
 
     /// <summary>
-    /// Specifies a transition that occurred 
+    /// Specifies a transition that occurred
     /// </summary>
     public readonly struct AgentTransition
     {
@@ -24,14 +24,14 @@ namespace Z0
         /// Indicates the relative time at which the transition ocurred
         /// </summary>
         public readonly ulong Timestamp;
-        
+
         /// <summary>
         /// Specifies the state of the agent before the transition
         /// </summary>
         public readonly AgentStatus SourceState;
 
         /// <summary>
-        /// Specifies the state of the agent ater the transition
+        /// Specifies the state of the agent after the transition
         /// </summary>
         public readonly AgentStatus TargetState;
 

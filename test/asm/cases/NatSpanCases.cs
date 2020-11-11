@@ -11,7 +11,7 @@ namespace Z0
     using System.Linq;
 
     using static Konst;
-    using static Typed;
+    using static z;
 
 
     class NatSpanCases
@@ -21,7 +21,6 @@ namespace Z0
                 let id = OpIdentityParser.parse(p.DisplayName())
                 let type = p.PropertyType
                 select (id,type);
-
 
         [DisplayName("n4x32u")]
         public static NatSpan<N4,uint> Case_n4x32u

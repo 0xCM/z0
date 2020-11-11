@@ -19,59 +19,19 @@ namespace Z0
         byte[] data;
 
         [MethodImpl(Inline)]
-        public static implicit operator string(BitString src)
-            => src.Format();
-
-        [MethodImpl(Inline)]
-        public static bool operator ==(BitString lhs, BitString rhs)
-            => lhs.Equals(rhs);
-
-        [MethodImpl(Inline)]
-        public static bool operator !=(BitString lhs, BitString rhs)
-            => !lhs.Equals(rhs);
-
-        [MethodImpl(Inline)]
-        public static BitString operator +(BitString lhs, BitString rhs)
-            => lhs.Concat(rhs);
-
-        [MethodImpl(Inline)]
-        public static BitString operator &(BitString lhs, BitString rhs)
-            => and(lhs,rhs);
-
-        [MethodImpl(Inline)]
-        public static BitString operator |(BitString lhs, BitString rhs)
-            => or(lhs,rhs);
-
-        [MethodImpl(Inline)]
-        public static BitString operator ^(BitString lhs, BitString rhs)
-            => xor(lhs,rhs);
-
-        [MethodImpl(Inline)]
-        public static BitString operator <<(BitString lhs, int offset)
-            => sll(lhs,offset);
-
-        [MethodImpl(Inline)]
-        public static BitString operator >>(BitString lhs, int offset)
-            => srl(lhs,offset);
-
-        [MethodImpl(Inline)]
-        public static BitString operator ~(BitString src)
-            => not(src);
-
-        [MethodImpl(Inline)]
-        BitString(byte[] src)
+        internal BitString(byte[] src)
         {
             data = src;
         }
 
         [MethodImpl(Inline)]
-        BitString(ReadOnlySpan<byte> src)
+        internal BitString(ReadOnlySpan<byte> src)
         {
             data = src.ToArray();
         }
 
         [MethodImpl(Inline)]
-        BitString(ReadOnlySpan<Bit32> src)
+        internal BitString(ReadOnlySpan<Bit32> src)
         {
             data = new byte[src.Length];
             for(var i=0; i<src.Length; i++)
@@ -661,8 +621,48 @@ namespace Z0
             return dst;
         }
 
+        [MethodImpl(Inline)]
+        public static implicit operator string(BitString src)
+            => src.Format();
+
+        [MethodImpl(Inline)]
+        public static bool operator ==(BitString lhs, BitString rhs)
+            => lhs.Equals(rhs);
+
+        [MethodImpl(Inline)]
+        public static bool operator !=(BitString lhs, BitString rhs)
+            => !lhs.Equals(rhs);
+
+        [MethodImpl(Inline)]
+        public static BitString operator +(BitString lhs, BitString rhs)
+            => lhs.Concat(rhs);
+
+        [MethodImpl(Inline)]
+        public static BitString operator &(BitString lhs, BitString rhs)
+            => and(lhs,rhs);
+
+        [MethodImpl(Inline)]
+        public static BitString operator |(BitString lhs, BitString rhs)
+            => or(lhs,rhs);
+
+        [MethodImpl(Inline)]
+        public static BitString operator ^(BitString lhs, BitString rhs)
+            => xor(lhs,rhs);
+
+        [MethodImpl(Inline)]
+        public static BitString operator <<(BitString lhs, int offset)
+            => sll(lhs,offset);
+
+        [MethodImpl(Inline)]
+        public static BitString operator >>(BitString lhs, int offset)
+            => srl(lhs,offset);
+
+        [MethodImpl(Inline)]
+        public static BitString operator ~(BitString src)
+            => not(src);
+
         /// <summary>
-        /// Defines the canonical emtpy bitstring of 0 length
+        /// Defines the canonical empty bitstring of 0 length
         /// </summary>
         public static BitString Empty
             => parse(string.Empty);

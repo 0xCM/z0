@@ -7,9 +7,6 @@ namespace Z0.Asm
     using System;
     using System.Linq;
 
-
-    using static Root;
-
     public class t_resource_capture : t_asm<t_resource_capture>
     {
         public void define_resources()

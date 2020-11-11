@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static Memories;
+    using static z;
     using static BufferSeqId;
 
     public interface TTestDynamicVectors : ICheckVectors, TTestAction, ITestDynamic, IBufferedChecker
