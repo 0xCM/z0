@@ -24,7 +24,7 @@ namespace Z0
         }
 
         void OnPulse(object sender, ElapsedEventArgs args)
-            => Context.EventLog.Receive(PulseEvent.create(ServerId, AgentId, ServerTimestamp.Timestamp()));
+            => Context.EventLog.Receive(SourcedEvents.pulse(ServerId, AgentId, ServerTimestamp.Timestamp()));
 
         Timer Timer {get;}
 

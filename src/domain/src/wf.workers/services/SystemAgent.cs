@@ -62,7 +62,7 @@ namespace Z0
                 _State = value;
 
                 Context.EventLog.AgentTransitioned(transition);
-                StateChanged?.BeginInvoke(in transition, new AsyncCallback(x =>{}), this);
+                StateChanged?.BeginInvoke(transition, new AsyncCallback(x =>{}), this);
             }
         }
 

@@ -9,9 +9,6 @@ namespace Z0
     /// </summary>
     public readonly struct Heartbeat
     {
-        public static implicit operator Heartbeat((uint server, uint agent, ulong time) src)
-            => new Heartbeat(src.server, src.agent, src.time);
-
         public Heartbeat(uint server, uint agent, ulong ts)
         {
             ServerId = server;
@@ -38,7 +35,7 @@ namespace Z0
             => (ServerId, AgentId, Timestamp);
 
 
-        public override string ToString() 
+        public override string ToString()
             => $"({ServerId},{AgentId},{Timestamp})";
     }
 }

@@ -9,11 +9,10 @@ namespace Z0
 
     using static Konst;
 
-    partial struct AsDeprecated
+    public readonly struct SourcedEvents
     {
-        [MethodImpl(Inline)]
-        public static T zero<T>(T t = default)
-            where T : unmanaged
-                => default(T);
+        [MethodImpl(Inline), Op]
+        public static PulseEvent pulse(uint server, uint agent, ulong ts)
+            => new PulseEvent(new AgentEventId(server, agent, ts, IntrinsicEvents.Pulse));
     }
 }

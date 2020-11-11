@@ -4,8 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+
     public interface IPulseEventReceiver : IAgentEventSink<PulseEvent>
     {
-        
+
     }
 }

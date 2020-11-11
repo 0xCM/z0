@@ -3,63 +3,61 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
-    using System;
-    using System.Linq;
-    using System.Threading;
-
-    class App : TestApp<App>
-    {            
+{
+    class App
+    {
         AgentContext AgentContext;
+
+        IWfShell Wf;
 
         Option<ServerComplex> Complex;
 
-        void ManageServerComplex()
+        IAgentControl Control;
+
+        App(AgentContext context, string[] args)
+        {
+            AgentContext = context;
+            Wf = WfShell.create(args);
+            Control = AgentControl.FromContext(Wf.Context);
+        }
+
+        void Exec()
         {
             Terminal.Get().SetTerminationHandler(OnTerminate);
-            
-            term.cyan($"Starting server complex");
-            ServerComplex.Start(AgentContext).ContinueWith(complex => 
+
+            Wf.Status($"Starting server complex");
+            ServerComplex.Start(AgentContext).ContinueWith(complex =>
                 {
                     Complex = complex.Result;
-                    term.magenta("Server complex started");
+                    Wf.Status("Server complex started");
 
                 });
 
-            var control = AgentControl.FromContext(this);
-            control.Configure(AgentContext).ContinueWith(_ => 
+            Control.Configure(AgentContext).ContinueWith(_ =>
             {
-                term.inform($"There are {control.SummaryStats.AgentCount.ToString()} agents in play");
+                Wf.Status($"There are {Control.SummaryStats.AgentCount.ToString()} agents in play");
             });
 
-            
-            term.readKey("Press any key to terminate the application");            
+            term.readKey("Press any key to terminate the application");
         }
 
         void OnTerminate()
         {
             if(Complex)
-            {                          
+            {
 
                 Complex.OnSome(c => {
-                    term.cyan($"Shutting down server complex");
+                    Wf.Status($"Shutting down server complex");
                     c.Stop().Wait();
-                    term.magenta($"Server complex shut down complete");                    
+                    Wf.Status($"Server complex shut down complete");
                 });
             }
-        }   
-
-        protected override void RunTests(params string[] filters)
-        {
-            this.AgentContext = new AgentContext(SystemEventWriter.Log);
-            
-            //ManageServerComplex();
-
-            base.RunTests();
-        
         }
 
         public static void Main(params string[] args)
-            => Run(args);
+        {
+            var app = new App(new AgentContext(SystemEventWriter.Log), args);
+            app.Exec();
+        }
     }
 }

@@ -5,11 +5,9 @@
 [assembly: PartId(PartId.MachinesTest)]
 
 namespace Z0.Parts
-{        
-    using System;
-
-    public sealed class MachinesTest : ExecutablePart<MachinesTest>
+{
+    public sealed class MachinesTest : Part<MachinesTest>
     {
-        public override void Execute(params string[] args) => App.Run(args);    
+
     }
 }
