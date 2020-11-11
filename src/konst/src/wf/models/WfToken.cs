@@ -12,6 +12,14 @@ namespace Z0
 
     public readonly struct WfToken : ITextual, IEquatable<WfToken>, IComparable<WfToken>
     {
+        [MethodImpl(Inline), Op]
+        public static WfToken create(WfPartKind kind, Type src)
+            => new WfToken((((uint)src.MetadataToken & BitMasks.Literals.Lo24u) | ((uint)kind << 24) ) | hash2(src.AssemblyQualifiedName));
+
+        [MethodImpl(Inline), Op]
+        public static WfToken create(WfStepId step)
+            => new WfToken((((uint)step.HostKey & BitMasks.Literals.Lo24u) | (1u << 24) ) | hash2(step.HostName));
+
         public readonly ulong Value;
 
         public static WfToken Empty => default;

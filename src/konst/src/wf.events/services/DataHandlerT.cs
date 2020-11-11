@@ -9,8 +9,6 @@ namespace Z0
 
     using static Konst;
 
-    using D = WfDelegates;
-
     public readonly struct DataHandler<T> : IDataHandler<T>
     {
         readonly DataReceiver<T> Receiver;

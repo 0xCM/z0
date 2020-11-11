@@ -9,23 +9,20 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Render;
-    using static z;
 
     [Event(EventName)]
     public readonly struct RunningCmdEvent : IWfEvent<RunningCmdEvent>
     {
-        public const string EventName = nameof(GlobalEvents.RunningCmd);
+        public const string EventName = GlobalEvents.RunningCmd;
 
         public WfEventId EventId {get;}
 
-        public FlairKind Flair {get;}
+        public FlairKind Flair => FlairKind.Running;
 
         [MethodImpl(Inline)]
-        public RunningCmdEvent(CmdId cmd, CorrelationToken ct, FlairKind flair = Running)
+        public RunningCmdEvent(CmdId cmd, CorrelationToken ct)
         {
             EventId = (EventName, cmd, ct);
-            Flair = flair;
         }
 
         [MethodImpl(Inline)]

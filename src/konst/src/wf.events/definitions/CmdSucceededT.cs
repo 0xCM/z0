@@ -21,15 +21,14 @@ namespace Z0
 
         public EventPayload<T> Payload {get;}
 
-        public FlairKind Flair {get;}
+        public FlairKind Flair => FlairKind.Ran;
 
         [MethodImpl(Inline)]
-        public CmdSucceeded(CmdSpec cmd, T payload, CorrelationToken ct, FlairKind flair = FlairKind.Ran)
+        public CmdSucceeded(CmdSpec cmd, T payload, CorrelationToken ct)
         {
             EventId = (EventName, cmd.CmdId, ct);
             Cmd = cmd;
             Payload = payload;
-            Flair = flair;
         }
 
         [MethodImpl(Inline)]

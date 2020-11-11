@@ -30,7 +30,7 @@ namespace Z0
         /// Encodes a permutation on 16 unsigned shorts as a permutation on 32 bytes
         /// </summary>
         [Op]
-        public static Vector256<byte> vshuffle_spec_parts(
+        public static Vector256<byte> vshuffle_spec_256x16u(
             ushort x0, ushort x1, ushort x2, ushort x3, ushort x4, ushort x5, ushort x6, ushort x7,
             ushort x8, ushort x9, ushort xA, ushort xB, ushort xC, ushort xD, ushort xE, ushort xF)
         {
@@ -93,7 +93,7 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline), Op]
         public static Vector256<byte> vshuffle_spec_1(Vector256<ushort> src)
-            => vshuffle_spec_parts(
+            => vshuffle_spec_256x16u(
                 vcell(src,0), vcell(src,1), vcell(src,2),vcell(src,3),
                 vcell(src,4), vcell(src,5), vcell(src,6), vcell(src,7),
                 vcell(src,8), vcell(src,9), vcell(src,10), vcell(src,11),
@@ -166,13 +166,14 @@ namespace Z0
         [Op(ExampleGroups.Shuffles)]
         public void vshuf16x8()
         {
-            var src =z.vinc<byte>(n128);
-            var perm = Permute.natural(PermSymbolic.reversed(n16));
+            var reverse = PermSymbolic.reversed(n16);
+            var perm = Permute.natural(reverse);
             for(int i=0,j=15; i<perm.Length; i++, j--)
-                Claim.eq(perm[i],j);
+                Claim.eq(perm[i], j);
 
-            var shufspec = perm.ToShuffleSpec();
-            var dst = z.vshuf16x8(src,shufspec);
+            var increments = z.vinc<byte>(n128);
+            var spec = perm.ToShuffleSpec();
+            var dst = z.vshuf16x8(increments,spec);
             var expect = z.vdec<byte>(n128);
             Claim.veq(expect, dst);
 

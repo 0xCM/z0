@@ -32,7 +32,7 @@ namespace Z0
             Settings = settings ?? JsonSettings.Load(Paths.AppConfigPath);
             MessageQueue = queue;
             Api = parts;
-            ApiParts = WfShell.parts();
+            ApiParts = WfShellInit.parts();
         }
     }
 }

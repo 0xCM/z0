@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Render;
 
     [Event(EventName)]
     public readonly struct EmittingFileEvent<T> : IWfEvent<EmittingFileEvent<T>>
@@ -21,15 +20,14 @@ namespace Z0
 
         public FS.FilePath Target {get;}
 
-        public FlairKind Flair {get;}
+        public FlairKind Flair => FlairKind.Running;
 
         [MethodImpl(Inline)]
-        public EmittingFileEvent(WfStepId step, T source, FS.FilePath target, CorrelationToken ct, FlairKind flair = Running)
+        public EmittingFileEvent(WfStepId step, T source, FS.FilePath target, CorrelationToken ct)
         {
             EventId = (EventName, step, ct);
             Source = source;
             Target = target;
-            Flair = flair;
         }
 
         [MethodImpl(Inline)]

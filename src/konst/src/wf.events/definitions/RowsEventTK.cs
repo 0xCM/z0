@@ -25,7 +25,7 @@ namespace Z0
 
         public T Content {get;}
 
-        public FlairKind Flair {get;}
+        public FlairKind Flair => FlairKind.DataRow;
 
         [MethodImpl(Inline)]
         public RowsEvent(T data, K kind)
@@ -34,7 +34,6 @@ namespace Z0
             DataKind = kind;
             EventId = (text.format("{0}:{1}", DataKind, DataType.Name), CorrelationToken.Empty);
             Content = data;
-            Flair = FlairKind.DataRow;
         }
 
         [MethodImpl(Inline)]

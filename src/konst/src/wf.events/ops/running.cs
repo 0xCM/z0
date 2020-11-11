@@ -19,7 +19,7 @@ namespace Z0
         public static RunningEvent<T> running<T>(WfStepId step, T content, CorrelationToken ct)
             => new RunningEvent<T>(step, content, ct);
 
-        [MethodImpl(Inline), Op, Closures(UInt64k)]
+        [MethodImpl(Inline)]
         public static RunningEvent<T> running<H,T>(H host, T content, CorrelationToken ct)
             where H : IWfHost<H>, new()
                 => new RunningEvent<T>(host.Id, content, ct);

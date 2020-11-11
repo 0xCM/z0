@@ -13,20 +13,19 @@ namespace Z0
     [Event(EventName)]
     public readonly struct CmdSucceeded : IWfEvent<CmdSucceeded>
     {
-        public const string EventName = nameof(GlobalEvents.CmdExec);
+        public const string EventName = GlobalEvents.CmdExec;
 
         public WfEventId EventId {get;}
 
         public CmdSpec Cmd {get;}
 
-        public FlairKind Flair {get;}
+        public FlairKind Flair  => FlairKind.Ran;
 
         [MethodImpl(Inline)]
-        public CmdSucceeded(CmdSpec cmd, CorrelationToken ct, FlairKind flair = FlairKind.Ran)
+        public CmdSucceeded(CmdSpec cmd, CorrelationToken ct)
         {
             EventId = (EventName, cmd.CmdId, ct);
             Cmd = cmd;
-            Flair = flair;
         }
 
         [MethodImpl(Inline)]

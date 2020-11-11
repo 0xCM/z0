@@ -13,7 +13,7 @@ namespace Z0
     [Event(EventName)]
     public readonly struct WarnEvent<T> : IWfEvent<WarnEvent<T>,T>
     {
-        public const string EventName = nameof(GlobalEvents.Warning);
+        public const string EventName = GlobalEvents.Warning;
 
         public WfEventId EventId {get;}
 
@@ -21,7 +21,7 @@ namespace Z0
 
         public EventPayload<T> Payload {get;}
 
-        public FlairKind Flair {get;}
+        public FlairKind Flair => FlairKind.Warning;
 
         [MethodImpl(Inline)]
         public WarnEvent(WfStepId step, T content, CorrelationToken ct)
@@ -29,9 +29,8 @@ namespace Z0
             EventId = (EventName, step, ct);
             Payload = content;
             StepId = step;
-            Flair = FlairKind.Warning;
         }
-        [MethodImpl(Inline)]
+
         public string Format()
             => Render.format(EventId, StepId, Payload);
     }

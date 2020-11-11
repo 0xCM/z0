@@ -8,30 +8,27 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Render;
-    using static z;
 
     [Event(EventName)]
-    public readonly struct Disposed<T> : IWfEvent<Disposed<T>>
+    public readonly struct Disposed<T> : IWfEvent<Disposed<T>,T>
     {
-        public const string EventName = nameof(GlobalEvents.Disposed);
+        public const string EventName = GlobalEvents.Disposed;
 
         public WfEventId EventId {get;}
 
-        public EventPayload<T> Content {get;}
+        public EventPayload<T> Payload {get;}
 
-        public FlairKind Flair {get;}
+        public FlairKind Flair => FlairKind.Disposed;
 
         [MethodImpl(Inline)]
-        public Disposed(WfStepId step, T content, CorrelationToken ct, FlairKind flair = Render.Disposed)
+        public Disposed(WfStepId step, T content, CorrelationToken ct)
         {
             EventId = (EventName, step, ct);
-            Content = content;
-            Flair = flair;
+            Payload = content;
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => Render.format(EventId, Content);
+            => Render.format(EventId, Payload);
     }
 }

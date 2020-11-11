@@ -8,8 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static z;
-    using static Render;
 
     partial struct WfEvents
     {
@@ -20,8 +18,8 @@ namespace Z0
         /// <param name="ct">The correlation token</param>
         /// <param name="flair">The flair</param>
         [MethodImpl(Inline), Op, Closures(UInt64k)]
-        public static CmdSucceeded succeeded(CmdSpec spec, CorrelationToken ct, FlairKind flair = Created)
-            => new CmdSucceeded(spec, ct, flair);
+        public static CmdSucceeded succeeded(CmdSpec spec, CorrelationToken ct)
+            => new CmdSucceeded(spec, ct);
 
         /// <summary>
         /// Defines a <see cref='CmdSucceeded{T}'/> event
@@ -30,7 +28,7 @@ namespace Z0
         /// <param name="ct">The correlation token</param>
         /// <param name="flair">The flair</param>
         [MethodImpl(Inline), Op, Closures(UInt64k)]
-        public static CmdSucceeded<T> succeeded<T>(CmdSpec spec, T payload, CorrelationToken ct, FlairKind flair = Created)
-            => new CmdSucceeded<T>(spec, payload, ct, flair);
+        public static CmdSucceeded<T> succeeded<T>(CmdSpec spec, T payload, CorrelationToken ct)
+            => new CmdSucceeded<T>(spec, payload, ct);
     }
 }

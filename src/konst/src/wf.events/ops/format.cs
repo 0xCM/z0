@@ -19,7 +19,7 @@ namespace Z0
             const string ErrorTrace = "{0} | {1} | {2} | Outer | {3} | {4} | {5}";
             const string InnerTrace = "{0} | {1} | {2} | Inner | {3} | {4} | {5} | {6}";
 
-            var exception = error.Data;
+            var exception = error.Payload;
             var eType = exception.GetType();
             var outer = string.Format(ErrorTrace, error.EventId, error.Summary, error.Source, eType.Name, exception.Data.Message, exception.Data.StackTrace);
             dst.AppendLine(outer);

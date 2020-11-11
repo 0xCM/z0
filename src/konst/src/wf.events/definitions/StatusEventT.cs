@@ -8,34 +8,27 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Render;
-    using static Workflow;
-    using static z;
 
     [Event(EventName)]
-    public readonly struct StatusEvent<T> : IWfStatusEvent<T>
+    public readonly struct StatusEvent<T> : IWfEvent<StatusEvent<T>,T>
     {
-        public const string EventName = nameof(GlobalEvents.Status);
+        public const string EventName = GlobalEvents.Status;
 
         public WfEventId EventId {get;}
 
-        public WfStepId StepId {get;}
+        public EventPayload<T> Payload {get;}
 
-        public EventPayload<T> Content {get;}
-
-        public FlairKind Flair {get;}
+        public FlairKind Flair => FlairKind.Status;
 
         [MethodImpl(Inline)]
-        public StatusEvent(WfStepId step, T content, CorrelationToken ct, FlairKind flair = Status)
+        public StatusEvent(WfStepId step, T content, CorrelationToken ct)
         {
             EventId = (EventName, step, ct);
-            StepId = step;
-            Flair =  flair;
-            Content = content;
+            Payload = content;
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => format(EventId, Content);
+            => Render.format(EventId, Payload);
     }
 }

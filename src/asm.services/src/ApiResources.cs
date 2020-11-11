@@ -16,6 +16,16 @@ namespace Z0
 
     public readonly struct ApiResources
     {
+        [Op]
+        public static ApiHostUri uri(Type src)
+        {
+            var typename = src.Name;
+            var partName = typename.LeftOfFirst('_');
+            var part = ApiPartIdParser.single(partName);
+            var host = text.ifempty(typename.RightOfFirst('_'), "anonymous");
+            return new ApiHostUri(part, host);
+        }
+
         public static CapturedApiResource[] capture(IAsmContext context, ApiHostUri host, FS.FilePath dst)
             => capture(context, host, Resources.accessors(context.ContextRoot.Api.Components), dst);
 
@@ -56,7 +66,7 @@ namespace Z0
             for(var i=0u; i<count; i++)
             {
                 ref readonly var index = ref skip(indices,i);
-                var host = Workflow.uri(index.DeclaringType);
+                var host = uri(index.DeclaringType);
                 var path = dst + host.FileName(ArchiveFileKinds.Asm);
                 results.AddRange(capture(context, host, index.Data, path));
             }

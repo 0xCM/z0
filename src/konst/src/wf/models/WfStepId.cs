@@ -39,7 +39,7 @@ namespace Z0
         public WfToken Token
         {
             [MethodImpl(Inline)]
-            get => Workflow.token(this);
+            get => WfToken.create(this);
         }
 
         public bool IsEmpty

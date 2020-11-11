@@ -11,6 +11,8 @@ namespace Z0
 
     using static Konst;
 
+    using api = WfBrokers;
+
     public readonly struct WfEventHub : IWfEventHub
     {
         internal readonly Dictionary<Type,IDataSink> Index;
@@ -22,20 +24,20 @@ namespace Z0
         [MethodImpl(Inline)]
         public void Subscribe<E>(E e, EventReceiver<E> receiver)
             where E : struct, IDataEvent
-                => EventHubs.subscribe(this, EventHubs.relay(receiver), e);
+                => api.subscribe(this, api.relay(receiver), e);
 
         [MethodImpl(Inline)]
         public void Subscribe<E>(E e, EventReceiver receiver)
             where E : struct, IDataEvent
-                => EventHubs.subscribe(this, receiver, e);
+                => api.subscribe(this, receiver, e);
 
         [MethodImpl(Inline)]
         public void Subscribe(IDataEvent e, EventReceiver receiver)
-            => EventHubs.subscribe(this, receiver, e);
+            => api.subscribe(this, receiver, e);
 
         [MethodImpl(Inline)]
         public ref readonly E Broadcast<E>(in E e)
             where E : struct, IDataEvent
-                => ref EventHubs.broadcast(this, e);
+                => ref api.broadcast(this, e);
     }
 }

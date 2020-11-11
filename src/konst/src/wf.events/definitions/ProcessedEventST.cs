@@ -18,14 +18,13 @@ namespace Z0
 
         public DataFlow<S,T> DataFlow {get;}
 
-        public FlairKind Flair {get;}
+        public FlairKind Flair => FlairKind.Processed;
 
         [MethodImpl (Inline)]
         public ProcessedEvent(WfStepId step, DataFlow<S,T> flow, CorrelationToken ct)
         {
             EventId = (EventName, step, ct);
             DataFlow = flow;
-            Flair = FlairKind.Processed;
         }
 
         [MethodImpl (Inline)]

@@ -258,6 +258,10 @@ readonly struct ApiNames
 
     public const string WfShell = workflow + dot + shell;
 
+    public const string WfShellInit = workflow + dot + shell + dot + init;
+
+    public const string WfEvents = workflow + dot + events;
+
     public const string WfControl = workflow + dot + control;
 
     public const string WfShellX = workflow + dot + shell + dot + extensions;
@@ -380,4 +384,5 @@ readonly struct ApiNames
 
     public const string CmdRunners = cmd + dot + "runners";
 
+    public const string JsonDeps = runtime + dot + archives + dot + "dependencies";
 }

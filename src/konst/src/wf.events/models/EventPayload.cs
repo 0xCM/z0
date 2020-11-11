@@ -15,14 +15,6 @@ namespace Z0
         public readonly BinaryCode Data;
 
         [MethodImpl(Inline)]
-        public static implicit operator EventPayload(BinaryCode src)
-            => new EventPayload(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator BinaryCode(EventPayload src)
-            => src.Data;
-
-        [MethodImpl(Inline)]
         public EventPayload(BinaryCode data)
             => Data = data;
 
@@ -32,5 +24,13 @@ namespace Z0
 
         public override string ToString()
             => Format();
+
+        [MethodImpl(Inline)]
+        public static implicit operator EventPayload(BinaryCode src)
+            => new EventPayload(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator BinaryCode(EventPayload src)
+            => src.Data;
     }
 }

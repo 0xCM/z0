@@ -63,11 +63,6 @@ namespace Z0
                 term.print(Buffer[i]);
         }
 
-        void RunFsm()
-        {
-            using var step = new RunFsm(Wf);
-            step.Run();
-        }
 
         void Status<T>(T message)
             => Wf.Status(Host, message);

@@ -8,34 +8,30 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Render;
-    using static Workflow;
-    using static z;
 
     [Event(EventName)]
-    public readonly struct TraceEvent<T> : IWfTraceEvent<T>
+    public readonly struct TraceEvent<T> : IWfEvent<TraceEvent<T>,T>
     {
-        public const string EventName = nameof(GlobalEvents.Trace);
+        public const string EventName = GlobalEvents.Trace;
 
         public WfEventId EventId {get;}
 
         public WfStepId StepId {get;}
 
-        public EventPayload<T> Content {get;}
+        public EventPayload<T> Payload {get;}
 
-        public FlairKind Flair {get;}
+        public FlairKind Flair => FlairKind.Trace;
 
         [MethodImpl(Inline)]
-        public TraceEvent(WfStepId step, T content, CorrelationToken ct, FlairKind flair = Trace)
+        public TraceEvent(WfStepId step, T content, CorrelationToken ct)
         {
             EventId = (EventName, step, ct);
             StepId = step;
-            Flair =  flair;
-            Content = content;
+            Payload = content;
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => format(EventId, Content);
+            => Render.format(EventId, Payload);
     }
 }

@@ -34,8 +34,6 @@ readonly struct ApiNames
     public const string CmdSpecs = cmd + dot + specs;
 
 
-    public const string JsonDeps = "builds" + dot + archives + dot + "dependencies";
-
     public const string Workers = workers;
 
 

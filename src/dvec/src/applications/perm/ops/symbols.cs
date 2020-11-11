@@ -16,7 +16,6 @@ namespace Z0
 
     partial class Permute
     {
-
         /// <summary>
         /// Creates a fixed 16-bit permutation over a generic permutation over 16 elements
         /// </summary>

@@ -28,33 +28,18 @@ namespace Z0
     [ApiHost("vex.examples.runner")]
     public sealed class VexExampleRunner: t_inx<VexExampleRunner>
     {
-        uint Counter;
+        uint Successes;
 
-        [Op]
-        public uint Run1()
+        uint Failures;
+
+        public VexExampleRunner()
         {
-            var examples = new VexExamples();
-            examples.vduplicate();
-            examples.vcover();
-            examples.vgather_128();
-            examples.vgather_256();
-            examples.vgather_blocks();
-            examples.vmerge_128();
-            examples.vmerge_256();
-            examples.vmerge_hi();
-            examples.vmerge_hilo();
-            examples.vmerge_lo();
-            examples.vperm4x16();
-            examples.vperm4x32_128x32u_A();
-            examples.vperm4x32_128x32u_B();
-            examples.vshuf16x16();
-            examples.vshuf16x8_128x8u();
-            examples.vshuf16x8();
-            return Counter;
+            Successes = 0;
+            Failures  = 0;
         }
 
         [Op]
-        public uint Run2()
+        public void Run()
         {
             var examples = new VexExamples();
             Run(examples.vduplicate);
@@ -70,17 +55,24 @@ namespace Z0
             Run(examples.vperm4x16);
             Run(examples.vperm4x32_128x32u_A);
             Run(examples.vperm4x32_128x32u_B);
+
             Run(examples.vshuf16x16);
             Run(examples.vshuf16x8_128x8u);
             Run(examples.vshuf16x8);
-            return Counter;
         }
 
         [MethodImpl(Inline),Op]
         public void Run(Action f)
         {
-            f();
-            Counter++;
+            try
+            {
+                f();
+                Successes++;
+            }
+            catch(Exception e)
+            {
+                Trace(e.Message);
+            }
         }
     }
 
@@ -97,6 +89,5 @@ namespace Z0
         public const string Cover = nameof(Cover);
 
         public const string Duplicate = nameof(Duplicate);
-
     }
 }

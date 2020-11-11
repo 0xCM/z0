@@ -8,12 +8,11 @@ namespace Z0
     using System;
 
     using static Konst;
-    using static RP;
 
     [Event(EventName)]
     public readonly struct EmittedTableEvent : IWfEvent<EmittedTableEvent>
     {
-        public const string EventName = nameof(GlobalEvents.EmittedTable);
+        public const string EventName = GlobalEvents.EmittedTable;
 
         public WfEventId EventId {get;}
 
@@ -22,6 +21,8 @@ namespace Z0
         public Count RowCount {get;}
 
         public FS.FilePath Target {get;}
+
+        public FlairKind Flair => FlairKind.Ran;
 
         [MethodImpl(Inline)]
         public EmittedTableEvent(WfStepId step, TableId dataset, uint count, FS.FilePath target, CorrelationToken ct)

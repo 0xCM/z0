@@ -15,7 +15,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static WfEventHub create(IDataSink sink)
         {
-            var hub = EventHubs.hub();
+            var hub = WfBrokers.hub();
             var client = new HubClientExample(hub, sink);
             return hub;
         }

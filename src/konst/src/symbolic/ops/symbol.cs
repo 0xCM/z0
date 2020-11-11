@@ -11,11 +11,22 @@ namespace Z0
 
     partial struct Symbolic
     {
-        [MethodImpl(Inline)]
+        /// <summary>
+        /// Creates a symbol from an unmanaged value
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <typeparam name="S">The source type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Symbol<S> symbol<S>(S src)
             where S : unmanaged
                 => new Symbol<S>(src);
 
+        /// <summary>
+        /// Creates a symbol from an unmanaged value
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <typeparam name="S">The source type</typeparam>
+        /// <typeparam name="T">The storage type</typeparam>
         [MethodImpl(Inline)]
         public static Symbol<S,T> symbol<S,T>(S src)
             where S : unmanaged

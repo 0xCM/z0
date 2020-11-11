@@ -17,7 +17,7 @@ namespace Z0
         App(AgentContext context, string[] args)
         {
             AgentContext = context;
-            Wf = WfShell.create(args);
+            Wf = WfShellInit.create(args);
             Control = AgentControl.FromContext(Wf.Context);
         }
 

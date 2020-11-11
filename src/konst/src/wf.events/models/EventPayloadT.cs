@@ -15,14 +15,6 @@ namespace Z0
         public readonly T Data;
 
         [MethodImpl(Inline)]
-        public static implicit operator EventPayload<T>(T src)
-            => new EventPayload<T>(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator T(EventPayload<T> src)
-            => src.Data;
-
-        [MethodImpl(Inline)]
         public EventPayload(T data)
             => Data = data;
 
@@ -32,5 +24,13 @@ namespace Z0
 
         public override string ToString()
             => Format();
+
+        [MethodImpl(Inline)]
+        public static implicit operator EventPayload<T>(T src)
+            => new EventPayload<T>(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator T(EventPayload<T> src)
+            => src.Data;
     }
 }

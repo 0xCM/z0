@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using api = Workflow;
-    using Free =System.Security.SuppressUnmanagedCodeSecurityAttribute;
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     /// <summary>
     /// Describes a workflow step
@@ -31,7 +30,7 @@ namespace Z0
         where C : IWfStep<C>, new()
     {
         WfStepId IWfStep.Id
-            => api.step<C>();
+            => new WfStepId<C>();
 
         WfFunc<C> Fx([CallerMemberName] string name = null)
             => new WfFunc<C>(name);

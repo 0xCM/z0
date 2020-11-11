@@ -12,7 +12,7 @@ namespace Z0
     [Event(EventName)]
     public readonly struct EmittingTableEvent<T> : IWfEvent<EmittingTableEvent<T>>
     {
-        public const string EventName = nameof(GlobalEvents.EmittingTable);
+        public const string EventName = GlobalEvents.EmittingTable;
 
         public WfEventId EventId {get;}
 
@@ -20,14 +20,13 @@ namespace Z0
 
         public FS.FilePath Target {get;}
 
-        public FlairKind Flair {get;}
+        public FlairKind Flair => FlairKind.Running;
 
         [MethodImpl(Inline)]
-        public EmittingTableEvent(WfStepId step, FS.FilePath target, CorrelationToken ct, FlairKind flair = FlairKind.Running)
+        public EmittingTableEvent(WfStepId step, FS.FilePath target, CorrelationToken ct)
         {
             EventId = (EventName, step, ct);
             Target = target;
-            Flair = flair;
         }
 
         [MethodImpl(Inline)]

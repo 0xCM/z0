@@ -8,30 +8,27 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Render;
-    using static z;
 
     [Event(EventName)]
-    public readonly struct RowEvent<T> : IWfEvent<RowEvent<T>>
+    public readonly struct RowEvent<T> : IWfEvent<RowEvent<T>,T>
     {
-        public const string EventName = nameof(GlobalEvents.Row);
+        public const string EventName = GlobalEvents.Row;
 
         public WfEventId EventId {get;}
 
-        public T Data {get;}
+        public EventPayload<T> Payload {get;}
 
-        public FlairKind Flair {get;}
+        public FlairKind Flair => FlairKind.Ran;
 
         [MethodImpl(Inline)]
-        public RowEvent(T data, FlairKind flair = Ran)
+        public RowEvent(T data)
         {
-            EventId= WfEventId.define(EventName);
-            Data = data;
-            Flair = flair;
+            EventId = WfEventId.define(EventName);
+            Payload = data;
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => Data?.ToString() ?? EmptyString;
+            => Payload.Format();
     }
 }

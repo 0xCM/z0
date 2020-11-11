@@ -104,6 +104,6 @@ namespace Z0
         /// Creates a path provider for the controlling application
         /// </summary>
         IWfPaths ForApp()
-            => WfShell.paths();
+            => WfShellInit.paths();
     }
 }

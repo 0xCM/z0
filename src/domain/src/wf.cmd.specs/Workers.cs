@@ -18,6 +18,15 @@ namespace Z0
 
         IWfShell Wf;
 
+        [Op]
+        public void list(IWfShell wf, BuildArchiveSettings spec)
+        {
+            var archive = BuildArchives.create(wf, spec);
+            var types = array(archive.Dll, archive.Exe, archive.Pdb, archive.Lib);
+            var cmd = EmitFileList.specify(wf, spec.Label + ".artifacts", archive.Root, types);
+            EmitFileList.run(wf, cmd);
+        }
+
         public void Init(IWfShell wf)
         {
             Host = WfSelfHost.create(typeof(Workers));
@@ -39,7 +48,7 @@ namespace Z0
         {
             var hosts = Wf.Api.ApiHosts;
             var kHost = (uint)hosts.Length;
-            Wf.Status(Status.IndexingHosts.Apply(kHost));
+            Wf.Status(Msg.IndexingHosts.Apply(kHost));
 
             var members  = @readonly(ApiRuntime.index(Wf));
             var target = Wf.Db().IndexFile("api.members");
@@ -65,9 +74,9 @@ namespace Z0
             var count = query.ResourceCount;
 
             if(count == 0)
-                wf.Warn(Warnings.NoMatchingResources.Apply(cmd.Source, cmd.Match));
+                wf.Warn(Msg.NoMatchingResources.Apply(cmd.Source, cmd.Match));
             else
-                wf.Status(Status.EmittingResources.Apply(cmd.Source, count));
+                wf.Status(Msg.EmittingResources.Apply(cmd.Source, count));
 
             if(cmd.ClearTarget)
                 cmd.Target.Clear();

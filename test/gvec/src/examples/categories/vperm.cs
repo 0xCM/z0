@@ -12,7 +12,6 @@ namespace Z0
 
     partial class VexExamples
     {
-
         [Op(ExampleGroups.Perms)]
         public void vperm4x16()
         {

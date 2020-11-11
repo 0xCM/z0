@@ -22,7 +22,7 @@ namespace Z0
 
         public FS.FilePath SourcePath {get;}
 
-        public FlairKind Flair {get;}
+        public FlairKind Flair => FlairKind.Processed;
 
         [MethodImpl(Inline)]
         public ProcessedFileEvent(WfStepId step, FS.FilePath src, T kind,  M metric, CorrelationToken ct)
@@ -31,7 +31,6 @@ namespace Z0
             SourcePath = src;
             FileKind = kind;
             Metric = metric;
-            Flair = FlairKind.Processed;
         }
 
         [MethodImpl(Inline)]

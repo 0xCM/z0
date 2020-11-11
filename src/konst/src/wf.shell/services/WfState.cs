@@ -30,7 +30,7 @@ namespace Z0
             => Wf.Raise(new RanEvent(Host, Ct));
 
         public void SignalTableEmitting(Type type, FS.FilePath dst)
-            => Wf.Raise(new EmittingTableEvent(Host, type, dst, Ct));
+            => Wf.Raise(tableEmitting(Host, type, dst, Ct));
 
         public WfExecFlow Running<T>(T src)
         {

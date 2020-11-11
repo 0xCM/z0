@@ -10,13 +10,13 @@ namespace Z0
     public interface IWfContext : ITextual
     {
         IWfPaths Paths
-            => WfShell.paths();
+            => WfShellInit.paths();
 
         IJsonSettings Settings
             => JsonSettings.Load(Paths.AppConfigPath);
 
         IApiParts ApiParts
-             => WfShell.parts();
+             => WfShellInit.parts();
 
         CorrelationToken Ct
             => z.correlate(Controller.Id);

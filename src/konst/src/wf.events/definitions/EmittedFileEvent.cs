@@ -6,7 +6,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Render;
 
     [Event(EventName)]
     public readonly struct EmittedFileEvent : IWfEvent<EmittedFileEvent>
@@ -19,18 +18,15 @@ namespace Z0
 
         public Count SegmentCount {get;}
 
-        public FlairKind Flair {get;}
+        public FlairKind Flair => FlairKind.Ran;
 
         [MethodImpl(Inline)]
-        public EmittedFileEvent(WfStepId step, FS.FilePath path, Count segments, CorrelationToken ct, FlairKind flair = Ran)
+        public EmittedFileEvent(WfStepId step, FS.FilePath path, Count segments, CorrelationToken ct)
         {
             EventId = (EventName, step, ct);
             SegmentCount = segments;
             Path = path;
-            Flair = flair;
         }
-
-        [MethodImpl(Inline)]
         public string Format()
             => Render.format(EventId, SegmentCount, Path.ToUri());
     }

@@ -28,6 +28,6 @@ namespace Z0
         /// <param name="ct">The correlation token</param>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Disposed<T> disposed<T>(WfStepId step, T payload, CorrelationToken ct)
-            => new Disposed<T>(step,payload,ct);
+            => new Disposed<T>(step, payload, ct);
     }
 }

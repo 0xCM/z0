@@ -8,13 +8,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Render;
-    using static z;
 
     [Event(EventName)]
-    public readonly struct RanEvent<T> : IWfEvent<RanEvent<T>, T>
+    public readonly struct RanEvent<T> : IWfEvent<RanEvent<T>,T>
     {
-        public const string EventName = nameof(GlobalEvents.Ran);
+        public const string EventName = GlobalEvents.Ran;
 
         public WfEventId EventId {get;}
 
@@ -22,15 +20,14 @@ namespace Z0
 
         public EventPayload<T> Payload {get;}
 
-        public FlairKind Flair {get;}
+        public FlairKind Flair => FlairKind.Ran;
 
         [MethodImpl(Inline)]
-        public RanEvent(WfStepId step, T data, CorrelationToken ct, FlairKind flair = Ran)
+        public RanEvent(WfStepId step, T data, CorrelationToken ct)
         {
             EventId = (EventName, step, ct);
             StepId = step;
             Payload = data;
-            Flair = flair;
         }
 
         [MethodImpl(Inline)]

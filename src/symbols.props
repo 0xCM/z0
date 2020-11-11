@@ -17,6 +17,8 @@
 
     <Commands>$(Src)commands/z0.commands.csproj</Commands>
 
+    <Fsm>$(Src)fsm/z0.fsm.csproj</Fsm>
+
     <Domain>$(Src)domain/z0.domain.csproj</Domain>
 
     <Tables>$(Src)tables/z0.tables.csproj</Tables>

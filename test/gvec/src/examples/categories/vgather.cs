@@ -39,7 +39,7 @@ namespace Z0
             var v512Expect = vparts(n128,0, 127, 255, 511);
             Claim.veq(v512Expect,v512Actual);
 
-            // Each claim below asserts that each gather operation is an identiy function
+            // Each claim below asserts that each gather operation is an identity function
             // with respect to the defined indexes (ignoring the type of the underlying data)
 
             var i2x8 = vparts(n128, 8, 16);

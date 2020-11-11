@@ -29,30 +29,6 @@ namespace Z0
             => new WfEventId(name, ct ?? correlate(0ul));
 
         [MethodImpl(Inline)]
-        public static implicit operator WfEventId((Type type, WfStepId step, CorrelationToken ct) src)
-            => new WfEventId(src.type, src.step, src.ct);
-
-        [MethodImpl(Inline)]
-        public static implicit operator WfEventId((string name, WfStepId step, CorrelationToken ct) src)
-            => new WfEventId(src.name, src.step, src.ct);
-
-        [MethodImpl(Inline)]
-        public static implicit operator WfEventId((string name, CorrelationToken ct) src)
-            => new WfEventId(src.name, src.ct);
-
-        [MethodImpl(Inline)]
-        public static implicit operator WfEventId((string name, string actor, CorrelationToken ct) src)
-            => new WfEventId(src.name, src.actor, src.ct);
-
-        [MethodImpl(Inline)]
-        public static implicit operator WfEventId((string name, CmdId cmd, CorrelationToken ct) src)
-            => new WfEventId(src.name, src.cmd, src.ct);
-
-        [MethodImpl(Inline)]
-        public static implicit operator WfEventId(Type row)
-            => new WfEventId(row);
-
-        [MethodImpl(Inline)]
         public WfEventId(Type type)
         {
             Ts = timestamp();
@@ -141,5 +117,29 @@ namespace Z0
 
         public override string ToString()
             => Format();
+
+        [MethodImpl(Inline)]
+        public static implicit operator WfEventId((Type type, WfStepId step, CorrelationToken ct) src)
+            => new WfEventId(src.type, src.step, src.ct);
+
+        [MethodImpl(Inline)]
+        public static implicit operator WfEventId((string name, WfStepId step, CorrelationToken ct) src)
+            => new WfEventId(src.name, src.step, src.ct);
+
+        [MethodImpl(Inline)]
+        public static implicit operator WfEventId((string name, CorrelationToken ct) src)
+            => new WfEventId(src.name, src.ct);
+
+        [MethodImpl(Inline)]
+        public static implicit operator WfEventId((string name, string actor, CorrelationToken ct) src)
+            => new WfEventId(src.name, src.actor, src.ct);
+
+        [MethodImpl(Inline)]
+        public static implicit operator WfEventId((string name, CmdId cmd, CorrelationToken ct) src)
+            => new WfEventId(src.name, src.cmd, src.ct);
+
+        [MethodImpl(Inline)]
+        public static implicit operator WfEventId(Type row)
+            => new WfEventId(row);
     }
 }

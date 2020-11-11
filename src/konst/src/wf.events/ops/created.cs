@@ -8,8 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static z;
-    using static Render;
 
     partial struct WfEvents
     {
@@ -20,8 +18,8 @@ namespace Z0
         /// <param name="ct">The correlation token</param>
         /// <param name="flair">The flair</param>
         [MethodImpl(Inline), Op]
-        public static CreatedEvent created(WfStepId id, CorrelationToken ct, FlairKind flair = Created)
-            => new CreatedEvent(id, ct, flair);
+        public static CreatedEvent created(WfStepId id, CorrelationToken ct)
+            => new CreatedEvent(id, ct);
 
         /// <summary>
         /// Defines a <see cref='CmdCreatedEvent'/> event
@@ -30,8 +28,8 @@ namespace Z0
         /// <param name="ct">The correlation token</param>
         /// <param name="flair">The flair</param>
         [MethodImpl(Inline), Op]
-        public static CmdCreatedEvent created(ToolId id, CorrelationToken ct, FlairKind flair = Created)
-            => new CmdCreatedEvent(id,ct,flair);
+        public static CmdCreatedEvent created(ToolId id, CorrelationToken ct)
+            => new CmdCreatedEvent(id, ct);
 
         /// <summary>
         /// Defines a <see cref='CreatedEvent{T}'/> event
@@ -40,7 +38,7 @@ namespace Z0
         /// <param name="ct">The correlation token</param>
         /// <param name="flair">The flair</param>
         [MethodImpl(Inline), Op, Closures(UInt64k)]
-        public static CreatedEvent<T> created<T>(WfStepId id, T content, CorrelationToken ct, FlairKind flair = Created)
-            => new CreatedEvent<T>(id, content, ct, flair);
+        public static CreatedEvent<T> created<T>(WfStepId id, T content, CorrelationToken ct)
+            => new CreatedEvent<T>(id, content, ct);
     }
 }

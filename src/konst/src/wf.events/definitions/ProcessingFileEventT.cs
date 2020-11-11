@@ -22,15 +22,14 @@ namespace Z0
 
         public FS.FilePath SourcePath {get;}
 
-        public FlairKind Flair {get;}
+        public FlairKind Flair => FlairKind.Running;
 
         [MethodImpl(Inline)]
-        public ProcessingFileEvent(WfStepId step, T kind, FS.FilePath src, CorrelationToken ct, FlairKind flair = Running)
+        public ProcessingFileEvent(WfStepId step, T kind, FS.FilePath src, CorrelationToken ct)
         {
             EventId = (EventName, step, ct);
             SourcePath = src;
             FileKind = kind;
-            Flair = flair;
         }
 
         [MethodImpl(Inline)]

@@ -46,7 +46,7 @@ namespace Z0
 
                     total += count;
 
-                    wf.EmittingFile(total, spec.Target);
+                    wf.EmittedFile(total, spec.Target);
                 }
             }
             return Win();

@@ -212,7 +212,7 @@ namespace Z0
         public void Run<T>(T spec)
             where T : struct, ICmdSpec<T>
         {
-            Wf.Status(Status.Dispatching<T>().Apply(spec));
+            Wf.Status(Msg.Dispatching<T>().Apply(spec));
             Router.Dispatch(spec);
         }
 

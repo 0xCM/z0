@@ -21,10 +21,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public void Connect()
         {
-            broker[JccKind.JA] = Workflow.handler<ApiInstruction>(OnJA);
-            broker[JccKind.JAE] = Workflow.handler<ApiInstruction>(OnJAE);
-            broker[JccKind.JB] = Workflow.handler<ApiInstruction>(OnJB);
-            broker[JccKind.JBE] = Workflow.handler<ApiInstruction>(OnJBE);
+            broker[JccKind.JA] = WfBrokers.handler<ApiInstruction>(OnJA);
+            broker[JccKind.JAE] = WfBrokers.handler<ApiInstruction>(OnJAE);
+            broker[JccKind.JB] = WfBrokers.handler<ApiInstruction>(OnJB);
+            broker[JccKind.JBE] = WfBrokers.handler<ApiInstruction>(OnJBE);
         }
 
         [MethodImpl(Inline)]

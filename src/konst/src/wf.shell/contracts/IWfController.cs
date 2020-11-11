@@ -8,15 +8,16 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Konst;
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-
+    [Free]
     public interface IWfController
     {
         Assembly Component {get;}
     }
 
-    public interface IWfControl<P> : IWfController
+    [Free]
+    public interface IWfController<P> : IWfController
         where P : IPart<P>, new()
     {
 

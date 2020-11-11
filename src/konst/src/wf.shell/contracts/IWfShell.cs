@@ -40,6 +40,16 @@ namespace Z0
 
         IWfShell WithVerbosity(LogLevel level);
 
+        WfExecFlow Running();
+
+        WfExecFlow Running<T>(T worker);
+
+        WfExecToken Ran(WfExecFlow src);
+
+        WfExecFlow EmittingTable(Type type, FS.FilePath dst);
+
+        void Ran();
+
         ICmdCatalog CmdCatalog
             => new CmdCatalog(this);
 
@@ -52,8 +62,8 @@ namespace Z0
         IWfPaths IWfContext.Paths
             => Context.Paths;
 
-        FolderPath IndexRoot
-            => FolderPath.Define(Init.IndexDir.Name);
+        FS.FolderPath IndexRoot
+            => FS.dir(Init.IndexDir.Name);
 
         FolderPath ResourceRoot
             => FolderPath.Define(Init.ResDir.Name);
@@ -219,14 +229,11 @@ namespace Z0
         }
 
         void EmittingFile<T>(T source, FS.FilePath dst)
-            => Raise(new EmittingFileEvent<T>(Host, source, dst, Ct));
-
-        void EmittingFile(Count measure, FS.FilePath dst)
-            => Raise(new EmittingFileEvent<Count>(Host, measure, dst, Ct));
+            => Raise(fileEmitting<T>(Host, source, dst, Ct));
 
         void EmittingTable<T>(FS.FilePath dst, T t = default)
             where T : struct
-                => Raise(new EmittingTableEvent<T>(Host, dst, Ct));
+                => Raise(tableEmitting<T>(Host, dst, Ct));
 
         void Running(CmdId cmd)
             => Raise(new RunningCmdEvent(cmd, Ct));
@@ -234,15 +241,6 @@ namespace Z0
         // ~ Flow
         // ~ ---------------------------------------------------------------------------
 
-        WfExecFlow Running();
-
-        WfExecFlow Running<T>(T worker);
-
-        WfExecToken Ran(WfExecFlow src);
-
-        WfExecFlow EmittingTable(Type type, FS.FilePath dst);
-
-        void Ran();
 
         void Succeeded<T>(CmdSpec cmd, T payload)
             => Raise(succeeded(cmd, payload, Ct));

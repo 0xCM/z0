@@ -13,23 +13,21 @@ namespace Z0
     [Event(EventName)]
     public readonly struct CreatedEvent<T> : IWfEvent<CreatedEvent<T>>
     {
-        public const string EventName = nameof(GlobalEvents.Created);
+        public const string EventName = GlobalEvents.Created;
 
         public WfEventId EventId {get;}
 
         public EventPayload<T> Content {get;}
 
-        public FlairKind Flair {get;}
+        public FlairKind Flair  => FlairKind.Created;
 
         [MethodImpl(Inline)]
-        public CreatedEvent(WfStepId step, T content, CorrelationToken ct, FlairKind flair = FlairKind.Created)
+        public CreatedEvent(WfStepId step, T content, CorrelationToken ct)
         {
             EventId = (EventName, step, ct);
             Content = content;
-            Flair = flair;
         }
 
-        [MethodImpl(Inline)]
         public string Format()
             => Render.format(EventId, Content);
     }

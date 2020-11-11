@@ -18,14 +18,6 @@ namespace Z0
         readonly TableSpan<ApiMember> Data;
 
         [MethodImpl(Inline)]
-        public static implicit operator ApiMembers(ApiMember[] src)
-            => new ApiMembers(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator ApiMember[](ApiMembers src)
-            => src.Data;
-
-        [MethodImpl(Inline)]
         public ApiMembers(params ApiMember[] src)
             => Data = src;
 
@@ -67,6 +59,14 @@ namespace Z0
 
         public ApiMembers Where(Func<ApiMember,bool> predicate)
             => Data.Storage.Where(predicate);
+
+        [MethodImpl(Inline)]
+        public static implicit operator ApiMembers(ApiMember[] src)
+            => new ApiMembers(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator ApiMember[](ApiMembers src)
+            => src.Data;
 
         public static ApiMembers Empty
             => new ApiMembers(TableSpan<ApiMember>.Empty);

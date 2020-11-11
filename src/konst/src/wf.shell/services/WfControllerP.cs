@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct WfController<P> : IWfControl<P>
+    public readonly struct WfController<P> : IWfController<P>
         where P : IPart<P>, new()
     {
         public Assembly Component

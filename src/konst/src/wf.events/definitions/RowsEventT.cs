@@ -11,30 +11,29 @@ namespace Z0
     using static z;
 
     [Event(EventName)]
-    public readonly struct RowsEvent<T> : IWfEvent<RowsEvent<T>>
+    public readonly struct RowsEvent<T> : IWfEvent<RowsEvent<T>,T>
         where T : ITextual
     {
         public const string EventName = GlobalEvents.Rows;
 
-        public Type DataType {get;}
-
         public WfEventId EventId {get;}
 
-        public T Content {get;}
+        public Type DataType {get;}
 
-        public FlairKind Flair {get;}
+        public EventPayload<T> Payload {get;}
+
+        public FlairKind Flair => FlairKind.DataRow;
 
         [MethodImpl(Inline)]
         public RowsEvent(T data)
         {
             DataType = typeof(T);
             EventId = DataType;
-            Content = data;
-            Flair = FlairKind.DataRow;
+            Payload = data;
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => Content.Format();
+            => Payload.Format();
     }
 }

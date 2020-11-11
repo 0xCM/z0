@@ -21,7 +21,7 @@ namespace Z0
         public void test_1()
         {
             var examples = ExampleEvents.Examples;
-            var hub = HubClientExample.create(EventHubs.relay(x => Receiver(x)));
+            var hub = HubClientExample.create(WfBrokers.relay(x => Receiver(x)));
 
             var d1 = code(0,2,4,8);
 
