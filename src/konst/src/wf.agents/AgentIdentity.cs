@@ -17,12 +17,26 @@ namespace Z0
         /// <summary>
         /// Uniquely identifies a server
         /// </summary>
-        public readonly uint ServerId;
+        public readonly uint PartId;
 
         /// <summary>
         /// Identifies an agent relative to a server
         /// </summary>
-        public readonly uint AgentId;
+        public readonly uint HostId;
+
+        [MethodImpl(Inline)]
+        public AgentIdentity(uint server, uint agent)
+        {
+            PartId = server;
+            HostId = agent;
+        }
+
+        [MethodImpl(Inline)]
+        public AgentIdentity(ulong id)
+        {
+            PartId = (uint)(id >> 32);
+            HostId = (uint)(id);
+        }
 
         /// <summary>
         /// Uniquely identifies an agent by composing the host on which it resides
@@ -31,8 +45,14 @@ namespace Z0
         public readonly ulong Identifier
         {
             [MethodImpl(Inline)]
-            get => ((ulong)ServerId << 32) | AgentId;
+            get => ((ulong)PartId << 32) | HostId;
         }
+
+        public string Format()
+            =>$"{PartId}/{HostId}";
+
+        public override string ToString()
+            => Format();
 
         /// <summary>
         /// Constructs an identity from server and agent id's
@@ -46,29 +66,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator ulong(AgentIdentity identity)
             => identity.Identifier;
-
-        [MethodImpl(Inline)]
-        public AgentIdentity(uint server, uint agent)
-        {
-            ServerId = server;
-            AgentId = agent;
-        }
-
-        [MethodImpl(Inline)]
-        public AgentIdentity(ulong id)
-        {
-            ServerId = (uint)(id >> 32);
-            AgentId = (uint)(id);
-        }
-
-        [MethodImpl(Inline)]
-        public void Deconstruct(out uint server, out uint agent)
-        {
-            server = ServerId;
-            agent = AgentId;
-        }
-
-        public override string ToString()
-            => $"{ServerId}/{AgentId}";
     }
 }

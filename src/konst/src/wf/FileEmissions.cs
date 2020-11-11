@@ -28,15 +28,6 @@ namespace Z0
             return files;
         }
 
-        [Op]
-        public static CmdResult exec(EmitFileListCmd cmd)
-        {
-            var archive = FS.archive(cmd.SourceDir, cmd.FileKinds);
-            var id = Cmd.id(cmd);
-            var list = cmd.EmissionLimit != 0 ? match(cmd.SourceDir, cmd.EmissionLimit, cmd.FileKinds) : match(cmd.SourceDir, cmd.FileKinds);
-            var outcome = FileEmissions.emit(list, cmd.FileUriMode, cmd.TargetPath);
-            return Cmd.result(id,outcome);
-        }
 
         [Op]
         public static Outcome<FileEmission> emit(FS.FilePath[] src, bool uri, FS.FilePath dst)

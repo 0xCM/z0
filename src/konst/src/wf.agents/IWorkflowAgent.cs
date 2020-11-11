@@ -15,12 +15,12 @@ namespace Z0
         /// <summary>
         /// Identifies the server on which the agent is executing
         /// </summary>
-        uint ServerId {get;}
+        uint PartId {get;}
 
         /// <summary>
         /// Identifies the agent relative to the hosting server
         /// </summary>
-        uint AgentId {get;}
+        uint HostId {get;}
 
         /// <summary>
         /// Starts agent execution
@@ -47,6 +47,6 @@ namespace Z0
         /// </summary>
         /// <param name="agent">The agent</param>
         AgentIdentity Identity
-            => (ServerId, AgentId);
+            => (PartId, HostId);
     }
 }

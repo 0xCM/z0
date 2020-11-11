@@ -13,7 +13,7 @@ namespace Z0
 
     using static Konst;
 
-    public sealed class TraceEventSink : SystemAgent
+    public sealed class TraceEventSink : WorkflowAgent
     {
         public static IWorkflowAgent Define(AgentContext Context, AgentIdentity Identity)
             => new TraceEventSink(Context, Identity);

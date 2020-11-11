@@ -9,23 +9,23 @@ namespace Z0
     /// <summary>
     /// Defines a logical server
     /// </summary>
-    public class ServerAgent : SystemAgent
+    public class WorkflowServer : WorkflowAgent
     {
-        public static ServerAgent create(IAgentContext context, ServerConfig config)
-            => new ServerAgent(context, config);
+        public static WorkflowServer create(IAgentContext context, ServerConfig config)
+            => new WorkflowServer(context, config);
 
         ServerConfig Config {get;}
 
-        ServerProcess Worker {get; }
+        AgentProcess Worker {get; }
 
-        internal ServerAgent(IAgentContext Context, ServerConfig Config)
+        internal WorkflowServer(IAgentContext Context, ServerConfig Config)
             : base(Context, (Config.ServerId, 0u))
         {
             this.Config = Config;
             var hearbeat = PulseEmitter.create(Context,
-                ServiceIdentityPool.NextAgentId(ServerId),
+                ServiceIdentityPool.NextAgentId(PartId),
                 new PulseEmitterConfig(new TimeSpan(0,0,1)));
-            this.Worker = ServerProcess.create(Context, ServerId, Config.CoreNumber, new IWorkflowAgent[]{hearbeat});
+            this.Worker = AgentProcess.create(Context, PartId, Config.CoreNumber, new IWorkflowAgent[]{hearbeat});
         }
 
         protected override async void OnStart()

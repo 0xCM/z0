@@ -20,7 +20,7 @@ namespace Z0
         public readonly ulong Location;
 
         /// <summary>
-        /// The time of occurrence, expressed as number of elapsed ticks 
+        /// The time of occurrence, expressed as number of elapsed ticks
         /// from some fixed point in time
         /// </summary>
         public readonly ulong Timestamp;
@@ -49,7 +49,7 @@ namespace Z0
             this.Location = ((ulong)server << 32) | agent;
             this.Timestamp = Time;
         }
-    
+
         [MethodImpl(Inline)]
         public AgentEventOrigin(ulong Location, ulong Time)
         {
@@ -74,12 +74,5 @@ namespace Z0
             [MethodImpl(Inline)]
             get => (uint) Location;
         }
-
-        [MethodImpl(Inline)]
-        public void Deconstruct(out ulong location, out ulong time)
-        {
-            location = Location;
-            time = Timestamp;
-        }    
     }
 }

@@ -8,7 +8,7 @@ namespace Z0
 
     using static Konst;
 
-    public enum CmdEngineKind : byte
+    public enum CmdAgentKind : byte
     {
         CmdExe = 1,
 
@@ -17,9 +17,9 @@ namespace Z0
         Custom = 4
     }
 
-    public struct CmdEngineSettings
+    public struct CmdAgentSettings
     {
-        public CmdEngineKind EngineKind;
+        public CmdAgentKind AgentKind;
 
         public FS.FilePath Path;
     }

@@ -9,12 +9,12 @@ namespace Z0
     using System.Linq;
 
     using static Konst;
-    using static Root;
+    using static z;
 
     /// <summary>
     /// Responsible for managing agents owned by a server
     /// </summary>
-    public class ServerProcess : SystemAgent
+    public class AgentProcess : WorkflowAgent
     {
         /// <summary>
         /// Creates and configures, but does not start, a server process
@@ -22,10 +22,10 @@ namespace Z0
         /// <param name="Context">The context to which the server process will be assigned</param>
         /// <param name="ServerId">The server id</param>
         /// <param name="ServerAgents">The agents to be managed on behalf of the server</param>
-        public static ServerProcess create(IAgentContext Context, uint ServerId, uint CoreNumber, params IWorkflowAgent[] ServerAgents)
-            => new ServerProcess(Context, ServerId, CoreNumber, ServerAgents);
+        public static AgentProcess create(IAgentContext Context, uint ServerId, uint CoreNumber, params IWorkflowAgent[] ServerAgents)
+            => new AgentProcess(Context, ServerId, CoreNumber, ServerAgents);
 
-        internal ServerProcess(IAgentContext context, uint server, uint core, params IWorkflowAgent[] agents)
+        internal AgentProcess(IAgentContext context, uint server, uint core, params IWorkflowAgent[] agents)
             : base(context, (server, 1u))
         {
             Agents = agents.ToList();

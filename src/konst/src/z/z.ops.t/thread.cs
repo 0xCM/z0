@@ -10,13 +10,13 @@ namespace Z0
 
     using static Konst;
 
-    partial class RootLegacy
+    partial struct z
     {
         /// <summary>
         /// Searches for a thread given an OS-assigned id, not the useless clr id
         /// </summary>
         /// <param name="id">The OS thread Id</param>
-        [MethodImpl(Inline)]   
+        [MethodImpl(Inline), Op]
         public static Option<ProcessThread> thread(uint id)
             => CurrentProcess.ProcessThread(id);
     }

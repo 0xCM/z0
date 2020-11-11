@@ -12,9 +12,9 @@ namespace Z0
     /// <summary>
     /// Agent that manages a collection of servers
     /// </summary>
-    public class ServerComplex : SystemAgent
+    public class ServerComplex : WorkflowAgent
     {
-        ServerAgent[] Servers;
+        WorkflowServer[] Servers;
 
         IWorkflowAgent EventSink;
 
@@ -49,7 +49,7 @@ namespace Z0
                     corenum = 0;
             }
 
-            var eventSink = TraceEventSink.Define(context, (complex.ServerId, complex.AgentId));
+            var eventSink = TraceEventSink.Define(context, (complex.PartId, complex.HostId));
             complex.Configure(configs, eventSink);
             await complex.Start();
             Complex = complex;
@@ -59,19 +59,18 @@ namespace Z0
         static AgentIdentity Identity
             => (UInt32.MaxValue, UInt32.MaxValue);
 
-
         ServerComplex(AgentContext Context)
             : base(Context, Identity)
         {
-            Servers = new ServerAgent[]{};
+            Servers = new WorkflowServer[]{};
         }
 
         public void Configure(IEnumerable<ServerConfig> config, IWorkflowAgent sink)
         {
             var configs = config.ToArray();
-            Servers = new ServerAgent[configs.Length];
+            Servers = new WorkflowServer[configs.Length];
             for(var i=0; i<configs.Length; i++)
-                Servers[i] = ServerAgent.create(Context, configs[i]);
+                Servers[i] = WorkflowServer.create(Context, configs[i]);
 
             EventSink = sink;
         }

@@ -10,7 +10,7 @@ namespace Z0
     /// <summary>
     /// Defines base system agent abstraction
     /// </summary>
-    public abstract class SystemAgent : IWorkflowAgent
+    public abstract class WorkflowAgent : IWorkflowAgent
     {
         public IAgentContext Context {get;}
 
@@ -21,7 +21,7 @@ namespace Z0
         /// <summary>
         /// Identifies the server to which the agent belongs
         /// </summary>
-        public uint ServerId {get;}
+        public uint PartId {get;}
 
         /// <summary>
         /// Identifies the agent relative to the server
@@ -35,12 +35,12 @@ namespace Z0
         /// etc, is also a service agent. It will be assigned UInt32.MaxValue which will be considered
         /// an invalid id for any other agent
         /// </remarks>
-        public uint AgentId {get;}
+        public uint HostId {get;}
 
-        protected SystemAgent(IAgentContext context, AgentIdentity id)
+        protected WorkflowAgent(IAgentContext context, AgentIdentity id)
         {
-            ServerId = id.ServerId;
-            AgentId = id.AgentId;
+            PartId = id.PartId;
+            HostId = id.HostId;
             Context = context;
             context.Register(this);
             State = AgentStatus.Created;
@@ -58,7 +58,7 @@ namespace Z0
                 if(_State == value)
                     return;
 
-                var transition = new AgentTransition((ServerId,AgentId), 0ul, _State, value);
+                var transition = new AgentTransition((PartId,HostId), 0ul, _State, value);
                 _State = value;
 
                 Context.EventLog.AgentTransitioned(transition);

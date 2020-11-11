@@ -40,7 +40,8 @@ namespace Z0
             if(o is PulseEvent e)
                 Receive(e);
         }
+
         public void AgentTransitioned(AgentTransition data)
-            => AgentTransitioned(2, data.Agent.ServerId, data.Agent.AgentId, data.Timestamp, z.bytes(data).ToArray());
+            => AgentTransitioned(2, data.Agent.PartId, data.Agent.HostId, data.Timestamp, z.bytes(data).ToArray());
     }
 }

@@ -10,13 +10,13 @@ namespace Z0
 
     using static Konst;
 
-    public class CmdEngine : SystemAgent, ICmdObserver
+    public class CmdAgent : WorkflowAgent, ICmdObserver
     {
         [Op]
-        public static CmdEngine create(IWfShell wf, ICmdObserver observer)
+        public static CmdAgent create(IWfShell wf, ICmdObserver observer)
         {
-            var settings = new CmdEngineSettings();
-            settings.EngineKind = CmdEngineKind.CmdExe;
+            var settings = new CmdAgentSettings();
+            settings.AgentKind = CmdAgentKind.CmdExe;
             settings.Path = FS.path("cmd.exe");
 
             var info = new ProcessStartInfo(settings.Path.Name);
@@ -27,9 +27,10 @@ namespace Z0
             info.WindowStyle = ProcessWindowStyle.Hidden;
             info.CreateNoWindow = true;
             info.Arguments = EmptyString;
-            return new CmdEngine(wf, settings, info, observer);
+            return new CmdAgent(wf, settings, info, observer);
         }
-        CmdEngineSettings Settings {get;}
+
+        CmdAgentSettings Settings {get;}
 
         ProcessStartInfo StartInfo {get;}
 
@@ -40,10 +41,10 @@ namespace Z0
         IWfShell Wf {get;}
 
         [MethodImpl(Inline)]
-        public CmdEngine(IWfShell wf, CmdEngineSettings settings, ProcessStartInfo start, ICmdObserver observer = null)
+        public CmdAgent(IWfShell wf, CmdAgentSettings settings, ProcessStartInfo start, ICmdObserver observer = null)
             : base(new WfAgentContext(wf), new AgentIdentity(10u,10u))
         {
-            Host = WfSelfHost.create(typeof(CmdEngine));
+            Host = WfSelfHost.create(typeof(CmdAgent));
             Wf = wf.WithHost(Host);
             Settings = settings;
             StartInfo = start;

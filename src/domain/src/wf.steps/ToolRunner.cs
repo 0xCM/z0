@@ -59,22 +59,38 @@ namespace Z0
         //void EmitScripts()
         //    => EmitToolScripts.run(Wf, EmitToolScripts.specify(Wf));
 
+        [Op]
+        public static FS.FilePath[] match(FS.FolderPath root, params FS.FileExt[] ext)
+        {
+            var files = FS.archive(root, ext).Files().Array();
+            Array.Sort(files);
+            return files;
+        }
+
+        [Op]
+        public static FS.FilePath[] match(FS.FolderPath root, uint max, params FS.FileExt[] ext)
+        {
+            var files = FS.archive(root, ext).Files().Take(max).Array();
+            Array.Sort(files);
+            return files;
+        }
+
+        [Op]
+        public static CmdResult exec(EmitFileListCmd cmd)
+        {
+            var archive = FS.archive(cmd.SourceDir, cmd.FileKinds);
+            var id = Cmd.id(cmd);
+            var list = cmd.EmissionLimit != 0 ? match(cmd.SourceDir, cmd.EmissionLimit, cmd.FileKinds) : match(cmd.SourceDir, cmd.FileKinds);
+            var outcome = FileEmissions.emit(list, cmd.FileUriMode, cmd.TargetPath);
+            return Cmd.result(id,outcome);
+        }
+
         CmdResult EmitToolHelp()
             => EmitResourceData.run(Wf, CmdBuilder.EmitResourceData(Parts.Refs.Assembly, "tools/help", ".help"));
 
         CmdResult EmitFileList()
-            => FileEmissions.exec(Wf.EmitFileListCmdSample());
+            => exec(Wf.EmitFileListCmdSample());
 
-        // CmdResult EmitRuntimeIndex()
-        // {
-        //     using var flow = Wf.Running();
-        //     var cmd = Wf.CmdCatalog.EmitRuntimeIndex();
-        //     var worker = cmd.Worker(Wf);
-        //     var result  = worker.Invoke(Wf, cmd);
-        //     Wf.Status(result);
-        //     return result;
-
-        // }
         CmdResult EmitAsmRefs()
         {
             var srcDir = FS.dir("k:/z0/builds/nca.3.1.win-x64");
