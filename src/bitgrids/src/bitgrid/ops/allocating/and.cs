@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
     using static BitGrid;
 
     partial class BitGridA
@@ -120,7 +119,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
         {
-            var dst = alloc<M,N,T>();    
+            var dst = alloc<M,N,T>();
             BitGrid.and(a,b,dst);
             return dst;
         }

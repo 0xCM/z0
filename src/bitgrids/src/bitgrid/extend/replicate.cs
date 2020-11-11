@@ -8,14 +8,13 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
 
     partial class XTend
     {
         public static BitGrid<M,N,T> Replicate<M,N,T>(this BitGrid<M,N,T> src)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-            where T : unmanaged 
+            where T : unmanaged
                 => new BitGrid<M,N,T>(src.Content.Replicate());
 
         public static BitGrid<T> Replicate<T>(this BitGrid<T> src)

@@ -8,13 +8,12 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
 
     partial class XTend
     {
         [MethodImpl(Inline)]
         public static SubGrid32<N8,N3,uint> ToSubGrid(this NatPerm<N8> src)
-            => SubGrid.init(src);            
+            => SubGrid.init(src);
 
         [MethodImpl(Inline)]
         public static SubGrid32<N8,N3,uint> ToSubGrid(this Perm8L src)

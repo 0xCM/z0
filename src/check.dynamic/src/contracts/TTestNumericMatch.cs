@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface TTestNumericMatch : TTestAction, TCheckNumeric, ITestRandom
+    public interface ITestNumericMatch : ITestAction, TCheckNumeric, ITestRandom
     {
         /// <summary>
         /// Evaluates a pair of unary operators and asserts their equality over a random sequence
@@ -26,7 +26,7 @@ namespace Z0
             }
 
             return TestAction<T>(check, label);
-        }           
+        }
 
         /// <summary>
         /// Evaluates a pair of binary operators and asserts their equality over a random sequence
@@ -43,12 +43,12 @@ namespace Z0
                 for(var i=0; i<RepCount; i++)
                 {
                     var x = Random.Next<T>();
-                    var y = Random.Next<T>();                    
+                    var y = Random.Next<T>();
                     NumEq(f(x,y),g(x,y));
                 }
             }
 
             return TestAction<T>(check, label);
-        }        
+        }
     }
 }

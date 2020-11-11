@@ -182,7 +182,7 @@ namespace Z0
         protected string caller([Caller] string caller = null)
             => caller;
 
-        protected TTestCaseIdentity CaseIdentityService
+        protected ITestCaseIdentity CaseIdentityService
             => Context;
 
         protected OpIdentity CaseOpId<T>(string label, T t = default)

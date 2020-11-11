@@ -5,20 +5,20 @@
 namespace Z0
 {
     using System;
-    
+
     public interface ITestRandom : TTester, IPolyrandProvider
     {
 
 
-    }        
-        
-    public interface TTestChecker : TTester, TTestResultSink
-    {
-        
     }
 
-    public interface TTester : TClocked, TCheckOptions, TTestCaseIdentity, TCheckError
-    {        
-        
-    }       
+    public interface TTestChecker : TTester, TTestResultSink
+    {
+
+    }
+
+    public interface TTester : TClocked, TCheckOptions, ITestCaseIdentity, TCheckError
+    {
+
+    }
 }

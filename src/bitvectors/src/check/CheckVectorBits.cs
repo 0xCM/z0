@@ -10,5 +10,4 @@ namespace Z0
     {
         public static ICheckVectorBits Checker => default(CheckVectorBits);
     }
-
 }

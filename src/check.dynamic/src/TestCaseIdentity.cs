@@ -9,9 +9,9 @@ namespace Z0
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
 
-    public readonly struct TestCaseIdentity : TTestCaseIdentity
+    public readonly struct TestCaseIdentity : ITestCaseIdentity
     {
-        public static TTestCaseIdentity Service => default(TestCaseIdentity);
+        public static ITestCaseIdentity Service => default(TestCaseIdentity);
 
         public static string name(IFunc f)
             => ApiTestIdentity.name(f);

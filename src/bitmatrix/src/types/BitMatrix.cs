@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.InteropServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     /// <summary>
     /// Defines a square bitmatrix with order determined by the primal type over which it is defined
@@ -20,7 +20,7 @@ namespace Z0
     {
         internal readonly Span<T> Data;
 
-        public static int N => bitwidth<T>();
+        public static int N => (int)bitwidth<T>();
 
         [MethodImpl(Inline)]
         public static BitVector<T> operator * (BitMatrix<T> A, BitVector<T> x)
@@ -67,7 +67,7 @@ namespace Z0
         public ref BitVector<T> this[int row]
         {
             [MethodImpl(Inline)]
-            get => ref AsBitVector(ref head(Data, row));
+            get => ref AsBitVector(ref Memories.head(Data, row));
         }
 
         public Bit32 this[int row, int col]

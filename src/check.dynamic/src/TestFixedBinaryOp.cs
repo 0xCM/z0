@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public class TestFixedBinaryOp : TTestFixedBinaryOp
+    public class TestFixedBinaryOp : ITestBinaryCellOp
     {
         public IPolyrand Random {get;}
 
@@ -19,7 +19,7 @@ namespace Z0
             => new TestFixedBinaryOp(random);
 
         [MethodImpl(Inline)]
-        public static TTestFixedBinaryOp Service(IPolyrand random)
+        public static ITestBinaryCellOp Service(IPolyrand random)
             => Check(random);
 
         [MethodImpl(Inline)]
@@ -28,13 +28,17 @@ namespace Z0
             Random = random;
         }
 
-        TTestAction ActionTest => z.cast<TTestFixedBinaryOp>(this);
+        ITestAction ActionTest
+            => z.cast<ITestBinaryCellOp>(this);
 
-        TTestCaseIdentity Identity => ActionTest;
+        ITestCaseIdentity Identity
+            => ActionTest;
 
-        int RepCount => ActionTest.RepCount;
+        int RepCount
+            => ActionTest.RepCount;
 
-        TCheckEquatable Claim => CheckEquatable.Checker;
+        TCheckEquatable Claim
+            => CheckEquatable.Checker;
 
         /// <summary>
         /// Verifies that two 8-bit binary operators agree over a random set of points

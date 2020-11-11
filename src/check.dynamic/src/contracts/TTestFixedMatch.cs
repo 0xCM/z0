@@ -4,8 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface TTestFixedMatch : TTestFixedBinaryOp, TTestUnaryFixedMatch
-    {        
+    public interface TTestFixedMatch : ITestBinaryCellOp, TTestUnaryFixedMatch
+    {
 
     }
 }

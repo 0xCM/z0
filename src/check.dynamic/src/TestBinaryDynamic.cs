@@ -15,20 +15,20 @@ namespace Z0
 
     public readonly struct TestBinaryDynamic : ITestBinaryDynamic
     {
-        readonly TTestFixedBinaryOp Matcher;
+        readonly ITestBinaryCellOp Matcher;
 
         public IPolyrand Random
             => Matcher.Random;
 
         [MethodImpl(Inline)]
-        public static ITestBinaryDynamic Service(TTestFixedBinaryOp matcher)
+        public static ITestBinaryDynamic Service(ITestBinaryCellOp matcher)
             => new TestBinaryDynamic(matcher);
 
         [MethodImpl(Inline)]
-        internal static TestBinaryDynamic Check(TTestFixedBinaryOp matcher)
+        internal static TestBinaryDynamic Check(ITestBinaryCellOp matcher)
             => new TestBinaryDynamic(matcher);
 
-        internal TestBinaryDynamic(TTestFixedBinaryOp matcher)
+        internal TestBinaryDynamic(ITestBinaryCellOp matcher)
         {
             Matcher = matcher;
         }

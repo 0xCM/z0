@@ -13,7 +13,7 @@ namespace Z0
     using static TestCaseIdentity;
     using static ApiUriDelimiters;
 
-    public interface TTestCaseIdentity : TValidator
+    public interface ITestCaseIdentity : TValidator
     {
         /// <summary>
         /// Produces a test case name predicated on an operation identity

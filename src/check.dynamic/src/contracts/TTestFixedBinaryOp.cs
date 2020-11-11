@@ -6,12 +6,12 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
 
     using Test = TestFixedBinaryOp;
 
-    public interface TTestFixedBinaryOp : TTestAction, ITestRandom
+    public interface ITestBinaryCellOp : ITestAction, ITestRandom
     {
         /// <summary>
         /// Verifies that two 8-bit binary operators agree over a random set of points

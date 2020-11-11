@@ -5,8 +5,8 @@
 namespace Z0
 {
     using System;
-        
-    public interface TTestAction : TTester
+
+    public interface ITestAction : TTester
     {
         /// <summary>
         /// Captures the outcome of an action invocation, identified by a supplied label
@@ -16,7 +16,7 @@ namespace Z0
         TestCaseRecord TestAction(Action f, string label)
         {
             var succeeded = true;
-            
+
             var clock = Time.counter(true);
             try
             {
@@ -38,7 +38,7 @@ namespace Z0
         TestCaseRecord TestAction<T>(Action<T> f, T point, string label)
         {
             var succeeded = true;
-            
+
             var clock = Time.counter(true);
             try
             {
@@ -62,7 +62,7 @@ namespace Z0
             where T : unmanaged
         {
             var succeeded = true;
-            
+
             var clock = Time.counter(true);
             try
             {

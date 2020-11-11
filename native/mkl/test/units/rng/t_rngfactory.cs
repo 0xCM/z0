@@ -10,11 +10,10 @@ namespace Z0
     using Z0.Mkl;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     public class t_rngfactory : UnitTest<t_rngfactory>
     {
-
         const uint Seed = 0x78941u;
 
         const double MinF64 = -350000;
@@ -143,12 +142,11 @@ namespace Z0
                 var sample = stream.TakeArray(segment);
                 sw.Stop();
                 for(var j=0; j< segment; j++)
-                    stats.Collect(convert<T,double>(sample[j]));
+                    stats.Collect(force<T,double>(sample[j]));
             }
 
             var opname = $"{caller}<{typeof(T).DisplayName()}>";
             Deposit(BenchmarkRecord.Define(total, sw.Elapsed, opname));
         }
-
     }
 }

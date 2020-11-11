@@ -3,9 +3,9 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
-    public interface TTestOperatorMatch : TTestFixedMatch, TTestNumericMatch
+{
+    public interface TTestOperatorMatch : TTestFixedMatch, ITestNumericMatch
     {
-        
-    }    
+
+    }
 }

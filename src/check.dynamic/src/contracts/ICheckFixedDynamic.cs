@@ -29,5 +29,4 @@ namespace Z0
             iter(points, x => checker.Eq(f(x), g(x)));
         }
     }
-
 }

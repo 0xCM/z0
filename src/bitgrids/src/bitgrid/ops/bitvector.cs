@@ -8,10 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
 
     partial class BitGrid
-    {                
+    {
         /// <summary>
         /// Presents a fixed 16-bit grid as a 16-bit bitvector
         /// </summary>
