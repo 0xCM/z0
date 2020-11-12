@@ -7,17 +7,17 @@ namespace Z0
     using System;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     public class t_natproof : UnitTest<t_natproof>
-    {    
+    {
         public void equality()
         {
             NatClaim.eq<N16>(16);
             NatClaim.eq<N512>(512);
             NatClaim.eq<NatSeq<N8, N2, N1>>(821);
         }
- 
+
         public void smaller()
         {
             NatClaim.lt(n11, n12);
@@ -53,10 +53,10 @@ namespace Z0
 
         public void next()
         {
-            NatClaim.next(n0, n1);            
-            NatClaim.next(n5, n6);            
+            NatClaim.next(n0, n1);
+            NatClaim.next(n5, n6);
             NatClaim.next(n15, n16);
-            
+
             var n11 = NextNat.get(n10);
             var n12 = NextNat.get(n11);
             var n13 = NextNat.get(n12);

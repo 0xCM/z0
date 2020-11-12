@@ -5,9 +5,8 @@
 namespace Z0
 {
     using System;
-    
+
     using static Konst;
-    using static Memories;
 
     public class t_vtestz : t_inx<t_vtestz>
     {
@@ -66,12 +65,12 @@ namespace Z0
             for(var i=0; i< RepCount; i++)
             {
                 var x = Random.CpuVector(w,t);
-                
+
                 // Creates a mask corresponding to each off bit in the source vector
                 // thereby establishing the the context where testz will return true
                 // since all mask-identified source bits are disabled
-                var mask = gvec.vcnonimpl(gvec.vones(w,t), x);                
-                
+                var mask = gvec.vcnonimpl(gvec.vones(w,t), x);
+
                 Claim.Require(gvec.vtestz(x,mask));
             }
         }
@@ -87,10 +86,10 @@ namespace Z0
                 // Creates a mask corresponding to each off bit in the source vector
                 // thereby establishing the the context where testz will return true
                 // since all mask-identified source bits are disabled
-                var mask = gvec.vcnonimpl(gvec.vones(w,t), x);                
-                
+                var mask = gvec.vcnonimpl(gvec.vones(w,t), x);
+
                 Claim.Require(gvec.vtestz(x,mask));
             }
-        }            
+        }
     }
 }

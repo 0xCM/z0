@@ -8,7 +8,7 @@ namespace Z0
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     public class t_natmod : t_gmath<t_natmod>
     {

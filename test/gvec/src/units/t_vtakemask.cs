@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     public class t_vtakemask : t_inx<t_vtakemask>
     {
@@ -60,7 +60,7 @@ namespace Z0
                     var x = r.Invoke();
                     var a = f.Invoke(x);
                     var y = v8u(x);
-                    for(var j=0; j<count; j++)
+                    for(byte j=0; j<count; j++)
                         Claim.Eq(gbits.testbit32(vcell(y,j), 7), gbits.testbit32(a,(byte)j));
                 }
             }
@@ -82,7 +82,7 @@ namespace Z0
                     var x = r.Invoke();
                     var a = f.Invoke(x);
                     var y = v8u(x);
-                    for(var j=0; j<count; j++)
+                    for(byte j=0; j<count; j++)
                         Claim.Eq(gbits.testbit32(vcell(y,j), 7), gbits.testbit32(a,(byte)j));
                 }
             }

@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     partial class BitGrid
     {
@@ -21,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ref T cell<T>(ref T src, int bitpos)
             where T : unmanaged
-                => ref seek(ref src, bitpos / bitwidth<T>());
+                => ref seek(src, bitpos / (int)bitwidth<T>());
 
         /// <summary>
         /// Reads/manipulates a cell identified by a linear bit position
@@ -32,7 +32,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ref T cell<T>(in BitGrid<T> src, int bitpos)
             where T : unmanaged
-                => ref seek(ref src.Head, bitpos / bitwidth<T>());
+                => ref seek(src.Head, bitpos / bitwidth<T>());
 
         /// <summary>
         /// Reads/manipulates a cell identified by a linear bit position
@@ -47,16 +47,16 @@ namespace Z0
             where T : unmanaged
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                => ref seek(ref src.Head, bitpos / bitwidth<T>());
+                => ref seek(src.Head, bitpos / bitwidth<T>());
 
         [MethodImpl(Inline)]
-        public static RowBits<T> rowcells<M,N,T>(in BitGrid<M,N,T> g, int row)
+        public static RowBits<T> rowcells<M,N,T>(in BitGrid<M,N,T> g, uint row)
             where T : unmanaged
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
         {
-            int rowcells = (nat32i<N>() / 8)/size<T>();
-            int rowoffset = ((row*nat32i<N>())/8)/size<T>();
+            var rowcells = (nat32u<N>() / 8u)/size<T>();
+            var rowoffset = ((row*nat32u<N>())/8)/size<T>();
             return RowBits.load(g.Content.Slice(rowoffset, rowcells));
         }
     }

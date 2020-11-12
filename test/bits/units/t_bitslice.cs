@@ -7,17 +7,17 @@ namespace Z0
     using System;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     public class t_bitslice : t_bitcore<t_bitslice>
-    {        
+    {
         public void bitslice_32u()
         {
             var src = 0b00001010110000101001_001_111_011_001u;
             var bsSrc = src.ToBitString().Format(true);
             ClaimPrimalSeq.eq("1010110000101001001111011001", bsSrc);
-            
-            var i=-3; 
+
+            var i=-3;
 
             var x0 = gbits.slice(src, uint8(i += 3), 3);
             var bsx0 = x0.ToBitString();
@@ -33,11 +33,11 @@ namespace Z0
             var bsx2 = x2.ToBitString();
             var y2 = bsx2.TakeScalar<uint>();
             Claim.Eq(x2,y2);
-            
+
             var x3 = gbits.slice(src, uint8(i += 3), 3);
             var bsx3 = x3.ToBitString();
             var y3 = bsx3.TakeScalar<uint>();
-            Claim.Eq(x3,y3);            
+            Claim.Eq(x3,y3);
         }
 
     }

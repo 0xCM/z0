@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     partial class VServices
     {
@@ -22,7 +22,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public T Invoke(T a, T count)
-                => gmath.srl(a,convert<T,byte>(count));
+                => gmath.srl(a, force<T,byte>(count));
         }
 
         public readonly struct Srlr256<T> : IBinaryOp256<T>
@@ -35,7 +35,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public T InvokeScalar(T a, T offset)
-                => gmath.srl(a,convert<T,byte>(offset));
+                => gmath.srl(a, force<T,byte>(offset));
         }
     }
 }

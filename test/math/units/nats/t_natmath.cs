@@ -7,8 +7,7 @@ namespace Z0
     using System;
 
     using static Konst;
-    using static Memories;
-    using static NatCalc;
+    using static z;
 
     public class t_natmath : UnitTest<t_natmath>
     {

@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
 
     public class t_bvperm : t_bitvectors<t_bvperm>
     {
@@ -19,7 +18,6 @@ namespace Z0
             var bs2 = BitString.parse("01001101");
             var bs3 = bs1.Permute(perm);
             Claim.eq(bs2, bs3);
-
         }
 
         public void pbv_perm_16()

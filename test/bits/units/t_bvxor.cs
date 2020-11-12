@@ -6,9 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
-    using static Memories;
 
     public class t_bvxor : t_bitvectors<t_bvxor>
     {
@@ -194,7 +193,7 @@ namespace Z0
 
         public void bvxor_w16x64()
             => bvxor_wcheck<ulong>(16);
- 
+
         public void bvxor_w17x64()
             => bvxor_wcheck<ulong>(17);
 
@@ -224,7 +223,7 @@ namespace Z0
 
         public void bvxor_w26x64()
             => bvxor_wcheck<ulong>(26);
- 
+
         public void bvxor_w27x64()
             => bvxor_wcheck<ulong>(27);
 
@@ -250,7 +249,7 @@ namespace Z0
             {
                 var x = Random.BitVector<T>(width);
                 ClaimNumeric.lteq(BitVector.width(x), width);
-                
+
                 var y = Random.BitVector<T>(width);
                 ClaimNumeric.lteq(BitVector.width(y),width);
 

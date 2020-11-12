@@ -4,10 +4,48 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static AsciCharText;
-
     partial struct RP
     {
+        const string D0 = "0";
+
+        const string D1 = "1";
+
+        const string D2 = "2";
+
+        const string D3 = "3";
+
+        const string D4 = "4";
+
+        const string D5 = "5";
+
+        const string D6 = "6";
+
+        const string D7 = "7";
+
+        const string D8 = "8";
+
+        const string D9 = "9";
+
+        const string Space = " ";
+
+        /// <summary>
+        /// Defines the literal '}'
+        /// </summary>
+        [RenderLiteral(RBrace)]
+        const string RBrace = "}";
+
+        /// <summary>
+        /// Defines the literal '"'
+        /// </summary>
+        [RenderLiteral(DQuote)]
+        const string DQuote = "\"";
+
+        /// <summary>
+        /// Defines the literal '"'
+        /// </summary>
+        [RenderLiteral(Colon)]
+        const string Colon = ":";
+
         /// <summary>
         /// Defines the literal '"{1}"'
         /// </summary>
@@ -31,20 +69,20 @@ namespace Z0
         /// <summary>
         /// Defines the literal '{'
         /// </summary>
-        [StringLiteral("{")]
-        public const string OpenSlot = LBrace;
+        [RenderLiteral("{")]
+        public const string OpenSlot ="{";
 
         /// <summary>
         /// Defines the literal '}'
         /// </summary>
-        [StringLiteral("}")]
-        public const string CloseSlot = RBrace;
+        [RenderLiteral("}")]
+        public const string CloseSlot = "}";
 
         /// <summary>
         /// Defines the literal '"{'
         /// </summary>
         [StringLiteral("\"{")]
-        public const string OpenQSlot = DQuote + LBrace;
+        public const string OpenQSlot = DQuote + OpenSlot;
 
         /// <summary>
         /// Defines the literal '"}'
@@ -61,157 +99,157 @@ namespace Z0
         /// <summary>
         /// Defines the literal '{0}'
         /// </summary>
-        [FormatPattern(1, "{0}")]
+        [RenderPattern(1, "{0}")]
         public const string Slot0 = OpenSlot + D0 + CloseSlot;
 
         /// <summary>
         /// Defines the literal '{1}'
         /// </summary>
-        [FormatPattern(1, "{1}")]
+        [RenderPattern(1, "{1}")]
         public const string Slot1 = OpenSlot + D1 + CloseSlot;
 
         /// <summary>
         /// Defines the literal '{2}'
         /// </summary>
-        [FormatPattern(1, "{2}")]
+        [RenderPattern(1, "{2}")]
         public const string Slot2 = OpenSlot + D2 + CloseSlot;
 
         /// <summary>
         /// Defines the literal '{3}'
         /// </summary>
-        [FormatPattern(1,"{3}")]
+        [RenderPattern(1,"{3}")]
         public const string Slot3 = OpenSlot + D3 + CloseSlot;
 
         /// <summary>
         /// Defines the literal '{4}'
         /// </summary>
-        [FormatPattern(1, "{4}")]
+        [RenderPattern(1, "{4}")]
         public const string Slot4 = OpenSlot + D4 + CloseSlot;
 
         /// <summary>
         /// Defines the literal {5}'
         /// </summary>
-        [FormatPattern(1, "{5}")]
+        [RenderPattern(1, "{5}")]
         public const string Slot5 = OpenSlot + D5 + CloseSlot;
 
         /// <summary>
         /// Defines the literal "{6}"
         /// </summary>
-        [FormatPattern(1, "{6}")]
+        [RenderPattern(1, "{6}")]
         public const string Slot6 = OpenSlot + D6 + CloseSlot;
 
         /// <summary>
         /// Defines the literal "{7}"
         /// </summary>
-        [FormatPattern(1, "{7}")]
+        [RenderPattern(1, "{7}")]
         public const string Slot7 = OpenSlot + D7 + CloseSlot;
 
         /// <summary>
         /// Defines the literal "{8}"
         /// </summary>
-        [FormatPattern(1, "{8}")]
+        [RenderPattern(1, "{8}")]
         public const string Slot8 = OpenSlot + D8 + CloseSlot;
 
         /// <summary>
         /// Defines the literal "{0} "
         /// </summary>
-        [FormatPattern(1, "{0} ")]
+        [RenderPattern(1, "{0} ")]
         public const string Slot0Space = Slot0 + Space;
 
         /// <summary>
         /// Defines the literal "{1} "
         /// </summary>
-        [FormatPattern(1, "{1} ")]
+        [RenderPattern(1, "{1} ")]
         public const string Slot1Space = Slot1 + Space;
 
         /// <summary>
         /// Defines the literal "{2} "
         /// </summary>
-        [FormatPattern(1, "{2} ")]
+        [RenderPattern(1, "{2} ")]
         public const string Slot2Space = Slot2 + Space;
 
         /// <summary>
         /// Defines the literal "{3} "
         /// </summary>
-        [FormatPattern(1, "{3} ")]
+        [RenderPattern(1, "{3} ")]
         public const string Slot3Space = Slot3 + Space;
 
         /// <summary>
         /// Defines the literal "{4} "
         /// </summary>
-        [FormatPattern(1, "{4} ")]
+        [RenderPattern(1, "{4} ")]
         public const string Slot4Space = Slot4 + Space;
 
         /// <summary>
         /// Defines the literal "{5} "
         /// </summary>
-        [FormatPattern(1, "{5} ")]
+        [RenderPattern(1, "{5} ")]
         public const string Slot5Space = Slot5 + Space;
 
         /// <summary>
         /// Defines the literal '| {0}'
         /// </summary>
-        [FormatPattern(1, "{0} | ")]
+        [RenderPattern(1, "{0} | ")]
         public const string SlottedSpacePipe = Slot0 + SpacePipe + Space;
 
         /// <summary>
         /// Defines the literal '{0} | {1}'
         /// </summary>
-        [FormatPattern(2, "{0} | {1}")]
+        [RenderPattern(2, "{0} | {1}")]
         public const string PSx2 = Slot0 + SpacePipe + Space + Slot1;
 
         /// <summary>
         /// Defines the literal '{0} | {1} | {2}'
         /// </summary>
-        [FormatPattern(3, "{0} | {1} | {2}")]
+        [RenderPattern(3, "{0} | {1} | {2}")]
         public const string PSx3 = PSx2 + SpacePipe + Space + Slot2;
 
         /// <summary>
         /// Defines the literal '{0} | {1} | {2} | {3}'
         /// </summary>
-        [FormatPattern(4, "{0} | {1} | {2} | {3}")]
+        [RenderPattern(4, "{0} | {1} | {2} | {3}")]
         public const string PSx4 = PSx3 + SpacePipe + Space + Slot3;
 
         /// <summary>
         /// Defines the literal '{0} | {1} | {2} | {3} | {4}'
         /// </summary>
-        [FormatPattern(5, "{0} | {1} | {2} | {3} | {4}")]
+        [RenderPattern(5, "{0} | {1} | {2} | {3} | {4}")]
         public const string PSx5 = PSx4 + SpacePipe + Space + Slot4;
 
         /// <summary>
         /// Defines the literal '| {0} | {1} | {2} | {3} | {4} | {5}'
         /// </summary>
-        [FormatPattern(6, "{0} | {1} | {2} | {3} | {4} | {5}")]
+        [RenderPattern(6, "{0} | {1} | {2} | {3} | {4} | {5}")]
         public const string PSx6 = PSx5 + SpacePipe + Space + Slot5;
 
         /// <summary>
         /// Defines the literal '| {0} | {1} | {2} | {3} | {4} | {5} | {6}'
         /// </summary>
-        [FormatPattern(7, "{0} | {1} | {2} | {3} | {4} | {5} | {6}")]
+        [RenderPattern(7, "{0} | {1} | {2} | {3} | {4} | {5} | {6}")]
         public const string PSx7 = PSx6 + SpacePipe + Space + Slot6;
 
         /// <summary>
         /// Defines the literal '"{0}": "{1}"'
         /// </summary>
-        [FormatPattern(2, JsonProp)]
+        [RenderPattern(2, JsonProp)]
         public const string JsonProp = QSlot0 + Colon + Space + QSlot1;
 
         /// <summary>
         /// Defines a right-padded slot of width 4
         /// </summary>
-        [FormatPattern(1, JsonProp)]
+        [RenderPattern(1, JsonProp)]
         public const string SlotPad0x4 = "{0,-4}";
 
         /// <summary>
         /// Defines a right-padded slot of width 8
         /// </summary>
-        [FormatPattern(1, JsonProp)]
+        [RenderPattern(1, JsonProp)]
         public const string SlotPad0x8 = "{0,-8}";
 
         /// <summary>
         /// Defines a right-padded slot of width 12
         /// </summary>
-        [FormatPattern(1, JsonProp)]
+        [RenderPattern(1, JsonProp)]
         public const string SlotPad0x12 = "{0,-12}";
 
         /// <summary>
@@ -257,61 +295,61 @@ namespace Z0
         /// <summary>
         /// Defines the literal '{0} {1}'
         /// </summary>
-        [FormatPattern(2, SSx2)]
+        [RenderPattern(2, SSx2)]
         public const string SSx2 = "{0} {1}";
 
         /// <summary>
         /// Defines the literal '{0} {1} {2}'
         /// </summary>
-        [FormatPattern(3, "{0} {1} {2}")]
+        [RenderPattern(3, "{0} {1} {2}")]
         public const string SSx3 = "{0} {1} {2}";
 
         /// <summary>
         /// Defines the literal '{0} {1} {2} {3}'
         /// </summary>
-        [FormatPattern(4)]
+        [RenderPattern(4)]
         public const string SSx4 = "{0} {1} {2} {3}";
 
         /// <summary>
         /// Defines the literal '{0} {1} {2} {3} {4}'
         /// </summary>
-        [FormatPattern(5)]
+        [RenderPattern(5)]
         public const string SSx5 = "{0} {1} {2} {3} {4}";
 
         /// <summary>
         /// Defines the literal "{1} {2}"
         /// </summary>
-        [FormatPattern(6, "{1} {2}")]
+        [RenderPattern(6, "{1} {2}")]
         public const string SS1x2 = Slot1 + SS2;
 
         /// <summary>
         /// Defines the literal '{0}.{1}'
         /// </summary>
-        [FormatPattern("{0}.{1}")]
+        [RenderPattern("{0}.{1}")]
         public const string SlotDot2 = Slot0 + Dot + Slot1;
 
         /// <summary>
         /// Defines the literal '{0}.{1}.{2}'
         /// </summary>
-        [FormatPattern("{0}.{1}.{2}")]
+        [RenderPattern("{0}.{1}.{2}")]
         public const string SlotDot3 = SlotDot2 + Dot + Slot2;
 
         /// <summary>
         /// Defines the literal '{0}.{1}.{2}.{3}'
         /// </summary>
-        [FormatPattern("{0}.{1}.{2}.{3}")]
+        [RenderPattern("{0}.{1}.{2}.{3}")]
         public const string SlotDot4 = SlotDot3 + Dot + Slot3;
 
         /// <summary>
         /// Defines the literal '{0}.{1}.{2}.{3}.{4}'
         /// </summary>
-        [FormatPattern(5, "{0}.{1}.{2}.{3}.{4}")]
+        [RenderPattern(5, "{0}.{1}.{2}.{3}.{4}")]
         public const string SlotDot5 = SlotDot4 + Dot + Slot4;
 
-        [FormatPattern(1, "{0} ")]
+        [RenderPattern(1, "{0} ")]
         public const string RSpace = "{0} ";
 
-        [FormatPattern(1, " {0}")]
+        [RenderPattern(1, " {0}")]
         public const string LSpace = " {0}";
     }
 }

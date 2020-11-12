@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
 
     /// <summary>
     /// Shows the "extended" De Morgan's laws hold as specified in Chapter 2 of Hacker's Delight
@@ -16,7 +15,7 @@ namespace Z0
     public class t_bvlaws : t_bitvectors<t_bvlaws>
     {
         /// <summary>
-        /// Verifies the identity  ~(x & y) = ~ x | ~ y holds for 32-bit bitvectors 
+        /// Verifies the identity  ~(x & y) = ~ x | ~ y holds for 32-bit bitvectors
         /// </summary>
         public void bv_demorgan1_32u()
         {
@@ -29,7 +28,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// Verifies the identity  ~(x & y) = ~ x | ~ y holds for 64-bit bitvectors 
+        /// Verifies the identity  ~(x & y) = ~ x | ~ y holds for 64-bit bitvectors
         /// </summary>
         public void bv_demorgan1_64u()
         {
@@ -53,7 +52,7 @@ namespace Z0
                 Claim.eq(~(x | y), ~x & ~ y);
             }
         }
-        
+
         /// <summary>
         /// Verifies the identity ~(x | y) = ~ x & ~ y holds for 64-bit bitvectors
         /// </summary>
@@ -69,7 +68,7 @@ namespace Z0
 
 
         /// <summary>
-        /// Verifies the identity ~(x + 1) = ~ x - 1 holds for 64-bit bitvectors 
+        /// Verifies the identity ~(x + 1) = ~ x - 1 holds for 64-bit bitvectors
         /// </summary>
         public void bv_demorgan3_64u()
         {
@@ -77,7 +76,7 @@ namespace Z0
             {
                 var x = Random.BitVector(n64);
                 Claim.eq(~(x + 1), ~x - 1);
-            }        
+            }
         }
 
         /// <summary>
@@ -91,7 +90,7 @@ namespace Z0
                 Claim.eq(~(x - 1), ~x + 1);
             }
         }
-         
+
         /// <summary>
         /// Verifies the identity  ~(x - 1) = ~ x + 1 holds for 8-bit bitvectors
         /// </summary>
@@ -105,7 +104,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// Verifies the identity  ~(-x) = x - 1 holds for 32-bit bitvectors 
+        /// Verifies the identity  ~(-x) = x - 1 holds for 32-bit bitvectors
         /// </summary>
         public void bv_demorgan5_8u()
         {
@@ -118,7 +117,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// Verifies the identity  ~(-x) = x - 1 holds for 16-bit bitvectors 
+        /// Verifies the identity  ~(-x) = x - 1 holds for 16-bit bitvectors
         /// </summary>
         public void bv_demorgan5_16u()
         {
@@ -131,7 +130,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// Verifies the identity  ~(-x) = x - 1 holds for 32-bit bitvectors 
+        /// Verifies the identity  ~(-x) = x - 1 holds for 32-bit bitvectors
         /// </summary>
         public void bv_demorgan5_32u()
         {
@@ -144,7 +143,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// Verifies the identity ~(-x) = x - 1 holds for 64-bit bitvectors 
+        /// Verifies the identity ~(-x) = x - 1 holds for 64-bit bitvectors
         /// </summary>
         public void bv_demorgan5_64u()
         {
@@ -171,7 +170,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// Verifies the identity ~(x ^ y) = ~x ^ y holds for 16-bit bitvectors 
+        /// Verifies the identity ~(x ^ y) = ~x ^ y holds for 16-bit bitvectors
         /// </summary>
         public void bv_demorgan6_16u()
         {
@@ -183,7 +182,7 @@ namespace Z0
                 Claim.eq(~(x ^ y), x ^ ~y);
             }
         }
-         
+
         /// <summary>
         /// Verifies the identity ~(x ^ y) = ~x ^ y holds for 32-bit bitvectors
         /// </summary>
@@ -197,9 +196,9 @@ namespace Z0
                 Claim.eq(~(x ^ y), x ^ ~y);
             }
         }
-        
+
         /// <summary>
-        /// Verifies the identity ~(x ^ y) = ~x ^ y holds for 64-bit bitvectors 
+        /// Verifies the identity ~(x ^ y) = ~x ^ y holds for 64-bit bitvectors
         /// </summary>
         public void bv_demorgan6_64u()
         {

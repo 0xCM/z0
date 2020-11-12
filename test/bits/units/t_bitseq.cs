@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Memories;
+    using static z;
 
     public class t_bitseq : t_bitcore<t_bitseq>
     {
@@ -44,8 +44,8 @@ namespace Z0
         void bitseq_check<T>(T t = default)
             where T : unmanaged
         {
-            Span<byte> s0 = stackalloc byte[bitwidth<T>()];
-            Span<byte> s1 = stackalloc byte[bitwidth<T>()];
+            Span<byte> s0 = stackalloc byte[(int)bitwidth<T>()];
+            Span<byte> s1 = stackalloc byte[(int)bitwidth<T>()];
             ReadOnlySpan<byte> s2 = default;
             for(var i=0; i<RepCount; i++)
             {

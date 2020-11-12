@@ -7,7 +7,7 @@ namespace Z0.Logix
     using System;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     public class t_solve : UnitTest<t_solve>
     {
@@ -34,7 +34,7 @@ namespace Z0.Logix
         void check_identity_sln<T>(ComparisonExpr<T> identity, T min, T max)
             where T : unmanaged
         {
-            var count = convert<T,int>(gmath.add(gmath.sub(max, min), z.one<T>()));
+            var count = force<T,int>(gmath.add(gmath.sub(max, min), z.one<T>()));
             var expect = gmath.square(count);
             var sln = LogicEngine.solve(identity, (min,max));
             Claim.eq(expect,sln.Count);

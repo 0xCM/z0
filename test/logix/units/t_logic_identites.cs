@@ -8,7 +8,7 @@ namespace Z0.Logix
     using System;
 
     using static Konst;
-    using static Memories;
+    using static z;
     using static BitLogicSpec;
 
     public class t_logic_identities : UnitTest<t_logic_identities>

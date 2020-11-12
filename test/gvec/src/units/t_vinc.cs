@@ -6,9 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.Intrinsics;
-    
+
     using static Konst;
-    using static Memories;
 
     public class t_vinc : t_inx<t_vinc>
     {
@@ -17,10 +16,10 @@ namespace Z0
             vinc_check(n128);
             vinc_check(n256);
         }
-        
+
         void vinc_check(N128 w)
         {
-            vinc_check(w, z8);                
+            vinc_check(w, z8);
             vinc_check(w, z8i);
             vinc_check(w, z16);
             vinc_check(w, z16i);
@@ -32,7 +31,7 @@ namespace Z0
 
         void vinc_check(N256 w)
         {
-            vinc_check(w, z8);                
+            vinc_check(w, z8);
             vinc_check(w, z8i);
             vinc_check(w, z16);
             vinc_check(w, z16i);
@@ -45,7 +44,7 @@ namespace Z0
         void vinc_check<T>(N128 w, T t = default)
             where T : unmanaged
                 => CheckSVF.CheckUnaryOp(VSvc.vinc(w,t),w,t);
-            
+
         void vinc_check<T>(N256 w, T t = default)
             where T : unmanaged
                 => CheckSVF.CheckUnaryOp(VSvc.vinc(w,t),w,t);

@@ -9,18 +9,13 @@ namespace Z0
     using System.Reflection;
 
     using static Konst;
-    using static Memories;
 
     public class t_nonzero : t_numeric<t_nonzero>
     {
         public void nonzero_create()
         {
-            Claim.nonzero(nonzero.create(0u).Value);            
-
+            Claim.nonzero(nonzero.create(0u).Value);
             Claim.eq(nonzero.create(5), 5);
-
         }
     }
 }
-
-

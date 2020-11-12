@@ -7,11 +7,11 @@ namespace Z0.Logix
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    
+
     using static Konst;
-    using static Memories;
+    using static z;
     using TL = TypedLogicSpec;
-    
+
     public class t_typed_identities : LogixTest<t_typed_identities>
     {
         public void check_scalar_identities()
@@ -47,7 +47,7 @@ namespace Z0.Logix
                 var x = Random.Next<T>();
                 var y = Random.Next<T>();
                 identity.SetVars(x,y);
-                Claim.Eq(TL.@true<T>(), LogicEngine.eval(identity)); 
+                Claim.Eq(TL.@true<T>(), LogicEngine.eval(identity));
                 Claim.Require(LogicEngine.satisfied(identity, x, y));
 
             }
@@ -63,8 +63,8 @@ namespace Z0.Logix
                 var y = Random.CpuVector<T>(w);
                 identity.SetVars(x,y);
 
-                Claim.veq(@true,LogicEngine.eval(identity).Value);   
-                Claim.Require(LogicEngine.satisfied(identity, x,y));        
+                Claim.veq(@true,LogicEngine.eval(identity).Value);
+                Claim.Require(LogicEngine.satisfied(identity, x,y));
             }
         }
 
@@ -79,7 +79,7 @@ namespace Z0.Logix
 
                 equality.SetVars(x,y);
 
-                Claim.veq(@true, LogicEngine.eval(equality).Value);     
+                Claim.veq(@true, LogicEngine.eval(equality).Value);
                 Claim.Require(LogicEngine.satisfied(equality, x,y));
             }
         }

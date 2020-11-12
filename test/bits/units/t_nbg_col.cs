@@ -8,10 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
-    
+
     public class t_nbg_col : t_bitgrids<t_nbg_col>
-    {        
+    {
         void nbg_col_256x32x8()
         {
             var m = n32;
@@ -25,11 +24,11 @@ namespace Z0
 
                 for(var col=0; col<n; col++)
                 {
-                    BitVector<uint> bv1 = BitGrid.col(xg,col);     
+                    BitVector<uint> bv1 = BitGrid.col(xg,col);
                     BitVector<uint> bv2 = BitVector.create(m,xs.Slice(col*m, m));
-                    Claim.eq(bv1,bv2);                    
+                    Claim.eq(bv1,bv2);
                 }
-            }            
+            }
         }
 
         void nbg_col_128x16x8()
@@ -45,11 +44,11 @@ namespace Z0
 
                 for(var col=0; col<n; col++)
                 {
-                    BitVector<ushort> bv1 = BitGrid.col(xg,col);     
+                    BitVector<ushort> bv1 = BitGrid.col(xg,col);
                     BitVector<ushort> bv2 = BitVector.create(m,xs.Slice(col*m, m));
                     Claim.eq(bv1, bv2);
                 }
-            }            
+            }
         }
 
 
@@ -66,10 +65,10 @@ namespace Z0
 
                 for(var col=0; col<n; col++)
                 {
-                    var bv1 = BitGrid.col(xg,col);     
-                    var bv2 = xs.Slice(col*m, m).ToBitVector(m);                    
+                    var bv1 = BitGrid.col(xg,col);
+                    var bv2 = xs.Slice(col*m, m).ToBitVector(m);
                     Claim.eq(bv1, bv2);
-                }            
+                }
             }
         }
 
@@ -86,11 +85,11 @@ namespace Z0
 
                 for(var col=0; col<n; col++)
                 {
-                    var bv1 = BitGrid.col(xg,col);     
+                    var bv1 = BitGrid.col(xg,col);
                     var bv2 = BitVector.create(m,xs.Slice(col*m, m));
                     Claim.eq(bv1, bv2);
                 }
-            }            
+            }
         }
 
         public void nbg_col_64x16x4()
@@ -106,10 +105,10 @@ namespace Z0
 
                 for(var col=0; col<n; col++)
                 {
-                    var bv1 = BitGrid.col(xg,col);     
+                    var bv1 = BitGrid.col(xg,col);
                     var bv2 = BitVector.create(m,xs.Slice(col*m, m));
                     Claim.eq(bv1, bv2);
-                }            
+                }
             }
         }
 
@@ -126,10 +125,10 @@ namespace Z0
 
                 for(var col=0; col<n; col++)
                 {
-                    var bv1 = BitGrid.col(xg,col);     
+                    var bv1 = BitGrid.col(xg,col);
                     var bv2 = BitVector.create(m,xs.Slice(col*m, m));
                     Claim.eq(bv1, bv2);
-                }            
+                }
             }
         }
 
@@ -146,10 +145,10 @@ namespace Z0
 
                 for(var col=0; col<n; col++)
                 {
-                    var bv1 = BitGrid.col(xg,col);     
+                    var bv1 = BitGrid.col(xg,col);
                     var bv2 = BitVector.create(m,xs.Slice(col*m, m));
                     Claim.eq(bv1, bv2);
-                }            
+                }
             }
         }
     }

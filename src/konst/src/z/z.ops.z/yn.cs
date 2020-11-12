@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static YeaOrNea;
 
-    partial class Memories
+    partial struct z
     {
         /// <summary>
         /// Yea or Nea?
@@ -25,7 +25,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static YeaOrNea yn(Bit32 src)
+        public static YeaOrNea yn(bit src)
             => src ? Y : N;
 
         /// <summary>

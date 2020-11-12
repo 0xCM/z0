@@ -8,11 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
 
     public class t_boxed_number : t_numeric<t_boxed_number>
     {
-
         public void convert_1()
         {
             var x = BoxedNumber.Define((byte)3);

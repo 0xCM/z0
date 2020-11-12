@@ -8,25 +8,24 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
-    
+
     public class t_bg_patterns : t_bitgrids<t_bg_patterns>
-    {        
+    {
         void stripes_12x12()
             => BitGrid.export(GridPatterns.stripes(n256,n12,n12,z16));
-                   
-        void bars_16x16()        
+
+        void bars_16x16()
             => BitGrid.export(GridPatterns.bars(n256,n16,n16,z16));
 
         void xcross_16x16()
             => BitGrid.export(BitGrid.xor(GridPatterns.stripes(n256, n16,n16,z16), GridPatterns.bars(n256, n16,n16,z16)));
 
-        void exchange_rotl_4_16x16()        
+        void exchange_rotl_4_16x16()
             => BitGrid.export(BitGrid.rotl(GridPatterns.exchange(n256,n16,n16,z16), 4));
 
-        void exchange_rotr_4_16x16()        
+        void exchange_rotr_4_16x16()
             => BitGrid.export(BitGrid.rotr(GridPatterns.exchange(n256,n16,n16,z16), 4));
-        
+
         void identity_4x4()
             => BitGrid.export(GridPatterns.one(n16,n4,n4,z16));
 
@@ -41,11 +40,11 @@ namespace Z0
 
         void exchange_16x16()
             => BitGrid.export(GridPatterns.exchange(n256,n16,n16,z16));
-        
-        void identity_rotl_4_16x16()        
+
+        void identity_rotl_4_16x16()
             => BitGrid.export(BitGrid.rotl(GridPatterns.one(n256,n16,n16,z16), 4));
 
-        void identity_rotr_4_16x16()        
+        void identity_rotr_4_16x16()
             => BitGrid.export(BitGrid.rotr(GridPatterns.one(n256,n16,n16,z16), 4));
 
     }

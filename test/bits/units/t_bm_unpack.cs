@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
 
     public class t_bm_unpack : t_bitmatrix<t_bm_unpack>
     {

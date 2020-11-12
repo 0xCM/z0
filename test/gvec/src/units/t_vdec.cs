@@ -6,9 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.Intrinsics;
-    
+
     using static Konst;
-    using static Memories;
 
     public class t_vdec : t_inx<t_vdec>
     {
@@ -17,10 +16,10 @@ namespace Z0
             vdec_check(n128);
             vdec_check(n256);
         }
-        
+
         void vdec_check(N128 w)
         {
-            vdec_check(w, z8);                
+            vdec_check(w, z8);
             vdec_check(w, z8i);
             vdec_check(w, z16);
             vdec_check(w, z16i);
@@ -32,7 +31,7 @@ namespace Z0
 
         void vdec_check(N256 w)
         {
-            vdec_check(w, z8);                
+            vdec_check(w, z8);
             vdec_check(w, z8i);
             vdec_check(w, z16);
             vdec_check(w, z16i);
@@ -45,7 +44,7 @@ namespace Z0
         void vdec_check<T>(N128 w, T t = default)
             where T : unmanaged
                 => CheckSVF.CheckUnaryOp(VSvc.vdec(w,t),w,t);
-            
+
         void vdec_check<T>(N256 w, T t = default)
             where T : unmanaged
                 => CheckSVF.CheckUnaryOp(VSvc.vdec(w,t),w,t);

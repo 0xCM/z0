@@ -9,10 +9,10 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static Memories;
-    
+    using static z;
+
     public class t_bg_row : t_bitgrids<t_bg_row>
-    {        
+    {
         void bg_row_128x32x4()
         {
             var t = z32;
@@ -37,14 +37,14 @@ namespace Z0
             var t = z32;
             var m = n8;
             var n = n4;
-            
+
             for(var i=0; i<RepCount; i++)
             {
                 var bg = Random.BitGrid(m,n,t);
-                var bs = BitGrid.bitstring(bg); 
+                var bs = BitGrid.bitstring(bg);
 
                 for(var row = 0; row < m; row++)
-                {                
+                {
                     var r1 = BitGrid.row(bg,row);
                     var r2 = bs.Slice(row*n,n);
                     var r4 = BitVector.create(n, r2);
@@ -58,14 +58,14 @@ namespace Z0
             var t = z32;
             var m = n4;
             var n = n8;
-            
+
             for(var i=0; i<RepCount; i++)
             {
                 var bg = Random.BitGrid(m,n,t);
-                var bs = BitGrid.bitstring(bg); 
+                var bs = BitGrid.bitstring(bg);
 
                 for(var row = 0; row < m; row++)
-                {                
+                {
                     var r1 = BitGrid.row(bg,row);
                     var r2 = bs.Slice(row*n,n);
                     var r4 = BitVector.create(n, r2);
@@ -80,13 +80,13 @@ namespace Z0
             var m = n4;
             var n = n64;
             var t = z64;
-            
+
             for(var i=0; i<RepCount; i++)
             {
                 var bg = Random.BitGrid(m,n,t);
-                var bs = BitGrid.bitstring(bg); 
+                var bs = BitGrid.bitstring(bg);
                 var bd = BitGrid.store(bg);
-                
+
                 for(var row = 0; row<m; row++)
                 {
                     var row1 = BitGrid.row(bg,row);
@@ -101,13 +101,13 @@ namespace Z0
             var t = z16;
             var m = n16;
             var n = n16;
-            
+
             for(var i=0; i<RepCount; i++)
             {
                 var bg = Random.BitGrid(m,n,t);
-                var bs = BitGrid.bitstring(bg); 
+                var bs = BitGrid.bitstring(bg);
                 var bd = BitGrid.store(bg);
-                
+
                 for(var row = 0; row<m; row++)
                 {
                     var row1 = BitGrid.row(bg,row);

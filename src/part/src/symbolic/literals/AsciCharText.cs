@@ -7,7 +7,6 @@ namespace Z0
     /// <summary>
     /// Defines asci string literals
     /// </summary>
-    [LiteralProvider]
     public static class AsciCharText
     {
         /// <summary>
@@ -312,14 +311,29 @@ namespace Z0
 
         public const string Null = "\0";
 
+        /// <summary>
+        /// Defines the literal '0'
+        /// </summary>
         public const string D0 = "0";
 
+        /// <summary>
+        /// Defines the literal '1'
+        /// </summary>
         public const string D1 = "1";
 
+        /// <summary>
+        /// Defines the literal '2'
+        /// </summary>
         public const string D2 = "2";
 
+        /// <summary>
+        /// Defines the literal '3'
+        /// </summary>
         public const string D3 = "3";
 
+        /// <summary>
+        /// Defines the literal '4'
+        /// </summary>
         public const string D4 = "4";
 
         public const string D5 = "5";

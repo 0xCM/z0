@@ -8,8 +8,7 @@ namespace Z0.Mkl
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
-    
+
     public class t_dot : t_mkl<t_dot>
     {
         [MethodImpl(Inline)]
@@ -20,8 +19,8 @@ namespace Z0.Mkl
         [MethodImpl(Inline)]
         internal static T dot<N,T>(in Block256<N,T> lhs, in Block256<N,T> rhs)
             where N : unmanaged, ITypeNat
-            where T : unmanaged    
-                => gspan.dot<T>(lhs.Unsized,rhs.Unsized);
+            where T : unmanaged
+                => gspan.dot<T>(lhs.Unsized, rhs.Unsized);
 
         public void dot32f()
         {
@@ -58,7 +57,7 @@ namespace Z0.Mkl
             for(var i=0; i< CycleCount; i++)
             {
                 var x = RVecF64(n256);
-                var y = RVecF64(n256);                
+                var y = RVecF64(n256);
                 Claim.almost(mkl.dot(x,y),dot(x,y));
             }
         }

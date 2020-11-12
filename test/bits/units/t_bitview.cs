@@ -7,7 +7,7 @@ namespace Z0
     using System;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     public class t_bitview : t_bitcore<t_bitview>
     {

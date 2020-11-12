@@ -12,7 +12,7 @@ namespace Z0
         /// Formamats a number with comma separators
         /// </summary>
         /// <param name="src">The source number</param>
-        [RenderUtility]
+        [TextUtility]
         public static string CommaSeparated(this short src)
             => src.ToString("#,#");
 
@@ -20,7 +20,7 @@ namespace Z0
         /// Formamats a number with comma separators
         /// </summary>
         /// <param name="src">The source number</param>
-        [RenderUtility]
+        [TextUtility]
         public static string CommaSeparated(this ushort src)
             => src.ToString("#,#");
 
@@ -28,7 +28,7 @@ namespace Z0
         /// Formamats a number with comma separators
         /// </summary>
         /// <param name="src">The source number</param>
-        [RenderUtility]
+        [TextUtility]
         public static string CommaSeparated(this int src)
             => src.ToString("#,#");
 
@@ -36,7 +36,7 @@ namespace Z0
         /// Formamats a number with comma separators
         /// </summary>
         /// <param name="src">The source number</param>
-        [RenderUtility]
+        [TextUtility]
         public static string CommaSeparated(this uint src)
             => src.ToString("#,#");
 
@@ -44,7 +44,7 @@ namespace Z0
         /// Formamats a number with comma separators
         /// </summary>
         /// <param name="src">The source number</param>
-        [RenderUtility]
+        [TextUtility]
         public static string CommaSeparated(this long src)
             => src.ToString("#,#");
 
@@ -52,7 +52,7 @@ namespace Z0
         /// Formamats a number with comma separators
         /// </summary>
         /// <param name="src">The source number</param>
-        [RenderUtility]
+        [TextUtility]
         public static string CommaSeparated(this ulong src)
             => src.ToString("#,#");
 
@@ -60,7 +60,7 @@ namespace Z0
         /// Formamats a number with comma separators
         /// </summary>
         /// <param name="src">The source number</param>
-        [RenderUtility]
+        [TextUtility]
         public static string CommaSeparated(this float src)
             => src.ToString("#,#");
 
@@ -68,7 +68,7 @@ namespace Z0
         /// Formamats a number with comma separators
         /// </summary>
         /// <param name="src">The source number</param>
-        [RenderUtility]
+        [TextUtility]
         public static string CommaSeparated(this double src)
             => src.ToString("#,#");
     }

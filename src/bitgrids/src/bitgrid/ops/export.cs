@@ -10,7 +10,7 @@ namespace Z0
     using System.IO;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
 

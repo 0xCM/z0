@@ -8,11 +8,10 @@ namespace Z0.Logix
     using System.Linq;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     using static BitLogicSpec;
     using static LogicEngine;
-
 
     using BLK = BinaryBitLogicKind;
     using BL = BitLogix;

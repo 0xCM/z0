@@ -7,8 +7,7 @@ namespace Z0.Mkl
     using System;
 
     using static Konst;
-    using static Memories;
-    
+
     public class t_potrf : UnitTest<t_potrf>
     {
         public void posdef1()
@@ -27,7 +26,7 @@ namespace Z0.Mkl
         {
             var A = Matrix.blockload(new float[]{4,12,-16,12,37,-43,-16,-43,98}, n3);
             var B = A.Replicate();
-            Claim.Require(mkl.potrf(B));            
+            Claim.Require(mkl.potrf(B));
         }
     }
 }

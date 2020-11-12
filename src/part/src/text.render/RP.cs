@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static AsciCharText;
-
-    [LiteralProvider]
     public readonly partial struct RP
     {
         /// <summary>
@@ -18,7 +15,13 @@ namespace Z0
         /// <summary>
         /// Defines the literal '{0} -> {1}'
         /// </summary>
-        [FormatPattern("{0} -> {1}")]
+        [RenderPattern("{0} -> {1}")]
         public const string ArrowAxB = "{0} -> {1}";
+    }
+
+    static partial class RU
+    {
+
+
     }
 }

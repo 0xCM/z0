@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     public class t_bitchars : t_bitcore<t_bitchars>
     {
@@ -45,7 +45,7 @@ namespace Z0
         protected void bitchars_check<T>(T t = default)
             where T : unmanaged
         {
-            Span<char> s0 = stackalloc char[bitwidth<T>()];
+            Span<char> s0 = stackalloc char[(int)bitwidth<T>()];
             ReadOnlySpan<char> s1 = default;
             for(var i=0; i<RepCount; i++)
             {

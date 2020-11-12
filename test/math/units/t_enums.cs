@@ -7,7 +7,6 @@ namespace Z0
     using System;
 
     using static Konst;
-    using static Memories;
 
     public sealed class t_enums : t_numeric<t_enums>
     {
@@ -18,10 +17,10 @@ namespace Z0
 
         public enum Choices32i : int
         {
-            C0 = 1,  C1 = 2, C2 = C1*2, C3 = C2*2, 
+            C0 = 1,  C1 = 2, C2 = C1*2, C3 = C2*2,
             C4 = C3*2, C5 = C4*2, C6 = C5*2, C7 = C6*2,
             C99 = byte.MaxValue,
-        
+
         }
 
         public void check_enum_values()
@@ -41,7 +40,7 @@ namespace Z0
                 var expect = (int)Math.Pow(2,i);
                 if(expect != ival)
                     Notify($"{values[i]} = {ival} != {expect}");
-                Claim.eq(expect, ival);                            
+                Claim.eq(expect, ival);
             }
         }
 

@@ -8,12 +8,12 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     partial class BitGrid
-    {        
+    {
         /// <summary>
-        /// Retuns a one-filled 16-bit bitgrid
+        /// Returns a one-filled 16-bit bitgrid
         /// </summary>
         /// <param name="n">The width selector</param>
         /// <param name="t">The cell type representative</param>
@@ -24,7 +24,7 @@ namespace Z0
                 => init16<T>(ushort.MaxValue);
 
         /// <summary>
-        /// Retuns a one-filled bitgrid
+        /// Returns a one-filled bitgrid
         /// </summary>
         /// <param name="n">The width selector</param>
         /// <param name="t">The cell type representative</param>
@@ -35,7 +35,7 @@ namespace Z0
                 => init32<T>(uint.MaxValue);
 
         /// <summary>
-        /// Retuns a one-filled bitgrid
+        /// Returns a one-filled bitgrid
         /// </summary>
         /// <param name="n">The width selector</param>
         /// <param name="t">The cell type representative</param>
@@ -54,7 +54,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// Returns a 1-filled natural bitgrid 
+        /// Returns a 1-filled natural bitgrid
         /// </summary>
         /// <param name="width">The grid width</param>
         /// <param name="m">The row count representative</param>
@@ -71,7 +71,7 @@ namespace Z0
                 => ushort.MaxValue;
 
         /// <summary>
-        /// Returns a 1-filled natural bitgrid 
+        /// Returns a 1-filled natural bitgrid
         /// </summary>
         /// <param name="width">The grid width</param>
         /// <param name="m">The row count representative</param>
@@ -88,7 +88,7 @@ namespace Z0
                 => uint.MaxValue;
 
         /// <summary>
-        /// Returns a 1-filled natural bitgrid 
+        /// Returns a 1-filled natural bitgrid
         /// </summary>
         /// <param name="width">The grid width</param>
         /// <param name="m">The row count representative</param>
@@ -105,7 +105,7 @@ namespace Z0
                 => ulong.MaxValue;
 
         /// <summary>
-        /// Returns a 1-filled natural bitgrid 
+        /// Returns a 1-filled natural bitgrid
         /// </summary>
         /// <param name="width">The grid width</param>
         /// <param name="m">The row count representative</param>
@@ -122,7 +122,7 @@ namespace Z0
                 => gvec.vones<T>(width);
 
         /// <summary>
-        /// Returns a 1-filled natural bitgrid 
+        /// Returns a 1-filled natural bitgrid
         /// </summary>
         /// <param name="width">The grid width</param>
         /// <param name="m">The row count representative</param>

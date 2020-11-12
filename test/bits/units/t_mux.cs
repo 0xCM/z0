@@ -8,7 +8,6 @@ namespace Z0
     using System.Linq;
 
     using static Konst;
-    using static Memories;
 
     public class t_mux : t_bitcore<t_mux>
     {

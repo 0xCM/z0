@@ -4,23 +4,21 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static AsciCharText;
-
     partial struct RP
     {
         /// <summary>
         /// Defines the canonical setting format
         /// </summary>
-        [FormatPattern(2, Setting)]
+        [RenderPattern(2, Setting)]
         public const string Setting = "{0}:{1}";
 
-        [FormatPattern(4, Settings2)]
+        [RenderPattern(4, Settings2)]
         public const string Settings2 ="{0}:{1} | {2}:{3}";
 
-        [FormatPattern(6, Settings3)]
+        [RenderPattern(6, Settings3)]
         public const string Settings3 ="{0}:{1} | {2}:{3} | {4}:{5}";
 
-        [FormatPattern(8, Settings4)]
+        [RenderPattern(8, Settings4)]
         public const string Settings4 ="{0}:{1} | {2}:{3} | {4}:{5} | {6}:{7}";
     }
 }

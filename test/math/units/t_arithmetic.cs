@@ -324,7 +324,7 @@ namespace Z0
         {
             var count = Random.Next(21u, 256u);
             Span<T> data = new T[count];
-            ref var src = ref Memories.first(data);
+            ref var src = ref z.first(data);
             gmath.increments(first, count, ref src);
 
             for(var i=0; i < count; i++)

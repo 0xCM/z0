@@ -7,16 +7,16 @@ namespace Z0
     using System;
 
     [AttributeUsage(AttributeTargets.Field)]
-    public class FormatArgAttribute : StringLiteralAttribute
+    public class RenderSlotAttribute : Attribute
     {
-        public FormatArgAttribute(byte position, string pattern)
-            : base(pattern)
-        {
-            Position = position;
-        }
-
         public byte Position {get;}
 
-        public string Pattern => base.Text;
+        public string SlotContent {get;}
+
+        public RenderSlotAttribute(byte position, string content)
+        {
+            Position = position;
+            SlotContent = content;
+        }
     }
 }

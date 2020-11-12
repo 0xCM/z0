@@ -10,8 +10,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
-    
+
     public class t_bm_equality : t_bitmatrix<t_bm_equality>
     {
         static bool are_equal(in BitMatrix8 A, in BitMatrix8 B)
@@ -62,7 +61,7 @@ namespace Z0
                 Claim.Require(BitMatrix.same(m1,m2));
                 Claim.Require(are_equal(m1,m2));
 
-                m2[5,5] = !m1[5,5];                
+                m2[5,5] = !m1[5,5];
                 Claim.nea(BitMatrix.same(m1,m2));
                 Claim.nea(m1.Equals(m2));
 
@@ -81,7 +80,7 @@ namespace Z0
                 Claim.Require(BitMatrix.same(m1,m2));
                 Claim.Require(are_equal(m1,m2));
 
-                m2[5,5] = !m1[5,5];                
+                m2[5,5] = !m1[5,5];
                 Claim.nea(BitMatrix.same(m1,m2));
                 Claim.nea(m1.Equals(m2));
 
@@ -100,7 +99,7 @@ namespace Z0
                 var m2 = m1.Replicate();
                 Claim.Require(BitMatrix.same(m1,m2));
 
-                m2[5,5] = !m1[5,5];                
+                m2[5,5] = !m1[5,5];
                 Claim.nea(BitMatrix.same(m1,m2));
                 Claim.nea(m1.Equals(m2));
 
@@ -118,7 +117,7 @@ namespace Z0
                 var m2 = m1.Replicate();
                 Claim.Require(BitMatrix.same(m1,m2));
 
-                m2[5,5] = !m1[5,5];                
+                m2[5,5] = !m1[5,5];
                 Claim.nea(BitMatrix.same(m1,m2));
                 Claim.nea(m1.Equals(m2));
 

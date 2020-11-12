@@ -8,10 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
 
     public class t_bm_cnonimpl : t_bitmatrix<t_bm_cnonimpl>
-    {                
+    {
         public void bm_not_32x32x32()
         {
             for(var i=0; i<RepCount; i++)
@@ -20,7 +19,6 @@ namespace Z0
                 var B = BitMatrix.not(A);
                 var C = BitMatrix.from(n32, gspan.not(A.Bytes.Replicate(), A.Bytes.Replicate()));
                 Claim.Require(B == C);
-                
             }
         }
 

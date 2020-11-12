@@ -8,7 +8,7 @@ namespace Z0.Logix
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static Memories;
+    using static z;
     using static TypedLogicSpec;
 
     public class t_bitwise_expr : UnitTest<t_bitwise_expr, ICheckVectorBits>
@@ -242,12 +242,12 @@ namespace Z0.Logix
         void check_op_identity<T>(TernaryBitLogicKind id)
             where T: unmanaged
         {
-            var a = convert<T>(0b1111_0000);
-            var b = convert<T>(0b1100_1100);
-            var c = convert<T>(0b1010_1010);
-            var mask = convert<T>(0xFF);
+            var a = force<T>(0b1111_0000);
+            var b = force<T>(0b1100_1100);
+            var c = force<T>(0b1010_1010);
+            var mask = force<T>(0xFF);
             var f = NumericLogixHost.lookup<T>(id);
-            var actual = convert<T,byte>(gmath.and(f(a,b,c), mask));
+            var actual = force<T,byte>(gmath.and(f(a,b,c), mask));
             var expect = (byte)id;
             Claim.eq(expect.FormatHex(), actual.FormatHex());
         }

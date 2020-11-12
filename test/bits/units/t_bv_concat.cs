@@ -8,21 +8,19 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
 
     public class t_bvconcat : t_bitvectors<t_bvconcat>
     {
         public void bv_inc_8()
-        {            
+        {
             var bv = BitVector8.Zero;
             var counter = 0;
             do
-                Claim.eq(counter++, (byte)bv);            
+                Claim.eq(counter++, (byte)bv);
             while(++bv);
 
             Claim.eq(counter, Pow2.T08);
         }
- 
 
         public void bv_concat_8()
         {
@@ -34,7 +32,7 @@ namespace Z0
             var bsWhole = whole.ToBitString();
             var bsHead = head.ToBitString();
             var bsTail = tail.ToBitString();
-            Claim.eq(bsWhole, bsHead + bsTail);        
+            Claim.eq(bsWhole, bsHead + bsTail);
         }
     }
 }

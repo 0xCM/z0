@@ -1,4 +1,5 @@
-﻿Microsoft Visual Studio Solution File, Format Version 12.00
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30621.155
 MinimumVisualStudioVersion = 10.0.40219.1
@@ -150,7 +151,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "z0.records", "src\records\z
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "z0.control", "src\control\z0.control.csproj", "{AB0F9E45-E18A-4549-BF71-29E001CBB4CE}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "z0.share", "src\share\z0.share.shproj", "{666886D1-8CC4-481C-A270-9166DA0BC711}"
+EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		src\share\z0.share.projitems*{666886d1-8cc4-481c-a270-9166da0bc711}*SharedItemsImports = 13
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -480,6 +486,7 @@ Global
 		{FB56DA8B-BD46-436B-A4E8-A2F6D1F33C44} = {E5562ED9-8DD3-4401-8471-7BB3B9B5733A}
 		{99948B97-2BF1-4C69-BA1C-382DAF111B8D} = {159F1D4A-1055-4314-8680-A9B7CED69DE0}
 		{9A4C758D-EFD7-4334-BBEB-5FB614075892} = {159F1D4A-1055-4314-8680-A9B7CED69DE0}
+		{666886D1-8CC4-481C-A270-9166DA0BC711} = {FC023E0D-DB73-49D4-B52F-5CB52A8AB142}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {75DBF59A-77AC-430F-B85D-CC30D6061CCB}
