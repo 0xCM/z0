@@ -34,7 +34,7 @@ namespace Z0.Asm
         /// <param name="index">The cell index to query/manipulate</param>
         [MethodImpl(Inline)]
         public ref byte Target(int index)
-            => ref Root.seek(TargetBuffer, index);
+            => ref z.seek(TargetBuffer, index);
 
         public ref byte this[int index]
         {

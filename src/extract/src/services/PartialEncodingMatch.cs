@@ -7,7 +7,7 @@ namespace Z0
     using System;
 
     using static Konst;
-    using static Root;
+    using static z;
 
     public static class PartialEncodingMatch
     {
@@ -22,10 +22,10 @@ namespace Z0
         {
             var pos = 0;
             var posMax = state.Length - 1;
-            int? termidx = null;
+            int? index = null;
 
-            ref readonly var input = ref head(src);
-            ref readonly var match = ref head(pattern);
+            ref readonly var input = ref z.first(src);
+            ref readonly var match = ref z.first(pattern);
             for(var i=0; i<src.Length; i++)
             {
                 ref readonly var atom = ref skip(input,i);
@@ -34,17 +34,17 @@ namespace Z0
                     ref readonly var token = ref skip(match,j);
                     if(!token.HasValue || (token.HasValue && token.Value == atom))
                     {
-                        Root.seek(state,j) = atom;
+                        seek(state,j) = atom;
                         if(j == posMax)
-                            termidx = i;
+                            index = i;
                     }
                 }
 
-                if(termidx != null)
+                if(index != null)
                     break;
             }
 
-            return termidx;
+            return index;
         }
 
         static bool TryMatch(EncodingPatternOffset offset, ReadOnlySpan<byte> input, ReadOnlySpan<byte?> pattern,  out ReadOnlySpan<byte> selected)

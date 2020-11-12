@@ -26,7 +26,7 @@ namespace Z0
             var zed = zero<T>();
             var lit = ones<T>();
             var min = byte.MinValue;
-            var max = (byte)Root.bitsize<T>();
+            var max = (byte)z.bitsize<T>();
 
             void check()
             {

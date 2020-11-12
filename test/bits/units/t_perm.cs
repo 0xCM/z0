@@ -26,7 +26,7 @@ namespace Z0
         {
             var perm = Perm.identity(n);
             var lengths = Algorithmic.stream(m,n);
-            Root.iter(lengths, i => {
+            z.iter(lengths, i => {
                 var p = Perm.identity(i);
                 var cycle = p.Cycle(default(T));
                 Claim.eq(cycle.Length, 1);

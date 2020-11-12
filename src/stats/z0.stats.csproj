@@ -6,7 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Imagine)" />
     <ProjectReference Include="$(GMath)" />
     <ProjectReference Include="$(MathSvc)" />
     <ProjectReference Include="$(Polyrand)" />

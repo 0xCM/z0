@@ -7,11 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Root;
     using static Konst;
 
     public class t_stringref : t_symbolic<t_stringref>
-    {        
+    {
         const string S0 = "ABCDEFG";
 
         const string S1 ="HIJKLMN";

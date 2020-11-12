@@ -9,7 +9,7 @@ namespace Z0.Asm
     using System.Linq;
 
     using static Konst;
-    using static Root;
+    using static z;
 
     using K = Kinds;
 

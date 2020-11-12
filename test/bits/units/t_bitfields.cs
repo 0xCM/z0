@@ -87,7 +87,7 @@ namespace Z0
                 BitFields.segment(BFB_I.BFB_2, 8, 9),
                 BitFields.segment(BFB_I.BFB_3, 10, 15)
                 );
-            var dst = Root.alloc<ushort>(spec.FieldCount);
+            var dst = z.alloc<ushort>(spec.FieldCount);
             var bf = BitFields.create<ushort>(spec);
 
             Claim.eq((byte)4,spec.FieldCount);

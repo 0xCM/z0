@@ -6,7 +6,6 @@
 
 
   <ItemGroup>
-    <ProjectReference Include="$(Imagine)" />
     <ProjectReference Include="$(GMath)" />
     <ProjectReference Include="$(Polyrand)" />
     <ProjectReference Include="$(Dynamic)" />

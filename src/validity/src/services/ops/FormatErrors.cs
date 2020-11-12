@@ -8,10 +8,8 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
     using System.Reflection;
-    using System.Collections.Concurrent;
 
     using static Konst;
-    using static Root;
 
     partial class TestApp<A>
     {

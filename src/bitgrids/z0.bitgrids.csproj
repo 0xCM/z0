@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Imagine)" />
     <ProjectReference Include="$(GVec)" />
     <ProjectReference Include="$(LSquare)" />
     <ProjectReference Include="$(BitMatrix)" />

@@ -71,7 +71,7 @@ namespace Z0
 
             var formatter = Table.formatter<F>(delimiter);
 
-            Root.iter(records, r => dst.AppendLine(r.DelimitedText(delimiter)));
+            z.iter(records, r => dst.AppendLine(r.DelimitedText(delimiter)));
         }
 
         public void Deposit(IAppMsg src)

@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Imagine)" />
     <ProjectReference Include="$(BitCore)" />
     <ProjectReference Include="$(BitVectors)" />
 
