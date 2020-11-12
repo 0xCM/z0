@@ -11,7 +11,7 @@
     <ProjectReference Include="$(Extract)" />
     <ProjectReference Include="$(Dynamic)" />
     <ProjectReference Include="$(Apps)" />
-    <ProjectReference Include="$(Domain)" />
+
   </ItemGroup>
 
 </Project>

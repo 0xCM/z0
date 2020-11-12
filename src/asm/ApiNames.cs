@@ -14,5 +14,7 @@ readonly struct ApiNames
     public const string AsmMachines = asm + dot + machines;
 
     public const string RegisterQuery = asm + dot + registers + dot + query;
+
+
 }
 

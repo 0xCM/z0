@@ -16,11 +16,7 @@ readonly struct ApiNames
 
     public const string JsonData = data + dot + json;
 
-    public const string ApiData = api + dot + data;
 
-    public const string ApiRuntime = api + dot + runtime;
-
-    public const string ApiSigs = api + dot + signatures;
 
     const string samples = nameof(samples);
 

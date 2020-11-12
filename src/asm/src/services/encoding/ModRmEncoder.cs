@@ -9,7 +9,6 @@ namespace Z0.Asm
 
     using static Konst;
     using static z;
-    using static ModRmMasks;
 
     public readonly struct ModRmMasks
     {
