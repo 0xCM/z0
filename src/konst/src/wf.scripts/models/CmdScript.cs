@@ -10,7 +10,6 @@ namespace Z0
     using static Konst;
     using static z;
 
-
     using api = Cmd;
 
     public readonly struct CmdScript : ITextual, IContented<TableSpan<CmdExpr>>, IIdentified<utf8>
@@ -48,6 +47,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator CmdScript(CmdExpr[] src)
             => new CmdScript(src);
+
         public string Format()
             => api.format(this);
 

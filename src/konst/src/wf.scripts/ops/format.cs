@@ -11,18 +11,18 @@ namespace Z0
     using static z;
     using static Konst;
 
-    partial struct Scripts
+    partial struct CmdScripts
     {
         [MethodImpl(Inline), Op]
-        public static Env env()
-            => new Env();
+        public static ScriptEnv env()
+            => new ScriptEnv();
 
         [Op]
-        public static string format(Var src)
+        public static string format(ScriptVar src)
             => string.Format("{0}={1}",src.Symbol, src.Value);
 
         [Op]
-        public static string format(VarValue src)
+        public static string format(ScriptVarValue src)
             => src.Content ?? EmptyString;
 
         [Op]
@@ -30,7 +30,7 @@ namespace Z0
             => string.Format("{0}={1}", src.Symbol, src.Value);
 
         [Op]
-        public static string format(Symbol src)
+        public static string format(ScriptSymbol src)
             => string.Format("$({0})",src.Name ?? EmptyString);
 
         [Op]
@@ -43,7 +43,7 @@ namespace Z0
         }
 
         [Op]
-        public static string format(Vars src)
+        public static string format(ScriptVars src)
         {
             var dst = Buffers.text();
             render(src,dst);

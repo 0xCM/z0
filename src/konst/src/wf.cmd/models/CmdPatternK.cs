@@ -31,6 +31,15 @@ namespace Z0
             Content = content;
         }
 
+        public override string ToString()
+            => Content ?? EmptyString;
+
+        public override int GetHashCode()
+            => Content?.GetHashCode() ?? 0;
+
+        public bool Equals(CmdPattern<K> src)
+            => text.equals(Content, src.Content);
+
         [MethodImpl(Inline)]
         public static implicit operator CmdPattern<K>(string src)
             => new CmdPattern<K>(src);
@@ -46,14 +55,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator CmdPattern<K>(Paired<K,string> src)
             => new CmdPattern<K>(src.Left, src.Right);
-
-        public override string ToString()
-            => Content ?? EmptyString;
-
-        public override int GetHashCode()
-            => Content?.GetHashCode() ?? 0;
-
-        public bool Equals(CmdPattern<K> src)
-            => text.equals(Content, src.Content);
     }
 }

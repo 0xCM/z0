@@ -6,7 +6,6 @@
 
   <ItemGroup>
     <ProjectReference Include="$(GVec)" />
-    <ProjectReference Include="$(LSquare)" />
     <ProjectReference Include="$(BitMatrix)" />
   </ItemGroup>
 

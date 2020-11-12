@@ -8,7 +8,7 @@
     <ProjectReference Include="$(Konst)" />
     <ProjectReference Include="$(Capture)" />
     <ProjectReference Include="$(Domain)" />
-    <ProjectReference Include="$(AsmServices)" />
+    <ProjectReference Include="$(Asm)" />
     <ProjectReference Include="$(Apps)" />
     <ProjectReference Include="$(BitVectors)" />
     <ProjectReference Include="$(Xed)" />

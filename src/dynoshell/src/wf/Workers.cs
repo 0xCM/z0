@@ -12,7 +12,7 @@ namespace Z0
     using static Konst;
     using static ApiDataModel;
 
-    struct Workers : IWfService<Workers>
+    public struct Workers : IWfService<Workers>
     {
         WfHost Host;
 

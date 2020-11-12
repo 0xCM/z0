@@ -42,6 +42,9 @@ namespace Z0
             get => !text.blank(Content);
         }
 
+        public override string ToString()
+            => Content;
+
         [MethodImpl(Inline)]
         public static implicit operator CmdPattern(string src)
             => new CmdPattern(src);
@@ -53,9 +56,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator CmdPattern(Pair<string> src)
             => new CmdPattern(src.Left, src.Right);
-
-        public override string ToString()
-            => Content;
 
         public static CmdPattern Empty
             => new CmdPattern(EmptyString, EmptyString);

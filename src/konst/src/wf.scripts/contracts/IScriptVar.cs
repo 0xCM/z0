@@ -4,13 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static Scripts;
-
     public interface IScriptVar
     {
-        Symbol Symbol {get;}
+        ScriptSymbol Symbol {get;}
 
-        VarValue Value {get;}
+        ScriptVarValue Value {get;}
     }
 
     public interface IScriptVar<H> : IScriptVar

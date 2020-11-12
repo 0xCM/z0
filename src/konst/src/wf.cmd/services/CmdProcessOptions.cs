@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// CommandOptions is a helper class for the Command class.  It stores options
     /// that affect the behavior of the execution of ETWCommands and is passes as a
-    /// parapeter to the constuctor of a Command.
+    /// parapeter to the constructor of a Command.
     /// It is useful for these options be be on a separate class (rather than
     /// on Command itself), because it is reasonably common to want to have a set
     /// of options passed to several commands, which is not easily possible otherwise.

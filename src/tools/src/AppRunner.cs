@@ -40,56 +40,10 @@ namespace Z0
             Wf.Disposed();
         }
 
-        EmitResourceDataCmd[] Commands()
-        {
-            var db = Wf.Db();
-            var archive = Wf.RuntimeArchive();
-            var buffer = z.list<EmitResourceDataCmd>();
-            var dst = span<EmitResourceDataCmd>(buffer);
-            var cmd = default(EmitResourceDataCmd);
-            var src = default(Assembly);
-
-            src = archive.Dia2Lib;
-            cmd = new EmitResourceDataCmd();
-            cmd.Source = src;
-            cmd.Target = db.Reflected(src);
-            cmd.ClearTarget = true;
-            buffer.Add(cmd);
-
-            src = archive.Srm;
-            cmd = new EmitResourceDataCmd();
-            cmd.Source = src;
-            cmd.Target = db.Reflected(src);
-            cmd.ClearTarget = true;
-            buffer.Add(cmd);
-
-            src = archive.CodeAnalysis;
-            cmd = new EmitResourceDataCmd();
-            cmd.Source = src;
-            cmd.Target = db.Reflected(src);
-            cmd.ClearTarget = true;
-            buffer.Add(cmd);
-
-            return buffer.Array();
-        }
-
 
         public void Run()
         {
-            using var runner = new ToolRunner(Wf, Host);
-            // var cmd = Wf.CmdCatalog.EmitResourceData();
-            // cmd.Source = Parts.Refs.Assembly;
-            // cmd.Target = Wf.Db().RefDataRoot() + FS.folder("test.emission");
-            // cmd.ClearTarget = true;
 
-            var commands = @readonly(Commands());
-            var count = commands.Length;
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var cmd = ref skip(commands,i);
-                Wf.Status(cmd.Source);
-                runner.Run(cmd);
-            }
         }
     }
 

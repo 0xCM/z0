@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-
     using static Konst;
     using static z;
 
@@ -15,7 +14,8 @@ namespace Z0
     {
         public T Content;
 
-        public ToolId CmdId => Content.CmdId;
+        public ToolId CmdId
+            => Content.CmdId;
 
         [MethodImpl(Inline)]
         public CmdScript(T data)

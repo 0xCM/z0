@@ -56,9 +56,6 @@ namespace Z0
         CmdResult EmitSymbols()
             => EmitAsmSymbols.run(Wf, CmdBuilder.EmitAsmSymbols());
 
-        //void EmitScripts()
-        //    => EmitToolScripts.run(Wf, EmitToolScripts.specify(Wf));
-
         [Op]
         public static FS.FilePath[] match(FS.FolderPath root, params FS.FileExt[] ext)
         {
@@ -82,7 +79,7 @@ namespace Z0
             var id = Cmd.id(cmd);
             var list = cmd.EmissionLimit != 0 ? match(cmd.SourceDir, cmd.EmissionLimit, cmd.FileKinds) : match(cmd.SourceDir, cmd.FileKinds);
             var outcome = FileEmissions.emit(list, cmd.FileUriMode, cmd.TargetPath);
-            return Cmd.result(id,outcome);
+            return Cmd.ok(cmd);
         }
 
         CmdResult EmitToolHelp()
@@ -298,5 +295,6 @@ namespace Z0
 
             public const string Case0 = @"llvm-pdbutil dump --streams J:\dev\projects\z0\.build\bin\netcoreapp3.1\win-x64\z0.math.pdb > z0.math.pdb.streams.log";
         }
+
     }
 }

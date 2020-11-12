@@ -1,10 +1,8 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-using Z0;
 
-[LiteralProvider]
-public readonly struct CsKeywords
+readonly struct CsKeywords
 {
     public const string Const = "const";
 

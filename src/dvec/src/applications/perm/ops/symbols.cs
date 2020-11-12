@@ -133,7 +133,6 @@ namespace Z0
             where T : unmanaged
                 => throw new Exception($"The value {key}:{typeof(T).DisplayName()} does not exist in the index");
 
-
         [MethodImpl(Inline), Op]
         public static Vector128<byte> shuffles(NatPerm<N16> src)
             => z.vload(n128, first(z.transform<byte>(src.Terms)));

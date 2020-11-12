@@ -9,28 +9,25 @@ namespace Z0
 
     using static z;
     using static Konst;
+    using static CmdScripts;
 
-    partial struct Scripts
+    public struct ScriptVars : IScriptVars<ScriptVars>
     {
-        public struct Vars : IScriptVars<Vars>
+        readonly Indexed<ScriptDir> Directories;
+
+        [MethodImpl(Inline)]
+        internal ScriptVars(ScriptDir[] src)
         {
-            readonly Indexed<Dir> Directories;
-
-            [MethodImpl(Inline)]
-            internal Vars(Dir[] src)
-            {
-                Directories = src;
-            }
-
-            public Indexed<IScriptVar> Members()
-                => Directories.Cast<IScriptVar>();
-
-            public string Format()
-                => format(this);
-
-            public override string ToString()
-                => Format();
+            Directories = src;
         }
-    }
 
+        public Indexed<IScriptVar> Members()
+            => Directories.Cast<IScriptVar>();
+
+        public string Format()
+            => format(this);
+
+        public override string ToString()
+            => Format();
+    }
 }

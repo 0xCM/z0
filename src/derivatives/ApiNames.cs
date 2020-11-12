@@ -6,10 +6,7 @@ using static ApiNameParts;
 
 namespace Z0
 {
-    readonly struct ApiNames
-    {
 
-    }
 }
 
 namespace System.IO

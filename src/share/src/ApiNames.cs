@@ -4,9 +4,24 @@
 //-----------------------------------------------------------------------------
 using static ApiNameParts;
 
-[ApiNameProvider]
 readonly struct ApiNames
 {
+    public const string TextApi = text + dot + core;
+
+    public const string SymbolQuery = symbolic + dot + query;
+
+    public const string Memory = memory + dot + core;
+
+    public const string PartExtensions = part + dot + extensions;
+
+    public const string LiteralKinds = literals + dot + kinds;
+
+    public const string Arrays = collective + dot + arrays;
+
+    public const string ArrayBuilder = collective + dot + arrays + dot + builder;
+
+    public const string XArray = collective + dot + arrays + dot + extensions;
+
     public const string DataFlows = data + dot + flow;
 
     public const string DataModels = data + dot + models;
@@ -385,4 +400,180 @@ readonly struct ApiNames
     public const string CmdRunners = cmd + dot + "runners";
 
     public const string JsonDeps = runtime + dot + archives + dot + "dependencies";
+
+    public const string ApiSpecs = api + dot + specs;
+
+    public const string ApiCallMap = api + dot + calls + dot + "map";
+
+    public const string ApiCallRoutes = api + dot + calls + dot + routes;
+
+    public const string ApiData = api + dot + data;
+
+    public const string ApiRuntime = api + dot + runtime;
+
+    public const string ApiSigs = api + dot + signatures;
+
+    public const string UBits = ubits;
+
+    public const string UBitsLogic = ubits + dot + bitlogic;
+
+    public const string BitLogicU1 = ubits + dot +  bitlogic + dot + u1;
+
+    public const string BitLogicU2 = ubits + dot + bitlogic + dot + u2;
+
+    public const string BitLogicU3 = ubits + dot + bitlogic + dot + u3;
+
+    public const string BitLogicU4 = ubits + dot + bitlogic + dot + u4;
+
+    public const string BitLogicU5 = ubits + dot + bitlogic + dot + u5;
+
+    public const string BitLogicU6 = ubits + dot + bitlogic + dot + u6;
+
+    public const string BitLogicU7 = ubits + dot + bitlogic + dot + u7;
+
+    public const string BitLogicO8 = ubits + dot + bitlogic + dot + u8;
+
+    public const string BitSeq = bits + dot + seq;
+
+    public const string AsmData = asm + dot + data;
+
+    public const string AsmOpCodes = AsmData + dot + opcodes;
+
+    public const string AsmLang = asm + dot + lang;
+
+    public const string AsmOperands =  AsmLang + dot + operands;
+
+    public const string AsmMachines = asm + dot + machines;
+
+    public const string RegisterQuery = asm + dot + registers + dot + query;
+
+    const string check = nameof(check);
+
+    const string outcomes = nameof(outcomes);
+
+    public const string CheckOutcomes = check + dot + outcomes;
+
+    const string asm = nameof(asm);
+
+    const string render = nameof(render);
+
+    const string semantic = nameof(semantic);
+
+    const string archive = nameof(archive);
+
+    public const string AsmSemanticRender = asm + dot + semantic + dot + render;
+
+    public const string AsmSemanticArchive = asm + dot + semantic + dot + archive;
+
+    const string slots = nameof(slots);
+
+    const string fx = nameof(fx);
+
+    public const string FxSlots = fx + dot + slots;
+
+    public const string n16 = nameof(n16);
+
+    public const string u8 = nameof(u8);
+
+    public const string x = nameof(x);
+
+    public const string x8 = nameof(x8);
+
+    public const string dot = ApiNameParts.dot;
+
+    const string sep ="_";
+
+    public const string FxSlots_n16x8x8x8 = fx + dot + slots + sep + n16 + x8 + x8 + x8;
+
+    public const string Signatures = signatures;
+
+
+    public const string sequences = nameof(sequences);
+
+    public const string EnumCatalogs = enums + dot + catalogs;
+
+    public const string JsonData = data + dot + json;
+
+
+
+    const string samples = nameof(samples);
+
+    const string catalog = nameof(catalog);
+
+    public const string ToolCmd = nameof(cmd) + dot + tools;
+
+    public const string XCmdWorkers = cmd + dot + workers + dot + extensions;
+
+
+    public const string CmdSpecs = cmd + dot + specs;
+
+
+    public const string Workers = workers;
+
+
+    public const string WfServices = workflow + dot + services;
+
+    public const string Cs = lang + dot + cs;
+
+    public const string Asm = lang + dot + asm;
+
+    public const string DynamicOperators = dynamic + dot + operators;
+
+    public const string AlgorithmDynamic = dynamic + dot + algorithms;
+
+
+    // ~~ LinqX
+    // ~~ -----------------------------------------------------------------------------------------
+
+    public const string LinqXPress = linq + dot + expressions;
+
+    public const string LinqXQuery = linq + dot + expressions + dot + query;
+
+    public const string LinqXFunc = linq + dot + expressions + dot + functions;
+
+    public const string LinqXFuncX = linq + dot + expressions + dot + extensions;
+
+   public const string gmath =  math + dot + generic;
+
+    public const string algorithms = nameof(algorithms);
+
+    public const string AlG = math + dot + generic + dot + algorithms;
+
+    public const string XAlG = math + dot + generic + dot + algorithms + dot + extensions;
+
+    public const string Partition = math + dot + partition;
+
+    public const string CheckClose = checks + dot + "close";
+
+    public const string CheckSpans = checks + dot + spans;
+
+    public const string LanguageModels = lang + dot + models;
+
+    public const string CsLang = lang + dot + cs;
+
+    public const string CsRender = lang + dot + cs + dot + render;
+
+    public const string CsBuilder = lang + dot + cs + dot + builder;
+
+    public const string CsPrototypes = lang + dot + cs + dot + "prototypes";
+
+    public const string Cil = cil + dot + api;
+
+    public const string CilTableBuilder = cil + dot + tables + dot + builder;
+
+    public const string CilTables = cil + dot + tables;
+
+    public const string FilePathParser = parsers + dot + files + dot + paths;
+
+    public const string SyntaxModels = syntax + dot + models;
+
+    public const string SyntaxParsers = syntax + dot + parsers;
+
+    public const string SyntaxParserCases = syntax + dot + parsers + dot + cases;
+
+    public const string BufferSegments = buffers + dot + segments;
+
+    public const string StateBuffers = buffers + dot + states;
+
+    public const string FixedBuffers = buffers + dot + @fixed;
 }

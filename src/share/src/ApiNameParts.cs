@@ -3,10 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 using static CsKeywords;
-using static Z0.AsciCharText;
-
-[ApiNameProvider]
-public readonly struct ApiNameParts
+readonly struct ApiNameParts
 {
     public const string @static = Static;
 
@@ -22,7 +19,7 @@ public readonly struct ApiNameParts
 
     public const string @case = Case;
 
-    public const string dot = Dot;
+    public const string dot = ".";
 
     public const string api = nameof(api);
 
@@ -393,4 +390,20 @@ public readonly struct ApiNameParts
     public const string scripts = nameof(scripts);
 
     public const string init = nameof(init);
+
+    public const string format = nameof(format);
+
+    public const string calls = nameof(calls);
+
+    public const string router = nameof(router);
+
+    public const string routes = nameof(routes);
+
+    public const string actions = nameof(actions);
+
+    public const string operations = nameof(operations);
+
+    public const string unsigned = nameof(unsigned);
+
+    public const string ubits = unsigned + dot + bits;
 }

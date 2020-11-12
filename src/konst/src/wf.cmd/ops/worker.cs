@@ -25,14 +25,11 @@ namespace Z0
         public static CmdRouter router(IWfShell wf, Type host)
             => new CmdRouter(wf, workers(wf, host));
 
-        // [Op]
-        // public static CmdRouter router(IWfShell wf)
-        //     => new CmdRouter(wf, workers(wf, typeof(Workers)));
-
         public static CmdWorkers workers<T>(IWfShell wf)
             where T : ICmdRouter<T>, new()
                 => workers(wf, typeof(T));
 
+        [Op]
         public static CmdWorkers workers(IWfShell wf, Type host)
         {
             var methods = @readonly(host.DeclaredInstanceMethods().Tagged<CmdWorkerAttribute>().WithArity(1));

@@ -7,24 +7,21 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static z;
     using static Konst;
     using static CmdScripts;
 
-    public readonly struct ScriptEnv : IScriptVars<ScriptEnv>
+    public struct ScriptVar : IScriptVar<ScriptVar>
     {
-        public ScriptDir ZDev
-            => (nameof(ZDev), Environment.GetEnvironmentVariable(nameof(ZDev)));
+        public ScriptSymbol Symbol {get;}
 
-        public ScriptDir ZDb
-            => (nameof(ZDb), Environment.GetEnvironmentVariable(nameof(ZDb)));
-
-        public ScriptDir ZControl
-            => (nameof(ZControl), Environment.GetEnvironmentVariable(nameof(ZControl)));
+        public ScriptVarValue Value {get;}
 
         [MethodImpl(Inline)]
-        public Indexed<IScriptVar> Members()
-            => members(this);
+        public ScriptVar(ScriptSymbol name, ScriptVarValue value)
+        {
+            Symbol = name;
+            Value = value;
+        }
 
         [MethodImpl(Inline)]
         public string Format()
@@ -32,5 +29,9 @@ namespace Z0
 
         public override string ToString()
             => Format();
+
+        [MethodImpl(Inline)]
+        public static implicit operator ScriptVar((ScriptSymbol symbol, ScriptVarValue value) src)
+            => new ScriptVar(src.symbol, src.value);
     }
 }

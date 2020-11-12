@@ -12,9 +12,11 @@ namespace Z0
     using static Konst;
 
     [ApiHost(ApiNames.Scripts, true)]
-    public readonly partial struct Scripts
+    public readonly partial struct CmdScripts
     {
-        static Symbol PathSep => '\\';
+        const NumericKind Closure = UnsignedInts;
+
+        static ScriptSymbol PathSep => '\\';
 
         const BindingFlags MemberSelector = BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly;
     }
