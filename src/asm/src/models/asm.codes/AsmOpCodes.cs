@@ -250,7 +250,7 @@ namespace Z0.Asm
         }
 
         static ResExtractor Extractor
-            => ResExtractor.Service(typeof(Z0.Parts.AsmModels).Assembly);
+            => ResExtractor.Service(typeof(Z0.Parts.Asm).Assembly);
 
         /// <summary>
         /// Searches for an embedded document with a matching identifier and, if found,

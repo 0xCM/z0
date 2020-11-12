@@ -13,7 +13,7 @@
     <ProjectReference Include="$(BitVectors)" />
     <ProjectReference Include="$(Xed)" />
     <ProjectReference Include="$(Check)" />
-    <ProjectReference Include="$(CheckDynamic)" />
+    <ProjectReference Include="$(Dynamic)" />
     <ProjectReference Include="$(Canonical)" />
   </ItemGroup>
 

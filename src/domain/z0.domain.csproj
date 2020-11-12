@@ -11,7 +11,7 @@
     <ProjectReference Include="$(gmath)" />
     <ProjectReference Include="$(MathSvc)" />
     <ProjectReference Include="$(Xed)" />
-    <ProjectReference Include="$(AsmModels)" />
+    <ProjectReference Include="$(Asm)" />
     <ProjectReference Include="$(Dynamic)" />
     <ProjectReference Include="$(Polyrand)" />
   </ItemGroup>
