@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Root;
+    using static z;
 
     partial struct BitString
     {
@@ -52,7 +52,7 @@ namespace Z0
             var seglen = bitsize<T>();
             var srclen = src.Length;
             Span<char> dst = sys.alloc<char>(srclen * seglen);
-            ref readonly var input = ref head(src);
+            ref readonly var input = ref first(src);
 
             for(var i=0; i<srclen; i++)
                 bitchars(skip(input,i)).CopyTo(dst, i*seglen);

@@ -1,6 +1,0 @@
-Failure trapped by Main at j:\dev\projects\z0\src\machine\App.cs 53
-System.NullReferenceException: Object reference not set to an instance of an object.
-   at Z0.EnvVar.Transform[T](Func`2 f) in j:\dev\projects\z0\src\konst\src\wf.shell\models\EnvVar.cs:line 43
-   at Z0.WfShellInit.create(String[] args, Boolean verbose) in j:\dev\projects\z0\src\konst\src\wf.shell\WfShellInit.cs:line 50
-   at Z0.App.Main(String[] args) in j:\dev\projects\z0\src\machine\App.cs:line 44
-

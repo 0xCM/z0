@@ -59,7 +59,6 @@ namespace Z0.Asm
         static Outcome<uint> Clear(FS.Files src)
             => src.Delete();
 
-
         const string TypeStatusPattern = "Cleared {0} *.{1} {2} files";
 
         const string TotalStatusPattern = "Cleared {0} total {1} files";

@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Root;
+    using static z;
 
     [ApiHost]
     public readonly struct ApiCodeExtractors
@@ -52,7 +52,7 @@ namespace Z0
             var dst = sys.alloc<ApiMemberExtract>(count);
             var target = span(dst);
             var source = span(src);
-            for(var i=0; i<count; i++)
+            for(var i=0u; i<count; i++)
                 seek(target,i) = extract(skip(source,i), sys.clear(buffer));
             return dst;
         }

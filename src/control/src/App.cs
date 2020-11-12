@@ -25,7 +25,7 @@ namespace Z0
 
         static void Run(string[] args)
         {
-            using var wf = Configure(WfShell.create(args));
+            using var wf = Configure(WfShellInit.create(args));
             var app = Apps.context(wf);
             var asm = new AsmContext(app, wf);
             var cstate = new WfCaptureState(wf, asm);

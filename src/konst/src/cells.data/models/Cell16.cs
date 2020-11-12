@@ -9,8 +9,6 @@ namespace Z0
 
     using static Konst;
 
-    using api = Cells;
-
     public readonly struct Cell16 : IDataCell<Cell16,W16,ushort>
     {
         internal readonly ushort Data;
@@ -42,90 +40,32 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static Cell16 From(byte src)
+        public static Cell16 init(byte src)
             => new Cell16(src);
 
         [MethodImpl(Inline)]
-        public static Cell16 From(ushort src)
+        public static Cell16 init(ushort src)
             => new Cell16(src);
 
-
         [MethodImpl(Inline)]
-        public static Cell16 From(Cell8 src)
+        public static Cell16 init(Cell8 src)
             => new Cell16(src.Data);
 
         [MethodImpl(Inline)]
-        public static Cell16 From(short src)
+        public static Cell16 init(short src)
             => new Cell16((ushort)src);
 
         [MethodImpl(Inline)]
-        public static Cell16 From(int src)
+        public static Cell16 init(int src)
             => new Cell16((ushort)(short)src);
 
         [MethodImpl(Inline)]
-        public static Cell16 From(uint src)
+        public static Cell16 init(uint src)
             => new Cell16((ushort)src);
 
         [MethodImpl(Inline)]
         Cell16(ushort x)
             => Data = x;
-
-        [MethodImpl(Inline)]
-        public static implicit operator ushort(Cell16 x)
-            => x.Data;
-
-        [MethodImpl(Inline)]
-        public static implicit operator uint(Cell16 x)
-            => x.Data;
-
-        [MethodImpl(Inline)]
-        public static implicit operator ulong(Cell16 x)
-            => x.Data;
-
-        [MethodImpl(Inline)]
-        public static implicit operator Cell16(ushort x)
-            => From(x);
-
-        [MethodImpl(Inline)]
-        public static implicit operator Cell16(Cell8 x)
-            => From(x.Data);
-
-        [MethodImpl(Inline)]
-        public static implicit operator Cell32(Cell16 x)
-            => Cell32.init(x.Data);
-
-        [MethodImpl(Inline)]
-        public static implicit operator Cell64(Cell16 x)
-            => Cell64.From(x.Data);
-
-        [MethodImpl(Inline)]
-        public static implicit operator Cell16(byte x)
-            => From((ushort)x);
-
-        [MethodImpl(Inline)]
-        public static implicit operator Cell16(short x)
-            => From(x);
-
-        [MethodImpl(Inline)]
-        public static explicit operator Cell16(int x)
-            => From(x);
-
-        [MethodImpl(Inline)]
-        public static explicit operator Cell16(uint x)
-            => From(x);
-
-        [MethodImpl(Inline)]
-        public static explicit operator sbyte(Cell16 x)
-            => (sbyte)x.Data;
-
-        [MethodImpl(Inline)]
-        public static explicit operator byte(Cell16 x)
-            => (byte)x.Data;
-
-        [MethodImpl(Inline)]
-        public static explicit operator short(Cell16 x)
-            => (short)x.Data;
-
 
         [MethodImpl(Inline)]
         public T As<T>()
@@ -152,9 +92,63 @@ namespace Z0
         public override bool Equals(object src)
             => src is Cell16 x && Equals(x);
 
+        [MethodImpl(Inline)]
+        public static implicit operator ushort(Cell16 x)
+            => x.Data;
+
+        [MethodImpl(Inline)]
+        public static implicit operator uint(Cell16 x)
+            => x.Data;
+
+        [MethodImpl(Inline)]
+        public static implicit operator ulong(Cell16 x)
+            => x.Data;
+
+        [MethodImpl(Inline)]
+        public static implicit operator Cell16(ushort x)
+            => init(x);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Cell16(Cell8 x)
+            => init(x.Data);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Cell32(Cell16 x)
+            => Cell32.init(x.Data);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Cell64(Cell16 x)
+            => Cell64.init(x.Data);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Cell16(byte x)
+            => init((ushort)x);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Cell16(short x)
+            => init(x);
+
+        [MethodImpl(Inline)]
+        public static explicit operator Cell16(int x)
+            => init(x);
+
+        [MethodImpl(Inline)]
+        public static explicit operator Cell16(uint x)
+            => init(x);
+
+        [MethodImpl(Inline)]
+        public static explicit operator sbyte(Cell16 x)
+            => (sbyte)x.Data;
+
+        [MethodImpl(Inline)]
+        public static explicit operator byte(Cell16 x)
+            => (byte)x.Data;
+
+        [MethodImpl(Inline)]
+        public static explicit operator short(Cell16 x)
+            => (short)x.Data;
 
         public static Cell16 Empty
             => default(Cell16);
-
    }
 }

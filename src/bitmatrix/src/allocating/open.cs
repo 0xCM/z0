@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst; 
-    using static Memories;
+    using static Konst;
 
     partial class BitMatrixA
     {
@@ -37,7 +36,7 @@ namespace Z0
         /// </summary>
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
-        /// <typeparam name="T">The primal type over which the matrices are constructed</typeparam>        
+        /// <typeparam name="T">The primal type over which the matrices are constructed</typeparam>
         [MethodImpl(Inline), And, Closures(UnsignedInts)]
         public static BitMatrix<T> and<T>(in BitMatrix<T> A, in BitMatrix<T> B)
             where T : unmanaged
@@ -52,7 +51,7 @@ namespace Z0
         /// </summary>
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
-        /// <typeparam name="T">The primal type over which the matrix is constructed</typeparam>        
+        /// <typeparam name="T">The primal type over which the matrix is constructed</typeparam>
         [MethodImpl(Inline), Or, NumericClosures(UnsignedInts)]
         public static BitMatrix<T> or<T>(in BitMatrix<T> A, in BitMatrix<T> B)
             where T : unmanaged
@@ -67,7 +66,7 @@ namespace Z0
         /// </summary>
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
-        /// <typeparam name="T">The primal type over which the matrix is constructed</typeparam>        
+        /// <typeparam name="T">The primal type over which the matrix is constructed</typeparam>
         [MethodImpl(Inline), NonImpl, Closures(UnsignedInts)]
         public static BitMatrix<T> nonimpl<T>(in BitMatrix<T> A, in BitMatrix<T> B)
             where T : unmanaged
@@ -81,7 +80,7 @@ namespace Z0
         /// Computes the logical negation of a generic bitmatrix, returning the allocated result to the caller
         /// </summary>
         /// <param name="A">The source matrix</param>
-        /// <typeparam name="T">The primal type over which the matrix is constructed</typeparam>        
+        /// <typeparam name="T">The primal type over which the matrix is constructed</typeparam>
         [MethodImpl(Inline), Not, Closures(UnsignedInts)]
         public static BitMatrix<T> not<T>(in BitMatrix<T> A)
             where T : unmanaged
@@ -110,7 +109,7 @@ namespace Z0
         /// </summary>
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
-        /// <typeparam name="T">The primal type over which the matrix is constructed</typeparam>        
+        /// <typeparam name="T">The primal type over which the matrix is constructed</typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static BitMatrix<T> cnonimpl<T>(in BitMatrix<T> A, in BitMatrix<T> B)
             where T : unmanaged
@@ -138,7 +137,7 @@ namespace Z0
         /// </summary>
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
-        /// <typeparam name="T">The primal type over which the matrix is constructed</typeparam>        
+        /// <typeparam name="T">The primal type over which the matrix is constructed</typeparam>
         [MethodImpl(Inline), Nor, Closures(UnsignedInts)]
         public static BitMatrix<T> nor<T>(in BitMatrix<T> A, in BitMatrix<T> B)
             where T : unmanaged
@@ -154,7 +153,7 @@ namespace Z0
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
         /// <param name="B">The target matrix</param>
-        /// <typeparam name="T">The primal type over which the matrix is constructed</typeparam>        
+        /// <typeparam name="T">The primal type over which the matrix is constructed</typeparam>
         [MethodImpl(Inline), Nor, Closures(UnsignedInts)]
         public static ref readonly BitMatrix<T> nor<T>(in BitMatrix<T> A, in BitMatrix<T> B, in BitMatrix<T> Z)
             where T : unmanaged

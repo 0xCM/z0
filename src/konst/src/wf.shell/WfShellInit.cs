@@ -48,19 +48,10 @@ namespace Z0
             var configured = list<string>();
 
             var logRoot = EnvVars.Common.DbRoot + FS.folder("logs") + FS.folder("apps");
-
-            configured.Add(string.Format("{0}:{1}", "control", controlId));
-            configured.Add(string.Format("{0}:{1}", "args", delimit(args)));
-            configured.Add(string.Format("{0}:{1}", "logs.root", logRoot));
-
             var api = parts(control, args);
             var partList = api.Api.PartIdentities;
             var partCount = partList.Length;
-            configured.Add(string.Format("{0}:{1}", "PartCount", partCount));
-            configured.Add(string.Format("{0}:{1}", "PartList", delimit(partList)));
-
             var logConfig = WfShellInit.logConfig(controlId, logRoot);
-            configured.Add(string.Format("{0}:{1}", nameof(WfLogConfig), logConfig.Format()));
 
             IWfPaths _paths = new WfPaths(logConfig);
             var ctx = new WfContext();
@@ -73,9 +64,15 @@ namespace Z0
             ctx.Controller = control;
 
             var init = new WfInit(ctx, logConfig, partList);
-            configured.Add(string.Format("{0}:{1}", "wf.init", init.ControlId));
-
             IWfShell wf = new WfShell(init);
+
+            configured.Add(string.Format("{0}:{1}", "control", controlId));
+            configured.Add(string.Format("{0}:{1}", "args", delimit(args)));
+            configured.Add(string.Format("{0}:{1}", "logs.root", logRoot));
+            configured.Add(string.Format("{0}:{1}", "PartCount", partCount));
+            configured.Add(string.Format("{0}:{1}", "PartList", delimit(partList)));
+            configured.Add(string.Format("{0}:{1}", nameof(WfLogConfig), logConfig.Format()));
+            configured.Add(string.Format("{0}:{1}", "wf.init", init.ControlId));
             configured.Add(string.Format("{0}:{1}", "wf", wf.AppName));
 
             if(verbose)

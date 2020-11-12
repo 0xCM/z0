@@ -12,7 +12,6 @@ namespace Z0
 
     partial class BitMatrix
     {
-
         /// <summary>
         /// Computes the converse implication for generic bitmatrices, depositing the result to a caller-supplied target
         /// </summary>

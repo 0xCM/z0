@@ -59,38 +59,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void map<S,T>(ReadOnlySpan<S> src, Func<S,T> f, Span<T> dst)
         {
-            var count = Root.length(src,dst);
+            var count = z.length(src,dst);
             for(var i= 0; i<count; i++)
                 seek(dst,i) = f(skip(src,i));
-        }
-
-        /// <summary>
-        /// Applies a unary operator to an input sequence and deposits the result to a caller-supplied target
-        /// </summary>
-        /// <param name="src">The source</param>
-        /// <param name="f">The operator</param>
-        /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static void apply<T>(ReadOnlySpan<T> src, Func<T,T> f, Span<T> dst)
-        {
-            var count = Root.length(src,dst);
-            for(var i= 0; i<count; i++)
-                seek(dst,i) = f(skip(src,i));
-        }
-
-        /// <summary>
-        /// Projects a pair of source spans to target span via a binary operator
-        /// </summary>
-        /// <param name="x">The left operand</param>
-        /// <param name="y">The right operand</param>
-        /// <param name="f">The operator</param>
-        /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static void map<T>(ReadOnlySpan<T> x, ReadOnlySpan<T> y, Func<T,T,T> f, Span<T> dst)
-        {
-            var count = length(x,y);
-            for(var i= 0; i<count; i++)
-                seek(dst,i) = f(skip(x,i), skip(y,i));
         }
 
         /// <summary>

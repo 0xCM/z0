@@ -5,9 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="$(Records)" />
     <ProjectReference Include="$(Math)" />
     <ProjectReference Include="$(BitCore)" />
     <ProjectReference Include="$(BitFields)" />
+
   </ItemGroup>
 
 </Project>

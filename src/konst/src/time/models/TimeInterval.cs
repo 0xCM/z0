@@ -20,12 +20,12 @@ namespace Z0
         /// <summary>
         /// The minimum value in the range
         /// </summary>
-        public readonly T Min;
+        public T Min {get;}
 
         /// <summary>
         /// The maximum value in the range
         /// </summary>
-        public readonly T Max;
+        public T Max {get;}
 
         [MethodImpl(Inline)]
         public TimeInterval(T min, T max)
@@ -33,12 +33,6 @@ namespace Z0
             Min = min;
             Max = max;
         }
-
-        T ITimeInterval<T>.Min 
-            => Min;
-
-        T ITimeInterval<T>.Max 
-            => Max;
 
         /// <summary>
         /// Tests whether a value is in the range

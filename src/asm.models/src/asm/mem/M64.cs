@@ -14,14 +14,6 @@ namespace Z0.Asm
         public ulong Data;
 
         [MethodImpl(Inline)]
-        public static implicit operator M64(ulong src)
-            => new M64(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator ulong(M64 src)
-            => src.Data;
-
-        [MethodImpl(Inline)]
         public M64(ulong src)
             => Data = src;
 
@@ -30,5 +22,17 @@ namespace Z0.Asm
 
         ulong IContented<ulong>.Content
             => Data;
+
+        [MethodImpl(Inline)]
+        public static implicit operator M64(ulong src)
+            => new M64(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator M64(Cell64 src)
+            => new M64(src.Content);
+
+        [MethodImpl(Inline)]
+        public static implicit operator ulong(M64 src)
+            => src.Data;
     }
 }

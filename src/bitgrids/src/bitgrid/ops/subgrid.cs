@@ -9,7 +9,6 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static Root;
 
     partial class BitGrid
     {
@@ -27,7 +26,7 @@ namespace Z0
         public static SubGrid16<M,N,T> subgrid<M,N,T>(N16 w, M m = default, N n = default, T t = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-            where T : unmanaged            
+            where T : unmanaged
                 => new SubGrid16<M, N, T>(z16);
 
         /// <summary>
@@ -44,7 +43,7 @@ namespace Z0
         public static SubGrid16<M,N,T> subgrid<M,N,T>(N16 w, T data, M m = default, N n = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-            where T : unmanaged            
+            where T : unmanaged
                 => new SubGrid16<M, N, T>(Cast.to<T,ushort>(data));
 
         /// <summary>
@@ -61,7 +60,7 @@ namespace Z0
         public static SubGrid32<M,N,T> subgrid<M,N,T>(N32 w, M m = default, N n = default, T t = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-            where T : unmanaged            
+            where T : unmanaged
                 => new SubGrid32<M, N, T>(z32);
 
         /// <summary>
@@ -78,7 +77,7 @@ namespace Z0
         public static SubGrid32<M,N,T> subgrid<M,N,T>(N32 w, T data, M m = default, N n = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-            where T : unmanaged            
+            where T : unmanaged
                 => new SubGrid32<M, N, T>(Cast.to<T,uint>(data));
 
         /// <summary>
@@ -95,7 +94,7 @@ namespace Z0
         public static SubGrid64<M,N,T> subgrid<M,N,T>(N64 w, M m = default, N n = default, T t = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-            where T : unmanaged            
+            where T : unmanaged
                 => new SubGrid64<M, N, T>(z64);
 
         /// <summary>
@@ -112,7 +111,7 @@ namespace Z0
         public static SubGrid64<M,N,T> subgrid<M,N,T>(N64 w, T data, M m = default, N n = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-            where T : unmanaged            
+            where T : unmanaged
                 => new SubGrid64<M, N, T>(Cast.to<T,ulong>(data));
 
 
@@ -130,7 +129,7 @@ namespace Z0
         public static SubGrid128<M,N,T> subgrid<M,N,T>(N128 w, M m = default, N n = default, T t = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-            where T : unmanaged            
+            where T : unmanaged
                 => new SubGrid128<M, N, T>(default);
 
         /// <summary>
@@ -146,7 +145,7 @@ namespace Z0
         public static SubGrid128<M,N,T> subgrid<M,N,T>(Vector128<T> data, M m = default, N n = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-            where T : unmanaged            
+            where T : unmanaged
                 => new SubGrid128<M, N, T>(data);
 
         /// <summary>
@@ -163,7 +162,7 @@ namespace Z0
         public static SubGrid256<M,N,T> subgrid<M,N,T>(N256 w, M m = default, N n = default, T t = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-            where T : unmanaged            
+            where T : unmanaged
                 => new SubGrid256<M, N, T>(default);
 
         /// <summary>
@@ -179,7 +178,7 @@ namespace Z0
         public static SubGrid256<M,N,T> subgrid<M,N,T>(Vector256<T> data, M m = default, N n = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-            where T : unmanaged            
+            where T : unmanaged
                 => new SubGrid256<M, N, T>(data);
     }
 }

@@ -10,7 +10,7 @@ namespace Z0.Logix
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     [ApiHost("logic.engine")]
     public static partial class LogicEngine

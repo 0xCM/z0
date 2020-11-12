@@ -4,13 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Konst;
-
     using W = TypeWidth;
-
 
     /// <summary>
     /// Defines cell data type classifiers

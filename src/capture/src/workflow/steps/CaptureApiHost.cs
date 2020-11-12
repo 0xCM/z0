@@ -18,6 +18,16 @@ namespace Z0
         WfCaptureState State;
 
         IApiHost Api;
+
+        IAsmWf Asm;
+        public static WfHost create(IAsmWf asm, IApiHost api)
+        {
+            var host = new CaptureApiHost();
+            host.Asm = asm;
+            host.Api = api;
+            return host;
+        }
+
         public static WfHost create(WfCaptureState state, IApiHost api)
         {
             var host = new CaptureApiHost();
@@ -60,7 +70,7 @@ namespace Z0
 
         public void Run()
         {
-            Wf.Running(Api);
+            using var flow = Wf.Running(Api);
 
             try
             {
@@ -73,8 +83,6 @@ namespace Z0
             {
                 Wf.Error(e);
             }
-
-            Wf.Ran2(Api);
         }
     }
 }

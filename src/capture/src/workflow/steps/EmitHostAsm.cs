@@ -18,7 +18,6 @@ namespace Z0
 
         ApiHostUri Uri;
 
-
         public static EmitHostAsm create(ICaptureContext context, ApiHostUri uri)
         {
             var dst = new EmitHostAsm();

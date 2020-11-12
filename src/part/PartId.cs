@@ -18,11 +18,7 @@ public enum PartId : ulong
 
     Math = 4,
 
-    BitMasks = 5,
-
-    Win = 6,
-
-    Expressive = 7,
+    Records = 6,
 
     Refs = 8,
 
@@ -33,8 +29,6 @@ public enum PartId : ulong
     Check = 19,
 
     Imagine = 20,
-
-    KonstShell = 21,
 
     Lang = 22,
 

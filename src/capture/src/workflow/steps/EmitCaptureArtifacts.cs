@@ -35,10 +35,26 @@ namespace Z0
 
         readonly WfHost Host;
 
+        readonly IAsmWf Asm;
+
+        public EmitCaptureArtifactsStep(IAsmWf asm, WfHost host, ApiHostUri src, ApiMemberExtract[] extracts)
+        {
+            Asm = asm;
+            Wf = asm.Wf.WithHost(host);
+            Host = host;
+            State = default;
+            Ct = Wf.Ct;
+            HostUri = src;
+            Extracts = extracts;
+            ParsedBlocks = default;
+            Wf.Created();
+        }
+
         public EmitCaptureArtifactsStep(IWfCaptureState state, WfHost host, ApiHostUri src, ApiMemberExtract[] extracts)
         {
             Wf = state.Wf.WithHost(host);
             Host = host;
+            Asm = default;
             State = state;
             Ct = Wf.Ct;
             HostUri = src;

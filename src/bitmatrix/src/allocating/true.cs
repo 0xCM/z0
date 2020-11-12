@@ -7,12 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst; 
-    using static Memories;
+    using static Konst;
 
     partial class BitMatrixA
     {
-
         [MethodImpl(Inline), True, NumericClosures(UnsignedInts)]
         public static BitMatrix<T> @true<T>()
             where T:unmanaged

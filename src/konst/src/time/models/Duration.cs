@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
 
     /// <summary>
@@ -20,98 +20,18 @@ namespace Z0
         /// </summary>
         public readonly long Ticks;
 
-        public static Duration Zero 
-            => new Duration(0);
-        
         [MethodImpl(Inline)]
-        public static Duration Define(long ticks)
+        public static Duration init(long ticks)
             => new Duration(ticks);
 
         [MethodImpl(Inline)]
-        public static Duration Define(TimeSpan ts)
+        public static Duration init(TimeSpan ts)
             => new Duration(ts.Ticks);
 
         [MethodImpl(Inline)]
-        Duration(long ticks)
+        public Duration(long ticks)
             => Ticks = ticks;
 
-
-        [MethodImpl(Inline)]
-        public static implicit operator TimeSpan(Duration src)
-            => src.TimeSpan;
-
-        [MethodImpl(Inline)]
-        public static implicit operator Duration(TimeSpan src)
-            => new Duration(src.Ticks);
-
-        [MethodImpl(Inline)]
-        public static implicit operator Duration(long ticks)
-            => Define(ticks);
-
-        [MethodImpl(Inline)]
-        public static Duration operator +(Duration a, Duration b)
-            => new Duration(a.Ticks + b.Ticks);
-
-        [MethodImpl(Inline)]
-        public static Duration operator +(Duration a, TimeSpan b)
-            => new Duration(a.Ticks + b.Ticks);
-
-        [MethodImpl(Inline)]
-        public static Duration operator -(Duration a, Duration b)
-            => new Duration(a.Ticks - b.Ticks);
-
-        [MethodImpl(Inline)]
-        public static Duration operator -(Duration a, TimeSpan b)
-            => new Duration(a.Ticks - b.Ticks);
-
-        [MethodImpl(Inline)]
-        public static double operator /(Duration a, Duration b)        
-            => Math.Round((double)a.Ticks / (double) b.Ticks, 4);
-
-        [MethodImpl(Inline)]
-        public static double operator /(Duration a, TimeSpan b)        
-            => Math.Round((double)a.Ticks / (double) b.Ticks, 4);
-
-        [MethodImpl(Inline)]
-        public static bool operator !=(Duration a, Duration b)
-            => a.Ticks != b.Ticks;
-
-        [MethodImpl(Inline)]
-        public static bool operator ==(Duration a, Duration b)
-            => a.Ticks == b.Ticks;
-
-        [MethodImpl(Inline)]
-        public static bool operator >(Duration lhs, Duration rhs)
-            => lhs.Ticks > rhs.Ticks;
-
-        [MethodImpl(Inline)]
-        public static bool operator >(Duration lhs, TimeSpan rhs)
-            => lhs.Ticks > rhs.Ticks;
-
-        [MethodImpl(Inline)]
-        public static bool operator <(Duration lhs, Duration rhs)
-            => lhs.Ticks < rhs.Ticks;
-
-        [MethodImpl(Inline)]
-        public static bool operator <(Duration lhs, TimeSpan rhs)
-            => lhs.Ticks < rhs.Ticks;
-
-        [MethodImpl(Inline)]
-        public static bool operator >=(Duration lhs, Duration rhs)
-            => lhs.Ticks >= rhs.Ticks;
-
-        [MethodImpl(Inline)]
-        public static bool operator >=(Duration lhs, TimeSpan rhs)
-            => lhs.Ticks >= rhs.Ticks;
-
-        [MethodImpl(Inline)]
-        public static bool operator <=(Duration lhs, Duration rhs)
-            => lhs.Ticks <= rhs.Ticks;
-
-        [MethodImpl(Inline)]
-        public static bool operator <=(Duration lhs, TimeSpan rhs)
-            => lhs.Ticks <= rhs.Ticks;
-            
         /// <summary>
         /// The duration expressed in nanoseconds
         /// </summary>
@@ -155,14 +75,93 @@ namespace Z0
 
         public string Format()
             => $"{Ms} ms";
-        
+
         public override string ToString()
             => Format();
 
         public override int GetHashCode()
             => Ticks.GetHashCode();
 
-        public override bool Equals(object obj)            
+        public override bool Equals(object obj)
             => obj is Duration x && Equals(x);
+
+        [MethodImpl(Inline)]
+        public static implicit operator TimeSpan(Duration src)
+            => src.TimeSpan;
+
+        [MethodImpl(Inline)]
+        public static implicit operator Duration(TimeSpan src)
+            => new Duration(src.Ticks);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Duration(long ticks)
+            => init(ticks);
+
+        [MethodImpl(Inline)]
+        public static Duration operator +(Duration a, Duration b)
+            => new Duration(a.Ticks + b.Ticks);
+
+        [MethodImpl(Inline)]
+        public static Duration operator +(Duration a, TimeSpan b)
+            => new Duration(a.Ticks + b.Ticks);
+
+        [MethodImpl(Inline)]
+        public static Duration operator -(Duration a, Duration b)
+            => new Duration(a.Ticks - b.Ticks);
+
+        [MethodImpl(Inline)]
+        public static Duration operator -(Duration a, TimeSpan b)
+            => new Duration(a.Ticks - b.Ticks);
+
+        [MethodImpl(Inline)]
+        public static double operator /(Duration a, Duration b)
+            => Math.Round((double)a.Ticks / (double) b.Ticks, 4);
+
+        [MethodImpl(Inline)]
+        public static double operator /(Duration a, TimeSpan b)
+            => Math.Round((double)a.Ticks / (double) b.Ticks, 4);
+
+        [MethodImpl(Inline)]
+        public static bool operator !=(Duration a, Duration b)
+            => a.Ticks != b.Ticks;
+
+        [MethodImpl(Inline)]
+        public static bool operator ==(Duration a, Duration b)
+            => a.Ticks == b.Ticks;
+
+        [MethodImpl(Inline)]
+        public static bool operator >(Duration lhs, Duration rhs)
+            => lhs.Ticks > rhs.Ticks;
+
+        [MethodImpl(Inline)]
+        public static bool operator >(Duration lhs, TimeSpan rhs)
+            => lhs.Ticks > rhs.Ticks;
+
+        [MethodImpl(Inline)]
+        public static bool operator <(Duration lhs, Duration rhs)
+            => lhs.Ticks < rhs.Ticks;
+
+        [MethodImpl(Inline)]
+        public static bool operator <(Duration lhs, TimeSpan rhs)
+            => lhs.Ticks < rhs.Ticks;
+
+        [MethodImpl(Inline)]
+        public static bool operator >=(Duration lhs, Duration rhs)
+            => lhs.Ticks >= rhs.Ticks;
+
+        [MethodImpl(Inline)]
+        public static bool operator >=(Duration lhs, TimeSpan rhs)
+            => lhs.Ticks >= rhs.Ticks;
+
+        [MethodImpl(Inline)]
+        public static bool operator <=(Duration lhs, Duration rhs)
+            => lhs.Ticks <= rhs.Ticks;
+
+        [MethodImpl(Inline)]
+        public static bool operator <=(Duration lhs, TimeSpan rhs)
+            => lhs.Ticks <= rhs.Ticks;
+
+        public static Duration Zero
+            => new Duration(0);
     }
 }

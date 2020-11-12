@@ -145,7 +145,7 @@ namespace Z0
         {
             if(asm.isCall(src.Instruction))
             {
-                var bytes = Root.span(src.Encoded.Data);
+                var bytes = z.span(src.Encoded.Data);
                 if(bytes.Length >= 5)
                 {
                     var encoded = bytes.Slice(1,4);
@@ -170,7 +170,7 @@ namespace Z0
             Buffer.Add(header);
 
             var opcount = src.Instruction.OpCount;
-            var summaries = Root.list<string>();
+            var summaries = z.list<string>();
             for(byte i =0; i<opcount; i++)
             {
                 var kind = asm.kind(fx, i);

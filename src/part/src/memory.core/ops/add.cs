@@ -18,6 +18,46 @@ namespace Z0
         /// <param name="src">The source reference</param>
         /// <param name="count">The T-cell count to add</param>
         /// <typeparam name="T">The reference type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref T add<T>(in T src, sbyte count)
+            => ref Add(ref edit(src), count);
+
+        /// <summary>
+        /// Adds an offset to a reference
+        /// </summary>
+        /// <param name="src">The source reference</param>
+        /// <param name="count">The T-cell count to add</param>
+        /// <typeparam name="T">The reference type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref T add<T>(in T src, byte count)
+            => ref Add(ref edit(src), count);
+
+        /// <summary>
+        /// Adds an offset to a reference
+        /// </summary>
+        /// <param name="src">The source reference</param>
+        /// <param name="count">The T-cell count to add</param>
+        /// <typeparam name="T">The reference type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref T add<T>(in T src, short count)
+            => ref Add(ref edit(src), count);
+
+        /// <summary>
+        /// Adds an offset to a reference
+        /// </summary>
+        /// <param name="src">The source reference</param>
+        /// <param name="count">The T-cell count to add</param>
+        /// <typeparam name="T">The reference type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref T add<T>(in T src, ushort count)
+            => ref Add(ref edit(src), (int)count);
+
+        /// <summary>
+        /// Adds an offset to a reference
+        /// </summary>
+        /// <param name="src">The source reference</param>
+        /// <param name="count">The T-cell count to add</param>
+        /// <typeparam name="T">The reference type</typeparam>
         /// <remarks>
         /// u8:  movsxd rax,edx -> add rax,rcx
         /// u16: movsxd rax,edx -> lea rax,[rcx+rax*2]
@@ -51,17 +91,7 @@ namespace Z0
         /// <param name="count">The T-cell count to add</param>
         /// <typeparam name="T">The reference type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref T add<T>(in T src, byte count)
-            => ref Add(ref edit(src), (int)count);
-
-        /// <summary>
-        /// Adds an offset to a reference
-        /// </summary>
-        /// <param name="src">The source reference</param>
-        /// <param name="count">The T-cell count to add</param>
-        /// <typeparam name="T">The reference type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref T add<T>(in T src, ushort count)
+        public static ref T add<T>(in T src, long count)
             => ref Add(ref edit(src), (int)count);
 
         /// <summary>

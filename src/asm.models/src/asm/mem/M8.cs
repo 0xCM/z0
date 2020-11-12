@@ -14,18 +14,18 @@ namespace Z0.Asm
         public byte Data;
 
         [MethodImpl(Inline)]
+        public M8(byte src)
+            => Data = src;
+
+        byte IContented<byte>.Content
+            => Data;
+
+        [MethodImpl(Inline)]
         public static implicit operator M8(byte src)
             => new M8(src);
 
         [MethodImpl(Inline)]
         public static implicit operator byte(M8 src)
             => src.Data;
-
-        [MethodImpl(Inline)]
-        public M8(byte src)
-            => Data = src;
-
-        byte IContented<byte>.Content
-            => Data;
     }
 }

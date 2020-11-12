@@ -5,7 +5,7 @@
 namespace Z0
 {
     using System;
-    
+
     using static Konst;
     using static Root;
 
@@ -17,9 +17,9 @@ namespace Z0
             var offset = patterns.MatchOffset(id);
             return TryMatch(offset, input, pattern, out selected);
         }
-                
+
         static int? TerminalIndex(ReadOnlySpan<byte> src, ReadOnlySpan<byte?> pattern, Span<byte> state)
-        {            
+        {
             var pos = 0;
             var posMax = state.Length - 1;
             int? termidx = null;
@@ -43,7 +43,7 @@ namespace Z0
                 if(termidx != null)
                     break;
             }
-        
+
             return termidx;
         }
 

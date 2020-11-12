@@ -16,6 +16,7 @@
     <Derivatives>$(Src)derivatives/z0.derivatives.csproj</Derivatives>
 
     <Commands>$(Src)commands/z0.commands.csproj</Commands>
+    <Records>$(Src)records/z0.records.csproj</Records>
 
     <Fsm>$(Src)fsm/z0.fsm.csproj</Fsm>
 

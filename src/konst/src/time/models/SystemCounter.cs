@@ -22,45 +22,6 @@ namespace Z0
 
         bool Running;
 
-        // Vector128<ulong> Data;
-
-        // long _Total
-        // {
-        //     [MethodImpl(Inline)]
-        //     get => (long)z.vcell(Data,0);
-
-        //     [MethodImpl(Inline)]
-        //     set => Data = z.vparts(w128, (ulong)value, (ulong)Started);
-        // }
-
-
-        [MethodImpl(Inline)]
-        public static implicit operator long(SystemCounter counter)
-        {
-            counter.Stop();
-            var counted = counter.Count;
-            counter.Start();
-            return counted;
-        }
-
-        [MethodImpl(Inline)]
-        public static implicit operator TimeSpan(SystemCounter counter)
-        {
-            counter.Stop();
-            var time =  TimeSpan.FromTicks(counter.Count);
-            counter.Start();
-            return time;
-        }
-
-        [MethodImpl(Inline)]
-        public static implicit operator Duration(SystemCounter counter)
-        {
-            counter.Stop();
-            var time =  TimeSpan.FromTicks(counter.Count);
-            counter.Start();
-            return time;
-        }
-
         [MethodImpl(Inline)]
         public void Start()
         {
@@ -121,6 +82,33 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => TimeSpan.FromTicks(Count);
+        }
+
+        [MethodImpl(Inline)]
+        public static implicit operator long(SystemCounter counter)
+        {
+            counter.Stop();
+            var counted = counter.Count;
+            counter.Start();
+            return counted;
+        }
+
+        [MethodImpl(Inline)]
+        public static implicit operator TimeSpan(SystemCounter counter)
+        {
+            counter.Stop();
+            var time =  TimeSpan.FromTicks(counter.Count);
+            counter.Start();
+            return time;
+        }
+
+        [MethodImpl(Inline)]
+        public static implicit operator Duration(SystemCounter counter)
+        {
+            counter.Stop();
+            var time =  TimeSpan.FromTicks(counter.Count);
+            counter.Start();
+            return time;
         }
     }
 }

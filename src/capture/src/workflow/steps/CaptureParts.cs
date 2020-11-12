@@ -13,6 +13,40 @@ namespace Z0
     using static Konst;
     using static z;
 
+    public readonly struct ApiPartCapture
+    {
+        static WfHost Host => WfSelfHost.create(typeof(ApiPartCapture));
+
+        public static void capture(IAsmWf asm, IApiPartCatalog src)
+        {
+            if(src.IsEmpty)
+                return;
+
+            capture(asm, src.ApiDataTypes);
+            capture(asm, src.OperationHosts);
+        }
+
+        public static void capture(IAsmWf asm, ApiHost[] src)
+        {
+            var count = src.Length;
+            var hosts = @readonly(src);
+            for(var i=0; i<count; i++)
+                CaptureApiHost.create(asm, skip(hosts,i)).Run(asm.Wf);
+        }
+
+        public static void capture(IAsmWf asm, ApiDataTypes src)
+        {
+            using var step = new ExtractMembers(asm.Wf, Host);
+            var extracted = @readonly(step.Extract(src).GroupBy(x => x.Host).Select(x => kvp(x.Key, x.Array())).Array());
+            for(var i=0; i<extracted.Length; i++)
+            {
+                ref readonly var x = ref skip(extracted,i);
+                using var emit = new EmitCaptureArtifactsStep(asm, Host, x.Key, x.Value);
+                emit.Run();
+            }
+        }
+    }
+
     public sealed class CaptureParts : WfHost<CaptureParts,WfCaptureState>
     {
         protected override void Execute(IWfShell shell, in WfCaptureState state)
@@ -55,21 +89,21 @@ namespace Z0
 
         public void Run()
         {
-            Wf.Running();
+            using var flow = Wf.Running();
 
             ClearCaptureArchives.create().Run(Wf);
+
             var catalogs = Config.Api.Catalogs.Terms;
             var count = catalogs.Length;
             for(var i=0; i<count; i++)
                 CapturePart(skip(catalogs,i));
-
-            Wf.Ran();
         }
 
         void CapturePart(IApiPartCatalog src)
         {
             if(src.IsEmpty)
                 return;
+
             Capture(src.ApiDataTypes);
             Capture(src.OperationHosts);
         }

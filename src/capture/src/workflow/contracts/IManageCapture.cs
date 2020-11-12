@@ -6,9 +6,5 @@ namespace Z0.Asm
 {
     public interface IManageCapture : IWfBrokerClient<IWfCaptureBroker>
     {
-
-        void Connect()
-        {
-        }
     }
 }

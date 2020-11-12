@@ -17,7 +17,6 @@ namespace Z0.Logix
     [ApiHost("expr.arith.eval")]
     public class ArithExprEval
     {
-
         [Op, NumericClosures(UnsignedInts)]
         public static LiteralExpr<T> eval<T>(IArithmeticExpr<T> expr)
             where T : unmanaged

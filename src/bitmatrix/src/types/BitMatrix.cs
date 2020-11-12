@@ -67,7 +67,7 @@ namespace Z0
         public ref BitVector<T> this[int row]
         {
             [MethodImpl(Inline)]
-            get => ref AsBitVector(ref Memories.head(Data, row));
+            get => ref AsBitVector(ref z.seek(Data, row));
         }
 
         public Bit32 this[int row, int col]

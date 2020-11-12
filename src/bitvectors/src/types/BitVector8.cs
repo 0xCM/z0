@@ -13,11 +13,123 @@ namespace Z0
     {
         internal byte Data;
 
-        public static BitVector8 Zero => default;
+        [MethodImpl(Inline)]
+        public BitVector8(byte src)
+            => Data = src;
 
-        public static BitVector8 One => 1;
+        /// <summary>
+        /// Extracts the scalar represented by the vector
+        /// </summary>
+        public byte Scalar
+        {
+            [MethodImpl(Inline)]
+            get => Data;
+        }
 
-        public static BitVector8 Ones => byte.MaxValue;
+        /// <summary>
+        /// The number of bits represented by the vector
+        /// </summary>
+        public readonly int Width
+        {
+            [MethodImpl(Inline)]
+            get => 8;
+        }
+
+        /// <summary>
+        /// Presents bitvector content as a bytespan
+        /// </summary>
+        public Span<byte> Bytes
+        {
+            [MethodImpl(Inline)]
+            get => BitVector.bytes(Data);
+        }
+
+        /// <summary>
+        /// Returns true if no bits are enabled, false otherwise
+        /// </summary>
+        public readonly Bit32 Empty
+        {
+            [MethodImpl(Inline)]
+            get => Data == 0;
+        }
+
+        /// <summary>
+        /// Returns true if the vector has at least one enabled bit; false otherwise
+        /// </summary>
+        public readonly Bit32 NonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => !Empty;
+        }
+
+        /// <summary>
+        /// Returns true if all bits are enabled, false otherwise
+        /// </summary>
+        public readonly Bit32 AllOn
+        {
+            [MethodImpl(Inline)]
+            get => (0xFF & Data) == 0xFF;
+        }
+
+        /// <summary>
+        /// The vector's 4 most significant bits
+        /// </summary>
+        public readonly BitVector4 Hi
+        {
+            [MethodImpl(Inline)]
+            get => Bits.hi(Data);
+        }
+
+        /// <summary>
+        /// The vector's 4 least significant bits
+        /// </summary>
+        public readonly BitVector4 Lo
+        {
+            [MethodImpl(Inline)]
+            get => Bits.lo(Data);
+        }
+
+        /// <summary>
+        /// Gets/sets the state of an index-identified bit
+        /// </summary>
+        public Bit32 this[int index]
+        {
+            [MethodImpl(Inline)]
+            get => Bit32.test(Data, index);
+
+            [MethodImpl(Inline)]
+            set => Data = Bit32.set(Data, (byte)index, value);
+        }
+
+        /// <summary>
+        /// Selects a contiguous range of bits
+        /// </summary>
+        /// <param name="first">The position of the first bit</param>
+        /// <param name="last">The position of the last bit</param>
+        public BitVector8 this[byte first, byte last]
+        {
+            [MethodImpl(Inline)]
+            get => BitVector.bitseg(this,first,last);
+        }
+
+        [MethodImpl(Inline)]
+        public readonly bool Equals(BitVector8 y)
+            => Data == y.Data;
+
+        public override bool Equals(object obj)
+            => obj is BitVector8 x ? Equals(x) : false;
+
+        public override int GetHashCode()
+            => Data.GetHashCode();
+
+        public string Format(BitFormat config)
+            => BitVector.format(this,config);
+
+        public string Format()
+            => BitVector.format(this);
+
+        public override string ToString()
+            => Format();
 
         [MethodImpl(Inline)]
         public static implicit operator BitVector<byte>(BitVector8 src)
@@ -261,122 +373,10 @@ namespace Z0
         public static Bit32 operator >=(BitVector8 x, BitVector8 y)
             => math.gteq(x,y);
 
-        [MethodImpl(Inline)]
-        public BitVector8(byte src)
-            => this.Data = src;
+        public static BitVector8 Zero => default;
 
-        /// <summary>
-        /// Extracts the scalar represented by the vector
-        /// </summary>
-        public byte Scalar
-        {
-            [MethodImpl(Inline)]
-            get => Data;
-        }
+        public static BitVector8 One => 1;
 
-        /// <summary>
-        /// The number of bits represented by the vector
-        /// </summary>
-        public readonly int Width
-        {
-            [MethodImpl(Inline)]
-            get => 8;
-        }
-
-        /// <summary>
-        /// Presents bitvector content as a bytespan
-        /// </summary>
-        public Span<byte> Bytes
-        {
-            [MethodImpl(Inline)]
-            get => BitVector.bytes(Data);
-        }
-
-        /// <summary>
-        /// Returns true if no bits are enabled, false otherwise
-        /// </summary>
-        public readonly Bit32 Empty
-        {
-            [MethodImpl(Inline)]
-            get => Data == 0;
-        }
-
-        /// <summary>
-        /// Returns true if the vector has at least one enabled bit; false otherwise
-        /// </summary>
-        public readonly Bit32 NonEmpty
-        {
-            [MethodImpl(Inline)]
-            get => !Empty;
-        }
-
-        /// <summary>
-        /// Returns true if all bits are enabled, false otherwise
-        /// </summary>
-        public readonly Bit32 AllOn
-        {
-            [MethodImpl(Inline)]
-            get => (0xFF & Data) == 0xFF;
-        }
-
-        /// <summary>
-        /// The vector's 4 most significant bits
-        /// </summary>
-        public readonly BitVector4 Hi
-        {
-            [MethodImpl(Inline)]
-            get => Bits.hi(Data);
-        }
-
-        /// <summary>
-        /// The vector's 4 least significant bits
-        /// </summary>
-        public readonly BitVector4 Lo
-        {
-            [MethodImpl(Inline)]
-            get => Bits.lo(Data);
-        }
-
-        /// <summary>
-        /// Gets/sets the state of an index-identified bit
-        /// </summary>
-        public Bit32 this[int index]
-        {
-            [MethodImpl(Inline)]
-            get => Bit32.test(Data, index);
-
-            [MethodImpl(Inline)]
-            set => Data = Bit32.set(Data, (byte)index, value);
-        }
-
-        /// <summary>
-        /// Selects a contiguous range of bits
-        /// </summary>
-        /// <param name="first">The position of the first bit</param>
-        /// <param name="last">The position of the last bit</param>
-        public BitVector8 this[byte first, byte last]
-        {
-            [MethodImpl(Inline)]
-            get => BitVector.bitseg(this,first,last);
-        }
-
-        [MethodImpl(Inline)]
-        public readonly bool Equals(BitVector8 y)
-            => Data == y.Data;
-
-        public override bool Equals(object obj)
-            => obj is BitVector8 x ? Equals(x) : false;
-
-        public override int GetHashCode()
-            => Data.GetHashCode();
-
-        public string Format(BitFormat config)
-            => BitVector.format(this,config);
-
-        public string Format()
-            => BitVector.format(this);
-
-        public override string ToString()
-            => Format();
+        public static BitVector8 Ones => byte.MaxValue;
     }
 }

@@ -14,18 +14,18 @@ namespace Z0.Asm
         public ushort Data;
 
         [MethodImpl(Inline)]
+        public M16(ushort src)
+            => Data = src;
+
+        ushort IContented<ushort>.Content
+            => Data;
+
+        [MethodImpl(Inline)]
         public static implicit operator M16(ushort src)
             => new M16(src);
 
         [MethodImpl(Inline)]
         public static implicit operator ushort(M16 src)
             => src.Data;
-
-        [MethodImpl(Inline)]
-        public M16(ushort src)
-            => Data = src;
-
-        ushort IContented<ushort>.Content
-            => Data;
     }
 }

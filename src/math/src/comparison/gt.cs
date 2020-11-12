@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-        
+
     partial class math
     {
         /// <summary>
@@ -79,7 +79,6 @@ namespace Z0
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline), Gt]
         public static bool gt(ulong a, ulong b)
-            => a > b; 
-
+            => a > b;
     }
 }

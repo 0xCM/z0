@@ -19,14 +19,6 @@ namespace Z0
         public Cells(CellW<W,T>[] data)
             => Data = data;
 
-        [MethodImpl(Inline)]
-        public static implicit operator Cells<W,T>(CellW<W,T>[] src)
-            => new Cells<W,T>(src);
-
-        [MethodImpl(Inline)]
-        public Cells<W,T> Refresh(CellW<W,T>[] src)
-            => src;
-
         public ref CellW<W,T> this[ulong index]
         {
             [MethodImpl(Inline)]
@@ -62,5 +54,13 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Data.Storage;
         }
+
+        [MethodImpl(Inline)]
+        public Cells<W,T> Refresh(CellW<W,T>[] src)
+            => src;
+
+        [MethodImpl(Inline)]
+        public static implicit operator Cells<W,T>(CellW<W,T>[] src)
+            => new Cells<W,T>(src);
     }
 }

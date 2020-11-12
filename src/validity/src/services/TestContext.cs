@@ -285,6 +285,6 @@ namespace Z0
         /// <param name="sw">A running/stopped stopwatch</param>
         [MethodImpl(Inline)]
         public Duration snapshot(Stopwatch sw)
-            => Duration.Define(sw.ElapsedTicks);
+            => Duration.init(sw.ElapsedTicks);
     }
 }

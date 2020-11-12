@@ -10,6 +10,7 @@ namespace Z0
     using System.Linq;
 
     using static Konst;
+
     using BS = Z0.BitString;
 
     public static class RandomBitStrings

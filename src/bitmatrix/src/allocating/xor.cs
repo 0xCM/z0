@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst; 
-    using static Memories;
+    using static Konst;
+    using static z;
 
     partial class BitMatrixA
     {
@@ -29,7 +29,7 @@ namespace Z0
         /// </summary>
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
-        /// <typeparam name="T">The primal type over which the matrices are constructed</typeparam>        
+        /// <typeparam name="T">The primal type over which the matrices are constructed</typeparam>
         [MethodImpl(Inline), Xor, Closures(UnsignedInts)]
         public static BitMatrix<T> xor<T>(in BitMatrix<T> A, in BitMatrix<T> B)
             where T : unmanaged
@@ -38,14 +38,14 @@ namespace Z0
             LogicSquare.xor(in A.Head,in B.Head, ref Z.Head);
             return Z;
         }
-        
+
         /// <summary>
         /// Computes the logical Xor btween two generic bitmatrices, depositing the result to a caller-allocated target
         /// </summary>
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
         /// <param name="Z">The target matrix</param>
-        /// <typeparam name="T">The primal type over which the matrices are constructed</typeparam>        
+        /// <typeparam name="T">The primal type over which the matrices are constructed</typeparam>
         [MethodImpl(Inline), Xor, Closures(UnsignedInts)]
         public static ref BitMatrix<T> xor<T>(in BitMatrix<T> A, in BitMatrix<T> B, ref BitMatrix<T> Z)
             where T : unmanaged
@@ -92,7 +92,7 @@ namespace Z0
             LogicSquare.xor(in A.Head,in B.Head, ref Z.Head);
             return Z;
         }
-        
+
 
         /// <summary>
         /// Computes the logical Xor between two primal bitmatrices and returns the allocated result to the caller

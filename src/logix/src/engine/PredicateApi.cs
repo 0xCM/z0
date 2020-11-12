@@ -8,7 +8,6 @@ namespace Z0.Logix
     using System.Security;
 
     using static Konst;
-    using static Memories;
     using static LogicSig;
 
     using BCK = BinaryComparisonApiClass;

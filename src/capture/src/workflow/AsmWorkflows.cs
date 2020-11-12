@@ -15,10 +15,6 @@ namespace Z0
     public readonly struct AsmWorkflows
     {
         [MethodImpl(Inline), Op]
-        public static IAsmContext context(IAppContext root)
-            => new AsmContext(root);
-
-        [MethodImpl(Inline), Op]
         public static IAsmWf create(IWfShell wf)
             => new AsmWf(wf);
 
@@ -29,9 +25,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static IWfCaptureBroker broker(IWfShell wf)
             => new WfCaptureBroker(wf);
-
-        [MethodImpl(Inline), Op]
-        public static WfCaptureState state(IWfShell wf, IAsmContext asm)
-            => new WfCaptureState(wf, asm);
     }
 }

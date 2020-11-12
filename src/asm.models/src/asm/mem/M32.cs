@@ -14,18 +14,18 @@ namespace Z0.Asm
         public uint Data;
 
         [MethodImpl(Inline)]
+        public M32(uint src)
+            => Data = src;
+
+        uint IContented<uint>.Content
+            => Data;
+
+        [MethodImpl(Inline)]
         public static implicit operator M32(uint src)
             => new M32(src);
 
         [MethodImpl(Inline)]
         public static implicit operator uint(M32 src)
             => src.Data;
-
-        [MethodImpl(Inline)]
-        public M32(uint src)
-            => Data = src;
-
-        uint IContented<uint>.Content
-            => Data;
     }
 }

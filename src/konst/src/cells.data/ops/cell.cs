@@ -87,12 +87,12 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Cell8 c8<T>(T src)
             where T : unmanaged
-                => Cell8.From(z.force<T,byte>(src));
+                => Cell8.init(z.force<T,byte>(src));
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Cell16 c16<T>(T src)
             where T : unmanaged
-                => Cell16.From(z.force<T,ushort>(src));
+                => Cell16.init(z.force<T,ushort>(src));
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Cell32 c32<T>(T src)
@@ -102,7 +102,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Cell64 c64<T>(T src)
             where T : unmanaged
-                => Cell64.From(z.force<T,ulong>(src));
+                => Cell64.init(z.force<T,ulong>(src));
 
         [MethodImpl(Inline)]
         public static F fix<T,F>(T src)

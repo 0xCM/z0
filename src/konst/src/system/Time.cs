@@ -88,7 +88,7 @@ namespace Z0
         /// <param name="sw">A running/stopped stopwatch</param>
         [MethodImpl(Inline), Op]
         public static Duration snapshot(Stopwatch sw)
-            => Duration.Define(sw.ElapsedTicks);
+            => Duration.init(sw.ElapsedTicks);
 
         public static Date[] partition(in ClosedInterval<Date> src, uint width)
         {

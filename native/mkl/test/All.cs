@@ -20,9 +20,10 @@ namespace Z0.Mkl
         /// <param name="sw">A running/stopped stopwatch</param>
         [MethodImpl(Inline)]
         public static Duration snap(Stopwatch sw)
-            => Duration.Define(sw.ElapsedTicks);
+            => Duration.init(sw.ElapsedTicks);
 
         const string Intro = "beginning";
+
         const string Finale = "finished";
 
         static readonly string Divider = new string('-',80);
@@ -52,7 +53,6 @@ namespace Z0.Mkl
             }
             return (variant, line1 + Eol + line2);
         }
-
 
         public static string finale(string title, object value, Duration time, bool silent = true, [CallerMemberName] string method = null)
         {

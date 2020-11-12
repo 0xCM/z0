@@ -5,9 +5,9 @@
 namespace Z0
 {
     using System;
-    
+
     /// <summary>
-    /// Characterizes the reification of a natural number k such that 
+    /// Characterizes the reification of a natural number k such that
     /// a:K1 & b:K2 & k = a - b
     /// </summary>
     /// <typeparam name="K2">The base type</typeparam>
@@ -19,5 +19,4 @@ namespace Z0
     {
 
     }
-
 }

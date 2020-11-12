@@ -18,6 +18,9 @@ namespace Z0.Asm
         public M128(Cell128 src)
             => Data = src;
 
+        Cell128 IContented<Cell128>.Content
+            => Data;
+
         [MethodImpl(Inline)]
         public static implicit operator M128(Cell128 src)
             => new M128(src);
@@ -29,8 +32,5 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public static implicit operator Cell128(M128 src)
             => src.Data;
-
-        Cell128 IContented<Cell128>.Content
-            => Data;
     }
 }

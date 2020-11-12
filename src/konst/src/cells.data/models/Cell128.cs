@@ -18,19 +18,19 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Cell128 scalar<T>(T src)
             where T : unmanaged
-                => create(vscalar(w128,src));
+                => init(vscalar(w128,src));
 
         [MethodImpl(Inline)]
-        public static Cell128 create<T>(Vector128<T> src)
+        public static Cell128 init<T>(Vector128<T> src)
             where T : unmanaged
                 => new Cell128(v64u(src));
 
         [MethodImpl(Inline)]
-        public static Cell128 create((ulong x0, ulong x1) x)
+        public static Cell128 init((ulong x0, ulong x1) x)
             => new Cell128(x.x0, x.x1);
 
         [MethodImpl(Inline)]
-        public static Cell128 create(in ConstPair<ulong> x)
+        public static Cell128 init(in ConstPair<ulong> x)
             => new Cell128(x.Left,x.Right);
 
         internal readonly Vector128<ulong> Data;
@@ -104,19 +104,19 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator Cell128((ulong x0, ulong x1) x)
-            => create(x);
+            => init(x);
 
         [MethodImpl(Inline)]
         public static implicit operator Cell128(in ConstPair<ulong> x)
-            => create(x);
+            => init(x);
 
         [MethodImpl(Inline)]
         public static implicit operator Cell128(Vector128<byte> x)
-            => create(x);
+            => init(x);
 
         [MethodImpl(Inline)]
         public static explicit operator Cell128(ushort src)
-            => create(z.vscalar(w128,src));
+            => init(z.vscalar(w128,src));
 
         [MethodImpl(Inline)]
         public static explicit operator ushort(Cell128 src)
@@ -124,15 +124,15 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator Cell128(Vector128<ushort> x)
-            => create(x);
+            => init(x);
 
         [MethodImpl(Inline)]
         public static implicit operator Cell128(Vector128<uint> x)
-            => create(x);
+            => init(x);
 
         [MethodImpl(Inline)]
         public static implicit operator Cell128(Vector128<ulong> x)
-            => create(x);
+            => init(x);
 
         [MethodImpl(Inline)]
         public static implicit operator Vector128<byte>(Cell128 x)

@@ -11,12 +11,9 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct Cells<T> : ITableSpan<Cells<T>, T>
+    public readonly struct Cells<T> : ITableSpan<Cells<T>,T>
         where T : struct, IDataCell
     {
-        public static uint CellWidth
-            => bitwidth<T>();
-
         readonly TableSpan<T> Data;
 
         [MethodImpl(Inline)]
@@ -72,5 +69,7 @@ namespace Z0
         public Cells<T> Refresh(T[] src)
             => src;
 
+        public static uint CellWidth
+            => bitwidth<T>();
     }
 }

@@ -8,10 +8,10 @@ namespace Z0
     using System.Collections.Generic;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     partial class BitGrid
-    {                
+    {
         /// <summary>
         /// Enumerates the valid dimensions for a 16-bit fixed bitgrid
         /// </summary>
@@ -44,9 +44,9 @@ namespace Z0
         public static IEnumerable<Pair<ulong>> dimensions(N32 w)
         {
             yield return Dim.define(n1,n32);
-            yield return Dim.define(n32,n1);            
+            yield return Dim.define(n32,n1);
             yield return Dim.define(n2,n16);
-            yield return Dim.define(n16,n2);            
+            yield return Dim.define(n16,n2);
             yield return Dim.define(n8,n4);
             yield return Dim.define(n4,n8);
         }
@@ -58,9 +58,9 @@ namespace Z0
         public static IEnumerable<Pair<ulong>> dimensions(N64 w)
         {
             yield return Dim.define(n1,n64);
-            yield return Dim.define(n64,n1);            
+            yield return Dim.define(n64,n1);
             yield return Dim.define(n2,n32);
-            yield return Dim.define(n32,n2);            
+            yield return Dim.define(n32,n2);
             yield return Dim.define(n16,n4);
             yield return Dim.define(n4,n16);
             yield return Dim.define(n8,n8);
@@ -73,9 +73,9 @@ namespace Z0
         public static IEnumerable<Pair<ulong>> dimensions(N128 w)
         {
             yield return Dim.define(n1,n128);
-            yield return Dim.define(n128,n1);            
+            yield return Dim.define(n128,n1);
             yield return Dim.define(n2,n64);
-            yield return Dim.define(n64,n2);            
+            yield return Dim.define(n64,n2);
             yield return Dim.define(n32,n4);
             yield return Dim.define(n4,n32);
             yield return Dim.define(n8,n16);
@@ -89,9 +89,9 @@ namespace Z0
         public static IEnumerable<Pair<ulong>> dimensions(N256 w)
         {
             yield return Dim.define(n1,n256);
-            yield return Dim.define(n256,n1);            
+            yield return Dim.define(n256,n1);
             yield return Dim.define(n2,n128);
-            yield return Dim.define(n128,n2);            
+            yield return Dim.define(n128,n2);
             yield return Dim.define(n64,n4);
             yield return Dim.define(n4,n64);
             yield return Dim.define(n8,n32);
@@ -118,15 +118,15 @@ namespace Z0
                 => default;
 
         /// <summary>
-        /// Enunerates the valid grid dimensions where the total bit width is a power of 2
+        /// Enumerates the valid grid dimensions where the total bit width is a power of 2
         /// </summary>
         /// <typeparam name="W">The grid dimension type</typeparam>
         public static IEnumerable<Pair<ulong>> p2dimensions<W>()
             where W : unmanaged,INatPow2<W>
-                => p2dimensions(value<W>());
+                => p2dimensions(nat32u<W>());
 
         /// <summary>
-        /// Enunerates the valid grid dimensions where the total bit width is a power of 2
+        /// Enumerates the valid grid dimensions where the total bit width is a power of 2
         /// </summary>
         /// <param name="w">A power of 2 that specifies the bit width of the grid</param>
         public static IEnumerable<Pair<ulong>> p2dimensions(ulong w)
@@ -139,15 +139,15 @@ namespace Z0
             {
                 while(--failsafe >= 0)
                 {
-                    yield return Root.pair(m,n);
+                    yield return z.pair(m,n);
 
                     if(m == n)
                         break;
 
-                    yield return Root.pair(n,m);
+                    yield return z.pair(n,m);
 
                     m <<= 1;
-                    
+
                     if(m == n)
                         break;
 

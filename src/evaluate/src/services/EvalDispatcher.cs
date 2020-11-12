@@ -31,7 +31,7 @@ namespace Z0
         }
 
         uint PointCount<T>()
-            => (uint)Root.size<T>()/BufferSize;
+            => (uint)z.size<T>()/BufferSize;
 
         MemberEvaluator Evaluator(BufferTokens buffers)
             => Evaluate.evaluator(buffers);

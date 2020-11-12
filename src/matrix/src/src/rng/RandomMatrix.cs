@@ -20,7 +20,7 @@ namespace Z0
         /// Allocates and fills a matrix of natural dimensions with random values
         /// </summary>
         /// <param name="random">The random source</param>
-        /// <param name="domain">The range of potiential random values</param>
+        /// <param name="domain">The range of potential random values</param>
         /// <param name="m">The natural number of rows</param>
         /// <param name="n">The natural number of columns</param>
         /// <typeparam name="M">The row type</typeparam>
@@ -37,7 +37,7 @@ namespace Z0
         /// Allocates and fills a matrix of natural dimensions with random values
         /// </summary>
         /// <param name="random">The random source</param>
-        /// <param name="domain">The range of potiential random values</param>
+        /// <param name="domain">The range of potential random values</param>
         /// <param name="m">The natural number of rows</param>
         /// <param name="n">The natural number of columns</param>
         /// <typeparam name="M">The row type</typeparam>

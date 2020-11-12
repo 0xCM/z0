@@ -9,7 +9,7 @@ namespace Z0
     using System.Text;
 
     using static Konst;
-    using static Root;
+    using static z;
 
     /// <summary>
     /// Represents a sequence of bits

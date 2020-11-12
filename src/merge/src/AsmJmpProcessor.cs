@@ -49,6 +49,22 @@ namespace Z0
             broker.Get(kind).Handle(fx);
         }
 
+        public const string RenderPattern = "| {0,-16} | {1,-16} | {2,-16} | {3,-16} | {4,-16} | {5,-16:g} | {6,-32}";
+
+        public static string format(in JmpInfo jmp)
+            => string.Format(RenderPattern, jmp.Base, jmp.Source, jmp.InstructionSize, jmp.CallSite, jmp.Target, jmp.Kind, jmp.Asm);
+
+        public static string header()
+            => string.Format(RenderPattern,
+                nameof(JmpInfo.Base),
+                nameof(JmpInfo.Source),
+                nameof(JmpInfo.InstructionSize),
+                nameof(JmpInfo.CallSite),
+                nameof(JmpInfo.Target),
+                nameof(JmpInfo.Kind),
+                nameof(JmpInfo.Asm)
+                );
+
         public void Process()
         {
             var hosts = Source.View;
@@ -87,13 +103,13 @@ namespace Z0
             if(Collected.Count != 0)
             {
                 using var writer = Target.Writer();
-                writer.WriteLine(JmpInfo.header());
+                writer.WriteLine(header());
                 var jumps = @readonly(Collected.ToArray());
                 var count = jumps.Length;
                 for(var i=0u; i<count; i++)
                 {
                     ref readonly var jmp = ref skip(jumps,i);
-                    writer.WriteLine(JmpInfo.format(jmp));
+                    writer.WriteLine(format(jmp));
                 }
             }
         }

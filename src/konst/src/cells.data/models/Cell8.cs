@@ -22,19 +22,19 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static Cell8 From(byte src)
+        public static Cell8 init(byte src)
             => new Cell8(src);
 
         [MethodImpl(Inline)]
-        public static Cell8 From(sbyte src)
+        public static Cell8 init(sbyte src)
             => new Cell8((byte)src);
 
         [MethodImpl(Inline)]
-        public static Cell8 From(int src)
+        public static Cell8 init(int src)
             => new Cell8((byte)(sbyte)src);
 
         [MethodImpl(Inline)]
-        public static Cell8 From(uint src)
+        public static Cell8 init(uint src)
             => new Cell8((byte)src);
 
         public Cell8 Zero
@@ -48,20 +48,45 @@ namespace Z0
             => Data = x0;
 
         [MethodImpl(Inline)]
+        public T As<T>()
+            where T : struct
+              => Cast.to<T>(Data);
+
+        [MethodImpl(Inline)]
+        public bool Equals(Cell8 src)
+            => Data == src.Data;
+
+        [MethodImpl(Inline)]
+        public bool Equals(byte src)
+            => Data == src;
+
+        public string Format()
+            => Data.ToString();
+
+        public override string ToString()
+            => Format();
+
+        public override int GetHashCode()
+            => Data.GetHashCode();
+
+        public override bool Equals(object src)
+            => src is Cell8 x && Equals(x);
+
+        [MethodImpl(Inline)]
         public static implicit operator byte(Cell8 src)
             => (byte)src.Data;
 
         [MethodImpl(Inline)]
         public static implicit operator Cell8(byte src)
-            => From(src);
+            => init(src);
 
         [MethodImpl(Inline)]
         public static implicit operator Cell8(sbyte x0)
-            => From(x0);
+            => init(x0);
 
         [MethodImpl(Inline)]
         public static implicit operator Cell16(Cell8 x)
-            => Cell16.From(x.Data);
+            => Cell16.init(x.Data);
 
         [MethodImpl(Inline)]
         public static implicit operator Cell32(Cell8 x)
@@ -69,7 +94,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator Cell64(Cell8 x)
-            => Cell64.From(x.Data);
+            => Cell64.init(x.Data);
 
         [MethodImpl(Inline)]
         public static explicit operator Cell8(int x)
@@ -98,32 +123,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static explicit operator ulong(Cell8 x)
             => (ulong)x.Data;
-
-        [MethodImpl(Inline)]
-        public T As<T>()
-            where T : struct
-              => Cast.to<T>(Data);
-
-        [MethodImpl(Inline)]
-        public bool Equals(Cell8 src)
-            => Data == src.Data;
-
-        [MethodImpl(Inline)]
-        public bool Equals(byte src)
-            => Data == src;
-
-        public string Format()
-            => Data.ToString();
-
-        public override string ToString()
-            => Format();
-
-        public override int GetHashCode()
-            => Data.GetHashCode();
-
-        public override bool Equals(object src)
-            => src is Cell8 x && Equals(x);
-
         public static Cell8 Empty => default;
     }
 }

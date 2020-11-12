@@ -9,22 +9,20 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Typed;
+    using static z;
 
    public readonly struct NaturalNumericClosure<M,N,T>
         where M : unmanaged, ITypeNat
         where N : unmanaged, ITypeNat
-        where T : unmanaged        
+        where T : unmanaged
     {
         public readonly MethodInfo Definition;
 
         [MethodImpl(Inline)]
-        public NaturalNumericClosure(MethodInfo def) 
-        {
-            this.Definition = def;
-        }
+        public NaturalNumericClosure(MethodInfo def)
+            => Definition = def;
 
-        public NaturalNumericClosure Untyped 
-            => new NaturalNumericClosure(Definition, value<M>(), value<N>(), typeof(T).NumericKind());
+        public NaturalNumericClosure Untyped
+            => new NaturalNumericClosure(Definition, nat64u<M>(), nat64u<N>(), typeof(T).NumericKind());
     }
 }

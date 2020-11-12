@@ -69,7 +69,7 @@ namespace Z0
             var sw = Time.stopwatch();
             var series = Define(domain, seed);
             var terms = series.Terms().ToSpan(count);
-            var elapsed = Duration.Define(sw.ElapsedTicks);
+            var elapsed = Duration.init(sw.ElapsedTicks);
             Demands.insist(terms.Length == count);
             Demands.insist(series.Observed.Observed.Equals(terms[count - 1].Observed));
             complete(series,elapsed);
@@ -86,7 +86,7 @@ namespace Z0
             Demands.insist(terms.Length == steps);
             Demands.insist(series.Observed.Observed.Equals(terms[steps - 1].Observed));
 
-            var elapsed = Duration.Define(sw.ElapsedTicks);
+            var elapsed = Duration.init(sw.ElapsedTicks);
             var evolved = SeriesEvolution.Define(seed, domain, s0.Observed, series.Observed, elapsed);
             return evolved;
         }

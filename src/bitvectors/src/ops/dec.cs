@@ -7,11 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst; using static Memories;
+    using static Konst;
 
     partial class BitVector
     {
-
         /// <summary>
         /// Arithmetically decrements the source vector
         /// </summary>
@@ -30,15 +29,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline), Op]
-        public static BitVector8 dec(BitVector8 x)        
-            => gmath.dec(x.Data);
-        
-        /// <summary>
-        /// Arithmetically decrements the source vector
-        /// </summary>
-        /// <param name="x">The source vector</param>
-        [MethodImpl(Inline), Op]
-        public static BitVector16 dec(BitVector16 x)        
+        public static BitVector8 dec(BitVector8 x)
             => gmath.dec(x.Data);
 
         /// <summary>
@@ -46,7 +37,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline), Op]
-        public static BitVector32 dec(BitVector32 x)        
+        public static BitVector16 dec(BitVector16 x)
             => gmath.dec(x.Data);
 
         /// <summary>
@@ -54,7 +45,15 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline), Op]
-        public static BitVector64 dec(BitVector64 x)        
+        public static BitVector32 dec(BitVector32 x)
+            => gmath.dec(x.Data);
+
+        /// <summary>
+        /// Arithmetically decrements the source vector
+        /// </summary>
+        /// <param name="x">The source vector</param>
+        [MethodImpl(Inline), Op]
+        public static BitVector64 dec(BitVector64 x)
             => gmath.dec(x.Data);
 
         /// <summary>

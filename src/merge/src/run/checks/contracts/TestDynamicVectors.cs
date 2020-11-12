@@ -31,7 +31,7 @@ namespace Z0
             => Dynops.Dynexus;
 
         uint PointCount<T>()
-            => (uint)Root.size<T>()/Buffer.BufferSize;
+            => z.size<T>()/Buffer.BufferSize;
 
         IPolyrand Random
             => Context.Random;

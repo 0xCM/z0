@@ -20,6 +20,18 @@ namespace Z0
             => Content = src;
 
         [MethodImpl(Inline)]
+        public static ref Cell<T> assign(in T src, ref Cell<T> dst)
+        {
+            dst.Content = src;
+            return ref dst;
+        }
+
+        [MethodImpl(Inline)]
+        public static ref Cell<S> morph<S>(in Cell<T> src)
+            where S : struct, IDataCell<S>
+                => ref @as<Cell<T>,Cell<S>>(src);
+
+        [MethodImpl(Inline)]
         public static T operator !(in Cell<T> src)
             => src.Content;
 
@@ -30,17 +42,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator Cell<T>(in T src)
             => new Cell<T>(src);
-
-        [MethodImpl(Inline)]
-        public static ref Cell<S> morph<S>(in Cell<T> src)
-            where S : struct, IDataCell<S>
-                => ref @as<Cell<T>,Cell<S>>(src);
-
-        [MethodImpl(Inline)]
-        public static ref Cell<T> assign(in T src, ref Cell<T> dst)
-        {
-            dst.Content = src;
-            return ref dst;
-        }
     }
 }

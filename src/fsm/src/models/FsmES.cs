@@ -153,7 +153,7 @@ namespace Z0
                 StartTime = StartTime,
                 EndTime = EndTime,
                 ReceiptCount = ReceiptCount,
-                Runtime = Duration.Define(Runtime.ElapsedTicks),
+                Runtime = Duration.init(Runtime.ElapsedTicks),
                 TransitionCount = TransitionCount
             };
 

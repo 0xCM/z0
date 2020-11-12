@@ -54,17 +54,15 @@ namespace Z0.Mkl
             }
         }
 
-        public VslSSTask(int Dim,  T[] Samples, T[] Weights, int[] Indices)
+        public VslSSTask(int dim, T[] samples, T[] weights, int[] indices)
         {
-
-            this.Storage = VslSSMatrixStorage.VSL_SS_MATRIX_STORAGE_ROWS;
-            this.Dim = Dim;
-            this.Samples = Samples;
-            this.SampleCount = Samples.Length / Dim;
-            this.Weights = Weights;
-            this.Indices = Indices;
-
-            Root.insist(Weights.Length == SampleCount);
+            Storage = VslSSMatrixStorage.VSL_SS_MATRIX_STORAGE_ROWS;
+            Dim = dim;
+            Samples = samples;
+            SampleCount = samples.Length / dim;
+            Weights = weights;
+            Indices = indices;
+            z.require(weights.Length == SampleCount);
         }
 
         public abstract VslSSStatus Allocate();

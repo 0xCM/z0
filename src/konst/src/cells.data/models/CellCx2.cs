@@ -18,6 +18,7 @@ namespace Z0
 
         public B C1;
 
+        [MethodImpl(Inline)]
         public Cell(in A c0, in B c1)
         {
             C0 = c0;

@@ -62,29 +62,10 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static Cell512 From<T>(in Vector512<T> src)
+        public static Cell512 init<T>(in Vector512<T> src)
             where T : unmanaged
                 => new Cell512(src.As<ulong>());
 
-        [MethodImpl(Inline)]
-        public static implicit operator Cell512((Cell256 x0, Cell256 x1) x)
-            => new Cell512(x.x0,x.x1);
-
-        [MethodImpl(Inline)]
-        public static implicit operator Cell512(in Vector512<byte> x)
-            => From(x);
-
-        [MethodImpl(Inline)]
-        public static implicit operator Cell512(in Vector512<ushort> x)
-            => From(x);
-
-        [MethodImpl(Inline)]
-        public static implicit operator Cell512(in Vector512<uint> x)
-            => From(x);
-
-        [MethodImpl(Inline)]
-        public static implicit operator Cell512(in Vector512<ulong> x)
-            => From(x);
         public string Format()
             => Arrays.from(X0,X1).Format();
 
@@ -115,7 +96,26 @@ namespace Z0
             where T : unmanaged
                 => Unsafe.As<Cell512,Vector512<T>>(ref Unsafe.AsRef(this));
 
-        public static Cell512 Empty => default;
+        [MethodImpl(Inline)]
+        public static implicit operator Cell512((Cell256 x0, Cell256 x1) x)
+            => new Cell512(x.x0,x.x1);
 
+        [MethodImpl(Inline)]
+        public static implicit operator Cell512(in Vector512<byte> x)
+            => init(x);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Cell512(in Vector512<ushort> x)
+            => init(x);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Cell512(in Vector512<uint> x)
+            => init(x);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Cell512(in Vector512<ulong> x)
+            => init(x);
+
+        public static Cell512 Empty => default;
     }
 }

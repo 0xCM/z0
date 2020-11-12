@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
 
     public readonly struct NaturalNumericClosure<T>
-        where T : unmanaged        
+        where T : unmanaged
     {
         public readonly ulong? M;
 
@@ -20,14 +20,14 @@ namespace Z0
         public readonly MethodInfo Definition;
 
         [MethodImpl(Inline)]
-        public NaturalNumericClosure(MethodInfo def, ulong? m, ulong n) 
+        public NaturalNumericClosure(MethodInfo def, ulong? m, ulong n)
         {
-            this.Definition = def;
-            this.M = m;
-            this.N = n;
+            Definition = def;
+            M = m;
+            N = n;
         }
 
-        public NaturalNumericClosure Untyped 
+        public NaturalNumericClosure Untyped
             => new NaturalNumericClosure(Definition, M, N, typeof(T).NumericKind());
     }
 }

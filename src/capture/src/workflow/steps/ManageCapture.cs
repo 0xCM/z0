@@ -52,9 +52,9 @@ namespace Z0
         public ManageCaptureStep(WfCaptureState state, WfHost host)
         {
             Host = host;
+            Wf = state.Wf.WithHost(host);
             State = state;
             App = state.Asm.ContextRoot;
-            Wf = state.Wf.WithHost(host);
             Sink = Wf.WfSink;
             Parts = Wf.Api.PartIdentities;
             Broker = state.CaptureBroker;

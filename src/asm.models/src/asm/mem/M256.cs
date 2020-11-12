@@ -18,6 +18,9 @@ namespace Z0.Asm
         public M256(Cell256 src)
             => Data = src;
 
+        Cell256 IContented<Cell256>.Content
+            => Data;
+
         [MethodImpl(Inline)]
         public static implicit operator M256(Cell256 src)
             => new M256(src);
@@ -29,8 +32,5 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public static implicit operator Cell256(M256 src)
             => src.Data;
-
-        Cell256 IContented<Cell256>.Content
-            => Data;
     }
 }
