@@ -10,7 +10,7 @@ namespace Z0
     /// <summary>
     /// Characterizes a thread of control with independent volition
     /// </summary>
-    public interface IWorkflowAgent : IDisposable
+    public interface IWfAgent : IDisposable
     {
         /// <summary>
         /// Identifies the server on which the agent is executing

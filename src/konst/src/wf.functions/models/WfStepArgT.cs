@@ -17,10 +17,6 @@ namespace Z0
         public T Value {get;}
 
         [MethodImpl(Inline)]
-        public static implicit operator WfStepArg<T>((byte index, T value) src)
-            => new WfStepArg<T>(src.index, src.value);
-
-        [MethodImpl(Inline)]
         public WfStepArg(byte index, T value)
         {
             Index = index;
@@ -30,5 +26,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public string Format()
             => text.format(RP.Slot0, Value);
+
+        [MethodImpl(Inline)]
+        public static implicit operator WfStepArg<T>((byte index, T value) src)
+            => new WfStepArg<T>(src.index, src.value);
     }
 }

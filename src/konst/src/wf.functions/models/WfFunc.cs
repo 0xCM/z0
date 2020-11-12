@@ -10,24 +10,29 @@ namespace Z0
     using static Konst;
     using static FS;
 
-    public readonly struct WfFunc<C,R> : IWfFunc<C>
-        where C : IWfStep<C>, new()
+    public readonly struct WfFunc : IWfFunc
     {
         public StringRef Name {get;}
 
-        public WfStepId StepId
-        {
-            [MethodImpl(Inline)]
-            get => Step.Id;
-        }
-
-        public static implicit operator WfFunc(WfFunc<C,R> src)
-            => new WfFunc(src.StepId, src.Name);
-        public C Step => default;
+        public WfStepId StepId {get;}
 
         [MethodImpl(Inline)]
-        public WfFunc([CallerMemberName] string name = null)
-            => Name = name;
+        public WfFunc(WfStepId step, string name)
+        {
+            StepId = step;
+            Name = name;
+        }
+
+        [MethodImpl(Inline)]
+        public WfFunc(WfStepId step, StringRef name)
+        {
+            StepId = step;
+            Name = name;
+        }
+
+        [MethodImpl(Inline)]
+        public static implicit operator WfFunc((WfStepId step, string name) src)
+            => new WfFunc(src.step, src.name);
 
         [MethodImpl(Inline)]
         public string Format()

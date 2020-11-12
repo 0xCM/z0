@@ -26,13 +26,13 @@ namespace Z0
             EventLog = sink;
         }
 
-        public void Register(IWorkflowAgent agent)
+        public void Register(IWfAgent agent)
             => Agents.TryAdd(agent.Identity, agent);
 
-        public IEnumerable<IWorkflowAgent> Members
+        public IEnumerable<IWfAgent> Members
             => Agents.Values;
 
-        ConcurrentDictionary<ulong,IWorkflowAgent> Agents {get;}
-            = new ConcurrentDictionary<ulong, IWorkflowAgent>();
+        ConcurrentDictionary<ulong,IWfAgent> Agents {get;}
+            = new ConcurrentDictionary<ulong, IWfAgent>();
     }
 }

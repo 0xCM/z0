@@ -23,6 +23,14 @@ namespace Z0
         public C Step => default;
 
         [MethodImpl(Inline)]
+        public WfFunc([CallerMemberName] string name = null)
+            => Name = name;
+
+        [MethodImpl(Inline)]
+        public string Format()
+            => text.format("{0}/{1}", StepId.Format(), Name.Format());
+
+        [MethodImpl(Inline)]
         public static implicit operator WfFunc(WfFunc<C> src)
             => new WfFunc(src.StepId, src.Name);
 
@@ -30,12 +38,5 @@ namespace Z0
         public static implicit operator WfFunc<C>(string name)
             => new WfFunc<C>(name);
 
-        [MethodImpl(Inline)]
-        public WfFunc([CallerMemberName] string name = null)
-            => Name = name;
-
-        [MethodImpl(Inline)]
-        public string Format()
-            => text.format("{0}/{1}", StepId.Format(), Name.Format());
     }
 }

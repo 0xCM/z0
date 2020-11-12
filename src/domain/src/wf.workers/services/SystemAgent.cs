@@ -10,7 +10,7 @@ namespace Z0
     /// <summary>
     /// Defines base system agent abstraction
     /// </summary>
-    public abstract class WorkflowAgent : IWorkflowAgent
+    public abstract class WorkflowAgent : IWfAgent
     {
         public IAgentContext Context {get;}
 

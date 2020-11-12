@@ -12,7 +12,7 @@ namespace Z0
     {
     }
 
-    public interface IApiAsmProcessor : IAsmDataProcessor<Mnemonic,ApiInstruction>
+    public interface IApiAsmProcessor : IWfDataProcessor<Mnemonic,ApiInstruction>
     {
         void OnAnd(ApiInstruction located)
         {

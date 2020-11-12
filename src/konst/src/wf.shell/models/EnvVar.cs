@@ -25,18 +25,22 @@ namespace Z0
         public string Value {get;}
 
         [MethodImpl(Inline)]
-        public static implicit operator EnvVar((string name, string value) src)
-            => EnvVars.define(src.name, src.value);
-
-        [MethodImpl(Inline)]
-        public static implicit operator string(EnvVar src)
-            => src.Value;
-
-        [MethodImpl(Inline)]
         public EnvVar(string name, string value)
         {
             Name = name;
             Value = value;
+        }
+
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => text.empty(Name) || text.empty(Value);
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => text.nonempty(Name) && text.nonempty(Value);
         }
 
         public EnvVar<T> Transform<T>(Func<string,T> f)
@@ -58,5 +62,19 @@ namespace Z0
 
         public override bool Equals(object src)
             => src is EnvVar v && Equals(v);
+
+        [MethodImpl(Inline)]
+        public static implicit operator EnvVar((string name, string value) src)
+            => EnvVars.define(src.name, src.value);
+
+        [MethodImpl(Inline)]
+        public static implicit operator string(EnvVar src)
+            => src.Value;
+
+        public static EnvVar Empty
+        {
+            [MethodImpl(Inline)]
+            get => new EnvVar(EmptyString, EmptyString);
+        }
     }
 }

@@ -16,10 +16,6 @@ namespace Z0
         public readonly string Value;
 
         [MethodImpl(Inline)]
-        public static implicit operator WfArg((string name, string value) src)
-            => new WfArg(src.name, src.value);
-
-        [MethodImpl(Inline)]
         public WfArg(string name, string value)
         {
             Name = name;
@@ -31,6 +27,10 @@ namespace Z0
 
         public bool IsNonEmpty
             => !IsEmpty;
+
+        [MethodImpl(Inline)]
+        public static implicit operator WfArg((string name, string value) src)
+            => new WfArg(src.name, src.value);
 
         public static WfArg Empty
             => new WfArg("", "");

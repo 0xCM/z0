@@ -6,15 +6,21 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Linq;
 
     using static Konst;
 
     public readonly struct WfArg<T>
     {
-        public readonly string Name;
+        public string Name {get;}
 
-        public readonly T Value;
+        public T Value {get;}
+
+        [MethodImpl(Inline)]
+        public WfArg(string name, T value)
+        {
+            Name = name;
+            Value = value;
+        }
 
         [MethodImpl(Inline)]
         public static implicit operator WfArg<T>((string name, T value) src)
@@ -23,13 +29,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator WfArg(WfArg<T> src)
             => new WfArg(src.Name, src.Value?.ToString() ?? "");
-
-        [MethodImpl(Inline)]
-        public WfArg(string name, T value)
-        {
-            Name = name;
-            Value = value;
-        }
 
         public static WfArg<T> Empty
             => new WfArg<T>("", default(T));

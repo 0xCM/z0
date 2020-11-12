@@ -16,7 +16,7 @@ namespace Z0
     {
         WorkflowServer[] Servers;
 
-        IWorkflowAgent EventSink;
+        IWfAgent EventSink;
 
         static Option<ServerComplex> Complex {get; set;}
 
@@ -65,7 +65,7 @@ namespace Z0
             Servers = new WorkflowServer[]{};
         }
 
-        public void Configure(IEnumerable<ServerConfig> config, IWorkflowAgent sink)
+        public void Configure(IEnumerable<ServerConfig> config, IWfAgent sink)
         {
             var configs = config.ToArray();
             Servers = new WorkflowServer[configs.Length];

@@ -12,5 +12,4 @@ namespace Z0
     [Free]
     public delegate void WfStepLauncher<H>(IWfShell wf, H host)
         where H : IWfHost<H>,new();
-
 }

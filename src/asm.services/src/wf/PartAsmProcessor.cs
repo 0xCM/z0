@@ -11,7 +11,7 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct PartAsmProcessor : IAsmDataProcessor<AsmHandlerKind,ApiPartRoutines>
+    public readonly struct PartAsmProcessor : IWfDataProcessor<AsmHandlerKind,ApiPartRoutines>
     {
         public IWfShell Wf {get;}
 

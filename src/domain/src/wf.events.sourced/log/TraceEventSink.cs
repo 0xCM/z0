@@ -15,7 +15,7 @@ namespace Z0
 
     public sealed class TraceEventSink : WorkflowAgent
     {
-        public static IWorkflowAgent Define(AgentContext Context, AgentIdentity Identity)
+        public static IWfAgent Define(AgentContext Context, AgentIdentity Identity)
             => new TraceEventSink(Context, Identity);
 
         TraceEventSink(AgentContext Context, AgentIdentity Identity)

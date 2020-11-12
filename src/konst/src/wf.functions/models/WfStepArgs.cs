@@ -15,14 +15,6 @@ namespace Z0
         readonly TableSpan<WfStepArg> Data;
 
         [MethodImpl(Inline)]
-        public static implicit operator WfStepArgs(WfStepArg[] src)
-            => new WfStepArgs(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator WfStepArg[](WfStepArgs src)
-            => src.Data.Storage;
-
-        [MethodImpl(Inline)]
         public WfStepArgs(params WfStepArg[] src)
             => Data = src;
 
@@ -37,6 +29,14 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Data.View;
         }
+
+        [MethodImpl(Inline)]
+        public static implicit operator WfStepArgs(WfStepArg[] src)
+            => new WfStepArgs(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator WfStepArg[](WfStepArgs src)
+            => src.Data.Storage;
 
         public static WfStepArgs Empty
             => new WfStepArgs(0);

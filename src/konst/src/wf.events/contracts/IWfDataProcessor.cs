@@ -4,15 +4,23 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
+    using Free =System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    public interface IAsmDataProcessor<T> : IWfDataProcessor<T>
+    [Free]
+    public interface IWfDataProcessor
     {
-        void Process(T src);
+        void Connect() {}
     }
 
-    public interface IAsmDataProcessor<E,T> : IAsmDataProcessor<T>
-        where E : unmanaged, Enum
+    [Free]
+    public interface IWfDataProcessor<S> : IWfDataProcessor
+    {
+        void Process(S src);
+    }
+
+    [Free]
+    public interface IWfDataProcessor<E,T> : IWfDataProcessor<T>
+        where E : unmanaged
     {
         IWfDataBroker<E,T> Broker {get;}
 

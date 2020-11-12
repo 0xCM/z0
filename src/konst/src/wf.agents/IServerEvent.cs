@@ -57,7 +57,7 @@ namespace Z0
     /// <summary>
     /// Characterizes an event orignator
     /// </summary>
-    public interface IEventEmitter : IWorkflowAgent
+    public interface IEventEmitter : IWfAgent
     {
 
     }

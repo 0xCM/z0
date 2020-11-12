@@ -25,7 +25,7 @@ namespace Z0
             var hearbeat = PulseEmitter.create(Context,
                 ServiceIdentityPool.NextAgentId(PartId),
                 new PulseEmitterConfig(new TimeSpan(0,0,1)));
-            this.Worker = AgentProcess.create(Context, PartId, Config.CoreNumber, new IWorkflowAgent[]{hearbeat});
+            this.Worker = AgentProcess.create(Context, PartId, Config.CoreNumber, new IWfAgent[]{hearbeat});
         }
 
         protected override async void OnStart()

@@ -69,5 +69,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public void Relay(K kind, T data)
             => Get(kind).Handle(data);
+
+        public void Process(T src)
+        {
+
+        }
     }
 }

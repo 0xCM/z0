@@ -32,7 +32,7 @@ namespace Z0
         {
             var settings = new MultiplexSettings();
             settings.DbRoot = root;
-            settings.BuildRoot = EnvVars.Common.BuildPubRoot;
+            settings.BuildRoot = FS.path(Assembly.GetEntryAssembly().Location).FolderPath;
             return settings;
         }
 
@@ -44,7 +44,7 @@ namespace Z0
             return mpx;
         }
 
-        Multiplex(IWfShell wf, MultiplexSettings settings)
+        internal Multiplex(IWfShell wf, MultiplexSettings settings)
         {
 
             Host = WfSelfHost.create(typeof(Multiplex));

@@ -17,10 +17,6 @@ namespace Z0
         public ulong Value {get;}
 
         [MethodImpl(Inline)]
-        public static implicit operator WfStepArg((byte index, ulong value) src)
-            => new WfStepArg(src.index, src.value);
-
-        [MethodImpl(Inline)]
         public WfStepArg(byte index, ulong value)
         {
             Index = index;
@@ -30,5 +26,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public string Format()
             => text.format(RP.PSx2, Index, Value);
+
+        [MethodImpl(Inline)]
+        public static implicit operator WfStepArg((byte index, ulong value) src)
+            => new WfStepArg(src.index, src.value);
     }
 }

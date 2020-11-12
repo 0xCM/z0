@@ -12,7 +12,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct HostAsmProcessor : IAsmDataProcessor<AsmHandlerKind,ApiHostRoutines>
+    public readonly struct HostAsmProcessor : IWfDataProcessor<AsmHandlerKind,ApiHostRoutines>
     {
         public IWfShell Wf {get;}
 
