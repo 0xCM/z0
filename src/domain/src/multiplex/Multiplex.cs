@@ -46,7 +46,6 @@ namespace Z0
 
         internal Multiplex(IWfShell wf, MultiplexSettings settings)
         {
-
             Host = WfSelfHost.create(typeof(Multiplex));
             Wf = wf.WithHost(Host);
             BuildArchive = BuildArchives.create(wf, settings.BuildRoot);

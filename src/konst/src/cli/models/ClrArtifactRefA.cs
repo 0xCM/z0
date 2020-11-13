@@ -46,7 +46,7 @@ namespace Z0
             => new ClrArtifactRef<A>(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator ClrArtifactRef(ClrArtifactRef<A> src)
-            => new ClrArtifactRef(src.Key, src.Kind, src.Name);
+        public static implicit operator CliArtifactRef(ClrArtifactRef<A> src)
+            => new CliArtifactRef(src.Key, src.Kind, src.Name);
     }
 }

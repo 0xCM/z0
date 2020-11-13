@@ -28,7 +28,7 @@ namespace Z0
                 var bits = BitStream.from(a);
                 var s1 = bits.Format();
                 var s2 = formatter.Format(a);
-                Claim.eq(s1,s1);
+                Claim.ClaimEq(s1,s1);
             }
         }
     }

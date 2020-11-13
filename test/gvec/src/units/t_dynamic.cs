@@ -33,7 +33,7 @@ namespace Z0
             var op = Dynop.EmbedVUnaryOpImm(vk128<uint>(), Z0.Identity.identify(src), src, imm8);
             var handle = ClrDynamic.handle(op.Target);
             var dst = ClrDynamic.method(handle);
-            Claim.eq(dst.Name, name);
+            Claim.ClaimEq(dst.Name, name);
         }
 
         public unsafe void vbsll_128x32u()

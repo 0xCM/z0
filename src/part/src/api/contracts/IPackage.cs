@@ -9,6 +9,13 @@ namespace Z0
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
+    public interface IProject<T> : IVersioned
+        where T : struct, IProject<T>
+    {
+
+    }
+
+    [Free]
     public interface IPackage<T> : IVersioned
         where T : struct, IPackage<T>
     {

@@ -76,7 +76,7 @@ namespace Z0
         public static void close<T>(Span<T> lhs, Span<T> rhs, T tolerance, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged
         {
-            for(var i = 0; i< api.length(lhs,rhs); i++)
+            for(var i = 0; i< CheckLengths.length(lhs,rhs); i++)
                 if(!gmath.within(lhs[i],rhs[i],tolerance))
                     throw AppErrors.ItemsNotEqual(i, lhs[i], rhs[i], caller, file, line);
         }

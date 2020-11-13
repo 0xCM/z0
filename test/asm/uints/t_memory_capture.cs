@@ -14,7 +14,7 @@ namespace Z0.Asm
         {
             var patterns = EncodingPatterns.Default;
             if(patterns.TryPartialMatch(EncodingPatternKind.CALL32_INTR, AsChar_Span8u_Input, out var selected))
-                Claim.eq(AsChar_Span8u_Output, selected);
+                Claim.ClaimEq(AsChar_Span8u_Output, selected);
             else
                 Claim.Fail();
         }

@@ -124,10 +124,9 @@ namespace Z0
 
                 var expect = fmath.fcmp(lDst, rDst, mode);
                 var actual = vcmpf(lhs, rhs, mode);
-                Claim.eq(expect, actual);
+                Claim.ClaimEq(expect, actual);
             }
         }
-
 
         protected void cmp_256xf32_check(FpCmpMode mode)
         {
@@ -148,7 +147,7 @@ namespace Z0
 
                 var expect = fmath.fcmp(xDst, yDst, mode);
                 var actual = cmpf(x, y, mode);
-                Claim.eq(expect, actual);
+                Claim.ClaimEq(expect, actual);
             }
         }
 
@@ -170,7 +169,7 @@ namespace Z0
 
                 var expect = fmath.fcmp(xDst, yDst, mode);
                 var actual = cmpf(x, y, mode);
-                Claim.eq(expect, actual);
+                Claim.ClaimEq(expect, actual);
             }
         }
 
@@ -179,7 +178,7 @@ namespace Z0
             => (FloatComparisonMode)m;
 
         /// <summary>
-        /// Determines whether the componenents are assigned the NaN value and
+        /// Determines whether the components are assigned the NaN value and
         /// returns the result as an array of bools
         /// </summary>
         /// <param name="src">The source vector</param>

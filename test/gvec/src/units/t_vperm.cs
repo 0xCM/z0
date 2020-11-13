@@ -49,11 +49,11 @@ namespace Z0
 
         public void perm_symbols()
         {
-            Claim.eq($"{Perm4L.ABDC}", Perm4L.ABDC.Format());
-            Claim.eq($"{Perm4L.DCBA}", Perm4L.DCBA.Format());
-            Claim.eq($"ABCDEFGH", PermLits.Perm8Identity.Format());
-            Claim.eq($"HGFEDCBA", PermLits.Perm8Reversed.Format());
-            Claim.eq($"0123456789ABCDEF", PermLits.Perm16Identity.Format());
+            Claim.ClaimEq($"{Perm4L.ABDC}", Perm4L.ABDC.Format());
+            Claim.ClaimEq($"{Perm4L.DCBA}", Perm4L.DCBA.Format());
+            Claim.ClaimEq($"ABCDEFGH", PermLits.Perm8Identity.Format());
+            Claim.ClaimEq($"HGFEDCBA", PermLits.Perm8Reversed.Format());
+            Claim.ClaimEq($"0123456789ABCDEF", PermLits.Perm16Identity.Format());
         }
 
         public void perm4_digits()
@@ -64,16 +64,16 @@ namespace Z0
             const byte D = 0b11;
 
             var dABCD = Perm4L.ABCD.ToDigits();
-            ClaimNumeric.eq(NatSpan.parts(n4, A, B, C, D), dABCD);
+            ClaimNumeric.ClaimEq(NatSpan.parts(n4, A, B, C, D), dABCD);
 
             var dDCBA = Perm4L.DCBA.ToDigits();
-            ClaimNumeric.eq(NatSpan.parts(n4, D, C, B, A), dDCBA);
+            ClaimNumeric.ClaimEq(NatSpan.parts(n4, D, C, B, A), dDCBA);
 
             var dACBD = Perm4L.ACBD.ToDigits();
-            ClaimNumeric.eq(NatSpan.parts(n4, A, C, B, D), dACBD);
+            ClaimNumeric.ClaimEq(NatSpan.parts(n4, A, C, B, D), dACBD);
 
             var dCBDA = Perm4L.CBDA.ToDigits();
-            ClaimNumeric.eq(NatSpan.parts(n4, C, B, D, A), dCBDA);
+            ClaimNumeric.ClaimEq(NatSpan.parts(n4, C, B, D, A), dCBDA);
         }
 
         public void vpermlo_4x16_outline()
@@ -120,7 +120,6 @@ namespace Z0
             Claim.veq(xACBD, Vector128.Create(xs[A], xs[B], xs[C], xs[D], xs[A + 4], xs[C + 4], xs[B + 4], xs[D + 4]));
 
             Claim.veq(z.vpermhi4x16(vparts(n128, 0,1,2,3,6,7,8,9), Perm4L.ADCB), vparts(n128,0,1,2,3,6,9,8,7));
-
         }
 
         public void vperm4x32_128x32u_outline()
@@ -329,7 +328,7 @@ namespace Z0
             Claim.Eq(p, p_assembled);
 
             var pformat_actual = p.FormatMap();
-            Claim.eq(pformat_epect, pformat_actual);
+            Claim.ClaimEq(pformat_epect, pformat_actual);
 
             var vIn = vparts(w128, 0,1,2,3);
             var vExpect = vparts(w128, 3,2,1,0);

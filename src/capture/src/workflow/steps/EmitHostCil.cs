@@ -23,6 +23,7 @@ namespace Z0
         protected override ref FS.FilePath Execute(IWfShell wf, in ApiMemberCodeBlocks src, out FS.FilePath dst)
         {
             var path = wf.Db().CapturedCilDataFile(Uri);
+            dst = FS.FilePath.Empty;
             if(src.Count != 0)
             {
                 dst = path;

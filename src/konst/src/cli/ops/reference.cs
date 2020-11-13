@@ -27,7 +27,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The defining type</param>
         [MethodImpl(Inline), Op]
-        public static CliArtfactRef reference(ClrArtifactKey src)
-            => new CliArtfactRef(src);
+        public static CliArtifactRef reference(ClrArtifactKey id, ClrArtifactKind kind, StringRef name)
+            => new CliArtifactRef(id,kind,name);
     }
 }

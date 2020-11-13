@@ -116,7 +116,7 @@ namespace Z0
                 byte b = (byte)i;
                 var x = BitStore.bitseq(b);
                 var y = BitStore.select(b);
-                ClaimNumeric.eq(x,y);
+                ClaimNumeric.ClaimEq(x,y);
 
                 var up1 = BitStore.select((byte)i);
                 Bits.unpack8x1(b, up2);

@@ -9,18 +9,17 @@ namespace Z0
 
     using static Konst;
 
+    using api = CheckLengths;
+
     public interface TCheckLengths : TValidator
     {
-        [MethodImpl(Inline)]   
         int length<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs)
-            => lhs.Length == rhs.Length ? lhs.Length : AppErrors.ThrowNotEqualNoCaller(lhs.Length, rhs.Length);
+            => api.length(lhs, rhs);
 
-        [MethodImpl(Inline)]   
         int length<T>(T[] lhs, T[] rhs)
-            => lhs.Length == rhs.Length ? lhs.Length : AppErrors.ThrowNotEqualNoCaller(lhs.Length, rhs.Length);
+             => api.length(lhs, rhs);
 
-        [MethodImpl(Inline)]   
         int length<T>(Span<T> lhs, Span<T> rhs)
-            => lhs.Length == rhs.Length ? lhs.Length : AppErrors.ThrowNotEqualNoCaller(lhs.Length, rhs.Length);
+            => api.length(lhs, rhs);
     }
 }

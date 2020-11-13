@@ -43,9 +43,7 @@ namespace Z0
 
     public readonly struct SystemHandles
     {
-        [Free]
-        [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-        [DllImport(Kernel32, SetLastError = true)]
+        [Free, DllImport(Kernel32, SetLastError = true)]
         public static extern bool CloseHandle(IntPtr hObject);
     }
 }

@@ -13,7 +13,7 @@ namespace Z0
     partial struct ClrArtifacts
     {
         [MethodImpl(Inline), Op]
-        public static string format(in ClrArtifactRef src)
+        public static string format(in CliArtifactRef src)
             => text.format(RP.PSx3, src.Kind, src.Key, src.Name);
     }
 }

@@ -9,20 +9,44 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct ArtifactTable<H,A,T> : IArtifactTable<ArtifactTable<H,A,T>,A,T>
-        where A : struct
-        where T : struct, IArtifactTable<T>
-        where H : struct
+    /// <summary>
+    /// Defines a directed association from one artifact to another
+    /// </summary>
+    public readonly struct CliDependency
     {
-        public A Artifact {get;}
+        public ClrArtifactKey Source {get;}
 
-        public T Table {get;}
+        public ClrArtifactKey Target {get;}
 
         [MethodImpl(Inline)]
-        public ArtifactTable(A artifact, T table)
+        public CliDependency(ClrArtifactKey src, ClrArtifactKey dst)
         {
-            Artifact = artifact;
-            Table = table;
+            Source = src;
+            Target = dst;
+        }
+
+        [MethodImpl(Inline)]
+        public static implicit operator CliDependency((ClrArtifactKey src, ClrArtifactKey dst) x)
+            => new CliDependency(x.src, x.dst);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Pair<ClrArtifactKey>(CliDependency r)
+            =>  z.pair(r.Source, r.Target);
+    }
+
+    public readonly struct CliDependency<S,T>
+        where S : struct
+        where T : struct
+    {
+        public S Source {get;}
+
+        public T Target {get;}
+
+        [MethodImpl(Inline)]
+        public CliDependency(S src, T dst)
+        {
+            Source = src;
+            Target = dst;
         }
     }
 }

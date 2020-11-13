@@ -10,21 +10,5 @@ namespace Z0
 
     using static Konst;
 
-    [StructLayout(LayoutKind.Sequential)]
-    public readonly struct ClrArtifactRef : IClrArtifactRef
-    {
-        public ClrArtifactKind Kind {get;}
 
-        public ClrArtifactKey Key {get;}
-
-        public StringRef Name {get;}
-
-        [MethodImpl(Inline)]
-        public ClrArtifactRef(ClrArtifactKey id, ClrArtifactKind kind, StringRef name)
-        {
-            Key = id;
-            Kind = kind;
-            Name = name;
-        }
-    }
 }

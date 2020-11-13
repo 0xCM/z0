@@ -14,7 +14,7 @@ namespace Z0
             {
                 var v1 = Random.BitVector(n8);
                 var v2 = Random.BitVector(n8);
-                var p1 = Gf256.clmul(v1,v2); 
+                var p1 = Gf256.clmul(v1,v2);
                 var p2 = Gf256.clmul((byte)v1, (byte)v2);
                 var p4 = Gf256.mul_ref(v1,v2);
 
@@ -28,9 +28,9 @@ namespace Z0
             var p2 = GfPoly16.FromExponents(8,4,3,2,0);
             var p3 = GfPoly16.FromScalar(0b100011101);
 
-            Claim.Eq(p3.Degree,(byte)8);                        
+            Claim.Eq(p3.Degree,(byte)8);
             Claim.Eq(p1.Scalar, p2.Scalar);
-            ClaimPrimalSeq.eq(p1.Format(),p2.Format());                
+            ClaimPrimalSeq.ClaimEq(p1.Format(),p2.Format());
         }
 
         public void gfmul_8()
@@ -63,12 +63,12 @@ namespace Z0
             for(var i=0; i<7; i++)
             {
                 for(var j=0; j<7; j++)
-                {                    
+                {
                     ref readonly var cell = ref src[i,j];
                     var cellFmt = BitFormatter.format(cell, config);
 
-                    dst.Append(cellFmt);                    
-                    
+                    dst.Append(cellFmt);
+
                     if(j != 6)
                         dst.Append(Chars.Pipe);
                 }
@@ -78,12 +78,12 @@ namespace Z0
         }
 
         public void gfpoly()
-        {            
-            gfpoly_check(GfPoly.Lookup<N3,byte>(), BitString.parse("1011"));            
+        {
+            gfpoly_check(GfPoly.Lookup<N3,byte>(), BitString.parse("1011"));
             gfpoly_check(GfPoly.Lookup<N8,ushort>(), BitString.parse("100011101"));
-            gfpoly_check(GfPoly.Lookup<N16,uint>(), BitString.parse("10000001111011101"));            
+            gfpoly_check(GfPoly.Lookup<N16,uint>(), BitString.parse("10000001111011101"));
             Claim.Eq((ushort)0b100011101, GfPoly.Lookup<N8,ushort>().Scalar);
-            
+
         }
 
         void gfpoly_check<N,T>(GfPoly<N,T> p, BitString match)
@@ -91,7 +91,7 @@ namespace Z0
             where T : unmanaged
         {
             var bs = BitString.scalar(p.Scalar).Truncate(p.Degree + 1);
-            Claim.eq(bs, match);  
+            Claim.eq(bs, match);
         }
     }
 }

@@ -15,18 +15,8 @@ namespace Z0
         public TableIndex Index {get;}
 
         [MethodImpl(Inline)]
-        public static implicit operator TableIndex(CliArtifactKind src)
-            => src.Index;
-
-        [MethodImpl(Inline)]
-        public static implicit operator CliArtifactKind(TableIndex src)
-            => new CliArtifactKind(src);
-
-        [MethodImpl(Inline)]
         public CliArtifactKind(TableIndex src)
-        {
-            Index = src;
-        }
+            => Index = src;
 
         [MethodImpl(Inline)]
         public string Format()
@@ -34,5 +24,13 @@ namespace Z0
 
         public override string ToString()
             => Format();
+
+        [MethodImpl(Inline)]
+        public static implicit operator TableIndex(CliArtifactKind src)
+            => src.Index;
+
+        [MethodImpl(Inline)]
+        public static implicit operator CliArtifactKind(TableIndex src)
+            => new CliArtifactKind(src);
     }
 }

@@ -42,8 +42,6 @@ namespace Z0
 
         const byte MaxVarIndex = MaxVarCount - 1;
 
-        public const string ArgSpecifier = AsciCharText.Colon;
-
         uint ArgIndex;
 
         public ToolId Id {get;}
@@ -54,7 +52,7 @@ namespace Z0
         internal DumpBin(IWfShell wf, ToolId id)
         {
             Wf = wf;
-            Id = Id;
+            Id = id;
             Args =  alloc<CmdArg<Flag,object>>(MaxVarCount);
             ArgIndex = 0;
             Description = describe();

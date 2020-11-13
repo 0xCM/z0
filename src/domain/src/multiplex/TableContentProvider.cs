@@ -13,8 +13,15 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct TableContentProvider : IContentProvider
+    public readonly struct TableContentProvider
     {
+        public static IEnumerable<DocLibEntry> entries(Assembly src)
+        {
+            var names = ResExtractor.Service(src).ResourceNames;
+            foreach(var name in names)
+                yield return new DocLibEntry(name, Path.GetExtension(name));
+        }
+
         public static TableContentProvider create(Assembly src)
             => new TableContentProvider(src);
 
@@ -28,7 +35,7 @@ namespace Z0
         {
             Source = src;
             Extractor = ResExtractor.Service(src);
-            _Entries = Provided.Array();
+            _Entries = entries(src).Array();
         }
 
         public ReadOnlySpan<DocLibEntry> Entries
@@ -37,24 +44,12 @@ namespace Z0
             get => _Entries.View;
         }
 
-        public IEnumerable<DocLibEntry> Provided
-        {
-            get
-            {
-                var names = Extractor.ResourceNames;
-                foreach(var name in names)
-                {
-                    yield return new DocLibEntry(name, Path.GetExtension(name));
-                }
-            }
-        }
-
         [Op]
         ReadOnlySpan<ImageToken> SystemImages
         {
             get
             {
-                var doc = structured(nameof(SystemImages));
+                var doc = structured("SystemImages");
                 if(doc.RowCount != 0)
                 {
                     var dst = sys.alloc<ImageToken>(doc.RowCount);

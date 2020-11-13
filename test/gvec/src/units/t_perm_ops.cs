@@ -18,7 +18,7 @@ namespace Z0
             var p = Perm.Identity(16);
             for(var i=0; i<16; i++)
                 p.Inc();
-            Claim.eq(p.Terms, Perm.Identity(16).Terms);
+            Claim.ClaimEq(p.Terms, Perm.Identity(16).Terms);
         }
 
         public void perm_dec()
@@ -27,7 +27,7 @@ namespace Z0
             for(var i=0; i<16; i++)
                 p.Dec();
 
-            Claim.eq(p.Terms, Perm.Identity(16).Terms);
+            Claim.ClaimEq(p.Terms, Perm.Identity(16).Terms);
         }
 
         public void perm_invert()
@@ -75,7 +75,7 @@ namespace Z0
             Claim.Eq(p, p_assembled);
 
             var pformat_actual = p.FormatMap();
-            Claim.eq(pformat_epect, pformat_actual);
+            Claim.ClaimEq(pformat_epect, pformat_actual);
 
         }
 

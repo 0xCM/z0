@@ -16,7 +16,7 @@ namespace Z0
         [StructLayout(DefaultLayout)]
         public struct FieldMetadata
         {
-            public ClrArtifactRef Key;
+            public CliArtifactRef Key;
 
             public ClrArtifactKey DeclaringType;
 

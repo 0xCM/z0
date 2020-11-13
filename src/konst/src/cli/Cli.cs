@@ -15,6 +15,10 @@ namespace Z0
     [ApiHost]
     public readonly struct Cli
     {
-
+        [MethodImpl(Inline)]
+        public static CliDependency<S,T> dependency<S,T>(S src, T dst)
+            where S : struct
+            where T : struct
+                => new CliDependency<S,T>(src,dst);
     }
 }

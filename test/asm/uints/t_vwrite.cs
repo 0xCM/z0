@@ -55,7 +55,7 @@ namespace Z0
             z.vsave(dst, ref first(a));
             var b = SeqMap.u32(src);
 
-            Claim.eq(a,b);
+            Claim.ClaimEq(a,b);
         }
     }
 }

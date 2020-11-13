@@ -6,27 +6,26 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
 
     using static Konst;
     using static z;
 
-    /// <summary>
-    /// Defines a reference to an artifact
-    /// </summary>
-    public readonly struct CliArtfactRef
+    [StructLayout(LayoutKind.Sequential)]
+    public readonly struct CliArtifactRef : ICliArtifact
     {
-        public readonly ClrArtifactKey Id;
+        public ClrArtifactKind Kind {get;}
+
+        public ClrArtifactKey Key {get;}
+
+        public StringRef Name {get;}
 
         [MethodImpl(Inline)]
-        public CliArtfactRef(Type t)
+        public CliArtifactRef(ClrArtifactKey id, ClrArtifactKind kind, StringRef name)
         {
-            Id = t.MetadataToken;
-        }
-
-        [MethodImpl(Inline)]
-        public CliArtfactRef(ClrArtifactKey src)
-        {
-            Id = src;
+            Key = id;
+            Kind = kind;
+            Name = name;
         }
     }
 }

@@ -94,7 +94,7 @@ namespace Z0.Asm
             var id = Z0.Identity.identify(src);
             var f = Dynop.EmbedVUnaryOpImm(K.vk128<uint>(), id, src, imm8);
             var method = ClrDynamic.method(ClrDynamic.handle(f.Target));
-            Claim.eq(method.Name, name);
+            Claim.ClaimEq(method.Name, name);
 
             var capture = AsmCheck.Capture(id, f).Require();
             AsmCheck.WriteAsm(capture,dst);
@@ -109,7 +109,7 @@ namespace Z0.Asm
             var id = Z0.Identity.identify(src);
             var f = Dynop.EmbedVUnaryOpImm(vKind, id, src, imm8);
             var method = ClrDynamic.method(ClrDynamic.handle(f.Target));
-            Claim.eq(method.Name, name);
+            Claim.ClaimEq(method.Name, name);
 
             var capture = AsmCheck.Capture(id, f).Require();
             AsmCheck.WriteAsm(capture,dst);

@@ -17,14 +17,6 @@ namespace Z0
     public readonly struct Validator
     {
         [MethodImpl(Inline), Op]
-        public static int length<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs)
-            => lhs.Length == rhs.Length ? lhs.Length : AppErrors.ThrowNotEqualNoCaller(lhs.Length, rhs.Length);
-
-        [MethodImpl(Inline), Op]
-        public static int length<T>(T[] lhs, T[] rhs)
-            => lhs.Length == rhs.Length ? lhs.Length : AppErrors.ThrowNotEqualNoCaller(lhs.Length, rhs.Length);
-
-        [MethodImpl(Inline), Op]
         public static int length<T>(Span<T> lhs, Span<T> rhs)
             => lhs.Length == rhs.Length ? lhs.Length : AppErrors.ThrowNotEqualNoCaller(lhs.Length, rhs.Length);
 
