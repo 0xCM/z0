@@ -41,7 +41,7 @@ namespace Z0
 
 
         public virtual IPolyrand Random {get;}
-            = Polyrand.WyHash64(PolySeed64.Seed00);
+            = Rng.wyhash64(PolySeed64.Seed00);
 
         public event Action<IAppMsg> Next;
 

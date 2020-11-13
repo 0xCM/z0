@@ -12,7 +12,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    using static SFxShape;
+    using static SFx;
 
     [ApiHost(ApiNames.AlgorithmDynamic, true)]
     public readonly partial struct AlgorithmDynamic

@@ -55,7 +55,7 @@ namespace Z0
         public static Fsm<T,T> create<T>(PrimalFsmSpec<T> spec, ulong seed, ulong index)
             where T : unmanaged
         {
-            var random = Polyrand.Pcg64(seed, index);
+            var random = Rng.pcg64(seed, index);
             var context = Fsm.context(random, spec.ReceiptLimit);
             return Fsm.machine(identify(spec), context, spec.StartState, spec.EndState, transition(context, spec));
         }
@@ -70,7 +70,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Fsm<T,T> create<T>(IWfShell wf, PrimalFsmSpec<T> spec, ulong seed, ulong index)
             where T : unmanaged
-                => create(wf, Polyrand.Pcg64(seed, index),spec);
+                => create(wf, Rng.pcg64(seed, index),spec);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         static string identify<T>(PrimalFsmSpec<T> spec)

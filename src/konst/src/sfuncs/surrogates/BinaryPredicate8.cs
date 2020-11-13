@@ -18,10 +18,6 @@ namespace Z0
             public OpIdentity Id {get;}
 
             [MethodImpl(Inline)]
-            public static implicit operator Func<T,T,bool>(BinaryPredicate8<T> src)
-                => src.AsFunc();
-
-            [MethodImpl(Inline)]
             internal BinaryPredicate8(Z0.BinaryPredicate8<T> f, OpIdentity id)
             {
                 F = f;
@@ -48,6 +44,10 @@ namespace Z0
             [MethodImpl(Inline)]
             public Func<T,T,bool> AsFunc()
                 => SFx.surrogate(this);
+
+            [MethodImpl(Inline)]
+            public static implicit operator Func<T,T,bool>(BinaryPredicate8<T> src)
+                => src.AsFunc();
         }
     }
 }

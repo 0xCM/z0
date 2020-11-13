@@ -11,13 +11,12 @@ namespace Z0
 
     partial class Surrogates
     {
+        /// <summary>
+        /// Defines a structured surrogate over an emitter
+        /// </summary>
         public readonly struct Func<R> : Z0.IFunc<R>
         {
             internal readonly System.Func<R> F;
-
-            [MethodImpl(Inline)]
-            public static implicit operator System.Func<R>(Func<R> src)
-                => src.F;
 
             [MethodImpl(Inline)]
             internal Func(System.Func<R> f, OpIdentity id)
@@ -36,6 +35,10 @@ namespace Z0
                 [MethodImpl(Inline)]
                 get => F;
             }
+
+            [MethodImpl(Inline)]
+            public static implicit operator System.Func<R>(Func<R> src)
+                => src.F;
         }
     }
 }

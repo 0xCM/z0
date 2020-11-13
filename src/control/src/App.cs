@@ -19,7 +19,7 @@ namespace Z0
         }
 
         static IWfShell Configure(IWfShell wf)
-            => describe(wf.WithRandom(Polyrand.@default())
+            => describe(wf.WithRandom(Rng.@default())
                  .WithHost(WfSelfHost.create(typeof(App)))
                  .WithVerbosity(LogLevel.Babble));
 

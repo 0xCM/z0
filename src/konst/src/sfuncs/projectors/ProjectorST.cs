@@ -15,9 +15,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public Projector(Func<S,T> fx)
-        {
-            Fx = fx;
-        }
+            => Fx = fx;
 
         [MethodImpl(Inline)]
         public T Invoke(S a)

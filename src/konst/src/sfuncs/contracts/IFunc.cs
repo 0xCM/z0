@@ -6,11 +6,11 @@ namespace Z0
 {
     using System;
 
-    using static SFxShape;
+    using static SFx;
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    partial struct SFxShape
+    partial struct SFx
     {
         [Free]
         public interface IOperation

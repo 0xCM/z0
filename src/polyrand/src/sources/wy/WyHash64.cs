@@ -14,7 +14,7 @@ namespace Z0
     /// </summary>
     /// <remarks>Algorithms take from https://github.com/lemire/testingRNG/blob/master/source/wyhash.h</remarks>
     public class WyHash64 : IRngBoundPointSource<ulong>
-    {        
+    {
         ulong State;
 
         [MethodImpl(Inline)]
@@ -23,7 +23,7 @@ namespace Z0
             this.State = state;
         }
 
-        public RngKind RngKind 
+        public RngKind RngKind
             => RngKind.WyHash64;
 
         public ulong Next()
@@ -38,16 +38,16 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ulong Next(ulong max)
-            => Next().Contract(max);
+            => Rng.contract(Next(), max);
 
         [MethodImpl(Inline)]
-        public ulong Next(ulong min, ulong max)        
+        public ulong Next(ulong min, ulong max)
             => min + Next(max - min);
 
         const ulong X1 = 0x60bee2bee120fc15;
-        
+
         const ulong X2 = 0xa3b195354a39b70d;
-        
-        const ulong X3 = 0x1b03738712fad5c9;        
+
+        const ulong X3 = 0x1b03738712fad5c9;
     }
 }

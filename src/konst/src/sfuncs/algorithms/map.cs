@@ -28,7 +28,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T map<T>(ValueProjector<T> f, in T x)
             where T : struct
-                => ref z.unbox<T>(f.Delegate(x));
+                => ref z.unbox<T>(f.Actor(x));
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T map<T>(ValueProjector<T,T> f, in T x)

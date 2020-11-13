@@ -57,7 +57,7 @@ namespace Z0
             where T : unmanaged
         {
             var id = atomic(ref LastSeriesId);
-            var rng = Polyrand.XOrShift1024(seed);
+            var rng = Rng.xorShift1024(seed);
             if(!States.TryAdd(id,rng))
                 throw new Exception($"Key {id} already exists");
             return new TimeSeries<T>(id, domain, Term(0, z.zero<T>()));

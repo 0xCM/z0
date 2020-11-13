@@ -100,9 +100,9 @@ namespace Z0
 
         public void polyrand()
         {
-            rng_bench(Polyrand.Pcg64(Seed).Stream(RangeI32));
-            rng_bench(Polyrand.Pcg64(Seed).Stream(RangeF32));
-            rng_bench(Polyrand.Pcg64(Seed).Stream(RangeF64));
+            rng_bench(Rng.pcg64(Seed).Stream(RangeI32));
+            rng_bench(Rng.pcg64(Seed).Stream(RangeF32));
+            rng_bench(Rng.pcg64(Seed).Stream(RangeF64));
         }
 
         public void wh()

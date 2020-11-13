@@ -30,7 +30,7 @@ namespace Z0
             var indices = Algorithmic.stream(0xFFFFul, 0xFFFFFFFFul).Where(x => x % 2 != 0).Take(Pow2.T08).ToArray();
             for(var i=0u; i< tasks.Length; i++)
             {
-                var random = Polyrand.Pcg64(0,indices[i]);
+                var random = Rng.pcg64(0,indices[i]);
                 var context = Fsm.context(random);
                 var machine = Fsm.machine($"Fsm1-{i}",context, S0,S5, spec.TransFunc);
                 tasks[i] = Fsm.run(machine);

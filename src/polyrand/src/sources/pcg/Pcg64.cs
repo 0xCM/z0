@@ -6,39 +6,36 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
+    using static z;
+
+    using api = Pcg;
 
     /// <summary>
-    /// Implemements a 64-bit PCG generator
+    /// Implements a 64-bit PCG generator
     /// </summary>
-    public class Pcg64 : IRngNav<ulong>
-    {    
-        /// <summary>
-        /// Creates a pcg 64-bit rng
-        /// </summary>
-        /// <param name="s0">The initial state</param>
-        /// <param name="index">The stream index</param>
+    public struct Pcg64 : IRngNav<ulong>
+    {
+        internal const ulong Multiplier = Pcg.DefaultMultiplier;
+
         [MethodImpl(Inline)]
-        public static Pcg64 Define(ulong s0, ulong? index = null)
-            => new Pcg64(s0,index);
-     
-        [MethodImpl(Inline)]
-        Pcg64(ulong s0, ulong? index = null)
+        internal Pcg64(ulong s0, ulong? index = null)
+            : this()
         {
-            Init(s0, index ?? PcgInternal.DefaultIndex);
+            Init(s0, index ?? Pcg.DefaultIndex);
         }
 
-        ulong State;
-        
-        ulong Index;
+        internal ulong State;
 
-        public RngKind RngKind 
+        internal ulong Index;
+
+        public RngKind RngKind
             => RngKind.Pcg64;
 
         [MethodImpl(Inline)]
         public ulong Next()
-            => Grind(Step());
+            => api.next(ref this);
 
         /// <summary>
         /// Advances the generator to the next state and returns the prior state for consumption
@@ -53,49 +50,32 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ulong Next(ulong max)
-            => Next().Contract(max);
+            => Rng.contract(Next(),max);
 
         [MethodImpl(Inline)]
-        public ulong Next(ulong min, ulong max)        
+        public ulong Next(ulong min, ulong max)
             => min + Next(max - min);
 
         [MethodImpl(Inline)]
-        public void Advance(ulong count)  
-            => State = PcgInternal.advance(State, count, Multiplier, Index);
+        public void Advance(ulong count)
+            => State = api.advance(State, count, Multiplier, Index);
 
         [MethodImpl(Inline)]
         public void Retreat(ulong count)
-            => Advance(gmath.negate(count));        
+            => Advance(gmath.negate(count));
 
         void Init(ulong s0, ulong index)
         {
             if(index % 2 == 0)
-                throw new ArgumentException($"Then index value {index} is not odd");
+                @throw(new ArgumentException($"Then index value {index} is not odd"));
 
             Index = (index << 1) | 1u;
             Step();
             State += s0;
             Step();
-
         }
 
         public override string ToString()
             => $"{State}[{Index}]";
-
-        const ulong Multiplier = PcgInternal.DefaultMultiplier;
-
-        /// <summary>
-        /// Produces a pseudorandom output predicated on a state
-        /// </summary>
-        /// <param name="state">The source state</param>
-        /// <remarks>Follows the implementation of pcg_output_rxs_m_xs_64_64</remarks>
-        [MethodImpl(Inline)]
-        static ulong Grind(ulong state)
-        {
-            var shift = (int) ((state >> 59) + 5);
-            var src = ((state >> shift) ^ state) * 12605985483714917081ul;  
-            var dst = (src >> 43) ^ src; 
-            return dst;         
-        }
     }
 }

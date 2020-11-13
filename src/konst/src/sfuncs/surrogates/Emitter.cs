@@ -21,14 +21,6 @@ namespace Z0
             readonly Z0.Emitter<T> F;
 
             [MethodImpl(Inline)]
-            public static implicit operator Func<T>(Emitter<T> src)
-                => src.AsFunc();
-
-            [MethodImpl(Inline)]
-            public static implicit operator Emitter<T>(Func<T> src)
-                => SFx.canonical(src);
-
-            [MethodImpl(Inline)]
             public Emitter(Z0.Emitter<T> f, OpIdentity id)
             {
                 F = f;
@@ -54,7 +46,14 @@ namespace Z0
             [MethodImpl(Inline)]
             public Func<T> AsFunc()
                 => SFx.surrogate(this);
-        }
 
+            [MethodImpl(Inline)]
+            public static implicit operator Func<T>(Emitter<T> src)
+                => src.AsFunc();
+
+            [MethodImpl(Inline)]
+            public static implicit operator Emitter<T>(Func<T> src)
+                => SFx.canonical(src);
+        }
     }
 }

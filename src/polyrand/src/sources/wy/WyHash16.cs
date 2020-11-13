@@ -23,34 +23,34 @@ namespace Z0
         [MethodImpl(Inline)]
         public static WyHash16 Define(ushort state, ushort? index = null)
             => new WyHash16(state,index);
-    
+
         [MethodImpl(Inline)]
-        public WyHash16(ushort state, ushort? index = null)
+        internal WyHash16(ushort state, ushort? index = null)
         {
-            this.State = state;
-            this.Index = index ?? 0xfc15;
+            State = state;
+            Index = index ?? 0xfc15;
         }
 
         ushort State;
 
         readonly ushort Index;
 
-        public RngKind RngKind 
+        public RngKind RngKind
             => RngKind.WyHash16;
 
         [MethodImpl(Inline)]
         public ushort Next()
             => Hash16(State += Index, 0x2ab);
-            
+
         public ushort Next(ushort max)
         {
             var x = Next();
             var m = (uint)x * (uint)max;
             var l = (ushort)m;
-            if (l < max) 
+            if (l < max)
             {
                 var t = mod(negate(max), max);
-                while (l < t) 
+                while (l < t)
                 {
                     x = Next();
                     m = (uint)x * (uint)max;
@@ -58,14 +58,14 @@ namespace Z0
                 }
             }
             return (ushort) (m >> 16);
-        }   
+        }
 
         [MethodImpl(Inline)]
         public ushort Next(ushort min, ushort max)
             => add(min, Next((ushort)(max - min)));
 
         [MethodImpl(Inline)]
-        ushort Hash16(uint input, uint key) 
+        ushort Hash16(uint input, uint key)
         {
             var hash = input * key;
             return (ushort) (((hash >> 16) ^ hash) & 0xFFFF);

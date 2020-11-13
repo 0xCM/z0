@@ -7,7 +7,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static SFxShape;
+    using static SFx;
+
     using S = System;
 
     partial class Surrogates

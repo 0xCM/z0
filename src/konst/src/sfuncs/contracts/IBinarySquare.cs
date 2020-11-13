@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    using static SFxShape;
+    using static SFx;
 
     public interface IBinarySquare<W,T> : IBinaryRefOp<W,T>, IBinaryRefStepOp<W,T>
         where T : unmanaged

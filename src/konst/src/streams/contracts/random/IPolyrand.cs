@@ -23,6 +23,7 @@ namespace Z0
     /// Characterizes a type that provides access to a stateful and parametric-polymorphic
     /// pseudorandom number generator
     /// </summary>
+    [Free]
     public interface IPolyrandProvider
     {
         IPolyrand Random {get;}

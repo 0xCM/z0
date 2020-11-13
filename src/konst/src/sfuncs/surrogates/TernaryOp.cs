@@ -18,14 +18,6 @@ namespace Z0
             public OpIdentity Id {get;}
 
             [MethodImpl(Inline)]
-            public static implicit operator Func<T,T,T,T>(TernaryOp<T> src)
-                => src.AsFunc();
-
-            [MethodImpl(Inline)]
-            public static implicit operator TernaryOp<T>(Func<T,T,T,T> src)
-                => SFx.canonical(src);
-
-            [MethodImpl(Inline)]
             internal TernaryOp(Z0.TernaryOp<T> f, OpIdentity id)
             {
                 F = f;
@@ -51,6 +43,14 @@ namespace Z0
             [MethodImpl(Inline)]
             public Func<T,T,T,T> AsFunc()
                 => SFx.surrogate(this);
+
+            [MethodImpl(Inline)]
+            public static implicit operator Func<T,T,T,T>(TernaryOp<T> src)
+                => src.AsFunc();
+
+            [MethodImpl(Inline)]
+            public static implicit operator TernaryOp<T>(Func<T,T,T,T> src)
+                => SFx.canonical(src);
         }
     }
 }

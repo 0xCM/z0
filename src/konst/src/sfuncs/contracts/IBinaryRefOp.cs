@@ -6,7 +6,7 @@ namespace Z0
 {
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    partial struct SFxShape
+    partial struct SFx
     {
         [Free, SFx]
         public interface IBinaryRefOp<W,T> : IFuncWT<W,T>

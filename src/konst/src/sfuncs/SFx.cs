@@ -4,15 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    [ApiHost(ApiNames.SFx)]
+    [ApiHost(ApiNames.SFx, true)]
     public readonly partial struct SFx
     {
         const NumericKind Closure = NumericKind.I8 | NumericKind.U64;
     }
-
-    public readonly partial struct SFxShape
-    {
-
-    }
-
 }

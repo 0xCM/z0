@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static SFxShape;
+    using static SFx;
 
     partial struct SFx
     {

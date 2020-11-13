@@ -41,7 +41,7 @@ namespace Z0
         {
             try
             {
-                using var wf = WfShellInit.create(args).WithRandom(Polyrand.@default());
+                using var wf = WfShellInit.create(args).WithRandom(Rng.@default());
                 var app = Apps.context(wf);
                 var asm = new AsmContext(app, wf);
                 var state = new WfCaptureState(wf, asm);

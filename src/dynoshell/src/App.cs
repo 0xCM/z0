@@ -17,7 +17,7 @@ namespace Z0
         {
             try
             {
-                using var wf = WfShellInit.create(args).WithRandom(Polyrand.@default());
+                using var wf = WfShellInit.create(args).WithRandom(Rng.@default());
                 create().Run(wf);
             }
             catch(Exception e)

@@ -6,8 +6,6 @@ namespace Z0
 {
     using System.Runtime.Intrinsics;
 
-    using static SFxShape;
-
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     partial struct SFx

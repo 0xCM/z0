@@ -3,28 +3,24 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
     using System;
     using System.Runtime.CompilerServices;
- 
+
     using static Konst;
-    
+
     public readonly struct ProjectorProxy<T> : IValueProjector<T>
         where T : struct
-    {          
+    {
         /// <summary>
         /// The proxy subject
         /// </summary>
-        internal readonly Func<object,T> Delegate;
+        readonly Func<object,T> Delegate;
 
         /// <summary>
         /// Captures a projected value
         /// </summary>
         readonly T[] Target;
-
-        [MethodImpl(Inline)]
-        public static implicit operator BoxedValueMap<T>(ProjectorProxy<T> src)
-            => src.Project;
 
         [MethodImpl(Inline)]
         public ProjectorProxy(Func<object,T> f, T[] dst)
@@ -38,7 +34,7 @@ namespace Z0
         {
             ref var dst = ref Target[0];
             dst = Delegate(src);
-            return ref dst;                        
+            return ref dst;
         }
 
         [MethodImpl(Inline)]
@@ -46,11 +42,15 @@ namespace Z0
         {
             ref var dst = ref Target[0];
             dst = Delegate(src);
-            return ref dst;                        
+            return ref dst;
         }
 
         [MethodImpl(Inline)]
         ValueType IValueProjector.Project(ValueType src)
-            => Delegate(src);    
+            => Delegate(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator BoxedValueMap<T>(ProjectorProxy<T> src)
+            => src.Project;
     }
 }

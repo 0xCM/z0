@@ -1,3 +1,7 @@
+//-----------------------------------------------------------------------------
+// Copyright   :  (c) Chris Moore, 2020
+// License     :  MIT
+//-----------------------------------------------------------------------------
 namespace Z0
 {
     using System;
@@ -12,79 +16,22 @@ namespace Z0
     /// </summary>
     public class Polyrand : IPolyrand
     {
-        public static IPolyrand @default()
-            => Polyrand.Pcg64(PolySeed64.Seed05);
-
-        public static IPolyrand @default(ulong seed)
-            => Polyrand.Pcg64(seed);
-
-        public static IWfShell install(IWfShell dst)
-            => dst.WithRandom(@default());
-
-        public static IWfShell install(IPolyrand src, IWfShell dst)
-            => dst.WithRandom(src);
-
-        /// <summary>
-        /// Creates a 64-bit Pcg RNG
-        /// </summary>
-        /// <param name="seed">The initial rng state</param>
-        /// <param name="index">The stream index, if any</param>
-        public static IPolyrand Pcg64(ulong? seed = null, ulong? index = null)
-            => Polyrand.Create(Z0.Pcg64.Define(seed ?? PolySeed64.Seed00, index));
-
-        /// <summary>
-        /// Creates a new WyHash16 generator
-        /// </summary>
-        /// <param name="seed">An optional seed; if unspecified, seed is taken from the system entropy source</param>
-        public static IPolyrand WyHash64(ulong? seed = null)
-            => Polyrand.Create(new WyHash64(seed ?? PolySeed64.Seed00));
-
-        /// <summary>
-        /// Creates a splitmix 64-bit generator
-        /// </summary>
-        /// <param name="seed">The initial state of the generator, if specified;
-        /// otherwise, the seed is obtained from an entropy source</param>
-        public static IPolyrand SplitMix(ulong? seed = null)
-            => Polyrand.Create(SplitMix64.Define(seed ?? PolySeed64.Seed00));
-
-        /// <summary>
-        /// Creates an XOrShift 1024 rng
-        /// </summary>
-        /// <param name="seed">The initial state</param>
-        public static IPolyrand XOrStarStar256(ulong[] seed = null)
-            => Polyrand.Create(XOrShift256.Define(seed ?? PolySeed256.Default));
-
-        /// <summary>
-        /// Creates an XOrShift 1024 rng
-        /// </summary>
-        /// <param name="seed">The initial state</param>
-        public static IPolyrand XOrShift1024(ulong[] seed = null)
-            => Polyrand.Create(new XOrShift1024(seed ?? PolySeed1024.Default));
-
         readonly IRngBoundPointSource<ulong> Points;
 
         public Option<IRngNav> Navigator {get;}
 
         [MethodImpl(Inline)]
-        public static IPolyrand Create(IRngBoundPointSource<ulong> src)
-            => new Polyrand(src);
-
-        [MethodImpl(Inline)]
-        public static IPolyrand Create(IRngNav<ulong> src)
-            => new Polyrand(src);
-
-        [MethodImpl(Inline)]
-        Polyrand(IRngBoundPointSource<ulong> Points)
+        internal Polyrand(IRngBoundPointSource<ulong> points)
         {
-            this.Points = Points;
-            this.Navigator = default;
+            Points = points;
+            Navigator = default;
         }
 
         [MethodImpl(Inline)]
-        Polyrand(IRngNav<ulong> Points)
+        internal Polyrand(IRngNav<ulong> points)
         {
-            this.Points = Points;
-            this.Navigator = Option.some(Points as IRngNav);
+            Points = points;
+            Navigator = Option.some(points as IRngNav);
         }
 
         public RngKind RngKind
@@ -119,7 +66,6 @@ namespace Z0
                 return generic<T>(Int64Source.Next());
             else
                 return Next_f<T>();
-
         }
 
         T Next_f<T>()
@@ -130,7 +76,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return generic<T>(Float64Source.Next());
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
         [MethodImpl(Inline)]
@@ -174,7 +120,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return generic<T>(Float64Source.Next(float64(max)));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
         [MethodImpl(Inline)]
@@ -219,7 +165,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return generic<T>(Float64Source.Next(float64(min), float64(max)));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
         [MethodImpl(Inline)]
@@ -252,7 +198,6 @@ namespace Z0
             [MethodImpl(Inline)]
             get => this;
         }
-
 
         IDomainValues<ushort> UInt16Source
         {

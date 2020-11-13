@@ -8,7 +8,7 @@ namespace Z0
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    partial struct SFxShape
+    partial struct SFx
     {
         /// <summary>
         /// Characterizes a function that produces a 128-bit vector from a 256-bit vector
@@ -21,5 +21,4 @@ namespace Z0
 
         }
     }
-
 }

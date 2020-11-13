@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static SFxShape;
+    using static SFx;
 
     partial class VServices
     {

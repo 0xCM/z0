@@ -3,10 +3,10 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
     using System;
     using System.Runtime.CompilerServices;
- 
+
     using static Konst;
 
     public readonly struct ValueProjector<S,T> : IValueProjector<S,T>
@@ -14,10 +14,6 @@ namespace Z0
         where T : struct
     {
         internal readonly ValueMap<S,T> Delegate;
-        
-        [MethodImpl(Inline)]
-        public static implicit operator ValueMap<S,T>(ValueProjector<S,T> src)
-            => src.Delegate;
 
         [MethodImpl(Inline)]
         public ValueProjector(ValueMap<S,T> f)
@@ -37,5 +33,9 @@ namespace Z0
 
         ValueType IValueProjector.Project(ValueType src)
             => map(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator ValueMap<S,T>(ValueProjector<S,T> src)
+            => src.Delegate;
     }
 }

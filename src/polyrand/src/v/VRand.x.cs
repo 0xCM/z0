@@ -9,7 +9,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.Intrinsics;
     using System.Linq;
-    
+
     using static Konst;
 
     public static class VRandX
@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="random">The random source</param>
         /// <param name="w">The width selector</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        public static Vector128<T> CpuVector<T>(this IPolyrand random, N128 w)        
+        public static Vector128<T> CpuVector<T>(this IPolyrand random, N128 w)
             where T : unmanaged
                 => random.Blocks<T>(w).LoadVector();
 
@@ -30,17 +30,17 @@ namespace Z0
         /// <param name="random">The random source</param>
         /// <param name="w">The vector width selector</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        public static Vector256<T> CpuVector<T>(this IPolyrand random, N256 w)        
+        public static Vector256<T> CpuVector<T>(this IPolyrand random, N256 w)
             where T : unmanaged
                 => random.Blocks<T>(w).LoadVector();
-                
+
         /// <summary>
         /// Produces a 128-bit cpu vector over random T-cells
         /// </summary>
         /// <param name="random">The random source</param>
         /// <param name="w">The width selector</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        public static Vector128<T> CpuVector<T>(this IPolyrand random, Vec128Kind<T> k, W128 w = default)        
+        public static Vector128<T> CpuVector<T>(this IPolyrand random, Vec128Kind<T> k, W128 w = default)
             where T : unmanaged
                 => random.Blocks<T>(w).LoadVector();
 
@@ -50,7 +50,7 @@ namespace Z0
         /// <param name="random">The random source</param>
         /// <param name="w">The vector width selector</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        public static Vector256<T> CpuVector<T>(this IPolyrand random, Vec256Kind<T> k, W256 w = default)        
+        public static Vector256<T> CpuVector<T>(this IPolyrand random, Vec256Kind<T> k, W256 w = default)
             where T : unmanaged
                 => random.Blocks<T>(w).LoadVector();
 
@@ -63,7 +63,7 @@ namespace Z0
         /// <typeparam name="T">The vector component type</typeparam>
         public static VRandom128<T> VectorEmitter<T>(this IPolyrand random, N128 w, T t = default)
             where T : unmanaged
-                => VRand.emitter(w,random,t);
+                => Rng.vemitter(w,random,t);
 
         /// <summary>
         /// Creates a 256-bit vectorized emitter predicated a random source
@@ -74,7 +74,7 @@ namespace Z0
         /// <typeparam name="T">The vector component type</typeparam>
         public static VRandom256<T> VectorEmitter<T>(this IPolyrand random, N256 w, T t = default)
             where T : unmanaged
-                => VRand.emitter(w,random,t);
+                => Rng.vemitter(w,random,t);
 
         /// <summary>
         /// Produces a stream of 128-bit cpu vectors over random T-cells
@@ -110,7 +110,7 @@ namespace Z0
         /// <param name="domain">An interval to which component values are constrained</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector128<T> CpuVector<T>(this IPolyrand random, N128 w, Interval<T> domain)        
+        public static Vector128<T> CpuVector<T>(this IPolyrand random, N128 w, Interval<T> domain)
             where T : unmanaged
                 => random.Blocks<T>(w,domain,1).LoadVector();
 
@@ -122,7 +122,7 @@ namespace Z0
         /// <param name="domain">An interval to which component values are constrained</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static IEnumerable<Vector128<T>> CpuVectors<T>(this IPolyrand random, N128 w, Interval<T> domain)        
+        public static IEnumerable<Vector128<T>> CpuVectors<T>(this IPolyrand random, N128 w, Interval<T> domain)
             where T : unmanaged
         {
             while(true)
@@ -138,7 +138,7 @@ namespace Z0
         /// <param name="filter">A domain refinement filter</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector128<T> CpuVector<T>(this IPolyrand random, N128 w, Interval<T> domain, Func<T,bool> filter)        
+        public static Vector128<T> CpuVector<T>(this IPolyrand random, N128 w, Interval<T> domain, Func<T,bool> filter)
             where T : unmanaged
                 => random.Blocks<T>(w, domain, 1, filter).LoadVector();
 
@@ -150,7 +150,7 @@ namespace Z0
         /// <param name="domain">An interval to which component values are constrained</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector256<T> CpuVector<T>(this IPolyrand random, N256 w, Interval<T> domain)        
+        public static Vector256<T> CpuVector<T>(this IPolyrand random, N256 w, Interval<T> domain)
             where T : unmanaged
                 => random.Blocks<T>(w, domain, 1).LoadVector();
 
@@ -162,7 +162,7 @@ namespace Z0
         /// <param name="domain">An interval to which component values are constrained</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static IEnumerable<Vector256<T>> CpuVectors<T>(this IPolyrand random, N256 w, Interval<T> domain)        
+        public static IEnumerable<Vector256<T>> CpuVectors<T>(this IPolyrand random, N256 w, Interval<T> domain)
             where T : unmanaged
         {
             while(true)
@@ -178,7 +178,7 @@ namespace Z0
         /// <param name="filter">A domain refinement filter</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector256<T> CpuVector<T>(this IPolyrand random, N256 w, Interval<T> domain, Func<T,bool> filter)        
+        public static Vector256<T> CpuVector<T>(this IPolyrand random, N256 w, Interval<T> domain, Func<T,bool> filter)
             where T : unmanaged
                 => random.Blocks<T>(w, domain, 1, filter).LoadVector();
 
@@ -191,7 +191,7 @@ namespace Z0
         /// <param name="filter">A domain refinement filter</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector512<T> CpuVector<T>(this IPolyrand random, N512 w, Interval<T> domain, Func<T,bool> filter)        
+        public static Vector512<T> CpuVector<T>(this IPolyrand random, N512 w, Interval<T> domain, Func<T,bool> filter)
             where T : unmanaged
                 => random.Blocks(w, domain, 1, filter).LoadVector();
 
@@ -203,7 +203,7 @@ namespace Z0
         /// <param name="domain">An interval to which vector component values are constrained</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector512<T> CpuVector<T>(this IPolyrand random, N512 w, Interval<T> domain)        
+        public static Vector512<T> CpuVector<T>(this IPolyrand random, N512 w, Interval<T> domain)
             where T : unmanaged
                 => random.CpuVector(w,domain,null);
 
@@ -215,7 +215,7 @@ namespace Z0
         /// <param name="t">The component type representative</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector128<T> CpuVector<T>(this IPolyrand random, N128 w, T t)        
+        public static Vector128<T> CpuVector<T>(this IPolyrand random, N128 w, T t)
             where T : unmanaged
                 => random.Blocks<T>(w,1).LoadVector();
 
@@ -227,7 +227,7 @@ namespace Z0
         /// <param name="t">The component type representative</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector256<T> CpuVector<T>(this IPolyrand random, N256 w, T t)        
+        public static Vector256<T> CpuVector<T>(this IPolyrand random, N256 w, T t)
             where T : unmanaged
                 => random.Blocks<T>(w,1).LoadVector();
 
@@ -238,8 +238,8 @@ namespace Z0
         /// <param name="w">The vector width selector value</param>
         /// <param name="t">The component type representative</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        public static Vector512<T> CpuVector<T>(this IPolyrand random, N512 w, T t)        
+        public static Vector512<T> CpuVector<T>(this IPolyrand random, N512 w, T t)
             where T : unmanaged
-                => random.Blocks<T>(w,1).LoadVector();                                   
+                => random.Blocks<T>(w,1).LoadVector();
     }
 }

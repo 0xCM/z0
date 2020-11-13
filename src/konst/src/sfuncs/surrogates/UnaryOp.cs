@@ -18,10 +18,6 @@ namespace Z0
             readonly Z0.UnaryOp<T> F;
 
             [MethodImpl(Inline)]
-            public static implicit operator Func<T,T>(UnaryOp<T> src)
-                => src.AsFunc();
-
-            [MethodImpl(Inline)]
             internal UnaryOp(Z0.UnaryOp<T> f, OpIdentity id)
             {
                 F = f;
@@ -47,6 +43,10 @@ namespace Z0
             [MethodImpl(Inline)]
             public Func<T,T> AsFunc()
                 => SFx.surrogate(this);
+
+            [MethodImpl(Inline)]
+            public static implicit operator Func<T,T>(UnaryOp<T> src)
+                => src.AsFunc();
         }
     }
 }

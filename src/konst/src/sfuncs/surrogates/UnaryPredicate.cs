@@ -18,10 +18,6 @@ namespace Z0
             readonly Z0.UnaryPredicate<T> F;
 
             [MethodImpl(Inline)]
-            public static implicit operator Func<T,Bit32>(UnaryPredicate<T> src)
-                => src.AsFunc();
-
-            [MethodImpl(Inline)]
             internal UnaryPredicate(Z0.UnaryPredicate<T> f, OpIdentity id)
             {
                 F = f;
@@ -48,6 +44,10 @@ namespace Z0
             [MethodImpl(Inline)]
             public Func<T,Bit32> AsFunc()
                  => SFx.surrogate(this);
+
+            [MethodImpl(Inline)]
+            public static implicit operator Func<T,Bit32>(UnaryPredicate<T> src)
+                => src.AsFunc();
         }
     }
 }
