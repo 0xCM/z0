@@ -22,16 +22,16 @@ namespace Z0
 
             void case2()
             {
-                byte x = 0b00000011;            
+                byte x = 0b00000011;
                 byte y = 0b00110000;
                 byte z = 0b1111;
                 var s = gbits.stitch(x, 1, y, 1);
-                Claim.Eq(z, s);
+                Claim.eq(z, s);
             }
-            
+
             case1();
             case2();
-            
+
         }
 
         public void split_basecases()
@@ -41,8 +41,8 @@ namespace Z0
             var y0 = 0b11111111_11100111_11111111ul;
             var y1 = 0b11111111_10101010_11111111_11111111_10101010ul;
 
-            Claim.Eq(x0,y0);
-            Claim.Eq(x1,y1); 
+            Claim.eq(x0,y0);
+            Claim.eq(x1,y1);
 
             void report()
             {
@@ -52,7 +52,7 @@ namespace Z0
                 Trace("in  hi", x1.FormatBits());
                 Trace("out hi", y1.FormatBits());
             }
-            
+
         }
     }
 }

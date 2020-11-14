@@ -35,52 +35,52 @@ namespace Z0
             var nk = NumericKind.I64;
             var x = nk.BoxedZero();
             Trace($"{x.Boxed}:{x.Kind.Format()}");
-            Claim.Eq(x.Kind, nk);
+            Claim.eq(x.Kind, nk);
 
             nk = NumericKind.U64;
             x = nk.BoxedZero();
             Trace($"{x.Boxed}:{x.Kind.Format()}");
-            Claim.Eq(x.Kind, nk);
+            Claim.eq(x.Kind, nk);
 
             nk = NumericKind.U8;
             x = nk.BoxedZero();
             Trace($"{x.Boxed}:{x.Kind.Format()}");
-            Claim.Eq(x.Kind, nk);
+            Claim.eq(x.Kind, nk);
 
             nk = NumericKind.I8;
             x = nk.BoxedZero();
             Trace($"{x.Boxed}:{x.Kind.Format()}");
-            Claim.Eq(x.Kind, nk);
+            Claim.eq(x.Kind, nk);
 
             nk = NumericKind.U16;
             x = nk.BoxedZero();
             Trace($"{x.Boxed}:{x.Kind.Format()}");
-            Claim.Eq(x.Kind, nk);
+            Claim.eq(x.Kind, nk);
 
             nk = NumericKind.I16;
             x = nk.BoxedZero();
             Trace($"{x.Boxed}:{x.Kind.Format()}");
-            Claim.Eq(x.Kind, nk);
+            Claim.eq(x.Kind, nk);
 
             nk = NumericKind.U32;
             x = nk.BoxedZero();
             Trace($"{x.Boxed}:{x.Kind.Format()}");
-            Claim.Eq(x.Kind, nk);
+            Claim.eq(x.Kind, nk);
 
             nk = NumericKind.I32;
             x = nk.BoxedZero();
             Trace($"{x.Boxed}:{x.Kind.Format()}");
-            Claim.Eq(x.Kind, nk);
+            Claim.eq(x.Kind, nk);
 
             nk = NumericKind.F32;
             x = nk.BoxedZero();
             Trace($"{x.Boxed}:{x.Kind.Format()}");
-            Claim.Eq(x.Kind, nk);
+            Claim.eq(x.Kind, nk);
 
             nk = NumericKind.F64;
             x = nk.BoxedZero();
             Trace($"{x.Boxed}:{x.Kind.Format()}");
-            Claim.Eq(x.Kind, nk);
+            Claim.eq(x.Kind, nk);
         }
     }
 }

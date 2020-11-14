@@ -91,7 +91,7 @@ namespace Z0
                 var a = (ushort)A;
                 var b = (ushort)B;
                 var z = (ushort)Z;
-                Claim.Eq(math.and(a,b),z);
+                Claim.eq(math.and(a,b),z);
             }
         }
 

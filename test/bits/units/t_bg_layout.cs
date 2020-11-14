@@ -16,15 +16,15 @@ namespace Z0
         {
             var a0 = GridCells.grid(n21,n32,0u);
             var b0 = GridCells.grid(21, 32, 32);
-            Claim.Eq(a0,b0);
+            Claim.eq(a0,b0);
 
             var a1 = GridCells.grid(n32,n64,ushort.MinValue);
             var b1 = GridCells.grid(32, 64, 16);
-            Claim.Eq(a1,b1);
+            Claim.eq(a1,b1);
 
             var a2 = GridCells.grid(n5,n15,byte.MinValue);
             var b2 = GridCells.grid(5, 15, 8);
-            Claim.Eq(a2,b2);
+            Claim.eq(a2,b2);
         }
 
         public void bg_layout_32x8x8()

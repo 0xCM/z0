@@ -40,14 +40,14 @@ namespace Z0
             var bytes = z.bytes(src);
             Claim.eq(2, bytes.Length);
 
-            Claim.Eq(srcPop, bytes.PopCount());
+            Claim.eq(srcPop, bytes.PopCount());
             var buffer64x8 = SpanBlocks.alloc<byte>(n256,2);
 
             for(var i=0; i< RepCount; i++)
             {
                 var y = BitConverter.GetBytes(Random.Next<ulong>()).ToSpan();
                 Unpack(y,buffer64x8);
-                Claim.Eq(buffer64x8.Data.PopCount(), y.PopCount());
+                Claim.eq(buffer64x8.Data.PopCount(), y.PopCount());
             }
 
             // var bits5 = Random.Span<byte>(5);

@@ -6,11 +6,11 @@ namespace Z0
 {
     using System;
     using System.Runtime.Intrinsics;
-    
+
     using static Konst;
 
     public class t_vhi : t_inx<t_vhi>
-    {   
+    {
         public void vhi_128x8u()
             => vhi_check<byte>(n128,z8);
 
@@ -70,7 +70,7 @@ namespace Z0
 
         public void vhi_256x64f()
             => vhi_check<double>(n256);
- 
+
         protected void vhi_check<T>(N128 w, T t = default)
             where T : unmanaged
         {
@@ -78,12 +78,12 @@ namespace Z0
             var f = VSvc.vhi(w,t);
             var r = Random.VectorEmitter(w,t);
             for(var rep=0; rep < RepCount; rep++)
-            {                
+            {
                 var x = r.Invoke();
                 var h = f.Invoke(x);
 
                 for(int i=0, j = count/2; j < count; i++, j++)
-                    Claim.Eq(x.Cell(j), h.Cell(i));
+                    Claim.eq(x.Cell(j), h.Cell(i));
             }
         }
 
@@ -99,6 +99,6 @@ namespace Z0
                 var z = gvec.vinsert(y,x,1);
                 Claim.veq(x,z);
             }
-        } 
+        }
     }
 }

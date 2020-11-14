@@ -80,7 +80,7 @@ namespace Z0
                 Claim.eq(bs.Length, bitcount);
 
                 for(var j=0; j<bc.BitCount; j++)
-                    Claim.Eq(bc[j], bs[j]);
+                    Claim.eq(bc[j], bs[j]);
             }
         }
 
@@ -96,7 +96,7 @@ namespace Z0
             Claim.eq(BitBlock<N,T>.NeededCells, segcount);
             var totalcap = BitBlock<N,T>.RequiredWidth;
             var segcap = bitwidth<T>();
-            Claim.eq(BitBlock<N,T>.CellWidth, segcap);
+            base.Claim.eq(BitBlock<N, T>.CellWidth, (BitVector32)segcap);
 
             var src = Random.Span<T>(RepCount);
             for(var i=0; i<RepCount; i+= segcount)
@@ -109,7 +109,7 @@ namespace Z0
 
                 var x = src[i];
                 for(byte j = 0; j < n; j++)
-                    Claim.Eq(gbits.testbit32(x,j), bc[j]);
+                    Claim.eq(gbits.testbit32(x,j), bc[j]);
             }
         }
     }

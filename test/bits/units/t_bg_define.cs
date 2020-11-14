@@ -59,7 +59,7 @@ namespace Z0
             var grid = matrix.ToBitGrid();
             for(var row = 0; row < n; row++)
             for(var col = 0; col < n; col++)
-                Claim.Eq(grid[row,col], matrix[row,col]);
+                Claim.eq(grid[row,col], matrix[row,col]);
 
             nbg_define_check(n,n,zero);
         }
@@ -72,7 +72,7 @@ namespace Z0
             var grid = matrix.ToBitGrid();
             for(var row = 0; row < n; row++)
             for(var col = 0; col < n; col++)
-                Claim.Eq(grid[row,col], matrix[row,col]);
+                Claim.eq(grid[row,col], matrix[row,col]);
 
             nbg_define_check(n,n,zero);
         }

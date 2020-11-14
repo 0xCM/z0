@@ -141,7 +141,7 @@ namespace Z0.Logix
                 var b = vb.Set(Random);
                 var result = eval(x);
                 var expect = NumericLogixHost.eval(kind,a,b);
-                Claim.Eq(expect,result);
+                Claim.eq(expect,result);
             }
         }
     }

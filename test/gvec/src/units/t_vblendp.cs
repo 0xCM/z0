@@ -325,7 +325,7 @@ namespace Z0
                 {
                     var j = perm[i];
                     var k = perm[j];
-                    Claim.Eq(ti,k);
+                    Claim.eq(ti,k);
                     tc++;
                 }
             }

@@ -26,7 +26,7 @@ namespace Z0.Asm
                 for(var i=0; i<RepCount; i++)
                 {
                     (var x, var y) = Random.NextPair<T>();
-                    Eq(f(x,y),g(x,y));
+                    eq(f(x,y),g(x,y));
                 }
             }
 

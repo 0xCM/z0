@@ -328,7 +328,7 @@ namespace Z0
             gmath.increments(first, count, ref src);
 
             for(var i=0; i < count; i++)
-                Claim.Eq(gmath.add(first, force<T>(i)), data[i]);
+                Claim.eq(gmath.add(first, force<T>(i)), data[i]);
         }
 
         public void signum_8i()
@@ -358,7 +358,7 @@ namespace Z0
                 var x = Random.Next<T>();
                 var expect = gmath.lt(x, zero) ? SignKind.Signed : SignKind.Unsigned;
                 var actual = gmath.signum(x);
-                Claim.Eq(expect,actual);
+                Claim.eq(expect,actual);
             }
         }
     }

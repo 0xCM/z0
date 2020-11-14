@@ -37,7 +37,7 @@ namespace Z0.Logix
                 v2.Set(s2);
                 var expect = rule(s1,s2);
                 var e1 = eval(expr);
-                Claim.Eq(expect,e1);
+                Claim.eq(expect,e1);
             }
         }
 
@@ -431,10 +431,10 @@ namespace Z0.Logix
                 var result3 = BitVectorLogix.Service.EvalRef(kind, BitVector.alloc(a), BitVector.alloc(b)).Scalar;
                 var result4 = VLogixOps.eval(kind, z.vbroadcast(n128,a), z.vbroadcast(n128,b)).ToScalar();
                 var result5 = VLogixOps.eval(kind, z.vbroadcast(n256,a), z.vbroadcast(n256,b)).ToScalar();
-                Claim.Eq(result1, result2);
-                Claim.Eq(result2, result3);
-                Claim.Eq(result3, result4);
-                Claim.Eq(result4, result5);
+                Claim.eq(result1, result2);
+                Claim.eq(result2, result3);
+                Claim.eq(result3, result4);
+                Claim.eq(result4, result5);
             }
         }
      }

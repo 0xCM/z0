@@ -124,7 +124,7 @@ namespace Z0.Logix
 
                 var expect = op1(op0(a,b), op0(c,d));
                 var actual = LogicEngine.eval(expr).Value;
-                Claim.Eq(expect,actual);
+                Claim.eq(expect,actual);
             }
         }
 
@@ -150,7 +150,7 @@ namespace Z0.Logix
                 var b = Random.SetNext(v1);
                 var expect = op(a, b);
                 var actual = LogicEngine.eval(expr).Value;
-                Claim.Eq(expect,actual);
+                Claim.eq(expect,actual);
             }
         }
     }

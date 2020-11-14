@@ -17,9 +17,9 @@ namespace Z0
             {
                 var x = Random.BitVector(n8);
                 var y = Random.BitVector(n8);
-                Claim.Eq(math.sub(x.Scalar,  y.Scalar), (x - y).Scalar);
-                Claim.Eq(math.sub(x.Scalar,  y.Scalar), (x + -y).Scalar);
-                Claim.Eq(math.sub(x.Scalar,  (byte)1), (--x).Scalar);
+                Claim.eq(math.sub(x.Scalar,  y.Scalar), (x - y).Scalar);
+                Claim.eq(math.sub(x.Scalar,  y.Scalar), (x + -y).Scalar);
+                Claim.eq(math.sub(x.Scalar,  (byte)1), (--x).Scalar);
             }
         }
 
@@ -29,9 +29,9 @@ namespace Z0
             {
                 var x = Random.BitVector(n16);
                 var y = Random.BitVector(n16);
-                Claim.Eq(math.sub(x.Scalar,  y.Scalar), (x - y).Scalar);
-                Claim.Eq(math.sub(x.Scalar,  y.Scalar), (x + -y).Scalar);
-                Claim.Eq(math.sub(x.Scalar,  (ushort)1), (--x).Scalar);
+                Claim.eq(math.sub(x.Scalar,  y.Scalar), (x - y).Scalar);
+                Claim.eq(math.sub(x.Scalar,  y.Scalar), (x + -y).Scalar);
+                Claim.eq(math.sub(x.Scalar,  (ushort)1), (--x).Scalar);
             }
         }
 
@@ -41,9 +41,9 @@ namespace Z0
             {
                 var x = Random.BitVector(n32);
                 var y = Random.BitVector(n32);
-                Claim.Eq(math.sub(x.Scalar,  y.Scalar), (x - y).Scalar);
-                Claim.Eq(math.sub(x.Scalar,  y.Scalar), (x + -y).Scalar);
-                Claim.Eq(math.sub(x.Scalar,  1u), (--x).Scalar);
+                Claim.eq(math.sub(x.Scalar,  y.Scalar), (x - y).Scalar);
+                Claim.eq(math.sub(x.Scalar,  y.Scalar), (x + -y).Scalar);
+                Claim.eq(math.sub(x.Scalar,  1u), (--x).Scalar);
             }
         }
 
@@ -53,9 +53,9 @@ namespace Z0
             {
                 var x = Random.BitVector(n64);
                 var y = Random.BitVector(n64);
-                Claim.Eq(math.sub(x.Scalar,  y.Scalar), (x - y).Scalar);
-                Claim.Eq(math.sub(x.Scalar,  y.Scalar), (x + -y).Scalar);
-                Claim.Eq(math.sub(x.Scalar,  1ul), (--x).Scalar);
+                Claim.eq(math.sub(x.Scalar,  y.Scalar), (x - y).Scalar);
+                Claim.eq(math.sub(x.Scalar,  y.Scalar), (x + -y).Scalar);
+                Claim.eq(math.sub(x.Scalar,  1ul), (--x).Scalar);
             }
         }
     }

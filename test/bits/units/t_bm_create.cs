@@ -36,7 +36,7 @@ namespace Z0
 
             for(var row=0; row < bm.RowCount; row++)
             for(var col=0; col < bm.ColCount; col++)
-                Claim.Eq(bm[row,col], gmath.even(row) ? Bit32.test(p0,col) : Bit32.test(p1,col));
+                Claim.eq(bm[row,col], gmath.even(row) ? Bit32.test(p0,col) : Bit32.test(p1,col));
         }
 
         public void bm_create_fromfixed_16x16x16()
@@ -59,7 +59,7 @@ namespace Z0
                 var m2 = BitMatrix.load(n, n, BitConverter.GetBytes(src.Current).ToSpan());
                 for(var i=0; i<8; i++)
                 for(var j=0; j<8; j++)
-                    Claim.Eq(m1[i,j], m2[i,j]);
+                    Claim.eq(m1[i,j], m2[i,j]);
             }
         }
 

@@ -7,8 +7,7 @@ namespace Z0
     using System;
 
     public class t_partition : t_gmath<t_partition>
-    {        
-
+    {
         public void part_points_32i()
         {
             points_check(0, 99, 1);
@@ -52,7 +51,7 @@ namespace Z0
             var src = Interval.closed(5,12);
             var dst = Partition.measured(src,1);
             var fmt = dst.Map(x => x.ToString()).Concat(", ");
-            Claim.eq(src.Length() + 1, dst.Length);            
+            Claim.eq(src.Length() + 1, dst.Length);
             ClaimNumeric.Eq(Arrays.from(5,6,7,8,9,10,11,12).ToSpan(),dst);
         }
 
@@ -62,8 +61,8 @@ namespace Z0
             var dst = Partition.width(src,1);
             var fmt = dst.Map(x => x.ToString()).Concat(" + ");
             Claim.eq(src.Right - src.Left, dst.Length);
-            Claim.Eq(Interval.closedL(5,6), dst.First());
-            Claim.Eq(Interval.closedL(19,20), dst.Last());
+            Claim.eq(Interval.closedL(5,6), dst.First());
+            Claim.eq(Interval.closedL(19,20), dst.Last());
 
         }
 
@@ -73,8 +72,8 @@ namespace Z0
             var dst = Partition.width(src,1);
             var fmt = dst.Map(x => x.ToString()).Concat(" + ");
             Claim.eq(src.Right - src.Left, dst.Length);
-            Claim.Eq(Interval.closedL(5,6), dst.First());
-            Claim.Eq(Interval.closed(19,20), dst.Last());
+            Claim.eq(Interval.closedL(5,6), dst.First());
+            Claim.eq(Interval.closed(19,20), dst.Last());
         }
 
         public void part3()
@@ -83,8 +82,8 @@ namespace Z0
             var dst = Partition.width(src,1);
             var fmt = dst.Map(x => x.ToString()).Concat(" + ");
             Claim.eq(src.Right - src.Left, dst.Length);
-            Claim.Eq(Interval.open(5,6), dst.First());
-            Claim.Eq(Interval.closedL(19,20), dst.Last());
+            Claim.eq(Interval.open(5,6), dst.First());
+            Claim.eq(Interval.closedL(19,20), dst.Last());
         }
 
 
@@ -96,12 +95,12 @@ namespace Z0
             Claim.eq(1, dst.First());
             Claim.eq(100, dst.Last());
         }
-                
+
         public void part6()
         {
             var src = Interval.closed(1,103);
             var dst = Partition.width(src,13);
-            var fmt = dst.Map(x => x.Format()).Concat(" + ");  
+            var fmt = dst.Map(x => x.Format()).Concat(" + ");
             Claim.Require(dst.Last().Closed);
         }
 
@@ -111,14 +110,14 @@ namespace Z0
             var points = Partition.measured(Interval.open(min, max), width);
             var len = gmath.sub(max,min);
             var deltaSum = NumericLiterals.zero<T>();
-            for(var i=0; i<points.Length - 1; i++)           
+            for(var i=0; i<points.Length - 1; i++)
             {
                 var left = points[i];
-                var right = points[i + 1];                
-                deltaSum = gmath.add<T>(deltaSum, gmath.sub(right,left));                
+                var right = points[i + 1];
+                deltaSum = gmath.add<T>(deltaSum, gmath.sub(right,left));
             }
 
-            Claim.Eq(len, deltaSum);                        
+            Claim.eq(len, deltaSum);
         }
     }
 }

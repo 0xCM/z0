@@ -7,12 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-
-    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
-    using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
-    using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
-
     using api = CheckSpans;
 
     public interface TCheckSpans : TValidator, TCheckGeneric
@@ -24,6 +18,5 @@ namespace Z0
         void Eq<T>(Span<T> lhs, Span<T> rhs)
             where T : unmanaged
                 => api.eq(lhs,rhs);
-
     }
 }

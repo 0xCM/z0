@@ -20,7 +20,7 @@ namespace Z0
                 for(var i=0; i<RepCount; i++)
                 {
                     var x = Random.Next<T>();
-                    Eq(f(x), g(x));
+                    eq(f(x), g(x));
                 }
             }
 
@@ -36,7 +36,7 @@ namespace Z0
                 for(var i=0; i<RepCount; i++)
                 {
                     (var x, var y) = Random.NextPair<T>();
-                    Eq(f(x,y),g(x,y));
+                    eq(f(x,y),g(x,y));
                 }
             }
 
@@ -52,7 +52,7 @@ namespace Z0
                 for(var i=0; i<RepCount; i++)
                 {
                     (var x, var y, var z) = Random.NextTriple<T>();
-                    Eq(f(x,y,z),g(x,y,z));
+                    eq(f(x,y,z),g(x,y,z));
                 }
             }
 

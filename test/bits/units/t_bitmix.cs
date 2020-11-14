@@ -72,7 +72,7 @@ namespace Z0
                 for(int j=0, k = 0; j<64; j+=2, k++)
                     z[k] = x[j];
 
-                Claim.Eq(z.Scalar, y.Scalar);
+                Claim.eq(z.Scalar, y.Scalar);
             }
 
             for(var i=0; i<RepCount; i++)
@@ -84,7 +84,7 @@ namespace Z0
                 for(int j=1, k = 0; j<64; j+=2, k++)
                     z[k] = x[j];
 
-                Claim.Eq(z.Scalar, y.Scalar);
+                Claim.eq(z.Scalar, y.Scalar);
             }
         }
 

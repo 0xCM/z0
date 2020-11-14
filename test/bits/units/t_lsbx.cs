@@ -6,14 +6,14 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     public class t_lsbx : t_bitcore<t_lsbx>
     {
         public void xlsb_outline()
         {
             //lsbx is an identity function over a domain consisting of powers of 2
             for(byte i = 0; i< 64; i++)
-                Claim.Eq(Pow2.pow(i), gbits.xlsb(Pow2.pow(i)));
+                Claim.eq(Pow2.pow(i), gbits.xlsb(Pow2.pow(i)));
         }
 
         public void lsbx_8()
@@ -26,7 +26,7 @@ namespace Z0
             => lsbx_check<uint>();
 
         public void lsbx_64()
-            => lsbx_check<ulong>(); 
+            => lsbx_check<ulong>();
 
         protected void lsbx_check<T>(T t = default)
             where T : unmanaged
@@ -37,7 +37,7 @@ namespace Z0
                 var src = Random.Next<T>();
                 var x = gbits.xlsb(src);
                 var y = gmath.and(src, gmath.negate(src));
-                Claim.Eq(x,y);
+                Claim.eq(x,y);
             }
         }
 

@@ -11,19 +11,19 @@ namespace Z0
         public void bitspan_from_bitstring_check<T>()
             where T : unmanaged
         {
-            for(var i=0; i< RepCount; i++)            
+            for(var i=0; i< RepCount; i++)
             {
                 var bs = Random.BitString(5,233);
                 var bc = BitBlocks.from<T>(bs);
                 Claim.eq(bs.Length, bc.BitCount);
                 for(var j=0; j<bs.Length; j++)
-                {                
+                {
                     if(bc[j] != bs[j])
                     {
                         Trace("bs", bs.Format());
                         Trace("bc", bc.Format());
                     }
-                    Claim.Eq(bc[j],bs[j]);
+                    Claim.eq(bc[j],bs[j]);
                 }
             }
         }

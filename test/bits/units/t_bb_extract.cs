@@ -115,27 +115,27 @@ namespace Z0
             ClaimPrimalSeq.ClaimEq(bsx, bsy);
             ClaimPrimalSeq.ClaimEq(bsx, bsz);
 
-            Claim.Eq(y0, bcx.BitSeg(0,3));
-            Claim.Eq(y1, bcx.BitSeg(4,7));
-            Claim.Eq(y2, bcx.BitSeg(8,11));
-            Claim.Eq(y3, bcx.BitSeg(12,15));
-            Claim.Eq(y4, bcx.BitSeg(16,19));
-            Claim.Eq(y5, bcx.BitSeg(20,23));
-            Claim.Eq(y6, bcx.BitSeg(24,27));
-            Claim.Eq(y7, bcx.BitSeg(28,31));
-            Claim.Eq(y8, bcx.BitSeg(32,35));
-            Claim.Eq(y9, bcx.BitSeg(36,39));
+            Claim.eq(y0, bcx.BitSeg(0,3));
+            Claim.eq(y1, bcx.BitSeg(4,7));
+            Claim.eq(y2, bcx.BitSeg(8,11));
+            Claim.eq(y3, bcx.BitSeg(12,15));
+            Claim.eq(y4, bcx.BitSeg(16,19));
+            Claim.eq(y5, bcx.BitSeg(20,23));
+            Claim.eq(y6, bcx.BitSeg(24,27));
+            Claim.eq(y7, bcx.BitSeg(28,31));
+            Claim.eq(y8, bcx.BitSeg(32,35));
+            Claim.eq(y9, bcx.BitSeg(36,39));
 
-            Claim.Eq(y0, (byte)bvz.BitSeg(0,3));
-            Claim.Eq(y1, bvz.BitSeg(4,7));
-            Claim.Eq(y2, bvz.BitSeg(8,11));
-            Claim.Eq(y3, bvz.BitSeg(12,15));
-            Claim.Eq(y4, bvz.BitSeg(16,19));
-            Claim.Eq(y5, bvz.BitSeg(20,23));
-            Claim.Eq(y6, bvz.BitSeg(24,27));
-            Claim.Eq(y7, bvz.BitSeg(28,31));
-            Claim.Eq(y8, bvz.BitSeg(32,35));
-            Claim.Eq(y9, bvz.BitSeg(36,39));
+            Claim.eq(y0, (byte)bvz.BitSeg(0,3));
+            Claim.eq(y1, bvz.BitSeg(4,7));
+            Claim.eq(y2, bvz.BitSeg(8,11));
+            Claim.eq(y3, bvz.BitSeg(12,15));
+            Claim.eq(y4, bvz.BitSeg(16,19));
+            Claim.eq(y5, bvz.BitSeg(20,23));
+            Claim.eq(y6, bvz.BitSeg(24,27));
+            Claim.eq(y7, bvz.BitSeg(28,31));
+            Claim.eq(y8, bvz.BitSeg(32,35));
+            Claim.eq(y9, bvz.BitSeg(36,39));
         }
 
         public void bb_extract_arb()
@@ -153,26 +153,26 @@ namespace Z0
             var bsz = bvz.ToBitString().Format(true);
             ClaimPrimalSeq.ClaimEq(bsx, bsz);
 
-            Claim.Eq((byte)0b10110, bvx.TakeScalarBits(0, 4));
-            Claim.Eq((byte)0b01110, bvx.TakeScalarBits(5, 9));
-            Claim.Eq((byte)0b00101, bvx.TakeScalarBits(10, 14));
-            Claim.Eq((byte)0b00111, bvx.TakeScalarBits(15, 19));
-            Claim.Eq((byte)0b11010, bvx.TakeScalarBits(20, 24));
-            Claim.Eq((byte)0b01110, bvx.TakeScalarBits(25, 29));
+            Claim.eq((byte)0b10110, bvx.TakeScalarBits(0, 4));
+            Claim.eq((byte)0b01110, bvx.TakeScalarBits(5, 9));
+            Claim.eq((byte)0b00101, bvx.TakeScalarBits(10, 14));
+            Claim.eq((byte)0b00111, bvx.TakeScalarBits(15, 19));
+            Claim.eq((byte)0b11010, bvx.TakeScalarBits(20, 24));
+            Claim.eq((byte)0b01110, bvx.TakeScalarBits(25, 29));
 
-            Claim.Eq((ushort)0b10110, bvy.TakeScalarBits(0, 4));
-            Claim.Eq((ushort)0b01110, bvy.TakeScalarBits(5, 9));
-            Claim.Eq((ushort)0b00101, bvy.TakeScalarBits(10, 14));
-            Claim.Eq((ushort)0b00111, bvy.TakeScalarBits(15, 19));
-            Claim.Eq((ushort)0b11010, bvy.TakeScalarBits(20, 24));
-            Claim.Eq((ushort)0b01110, bvy.TakeScalarBits(25, 29));
+            Claim.eq((ushort)0b10110, bvy.TakeScalarBits(0, 4));
+            Claim.eq((ushort)0b01110, bvy.TakeScalarBits(5, 9));
+            Claim.eq((ushort)0b00101, bvy.TakeScalarBits(10, 14));
+            Claim.eq((ushort)0b00111, bvy.TakeScalarBits(15, 19));
+            Claim.eq((ushort)0b11010, bvy.TakeScalarBits(20, 24));
+            Claim.eq((ushort)0b01110, bvy.TakeScalarBits(25, 29));
 
-            Claim.Eq((ulong)0b10110, bvz.TakeScalarBits(0, 4));
-            Claim.Eq((ulong)0b01110, bvz.TakeScalarBits(5, 9));
-            Claim.Eq((ulong)0b00101, bvz.TakeScalarBits(10, 14));
-            Claim.Eq((ulong)0b00111, bvz.TakeScalarBits(15, 19));
-            Claim.Eq((ulong)0b11010, bvz.TakeScalarBits(20, 24));
-            Claim.Eq((ulong)0b01110, bvz.TakeScalarBits(25, 29));
+            Claim.eq((ulong)0b10110, bvz.TakeScalarBits(0, 4));
+            Claim.eq((ulong)0b01110, bvz.TakeScalarBits(5, 9));
+            Claim.eq((ulong)0b00101, bvz.TakeScalarBits(10, 14));
+            Claim.eq((ulong)0b00111, bvz.TakeScalarBits(15, 19));
+            Claim.eq((ulong)0b11010, bvz.TakeScalarBits(20, 24));
+            Claim.eq((ulong)0b01110, bvz.TakeScalarBits(25, 29));
         }
     }
 }

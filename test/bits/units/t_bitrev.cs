@@ -13,7 +13,7 @@ namespace Z0
 
         public void bitrev_16()
             => bitrev_check<ushort>();
-        
+
         public void bitrev_32()
             => bitrev_check<uint>();
 
@@ -23,13 +23,13 @@ namespace Z0
          protected void bitrev_check<T>(T t = default)
             where T : unmanaged
         {
-            for(var i=0; i<RepCount; i++)            
+            for(var i=0; i<RepCount; i++)
             {
                 var src = Random.Next<T>();
                 var r1 = gbits.reverse(src);
                 var r2 = BitString.scalar(src).Reverse().TakeScalar<T>();
-                Claim.Eq(r1,r2);
+                Claim.eq(r1,r2);
             }
-        }       
+        }
     }
 }

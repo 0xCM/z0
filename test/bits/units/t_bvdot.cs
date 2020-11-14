@@ -226,7 +226,7 @@ namespace Z0
                 var x64 = x32.Extend(n64);
                 var y64 = y32.Extend(n64);
                 var dot64 = BitVector.dot(x64,y64);
-                Claim.Eq(dot32,dot64);
+                Claim.eq(dot32,dot64);
             }
         }
 
@@ -244,7 +244,7 @@ namespace Z0
                 var xc = x.ToBitBlock();
                 var yc = y.ToBitBlock();
                 var b = xc % yc;
-                ClaimNumeric.Eq(a,b);
+                ClaimNumeric.eq(a,b);
             }
         }
 
@@ -270,7 +270,7 @@ namespace Z0
                     var y = Random.BitVector<N,T>();
                     Bit32 a = x % y;
                     var b = BitVector.modprod(x,y);
-                    Claim.Eq(a,b);
+                    Claim.eq(a,b);
                 }
             }
 

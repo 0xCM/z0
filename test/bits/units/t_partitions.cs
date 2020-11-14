@@ -36,7 +36,7 @@ namespace Z0
 
             BitParts.part24x3(src, ref dst.Head);
             for(var i=0; i<n; i++)
-                Claim.Eq(dst[i],(byte)7);
+                Claim.eq(dst[i],(byte)7);
         }
 
         public void bitpart_27x3()
@@ -57,9 +57,9 @@ namespace Z0
 
             for(var i=0; i<n; i+= 3)
             {
-                Claim.Eq(expect[i],actual[i]);
-                Claim.Eq(expect[i+1],actual[i+1]);
-                Claim.Eq(expect[i+2],actual[i+2]);
+                Claim.eq(expect[i],actual[i]);
+                Claim.eq(expect[i+1],actual[i+1]);
+                Claim.eq(expect[i+2],actual[i+2]);
             }
 
         }
@@ -74,7 +74,7 @@ namespace Z0
 
             BitParts.part30x3(src, ref dst.Head);
             for(var i=0; i<n; i++)
-                Claim.Eq(dst[i],(byte)7);
+                Claim.eq(dst[i],(byte)7);
         }
 
         public void bitpart_63x3()
@@ -87,7 +87,7 @@ namespace Z0
             var dst = NatSpan.alloc(n,t);
             BitParts.part63x3(src, ref dst.Head);
             for(var i=0; i<n; i++)
-                Claim.Eq(dst[i],(byte)7);
+                Claim.eq(dst[i],(byte)7);
         }
     }
 }

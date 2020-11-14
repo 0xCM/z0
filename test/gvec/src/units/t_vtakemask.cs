@@ -61,7 +61,7 @@ namespace Z0
                     var a = f.Invoke(x);
                     var y = v8u(x);
                     for(byte j=0; j<count; j++)
-                        Claim.Eq(gbits.testbit32(vcell(y,j), 7), gbits.testbit32(a,(byte)j));
+                        Claim.eq(gbits.testbit32(vcell(y,j), 7), gbits.testbit32(a,(byte)j));
                 }
             }
 
@@ -83,7 +83,7 @@ namespace Z0
                     var a = f.Invoke(x);
                     var y = v8u(x);
                     for(byte j=0; j<count; j++)
-                        Claim.Eq(gbits.testbit32(vcell(y,j), 7), gbits.testbit32(a,(byte)j));
+                        Claim.eq(gbits.testbit32(vcell(y,j), 7), gbits.testbit32(a,(byte)j));
                 }
             }
 

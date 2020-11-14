@@ -22,7 +22,7 @@ namespace Z0
                 var bcbytes = bc.Bytes;
                 for(var j=0; j< bcbytes.Length; j++)
                     expect += Bits.pop(bcbytes[j]);
-                Claim.Eq(expect, bcpop);                
+                Claim.eq(expect, bcpop);
             }
 
         }
@@ -97,7 +97,7 @@ namespace Z0
             => bitblock_pop_check<N8192,ulong>();
 
         public void nbb_pop_16384x64()
-            => bitblock_pop_check<N16384,ulong>();        
+            => bitblock_pop_check<N16384,ulong>();
 
     }
 }

@@ -30,7 +30,7 @@ namespace Z0
                     var y = Random.BitVector<T>();
                     var result = f.Invoke(x,y);
                     var expect = f.Invoke(x.Scalar,y.Scalar);
-                    Claim.Eq(expect,result.Scalar);
+                    Claim.eq(expect,result.Scalar);
                 }
 
             }

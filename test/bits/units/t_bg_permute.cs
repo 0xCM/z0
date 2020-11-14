@@ -46,7 +46,7 @@ namespace Z0
             //[o1, o0, o3, o2, o5, o4, o7, o6]
             var digits = spec.ToDigits();
             for(var i =0; i<8; i++)
-                Claim.Eq((uint)symbols[i], (uint)digits[i]);
+                Claim.eq((uint)symbols[i], (uint)digits[i]);
 
         }
 

@@ -41,7 +41,7 @@ namespace Z0
                 Perm4L q = (Perm4L)(p0 | p1 << 2 | p2 << 4 | p3 << 6);
 
                 // Same?
-                Claim.Eq(p,q);
+                Claim.eq(p,q);
 
                 // Permute vector via api
                 var v2 = z.vperm4x32(v1,p);

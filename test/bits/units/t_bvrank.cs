@@ -35,7 +35,7 @@ namespace Z0
                 var expect = 0u;
                 for(var j=0; j<= pos; j++)
                     expect += (x[j] ? 1u : 0u);
-                Claim.Eq(expect, actual);
+                Claim.eq(expect, actual);
             }
         }
 
@@ -50,7 +50,7 @@ namespace Z0
                 var expect = 0u;
                 for(var j=0; j<= pos; j++)
                     expect += (x[j] ? 1u : 0u);
-                Claim.Eq(expect, actual);
+                Claim.eq(expect, actual);
             }
         }
 
@@ -66,7 +66,7 @@ namespace Z0
                 var expect = 0u;
                 for(var j=0; j<= pos; j++)
                     expect += (x[j] ? 1u : 0u);
-                Claim.Eq(expect, actual);
+                Claim.eq(expect, actual);
             }
         }
 
@@ -80,7 +80,7 @@ namespace Z0
             var expect = 0u;
             for(var i=0; i<= pos; i++)
                 expect += (x[i] ? 1u : 0u);
-            Claim.Eq(expect, actual);
+            Claim.eq(expect, actual);
         }
     }
 }

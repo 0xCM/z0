@@ -167,7 +167,7 @@ namespace Z0
                 if(fp)
                     Numeric.close(x,y);
                 else
-                    Numeric.Eq(x,y);
+                    Numeric.eq(x,y);
             }
         }
 
@@ -196,7 +196,7 @@ namespace Z0
                 if(fp)
                     Numeric.close(x,y);
                 else
-                    Numeric.Eq(x,y);
+                    Numeric.eq(x,y);
             }
         }
 

@@ -75,7 +75,7 @@ namespace Z0
             var b = Mod.Define(21, n);
             var c = Mod.Define(0, n);
             var d = a + b;
-            Claim.Eq(c,d);
+            Claim.eq(c,d);
         }
 
         public void mod_create_imp()
@@ -83,10 +83,10 @@ namespace Z0
             var n = new N15();
 
             Mod<N15> x = 5;
-            Claim.Eq(Mod.Define(5,n),x);
+            Claim.eq(Mod.Define(5,n),x);
 
             var a0 = x + 2;
-            Claim.Eq(Mod.Define(7,n),a0);
+            Claim.eq(Mod.Define(7,n),a0);
         }
 
         public void mod_sub()
@@ -96,10 +96,10 @@ namespace Z0
             Mod<N15> a = 5;
 
             var b14a = a + 9;
-            Claim.Eq(Mod.Define(14,n), b14a);
+            Claim.eq(Mod.Define(14,n), b14a);
 
             var b14b = a - 6;
-            Claim.Eq(Mod.Define(14,n), b14a);
+            Claim.eq(Mod.Define(14,n), b14a);
         }
 
         protected void mod_add_check<N>(int samples, N n = default)
@@ -118,10 +118,10 @@ namespace Z0
                 var y = rhs[i];
 
                 var xN = n0 + x;
-                Claim.Eq(Mod.Define(x,n), xN);
+                Claim.eq(Mod.Define(x,n), xN);
 
                 var yN = n0 + y;
-                Claim.Eq(Mod.Define(y,n), yN);
+                Claim.eq(Mod.Define(y,n), yN);
 
                 var zN = xN + yN;
                 var z = (uint)(((ulong)x + (ulong)y) % (ulong)nVal);
@@ -188,7 +188,7 @@ namespace Z0
             do --m;
             while(--i >= 0);
 
-            Claim.Eq(m, last);
+            Claim.eq(m, last);
 
             var x = max;
             var y = Mod.Define(max,n);
@@ -214,11 +214,11 @@ namespace Z0
 
             x++; x++; x++;
             y += 3u;
-            Claim.Eq(x,y);
+            Claim.eq(x,y);
 
             x++; x++; x++; x++; x++; x++; x++; x++; x++; x++;
             y += 10u;
-            Claim.Eq(x,y);
+            Claim.eq(x,y);
 
 
             var a = Mod.Define(max,n);
@@ -227,7 +227,7 @@ namespace Z0
             for(var k = 1; k<max*3; k++)
             {
                 ++a;
-                Claim.Eq(a, b += 1u);
+                Claim.eq(a, b += 1u);
             }
 
             TypeCaseEnd<N>();

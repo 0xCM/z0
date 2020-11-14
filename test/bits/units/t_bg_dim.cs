@@ -7,11 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Linq;
-    
+
     using static Konst;
-    
+
     public class t_bg_dim : t_bitgrids<t_bg_dim>
-    {        
+    {
         public void nbg_describe_dim()
         {
             var g1 = BitGrid.dimension<N128,N4,N32,uint>();
@@ -43,17 +43,17 @@ namespace Z0
             var d256b = BitGrid.dimensions(n256).OrderBy(x =>x.Left).ThenBy(x => x.Right).ToArray();
             for(var i=0; i< Claim.length(d256a,d256b); i++)
             {
-                Claim.Eq(d256a[i], d256b[i]);
-                Claim.Eq(d256a[i], d256b[i]);
+                Claim.eq(d256a[i], d256b[i]);
+                Claim.eq(d256a[i], d256b[i]);
             }
-            
+
             var d128a = BitGrid.p2dimensions(Pow2.T07).OrderBy(x =>x.Left).ThenBy(x => x.Right).ToArray();
             var d128b = BitGrid.dimensions(n128).OrderBy(x =>x.Left).ThenBy(x => x.Right).ToArray();
             for(var i=0; i< Claim.length(d128a,d128b); i++)
             {
-                Claim.Eq(d128a[i].Left, d128b[i].Left);
-                Claim.Eq(d128a[i].Right, d128b[i].Right);
-            }            
+                Claim.eq(d128a[i].Left, d128b[i].Left);
+                Claim.eq(d128a[i].Right, d128b[i].Right);
+            }
         }
     }
 }

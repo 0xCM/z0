@@ -60,7 +60,7 @@ namespace Z0
                 var blended = gvec.vblendbits(x,y,mask);
 
                 for(byte i = 0; i<count; i++)
-                    Claim.Eq(vcell(blended,i),gmath.blend(vcell(x,i),vcell(y,i), vcell(mask,i)));
+                    Claim.eq(vcell(blended,i),gmath.blend(vcell(x,i),vcell(y,i), vcell(mask,i)));
 
                 vcheckmask(x,y,mask,blended);
             }
@@ -78,7 +78,7 @@ namespace Z0
             for(var i=0; i<lbs.Length; i++)
             {
                 var a = bsm[i] ? rbs[i] : lbs[i];
-                Claim.Eq(a, bsr[i]);
+                Claim.eq(a, bsr[i]);
             }
         }
 
@@ -94,7 +94,7 @@ namespace Z0
                 var r = gvec.vblendbits(x,y,m);
 
                 for(byte i = 0; i<count; i++)
-                    Claim.Eq(vcell(r,i),gmath.blend(vcell(x,i),vcell(y,i), vcell(m,i)));
+                    Claim.eq(vcell(r,i),gmath.blend(vcell(x,i),vcell(y,i), vcell(m,i)));
             }
         }
     }

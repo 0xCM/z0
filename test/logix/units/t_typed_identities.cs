@@ -47,7 +47,7 @@ namespace Z0.Logix
                 var x = Random.Next<T>();
                 var y = Random.Next<T>();
                 identity.SetVars(x,y);
-                Claim.Eq(TL.@true<T>(), LogicEngine.eval(identity));
+                Claim.eq(TL.@true<T>(), LogicEngine.eval(identity));
                 Claim.Require(LogicEngine.satisfied(identity, x, y));
 
             }

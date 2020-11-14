@@ -90,7 +90,7 @@ namespace Z0.Logix
                 a.Set(s0);
                 b.Set(s1);
                 var actual = eval(expr6);
-                Claim.Eq(expect,actual);
+                Claim.eq(expect,actual);
             }
         }
 
@@ -112,7 +112,7 @@ namespace Z0.Logix
 
                 var actual = eval(expr);
                 var expect = (s1 & s2) | (s2 & s3);
-                Claim.Eq(expect,actual);
+                Claim.eq(expect,actual);
             }
         }
 
@@ -130,7 +130,7 @@ namespace Z0.Logix
                 v2.Set(s2);
                 var actual = eval(expr);
                 var expect = s1 & ~s2;
-                Claim.Eq(expect,actual);
+                Claim.eq(expect,actual);
             }
         }
 
@@ -174,8 +174,8 @@ namespace Z0.Logix
                 var y = BitVector.create(n8,bs);
                 for(var i=0; i<bs.Length; i++)
                 {
-                    Claim.Eq(bs[i],x[i]);
-                    Claim.Eq(bs[i],y[i]);
+                    Claim.eq(bs[i],x[i]);
+                    Claim.eq(bs[i],y[i]);
                 }
             }
         }

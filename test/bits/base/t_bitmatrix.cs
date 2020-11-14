@@ -81,7 +81,7 @@ namespace Z0
                 {
                     var x = vector[col];
                     var y = src[row,col];
-                    ClaimNumeric.Eq(vector[col], src[row,col]);
+                    ClaimNumeric.eq(vector[col], src[row,col]);
                 }
             }
         }
@@ -97,7 +97,7 @@ namespace Z0
                 var B = A.Transpose();
                 for(var i=0; i<B.RowCount; i++)
                 for(var j=0; j<B.ColCount; j++)
-                    ClaimNumeric.Eq(B[i,j], A[j,i]);
+                    ClaimNumeric.eq(B[i,j], A[j,i]);
             }
         }
 

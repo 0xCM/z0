@@ -100,9 +100,9 @@ namespace Z0
             var x01 = bs01.TakeScalar<T>();
             var y = gmath.sra(x10, 1);
             if(signed)
-                Claim.Eq(x11, y);
+                Claim.eq(x11, y);
             else
-                Claim.Eq(x01, y);
+                Claim.eq(x01, y);
         }
     }
 }

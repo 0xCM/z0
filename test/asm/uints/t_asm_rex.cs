@@ -12,20 +12,20 @@ namespace Z0.Asm
         void rex_field_reader()
         {
             var rw48 = RexPrefixBits.Define(b:0, x:0, r:0, w:1, RexPrefixCode.Rex43);
-            Claim.Eq(rw48.B, 0);
-            Claim.Eq(rw48.X, 0);
-            Claim.Eq(rw48.R, 0);
-            Claim.Eq(rw48.W, 1);
-            Claim.Eq(rw48.Code, RexPrefixCode.Rex43);
-            Claim.Eq((byte)0x48,rw48.Scalar);
+            Claim.eq(rw48.B, 0);
+            Claim.eq(rw48.X, 0);
+            Claim.eq(rw48.R, 0);
+            Claim.eq(rw48.W, 1);
+            Claim.eq(rw48.Code, RexPrefixCode.Rex43);
+            Claim.eq((byte)0x48,rw48.Scalar);
 
             var rw49 = RexPrefixBits.Define(b:1, x:0, r:0, w:1, RexPrefixCode.Rex43);
-            Claim.Eq(rw49.B, 1);
-            Claim.Eq(rw49.X, 0);
-            Claim.Eq(rw49.R, 0);
-            Claim.Eq(rw49.W, 1);
-            Claim.Eq(rw49.Code, RexPrefixCode.Rex43);
-            Claim.Eq((byte)0x49,rw49.Scalar);
+            Claim.eq(rw49.B, 1);
+            Claim.eq(rw49.X, 0);
+            Claim.eq(rw49.R, 0);
+            Claim.eq(rw49.W, 1);
+            Claim.eq(rw49.Code, RexPrefixCode.Rex43);
+            Claim.eq((byte)0x49,rw49.Scalar);
         }
 
         public void rex_field_writer()

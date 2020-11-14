@@ -22,7 +22,7 @@ namespace Z0
             Claim.eq(16, r.DataSize);
             Claim.eq(4, r.CellCount);
             for(var i=0; i<src.Length; i++)
-                Claim.eq(r[i],src[i]);
+                base.Claim.eq(r[i], (BitVector32)src[i]);
         }
 
 
@@ -56,7 +56,7 @@ namespace Z0
             {
                 ref readonly var a = ref skip(dstA,i);
                 ref readonly var b = ref skip(dstB,i);
-                Claim.Eq(a,b);
+                Claim.eq(a,b);
             }
         }
 

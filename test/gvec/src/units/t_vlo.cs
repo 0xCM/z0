@@ -6,12 +6,12 @@ namespace Z0
 {
     using System;
     using System.Runtime.Intrinsics;
-    
+
     using static Konst;
     using static z;
 
     public class t_vlo : t_inx<t_vlo>
-    {   
+    {
         public void vlo_128x8u()
             => vlo_check<byte>(n128,z8);
 
@@ -71,7 +71,7 @@ namespace Z0
 
         public void vlo_256x64f()
             => vlo_check<double>(n256);
- 
+
         protected void vlo_check<T>(N128 w, T t = default)
             where T : unmanaged
         {
@@ -79,12 +79,12 @@ namespace Z0
             var f = VSvc.vlo(w,t);
             var r = Random.VectorEmitter(w,t);
             for(var rep=0; rep < RepCount; rep++)
-            {                
+            {
                 var x = r.Invoke();
                 var h = f.Invoke(x);
 
                 for(int i=0; i < count/2; i++)
-                    Claim.Eq(x.Cell(i), h.Cell(i));
+                    Claim.eq(x.Cell(i), h.Cell(i));
             }
         }
 
@@ -100,6 +100,6 @@ namespace Z0
                 var z = gvec.vinsert(y,x,(byte)0);
                 Claim.veq(x,z);
             }
-        } 
+        }
     }
 }

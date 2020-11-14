@@ -72,7 +72,7 @@ namespace Z0
             Claim.eq(pbs_expect, pbs_actual);
 
             var p_assembled = PermSymbolic.assemble(Perm4L.D, Perm4L.C, Perm4L.B, Perm4L.A);
-            Claim.Eq(p, p_assembled);
+            Claim.eq(p, p_assembled);
 
             var pformat_actual = p.FormatMap();
             Claim.ClaimEq(pformat_epect, pformat_actual);

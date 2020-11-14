@@ -30,7 +30,7 @@ namespace Z0
                 var y = Random.Next<T>();
                 var z1 = gmath.cnonimpl(x, y);
                 var z2 = gmath.and(x,gmath.not(y));
-                Claim.Eq(z1,z2);
+                Claim.eq(z1,z2);
             }
         }
     }

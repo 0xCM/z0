@@ -10,10 +10,10 @@ namespace Z0
     {
         public void ntz_outline()
         {
-            Claim.Eq((byte)3, gbits.ntz((byte)0b111000));
-            Claim.Eq(2u, gbits.ntz(0b0001011000100u));
-            Claim.Eq(5u, gbits.ntz(0b000101100000u));
-            Claim.Eq(3ul, gbits.ntz(Pow2.pow(3)));
+            Claim.eq((byte)3, gbits.ntz((byte)0b111000));
+            Claim.eq(2u, gbits.ntz(0b0001011000100u));
+            Claim.eq(5u, gbits.ntz(0b000101100000u));
+            Claim.eq(3ul, gbits.ntz(Pow2.pow(3)));
         }
 
         public void ntz_8()
@@ -44,7 +44,7 @@ namespace Z0
                     Trace("bitstring", y.Format());
                 }
 
-                Claim.Eq(ntzX, ntzY);
+                Claim.eq(ntzX, ntzY);
             }
         }
 

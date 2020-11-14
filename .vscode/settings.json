@@ -518,6 +518,7 @@
         "nowarn",
         "nowarnings",
         "nowin",
+        "numeq",
         "opcount",
         "opid",
         "opmask",

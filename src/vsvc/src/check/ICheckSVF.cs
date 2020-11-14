@@ -76,7 +76,7 @@ namespace Z0
                     (var x, var y) = src(i);
                     var z = f.Invoke(x,y);
                     for(byte j=0; j<cells; j++)
-                        Eq(f.Invoke(vcell(x,j),vcell(y,j)), vcell(z,j));
+                        eq(f.Invoke(vcell(x,j),vcell(y,j)), vcell(z,j));
                 }
             }
             catch(Exception e)
@@ -107,7 +107,7 @@ namespace Z0
                     (var x, var y) = src(i);
                     var z = f.Invoke(x,y);
                     for(byte j=0; j< cells; j++)
-                        Eq(f.Invoke(vcell(x,j),vcell(y,j)), vcell(z,j));
+                        eq(f.Invoke(vcell(x,j),vcell(y,j)), vcell(z,j));
                 }
             }
             catch(Exception e)

@@ -53,7 +53,7 @@ namespace Z0
                     var b = rhs[i];
                     var x = Cells.cell(f(a.Content, b.Content));
                     var y = g(a,b);
-                    Claim.Eq(x,y);
+                    Claim.eq(x,y);
                 }
             }
 

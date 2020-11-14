@@ -79,7 +79,7 @@ namespace Z0
                 {
                     var expect = bs[i] ? one<T>() : zero<T>();
                     var actual = dst[i];
-                    Claim.Eq(expect,actual);
+                    Claim.eq(expect,actual);
                 }
             }
 

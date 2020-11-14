@@ -36,15 +36,14 @@ namespace Z0
             {
                 var x = Random.Next<T>();
                 var y = BitString.scalar(x);
-                Claim.Eq(x, y.TakeScalar<T>());
+                Claim.eq(x, y.TakeScalar<T>());
 
                 x = gbits.rotl(x, (byte)offset);
                 y = y.RotL(offset);
 
                 var z = y.TakeScalar<T>();
-                Claim.Eq(x,z);
+                Claim.eq(x,z);
             }
         }
-
     }
 }

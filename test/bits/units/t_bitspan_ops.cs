@@ -36,7 +36,7 @@ namespace Z0
             var x0 = 0b_01011000_00001000_11111010_01100101u;
             var x1 = x0.ToBitSpan();
             var x2 = x1.Extract<uint>();
-            Claim.Eq(x0,x2);
+            Claim.eq(x0,x2);
 
             var x = 0b10100001100101010001u;
             var bsSrc = "0000010100001100101010001";
@@ -48,7 +48,7 @@ namespace Z0
             Claim.eq(bs1.Trim(),bs2.Trim());
 
             var y = bs1.Convert<uint>();
-            Claim.Eq(x,y);
+            Claim.eq(x,y);
         }
 
         public void bsand_8()
@@ -179,7 +179,7 @@ namespace Z0
                 var a = x.Extract(t);
                 var b = y.Extract(t);
                 var c = gmath.and(a, b);
-                Claim.Eq(c, z.Extract(t));
+                Claim.eq(c, z.Extract(t));
             }
         }
 
@@ -196,7 +196,7 @@ namespace Z0
                 var a = x.Extract(t);
                 var b = y.Extract(t);
                 var c = gmath.or(a, b);
-                Claim.Eq(c, z.Extract(t));
+                Claim.eq(c, z.Extract(t));
             }
         }
 
@@ -213,7 +213,7 @@ namespace Z0
                 var a = x.Extract(t);
                 var b = y.Extract(t);
                 var c = gmath.xor(a, b);
-                Claim.Eq(c, z.Extract(t));
+                Claim.eq(c, z.Extract(t));
             }
         }
 
@@ -283,7 +283,7 @@ namespace Z0
                     var x = Random.One<T>();
                     var y = BitSpans.from(x);
                     var z = BitSpans.extract<T>(y);
-                    Claim.Eq(x,z);
+                    Claim.eq(x,z);
                 }
             }
 
@@ -302,7 +302,7 @@ namespace Z0
                     var x2 = x1.Format();
                     var x3 = BitSpans.parse(x2);
                     var x4 = x3.Convert<T>();
-                    Claim.Eq(x0,x4);
+                    Claim.eq(x0,x4);
                 }
             }
 
@@ -314,7 +314,7 @@ namespace Z0
             var bitcount = bitspan.Length;
             for(int i=0, k = 0; i < packed.Length; i++, k += 8)
             for(var j=0; j < 8; j++)
-                Claim.Eq(Bit32.test(packed[i], j), bitspan[k + j]);
+                Claim.eq(Bit32.test(packed[i], j), bitspan[k + j]);
         }
     }
 }

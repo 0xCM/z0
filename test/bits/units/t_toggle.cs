@@ -55,9 +55,9 @@ namespace Z0
                     var before = gbits.testbit32(x, j);
                     x = gbits.toggle(x, j);
                     var after = gbits.testbit32(x, j);
-                    ClaimNumeric.Neq(before, after);
+                    ClaimNumeric.neq(before, after);
                     x = gbits.toggle(x, j);
-                    Claim.Eq(x, src[i]);
+                    Claim.eq(x, src[i]);
                 }
             }
         }

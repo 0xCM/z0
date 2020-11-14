@@ -119,13 +119,13 @@ namespace Z0.Logix
                 Claim.Require(y0);
 
                 var y1 = S.equals(x,x);
-                Claim.Eq(NumericLiterals.maxval<T>(), y1);
+                Claim.eq(NumericLiterals.maxval<T>(), y1);
 
                 var y2 = gmath.eq(x,y);
                 Claim.nea(y2);
 
                 var y3 = S.equals(x,y);
-                Claim.Eq(NumericLiterals.zero<T>(),y3);
+                Claim.eq(NumericLiterals.zero<T>(),y3);
 
             }
         }
@@ -218,7 +218,7 @@ namespace Z0.Logix
                 var y = Random.Next<T>();
                 var expect = gmath.lt(x,y).Promote<T>();
                 var actual = S.lt(x,y);
-                Claim.Eq(expect,actual);
+                Claim.eq(expect,actual);
             }
         }
 
@@ -231,7 +231,7 @@ namespace Z0.Logix
                 var y = Random.Next<T>();
                 var expect = gmath.lteq(x,y).Promote<T>();
                 var actual = S.lteq(x,y);
-                Claim.Eq(expect,actual);
+                Claim.eq(expect,actual);
             }
         }
 
@@ -244,7 +244,7 @@ namespace Z0.Logix
                 var y = Random.Next<T>();
                 var expect = gmath.gt(x,y).Promote<T>();
                 var actual = S.gt(x,y);
-                Claim.Eq(expect,actual);
+                Claim.eq(expect,actual);
             }
         }
 
@@ -257,7 +257,7 @@ namespace Z0.Logix
                 var y = Random.Next<T>();
                 var expect = gmath.gteq(x,y).Promote<T>();
                 var actual = S.gteq(x,y);
-                Claim.Eq(expect,actual);
+                Claim.eq(expect,actual);
             }
         }
 

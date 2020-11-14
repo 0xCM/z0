@@ -20,18 +20,18 @@ namespace Z0
             Span<byte> xSrc =  bytes(x);
             var bvx = BitBlocks.load(xSrc.Slice(0,5).ToArray());
             Claim.eq(gbits.pop(x), bvz.Pop());
-            Claim.Eq(gbits.pop(x), bvx.Pop());
+            Claim.eq(gbits.pop(x), bvx.Pop());
 
             for(var i=0; i<n; i++)
-                Claim.Eq(bvz[i], bvx[i]);
+                Claim.eq(bvz[i], bvx[i]);
         }
 
         public void bb_literal_12x32()
         {
             var bv = BitBlocks.single(0b101110001110u, n12);
-            Claim.Eq(bv[0], Bit32.Off);
-            Claim.Eq(bv[1], Bit32.On);
-            Claim.Eq(bv[11], Bit32.On);
+            Claim.eq(bv[0], Bit32.Off);
+            Claim.eq(bv[1], Bit32.On);
+            Claim.eq(bv[11], Bit32.On);
         }
     }
 }

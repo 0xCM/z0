@@ -159,7 +159,7 @@ namespace Z0
             Blocked.or(xb,yb,zb);
 
             for(var i=0; i<cells; i++)
-                Claim.Eq(gmath.or(xb[i],yb[i]), zb[i]);
+                Claim.eq(gmath.or(xb[i],yb[i]), zb[i]);
         }
 
         protected void vor_blocks_check<T>(W256 w, T t = default)
@@ -176,7 +176,7 @@ namespace Z0
             Blocked.or(xb,yb,zb);
 
             for(var i=0; i<cells; i++)
-                Claim.Eq(gmath.or(xb[i],yb[i]), zb[i]);
+                Claim.eq(gmath.or(xb[i],yb[i]), zb[i]);
         }
     }
 }

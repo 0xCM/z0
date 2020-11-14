@@ -6,7 +6,7 @@ namespace Z0.Mkl
 {
     using System;
     using System.Linq;
-   
+
     public class t_vslinit : UnitTest<t_vslinit>
     {
         public void t_bernoulli()
@@ -15,11 +15,11 @@ namespace Z0.Mkl
             var tolerance = .02;
             var count = Pow2.T12;
             using var src = rng.mt19937(54u);
-            
+
             var sum = 0.0;
             var buffer = samplers.bernoulli(src,pTarget);
             foreach(var point in buffer.ToSpan(count))
-                if(point != 0) 
+                if(point != 0)
                     sum++;
 
             var pActual = sum / ((double)count);
@@ -35,7 +35,7 @@ namespace Z0.Mkl
             var streams = new MklRng[gencount];
             for(var i=0; i<gencount; i++)
                 streams[i] = rng.mt2203(seeds[i], i);
-            
+
             var bufferF64 = new double[samplesize];
             var bufferU32 = new uint[samplesize];
             var bufferI32 = new int[samplesize];
@@ -47,7 +47,7 @@ namespace Z0.Mkl
                 Observations.Load(bufferF64,1).Extrema();
                 var max = Observations.Load(bufferF64,1).Max()[0];
                 ClaimNumeric.lteq(max, ufRange.Right);
-                ClaimNumeric.Neq(max,0);
+                ClaimNumeric.neq(max,0);
 
                 sample.bits(stream, bufferU32);
 
@@ -63,6 +63,6 @@ namespace Z0.Mkl
                 streams[i].Dispose();
 
         }
-        
+
     }
 }

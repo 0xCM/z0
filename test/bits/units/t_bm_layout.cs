@@ -47,7 +47,7 @@ namespace Z0
 
             for(var i=0; i < order; i++)
             for(var j=0; j < order; j++)
-                Claim.Eq(Bit32.On, m[i,j]);
+                Claim.eq(Bit32.On, m[i,j]);
         }
     }
 }

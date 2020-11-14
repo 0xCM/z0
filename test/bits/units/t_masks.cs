@@ -15,11 +15,11 @@ namespace Z0
     {
         public void lomask_case1()
         {
-            Claim.Eq((Pow2.pow(3) - 1)^Pow2.pow(3), lo64(3));
-            Claim.Eq((Pow2.pow(7) - 1)^Pow2.pow(7), lo64(7));
-            Claim.Eq((Pow2.pow(13) - 1)^Pow2.pow(13), lo64(13));
-            Claim.Eq((Pow2.pow(25) - 1)^Pow2.pow(25), lo64(25));
-            Claim.Eq((Pow2.pow(59) - 1)^Pow2.pow(59), lo64(59));
+            Claim.eq((Pow2.pow(3) - 1)^Pow2.pow(3), lo64(3));
+            Claim.eq((Pow2.pow(7) - 1)^Pow2.pow(7), lo64(7));
+            Claim.eq((Pow2.pow(13) - 1)^Pow2.pow(13), lo64(13));
+            Claim.eq((Pow2.pow(25) - 1)^Pow2.pow(25), lo64(25));
+            Claim.eq((Pow2.pow(59) - 1)^Pow2.pow(59), lo64(59));
         }
 
         public void lomask_case2()

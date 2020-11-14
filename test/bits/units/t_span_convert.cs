@@ -14,7 +14,7 @@ namespace Z0
         void VerifySpanBytesToValue<T>(Span<byte> src, T expect)
             where T : unmanaged
         {
-            Claim.Eq(expect, z.cell<T>(src));
+            Claim.eq(expect, z.cell<T>(src));
         }
 
         void VerifySpanBytesToValues<T>(Span<byte> src, Span<T> expect)

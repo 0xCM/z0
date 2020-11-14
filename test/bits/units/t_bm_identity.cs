@@ -37,9 +37,9 @@ namespace Z0
             for(var j=0; j<4; j++)
             {
                 if(i == j)
-                    Claim.Eq(Bit32.On, I[i,j]);
+                    Claim.eq(Bit32.On, I[i,j]);
                 else
-                    Claim.Eq(Bit32.Off, I[i,j]);
+                    Claim.eq(Bit32.Off, I[i,j]);
             }
         }
 
@@ -47,7 +47,7 @@ namespace Z0
         {
             var m = BitMatrix8.Identity;
             for(byte i=0; i < m.Order; i++)
-                Claim.Eq(m[i,i],Bit32.On);
+                Claim.eq(m[i,i],Bit32.On);
 
             Claim.Require(m.Diagonal().AllOn);
 
@@ -56,7 +56,7 @@ namespace Z0
             var result = lhs & rhs;
             for(var row=0; row< result.Order; row++)
             for(var col=0; col< result.Order; col++)
-                Claim.Eq(result[row,col], rhs[row,col]);
+                Claim.eq(result[row,col], rhs[row,col]);
 
         }
 
@@ -64,7 +64,7 @@ namespace Z0
         {
             var m = BitMatrix16.Identity;
             for(byte i=0; i < m.Order; i++)
-                Claim.Eq(m[i,i],Bit32.On);
+                Claim.eq(m[i,i],Bit32.On);
             Claim.Require(BitMatrix.diagonal(m).AllOn);
         }
 
@@ -72,7 +72,7 @@ namespace Z0
         {
             var m = BitMatrix32.Identity;
             for(byte i=0; i < m.Order; i++)
-                Claim.Eq(m[i,i],Bit32.On);
+                Claim.eq(m[i,i],Bit32.On);
             Claim.Require(BitMatrix.diagonal(m).TestC());
         }
 
@@ -80,7 +80,7 @@ namespace Z0
         {
             var m = BitMatrix64.Identity;
             for(byte i=0; i < m.Order; i++)
-                Claim.Eq(m[i,i],Bit32.On);
+                Claim.eq(m[i,i],Bit32.On);
 
             Claim.Require(BitMatrix.diagonal(m).AllOn);
 
@@ -89,7 +89,7 @@ namespace Z0
             var result = lhs & rhs;
             for(var row=0; row<result.Order; row++)
             for(var col=0; col<result.Order; col++)
-                Claim.Eq(result[row,col], rhs[row,col]);
+                Claim.eq(result[row,col], rhs[row,col]);
         }
 
         public void bm_iszero_check()
@@ -118,7 +118,7 @@ namespace Z0
             var identity = BitMatrixA.identity<N,T>();
             for(var i=0; i< identity.Order; i++)
             for(var j=0; j< identity.Order; j++)
-                Claim.Eq(identity[i,j], i==j ? Bit32.On : Bit32.Off);
+                Claim.eq(identity[i,j], i==j ? Bit32.On : Bit32.Off);
         }
     }
 }
