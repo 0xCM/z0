@@ -21,5 +21,4 @@ namespace Z0
 
         public Duration Frequency;
     }
-
 }

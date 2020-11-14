@@ -54,6 +54,6 @@ namespace Z0
         /// <summary>
         /// The process main module
         /// </summary>
-        public ProcessModuleData Main;
+        public ProcessModuleRecord Main;
     }
 }

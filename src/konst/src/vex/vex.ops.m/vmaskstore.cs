@@ -492,5 +492,45 @@ namespace Z0
         [MethodImpl(Inline), Op]
         static unsafe void vmaskstore(Vector128<ulong> src, Vector128<byte> mask, ref byte dst)
             => MaskMove(v8u(src), mask, refptr(ref dst));
+
+        /// <summary>
+        /// void _mm_maskstore_ps (float * mem_addr, __m128i mask, __m128 a) VMASKMOVPS m128, xmm, xmm
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="mask">The mask</param>
+        /// <param name="dst">The memory reference</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe void maskstore(Vector128<float> src, Vector128<float> mask, ref float dst)
+            => MaskStore(gptr(dst), src,mask);
+
+        /// <summary>
+        /// void _mm_maskstore_pd (double * mem_addr, __m128i mask, __m128d a) VMASKMOVPD m128, xmm, xmm
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="mask">The mask</param>
+        /// <param name="dst">The memory reference</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe void maskstore(Vector128<double> src, Vector128<double> mask, ref double dst)
+            => MaskStore(gptr(dst), src,mask);
+
+        /// <summary>
+        /// void _mm256_maskstore_ps (float * mem_addr, __m256i mask, __m256 a) VMASKMOVPS m256, ymm, ymm
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="mask">The mask</param>
+        /// <param name="dst">The memory reference</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe void maskstore(Vector256<float> src, Vector256<float> mask, ref float dst)
+            => MaskStore(gptr(dst), src,mask);
+
+        /// <summary>
+        /// void _mm256_maskstore_pd (double * mem_addr, __m256i mask, __m256d a) VMASKMOVPD m256, ymm, ymm
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="mask">The mask</param>
+        /// <param name="dst">The memory reference</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe void maskstore(Vector256<double> src, Vector256<double> mask, ref double dst)
+            => MaskStore(gptr(dst), src,mask);
     }
 }

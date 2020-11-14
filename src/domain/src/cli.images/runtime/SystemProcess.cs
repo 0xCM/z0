@@ -21,7 +21,7 @@ namespace Z0
             => Process.GetCurrentProcess();
 
         [MethodImpl(Inline), Op]
-        public static ProcessModuleData[] modules()
+        public static ProcessModuleRecord[] modules()
             => modules(current());
 
         /// <summary>
@@ -37,11 +37,11 @@ namespace Z0
         }
 
         [Op]
-        public static ProcessModuleData[] modules(Process src)
+        public static ProcessModuleRecord[] modules(Process src)
         {
             var modules = @readonly(src.Modules.Cast<ProcessModule>().Array());
             var count = modules.Length;
-            var buffer = alloc<ProcessModuleData>(count);
+            var buffer = alloc<ProcessModuleRecord>(count);
             var dst = span(buffer);
             for(var i=0u; i<count; i++)
                 map(skip(modules,i), ref seek(dst, i));
@@ -64,7 +64,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static ref ProcessModuleData map(ProcessModule src, ref ProcessModuleData dst)
+        public static ref ProcessModuleRecord map(ProcessModule src, ref ProcessModuleRecord dst)
         {
             dst.Name = src.ModuleName;
             dst.Base = src.BaseAddress;
@@ -76,7 +76,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static void map(ProcessModule[] src, ProcessModuleData[] dst)
+        public static void map(ProcessModule[] src, ProcessModuleRecord[] dst)
         {
             var count = min(src.Length, dst.Length);
             ref readonly var s = ref first(span(src));

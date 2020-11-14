@@ -18,13 +18,12 @@ namespace Z0
 
         public BinaryCode[] Cells;
 
-
         public ref BinaryCode this[F index]
         {
             get => ref Cells[z.u16(index)];
         }
 
-        T IDataRow<F, T>.Data
+        T IDataRow<F,T>.Data
             => Data;
 
         BinaryCode[] IDataRow.Cells

@@ -19,10 +19,6 @@ namespace Z0
         public readonly C Code {get;}
 
         [MethodImpl(Inline)]
-        public static implicit operator FormatCode<K,C>((K kind, C code) src)
-            => new FormatCode<K,C>(src.kind, src.code);
-
-        [MethodImpl(Inline)]
         public FormatCode(K k, C c)
         {
             Kind = k;
@@ -38,5 +34,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public string Apply<T>(T src)
             => api.apply(this, src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator FormatCode<K,C>((K kind, C code) src)
+            => new FormatCode<K,C>(src.kind, src.code);
     }
 }
