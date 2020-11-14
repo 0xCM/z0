@@ -22,24 +22,5 @@ namespace Z0
         public ImageToken Source;
 
         public BinaryCode Data;
-
-        [MethodImpl(Inline)]
-        public ImageContentRecord(ImageToken src, byte[] content)
-        {
-            Source = src;
-            Data = content;
-        }
-
-        [MethodImpl(Inline)]
-        public static implicit operator ImageContentRecord((ImageToken src, byte[] data) x)
-            => new ImageContentRecord(x.src, x.data);
-
-        [MethodImpl(Inline)]
-        public static implicit operator ImageContentRecord((ImageToken src, BinaryCode data) x)
-            => new ImageContentRecord(x.src, x.data);
-
-        [MethodImpl(Inline)]
-        public static implicit operator ImageContentRecord(Paired<ImageToken,BinaryCode> x)
-            => new ImageContentRecord(x.Left, x.Right);
     }
 }

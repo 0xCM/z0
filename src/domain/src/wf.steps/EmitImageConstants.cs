@@ -12,7 +12,7 @@ namespace Z0
     using static z;
 
     using F = CliConstant.Fields;
-    using W = CliConstant.RenderWidths;
+    using W = EmitImageConstantsStep.RenderWidths;
 
     [WfHost]
     public sealed class EmitImageConstants : WfHost<EmitImageConstants>
@@ -26,6 +26,19 @@ namespace Z0
 
     ref struct EmitImageConstantsStep
     {
+        public enum RenderWidths : ushort
+        {
+            Sequence = 12,
+
+            ParentId = 20,
+
+            Source = 20,
+
+            DataType = 20,
+
+            Value = 30,
+        }
+
         readonly IWfShell Wf;
 
         readonly WfHost Host;

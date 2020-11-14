@@ -11,7 +11,7 @@ namespace Z0
     using static z;
     using static Konst;
 
-    partial struct CmdScripts
+    partial struct Scripts
     {
         public static Indexed<IScriptVar> members<T>(T set)
             where T : IScriptVars<T>, new()

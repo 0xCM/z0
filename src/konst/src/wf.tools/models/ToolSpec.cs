@@ -12,15 +12,15 @@ namespace Z0
 
     public readonly struct ToolSpec
     {
-        public readonly ToolId Id;
+        public ToolId Id {get;}
 
-        public readonly ToolFlag[] Flags;
+        public ToolVerb[] Verbs {get;}
 
         [MethodImpl(Inline)]
-        public ToolSpec(ToolId id, ToolFlag[] flags)
+        public ToolSpec(ToolId id, ToolVerb[] verbs)
         {
             Id = id;
-            Flags = flags;
+            Verbs = verbs;
         }
     }
 }

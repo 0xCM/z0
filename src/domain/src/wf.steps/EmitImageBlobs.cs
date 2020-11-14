@@ -62,13 +62,15 @@ namespace Z0
             return dst.Emit();
         }
 
+        public static ReadOnlySpan<byte> RenderWidths => new byte[CliBlob.FieldCount]{12,12,12,30};
+
         void Emit(IPart part)
         {
             var dstPath = Wf.Db().Table(part.Id, TableId, FileKindType.Csv);
             var data = Read(part);
             var count = (uint)data.Length;
             var buffer = Buffers.text();
-            var columns = Table.columns(typeof(CliBlob), CliBlob.RenderWidths);
+            var columns = Table.columns(typeof(CliBlob), RenderWidths);
             var header = Table.header(columns);
 
             using var writer = dstPath.Writer();

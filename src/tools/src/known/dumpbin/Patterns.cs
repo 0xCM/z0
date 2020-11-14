@@ -44,12 +44,12 @@ namespace Z0
         }
 
         public static CmdScript script(DumpBin tool, string name, CmdId id, FileModule[] src)
-            => CmdScripts.create(name,src.Map(file => tool.Command(id, file.Path)));
+            => Scripts.create(name,src.Map(file => tool.Command(id, file.Path)));
 
         public CmdScript Script(string name, CmdId id, FileModule[] src)
             => script(this, name, id, src);
 
-        public CmdExpr Command(CmdId id, FS.FilePath src)
+        public CmdScriptExpr Command(CmdId id, FS.FilePath src)
         {
             var subdir = OutputDir + FS.folder(src.FileName.WithoutExtension.Name);
             subdir.Create();
@@ -61,22 +61,22 @@ namespace Z0
             switch(id)
             {
                 case CmdId.EmitAsm:
-                    pattern = CmdScripts.pattern("dumpbin.disasm", string.Format("dumpbin /DISASM:{2} /OUT:{1} {0}", source, target, "NOBYTES"));
+                    pattern = Scripts.pattern("dumpbin.disasm", string.Format("dumpbin /DISASM:{2} /OUT:{1} {0}", source, target, "NOBYTES"));
                     break;
                 case CmdId.EmitRawData:
-                    pattern = CmdScripts.pattern("dumpbin.rawdata", string.Format("dumpbin /RAWDATA:1,32 /OUT:{1} {0}", source, target));
+                    pattern = Scripts.pattern("dumpbin.rawdata", string.Format("dumpbin /RAWDATA:1,32 /OUT:{1} {0}", source, target));
                     break;
                 case CmdId.EmitHeaders:
-                    pattern = CmdScripts.pattern("dumpbin.headers", string.Format("dumpbin /HEADERS /OUT:{1} {0}", source, target));
+                    pattern = Scripts.pattern("dumpbin.headers", string.Format("dumpbin /HEADERS /OUT:{1} {0}", source, target));
                     break;
                 case CmdId.EmitRelocations:
-                    pattern = CmdScripts.pattern("dumpbin.relocations", string.Format("dumpbin /RELOCATIONS /OUT:{1} {0}", src.Format(PS), output.Format(PS)));
+                    pattern = Scripts.pattern("dumpbin.relocations", string.Format("dumpbin /RELOCATIONS /OUT:{1} {0}", src.Format(PS), output.Format(PS)));
                     break;
                 case CmdId.EmitExports:
-                    pattern = CmdScripts.pattern("dumpbin.exports", string.Format("dumpbin /EXPORTS /OUT:{1} {0}", source, target));
+                    pattern = Scripts.pattern("dumpbin.exports", string.Format("dumpbin /EXPORTS /OUT:{1} {0}", source, target));
                     break;
                 case CmdId.EmitLoadConfig:
-                    pattern = CmdScripts.pattern("dumpbin.loadconfig", string.Format("dumpbin /LOADCONFIG /OUT:{1} {0}", src.Format(PS), output.Format(PS)));
+                    pattern = Scripts.pattern("dumpbin.loadconfig", string.Format("dumpbin /LOADCONFIG /OUT:{1} {0}", src.Format(PS), output.Format(PS)));
                     break;
             }
             return Cmd.expr(pattern);

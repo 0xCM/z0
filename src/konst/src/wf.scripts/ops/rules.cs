@@ -6,15 +6,14 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.IO;
 
     using static z;
     using static Konst;
 
-    partial struct CmdScripts
+    partial struct Scripts
     {
         [Op]
-        public static ref CmdScript<CmdScriptPattern> rules(IFileDb db, ref CmdScript<CmdScriptPattern> cmd)
+        public static ref ToolScript<ToolScriptPattern> rules(IFileDb db, ref ToolScript<ToolScriptPattern> cmd)
         {
             ref var data = ref cmd.Content;
             ref readonly var id = ref data.Tool;

@@ -49,15 +49,15 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<LocatedImageSummary> summaries()
-            => summaries(locate());
+        public static ReadOnlySpan<LocatedImageRow> rows()
+            => rows(locate());
 
         [Op]
-        public static ReadOnlySpan<LocatedImageSummary> summaries(LocatedImages src)
+        public static ReadOnlySpan<LocatedImageRow> rows(LocatedImages src)
         {
             var count = src.Count;
             var images = src.View;
-            var summaries = span<LocatedImageSummary>(count);
+            var summaries = span<LocatedImageRow>(count);
             var system = SystemImages;
             for(var i=0u; i<count; i++)
             {
@@ -85,9 +85,9 @@ namespace Z0
             var system = SystemImages;
             var count = src.Count;
             var images = src.View;
-            var fields = Table.columns<LocatedImageSummary.Fields>();
+            var fields = Table.columns<LocatedImageRow.Fields>();
             var header = Table.header(fields);
-            var summaries = span<LocatedImageSummary>(count);
+            var summaries = span<LocatedImageRow>(count);
 
             var rows = text.build();
             rows.AppendLine(header);
@@ -138,7 +138,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        static void fill(in LocatedImage src, ref LocatedImageSummary dst)
+        static void fill(in LocatedImage src, ref LocatedImageRow dst)
         {
             dst.PartId = src.PartId;
             dst.EntryAddress = src.EndAddress;

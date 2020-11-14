@@ -24,14 +24,6 @@ namespace Z0
         LocalVar
     }
 
-
-    public enum CorSigField : byte
-    {
-        None = 0,
-
-        CallingConvention = 1,
-    }
-
     public interface ICorSig<T>
         where T : struct, ICorSig<T>
     {

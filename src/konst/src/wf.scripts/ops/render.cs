@@ -10,7 +10,7 @@ namespace Z0
     using static z;
     using static Konst;
 
-    partial struct CmdScripts
+    partial struct Scripts
     {
         [Op]
         public static void render(ScriptDirVars src, ITextBuffer dst)

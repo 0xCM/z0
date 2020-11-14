@@ -285,12 +285,23 @@ namespace Z0
             => new Exception(text.concat($"Duplicate keys were detected {keys.FormatList()}",  caller,file, line));
 
         [Op]
-        static KeyedValues<PartId,Type>[] enums(ISystemApiCatalog src)
+        public static KeyedValues<PartId,Type>[] enums(ISystemApiCatalog src)
         {
             var x = from part in  src.Parts
                     let enums = part.Owner.Enums()
                         orderby part.Id
                         select Seq.keyed(part.Id, enums);
+            return x;
+        }
+
+        [Op]
+        public static KeyedValues<PartId,Type>[] enums(ISystemApiCatalog src, PartId[] parts)
+        {
+            var selection = src.Parts.Where(p => parts.Contains(p.Id));
+            var x = from part in  selection
+                    let enums = part.Owner.Enums()
+                    orderby part.Id
+                    select Seq.keyed(part.Id, enums);
             return x;
         }
 

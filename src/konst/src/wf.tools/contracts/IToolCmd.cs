@@ -17,7 +17,7 @@ namespace Z0
         where T : struct, IToolCmd<T>
     {
         ToolId IToolCmd.ToolId
-            => Cmd.toolid<T>();
+            => Tooling.toolid<T>();
 
         CmdId IIdentified<CmdId>.Id
             => Cmd.id<T>();

@@ -9,14 +9,14 @@ namespace Z0
 
     using static z;
     using static Konst;
-    using static CmdScripts;
+    using static Scripts;
 
-    public struct ScriptDirVars : IScriptVars<ScriptDirVars>
+    public struct ScriptVars : IScriptVars<ScriptVars>
     {
-        readonly Indexed<ScriptDirVar> Data;
+        readonly Indexed<ScriptVar> Data;
 
         [MethodImpl(Inline)]
-        internal ScriptDirVars(ScriptDirVar[] src)
+        internal ScriptVars(ScriptVar[] src)
             => Data = src;
 
         [MethodImpl(Inline)]

@@ -9,7 +9,7 @@ namespace Z0
 
     using static z;
     using static Konst;
-    using static CmdScripts;
+    using static Scripts;
 
     public struct ScriptDirVar : IScriptVar<ScriptVar>
     {

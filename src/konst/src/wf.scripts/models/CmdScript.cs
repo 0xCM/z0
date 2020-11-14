@@ -12,21 +12,28 @@ namespace Z0
 
     using api = Cmd;
 
-    public readonly struct CmdScript : ITextual, IContented<TableSpan<CmdExpr>>, IIdentified<utf8>
+    public readonly struct CmdScript : ICmdScript
     {
-        public utf8 Id {get;}
+        public asci32 Id {get;}
 
-        readonly TableSpan<CmdExpr> Data;
+        readonly TableSpan<CmdScriptExpr> Data;
 
         [MethodImpl(Inline)]
-        public CmdScript(CmdExpr[] src)
+        public CmdScript(CmdScriptExpr[] src)
         {
             Id = api.Anonymous;
             Data = src;
         }
 
         [MethodImpl(Inline)]
-        public CmdScript(utf8 id, CmdExpr[] src)
+        public CmdScript(asci32 id, CmdScriptExpr[] src)
+        {
+            Id = id;
+            Data = src;
+        }
+
+        [MethodImpl(Inline)]
+        public CmdScript(string id, CmdScriptExpr[] src)
         {
             Id = id;
             Data = src;
@@ -38,14 +45,14 @@ namespace Z0
             get => Data.Length;
         }
 
-        public TableSpan<CmdExpr> Content
+        public TableSpan<CmdScriptExpr> Content
         {
             [MethodImpl(Inline)]
             get => Data;
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator CmdScript(CmdExpr[] src)
+        public static implicit operator CmdScript(CmdScriptExpr[] src)
             => new CmdScript(src);
 
         public string Format()

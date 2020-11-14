@@ -12,10 +12,6 @@ namespace Z0
 
     partial struct Cmd
     {
-        [MethodImpl(Inline), Op]
-        public static string format(in ToolOption src, char specifier)
-            => string.Format("{0}{1}{2}", src.Name, specifier, src.Value);
-
         [Op]
         public static string format(CmdModel src)
         {
@@ -25,25 +21,25 @@ namespace Z0
         }
 
         [Op]
-        public static string format(in CmdExpr src)
+        public static string format(in CmdScriptExpr src)
             => format(src.Pattern, src.Variables.Storage);
 
         [Op]
-        public static string format<K>(in CmdExpr<K> src)
+        public static string format<K>(in CmdScriptExpr<K> src)
             where K : unmanaged
             => format(src.Pattern, src.Variables.Storage);
 
         [Op]
-        public static CmdExpr format(in CmdPattern pattern, params CmdVar[] args)
+        public static CmdScriptExpr format(in CmdPattern pattern, params CmdVar[] args)
             => string.Format(pattern.Content, args.Select(a => a.Format()));
 
         [Op, Closures(UnsignedInts)]
-        public static CmdExpr format<K>(in CmdPattern<K> pattern, params CmdVar[] args)
+        public static CmdScriptExpr format<K>(in CmdPattern<K> pattern, params CmdVar[] args)
             where K : unmanaged
                 => string.Format(pattern.Content, args.Select(a => a.Format()));
 
         [Op, Closures(Closure)]
-        public static CmdExpr format<K>(in CmdPattern pattern, params CmdVar<K>[] args)
+        public static CmdScriptExpr format<K>(in CmdPattern pattern, params CmdVar<K>[] args)
             where K : unmanaged
                 => string.Format(pattern.Content, args.Select(a => a.Format()));
 

@@ -16,7 +16,7 @@ namespace Z0
     public readonly struct EnumCatalogs
     {
         [Op]
-        public static ReadOnlySpan<EnumLiteralRow> enums(PartId part, Type src)
+        public static ReadOnlySpan<EnumLiteralRow> enums(string part, Type src)
         {
             var fields = span(src.LiteralFields());
             var dst = span<EnumLiteralRow>(fields.Length);
@@ -26,7 +26,7 @@ namespace Z0
         }
 
         [Op]
-        public static void fill(PartId part, Type type, EnumTypeCode ecode, ReadOnlySpan<FieldInfo> fields, Span<EnumLiteralRow> dst)
+        public static void fill(string part, Type type, EnumTypeCode ecode, ReadOnlySpan<FieldInfo> fields, Span<EnumLiteralRow> dst)
         {
             var count = fields.Length;
             var address = type.TypeHandle.Value;
@@ -71,7 +71,7 @@ namespace Z0
         [Op]
         public static void format(in EnumLiteralRow src, TableFormatter<Fields> dst, bool eol = true)
         {
-            dst.Delimit(Fields.PartId, src.PartId);
+            dst.Delimit(Fields.Component, src.Component);
             dst.Delimit(Fields.TypeId, src.TypeId);
             dst.Delimit(Fields.TypeAddress, src.TypeAddress);
             dst.Delimit(Fields.NameAddress, src.NameAddress);
@@ -84,10 +84,9 @@ namespace Z0
                 dst.EmitEol();
         }
 
-        [Op]
-        public static void emit(IWfShell wf)
+        public static void emit(IWfShell wf, PartId[] selection)
         {
-            var parts = ApiQuery.types(ClrTypeKind.Enum, wf.Api);
+            var parts = ApiQuery.enums(wf.Api, selection);
             var target = wf.Db().Table(EnumLiteralRow.TableId);
             var dst = list<EnumLiteralRow>();
             for(var i=0; i<parts.Length; i++)
@@ -97,7 +96,8 @@ namespace Z0
                 {
                     var y = x[j];
                     (var part, var type) = y;
-                    var records = enums(part,type);
+                    var component = part.Format();
+                    var records = enums(component,type);
                     for(var k = 0; k<records.Length; k++)
                         dst.Add(records[k]);
                 }
@@ -118,5 +118,9 @@ namespace Z0
 
             wf.EmittedTable(typeof(EnumLiteralRow), rows.Length, target);
         }
+
+        [Op]
+        public static void emit(IWfShell wf)
+            => emit(wf, wf.Api.PartIdentities);
     }
 }

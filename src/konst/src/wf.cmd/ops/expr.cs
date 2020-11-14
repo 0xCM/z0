@@ -13,25 +13,25 @@ namespace Z0
     partial struct Cmd
     {
         [MethodImpl(Inline), Op]
-        public static CmdExpr expr(CmdPattern pattern)
-            => new CmdExpr(pattern);
+        public static CmdScriptExpr expr(CmdPattern pattern)
+            => new CmdScriptExpr(pattern);
 
         [MethodImpl(Inline), Op]
-        public static CmdExpr expr(in Paired<CmdPattern,CmdVars> src)
-            => new CmdExpr(src.Left, src.Right);
+        public static CmdScriptExpr expr(in Paired<CmdPattern,CmdVars> src)
+            => new CmdScriptExpr(src.Left, src.Right);
 
         [MethodImpl(Inline), Op]
-        public static CmdExpr expr(CmdPattern pattern, CmdVars vars)
-            => new CmdExpr(pattern, vars);
+        public static CmdScriptExpr expr(CmdPattern pattern, CmdVars vars)
+            => new CmdScriptExpr(pattern, vars);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static CmdExpr<K> expr<K>(CmdPattern pattern, CmdVars<K> content)
+        public static CmdScriptExpr<K> expr<K>(CmdPattern pattern, CmdVars<K> content)
             where K : unmanaged
-                => new CmdExpr<K>(pattern, content);
+                => new CmdScriptExpr<K>(pattern, content);
 
         [MethodImpl(Inline)]
-        public static CmdExpr<K,T> expr<K,T>(K id, T content)
+        public static CmdScriptExpr<K,T> expr<K,T>(K id, T content)
             where K : unmanaged
-                => new CmdExpr<K,T>(id,content);
+                => new CmdScriptExpr<K,T>(id,content);
     }
 }

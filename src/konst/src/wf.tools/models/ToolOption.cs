@@ -15,30 +15,19 @@ namespace Z0
         /// <summary>
         /// The option name
         /// </summary>
-        public readonly string Name;
+        public string Key {get;}
 
         /// <summary>
         /// The option value
         /// </summary>
-        public readonly string Value;
+        public string Value {get;}
 
         [MethodImpl(Inline)]
         public ToolOption(string name, string value)
         {
-            Name = name;
+            Key = name;
             Value = value;
         }
-
-        [MethodImpl(Inline)]
-        public string Format(string pattern)
-            => text.format(pattern, Name, Value);
-
-        [MethodImpl(Inline)]
-        public string Format()
-            => Format("{0}:{1}");
-
-        public override string ToString()
-            => Format();
 
         [MethodImpl(Inline)]
         public static implicit operator ToolOption((string name, string value) src)

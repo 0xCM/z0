@@ -9,18 +9,17 @@ namespace Z0
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface ITool
+    public interface ITool : IIdentified<ToolId>
     {
-        ToolId ToolId {get;}
-
-        FS.FolderPath Source => FS.FolderPath.Empty;
+        FS.FolderPath Source
+            => FS.FolderPath.Empty;
     }
 
     [Free]
     public interface ITool<T> : ITool
         where T : struct, ITool<T>
     {
-        IToolArchive<T> Archive {get;}
+
     }
 
     [Free]
@@ -28,6 +27,6 @@ namespace Z0
         where T : struct, ITool<T,F>
         where F : unmanaged, Enum
     {
-        ToolFlags<F> AvailableFlags {get;}
+
     }
 }

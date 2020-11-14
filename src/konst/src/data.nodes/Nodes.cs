@@ -18,5 +18,8 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Node<T> create<T>(T src)
             => new Node<T>(src);
+
+        public static Projected<S,T> projected<S,T>(S src, T dst)
+            => new Projected<S, T>(src,dst);
     }
 }

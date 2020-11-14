@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static CmdScripts;
+    using static Scripts;
 
     public readonly struct ScriptVarValue : IScriptVarValue<string>
     {

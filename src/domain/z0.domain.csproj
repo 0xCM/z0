@@ -7,6 +7,7 @@
   <ItemGroup>
     <ProjectReference Include="$(Konst)" />
     <ProjectReference Include="$(Commands)" />
+    <ProjectReference Include="$(Records)" />
     <ProjectReference Include="$(math)" />
     <ProjectReference Include="$(gmath)" />
     <ProjectReference Include="$(MathSvc)" />
@@ -14,6 +15,7 @@
     <ProjectReference Include="$(Asm)" />
     <ProjectReference Include="$(Dynamic)" />
     <ProjectReference Include="$(Polyrand)" />
+
   </ItemGroup>
 
    <ItemGroup>

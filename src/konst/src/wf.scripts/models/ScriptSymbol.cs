@@ -9,9 +9,9 @@ namespace Z0
 
     using static z;
     using static Konst;
-    using static CmdScripts;
+    using static Scripts;
 
-    public readonly struct ScriptSymbol
+    public readonly struct ScriptSymbol : IScriptSymbol
     {
         public string Name {get;}
 

@@ -24,11 +24,14 @@ namespace Z0
             return cmd;
         }
 
+        public static ReadOnlySpan<byte> RenderWidths
+            => new byte[ImageSectionHeader.FieldCount]{60,16,16,12,12,60,16,16,16};
+
         [CmdWorker]
         public static CmdResult run(IWfShell wf, EmitImageHeadersCmd spec)
         {
             var total = Count.Zero;
-            var formatter = TableRows.formatter<ImageSectionHeader>(ImageSectionHeader.RenderWidths);
+            var formatter = TableRows.formatter<ImageSectionHeader>(RenderWidths);
             using var writer = spec.Target.Writer();
             writer.WriteLine(formatter.FormatHeader());
             foreach(var file in spec.Sources)

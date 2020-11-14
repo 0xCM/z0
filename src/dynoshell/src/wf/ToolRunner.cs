@@ -79,7 +79,7 @@ namespace Z0
             var id = Cmd.id(cmd);
             var list = cmd.EmissionLimit != 0 ? match(cmd.SourceDir, cmd.EmissionLimit, cmd.FileKinds) : match(cmd.SourceDir, cmd.FileKinds);
             var outcome = FileEmissions.emit(list, cmd.FileUriMode, cmd.TargetPath);
-            return Cmd.ok(cmd);
+            return outcome ? Cmd.ok(cmd) : Cmd.fail(cmd,outcome.Format());
         }
 
         CmdResult EmitToolHelp()

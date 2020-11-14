@@ -13,15 +13,21 @@ namespace Z0
     [ApiHost("tooling", true)]
     public partial struct Tooling
     {
-        [MethodImpl(Inline)]
-        public static ToolOption option<E,V>(E kind, V value)
-            where E : unmanaged, Enum
-                => new ToolOption(kind.ToString(), value.ToString());
-
         const NumericKind Closure = UnsignedInts;
 
         [MethodImpl(Inline), Op]
-        public static ToolFlag flag(string name)
-            => name;
+        public static IToolDb db(FS.FolderPath storage)
+            => new ToolDb(storage);
+
+        [MethodImpl(Inline)]
+        public static ToolTarget<T,F> target<T,F>(F kind, FS.FilePath path)
+            where T : struct, ITool<T>
+            where F : unmanaged
+                => new ToolTarget<T,F>(kind, path);
+
+        [MethodImpl(Inline)]
+        public static ToolTarget<T> target<T>(FS.FilePath path)
+            where T : struct, ITool<T>
+                => new ToolTarget<T>(path);
     }
 }

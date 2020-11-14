@@ -1,3 +1,7 @@
+//-----------------------------------------------------------------------------
+// Copyright   :  (c) Chris Moore, 2020
+// License     :  MIT
+//-----------------------------------------------------------------------------
 namespace Z0
 {
     using System;
@@ -29,10 +33,10 @@ namespace Z0
         public NamedValues<string> Vars;
 
         [MethodImpl(Inline)]
-        public ToolCmdSpec(FS.FilePath tool, string command, FS.FolderPath? root = null)
+        public ToolCmdSpec(FS.FilePath tool, string args, FS.FolderPath? root = null)
         {
             ToolPath = tool;
-            Args = command;
+            Args = args;
             WorkingDir = root ?? FS.FolderPath.Empty;
             Vars = default;
         }

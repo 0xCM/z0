@@ -12,7 +12,7 @@ namespace Z0
     using static Konst;
     using static CmdPatterns;
 
-    partial struct CmdScripts
+    partial struct Scripts
     {
         /// <summary>
         /// Creates a <see cref='CmdArgs'/> collection from an array
@@ -27,9 +27,9 @@ namespace Z0
             where K : unmanaged
                 => new CmdPattern<K>(id,content);
         [Op]
-        public static CmdScript<CmdScriptPattern> pattern(IFileDb db, string root, string name, string arg, string delimiter = null, string type = null)
+        public static ToolScript<ToolScriptPattern> pattern(IFileDb db, string root, string name, string arg, string delimiter = null, string type = null)
         {
-            CmdScript<CmdScriptPattern> cmd = new CmdScriptPattern();
+            ToolScript<ToolScriptPattern> cmd = new ToolScriptPattern();
             ref var data = ref cmd.Content;
             data.CmdRootName = FS.folder(root);
             data.Tool = name;

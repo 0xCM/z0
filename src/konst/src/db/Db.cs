@@ -35,12 +35,5 @@ namespace Z0
         public static IFileDb files(IWfShell wf, FileDbPaths paths)
             => new FileDb(wf, paths);
 
-        [MethodImpl(Inline), Op]
-        public string literal(N0 n)
-            => Literals.asm;
-
-        [MethodImpl(Inline), Op]
-        public string literal(N1 n)
-            => Literals.cs;
     }
 }

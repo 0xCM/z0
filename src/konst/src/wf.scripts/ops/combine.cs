@@ -11,11 +11,15 @@ namespace Z0
     using static z;
     using static Konst;
 
-    partial struct CmdScripts
+    partial struct Scripts
     {
         [MethodImpl(Inline), Op]
         public static ScriptSymbol combine(ScriptSymbol a, ScriptSymbol b)
             => new ScriptSymbol(string.Format("{0}{1}", a, b));
+
+        [MethodImpl(Inline), Op]
+        public static ScriptSymbol combine<T>(ScriptSymbol<T> a, ScriptSymbol<T> b)
+            => new ScriptSymbol(string.Format("{0}{1}", a,b));
 
         [Op]
         public static ScriptDirVar combine(ScriptDirVar a, ScriptDirVar b)

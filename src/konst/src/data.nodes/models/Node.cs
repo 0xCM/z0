@@ -40,10 +40,10 @@ namespace Z0
             get => !IsNonEmpty;
         }
 
-        public static Node<T> Empty => default;
-
         [MethodImpl(Inline)]
         public static implicit operator Node<T>(T src)
             => new Node<T>(src, false);
+
+        public static Node<T> Empty => default;
     }
 }

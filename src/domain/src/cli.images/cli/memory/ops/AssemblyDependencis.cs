@@ -14,6 +14,7 @@ namespace Z0
 
     partial class CliMemoryMap
     {
+
         [MethodImpl(Inline), Op]
         ReadOnlySpan<AssemblyReferenceHandle> AssemblyReferenceHandles()
             => CliReader.AssemblyReferences.ToReadOnlySpan();

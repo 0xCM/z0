@@ -10,10 +10,10 @@ namespace Z0
     using static z;
     using static Konst;
 
-    partial struct CmdScripts
+    partial struct Scripts
     {
         [Op]
-        public static ref CmdScript<CmdScriptPattern> update(IFileDb db, ref CmdScript<CmdScriptPattern> cmd, string root = null, string name = null, string arg = null, string delimiter = null, string type = null)
+        public static ref ToolScript<ToolScriptPattern> update(IFileDb db, ref ToolScript<ToolScriptPattern> cmd, string root = null, string name = null, string arg = null, string delimiter = null, string type = null)
         {
             ref var data = ref cmd.Content;
             data.CmdRootName = root == null ? data.CmdRootName : FS.folder(root);

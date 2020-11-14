@@ -575,5 +575,5 @@ readonly struct ApiNames
 
     public const string StateBuffers = buffers + dot + states;
 
-    public const string FixedBuffers = buffers + dot + @fixed;
+    public const string PinnedBuffers = buffers + dot + "pinned";
 }

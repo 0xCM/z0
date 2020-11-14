@@ -40,6 +40,9 @@ namespace Z0
             Wf.Created(Host);
         }
 
+        public static ReadOnlySpan<byte> RenderWidths
+            => new byte[CliField.FieldCount]{16,60,12,12,16,40,30};
+
         public void Run()
         {
             var count = 0u;
@@ -69,7 +72,7 @@ namespace Z0
             var src = reader.Fields();
             var count = (uint)src.Length;
 
-            var formatter = TableRows.formatter(CliField.RenderWidths, t);
+            var formatter = TableRows.formatter(RenderWidths, t);
             using var writer = path.Writer();
             writer.WriteLine(formatter.FormatHeader());
             foreach(var item in src)

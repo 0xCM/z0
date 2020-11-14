@@ -7,17 +7,12 @@ namespace Z0
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface IToolArchive
+    public interface IToolArchive : IIdentified<ToolId>
     {
-        /// <summary>
-        /// The identifier of the owning tool
-        /// </summary>
-        ToolId ToolId {get;}
-
         /// <summary>
         /// The tool output directory
         /// </summary>
-        FS.FolderPath ToolOutput {get;}
+        FS.FolderPath Target {get;}
 
         /// <summary>
         /// The process root folder
@@ -29,12 +24,7 @@ namespace Z0
     public interface IToolArchive<T> : IToolArchive
         where T : struct, ITool<T>
     {
-        /// <summary>
-        /// The tool that owns the archive
-        /// </summary>
-        T Owner => default(T);
-
-        CmdOutput<T> Dir()
-            => Tooling.output(this).Map(f => new CmdTarget<T>(f));
+        ToolOutput<T> Dir()
+            => Tooling.output(this).Map(Tooling.target<T>);
     }
 }

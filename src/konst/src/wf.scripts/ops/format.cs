@@ -11,9 +11,13 @@ namespace Z0
     using static z;
     using static Konst;
 
-    partial struct CmdScripts
+    partial struct Scripts
     {
-        [Op, Closures(UnsignedInts)]
+        [Op, Closures(Closure)]
+        public static string format<T>(ScriptSymbol<T> src)
+            => string.Format("{0}", src.Name);
+
+        [Op, Closures(Closure)]
         public static string format<T>(ScriptVarValue<T> src)
             => string.Format("{0}", src.Content);
         [Op]

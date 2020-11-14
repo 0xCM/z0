@@ -80,26 +80,5 @@ namespace Z0
             dst = tVal;
             return ref tVal;
         }
-
-        [Op]
-        public static void store(PartId part, Type src, Span<EnumLiteralRow> dst)
-        {
-            var fields = span(src.LiteralFields());
-            var tc = PrimalKinds.ecode(src);
-            store(part, src, tc, fields, dst);
-        }
-
-        [Op]
-        public static void store(PartId part, Type type, EnumTypeCode tc, ReadOnlySpan<FieldInfo> fields, Span<EnumLiteralRow> dst)
-        {
-            var count = fields.Length;
-            var address = type.TypeHandle.Value;
-            for(var i=0u; i<count; i++)
-            {
-                ref readonly var f = ref z.skip(fields,i);
-                var nameAddress = z.address(f.Name);
-                seek(dst,i) = new EnumLiteralRow(part, type, address, (ushort)i, f.Name, nameAddress, (EnumScalarKind)tc, Enums.unbox(tc, f.GetRawConstantValue()));
-            }
-        }
     }
 }

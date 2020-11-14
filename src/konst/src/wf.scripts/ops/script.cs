@@ -10,10 +10,10 @@ namespace Z0
     using static z;
     using static Konst;
 
-    partial struct CmdScripts
+    partial struct Scripts
     {
         [MethodImpl(Inline), Op]
-        public static CmdScript script(utf8 id, CmdExpr[] expr)
+        public static CmdScript script(string id, CmdScriptExpr[] expr)
             => new CmdScript(id, expr);
     }
 }

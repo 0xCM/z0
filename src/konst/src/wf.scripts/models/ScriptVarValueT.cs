@@ -8,15 +8,15 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static CmdScripts;
+    using static Scripts;
 
     public readonly struct ScriptVarValue<T> : IScriptVarValue<T>
     {
         public T Content {get;}
 
         [MethodImpl(Inline)]
-        public ScriptVarValue(T name)
-            => Content = name;
+        public ScriptVarValue(T src)
+            => Content = src;
 
         public bool IsEmpty
         {

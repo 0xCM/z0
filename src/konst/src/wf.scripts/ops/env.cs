@@ -11,10 +11,16 @@ namespace Z0
     using static z;
     using static Konst;
 
-    partial struct CmdScripts
+    partial struct Scripts
     {
-        [MethodImpl(Inline), Op]
+        [Op]
         public static ScriptEnvVars env()
-            => new ScriptEnvVars();
+        {
+            var dst = new ScriptEnvVars();
+            dst.DevRoot = (nameof(ScriptEnvVars.DevRoot), Environment.GetEnvironmentVariable("ZDev"));
+            dst.Db = (nameof(ScriptEnvVars.Db), Environment.GetEnvironmentVariable("ZDb"));
+            dst.Control = (nameof(ScriptEnvVars.Control), Environment.GetEnvironmentVariable("ZControl"));
+            return dst;
+        }
     }
 }

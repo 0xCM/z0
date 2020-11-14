@@ -96,4 +96,15 @@ namespace Z0
         public Files PdbFiles
             => Files.Where(x => x.Is(Pdb)).Array();
     }
+
+    partial class XTend
+    {
+        [Op]
+        public static RuntimeArchive RuntimeArchive(this IWfShell wf)
+            => Z0.RuntimeArchive.create();
+
+        [Op]
+        public static RuntimeArchive RuntimeArchive(this IWfShell wf, FS.FolderPath src)
+            => Z0.RuntimeArchive.create(src);
+    }
 }

@@ -15,12 +15,12 @@ namespace Z0
         /// <summary>
         /// The tool identifier
         /// </summary>
-        public ToolId ToolId {get;}
+        public ToolId Id {get;}
 
         /// <summary>
         /// The tool output directory
         /// </summary>
-        public FS.FolderPath ToolOutput {get;}
+        public FS.FolderPath Target {get;}
 
         /// <summary>
         /// The process root folder
@@ -30,15 +30,15 @@ namespace Z0
         [MethodImpl(Inline)]
         public ToolArchive(ToolId tool, FS.FolderPath src, FS.FolderPath dst)
         {
-            ToolOutput = src;
-            ToolId = tool;
+            Target = src;
+            Id = tool;
             Processed = dst;
         }
 
-        public CmdOutput<T> Dir()
-            => ToolOutput.AllFiles.Map(f => new CmdTarget<T>(f));
+        public ToolOutput<T> Dir()
+            => Target.AllFiles.Map(Tooling.target<T>);
 
-        public CmdOutput<T> Dir(string pattern)
-            => ToolOutput.Files(pattern, true).Map(f => new CmdTarget<T>(f));
+        public ToolOutput<T> Dir(string pattern)
+            => Target.Files(pattern, true).Map(Tooling.target<T>);
     }
 }
