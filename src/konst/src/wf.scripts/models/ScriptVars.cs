@@ -11,18 +11,17 @@ namespace Z0
     using static Konst;
     using static CmdScripts;
 
-    public struct ScriptVars : IScriptVars<ScriptVars>
+    public struct ScriptDirVars : IScriptVars<ScriptDirVars>
     {
-        readonly Indexed<ScriptDir> Directories;
+        readonly Indexed<ScriptDirVar> Data;
 
         [MethodImpl(Inline)]
-        internal ScriptVars(ScriptDir[] src)
-        {
-            Directories = src;
-        }
+        internal ScriptDirVars(ScriptDirVar[] src)
+            => Data = src;
 
+        [MethodImpl(Inline)]
         public Indexed<IScriptVar> Members()
-            => Directories.Cast<IScriptVar>();
+            => Data.Cast<IScriptVar>();
 
         public string Format()
             => format(this);

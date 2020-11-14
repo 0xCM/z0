@@ -26,7 +26,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public CmdScript(string id, CmdExpr[] src)
+        public CmdScript(utf8 id, CmdExpr[] src)
         {
             Id = id;
             Data = src;

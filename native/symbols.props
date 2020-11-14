@@ -1,6 +1,5 @@
 <Project>
 
-
   <PropertyGroup>
     <MklApi>$(Native)mkl/src/z0.mkl.csproj</MklApi>
     <LibM>$(Native)libm/z0.libm.csproj</LibM>

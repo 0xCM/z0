@@ -11,15 +11,15 @@ namespace Z0
     using static Konst;
     using static CmdScripts;
 
-    public readonly struct ScriptEnv : IScriptVars<ScriptEnv>
+    public readonly struct ScriptEnvVars : IScriptVars<ScriptEnvVars>
     {
-        public ScriptDir ZDev
+        public ScriptDirVar ZDev
             => (nameof(ZDev), Environment.GetEnvironmentVariable(nameof(ZDev)));
 
-        public ScriptDir ZDb
+        public ScriptDirVar ZDb
             => (nameof(ZDb), Environment.GetEnvironmentVariable(nameof(ZDb)));
 
-        public ScriptDir ZControl
+        public ScriptDirVar ZControl
             => (nameof(ZControl), Environment.GetEnvironmentVariable(nameof(ZControl)));
 
         [MethodImpl(Inline)]

@@ -8,6 +8,6 @@ namespace Z0.Parts
 {
     public sealed class SymbolicTest : ExecutablePart<SymbolicTest>
     {
-         public override void Execute(params string[] args) => App.Run(args);
+         public override void Execute(params string[] args) => SymbolicTestApp.Run(args);
     }
 }

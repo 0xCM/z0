@@ -10,9 +10,9 @@ namespace Z0
     using static Konst;
     using static CmdScripts;
 
-    public struct ScriptVarValue
+    public readonly struct ScriptVarValue : IScriptVarValue<string>
     {
-        public string Content;
+        public string Content {get;}
 
         [MethodImpl(Inline)]
         public ScriptVarValue(string name)

@@ -10,7 +10,7 @@ namespace Z0.Parts
     {
          public override void Execute(params string[] args)
          {
-            App.Run(args);
+            MathTestApp.Run(args);
          }
     }
 }

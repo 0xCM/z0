@@ -13,10 +13,9 @@ namespace Z0
 
     partial struct CmdScripts
     {
-        [MethodImpl(Inline), Op]
-        public static ScriptEnv env()
-            => new ScriptEnv();
-
+        [Op, Closures(UnsignedInts)]
+        public static string format<T>(ScriptVarValue<T> src)
+            => string.Format("{0}", src.Content);
         [Op]
         public static string format(ScriptVar src)
             => string.Format("{0}={1}",src.Symbol, src.Value);
@@ -43,7 +42,7 @@ namespace Z0
         }
 
         [Op]
-        public static string format(ScriptVars src)
+        public static string format(ScriptDirVars src)
         {
             var dst = Buffers.text();
             render(src,dst);

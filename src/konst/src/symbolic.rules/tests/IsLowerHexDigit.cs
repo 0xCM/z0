@@ -21,7 +21,6 @@ namespace Z0
             internal static bit check(XF src)
                 => (src >= XF.FirstNumber && src <= XF.LastNumber) || (src >= XF.FirstLetterLo && src <= XF.LastLetterLo);
 
-
             [MethodImpl(Inline), Op]
             public static bit check(char src)
                 => check((XF)(src));

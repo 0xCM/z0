@@ -20,7 +20,7 @@ namespace Z0
         public static CaseLog<F,T> create<F,T>(FS.FilePath dst)
             where T : ITabular
             where F : unmanaged, Enum
-            => new CaseLog<F,T>(dst);
+                => new CaseLog<F,T>(dst);
 
         [Op]
         public static CaseLog create(FS.FilePath dst)

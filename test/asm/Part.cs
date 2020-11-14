@@ -6,8 +6,8 @@
 
 namespace Z0.Parts
 {
-    public sealed class AsmTest : ExecutablePart<AsmTest> 
-    { 
-        public override void Execute(params string[] args) => App.Run(args);                     
+    public sealed class AsmTest : ExecutablePart<AsmTest>
+    {
+        public override void Execute(params string[] args) => AsmTestApp.Run(args);
     }
 }

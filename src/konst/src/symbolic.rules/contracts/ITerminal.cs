@@ -8,18 +8,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static z;
 
-    public interface ISymbolicTest<S>
+   public interface ITerminal<S> : ISymbol<S>
         where S : unmanaged
     {
-        bit Check(S s);
-    }
 
-    public interface ISymbolicTest<H,S> : ISymbolicTest<S>, IKeyed<string>
-        where H : unmanaged, ISymbolicTest<H,S>
-        where S : unmanaged
-    {
-        string IKeyed<string>.Key
-                => typeof(H).AssemblyQualifiedName;
     }
 }

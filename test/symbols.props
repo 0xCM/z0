@@ -1,0 +1,12 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+    <PropertyGroup>
+        <MathTest>$(TestDir)math\z0.math.test.csproj</MathTest>
+        <AsmTest>$(TestDir)asm\z0.asm.test.csproj</AsmTest>
+        <BitsTest>$(TestDir)bits\z0.bits.test.csproj</BitsTest>
+        <GVecTest>$(TestDir)gvec\z0.gvec.test.csproj</GVecTest>
+        <LogixTest>$(TestDir)logix\z0.logix.test.csproj</LogixTest>
+        <SymbolicTest>$(TestDir)symbolic\z0.symbolic.test.csproj</SymbolicTest>
+        <MachinesTest>$(TestDir)machines\z0.machines.test.csproj</MachinesTest>
+    </PropertyGroup>
+</Project>

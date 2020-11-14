@@ -11,29 +11,36 @@ namespace Z0
     using static Konst;
     using static CmdScripts;
 
-    public struct ScriptDir : IScriptVar<ScriptVar>
+    public struct ScriptDirVar : IScriptVar<ScriptVar>
     {
         public ScriptSymbol Symbol {get;}
 
         public ScriptVarValue Value {get;}
 
         [MethodImpl(Inline)]
-        public ScriptDir(ScriptSymbol name, ScriptVarValue value)
+        public ScriptDirVar(ScriptSymbol name, ScriptVarValue value)
         {
             Symbol = name;
             Value = value;
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator ScriptDir((ScriptSymbol symbol, ScriptVarValue value) src)
-            => new ScriptDir(src.symbol, src.value);
+        public ScriptDirVar(ScriptSymbol name)
+        {
+            Symbol = name;
+            Value = ScriptVarValue.Empty;
+        }
 
         [MethodImpl(Inline)]
-        public static implicit operator ScriptVar(ScriptDir src)
-            => new ScriptDir(src.Symbol, src.Value);
+        public static implicit operator ScriptDirVar((ScriptSymbol symbol, ScriptVarValue value) src)
+            => new ScriptDirVar(src.symbol, src.value);
 
         [MethodImpl(Inline)]
-        public static ScriptDir operator + (ScriptDir a, ScriptDir b)
+        public static implicit operator ScriptVar(ScriptDirVar src)
+            => new ScriptDirVar(src.Symbol, src.Value);
+
+        [MethodImpl(Inline)]
+        public static ScriptDirVar operator + (ScriptDirVar a, ScriptDirVar b)
             => combine(a,b);
     }
 }

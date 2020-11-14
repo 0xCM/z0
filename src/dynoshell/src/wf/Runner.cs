@@ -62,8 +62,6 @@ namespace Z0
             return buffer.Array();
         }
 
-
-
         public void EmitRuntimeIndex()
         {
             using var flow = Wf.Running();

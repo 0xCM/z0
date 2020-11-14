@@ -51,7 +51,7 @@ public enum PartId : ulong
 
     Monitor = 41,
 
-    ToolCli = 43,
+    Driver = 43,
 
     Run = 50,
 
@@ -201,6 +201,8 @@ public enum PartId : ulong
     UnsignedTest = Unsigned | Test,
 
     GVecTest = GVec | Test,
+
+    TestDriver = Driver | Test,
 
     // ~ Classifiers
     // ~ -------------------------------------------------------------------------------

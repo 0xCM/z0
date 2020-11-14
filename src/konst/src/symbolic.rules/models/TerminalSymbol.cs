@@ -8,26 +8,23 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static z;
 
-    public readonly struct InputValue<T> : ITextual
+   public readonly struct TerminalSymbol<S> : ITerminal<S>
+        where S : unmanaged
     {
-        public readonly T Value;
+        public S Value {get;}
 
         [MethodImpl(Inline)]
-        public InputValue(T src)
-        {
-            Value = src;
-        }
+        public TerminalSymbol(S value)
+            => Value = value;
 
         [MethodImpl(Inline)]
-        public string Format()
-            => Value?.ToString() ?? EmptyString;
-
-        public override string ToString()
-                => Format();
+        public static implicit operator TerminalSymbol<S>(S src)
+            => new TerminalSymbol<S>(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator InputValue<T>(T src)
-            => new InputValue<T>(src);
+        public static implicit operator S(TerminalSymbol<S> src)
+            => src.Value;
     }
 }

@@ -9,13 +9,13 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public struct CmdScript<T> : ICmdScript<CmdScript<T>,T>
-        where T : struct, ICmdScript<T>
+    public struct CmdScript<T> : IToolScript<CmdScript<T>,T>
+        where T : struct, IToolScript<T>
     {
         public T Content;
 
-        public ToolId CmdId
-            => Content.CmdId;
+        public ToolId ToolId
+            => Content.ToolId;
 
         [MethodImpl(Inline)]
         public CmdScript(T data)

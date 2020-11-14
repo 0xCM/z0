@@ -4,14 +4,16 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IScriptVars
-    {
-        Indexed<IScriptVar> Members();
-    }
+    using System;
 
-    public interface IScriptVars<H> : IScriptVars
-        where H : IScriptVars<H>, new()
+    [ApiHost]
+    public readonly struct BuildScripts
     {
-
+        public bool config<T>(string src, out T dst)
+            where T : struct
+        {
+            dst = default;
+            return true;
+        }
     }
 }

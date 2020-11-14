@@ -8,26 +8,23 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static z;
 
-    public readonly struct OutputValue<T> : ITextual
+   public readonly struct Nonterminal<S> : INonterminal<S>
+        where S : unmanaged
     {
-        public readonly T Value;
+        public S Value {get;}
 
         [MethodImpl(Inline)]
-        public OutputValue(T src)
-        {
-            Value = src;
-        }
+        public Nonterminal(S value)
+            => Value = value;
 
         [MethodImpl(Inline)]
-        public string Format()
-            => Value?.ToString() ?? EmptyString;
-
-        public override string ToString()
-                => Format();
+        public static implicit operator Nonterminal<S>(S src)
+            => new Nonterminal<S>(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator OutputValue<T>(T src)
-            => new OutputValue<T>(src);
+        public static implicit operator S(Nonterminal<S> src)
+            => src.Value;
     }
 }

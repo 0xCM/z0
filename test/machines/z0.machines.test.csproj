@@ -9,7 +9,6 @@
     <ProjectReference Include="$(Validity)" />
     <ProjectReference Include="$(Merge)" />
     <ProjectReference Include="$(MathSvc)" />
-
   </ItemGroup>
 
 </Project>

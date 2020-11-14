@@ -49,12 +49,14 @@ namespace Z0
         /// <summary>
         /// The <typeparamref name='T' /> cell bit-width
         /// </summary>
-        ushort SegWidth => (ushort)bitwidth<T>();
+        ushort SegWidth
+            => (ushort)bitwidth<T>();
 
         /// <summary>
         /// The <typeparamref name='T' /> cell value
         /// </summary>
-        T Cell => Unsafe.As<S,T>(ref edit(Value));
+        T Cell
+            => Unsafe.As<S,T>(ref edit(Value));
     }
 
     public interface ISymbol<S,T,N> : ISymbol<S,T>

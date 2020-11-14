@@ -13,7 +13,7 @@ namespace Z0
     partial struct CmdScripts
     {
         [Op]
-        public static void render(ScriptVars src, ITextBuffer dst)
+        public static void render(ScriptDirVars src, ITextBuffer dst)
         {
             var members = src.Members().View;
             var count = members.Length;

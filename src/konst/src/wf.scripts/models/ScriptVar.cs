@@ -10,10 +10,19 @@ namespace Z0
     using static Konst;
     using static CmdScripts;
 
+    /// <summary>
+    /// Defines a script variable
+    /// </summary>
     public struct ScriptVar : IScriptVar<ScriptVar>
     {
+        /// <summary>
+        /// The variable symbol
+        /// </summary>
         public ScriptSymbol Symbol {get;}
 
+        /// <summary>
+        /// The variable value, possibly empty
+        /// </summary>
         public ScriptVarValue Value {get;}
 
         [MethodImpl(Inline)]
@@ -21,6 +30,13 @@ namespace Z0
         {
             Symbol = name;
             Value = value;
+        }
+
+        [MethodImpl(Inline)]
+        public ScriptVar(ScriptSymbol name)
+        {
+            Symbol = name;
+            Value = ScriptVarValue.Empty;
         }
 
         [MethodImpl(Inline)]

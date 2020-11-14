@@ -6,9 +6,12 @@ namespace Z0
 {
     using static ApiNameParts;
 
-    class App : TestApp<App>
+    public class LogixTestApp : TestApp<LogixTestApp>
     {
-        public static void Main(params string[] args)
+        static void Main(params string[] args)
+            => Run(args);
+
+        public static void run(params string[] args)
             => Run(args);
     }
 

@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    class App
+    public class MachinesTestApp
     {
         AgentContext AgentContext;
 
@@ -14,7 +14,7 @@ namespace Z0
 
         IAgentControl Control;
 
-        App(AgentContext context, string[] args)
+        MachinesTestApp(AgentContext context, string[] args)
         {
             AgentContext = context;
             Wf = WfShellInit.create(args);
@@ -54,10 +54,13 @@ namespace Z0
             }
         }
 
-        public static void Main(params string[] args)
+        public static void run(params string[] args)
         {
-            var app = new App(new AgentContext(SystemEventWriter.Log), args);
+            var app = new MachinesTestApp(new AgentContext(SystemEventWriter.Log), args);
             app.Exec();
+
         }
+        static void Main(params string[] args)
+            => run(args);
     }
 }

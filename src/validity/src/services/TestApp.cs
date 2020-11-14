@@ -24,15 +24,12 @@ namespace Z0
 
         protected virtual string AppName {get;}
 
-        static IAppMsgLog app(FS.FilePath std, FS.FilePath err)
-            => new AppMsgLog(std, err);
-
         protected TestApp()
         {
             CaseLog = CaseLogs.create(LogPaths.CaseLogPath);
             OnDispose += CaseLog.Dispose;
             AppName = GetType().Assembly.GetSimpleName();
-            Log = app(LogPaths.TestStatusLogPath, LogPaths.TestErrorLogPath);
+            Log = new AppMsgLog(LogPaths.TestStatusLogPath, LogPaths.TestErrorLogPath);
         }
 
         ConcurrentQueue<TestCaseRecord> TestResultQueue {get;}

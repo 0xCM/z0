@@ -3,9 +3,12 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
-    class App : TestApp<App>
-    {                    
-        public static void Main(params string[] args) => Run(args);    
+{
+    public class SymbolicTestApp : TestApp<SymbolicTestApp>
+    {
+        static void Main(params string[] args) => Run(args);
+
+        public static void run(params string[] args)
+            => Run(args);
     }
 }

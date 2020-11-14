@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public struct CmdScriptPattern : ICmdScript<CmdScriptPattern>
+    public struct CmdScriptPattern : IToolScript<CmdScriptPattern>
     {
         public FS.FolderName CmdRootName;
 
@@ -45,7 +45,7 @@ namespace Z0
         public override string ToString()
             => Format();
 
-        ToolId ICmdScript.CmdId
+        ToolId IToolScript.ToolId
             => Tool;
     }
 }

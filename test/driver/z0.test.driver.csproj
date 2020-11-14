@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="$(Apps)" />
+    <ProjectReference Include="$(Asm)" />
+    <ProjectReference Include="$(Capture)" />
+    <ProjectReference Include="$(Domain)" />
+    <ProjectReference Include="$(Validity)" />
+    <ProjectReference Include="$(MathSvc)" />
+
+    <ProjectReference Include="$(AsmTest)" />
+    <ProjectReference Include="$(BitsTest)" />
+    <ProjectReference Include="$(MathTest)" />
+    <ProjectReference Include="$(GVecTest)" />
+    <ProjectReference Include="$(LogixTest)" />
+    <ProjectReference Include="$(SymbolicTest)" />
+
+  </ItemGroup>
+
+</Project>

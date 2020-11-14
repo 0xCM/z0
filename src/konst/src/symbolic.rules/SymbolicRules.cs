@@ -10,6 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
     using static Symbolic;
+    using static SymbolicTests;
 
     [ApiHost(ApiNames.Rules, true)]
     public readonly partial struct SymbolicRules
@@ -28,5 +29,9 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static RuleEffect<T> effect<T>(T[] spec)
             => new RuleEffect<T>(spec);
+
+        [MethodImpl(Inline), Op]
+        public static IsOneOf oneOf(params char[] subjects)
+            => new IsOneOf(subjects);
     }
 }

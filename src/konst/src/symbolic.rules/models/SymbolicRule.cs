@@ -12,11 +12,11 @@ namespace Z0
 
     public readonly struct SymbolicRule<T>
     {
-        public RuleId RuleId { get; }
+        public RuleId RuleId {get;}
 
-        public RuleOperand<T>[] Operands { get; }
+        public RuleOperand<T>[] Operands {get;}
 
-        public RuleEffect<T> Effect { get; }
+        public RuleEffect<T> Effect {get;}
 
         [MethodImpl(Inline)]
         public SymbolicRule(RuleId id, RuleOperand<T>[] operands, RuleEffect<T> effect)
@@ -38,5 +38,4 @@ namespace Z0
             get => (byte)Operands.Length;
         }
     }
-    
 }
