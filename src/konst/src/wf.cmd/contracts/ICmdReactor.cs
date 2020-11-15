@@ -8,7 +8,8 @@ namespace Z0
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    public interface ICmdNode : IWfService
+    [Free]
+    public interface ICmdReactor : IWfService
     {
         CmdId CmdId {get;}
 
@@ -16,22 +17,22 @@ namespace Z0
     }
 
     [Free]
-    public interface ICmdNode<S,T> : ICmdNode
+    public interface ICmdReactor<S,T> : ICmdReactor
         where S : struct, ICmdSpec<S>
         where T : struct
     {
-        CmdId ICmdNode.CmdId
+        CmdId ICmdReactor.CmdId
             => default(S).CmdId;
 
         T Process(S src);
 
-        ValueType ICmdNode.Process(ICmdSpec src)
+        ValueType ICmdReactor.Process(ICmdSpec src)
             => Process((S)src);
     }
 
     [Free]
-    public interface ICmdNode<H,S,T> : ICmdNode<S,T>, IWfService<H>
-        where H : ICmdNode<H,S,T>, new()
+    public interface ICmdReactor<H,S,T> : ICmdReactor<S,T>, IWfService<H>
+        where H : ICmdReactor<H,S,T>, new()
         where S : struct, ICmdSpec<S>
         where T : struct
     {

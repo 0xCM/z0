@@ -47,8 +47,12 @@ namespace Z0
             Wf.Disposed();
         }
 
-        CmdResult EmitOpCodes()
-            => EmitAsmOpCodes.run(Wf);
+        FS.FilePath EmitOpCodes()
+        {
+            var spec = EmitAsmOpCodes.Spec();
+            spec.WithTarget(Wf.Db().RefDataPath("asm.opcodes"));
+            return EmitAsmOpCodes.Create(Wf).Process(spec);
+        }
 
         CmdResult EmitPatterns()
             => EmitRenderPatterns.run(Wf, Wf.CmdCatalog.EmitRenderPatterns(typeof(RP)));
@@ -295,6 +299,5 @@ namespace Z0
 
             public const string Case0 = @"llvm-pdbutil dump --streams J:\dev\projects\z0\.build\bin\netcoreapp3.1\win-x64\z0.math.pdb > z0.math.pdb.streams.log";
         }
-
     }
 }

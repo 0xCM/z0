@@ -9,7 +9,7 @@ namespace Z0
     /// <summary>
     /// Identifies a workflow node processor
     /// </summary>
-    public class WfNodeAttribute : Attribute
+    public class CmdReactorAttribute : Attribute
     {
 
     }

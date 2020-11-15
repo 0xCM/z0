@@ -10,20 +10,14 @@ namespace Z0
     using static Konst;
     using static z;
 
-    [WfHost]
-    public sealed class CheckBitMasksHost : WfHost<CheckBitMasksHost>
+    sealed class CheckBitMasksReactor : CmdReactor<CheckBitMasksReactor,CheckBitMasksCmd,Outcome>
     {
-        public static void control(IWfShell wf, IPolyrand source)
+        protected override Outcome Run(CheckBitMasksCmd cmd)
         {
             var log = text.build();
-            var host  = new CheckBitMasksHost();
-            using var step = new BitMaskChecker(wf, host, source, log);
+            using var step = new BitMaskChecker(Wf, Host, Wf.PolySource, log);
             step.Run();
-        }
-
-        protected override void Execute(IWfShell shell)
-        {
-            throw new NotImplementedException();
+            return true;
         }
     }
 }

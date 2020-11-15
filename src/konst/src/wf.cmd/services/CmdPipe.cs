@@ -15,18 +15,18 @@ namespace Z0
     {
         IWfShell Wf;
 
-        ConcurrentDictionary<CmdId,ICmdNode> Nodes;
+        ConcurrentDictionary<CmdId,ICmdReactor> Nodes;
 
         public void Init(IWfShell wf)
         {
             Wf = wf;
-            Nodes = new ConcurrentDictionary<CmdId, ICmdNode>();
+            Nodes = new ConcurrentDictionary<CmdId, ICmdReactor>();
         }
 
         public CmdPipe(IWfShell wf)
         {
             Wf =wf;
-            Nodes = new ConcurrentDictionary<CmdId, ICmdNode>();
+            Nodes = new ConcurrentDictionary<CmdId, ICmdReactor>();
         }
 
         public Outcome<T> Process<S,T>(S src)

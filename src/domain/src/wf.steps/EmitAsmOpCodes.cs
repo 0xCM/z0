@@ -12,24 +12,8 @@ namespace Z0
     using static Konst;
     using static z;
 
-    [WfNode]
-    public sealed class EmitAsmOpCodes : CmdNode<EmitAsmOpCodes, EmitAsmOpCodesCmd, FS.FilePath>
+    public sealed class EmitAsmOpCodes : CmdReactor<EmitAsmOpCodes, EmitAsmOpCodesCmd, FS.FilePath>
     {
-        public static CmdResult run(IWfShell wf)
-        {
-            var spec = wf.CmdSpecs().EmitAsmOpCodes();
-            spec.WithTarget(wf.Db().RefDataPath("asm.opcodes"));
-            return run(wf,spec);
-        }
-
-        [CmdWorker]
-        public static CmdResult run(IWfShell wf, in EmitAsmOpCodesCmd cmd)
-        {
-            var node = Node(wf);
-            node.Run(cmd);
-            return Cmd.ok(cmd);
-        }
-
         protected override FS.FilePath Run(EmitAsmOpCodesCmd cmd)
         {
             var data = AsmOpCodes.dataset().Entries;

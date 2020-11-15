@@ -56,7 +56,7 @@ namespace Z0
         Assembly[] Components
             => Context.ApiParts.Components;
 
-        IPolySource PolySource
+        IPolySourced PolySource
             => Random;
 
         IWfPaths IWfContext.Paths

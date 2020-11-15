@@ -27,7 +27,7 @@ namespace Z0
 
         public Pair<uint> Counts;
 
-        readonly IPolyrand DataSource;
+        readonly IPolySourced DataSource;
 
         Span<byte> Cases8;
 
@@ -53,7 +53,7 @@ namespace Z0
 
         CheckHiMaskResults<ulong> HiMaskResults64;
 
-        public BitMaskChecker(IWfShell wf, WfHost host, IPolyrand source, StringBuilder log)
+        public BitMaskChecker(IWfShell wf, WfHost host, IPolySourced source, StringBuilder log)
             : this()
         {
             Host = host;

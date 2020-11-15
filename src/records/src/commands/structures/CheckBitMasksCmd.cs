@@ -5,10 +5,10 @@
 namespace Z0
 {
     [Cmd]
-    public struct EmitAssemblyRefsCmd : ICmdSpec<EmitAssemblyRefsCmd>
-    {
-        public Files Sources;
 
-        public FS.FilePath Target;
+    public struct CheckBitMasksCmd : ICmdSpec<CheckBitMasksCmd>
+    {
+
+
     }
 }

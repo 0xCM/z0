@@ -310,7 +310,8 @@ namespace Z0
             var methods = typeof(BitMaskChecker).Methods().WithNameStartingWith("CheckLoMask");
             var dst = Wf.AppData + FS.file("bitmasks", ArchiveFileKinds.Asm);
             var routines = asmWf.Decode(methods, dst);
-            CheckBitMasksHost.control(Wf, Random);
+            var reactor = CheckBitMasksReactor.Create(Wf);
+            reactor.Process(CheckBitMasksReactor.Spec());
         }
 
         void ListTextResources()
@@ -323,7 +324,6 @@ namespace Z0
                 Wf.Row(row);
             }
         }
-
 
         public void Run89(params Assembly[] src)
         {

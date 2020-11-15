@@ -14,6 +14,8 @@ namespace Z0
     using static Konst;
     using static z;
 
+    using D = System.Diagnostics;
+
     [ApiHost]
     public readonly struct ProcessImages
     {

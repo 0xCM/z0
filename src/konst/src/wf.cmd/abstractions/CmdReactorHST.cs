@@ -10,18 +10,23 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public abstract class CmdNode<H,S,T> : ICmdNode<H,S,T>
-        where H : CmdNode<H,S,T>, new()
+    [CmdReactor]
+    public abstract class CmdReactor<H,S,T> : ICmdReactor<H,S,T>
+        where H : CmdReactor<H,S,T>, new()
         where S : struct, ICmdSpec<S>
         where T : struct
     {
+        protected WfHost Host;
+
         protected IWfShell Wf;
 
-        protected static S Spec() => new S();
+        protected IFileDb Db => Wf.Db();
+
+        public static S Spec() => new S();
 
         public CmdId CmdId => Spec().Id;
 
-        public static H Node(IWfShell wf)
+        public static H Create(IWfShell wf)
         {
             var node = new H();
             node.Init(wf);
@@ -36,6 +41,9 @@ namespace Z0
         }
 
         public void Init(IWfShell wf)
-            => Wf = wf;
+        {
+            Host = WfSelfHost.create(typeof(H));
+            Wf = wf.WithHost(Host);
+        }
     }
 }
