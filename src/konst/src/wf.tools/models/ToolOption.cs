@@ -20,6 +20,11 @@ namespace Z0
         internal const string AnonymousOptionName = "_anonymous_";
 
         /// <summary>
+        /// The option index, relative ot others in a sequence
+        /// </summary>
+        public ushort Index {get;}
+
+        /// <summary>
         /// The option name
         /// </summary>
         public string Name {get;}
@@ -32,6 +37,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public ToolOption(string name)
         {
+            Index = 0;
             Name = name;
             Purpose = EmptyString;
         }
@@ -39,6 +45,15 @@ namespace Z0
         [MethodImpl(Inline)]
         public ToolOption(string name, string purpose)
         {
+            Index = 0;
+            Name = name;
+            Purpose = purpose;
+        }
+
+        [MethodImpl(Inline)]
+        public ToolOption(ushort index, string name, string purpose)
+        {
+            Index = index;
             Name = name;
             Purpose = purpose;
         }

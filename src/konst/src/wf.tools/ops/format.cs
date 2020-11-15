@@ -6,12 +6,40 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
 
     using static Konst;
     using static z;
 
     partial struct Tooling
     {
+        [Projector]
+        static ref ToolOption extract(MemberInfo src, ushort index, out ToolOption dst)
+        {
+            var tag = src.RequiredTag<SlotAttribute>();
+            var purpose = src.Tag<MeaningAttribute>().MapValueOrElse(t => (string)t.Content, () => EmptyString);
+            dst = option(index, text.ifempty(tag.Name, src.Name), purpose);
+            return ref dst;
+        }
+
+        [Formatter]
+        public static string format(OptionDelimiter src)
+        {
+            var len = src.Length;
+            if(len == 0)
+                return EmptyString;
+            else if(len == 1)
+            {
+                Span<char> content = stackalloc char[1]{(char)src.C0};
+                return new string(content);
+            }
+            else
+            {
+                Span<char> content = stackalloc char[2]{(char)src.C0, (char)src.C1};
+                return new string(content);
+            }
+        }
+
         [MethodImpl(Inline), Formatter]
         public static string format(ToolOption src)
             => src.IsAnonymous || src.IsEmpty ? EmptyString : src.Name;

@@ -7,7 +7,17 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
+    [Free]
+    public interface IDataType : IReified
+    {
+    }
 
+    [Free]
+    public interface IDataType<T> : IDataType, IReified<T>
+        where  T : struct, IDataType<T>
+    {
+
+    }
 }

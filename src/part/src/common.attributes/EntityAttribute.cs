@@ -5,11 +5,11 @@
 namespace Z0
 {
     using System;
+
     /// <summary>
-    /// Identifies a specialized literal cover
+    /// Identifies a data entity
     /// </summary>
-    [AttributeUsage(AttributeTargets.Struct)]
-    public class LiteralCoverAttribute : Attribute
+    public class EntityAttribute : Attribute
     {
 
     }

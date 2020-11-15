@@ -3,14 +3,12 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
-    using System;
-    using System.Security;
-        
-    [SuppressUnmanagedCodeSecurity]
-    public interface IDataEntity<T> : ITextual, INullary<T>, IEquatable<T>
-        where T : struct
+{
+    /// <summary>
+    /// Identifies operations of the form source -> target
+    /// </summary>
+    public class ProjectorAttribute : OpAttribute
     {
-        
+
     }
 }

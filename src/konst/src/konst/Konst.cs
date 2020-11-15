@@ -203,13 +203,13 @@ namespace Z0
         /// parametrically-identified type is not supported
         /// </summary>
         /// <typeparam name="T">The unsupported type</typeparam>
-        [MethodImpl(Inline), Closures(AllNumeric)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static NotSupportedException no<T>()
             => Unsupported.define<T>();
 
-        [MethodImpl(Inline), Closures(AllNumeric)]
-        public static T bad<T>()
-            => Unsupported.raise<T>();
+        [MethodImpl(NotInline), Op, Closures(AllNumeric)]
+        public static ArgumentException bad<T>(T arg)
+            => new ArgumentException(arg?.ToString() ?? "<null>");
 
         public static T no<S,T>()
             => Unsupported.raise<T>($"The transformation {typeof(S).Name} -> {typeof(T).Name} is undefined");

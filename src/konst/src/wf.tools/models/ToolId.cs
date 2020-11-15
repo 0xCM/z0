@@ -10,6 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
+    [DataType]
     public struct ToolId : IIdentified<ToolId,string>
     {
         public string Id {get;}

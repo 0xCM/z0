@@ -5,20 +5,21 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface IToolModel
+    public interface IReified
     {
-        Type ModelType {get;}
+        Type HostType {get;}
     }
 
     [Free]
-    public interface IToolModel<T> : IToolModel
-        where T : struct, IToolModel<T>
+    public interface IReified<T> : IReified
+        where T : IReified<T>
     {
-        Type IToolModel.ModelType
+        Type IReified.HostType
             => typeof(T);
     }
 }

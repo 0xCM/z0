@@ -16,25 +16,25 @@ namespace Z0
 
         public const string Usage = "pdb2xml <PEFile | DeltaPdb> [/out <output file>] [/tokens] [/methodSpans] [/delta] [/srcsvr] [/sources] [/native]";
 
-        [Position(0), Meaning("The input file path")]
+        [Slot(0), Meaning("The input file path")]
         public FS.FilePath SrcPath;
 
-        [Name("out"), Meaning("The output file path")]
+        [Slot("out"), Meaning("The output file path")]
         public FS.FilePath DstPath;
 
-        [Name("tokens")]
+        [Slot("tokens")]
         public bool Tokens;
 
-        [Name("methodSpans")]
+        [Slot("methodSpans")]
         public bool MethodSpans;
 
-        [Name("delta")]
+        [Slot("delta")]
         public bool Delta;
 
-        [Name("sources")]
+        [Slot("sources")]
         public bool Sources;
 
-        [Name("native")]
+        [Slot("native")]
         public bool Native;
     }
 }

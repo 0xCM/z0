@@ -11,6 +11,7 @@ namespace Z0
 
     using api = Names;
 
+    [DataType]
     public readonly struct Name : IName<string>, IEquatable<Name>, IComparable<Name>
     {
         public readonly string Content;

@@ -20,7 +20,7 @@ namespace Z0
     /// that often, as a flagrant display of idiocy, have numbering schemes that are content-type
     /// independent and even document-location independent
     /// </summary>
-    public readonly struct ContentRef : IDataEntity<E>
+    public readonly struct ContentRef : ITextual, INullary<ContentRef>, IEquatable<ContentRef>
     {
         readonly S State;
 

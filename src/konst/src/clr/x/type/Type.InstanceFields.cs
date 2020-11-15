@@ -8,17 +8,17 @@ namespace Z0
     using System.Reflection;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static ReflectionFlags;
 
     partial class XClrQuery
     {
         /// <summary>
-        /// Retrieves the public and non-public instance methods declared by a type
+        /// Retrieves the public and non-public instance fields declared or inherited by a type
         /// </summary>
         /// <param name="t">The type to examine</param>
         [MethodImpl(Inline), Op]
-        public static MethodInfo[] InstanceMethods(this Type src)
-            => src.GetMethods(BF_World);
+        public static FieldInfo[] InstanceFields(this Type src)
+            => src.GetFields(BF_World);
     }
 }

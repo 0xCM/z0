@@ -10,6 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
+    [DataType]
     public readonly struct ToolOptions : IIndexedView<ToolOptions,ushort,ToolOption>
     {
         readonly IndexedView<ToolOption> Data;

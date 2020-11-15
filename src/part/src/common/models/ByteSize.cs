@@ -13,7 +13,7 @@ namespace Z0
     /// Specifies data size in bytes
     /// </summary>
     [ApiDataType]
-    public readonly struct ByteSize : ITextual
+    public readonly struct ByteSize : IDataType<ByteSize>, ITextual
     {
         [MethodImpl(Inline)]
         public static string format(ByteSize src)

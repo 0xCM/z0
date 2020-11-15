@@ -17,7 +17,7 @@ namespace Z0
     /// <summary>
     /// Defines a reference to document content
     /// </summary>
-    public readonly struct DocRef : IDataEntity<E>
+    public readonly struct DocRef : ITextual, INullary<DocRef>, IEquatable<DocRef>
     {
         readonly S State;
 
