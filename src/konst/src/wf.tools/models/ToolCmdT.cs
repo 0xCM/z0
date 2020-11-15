@@ -9,7 +9,10 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public struct ToolScript<T> : IToolScript<ToolScript<T>,T>
+    /// <summary>
+    /// Defines a tool invocation script
+    /// </summary>
+    public struct ToolCmd<T> : IToolScript<ToolCmd<T>,T>
         where T : struct, IToolScript<T>
     {
         public T Content;
@@ -18,7 +21,7 @@ namespace Z0
             => Content.ToolId;
 
         [MethodImpl(Inline)]
-        public ToolScript(T data)
+        public ToolCmd(T data)
             => Content = data;
 
         [MethodImpl(Inline)]
@@ -32,7 +35,7 @@ namespace Z0
             => Content;
 
         [MethodImpl(Inline)]
-        public static implicit operator ToolScript<T>(T src)
-            => new ToolScript<T>(src);
+        public static implicit operator ToolCmd<T>(T src)
+            => new ToolCmd<T>(src);
     }
 }

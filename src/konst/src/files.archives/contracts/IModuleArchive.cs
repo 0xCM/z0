@@ -10,7 +10,7 @@ namespace Z0
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface IModuleArchive : IFileArchive<ModuleArchive>
+    public interface IModuleArchive : IFileArchive
     {
         IEnumerable<FileModule> ManagedDllFiles();
 

@@ -9,12 +9,12 @@ namespace Z0
     using System.Reflection;
 
     using static Konst;
-    
+
     partial struct Formatters
     {
         public static IFormatter custom(object src)
         {
-            var attrib = src?.GetType()?.GetCustomAttribute<FormatterAttribute>();
+            var attrib = src?.GetType()?.GetCustomAttribute<FormatterServiceAttribute>();
             if(attrib != null)
                 return custom(attrib.Realization);
             else
@@ -31,6 +31,6 @@ namespace Z0
             {
                 return DefaultFormatter.Service;
             }
-        }        
+        }
     }
 }

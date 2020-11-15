@@ -18,16 +18,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static IToolDb db(FS.FolderPath storage)
             => new ToolDb(storage);
-
-        [MethodImpl(Inline)]
-        public static ToolTarget<T,F> target<T,F>(F kind, FS.FilePath path)
-            where T : struct, ITool<T>
-            where F : unmanaged
-                => new ToolTarget<T,F>(kind, path);
-
-        [MethodImpl(Inline)]
-        public static ToolTarget<T> target<T>(FS.FilePath path)
-            where T : struct, ITool<T>
-                => new ToolTarget<T>(path);
     }
 }

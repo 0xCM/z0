@@ -9,9 +9,9 @@ namespace Z0
     /// <summary>
     /// Applied to a type to specify a non-default formatter
     /// </summary>
-    public class FormatterAttribute : Attribute
-    {        
-        public FormatterAttribute(Type realization)
+    public class FormatterServiceAttribute : Attribute
+    {
+        public FormatterServiceAttribute(Type realization)
             => this.Realization = realization;
 
         /// <summary>

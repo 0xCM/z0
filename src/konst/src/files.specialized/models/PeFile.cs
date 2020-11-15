@@ -16,20 +16,20 @@ namespace Z0
     {
         public FS.FilePath Path {get;}
 
-        public PeFileKind FileKind {get;}
+        public PeFileKind Kind {get;}
 
         [MethodImpl(Inline)]
         public PeFile(FS.FilePath path)
         {
             Path = path;
-            FileKind = Enums.parse(Path.Ext.Name, PeFileKind.None);
+            Kind = Enums.parse(Path.Ext.Name, PeFileKind.None);
         }
 
         [MethodImpl(Inline)]
         public PeFile(FS.FilePath path, PeFileKind kind)
         {
             Path = path;
-            FileKind = kind;
+            Kind = kind;
         }
     }
 }

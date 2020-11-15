@@ -13,7 +13,7 @@ namespace Z0
     }
 
     [Free]
-    public interface IPeFile<T> : IPeFile, IKindedFile<PeFileKind>
+    public interface IPeFile<T> : IPeFile, IFile<PeFileKind>
         where T : struct, IPeFile<T>
     {
 

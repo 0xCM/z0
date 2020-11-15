@@ -7,11 +7,11 @@ namespace Z0
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface IFileModule : IFile, IKindedFile<FileModuleKind>
+    public interface IFileModule : IFile<FileModuleKind>
     {
         FileModuleKind ModuleKind {get;}
 
-        FileModuleKind IKindedFile<FileModuleKind>.FileKind
+        FileModuleKind IFile<FileModuleKind>.Kind
             => ModuleKind;
 
         string ITextual.Format()

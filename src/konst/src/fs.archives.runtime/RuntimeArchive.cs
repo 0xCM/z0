@@ -14,7 +14,7 @@ namespace Z0
     using static ArchiveFileKinds;
 
     [ApiHost]
-    public readonly struct RuntimeArchive : IFileArchive<RuntimeArchive>
+    public readonly struct RuntimeArchive : IFileArchive
     {
         public FS.FolderPath Root {get;}
 

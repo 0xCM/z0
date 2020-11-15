@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     using api = Names;
 
@@ -18,42 +18,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public Name(string src)
             => Content = src;
-
-        [MethodImpl(Inline)]
-        public static implicit operator Name(string src)
-            => new Name(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator string(Name src)
-            => src.Content;
-
-        [MethodImpl(Inline)]
-        public static implicit operator ReadOnlySpan<char>(Name src)
-            => src.Content;
-
-        [MethodImpl(Inline)]
-        public static bool operator <(Name x, Name y)
-            => x.CompareTo(y) < 0;
-
-        [MethodImpl(Inline)]
-        public static bool operator <=(Name x, Name y)
-            => x.CompareTo(y) <= 0;
-
-        [MethodImpl(Inline)]
-        public static bool operator >(Name x, Name y)
-            => x.CompareTo(y) > 0;
-
-        [MethodImpl(Inline)]
-        public static bool operator >=(Name x, Name y)
-            => x.CompareTo(y) >= 0;
-
-        [MethodImpl(Inline)]
-        public static bool operator ==(Name x, Name y)
-            => x.Content == y.Content;
-
-        [MethodImpl(Inline)]
-        public static bool operator !=(Name x, Name y)
-            => x.Content != y.Content;
 
         [MethodImpl(Inline)]
         public string Format()
@@ -119,5 +83,41 @@ namespace Z0
 
         public override bool Equals(object src)
             => src is Name n && Equals(n);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Name(string src)
+            => new Name(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator string(Name src)
+            => src.Content;
+
+        [MethodImpl(Inline)]
+        public static implicit operator ReadOnlySpan<char>(Name src)
+            => src.Content;
+
+        [MethodImpl(Inline)]
+        public static bool operator <(Name x, Name y)
+            => x.CompareTo(y) < 0;
+
+        [MethodImpl(Inline)]
+        public static bool operator <=(Name x, Name y)
+            => x.CompareTo(y) <= 0;
+
+        [MethodImpl(Inline)]
+        public static bool operator >(Name x, Name y)
+            => x.CompareTo(y) > 0;
+
+        [MethodImpl(Inline)]
+        public static bool operator >=(Name x, Name y)
+            => x.CompareTo(y) >= 0;
+
+        [MethodImpl(Inline)]
+        public static bool operator ==(Name x, Name y)
+            => x.Content == y.Content;
+
+        [MethodImpl(Inline)]
+        public static bool operator !=(Name x, Name y)
+            => x.Content != y.Content;
     }
 }

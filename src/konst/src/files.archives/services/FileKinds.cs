@@ -14,7 +14,7 @@ namespace Z0
     /// <summary>
     /// Defines a rooted archive over files with specified extensions
     /// </summary>
-    public readonly struct FileKinds : IFileArchive<FileArchive>
+    public readonly struct FileKinds : IFileArchive
     {
         public FS.FolderPath Root {get;}
 

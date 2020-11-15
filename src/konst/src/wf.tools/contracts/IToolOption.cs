@@ -4,26 +4,29 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
+
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     /// <summary>
-    /// Characterizes a tool-specific file archive
+    /// Characterizes a tool option
     /// </summary>
     [Free]
-    public interface IToolArchive : IIdentified<ToolId>, IFileArchive
+    public interface IToolOption : INamed, ITextual
     {
-        ToolId ToolId {get;}
 
-        ToolArchiveKind ArchiveKind {get;}
-
-        ToolId IIdentified<ToolId>.Id
-            => ToolId;
     }
 
+    /// <summary>
+    /// Characterizes a kinded tool option
+    /// </summary>
     [Free]
-    public interface IToolArchive<T> : IToolArchive, IFileArchive<ToolArchiveKind>
-        where T : struct, ITool<T>
+    public interface IToolOption<K> : IToolOption
+        where K : unmanaged
     {
+        K Kind {get;}
 
+        string INamed.Name
+            => Kind.ToString();
     }
 }

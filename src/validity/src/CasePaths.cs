@@ -49,12 +49,12 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public FS.FilePath CasePath(string @case, FS.FileExt? ext = null)
-            => CasePath(FS.file(@case, ext ?? DefaultExt));
+            => CasePath(FS.file(@case, ext ?? ArchiveFileKinds.Csv));
 
         FS.FileExt DefaultExt
         {
             [MethodImpl(Inline)]
-            get => FileKindType.Csv;
+            get => ArchiveFileKinds.Csv;
         }
     }
 }

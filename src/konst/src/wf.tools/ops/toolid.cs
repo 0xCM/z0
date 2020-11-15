@@ -17,8 +17,7 @@ namespace Z0
         /// </summary>
         /// <typeparam name="T">The tool type</typeparam>
         [MethodImpl(Inline)]
-        public static ToolId<T> toolid<T>()
-            where T : struct
-                => default;
+        public static ToolId toolid<T>()
+            => new ToolId(typeof(T).Name);
     }
 }

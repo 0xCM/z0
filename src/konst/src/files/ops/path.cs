@@ -22,5 +22,10 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static FilePath path(FolderPath folder, FileName file)
             => folder + file;
+
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static FilePath<K> path<K>(string name, K kind)
+            where K : unmanaged
+                => new FilePath<K>(path(name), kind);
     }
 }

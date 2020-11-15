@@ -10,7 +10,6 @@ namespace Z0
 
     using static Konst;
     using static z;
-    using System.Diagnostics.CodeAnalysis;
 
     partial struct FS
     {

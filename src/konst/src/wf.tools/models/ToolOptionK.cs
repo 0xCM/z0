@@ -10,37 +10,34 @@ namespace Z0
     using static Konst;
     using static z;
 
-    using api = Tooling;
-
     /// <summary>
-    /// Defines a tool option
+    /// Specifies a kinded tool option
     /// </summary>
-    public readonly struct ToolOption : IToolOption
+    public readonly struct ToolOption<K> : IToolOption<K>
+        where K : unmanaged
     {
-        internal const string AnonymousOptionName = "_anonymous_";
-
         /// <summary>
         /// The option name
         /// </summary>
         public string Name {get;}
 
         /// <summary>
-        /// The option's use
+        /// The option kind
         /// </summary>
-        public string Purpose {get;}
+        public K Kind {get;}
 
         [MethodImpl(Inline)]
-        public ToolOption(string name)
+        public ToolOption(K kind)
         {
-            Name = name;
-            Purpose = EmptyString;
+            Name = kind.ToString();
+            Kind = kind;
         }
 
         [MethodImpl(Inline)]
-        public ToolOption(string name, string purpose)
+        public ToolOption(string name, K kind)
         {
             Name = name;
-            Purpose = purpose;
+            Kind = kind;
         }
 
         public bool IsEmpty
@@ -58,24 +55,31 @@ namespace Z0
         public bool IsAnonymous
         {
             [MethodImpl(Inline)]
-            get => string.Equals(Name, AnonymousOptionName);
+            get => string.Equals(Name, ToolOption.AnonymousOptionName);
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => api.format(this);
+            => Name;
 
         public override string ToString()
             => Format();
 
         [MethodImpl(Inline)]
-        public static implicit operator ToolOption(string src)
-            => new ToolOption(src);
+        public static implicit operator ToolOption<K>(K src)
+            => new ToolOption<K>(src);
 
-        public static ToolOption Empty
+        [MethodImpl(Inline)]
+        public static implicit operator ToolOption(ToolOption<K> src)
+            => new ToolOption(src.Name);
+
+        /// <summary>
+        /// Specifies the empty option
+        /// </summary>
+        public static ToolOption<K> Empty
         {
             [MethodImpl(Inline)]
-            get => new ToolOption(EmptyString);
+            get => new ToolOption<K>(EmptyString, default(K));
         }
     }
 }

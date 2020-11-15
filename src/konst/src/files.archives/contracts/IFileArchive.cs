@@ -8,6 +8,9 @@ namespace Z0
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
+    /// <summary>
+    /// Characterizes a file system repository
+    /// </summary>
     [Free]
     public interface IFileArchive : IFileArchivePaths
     {
@@ -24,10 +27,17 @@ namespace Z0
             => Root.EnumerateFiles(true);
     }
 
+    /// <summary>
+    /// Characterizes a kinded archive
+    /// </summary>
+    /// <typeparam name="K">The archive's classifying type</typeparam>
     [Free]
-    public interface IFileArchive<H> : IFileArchive
-        where H : IFileArchive<H>
+    public interface IFileArchive<K> : IFileArchive
+        where K : unmanaged
     {
-
+        /// <summary>
+        /// Specifies the archive classifier
+        /// </summary>
+        K ArchiveKind {get;}
     }
 }

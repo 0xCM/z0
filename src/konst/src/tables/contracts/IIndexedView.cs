@@ -13,7 +13,6 @@ namespace Z0
     {
         T[] Storage {get;}
 
-
         ReadOnlySpan<T> Terms
             => Storage;
 

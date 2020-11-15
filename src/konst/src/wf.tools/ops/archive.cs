@@ -11,18 +11,9 @@ namespace Z0
 
     partial struct Tooling
     {
-        public static ToolArchive<T> archive<T>(ToolId tool, FS.FolderPath src, FS.FolderPath dst)
-            where T : struct, ITool<T>
-                => new ToolArchive<T>(tool, src, dst);
-
         [MethodImpl(Inline)]
-        public static FS.Files output<T>(IToolArchive<T> archive)
+        public static ToolArchive<T> archive<T>(ToolId tool, FS.FolderPath root, ToolArchiveKind kind)
             where T : struct, ITool<T>
-                => archive.Target.AllFiles;
-
-        [MethodImpl(Inline)]
-        public static FS.Files processed<T>(IToolArchive<T> archive)
-            where T : struct, ITool<T>
-                => archive.Processed.AllFiles;
+                => new ToolArchive<T>(tool, root, kind);
     }
 }

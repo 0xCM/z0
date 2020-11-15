@@ -6,11 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.IO;
 
     using static z;
     using static Konst;
-    using static CmdPatterns;
 
     partial struct Scripts
     {
@@ -26,18 +24,5 @@ namespace Z0
         public static CmdPattern<K> pattern<K>(K id, string content)
             where K : unmanaged
                 => new CmdPattern<K>(id,content);
-        [Op]
-        public static ToolScript<ToolScriptPattern> pattern(IFileDb db, string root, string name, string arg, string delimiter = null, string type = null)
-        {
-            ToolScript<ToolScriptPattern> cmd = new ToolScriptPattern();
-            ref var data = ref cmd.Content;
-            data.CmdRootName = FS.folder(root);
-            data.Tool = name;
-            data.CmdArgName = arg;
-            data.ArgDelimiter = delimiter ?? DefaultArgDelimiter;
-            data.CmdType = FS.ext(type ?? DefaultCmdType);
-            rules(db, ref cmd);
-            return cmd;
-        }
     }
 }

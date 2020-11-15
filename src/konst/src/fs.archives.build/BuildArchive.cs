@@ -14,7 +14,7 @@ namespace Z0
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface IBuildArchive : IFileArchive<BuildArchive>
+    public interface IBuildArchive : IFileArchive
     {
         IEnumerable<FS.FilePath> BuildFiles(FS.FileExt ext)
             => Root.EnumerateFiles(ext, true);

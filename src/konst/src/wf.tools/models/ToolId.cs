@@ -10,16 +10,12 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public struct ToolId : IIdentified<ToolId,utf8>
+    public struct ToolId : IIdentified<ToolId,string>
     {
-        public utf8 Id {get;}
+        public string Id {get;}
 
         [MethodImpl(Inline)]
         public ToolId(string id)
-            => Id = id;
-
-        [MethodImpl(Inline)]
-        public ToolId(utf8 id)
             => Id = id;
 
         public bool IsEmpty

@@ -16,7 +16,7 @@ namespace Z0
     {
         public FS.FilePath Path {get;}
 
-        public PeFileKind FileKind
+        public PeFileKind Kind
             => PeFileKind.Pdb;
 
         [MethodImpl(Inline)]

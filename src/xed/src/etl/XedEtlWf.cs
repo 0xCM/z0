@@ -145,7 +145,7 @@ namespace Z0.Xed
         void SaveMnemonics(XedPatternRow[] src)
         {
             var upper = src.Select(s => s.Class).Distinct().OrderBy(x => x).ToArray();
-            var dst = Target.TablePath(FS.file("mnemonics", FileKindType.Csv));
+            var dst = Target.TablePath(FS.file("mnemonics", ArchiveFileKinds.Csv));
             dst.Overwrite(upper);
         }
 

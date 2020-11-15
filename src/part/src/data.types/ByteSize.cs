@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Specifies data size in bytes
@@ -25,12 +25,56 @@ namespace Z0
         public readonly uint Count;
 
         [MethodImpl(Inline)]
-        public static ByteSize Define(int count)
-            => new ByteSize(count);
+        public ByteSize(int count)
+            => Count = (uint)count;
 
         [MethodImpl(Inline)]
-        public static ByteSize init(uint count)
-            => new ByteSize(count);
+        public ByteSize(uint count)
+            => Count = count;
+
+        public ulong Bits
+        {
+            [MethodImpl(Inline)]
+            get => Count*8;
+        }
+
+        [MethodImpl(Inline),Ignore]
+        public string Format(string pattern)
+            => format(this);
+
+        [MethodImpl(Inline),Ignore]
+        public string Format()
+            => Count == 0 ? "0" : Format("#,#");
+
+        public override string ToString()
+            => Format();
+
+        public override int GetHashCode()
+            => Count.GetHashCode();
+
+        public bool Equals(ByteSize src)
+            => Count == src.Count;
+
+        public override bool Equals(object obj)
+            => obj is ByteSize ? Equals((ByteSize)obj) : false;
+
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Count == 0;
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Count != 0;
+        }
+
+        public bool IsNonZero
+        {
+            [MethodImpl(Inline)]
+            get => Count != 0;
+        }
 
         [MethodImpl(Inline)]
         public static implicit operator int(ByteSize src)
@@ -111,58 +155,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ByteSize operator %(ByteSize a, ByteSize b)
             => a.Count % b.Count;
-
-        [MethodImpl(Inline)]
-        public ByteSize(int count)
-            => Count = (uint)count;
-
-        [MethodImpl(Inline)]
-        public ByteSize(uint count)
-            => Count = count;
-
-        public ulong Bits
-        {
-            [MethodImpl(Inline)]
-            get => Count*8;
-        }
-
-        [MethodImpl(Inline),Ignore]
-        public string Format(string pattern)
-            => format(this);
-
-        [MethodImpl(Inline),Ignore]
-        public string Format()
-            => Count == 0 ? "0" : Format("#,#");
-
-        public override string ToString()
-            => Format();
-
-        public override int GetHashCode()
-            => Count.GetHashCode();
-
-        public bool Equals(ByteSize src)
-            => Count == src.Count;
-
-        public override bool Equals(object obj)
-            => obj is ByteSize ? Equals((ByteSize)obj) : false;
-
-        public bool IsEmpty
-        {
-            [MethodImpl(Inline)]
-            get => Count == 0;
-        }
-
-        public bool IsNonEmpty
-        {
-            [MethodImpl(Inline)]
-            get => Count != 0;
-        }
-
-        public bool IsNonZero
-        {
-            [MethodImpl(Inline)]
-            get => Count != 0;
-        }
 
         public static ByteSize Empty
             => default;

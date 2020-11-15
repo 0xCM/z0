@@ -4,29 +4,27 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    [Free]
-    public interface IToolTarget
+    public interface IToolArg<V>
     {
-        FS.FilePath Path {get;}
+        ToolOption Option {get;}
+
+        V Value {get;}
+    }
+
+    public interface IToolArg : IToolArg<string>
+    {
+
     }
 
     [Free]
-    public interface IToolTarget<T> : IToolTarget
-        where T : struct, ITool<T>
+    public interface IToolArg<K,V> : IToolArg<V>
+        where K : unmanaged
     {
-        T Tool => default(T);
+        new ToolOption<K> Option {get;}
 
-    }
-
-    [Free]
-    public interface IToolTarget<T,F> : IToolTarget<T>
-        where T : struct, ITool<T>
-        where F : unmanaged
-    {
-
+        ToolOption IToolArg<V>.Option
+            => Option;
     }
 }

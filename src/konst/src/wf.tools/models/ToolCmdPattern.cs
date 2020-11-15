@@ -10,7 +10,10 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public struct ToolScriptPattern : IToolScript<ToolScriptPattern>
+    /// <summary>
+    /// Defines a pattern for creating a <see cref='ToolCmd'/>
+    /// </summary>
+    public struct ToolCmdPattern : IToolScript<ToolCmdPattern>
     {
         public FS.FolderName CmdRootName;
 

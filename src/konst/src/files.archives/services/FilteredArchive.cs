@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct FilteredArchive : IFileArchive<FilteredArchive>
+    public readonly struct FilteredArchive : IFileArchive
     {
         public FS.FolderPath Root {get;}
 
