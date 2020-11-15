@@ -36,4 +36,13 @@ namespace Z0
         WfController Controller
             => Assembly.GetEntryAssembly();
     }
+
+    public interface IWfContext<A> : IWfContext
+    {
+        IWfPaths IWfContext.Paths
+            => WfShellInit.paths<A>();
+
+        ITestLogPaths IWfContext.TestLogPaths
+            => new TestLogPaths<A>();
+    }
 }

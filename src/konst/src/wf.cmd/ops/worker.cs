@@ -12,11 +12,6 @@ namespace Z0
 
     partial struct Cmd
     {
-        [MethodImpl(Inline)]
-        public static CmdWorker<C> worker<C>(CmdWorkerFunction<C> fx)
-            where C : struct, ICmdSpec<C>
-                => new CmdWorker<C>(fx);
-
         [MethodImpl(Inline), Op]
         public static CmdWorker worker(CmdId id, CmdWorkerFunction fx)
             => new CmdWorker(id, fx);

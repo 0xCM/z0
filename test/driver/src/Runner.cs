@@ -32,8 +32,8 @@ namespace Z0
         public void Run()
         {
             using var flow = Wf.Running();
+            MathTestApp.run();
             BitsTestApp.run();
-            // MathTestApp.run();
             // AsmTestApp.run();
             // LogixTestApp.run();
             // SymbolicTestApp.run();

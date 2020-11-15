@@ -12,7 +12,8 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public sealed class EmitAsmOpCodes : CmdHost<EmitAsmOpCodes, EmitAsmOpCodesCmd>
+    [WfNode]
+    public sealed class EmitAsmOpCodes : CmdNode<EmitAsmOpCodes, EmitAsmOpCodesCmd, FS.FilePath>
     {
         public static CmdResult run(IWfShell wf)
         {
@@ -22,26 +23,33 @@ namespace Z0
         }
 
         [CmdWorker]
-        public static CmdResult run(IWfShell wf, in EmitAsmOpCodesCmd spec)
+        public static CmdResult run(IWfShell wf, in EmitAsmOpCodesCmd cmd)
+        {
+            var node = Node(wf);
+            node.Run(cmd);
+            return Cmd.ok(cmd);
+        }
+
+        protected override FS.FilePath Run(EmitAsmOpCodesCmd cmd)
         {
             var data = AsmOpCodes.dataset().Entries;
             var count = data.Count;
             var view = data.View;
-
             var formatter = AsmOpCodes.formatter<AsmOpCodeField>();
-            using var dst = spec.Target.Writer();
+            var rowbuffer = alloc<AsmOpCodeRow>(count);
+            var rows = span(rowbuffer);
+            using var dst = cmd.Target.Writer();
             formatter.EmitHeader(false);
             dst.WriteLine(formatter.Render());
             for(var i=0; i<count; i++)
             {
                 ref readonly var record = ref skip(view,i);
+                seek(rows,i) = record;
+
                 AsmOpCodes.format(record, formatter);
                 dst.WriteLine(formatter.Render());
             }
-            return Win();
+            return  cmd.Target;
         }
-
-        protected override CmdResult Execute(IWfShell wf, in EmitAsmOpCodesCmd spec)
-            => run(wf, spec);
     }
 }

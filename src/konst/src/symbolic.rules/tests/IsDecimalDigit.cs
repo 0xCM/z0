@@ -15,7 +15,7 @@ namespace Z0
         /// <summary>
         /// Tests whether a character is one of (0,..9)
         /// </summary>
-        public readonly struct IsDecimalDigit : ISymbolicTest<IsDecimalDigit, char>
+        public readonly struct IsDecimalDigit : ISymbolicTest<IsDecimalDigit,char>
         {
             [MethodImpl(Inline)]
             public static bit check(char c)

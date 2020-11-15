@@ -15,12 +15,12 @@ namespace Z0
     public readonly partial struct TableRows
     {
         [MethodImpl(Inline)]
-        public static RowAdapter<T> adapter<T>(in TableFieldIndex fields)
+        public static RowAdapter<T> adapter<T>(in TableFields fields)
             where T : struct
                 => new RowAdapter<T>(fields);
 
         public static RowAdapter<T> adapter<T>()
             where T : struct
-                => adapter<T>(TableFields.index<T>());
+                => adapter<T>(Table.index<T>());
     }
 }

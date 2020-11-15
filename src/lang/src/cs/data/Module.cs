@@ -16,9 +16,9 @@ namespace Z0.Lang.Cs
         {
             public INamespaceSymbol GlobalNamespace;
 
-            public Indexed<AssemblyIdentity> ReferencedAssemblies;
+            public Index<AssemblyIdentity> ReferencedAssemblies;
 
-            public Indexed<IAssemblySymbol> ReferencedAssemblySymbols;
+            public Index<IAssemblySymbol> ReferencedAssemblySymbols;
 
             public SymbolKind Kind;
 
@@ -56,9 +56,9 @@ namespace Z0.Lang.Cs
 
             public bool CanBeReferencedByName;
 
-            public Indexed<Location> Locations;
+            public Index<Location> Locations;
 
-            public Indexed<SyntaxReference> DeclaringSyntaxReferences;
+            public Index<SyntaxReference> DeclaringSyntaxReferences;
 
             public Accessibility DeclaredAccessibility;
 

@@ -21,18 +21,6 @@ namespace Z0
         public readonly S[] Symbols;
 
         [MethodImpl(Inline)]
-        public static implicit operator SymbolSpec(SymbolSpec<S,T,W> src)
-            => new SymbolSpec(src.SymWidth, src.SegWidth, src.SegDomain, src.SymDomain);
-
-        [MethodImpl(Inline)]
-        public static implicit operator SymbolSpec<S>(SymbolSpec<S,T,W> src)
-            => new SymbolSpec<S>(src.SymWidth, src.SegWidth, src.SegDomain, src.SymDomain, src.Symbols);
-
-        [MethodImpl(Inline)]
-        public static implicit operator SymbolSpec<S,W>(SymbolSpec<S,T,W> src)
-            => new SymbolSpec<S,W>(src.SegWidth, src.SegDomain, src.Symbols);
-
-        [MethodImpl(Inline)]
         public SymbolSpec(params S[] symbols)
             => Symbols = symbols;
 
@@ -83,5 +71,17 @@ namespace Z0
 
         S[] ISymbolSpec<S>.Symbols
             => Symbols;
+
+        [MethodImpl(Inline)]
+        public static implicit operator SymbolSpec(SymbolSpec<S,T,W> src)
+            => new SymbolSpec(src.SymWidth, src.SegWidth, src.SegDomain, src.SymDomain);
+
+        [MethodImpl(Inline)]
+        public static implicit operator SymbolSpec<S>(SymbolSpec<S,T,W> src)
+            => new SymbolSpec<S>(src.SymWidth, src.SegWidth, src.SegDomain, src.SymDomain, src.Symbols);
+
+        [MethodImpl(Inline)]
+        public static implicit operator SymbolSpec<S,W>(SymbolSpec<S,T,W> src)
+            => new SymbolSpec<S,W>(src.SegWidth, src.SegDomain, src.Symbols);
     }
 }

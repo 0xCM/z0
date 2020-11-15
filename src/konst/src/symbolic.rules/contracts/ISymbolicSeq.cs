@@ -10,22 +10,21 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public interface ISymbolicSeq<T> : ISymbolicRule<IndexedView<T>>
-        where T : ISymbolicRule<T>
+    public interface ISymbolicSeq<T> : IRule<IndexedView<T>>
+        where T : unmanaged, ISymbolicRule<T>
     {
-        IndexedView<T> Terms
-            => Content;
+        IndexedView<T> Terms {get;}
 
-        Multiplicity Multiplicity
+        MultiplicityKind Multiplicity
             => 0;
     }
 
     public interface ISingletonSeq<T> : ISymbolicSeq<T>
-        where T : ISymbolicRule<T>
+        where T : unmanaged, ISymbolicRule<T>
     {
         T Term => Terms[0];
 
-        Multiplicity ISymbolicSeq<T>.Multiplicity
-            => Multiplicity.One;
+        MultiplicityKind ISymbolicSeq<T>.Multiplicity
+            => MultiplicityKind.One;
     }
 }

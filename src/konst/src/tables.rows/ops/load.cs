@@ -16,10 +16,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static TableRow<T> load<T>(uint index, in T src)
             where T : struct
-                => load(TableFields.index<T>(), index, src);
+                => load(Table.index<T>(), index, src);
 
         [MethodImpl(Inline)]
-        public static TableRow<T> load<T>(in TableFieldIndex fields, uint index, in T src)
+        public static TableRow<T> load<T>(in TableFields fields, uint index, in T src)
             where T : struct
         {
             var dst = alloc<T>(fields.Count);
@@ -30,10 +30,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static TableRows<T> load<T>(ReadOnlySpan<T> src)
             where T : struct
-                => load(TableFields.index<T>(), src);
+                => load(Table.index<T>(), src);
 
         [MethodImpl(Inline)]
-        public static TableRows<T> load<T>(in TableFieldIndex fields, ReadOnlySpan<T> src)
+        public static TableRows<T> load<T>(in TableFields fields, ReadOnlySpan<T> src)
             where T : struct
         {
             var count = (uint)src.Length;
@@ -43,7 +43,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static void load<T>(in TableFieldIndex fields, ReadOnlySpan<T> src, in TableRows<T> dst)
+        public static void load<T>(in TableFields fields, ReadOnlySpan<T> src, in TableRows<T> dst)
             where T : struct
         {
             var count = (uint)src.Length;
@@ -53,7 +53,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static void load<T>(in TableFieldIndex fields, uint index, in T src, ref TableRow<T> dst)
+        public static void load<T>(in TableFields fields, uint index, in T src, ref TableRow<T> dst)
             where T : struct
         {
             var tr = __makeref(edit(src));

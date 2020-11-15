@@ -13,7 +13,7 @@ namespace Z0
 
     partial struct Scripts
     {
-        public static Indexed<IScriptVar> members<T>(T set)
+        public static Index<IScriptVar> members<T>(T set)
             where T : IScriptVars<T>, new()
                 => typeof(T).GetProperties(MemberSelector).Select(x => (IScriptVar)x.GetValue(set));
     }

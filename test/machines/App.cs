@@ -10,7 +10,7 @@ namespace Z0
 
         IWfShell Wf;
 
-        Option<ServerComplex> Complex;
+        Option<AgentComplex> Complex;
 
         IAgentControl Control;
 
@@ -26,7 +26,7 @@ namespace Z0
             Terminal.Get().SetTerminationHandler(OnTerminate);
 
             Wf.Status($"Starting server complex");
-            ServerComplex.Start(AgentContext).ContinueWith(complex =>
+            AgentComplex.Start(AgentContext).ContinueWith(complex =>
                 {
                     Complex = complex.Result;
                     Wf.Status("Server complex started");

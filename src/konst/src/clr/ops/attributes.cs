@@ -13,7 +13,7 @@ namespace Z0
     partial struct ClrQuery
     {
         [MethodImpl(Inline), Op]
-        public static Indexed<object> attributes(Type src)
+        public static Index<object> attributes(Type src)
             => src.GetCustomAttributes(false);
     }
 }

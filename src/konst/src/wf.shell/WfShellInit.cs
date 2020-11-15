@@ -22,6 +22,10 @@ namespace Z0
         public static Assembly controller()
             => Assembly.GetEntryAssembly();
 
+        [MethodImpl(Inline)]
+        public static Assembly controller<A>()
+            => typeof(A).Assembly;
+
         [Op]
         public static ApiPartSet parts()
             => parts(controller(), args());
@@ -60,7 +64,7 @@ namespace Z0
             ctx.Paths = _paths;
             ctx.Settings = JsonSettings.Load(_paths.AppConfigPath);
             ctx.WfSettings = new WfSettings(ctx.Settings);
-            ctx.TestLogPaths = new TestLogPaths(logRoot);
+            ctx.TestLogPaths = testpaths(logRoot);
             ctx.Controller = control;
 
             var init = new WfInit(ctx, logConfig, partList);
@@ -79,6 +83,14 @@ namespace Z0
                 wf.Status(configured.FormatList(FieldDelimiter));
             return wf;
         }
+
+        [MethodImpl(Inline), Op]
+        public static ITestLogPaths<A> testpaths<A>(FS.FolderPath root)
+            => new TestLogPaths<A>(root);
+
+        [MethodImpl(Inline), Op]
+        public static ITestLogPaths testpaths(FS.FolderPath root)
+            => new TestLogPaths(root);
 
         [MethodImpl(Inline), Op]
         public static IWfEventLog log(WfLogConfig config)
@@ -103,6 +115,10 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static IWfPaths paths()
             => new WfPaths(logConfig(controller().Id(), logRoot(), dbRoot()));
+
+        [MethodImpl(Inline), Op]
+        public static IWfPaths<A> paths<A>()
+            => new WfPaths<A>(logConfig(controller<A>().Id(), logRoot(), dbRoot()));
 
         [MethodImpl(Inline), Op]
         public static IJsonSettings json(IWfPaths paths)

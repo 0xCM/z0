@@ -13,14 +13,14 @@ namespace Z0
 
     public struct ScriptVars : IScriptVars<ScriptVars>
     {
-        readonly Indexed<ScriptVar> Data;
+        readonly Index<ScriptVar> Data;
 
         [MethodImpl(Inline)]
         internal ScriptVars(ScriptVar[] src)
             => Data = src;
 
         [MethodImpl(Inline)]
-        public Indexed<IScriptVar> Members()
+        public Index<IScriptVar> Members()
             => Data.Cast<IScriptVar>();
 
         public string Format()

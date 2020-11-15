@@ -16,14 +16,14 @@ namespace Z0
 
         public RuleOperand<T>[] Operands {get;}
 
-        public RuleEffect<T> Effect {get;}
+        public Consequence<T> Implication {get;}
 
         [MethodImpl(Inline)]
-        public SymbolicRule(RuleId id, RuleOperand<T>[] operands, RuleEffect<T> effect)
+        public SymbolicRule(RuleId id, RuleOperand<T>[] operands, Consequence<T> effect)
         {
             RuleId = id;
             Operands = operands;
-            Effect = effect;
+            Implication = effect;
         }
 
         public ref RuleOperand<T> this[byte index]

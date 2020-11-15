@@ -12,7 +12,7 @@ namespace Z0
 
     public readonly struct ApiComponents : IIndex<ApiComponents,uint,ApiComponent>
     {
-        readonly Indexed<ApiComponent> Data;
+        readonly Index<ApiComponent> Data;
 
         [MethodImpl(Inline)]
         public ApiComponents(ApiComponent[] src)

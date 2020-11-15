@@ -20,7 +20,7 @@ namespace Z0
         public ScriptDirVar Control;
 
         [MethodImpl(Inline)]
-        public Indexed<IScriptVar> Members()
+        public Index<IScriptVar> Members()
             => members(this);
 
         [MethodImpl(Inline)]

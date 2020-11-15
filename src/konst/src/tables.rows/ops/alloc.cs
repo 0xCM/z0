@@ -19,7 +19,7 @@ namespace Z0
                 => new TableRow<T>(0,default(T), sys.alloc<object>(cells));
 
         [MethodImpl(Inline)]
-        public static TableRows<T> alloc<T>(in TableFieldIndex fields, uint rowcount)
+        public static TableRows<T> alloc<T>(in TableFields fields, uint rowcount)
             where T : struct
                 => first(recover<byte,TableRows<T>>(span<byte>(rowsize<T>(rowcount, fields.Count))));
     }

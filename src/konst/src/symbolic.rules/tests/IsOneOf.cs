@@ -12,9 +12,9 @@ namespace Z0
 
     partial struct SymbolicTests
     {
-        public readonly struct IsOneOf : ISymbolicTest<IsOneOf, char>
+        public readonly struct IsOneOf : ISymbolicTest<IsOneOf,char>
         {
-            readonly Indexed<char> Subjects;
+            readonly Index<char> Subjects;
 
             [MethodImpl(Inline), Op]
             public IsOneOf(char[] subjects)

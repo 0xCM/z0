@@ -10,13 +10,13 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public abstract class CmdHost<H,C> : WfHost<H>
-        where H : CmdHost<H,C>, new()
-        where C : struct, ICmdSpec<C>
+    public abstract class CmdHost<H,S> : WfHost<H>
+        where H : CmdHost<H,S>, new()
+        where S : struct, ICmdSpec<S>
     {
-        public CmdId CmdId => new C().Id;
+        public CmdId CmdId => new S().Id;
 
-        protected static C Spec() => new C();
+        protected static S Spec() => new S();
 
         protected static CmdResult Fail(params byte[] data)
             => new CmdResult(new CmdId(), false, data);
@@ -24,7 +24,7 @@ namespace Z0
         protected static CmdResult Win(params byte[] data)
             => new CmdResult(new CmdId(), true, data);
 
-        public CmdResult Run(IWfShell wf, in C spec)
+        public CmdResult Run(IWfShell wf, in S spec)
         {
             try
             {
@@ -41,7 +41,7 @@ namespace Z0
             }
         }
 
-        protected abstract CmdResult Execute(IWfShell wf, in C spec);
+        protected abstract CmdResult Execute(IWfShell wf, in S spec);
 
         protected override void Execute(IWfShell wf)
             => Execute(wf, Spec());

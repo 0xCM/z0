@@ -18,14 +18,14 @@ namespace Z0
     {
         readonly Type TableType;
 
-        readonly TableFieldIndex Fields;
+        readonly TableFields Fields;
 
         readonly StringBuilder Target;
 
         readonly char Delimiter;
 
         [MethodImpl(Inline)]
-        public RowFormatter(TableFieldIndex fields, StringBuilder dst = null, char delimiter = FieldDelimiter)
+        public RowFormatter(TableFields fields, StringBuilder dst = null, char delimiter = FieldDelimiter)
         {
             TableType = typeof(T);
             Fields = fields;

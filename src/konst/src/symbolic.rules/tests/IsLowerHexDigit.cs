@@ -15,7 +15,7 @@ namespace Z0
         /// <summary>
         /// Tests whether a character is one of (0,..9) | (a .. f)
         /// </summary>
-        public readonly struct IsLowerHexDigit : ISymbolicTest<IsHexDigit, char>
+        public readonly struct IsLowerHexDigit : ISymbolicTest<IsHexDigit,char>
         {
             [MethodImpl(Inline), Op]
             internal static bit check(XF src)

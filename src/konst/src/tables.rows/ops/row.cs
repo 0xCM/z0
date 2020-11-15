@@ -22,7 +22,7 @@ namespace Z0
             where T : struct
                 => adapter.Adapt(src).Adapted;
 
-        public static TableRow<T> row<T>(in T src, in TableFieldIndex fields)
+        public static TableRow<T> row<T>(in T src, in TableFields fields)
             where T : struct
                 => adapter<T>(fields).Adapt(src).Adapted;
 

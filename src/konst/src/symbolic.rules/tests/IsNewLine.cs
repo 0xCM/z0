@@ -15,7 +15,7 @@ namespace Z0
         /// <summary>
         /// Tests whether a character is either a <see cref="AC.CR"/> or <see cref="AC.NL"/>
         /// </summary>
-        public readonly struct IsNewLine : ISymbolicTest<IsWhitespace, char>
+        public readonly struct IsNewLine : ISymbolicTest<IsWhitespace,char>
         {
             [MethodImpl(Inline)]
             public static bit check(char c)

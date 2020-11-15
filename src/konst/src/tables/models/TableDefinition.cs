@@ -6,20 +6,18 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Reflection;
 
     using static Konst;
     using static z;
-
 
     public readonly struct TableDefinition
     {
         public readonly Type TableType;
 
-        readonly TableFieldIndex _Fields;
+        readonly TableFields _Fields;
 
         [MethodImpl(Inline)]
-        internal TableDefinition(Type type, TableFieldIndex fields)
+        internal TableDefinition(Type type, TableFields fields)
         {
             TableType = type;
             _Fields = fields;

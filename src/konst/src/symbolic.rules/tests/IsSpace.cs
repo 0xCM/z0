@@ -12,7 +12,7 @@ namespace Z0
 
     partial struct SymbolicTests
     {
-        public readonly struct IsSpace : ISymbolicTest<IsSpace, char>
+        public readonly struct IsSpace : ISymbolicTest<IsSpace,char>
         {
             [MethodImpl(Inline)]
             public static bool check(char c)

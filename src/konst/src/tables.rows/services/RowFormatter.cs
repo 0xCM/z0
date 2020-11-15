@@ -15,7 +15,7 @@ namespace Z0
 
     public struct RowFormatter
     {
-        public static void header(in TableFieldIndex src, char Delimiter, StringBuilder dst)
+        public static void header(in TableFields src, char Delimiter, StringBuilder dst)
         {
             var view = src.View;
             var count = view.Length;
@@ -30,7 +30,7 @@ namespace Z0
 
         readonly Type TableType;
 
-        readonly TableFieldIndex Fields;
+        readonly TableFields Fields;
 
         readonly TableSpan<ushort> Widths;
 
@@ -39,7 +39,7 @@ namespace Z0
         readonly char Delimiter;
 
         [MethodImpl(Inline)]
-        public RowFormatter(Type table, TableFieldIndex fields, StringBuilder dst = null, char delimiter = FieldDelimiter)
+        public RowFormatter(Type table, TableFields fields, StringBuilder dst = null, char delimiter = FieldDelimiter)
         {
             TableType = table;
             Fields = fields;

@@ -15,7 +15,8 @@ namespace Z0
     {
         T[] Storage {get;}
 
-        Span<T> Terms {get;}
+        Span<T> Terms
+            => Storage;
 
         int IMeasured.Length
             => Storage.Length;
@@ -23,7 +24,8 @@ namespace Z0
         Deferred<T> Deferred
             => new Deferred<T>(Storage);
 
-        ref T this[int index] {get;}
+        ref T this[int index]
+            => ref Storage[index];
 
         ref T Lookup(int index)
             => ref this[index];
@@ -37,8 +39,8 @@ namespace Z0
         bool INullity.IsEmpty
             => false;
 
-        Indexed<Y> Cast<Y>()
-            => new Indexed<Y>(Storage.Select(x => z.cast<Y>(x)));
+        Index<Y> Cast<Y>()
+            => new Index<Y>(Storage.Select(x => z.cast<Y>(x)));
 
         IEnumerator IEnumerable.GetEnumerator()
             => Deferred.Content.GetEnumerator();

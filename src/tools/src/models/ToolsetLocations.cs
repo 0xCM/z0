@@ -12,7 +12,7 @@ namespace Z0
 
     public readonly struct Toolsets
     {
-        readonly Indexed<Toolset> Data;
+        readonly Index<Toolset> Data;
 
         [MethodImpl(Inline)]
         internal Toolsets(Toolset[] src)
@@ -22,6 +22,6 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => ref Data[(uint)id];
-        }        
+        }
     }
 }

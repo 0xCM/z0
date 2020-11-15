@@ -15,7 +15,7 @@ namespace Z0
         {
             Settings = XedSettings.Default();
             SourceRoot = wf.Db().SourceRoot("xed");
-            TargetRoot = FS.dir(wf.Paths.RuntimeLogs.Name) + FS.folder("data") + FS.folder("xed");
+            TargetRoot = FS.dir(wf.Paths.LogRoot.Name) + FS.folder("data") + FS.folder("xed");
             Target = DbTables.create(wf.Db().Root + FS.folder("tables") + FS.folder("xed"));
         }
 

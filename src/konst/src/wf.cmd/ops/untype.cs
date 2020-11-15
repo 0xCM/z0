@@ -12,6 +12,34 @@ namespace Z0
 
     partial struct Cmd
     {
+        /// <summary>
+        /// Populates a <see cref='CmdArg'/> structure from a specified source
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <typeparam name="T">The option value type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static CmdArg untype<T>(in CmdArg<T> src)
+        {
+            var dst = new CmdArg();
+            data(src,ref dst);
+            return dst;
+        }
+
+        /// <summary>
+        /// Populates a <see cref='CmdArg'/> structure from a specified source
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <typeparam name="K">The option kind type</typeparam>
+        /// <typeparam name="T">The option value type</typeparam>
+        [MethodImpl(Inline)]
+        public static CmdArg untype<K,T>(in CmdArg<K,T> src)
+            where K : unmanaged
+        {
+            var dst = new CmdArg();
+            data(src,ref dst);
+            return dst;
+        }
+
         [Op, Closures(UInt64k)]
         public static CmdSpec untype<T>(in T spec)
             where T : struct

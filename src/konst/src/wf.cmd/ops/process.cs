@@ -17,8 +17,12 @@ namespace Z0
         /// </summary>
         /// <param variable="commandLine">The command line to run as a subprocess</param>
         /// <param variable="options">Options for the process</param>
-        [Op]
-        public static CmdProcess process(IWfShell context, CmdLine command, CmdProcessOptions config)
-            => CmdProcess.create(command, config);
+        [MethodImpl(Inline), Op]
+        public static CmdProcess process(IWfShell wf, CmdLine command, CmdProcessOptions config)
+            => new CmdProcess(wf, command, config);
+
+        [MethodImpl(Inline), Op]
+        public static CmdProcess create(IWfShell wf,  CmdLine commandLine)
+            => new CmdProcess(wf, commandLine, new CmdProcessOptions());
     }
 }

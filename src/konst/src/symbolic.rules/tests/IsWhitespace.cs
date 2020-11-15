@@ -10,10 +10,8 @@ namespace Z0
 
     partial struct SymbolicTests
     {
-        public readonly struct IsWhitespace : ISymbolicTest<IsWhitespace, char>
+        public readonly struct IsWhitespace : ISymbolicTest<IsWhitespace,char>
         {
-            public static IsWhitespace Service => default;
-
             public static bit check(char c)
                 => IsSpace.check(c) || IsTab.check(c) || IsNewLine.check(c);
 

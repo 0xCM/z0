@@ -9,22 +9,18 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct SymbolicRange<T> : ISymbolicRuleSpec<SymbolicRange<T>>
+    public readonly struct SymbolicRange<T>
         where T : unmanaged
     {
-        public RuleId RuleId { get; }
+        public T Min {get;}
 
-        public T Min { get; }
-
-        public T Max { get; }
+        public T Max {get;}
 
         [MethodImpl(Inline)]
-        public SymbolicRange(RuleId id, T min, T max)
+        public SymbolicRange(T min, T max)
         {
-            RuleId = id;
             Min = min;
             Max = max;
         }
     }
-    
 }

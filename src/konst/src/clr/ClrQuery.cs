@@ -36,7 +36,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static Indexed<Type> interfaces(Type src)
+        public static Index<Type> interfaces(Type src)
             => src.GetInterfaces();
 
         [MethodImpl(Inline), Op]

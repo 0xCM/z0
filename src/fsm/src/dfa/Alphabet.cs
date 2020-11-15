@@ -22,7 +22,7 @@ namespace Z0
     public readonly struct Alphabet<A> : IAlphabet<A>
         where A : unmanaged, ISymbol
     {
-        readonly Indexed<A> Data;
+        readonly Index<A> Data;
 
         [MethodImpl(Inline)]
         public Alphabet(A[] src)

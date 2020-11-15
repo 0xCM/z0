@@ -18,6 +18,12 @@ namespace Z0
         public CmdArgs(CmdArg[] src)
             => Data = src;
 
+        public ref CmdArg this[uint index]
+        {
+            [MethodImpl(Inline)]
+            get => ref Data[index];
+        }
+
         public ReadOnlySpan<CmdArg> View
         {
             [MethodImpl(Inline)]

@@ -9,6 +9,9 @@ namespace Z0
 
     using static Konst;
 
+    /// <summary>
+    /// Defines the outcome of an operation/process
+    /// </summary>
     public readonly struct Outcome
     {
         public readonly bool Ok;
@@ -16,34 +19,6 @@ namespace Z0
         public readonly AppMsg Message;
 
         public bool Fail => !Ok;
-
-        [MethodImpl(Inline)]
-        public static implicit operator Outcome(bool success)
-            => new Outcome(success);
-
-        [MethodImpl(Inline)]
-        public static implicit operator Outcome(Exception e)
-            => new Outcome(e);
-
-        [MethodImpl(Inline)]
-        public static implicit operator Outcome(AppMsgData data)
-            => new Outcome(data);
-
-        [MethodImpl(Inline)]
-        public static implicit operator Outcome((bool success, AppMsg msg) src)
-            => new Outcome(src.success, src.msg);
-
-        [MethodImpl(Inline)]
-        public static bool operator true(Outcome src)
-            => src.Ok == true;
-
-        [MethodImpl(Inline)]
-        public static bool operator false(Outcome src)
-            => src.Ok == false;
-
-        [MethodImpl(Inline)]
-        public static implicit operator bool(Outcome src)
-            => src.Ok;
 
         [MethodImpl(Inline)]
         public Outcome(bool success)
@@ -93,5 +68,33 @@ namespace Z0
 
         public override string ToString()
             => Format();
+
+        [MethodImpl(Inline)]
+        public static implicit operator Outcome(bool success)
+            => new Outcome(success);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Outcome(Exception e)
+            => new Outcome(e);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Outcome(AppMsgData data)
+            => new Outcome(data);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Outcome((bool success, AppMsg msg) src)
+            => new Outcome(src.success, src.msg);
+
+        [MethodImpl(Inline)]
+        public static bool operator true(Outcome src)
+            => src.Ok == true;
+
+        [MethodImpl(Inline)]
+        public static bool operator false(Outcome src)
+            => src.Ok == false;
+
+        [MethodImpl(Inline)]
+        public static implicit operator bool(Outcome src)
+            => src.Ok;
     }
 }

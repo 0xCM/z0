@@ -13,6 +13,49 @@ namespace Z0
     partial struct Cmd
     {
         [Op]
+        public string format(CmdSpec src)
+        {
+            var dst = Buffers.text();
+            dst.AppendFormat("{0} ", src.CmdId.Format());
+            render(src.Args,dst);
+            return dst.Emit();
+        }
+
+        [Op]
+        public static void render(CmdArgs src, ITextBuffer dst)
+        {
+            var count = src.Count;
+            for(var i=0u; i<count; i++)
+            {
+                dst.Append(format(src[i]));
+                if(i != count - 1)
+                    dst.Append(Space);
+            }
+        }
+
+        [Op]
+        public static void render(CmdScript src, ITextBuffer dst)
+        {
+            var count = src.Length;
+            var parts = src.Content.View;
+            for(var i=0; i<count; i++)
+                dst.AppendLine(skip(parts,i).Format());
+        }
+
+        [Op]
+        public static void render(CmdModel src, ITextBuffer dst)
+        {
+            dst.Append(src.DataType.Name);
+            var fields = src.Fields.Terms;;
+            var count = fields.Length;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var field = ref skip(fields,count);
+                dst.Append(string.Format(" | {0}:{1}", field.Name, field.FieldType.Name));
+            }
+        }
+
+        [Op]
         public static string format(CmdModel src)
         {
             var buffer = Buffers.text();

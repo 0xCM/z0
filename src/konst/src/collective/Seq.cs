@@ -219,11 +219,11 @@ namespace Z0
             => new IndexedSeq<T>(EmptyArray<T>(),true);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Indexed<T> EmptyIndex<T>()
-            => new Indexed<T>(EmptyArray<T>());
+        public static Index<T> EmptyIndex<T>()
+            => new Index<T>(EmptyArray<T>());
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static bit search<T>(in Indexed<T> src, Func<T,bool> predicate, out T found)
+        public static bit search<T>(in Index<T> src, Func<T,bool> predicate, out T found)
         {
             var view = src.View;
             var count = view.Length;
@@ -292,19 +292,19 @@ namespace Z0
             => new DelimitedList<T>(array(src), delimiter);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Indexed<T> filter<T>(in Indexed<T> src, Func<T,bool> predicate)
-            => new Indexed<T>(from x in src.Data where predicate(x) select x);
+        public static Index<T> filter<T>(in Index<T> src, Func<T,bool> predicate)
+            => new Index<T>(from x in src.Data where predicate(x) select x);
 
-        public static Indexed<Y> map<T,Y>(in Indexed<T> src, Func<T,Y> selector)
-                => new Indexed<Y>(from x in src.Data select selector(x));
+        public static Index<Y> map<T,Y>(in Index<T> src, Func<T,Y> selector)
+                => new Index<Y>(from x in src.Data select selector(x));
 
-        public static Indexed<Z> map<T,Y,Z>(in Indexed<T> src, Func<T,Indexed<Y>> lift, Func<T,Y,Z> project)
-            => new Indexed<Z>(array(from x in src.Data
+        public static Index<Z> map<T,Y,Z>(in Index<T> src, Func<T,Index<Y>> lift, Func<T,Y,Z> project)
+            => new Index<Z>(array(from x in src.Data
                             from y in lift(x).Data
                             select project(x, y)));
 
-        public static Indexed<Y> map<T,Y>(in Indexed<T> src, Func<T,Indexed<Y>> lift)
-            => new Indexed<Y>(array(from x in src.Data
+        public static Index<Y> map<T,Y>(in Index<T> src, Func<T,Index<Y>> lift)
+            => new Index<Y>(array(from x in src.Data
                             from y in lift(x).Data
                             select y));
 

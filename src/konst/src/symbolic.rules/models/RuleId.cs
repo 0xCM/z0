@@ -27,23 +27,11 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator RuleId(string src)
             => new RuleId(src);
-    }
 
-    public readonly struct RuleId<T> : IKeyed<RuleId, string>
-    {
-        public string Key
+        public static RuleId Empty
         {
             [MethodImpl(Inline)]
-            get => typeof(T).AssemblyQualifiedName;
+            get => new RuleId(EmptyString);
         }
-
-        public bool IsEmpty
-        {
-            [MethodImpl(Inline)]
-            get => typeof(T) == typeof(void);
-        }
-
-        public static implicit operator RuleId(RuleId<T> src)
-            => new RuleId(src.Key);
     }
 }

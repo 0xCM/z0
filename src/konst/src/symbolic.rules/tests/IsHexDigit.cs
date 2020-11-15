@@ -13,7 +13,7 @@ namespace Z0
         /// <summary>
         /// Tests whether a character is one of (0,..9) | (a .. f) | (A .. F)
         /// </summary>
-        public readonly struct IsHexDigit : ISymbolicTest<IsHexDigit, char>
+        public readonly struct IsHexDigit : ISymbolicTest<IsHexDigit,char>
         {
             [MethodImpl(Inline), Op]
             public static bit check(char src)

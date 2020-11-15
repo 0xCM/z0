@@ -22,8 +22,8 @@ namespace Z0
             try
             {
                 using var wf = WfShellInit.create(args).WithRandom(Rng.@default());
-                //CaptureTool.run(wf);
-                create().Run(wf);
+                CaptureTool.run(wf);
+                //create().Run(wf);
             }
             catch(Exception e)
             {

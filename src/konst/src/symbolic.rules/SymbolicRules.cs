@@ -9,7 +9,6 @@ namespace Z0
 
     using static Konst;
     using static z;
-    using static Symbolic;
     using static SymbolicTests;
 
     [ApiHost(ApiNames.Rules, true)]
@@ -18,20 +17,36 @@ namespace Z0
         const NumericKind Closure = UnsignedInts;
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static SymbolicRule<T> rule<T>(RuleId id, RuleOperand<T>[] operands, RuleEffect<T> effect)
-            => new SymbolicRule<T>(id, operands, effect);
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static SymbolicRange<T> range<T>(RuleId id, T min, T max)
+        public static SymbolicRange<T> range<T>(T min, T max)
             where T : unmanaged
-                => new SymbolicRange<T>(id, min,max);
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static RuleEffect<T> effect<T>(T[] spec)
-            => new RuleEffect<T>(spec);
+                => new SymbolicRange<T>(min,max);
 
         [MethodImpl(Inline), Op]
-        public static IsOneOf oneOf(params char[] subjects)
-            => new IsOneOf(subjects);
+        public static IsOneOf oneOf(params char[] src)
+            => new IsOneOf(src);
+
+        [MethodImpl(Inline), Op]
+        public static IsInRange inRange(char min, char max)
+            => new IsInRange(range(min,max));
+
+        [MethodImpl(Inline), Op]
+        public static IsSpace space()
+            => default;
+
+        [MethodImpl(Inline), Op]
+        public static IsTab tab()
+            => default;
+
+        [MethodImpl(Inline), Op]
+        public static IsNewLine newLine()
+            => default;
+
+        [MethodImpl(Inline), Op]
+        public static IsWhitespace whitespace()
+            => default;
+
+        [MethodImpl(Inline), Op]
+        public static IsHexDigit hexDigit()
+            => default;
     }
 }

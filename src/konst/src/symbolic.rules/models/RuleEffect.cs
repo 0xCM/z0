@@ -10,16 +10,16 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct RuleEffect<T>
+    public readonly struct Consequence<T>
     {
-        public T[] Data {get;}
+        public T C{get;}
 
         [MethodImpl(Inline)]
-        public RuleEffect(T[] src)
-            => Data = src;
+        public Consequence(T src)
+            => C = src;
 
         [MethodImpl(Inline)]
-        public static implicit operator RuleEffect<T>(T[] src)
-            => new RuleEffect<T>(src);
+        public static implicit operator Consequence<T>(T src)
+            => new Consequence<T>(src);
     }
 }

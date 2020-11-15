@@ -10,11 +10,10 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public interface ISymbolicRule<T> : INode<T>
+    public interface ISymbolicRule<T> :  IRule<T>
+        where T : unmanaged
     {
-        RuleId RuleId {get;}
 
-        bool INode.IsNonEmpty
-            => RuleId.IsEmpty;
+
     }
 }

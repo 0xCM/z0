@@ -39,7 +39,6 @@ namespace Z0
     {
         public ITestContext Context {get;}
 
-
         public virtual IPolyrand Random {get;}
             = Rng.wyhash64(PolySeed64.Seed00);
 

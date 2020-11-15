@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="src">The source sequence</param>
         /// <typeparam name="S">The source element type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Indexed<Symbol<S>> symbols<S>(params S[] src)
+        public static Index<Symbol<S>> symbols<S>(params S[] src)
             where S : unmanaged
                 => src.Map(symbol);
     }

@@ -12,7 +12,7 @@ namespace Z0
 
     using api = Seq;
 
-    public readonly struct Indexed<T> : IIndex<T>
+    public readonly struct Index<T> : IIndex<T>
     {
         internal readonly T[] Data;
 
@@ -63,7 +63,7 @@ namespace Z0
             => api.search(this, predicate, out found);
 
         [MethodImpl(Inline)]
-        public Indexed(T[] content)
+        public Index(T[] content)
             => Data = content;
 
         public ref T this[int i]
@@ -96,47 +96,47 @@ namespace Z0
         public ref T Last
              => ref this[Length - 1];
 
-        public Indexed<T> Reverse()
+        public Index<T> Reverse()
         {
             Array.Reverse(Data);
             return this;
         }
 
-        public Indexed<Y> Cast<Y>()
-            => new Indexed<Y>(Storage.Select(x => cast<Y>(x)));
+        public Index<Y> Cast<Y>()
+            => new Index<Y>(Storage.Select(x => cast<Y>(x)));
 
-        public Indexed<Y> Select<Y>(Func<T,Y> selector)
+        public Index<Y> Select<Y>(Func<T,Y> selector)
              => api.map(this, selector);
 
-        public Indexed<Z> SelectMany<Y,Z>(Func<T,Indexed<Y>> lift, Func<T,Y,Z> project)
+        public Index<Z> SelectMany<Y,Z>(Func<T,Index<Y>> lift, Func<T,Y,Z> project)
              => api.map(this, lift, project);
 
-        public Indexed<Y> SelectMany<Y>(Func<T,Indexed<Y>> lift)
+        public Index<Y> SelectMany<Y>(Func<T,Index<Y>> lift)
              => api.map(this, lift);
 
-        public Indexed<T> Where(Func<T,bool> predicate)
+        public Index<T> Where(Func<T,bool> predicate)
             => api.filter(this, predicate);
 
-        public static Indexed<T> Empty
+        public static Index<T> Empty
         {
            [MethodImpl(Inline)]
            get => api.EmptyIndex<T>();
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator Span<T>(Indexed<T> src)
+        public static implicit operator Span<T>(Index<T> src)
             => src.Terms;
 
         [MethodImpl(Inline)]
-        public static implicit operator ReadOnlySpan<T>(Indexed<T> src)
+        public static implicit operator ReadOnlySpan<T>(Index<T> src)
             => src.View;
 
         [MethodImpl(Inline)]
-        public static implicit operator Indexed<T>(T[] src)
-            => new Indexed<T>(src);
+        public static implicit operator Index<T>(T[] src)
+            => new Index<T>(src);
 
        [MethodImpl(Inline)]
-        public static implicit operator T[](Indexed<T> src)
+        public static implicit operator T[](Index<T> src)
             => src.Data;
     }
 }

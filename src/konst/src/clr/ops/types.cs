@@ -22,7 +22,7 @@ namespace Z0
             => src.GetTypes();
 
         [MethodImpl(Inline), Op]
-        public static Type type(in Indexed<Type>  src, ClrArtifactKey id)
+        public static Type type(in Index<Type>  src, ClrArtifactKey id)
         {
             for(var i=0; i<src.Length; i++)
             {

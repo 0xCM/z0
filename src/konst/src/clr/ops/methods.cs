@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The type to examine</param>
         [MethodImpl(Inline), Op]
-        public static Indexed<MethodInfo> methods(Type src)
+        public static Index<MethodInfo> methods(Type src)
             => src.GetMethods(BF);
     }
 }

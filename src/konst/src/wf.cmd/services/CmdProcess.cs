@@ -24,19 +24,7 @@ namespace Z0
     /// </summary>
     public sealed class CmdProcess : ICmdProcess
     {
-        /// <summary>
-        /// Run 'commandLine' as a subprocess
-        /// Output is captured and placed in the 'Output' property of the returned Command
-        /// structure.
-        /// </summary>
-        /// <param variable="commandLine">The command lineNumber to run as a subprocess</param>
-        /// <param variable="options">Additional qualifiers that control how the process is run</param>
-        /// <returns>A Command structure that can be queried to determine ExitCode, Output, etc.</returns>
-        public static CmdProcess create(CmdLine commandLine, CmdProcessOptions options)
-            => new CmdProcess(commandLine, options);
-
-        public static CmdProcess create(CmdLine commandLine)
-            => create(commandLine, new CmdProcessOptions());
+        IWfShell Wf;
 
         readonly CmdLine _commandLine;
 
@@ -141,8 +129,9 @@ namespace Z0
         /// <param variable="commandLine">The command lineNumber to run as a subprocess</param>
         /// <param variable="options">Additional qualifiers that control how the process is run</param>
         /// <returns>A Command structure that can be queried to determine ExitCode, Output, etc.</returns>
-        public CmdProcess(CmdLine commandLine, CmdProcessOptions options)
+        public CmdProcess(IWfShell wf, CmdLine commandLine, CmdProcessOptions options)
         {
+            Wf = wf;
             Options = options;
             _commandLine = commandLine;
 
@@ -255,8 +244,8 @@ namespace Z0
         /// Create a subprocess to run 'commandLine' with no special options.
         /// <param variable="commandLine">The command lineNumber to run as a subprocess</param>
         /// </summary>
-        public CmdProcess(string commandLine)
-            : this(commandLine, new CmdProcessOptions())
+        public CmdProcess(IWfShell wf, string commandLine)
+            : this(wf, commandLine, new CmdProcessOptions())
         {
         }
 
@@ -349,7 +338,7 @@ namespace Z0
             Debug.WriteLine("Killing process tree " + ProcessId + " Cmd: " + _commandLine);
             try
             {
-                create("taskkill /f /t /pid " + Process.Id).Wait();
+                Cmd.create(Wf, "taskkill /f /t /pid " + Process.Id).Wait();
             }
             catch (Exception e)
             {

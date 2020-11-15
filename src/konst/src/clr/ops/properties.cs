@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The type to examine</param>
         [MethodImpl(Inline), Op]
-        public static Indexed<PropertyInfo> properties(Type src)
+        public static Index<PropertyInfo> properties(Type src)
             => src.GetProperties(BF);
     }
 }

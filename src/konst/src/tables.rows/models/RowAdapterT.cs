@@ -14,7 +14,7 @@ namespace Z0
     public struct RowAdapter<T>
         where T : struct
     {
-        public readonly TableFieldIndex Fields;
+        public readonly TableFields Fields;
 
         uint Index;
 
@@ -23,7 +23,7 @@ namespace Z0
         TableRow<T> Row;
 
         [MethodImpl(Inline)]
-        public RowAdapter(in TableFieldIndex fields, uint index = 0)
+        public RowAdapter(in TableFields fields, uint index = 0)
         {
             Source = default;
             Index = index;

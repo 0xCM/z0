@@ -16,19 +16,6 @@ namespace Z0
         /// Populates a <see cref='CmdArg'/> structure from a specified source
         /// </summary>
         /// <param name="src">The data source</param>
-        /// <typeparam name="T">The option value type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static CmdArg data<T>(in CmdArg<T> src)
-        {
-            var dst = new CmdArg();
-            data(src,ref dst);
-            return dst;
-        }
-
-        /// <summary>
-        /// Populates a <see cref='CmdArg'/> structure from a specified source
-        /// </summary>
-        /// <param name="src">The data source</param>
         /// <param name="dst">The data target</param>
         /// <typeparam name="T">The option value type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
@@ -36,21 +23,6 @@ namespace Z0
         {
             dst = new CmdArg(src.Name, src.Value.ToString());
             return ref dst;
-        }
-
-        /// <summary>
-        /// Populates a <see cref='CmdArg'/> structure from a specified source
-        /// </summary>
-        /// <param name="src">The data source</param>
-        /// <typeparam name="K">The option kind type</typeparam>
-        /// <typeparam name="T">The option value type</typeparam>
-        [MethodImpl(Inline)]
-        public static CmdArg data<K,T>(in CmdArg<K,T> src)
-            where K : unmanaged
-        {
-            var dst = new CmdArg();
-            data(src,ref dst);
-            return dst;
         }
 
         /// <summary>

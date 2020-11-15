@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    public interface ISymbolicTest<S>
+    public interface ISymbolicTest<S> : ISymbolicRule<S>
         where S : unmanaged
     {
         bit Check(S s);
@@ -19,7 +19,10 @@ namespace Z0
         where H : struct, ISymbolicTest<H,S>
         where S : unmanaged
     {
+        RuleId IRule<S>.RuleId
+            => new RuleId<H>();
+
         string IKeyed<string>.Key
-                => typeof(H).AssemblyQualifiedName;
+            => typeof(H).AssemblyQualifiedName;
     }
 }

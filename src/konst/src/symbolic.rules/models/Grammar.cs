@@ -10,16 +10,6 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct Grammars
-    {
-
-    }
-
-    public readonly struct Production<N,T>
-    {
-
-    }
-
     /// <summary>
     /// Represents a basic generative grammar over a finite set of nonterminal <typeparamref name='S'/> symbols
     /// and a necessarily disjoint set of terminal <typeparamref name='T'/> symbols

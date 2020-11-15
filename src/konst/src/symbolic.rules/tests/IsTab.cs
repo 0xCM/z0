@@ -12,7 +12,7 @@ namespace Z0
 
     partial struct SymbolicTests
     {
-        public readonly struct IsTab : ISymbolicTest<IsTab, char>
+        public readonly struct IsTab : ISymbolicTest<IsTab,char>
         {
             [MethodImpl(Inline)]
             public static bit check(char c)

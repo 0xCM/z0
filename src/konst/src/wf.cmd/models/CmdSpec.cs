@@ -10,6 +10,8 @@ namespace Z0
     using static Konst;
     using static z;
 
+    using api = Cmd;
+
     public struct CmdSpec : ICmdSpec, ITextual
     {
         public CmdId CmdId {get;}
@@ -22,8 +24,9 @@ namespace Z0
             CmdId = id;
             Args = args;
         }
+
         public string Format()
-            => CmdId.Format();
+            => api.format(this);
 
         public override string ToString()
             => Format();

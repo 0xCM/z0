@@ -22,7 +22,7 @@ namespace Z0
 
         public IApiHost Host {get;}
 
-        public Indexed<MethodInfo> Methods {get;}
+        public Index<MethodInfo> Methods {get;}
 
         [MethodImpl(Inline)]
         public ApiHostMethods(IApiHost host, MethodInfo[] src)
