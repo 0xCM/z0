@@ -62,9 +62,6 @@ namespace Z0
         public static int ToDateKey(this Date? d)
             => d != null ? d.Value.ToDateKey() : 0;
 
-        public static Span<ushort> GetParts(this DateTime x, TimeResolution resolution = TimeResolution.Ms)
-            => api.parts(x,resolution);
-
         /// <summary>
         /// Represents a date value as an array of integers
         /// </summary>

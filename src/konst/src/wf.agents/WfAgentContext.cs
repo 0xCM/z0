@@ -14,15 +14,15 @@ namespace Z0
         public WfAgentContext(IWfShell wf)
         {
             Wf = wf;
-            Members = sys.empty<IAgent>();
+            Members = sys.empty<IWfAgent>();
             EventLog = new WfEventSink(wf);
         }
 
-        public IEnumerable<IAgent> Members {get;}
+        public IEnumerable<IWfAgent> Members {get;}
 
         public IAgentEventSink EventLog {get;}
 
-        public void Register(IAgent agent)
+        public void Register(IWfAgent agent)
         {
 
         }

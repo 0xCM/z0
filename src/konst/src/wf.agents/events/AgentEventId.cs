@@ -30,15 +30,12 @@ namespace Z0
 
         /// <summary>
         /// The event classifier/discriminator
-        /// </summary>        
+        /// </summary>
         public readonly ulong EventKind;
 
         /// <summary>
         /// Constructs an event identity from a (kind,server,agent,time) tuple
         /// </summary>
-        /// <param name="loc">The location of occurence</param>
-        /// <param name="time">The time of occurrence</param>
-        /// <param name="kind">The kind of event that occurred</param>
         [MethodImpl(Inline)]
         public static AgentEventId define(uint server, uint agent, ulong time, ulong kind)
             => new AgentEventId(server, agent, time, kind);
@@ -55,7 +52,7 @@ namespace Z0
         public ulong Location
         {
             [MethodImpl(Inline)]
-            get => ((ulong)ServerId << 32) & AgentId; 
+            get => ((ulong)ServerId << 32) & AgentId;
         }
 
         /// <summary>
@@ -76,7 +73,7 @@ namespace Z0
             time = Timestamp;
         }
 
-        public override string ToString() 
+        public override string ToString()
             => $"{EventKind}/{ServerId}/{AgentId}/{Timestamp}";
     }
 }

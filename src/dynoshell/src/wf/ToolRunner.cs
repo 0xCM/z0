@@ -63,7 +63,7 @@ namespace Z0
         [Op]
         public static FS.FilePath[] match(FS.FolderPath root, params FS.FileExt[] ext)
         {
-            var files = FS.archive(root, ext).Files().Array();
+            var files = FileArchives.create(root, ext).Files().Array();
             Array.Sort(files);
             return files;
         }
@@ -71,7 +71,7 @@ namespace Z0
         [Op]
         public static FS.FilePath[] match(FS.FolderPath root, uint max, params FS.FileExt[] ext)
         {
-            var files = FS.archive(root, ext).Files().Take(max).Array();
+            var files = FileArchives.create(root, ext).Files().Take(max).Array();
             Array.Sort(files);
             return files;
         }
@@ -79,10 +79,10 @@ namespace Z0
         [Op]
         public static CmdResult exec(EmitFileListCmd cmd)
         {
-            var archive = FS.archive(cmd.SourceDir, cmd.FileKinds);
+            var archive = FileArchives.create(cmd.SourceDir, cmd.FileKinds);
             var id = Cmd.id(cmd);
             var list = cmd.EmissionLimit != 0 ? match(cmd.SourceDir, cmd.EmissionLimit, cmd.FileKinds) : match(cmd.SourceDir, cmd.FileKinds);
-            var outcome = FileEmissions.emit(list, cmd.FileUriMode, cmd.TargetPath);
+            var outcome = FileArchives.emit(list, cmd.FileUriMode, cmd.TargetPath);
             return outcome ? Cmd.ok(cmd) : Cmd.fail(cmd,outcome.Format());
         }
 

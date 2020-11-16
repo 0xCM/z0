@@ -14,7 +14,7 @@ namespace Z0
     /// <summary>
     /// Responsible for managing agents owned by a server
     /// </summary>
-    public class AgentProcess : WorkflowAgent
+    public class WfAgentProcess : WfAgent
     {
         /// <summary>
         /// Creates and configures, but does not start, a server process
@@ -22,10 +22,10 @@ namespace Z0
         /// <param name="Context">The context to which the server process will be assigned</param>
         /// <param name="ServerId">The server id</param>
         /// <param name="ServerAgents">The agents to be managed on behalf of the server</param>
-        public static AgentProcess create(IAgentContext Context, uint ServerId, uint CoreNumber, params IAgent[] ServerAgents)
-            => new AgentProcess(Context, ServerId, CoreNumber, ServerAgents);
+        public static WfAgentProcess create(IAgentContext Context, uint ServerId, uint CoreNumber, params IWfAgent[] ServerAgents)
+            => new WfAgentProcess(Context, ServerId, CoreNumber, ServerAgents);
 
-        internal AgentProcess(IAgentContext context, uint server, uint core, params IAgent[] agents)
+        internal WfAgentProcess(IAgentContext context, uint server, uint core, params IWfAgent[] agents)
             : base(context, (server, 1u))
         {
             Agents = agents.ToList();
@@ -37,11 +37,11 @@ namespace Z0
         /// <summary>
         /// Exposes a readonly stream of the agents under management on behalf of the server
         /// </summary>
-        public IEnumerable<IAgent> ServerAgents
+        public IEnumerable<IWfAgent> ServerAgents
             => Agents;
 
-        List<IAgent> Agents {get;}
-            = new List<IAgent>();
+        List<IWfAgent> Agents {get;}
+            = new List<IWfAgent>();
 
         protected override void OnStart()
         {

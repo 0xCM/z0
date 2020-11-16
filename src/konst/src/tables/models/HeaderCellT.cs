@@ -9,16 +9,16 @@ namespace Z0
     using System.Reflection;
 
     using static Konst;
-    
+
     public readonly struct HeaderCell<F>
-        where F : unmanaged, Enum
+        where F : unmanaged
     {
-        public readonly uint Index;
+        public uint Index {get;}
 
         readonly FieldInfo Field;
 
-        readonly F Value;
-                
+        public F Value {get;}
+
         [MethodImpl(Inline)]
         public HeaderCell(uint index, FieldInfo field, F value)
         {
@@ -26,18 +26,17 @@ namespace Z0
             Field = field;
             Value = value;
         }
-        
+
         public string Name
         {
             [MethodImpl(Inline)]
             get => Field.Name;
         }
-        
+
         public ushort Width
         {
             [MethodImpl(Inline)]
             get => z.@as<F,ushort>(Value);
         }
     }
-
 }

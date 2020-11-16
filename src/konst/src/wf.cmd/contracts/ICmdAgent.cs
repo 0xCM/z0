@@ -5,15 +5,13 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
+    using System.Diagnostics;
 
-    public interface ITimeStamped : IFacet<DateTime>
+    using static Konst;
+
+    public interface ICmdAgent : IWfAgent
     {
-        DateTime Timestamp {get;}
 
-        string IFacet.FacetName 
-            => nameof(Timestamp);
-
-        DateTime IFacet<DateTime>.FacetValue 
-            => Timestamp;
     }
 }

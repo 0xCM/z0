@@ -162,7 +162,7 @@ namespace Z0
         /// </summary>
         public void Start()
         {
-            StartTime = ServerTimestamp.Timestamp();
+            StartTime = Time.timestamp();
         }
 
         bool CanProcess()
@@ -221,7 +221,7 @@ namespace Z0
 
         void OnComplete(bool asPlanned)
         {
-            EndTime = ServerTimestamp.Timestamp();
+            EndTime = Time.timestamp();
             Runtime.Stop();
             Completed?.Invoke(QueryStats(), asPlanned);
         }

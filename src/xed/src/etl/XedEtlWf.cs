@@ -35,7 +35,7 @@ namespace Z0
 
         readonly XedStage Stage;
 
-        readonly IDbTableArchive Target;
+        readonly ITableStore Target;
 
         readonly WfHost Host;
 

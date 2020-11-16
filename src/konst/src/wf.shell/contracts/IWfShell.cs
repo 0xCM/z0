@@ -16,8 +16,35 @@ namespace Z0
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
-    public interface IWfShell : IWfContext, IDisposable
+    public interface IWfShell : IDisposable, ITextual
     {
+        IWfPaths Paths
+            => WfShell.paths();
+
+        IJsonSettings Settings
+            => JsonSettings.Load(Paths.AppConfigPath);
+
+        IApiParts ApiParts
+             => WfShell.parts();
+
+        CorrelationToken Ct
+            => z.correlate(Controller.Id);
+
+        ITestLogPaths TestLogPaths
+            => new TestLogPaths();
+
+        CmdArgs Args
+             => Environment.GetCommandLineArgs();
+
+        string AppName
+            => Controller.Name;
+
+        string ITextual.Format()
+            => AppName;
+
+        WfController Controller
+            => Assembly.GetEntryAssembly();
+
         ISystemApiCatalog Api {get;}
 
         IWfContext Context {get;}
@@ -90,8 +117,8 @@ namespace Z0
         IPolySourced PolySource
             => Random;
 
-        IWfPaths IWfContext.Paths
-            => Context.Paths;
+        // IWfPaths IWfContext.Paths
+        //     => Context.Paths;
 
         FS.FolderPath IndexRoot
             => FS.dir(Init.IndexDir.Name);

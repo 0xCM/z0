@@ -9,23 +9,23 @@ namespace Z0
     /// <summary>
     /// Defines a logical server
     /// </summary>
-    public class WorkflowServer : WorkflowAgent
+    public class WfServer : WfAgent
     {
-        public static WorkflowServer create(IAgentContext context, WorkflowServerConfig config)
-            => new WorkflowServer(context, config);
+        public static WfServer create(IAgentContext context, WfServerConfig config)
+            => new WfServer(context, config);
 
-        WorkflowServerConfig Config {get;}
+        WfServerConfig Config {get;}
 
-        AgentProcess Worker {get; }
+        WfAgentProcess Worker {get; }
 
-        internal WorkflowServer(IAgentContext context, WorkflowServerConfig config)
+        internal WfServer(IAgentContext context, WfServerConfig config)
             : base(context, (config.ServerId, 0u))
         {
             Config = config;
             var pulse =  SourcedEvents.emitter(context,
                 AgentIdentityPool.NextAgentId(PartId),
                 new PulseEmitterConfig(new TimeSpan(0,0,1)));
-            Worker = AgentProcess.create(context, PartId, config.CoreNumber, new IAgent[]{pulse});
+            Worker = WfAgentProcess.create(context, PartId, config.CoreNumber, new IWfAgent[]{pulse});
         }
 
         protected override async void OnStart()

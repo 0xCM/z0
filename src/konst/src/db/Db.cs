@@ -28,12 +28,11 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static IDbTableArchive tables<S>(IWfShell wf, S subject)
-            => new DbTables<S>(wf.Db(), subject);
+        public static ITableStore tables<S>(IWfShell wf, S subject)
+            => new FileDbTables<S>(wf.Db(), subject);
 
         [MethodImpl(Inline), Op]
         public static IFileDb files(IWfShell wf, FileDbPaths paths)
             => new FileDb(wf, paths);
-
     }
 }

@@ -10,7 +10,7 @@ namespace Z0
     /// <summary>
     /// Defines base system agent abstraction
     /// </summary>
-    public abstract class WorkflowAgent : IAgent
+    public abstract class WfAgent : IWfAgent
     {
         public IAgentContext Context {get;}
 
@@ -37,7 +37,7 @@ namespace Z0
         /// </remarks>
         public uint HostId {get;}
 
-        protected WorkflowAgent(IAgentContext context, AgentIdentity id)
+        protected WfAgent(IAgentContext context, AgentIdentity id)
         {
             PartId = id.PartId;
             HostId = id.HostId;

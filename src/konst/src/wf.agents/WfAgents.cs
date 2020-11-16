@@ -5,16 +5,13 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
+    using System.Threading.Tasks;
 
-    using static Konst;
-    using static z;
 
-    partial struct Table
+    [ApiHost]
+    public readonly struct WfAgents
     {
-        public static TableStore<F,R> store<F,R>()
-            where F : unmanaged, Enum
-            where R : struct, ITabular
-                => default;
+
+
     }
 }

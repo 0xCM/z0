@@ -16,10 +16,7 @@ namespace Z0
             Settings = XedSettings.Default();
             SourceRoot = wf.Db().SourceRoot("xed");
             TargetRoot = FS.dir(wf.Paths.LogRoot.Name) + FS.folder("data") + FS.folder("xed");
-            Target = DbTables.create(wf.Db().Root + FS.folder("tables") + FS.folder("xed"));
         }
-
-        public readonly IDbTableArchive Target;
 
         public FS.FileName SummaryFile
             => FS.file(text.format("{0}.{1}", "xed", "summary"), DataFileExt);
@@ -32,9 +29,6 @@ namespace Z0
 
         public FS.FolderPath ExtractRoot
             => TargetRoot + FS.folder("extracts");
-
-        public FS.FolderPath PubRoot
-            => Target.Root;
 
         public FS.FolderName ExtensionFolder
             => FS.folder("extensions");

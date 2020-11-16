@@ -11,19 +11,14 @@ namespace Z0
 
     public struct FileDbPaths : IFileDbPaths<FileDbPaths>
     {
-        public FS.FolderPath Root;
+        public FS.FolderPath Root {get;}
 
         [MethodImpl(Inline)]
         public FileDbPaths(FS.FolderPath root)
             => Root = root;
 
-        FS.FolderPath IFileArchivePaths.Root
-            => Root;
-
         [MethodImpl(Inline)]
         public static implicit operator FileDbPaths(FS.FolderPath root)
             => new FileDbPaths(root);
-
-        public IFileDbPaths Defaults => this;
     }
 }

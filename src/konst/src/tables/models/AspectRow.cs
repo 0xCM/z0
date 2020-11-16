@@ -14,26 +14,22 @@ namespace Z0
         /// <summary>
         /// The aspect name
         /// </summary>
-        public readonly string Name;
+        public string Name {get;}
 
         /// <summary>
         /// The defining source
         /// </summary>
-        public readonly object Source;
+        public object Source {get;}
 
         /// <summary>
         /// The aspect value
         /// </summary>
-        public readonly object Value;
+        public object Value {get;}
 
         /// <summary>
         /// An informative description
         /// </summary>
-        public readonly string Description;
-
-        [MethodImpl(Inline)]
-        public static implicit operator AspectRow((string name, object src, object value, string description) src)
-            => new AspectRow(src.name, src.src, src.value, src.description);
+        public string Description {get;}
 
         [MethodImpl(Inline)]
         public AspectRow(string name, object src, object value, string description)
@@ -56,7 +52,11 @@ namespace Z0
         public override string ToString()
             => Format();
 
+        [MethodImpl(Inline)]
+        public static implicit operator AspectRow((string name, object src, object value, string description) src)
+            => new AspectRow(src.name, src.src, src.value, src.description);
+
         public static AspectRow Empty
-            => (string.Empty, Null.Value, Null.Value, string.Empty);
+            => new AspectRow(EmptyString, Null.Value, Null.Value, EmptyString);
     }
 }

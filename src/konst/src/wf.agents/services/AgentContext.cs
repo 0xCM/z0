@@ -20,17 +20,17 @@ namespace Z0
     {
         public IAgentEventSink EventLog {get;}
 
-        ConcurrentDictionary<ulong,IAgent> Agents {get;}
-            = new ConcurrentDictionary<ulong, IAgent>();
+        ConcurrentDictionary<ulong,IWfAgent> Agents {get;}
+            = new ConcurrentDictionary<ulong, IWfAgent>();
 
         [MethodImpl(Inline)]
         public AgentContext(IAgentEventSink sink)
             => EventLog = sink;
 
-        public void Register(IAgent agent)
+        public void Register(IWfAgent agent)
             => Agents.TryAdd(agent.Identity, agent);
 
-        public IEnumerable<IAgent> Members
+        public IEnumerable<IWfAgent> Members
             => Agents.Values;
     }
 }

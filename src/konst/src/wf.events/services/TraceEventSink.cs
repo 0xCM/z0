@@ -15,9 +15,9 @@ namespace Z0
 
     using api = SourcedEvents;
 
-    public sealed class TraceEventSink : WorkflowAgent
+    public sealed class TraceEventSink : WfAgent
     {
-        public static IAgent Define(AgentContext Context, AgentIdentity Identity)
+        public static IWfAgent Define(AgentContext Context, AgentIdentity Identity)
             => new TraceEventSink(Context, Identity);
 
         TraceEventSink(AgentContext Context, AgentIdentity Identity)

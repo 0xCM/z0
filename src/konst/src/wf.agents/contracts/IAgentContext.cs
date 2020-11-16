@@ -9,10 +9,10 @@ namespace Z0
 
     public interface IAgentContext : IWfContext
     {
-        IEnumerable<IAgent> Members {get;}
+        IEnumerable<IWfAgent> Members {get;}
 
         IAgentEventSink EventLog {get;}
 
-        void Register(IAgent agent);
+        void Register(IWfAgent agent);
     }
 }

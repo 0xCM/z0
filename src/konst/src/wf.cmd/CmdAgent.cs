@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    public class CmdAgent : WorkflowAgent, ICmdObserver
+    public class CmdAgent : WfAgent, ICmdObserver
     {
         [Op]
         public static CmdAgent create(IWfShell wf, ICmdObserver observer)

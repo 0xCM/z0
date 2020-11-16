@@ -8,8 +8,8 @@ namespace Z0
     using System.Linq;
     using System.Threading.Tasks;
 
-    public abstract class AgentControl<S,C> : IAgentControl<S,C>
-        where S : IAgentControl
+    public abstract class AgentControl<S,C> : IWfAgentControl<S,C>
+        where S : IWfAgentControl
         where C : IAgentContext
     {
         protected AgentControl(IWfContext context)
@@ -25,7 +25,7 @@ namespace Z0
 
         protected abstract Task Configure(C config);
 
-        async Task IAgentControl<S,C>.Configure(C config)
+        async Task IWfAgentControl<S,C>.Configure(C config)
         {
             await Configure(config);
             OnConfigured(config);

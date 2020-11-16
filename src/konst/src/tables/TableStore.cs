@@ -13,8 +13,32 @@ namespace Z0
     using static z;
 
     [ApiHost]
-    public readonly struct TableStore
+    public readonly struct TableStores
     {
+        [MethodImpl(Inline), Op]
+        public ITableStore service(FS.FolderPath root)
+            => new TableStore(root);
+
+        public static TableStore<F,R> service<F,R>()
+            where F : unmanaged, Enum
+            where R : struct, ITabular
+                => default;
+
+        public static Option<FilePath> save<F,R>(R[] src, FS.FilePath dst)
+            where F : unmanaged, Enum
+            where R : struct, ITabular
+                => service<F,R>().Save(src, dst);
+
+        [MethodImpl(Inline)]
+        public static ArchivedTable<T> archived<T>(FS.FilePath src)
+            where T : struct
+                => new ArchivedTable<T>(src);
+
+        [MethodImpl(Inline)]
+        public static DataFlow<Rowset<T>, ArchivedTable<T>> archived<T>(Rowset<T> src, FS.FilePath dst)
+            where T : struct
+                => (src, new ArchivedTable<T>(dst));
+
         [MethodImpl(Inline), Op]
         public static TableEmission<F,T> emission<F,T>(T[] src, FS.FilePath dst, F f = default)
             where T : struct, ITable<F,T>

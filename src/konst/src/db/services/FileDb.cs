@@ -40,7 +40,7 @@ namespace Z0
        static Option<FilePath> deposit<F,R,S>(FS.FolderPath root, R[] src, string id, S subject, FS.FileExt type)
             where F : unmanaged, Enum
             where R : struct, ITabular
-                => T.store<F,R>().Save(src, T.renderspec<F>(), (FS.dir(root.Name) + FS.folder(id) + FS.file($"{id}.{subject}",type)));
+                => TableStores.service<F,R>().Save(src, T.renderspec<F>(), (FS.dir(root.Name) + FS.folder(id) + FS.file($"{id}.{subject}",type)));
         public FS.FolderPath TableRoot()
             => Root + FS.folder(PN.tables);
     }

@@ -1,6 +1,6 @@
 //-----------------------------------------------------------------------------
-// Copyright   : (c) Chris Moore, 2020
-// License     : MIT
+// Copyright   :  (c) Chris Moore, 2020
+// License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
 {
@@ -10,22 +10,26 @@ namespace Z0
     using System.Linq;
 
     using static Konst;
+    using static z;
 
     using api = Table;
-
     using X = ArchiveFileKinds;
 
-    public readonly struct DbTables : IDbTableArchive
+    public struct FileDbTables<S> : ITableStore
     {
+        public IFileDb Db {get;}
+
+        public S Subject {get;}
+
         public FS.FolderPath Root {get;}
 
         [MethodImpl(Inline)]
-        public static IDbTableArchive create(FS.FolderPath root)
-            => new DbTables(root);
-
-        [MethodImpl(Inline)]
-        internal DbTables(FS.FolderPath root)
-            => Root = root;
+        internal FileDbTables(IFileDb archive, S subject)
+        {
+            Db = archive;
+            Subject = subject;
+            Root = archive.TableRoot();
+        }
 
         public void Clear()
             => Root.Clear();
@@ -39,12 +43,12 @@ namespace Z0
         public Option<FilePath> Deposit<F,R>(R[] src, FS.FileName name)
             where F : unmanaged, Enum
             where R : struct, ITabular
-                => api.store<F,R>().Save(src, api.renderspec<F>(), Root + FS.file(name.Name));
+                => TableStores.service<F,R>().Save(src, api.renderspec<F>(), Root + FS.file(name.Name));
 
         public Option<FilePath> Deposit<F,R>(R[] src, FS.FolderName folder, FS.FileName name)
             where F : unmanaged, Enum
             where R : struct, ITabular
-                => api.store<F,R>().Save(src, api.renderspec<F>(), (FS.dir(Root.Name) + folder) + name);
+                => TableStores.service<F,R>().Save(src, api.renderspec<F>(), (FS.dir(Root.Name) + folder) + name);
 
         public DataFlow<Rowset<T>,ArchivedTable<T>> Deposit<T,M,K>(T[] src, string header, Func<T,string> render,  M m = default)
             where T : struct

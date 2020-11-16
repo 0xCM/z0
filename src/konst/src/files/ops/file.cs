@@ -11,6 +11,7 @@ namespace Z0
 
     partial struct FS
     {
+
         [MethodImpl(Inline), Op]
         public static FileName file(PartId part, FileExt ext)
             => file(Render.concat(part.Format()), ext);

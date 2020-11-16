@@ -7,7 +7,7 @@ namespace Z0
     /// <summary>
     /// Defines a server configuration record
     /// </summary>
-    public readonly struct WorkflowServerConfig
+    public readonly struct WfServerConfig
     {
         /// <summary>
         /// Identifies the server to which the configuration applies
@@ -24,7 +24,7 @@ namespace Z0
         /// </summary>
         public readonly uint CoreNumber;
 
-        public WorkflowServerConfig(uint id, string name, uint core)
+        public WfServerConfig(uint id, string name, uint core)
         {
             ServerId = id;
             ServerName = name;

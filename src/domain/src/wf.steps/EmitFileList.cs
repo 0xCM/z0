@@ -28,7 +28,7 @@ namespace Z0
         [CmdWorker]
         public static CmdResult run(IWfShell wf, EmitFileListCmd spec)
         {
-            var archive = FS.archive(spec.SourceDir);
+            var archive = FileArchives.create(spec.SourceDir);
             var files = archive.Files(true, spec.FileKinds).Where(f => !f.Name.EndsWith(".resources.dll"));
             var counter = 0;
             using var writer = spec.TargetPath.Writer();

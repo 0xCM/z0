@@ -1,6 +1,6 @@
 //-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2020
-// License     :  MIT
+// Copyright   : (c) Chris Moore, 2020
+// License     : MIT
 //-----------------------------------------------------------------------------
 namespace Z0
 {
@@ -10,26 +10,18 @@ namespace Z0
     using System.Linq;
 
     using static Konst;
-    using static z;
 
     using api = Table;
+
     using X = ArchiveFileKinds;
 
-    public struct DbTables<S> : IDbTableArchive
+    public readonly struct TableStore : ITableStore
     {
-        public IFileDb Db {get;}
-
-        public S Subject {get;}
-
         public FS.FolderPath Root {get;}
 
         [MethodImpl(Inline)]
-        internal DbTables(IFileDb archive, S subject)
-        {
-            Db = archive;
-            Subject = subject;
-            Root = archive.TableRoot();
-        }
+        internal TableStore(FS.FolderPath root)
+            => Root = root;
 
         public void Clear()
             => Root.Clear();
@@ -43,12 +35,12 @@ namespace Z0
         public Option<FilePath> Deposit<F,R>(R[] src, FS.FileName name)
             where F : unmanaged, Enum
             where R : struct, ITabular
-                => api.store<F,R>().Save(src, api.renderspec<F>(), Root + FS.file(name.Name));
+                => TableStores.service<F,R>().Save(src, api.renderspec<F>(), Root + FS.file(name.Name));
 
         public Option<FilePath> Deposit<F,R>(R[] src, FS.FolderName folder, FS.FileName name)
             where F : unmanaged, Enum
             where R : struct, ITabular
-                => api.store<F,R>().Save(src, api.renderspec<F>(), (FS.dir(Root.Name) + folder) + name);
+                => TableStores.service<F,R>().Save(src, api.renderspec<F>(), (FS.dir(Root.Name) + folder) + name);
 
         public DataFlow<Rowset<T>,ArchivedTable<T>> Deposit<T,M,K>(T[] src, string header, Func<T,string> render,  M m = default)
             where T : struct

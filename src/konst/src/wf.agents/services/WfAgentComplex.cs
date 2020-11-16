@@ -12,37 +12,37 @@ namespace Z0
     /// <summary>
     /// Agent that manages a collection of servers
     /// </summary>
-    public class AgentComplex : WorkflowAgent
+    public class WfAgentComplex : WfAgent
     {
-        WorkflowServer[] Servers;
+        WfServer[] Servers;
 
-        IAgent EventSink;
+        IWfAgent EventSink;
 
-        static Option<AgentComplex> Complex {get; set;}
+        static Option<WfAgentComplex> Complex {get; set;}
 
-        public static AgentComplex Define(AgentContext context)
-            => new AgentComplex(context);
+        public static WfAgentComplex Define(AgentContext context)
+            => new WfAgentComplex(context);
 
         /// <summary>
         /// Starts a new complex or returns the existing complex
         /// </summary>
         /// <param name="context">The context that the complex will inherit</param>
         /// <param name="servers"></param>
-        public static async Task<AgentComplex> Start(AgentContext context)
+        public static async Task<WfAgentComplex> Start(AgentContext context)
         {
             if(Complex.IsSome())
                 return Complex.ValueOrDefault();
 
             var servers = 20;
-            var complex = AgentComplex.Define(context);
-            var configs = new List<WorkflowServerConfig>();
+            var complex = WfAgentComplex.Define(context);
+            var configs = new List<WfServerConfig>();
             var processors = Environment.ProcessorCount;
             term.inform($"Server complex using {processors} processor cores");
 
             for(uint i = 0, corenum = 1; i <= servers; i++, corenum++)
             {
                 var sid = AgentIdentityPool.NextServerId();
-                var config = new WorkflowServerConfig(sid, $"Server{sid}", corenum);
+                var config = new WfServerConfig(sid, $"Server{sid}", corenum);
                 term.babble($"Defined configuration for {config}");
                 configs.Add(config);
                 if(corenum == processors)
@@ -59,18 +59,18 @@ namespace Z0
         static AgentIdentity Identity
             => (UInt32.MaxValue, UInt32.MaxValue);
 
-        AgentComplex(AgentContext Context)
+        WfAgentComplex(AgentContext Context)
             : base(Context, Identity)
         {
-            Servers = new WorkflowServer[]{};
+            Servers = new WfServer[]{};
         }
 
-        public void Configure(IEnumerable<WorkflowServerConfig> config, IAgent sink)
+        public void Configure(IEnumerable<WfServerConfig> config, IWfAgent sink)
         {
             var configs = config.ToArray();
-            Servers = new WorkflowServer[configs.Length];
+            Servers = new WfServer[configs.Length];
             for(var i=0; i<configs.Length; i++)
-                Servers[i] = WorkflowServer.create(Context, configs[i]);
+                Servers[i] = WfServer.create(Context, configs[i]);
 
             EventSink = sink;
         }

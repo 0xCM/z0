@@ -75,9 +75,6 @@ namespace Z0
         FS.FolderPath StageRoot()
             => Root + FS.folder(PN.Stage);
 
-        IDbTableArchive Tables(string id)
-            => DbTables.create(TableDir(id));
-
         FS.FolderPath Notebook(string name)
             => Notebooks() + FS.folder(name);
 

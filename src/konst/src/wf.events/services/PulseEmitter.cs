@@ -12,9 +12,6 @@ namespace Z0
     /// </summary>
     public class PulseEmitter : EventEmitter<PulseEvent>
     {
-        public static PulseEmitter create(IAgentContext context, AgentIdentity identity, PulseEmitterConfig config)
-            => new PulseEmitter(context, identity, config);
-
         public PulseEmitter(IAgentContext context, AgentIdentity identity, PulseEmitterConfig config)
             : base(context,identity)
         {
@@ -24,7 +21,7 @@ namespace Z0
         }
 
         void OnPulse(object sender, ElapsedEventArgs args)
-            => Context.EventLog.Receive(SourcedEvents.pulse(PartId, HostId, ServerTimestamp.Timestamp()));
+            => Context.EventLog.Receive(SourcedEvents.pulse(PartId, HostId, Time.timestamp()));
 
         Timer Timer {get;}
 
