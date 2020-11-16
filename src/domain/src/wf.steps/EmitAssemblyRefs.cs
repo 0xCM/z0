@@ -31,7 +31,7 @@ namespace Z0
             var srcCount = sources.Length;
 
             using var writer = cmd.Target.Writer();
-            var formatter = TableRows.formatter<AssemblyDependency>(RenderWidths);
+            var formatter = TableFormatter.row<AssemblyDependency>(RenderWidths);
             writer.WriteLine(formatter.FormatHeader());
 
             for(var k=0u; k<srcCount; k++)

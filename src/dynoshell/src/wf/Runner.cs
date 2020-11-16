@@ -12,15 +12,15 @@ namespace Z0
     using static Konst;
     using static z;
 
-    ref struct Runner
+    ref struct Dynoshell
     {
         readonly WfHost Host;
 
         readonly IWfShell Wf;
 
-        public Runner(IWfShell wf)
+        public Dynoshell(IWfShell wf)
         {
-            Host = WfSelfHost.create(typeof(Runner));
+            Host = WfShell.host(typeof(Dynoshell));
             Wf = wf.WithHost(Host);
         }
 

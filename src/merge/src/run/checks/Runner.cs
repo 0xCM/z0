@@ -38,7 +38,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public MergeRunner(WfCaptureState wf)
         {
-            Host = WfSelfHost.create(typeof(MergeRunner));
+            Host = WfShell.host(typeof(MergeRunner));
             Wf = wf.Wf.WithHost(Host);
             Db = Wf.Db();
             State = wf;
@@ -115,7 +115,6 @@ namespace Z0
                 else if(v != null)
                     dst.Append(v.ToString());
             }
-
         }
 
         void SaveCilOpCodes()

@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Xed
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
@@ -12,17 +12,18 @@ namespace Z0.Xed
     using static z;
     using static Konst;
 
-    using xed_ext = xed_extension_enum_t;
-    using xed_cat = xed_category_enum_t;
+    using Z0.Xed;
+    using xed_ext = Xed.xed_extension_enum_t;
+    using xed_cat = Xed.xed_category_enum_t;
 
     using F = XedPatternField;
     using R = XedPatternRow;
 
     [ApiHost]
-    public readonly ref struct XedEtlWf
+    public readonly ref struct XedWf
     {
-        public static XedEtlWf create(IWfShell wf)
-            => new XedEtlWf(wf,new XedWfConfig(wf));
+        public static XedWf create(IWfShell wf)
+            => new XedWf(wf,new XedWfConfig(wf));
 
         readonly XedWfConfig Config;
 
@@ -37,9 +38,10 @@ namespace Z0.Xed
         readonly IDbTableArchive Target;
 
         readonly WfHost Host;
-        public XedEtlWf(IWfShell wf, XedWfConfig config)
+
+        public XedWf(IWfShell wf, XedWfConfig config)
         {
-            Host = WfSelfHost.create(typeof(XedEtlWf));
+            Host = WfShell.host(typeof(XedWf));
             Wf = wf.WithHost(Host);
             Config = config;
             Settings = config.Settings;
@@ -56,7 +58,7 @@ namespace Z0.Xed
 
         public XedPattern[] ExtractPatterns()
         {
-            WfStepId step = typeof(XedEtlWf);
+            WfStepId step = typeof(XedWf);
             var patterns = list<XedPattern>();
             var parser = XedSourceParser.Service;
             var files = @readonly(Source.InstructionFiles);
@@ -202,7 +204,7 @@ namespace Z0.Xed
                                     writer.WriteLine(line);
                             }
 
-                            Wf.Raise(new EmittedRuleSet(typeof(XedEtlWf), kCount, target, Wf.Ct));
+                            Wf.Raise(new EmittedRuleSet(typeof(XedWf), kCount, target, Wf.Ct));
                         }
                     }
                 }

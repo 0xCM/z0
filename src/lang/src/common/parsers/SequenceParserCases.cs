@@ -28,7 +28,7 @@ namespace Z0
         [MethodImpl(Inline)]
         internal SequenceParserCases(IWfShell wf)
         {
-            Host = WfSelfHost.create(typeof(SequenceParserCases));
+            Host = WfShell.host(typeof(SequenceParserCases));
             Wf = wf.WithHost(Host).WithVerbosity(LogLevel.Babble);
         }
 

@@ -17,7 +17,7 @@ namespace Z0
         {
             try
             {
-                using var wf = WfShellInit.create(args).WithRandom(Rng.@default());
+                using var wf = WfShell.create(args).WithRandom(Rng.@default());
                 create().Run(wf);
             }
             catch(Exception e)
@@ -28,7 +28,7 @@ namespace Z0
 
         protected override void Execute(IWfShell wf)
         {
-            using var runner = new Runner(wf);
+            using var runner = new Dynoshell(wf);
             runner.Run();
         }
     }

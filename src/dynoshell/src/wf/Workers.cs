@@ -29,7 +29,7 @@ namespace Z0
 
         public void Init(IWfShell wf)
         {
-            Host = WfSelfHost.create(typeof(Workers));
+            Host = WfShell.host(typeof(Workers));
             Wf = wf.WithHost(Host);
         }
 

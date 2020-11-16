@@ -31,7 +31,7 @@ namespace Z0
         public static CmdResult run(IWfShell wf, EmitImageHeadersCmd spec)
         {
             var total = Count.Zero;
-            var formatter = TableRows.formatter<ImageSectionHeader>(RenderWidths);
+            var formatter = TableFormatter.row<ImageSectionHeader>(RenderWidths);
             using var writer = spec.Target.Writer();
             writer.WriteLine(formatter.FormatHeader());
             foreach(var file in spec.Sources)

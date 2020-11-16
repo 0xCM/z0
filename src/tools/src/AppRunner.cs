@@ -19,7 +19,7 @@ namespace Z0
 
         readonly Multiplex Mpx;
 
-        readonly AppArgs Args;
+        readonly CmdArgs Args;
 
         readonly CmdBuilder CmdBuilder;
 

@@ -101,12 +101,12 @@ namespace Z0
         /// Creates a path provider for the controlling application
         /// </summary>
         IWfPaths ForApp()
-            => WfShellInit.paths();
+            => WfShell.paths();
     }
 
     public interface IWfPaths<A> : IWfPaths, ILogPaths<A>
     {
         IWfPaths IWfPaths.ForApp()
-            => WfShellInit.paths<A>();
+            => WfShell.paths<A>();
     }
 }

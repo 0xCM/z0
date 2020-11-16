@@ -72,7 +72,7 @@ namespace Z0
             if(Records.Length != 0)
             {
                 var t = default(EnumLiteralRecord);
-                var formatter = TableRows.formatter(RenderWidths,t);
+                var formatter = TableFormatter.row(RenderWidths,t);
                 Wf.Running(Host, Source.SimpleName);
                 var counter = 0u;
                 Execute(ref counter, formatter);

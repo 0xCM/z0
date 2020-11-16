@@ -31,7 +31,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public EmitPartStringsStep(IWfShell wf, IPart part, R.Kind sk, CorrelationToken ct)
         {
-            Host = WfSelfHost.create(typeof(EmitPartStringsStep));
+            Host = WfShell.host(typeof(EmitPartStringsStep));
             Wf = wf.WithHost(Host);
             Part = part;
             if(sk == R.Kind.System)

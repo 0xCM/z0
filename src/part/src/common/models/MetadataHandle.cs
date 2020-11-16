@@ -9,13 +9,14 @@ namespace Z0
 
     using static Part;
 
+    [DataType]
     public readonly struct MetadataHandle<T>
     {
-        public readonly T Data;
+        public T Value {get;}
 
         [MethodImpl(Inline)]
         public MetadataHandle(T src)
-            => Data = src;
+            => Value = src;
 
         [MethodImpl(Inline)]
         public static implicit operator MetadataHandle<T>(T src)

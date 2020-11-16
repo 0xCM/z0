@@ -19,7 +19,7 @@ namespace Z0
 
         public ActionController(IWfShell wf)
         {
-            Host = WfSelfHost.create(typeof(ActionController));
+            Host = WfShell.host(typeof(ActionController));
             Wf = wf.WithHost(Host);
             seq = 0;
         }

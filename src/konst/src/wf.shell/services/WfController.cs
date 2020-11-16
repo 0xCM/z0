@@ -12,21 +12,12 @@ namespace Z0
 
     public readonly struct WfController
     {
+
         public Assembly Component {get;}
 
         [MethodImpl(Inline)]
         public WfController(Assembly src)
-        {
-            Component = src;
-        }
-
-        [MethodImpl(Inline)]
-        public static implicit operator WfController(Assembly src)
-            => new WfController(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator Assembly(WfController src)
-            => src.Component;
+            => Component = src;
 
         public string Name
         {
@@ -39,5 +30,13 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Component.Id();
         }
+
+        [MethodImpl(Inline)]
+        public static implicit operator WfController(Assembly src)
+            => new WfController(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Assembly(WfController src)
+            => src.Component;
     }
 }

@@ -15,12 +15,13 @@ namespace Z0
     [ApiHost]
     public readonly partial struct Table
     {
+        const NumericKind Closure = UnsignedInts;
+
         [MethodImpl(Inline)]
         public static TableField<F> field<F,T>(F id, TableField spec, ushort? width = null)
             where F : unmanaged
             where T : struct
                 => new TableField<F>(id, spec, width ?? (new RenderWidth<ushort>(@as<F,ushort>(id))));
-
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static TableField<byte> field<T>(byte id, TableField spec, ushort width)
@@ -130,7 +131,6 @@ namespace Z0
 
             return new TableFields(buffer);
         }
-
 
         [Op, Closures(UnsignedInts)]
         public static TableFields index<T>()

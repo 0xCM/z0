@@ -19,7 +19,7 @@ namespace Z0
         {
             try
             {
-                using var wf = WfShellInit.create(args);
+                using var wf = WfShell.create(args);
                 create().Run(wf);
             }
             catch(Exception e)

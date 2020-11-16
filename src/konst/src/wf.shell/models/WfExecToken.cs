@@ -9,6 +9,8 @@ namespace Z0
 
     using static Konst;
 
+    using api = WfShell;
+
     public readonly struct WfExecToken
     {
         public ulong Source {get;}
@@ -35,9 +37,17 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => string.Format("{0}:{1}", Source, Target);
+            => api.format(this);
 
         public override string ToString()
             => Format();
+
+        [MethodImpl(Inline)]
+        public static implicit operator WfExecToken(Pair<ulong> src)
+            => new WfExecToken(src.Left, src.Right);
+
+        [MethodImpl(Inline)]
+        public static implicit operator WfExecToken(ulong src)
+            => new WfExecToken(src);
     }
 }

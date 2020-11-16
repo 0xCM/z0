@@ -42,7 +42,7 @@ namespace Z0
 
         public void Init(IWfShell wf)
         {
-            Host = WfSelfHost.create(typeof(H));
+            Host = WfShell.host(typeof(H));
             Wf = wf.WithHost(Host);
         }
     }

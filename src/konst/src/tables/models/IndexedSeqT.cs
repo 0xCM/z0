@@ -93,7 +93,19 @@ namespace Z0
         uint IFinite.Count()
             => (uint)Data.Length;
 
-        public ref T this[int index]
+        // public ref T this[int index]
+        // {
+        //     [MethodImpl(Inline)]
+        //     get => ref Data[index];
+        // }
+
+        public ref T this[long index]
+        {
+            [MethodImpl(Inline)]
+            get => ref Data[index];
+        }
+
+        public ref T this[ulong index]
         {
             [MethodImpl(Inline)]
             get => ref Data[index];

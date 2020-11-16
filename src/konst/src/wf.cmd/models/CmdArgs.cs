@@ -10,13 +10,19 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct CmdArgs
+    public readonly struct CmdArgs : IIndex<CmdArg>
     {
-        readonly TableSpan<CmdArg> Data;
+        readonly IndexedSeq<CmdArg> Data;
 
         [MethodImpl(Inline)]
         public CmdArgs(CmdArg[] src)
             => Data = src;
+
+        public ref CmdArg this[int index]
+        {
+            [MethodImpl(Inline)]
+            get => ref Data[index];
+        }
 
         public ref CmdArg this[uint index]
         {
@@ -24,27 +30,23 @@ namespace Z0
             get => ref Data[index];
         }
 
-        public ReadOnlySpan<CmdArg> View
+        public CmdArg[] Storage
         {
             [MethodImpl(Inline)]
-            get => Data.View;
+            get => Data.Storage;
         }
 
-        public Span<CmdArg> Edit
+        public Span<CmdArg> Terms
         {
             [MethodImpl(Inline)]
-            get => Data.Edit;
+            get => Data.Terms;
         }
 
-        public byte Count
+        public uint Count
         {
             [MethodImpl(Inline)]
-            get => (byte)Data.Length;
+            get => (uint)Data.Length;
         }
-
-        [MethodImpl(Inline)]
-        public static implicit operator CmdArgs(CmdArg[] src)
-            => new CmdArgs(src);
 
         public bool IsEmpty
         {
@@ -57,6 +59,14 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Data.IsNonEmpty;
         }
+
+        [MethodImpl(Inline)]
+        public static implicit operator CmdArgs(CmdArg[] src)
+            => new CmdArgs(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator CmdArgs(string[] src)
+            => new CmdArgs(src.Map(x => new CmdArg(x)));
 
         public static CmdArgs Empty
         {

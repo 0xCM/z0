@@ -11,14 +11,11 @@ namespace Z0
     using static Konst;
     using static z;
 
-
-    using Z0.Xed;
-
     public sealed class XedEtlWfHost : WfHost<XedEtlWfHost>
     {
         protected override void Execute(IWfShell wf)
         {
-            using var step = XedEtlWf.create(wf);
+            using var step = XedWf.create(wf);
             step.Run();
         }
     }

@@ -10,13 +10,13 @@ namespace Z0
     public interface IWfContext : ITextual
     {
         IWfPaths Paths
-            => WfShellInit.paths();
+            => WfShell.paths();
 
         IJsonSettings Settings
             => JsonSettings.Load(Paths.AppConfigPath);
 
         IApiParts ApiParts
-             => WfShellInit.parts();
+             => WfShell.parts();
 
         CorrelationToken Ct
             => z.correlate(Controller.Id);
@@ -24,7 +24,7 @@ namespace Z0
         ITestLogPaths TestLogPaths
             => new TestLogPaths();
 
-        AppArgs Args
+        CmdArgs Args
              => Environment.GetCommandLineArgs();
 
         string AppName
@@ -40,7 +40,7 @@ namespace Z0
     public interface IWfContext<A> : IWfContext
     {
         IWfPaths IWfContext.Paths
-            => WfShellInit.paths<A>();
+            => WfShell.paths<A>();
 
         ITestLogPaths IWfContext.TestLogPaths
             => new TestLogPaths<A>();

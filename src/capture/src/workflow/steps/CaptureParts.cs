@@ -15,7 +15,7 @@ namespace Z0
 
     public readonly struct ApiPartCapture
     {
-        static WfHost Host => WfSelfHost.create(typeof(ApiPartCapture));
+        static WfHost Host => WfShell.host(typeof(ApiPartCapture));
 
         public static void capture(IAsmWf asm, IApiPartCatalog src)
         {

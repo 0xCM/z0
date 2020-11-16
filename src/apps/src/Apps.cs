@@ -13,12 +13,12 @@ namespace Z0
     public readonly struct Apps
     {
         public static IAppContext context(IWfShell wf)
-            => new AppContext(wf.Paths, wf.Api, Rng.@default(), WfShellInit.json(wf.Paths), WfMsgExchange.Create(wf));
+            => new AppContext(wf.Paths, wf.Api, Rng.@default(), WfShell.json(wf.Paths), WfMsgExchange.Create(wf));
 
         public static IAppContext context()
-            => context(WfShellInit.parts(Assembly.GetEntryAssembly()), WfShellInit.paths());
+            => context(WfShell.parts(Assembly.GetEntryAssembly()), WfShell.paths());
 
         static IAppContext context(ApiPartSet src, IWfPaths paths)
-            => new AppContext(paths, src.Api, Rng.@default(), WfShellInit.json(paths), AppMsgExchange.Create());
+            => new AppContext(paths, src.Api, Rng.@default(), WfShell.json(paths), AppMsgExchange.Create());
     }
 }

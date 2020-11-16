@@ -75,7 +75,7 @@ namespace Z0
         public void Emit()
         {
             var list = IntelIntrinsicsDocReader.read();
-            var target = WfShellInit.paths().ResourceRoot + FS.folder("intrinsics") + FS.folder("algorithms");
+            var target = WfShell.paths().ResourceRoot + FS.folder("intrinsics") + FS.folder("algorithms");
             var kind = FileExtension.Define("md");
             var folder = IntelIntrinsicsDocReader.folder(kind);
             target.Clear();

@@ -20,7 +20,7 @@ namespace Z0
 
         public TestRunner(IWfShell wf)
         {
-            Host = WfSelfHost.create(typeof(TestRunner));
+            Host = WfShell.host(typeof(TestRunner));
             Wf = wf.WithHost(Host);
         }
 

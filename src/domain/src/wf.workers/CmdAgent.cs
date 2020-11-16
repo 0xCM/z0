@@ -44,7 +44,7 @@ namespace Z0
         public CmdAgent(IWfShell wf, CmdAgentSettings settings, ProcessStartInfo start, ICmdObserver observer = null)
             : base(new WfAgentContext(wf), new AgentIdentity(10u,10u))
         {
-            Host = WfSelfHost.create(typeof(CmdAgent));
+            Host = WfShell.host(typeof(CmdAgent));
             Wf = wf.WithHost(Host);
             Settings = settings;
             StartInfo = start;

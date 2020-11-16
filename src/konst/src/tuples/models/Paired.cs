@@ -18,7 +18,7 @@ namespace Z0
         /// The first member
         /// </summary>
         public T0 Left;
-        
+
         /// <summary>
         /// The second member
         /// </summary>
@@ -30,30 +30,19 @@ namespace Z0
             get => Left;
         }
 
-        T1 ITupled<Paired<T0, T1>, T0, T1>.Right 
+        T1 ITupled<Paired<T0, T1>, T0, T1>.Right
         {
             [MethodImpl(Inline)]
             get => Right;
         }
 
-        [MethodImpl(Inline)]
-        public static implicit operator Paired<T0,T1>((T0 a, T1 b) src)
-            => new Paired<T0, T1>(src.a, src.b);
-
-        [MethodImpl(Inline)]
-        public static bool operator ==(Paired<T0,T1> x, Paired<T0,T1> y)        
-            => x.Equals(y);
-
-        [MethodImpl(Inline)]
-        public static bool operator !=(Paired<T0,T1> x, Paired<T0,T1> y)        
-            => x.Equals(y);
 
         [MethodImpl(Inline)]
         public Paired(T0 left, T1 right)
         {
             this.Left = left;
             this.Right = right;
-        }                
+        }
 
         [MethodImpl(Inline)]
         public void Deconstruct(out T0 a, out T1 b)
@@ -72,7 +61,7 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => !IsEmpty;
-        }        
+        }
 
         /// <summary>
         /// Interprets the pair over alternate domains
@@ -81,7 +70,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public Paired<S,T> As<S,T>()
             where S : unmanaged
-            where T : unmanaged        
+            where T : unmanaged
                 => Unsafe.As<Paired<T0,T1>,Paired<S,T>>(ref this);
 
         [MethodImpl(Inline)]
@@ -96,12 +85,24 @@ namespace Z0
 
         public override int GetHashCode()
             => HashCode.Combine(Left,Right);
-        
+
         public override bool Equals(object obj)
             => obj is Paired<T0,T1> x && Equals(x);
 
         public override string ToString()
             => Format();
+
+        [MethodImpl(Inline)]
+        public static implicit operator Paired<T0,T1>((T0 a, T1 b) src)
+            => new Paired<T0, T1>(src.a, src.b);
+
+        [MethodImpl(Inline)]
+        public static bool operator ==(Paired<T0,T1> x, Paired<T0,T1> y)
+            => x.Equals(y);
+
+        [MethodImpl(Inline)]
+        public static bool operator !=(Paired<T0,T1> x, Paired<T0,T1> y)
+            => x.Equals(y);
 
         public static Paired<T0,T1> Empty => default;
     }

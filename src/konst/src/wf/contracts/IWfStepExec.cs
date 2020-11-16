@@ -11,13 +11,13 @@ namespace Z0
     [Free]
     public interface IWfStepExec<T> : IWfStep
     {
-        T Run(IWfShell wf, WfStepArgs args)
+        T Run(IWfShell wf, WfFuncArgs args)
         {
             Configure(args);
             return Run(wf);
         }
 
-        void Configure(WfStepArgs args) { }
+        void Configure(WfFuncArgs args) { }
 
         T Run(IWfShell wf);
 

@@ -42,13 +42,13 @@ namespace Z0
         /// <summary>
         /// Processor selection keys
         /// </summary>
-        readonly KeyMap<K,I> Selectors;
+        readonly IndexKeys<K,I> Selectors;
 
         uint SourceCount
             => (uint)Source.Length;
 
         [MethodImpl(Inline)]
-        public TableDispatchEngine(IWfShell wf, T[] src, TableProjectors<K,I,T,Y> projectors, KeyMap<K,I> selectors, Y[] dst)
+        public TableDispatchEngine(IWfShell wf, T[] src, TableProjectors<K,I,T,Y> projectors, IndexKeys<K,I> selectors, Y[] dst)
         {
             Wf = wf;
             Source = src;
@@ -106,7 +106,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static ulong index(in KeyedIndex<K,I> selector, ulong offset)
+        static ulong index(in IndexKey<K,I> selector, ulong offset)
             => uint64(selector.Index) - offset;
     }
 }

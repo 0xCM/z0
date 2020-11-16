@@ -72,7 +72,7 @@ namespace Z0
             var src = reader.Fields();
             var count = (uint)src.Length;
 
-            var formatter = TableRows.formatter(RenderWidths, t);
+            var formatter = TableFormatter.row(RenderWidths, t);
             using var writer = path.Writer();
             writer.WriteLine(formatter.FormatHeader());
             foreach(var item in src)

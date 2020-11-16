@@ -19,12 +19,12 @@ namespace Z0
         where T : struct
         where S : unmanaged
     {
-        public KeyedIndex<D,S> Id {get;}
+        public IndexKey<D,S> Id {get;}
 
         readonly Func<T,Y> Fx;
 
         [MethodImpl(Inline)]
-        public TableProjector(Func<T,Y> f, KeyedIndex<D,S> id)
+        public TableProjector(Func<T,Y> f, IndexKey<D,S> id)
         {
             Id = id;
             Fx = f;

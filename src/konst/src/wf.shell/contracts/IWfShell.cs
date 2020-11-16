@@ -9,12 +9,12 @@ namespace Z0
 
     using static Konst;
     using static z;
+    using static WfShellUtility;
+    using static WfEvents;
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
-
-    using static WfEvents;
 
     public interface IWfShell : IWfContext, IDisposable
     {
@@ -34,21 +34,52 @@ namespace Z0
 
         LogLevel Verbosity {get;}
 
-        IWfShell WithRandom(IPolyrand random);
-
-        IWfShell WithHost(WfHost host);
-
-        IWfShell WithVerbosity(LogLevel level);
-
         WfExecFlow Running();
 
-        WfExecFlow Running<T>(T worker);
+        WfExecToken NextExecToken();
+
+        WfExecToken CloseExecToken(WfExecToken src);
 
         WfExecToken Ran(WfExecFlow src);
 
-        WfExecFlow EmittingTable(Type type, FS.FilePath dst);
+        IWfShell WithHost(WfHost host)
+            => clone(this, host, Random, Verbosity);
 
-        void Ran();
+        IWfShell WithRandom(IPolyrand random)
+            => clone(this, Host, random, Verbosity);
+
+        IWfShell WithVerbosity(LogLevel level)
+            => clone(this, Host, Random, level);
+
+        WfExecFlow EmittingTable(Type type, FS.FilePath dst)
+        {
+            SignalTableEmitting(type, dst);
+            return new WfExecFlow(this, NextExecToken());
+        }
+
+        void Ran()
+            => SignalRan();
+
+        WfExecFlow Running<T>(T worker)
+        {
+            SignalRunning(worker);
+            return Flow();
+        }
+
+        WfExecFlow Flow()
+            => new WfExecFlow(this, NextExecToken());
+
+        void SignalTableEmitting(Type type, FS.FilePath dst)
+            => Raise(tableEmitting(Host, type, dst, Ct));
+
+        void SignalRunning()
+            => Raise(running(Host, Ct));
+
+        void SignalRunning<T>(T src)
+            => Raise(running(Host, src, Ct));
+
+        void SignalRan()
+            => Raise(new RanEvent(Host, Ct));
 
         ICmdCatalog CmdCatalog
             => new CmdCatalog(this);
@@ -138,9 +169,6 @@ namespace Z0
             svc.Init(this);
             return svc;
         }
-
-        // ~ Lifecycle
-        // ~ ---------------------------------------------------------------------------
 
         void Created(ToolId tool)
             => Raise(created(tool, Ct));
@@ -237,10 +265,6 @@ namespace Z0
 
         void Running(CmdId cmd)
             => Raise(new RunningCmdEvent(cmd, Ct));
-
-        // ~ Flow
-        // ~ ---------------------------------------------------------------------------
-
 
         void Succeeded<T>(CmdSpec cmd, T payload)
             => Raise(succeeded(cmd, payload, Ct));

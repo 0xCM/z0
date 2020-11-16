@@ -9,18 +9,12 @@ namespace Z0
 
     using static Part;
 
+    [DataType]
     public readonly struct Kind<K> : ITextual
         where K : unmanaged
     {
-        public readonly K Value;
+        readonly K Value {get;}
 
-        [MethodImpl(Inline)]
-        public static implicit operator Kind<K>(K src)
-            => new Kind<K>(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator K(Kind<K> src)
-            => src.Value;
 
         [MethodImpl(Inline)]
         public Kind(K src)
@@ -32,5 +26,13 @@ namespace Z0
 
         public override string ToString()
             => Format();
+
+        [MethodImpl(Inline)]
+        public static implicit operator Kind<K>(K src)
+            => new Kind<K>(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator K(Kind<K> src)
+            => src.Value;
     }
 }

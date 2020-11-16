@@ -27,7 +27,7 @@ namespace Z0
 
         public ICmdPipe Pipe {get;}
 
-        public AppArgs Args {get;}
+        public CmdArgs Args {get;}
 
         public IWfPaths Paths {get;}
 
@@ -47,7 +47,12 @@ namespace Z0
 
         public LogLevel Verbosity {get; private set;}
 
-        IWfShell Wf => this;
+        long SourceToken;
+
+        long TargetToken;
+
+        WfExecTokens ExecTokens {get;}
+            = WfExecTokens.init();
 
         [MethodImpl(Inline)]
         public WfShell(IWfInit config)
@@ -56,7 +61,7 @@ namespace Z0
             Init = config;
             Id = config.ControlId;
             Ct = correlate(config.ControlId);
-            WfSink = WfShellInit.log(config.Logs);
+            WfSink = WfShell.log(config.Logs);
             Broker = new WfBroker(WfSink, Ct);
             Host = new WfHost(typeof(WfShell), typeof(WfShell), _ => throw no<WfShell>());
             Random = default;
@@ -71,7 +76,7 @@ namespace Z0
             Pipe = new CmdPipe(this);
         }
 
-        WfShell(IWfInit config, CorrelationToken ct, IWfEventSink sink, IWfBroker broker, WfHost host, IPolyrand random, LogLevel verbosity)
+        internal WfShell(IWfInit config, CorrelationToken ct, IWfEventSink sink, IWfBroker broker, WfHost host, IPolyrand random, LogLevel verbosity)
         {
             Context = config.Shell;
             Init = config;
@@ -92,21 +97,30 @@ namespace Z0
             Pipe = new CmdPipe(this);
         }
 
-        [MethodImpl(Inline)]
-        static IWfShell clone(IWfShell src, WfHost host, IPolyrand random, LogLevel verbosity)
-            => new WfShell(src.Init, src.Ct, src.WfSink, src.Broker, host, random, verbosity);
+        IWfShell Wf => this;
+
+        public WfExecFlow Running()
+        {
+            Wf.SignalRunning();
+            return Wf.Flow();
+        }
+
+        public WfExecToken Ran(WfExecFlow src)
+        {
+            Wf.SignalRan();
+            var token = CloseExecToken(src.Token);
+            ExecTokens.TryAdd(token.Source, token);
+            return token;
+        }
 
         [MethodImpl(Inline)]
-        public IWfShell WithRandom(IPolyrand random)
-            => clone(this, Host, random, Verbosity);
+        public WfExecToken NextExecToken()
+            => new WfExecToken((ulong)atomic(ref SourceToken));
 
         [MethodImpl(Inline)]
-        public IWfShell WithVerbosity(LogLevel level)
-            => clone(this, Host, Random, level);
+        public WfExecToken CloseExecToken(WfExecToken src)
+            => src.WithTarget((ulong)atomic(ref TargetToken));
 
-        [MethodImpl(Inline)]
-        public IWfShell WithHost(WfHost host)
-            => clone(this, host, Random, Verbosity);
 
         public void Dispose()
         {

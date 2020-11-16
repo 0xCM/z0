@@ -61,7 +61,7 @@ namespace Z0
             MaxCycles = cycles;
             CycleCounter = 0;
             CycleLength = length;
-            Host = WfSelfHost.create(typeof(CpuWorker<T>));
+            Host = WfShell.host(typeof(CpuWorker<T>));
             WorkerStatus = default;
             ManagedWorkerThread = default;
         }

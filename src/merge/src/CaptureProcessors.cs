@@ -50,7 +50,7 @@ namespace Z0
 
         public static void Run(IWfShell wf, in WfCaptureState state)
         {
-            var index = BuildIndex(wf, WfSelfHost.create(typeof(CaptureProcessors)));
+            var index = BuildIndex(wf, WfShell.host(typeof(CaptureProcessors)));
             run(wf, state, index);
             process(wf, DecodeIndex(wf, state.RoutineDecoder, index));
             ResBytesEmitter.create().WithIndex(index).Run(wf);

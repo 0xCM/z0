@@ -38,7 +38,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public EmitImageData(IWfShell wf, IPart part)
         {
-            Host = WfSelfHost.create(typeof(EmitImageData));
+            Host = WfShell.host(typeof(EmitImageData));
             Wf = wf.WithHost(Host);
             Part = part;
             BaseAddress = ProcessImages.@base(Part);

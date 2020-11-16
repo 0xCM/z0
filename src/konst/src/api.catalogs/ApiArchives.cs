@@ -23,7 +23,6 @@ namespace Z0
         public static ApiCodeArchive hex(FS.FolderPath root)
             => new ApiCodeArchive(root);
 
-
         [MethodImpl(Inline), Op]
         public static ApiCodeBlock[] hexblocks(IWfShell wf, ApiHostUri host)
             => hex(wf).Read(host);

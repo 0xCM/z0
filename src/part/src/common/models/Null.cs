@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
 
@@ -20,11 +20,11 @@ namespace Z0
         public const string NullMethod = Identifier + nameof(NullMethod) + Identifier;
 
         public const string NullType = Identifier + nameof(NullType) + Identifier;
-                
-        public static Null Value => default;        
-                
+
+        public static Null Value => default;
+
         [MethodImpl(Inline)]
-        public static object Banish(object src) 
+        public static object Banish(object src)
             => src ?? Value;
 
         [MethodImpl(Inline)]
@@ -40,16 +40,16 @@ namespace Z0
             => !Is(src);
 
         [MethodImpl(Inline)]
-        public static T Banish<T>(T src, T alt) 
+        public static T Banish<T>(T src, T alt)
             where T : class
                 => src ?? alt;
 
-        public bool IsEmpty 
+        public bool IsEmpty
             => true;
-        
-        public Null Zero 
+
+        public Null Zero
             => Value;
-        
+
         [MethodImpl(Inline)]
         public string Format()
             => Label;

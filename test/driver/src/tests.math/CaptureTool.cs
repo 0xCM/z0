@@ -20,13 +20,13 @@ namespace Z0
         static IWfShell Configure(IWfShell wf)
             => describe(
                 wf.WithRandom(Rng.@default())
-                  .WithHost(WfSelfHost.create(typeof(App)))
+                  .WithHost(WfShell.host(typeof(TestDriver)))
                   .WithVerbosity(LogLevel.Babble)
                 );
 
         public static void run(string[] args)
         {
-            using var wf = Configure(WfShellInit.create(args));
+            using var wf = Configure(WfShell.create(args));
             var app = Apps.context(wf);
             var asm = new AsmContext(app, wf);
             var cstate = new WfCaptureState(wf, asm);

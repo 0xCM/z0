@@ -4,15 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.IO;
-    using System.Text;
     using System.Runtime.CompilerServices;
 
     using static Konst;
     using static z;
-
-    using api = CaseLogs;
 
     public readonly struct CaseLog : ICaseLog
     {

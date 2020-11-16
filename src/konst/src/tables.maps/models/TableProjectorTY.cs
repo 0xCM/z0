@@ -15,6 +15,7 @@ namespace Z0
     {
         readonly Func<T,Y> Fx;
 
+        [MethodImpl(Inline)]
         public TableProjector(Func<T,Y> f)
             => Fx = f;
 

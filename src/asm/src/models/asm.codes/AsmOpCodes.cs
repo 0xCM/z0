@@ -360,10 +360,10 @@ namespace Z0.Asm
         }
 
         public static FS.FilePath CasePath(string name)
-            => WfShellInit.paths().AppDataRoot + FS.file(name);
+            => WfShell.paths().AppDataRoot + FS.file(name);
 
         static FS.FilePath CasePath(string name, FileExtension ext)
-            => WfShellInit.paths().AppDataRoot + FS.file(name, ext);
+            => WfShell.paths().AppDataRoot + FS.file(name, ext);
 
         static StreamWriter CaseWriter(string name, FileExtension ext)
             =>  CasePath(name, ext).Writer();

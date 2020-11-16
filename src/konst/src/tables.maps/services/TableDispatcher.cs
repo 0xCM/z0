@@ -22,12 +22,12 @@ namespace Z0
 
         readonly TableProjectors<D,S,T,Y> Projectors;
 
-        readonly KeyMap<D,S> Selectors;
+        readonly IndexKeys<D,S> Selectors;
 
         [MethodImpl(Inline)]
-        public TableDispatcher(IWfShell wf, in TableProjectors<D,S,T,Y> processors, in KeyMap<D,S> selectors)
+        public TableDispatcher(IWfShell wf, in TableProjectors<D,S,T,Y> processors, in IndexKeys<D,S> selectors)
         {
-            Host = WfSelfHost.create(typeof(TableDispatcher<F,T,D,S,Y>));
+            Host = WfShell.host (typeof(TableDispatcher<F,T,D,S,Y>));
             Wf = wf.WithHost(Host);
             Projectors = processors;
             Selectors = selectors;

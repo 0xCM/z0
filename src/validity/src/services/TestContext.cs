@@ -28,7 +28,7 @@ namespace Z0
 
         protected TestContext()
         {
-            ApiParts = WfShellInit.parts();
+            ApiParts = WfShell.parts();
         }
 
         public IApiParts ApiParts {get;}

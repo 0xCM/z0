@@ -202,6 +202,8 @@ public enum PartId : ulong
 
     GVecTest = GVec | Test,
 
+    ToolsTest = Tools | Test,
+
     TestDriver = Driver | Test,
 
     // ~ Classifiers

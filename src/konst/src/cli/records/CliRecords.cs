@@ -34,7 +34,7 @@ namespace Z0
         {
             var count = src.Length;
             var counter = 0u;
-            var formatter = TableRows.formatter<HandleRecord>(HandleRecord.RenderWidths);
+            var formatter = TableFormatter.row<HandleRecord>(HandleRecord.RenderWidths);
             for(var i=0; i<count; i++)
             {
                 ref readonly var record = ref skip(src,i);

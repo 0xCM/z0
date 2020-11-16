@@ -40,7 +40,7 @@ namespace Z0
         where T : struct
         where S : unmanaged
     {
-        KeyedIndex<D,S> Id {get;}
+        IndexKey<D,S> Id {get;}
     }
 
     /// <summary>

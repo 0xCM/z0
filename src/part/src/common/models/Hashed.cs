@@ -13,8 +13,9 @@ namespace Z0
     /// <summary>
     /// Captures a hash code
     /// </summary>
+    [DataType]
     public readonly struct Hashed : IHashed
-    {        
+    {
         public uint Hash {get;}
 
         [MethodImpl(Inline)]
@@ -26,27 +27,6 @@ namespace Z0
             => Hash = (uint)src;
 
         public override int GetHashCode()
-            => (int) Hash;              
-    }
-
-    /// <summary>
-    /// Captures a hash code for structured content
-    /// </summary>
-    public readonly struct Hashed<C> : IHashed<Hashed<C>>
-        where C : struct
-    {
-        public uint Hash {get;}
-
-        public C Content {get;}
-        
-        [MethodImpl(Inline)]
-        public Hashed(in C content, uint hash)
-        {
-            Content = content;
-            Hash = hash;
-        }  
-
-        public override int GetHashCode()
-            => (int) Hash;  
+            => (int) Hash;
     }
 }

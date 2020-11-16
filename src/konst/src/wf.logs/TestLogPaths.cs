@@ -6,11 +6,19 @@ namespace Z0
 {
     using System;
     using System.Reflection;
+    using System.Runtime.CompilerServices;
+
+    using static Konst;
 
     public readonly struct TestLogPaths : ITestLogPaths
     {
+        [MethodImpl(Inline), Op]
+        public static ITestLogPaths define(FS.FolderPath root)
+            => new TestLogPaths(root);
+
         public FS.FolderPath LogRoot {get;}
 
+        [MethodImpl(Inline)]
         public TestLogPaths(FS.FolderPath dir)
         {
             LogRoot = dir;
@@ -21,6 +29,7 @@ namespace Z0
     {
         public FS.FolderPath LogRoot {get;}
 
+        [MethodImpl(Inline)]
         public TestLogPaths(FS.FolderPath dir)
         {
             LogRoot = dir;

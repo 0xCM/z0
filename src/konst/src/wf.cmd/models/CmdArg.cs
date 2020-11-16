@@ -30,6 +30,18 @@ namespace Z0
             Value = EmptyString;
         }
 
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => text.empty(Name) && text.empty(Value);
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => text.nonempty(Name) || text.nonempty(Value);
+        }
+
         [MethodImpl(Inline)]
         public string Format()
             => string.Format(RP.Setting, Name, Value);
@@ -46,5 +58,15 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator CmdArg(Pair<string> src)
             => new CmdArg(src.Left, src.Right);
+
+        [MethodImpl(Inline)]
+        public static implicit operator CmdArg((string name, string value) src)
+            => new CmdArg(src.name, src.value);
+
+        public static CmdArg Empty
+        {
+            [MethodImpl(Inline)]
+            get => new CmdArg(EmptyString, EmptyString);
+        }
     }
 }

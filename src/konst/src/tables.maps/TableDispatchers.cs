@@ -18,14 +18,14 @@ namespace Z0
                 => new TableProjector<T,Y>(f);
 
         [MethodImpl(Inline)]
-        public static TableProjector<D,S,T,Y> projector<T,D,S,Y>(Func<T,Y> f, KeyedIndex<D,S> index, T t = default, Y y = default)
+        public static TableProjector<D,S,T,Y> projector<T,D,S,Y>(Func<T,Y> f, IndexKey<D,S> index, T t = default, Y y = default)
             where D : unmanaged
             where T : struct
             where S : unmanaged
                 => new TableProjector<D,S,T,Y>(f,index);
 
         [MethodImpl(Inline)]
-        public static TableDispatcher<F,T,D,S,Y> create<F,T,D,S,Y>(IWfShell wf, TableProjectors<D,S,T,Y> projectors, KeyMap<D,S> selectors)
+        public static TableDispatcher<F,T,D,S,Y> create<F,T,D,S,Y>(IWfShell wf, TableProjectors<D,S,T,Y> projectors, IndexKeys<D,S> selectors)
             where F : unmanaged
             where T : struct, IKeyedTable<F,T,D>
             where D : unmanaged

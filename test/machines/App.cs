@@ -17,7 +17,7 @@ namespace Z0
         MachinesTestApp(AgentContext context, string[] args)
         {
             AgentContext = context;
-            Wf = WfShellInit.create(args);
+            Wf = WfShell.create(args);
             Control = AgentControl.FromContext(Wf.Context);
         }
 

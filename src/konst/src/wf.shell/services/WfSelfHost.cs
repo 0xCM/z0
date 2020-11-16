@@ -12,14 +12,8 @@ namespace Z0
 
     public sealed class WfSelfHost : WfHost<WfSelfHost>
     {
-        [MethodImpl(Inline)]
-        public static WfSelfHost create(Type self)
-            => new WfSelfHost(self);
-
         protected override void Execute(IWfShell shell)
-        {
-
-        }
+            => missing();
 
         Type HostType;
 
