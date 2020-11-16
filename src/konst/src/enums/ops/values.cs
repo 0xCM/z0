@@ -13,7 +13,7 @@ namespace Z0
 
     partial class Enums
     {
-        public static FieldValues<E,T> values<E,T>(Type src)
+        public static EnumFieldValues<E,T> values<E,T>(Type src)
             where E : unmanaged, Enum
             where T : unmanaged
         {

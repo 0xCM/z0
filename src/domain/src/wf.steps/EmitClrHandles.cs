@@ -10,7 +10,6 @@ namespace Z0
 
     using static Konst;
     using static z;
-    using static CliRecords;
 
     [WfHost(CommandName)]
     public sealed class EmitClrHandles : WfHost<EmitClrHandles,ClrAssembly>
@@ -26,7 +25,7 @@ namespace Z0
         [CmdWorker]
         public static CmdResult run(IWfShell wf, EmitClrHandlesCmd cmd)
         {
-            wf.Db().Clear(HandleRecord.TableId);
+            wf.Db().Clear(ClrHandleRecord.TableId);
             var components = wf.Api.Components;
             foreach(var component in components)
             {
@@ -44,7 +43,7 @@ namespace Z0
 
         readonly WfHost Host;
 
-        public Span<HandleRecord> Emitted;
+        public Span<ClrHandleRecord> Emitted;
 
         [MethodImpl(Inline)]
         public EmitClrHandlesStep(IWfShell wf, WfHost host, ClrAssembly src)

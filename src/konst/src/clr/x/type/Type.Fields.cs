@@ -8,8 +8,8 @@ namespace Z0
     using System.Reflection;
     using System.Runtime.CompilerServices;
 
+    using static Part;
     using static ReflectionFlags;
-    using static Konst;
 
     partial class XClrQuery
     {

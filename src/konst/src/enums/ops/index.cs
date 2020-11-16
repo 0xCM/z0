@@ -15,10 +15,10 @@ namespace Z0
     partial class Enums
     {
         [MethodImpl(Inline)]
-        public static FieldValues<E,T> index<E,T>(EnumFieldValue<E,T>[] src)
+        public static EnumFieldValues<E,T> index<E,T>(EnumFieldValue<E,T>[] src)
             where E : unmanaged, Enum
             where T : unmanaged
-                => new FieldValues<E,T>(src);
+                => new EnumFieldValues<E,T>(src);
 
         /// <summary>
         /// Gets the declaration-order indices for each named literal

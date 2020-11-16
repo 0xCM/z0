@@ -11,6 +11,17 @@ namespace Z0
     using static Konst;
     using static z;
 
+    partial struct ClrArtifacts
+    {
+        [MethodImpl(Inline), Op]
+        public static ClrArtifactSet<TypeView> sTypes(Assembly src)
+            => @recover<Type,TypeView>(@readonly(src.Types()));
+
+        [MethodImpl(Inline), Op]
+        public static ReadOnlySpan<TypeView> vTypes(Assembly src)
+            => View(src.Types(),type);
+    }
+
     partial struct ClrQuery
     {
         [MethodImpl(Inline), Op]

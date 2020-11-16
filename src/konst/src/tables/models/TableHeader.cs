@@ -9,17 +9,19 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct TableHeader : IDataIndex<HeaderCell>, ITextual
+    public readonly struct TableHeader : IIndex<HeaderCell>, ITextual
     {
         public HeaderCell[] Data {get;}
 
         [MethodImpl(Inline)]
-        public static implicit operator TableHeader(HeaderCell[] data)
-            => new TableHeader(data);
-
-        [MethodImpl(Inline)]
         public TableHeader(HeaderCell[] data)
             => Data = data;
+
+        public HeaderCell[] Storage
+        {
+            [MethodImpl(Inline)]
+            get => Data;
+        }
 
         public ref HeaderCell this[uint index]
         {
@@ -52,7 +54,12 @@ namespace Z0
                 dst.Append(text.format(RP.SlottedSpacePipe, Data[i].Format()));
             return dst.ToString();
         }
+
+        [MethodImpl(Inline)]
+        public static implicit operator TableHeader(HeaderCell[] data)
+            => new TableHeader(data);
+
         public static TableHeader Empty
-            => new TableHeader(new HeaderCell[0]{});
+            => new TableHeader(sys.empty<HeaderCell>());
     }
 }

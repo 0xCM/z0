@@ -17,10 +17,10 @@ namespace Z0
             => Storage;
 
         ref readonly T this[long index]
-            => ref z.skip(Terms, index);
+            => ref memory.skip(Terms, index);
 
         ref readonly T this[ulong index]
-            => ref z.skip(Terms, index);
+            => ref memory.skip(Terms, index);
 
         int IMeasured.Length
             => Terms.Length;
@@ -35,21 +35,26 @@ namespace Z0
             => z.delimit(Storage).Format();
     }
 
+    /// <summary>
+    /// Characterizes a <typeparamref name='I'/> indexed sequence of readonly <typeparamref name='T'/> terms
+    /// </summary>
+    /// <typeparam name="I">The index type</typeparam>
+    /// <typeparam name="T">The element type</typeparam>
     [Free]
     public interface IIndexedView<I,T> : IIndexedView<T>, IMeasured<I>
         where I : unmanaged
     {
         ref readonly T this[I index]
-            => ref z.skip(Terms,z.@as<I,uint>(index));
+            => ref memory.skip(Terms, memory.@as<I,uint>(index));
 
         int IMeasured.Length
             => Terms.Length;
 
         I IMeasured<I>.Length
-            => z.@as<uint,I>((uint)Terms.Length);
+            => memory.@as<uint,I>((uint)Terms.Length);
 
         I ICounted<I>.Count
-            => z.@as<uint,I>((uint)Terms.Length);
+            => memory.@as<uint,I>((uint)Terms.Length);
     }
 
     [Free]

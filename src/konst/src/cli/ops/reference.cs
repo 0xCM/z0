@@ -10,18 +10,8 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct ClrArtifacts
+    partial struct Cli
     {
-        /// <summary>
-        /// Defines a reference to an artifact of parametric type
-        /// </summary>
-        /// <param name="src">The source artifact</param>
-        /// <typeparam name="A">The artifact type</typeparam>
-        [MethodImpl(Inline)]
-        public static ClrArtifactRef<A> reference<A>(A src)
-            where A : struct, IClrArtifact<A>
-                => src;
-
         /// <summary>
         /// Defines an <see cref='CliArtfactRef'/> predicated on an a <see cref='ClrArtifactKey'/>
         /// </summary>

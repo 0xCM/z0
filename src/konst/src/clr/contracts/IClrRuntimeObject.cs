@@ -15,7 +15,6 @@ namespace Z0
         ClrArtifactKind ClrKind {get;}
 
         ClrArtifactKey Token {get;}
-
     }
 
     [Free]

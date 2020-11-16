@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Collections;
 
     using static Konst;
 
@@ -16,14 +14,10 @@ namespace Z0
     /// Defines an E-parametric literal index
     /// </summary>
     [ApiProviderAttribute(DataIndex)]
-    public readonly struct EnumLiteralDetails<E> : IEnumerable<EnumLiteralDetail<E>>, IConstIndex<EnumLiteralDetail<E>>
+    public readonly struct EnumLiteralDetails<E> : IIndex<EnumLiteralDetail<E>>
         where E : unmanaged, Enum
     {
         readonly EnumLiteralDetail<E>[] Data;
-
-        [MethodImpl(Inline)]
-        public static implicit operator EnumLiteralDetails<E>(EnumLiteralDetail<E>[] src)
-            => new EnumLiteralDetails<E>(src);
 
         [MethodImpl(Inline)]
         internal EnumLiteralDetails(EnumLiteralDetail<E>[] src)
@@ -73,10 +67,20 @@ namespace Z0
         public IEnumerable<NamedValue<E>> NamedValues
             => from i in Data select NamedValue.define(i.Name, i.LiteralValue);
 
-        public IEnumerator<EnumLiteralDetail<E>> GetEnumerator()
-            => ((IEnumerable<EnumLiteralDetail<E>>)Data).GetEnumerator();
+        public EnumLiteralDetail<E>[] Storage
+        {
+            [MethodImpl(Inline)]
+            get => Data;
+        }
 
-        IEnumerator IEnumerable.GetEnumerator()
-            => Data.GetEnumerator();
+        [MethodImpl(Inline)]
+        public static implicit operator EnumLiteralDetails<E>(EnumLiteralDetail<E>[] src)
+            => new EnumLiteralDetails<E>(src);
+
+        // public IEnumerator<EnumLiteralDetail<E>> GetEnumerator()
+        //     => ((IEnumerable<EnumLiteralDetail<E>>)Data).GetEnumerator();
+
+        // IEnumerator IEnumerable.GetEnumerator()
+        //     => Data.GetEnumerator();
     }
 }

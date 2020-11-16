@@ -9,47 +9,59 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct TableRows<T>
+    public readonly struct TableRows<T> : IIndex<TableRow<T>>
         where T : struct
     {
-        readonly TableRow<T>[] Storage;
-
-        [MethodImpl(Inline)]
-        public static implicit operator TableRows<T>(TableRow<T>[] data)
-            => new TableRows<T>(data);
+        readonly TableRow<T>[] Data;
 
         [MethodImpl(Inline)]
         public TableRows(TableRow<T>[] src)
-            => Storage = src;
+            => Data = src;
+
+        public TableRow<T>[] Storage
+        {
+            [MethodImpl(Inline)]
+            get => Data;
+        }
 
         public Span<TableRow<T>> Edit
         {
             [MethodImpl(Inline)]
-            get => Storage;
+            get => Data;
         }
 
         public ref TableRow<T> this[ulong index]
         {
             [MethodImpl(Inline)]
-            get => ref Storage[(int)index];
+            get => ref Data[(int)index];
         }
 
         public ref TableRow<T> this[long index]
         {
             [MethodImpl(Inline)]
-            get => ref Storage[(int)index];
+            get => ref Data[(int)index];
         }
 
         public int Length
         {
             [MethodImpl(Inline)]
-            get => Storage.Length;
+            get => Data.Length;
         }
 
         public uint Count
         {
             [MethodImpl(Inline)]
-            get => (uint)Storage.Length;
+            get => (uint)Data.Length;
+        }
+
+        [MethodImpl(Inline)]
+        public static implicit operator TableRows<T>(TableRow<T>[] data)
+            => new TableRows<T>(data);
+
+        public static TableRows<T> Empty
+        {
+            [MethodImpl(Inline)]
+            get => sys.empty<TableRow<T>>();
         }
     }
 }

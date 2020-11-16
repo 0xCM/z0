@@ -19,21 +19,4 @@ namespace Z0
         ref readonly T Lookup(ulong index)
             => ref this[index];
     }
-
-    /// <summary>
-    /// Characterizes a <typeparamref name='K'/> indexed sequence of readonly <typeparamref name='T'/> terms
-    /// </summary>
-    /// <typeparam name="K">The accessor type</typeparam>
-    /// <typeparam name="M">The measure type</typeparam>
-    /// <typeparam name="T">The term type</typeparam>
-    [Free]
-    public interface IConstIndex<H,K,T> : IConstIndex<T>
-        where K : unmanaged
-        where H : struct, IConstIndex<H,K,T>
-    {
-        ref readonly T this[K index] {get;}
-
-        ref readonly T Lookup(K index)
-            => ref this[index];
-    }
 }

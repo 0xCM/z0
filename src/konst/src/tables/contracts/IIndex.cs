@@ -55,7 +55,7 @@ namespace Z0
         ref T this[I index] {get;}
 
         ref T IIndex<T>.this[int index]
-            => ref this[z.@as<int,I>(index)];
+            => ref this[memory.@as<int,I>(index)];
 
         ref T Lookup(I index)
             => ref this[index];

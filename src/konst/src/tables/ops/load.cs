@@ -22,18 +22,17 @@ namespace Z0
                 load(fields, i, skip(src, i), ref seek(target,i));
         }
 
-        [MethodImpl(Inline)]
+        [Op, Closures(Closure)]
         public static void load<T>(in TableFields fields, uint index, in T src, ref TableRow<T> dst)
             where T : struct
         {
+            dst = dst.UpdateSource(index, src);
             var tr = __makeref(edit(src));
             var count = fields.Length;
-            dst.Source = src;
-            dst.RowIndex = index;
             var fv = fields.View;
             var target = span(dst.Cells);
             for(var i=0u; i<count; i++)
-                seek(target,i) = skip(fv, i).Definition.GetValueDirect(tr);
+                seek(target, i) = skip(fv, i).Definition.GetValueDirect(tr);
         }
     }
 }

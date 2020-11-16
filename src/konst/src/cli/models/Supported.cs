@@ -14,8 +14,6 @@ namespace Z0
     {
         public readonly struct Supported
         {
-            public static AssemblyView assembly => default;
-
             public static FieldView field => default;
 
             public static MethodView method => default;
@@ -24,8 +22,6 @@ namespace Z0
 
             public static ModuleView module => default;
         }
-
-        static AssemblyView assembly => Supported.assembly;
 
         static FieldView field => Supported.field;
 

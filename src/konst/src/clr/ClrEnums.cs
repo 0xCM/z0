@@ -10,30 +10,29 @@ namespace Z0
 
     using static Konst;
     using static z;
-    using static CliRecords;
 
     [ApiHost(ApiNames.ClrEnums, true)]
     public readonly struct ClrEnums
     {
         [Op]
-        public static EnumLiteralRecord[] literals(Assembly src)
+        public static ClrEnumLiteralRecord[] literals(Assembly src)
         {
             var types = src.GetTypes().Where(t => t.IsEnum);
-            var dst = list<EnumLiteralRecord>();
+            var dst = list<ClrEnumLiteralRecord>();
             for(var i=0; i<types.Length; i++)
                 dst.AddRange(literals(types[i]));
             return dst.ToArray();
         }
 
         [Op]
-        public static EnumLiteralRecord[] literals(Type src)
+        public static ClrEnumLiteralRecord[] literals(Type src)
         {
             var ut = src.GetEnumUnderlyingType();
             var nk = ut.NumericKind();
 
             var fields = span(src.LiteralFields());
             var count = fields.Length;
-            var buffer = sys.alloc<EnumLiteralRecord>(count);
+            var buffer = sys.alloc<ClrEnumLiteralRecord>(count);
             var index = span(buffer);
             var assembly = src.Assembly;
             var part = assembly.Id();
@@ -48,7 +47,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static ref EnumLiteralRecord fill(PartId part, FieldInfo field, uint index, ref EnumLiteralRecord dst)
+        public static ref ClrEnumLiteralRecord fill(PartId part, FieldInfo field, uint index, ref ClrEnumLiteralRecord dst)
         {
             dst.PartId = part;
             dst.TypeId = field.DeclaringType.MetadataToken;

@@ -13,8 +13,8 @@ namespace Z0.Dynamics
 
     public static class MemberDependencies
     {
-        public static DataMemberArrow<S,T> define<S,T>(Expression<Func<S,object>> s, Expression<Func<T,object>> t)
-            => new DataMemberArrow<S,T>(s.GetDataMember(), t.GetDataMember());
+        public static ClrDataLink<S,T> define<S,T>(Expression<Func<S,object>> s, Expression<Func<T,object>> t)
+            => new ClrDataLink<S,T>(s.GetDataMember(), t.GetDataMember());
 
         public static MemberDependencyBuilder<S,T> build<S,T>()
             => new MemberDependencyBuilder<S,T>();
@@ -22,11 +22,11 @@ namespace Z0.Dynamics
 
     public class MemberDependencyBuilder<S,T>
     {
-        public static implicit operator DataMemberArrows<S,T>(MemberDependencyBuilder<S, T> builder)
+        public static implicit operator ClrDataLinks<S,T>(MemberDependencyBuilder<S, T> builder)
             => builder.Complete();
 
-        HashSet<DataMemberArrow> Arrows {get;} 
-            = new HashSet<DataMemberArrow>();
+        HashSet<ClrDataLink> Arrows {get;}
+            = new HashSet<ClrDataLink>();
 
         public MemberDependencyBuilder<S,T> Include(Expression<Func<S, object>> s, Expression<Func<T,object>> t)
         {
@@ -42,7 +42,7 @@ namespace Z0.Dynamics
             return this;
         }
 
-        public DataMemberArrows<S,T> Complete()
-            => new DataMemberArrows<S,T>(Arrows);
+        public ClrDataLinks<S,T> Complete()
+            => new ClrDataLinks<S,T>(Arrows);
     }
 }

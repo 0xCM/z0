@@ -10,7 +10,6 @@ namespace Z0
 
     using static Konst;
     using static z;
-    using static CliRecords;
 
     [WfHost(CommandName)]
     public sealed class EmitEnums : WfHost<EmitEnums,ClrAssembly>
@@ -27,7 +26,7 @@ namespace Z0
 
         public static void run(IWfShell wf)
         {
-            wf.Db().Clear(EnumLiteralRecord.TableId);
+            wf.Db().Clear(ClrEnumLiteralRecord.TableId);
             var components = wf.Api.Components;
             foreach(var component in components)
             {
@@ -47,7 +46,7 @@ namespace Z0
 
         readonly WfHost Host;
 
-        public EnumLiteralRecord[] Records;
+        public ClrEnumLiteralRecord[] Records;
 
         readonly ReadOnlySpan<byte> RenderWidths;
 
@@ -57,9 +56,9 @@ namespace Z0
             Wf = wf;
             Host = host;
             Source = src;
-            Target = Wf.Db().Table(EnumLiteralRecord.TableId, Source.Part);
+            Target = Wf.Db().Table(ClrEnumLiteralRecord.TableId, Source.Part);
             Records = default;
-            RenderWidths = EnumLiteralRecord.RenderWidths;
+            RenderWidths = ClrEnumLiteralRecord.RenderWidths;
         }
 
         public void Dispose()
@@ -71,7 +70,7 @@ namespace Z0
             Records = ClrEnums.literals(Source);
             if(Records.Length != 0)
             {
-                var t = default(EnumLiteralRecord);
+                var t = default(ClrEnumLiteralRecord);
                 var formatter = TableFormatter.row(RenderWidths,t);
                 Wf.Running(Host, Source.SimpleName);
                 var counter = 0u;
@@ -80,10 +79,10 @@ namespace Z0
             }
         }
 
-        void Execute(ref uint counter, in RowFormatter<EnumLiteralRecord> formatter)
+        void Execute(ref uint counter, in RowFormatter<ClrEnumLiteralRecord> formatter)
         {
             var src = @readonly(Records);
-            var t = default(EnumLiteralRecord);
+            var t = default(ClrEnumLiteralRecord);
             var count = src.Length;
             using var dst = Target.Writer();
             dst.WriteLine(formatter.FormatHeader());

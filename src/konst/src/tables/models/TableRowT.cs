@@ -9,28 +9,26 @@ namespace Z0
 
     using static Konst;
 
-    public struct TableRow<T>
+    public struct TableRow<T> : IDynamicRow<T>
         where T : struct
     {
-        public uint RowIndex;
+        public uint RowIndex {get;}
 
-        public T Source;
+        public T Source {get;}
 
-        public readonly object[] Cells;
+        public dynamic[] Cells {get;}
 
         [MethodImpl(Inline)]
-        public TableRow(uint index, T src, object[] cells)
+        public TableRow(uint index, in T src, dynamic[] cells)
         {
             RowIndex = index;
             Source = src;
             Cells = cells;
         }
 
-        public int Length
-        {
-            [MethodImpl(Inline)]
-            get => Cells.Length;
-        }
+        [MethodImpl(Inline)]
+        public TableRow<T> UpdateSource(uint index, in T src)
+            => new TableRow<T>(index, src, Cells);
 
         public uint CellCount
         {
@@ -38,13 +36,13 @@ namespace Z0
             get => (uint)Cells.Length;
         }
 
-        public ref object this[long index]
+        public ref dynamic this[long index]
         {
             [MethodImpl(Inline)]
             get => ref Cells[index];
         }
 
-        public ref object this[ulong index]
+        public ref dynamic this[ulong index]
         {
             [MethodImpl(Inline)]
             get => ref Cells[index];

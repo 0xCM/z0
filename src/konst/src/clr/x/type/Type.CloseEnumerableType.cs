@@ -40,9 +40,9 @@ namespace Z0
             {
                 foreach (var i in interfaces)
                 {
-                    var ienum = CloseEnumerableType(i);
-                    if (ienum.Exists)
-                        return ienum;
+                    var tEnum = CloseEnumerableType(i);
+                    if (tEnum.Exists)
+                        return tEnum;
                 }
             }
 

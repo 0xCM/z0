@@ -112,7 +112,7 @@ namespace Z0
 
         [Op]
         public static ApiSig sig(PartId part, Type host, MethodInfo src)
-            => new ApiSig(part, host.Name,  Clr.sig(src));
+            => new ApiSig(part, host.Name,  Cli.sig(src));
 
         [Op]
         public static ref RuntimeMember populate(IApiHost host, ApiMember src, ref RuntimeMember dst)
