@@ -5,6 +5,7 @@
 
     <!-- <TargetFramework>net5.0</TargetFramework> -->
 
+    <Deterministic>true</Deterministic>
     <Optimize>true</Optimize>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <LangVersion>preview</LangVersion>
