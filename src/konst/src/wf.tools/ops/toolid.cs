@@ -19,5 +19,13 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ToolId toolid<T>()
             => new ToolId(typeof(T).Name);
+
+        [MethodImpl(Inline), Op]
+        public static ToolId toolid(Type src)
+            => new ToolId(src.Name);
+
+        [MethodImpl(Inline), Op]
+        public static ToolId toolid(string src)
+            => new ToolId(src);
     }
 }

@@ -13,14 +13,9 @@ namespace Z0
 
     partial struct Tooling
     {
-        [Projector]
-        static ref ToolOption extract(MemberInfo src, ushort index, out ToolOption dst)
-        {
-            var tag = src.RequiredTag<SlotAttribute>();
-            var purpose = src.Tag<MeaningAttribute>().MapValueOrElse(t => (string)t.Content, () => EmptyString);
-            dst = option(index, text.ifempty(tag.Name, src.Name), purpose);
-            return ref dst;
-        }
+        [MethodImpl(Inline), Formatter]
+        public static string format(ToolOption src)
+            => src.IsAnonymous || src.IsEmpty ? EmptyString : src.Name;
 
         [Formatter]
         public static string format(OptionDelimiter src)
@@ -40,18 +35,18 @@ namespace Z0
             }
         }
 
-        [MethodImpl(Inline), Formatter]
-        public static string format(ToolOption src)
-            => src.IsAnonymous || src.IsEmpty ? EmptyString : src.Name;
-
         [MethodImpl(Inline), Formatter, Closures(Closure)]
         public static string format<K>(ToolOption<K> src)
             where K : unmanaged
                 => src.IsAnonymous || src.IsEmpty ? EmptyString : src.Name;
 
         [Formatter]
-        public static string format(ToolArg src, char specifier)
-            => string.Format("{0}{1}{2}", src.Option, specifier, src.Value);
+        public static string format(ToolArg src)
+            => string.Format("{0}{2}", format(src.Option), src.Value);
+
+        [Formatter]
+        public static string format(ToolArg src, OptionDelimiter delimiter, char specifier)
+            => string.Format("{0}{1}{2}{3}", format(delimiter), format(src.Option), specifier, src.Value);
 
         public static string format<K,V>(ToolArg<K,V> src, char specifier)
             where K : unmanaged

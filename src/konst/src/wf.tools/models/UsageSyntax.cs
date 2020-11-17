@@ -17,9 +17,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public UsageSyntax(string content)
-        {
-            Content = content;
-        }
+            => Content = content;
 
         [MethodImpl(Inline)]
         public string Format()
@@ -31,5 +29,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator UsageSyntax(string src)
             => new UsageSyntax(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator string(UsageSyntax src)
+            => src.Content;
     }
 }

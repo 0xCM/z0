@@ -15,6 +15,13 @@ namespace Z0
     /// </summary>
     public readonly struct ToolArg : IToolArg
     {
+        public ushort Position {get;}
+
+        /// <summary>
+        /// The option protocol
+        /// </summary>
+        public OptionProtocol Protocol {get;}
+
         /// <summary>
         /// The option for which the argument is specified
         /// </summary>
@@ -26,25 +33,12 @@ namespace Z0
         public string Value {get;}
 
         [MethodImpl(Inline)]
-        public ToolArg(string option, string value)
+        public ToolArg(ushort position, OptionProtocol protocol, ToolOption option, string value)
         {
+            Position = position;
+            Protocol = protocol;
             Option = option;
             Value = value;
         }
-
-        [MethodImpl(Inline)]
-        public ToolArg(ToolOption option, string value)
-        {
-            Option = option;
-            Value = value;
-        }
-
-        [MethodImpl(Inline)]
-        public static implicit operator ToolArg((string name, string value) src)
-            => new ToolArg(src.name, src.value);
-
-        [MethodImpl(Inline)]
-        public static implicit operator ToolArg((ToolOption option, string value) src)
-            => new ToolArg(src.option, src.value);
     }
 }

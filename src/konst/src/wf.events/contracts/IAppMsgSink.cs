@@ -17,10 +17,10 @@ namespace Z0
 
         void NotifyConsole(IAppMsg msg)
         {
-            if(msg.Kind == LogLevel.Error)
-                term.print(msg);
-            else
-                term.print(msg, msg.Flair);
+            // if(msg.Kind == LogLevel.Error)
+            //     term.print(msg);
+            // else
+            //     term.print(msg, msg.Flair);
 
             Deposit(msg);
         }

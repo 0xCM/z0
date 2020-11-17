@@ -22,7 +22,7 @@ namespace Z0
         readonly ToolCatalog _Catalog;
 
         [MethodImpl(Inline), Op]
-        public static Toolset toolset(ToolsetId id, FS.FolderPath location)
+        public static Toolset toolset(string id, FS.FolderPath location)
             => new Toolset(id, location);
 
         [MethodImpl(Inline), Op]
@@ -60,9 +60,9 @@ namespace Z0
         public static Toolsets toolsets()
         {
             var data = array(
-                toolset(ToolsetId.Llvm, FS.dir("j:/lang/tools/llvm-project/build/Release/bin")),
-                toolset(ToolsetId.CoreRoot, FS.dir("j:/lang/net/runtime/artifacts/tests/coreclr/Windows_NT.x64.Debug/Tests/Core_Root")),
-                toolset(ToolsetId.Msys64, FS.dir("j:/tools/msys64/usr/bin"))
+                toolset("Llvm", FS.dir("j:/lang/tools/llvm-project/build/Release/bin")),
+                toolset("CoreRoot", FS.dir("j:/lang/net/runtime/artifacts/tests/coreclr/Windows_NT.x64.Debug/Tests/Core_Root")),
+                toolset("Msys64", FS.dir("j:/tools/msys64/usr/bin"))
             );
             return new Toolsets(data);
         }

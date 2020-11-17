@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public struct ToolCmdSpec
+    public struct ToolCmd
     {
         /// <summary>
         /// The path to the tool executable
@@ -33,7 +33,7 @@ namespace Z0
         public NamedValues<string> Vars;
 
         [MethodImpl(Inline)]
-        public ToolCmdSpec(FS.FilePath tool, string args, FS.FolderPath? root = null)
+        public ToolCmd(FS.FilePath tool, string args, FS.FolderPath? root = null)
         {
             ToolPath = tool;
             Args = args;

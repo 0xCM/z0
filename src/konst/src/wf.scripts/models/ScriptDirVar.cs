@@ -9,16 +9,15 @@ namespace Z0
 
     using static z;
     using static Konst;
-    using static Scripts;
 
-    public struct ScriptDirVar : IScriptVar<ScriptVar>
+    public struct ScriptDirVar : IScriptVar<FS.FolderPath>
     {
         public ScriptSymbol Symbol {get;}
 
-        public ScriptVarValue Value {get;}
+        public FS.FolderPath Value {get;}
 
         [MethodImpl(Inline)]
-        public ScriptDirVar(ScriptSymbol name, ScriptVarValue value)
+        public ScriptDirVar(ScriptSymbol name, FS.FolderPath value)
         {
             Symbol = name;
             Value = value;
@@ -28,19 +27,15 @@ namespace Z0
         public ScriptDirVar(ScriptSymbol name)
         {
             Symbol = name;
-            Value = ScriptVarValue.Empty;
+            Value = FS.FolderPath.Empty;
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator ScriptDirVar((ScriptSymbol symbol, ScriptVarValue value) src)
+        public static implicit operator ScriptDirVar((ScriptSymbol symbol, FS.FolderPath value) src)
             => new ScriptDirVar(src.symbol, src.value);
 
         [MethodImpl(Inline)]
         public static implicit operator ScriptVar(ScriptDirVar src)
             => new ScriptDirVar(src.Symbol, src.Value);
-
-        [MethodImpl(Inline)]
-        public static ScriptDirVar operator + (ScriptDirVar a, ScriptDirVar b)
-            => combine(a,b);
     }
 }

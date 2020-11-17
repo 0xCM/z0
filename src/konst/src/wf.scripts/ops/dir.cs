@@ -26,7 +26,7 @@ namespace Z0
         /// <param name="symbol">The variable symbol</param>
         /// <param name="value">The variable value</param>
         [MethodImpl(Inline), Op]
-        public static ScriptDirVar dir(ScriptSymbol symbol, ScriptVarValue value)
+        public static ScriptDirVar dir(ScriptSymbol symbol, FS.FolderPath value)
             => new ScriptDirVar(symbol, value);
     }
 }

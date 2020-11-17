@@ -15,28 +15,26 @@ namespace Z0
 
         public long? Position {get;}
 
+        public char Qualifier {get;}
+
         public SlotAttribute()
         {
             Name = string.Empty;
             Position = null;
         }
 
-        public SlotAttribute(string name)
+        public SlotAttribute(string name, char qualifier = ' ')
         {
             Name = name;
             Position = null;
+            Qualifier = qualifier;
         }
 
-        public SlotAttribute(long position)
+        public SlotAttribute(long position, char qualifier = ' ')
         {
             Name = string.Empty;
             Position = position;
-        }
-
-        public SlotAttribute(string name, long position)
-        {
-            Name = name;
-            Position = position;
+            Qualifier = qualifier;
         }
     }
 }

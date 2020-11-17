@@ -14,7 +14,7 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public ToolVerb verb(ToolId tool, string name)
-            => new ToolVerb(tool,name);
+            => new ToolVerb(tool, name);
 
         [MethodImpl(Inline), Op]
         public static ToolVerb verb<T>(string name)

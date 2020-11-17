@@ -6,14 +6,31 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
 
-    using static Konst;
     using static z;
+    using static Konst;
+    using static CmdPatterns;
 
-    partial struct Tooling
+    [ApiHost]
+    public readonly partial struct ToolScripts
     {
         [Op]
-        public static ref ToolCmd<ToolCmdPattern> update(IFileDb db, ref ToolCmd<ToolCmdPattern> cmd, string root = null, string name = null, string arg = null, string delimiter = null, string type = null)
+        public static ToolCmd<ToolScript> create(IFileDb db, string root, string name, string arg, string delimiter = null, string type = null)
+        {
+            ToolCmd<ToolScript> cmd = new ToolScript();
+            ref var data = ref cmd.Content;
+            data.CmdRootName = FS.folder(root);
+            data.Tool = name;
+            data.CmdArgName = arg;
+            data.ArgDelimiter = delimiter ?? DefaultArgDelimiter;
+            data.CmdType = FS.ext(type ?? DefaultCmdType);
+            rules(db, ref cmd);
+            return cmd;
+        }
+
+        [Op]
+        public static ref ToolCmd<ToolScript> update(IFileDb db, ref ToolCmd<ToolScript> cmd, string root = null, string name = null, string arg = null, string delimiter = null, string type = null)
         {
             ref var data = ref cmd.Content;
             data.CmdRootName = root == null ? data.CmdRootName : FS.folder(root);
@@ -26,7 +43,7 @@ namespace Z0
         }
 
         [Op]
-        public static ref ToolCmd<ToolCmdPattern> rules(IFileDb db, ref ToolCmd<ToolCmdPattern> cmd)
+        public static ref ToolCmd<ToolScript> rules(IFileDb db, ref ToolCmd<ToolScript> cmd)
         {
             ref var data = ref cmd.Content;
             ref readonly var id = ref data.Tool;

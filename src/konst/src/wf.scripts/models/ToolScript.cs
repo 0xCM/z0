@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Defines a pattern for creating a <see cref='ToolCmd'/>
     /// </summary>
-    public struct ToolCmdPattern : IToolScript<ToolCmdPattern>
+    public struct ToolScript : IToolScript<ToolScript>
     {
         public FS.FolderName CmdRootName;
 

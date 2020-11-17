@@ -8,6 +8,10 @@ namespace Z0
 
     public interface IToolArg<V>
     {
+        ushort Position {get;}
+
+        OptionProtocol Protocol {get;}
+
         ToolOption Option {get;}
 
         V Value {get;}

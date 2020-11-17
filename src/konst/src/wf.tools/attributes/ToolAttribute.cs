@@ -23,6 +23,7 @@ namespace Z0
             OptionDelimiter = string.Empty;
             UsageSyntax = string.Empty;
         }
+
         public ToolAttribute(string name)
         {
             ToolName = name ?? string.Empty;

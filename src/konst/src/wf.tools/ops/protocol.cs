@@ -11,8 +11,8 @@ namespace Z0
 
     partial struct Tooling
     {
-        [MethodImpl(Inline), Op]
-        public static ToolCliHelp clihelp(ToolId tool, string src)
-            => new ToolCliHelp(tool, src);
+        [MethodImpl(Inline), Factory]
+        public OptionProtocol protocol(OptionDelimiter delimiter, AsciCharCode qualifier = AsciCharCode.Space)
+            => new OptionProtocol(delimiter, qualifier);
     }
 }

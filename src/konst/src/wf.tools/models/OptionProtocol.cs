@@ -10,21 +10,17 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct Toolset : IIdentified<string>
+    public readonly struct OptionProtocol
     {
-        public string Id {get;}
+        public OptionDelimiter Delimiter {get;}
 
-        public FS.FolderPath Location {get;}
+        public AsciCharCode Qualifier {get;}
 
         [MethodImpl(Inline)]
-        public Toolset(string name, FS.FolderPath root)
+        public OptionProtocol(OptionDelimiter delimiter, AsciCharCode qualifier)
         {
-            Id = name;
-            Location = root;
+            Delimiter = delimiter;
+            Qualifier = qualifier;
         }
-
-        [MethodImpl(Inline)]
-        public static implicit operator Toolset(KeyedValue<string,FS.FolderPath> src)
-            => new Toolset(src.Key, src.Value);
     }
 }

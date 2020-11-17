@@ -58,6 +58,10 @@ namespace Z0
         public override string ToString()
             => Format();
 
+        [MethodImpl(Inline)]
+        public static implicit operator string(OptionDelimiter src)
+            => src.Format();
+
         public static OptionDelimiter Empty => default;
     }
 }

@@ -9,17 +9,10 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct ToolCliHelp : IToolCliHelp
+    partial struct Tooling
     {
-        public ToolId Id {get;}
-
-        public string Content {get;}
-
-        [MethodImpl(Inline)]
-        public ToolCliHelp(ToolId id, string content)
-        {
-            Id = id;
-            Content = content;
-        }
+        [MethodImpl(Inline), Op]
+        public static ToolHelp help(ToolId tool, string src)
+            => new ToolHelp(tool, src);
     }
 }

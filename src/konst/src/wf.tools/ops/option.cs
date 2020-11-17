@@ -28,23 +28,5 @@ namespace Z0
         [MethodImpl(Inline), Factory]
         public static ToolOption option(string name, string purpose)
             => new ToolOption(name, purpose);
-
-        /// <summary>
-        /// Creates a meaningful option
-        /// </summary>
-        /// <param name="name">The option name</param>
-        /// <param name="purpose">The option's significance</param>
-        [MethodImpl(Inline), Factory]
-        public static ToolOption option(ushort index, string name)
-            => new ToolOption(index, name, EmptyString);
-
-        /// <summary>
-        /// Creates a meaningful option
-        /// </summary>
-        /// <param name="name">The option name</param>
-        /// <param name="purpose">The option's significance</param>
-        [MethodImpl(Inline), Factory]
-        public static ToolOption option(ushort index, string name, string purpose)
-            => new ToolOption(index, name, purpose);
     }
 }

@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Defines a script variable
     /// </summary>
-    public struct ScriptVar : IScriptVar<ScriptVar>
+    public struct ScriptVar : IScriptVar
     {
         /// <summary>
         /// The variable symbol
@@ -23,10 +23,10 @@ namespace Z0
         /// <summary>
         /// The variable value, possibly empty
         /// </summary>
-        public ScriptVarValue Value {get;}
+        public string Value {get;}
 
         [MethodImpl(Inline)]
-        public ScriptVar(ScriptSymbol name, ScriptVarValue value)
+        public ScriptVar(ScriptSymbol name, string value)
         {
             Symbol = name;
             Value = value;
@@ -36,7 +36,7 @@ namespace Z0
         public ScriptVar(ScriptSymbol name)
         {
             Symbol = name;
-            Value = ScriptVarValue.Empty;
+            Value = EmptyString;
         }
 
         [MethodImpl(Inline)]
@@ -47,7 +47,7 @@ namespace Z0
             => Format();
 
         [MethodImpl(Inline)]
-        public static implicit operator ScriptVar((ScriptSymbol symbol, ScriptVarValue value) src)
+        public static implicit operator ScriptVar((ScriptSymbol symbol, string value) src)
             => new ScriptVar(src.symbol, src.value);
     }
 }

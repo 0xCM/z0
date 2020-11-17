@@ -13,13 +13,10 @@ namespace Z0
 
     public readonly struct ToolCatalog
     {
-        public static ToolCatalog create()
-            => new ToolCatalog(FS.dir("j:/root/tools"));
-        
         readonly FS.FolderPath Root;
-        
+
         readonly FS.FileExt HelpExt;
-        
+
         [MethodImpl(Inline)]
         public ToolCatalog(FS.FolderPath root)
         {
@@ -33,11 +30,11 @@ namespace Z0
             var path = HelpDir.Files(HelpExt).Where(f => f.FileName.WithoutExtension.Equals(match)).FirstOrDefault();
             return path;
         }
-        
-        public Files Help()
-            => HelpDir.Files(FS.ext("help"));       
 
-        FS.FolderPath HelpDir 
+        public Files Help()
+            => HelpDir.Files(FS.ext("help"));
+
+        FS.FolderPath HelpDir
             => Root + FS.folder("help");
     }
 }

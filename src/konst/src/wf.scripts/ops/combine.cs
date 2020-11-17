@@ -21,12 +21,5 @@ namespace Z0
         public static ScriptSymbol combine<T>(ScriptSymbol<T> a, ScriptSymbol<T> b)
             => new ScriptSymbol(string.Format("{0}{1}", a,b));
 
-        [Op]
-        public static ScriptDirVar combine(ScriptDirVar a, ScriptDirVar b)
-        {
-            var symbol = a.Symbol + PathSep + b.Symbol;
-            var value = Path.Combine(a.Value, b.Value);
-            return (symbol,value);
-        }
     }
 }

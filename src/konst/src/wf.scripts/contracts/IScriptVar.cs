@@ -7,17 +7,16 @@ namespace Z0
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface IScriptVar
+    public interface IScriptVar<T>
     {
         ScriptSymbol Symbol {get;}
 
-        ScriptVarValue Value {get;}
+        T Value {get;}
     }
-
     [Free]
-    public interface IScriptVar<H> : IScriptVar
-        where H : struct, IScriptVar<H>
+    public interface IScriptVar : IScriptVar<string>
     {
+
 
     }
 }

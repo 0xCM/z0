@@ -23,6 +23,7 @@ namespace Z0
         {
             var dst = new ToolModel();
             var tag = src.Tag<ToolAttribute>();
+            dst.ToolId = toolid(src);
             if(!tag)
             {
                 dst.Name = src.Name;
@@ -38,17 +39,14 @@ namespace Z0
             }
 
             var fields = @readonly(src.InstanceFields().Tagged<SlotAttribute>());
-            var props = @readonly(src.InstanceProperties().Tagged<SlotAttribute>());
             var kFields = fields.Length;
-            var kProps = props.Length;
+            var buffer = alloc<ToolOption>(kFields);
 
-            var buffer = alloc<ToolOption>(kFields + kProps);
             dst.Options = buffer;
+
             var options = span(buffer);
             for(ushort i=0; i<kFields; i++)
-                extract(skip(fields,i), i, out seek(options,i));
-            for(ushort i=0; i<kProps; i++)
-                extract(skip(props,i), i, out seek(options,i));
+                extract(skip(fields,i), out seek(options,i));
 
             return dst;
         }

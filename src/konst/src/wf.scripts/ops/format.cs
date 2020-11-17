@@ -17,9 +17,6 @@ namespace Z0
         public static string format<T>(ScriptSymbol<T> src)
             => string.Format("{0}", src.Name);
 
-        [Op, Closures(Closure)]
-        public static string format<T>(ScriptVarValue<T> src)
-            => string.Format("{0}", src.Content);
         [Op]
         public static string format(ScriptVar src)
             => string.Format("{0}={1}",src.Symbol, src.Value);

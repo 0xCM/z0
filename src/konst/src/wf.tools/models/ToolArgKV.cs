@@ -10,11 +10,24 @@ namespace Z0
     using static Konst;
     using static z;
 
+    /// <summary>
+    /// Defines a tool option argument
+    /// </summary>
     public readonly struct ToolArg<K,V> : IToolArg<K,V>
         where K : unmanaged
     {
         /// <summary>
-        /// The option name
+        /// The 0-based argument position
+        /// </summary>
+        public ushort Position {get;}
+
+        /// <summary>
+        /// The option protocol
+        /// </summary>
+        public OptionProtocol Protocol {get;}
+
+        /// <summary>
+        /// The specified option
         /// </summary>
         public ToolOption<K> Option {get;}
 
@@ -24,29 +37,12 @@ namespace Z0
         public V Value {get;}
 
         [MethodImpl(Inline)]
-        public ToolArg(ToolOption<K> option, V value)
+        public ToolArg(ushort position, OptionProtocol protocol, K kind, V value)
         {
-            Option = option;
-            Value = value;
-        }
-
-        [MethodImpl(Inline)]
-        public ToolArg(K kind, V value)
-        {
+            Position = position;
+            Protocol = protocol;
             Option = kind;
             Value = value;
         }
-
-        [MethodImpl(Inline)]
-        public static implicit operator ToolArg<K,V>((ToolOption<K> option, V value) src)
-            => new ToolArg<K,V>(src.option, src.value);
-
-        [MethodImpl(Inline)]
-        public static implicit operator ToolArg<K,V>((K kind, V value) src)
-            => new ToolArg<K,V>(src.kind, src.value);
-
-        [MethodImpl(Inline)]
-        public static implicit operator ToolArg<K,V>(Paired<K,V> src)
-            => new ToolArg<K,V>(src.Left, src.Right);
     }
 }

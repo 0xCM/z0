@@ -19,6 +19,18 @@ namespace Z0
         public ToolOptions(ToolOption[] src)
             => Data = src;
 
+        public uint Count
+        {
+            [MethodImpl(Inline)]
+            get => Data.Count;
+        }
+
+        public ref readonly ToolOption this[ushort index]
+        {
+            [MethodImpl(Inline)]
+            get => ref Data[index];
+        }
+
         public ToolOption[] Storage
         {
             [MethodImpl(Inline)]

@@ -13,11 +13,11 @@ namespace Z0
     partial struct Scripts
     {
         [MethodImpl(Inline), Op]
-        public static ScriptVar set(ScriptVar src, ScriptVarValue value)
-            =>  var(src.Symbol, value);
+        public static ScriptVar set(ScriptVar src, string value)
+            => var(src.Symbol, value);
 
         [MethodImpl(Inline), Op]
-        public static ScriptDirVar set(ScriptDirVar src, ScriptVarValue value)
-            =>  dir(src.Symbol, value);
+        public static ScriptDirVar set(ScriptDirVar src, FS.FolderPath value)
+            => dir(src.Symbol, value);
     }
 }
