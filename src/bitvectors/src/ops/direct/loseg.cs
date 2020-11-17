@@ -18,7 +18,7 @@ namespace Z0
         [MethodImpl(Inline), LoSeg, Closures(Closure)]
         public static BitVector<T> loseg<T>(BitVector<T> src, byte n)
             where T : unmanaged
-                => bitseg(src, 0, n -=1);
+                => segment(src, 0, n -=1);
 
         /// <summary>
         /// Constructs a bitvector formed from the n lest significant bits of the current vector
@@ -26,7 +26,7 @@ namespace Z0
         /// <param name="count">The count of least significant bits</param>
         [MethodImpl(Inline), LoSeg]
         public static BitVector4 loseg(BitVector4 x, byte count)
-            => bitseg(x, 0, (byte)(count - 1));
+            => segment(x, 0, (byte)(count - 1));
 
         /// <summary>
         /// Constructs a bitvector formed from the n lest significant bits of the current vector
@@ -34,7 +34,7 @@ namespace Z0
         /// <param name="count">The count of least significant bits</param>
         [MethodImpl(Inline), LoSeg]
         public static BitVector8 loseg(BitVector8 x, byte count)
-            => bitseg(x,0, count -=1);
+            => segment(x,0, count -=1);
 
         /// <summary>
         /// Constructs a bitvector formed from the n lest significant bits of the current vector
@@ -42,7 +42,7 @@ namespace Z0
         /// <param name="count">The count of least significant bits</param>
         [MethodImpl(Inline), LoSeg]
         public static BitVector16 loseg(BitVector16 src, byte count)
-            => bitseg(src.Data,0,count -=1);
+            => segment(src.Data,0,count -=1);
 
         /// <summary>
         /// Constructs a bitvector formed from the n lest significant bits of the current vector
@@ -50,7 +50,7 @@ namespace Z0
         /// <param name="count">The count of least significant bits</param>
         [MethodImpl(Inline), LoSeg]
         public static BitVector32 loseg(BitVector32 src, byte count)
-            => bitseg(src.Data,0,count -=1);
+            => segment(src.Data,0,count -=1);
 
         /// <summary>
         /// Constructs a bitvector formed from the n lest significant bits of the current vector
@@ -58,7 +58,7 @@ namespace Z0
         /// <param name="n">The count of least significant bits</param>
         [MethodImpl(Inline), LoSeg]
         public static BitVector64 loseg(BitVector64 src, byte n)
-            => bitseg(src.Data,0, n -=1);
+            => segment(src.Data,0, n -=1);
 
     }
 }

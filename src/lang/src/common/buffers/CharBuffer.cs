@@ -105,7 +105,6 @@ namespace Z0
 		{
 			var pos = Index;
             var srclen = src.Length;
-
 			src.CopyTo(slice(_Buffer, Index));
 			Index += (uint)src.Length;
             return Index;

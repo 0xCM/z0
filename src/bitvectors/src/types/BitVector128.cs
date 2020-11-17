@@ -34,6 +34,87 @@ namespace Z0
 
         public static T Zero => default;
 
+
+        /// <summary>
+        /// Initializes a bitvector with the lo N bits of a scalar source
+        /// </summary>
+        /// <param name="data">The scalar source value</param>
+        [MethodImpl(Inline)]
+        public BitVector128(Vector128<T> data)
+            => this.Data = data;
+
+        /// <summary>
+        /// The scalar representation of the vector
+        /// </summary>
+        public Vector128<T> Content
+        {
+            [MethodImpl(Inline)]
+            get => Data;
+        }
+
+        /// <summary>
+        /// The bitvector's natural width
+        /// </summary>
+        public int Width
+        {
+            [MethodImpl(Inline)]
+            get => (int)TypeNats.value<N>();
+        }
+
+        /// <summary>
+        /// The bitvector's lower 64 bits
+        /// </summary>
+        public BitVector64 Lo
+        {
+            [MethodImpl(Inline)]
+            get => z.vcell(v64u(Data),0);
+        }
+
+        /// <summary>
+        /// The bitvector's upper 64 bits
+        /// </summary>
+        public BitVector64 Hi
+        {
+            [MethodImpl(Inline)]
+            get => z.vcell(v64u(Data),1);
+        }
+
+        /// <summary>
+        /// Specifies whether all bits are disabled
+        /// </summary>
+        public Bit32 Empty
+        {
+            [MethodImpl(Inline)]
+            get => !gmath.nonz(Data);
+        }
+
+        /// <summary>
+        /// Specifies whether at least one bit is enabled
+        /// </summary>
+        public Bit32 NonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => gmath.nonz(Data);
+        }
+
+        [MethodImpl(Inline)]
+        public readonly bool Equals(in BitVector128<N,T> y)
+            => BitVector.eq(this,y);
+
+        public readonly override bool Equals(object obj)
+            => obj is BitVector128<N,T> x && Equals(x);
+
+        public readonly override int GetHashCode()
+            => Data.GetHashCode();
+
+        public override string ToString()
+            => string.Empty;
+
+        [MethodImpl(Inline)]
+        public BitVector128<N,U> As<U>()
+            where U : unmanaged
+                => Data.As<T,U>();
+
         /// <summary>
         /// Implicitly convers a scalar to a bitvector
         /// </summary>
@@ -151,85 +232,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Bit32 operator !=(in BitVector128<N,T> x, in BitVector128<N,T> y)
             => !BitVector.eq(x,y);
-
-        /// <summary>
-        /// Initializes a bitvector with the lo N bits of a scalar source
-        /// </summary>
-        /// <param name="data">The scalar source value</param>
-        [MethodImpl(Inline)]
-        public BitVector128(Vector128<T> data)
-            => this.Data = data;
-
-        /// <summary>
-        /// The scalar representation of the vector
-        /// </summary>
-        public Vector128<T> Content
-        {
-            [MethodImpl(Inline)]
-            get => Data;
-        }
-
-        /// <summary>
-        /// The bitvector's natural width
-        /// </summary>
-        public int Width
-        {
-            [MethodImpl(Inline)]
-            get => (int)TypeNats.value<N>();
-        }
-
-        /// <summary>
-        /// The bitvector's lower 64 bits
-        /// </summary>
-        public BitVector64 Lo
-        {
-            [MethodImpl(Inline)]
-            get => z.vcell(v64u(Data),0);
-        }
-
-        /// <summary>
-        /// The bitvector's upper 64 bits
-        /// </summary>
-        public BitVector64 Hi
-        {
-            [MethodImpl(Inline)]
-            get => z.vcell(v64u(Data),1);
-        }
-
-        /// <summary>
-        /// Specifies whether all bits are disabled
-        /// </summary>
-        public Bit32 Empty
-        {
-            [MethodImpl(Inline)]
-            get => !gmath.nonz(Data);
-        }
-
-        /// <summary>
-        /// Specifies whether at least one bit is enabled
-        /// </summary>
-        public Bit32 NonEmpty
-        {
-            [MethodImpl(Inline)]
-            get => gmath.nonz(Data);
-        }
-
-        [MethodImpl(Inline)]
-        public readonly bool Equals(in BitVector128<N,T> y)
-            => BitVector.eq(this,y);
-
-        public readonly override bool Equals(object obj)
-            => obj is BitVector128<N,T> x && Equals(x);
-
-        public readonly override int GetHashCode()
-            => Data.GetHashCode();
-
-        public override string ToString()
-            => string.Empty;
-
-        [MethodImpl(Inline)]
-        public BitVector128<N,U> As<U>()
-            where U : unmanaged
-                => Data.As<T,U>();
     }
 }

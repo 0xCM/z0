@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Security;
     using System.Runtime.CompilerServices;
 
     using static Konst;
@@ -19,10 +18,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public Cells(T[] src)
             => Data = src;
-
-        [MethodImpl(Inline)]
-        public static implicit operator Cells<T>(T[] src)
-            => new Cells<T>(src);
 
         public Span<T> Edit
         {
@@ -71,5 +66,9 @@ namespace Z0
 
         public static uint CellWidth
             => bitwidth<T>();
+
+        [MethodImpl(Inline)]
+        public static implicit operator Cells<T>(T[] src)
+            => new Cells<T>(src);
     }
 }

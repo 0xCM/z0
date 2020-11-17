@@ -8,8 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static z;
 
-    using api = ValueTypes;
+    using api = Values;
 
     public readonly struct KindedIdentity<K,I> : IEquatable<KindedIdentity<K,I>>, ITextual
         where I : unmanaged

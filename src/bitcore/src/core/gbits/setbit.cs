@@ -12,17 +12,17 @@ namespace Z0
 
     partial class gbits
     {
-        /// <summary>
-        /// Sets an identified bit to a supplied value
-        /// </summary>
-        /// <param name="src">The source segment</param>
-        /// <param name="pos">The bit position</param>
-        /// <param name="value">The value to be applied</param>
-        /// <typeparam name="T">The source element type</typeparam>
-        [MethodImpl(Inline), SetBit, Closures(AllNumeric)]
-        public static T setbit<T>(T src, int pos, Bit32 value)
-            where T : unmanaged
-                => value ? enable(src, pos) : disable(src, pos);
+        // /// <summary>
+        // /// Sets an identified bit to a supplied value
+        // /// </summary>
+        // /// <param name="src">The source segment</param>
+        // /// <param name="pos">The bit position</param>
+        // /// <param name="value">The value to be applied</param>
+        // /// <typeparam name="T">The source element type</typeparam>
+        // [MethodImpl(Inline), SetBit, Closures(AllNumeric)]
+        // public static T setbit<T>(T src, byte pos, Bit32 value)
+        //     where T : unmanaged
+        //         => value ? enable(src, pos) : disable(src, pos);
 
         /// <summary>
         /// Sets an identified bit to a supplied value

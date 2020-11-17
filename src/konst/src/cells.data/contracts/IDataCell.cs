@@ -18,16 +18,22 @@ namespace Z0
         /// <summary>
         /// The invariant number of bits covered by the reifying type
         /// </summary>
-        uint BitWidth {get;}
+        uint Width {get;}
 
         ByteSize Size {get;}
+
+        uint EffectiveWidth
+            => Width;
     }
 
     [Free]
     public interface IDataCell<T> : IDataCell
         where T : struct
     {
-        uint IDataCell.BitWidth
+        Span<byte> CellBytes
+            => z.bytes((T)this);
+
+        uint IDataCell.Width
             => (uint)Unsafe.SizeOf<T>()*8;
 
         ByteSize IDataCell.Size
@@ -57,7 +63,7 @@ namespace Z0
         TypeWidth TypeWidth
             => Widths.type<W>();
 
-        uint IDataCell.BitWidth
+        uint IDataCell.Width
             => (uint)TypeWidth;
 
         ByteSize IDataCell.Size

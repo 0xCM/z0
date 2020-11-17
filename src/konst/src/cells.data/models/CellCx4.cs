@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public struct Cell<A,B,C,D>
+    public struct Cell<A,B,C,D>  : IDataCell<Cell<A,B,C,D>>
         where A : struct, IDataCell<A>
         where B : struct, IDataCell<B>
         where C : struct, IDataCell<C>
@@ -32,5 +32,9 @@ namespace Z0
             C2 = c2;
             C3 = c3;
         }
+
+       [MethodImpl(Inline)]
+        public string Format()
+            => text.format(RP.Adjacent4, C0, C1, C2, C3);
     }
 }

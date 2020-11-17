@@ -24,9 +24,7 @@ namespace Z0
             C0 = c0;
             C1 = c1;
         }
-
-        [MethodImpl(Inline)]
         public string Format()
-            => text.format(RP.Tuple2, C0, C1);
+            => text.format(RP.Adjacent2, C0.Format(), C1.Format());
     }
 }

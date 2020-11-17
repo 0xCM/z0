@@ -9,8 +9,6 @@ namespace Z0
 
     using static Konst;
 
-    using api = Symbolic;
-
     public readonly struct NamedSymbols<S,T,N>
         where S : unmanaged
         where T : unmanaged

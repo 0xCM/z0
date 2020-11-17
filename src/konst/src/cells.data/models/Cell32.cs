@@ -63,8 +63,33 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        Cell32(uint x0)
+        internal Cell32(uint x0)
             => Data = x0;
+
+        [MethodImpl(Inline)]
+        public T As<T>()
+            where T : struct
+              => Cast.to<T>(Data);
+
+        [MethodImpl(Inline)]
+        public bool Equals(Cell32 src)
+            => Data == src.Data;
+
+        [MethodImpl(Inline)]
+        public bool Equals(uint src)
+            => Data == src;
+
+        public string Format()
+            => Data.ToString();
+
+        public override string ToString()
+            => Format();
+
+        public override int GetHashCode()
+            => Data.GetHashCode();
+
+        public override bool Equals(object src)
+            => src is Cell32 x && Equals(x);
 
         [MethodImpl(Inline)]
         public static implicit operator Cell32(uint x0)
@@ -105,32 +130,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static explicit operator ulong(Cell32 x)
             => (ulong)x.Data;
-
-
-        [MethodImpl(Inline)]
-        public T As<T>()
-            where T : struct
-              => Cast.to<T>(Data);
-
-        [MethodImpl(Inline)]
-        public bool Equals(Cell32 src)
-            => Data == src.Data;
-
-        [MethodImpl(Inline)]
-        public bool Equals(uint src)
-            => Data == src;
-
-        public string Format()
-            => Data.ToString();
-
-        public override string ToString()
-            => Format();
-
-        public override int GetHashCode()
-            => Data.GetHashCode();
-
-        public override bool Equals(object src)
-            => src is Cell32 x && Equals(x);
 
         public static Cell32 Empty => default;
     }

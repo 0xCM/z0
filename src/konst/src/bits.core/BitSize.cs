@@ -49,6 +49,35 @@ namespace Z0
                 => a % (Unsafe.SizeOf<T>()*8);
 
         [MethodImpl(Inline)]
+        public BitSize(uint bits)
+            => Count = bits;
+
+        public ByteSize Bytes
+        {
+            [MethodImpl(Inline)]
+            get => Count/8;
+        }
+
+        [MethodImpl(Inline)]
+        public bool Equals(BitSize rhs)
+            => Count == rhs.Count;
+
+        public override string ToString()
+            => Count.ToString();
+
+        public override int GetHashCode()
+            => (int)Count;
+
+        public override bool Equals(object obj)
+            => obj is BitSize x && Equals(x);
+
+        /// <summary>
+        /// The bit with no size
+        /// </summary>
+        public static BitSize Empty
+            => default;
+
+        [MethodImpl(Inline)]
         public static explicit operator ByteSize(BitSize src)
             => src.Bytes;
 
@@ -151,34 +180,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitSize operator %(BitSize lhs, BitSize rhs)
             => lhs.Count % rhs.Count;
-
-        [MethodImpl(Inline)]
-        public BitSize(uint bits)
-            => Count = bits;
-
-        public ByteSize Bytes
-        {
-            [MethodImpl(Inline)]
-            get => Count/8;
-        }
-
-        [MethodImpl(Inline)]
-        public bool Equals(BitSize rhs)
-            => Count == rhs.Count;
-
-        public override string ToString()
-            => Count.ToString();
-
-        public override int GetHashCode()
-            => (int)Count;
-
-        public override bool Equals(object obj)
-            => obj is BitSize x && Equals(x);
-
-        /// <summary>
-        /// The bit with no size
-        /// </summary>
-        public static BitSize Empty
-            => default;
     }
 }

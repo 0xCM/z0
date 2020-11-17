@@ -12,7 +12,7 @@ namespace Z0
 
     partial class gfp
     {
-        [MethodImpl(Inline), Op, Closures(NumericKind.Floats)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Bit32 gt<T>(T a, T b)
             where T : unmanaged
         {
@@ -21,10 +21,10 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                  return fmath.gt(float64(a), float64(b));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
-        [MethodImpl(Inline), Op, Closures(NumericKind.Floats)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Bit32 gteq<T>(T a, T b)
             where T : unmanaged
         {
@@ -33,7 +33,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                  return fmath.gteq(float64(a), float64(b));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
     }
 }

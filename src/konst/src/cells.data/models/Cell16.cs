@@ -64,7 +64,7 @@ namespace Z0
             => new Cell16((ushort)src);
 
         [MethodImpl(Inline)]
-        Cell16(ushort x)
+        internal Cell16(ushort x)
             => Data = x;
 
         [MethodImpl(Inline)]

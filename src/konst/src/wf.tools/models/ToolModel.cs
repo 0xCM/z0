@@ -7,7 +7,7 @@ namespace Z0
     using System.Runtime.InteropServices;
 
     [Entity, StructLayout(LayoutKind.Sequential)]
-    public struct ToolModel : IDataEntity<ToolModel>
+    public struct ToolModel
     {
         public Name Name;
 

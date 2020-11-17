@@ -13,7 +13,7 @@ namespace Z0
     partial class gfp
     {
         [MethodImpl(Inline), Between, Closures(Closure)]
-        public static Bit32 between<T>(T x, T a, T b)
+        public static bit between<T>(T x, T a, T b)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
@@ -21,7 +21,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return fmath.between(float64(x), float64(a), float64(b));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
     }
 }

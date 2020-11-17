@@ -41,6 +41,148 @@ namespace Z0
             where T : unmanaged, Enum
                 => Enums.scalar<T,uint>(src);
 
+        /// <summary>
+        /// Initializes the vector
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline)]
+        public BitVector24(uint src)
+            => this.Data = src & MaxValue;
+
+        /// <summary>
+        /// Initializes the vector
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline)]
+        public BitVector24(ushort lo, byte hi)
+            => this.Data = (uint)lo | (uint)hi << 16;
+
+        /// <summary>
+        /// Extracts the scalar represented by the vector
+        /// </summary>
+        public readonly uint Scalar
+        {
+            [MethodImpl(Inline)]
+            get => Data;
+        }
+
+        /// <summary>
+        /// The number of bits represented by the vector
+        /// </summary>
+        public readonly int Width
+        {
+            [MethodImpl(Inline)]
+            get => 24;
+        }
+
+        /// <summary>
+        /// The first 8 bits of the vector
+        /// </summary>
+        public BitVector8 Lo8
+        {
+            [MethodImpl(Inline)]
+            get => (byte)Data;
+        }
+
+        /// <summary>
+        /// The middle 8 bits of the vector
+        /// </summary>
+        public BitVector8 Mid8
+        {
+            [MethodImpl(Inline)]
+            get => (byte)(Data >> 8);
+        }
+
+        /// <summary>
+        /// The upper 8 bits of the vector
+        /// </summary>
+        public BitVector8 Hi8
+        {
+            [MethodImpl(Inline)]
+            get => (byte)(Data >> 16);
+        }
+
+        /// <summary>
+        /// The first 16 bits of the vector
+        /// </summary>
+        public BitVector16 Lo16
+        {
+            [MethodImpl(Inline)]
+            get => (ushort)Data;
+        }
+
+        /// <summary>
+        /// The last 16 bits of the vector
+        /// </summary>
+        public BitVector16 Hi16
+        {
+            [MethodImpl(Inline)]
+            get => (ushort)(Data >> 8);
+        }
+
+        /// <summary>
+        /// Presents bitvector content as a bytespan
+        /// </summary>
+        public Span<byte> Bytes
+        {
+            [MethodImpl(Inline)]
+            get => BitVector.bytes(Data).Slice(0,3);
+        }
+
+        /// <summary>
+        /// Returns true if no bits are enabled, false otherwise
+        /// </summary>
+        public readonly bool Empty
+        {
+            [MethodImpl(Inline)]
+            get => Data == 0;
+        }
+
+        /// <summary>
+        /// Returns true if the vector has at least one enabled bit; false otherwise
+        /// </summary>
+        public readonly bool NonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Data != 0;
+        }
+
+        /// <summary>
+        /// Queries/Manipulates index-identified bits
+        /// </summary>
+        public bit this[byte pos]
+        {
+            [MethodImpl(Inline)]
+            get => BitStates.test(Data, pos);
+
+            [MethodImpl(Inline)]
+            set => Data = BitStates.set(Data, pos, value);
+       }
+
+        /// <summary>
+        /// Selects a contiguous range of bits defined by an inclusive 0-based index range
+        /// </summary>
+        /// <param name="first">The position of the first bit</param>
+        /// <param name="last">The position of the last bit</param>
+        public BitVector24 this[byte first, byte last]
+        {
+            [MethodImpl(Inline)]
+            get =>  Bits.extract(Data, first, last);
+        }
+
+        [MethodImpl(Inline)]
+        public bool Equals(BitVector24 y)
+            => Data == y.Data;
+
+        public override bool Equals(object obj)
+            => obj is BitVector24 x ? Equals(x) : false;
+
+        public override int GetHashCode()
+            => Data.GetHashCode();
+
+        public override string ToString()
+            => Data.ToBitString(24).Format();
+
         [MethodImpl(Inline)]
         public static implicit operator BitVector64(BitVector24 src)
             => BitVector.create(n64,src.Data);
@@ -182,7 +324,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The ource operand</param>
         [MethodImpl(Inline)]
-        public static Bit32 operator !(BitVector24 src)
+        public static bit operator !(BitVector24 src)
             => src.Empty;
 
         /// <summary>
@@ -191,7 +333,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Bit32 operator ==(BitVector24 x, BitVector24 y)
+        public static bit operator ==(BitVector24 x, BitVector24 y)
             => x.Data == y.Data;
 
         /// <summary>
@@ -200,7 +342,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Bit32 operator !=(BitVector24 x, BitVector24 y)
+        public static bit operator !=(BitVector24 x, BitVector24 y)
             => x.Data != y.Data;
 
         /// <summary>
@@ -209,7 +351,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Bit32 operator <(BitVector24 x, BitVector24 y)
+        public static bit operator <(BitVector24 x, BitVector24 y)
             => math.lt(x,y);
 
         /// <summary>
@@ -218,7 +360,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Bit32 operator >(BitVector24 x, BitVector24 y)
+        public static bit operator >(BitVector24 x, BitVector24 y)
             => math.gt(x,y);
 
         /// <summary>
@@ -227,7 +369,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Bit32 operator <=(BitVector24 x, BitVector24 y)
+        public static bit operator <=(BitVector24 x, BitVector24 y)
             => math.lteq(x,y);
 
         /// <summary>
@@ -236,152 +378,8 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Bit32 operator >=(BitVector24 x, BitVector24 y)
+        public static bit operator >=(BitVector24 x, BitVector24 y)
             => math.gteq(x,y);
 
-        /// <summary>
-        /// Initializes the vector
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        public BitVector24(uint src)
-            => this.Data = src & MaxValue;
-
-        /// <summary>
-        /// Initializes the vector
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        public BitVector24(ushort lo, byte hi)
-            => this.Data = (uint)lo | (uint)hi << 16;
-
-        /// <summary>
-        /// Extracts the scalar represented by the vector
-        /// </summary>
-        public readonly uint Scalar
-        {
-            [MethodImpl(Inline)]
-            get => Data;
-        }
-
-        /// <summary>
-        /// The number of bits represented by the vector
-        /// </summary>
-        public readonly int Width
-        {
-            [MethodImpl(Inline)]
-            get => 24;
-        }
-
-        /// <summary>
-        /// The first 8 bits of the vector
-        /// </summary>
-        public BitVector8 Lo8
-        {
-            [MethodImpl(Inline)]
-            get => (byte)Data;
-        }
-
-        /// <summary>
-        /// The middle 8 bits of the vector
-        /// </summary>
-        public BitVector8 Mid8
-        {
-            [MethodImpl(Inline)]
-            get => (byte)(Data >> 8);
-        }
-
-        /// <summary>
-        /// The upper 8 bits of the vector
-        /// </summary>
-        public BitVector8 Hi8
-        {
-            [MethodImpl(Inline)]
-            get => (byte)(Data >> 16);
-        }
-
-        /// <summary>
-        /// The first 16 bits of the vector
-        /// </summary>
-        public BitVector16 Lo16
-        {
-            [MethodImpl(Inline)]
-            get => (ushort)Data;
-        }
-
-        /// <summary>
-        /// The last 16 bits of the vector
-        /// </summary>
-        public BitVector16 Hi16
-        {
-            [MethodImpl(Inline)]
-            get => (ushort)(Data >> 8);
-        }
-
-        /// <summary>
-        /// Presents bitvector content as a bytespan
-        /// </summary>
-        public Span<byte> Bytes
-        {
-            [MethodImpl(Inline)]
-            get => BitVector.bytes(Data).Slice(0,3);
-        }
-
-        /// <summary>
-        /// Returns true if no bits are enabled, false otherwise
-        /// </summary>
-        public readonly bool Empty
-        {
-            [MethodImpl(Inline)]
-            get => Data == 0;
-        }
-
-        /// <summary>
-        /// Returns true if the vector has at least one enabled bit; false otherwise
-        /// </summary>
-        public readonly bool NonEmpty
-        {
-            [MethodImpl(Inline)]
-            get => Data != 0;
-        }
-
-        /// <summary>
-        /// Queries/Manipulates index-identified bits
-        /// </summary>
-        public Bit32 this[int pos]
-        {
-            [MethodImpl(Inline)]
-            get => Bit32.test(Data, pos);
-
-            [MethodImpl(Inline)]
-            set => Data = Bit32.set(Data, (byte)pos, value);
-       }
-
-        /// <summary>
-        /// Selects a contiguous range of bits defined by an inclusive 0-based index range
-        /// </summary>
-        /// <param name="first">The position of the first bit</param>
-        /// <param name="last">The position of the last bit</param>
-        /// <remarks>Unfortuantely, the range spec/select syntanx [a..b] results in about 50 extra bytes
-        /// of assembly (!) of the jmp/cmp/test variety. So, defining a range operator for
-        /// performance-sensitive types is hard no-go </remarks>
-        public BitVector24 this[byte first, byte last]
-        {
-            [MethodImpl(Inline)]
-            get =>  Bits.extract(Data, first, last);
-        }
-
-        [MethodImpl(Inline)]
-        public bool Equals(BitVector24 y)
-            => Data == y.Data;
-
-        public override bool Equals(object obj)
-            => obj is BitVector24 x ? Equals(x) : false;
-
-        public override int GetHashCode()
-            => Data.GetHashCode();
-
-        public override string ToString()
-            => Data.ToBitString(24).Format();
     }
 }

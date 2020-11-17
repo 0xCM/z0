@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public struct Cell<T>
+    public struct Cell<T> : IDataCell<Cell<T>>
         where T : struct, IDataCell<T>
     {
         T Content;
@@ -18,6 +18,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public Cell(T src)
             => Content = src;
+
+        [MethodImpl(Inline)]
+        public string Format()
+            => Content.Format();
 
         [MethodImpl(Inline)]
         public static ref Cell<T> assign(in T src, ref Cell<T> dst)

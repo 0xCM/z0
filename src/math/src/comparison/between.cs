@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-        
+
     partial class math
     {
         /// <summary>
@@ -14,9 +14,9 @@ namespace Z0
         /// </summary>
         /// <param name="src">The test value</param>
         /// <param name="min">The inclusive lower bound</param>
-        /// <param name="max">The inclusive uppper bound</param>
+        /// <param name="max">The inclusive upper bound</param>
         [MethodImpl(Inline), Between]
-        public static bool between(byte src, byte min, byte max)    
+        public static bool between(byte src, byte min, byte max)
             => src >= min && src <= max;
 
         /// <summary>
@@ -24,9 +24,9 @@ namespace Z0
         /// </summary>
         /// <param name="src">The test value</param>
         /// <param name="min">The inclusive lower bound</param>
-        /// <param name="max">The inclusive uppper bound</param>
+        /// <param name="max">The inclusive upper bound</param>
         [MethodImpl(Inline), Between]
-        public static bool between(sbyte src, sbyte min, sbyte max)    
+        public static bool between(sbyte src, sbyte min, sbyte max)
             => src >= min && src <= max;
 
         /// <summary>
@@ -34,9 +34,9 @@ namespace Z0
         /// </summary>
         /// <param name="src">The test value</param>
         /// <param name="min">The inclusive lower bound</param>
-        /// <param name="max">The inclusive uppper bound</param>
+        /// <param name="max">The inclusive upper bound</param>
         [MethodImpl(Inline), Between]
-        public static bool between(short src, short min, short max)    
+        public static bool between(short src, short min, short max)
             => src >= min && src <= max;
 
         /// <summary>
@@ -44,9 +44,9 @@ namespace Z0
         /// </summary>
         /// <param name="src">The test value</param>
         /// <param name="min">The inclusive lower bound</param>
-        /// <param name="max">The inclusive uppper bound</param>
+        /// <param name="max">The inclusive upper bound</param>
         [MethodImpl(Inline), Between]
-        public static bool between(ushort src, ushort min, ushort max)    
+        public static bool between(ushort src, ushort min, ushort max)
             => src >= min && src <= max;
 
         /// <summary>
@@ -54,9 +54,9 @@ namespace Z0
         /// </summary>
         /// <param name="src">The test value</param>
         /// <param name="min">The inclusive lower bound</param>
-        /// <param name="max">The inclusive uppper bound</param>
+        /// <param name="max">The inclusive upper bound</param>
         [MethodImpl(Inline), Between]
-        public static bool between(int src, int min, int max)    
+        public static bool between(int src, int min, int max)
             => src >= min && src <= max;
 
         /// <summary>
@@ -64,9 +64,9 @@ namespace Z0
         /// </summary>
         /// <param name="src">The test value</param>
         /// <param name="min">The inclusive lower bound</param>
-        /// <param name="max">The inclusive uppper bound</param>
+        /// <param name="max">The inclusive upper bound</param>
         [MethodImpl(Inline), Between]
-        public static bool between(uint src, uint min, uint max)    
+        public static bool between(uint src, uint min, uint max)
             => src >= min && src <= max;
 
         /// <summary>
@@ -74,9 +74,9 @@ namespace Z0
         /// </summary>
         /// <param name="src">The test value</param>
         /// <param name="min">The inclusive lower bound</param>
-        /// <param name="max">The inclusive uppper bound</param>
+        /// <param name="max">The inclusive upper bound</param>
         [MethodImpl(Inline), Between]
-        public static bool between(long src, long min, long max)    
+        public static bool between(long src, long min, long max)
             => src >= min && src <= max;
 
         /// <summary>
@@ -84,9 +84,9 @@ namespace Z0
         /// </summary>
         /// <param name="src">The test value</param>
         /// <param name="min">The inclusive lower bound</param>
-        /// <param name="max">The inclusive uppper bound</param>
+        /// <param name="max">The inclusive upper bound</param>
         [MethodImpl(Inline), Between]
-        public static bool between(ulong src, ulong min, ulong max)    
+        public static bool between(ulong src, ulong min, ulong max)
             => src >= min && src <= max;
     }
 }

@@ -25,6 +25,137 @@ namespace Z0
 
         public static N64 N => default;
 
+
+        /// <summary>
+        /// Initializes a vector with the primal source value it represents
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline)]
+        public BitVector64(ulong data)
+            => this.Data = data;
+
+        /// <summary>
+        /// Extracts the scalar represented by the vector
+        /// </summary>
+        public readonly ulong Scalar
+        {
+            [MethodImpl(Inline)]
+            get => Data;
+        }
+
+        /// <summary>
+        /// The actual number of bits represented by the vector
+        /// </summary>
+        public readonly int Width
+        {
+            [MethodImpl(Inline)]
+            get => 64;
+        }
+
+        /// <summary>
+        /// Presents bitvector content as a bytespan
+        /// </summary>
+        public Span<byte> Bytes
+        {
+            [MethodImpl(Inline)]
+            get => BitVector.bytes(Data);
+        }
+
+        /// <summary>
+        /// Returns true if no bits are enabled, false otherwise
+        /// </summary>
+        public readonly Bit32 Empty
+        {
+            [MethodImpl(Inline)]
+            get => Data == 0;
+        }
+
+        /// <summary>
+        /// Returns true if the vector has at least one enabled bit; false otherwise
+        /// </summary>
+        public readonly Bit32 NonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Data != 0;
+        }
+
+        /// <summary>
+        /// Tests whether all bits are on
+        /// </summary>
+        public readonly bool AllOn
+        {
+            [MethodImpl(Inline)]
+            get => (UInt64.MaxValue & Data) == UInt64.MaxValue;
+        }
+
+        /// <summary>
+        /// The vector's 32 least significant bits
+        /// </summary>
+        public readonly BitVector32 Lo
+        {
+            [MethodImpl(Inline)]
+            get => BitVector.create(n32, (uint)Data);
+        }
+
+        /// <summary>
+        /// The vector's 32 most significant bits
+        /// </summary>
+        public readonly BitVector32 Hi
+        {
+            [MethodImpl(Inline)]
+            get => BitVector.create(n32,(uint)(Data >> 32));
+        }
+
+        /// <summary>
+        /// Reads/Manipulates a source bit at a specified position
+        /// </summary>
+        public Bit32 this[int index]
+        {
+            [MethodImpl(Inline)]
+            get => Bit32.test(Data, index);
+
+            [MethodImpl(Inline)]
+            set => Data = Bit32.set(Data, (byte)index, value);
+        }
+
+        /// <summary>
+        /// Selects a contiguous range of bits
+        /// </summary>
+        /// <param name="first">The position of the first bit</param>
+        /// <param name="last">The position of the last bit</param>
+        public BitVector64 this[byte first, byte last]
+        {
+            [MethodImpl(Inline)]
+            get => BitVector.segment(this,first, last);
+        }
+
+        /// <summary>
+        /// Selects an index-identified byte where index = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7
+        /// </summary>
+        /// <param name="index">The 0-based byte-relative position</param>
+        [MethodImpl(Inline)]
+        public ref byte Byte(int index)
+            => ref Bytes[index];
+
+        [MethodImpl(Inline)]
+        public readonly bool Equals(BitVector64 y)
+            => Data == y.Data;
+
+        public override bool Equals(object obj)
+            => obj is BitVector64 x && Equals(x);
+
+        public override int GetHashCode()
+            => Data.GetHashCode();
+
+        public string Format(BitFormat config)
+            => BitVector.format(this,config);
+
+         public string Format()
+            => BitVector.format(this);
+
+        public override string ToString()
+            => Format();
+
         [MethodImpl(Inline)]
         public static implicit operator BitVector<ulong>(BitVector64 src)
             => src.Data;
@@ -280,135 +411,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Bit32 operator >=(BitVector64 x, BitVector64 y)
             => math.gteq(x,y);
-
-        /// <summary>
-        /// Initializes a vector with the primal source value it represents
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        public BitVector64(ulong data)
-            => this.Data = data;
-
-        /// <summary>
-        /// Extracts the scalar represented by the vector
-        /// </summary>
-        public readonly ulong Scalar
-        {
-            [MethodImpl(Inline)]
-            get => Data;
-        }
-
-        /// <summary>
-        /// The actual number of bits represented by the vector
-        /// </summary>
-        public readonly int Width
-        {
-            [MethodImpl(Inline)]
-            get => 64;
-        }
-
-        /// <summary>
-        /// Presents bitvector content as a bytespan
-        /// </summary>
-        public Span<byte> Bytes
-        {
-            [MethodImpl(Inline)]
-            get => BitVector.bytes(Data);
-        }
-
-        /// <summary>
-        /// Returns true if no bits are enabled, false otherwise
-        /// </summary>
-        public readonly Bit32 Empty
-        {
-            [MethodImpl(Inline)]
-            get => Data == 0;
-        }
-
-        /// <summary>
-        /// Returns true if the vector has at least one enabled bit; false otherwise
-        /// </summary>
-        public readonly Bit32 NonEmpty
-        {
-            [MethodImpl(Inline)]
-            get => Data != 0;
-        }
-
-        /// <summary>
-        /// Tests whether all bits are on
-        /// </summary>
-        public readonly bool AllOn
-        {
-            [MethodImpl(Inline)]
-            get => (UInt64.MaxValue & Data) == UInt64.MaxValue;
-        }
-
-        /// <summary>
-        /// The vector's 32 least significant bits
-        /// </summary>
-        public readonly BitVector32 Lo
-        {
-            [MethodImpl(Inline)]
-            get => BitVector.create(n32, (uint)Data);
-        }
-
-        /// <summary>
-        /// The vector's 32 most significant bits
-        /// </summary>
-        public readonly BitVector32 Hi
-        {
-            [MethodImpl(Inline)]
-            get => BitVector.create(n32,(uint)(Data >> 32));
-        }
-
-        /// <summary>
-        /// Reads/Manipulates a source bit at a specified position
-        /// </summary>
-        public Bit32 this[int index]
-        {
-            [MethodImpl(Inline)]
-            get => Bit32.test(Data, index);
-
-            [MethodImpl(Inline)]
-            set => Data = Bit32.set(Data, (byte)index, value);
-        }
-
-        /// <summary>
-        /// Selects a contiguous range of bits
-        /// </summary>
-        /// <param name="first">The position of the first bit</param>
-        /// <param name="last">The position of the last bit</param>
-        public BitVector64 this[byte first, byte last]
-        {
-            [MethodImpl(Inline)]
-            get => BitVector.bitseg(this,first, last);
-        }
-
-        /// <summary>
-        /// Selects an index-identified byte where index = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7
-        /// </summary>
-        /// <param name="index">The 0-based byte-relative position</param>
-        [MethodImpl(Inline)]
-        public ref byte Byte(int index)
-            => ref Bytes[index];
-
-        [MethodImpl(Inline)]
-        public readonly bool Equals(BitVector64 y)
-            => Data == y.Data;
-
-        public override bool Equals(object obj)
-            => obj is BitVector64 x && Equals(x);
-
-        public override int GetHashCode()
-            => Data.GetHashCode();
-
-        public string Format(BitFormat config)
-            => BitVector.format(this,config);
-
-         public string Format()
-            => BitVector.format(this);
-
-        public override string ToString()
-            => Format();
    }
 }

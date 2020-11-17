@@ -10,6 +10,12 @@ namespace Z0
     using static Konst;
     using static z;
 
+    public interface ICellBits<T>
+        where T : struct, IDataCell<T>
+    {
+
+    }
+
     public interface IScalarBits<T>
         where T : unmanaged
     {

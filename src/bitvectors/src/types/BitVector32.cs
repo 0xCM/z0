@@ -34,6 +34,117 @@ namespace Z0
 
         public static N32 N => default;
 
+
+        /// <summary>
+        /// Initializes the vector with the source value it represents
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline)]
+        public BitVector32(uint src)
+            => this.Data = src;
+
+        /// <summary>
+        /// Extracts the scalar represented by the vector
+        /// </summary>
+        public readonly uint Scalar
+        {
+            [MethodImpl(Inline)]
+            get => Data;
+        }
+
+        /// <summary>
+        /// The number of bits represented by the vector
+        /// </summary>
+        public readonly int Width
+        {
+            [MethodImpl(Inline)]
+            get => 32;
+        }
+
+        public BitVector16 Lo
+        {
+            [MethodImpl(Inline)]
+            get => (ushort)Bits.lo(Data);
+        }
+
+        public BitVector16 Hi
+        {
+            [MethodImpl(Inline)]
+            get => (ushort)Bits.hi(Data);
+        }
+
+        /// <summary>
+        /// Presents bitvector content as a bytespan
+        /// </summary>
+        public Span<byte> Bytes
+        {
+            [MethodImpl(Inline)]
+            get => BitVector.bytes(Data);
+        }
+
+        /// <summary>
+        /// Returns true if no bits are enabled, false otherwise
+        /// </summary>
+        public readonly bool Empty
+        {
+            [MethodImpl(Inline)]
+            get => Data == 0;
+        }
+
+        /// <summary>
+        /// Returns true if the vector has at least one enabled bit; false otherwise
+        /// </summary>
+        public readonly bool NonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Data != 0;
+        }
+
+        /// <summary>
+        /// Queries/Manipulates index-identified bits
+        /// </summary>
+        public Bit32 this[int pos]
+        {
+            [MethodImpl(Inline)]
+            get => Bit32.test(Data, pos);
+
+            [MethodImpl(Inline)]
+            set => Data = Bit32.set(Data, (byte)pos, value);
+       }
+
+        /// <summary>
+        /// Selects a contiguous range of bits defined by an inclusive 0-based index range
+        /// </summary>
+        /// <param name="first">The position of the first bit</param>
+        /// <param name="last">The position of the last bit</param>
+        /// <remarks>Unfortuantely, the range spec/select syntanx [a..b] results in about 50 extra bytes
+        /// of assembly (!) of the jmp/cmp/test variety. So, defining a range operator for
+        /// performance-sensitive types is hard no-go </remarks>
+        public BitVector32 this[byte first, byte last]
+        {
+            [MethodImpl(Inline)]
+            get =>  Bits.extract(Data, first, last);
+        }
+
+        [MethodImpl(Inline)]
+        public bool Equals(BitVector32 y)
+            => Data == y.Data;
+
+        public override bool Equals(object obj)
+            => obj is BitVector32 x ? Equals(x) : false;
+
+        public override int GetHashCode()
+            => Data.GetHashCode();
+
+         public string Format(BitFormat config)
+            => BitVector.format(this,config);
+
+        public string Format()
+            => BitVector.format(this);
+
+        public override string ToString()
+            => Format();
+
         [MethodImpl(Inline)]
         public static implicit operator BitVector<uint>(BitVector32 src)
             => src.Data;
@@ -261,115 +372,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Bit32 operator >=(BitVector32 x, BitVector32 y)
             => math.gteq(x,y);
-
-        /// <summary>
-        /// Initializes the vector with the source value it represents
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        public BitVector32(uint src)
-            => this.Data = src;
-
-        /// <summary>
-        /// Extracts the scalar represented by the vector
-        /// </summary>
-        public readonly uint Scalar
-        {
-            [MethodImpl(Inline)]
-            get => Data;
-        }
-
-        /// <summary>
-        /// The number of bits represented by the vector
-        /// </summary>
-        public readonly int Width
-        {
-            [MethodImpl(Inline)]
-            get => 32;
-        }
-
-        public BitVector16 Lo
-        {
-            [MethodImpl(Inline)]
-            get => (ushort)Bits.lo(Data);
-        }
-
-        public BitVector16 Hi
-        {
-            [MethodImpl(Inline)]
-            get => (ushort)Bits.hi(Data);
-        }
-
-        /// <summary>
-        /// Presents bitvector content as a bytespan
-        /// </summary>
-        public Span<byte> Bytes
-        {
-            [MethodImpl(Inline)]
-            get => BitVector.bytes(Data);
-        }
-
-        /// <summary>
-        /// Returns true if no bits are enabled, false otherwise
-        /// </summary>
-        public readonly bool Empty
-        {
-            [MethodImpl(Inline)]
-            get => Data == 0;
-        }
-
-        /// <summary>
-        /// Returns true if the vector has at least one enabled bit; false otherwise
-        /// </summary>
-        public readonly bool NonEmpty
-        {
-            [MethodImpl(Inline)]
-            get => Data != 0;
-        }
-
-        /// <summary>
-        /// Queries/Manipulates index-identified bits
-        /// </summary>
-        public Bit32 this[int pos]
-        {
-            [MethodImpl(Inline)]
-            get => Bit32.test(Data, pos);
-
-            [MethodImpl(Inline)]
-            set => Data = Bit32.set(Data, (byte)pos, value);
-       }
-
-        /// <summary>
-        /// Selects a contiguous range of bits defined by an inclusive 0-based index range
-        /// </summary>
-        /// <param name="first">The position of the first bit</param>
-        /// <param name="last">The position of the last bit</param>
-        /// <remarks>Unfortuantely, the range spec/select syntanx [a..b] results in about 50 extra bytes
-        /// of assembly (!) of the jmp/cmp/test variety. So, defining a range operator for
-        /// performance-sensitive types is hard no-go </remarks>
-        public BitVector32 this[byte first, byte last]
-        {
-            [MethodImpl(Inline)]
-            get =>  Bits.extract(Data, first, last);
-        }
-
-        [MethodImpl(Inline)]
-        public bool Equals(BitVector32 y)
-            => Data == y.Data;
-
-        public override bool Equals(object obj)
-            => obj is BitVector32 x ? Equals(x) : false;
-
-        public override int GetHashCode()
-            => Data.GetHashCode();
-
-         public string Format(BitFormat config)
-            => BitVector.format(this,config);
-
-        public string Format()
-            => BitVector.format(this);
-
-        public override string ToString()
-            => Format();
    }
 }

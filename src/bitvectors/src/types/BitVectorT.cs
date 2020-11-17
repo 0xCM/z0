@@ -251,7 +251,7 @@ namespace Z0
         /// <summary>
         /// Specifies whether all bits are disabled
         /// </summary>
-        public Bit32 Empty
+        public bit Empty
         {
             [MethodImpl(Inline)]
             get => !gmath.nonz(Data);
@@ -260,7 +260,7 @@ namespace Z0
         /// <summary>
         /// Specifies whether at least one bit is enabled
         /// </summary>
-        public readonly Bit32 NonEmpty
+        public readonly bit NonEmpty
         {
             [MethodImpl(Inline)]
             get => gmath.nonz(Data);
@@ -269,26 +269,15 @@ namespace Z0
         /// <summary>
         /// Reads/Manipulates a single bit
         /// </summary>
-        public Bit32 this[int index]
+        public bit this[int index]
         {
             [MethodImpl(Inline)]
             get => gbits.testbit32(Data, (byte)index);
 
             [MethodImpl(Inline)]
-            set => Data = gbits.setbit(Data, index, value);
+            set => Data = gbits.setbit(Data, (byte)index, value);
         }
 
-        /// <summary>
-        /// Reads/Manipulates a single bit
-        /// </summary>
-        public Bit32 this[byte index]
-        {
-            [MethodImpl(Inline)]
-            get => gbits.testbit32(Data, (byte)index);
-
-            [MethodImpl(Inline)]
-            set => Data = gbits.setbit(Data, index, value);
-        }
 
         /// <summary>
         /// Extracts a contiguous sequence of bits defined by an inclusive range
@@ -298,7 +287,7 @@ namespace Z0
         public BitVector<T> this[byte first, byte last]
         {
             [MethodImpl(Inline)]
-            get => BitVector.bitseg(this, first, last);
+            get => BitVector.segment(this, first, last);
         }
 
         [MethodImpl(Inline)]

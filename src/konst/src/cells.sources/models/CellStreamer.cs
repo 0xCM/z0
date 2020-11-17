@@ -30,7 +30,7 @@ namespace Z0
         public CellStreamer(IValueSource src, Interval<T> domain)
         {
             Source = src;
-            Width = (CellWidth)default(F).BitWidth;
+            Width = (CellWidth)default(F).Width;
             Kind = typeof(T).NumericKind();
             CellDomain = domain;
             ValueEmitter = CreateEmitter(src, Width, Kind);

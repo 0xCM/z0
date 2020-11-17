@@ -22,6 +22,89 @@ namespace Z0
 
         public static BitVector4 Ones => 0xF;
 
+
+        [MethodImpl(Inline)]
+        internal BitVector4(byte data, Bit32 direct)
+            => this.Data = data;
+
+        [MethodImpl(Inline)]
+        public BitVector4(byte data)
+            => this.Data = (byte)(data & 0xF);
+
+        /// <summary>
+        /// Extracts the scalar represented by the vector
+        /// </summary>
+        public byte Scalar
+        {
+            [MethodImpl(Inline)]
+            get => Data;
+        }
+
+        /// <summary>
+        /// The number of bits represented by the vector
+        /// </summary>
+        public readonly int Width
+        {
+            [MethodImpl(Inline)]
+            get => 4;
+        }
+
+        /// <summary>
+        /// Returns true if all bits are disabled, false otherwise
+        /// </summary>
+        public readonly Bit32 Empty
+        {
+            [MethodImpl(Inline)]
+            get => Data == 0;
+        }
+
+        /// <summary>
+        /// Returns true if at least one bit is enabled, false otherwise
+        /// </summary>
+        public readonly Bit32 NonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Data != 0;
+        }
+
+        public bool AllOn
+        {
+            [MethodImpl(Inline)]
+            get => (0xF & Data) == 0xF;
+        }
+
+        public Bit32 this[byte pos]
+        {
+            [MethodImpl(Inline)]
+            get => (Data & (1 << pos)) != 0;
+
+            [MethodImpl(Inline)]
+            set => Data = Bit32.set(Data, pos, value);
+        }
+
+        public BitVector4 this[byte first, byte last]
+        {
+            [MethodImpl(Inline)]
+            get => BitVector.segment(this,first,last);
+        }
+
+        [MethodImpl(Inline)]
+        public bool Equals(in BitVector4 y)
+            => Data == y.Data;
+
+        [MethodImpl(Inline)]
+        public bool Equals(BitVector4 other)
+            => Data == other.Data;
+
+        public override bool Equals(object obj)
+            => obj is BitVector4 x  && Equals(x);
+
+        public override int GetHashCode()
+            => Data.GetHashCode();
+
+        public override string ToString()
+            => this.Format();
+
         [MethodImpl(Inline)]
         public static implicit operator BitVector4(byte src)
             => new BitVector4(src);
@@ -169,87 +252,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Bit32 operator >=(BitVector4 x, BitVector4 y)
             => math.gteq(x,y);
-
-        [MethodImpl(Inline)]
-        internal BitVector4(byte data, Bit32 direct)
-            => this.Data = data;
-
-        [MethodImpl(Inline)]
-        public BitVector4(byte data)
-            => this.Data = (byte)(data & 0xF);
-
-        /// <summary>
-        /// Extracts the scalar represented by the vector
-        /// </summary>
-        public byte Scalar
-        {
-            [MethodImpl(Inline)]
-            get => Data;
-        }
-
-        /// <summary>
-        /// The number of bits represented by the vector
-        /// </summary>
-        public readonly int Width
-        {
-            [MethodImpl(Inline)]
-            get => 4;
-        }
-
-        /// <summary>
-        /// Returns true if all bits are disabled, false otherwise
-        /// </summary>
-        public readonly Bit32 Empty
-        {
-            [MethodImpl(Inline)]
-            get => Data == 0;
-        }
-
-        /// <summary>
-        /// Returns true if at least one bit is enabled, false otherwise
-        /// </summary>
-        public readonly Bit32 NonEmpty
-        {
-            [MethodImpl(Inline)]
-            get => Data != 0;
-        }
-
-        public bool AllOn
-        {
-            [MethodImpl(Inline)]
-            get => (0xF & Data) == 0xF;
-        }
-
-        public Bit32 this[byte pos]
-        {
-            [MethodImpl(Inline)]
-            get => (Data & (1 << pos)) != 0;
-
-            [MethodImpl(Inline)]
-            set => Data = Bit32.set(Data, pos, value);
-        }
-
-        public BitVector4 this[byte first, byte last]
-        {
-            [MethodImpl(Inline)]
-            get => BitVector.bitseg(this,first,last);
-        }
-
-        [MethodImpl(Inline)]
-        public bool Equals(in BitVector4 y)
-            => Data == y.Data;
-
-        [MethodImpl(Inline)]
-        public bool Equals(BitVector4 other)
-            => Data == other.Data;
-
-        public override bool Equals(object obj)
-            => obj is BitVector4 x  && Equals(x);
-
-        public override int GetHashCode()
-            => Data.GetHashCode();
-
-        public override string ToString()
-            => this.Format();
     }
 }

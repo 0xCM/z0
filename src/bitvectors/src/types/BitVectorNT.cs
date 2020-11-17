@@ -52,6 +52,111 @@ namespace Z0
             => new BitVector<N,T>(src, true);
 
         /// <summary>
+        /// Initializes a bitvector with the lo N bits of a scalar source
+        /// </summary>
+        /// <param name="data">The scalar source value</param>
+        [MethodImpl(Inline)]
+        internal BitVector(T data)
+            => this.Data = gmath.and(BitMasks.lo<N,T>(), data);
+
+        [MethodImpl(Inline)]
+        BitVector(T data, Bit32 inject)
+            => this.Data = data;
+
+        /// <summary>
+        /// The scalar representation of the vector
+        /// </summary>
+        public T Scalar
+        {
+            [MethodImpl(Inline)]
+            get => Data;
+        }
+
+        /// <summary>
+        /// The bitvector width
+        /// </summary>
+        public int Width
+        {
+            [MethodImpl(Inline)]
+            get => (int)TypeNats.value<N>();
+        }
+
+        /// <summary>
+        /// Specifies whether all bits are disabled
+        /// </summary>
+        public Bit32 Empty
+        {
+            [MethodImpl(Inline)]
+            get => !gmath.nonz(Data);
+        }
+
+        /// <summary>
+        /// Specifies whether at least one bit is enabled
+        /// </summary>
+        public readonly Bit32 NonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => gmath.nonz(Data);
+        }
+
+        public Span<byte> Bytes
+        {
+            [MethodImpl(Inline)]
+            get => BitVector.bytes(Data);
+        }
+
+        /// <summary>
+        /// Reads/Manipulates a single bit
+        /// </summary>
+        public Bit32 this[int index]
+        {
+            [MethodImpl(Inline)]
+            get => gbits.testbit32(Data, (byte)index);
+
+            [MethodImpl(Inline)]
+            set => Data = gbits.setbit(Data, (byte)index, value);
+        }
+
+        /// <summary>
+        /// Extracts a contiguous sequence of bits defined by an inclusive range
+        /// </summary>
+        /// <param name="first">The first bit position</param>
+        /// <param name="last">The last bit position</param>
+        public BitVector<N,T> this[byte first, byte last]
+        {
+            [MethodImpl(Inline)]
+            get => gbits.extract(Data, first, last);
+        }
+
+        [MethodImpl(Inline)]
+        public readonly bool Equals(BitVector<N,T> y)
+            => gmath.eq(Data, y.Data);
+
+        /// <summary>
+        /// Creates a new vector by converting the underlying cell to the target type
+        /// </summary>
+        /// <typeparam name="U">The target type</typeparam>
+        [MethodImpl(Inline)]
+        public BitVector<N,U> As<U>()
+            where U : unmanaged
+                => force<T,U>(Data);
+
+        public readonly override bool Equals(object obj)
+            => obj is BitVector<N,T> x && Equals(x);
+
+        public readonly override int GetHashCode()
+            => Data.GetHashCode();
+
+        public string Format(BitFormat config)
+            => BitVector.format(this,config);
+
+        public string Format()
+            => BitVector.format(this);
+
+        public override string ToString()
+            => Format();
+
+        /// <summary>
         /// Implicitly convers a scalar to a bitvector
         /// </summary>
         /// <param name="src">The scalar value</param>
@@ -76,7 +181,7 @@ namespace Z0
             => new BitVector<T>(src.Data);
 
         /// <summary>
-        /// Computes the bitwias AND between the operands
+        /// Computes the bitwise AND between the operands
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
@@ -85,7 +190,7 @@ namespace Z0
             => BitVector.and(x,y);
 
         /// <summary>
-        /// Computes the bitwias AND between the operands
+        /// Computes the bitwise AND between the operands
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
@@ -183,7 +288,7 @@ namespace Z0
         /// <param name="x">The first vector</param>
         /// <param name="y">The second vector</param>
         [MethodImpl(Inline)]
-        public static Bit32 operator <(BitVector<N,T> x, BitVector<N,T> y)
+        public static bit operator <(BitVector<N,T> x, BitVector<N,T> y)
             => gmath.lt(x.Data, y.Data);
 
         /// <summary>
@@ -192,7 +297,7 @@ namespace Z0
         /// <param name="x">The first vector</param>
         /// <param name="y">The second vector</param>
         [MethodImpl(Inline)]
-        public static Bit32 operator >(BitVector<N,T> x, BitVector<N,T> y)
+        public static bit operator >(BitVector<N,T> x, BitVector<N,T> y)
             => gmath.gt(x.Data, y.Data);
 
         /// <summary>
@@ -201,7 +306,7 @@ namespace Z0
         /// <param name="x">The first vector</param>
         /// <param name="y">The second vector</param>
         [MethodImpl(Inline)]
-        public static Bit32 operator <=(BitVector<N,T> x, BitVector<N,T> y)
+        public static bit operator <=(BitVector<N,T> x, BitVector<N,T> y)
             => gmath.lteq(x.Data, y.Data);
 
         /// <summary>
@@ -210,7 +315,7 @@ namespace Z0
         /// <param name="x">The first vector</param>
         /// <param name="y">The second vector</param>
         [MethodImpl(Inline)]
-        public static Bit32 operator >=(BitVector<N,T> x, BitVector<N,T> y)
+        public static bit operator >=(BitVector<N,T> x, BitVector<N,T> y)
             => gmath.gteq(x.Data, y.Data);
 
         /// <summary>
@@ -235,7 +340,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Bit32 operator ==(BitVector<N,T> x, BitVector<N,T> y)
+        public static bit operator ==(BitVector<N,T> x, BitVector<N,T> y)
             => gmath.eq(x.Data,y.Data);
 
         /// <summary>
@@ -244,112 +349,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Bit32 operator !=(BitVector<N,T> x, BitVector<N,T> y)
+        public static bit operator !=(BitVector<N,T> x, BitVector<N,T> y)
             => gmath.neq(x.Data,y.Data);
-
-        /// <summary>
-        /// Intializes a bitvector with the lo N bits of a scalar source
-        /// </summary>
-        /// <param name="data">The scalar source value</param>
-        [MethodImpl(Inline)]
-        internal BitVector(T data)
-            => this.Data = gmath.and(BitMasks.lo<N,T>(), data);
-
-        [MethodImpl(Inline)]
-        BitVector(T data, Bit32 inject)
-            => this.Data = data;
-
-        /// <summary>
-        /// The scalar representation of the vector
-        /// </summary>
-        public T Scalar
-        {
-            [MethodImpl(Inline)]
-            get => Data;
-        }
-
-        /// <summary>
-        /// The bitvector width
-        /// </summary>
-        public int Width
-        {
-            [MethodImpl(Inline)]
-            get => (int)TypeNats.value<N>();
-        }
-
-        /// <summary>
-        /// Specifies whether all bits are disabled
-        /// </summary>
-        public Bit32 Empty
-        {
-            [MethodImpl(Inline)]
-            get => !gmath.nonz(Data);
-        }
-
-        /// <summary>
-        /// Specifies whether at least one bit is enabled
-        /// </summary>
-        public readonly Bit32 NonEmpty
-        {
-            [MethodImpl(Inline)]
-            get => gmath.nonz(Data);
-        }
-
-        public Span<byte> Bytes
-        {
-            [MethodImpl(Inline)]
-            get => BitVector.bytes(Data);
-        }
-
-        /// <summary>
-        /// Reads/Manipulates a single bit
-        /// </summary>
-        public Bit32 this[int index]
-        {
-            [MethodImpl(Inline)]
-            get => gbits.testbit32(Data, (byte)index);
-
-            [MethodImpl(Inline)]
-            set => Data = gbits.setbit(Data, index, value);
-        }
-
-        /// <summary>
-        /// Extracts a contiguous sequence of bits defined by an inclusive range
-        /// </summary>
-        /// <param name="first">The first bit position</param>
-        /// <param name="last">The last bit position</param>
-        public BitVector<N,T> this[byte first, byte last]
-        {
-            [MethodImpl(Inline)]
-            get => gbits.extract(Data, first, last);
-        }
-
-        [MethodImpl(Inline)]
-        public readonly bool Equals(BitVector<N,T> y)
-            => gmath.eq(Data, y.Data);
-
-        /// <summary>
-        /// Creates a new vector by converting the underlying cell to the target type
-        /// </summary>
-        /// <typeparam name="U">The target type</typeparam>
-        [MethodImpl(Inline)]
-        public BitVector<N,U> As<U>()
-            where U : unmanaged
-                => force<T,U>(Data);
-
-        public readonly override bool Equals(object obj)
-            => obj is BitVector<N,T> x && Equals(x);
-
-        public readonly override int GetHashCode()
-            => Data.GetHashCode();
-
-        public string Format(BitFormat config)
-            => BitVector.format(this,config);
-
-        public string Format()
-            => BitVector.format(this);
-
-        public override string ToString()
-            => Format();
     }
 }

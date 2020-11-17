@@ -12,26 +12,6 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public ref struct CheckMaskCapture
-    {
-
-    }
-
-    public struct MaskCheckResult
-    {
-        public ulong Mask;
-
-        public PrimalKind MaskType;
-
-        public string Text;
-
-        public TableSpan<uint1> Parsed;
-
-        public ulong Converted;
-
-        public bool Identical;
-    }
-
     public readonly struct MaskCaptureCheck<T>
         where T : unmanaged
     {

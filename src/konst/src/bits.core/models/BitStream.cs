@@ -55,6 +55,5 @@ namespace Z0
         public static IEnumerable<bit> from<T>(IEnumerable<T> src)
             where T : struct
                 => from<T>(src.GetEnumerator());
-
     }
 }

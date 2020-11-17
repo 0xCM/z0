@@ -543,6 +543,10 @@ namespace Z0
         public static implicit operator BitState(Bit32 src)
             => (BitState)(byte)src;
 
+        [MethodImpl(Inline), Op]
+        public static implicit operator bit(Bit32 src)
+            => new bit((bool)src);
+
         /// <summary>
         /// Defines an explicit ulong -> bit conversion
         /// </summary>

@@ -19,12 +19,12 @@ namespace Z0
         /// <param name="min">The lower bound</param>
         /// <param name="max">The upper bound</param>
         [MethodImpl(Inline), Between, Closures(Integers)]
-        public static Bit32 between<T>(T src, T min, T max)
+        public static bit between<T>(T src, T min, T max)
             where T : unmanaged
                 => between_u(src,min,max);
 
         [MethodImpl(Inline)]
-        static Bit32 between_u<T>(T x, T min, T max)
+        static bit between_u<T>(T x, T min, T max)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -40,7 +40,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static Bit32 between_i<T>(T x, T min, T max)
+        static bit between_i<T>(T x, T min, T max)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))

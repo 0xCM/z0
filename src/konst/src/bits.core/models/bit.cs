@@ -56,7 +56,58 @@ namespace Z0
         public bit(ulong state)
             => State = state != 0;
 
+
         /// <summary>
+        /// Constructs a disabled bit
+        /// </summary>
+        public static bit Off
+        {
+             [MethodImpl(Inline)]
+             get => false;
+        }
+
+        /// <summary>
+        /// Constructs an enabled bit
+        /// </summary>
+        public static bit On
+        {
+             [MethodImpl(Inline)]
+             get => true;
+        }
+
+        /// <summary>
+        /// Promotes a bit to a numeric value where all target bits are enabled if the state of the
+        /// bit is on; otherwise all target bits are disabled
+        /// </summary>
+        /// <param name="src">The source bit</param>
+        /// <typeparam name="T">The target numeric type</typeparam>
+        [MethodImpl(Inline), Op]
+        public T Promote<T>()
+            where T : unmanaged
+                => this ? NumericLiterals.maxval<T>() : default;
+
+        [MethodImpl(Inline), Op]
+        public bool Equals(bit b)
+            => State == b.State;
+
+        public override bool Equals(object b)
+            => b is bit x && Equals(x);
+
+        public override int GetHashCode()
+            => (int)(u8(State));
+
+        [MethodImpl(Inline), Op]
+        public char ToChar()
+            => (char)(u8(State) + 48);
+
+        [MethodImpl(Inline)]
+        public string Format()
+            => State ? "1" : "0";
+
+        public override string ToString()
+            => Format();
+
+       /// <summary>
         /// Computes the bitwise AND between the operands
         /// </summary>
         /// <param name="a">The left bit</param>
@@ -255,55 +306,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool operator !=(bit a, bit b)
             => a.State != b.State;
-
-        /// <summary>
-        /// Constructs a disabled bit
-        /// </summary>
-        public static bit Off
-        {
-             [MethodImpl(Inline)]
-             get => false;
-        }
-
-        /// <summary>
-        /// Constructs an enabled bit
-        /// </summary>
-        public static bit On
-        {
-             [MethodImpl(Inline)]
-             get => true;
-        }
-
-        /// <summary>
-        /// Promotes a bit to a numeric value where all target bits are enabled if the state of the
-        /// bit is on; otherwise all target bits are disabled
-        /// </summary>
-        /// <param name="src">The source bit</param>
-        /// <typeparam name="T">The target numeric type</typeparam>
-        [MethodImpl(Inline), Op]
-        public T Promote<T>()
-            where T : unmanaged
-                => this ? NumericLiterals.maxval<T>() : default;
-
-        [MethodImpl(Inline), Op]
-        public bool Equals(bit b)
-            => State == b.State;
-
-        public override bool Equals(object b)
-            => b is bit x && Equals(x);
-
-        public override int GetHashCode()
-            => (int)(u8(State));
-
-        [MethodImpl(Inline), Op]
-        public char ToChar()
-            => (char)(u8(State) + 48);
-
-        [MethodImpl(Inline)]
-        public string Format()
-            => State ? "1" : "0";
-
-        public override string ToString()
-            => Format();
     }
 }
