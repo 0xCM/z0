@@ -11,9 +11,17 @@ namespace Z0
     [Free]
     public interface ICmdRouter : IWfService
     {
-        CmdResult Dispatch(ICmdSpec cmd);
-
         IndexedView<CmdId> SupportedCommands {get;}
+
+        CmdResult Process(ICmdSpec cmd);
+
+        CmdResult<T> Process<S,T>(S cmd)
+            where S : struct, ICmdSpec<S>
+            where T : struct;
+
+        ReadOnlySpan<CmdResult<T>> Process<S,T>(ReadOnlySpan<S> src, bool pll)
+            where S : struct, ICmdSpec<S>
+            where T : struct;
     }
 
     [Free]
@@ -22,4 +30,5 @@ namespace Z0
     {
 
     }
+
 }

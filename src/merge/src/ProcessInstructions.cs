@@ -8,10 +8,7 @@ namespace Z0
     using Z0.Asm;
 
     using static InstructionProcessors;
-    using static Konst;
-    using static z;
 
-    [Step]
     public sealed class ProcessInstructions : WfHost<ProcessInstructions,ApiPartRoutines>
     {
         protected override void Execute(IWfShell wf, in ApiPartRoutines state)

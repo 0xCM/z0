@@ -25,7 +25,6 @@ namespace Z0
             return cmd;
         }
 
-        [CmdWorker]
         public static CmdResult run(IWfShell wf, EmitFileListCmd spec)
         {
             var archive = FileArchives.create(spec.SourceDir);

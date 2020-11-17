@@ -14,10 +14,10 @@ namespace Z0
     {
         public string Name {get;}
 
-        public string Value {get;}
+        public object Value {get;}
 
         [MethodImpl(Inline)]
-        public CmdArg(string name, string value)
+        public CmdArg(string name, object value)
         {
             Name = name;
             Value = value;
@@ -33,13 +33,13 @@ namespace Z0
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => text.empty(Name) && text.empty(Value);
+            get => text.empty(Name) && Value is null;
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => text.nonempty(Name) || text.nonempty(Value);
+            get => text.nonempty(Name) || !(Value is null);
         }
 
         [MethodImpl(Inline)]
@@ -52,15 +52,12 @@ namespace Z0
         string ICmdArg.Key
             => Name;
 
-        string ICmdArg.Value
-            => Value;
-
         [MethodImpl(Inline)]
         public static implicit operator CmdArg(Pair<string> src)
             => new CmdArg(src.Left, src.Right);
 
         [MethodImpl(Inline)]
-        public static implicit operator CmdArg((string name, string value) src)
+        public static implicit operator CmdArg((string name, object value) src)
             => new CmdArg(src.name, src.value);
 
         public static CmdArg Empty

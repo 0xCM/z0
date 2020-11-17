@@ -8,11 +8,10 @@ namespace Z0
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-
     [Free]
     public interface IKeyed<T> : ITextual
     {
-        T Key { get; }
+        T Key {get;}
 
         string ITextual.Format()
             => Key?.ToString() ?? string.Empty;

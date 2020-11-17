@@ -11,7 +11,6 @@ namespace Z0
     using static z;
     using static PrimalBits;
 
-    using PK = PrimalKind;
     using NK = PrimalNumericKind;
     using TC = System.TypeCode;
 
@@ -19,8 +18,8 @@ namespace Z0
     public readonly struct ClrPrimitives
     {
         [MethodImpl(Inline), Op]
-        public static PrimalKindInfo describe(PrimalKind src)
-            => new PrimalKindInfo(src, width(src), sign(src), (PrimalTypeCode)code(src));
+        public static ClrPrimitiveRecord describe(PrimalKind src)
+            => new ClrPrimitiveRecord(src, width(src), sign(src), (PrimalTypeCode)code(src));
 
         /// <summary>
         /// Determines the numeric kind, if any, of a system type

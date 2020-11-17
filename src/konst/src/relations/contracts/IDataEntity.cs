@@ -4,14 +4,20 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
+
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface IKeyedTable<F,T,K>
-        where F : unmanaged
-        where T : struct
-        where K : unmanaged
+    public interface IDataEntity
     {
-        K Key {get;}
+        Type EntityType {get;}
+    }
+
+    [Free]
+    public interface IDataEntity<T> : IDataEntity
+        where T : struct, IDataEntity<T>
+    {
+        Type IDataEntity.EntityType => typeof(T);
     }
 }

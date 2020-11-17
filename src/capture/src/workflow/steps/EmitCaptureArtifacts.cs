@@ -12,7 +12,6 @@ namespace Z0
     using static Konst;
     using static z;
 
-    [Step]
     public sealed class EmitCaptureArtifacts : WfHost<EmitCaptureArtifacts>
     {
         protected override void Execute(IWfShell wf)

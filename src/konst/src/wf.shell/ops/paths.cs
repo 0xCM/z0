@@ -10,16 +10,14 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct Cmd
+    partial class WfShell
     {
-        [MethodImpl(Inline)]
-        public static CmdResult ok<T>(T spec)
-            where T : ICmdSpec
-                => new CmdResult(spec.Id, true);
+        [MethodImpl(Inline), Op]
+        public static IWfPaths paths()
+            => new WfPaths(logConfig(controller().Id(), logRoot(), dbRoot()));
 
-        [MethodImpl(Inline)]
-        public static CmdResult ok<T>(T spec, byte[] payload)
-            where T : ICmdSpec
-                => new CmdResult(spec.Id, true, payload);
+        [MethodImpl(Inline), Op]
+        public static IWfPaths<A> paths<A>()
+            => new WfPaths<A>(logConfig(controller<A>().Id(), logRoot(), dbRoot()));
     }
 }

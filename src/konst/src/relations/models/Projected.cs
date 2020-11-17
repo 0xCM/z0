@@ -8,16 +8,22 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static z;
 
-    public struct WfStepInfo
+    public readonly struct Projected<S,T> : IDataFlow<S,T>
     {
-        public WfStepId Id;
+        public S Source {get;}
+
+        public T Target {get;}
 
         [MethodImpl(Inline)]
-        public WfStepInfo(WfStepId id)
+        public Projected(S src, T dst)
         {
-            Id = id;
+            Source = src;
+            Target = dst;
         }
+
+        [MethodImpl(Inline)]
+        public static implicit operator Projected<S,T>(Paired<S,T> src)
+            => new Projected<S,T>(src.Left, src.Right);
     }
 }

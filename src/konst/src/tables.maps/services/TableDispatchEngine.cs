@@ -15,7 +15,7 @@ namespace Z0
     /// </summary>
     readonly ref struct TableDispatchEngine<F,T,K,I,Y>
         where F : unmanaged
-        where T : struct, IKeyedTable<F,T,K>
+        where T : struct, IKeyed<K>
         where K : unmanaged
         where I : unmanaged
     {

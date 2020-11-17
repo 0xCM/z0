@@ -13,7 +13,7 @@ namespace Z0
     {
         CmdId CmdId {get;}
 
-        ValueType Process(ICmdSpec src);
+        CmdResult Invoke(ICmdSpec cmd);
     }
 
     [Free]
@@ -24,10 +24,20 @@ namespace Z0
         CmdId ICmdReactor.CmdId
             => default(S).CmdId;
 
-        T Process(S src);
+        CmdResult<T> Invoke(S src);
 
-        ValueType ICmdReactor.Process(ICmdSpec src)
-            => Process((S)src);
+        CmdResult ICmdReactor.Invoke(ICmdSpec src)
+        {
+            try
+            {
+                Invoke((S)src);
+                return Cmd.ok(src);
+            }
+            catch(Exception e)
+            {
+                return Cmd.fail(src,e);
+            }
+        }
     }
 
     [Free]

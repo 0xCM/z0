@@ -66,13 +66,13 @@ namespace Z0
         public Index(T[] content)
             => Data = content;
 
-        public ref T this[int i]
+        public ref T this[long i]
         {
             [MethodImpl(Inline)]
             get => ref Data[i];
         }
 
-        public ref T this[uint i]
+        public ref T this[ulong i]
         {
             [MethodImpl(Inline)]
             get => ref Data[i];

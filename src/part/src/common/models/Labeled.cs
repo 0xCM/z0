@@ -16,9 +16,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public Labeled(string label)
-        {
-            Label = label;
-        }
+            => Label = label;
 
         public static Labeled Attributed
         {

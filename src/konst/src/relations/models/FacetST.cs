@@ -10,20 +10,20 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct Facet<S,T>
+    public readonly struct Facet<S,T> : IFacet<S,T>
     {
-        public readonly asci32 Name;
+        public S Key {get;}
 
-        public readonly variant Value;
-
-        public static implicit operator Facet<S,T>(Paired<asci32,variant> src)
-            => new Facet<S,T>(src.Left, src.Right);
+        public T Value {get;}
 
         [MethodImpl(Inline)]
-        public Facet(asci32 name, variant value)
+        public Facet(S key, T value)
         {
-            Name = name;
+            Key = key;
             Value = value;
         }
+
+        public static implicit operator Facet<S,T>(Paired<S,T> src)
+            => new Facet<S,T>(src.Left, src.Right);
     }
 }

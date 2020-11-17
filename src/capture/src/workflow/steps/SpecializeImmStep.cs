@@ -13,7 +13,6 @@ namespace Z0.Asm
 
     using static z;
 
-    [Step]
     public sealed class SpecializeImm : WfHost<SpecializeImm>
     {
         protected override void Execute(IWfShell shell)

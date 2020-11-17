@@ -7,8 +7,9 @@ namespace Z0
     using System;
     using System.Reflection;
 
-    using static Konst;
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
+    [Free]
     public interface ICmdModel
     {
         Type DataType {get;}
@@ -16,6 +17,7 @@ namespace Z0
         IndexedView<FieldInfo> Fields {get;}
     }
 
+    [Free]
     public interface ICmdModel<T> : ICmdModel
         where T : struct, ICmdSpec<T>
     {
@@ -26,6 +28,7 @@ namespace Z0
             => typeof(T).DeclaredInstanceFields();
     }
 
+    [Free]
     public interface ICmdModel<H,T> : ICmdModel<T>
         where T : struct, ICmdSpec<T>
         where H : struct, ICmdModel<H,T>

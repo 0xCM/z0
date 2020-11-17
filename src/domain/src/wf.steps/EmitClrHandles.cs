@@ -22,7 +22,6 @@ namespace Z0
             step.Run();
         }
 
-        [CmdWorker]
         public static CmdResult run(IWfShell wf, EmitClrHandlesCmd cmd)
         {
             wf.Db().Clear(ClrHandleRecord.TableId);

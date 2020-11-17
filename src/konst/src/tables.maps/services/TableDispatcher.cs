@@ -12,7 +12,7 @@ namespace Z0
 
     public readonly struct TableDispatcher<F,T,D,S,Y> : ITableDispatcher<F,T,D,S,Y>
         where F : unmanaged
-        where T : struct, IKeyedTable<F,T,D>
+        where T : struct, IKeyed<D>
         where D : unmanaged
         where S : unmanaged
     {

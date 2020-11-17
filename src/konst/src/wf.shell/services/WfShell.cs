@@ -25,7 +25,7 @@ namespace Z0
 
         public IWfBroker Broker {get;}
 
-        public ICmdPipe Pipe {get;}
+        public ICmdRouter Router {get;}
 
         public CmdArgs Args {get;}
 
@@ -73,7 +73,7 @@ namespace Z0
             Api = config.ApiParts.Api;
             Controller = config.Control;
             AppName = config.Shell.AppName;
-            Pipe = new CmdPipe(this);
+            Router = new CmdRouter(this);
         }
 
         internal WfShell(IWfInit config, CorrelationToken ct, IWfEventSink sink, IWfBroker broker, WfHost host, IPolyrand random, LogLevel verbosity)
@@ -94,7 +94,7 @@ namespace Z0
             Api = config.ApiParts.Api;
             Controller = config.Control;
             AppName = config.Shell.AppName;
-            Pipe = new CmdPipe(this);
+            Router = new CmdRouter(this);
         }
 
         IWfShell Wf => this;

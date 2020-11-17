@@ -33,7 +33,6 @@ namespace Z0
             Wf = wf.WithHost(Host);
         }
 
-        [CmdWorker]
         public CmdResult Route(EmitHexIndexCmd cmd)
         {
             var dst = Wf.Db().Table("apihex.index");
@@ -43,7 +42,6 @@ namespace Z0
             return Cmd.ok(cmd);
         }
 
-        [CmdWorker]
         public CmdResult Route(EmitRuntimeIndexCmd cmd)
         {
             var hosts = Wf.Api.ApiHosts;
@@ -64,7 +62,6 @@ namespace Z0
             return Cmd.ok(cmd);
         }
 
-        [CmdWorker]
         public CmdResult Route(EmitResourceDataCmd cmd)
             => exec(Wf, cmd);
 

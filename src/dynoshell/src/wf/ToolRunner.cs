@@ -28,8 +28,6 @@ namespace Z0
 
         readonly IFileDb Db;
 
-        readonly ICmdRouter Router;
-
         public ToolRunner(IWfShell wf, WfHost host)
         {
             Host = host;
@@ -38,8 +36,6 @@ namespace Z0
             Args = wf.Args;
             CmdBuilder = wf.CmdBuilder();
             Db = Wf.Db();
-            Router = Cmd.router(wf,typeof(Workers));
-
         }
 
         public void Dispose()
@@ -47,11 +43,11 @@ namespace Z0
             Wf.Disposed();
         }
 
-        FS.FilePath EmitOpCodes()
+        CmdResult<FS.FilePath> EmitOpCodes()
         {
             var spec = EmitAsmOpCodes.Spec();
             spec.WithTarget(Wf.Db().RefDataPath("asm.opcodes"));
-            return EmitAsmOpCodes.Create(Wf).Process(spec);
+            return EmitAsmOpCodes.Create(Wf).Invoke(spec);
         }
 
         CmdResult EmitPatterns()
@@ -207,14 +203,14 @@ namespace Z0
 
         public void Run(ICmdSpec spec)
         {
-            Router.Dispatch(spec);
+
         }
 
         public void Run<T>(T spec)
             where T : struct, ICmdSpec<T>
         {
             Wf.Status(Msg.Dispatching<T>().Apply(spec));
-            Router.Dispatch(spec);
+            //Router.Process(spec);
         }
 
         void ShowDependencies()

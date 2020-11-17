@@ -27,7 +27,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static TableDispatcher<F,T,D,S,Y> create<F,T,D,S,Y>(IWfShell wf, TableProjectors<D,S,T,Y> projectors, IndexKeys<D,S> selectors)
             where F : unmanaged
-            where T : struct, IKeyedTable<F,T,D>
+            where T : struct, IKeyed<D>
             where D : unmanaged
             where S : unmanaged
                 => new TableDispatcher<F,T,D,S,Y>(wf, projectors, selectors);

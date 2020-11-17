@@ -7,20 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
-    public readonly struct Facets<S,T>
+    public readonly struct Facets<S,T> : IIndex<Facet<S,T>>
     {
-        readonly TableSpan<Facet<S,T>> Data;
-
-        [MethodImpl(Inline)]
-        public static implicit operator Facets<S,T>(Facet<S,T>[] src)
-            => new Facets<S,T>(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator Facet<S,T>[](Facets<S,T> src)
-            => src.Data.Storage;
+        readonly Index<Facet<S,T>> Data;
 
         [MethodImpl(Inline)]
         public Facets(uint count)
@@ -40,10 +31,16 @@ namespace Z0
             get => Data.View;
         }
 
-        public Span<Facet<S,T>> Edit
+        public Facet<S,T>[] Storage
         {
             [MethodImpl(Inline)]
-            get => Data.Edit;
+            get => Data.Storage;
+        }
+
+        public Span<Facet<S,T>> Terms
+        {
+            [MethodImpl(Inline)]
+            get => Data.Terms;
         }
 
         public uint Count
@@ -63,5 +60,13 @@ namespace Z0
             [MethodImpl(Inline)]
             get => ref Data[index];
         }
+
+        [MethodImpl(Inline)]
+        public static implicit operator Facets<S,T>(Facet<S,T>[] src)
+            => new Facets<S,T>(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Facet<S,T>[](Facets<S,T> src)
+            => src.Data.Storage;
     }
 }

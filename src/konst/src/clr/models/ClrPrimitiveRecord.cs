@@ -10,18 +10,18 @@ namespace Z0
     using static z;
     using static Part;
 
-    public readonly struct PrimalKindInfo : ITextual
+    public struct ClrPrimitiveRecord : ITextual
     {
-        public PrimalKind Kind {get;}
+        public PrimalKind Kind;
 
-        public TypeWidth Width {get;}
+        public TypeWidth Width;
 
-        public SignKind Sign {get;}
+        public SignKind Sign;
 
-        public PrimalTypeCode TypeCode {get;}
+        public PrimalTypeCode TypeCode;
 
         [MethodImpl(Inline)]
-        public PrimalKindInfo(PrimalKind kind, TypeWidth width, SignKind sign, PrimalTypeCode tc)
+        public ClrPrimitiveRecord(PrimalKind kind, TypeWidth width, SignKind sign, PrimalTypeCode tc)
         {
             Kind = kind;
             Width = width;

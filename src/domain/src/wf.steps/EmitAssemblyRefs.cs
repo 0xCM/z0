@@ -24,7 +24,6 @@ namespace Z0
             return cmd;
         }
 
-        [CmdWorker]
         public static CmdResult run(IWfShell wf, in EmitAssemblyRefsCmd cmd)
         {
             var sources = @readonly(cmd.Sources.Storage);

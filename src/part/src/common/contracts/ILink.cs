@@ -24,6 +24,11 @@ namespace Z0
         S Source {get;}
 
         T Target {get;}
+
+        string IIdentified.Identifier
+            => string.Format("{0} -> {1}", Source, Target);
+        string ITextual.Format()
+            => Identifier;
     }
 
     [Free]
@@ -33,23 +38,12 @@ namespace Z0
     }
 
     [Free]
-    public interface ILink<F,S,T> : ILink<S,T>
-        where F : ILink<F,S,T>
-    {
-
-    }
-
-    [Free]
-    public interface IKindedLink<K> : ILink, IKinded<K>
+    public interface ILink<S,T,K> : ILink<S,T>, IKinded<K>
         where K : unmanaged
     {
-
-    }
-
-    [Free]
-    public interface IKindedLink<K,S,T> : IKindedLink<K>, ILink<S,T>
-        where K : unmanaged
-    {
-
-    }
+        string IIdentified.Identifier
+            => string.Format("{0} -> {1}", Source, Target);
+        string ITextual.Format()
+            => Identifier;
+   }
 }

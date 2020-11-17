@@ -4,21 +4,20 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Security;
-
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface IDataEntity
+    public interface IDataRelation<S,T> : ILink<S,T>
+        where S : struct
+        where T : struct
     {
-        Type EntityType {get;}
+
     }
 
     [Free]
-    public interface IDataEntity<T> : IDataEntity
-        where T : struct, IDataEntity<T>
+    public interface IDataRelation<T> : IDataRelation<T,T>
+        where T : struct
     {
-        Type IDataEntity.EntityType => typeof(T);
+
     }
 }

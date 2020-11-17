@@ -18,18 +18,17 @@ namespace Z0
     }
 
     [Free]
-    public interface ITable<T> : ITable
-        where T : struct
+    public interface ITable<T> : ITable, IEntity<T>
+        where T : struct, ITable<T>
     {
 
     }
 
     [Free]
     public interface ITable<F,T> : ITable<T>
-        where T : struct
+        where T : struct, ITable<F,T>
         where F : unmanaged
     {
 
     }
-
 }

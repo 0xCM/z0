@@ -24,10 +24,6 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator Meaning<M,T>((M src,T dst) x)
-            => new Meaning<M,T>(x.src, x.dst);
-
-        [MethodImpl(Inline)]
         public Meaning(M src, T dst)
         {
             Content = src;
@@ -37,5 +33,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public string Format()
             => string.Format("{0} -> {1}", Content, Target);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Meaning<M,T>((M src,T dst) x)
+            => new Meaning<M,T>(x.src, x.dst);
     }
 }

@@ -5,30 +5,17 @@
 namespace Z0
 {
     using System;
-    using System.IO;
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static z;
 
     /// <summary>
     /// Identifies a workflow step
     /// </summary>
+    [DataType]
     public readonly struct WfStepId<T> : IWfStepId
         where T : new()
     {
-        [MethodImpl(Inline)]
-        public static implicit operator WfStepId(WfStepId<T> src)
-            => new WfStepId(src.Control);
-
-        [MethodImpl(Inline)]
-        public static implicit operator WfStepId<T>(Type effect)
-            => default;
-
-        [MethodImpl(Inline)]
-        public static implicit operator WfToken(WfStepId<T> src)
-            => src.Token;
-
         /// <summary>
         /// The step name
         /// </summary>
@@ -102,5 +89,17 @@ namespace Z0
 
         public static WfStepId<T> Empty
             => default;
+
+        [MethodImpl(Inline)]
+        public static implicit operator WfStepId(WfStepId<T> src)
+            => new WfStepId(src.Control);
+
+        [MethodImpl(Inline)]
+        public static implicit operator WfStepId<T>(Type effect)
+            => default;
+
+        [MethodImpl(Inline)]
+        public static implicit operator WfToken(WfStepId<T> src)
+            => src.Token;
     }
 }

@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// Defines kinded link
     /// </summary>
-    public readonly struct Link<S,T,K>
+    public readonly struct Link<S,T,K> : ILink<S,T,K>
         where K : unmanaged
     {
         /// <summary>

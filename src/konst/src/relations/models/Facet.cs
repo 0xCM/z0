@@ -7,18 +7,18 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
-    public readonly struct Facet
+    public readonly struct Facet : IFacet<asci32,variant>
     {
-        public readonly asci32 Name;
+        public asci32 Key {get;}
 
-        public readonly variant Value;
+        public variant Value {get;}
 
         [MethodImpl(Inline)]
         public Facet(string name, variant value)
         {
-            Name = name;
+            Key = name;
             Value = value;
         }
 

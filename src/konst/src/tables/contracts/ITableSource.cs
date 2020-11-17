@@ -30,7 +30,6 @@ namespace Z0
     public interface ITableExchange<S,T> : ITableSource<S>, ITableTarget<T>
         where S : struct
         where T : struct
-
     {
 
     }

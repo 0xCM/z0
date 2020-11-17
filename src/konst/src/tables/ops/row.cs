@@ -15,7 +15,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static TableRow<T> row<T>(uint cells)
             where T : struct
-                => new TableRow<T>(0,default(T), sys.alloc<object>(cells));
+                => new TableRow<T>(0, default(T), sys.alloc<dynamic>(cells));
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static TableRow<T> row<T>(uint index, in T src)

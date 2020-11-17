@@ -10,9 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    /// <summary>
-    /// Identifies a workflow step - which is synonymous with its actuator/host/controller
-    /// </summary>
+    [DataType]
     public readonly struct WfStepId : IWfStepId
     {
         public ClrArtifactKey HostKey {get;}

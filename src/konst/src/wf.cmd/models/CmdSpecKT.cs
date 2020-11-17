@@ -11,7 +11,7 @@ namespace Z0
 
     public struct CmdSpec<K,T> : ICmdSpec<CmdSpec<K,T>,K,T>
         where K : unmanaged
-        where T : struct
+        where T : struct, ICmdSpec<T>
     {
         public CmdId Id {get;}
 

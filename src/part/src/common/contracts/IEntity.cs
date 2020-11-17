@@ -4,13 +4,17 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-    using System.Diagnostics;
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    using static Konst;
+    [Free]
+    public interface IEntity
+    {
 
-    public interface ICmdAgent : IWfAgent
+    }
+
+    [Free]
+    public interface IEntity<T> : IEntity
+        where T : struct, IEntity<T>
     {
 
     }

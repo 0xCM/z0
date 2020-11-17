@@ -11,7 +11,7 @@ namespace Z0
 
     using api = Links;
 
-    public readonly struct Link<S,T> : ILink<Link<S,T>,S,T>
+    public readonly struct Link<S,T> : ILink<S,T>
     {
         public S Source {get;}
 

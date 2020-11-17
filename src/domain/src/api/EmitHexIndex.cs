@@ -15,7 +15,6 @@ namespace Z0
         protected override CmdResult Execute(IWfShell wf, in EmitHexIndexCmd spec)
             => exec(wf,spec);
 
-        [CmdWorker]
         public static CmdResult exec(IWfShell wf, EmitHexIndexCmd cmd)
         {
             var dst = wf.Db().Table("apihex.index");

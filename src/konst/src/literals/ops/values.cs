@@ -49,11 +49,11 @@ namespace Z0
             }
         }
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [Op, Closures(Closure)]
         public static T[] values<T>(Type src)
             => map(search<T>(src),value<T>);
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [Op, Closures(Closure)]
         public static ClrFieldValue<T>[] values2<T>(Type src)
         {
             var fields = @readonly(search<T>(src));
@@ -70,7 +70,6 @@ namespace Z0
             return buffer;
         }
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
         public static void values<S,T>(Span<ClrFieldValue<T>> dst)
             where S : struct
         {

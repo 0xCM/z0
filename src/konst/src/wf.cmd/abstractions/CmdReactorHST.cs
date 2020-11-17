@@ -35,9 +35,17 @@ namespace Z0
 
         protected abstract T Run(S cmd);
 
-        public T Process(S cmd)
+        public CmdResult<T> Invoke(S cmd)
         {
-            return Run(cmd);
+            try
+            {
+                return new CmdResult<T>(cmd.Id, true, Run(cmd));
+            }
+            catch(Exception e)
+            {
+                Wf.Error(e);
+                return new CmdResult<T>(cmd.Id, false);
+            }
         }
 
         public void Init(IWfShell wf)

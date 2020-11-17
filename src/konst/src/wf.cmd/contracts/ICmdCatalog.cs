@@ -4,10 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    using static Konst;
-
+    [Free]
     public interface ICmdCatalog
     {
         IWfShell Wf {get;}
@@ -15,6 +14,7 @@ namespace Z0
         IFileDb Db => Wf.Db();
     }
 
+    [Free]
     public interface ICmdCatalog<H> : ICmdCatalog
         where H : ICmdCatalog<H>, new()
     {

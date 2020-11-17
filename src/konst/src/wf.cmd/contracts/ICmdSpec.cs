@@ -6,6 +6,8 @@ namespace Z0
 {
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
+    using api = Cmd;
+
     [Free]
     public interface ICmdSpec : IIdentified<CmdId>
     {
@@ -18,20 +20,20 @@ namespace Z0
     }
 
     [Free]
-    public interface ICmdSpec<T> : ICmdSpec
-        where T : struct
+    public interface ICmdSpec<T> : IEntity<T>, ICmdSpec
+        where T : struct, ICmdSpec<T>
     {
         CmdId ICmdSpec.CmdId
-            => CmdId.from<T>();
+            => api.id<T>();
 
         CmdArgs ICmdSpec.Args
-            => CmdArgs.Empty;
+            => api.args((T)this);
     }
 
     [Free]
     public interface ICmdSpec<K,T> : ICmdSpec<T>
         where K : unmanaged
-        where T : struct
+        where T : struct, ICmdSpec<T>
     {
         new CmdArgs<K,T> Args {get;}
 
@@ -43,7 +45,7 @@ namespace Z0
     public interface ICmdSpec<H,K,T> : ICmdSpec<K,T>
         where H : struct, ICmdSpec<H,K,T>
         where K : unmanaged
-        where T : struct
+        where T : struct, ICmdSpec<T>
     {
 
     }

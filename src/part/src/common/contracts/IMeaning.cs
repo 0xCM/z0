@@ -26,14 +26,10 @@ namespace Z0
             => Content;
     }
 
-    public interface IMeaning<H,M> : IMeaning<M>, IFacet<M>
+    public interface IMeaning<H,M> : IMeaning<M>
         where H : IMeaning<H,M>
     {
-        string IFacet.FacetName
-            => nameof(Meaning);
 
-        M IFacet<M>.FacetValue
-            => Content;
     }
 
     public interface IMeaning<H,M,T> : IMeaning<H,M>

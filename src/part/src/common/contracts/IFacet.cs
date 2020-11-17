@@ -4,18 +4,13 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IFacet
-    {   
-        string FacetName {get;}
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-        object FacetValue {get;}
-    }
-
-    public interface IFacet<V> : IFacet
-    {   
-        new V FacetValue {get;}
-
-        object IFacet.FacetValue 
-            => FacetValue;
+    [Free]
+    public interface IFacet<K,V> : IKeyed<K>
+    {
+        V Value {get;}
+        string ITextual.Format()
+            => string.Format("{0}:{1}", Key, Value);
     }
 }

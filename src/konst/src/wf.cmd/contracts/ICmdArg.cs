@@ -11,7 +11,7 @@ namespace Z0
     {
         string Key {get;}
 
-        string Value {get;}
+        object Value {get;}
 
         string ITextual.Format()
             => Render.setting(Key,Value);
@@ -22,8 +22,8 @@ namespace Z0
     {
         new T Value {get;}
 
-        string ICmdArg.Value
-            => Value.ToString();
+        object ICmdArg.Value
+            => Value;
     }
 
     [Free]

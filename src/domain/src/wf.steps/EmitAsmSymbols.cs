@@ -14,7 +14,6 @@ namespace Z0
 
     public sealed class EmitAsmSymbols : CmdHost<EmitAsmSymbols, EmitAsmSymbolsCmd>
     {
-        [CmdWorker]
         public static CmdResult run(IWfShell wf, in EmitAsmSymbolsCmd spec)
         {
             const string RenderPattern = "{0,-20} | {1,-20} | {2,-20} | {3}";

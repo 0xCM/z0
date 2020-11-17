@@ -30,9 +30,8 @@ namespace Z0
         CorrelationToken Ct
             => z.correlate(Controller.Id);
 
-        ITestLogPaths TestLogPaths
-            => new TestLogPaths();
-
+        // ITestLogPaths TestLogPaths
+        //     => new TestLogPaths();
         CmdArgs Args
              => Environment.GetCommandLineArgs();
 
@@ -52,6 +51,8 @@ namespace Z0
         IWfEventSink WfSink {get;}
 
         IWfBroker Broker {get;}
+
+        ICmdRouter Router {get;}
 
         IWfInit Init {get;}
 

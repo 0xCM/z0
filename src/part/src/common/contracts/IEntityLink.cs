@@ -4,19 +4,20 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Security;
-
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface ITypedIndex<T,K> : IMeasured
-        where K : unmanaged
+    public interface IEntityLink<S,T> : IDataRelation<S,T>
+        where S : struct, IEntity<S>
+        where T : struct, IEntity<T>
     {
 
-        ref T this[ulong index] {get;}
+    }
 
-        ref T this[K index]
-            => ref this[z.uint64(index)];
+    [Free]
+    public interface IEntityLink<T> : IEntityLink<T,T>, ILink<T>
+        where T : struct, IEntity<T>
+    {
+
     }
 }

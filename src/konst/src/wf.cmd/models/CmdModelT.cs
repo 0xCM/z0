@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct CmdModel<T> : ICmdModel<CmdModel<T>, T>
+    public readonly struct CmdModel<T> : ICmdModel<CmdModel<T>,T>
         where T : struct, ICmdSpec<T>
     {
         public Type DataType => typeof(T);

@@ -17,8 +17,12 @@ namespace Z0
             where T : ICmdSpec
                 => new CmdResult(spec.Id, false);
 
+        public static CmdResult fail<T>(T spec, Exception e)
+            where T : ICmdSpec
+                => fail<T>(spec, e.ToString());
+
         public static CmdResult fail<T>(T spec, string message)
-            where T : struct, ICmdSpec<T>
+            where T : ICmdSpec
                 => new CmdResult(spec.Id, false, TextEncoders.utf8().GetBytes(message));
 
         [Op]

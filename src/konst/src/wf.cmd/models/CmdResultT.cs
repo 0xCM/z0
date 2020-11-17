@@ -20,7 +20,7 @@ namespace Z0
         public P Payload {get;}
 
         [MethodImpl(Inline)]
-        public CmdResult(CmdId id, bool success, P payload)
+        public CmdResult(CmdId id, bool success, P payload = default)
         {
             Id = id;
             Payload = payload;

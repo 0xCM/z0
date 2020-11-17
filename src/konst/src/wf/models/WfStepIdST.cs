@@ -34,10 +34,6 @@ namespace Z0
         public static implicit operator WfToken(WfStepId<S,T> src)
             => src.Token;
 
-        [MethodImpl(Inline)]
-        public static implicit operator Type(WfStepId<S,T> src)
-            => LinkType<S,T>.Type;
-
         /// <summary>
         /// The step controller
         /// </summary>

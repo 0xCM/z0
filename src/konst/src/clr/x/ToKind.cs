@@ -8,23 +8,19 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static z;
 
-    public readonly struct CmdWorker : ICmdWorker
+    partial class XClrQuery
     {
-        readonly CmdWorkerFunction Fx;
-
-        public CmdId CmdId {get;}
+        [MethodImpl(Inline)]
+        public static PrimalTypeCode ToKind(this TypeCode src)
+            => (PrimalTypeCode)src;
 
         [MethodImpl(Inline)]
-        public CmdWorker(CmdId id, CmdWorkerFunction fx)
-        {
-            CmdId = id;
-            Fx = fx;
-        }
+        public static TypeCode ToTypeCode(this PrimalTypeCode src)
+            => (TypeCode)src;
 
         [MethodImpl(Inline)]
-        public CmdResult Invoke(ICmdSpec cmd)
-            => Fx(cmd);
+        public static string Format(this PrimalTypeCode src)
+            => $"{src}";
     }
 }

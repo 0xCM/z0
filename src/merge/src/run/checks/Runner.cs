@@ -310,7 +310,7 @@ namespace Z0
             var dst = Wf.AppData + FS.file("bitmasks", ArchiveFileKinds.Asm);
             var routines = asmWf.Decode(methods, dst);
             var reactor = CheckBitMasksReactor.Create(Wf);
-            reactor.Process(CheckBitMasksReactor.Spec());
+            reactor.Invoke(CheckBitMasksReactor.Spec());
         }
 
         void ListTextResources()

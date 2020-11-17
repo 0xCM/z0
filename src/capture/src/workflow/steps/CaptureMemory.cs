@@ -12,7 +12,6 @@ namespace Z0
 
     using Z0.Asm;
 
-    [Step]
     public sealed class CaptureMemory : WfHost<CaptureMemory>
     {
         IAsmContext Asm;
