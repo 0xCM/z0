@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct UBits
+    partial struct UI
     {
         /// <summary>
         /// Shears the input to a target width

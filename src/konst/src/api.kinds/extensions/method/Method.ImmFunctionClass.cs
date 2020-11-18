@@ -8,7 +8,7 @@ namespace Z0
     using System.Reflection;
     using System.Linq;
 
-    using static ImmFunctionClass;
+    using FC = ImmFunctionClass;
 
     partial class XKinds
     {
@@ -24,18 +24,18 @@ namespace Z0
             if(count == 0 || count > 2)
                 return 0;
 
-            var dst = Imm8;
+            var dst = FC.Imm8;
             var first = found.First();
             switch(count)
             {
                 case 1:
-                    dst |= ImmCount1;
+                    dst |= FC.ImmCount1;
                     dst |= first.ImmSlot();
                 break;
 
                 case 2:
                     var second = found.Last();
-                    dst |= ImmCount2;
+                    dst |= FC.ImmCount2;
                     dst |= first.ImmSlot();
                     dst |= second.ImmSlot();
                 break;

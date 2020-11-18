@@ -405,5 +405,7 @@ readonly struct ApiNameParts
 
     public const string unsigned = nameof(unsigned);
 
-    public const string ubits = unsigned + dot + bits;
+    public const string integers = nameof(integers);
+
+    public const string ui = unsigned + dot + integers;
 }

@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct UBits
+    partial struct UI
     {
         /// <summary>
         /// Reinterprets an input reference as a mutable <see cref='Z0.uint1'/> reference cell

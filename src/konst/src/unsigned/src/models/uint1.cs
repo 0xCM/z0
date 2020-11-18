@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static UBits;
+    using static UI;
 
     using U = uint1;
     using K = UInt1;

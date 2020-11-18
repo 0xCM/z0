@@ -413,25 +413,25 @@ readonly struct ApiNames
 
     public const string ApiSigs = api + dot + signatures;
 
-    public const string UBits = ubits;
+    public const string UI = ui;
 
-    public const string UBitsLogic = ubits + dot + bitlogic;
+    public const string UBitsLogic = ui + dot + bitlogic;
 
-    public const string BitLogicU1 = ubits + dot +  bitlogic + dot + u1;
+    public const string BitLogicU1 = ui + dot +  bitlogic + dot + u1;
 
-    public const string BitLogicU2 = ubits + dot + bitlogic + dot + u2;
+    public const string BitLogicU2 = ui + dot + bitlogic + dot + u2;
 
-    public const string BitLogicU3 = ubits + dot + bitlogic + dot + u3;
+    public const string BitLogicU3 = ui + dot + bitlogic + dot + u3;
 
-    public const string BitLogicU4 = ubits + dot + bitlogic + dot + u4;
+    public const string BitLogicU4 = ui + dot + bitlogic + dot + u4;
 
-    public const string BitLogicU5 = ubits + dot + bitlogic + dot + u5;
+    public const string BitLogicU5 = ui + dot + bitlogic + dot + u5;
 
-    public const string BitLogicU6 = ubits + dot + bitlogic + dot + u6;
+    public const string BitLogicU6 = ui + dot + bitlogic + dot + u6;
 
-    public const string BitLogicU7 = ubits + dot + bitlogic + dot + u7;
+    public const string BitLogicU7 = ui + dot + bitlogic + dot + u7;
 
-    public const string BitLogicO8 = ubits + dot + bitlogic + dot + u8;
+    public const string BitLogicO8 = ui + dot + bitlogic + dot + u8;
 
     public const string BitSeq = bits + dot + seq;
 
@@ -493,8 +493,6 @@ readonly struct ApiNames
     public const string EnumCatalogs = enums + dot + catalogs;
 
     public const string JsonData = data + dot + json;
-
-
 
     const string samples = nameof(samples);
 

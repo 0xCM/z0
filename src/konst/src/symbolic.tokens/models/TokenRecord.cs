@@ -15,11 +15,11 @@ namespace Z0
     {
         public Sequential Index;
 
-        public StringRef Identifier;
+        public string Identifier;
 
-        public StringRef Value;
+        public string Value;
 
-        public StringRef Description;
+        public string Description;
 
         [MethodImpl(Inline)]
         public TokenRecord(uint index, string id, string value, string description)

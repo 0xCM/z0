@@ -11,10 +11,8 @@ namespace Z0
 
     using Q = Z0;
 
-    partial struct UBits
+    partial struct UI
     {
-
-
         [MethodImpl(Inline), Op]
         public static uint3 maxval(W3 w)
             => maxval<uint3>();

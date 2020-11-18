@@ -12,7 +12,7 @@ namespace Z0
     using api = Symbolic;
 
     /// <summary>
-    /// Represents a lexical token
+    /// Defines a kinded token
     /// </summary>
     public readonly struct Token<K,S> : IToken<K,S>
         where K : unmanaged
@@ -23,7 +23,7 @@ namespace Z0
         /// </summary>
         public K Id {get;}
 
-        readonly TableSpan<S> Data;
+        readonly Index<S> Data;
 
         [MethodImpl(Inline)]
         public Token(K id, S[] src)

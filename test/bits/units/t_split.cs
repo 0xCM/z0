@@ -25,7 +25,7 @@ namespace Z0
                 Bits.split(x,out var x0, out var x1);
                 var y = Bits.concat(x0, x1);
                 Claim.eq(x,y);
-                Claim.eq(x, UBits.u16(new byte[]{x0, x1}));
+                Claim.eq(x, UI.u16(new byte[]{x0, x1}));
             }
         }
 
@@ -37,7 +37,7 @@ namespace Z0
                 Bits.split(x, out var x0, out var x1, out var x2, out var x3);
                 var y = Bits.concat(x0, x1, x2, x3);
                 Claim.eq(x,y);
-                Claim.eq(x, UBits.u32(new byte[]{x0, x1, x2, x3}));
+                Claim.eq(x, UI.u32(new byte[]{x0, x1, x2, x3}));
             }
         }
 

@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct UBits
+    partial struct UI
     {
         [MethodImpl(Inline), Op]
         public static ulong u64(ReadOnlySpan<byte> src, int offset = 0)

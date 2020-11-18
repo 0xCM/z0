@@ -12,7 +12,7 @@ namespace Z0
 
     using U = uint1;
 
-    partial struct UBits
+    partial struct UI
     {
         [MethodImpl(Inline), Op]
         public static U maxval(W1 w)

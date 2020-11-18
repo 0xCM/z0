@@ -11,7 +11,7 @@ namespace Z0
 
     using U = uint3;
 
-    partial struct UBits
+    partial struct UI
     {
         /// <summary>
         /// Creates a 3-bit unsigned integer, equal to zero or one, if the source value is respectively false or true

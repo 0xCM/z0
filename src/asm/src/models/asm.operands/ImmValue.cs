@@ -12,42 +12,26 @@ namespace Z0
     /// <summary>
     /// Defines an immediate value of any width in the range [0..64]
     /// </summary>
-    public readonly struct AsmImm : ITextual
+    public readonly struct ImmValue : ITextual
     {
         const string RenderPattern = "x{0}";
 
         readonly ulong Data;
 
         [MethodImpl(Inline)]
-        public static implicit operator AsmImm(byte src)
-            => new AsmImm(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator AsmImm(ushort src)
-            => new AsmImm(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator AsmImm(uint src)
-            => new AsmImm(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator AsmImm(ulong src)
-            => new AsmImm(src);
-
-        [MethodImpl(Inline)]
-        public AsmImm(byte src)
+        public ImmValue(byte src)
             => Data = src;
 
         [MethodImpl(Inline)]
-        public AsmImm(ushort src)
+        public ImmValue(ushort src)
             => Data = src;
 
         [MethodImpl(Inline)]
-        public AsmImm(uint src)
+        public ImmValue(uint src)
             => Data = src;
 
         [MethodImpl(Inline)]
-        public AsmImm(ulong src)
+        public ImmValue(ulong src)
             => Data = src;
 
         public uint Width
@@ -65,5 +49,21 @@ namespace Z0
         [MethodImpl(Inline)]
         public string Format()
             => Data.ToString(text.format(RenderPattern, Size*2));
+
+        [MethodImpl(Inline)]
+        public static implicit operator ImmValue(byte src)
+            => new ImmValue(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator ImmValue(ushort src)
+            => new ImmValue(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator ImmValue(uint src)
+            => new ImmValue(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator ImmValue(ulong src)
+            => new ImmValue(src);
     }
 }

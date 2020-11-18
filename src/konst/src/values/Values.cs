@@ -11,9 +11,62 @@ namespace Z0
     using static z;
 
     [ApiHost]
-    public readonly struct ValueTypes
+    public readonly struct Values
     {
         const NumericKind Closure = Integers;
+
+        [MethodImpl(Inline), Op]
+        public static Span<byte> edit<T>(in T src)
+            where T : struct
+                => bytes(src);
+
+        [MethodImpl(Inline), Op]
+        public static ReadOnlySpan<byte> view<T>(in T src)
+            where T : struct
+                => bytes(src);
+
+        [MethodImpl(Inline), Op]
+        public static uint hash<T>(in T src)
+            where T : struct
+                => z.hash(bytes(src));
+
+        /// <summary>
+        /// Determines whether each corresponding bytes of two structural values are identical
+        /// </summary>
+        /// <param name="x">The first value</param>
+        /// <param name="y">The second value</param>
+        /// <typeparam name="T">The structure type</typeparam>
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static bool eq<T>(in T x, in T y)
+            where T : struct
+        {
+            var count = (uint)size<T>();
+            ref readonly var bx = ref @as<T,byte>(x);
+            ref readonly var by = ref @as<T,byte>(y);
+
+            for(var i=0; i<count; i++)
+                if(skip(bx,i) != skip(by,i))
+                    return false;
+            return true;
+        }
+
+        /// <summary>
+        /// Determines whether all bytes of a structural value are zero
+        /// </summary>
+        /// <param name="src">The value to evaluate</param>
+        /// <typeparam name="T">The structure type</typeparam>
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static bool empty<T>(in T src)
+            where T : struct
+        {
+            ref var data = ref @as<T,byte>(src);
+            var count = size<T>();
+            for(var i=0u; i<count; i++)
+                if(skip(data,i) != 0)
+                    return false;
+            return true;
+        }
+
 
         /// <summary>
         /// Returns the hex character code for a <see cref='uint4'/> value
@@ -59,8 +112,8 @@ namespace Z0
             for(var i=0u; i<count; i++)
             {
                 ref readonly var d = ref skip(bytes,i);
-                seek(dst, j--) = code(LowerCase, UBits.cut(d, w4));
-                seek(dst, j--) = code(LowerCase, UBits.srl(d, n4, w4));
+                seek(dst, j--) = code(LowerCase, UI.cut(d, w4));
+                seek(dst, j--) = code(LowerCase, UI.srl(d, n4, w4));
             }
         }
 
@@ -86,8 +139,8 @@ namespace Z0
             for(var i=0u; i<count; i++)
             {
                 ref readonly var d = ref skip(bytes,i);
-                seek(dst, j--) = (char)code(LowerCase, UBits.cut(d, w4));
-                seek(dst, j--) = (char)code(LowerCase, UBits.srl(d, n4, w4));
+                seek(dst, j--) = (char)code(LowerCase, UI.cut(d, w4));
+                seek(dst, j--) = (char)code(LowerCase, UI.srl(d, n4, w4));
             }
 
             return Render.format(dst);
@@ -112,7 +165,5 @@ namespace Z0
                     return true;
             return false;
         }
-
-
     }
 }

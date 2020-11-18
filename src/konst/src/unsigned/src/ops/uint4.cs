@@ -11,7 +11,7 @@ namespace Z0
 
     using U = uint4;
 
-    partial struct UBits
+    partial struct UI
     {
         /// <summary>
         /// Shifts the source a rightwards by a specified bit count and shears the result to a specified width

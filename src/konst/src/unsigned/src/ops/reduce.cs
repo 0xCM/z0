@@ -12,7 +12,7 @@ namespace Z0
     using S4 = uint4;
     using S5 = uint5;
 
-    partial struct UBits
+    partial struct UI
     {
         [MethodImpl(Inline)]
         public static byte reduce(N4 n, byte x)

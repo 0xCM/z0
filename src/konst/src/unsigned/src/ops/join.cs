@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    public partial struct UBits
+    public partial struct UI
     {
         /// <summary>
         /// (a,b) -> [ab]

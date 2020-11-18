@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    [ApiHost(ApiNames.UBits)]
+    [ApiHost(ApiNames.UI)]
     public readonly partial struct ULogix
     {
         public const NumericKind Closure = NumericKind.UnsignedInts;

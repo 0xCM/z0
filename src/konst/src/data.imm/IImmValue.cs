@@ -4,26 +4,26 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IAsmImm
+    public interface IImmValue
     {
 
     }
 
-    public interface IAsmImm<T> : IAsmImm
+    public interface IImmValue<T> : IImmValue
         where T : unmanaged
     {
 
     }
 
-    public interface IAsmImm<W,T> : IAsmImm<T>
+    public interface IImmValue<W,T> : IImmValue<T>
         where W : unmanaged, IDataWidth
         where T : unmanaged
     {
 
     }
 
-    public interface IAsmImm<F,W,T> : IAsmImm<W,T>
-        where F : unmanaged, IAsmImm<F,W,T>
+    public interface IImmValue<F,W,T> : IImmValue<W,T>
+        where F : unmanaged, IImmValue<F,W,T>
         where W : unmanaged, IDataWidth
         where T : unmanaged
     {

@@ -23,7 +23,7 @@ namespace Z0
             for(var i=1; i<count; i++)
             {
                 ref readonly var token = ref skip(src,i);
-                var line = text.concat(token.Identifier.Format().PadRight(20), "| ", token.Value.Format().PadRight(20), "| ", token.Description);
+                var line = text.concat(token.Identifier.PadRight(20), "| ", token.Value.PadRight(20), "| ", token.Description);
                 writer.WriteLine(line);
             }
         }

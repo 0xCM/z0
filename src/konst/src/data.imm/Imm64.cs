@@ -10,27 +10,25 @@ namespace Z0
     using static Konst;
 
     using W = W64;
+    using I = Imm64;
 
     /// <summary>
-    /// Defines a refined 64-bit immediate value
+    /// Defines a 64-bit immediate value
     /// </summary>
-    public readonly struct Imm64<E> //: ISized<Imm64<E>,W64>
-        where E : unmanaged
+    public readonly struct Imm64 : IImmValue<I,W64,ulong>
     {
-        public readonly E Data;
+        public readonly ulong Data;
 
         public static W W => default;
 
-        [MethodImpl(Inline)]
-        public static implicit operator E(Imm64<E> src)
-            => src.Data;
+        public ulong Content
+        {
+            [MethodImpl(Inline)]
+            get => Data;
+        }
 
         [MethodImpl(Inline)]
-        public static implicit operator Imm64<E>(E src)
-            => new Imm64<E>(src);
-
-        [MethodImpl(Inline)]
-        public Imm64(E src)
+        public Imm64(ulong src)
             => Data = src;
 
         [MethodImpl(Inline)]
@@ -48,5 +46,53 @@ namespace Z0
 
         public override int GetHashCode()
             => (int)Hash;
+
+        [MethodImpl(Inline)]
+        public int CompareTo(I src)
+            => Data == src.Data ? 0 : Data < src.Data ? -1 : 1;
+
+        [MethodImpl(Inline)]
+        public bool Equals(I src)
+            => Data == src.Data;
+
+        public override bool Equals(object src)
+            => src is I x && Equals(x);
+
+
+        [MethodImpl(Inline)]
+        public Address64 ToAddress()
+            => Data;
+
+        [MethodImpl(Inline)]
+        public static implicit operator ulong(I src)
+            => src.Data;
+
+        [MethodImpl(Inline)]
+        public static implicit operator I(ulong src)
+            => new I(src);
+
+        [MethodImpl(Inline)]
+        public static bool operator <(I a, I b)
+            => a.Data < b.Data;
+
+        [MethodImpl(Inline)]
+        public static bool operator >(I a, I b)
+            => a.Data > b.Data;
+
+        [MethodImpl(Inline)]
+        public static bool operator <=(I a, I b)
+            => a.Data <= b.Data;
+
+        [MethodImpl(Inline)]
+        public static bool operator >=(I a, I b)
+            => a.Data >= b.Data;
+
+        [MethodImpl(Inline)]
+        public static bool operator ==(I a, I b)
+            => a.Data == b.Data;
+
+        [MethodImpl(Inline)]
+        public static bool operator !=(I a, I b)
+            => a.Data != b.Data;
     }
 }

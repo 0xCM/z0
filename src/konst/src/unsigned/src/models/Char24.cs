@@ -23,25 +23,25 @@ namespace Z0
         public uint6 this[N0 n]
         {
             [MethodImpl(Inline)]
-            get => UBits.uint6(Data);
+            get => UI.uint6(Data);
         }
 
         public uint6 this[N1 n]
         {
             [MethodImpl(Inline)]
-            get => UBits.uint6(Data >> 6);
+            get => UI.uint6(Data >> 6);
         }
 
         public uint6 this[N2 n]
         {
             [MethodImpl(Inline)]
-            get => UBits.uint6(Data >> 12);
+            get => UI.uint6(Data >> 12);
         }
 
         public uint6 this[N3 n]
         {
             [MethodImpl(Inline)]
-            get => UBits.uint6(Data >> 18);
+            get => UI.uint6(Data >> 18);
         }
     }
 }

@@ -21,7 +21,7 @@ namespace Z0
         /// </summary>
         T Content {get;}
 
-        uint ISized.Width
+        BitSize ISized.Width
             => bitwidth<T>();
     }
 

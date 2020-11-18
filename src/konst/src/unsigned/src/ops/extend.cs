@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct UBits
+    partial struct UI
     {
         /// <summary>
         /// Promotes a <see cref='U2'/> to a <see cref='U3'/>, as indicated by the <see cref='W3'/> selector

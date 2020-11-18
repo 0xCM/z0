@@ -11,18 +11,19 @@ namespace Z0
         /// <summary>
         /// Specifies the bit-scaled data width of the reification type
         /// </summary>
-        uint Width {get;}
+        BitSize Width {get;}
 
-        uint Size
-            => Width/8;
+        ByteSize Size
+            => (uint)Width/8;
     }
 
     public interface ISized<W> : ISized
         where W : unmanaged, IDataWidth
     {
-        new W Width => default(W);
+        new W Width
+            => default(W);
 
-        uint ISized.Width
+        BitSize ISized.Width
             => Width.Value;
     }
 

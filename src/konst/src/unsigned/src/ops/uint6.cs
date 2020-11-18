@@ -11,7 +11,7 @@ namespace Z0
 
     using U = uint6;
 
-    partial struct UBits
+    partial struct UI
     {
         /// <summary>
         /// Creates a 6-bit unsigned integer, equal to zero or one, if the source value is respectively false or true

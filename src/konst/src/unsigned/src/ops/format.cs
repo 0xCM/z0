@@ -11,7 +11,7 @@ namespace Z0
 
     using U = uint2;
 
-    partial struct UBits
+    partial struct UI
     {
         static BitFormat FormatConfig2
             => BitFormatter.limited(U.Width, U.Width);
