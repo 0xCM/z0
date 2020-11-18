@@ -10,6 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
+    [ApiHost]
     public readonly struct SeqMap
     {
         const NumericKind Closure = UnsignedInts;
