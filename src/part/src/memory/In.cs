@@ -7,10 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static System.Runtime.CompilerServices.Unsafe;
-
-    using static z;
+    using static memory;
 
     [ApiHost]
     public readonly struct In
