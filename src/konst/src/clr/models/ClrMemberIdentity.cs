@@ -17,18 +17,6 @@ namespace Z0
     {
         readonly ulong Data;
 
-        [MethodImpl(Inline)]
-        public static ClrMemberIdentity from(FieldInfo src)
-            => new ClrMemberIdentity(src);
-
-        [MethodImpl(Inline)]
-        public static ClrMemberIdentity from(PropertyInfo src)
-            => new ClrMemberIdentity(src);
-
-        [MethodImpl(Inline)]
-        public static ClrMemberIdentity from(MethodInfo src)
-            => new ClrMemberIdentity(src);
-
         public ClrArtifactKey OwnerId
         {
             [MethodImpl(Inline)]
@@ -54,26 +42,6 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static bool operator ==(ClrMemberIdentity x, ClrMemberIdentity y)
-            => x.Equals(y);
-
-        [MethodImpl(Inline)]
-        public static bool operator !=(ClrMemberIdentity x, ClrMemberIdentity y)
-            => !x.Equals(y);
-
-        [MethodImpl(Inline)]
-        public static implicit operator ClrMemberIdentity(FieldInfo src)
-            => new ClrMemberIdentity(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator ClrMemberIdentity(PropertyInfo src)
-            => new ClrMemberIdentity(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator ClrMemberIdentity(MethodInfo src)
-            => from(src);
-
-        [MethodImpl(Inline)]
         internal ClrMemberIdentity(FieldInfo src)
             : this(src.DeclaringType.MetadataToken, src.MetadataToken)
         {
@@ -95,11 +63,15 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        ClrMemberIdentity(uint owner, uint member)
+        internal ClrMemberIdentity(EventInfo src)
+            : this(src.DeclaringType.MetadataToken, src.MetadataToken)
         {
-            Data = ((ulong)owner << 32) | (ulong)member;
 
         }
+
+        [MethodImpl(Inline)]
+        ClrMemberIdentity(uint owner, uint member)
+            => Data = ((ulong)owner << 32) | (ulong)member;
 
         [MethodImpl(Inline)]
         internal ClrMemberIdentity(int owner, int member)
@@ -127,5 +99,25 @@ namespace Z0
 
         public static ClrMemberIdentity Empty
             => default;
+
+        [MethodImpl(Inline)]
+        public static bool operator ==(ClrMemberIdentity x, ClrMemberIdentity y)
+            => x.Equals(y);
+
+        [MethodImpl(Inline)]
+        public static bool operator !=(ClrMemberIdentity x, ClrMemberIdentity y)
+            => !x.Equals(y);
+
+        [MethodImpl(Inline)]
+        public static implicit operator ClrMemberIdentity(FieldInfo src)
+            => new ClrMemberIdentity(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator ClrMemberIdentity(PropertyInfo src)
+            => new ClrMemberIdentity(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator ClrMemberIdentity(MethodInfo src)
+            => new ClrMemberIdentity(src);
     }
 }

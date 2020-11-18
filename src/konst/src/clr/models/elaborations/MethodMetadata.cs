@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Reflection;
 
-    using static Konst;
-
     public struct MethodMetadata : ITextual
     {
         public ClrArtifactKey MethodId;

@@ -11,9 +11,13 @@ namespace Z0
 
     using static Konst;
 
-    [StructLayout(DefaultLayout)]
+    [StructLayout(DefaultLayout), Table(TableId, FieldCount)]
     public struct ClrFieldRecord
     {
+        public const byte FieldCount = 6;
+
+        public const string TableId = "clr.fields";
+
         public CliArtifactRef Key;
 
         public ClrArtifactKey DeclaringType;

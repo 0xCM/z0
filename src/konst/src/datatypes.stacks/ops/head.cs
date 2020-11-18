@@ -8,10 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Stacked;
     using static z;
 
-    partial class Stacks
+    partial class StackStores
     {
         /// <summary>
         /// Presents the leading source storage cell as a generic reference
@@ -64,7 +63,7 @@ namespace Z0
         /// <param name="t">A cell type representative</param>
         /// <typeparam name="T">The reference type</typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static ref T head<T>(ref BitStack1024 src, T t = default)
+        public static ref T head<T>(ref BitBlock1024 src, T t = default)
             where T : unmanaged
                 => ref @as<ulong,T>(u64(src));
 

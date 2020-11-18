@@ -4,9 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public static partial class Stacked
+    partial class StackStores
     {
-
         public struct CharStack2
         {
             public char C0;
@@ -32,21 +31,21 @@ namespace Z0
         {
             public CharStack8 C0;
 
-            CharStack8 C1;        
+            CharStack8 C1;
         }
 
         public struct CharStack32
         {
             public CharStack16 C0;
 
-            CharStack16 C1;        
+            CharStack16 C1;
         }
 
         public struct CharStack64
         {
             public CharStack32 C0;
 
-            CharStack32 C1;       
-        }        
+            CharStack32 C1;
+        }
     }
 }

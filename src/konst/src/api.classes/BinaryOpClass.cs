@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Defines a type-level lift for the <see cref='ApiOperatorClass.BinaryOp'/> classifier

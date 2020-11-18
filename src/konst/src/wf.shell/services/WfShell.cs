@@ -76,7 +76,7 @@ namespace Z0
             Router = new CmdRouter(this);
         }
 
-        internal WfShell(IWfInit config, CorrelationToken ct, IWfEventSink sink, IWfBroker broker, WfHost host, IPolyrand random, LogLevel verbosity)
+        internal WfShell(IWfInit config, CorrelationToken ct, IWfEventSink sink, IWfBroker broker, WfHost host, IPolyrand random, LogLevel verbosity, ICmdRouter router)
         {
             Context = config.Shell;
             Init = config;
@@ -94,7 +94,7 @@ namespace Z0
             Api = config.ApiParts.Api;
             Controller = config.Control;
             AppName = config.Shell.AppName;
-            Router = new CmdRouter(this);
+            Router = router;
         }
 
         IWfShell Wf => this;

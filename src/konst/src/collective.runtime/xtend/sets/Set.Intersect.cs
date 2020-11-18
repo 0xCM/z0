@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
-    using System.Linq;
 
     partial class XTend
     {
@@ -15,7 +14,7 @@ namespace Z0
         {
             var dst = new HashSet<T>(s1);
             dst.IntersectWith(s2);
-            return dst;        
+            return dst;
         }
 
         /// <summary>
@@ -26,8 +25,8 @@ namespace Z0
         /// <typeparam name="T">The item type</typeparam>
         public static ISet<T> Intersect<T>(this ISet<T> dst, params ISet<T>[] src)
         {
-            src.Iter(set => set.Iter(item => dst.Add(item)));            
-            return dst;        
+            src.Iter(set => set.Iter(item => dst.Add(item)));
+            return dst;
         }
     }
 }

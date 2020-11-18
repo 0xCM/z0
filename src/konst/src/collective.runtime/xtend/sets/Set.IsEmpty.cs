@@ -9,7 +9,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
-    using static Konst;
+    using static Part;
 
     partial class XTend
     {
@@ -29,7 +29,7 @@ namespace Z0
         /// <param name="set">The set under examination</param>
         [MethodImpl(Inline)]
         public static bool IsNonEmpty<T>(this ISet<T> set)
-            => set.Count != 0;        
+            => set.Count != 0;
 
         /// <summary>
         /// Determines whether a collection contains any elements

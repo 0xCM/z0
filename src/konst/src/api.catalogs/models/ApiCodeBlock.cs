@@ -17,20 +17,12 @@ namespace Z0
         /// <summary>
         /// The operation uri
         /// </summary>
-        public readonly OpUri Uri;
+        public OpUri Uri {get;}
 
         /// <summary>
         /// The encoded operation data
         /// </summary>
-        public readonly BasedCodeBlock Code;
-
-        [MethodImpl(Inline)]
-        public static implicit operator BinaryCode(ApiCodeBlock src)
-            => src.Code;
-
-        [MethodImpl(Inline)]
-        public static implicit operator BasedCodeBlock(ApiCodeBlock src)
-            => new BasedCodeBlock(src.Base, src.Code);
+        public BasedCodeBlock Code {get;}
 
         [MethodImpl(Inline)]
         public ApiCodeBlock(MemoryAddress @base, OpUri uri, BinaryCode src)
@@ -159,5 +151,13 @@ namespace Z0
         /// </summary>
         public static ApiCodeBlock Empty
             => default;
+
+        [MethodImpl(Inline)]
+        public static implicit operator BinaryCode(ApiCodeBlock src)
+            => src.Code;
+
+        [MethodImpl(Inline)]
+        public static implicit operator BasedCodeBlock(ApiCodeBlock src)
+            => new BasedCodeBlock(src.Base, src.Code);
     }
 }

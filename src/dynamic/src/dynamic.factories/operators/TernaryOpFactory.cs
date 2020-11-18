@@ -15,7 +15,7 @@ namespace Z0
     {
         public static ITernaryOpFactory<T> Service => default(TernaryOpFactory<T>);
 
-        public Func<T,T,T,T> Manufacture(MethodInfo method, object instance = null)
+        public Func<T,T,T,T> Create(MethodInfo method, object instance = null)
         {
             var args = z.array(paramX<T,T,T>());
             var callExpr = call(instance, method, args);

@@ -13,86 +13,86 @@ namespace Z0
     partial struct SymbolStore
     {
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<Symbol<UInt6,byte,N6>> bits(N6 n)
-            => Bytes.cells<Symbol<UInt6,byte,N6>>(n64);
+        public static ReadOnlySpan<Symbol<BitSeq6,byte,N6>> bits(N6 n)
+            => Bytes.cells<Symbol<BitSeq6,byte,N6>>(n64);
 
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<Symbol<UInt7,byte,N7>> bits(N7 n)
-            => Bytes.cells<Symbol<UInt7,byte,N7>>(n128);
+        public static ReadOnlySpan<Symbol<BitSeq7,byte,N7>> bits(N7 n)
+            => Bytes.cells<Symbol<BitSeq7,byte,N7>>(n128);
 
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<Symbol<Octet,byte,N8>> bits(N8 n)
-            => Bytes.cells<Symbol<Octet,byte,N8>>(n256);
+        public static ReadOnlySpan<Symbol<BitSeq8,byte,N8>> bits(N8 n)
+            => Bytes.cells<Symbol<BitSeq8,byte,N8>>(n256);
 
         /// <summary>
-        /// Creates a cell-parametric store store covering each <see cref='UInt1'/> member
+        /// Creates a cell-parametric store store covering each <see cref='BitSeq1'/> member
         /// </summary>
         /// <param name="n">The sequence length selector</param>
         /// <typeparam name="T">The storage cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static SymbolStore<UInt1,T,N1> bits<T>(N1 n)
+        public static SymbolStore<BitSeq1,T,N1> bits<T>(N1 n)
             where T : unmanaged
-                => symbols<UInt1,T,N1>();
+                => symbols<BitSeq1,T,N1>();
 
         /// <summary>
-        /// Creates a cell-parametric store store covering each <see cref='UInt2'/> member
+        /// Creates a cell-parametric store store covering each <see cref='BitSeq2'/> member
         /// </summary>
         /// <param name="n">The sequence length selector</param>
         /// <typeparam name="T">The storage cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static SymbolStore<UInt2,T,N2> bits<T>(N2 n)
+        public static SymbolStore<BitSeq2,T,N2> bits<T>(N2 n)
             where T : unmanaged
-            => symbols<UInt2,T,N2>();
+            => symbols<BitSeq2,T,N2>();
 
         /// <summary>
-        /// Creates a cell-parametric store store covering each <see cref='UInt3'/> member
+        /// Creates a cell-parametric store store covering each <see cref='BitSeq3'/> member
         /// </summary>
         /// <param name="n">The sequence length selector</param>
         /// <typeparam name="T">The storage cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static SymbolStore<UInt3,T,N3> bits<T>(N3 n)
+        public static SymbolStore<BitSeq3,T,N3> bits<T>(N3 n)
             where T : unmanaged
-            => symbols<UInt3,T,N3>();
+            => symbols<BitSeq3,T,N3>();
 
         /// <summary>
-        /// Creates a cell-parametric store store covering each <see cref='UInt4'/> member
+        /// Creates a cell-parametric store store covering each <see cref='BitSeq4'/> member
         /// </summary>
         /// <param name="n">The sequence length selector</param>
         /// <typeparam name="T">The storage cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static SymbolStore<UInt4,T,N4> bits<T>(N4 n)
+        public static SymbolStore<BitSeq4,T,N4> bits<T>(N4 n)
             where T : unmanaged
-            => symbols<UInt4,T,N4>();
+            => symbols<BitSeq4,T,N4>();
 
         /// <summary>
-        /// Creates a cell-parametric store store covering each <see cref='UInt5'/> member
+        /// Creates a cell-parametric store store covering each <see cref='BitSeq5'/> member
         /// </summary>
         /// <param name="n">The sequence length selector</param>
         /// <typeparam name="T">The storage cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static SymbolStore<UInt5,T,N5> bits<T>(N5 n)
+        public static SymbolStore<BitSeq5,T,N5> bits<T>(N5 n)
             where T : unmanaged
-            => symbols<UInt5,T,N5>();
+            => symbols<BitSeq5,T,N5>();
 
         /// <summary>
-        /// Creates a cell-parametric store store covering each <see cref='UInt6'/> member
+        /// Creates a cell-parametric store store covering each <see cref='BitSeq6'/> member
         /// </summary>
         /// <param name="n">The sequence length selector</param>
         /// <typeparam name="T">The storage cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static SymbolStore<UInt6,T,N6> bits<T>(N6 n)
+        public static SymbolStore<BitSeq6,T,N6> bits<T>(N6 n)
             where T : unmanaged
-                => symbols<UInt6,T,N6>();
+                => symbols<BitSeq6,T,N6>();
 
         /// <summary>
-        /// Creates a cell-parametric store store covering each <see cref='Octet'/> member
+        /// Creates a cell-parametric store store covering each <see cref='BitSeq8'/> member
         /// </summary>
         /// <param name="n">The sequence length selector</param>
         /// <typeparam name="T">The storage cell type</typeparam>
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static SymbolStore<Octet,T,N8> bits<T>(N8 n)
+        public static SymbolStore<BitSeq8,T,N8> bits<T>(N8 n)
             where T : unmanaged
-                => symbols<Octet,T,N8>();
+                => symbols<BitSeq8,T,N8>();
     }
 }

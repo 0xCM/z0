@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Defines an E-parametric literal index
     /// </summary>
-    [ApiProviderAttribute(DataIndex)]
+    [DataType]
     public readonly struct EnumLiteralDetails<E> : IIndex<EnumLiteralDetail<E>>
         where E : unmanaged, Enum
     {
@@ -65,7 +65,7 @@ namespace Z0
         }
 
         public IEnumerable<NamedValue<E>> NamedValues
-            => from i in Data select NamedValue.define(i.Name, i.LiteralValue);
+            => from i in Data select Names.value(i.Name, i.LiteralValue);
 
         public EnumLiteralDetail<E>[] Storage
         {
@@ -76,11 +76,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator EnumLiteralDetails<E>(EnumLiteralDetail<E>[] src)
             => new EnumLiteralDetails<E>(src);
-
-        // public IEnumerator<EnumLiteralDetail<E>> GetEnumerator()
-        //     => ((IEnumerable<EnumLiteralDetail<E>>)Data).GetEnumerator();
-
-        // IEnumerator IEnumerable.GetEnumerator()
-        //     => Data.GetEnumerator();
     }
 }

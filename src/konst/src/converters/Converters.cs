@@ -19,7 +19,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The value to convert</param>
         public static Option<T> convert<S,T>(S src)
-            => Try(() =>from converter in Converters.get<S>()
+            => Try(() => from converter in Converters.get<S>()
                     from converted in converter.ConvertFromTarget(src,typeof(T))
                     select (T)converted);
 

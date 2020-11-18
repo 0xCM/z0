@@ -12,23 +12,5 @@ namespace Z0
 
     partial struct ClrArtifacts
     {
-        public readonly struct Supported
-        {
-            public static FieldView field => default;
-
-            public static MethodView method => default;
-
-            public static TypeView type => default;
-
-            public static ModuleView module => default;
-        }
-
-        static FieldView field => Supported.field;
-
-        static ModuleView module => Supported.module;
-
-        static MethodView method => Supported.method;
-
-        static TypeView type => Supported.type;
     }
 }

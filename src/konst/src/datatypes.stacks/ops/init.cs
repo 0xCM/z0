@@ -6,18 +6,37 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
 
     using static Konst;
     using static z;
 
-    partial class Stacks
+    partial class StackStores
     {
-        [MethodImpl(Inline), Op, Closures(UInt64k)]
-        public static DataBlock<T> init<T>(in T lo, in T hi)
-            where T : unmanaged
-                => pair(lo, hi);
+        [MethodImpl(Inline), Op]
+        public static CellBlock32 init(Vector256<ushort> lo, Vector256<ushort> hi)
+        {
+            var src = new Seg512(lo,hi);
+            var dst = alloc(w8, n32);
+            copy(z.bytes(src), ref dst);
+            return dst;
+        }
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        readonly struct Seg512
+        {
+            readonly Vector256<ushort> Lo;
+
+            readonly Vector256<ushort> Hi;
+
+            [MethodImpl(Inline), Op]
+            public Seg512(Vector256<ushort> lo, Vector256<ushort> hi)
+            {
+                Lo = lo;
+                Hi = hi;
+            }
+        }
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static BitBlock32 init<T>(W32 w, in T src)
             where T : unmanaged
         {
@@ -58,7 +77,7 @@ namespace Z0
                 throw no<T>();
         }
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static BitBlock64 init<T>(W64 w, in T src)
             where T : unmanaged
         {
@@ -67,7 +86,7 @@ namespace Z0
             return @as<BitBlock128,BitBlock64>(dst);
         }
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static BitBlock128 init<T>(W128 w, in T src)
             where T : unmanaged
         {
@@ -76,7 +95,7 @@ namespace Z0
             return dst;
         }
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static BitBlock256 init<T>(W256 w, in T src)
             where T : unmanaged
         {

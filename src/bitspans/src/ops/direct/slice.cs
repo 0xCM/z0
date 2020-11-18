@@ -22,9 +22,9 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static byte slice(in BitSpan src, W8 w, int offset, int count)
         {
-            var buffer = Stacks.alloc(w64);
-            var unpacked = Stacks.span<Bit32>(ref buffer);
-            ref var dst = ref Stacks.head<Bit32>(ref buffer);
+            var buffer = StackStores.alloc(w64);
+            var unpacked = StackStores.span<Bit32>(ref buffer);
+            ref var dst = ref StackStores.head<Bit32>(ref buffer);
             MemCopy.copy(in skip(src.Edit, offset), ref dst, count);
             return BitPack.pack(unpacked,Konst.z8);
         }
@@ -39,9 +39,9 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ushort slice(in BitSpan src, W16 w, int offset, int count)
         {
-            var buffer = Stacks.alloc(w128);
-            var unpacked = Stacks.span<Bit32>(ref buffer);
-            ref var dst = ref Stacks.head<Bit32>(ref buffer);
+            var buffer = StackStores.alloc(w128);
+            var unpacked = StackStores.span<Bit32>(ref buffer);
+            ref var dst = ref StackStores.head<Bit32>(ref buffer);
             MemCopy.copy(in skip(src.Edit, offset), ref dst, count);
             return BitPack.pack(unpacked, z16);
         }
@@ -56,8 +56,8 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static uint slice(in BitSpan src, W32 w, int offset, int count)
         {
-            var buffer = Stacks.alloc(w256);
-            var unpacked = Stacks.span<Bit32>(ref buffer);
+            var buffer = StackStores.alloc(w256);
+            var unpacked = StackStores.span<Bit32>(ref buffer);
             var take = math.min(src.Edit.Length -offset, count);
             src.Edit.Slice(offset,take).CopyTo(unpacked);
             return BitPack.pack(unpacked, z32);
@@ -73,9 +73,9 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ulong slice(in BitSpan src, W64 w, int offset, int count)
         {
-            var buffer = Stacks.alloc(w512);
-            var unpacked = Stacks.span<Bit32>(ref buffer);
-            ref var dst = ref Stacks.head<Bit32>(ref buffer);
+            var buffer = StackStores.alloc(w512);
+            var unpacked = StackStores.span<Bit32>(ref buffer);
+            ref var dst = ref StackStores.head<Bit32>(ref buffer);
             MemCopy.copy(in skip(src.Edit, offset), ref dst, count);
             return BitPack.pack(unpacked, z64);
         }
@@ -83,9 +83,9 @@ namespace Z0
         [MethodImpl(Inline)]
         internal static sbyte islice(in BitSpan src, W8 w, int offset, int count)
         {
-            var buffer = Stacks.alloc(w64);
-            var unpacked = Stacks.span<Bit32>(ref buffer);
-            ref var dst = ref Stacks.head<Bit32>(ref buffer);
+            var buffer = StackStores.alloc(w64);
+            var unpacked = StackStores.span<Bit32>(ref buffer);
+            ref var dst = ref StackStores.head<Bit32>(ref buffer);
             MemCopy.copy(in skip(src.Edit, offset), ref dst, count);
             return BitPack.pack(unpacked, z8i);
         }
@@ -93,9 +93,9 @@ namespace Z0
         [MethodImpl(Inline)]
         internal static short islice(in BitSpan src, W16 w, int offset, int count)
         {
-            var buffer = Stacks.alloc(w128);
-            var unpacked = Stacks.span<Bit32>(ref buffer);
-            ref var dst = ref Stacks.head<Bit32>(ref buffer);
+            var buffer = StackStores.alloc(w128);
+            var unpacked = StackStores.span<Bit32>(ref buffer);
+            ref var dst = ref StackStores.head<Bit32>(ref buffer);
             MemCopy.copy(in skip(src.Edit, offset), ref dst, count);
             return BitPack.pack(unpacked, z16i);
         }
@@ -103,9 +103,9 @@ namespace Z0
         [MethodImpl(Inline)]
         internal static int islice(in BitSpan src, W32 w, int offset, int count)
         {
-            var buffer = Stacks.alloc(w256);
-            var unpacked = Stacks.span<Bit32>(ref buffer);
-            ref var dst = ref Stacks.head<Bit32>(ref buffer);
+            var buffer = StackStores.alloc(w256);
+            var unpacked = StackStores.span<Bit32>(ref buffer);
+            ref var dst = ref StackStores.head<Bit32>(ref buffer);
             MemCopy.copy(in skip(src.Edit, offset), ref dst, count);
             return BitPack.pack(unpacked,z32i);
         }
@@ -113,9 +113,9 @@ namespace Z0
         [MethodImpl(Inline)]
         internal static long islice(in BitSpan src, W64 w, int offset, int count)
         {
-            var buffer = Stacks.alloc(w512);
-            var unpacked = Stacks.span<Bit32>(ref buffer);
-            ref var dst = ref Stacks.head<Bit32>(ref buffer);
+            var buffer = StackStores.alloc(w512);
+            var unpacked = StackStores.span<Bit32>(ref buffer);
+            ref var dst = ref StackStores.head<Bit32>(ref buffer);
             MemCopy.copy(in skip(src.Edit, offset), ref dst, count);
             return BitPack.pack(unpacked, z64i);
         }

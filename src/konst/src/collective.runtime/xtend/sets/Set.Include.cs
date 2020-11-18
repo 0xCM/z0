@@ -7,9 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
-    using System.Linq;
 
-    using static Konst;
+    using static Part;
 
     partial class XTend
     {
@@ -21,7 +20,7 @@ namespace Z0
         /// <typeparam name="T">The item type</typeparam>
         public static void Include<T>(this ISet<T> dst, IEnumerable<T> src)
             => src.Iter(item => dst.Add(item));
-        
+
         /// <summary>
         /// Adds items from a parameter array to a target set
         /// </summary>

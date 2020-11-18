@@ -6,6 +6,8 @@ namespace Z0
 {
     public sealed class BlockedAttribute : SegmentedAttribute
     {
+        public SpanBlockKind Kind {get;}
+
         public BlockedAttribute(TypeWidth width, params CellWidth[] cells)
             : base(width, false, cells)
         {
@@ -16,8 +18,5 @@ namespace Z0
         {
             Kind = kind;
         }
-
-        public SpanBlockKind Kind {get;}
-
     }
 }

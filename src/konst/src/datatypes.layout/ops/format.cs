@@ -16,12 +16,18 @@ namespace Z0
 
         [Op, MethodImpl(Inline)]
         public static string format(in LayoutPartition src)
-            => string.Format(PartitionFormat, src.Left/8, src.Right/8, src.Width/8);
+            => string.Format(PartitionFormat, src.Left, src.Right, src.Width);
 
         [Op, MethodImpl(Inline)]
         public static string format<T>(in LayoutPartition<T> src)
             where T : unmanaged
-                => string.Format(PartitionFormat, src.Left/8, src.Right/8, src.Width/8);
+                => string.Format(PartitionFormat, src.Left, src.Right, src.Width);
+
+        [Op, MethodImpl(Inline)]
+        public static string format<T,R>(in LayoutPartition<T,R> src)
+            where T : unmanaged
+            where R : unmanaged
+                => string.Format(PartitionFormat, src.Left, src.Right, src.Width);
 
         [Op, Closures(Closure)]
         public static string format<T>(in LayoutIdentity<T> src)

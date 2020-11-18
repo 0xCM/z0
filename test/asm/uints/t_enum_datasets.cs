@@ -38,7 +38,7 @@ namespace Z0.Asm
         public void ds_1()
         {
             emit<AsciCharCode,byte>();
-            emit<Octet,byte>();
+            emit<BitSeq8,byte>();
             emit<Hex8Seq,byte>();
             emit<RegisterKind,uint>();
             emit<RegisterIndex,byte>();

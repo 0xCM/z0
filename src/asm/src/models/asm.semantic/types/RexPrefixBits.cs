@@ -8,7 +8,7 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static UInt4;
+    using static BitSeq4;
 
     using RFI = RexFieldIndex;
     using RFW = RexFieldWidth;

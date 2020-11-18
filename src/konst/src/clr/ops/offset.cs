@@ -9,8 +9,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     partial struct ClrQuery
     {

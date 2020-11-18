@@ -30,8 +30,6 @@ namespace Z0
         CorrelationToken Ct
             => z.correlate(Controller.Id);
 
-        // ITestLogPaths TestLogPaths
-        //     => new TestLogPaths();
         CmdArgs Args
              => Environment.GetCommandLineArgs();
 
@@ -88,9 +86,9 @@ namespace Z0
         void Ran()
             => SignalRan();
 
-        WfExecFlow Running<T>(T worker)
+        WfExecFlow Running<T>(T content)
         {
-            SignalRunning(worker);
+            SignalRunning(content);
             return Flow();
         }
 
@@ -109,6 +107,9 @@ namespace Z0
         void SignalRan()
             => Raise(new RanEvent(Host, Ct));
 
+        void SignalRan<T>(T content)
+            => Raise(ran(Host, content, Ct));
+
         ICmdCatalog CmdCatalog
             => new CmdCatalog(this);
 
@@ -117,9 +118,6 @@ namespace Z0
 
         IPolySourced PolySource
             => Random;
-
-        // IWfPaths IWfContext.Paths
-        //     => Context.Paths;
 
         FS.FolderPath IndexRoot
             => FS.dir(Init.IndexDir.Name);

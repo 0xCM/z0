@@ -6,17 +6,13 @@ namespace Z0
 {
     using System;
     using System.Runtime.InteropServices;
-    using System.Reflection;
 
     using static Konst;
 
-    [StructLayout(LayoutKind.Sequential), Table(TableId, FieldCount)]
+    [StructLayout(DefaultLayout), Table(TableId, FieldCount)]
     public struct ClrEnumLiteralRecord
     {
         public const byte FieldCount = 8;
-
-        public static ReadOnlySpan<byte> RenderWidths
-            => new byte[FieldCount]{16, 36, 16, 24, 16, 16, 24, 16};
 
         public const string TableId = "clr.enums";
 
@@ -60,5 +56,4 @@ namespace Z0
         /// </summary>
         public ulong LiteralValue;
     }
-
 }

@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection.Metadata.Ecma335;
 
-    using static Konst;
+    using static Part;
 
     public readonly struct CliArtifactKind : ICliArtifactKind<CliArtifactKind>
     {

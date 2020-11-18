@@ -20,8 +20,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public LookupTable(LookupEntry<K,V>[] src)
-        {
-            Entries = src;
-        }
+            => Entries = src;
     }
 }

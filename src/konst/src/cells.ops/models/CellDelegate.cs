@@ -15,21 +15,13 @@ namespace Z0
         /// <summary>
         /// The operation identity
         /// </summary>
-        public readonly OpIdentity Id;
+        public OpIdentity Id {get;}
 
-        public readonly MemoryAddress SourceAddress;
+        public MemoryAddress SourceAddress {get;}
 
-        public readonly DynamicMethod Enclosure;
+        public DynamicMethod Enclosure {get;}
 
-        public readonly Delegate DynamicOp;
-
-        [MethodImpl(Inline)]
-        public static CellDelegate define(OpIdentity id, MemoryAddress src, DynamicMethod enclosure, Delegate dynop)
-            => new CellDelegate(id,src,enclosure,dynop);
-
-        [MethodImpl(Inline)]
-        public static implicit operator Delegate(CellDelegate src)
-            => src.DynamicOp;
+        public Delegate DynamicOp {get;}
 
         [MethodImpl(Inline)]
         public CellDelegate(OpIdentity id, MemoryAddress src, DynamicMethod enclosure, Delegate dynop)
@@ -39,5 +31,9 @@ namespace Z0
             Enclosure = enclosure;
             DynamicOp = dynop;
         }
+
+        [MethodImpl(Inline)]
+        public static implicit operator Delegate(CellDelegate src)
+            => src.DynamicOp;
     }
 }

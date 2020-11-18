@@ -8,32 +8,23 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Konst;
-    using static z;
+    using static memory;
 
     partial struct ClrQuery
     {
-        /// <summary>
-        /// Returns true if the source field is a literal, false otherwise
-        /// </summary>
-        /// <param name="src">The field to test</param>
-        [MethodImpl(Inline), Op]
-        public static bool IsLiteral(FieldInfo src)
-            => src.IsLiteral;
-
-        [MethodImpl(Inline), Op]
+        [Op]
         public static Span<FieldInfo> literals(in IndexedSeq<FieldInfo> src, Span<FieldInfo> dst)
         {
             var k = 0u;
             var view = src.Terms;
             var count = view.Length;
             for(var i=0u; i<count; i++)
-                if(IsLiteral(skip(view,i)))
+                if(skip(view,i).IsLiteral)
                     seek(dst, k++) = skip(view,i);
             return slice(dst,k);
         }
 
-        [MethodImpl(Inline), Op]
+        [Op]
         public static Span<FieldInfo> literals(Type src, Span<FieldInfo> dst)
             => literals(fields(src), dst);
     }

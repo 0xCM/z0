@@ -22,7 +22,6 @@ namespace Z0
             where T : struct
                 => new CliDependency<S,T>(src,dst);
 
-
         /// <summary>
         /// Returns a reference to the cli metadata for an assembly
         /// </summary>

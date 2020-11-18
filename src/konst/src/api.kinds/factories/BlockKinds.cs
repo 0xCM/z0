@@ -98,7 +98,6 @@ namespace Z0
         public static Block64x64u b64x64u()
             => default;
 
-
         [KindFactory]
         public static Block64x64i b64x64i()
             => default;
@@ -107,11 +106,9 @@ namespace Z0
         public static Block128x8u b128x8u()
             => default;
 
-
         [KindFactory]
         public static Block128x8i b128x8i()
             => default;
-
 
         [KindFactory]
         public static Block128x16u b128x16u()

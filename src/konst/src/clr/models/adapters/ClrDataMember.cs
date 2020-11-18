@@ -8,8 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     /// <summary>
     /// Unifies fields and properties from a structural metadata represetnation perspective
@@ -23,17 +22,14 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ClrDataMember(PropertyInfo src)
-        {
-            Definition = src;
-        }
+            => Definition = src;
 
         [MethodImpl(Inline)]
         public ClrDataMember(FieldInfo src)
-        {
-            Definition = src;
-        }
+            => Definition = src;
 
-        bool IsField => Definition is FieldInfo;
+        bool IsField
+            => Definition is FieldInfo;
 
         public object GetValue(object o)
         {

@@ -5,20 +5,18 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-
-    using static Konst;
-    using static z;
 
     public interface IDataLayout : ITextual
     {
         LayoutIdentity Id {get;}
 
-        uint Index => Id.Index;
-
-        ulong Kind => Id.Kind;
-
         ulong Width {get;}
+
+        uint Index
+            => Id.Index;
+
+        ulong Kind
+            => Id.Kind;
     }
 
     public interface IDataLayout<H> : IDataLayout
@@ -36,7 +34,6 @@ namespace Z0
         uint PartitionCount
             => (uint)Partitions.Length;
     }
-
 
     public interface IDataLayout<H,S,T> : IDataLayout<H,S>
         where H : struct, IDataLayout<H,S,T>

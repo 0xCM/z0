@@ -6,10 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Reflection;
 
     using static Konst;
-    using static z;
 
     /// <summary>
     /// Defines an entry in a <see cref='LookupTable{T,K}'/>

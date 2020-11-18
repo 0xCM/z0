@@ -30,7 +30,7 @@ namespace Z0.Asm
             var id = m.Identify();
 
             var factory = Dynamic.Factory(K.emitter(t));
-            var f = factory.Manufacture(m);
+            var f = factory.Create(m);
             Claim.eq(f(), M.K17());
         }
 
@@ -42,7 +42,7 @@ namespace Z0.Asm
             var id = m.Identify();
 
             var factory = Dynamic.Factory(K.unaryop(t));
-            var f = factory.Manufacture(m);
+            var f = factory.Create(m);
             Claim.eq(f(3), M.Square(3));
         }
 
@@ -54,7 +54,7 @@ namespace Z0.Asm
             var id = m.Identify();
 
             var factory = Dynamic.Factory(K.binaryop(t));
-            var f = factory.Manufacture(m);
+            var f = factory.Create(m);
             Claim.eq(f(10,5), M.BinaryAdd(10,5));
         }
 
@@ -66,7 +66,7 @@ namespace Z0.Asm
             var id = m.Identify();
 
             var factory = Dynamic.Factory(K.ternaryop(t));
-            var f = factory.Manufacture(m);
+            var f = factory.Create(m);
             Claim.eq(f(10,5,5), M.TernaryAdd(10,5,5));
         }
 

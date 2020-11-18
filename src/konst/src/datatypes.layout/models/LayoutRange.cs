@@ -19,12 +19,12 @@ namespace Z0
         /// <summary>
         /// The postion of the least-significant bit
         /// </summary>
-        public readonly ulong Left;
+        public ulong Left {get;}
 
         /// <summary>
         /// The postion of the most-significant bit
         /// </summary>
-        public readonly ulong Right;
+        public ulong Right {get;}
 
         [MethodImpl(Inline)]
         public LayoutRange(ulong left, ulong right)
@@ -36,5 +36,14 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator LayoutRange((ulong lsb, ulong msb) src)
             => new LayoutRange(src.lsb, src.msb);
+
+        [MethodImpl(Inline)]
+        public static implicit operator LayoutRange(Pair<ulong> src)
+            => new LayoutRange(src.Left, src.Right);
+
+        [MethodImpl(Inline)]
+        public static implicit operator LayoutRange(ClosedInterval<ulong> src)
+            => new LayoutRange(src.Min, src.Max);
+
     }
 }

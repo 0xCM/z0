@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Defines a span of contiguous memory that can be evenly partitioned into 8-bit segments
     /// </summary>
-    [ApiType(ApiTypeId.SpanBlock), Blocked(TypeWidth.W8, SpanBlockKind.Sb8)]
+    [Blocked(TypeWidth.W8, SpanBlockKind.Sb8)]
     public readonly ref struct SpanBlock8<T>
         where T : unmanaged
     {

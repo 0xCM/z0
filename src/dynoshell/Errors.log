@@ -1,0 +1,10 @@
+Failure trapped by Main at J:\dev\projects\z0\src\dynoshell\src\App.cs 25
+System.ArgumentException: Cannot create an instance of Z0.CmdReactor`3[H,S,T] because Type.ContainsGenericParameters is true.
+   at System.RuntimeType.CreateInstanceCheckThis()
+   at System.RuntimeType.CreateInstanceDefaultCtor(Boolean publicOnly, Boolean skipCheckThis, Boolean fillCache, Boolean wrapExceptions)
+   at System.Activator.CreateInstance(Type type, Boolean nonPublic, Boolean wrapExceptions)
+   at Z0.WfShell.<>c.<reactors>b__18_0(Type t) in j:\dev\projects\z0\src\konst\src\wf.shell\ops\reactors.cs:line 20
+   at Z0.WfShell.reactors(IWfShell wf, Assembly[] components) in j:\dev\projects\z0\src\konst\src\wf.shell\ops\reactors.cs:line 20
+   at Z0.WfShell.create(String[] args, Boolean verbose) in j:\dev\projects\z0\src\konst\src\wf.shell\ops\create.cs:line 40
+   at Z0.App.Main(String[] args) in J:\dev\projects\z0\src\dynoshell\src\App.cs:line 20
+

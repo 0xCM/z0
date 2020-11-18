@@ -20,4 +20,10 @@ namespace Z0
         public static CmdResult run(IWfShell wf, EmitResourceDataCmd spec)
             => Workers.exec(wf, spec);
     }
+
+    sealed class EmitResourceDataReactor : CmdReactor<EmitResourceDataReactor, EmitResourceDataCmd, CmdResult>
+    {
+        protected override CmdResult Run(EmitResourceDataCmd cmd)
+            => Workers.exec(Wf, cmd);
+    }
 }

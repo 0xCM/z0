@@ -1,9 +1,8 @@
-echo off
+@echo off
 set ProjectId=dynoshell
 
-set SetupCmd=%ZDev%\.cmd\setup.cmd
-echo SetupCmd:%SetupCmd%
+set BuildCmd=%ZDev%\.cmd\build-project.cmd
+echo BuildCmd:%BuildCmd%
 
 echo on
-call %SetupCmd%
 call %BuildCmd%

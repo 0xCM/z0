@@ -8,11 +8,10 @@ namespace Z0
     using System.Reflection;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
     using System.Linq;
     using System.IO;
 
-    [ApiHost("api")]
+    [ApiHost]
     public readonly partial struct Part
     {
         /// <summary>

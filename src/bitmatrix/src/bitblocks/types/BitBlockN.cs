@@ -21,71 +21,6 @@ namespace Z0
     {
         readonly Span<T> data;
 
-        [MethodImpl(Inline)]
-        public static implicit operator BitBlock<T>(in BitBlock<N,T> x)
-            => new BitBlock<T>(x.data, (uint)new N().NatValue);
-
-        [MethodImpl(Inline)]
-        public static BitBlock<N,T> operator &(in BitBlock<N,T> x, in BitBlock<N,T> y)
-            => new BitBlock<N,T>(gspan.and(x.data, y.data, x.data.Replicate()));
-
-        [MethodImpl(Inline)]
-        public static BitBlock<N,T> operator |(in BitBlock<N,T> x, in BitBlock<N,T> y)
-            => new BitBlock<N,T>(gspan.or(x.data, y.data, x.data.Replicate()));
-
-        [MethodImpl(Inline)]
-        public static BitBlock<N,T> operator ^(in BitBlock<N,T> lhs, in BitBlock<N,T> rhs)
-            => new BitBlock<N,T>(gspan.xor(lhs.data, rhs.data, lhs.data.Replicate()));
-
-        /// <summary>
-        /// Computes the bitwise complement of the operand
-        /// </summary>
-        /// <param name="lhs">The source operand</param>
-        [MethodImpl(Inline)]
-        public static BitBlock<N,T> operator ~(in BitBlock<N,T> x)
-            => new BitBlock<N,T>(gspan.not(x.data, x.data.Replicate()));
-
-        /// <summary>
-        /// Computes the scalar product of the operands
-        /// </summary>
-        /// <param name="x">The left operand</param>
-        /// <param name="y">The right operand</param>
-        [MethodImpl(Inline)]
-        public static Bit32 operator %(in BitBlock<N,T> x, in BitBlock<N,T> y)
-            => BitBlocks.dot(x,y);
-
-        /// <summary>
-        /// Computes the bitwise complement of the operand
-        /// </summary>
-        /// <param name="lhs">The source operand</param>
-        [MethodImpl(Inline)]
-        public static BitBlock<N,T> operator -(in BitBlock<N,T> x)
-            => new BitBlock<N,T>(gspan.negate(x.data, x.data.Replicate()));
-
-        /// <summary>
-        /// Returns true if the source vector is nonzero, false otherwise
-        /// </summary>
-        /// <param name="x">The source vector</param>
-        [MethodImpl(Inline)]
-        public static bool operator true(in BitBlock<N,T> x)
-            => x.Nonempty;
-
-        /// <summary>
-        /// Returns false if the source vector is the zero vector, false otherwise
-        /// </summary>
-        /// <param name="x">The source vector</param>
-        [MethodImpl(Inline)]
-        public static bool operator false(in BitBlock<N,T> x)
-            => !x.Nonempty;
-
-        [MethodImpl(Inline)]
-        public static Bit32 operator ==(in BitBlock<N,T> x, in BitBlock<N,T> y)
-            => x.Equals(y);
-
-        [MethodImpl(Inline)]
-        public static Bit32 operator !=(in BitBlock<N,T> x, in BitBlock<N,T> y)
-            => !x.Equals(y);
-
         /// <summary>
         /// The number of bits covered by a cell
         /// </summary>
@@ -247,5 +182,70 @@ namespace Z0
 
         public override string ToString()
             => throw new NotImplementedException();
+
+        [MethodImpl(Inline)]
+        public static implicit operator BitBlock<T>(in BitBlock<N,T> x)
+            => new BitBlock<T>(x.data, (uint)new N().NatValue);
+
+        [MethodImpl(Inline)]
+        public static BitBlock<N,T> operator &(in BitBlock<N,T> x, in BitBlock<N,T> y)
+            => new BitBlock<N,T>(gspan.and(x.data, y.data, x.data.Replicate()));
+
+        [MethodImpl(Inline)]
+        public static BitBlock<N,T> operator |(in BitBlock<N,T> x, in BitBlock<N,T> y)
+            => new BitBlock<N,T>(gspan.or(x.data, y.data, x.data.Replicate()));
+
+        [MethodImpl(Inline)]
+        public static BitBlock<N,T> operator ^(in BitBlock<N,T> lhs, in BitBlock<N,T> rhs)
+            => new BitBlock<N,T>(gspan.xor(lhs.data, rhs.data, lhs.data.Replicate()));
+
+        /// <summary>
+        /// Computes the bitwise complement of the operand
+        /// </summary>
+        /// <param name="lhs">The source operand</param>
+        [MethodImpl(Inline)]
+        public static BitBlock<N,T> operator ~(in BitBlock<N,T> x)
+            => new BitBlock<N,T>(gspan.not(x.data, x.data.Replicate()));
+
+        /// <summary>
+        /// Computes the scalar product of the operands
+        /// </summary>
+        /// <param name="x">The left operand</param>
+        /// <param name="y">The right operand</param>
+        [MethodImpl(Inline)]
+        public static Bit32 operator %(in BitBlock<N,T> x, in BitBlock<N,T> y)
+            => BitBlocks.dot(x,y);
+
+        /// <summary>
+        /// Computes the bitwise complement of the operand
+        /// </summary>
+        /// <param name="lhs">The source operand</param>
+        [MethodImpl(Inline)]
+        public static BitBlock<N,T> operator -(in BitBlock<N,T> x)
+            => new BitBlock<N,T>(gspan.negate(x.data, x.data.Replicate()));
+
+        /// <summary>
+        /// Returns true if the source vector is nonzero, false otherwise
+        /// </summary>
+        /// <param name="x">The source vector</param>
+        [MethodImpl(Inline)]
+        public static bool operator true(in BitBlock<N,T> x)
+            => x.Nonempty;
+
+        /// <summary>
+        /// Returns false if the source vector is the zero vector, false otherwise
+        /// </summary>
+        /// <param name="x">The source vector</param>
+        [MethodImpl(Inline)]
+        public static bool operator false(in BitBlock<N,T> x)
+            => !x.Nonempty;
+
+        [MethodImpl(Inline)]
+        public static Bit32 operator ==(in BitBlock<N,T> x, in BitBlock<N,T> y)
+            => x.Equals(y);
+
+        [MethodImpl(Inline)]
+        public static Bit32 operator !=(in BitBlock<N,T> x, in BitBlock<N,T> y)
+            => !x.Equals(y);
     }
 }

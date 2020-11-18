@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-
     public interface IOpKind<E> : IApiKey, ILiteralKind<E>
         where E : unmanaged, Enum
     {

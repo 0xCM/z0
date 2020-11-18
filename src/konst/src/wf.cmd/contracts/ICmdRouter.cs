@@ -13,13 +13,15 @@ namespace Z0
     {
         IndexedView<CmdId> SupportedCommands {get;}
 
-        CmdResult Process(ICmdSpec cmd);
+        void Enlist(params ICmdReactor[] reactors);
 
-        CmdResult<T> Process<S,T>(S cmd)
+        CmdResult Dispatch(ICmdSpec cmd);
+
+        CmdResult<T> Dispatch<S,T>(S cmd)
             where S : struct, ICmdSpec<S>
             where T : struct;
 
-        ReadOnlySpan<CmdResult<T>> Process<S,T>(ReadOnlySpan<S> src, bool pll)
+        ReadOnlySpan<CmdResult<T>> Dispatch<S,T>(ReadOnlySpan<S> src, bool pll)
             where S : struct, ICmdSpec<S>
             where T : struct;
     }

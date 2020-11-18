@@ -21,14 +21,15 @@ namespace Z0
         /// <summary>
         /// Identifies the token within some scope
         /// </summary>
-        public K Id {get;}
+        public K Kind {get;}
 
         readonly Index<S> Data;
 
         [MethodImpl(Inline)]
-        public Token(K id, S[] src)
+        public Token(K kind, S[] src)
         {
-            Id = id;
+
+            Kind = kind;
             Data = src;
         }
 

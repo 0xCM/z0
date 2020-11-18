@@ -8,16 +8,17 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Konst;
+    using static Part;
 
+    [DataType]
     public readonly struct EnumFieldValue<E,P>
         where E : unmanaged, Enum
     {
-        public readonly FieldInfo Field;
+        public FieldInfo Field {get;}
 
-        public readonly E EnumValue;
+        public E EnumValue {get;}
 
-        public readonly P NumericValue;
+        public P NumericValue {get;}
 
         [MethodImpl(Inline)]
         public EnumFieldValue(FieldInfo field,  E eValue, P tValue)
@@ -37,7 +38,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            =>$"{EnumValue} = {NumericValue}";
+            =>$"{EnumValue}:{NumericValue}";
 
         public override string ToString()
             => Format();

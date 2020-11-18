@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
     using System.Runtime.Intrinsics;
+    using System.Reflection.Emit;
 
     using static Konst;
 
@@ -17,6 +18,10 @@ namespace Z0
     public readonly struct CellDelegates
     {
         const NumericKind Closure = Integers;
+
+        [MethodImpl(Inline)]
+        public static CellDelegate define(OpIdentity id, MemoryAddress src, DynamicMethod enclosure, Delegate dynop)
+            => new CellDelegate(id,src,enclosure,dynop);
 
         /// <summary>
         /// Creates a fixed 8-bit binary operator from caller-supplied delegate

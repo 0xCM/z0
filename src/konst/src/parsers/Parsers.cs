@@ -6,14 +6,18 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Text;
-    using System.Reflection;
 
     using static Konst;
 
     [ApiHost]
     public readonly struct Parsers
     {
+        public static IParserHost host(IParseFunction fx)
+        {
+            var tHost = typeof(ParserHost<,>).GenericDefinition2().MakeGenericType(fx.SourceType, fx.TargetType);
+            return (IParserHost)Activator.CreateInstance(tHost,fx);
+        }
+
         [Op]
         public static bool Parse(string s, out GridDim dst)
         {

@@ -5,10 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Security;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     public readonly struct CellOpKind<W,D> : ICellOpKind<W,D>
         where W : unmanaged, ICellWidth

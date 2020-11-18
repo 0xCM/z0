@@ -15,7 +15,7 @@ namespace Z0
     }
 
     [Free]
-    public interface IToken<K> : IToken, IIdentified<K>
+    public interface IToken<K> : IToken, IKinded<K>
         where K : unmanaged
     {
 

@@ -6,12 +6,10 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
     using static Konst;
-    using static Stacked;
 
-    partial class Stacks
+    partial class StackStores
     {
         /// <summary>
         /// Fills a span with data from a stack storage block
@@ -19,7 +17,7 @@ namespace Z0
         /// <param name="src">The stack storage source</param>
         /// <param name="t">A span cell type representative</param>
         /// <typeparam name="T">The span cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static unsafe Span<T> span<T>(ref BitBlock64 src, T t = default)
             where T : unmanaged
                 => z.cover(z.u8(src), 8).Cast<byte,T>();
@@ -30,7 +28,7 @@ namespace Z0
         /// <param name="src">The stack storage source</param>
         /// <param name="t">A span cell type representative</param>
         /// <typeparam name="T">The span cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<T> span<T>(ref BitBlock128 src, T t = default)
             where T : unmanaged
                 => z.cover(z.u8(src), 16).Cast<byte,T>();
@@ -41,7 +39,7 @@ namespace Z0
         /// <param name="src">The stack storage source</param>
         /// <param name="t">A span cell type representative</param>
         /// <typeparam name="T">The span cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<T> span<T>(ref BitBlock256 src, T t = default)
             where T : unmanaged
                 => z.cover(z.u8(src), 32).Cast<byte,T>();
@@ -52,7 +50,7 @@ namespace Z0
         /// <param name="src">The stack storage source</param>
         /// <param name="t">A span cell type representative</param>
         /// <typeparam name="T">The span cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static unsafe Span<T> span<T>(ref BitBlock512 src, T t = default)
             where T : unmanaged
                 => z.recover<T>(z.cover(z.u8(src), 64));
@@ -63,8 +61,8 @@ namespace Z0
         /// <param name="src">The stack storage source</param>
         /// <param name="t">A span cell type representative</param>
         /// <typeparam name="T">The span cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static unsafe Span<T> span<T>(ref BitStack1024 src, T t = default)
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static unsafe Span<T> span<T>(ref BitBlock1024 src, T t = default)
             where T : unmanaged
                 => z.recover<T>(z.cover(z.u8(src), 128));
 
@@ -90,6 +88,6 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static Span<char> span(ref CharStack64 src)
-            => z.cover(head(ref src), 64); 
+            => z.cover(head(ref src), 64);
     }
 }

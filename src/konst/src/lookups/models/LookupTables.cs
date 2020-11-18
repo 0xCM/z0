@@ -49,7 +49,6 @@ namespace Z0
             [MethodImpl(Inline)]
             public ref K Key(uint i)
                 => ref KeyValues[i];
-
         }
 
         /// <summary>
@@ -61,9 +60,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public Lu8(LookupTable<byte,V> src)
-            {
-                Entries = src;
-            }
+                => Entries = src;
         }
 
         /// <summary>
@@ -75,9 +72,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public Lu16(LookupTable<ushort,V> src)
-            {
-                Entries = src;
-            }
+                => Entries = src;
         }
 
         /// <summary>
@@ -89,9 +84,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public Lu32(LookupTable<uint,V> src)
-            {
-                Entries = src;
-            }
+                => Entries = src;
         }
 
         /// <summary>
@@ -103,9 +96,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public Lu64(LookupTable<ulong,V> src)
-            {
-                Entries = src;
-            }
+                => Entries = src;
         }
     }
 }

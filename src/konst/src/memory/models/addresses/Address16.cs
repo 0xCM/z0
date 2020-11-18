@@ -16,7 +16,11 @@ namespace Z0
     [ApiDataType]
     public readonly struct Address16
     {
-        public readonly T Location;
+        public T Location {get;}
+
+        [MethodImpl(Inline)]
+        public Address16(T offset)
+            => Location = offset;
 
         public static W W => default;
 
@@ -105,9 +109,5 @@ namespace Z0
 
         public static A Empty
             => new A(0);
-
-        [MethodImpl(Inline)]
-        public Address16(T offset)
-            => Location = offset;
     }
 }

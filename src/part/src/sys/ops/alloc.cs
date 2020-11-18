@@ -10,10 +10,6 @@ namespace Z0
     partial struct sys
     {
         [MethodImpl(Options), Op, Closures(Closure)]
-        public static T[] alloc<T>(long count)
-            => proxy.alloc<T>(count);
-
-        [MethodImpl(Options), Op, Closures(Closure)]
         public static T[] alloc<T>(byte count)
             => proxy.alloc<T>(count);
 
@@ -23,6 +19,10 @@ namespace Z0
 
         [MethodImpl(Options), Op, Closures(Closure)]
         public static T[] alloc<T>(uint count)
+            => proxy.alloc<T>(count);
+
+        [MethodImpl(Options), Op, Closures(Closure)]
+        public static T[] alloc<T>(long count)
             => proxy.alloc<T>(count);
 
         [MethodImpl(Options), Op, Closures(Closure)]

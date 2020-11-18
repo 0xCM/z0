@@ -8,8 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     partial struct ClrQuery
     {
@@ -17,7 +17,7 @@ namespace Z0
             where T : struct
         {
             var fields = span(typeof(T).DeclaredFields());
-            var dst = alloc<ClrFieldValue>(fields.Length);
+            var dst = sys.alloc<ClrFieldValue>(fields.Length);
             values(src, fields, dst);
             return dst;
         }
@@ -46,8 +46,8 @@ namespace Z0
         [Op, Closures(Closure)]
         public static ClrFieldValue<T>[] values<T>(Type src)
         {
-            var fields = @readonly(search<T>(src));
-            var buffer = alloc<ClrFieldValue<T>>(fields.Length);
+            var fields = z.@readonly(search<T>(src));
+            var buffer = z.alloc<ClrFieldValue<T>>(fields.Length);
             var dst = span(buffer);
             ref var target = ref first(dst);
             var tRef = __makeref(src);
@@ -64,7 +64,7 @@ namespace Z0
             where S : struct
         {
             var src = typeof(S);
-            var fields = @readonly(search<T>(src));
+            var fields = z.@readonly(search<T>(src));
             ref var target = ref first(dst);
             var tRef = __makeref(src);
             var count = fields.Length;

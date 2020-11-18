@@ -16,7 +16,7 @@ namespace Z0
         public static IUnaryOpFactory<T> Service
             => default(UnaryOpFactory<T>);
 
-        public Func<T,T> Manufacture(MethodInfo method, object instance = null)
+        public Func<T,T> Create(MethodInfo method, object instance = null)
         {
             var args = z.array(paramX<T>());
             var callExpr = call(instance, method, args);

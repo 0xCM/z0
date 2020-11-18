@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial class Stacks
+    partial class StackStores
     {
         /// <summary>
         /// Presents the leading source storage cell as reference to an unsigned 64-bit integer
@@ -49,7 +49,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The storage source</param>
         [MethodImpl(Inline), Op]
-        public static ref ulong head64(ref BitStack1024 src)
+        public static ref ulong head64(ref BitBlock1024 src)
             => ref head64(ref src.X0);
     }
 }

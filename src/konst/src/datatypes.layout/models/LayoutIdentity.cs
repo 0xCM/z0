@@ -13,12 +13,18 @@ namespace Z0
     using api = DataLayouts;
 
     /// <summary>
-    /// Defines identity for a <see cref 'DataLayout'/> component
+    /// Defines identity for a <see cref 'IDataLayout'/> component
     /// </summary>
     public readonly struct LayoutIdentity : ITextual
     {
+        /// <summary>
+        /// The 0-based index of the layout within the enclosing scope
+        /// </summary>
         public uint Index {get;}
 
+        /// <summary>
+        /// The unrefined layout kind
+        /// </summary>
         public ulong Kind {get;}
 
         [MethodImpl(Inline)]

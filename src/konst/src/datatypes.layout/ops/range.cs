@@ -15,5 +15,10 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static LayoutRange range(ulong left, ulong right)
             => new LayoutRange(left,right);
+
+        [MethodImpl(Inline), Op]
+        public static LayoutRange<T> range<T>(T left, T right)
+            where T : unmanaged
+                => new LayoutRange<T>(left,right);
     }
 }

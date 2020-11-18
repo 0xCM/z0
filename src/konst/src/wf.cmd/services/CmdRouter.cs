@@ -21,7 +21,15 @@ namespace Z0
             => Nodes.Keys.Array();
 
         public void Enlist(params ICmdReactor[] src)
-            => iter(src,cmd => Nodes.TryAdd(cmd.CmdId, cmd));
+        {
+            var count = 0;
+            foreach(var reactor in src)
+            {
+                if(Nodes.TryAdd(reactor.CmdId, reactor))
+                    count++;
+            }
+            iter(src, cmd => Nodes.TryAdd(cmd.CmdId, cmd));
+        }
 
         public CmdRouter()
         {
@@ -40,7 +48,7 @@ namespace Z0
             Nodes = new ConcurrentDictionary<CmdId, ICmdReactor>();
         }
 
-        public CmdResult<T> Process<S,T>(S src)
+        public CmdResult<T> Dispatch<S,T>(S src)
             where S : struct, ICmdSpec<S>
             where T : struct
         {
@@ -61,7 +69,7 @@ namespace Z0
             }
         }
 
-        public ReadOnlySpan<CmdResult<T>> Process<S,T>(ReadOnlySpan<S> src, bool pll)
+        public ReadOnlySpan<CmdResult<T>> Dispatch<S,T>(ReadOnlySpan<S> src, bool pll)
             where S : struct, ICmdSpec<S>
             where T : struct
         {
@@ -74,21 +82,22 @@ namespace Z0
             else
             {
                 for(var i=0; i<count; i++)
-                    seek(dst,i) = Process<S,T>(skip(src,i));
+                    seek(dst,i) = Dispatch<S,T>(skip(src,i));
             }
             return dst;
         }
 
-        public CmdResult Process(ICmdSpec cmd)
+        public CmdResult Dispatch(ICmdSpec cmd)
         {
             try
             {
                 if(Nodes.TryGetValue(cmd.CmdId, out var node))
                 {
-                    return Cmd.ok(cmd);
+                    return node.Invoke(cmd);
                 }
                 else
                 {
+                    Wf.Error(WfEvents.missing(cmd.Id));
                     return Cmd.fail(cmd);
                 }
             }

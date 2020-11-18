@@ -11,20 +11,6 @@ namespace Z0
     using static ParseFunctions;
     using static z;
 
-    public interface IParserHost
-    {
-        bool Parse<S,T>(in S src, out T dst);
-    }
-
-    public readonly struct ParserHost
-    {
-        public static IParserHost create(IParseFunction fx)
-        {
-            var tHost = typeof(ParserHost<,>).GenericDefinition2().MakeGenericType(fx.SourceType, fx.TargetType);
-            return (IParserHost)Activator.CreateInstance(tHost,fx);
-        }
-    }
-
     public readonly struct ParserHost<S,T> : ICanonical<S,T>, IParserHost
     {
         readonly ICanonical<S,T> Parser;

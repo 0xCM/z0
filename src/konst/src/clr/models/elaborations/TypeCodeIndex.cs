@@ -14,7 +14,7 @@ namespace Z0
         readonly Type[] Data;
 
         [MethodImpl(Inline)]
-        public TypeCodeIndex(Type[] src)
+        internal TypeCodeIndex(Type[] src)
             => Data = src;
 
         public ref readonly Type this[TypeCode code]

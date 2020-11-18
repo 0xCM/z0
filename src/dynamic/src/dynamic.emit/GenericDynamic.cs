@@ -97,7 +97,7 @@ namespace Z0
             g.Emit(OpCodes.Ldc_I8, (long)dst);
             g.EmitCalli(OpCodes.Calli, CallingConvention.StdCall, result, args);
             g.Emit(OpCodes.Ret);
-            return CellDelegate.define(id, dst, method, method.CreateDelegate(functype));
+            return CellDelegates.define(id, dst, method, method.CreateDelegate(functype));
         }
 
         static T empty<T>(T src)

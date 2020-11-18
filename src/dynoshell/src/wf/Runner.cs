@@ -65,9 +65,14 @@ namespace Z0
         public void EmitRuntimeIndex()
         {
             using var flow = Wf.Running();
-            var cmd = Wf.CmdCatalog.EmitRuntimeIndex();
+
 
             using var runner = new ToolRunner(Wf, Host);
+            if(Wf.Router.SupportedCommands.Count == 0)
+                Wf.Warn("No commands");
+
+            runner.Run(Wf.CmdCatalog.EmitRuntimeIndex());
+
             // var cmd = Wf.CmdCatalog.EmitResourceData();
             // cmd.Source = Parts.Refs.Assembly;
             // cmd.Target = Wf.Db().RefDataRoot() + FS.folder("test.emission");
@@ -78,13 +83,14 @@ namespace Z0
             for(var i=0; i<count; i++)
             {
                 ref readonly var cmd2 = ref skip(commands,i);
-                Wf.Status(cmd2.Source);
+                //Wf.Status(cmd2.Source);
                 runner.Run(cmd2);
-            }        }
+            }
+        }
 
         public void Run()
         {
-
+            EmitRuntimeIndex();
         }
     }
 

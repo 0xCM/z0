@@ -10,8 +10,6 @@ namespace Z0
     using System.Linq;
     using System.Diagnostics;
 
-    using D = ApiDataModel;
-
     using static z;
 
     public struct ToolRunner : IDisposable
@@ -102,14 +100,14 @@ namespace Z0
             Wf.Status(Host, src.OpUri);
         }
 
-        void Emit(ReadOnlySpan<D.CodeBlockDescriptor> src, FS.FilePath dst)
+        void Emit(ReadOnlySpan<ApiCodeDescriptor> src, FS.FilePath dst)
         {
             using var writer = dst.Writer();
             var count = src.Length;
             for(var i=0; i<count; i++)
             {
                 ref readonly var block = ref skip(src,i);
-                writer.WriteLine(string.Format(D.CodeBlockDescriptor.FormatPattern, block.Part, block.Host, block.Base, block.Size, block.Uri));
+                writer.WriteLine(string.Format(ApiCodeDescriptor.FormatPattern, block.Part, block.Host, block.Base, block.Size, block.Uri));
             }
         }
 
@@ -210,7 +208,8 @@ namespace Z0
             where T : struct, ICmdSpec<T>
         {
             Wf.Status(Msg.Dispatching<T>().Apply(spec));
-            //Router.Process(spec);
+            Wf.Router.Dispatch(spec);
+
         }
 
         void ShowDependencies()

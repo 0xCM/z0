@@ -10,22 +10,22 @@ namespace Z0
     public interface IOperatorFactory<D,T>
         where D : Delegate
     {
-        D Manufacture(MethodInfo method, object instance);
+        D Create(MethodInfo method, object instance);
 
-        D Manufacture(MethodInfo method)
-            => Manufacture(method,null);
+        D Create(MethodInfo method)
+            => Create(method,null);
     }
 
     public interface IEmitterOpFactory<T> : IOperatorFactory<Func<T>,T>
     {
 
-    }    
+    }
 
     public interface IUnaryOpFactory<T> : IOperatorFactory<Func<T,T>,T>
     {
 
     }
-    
+
     public interface IBinaryOpFactory<T> : IOperatorFactory<Func<T,T,T>,T>
     {
 
@@ -34,5 +34,5 @@ namespace Z0
     public interface ITernaryOpFactory<T> : IOperatorFactory<Func<T,T,T,T>,T>
     {
 
-    }    
+    }
 }

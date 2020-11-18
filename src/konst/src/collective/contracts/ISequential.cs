@@ -6,17 +6,9 @@ namespace Z0
 {
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    [Free]
-    public interface IBijection<S,T> : ICounted<Count>
-    {
-        Pairings<S,T> Terms {get;}
-
-        Count ICounted<Count>.Count
-            => Terms.Count;
-    }
 
     /// <summary>
-    /// Characterizes a sequence of individuals t(i) that can be bijectively identified with a subset of distinct nonnegative integers
+    /// Characterizes a sequence of individuals t(i) that can be uniquely identified with a subset of distinct nonnegative integers
     /// </summary>
     /// <typeparam name="T">The individual type</typeparam>
     [Free]

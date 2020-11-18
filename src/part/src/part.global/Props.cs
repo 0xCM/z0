@@ -47,6 +47,11 @@ namespace Z0
 
         public const NK AllNumeric = NK.All;
 
+        /// <summary>
+        /// The default delimiter to use when formatting structured text
+        /// </summary>
+        public const char FieldDelimiter = Chars.Pipe;
+
         public static NotSupportedException no<T>()
             => new NotSupportedException($"The type {typeof(T).Name} is not supported");
     }

@@ -42,12 +42,12 @@ namespace Z0
         public static ReadOnlySpan<char> chars(byte src)
         {
             ref readonly var codes = ref first(UpperDigits);
-            var storage = Stacks.char2();
+            var storage = StackStores.char2();
             ref var dst = ref storage.C0;
 
             seek(dst,0) = (char)skip(codes, (byte)(0xF & src));
             seek(dst,1) = (char)skip(codes, (byte)((src >> 4) & 0xF));
-            return Stacks.span(ref storage);
+            return StackStores.span(ref storage);
         }
 
         /// <summary>
@@ -59,12 +59,12 @@ namespace Z0
         {
             const int count = 4;
             ref readonly var codes = ref first(UpperDigits);
-            var storage = Stacks.char4();
+            var storage = StackStores.char4();
             ref var dst = ref storage.C0;
 
             for(var i=0; i < count; i++)
-                Stacks.cell(ref dst, i) = (char)skip(codes, (uint)((src >> i*4) & 0xF));
-            return Stacks.span(ref storage);
+                StackStores.cell(ref dst, i) = (char)skip(codes, (uint)((src >> i*4) & 0xF));
+            return StackStores.span(ref storage);
         }
 
         /// <summary>
@@ -76,12 +76,12 @@ namespace Z0
         {
             const int count = 8;
             ref readonly var codes = ref first(UpperDigits);
-            var storage = Stacks.char8();
+            var storage = StackStores.char8();
             ref var dst = ref storage.C0;
 
             for(var i=0; i < count; i++)
-                Stacks.cell(ref dst, i) = (char)skip(in codes, (uint) ((src >> i*4) & 0xF));
-            return Stacks.span(ref storage);
+                StackStores.cell(ref dst, i) = (char)skip(in codes, (uint) ((src >> i*4) & 0xF));
+            return StackStores.span(ref storage);
         }
 
         /// <summary>
@@ -93,12 +93,12 @@ namespace Z0
         {
             const int count = 16;
             ref readonly var codes = ref first(UpperDigits);
-            var storage = Stacks.char16();
+            var storage = StackStores.char16();
             ref var dst = ref storage.C0;
 
             for(var i=0; i < count; i++)
-                Stacks.cell(ref dst, i) = (char)skip(in codes, (uint) ((src >> i*4) & 0xF));
-            return Stacks.span(ref storage);
+                StackStores.cell(ref dst, i) = (char)skip(in codes, (uint) ((src >> i*4) & 0xF));
+            return StackStores.span(ref storage);
         }
 
         [MethodImpl(Inline), Op]

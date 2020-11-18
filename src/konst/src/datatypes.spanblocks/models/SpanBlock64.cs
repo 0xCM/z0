@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Defines a span of contiguous memory that can be evenly partitioned into 8, 16, 32 and 64-bit segments
     /// </summary>
-    [ApiType(ApiTypeId.SpanBlock), Blocked(TypeWidth.W64, SpanBlockKind.Sb64)]
+    [Blocked(TypeWidth.W64, SpanBlockKind.Sb64)]
     public readonly ref struct SpanBlock64<T>
         where T : unmanaged
     {

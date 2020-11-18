@@ -16,22 +16,6 @@ namespace Z0
         readonly ReadOnlySpan<A> Data;
 
         [MethodImpl(Inline)]
-        public static implicit operator ClrArtifactSet<A>(Span<A> src)
-            => new ClrArtifactSet<A>(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator ClrArtifactSet<A>(A[] src)
-            => new ClrArtifactSet<A>(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator ClrArtifactSet<A>(ReadOnlySpan<A> src)
-            => new ClrArtifactSet<A>(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator ReadOnlySpan<A>(ClrArtifactSet<A> src)
-            => src.Data;
-
-        [MethodImpl(Inline)]
         public ClrArtifactSet(A[] src)
             => Data = src;
 
@@ -84,5 +68,21 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Data.Length != 0;
         }
+
+        [MethodImpl(Inline)]
+        public static implicit operator ClrArtifactSet<A>(Span<A> src)
+            => new ClrArtifactSet<A>(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator ClrArtifactSet<A>(A[] src)
+            => new ClrArtifactSet<A>(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator ClrArtifactSet<A>(ReadOnlySpan<A> src)
+            => new ClrArtifactSet<A>(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator ReadOnlySpan<A>(ClrArtifactSet<A> src)
+            => src.Data;
     }
 }

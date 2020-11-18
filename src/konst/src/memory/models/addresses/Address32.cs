@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     using A = Address32;
     using W = W32;
@@ -15,12 +15,11 @@ namespace Z0
 
     public readonly struct Address32 : IAddress<A,W,T>
     {
-        public readonly T Location;
-
+        public T Location {get;}
 
         [MethodImpl(Inline)]
-        public static implicit operator MemoryAddress(Address32 src)
-            => src.Location;
+        public Address32(T offset)
+            => Location = offset;
 
         public static W W => default;
 
@@ -41,6 +40,34 @@ namespace Z0
              [MethodImpl(Inline)]
              get => Empty;
         }
+
+        [MethodImpl(Inline)]
+        public bool Equals(A src)
+            => Location == src.Location;
+
+        public override bool Equals(object src)
+            => src is A a && Equals(a);
+
+        [MethodImpl(Inline)]
+        public int CompareTo(A src)
+            => Location == src.Location ? 0 : Location < src.Location ? -1 : 1;
+
+        [MethodImpl(Inline)]
+        public string Format()
+            => Hex.format(Location, W);
+
+        public override string ToString()
+            => Format();
+
+        public override int GetHashCode()
+            => Location.GetHashCode();
+
+        public static A Empty
+            => new A(0);
+
+        [MethodImpl(Inline)]
+        public static implicit operator MemoryAddress(Address32 src)
+            => src.Location;
 
         [MethodImpl(Inline)]
         public static implicit operator A(T src)
@@ -93,36 +120,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool operator!=(A x, A y)
             => x.Location != y.Location;
-
-        [MethodImpl(Inline)]
-        public bool Equals(A src)
-            => Location == src.Location;
-
-        public override bool Equals(object src)
-            => src is A a && Equals(a);
-
-        [MethodImpl(Inline)]
-        public int CompareTo(A src)
-            => Location == src.Location ? 0 : Location < src.Location ? -1 : 1;
-
-        [MethodImpl(Inline)]
-        public string Format()
-            => Hex.format(Location, W);
-
-        public override string ToString()
-            => Format();
-
-        public override int GetHashCode()
-            => Location.GetHashCode();
-
-        public static A Empty
-            => new A(0);
-
-        T IAddress<T>.Location
-            => Location;
-
-        [MethodImpl(Inline)]
-        public Address32(T offset)
-            => Location = offset;
     }
 }

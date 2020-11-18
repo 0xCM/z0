@@ -12,7 +12,6 @@ namespace Z0
 
     using static Konst;
     using static z;
-    using static ApiDataModel;
 
     [ApiHost(ApiNames.ApiData, true)]
     public readonly struct ApiCode
@@ -75,22 +74,22 @@ namespace Z0
                 select code;
 
         [Op]
-        public static uint emit(ReadOnlySpan<CodeBlockDescriptor> src, FS.FilePath dst)
+        public static uint emit(ReadOnlySpan<ApiCodeDescriptor> src, FS.FilePath dst)
         {
             using var writer = dst.Writer();
             var count = (uint)src.Length;
             for(var i=0; i<count; i++)
             {
                 ref readonly var block = ref skip(src,i);
-                writer.WriteLine(string.Format(CodeBlockDescriptor.FormatPattern, block.Part, block.Host, block.Base, block.Size, block.Uri));
+                writer.WriteLine(string.Format(ApiCodeDescriptor.FormatPattern, block.Part, block.Host, block.Base, block.Size, block.Uri));
             }
             return count;
         }
 
         [MethodImpl(Inline), Op]
-        public static CodeBlockDescriptor descriptor(in ApiCodeBlock src)
+        public static ApiCodeDescriptor descriptor(in ApiCodeBlock src)
         {
-            var dst = new CodeBlockDescriptor();
+            var dst = new ApiCodeDescriptor();
             dst.Part = src.Uri.Part;
             dst.Host = src.Uri.Host.Name;
             dst.Base = src.Code.Base;
@@ -130,7 +129,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static ref CodeBlockDescriptor store(in ApiCodeBlock src, ref CodeBlockDescriptor dst)
+        public static ref ApiCodeDescriptor store(in ApiCodeBlock src, ref ApiCodeDescriptor dst)
         {
             dst.Part = src.Uri.Part;
             dst.Host = src.Uri.Host.Name;
@@ -141,18 +140,18 @@ namespace Z0
         }
 
         [Op]
-        public static CodeBlockDescriptor[] BlockDescriptors(IWfShell wf)
+        public static ApiCodeDescriptor[] BlockDescriptors(IWfShell wf)
         {
             var archive = ApiArchives.hex(wf);
             var files = @readonly(archive.List().Storage);
-            var dst = list<CodeBlockDescriptor>();
+            var dst = list<ApiCodeDescriptor>();
             var count = files.Length;
             for(var i=0u; i<count; i++)
             {
                 ref readonly var file = ref skip(files,i);
                 var content = @readonly(archive.Read(file.Path));
                 var kBlock = content.Length;
-                var buffer = alloc<CodeBlockDescriptor>(kBlock);
+                var buffer = alloc<ApiCodeDescriptor>(kBlock);
                 var target = span(buffer);
                 for(var j=0u; j<kBlock; j++)
                     store(skip(content,j), ref seek(target,j));
@@ -162,11 +161,11 @@ namespace Z0
         }
 
         [Op]
-        public static CodeBlockDescriptor[] BlockDescriptors(FS.FolderPath src)
+        public static ApiCodeDescriptor[] BlockDescriptors(FS.FolderPath src)
         {
             var archive = ApiArchives.hex(src);
             var files = archive.List();
-            var dst = list<ApiDataModel.CodeBlockDescriptor>();
+            var dst = list<ApiCodeDescriptor>();
             foreach(var file in files.Storage)
                 dst.AddRange(archive.Read(file.Path).Select(x => descriptor(x)));
             return dst.OrderBy(x => x.Base).ToArray();

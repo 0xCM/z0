@@ -39,6 +39,8 @@ namespace Z0
             var init = new WfInit(ctx, logConfig, partList);
             IWfShell wf = new WfShell(init);
 
+            wf.Router.Enlist(WfShell.reactors(wf,api.Components));
+
             configured.Add(string.Format("{0}:{1}", "control", controlId));
             configured.Add(string.Format("{0}:{1}", "args", delimit(args)));
             configured.Add(string.Format("{0}:{1}", "logs.root", logRoot));

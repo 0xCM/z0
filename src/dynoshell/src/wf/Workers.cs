@@ -10,7 +10,6 @@ namespace Z0
 
     using static z;
     using static Konst;
-    using static ApiDataModel;
 
     public struct Workers : IWfService<Workers>
     {
@@ -38,7 +37,7 @@ namespace Z0
             var dst = Wf.Db().Table("apihex.index");
             var descriptors = ApiCode.BlockDescriptors(Wf);
             var count= ApiCode.emit(descriptors, dst);
-            Wf.EmittedTable<CodeBlockDescriptor>(count, dst);
+            Wf.EmittedTable<ApiCodeDescriptor>(count, dst);
             return Cmd.ok(cmd);
         }
 

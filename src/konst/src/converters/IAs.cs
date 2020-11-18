@@ -4,18 +4,13 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Konst;
-
     /// <summary>
     /// Characterizes a value imagination service
     /// </summary>
     /// <typeparam name="S">The numeric source type</typeparam>
     /// <typeparam name="T">The numeric target type</typeparam>
     public interface IAs<S,T>
-        where T : unmanaged        
+        where T : unmanaged
     {
         /// <summary>
         /// Presents src:S as dst:T
@@ -34,7 +29,7 @@ namespace Z0
     /// <typeparam name="T">The numeric target type</typeparam>
     public interface IAs<F,S,T> : IAs<S,T>
         where T : unmanaged
-        where F : unmanaged, IAs<F,S,T>        
+        where F : unmanaged, IAs<F,S,T>
     {
 
     }

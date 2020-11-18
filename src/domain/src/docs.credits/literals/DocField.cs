@@ -6,7 +6,7 @@ namespace Z0
 {
     using P = CreditTypes.DocFieldDelimiter;
 
-    using static Octet;
+    using static BitSeq8;
 
     partial class CreditTypes
     {

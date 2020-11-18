@@ -17,7 +17,7 @@ namespace Z0
     {
         public static IBinaryOpFactory<T> Service => default(BinaryOpFactory<T>);
 
-        public Func<T,T,T> Manufacture(MethodInfo method, object instance = null)
+        public Func<T,T,T> Create(MethodInfo method, object instance = null)
         {
             var args = paramX<T,T>();
             var callExpr = call(instance, method, args.ToArray());

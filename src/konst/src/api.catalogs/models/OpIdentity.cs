@@ -14,8 +14,6 @@ namespace Z0
     /// </summary>
     public readonly struct OpIdentity : IIdentifiedOp<OpIdentity>
     {
-        public static OpIdentity Empty => new OpIdentity(EmptyString);
-
         /// <summary>
         /// Creates a moniker directly from source text
         /// </summary>
@@ -58,21 +56,6 @@ namespace Z0
         /// </summary>
         public string[] TextComponents {get;}
 
-        [MethodImpl(Inline)]
-        public static implicit operator string(OpIdentity src)
-            => src.Identifier;
-
-        [MethodImpl(Inline)]
-        public static bool operator==(OpIdentity a, OpIdentity b)
-            => a.Equals(b);
-
-        [MethodImpl(Inline)]
-        public static bool operator!=(OpIdentity a, OpIdentity b)
-            => !a.Equals(b);
-
-        static string Safe(string src)
-            => src.Replace(Chars.Lt, IDI.TypeArgsOpen).Replace(Chars.Gt, IDI.TypeArgsClose);
-
         public OpIdentity(string text, string name, string suffix, bool generic, bool imm, string[] components)
         {
             Identifier = Safe(text);
@@ -97,7 +80,6 @@ namespace Z0
         IIdentifiedOp<OpIdentity> Identified
             => this;
 
-
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
@@ -112,5 +94,22 @@ namespace Z0
 
         public override string ToString()
             => Identified.Format();
+
+        [MethodImpl(Inline)]
+        public static implicit operator string(OpIdentity src)
+            => src.Identifier;
+
+        [MethodImpl(Inline)]
+        public static bool operator==(OpIdentity a, OpIdentity b)
+            => a.Equals(b);
+
+        [MethodImpl(Inline)]
+        public static bool operator!=(OpIdentity a, OpIdentity b)
+            => !a.Equals(b);
+
+        static string Safe(string src)
+            => src.Replace(Chars.Lt, IDI.TypeArgsOpen).Replace(Chars.Gt, IDI.TypeArgsClose);
+
+        public static OpIdentity Empty => new OpIdentity(EmptyString);
     }
 }

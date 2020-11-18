@@ -13,10 +13,7 @@ namespace Z0
         [Free]
         public delegate bool Canonical<S,T>(in S src, out T dst);
 
-        [Free]
-        public interface ICanonical<S,T>
-        {
-            bool Parse(in S src, out T dst);
-        }
     }
+
+
 }

@@ -23,8 +23,8 @@ namespace Z0
             where T : unmanaged
         {
             var w = w128;
-            var stack = Stacks.alloc(w);
-            ref var dst = ref Stacks.head<T>(ref stack);
+            var stack = StackStores.alloc(w);
+            ref var dst = ref StackStores.head<T>(ref stack);
             z.vsave(src, ref dst);
             return SpanBlocks.load(w, ref dst);
         }
@@ -39,8 +39,8 @@ namespace Z0
             where T : unmanaged
         {
             var w = w256;
-            var stack = Stacks.alloc(w);
-            ref var dst = ref Stacks.head<T>(ref stack);
+            var stack = StackStores.alloc(w);
+            ref var dst = ref StackStores.head<T>(ref stack);
             z.vsave(src, ref dst);
             return SpanBlocks.load(w, ref dst);
         }
@@ -55,8 +55,8 @@ namespace Z0
             where T : unmanaged
         {
             var w = w512;
-            var stack = Stacks.alloc(w);
-            ref var dst = ref Stacks.head<T>(ref stack);
+            var stack = StackStores.alloc(w);
+            ref var dst = ref StackStores.head<T>(ref stack);
             z.vsave(src, ref dst);
             return SpanBlocks.load(w, ref dst);
         }

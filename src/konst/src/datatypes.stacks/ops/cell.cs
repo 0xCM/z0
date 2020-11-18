@@ -8,9 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Stacked;
 
-    partial class Stacks
+    partial class StackStores
     {
         // ~ asm(value<T>)
         // ~ movxsd rax,edx
@@ -23,7 +22,7 @@ namespace Z0
         /// <param name="src">The source storage</param>
         /// <param name="index">The source index, relative to the cell type</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T cell<T>(ref BitBlock64 src, int index, T t = default)
             where T : unmanaged
                 => ref z.add(head<T>(ref src), index);
@@ -34,18 +33,18 @@ namespace Z0
         /// <param name="src">The source storage</param>
         /// <param name="index">The source index, relative to the cell type</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T cell<T>(ref BitBlock128 src, int index, T t = default)
             where T : unmanaged
                 => ref z.add(head<T>(ref src), index);
-            
+
         /// <summary>
         /// Queries/manipulates an index-identified generic cell value
         /// </summary>
         /// <param name="src">The source storage</param>
         /// <param name="index">The source index, relative to the cell type</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T cell<T>(ref BitBlock256 src, int index, T t = default)
             where T : unmanaged
                 => ref z.add(head<T>(ref src), index);
@@ -56,7 +55,7 @@ namespace Z0
         /// <param name="src">The source storage</param>
         /// <param name="index">The source index, relative to the cell type</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T cell<T>(ref BitBlock512 src, int index, T t = default)
             where T : unmanaged
                 => ref z.add(head<T>(ref src), index);
@@ -67,8 +66,8 @@ namespace Z0
         /// <param name="src">The source storage</param>
         /// <param name="index">The source index, relative to the cell type</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static ref T cell<T>(ref BitStack1024 src, int index, T t = default)
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref T cell<T>(ref BitBlock1024 src, int index, T t = default)
             where T : unmanaged
                 => ref z.add(head<T>(ref src), index);
 

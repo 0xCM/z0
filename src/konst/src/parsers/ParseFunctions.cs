@@ -21,19 +21,5 @@ namespace Z0
         }
     }
 
-    [Free]
-    public interface IParseFunction
-    {
-        Type SourceType {get;}
 
-        Type TargetType {get;}
-    }
-
-    [Free]
-    public interface IParseFunction<S,T> : IParseFunction
-    {
-        Type IParseFunction.SourceType => typeof(S);
-
-        Type IParseFunction.TargetType => typeof(T);
-    }
 }

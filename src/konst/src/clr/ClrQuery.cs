@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Reflection;
-    using System.Reflection.Emit;
 
     using static Konst;
     using static z;
@@ -18,22 +17,6 @@ namespace Z0
         const NumericKind Closure = UnsignedInts;
 
         const BindingFlags BF = ReflectionFlags.BF_All;
-
-        [MethodImpl(Inline), Op]
-        public static ClrMemberIdentity identity(FieldInfo src)
-            => ClrMemberIdentity.from(src);
-
-        [MethodImpl(Inline), Op]
-        public readonly void enums(in ReadOnlySpan<Type> src, Span<ClrEnum> dst)
-        {
-            var count = src.Length;
-            for(uint i=0, j=0; i<count; i++)
-            {
-                ref readonly var candidate = ref skip(src,i);
-                if(candidate.IsEnum)
-                    seek(dst, j++) = candidate;
-            }
-        }
 
         [MethodImpl(Inline), Op]
         public static Index<Type> interfaces(Type src)
@@ -75,20 +58,5 @@ namespace Z0
         public static ClrStruct @struct<T>()
             where T : struct
                 => new ClrStruct<T>(typeof(T));
-
-        [MethodImpl(Inline), Op]
-        public static Z0.EnumLiteralNames[] names(ReadOnlySpan<ClrEnum> src)
-        {
-            var count = src.Length;
-            var buffer = z.alloc<Z0.EnumLiteralNames>(count);
-            var dst  = span(buffer);
-            for(var i=0u; i<count; i++)
-            {
-                ref readonly var et = ref skip(src,i);
-                seek(dst,i) = new Z0.EnumLiteralNames(et, System.Enum.GetNames(et));
-            }
-
-            return buffer;
-        }
     }
 }

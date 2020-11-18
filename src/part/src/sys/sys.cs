@@ -17,7 +17,7 @@ namespace Z0
         const MethodImplOptions Options = MethodImplOptions.AggressiveInlining;
     }
 
-    [ApiHost("api")]
+    [ApiHost]
     public readonly partial struct sys
     {
         const NumericKind Closure = Integers;

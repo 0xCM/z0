@@ -1,9 +1,10 @@
-echo off
-set ProjectId=dynoshell
+call .cmd/build.bat
 
-set SetupCmd=%ZDev%\.cmd\setup.cmd
-echo SetupCmd:%SetupCmd%
+@echo off
+
+set ShellPath=J:\dev\projects\z0\.build\bin\Release\z0.dynoshell\netcoreapp3.1\win-x64\z0.dynoshell.exe
+echo ShellPath:%ShellPath%
 
 echo on
-call %SetupCmd%
-call %RunCmd%
+
+call %ShellPath%

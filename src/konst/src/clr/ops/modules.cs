@@ -12,14 +12,10 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct ClrArtifacts
+    partial struct ClrQuery
     {
         [MethodImpl(Inline), Op]
         public static Module[] modules(Assembly src)
             => src.Modules.Array();
-
-        [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<ModuleView> vModules(Assembly src)
-            => View(modules(src), module);
     }
 }

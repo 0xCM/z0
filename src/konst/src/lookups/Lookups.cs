@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Reflection;
 
     using static Konst;
     using static z;
@@ -14,11 +13,92 @@ namespace Z0
     [ApiHost(ApiNames.Lookups)]
     public partial struct Lookups
     {
+        const NumericKind Closure = UnsignedInts;
+
+        /// <summary>
+        /// Creates a <see cref='LookupTable{K,T}'/> entry
+        /// </summary>
+        /// <param name="key">The lookup key</param>
+        /// <param name="value">The target value</param>
+        /// <typeparam name="K">The key type</typeparam>
+        /// <typeparam name="V">The value type</typeparam>
+        [MethodImpl(Inline)]
+        public static LookupEntry<K,V> entry<K,V>(K key, in V value)
+            where K : unmanaged
+        {
+            if(typeof(K) == typeof(byte))
+                return generic<K,V>(entry(uint8(key), value));
+            else if(typeof(K) == typeof(ushort))
+                return generic<K,V>(entry(uint16(key), value));
+            else if(typeof(K) == typeof(uint))
+                return generic<K,V>(entry(uint32(key), value));
+            else if(typeof(K) == typeof(ulong))
+                return generic<K,V>(entry(uint64(key), value));
+            else
+                throw no<K>();
+        }
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        static LookupEntry<byte,V> entry<V>(byte key, in V value)
+            => new LookupEntry<byte,V>(key,value);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        static LookupEntry<ushort,V> entry<V>(ushort key, in V value)
+            => new LookupEntry<ushort,V>(key,value);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        static LookupEntry<uint,V> entry<V>(uint key, in V value)
+            => new LookupEntry<uint,V>(key,value);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        static LookupEntry<ulong,V> entry<V>(ulong key, in V value)
+            => new LookupEntry<ulong,V>(key,value);
+
+        [MethodImpl(Inline)]
+        static ref LookupEntry<K,V> generic<K,V>(in LookupEntry<byte,V> src)
+            where K : unmanaged
+                => ref @as<LookupEntry<byte,V>,LookupEntry<K,V>>(src);
+
+        [MethodImpl(Inline)]
+        static ref LookupEntry<K,V> generic<K,V>(in LookupEntry<ushort,V> src)
+            where K : unmanaged
+                => ref @as<LookupEntry<ushort,V>,LookupEntry<K,V>>(src);
+
+        [MethodImpl(Inline)]
+        static ref LookupEntry<K,V> generic<K,V>(in LookupEntry<uint,V> src)
+            where K : unmanaged
+                => ref @as<LookupEntry<uint,V>,LookupEntry<K,V>>(src);
+
+        [MethodImpl(Inline)]
+        static ref LookupEntry<K,V> generic<K,V>(in LookupEntry<ulong,V> src)
+            where K : unmanaged
+                => ref @as<LookupEntry<ulong,V>,LookupEntry<K,V>>(src);
+
+        [MethodImpl(Inline)]
+        static ref LookupTable<K,V> generic<K,V>(in LookupTable<byte,V> src)
+            where K : unmanaged
+                => ref @as<LookupTable<byte,V>,LookupTable<K,V>>(src);
+
+        [MethodImpl(Inline)]
+        static ref LookupTable<K,V> generic<K,V>(in LookupTable<ushort,V> src)
+            where K : unmanaged
+                => ref @as<LookupTable<ushort,V>,LookupTable<K,V>>(src);
+
+        [MethodImpl(Inline)]
+        static ref LookupTable<K,V> generic<K,V>(in LookupTable<uint,V> src)
+            where K : unmanaged
+                => ref @as<LookupTable<uint,V>,LookupTable<K,V>>(src);
+
+        [MethodImpl(Inline)]
+        static ref LookupTable<K,V> generic<K,V>(in LookupTable<ulong,V> src)
+            where K : unmanaged
+                => ref @as<LookupTable<ulong,V>,LookupTable<K,V>>(src);
+
         [Op, Closures(UInt8k)]
         public static LookupGrid<byte,byte,byte,T> grid<T>(W8 ixj)
             => new LookupGrid<byte,byte,byte,T>(new byte[256,256], new T[256*256]);
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Lu8<V> lookup<V>(LookupEntry<byte,V>[] src)
             => new Lu8<V>(lookup<byte,V>(src));
 
@@ -30,7 +110,7 @@ namespace Z0
             return lu;
         }
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref Lu8<V> fill<V>(byte[] keys, V[] values, ref Lu8<V> dst)
         {
             var count = keys.Length;
@@ -47,34 +127,34 @@ namespace Z0
             where K : unmanaged
                 => new LookupEntry<K,V>(key,value);
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Lu16<V> lookup<V>(LookupEntry<ushort,V>[] src)
             => new Lu16<V>(lookup<ushort,V>(src));
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Lu32<V> lookup<V>(LookupEntry<uint,V>[] src)
             => new Lu32<V>(lookup<uint,V>(src));
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Lu64<V> lookup<V>(LookupEntry<ulong,V>[] src)
             => new Lu64<V>(lookup<ulong,V>(src));
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static LuFx64<T> lookup<T>(ulong[] index, T[] values)
             where T : unmanaged
                 => new LuFx64<T>(index, values);
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static LuFx64<T> lookup<T>(Paired<ulong,T>[] pairs)
             where T : unmanaged
                 => new LuFx64<T>(pairs);
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T lookup<T>(in LookupGrid<byte,byte,byte,T> src, byte i, byte j)
             where T : unmanaged
                 => ref lookup<byte,byte,byte,T>(src,i,j);
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T lookup<T>(in TableSpan<N256,N256,T> src, byte i, byte j)
             where T : unmanaged
                 => ref src[i,j];

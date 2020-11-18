@@ -48,7 +48,7 @@ namespace Z0
 
         public ClrEnumLiteralRecord[] Records;
 
-        readonly ReadOnlySpan<byte> RenderWidths;
+        static ReadOnlySpan<byte> RenderWidths => new byte[ClrEnumLiteralRecord.FieldCount]{16, 36, 16, 24, 16, 16, 24, 16};
 
         [MethodImpl(Inline)]
         public EmitEnumsStep(IWfShell wf, WfHost host, ClrAssembly src)
@@ -58,7 +58,7 @@ namespace Z0
             Source = src;
             Target = Wf.Db().Table(ClrEnumLiteralRecord.TableId, Source.Part);
             Records = default;
-            RenderWidths = ClrEnumLiteralRecord.RenderWidths;
+            //RenderWidths = ClrEnumLiteralRecord.RenderWidths;
         }
 
         public void Dispose()

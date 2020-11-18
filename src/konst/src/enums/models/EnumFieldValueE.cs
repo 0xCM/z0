@@ -8,9 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Konst;
+    using static Part;
 
-    [ApiProviderAttribute(DataStructure)]
+    [DataType]
     public readonly struct EnumFieldValue<E>
         where E : unmanaged, Enum
     {
@@ -26,9 +26,7 @@ namespace Z0
         }
 
         public string Format()
-        {
-            return EnumValue.ToString();
-        }
+            => EnumValue.ToString();
 
         public override string ToString()
             => Format();

@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
 
     [AttributeUsage(AttributeTargets.Struct)]
     public class SegmentedAttribute : WidthAttribute
@@ -16,5 +15,4 @@ namespace Z0
 
         }
     }
-
 }

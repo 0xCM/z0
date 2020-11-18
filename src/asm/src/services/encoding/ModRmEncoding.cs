@@ -38,7 +38,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        public ModRmEncoding(uint3 rm, UInt3 reg, UInt2 mod, ModRm encoded)
+        public ModRmEncoding(uint3 rm, BitSeq3 reg, BitSeq2 mod, ModRm encoded)
         {
             Input = or((byte)rm, sll((byte)reg,3), sll((byte)mod, 3 + 3));
             Encoded = encoded;

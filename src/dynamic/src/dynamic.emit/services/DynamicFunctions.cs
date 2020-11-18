@@ -27,9 +27,7 @@ namespace Z0
         readonly IMethodBodyEmitter BodyEmitter;
 
         public DynamicFunctions(IMethodBodyEmitter emitter)
-        {
-            BodyEmitter = emitter;
-        }
+            => BodyEmitter = emitter;
 
         public CellDelegate Emit(OpIdentity id, Type functype, Type result, Type[] args, MemoryAddress dst)
         {
@@ -38,7 +36,7 @@ namespace Z0
             g.Emit(OpCodes.Ldc_I8, (long)dst);
             g.EmitCalli(OpCodes.Calli, CallingConvention.StdCall, result, args);
             g.Emit(OpCodes.Ret);
-            return CellDelegate.define(id, dst, method, method.CreateDelegate(functype));
+            return CellDelegates.define(id, dst, method, method.CreateDelegate(functype));
         }
 
         public CellDelegate Emit(OpIdentity id, Type functype, Type result, Type[] args, Span<byte> buffer)
@@ -49,7 +47,7 @@ namespace Z0
             g.Emit(OpCodes.Ldc_I8, (long)z.address(buffer));
             g.EmitCalli(OpCodes.Calli, CallingConvention.StdCall, result, args);
             g.Emit(OpCodes.Ret);
-            return CellDelegate.define(id, address, method, method.CreateDelegate(functype));
+            return CellDelegates.define(id, address, method, method.CreateDelegate(functype));
         }
     }
 

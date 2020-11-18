@@ -40,7 +40,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<T> ToSpan<T>(this IEnumerable<T> src)
-            => z.span(src);
+            => sys.array(src);
 
         /// <summary>
         /// Constructs a span from a readonly span
@@ -59,7 +59,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<T> ToSpan<T>(this IEnumerable<T> src, int length)
-            => z.span(src, length);
+            => src.Take(length).Array();
 
         /// <summary>
         /// Constructs a span of specified length from the sequence obtained by skipping a specified number of leading elements
@@ -70,6 +70,6 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<T> ToSpan<T>(this IEnumerable<T> src, int offset, int length)
-            => z.span(src,offset,length);
+            => src.Skip(offset).Take(length).Array();
     }
 }

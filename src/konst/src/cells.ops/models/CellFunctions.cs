@@ -15,7 +15,6 @@ namespace Z0
         public interface ISignature
         {
             TypeWidth ResultWidth {get;}
-
         }
 
         public interface ISignature<H> : ISignature

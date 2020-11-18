@@ -16,7 +16,6 @@ namespace Z0
             var x = BoxedNumber.Define((byte)3);
             var y = x.Convert<short>();
             Claim.eq(y, (short)x.Unbox<byte>());
-
         }
 
         public void convert_2()

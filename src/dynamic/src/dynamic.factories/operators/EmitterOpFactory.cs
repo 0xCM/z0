@@ -14,7 +14,7 @@ namespace Z0
     {
         public static IEmitterOpFactory<T> Service => default(EmitterFactory<T>);
 
-        public Func<T> Manufacture(MethodInfo method, object host = null)
+        public Func<T> Create(MethodInfo method, object host = null)
         {
             var xCall = call(host, method);
             var xConvert = convert<T>(xCall);

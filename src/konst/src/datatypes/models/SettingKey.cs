@@ -9,8 +9,6 @@ namespace Z0
 
     using static Konst;
 
-    using api = Settings;
-
     public readonly struct SettingKey<K> : ISettingKey<SettingKey<K>>
     {
         public K Key {get;}

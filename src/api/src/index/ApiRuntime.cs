@@ -11,13 +11,12 @@ namespace Z0
 
     using static Konst;
     using static z;
-    using static ApiDataModel;
 
     [ApiHost(ApiNames.ApiRuntime, true)]
     public readonly struct ApiRuntime
     {
         [RenderFunction]
-        public static Count render(in RuntimeMember src, ITextBuffer dst)
+        public static Count render(in ApiRuntimeMember src, ITextBuffer dst)
         {
             var count = render(src.Address, dst);
 
@@ -115,7 +114,7 @@ namespace Z0
             => new ApiSig(part, host.Name,  Cli.sig(src));
 
         [Op]
-        public static ref RuntimeMember populate(IApiHost host, ApiMember src, ref RuntimeMember dst)
+        public static ref ApiRuntimeMember populate(IApiHost host, ApiMember src, ref ApiRuntimeMember dst)
         {
             var method = src.Method;
             dst.Address = src.Address;
@@ -128,12 +127,12 @@ namespace Z0
         }
 
         [Op]
-        public static RuntimeMember[] index(IWfShell wf)
+        public static ApiRuntimeMember[] index(IWfShell wf)
         {
             var db = wf.Db();
             var hosts = @readonly(wf.Api.ApiHosts);
             var kHost = (uint)hosts.Length;
-            var buffer = list<RuntimeMember>();
+            var buffer = list<ApiRuntimeMember>();
 
             wf.Status(Msg.IndexingHosts.Apply(kHost));
 
@@ -149,7 +148,7 @@ namespace Z0
                 {
                     for(var j=0u; j<apicount; j++, counter++)
                     {
-                        var member = default(RuntimeMember);
+                        var member = default(ApiRuntimeMember);
                         populate(host, skip(members,j), ref member);
                         buffer.Add(member);
                     }

@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Identifies a metadata element
@@ -150,23 +150,23 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator ClrArtifactKey(Type src)
-            => from(src);
+            => new ClrArtifactKey(src);
 
         [MethodImpl(Inline)]
         public static implicit operator ClrArtifactKey(FieldInfo src)
-            => from(src);
+            => new ClrArtifactKey(src);
 
         [MethodImpl(Inline)]
         public static implicit operator ClrArtifactKey(PropertyInfo src)
-            => from(src);
+            => new ClrArtifactKey(src);
 
         [MethodImpl(Inline)]
         public static implicit operator ClrArtifactKey(MethodInfo src)
-            => from(src);
+            => new ClrArtifactKey(src);
 
         [MethodImpl(Inline)]
         public static implicit operator ClrArtifactKey(ParameterInfo src)
-            => from(src);
+            => new ClrArtifactKey(src);
 
         [MethodImpl(Inline)]
         public static implicit operator uint(ClrArtifactKey src)

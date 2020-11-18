@@ -9,7 +9,6 @@ namespace Z0
 
     using static z;
     using static Konst;
-    using static ApiDataModel;
 
     [WfHost]
     public sealed class EmitCodeBlockReport : WfHost<EmitCodeBlockReport>
@@ -29,7 +28,7 @@ namespace Z0
 
         Count EmissionCount;
 
-        TableSpan<CodeBlockDescriptor> Descriptors;
+        TableSpan<ApiCodeDescriptor> Descriptors;
 
         [MethodImpl(Inline)]
         public EmitCodeBlockReportStep(IWfShell wf, WfHost host)
@@ -52,7 +51,7 @@ namespace Z0
             var dst = Wf.Db().Table("apihex.index");
             Descriptors = ApiCode.BlockDescriptors(Wf);
             EmissionCount = ApiCode.emit(Descriptors.Storage, dst);
-            Wf.EmittedTable<CodeBlockDescriptor>(EmissionCount, dst);
+            Wf.EmittedTable<ApiCodeDescriptor>(EmissionCount, dst);
         }
     }
 }

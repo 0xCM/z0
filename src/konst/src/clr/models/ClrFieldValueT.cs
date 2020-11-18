@@ -21,14 +21,14 @@ namespace Z0
         public readonly T Value;
 
         [MethodImpl(Inline)]
-        public static implicit operator ClrFieldValue<T>((FieldInfo field, T value) src)
-            => new ClrFieldValue<T>(src.field, src.value);
-
-        [MethodImpl(Inline)]
         public ClrFieldValue(FieldInfo field, T value)
         {
             Field = field;
             Value = value;
         }
+
+        [MethodImpl(Inline)]
+        public static implicit operator ClrFieldValue<T>((FieldInfo field, T value) src)
+            => new ClrFieldValue<T>(src.field, src.value);
     }
 }
