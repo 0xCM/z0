@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Reflection;
 
-    using static Konst;
-
     partial class XClrQuery
     {
         /// <summary>
@@ -29,6 +27,5 @@ namespace Z0
             => from m in src
                 where m.GetParameters().Length == count
                 select m;
-
     }
 }

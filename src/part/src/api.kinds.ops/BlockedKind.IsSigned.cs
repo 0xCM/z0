@@ -5,16 +5,19 @@
 namespace Z0
 {
     using System;
+    using System.Linq;
     using System.Runtime.CompilerServices;
 
-    partial class XTend
+    using static Part;
+
+    partial class XKinds
     {
         /// <summary>
-        /// Determines whether the floating facet of a block classification is enabled
+        /// Determines whether the signed facet of a block classification is enabled
         /// </summary>
         /// <param name="k">The vector classifier</param>
-        [MethodImpl(Konst.Inline)]
-        public static bool IsFloat(this SegBlockKind k)
-            => ((uint)k & (uint)Z0.NumericKind.Float) != 0;
+        [MethodImpl(Inline)]
+        public static bool IsSigned(this SegBlockKind k)
+            => ((uint)k & (uint)Z0.NumericKind.Signed) != 0;
     }
 }

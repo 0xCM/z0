@@ -7,11 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
-    partial class XTend
+    [ApiHost]
+    public static partial class XKinds
     {
-        public static string Format(this SegBlockKind k)
-            => k != 0 ? k.ToString() : string.Empty;
+
     }
 }

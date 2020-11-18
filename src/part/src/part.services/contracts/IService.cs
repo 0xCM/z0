@@ -26,16 +26,4 @@ namespace Z0
     {
 
     }
-
-    /// <summary>
-    /// Characterizes a stateless service that requires explicit resource management
-    /// </summary>
-    /// </remarks>
-    /// Read the summary again
-    /// </remarks>
-    [Free]
-    public interface IServiceAllocation : IService, IDisposable
-    {
-
-    }
 }

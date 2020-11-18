@@ -8,9 +8,9 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
-    partial class XTend
+    partial class XKinds
     {
         /// Determines whether the unsigned facet of a block classification is enabled
         /// </summary>

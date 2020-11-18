@@ -6,11 +6,10 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-        
+
     using static Part;
 
 
-    [ApiHost("x")]
     public static partial class XTend
     {
         const NumericKind Closure = Integers;
@@ -24,20 +23,19 @@ namespace Z0
         const NumericKind Closure = Integers;
 
         public static Type ProxyType => typeof(proxy);
-        
+
         const string EmptyString = "";
 
-        internal const MethodImplOptions Options = MethodImplOptions.AggressiveInlining;                    
+        internal const MethodImplOptions Options = MethodImplOptions.AggressiveInlining;
     }
 
     [ApiHost]
     readonly partial struct proxy
     {
-
         const NumericKind Closure = Integers;
 
         const string EmptyString = "";
 
-        const MethodImplOptions Options = MethodImplOptions.NoInlining;                       
+        const MethodImplOptions Options = MethodImplOptions.NoInlining;
     }
 }

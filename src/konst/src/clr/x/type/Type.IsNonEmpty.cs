@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     partial class XClrQuery
     {
@@ -17,6 +17,6 @@ namespace Z0
         /// <param name="src">The type to examine</param>
         [MethodImpl(Inline), Op]
         public static bool IsNonEmpty(this Type src)
-            => src != null && src != EmptyType && src != typeof(void);
+            => src != null && src != typeof(void);
     }
 }

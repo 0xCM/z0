@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    using static Konst;
-
     [Free]
     public interface IOperatorClass : IOperationalClass
     {

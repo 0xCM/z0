@@ -2,7 +2,6 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-
 namespace Z0
 {
     using System;
@@ -10,11 +9,10 @@ namespace Z0
 
     using static Part;
 
-    partial class XClrQuery
+    partial class XKinds
     {
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static bool IsNone<T>(this T? src)
-            where T : struct
-                => !src.HasValue;
+        [Op]
+        public static string Format(this SegBlockKind k)
+            => k != 0 ? k.ToString() : string.Empty;
     }
 }

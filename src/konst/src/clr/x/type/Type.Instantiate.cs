@@ -7,6 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using static Part;
+
     partial class XClrQuery
     {
         /// <summary>
@@ -15,6 +17,7 @@ namespace Z0
         /// <typeparam name="T">The cast instance type</typeparam>
         /// <param name="t">The type for which an instance will be created</param>
         /// <param name="args">Arguments matched with/passed to an instance constructor defined by the type</param>
+        [MethodImpl(Inline)]
         public static T Instantiate<T>(this Type t, params object[] args)
             => (T)Activator.CreateInstance(t, args);
     }
