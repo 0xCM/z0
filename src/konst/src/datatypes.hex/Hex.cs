@@ -44,16 +44,16 @@ namespace Z0
         /// </summary>
         public const byte MaxCharCodeL = 102;
 
-       /// <summary>
+        /// <summary>
         /// Defines the asci character codes for uppercase hex digits 1,2, ..., 9, A, ..., F
         /// </summary>
-        public static ReadOnlySpan<byte> UpperDigits
+        public static ReadOnlySpan<byte> UpperHexDigits
             => new byte[]{48,49,50,51,52,53,54,55,56,57,65,66,67,68,69,70};
 
         /// <summary>
         /// Defines the asci character codes for uppercase hex digits 1,2, ..., 9, a, ..., f
         /// </summary>
-        public static ReadOnlySpan<byte> LowerDigits
+        public static ReadOnlySpan<byte> LowerHexDigits
             => new byte[]{48,49,50,51,52,53,54,55,56,57,97,98,99,100,101,102};
 
         public static SegRef[] HexRefs

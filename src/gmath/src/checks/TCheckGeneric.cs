@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static AppErrorMsg;
     using api = CheckGeneric;
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;

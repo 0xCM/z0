@@ -39,13 +39,4 @@ namespace Z0
             }
         }
     }
-
-    [Free]
-    public interface ICmdReactor<H,S,T> : ICmdReactor<S,T>, IWfService<H>
-        where H : ICmdReactor<H,S,T>, new()
-        where S : struct, ICmdSpec<S>
-        where T : struct
-    {
-
-    }
 }

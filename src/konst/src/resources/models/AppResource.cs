@@ -16,10 +16,6 @@ namespace Z0
         public readonly string Content;
 
         [MethodImpl(Inline)]
-        public static implicit operator AppResource<string>(AppResource src)
-            => new AppResource<string>(src.Name,src.Content);
-        
-        [MethodImpl(Inline)]
         public AppResource(string name, string data)
         {
             Name = name;
@@ -40,11 +36,14 @@ namespace Z0
         string IAppResource.Name
             => Name;
 
-        string IAppResource<string>.Content 
+        string IAppResource<string>.Content
             => Content;
 
-        public static AppResource Empty 
-            => new AppResource(EmptyString, EmptyString);
+        [MethodImpl(Inline)]
+        public static implicit operator AppResource<string>(AppResource src)
+            => new AppResource<string>(src.Name,src.Content);
 
+        public static AppResource Empty
+            => new AppResource(EmptyString, EmptyString);
     }
 }

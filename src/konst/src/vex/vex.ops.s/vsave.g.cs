@@ -101,7 +101,7 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                vsave(v8i(src), ref int8(ref dst));
+                vstore(v8i(src), ref int8(ref dst));
             else if(typeof(T) == typeof(short))
                 vsave(v16i(src), ref int16(ref dst));
             else if(typeof(T) == typeof(int))

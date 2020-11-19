@@ -15,14 +15,6 @@ namespace Z0
     partial struct asci
     {
         [MethodImpl(Inline), Op]
-        public static string format(in BinaryCode src)
-        {
-            var dst = span<char>(src.Length);
-            decode(src,dst);
-            return sys.@string(dst);
-        }
-
-        [MethodImpl(Inline), Op]
         public static string format(in asci2 src)
             => F.format(src);
 
@@ -45,37 +37,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static string format(in asci64 src)
             => F.format(src);
-
-        [Op]
-        public static string format(ReadOnlySpan<BinaryDigit> src)
-        {
-            Span<char> dst = stackalloc char[src.Length];
-            render(src,dst);
-            return @string(dst);
-        }
-
-        [Op]
-        public static string format(ReadOnlySpan<DecimalDigit> src)
-        {
-            Span<char> dst = stackalloc char[src.Length];
-            render(src,dst);
-            return @string(dst);
-        }
-
-        [Op]
-        public static string format(ReadOnlySpan<HexDigit> src)
-        {
-            Span<char> dst = stackalloc char[src.Length];
-            render(src,dst);
-            return @string(dst);
-        }
-
-        [Op]
-        public static string format(Base16 @base, UpperCased @case, ReadOnlySpan<byte> src)
-        {
-            Span<char> digits = stackalloc char[src.Length*3];
-            render(@base, @case, src,digits);
-            return @string(digits);
-        }
     }
 }

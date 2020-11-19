@@ -7,6 +7,7 @@ namespace Z0
     /// <summary>
     /// Defines the symbols that represent the base-2 digits
     /// </summary>
+    [SymbolProvider]
     public enum BinarySym : ushort
     {
         /// <summary>
@@ -18,7 +19,7 @@ namespace Z0
         /// Specifies 0 base 2, asci code 48
         /// </summary>
         b0 = '0',
-        
+
         /// <summary>
         /// Specifies 1 base 2, asci code 49
         /// </summary>

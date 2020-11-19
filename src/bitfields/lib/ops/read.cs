@@ -13,15 +13,15 @@ namespace Z0
     partial class BitFields
     {
         [MethodImpl(Inline)]
-        internal static T Mask<F,T>(BitField256<F,T> src, F index)
+        internal static T Mask<I,T>(BitField256<I,T> src, I index)
             where T : unmanaged
-            where F : unmanaged
+            where I : unmanaged
                 => BitMasks.lo<T>(src.Spec[index]);
 
         [MethodImpl(Inline)]
-        public static T read<F,T>(in BitField256<F,T> src, F index)
+        public static T read<I,T>(in BitField256<I,T> src, I index)
             where T : unmanaged
-            where F : unmanaged
-                => gmath.and(vcell(src.State, z.@as<F,byte>(index)), Mask(src,index));
+            where I : unmanaged
+                => gmath.and(vcell(src.State, z.@as<I,byte>(index)), Mask(src,index));
     }
 }

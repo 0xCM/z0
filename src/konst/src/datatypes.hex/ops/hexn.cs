@@ -15,7 +15,6 @@ namespace Z0
         public static Hex1 hex(Hex1Seq src)
             => new Hex1(src);
 
-
         [MethodImpl(Inline), Op]
         public static Hex2 hex(Hex2Seq src)
             => new Hex2(src);

@@ -24,10 +24,10 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public CmdArg(string name)
+        public CmdArg(object value)
         {
-            Name = name;
-            Value = EmptyString;
+            Name = EmptyString;
+            Value = value;
         }
 
         public bool IsEmpty
@@ -44,7 +44,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => string.Format(RP.Setting, Name, Value);
+            => text.nonempty(Name) ? string.Format(RP.Setting, Name, Value) : Value?.ToString() ?? EmptyString;
 
         public override string ToString()
             => Format();

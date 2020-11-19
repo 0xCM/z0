@@ -19,7 +19,6 @@ namespace Z0
 
         readonly Multiplex Mpx;
 
-        readonly CmdArgs Args;
 
         readonly CmdBuilder CmdBuilder;
 
@@ -30,7 +29,6 @@ namespace Z0
             Host = host;
             Wf = wf.WithHost(Host);
             Mpx = Multiplex.create(wf, Multiplex.configure(wf.Db().Root));
-            Args = wf.Args;
             CmdBuilder = wf.CmdBuilder();
             Db = Wf.Db();
         }

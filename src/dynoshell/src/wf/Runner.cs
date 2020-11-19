@@ -12,7 +12,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    ref struct Dynoshell
+    class Dynoshell : IDisposable
     {
         readonly WfHost Host;
 
@@ -29,21 +29,14 @@ namespace Z0
             Wf.Disposed();
         }
 
-        EmitResourceDataCmd[] Commands()
+        ICmdSpec[] Commands()
         {
             var db = Wf.Db();
             var archive = Wf.RuntimeArchive();
-            var buffer = z.list<EmitResourceDataCmd>();
-            var dst = span<EmitResourceDataCmd>(buffer);
+            var buffer = z.list<ICmdSpec>();
+            var dst = span<ICmdSpec>(buffer);
             var cmd = default(EmitResourceDataCmd);
             var src = default(Assembly);
-
-            src = archive.Dia2Lib;
-            cmd = new EmitResourceDataCmd();
-            cmd.Source = src;
-            cmd.Target = db.Reflected(src);
-            cmd.ClearTarget = true;
-            buffer.Add(cmd);
 
             src = archive.Srm;
             cmd = new EmitResourceDataCmd();
@@ -59,38 +52,34 @@ namespace Z0
             cmd.ClearTarget = true;
             buffer.Add(cmd);
 
+            buffer.Add(Wf.CmdCatalog.EmitRuntimeIndex());
+
+            buffer.Add(Wf.CmdCatalog.ShowRuntimeArchive());
+
+            var spec = EmitAsmOpCodes.Spec();
+            spec.WithTarget(Wf.Db().RefDataPath("asm.opcodes"));
+            buffer.Add(spec);
+
             return buffer.Array();
         }
 
-        public void EmitRuntimeIndex()
+        public void DispatchCommands()
         {
             using var flow = Wf.Running();
-
-
             using var runner = new ToolRunner(Wf, Host);
-            if(Wf.Router.SupportedCommands.Count == 0)
-                Wf.Warn("No commands");
+            iter(Wf.Router.SupportedCommands.Storage, c => Wf.Status($"{c} enabled"));
 
-            runner.Run(Wf.CmdCatalog.EmitRuntimeIndex());
-
-            // var cmd = Wf.CmdCatalog.EmitResourceData();
-            // cmd.Source = Parts.Refs.Assembly;
-            // cmd.Target = Wf.Db().RefDataRoot() + FS.folder("test.emission");
-            // cmd.ClearTarget = true;
+            //runner.Run(Wf.CmdCatalog.EmitRuntimeIndex());
 
             var commands = @readonly(Commands());
             var count = commands.Length;
             for(var i=0; i<count; i++)
-            {
-                ref readonly var cmd2 = ref skip(commands,i);
-                //Wf.Status(cmd2.Source);
-                runner.Run(cmd2);
-            }
+                runner.Run(skip(commands,i));
         }
 
         public void Run()
         {
-            EmitRuntimeIndex();
+            DispatchCommands();
         }
     }
 
@@ -98,16 +87,11 @@ namespace Z0
     {
         public static RenderPattern<uint,ApiHostUri,uint> IndexedHost => "{2} | {0} | {1} | Api summary accumulation";
 
-        public static RenderPattern<uint> IndexingHosts => "Indexing {0} hosts";
+        public static RenderPattern<uint,FS.FilePath> EmittedOpIndex => "Emitted operation index for {0} hosts to {1}";
 
         public static RenderPattern<T> Dispatching<T>()
             where T : struct, ICmdSpec<T> => "Dispatching {0}";
 
-
-        public static RenderPattern<Assembly,utf8> NoMatchingResources => "No {0} resources found that match {1}";
-
-
-        public static RenderPattern<Assembly,uint>  EmittingResources => "Emitting {1} {0} resources";
-
+        public static RenderPattern<CmdId> Dispatching() => "Dispatching {0}";
     }
 }

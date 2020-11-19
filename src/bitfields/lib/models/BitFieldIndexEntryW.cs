@@ -23,14 +23,6 @@ namespace Z0
         public W FieldWidth {get;}
 
         [MethodImpl(Inline)]
-        public static implicit operator BitFieldIndexEntry(BitFieldIndexEntry<W> src)
-            => new BitFieldIndexEntry(src.FieldIndex, src.FieldName, uint32(src.FieldWidth));
-
-        [MethodImpl(Inline)]
-        public static bool operator ==(BitFieldIndexEntry<W> a, BitFieldIndexEntry<W> b)
-            => a.Equals(b);
-
-        [MethodImpl(Inline)]
         public static bool operator !=(BitFieldIndexEntry<W> lhs, BitFieldIndexEntry<W> rhs)
             => !lhs.Equals(rhs);
 
@@ -56,5 +48,13 @@ namespace Z0
 
         public override bool Equals(object obj)
             => obj is BitFieldIndexEntry<W> x && Equals(x);
+
+        [MethodImpl(Inline)]
+        public static implicit operator BitFieldIndexEntry(BitFieldIndexEntry<W> src)
+            => new BitFieldIndexEntry(src.FieldIndex, src.FieldName, uint32(src.FieldWidth));
+
+        [MethodImpl(Inline)]
+        public static bool operator ==(BitFieldIndexEntry<W> a, BitFieldIndexEntry<W> b)
+            => a.Equals(b);
     }
 }

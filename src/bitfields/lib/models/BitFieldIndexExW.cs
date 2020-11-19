@@ -13,7 +13,7 @@ namespace Z0
         where E : unmanaged
         where W : unmanaged
     {
-        readonly BitFieldIndexEntry<E,W>[] Storage;
+        readonly BitFieldIndexEntry<E,W>[] Data;
 
         [MethodImpl(Inline)]
         public static implicit operator BitFieldIndex<E,W>(BitFieldIndexEntry<E,W>[] entries)
@@ -21,52 +21,52 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator BitFieldIndexEntry<E,W>[](BitFieldIndex<E,W> src)
-            => src.Storage;
+            => src.Data;
 
         [MethodImpl(Inline)]
         public BitFieldIndex(BitFieldIndexEntry<E,W>[] src)
-            => Storage = src;
+            => Data = src;
 
         public ReadOnlySpan<BitFieldIndexEntry<E,W>> View
         {
             [MethodImpl(Inline)]
-            get => Storage;
+            get => Data;
         }
 
         public Span<BitFieldIndexEntry<E,W>> Edit
         {
             [MethodImpl(Inline)]
-            get => Storage;
+            get => Data;
         }
 
         public uint EntryCount
         {
             [MethodImpl(Inline)]
-            get => (uint)Storage.Length;
+            get => (uint)Data.Length;
         }
 
         public int Length
         {
             [MethodImpl(Inline)]
-            get => Storage.Length;
+            get => Data.Length;
         }
 
         public ref BitFieldIndexEntry<E,W> this[E index]
         {
             [MethodImpl(Inline)]
-            get => ref Storage[z.@as<E,int>(index)];
+            get => ref Data[z.@as<E,int>(index)];
         }
 
         public ref BitFieldIndexEntry<E,W> this[long index]
         {
             [MethodImpl(Inline)]
-            get => ref Storage[index];
+            get => ref Data[index];
         }
 
         public ref BitFieldIndexEntry<E,W> this[ulong index]
         {
             [MethodImpl(Inline)]
-            get => ref Storage[index];
+            get => ref Data[index];
         }
     }
 }

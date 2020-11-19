@@ -282,6 +282,8 @@ public enum ApiClass : ushort
 
     BitClear,
 
+    MoveMask,
+
     BitCell,
 
     Enable,

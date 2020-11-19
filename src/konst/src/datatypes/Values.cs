@@ -74,7 +74,7 @@ namespace Z0
         /// <param name="src">The value to be hex-encoded</param>
         [MethodImpl(Inline), Op]
         public static HexCodeUp code(UpperCased upper, uint4 src)
-            => (HexCodeUp)skip(first(Hex.UpperDigits), src);
+            => (HexCodeUp)skip(first(Hex.UpperHexDigits), src);
 
         /// <summary>
         /// Returns the hex character code for a <see cref='uint4'/> value
@@ -82,7 +82,7 @@ namespace Z0
         /// <param name="src">The value to be hex-encoded</param>
         [MethodImpl(Inline), Op]
         public static HexCodeLo code(LowerCased lower, uint4 src)
-            => (HexCodeLo)skip(first(Hex.LowerDigits), src);
+            => (HexCodeLo)skip(first(Hex.LowerHexDigits), src);
 
         /// <summary>
         /// Determines whether at least one byte of a structural value is nonzero

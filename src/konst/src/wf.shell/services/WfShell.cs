@@ -27,7 +27,7 @@ namespace Z0
 
         public ICmdRouter Router {get;}
 
-        public CmdArgs Args {get;}
+        public string[] Args {get;}
 
         public IWfPaths Paths {get;}
 

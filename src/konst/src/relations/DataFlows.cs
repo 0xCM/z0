@@ -18,15 +18,15 @@ namespace Z0
         public static string identifier<S,T>(DataFlow<S,T> flow)
             => text.format("{0} -> {1}", flow.Source, flow.Target);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static string identifier<T>(DataFlow<T> flow)
             => text.format("{0} -> {1}", flow.Source, flow.Target);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static string format<T>(DataFlow<T> flow)
             => text.format("{0} -> {1}", flow.Source, flow.Target);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static LinkType type<T>(DataFlow<T> flow)
             => Links.type<T>();
 

@@ -63,7 +63,8 @@ namespace Z0
 
     public sealed class EffSizeAttribute : A { public EffSizeAttribute() : base(K.EffSize) {} }
 
-   public sealed class BitClearAttribute : A { public BitClearAttribute() : base(K.BitClear) {} }
+    public sealed class BitClearAttribute : A { public BitClearAttribute() : base(K.BitClear) {} }
 
+    public sealed class MoveMaskAttribute : A { public MoveMaskAttribute() : base(K.MoveMask) {} }
 
 }

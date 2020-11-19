@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct CmdId : ITextual
+    public readonly struct CmdId : ITextual, IEquatable<CmdId>
     {
         [MethodImpl(Inline)]
         public static CmdId from(Type spec)
@@ -41,22 +41,37 @@ namespace Z0
         public uint Hash
         {
             [MethodImpl(Inline)]
-            get => text.hash(Data);
+            get => (uint)Data.GetHashCode();
         }
-
-        [MethodImpl(Inline)]
-        public static implicit operator CmdId(Type spec)
-            => from(spec);
 
         [MethodImpl(Inline)]
         public string Format()
             => Data;
+
+        [MethodImpl(Inline)]
+        public bool Equals(CmdId src)
+            => text.equals(Data, src.Data);
+
+        public override bool Equals(object obj)
+            => obj is CmdId x ? Equals(x) : false;
 
         public override string ToString()
             => Format();
 
         public override int GetHashCode()
             => (int)Hash;
+
+        [MethodImpl(Inline)]
+        public static bool operator ==(CmdId a, CmdId b)
+            => a.Equals(b);
+
+        [MethodImpl(Inline)]
+        public static bool operator !=(CmdId a, CmdId b)
+            => !a.Equals(b);
+
+        [MethodImpl(Inline)]
+        public static implicit operator CmdId(Type spec)
+            => new CmdId(spec.Name);
 
         public static CmdId Empty => default;
     }

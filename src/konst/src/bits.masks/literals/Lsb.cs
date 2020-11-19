@@ -588,7 +588,6 @@ namespace Z0
             /// </summary>
             [BitMask ("[11111111 11111111]")]
             public const ulong Lsb64x16 = Lsb64x15 | Lsb64x1 << 15;
-
         }
     }
 }

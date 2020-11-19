@@ -3,7 +3,8 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
+    [SymbolProvider]
     public enum AsciDigit : ushort
     {
         /// <summary>
@@ -15,12 +16,12 @@ namespace Z0
         /// Specifies '1', asci code 49
         /// </summary>
         d1 = '1',
-        
+
         /// <summary>
         /// Specifies '2', asci code 50
         /// </summary>
         d2 = '2',
-        
+
         /// <summary>
         /// Specifies '3',  asci code 51
         /// </summary>
@@ -45,16 +46,16 @@ namespace Z0
         /// Specifies '7'  asci code 55
         /// </summary>
         d7 = '7',
-        
+
         /// <summary>
         /// Specifies '8', asci code 56
         /// </summary>
         d8 = '8',
-        
+
         /// <summary>
         /// Specifies 9, asci code 57
         /// </summary>
-        d9 = '9',        
+        d9 = '9',
     }
 
 }

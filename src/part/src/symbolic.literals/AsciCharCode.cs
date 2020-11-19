@@ -3,9 +3,10 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
-    using ASym = AsciChar;
+{
+    using AC = AsciChar;
 
+    [CodeProvider]
     public enum AsciCharCode : byte
     {
         /// <summary>
@@ -16,486 +17,486 @@ namespace Z0
          /// <summary>
         /// The tab character code 9
         /// </summary>
-        Tab = (byte)ASym.Tab,
+        Tab = (byte)AC.Tab,
 
         /// <summary>
         /// The new-line character code 10
         /// </summary>
-        NL = (byte)ASym.NL,
+        NL = (byte)AC.NL,
 
         /// <summary>
         /// The line-feed character code 13
         /// </summary>
-        CR = (byte)ASym.CR,
+        CR = (byte)AC.CR,
 
         /// <summary>
         /// The ' ' character code 32
         /// </summary>
-        Space = (byte)ASym.Space,
+        Space = (byte)AC.Space,
 
         /// <summary>
         /// The '!' character code 33
         /// </summary>
-        Bang = (byte)ASym.Bang,
+        Bang = (byte)AC.Bang,
 
         /// <summary>
         /// The '"' character code 34
         /// </summary>
-        Quote = (byte)ASym.DQuote,
+        Quote = (byte)AC.DQuote,
 
         /// <summary>
         /// The '#' character code 35
         /// </summary>
-        Hash = (byte)ASym.Hash,
+        Hash = (byte)AC.Hash,
 
         /// <summary>
         /// The '$' character code 36
         /// </summary>
-        Dollar = (byte)ASym.Dollar,
+        Dollar = (byte)AC.Dollar,
 
         /// <summary>
         /// The '%' character code 37
         /// </summary>
-        Percent = (byte)ASym.Percent,
+        Percent = (byte)AC.Percent,
 
         /// <summary>
         /// The '&' character code 38
         /// </summary>
-        Amp = (byte)ASym.Amp,
+        Amp = (byte)AC.Amp,
 
         /// <summary>
         /// The ''' character code 39
         /// </summary>
-        SQuote = (byte)ASym.SQuote,
+        SQuote = (byte)AC.SQuote,
 
         /// <summary>
         /// The '(' character code 40
         /// </summary>
-        LParen = (byte)ASym.LParen,        
+        LParen = (byte)AC.LParen,
 
         /// <summary>
         /// The ')' character code 41
         /// </summary>
-        RParen = (byte)ASym.RParen,        
+        RParen = (byte)AC.RParen,
 
         /// <summary>
         /// The '}' character code 41
         /// </summary>
-        RBrace = (byte)ASym.RParen,
+        RBrace = (byte)AC.RParen,
 
         /// <summary>
         /// The '*' character code 42
         /// </summary>
-        Star = (byte)ASym.Mul,
+        Star = (byte)AC.Mul,
 
         /// <summary>
         /// The '+' character code 43
         /// </summary>
-        Plus = (byte)ASym.Plus,
+        Plus = (byte)AC.Plus,
 
         /// <summary>
         /// The ,' character code 44
         /// </summary>
-        Comma = (byte)ASym.Comma,
+        Comma = (byte)AC.Comma,
 
         /// <summary>
         /// The '-' character code 45
         /// </summary>
-        Dash = (byte)ASym.Dash,
+        Dash = (byte)AC.Dash,
 
         /// <summary>
         /// The '.' character code 46
         /// </summary>
-        Dot = (byte)ASym.Dot,
+        Dot = (byte)AC.Dot,
 
         /// <summary>
         /// The '/' character code 47
         /// </summary>
-        FSlash = (byte)ASym.FS,
+        FSlash = (byte)AC.FS,
 
         /// <summary>
         /// Specifies the asci code for the digit '0'
         /// </summary>
-        d0 = (byte)ASym.d0,
+        d0 = (byte)AC.d0,
 
         /// <summary>
         /// Specifies the asci code for the digit '1'
         /// </summary>
-        d1 = (byte)ASym.d1,
-        
+        d1 = (byte)AC.d1,
+
         /// <summary>
         /// Specifies the asci code for the digit '2'
         /// </summary>
-        d2 = (byte)ASym.d2,
-        
+        d2 = (byte)AC.d2,
+
         /// <summary>
         /// Specifies the asci code for the digit '3'
         /// </summary>
-        d3 = (byte)ASym.d3,
+        d3 = (byte)AC.d3,
 
         /// <summary>
         /// Specifies the asci code for the digit '4'
         /// </summary>
-        d4 = (byte)ASym.d4,
+        d4 = (byte)AC.d4,
 
         /// <summary>
         /// Specifies the asci code for the digit '5'
         /// </summary>
-        d5 = (byte)ASym.d5,
+        d5 = (byte)AC.d5,
 
         /// <summary>
         /// Specifies the asci code for the digit '6'
         /// </summary>
-        d6 = (byte)ASym.d6,
+        d6 = (byte)AC.d6,
 
         /// <summary>
         /// Specifies the asci code for the digit '7'
         /// </summary>
-        d7 = (byte)ASym.d7,
-        
+        d7 = (byte)AC.d7,
+
         /// <summary>
         /// Specifies the asci code for the digit '8'
         /// </summary>
-        d8 = (byte)ASym.d8,
-        
+        d8 = (byte)AC.d8,
+
         /// <summary>
         /// Specifies the asci code for the digit '9'
         /// </summary>
-        d9 = (byte)ASym.d9,        
+        d9 = (byte)AC.d9,
 
         /// <summary>
         /// The 'a' symbol code 97
         /// </summary>
-        a = (byte)ASym.a,
-        
+        a = (byte)AC.a,
+
         /// <summary>
         /// The 'b' symbol code 98
         /// </summary>
-        b = (byte)ASym.b,
-        
+        b = (byte)AC.b,
+
         /// <summary>
         /// The 'c' symbol code 99
         /// </summary>
-        c = (byte)ASym.c,
-        
+        c = (byte)AC.c,
+
         /// <summary>
         /// The 'd' symbol code 100
         /// </summary>
-        d = (byte)ASym.d,
-        
+        d = (byte)AC.d,
+
         /// <summary>
         /// The 'e' symbol code 101
         /// </summary>
-        e = (byte)ASym.e,
-        
+        e = (byte)AC.e,
+
         /// <summary>
         /// The 'f' symbol code 102
         /// </summary>
-        f = (byte)ASym.f,
-        
+        f = (byte)AC.f,
+
         /// <summary>
         /// The 'g' symbol code 103
         /// </summary>
-        g = (byte)ASym.g,
-        
+        g = (byte)AC.g,
+
         /// <summary>
         /// The 'h' symbol code 104
         /// </summary>
-        h = (byte)ASym.h,
-        
+        h = (byte)AC.h,
+
         /// <summary>
         /// The 'i' symbol code 105
         /// </summary>
-        i = (byte)ASym.i,
-        
+        i = (byte)AC.i,
+
         /// <summary>
         /// The 'j' symbol code 106
         /// </summary>
-        j = (byte)ASym.j,
-        
+        j = (byte)AC.j,
+
         /// <summary>
         /// The 'k' symbol code 107
         /// </summary>
-        k = (byte)ASym.k,
-        
+        k = (byte)AC.k,
+
         /// <summary>
         /// The 'l' symbol code 108
         /// </summary>
-        l = (byte)ASym.l,
-        
+        l = (byte)AC.l,
+
         /// <summary>
         /// The 'm' symbol code 109
         /// </summary>
-        m = (byte)ASym.m,
-        
+        m = (byte)AC.m,
+
         /// <summary>
         /// The 'n' symbol code 110
         /// </summary>
-        n = (byte)ASym.n,
-        
+        n = (byte)AC.n,
+
         /// <summary>
         /// The 'o' symbol code 111
         /// </summary>
-        o = (byte)ASym.o,
-        
+        o = (byte)AC.o,
+
         /// <summary>
         /// The 'p' symbol code 112
         /// </summary>
-        p = (byte)ASym.p,
-        
+        p = (byte)AC.p,
+
         /// <summary>
         /// The 'q' symbol code 113
         /// </summary>
-        q = (byte)ASym.q,
-        
+        q = (byte)AC.q,
+
         /// <summary>
         /// The 'r' symbol code 114
         /// </summary>
-        r = (byte)ASym.r,
-        
+        r = (byte)AC.r,
+
         /// <summary>
         /// The 's' symbol code 115
         /// </summary>
-        s = (byte)ASym.s,
-        
+        s = (byte)AC.s,
+
         /// <summary>
         /// The 't' symbol code 116
         /// </summary>
-        t = (byte)ASym.t,
-        
+        t = (byte)AC.t,
+
         /// <summary>
         /// The 'u' symbol code 117
         /// </summary>
-        u = (byte)ASym.u,
-        
+        u = (byte)AC.u,
+
         /// <summary>
         /// The 'v' symbol code 118
         /// </summary>
-        v = (byte)ASym.v,
-        
+        v = (byte)AC.v,
+
         /// <summary>
         /// The 'w' symbol code 119
         /// </summary>
-        w = (byte)ASym.w,
-        
+        w = (byte)AC.w,
+
         /// <summary>
         /// The 'x' symbol code 120
         /// </summary>
-        x = (byte)ASym.x,
-        
+        x = (byte)AC.x,
+
         /// <summary>
         /// The 'y' symbol code 121
         /// </summary>
-        y = (byte)ASym.y,
-        
+        y = (byte)AC.y,
+
         /// <summary>
         /// The 'z' symbol code 122
         /// </summary>
-        z = (byte)ASym.z,
+        z = (byte)AC.z,
 
         /// <summary>
         /// The 'A' symbol code 65
         /// </summary>
-        A = (byte)ASym.A,
-        
+        A = (byte)AC.A,
+
         /// <summary>
         /// The 'B' symbol code 66
         /// </summary>
-        B = (byte)ASym.B,
-        
+        B = (byte)AC.B,
+
         /// <summary>
         /// The 'C' symbol code 67
         /// </summary>
-        C = (byte)ASym.C,
-        
+        C = (byte)AC.C,
+
         /// <summary>
         /// The 'D' symbol code 68
         /// </summary>
-        D = (byte)ASym.D,
-        
+        D = (byte)AC.D,
+
         /// <summary>
         /// The 'E' symbol code 69
         /// </summary>
-        E = (byte)ASym.E,
-        
+        E = (byte)AC.E,
+
         /// <summary>
         /// The 'F' symbol code 70
         /// </summary>
-        F = (byte)ASym.F,
-        
+        F = (byte)AC.F,
+
         /// <summary>
         /// The 'G' symbol code 71
         /// </summary>
-        G = (byte)ASym.G,
-        
+        G = (byte)AC.G,
+
         /// <summary>
         /// The 'H' symbol code 72
         /// </summary>
-        H = (byte)ASym.H,
-        
+        H = (byte)AC.H,
+
         /// <summary>
         /// The 'I' symbol code 73
         /// </summary>
-        I = (byte)ASym.I,
-        
+        I = (byte)AC.I,
+
         /// <summary>
         /// The 'J' symbol code 74
         /// </summary>
-        J = (byte)ASym.J,
+        J = (byte)AC.J,
 
         /// <summary>
         /// The 'K' symbol code 75
         /// </summary>
-        K = (byte)ASym.K,
+        K = (byte)AC.K,
 
         /// <summary>
         /// The 'L' symbol code 76
         /// </summary>
-        L = (byte)ASym.L,
-        
+        L = (byte)AC.L,
+
         /// <summary>
         /// The 'M' symbol code 77
         /// </summary>
-        M = (byte)ASym.M,
-        
+        M = (byte)AC.M,
+
         /// <summary>
         /// The 'N' symbol code 78
         /// </summary>
-        N = (byte)ASym.N,
-        
+        N = (byte)AC.N,
+
         /// <summary>
         /// The 'O' symbol code 79
         /// </summary>
-        O = (byte)ASym.O,
-        
+        O = (byte)AC.O,
+
         /// <summary>
         /// The 'P' symbol code 80
         /// </summary>
-        P = (byte)ASym.P,
-        
+        P = (byte)AC.P,
+
         /// <summary>
         /// The 'Q' symbol code 81
         /// </summary>
-        Q = (byte)ASym.Q,
-        
+        Q = (byte)AC.Q,
+
         /// <summary>
         /// The 'R' symbol code 82
         /// </summary>
-        R = (byte)ASym.R,
-        
+        R = (byte)AC.R,
+
         /// <summary>
         /// The 'S' symbol code 83
         /// </summary>
-        S = (byte)ASym.S,
-        
+        S = (byte)AC.S,
+
         /// <summary>
         /// The 'T' symbol code 84
         /// </summary>
-        T = (byte)ASym.T,
-        
+        T = (byte)AC.T,
+
         /// <summary>
         /// The 'U' symbol code 85
         /// </summary>
-        U = (byte)ASym.U,
-        
+        U = (byte)AC.U,
+
         /// <summary>
         /// The 'V' symbol code 86
         /// </summary>
-        V = (byte)ASym.V,
+        V = (byte)AC.V,
 
         /// <summary>
         /// The 'W' symbol code 87
         /// </summary>
-        W = (byte)ASym.W,
+        W = (byte)AC.W,
 
         /// <summary>
         /// The 'X' symbol code 88
         /// </summary>
-        X = (byte)ASym.X,
+        X = (byte)AC.X,
 
         /// <summary>
         /// The 'Y' symbol code 89
         /// </summary>
-        Y = (byte)ASym.Y,
+        Y = (byte)AC.Y,
 
         /// <summary>
         /// The 'Z' symbol code 90
         /// </summary>
-        Z = (byte)ASym.Z,
+        Z = (byte)AC.Z,
 
         /// <summary>
         /// The ':' character code 58
         /// </summary>
-        Colon = (byte)ASym.Colon,
+        Colon = (byte)AC.Colon,
 
         /// <summary>
         /// The ,' character code 59
         /// </summary>
-        Semicolon = (byte)ASym.Semicolon,
+        Semicolon = (byte)AC.Semicolon,
 
         /// <summary>
         /// The '@' character code 64
         /// </summary>
-        At = (byte)ASym.At,
+        At = (byte)AC.At,
 
         /// <summary>
         /// The backslash character code 92
         /// </summary>
-        BSlash = (byte)ASym.BS,
+        BSlash = (byte)AC.BS,
 
         /// <summary>
         /// The '^' character code 94
         /// </summary>
-        Caret = (byte)ASym.Caret,
+        Caret = (byte)AC.Caret,
 
         /// <summary>
         /// The '=' character code 61
         /// </summary>
-        Eq = (byte)ASym.Eq,
+        Eq = (byte)AC.Eq,
 
         /// <summary>
         /// The '>' character code 62
         /// </summary>
-        Gt = (byte)ASym.GT,
+        Gt = (byte)AC.GT,
 
         /// <summary>
         /// The '{' character code 128
         /// </summary>
-        LBrace = (byte)ASym.LBrace,
+        LBrace = (byte)AC.LBrace,
 
         /// <summary>
         /// The '[' character code 91
         /// </summary>
-        LBracket = (byte)ASym.LB,
+        LBracket = (byte)AC.LB,
 
         /// <summary>
         /// The '<' character code 60
         /// </summary>
-        Lt = (byte)ASym.LT,
+        Lt = (byte)AC.LT,
 
         /// <summary>
         /// The '|' character code 124
         /// </summary>
-        Pipe = (byte)ASym.Pipe,
+        Pipe = (byte)AC.Pipe,
 
         /// <summary>
         /// The '?' character code 63
         /// </summary>
-        Question = (byte)ASym.Question,
-      
+        Question = (byte)AC.Question,
+
         /// <summary>
         /// The ']' character code 93
         /// </summary>
-        RBracket = (byte)ASym.RBracket,
+        RBracket = (byte)AC.RBracket,
 
         /// <summary>
         /// The '~' character code 126
         /// </summary>
-        SYM = (byte)ASym.Tilde, 
+        SYM = (byte)AC.Tilde,
 
         /// <summary>
         /// The '~' character code 95
         /// </summary>
-        Underscore = (byte)ASym.US, 
+        Underscore = (byte)AC.US,
     }
 }

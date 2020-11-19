@@ -87,50 +87,50 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static char hexchar(byte value, byte pos)
-            => (char)skip(first(UpperDigits), (byte)(0xF & (byte)(value >> pos*4)));
+            => (char)skip(first(UpperHexDigits), (byte)(0xF & (byte)(value >> pos*4)));
 
         [MethodImpl(Inline), Op]
         public static char hexchar(ushort value, byte pos)
-            => (char)skip(first(UpperDigits), (byte)(0xF & (byte)(value >> pos*4)));
+            => (char)skip(first(UpperHexDigits), (byte)(0xF & (byte)(value >> pos*4)));
 
         [MethodImpl(Inline), Op]
         public static char hexchar(uint value, byte pos)
-            => (char)skip(first(UpperDigits), (byte)(0xF & (byte)(value >> pos*4)));
+            => (char)skip(first(UpperHexDigits), (byte)(0xF & (byte)(value >> pos*4)));
 
         [MethodImpl(Inline), Op]
         public static char hexchar(ulong value, byte pos)
-            => (char)skip(first(UpperDigits), (byte)(0xF & (byte)(value >> pos*4)));
+            => (char)skip(first(UpperHexDigits), (byte)(0xF & (byte)(value >> pos*4)));
 
         [MethodImpl(Inline), Op]
         public static char hexchar(byte value, byte pos, LowerCased @case)
-            => (char)skip(first(LowerDigits), (byte)(0xF & (byte)(value >> pos*4)));
+            => (char)skip(first(LowerHexDigits), (byte)(0xF & (byte)(value >> pos*4)));
 
         [MethodImpl(Inline), Op]
         public static char hexchar(ushort value, byte pos, LowerCased @case)
-            => (char)skip(first(LowerDigits), (byte)(0xF & (byte)(value >> pos*4)));
+            => (char)skip(first(LowerHexDigits), (byte)(0xF & (byte)(value >> pos*4)));
 
         [MethodImpl(Inline), Op]
         public static char hexchar(uint value, byte pos, LowerCased @case)
-            => (char)skip(first(LowerDigits), (byte)(0xF & (byte)(value >> pos*4)));
+            => (char)skip(first(LowerHexDigits), (byte)(0xF & (byte)(value >> pos*4)));
 
         [MethodImpl(Inline), Op]
         public static char hexchar(ulong value, byte pos, LowerCased @case)
-            => (char)skip(first(LowerDigits), (byte)(0xF & (byte)(value >> pos*4)));
+            => (char)skip(first(LowerHexDigits), (byte)(0xF & (byte)(value >> pos*4)));
 
         [MethodImpl(Inline), Op]
         public static char hexchar(byte value, byte pos, UpperCased @case)
-            => (char)skip(first(UpperDigits), (byte)(0xF & (byte)(value >> pos*4)));
+            => (char)skip(first(UpperHexDigits), (byte)(0xF & (byte)(value >> pos*4)));
 
         [MethodImpl(Inline), Op]
         public static char hexchar(ushort value, byte pos, UpperCased @case)
-            => (char)skip(first(UpperDigits), (byte)(0xF & (byte)(value >> pos*4)));
+            => (char)skip(first(UpperHexDigits), (byte)(0xF & (byte)(value >> pos*4)));
 
         [MethodImpl(Inline), Op]
         public static char hexchar(uint value, byte pos, UpperCased @case)
-            => (char)skip(first(UpperDigits), (byte)(0xF & (byte)(value >> pos*4)));
+            => (char)skip(first(UpperHexDigits), (byte)(0xF & (byte)(value >> pos*4)));
 
         [MethodImpl(Inline), Op]
         public static char hexchar(ulong value, byte pos, UpperCased @case)
-            => (char)skip(first(UpperDigits), (byte)(0xF & (byte)(value >> pos*4)));
+            => (char)skip(first(UpperHexDigits), (byte)(0xF & (byte)(value >> pos*4)));
     }
 }

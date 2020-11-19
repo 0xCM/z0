@@ -12,6 +12,7 @@ namespace Z0
     using static Konst;
     using static z;
 
+
     /// <summary>
     /// Defines a permutation over the integers [0, 1, ..., n - 1] where n is the permutation length
     /// </summary>
@@ -19,6 +20,7 @@ namespace Z0
     public readonly struct Perm
     {
         const NumericKind Closure = UnsignedInts;
+
 
         /// <summary>
         /// Defines the permutation (0 -> terms[0], 1 -> terms[1], ..., n - 1 -> terms[n-1])
@@ -68,6 +70,27 @@ namespace Z0
             var dst = sys.alloc<T>(src.Length);
             apply(p,src, dst);
             return dst;
+        }
+
+        /// <summary>
+        /// Applies a transposition sequence to an input sequence
+        /// </summary>
+        /// <param name="src">The input sequence</param>
+        /// <param name="swaps">The transposition sequence</param>
+        /// <param name="dst">The output sequence</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static void apply<T>(ReadOnlySpan<T> src, ReadOnlySpan<Swap> swaps, Span<T> dst)
+            where T : unmanaged
+        {
+            var len = swaps.Length;
+            ref readonly var input = ref first(src);
+            ref readonly var exchange = ref first(swaps);
+            for(var k = 0u; k<len; k++)
+            {
+                ref readonly var x = ref skip(exchange, k);
+                swap(ref seek(input, x.i), ref seek(input, x.j));
+            }
         }
 
         /// <summary>

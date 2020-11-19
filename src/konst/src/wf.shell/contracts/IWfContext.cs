@@ -24,7 +24,7 @@ namespace Z0
         ITestLogPaths TestLogPaths
             => new TestLogPaths();
 
-        CmdArgs Args
+        string[] Args
              => Environment.GetCommandLineArgs();
 
         string AppName

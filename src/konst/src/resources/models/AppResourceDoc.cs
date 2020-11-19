@@ -12,15 +12,8 @@ namespace Z0
     public readonly struct AppResourceDoc : IAppResource<TextDoc>
     {
         public string Name {get;}
-        
-        public TextDoc Content {get;}        
-        
-        public static AppResourceDoc Empty 
-            => new AppResourceDoc(EmptyString, TextDoc.Empty);
-             
-        [MethodImpl(Inline)]
-        public static implicit operator AppResource<TextDoc>(AppResourceDoc src)
-            => new AppResource<TextDoc>(src.Name,src.Content);
+
+        public TextDoc Content {get;}
 
         [MethodImpl(Inline)]
         public AppResourceDoc(string name, TextDoc doc)
@@ -34,7 +27,7 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Content.RowData;
         }
-        
+
         public ref readonly TextRow this[int index]
         {
             [MethodImpl(Inline)]
@@ -47,7 +40,7 @@ namespace Z0
             get => Content.RowCount;
         }
 
-        public int CharCount(char exclude)        
+        public int CharCount(char exclude)
         {
             var count = 0;
             for(var i=0; i<RowCount; i++)
@@ -79,5 +72,12 @@ namespace Z0
 
         public override string ToString()
             => Format();
+
+        public static AppResourceDoc Empty
+            => new AppResourceDoc(EmptyString, TextDoc.Empty);
+
+        [MethodImpl(Inline)]
+        public static implicit operator AppResource<TextDoc>(AppResourceDoc src)
+            => new AppResource<TextDoc>(src.Name,src.Content);
     }
 }

@@ -19,13 +19,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ProjectFile(FS.FilePath src)
-        {
-            Path = src;
-        }
-
-        [MethodImpl(Inline)]
-        public static implicit operator ProjectFile(FS.FilePath src)
-            => new ProjectFile(src);
+            => Path = src;
 
         [MethodImpl(Inline)]
         public string Format()
@@ -33,5 +27,9 @@ namespace Z0
 
         public override string ToString()
             => Format();
+
+        [MethodImpl(Inline)]
+        public static implicit operator ProjectFile(FS.FilePath src)
+            => new ProjectFile(src);
     }
 }

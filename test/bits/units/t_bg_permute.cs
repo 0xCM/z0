@@ -20,10 +20,10 @@ namespace Z0
         public void bg_permute_16x4()
         {
             var identity = PermSymbolic.identity(n16);
-            var iterms = identity.Literals();
+            var symbols =  PermSymbolic.symbols(identity);
             var g1 = identity.ToBitGrid();
-            var iperm = identity.ToNatural();
-            var g2 = iperm.ToBitGrid();
+            var nP = identity.ToNatural();
+            var g2 = nP.ToBitGrid();
             Claim.Require(g1 == g2);
 
         }
@@ -31,10 +31,10 @@ namespace Z0
         public void bg_permute_8x3()
         {
             var id = PermSymbolic.identity(n8);
-            var idterms = id.Literals();
+            var symbols = PermSymbolic.symbols(id);
             var g1 = id.ToSubGrid();
-            var iperm = id.ToNatural();
-            var g2 = iperm.ToSubGrid();
+            var nP = id.ToNatural();
+            var g2 = nP.ToSubGrid();
             //Claim.yea(g1 == g2);
         }
 
@@ -47,7 +47,6 @@ namespace Z0
             var digits = spec.ToDigits();
             for(var i =0; i<8; i++)
                 Claim.eq((uint)symbols[i], (uint)digits[i]);
-
         }
 
         public void bg_perm_8x32_bits()

@@ -13,23 +13,23 @@ namespace Z0
     partial class Hex
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ReadOnlySpan<char> chars<T>(T value)
+        public static ReadOnlySpan<char> chars<T>(Base16 @base, UpperCased @case, T value)
             where T : unmanaged
-                => chars_u(value);
+                => chars_u(@base, @case, value);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static void chars<T>(T value, Span<char> dst, int offset)
+        public static void chars<T>(Base16 @base, UpperCased @case, T value, Span<char> dst, int offset)
             where T : unmanaged
-                => chars_u(value, dst, offset);
+                => chars_u(@base, @case, value, dst, offset);
 
         /// <summary>
         /// Computes the 2-character hex representation of a byte
         /// </summary>
         /// <param name="src">The byte value</param>
         [MethodImpl(Inline), Op]
-        public static void chars(byte value, out char d0, out char d1)
+        public static void chars(Base16 @base, UpperCased @case, byte value, out char d0, out char d1)
         {
-            ref readonly var codes = ref first(UpperDigits);
+            ref readonly var codes = ref first(UpperHexDigits);
             d0 = (char)skip(codes, (byte)(0xF & value));
             d1 = (char)skip(codes, (byte)((value >> 4) & 0xF));
         }
@@ -41,7 +41,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> chars(byte src)
         {
-            ref readonly var codes = ref first(UpperDigits);
+            ref readonly var codes = ref first(UpperHexDigits);
             var storage = StackStores.char2();
             ref var dst = ref storage.C0;
 
@@ -58,7 +58,7 @@ namespace Z0
         public static ReadOnlySpan<char> chars(ushort src)
         {
             const int count = 4;
-            ref readonly var codes = ref first(UpperDigits);
+            ref readonly var codes = ref first(UpperHexDigits);
             var storage = StackStores.char4();
             ref var dst = ref storage.C0;
 
@@ -74,12 +74,12 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> chars(uint src)
         {
-            const int count = 8;
-            ref readonly var codes = ref first(UpperDigits);
+            const byte count = 8;
+            ref readonly var codes = ref first(UpperHexDigits);
             var storage = StackStores.char8();
             ref var dst = ref storage.C0;
 
-            for(var i=0; i < count; i++)
+            for(byte i=0; i < count; i++)
                 StackStores.cell(ref dst, i) = (char)skip(in codes, (uint) ((src >> i*4) & 0xF));
             return StackStores.span(ref storage);
         }
@@ -91,12 +91,12 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> chars(ulong src)
         {
-            const int count = 16;
-            ref readonly var codes = ref first(UpperDigits);
+            const byte count = 16;
+            ref readonly var codes = ref first(UpperHexDigits);
             var storage = StackStores.char16();
             ref var dst = ref storage.C0;
 
-            for(var i=0; i < count; i++)
+            for(byte i=0; i<count; i++)
                 StackStores.cell(ref dst, i) = (char)skip(in codes, (uint) ((src >> i*4) & 0xF));
             return StackStores.span(ref storage);
         }
@@ -104,7 +104,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static void chars(byte src, Span<char> dst, int offset)
         {
-            ref readonly var codes = ref first(UpperDigits);
+            ref readonly var codes = ref first(UpperHexDigits);
             ref var target = ref first(dst);
 
             seek(target, offset + 0) = (char)skip(in codes, (byte)(src & 0xF));
@@ -114,7 +114,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static void chars(ushort src, Span<char> dst, int offset)
         {
-            ref readonly var codes = ref first(UpperDigits);
+            ref readonly var codes = ref first(UpperHexDigits);
             ref var target = ref first(dst);
             seek(target, offset + 0) = (char)skip(in codes, (ushort)(src & 0xF));
             seek(target, offset + 1) = (char)skip(in codes, (ushort)((src >> 1*4) & 0xF));
@@ -125,7 +125,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static void chars(uint src, Span<char> dst, int offset)
         {
-            ref readonly var codes = ref first(UpperDigits);
+            ref readonly var codes = ref first(UpperHexDigits);
             ref var target = ref first(dst);
             seek(target, offset + 0) = (char)skip(in codes, src & 0xF);
             seek(target, offset + 1) = (char)skip(in codes, (src >> 1*4) & 0xF);
@@ -136,7 +136,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static void chars(ulong src, Span<char> dst, int offset)
         {
-            ref readonly var codes = ref first(UpperDigits);
+            ref readonly var codes = ref first(UpperHexDigits);
             ref var target = ref first(dst);
             seek(target, offset + 0) = (char)skip(in codes, src & 0xF);
             seek(target, offset + 1) = (char)skip(in codes, (src >> 1*4) & 0xF);
@@ -148,40 +148,8 @@ namespace Z0
             seek(target, offset + 7) = (char)skip(in codes, (src >> 7*4) & 0xF);
         }
 
-        [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<char> chars(in HexText<Hex1Seq> src, Hex1Seq kind)
-            => src.Chars(kind);
-
-        [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<char> chars(in HexText<Hex2Seq> src, Hex2Seq kind)
-            => src.Chars(kind);
-
-        [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<char> chars(in HexText<Hex3Seq> src, Hex3Seq kind)
-            => src.Chars(kind);
-
-        [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<char> chars(in HexText<Hex4Seq> src, Hex4Seq kind)
-            => src.Chars(kind);
-
-        [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<char> chars(Hex1Seq kind)
-            => chars(text(n1), kind);
-
-        [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<char> chars(Hex2Seq kind)
-            => chars(text(n2), kind);
-
-        [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<char> chars(Hex3Seq kind)
-            => chars(text(n3), kind);
-
-        [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<char> chars(Hex4Seq kind)
-            => chars(text(n4), kind);
-
         [MethodImpl(Inline)]
-        static ReadOnlySpan<char> chars_u<T>(T value)
+        static ReadOnlySpan<char> chars_u<T>(Base16 @base, UpperCased @case, T value)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -193,11 +161,11 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return chars(uint64(value));
             else
-                return chars_i(value);
+                return chars_i(@base, @case, value);
         }
 
         [MethodImpl(Inline)]
-        static ReadOnlySpan<char> chars_i<T>(T value)
+        static ReadOnlySpan<char> chars_i<T>(Base16 @base, UpperCased @case, T value)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -209,11 +177,11 @@ namespace Z0
             else if(typeof(T) == typeof(long))
                 return chars(int64(value));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
         [MethodImpl(Inline)]
-        static void chars_u<T>(T value, Span<char> dst, int offset)
+        static void chars_u<T>(Base16 @base, UpperCased @case, T value, Span<char> dst, int offset)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -225,11 +193,11 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 chars(uint64(value), dst, offset);
             else
-                chars_i(value,dst,offset);
+                chars_i(@base, @case, value,dst,offset);
         }
 
         [MethodImpl(Inline)]
-        static void chars_i<T>(T value, Span<char> dst, int offset)
+        static void chars_i<T>(Base16 @base, UpperCased @case, T value, Span<char> dst, int offset)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -241,7 +209,7 @@ namespace Z0
             else if(typeof(T) == typeof(long))
                 chars(int64(value), dst, offset);
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
     }
 }

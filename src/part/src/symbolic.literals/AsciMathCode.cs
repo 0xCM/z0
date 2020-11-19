@@ -3,11 +3,12 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
     using S = AsciMath;
 
+    [CodeProvider]
     public enum AsciMathCode : byte
-    {        
+    {
         /// <summary>
         /// The '!' character code 33
         /// </summary>
@@ -61,6 +62,6 @@ namespace Z0
         /// <summary>
         /// The '~' character code 126
         /// </summary>
-        Complement = (byte)S.Complement, 
+        Complement = (byte)S.Complement,
     }
 }

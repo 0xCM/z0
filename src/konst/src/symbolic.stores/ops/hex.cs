@@ -75,7 +75,7 @@ namespace Z0
         /// <param name="case">The case selector</param>
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<HexSymUp> hex(byte src, UpperCased @case)
-            => recover<byte,HexSymUp>(Hex.UpperDigits);
+            => recover<byte,HexSymUp>(Hex.UpperHexDigits);
 
         /// <summary>
         /// Presents the source value as a sequence of hex symbols
@@ -84,6 +84,6 @@ namespace Z0
         /// <param name="case">The case selector</param>
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<HexSymLo> hex(byte src, LowerCased @case)
-            => recover<byte,HexSymLo>(Hex.LowerDigits);
+            => recover<byte,HexSymLo>(Hex.LowerHexDigits);
     }
 }

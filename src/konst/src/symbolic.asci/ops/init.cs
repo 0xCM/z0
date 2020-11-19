@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
@@ -83,6 +83,6 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static asci16 init(N16 n, ulong lo, ulong hi)
-            => new asci16(Vector128.Create(lo,hi).AsByte());            
+            => new asci16(Vector128.Create(lo,hi).AsByte());
     }
 }

@@ -24,6 +24,6 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static char uppercase(AsciLetterLoCode src)
-            => skip(LettersUp,(uint)src - (uint)AsciLetterLoCode.First);
+            => skip(UppercaseLetters,(uint)src - (uint)AsciLetterLoCode.First);
     }
 }

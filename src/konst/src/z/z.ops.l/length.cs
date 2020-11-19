@@ -6,13 +6,11 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
 
     using static Konst;
 
     partial struct z
     {
-
         /// <summary>
         /// Computs min(x.Length,y.Length)
         /// </summary>

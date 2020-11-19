@@ -20,7 +20,7 @@ namespace Z0
 
         readonly Multiplex Mpx;
 
-        readonly CmdArgs Args;
+        readonly string[] Args;
 
         readonly CmdBuilder CmdBuilder;
 
@@ -80,8 +80,8 @@ namespace Z0
             return outcome ? Cmd.ok(cmd) : Cmd.fail(cmd,outcome.Format());
         }
 
-        CmdResult EmitToolHelp()
-            => EmitResourceData.run(Wf, CmdBuilder.EmitResourceData(Parts.Refs.Assembly, "tools/help", ".help"));
+        // CmdResult EmitToolHelp()
+        //     => EmitResourceData.run(Wf, CmdBuilder.EmitResourceData(Parts.Refs.Assembly, "tools/help", ".help"));
 
         CmdResult EmitFileList()
             => exec(Wf.EmitFileListCmdSample());
@@ -156,16 +156,16 @@ namespace Z0
         FS.FilePath AppDataPath(FS.FileName file)
             => Wf.AppData + file;
 
-        void ShowRuntimeArchive()
-        {
-            var archive = RuntimeArchive.create();
-            var resolver = new PathAssemblyResolver(archive.Files.Select(x => x.Name.Text));
-            using var context = new MetadataLoadContext(resolver);
-            iter(archive.ManagedLibraries, path => context.LoadFromAssemblyPath(path.Name));
-            var assemblies = context.GetAssemblies();
-            foreach(var a in assemblies)
-                Wf.Status(a.GetSimpleName());
-        }
+        // void ShowRuntimeArchive()
+        // {
+        //     var archive = RuntimeArchive.create();
+        //     var resolver = new PathAssemblyResolver(archive.Files.Select(x => x.Name.Text));
+        //     using var context = new MetadataLoadContext(resolver);
+        //     iter(archive.ManagedLibraries, path => context.LoadFromAssemblyPath(path.Name));
+        //     var assemblies = context.GetAssemblies();
+        //     foreach(var a in assemblies)
+        //         Wf.Status(a.GetSimpleName());
+        // }
 
         static string[] DebugFlags(Assembly src)
             => src.GetCustomAttributes<DebuggableAttribute>().Select(a => a.DebuggingFlags.ToString()).Array();
@@ -180,7 +180,7 @@ namespace Z0
 
         void ShowArgs()
         {
-            for(var i=0; i<Args.Count; i++)
+            for(var i=0; i<Args.Length; i++)
                 Wf.RowData(Args[i]);
         }
 
@@ -201,7 +201,8 @@ namespace Z0
 
         public void Run(ICmdSpec spec)
         {
-
+            Wf.Status(Msg.Dispatching().Apply(spec.CmdId));
+            Wf.Router.Dispatch(spec);
         }
 
         public void Run<T>(T spec)
@@ -209,7 +210,6 @@ namespace Z0
         {
             Wf.Status(Msg.Dispatching<T>().Apply(spec));
             Wf.Router.Dispatch(spec);
-
         }
 
         void ShowDependencies()
@@ -241,7 +241,7 @@ namespace Z0
         {
             EmitOpCodes();
             EmitPatterns();
-            EmitToolHelp();
+            //EmitToolHelp();
             EmitSymbols();
             EmitAsmRefs();
             EmitPeHeaders();

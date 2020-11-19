@@ -24,7 +24,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ref T Lookup(K key)
-            => ref seek(Values, EnumValue.e8u(key));
+            => ref seek(Values, u8(key));
 
         public ref T this[K index]
         {

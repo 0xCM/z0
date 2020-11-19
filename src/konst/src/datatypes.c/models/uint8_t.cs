@@ -19,7 +19,6 @@ namespace Z0
 
         public static analog one => 1;
 
-
         [MethodImpl(Inline)]
         public static implicit operator byte(analog src)
             => src.data;

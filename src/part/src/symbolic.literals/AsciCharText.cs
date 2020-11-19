@@ -7,6 +7,7 @@ namespace Z0
     /// <summary>
     /// Defines asci string literals
     /// </summary>
+    [LiteralProvider]
     public static class AsciCharText
     {
         /// <summary>

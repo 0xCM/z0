@@ -7,6 +7,7 @@ namespace Z0
     /// <summary>
     /// Defines literals that correspond to base-10 digits
     /// </summary>
+    [CodeProvider]
     public enum DecimalDigit : byte
     {
         /// <summary>
@@ -18,12 +19,12 @@ namespace Z0
         /// Specifies 1 base 10
         /// </summary>
         d1 = 1,
-        
+
         /// <summary>
         /// Specifies 2 base 10
         /// </summary>
         d2 = 2,
-        
+
         /// <summary>
         /// Specifies 3 base 10
         /// </summary>
@@ -48,15 +49,15 @@ namespace Z0
         /// Specifies 7 base 10
         /// </summary>
         d7 = 7,
-        
+
         /// <summary>
         /// Specifies 8 base 10
         /// </summary>
         d8 = 8,
-        
+
         /// <summary>
         /// Specifies 9 base 10
         /// </summary>
-        d9 = 9,        
+        d9 = 9,
     }
 }

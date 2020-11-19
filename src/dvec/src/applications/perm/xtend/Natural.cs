@@ -64,24 +64,24 @@ namespace Z0
         /// </summary>
         /// <param name="src">The perm spec</param>
         [MethodImpl(Inline)]
-        public static NatSpan<N4, byte> ToDigits(this Perm4L src)
-            => asci.digits(src);
+        public static Span<byte> ToDigits(this Perm4L src)
+            => Digital.digits(src);
 
         /// <summary>
         /// Computes the digits corresponding to each 3-bit segment of the permutation spec
         /// </summary>
         /// <param name="src">The perm spec</param>
         [MethodImpl(Inline)]
-        public static NatSpan<N8,OctalDigit> ToDigits(this Perm8L src)
-            => asci.digits(src);
+        public static Span<OctalDigit> ToDigits(this Perm8L src)
+            => Digital.digits(src);
 
         /// <summary>
         /// Computes the digits corresponding to each 4-bit segment of the permutation spec
         /// </summary>
         /// <param name="src">The perm spec</param>
         [MethodImpl(Inline)]
-        public static NatSpan<N16,HexDigit> ToDigits(this Perm16L src)
-            => asci.digits(src);
+        public static Span<HexDigit> ToDigits(this Perm16L src)
+            => Digital.digits(src);
 
         /// <summary>
         /// Defines a shuffle spec from a permutation

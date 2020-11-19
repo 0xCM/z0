@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static z;
 
     partial class Hex
     {
@@ -57,7 +56,7 @@ namespace Z0
             => chars((uint)src,dst,offset);
 
         [MethodImpl(Inline), Op]
-        public static void chars(long src, Span<char> dst, int offset)        
+        public static void chars(long src, Span<char> dst, int offset)
             => chars((ulong)src,dst,offset);
     }
 }

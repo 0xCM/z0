@@ -11,8 +11,7 @@ namespace Z0
     using static z;
 
     [CmdReactor]
-    public abstract class CmdReactor<H,S,T> : ICmdReactor<H,S,T>
-        where H : CmdReactor<H,S,T>, new()
+    public abstract class CmdReactor<S,T> : ICmdReactor<S,T>
         where S : struct, ICmdSpec<S>
         where T : struct
     {
@@ -25,13 +24,6 @@ namespace Z0
         public static S Spec() => new S();
 
         public CmdId CmdId => Spec().Id;
-
-        public static H Create(IWfShell wf)
-        {
-            var node = new H();
-            node.Init(wf);
-            return node;
-        }
 
         protected abstract T Run(S cmd);
 
@@ -50,8 +42,26 @@ namespace Z0
 
         public void Init(IWfShell wf)
         {
-            Host = WfShell.host(typeof(H));
+            Host = WfShell.host(GetType());
             Wf = wf.WithHost(Host);
+        }
+
+        ClrArtifactKey IWfService.ServiceId
+            => GetType().MetadataToken;
+    }
+
+    [CmdReactor]
+    public abstract class CmdReactor<H,S,T> : CmdReactor<S,T>
+        where H : CmdReactor<H,S,T>, new()
+        where S : struct, ICmdSpec<S>
+        where T : struct
+    {
+
+        public static H Create(IWfShell wf)
+        {
+            var node = new H();
+            node.Init(wf);
+            return node;
         }
     }
 }

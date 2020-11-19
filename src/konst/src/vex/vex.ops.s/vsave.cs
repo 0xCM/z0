@@ -18,16 +18,14 @@ namespace Z0
     partial struct z
     {
         /// <summary>
+        /// void _mm_storeu_si128 (__m128i* mem_addr, __m128i a) MOVDQU m128, xmm
         /// Stores vector content to a memory location
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target memory</param>
         [MethodImpl(Inline), Op]
-        public static unsafe ref sbyte vsave(Vector128<sbyte> src, ref sbyte dst)
-        {
-            Store(refptr(ref dst), src);
-            return ref dst;
-        }
+        public static unsafe void vstore(Vector128<sbyte> src, ref sbyte dst)
+            => Store(refptr(ref dst), src);
 
         /// <summary>
         /// Stores vector content to a memory location
@@ -35,11 +33,8 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target memory</param>
         [MethodImpl(Inline), Op]
-        public static unsafe ref byte vsave(Vector128<byte> src, ref byte dst)
-        {
-            Store(refptr(ref dst), src);
-            return ref dst;
-        }
+        public static unsafe void vsave(Vector128<byte> src, ref byte dst)
+            => Store(refptr(ref dst), src);
 
         /// <summary>
         /// Stores vector content to a memory location
@@ -47,11 +42,8 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target memory</param>
         [MethodImpl(Inline), Op]
-        public static unsafe ref short vsave(Vector128<short> src, ref short dst)
-        {
-            Store(refptr(ref dst), src);
-            return ref dst;
-        }
+        public static unsafe void vsave(Vector128<short> src, ref short dst)
+            => Store(refptr(ref dst), src);
 
         /// <summary>
         /// Stores vector content to a memory location
@@ -59,11 +51,8 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target memory</param>
         [MethodImpl(Inline), Op]
-        public static unsafe ref ushort vsave(Vector128<ushort> src, ref ushort dst)
-        {
-            Store(refptr(ref dst), src);
-            return ref dst;
-        }
+        public static unsafe void vsave(Vector128<ushort> src, ref ushort dst)
+            => Store(refptr(ref dst), src);
 
         /// <summary>
         /// Stores vector content to a memory location
@@ -71,11 +60,8 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target memory</param>
         [MethodImpl(Inline), Op]
-        public static unsafe ref int vsave(Vector128<int> src, ref int dst)
-        {
-            Store(refptr(ref dst), src);
-            return ref dst;
-        }
+        public static unsafe void vsave(Vector128<int> src, ref int dst)
+            => Store(refptr(ref dst), src);
 
         /// <summary>
         /// Stores vector content to a memory location
@@ -83,11 +69,8 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target memory</param>
         [MethodImpl(Inline), Op]
-        public static unsafe ref uint vsave(Vector128<uint> src, ref uint dst)
-        {
-            Store(refptr(ref dst), src);
-            return ref dst;
-        }
+        public static unsafe void vsave(Vector128<uint> src, ref uint dst)
+            => Store(refptr(ref dst), src);
 
         /// <summary>
         /// Stores vector content to a memory location
@@ -225,6 +208,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target memory</param>
+        /// <intrinsic>void _mm_storeu_si128 (__m128i* mem_addr, __m128i a) MOVDQU m128, xmm</intrinsic>
         [MethodImpl(Inline), Op]
         public static unsafe void vsave(Vector128<sbyte> src, ref sbyte dst, int offset)
             => Store(refptr(ref dst, offset), src);
@@ -234,6 +218,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target memory</param>
+        /// <intrinsic>void _mm_storeu_si128 (__m128i* mem_addr, __m128i a) MOVDQU m128, xmm</intrinsic>
         [MethodImpl(Inline), Op]
         public static unsafe void vstore(Vector128<byte> src, ref byte dst, int offset)
             => Store(refptr(ref dst, offset), src);
@@ -243,6 +228,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target memory</param>
+        /// <intrinsic>void _mm_storeu_si128 (__m128i* mem_addr, __m128i a) MOVDQU m128, xmm</intrinsic>
         [MethodImpl(Inline), Op]
         public static unsafe void vsave(Vector128<short> src, ref short dst, int offset)
             => Store(refptr(ref dst, offset), src);
@@ -347,6 +333,7 @@ namespace Z0
             => Store(refptr(ref dst, offset), src);
 
         /// <summary>
+        /// void _mm256_storeu_si256 (__m256i * mem_addr, __m256i a) MOVDQU m256, ymm
         /// Stores vector content to a memory location
         /// </summary>
         /// <param name="src">The source vector</param>
@@ -356,6 +343,7 @@ namespace Z0
             => Store(refptr(ref dst, offset), src);
 
         /// <summary>
+        /// void _mm256_storeu_si256 (__m256i * mem_addr, __m256i a) MOVDQU m256, ymm
         /// Stores vector content to a memory location
         /// </summary>
         /// <param name="src">The source vector</param>

@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
@@ -13,16 +13,6 @@ namespace Z0
 
     partial struct asci
     {
-        [MethodImpl(Inline), Op]
-        public static void decode(in BinaryCode src, Span<char> dst)
-        {
-            var count = src.Length;
-            var view = src.View;
-
-            for(var i=0u; i<count; i++)
-                seek(dst,i) = (char)skip(view,i);
-        }
-
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> decode(AsciCharCode src)
         {
@@ -58,7 +48,7 @@ namespace Z0
         public static ReadOnlySpan<char> decode(in asci8 src)
         {
             var decoded = vinflate(z.vbytes(w128, src.Storage));
-            return z.recover<char>(z.bytes(vlo(decoded)));            
+            return z.recover<char>(z.bytes(vlo(decoded)));
         }
 
         [MethodImpl(Inline), Op]
@@ -67,7 +57,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> decode(in asci32 src)
-        {            
+        {
             var lo = vinflate(src.Storage, n0);
             var hi = vinflate(src.Storage, n1);
             return z.recover<char>(z.bytes(new Seg512(lo,hi)));
@@ -75,7 +65,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> decode(in asci64 src)
-        {            
+        {
             var x = src.Storage;
             var x0 = vinflate(x.Lo,n0);
             var x1 = vinflate(x.Lo,n1);

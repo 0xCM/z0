@@ -55,13 +55,13 @@ namespace Z0.Asm
             Trace(formatted.ToString());
         }
 
-        public void asci_render()
+        public void digital_render()
         {
             var src = Random.Bytes(8).ToSpan();
             var bs = src.ToBitSpan();
             Claim.eq(64,bs.Length);
             var expect = bs.Format();
-            var actual = asci.render(Konst.base2, src).Reverse().ToString();
+            var actual = Digital.render(Konst.base2, src).Reverse().ToString();
             ClaimPrimal.eq(expect,actual);
         }
 

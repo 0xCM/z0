@@ -50,7 +50,7 @@ namespace Z0
             else if(typeof(A) == typeof(asci64))
                 copy(cast(n64, src), ref dst);
             else
-                throw Unsupported.define<A>();
+                throw no<A>();
         }
     }
 }

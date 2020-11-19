@@ -3,9 +3,10 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
+    [SymbolProvider]
     public enum AsciMath : ushort
-    {        
+    {
         /// <summary>
         /// The '=' character
         /// </summary>
@@ -54,7 +55,7 @@ namespace Z0
         /// <summary>
         /// The '~' character
         /// </summary>
-        Complement = '~', 
+        Complement = '~',
 
         /// <summary>
         /// The '!' character

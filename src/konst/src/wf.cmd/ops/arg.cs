@@ -19,9 +19,9 @@ namespace Z0
         /// <param name="value">The option value</param>
         [MethodImpl(Inline), Op]
         public static CmdArg arg(string name, string value)
-            => new CmdArg(name,value);
+            => new CmdArg(name, value);
 
-        [MethodImpl(Inline), Op]
+        [Op]
         public static CmdArg arg(string name, string[] values)
             => new CmdArg(name, values.Concat(';'));
 
@@ -46,21 +46,5 @@ namespace Z0
         public static CmdArg<K,T> arg<K,T>(K kind, T value)
             where K : unmanaged
                 => new CmdArg<K,T>(kind,value);
-        [Op]
-        public static ParseResult<CmdArg> arg(string src)
-        {
-            try
-            {
-                var i = src.IndexOf(DefaultSpecifier);
-                if(i == NotFound)
-                    return parsed(src,new CmdArg(src));
-                else
-                    return parsed(src, new CmdArg(src.LeftOfIndex(i), src.RightOfIndex(i)));
-            }
-            catch(Exception e)
-            {
-                return unparsed<CmdArg>(src,e);
-            }
-        }
     }
 }

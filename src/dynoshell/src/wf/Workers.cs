@@ -41,55 +41,5 @@ namespace Z0
             return Cmd.ok(cmd);
         }
 
-        public CmdResult Route(EmitRuntimeIndexCmd cmd)
-        {
-            var hosts = Wf.Api.ApiHosts;
-            var kHost = (uint)hosts.Length;
-            Wf.Status(Msg.IndexingHosts.Apply(kHost));
-
-            var members  = @readonly(ApiRuntime.index(Wf));
-            var target = Wf.Db().IndexFile("api.members");
-            using var writer = target.Writer();
-            var count = members.Length;
-            var buffer = Buffers.text();
-            for(var i=0; i<count; i++)
-            {
-                ApiRuntime.render(skip(members, i), buffer);
-                writer.WriteLine(buffer.Emit());
-            }
-
-            return Cmd.ok(cmd);
-        }
-
-        public CmdResult Route(EmitResourceDataCmd cmd)
-            => exec(Wf, cmd);
-
-        public static CmdResult exec(IWfShell wf, EmitResourceDataCmd cmd)
-        {
-            var query = cmd.Match.IsEmpty ? Resources.query(cmd.Source) : Resources.query(cmd.Source, cmd.Match);
-            var count = query.ResourceCount;
-
-            if(count == 0)
-                wf.Warn(Msg.NoMatchingResources.Apply(cmd.Source, cmd.Match));
-            else
-                wf.Status(Msg.EmittingResources.Apply(cmd.Source, count));
-
-            if(cmd.ClearTarget)
-                cmd.Target.Clear();
-
-            var invalid = Path.GetInvalidPathChars();
-            var descriptors = query.Descriptors();
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var descriptor = ref skip(descriptors,i);
-                var name =  descriptor.Name.ToString().ReplaceAny(invalid, Chars.Underscore);
-                var target = cmd.Target + FS.file(name);
-                var utf = Resources.utf8(descriptor);
-                using var writer = target.Writer();
-                writer.Write(utf);
-                wf.EmittedFile(utf.Length, target);
-            }
-            return Cmd.ok(cmd);
-        }
     }
 }

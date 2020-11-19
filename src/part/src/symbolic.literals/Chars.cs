@@ -3,10 +3,11 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
     /// <summary>
     /// Defines an arbitrary collection of character literals
     /// </summary>
+    [LiteralProvider]
     public static class Chars
     {
         /// <summary>
@@ -92,7 +93,7 @@ namespace Z0
         /// <summary>
         /// The '(' character
         /// </summary>
-        public const char LParen = '(';        
+        public const char LParen = '(';
 
         /// <summary>
         /// The '<' character
@@ -127,8 +128,8 @@ namespace Z0
         /// <summary>
         /// The ')' character
         /// </summary>
-        public const char RParen = ')';        
-        
+        public const char RParen = ')';
+
         /// <summary>
         /// The '}' character
         /// </summary>
@@ -143,7 +144,7 @@ namespace Z0
         /// The ';' character
         /// </summary>
         public const char Semicolon = ';';
-        
+
         /// <summary>
         /// The ' ' character
         /// </summary>
@@ -162,58 +163,58 @@ namespace Z0
         /// <summary>
         /// The '~' character
         /// </summary>
-        public const char Tilde = '~'; 
+        public const char Tilde = '~';
 
         /// <summary>
         /// The '~' character
         /// </summary>
-        public const char Underscore = '_'; 
+        public const char Underscore = '_';
 
         /// <summary>
         /// The '0' character
         /// </summary>
         public const char D0 = '0';
-        
+
         /// <summary>
         /// The '1' character
         /// </summary>
         public const char D1 = '1';
-        
+
         /// <summary>
         /// The '2' character
         /// </summary>
         public const char D2 = '2';
-        
+
         /// <summary>
         /// The '3' character
         /// </summary>
         public const char D3 = '3';
-        
+
         /// <summary>
         /// The '4' character
         /// </summary>
         public const char D4 = '4';
-        
+
         /// <summary>
         /// The '5' character
         /// </summary>
         public const char D5 = '5';
-        
+
         /// <summary>
         /// The '6' character
         /// </summary>
         public const char D6 = '6';
-        
+
         /// <summary>
         /// The '7' character
         /// </summary>
         public const char D7 = '7';
-        
+
         /// <summary>
         /// The '8' character
         /// </summary>
         public const char D8 = '8';
-        
+
         /// <summary>
         /// The '9' character
         /// </summary>
@@ -247,6 +248,6 @@ namespace Z0
         /// <summary>
         /// The asci null character '\0'
         /// </summary>
-        public const char Null = (char)0;       
+        public const char Null = (char)0;
     }
 }

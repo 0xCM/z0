@@ -12,6 +12,8 @@ namespace Z0
 
     using F = ImageSectionHeader.Fields;
 
+    using static ImageSectionHeader;
+
     [WfHost]
     public sealed class EmitSectionHeaders : WfHost<EmitSectionHeaders>
     {
@@ -44,6 +46,19 @@ namespace Z0
             Wf.Disposed();
         }
 
+        [Op]
+        public static void format(in ImageSectionHeader src, DatasetFormatter<Fields> dst)
+        {
+            dst.Delimit(Fields.FileName, src.File);
+            dst.Delimit(Fields.Section, src.SectionName);
+            dst.Delimit(Fields.Address, src.RawData);
+            dst.Delimit(Fields.Size, src.RawDataSize);
+            dst.Delimit(Fields.EntryPoint, src.EntryPoint);
+            dst.Delimit(Fields.CodeBase, src.CodeBase);
+            dst.Delimit(Fields.Gpt, src.GptRva);
+            dst.Delimit(Fields.GptSize, src.GptSize);
+        }
+
         public void Run()
         {
             using var flow = Wf.Running();
@@ -64,7 +79,7 @@ namespace Z0
 
                 for(var i=0; i<count; i++)
                 {
-                    RecordApi.format(skip(records,i), formatter);
+                    format(skip(records,i), formatter);
                     writer.WriteLine(formatter.Render());
                 }
                 total += count;

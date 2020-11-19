@@ -121,7 +121,7 @@ namespace Z0
             /// </summary>
             /// <param name="a">The first operand</param>
             /// <param name="b">The second operand</param>
-            [MethodImpl(Inline), Op]
+            [MethodImpl(Inline), Select]
             public static bit select(bit a, bit b, bit c)
                 => new bit((a.State & b.State) | (!a.State & c.State));
         }

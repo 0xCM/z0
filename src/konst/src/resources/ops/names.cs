@@ -19,11 +19,4 @@ namespace Z0
             ? src.ManifestResourceNames().Where(n => n.Contains(match.Value))
             : src.ManifestResourceNames();
     }
-
-    partial class XTend
-    {
-        [MethodImpl(Inline)]
-        public static string[] ManifestResourceNames(this Assembly src)
-            => src.GetManifestResourceNames() ?? sys.empty<string>();
-    }
 }

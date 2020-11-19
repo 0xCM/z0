@@ -7,6 +7,7 @@ namespace Z0
     /// <summary>
     /// Defines the symbols that represent the base-10 digits
     /// </summary>
+    [SymbolProvider]
     public enum DecimalSym : ushort
     {
         /// <summary>
@@ -23,12 +24,12 @@ namespace Z0
         /// Specifies 1 base 10, asci code 49
         /// </summary>
         d1 = '1',
-        
+
         /// <summary>
         /// Specifies 2 base 10, asci code 50
         /// </summary>
         d2 = '2',
-        
+
         /// <summary>
         /// Specifies 3 base 10, asci code 51
         /// </summary>
@@ -53,15 +54,15 @@ namespace Z0
         /// Specifies 7 base 10, asci code 55
         /// </summary>
         d7 = '7',
-        
+
         /// <summary>
         /// Specifies 8 base 10, asci code 56
         /// </summary>
         d8 = '8',
-        
+
         /// <summary>
         /// Specifies 9 base 10, asci code 57
         /// </summary>
-        d9 = '9',        
+        d9 = '9',
     }
 }

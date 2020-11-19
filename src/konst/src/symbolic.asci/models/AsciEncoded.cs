@@ -72,8 +72,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => asci.format(Encoded);
-
+            => Digital.format(Encoded);
 
         [MethodImpl(Inline)]
         public bool Equals(AsciEncoded src)

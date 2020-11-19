@@ -28,7 +28,7 @@ namespace Z0
         public void numeq<N,T>(NatSpan<N,T> lhs, NatSpan<N,T> rhs)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => ClaimNumeric.Eq(lhs.Edit,rhs.Edit);
+                => CheckSpans.eq(lhs.Edit,rhs.Edit);
 
         /// <summary>
         /// Asserts content equality for two tabular spans of coincident dimension
@@ -45,7 +45,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
             where T : unmanaged
-                => ClaimNumeric.Eq(lhs.Data, rhs.Data);
+                => CheckSpans.eq(lhs.Data, rhs.Data);
 
         public void perm_symbols()
         {
@@ -241,15 +241,15 @@ namespace Z0
             {
                 var perm = perms.First();
                 Claim.contains(all,perm);
-                var symbols = PermSymbolic.literals(perm);
+                var symbols = PermSymbolic.symbols(perm);
                 Claim.eq(4, symbols.Length);
             }
         }
 
         void perm4x64_mapformat()
         {
-            var pmaps = Permute.symbols(n4);
-            z.iter(pmaps, m => Trace(m.perm.ToString(), m.format));
+            var symbols = Permute.symbols(n4);
+            z.iter(symbols, m => Trace(m.perm.ToString(), m.format));
         }
 
         public void vperm_2x128_outline()
@@ -342,7 +342,7 @@ namespace Z0
             var symbol = default(Perm4L);
             for(var i=0; i<expect.Length; i++)
             {
-                Claim.Require(PermSymbolic.literal(perm, i, out symbol));
+                Claim.Require(PermSymbolic.symbol(perm, i, out symbol));
                 Claim.eq(expect[i], symbol);
             }
         }

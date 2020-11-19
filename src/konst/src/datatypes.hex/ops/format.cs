@@ -80,19 +80,19 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static string format(in HexText<Hex1Seq> src, Hex1Seq kind)
+        public static string format(in HexString<Hex1Seq> src, Hex1Seq kind)
             => src.String(kind);
 
         [MethodImpl(Inline), Op]
-        public static string format(in HexText<Hex2Seq> src,  Hex2Seq kind)
+        public static string format(in HexString<Hex2Seq> src,  Hex2Seq kind)
             => src.String(kind);
 
         [MethodImpl(Inline), Op]
-        public static string format(in HexText<Hex3Seq> src, Hex3Seq kind)
+        public static string format(in HexString<Hex3Seq> src, Hex3Seq kind)
             => src.String(kind);
 
         [MethodImpl(Inline), Op]
-        public static string format(in HexText<Hex4Seq> src, Hex4Seq kind)
+        public static string format(in HexString<Hex4Seq> src, Hex4Seq kind)
             => src.String(kind);
 
         [MethodImpl(Inline), Op]

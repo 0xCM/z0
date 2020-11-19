@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
     using System;
     using System.Runtime.CompilerServices;
 
@@ -14,11 +14,11 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static void store(ReadOnlySpan<byte> src, char fill, Span<char> dst)
-        {            
+        {
             var count = z.length(src,dst);
-            for(var i=0u; i<count; i++)            
+            for(var i=0u; i<count; i++)
             {
-                ref readonly var next = ref skip(src,i);                                    
+                ref readonly var next = ref skip(src,i);
                 seek(dst,i) = next == 0 ? fill : @char(skip(src,i));
             }
         }
@@ -30,7 +30,7 @@ namespace Z0
             seek(dst,0) = skip(data,0);
             seek(dst,1) = skip(data,1);
             return 2;
-        } 
+        }
 
         [MethodImpl(Inline), Op]
         public static int store(in asci4 src, Span<char> dst)
@@ -41,30 +41,22 @@ namespace Z0
             seek(dst,2) = skip(data,2);
             seek(dst,3) = skip(data,3);
             return 4;
-        } 
+        }
 
         [MethodImpl(Inline), Op]
         public static void store(in asci8 src, Span<char> dst)
-        {
-            decode(src, ref z.first(dst));
-        } 
+            => decode(src, ref z.first(dst));
 
         [MethodImpl(Inline), Op]
         public static void store(in asci16 src, Span<char> dst)
-        {
-            decode(src, ref z.first(dst));
-        }
+            => decode(src, ref z.first(dst));
 
         [MethodImpl(Inline), Op]
         public static void store(in asci32 src, Span<char> dst)
-        {
-            decode(src, ref z.first(dst));
-        }
+            => decode(src, ref z.first(dst));
 
         [MethodImpl(Inline), Op]
         public static void store(in asci64 src, Span<char> dst)
-        {
-            decode(src, ref z.first(dst));
-        }        
+            => decode(src, ref z.first(dst));
     }
 }

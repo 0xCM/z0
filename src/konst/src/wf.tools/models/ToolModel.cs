@@ -17,6 +17,6 @@ namespace Z0
 
         public ToolOptions Options;
 
-        public OptionDelimiter Delimiter;
+        public CmdArgDelimiter Delimiter;
     }
 }

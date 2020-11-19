@@ -13,4 +13,19 @@ namespace Z0
     {
 
     }
+
+    public class SymbolProvider : Attribute
+    {
+
+    }
+
+    public class TokenProvider : Attribute
+    {
+
+    }
+
+    public class CodeProvider : Attribute
+    {
+
+    }
 }

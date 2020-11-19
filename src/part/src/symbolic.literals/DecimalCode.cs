@@ -9,10 +9,11 @@ namespace Z0
     /// <summary>
     /// Defines the symbols that represent the base-10 digits
     /// </summary>
+    [CodeProvider]
     public enum DecimalCode : byte
     {
         None = 0,
-        
+
         /// <summary>
         /// Specifies the asci code for the digit '0'
         /// </summary>
@@ -22,12 +23,12 @@ namespace Z0
         /// Specifies the asci code for the digit '1'
         /// </summary>
         d1 = (byte)S.d1,
-        
+
         /// <summary>
         /// Specifies the asci code for the digit '2'
         /// </summary>
         d2 = (byte)S.d2,
-        
+
         /// <summary>
         /// Specifies the asci code for the digit '3'
         /// </summary>
@@ -52,12 +53,12 @@ namespace Z0
         /// Specifies the asci code for the digit '7'
         /// </summary>
         d7 = (byte)S.d7,
-        
+
         /// <summary>
         /// Specifies the asci code for the digit '8'
         /// </summary>
         d8 = (byte)S.d8,
-        
+
         /// <summary>
         /// Specifies the asci code for the digit '9'
         /// </summary>

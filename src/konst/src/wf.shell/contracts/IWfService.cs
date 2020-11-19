@@ -18,7 +18,7 @@ namespace Z0
     {
         void Init(IWfShell wf);
 
-        WfServiceRole Role {get;}
+        WfServiceRole Role => default;
 
         ClrArtifactKey ServiceId {get;}
     }

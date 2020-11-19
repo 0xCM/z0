@@ -30,7 +30,7 @@ namespace Z0
         CorrelationToken Ct
             => z.correlate(Controller.Id);
 
-        CmdArgs Args
+        string[] Args
              => Environment.GetCommandLineArgs();
 
         string AppName

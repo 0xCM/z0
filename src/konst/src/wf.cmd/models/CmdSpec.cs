@@ -30,5 +30,11 @@ namespace Z0
 
         public override string ToString()
             => Format();
+
+        public static CmdSpec Empty
+        {
+            [MethodImpl(Inline)]
+            get => new CmdSpec(CmdId.Empty);
+        }
     }
 }

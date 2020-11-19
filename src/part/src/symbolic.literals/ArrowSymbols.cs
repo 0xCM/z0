@@ -3,7 +3,8 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
+    [SymbolProvider]
     public enum ArrowSymbols : ushort
     {
         /// <summary>

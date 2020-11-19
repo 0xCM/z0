@@ -18,7 +18,7 @@ namespace Z0
             => src.IsAnonymous || src.IsEmpty ? EmptyString : src.Name;
 
         [Formatter]
-        public static string format(OptionDelimiter src)
+        public static string format(CmdArgDelimiter src)
         {
             var len = src.Length;
             if(len == 0)
@@ -45,7 +45,7 @@ namespace Z0
             => string.Format("{0}{2}", format(src.Option), src.Value);
 
         [Formatter]
-        public static string format(ToolArg src, OptionDelimiter delimiter, char specifier)
+        public static string format(ToolArg src, CmdArgDelimiter delimiter, char specifier)
             => string.Format("{0}{1}{2}{3}", format(delimiter), format(src.Option), specifier, src.Value);
 
         public static string format<K,V>(ToolArg<K,V> src, char specifier)

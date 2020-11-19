@@ -12,7 +12,7 @@ namespace Z0
     partial struct Tooling
     {
         [MethodImpl(Inline), Factory]
-        public OptionProtocol protocol(OptionDelimiter delimiter, AsciCharCode qualifier = AsciCharCode.Space)
-            => new OptionProtocol(delimiter, qualifier);
+        public CmdArgProtocol protocol(CmdArgDelimiter delimiter, AsciCharCode qualifier = AsciCharCode.Space)
+            => new CmdArgProtocol(delimiter, qualifier);
     }
 }

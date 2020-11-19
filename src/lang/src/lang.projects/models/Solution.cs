@@ -11,17 +11,6 @@ namespace Z0
     {
         public FS.FilePath Path;
 
-        public IndexedSeq<SolutionProject> Projects;
-    }
-
-    public struct SolutionProject
-    {
-        public FS.FilePath Path;
-
-        public utf8 ProjectName;
-
-        public Guid ProjectGuid;
-
-        public IndexedSeq<Guid> Dependencies;
+        public IndexedSeq<SlnProject> Projects;
     }
 }

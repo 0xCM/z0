@@ -64,10 +64,6 @@ namespace Z0
         public static implicit operator CmdArgs(CmdArg[] src)
             => new CmdArgs(src);
 
-        [MethodImpl(Inline)]
-        public static implicit operator CmdArgs(string[] src)
-            => new CmdArgs(src.Map(x => new CmdArg(x)));
-
         public static CmdArgs Empty
         {
             [MethodImpl(Inline)]

@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
 
@@ -16,13 +16,9 @@ namespace Z0
         where T : struct
         where K : unmanaged, Enum
     {
-        public readonly K Key;
+        public K Key {get;}
 
-        public readonly T Value;
-
-        [MethodImpl(Inline)]
-        public static implicit operator HexLookupEntry<K,T>((K k, T value) src)
-            => new HexLookupEntry<K,T>(src.k, src.value);
+        public T Value {get;}
 
         [MethodImpl(Inline)]
         public HexLookupEntry(K key, T value)
@@ -30,5 +26,9 @@ namespace Z0
             Key = key;
             Value = value;
         }
+
+        [MethodImpl(Inline)]
+        public static implicit operator HexLookupEntry<K,T>((K k, T value) src)
+            => new HexLookupEntry<K,T>(src.k, src.value);
     }
 }

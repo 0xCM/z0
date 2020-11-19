@@ -14,7 +14,7 @@ namespace Z0
 
     public readonly struct Hex4 : IHexNumber<H,K>
     {
-        public readonly K Value;
+        public K Value {get;}
 
         [MethodImpl(Inline)]
         public Hex4(K src)
@@ -41,6 +41,35 @@ namespace Z0
         public static H Min => KMin;
 
         public static H Max => KMax;
+
+        [MethodImpl(Inline)]
+        public bool Equals(H src)
+            => Value == src.Value;
+
+        public uint Hash
+        {
+            [MethodImpl(Inline)]
+            get => (uint)Value;
+        }
+
+        public override int GetHashCode()
+            => (int)Hash;
+
+        public override bool Equals(object src)
+            => src is H c && Equals(c);
+
+        public string Text
+        {
+            [MethodImpl(Inline)]
+            get => $"{Value}";
+        }
+
+        [MethodImpl(Inline)]
+        public string Format()
+            => Text;
+
+        public override string ToString()
+            => Text;
 
         [MethodImpl(Inline)]
         public static implicit operator H(K src)
@@ -78,7 +107,6 @@ namespace Z0
         public static explicit operator ulong(H src)
             => (ulong)src.Value;
 
-
         [MethodImpl(Inline)]
         public static implicit operator H(Hex1Seq src)
             => new H((byte)src);
@@ -90,37 +118,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator H(Hex3Seq src)
             => new H((byte)src);
-
-        K IHexNumber<K>.Value
-            => Value;
-
-        [MethodImpl(Inline)]
-        public bool Equals(H src)
-            => Value == src.Value;
-
-        public uint Hash
-        {
-            [MethodImpl(Inline)]
-            get => (uint)Value;
-        }
-
-        public override int GetHashCode()
-            => (int)Hash;
-
-        public override bool Equals(object src)
-            => src is H c && Equals(c);
-
-        public string Text
-        {
-            [MethodImpl(Inline)]
-            get => $"{Value}";
-        }
-
-        [MethodImpl(Inline)]
-        public string Format()
-            => Text;
-
-        public override string ToString()
-            => Text;
     }
 }

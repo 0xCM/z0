@@ -109,7 +109,6 @@ namespace Z0
             /// </summary>
             [BitMask ("[11001100 11001100 11001100 11001100 11001100 11001100 11001100 11001100]")]
             public const ulong Odd64x2 = (ulong) Odd32x2 | (ulong) Odd32x2 << 32;
-
         }
     }
 }

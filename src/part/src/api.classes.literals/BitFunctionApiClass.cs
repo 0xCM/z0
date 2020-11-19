@@ -69,6 +69,8 @@ namespace Z0
 
         EffSize = Id.EffSize,
 
-        BitClear = Id.BitClear
+        BitClear = Id.BitClear,
+
+        MoveMask = Id.MoveMask,
     }
 }

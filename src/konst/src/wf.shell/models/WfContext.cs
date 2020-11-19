@@ -16,7 +16,7 @@ namespace Z0
 
         internal IJsonSettings Settings;
 
-        internal CmdArgs Args;
+        internal string[] Args;
 
         internal WfController Controller;
 
@@ -32,7 +32,7 @@ namespace Z0
         IJsonSettings IWfContext.Settings
             => Settings;
 
-        CmdArgs IWfContext.Args
+        string[] IWfContext.Args
             => Args;
 
         WfController IWfContext.Controller

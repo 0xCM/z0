@@ -7,8 +7,6 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Validity)" />
-    <ProjectReference Include="$(Unsigned)" />
-
   </ItemGroup>
 
 </Project>

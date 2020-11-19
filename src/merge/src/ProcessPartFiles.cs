@@ -57,7 +57,7 @@ namespace Z0
                 var buffer =  Buffers.Run();
                 var steps = buffer.Slice(0, ProcessedCount);
                 var log = Buffers.Log();
-                var count = asci.render(steps, log);
+                var count = Digital.render(steps, log);
                 var hex = log.Slice(0,count).ToString();
                 Wf.Status(hex);
             }
@@ -75,7 +75,7 @@ namespace Z0
         void Execute(in ReadOnlySpan<byte> src)
         {
             var buffer = Buffers.Step();
-            var count = asci.codes(src, UpperCased.Case, buffer);
+            var count = Digital.codes(src, UpperCased.Case, buffer);
             var ran = buffer.Slice(0, count);
             ran.CopyTo(Buffers.Run(), ProcessedCount);
             ProcessedCount += count;
