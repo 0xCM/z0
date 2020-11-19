@@ -11,6 +11,7 @@ namespace Z0
     /// <summary>
     /// Identifies binary comparison predicates
     /// </summary>
+    [ApiClass]
     public enum BinaryComparisonApiClass : ushort
     {
         /// <summary>

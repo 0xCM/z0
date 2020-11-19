@@ -13,11 +13,11 @@ namespace Z0
     using static z;
     using static ApiCaptureIndexParts;
 
-    public class MemoryIndexBuilder : IDisposable
+    public class ApiIndexBuilder : IDisposable
     {
         public ApiCodeBlockIndex Product;
 
-        public CaptureIndexStatus IndexStatus;
+        public ApiIndexStatus IndexStatus;
 
         readonly Dictionary<MemoryAddress,ApiCodeBlock> CodeAddress;
 
@@ -34,7 +34,7 @@ namespace Z0
             Wf.Disposed(Host);
         }
 
-        public MemoryIndexBuilder(IWfShell wf, WfHost host)
+        public ApiIndexBuilder(IWfShell wf, WfHost host)
         {
             Host = host;
             Wf = wf.WithHost(Host);
@@ -104,9 +104,9 @@ namespace Z0
                 Include(skip(src, i));
         }
 
-        CaptureIndexStatus Status()
+        ApiIndexStatus Status()
         {
-            var dst = default(CaptureIndexStatus);
+            var dst = default(ApiIndexStatus);
             dst.Parts = Locations.Keys.Select(x => x.Host.Owner).Distinct().Array();
             dst.Hosts = Locations.Keys.Select(x => x.Host).Distinct().Array();
             dst.Addresses = CodeAddress.Keys.Array();
@@ -118,19 +118,16 @@ namespace Z0
         ApiCodeBlockIndex Freeze()
         {
             var memories = CodeAddress.ToKVPairs();
-            var locations = UriAddress.ToKVPairs();
             var parts = Locations.Keys.Select(x => x.Host.Owner).Distinct().Array();
             var code = CodeAddress.Values.Select(x => (x.Uri.Host, Code: x))
                 .Array()
                 .GroupBy(g => g.Host)
-                .Select(x => (new CodeBlocks(x.Key, x.Select(y => y.Code).ToArray()))).Array();
+                .Select(x => (new ApiCodeBlocks(x.Key, x.Select(y => y.Code).ToArray()))).Array();
 
             return new ApiCodeBlockIndex(
                    new PartAddresses(parts, memories),
-                   new UriAddresses(parts, locations),
-                   new PartCode(parts, code.Select(x => (x.Host, x)).ToDictionary()));
+                   new UriAddresses(parts, UriAddress),
+                   new PartCodeIndex(parts, code.Select(x => (x.Host, x)).ToDictionary()));
         }
-
-
     }
 }

@@ -19,6 +19,19 @@ namespace Z0
         /// </summary>
         public bool Value {get;}
 
+        [MethodImpl(Inline)]
+        public LiteralLogicExpr(bool src)
+            => Value= src;
+
+        public string Format()
+            => Format(false);
+
+        public string Format(bool digit)
+            => digit ? Value.ToString() : Value ? "T" : "F";
+
+        public override string ToString()
+            => Format();
+
         /// <summary>
         /// Implicitly converts a literal expression to the underlying value
         /// </summary>
@@ -34,18 +47,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator LiteralLogicExpr(bool src)
             => new LiteralLogicExpr(src);
-
-        [MethodImpl(Inline)]
-        public LiteralLogicExpr(bool src)
-            => Value= src;
-
-        public string Format()
-            => Format(false);
-
-        public string Format(bool digit)
-            => digit ? Value.ToString() : Value ? "T" : "F";
-
-        public override string ToString()
-            => Format();
     }
 }

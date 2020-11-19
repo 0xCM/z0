@@ -9,6 +9,6 @@ namespace Z0
     [ApiHost("kinds.blocked")]
     public partial class BlockedKinds
     {
-
+        const NumericKind Closure = NumericKind.All;
     }
 }

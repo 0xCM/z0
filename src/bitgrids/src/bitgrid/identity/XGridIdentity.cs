@@ -5,39 +5,40 @@ namespace Z0
 {
     using System;
     using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
     using static Konst;
     using static z;
     using static ApiGridKind;
 
-    public static class BitGridIdentityX
+    [ApiHost]
+    public static class XGridIdentity
     {
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bool IsPrimalGeneric(this ApiGridKind k)
             => (k & NumericGeneric) != 0;
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bool IsFixedNatural(this ApiGridKind k)
             => (k & FixedNatural) != 0;
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bool IsSubGrid(this ApiGridKind k)
             => (k & FixedSubgrid) != 0;
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static CellWidth Width(this ApiGridKind k)
             => (CellWidth)((ushort)k);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ApiGridClass Category(this ApiGridKind k)
             => (ApiGridClass)(((uint)k >> 16) << 16);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bool IsSome(this ApiGridKind k)
             => k != Z0.ApiGridKind.None;
 
+        [Op]
         public static string Indicator(this ApiGridKind k)
             => k.IsPrimalGeneric() ? GridIndicators.PrimalGeneric
              : k.IsSubGrid() ? GridIndicators.FixedSubgrid
@@ -48,7 +49,8 @@ namespace Z0
              : (k & Z0.ApiGridKind.NaturalUnfixed) != 0 ? GridIndicators.Natural
              :  k.ToString();
 
-        public static NatKind GridClosures(this Type src )
+        [Op]
+        public static NatKind GridClosures(this Type src)
         {
             var args = src.GridKind().MapValueOrDefault(k => src.SuppliedTypeArgs().ToArray(), array<Type>());
             if(args.Length == 1)
@@ -59,14 +61,15 @@ namespace Z0
                 return (0, 0, NumericKind.None);
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bool IsSome(this NatKind src)
             => !src.IsEmpty;
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static int NonEmptyCount(this NatKind src)
             => (src.M != 0 ? 1 : 0) + (src.N != 0 ? 1 : 0)  + (src.T.IsSome() ? 1 : 0);
 
+        [Op]
         public static Option<ApiGridKind> GridKind(this Type src)
         {
             var def =  src.GenericDefinition2();
@@ -107,7 +110,7 @@ namespace Z0
                 return none<ApiGridKind>();
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Option<CellWidth> GridWidth(this Type src)
             => src.GridKind().TryMap(k => k.Width());
     }

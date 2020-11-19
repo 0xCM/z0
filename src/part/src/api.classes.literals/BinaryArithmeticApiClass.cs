@@ -9,6 +9,7 @@ namespace Z0
     /// <summary>
     /// Identifies binary arithmetic operators classes
     /// </summary>
+    [ApiClass]
     public enum BinaryArithmeticApiClass : ushort
     {
         /// <summary>
@@ -51,19 +52,6 @@ namespace Z0
         ClMul = Id.ClMul,
 
         Dot = Id.Dot,
-
-        // Inc = Id.Inc,
-
-        // Dec = Id.Dec,
-
-        // Negate = Id.Negate,
-
-        // Abs = Id.Abs,
-
-        // Square = Id.Square,
-
-        // Sqrt = Id.Sqrt,
-
 
         Fma = Id.Fma,
 

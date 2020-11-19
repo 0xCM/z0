@@ -9,6 +9,7 @@ namespace Z0
     /// <summary>
     /// Identifies bitwise shift operators
     /// </summary>
+    [ApiClass]
     public enum BitShiftApiClass : ushort
     {
         /// <summary>

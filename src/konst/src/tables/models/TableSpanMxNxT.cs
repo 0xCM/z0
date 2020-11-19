@@ -180,7 +180,7 @@ namespace Z0
             where I : unmanaged, ITypeNat
             where J : unmanaged, ITypeNat
         {
-            var  dst = Table.tspan<I,J,T>();
+            var  dst = TableSpans.alloc<I,J,T>();
             var curidx = 0;
             for(var i = origin.r; i < (origin.r + dim.I); i++)
             for(var j = origin.c; j < (origin.c + dim.J); j++)
@@ -212,7 +212,7 @@ namespace Z0
 
         public TableSpan<N,M,T> Transpose()
         {
-            var dst = Table.tspan<N,M,T>();
+            var dst = TableSpans.alloc<N,M,T>();
             for(var r = 0; r < RowCount; r++)
             for(var c = 0; c < ColCount; c++)
                 dst[c, r] = this[r, c];

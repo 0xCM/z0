@@ -33,5 +33,4 @@ namespace Z0
             where T : unmanaged
                 => generic<T>(z.vblend(v64u(x), v64u(y), spec));
     }
-
 }

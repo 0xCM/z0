@@ -12,6 +12,7 @@ namespace Z0
     [ApiHost]
     public readonly struct TableSpans
     {
+
         [MethodImpl(Inline)]
         public static TableSpan<M,N,T> alloc<M,N,T>(M m = default, N n = default, T fill = default)
             where M : unmanaged, ITypeNat

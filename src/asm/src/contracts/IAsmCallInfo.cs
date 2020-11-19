@@ -8,13 +8,17 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static z;
 
-    public struct ActionableLoop<I>
-        where I : unmanaged
+    public interface IMachineCallInfo
     {
-        public Loop<I> Loop;
+        MemoryAddress Source {get;}
 
-        public ILoopAction<I> Action;
+        MemoryAddress Target {get;}
+
+        byte InstructionSize {get;}
+
+        MemoryAddress TargetOffset {get;}
+
+        BinaryCode Encoded {get;}
     }
 }

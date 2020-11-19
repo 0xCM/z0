@@ -8,3 +8,16 @@ System.ArgumentException: Cannot create an instance of Z0.CmdReactor`3[H,S,T] be
    at Z0.WfShell.create(String[] args, Boolean verbose) in j:\dev\projects\z0\src\konst\src\wf.shell\ops\create.cs:line 40
    at Z0.App.Main(String[] args) in J:\dev\projects\z0\src\dynoshell\src\App.cs:line 20
 
+Failure trapped by Main at J:\dev\projects\z0\src\dynoshell\src\App.cs 26
+System.Exception: Failure starting Process
+    Exception: The system cannot find the file specified.
+    Cmd: dir j:\
+    Cmd dir implemented by Cmd.exe, fix by prefixing with 'cmd /c'.
+ ---> System.ComponentModel.Win32Exception (2): The system cannot find the file specified.
+   at System.Diagnostics.Process.StartWithCreateProcess(ProcessStartInfo startInfo)
+   at System.Diagnostics.Process.Start()
+   at Z0.CmdProcess..ctor(IWfShell wf, CmdLine commandLine, CmdProcessOptions options) in j:\dev\projects\z0\src\konst\src\wf.cmd\services\CmdProcess.cs:line 208
+   --- End of inner exception stack trace ---
+   at Z0.CmdProcess..ctor(IWfShell wf, CmdLine commandLine, CmdProcessOptions options) in j:\dev\projects\z0\src\konst\src\wf.cmd\services\CmdProcess.cs:line 225
+   at Z0.App.Main(String[] args) in J:\dev\projects\z0\src\dynoshell\src\App.cs:line 21
+

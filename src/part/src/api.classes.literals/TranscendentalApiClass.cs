@@ -9,6 +9,7 @@ namespace Z0
     /// <summary>
     /// Identifies transcental operation kinds
     /// </summary>
+    [ApiClass]
     public enum TranscendentalApiClass : ushort
     {
         None = 0,

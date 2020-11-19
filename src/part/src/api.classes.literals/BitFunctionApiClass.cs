@@ -9,6 +9,7 @@ namespace Z0
     /// <summary>
     /// Identifies bitwise operations in an arity-neutral way
     /// </summary>
+    [ApiClass]
     public enum BitFunctionApiClass : ushort
     {
         None = 0,

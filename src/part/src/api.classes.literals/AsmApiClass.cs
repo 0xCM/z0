@@ -6,6 +6,7 @@ namespace Z0
 {
     using Id = ApiClass;
 
+    [ApiClass]
     public enum AsmApiClass : ushort
     {
         CVTSS2SI = Id.Intrinsic + 1,

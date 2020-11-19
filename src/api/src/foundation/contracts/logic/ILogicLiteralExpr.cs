@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-
     public interface ILogicLiteralExpr : ILogicExpr, ILiteralExpr
     {
         bool Value {get;}
@@ -15,5 +14,4 @@ namespace Z0
     {
 
     }
-
 }

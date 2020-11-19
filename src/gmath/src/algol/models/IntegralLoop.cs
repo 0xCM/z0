@@ -7,11 +7,15 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
-
-    public class LlvmHelpParser
+    public struct IntegralLoop<I>
+        where I : unmanaged
     {
-        
+        public I LowerBound;
+
+        public bool LowerInclusive;
+
+        public I UpperBound;
+
+        public bool UpperInclusive;
     }
 }

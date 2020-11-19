@@ -6,10 +6,7 @@ namespace Z0
 {
     using BK = SegBlockKind;
 
-    using static Konst;
-    using static z;
-
-    partial class Kinds
+    partial class BlockedKinds
     {
         public readonly struct Block16x8u : IBlockedOp<Block16x8u,W16,byte>
         {

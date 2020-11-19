@@ -6,16 +6,9 @@ namespace Z0
 {
     using System;
 
-    public interface IBranchMap<S,T>
-        where S : unmanaged
+    [AttributeUsage(AttributeTargets.Enum)]
+    public class ApiClassAttribute : Attribute
     {
-        T Apply(S src);
 
-    }
-
-    public interface IBranchMap<H,S,T> : IBranchMap<S,T>
-        where S : unmanaged
-        where H : struct, IBranchMap<H,S,T>
-    {
     }
 }

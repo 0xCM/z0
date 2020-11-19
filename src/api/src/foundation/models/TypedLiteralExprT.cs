@@ -20,6 +20,26 @@ namespace Z0
         /// </summary>
         public T Value {get;}
 
+        [MethodImpl(Inline)]
+        public LiteralExpr(T value)
+            =>    Value = value;
+
+        [MethodImpl(Inline)]
+        public bool Equals(T other)
+            => Value.Equals(other);
+
+        public override int GetHashCode()
+            => Value.GetHashCode();
+
+        public override bool Equals(object obj)
+            => obj is LiteralExpr<T> x && Equals(x);
+
+        public string Format()
+            => Value.ToString();
+
+        public override string ToString()
+            => Format();
+
         /// <summary>
         /// Implicitly converts a literal expression to the underlying value
         /// </summary>
@@ -43,27 +63,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool operator !=(LiteralExpr<T> a, LiteralExpr<T> b)
             => !a.Equals(b);
-
-        [MethodImpl(Inline)]
-        public LiteralExpr(T value)
-        {
-            Value = value;
-        }
-
-        [MethodImpl(Inline)]
-        public bool Equals(T other)
-            => Value.Equals(other);
-
-        public override int GetHashCode()
-            => Value.GetHashCode();
-
-        public override bool Equals(object obj)
-            => obj is LiteralExpr<T> x && Equals(x);
-
-        public string Format()
-            => Value.ToString();
-
-        public override string ToString()
-            => Format();
     }
 }

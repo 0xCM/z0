@@ -58,7 +58,7 @@ namespace Z0
         /// <param name="t">The type to match as specified by a representative value</param>
         [MethodImpl(Inline), Test]
         public static bool test(VectorKind k, sbyte t)
-            => ((uint)k & (uint)NumericApiClass.I8) != 0;
+            => ((uint)k & (uint)NumericApiKind.I8) != 0;
 
         /// <summary>
         /// Determines whether a vector of specified kind has an unsigned 8-bit cell type
@@ -67,7 +67,7 @@ namespace Z0
         /// <param name="t">The type to match as specified by a representative value</param>
         [MethodImpl(Inline), Test]
         public static bool test(VectorKind k, byte t)
-            => ((uint)k & (uint)NumericApiClass.U8) != 0;
+            => ((uint)k & (uint)NumericApiKind.U8) != 0;
 
         /// <summary>
         /// Determines whether a vector of specified kind has a singed 16-bit cell type
@@ -76,7 +76,7 @@ namespace Z0
         /// <param name="t">The type to match as specified by a representative value</param>
         [MethodImpl(Inline), Test]
         public static bool test(VectorKind k, short t)
-            => ((uint)k & (uint)NumericApiClass.I16) != 0;
+            => ((uint)k & (uint)NumericApiKind.I16) != 0;
 
         /// <summary>
         /// Determines whether a vector of specified kind has an unsigned 16-bit cell type
@@ -85,7 +85,7 @@ namespace Z0
         /// <param name="t">The type to match as specified by a representative value</param>
         [MethodImpl(Inline), Test]
         public static bool test(VectorKind k, ushort t)
-            => ((uint)k & (uint)NumericApiClass.U16) != 0;
+            => ((uint)k & (uint)NumericApiKind.U16) != 0;
 
         /// <summary>
         /// Determines whether a vector of specified kind has a singed 32-bit cell type
@@ -94,7 +94,7 @@ namespace Z0
         /// <param name="t">The type to match as specified by a representative value</param>
         [MethodImpl(Inline), Test]
         public static bool test(VectorKind k, int t)
-             => ((uint)k & (uint)NumericApiClass.I32) != 0;
+             => ((uint)k & (uint)NumericApiKind.I32) != 0;
 
         /// <summary>
         /// Determines whether a vector of specified kind has an unsigned 32-bit cell type
@@ -103,7 +103,7 @@ namespace Z0
         /// <param name="t">The type to match as specified by a representative value</param>
         [MethodImpl(Inline), Test]
         public static bool test(VectorKind k, uint t)
-            => ((uint)k & (uint)NumericApiClass.U32) != 0;
+            => ((uint)k & (uint)NumericApiKind.U32) != 0;
 
         /// <summary>
         /// Determines whether a vector of specified kind has a singed 64-bit cell type
@@ -112,7 +112,7 @@ namespace Z0
         /// <param name="t">The type to match as specified by a representative value</param>
         [MethodImpl(Inline), Test]
         public static bool test(VectorKind k, long t)
-            => ((uint)k & (uint)NumericApiClass.I64) != 0;
+            => ((uint)k & (uint)NumericApiKind.I64) != 0;
 
         /// <summary>
         /// Determines whether a vector of specified kind has an unsigned 64-bit cell type
@@ -121,7 +121,7 @@ namespace Z0
         /// <param name="t">The type to match as specified by a representative value</param>
         [MethodImpl(Inline), Test]
         public static bool test(VectorKind k, ulong t)
-            => ((uint)k & (uint)NumericApiClass.U64) != 0;
+            => ((uint)k & (uint)NumericApiKind.U64) != 0;
 
         /// <summary>
         /// Determines whether a vector of specified kind has a 32-bit floating-point cell type
@@ -130,7 +130,7 @@ namespace Z0
         /// <param name="t">The type to match as specified by a representative value</param>
         [MethodImpl(Inline), Test]
         public static bool test(VectorKind k, float t)
-             => ((uint)k & (uint)NumericApiClass.F32) != 0;
+             => ((uint)k & (uint)NumericApiKind.F32) != 0;
 
         /// <summary>
         /// Determines whether a vector of specified kind has a 64-bit floating-point cell type
@@ -139,7 +139,7 @@ namespace Z0
         /// <param name="t">The type to match as specified by a representative value</param>
         [MethodImpl(Inline), Test]
         public static bool test(VectorKind k, double t)
-             => ((uint)k & (uint)NumericApiClass.F64) != 0;
+             => ((uint)k & (uint)NumericApiKind.F64) != 0;
 
         /// <summary>
         /// Determines whether a type is a 128-bit intrinsic vector closed over a specified type

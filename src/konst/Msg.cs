@@ -6,23 +6,13 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Reflection;
+    using System.Collections.Generic;
 
-    using static z;
     using static Konst;
+    using static z;
 
-    public readonly struct UnaryBitLogicMachine<T>
-        where T : struct
+    readonly struct Msg
     {
-
-
-    }
-
-
-    public readonly struct TernaryBitLogicMachine<T>
-        where T : struct
-    {
-
-
+        public static RenderPattern<Type,Type> ContractMismatch => "The source type {0} does not reify {1}";
     }
 }

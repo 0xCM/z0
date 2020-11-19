@@ -16,7 +16,6 @@ namespace Z0
         {
             if(!HasBinaryLiteral(target))
                 return NumericLiteral.Empty;
-
             return NumericLiterals.base2(target.Name, value, target.Tag<BinaryLiteralAttribute>().Value.Text);
         }
 
@@ -25,6 +24,5 @@ namespace Z0
 
         public static bool HasMultiLiteral(FieldInfo target)
             => Attribute.IsDefined(target, typeof(MultiLiteralAttribute));
-
     }
 }

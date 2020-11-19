@@ -20,18 +20,5 @@ namespace Z0
                 seek(dst,i) = cell(formatter, skip(src,i));
             return dst;
         }
-
-        /// <summary>
-        /// Creates a <see cref='StringTableCells'/> sequence from a <see cref='string'/> array
-        /// </summary>
-        /// <param name="src">The source array</param>
-        [MethodImpl(Inline), Op]
-        public static StringTableCells cells(string[] src)
-            => new StringTableCells(src);
-
-        [MethodImpl(Inline), Op]
-        public static StringTableCells<T> cells<T>(StringTableCell<T>[] src)
-            where T : ITextual
-                => new StringTableCells<T>(src);
     }
 }

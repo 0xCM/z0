@@ -13,7 +13,7 @@ namespace Z0
     using static z;
 
     using NK = NumericKind;
-    using ID = NumericApiClass;
+    using ID = NumericApiKind;
 
     partial struct ApiIdentify
     {

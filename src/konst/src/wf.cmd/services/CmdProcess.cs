@@ -338,7 +338,7 @@ namespace Z0
             Debug.WriteLine("Killing process tree " + ProcessId + " Cmd: " + _commandLine);
             try
             {
-                Cmd.create(Wf, "taskkill /f /t /pid " + Process.Id).Wait();
+                Cmd.process(Wf, "taskkill /f /t /pid " + Process.Id).Wait();
             }
             catch (Exception e)
             {

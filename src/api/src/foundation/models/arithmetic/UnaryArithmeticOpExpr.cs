@@ -25,8 +25,8 @@ namespace Z0
 
         public UnaryArithmeticOpExpr(UnaryArithmeticApiClass op, IExpr<T> operand)
         {
-            this.ApiClass = op;
-            this.Arg = operand;
+            ApiClass = op;
+            Arg = operand;
         }
 
         public string Format()

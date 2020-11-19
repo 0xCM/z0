@@ -44,14 +44,6 @@ namespace Z0
             where T : struct
                 => adapter<T>(fields).Adapt(src).Adapted;
 
-        [MethodImpl(Inline), Op]
-        public static StringTableRow row(string[] data)
-            => new StringTableRow(data);
-
-        [MethodImpl(Inline), Op]
-        public static StringTableRow<T> row<T>(params StringTableCell<T>[] cells)
-            where T : ITextual
-                => new StringTableRow<T>(cells);
 
         [MethodImpl(Inline)]
         public static TableRow<C0,C1,C2> row<C0,C1,C2>(in C0 c0, in C1 c1, in C2 c2)

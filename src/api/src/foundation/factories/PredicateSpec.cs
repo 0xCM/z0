@@ -14,6 +14,8 @@ namespace Z0
     [ApiHost]
     public readonly struct PredicateSpec
     {
+        const NumericKind Closure = UInt64k;
+
         /// <summary>
         /// Defines a typed comparison predicate over operand expressions
         /// </summary>
@@ -21,7 +23,7 @@ namespace Z0
         /// <param name="a">The left expression</param>
         /// <param name="b">The right expression</param>
         /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ComparisonPredExpr<T> compare<T>(BinaryComparisonApiClass kind, IExpr<T> a, IExpr<T> b)
             where T : unmanaged
                 => new ComparisonPredExpr<T>(kind,a,b);
@@ -33,7 +35,7 @@ namespace Z0
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ComparisonPredExpr<T> compare<T>(BinaryComparisonApiClass kind, T a, T b)
             where T : unmanaged
                 => new ComparisonPredExpr<T>(kind, literal(a), literal(b));
@@ -44,7 +46,7 @@ namespace Z0
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ComparisonPredExpr<T> equals<T>(IExpr<T> a, IExpr<T> b)
             where T : unmanaged
                 => compare(Eq, a, b);
@@ -55,7 +57,7 @@ namespace Z0
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ComparisonPredExpr<T> equals<T>(T a, T b)
             where T : unmanaged
                 => compare(Eq, a, b);
@@ -66,7 +68,7 @@ namespace Z0
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ComparisonPredExpr<T> lt<T>(IExpr<T> a, IExpr<T> b)
             where T : unmanaged
                 => compare(Lt, a, b);
@@ -77,7 +79,7 @@ namespace Z0
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ComparisonPredExpr<T> lt<T>(T a, T b)
             where T : unmanaged
                 => compare(Lt, a, b);
@@ -88,7 +90,7 @@ namespace Z0
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ComparisonPredExpr<T> lteq<T>(IExpr<T> a, IExpr<T> b)
             where T : unmanaged
                 => compare(LtEq, a, b);
@@ -99,7 +101,7 @@ namespace Z0
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ComparisonPredExpr<T> lteq<T>(T a, T b)
             where T : unmanaged
                 => compare(LtEq, a, b);
@@ -110,7 +112,7 @@ namespace Z0
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ComparisonPredExpr<T> gt<T>(IExpr<T> a, IExpr<T> b)
             where T : unmanaged
                 => compare(Gt, a, b);
@@ -121,7 +123,7 @@ namespace Z0
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ComparisonPredExpr<T> gt<T>(T a, T b)
             where T : unmanaged
                 => compare(Gt, a, b);
@@ -132,7 +134,7 @@ namespace Z0
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ComparisonPredExpr<T> gteq<T>(IExpr<T> a, IExpr<T> b)
             where T : unmanaged
                 => compare(GtEq, a, b);
@@ -143,7 +145,7 @@ namespace Z0
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ComparisonPredExpr<T> gteq<T>(T a, T b)
             where T : unmanaged
                 => compare(GtEq, a, b);

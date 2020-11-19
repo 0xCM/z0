@@ -5,6 +5,7 @@
 namespace Z0
 {
     using System;
+    using System.Reflection;
     using System.Runtime.CompilerServices;
 
     using static Part;
@@ -12,21 +13,30 @@ namespace Z0
     [DataType]
     public readonly struct Labeled : ILabeled<Labeled>
     {
+        /// <summary>
+        /// Returns the a target label, if attributed; otherwise, returns the target's system-defined name
+        /// </summary>
+        /// <typeparam name="T">The label target</typeparam>
+        [MethodImpl(Inline)]
+        public static Labeled from(MemberInfo src)
+        {
+             var attrib = src.GetCustomAttribute<LabelAttribute>();
+             return attrib is null ? src.Name : attrib.Label;
+        }
+
+        /// <summary>
+        /// Returns the label of a parametric type, if attributed; otherwise, returns the type's name
+        /// </summary>
+        /// <typeparam name="T">The label target</typeparam>
+        [MethodImpl(Inline)]
+        public static Labeled from<T>()
+            => from(typeof(T));
+
         public string Label {get;}
 
         [MethodImpl(Inline)]
         public Labeled(string label)
             => Label = label;
-
-        public static Labeled Attributed
-        {
-            [MethodImpl(Inline)]
-            get => new Labeled(LabelAttribute.TargetLabel<Labeled>());
-        }
-
-        [MethodImpl(Inline)]
-        public static Labeled From(string src)
-            => new Labeled(src);
 
         [MethodImpl(Inline)]
         public static implicit operator string(Labeled src)
@@ -34,6 +44,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator Labeled(string src)
-            => From(src);
+            => new Labeled(src);
     }
 }

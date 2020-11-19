@@ -25,8 +25,8 @@ namespace Z0
         [MethodImpl(Inline)]
         internal VariedExpr(IExpr<T> baseExpr, params IVarExpr<T>[] variables)
         {
-            this.BaseExpr = baseExpr;
-            this.Vars = variables;
+            BaseExpr = baseExpr;
+            Vars = variables;
         }
 
         [MethodImpl(Inline)]

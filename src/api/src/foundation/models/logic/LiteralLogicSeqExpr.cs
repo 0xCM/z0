@@ -17,10 +17,8 @@ namespace Z0
         public Bit32[] Terms {get;}
 
         [MethodImpl(Inline)]
-        public LiteralLogicSeqExpr(Bit32[] terms)
-        {
-            this.Terms = terms;
-        }
+        public LiteralLogicSeqExpr(Bit32[] src)
+            => Terms = src;
 
         /// <summary>
         /// The expression classifier

@@ -10,8 +10,12 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct Table
+   public struct LoopHost<H,I>
+        where I : unmanaged
+        where H : struct
     {
+        public H Host;
 
-   }
+        public IntegralLoop<I> Loop;
+    }
 }

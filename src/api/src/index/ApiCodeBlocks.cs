@@ -10,15 +10,17 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public struct Loop<I>
-        where I : unmanaged
+    public readonly struct ApiCodeBlocks
     {
-        public I LowerBound;
+        public readonly ApiHostUri Host;
 
-        public bool LowerInclusive;
+        public readonly TableSpan<ApiCodeBlock> Code;
 
-        public I UpperBound;
-
-        public bool UpperInclusive;
+        [MethodImpl(Inline)]
+        public ApiCodeBlocks(ApiHostUri host, ApiCodeBlock[] code)
+        {
+            Host = host;
+            Code = code;
+        }
     }
 }

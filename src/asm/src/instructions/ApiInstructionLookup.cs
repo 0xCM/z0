@@ -6,12 +6,21 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Linq;
+    using System.Collections.Generic;
 
-    using static z;
+    using Z0.Asm;
+
     using static Konst;
+    using static z;
 
-    public readonly partial struct BitLogicMachines
+    public sealed class ApiInstructionLookup : Dictionary<MemoryAddress, ApiInstruction>
     {
+        [MethodImpl(Inline)]
+        public ApiInstructionLookup(int capacity)
+            : base(capacity)
+        {
 
+        }
     }
 }

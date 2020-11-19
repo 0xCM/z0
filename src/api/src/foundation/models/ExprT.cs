@@ -9,7 +9,6 @@ namespace Z0
     public readonly struct Expr<T> : IExpr<Expr<T>,T>
         where T : unmanaged
     {
-
         /// <summary>
         /// The identified expression
         /// </summary>

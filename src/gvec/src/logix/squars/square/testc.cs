@@ -19,7 +19,7 @@ namespace Z0
     partial class LogicSquare
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Bit32 testc<T>(in T a)
+        public static bit testc<T>(in T a)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -35,7 +35,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Bit32 testc<T>(in T A, in T B)
+        public static bit testc<T>(in T A, in T B)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))

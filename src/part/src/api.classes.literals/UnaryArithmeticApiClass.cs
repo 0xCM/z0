@@ -11,6 +11,7 @@ namespace Z0
     /// <summary>
     /// Classifies unary arithmetic operators
     /// </summary>
+    [ApiClass]
     public enum UnaryArithmeticApiClass : ushort
     {
         None = 0,

@@ -33,18 +33,6 @@ namespace Z0
         public readonly GridStorage Storage;
 
         [MethodImpl(Inline)]
-        public static GridSpec<T> Define(T rows, T cols, T segwidth, int bytes, int bits, int segments)
-            => new GridSpec<T>(rows, cols, segwidth, bytes, bits, segments);
-
-        [MethodImpl(Inline)]
-        public static bool operator ==(GridSpec<T> a, GridSpec<T> b)
-            => a.Equals(b);
-
-        [MethodImpl(Inline)]
-        public static bool operator !=(GridSpec<T> a, GridSpec<T> b)
-            => !a.Equals(b);
-
-        [MethodImpl(Inline)]
         public GridSpec(T rows, T cols, T segwidth, int bytes, int bits, int segments)
         {
             RowCount = rows;
@@ -71,5 +59,13 @@ namespace Z0
 
         public override string ToString()
             => Format();
+
+        [MethodImpl(Inline)]
+        public static bool operator ==(GridSpec<T> a, GridSpec<T> b)
+            => a.Equals(b);
+
+        [MethodImpl(Inline)]
+        public static bool operator !=(GridSpec<T> a, GridSpec<T> b)
+            => !a.Equals(b);
     }
 }

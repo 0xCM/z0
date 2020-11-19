@@ -9,6 +9,7 @@ namespace Z0
     /// <summary>
     /// Identifies arithmetic operation kinds
     /// </summary>
+    [ApiClass]
     public enum ArithmeticApiClass : ushort
     {
         /// <summary>

@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="value">The literal value</param>
         /// <typeparam name="T">The literal type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static LiteralExpr<T> literal<T>(T value)
             where T : unmanaged
                 => new LiteralExpr<T>(value);
@@ -28,7 +28,7 @@ namespace Z0
         /// <param name="op">The operator classifier</param>
         /// <param name="operand">The operand</param>
         /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static UnaryBitwiseOpExpr<T> unary<T>(UnaryBitLogicKind op, IExpr<T> operand)
             where T : unmanaged
                 => new UnaryBitwiseOpExpr<T>(op,operand);
@@ -40,7 +40,7 @@ namespace Z0
         /// <param name="left">The left operand</param>
         /// <param name="right">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static BinaryBitwiseOpExpr<T> binary<T>(BinaryBitLogicKind op, IExpr<T> left, IExpr<T> right)
             where T : unmanaged
                 => new BinaryBitwiseOpExpr<T>(op,left,right);
@@ -52,7 +52,7 @@ namespace Z0
         /// <param name="left">The left operand</param>
         /// <param name="right">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ComparisonExpr<T> binary<T>(BinaryComparisonApiClass op, IExpr<T> left, IExpr<T> right)
             where T : unmanaged
                 => new ComparisonExpr<T>(op,left,right);
@@ -64,7 +64,7 @@ namespace Z0
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static TernaryBitwiseOpExpr<T> ternary<T>(TernaryBitLogicKind op, IExpr<T> a, IExpr<T> b, IExpr<T> c)
             where T : unmanaged
                 => new TernaryBitwiseOpExpr<T>(op,a,b,c);
@@ -75,7 +75,7 @@ namespace Z0
         /// <param name="min">The minimum scalar in the range</param>
         /// <param name="max">The maximum scalar in the range</param>
         /// <typeparam name="T">The scalar type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static RangeExpr<T> rangexpr<T>(T min, T max, T? step = null)
             where T : unmanaged
                 => new RangeExpr<T>(min,max,step ?? z.one<T>());

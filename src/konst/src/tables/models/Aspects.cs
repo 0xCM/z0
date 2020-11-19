@@ -13,39 +13,42 @@ namespace Z0
 
     public readonly struct Aspects
     {
-        public static string[] Values<T>(object src)
-            => From<T>(src).FormatValues();
+        public static string[] values<T>(object src)
+            => load<T>(src).FormatValues();
 
-        public static string[] Names<T>()
+        public static string[] names<T>()
         {
-            var props = Props(typeof(T));
+            var props = typeof(T).Properties().Instance().Where(p => p.NotIgnored());
             var count = props.Length;
             var names = new string[count];
             for(var i=0; i<count; i++)
-                names[i] = Label(props[i]);
+                names[i] = label(props[i]);
             return names;
         }
 
-        public static Aspects From<T>(object src)
+        public static Aspects load<T>(object src)
         {
             var contractType = typeof(T);
-            var contractLabel = Label(contractType);
+            var contractLabel = label(contractType);
 
             var hostType = src.GetType();
-            var hostLabel = Label(hostType);
+            var hostLabel = label(hostType);
 
-            if(!src.GetType().Reifies<T>())
-                return new Aspects(new AspectRow("Error", hostType, src, ContractMismatch(hostLabel, contractLabel).Format()));
+            if(!hostType.Reifies(contractType))
+            {
+                var msg = Msg.ContractMismatch.Apply(hostType, contractType);
+                return new Aspects(new AspectRow("Error", hostType, src, msg));
+            }
 
             var dst = text.build();
-            var props = Props(contractType);
+            var props = Aspects.props(contractType);
             var propcount = props.Length;
             var aspects = new AspectRow[propcount];
 
             for(var i=0; i< propcount; i++)
             {
                 var prop = props[i];
-                var name = Label(prop);
+                var name = label(prop);
                 var val = props[i].GetValue(src);
                 var description = FormatValue(val);
                 aspects[i] = (name, hostLabel, (val is null) ? "null" : val, description);
@@ -57,14 +60,8 @@ namespace Z0
         public readonly AspectRow[] Data {get;}
 
         [MethodImpl(Inline)]
-        public static implicit operator Aspects(AspectRow[] data)
-            => new Aspects(data);
-
-        [MethodImpl(Inline)]
         public Aspects(params AspectRow[] data)
-        {
-            Data = data;
-        }
+            => Data = data;
 
         [MethodImpl(Inline)]
         public ref readonly AspectRow Aspect(uint index)
@@ -78,8 +75,6 @@ namespace Z0
 
         public int Count
             => Data.Length;
-
-        const string DefaultSep = CharText.Space + CharText.Pipe + CharText.Space;
 
         public string Format(string sep)
         {
@@ -114,6 +109,10 @@ namespace Z0
         string FormatItem(uint index, string sep)
             => FormatDelimiter(index) + this[index].Format();
 
+        [MethodImpl(Inline)]
+        public static implicit operator Aspects(AspectRow[] data)
+            => new Aspects(data);
+
         public static Aspects Empty
             => new Aspects(sys.empty<AspectRow>());
 
@@ -127,17 +126,16 @@ namespace Z0
                 return value.ToString();
         }
 
-        static AppMsg ContractMismatch(string host, string contract)
-            => AppMsg.define($"The source type {host} does not reify {contract}", LogLevel.Error);
+        const string DefaultSep = " | ";
 
-        static PropertyInfo[] Props(Type contract)
+        static PropertyInfo[] props(Type contract)
             => contract.Properties().Instance().Where(p => p.NotIgnored());
 
-        static string Label(PropertyInfo src)
-            => AspectLabels.GetOrAdd(src, p =>  LabelAttribute.TargetLabel(p));
+        static string label(PropertyInfo src)
+            => AspectLabels.GetOrAdd(src, p =>  Labeled.from(p));
 
-        static string Label(Type src)
-            => TypeLabels.GetOrAdd(src, t =>  LabelAttribute.TargetLabel(t));
+        static string label(Type src)
+            => TypeLabels.GetOrAdd(src, t => Labeled.from(t));
 
         static ConcurrentDictionary<Type, string> TypeLabels {get;}
             = new ConcurrentDictionary<Type, string>();

@@ -10,11 +10,11 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public struct DelegatedLoop<I>
+    public struct LoopAction<I>
         where I : unmanaged
     {
-        public Loop<I> Loop;
+        public IntegralLoop<I> Loop;
 
-        public Action<I> Action;
+        public IIntegralLoop<I> Action;
     }
 }

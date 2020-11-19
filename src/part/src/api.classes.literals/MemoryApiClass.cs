@@ -4,6 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    [ApiClass]
     public enum MemoryApiClass : ushort
     {
         None = 0,

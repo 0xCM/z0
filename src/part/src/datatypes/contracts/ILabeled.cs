@@ -25,6 +25,6 @@ namespace Z0
         where F : ILabeled<F>
     {
         string ILabeled.Label
-            => LabelAttribute.TargetLabel<F>();
+            => Labeled.from<F>();
     }
 }

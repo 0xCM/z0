@@ -13,6 +13,6 @@ namespace Z0
     [ApiHost]
     public partial struct TypedLogicSpec
     {
-
+        const NumericKind Closure = UInt64k;
     }
 }

@@ -13,7 +13,7 @@ namespace Z0
         where H : unmanaged, IHexType;
 
     public readonly struct HexCodeSink<H> : IHexHandler<H>, IHexHandler
-        where H:unmanaged, IHexType
+        where H: unmanaged, IHexType
     {
         static H Code => default;
 
@@ -21,9 +21,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public HexCodeSink(HexReceiver<H> receiver)
-        {
-            Receiver = receiver;
-        }
+            => Receiver = receiver;
 
         [MethodImpl(Inline)]
         public void OnHex(Hex8Seq kind)

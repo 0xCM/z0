@@ -6,6 +6,7 @@ namespace Z0
 {
     using Id = ApiClass;
 
+    [ApiClass]
     public enum AggregateApiClass : ushort
     {
         None = 0,

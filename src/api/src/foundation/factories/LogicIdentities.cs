@@ -13,7 +13,8 @@ namespace Z0
     using static z;
     using static BitLogicSpec;
 
-    public static class LogicIdentities
+    [ApiHost]
+    public readonly struct LogicIdentities
     {
         public static IEnumerable<ComparisonExpr> All
             => seq(AndOverOr, AndOverXOr, OrOverAnd, NotOverAnd, NotOverXOr);
@@ -23,6 +24,7 @@ namespace Z0
         /// </summary>
         public static ComparisonExpr AndOverOr
         {
+            [Op]
             get
             {
                 (var a, var b, var c) = vars3;
@@ -37,13 +39,13 @@ namespace Z0
         /// </summary>
         public static ComparisonExpr AndOverXOr
         {
+            [Op]
             get
             {
                 (var a, var b, var c) = vars3;
                 var lhs = and(a, xor(b,c));
                 var rhs = xor(and(a,b), and(a,c));
                 return equals(lhs,rhs, a,b,c);
-
             }
         }
 
@@ -52,13 +54,13 @@ namespace Z0
         /// </summary>
         public static ComparisonExpr OrOverAnd
         {
+            [Op]
             get
             {
                 (var a, var b, var c) = vars3;
                 var lhs = and(a, or(b,c));
                 var rhs = or(and(a,b), and(a,c));
                 return equals(lhs, rhs, a, b, c);
-
             }
         }
 
@@ -67,13 +69,13 @@ namespace Z0
         /// </summary>
         public static ComparisonExpr NotOverAnd
         {
+            [Op]
             get
             {
                 (var a, var b) = vars2;
                 var lhs = not(and(a,b));
                 var rhs = or(not(a), not(b));
                 return equals(lhs,rhs,a,b);
-
             }
         }
 
@@ -82,25 +84,25 @@ namespace Z0
         /// </summary>
         public static ComparisonExpr NotOverXOr
         {
+            [Op]
             get
             {
                 (var a, var b) = vars2;
                 var lhs = not(xor(a,b));
                 var rhs = xor(not(a),b);
                 return equals(lhs,rhs,a,b);
-
             }
         }
 
         static (LogicVariable a, LogicVariable b) vars2
         {
-            [MethodImpl(Inline)]
+            [Op, MethodImpl(Inline)]
             get => (lvar('a'), lvar('b'));
         }
 
         static (LogicVariable a, LogicVariable b, LogicVariable c) vars3
         {
-            [MethodImpl(Inline)]
+            [Op, MethodImpl(Inline)]
             get => (lvar('a'), lvar('b'), lvar('c'));
         }
     }

@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="kind">The source kind</param>
         /// <param name="id">The kind to match</param>
         [MethodImpl(Inline), Op]
-        public static bool contains(NumericKind kind, NumericApiClass id)
+        public static bool contains(NumericKind kind, NumericApiKind id)
             => ((uint)kind & (uint)id) != 0;
     }
 }

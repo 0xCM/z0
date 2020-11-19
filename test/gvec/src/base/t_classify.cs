@@ -67,16 +67,16 @@ namespace Z0
 
         public void check_numeric_identity()
         {
-            Claim.eq(NumericApiClass.U8, NumericKind.U8.NumericId());
-            Claim.eq(NumericApiClass.I8, NumericKind.I8.NumericId());
-            Claim.eq(NumericApiClass.U16, NumericKind.U16.NumericId());
-            Claim.eq(NumericApiClass.I16, NumericKind.I16.NumericId());
-            Claim.eq(NumericApiClass.U32, NumericKind.U32.NumericId());
-            Claim.eq(NumericApiClass.I32, NumericKind.I32.NumericId());
-            Claim.eq(NumericApiClass.U64, NumericKind.U64.NumericId());
-            Claim.eq(NumericApiClass.I64, NumericKind.I64.NumericId());
-            Claim.eq(NumericApiClass.F32, NumericKind.F32.NumericId());
-            Claim.eq(NumericApiClass.F64, NumericKind.F64.NumericId());
+            Claim.eq(NumericApiKind.U8, NumericKind.U8.NumericId());
+            Claim.eq(NumericApiKind.I8, NumericKind.I8.NumericId());
+            Claim.eq(NumericApiKind.U16, NumericKind.U16.NumericId());
+            Claim.eq(NumericApiKind.I16, NumericKind.I16.NumericId());
+            Claim.eq(NumericApiKind.U32, NumericKind.U32.NumericId());
+            Claim.eq(NumericApiKind.I32, NumericKind.I32.NumericId());
+            Claim.eq(NumericApiKind.U64, NumericKind.U64.NumericId());
+            Claim.eq(NumericApiKind.I64, NumericKind.I64.NumericId());
+            Claim.eq(NumericApiKind.F32, NumericKind.F32.NumericId());
+            Claim.eq(NumericApiKind.F64, NumericKind.F64.NumericId());
         }
 
         public void classify_block_segment_16()

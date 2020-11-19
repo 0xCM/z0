@@ -4,11 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public enum OpacityApiClass : ulong
+    [ApiClass]
+    public enum OpacityApiClass : ushort
     {
         None = 0,
-
-        Closure = NumericKind.All,
 
         Root = ApiClass.Opaque,
 

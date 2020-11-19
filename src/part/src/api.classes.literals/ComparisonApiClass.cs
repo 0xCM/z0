@@ -9,6 +9,7 @@ namespace Z0
     /// <summary>
     /// Identifies comparison (predicate) kinds
     /// </summary>
+    [ApiClass]
     public enum ComparisonApiClass : ushort
     {
         /// <summary>

@@ -47,7 +47,7 @@ namespace Z0
             => !IsEmpty;
 
         public string Format()
-            => text.concat(Source, text.bracket(Name)," = ", Description);
+            => text.concat(Source, text.bracket(Name),":", Description);
 
         public override string ToString()
             => Format();

@@ -6,6 +6,7 @@ namespace Z0
 {
     using Id = ApiClass;
 
+    [ApiClass]
     public enum PredicateApiClass : ushort
     {
         None = 0,

@@ -4,18 +4,15 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
-
-    public interface ILoopAction<I>
+    public interface IIntegralLoop<I>
+        where I : unmanaged
     {
         void Step(I i);
     }
 
-    public interface ILoopHost<H,I> : ILoopAction<I>
+    public interface ILoopHost<H,I> : IIntegralLoop<I>
+        where I : unmanaged
         where H : struct, ILoopHost<H,I>
     {
 

@@ -9,6 +9,7 @@ namespace Z0
     /// <summary>
     /// Classifies binary boolean and bitwise logical operations
     /// </summary>
+    [ApiClass]
     public enum BinaryBitLogicApiClass : ushort
     {
         /// <summary>

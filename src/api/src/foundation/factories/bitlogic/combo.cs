@@ -98,7 +98,6 @@ namespace Z0
                 default:
                     return new LiteralLogicSeqExpr[0]{};
            }
-
        }
 
         /// <summary>

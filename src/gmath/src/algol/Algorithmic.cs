@@ -319,7 +319,7 @@ namespace Z0
         ///  Adapted from corefx repo
         /// </summary>
         [Op, Closures(UnsignedInts)]
-        public static bit identical<T>(ref T first, ref T second, uint length)
+        public static bit identical<T>(ref T first, ref T second, uint count)
             where T : unmanaged
         {
             if (Unsafe.AreSame(ref first, ref second))
@@ -328,9 +328,9 @@ namespace Z0
             var offset = 0;
             T x;
             T y;
-            while (length >= 8)
+            while (count >= 8)
             {
-                length -= 8;
+                count -= 8;
 
                 x = z.add<T>(first, offset + 0);
                 y = z.add<T>(second, offset + 0);
@@ -368,9 +368,9 @@ namespace Z0
                 offset += 8;
             }
 
-            if (length >= 4)
+            if (count >= 4)
             {
-                length -= 4;
+                count -= 4;
 
                 x = z.add<T>(first, offset);
                 y = z.add<T>(second, offset);
@@ -392,14 +392,14 @@ namespace Z0
                 offset += 4;
             }
 
-            while (length > 0)
+            while (count > 0)
             {
                 x = z.add<T>(first, offset);
                 y = z.add<T>(second, offset);
                 if(gmath.neq(x, y))
                     return false;
                 offset += 1;
-                length--;
+                count--;
             }
 
             return true;

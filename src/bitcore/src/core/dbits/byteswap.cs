@@ -5,7 +5,7 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
 
     using static Konst;
 
@@ -17,7 +17,6 @@ namespace Z0
             var dst = src >> 8;
             dst |= ((0xFF & src) << 8);
             return (ushort)dst;
-
         }
 
         [MethodImpl(Inline), Op]

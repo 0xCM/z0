@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Linq;
     using System.Collections.Generic;
 
     using static Konst;
@@ -107,6 +106,5 @@ namespace Z0
                 if(item.IsNonEmpty)
                     yield return item;
         }
-
     }
 }

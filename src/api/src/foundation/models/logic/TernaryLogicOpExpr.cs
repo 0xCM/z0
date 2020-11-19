@@ -37,10 +37,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public TernaryLogicOpExpr(TernaryBitLogicKind op, ILogicExpr arg1, ILogicExpr arg2, ILogicExpr arg3)
         {
-            this.ApiClass = op;
-            this.FirstArg = arg1;
-            this.SecondArg = arg2;
-            this.ThirdArg = arg3;
+            ApiClass = op;
+            FirstArg = arg1;
+            SecondArg = arg2;
+            ThirdArg = arg3;
         }
 
         public string Format()

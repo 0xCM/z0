@@ -22,7 +22,7 @@ namespace Z0
             => new CmdProcess(wf, command, config);
 
         [MethodImpl(Inline), Op]
-        public static CmdProcess create(IWfShell wf,  CmdLine commandLine)
+        public static CmdProcess process(IWfShell wf,  CmdLine commandLine)
             => new CmdProcess(wf, commandLine, new CmdProcessOptions());
     }
 }

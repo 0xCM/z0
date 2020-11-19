@@ -9,7 +9,7 @@ namespace Z0
     /// <summary>
     /// Defines numeric identifiers for primal numeric types
     /// </summary>
-    public enum NumericApiClass : uint
+    public enum NumericApiKind : uint
     {
         None = 0,
 

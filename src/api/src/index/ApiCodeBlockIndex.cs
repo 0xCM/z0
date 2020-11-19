@@ -18,12 +18,12 @@ namespace Z0
 
         UriAddresses UriLocations;
 
-        PartCode PartIndex;
+        PartCodeIndex PartIndex;
 
         public PartId[] Parts => Memories.Parts;
 
         [MethodImpl(Inline)]
-        public ApiCodeBlockIndex(PartAddresses members, UriAddresses memuri, PartCode code)
+        public ApiCodeBlockIndex(PartAddresses members, UriAddresses memuri, PartCodeIndex code)
         {
             Memories = members;
             UriLocations = memuri;

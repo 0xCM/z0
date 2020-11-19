@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="src">The left operand</param>
         /// <param name="count">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ShiftOpExpr<T> shift<T>(BSK op, IExpr<T> src, byte count)
             where T : unmanaged
                 => new ShiftOpExpr<T>(op,src,literal(count));
@@ -32,7 +32,7 @@ namespace Z0
         /// <param name="src">The left operand</param>
         /// <param name="count">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ShiftOpExpr<T> shiftx<T>(BSK op, IExpr<T> src, IExpr<byte> count)
             where T : unmanaged
                 => new ShiftOpExpr<T>(op,src, count);
@@ -43,7 +43,7 @@ namespace Z0
         /// <param name="src">The left operand</param>
         /// <param name="count">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ShiftOpExpr<T> sll<T>(IExpr<T> src, byte count)
             where T : unmanaged
                 => shift(BSK.Sll, src, count);
@@ -54,7 +54,7 @@ namespace Z0
         /// <param name="src">The left operand</param>
         /// <param name="count">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ShiftOpExpr<T> sll<T>(T src, byte count)
             where T : unmanaged
                 => shift(BSK.Sll,literal(src), count);
@@ -65,7 +65,7 @@ namespace Z0
         /// <param name="src">The left operand</param>
         /// <param name="count">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ShiftOpExpr<T> srl<T>(IExpr<T> src, byte count)
             where T : unmanaged
                 => shift(BSK.Srl, src, count);
@@ -76,7 +76,7 @@ namespace Z0
         /// <param name="src">The left operand</param>
         /// <param name="count">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ShiftOpExpr<T> srl<T>(T src, byte count)
             where T : unmanaged
                 => shift(BSK.Srl,literal(src), count);
@@ -87,7 +87,7 @@ namespace Z0
         /// <param name="src">The left operand</param>
         /// <param name="count">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ShiftOpExpr<T> rotr<T>(IExpr<T> src, byte count)
             where T : unmanaged
                 => shift(BSK.Rotr, src, count);
@@ -98,7 +98,7 @@ namespace Z0
         /// <param name="src">The left operand</param>
         /// <param name="count">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ShiftOpExpr<T> rotr<T>(T src, byte count)
             where T : unmanaged
                 => shift(BSK.Rotr,literal(src), count);
@@ -109,7 +109,7 @@ namespace Z0
         /// <param name="src">The left operand</param>
         /// <param name="count">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ShiftOpExpr<T> rotl<T>(IExpr<T> src, byte count)
             where T : unmanaged
                 => shift(BSK.Rotl, src, count);
@@ -120,7 +120,7 @@ namespace Z0
         /// <param name="src">The left operand</param>
         /// <param name="count">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ShiftOpExpr<T> rotl<T>(T src, byte count)
             where T : unmanaged
                 => shift(BSK.Rotl,literal(src), count);
@@ -131,7 +131,7 @@ namespace Z0
         /// <param name="src">The left operand</param>
         /// <param name="count">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ShiftOpExpr<T> sll<T>(IExpr<T> src, IExpr<byte> count)
             where T : unmanaged
                 => shiftx(BSK.Sll, src, count);
@@ -142,7 +142,7 @@ namespace Z0
         /// <param name="src">The left operand</param>
         /// <param name="count">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ShiftOpExpr<T> sllx<T>(T src, IExpr<byte> count)
             where T : unmanaged
                 => sll(literal(src), count);
@@ -153,7 +153,7 @@ namespace Z0
         /// <param name="src">The left operand</param>
         /// <param name="count">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ShiftOpExpr<T> srl<T>(IExpr<T> src, IExpr<byte> count)
             where T : unmanaged
                 => shiftx(BSK.Srl, src, count);
@@ -164,7 +164,7 @@ namespace Z0
         /// <param name="src">The left operand</param>
         /// <param name="count">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ShiftOpExpr<T> srl<T>(T src, IExpr<byte> count)
             where T : unmanaged
                 => shiftx(BSK.Srl, literal(src), count);
@@ -175,7 +175,7 @@ namespace Z0
         /// <param name="src">The left operand</param>
         /// <param name="count">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ShiftOpExpr<T> rotr<T>(IExpr<T> src, IExpr<byte> count)
             where T : unmanaged
                 => shiftx(BSK.Rotr, src, count);
@@ -186,7 +186,7 @@ namespace Z0
         /// <param name="src">The left operand</param>
         /// <param name="count">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ShiftOpExpr<T> rotr<T>(T src, IExpr<byte> count)
             where T : unmanaged
                 => shiftx(BSK.Rotr, literal(src), count);
@@ -197,7 +197,7 @@ namespace Z0
         /// <param name="src">The left operand</param>
         /// <param name="count">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ShiftOpExpr<T> rotl<T>(IExpr<T> src, IExpr<byte> count)
             where T : unmanaged
                 => shiftx(BSK.Rotl, src, count);
@@ -208,7 +208,7 @@ namespace Z0
         /// <param name="src">The left operand</param>
         /// <param name="count">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ShiftOpExpr<T> rotl<T>(T src, IExpr<byte> count)
             where T : unmanaged
                 => shiftx(BSK.Rotl, literal(src), count);

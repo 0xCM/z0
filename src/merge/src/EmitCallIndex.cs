@@ -57,7 +57,7 @@ namespace Z0
             var dst = Wf.Db().Table(AsmCallRow.TableId, Source.Part);
             Wf.EmittingFile(Source.Part, dst);
             using var writer = dst.Writer();
-            var records = @readonly(Source.Instructions.CallRecords());
+            var records = @readonly(ApiAsm.CallRecords(Source.Instructions));
             var count = records.Length;
             writer.WriteLine(AsmCallRow.header());
             for(var i=0; i<count; i++)

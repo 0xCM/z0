@@ -8,7 +8,7 @@ namespace Z0
 
     using BK = SegBlockKind;
     using TW = TypeWidth;
-    using ID = NumericApiClass;
+    using ID = NumericApiKind;
 
     partial class BlockedKinds
     {

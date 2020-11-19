@@ -156,17 +156,6 @@ namespace Z0
         FS.FilePath AppDataPath(FS.FileName file)
             => Wf.AppData + file;
 
-        // void ShowRuntimeArchive()
-        // {
-        //     var archive = RuntimeArchive.create();
-        //     var resolver = new PathAssemblyResolver(archive.Files.Select(x => x.Name.Text));
-        //     using var context = new MetadataLoadContext(resolver);
-        //     iter(archive.ManagedLibraries, path => context.LoadFromAssemblyPath(path.Name));
-        //     var assemblies = context.GetAssemblies();
-        //     foreach(var a in assemblies)
-        //         Wf.Status(a.GetSimpleName());
-        // }
-
         static string[] DebugFlags(Assembly src)
             => src.GetCustomAttributes<DebuggableAttribute>().Select(a => a.DebuggingFlags.ToString()).Array();
 

@@ -5,8 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
     using static Konst;
@@ -42,12 +40,6 @@ namespace Z0
             Max = max;
             Step = step;
         }
-
-        // public IEnumerable<T> Terms
-        //     => Algorithmic.stream(Min,Max,Step);
-
-        // public int? Length
-        //     => force<T,int>(gmath.sub(Max,Min));
 
         public string Format()
             => text.embrace($"{Min}...{Max}") + text.bracket($"{Step}") ;

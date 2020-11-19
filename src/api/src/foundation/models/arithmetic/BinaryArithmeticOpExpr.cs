@@ -33,9 +33,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public BinaryArithmeticOpExpr(BinaryArithmeticApiClass op, IExpr<T> lhs, IExpr<T> rhs)
         {
-            this.ApiClass = op;
-            this.LeftArg= lhs;
-            this.RightArg = rhs;
+            ApiClass = op;
+            LeftArg= lhs;
+            RightArg = rhs;
         }
 
         /// <summary>

@@ -13,7 +13,7 @@ namespace Z0
     partial class gvec
     {
         /// <summary>
-        /// Efects a "paired" or "permutation" blend that computes vectors
+        /// Effects a "paired" or "permutation" blend that computes vectors
         /// lo := vblendv(x,y,spec)
         /// hi := vblendv(x,y,vnot(spec))
         /// that, taken together, define a permutation on the source vector components
@@ -28,7 +28,7 @@ namespace Z0
                 => (vblendv(x,y,spec), vblendv(x,y, vnot(spec)));
 
         /// <summary>
-        /// Efects a "paired" or "permutation" blend that computes vectors
+        /// Effects a "paired" or "permutation" blend that computes vectors
         /// lo := vblendv(x,y,spec)
         /// hi := vblendv(x,y,vnot(spec))
         /// that, taken together, define a permutation on the source vector components
@@ -43,7 +43,7 @@ namespace Z0
                 => (vblendv(x.Lo, x.Hi, spec), vblendv(x.Lo, x.Hi, vnot(spec)));
 
         /// <summary>
-        /// Efects a "paired" or "permutation" blend that computes vectors
+        /// Effects a "paired" or "permutation" blend that computes vectors
         /// lo := vblendv(x,y,spec)
         /// hi := vblendv(x,y,vnot(spec))
         /// that, taken together, define a permutation on the source vector components
@@ -58,7 +58,7 @@ namespace Z0
                 => z.vconcat(vblendv(x,y,spec), vblendv(x,y,vnot(spec)));
 
         /// <summary>
-        /// Efects a "paired" or "permutation" blend that computes vectors
+        /// Effects a "paired" or "permutation" blend that computes vectors
         /// lo := vblendv(x,y,spec)
         /// hi := vblendv(x,y,vnot(spec))
         /// that, taken together, define a permutation on the source vector components
