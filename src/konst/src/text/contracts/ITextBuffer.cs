@@ -17,9 +17,6 @@ namespace Z0
             Append(Eol);
         }
 
-        void AppendLine()
-            => Append(Eol);
-
         void Append(ReadOnlySpan<char> src)
             => Append(new string(src));
 
@@ -29,7 +26,19 @@ namespace Z0
         void Append(char c)
             => Append(c.ToString());
 
-        void Delimit<F,T>(F field, T value, char c = FieldDelimiter)
+        void AppendLine<T>(T src)
+        {
+            if(src != null)
+            {
+                Append(src.ToString());
+                Append(Eol);
+            }
+        }
+
+        void AppendLine()
+            => Append(Eol);
+
+        void AppendDelimited<F,T>(F field, T value, char c = FieldDelimiter)
             where F : unmanaged
         {
             var shift = bitsize<F>()/2;
@@ -38,15 +47,30 @@ namespace Z0
             Append($"{value}".PadRight((int)width));
         }
 
-        void Delimit<T>(byte width, T value, char c = FieldDelimiter)
+        void AppendDelimited<T>(byte width, T value, char c = FieldDelimiter)
             where T : ITextual
         {
             Append(text.rspace(c));
             Append(value.Format().PadRight(width));
         }
 
-        void AppendFormat(string pattern, params object[] args)
+        void AppendDelimited<T>(T[] src, char c = FieldDelimiter)
+            => Append(delimit(src, c).Format());
+
+        void AppendFormatted(string pattern, params object[] args)
             => Append(string.Format(pattern, args));
+
+        void AppendSettingLine(string name, object value)
+        {
+            AppendFormatted("{0}:{1}", name, value);
+            AppendLine();
+        }
+
+        void AppendFormattedLine(string pattern, params object[] args)
+        {
+            AppendFormatted(pattern, args);
+            Append(Eol);
+        }
     }
 
     public interface ITextBuffer<H> : ITextBuffer

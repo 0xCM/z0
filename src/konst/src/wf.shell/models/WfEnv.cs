@@ -6,18 +6,23 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
 
     using static Konst;
     using static z;
 
-    partial class WfShell
+    public readonly struct WfEnv
     {
         [MethodImpl(Inline), Op]
-        public static IWfPaths paths()
-            => new WfPaths(WfLogs.configure(controller().Id(), WfEnv.dbRoot(), logRoot()));
+        public static FS.FolderPath dbRoot()
+            => EnvVars.Common.DbRoot;
 
         [MethodImpl(Inline), Op]
-        public static IWfPaths<A> paths<A>()
-            => new WfPaths<A>(WfLogs.configure(controller<A>().Id(), WfEnv.dbRoot(), logRoot()));
+        public static string[] args()
+            => Environment.GetCommandLineArgs();
+
+        [MethodImpl(Inline), Op]
+        public static Assembly entry()
+            => Assembly.GetEntryAssembly();
     }
 }

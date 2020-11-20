@@ -57,11 +57,9 @@ namespace Z0
                 Display(e);
 
                 if(e.IsError)
-                {
                     Error.AppendLine(e.Format());
-                }
-                else
-                    FS.write(format(e), Status);
+
+                FS.write(format(e), Status);
             }
             catch(Exception error)
             {
@@ -77,8 +75,7 @@ namespace Z0
             {
                 if(e.IsError)
                     Error.AppendLine(e.Format());
-                else
-                    FS.write(format(e), Status);
+                FS.write(format(e), Status);
             }
             catch(Exception error)
             {

@@ -50,10 +50,10 @@ namespace Z0
             where E : unmanaged, Enum
             where T : unmanaged
         {
-            dst.Delimit(F.Token, src.Id);
-            dst.Delimit(F.Index, src.Position);
-            dst.Delimit(F.Name, src.Name);
-            dst.Delimit(F.Scalar, src.Scalar);
+            dst.AppendDelimited(F.Token, src.Id);
+            dst.AppendDelimited(F.Index, src.Position);
+            dst.AppendDelimited(F.Name, src.Name);
+            dst.AppendDelimited(F.Scalar, src.Scalar);
             return dst.Emit();
         }
     }

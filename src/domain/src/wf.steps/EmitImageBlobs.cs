@@ -55,10 +55,10 @@ namespace Z0
 
         static string format(in CliBlob src, ReadOnlySpan<TableColumn> columns, ITextBuffer dst)
         {
-            dst.Delimit(columns[0].Width, src.Seq);
-            dst.Delimit(columns[1].Width, src.HeapSize);
-            dst.Delimit(columns[2].Width, src.Offset);
-            dst.Delimit(columns[3].Width, src.Data);
+            dst.AppendDelimited(columns[0].Width, src.Seq);
+            dst.AppendDelimited(columns[1].Width, src.HeapSize);
+            dst.AppendDelimited(columns[2].Width, src.Offset);
+            dst.AppendDelimited(columns[3].Width, src.Data);
             return dst.Emit();
         }
 

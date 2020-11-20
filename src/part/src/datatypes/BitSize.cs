@@ -20,7 +20,7 @@ namespace Z0
         /// <summary>
         /// Specifies a bit count
         /// </summary>
-        public readonly uint Count;
+        public ulong Count {get;}
 
         /// <summary>
         /// Computes the bit-size of a parametric type
@@ -51,7 +51,31 @@ namespace Z0
                 => a % (Unsafe.SizeOf<T>()*8);
 
         [MethodImpl(Inline)]
+        public BitSize(sbyte bits)
+            => Count = (ulong)bits;
+
+        [MethodImpl(Inline)]
+        public BitSize(byte bits)
+            => Count = bits;
+
+        [MethodImpl(Inline)]
+        public BitSize(ushort bits)
+            => Count = bits;
+
+        [MethodImpl(Inline)]
+        public BitSize(int bits)
+            => Count = (ulong)bits;
+
+        [MethodImpl(Inline)]
         public BitSize(uint bits)
+            => Count = bits;
+
+        [MethodImpl(Inline)]
+        public BitSize(long bits)
+            => Count = (ulong)bits;
+
+        [MethodImpl(Inline)]
+        public BitSize(ulong bits)
             => Count = bits;
 
         public ByteSize Bytes
@@ -73,11 +97,21 @@ namespace Z0
         public override bool Equals(object obj)
             => obj is BitSize x && Equals(x);
 
-        /// <summary>
-        /// The bit with no size
-        /// </summary>
-        public static BitSize Empty
-            => default;
+        [MethodImpl(Inline)]
+        public static implicit operator long(BitSize src)
+            => (long)src.Count;
+
+        [MethodImpl(Inline)]
+        public static implicit operator ulong(BitSize src)
+            => src.Count;
+
+        [MethodImpl(Inline)]
+        public static implicit operator BitSize(long src)
+            => new BitSize(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator BitSize(ulong src)
+            => new BitSize(src);
 
         [MethodImpl(Inline)]
         public static explicit operator ByteSize(BitSize src)
@@ -112,11 +146,11 @@ namespace Z0
             => (NumericWidth)src.Count;
 
         [MethodImpl(Inline)]
-        public static implicit operator BitSize(byte src)
+        public static explicit operator BitSize(byte src)
             => new BitSize(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator BitSize(ushort src)
+        public static explicit operator BitSize(ushort src)
             => new BitSize(src);
 
         [MethodImpl(Inline)]
@@ -124,32 +158,20 @@ namespace Z0
             => new BitSize(src);
 
         [MethodImpl(Inline)]
-        public static explicit operator byte(BitSize src)
+        public static implicit operator byte(BitSize src)
             => (byte)src.Count;
 
         [MethodImpl(Inline)]
-        public static implicit operator int(BitSize src)
+        public static explicit operator int(BitSize src)
             => (int)src.Count;
 
         [MethodImpl(Inline)]
-        public static implicit operator uint(BitSize src)
-            => src.Count;
-
-        [MethodImpl(Inline)]
-        public static implicit operator long(BitSize src)
-            => (long)src.Count;
-
-        [MethodImpl(Inline)]
-        public static implicit operator ulong(BitSize src)
-            => src.Count;
+        public static explicit operator uint(BitSize src)
+            => (uint)src.Count;
 
         [MethodImpl(Inline)]
         public static explicit operator double(BitSize src)
             => src.Count;
-
-        [MethodImpl(Inline)]
-        public static implicit operator BitSize(int src)
-            => new BitSize((uint)src);
 
         [MethodImpl(Inline)]
         public static implicit operator BitSize(ByteSize src)
@@ -182,5 +204,17 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitSize operator %(BitSize lhs, BitSize rhs)
             => lhs.Count % rhs.Count;
+
+        /// <summary>
+        /// The bit with no size
+        /// </summary>
+        public static BitSize Empty
+            => default;
+
+        /// <summary>
+        /// The bit with no size
+        /// </summary>
+        public static BitSize Zero
+            => default;
     }
 }

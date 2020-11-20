@@ -13,13 +13,18 @@ namespace Z0
 
     partial class WfShell
     {
-        [MethodImpl(Inline), Op]
-        public static string[] args()
-            => Environment.GetCommandLineArgs();
+        public static void render(in WfConfigInfo src, ITextBuffer dst)
+        {
+            dst.AppendSettingLine(nameof(src.AppConfigPath), src.AppConfigPath);
+            dst.AppendSettingLine(nameof(src.Args),  Delimited.list(src.AppConfigPath).Format());
+            dst.AppendSettingLine(nameof(src.Controller), src.Controller.Format());
+            dst.AppendSettingLine(nameof(src.LogConfig), src.LogConfig.Format());
+            dst.AppendSettingLine(nameof(src.Parts), Delimited.list(src.Parts).Format());
+        }
 
         [MethodImpl(Inline), Op]
         public static Assembly controller()
-            => Assembly.GetEntryAssembly();
+            => WfEnv.entry();
 
         [MethodImpl(Inline)]
         public static Assembly controller<A>()
@@ -30,28 +35,8 @@ namespace Z0
             => JsonSettings.Load(paths.AppConfigPath);
 
         [MethodImpl(Inline), Op]
-        public static FS.FolderPath dbRoot()
-            => EnvVars.Common.DbRoot;
-
-        [MethodImpl(Inline), Op]
         public static FS.FolderPath logRoot()
-            => dbRoot() + FS.folder("logs") + FS.folder("wf");
-
-        [MethodImpl(Inline), Op]
-        public static WfLogConfig logConfig(PartId part, FS.FolderPath logRoot, FS.FolderPath dbRoot)
-            => new WfLogConfig(part, logRoot, dbRoot);
-
-        [MethodImpl(Inline), Op]
-        public static WfLogConfig logConfig(PartId part, FS.FolderPath root)
-            => logConfig(part, root, dbRoot());
-
-        [MethodImpl(Inline)]
-        public static WfSelfHost host(Type self)
-            => new WfSelfHost(self);
-
-        [MethodImpl(Inline), Op]
-        public static IWfEventLog log(WfLogConfig config)
-            => new WfEventLog(config);
+            => WfEnv.dbRoot() + FS.folder("logs") + FS.folder("wf");
 
         [Op]
         public static string format(WfExecToken src)

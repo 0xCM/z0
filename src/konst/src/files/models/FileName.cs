@@ -106,6 +106,13 @@ namespace Z0
 
             const string Pattern = "{0}";
 
+            /// <summary>
+            /// Converts this filename to a <see cref='FilePath'/>
+            /// </summary>
+            [MethodImpl(Inline)]
+            public FilePath ToPath()
+                => path(Name);
+
             [MethodImpl(Inline)]
             public string Format()
                 => Name.Format();

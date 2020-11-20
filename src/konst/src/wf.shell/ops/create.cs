@@ -11,6 +11,19 @@ namespace Z0
     using static Konst;
     using static z;
 
+    public struct WfConfigInfo
+    {
+        public PartId Controller;
+
+        public string[] Args;
+
+        public FS.FilePath AppConfigPath;
+
+        public PartId[] Parts;
+
+        public WfLogConfig LogConfig;
+    }
+
     partial class WfShell
     {
         [Op]
@@ -18,40 +31,40 @@ namespace Z0
         {
             var control = controller();
             var controlId = control.Id();
-            var configured = list<string>();
 
-            var logRoot = EnvVars.Common.DbRoot + FS.folder("logs") + FS.folder("apps");
-            var api = WfShell.parts(control, args);
-            var partList = api.Api.PartIdentities;
-            var partCount = partList.Length;
-            var logConfig = WfShell.logConfig(controlId, logRoot);
+            var appLogRoot = WfLogs.root("apps");
+            var testLogRoot = WfLogs.root("test");
+            var dbRoot = WfEnv.dbRoot();
+            var parts = WfShell.parts(control, args);
+            var partIdList = parts.Api.PartIdentities;
+            var appLogConfig = WfLogs.configure(controlId, dbRoot, appLogRoot);
 
-            IWfPaths _paths = new WfPaths(logConfig);
+            IWfPaths _paths = new WfPaths(appLogConfig);
             var ctx = new WfContext();
-            ctx.ApiParts = api;
+            ctx.ApiParts = parts;
             ctx.Args = args;
             ctx.Paths = _paths;
             ctx.Settings = JsonSettings.Load(_paths.AppConfigPath);
             ctx.WfSettings = new WfSettings(ctx.Settings);
-            ctx.TestLogPaths = TestLogPaths.define(logRoot);
+            ctx.TestLogPaths = TestLogPaths.define(appLogRoot);
             ctx.Controller = control;
 
-            var init = new WfInit(ctx, logConfig, partList);
-            IWfShell wf = new WfShell(init);
+            var ci = new WfConfigInfo();
+            ci.Args = args;
+            ci.Controller = controlId;
+            ci.LogConfig = appLogConfig;
+            ci.Parts = partIdList;
+            ci.AppConfigPath = _paths.AppConfigPath;
 
-            wf.Router.Enlist(WfShell.reactors(wf,api.Components));
-
-            configured.Add(string.Format("{0}:{1}", "control", controlId));
-            configured.Add(string.Format("{0}:{1}", "args", delimit(args)));
-            configured.Add(string.Format("{0}:{1}", "logs.root", logRoot));
-            configured.Add(string.Format("{0}:{1}", "PartCount", partCount));
-            configured.Add(string.Format("{0}:{1}", "PartList", delimit(partList)));
-            configured.Add(string.Format("{0}:{1}", nameof(WfLogConfig), logConfig.Format()));
-            configured.Add(string.Format("{0}:{1}", "wf.init", init.ControlId));
-            configured.Add(string.Format("{0}:{1}", "wf", wf.AppName));
+            IWfShell wf = new WfShell(new WfInit(ctx, appLogConfig, partIdList));
+            wf.Router.Enlist(WfShell.reactors(wf,parts.Components));
 
             if(verbose)
-                wf.Status(configured.FormatList(FieldDelimiter));
+            {
+                var dst = Buffers.text();
+                render(ci,dst);
+                wf.Status(dst.Emit());
+            }
             return wf;
         }
     }

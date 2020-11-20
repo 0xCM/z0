@@ -19,12 +19,12 @@ namespace Z0
                 => (ByteSize)size<A>();
 
         [MethodImpl(Inline)]
-        public static int offset<A>(int index)
+        public static ulong offset<A>(int index)
             where A : unmanaged, IBytes
                 => index*size<A>();
 
         [MethodImpl(Inline)]
-        public static int count<A>(int datasize)
+        public static ulong count<A>(int datasize)
             where A : unmanaged, IBytes
                 => datasize/size<A>();
     }

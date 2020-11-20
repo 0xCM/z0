@@ -23,34 +23,6 @@ namespace Z0
         public Ptr64(ulong* src)
             => P = src;
 
-        [MethodImpl(Inline)]
-        public static ulong operator !(Ptr64 x)
-            => *x.P;
-
-        [MethodImpl(Inline)]
-        public static Ptr64 operator ++(Ptr64 x)
-            => api.next(x);
-
-        [MethodImpl(Inline)]
-        public static Ptr64 operator --(Ptr64 x)
-            => api.prior(x);
-
-        [MethodImpl(Inline)]
-        public static implicit operator Ptr<ulong>(Ptr64 src)
-            => new Ptr<ulong>(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator MemoryAddress(Ptr64 src)
-            => src.Address;
-
-        [MethodImpl(Inline)]
-        public static implicit operator Ptr64(ulong* src)
-            => new Ptr64(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator ulong*(Ptr64 src)
-            => src.P;
-
         public uint Hash
         {
             [MethodImpl(Inline)]
@@ -76,5 +48,37 @@ namespace Z0
 
         public override string ToString()
             => Format();
+
+        [MethodImpl(Inline)]
+        public static ulong operator !(Ptr64 x)
+            => *x.P;
+
+        [MethodImpl(Inline)]
+        public static Ptr64 operator ++(Ptr64 x)
+            => api.next(x);
+
+        [MethodImpl(Inline)]
+        public static Ptr64 operator --(Ptr64 x)
+            => api.prior(x);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Ptr<ulong>(Ptr64 src)
+            => new Ptr<ulong>(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator MemoryAddress(Ptr64 src)
+            => src.Address;
+
+        [MethodImpl(Inline)]
+        public static implicit operator Ptr64(IntPtr src)
+            => new Ptr64(src.ToPointer<ulong>());
+
+        [MethodImpl(Inline)]
+        public static implicit operator Ptr64(ulong* src)
+            => new Ptr64(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator ulong*(Ptr64 src)
+            => src.P;
     }
 }

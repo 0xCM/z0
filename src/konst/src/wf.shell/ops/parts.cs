@@ -15,7 +15,7 @@ namespace Z0
     {
         [Op]
         public static ApiPartSet parts()
-            => parts(WfShell.controller(), args());
+            => parts(WfShell.controller(), WfEnv.args());
 
         [Op]
         public static ApiPartSet parts(Assembly control, string[] args)
@@ -29,6 +29,6 @@ namespace Z0
 
         [Op]
         public static ApiPartSet parts(Assembly control)
-            => parts(control, args());
+            => parts(control, WfEnv.args());
     }
 }

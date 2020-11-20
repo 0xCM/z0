@@ -22,14 +22,22 @@ namespace Z0
         /// <summary>
         /// Specifies a byte count
         /// </summary>
-        public readonly uint Count;
+        public ulong Count {get;}
 
         [MethodImpl(Inline)]
         public ByteSize(int count)
-            => Count = (uint)count;
+            => Count = (ulong)count;
+
+        [MethodImpl(Inline)]
+        public ByteSize(long count)
+            => Count = (ulong)count;
 
         [MethodImpl(Inline)]
         public ByteSize(uint count)
+            => Count = count;
+
+        [MethodImpl(Inline)]
+        public ByteSize(ulong count)
             => Count = count;
 
         public ulong Bits
@@ -77,6 +85,42 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
+        public static implicit operator ByteSize(sbyte src)
+            => new ByteSize(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator ByteSize(byte src)
+            => new ByteSize(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator ByteSize(short src)
+            => new ByteSize(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator ByteSize(ushort src)
+            => new ByteSize(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator ByteSize(int src)
+            => new ByteSize(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator ByteSize(uint src)
+            => new ByteSize(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator ByteSize(ulong src)
+            => new ByteSize(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator long(ByteSize src)
+            => (long)src.Count;
+
+        [MethodImpl(Inline)]
+        public static implicit operator ByteSize(long src)
+            => new ByteSize(src);
+
+        [MethodImpl(Inline)]
         public static implicit operator int(ByteSize src)
             => (int)src.Count;
 
@@ -85,48 +129,29 @@ namespace Z0
             => (uint)src.Count;
 
         [MethodImpl(Inline)]
+        public static implicit operator ulong(ByteSize src)
+            => src.Count;
+
+        [MethodImpl(Inline)]
         public static explicit operator ByteSize(DataWidth src)
-            => new ByteSize((uint)src/8);
+            => new ByteSize((ulong)src/8);
 
         [MethodImpl(Inline)]
-        public static explicit operator ByteSize(byte src)
-            => new ByteSize(src);
+        public static implicit operator IntPtr(ByteSize src)
+            => (IntPtr)src.Count;
 
         [MethodImpl(Inline)]
-        public static explicit operator ByteSize(sbyte src)
-            => new ByteSize(src);
+        public static implicit operator ByteSize(IntPtr src)
+            => new ByteSize((ulong)src);
 
-        [MethodImpl(Inline)]
-        public static explicit operator ByteSize(short src)
-            => new ByteSize(src);
-
-        [MethodImpl(Inline)]
-        public static explicit operator ByteSize(long src)
-            => new ByteSize((uint)src);
-
-        [MethodImpl(Inline)]
-        public static explicit operator ByteSize(ushort src)
-            => new ByteSize(src);
-
-        [MethodImpl(Inline)]
-        public static explicit operator ByteSize(uint src)
-            => new ByteSize(src);
 
         [MethodImpl(Inline)]
         public static implicit operator ByteSize(TypeWidth src)
-            => new ByteSize((uint)src/8);
+            => new ByteSize((ulong)src/8);
 
         [MethodImpl(Inline)]
         public static implicit operator ByteSize(VectorWidth src)
-            => new ByteSize((uint)src/8);
-
-        [MethodImpl(Inline)]
-        public static implicit operator ByteSize(int src)
-            => new ByteSize(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator ByteSize(ulong src)
-            => new ByteSize((int)src);
+            => new ByteSize((ulong)src/8);
 
         [MethodImpl(Inline)]
         public static bool operator ==(ByteSize a, ByteSize b)
@@ -150,13 +175,16 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static ByteSize operator /(ByteSize a, ByteSize b)
-            => a.Count / b.Count;
+            => a.Count/b.Count;
 
         [MethodImpl(Inline)]
         public static ByteSize operator %(ByteSize a, ByteSize b)
             => a.Count % b.Count;
 
         public static ByteSize Empty
+            => default;
+
+        public static ByteSize Zero
             => default;
     }
 }

@@ -61,7 +61,7 @@ namespace Z0
             Init = config;
             Id = config.ControlId;
             Ct = correlate(config.ControlId);
-            WfSink = WfShell.log(config.Logs);
+            WfSink = WfLogs.events(config.Logs);
             Broker = new WfBroker(WfSink, Ct);
             Host = new WfHost(typeof(WfShell), typeof(WfShell), _ => throw no<WfShell>());
             Random = default;

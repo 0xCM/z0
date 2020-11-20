@@ -41,7 +41,7 @@ namespace Z0
         public FS.FolderPath DbRoot;
 
         [MethodImpl(Inline)]
-        public WfLogConfig(PartId control, FS.FolderPath root, FS.FolderPath dbRoot)
+        public WfLogConfig(PartId control, FS.FolderPath dbRoot, FS.FolderPath root)
         {
             Control = control;
             Root = root;

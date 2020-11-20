@@ -48,7 +48,7 @@ namespace Z0
         public override string ToString()
             => Format();
 
-       [MethodImpl(Inline)]
+        [MethodImpl(Inline)]
         public static implicit operator Ptr(void* src)
             => new Ptr(src);
 
