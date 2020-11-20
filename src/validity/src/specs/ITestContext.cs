@@ -6,9 +6,11 @@ namespace Z0
 {
     using System;
 
-    public interface ITestContext : IAppMsgContext, IDisposable, IPolyrandProvider, ITestService, ITestQueue, IWfContext, TClocked, TCheckAction, TCheckOptions, ITestCaseIdentity, TValidator
+    public interface ITestContext : IAppMsgContext, IDisposable, IPolyrandProvider, ITestService, ITestQueue, TClocked, TCheckAction, TCheckOptions, ITestCaseIdentity, TValidator
     {
         bool DiagnosticMode {get;}
+
+        ITestLogPaths TestLogPaths {get;}
     }
 
     public interface ITestContext<U> : ITestContext

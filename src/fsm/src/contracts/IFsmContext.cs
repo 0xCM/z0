@@ -7,7 +7,7 @@ namespace Z0
     /// <summary>
     /// Defines context specialization for FSM
     /// </summary>
-    public interface IFsmContext : IPolyrandProvider, IWfContext
+    public interface IFsmContext : IPolyrandProvider
     {
         ulong? ReceiptLimit {get;}
     }

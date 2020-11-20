@@ -27,20 +27,15 @@ namespace Z0
             => new WfTermLog(src);
 
         [MethodImpl(Inline), Op]
-        public static FS.FolderPath root(string area)
-            => WfEnv.dbRoot() + FS.folder("logs") + FS.folder(area);
+        public static FS.FolderPath area(FS.FolderPath dbRoot, string area)
+            => dbRoot + FS.folder("logs") + FS.folder(area);
 
         [MethodImpl(Inline), Op]
-        public static WfLogConfig configure(PartId part, FS.FolderPath dbRoot, FS.FolderPath logRoot)
-            => new WfLogConfig(part, dbRoot, logRoot);
+        public static WfLogConfig configure(PartId part, FS.FolderPath dbRoot)
+            => new WfLogConfig(part, dbRoot, dbRoot + FS.folder("logs"));
 
         [MethodImpl(Inline), Op]
         public static WfLogConfig configure(PartId part, FS.FolderPath dbRoot, string area)
             => new WfLogConfig(part, dbRoot, dbRoot + FS.folder("logs") + FS.folder(area));
-
-        [MethodImpl(Inline), Op]
-        public static WfLogConfig configure(PartId part, string area)
-            => new WfLogConfig(part, WfEnv.dbRoot(), WfEnv.dbRoot() + FS.folder("logs") + FS.folder(area));
-
     }
 }

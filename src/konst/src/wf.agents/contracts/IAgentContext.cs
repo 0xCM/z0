@@ -7,8 +7,10 @@ namespace Z0
     using System;
     using System.Collections.Generic;
 
-    public interface IAgentContext : IWfContext
+    public interface IAgentContext
     {
+        IWfShell Wf {get;}
+
         IEnumerable<IWfAgent> Members {get;}
 
         IAgentEventSink EventLog {get;}

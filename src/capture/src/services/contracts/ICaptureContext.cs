@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    public interface ICaptureContext : IWfContext
+    public interface ICaptureContext
     {
         IAsmDecoder Decoder {get;}
 

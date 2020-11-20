@@ -26,10 +26,10 @@ namespace Z0
 
         protected TestApp()
         {
-            CaseLog = CaseLogs.create(LogPaths.CaseLogPath);
+            CaseLog = CaseLogs.create(TestLogPaths.CaseLogPath);
             OnDispose += CaseLog.Dispose;
             AppName = GetType().Assembly.GetSimpleName();
-            Log = new AppMsgLog(LogPaths.TestStatusLogPath, LogPaths.TestErrorLogPath);
+            Log = new AppMsgLog(TestLogPaths.TestStatusLogPath, TestLogPaths.TestErrorLogPath);
         }
 
         ConcurrentQueue<TestCaseRecord> TestResultQueue {get;}

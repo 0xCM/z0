@@ -57,47 +57,50 @@ namespace Z0
         [MethodImpl(Inline)]
         public WfShell(IWfInit config)
         {
-            Context = config.Shell;
             Init = config;
-            Id = config.ControlId;
-            Ct = correlate(config.ControlId);
-            WfSink = WfLogs.events(config.Logs);
+            Context = Init.Shell;
+            Id = Init.ControlId;
+            Ct = correlate(Init.ControlId);
+            WfSink = WfLogs.events(Init.Logs);
             Broker = new WfBroker(WfSink, Ct);
             Host = new WfHost(typeof(WfShell), typeof(WfShell), _ => throw no<WfShell>());
             Random = default;
             Verbosity = LogLevel.Info;
-            Paths = config.Shell.Paths;
-            Args = config.Shell.Args;
-            Settings = JsonSettings.Load(config.Shell.Paths.AppConfigPath);
-            ApiParts = config.ApiParts;
-            Api = config.ApiParts.Api;
-            Controller = config.Control;
-            AppName = config.Shell.AppName;
+            Paths = Init.Shell.Paths;
+            Args = Init.Shell.Args;
+            Settings = Init.Shell.Settings;
+            ApiParts = Init.ApiParts;
+            Api = Init.ApiParts.Api;
+            Controller = Init.Control;
+            AppName = Init.Shell.AppName;
             Router = new CmdRouter(this);
         }
 
         internal WfShell(IWfInit config, CorrelationToken ct, IWfEventSink sink, IWfBroker broker, WfHost host, IPolyrand random, LogLevel verbosity, ICmdRouter router)
         {
-            Context = config.Shell;
             Init = config;
-            Id = config.ControlId;
+            Context = Init.Shell;
+            Id = Init.ControlId;
+            Args = Init.Shell.Args;
+            Paths = Init.Shell.Paths;
+            Settings = Init.Shell.Settings;
+            ApiParts = Init.ApiParts;
+            Api = Init.ApiParts.Api;
+            Controller = Init.Control;
+            AppName = Init.Shell.AppName;
             Ct = ct;
             WfSink = sink;
             Broker = broker;
             Host = host;
             Random = random;
             Verbosity = verbosity;
-            Args = config.Shell.Args;
-            Paths = config.Shell.Paths;
-            Settings = JsonSettings.Load(config.Shell.Paths.AppConfigPath);
-            ApiParts = config.ApiParts;
-            Api = config.ApiParts.Api;
-            Controller = config.Control;
-            AppName = config.Shell.AppName;
             Router = router;
         }
 
         IWfShell Wf => this;
+
+        public IFileDb Db()
+            => Init.Db;
 
         public WfExecFlow Running()
         {

@@ -54,13 +54,17 @@ namespace Z0
             }
         }
 
-        public static void run(params string[] args)
+        public static void run(IWfShell wf, params string[] args)
         {
-            var app = new MachinesTestApp(new AgentContext(SystemEventWriter.Log), args);
+            var app = new MachinesTestApp(new AgentContext(wf, SystemEventWriter.Log), args);
             app.Exec();
 
         }
+
         static void Main(params string[] args)
-            => run(args);
+        {
+
+        }
+
     }
 }

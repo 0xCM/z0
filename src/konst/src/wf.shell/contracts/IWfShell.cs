@@ -18,29 +18,19 @@ namespace Z0
 
     public interface IWfShell : IDisposable, ITextual
     {
-        IWfPaths Paths
-            => WfShell.paths();
+        IWfPaths Paths {get;}
 
-        IJsonSettings Settings
-            => JsonSettings.Load(Paths.AppConfigPath);
+        IJsonSettings Settings {get;}
 
-        IApiParts ApiParts
-             => WfShell.parts();
+        IApiParts ApiParts {get;}
 
-        CorrelationToken Ct
-            => z.correlate(Controller.Id);
+        CorrelationToken Ct {get;}
 
-        string[] Args
-             => Environment.GetCommandLineArgs();
+        string[] Args {get;}
 
-        string AppName
-            => Controller.Name;
+        string AppName {get;}
 
-        string ITextual.Format()
-            => AppName;
-
-        WfController Controller
-            => Assembly.GetEntryAssembly();
+        WfController Controller {get;}
 
         ISystemApiCatalog Api {get;}
 
@@ -67,6 +57,9 @@ namespace Z0
         WfExecToken CloseExecToken(WfExecToken src);
 
         WfExecToken Ran(WfExecFlow src);
+
+        string ITextual.Format()
+            => AppName;
 
         IWfShell WithHost(WfHost host)
             => clone(this, host, Random, Verbosity);
@@ -131,8 +124,7 @@ namespace Z0
         FS.FolderPath AppData
             => FS.dir(Context.Paths.AppDataRoot.Name);
 
-        IFileDb Db()
-            => Z0.Db.files(this, new FileDbPaths(EnvRules.Default.DbRoot()));
+        IFileDb Db();
 
         WfEventId Raise<E>(in E e)
             where E : IWfEvent

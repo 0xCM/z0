@@ -32,7 +32,6 @@ namespace Z0
     [Free]
     public interface ILogPaths<A> : ILogPaths
     {
-        string ILogPaths.AppName
-            => typeof(A).Assembly.GetSimpleName();
+
     }
 }

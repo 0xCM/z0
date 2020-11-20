@@ -6,36 +6,14 @@ namespace Z0
 {
     public struct WfContext : IWfContext
     {
-        internal IWfPaths Paths;
+        public IWfPaths Paths {get; internal set;}
 
-        internal IApiParts ApiParts;
+        public IApiParts ApiParts {get; internal set;}
 
-        internal ITestLogPaths TestLogPaths;
+        public IJsonSettings Settings {get; internal set;}
 
-        internal WfSettings WfSettings;
+        public string[] Args {get; internal set;}
 
-        internal IJsonSettings Settings;
-
-        internal string[] Args;
-
-        internal WfController Controller;
-
-        IWfPaths IWfContext.Paths
-            => Paths;
-
-        IApiParts IWfContext.ApiParts
-            => ApiParts;
-
-        ITestLogPaths IWfContext.TestLogPaths
-            => TestLogPaths;
-
-        IJsonSettings IWfContext.Settings
-            => Settings;
-
-        string[] IWfContext.Args
-            => Args;
-
-        WfController IWfContext.Controller
-            => Controller;
+        public WfController Controller {get; internal set;}
     }
 }

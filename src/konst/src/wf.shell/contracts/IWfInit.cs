@@ -12,6 +12,8 @@ namespace Z0
     [Free]
     public interface IWfInit
     {
+        IFileDb Db {get;}
+
         /// <summary>
         /// The context root
         /// </summary>

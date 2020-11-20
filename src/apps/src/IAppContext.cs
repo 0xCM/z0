@@ -14,6 +14,12 @@ namespace Z0
     {
         IAppMsgQueue MessageQueue {get;}
 
+        WfController IWfContext.Controller
+            => WfShell.controller();
+
+        string[] IWfContext.Args
+            => Environment.GetCommandLineArgs();
+
         Action<IAppMsg> MessageRelay
             => (e => term.print(e));
 

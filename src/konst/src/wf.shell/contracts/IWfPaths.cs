@@ -16,6 +16,9 @@ namespace Z0
         /// </summary>
         FS.FolderPath DbRoot {get;}
 
+        ITestLogPaths TestLogs
+            => TestLogPaths.define(DbRoot + FS.folder("tests"));
+
         FS.FolderPath CodeGenRoot
             => FS.dir(@"j:\dev\projects\z0.generated");
 

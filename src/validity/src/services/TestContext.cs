@@ -52,10 +52,12 @@ namespace Z0
         Queue<BenchmarkRecord> Benchmarks {get;}
             = new Queue<BenchmarkRecord>();
 
+        protected IWfPaths AppPaths {get;}
+
         protected TestContext()
         {
             void Relay(IAppMsg msg) => Next(msg);
-
+            AppPaths = WfShell.paths();
             Context = this;
             Next += x => {};
             Queue = AppMsgExchange.Create();
@@ -154,11 +156,9 @@ namespace Z0
         protected TCheckEquatable ClaimEquatable
             => CheckEquatable.Checker;
 
-        protected IWfPaths AppPaths
-            => Context.Paths;
 
-        public ITestLogPaths LogPaths
-            => Context.TestLogPaths;
+        public ITestLogPaths TestLogPaths
+            => AppPaths.TestLogs;
 
         protected PartId TestedPart
         {
@@ -169,7 +169,7 @@ namespace Z0
         FS.FolderPath TestRoot
         {
              [MethodImpl(Inline)]
-             get => Context.TestLogPaths.TestDataRoot + FS.folder(TestedPart.Format());
+             get => TestLogPaths.TestDataRoot + FS.folder(TestedPart.Format());
         }
 
         protected FolderPath UnitDataDir
@@ -208,7 +208,7 @@ namespace Z0
             => Context.CaseName(f);
 
         public CasePaths Paths
-            => new CasePaths(Context.TestLogPaths.TestDataRoot, TestedPart, GetType());
+            => new CasePaths(TestLogPaths.TestDataRoot, TestedPart, GetType());
 
         [MethodImpl(Inline)]
         protected FilePath UnitPath(FileName name)

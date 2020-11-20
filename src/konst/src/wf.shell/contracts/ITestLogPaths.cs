@@ -56,7 +56,7 @@ namespace Z0
             => TestDataDir(typeof(T));
     }
 
-    public interface ITestLogPaths<A> : ITestLogPaths, ILogPaths<A>
+    public interface ITestLogPaths<A> : ITestLogPaths, ILogPaths
     {
 
     }

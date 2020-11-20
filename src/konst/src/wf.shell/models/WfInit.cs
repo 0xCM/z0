@@ -48,9 +48,12 @@ namespace Z0
 
         public ISystemApiCatalog Api {get;}
 
+        public IFileDb Db {get;}
+
         [MethodImpl(Inline)]
-        public WfInit(IWfContext ctx, WfLogConfig logs, PartId[] parts)
+        public WfInit(IFileDb db, IWfContext ctx, WfLogConfig logs, PartId[] parts)
         {
+            Db = db;
             Context = ctx;
             ApiParts = ctx.ApiParts;
             Control = ctx.Controller;

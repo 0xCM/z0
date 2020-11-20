@@ -32,7 +32,8 @@ namespace Z0
             Frequency = new TimeSpan(0, 0, 0, 0, 50);
             Host = WfShell.host(typeof(H));
             CommandQueue = new ConcurrentQueue<string>();
-            DispatchQueue = new ConcurrentDictionary<ulong,WfExecToken>();
+            ExecLog = new ConcurrentDictionary<ulong,WfExecToken>();
+            DispatchKeys = new ConcurrentBag<Guid>();
             Tokenizer = WfShell.tokenizer();
             Running = false;
             Initialized = false;
@@ -54,13 +55,19 @@ namespace Z0
 
         readonly ConcurrentQueue<string> CommandQueue;
 
-        readonly ConcurrentDictionary<ulong,WfExecToken> DispatchQueue;
+        readonly ConcurrentBag<Guid> DispatchKeys;
+
+        readonly ConcurrentDictionary<ulong,WfExecToken> ExecLog;
 
         public void Submit(string command)
         {
             try
             {
+                var key = Guid.NewGuid();
+                DispatchKeys.Add(key);
+                CommandQueue.Enqueue(string.Format("echo dispatching:{0}", key));
                 CommandQueue.Enqueue(command);
+                CommandQueue.Enqueue(string.Format("echo executed:{0}", key));
             }
             catch(Exception e)
             {
@@ -100,7 +107,7 @@ namespace Z0
             try
             {
                 Wf = wf.WithHost(Host);
-                WorkerLog = WfLogs.process(WfLogs.configure(wf.Controller.Id, "processes"));
+                WorkerLog = WfLogs.process(WfLogs.configure(wf.Controller.Id, wf.Db().Root, "processes"));
                 Worker = new Process();
 
                 var start = new ProcessStartInfo(ExePath.Name, StartupArgs)
@@ -168,7 +175,7 @@ namespace Z0
                 if(CommandQueue.TryDequeue(out var cmd))
                 {
                     var token = Tokenizer.Open();
-                    DispatchQueue[token.StartSeq] = token;
+                    ExecLog[token.StartSeq] = token;
                     Worker.StandardInput.WriteLine(cmd);
                     Dispatch();
                 }

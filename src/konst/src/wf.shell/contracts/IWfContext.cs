@@ -4,36 +4,25 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Reflection;
-
     public interface IWfContext : ITextual
     {
-        IWfPaths Paths
-            => WfShell.paths();
+        IWfPaths Paths {get;}
 
-        IJsonSettings Settings
-            => JsonSettings.Load(Paths.AppConfigPath);
+        IJsonSettings Settings {get;}
 
-        IApiParts ApiParts
-             => WfShell.parts();
+        IApiParts ApiParts {get;}
+
+        WfController Controller {get;}
+
+        string[] Args {get;}
 
         CorrelationToken Ct
             => z.correlate(Controller.Id);
-
-        ITestLogPaths TestLogPaths
-            => new TestLogPaths();
-
-        string[] Args
-             => Environment.GetCommandLineArgs();
 
         string AppName
             => Controller.Name;
 
         string ITextual.Format()
             => AppName;
-
-        WfController Controller
-            => Assembly.GetEntryAssembly();
     }
 }

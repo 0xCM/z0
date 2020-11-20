@@ -16,12 +16,9 @@ namespace Z0
     {
         public ArchiveConfig Settings {get;}
 
-        readonly IWfShell Wf;
-
         [MethodImpl(Inline)]
-        internal FileDb(IWfShell wf, FileDbPaths paths)
+        internal FileDb(FileDbPaths paths)
         {
-            Wf = wf;
             Settings = new ArchiveConfig(paths.Root);
         }
 
