@@ -47,7 +47,7 @@ namespace Z0
             if(help.IsEmpty)
                 Wf.Warn(ToolHelpNotFound.Apply(tool));
             else
-                Wf.RowData(help);
+                Wf.Row(help);
         }
 
         public void ListCommands()

@@ -14,7 +14,7 @@ namespace Z0
     /// <summary>
     /// Captures and represents <see cref='ulong'/> pointer
     /// </summary>
-    [ApiDataType]
+    [ApiType]
     public unsafe struct Ptr64
     {
         public ulong* P;

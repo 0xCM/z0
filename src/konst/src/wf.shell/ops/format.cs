@@ -38,12 +38,8 @@ namespace Z0
         public static FS.FolderPath logRoot()
             => WfEnv.dbRoot() + FS.folder("logs") + FS.folder("wf");
 
-        [Op]
-        public static string format(WfExecToken src)
-            => string.Format("{0}:{1}", src.Source, src.Target);
-
         [MethodImpl(Inline), Op]
-        public static WfExecToken token(ulong src, ulong dst)
-            => new WfExecToken(src, dst);
+        public static WfExecToken token(ulong seq)
+            => new WfExecToken(seq, timestamp());
     }
 }

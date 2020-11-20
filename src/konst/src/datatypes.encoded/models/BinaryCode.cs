@@ -9,6 +9,7 @@ namespace Z0
     using System.Linq;
 
     using static Konst;
+    using static Encoded;
 
     /// <summary>
     /// Encoded x86 bytes extracted from a memory source
@@ -20,6 +21,9 @@ namespace Z0
         /// </summary>
         public byte[] Encoded {get;}
 
+        [MethodImpl(Inline)]
+        public BinaryCode(byte[] bytes)
+            => Encoded = z.insist(bytes);
         public byte[] Storage
         {
             [MethodImpl(Inline)]
@@ -98,23 +102,10 @@ namespace Z0
             get => (uint)Encoded.Length;
         }
 
+
         [MethodImpl(Inline)]
-        public BinaryCode(byte[] bytes)
-            => Encoded = z.insist(bytes);
-
-
         public bool Equals(BinaryCode src)
-        {
-            if(IsNonEmpty && src.IsNonEmpty)
-                return Encoded.SequenceEqual(src.Encoded);
-            else
-            {
-                if(Length == 0 && src.Length == 0)
-                    return true;
-                else
-                    return false;
-            }
-        }
+            => equals(this,src);
 
         public string Format()
             => Encoded.FormatHexBytes();

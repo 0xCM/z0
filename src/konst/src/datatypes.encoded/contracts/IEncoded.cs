@@ -8,13 +8,14 @@ namespace Z0
 
     public interface IEncoded
     {
-        BinaryCode Encoded  => BinaryCode.Empty;
+        BinaryCode Encoded => BinaryCode.Empty;
     }
 
     public interface IEncoded<F> : IEncoded, IEquatable<F>, IMeasured, ITextual
         where F : struct, IEncoded<F>
     {
-
+        int IMeasured.Length
+            => Encoded.Length;
     }
 
     public interface IEncoded<F,C> : IEncoded<F>

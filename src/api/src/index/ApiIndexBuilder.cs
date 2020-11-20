@@ -122,7 +122,7 @@ namespace Z0
             var code = CodeAddress.Values.Select(x => (x.Uri.Host, Code: x))
                 .Array()
                 .GroupBy(g => g.Host)
-                .Select(x => (new ApiCodeBlocks(x.Key, x.Select(y => y.Code).ToArray()))).Array();
+                .Select(x => (new ApiHostCodeBlocks(x.Key, x.Select(y => y.Code).ToArray()))).Array();
 
             return new ApiCodeBlockIndex(
                    new PartAddresses(parts, memories),

@@ -15,7 +15,7 @@ namespace Z0.Mkl.Test
             var rhs = RVec<float>();
             var dst1 = RowVectors.blockalloc<float>(lhs.Length);
             mkl.add(lhs,rhs, ref dst1);
-            
+
             var dst2 = lhs.Replicate();
             gspan.add(lhs,rhs, dst2.Unblocked);
             Claim.Require(dst1 == dst2);
@@ -27,12 +27,11 @@ namespace Z0.Mkl.Test
             var rhs = RVec<double>();
             var dst1 = RowVectors.blockalloc<double>(lhs.Length);
             mkl.add(lhs,rhs,ref dst1);
-            
+
             var dst2 = lhs.Replicate();
             gspan.add(lhs, rhs, dst2.Unblocked);
             Claim.Require(dst1 == dst2);
         }
-
 
         PairedBench vaddF32Perf(int samples, long cycles)
         {
@@ -44,19 +43,18 @@ namespace Z0.Mkl.Test
             var rhs2 = rhs1.Replicate();
             var dst2 = dst1.Replicate();
 
-            var sw1 = stopwatch();
+            var sw1 = Time.stopwatch(true);
             for(var i=0; i<cycles; i++)
                 gspan.add(lhs1,rhs1, dst1.Unblocked);
-            var time1 = BenchmarkRecord.Define(cycles, snapshot(sw1), "gmath");
+            var time1 = BenchmarkRecord.Define(cycles, Time.snapshot(sw1), "gmath");
 
 
-            var sw2 = stopwatch();
+            var sw2 = Time.stopwatch(true);
             for(var i=0; i<cycles; i++)
                 mkl.add(lhs2, rhs2, ref dst2);
-            var time2 = BenchmarkRecord.Define(cycles, snapshot(sw2), "mkl");
-            
+            var time2 = BenchmarkRecord.Define(cycles, Time.snapshot(sw2), "mkl");
+
             return (time1,time2);
-            
         }
 
         PairedBench vaddF64Perf(int samples, long cycles)
@@ -65,22 +63,20 @@ namespace Z0.Mkl.Test
             var rhs1 = RVec<double>(samples);
             var dst1 = RowVectors.blockalloc<double>(samples);
 
-
-            var sw1 = stopwatch();
+            var sw1 = Time.stopwatch(true);
             for(var i=0; i<cycles; i++)
                 gspan.add(lhs1,rhs1,dst1.Unblocked);
-            var time1 = BenchmarkRecord.Define(cycles, snapshot(sw1), "gmath");
-
+            var time1 = BenchmarkRecord.Define(cycles, Time.snapshot(sw1), "gmath");
 
             var lhs2 = lhs1.Replicate();
             var rhs2 = rhs1.Replicate();
             var dst2 = dst1.Replicate();
 
-            var sw2 = stopwatch();
+            var sw2 = Time.stopwatch(true);
             for(var i=0; i<cycles; i++)
                 mkl.add(lhs2, rhs2,ref dst2);
-            var time2 = BenchmarkRecord.Define(cycles, snapshot(sw2), "mkl");
-            
+            var time2 = BenchmarkRecord.Define(cycles, Time.snapshot(sw2), "mkl");
+
             return (time1,time2);
         }
 
@@ -90,9 +86,6 @@ namespace Z0.Mkl.Test
             var i = Pow2.T12;
             TracePerf(vaddF64Perf(n, i).Format());
             TracePerf(vaddF32Perf(n, i).Format());
-            
         }
-
     }
-
 }

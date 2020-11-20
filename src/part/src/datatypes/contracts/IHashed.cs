@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
 
-    using static Part;
-
     /// <summary>
     /// Characterizes a hash code provider
     /// </summary>

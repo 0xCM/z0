@@ -21,7 +21,7 @@ namespace Z0
             try
             {
                 var execTime = Duration.Zero;
-                var clock = counter(true);
+                var clock = Time.counter(true);
                 var tsStart = Time.now();
 
                 if(unit is IExplicitTest et)

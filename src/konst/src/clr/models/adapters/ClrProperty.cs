@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    [ApiDataType(ApiNames.ClrProperty, true)]
+    [ApiType(ApiNames.ClrProperty, true)]
     public readonly struct ClrProperty : IClrRuntimeMember<ClrProperty, PropertyInfo>
     {
         public PropertyInfo Definition {get;}

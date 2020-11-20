@@ -147,7 +147,7 @@ namespace Z0
 
             var idx = index(catalog);
             var archive =  ApiArchives.capture(root);
-            var paths =  HostCaptureArchive.create(root, host);
+            var paths =  ApiArchives.capture(FS.dir(root.Name), host);
             var code = ApiHexReader.Service.Read(paths.HostX86Path);
             var opIndex =  CodeBlockIndex(code);
             return new ApiHostMemberCode(host, MemberCodeIndex(idx, opIndex));

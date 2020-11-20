@@ -53,5 +53,9 @@ namespace Z0
         /// </summary>
         public const ushort CharCount = 512;
 
+        /// <summary>
+        /// The size of the block, in bytes
+        /// </summary>
+        public const uint Size = CharCount * 2;
     }
 }

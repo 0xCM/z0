@@ -14,5 +14,9 @@ namespace Z0
     readonly struct Msg
     {
         public static RenderPattern<Type,Type> ContractMismatch => "The source type {0} does not reify {1}";
+
+        public static RenderPattern<string> SourceLoggerCreated => "Logger for {0} created";
+
+        public static RenderPattern<string> SourceLoggerDisposed => "Logger for {0} disposed";
     }
 }

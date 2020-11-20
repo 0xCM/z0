@@ -72,7 +72,7 @@ namespace Z0.Asm
             for(var i=0; i<parts.Length; i++)
             {
                 var part = parts[i];
-                var data = archive.Read(part).Array();
+                var data = archive.ApiCode(part).Array();
                 log.WriteLine($"Running {part} instruction lists through the pipe");
                 RunPipe(data,log);
             }

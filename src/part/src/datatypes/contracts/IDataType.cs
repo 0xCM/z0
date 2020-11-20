@@ -4,16 +4,36 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System.Runtime.CompilerServices;
+
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface IDataType : IReified
+    public interface IDataType : ITextual
     {
+        BitSize PhysicalWidth {get;}
+
+        BitSize EffectiveWidth
+            => PhysicalWidth;
     }
 
     [Free]
-    public interface IDataType<T> : IDataType, IReified<T>
-        where  T : struct, IDataType<T>
+    public interface IDataType<T> : IDataType
+        where T : struct
+    {
+        T Value {get;}
+
+        BitSize IDataType.PhysicalWidth
+            => Unsafe.SizeOf<T>();
+
+        string ITextual.Format()
+            => Value.ToString();
+    }
+
+    [Free]
+    public interface IDataType<H,T> : IDataType<T>
+        where T : struct
+        where H : struct, IDataType<H,T>
     {
 
     }

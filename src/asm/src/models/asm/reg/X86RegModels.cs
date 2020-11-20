@@ -6,7 +6,7 @@ namespace Z0.Asm
 {
     using R = X86Registers;
 
-    [ApiDataType]
+    [ApiType]
     public readonly struct X86RegModels
     {
         public static R.al al => default;

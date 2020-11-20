@@ -37,7 +37,7 @@ namespace Z0
 
         void ExecuteHost(BufferTokens buffers, IApiHost host)
         {
-            var dst = HostCaptureArchive.create(CodeArchive.ArchiveRoot, host.Uri);
+            var dst = ApiArchives.capture(FS.dir(CodeArchive.ArchiveRoot.Name), host.Uri);
             if(dst.HostX86Path.Exists)
             {
                 var code = ApiQuery.code(ApiSet, host.Uri, CodeArchive.ArchiveRoot).Members;

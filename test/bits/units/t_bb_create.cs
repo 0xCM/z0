@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    [ApiDataType]
+    [ApiType]
     public class t_bb_create : t_bitspans<t_bb_create>
     {
         CallingMember Caller;

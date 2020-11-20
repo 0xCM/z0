@@ -14,7 +14,7 @@ namespace Z0
 
     using BL = BitLogic.Scalar;
 
-    [ApiDataType]
+    [ApiType]
     public unsafe readonly struct Blm32u
     {
         static MethodInfo[] Methods;

@@ -38,7 +38,7 @@ namespace Z0
         {
             try
             {
-                FS.write(content, Status);
+                FS.write(content + Eol, Status);
             }
             catch(Exception error)
             {
@@ -51,7 +51,9 @@ namespace Z0
             try
             {
                 Error.AppendLine(content);
-                FS.write(content, Status);
+                FS.write("[error] ", Status);
+                FS.write(RP.PageBreak40 + Eol, Status);
+                FS.write(content + Eol, Status);
             }
             catch(Exception error)
             {

@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    [ApiDataType(ApiNames.ClrEnumLiteral, true)]
+    [ApiType(ApiNames.ClrEnumLiteral, true)]
     public readonly struct ClrEnumLiteral
     {
         public FieldInfo Definition {get;}

@@ -10,7 +10,7 @@ namespace Z0
 
     using K = CilOpCodeKind;
 
-    [ApiDataType]
+    [ApiType]
     public readonly struct CilOpCodeSpecs
     {
         //

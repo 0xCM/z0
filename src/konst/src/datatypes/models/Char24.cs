@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    [ApiDataType]
+    [ApiType]
     public readonly struct Char24
     {
         readonly uint24 Data;

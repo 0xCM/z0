@@ -6,100 +6,149 @@ namespace Z0
 {
     using System;
     using System.Diagnostics;
-    using System.Text;
-    using System.Runtime.CompilerServices;
+    using System.Collections.Concurrent;
+    using System.Threading.Tasks;
 
     using static Konst;
+    using static z;
 
     public abstract class Interpreter<H> : IWfService<H>, IDisposable
         where H : Interpreter<H>, new()
     {
-        protected virtual void Initialized()
+        public static H create()
+            => new H();
+
+        public static H create(IWfShell wf)
         {
-
-        }
-
-        protected virtual void OnExit()
-        {
-
+            var host = new H();
+            host.Init(wf);
+            return host;
         }
 
         protected Interpreter()
         {
-            OutputBuffer = new StringBuilder();
+            Name = typeof(H).Name;
+            TermLog = WfLogs.term(Name);
+            Frequency = new TimeSpan(0, 0, 0, 0, 50);
+            Host = WfShell.host(typeof(H));
+            CommandQueue = new ConcurrentQueue<string>();
+            DispatchQueue = new ConcurrentDictionary<ulong,WfExecToken>();
+            Tokenizer = WfShell.tokenizer();
+            Running = false;
+            Initialized = false;
         }
 
-        StringBuilder OutputBuffer {get;}
+        public Name Name {get;}
 
-        protected IWfShell Wf {get; private set;}
+        WfHost Host;
 
-        IWfProcLog Log;
+        IWfEventSink TermLog;
 
-        Process Worker;
+        Duration Frequency;
+
+        bool Running;
+
+        bool Initialized;
+
+        WfTokenizer Tokenizer;
+
+        readonly ConcurrentQueue<string> CommandQueue;
+
+        readonly ConcurrentDictionary<ulong,WfExecToken> DispatchQueue;
+
+        public void Submit(string command)
+        {
+            try
+            {
+                CommandQueue.Enqueue(command);
+            }
+            catch(Exception e)
+            {
+                Wf.Error(e);
+            }
+        }
 
         protected virtual string StartupArgs {get;}
             = EmptyString;
 
         protected abstract FS.FilePath ExePath {get;}
 
+        protected IWfShell Wf {get; private set;}
+
+        IWfProcLog WorkerLog;
+
+        Process Worker;
+
+        Task SpinTask;
+
+        WfExecToken Token;
+
+        public void Run()
+        {
+            if(!Initialized)
+                throw new Exception("Not initialized!");
+
+            Worker.Start();
+            Worker.BeginOutputReadLine();
+            Worker.BeginErrorReadLine();
+            Running = true;
+            SpinTask = task(() => Spin());
+        }
+
         public void Init(IWfShell wf)
         {
-            Wf = wf;
-            Log = WfLogs.process(WfLogs.configure(wf.Controller.Id, "processes"));
-
-            var start = new ProcessStartInfo(ExePath.Name, StartupArgs)
+            try
             {
-                UseShellExecute = false,
-                RedirectStandardError = true,
-                RedirectStandardOutput = true,
-                ErrorDialog = false,
-                CreateNoWindow = true,
-                RedirectStandardInput = true,
+                Wf = wf.WithHost(Host);
+                WorkerLog = WfLogs.process(WfLogs.configure(wf.Controller.Id, "processes"));
+                Worker = new Process();
 
-            };
+                var start = new ProcessStartInfo(ExePath.Name, StartupArgs)
+                {
+                    UseShellExecute = false,
+                    RedirectStandardError = true,
+                    RedirectStandardOutput = true,
+                    RedirectStandardInput = true,
+                    ErrorDialog = false,
+                    CreateNoWindow = true,
+                };
 
-            Worker = new Process();
-            Worker.StartInfo = start;
-            Worker.OutputDataReceived += OnStatus;
-            Worker.ErrorDataReceived += OnError;
-            Worker.EnableRaisingEvents = true;
-            Worker.Exited += Exited;
+                Worker.StartInfo = start;
+                Worker.OutputDataReceived += OnStatus;
+                Worker.ErrorDataReceived += OnError;
+                Worker.EnableRaisingEvents = true;
+                Worker.Exited += Exited;
+                Initialized = true;
+            }
+            catch(Exception e)
+            {
+                wf.Error(e);
+                throw e;
+            }
         }
+
+        public abstract void SubmitStop();
 
         void Exited(object sender, EventArgs e)
         {
-
+            Wf.Status("Process exit event received");
         }
-
 
         void OnStatus(object sender, DataReceivedEventArgs e)
         {
-            Log?.LogStatus(e.Data);
+            if(e != null && e.Data != null)
+            {
+                WorkerLog?.LogStatus(e.Data);
+                TermLog.Deposit(WfEvents.status(Host, e.Data, Wf.Ct));
+            }
         }
 
         void OnError(object sender, DataReceivedEventArgs e)
         {
-            Log?.LogStatus(e.Data);
-        }
-
-        public void Post(string command)
-        {
-            Worker.StandardInput.Write(command);
-        }
-
-        public Outcome Start()
-        {
-            try
+            if(e != null && e.Data != null)
             {
-                Worker.Start();
-                Worker.BeginOutputReadLine();
-                Worker.BeginErrorReadLine();
-                return true;
-
-            }
-            catch(Exception e)
-            {
-                return e;
+                WorkerLog?.LogError(e.Data);
+                TermLog.Deposit(WfEvents.error(Host, e.Data, Wf.Ct));
             }
         }
 
@@ -108,8 +157,38 @@ namespace Z0
             if(Worker != null)
                 Worker.Close();
 
-            if(Log != null)
-                Log.Dispose();
+            if(WorkerLog != null)
+                WorkerLog.Dispose();
+        }
+
+        void Dispatch()
+        {
+            if(Running)
+            {
+                if(CommandQueue.TryDequeue(out var cmd))
+                {
+                    var token = Tokenizer.Open();
+                    DispatchQueue[token.StartSeq] = token;
+                    Worker.StandardInput.WriteLine(cmd);
+                    Dispatch();
+                }
+            }
+        }
+
+        void Spin()
+        {
+            while(true && Running)
+            {
+                Dispatch();
+                delay(Frequency);
+            }
+        }
+
+        public WfExecToken WaitForExit()
+        {
+            SubmitStop();
+            Worker.WaitForExit();
+            return Token;
         }
     }
 }

@@ -9,7 +9,7 @@ namespace Z0
     public interface ICorrelated
     {
         CorrelationToken Ct
-            => correlate(0ul);
+            => CorrelationToken.Empty;
     }
 
     public interface ICorrelated<F> : ICorrelated

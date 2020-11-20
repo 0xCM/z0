@@ -15,7 +15,7 @@ namespace Z0
     /// <summary>
     /// Defines an assembly-qualified type name
     /// </summary>
-    [ApiDataType]
+    [ApiType]
     public readonly struct ClrTypeName : IName<string>, IEquatable<ClrTypeName>, IComparable<ClrTypeName>
     {
         [MethodImpl(Inline)]

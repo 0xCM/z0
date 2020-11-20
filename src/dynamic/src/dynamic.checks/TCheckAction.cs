@@ -5,7 +5,7 @@
 namespace Z0
 {
     using System;
-    
+
     using static Konst;
 
     public interface TCheckAction : TTestChecker
@@ -15,12 +15,10 @@ namespace Z0
         /// </summary>
         /// <param name="f">The action under test</param>
         /// <param name="name">The action name</param>
-        void CheckAction(Action f, string name)        
+        void CheckAction(Action f, string name)
         {
             var succeeded = true;
-            var count = counter();
-            
-            count.Start();
+            var count = Time.counter(true);
             try
             {
                 f();

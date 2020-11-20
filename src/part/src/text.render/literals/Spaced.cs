@@ -78,11 +78,23 @@ namespace Z0
         [RenderLiteral(Spaced12, 12)]
         public const string Spaced12 = Spaced11 + Space;
 
-       /// <summary>
+        /// <summary>
         /// Defines a string consisting of 13 spaces
         /// </summary>
         [RenderLiteral(Spaced13, 13)]
         public const string Spaced13 = Spaced12 + Space;
+
+        /// <summary>
+        /// Defines a string consisting of 14 spaces
+        /// </summary>
+        [RenderLiteral(Spaced14, 14)]
+        public const string Spaced14 = Spaced13 + Space;
+
+        /// <summary>
+        /// Defines a string consisting of 15 spaces
+        /// </summary>
+        [RenderLiteral(Spaced15, 15)]
+        public const string Spaced15 = Spaced14 + Space;
 
         /// <summary>
         /// Defines a string consisting of 16 spaces

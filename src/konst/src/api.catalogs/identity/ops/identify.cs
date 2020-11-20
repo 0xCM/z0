@@ -13,7 +13,6 @@ namespace Z0
 
     partial struct ApiIdentify
     {
-
         /// <summary>
         /// Identifies a type
         /// </summary>

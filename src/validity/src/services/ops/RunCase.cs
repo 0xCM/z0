@@ -18,7 +18,7 @@ namespace Z0
         {
             var exectime = Duration.Zero;
             var casename = ApiUri.TestCase(method);
-            var clock = counter(false);
+            var clock = Time.counter(false);
             var messages = new List<IAppMsg>();
             var outcomes = z.list<TestCaseRecord>();
 

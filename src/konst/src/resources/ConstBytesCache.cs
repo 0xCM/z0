@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    [ApiDataType(ApiNames.ConstBytesCache, true)]
+    [ApiType(ApiNames.ConstBytesCache, true)]
     public readonly struct ConstBytesCache
     {
         [MethodImpl(Inline)]

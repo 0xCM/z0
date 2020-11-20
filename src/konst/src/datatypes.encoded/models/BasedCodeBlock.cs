@@ -24,6 +24,19 @@ namespace Z0
         /// </summary>
         public BinaryCode Encoded {get;}
 
+        [MethodImpl(Inline)]
+        public BasedCodeBlock(MemoryAddress src, byte[] data)
+        {
+            Base = z.insist(src, x => x.IsNonEmpty);
+            Encoded = new BinaryCode(z.insist(data));
+        }
+
+        public MemoryRange MemorySegment
+        {
+            [MethodImpl(Inline)]
+            get => (Base, Base + (MemoryAddress)Encoded.Length);
+        }
+
         /// <summary>
         /// The encoded content as byte array
         /// </summary>
@@ -64,33 +77,6 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator byte[](BasedCodeBlock src)
-            => src.Encoded;
-
-        [MethodImpl(Inline)]
-        public static implicit operator BinaryCode(BasedCodeBlock src)
-            => src.Encoded;
-
-        [MethodImpl(Inline)]
-        public static implicit operator ReadOnlySpan<byte>(BasedCodeBlock src)
-            => src.Encoded;
-
-        [MethodImpl(Inline)]
-        public static bool operator==(BasedCodeBlock a, BasedCodeBlock b)
-            => a.Equals(b);
-
-        [MethodImpl(Inline)]
-        public static bool operator!=(BasedCodeBlock a, BasedCodeBlock b)
-            => !a.Equals(b);
-
-        [MethodImpl(Inline)]
-        public BasedCodeBlock(MemoryAddress src, byte[] data)
-        {
-            Base = z.insist(src, x => x.IsNonEmpty);
-            Encoded = new BinaryCode(z.insist(data));
-        }
-
-        [MethodImpl(Inline)]
         public bool Equals(BasedCodeBlock src)
             => Encoded.Equals(src.Encoded);
 
@@ -111,11 +97,25 @@ namespace Z0
             Encoded = Array.Empty<byte>();
         }
 
-        public MemoryRange MemorySegment
-        {
-            [MethodImpl(Inline)]
-            get => (Base, Base + (MemoryAddress)Encoded.Length);
-        }
+        [MethodImpl(Inline)]
+        public static implicit operator byte[](BasedCodeBlock src)
+            => src.Encoded;
+
+        [MethodImpl(Inline)]
+        public static implicit operator BinaryCode(BasedCodeBlock src)
+            => src.Encoded;
+
+        [MethodImpl(Inline)]
+        public static implicit operator ReadOnlySpan<byte>(BasedCodeBlock src)
+            => src.Encoded;
+
+        [MethodImpl(Inline)]
+        public static bool operator==(BasedCodeBlock a, BasedCodeBlock b)
+            => a.Equals(b);
+
+        [MethodImpl(Inline)]
+        public static bool operator!=(BasedCodeBlock a, BasedCodeBlock b)
+            => !a.Equals(b);
 
         public static BasedCodeBlock Empty
             => new BasedCodeBlock(0);

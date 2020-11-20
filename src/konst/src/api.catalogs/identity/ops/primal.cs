@@ -17,7 +17,7 @@ namespace Z0
         /// returns <see cref='PrimalIdentity.Empty'/>
         /// </summary>
         /// <param name="src">The source type</param>
-        [MethodImpl(Inline), Op]
+        [Op]
         public static PrimalIdentity primal(Type src)
             => src.IsSystemDefined() ?
                (NumericKinds.test(src)

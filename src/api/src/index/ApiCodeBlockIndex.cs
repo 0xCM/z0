@@ -20,8 +20,6 @@ namespace Z0
 
         PartCodeIndex PartIndex;
 
-        public PartId[] Parts => Memories.Parts;
-
         [MethodImpl(Inline)]
         public ApiCodeBlockIndex(PartAddresses members, UriAddresses memuri, PartCodeIndex code)
         {
@@ -29,6 +27,9 @@ namespace Z0
             UriLocations = memuri;
             PartIndex = code;
         }
+
+        public PartId[] Parts
+            => Memories.Parts;
 
         /// <summary>
         /// The number of indexed functions
@@ -90,7 +91,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ApiHostCodeBlocks HostCodeBlocks(ApiHostUri host)
-            => ApiFiles.index(host, PartIndex[host]);
+            => new ApiHostCodeBlocks(host, PartIndex[host]);
 
         [MethodImpl(Inline)]
         public ApiPartCodeBlocks PartCodeBlocks(PartId id)

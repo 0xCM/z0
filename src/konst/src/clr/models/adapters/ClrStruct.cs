@@ -11,7 +11,7 @@ namespace Z0
 
     using static Konst;
 
-    [ApiDataType(ApiNames.ClrStruct, true)]
+    [ApiType(ApiNames.ClrStruct, true)]
     public readonly struct ClrStruct
     {
         public Type Definition {get;}

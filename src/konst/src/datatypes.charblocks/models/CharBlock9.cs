@@ -17,10 +17,13 @@ namespace Z0
     public struct CharBlock9 : ICharBlock<CharBlock9>
     {
         /// <summary>
-        /// The upper segment
+        /// The lower content
         /// </summary>
         public CharBlock8 A;
 
+        /// <summary>
+        /// The upper content
+        /// </summary>
         public CharBlock1 B;
 
         /// <summary>
@@ -29,7 +32,7 @@ namespace Z0
         public Span<char> Data
         {
             [MethodImpl(Inline)]
-           get => cover<CharBlock9,char>(this, CharCount);
+            get => cover<CharBlock9,char>(this, CharCount);
         }
 
         [MethodImpl(Inline)]
@@ -42,6 +45,10 @@ namespace Z0
         /// The block capacity
         /// </summary>
         public const ushort CharCount = 9;
-    }
 
+        /// <summary>
+        /// The size of the block, in bytes
+        /// </summary>
+        public const uint Size = CharCount * 2;
+    }
 }

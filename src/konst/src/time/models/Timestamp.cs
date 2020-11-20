@@ -80,5 +80,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator Timestamp(DateTime src)
             => new Timestamp((ulong)src.Ticks);
+
+        public static Timestamp Zero => default;
+
     }
 }

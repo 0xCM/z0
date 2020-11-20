@@ -12,7 +12,7 @@ namespace Z0
 
     using R = System.Reflection;
 
-    [ApiDataType(ApiNames.ClrField, true)]
+    [ApiType(ApiNames.ClrField, true)]
     public readonly struct ClrField : IClrRuntimeMember<ClrField,FieldInfo>
     {
         public FieldInfo Definition {get;}

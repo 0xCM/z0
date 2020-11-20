@@ -121,6 +121,14 @@ namespace Z0
                 => Files(ext).Where(f => f.IsOwner(part));
 
             /// <summary>
+            /// Enumerates part-owned folder files
+            /// </summary>
+            /// <param name="part">The owning part</param>
+            /// <param name="ext">The extension to match</param>
+            public FilePath[] Files(PartId part, FileExt ext, bool recurse)
+                => Files(ext, recurse).Where(f => f.IsOwner(part));
+
+            /// <summary>
             /// Nonrecursively enumerates host-owned folder files
             /// </summary>
             /// <param name="part">The owning part</param>
@@ -196,7 +204,6 @@ namespace Z0
                         from f in Directory.EnumerateFiles(src.Name, x.SearchPattern, option(recurse))
                         select  path(f);
                 return selected;
-
             }
 
             static IEnumerable<FilePath> EnumerateFiles(FolderPath src, FileExt ext, bool recurse = false)

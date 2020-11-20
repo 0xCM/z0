@@ -8,46 +8,42 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static z;
 
-    using api = WfShell;
-
-    public readonly struct WfExecToken
+    public struct WfExecToken
     {
-        public ulong Source {get;}
+        public ulong StartSeq;
 
-        public ulong Target {get;}
+        public Timestamp Started;
+
+        public Timestamp Finished;
+
+        public ulong FinishedSeq;
 
         [MethodImpl(Inline)]
-        public WfExecToken(ulong src)
+        public WfExecToken(ulong seq, Timestamp? started = null)
         {
-            Source = src;
-            Target = default;
+            StartSeq = seq;
+            Started = started ?? timestamp();
+            Finished = Timestamp.Zero;
+            FinishedSeq = 0;
         }
 
         [MethodImpl(Inline)]
-        public WfExecToken(ulong src, ulong dst)
+        public WfExecToken Complete(ulong seq, Timestamp? ts = null)
         {
-            Source = src;
-            Target = dst;
+            FinishedSeq = seq;
+            Finished = ts ?? timestamp();
+            return this;
         }
 
-        [MethodImpl(Inline)]
-        public WfExecToken WithTarget(ulong dst)
-            => new WfExecToken(Source, dst);
-
-        [MethodImpl(Inline)]
         public string Format()
-            => api.format(this);
+        {
+            const string Pattern = "{0} | {1} | {2} | {4|";
+            return string.Format(Pattern, StartSeq, Started, FinishedSeq, Finished);
+        }
 
         public override string ToString()
             => Format();
-
-        [MethodImpl(Inline)]
-        public static implicit operator WfExecToken(Pair<ulong> src)
-            => new WfExecToken(src.Left, src.Right);
-
-        [MethodImpl(Inline)]
-        public static implicit operator WfExecToken(ulong src)
-            => new WfExecToken(src);
     }
 }

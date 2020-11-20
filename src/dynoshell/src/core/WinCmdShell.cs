@@ -8,5 +8,14 @@ namespace Z0
     {
         protected override FS.FilePath ExePath
             => FS.file("cmd", ArchiveFileKinds.Exe).ToPath();
+
+        public override void SubmitStop()
+            => exit();
+
+        public void exit()
+            => Submit(nameof(exit));
+
+        public void echo(string msg)
+            => Submit(string.Format("{0} {1}", nameof(echo), msg));
     }
 }

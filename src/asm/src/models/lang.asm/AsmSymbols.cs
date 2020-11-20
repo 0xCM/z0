@@ -11,7 +11,7 @@ namespace Z0
 
     using static Konst;
 
-    [ApiDataType]
+    [ApiType]
     public readonly partial struct AsmSymbols
     {
         readonly NamedSymbols<Mnemonic,ushort> _Mnemonics;

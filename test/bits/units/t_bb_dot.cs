@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    [ApiDataType]
+    [ApiType]
     public class t_bb_dot : t_bitspans<t_bb_dot>
     {
         public void gbb_dot_10x32()

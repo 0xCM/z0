@@ -76,7 +76,7 @@ namespace Z0
 
             var content = Literals.format(src).PadRight(48);
             var address = src.Address.Format().PadRight(16);
-            var width = src.Width.Count.ToString().PadRight(16);
+            var width = src.Width.Value.ToString().PadRight(16);
             var type = src.Field.DeclaringType.Name.PadRight(36);
             var field = src.Field.Name.PadRight(36);
             var line = text.concat(address, Sep, width, Sep,type, Sep, field, Sep, content, Sep);

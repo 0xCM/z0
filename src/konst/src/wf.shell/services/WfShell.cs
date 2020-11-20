@@ -47,12 +47,12 @@ namespace Z0
 
         public LogLevel Verbosity {get; private set;}
 
-        long SourceToken;
+        long StartToken;
 
-        long TargetToken;
+        long EndToken;
 
-        WfExecTokens ExecTokens {get;}
-            = WfExecTokens.init();
+        ExecTokens Tokens {get;}
+            = ExecTokens.init();
 
         [MethodImpl(Inline)]
         public WfShell(IWfInit config)
@@ -109,18 +109,17 @@ namespace Z0
         {
             Wf.SignalRan();
             var token = CloseExecToken(src.Token);
-            ExecTokens.TryAdd(token.Source, token);
+            Tokens.TryAdd(token.Started, token);
             return token;
         }
 
         [MethodImpl(Inline)]
         public WfExecToken NextExecToken()
-            => new WfExecToken((ulong)atomic(ref SourceToken));
+            => new WfExecToken((ulong)atomic(ref StartToken));
 
         [MethodImpl(Inline)]
         public WfExecToken CloseExecToken(WfExecToken src)
-            => src.WithTarget((ulong)atomic(ref TargetToken));
-
+            => src.Complete((ulong)atomic(ref EndToken));
 
         public void Dispose()
         {

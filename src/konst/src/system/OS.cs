@@ -21,6 +21,9 @@ namespace Z0
         [return: MarshalAs(UnmanagedType.Bool)]
         public static extern bool FreeLibrary(IntPtr hModule);
 
+        [Free, DllImport(Kernel32, SetLastError = true)]
+        public static extern bool CloseHandle(IntPtr hObject);
+
         [DllImport(Kernel32, CharSet = CharSet.Unicode, SetLastError = true, EntryPoint = "LoadLibraryW"), Free]
         public static extern IntPtr LoadLibrary(string lpLibFileName);
 
@@ -43,16 +46,6 @@ namespace Z0
 
             [Fp(StdCall), Free]
             public delegate int QueryInterfaceDelegate(IntPtr self, in Guid guid, out IntPtr ptr);
-        }
-
-        [StructLayout(LayoutKind.Sequential)]
-        public struct IUnknownVTable
-        {
-            public IntPtr QueryInterface;
-
-            public IntPtr AddRef;
-
-            public IntPtr Release;
         }
     }
 }

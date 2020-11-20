@@ -7,7 +7,7 @@ namespace Z0
     /// <summary>
     /// Generic vectorized intrinsics
     /// </summary>
-    [ApiHost("api")]
+    [ApiHost]
     public partial class gvec
     {
 

@@ -10,10 +10,10 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public sealed class WfExecTokens : ConcurrentDictionary<ulong,WfExecToken>
+    public sealed class ExecTokens : ConcurrentDictionary<ulong,WfExecToken>
     {
         [MethodImpl(Inline)]
-        public static WfExecTokens init()
-            => new WfExecTokens();
+        public static ExecTokens init()
+            => new ExecTokens();
     }
 }

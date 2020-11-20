@@ -12,46 +12,6 @@ namespace Z0
     using static Konst;
     using static z;
 
-    using PC = System.Collections.Generic.Dictionary<ApiHostUri, ApiCodeBlocks>;
-
-    public sealed class ApiHostCodeLookup : Dictionary<ApiHostUri, ApiCodeBlocks>
-    {
-
-    }
-
-    public readonly struct PartCodeIndex
-    {
-        public readonly PartId[] Parts;
-
-        readonly PC Data;
-
-        [MethodImpl(Inline)]
-        public PartCodeIndex(PartId[] parts, PC src)
-        {
-            Parts = parts;
-            Data = src;
-        }
-
-        public int HostCount
-        {
-            [MethodImpl(Inline)]
-            get => Data.Count;
-        }
-
-        public ApiHostUri[] Hosts
-        {
-            [MethodImpl(Inline)]
-            get => Data.Keys.ToArray();
-        }
-
-        public TableSpan<ApiCodeBlock> this[ApiHostUri src]
-        {
-            [MethodImpl(Inline)]
-            get => Data[src].Code;
-        }
-    }
-
-
     public readonly struct ApiCaptureIndexParts
     {
         public readonly struct UriAddresses

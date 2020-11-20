@@ -38,10 +38,10 @@ namespace Z0
         FS.FilePath HostAsmPath
             => HostAsmDir + AsmFile;
 
-        FileName CilFile
-            => LegalFileName(Host, IlData);
+        FS.FileName CilFile
+            => FS.file(LegalFileName(Host, IlData).Name);
 
-        FilePath CilPath
+        FS.FilePath CilPath
             => CilDir + CilFile;
     }
 }

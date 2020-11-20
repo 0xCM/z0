@@ -20,6 +20,7 @@ namespace Z0
     using BCK = BinaryComparisonApiClass;
     using BAR = BinaryArithmeticApiClass;
 
+    [ApiHost]
     public static partial class VLogix
     {
         /// <summary>

@@ -12,7 +12,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    [ApiDataType]
+    [ApiType]
     public struct Multiparser
     {
         [FixedAddressValueType]

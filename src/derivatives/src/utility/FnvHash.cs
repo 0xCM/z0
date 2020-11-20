@@ -13,7 +13,7 @@ namespace Z0.X
 
     using static Part;
 
-    [ApiDataType]
+    [ApiType]
     public readonly struct FnvHash
     {
         /// <summary>

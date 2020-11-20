@@ -14,6 +14,7 @@ namespace Z0
     /// <summary>
     /// Generates the data presented by VData
     /// </summary>
+    [ApiHost]
     public static class VDataGen
     {
         /// <summary>
@@ -22,7 +23,7 @@ namespace Z0
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline)]
+        [Op, Closures(UnsignedInts)]
         public static Vector128<T> vpalt<T>(N128 n, T a, T b)
             where T : unmanaged
         {
@@ -40,7 +41,7 @@ namespace Z0
         /// <param name="first">The value of the first component</param>
         /// <param name="step">The distance between adjacent components</param>
         /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline)]
+        [Op, Closures(UnsignedInts)]
         public static Vector128<T> vdecrements<T>(N128 n, T first)
             where T : unmanaged
         {
@@ -63,7 +64,7 @@ namespace Z0
         /// <param name="first">The value of the first component</param>
         /// <param name="step">The distance between adjacent components</param>
         /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline)]
+        [Op, Closures(UnsignedInts)]
         public static Vector256<T> vdecrements<T>(N256 n, T first)
             where T : unmanaged
         {
@@ -86,7 +87,7 @@ namespace Z0
         /// <param name="first">The value of the first component</param>
         /// <param name="step">The distance between adjacent components</param>
         /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline)]
+        [Op, Closures(UnsignedInts)]
         public static Vector128<T> vdecrements<T>(N128 n, T first, T step)
             where T : unmanaged
         {
@@ -108,7 +109,7 @@ namespace Z0
         /// <param name="first">The value of the first component</param>
         /// <param name="step">The distance between adjacent components</param>
         /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline)]
+        [Op, Closures(UnsignedInts)]
         public static Vector256<T> vdecrements<T>(N256 n, T first, T step)
             where T : unmanaged
         {
@@ -124,6 +125,7 @@ namespace Z0
             return vload(n, in mem);
         }
 
+        [Op, Closures(UnsignedInts)]
         public static Vector256<T> vdecrements<T>(N256 n, T first, params Swap[] swaps)
             where T : unmanaged
         {
@@ -140,6 +142,7 @@ namespace Z0
             return vload(n, in data.Swap(swaps).Head);
         }
 
+        [Op, Closures(UnsignedInts)]
         public static Vector128<T> vdecrements<T>(N128 n, T first, params Swap[] swaps)
             where T : unmanaged
         {
@@ -162,6 +165,7 @@ namespace Z0
         /// <param name="first">The value of the first component</param>
         /// <param name="step">The distance between adjacent components</param>
         /// <typeparam name="T">The primal component type</typeparam>
+        [Op, Closures(UnsignedInts)]
         public static Vector128<T> vincrements<T>(N128 n, T first, T step)
             where T : unmanaged
         {
@@ -183,6 +187,7 @@ namespace Z0
         /// <param name="first">The value of the first component</param>
         /// <param name="step">The distance between adjacent components</param>
         /// <typeparam name="T">The primal component type</typeparam>
+        [Op, Closures(UnsignedInts)]
         public static Vector256<T> vincrements<T>(N256 n, T first, T step)
             where T : unmanaged
         {
@@ -199,6 +204,7 @@ namespace Z0
             return vload(n, in mem);
         }
 
+        [Op, Closures(UnsignedInts)]
         public static Vector128<T> vincrements<T>(N128 n, T first, params Swap[] swaps)
             where T : unmanaged
         {
@@ -215,6 +221,7 @@ namespace Z0
             return vload(n, in data.Swap(swaps).Head);
         }
 
+        [Op, Closures(UnsignedInts)]
         public static Vector256<T> vincrements<T>(N256 n, T first, params Swap[] swaps)
             where T : unmanaged
         {
@@ -232,6 +239,7 @@ namespace Z0
         }
 
 
+        [MethodImpl(Inline), Op]
         public static Vector256<byte> DefineLaneMergeData8u()
         {
             //<lo = i,i+2,i+4 ... n-2 | hi = i+1, i + 3, i+5, ... n-1 >
@@ -243,6 +251,7 @@ namespace Z0
                 );
         }
 
+        [MethodImpl(Inline), Op]
         public static Span<byte> DefineLaneMergeData16u()
         {
             //<lo = i,i+2,i+4 ... n-2 | hi = i+1, i + 3, i+5, ... n-1 >
@@ -261,6 +270,7 @@ namespace Z0
         /// Creates a shuffle mask that zeroes-out ever-other vector component
         /// </summary>
         /// <typeparam name="T">The primal component type</typeparam>
+        [Op, Closures(UnsignedInts)]
         public static Span<T> DefineClearAlt<T>()
             where T : unmanaged
         {

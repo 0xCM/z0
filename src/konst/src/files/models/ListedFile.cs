@@ -14,17 +14,9 @@ namespace Z0
     /// </summary>
     public readonly struct ListedFile : ITextual
     {
-        public readonly uint Index;
+        public uint Index {get;}
 
-        public readonly FS.FilePath Path;
-
-        [MethodImpl(Inline)]
-        public static implicit operator ListedFile((uint index, FS.FilePath path) src)
-            => new ListedFile(src.index, src.path);
-
-        [MethodImpl(Inline)]
-        public static implicit operator ListedFile((int index, FS.FilePath path) src)
-            => new ListedFile(src.index, src.path);
+        public FS.FilePath Path {get;}
 
         [MethodImpl(Inline)]
         public ListedFile(uint index, FS.FilePath path)
@@ -42,6 +34,17 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => ApiFiles.format(this);
+            => FS.format(this);
+
+        public override string ToString()
+            => Format();
+
+        [MethodImpl(Inline)]
+        public static implicit operator ListedFile((uint index, FS.FilePath path) src)
+            => new ListedFile(src.index, src.path);
+
+        [MethodImpl(Inline)]
+        public static implicit operator ListedFile((int index, FS.FilePath path) src)
+            => new ListedFile(src.index, src.path);
     }
 }

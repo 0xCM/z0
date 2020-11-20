@@ -21,6 +21,9 @@ namespace Z0
         Files Clear(string id);
 
         IEnumerable<FS.FolderPath> Directories()
-            => ApiFiles.directories(Root, true);
+        {
+            foreach(var path in Root.SubDirs(true))
+                yield return FS.dir(path.Name);
+        }
     }
 }

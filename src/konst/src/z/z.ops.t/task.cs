@@ -7,13 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Threading.Tasks;
-    using System.Diagnostics;
 
     using static Konst;
 
     partial struct z
     {
-
         /// <summary>
         /// Executes a worker that computes a value within the context of a new task
         /// </summary>

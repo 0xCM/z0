@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// Defines operators over square bit domains
     /// </summary>
-    [ApiHost("api")]
+    [ApiHost]
     public partial class LogicSquare
     {
         static W256 w => default;
@@ -26,7 +26,7 @@ namespace Z0
         const NumericKind Closure = UnsignedInts;
     }
 
-    [ApiHost("ops")]
+    [ApiHost]
     public partial class LogicSquared
     {
         const NumericKind Closure = UnsignedInts;

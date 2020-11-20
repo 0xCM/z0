@@ -6,19 +6,30 @@ namespace Z0
 {
     using System;
 
-    public class ApiTypeAttribute : ApiPartAttribute
+    /// <summary>
+    /// Marks a type as an api data type
+    /// </summary>
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct)]
+    public class ApiTypeAttribute : ApiProviderAttribute
     {
-        public ApiTypeId Id{get;}
-
-        public ApiTypeAttribute(ApiTypeId data)
-            : base((ulong)data)
-        {
-            Id = data;
-        }
+        public string Name {get;}
 
         public ApiTypeAttribute()
+            : base(ApiProviderKind.DataType)
         {
+            Name = string.Empty;
+        }
 
+        public ApiTypeAttribute(string name)
+            : base(ApiProviderKind.DataType)
+        {
+            Name = name;
+        }
+
+        public ApiTypeAttribute(string name, bool global)
+            : base(ApiProviderKind.DataType, global)
+        {
+            Name = name;
         }
     }
 }

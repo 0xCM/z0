@@ -11,21 +11,12 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public struct WfConfigInfo
-    {
-        public PartId Controller;
-
-        public string[] Args;
-
-        public FS.FilePath AppConfigPath;
-
-        public PartId[] Parts;
-
-        public WfLogConfig LogConfig;
-    }
-
     partial class WfShell
     {
+        [MethodImpl(Inline)]
+        public static WfTokenizer tokenizer()
+            => new WfTokenizer();
+
         [Op]
         public static IWfShell create(string[] args, bool verbose = false)
         {

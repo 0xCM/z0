@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    [ApiDataType(ApiNames.ClrAssembly, true)]
+    [ApiType(ApiNames.ClrAssembly, true)]
     public readonly struct ClrAssembly : IClrRuntimeObject<ClrAssembly,Assembly>
     {
         public Assembly Definition {get;}

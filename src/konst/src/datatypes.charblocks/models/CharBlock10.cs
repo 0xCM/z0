@@ -45,5 +45,10 @@ namespace Z0
         /// The block capacity
         /// </summary>
         public const ushort CharCount = 10;
+
+        /// <summary>
+        /// The size of the block, in bytes
+        /// </summary>
+        public const uint Size = CharCount * 2;
     }
 }

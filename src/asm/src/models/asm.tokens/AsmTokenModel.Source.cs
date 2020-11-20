@@ -14,7 +14,7 @@ namespace Z0
     using P = AsmTokenMeaning;
     using V = AsmTokenValues;
 
-    [ApiDataType]
+    [ApiType]
     public readonly struct AsmTokens
     {
         public static TokenRecord None => Tokens.record(T.None, I.None, V.None, P.None);

@@ -21,11 +21,10 @@ namespace Z0
         /// Specifies whether the instance is responsible for handle lifecycle management
         /// </summary>
         bool IsOwner {get;}
-
     }
 
     /// <summary>
-    /// Characterizes a <see cref='ISystemHandle'/> reification
+    /// Characterizes a concrete <see cref='ISystemHandle'/>
     /// </summary>
     /// <typeparam name="T">The reifying type</typeparam>
     [Free]

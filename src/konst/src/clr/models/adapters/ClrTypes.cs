@@ -16,7 +16,7 @@ namespace Z0
     using V = System.Type;
     using K = ClrArtifactKey;
 
-    [ApiDataType(ApiNames.ClrTypes, true)]
+    [ApiType(ApiNames.ClrTypes, true)]
     public readonly struct ClrTypes
     {
         readonly Storage Data;

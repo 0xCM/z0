@@ -24,6 +24,9 @@ namespace Z0
         /// </summary>
         public CharBlock4 Lo;
 
+        /// <summary>
+        /// The upper content
+        /// </summary>
         public CharBlock1 Hi;
 
         /// <summary>
@@ -45,11 +48,16 @@ namespace Z0
         public static implicit operator CharBlock5(string src)
             => api.init(src, out CharBlock5 dst);
 
+        public static CharBlock5 Empty => RP.Spaced5;
+
         /// <summary>
         /// The block capacity
         /// </summary>
         public const ushort CharCount = 5;
 
-        public static CharBlock5 Empty => RP.Spaced5;
+        /// <summary>
+        /// The size of the block, in bytes
+        /// </summary>
+        public const uint Size = CharCount * 2;
     }
 }

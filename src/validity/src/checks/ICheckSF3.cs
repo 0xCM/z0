@@ -53,7 +53,7 @@ namespace Z0
         {
             var casename = ApiUri.TestCase(Context.HostType, g);
             var succeeded = true;
-            var clock = counter();
+            var clock = Time.counter(false);
 
             T0 next_x()
                 => ExcludeZero ? Random.NonZ<T0>() : Random.Next<T0>();
@@ -94,7 +94,7 @@ namespace Z0
             var casename = ApiUri.TestCase(Context.HostType, $"{g.Id}_span");
             var succeeded = true;
             var count = RepCount;
-            var clock = counter();
+            var clock = Time.counter(false);
 
             var inA = (ExcludeZero ? Random.NonZeroSpan<T0>(count) : Random.Span<T0>(count)).ReadOnly();
             ref readonly var inATarget = ref first(inA);

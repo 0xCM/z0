@@ -5,7 +5,7 @@
 namespace Z0.Mkl.Test
 {
     using System;
-    
+
     public class tvml_mul : t_mkl<tvml_mul>
     {
         public void vMulF32()
@@ -14,7 +14,7 @@ namespace Z0.Mkl.Test
             var rhs = RVec<float>();
             var dst1 = RowVectors.blockalloc<float>(lhs.Length);
             mkl.mul(lhs,rhs, ref dst1);
-            
+
             var dst2 = lhs.Replicate();
             gspan.mul(lhs,rhs, dst2.Unblocked);
             Claim.Require(dst1 == dst2);
@@ -26,7 +26,7 @@ namespace Z0.Mkl.Test
             var rhs = Random.VectorBlock<N256,double>();
             var dst1 = RowVectors.blockalloc<N256,double>();
             mkl.mul(lhs,rhs, ref dst1);
-            
+
             var dst2 = lhs.Replicate();
             gspan.mul(lhs.Unsized,rhs.Unsized, dst2.Unsized);
             Claim.Require(dst1 == dst2);
@@ -38,22 +38,20 @@ namespace Z0.Mkl.Test
             var rhs1 = RVec<double>(samples);
             var dst1 = RowVectors.blockalloc<double>(samples);
 
-
-            var sw1 = stopwatch();
+            var sw1 = Time.stopwatch(true);
             for(var i=0; i<cycles; i++)
                 gspan.mul(lhs1,rhs1, dst1.Unblocked);
-            var time1 = BenchmarkRecord.Define(cycles, snapshot(sw1), "gmath");
-
+            var time1 = BenchmarkRecord.Define(cycles, Time.snapshot(sw1), "gmath");
 
             var lhs2 = lhs1.Replicate();
             var rhs2 = rhs1.Replicate();
             var dst2 = dst1.Replicate();
 
-            var sw2 = stopwatch();
+            var sw2 = Time.stopwatch(true);
             for(var i=0; i<cycles; i++)
                 mkl.mul(lhs2, rhs2, ref dst2);
-            var time2 = BenchmarkRecord.Define(cycles, snapshot(sw2), "mkl");
-            
+            var time2 = BenchmarkRecord.Define(cycles, Time.snapshot(sw2), "mkl");
+
             return (time1,time2);
         }
 
@@ -63,7 +61,6 @@ namespace Z0.Mkl.Test
             var n = Pow2.T08;
             var i = Pow2.T12;
             TracePerf(vMulPerf(n, i).Format());
-            
         }
 
         public void vMulPerf2()
@@ -71,7 +68,6 @@ namespace Z0.Mkl.Test
             var n = Pow2.T08;
             var i = Pow2.T12;
             TracePerf(vMulPerf(n, i).Format());
-            
         }
     }
 }

@@ -11,7 +11,7 @@ namespace Z0.Ice
     using static Konst;
     using static z;
 
-    [ApiDataType]
+    [ApiType]
     public readonly ref struct IceInstructionBits
     {
         [Ignore]

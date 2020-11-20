@@ -14,7 +14,7 @@ namespace Z0
     /// <summary>
     /// Captures and represents <see cref='byte'/> pointer
     /// </summary>
-    [ApiDataType]
+    [ApiType]
     public unsafe struct Ptr8
     {
         public byte* P;

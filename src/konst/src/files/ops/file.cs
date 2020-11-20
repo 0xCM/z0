@@ -20,7 +20,7 @@ namespace Z0
             => FS.file(text.concat(host.Owner.Format(), Chars.Dot, host.Name), ext);
 
         [MethodImpl(Inline), Op]
-        public static FS.FileName file(ApiHostUri host, FS.FileExt a, FS.FileExt b)
+        public static FS.FileName file(ApiHostUri host, FileExt a, FileExt b)
             => FS.file(text.concat(host.Owner.Format(), Chars.Dot, host.Name), a + b);
 
         /// <summary>

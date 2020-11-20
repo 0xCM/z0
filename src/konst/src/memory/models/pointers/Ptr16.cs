@@ -14,7 +14,7 @@ namespace Z0
     /// <summary>
     /// Captures and represents <see cref='ushort'/> pointer
     /// </summary>
-    [ApiDataType]
+    [ApiType]
     public unsafe struct Ptr16
     {
         public ushort* P;

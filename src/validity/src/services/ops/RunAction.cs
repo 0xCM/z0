@@ -15,7 +15,7 @@ namespace Z0
         public Duration RunAction(IUnitTest unit, Action exec)
         {
             var messages = new List<IAppMsg>();
-            var clock = counter(false);
+            var clock = Time.counter(false);
             var casename = TestActionName;
             var control = unit as ITestQueue;
 
@@ -54,7 +54,7 @@ namespace Z0
 
         Duration ExecExplicit(IExplicitTest unit, string hostpath, IList<TestCaseRecord> results)
         {
-            var clock = counter(false);
+            var clock = Time.counter(false);
             var messages = Arrays.empty<IAppMsg>();
             var casename = TestCaseName(unit);
 

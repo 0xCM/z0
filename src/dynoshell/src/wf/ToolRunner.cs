@@ -143,14 +143,14 @@ namespace Z0
             {
                 ref readonly var res = ref skip(resources,i);
                 ref readonly var row = ref skip(rows,i);
-                Wf.RowData(row);
+                Wf.Row(row);
             }
         }
 
         void Show(ListedFiles src)
         {
             for(var i=0; i<src.Count; i++)
-                Wf.RowData(src[i]);
+                Wf.Row(src[i]);
         }
 
         FS.FilePath AppDataPath(FS.FileName file)
@@ -170,7 +170,7 @@ namespace Z0
         void ShowArgs()
         {
             for(var i=0; i<Args.Length; i++)
-                Wf.RowData(Args[i]);
+                Wf.Row(Args[i]);
         }
 
         void ShowTokens()
@@ -222,7 +222,7 @@ namespace Z0
             for(var i=0; i<models.Length; i++)
             {
                 Cmd.render(skip(models,i), buffer);
-                Wf.RowData(buffer.Emit());
+                Wf.Row(buffer.Emit());
             }
         }
 
@@ -273,7 +273,7 @@ namespace Z0
             for(var i=0; i<count; i++)
             {
                 ref readonly var model = ref skip(models,i);
-                Wf.RowData(string.Format("{0,-3} {1}", i, model.DataType.Name));
+                Wf.Row(string.Format("{0,-3} {1}", i, model.DataType.Name));
             }
         }
 

@@ -11,7 +11,7 @@ namespace Z0
 
     using api = ClrQuery;
 
-    [ApiDataType(ApiNames.ClrType, true)]
+    [ApiType(ApiNames.ClrType, true)]
     public readonly struct ClrType : IClrRuntimeType<ClrType>
     {
         public Type Definition {get;}

@@ -33,7 +33,7 @@ namespace Z0
         {
             var casename = ApiUri.TestCase(context.HostType, $"{g.Id}_span");
             var succeeded = true;
-            var clock = counter();
+            var clock = Time.counter(false);
 
             T next_x()
                 => nonz ? context.Random.NonZ<T>() : context.Random.Next<T>();
@@ -67,7 +67,7 @@ namespace Z0
             var casename = ApiUri.TestCase(context.HostType, g);
             var succeeded = true;
             var count = context.RepCount;
-            var clock = counter();
+            var clock = Time.counter(false);
 
             var lhs = (nonz ? context.Random.NonZeroSpan<T>(count) : context.Random.Span<T>(count)).ReadOnly();
             ref readonly var leftIn = ref first(lhs);

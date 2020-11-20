@@ -13,67 +13,6 @@ namespace Z0
 
     using api = CharBlocks;
 
-    [StructLayout(LayoutKind.Sequential)]
-    public struct CharBlock12 : ICharBlock<CharBlock12>
-    {
-        /// <summary>
-        /// The lower content
-        /// </summary>
-        public CharBlock8 Lo;
-
-        /// <summary>
-        /// The upper content
-        /// </summary>
-        public CharBlock4 Hi;
-
-        /// <summary>
-        /// The block content presented as an editable buffer
-        /// </summary>
-        public Span<char> Data
-        {
-            [MethodImpl(Inline)]
-           get => cover<CharBlock12,char>(this, CharCount);
-        }
-
-        [MethodImpl(Inline)]
-        public static implicit operator CharBlock12(string src)
-            => api.init(src, out CharBlock12 dst);
-
-        public const ushort CharCount = 12;
-    }
-
-    /// <summary>
-    /// Defines a character block b with capacity(b) = 13x16u
-    /// </summary>
-    [StructLayout(LayoutKind.Sequential)]
-    public struct CharBlock13 : ICharBlock<CharBlock13>
-    {
-        /// <summary>
-        /// The upper segment
-        /// </summary>
-        public CharBlock12 Lo;
-
-        /// <summary>
-        /// The upper content
-        /// </summary>
-        public CharBlock1 Hi;
-
-        /// <summary>
-        /// The block content presented as an editable buffer
-        /// </summary>
-        public Span<char> Data
-        {
-            [MethodImpl(Inline)]
-           get => cover<CharBlock13,char>(this, CharCount);
-        }
-
-        [MethodImpl(Inline)]
-        public static implicit operator CharBlock13(string src)
-            => api.init(src, out CharBlock13 dst);
-
-        public const ushort CharCount = 13;
-    }
-
     /// <summary>
     /// Defines a character block b with capacity(b) = 14x16u
     /// </summary>
@@ -90,7 +29,27 @@ namespace Z0
         /// </summary>
         public CharBlock7 Hi;
 
+        /// <summary>
+        /// The block content presented as an editable buffer
+        /// </summary>
+        public Span<char> Data
+        {
+            [MethodImpl(Inline)]
+            get => cover<CharBlock14,char>(this, CharCount);
+        }
+
+        [MethodImpl(Inline)]
+        public static implicit operator CharBlock14(string src)
+            => api.init(src, out CharBlock14 dst);
+
+        public static CharBlock14 Empty => RP.Spaced14;
+
         public const ushort CharCount = 14;
+
+        /// <summary>
+        /// The size of the block, in bytes
+        /// </summary>
+        public const uint Size = CharCount * 2;
     }
 
     /// <summary>
@@ -109,11 +68,27 @@ namespace Z0
         /// </summary>
         public CharBlock5 Hi;
 
+        /// <summary>
+        /// The block content presented as an editable buffer
+        /// </summary>
+        public Span<char> Data
+        {
+            [MethodImpl(Inline)]
+            get => cover<CharBlock15,char>(this, CharCount);
+        }
+
         [MethodImpl(Inline)]
         public static implicit operator CharBlock15(string src)
             => api.init(src, out CharBlock15 dst);
 
+        public static CharBlock15 Empty => RP.Spaced15;
+
         public const ushort CharCount = 15;
+
+        /// <summary>
+        /// The size of the block, in bytes
+        /// </summary>
+        public const uint Size = CharCount * 2;
     }
 
     /// <summary>
@@ -132,6 +107,15 @@ namespace Z0
         /// </summary>
         public CharBlock8 Hi;
 
+        /// <summary>
+        /// The block content presented as an editable buffer
+        /// </summary>
+        public Span<char> Data
+        {
+            [MethodImpl(Inline)]
+            get => cover<CharBlock16,char>(this, CharCount);
+        }
+
         [MethodImpl(Inline)]
         public static implicit operator CharBlock16(string src)
             => api.init(src, out CharBlock16 dst);
@@ -139,31 +123,11 @@ namespace Z0
         public static CharBlock16 Empty => RP.Spaced16;
 
         public const ushort CharCount = 16;
-    }
-
-    /// <summary>
-    /// Defines a character block b with capacity(b) = 32x16u
-    /// </summary>
-    [StructLayout(LayoutKind.Sequential)]
-    public struct CharBlock32  : ICharBlock<CharBlock32>
-    {
-        /// <summary>
-        /// The lower content
-        /// </summary>
-        public CharBlock16 Lo;
 
         /// <summary>
-        /// The upper content
+        /// The size of the block, in bytes
         /// </summary>
-        public CharBlock16 Hi;
-
-        [MethodImpl(Inline)]
-        public static implicit operator CharBlock32(string src)
-            => api.init(src, out CharBlock32 dst);
-
-        public static CharBlock32 Empty => RP.Spaced32;
-
-        public const ushort CharCount = 32;
+        public const uint Size = CharCount * 2;
     }
 
     /// <summary>
@@ -179,6 +143,12 @@ namespace Z0
 
         public CharBlock32 Hi;
 
+        public Span<char> Data
+        {
+            [MethodImpl(Inline)]
+            get => cover<CharBlock64,char>(this, CharCount);
+        }
+
         [MethodImpl(Inline)]
         public static implicit operator CharBlock64(string src)
             => api.init(src, out CharBlock64 dst);
@@ -186,6 +156,11 @@ namespace Z0
         public static CharBlock64 Empty => RP.Spaced64;
 
         public const ushort CharCount = 64;
+
+        /// <summary>
+        /// The size of the block, in bytes
+        /// </summary>
+        public const uint Size = CharCount * 2;
     }
 
     /// <summary>
@@ -204,45 +179,24 @@ namespace Z0
         /// </summary>
         public CharBlock64 Hi;
 
+        public Span<char> Data
+        {
+            [MethodImpl(Inline)]
+            get => cover<CharBlock128,char>(this, CharCount);
+        }
+
         [MethodImpl(Inline)]
         public static implicit operator CharBlock128(string src)
             => api.init(src, out CharBlock128 dst);
 
+        public static CharBlock128 Empty => RP.Spaced128;
+
         public const ushort CharCount = 128;
 
-    }
-
-    /// <summary>
-    /// Defines a character block b with capacity(b) = 256x16u
-    /// </summary>
-    [StructLayout(LayoutKind.Sequential)]
-    public struct CharBlock256 : ICharBlock<CharBlock256>
-    {
         /// <summary>
-        /// The lower content
+        /// The size of the block, in bytes
         /// </summary>
-        public CharBlock128 Lo;
-
-        /// <summary>
-        /// The upper content
-        /// </summary>
-        public CharBlock128 Hi;
-
-        [MethodImpl(Inline)]
-        public static implicit operator Pair<CharBlock128>(in CharBlock256 src)
-            => pair(src.Lo, src.Hi);
-
-        [MethodImpl(Inline)]
-        public static implicit operator CharBlock256(in Pair<CharBlock128> src)
-        {
-            var dst = default(CharBlock256);
-            dst.Lo = src.Left;
-            dst.Hi = src.Right;
-            return dst;
-        }
-
-        public const ushort CharCount = 256;
+        public const uint Size = CharCount * 2;
     }
-
 
 }

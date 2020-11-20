@@ -35,11 +35,10 @@ namespace Z0
         public CmdResult Route(EmitHexIndexCmd cmd)
         {
             var dst = Wf.Db().Table("apihex.index");
-            var descriptors = ApiCode.BlockDescriptors(Wf);
-            var count= ApiCode.emit(descriptors, dst);
+            var descriptors = ApiArchives.BlockDescriptors(Wf);
+            var count= ApiArchives.emit(descriptors, dst);
             Wf.EmittedTable<ApiCodeDescriptor>(count, dst);
             return Cmd.ok(cmd);
         }
-
     }
 }

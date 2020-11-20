@@ -29,7 +29,7 @@ namespace Z0.Asm
             Uri = host;
             ArchiveRoot = root;
             AsmFormatter = formatter;
-            HostArchive = HostCaptureArchive.create(root, host);
+            HostArchive = ApiArchives.capture(FS.dir(root.Name), host);
             CilFormatter =  Cil.formatter();
         }
 
@@ -49,7 +49,7 @@ namespace Z0.Asm
         public Option<FilePath> SaveHexImm(OpIdentity id, AsmRoutine[] src, bool append)
         {
             var path = HostArchive.HexImmPath(Uri.Owner, Uri, id);
-            ApiCode.save(src.Map(x => x.Code), FS.path(path.Name),append);
+            ApiArchives.save(src.Map(x => x.Code), FS.path(path.Name),append);
             return path;
         }
     }

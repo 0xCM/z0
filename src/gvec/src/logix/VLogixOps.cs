@@ -17,6 +17,7 @@ namespace Z0
     using BCK = BinaryComparisonApiClass;
     using BSK = BitShiftApiClass;
 
+    [ApiHost]
     public class VLogixOps
     {
         /// <summary>

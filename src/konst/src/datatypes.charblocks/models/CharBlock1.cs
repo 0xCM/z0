@@ -12,7 +12,6 @@ namespace Z0
     using static z;
 
     using api = CharBlocks;
-    using B = CharBlock1;
 
     /// <summary>
     /// Defines a character block b with capacity(b) = 1x16u
@@ -53,5 +52,10 @@ namespace Z0
         /// The block capacity
         /// </summary>
         public const ushort CharCount = 1;
+
+        /// <summary>
+        /// The size of the block, in bytes
+        /// </summary>
+        public const uint Size = CharCount * 2;
     }
 }

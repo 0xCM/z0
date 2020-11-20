@@ -14,8 +14,8 @@ namespace Z0
         public static CmdResult exec(IWfShell wf, EmitHexIndexCmd cmd)
         {
             var dst = wf.Db().Table("apihex.index");
-            var descriptors = ApiCode.BlockDescriptors(wf);
-            var count= ApiCode.emit(descriptors, dst);
+            var descriptors = ApiArchives.BlockDescriptors(wf);
+            var count= ApiArchives.emit(descriptors, dst);
             wf.EmittedTable<ApiCodeDescriptor>(count, dst);
             return Win();
         }

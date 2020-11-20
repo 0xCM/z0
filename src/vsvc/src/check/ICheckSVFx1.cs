@@ -40,9 +40,8 @@ namespace Z0
             var cells = vcount(w,t);
             var succeeded = true;
             var casename = CaseName(f);
-            var clock = counter();
+            var clock = Time.counter(true);
 
-            clock.Start();
             try
             {
                 for(var i=0; i<RepCount; i++)

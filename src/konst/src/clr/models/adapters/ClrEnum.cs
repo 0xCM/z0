@@ -12,7 +12,7 @@ namespace Z0
 
     using static Konst;
 
-    [ApiDataType(ApiNames.ClrEnum, true)]
+    [ApiType(ApiNames.ClrEnum, true)]
     public readonly struct ClrEnum
     {
         public Type Definition {get;}

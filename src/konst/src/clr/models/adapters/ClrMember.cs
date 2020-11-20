@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using static Konst;
 
-    [ApiDataType(ApiNames.ClrMember, true)]
+    [ApiType(ApiNames.ClrMember, true)]
     public readonly struct ClrMember : IClrRuntimeMember<ClrMember, MemberInfo>
     {
         [MethodImpl(Inline)]

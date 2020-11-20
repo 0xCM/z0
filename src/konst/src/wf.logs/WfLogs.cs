@@ -23,6 +23,10 @@ namespace Z0
             => new WfEventLog(config);
 
         [MethodImpl(Inline), Op]
+        public static IWfEventSink term(string src)
+            => new WfTermLog(src);
+
+        [MethodImpl(Inline), Op]
         public static FS.FolderPath root(string area)
             => WfEnv.dbRoot() + FS.folder("logs") + FS.folder(area);
 

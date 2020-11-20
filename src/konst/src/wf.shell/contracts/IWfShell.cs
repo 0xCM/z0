@@ -352,19 +352,13 @@ namespace Z0
         void ProcessedFile<T,M>(FS.FilePath src, T kind, M metric)
             => Raise(fileProcessed(Host, src, kind, metric, Ct));
 
-        void Row<T>(T content)
-            where T : ITextual
-                => Raise(rows(content));
-
-        void RowData<T>(T data)
+        void Row<T>(T data)
             => Raise(row(data));
 
         void Rows<T>(params T[] src)
-            where T : ITextual
                 => Rows(@readonly(src));
 
         void Rows<T>(ReadOnlySpan<T> src)
-            where T : ITextual
         {
             if(src.Length != 0)
             {
@@ -374,7 +368,7 @@ namespace Z0
                 for(var i=0; i<count; i++)
                 {
                     ref readonly var row = ref skip(src,i);
-                    buffer.AppendLine(row.Format());
+                    buffer.AppendLine(row is ITextual t ? t.Format() : row.ToString());
                 }
                 Raise(status(Host, buffer.Emit(), Ct));
             }

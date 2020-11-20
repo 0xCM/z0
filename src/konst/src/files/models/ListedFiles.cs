@@ -60,6 +60,12 @@ namespace Z0
             get => ref Data.First;
         }
 
+        public string Format()
+            => FS.format(this);
+
+        public override string ToString()
+            => Format();
+
         [MethodImpl(Inline)]
         public static implicit operator ListedFiles(ListedFile[] src)
             => new ListedFiles(src);

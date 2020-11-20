@@ -21,3 +21,57 @@ System.Exception: Failure starting Process
    at Z0.CmdProcess..ctor(IWfShell wf, CmdLine commandLine, CmdProcessOptions options) in j:\dev\projects\z0\src\konst\src\wf.cmd\services\CmdProcess.cs:line 225
    at Z0.App.Main(String[] args) in J:\dev\projects\z0\src\dynoshell\src\App.cs:line 21
 
+Failure trapped by Main at j:\dev\projects\z0\src\dynoshell\src\App.cs 49
+System.InvalidOperationException: No process is associated with this object.
+   at System.Diagnostics.Process.EnsureState(State state)
+   at System.Diagnostics.Process.EnsureState(State state)
+   at System.Diagnostics.Process.GetProcessHandle(Int32 access, Boolean throwIfExited)
+   at System.Diagnostics.Process.WaitForExitCore(Int32 milliseconds)
+   at Z0.App.Main(String[] args) in j:\dev\projects\z0\src\dynoshell\src\App.cs:line 38
+
+Failure trapped by Main at J:\dev\projects\z0\src\dynoshell\src\App.cs 49
+System.InvalidOperationException: No process is associated with this object.
+   at System.Diagnostics.Process.EnsureState(State state)
+   at System.Diagnostics.Process.EnsureState(State state)
+   at System.Diagnostics.Process.GetProcessHandle(Int32 access, Boolean throwIfExited)
+   at System.Diagnostics.Process.WaitForExitCore(Int32 milliseconds)
+   at Z0.App.Main(String[] args) in J:\dev\projects\z0\src\dynoshell\src\App.cs:line 38
+
+Failure trapped by Main at J:\dev\projects\z0\src\dynoshell\src\App.cs 49
+System.InvalidOperationException: No process is associated with this object.
+   at System.Diagnostics.Process.EnsureState(State state)
+   at System.Diagnostics.Process.EnsureState(State state)
+   at System.Diagnostics.Process.GetProcessHandle(Int32 access, Boolean throwIfExited)
+   at System.Diagnostics.Process.WaitForExitCore(Int32 milliseconds)
+   at Z0.App.Main(String[] args) in J:\dev\projects\z0\src\dynoshell\src\App.cs:line 38
+
+Failure trapped by Main at J:\dev\projects\z0\src\dynoshell\src\App.cs 45
+System.InvalidOperationException: RunSynchronously may not be called on a task not bound to a delegate, such as the task returned from an asynchronous method.
+   at System.Threading.Tasks.Task.InternalRunSynchronously(TaskScheduler scheduler, Boolean waitForCompletion)
+   at Z0.Interpreter`1.WaitForExit() in J:\dev\projects\z0\src\dynoshell\src\core\InterpreterH.cs:line 186
+   at Z0.App.Main(String[] args) in J:\dev\projects\z0\src\dynoshell\src\App.cs:line 34
+
+EventLogError: Failure occurred at LogStatus j:\dev\projects\z0\src\konst\src\wf.logs\services\WfProcLog.cs 45
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Z0.FS.write(String src, FileStream dst, Encoding encoding) in j:\dev\projects\z0\src\konst\src\files\ops\stream.cs:line 37
+   at Z0.WfProcLog.LogStatus(String content) in j:\dev\projects\z0\src\konst\src\wf.logs\services\WfProcLog.cs:line 41
+
+EventLogError: Failure occurred at LogStatus j:\dev\projects\z0\src\konst\src\wf.logs\services\WfProcLog.cs 45
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Z0.FS.write(String src, FileStream dst, Encoding encoding) in j:\dev\projects\z0\src\konst\src\files\ops\stream.cs:line 37
+   at Z0.WfProcLog.LogStatus(String content) in j:\dev\projects\z0\src\konst\src\wf.logs\services\WfProcLog.cs:line 41
+
+EventLogError: Failure occurred at LogStatus j:\dev\projects\z0\src\konst\src\wf.logs\services\WfProcLog.cs 45
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Z0.FS.write(String src, FileStream dst, Encoding encoding) in j:\dev\projects\z0\src\konst\src\files\ops\stream.cs:line 37
+   at Z0.WfProcLog.LogStatus(String content) in j:\dev\projects\z0\src\konst\src\wf.logs\services\WfProcLog.cs:line 41
+
+EventLogError: Failure occurred at LogStatus j:\dev\projects\z0\src\konst\src\wf.logs\services\WfProcLog.cs 45
+System.ArgumentNullException: String reference not set to an instance of a String. (Parameter 's')
+   at System.Text.Encoding.GetBytes(String s)
+   at Z0.FS.write(String src, FileStream dst, Encoding encoding) in j:\dev\projects\z0\src\konst\src\files\ops\stream.cs:line 37
+   at Z0.WfProcLog.LogStatus(String content) in j:\dev\projects\z0\src\konst\src\wf.logs\services\WfProcLog.cs:line 41
+

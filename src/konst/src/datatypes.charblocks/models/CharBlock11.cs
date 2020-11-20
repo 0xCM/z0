@@ -13,7 +13,6 @@ namespace Z0
 
     using api = CharBlocks;
 
-
     [StructLayout(LayoutKind.Sequential)]
     public struct CharBlock11 : ICharBlock<CharBlock11>
     {
@@ -43,5 +42,10 @@ namespace Z0
         public static CharBlock11 Empty => RP.Spaced11;
 
         public const ushort CharCount = 11;
+
+        /// <summary>
+        /// The size of the block, in bytes
+        /// </summary>
+        public const uint Size = CharCount * 2;
     }
 }

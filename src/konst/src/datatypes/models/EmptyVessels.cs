@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
     using static ReflectionFlags;
 
-    [ApiDataType]
+    [ApiType]
     public readonly struct EmptyVessels
     {
         const byte _EmptyField = 0;
