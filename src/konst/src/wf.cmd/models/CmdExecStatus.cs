@@ -9,7 +9,7 @@ namespace Z0
     [Table(TableId, FieldCount)]
     public struct CmdExecStatus
     {
-        public const string TableId = "tool.status";
+        public const string TableId = "cmd.status";
 
         public const byte FieldCount = 6;
 

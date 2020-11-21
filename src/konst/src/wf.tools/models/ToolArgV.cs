@@ -25,7 +25,7 @@ namespace Z0
         /// <summary>
         /// The option name
         /// </summary>
-        public ToolOption Option {get;}
+        public CmdOption Option {get;}
 
         /// <summary>
         /// The option value
@@ -33,7 +33,7 @@ namespace Z0
         public V Value {get;}
 
         [MethodImpl(Inline)]
-        public ToolArg(ushort position, CmdArgProtocol protocol, ToolOption option, V value)
+        public ToolArg(ushort position, CmdArgProtocol protocol, CmdOption option, V value)
         {
             Position = position;
             Protocol = protocol;

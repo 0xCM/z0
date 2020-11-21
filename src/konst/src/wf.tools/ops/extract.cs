@@ -14,7 +14,7 @@ namespace Z0
     partial struct Tooling
     {
         [Projector]
-        static ref ToolOption extract(MemberInfo src, out ToolOption dst)
+        static ref CmdOption extract(MemberInfo src, out CmdOption dst)
         {
             var tag = src.RequiredTag<SlotAttribute>();
             var purpose = src.Tag<MeaningAttribute>().MapValueOrElse(t => (string)t.Content, () => EmptyString);

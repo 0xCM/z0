@@ -4,19 +4,14 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
-
-    public readonly struct ToolVerbInfo<T>
-        where T : struct
+    /// <summary>
+    /// Defines floating-point operations
+    /// </summary>
+    [ApiHost]
+    public partial class fmath
     {
-        public ToolId Tool {get;}
-
-        public ToolVerb Verb {get;}
-
-        public T Spec {get;}
+        internal const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
     }
 }

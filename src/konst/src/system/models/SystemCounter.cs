@@ -66,6 +66,16 @@ namespace Z0
         }
 
         /// <summary>
+        /// Resets and restarts the clock
+        /// </summary>
+        [MethodImpl(Inline)]
+        public void Restart()
+        {
+            Reset();
+            Start();
+        }
+
+        /// <summary>
         /// Gets the total number of timer ticks
         /// </summary>
         public readonly long Count

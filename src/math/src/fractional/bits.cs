@@ -7,9 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
-    
-    using static math;    
-    
+
+    using static math;
+
     partial class fmath
     {
         [MethodImpl(Inline), Op]
@@ -29,9 +29,8 @@ namespace Z0
             => z.skip(z.@as<decimal,ulong>(src), 1);
     }
 
-
     [StructLayout(LayoutKind.Explicit, Size = 4)]
-    public struct F32Bits
+    public struct BitsF32
     {
         public const uint SignMask = 0x7fffffff;
 
@@ -42,15 +41,15 @@ namespace Z0
         public uint Bits;
 
         [MethodImpl(Inline)]
-        public F32Bits(float src)
+        public BitsF32(float src)
         {
             Bits = 0;
             Data = src;
-        }        
+        }
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 8)]
-    public struct F64Bits
+    public struct BitsF64
     {
         public const ulong SignMask = 0x7fffffffffffffff;
 
@@ -61,15 +60,15 @@ namespace Z0
         public ulong Bits;
 
         [MethodImpl(Inline)]
-        public F64Bits(double src)
+        public BitsF64(double src)
             : this()
         {
             Data = src;
-        }    
-    }    
+        }
+    }
 
     [StructLayout(LayoutKind.Explicit, Size = 16)]
-    public struct F128Bits
+    public struct BitsF128
     {
         [FieldOffset(0)]
         public decimal Data;
@@ -81,10 +80,10 @@ namespace Z0
         public ulong HiBits;
 
         [MethodImpl(Inline)]
-        public F128Bits(decimal src)
+        public BitsF128(decimal src)
             : this()
         {
             Data = src;
-        }    
-    }        
+        }
+    }
 }

@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    
+
     partial class math
     {
         /// <summary>
@@ -82,6 +82,5 @@ namespace Z0
         [MethodImpl(Inline), Clamp]
         public static ulong clamp(ulong src, ulong max)
             => src > max ? max : src;
-
     }
 }

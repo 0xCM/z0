@@ -12,11 +12,11 @@ namespace Z0
     partial struct Tooling
     {
         [MethodImpl(Inline), Factory]
-        public static ToolArg arg(ushort position, CmdArgProtocol protocol, ToolOption option, string value)
+        public static ToolArg arg(ushort position, CmdArgProtocol protocol, CmdOption option, string value)
             => new ToolArg(position, protocol, option,value);
 
         [MethodImpl(Inline), Factory]
-        public static ToolArg<T> arg<T>(ushort position, CmdArgProtocol protocol, ToolOption option, T value)
+        public static ToolArg<T> arg<T>(ushort position, CmdArgProtocol protocol, CmdOption option, T value)
             => new ToolArg<T>(position, protocol, option, value);
 
         [MethodImpl(Inline)]

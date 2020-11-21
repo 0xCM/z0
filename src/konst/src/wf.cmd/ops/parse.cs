@@ -44,7 +44,6 @@ namespace Z0
             }
         }
 
-
         [Op]
         public static ParseResult<CmdSpec> parse(string src, string delimiter = EmptyString, char specifier = ' ')
         {

@@ -9,24 +9,22 @@ namespace Z0
 
     using static Konst;
 
-    public struct CmdModels
+    public struct CmdDescriptors
     {
-        IndexedSeq<CmdModel> Data;
+        IndexedSeq<CmdDescriptor> Data;
 
         [MethodImpl(Inline)]
-        public CmdModels(CmdModel[] src)
-        {
-            Data = src;
-        }
+        public CmdDescriptors(CmdDescriptor[] src)
+            => Data = src;
 
-        [MethodImpl(Inline)]
-        public static implicit operator CmdModels(CmdModel[] src)
-            => new CmdModels(src);
-
-        public Span<CmdModel> Terms
+        public Span<CmdDescriptor> Terms
         {
             [MethodImpl(Inline)]
             get => Data.Terms;
         }
+
+        [MethodImpl(Inline)]
+        public static implicit operator CmdDescriptors(CmdDescriptor[] src)
+            => new CmdDescriptors(src);
     }
 }

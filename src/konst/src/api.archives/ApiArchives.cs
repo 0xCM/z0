@@ -36,12 +36,12 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static ApiCodeArchive hex(IWfShell wf)
-            => new ApiCodeArchive(wf);
+        public static ApiHexArchive hex(IWfShell wf)
+            => new ApiHexArchive(wf);
 
         [MethodImpl(Inline), Op]
-        public static ApiCodeArchive hex(FS.FolderPath root)
-            => new ApiCodeArchive(root);
+        public static ApiHexArchive hex(FS.FolderPath root)
+            => new ApiHexArchive(root);
 
         [MethodImpl(Inline), Op]
         public static ApiCodeBlock[] hexblocks(IWfShell wf, ApiHostUri host)
@@ -104,22 +104,50 @@ namespace Z0
 
         [Op]
         public static ApiCodeDescriptor[] BlockDescriptors(IWfShell wf)
+            => BlockDescriptors(wf, wf.Api.PartIdentities);
+
+        // {
+        //     var archive = ApiArchives.hex(wf);
+        //     var files = @readonly(archive.List().Storage);
+        //     var dst = list<ApiCodeDescriptor>();
+        //     var count = files.Length;
+        //     for(var i=0u; i<count; i++)
+        //     {
+        //         ref readonly var file = ref skip(files,i);
+        //         var content = @readonly(archive.Read(file.Path));
+        //         var kBlock = content.Length;
+        //         var buffer = alloc<ApiCodeDescriptor>(kBlock);
+        //         var target = span(buffer);
+        //         for(var j=0u; j<kBlock; j++)
+        //             store(skip(content,j), ref seek(target,j));
+        //         dst.AddRange(buffer);
+        //     }
+        //     return dst.OrderBy(x => x.Base).ToArray();
+        // }
+
+
+        [Op]
+        public static ApiCodeDescriptor[] BlockDescriptors(IWfShell wf, params PartId[] parts)
         {
             var archive = ApiArchives.hex(wf);
-            var files = @readonly(archive.List().Storage);
-            var dst = list<ApiCodeDescriptor>();
-            var count = files.Length;
-            for(var i=0u; i<count; i++)
+            var dst  = list<ApiCodeDescriptor>();
+            foreach(var part in parts)
             {
-                ref readonly var file = ref skip(files,i);
-                var content = @readonly(archive.Read(file.Path));
-                var kBlock = content.Length;
-                var buffer = alloc<ApiCodeDescriptor>(kBlock);
-                var target = span(buffer);
-                for(var j=0u; j<kBlock; j++)
-                    store(skip(content,j), ref seek(target,j));
-                dst.AddRange(buffer);
+                var files = @readonly(archive.PartFiles(part));
+                var count = files.Length;
+                for(var i=0u; i<count; i++)
+                {
+                    ref readonly var file = ref skip(files,i);
+                    var content = @readonly(archive.Read(file));
+                    var kBlock = content.Length;
+                    var buffer = alloc<ApiCodeDescriptor>(kBlock);
+                    var target = span(buffer);
+                    for(var j=0u; j<kBlock; j++)
+                        store(skip(content,j), ref seek(target,j));
+                    dst.AddRange(buffer);
+                }
             }
+
             return dst.OrderBy(x => x.Base).ToArray();
         }
 

@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
-    using System.Runtime.Intrinsics.X86;
 
     using static System.Runtime.Intrinsics.X86.Bmi2;
     using static System.Runtime.Intrinsics.X86.Bmi2.X64;
@@ -28,7 +26,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static unsafe ulong mullo(ulong x, ulong y)
         {
-            var lo = 0ul;            
+            var lo = 0ul;
             MultiplyNoFlags(x,y, &lo);
             return lo;
         }

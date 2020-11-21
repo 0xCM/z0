@@ -9,6 +9,7 @@ namespace Z0
     using System.Reflection;
 
     using static Konst;
+
     using api = Cmd;
 
     [ApiHost]
@@ -30,8 +31,12 @@ namespace Z0
         public static EmitResourceDataCmd EmitResourceData(this ICmdCatalog wf)
             => default;
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static EmitAsmSymbolsCmd EmitAsmSymbols(this ICmdCatalog wf)
+            => default;
+
+        [MethodImpl(Inline), Op]
+        public static EmitAsmSymbolsCmd EmitHexIndex(this ICmdCatalog wf)
             => default;
 
         [MethodImpl(Inline), Op]

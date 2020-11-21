@@ -43,7 +43,7 @@ namespace Z0
         }
 
         [Op]
-        public static void render(CmdModel src, ITextBuffer dst)
+        public static void render(CmdDescriptor src, ITextBuffer dst)
         {
             dst.Append(src.DataType.Name);
             var fields = src.Fields.Terms;;
@@ -56,7 +56,7 @@ namespace Z0
         }
 
         [Op]
-        public static string format(CmdModel src)
+        public static string format(CmdDescriptor src)
         {
             var buffer = Buffers.text();
             render(src,buffer);

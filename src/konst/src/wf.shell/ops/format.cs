@@ -20,6 +20,11 @@ namespace Z0
             dst.AppendSettingLine(nameof(src.Controller), src.Controller.Format());
             dst.AppendSettingLine(nameof(src.LogConfig), src.LogConfig.Format());
             dst.AppendSettingLine(nameof(src.Parts), Delimited.list(src.Parts).Format());
+            dst.AppendSettingLine(nameof(src.StartTS), src.StartTS.Format());
+            dst.AppendSettingLine(nameof(src.PathConfigTime), src.PathConfigTime.Format());
+            dst.AppendSettingLine(nameof(src.InitConfigTime), src.InitConfigTime.Format());
+            dst.AppendSettingLine(nameof(src.ShellCreateTime), src.ShellCreateTime.Format());
+            dst.AppendSettingLine(nameof(src.FinishTS), src.FinishTS.Format());
         }
 
         [MethodImpl(Inline), Op]

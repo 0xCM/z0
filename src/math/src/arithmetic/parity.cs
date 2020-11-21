@@ -10,133 +10,133 @@ namespace Z0
     using static Konst;
 
     partial class math
-    {        
+    {
         /// <summary>
         /// Returns true if the test value is even by examining the least significant bit
         /// </summary>
         /// <param name="test">The value to test</param>
-        [MethodImpl(Inline)]
-        public static bool even(sbyte test)
+        [MethodImpl(Inline), Op]
+        public static bit even(sbyte test)
             => (test & 1) == 0;
 
         /// <summary>
         /// Returns true if the test value is even by examining the least significant bit
         /// </summary>
         /// <param name="test">The value to test</param>
-        [MethodImpl(Inline)]
-        public static bool even(byte test)
+        [MethodImpl(Inline), Op]
+        public static bit even(byte test)
             => (test & 1) == 0;
 
         /// <summary>
         /// Returns true if the test value is even by examining the least significant bit
         /// </summary>
         /// <param name="test">The value to test</param>
-        [MethodImpl(Inline)]
-        public static bool even(short test)
+        [MethodImpl(Inline), Op]
+        public static bit even(short test)
             => (test & 1) == 0;
 
         /// <summary>
         /// Returns true if the test value is even by examining the least significant bit
         /// </summary>
         /// <param name="test">The value to test</param>
-        [MethodImpl(Inline)]
-        public static bool even(int test)
+        [MethodImpl(Inline), Op]
+        public static bit even(int test)
             => (test & 1) == 0;
 
         /// <summary>
         /// Returns true if the test value is even by examining the least significant bit
         /// </summary>
         /// <param name="test">The value to test</param>
-        [MethodImpl(Inline)]
-        public static bool even(ushort test)
+        [MethodImpl(Inline), Op]
+        public static bit even(ushort test)
             => (test & 1) == 0;
 
         /// <summary>
         /// Returns true if the test value is even by examining the least significant bit
         /// </summary>
         /// <param name="test">The value to test</param>
-        [MethodImpl(Inline)]
-        public static bool even(uint test)
+        [MethodImpl(Inline), Op]
+        public static bit even(uint test)
             => (test & 1) == 0;
 
         /// <summary>
         /// Returns true if the test value is even by examining the least significant bit
         /// </summary>
         /// <param name="test">The value to test</param>
-        [MethodImpl(Inline)]
-        public static bool even(long test)
+        [MethodImpl(Inline), Op]
+        public static bit even(long test)
             => (test & 1) == 0;
 
         /// <summary>
         /// Returns true if the test value is even by examining the least significant bit
         /// </summary>
         /// <param name="test">The value to test</param>
-        [MethodImpl(Inline)]
-        public static bool even(ulong test)
+        [MethodImpl(Inline), Op]
+        public static bit even(ulong test)
             => (test & 1) == 0;
 
         /// <summary>
         /// Returns true if the test value is odd by examining the least significant bit
         /// </summary>
         /// <param name="test">The value to test</param>
-        [MethodImpl(Inline)]
-        public static bool odd(sbyte test)
+        [MethodImpl(Inline), Op]
+        public static bit odd(sbyte test)
             => (test & 1) != 0;
 
         /// <summary>
         /// Returns true if the test value is odd by examining the least significant bit
         /// </summary>
         /// <param name="test">The value to test</param>
-        [MethodImpl(Inline)]
-        public static bool odd(byte test)
+        [MethodImpl(Inline), Op]
+        public static bit odd(byte test)
             => (test & 1) != 0;
 
         /// <summary>
         /// Returns true if the test value is odd by examining the least significant bit
         /// </summary>
         /// <param name="test">The value to test</param>
-        [MethodImpl(Inline)]
-        public static bool odd(short test)
+        [MethodImpl(Inline), Op]
+        public static bit odd(short test)
             => (test & 1) != 0;
 
         /// <summary>
         /// Returns true if the test value is odd by examining the least significant bit
         /// </summary>
         /// <param name="test">The value to test</param>
-        [MethodImpl(Inline)]
-        public static bool odd(ushort test)
+        [MethodImpl(Inline), Op]
+        public static bit odd(ushort test)
             => (test & 1) != 0;
 
         /// <summary>
         /// Returns true if the test value is odd by examining the least significant bit
         /// </summary>
         /// <param name="test">The value to test</param>
-        [MethodImpl(Inline)]
-        public static bool odd(int test)
+        [MethodImpl(Inline), Op]
+        public static bit odd(int test)
             => (test & 1) != 0;
 
         /// <summary>
         /// Returns true if the test value is odd by examining the least significant bit
         /// </summary>
         /// <param name="test">The value to test</param>
-        [MethodImpl(Inline)]
-        public static bool odd(uint test)
+        [MethodImpl(Inline), Op]
+        public static bit odd(uint test)
             => (test & 1) != 0;
 
         /// <summary>
         /// Returns true if the test value is odd by examining the least significant bit
         /// </summary>
         /// <param name="test">The value to test</param>
-        [MethodImpl(Inline)]
-        public static bool odd(long test)
+        [MethodImpl(Inline), Op]
+        public static bit odd(long test)
             => (test & 1) != 0;
 
         /// <summary>
         /// Returns true if the test value is odd by examining the least significant bit
         /// </summary>
         /// <param name="test">The value to test</param>
-        [MethodImpl(Inline)]
-        public static bool odd(ulong test)
-            => (test & 1) != 0;        
+        [MethodImpl(Inline), Op]
+        public static bit odd(ulong test)
+            => (test & 1) != 0;
     }
 }

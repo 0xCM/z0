@@ -48,7 +48,7 @@ namespace Z0
                 EmitCilTables.create().Run(Wf);
                 EmitEnumCatalog.create().Run(Wf);
                 EmitFieldLiterals.create().Run(Wf);
-                EmitReferenceData.create().Run(Wf);
+                //EmitReferenceData.create().Run(Wf);
                 EmitBitMasks.create().Run(Wf);
                 CaptureProcessors.Run(Wf,State);
             }

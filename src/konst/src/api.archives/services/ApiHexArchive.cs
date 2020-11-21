@@ -11,17 +11,17 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct ApiCodeArchive : IFileArchive
+    public readonly struct ApiHexArchive : IFileArchive
     {
         public FS.FolderPath Root {get;}
 
         [MethodImpl(Inline)]
-        public ApiCodeArchive(FS.FolderPath root)
+        public ApiHexArchive(FS.FolderPath root)
             => Root = root;
 
         [MethodImpl(Inline)]
-        public ApiCodeArchive(IWfShell wf)
-            => Root = wf.Db().CaptureRoot() + FS.folder("code");
+        public ApiHexArchive(IWfShell wf)
+            => Root = wf.Db().CapturedHexDir();
 
         public FS.FileExt DefaultExt
             => ArchiveFileKinds.Hex;
@@ -51,7 +51,7 @@ namespace Z0
         /// <summary>
         /// Enumerates the archived files owned by a specified part
         /// </summary>
-        public FS.FilePath[] Files(PartId owner)
+        public FS.FilePath[] PartFiles(PartId owner)
             => Root.Files(owner, DefaultExt, true);
 
         public ApiHostCodeBlocks HostCode(FS.FilePath src)
@@ -73,7 +73,7 @@ namespace Z0
             if(parts.Length != 0)
             {
                 foreach(var owner in parts)
-                foreach(var file in Files(owner))
+                foreach(var file in PartFiles(owner))
                 {
                     var idx = Index(file);
                     if(idx.IsNonEmpty)
@@ -112,7 +112,7 @@ namespace Z0
         /// </summary>
         public IEnumerable<ApiCodeBlock> ApiCode(PartId owner)
         {
-            foreach(var file in Files(owner))
+            foreach(var file in PartFiles(owner))
             foreach(var item in Read(file))
                 if(item.IsNonEmpty)
                     yield return item;
@@ -166,7 +166,7 @@ namespace Z0
         /// <summary>
         /// Enumerates the content of all archived files
         /// </summary>
-        static IEnumerable<ApiCodeBlock> read(ApiCodeArchive src)
+        static IEnumerable<ApiCodeBlock> read(ApiHexArchive src)
         {
             var list = src.List();
             var iCount = list.Count;

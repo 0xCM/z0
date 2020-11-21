@@ -61,8 +61,6 @@ namespace Z0
         public static uint negate(uint src)
             => 0 - src;
 
-            //=> ~src + 1;
-
         /// <summary>
         /// Negates the source value
         /// </summary>
@@ -79,8 +77,6 @@ namespace Z0
         [MethodImpl(Inline), Negate]
         public static ulong negate(ulong src)
             => 0 - src;
-            //=> ~ src + 1;
-
 
         /// <summary>
         /// Negates the source value

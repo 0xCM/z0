@@ -10,28 +10,33 @@ namespace Z0
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface ICmdModel
+    public interface ICmdDescriptor
     {
+        CmdId CmdId {get;}
+
         Type DataType {get;}
 
         IndexedView<FieldInfo> Fields {get;}
     }
 
     [Free]
-    public interface ICmdModel<T> : ICmdModel
+    public interface ICmdDescriptor<T> : ICmdDescriptor
         where T : struct, ICmdSpec<T>
     {
-        Type ICmdModel.DataType
+        CmdId ICmdDescriptor.CmdId
+            => Cmd.id<T>();
+
+        Type ICmdDescriptor.DataType
             => typeof(T);
 
-        IndexedView<FieldInfo> ICmdModel.Fields
+        IndexedView<FieldInfo> ICmdDescriptor.Fields
             => typeof(T).DeclaredInstanceFields();
     }
 
     [Free]
-    public interface ICmdModel<H,T> : ICmdModel<T>
+    public interface ICmdDescriptor<H,T> : ICmdDescriptor<T>
         where T : struct, ICmdSpec<T>
-        where H : struct, ICmdModel<H,T>
+        where H : struct, ICmdDescriptor<H,T>
     {
 
     }

@@ -10,29 +10,29 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct ToolOptions<K> : IIndexedView<ToolOptions<K>,ushort,ToolOption<K>>
+    public readonly struct CmdOptions<K> : IIndexedView<CmdOptions<K>,ushort,CmdOption<K>>
         where K : unmanaged
     {
-        readonly IndexedView<ToolOption<K>> Data;
+        readonly IndexedView<CmdOption<K>> Data;
 
         [MethodImpl(Inline)]
-        public ToolOptions(ToolOption<K>[] src)
+        public CmdOptions(CmdOption<K>[] src)
             => Data = src;
 
-        public ToolOption<K>[] Storage
+        public CmdOption<K>[] Storage
         {
             [MethodImpl(Inline)]
             get => Data;
         }
 
-        public ReadOnlySpan<ToolOption<K>> Terms
+        public ReadOnlySpan<CmdOption<K>> Terms
         {
             [MethodImpl(Inline)]
             get => Data.Terms;
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator ToolOptions<K>(ToolOption<K>[] src)
-            => new ToolOptions<K>(src);
+        public static implicit operator CmdOptions<K>(CmdOption<K>[] src)
+            => new CmdOptions<K>(src);
     }
 }

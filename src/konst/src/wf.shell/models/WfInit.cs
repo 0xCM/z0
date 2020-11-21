@@ -19,39 +19,39 @@ namespace Z0
         /// <summary>
         /// The entry assembly
         /// </summary>
-        internal Assembly Control {get;}
+        public Assembly Control {get;}
 
         /// <summary>
         /// The entry assembly identifier
         /// </summary>
-        internal PartId ControlId {get;}
+        public PartId ControlId {get;}
 
         /// <summary>
         /// The parts considered by the workflow
         /// </summary>
-        internal PartId[] PartIdentities {get;}
+        public PartId[] PartIdentities {get;}
 
         /// <summary>
         /// The context root
         /// </summary>
-        internal IWfContext Context {get;}
+        public IWfContext Context {get;}
 
         /// <summary>
         /// The specified log configuration
         /// </summary>
-        internal WfLogConfig Logs {get;}
+        public WfLogConfig LogConfig {get;}
 
         /// <summary>
         /// The input data archive configuration
         /// </summary>
-        internal IApiParts ApiParts {get;}
+        public IApiParts ApiParts {get;}
 
         public ISystemApiCatalog Api {get;}
 
         public IFileDb Db {get;}
 
         [MethodImpl(Inline)]
-        public WfInit(IFileDb db, IWfContext ctx, WfLogConfig logs, PartId[] parts)
+        public WfInit(IFileDb db, IWfContext ctx, WfLogConfig logConfig, PartId[] parts)
         {
             Db = db;
             Context = ctx;
@@ -59,26 +59,17 @@ namespace Z0
             Control = ctx.Controller;
             Api = ctx.ApiParts.Api;
             ControlId = ctx.Controller.Id;
-            Logs = logs;
+            LogConfig = logConfig;
             PartIdentities = parts;
         }
 
-        IWfContext IWfInit.Shell
+        public FS.FolderPath ResDir
+            => FS.dir(Context.Paths.ResourceRoot.Name);
+
+        public FS.FolderPath IndexDir
+            => ResDir + FS.folder("index");
+
+        public IWfContext Shell
             => Context;
-
-        IApiParts IWfInit.ApiParts
-            => ApiParts;
-
-        Assembly IWfInit.Control
-            => Control;
-
-        PartId IWfInit.ControlId
-            => ControlId;
-
-        PartId[] IWfInit.PartIdentities
-            => PartIdentities;
-
-        WfLogConfig IWfInit.Logs
-            => Logs;
     }
 }

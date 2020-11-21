@@ -14,7 +14,7 @@ namespace Z0
     partial struct Tooling
     {
         [MethodImpl(Inline), Formatter]
-        public static string format(ToolOption src)
+        public static string format(CmdOption src)
             => src.IsAnonymous || src.IsEmpty ? EmptyString : src.Name;
 
         [Formatter]
@@ -36,7 +36,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Formatter, Closures(Closure)]
-        public static string format<K>(ToolOption<K> src)
+        public static string format<K>(CmdOption<K> src)
             where K : unmanaged
                 => src.IsAnonymous || src.IsEmpty ? EmptyString : src.Name;
 

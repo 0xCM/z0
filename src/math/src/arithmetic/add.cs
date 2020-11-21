@@ -45,21 +45,6 @@ namespace Z0
             => a + b;
 
         /// <summary>
-        /// Computes the sum of two 128-bit integers
-        /// </summary>
-        /// <param name="x">The first integer, represented via paired hi/lo components</param>
-        /// <param name="y">The second integer, represented via paired hi/lo components</param>
-        /// <remarks>Follows https://github.com/chfast/intx/include/intx/int128.hpp</remarks>
-        [MethodImpl(Inline), Op]
-        public static ConstPair<ulong> add(in ConstPair<ulong> x, in ConstPair<ulong> y)
-        {
-            var lo = x.Left + y.Left;
-            var carry = x.Left > lo;
-            var hi = x.Right + y.Right + z.@uint(carry);
-            return (lo,hi);
-        }
-
-        /// <summary>
         /// Computes the sum c := a + b of 128-bit unsigned integers a and b
         /// </summary>
         /// <param name="a">A reference to the left 128-bits</param>

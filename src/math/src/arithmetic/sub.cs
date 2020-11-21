@@ -44,21 +44,6 @@ namespace Z0
             => a - b;
 
         /// <summary>
-        /// Computes the difference of two 128-bit integers
-        /// </summary>
-        /// <param name="x">The first integer, represented via paired hi/lo components</param>
-        /// <param name="y">The second integer, represented via paired hi/lo components</param>
-        /// <remarks>Follows https://github.com/chfast/intx/include/intx/int128.hpp</remarks>
-        [MethodImpl(Inline), Op]
-        public static ConstPair<ulong> sub(in ConstPair<ulong> x, in ConstPair<ulong> y)
-        {
-            var lo = x.Left - y.Left;
-            var borrow = x.Left < lo;
-            var hi = x.Right - y.Right - z.@uint(borrow);
-            return (lo,hi);
-        }
-
-        /// <summary>
         /// Computes the difference c := a - b between 128-bit unsigned integers a and b
         /// </summary>
         /// <param name="a">A reference to the left 128-bits</param>

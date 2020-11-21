@@ -8,19 +8,18 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static SFx;
 
     partial class MSvcHosts
     {
         [Closures(Integers), Even]
-        public readonly struct Even<T> : IFunc<T,Bit32>, IUnarySpanPred<T>
+        public readonly struct Even<T> : IFunc<T,bit>, SFx.IUnarySpanPred<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]
-            public readonly Bit32 Invoke(T a) => gmath.even(a);
+            public readonly bit Invoke(T a) => gmath.even(a);
 
             [MethodImpl(Inline)]
-            public Span<Bit32> Invoke(ReadOnlySpan<T> src, Span<Bit32> dst)
+            public Span<bit> Invoke(ReadOnlySpan<T> src, Span<bit> dst)
                 => gspan.even(src,dst);
         }
     }

@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
     using System.Threading;
-    using System.Runtime.CompilerServices;
-    using System.Threading.Tasks;
     using System.Diagnostics;
 
     using static Konst;
@@ -18,7 +16,6 @@ namespace Z0
     public struct CpuWorker<S,T>
         where S : struct
         where T : struct
-
     {
         CpuWorkerSettings Spec;
 
@@ -42,7 +39,6 @@ namespace Z0
             return worker;
         }
 
-
         void Execute()
         {
             NativeThread = api.thread(CurrentProcess.OsThreadId);
@@ -63,7 +59,6 @@ namespace Z0
                 }
             }
         }
-
 
         public void Run(IWfShell wf)
         {

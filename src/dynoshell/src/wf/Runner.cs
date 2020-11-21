@@ -69,12 +69,13 @@ namespace Z0
             using var runner = new ToolRunner(Wf, Host);
             iter(Wf.Router.SupportedCommands.Storage, c => Wf.Status($"{c} enabled"));
 
-            //runner.Run(Wf.CmdCatalog.EmitRuntimeIndex());
+            runner.Run(new EmitHexIndexCmd());
 
-            var commands = @readonly(Commands());
-            var count = commands.Length;
-            for(var i=0; i<count; i++)
-                runner.Run(skip(commands,i));
+            //runner.Run(Wf.CmdCatalog.EmitRuntimeIndex());
+            // var commands = @readonly(Commands());
+            // var count = commands.Length;
+            // for(var i=0; i<count; i++)
+            //     runner.Run(skip(commands,i));
         }
 
         public void Run()

@@ -35,7 +35,7 @@ namespace Z0
             => new CmdBuilder(wf);
 
         [Op]
-        public static CmdModel[] models(IWfShell wf)
-            => typeof(Cmd).Assembly.Types().Tagged<CmdAttribute>().Select(model);
+        public static CmdDescriptor[] models(IWfShell wf)
+            => typeof(Cmd).Assembly.Types().Tagged<CmdAttribute>().Select(descriptor);
     }
 }

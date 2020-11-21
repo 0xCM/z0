@@ -23,7 +23,7 @@ namespace Z0
     }
 
     [Free]
-    public interface ITool<T,F> : ITool<T>, IToolOption<F>
+    public interface ITool<T,F> : ITool<T>, ICmdOption<F>
         where T : struct, ITool<T,F>
         where F : unmanaged, Enum
     {

@@ -11,7 +11,6 @@ namespace Z0
 
     partial class math
     {
-        
         [MethodImpl(Inline), Op]
         public static ModN modn(uint n)
             => new ModN(n);
@@ -29,7 +28,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The dividend</param>
         [MethodImpl(Inline), Op]
-        public static uint div(in ModN n, uint a)        
+        public static uint div(in ModN n, uint a)
             => n.div(a);
 
         /// <summary>
@@ -57,6 +56,7 @@ namespace Z0
     /// Implements basic arithmetic operations relative to a fixed modulus
     /// </summary>
     /// <remarks>See https://arxiv.org/pdf/1902.01961.pdf</remarks>
+    [ApiType]
     public readonly struct ModN
     {
         readonly ulong _N;
@@ -83,7 +83,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The dividend</param>
         [MethodImpl(Inline)]
-        public uint div(uint a)        
+        public uint div(uint a)
             => (uint) math.mulhi(_M, a);
 
         /// <summary>
@@ -92,7 +92,7 @@ namespace Z0
         /// <param name="a">The dividend</param>
         [MethodImpl(Inline)]
         public bool divisible(uint a)
-            => a * _M <= _M - 1; 
+            => a * _M <= _M - 1;
 
         /// <summary>
         /// Computes both the quotient and remainder
@@ -105,7 +105,7 @@ namespace Z0
             r = mod(a);
         }
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public ref readonly ConstPair<uint> divrem(in ModN n, uint a, out ConstPair<uint> dst)
         {
             dst = new ConstPair<uint>(div(a),mod(a));
@@ -124,6 +124,6 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => (uint)_N;
-        } 
-    }    
+        }
+    }
 }

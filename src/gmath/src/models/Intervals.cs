@@ -12,7 +12,6 @@ namespace Z0
 
     public static class IntervalOps
     {
-
         /// <summary>
         /// Computes the length of the interval by finding the magnitude of the difference
         /// between its left/right endpoints

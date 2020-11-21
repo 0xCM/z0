@@ -24,7 +24,7 @@ namespace Z0
         where T : struct, ICmdSpec<T>
     {
         CmdId ICmdSpec.CmdId
-            => api.id<T>();
+            => Cmd.id<T>();
 
         CmdArgs ICmdSpec.Args
             => api.args((T)this);

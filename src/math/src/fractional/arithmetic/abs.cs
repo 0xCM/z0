@@ -6,9 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static z;
-    
+
     partial class fmath
     {
         /// <summary>
@@ -18,8 +18,8 @@ namespace Z0
         [MethodImpl(Inline), Abs]
         public static float abs(float a)
         {
-            var b =  new F32Bits(a);
-            b.Bits &= F32Bits.SignMask;
+            var b =  new BitsF32(a);
+            b.Bits &= BitsF32.SignMask;
             return b.Data;
         }
 
@@ -30,8 +30,8 @@ namespace Z0
         [MethodImpl(Inline), Abs]
         public static double abs(double a)
         {
-            var b = new F64Bits(a);
-            b.Bits &= F64Bits.SignMask;
+            var b = new BitsF64(a);
+            b.Bits &= BitsF64.SignMask;
             return b.Data;
         }
     }

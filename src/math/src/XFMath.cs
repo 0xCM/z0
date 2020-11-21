@@ -4,13 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    
     using System;
     using System.Runtime.CompilerServices;
 
-    using static math;    
+    using static math;
 
-    public static class fmathx
+    public static class XFMath
     {
         [MethodImpl(Inline)]
         public static float Round(this float src, int scale)
@@ -27,14 +26,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static double Truncate(this double src)
             => (long)src;
-
-        // [MethodImpl(Inline)]
-        // public static int ToBits(this float src)
-        //     => BitConvert.ToInt32(src);
-
-        // [MethodImpl(Inline)]
-        // public static long ToBits(this double src)
-        //     => BitConvert.ToInt64(src);
 
         /// <summary>
         /// Returns true if a value is the NaN representative

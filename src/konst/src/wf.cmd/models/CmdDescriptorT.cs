@@ -11,9 +11,11 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct CmdModel<T> : ICmdModel<CmdModel<T>,T>
+    public readonly struct CmdDescriptor<T> : ICmdDescriptor<CmdDescriptor<T>,T>
         where T : struct, ICmdSpec<T>
     {
+        public CmdId CmdId => Cmd.id<T>();
+
         public Type DataType => typeof(T);
 
         public IndexedView<FieldInfo> Fields
@@ -23,7 +25,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator CmdModel(CmdModel<T> src)
-            => new CmdModel(src.DataType, src.Fields);
+        public static implicit operator CmdDescriptor(CmdDescriptor<T> src)
+            => new CmdDescriptor(src.DataType, src.Fields);
     }
 }

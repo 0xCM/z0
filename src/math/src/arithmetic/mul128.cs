@@ -7,11 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;        
+    using static Konst;
 
     partial class math
     {
-        
         /// <summary>
         /// 64x64 -> 128 multiplication, reference implementation
         /// </summary>
@@ -37,8 +36,8 @@ namespace Z0
             var u2 = t2 + (u1 & Max32u);
 
             var lo = (u2 << 32) | (t0 & Max32u);
-            var hi = t3 + (u2 >> 32) + (u1 >> 32);  
-            return (lo,hi);          
+            var hi = t3 + (u2 >> 32) + (u1 >> 32);
+            return (lo,hi);
         }
     }
 }

@@ -12,16 +12,16 @@ namespace Z0
     /// Characterizes a tool option
     /// </summary>
     [Free]
-    public interface IToolOption : INamed, ITextual
+    public interface ICmdOption : INamed, ITextual
     {
-
+        string Purpose {get;}
     }
 
     /// <summary>
     /// Characterizes a kinded tool option
     /// </summary>
     [Free]
-    public interface IToolOption<K> : IToolOption
+    public interface ICmdOption<K> : ICmdOption
         where K : unmanaged
     {
         K Kind {get;}

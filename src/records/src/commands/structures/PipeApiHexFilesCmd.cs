@@ -4,14 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Konst;
-
-    [ApiHost(ApiNames.XCmdWorkers)]
-    public static partial class XCmdWorkers
+    [Cmd(Name)]
+    public struct PipeApiHexFilesCmd : ICmdSpec<PipeApiHexFilesCmd>
     {
+        public const string Name = "pipe-hex";
 
+        public Index<PartId> Parts;
     }
 }

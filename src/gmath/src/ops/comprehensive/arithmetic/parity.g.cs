@@ -28,12 +28,12 @@ namespace Z0
         /// <param name="a">The value to test</param>
         /// <typeparam name="T">The primal integer type</typeparam>
         [MethodImpl(Inline), Op, Closures(Integers)]
-        public static Bit32 even<T>(T a)
+        public static bit even<T>(T a)
             where T : unmanaged
                 => even_u(a);
 
         [MethodImpl(Inline)]
-        static Bit32 odd_u<T>(T a)
+        static bit odd_u<T>(T a)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -49,7 +49,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static Bit32 odd_i<T>(T a)
+        static bit odd_i<T>(T a)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -61,11 +61,11 @@ namespace Z0
             else if(typeof(T) == typeof(long))
                 return math.odd(int64(a));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
         [MethodImpl(Inline)]
-        static Bit32 even_u<T>(T a)
+        static bit even_u<T>(T a)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -81,7 +81,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static Bit32 even_i<T>(T a)
+        static bit even_i<T>(T a)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -93,7 +93,7 @@ namespace Z0
             else if(typeof(T) == typeof(long))
                 return math.even(int64(a));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
     }
 }

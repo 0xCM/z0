@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Specifies a kinded tool option
     /// </summary>
-    public readonly struct ToolOption<K> : IToolOption<K>
+    public readonly struct CmdOption<K> : ICmdOption<K>
         where K : unmanaged
     {
         /// <summary>
@@ -26,18 +26,25 @@ namespace Z0
         /// </summary>
         public K Kind {get;}
 
+        /// <summary>
+        /// A description for the option, if available
+        /// </summary>
+        public string Purpose {get;}
+
         [MethodImpl(Inline)]
-        public ToolOption(K kind)
+        public CmdOption(K kind)
         {
             Name = kind.ToString();
             Kind = kind;
+            Purpose = EmptyString;
         }
 
         [MethodImpl(Inline)]
-        public ToolOption(string name, K kind)
+        public CmdOption(string name, K kind)
         {
             Name = name;
             Kind = kind;
+            Purpose = EmptyString;
         }
 
         public bool IsEmpty
@@ -55,7 +62,7 @@ namespace Z0
         public bool IsAnonymous
         {
             [MethodImpl(Inline)]
-            get => string.Equals(Name, ToolOption.AnonymousOptionName);
+            get => string.Equals(Name, CmdOption.AnonymousOptionName);
         }
 
         [MethodImpl(Inline)]
@@ -66,20 +73,20 @@ namespace Z0
             => Format();
 
         [MethodImpl(Inline)]
-        public static implicit operator ToolOption<K>(K src)
-            => new ToolOption<K>(src);
+        public static implicit operator CmdOption<K>(K src)
+            => new CmdOption<K>(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator ToolOption(ToolOption<K> src)
-            => new ToolOption(src.Name);
+        public static implicit operator CmdOption(CmdOption<K> src)
+            => new CmdOption(src.Name);
 
         /// <summary>
         /// Specifies the empty option
         /// </summary>
-        public static ToolOption<K> Empty
+        public static CmdOption<K> Empty
         {
             [MethodImpl(Inline)]
-            get => new ToolOption<K>(EmptyString, default(K));
+            get => new CmdOption<K>(EmptyString, default(K));
         }
     }
 }

@@ -85,12 +85,11 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static byte gcdbin(byte u, byte v)            
+        public static byte gcdbin(byte u, byte v)
             => (byte)gcdbin((uint)u, (uint)v);
 
         [MethodImpl(Inline)]
-        public static ushort gcdbin(ushort u, ushort v)            
+        public static ushort gcdbin(ushort u, ushort v)
             => (ushort)gcdbin((uint)u, (uint)v);
     }
-
 }

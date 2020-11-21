@@ -20,6 +20,5 @@ namespace Z0
                 dst[i] = gfp.round(src[i], scale);
             return dst;
         }
-
     }
 }

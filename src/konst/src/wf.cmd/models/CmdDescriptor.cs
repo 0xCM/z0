@@ -11,15 +11,18 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct CmdModel : ICmdModel
+    public readonly struct CmdDescriptor : ICmdDescriptor
     {
+        public CmdId CmdId {get;}
+
         public Type DataType {get;}
 
         public IndexedView<FieldInfo> Fields {get;}
 
         [MethodImpl(Inline)]
-        public CmdModel(Type type, FieldInfo[] fields)
+        public CmdDescriptor(Type type, FieldInfo[] fields)
         {
+            CmdId = Cmd.id(type);
             DataType = type;
             Fields = fields;
         }

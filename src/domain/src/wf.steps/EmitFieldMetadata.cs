@@ -9,7 +9,6 @@ namespace Z0
 
     using static Konst;
 
-
     [WfHost]
     public sealed class EmitFieldMetadata : WfHost<EmitFieldMetadata>
     {

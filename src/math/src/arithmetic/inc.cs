@@ -72,12 +72,5 @@ namespace Z0
         [MethodImpl(Inline), Inc]
         public static ulong inc(ulong src)
             => ++src;
-
-        [MethodImpl(Inline), Op]
-        public static ref ConstPair<ulong> inc(ref ConstPair<ulong> x)
-        {
-            x = math.add(x, Tuples.@const(1ul,0ul));
-            return ref x;
-        }
     }
 }

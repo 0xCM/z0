@@ -6,9 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-        
+
     partial class math
-    {        
+    {
         /// <summary>
         /// Computes b := a % m
         /// </summary>
@@ -81,6 +81,5 @@ namespace Z0
         [MethodImpl(Inline), Mod]
         public static ulong mod(ulong a, ulong m)
             => a % m;
-
     }
 }

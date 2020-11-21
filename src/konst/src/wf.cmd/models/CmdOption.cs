@@ -15,7 +15,7 @@ namespace Z0
     /// <summary>
     /// Defines a tool option
     /// </summary>
-    public readonly struct ToolOption : IToolOption
+    public readonly struct CmdOption : ICmdOption
     {
         internal const string AnonymousOptionName = "_anonymous_";
 
@@ -30,14 +30,14 @@ namespace Z0
         public string Purpose {get;}
 
         [MethodImpl(Inline)]
-        public ToolOption(string name)
+        public CmdOption(string name)
         {
             Name = name;
             Purpose = EmptyString;
         }
 
         [MethodImpl(Inline)]
-        public ToolOption(string name, string purpose)
+        public CmdOption(string name, string purpose)
         {
             Name = name;
             Purpose = purpose;
@@ -69,13 +69,13 @@ namespace Z0
             => Format();
 
         [MethodImpl(Inline)]
-        public static implicit operator ToolOption(string src)
-            => new ToolOption(src);
+        public static implicit operator CmdOption(string src)
+            => new CmdOption(src);
 
-        public static ToolOption Empty
+        public static CmdOption Empty
         {
             [MethodImpl(Inline)]
-            get => new ToolOption(EmptyString);
+            get => new CmdOption(EmptyString);
         }
     }
 }

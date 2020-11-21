@@ -12,13 +12,13 @@ namespace Z0
     using static z;
 
     [WfHost]
-    sealed class Runner : WfHost<Runner>
+    sealed class MachineRunner : WfHost<MachineRunner>
     {
         WfCaptureState State;
 
         public static WfHost create(in WfCaptureState state)
         {
-            var host = new Runner();
+            var host = new MachineRunner();
             host.State = state;
             return host;
         }
@@ -32,21 +32,41 @@ namespace Z0
 
     struct App
     {
-        static void RunCapture(WfCaptureState cstate)
+        IWfShell Wf;
+
+        bool RunCapture {get;}
+
+        bool RunMachine {get;}
+
+        App(IWfShell wf)
         {
-            using var control = CaptureWorkflow.create(cstate);
-            control.Run();
+            Wf = wf;
+            RunCapture = true;
+            RunMachine = true;
         }
+
+        void Run()
+        {
+
+            var ctx = Apps.context(Wf);
+            var asm = new AsmContext(ctx, Wf);
+            var state = new WfCaptureState(Wf, asm);
+            var capture = CaptureWorkflow.create(state);
+
+            if(RunCapture)
+                capture.Run();
+
+            if(RunMachine)
+                MachineRunner.create(state).Run(Wf);
+        }
+
         public static void Main(params string[] args)
         {
             try
             {
                 using var wf = WfShell.create(args).WithRandom(Rng.@default());
-                var app = Apps.context(wf);
-                var asm = new AsmContext(app, wf);
-                var state = new WfCaptureState(wf, asm);
-                RunCapture(state);
-                Runner.create(state).Run(wf);
+                var app = new App(wf);
+                app.Run();
             }
             catch(Exception e)
             {

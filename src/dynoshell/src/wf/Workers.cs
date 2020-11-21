@@ -31,14 +31,5 @@ namespace Z0
             Host = WfShell.host(typeof(Workers));
             Wf = wf.WithHost(Host);
         }
-
-        public CmdResult Route(EmitHexIndexCmd cmd)
-        {
-            var dst = Wf.Db().Table("apihex.index");
-            var descriptors = ApiArchives.BlockDescriptors(Wf);
-            var count= ApiArchives.emit(descriptors, dst);
-            Wf.EmittedTable<ApiCodeDescriptor>(count, dst);
-            return Cmd.ok(cmd);
-        }
     }
 }

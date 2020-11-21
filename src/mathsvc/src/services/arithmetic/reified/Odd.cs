@@ -13,14 +13,14 @@ namespace Z0
     partial class MSvcHosts
     {
         [Closures(Integers), Odd]
-        public readonly struct Odd<T> : IFunc<T,Bit32>, IUnarySpanPred<T>
+        public readonly struct Odd<T> : IFunc<T,bit>, SFx.IUnarySpanPred<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]
-            public readonly Bit32 Invoke(T a) => gmath.odd(a);
+            public readonly bit Invoke(T a) => gmath.odd(a);
 
             [MethodImpl(Inline)]
-            public Span<Bit32> Invoke(ReadOnlySpan<T> src, Span<Bit32> dst)
+            public Span<bit> Invoke(ReadOnlySpan<T> src, Span<bit> dst)
                 => gspan.odd(src,dst);
         }
     }

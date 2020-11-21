@@ -53,13 +53,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(math.avg(Spans.s8u(src), @checked));
+                return generic<T>(mspan.avg(Spans.s8u(src), @checked));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(math.avg(Spans.s16u(src)));
+                return generic<T>(mspan.avg(Spans.s16u(src)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(math.avg(Spans.s32u(src)));
+                return generic<T>(mspan.avg(Spans.s32u(src)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(math.avg(Spans.s64u(src)));
+                return generic<T>(mspan.avg(Spans.s64u(src)));
             else
                 return avg_i(src, @checked);
         }
@@ -69,13 +69,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(math.avg(Spans.s8i(src), @checked));
+                return generic<T>(mspan.avg(Spans.s8i(src), @checked));
             else if(typeof(T) == typeof(short))
-                return generic<T>(math.avg(Spans.s16i(src), @checked));
+                return generic<T>(mspan.avg(Spans.s16i(src), @checked));
             else if(typeof(T) == typeof(int))
-                return generic<T>(math.avg(Spans.s32i(src), @checked));
+                return generic<T>(mspan.avg(Spans.s32i(src), @checked));
             else if(typeof(T) == typeof(long))
-                return generic<T>(math.avg(Spans.s64i(src), @checked));
+                return generic<T>(mspan.avg(Spans.s64i(src), @checked));
             else
                 return fspan.avg(src, @checked);
         }

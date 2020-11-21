@@ -72,7 +72,7 @@ namespace Z0
     {
         const string ProjectName = "bytes";
 
-        readonly ApiCodeArchive Archive;
+        readonly ApiHexArchive Archive;
 
         readonly WfHost Host;
 

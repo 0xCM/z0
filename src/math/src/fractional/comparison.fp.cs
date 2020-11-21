@@ -144,7 +144,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The test value</param>
         /// <param name="a">The lower bound</param>
-        /// <param name="b">The uppper bound</param>
+        /// <param name="b">The upper bound</param>
         [MethodImpl(Inline), Between]
         public static bit between(float x, float a, float b)
             => x >= a && x <= b;
@@ -154,7 +154,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The test value</param>
         /// <param name="a">The lower bound</param>
-        /// <param name="b">The uppper bound</param>
+        /// <param name="b">The upper bound</param>
         [MethodImpl(Inline), Between]
         public static bit between(double x, double a, double b)
             => x >= a && x <= b;
@@ -246,24 +246,6 @@ namespace Z0
                 _ => throw new NotSupportedException()
             };
 
-            return result;
-        }
-
-        public static bool[] fcmp(Span<float> lhs, Span<float> rhs, FpCmpMode kind)
-        {
-            var len =  lhs.Length;
-            var result = sys.alloc<bool>(len);
-            for(var i = 0; i< len; i++)
-                result[i] = fmath.fcmp(lhs[i], rhs[i], kind);
-            return result;
-        }
-
-        public static bool[] fcmp(Span<double> lhs, Span<double> rhs, FpCmpMode kind)
-        {
-            var len =  lhs.Length;
-            var result = sys.alloc<bool>(len);
-            for(var i = 0; i< len; i++)
-                result[i] = fmath.fcmp(lhs[i], rhs[i], kind);
             return result;
         }
     }

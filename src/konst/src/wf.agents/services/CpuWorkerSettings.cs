@@ -5,19 +5,15 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-
     using static Konst;
     using static z;
 
-    partial struct Cmd
+    public struct CpuWorkerSettings
     {
-        [Op]
-        public static CmdModel model(Type src)
-            => new CmdModel(src, src.DeclaredInstanceFields());
+        public uint Id;
 
-        public static CmdModel<T> model<T>()
-            where T : struct, ICmdSpec<T>
-                => default;
+        public uint Core;
+
+        public Duration Frequency;
     }
 }

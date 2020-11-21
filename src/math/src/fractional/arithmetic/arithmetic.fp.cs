@@ -6,9 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static z;
-    
+
     partial class fmath
     {
         /// <summary>
@@ -217,7 +217,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
         public static double floor(double src)
-            => Math.Floor(src); 
+            => Math.Floor(src);
 
         /// <summary>
         /// Clamps the source value to an inclusive maximum
@@ -262,7 +262,7 @@ namespace Z0
         [MethodImpl(Inline), Divides]
         public static bool divides(double a, double b)
             => b % a == 0;
- 
+
         [MethodImpl(Inline), Fma]
         public static float fma(float x, float y, float z)
             => MathF.FusedMultiplyAdd(x,y,z);
@@ -311,7 +311,7 @@ namespace Z0
         /// <param name="src">The operand</param>
         [MethodImpl(Inline), Op]
         public static SignKind signum(double src)
-            => (SignKind)Math.Sign(src);            
+            => (SignKind)Math.Sign(src);
 
         [MethodImpl(Inline), Square]
         public static float square(float src)
@@ -335,60 +335,6 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Sqrt]
         public static double sqrt(double src)
-            => Math.Sqrt(src); 
-
-        [MethodImpl(Inline), Avg]
-        public static float avg(ReadOnlySpan<float> src, bool @checked)
-            => @checked? avg_checked(src) : avg_unchecked(src);
-
-        [MethodImpl(Inline), Avg]
-        public static double avg(ReadOnlySpan<double> src, bool @checked)
-            => @checked? avg_checked(src) : avg_unchecked(src);
-
-        [MethodImpl(Inline), Avg]
-        public static float avg(ReadOnlySpan<float> src)
-            => avg(src,true);
-
-        [MethodImpl(Inline), Avg]
-        public static double avg(ReadOnlySpan<double> src)
-            => avg(src,true);
-
-        [MethodImpl(Inline), Op]
-        static float avg_checked(ReadOnlySpan<float> src)
-            {checked{ return avg_unchecked(src);}}
-
-        [MethodImpl(Inline), Op]
-        static double avg_checked(ReadOnlySpan<double> src)
-            {checked{ return avg_unchecked(src);}}
-
-        [MethodImpl(Inline), Op]
-        static float avg_unchecked(ReadOnlySpan<float> src)
-        {
-            unchecked
-            {
-                var sum = default(double);                
-                
-                ref readonly var current = ref first(src);                
-                for(var i=0u; i<src.Length; i++)
-                    sum += skip(current,i);
-                
-                return (float)(sum/(float)src.Length);
-            }
-        }
-
-        [MethodImpl(Inline), Op]
-        static double avg_unchecked(ReadOnlySpan<double> src)
-        {
-            unchecked
-            {
-                var sum = default(double);
-
-                ref readonly var current = ref first(src);                
-                for(var i=0u; i<src.Length; i++)
-                    sum += skip(current,i);
-
-                return sum/(double)src.Length;
-            }
-        }
-    }        
+            => Math.Sqrt(src);
+    }
 }

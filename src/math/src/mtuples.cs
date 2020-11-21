@@ -11,7 +11,7 @@ namespace Z0
     using static z;
 
     [ApiHost]
-    public class tmath
+    public readonly struct mtuples
     {
         /// <summary>
         /// Zero, the the one and only.
@@ -64,7 +64,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ref ConstPair<ulong> dec(ref ConstPair<ulong> x)
         {
-            x = math.sub(x, Tuples.@const(1ul,0ul));
+            x = sub(x, Tuples.@const(1ul,0ul));
             return ref x;
         }
 
@@ -74,7 +74,7 @@ namespace Z0
         /// <param name="x">The integer, represented via paired hi/lo components</param>
         [MethodImpl(Inline), Op]
         public static ConstPair<ulong> negate(ConstPair<ulong> x)
-            => math.add(not(x), Tuples.@const(1ul,0ul));
+            => add(not(x), Tuples.@const(1ul,0ul));
 
         /// <summary>
         /// Determines whether the left and right operands define the same value
@@ -124,6 +124,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static bool gt(in ConstPair<ulong> x, in ConstPair<ulong> y)
             => !lteq(x,y);
+
         /// <summary>
         /// Shifts the source integer leftwards
         /// </summary>
@@ -180,7 +181,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static ConstPair<ulong> nor(in ConstPair<ulong> x, in ConstPair<ulong> y)
-            => not(tmath.or(x,y));
+            => not(mtuples.or(x,y));
 
         /// <summary>
         /// Computes the bitwise AND of two 128-bit integers
@@ -208,5 +209,42 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ConstPair<ulong> xnor(in ConstPair<ulong> x, in ConstPair<ulong> y)
             => not(xor(x,y));
+
+        /// <summary>
+        /// Computes the sum of two 128-bit integers
+        /// </summary>
+        /// <param name="x">The first integer, represented via paired hi/lo components</param>
+        /// <param name="y">The second integer, represented via paired hi/lo components</param>
+        /// <remarks>Follows https://github.com/chfast/intx/include/intx/int128.hpp</remarks>
+        [MethodImpl(Inline), Op]
+        public static ConstPair<ulong> add(in ConstPair<ulong> x, in ConstPair<ulong> y)
+        {
+            var lo = x.Left + y.Left;
+            var carry = x.Left > lo;
+            var hi = x.Right + y.Right + z.@uint(carry);
+            return (lo,hi);
+        }
+
+        [MethodImpl(Inline), Op]
+        public static ref ConstPair<ulong> inc(ref ConstPair<ulong> x)
+        {
+            x = add(x, Tuples.@const(1ul,0ul));
+            return ref x;
+        }
+
+        /// <summary>
+        /// Computes the difference of two 128-bit integers
+        /// </summary>
+        /// <param name="x">The first integer, represented via paired hi/lo components</param>
+        /// <param name="y">The second integer, represented via paired hi/lo components</param>
+        /// <remarks>Follows https://github.com/chfast/intx/include/intx/int128.hpp</remarks>
+        [MethodImpl(Inline), Op]
+        public static ConstPair<ulong> sub(in ConstPair<ulong> x, in ConstPair<ulong> y)
+        {
+            var lo = x.Left - y.Left;
+            var borrow = x.Left < lo;
+            var hi = x.Right - y.Right - z.@uint(borrow);
+            return (lo,hi);
+        }
    }
 }

@@ -29,7 +29,7 @@ namespace Z0
         /// <summary>
         /// The specified option
         /// </summary>
-        public ToolOption<K> Option {get;}
+        public CmdOption<K> Option {get;}
 
         /// <summary>
         /// The option value

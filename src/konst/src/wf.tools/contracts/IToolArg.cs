@@ -12,7 +12,7 @@ namespace Z0
 
         CmdArgProtocol Protocol {get;}
 
-        ToolOption Option {get;}
+        CmdOption Option {get;}
 
         V Value {get;}
     }
@@ -26,9 +26,9 @@ namespace Z0
     public interface IToolArg<K,V> : IToolArg<V>
         where K : unmanaged
     {
-        new ToolOption<K> Option {get;}
+        new CmdOption<K> Option {get;}
 
-        ToolOption IToolArg<V>.Option
+        CmdOption IToolArg<V>.Option
             => Option;
     }
 }

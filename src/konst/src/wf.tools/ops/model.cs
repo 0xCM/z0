@@ -40,7 +40,7 @@ namespace Z0
 
             var fields = @readonly(src.InstanceFields().Tagged<SlotAttribute>());
             var kFields = fields.Length;
-            var buffer = alloc<ToolOption>(kFields);
+            var buffer = alloc<CmdOption>(kFields);
 
             dst.Options = buffer;
 

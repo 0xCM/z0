@@ -12,14 +12,6 @@ namespace Z0
 
     public readonly struct CmdId : ITextual, IEquatable<CmdId>
     {
-        [MethodImpl(Inline)]
-        public static CmdId from(Type spec)
-            => new CmdId(spec.Name);
-
-        [MethodImpl(Inline)]
-        public static CmdId from<T>()
-            => new CmdId(typeof(T).Name);
-
         readonly string Data;
 
         [MethodImpl(Inline)]

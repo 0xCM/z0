@@ -14,15 +14,27 @@ namespace Z0
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static CmdId id<T>()
-            => CmdId.from<T>();
+            => id(typeof(T));
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static CmdId id<T>(T t)
-            => CmdId.from<T>();
+            => id(typeof(T));
 
         [MethodImpl(Inline), Op]
         public static CmdId id(Type spec)
-            => CmdId.from(spec);
+        {
+            var tag = spec.Tag<CmdAttribute>();
+            if(tag)
+            {
+                var name = tag.Value.Name;
+                if(text.empty(name))
+                    return new CmdId(spec.Name);
+                else
+                    return new CmdId(name);
+            }
+            else
+                return new CmdId(spec.Name);
+        }
 
         /// <summary>
         /// Parses a <see cref='CmdId'/> from a command identifier

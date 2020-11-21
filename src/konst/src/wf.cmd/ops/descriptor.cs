@@ -5,20 +5,19 @@
 namespace Z0
 {
     using System;
-    using System.Threading;
     using System.Runtime.CompilerServices;
-    using System.Threading.Tasks;
-    using System.Diagnostics;
 
     using static Konst;
     using static z;
 
-    public struct CpuWorkerSettings
+    partial struct Cmd
     {
-        public uint Id;
+        [Op]
+        public static CmdDescriptor descriptor(Type src)
+            => new CmdDescriptor(src, src.DeclaredInstanceFields());
 
-        public uint Core;
-
-        public Duration Frequency;
+        public static CmdDescriptor<T> descriptor<T>()
+            where T : struct, ICmdSpec<T>
+                => default;
     }
 }

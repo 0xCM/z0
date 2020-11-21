@@ -22,7 +22,7 @@ namespace Z0
         /// <summary>
         /// The specified log configuration
         /// </summary>
-        WfLogConfig Logs {get;}
+        WfLogConfig LogConfig {get;}
 
         /// <summary>
         /// The input data archive configuration
@@ -49,10 +49,8 @@ namespace Z0
         /// </summary>
         PartId[] PartIdentities {get;}
 
-        FS.FolderPath ResDir
-            => FS.dir(Shell.Paths.ResourceRoot.Name);
+        FS.FolderPath ResDir {get;}
 
-        FS.FolderPath IndexDir
-            => ResDir + FS.folder("index");
+        FS.FolderPath IndexDir {get;}
     }
 }

@@ -20,40 +20,50 @@ namespace Z0
         [Op]
         public static IWfShell create(string[] args, bool verbose = false)
         {
+            var ci = new WfConfigInfo();
+            ci.StartTS = now();
+            var clock = Time.counter(true);
+
             var control = controller();
             var controlId = control.Id();
-
             var dbRoot = WfEnv.dbRoot();
             var db = Z0.Db.create(new FileDbPaths(dbRoot));
             var parts = WfShell.parts(control, args);
             var partIdList = parts.Api.PartIdentities;
             var appLogConfig = WfLogs.configure(controlId, dbRoot);
-
             IWfPaths _paths = new WfPaths(appLogConfig);
+            ci.PathConfigTime = clock.Elapsed;
+            clock.Restart();
+
             var ctx = new WfContext();
             ctx.ApiParts = parts;
             ctx.Args = args;
             ctx.Paths = _paths;
             ctx.Settings = JsonSettings.Load(_paths.AppConfigPath);
             ctx.Controller = control;
+            var init = new WfInit(db, ctx, appLogConfig, partIdList);
 
-            IWfShell wf = new WfShell(new WfInit(db, ctx, appLogConfig, partIdList));
+            ci.InitConfigTime = clock.Elapsed;
+            clock.Restart();
+
+            IWfShell wf = new WfShell(init);
             wf.Router.Enlist(WfShell.reactors(wf,parts.Components));
 
+            ci.ShellCreateTime = clock.Elapsed;
+            ci.FinishTS = now();
+            ci.Args = args;
+            ci.Controller = controlId;
+            ci.LogConfig = appLogConfig;
+            ci.Parts = partIdList;
+            ci.AppConfigPath = _paths.AppConfigPath;
 
             if(verbose)
             {
-                var ci = new WfConfigInfo();
-                ci.Args = args;
-                ci.Controller = controlId;
-                ci.LogConfig = appLogConfig;
-                ci.Parts = partIdList;
-                ci.AppConfigPath = _paths.AppConfigPath;
-
                 var dst = Buffers.text();
-                render(ci,dst);
+                render(ci, dst);
                 wf.Status(dst.Emit());
             }
+
             return wf;
         }
     }

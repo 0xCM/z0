@@ -17,8 +17,8 @@ namespace Z0
         /// </summary>
         /// <param name="name">The option name</param>
         [MethodImpl(Inline), Factory]
-        public static ToolOption option(string name)
-            => new ToolOption(name);
+        public static CmdOption option(string name)
+            => new CmdOption(name);
 
         /// <summary>
         /// Creates a meaningful option
@@ -26,7 +26,7 @@ namespace Z0
         /// <param name="name">The option name</param>
         /// <param name="purpose">The option's significance</param>
         [MethodImpl(Inline), Factory]
-        public static ToolOption option(string name, string purpose)
-            => new ToolOption(name, purpose);
+        public static CmdOption option(string name, string purpose)
+            => new CmdOption(name, purpose);
     }
 }

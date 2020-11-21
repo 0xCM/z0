@@ -11,12 +11,12 @@ namespace Z0
     using static z;
 
     [DataType]
-    public readonly struct ToolOptions : IIndexedView<ToolOptions,ushort,ToolOption>
+    public readonly struct CmdOptions : IIndexedView<CmdOptions,ushort,CmdOption>
     {
-        readonly IndexedView<ToolOption> Data;
+        readonly IndexedView<CmdOption> Data;
 
         [MethodImpl(Inline)]
-        public ToolOptions(ToolOption[] src)
+        public CmdOptions(CmdOption[] src)
             => Data = src;
 
         public uint Count
@@ -25,26 +25,26 @@ namespace Z0
             get => Data.Count;
         }
 
-        public ref readonly ToolOption this[ushort index]
+        public ref readonly CmdOption this[ushort index]
         {
             [MethodImpl(Inline)]
             get => ref Data[index];
         }
 
-        public ToolOption[] Storage
+        public CmdOption[] Storage
         {
             [MethodImpl(Inline)]
             get => Data;
         }
 
-        public ReadOnlySpan<ToolOption> Terms
+        public ReadOnlySpan<CmdOption> Terms
         {
             [MethodImpl(Inline)]
             get => Data.Terms;
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator ToolOptions(ToolOption[] src)
-            => new ToolOptions(src);
+        public static implicit operator CmdOptions(CmdOption[] src)
+            => new CmdOptions(src);
     }
 }

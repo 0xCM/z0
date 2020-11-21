@@ -4,9 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    [Cmd]
+    [Cmd(Name)]
     public struct EmitHexIndexCmd : ICmdSpec<EmitHexIndexCmd>
     {
+        public const string Name = "index-hex";
 
+        public Index<PartId> Parts;
     }
 }
