@@ -14,18 +14,18 @@ namespace Z0.Asm
         void FireOnMatch(in S src);
     }
 
-    public interface IAsmFxTrigger : IAsmTrigger<Instruction>
+    public interface IAsmFxTrigger : IDataTrigger<Instruction>
     {
 
     }
 
-    public interface IAsmFxPipe
+    public interface IAsmPipe
     {
         AsmFxList Flow(in AsmFxList fxList);
     }
 
-    public interface IAsmFxFlow
+    public interface IAsmFlow
     {
-        AsmFxList[] Push(IAsmFxPipe fxPipe);
+        AsmFxList[] Push(IAsmPipe fxPipe);
     }
 }

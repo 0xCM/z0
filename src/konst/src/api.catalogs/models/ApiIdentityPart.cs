@@ -46,7 +46,7 @@ namespace Z0
         public static bool operator!=(ApiIdentityPart a, ApiIdentityPart b)
             => !a.Equals(b);
 
-        internal ApiIdentityPart(byte index, ApiIdentityPartKind kind, string text)
+        public ApiIdentityPart(byte index, ApiIdentityPartKind kind, string text)
         {
             Index = index;
             Kind = kind;

@@ -40,7 +40,7 @@ namespace Z0
         public void fixed_convert()
         {
             BinaryOp<uint> f = gmath.add<uint>;
-            BinaryOp32 g = CellOps.define(gmath.add<uint>);
+            CellDelegates.BinaryOp32 g = CellDelegates.define(gmath.add<uint>);
             var lhs = Random.CellStream<Cell32>().Take(RepCount).ToArray();
             var rhs = Random.CellStream<Cell32>().Take(RepCount).ToArray();
 

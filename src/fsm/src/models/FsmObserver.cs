@@ -55,7 +55,7 @@ namespace Z0
             CompletionCount++;
             if(Tracing.TraceCompletions())
             {
-                Trace(FsmMessages.Completed(Id, stats, asPlanned));
+                Trace(Msg.Completed(Id, stats, asPlanned));
                 CompletionCount = 0;
             }
         }
@@ -69,7 +69,7 @@ namespace Z0
         {
             TransitionCount++;
             if(Tracing.TraceTransitions())
-                Trace(FsmMessages.Transition(Id,s0,s1));
+                Trace(Msg.Transition(Id,s0,s1));
         }
 
         /// <summary>
@@ -82,7 +82,7 @@ namespace Z0
 
             if(ReceiptCounter == ReceiptEmitRate && Tracing.TraceEvents())
             {
-                Trace(FsmMessages.Receipt(Id, input, ReceiptCount));
+                Trace(Msg.Receipt(Id, input, ReceiptCount));
                 ReceiptCounter = 0;
             }
 
@@ -103,7 +103,7 @@ namespace Z0
                         Trace(ae.Message);
                         break;
                     default:
-                        Trace(FsmMessages.Error(Id, e));
+                        Trace(Msg.Error(Id, e));
                     break;
                 }
             }

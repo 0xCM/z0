@@ -15,30 +15,6 @@ namespace Z0
     {
         const NumericKind Closure = UnsignedInts;
 
-        [MethodImpl(Inline), Op]
-        public static StringLookup lookup(ReadOnlySpan<StringRef> src)
-            => new StringLookup(src);
-
-
-        [MethodImpl(Inline), Op]
-        public static StringIndex index(params string[] src)
-            => new StringIndex(src.Select(z.hash), src);
-
-        [Op]
-        public static KeyedValues<uint,string> pairs(in StringIndex src)
-            => pairs(src,sys.alloc<KeyedValue<uint,string>>(src.Count));
-
-        [MethodImpl(Inline), Op]
-        public static KeyedValues<uint,string> pairs(in StringIndex src, KeyedValue<uint,string>[] buffer)
-        {
-            var keys = @readonly(src.Keys);
-            var values = @readonly(src.Values);
-            var count = keys.Length;
-            var dst = span(buffer);
-            for(var i=0u; i<count; i++)
-                seek(dst,i) = z.kvp(skip(keys,i), skip(values,i));
-            return buffer;
-        }
 
         [MethodImpl(Inline), Op]
         public static string value(in StringIndex src, uint key)

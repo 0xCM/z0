@@ -70,7 +70,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Fsm<T,T> create<T>(IWfShell wf, PrimalFsmSpec<T> spec, ulong seed, ulong index)
             where T : unmanaged
-                => create(wf, Rng.pcg64(seed, index),spec);
+                => create(wf, spec);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         static string identify<T>(PrimalFsmSpec<T> spec)
@@ -83,9 +83,9 @@ namespace Z0
         /// <param name="spec">The FSM definition</param>
         /// <typeparam name="T">The primal fsm type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Fsm<T,T> create<T>(IWfShell wf, IPolyrand random, PrimalFsmSpec<T> spec)
+        public static Fsm<T,T> create<T>(IWfShell wf, PrimalFsmSpec<T> spec)
             where T : unmanaged
-                => Fsm.machine(identify(spec), wf, random, spec.StartState, spec.EndState, transition(random, spec), spec.ReceiptLimit);
+                => Fsm.machine(identify(spec), wf, spec.StartState, spec.EndState, transition(wf.Random, spec), spec.ReceiptLimit);
 
         /// <summary>
         /// Executes one or more primal state machines
@@ -295,8 +295,8 @@ namespace Z0
         /// <typeparam name="E">The event type</typeparam>
         /// <typeparam name="S">The state type</typeparam>
         [MethodImpl(Inline)]
-        public static Fsm<E,S> machine<E,S>(string id, IWfShell wf, IPolyrand random, S s0, S sZ, MachineTransition<E,S> f, ulong? limit = null)
-            => new Fsm<E,S>(id, wf, random, s0, sZ, f, limit);
+        public static Fsm<E,S> machine<E,S>(string id, IWfShell wf, S s0, S sZ, MachineTransition<E,S> f, ulong? limit = null)
+            => new Fsm<E,S>(id, wf, s0, sZ, f, limit);
 
         /// <summary>
         /// Defines an output rule key

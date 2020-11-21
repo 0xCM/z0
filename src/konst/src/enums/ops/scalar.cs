@@ -105,7 +105,6 @@ namespace Z0
             where E : unmanaged, Enum
                 => ref store(eVal, out tVal);
 
-
         /// <summary>
         /// Reads an i64-value from an enum of primal i64-kind
         /// </summary>
@@ -115,7 +114,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref long scalar<E>(in E eVal, out long tVal)
             where E : unmanaged, Enum
-                => ref z.store(eVal, out tVal);
+                => ref ScalarStore.store(eVal, out tVal);
 
         /// <summary>
         /// Reads a u64-value from an enum of primal u64-kind
@@ -126,7 +125,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref ulong scalar<E>(in E eVal, out ulong tVal)
             where E : unmanaged, Enum
-                => ref z.store(eVal, out tVal);
+                => ref ScalarStore.store(eVal, out tVal);
 
         /// <summary>
         /// Reads a c16-value from an enum of primal u16-kind

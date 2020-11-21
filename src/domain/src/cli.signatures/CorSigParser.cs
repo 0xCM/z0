@@ -29,7 +29,7 @@ namespace Z0
         /// </summary>
         public sealed class MethodDef : ClrSigParser<MethodDef>
         {
-            public override CorSigKind Kind => CorSigKind.MethodDef;
+            public override CliSigKind Kind => CliSigKind.MethodDef;
         }
 
         /// <summary>
@@ -37,40 +37,37 @@ namespace Z0
         /// </summary>
         public sealed class MethodRef : ClrSigParser<MethodRef>
         {
-            public override CorSigKind Kind => CorSigKind.MethodRef;
+            public override CliSigKind Kind => CliSigKind.MethodRef;
 
         }
 
         public sealed class StandAloneMethod : ClrSigParser<StandAloneMethod>
         {
-
-            public override CorSigKind Kind  => CorSigKind.StandAloneMethod;
-
+            public override CliSigKind Kind  => CliSigKind.StandAloneMethod;
         }
 
         public sealed class Field : ClrSigParser<Field>
         {
-            public override CorSigKind Kind => CorSigKind.Field;
+            public override CliSigKind Kind => CliSigKind.Field;
         }
 
         public sealed class Property : ClrSigParser<Property>
         {
 
-            public override CorSigKind Kind => CorSigKind.Property;
+            public override CliSigKind Kind => CliSigKind.Property;
 
         }
 
         public sealed class LocalVar : ClrSigParser<LocalVar>
         {
 
-            public override CorSigKind Kind => CorSigKind.LocalVar;
+            public override CliSigKind Kind => CliSigKind.LocalVar;
         }
     }
 
     public abstract class ClrSigParser<T> : CorSigParser
         where T : ClrSigParser<T>, new()
     {
-        public abstract CorSigKind Kind {get;}
+        public abstract CliSigKind Kind {get;}
     }
-
 }

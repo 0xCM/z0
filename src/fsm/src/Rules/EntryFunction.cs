@@ -20,6 +20,7 @@ namespace Z0
 
         public EntryFunction(IEnumerable<IFsmActionRule<A>> rules)
         {
+            //System.Reflection.Emit.SignatureHelper
             RuleIndex = rules.Select(rule => (rule.RuleId, rule)).ToDictionary();
         }
 

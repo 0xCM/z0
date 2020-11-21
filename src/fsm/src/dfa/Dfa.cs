@@ -22,7 +22,7 @@ namespace Z0
                 => new Alphabet<A>(terms);
 
         [MethodImpl(Inline), Op]
-        public static Alphabet<Symbol<AsciChar>> alphabet(AsciChar[] src)
+        public static Alphabet<Symbol<AsciChar>> asci(AsciChar[] src)
             => src.Map(s => Symbolic.symbol(s));
     }
 }

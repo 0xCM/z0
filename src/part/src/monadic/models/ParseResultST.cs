@@ -21,7 +21,7 @@ namespace Z0
         /// </summary>
         public bool Succeeded {get;}
 
-        public bool Failed 
+        public bool Failed
         {
             [MethodImpl(Inline)]
             get => !Succeeded;
@@ -49,7 +49,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator ParseResult(ParseResult<S,T> src)
             => ParseResult.Define(src.Source.ToString(), typeof(T), src.Succeeded, src.Value);
-        
+
         [MethodImpl(Inline)]
         public static bool operator true(ParseResult<S,T> src)
             => src.Succeeded;
@@ -65,7 +65,7 @@ namespace Z0
             Succeeded = true;
             Value = value;
             Reason = reason != null ? Option.some(reason) : Option.none<object>();
-        }        
+        }
 
         [MethodImpl(Inline)]
         public ParseResult<S,T> WithReason(object reason)
@@ -83,7 +83,7 @@ namespace Z0
             return this;
         }
 
-        
+
         /// <summary>
         /// Invokes an action if the value doesn't exist
         /// </summary>
@@ -130,12 +130,12 @@ namespace Z0
         {
             if(Succeeded)
                 return Value;
-            else    
+            else
                 throw new Exception($"{Source} unparsed:{Reason}");
         }
 
         /// <summary>
-        /// Extracts the encapulated value if it exists; otherwise, returns the default value for
+        /// Extracts the encapsulated value if it exists; otherwise, returns the default value for
         /// the underlying type which is NULL for reference types
         /// </summary>
         /// <param name="default">The value to return if the option is non-valued</param>
@@ -144,7 +144,7 @@ namespace Z0
             => Succeeded ? Value : @default;
 
         /// <summary>
-        /// Returns the encapsulated value if it exists; otherwise, invokes the supplied fallback function 
+        /// Returns the encapsulated value if it exists; otherwise, invokes the supplied fallback function
         /// </summary>
         /// <param name="fallback">The function called to produce a value when there is no value in the source</param>
         [MethodImpl(Inline)]

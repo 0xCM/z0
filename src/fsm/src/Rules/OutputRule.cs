@@ -20,44 +20,32 @@ namespace Z0
         /// <summary>
         /// The source state
         /// </summary>
-        public readonly E Trigger {get;}
+        public E Trigger {get;}
 
         /// <summary>
         /// The target state
         /// </summary>
-        public readonly S Source {get;}
+        public S Source {get;}
 
         /// <summary>
         /// The output value associated with the specified state
         /// </summary>
-        public readonly O Output {get;}
+        public O Output {get;}
 
         /// <summary>
         /// The key that identifies the rule
         /// </summary>
-        public readonly OutputRuleKey<E,S> Key {get;}
+        public OutputRuleKey<E,S> Key {get;}
 
         /// <summary>
         /// The rule id as determined by the key
         /// </summary>
-        public readonly int RuleId 
+        public readonly int RuleId
         {
             [MethodImpl(Inline)]
             get => Key.Hash;
         }
 
-        /// <summary>
-        /// Constructs an output rule from a (source,target,output) triple
-        /// </summary>
-        /// <param name="source">The source state</param>
-        /// <param name="target">The target state</param>
-        /// <param name="output">The output to emit upon a source -> target transition</param>
-        /// <typeparam name="S">The state type</typeparam>
-        /// <typeparam name="O">The output type</typeparam>
-        [MethodImpl(Inline)]
-        public static implicit operator OutputRule<E,S,O>((E trigger, S source, O output) x)
-            => new OutputRule<E, S, O>(x.trigger, x.source, x.output);
-                    
         [MethodImpl(Inline)]
         public OutputRule(E trigger, S source, O output)
         {
@@ -71,10 +59,23 @@ namespace Z0
         public string Format()
             => $"({Trigger},{Source}) -> {Output}";
 
-        public readonly override string ToString() 
+        public readonly override string ToString()
             => Format();
 
-        IRuleKey<E,S> IFsmRule<E,S>.Key 
+        IRuleKey<E,S> IFsmRule<E,S>.Key
             => Key;
+
+
+        /// <summary>
+        /// Constructs an output rule from a (source,target,output) triple
+        /// </summary>
+        /// <param name="source">The source state</param>
+        /// <param name="target">The target state</param>
+        /// <param name="output">The output to emit upon a source -> target transition</param>
+        /// <typeparam name="S">The state type</typeparam>
+        /// <typeparam name="O">The output type</typeparam>
+        [MethodImpl(Inline)]
+        public static implicit operator OutputRule<E,S,O>((E trigger, S source, O output) x)
+            => new OutputRule<E,S,O>(x.trigger, x.source, x.output);
     }
 }

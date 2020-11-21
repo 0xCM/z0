@@ -15,30 +15,29 @@ namespace Z0
     /// <typeparam name="S">The state type</typeparam>
     public readonly struct OutputRuleKey<E,S> : IRuleKey<E,S>
     {
-        public readonly E Trigger {get;}
+        public E Trigger {get;}
 
-        public readonly S Source {get;}
+        public S Source {get;}
 
         /// <summary>
         /// The invariant hash
         /// </summary>
-        public readonly int Hash {get;}
-
-        [MethodImpl(Inline)]
-        public static implicit operator OutputRuleKey<E,S>((E trigger, S source) x)
-            => new OutputRuleKey<E,S>(x.trigger, x.source);
+        public int Hash {get;}
 
         [MethodImpl(Inline)]
         public OutputRuleKey(E trigger, S target)
         {
-            this.Trigger = trigger;
-            this.Source = target;
-            this.Hash = HashCode.Combine(trigger,target);
+            Trigger = trigger;
+            Source = target;
+            Hash = HashCode.Combine(trigger,target);
         }
 
         public override string ToString()
             => $"({Trigger}, {Source})";
 
+        [MethodImpl(Inline)]
+        public static implicit operator OutputRuleKey<E,S>((E trigger, S source) x)
+            => new OutputRuleKey<E,S>(x.trigger, x.source);
     }
 
 }

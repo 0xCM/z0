@@ -14,7 +14,7 @@ namespace Z0
     {
         BasedCodeBlock Case(ApiClass k, params NumericKind[] kinds)
         {
-            var id = Signatures.NumericOp(k, kinds).ToPropertyName();
+            var id = ApiSignatures.NumericOp(k, kinds).ToPropertyName();
             var resource = TryFind(id);
             if(!resource)
                 throw new KeyNotFoundException(id);

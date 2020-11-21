@@ -18,12 +18,12 @@ namespace Z0
         [FixedAddressValueType]
         static Multiparser _Service;
 
-        Dictionary<ClrArtifactKey,IParseFunction> Parsers;
+        Dictionary<ClrArtifactKey,IParser> Parsers;
 
         static Multiparser()
         {
             _Service = new Multiparser();
-            _Service.Parsers = dict<ClrArtifactKey,IParseFunction>();
+            _Service.Parsers = dict<ClrArtifactKey,IParser>();
             _Service.Include(FilePathParser.service());
         }
 
@@ -32,15 +32,15 @@ namespace Z0
             => ref address(_Service).Ref<Multiparser>();
 
         [MethodImpl(Inline)]
-        public void Include(IParseFunction parser)
+        public void Include(IParser parser)
             => Parsers[parser.TargetType] = parser;
 
         [MethodImpl(Inline)]
-        public bool Lookup(Type target, out IParseFunction parser)
+        public bool Lookup(Type target, out IParser parser)
             => Parsers.TryGetValue(target, out parser);
 
         [MethodImpl(Inline)]
-        public bool Lookup(ClrArtifactKey target, out IParseFunction parser)
+        public bool Lookup(ClrArtifactKey target, out IParser parser)
             => Parsers.TryGetValue(target, out parser);
 
         [MethodImpl(Inline)]
@@ -52,11 +52,11 @@ namespace Z0
             => Parsers.ContainsKey(target);
 
         [MethodImpl(Inline)]
-        public IParseFunction Require(Type target)
+        public IParser Require(Type target)
             => Parsers[target];
 
         [MethodImpl(Inline)]
-        public IParseFunction Require(ClrArtifactKey target)
+        public IParser Require(ClrArtifactKey target)
             => Parsers[target];
     }
 }

@@ -6,19 +6,19 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
- 
+
     using static Konst;
-  
+
     /// <summary>
     /// Identifies an action rule for lookup purposes
     /// </summary>
     /// <typeparam name="S">The state type</typeparam>
     public readonly struct ActionRuleKey<S> : IRuleKey
     {
-        [MethodImpl(Inline)]
-        public static implicit operator ActionRuleKey<S>(S source)
-            => new ActionRuleKey<S>(source);
-        
+        public int Hash {get;}
+
+        public S Source {get;}
+
         [MethodImpl(Inline)]
         public ActionRuleKey(S source)
         {
@@ -26,11 +26,11 @@ namespace Z0
             Hash = source.GetHashCode();
         }
 
-        public readonly int Hash {get;}
-
-        public readonly S Source;
-
-        public readonly override string ToString() 
+        public readonly override string ToString()
             => $"({Source})";
+
+        [MethodImpl(Inline)]
+        public static implicit operator ActionRuleKey<S>(S source)
+            => new ActionRuleKey<S>(source);
     }
 }

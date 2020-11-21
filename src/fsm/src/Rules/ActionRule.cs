@@ -17,26 +17,38 @@ namespace Z0
         /// <summary>
         /// The state upon which the rule is predicated
         /// </summary>
-        public readonly S Source {get;}
-        
+        public S Source {get;}
+
         /// <summary>
         /// The action invoked
         /// </summary>
-        public readonly A Action {get;}
+        public A Action {get;}
 
         /// <summary>
         /// The rule key
         /// </summary>
-        public readonly ActionRuleKey<S> Key {get;}
+        public ActionRuleKey<S> Key {get;}
 
         /// <summary>
         /// The rule identifier
         /// </summary>
-        public readonly int RuleId 
+        public readonly int RuleId
         {
             [MethodImpl(Inline)]
             get => Key.Hash;
         }
+
+        [MethodImpl(Inline)]
+        public ActionRule(S source, A action)
+        {
+            Source = source;
+            Action= action;
+            Key = new ActionRuleKey<S>(source);
+        }
+
+
+        public readonly override string ToString()
+            => $"({Source}) -> {Action}";
 
         /// <summary>
         /// Constructs a rule from a source/action pair
@@ -48,17 +60,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator ActionRule<S,A>((S src, A action) x)
             => new ActionRule<S,A>(x.src, x.action);
-
-        [MethodImpl(Inline)]
-        public ActionRule(S source, A action)
-        {
-            Source = source;
-            Action= action;
-            Key = new ActionRuleKey<S>(source);
-        }
-
-
-        public readonly override string ToString() 
-            => $"({Source}) -> {Action}";
     }
 }

@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
-    using System.Linq;
     using System.Reflection;
 
     using static Konst;
@@ -21,7 +19,7 @@ namespace Z0
             var data = Literals.value(src);
             var type = src.FieldType;
 
-            var datatype = PrimalKinds.kind(type);
+            var datatype = ClrPrimitives.kind(type);
             if(data is string s)
             {
                 var content = z.span(s);

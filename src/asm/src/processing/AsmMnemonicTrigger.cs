@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
 
@@ -13,7 +13,7 @@ namespace Z0.Asm
     /// Fires when an instruction mnemonic matches a specified mnemonic
     /// </summary>
     public readonly struct AsmMnemonicTrigger : IAsmFxTrigger
-    {        
+    {
         public readonly Mnemonic Mnemonic;
 
         readonly AsmFxHandler Handler;
@@ -24,15 +24,15 @@ namespace Z0.Asm
             Mnemonic = mnemonic;
             Handler = handler;
         }
-                
+
         [MethodImpl(Inline)]
-        public bool CanFire(in Instruction src)
+        public bool TestCondition(in Instruction src)
             => Mnemonic == src.Mnemonic;
 
         [MethodImpl(Inline)]
-        public void FireOnMatch(in Instruction src)
+        public void TryFire(in Instruction src)
         {
-            if(CanFire(src))
+            if(TestCondition(src))
                 Handler(src);
         }
     }

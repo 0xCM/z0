@@ -15,7 +15,7 @@ namespace Z0
         public static EnumScalarKind kind(Type e)
         {
             var tc = Type.GetTypeCode(e.GetEnumUnderlyingType());
-            return (EnumScalarKind)z.primal(tc);
+            return (EnumScalarKind)ClrPrimitives.kind(tc);
         }
 
         [MethodImpl(Inline)]

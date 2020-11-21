@@ -10,8 +10,6 @@ namespace Z0
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
 
     using static Konst;
-    using static TestCaseIdentity;
-    using static ApiUriDelimiters;
 
     public interface ITestCaseIdentity : TValidator
     {
@@ -20,18 +18,7 @@ namespace Z0
         /// </summary>
         /// <param name="id">Identifies the operation under test</param>
         string CaseName(OpIdentity id)
-            => TestCaseIdentity.name(HostType,id);
-
-        string CaseName([Caller] string label = null)
-            => ApiUri.TestCase(HostType, label);
-
-        /// <summary>
-        /// Produces a test case identifier predicated on a parametrically-specialized label
-        /// <param name="label">The case label</param>
-        /// <typeparam name="T">The label specialization type</typeparam>
-        OpIdentity CaseOpId<T>([Caller] string label = null)
-            where T : unmanaged
-                => TestCaseIdentity.id<T>(label);
+            => ApiTestIdentity.name(HostType,id);
 
         /// <summary>
         /// Produces a test case name predicated on a parametrically-specialized label
@@ -40,50 +27,22 @@ namespace Z0
         /// <typeparam name="T">The label specialization type</typeparam>
         string CaseName<T>([Caller] string label = null)
             where T : unmanaged
-                => TestCaseIdentity.name<T>(HostType, label);
-
-        OpIdentity BaselineId<K>(string label, K t = default)
-            where K : unmanaged
-                => ApiIdentify.sfunc<K>($"{label}_baseline");
-
-        string CaseName(IFunc f)
-            => TestCaseIdentity.name(HostType,f);
+                => ApiTestIdentity.name<T>(HostType, label);
 
         string CaseName<W,T>(IFunc f)
             where W : unmanaged, ITypeWidth
             where T : unmanaged
-                => CaseName<W,T>(HostType, ApiIdentify.build<W,T>(name(f)), true);
+                => CaseName<W,T>(HostType, ApiIdentify.build<W,T>(ApiTestIdentity.name(f)), true);
 
         string CaseName<W,T>([Caller] string label = null, bool generic = true)
             where W : unmanaged, ITypeWidth
             where T : unmanaged
                 => CaseName<W,T>(GetType(), label, generic);
 
-        /// <summary>
-        /// Produces the name of the test case predicated on a root name and parametric type
-        /// </summary>
-        /// <param name="label">The root name</param>
-        string CaseName<C>(Type host, string label)
-            where C : unmanaged
-                => text.concat(ApiIdentityKinds.OwningPartText(host), UriPathSep, host.Name, UriPathSep, label, '_', ApiIdentify.numeric<C>());
-
         string CaseName<W,C>(Type host, string label, bool generic)
             where W : unmanaged, ITypeWidth
             where C : unmanaged
-                => TestCaseIdentity.name<W,C>(host, label, generic);
-
-        /// <summary>
-        /// Computes a test case identifier for a segmented structured function
-        /// </summary>
-        /// <param name="f">The function under test</param>
-        /// <param name="w">The domainant operand width</param>
-        /// <param name="generic">Whether the test subject is generic</param>
-        /// <typeparam name="W">The type width</typeparam>
-        /// <typeparam name="T">The cell width</typeparam>
-        string CaseName<W,T>(IFunc f, W w, bool generic = true)
-            where W : unmanaged, ITypeWidth
-            where T : unmanaged
-                => CaseName<W,T>(HostType, ApiIdentify.build<W,T>(name(f)), generic: generic);
+                => ApiTestIdentity.name<W,C>(host, label, generic);
 
         /// <summary>
         /// Produces a case name for an identified operation match test
@@ -91,6 +50,6 @@ namespace Z0
         /// <param name="f">The left operation</param>
         /// <param name="g">The right operation</param>
         string MatchCaseName(OpIdentity f, OpIdentity g)
-            => TestCaseIdentity.match(HostType, f, g);
+            => ApiTestIdentity.match(HostType, f, g);
     }
 }

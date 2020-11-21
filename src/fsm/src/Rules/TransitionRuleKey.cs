@@ -28,10 +28,6 @@ namespace Z0
         public int Hash {get;}
 
         [MethodImpl(Inline)]
-        public static implicit operator TransitionRuleKey<E,S>((E trigger, S source) x)
-            => new TransitionRuleKey<E,S>(x.trigger,x.source);
-
-        [MethodImpl(Inline)]
         public TransitionRuleKey(E input, S source)
         {
             Trigger = input;
@@ -47,6 +43,10 @@ namespace Z0
             => string.Format(RP.Tuple2, Source, Trigger);
 
         public override string ToString()
-            => $"({Source}, {Trigger})";
+            => Format();
+
+        [MethodImpl(Inline)]
+        public static implicit operator TransitionRuleKey<E,S>((E trigger, S source) x)
+            => new TransitionRuleKey<E,S>(x.trigger,x.source);
     }
 }

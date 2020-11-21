@@ -13,6 +13,5 @@ namespace Z0
         /// The source state
         /// </summary>
         S Source {get;}
-
     }
 }

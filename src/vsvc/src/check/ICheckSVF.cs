@@ -65,7 +65,7 @@ namespace Z0
         {
             var cells = vcount<T>(n128);
             var succeeded = true;
-            var casename = Context.CaseName(f);
+            var casename = ApiTestIdentity.name(f);
             var count = Time.counter();
 
             count.Start();
@@ -96,7 +96,7 @@ namespace Z0
         {
             var cells = vcount<T>(n256);
             var succeeded = true;
-            var casename = Context.CaseName(f);
+            var casename = ApiTestIdentity.name(f);
             var count = Time.counter();
 
             count.Start();
@@ -125,7 +125,7 @@ namespace Z0
             where T : unmanaged
             where F : IBinaryOp128<T>
         {
-            var casename = name ?? Context.CaseName(f);
+            var casename = name ?? ApiTestIdentity.name(f);
             var w = n128;
             var t = default(T);
             var cells = vcount(w,t);
@@ -160,7 +160,7 @@ namespace Z0
             where T : unmanaged
             where F : IBinaryOp256<T>
         {
-            var casename = name ?? Context.CaseName(f);
+            var casename = name ?? ApiTestIdentity.name(f);
             var w = n256;
             var t = default(T);
             var cells = vcount(w,t);
@@ -204,7 +204,7 @@ namespace Z0
             where F : IEmitter128<T>
         {
             var succeeded = true;
-            var casename = Context.CaseName(f);
+            var casename = ApiTestIdentity.name(f);
             var count = Time.counter();
 
             count.Start();
@@ -236,7 +236,7 @@ namespace Z0
             where F : IEmitter256<T>
         {
             var succeeded = true;
-            var casename = Context.CaseName(f);
+            var casename = ApiTestIdentity.name(f);
             var count = Time.counter();
 
             count.Start();
@@ -275,7 +275,7 @@ namespace Z0
             where C : ICheckSF128<S,T>
         {
             var succeeded = true;
-            var casename = Context.CaseName(f);
+            var casename = ApiTestIdentity.name(f);
             var count = Time.counter();
 
             count.Start();
@@ -324,7 +324,7 @@ namespace Z0
             where C : ICheckSF256<S,T>
         {
             var succeeded = true;
-            var casename = Context.CaseName(f);
+            var casename = ApiTestIdentity.name(f);
             var count = Time.counter();
 
             count.Start();

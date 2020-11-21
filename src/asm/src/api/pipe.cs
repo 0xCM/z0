@@ -3,19 +3,19 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
 
     using Z0.Asm;
 
-    using static Konst;    
+    using static Konst;
     using static z;
 
     partial struct asm
     {
         [MethodImpl(Inline), Op]
-        public static AsmFxPipe pipe(Func<AsmFxList,AsmFxList> f)
-            => new AsmFxPipe(f);
+        public static AsmPipe pipe(Func<AsmFxList,AsmFxList> f)
+            => new AsmPipe(f);
     }
 }

@@ -35,7 +35,7 @@ namespace Z0
 
             }
 
-            CheckAction(check, Context.CaseName(f));
+            CheckAction(check, ApiTestIdentity.name(f));
         }
     }
 }

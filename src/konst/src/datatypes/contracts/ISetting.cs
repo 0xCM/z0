@@ -23,10 +23,7 @@ namespace Z0
         string Value {get;}
     }
 
-    public interface ISetting<H,K,V> : ISetting
-        where H : struct, ISetting<H,K,V>
-        where K : struct, ISettingKey<K>
-        where V : struct, ISettingValue<V>
+    public interface ISetting<K,V> : ISetting
     {
         new K Name {get;}
 
@@ -39,6 +36,11 @@ namespace Z0
             => Value.ToString();
         string ITextual.Format()
             => Render.setting(Name,Value);
-        bool Parse(string src, out H dst);
+    }
+
+    public interface ISetting<H,K,V> : ISetting<K,V>
+        where H : struct, ISetting<H,K,V>
+    {
+
     }
 }

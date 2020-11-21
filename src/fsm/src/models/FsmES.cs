@@ -20,12 +20,22 @@ namespace Z0
     /// <typeparam name="S">The state type</typeparam>
     public class Fsm<E,S>
     {
-        public Fsm(string id, IWfShell wf, IPolyrand random,  S ground, S end, IFsmFunc<E,S> transition, ulong? limit = null)
+        /// <summary>
+        /// Initializes a state machine
+        /// </summary>
+        /// <param name="id">The state machine identifier</param>
+        /// <param name="wf">The executing workflow</param>
+        /// <param name="random"></param>
+        /// <param name="ground"></param>
+        /// <param name="end"></param>
+        /// <param name="transition"></param>
+        /// <param name="limit"></param>
+        public Fsm(string id, IWfShell wf, S ground, S end, IFsmFunc<E,S> transition, ulong? limit = null)
         {
             Id = id;
             Wf = wf;
             CurrentState = ground;
-            Random = random;
+            Random = Wf.Random;
             EndState = end;
             Error = none<Exception>();
             Transition = transition;
@@ -91,7 +101,7 @@ namespace Z0
         /// </summary>
         Option<Exception> Error;
 
-        public IPolyrand Random {get;}
+        public IPolySourced Random {get;}
 
         /// <summary>
         /// Identifies the machine within the process
@@ -169,13 +179,13 @@ namespace Z0
         {
             if(Finished)
             {
-                RaiseWarning(FsmMessages.ReceiptAfterFinish(Id));
+                RaiseWarning(Msg.ReceiptAfterFinish(Id));
                 return false;
             }
 
             if(!Started)
             {
-                RaiseWarning(FsmMessages.ReceiptBeforeStart(Id));
+                RaiseWarning(Msg.ReceiptBeforeStart(Id));
                 return false;
             }
 

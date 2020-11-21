@@ -18,14 +18,14 @@ namespace Z0
         public static ref ulong eq<T>(T x, T y, ref byte index, ref ulong dst)
             where T : unmanaged
         {
-            dst = (ulong)@byte(PrimalKinds.eq(x,y)) << index++;
+            dst = (ulong)@byte(ClrPrimitives.eq(x,y)) << index++;
             return ref dst;
         }
 
         [MethodImpl(Inline)]
         public static bit eq<T>(T x, T y)
             where T : unmanaged
-                => PrimalKinds.eq(x,y);
+                => ClrPrimitives.eq(x,y);
 
         [MethodImpl(Inline)]
         public static BitVector64 bveq<T>(T x, T y, byte index)

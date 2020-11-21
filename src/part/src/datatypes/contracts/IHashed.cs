@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     /// <summary>
     /// Characterizes a hash code provider
     /// </summary>
@@ -24,7 +22,7 @@ namespace Z0
     }
 
     /// <summary>
-    /// Characterizes a refied structural <see cref='IHashed'/> reification
+    /// Characterizes a structural <see cref='IHashed'/> reification
     /// </summary>
     /// <typeparam name="F">The reification type</typeparam>
     /// <typeparam name="C">The hashed content type</typeparam>

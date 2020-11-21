@@ -23,7 +23,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static AsmFxFlow flow(AsmFxList[] fxList, in AsmTriggerSet triggers, params AsmFxHandler[] handlers)
-            => new AsmFxFlow(fxList, triggers, handlers);
+        public static AsmFlow flow(AsmFxList[] fxList, in AsmTriggerSet triggers, params AsmFxHandler[] handlers)
+            => new AsmFlow(fxList, triggers, handlers);
     }
 }

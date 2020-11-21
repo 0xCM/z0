@@ -37,7 +37,7 @@ namespace Z0.Asm
         {
             var src = span(list.Data);
             for(var i=0; i<src.Length; i++)
-                trigger.FireOnMatch(skip(src,i));
+                trigger.TryFire(skip(src,i));
         }
 
         [MethodImpl(Inline)]

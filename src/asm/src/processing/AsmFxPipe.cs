@@ -9,12 +9,12 @@ namespace Z0.Asm
 
     using static Konst;
 
-    public readonly struct AsmFxPipe : IAsmFxPipe
+    public readonly struct AsmPipe : IAsmPipe
     {
         readonly Func<AsmFxList,AsmFxList> F;
 
         [MethodImpl(Inline)]
-        public AsmFxPipe(Func<AsmFxList,AsmFxList> f)
+        public AsmPipe(Func<AsmFxList,AsmFxList> f)
             => F = f;
 
         [MethodImpl(Inline)]

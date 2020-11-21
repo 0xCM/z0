@@ -42,34 +42,6 @@ namespace Z0
         public ParseResult<PartId> Parse(string src)
             => parse<PartId>(src);
 
-        public PartId[] ParseValid(params string[] args)
-            => WhereSome(args.Map(arg => parse<PartId>(arg).ValueOrDefault()));
-
-        public static PartId[] parse(string[] args, PartId[] fallback)
-        {
-            var result = WhereSome(args.Map(arg => parse<PartId>(arg).ValueOrDefault()));
-            return result.Length == 0 ? fallback : result;
-        }
-
-        [MethodImpl(Inline)]
-        static E zero<E>()
-            where E : unmanaged, Enum
-                => default(E);
-
-        [MethodImpl(Inline)]
-        static bool IsSome<E>(E src)
-            where E : unmanaged, Enum
-                => !zero<E>().Equals(src);
-
-        /// <summary>
-        /// Filters zero-valued elements from the source array
-        /// </summary>
-        /// <param name="src">The source array</param>
-        /// <typeparam name="E">The enumeration type</typeparam>
-        static E[] WhereSome<E>(E[] src)
-            where E : unmanaged, Enum
-                => src.Where(x => IsSome(x)).ToArray();
-
         /// <summary>
         /// Attempts to parse an enum literal, ignoring case, and returns a null value if parsing failed
         /// </summary>

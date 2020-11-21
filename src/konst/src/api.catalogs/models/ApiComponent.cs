@@ -15,14 +15,16 @@ namespace Z0
     {
         public Assembly Assembly {get;}
 
+        public FS.FilePath Location {get;}
+
+        public PartId Id {get;}
+
         [MethodImpl(Inline)]
         public ApiComponent(Assembly src)
-            => Assembly = src;
-
-        public FS.FilePath Location
-            => FS.path(Assembly.Location);
-
-        public PartId Id
-            => Assembly.Id();
+        {
+            Assembly = src;
+            Location = FS.path(Assembly.Location);
+            Id = Assembly.Id();
+        }
     }
 }

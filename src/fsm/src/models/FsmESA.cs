@@ -16,7 +16,7 @@ namespace Z0
     {
         internal Fsm(string Id, IWfShell wf, IPolyrand random, S ground, S end,
                 MachineTransition<E,S> Transition, EntryFunction<S,A> entry, ExitFunction<S,A> exit, ulong? limit = null)
-            : base(Id, wf, random, ground, end, Transition, limit)
+            : base(Id, wf, ground, end, Transition, limit)
         {
             EntryFunc = entry;
             ExitFunc = exit;

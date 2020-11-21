@@ -8,23 +8,23 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    
-    public readonly struct AsmCallSink
+
+    public readonly struct AsmCallSink : IAsmInstructionSink
     {
         public const Mnemonic Id = Mnemonic.Call;
 
         readonly AsmFxHandler Receiver;
 
         [MethodImpl(Inline)]
-        public static implicit operator AsmFxSink(AsmCallSink src)
-            => new AsmFxSink(Id, src.Deposit);
-
-        [MethodImpl(Inline)]
         public AsmCallSink(AsmFxHandler dst)
             => Receiver = dst;
-        
+
         [MethodImpl(Inline)]
         public void Deposit(in Instruction src)
             => Receiver(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator AsmFxSink(AsmCallSink src)
+            => new AsmFxSink(Id, src.Deposit);
     }
 }

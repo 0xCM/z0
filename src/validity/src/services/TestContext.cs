@@ -181,17 +181,6 @@ namespace Z0
         protected string caller([Caller] string caller = null)
             => caller;
 
-        protected ITestCaseIdentity CaseIdentityService
-            => Context;
-
-        protected OpIdentity CaseOpId<T>(string label, T t = default)
-            where T : unmanaged
-                => Context.CaseOpId<T>(label);
-
-        protected OpIdentity BaselineId<K>(string label,K t = default)
-            where K : unmanaged
-                => Context.BaselineId<K>(label);
-
         protected string CaseName<C>(string root, C t = default)
             where C : unmanaged
                 => Context.CaseName<C>(root);
@@ -205,7 +194,7 @@ namespace Z0
                 => Context.CaseName<W,C>(label, generic);
 
         protected string CaseName(IFunc f)
-            => Context.CaseName(f);
+            => ApiTestIdentity.name(f);
 
         public CasePaths Paths
             => new CasePaths(TestLogPaths.TestDataRoot, TestedPart, GetType());
