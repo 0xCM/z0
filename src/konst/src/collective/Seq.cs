@@ -16,13 +16,16 @@ namespace Z0
     {
         const NumericKind Closure = UInt64k;
 
+        public static string format<T>(IIndexedView<T> src)
+            => z.delimit(src.Storage).Format();
+
         /// <summary>
         /// Tests the source index for non-emptiness
         /// </summary>
         /// <param name="src">The index to test</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static uint count<T>(in ValueIndex<T> src)
+        public static uint count<T>(in DataIndex<T> src)
             where T : struct
                 => (uint)(src.Data?.Length ?? 0);
 
@@ -32,7 +35,7 @@ namespace Z0
         /// <param name="src">The index to test</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static bool nonempty<T>(in ValueIndex<T> src)
+        public static bool nonempty<T>(in DataIndex<T> src)
             where T : struct
                 => count(src) == 0;
 
@@ -42,7 +45,7 @@ namespace Z0
         /// <param name="src">The index to test</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static bool empty<T>(in ValueIndex<T> src)
+        public static bool empty<T>(in DataIndex<T> src)
             where T : struct
                 => src.Data == null || src.Data.Length == 0;
 
@@ -57,6 +60,26 @@ namespace Z0
             Array.Reverse(src);
             return src;
         }
+
+        /// <summary>
+        /// Produces an indexed sequence from a parameter array
+        /// </summary>
+        /// <param name="src">The source items</param>
+        /// <typeparam name="T">The item type</typeparam>
+        [MethodImpl(Inline)]
+        public static IndexedSeq<T> dataseq<T>(params T[] src)
+            => src;
+
+        /// <summary>
+        /// Creates a value index from an array
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(UInt8k)]
+        public static DataIndex<T> dataindex<T>(T[] src)
+            where T : struct
+                => new DataIndex<T>(src);
+
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static IndexedSeq<T> singletons<T>(params IEnumerable<T>[] src)
@@ -97,9 +120,9 @@ namespace Z0
         /// <param name="src">The data source</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ValueIndex<T> values<T>(T[] src)
+        public static DataIndex<T> values<T>(T[] src)
             where T : struct
-                => new ValueIndex<T>(src);
+                => new DataIndex<T>(src);
 
         /// <summary>
         /// Creates an index from a stream
@@ -107,9 +130,9 @@ namespace Z0
         /// <param name="src">The data source</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ValueIndex<T> values<T>(IEnumerable<T> src)
+        public static DataIndex<T> values<T>(IEnumerable<T> src)
             where T : struct
-                => new ValueIndex<T>(array(src));
+                => new DataIndex<T>(array(src));
 
         /// <summary>
         /// Creates a <see cref='IndexedView{T}'/> from a <see cref ='IEnumerable{T}'/>

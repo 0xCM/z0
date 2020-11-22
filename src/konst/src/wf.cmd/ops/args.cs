@@ -16,11 +16,6 @@ namespace Z0
             where T : struct, ICmdSpec<T>
                 => typeof(T).DeclaredInstanceFields().Select(f => new CmdArg(f.Name, f.GetValue(src)));
 
-        public static CmdArgs args<K,T>(CmdSpec<K,T> src)
-            where K : unmanaged
-            where T : struct, ICmdSpec<T>
-                => new CmdArgs(src.Args.Storage.Map(x => new CmdArg(x.Kind.ToString(), x.Value.ToString())));
-
         /// <summary>
         /// Creates a <see cref='CmdArgs'/> collection from an array
         /// </summary>

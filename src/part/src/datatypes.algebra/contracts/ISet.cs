@@ -53,7 +53,7 @@ namespace Z0
         /// Calculates the set difference, or symmetric difference, between the current
         /// set and a specified set and returns a new set that embodies this result
         /// </summary>
-        /// <param name="rhs">The set that should be differenced</param>
+        /// <param name="rhs">The other set</param>
         /// <remarks>See https://en.wikipedia.org/wiki/Symmetric_difference</remarks>
         F Difference(F rhs, bool symmetric);
     }

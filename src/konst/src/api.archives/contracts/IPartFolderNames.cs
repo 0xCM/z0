@@ -4,20 +4,15 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static CoreFolderNames;
+    using static ArchiveFolderNames;
 
-    using L = CoreFolderNames;
+    using L = ArchiveFolderNames;
 
     /// <summary>
     /// Defines common part path components
     /// </summary>
     public interface IPartFolderNames
     {
-        /// <summary>
-        /// An archive partition for files emitted during test execution
-        /// </summary>
-        FolderName TestFolder
-            => FolderName.Define(Test);
 
         FolderName ExtractFolderName
             => FolderName.Define("extracted", "Raw binary extracts");

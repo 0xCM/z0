@@ -15,31 +15,32 @@ namespace Z0
         /// <summary>
         /// The field specifier
         /// </summary>
-        public readonly F Id;
+        public F Id {get;}
 
         /// <summary>
         /// The field name
         /// </summary>
-        public readonly string Name;
+        public string Name {get;}
 
         /// <summary>
         /// The 0-based field index
         /// </summary>
-        public readonly int Index;
+        public ushort Index {get;}
 
         /// <summary>
         /// The field width
         /// </summary>
-        public readonly int Width;
+        public ushort Width {get;}
 
         [MethodImpl(Inline)]
-        public TableColumn(F id, string name, int index, int width)
+        public TableColumn(F id, string name, ushort index, ushort width)
         {
             Id = id;
             Name = name;
             Index = index;
             Width = width;
         }
+
         public string Format()
             => String.Concat($"{Index}".PadLeft(2,'0'), Space, $"{Width}".PadLeft(2,'0'), Space, Name);
 

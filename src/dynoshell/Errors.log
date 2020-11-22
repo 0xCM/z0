@@ -75,3 +75,31 @@ System.ArgumentNullException: String reference not set to an instance of a Strin
    at Z0.FS.write(String src, FileStream dst, Encoding encoding) in j:\dev\projects\z0\src\konst\src\files\ops\stream.cs:line 37
    at Z0.WfProcLog.LogStatus(String content) in j:\dev\projects\z0\src\konst\src\wf.logs\services\WfProcLog.cs:line 41
 
+Failure trapped by Main at J:\dev\projects\z0\src\dynoshell\src\App.cs 52
+System.Exception: The operands are not equal | 249 != 0
+   at Z0.proxy.throw(Func`1 f) in j:\dev\projects\z0\src\part\src\sys\proxy\throw.cs:line 28
+   at Z0.PipeChecks.check(IWfShell wf) in j:\dev\projects\z0\src\domain\src\multiplex\sRandomPipe.cs:line 29
+   at Z0.Dynoshell.DispatchCommands() in J:\dev\projects\z0\src\dynoshell\src\wf\Runner.cs:line 72
+   at Z0.App.Main(String[] args) in J:\dev\projects\z0\src\dynoshell\src\App.cs:line 40
+
+Failure trapped by Main at J:\dev\projects\z0\src\dynoshell\src\App.cs 52
+System.Exception: The operands are not equal | 0 != 250
+   at Z0.proxy.throw(Func`1 f) in j:\dev\projects\z0\src\part\src\sys\proxy\throw.cs:line 28
+   at Z0.PipeChecks.check(IWfShell wf) in j:\dev\projects\z0\src\domain\src\multiplex\sRandomPipe.cs:line 32
+   at Z0.Dynoshell.DispatchCommands() in J:\dev\projects\z0\src\dynoshell\src\wf\Runner.cs:line 72
+   at Z0.App.Main(String[] args) in J:\dev\projects\z0\src\dynoshell\src\App.cs:line 40
+
+Failure trapped by Main at J:\dev\projects\z0\src\dynoshell\src\App.cs 52
+System.Exception: The operands are not equal | 265 != 0
+   at Z0.proxy.throw(Func`1 f) in j:\dev\projects\z0\src\part\src\sys\proxy\throw.cs:line 28
+   at Z0.PipeChecks.check(IWfShell wf) in j:\dev\projects\z0\src\domain\src\multiplex\sRandomPipe.cs:line 29
+   at Z0.Dynoshell.DispatchCommands() in J:\dev\projects\z0\src\dynoshell\src\wf\Runner.cs:line 72
+   at Z0.App.Main(String[] args) in J:\dev\projects\z0\src\dynoshell\src\App.cs:line 40
+
+Failure trapped by Main at J:\dev\projects\z0\src\dynoshell\src\App.cs 52
+System.Exception: The operands are not equal | 15793 != 60095
+   at Z0.proxy.throw(Func`1 f) in j:\dev\projects\z0\src\part\src\sys\proxy\throw.cs:line 28
+   at Z0.PipeChecks.check(IWfShell wf) in j:\dev\projects\z0\src\domain\src\multiplex\sRandomPipe.cs:line 30
+   at Z0.Dynoshell.DispatchCommands() in J:\dev\projects\z0\src\dynoshell\src\wf\Runner.cs:line 72
+   at Z0.App.Main(String[] args) in J:\dev\projects\z0\src\dynoshell\src\App.cs:line 40
+

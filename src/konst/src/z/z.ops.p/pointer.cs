@@ -14,7 +14,7 @@ namespace Z0
         public static unsafe void* pointer(IntPtr src)
             => src.ToPointer();
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static unsafe T* pointer<T>(ref T src)
             where T : unmanaged
                 => (T*)AsPointer(ref src);

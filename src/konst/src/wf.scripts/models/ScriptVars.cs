@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Linq;
 
     using static z;
     using static Konst;
@@ -21,7 +22,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public Index<IScriptVar> Members()
-            => Data.Cast<IScriptVar>();
+            => new Index<IScriptVar>(Data.Storage.Select(x => z.cast<IScriptVar>(x)));
 
         public string Format()
             => format(this);

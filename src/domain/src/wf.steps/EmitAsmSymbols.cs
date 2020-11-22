@@ -39,6 +39,6 @@ namespace Z0
         }
 
         protected override CmdResult Execute(IWfShell wf, in EmitAsmSymbolsCmd spec)
-            => run(wf,spec);
+            => Reactions.react(wf,spec);
     }
 }

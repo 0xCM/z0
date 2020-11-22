@@ -4,20 +4,14 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Konst;
-    using static z;
-
-    sealed class CheckBitMasksReactor : CmdReactor<CheckBitMasksReactor,CheckBitMasksCmd,Outcome>
+    sealed class CheckBitMasksReactor : CmdReactor<CheckBitMasksCmd,CmdResult>
     {
-        protected override Outcome Run(CheckBitMasksCmd cmd)
+        protected override CmdResult Run(CheckBitMasksCmd cmd)
         {
             var log = text.build();
             using var step = new BitMaskChecker(Wf, Host, Wf.PolySource, log);
             step.Run();
-            return true;
+            return Cmd.ok(cmd);
         }
     }
 }

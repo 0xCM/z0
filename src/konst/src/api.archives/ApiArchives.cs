@@ -104,36 +104,35 @@ namespace Z0
 
         [Op]
         public static ApiCodeDescriptor[] BlockDescriptors(IWfShell wf)
-            => BlockDescriptors(wf, wf.Api.PartIdentities);
-
-        // {
-        //     var archive = ApiArchives.hex(wf);
-        //     var files = @readonly(archive.List().Storage);
-        //     var dst = list<ApiCodeDescriptor>();
-        //     var count = files.Length;
-        //     for(var i=0u; i<count; i++)
-        //     {
-        //         ref readonly var file = ref skip(files,i);
-        //         var content = @readonly(archive.Read(file.Path));
-        //         var kBlock = content.Length;
-        //         var buffer = alloc<ApiCodeDescriptor>(kBlock);
-        //         var target = span(buffer);
-        //         for(var j=0u; j<kBlock; j++)
-        //             store(skip(content,j), ref seek(target,j));
-        //         dst.AddRange(buffer);
-        //     }
-        //     return dst.OrderBy(x => x.Base).ToArray();
-        // }
-
+        {
+            var archive = ApiArchives.hex(wf);
+            var files = @readonly(archive.List().Storage);
+            var dst = list<ApiCodeDescriptor>();
+            var count = files.Length;
+            for(var i=0u; i<count; i++)
+            {
+                ref readonly var file = ref skip(files,i);
+                var content = @readonly(archive.Read(file.Path));
+                var kBlock = content.Length;
+                var buffer = alloc<ApiCodeDescriptor>(kBlock);
+                var target = span(buffer);
+                for(var j=0u; j<kBlock; j++)
+                    store(skip(content,j), ref seek(target,j));
+                dst.AddRange(buffer);
+            }
+            return dst.OrderBy(x => x.Base).ToArray();
+        }
 
         [Op]
         public static ApiCodeDescriptor[] BlockDescriptors(IWfShell wf, params PartId[] parts)
         {
             var archive = ApiArchives.hex(wf);
+            wf.Status(parts.Length);
             var dst  = list<ApiCodeDescriptor>();
             foreach(var part in parts)
             {
-                var files = @readonly(archive.PartFiles(part));
+
+                var files = @readonly(archive.Files(part));
                 var count = files.Length;
                 for(var i=0u; i<count; i++)
                 {
@@ -222,18 +221,18 @@ namespace Z0
             return buffer;
         }
 
-        public static Dictionary<PartId,PartFile[]> index(CoreFileKind kind, PartFiles src, params PartId[] parts)
+        public static Dictionary<PartId,PartFile[]> index(PartFileKind kind, PartFiles src, params PartId[] parts)
         {
             switch(kind)
             {
-                case CoreFileKind.Parsed:
-                    return select(CoreFileKind.Parsed, src.Parsed, parts);
+                case PartFileKind.Parsed:
+                    return select(PartFileKind.Parsed, src.Parsed, parts);
                 default:
                     return dict<PartId,PartFile[]>();
             }
         }
 
-        static Dictionary<PartId,PartFile[]> select(CoreFileKind kind, FS.Files src, PartId[] parts)
+        static Dictionary<PartId,PartFile[]> select(PartFileKind kind, FS.Files src, PartId[] parts)
         {
             var partSet = parts.ToHashSet();
             var files = (from f in src

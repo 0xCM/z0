@@ -20,13 +20,14 @@ namespace Z0
         /// <typeparam name="T">The source type</typeparam>
         /// <typeparam name="F">The fixed target type</typeparam>
         [MethodImpl(Inline)]
-        public static unsafe void deposit<S,F>(in S src, ref F dst)
+        public static unsafe ref F deposit<S,F>(in S src, ref F dst)
             where S : struct
             where F : unmanaged, IDataCell
         {
             ref var dstBytes = ref @as<F,byte>(dst);
             ref var srcBytes = ref @as<S,byte>(Unsafe.AsRef(in src));
             Unsafe.CopyBlockUnaligned(ref dstBytes, ref srcBytes, (uint)sizeof(F));
+            return ref dst;
         }
     }
 }

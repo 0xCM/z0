@@ -12,11 +12,6 @@ namespace Z0
 
     partial struct Cmd
     {
-        public static CmdSpec<K,T> spec<K,T>(params CmdArg<K,T>[] args)
-            where K : unmanaged
-            where T : struct, ICmdSpec<T>
-                => new CmdSpec<K,T>(default(T).CmdId, args);
-
         public static CmdSpec<T> spec<T>(T src)
             where T : struct, ICmdSpec<T>
                 => new CmdSpec<T>(args(src));

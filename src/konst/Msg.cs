@@ -18,5 +18,8 @@ namespace Z0
         public static RenderPattern<string> SourceLoggerCreated => "Logger for {0} created";
 
         public static RenderPattern<string> SourceLoggerDisposed => "Logger for {0} disposed";
+
+        public static RenderPattern<CmdId> DispatchingCommand => "Dispatching {0}";
+
     }
 }

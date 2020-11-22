@@ -1,0 +1,23 @@
+Failure occurred at RunUnit J:\dev\projects\z0\src\validity\src\services\ops\RunUnit.cs 43
+Harness execution failed: System.NullReferenceException: Object reference not set to an instance of an object.
+   at System.IO.FileStream.Dispose(Boolean disposing)
+   at System.IO.Stream.Close()
+   at System.IO.StreamWriter.CloseStreamFromDispose(Boolean disposing)
+   at System.IO.StreamWriter.Dispose(Boolean disposing)
+   at Z0.XTend.Append(FilePath dst, String[] src) in J:\dev\projects\z0\src\konst\src\files\legacy\FilePath.Modify.cs:line 60
+   at Z0.AppMsgLog.Deposit(IEnumerable`1 src) in J:\dev\projects\z0\src\konst\src\wf.events\services\AppMsgLog.cs:line 41
+   at Z0.TestApp`1.RunCase(IUnitTest unit, MethodInfo method, IList`1 cases) in J:\dev\projects\z0\src\validity\src\services\ops\RunCase.cs:line 19
+   at Z0.TestApp`1.<>c__DisplayClass36_0.<RunUnit>b__0(MethodInfo t) in J:\dev\projects\z0\src\validity\src\services\ops\RunUnit.cs:line 31
+   at Z0.z.iter[T](IEnumerable`1 items, Action`1 action, Boolean pll) in J:\dev\projects\z0\src\konst\src\z\z.ops.i\iter.cs:line 28
+   at Z0.TestApp`1.RunUnit(Type host, IUnitTest unit) in J:\dev\projects\z0\src\validity\src\services\ops\RunUnit.cs:line 31
+
+Failure occurred at RunUnit J:\dev\projects\z0\src\validity\src\services\ops\RunUnit.cs 43
+Harness execution failed: System.IndexOutOfRangeException: Index was outside the bounds of the array.
+   at System.Collections.Generic.List`1.Enumerator.MoveNext()
+   at System.Linq.Enumerable.Any[TSource](IEnumerable`1 source, Func`2 predicate)
+   at Z0.AppMsgLog.Deposit(IEnumerable`1 src) in J:\dev\projects\z0\src\konst\src\wf.events\services\AppMsgLog.cs:line 30
+   at Z0.TestApp`1.RunCase(IUnitTest unit, MethodInfo method, IList`1 cases) in J:\dev\projects\z0\src\validity\src\services\ops\RunCase.cs:line 58
+   at Z0.TestApp`1.<>c__DisplayClass36_0.<RunUnit>b__0(MethodInfo t) in J:\dev\projects\z0\src\validity\src\services\ops\RunUnit.cs:line 31
+   at Z0.z.iter[T](IEnumerable`1 items, Action`1 action, Boolean pll) in J:\dev\projects\z0\src\konst\src\z\z.ops.i\iter.cs:line 27
+   at Z0.TestApp`1.RunUnit(Type host, IUnitTest unit) in J:\dev\projects\z0\src\validity\src\services\ops\RunUnit.cs:line 32
+

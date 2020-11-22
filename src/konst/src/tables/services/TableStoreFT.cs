@@ -23,7 +23,7 @@ namespace Z0
         public Option<FilePath> Save(R[] data, TableRenderSpec<F> format, FS.FilePath dst, FileWriteMode mode = Overwrite)
             => Save(data,format,FilePath.Define(dst.Name), mode);
 
-        public Option<FilePath> Save(R[] data, TableRenderSpec<F> format, FilePath dst, FileWriteMode mode = Overwrite)
+        public Option<FilePath> Save(R[] data, TableRenderSpec<F> spec, FilePath dst, FileWriteMode mode = Overwrite)
         {
             if(data == null || data.Length == 0)
                 return Option.none<FilePath>();
@@ -32,14 +32,14 @@ namespace Z0
             {
                 dst.FolderPath.Create();
                 var overwrite = mode == FileWriteMode.Overwrite;
-                var emitHeader = format.EmitHeader && (overwrite || !dst.Exists);
+                var emitHeader = spec.EmitHeader && (overwrite || !dst.Exists);
 
                 using var writer = dst.Writer(mode);
 
                 if(emitHeader)
-                    writer.WriteLine(format.FormatHeader());
+                    writer.WriteLine(spec.FormatHeader());
 
-                z.iter(data, r => writer.WriteLine(r.DelimitedText(format.Delimiter)));
+                z.iter(data, r => writer.WriteLine(r.DelimitedText(spec.Delimiter)));
                 return dst;
             }
             catch(Exception e)

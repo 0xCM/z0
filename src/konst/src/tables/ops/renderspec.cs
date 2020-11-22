@@ -26,10 +26,32 @@ namespace Z0
             var fieldBuffer = sys.alloc<TableColumn<F>>(count);
             var fields = span(fieldBuffer);
 
-            for(var i=0u; i<count; i++)
+            for(ushort i=0; i<count; i++)
             {
                 ref readonly var literal = ref skip(literals, i);
-                seek(fields,i) = new TableColumn<F>(literal, literal.ToString(), (int)i, (short)(uint32(literal) >> WidthOffset));
+                seek(fields,i) = new TableColumn<F>(literal, literal.ToString(), i, (ushort)(uint32(literal) >> WidthOffset));
+            }
+
+            return new TableRenderSpec<F>(fieldBuffer);
+        }
+
+        /// <summary>
+        /// Derives format configuration data from a type
+        /// </summary>
+        /// <typeparam name="T">The source type</typeparam>
+        public static TableRenderSpec<F> renderspec2<F>(char delimiter = FieldDelimiter)
+            where F : unmanaged, Enum
+        {
+            var literals = @readonly(LiteralIndex.create<F>().Literals);
+            var count = literals.Length;
+            var headBuffer = sys.alloc<string>(count);
+            var fieldBuffer = sys.alloc<TableColumn<F>>(count);
+            var fields = span(fieldBuffer);
+
+            for(ushort i=0; i<count; i++)
+            {
+                ref readonly var literal = ref skip(literals, i);
+                seek(fields,i) = new TableColumn<F>(literal, literal.ToString(), i, uint16(literal));
             }
 
             return new TableRenderSpec<F>(fieldBuffer);

@@ -90,6 +90,7 @@ namespace Z0
 
         public CmdResult Dispatch(ICmdSpec cmd)
         {
+            Wf.Running(Msg.DispatchingCommand.Apply(cmd.Id));
             try
             {
                 if(Nodes.TryGetValue(cmd.CmdId, out var node))

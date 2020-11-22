@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static z;
 
     [DataType]
     public readonly struct CmdOptions : IIndexedView<CmdOptions,ushort,CmdOption>
@@ -42,6 +41,12 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Data.Terms;
         }
+
+        public string Format()
+            => Seq.format(this);
+
+        public override string ToString()
+            => Format();
 
         [MethodImpl(Inline)]
         public static implicit operator CmdOptions(CmdOption[] src)

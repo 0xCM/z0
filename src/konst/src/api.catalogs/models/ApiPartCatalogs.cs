@@ -35,6 +35,12 @@ namespace Z0
             get => Data.Storage.SelectMany(x => x.Owner.Enums());
         }
 
+        public string Format()
+            => Seq.format(this);
+
+        public override string ToString()
+            => Format();
+
         [MethodImpl(Inline)]
         public static implicit operator ApiPartCatalogs(IApiPartCatalog[] src)
             => new ApiPartCatalogs(src);

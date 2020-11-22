@@ -13,10 +13,82 @@ namespace Z0
 
     partial class Hex
     {
+        /// <summary>
+        /// Renders a primal numeric value as hex-formatted text
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="zpad">Specifies whether the output should be 0-padded to the data type width</param>
+        /// <param name="specifier">Specifies whether the output should be prefixed/postfixed with a hex specifier</param>
+        /// <param name="uppercase">Specifies whether the alphabetic hex digits should be uppercased</param>
+        /// <param name="prespec">Specifies whether the hex specifier, if emitted, should be the canonical prefix or postfix specifier</param>
+        /// <typeparam name="T">The primal numeric type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         internal static string format<T>(T src, bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true)
             where T : unmanaged
                 => format_u(src,zpad, specifier, uppercase,prespec);
+
+        /// <summary>
+        /// Formats a sequence of primal numeric calls as data-formatted hex
+        /// </summary>
+        /// <param name="src">The source data</param>
+        /// <typeparam name="T">The numeric type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static string format<T>(ReadOnlySpan<T> src)
+            where T : unmanaged
+                => formatter<T>().Format(src, HexFormatOptions.HexData);
+
+        [MethodImpl(Inline), Op]
+        static string format64(ulong src, bool postspec = false)
+            => src.ToString(HexFormatSpecs.SmallHexSpec) + (postspec ? HexFormatSpecs.PostSpec : EmptyString);
+
+        [MethodImpl(Inline), Op]
+        static string format8(byte src, bool postspec = false)
+            => format64(((ulong)src), postspec);
+
+        [MethodImpl(Inline), Op]
+        static string format16(ushort src, bool postspec = false)
+            => format64(((ulong)src), postspec);
+
+        [MethodImpl(Inline), Op]
+        static string format32(uint src, bool postspec = false)
+            => format64(((ulong)src), postspec);
+
+        [MethodImpl(Inline), Op]
+        public static string format(W8 w, byte src, bool postspec = false)
+            => format8(src,postspec);
+
+        [MethodImpl(Inline), Op]
+        public static string format(W16 w, ushort src, bool postspec = false)
+            => format16(src,postspec);
+
+        [MethodImpl(Inline), Op]
+        public static string format(W32 w, uint src, bool postspec = false)
+            => format32(src,postspec);
+
+        [MethodImpl(Inline), Op]
+        public static string format(W64 w, ulong src, bool postspec = false)
+            => format64(src,postspec);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static string format<T>(W8 w, T src, bool postspec = false)
+            where T : unmanaged
+                => format8(uint8(src), postspec);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static string format<T>(W16 w, T src, bool postspec = false)
+            where T : unmanaged
+                => format16(uint16(src), postspec);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static string format<T>(W32 w, T src, bool postspec = false)
+            where T : unmanaged
+                => format32(uint32(src), postspec);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static string format<T>(W64 w, T src, bool postspec = false)
+             where T : unmanaged
+                => format64(uint64(src), postspec);
+
 
         [MethodImpl(Inline)]
         static string format_u<T>(T src, bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true)

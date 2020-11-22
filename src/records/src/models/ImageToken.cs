@@ -11,9 +11,9 @@ namespace Z0
 
     public readonly struct ImageToken : ITextual
     {
-        public readonly string Identifier;
+        public string Identifier {get;}
 
-        public readonly string Name;
+        public string Name {get;}
 
         [MethodImpl(Inline)]
         public ImageToken(string name, string identifier)

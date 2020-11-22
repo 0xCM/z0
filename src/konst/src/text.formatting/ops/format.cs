@@ -122,7 +122,7 @@ namespace Z0
             => string.Format(Slot0, src);
 
         /// <summary>
-        /// Renders a pair of <see cref='ITextual'/> values as <see cref='Pipe'/> delimited text
+        /// Renders a pair of <see cref='ITextual'/> values as pipe-delimited text
         /// </summary>
         /// <param name="a">The first value</param>
         /// <param name="b">The second value</param>
@@ -135,7 +135,7 @@ namespace Z0
                 => string.Format(PSx2, a.Format(),  b.Format());
 
         /// <summary>
-        /// Renders a triple of <see cref='ITextual'/> values as <see cref='Pipe'/> delimited text
+        /// Renders a triple of <see cref='ITextual'/> values as pipe-delimited text
         /// </summary>
         /// <param name="a">The first value</param>
         /// <param name="b">The second value</param>
@@ -150,7 +150,7 @@ namespace Z0
                 => string.Format(PSx3, a.Format(), b.Format(), c.Format());
 
         /// <summary>
-        /// Renders a quartet of <see cref='ITextual'/> values as <see cref='Pipe'/> delimited text
+        /// Renders a quartet of <see cref='ITextual'/> values as pipe-delimited text
         /// </summary>
         /// <param name="a">The first value</param>
         /// <param name="b">The second value</param>
@@ -169,7 +169,7 @@ namespace Z0
 
 
         /// <summary>
-        /// Renders a quintet of <see cref='ITextual'/> values as <see cref='Pipe'/> delimited text
+        /// Renders a quintet of <see cref='ITextual'/> values as pipe-delimited text
         /// </summary>
         /// <param name="a">The first value</param>
         /// <param name="b">The second value</param>
@@ -190,7 +190,7 @@ namespace Z0
                 => string.Format(PSx5, a.Format(), b.Format(), c.Format(), d.Format(), e.Format());
 
         /// <summary>
-        /// Renders a sextet of <see cref='ITextual'/> values as <see cref='Pipe'/> delimited text
+        /// Renders a sextet of <see cref='ITextual'/> values as pipe-delimited text
         /// </summary>
         /// <param name="a">The first value</param>
         /// <param name="b">The second value</param>
@@ -214,7 +214,7 @@ namespace Z0
                 => string.Format(PSx6, a.Format(), b.Format(), c.Format(), d.Format(), e.Format(), f.Format());
 
         /// <summary>
-        /// Renders a septet of <see cref='ITextual'/> values as <see cref='Pipe'/> delimited text
+        /// Renders a septet of <see cref='ITextual'/> values as pipe-delimited text
         /// </summary>
         /// <param name="a">The first value</param>
         /// <param name="b">The second value</param>

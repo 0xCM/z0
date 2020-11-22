@@ -14,18 +14,6 @@ namespace Z0
         FS.FolderPath HostAsmDir
             => FS.dir((AsmDir + PartFolderName(Host.Owner)).Name);
 
-        FileName ExtractFileName
-            => LegalFileName(Host, Extract);
-
-        FilePath HostExtractPath
-            => ExtractDir + ExtractFileName;
-
-        FileName ParsedFileName
-            => LegalFileName(Host, Parsed);
-
-        FilePath ParsedPath
-            => ParsedDir + ParsedFileName;
-
         FileName X86FileName
             => LegalFileName(Host, HexLine);
 

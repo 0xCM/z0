@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using api = Render;
 
     public readonly struct HexFormatter<T> : ISpanFormatter<T,HexSeqFormat,HexFormatOptions>
         where T : unmanaged
@@ -45,7 +44,7 @@ namespace Z0
 
             for(var i = 0; i<src.Length; i++)
             {
-                var formatted = api.hex(src[i], hex.ZPad, hex.Specifier, hex.Uppercase, hex.PreSpec);
+                var formatted = Hex.format(src[i], hex.ZPad, hex.Specifier, hex.Uppercase, hex.PreSpec);
                 result.Append(formatted);
                 if(i != src.Length - 1)
                     result.Append(seq.Delimiter);
@@ -61,7 +60,7 @@ namespace Z0
 
             for(var i=0; i<src.Length; i++)
             {
-                var formatted = api.hex(src[i], config.ZPad, config.Specifier, config.Uppercase, config.PreSpec);
+                var formatted = Hex.format(src[i], config.ZPad, config.Specifier, config.Uppercase, config.PreSpec);
                 result.Append(formatted);
                 if(i != src.Length - 1)
                     result.Append(seq.Delimiter);

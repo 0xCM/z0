@@ -60,6 +60,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public bool Equals(IndexedView<I,T> rhs)
             => Data?.Equals(rhs.Data) ?? false;
+       public string Format()
+            => z.delimit(Storage).Format();
 
         [MethodImpl(Inline)]
         public static implicit operator IndexedView<I,T>(T[] src)

@@ -13,15 +13,12 @@ namespace Z0
 
     public readonly struct AppMsgLog : IAppMsgLog
     {
-        public static IAppMsgLog create(FilePath std, FilePath err)
-            => new AppMsgLog(std, err);
+        readonly FS.FilePath DefaultTarget;
 
-        readonly FilePath DefaultTarget;
-
-        readonly FilePath ErrorTarget;
+        readonly FS.FilePath ErrorTarget;
 
         [MethodImpl(Inline)]
-        public AppMsgLog(FilePath std, FilePath err)
+        public AppMsgLog(FS.FilePath std, FS.FilePath err)
         {
             DefaultTarget = std;
             ErrorTarget = err;
@@ -32,22 +29,22 @@ namespace Z0
             z.insist(src);
             z.insist(!src.Any(m => m == null),"Null messages are bad");
 
-            var errors = (from m in src where m.IsError select m.Format()).Array();
-            if(errors.Length != 0)
-                ErrorTarget.Append(errors);
+            // var errors = (from m in src where m.IsError select m.Format()).Array();
+            // if(errors.Length != 0)
+            //     ErrorTarget.Append(errors);
 
-            var standard = Render.items(src.Where(m => !m.IsError)).Array();
-            if(standard.Length != 0)
-                DefaultTarget.Append(standard);
+            // var standard = Render.items(src.Where(m => !m.IsError)).Array();
+            // if(standard.Length != 0)
+            //     DefaultTarget.Append(standard);
         }
 
          public void Deposit(IAppMsg src)
          {
             var formatted = src.Format();
-            if(src.IsError)
-                ErrorTarget.Append(formatted);
-            else
-                DefaultTarget.Append(formatted);
+            // if(src.IsError)
+            //     ErrorTarget.Append(formatted);
+            // else
+            //     DefaultTarget.Append(formatted);
         }
    }
 }

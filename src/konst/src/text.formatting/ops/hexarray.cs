@@ -20,6 +20,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static string hexarray<T>(ReadOnlySpan<T> src)
             where T : unmanaged
-                => Formatters.hex<T>().Format(src, HexFormatOptions.HexArray);
+                => Hex.formatter<T>().Format(src, HexFormatOptions.HexArray);
     }
 }

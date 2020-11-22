@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Reflection;
 
-    using static CoreFolderNames;
+    using static ArchiveFolderNames;
 
     public interface ITestLogPaths : ILogPaths
     {

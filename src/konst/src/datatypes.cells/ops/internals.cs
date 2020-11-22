@@ -51,13 +51,14 @@ namespace Z0
                 => store(src, (int)(size<S>() * count), ref Unsafe.Add(ref Unsafe.As<F,byte>(ref dst), (int)(size<S>() * offset)));
 
         [MethodImpl(Inline)]
-        internal static unsafe void store<S,T>(in S src, int bytecount, ref T dst)
+        internal static unsafe ref T store<S,T>(in S src, int bytecount, ref T dst)
             where S : struct
             where T : struct
         {
             ref var dstBytes = ref Unsafe.As<T,byte>(ref dst);
             ref var srcBytes = ref Unsafe.As<S,byte>(ref Unsafe.AsRef(in src));
             Unsafe.CopyBlockUnaligned(ref dstBytes, ref srcBytes, (uint)bytecount);
+            return ref dst;
         }
     }
 }

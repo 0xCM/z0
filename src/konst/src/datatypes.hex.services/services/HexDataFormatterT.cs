@@ -28,7 +28,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public void Format(ReadOnlySpan<T> src, StringBuilder dst)
-            => api.hex(src,Config,dst);
+            => Hex.render(src,Config,dst);
 
         public string Format(ReadOnlySpan<T> src)
         {

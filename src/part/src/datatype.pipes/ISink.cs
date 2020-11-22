@@ -1,0 +1,42 @@
+//-----------------------------------------------------------------------------
+// Copyright   :  (c) Chris Moore, 2020
+// License     :  MIT
+//-----------------------------------------------------------------------------
+namespace Z0
+{
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
+    /// <summary>
+    /// Sink interface root
+    /// </summary>
+    [Free]
+    public interface ISink
+    {
+
+    }
+
+    /// <summary>
+    /// Characterizes a sink that accepts a single input value
+    /// </summary>
+    /// <typeparam name="A">The input type</typeparam>
+    [Free]
+    public interface ISink<A> : ISink
+    {
+        /// <summary>
+        /// Receives supplied input
+        /// </summary>
+        /// <param name="src">The input</param>
+        void Deposit(A src);
+
+        void Deposit(in A src)
+            => Deposit(src);
+    }
+
+    [Free]
+    public interface IDataSink<T> : ISink<T>
+        where T : struct
+    {
+        void ISink<T>.Deposit(T src)
+            => Deposit(in src);
+    }
+}

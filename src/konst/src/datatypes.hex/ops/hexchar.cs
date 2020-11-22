@@ -23,9 +23,9 @@ namespace Z0
             where C : unmanaged, ILetterCase
         {
             if(typeof(C) == typeof(LowerCased))
-                return z.recover<char,HexSym>(span(src.ToString(LC)));
+                return recover<char,HexSym>(span(src.ToString(LC)));
             else
-                return z.recover<char,HexSym>(span(src.ToString(UC)));
+                return recover<char,HexSym>(span(src.ToString(UC)));
         }
 
         [MethodImpl(Inline)]

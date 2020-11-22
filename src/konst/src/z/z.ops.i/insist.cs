@@ -8,14 +8,75 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
 
-    using static Konst;
-
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
+    using static Konst;
+
     partial struct z
     {
+        [MethodImpl(Inline), Op]
+        public static void require(bool invariant, in Func<string> f)
+        {
+            if(!invariant)
+                sys.@throw(f);
+        }
+
+        [Op]
+        public static void require(bool invariant, [Caller] string caller = null)
+        {
+            if(!invariant)
+                sys.@throw(AppErrors.InvariantFailure(caller));
+        }
+
+        [MethodImpl(Inline), Op]
+        public static void insist(bool invariant, [Caller] string caller = null)
+            => require(invariant, caller);
+
+        [MethodImpl(Inline), Op, Closures(UInt8k)]
+        public static T[] insist<T>(T[] src)
+        {
+            if(src is null)
+                sys.@throw(AppErrors.NullArg());
+            return src;
+        }
+
+        [MethodImpl(NotInline)]
+        public static int insist<A,B>(A[] a, B[] b)
+        {
+            if(a == null || b == null)
+                sys.@throw(AppErrors.NullArg());
+            var length = a.Length;
+            if(length != b.Length)
+                z.@throw(AppErrors.LengthMismatch(a.Length, b.Length));
+            return length;
+        }
+
+        [MethodImpl(Inline), Op, Closures(UInt8k)]
+        public static IEnumerable<T> insist<T>(IEnumerable<T> src)
+        {
+            require(src != null, AppErrors.NullArg);
+            return src;
+        }
+
+        [MethodImpl(Inline), Op, Closures(UInt8k)]
+        public static void insist<T>(T lhs, T rhs)
+            where T : IEquatable<T>
+        {
+            if(z.nullnot(lhs) && z.nullnot(rhs) && lhs.Equals(rhs))
+                return;
+
+            require(false, () => AppErrors.neq<T>(lhs,rhs));
+        }
+
+        [MethodImpl(Inline), Op, Closures(UInt8k)]
+        public static T insist<T>(T src, Func<T,bool> f)
+        {
+            require(f(src),  () => AppErrors.NotTrue(src));
+            return src;
+        }
+
         [MethodImpl(Inline), Op]
         public static void insist(bool invariant, string msg, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
         {

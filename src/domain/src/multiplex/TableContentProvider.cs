@@ -43,34 +43,5 @@ namespace Z0
             [MethodImpl(Inline)]
             get => _Entries.View;
         }
-
-        [Op]
-        ReadOnlySpan<ImageToken> SystemImages
-        {
-            get
-            {
-                var doc = structured("SystemImages");
-                if(doc.RowCount != 0)
-                {
-                    var dst = sys.alloc<ImageToken>(doc.RowCount);
-                    for(var i=0; i<doc.RowCount; i++)
-                    {
-                        ref readonly var row = ref doc[i];
-                        if(row.CellCount >= 2)
-                            dst[i] = new ImageToken(row[0], row[1]);
-                    }
-                    return dst;
-                }
-                return sys.empty<ImageToken>();
-            }
-        }
-
-        /// <summary>
-        /// Searches for an embedded document with a matching identifier and, if found,
-        /// returns the first match; otherwise returns an empty document
-        /// </summary>
-        /// <param name="match">The resource identifier to match</param>
-        AppResourceDoc structured(string match)
-            => Extractor.MatchDocument(match);
     }
 }

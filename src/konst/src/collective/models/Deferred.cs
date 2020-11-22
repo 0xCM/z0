@@ -30,17 +30,6 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static Deferred<T> operator + (Deferred<T> lhs, Deferred<T> rhs)
-            => lhs.Concat(rhs);
-
-        /// <summary>
-        /// Implicitly constructs a sequence from an array
-        /// </summary>
-        /// <param name="src">The source array</param>
-        public static implicit operator Deferred<T>(T[] src)
-            => new Deferred<T>(src);
-
-        [MethodImpl(Inline)]
         public Deferred<T> WithContent(IEnumerable<T> src)
             => new Deferred<T>(src);
 
@@ -62,6 +51,17 @@ namespace Z0
 
         public Deferred<T> Where(Func<T,bool> predicate)
             => defer(from x in Content where predicate(x) select x);
+
+       [MethodImpl(Inline)]
+        public static Deferred<T> operator + (Deferred<T> lhs, Deferred<T> rhs)
+            => lhs.Concat(rhs);
+
+        /// <summary>
+        /// Implicitly constructs a sequence from an array
+        /// </summary>
+        /// <param name="src">The source array</param>
+        public static implicit operator Deferred<T>(T[] src)
+            => new Deferred<T>(src);
 
         public static Deferred<T> Empty
             => new Deferred<T>(sys.empty<T>());

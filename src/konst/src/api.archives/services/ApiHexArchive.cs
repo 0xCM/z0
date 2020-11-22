@@ -51,7 +51,7 @@ namespace Z0
         /// <summary>
         /// Enumerates the archived files owned by a specified part
         /// </summary>
-        public FS.FilePath[] PartFiles(PartId owner)
+        public FS.FilePath[] Files(PartId owner)
             => Root.Files(owner, DefaultExt, true);
 
         public ApiHostCodeBlocks HostCode(FS.FilePath src)
@@ -73,7 +73,7 @@ namespace Z0
             if(parts.Length != 0)
             {
                 foreach(var owner in parts)
-                foreach(var file in PartFiles(owner))
+                foreach(var file in Files(owner))
                 {
                     var idx = Index(file);
                     if(idx.IsNonEmpty)
@@ -112,7 +112,7 @@ namespace Z0
         /// </summary>
         public IEnumerable<ApiCodeBlock> ApiCode(PartId owner)
         {
-            foreach(var file in PartFiles(owner))
+            foreach(var file in Files(owner))
             foreach(var item in Read(file))
                 if(item.IsNonEmpty)
                     yield return item;
@@ -138,17 +138,6 @@ namespace Z0
         public ApiCodeBlock[] Read(FilePath src)
             => ApiHexReader.Service.Read(src);
 
-        /// <summary>
-        /// Reads the bits of an identified operation
-        /// </summary>
-        /// <param name="id">The source path</param>
-        public ApiCodeBlock[] ApiCode(OpIdentity id)
-        {
-            var dir = FolderPath.Define(Root.Name);
-            var path = dir + FileName.define(id,FileExtension.Define("hex"));
-            return Read(FS.path(path.Name));
-        }
-
         public ApiHostCodeBlocks Index(FS.FilePath src)
         {
             var uri = ApiUri.host(src.FileName);
@@ -156,28 +145,13 @@ namespace Z0
                 return default;
 
             var dst = z.list<ApiCodeBlock>();
-            foreach(var item in read(this))
+            foreach(var item in ApiCode())
                 if(item.IsNonEmpty)
                     dst.Add(item);
 
             return new ApiHostCodeBlocks(uri.Value, dst.Array());
         }
 
-        /// <summary>
-        /// Enumerates the content of all archived files
-        /// </summary>
-        static IEnumerable<ApiCodeBlock> read(ApiHexArchive src)
-        {
-            var list = src.List();
-            var iCount = list.Count;
-            for(var i=0; i<iCount; i++)
-            {
-                var path = list[i].Path;
-                var items = ApiArchives.hexblocks(path);
-                var jCount = items.Length;
-                for(var j=0; j<jCount; j++)
-                    yield return items[j];            }
-        }
         static FS.FilePath[] paths(FS.FolderPath root, FS.FileExt ext)
             => root.Files(ext, true).Array();
 

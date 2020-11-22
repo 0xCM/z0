@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Reflection.PortableExecutable;
     using System.Reflection.Metadata;
-    using System.Runtime.CompilerServices;
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 

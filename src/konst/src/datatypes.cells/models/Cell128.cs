@@ -15,6 +15,8 @@ namespace Z0
 
     public readonly struct Cell128 : IDataCell<F,W128,Vector128<ulong>>
     {
+        internal readonly Vector128<ulong> Data;
+
         [MethodImpl(Inline)]
         public static Cell128 scalar<T>(T src)
             where T : unmanaged
@@ -32,8 +34,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Cell128 init(in ConstPair<ulong> x)
             => new Cell128(x.Left,x.Right);
-
-        internal readonly Vector128<ulong> Data;
 
         public CellKind Kind
             => CellKind.Cell128;

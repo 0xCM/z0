@@ -31,6 +31,12 @@ namespace Z0
             get => Data.Terms;
         }
 
+        public string Format()
+            => Seq.format(this);
+
+        public override string ToString()
+            => Format();
+
         [MethodImpl(Inline)]
         public static implicit operator CmdOptions<K>(CmdOption<K>[] src)
             => new CmdOptions<K>(src);

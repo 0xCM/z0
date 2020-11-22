@@ -12,11 +12,11 @@ namespace Z0
 
     public readonly struct TableColumn
     {
-        public readonly ushort Index;
+        public ushort Index {get;}
 
-        public readonly StringRef Name;
+        public StringRef Name {get;}
 
-        public readonly byte Width;
+        public ushort Width {get;}
 
         [MethodImpl(Inline)]
         public TableColumn(ushort index, string name, ushort width)

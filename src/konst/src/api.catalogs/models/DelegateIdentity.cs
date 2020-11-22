@@ -18,7 +18,7 @@ namespace Z0
         public TypeIdentity[] Parameters {get;}
 
         /// <summary>
-        /// The unadorned name of the delegate tyepe
+        /// The unadorned name of the delegate type
         /// </summary>
         public string DelegateName {get;}
 
@@ -37,6 +37,27 @@ namespace Z0
             => new DelegateIdentity(identity, name, generic,  parameters);
 
         [MethodImpl(Inline)]
+        internal DelegateIdentity(string identifier, string name, bool generic, TypeIdentity[] parameters)
+        {
+            Identifier = identifier;
+            DelegateName = name;
+            Parameters = parameters;
+            Generic = generic;
+        }
+
+        IIdentifiedType<DelegateIdentity> Identified
+            => this;
+
+        public override int GetHashCode()
+            => Identified.HashCode;
+
+        public override bool Equals(object obj)
+            => Identified.Same(obj);
+
+        public override string ToString()
+            => Identified.Format();
+
+        [MethodImpl(Inline)]
         public static implicit operator string(DelegateIdentity src)
             => src.Identifier;
 
@@ -47,26 +68,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool operator!=(DelegateIdentity a, DelegateIdentity b)
             => !a.Equals(b);
-
-        [MethodImpl(Inline)]
-        DelegateIdentity(string identifier, string name, bool generic, TypeIdentity[] parameters)
-        {
-            Identifier = identifier;
-            DelegateName = name;
-            Parameters = parameters;
-            Generic = generic;
-        }
-
-        IIdentifiedType<DelegateIdentity> Identified => this;
-
-        public override int GetHashCode()
-            => Identified.HashCode;
-
-        public override bool Equals(object obj)
-            => Identified.Same(obj);
-
-        public override string ToString()
-            => Identified.Format();
 
         public static DelegateIdentity Empty
             => Define(string.Empty, string.Empty, false, Array.Empty<TypeIdentity>());

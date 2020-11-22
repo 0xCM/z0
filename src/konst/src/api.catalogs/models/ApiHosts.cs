@@ -74,5 +74,11 @@ namespace Z0
             host = null;
             return false;
         }
+
+        public string Format()
+            => Seq.format(this);
+
+        public override string ToString()
+            => Format();
     }
 }

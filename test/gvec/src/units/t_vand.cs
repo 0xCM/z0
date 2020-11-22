@@ -58,7 +58,7 @@ namespace Z0
             var v1 = VSvc.vbitlogic<T>(w128).and(x,y);
 
             var buffer = Cells.alloc<Cell128>();
-            ref var dst = ref Cells.head<Cell128,T>(ref buffer);
+            ref var dst = ref Cells.first<T>(buffer);
             var count = z.vcount<T>(w128);
 
             for(byte i=0; i< count; i++)

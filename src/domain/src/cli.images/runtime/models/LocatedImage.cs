@@ -17,27 +17,27 @@ namespace Z0
         /// <summary>
         /// The image source path
         /// </summary>
-        public readonly FS.FilePath ImagePath;
+        public FS.FilePath ImagePath {get;}
 
         /// <summary>
         /// The image part identifier, if any
         /// </summary>
-        public readonly PartId PartId;
+        public PartId PartId {get;}
 
         /// <summary>
         /// The process entry point
         /// </summary>
-        public readonly MemoryAddress EntryAddress;
+        public MemoryAddress EntryAddress {get;}
 
         /// <summary>
         /// The image's memory base
         /// </summary>
-        public readonly MemoryAddress BaseAddress;
+        public MemoryAddress BaseAddress {get;}
 
         /// <summary>
         /// The image size
         /// </summary>
-        public readonly ByteSize Size;
+        public ByteSize Size {get;}
 
         [MethodImpl(Inline)]
         public LocatedImage(FS.FilePath path, PartId part, MemoryAddress entry, MemoryAddress @base, uint size)

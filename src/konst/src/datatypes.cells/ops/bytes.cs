@@ -17,9 +17,9 @@ namespace Z0
         /// <param name="src">The fixed source value</param>
         /// <typeparam name="F">The fixed type</typeparam>
         [MethodImpl(Inline)]
-        public static unsafe Span<byte> bytes<F>(ref F src)
+        public static unsafe Span<byte> bytes<F>(in F src)
             where F : unmanaged, IDataCell
-                => new Span<byte>(Unsafe.AsPointer(ref src), Unsafe.SizeOf<F>());
+                => new Span<byte>(z.pointer(ref z.edit(src)), (int)z.size<F>());
 
         /// <summary>
         /// Presents a fixed source value as a readonly span of bytes

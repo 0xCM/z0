@@ -18,10 +18,6 @@ namespace Z0
         public LocatedImages(LocatedImage[] src)
             => Data = src;
 
-        [MethodImpl(Inline)]
-        public static implicit operator LocatedImages(LocatedImage[] src)
-            => new LocatedImages(src);
-
         public uint Count
         {
             [MethodImpl(Inline)]
@@ -39,5 +35,9 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Data;
         }
+
+        [MethodImpl(Inline)]
+        public static implicit operator LocatedImages(LocatedImage[] src)
+            => new LocatedImages(src);
     }
 }

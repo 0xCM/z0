@@ -41,11 +41,11 @@ namespace Z0
             Wf.Disposed();
         }
 
-        CmdResult<FS.FilePath> EmitOpCodes()
+        CmdResult EmitOpCodes()
         {
             var spec = EmitAsmOpCodes.Spec();
             spec.WithTarget(Wf.Db().RefDataPath("asm.opcodes"));
-            return EmitAsmOpCodes.Create(Wf).Invoke(spec);
+            return Wf.Router.Dispatch(spec);
         }
 
         CmdResult EmitPatterns()

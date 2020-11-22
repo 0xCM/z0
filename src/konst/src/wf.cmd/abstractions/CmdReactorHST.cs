@@ -49,19 +49,4 @@ namespace Z0
         ClrArtifactKey IWfService.ServiceId
             => GetType().MetadataToken;
     }
-
-    [CmdReactor]
-    public abstract class CmdReactor<H,S,T> : CmdReactor<S,T>
-        where H : CmdReactor<H,S,T>, new()
-        where S : struct, ICmdSpec<S>
-        where T : struct
-    {
-
-        public static H Create(IWfShell wf)
-        {
-            var node = new H();
-            node.Init(wf);
-            return node;
-        }
-    }
 }

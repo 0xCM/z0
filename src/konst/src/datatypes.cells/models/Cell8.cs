@@ -13,7 +13,8 @@ namespace Z0
     {
         internal readonly byte Data;
 
-        public CellKind Kind => CellKind.Cell8;
+        public CellKind Kind
+            => CellKind.Cell8;
 
         public byte Content
         {
@@ -29,14 +30,6 @@ namespace Z0
         public static Cell8 init(sbyte src)
             => new Cell8((byte)src);
 
-        [MethodImpl(Inline)]
-        public static Cell8 init(int src)
-            => new Cell8((byte)(sbyte)src);
-
-        [MethodImpl(Inline)]
-        public static Cell8 init(uint src)
-            => new Cell8((byte)src);
-
         public Cell8 Zero
         {
             [MethodImpl(Inline)]
@@ -44,7 +37,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        Cell8(byte x0)
+        internal Cell8(byte x0)
             => Data = x0;
 
         [MethodImpl(Inline)]

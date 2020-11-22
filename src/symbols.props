@@ -16,6 +16,7 @@
     <Sys>$(Src)sys/z0.sys.csproj</Sys>
     <Derivatives>$(Src)derivatives/z0.derivatives.csproj</Derivatives>
 
+    <Commands>$(Src)commands/z0.commands.csproj</Commands>
     <Records>$(Src)records/z0.records.csproj</Records>
 
     <Fsm>$(Src)fsm/z0.fsm.csproj</Fsm>
@@ -82,7 +83,6 @@
     <Machine>$(Src)machine/z0.machine.csproj</Machine>
 
     <ZXed>$(Src)zxed/z0.zxed.csproj</ZXed>
-    <ZAsm>$(Src)commands/zasm/z0.zasm.csproj</ZAsm>
 
     <VRoot>$(Src)vroot/z0.vroot.csproj</VRoot>
     <Capture>$(Src)capture/z0.capture.csproj</Capture>

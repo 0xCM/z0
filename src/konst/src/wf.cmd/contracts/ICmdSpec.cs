@@ -31,21 +31,8 @@ namespace Z0
     }
 
     [Free]
-    public interface ICmdSpec<K,T> : ICmdSpec<T>
-        where K : unmanaged
-        where T : struct, ICmdSpec<T>
-    {
-        new CmdArgs<K,T> Args {get;}
-
-        CmdArgs ICmdSpec.Args
-            => Args;
-    }
-
-    [Free]
-    public interface ICmdSpec<H,K,T> : ICmdSpec<K,T>
-        where H : struct, ICmdSpec<H,K,T>
-        where K : unmanaged
-        where T : struct, ICmdSpec<T>
+    public interface ICmdSpec<C,R> : ICmdSpec<C>
+        where C : struct, ICmdSpec<C,R>
     {
 
     }

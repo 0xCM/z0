@@ -60,6 +60,12 @@ namespace Z0
         public bool Equals(IndexedView<T> rhs)
             => Data?.Equals(rhs.Data) ?? false;
 
+        public string Format()
+            => Seq.format(this);
+
+        public override string ToString()
+            => Format();
+
         [MethodImpl(Inline)]
         public static implicit operator IndexedView<T>(T[] src)
             => new IndexedView<T>(src);

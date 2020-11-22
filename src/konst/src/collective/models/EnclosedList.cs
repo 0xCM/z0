@@ -23,15 +23,11 @@ namespace Z0
 
     public readonly struct EnclosedList<T> : ITextual
     {
-        public readonly T[] Data;
+        public T[] Data {get;}
 
-        public readonly ListEnclosureKind Kind;
+        public ListEnclosureKind Kind {get;}
 
-        public readonly char Delimiter;
-
-        [MethodImpl(Inline)]
-        public static implicit operator EnclosedList<T>(T[] src)
-            => new EnclosedList<T>(src);
+        public char Delimiter {get;}
 
         [MethodImpl(Inline)]
         public EnclosedList(T[] src, ListEnclosureKind kind = ListEnclosureKind.Embraced,  char delimiter =  Chars.Comma)
@@ -46,13 +42,15 @@ namespace Z0
 
         char Right => Kind == K.Embraced ? Chars.RBrace : Kind == K.Bracketed ? Chars.RBracket : Chars.RParen;
 
-
         [MethodImpl(Inline)]
         public string Format()
             => string.Concat(Left, text.delimit(Data, Delimiter), Right);
 
-
         public override string ToString()
             => Format();
+
+        [MethodImpl(Inline)]
+        public static implicit operator EnclosedList<T>(T[] src)
+            => new EnclosedList<T>(src);
     }
 }

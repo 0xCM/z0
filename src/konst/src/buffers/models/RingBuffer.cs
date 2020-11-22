@@ -42,7 +42,6 @@ namespace Z0
             Count = 0;
         }
 
-
         [MethodImpl(Inline)]
         public void Push(in T src)
         {

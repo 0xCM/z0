@@ -23,6 +23,367 @@ namespace Z0
         public static CellDelegate define(OpIdentity id, MemoryAddress src, DynamicMethod enclosure, Delegate dynop)
             => new CellDelegate(id,src,enclosure,dynop);
 
+        [MethodImpl(NotInline), Op]
+        public static BinaryOp1 define(BinaryOp<bit> f)
+            => (a,b) => f(a,b);
+
+        [MethodImpl(NotInline), Op]
+        public static BinaryOp8 define(BinaryOp<sbyte> f)
+            => (a, b) => f((sbyte)a.Content, (sbyte)b.Content);
+
+        [MethodImpl(NotInline), Op]
+        public static BinaryOp8 define(BinaryOp<byte> f)
+            => (a, b) => f(a.Content, b.Content);
+
+        [MethodImpl(NotInline), Op]
+        public static BinaryOp16 define(BinaryOp<short> f)
+            => (a, b) => f((short)a.Content, (short)b.Content);
+
+        [MethodImpl(NotInline), Op]
+        public static BinaryOp16 define(BinaryOp<ushort> f)
+            => (a, b) => f(a.Content, b.Content);
+
+        [MethodImpl(NotInline), Op]
+        public static BinaryOp32 define(BinaryOp<int> f)
+            => (a, b) => f((int)a.Content, (int)b.Content);
+
+        [MethodImpl(NotInline), Op]
+        public static BinaryOp32 define(BinaryOp<uint> f)
+            => (a, b)  => f(a.Content, b.Content);
+
+        [MethodImpl(NotInline), Op]
+        public static BinaryOp64 define(BinaryOp<long> f)
+            => (a, b)  => f((long)a.Content, (long)b.Content);
+
+        [MethodImpl(NotInline), Op]
+        public static BinaryOp64 define(BinaryOp<ulong> f)
+            => (a, b)  => f(a.Content, b.Content);
+
+        [MethodImpl(NotInline), Op]
+        public static Emitter1 define(Emitter<bit> f)
+            => () => f();
+
+        [MethodImpl(NotInline), Op]
+        public static Emitter8 define(Emitter<sbyte> f)
+            => () => f();
+
+        [MethodImpl(NotInline), Op]
+        public static Emitter8 define(Emitter<byte> f)
+            => () => f();
+
+        [MethodImpl(NotInline), Op]
+        public static Emitter16 define(Emitter<short> f)
+            => () => f();
+
+        [MethodImpl(NotInline), Op]
+        public static Emitter16 define(Emitter<ushort> f)
+            => () => f();
+
+        [MethodImpl(NotInline), Op]
+        public static Emitter32 define(Emitter<int> f)
+            => () => f();
+
+        [MethodImpl(NotInline), Op]
+        public static Emitter32 define(Emitter<uint> f)
+            => () => f();
+
+        [MethodImpl(NotInline), Op]
+        public static Emitter64 define(Emitter<long> f)
+            => () => f();
+
+        [MethodImpl(NotInline), Op]
+        public static Emitter64 define(Emitter<ulong> f)
+            => () => f();
+
+        [MethodImpl(NotInline), Op]
+        public static UnaryOp1 define(MethodInfo f, UnaryOpClass<bit> k)
+            => define(uFx(f,k));
+
+        [MethodImpl(NotInline), Op]
+        public static UnaryOp8 define(MethodInfo f, UnaryOpClass<sbyte> k)
+            => define(uFx(f,k));
+
+        [MethodImpl(NotInline), Op]
+        public static UnaryOp8 define(MethodInfo f, UnaryOpClass<byte> k)
+            => define(uFx(f,k));
+
+        [MethodImpl(NotInline), Op]
+        public static UnaryOp16 define(MethodInfo f, UnaryOpClass<short> k)
+            => define(uFx(f,k));
+
+        [MethodImpl(NotInline), Op]
+        public static UnaryOp16 define(MethodInfo f, UnaryOpClass<ushort> k)
+            => define(uFx(f,k));
+
+        [MethodImpl(NotInline), Op]
+        public static UnaryOp32 define(MethodInfo f, UnaryOpClass<int> k)
+            => define(uFx(f,k));
+
+        [MethodImpl(NotInline), Op]
+        public static UnaryOp32 define(MethodInfo f, UnaryOpClass<uint> k)
+            => define(uFx(f,k));
+
+        [MethodImpl(NotInline), Op]
+        public static UnaryOp64 define(MethodInfo f, UnaryOpClass<long> k )
+            => define(uFx(f,k));
+
+        [MethodImpl(NotInline), Op]
+        public static UnaryOp64 define(MethodInfo f, UnaryOpClass<ulong> k)
+            => define(uFx(f,k));
+
+        [MethodImpl(NotInline), Op]
+        public static BinaryOp1 define(MethodInfo f, BinaryOpClass<bit> k)
+            => define(bFx(f,k));
+
+        [MethodImpl(NotInline), Op]
+        public static BinaryOp8 define(MethodInfo f, BinaryOpClass<sbyte> k)
+            => define(bFx(f,k));
+
+        [MethodImpl(NotInline), Op]
+        public static BinaryOp8 define(MethodInfo f, BinaryOpClass<byte> k)
+            => define(bFx(f,k));
+
+        [MethodImpl(NotInline), Op]
+        public static BinaryOp16 define(MethodInfo f, BinaryOpClass<short> k)
+            => define(bFx(f,k));
+
+        [MethodImpl(NotInline), Op]
+        public static BinaryOp16 define(MethodInfo f, BinaryOpClass<ushort> k)
+            => define(bFx(f,k));
+
+        [MethodImpl(NotInline), Op]
+        public static BinaryOp32 define(MethodInfo f, BinaryOpClass<uint> k)
+            => define(bFx(f,k));
+
+        [MethodImpl(NotInline), Op]
+        public static BinaryOp32 define(MethodInfo f, BinaryOpClass<int> k)
+            => define(bFx(f,k));
+
+        [MethodImpl(NotInline), Op]
+        public static BinaryOp64 define(MethodInfo f, BinaryOpClass<ulong> k)
+            => define(bFx(f,k));
+
+        [MethodImpl(NotInline), Op]
+        public static BinaryOp64 define(MethodInfo f, BinaryOpClass<long> k)
+            => define(bFx(f,k));
+
+        [MethodImpl(NotInline), Op]
+        public static UnaryOp1 define(UnaryOp<bit> f)
+            => a => f(a);
+
+        [MethodImpl(NotInline), Op]
+        public static UnaryOp8 define(UnaryOp<sbyte> f)
+            => a => f((sbyte)a.Content);
+
+        [MethodImpl(NotInline), Op]
+        public static UnaryOp8 define(UnaryOp<byte> f)
+            => a => f((byte)a.Content);
+
+        [MethodImpl(NotInline), Op]
+        public static UnaryOp16 define(UnaryOp<short> f)
+            => a => f((short)a.Content);
+
+        [MethodImpl(NotInline), Op]
+        public static UnaryOp16 define(UnaryOp<ushort> f)
+            => a => f((ushort)a.Content);
+
+        [MethodImpl(NotInline), Op]
+        public static UnaryOp32 define(UnaryOp<int> f)
+            => a => f((int)a.Content);
+
+        [MethodImpl(NotInline), Op]
+        public static UnaryOp32 define(UnaryOp<uint> f)
+            => a => f((uint)a.Content);
+
+        [MethodImpl(NotInline), Op]
+        public static UnaryOp64 define(UnaryOp<long> f)
+            => a => f((long)a.Content);
+
+        [MethodImpl(NotInline), Op]
+        public static UnaryOp64 define(UnaryOp<ulong> f)
+            => a => f(a.Content);
+
+        [MethodImpl(NotInline), Op]
+        public static UnaryPredicate1 define(UnaryPredicate<Bit32> f)
+            => a => f(a);
+
+        [MethodImpl(NotInline), Op]
+        public static UnaryPredicate8 define(UnaryPredicate<sbyte> f)
+            => a => f((sbyte)a.Content);
+
+        [MethodImpl(NotInline), Op]
+        public static UnaryPredicate8 define(UnaryPredicate<byte> f)
+            => a => f((byte)a.Content);
+
+        [MethodImpl(NotInline), Op]
+        public static UnaryPredicate16 define(UnaryPredicate<short> f)
+            => a => f((short)a.Content);
+
+        [MethodImpl(NotInline), Op]
+        public static UnaryPredicate16 define(UnaryPredicate<ushort> f)
+            => a => f((ushort)a.Content);
+
+        [MethodImpl(NotInline), Op]
+        public static UnaryPredicate32 define(UnaryPredicate<int> f)
+            => a => f((int)a.Content);
+
+        [MethodImpl(NotInline), Op]
+        public static UnaryPredicate32 define(UnaryPredicate<uint> f)
+            => a => f((uint)a.Content);
+
+        [MethodImpl(NotInline), Op]
+        public static UnaryPredicate64 define(UnaryPredicate<long> f)
+            => a => f((long)a.Content);
+
+        [MethodImpl(NotInline), Op]
+        public static UnaryPredicate64 define(UnaryPredicate<ulong> f)
+            => a => f(a.Content);
+
+        [MethodImpl(NotInline), Op]
+        public static BinaryPredicate1 define(BinaryPredicate<bit> f)
+            => (a, b) => f(a, b);
+
+        [MethodImpl(NotInline), Op]
+        public static BinaryPredicate8 define(BinaryPredicate<sbyte> f)
+            => (a, b) => f((sbyte)a.Content, (sbyte)b.Content);
+
+        [MethodImpl(NotInline), Op]
+        public static BinaryPredicate8 define(BinaryPredicate<byte> f)
+            => (a, b) => f(a.Content, b.Content);
+
+        [MethodImpl(NotInline), Op]
+        public static BinaryPredicate16 define(BinaryPredicate<short> f)
+            => (a, b) => f((short)a.Content, (short)b.Content);
+
+        [MethodImpl(NotInline), Op]
+        public static BinaryPredicate16 define(BinaryPredicate<ushort> f)
+            => (a, b) => f(a.Content, b.Content);
+
+        [MethodImpl(NotInline), Op]
+        public static BinaryPredicate32 define(BinaryPredicate<int> f)
+            => (a, b) => f((int)a.Content, (int)a.Content);
+
+        [MethodImpl(NotInline), Op]
+        public static BinaryPredicate32 define(BinaryPredicate<uint> f)
+            => (a, b) => f(a.Content, b.Content);
+
+        [MethodImpl(NotInline), Op]
+        public static BinaryPredicate64 define(BinaryPredicate<long> f)
+            => (a, b) => f((long)a.Content, (long)b.Content);
+
+        [MethodImpl(NotInline), Op]
+        public static BinaryPredicate64 define(BinaryPredicate<ulong> f)
+            => (a, b) => f(a.Content, b.Content);
+
+        /// <summary>
+        /// Creates a fixed 128-bit unary operator from caller-supplied delegate
+        /// </summary>
+        /// <param name="f">The source delegate</param>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static UnaryOp128 define<T>(Func<Vector128<T>, Vector128<T>> f)
+            where T : unmanaged
+                => (Cell128 a) => f(a.ToVector<T>()).ToCell();
+
+        /// <summary>
+        /// Creates a fixed 256-bit binary operator from caller-supplied delegate
+        /// </summary>
+        /// <param name="f">The source delegate</param>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static UnaryOp256 define<T>(Func<Vector256<T>,Vector256<T>> f)
+            where T : unmanaged
+                => (Cell256 a) => f(a.ToVector<T>()).ToCell();
+
+        /// <summary>
+        /// Creates a fixed 128-bit binary operator from caller-supplied delegate
+        /// </summary>
+        /// <param name="f">The source delegate</param>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static BinaryOp128 define<T>(Func<Vector128<T>,Vector128<T>,Vector128<T>> f)
+            where T : unmanaged
+                => (Cell128 a, Cell128 b) => f(a.ToVector<T>(),b.ToVector<T>()).ToCell();
+
+        /// <summary>
+        /// Creates a fixed 256-bit binary operator from caller-supplied delegate
+        /// </summary>
+        /// <param name="f">The source delegate</param>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static BinaryOp256 define<T>(Func<Vector256<T>,Vector256<T>,Vector256<T>> f)
+            where T : unmanaged
+                => (Cell256 a, Cell256 b) => f(a.ToVector<T>(),b.ToVector<T>()).ToCell();
+
+        [MethodImpl(Inline), Op]
+        public static BinaryOp1 define(BinaryOp<Bit32> f)
+            => (a,b) => f(a,b);
+
+        /// <summary>
+        /// Evaluates a 128-bit unary operator over a vector
+        /// </summary>
+        /// <param name="f">The operator</param>
+        /// <param name="x">The source vector</param>
+        /// <typeparam name="T">The vector cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Vector128<T> apply<T>(UnaryOp128 f, Vector128<T> x)
+            where T : unmanaged
+                => f(x.ToCell()).ToVector<T>();
+
+        /// <summary>
+        /// Evaluates a 256-bit unary operator over a vector
+        /// </summary>
+        /// <param name="f">The operator</param>
+        /// <param name="x">The source vector</param>
+        /// <typeparam name="T">The vector cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Vector256<T> apply<T>(UnaryOp256 f, Vector256<T> x)
+            where T : unmanaged
+                => f(x.ToCell()).ToVector<T>();
+
+        /// <summary>
+        /// Evaluates a 512-bit unary operator over a vector
+        /// </summary>
+        /// <param name="f">The operator</param>
+        /// <param name="x">The source vector</param>
+        /// <typeparam name="T">The vector cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Vector512<T> apply<T>(UnaryOp512 f, in Vector512<T> x)
+            where T : unmanaged
+                => f(x.ToCell()).ToVector<T>();
+
+        /// <summary>
+        /// Evaluates a 128-bit binary operator over a pair of vectors
+        /// </summary>
+        /// <param name="f">The operator</param>
+        /// <param name="x">The first vector</param>
+        /// <param name="y">The second vector</param>
+        /// <typeparam name="T">The vector cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Vector128<T> apply<T>(BinaryOp128 f, Vector128<T> x, Vector128<T> y)
+            where T : unmanaged
+                => f(x.ToCell(), y.ToCell()).ToVector<T>();
+
+        /// <summary>
+        /// Evaluates a 256-bit binary operator over a pair of vectors
+        /// </summary>
+        /// <param name="f">The operator</param>
+        /// <param name="x">The first vector</param>
+        /// <param name="y">The second vector</param>
+        /// <typeparam name="T">The vector cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Vector256<T> apply<T>(BinaryOp256 f, Vector256<T> x, Vector256<T> y)
+            where T : unmanaged
+                => f(x.ToCell(), y.ToCell()).ToVector<T>();
+
+        /// <summary>
+        /// Evaluates a 512-bit binary operator over a pair of vectors
+        /// </summary>
+        /// <param name="f">The operator</param>
+        /// <param name="x">The first vector</param>
+        /// <param name="y">The second vector</param>
+        /// <typeparam name="T">The vector cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Vector512<T> apply<T>(BinaryOp512 f, Vector512<T> x, Vector512<T> y)
+            where T : unmanaged
+                => f(x.ToCell(), y.ToCell()).ToVector<T>();
+
         /// <summary>
         /// Creates a fixed 8-bit binary operator from caller-supplied delegate
         /// </summary>
@@ -152,381 +513,6 @@ namespace Z0
             where F : unmanaged, IDataCell
             where T : unmanaged
                 => (T a, T b) => Cells.unfix<F,T>(f(Cells.fix<T,F>(a), Cells.fix<T,F>(b)));
-
-        [MethodImpl(Inline), Op]
-        public static BinaryOp1 define(BinaryOp<bit> f)
-            => (a,b) => f(a,b);
-
-        [MethodImpl(Inline), Op]
-        public static BinaryOp8 define(BinaryOp<sbyte> f)
-            => (a, b) => f((sbyte)a.Content, (sbyte)b.Content);
-
-        [MethodImpl(Inline), Op]
-        public static BinaryOp8 define(BinaryOp<byte> f)
-            => (a, b) => f(a.Content, b.Content);
-
-        [MethodImpl(Inline), Op]
-        public static BinaryOp16 define(BinaryOp<short> f)
-            => (a, b) => f((short)a.Content, (short)b.Content);
-
-        [MethodImpl(Inline), Op]
-        public static BinaryOp16 define(BinaryOp<ushort> f)
-            => (a, b) => f(a.Content, b.Content);
-
-        [MethodImpl(Inline), Op]
-        public static BinaryOp32 define(BinaryOp<int> f)
-            => (a, b) => f((int)a.Content, (int)b.Content);
-
-        [MethodImpl(Inline), Op]
-        public static BinaryOp32 define(BinaryOp<uint> f)
-            => (a, b)  => f(a.Content, b.Content);
-
-        [MethodImpl(Inline), Op]
-        public static BinaryOp64 define(BinaryOp<long> f)
-            => (a, b)  => f((long)a.Content, (long)b.Content);
-
-        [MethodImpl(Inline), Op]
-        public static BinaryOp64 define(BinaryOp<ulong> f)
-            => (a, b)  => f(a.Content, b.Content);
-
-        [MethodImpl(Inline), Op]
-        public static Emitter1 define(Emitter<bit> f)
-            => () => f();
-
-        [MethodImpl(NotInline), Op]
-        public static Emitter8 define(Emitter<sbyte> f)
-            => () => f();
-
-        [MethodImpl(NotInline), Op]
-        public static Emitter8 define(Emitter<byte> f)
-            => () => f();
-
-        [MethodImpl(NotInline), Op]
-        public static Emitter16 define(Emitter<short> f)
-            => () => f();
-
-        [MethodImpl(NotInline), Op]
-        public static Emitter16 define(Emitter<ushort> f)
-            => () => f();
-
-        [MethodImpl(NotInline), Op]
-        public static Emitter32 define(Emitter<int> f)
-            => () => f();
-
-        [MethodImpl(NotInline), Op]
-        public static Emitter32 define(Emitter<uint> f)
-            => () => f();
-
-        [MethodImpl(NotInline), Op]
-        public static Emitter64 define(Emitter<long> f)
-            => () => f();
-
-        [MethodImpl(NotInline), Op]
-        public static Emitter64 define(Emitter<ulong> f)
-            => () => f();
-
-        [MethodImpl(NotInline), Op]
-        public static UnaryOp1 define(MethodInfo f, UnaryOpClass<bit> k)
-            => define(uFx(f,k));
-
-        [MethodImpl(NotInline), Op]
-        public static UnaryOp8 define(MethodInfo f, UnaryOpClass<sbyte> k)
-            => define(uFx(f,k));
-
-        [MethodImpl(NotInline), Op]
-        public static UnaryOp8 define(MethodInfo f, UnaryOpClass<byte> k)
-            => define(uFx(f,k));
-
-        [MethodImpl(NotInline), Op]
-        public static UnaryOp16 define(MethodInfo f, UnaryOpClass<short> k)
-            => define(uFx(f,k));
-
-        [MethodImpl(NotInline), Op]
-        public static UnaryOp16 define(MethodInfo f, UnaryOpClass<ushort> k)
-            => define(uFx(f,k));
-
-        [MethodImpl(NotInline), Op]
-        public static UnaryOp32 define(MethodInfo f, UnaryOpClass<int> k)
-            => define(uFx(f,k));
-
-        [MethodImpl(NotInline), Op]
-        public static UnaryOp32 define(MethodInfo f, UnaryOpClass<uint> k)
-            => define(uFx(f,k));
-
-        [MethodImpl(NotInline), Op]
-        public static UnaryOp64 define(MethodInfo f, UnaryOpClass<long> k )
-            => define(uFx(f,k));
-
-        [MethodImpl(NotInline), Op]
-        public static UnaryOp64 define(MethodInfo f, UnaryOpClass<ulong> k)
-            => define(uFx(f,k));
-
-        [MethodImpl(Inline), Op]
-        public static BinaryOp1 define(MethodInfo f, BinaryOpClass<bit> k)
-            => define(bFx(f,k));
-
-        [MethodImpl(Inline), Op]
-        public static BinaryOp8 define(MethodInfo f, BinaryOpClass<sbyte> k)
-            => define(bFx(f,k));
-
-        [MethodImpl(Inline), Op]
-        public static BinaryOp8 define(MethodInfo f, BinaryOpClass<byte> k)
-            => define(bFx(f,k));
-
-        [MethodImpl(Inline), Op]
-        public static BinaryOp16 define(MethodInfo f, BinaryOpClass<short> k)
-            => define(bFx(f,k));
-
-        [MethodImpl(Inline), Op]
-        public static BinaryOp16 define(MethodInfo f, BinaryOpClass<ushort> k)
-            => define(bFx(f,k));
-
-        [MethodImpl(Inline), Op]
-        public static BinaryOp32 define(MethodInfo f, BinaryOpClass<uint> k)
-            => define(bFx(f,k));
-
-        [MethodImpl(Inline), Op]
-        public static BinaryOp32 define(MethodInfo f, BinaryOpClass<int> k)
-            => define(bFx(f,k));
-
-        [MethodImpl(Inline), Op]
-        public static BinaryOp64 define(MethodInfo f, BinaryOpClass<ulong> k)
-            => define(bFx(f,k));
-
-        [MethodImpl(Inline), Op]
-        public static BinaryOp64 define(MethodInfo f, BinaryOpClass<long> k)
-            => define(bFx(f,k));
-
-        [MethodImpl(Inline), Op]
-        public static UnaryOp1 define(UnaryOp<bit> f)
-            => a => f(a);
-
-        [MethodImpl(Inline), Op]
-        public static UnaryOp8 define(UnaryOp<sbyte> f)
-            => a => f((sbyte)a.Content);
-
-        [MethodImpl(Inline), Op]
-        public static UnaryOp8 define(UnaryOp<byte> f)
-            => a => f((byte)a.Content);
-
-        [MethodImpl(Inline), Op]
-        public static UnaryOp16 define(UnaryOp<short> f)
-            => a => f((short)a.Content);
-
-        [MethodImpl(Inline), Op]
-        public static UnaryOp16 define(UnaryOp<ushort> f)
-            => a => f((ushort)a.Content);
-
-        [MethodImpl(Inline), Op]
-        public static UnaryOp32 define(UnaryOp<int> f)
-            => a => f((int)a.Content);
-
-        [MethodImpl(Inline), Op]
-        public static UnaryOp32 define(UnaryOp<uint> f)
-            => a => f((uint)a.Content);
-
-        [MethodImpl(Inline), Op]
-        public static UnaryOp64 define(UnaryOp<long> f)
-            => a => f((long)a.Content);
-
-        [MethodImpl(Inline), Op]
-        public static UnaryOp64 define(UnaryOp<ulong> f)
-            => a => f(a.Content);
-
-        [MethodImpl(Inline), Op]
-        public static UnaryPredicate1 define(UnaryPredicate<Bit32> f)
-            => a => f(a);
-
-        [MethodImpl(Inline), Op]
-        public static UnaryPredicate8 define(UnaryPredicate<sbyte> f)
-            => a => f((sbyte)a.Content);
-
-        [MethodImpl(Inline), Op]
-        public static UnaryPredicate8 define(UnaryPredicate<byte> f)
-            => a => f((byte)a.Content);
-
-        [MethodImpl(Inline), Op]
-        public static UnaryPredicate16 define(UnaryPredicate<short> f)
-            => a => f((short)a.Content);
-
-        [MethodImpl(Inline), Op]
-        public static UnaryPredicate16 define(UnaryPredicate<ushort> f)
-            => a => f((ushort)a.Content);
-
-        [MethodImpl(Inline), Op]
-        public static UnaryPredicate32 define(UnaryPredicate<int> f)
-            => a => f((int)a.Content);
-
-        [MethodImpl(Inline), Op]
-        public static UnaryPredicate32 define(UnaryPredicate<uint> f)
-            => a => f((uint)a.Content);
-
-        [MethodImpl(Inline), Op]
-        public static UnaryPredicate64 define(UnaryPredicate<long> f)
-            => a => f((long)a.Content);
-
-        [MethodImpl(Inline), Op]
-        public static UnaryPredicate64 define(UnaryPredicate<ulong> f)
-            => a => f(a.Content);
-
-        [MethodImpl(Inline), Op]
-        public static BinaryPredicate1 define(BinaryPredicate<bit> f)
-            => (a, b) => f(a, b);
-
-        [MethodImpl(Inline), Op]
-        public static BinaryPredicate8 define(BinaryPredicate<sbyte> f)
-            => (a, b) => f((sbyte)a.Content, (sbyte)b.Content);
-
-        [MethodImpl(Inline), Op]
-        public static BinaryPredicate8 define(BinaryPredicate<byte> f)
-            => (a, b) => f(a.Content, b.Content);
-
-        [MethodImpl(Inline), Op]
-        public static BinaryPredicate16 define(BinaryPredicate<short> f)
-            => (a, b) => f((short)a.Content, (short)b.Content);
-
-        [MethodImpl(Inline), Op]
-        public static BinaryPredicate16 define(BinaryPredicate<ushort> f)
-            => (a, b) => f(a.Content, b.Content);
-
-        [MethodImpl(Inline), Op]
-        public static BinaryPredicate32 define(BinaryPredicate<int> f)
-            => (a, b) => f((int)a.Content, (int)a.Content);
-
-        [MethodImpl(Inline), Op]
-        public static BinaryPredicate32 define(BinaryPredicate<uint> f)
-            => (a, b) => f(a.Content, b.Content);
-
-        [MethodImpl(Inline), Op]
-        public static BinaryPredicate64 define(BinaryPredicate<long> f)
-            => (a, b) => f((long)a.Content, (long)b.Content);
-
-        [MethodImpl(Inline), Op]
-        public static BinaryPredicate64 define(BinaryPredicate<ulong> f)
-            => (a, b) => f(a.Content, b.Content);
-
-        /// <summary>
-        /// Creates a fixed 128-bit unary operator from caller-supplied delegate
-        /// </summary>
-        /// <param name="f">The source delegate</param>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static UnaryOp128 define<T>(Func<Vector128<T>, Vector128<T>> f)
-            where T : unmanaged
-                => (Cell128 a) => f(a.ToVector<T>()).ToCell();
-
-        /// <summary>
-        /// Creates a fixed 256-bit binary operator from caller-supplied delegate
-        /// </summary>
-        /// <param name="f">The source delegate</param>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static UnaryOp256 define<T>(Func<Vector256<T>,Vector256<T>> f)
-            where T : unmanaged
-                => (Cell256 a) => f(a.ToVector<T>()).ToCell();
-
-        /// <summary>
-        /// Creates a fixed 128-bit binary operator from caller-supplied delegate
-        /// </summary>
-        /// <param name="f">The source delegate</param>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static BinaryOp128 define<T>(Func<Vector128<T>,Vector128<T>,Vector128<T>> f)
-            where T : unmanaged
-                => (Cell128 a, Cell128 b) => f(a.ToVector<T>(),b.ToVector<T>()).ToCell();
-
-        /// <summary>
-        /// Creates a fixed 256-bit binary operator from caller-supplied delegate
-        /// </summary>
-        /// <param name="f">The source delegate</param>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static BinaryOp256 define<T>(Func<Vector256<T>,Vector256<T>,Vector256<T>> f)
-            where T : unmanaged
-                => (Cell256 a, Cell256 b) => f(a.ToVector<T>(),b.ToVector<T>()).ToCell();
-
-        [MethodImpl(Inline), Op]
-        public static BinaryOp1 define(BinaryOp<Bit32> f)
-            => (a,b) => f(a,b);
-
-        /// <summary>
-        /// Evaluates a 128-bit unary operator over a vector
-        /// </summary>
-        /// <param name="f">The operator</param>
-        /// <param name="x">The source vector</param>
-        /// <typeparam name="T">The vector cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Vector128<T> apply<T>(UnaryOp128 f, Vector128<T> x)
-            where T : unmanaged
-                => f(x.ToCell()).ToVector<T>();
-
-        /// <summary>
-        /// Evaluates a 256-bit unary operator over a vector
-        /// </summary>
-        /// <param name="f">The operator</param>
-        /// <param name="x">The source vector</param>
-        /// <typeparam name="T">The vector cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Vector256<T> apply<T>(UnaryOp256 f, Vector256<T> x)
-            where T : unmanaged
-                => f(x.ToCell()).ToVector<T>();
-
-        /// <summary>
-        /// Evaluates a 512-bit unary operator over a vector
-        /// </summary>
-        /// <param name="f">The operator</param>
-        /// <param name="x">The source vector</param>
-        /// <typeparam name="T">The vector cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Vector512<T> apply<T>(UnaryOp512 f, in Vector512<T> x)
-            where T : unmanaged
-                => f(x.ToCell()).ToVector<T>();
-
-        /// <summary>
-        /// Evaluates a 128-bit binary operator over a pair of vectors
-        /// </summary>
-        /// <param name="f">The operator</param>
-        /// <param name="x">The first vector</param>
-        /// <param name="y">The second vector</param>
-        /// <typeparam name="T">The vector cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Vector128<T> apply<T>(BinaryOp128 f, Vector128<T> x, Vector128<T> y)
-            where T : unmanaged
-                => f(x.ToCell(), y.ToCell()).ToVector<T>();
-
-        /// <summary>
-        /// Evaluates a 256-bit binary operator over a pair of vectors
-        /// </summary>
-        /// <param name="f">The operator</param>
-        /// <param name="x">The first vector</param>
-        /// <param name="y">The second vector</param>
-        /// <typeparam name="T">The vector cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Vector256<T> apply<T>(BinaryOp256 f, Vector256<T> x, Vector256<T> y)
-            where T : unmanaged
-                => f(x.ToCell(), y.ToCell()).ToVector<T>();
-
-        /// <summary>
-        /// Evaluates a 512-bit binary operator over a pair of vectors
-        /// </summary>
-        /// <param name="f">The operator</param>
-        /// <param name="x">The first vector</param>
-        /// <param name="y">The second vector</param>
-        /// <typeparam name="T">The vector cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Vector512<T> apply<T>(BinaryOp512 f, Vector512<T> x, Vector512<T> y)
-            where T : unmanaged
-                => f(x.ToCell(), y.ToCell()).ToVector<T>();
-
-        // [MethodImpl(Inline), Op]
-        // public static UnaryOp8 unary(UnaryOp<sbyte> f)
-        //     => a => f((sbyte)a.Content);
-
-        // [MethodImpl(Inline), Op]
-        // public static UnaryOp8 unary(UnaryOp<byte> f)
-        //     => a => f((byte)a.Content);
-
-        // [MethodImpl(Inline), Op]
-        // public static UnaryOp32 unary(UnaryOp<uint> f)
-        //     => a => f((uint)a.Content);
-
-
 
         [Free]
         public delegate bit Emitter1();

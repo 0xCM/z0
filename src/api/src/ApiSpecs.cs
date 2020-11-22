@@ -89,15 +89,4 @@ namespace Z0
             return call;
         }
     }
-
-
-    public struct ApiCallResult
-    {
-        public BinaryCode Content;
-    }
-
-    public struct ApiCallResult<R>
-    {
-        public R Content;
-    }
 }

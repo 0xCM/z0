@@ -17,6 +17,7 @@ namespace Z0
     {
         /// <summary>
         ///  __m128i _mm_packs_epi16 (__m128i a, __m128i b) PACKSSWB xmm, xmm/m128
+        /// Converts packed signed 16-bit integers from the source operands to packed 8-bit integers using signed saturation
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
