@@ -20,7 +20,7 @@ namespace Z0
         /// <summary>
         /// The operator classification
         /// </summary>
-        public readonly ApiOperatorClass OperatorClass;
+        public readonly ApiOperatorKind OperatorClass;
 
         public static OperatorTypeClass Infer(MethodInfo src)
         {
@@ -32,7 +32,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        internal OperatorTypeClass(Type type, ApiOperatorClass @class)
+        internal OperatorTypeClass(Type type, ApiOperatorKind @class)
         {
             OperandType = type;
             OperatorClass = @class;

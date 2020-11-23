@@ -7,13 +7,13 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    public readonly struct ShiftOpClass : IOperatorClassHost<ShiftOpClass,ApiOperatorClass>
+    public readonly struct ShiftOpClass : IOperatorClassHost<ShiftOpClass,ApiOperatorKind>
     {
         public static implicit operator OperatorClass(ShiftOpClass src)
             => src.Classifier;
 
-        public ApiOperatorClass Kind
-            => ApiOperatorClass.ShiftOp;
+        public ApiOperatorKind Kind
+            => ApiOperatorKind.ShiftOp;
 
         public OperatorClass Classifier
             => new OperatorClass(Kind);

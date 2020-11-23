@@ -11,7 +11,7 @@ namespace Z0
     using static z;
 
     /// <summary>
-    /// Defines a pattern for creating a <see cref='ToolCmd'/>
+    /// Defines a pattern for creating a <see cref='ToolExecSpec'/>
     /// </summary>
     public struct ToolScript : IToolScript<ToolScript>
     {
@@ -23,11 +23,11 @@ namespace Z0
 
         public string ArgDelimiter;
 
-        public FS.FileExt CmdType;
+        public FS.FileExt ScriptType;
 
         public FS.FileName CmdName;
 
-        public string CmdArgs;
+        public string ToolArgs;
 
         public FS.FolderPath CmdOutDir;
 

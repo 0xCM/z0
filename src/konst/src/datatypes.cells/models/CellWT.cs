@@ -9,6 +9,9 @@ namespace Z0
 
     using static Konst;
 
+    /// <summary>
+    /// Defines the content of a <typeparamref name='T'/> cell of width <typeparamref name='W'/>
+    /// </summary>
     public readonly struct CellW<W,T>
         where W : unmanaged, IDataWidth
         where T : struct, IDataCell

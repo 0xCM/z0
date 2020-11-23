@@ -18,11 +18,6 @@ namespace Z0
         public ushort Position {get;}
 
         /// <summary>
-        /// The option protocol
-        /// </summary>
-        public CmdArgProtocol Protocol {get;}
-
-        /// <summary>
         /// The option name
         /// </summary>
         public CmdOption Option {get;}
@@ -33,16 +28,15 @@ namespace Z0
         public V Value {get;}
 
         [MethodImpl(Inline)]
-        public ToolArg(ushort position, CmdArgProtocol protocol, CmdOption option, V value)
+        public ToolArg(CmdOption option, ushort position,  V value)
         {
-            Position = position;
-            Protocol = protocol;
             Option = option;
+            Position = position;
             Value = value;
         }
 
         [MethodImpl(Inline)]
         public static implicit operator ToolArg(ToolArg<V> src)
-            => new ToolArg(src.Position, src.Protocol, src.Option, src.Value?.ToString() ?? EmptyString);
+            => new ToolArg(src.Option, src.Position, src.Value?.ToString() ?? EmptyString);
     }
 }

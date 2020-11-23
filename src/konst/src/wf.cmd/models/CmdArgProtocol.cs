@@ -12,15 +12,26 @@ namespace Z0
 
     public readonly struct CmdArgProtocol
     {
-        public CmdArgDelimiter Delimiter {get;}
+        public CmdArgPrefix Prefix {get;}
 
         public AsciCharCode Qualifier {get;}
 
         [MethodImpl(Inline)]
-        public CmdArgProtocol(CmdArgDelimiter delimiter, AsciCharCode qualifier)
+        public CmdArgProtocol(CmdArgPrefix delimiter, AsciCharCode qualifier)
         {
-            Delimiter = delimiter;
+            Prefix = delimiter;
             Qualifier = qualifier;
         }
+
+        [MethodImpl(Inline)]
+        public CmdArgProtocol(CmdArgPrefix delimiter)
+        {
+            Prefix = delimiter;
+            Qualifier = AsciCharCode.Space;
+        }
+
+        [MethodImpl(Inline)]
+        public static implicit operator CmdArgProtocol(CmdArgPrefix prefix)
+            => new CmdArgProtocol(prefix);
     }
 }

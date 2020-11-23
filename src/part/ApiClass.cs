@@ -148,22 +148,22 @@ public enum ApiClass : ushort
 
     Eq,
 
-
-    Eqz,
-
     Neq,
 
     Lt,
-
-    Ltz,
 
     LtEq,
 
     Gt,
 
+    GtEq,
+
     Gtz,
 
-    GtEq,
+
+    Ltz,
+
+    Eqz,
 
     Between,
 

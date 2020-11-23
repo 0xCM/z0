@@ -5,7 +5,7 @@
 namespace Z0
 {
 
-    using K = ApiPredicateClass;
+    using K = ApiPredicateKind;
 
     partial class Kinds
     {

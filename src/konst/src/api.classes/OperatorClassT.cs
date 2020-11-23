@@ -9,12 +9,12 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct OperatorClass<T> : IOperationalClass<ApiOperatorClass,T>
+    public readonly struct OperatorClass<T> : IOperationalClass<ApiOperatorKind,T>
     {
-        public ApiOperatorClass Kind {get;}
+        public ApiOperatorKind Kind {get;}
 
         [MethodImpl(Inline)]
-        public OperatorClass(ApiOperatorClass k)
+        public OperatorClass(ApiOperatorKind k)
             => Kind = k;
 
         [MethodImpl(Inline)]

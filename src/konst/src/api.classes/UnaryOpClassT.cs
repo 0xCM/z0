@@ -9,10 +9,10 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct UnaryOpClass<T> : IOperatorClassHost<UnaryOpClass<T>, ApiOperatorClass,T>
+    public readonly struct UnaryOpClass<T> : IOperatorClassHost<UnaryOpClass<T>, ApiOperatorKind,T>
     {
-        public ApiOperatorClass Kind
-            => ApiOperatorClass.UnaryOp;
+        public ApiOperatorKind Kind
+            => ApiOperatorKind.UnaryOp;
 
         public OperatorClass<T> Classifier
         {

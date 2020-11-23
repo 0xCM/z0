@@ -59,10 +59,10 @@ namespace Z0
             get => ref Data[Length - 1];
         }
 
-        public int Count
+        public uint Count
         {
             [MethodImpl(Inline)]
-            get => Data.Length;
+            get => (uint)Data.Length;
         }
 
         public IndexedSeq<T> Reverse()

@@ -13,50 +13,6 @@ namespace Z0
     partial struct UI
     {
         /// <summary>
-        /// Reinterprets an input reference as a mutable <see cref='Z0.uint1'/> reference cell
-        /// </summary>
-        /// <param name="src">The source reference</param>
-        /// <param name="dst">The target width selector</param>
-        /// <typeparam name="S">The source type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref uint1 edit<S>(in S src, W1 dst)
-            where S : unmanaged
-                => ref @as<S,uint1>(src);
-
-        /// <summary>
-        /// Reinterprets an input reference as a mutable <see cref='Z0.uint1'/> reference cell
-        /// </summary>
-        /// <param name="src">The source reference</param>
-        /// <param name="dst">The target width selector</param>
-        /// <typeparam name="S">The source type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref uint2 edit<S>(in S src, W2 dst)
-            where S : unmanaged
-                => ref @as<S,uint2>(src);
-
-        /// <summary>
-        /// Reinterprets an input reference as a mutable <see cref='Z0.uint2'/> reference cell
-        /// </summary>
-        /// <param name="src">The source reference</param>
-        /// <param name="dst">The target width selector</param>
-        /// <typeparam name="S">The source type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref uint3 edit<S>(in S src, W3 dst)
-            where S : unmanaged
-                => ref @as<S,uint3>(src);
-
-        /// <summary>
-        /// Reinterprets an input reference as as a mutable <see cref='Z0.uint3'/> reference cell
-        /// </summary>
-        /// <param name="src">The source reference</param>
-        /// <param name="dst">The target width selector</param>
-        /// <typeparam name="S">The source type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref uint4 edit<S>(in S src, W4 dst)
-            where S : unmanaged
-                => ref @as<S,uint4>(src);
-
-        /// <summary>
         /// Reinterprets an input reference as a mutable <see cref='Z0.uint4'/> reference cell
         /// </summary>
         /// <param name="src">The source reference</param>

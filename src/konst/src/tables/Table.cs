@@ -28,10 +28,6 @@ namespace Z0
             where T : struct
                 => new TableField<byte>(id, spec, width);
 
-        // [MethodImpl(Inline), Op]
-        // static object value(FieldInfo def, TypedReference tr)
-        //     => def.GetValueDirect(tr);
-
         public static void format<F,T>(in TableFields<F> fields, in T src, StringBuilder dst)
             where T : struct, ITable<F,T>
             where F : unmanaged, Enum
@@ -109,7 +105,7 @@ namespace Z0
             var fCount = final.Length;
             ref var f = ref first(span(final));
             for(ushort index = 0; index<fCount; index++)
-                seek(f,index).Index = index;
+                seek(f,index).FieldIndex = index;
 
             return final;
         }
@@ -170,7 +166,6 @@ namespace Z0
             return dst.ToArray();
         }
 
-
         [MethodImpl(Inline), Op]
         public static void map(ReadOnlySpan<FieldInfo> src, Span<TableField> dst)
         {
@@ -182,11 +177,10 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ref TableField map(FieldInfo src, ushort index, ref TableField dst)
         {
-            dst.Index = index;
-            dst.TableType = src.DeclaringType;
+            dst.FieldIndex = index;
+            dst.FieldKey = src.MetadataToken;
+            dst.RecordType = src.DeclaringType;
             dst.DataType = src.FieldType;
-            dst.Offset = Interop.offset(src.DeclaringType, src.Name);
-            dst.Id = (Address16)dst.Offset;
             dst.RenderWidth = 16;
             dst.Size = default;
             dst.Definition = src;
@@ -196,11 +190,10 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ref TableField map(FieldInfo src, ushort index, byte width, ref TableField dst)
         {
-            dst.Index = index;
-            dst.TableType = src.DeclaringType;
+            dst.FieldIndex = index;
+            dst.FieldKey = src.MetadataToken;
+            dst.RecordType = src.DeclaringType;
             dst.DataType = src.FieldType;
-            dst.Offset = Interop.offset(src.DeclaringType, src.Name);
-            dst.Id = (Address16)dst.Offset;
             dst.RenderWidth = width;
             dst.Size = default;
             dst.Definition = src;

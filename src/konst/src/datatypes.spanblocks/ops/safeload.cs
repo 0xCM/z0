@@ -31,6 +31,10 @@ namespace Z0
             }
         }
 
+        public static SpanBlock8<T> safeload<T>(W8 w, T[] src)
+            where T : unmanaged
+                => safeload(w, z.span(src));
+
         /// <summary>
         /// Loads a sequence of 16-bit blocks from an unblocked span, reallocating if the source span isn't properly blocked
         /// </summary>
@@ -50,6 +54,10 @@ namespace Z0
                 return dst;
             }
         }
+
+        public static SpanBlock16<T> safeload<T>(W16 w, T[] src)
+            where T : unmanaged
+                => safeload(w, z.span(src));
 
         /// <summary>
         /// Loads 32-bit blocked span from an unblocked span, reallocating if the source span isn't properly blocked
@@ -71,6 +79,10 @@ namespace Z0
             }
         }
 
+        public static SpanBlock32<T> safeload<T>(W32 w, T[] src)
+            where T : unmanaged
+                => safeload(w, z.span(src));
+
         /// <summary>
         /// Loads 64-bit blocked span from an unblocked span, reallocating if the source span isn't properly blocked
         /// </summary>
@@ -90,6 +102,10 @@ namespace Z0
                 return dst;
             }
         }
+
+        public static SpanBlock64<T> safeload<T>(W64 w, T[] src)
+            where T : unmanaged
+                => safeload(w, z.span(src));
 
         /// <summary>
         /// Loads 128-bit blocked span from an unblocked span, reallocating if the source span isn't properly blocked
@@ -111,6 +127,10 @@ namespace Z0
             }
         }
 
+        public static SpanBlock128<T> safeload<T>(W128 w, T[] src)
+            where T : unmanaged
+                => safeload(w, z.span(src));
+
         /// <summary>
         /// Loads 256-bit blocked span from an unblocked span, reallocating if the source span isn't properly blocked
         /// </summary>
@@ -131,32 +151,15 @@ namespace Z0
             }
         }
 
-        [MethodImpl(Inline)]
-        public static SpanBlock16<T> literals<T>(W16 w, params T[] src)
+        public static SpanBlock256<T> safeload<T>(W256 w, T[] src)
             where T : unmanaged
-                => safeload(w,src.ToSpan());
-
-        [MethodImpl(Inline)]
-        public static SpanBlock32<T> literals<T>(W32 w, params T[] src)
-            where T : unmanaged
-                => safeload(w,src.ToSpan());
-
-        [MethodImpl(Inline)]
-        public static SpanBlock64<T> literals<T>(W64 w, params T[] src)
-            where T : unmanaged
-                => safeload(w,src.ToSpan());
-
-        [MethodImpl(Inline)]
-        public static SpanBlock256<T> literals<T>(W256 w, params T[] src)
-            where T : unmanaged
-                => safeload(w,src.ToSpan());
+                => safeload(w, z.span(src));
 
         /// <summary>
         /// Loads 512-bit blocked span from an unblocked span, reallocating if the source span isn't properly blocked
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The data type</typeparam>
-        /// <remarks>The use of this method is discouranged unless absolutely necessary</remarks>
         public static SpanBlock512<T> safeload<T>(W512 w, Span<T> src)
             where T : unmanaged
         {
@@ -170,5 +173,9 @@ namespace Z0
                 return dst;
             }
         }
+
+        public static SpanBlock512<T> safeload<T>(W512 w, T[] src)
+            where T : unmanaged
+                => safeload(w, z.span(src));
     }
 }

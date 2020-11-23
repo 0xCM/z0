@@ -9,6 +9,9 @@ namespace Z0
 
     using static Konst;
 
+    /// <summary>
+    /// Defines an indexed sequence of <typeparamref name='W'/> width <typeparamref name='T'/> cells
+    /// </summary>
     public readonly struct Cells<W,T> : ITableSpan<Cells<W,T>, CellW<W,T>>
         where W : unmanaged, IDataWidth
         where T : struct, IDataCell

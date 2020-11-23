@@ -217,7 +217,7 @@ namespace Z0
 
         void ShowCmdModels()
         {
-            var models = @readonly(Cmd.models(Wf));
+            var models = @readonly(Cmd.descriptors(Wf));
             var buffer = Buffers.text();
             for(var i=0; i<models.Length; i++)
             {
@@ -268,7 +268,7 @@ namespace Z0
 
         public void Run()
         {
-            var models = @readonly(Cmd.models(Wf));
+            var models = @readonly(Cmd.descriptors(Wf));
             var count = models.Length;
             for(var i=0; i<count; i++)
             {

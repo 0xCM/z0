@@ -31,12 +31,18 @@ namespace Z0
         /// </summary>
         public string Purpose {get;}
 
+        /// <summary>
+        /// The option protocol
+        /// </summary>
+        public CmdArgProtocol Protocol {get;}
+
         [MethodImpl(Inline)]
         public CmdOption(K kind)
         {
             Name = kind.ToString();
             Kind = kind;
             Purpose = EmptyString;
+            Protocol = new CmdArgProtocol(CmdArgPrefix.Default);
         }
 
         [MethodImpl(Inline)]
@@ -45,6 +51,16 @@ namespace Z0
             Name = name;
             Kind = kind;
             Purpose = EmptyString;
+            Protocol = new CmdArgProtocol(CmdArgPrefix.Default);
+        }
+
+        [MethodImpl(Inline)]
+        public CmdOption(string name, K kind, string purpose, CmdArgProtocol protocol)
+        {
+            Name = name;
+            Kind = kind;
+            Purpose = purpose;
+            Protocol = protocol;
         }
 
         public bool IsEmpty
@@ -73,12 +89,8 @@ namespace Z0
             => Format();
 
         [MethodImpl(Inline)]
-        public static implicit operator CmdOption<K>(K src)
-            => new CmdOption<K>(src);
-
-        [MethodImpl(Inline)]
         public static implicit operator CmdOption(CmdOption<K> src)
-            => new CmdOption(src.Name);
+            => new CmdOption(src.Name, src.Purpose, src.Protocol);
 
         /// <summary>
         /// Specifies the empty option

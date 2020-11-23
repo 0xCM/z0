@@ -42,16 +42,14 @@ public enum PartId : ulong
 
     Tools = 41,
 
-    Sln = 42,
+    UInt = 42,
 
     Fsm = 43,
 
+    Driver = 44,
+
     // ~ 50
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-    Monitor = 41,
-
-    Driver = 43,
 
     Run = 50,
 
@@ -118,10 +116,6 @@ public enum PartId : ulong
 
     Dynamic = 137,
 
-    Fixed = 138,
-
-    VBlock = 139,
-
     Asm = 140,
 
     External = 141,
@@ -159,8 +153,6 @@ public enum PartId : ulong
     Control = 180,
 
     AsmModels = 181,
-
-    AsmServices = 186,
 
     Derivatives = 190,
 
@@ -205,6 +197,8 @@ public enum PartId : ulong
     ToolsTest = Tools | Test,
 
     TestDriver = Driver | Test,
+
+    UIntTest = UInt | Test,
 
     // ~ Classifiers
     // ~ -------------------------------------------------------------------------------

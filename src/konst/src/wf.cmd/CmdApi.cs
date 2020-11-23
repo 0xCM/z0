@@ -25,7 +25,6 @@ namespace Z0
 
         const NumericKind Closure = UnsignedInts;
 
-
         [MethodImpl(Inline), Op]
         public static ICmdCatalog catalog(IWfShell wf)
             => new CmdCatalog(wf);
@@ -34,8 +33,46 @@ namespace Z0
         public static CmdBuilder builder(IWfShell wf)
             => new CmdBuilder(wf);
 
-        [Op]
-        public static CmdDescriptor[] models(IWfShell wf)
-            => typeof(Cmd).Assembly.Types().Tagged<CmdAttribute>().Select(descriptor);
+        [MethodImpl(Inline), Factory]
+        public CmdArgProtocol protocol(CmdArgPrefix prefix, AsciCharCode qualifier = AsciCharCode.Space)
+            => new CmdArgProtocol(prefix, qualifier);
+
+
+        /// <summary>
+        /// Creates an option without purpose
+        /// </summary>
+        /// <param name="name">The option name</param>
+        [MethodImpl(Inline), Factory]
+        public static CmdOption option(string name)
+            => new CmdOption(name);
+
+        /// <summary>
+        /// Creates a meaningful option
+        /// </summary>
+        /// <param name="name">The option name</param>
+        /// <param name="purpose">The option's significance</param>
+        [MethodImpl(Inline), Factory]
+        public static CmdOption option(string name, string purpose)
+            => new CmdOption(name, purpose);
+
+        /// <summary>
+        /// Creates a meaningful option with non-default protocol
+        /// </summary>
+        /// <param name="name">The option name</param>
+        /// <param name="purpose">The option's significance</param>
+        /// <param name="purpose">The invocation protocol</param>
+        [MethodImpl(Inline), Factory]
+        public static CmdOption option(string name, string purpose, CmdArgPrefix prefix)
+            => new CmdOption(name, purpose, prefix);
+
+        /// <summary>
+        /// Creates a meaningful option with non-default protocol
+        /// </summary>
+        /// <param name="name">The option name</param>
+        /// <param name="purpose">The option's significance</param>
+        /// <param name="purpose">The invocation protocol</param>
+        [MethodImpl(Inline), Factory]
+        public static CmdOption option(string name, string purpose, CmdArgProtocol protocol)
+            => new CmdOption(name, purpose, protocol);
     }
 }

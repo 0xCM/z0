@@ -13,7 +13,6 @@ namespace Z0
         public void check_pdb2xml()
         {
             var model = Tooling.model<Pdb2Xml>();
-            eq(Pdb2Xml.Delimiter, model.Delimiter.Format()[0]);
             eq(Pdb2Xml.Usage, model.Usage);
             var options = model.Options;
             var count = options.Count;

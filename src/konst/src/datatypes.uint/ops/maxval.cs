@@ -14,22 +14,6 @@ namespace Z0
     partial struct UI
     {
         [MethodImpl(Inline), Op]
-        public static uint3 maxval(W3 w)
-            => maxval<uint3>();
-
-        [MethodImpl(Inline), Op]
-        public static uint4 maxval(W4 w)
-            => maxval<uint4>();
-
-        [MethodImpl(Inline), Op]
-        public static uint6 maxval(W6 w)
-            => maxval<uint6>();
-
-        [MethodImpl(Inline), Op]
-        public static uint7 maxval(W7 w)
-            => maxval<uint7>();
-
-        [MethodImpl(Inline), Op]
         public static octet maxval(W8 w)
             => maxval<octet>();
 

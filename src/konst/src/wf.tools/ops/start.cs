@@ -14,7 +14,7 @@ namespace Z0
 
     partial struct Tooling
     {
-        public static async Task<int> start(ToolCmd spec, WfStatusRelay dst)
+        public static async Task<int> start(ToolExecSpec spec, WfStatusRelay dst)
         {
             var info = new ProcessStartInfo
             {

@@ -10,8 +10,6 @@ namespace Z0
     using static Konst;
     using static z;
 
-    using api = Tooling;
-
     /// <summary>
     /// Defines a tool option
     /// </summary>
@@ -29,11 +27,17 @@ namespace Z0
         /// </summary>
         public string Purpose {get;}
 
+        /// <summary>
+        /// The option protocol
+        /// </summary>
+        public CmdArgProtocol Protocol {get;}
+
         [MethodImpl(Inline)]
         public CmdOption(string name)
         {
             Name = name;
             Purpose = EmptyString;
+            Protocol = new CmdArgProtocol(CmdArgPrefix.Default);
         }
 
         [MethodImpl(Inline)]
@@ -41,6 +45,15 @@ namespace Z0
         {
             Name = name;
             Purpose = purpose;
+            Protocol = new CmdArgProtocol(CmdArgPrefix.Default);
+        }
+
+        [MethodImpl(Inline)]
+        public CmdOption(string name, string purpose, CmdArgProtocol protocol)
+        {
+            Name = name;
+            Purpose = purpose;
+            Protocol = protocol;
         }
 
         public bool IsEmpty
@@ -63,7 +76,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => api.format(this);
+            => Cmd.format(this);
 
         public override string ToString()
             => Format();

@@ -9,10 +9,10 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct EmitterOpClass<T> : IOperatorClassHost<EmitterOpClass<T>,ApiOperatorClass,T>
+    public readonly struct EmitterOpClass<T> : IOperatorClassHost<EmitterOpClass<T>,ApiOperatorKind,T>
     {
-        public ApiOperatorClass Kind
-            => ApiOperatorClass.Emitter;
+        public ApiOperatorKind Kind
+            => ApiOperatorKind.Emitter;
 
         public OperatorClass<T> Classifier
         {

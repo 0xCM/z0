@@ -18,16 +18,14 @@ namespace Z0
         /// <summary>
         /// The defining type
         /// </summary>
-        public Type TableType;
+        public Type RecordType;
 
         /// <summary>
         /// The 0-based, declaration order of the field
         /// </summary>
-        public ushort Index;
+        public ushort FieldIndex;
 
-        public Address16 Id;
-
-        public Address64 Offset;
+        public ClrArtifactKey FieldKey;
 
         public Type DataType;
 
@@ -43,19 +41,25 @@ namespace Z0
             get => Definition.Name;
         }
 
-        Type ITableField.TableType
-            => TableType;
+        Type IRecordField.RecordType
+            => RecordType;
 
-        string ITableField.FieldName
+        ushort IRecordField.FieldIndex
+            => FieldIndex;
+
+        string IRecordField.FieldName
             => Name;
 
-        Type ITableField.DataType
+        Type IRecordField.FieldType
             => DataType;
 
-        ByteSize ITableField.FieldSize
+        ByteSize IRecordField.FieldSize
             => Size;
 
         RenderWidth<ushort> ITableField.RenderWidth
             => RenderWidth;
+
+        ClrArtifactKey IRecordField.FieldKey
+            => FieldKey;
     }
 }

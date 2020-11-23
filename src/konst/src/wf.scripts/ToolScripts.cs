@@ -16,46 +16,41 @@ namespace Z0
     public readonly partial struct ToolScripts
     {
         [Op]
-        public static ToolCmd<ToolScript> create(IFileDb db, string root, string name, string arg, string delimiter = null, string type = null)
+        public static ToolScript create(IFileDb db, ToolId tool, string root, string arg, string delimiter = null, string type = null)
         {
-            ToolCmd<ToolScript> cmd = new ToolScript();
-            ref var data = ref cmd.Content;
+            var data = new ToolScript();
             data.CmdRootName = FS.folder(root);
-            data.Tool = name;
+            data.Tool = tool;
             data.CmdArgName = arg;
             data.ArgDelimiter = delimiter ?? DefaultArgDelimiter;
-            data.CmdType = FS.ext(type ?? DefaultCmdType);
-            rules(db, ref cmd);
-            return cmd;
+            data.ScriptType = FS.ext(type ?? DefaultCmdType);
+            rules(db, ref data);
+            return data;
         }
 
         [Op]
-        public static ref ToolCmd<ToolScript> update(IFileDb db, ref ToolCmd<ToolScript> cmd, string root = null, string name = null, string arg = null, string delimiter = null, string type = null)
+        public static ref ToolScript update(IFileDb db, ref ToolScript data, string root = null, string name = null, string arg = null, string delimiter = null, string type = null)
         {
-            ref var data = ref cmd.Content;
             data.CmdRootName = root == null ? data.CmdRootName : FS.folder(root);
-            data.Tool = cmd.ToolId;
             data.CmdArgName = arg == null ? data.CmdArgName : arg;
             data.ArgDelimiter = delimiter == null ? data.ArgDelimiter : delimiter;
-            data.CmdType = type == null ? data.CmdType : FS.ext(type);
-            rules(db, ref cmd);
-            return ref cmd;
+            data.ScriptType = type == null ? data.ScriptType : FS.ext(type);
+            rules(db, ref data);
+            return ref data;
         }
 
         [Op]
-        public static ref ToolCmd<ToolScript> rules(IFileDb db, ref ToolCmd<ToolScript> cmd)
+        public static ref ToolScript rules(IFileDb db, ref ToolScript data)
         {
-            ref var data = ref cmd.Content;
-            ref readonly var id = ref data.Tool;
             data.CmdRoot = db.ToolRoot() +  data.CmdRootName;
-            data.CmdName = FS.file(id.Format(), data.CmdType);
-            data.CmdOutName = FS.file(string.Format("{0}.{1}", id, data.CmdArgName), db.Log);
-            data.CmdOutDir = db.ToolOutput(id);
-            data.CmdOutPath = data.CmdOutDir + FS.file(id.Id);
-            data.CmdArgs = string.Format("{0}{0}", data.ArgDelimiter, data.CmdArgName);
-            data.CmdPath = data.CmdRoot + FS.file(id.Format(), data.CmdType);
-            data.CmdExecSpec = string.Format("{0} {1}", data.CmdPath, data.CmdArgs);
-            return ref cmd;
+            data.CmdName = FS.file(data.Tool.Format(), data.ScriptType);
+            data.CmdOutName = FS.file(string.Format("{0}.{1}", data.Tool, data.CmdArgName), db.Log);
+            data.CmdOutDir = db.ToolOutput(data.Tool);
+            data.CmdOutPath = data.CmdOutDir + FS.file(data.Tool);
+            data.ToolArgs = string.Format("{0}{0}", data.ArgDelimiter, data.CmdArgName);
+            data.CmdPath = data.CmdRoot + FS.file(data.Tool.Format(), data.ScriptType);
+            data.CmdExecSpec = string.Format("{0} {1}", data.CmdPath, data.ToolArgs);
+            return ref data;
         }
     }
 }

@@ -12,7 +12,6 @@ namespace Z0
 
     public readonly struct WfController
     {
-
         public Assembly Component {get;}
 
         [MethodImpl(Inline)]

@@ -27,14 +27,12 @@ namespace Z0
             if(!tag)
             {
                 dst.Name = src.Name;
-                dst.Delimiter = delimiter(Chars.Dash);
                 dst.Usage = EmptyString;
             }
             else
             {
                 var attrib = tag.Value;
                 dst.Name = attrib.ToolName;
-                dst.Delimiter = delimiter(attrib.OptionDelimiter);
                 dst.Usage = attrib.UsageSyntax;
             }
 

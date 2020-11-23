@@ -12,7 +12,7 @@ namespace Z0.Dynamics
     {
         public static IMemberValuePredicate Define(IOperator Operator, MemberInfo Member, object Value)
         {
-            
+
             var OP = Operator.GetType();
             var typedef = typeof(MemberValuePredicate<>).GetGenericTypeDefinition();
             var type = typedef.MakeGenericType(OP);
@@ -21,7 +21,6 @@ namespace Z0.Dynamics
         }
     }
 
-
     /// <summary>
     /// Represents an operation that evaluates the value of a member and returns a boolean result
     /// </summary>
@@ -29,7 +28,6 @@ namespace Z0.Dynamics
     public sealed class MemberValuePredicate<OP> : MemberPredicate<OP>, IMemberValuePredicate
         where OP : BinaryOperator<OP>
     {
-
         public MemberValuePredicate(OP Operator, MemberInfo Member, object Value)
             : base(Operator, Member)
         {

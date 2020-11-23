@@ -10,10 +10,13 @@ namespace Z0
     using static Konst;
     using static z;
 
+    /// <summary>
+    /// Defines an indexed sequence of <typeparamref name='T'/> cells
+    /// </summary>
     public readonly struct Cells<T> : ITableSpan<Cells<T>,T>
         where T : struct, IDataCell
     {
-        readonly TableSpan<T> Data;
+        readonly IndexedSeq<T> Data;
 
         [MethodImpl(Inline)]
         public Cells(T[] src)
@@ -22,7 +25,7 @@ namespace Z0
         public Span<T> Edit
         {
             [MethodImpl(Inline)]
-            get =>  Data.Edit;
+            get =>  Data.Storage;
         }
 
         public ReadOnlySpan<T> View

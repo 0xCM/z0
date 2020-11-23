@@ -124,28 +124,28 @@ namespace Z0
 
         public readonly struct RNot : I { K I.Kind => K.RNot; }
 
-        public readonly struct And<T> : IBitLogicKindHost<And,T> {}
+        public readonly struct And<T> : IBitLogicMetatype<And,T> {}
 
-        public readonly struct Nand<T> : IBitLogicKindHost<Nand,T> {}
+        public readonly struct Nand<T> : IBitLogicMetatype<Nand,T> {}
 
-        public readonly struct Or<T> : IBitLogicKindHost<Or,T> {}
+        public readonly struct Or<T> : IBitLogicMetatype<Or,T> {}
 
-        public readonly struct Nor<T> : IBitLogicKindHost<Nor,T> {}
+        public readonly struct Nor<T> : IBitLogicMetatype<Nor,T> {}
 
-        public readonly struct Xor<T> : IBitLogicKindHost<Xor,T> {}
+        public readonly struct Xor<T> : IBitLogicMetatype<Xor,T> {}
 
-        public readonly struct Xnor<T> : IBitLogicKindHost<Xnor,T> {}
+        public readonly struct Xnor<T> : IBitLogicMetatype<Xnor,T> {}
 
-        public readonly struct Impl<T> : IBitLogicKindHost<Impl,T> {}
+        public readonly struct Impl<T> : IBitLogicMetatype<Impl,T> {}
 
-        public readonly struct NonImpl<T> : IBitLogicKindHost<NonImpl,T> {}
+        public readonly struct NonImpl<T> : IBitLogicMetatype<NonImpl,T> {}
 
-        public readonly struct CImpl<T> : IBitLogicKindHost<CImpl,T> {}
+        public readonly struct CImpl<T> : IBitLogicMetatype<CImpl,T> {}
 
-        public readonly struct CNonImpl<T> : IBitLogicKindHost<CNonImpl,T> {}
+        public readonly struct CNonImpl<T> : IBitLogicMetatype<CNonImpl,T> {}
 
-        public readonly struct Not<T> : IBitLogicKindHost<Not,T> {}
+        public readonly struct Not<T> : IBitLogicMetatype<Not,T> {}
 
-        public readonly struct Select<T> : IBitLogicKindHost<Select,T> {}
+        public readonly struct Select<T> : IBitLogicMetatype<Select,T> {}
     }
 }

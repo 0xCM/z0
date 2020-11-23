@@ -32,7 +32,7 @@ namespace Z0
 
         public void print_calls()
         {
-            var samples = z.span(Invoke8u, Invoke16u, Invoke16i, Invoke32u, Invoke64u);
+            var samples = z.array(Invoke8u, Invoke16u, Invoke16i, Invoke32u, Invoke64u);
             for(var i=0u; i<samples.Length; i++)
                 Trace(skip(samples,i).Format());
         }

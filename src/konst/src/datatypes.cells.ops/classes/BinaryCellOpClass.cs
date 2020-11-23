@@ -9,12 +9,12 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct BinaryCellOpClass : ICellOpClass<BinaryCellOpClass,ApiOperatorClass>
+    public readonly struct BinaryCellOpClass : ICellOpClass<BinaryCellOpClass,ApiOperatorKind>
     {
         public TypeWidth Width {get;}
 
-        public ApiOperatorClass Kind
-            => ApiOperatorClass.BinaryOp;
+        public ApiOperatorKind Kind
+            => ApiOperatorKind.BinaryOp;
 
         public OperatorClass Classifier
         {

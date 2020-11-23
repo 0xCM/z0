@@ -17,19 +17,14 @@ namespace Z0
         where K : unmanaged
     {
         /// <summary>
-        /// The 0-based argument position
-        /// </summary>
-        public ushort Position {get;}
-
-        /// <summary>
-        /// The option protocol
-        /// </summary>
-        public CmdArgProtocol Protocol {get;}
-
-        /// <summary>
         /// The specified option
         /// </summary>
         public CmdOption<K> Option {get;}
+
+        /// <summary>
+        /// The 0-based argument position
+        /// </summary>
+        public ushort Position {get;}
 
         /// <summary>
         /// The option value
@@ -37,11 +32,10 @@ namespace Z0
         public V Value {get;}
 
         [MethodImpl(Inline)]
-        public ToolArg(ushort position, CmdArgProtocol protocol, K kind, V value)
+        public ToolArg(CmdOption<K> option, ushort position, V value)
         {
             Position = position;
-            Protocol = protocol;
-            Option = kind;
+            Option = option;
             Value = value;
         }
     }

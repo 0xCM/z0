@@ -69,4 +69,12 @@ namespace Z0
         ByteSize IDataCell.Size
             => ((int)TypeWidth)/8;
     }
+
+    public interface IDataCells<H,I,C> : IIndex<H,I,C>
+        where H : struct, IDataCells<H,I,C>
+        where C : unmanaged, IDataCell
+        where I : unmanaged
+    {
+
+    }
 }

@@ -13,15 +13,6 @@ namespace Z0
     {
         /// <summary>
         /// Promotes a <see cref='U2'/> to a <see cref='U3'/>, as indicated by the <see cref='W3'/> selector
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="w">The target width</param>
-        [MethodImpl(Inline), Op]
-        public static uint3 extend(W3 w, uint2 src)
-            => src;
-
-        /// <summary>
-        /// Promotes a <see cref='U2'/> to a <see cref='U3'/>, as indicated by the <see cref='W3'/> selector
         /// and shifts the result <see cref='N1'/> bit leftward
         /// </summary>
         /// <param name="src">The source value</param>
@@ -57,7 +48,6 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static uint6 extend(W6 w, uint2 src)
             => src;
-
 
     }
 }

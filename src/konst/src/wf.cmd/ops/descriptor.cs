@@ -19,5 +19,9 @@ namespace Z0
         public static CmdDescriptor<T> descriptor<T>()
             where T : struct, ICmdSpec<T>
                 => default;
+
+        [Op]
+        public static CmdDescriptor[] descriptors(IWfShell wf)
+            => typeof(Cmd).Assembly.Types().Tagged<CmdAttribute>().Select(descriptor);
     }
 }

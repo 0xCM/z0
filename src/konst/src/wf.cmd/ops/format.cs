@@ -148,5 +148,32 @@ namespace Z0
             render(src, dst);
             return dst.Emit();
         }
+
+        [Formatter]
+        public static string format(CmdArgPrefix src)
+        {
+            var len = src.Length;
+            if(len == 0)
+                return EmptyString;
+            else if(len == 1)
+            {
+                Span<char> content = stackalloc char[1]{(char)src.C0};
+                return new string(content);
+            }
+            else
+            {
+                Span<char> content = stackalloc char[2]{(char)src.C0, (char)src.C1};
+                return new string(content);
+            }
+        }
+
+        [MethodImpl(Inline), Formatter]
+        public static string format(CmdOption src)
+            => src.IsAnonymous || src.IsEmpty ? EmptyString : src.Name;
+
+        [MethodImpl(Inline), Formatter, Closures(UnsignedInts)]
+        public static string format<K>(CmdOption<K> src)
+            where K : unmanaged
+                => src.IsAnonymous || src.IsEmpty ? EmptyString : src.Name;
     }
 }

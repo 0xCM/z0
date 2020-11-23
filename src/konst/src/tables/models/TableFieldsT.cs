@@ -61,10 +61,6 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public RenderWidth Width(F f)
-            => this[f].Width;
-
-        [MethodImpl(Inline)]
         public string Name(uint index)
             => this[index].Name;
     }

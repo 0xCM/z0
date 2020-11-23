@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    using K = ApiOperatorClass;
+    using K = ApiOperatorKind;
 
     public readonly struct OperatorClass : IOperatorClassHost<OperatorClass,K>
     {

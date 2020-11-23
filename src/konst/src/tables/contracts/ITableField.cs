@@ -8,45 +8,8 @@ namespace Z0
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface ITableField
+    public interface ITableField : IRecordField
     {
-        Type TableType {get;}
-
-        string FieldName {get;}
-
-        Type DataType {get;}
-
-        ByteSize FieldSize {get;}
-
         RenderWidth<ushort> RenderWidth {get;}
-    }
-
-    [Free]
-    public interface ITableField<T> : ITableField
-        where T : struct, ITable
-    {
-        Type ITableField.TableType
-            => typeof(T);
-
-    }
-
-    [Free]
-    public interface ITableField<F,T> : ITableField<T>
-        where T : struct, ITable
-        where F : unmanaged, Enum
-    {
-
-    }
-
-    [Free]
-    public interface ITableField<F,T,V> : ITableField<F,T>
-        where T : struct, ITable
-        where F : unmanaged, Enum
-    {
-        Type ITableField.DataType
-            => typeof(V);
-
-        ByteSize ITableField.FieldSize
-            => z.size<V>();
     }
 }

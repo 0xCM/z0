@@ -10,8 +10,6 @@ namespace Z0
     {
         ushort Position {get;}
 
-        CmdArgProtocol Protocol {get;}
-
         CmdOption Option {get;}
 
         V Value {get;}

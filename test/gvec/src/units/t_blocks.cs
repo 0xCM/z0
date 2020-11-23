@@ -75,24 +75,24 @@ namespace Z0
 
         public void check_block_slice()
         {
-            var x = SpanBlocks.safeload(n128, span<int>(1,2,3,4,5,6,7,8));
+            var x = SpanBlocks.safeload(w128, array<int>(1,2,3,4,5,6,7,8));
 
             var block0 = x.Block(0);
             Claim.eq(4, block0.Length);
-            var y = SpanBlocks.safeload(n128, span(1,2,3,4));
+            var y = SpanBlocks.safeload(w128, array(1,2,3,4));
             Claim.Eq(block0, y);
 
             var block2 = x.Block(1);
             Claim.eq(4, block2.Length);
-            Claim.Eq(block2, SpanBlocks.parts(n128,5,6,7,8));
+            Claim.Eq(block2, SpanBlocks.parts(w128,5,6,7,8));
 
         }
 
         public void check_safeload()
         {
-            var x = SpanBlocks.safeload(n128, span<int>(1,2,3,4,5,6,7,8));
+            var x = SpanBlocks.safeload(w128, array<int>(1,2,3,4,5,6,7,8));
             Claim.eq(x.BlockCount,2);
-            Claim.eq(x, SpanBlocks.parts(n128,1,2,3,4,5,6,7,8));
+            Claim.eq(x, SpanBlocks.parts(w128,1,2,3,4,5,6,7,8));
         }
 
         public void check_block_alloc()

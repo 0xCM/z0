@@ -16,7 +16,5 @@ namespace Z0
         public UsageSyntax Usage;
 
         public CmdOptions Options;
-
-        public CmdArgDelimiter Delimiter;
     }
 }

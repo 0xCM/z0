@@ -8,5 +8,6 @@
         <LogixTest>$(TestDir)logix\z0.logix.test.csproj</LogixTest>
         <SymbolicTest>$(TestDir)symbolic\z0.symbolic.test.csproj</SymbolicTest>
         <MachinesTest>$(TestDir)machines\z0.machines.test.csproj</MachinesTest>
+        <MachinesTest>$(TestDir)uint\z0.uint.test.csproj</MachinesTest>
     </PropertyGroup>
 </Project>

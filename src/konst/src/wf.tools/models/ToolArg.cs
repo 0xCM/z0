@@ -15,17 +15,15 @@ namespace Z0
     /// </summary>
     public readonly struct ToolArg : IToolArg
     {
-        public ushort Position {get;}
-
-        /// <summary>
-        /// The option protocol
-        /// </summary>
-        public CmdArgProtocol Protocol {get;}
-
         /// <summary>
         /// The option for which the argument is specified
         /// </summary>
         public CmdOption Option {get;}
+
+        /// <summary>
+        /// The 0-based argument position
+        /// </summary>
+        public ushort Position {get;}
 
         /// <summary>
         /// The argument value
@@ -33,10 +31,9 @@ namespace Z0
         public string Value {get;}
 
         [MethodImpl(Inline)]
-        public ToolArg(ushort position, CmdArgProtocol protocol, CmdOption option, string value)
+        public ToolArg(CmdOption option, ushort position, string value)
         {
             Position = position;
-            Protocol = protocol;
             Option = option;
             Value = value;
         }

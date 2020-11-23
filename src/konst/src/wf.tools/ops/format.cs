@@ -13,40 +13,13 @@ namespace Z0
 
     partial struct Tooling
     {
-        [MethodImpl(Inline), Formatter]
-        public static string format(CmdOption src)
-            => src.IsAnonymous || src.IsEmpty ? EmptyString : src.Name;
-
-        [Formatter]
-        public static string format(CmdArgDelimiter src)
-        {
-            var len = src.Length;
-            if(len == 0)
-                return EmptyString;
-            else if(len == 1)
-            {
-                Span<char> content = stackalloc char[1]{(char)src.C0};
-                return new string(content);
-            }
-            else
-            {
-                Span<char> content = stackalloc char[2]{(char)src.C0, (char)src.C1};
-                return new string(content);
-            }
-        }
-
-        [MethodImpl(Inline), Formatter, Closures(Closure)]
-        public static string format<K>(CmdOption<K> src)
-            where K : unmanaged
-                => src.IsAnonymous || src.IsEmpty ? EmptyString : src.Name;
-
         [Formatter]
         public static string format(ToolArg src)
-            => string.Format("{0}{2}", format(src.Option), src.Value);
+            => string.Format("{0}{2}", Cmd.format(src.Option), src.Value);
 
         [Formatter]
-        public static string format(ToolArg src, CmdArgDelimiter delimiter, char specifier)
-            => string.Format("{0}{1}{2}{3}", format(delimiter), format(src.Option), specifier, src.Value);
+        public static string format(ToolArg src, CmdArgPrefix delimiter, char specifier)
+            => string.Format("{0}{1}{2}{3}", Cmd.format(delimiter), Cmd.format(src.Option), specifier, src.Value);
 
         public static string format<K,V>(ToolArg<K,V> src, char specifier)
             where K : unmanaged

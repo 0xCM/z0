@@ -13,9 +13,6 @@ namespace Z0
 
     partial struct UI
     {
-        [MethodImpl(Inline), Op]
-        public static uint2 inc(uint2 x)
-            => !x.IsMax ? new uint2(z.add(x.data, 1), false) : Q.uint2.Min;
 
         [MethodImpl(Inline), Op]
         public static uint3 inc(uint3 x)

@@ -9,11 +9,11 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct TernaryCellOpClass<W> : ICellOpClass<TernaryCellOpClass<W>,W,ApiOperatorClass>
+    public readonly struct TernaryCellOpClass<W> : ICellOpClass<TernaryCellOpClass<W>,W,ApiOperatorKind>
         where W : unmanaged, ITypeWidth
     {
-        public ApiOperatorClass Kind
-            => ApiOperatorClass.TernaryOp;
+        public ApiOperatorKind Kind
+            => ApiOperatorKind.TernaryOp;
 
         public TypeWidth Width
             => Widths.type<W>();
