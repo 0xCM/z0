@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
 
@@ -13,14 +13,14 @@ namespace Z0
     /// Characterizes a content formatter that can also produces titles and titled content
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public interface IEntitled<T> : ITitleFormatter<T>, IFormatter<T>
+    public interface IEntitled<T> : ITitleFormatter<T>, ITextFormatter<T>
     {
-        IFormatter<T> ContentFormatter {get;}
+        ITextFormatter<T> ContentFormatter {get;}
 
         ITitleFormatter<T> TitleFormatter {get;}
 
         [MethodImpl(Inline)]
-        string IFormatter<T>.Format(T src) 
+        string IFormatter<T,string>.Format(T src)
             => ContentFormatter.Format(src);
 
         [MethodImpl(Inline)]
@@ -29,10 +29,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         string FormatEntitled(T src)
-            => String.Concat(
-                FormatTitle(src), 
-                Chars.FSlash, 
-                ContentFormatter.Format(src)
-                );
+            => String.Concat(FormatTitle(src), Chars.FSlash, ContentFormatter.Format(src));
     }
 }

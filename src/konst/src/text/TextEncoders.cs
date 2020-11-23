@@ -11,11 +11,11 @@ namespace Z0
     using static Konst;
 
     [ApiHost(ApiNames.TextEncoders, true)]
-    public unsafe readonly partial struct TextEncoders
+    public unsafe readonly partial struct TextCoders
     {
         [MethodImpl(Inline), Op]
-        public static TextEncoder service(Encoding src)
-            => new TextEncoder(src);
+        public static TextCoder service(Encoding src)
+            => new TextCoder(src);
 
         [MethodImpl(Inline), Op]
         public static int GetCharCount(Encoding e, ReadOnlySpan<byte> bytes)
@@ -107,7 +107,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static TextEncoder utf8()
-            => new TextEncoder(Encoding.UTF8);
+        public static TextCoder utf8()
+            => new TextCoder(Encoding.UTF8);
     }
 }

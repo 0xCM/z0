@@ -9,7 +9,7 @@ namespace Z0
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface ICmdRouter : IWfService
+    public interface ICmdRouter : IWfShellService
     {
         IndexedView<CmdId> SupportedCommands {get;}
 
@@ -27,7 +27,7 @@ namespace Z0
     }
 
     [Free]
-    public interface ICmdRouter<H> : ICmdRouter, IWfService<H>
+    public interface ICmdRouter<H> : ICmdRouter, IWfShellService<H>
         where H : ICmdRouter<H>, new()
     {
 

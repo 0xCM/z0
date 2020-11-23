@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// Characterizes a configurable formatter, parametric in both type and configuration
     /// </summary>
-    public interface IDataFormatter<C,T> : IFormatter<T>
+    public interface IDataFormatter<C,T> : ITextFormatter<T>
         where C : struct
     {
         /// <summary>
@@ -20,10 +20,10 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="config">The configuration</param>
-        string Format(T src, in C config);  
+        string Format(T src, in C config);
 
         [MethodImpl(Inline)]
-        string IFormatter<T>.Format(T src)
-            => Format(src, default);              
-    }    
+        string IFormatter<T,string>.Format(T src)
+            => Format(src, default);
+    }
 }

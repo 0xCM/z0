@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    public readonly partial struct Pipes
+    partial struct Pipes
     {
         [MethodImpl(Inline), Closures(UnsignedInts)]
         public static bool next<T>(in DataPipe<T> pipe, out T dst)

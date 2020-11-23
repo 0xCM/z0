@@ -53,12 +53,6 @@ namespace Z0
             => FS.file("config.json");
 
         /// <summary>
-        /// The path to the directory that contains runtime configuration data
-        /// </summary>
-        FS.FolderPath ConfigRoot
-            => DevRoot + FS.folder(".settings");
-
-        /// <summary>
         /// The path to the root application resource directory
         /// </summary>
         FS.FolderPath ResourceRoot

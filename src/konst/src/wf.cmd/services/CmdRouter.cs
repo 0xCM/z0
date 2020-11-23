@@ -11,7 +11,6 @@ namespace Z0
     using static Konst;
     using static z;
 
-
     public class CmdRouter : ICmdRouter<CmdRouter>
     {
         IWfShell Wf;

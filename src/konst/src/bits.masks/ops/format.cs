@@ -18,7 +18,7 @@ namespace Z0
     partial class BitMasks
     {
         [MethodImpl(Inline), Op]
-        public static void render(in BitMaskRow src, IDatasetFormatter<F> dst)
+        public static void render(in BitMaskInfo src, IDatasetFormatter<F> dst)
         {
             dst.Delimit(F.Name, src.Name);
             dst.Delimit(F.Base, src.Base);
@@ -26,7 +26,7 @@ namespace Z0
             dst.Delimit(F.Text, src.Text);
         }
 
-        static string format(Base2 @base, BitMaskRow src)
+        static string format(Base2 @base, BitMaskInfo src)
             => BitFormatter.bits(src.Data, src.TypeCode);
 
         /// <summary>

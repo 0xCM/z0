@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    using R = BitMaskRow;
+    using R = BitMaskInfo;
     using F = NumericLiteralField;
 
     public readonly struct BitMaskFormatter : IValueFormatter<F,R>

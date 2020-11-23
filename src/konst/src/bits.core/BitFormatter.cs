@@ -12,12 +12,11 @@ namespace Z0
     using static z;
 
     [ApiHost(ApiNames.BitFormatter, true)]
-    public readonly struct BitFormatter : IBitFormatter
+    public readonly struct BitFormatter : IBitFormatter<BitFormatter>
     {
         const NumericKind Closure = UnsignedInts;
 
         public static BitFormatter Service => default;
-
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static BitFormatter<T> create<T>()

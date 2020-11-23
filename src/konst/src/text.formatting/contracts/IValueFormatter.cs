@@ -8,12 +8,12 @@ namespace Z0
 
     using static Konst;
 
-    public interface IValueFormatter<T> : IFormatter<T>
+    public interface IValueFormatter<T> : ITextFormatter<T>
         where T : struct
     {
         string Format(in T src);
 
-        string IFormatter<T>.Format(T src)
+        string IFormatter<T,string>.Format(T src)
             => Format(src);
 
         string HeaderText {get;}

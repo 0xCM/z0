@@ -8,7 +8,7 @@ namespace Z0.Asm
     using System.IO;
 
     public interface TAsmTester :
-        IService<IAsmContext>,
+        IContextual<IAsmContext>,
         IBufferedChecker,
         ITestDynamic,
         ICheckVectors,

@@ -20,7 +20,7 @@ namespace Z0
 
         T Source;
 
-        TableRow<T> Row;
+        DynamicRow<T> Row;
 
         [MethodImpl(Inline)]
         public RowAdapter(in TableFields fields, uint index = 0)
@@ -39,7 +39,7 @@ namespace Z0
             return this;
         }
 
-        public TableRow<T> Adapted
+        public DynamicRow<T> Adapted
         {
             [MethodImpl(Inline)]
             get => Row;

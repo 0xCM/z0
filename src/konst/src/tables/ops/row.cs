@@ -13,17 +13,17 @@ namespace Z0
     partial struct Table
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static TableRow<T> row<T>(uint cells)
+        public static DynamicRow<T> row<T>(uint cells)
             where T : struct
-                => new TableRow<T>(0, default(T), sys.alloc<dynamic>(cells));
+                => new DynamicRow<T>(0, default(T), sys.alloc<dynamic>(cells));
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static TableRow<T> row<T>(uint index, in T src)
+        public static DynamicRow<T> row<T>(uint index, in T src)
             where T : struct
                 => row(Table.index<T>(), index, src);
 
         [MethodImpl(Inline)]
-        public static TableRow<T> row<T>(in TableFields fields, uint index, in T src)
+        public static DynamicRow<T> row<T>(in TableFields fields, uint index, in T src)
             where T : struct
         {
             var dst = row<T>(fields.Count);
@@ -31,16 +31,16 @@ namespace Z0
             return dst;
         }
 
-        public static TableRow<T> row<T>(in T src)
+        public static DynamicRow<T> row<T>(in T src)
             where T : struct
                 => adapter<T>().Adapt(src).Adapted;
 
         [MethodImpl(Inline)]
-        public static TableRow<T> row<T>(in T src, in RowAdapter<T> adapter)
+        public static DynamicRow<T> row<T>(in T src, in RowAdapter<T> adapter)
             where T : struct
                 => adapter.Adapt(src).Adapted;
 
-        public static TableRow<T> row<T>(in T src, in TableFields fields)
+        public static DynamicRow<T> row<T>(in T src, in TableFields fields)
             where T : struct
                 => adapter<T>(fields).Adapt(src).Adapted;
 

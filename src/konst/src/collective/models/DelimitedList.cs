@@ -20,10 +20,6 @@ namespace Z0
         readonly DelimitArray<T,string> Render;
 
         [MethodImpl(Inline)]
-        public static implicit operator DelimitedList<T>(T[] src)
-            => new DelimitedList<T>(src);
-
-        [MethodImpl(Inline)]
         public DelimitedList(T[] src, char delimiter =  FieldDelimiter)
         {
             Data = src;
@@ -45,5 +41,9 @@ namespace Z0
 
         public override string ToString()
             => Format();
+
+        [MethodImpl(Inline)]
+        public static implicit operator DelimitedList<T>(T[] src)
+            => new DelimitedList<T>(src);
     }
 }

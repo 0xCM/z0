@@ -12,10 +12,10 @@ namespace Z0
     /// <summary>
     /// Formats anything via <see cref='object.ToString()'/>
     /// </summary>
-    public readonly struct DefaultFormatter : IFormatter
+    public readonly struct DefaultFormatter : ITextFormatter<DefaultFormatter,object>
     {
         public static DefaultFormatter Service => default;
-        
+
         [MethodImpl(Inline)]
         public string Format(object src)
             => src?.ToString() ?? "<null>";

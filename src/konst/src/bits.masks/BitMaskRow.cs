@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
 
     [StructLayout(LayoutKind.Sequential), Table(TableId, FieldCount)]
-    public struct BitMaskRow
+    public struct BitMaskInfo
     {
         public const string TableId = "bitmasks";
 

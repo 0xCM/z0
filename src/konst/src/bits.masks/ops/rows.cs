@@ -15,10 +15,10 @@ namespace Z0
 
     partial class BitMasks
     {
-        public static BitMaskRow[] rows(Type src)
+        public static BitMaskInfo[] rows(Type src)
         {
             var fields = span(src.LiteralFields());
-            var dst = new List<BitMaskRow>();
+            var dst = new List<BitMaskInfo>();
             for(var i=0u; i<fields.Length; i++)
             {
                 ref readonly var field = ref skip(fields,i);
@@ -34,7 +34,7 @@ namespace Z0
             return dst.ToArray();
         }
 
-        public static BitMaskRow[] rows(LiteralInfo src, object value)
+        public static BitMaskInfo[] rows(LiteralInfo src, object value)
         {
             if(src.MultiLiteral)
             {
@@ -43,7 +43,7 @@ namespace Z0
                 {
                     var components = content.SplitClean(FieldDelimiter);
                     var count = components.Length;
-                    var dst = alloc<BitMaskRow>(count);
+                    var dst = alloc<BitMaskInfo>(count);
                     for(var i=0; i<count; i++)
                     {
                         var component = components[i];
@@ -71,7 +71,7 @@ namespace Z0
                     }
                 }
             }
-            return sys.empty<BitMaskRow>();
+            return sys.empty<BitMaskInfo>();
         }
     }
 }

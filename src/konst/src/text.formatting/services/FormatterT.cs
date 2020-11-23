@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct Formatter<T> : IFormatter<T>
+    public readonly struct Formatter<T> : ITextFormatter<T>
     {
         readonly FormatFunctions.Format<T> Fx;
 

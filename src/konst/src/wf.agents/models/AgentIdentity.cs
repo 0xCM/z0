@@ -15,12 +15,12 @@ namespace Z0
     public readonly struct AgentIdentity
     {
         /// <summary>
-        /// Uniquely identifies a server
+        /// Specifies the agent's defining assembly
         /// </summary>
         public readonly uint PartId;
 
         /// <summary>
-        /// Identifies an agent relative to a server
+        /// Specifies the agent's reifying type
         /// </summary>
         public readonly uint HostId;
 

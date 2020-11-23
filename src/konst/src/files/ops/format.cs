@@ -52,29 +52,41 @@ namespace Z0
         }
 
         [Op]
-        public static string format(FileTypeList src)
+        public static string format(FileType src)
         {
-            var dst = text.build();
-            format(src,dst);
-            return dst.ToString();
+            var dst = Buffers.text();
+            render(src,dst);
+            return dst.Emit();
         }
 
         [Op]
-        public static void format(FileTypeList src, StringBuilder dst)
+        public static void render(FileType src, ITextBuffer dst)
         {
-            dst.Append(Chars.LBracket);
+            var extensions = text.bracket(src.Extensions.Delimited().Format());
+            var content = src.ContentKind.Format();
+            dst.Append(text.bracket(src.Extensions.Delimited().Format()));
+            dst.Append(" | ");
+            dst.Append(src.ContentKind.Format());
+        }
+
+        [Op]
+        public static void render(FileTypes src, ITextBuffer dst)
+        {
             var count = src.Count;
-            var reps = src.Reps;
-            for(var i=0u; i<count; i++)
+            var view = src.View;
+            for(var i=0; i<count; i++)
             {
-                if(i != 0)
-                {
-                    dst.Append(Chars.Comma);
-                    dst.Append(Chars.Space);
-                }
-                dst.Append(skip(reps,i).Name);
+                render(skip(view,i), dst);
+                dst.AppendLine();
             }
-            dst.Append(Chars.RBracket);
+        }
+
+        [Op]
+        public static string format(FileTypes src)
+        {
+            var dst = Buffers.text();
+            render(src,dst);
+            return dst.Emit();
         }
     }
 }

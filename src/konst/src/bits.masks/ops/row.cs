@@ -13,14 +13,14 @@ namespace Z0
     partial class BitMasks
     {
         [MethodImpl(Inline), Op]
-        public static BitMaskRow row(NumericLiteral src)
+        public static BitMaskInfo row(NumericLiteral src)
         {
-            var dst = new BitMaskRow();
+            var dst = new BitMaskInfo();
             return map(src, ref dst);
         }
 
         [MethodImpl(Inline), Op]
-        static ref BitMaskRow map(in NumericLiteral src, ref BitMaskRow dst)
+        static ref BitMaskInfo map(in NumericLiteral src, ref BitMaskInfo dst)
         {
             dst.Name = src.Name;
             dst.TypeCode = src.TypeCode;

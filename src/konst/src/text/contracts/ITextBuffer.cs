@@ -73,7 +73,7 @@ namespace Z0
         }
     }
 
-    public interface ITextBuffer<H> : ITextBuffer
+    public interface ITextBuffer<H> : ITextBuffer, IService<H,ITextBuffer>
         where H : struct, ITextBuffer<H>
     {
 

@@ -170,7 +170,7 @@ namespace Z0
             => src.Tagged<OpAttribute>() && src.Tagged<ClosuresAttribute>() && !src.AcceptsImmediate();
 
         [Op]
-        public static BitMaskRow[] bitmasks(Type src)
+        public static BitMaskInfo[] bitmasks(Type src)
             => BitMasks.rows(src);
 
         [Op]

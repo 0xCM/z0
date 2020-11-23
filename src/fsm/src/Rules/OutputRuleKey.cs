@@ -39,5 +39,4 @@ namespace Z0
         public static implicit operator OutputRuleKey<E,S>((E trigger, S source) x)
             => new OutputRuleKey<E,S>(x.trigger, x.source);
     }
-
 }

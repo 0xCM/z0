@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
 
@@ -22,10 +22,10 @@ namespace Z0
             TitleFormatter = entitle;
         }
 
-        IFormatter<C> IEntitled<C>.ContentFormatter 
+        ITextFormatter<C> IEntitled<C>.ContentFormatter
             => ContentFormatter;
 
-        ITitleFormatter<C> IEntitled<C>.TitleFormatter 
+        ITitleFormatter<C> IEntitled<C>.TitleFormatter
             => TitleFormatter;
     }
 }

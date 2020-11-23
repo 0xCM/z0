@@ -3,10 +3,10 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
-    
-    public interface ICilFunctionFormatter : IService
+
+    public interface ICilFunctionFormatter
     {
         string Format(CilFunction f);
     }

@@ -6,7 +6,6 @@ namespace Z0
 {
     using Free =System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-
     [Free]
     public interface IWfFunc : ITextual
     {
@@ -18,18 +17,10 @@ namespace Z0
             => text.format("{0}/{1}", StepId.Format(), Name.Format());
     }
 
-
     [Free]
     public interface IWfFunc<C> : IWfFunc
         where C : IWfStep<C>, new()
     {
         C Step => default;
-    }
-
-    [Free]
-    public interface IWfFunc<C,R> : IWfFunc<C>
-        where C : IWfStep<C>, new()
-    {
-
     }
 }

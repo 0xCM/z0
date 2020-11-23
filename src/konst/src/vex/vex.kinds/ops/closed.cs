@@ -46,8 +46,7 @@ namespace Z0
         /// <param name="w">The vector width</param>
         [MethodImpl(Inline), Op]
         public static bool closed(ParameterInfo p, W128 w)
-            => p.ParameterType.IsClosedGeneric()
-            && VexKinds.test(p,w);
+            => p.ParameterType.IsClosedGeneric() && VexKinds.test(p,w);
 
         /// <summary>
         /// Returns true if a method parameter is a closed 256-bit intrinsic vector
@@ -56,8 +55,7 @@ namespace Z0
         /// <param name="w">The vector width</param>
         [MethodImpl(Inline), Op]
         public static bool closed(ParameterInfo p, W256 w)
-            => p.ParameterType.IsClosedGeneric()
-            && VexKinds.test(p,w);
+            => p.ParameterType.IsClosedGeneric() && VexKinds.test(p,w);
 
         /// <summary>
         /// Returns true if a method parameter is a closed 512-bit intrinsic vector
@@ -66,7 +64,6 @@ namespace Z0
         /// <param name="w">The vector width</param>
         [MethodImpl(Inline), Op]
         public static bool closed(ParameterInfo p, W512 w)
-            => p.ParameterType.IsClosedGeneric()
-            && VexKinds.test(p,w);
+            => p.ParameterType.IsClosedGeneric() && VexKinds.test(p,w);
     }
 }

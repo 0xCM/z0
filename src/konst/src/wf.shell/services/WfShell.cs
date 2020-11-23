@@ -47,6 +47,8 @@ namespace Z0
 
         public LogLevel Verbosity {get; private set;}
 
+        public WfServices Services {get;}
+
         long StartToken;
 
         long EndToken;
@@ -57,6 +59,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public WfShell(IWfInit config)
         {
+            Services = new WfServices();
             Init = config;
             Context = Init.Shell;
             Id = Init.ControlId;

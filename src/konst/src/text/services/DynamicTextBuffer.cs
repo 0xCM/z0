@@ -11,6 +11,7 @@ namespace Z0
     using static Konst;
     using static z;
 
+    [Service]
     public readonly struct DynamicTextBuffer : ITextBuffer<DynamicTextBuffer>
     {
         readonly StringBuilder Target;

@@ -13,7 +13,7 @@ namespace Z0
     partial struct Table
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static void load<T>(in TableFields fields, ReadOnlySpan<T> src, in TableRows<T> dst)
+        public static void load<T>(in TableFields fields, ReadOnlySpan<T> src, in DynamicRows<T> dst)
             where T : struct
         {
             var count = (uint)src.Length;
@@ -23,7 +23,7 @@ namespace Z0
         }
 
         [Op, Closures(Closure)]
-        public static void load<T>(in TableFields fields, uint index, in T src, ref TableRow<T> dst)
+        public static void load<T>(in TableFields fields, uint index, in T src, ref DynamicRow<T> dst)
             where T : struct
         {
             dst = dst.UpdateSource(index, src);

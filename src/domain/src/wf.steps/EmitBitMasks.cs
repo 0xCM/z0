@@ -35,7 +35,7 @@ namespace Z0
         {
             Host = host;
             Wf = wf.WithHost(host);
-            TableType = typeof(BitMaskRow);
+            TableType = typeof(BitMaskInfo);
             TargetPath = wf.Db().Table(TableType);
             Wf.Created();
         }
