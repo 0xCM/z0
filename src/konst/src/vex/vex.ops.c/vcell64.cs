@@ -11,8 +11,7 @@ namespace Z0
     using static Konst;
 
     partial struct z
-    {        
-
+    {
         /// <summary>
         /// Extract an index-identified component of a reinterpreted vector
         /// </summary>
@@ -62,7 +61,7 @@ namespace Z0
         public static double vcell64f<T>(Vector128<T> x, byte index)
             where T : unmanaged
                 => v64f(x).GetElement(index);
-       
+
         /// <summary>
         /// Extract an index-identified component of a reinterpreted vector
         /// </summary>

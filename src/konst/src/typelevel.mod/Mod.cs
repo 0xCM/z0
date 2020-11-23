@@ -1,13 +1,13 @@
 //-----------------------------------------------------------------------------
-// Copyrhs   :  (c) Chris Moore, 2020
+// Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
-        
-    using static Konst;    
+    using System.Runtime.CompilerServices;
+
+    using static Konst;
 
     /// <summary>
     /// Defines mod/div operations
@@ -21,7 +21,7 @@ namespace Z0
         /// Specifies the divisor for which the modulus was constructed
         /// </summary>
         public readonly uint n;
-        
+
         uint state;
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace Z0
         public static Mod<N> Define<N>(uint state, N n = default)
             where N : unmanaged, ITypeNat
                 => Mod<N>.Define(state);
-        
+
         /// <summary>
         /// Constructs a modulus operator with a persistent divisor
         /// </summary>
@@ -67,7 +67,7 @@ namespace Z0
             {
                 ++src.state;
                 return src;
-            }            
+            }
         }
 
         /// <summary>
@@ -122,7 +122,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The dividend</param>
         [MethodImpl(Inline)]
-        public uint div(uint a)        
+        public uint div(uint a)
             => (uint) ModOps.mulhi(M, a);
 
         /// <summary>
@@ -143,7 +143,7 @@ namespace Z0
         /// <param name="a">The dividend</param>
         [MethodImpl(Inline)]
         public bool divisible(uint a)
-            => a * M <= M - 1; 
+            => a * M <= M - 1;
 
         [MethodImpl(Inline)]
         public string Format()
@@ -155,7 +155,7 @@ namespace Z0
         public override bool Equals(object rhs)
             => rhs is Mod x ? x.state == state : false;
 
-        public override string ToString() 
+        public override string ToString()
             => Format();
     }
 }

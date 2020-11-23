@@ -188,7 +188,7 @@ namespace Z0
             => MultiplyAddScalar(x, y, z);
 
         /// <summary>
-        /// __m128 _mm_fmsub_ss (__m128 a, __m128 b, __m128 c)VFMSUBSS xmm, xmm, xmm/m32
+        /// __m128 _mm_fmsub_ss (__m128 a, __m128 b, __m128 c) VFMSUBSS xmm, xmm, xmm/m32
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>

@@ -12,9 +12,9 @@ namespace Z0
     partial struct z
     {
         /// <summary>
-        /// Allocates and populates a new array by filtering the source array with a specified predicate 
+        /// Allocates and populates a new array by filtering the source array with a specified predicate
         /// </summary>
-        /// <param name="src">The soruce array</param>
+        /// <param name="src">The source array</param>
         /// <param name="f">The predicate</param>
         /// <typeparam name="T">The array element type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
@@ -27,9 +27,9 @@ namespace Z0
             {
                 ref readonly var test = ref skip(src,i);
                 if(f(test))
-                    seek(dst, count++) = test;                    
-            }   
+                    seek(dst, count++) = test;
+            }
             return array(dst.Slice(0, (int)count));
-        }        
+        }
     }
 }

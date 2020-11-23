@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="src">The source specifier</param>
         /// <param name="w">A width-type representative</param>
         /// <typeparam name="N">The bit type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bool aligned<N>(in GridMetrics src, N n = default)
             where N : unmanaged, ITypeNat
                 => (ulong)src.StoreSize % TypeNats.value(n) == 0;
@@ -28,7 +28,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source specifier</param>
         /// <param name="w">A width-type representative</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bool aligned(in GridMetrics src, DataWidth w)
             => src.StoreSize % (uint)w == 0;
 
@@ -38,33 +38,33 @@ namespace Z0
         /// <param name="src">The source specifier</param>
         /// <param name="w">A width-type representative</param>
         /// <typeparam name="W">The bit-width type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bool aligned(in GridMetrics src, NumericKind k)
             => src.StoreSize % k.Width() == 0;
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static uint remainder(in GridMetrics src, W128 w)
             => src.StoreSize % 16;
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static uint coverage(in GridMetrics src, W128 w)
         {
             var r = remainder(src,w);
             return r != 0 ? r + 1 : r;
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static uint remainder(in GridMetrics src, W256 w)
             => src.StoreSize % 32;
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static uint coverage(in GridMetrics src, W256 w)
         {
             var r = remainder(src,w);
             return r != 0 ? r + 1 : r;
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static uint points(in GridMetrics src)
             => (uint)(src.RowCount*src.ColCount);
 
@@ -73,7 +73,7 @@ namespace Z0
         /// </summary>
         /// <param name="row">The 0-based row index</param>
         /// <param name="col">The 0-based col index</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static int linear(in GridMetrics src, int row, int col)
             => GridCells.linear(src.ColCount, row, col);
 
@@ -82,16 +82,16 @@ namespace Z0
         /// </summary>
         /// <param name="row">The 0-based row index</param>
         /// <param name="col">The 0-based col index</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static int offset(in GridMetrics src, int row, int col)
             => linear(src, row,col) % src.CellWidth;
 
         /// <summary>
-        /// Computes the storage segment that covers a specifed row/col coordinate
+        /// Computes the storage segment that covers a specified row/col coordinate
         /// </summary>
         /// <param name="row">The 0-based row index</param>
         /// <param name="col">The 0-based col index</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static int seg(in GridMetrics src, int row, int col)
             => linear(src,row,col) / src.CellWidth;
 

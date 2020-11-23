@@ -44,12 +44,8 @@ namespace Z0
             where T : unmanaged
                 => default(NumericParser<T>);
 
-        [MethodImpl(Inline), Op]
-        public static ScalarParser scalar()
-            => ScalarParser.Service;
-
         [MethodImpl(Inline)]
-        public static NumericParserNoFail<T> numeric<T>(bool succeed)
+        public static InfallibleNumericParser<T> numeric<T>(bool succeed)
             where T : unmanaged
                 => NumericParser.infallible<T>();
 

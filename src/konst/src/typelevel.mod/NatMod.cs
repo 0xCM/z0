@@ -1,14 +1,14 @@
 //-----------------------------------------------------------------------------
-// Copyrhs   :  (c) Chris Moore, 2020
+// Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
-        
-    using static Konst;  
-    
+    using System.Runtime.CompilerServices;
+
+    using static Konst;
+
     /// <summary>
     /// Represents div/mod operations for a divisor of type N; This type forms a commutative
     /// ring over the set of least residues {0,...,N-1}, i.e. the ring of integers modulo N,
@@ -16,14 +16,14 @@ namespace Z0
     /// </summary>
     public struct Mod<N>
         where N : unmanaged, ITypeNat
-    {        
+    {
         uint state;
 
         /// <summary>
         /// The fixed 64-bit modulus for the generic closure
         /// </summary>
         public static ulong M64 => default(N).NatValue;
-        
+
         /// <summary>
         /// The fixed 32-bit modulus for the generic closure
         /// </summary>
@@ -41,12 +41,11 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Mod<N> Define(uint state = 0)
             => new Mod<N>(state <= StateMax ? state : mod(state));
-        
+
         /// <summary>
         /// Implicitly constructs a typed modulus with an initial state, reducing as necessary
         /// </summary>
-        /// <param name="state">The intial state</param>
-        /// <typeparam name="N">The modulus type</typeparam>
+        /// <param name="state">The initial state</param>
         [MethodImpl(Inline)]
         public static implicit operator Mod<N>(uint state)
             => Define(state);
@@ -54,8 +53,7 @@ namespace Z0
         /// <summary>
         /// Implicitly constructs a modulus with an initial state from a signed integer, converting/reducing as necessary
         /// </summary>
-        /// <param name="state">The intial state</param>
-        /// <typeparam name="N">The modulus type</typeparam>
+        /// <param name="state">The initial state</param>
         [MethodImpl(Inline)]
         public static implicit operator Mod<N>(int state)
             => Define((uint)state);
@@ -75,7 +73,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator int(Mod<N> src)
             => (int)src.state;
-            
+
         /// <summary>
         /// Increments the source operand in-place
         /// </summary>
@@ -92,9 +90,9 @@ namespace Z0
             {
                 ++src.state;
                 return src;
-            }            
+            }
         }
-            
+
         /// <summary>
         /// Decrements the source operand in-place
         /// </summary>
@@ -116,11 +114,11 @@ namespace Z0
         /// <param name="rhs">The right operand</param>
         [MethodImpl(Inline)]
         public static Mod<N> operator -(Mod<N> lhs, Mod<N> rhs)
-        {            
+        {
             if(lhs.state >= rhs.state)
                 return new Mod<N>(lhs.state - rhs.state);
             else
-                return new Mod<N>(M32 - (rhs.state - lhs.state));            
+                return new Mod<N>(M32 - (rhs.state - lhs.state));
         }
 
         [MethodImpl(Inline)]
@@ -149,7 +147,7 @@ namespace Z0
 
         // [MethodImpl(Inline)]
         // public static T mod<T>(T a)
-        //     where T : unmanaged             
+        //     where T : unmanaged
         //         => convert<uint,T>(mod(convert<T,uint>(a)));
 
         /// <summary>
@@ -157,7 +155,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The dividend</param>
         [MethodImpl(Inline)]
-        public static uint div(uint a)        
+        public static uint div(uint a)
             => _Mod.div(a);
 
         /// <summary>
@@ -165,7 +163,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The dividend</param>
         [MethodImpl(Inline)]
-        public static uint divrem(uint a, out uint r)        
+        public static uint divrem(uint a, out uint r)
             => _Mod.divrem(a, out r);
 
         /// <summary>
@@ -174,18 +172,18 @@ namespace Z0
         /// <param name="a">The dividend</param>
         [MethodImpl(Inline)]
         public static bool divisible(uint a)
-            => _Mod.divisible(a);        
+            => _Mod.divisible(a);
 
         /// <summary>
         /// Computes the modular sum of the operands
         /// </summary>
-        /// <param name="a">The lefdt operand</param>
+        /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         [MethodImpl(Inline)]
         public static ulong add(ulong a, ulong b)
         {
-            if (b == 0)  
-                return a;                
+            if (b == 0)
+                return a;
             var c = M64 - b;
             return a >= c ? a - c : M64 - c + a;
         }
@@ -193,7 +191,7 @@ namespace Z0
         /// <summary>
         /// Computes the modular difference of the operands
         /// </summary>
-        /// <param name="a">The lefdt operand</param>
+        /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         [MethodImpl(Inline)]
         public static ulong sub(ulong a, ulong b)
@@ -202,12 +200,12 @@ namespace Z0
         /// <summary>
         /// Computes the modular product of the operands
         /// </summary>
-        /// <param name="a">The lefdt operand</param>
+        /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         /// <remarks>Follows the approach of Arndt in Matters Computational, Chapter 39: Modular arithmetic and some number theory</remarks>
         [MethodImpl(Inline)]
         public static ulong mul(ulong a, ulong b)
-        {            
+        {
             var x = a * b;
             var y = (ulong)((double)a*(double)b*MR +.5);
             var r = x - y;
@@ -229,7 +227,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ulong dec(ulong a)
             => a == 0 ? M64 - 1 : a - 1;
-        
+
         [MethodImpl(Inline)]
         public static ulong negate(ulong a)
             => a == 0 ? 0 : M64 - a;
@@ -244,7 +242,7 @@ namespace Z0
         public uint State
         {
             [MethodImpl(Inline)]
-            get => state;            
+            get => state;
         }
 
         [MethodImpl(Inline)]
@@ -257,7 +255,7 @@ namespace Z0
         public override bool Equals(object rhs)
             => rhs is Mod<N> x ? x.state == state : false;
 
-        public override string ToString() 
+        public override string ToString()
             => Format();
 
         /// <summary>

@@ -17,6 +17,7 @@ namespace Z0
 
         readonly TextParseFunction<K> Parser;
 
+        [MethodImpl(Inline)]
         public SettingKey(K key, TextFormatFunction<K> render, TextParseFunction<K> parse)
         {
             Key = key;

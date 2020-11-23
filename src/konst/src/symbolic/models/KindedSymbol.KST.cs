@@ -38,6 +38,19 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
+        public KindedSymbol(K kind, S value)
+        {
+            Kind = kind;
+            Value = value;
+        }
+
+        K IKindedSymbol<K,S>.Kind
+            => Kind;
+
+        S ISymbol<S>.Value
+            => Value;
+
+        [MethodImpl(Inline)]
         public static implicit operator Symbol<S>(KindedSymbol<K,S,T> src)
             => new Symbol<S>(src.Value);
 
@@ -60,18 +73,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator K(KindedSymbol<K,S,T> src)
             => src.Kind;
-
-        [MethodImpl(Inline)]
-        public KindedSymbol(K kind, S value)
-        {
-            Kind = kind;
-            Value = value;
-        }
-
-        K IKindedSymbol<K, S>.Kind
-            => Kind;
-
-        S ISymbol<S>.Value
-            => Value;
     }
 }

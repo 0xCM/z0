@@ -45,7 +45,7 @@ namespace Z0
             Value = value;
         }
 
-        K IKindedSymbol<K, S>.Kind
+        K IKindedSymbol<K,S>.Kind
             => Kind;
 
         S ISymbol<S>.Value

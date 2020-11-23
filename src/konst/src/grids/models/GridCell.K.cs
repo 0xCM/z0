@@ -16,11 +16,11 @@ namespace Z0
         where T : struct
         where K : unmanaged
     {
-        public readonly T Data;
+        public T Data {get;}
 
-        public readonly K Row;
+        public K Row {get;}
 
-        public readonly K Col;
+        public K Col {get;}
 
         [MethodImpl(Inline)]
         public GridCell(T data, K row, K col)

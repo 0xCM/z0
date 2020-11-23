@@ -25,7 +25,7 @@ namespace Z0
             const byte SegWidth = 2;
             var first = (byte)(index * SegWidth);
             var last = (byte)(first + SegWidth - 1);
-            dst = (Perm4L)extract((byte)src, first, last);
+            dst = (Perm4L)BitMasks.extract((byte)src, first, last);
             return test(dst);
         }
 
@@ -42,7 +42,7 @@ namespace Z0
             const byte Segwidth = 3;
             var first = (byte)(index * Segwidth);
             var last = (byte)(first + Segwidth - 1);
-            dst = (Perm8L)extract((uint)src, first, last);
+            dst = (Perm8L)BitMasks.extract((uint)src, first, last);
             return test(dst);
         }
 
@@ -59,7 +59,7 @@ namespace Z0
             const byte Segwidth = 4;
             var first = (byte)(index * Segwidth);
             var last = (byte)(first + Segwidth - 1);
-            dst = (Perm16L)extract((ulong)src, first, last);
+            dst = (Perm16L)BitMasks.extract((ulong)src, first, last);
             return test(dst);
         }
     }

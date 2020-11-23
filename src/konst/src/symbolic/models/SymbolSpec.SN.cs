@@ -32,6 +32,14 @@ namespace Z0
         /// </summary>
         public ClrArtifactKey SegDomain {get;}
 
+        [MethodImpl(Inline)]
+        public SymbolSpec(ushort wSeg, ClrArtifactKey dSeg, params S[] symbols)
+        {
+            SegDomain = dSeg;
+            SegWidth = wSeg;
+            Symbols = symbols;
+        }
+
         /// <summary>
         /// The number of bits occupied by a symbol
         /// </summary>
@@ -70,14 +78,6 @@ namespace Z0
 
         S[] ISymbolSpec<S>.Symbols
             => Symbols;
-
-        [MethodImpl(Inline)]
-        public SymbolSpec(ushort wSeg, ClrArtifactKey dSeg, params S[] symbols)
-        {
-            SegDomain = dSeg;
-            SegWidth = wSeg;
-            Symbols = symbols;
-        }
 
         [MethodImpl(Inline)]
         public static implicit operator SymbolSpec(SymbolSpec<S,W> src)

@@ -1,15 +1,15 @@
 //-----------------------------------------------------------------------------
-// Copyrhs   :  (c) Chris Moore, 2020
+// Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
-        
-    using static Konst;    
+
+    using static Konst;
 
     public static class ModOps
     {
@@ -34,7 +34,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The dividend</param>
         [MethodImpl(Inline)]
-        public static uint div(ulong m, ulong n, uint a)        
+        public static uint div(ulong m, ulong n, uint a)
             => (uint) mulhi(m, a);
 
         /// <summary>
@@ -43,8 +43,8 @@ namespace Z0
         /// <param name="a">The dividend</param>
         [MethodImpl(Inline)]
         public static bool divisible(ulong m, ulong n, uint a)
-            => a * m <= m - 1; 
-        
+            => a * m <= m - 1;
+
         /// <summary>
         /// Computes (a + b) mod n
         /// </summary>

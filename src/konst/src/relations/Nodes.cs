@@ -20,6 +20,6 @@ namespace Z0
             => new Node<T>(src);
 
         public static Projected<S,T> projected<S,T>(S src, T dst)
-            => new Projected<S, T>(src,dst);
+            => new Projected<S,T>(src,dst);
     }
 }

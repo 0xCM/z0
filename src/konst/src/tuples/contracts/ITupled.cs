@@ -28,7 +28,6 @@ namespace Z0
         /// The right member
         /// </summary>
         T1 Right {get;}
-
     }
 
     /// <summary>
@@ -49,7 +48,6 @@ namespace Z0
         T1 Second {get;}
 
         T2 Third {get;}
-
     }
 
     /// <summary>

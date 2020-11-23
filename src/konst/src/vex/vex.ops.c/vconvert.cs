@@ -19,7 +19,7 @@ namespace Z0
         /// <summary>
         /// VPMOVZXBD ymm, m64
         /// 8x8u -> 8x32u
-        /// Evenly covers a 256-bit target vector with a 64-bit source
+        /// Zero extend 8 packed 8-bit integers in the low 8 bytes of xmm2/m64 to 8 packed 32-bit integers in ymm1
         /// </summary>
         /// <param name="n64">The number of bits covered by the source reference</param>
         /// <param name="src">The source reference</param>
@@ -27,7 +27,7 @@ namespace Z0
         /// <param name="n">The target component width</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector256<uint> vconvert(N64 n64, in byte src, N256 w, N32 n)
-            => v32u(ConvertToVector256Int32(z.gptr(in src)));
+            => v32u(ConvertToVector256Int32(gptr(src)));
 
         /// <summary>
         /// VPMOVZXBD ymm, m64
@@ -40,7 +40,7 @@ namespace Z0
         /// <param name="n">The target component width</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector256<uint> vconvert(N64 n64, in ushort src, N256 w, N32 n)
-            => v32u(ConvertToVector256Int32(z.gptr(in In.uint8(in src))));
+            => v32u(ConvertToVector256Int32(gptr(u8(src))));
 
         /// <summary>
         /// VPMOVZXBD ymm, m64
@@ -53,7 +53,7 @@ namespace Z0
         /// <param name="n">The target component width</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector256<uint> vconvert(N64 n64, in uint src, N256 w, N32 n)
-            => v32u(ConvertToVector256Int32(z.gptr(in In.uint8(in src))));
+            => v32u(ConvertToVector256Int32(gptr(u8(src))));
 
         /// <summary>
         /// VPMOVZXBD ymm, m64
@@ -66,6 +66,6 @@ namespace Z0
         /// <param name="n">The target component width</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector256<uint> vconvert(N64 n64, in ulong src, N256 w, N32 n)
-            => v32u(ConvertToVector256Int32(z.gptr(in In.uint8(in src))));
+            => v32u(ConvertToVector256Int32(gptr(u8(src))));
     }
 }

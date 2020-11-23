@@ -17,11 +17,11 @@ namespace Z0
         where M : unmanaged
         where N : unmanaged
     {
-        public readonly T Data;
+        public T Data {get;}
 
-        public readonly M Row;
+        public M Row {get;}
 
-        public readonly N Col;
+        public N Col {get;}
 
         [MethodImpl(Inline)]
         public GridCell(T data, M row, N col)

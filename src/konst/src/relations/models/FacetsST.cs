@@ -15,15 +15,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public Facets(uint count)
-        {
-            Data = sys.alloc<Facet<S,T>>(count);
-        }
+            => Data = sys.alloc<Facet<S,T>>(count);
 
         [MethodImpl(Inline)]
         public Facets(Facet<S,T>[] src)
-        {
-            Data = src;
-        }
+            => Data = src;
 
         public ReadOnlySpan<Facet<S,T>> View
         {

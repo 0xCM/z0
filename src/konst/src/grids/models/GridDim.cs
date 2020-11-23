@@ -18,26 +18,12 @@ namespace Z0
         /// <summary>
         /// The number of grid rows
         /// </summary>
-        public readonly uint RowCount;
+        public uint RowCount {get;}
 
         /// <summary>
         /// The number of grid columns
         /// </summary>
-        public readonly uint ColCount;
-
-        public static bool operator ==(GridDim d1, GridDim d2)
-            => d1.Equals(d2);
-
-        public static bool operator !=(GridDim d1, GridDim d2)
-            => !d1.Equals(d2);
-
-        [MethodImpl(Inline)]
-        public static implicit operator GridDim((int rows, int cols) src)
-            => new GridDim((uint)src.rows,(uint)src.cols);
-
-        [MethodImpl(Inline)]
-        public static implicit operator Pair<uint>(GridDim src)
-            => pair(src.RowCount, src.ColCount);
+        public uint ColCount {get;}
 
         [MethodImpl(Inline)]
         public GridDim(uint rows, uint cols)
@@ -72,6 +58,20 @@ namespace Z0
 
         public override bool Equals(object obj)
             => obj is GridDim d && Equals(d);
+
+        public static bool operator ==(GridDim d1, GridDim d2)
+            => d1.Equals(d2);
+
+        public static bool operator !=(GridDim d1, GridDim d2)
+            => !d1.Equals(d2);
+
+        [MethodImpl(Inline)]
+        public static implicit operator GridDim((int rows, int cols) src)
+            => new GridDim((uint)src.rows,(uint)src.cols);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Pair<uint>(GridDim src)
+            => pair(src.RowCount, src.ColCount);
 
         public static GridDim Empty
             => default;

@@ -20,10 +20,6 @@ namespace Z0
         public readonly SymbolName Name;
 
         [MethodImpl(Inline)]
-        public static implicit operator NamedSymbol<S>((S symbol, string name) src)
-            => new NamedSymbol<S>(src.symbol, src.name);
-
-        [MethodImpl(Inline)]
         public NamedSymbol(S symbol, string name)
         {
             Name = name;
@@ -39,6 +35,10 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Name.IsNonEmpty;
         }
+
+        [MethodImpl(Inline)]
+        public static implicit operator NamedSymbol<S>((S symbol, string name) src)
+            => new NamedSymbol<S>(src.symbol, src.name);
 
         public static NamedSymbol<S> Empty
         {

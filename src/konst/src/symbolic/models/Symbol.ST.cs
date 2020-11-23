@@ -34,18 +34,6 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static explicit operator char(Symbol<S,T> src)
-            => api.render(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator S(Symbol<S,T> src)
-            => src.Value;
-
-        [MethodImpl(Inline)]
-        public static implicit operator Symbol<S>(Symbol<S,T> src)
-            => new Symbol<S>(src.Value);
-
-        [MethodImpl(Inline)]
         public Symbol(S src)
             => Value = src;
 
@@ -67,5 +55,17 @@ namespace Z0
 
         S ISymbol<S>.Value
             => Value;
+
+        [MethodImpl(Inline)]
+        public static explicit operator char(Symbol<S,T> src)
+            => api.render(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator S(Symbol<S,T> src)
+            => src.Value;
+
+        [MethodImpl(Inline)]
+        public static implicit operator Symbol<S>(Symbol<S,T> src)
+            => new Symbol<S>(src.Value);
     }
 }

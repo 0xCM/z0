@@ -70,7 +70,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<long> vinflate(Vector128<int> src, W64 w)
-            => vconvert(src, w256, z64i);
+            => vconvert(src, w256, w64i);
 
         /// <summary>
         /// 16x8u -> 16x32u
@@ -167,7 +167,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<long> vinflate(Vector128<int> src, N256 w, long t)
+        public static Vector256<long> vinflate(Vector128<int> src, N256 w, W64i t)
             => vconvert(src, w, t);
 
         /// <summary>

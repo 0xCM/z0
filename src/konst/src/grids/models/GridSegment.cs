@@ -16,22 +16,22 @@ namespace Z0
         /// <summary>
         /// The number of rows in the grid
         /// </summary>
-        public readonly ushort RowCount;
+        public ushort RowCount {get;}
 
         /// <summary>
         /// The number of columns in the grid
         /// </summary>
-        public readonly ushort ColCount;
+        public ushort ColCount {get;}
 
         /// <summary>
         /// The bit-width of a grid cell
         /// </summary>
-        public readonly ushort CellWidth;
+        public ushort CellWidth {get;}
 
         /// <summary>
         /// The bit-width of a segment that covers one or more cells
         /// </summary>
-        public readonly ushort SegWidth;
+        public ushort SegWidth {get;}
 
         [MethodImpl(Inline)]
         public GridSegment(ushort rows, ushort cols, ushort segwidth)

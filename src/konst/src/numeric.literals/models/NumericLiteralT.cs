@@ -25,7 +25,6 @@ namespace Z0
 
         public NBK Base {get;}
 
-
         [MethodImpl(Inline)]
         public NumericLiteral(string name, T data, string text, NBK @base)
         {

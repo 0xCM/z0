@@ -17,10 +17,6 @@ namespace Z0
         public Symbols(S[] src)
             => Data = src;
 
-        [MethodImpl(Inline)]
-        public static implicit operator Symbols<S>(S[] src)
-            => new Symbols<S>(src);
-
         public S[] Storage
         {
             [MethodImpl(Inline)]
@@ -39,5 +35,10 @@ namespace Z0
 
         public string Format()
             => z.format(Render());
+
+        [MethodImpl(Inline)]
+        public static implicit operator Symbols<S>(S[] src)
+            => new Symbols<S>(src);
+
     }
 }

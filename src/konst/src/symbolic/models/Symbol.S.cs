@@ -24,6 +24,17 @@ namespace Z0
         public readonly S Value;
 
         [MethodImpl(Inline)]
+        public Symbol(S src)
+            => Value = src;
+
+        [MethodImpl(Inline)]
+        public char Render()
+            => api.render(this);
+
+        S ISymbol<S>.Value
+            => Value;
+
+        [MethodImpl(Inline)]
         public static explicit operator char(Symbol<S> src)
             => api.render(src);
 
@@ -34,16 +45,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator Symbol<S>(S src)
             => new Symbol<S>(src);
-
-        [MethodImpl(Inline)]
-        public Symbol(S src)
-            => Value = src;
-
-        [MethodImpl(Inline)]
-        public char Render()
-            => api.render(this);
-
-        S ISymbol<S>.Value
-            => Value;
     }
 }

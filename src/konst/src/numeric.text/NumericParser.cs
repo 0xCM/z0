@@ -9,6 +9,7 @@ namespace Z0
 
     using static Konst;
     using static NumericCast;
+    using SP = ScalarParser;
 
     [ApiHost("parser")]
     public class NumericParser
@@ -35,19 +36,19 @@ namespace Z0
         [MethodImpl(Inline)]
         public static T succeed<T>(string src)
             where T : unmanaged
-                => NumericParser.parse<T>(src).ValueOrDefault();
+                => parse<T>(src).ValueOrDefault();
 
         /// <summary>
         /// Creates an infallible numeric parser
         /// </summary>
         /// <typeparam name="T">The numeric type to parse</typeparam>
         [MethodImpl(Inline)]
-        public static NumericParserNoFail<T> infallible<T>()
+        public static InfallibleNumericParser<T> infallible<T>()
             where T : unmanaged
-                => default(NumericParserNoFail<T>);
+                => default(InfallibleNumericParser<T>);
 
         [MethodImpl(Inline), Op, NumericClosures(AllNumeric)]
-        static Bit32 parse<T>(string src, out T dst)
+        static bit parse<T>(string src, out T dst)
             where T : unmanaged
                 => parse_u(src, out dst);
 
@@ -65,11 +66,8 @@ namespace Z0
                 return ParseResult.Fail<T>(src);
         }
 
-        static ScalarParser SP
-            => ScalarParser.Service;
-
         [MethodImpl(Inline)]
-        static Bit32 parse_u<T>(string src, out T dst)
+        static bit parse_u<T>(string src, out T dst)
             where T : unmanaged
         {
             dst = default;
@@ -121,7 +119,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static Bit32 parse_i<T>(string src, out T dst)
+        static bit parse_i<T>(string src, out T dst)
             where T : unmanaged
         {
             dst = default;
@@ -173,7 +171,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static Bit32 parse_f<T>(string src, out T dst)
+        static bit parse_f<T>(string src, out T dst)
             where T : unmanaged
         {
             dst = default;

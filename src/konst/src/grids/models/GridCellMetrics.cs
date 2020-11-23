@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
 
     /// <summary>
@@ -17,27 +17,27 @@ namespace Z0
         /// <summary>
         /// The number of blocks being described
         /// </summary>
-        public readonly int BlockCount;
+        public int BlockCount {get;}
 
         /// <summary>
         /// The bit-width of a block
         /// </summary>
-        public readonly int BlockWidth;
+        public int BlockWidth {get;}
 
         /// <summary>
         /// The bit-width of a cell
         /// </summary>
-        public readonly int CellWidth;
+        public int CellWidth {get;}
 
         /// <summary>
         /// The number of cells in a block
         /// </summary>
-        public readonly int BlockLength;
+        public int BlockLength {get;}
 
         /// <summary>
         /// The total number of covered cells
         /// </summary>
-        public readonly int CellCount;
+        public int CellCount {get;}
 
         /// <summary>
         /// The total number of covered bits

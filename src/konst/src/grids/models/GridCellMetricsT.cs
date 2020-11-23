@@ -6,10 +6,10 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
 
-   /// <summary>
+    /// <summary>
     /// Captures statistics for memory blocks over generic T-cells
     /// </summary>
     /// <typeparam name="T">The cell type</typeparam>
@@ -44,8 +44,8 @@ namespace Z0
         /// <summary>
         /// The total number of covered bits
         /// </summary>
-        public readonly int BitCount
-            => CellCount * CellWidth;        
+        public readonly int BitCount;
+
         [MethodImpl(Inline)]
         public GridCellMetrics(int bc, int bw)
         {
@@ -55,6 +55,7 @@ namespace Z0
             BlockLength = calcs.BlockLength;
             CellCount = calcs.CellCount;
             CellWidth = calcs.CellWidth;
+            BitCount = CellCount * CellWidth;
         }
     }
 }
