@@ -18,33 +18,25 @@ namespace Z0
     public readonly struct Dim<M,N> : IDim2, IDim<M,N>
         where M : unmanaged, ITypeNat
         where N : unmanaged, ITypeNat
-    {                
-        [MethodImpl(Inline)]
-        public static implicit operator Pair<ulong>(Dim<M,N> x)
-            => (TypeNats.value<M>(), TypeNats.value<N>());
-
-        [MethodImpl(Inline)]
-        public static implicit operator DimK(Dim<M,N> x)
-            => new DimK(x.I, x.J);
-
+    {
         /// <summary>
         /// Specifies the first component of the dimension
         /// </summary>
-        public ulong I 
+        public ulong I
             => value<M>();
-        
+
         /// <summary>
         /// Specifies the second component of the dimension
         /// </summary>
-        public ulong J 
+        public ulong J
             => value<N>();
 
         /// <summary>
         /// The volume bound by the rectangle defined by the two axes
         /// </summary>
-        public ulong Volume 
+        public ulong Volume
             => NatCalc.mul<M,N>();
-            
+
         /// <summary>
         /// Returns the axis corresponding to its 0-based index
         /// </summary>
@@ -57,7 +49,7 @@ namespace Z0
         /// <summary>
         /// The axis count - 2
         /// </summary>
-        public int Order 
+        public int Order
         {
             [MethodImpl(Inline)]
             get => 2;
@@ -65,7 +57,7 @@ namespace Z0
 
         public string Format()
             => $"{I}×{J}";
- 
+
         public override string ToString()
             => Format();
 
@@ -77,5 +69,13 @@ namespace Z0
 
         public override bool Equals(object y)
             => y is Dim<M,N> d && Equals(d);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Pair<ulong>(Dim<M,N> x)
+            => (TypeNats.value<M>(), TypeNats.value<N>());
+
+        [MethodImpl(Inline)]
+        public static implicit operator DimK(Dim<M,N> x)
+            => new DimK(x.I, x.J);
     }
 }

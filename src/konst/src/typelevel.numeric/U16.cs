@@ -30,5 +30,4 @@ namespace Z0
         public static implicit operator NK<P>(U16 src)
             => default;
     }
-
 }

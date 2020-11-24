@@ -18,34 +18,18 @@ namespace Z0
         /// The first/left/lo member of the pair
         /// </summary>
         public readonly T Left;
-        
+
         /// <summary>
         /// The second/right/hi member of the pair
         /// </summary>
         public readonly T Right;
 
         [MethodImpl(Inline)]
-        public static implicit operator ConstPair<T>(in Pair<T> src)
-            => new ConstPair<T>(src.Left, src.Right);
-
-        [MethodImpl(Inline)]
-        public static implicit operator ConstPair<T>((T a, T b) src)
-            => new ConstPair<T>(src.a, src.b);
-
-        [MethodImpl(Inline)]
-        public static bool operator ==(in ConstPair<T> left, in ConstPair<T> right)        
-            => left.Equals(right);
-
-        [MethodImpl(Inline)]
-        public static bool operator !=(in ConstPair<T> left, in ConstPair<T> right)        
-            => !left.Equals(right);
-
-        [MethodImpl(Inline)]
         public ConstPair(T left, T right)
         {
             Left = left;
             Right = right;
-        }                
+        }
 
         public T this[int i]
         {
@@ -60,13 +44,13 @@ namespace Z0
             right = Right;
         }
 
-        T IPair<ConstPair<T>,T>.Left 
+        T IPair<ConstPair<T>,T>.Left
         {
             [MethodImpl(Inline)]
             get => Left;
         }
 
-        T IPair<ConstPair<T>,T>.Right 
+        T IPair<ConstPair<T>,T>.Right
         {
             [MethodImpl(Inline)]
             get => Right;
@@ -93,11 +77,27 @@ namespace Z0
 
         public override int GetHashCode()
             => HashCode.Combine(Left,Right);
-        
+
         public override bool Equals(object obj)
             => obj is ConstPair<T> x && Equals(x);
 
         public override string ToString()
             => Format();
+
+        [MethodImpl(Inline)]
+        public static implicit operator ConstPair<T>(in Pair<T> src)
+            => new ConstPair<T>(src.Left, src.Right);
+
+        [MethodImpl(Inline)]
+        public static implicit operator ConstPair<T>((T a, T b) src)
+            => new ConstPair<T>(src.a, src.b);
+
+        [MethodImpl(Inline)]
+        public static bool operator ==(in ConstPair<T> left, in ConstPair<T> right)
+            => left.Equals(right);
+
+        [MethodImpl(Inline)]
+        public static bool operator !=(in ConstPair<T> left, in ConstPair<T> right)
+            => !left.Equals(right);
     }
 }

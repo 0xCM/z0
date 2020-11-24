@@ -12,7 +12,7 @@ namespace Z0
     using K = BitShiftApiClass;
     using I = IBitShiftApiKey;
 
-    partial struct BitShifts
+    public readonly partial struct BitShifts
     {
         public readonly struct Sll : I { K I.Kind => K.Sll; }
 

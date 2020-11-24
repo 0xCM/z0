@@ -12,7 +12,7 @@ namespace Z0
 
     public readonly struct CilOpCodeSymbol
     {
-        public readonly Symbol<ILOpCode,ushort,N16> Value;
+        public Symbol<ILOpCode,ushort,N16> Value {get;}
 
         [MethodImpl(Inline)]
         public static implicit operator CilOpCodeSymbol(ILOpCode src)
@@ -20,14 +20,10 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public CilOpCodeSymbol(ILOpCode src)
-        {
-            Value = new Symbol<ILOpCode, ushort, N16>(src);
-        }
+            => Value = new Symbol<ILOpCode,ushort,N16>(src);
 
         [MethodImpl(Inline)]
-        public CilOpCodeSymbol(Symbol<ILOpCode, ushort, N16> src)
-        {
-            Value = src;
-        }
+        public CilOpCodeSymbol(Symbol<ILOpCode,ushort,N16> src)
+            => Value = src;
     }
 }

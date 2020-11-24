@@ -15,9 +15,9 @@ namespace Z0
         public readonly struct AdjacencyParser<T>
             where T : unmanaged
         {
-            internal readonly T A;
+            public T A {get;}
 
-            internal readonly T B;
+            public T B {get;}
 
             [MethodImpl(Inline)]
             public AdjacencyParser(T a, T b)

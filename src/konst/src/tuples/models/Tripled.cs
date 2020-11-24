@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
 
     /// <summary>
@@ -15,13 +15,13 @@ namespace Z0
     /// <typeparam name="T0">The type of the first member</typeparam>
     /// <typeparam name="T1">The type of the second member</typeparam>
     /// <typeparam name="T2">The type of the third member</typeparam>
-    public struct Tripled<T0,T1,T2> : ITupled<Tripled<T0, T1, T2>, T0, T1, T2>
+    public struct Tripled<T0,T1,T2> : ITupled<Tripled<T0,T1,T2>,T0,T1,T2>
     {
         /// <summary>
         /// The first member
         /// </summary>
         public T0 First;
-        
+
         /// <summary>
         /// The second member
         /// </summary>
@@ -32,35 +32,6 @@ namespace Z0
         /// </summary>
         public T2 Third;
 
-        T0 ITupled<Tripled<T0, T1, T2>, T0, T1, T2>.First
-        {
-            [MethodImpl(Inline)]
-            get => First;
-        }
-
-        T1 ITupled<Tripled<T0, T1, T2>, T0, T1, T2>.Second 
-        {
-            [MethodImpl(Inline)]
-            get => Second;
-        }
-
-        T2 ITupled<Tripled<T0, T1, T2>, T0, T1, T2>.Third
-        {
-            [MethodImpl(Inline)]
-            get => Third;
-        }
-
-        [MethodImpl(Inline)]
-        public static implicit operator Tripled<T0,T1,T2>((T0 a, T1 b, T2 c) src)
-            => new Tripled<T0, T1, T2>(src.a, src.b, src.c);
-
-        [MethodImpl(Inline)]
-        public static bool operator ==(Tripled<T0,T1,T2> x, Tripled<T0,T1,T2> y)        
-            => x.Equals(y);
-
-        [MethodImpl(Inline)]
-        public static bool operator !=(Tripled<T0,T1,T2> x, Tripled<T0,T1,T2> y)        
-            => x.Equals(y);
 
         [MethodImpl(Inline)]
         public Tripled(T0 a, T1 b, T2 c)
@@ -68,7 +39,7 @@ namespace Z0
             this.First = a;
             this.Second = b;
             this.Third = c;
-        }                
+        }
 
         [MethodImpl(Inline)]
         public void Deconstruct(out T0 a, out T1 b, out T2 c)
@@ -85,8 +56,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public Tripled<S,T,U> As<S,T,U>()
             where S : unmanaged
-            where T : unmanaged        
-            where U : unmanaged                      
+            where T : unmanaged
+            where U : unmanaged
                 => Unsafe.As<Tripled<T0,T1,T2>,Tripled<S,T,U>>(ref this);
 
         [MethodImpl(Inline)]
@@ -100,11 +71,41 @@ namespace Z0
 
         public override int GetHashCode()
             => HashCode.Combine(First,Second);
-        
+
         public override bool Equals(object obj)
             => obj is Paired<T0,T1> x && Equals(x);
 
         public override string ToString()
             => Format();
+
+        T0 ITupled<Tripled<T0, T1, T2>, T0, T1, T2>.First
+        {
+            [MethodImpl(Inline)]
+            get => First;
+        }
+
+        T1 ITupled<Tripled<T0, T1, T2>, T0, T1, T2>.Second
+        {
+            [MethodImpl(Inline)]
+            get => Second;
+        }
+
+        T2 ITupled<Tripled<T0, T1, T2>, T0, T1, T2>.Third
+        {
+            [MethodImpl(Inline)]
+            get => Third;
+        }
+
+        [MethodImpl(Inline)]
+        public static implicit operator Tripled<T0,T1,T2>((T0 a, T1 b, T2 c) src)
+            => new Tripled<T0, T1, T2>(src.a, src.b, src.c);
+
+        [MethodImpl(Inline)]
+        public static bool operator ==(Tripled<T0,T1,T2> x, Tripled<T0,T1,T2> y)
+            => x.Equals(y);
+
+        [MethodImpl(Inline)]
+        public static bool operator !=(Tripled<T0,T1,T2> x, Tripled<T0,T1,T2> y)
+            => x.Equals(y);
     }
 }

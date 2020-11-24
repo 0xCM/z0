@@ -7,7 +7,7 @@ namespace Z0
     using System;
 
     using static Konst;
-    using static TypeNats;
+    using static z;
 
     /// <summary>
     /// Defines a dimension axis which may represent the dimension of a vector of length N
@@ -17,14 +17,11 @@ namespace Z0
     public readonly struct Dim<N> : IDim1
         where N : unmanaged, ITypeNat
     {
-        public static implicit operator ulong(Dim<N> x)
-            => x.I;
-
         /// <summary>
         /// The one-dimensional axis
         /// </summary>
         public ulong I
-            => value<N>();
+            => nat64u<N>();
 
         public ulong Volume
             => I;
@@ -42,6 +39,9 @@ namespace Z0
             => Format();
 
         public Dimensions Describe()
-            => new Dimensions(1, new ulong[]{value<N>()}, value<N>());
+            => new Dimensions(1, new ulong[]{nat64u<N>()}, nat64u<N>());
+
+        public static implicit operator ulong(Dim<N> x)
+            => x.I;
     }
 }

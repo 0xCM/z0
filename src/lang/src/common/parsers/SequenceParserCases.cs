@@ -54,7 +54,7 @@ namespace Z0
             const char Delimiter = ',';
             const byte SegCount = 4;
 
-            api.create(Delimiter, out DelimitedSplitter<char> parser);
+            api.create(Delimiter, out SequenceSplitter<char> parser);
             var input = edit(span(Input));
             api.run(parser, input, out var segments);
             return segments;
@@ -67,7 +67,7 @@ namespace Z0
             const char Delimiter = '.';
             const byte SegCount = 6;
 
-            api.create(Delimiter, out DelimitedSplitter<ushort> parser);
+            api.create(Delimiter, out SequenceSplitter<ushort> parser);
             var input = Spans.s16u(edit(span(Input)));
             api.run(parser, input, out var segments);
             return segments;
@@ -82,7 +82,7 @@ namespace Z0
             const char Delimiter = '.';
             const byte SegCount = 6;
 
-            api.create(AsciCharCode.Dot, out DelimitedSplitter<AsciCharCode> parser);
+            api.create(AsciCharCode.Dot, out SequenceSplitter<AsciCharCode> parser);
             var input = edit(Case2Input);
             api.run(parser, input, out var segments);
             return segments;

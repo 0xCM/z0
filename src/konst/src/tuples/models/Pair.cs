@@ -6,60 +6,36 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
 
     /// <summary>
     /// An homogenous mutable 2-tuple
     /// </summary>
     public struct Pair<T> : IPair<Pair<T>,T>
-    {        
+    {
         /// <summary>
         /// The first member
         /// </summary>
         public T Left;
-        
+
         /// <summary>
         /// The second member
         /// </summary>
         public T Right;
 
-        T IPair<Pair<T>, T>.Left 
-        {
-            [MethodImpl(Inline)]
-            get => Left;
-        }
-
-        T IPair<Pair<T>, T>.Right 
-        {
-            [MethodImpl(Inline)]
-            get => Right;
-        }
-
-        [MethodImpl(Inline)]
-        public static implicit operator Pair<T>((T a, T b) src)
-            => new Pair<T>(src.a, src.b);
-
-        [MethodImpl(Inline)]
-        public static bool operator ==(Pair<T> x, Pair<T> y)        
-            => x.Equals(y);
-
-        [MethodImpl(Inline)]
-        public static bool operator !=(Pair<T> x, Pair<T> y)        
-            => x.Equals(y);
-
         [MethodImpl(Inline)]
         public Pair(T left, T right)
         {
-            this.Left = left;
-            this.Right = right;
-        }                
+            Left = left;
+            Right = right;
+        }
 
         [MethodImpl(Inline)]
         public void Deconstruct(out T a, out T b)
         {
-            a = this.Left;
-            b = this.Right;
+            a = Left;
+            b = Right;
         }
 
         public T this[int i]
@@ -68,11 +44,11 @@ namespace Z0
             get => i == 0 ? Left : Right;
 
             [MethodImpl(Inline)]
-            set 
+            set
             {
                 if(i == 0)
                     Left = value;
-                else 
+                else
                     Right = value;
             }
         }
@@ -98,15 +74,38 @@ namespace Z0
 
         public override int GetHashCode()
             => HashCode.Combine(Left,Right);
-        
+
         public override bool Equals(object obj)
             => obj is Pair<T> x && Equals(x);
 
         public override string ToString()
             => Format();
 
-        public static Pair<T> Empty 
+        public static Pair<T> Empty
             => new Pair<T>(default,default);
 
+        T IPair<Pair<T>,T>.Left
+        {
+            [MethodImpl(Inline)]
+            get => Left;
+        }
+
+        T IPair<Pair<T>, T>.Right
+        {
+            [MethodImpl(Inline)]
+            get => Right;
+        }
+
+        [MethodImpl(Inline)]
+        public static implicit operator Pair<T>((T a, T b) src)
+            => new Pair<T>(src.a, src.b);
+
+        [MethodImpl(Inline)]
+        public static bool operator ==(Pair<T> x, Pair<T> y)
+            => x.Equals(y);
+
+        [MethodImpl(Inline)]
+        public static bool operator !=(Pair<T> x, Pair<T> y)
+            => x.Equals(y);
     }
 }

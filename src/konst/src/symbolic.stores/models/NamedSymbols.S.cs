@@ -9,7 +9,6 @@ namespace Z0
 
     using static Konst;
 
-
     public readonly struct NamedSymbols<S> : ITableSpan<NamedSymbol<S>>
         where S : unmanaged
     {

@@ -9,19 +9,19 @@ namespace Z0
     partial class Kinds
     {
         [KindFactory]
-        public static K.EmitterFunc func(A0 rep)
+        public static K.EmitterFunc func(N0 n)
             => default;
 
         [KindFactory]
-        public static K.UnaryFunc func(A1 rep)
+        public static K.UnaryFunc func(N1 n)
             => default;
 
         [KindFactory]
-        public static K.BinaryFunc func(A2 rep)
+        public static K.BinaryFunc func(N2 n)
             => default;
 
         [KindFactory]
-        public static K.TernaryFunc func(A3 rep)
+        public static K.TernaryFunc func(N3 rep)
             => default;
 
         [KindFactory, Closures(Closure)]

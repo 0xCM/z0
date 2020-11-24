@@ -4,10 +4,14 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IShifter<T>
-    {
-        T Sll(T src, uint count);
+    using System;
 
-        T Srl(T src, uint rhs);
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
+    [Free]
+    public interface IFsEntries<T> : IIndex<T>
+        where T : struct, IFsEntry<T>
+    {
+
     }
 }

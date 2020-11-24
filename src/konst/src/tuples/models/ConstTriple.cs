@@ -18,7 +18,7 @@ namespace Z0
         /// The first member
         /// </summary>
         public readonly T First;
-        
+
         /// <summary>
         /// The second member
         /// </summary>
@@ -29,42 +29,12 @@ namespace Z0
         /// </summary>
         public readonly T Third;
 
-        T ITriple<ConstTriple<T>,T>.First 
-        {
-            [MethodImpl(Inline)]
-            get => First;
-        }
-
-        T ITriple<ConstTriple<T>,T>.Second 
-        {
-            [MethodImpl(Inline)]
-            get => Second;
-        }
-
-        T ITriple<ConstTriple<T>,T>.Third 
-        {
-            [MethodImpl(Inline)]
-            get => Third;
-        }
-
-        [MethodImpl(Inline)]
-        public static implicit operator ConstTriple<T>((T a, T b, T c) src)
-            => new ConstTriple<T>(src.a,src.b,src.c);
-
-        [MethodImpl(Inline)]
-        public static bool operator ==(in ConstTriple<T> a, in ConstTriple<T> b)        
-            => a.Equals(b);
-
-        [MethodImpl(Inline)]
-        public static bool operator !=(in ConstTriple<T> a, in ConstTriple<T> b)        
-            => a.Equals(b);
-
         [MethodImpl(Inline)]
         public ConstTriple(T a, T b, T c)
         {
-            First = a; Second = b; Third = c; 
-        }                
-        
+            First = a; Second = b; Third = c;
+        }
+
         public T this[int i]
         {
             [MethodImpl(Inline)]
@@ -94,14 +64,45 @@ namespace Z0
             => style == TupleFormat.Coordinate ? $"({First},{Second},{Third})" : $"{First}x{Second}x{Third}";
 
         public string Format() => Format(TupleFormat.Coordinate);
-         
+
         public override int GetHashCode()
             => HashCode.Combine(First,Second,Third);
-        
+
         public override bool Equals(object obj)
             => obj is ConstTriple<T> x && Equals(x);
 
         public override string ToString()
             => Format();
+
+        T ITriple<ConstTriple<T>,T>.First
+        {
+            [MethodImpl(Inline)]
+            get => First;
+        }
+
+        T ITriple<ConstTriple<T>,T>.Second
+        {
+            [MethodImpl(Inline)]
+            get => Second;
+        }
+
+        T ITriple<ConstTriple<T>,T>.Third
+        {
+            [MethodImpl(Inline)]
+            get => Third;
+        }
+
+
+        [MethodImpl(Inline)]
+        public static implicit operator ConstTriple<T>((T a, T b, T c) src)
+            => new ConstTriple<T>(src.a,src.b,src.c);
+
+        [MethodImpl(Inline)]
+        public static bool operator ==(in ConstTriple<T> a, in ConstTriple<T> b)
+            => a.Equals(b);
+
+        [MethodImpl(Inline)]
+        public static bool operator !=(in ConstTriple<T> a, in ConstTriple<T> b)
+            => a.Equals(b);
     }
 }

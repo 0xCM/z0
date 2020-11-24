@@ -10,23 +10,26 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct NativeFunction : INativeFunction
+    public readonly struct NativeFunction<D> : INativeFunction
+        where D : Delegate
     {
         public MemoryAddress Address {get;}
 
         public NativeModule Source {get;}
 
         public StringRef Name {get;}
+        public readonly D Invoke {get;}
 
         [MethodImpl(Inline)]
-        public NativeFunction(NativeModule src, MemoryAddress @base, string name)
+        internal NativeFunction(NativeModule src, MemoryAddress @base, string name, D f)
         {
             Source = src;
             Address = @base;
             Name = name;
+            Invoke = f;
         }
 
         public string Format()
-            => Address.Format();
+            => text.format(RP.PSx3, Address, Source, Name);
     }
 }

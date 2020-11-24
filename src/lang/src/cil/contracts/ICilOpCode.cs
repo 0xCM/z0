@@ -14,7 +14,6 @@ namespace Z0
         string Name {get;}
 
         ILOpCode Id {get;}
-
     }
 
     public interface ICilOpCode<K> : ICilOpCode

@@ -14,21 +14,9 @@ namespace Z0
 
     partial struct FS
     {
-        public readonly struct Files : IEnumerable<FilePath>
+        public readonly struct Files : IFsEntries<FilePath>
         {
             public readonly TableSpan<FilePath> Data;
-
-            [MethodImpl(Inline)]
-            public static implicit operator FilePath[](Files src)
-                => src.Data;
-
-            [MethodImpl(Inline)]
-            public static implicit operator Files(FilePath[] src)
-                => new Files(src);
-
-            [MethodImpl(Inline)]
-            public static implicit operator Files(Z0.FilePath[] src)
-                => new Files(src.Select(x => FS.path(x.Name)));
 
             [MethodImpl(Inline)]
             public Files(FilePath[] src)
@@ -50,6 +38,12 @@ namespace Z0
             {
                 [MethodImpl(Inline)]
                 get => Data.Edit;
+            }
+
+            public FilePath[] Storage
+            {
+                [MethodImpl(Inline)]
+                get => Data.Storage;
             }
 
             public ReadOnlySpan<FilePath> ViewNonEmpty
@@ -97,6 +91,18 @@ namespace Z0
 
             IEnumerator IEnumerable.GetEnumerator()
                 => ViewNonEmpty.ToEnumerable().GetEnumerator();
+
+            [MethodImpl(Inline)]
+            public static implicit operator FilePath[](Files src)
+                => src.Data;
+
+            [MethodImpl(Inline)]
+            public static implicit operator Files(FilePath[] src)
+                => new Files(src);
+
+            [MethodImpl(Inline)]
+            public static implicit operator Files(Z0.FilePath[] src)
+                => new Files(src.Select(x => FS.path(x.Name)));
 
             public static Files Empty
                 => new Files(sys.empty<FilePath>());

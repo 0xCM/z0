@@ -14,19 +14,10 @@ namespace Z0
     {
         readonly Span<Triple<T>> Data;
 
-        [MethodImpl(Inline)]
-        public static implicit operator Triples<T>(Span<Triple<T>> src)
-            => new Triples<T>(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator Triples<T>(Triple<T>[] src)
-            => new Triples<T>(src);
-
-        [MethodImpl(Inline)]
-        public Triples(Span<Triple<T>> data)
-        {
-            this.Data = data;
-        }
+        public Triples(Span<Triple<T>> src)
+            => Data = src;
 
         [MethodImpl(Inline)]
         public ref Triple<T> Select(int index)
@@ -46,5 +37,13 @@ namespace Z0
 
         public IEnumerable<Triple<T>> Enumerate()
             => Data.ToEnumerable();
+
+        [MethodImpl(Inline)]
+        public static implicit operator Triples<T>(Span<Triple<T>> src)
+            => new Triples<T>(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Triples<T>(Triple<T>[] src)
+            => new Triples<T>(src);
     }
 }

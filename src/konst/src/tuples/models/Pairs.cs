@@ -23,14 +23,6 @@ namespace Z0
         public readonly Span<Pair<T>> Data;
 
         [MethodImpl(Inline)]
-        public static implicit operator Pairs<T>(Span<Pair<T>> src)
-            => new Pairs<T>(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator Pairs<T>(Pair<T>[] src)
-            => new Pairs<T>(src);
-
-        [MethodImpl(Inline)]
         public Pairs(Span<Pair<T>> data)
             => Data = data;
 
@@ -50,7 +42,7 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => ref Select(index);
-        }        
+        }
 
         /// <summary>
         /// Specifies the number of elements in the sequence
@@ -66,5 +58,13 @@ namespace Z0
         /// </summary>
         public IEnumerable<Pair<T>> Enumerate()
             => Data.ToEnumerable();
+
+        [MethodImpl(Inline)]
+        public static implicit operator Pairs<T>(Span<Pair<T>> src)
+            => new Pairs<T>(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Pairs<T>(Pair<T>[] src)
+            => new Pairs<T>(src);
     }
 }

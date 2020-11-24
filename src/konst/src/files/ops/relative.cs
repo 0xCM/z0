@@ -9,8 +9,10 @@ namespace Z0
 
     using static Konst;
 
-    public readonly partial struct BitShifts
+    partial struct FS
     {
-
+        [MethodImpl(Inline), Op]
+        public static RelativePath relative(PathPart name)
+            => new RelativePath(name);
     }
 }

@@ -21,18 +21,8 @@ namespace Z0
         public readonly Span<byte> Bytes;
 
         [MethodImpl(Inline)]
-        public static bool operator ==(BitEdit<T> lhs, BitEdit<T> rhs)
-            => lhs.Bytes.ValuesEqual(rhs.Bytes);
-
-        [MethodImpl(Inline)]
-        public static bool operator !=(BitEdit<T> lhs, BitEdit<T> rhs)
-            => !(lhs == rhs);
-
-        [MethodImpl(Inline)]
         public BitEdit(ref T src)
-        {
-            Bytes = new Span<byte>(Unsafe.AsPointer(ref src), Unsafe.SizeOf<T>());
-        }
+            => Bytes = new Span<byte>(Unsafe.AsPointer(ref src), Unsafe.SizeOf<T>());
 
         /// <summary>
         /// The total number of represented bytes
@@ -82,5 +72,13 @@ namespace Z0
 
         public override int GetHashCode()
             => throw new NotSupportedException();
+
+        [MethodImpl(Inline)]
+        public static bool operator ==(BitEdit<T> lhs, BitEdit<T> rhs)
+            => lhs.Bytes.ValuesEqual(rhs.Bytes);
+
+        [MethodImpl(Inline)]
+        public static bool operator !=(BitEdit<T> lhs, BitEdit<T> rhs)
+            => !(lhs == rhs);
     }
 }

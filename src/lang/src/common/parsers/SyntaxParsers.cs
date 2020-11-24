@@ -16,10 +16,10 @@ namespace Z0
         const NumericKind Closure = UnsignedInts;
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref DelimitedSplitter<T> create<T>(T delimiter, out DelimitedSplitter<T> dst)
+        public static ref SequenceSplitter<T> create<T>(T delimiter, out SequenceSplitter<T> dst)
             where T : unmanaged
         {
-            dst = new DelimitedSplitter<T>(delimiter);
+            dst = new SequenceSplitter<T>(delimiter);
             return ref dst;
         }
 
@@ -45,7 +45,7 @@ namespace Z0
         }
 
         [Op, Closures(Closure)]
-        public static ref BufferSegments<T> run<T>(DelimitedSplitter<T> parser, Span<T> src, out BufferSegments<T> dst)
+        public static ref BufferSegments<T> run<T>(SequenceSplitter<T> parser, Span<T> src, out BufferSegments<T> dst)
             where T : unmanaged
         {
             dst = new BufferSegments<T>(src, byte.MaxValue);

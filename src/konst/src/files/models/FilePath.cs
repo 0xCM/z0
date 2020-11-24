@@ -123,6 +123,10 @@ namespace Z0
             public FilePath Replace(char src, char dst)
                 => new FilePath(Name.Replace(src,dst));
 
+            [MethodImpl(Inline)]
+            public FilePath Replace(string src, string dst)
+                => new FilePath(Name.Replace(src,dst));
+
             /// <summary>
             /// Determines whether the filename, including the extension, ends with a specified substring
             /// </summary>

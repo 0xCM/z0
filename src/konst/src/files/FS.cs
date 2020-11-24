@@ -13,6 +13,10 @@ namespace Z0
     [ApiHost(ApiNames.FS, true)]
     public readonly partial struct FS
     {
+        static RenderPattern<A,B> PathJoin<A,B>()
+            where A : IFsEntry
+            where B : IFsEntry
+                => "{0}/{1}";
 
     }
 }

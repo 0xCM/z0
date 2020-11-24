@@ -35,22 +35,6 @@ namespace Z0
         public readonly T Fourth;
 
         [MethodImpl(Inline)]
-        public static implicit operator ConstQuad<T>(in (T a, T b, T c, T d) src)
-            => new ConstQuad<T>(src.a,src.b,src.c,src.d);
-
-        [MethodImpl(Inline)]
-        public static implicit operator ConstQuad<T>(in (ConstPair<T> a, ConstPair<T> b) src)
-            => new ConstQuad<T>(src.a.Left,src.a.Right, src.b.Left,src.b.Right);
-
-        [MethodImpl(Inline)]
-        public static bool operator ==(in ConstQuad<T> a, in ConstQuad<T> b)
-            => a.Equals(b);
-
-        [MethodImpl(Inline)]
-        public static bool operator !=(in ConstQuad<T> a, in ConstQuad<T> b)
-            => a.Equals(b);
-
-        [MethodImpl(Inline)]
         public ConstQuad(T a, T b, T c, T d)
         {
             First = a; Second = b; Third = c; Fourth = d;
@@ -99,6 +83,21 @@ namespace Z0
         [MethodImpl(Inline)]
         public Y Map<Y>(Func<ConstQuad<T>,Y> f)
             => f(this);
-    }
 
+        [MethodImpl(Inline)]
+        public static implicit operator ConstQuad<T>(in (T a, T b, T c, T d) src)
+            => new ConstQuad<T>(src.a,src.b,src.c,src.d);
+
+        [MethodImpl(Inline)]
+        public static implicit operator ConstQuad<T>(in (ConstPair<T> a, ConstPair<T> b) src)
+            => new ConstQuad<T>(src.a.Left,src.a.Right, src.b.Left,src.b.Right);
+
+        [MethodImpl(Inline)]
+        public static bool operator ==(in ConstQuad<T> a, in ConstQuad<T> b)
+            => a.Equals(b);
+
+        [MethodImpl(Inline)]
+        public static bool operator !=(in ConstQuad<T> a, in ConstQuad<T> b)
+            => a.Equals(b);
+    }
 }

@@ -10,10 +10,10 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public ref struct StateBuffer<T>
+    public struct StateBuffer<T>
         where T : unmanaged
     {
-        readonly Span<T> States;
+        readonly IndexedSeq<T> States;
 
         [MethodImpl(Inline)]
         public StateBuffer(uint count)
@@ -23,10 +23,10 @@ namespace Z0
         public StateBuffer(T[] states)
             => States = states;
 
-        public ref T this[T index]
+        public ref T this[uint index]
         {
             [MethodImpl(Inline)]
-            get => ref seek(States, z.@as<T,uint>(index));
+            get => ref States[index];
         }
     }
 }

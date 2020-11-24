@@ -21,12 +21,6 @@ namespace Z0
             where T : unmanaged
                 => string.Format(FencePattern, src.Left, src.Right);
 
-        [MethodImpl(Inline)]
-        public static string format<L,R>(Fence<L,R> src)
-            where L : unmanaged
-            where R : unmanaged
-                => string.Format(FencePattern, src.Left, src.Right);
-
         [Op]
         public static string format(in Fence src)
             => format(FencePattern, src.Left, src.Right);

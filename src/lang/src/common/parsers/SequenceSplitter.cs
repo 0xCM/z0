@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Partitions T-cell sequences predicated on a supplied delimiter
     /// </summary>
-    public struct DelimitedSplitter<T>
+    public struct SequenceSplitter<T>
         where T : unmanaged
     {
         public readonly T Delimiter;
@@ -33,7 +33,7 @@ namespace Z0
         internal uint InputCount;
 
         [MethodImpl(Inline)]
-        public DelimitedSplitter(T delimiter)
+        public SequenceSplitter(T delimiter)
         {
             Delimiter = delimiter;
             Collecting = true;

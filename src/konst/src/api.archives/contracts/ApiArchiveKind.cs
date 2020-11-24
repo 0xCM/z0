@@ -4,8 +4,20 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IApiCodeArchive : IFileArchive
+    public enum ApiArchiveKind : uint
     {
+        None,
+
+        Extract,
+
+        Parse,
+
+        Asm,
+
+        Hex,
+
+        CilTable,
+
 
     }
 }

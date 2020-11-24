@@ -9,10 +9,10 @@ namespace Z0
     /// </summary>
     public readonly struct DimK : IDim
     {
-        public readonly ulong[] Axes;
+        readonly ulong[] Axes;
 
-        public DimK(params ulong[] Axes)
-            => this.Axes = Axes;            
+        public DimK(params ulong[] src)
+            => Axes = src;
 
         public ulong this[int index]
         {
@@ -30,7 +30,7 @@ namespace Z0
             }
         }
 
-        public int Order 
+        public int Order
             => Axes.Length;
     }
 }

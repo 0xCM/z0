@@ -8,15 +8,12 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
-    using System.Runtime.CompilerServices;
-
     using static Konst;
 
     [ApiHost(ApiNames.XKinds)]
     public static partial class XKinds
     {
         const NumericKind Closure = NumericKind.All;
-
     }
 
     [ApiHost]

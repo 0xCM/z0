@@ -5,7 +5,7 @@
 namespace Z0
 {
     using System;
-    
+
     /// <summary>
     /// Raised when a validation check has failed
     /// </summary>
@@ -13,16 +13,16 @@ namespace Z0
     public class ClaimException : AppException
     {
         public static ClaimException Define(ClaimKind op, IAppMsg msg)
-            => new ClaimException(op, msg);        
+            => new ClaimException(op, msg);
 
         public ClaimException() { }
-     
-        ClaimException(ClaimKind kind, IAppMsg msg) 
+
+        internal ClaimException(ClaimKind kind, IAppMsg msg)
             : base(msg)
-            { 
+            {
                 OpKind = kind;
             }
-         
-        public ClaimKind OpKind {get;}         
-    }    
+
+        public ClaimKind OpKind {get;}
+    }
 }

@@ -30,18 +30,6 @@ namespace Z0
         public T Third;
 
         [MethodImpl(Inline)]
-        public static implicit operator Triple<T>((T a, T b, T c) src)
-            => new Triple<T>(src.a, src.b, src.c);
-
-        [MethodImpl(Inline)]
-        public static bool operator ==(Triple<T> x, Triple<T> y)
-            => x.Equals(y);
-
-        [MethodImpl(Inline)]
-        public static bool operator !=(Triple<T> x, Triple<T> y)
-            => x.Equals(y);
-
-        [MethodImpl(Inline)]
         public Triple(T a, T b, T c)
         {
             First = a;
@@ -78,19 +66,19 @@ namespace Z0
             }
         }
 
-        T ITriple<Triple<T>, T>.First
+        T ITriple<Triple<T>,T>.First
         {
             [MethodImpl(Inline)]
             get => First;
         }
 
-        T ITriple<Triple<T>, T>.Second
+        T ITriple<Triple<T>,T>.Second
         {
             [MethodImpl(Inline)]
             get => Second;
         }
 
-        T ITriple<Triple<T>, T>.Third
+        T ITriple<Triple<T>,T>.Third
         {
             [MethodImpl(Inline)]
             get => Third;
@@ -112,7 +100,8 @@ namespace Z0
         public string Format(TupleFormat style)
             => style == TupleFormat.Coordinate ? $"({First},{Second},{Third})" : $"{First}x{Second}x{Third}";
 
-        public string Format() => Format(TupleFormat.Coordinate);
+        public string Format()
+            => Format(TupleFormat.Coordinate);
 
         public override int GetHashCode()
             => HashCode.Combine(First,Second,Third);
@@ -122,5 +111,17 @@ namespace Z0
 
         public override string ToString()
             => Format();
+
+        [MethodImpl(Inline)]
+        public static implicit operator Triple<T>((T a, T b, T c) src)
+            => new Triple<T>(src.a, src.b, src.c);
+
+        [MethodImpl(Inline)]
+        public static bool operator ==(Triple<T> x, Triple<T> y)
+            => x.Equals(y);
+
+        [MethodImpl(Inline)]
+        public static bool operator !=(Triple<T> x, Triple<T> y)
+            => x.Equals(y);
     }
 }

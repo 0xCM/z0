@@ -38,6 +38,14 @@ namespace Z0
             }
 
             [MethodImpl(Inline)]
+            public FolderName Replace(char src, char dst)
+                => new FolderName(Name.Replace(src,dst));
+
+            [MethodImpl(Inline)]
+            public FolderName Replace(string src, string dst)
+                => new FolderName(Name.Replace(src,dst));
+
+            [MethodImpl(Inline)]
             public FolderName(PathPart name)
                 => Name = name;
 
@@ -48,9 +56,6 @@ namespace Z0
             public override string ToString()
                 => Format();
 
-            [MethodImpl(Inline)]
-            public FilePath Replace(char src, char dst)
-                => new FilePath(Name.Replace(src,dst));
 
             [MethodImpl(Inline)]
             public static implicit operator Z0.FolderName(FolderName src)

@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// A non-homogenous mutable 2-tuple
     /// </summary>
-    public struct Paired<T0,T1> : ITupled<Paired<T0,T1>, T0 ,T1>
+    public struct Paired<T0,T1> : ITupled<Paired<T0,T1>,T0,T1>
     {
         /// <summary>
         /// The first member
@@ -24,24 +24,11 @@ namespace Z0
         /// </summary>
         public T1 Right;
 
-        T0 ITupled<Paired<T0, T1>, T0, T1>.Left
-        {
-            [MethodImpl(Inline)]
-            get => Left;
-        }
-
-        T1 ITupled<Paired<T0, T1>, T0, T1>.Right
-        {
-            [MethodImpl(Inline)]
-            get => Right;
-        }
-
-
         [MethodImpl(Inline)]
         public Paired(T0 left, T1 right)
         {
-            this.Left = left;
-            this.Right = right;
+            Left = left;
+            Right = right;
         }
 
         [MethodImpl(Inline)]
@@ -91,6 +78,19 @@ namespace Z0
 
         public override string ToString()
             => Format();
+
+        T0 ITupled<Paired<T0, T1>, T0, T1>.Left
+        {
+            [MethodImpl(Inline)]
+            get => Left;
+        }
+
+        T1 ITupled<Paired<T0, T1>, T0, T1>.Right
+        {
+            [MethodImpl(Inline)]
+            get => Right;
+        }
+
 
         [MethodImpl(Inline)]
         public static implicit operator Paired<T0,T1>((T0 a, T1 b) src)

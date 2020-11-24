@@ -169,6 +169,10 @@ namespace Z0
             public string Format()
                 => Name.Format();
 
+            [MethodImpl(Inline)]
+            public string Format(PathSeparator sep)
+                => Name.Format(sep);
+
             public override string ToString()
                 => Format();
 

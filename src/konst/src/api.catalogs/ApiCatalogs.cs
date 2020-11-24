@@ -23,7 +23,7 @@ namespace Z0
         /// <param name="paths">The source paths</param>
         [Op]
         public static SystemApiCatalog system(FS.Files paths)
-            => new SystemApiCatalog(parts(paths.Data));
+            => new SystemApiCatalog(parts(paths.Storage));
 
         [Op]
         public static ISystemApiCatalog siblings(Assembly src, PartId[] parts)

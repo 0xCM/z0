@@ -24,14 +24,6 @@ namespace Z0
         readonly Span<Paired<S,T>> Data;
 
         [MethodImpl(Inline)]
-        public static implicit operator Pairings<S,T>(Span<Paired<S,T>> src)
-            => new Pairings<S,T>(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator Pairings<S,T>(Paired<S,T>[] src)
-            => new Pairings<S,T>(src);
-
-        [MethodImpl(Inline)]
         public Pairings(Span<Paired<S,T>> data)
             => Data = data;
 
@@ -69,5 +61,13 @@ namespace Z0
         /// </summary>
         public IEnumerable<Paired<S,T>> Enumerate()
             => Data.ToEnumerable();
+
+        [MethodImpl(Inline)]
+        public static implicit operator Pairings<S,T>(Span<Paired<S,T>> src)
+            => new Pairings<S,T>(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Pairings<S,T>(Paired<S,T>[] src)
+            => new Pairings<S,T>(src);
     }
 }

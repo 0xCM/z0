@@ -99,6 +99,10 @@ namespace Z0
             public PathPart Replace(char src, char dst)
                 => Text.Replace(src,dst);
 
+           [MethodImpl(Inline)]
+            public PathPart Replace(string src, string dst)
+                => Text.Replace(src,dst);
+
             public override int GetHashCode()
                 => Text.GetHashCode();
 
