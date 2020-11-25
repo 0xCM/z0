@@ -37,6 +37,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static CmdVarSymbol operator + (CmdVarSymbol<T> a, CmdVarSymbol<T> b)
-            => combine(a,b);
+            => CmdVars.combine(a,b);
     }
 }

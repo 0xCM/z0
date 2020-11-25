@@ -21,6 +21,31 @@ namespace Z0
 
         internal const byte MaxVarCount = 16;
 
+        /// <summary>
+        /// Creates a non-valued <see cref='CmdScriptVar'/>
+        /// </summary>
+        /// <param name="symbol">The variable symbol</param>
+        [MethodImpl(Inline), Op]
+        public static CmdScriptVar var(CmdVarSymbol symbol)
+            => new CmdScriptVar(symbol);
+
+        /// <summary>
+        /// Creates a valued <see cref='CmdScriptVar'/>
+        /// </summary>
+        /// <param name="symbol">The variable symbol</param>
+        /// <param name="value">The variable value</param>
+        [MethodImpl(Inline), Op]
+        public static CmdScriptVar var(CmdVarSymbol symbol, CmdVarValue value)
+            => new CmdScriptVar(symbol, value);
+
+        [MethodImpl(Inline), Op]
+        public static CmdVarSymbol combine(CmdVarSymbol a, CmdVarSymbol b)
+            => new CmdVarSymbol(string.Format("{0}{1}", a, b));
+
+        [MethodImpl(Inline), Op]
+        public static CmdVarSymbol combine<T>(CmdVarSymbol<T> a, CmdVarSymbol<T> b)
+            => new CmdVarSymbol(string.Format("{0}{1}", a,b));
+
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static CmdVar<K> define<K>(K id, in Cell128 value)
             where K : unmanaged
@@ -51,5 +76,31 @@ namespace Z0
             dst.Control = (nameof(dst.Control), FS.dir(Environment.GetEnvironmentVariable("ZControl")));
             return dst;
         }
+
+        /// <summary>
+        /// Creates a non-valued <see cref='DirVar'/>
+        /// </summary>
+        /// <param name="symbol">The variable symbol</param>
+        [MethodImpl(Inline), Op]
+        public static DirVar dir(CmdVarSymbol symbol)
+            => new DirVar(symbol);
+
+        /// <summary>
+        /// Creates a valued <see cref='DirVar'/>
+        /// </summary>
+        /// <param name="symbol">The variable symbol</param>
+        /// <param name="value">The variable value</param>
+        [MethodImpl(Inline), Op]
+        public static DirVar dir(CmdVarSymbol symbol, FS.FolderPath value)
+            => new DirVar(symbol, value);
+
+        [MethodImpl(Inline), Op]
+        public static CmdScriptVar set(CmdScriptVar src, string value)
+            => var(src.Symbol, value);
+
+        [MethodImpl(Inline), Op]
+        public static DirVar set(DirVar src, FS.FolderPath value)
+            => dir(src.Symbol, value);
+
     }
 }
