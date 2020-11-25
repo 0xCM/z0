@@ -5,11 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
-
-    using static Konst;
-    using static z;
 
     readonly struct Msg
     {
@@ -21,5 +16,6 @@ namespace Z0
 
         public static RenderPattern<CmdId> DispatchingCommand => "Dispatching {0}";
 
+        public static RenderPattern<CmdHostId> ToolHelpNotFound => "Tool {0} help not found";
     }
 }

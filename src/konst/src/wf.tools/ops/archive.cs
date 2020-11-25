@@ -12,7 +12,7 @@ namespace Z0
     partial struct Tooling
     {
         [MethodImpl(Inline)]
-        public static ToolArchive<T> archive<T>(ToolId tool, FS.FolderPath root, ToolArchiveKind kind)
+        public static ToolArchive<T> archive<T>(CmdHostId tool, FS.FolderPath root, ToolArchiveKind kind)
             where T : struct, ITool<T>
                 => new ToolArchive<T>(tool, root, kind);
     }

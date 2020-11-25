@@ -16,24 +16,24 @@ namespace Z0
     {
         public CmdPattern Pattern {get;}
 
-        public CmdVars Variables {get;}
+        public CmdVarIndex Variables {get;}
 
         [MethodImpl(Inline)]
         public CmdScriptExpr(string pattern)
         {
             Pattern = pattern;
-            Variables = api.vars();
+            Variables = CmdVars.init();
         }
 
         [MethodImpl(Inline)]
         internal CmdScriptExpr(CmdPattern pattern)
         {
             Pattern = pattern;
-            Variables = api.vars();
+            Variables = CmdVars.init();
         }
 
         [MethodImpl(Inline)]
-        internal CmdScriptExpr(CmdPattern pattern, CmdVars vars)
+        internal CmdScriptExpr(CmdPattern pattern, CmdVarIndex vars)
         {
             Pattern = pattern;
             Variables = vars;
@@ -76,7 +76,7 @@ namespace Z0
             => src.Pattern;
 
         [MethodImpl(Inline)]
-        public static implicit operator CmdScriptExpr(Paired<CmdPattern,CmdVars> src)
+        public static implicit operator CmdScriptExpr(Paired<CmdPattern,CmdVarIndex> src)
             => api.expr(src);
 
         [MethodImpl(Inline)]

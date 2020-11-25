@@ -13,11 +13,11 @@ namespace Z0
     /// <summary>
     /// Defines a pattern for creating a <see cref='ToolExecSpec'/>
     /// </summary>
-    public struct ToolScript : IToolScript<ToolScript>
+    public struct CmdScriptPattern : ICmdScriptPattern<CmdScriptPattern>
     {
         public FS.FolderName CmdRootName;
 
-        public ToolId Tool;
+        public CmdHostId CmdHost;
 
         public string CmdArgName;
 
@@ -48,7 +48,7 @@ namespace Z0
         public override string ToString()
             => Format();
 
-        ToolId IToolScript.ToolId
-            => Tool;
+        CmdHostId ICmdScriptPattern.CmdHost
+            => CmdHost;
     }
 }

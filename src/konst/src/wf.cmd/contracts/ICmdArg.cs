@@ -11,7 +11,7 @@ namespace Z0
     {
         string Key {get;}
 
-        object Value {get;}
+        string Value {get;}
 
         string ITextual.Format()
             => Render.setting(Key,Value);
@@ -22,14 +22,16 @@ namespace Z0
     {
         new T Value {get;}
 
-        object ICmdArg.Value
-            => Value;
+        string ICmdArg.Value
+            => Value?.ToString() ?? string.Empty;
     }
 
     [Free]
     public interface ICmdArg<K,T> : ICmdArg<T>
+        where K : unmanaged
     {
         new K Key {get;}
+
         string ICmdArg.Key
             => Key.ToString();
     }

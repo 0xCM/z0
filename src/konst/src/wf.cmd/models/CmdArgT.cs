@@ -14,14 +14,14 @@ namespace Z0
 
     public struct CmdArg<T> : ICmdArg<T>
     {
-        public string Name;
+        public string Key {get;}
 
-        public T Value;
+        public T Value {get;}
 
         [MethodImpl(Inline)]
-        public CmdArg(string id, T value)
+        public CmdArg(string key, T value)
         {
-            Name = id;
+            Key = key;
             Value = value;
         }
 
@@ -32,18 +32,12 @@ namespace Z0
         public override string ToString()
             => Format();
 
-        string ICmdArg.Key
-            => Name;
-
-        T ICmdArg<T>.Value
-            => Value;
-
         [MethodImpl(Inline)]
         public static implicit operator CmdArg<T>((string name, T value) src)
             => new CmdArg<T>(src.name, src.value);
 
         [MethodImpl(Inline)]
         public static implicit operator CmdArg(CmdArg<T> src)
-            => new CmdArg(src.Name, src.Value?.ToString() ?? EmptyString);
+            => new CmdArg(src.Key, src.Value?.ToString() ?? EmptyString);
     }
 }

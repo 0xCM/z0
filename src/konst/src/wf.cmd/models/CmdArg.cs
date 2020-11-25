@@ -12,52 +12,52 @@ namespace Z0
 
     public struct CmdArg : ICmdArg
     {
-        public string Name {get;}
+        public string Key {get;}
 
-        public object Value {get;}
+        public string Value {get;}
 
         [MethodImpl(Inline)]
-        public CmdArg(string name, object value)
+        public CmdArg(string name, string value)
         {
-            Name = name;
+            Key = name;
             Value = value;
         }
 
         [MethodImpl(Inline)]
-        public CmdArg(object value)
+        public CmdArg(string value)
         {
-            Name = EmptyString;
+            Key = EmptyString;
             Value = value;
         }
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => text.empty(Name) && Value is null;
+            get => text.empty(Key) && Value is null;
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => text.nonempty(Name) || !(Value is null);
+            get => text.nonempty(Key) || !(Value is null);
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.nonempty(Name) ? string.Format(RP.Setting, Name, Value) : Value?.ToString() ?? EmptyString;
+            => text.nonempty(Key) ? string.Format(RP.Setting, Key, Value) : Value?.ToString() ?? EmptyString;
 
         public override string ToString()
             => Format();
 
         string ICmdArg.Key
-            => Name;
+            => Key;
 
         [MethodImpl(Inline)]
         public static implicit operator CmdArg(Pair<string> src)
             => new CmdArg(src.Left, src.Right);
 
         [MethodImpl(Inline)]
-        public static implicit operator CmdArg((string name, object value) src)
+        public static implicit operator CmdArg((string name, string value) src)
             => new CmdArg(src.name, src.value);
 
         public static CmdArg Empty

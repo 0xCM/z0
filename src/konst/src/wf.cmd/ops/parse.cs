@@ -17,7 +17,7 @@ namespace Z0
             for(var i=0; i<src.Count; i++)
             {
                 ref readonly var arg = ref src[i];
-                if(text.equals(arg.Name, name))
+                if(text.equals(arg.Key, name))
                 {
                     dst=arg;
                     return true;

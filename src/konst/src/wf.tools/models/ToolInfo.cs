@@ -4,24 +4,19 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
 
-    using static Konst;
-    using static z;
-
+    [Entity, StructLayout(LayoutKind.Sequential)]
     public struct ToolInfo
     {
-        public string HostName;
+        public Name Name;
 
-        public string RuntimeName;
+        public CmdHostId ToolId;
 
-        public string FlagPrefix;
+        public UsageSyntax Usage;
 
-        public string ArgSpecifier;
+        public CmdOptionSpecs Options;
 
-        public byte MaxVarCount;
-
-        public string[] FlagNames;
+        public ToolVerb[] Verbs;
     }
 }

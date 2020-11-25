@@ -10,7 +10,7 @@ namespace Z0
     using static z;
     using static Konst;
 
-    partial struct Scripts
+    partial struct WfScripts
     {
         /// <summary>
         /// Creates a <see cref='CmdArgs'/> collection from an array

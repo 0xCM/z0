@@ -57,7 +57,7 @@ namespace Z0
             get => ref Data[index];
         }
 
-        public ulong Width
+        public BitSize Width
         {
             [MethodImpl(Inline)]
             get => api.width(Partitions);

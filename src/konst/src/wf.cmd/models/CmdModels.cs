@@ -11,20 +11,20 @@ namespace Z0
 
     public struct CmdDescriptors
     {
-        IndexedSeq<CmdDescriptor> Data;
+        IndexedSeq<CmdTypeInfo> Data;
 
         [MethodImpl(Inline)]
-        public CmdDescriptors(CmdDescriptor[] src)
+        public CmdDescriptors(CmdTypeInfo[] src)
             => Data = src;
 
-        public Span<CmdDescriptor> Terms
+        public Span<CmdTypeInfo> Terms
         {
             [MethodImpl(Inline)]
             get => Data.Terms;
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator CmdDescriptors(CmdDescriptor[] src)
+        public static implicit operator CmdDescriptors(CmdTypeInfo[] src)
             => new CmdDescriptors(src);
     }
 }

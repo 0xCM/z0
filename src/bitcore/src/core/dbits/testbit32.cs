@@ -17,8 +17,8 @@ namespace Z0
         /// <param name="src">The value to test</param>
         /// <param name="pos">The bit index to check</param>
         [MethodImpl(Inline), TestBit]
-        public static Bit32 testbit32(sbyte src, byte pos)
-            => Bit32.test(src,pos);
+        public static bit testbit32(sbyte src, byte pos)
+            => BitStates.test(src,pos);
 
         /// <summary>
         /// Returns 1 if an index-identified bit is enabled, 0 otherwise
@@ -26,8 +26,8 @@ namespace Z0
         /// <param name="src">The value to test</param>
         /// <param name="pos">The bit index to check</param>
         [MethodImpl(Inline), TestBit]
-        public static Bit32 testbit32(byte src, byte pos)
-            => Bit32.test(src,pos);
+        public static bit testbit32(byte src, byte pos)
+            => BitStates.test(src,pos);
 
         /// <summary>
         /// Returns 1 if an index-identified bit is enabled, 0 otherwise
@@ -35,8 +35,8 @@ namespace Z0
         /// <param name="src">The value to test</param>
         /// <param name="pos">The bit index to check</param>
         [MethodImpl(Inline), TestBit]
-        public static Bit32 testbit32(short src, byte pos)
-            => Bit32.test(src,pos);
+        public static bit testbit32(short src, byte pos)
+            => BitStates.test(src,pos);
 
         /// <summary>
         /// Returns 1 if an index-identified bit is enabled, 0 otherwise
@@ -44,8 +44,8 @@ namespace Z0
         /// <param name="src">The value to test</param>
         /// <param name="pos">The bit index to check</param>
         [MethodImpl(Inline), TestBit]
-        public static Bit32 testbit32(ushort src, byte pos)
-            => Bit32.test(src,pos);
+        public static bit testbit32(ushort src, byte pos)
+            => BitStates.test(src,pos);
 
         /// <summary>
         /// Returns 1 if an index-identified bit is enabled, 0 otherwise
@@ -53,8 +53,8 @@ namespace Z0
         /// <param name="src">The value to test</param>
         /// <param name="pos">The bit index to check</param>
         [MethodImpl(Inline), TestBit]
-        public static Bit32 testbit32(int src, byte pos)
-            => Bit32.test(src,pos);
+        public static bit testbit32(int src, byte pos)
+            => BitStates.test(src,pos);
 
         /// <summary>
         /// Returns 1 if an index-identified bit is enabled, 0 otherwise
@@ -62,8 +62,8 @@ namespace Z0
         /// <param name="src">The value to test</param>
         /// <param name="pos">The bit index to check</param>
         [MethodImpl(Inline), TestBit]
-        public static Bit32 testbit32(uint src, byte pos)
-            => Bit32.test(src,pos);
+        public static bit testbit32(uint src, byte pos)
+            => BitStates.test(src,pos);
 
         /// <summary>
         /// Returns 1 if an index-identified bit is enabled, 0 otherwise
@@ -71,8 +71,8 @@ namespace Z0
         /// <param name="src">The value to test</param>
         /// <param name="pos">The bit index to check</param>
         [MethodImpl(Inline), TestBit]
-        public static Bit32 testbit32(long src, byte pos)
-            => Bit32.test(src,pos);
+        public static bit testbit32(long src, byte pos)
+            => BitStates.test(src,pos);
 
         /// <summary>
         /// Returns 1 if an index-identified bit is enabled, 0 otherwise
@@ -80,8 +80,8 @@ namespace Z0
         /// <param name="src">The value to test</param>
         /// <param name="pos">The bit index to check</param>
         [MethodImpl(Inline), TestBit]
-        public static Bit32 testbit32(ulong src, byte pos)
-            => Bit32.test(src,pos);
+        public static bit testbit32(ulong src, byte pos)
+            => BitStates.test(src,pos);
 
         /// <summary>
         /// Returns 1 if an index-identified bit is enabled, false otherwise
@@ -89,8 +89,8 @@ namespace Z0
         /// <param name="src">The value to test</param>
         /// <param name="pos">The bit index to check</param>
         [MethodImpl(Inline), TestBit]
-        public static Bit32 testbit32(float src, byte pos)
-           => Bit32.test(BitConverter.SingleToInt32Bits(src),pos);
+        public static bit testbit32(float src, byte pos)
+           => BitStates.test(BitConverter.SingleToInt32Bits(src),pos);
 
         /// <summary>
         /// Returns 1 if an index-identified bit is enabled, false otherwise
@@ -98,7 +98,7 @@ namespace Z0
         /// <param name="src">The value to test</param>
         /// <param name="pos">The bit index to check</param>
         [MethodImpl(Inline), TestBit]
-        public static Bit32 testbit32(double src, byte pos)
-            => Bit32.test(BitConverter.DoubleToInt64Bits(src),pos);
+        public static bit testbit32(double src, byte pos)
+            => BitStates.test(BitConverter.DoubleToInt64Bits(src),pos);
     }
 }

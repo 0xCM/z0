@@ -26,7 +26,7 @@ namespace Z0
         public byte im;
 
 		/// <summary>
-		/// Loads a span of span of complext values from a source span where adjacent 
+		/// Loads a span of span of complex values from a source span where adjacent
 		/// entries (i,i+j) are interpreted respectively as real and imaginary components
 		/// </summary>
 		/// <param name="src">The source span, which must contain an even number of elements</param>
@@ -111,20 +111,20 @@ namespace Z0
 		{
 			re = this.re;
 			im = this.im;
-		}		
+		}
 
         /// <summary>
         /// Renders the value as a string per supplied options
         /// </summary>
         /// <param name="tupelize">Whether the value should be represented as a tuple (re,im) or in canonical form re +imi</param>
 		public string Format(bool tupleize = false)
-			=> tupleize ? $"({re}, {im})" : $"{re} + {im}i";			
+			=> tupleize ? $"({re}, {im})" : $"{re} + {im}i";
 
         [MethodImpl(Inline)]
         public bool Equals(ComplexU8 src)
             => this == src;
 
-		public override string ToString() 
+		public override string ToString()
 			=>  Format();
 
         public override int GetHashCode()

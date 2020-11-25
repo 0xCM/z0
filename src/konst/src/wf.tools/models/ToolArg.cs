@@ -18,7 +18,7 @@ namespace Z0
         /// <summary>
         /// The option for which the argument is specified
         /// </summary>
-        public CmdOption Option {get;}
+        public CmdOptionSpec Option {get;}
 
         /// <summary>
         /// The 0-based argument position
@@ -31,7 +31,7 @@ namespace Z0
         public string Value {get;}
 
         [MethodImpl(Inline)]
-        public ToolArg(CmdOption option, ushort position, string value)
+        public ToolArg(CmdOptionSpec option, ushort position, string value)
         {
             Position = position;
             Option = option;

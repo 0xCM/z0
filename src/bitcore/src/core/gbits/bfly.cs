@@ -70,7 +70,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(Bits.bfly(n,uint64(x)));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
         /// <summary>
@@ -92,7 +92,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(Bits.bfly(n,uint64(x)));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
         /// <summary>
@@ -112,7 +112,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(Bits.bfly(n,uint64(x)));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
         /// <summary>
@@ -129,7 +129,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(Bits.bfly(n,uint64(x)));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
     }
 }

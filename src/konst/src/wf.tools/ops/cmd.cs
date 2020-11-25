@@ -12,8 +12,8 @@ namespace Z0
 
     partial struct Tooling
     {
-        public static ToolCmd<T> cmd<T>(T src)
+        public static CmdTypeValue<T> cmd<T>(T src)
             where T : struct, IToolCmd<T>
-                => new ToolCmd<T>(src);
+                => new CmdTypeValue<T>(src);
     }
 }

@@ -11,11 +11,11 @@ namespace Z0
 
     public readonly struct HeaderCell : ITextual, IComparable<HeaderCell>
     {
-        public readonly uint Index;        
+        public uint Index {get;}
 
-        public readonly string Name;
+        public string Name {get;}
 
-        public readonly RenderWidth Width;
+        public RenderWidth Width {get;}
 
         [MethodImpl(Inline)]
         public HeaderCell(uint index, string name, RenderWidth width)
@@ -28,12 +28,12 @@ namespace Z0
         [MethodImpl(Inline)]
         public string Format()
             => text.rpad(Name, Width);
-        
+
         [MethodImpl(Inline)]
         public int CompareTo(HeaderCell src)
             => Index.CompareTo(src.Index);
 
-        public static HeaderCell Empty 
-            => new HeaderCell(0, EmptyString, 0);    
+        public static HeaderCell Empty
+            => new HeaderCell(0, EmptyString, 0);
     }
 }

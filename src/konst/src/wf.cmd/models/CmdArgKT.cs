@@ -15,21 +15,15 @@ namespace Z0
     public struct CmdArg<K,T> : ICmdArg<K,T>
         where K : unmanaged
     {
-        public K Kind {get;}
+        public K Key {get;}
 
         public T Value {get;}
 
         [MethodImpl(Inline)]
-        public CmdArg(K kind, T value)
+        public CmdArg(K key, T value)
         {
-            Kind = kind;
+            Key = key;
             Value = value;
-        }
-
-        public string Key
-        {
-            [MethodImpl(Inline)]
-            get => api.name(this);
         }
 
         [MethodImpl(Inline)]
@@ -38,12 +32,6 @@ namespace Z0
 
         public override string ToString()
             => Format();
-
-        K ICmdArg<K,T>.Key
-            => Kind;
-
-        T ICmdArg<T>.Value
-            => Value;
 
         [MethodImpl(Inline)]
         public static implicit operator CmdArg<K,T>((K kind, T value) src)
@@ -55,10 +43,10 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator CmdArg(CmdArg<K,T> src)
-            => new CmdArg(src.Key, src.Value?.ToString() ?? EmptyString);
+            => new CmdArg(src.Key.ToString(), src.Value?.ToString() ?? EmptyString);
 
         [MethodImpl(Inline)]
         public static implicit operator CmdArg<T>(CmdArg<K,T> src)
-            => new CmdArg<T>(src.Key, src.Value);
+            => new CmdArg<T>(src.Key.ToString(), src.Value);
     }
 }

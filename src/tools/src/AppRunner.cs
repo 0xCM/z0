@@ -19,7 +19,6 @@ namespace Z0
 
         readonly Multiplex Mpx;
 
-
         readonly CmdBuilder CmdBuilder;
 
         readonly IFileDb Db;

@@ -10,7 +10,7 @@ namespace Z0
     {
         LayoutIdentity Id {get;}
 
-        ulong Width {get;}
+        BitSize Width {get;}
 
         uint Index
             => Id.Index;

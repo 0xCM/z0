@@ -19,7 +19,7 @@ namespace Z0
         /// <summary>
         /// The specified option
         /// </summary>
-        public CmdOption<K> Option {get;}
+        public CmdOptionSpec<K> Option {get;}
 
         /// <summary>
         /// The 0-based argument position
@@ -32,7 +32,7 @@ namespace Z0
         public V Value {get;}
 
         [MethodImpl(Inline)]
-        public ToolArg(CmdOption<K> option, ushort position, V value)
+        public ToolArg(CmdOptionSpec<K> option, ushort position, V value)
         {
             Position = position;
             Option = option;

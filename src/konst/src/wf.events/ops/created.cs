@@ -28,7 +28,7 @@ namespace Z0
         /// <param name="ct">The correlation token</param>
         /// <param name="flair">The flair</param>
         [MethodImpl(Inline), Op]
-        public static CmdCreatedEvent created(ToolId id, CorrelationToken ct)
+        public static CmdCreatedEvent created(CmdHostId id, CorrelationToken ct)
             => new CmdCreatedEvent(id, ct);
 
         /// <summary>

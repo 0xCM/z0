@@ -50,77 +50,10 @@ namespace Z0
 			=> new BitPos<T>(BitPos.linear(CellWidth,bitindex), BitPos.offset(CellWidth, bitindex));
 
 		[MethodImpl(Inline)]
-		public static BitPos<T>operator +(BitPos<T> pos, uint count)
-		{
-			pos.Add(count);
-            return pos;
-		}
-
-		[MethodImpl(Inline)]
-		public static BitPos<T> operator -(BitPos<T> lhs, uint count)
-		{
-            lhs.Sub(count);
-            return lhs;
-		}
-
-		[MethodImpl(Inline)]
-		public static int operator -(BitPos<T> lhs, BitPos<T> rhs)
-		{
-			return lhs.CountTo(rhs);
-		}
-
-		[MethodImpl(Inline)]
-		public static BitPos<T> operator --(BitPos<T> src)
-		{
-            src.Dec();
-            return src;
-		}
-
-		[MethodImpl(Inline)]
-		public static BitPos<T> operator ++(BitPos<T> src)
-		{
-			src.Inc();
-            return src;
-		}
-
-		[MethodImpl(Inline)]
-		public static bool operator ==(BitPos<T> lhs, BitPos<T> rhs)
-			=> lhs.Equals(rhs);
-
-		[MethodImpl(Inline)]
-		public static bool operator !=(BitPos<T> lhs, BitPos<T> rhs)
-			=> !lhs.Equals(rhs);
-
-		[MethodImpl(Inline)]
-		public static bool operator <(BitPos<T> lhs, BitPos<T> rhs)
-			=> lhs.BitIndex < rhs.BitIndex;
-
-		[MethodImpl(Inline)]
-		public static bool operator <=(BitPos<T> lhs, BitPos<T> rhs)
-			=> lhs.BitIndex <= rhs.BitIndex;
-
-		[MethodImpl(Inline)]
-		public static bool operator >(BitPos<T> lhs, BitPos<T> rhs)
-			=> lhs.BitIndex > rhs.BitIndex;
-
-		[MethodImpl(Inline)]
-		public static bool operator >=(BitPos<T> lhs, BitPos<T> rhs)
-			=> lhs.BitIndex >= rhs.BitIndex;
-
-		[MethodImpl(Inline)]
-        public static implicit operator BitPos<T>((ushort cellindex, byte bitoffset) x)
-            => Define(x.cellindex, x.bitoffset);
-
-		[MethodImpl(Inline)]
-		public static BitPos<T> Define(ushort cellindex, byte bitoffset)
-			=> new BitPos<T>(cellindex, bitoffset);
-
-
-		[MethodImpl(Inline)]
 		public BitPos(ushort cellindex, byte bitoffset)
 		{
-			this.CellIndex = cellindex;
-			this.BitOffset = bitoffset;
+			CellIndex = cellindex;
+			BitOffset = bitoffset;
 		}
 
 		public int BitIndex
@@ -200,5 +133,71 @@ namespace Z0
 
 		public override bool Equals(object rhs)
             => rhs is BitPos<T> x && Equals(x);
+
+		[MethodImpl(Inline)]
+		public static BitPos<T>operator +(BitPos<T> pos, uint count)
+		{
+			pos.Add(count);
+            return pos;
+		}
+
+		[MethodImpl(Inline)]
+		public static BitPos<T> operator -(BitPos<T> lhs, uint count)
+		{
+            lhs.Sub(count);
+            return lhs;
+		}
+
+		[MethodImpl(Inline)]
+		public static int operator -(BitPos<T> lhs, BitPos<T> rhs)
+		{
+			return lhs.CountTo(rhs);
+		}
+
+		[MethodImpl(Inline)]
+		public static BitPos<T> operator --(BitPos<T> src)
+		{
+            src.Dec();
+            return src;
+		}
+
+		[MethodImpl(Inline)]
+		public static BitPos<T> operator ++(BitPos<T> src)
+		{
+			src.Inc();
+            return src;
+		}
+
+		[MethodImpl(Inline)]
+		public static bool operator ==(BitPos<T> lhs, BitPos<T> rhs)
+			=> lhs.Equals(rhs);
+
+		[MethodImpl(Inline)]
+		public static bool operator !=(BitPos<T> lhs, BitPos<T> rhs)
+			=> !lhs.Equals(rhs);
+
+		[MethodImpl(Inline)]
+		public static bool operator <(BitPos<T> lhs, BitPos<T> rhs)
+			=> lhs.BitIndex < rhs.BitIndex;
+
+		[MethodImpl(Inline)]
+		public static bool operator <=(BitPos<T> lhs, BitPos<T> rhs)
+			=> lhs.BitIndex <= rhs.BitIndex;
+
+		[MethodImpl(Inline)]
+		public static bool operator >(BitPos<T> lhs, BitPos<T> rhs)
+			=> lhs.BitIndex > rhs.BitIndex;
+
+		[MethodImpl(Inline)]
+		public static bool operator >=(BitPos<T> lhs, BitPos<T> rhs)
+			=> lhs.BitIndex >= rhs.BitIndex;
+
+		[MethodImpl(Inline)]
+        public static implicit operator BitPos<T>((ushort cellindex, byte bitoffset) x)
+            => Define(x.cellindex, x.bitoffset);
+
+		[MethodImpl(Inline)]
+		public static BitPos<T> Define(ushort cellindex, byte bitoffset)
+			=> new BitPos<T>(cellindex, bitoffset);
 	}
 }

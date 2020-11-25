@@ -44,6 +44,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator LayoutRange(ClosedInterval<ulong> src)
             => new LayoutRange(src.Min, src.Max);
-
     }
 }

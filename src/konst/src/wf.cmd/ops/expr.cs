@@ -17,15 +17,15 @@ namespace Z0
             => new CmdScriptExpr(pattern);
 
         [MethodImpl(Inline), Op]
-        public static CmdScriptExpr expr(in Paired<CmdPattern,CmdVars> src)
+        public static CmdScriptExpr expr(in Paired<CmdPattern,CmdVarIndex> src)
             => new CmdScriptExpr(src.Left, src.Right);
 
         [MethodImpl(Inline), Op]
-        public static CmdScriptExpr expr(CmdPattern pattern, CmdVars vars)
+        public static CmdScriptExpr expr(CmdPattern pattern, CmdVarIndex vars)
             => new CmdScriptExpr(pattern, vars);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static CmdScriptExpr<K> expr<K>(CmdPattern pattern, CmdVars<K> content)
+        public static CmdScriptExpr<K> expr<K>(CmdPattern pattern, CmdVarIndex<K> content)
             where K : unmanaged
                 => new CmdScriptExpr<K>(pattern, content);
 

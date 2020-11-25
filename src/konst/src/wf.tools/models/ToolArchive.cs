@@ -15,7 +15,7 @@ namespace Z0
         /// <summary>
         /// The tool identifier
         /// </summary>
-        public ToolId ToolId {get;}
+        public CmdHostId ToolId {get;}
 
         /// <summary>
         /// The archive root
@@ -28,7 +28,7 @@ namespace Z0
         public ToolArchiveKind ArchiveKind {get;}
 
         [MethodImpl(Inline)]
-        public ToolArchive(ToolId tool, FS.FolderPath root, ToolArchiveKind kind)
+        public ToolArchive(CmdHostId tool, FS.FolderPath root, ToolArchiveKind kind)
         {
             ToolId = tool;
             Root = root;

@@ -14,6 +14,11 @@ namespace Z0
     [ApiHost]
     public readonly partial struct Records
     {
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static DynamicRow<T> row<T>(uint cells)
+            where T : struct
+                => new DynamicRow<T>(0, default(T), sys.alloc<dynamic>(cells));
+
         public static RecordFields fields<T>()
             where T : struct
                 => fields(typeof(T));

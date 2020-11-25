@@ -11,10 +11,10 @@ namespace Z0
     using static z;
     using static Konst;
 
-    partial struct Scripts
+    partial struct WfScripts
     {
-        public static Index<IScriptVar> members<T>(T set)
-            where T : IScriptVars<T>, new()
-                => typeof(T).GetProperties(MemberSelector).Select(x => (IScriptVar)x.GetValue(set));
+        public static Index<ICmdVar> members<T>(T set)
+            where T : ICmdVars<T>, new()
+                => typeof(T).GetProperties(MemberSelector).Select(x => (ICmdVar)x.GetValue(set));
     }
 }

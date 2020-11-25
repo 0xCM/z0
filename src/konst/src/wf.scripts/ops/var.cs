@@ -10,23 +10,23 @@ namespace Z0
     using static z;
     using static Konst;
 
-    partial struct Scripts
+    partial struct WfScripts
     {
         /// <summary>
-        /// Creates a non-valued <see cref='ScriptVar'/>
+        /// Creates a non-valued <see cref='CmdScriptVar'/>
         /// </summary>
         /// <param name="symbol">The variable symbol</param>
         [MethodImpl(Inline), Op]
-        public static ScriptVar var(ScriptSymbol symbol)
-            => new ScriptVar(symbol);
+        public static CmdScriptVar var(CmdVarSymbol symbol)
+            => new CmdScriptVar(symbol);
 
         /// <summary>
-        /// Creates a valued <see cref='ScriptVar'/>
+        /// Creates a valued <see cref='CmdScriptVar'/>
         /// </summary>
         /// <param name="symbol">The variable symbol</param>
         /// <param name="value">The variable value</param>
         [MethodImpl(Inline), Op]
-        public static ScriptVar var(ScriptSymbol symbol, ScriptVarValue value)
-            => new ScriptVar(symbol, value);
+        public static CmdScriptVar var(CmdVarSymbol symbol, CmdVarValue value)
+            => new CmdScriptVar(symbol, value);
     }
 }

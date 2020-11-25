@@ -7,8 +7,7 @@ namespace Z0
     using System;
 
     /// <summary>
-    /// Defines control mask values for constucting a 256-bit target by blending 
-    /// 8 32-bit segments from two source vectors
+    /// Defines control mask values for constructing a 256-bit target by blending 8 32-bit segments from two source vectors
     /// </summary>
     [Flags]
     public enum Blend8x32 : byte

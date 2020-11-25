@@ -43,7 +43,7 @@ namespace Z0
         }
 
         [Op]
-        public static void render(CmdDescriptor src, ITextBuffer dst)
+        public static void render(CmdTypeInfo src, ITextBuffer dst)
         {
             dst.Append(src.DataType.Name);
             var fields = src.Fields.Terms;;
@@ -56,7 +56,7 @@ namespace Z0
         }
 
         [Op]
-        public static string format(CmdDescriptor src)
+        public static string format(CmdTypeInfo src)
         {
             var buffer = Buffers.text();
             render(src,buffer);
@@ -92,7 +92,7 @@ namespace Z0
         /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
         public static string format(in CmdArg src)
-            => Render.setting(src.Name, src.Value);
+            => Render.setting(src.Key, src.Value);
 
         /// <summary>
         /// Renders a specified option as text
@@ -101,7 +101,7 @@ namespace Z0
         /// <typeparam name="T">The option value type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static string format<T>(in CmdArg<T> src)
-            => Render.setting(src.Name, src.Value);
+            => Render.setting(src.Key, src.Value);
 
         /// <summary>
         /// Renders a specified option as text
@@ -168,11 +168,11 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Formatter]
-        public static string format(CmdOption src)
+        public static string format(CmdOptionSpec src)
             => src.IsAnonymous || src.IsEmpty ? EmptyString : src.Name;
 
         [MethodImpl(Inline), Formatter, Closures(UnsignedInts)]
-        public static string format<K>(CmdOption<K> src)
+        public static string format<K>(CmdOptionSpec<K> src)
             where K : unmanaged
                 => src.IsAnonymous || src.IsEmpty ? EmptyString : src.Name;
     }

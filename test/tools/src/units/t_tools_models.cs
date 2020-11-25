@@ -6,13 +6,16 @@ namespace Z0
 {
     using System;
 
+    using Z0.Tools;
+
     using static CheckPrimal;
+
 
     public sealed class t_tools_models : t_tools<t_tools_models>
     {
         public void check_pdb2xml()
         {
-            var model = Tooling.model<Pdb2Xml>();
+            var model = Tooling.describe<Pdb2Xml>();
             eq(Pdb2Xml.Usage, model.Usage);
             var options = model.Options;
             var count = options.Count;

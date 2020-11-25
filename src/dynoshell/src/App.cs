@@ -14,6 +14,13 @@ namespace Z0
 
         }
 
+        public static void run(IWfShell wf, CmdLine cmd)
+        {
+            var process = Cmd.process(wf, cmd).Wait();
+            var output = process.Output;
+            wf.Status(output);
+        }
+
         static void TestCmdLine(params string[] args)
         {
             var cmd1 = new CmdLine("cmd /c dir j:\\");
@@ -31,13 +38,16 @@ namespace Z0
             cmd.Run();
             cmd.WaitForExit();
         }
+
         public static void Main(params string[] args)
         {
             try
             {
                 using var wf = WfShell.create(args).WithRandom(Rng.@default());
-                using var dynoshell = new Dynoshell(wf);
-                dynoshell.Run();
+                run(wf, new CmdLine("llvm-mc --help"));
+
+                // using var dynoshell = new Dynoshell(wf);
+                // dynoshell.Run();
 
 
                 //var shell = WinCmdShell.create(wf);

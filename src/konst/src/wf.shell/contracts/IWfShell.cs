@@ -188,7 +188,7 @@ namespace Z0
             return svc;
         }
 
-        void Created(ToolId tool)
+        void Created(CmdHostId tool)
             => Raise(created(tool, Ct));
 
         void Created(WfStepId id)

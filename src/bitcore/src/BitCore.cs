@@ -17,7 +17,7 @@ namespace Z0
     [ApiHost("generic")]
     public partial class gbits
     {
-
+        const NumericKind Closure = UnsignedInts;
     }
 
     [ApiHost]

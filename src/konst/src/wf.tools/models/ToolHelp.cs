@@ -11,12 +11,12 @@ namespace Z0
 
     public readonly struct ToolHelp : IToolHelp
     {
-        public ToolId Id {get;}
+        public CmdHostId Id {get;}
 
         public string Content {get;}
 
         [MethodImpl(Inline)]
-        public ToolHelp(ToolId id, string content)
+        public ToolHelp(CmdHostId id, string content)
         {
             Id = id;
             Content = content;
@@ -31,7 +31,7 @@ namespace Z0
         public static ToolHelp Empty
         {
             [MethodImpl(Inline)]
-            get => new ToolHelp(ToolId.Empty, EmptyString);
+            get => new ToolHelp(CmdHostId.Empty, EmptyString);
         }
     }
 }

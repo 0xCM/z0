@@ -9,16 +9,11 @@ namespace Z0
 
     using static Konst;
 
-    public interface IBitField
-    {
-
-    }
-
     /// <summary>
     /// Characterizes a content-parametric bitfield
     /// </summary>
     /// <typeparam name="T">The bitfield content type</typeparam>
-    public interface IBitField<T> : IBitField
+    public interface IBitField<T>
         where T : unmanaged
     {
         /// <summary>

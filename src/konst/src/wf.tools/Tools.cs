@@ -14,9 +14,5 @@ namespace Z0
     public partial struct Tooling
     {
         const NumericKind Closure = UnsignedInts;
-
-        [MethodImpl(Inline), Op]
-        public static IToolDb db(FS.FolderPath storage)
-            => new ToolDb(storage);
     }
 }

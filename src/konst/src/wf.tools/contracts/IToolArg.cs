@@ -10,7 +10,7 @@ namespace Z0
     {
         ushort Position {get;}
 
-        CmdOption Option {get;}
+        CmdOptionSpec Option {get;}
 
         V Value {get;}
     }
@@ -24,9 +24,9 @@ namespace Z0
     public interface IToolArg<K,V> : IToolArg<V>
         where K : unmanaged
     {
-        new CmdOption<K> Option {get;}
+        new CmdOptionSpec<K> Option {get;}
 
-        CmdOption IToolArg<V>.Option
+        CmdOptionSpec IToolArg<V>.Option
             => Option;
     }
 }

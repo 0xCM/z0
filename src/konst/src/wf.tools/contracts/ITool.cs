@@ -9,7 +9,7 @@ namespace Z0
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface ITool : IIdentified<ToolId>
+    public interface ITool : IIdentified<CmdHostId>
     {
         FS.FolderPath Source
             => FS.FolderPath.Empty;

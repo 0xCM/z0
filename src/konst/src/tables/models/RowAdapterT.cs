@@ -28,7 +28,7 @@ namespace Z0
             Source = default;
             Index = index;
             Fields = fields;
-            Row = api.row<T>(fields.Count);
+            Row = Records.row<T>(fields.Count);
         }
 
         [MethodImpl(Inline)]

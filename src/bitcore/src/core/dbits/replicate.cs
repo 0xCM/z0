@@ -12,7 +12,7 @@ namespace Z0
     partial class Bits
     {
         /// <summary>
-        /// Replicates source bits [from..to] a specified number of times subject to the constraints imposed by the replicant type
+        /// Replicates source bits [from..to] a specified number of times subject to the constraints imposed by the source type
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <param name="from">The first source bit</param>
@@ -30,7 +30,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// Replicates source bits [from..to] a specified number of times subject to the constraints imposed by the replicant type
+        /// Replicates source bits [from..to] a specified number of times subject to the constraints imposed by the source type
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <param name="from">The first source bit</param>
@@ -48,7 +48,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// Replicates source bits [from..to] a specified number of times subject to the constraints imposed by the replicant type
+        /// Replicates source bits [from..to] a specified number of times subject to the constraints imposed by the source type
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <param name="from">The first source bit</param>
@@ -66,7 +66,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// Replicates source bits [from..to] a specified number of times subject to the constraints imposed by the replicant type
+        /// Replicates source bits [from..to] a specified number of times subject to the constraints imposed by the source type
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <param name="from">The first source bit</param>

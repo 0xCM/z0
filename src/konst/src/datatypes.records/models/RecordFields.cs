@@ -15,10 +15,6 @@ namespace Z0
         readonly IndexedSeq<RecordField> Data;
 
         [MethodImpl(Inline)]
-        public static implicit operator RecordFields(RecordField[] src)
-            => new RecordFields(src);
-
-        [MethodImpl(Inline)]
         public RecordFields(RecordField[] src)
             => Data = src;
 
@@ -70,5 +66,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public RecordFields Refresh(RecordField[] src)
             => src;
+
+        [MethodImpl(Inline)]
+        public static implicit operator RecordFields(RecordField[] src)
+            => new RecordFields(src);
     }
 }

@@ -10,31 +10,32 @@ namespace Z0
 
     using static z;
     using static Konst;
+    using static CmdVarTypes;
 
-    partial struct Scripts
+    partial struct WfScripts
     {
         [Op, Closures(Closure)]
-        public static string format<T>(ScriptSymbol<T> src)
+        public static string format<T>(CmdVarSymbol<T> src)
             => string.Format("{0}", src.Name);
 
         [Op]
-        public static string format(ScriptVar src)
+        public static string format(CmdScriptVar src)
             => string.Format("{0}={1}",src.Symbol, src.Value);
 
         [Op]
-        public static string format(ScriptVarValue src)
+        public static string format(CmdVarValue src)
             => src.Content ?? EmptyString;
 
         [Op]
-        public static string format(IScriptVar src)
+        public static string format(ICmdVar src)
             => string.Format("{0}={1}", src.Symbol, src.Value);
 
         [Op]
-        public static string format(ScriptSymbol src)
+        public static string format(CmdVarSymbol src)
             => string.Format("$({0})",src.Name ?? EmptyString);
 
         [Op]
-        public static string format(IScriptVars src)
+        public static string format(ICmdVars src)
         {
             var dst = new StringBuilder();
             foreach(var member in src.Members())
@@ -43,7 +44,7 @@ namespace Z0
         }
 
         [Op]
-        public static string format(ScriptDirVars src)
+        public static string format(DirVars src)
         {
             var dst = Buffers.text();
             render(src,dst);

@@ -12,7 +12,7 @@ namespace Z0
     partial struct Tooling
     {
         [MethodImpl(Inline), Op]
-        public static ToolHelp help(ToolId tool, string src)
+        public static ToolHelp help(CmdHostId tool, string src)
             => new ToolHelp(tool, src);
     }
 }

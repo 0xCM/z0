@@ -26,7 +26,7 @@ namespace Z0
         public static DynamicRow<T> row<T>(in TableFields fields, uint index, in T src)
             where T : struct
         {
-            var dst = row<T>(fields.Count);
+            var dst = Records.row<T>(fields.Count);
             load(fields, index, src, ref dst);
             return dst;
         }

@@ -10,10 +10,10 @@ namespace Z0
     using static z;
     using static Konst;
 
-    partial struct Scripts
+    partial struct WfScripts
     {
         [MethodImpl(Inline), Op]
-        public static ScriptSymbol symbol(string name)
-            => new ScriptSymbol(name);
+        public static CmdVarSymbol symbol(string name)
+            => new CmdVarSymbol(name);
     }
 }

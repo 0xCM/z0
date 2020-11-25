@@ -17,17 +17,17 @@ namespace Z0
     {
         public CmdPattern Pattern {get;}
 
-        public CmdVars<K> Variables {get;}
+        public CmdVarIndex<K> Variables {get;}
 
         [MethodImpl(Inline)]
         internal CmdScriptExpr(CmdPattern pattern)
         {
             Pattern = pattern;
-            Variables = api.vars<K>();
+            Variables = CmdVars.init<K>();
         }
 
         [MethodImpl(Inline)]
-        public CmdScriptExpr(CmdPattern pattern, CmdVars<K> vars)
+        public CmdScriptExpr(CmdPattern pattern, CmdVarIndex<K> vars)
         {
             Pattern = pattern;
             Variables = vars;

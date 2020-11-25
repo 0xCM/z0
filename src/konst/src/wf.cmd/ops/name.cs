@@ -15,6 +15,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static string name<K,T>(in CmdArg<K,T> src)
             where K : unmanaged
-                => src.Kind.ToString();
+                => src.Key.ToString();
     }
 }

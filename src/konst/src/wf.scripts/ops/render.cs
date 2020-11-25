@@ -9,11 +9,12 @@ namespace Z0
 
     using static z;
     using static Konst;
+    using static CmdVarTypes;
 
-    partial struct Scripts
+    partial struct WfScripts
     {
         [Op]
-        public static void render(ScriptDirVars src, ITextBuffer dst)
+        public static void render(DirVars src, ITextBuffer dst)
         {
             var members = src.Members().View;
             var count = members.Length;

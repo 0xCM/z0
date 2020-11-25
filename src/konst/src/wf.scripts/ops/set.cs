@@ -9,15 +9,16 @@ namespace Z0
 
     using static z;
     using static Konst;
+    using static CmdVarTypes;
 
-    partial struct Scripts
+    partial struct WfScripts
     {
         [MethodImpl(Inline), Op]
-        public static ScriptVar set(ScriptVar src, string value)
+        public static CmdScriptVar set(CmdScriptVar src, string value)
             => var(src.Symbol, value);
 
         [MethodImpl(Inline), Op]
-        public static ScriptDirVar set(ScriptDirVar src, FS.FolderPath value)
+        public static DirVar set(DirVar src, FS.FolderPath value)
             => dir(src.Symbol, value);
     }
 }

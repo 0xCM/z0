@@ -15,12 +15,12 @@ namespace Z0
     /// </summary>
     public readonly struct ToolVerb
     {
-        public ToolId Tool {get;}
+        public CmdHostId Tool {get;}
 
         public string Name {get;}
 
         [MethodImpl(Inline)]
-        public ToolVerb(ToolId tool, string name)
+        public ToolVerb(CmdHostId tool, string name)
         {
             Tool = tool;
             Name = name;

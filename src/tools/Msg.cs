@@ -10,6 +10,6 @@ namespace Z0
 
     readonly struct Msg
     {
-        public static RenderPattern<ToolId> ToolHelpNotFound => "Tool {0} help not found";
+
     }
 }

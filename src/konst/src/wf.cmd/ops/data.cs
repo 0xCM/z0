@@ -21,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref CmdArg data<T>(in CmdArg<T> src, ref CmdArg dst)
         {
-            dst = new CmdArg(src.Name, src.Value.ToString());
+            dst = new CmdArg(src.Key, src.Value.ToString());
             return ref dst;
         }
 
@@ -36,7 +36,7 @@ namespace Z0
         public static ref CmdArg data<K,T>(in CmdArg<K,T> src, ref CmdArg dst)
             where K : unmanaged
         {
-            dst = new CmdArg(src.Kind.ToString(), src.Value.ToString());
+            dst = new CmdArg(src.Key.ToString(), src.Value.ToString());
             return ref dst;
         }
     }

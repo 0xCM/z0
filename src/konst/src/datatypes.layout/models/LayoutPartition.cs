@@ -35,19 +35,25 @@ namespace Z0
             Range = new ClosedInterval<ulong>(start,end);
         }
 
+        /// <summary>
+        /// The bit position at which partition begins
+        /// </summary>
         public ulong Left
         {
             [MethodImpl(Inline)]
             get => Range.Min;
         }
 
+        /// <summary>
+        /// The bit position at which partition ends
+        /// </summary>
         public ulong Right
         {
             [MethodImpl(Inline)]
             get => Range.Max;
         }
 
-        public ulong Width
+        public BitSize Width
         {
             [MethodImpl(Inline)]
             get => Range.Width;

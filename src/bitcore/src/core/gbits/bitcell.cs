@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="src">The bit source</param>
         /// <param name="pos">The sequence-relative position of the target bit</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), BitCell, Closures(UnsignedInts)]
+        [MethodImpl(Inline), BitCell, Closures(Closure)]
         public static ref T bitcell<T>(Span<T> src, BitPos<T> pos)
             where T : unmanaged
                 => ref seek(src, pos.CellIndex);
@@ -29,7 +29,7 @@ namespace Z0
         /// <param name="src">The bit source</param>
         /// <param name="pos">The sequence-relative position of the target bit</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), BitCell, Closures(UnsignedInts)]
+        [MethodImpl(Inline), BitCell, Closures(Closure)]
         public static ref readonly T bitcell<T>(ReadOnlySpan<T> src, BitPos<T> pos)
             where T : unmanaged
                 => ref skip(src, pos.CellIndex);
