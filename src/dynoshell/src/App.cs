@@ -7,6 +7,10 @@ namespace Z0
     using System;
     using System.Diagnostics;
 
+    using Z0.Tools;
+
+    using static Tools.Llvm;
+
     sealed class App : WfHost<App>
     {
         public App()
@@ -21,6 +25,11 @@ namespace Z0
             wf.Status(output);
         }
 
+        public static void show(IWfShell wf, CmdLine cmd)
+        {
+            wf.Status(cmd.Format());
+        }
+
         static void TestCmdLine(params string[] args)
         {
             var cmd1 = new CmdLine("cmd /c dir j:\\");
@@ -30,6 +39,7 @@ namespace Z0
             var output = process.Output;
             wf.Status(output);
         }
+
 
         static void RunInterpreter(IWfShell wf)
         {
@@ -44,7 +54,15 @@ namespace Z0
             try
             {
                 using var wf = WfShell.create(args).WithRandom(Rng.@default());
-                run(wf, new CmdLine("llvm-mc --help"));
+                var llvm = Llvm.service(wf);
+                var paths = llvm.Paths();
+                var cases = paths.Test.ModuleDir(ModuleNames.Analysis, TestSubjects.AliasSet);
+                var cmd = WinCmd.dir(cases);
+                run(wf,cmd);
+                //run(wf, WinCmd.dir(FS.dir(paths.Test.Root)));
+
+                //run(wf, new CmdLine("llvm-mc --help"));
+
 
                 // using var dynoshell = new Dynoshell(wf);
                 // dynoshell.Run();

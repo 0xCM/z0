@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="tool">The tool identifier</param>
         /// <param name="verbs"></param>
         [MethodImpl(Inline), Op]
-        public static ToolSpec specify(CmdHostId tool, ToolVerb[] verbs)
+        public static ToolSpec specify(ToolId tool, ToolVerb[] verbs)
             => new ToolSpec(tool,verbs);
 
         [MethodImpl(Inline), Op, Closures(Closure)]

@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Specifies a kinded tool option
     /// </summary>
-    public readonly struct CmdOptionSpec<K> : ICmdOption<K>
+    public readonly struct CmdOptionSpec<K> : ICmdOptionSpec<K>
         where K : unmanaged
     {
         /// <summary>

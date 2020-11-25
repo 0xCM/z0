@@ -12,7 +12,7 @@ namespace Z0
 
     using api = Cmd;
 
-    public struct CmdArg<K,T> : ICmdArg<K,T>
+    public struct CmdArg<K,T>
         where K : unmanaged
     {
         public K Key {get;}

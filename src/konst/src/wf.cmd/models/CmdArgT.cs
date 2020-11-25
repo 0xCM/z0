@@ -14,15 +14,39 @@ namespace Z0
 
     public struct CmdArg<T> : ICmdArg<T>
     {
-        public string Key {get;}
+        public string Prefix {get;}
+
+        public string Name {get;}
 
         public T Value {get;}
+
+        public string Specifier {get;}
+
+        [MethodImpl(Inline)]
+        public CmdArg(string prefix, string name, T value)
+        {
+            Name = name;
+            Value = value;
+            Prefix = prefix;
+            Specifier = EmptyString;
+        }
 
         [MethodImpl(Inline)]
         public CmdArg(string key, T value)
         {
-            Key = key;
+            Name = key;
             Value = value;
+            Prefix = EmptyString;
+            Specifier = EmptyString;
+        }
+
+        [MethodImpl(Inline)]
+        public CmdArg(string prefix, string name, string specifier, T value)
+        {
+            Name = name;
+            Value = value;
+            Prefix = prefix;
+            Specifier = specifier;
         }
 
         [MethodImpl(Inline)]
@@ -38,6 +62,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator CmdArg(CmdArg<T> src)
-            => new CmdArg(src.Key, src.Value?.ToString() ?? EmptyString);
+            => new CmdArg(src.Name, src.Value?.ToString() ?? EmptyString);
     }
 }

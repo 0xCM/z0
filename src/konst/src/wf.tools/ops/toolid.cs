@@ -17,15 +17,15 @@ namespace Z0
         /// </summary>
         /// <typeparam name="T">The tool type</typeparam>
         [MethodImpl(Inline)]
-        public static CmdHostId toolid<T>()
-            => new CmdHostId(typeof(T).Name);
+        public static ToolId toolid<T>()
+            => new ToolId(typeof(T).Name);
 
         [MethodImpl(Inline), Op]
-        public static CmdHostId toolid(Type src)
-            => new CmdHostId(src.Name);
+        public static ToolId toolid(Type src)
+            => new ToolId(src.Name);
 
         [MethodImpl(Inline), Op]
-        public static CmdHostId toolid(string src)
-            => new CmdHostId(src);
+        public static ToolId toolid(string src)
+            => new ToolId(src);
     }
 }

@@ -15,7 +15,7 @@ namespace Z0
     partial struct WfScripts
     {
         [Op]
-        public static CmdScriptPattern tool(IFileDb db, CmdHostId tool, string root, string arg, string delimiter = null, string type = null)
+        public static CmdScriptPattern tool(IFileDb db, ToolId tool, string root, string arg, string delimiter = null, string type = null)
         {
             var data = new CmdScriptPattern();
             data.CmdRootName = FS.folder(root);

@@ -16,6 +16,6 @@ namespace Z0
 
         public static RenderPattern<CmdId> DispatchingCommand => "Dispatching {0}";
 
-        public static RenderPattern<CmdHostId> ToolHelpNotFound => "Tool {0} help not found";
+        public static RenderPattern<ToolId> ToolHelpNotFound => "Tool {0} help not found";
     }
 }

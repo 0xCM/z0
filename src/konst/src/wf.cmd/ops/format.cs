@@ -17,29 +17,8 @@ namespace Z0
         {
             var dst = Buffers.text();
             dst.AppendFormat("{0} ", src.CmdId.Format());
-            render(src.Args,dst);
+            CmdArgs.render(src.Args,dst);
             return dst.Emit();
-        }
-
-        [Op]
-        public static void render(CmdArgs src, ITextBuffer dst)
-        {
-            var count = src.Count;
-            for(var i=0u; i<count; i++)
-            {
-                dst.Append(format(src[i]));
-                if(i != count - 1)
-                    dst.Append(Space);
-            }
-        }
-
-        [Op]
-        public static void render(CmdScript src, ITextBuffer dst)
-        {
-            var count = src.Length;
-            var parts = src.Content.View;
-            for(var i=0; i<count; i++)
-                dst.AppendLine(skip(parts,i).Format());
         }
 
         [Op]
@@ -92,7 +71,7 @@ namespace Z0
         /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
         public static string format(in CmdArg src)
-            => Render.setting(src.Key, src.Value);
+            => Render.setting(src.Name, src.Value);
 
         /// <summary>
         /// Renders a specified option as text
@@ -101,7 +80,7 @@ namespace Z0
         /// <typeparam name="T">The option value type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static string format<T>(in CmdArg<T> src)
-            => Render.setting(src.Key, src.Value);
+            => Render.setting(src.Name, src.Value);
 
         /// <summary>
         /// Renders a specified option as text
@@ -118,11 +97,11 @@ namespace Z0
         {
             var dst = Buffers.text();
             dst.Append(src.CmdId.Format());
-            render(src.Args, dst);
+            CmdArgs.render(src.Args, dst);
             return dst.Emit();
         }
 
-        public static string format<K,T>(in CmdArgs<K,T> src)
+        public static string format<K,T>(in CmdArgIndex<K,T> src)
             where K : unmanaged
         {
             var dst = text.build();
@@ -134,10 +113,10 @@ namespace Z0
         }
 
         [Op]
-        public static string format(in CmdArgs src)
+        public static string format(in CmdArgIndex src)
         {
             var dst = Buffers.text();
-            render(src, dst);
+            CmdArgs.render(src, dst);
             return dst.Emit();
         }
 
@@ -145,7 +124,7 @@ namespace Z0
         public static string format(in CmdScript src)
         {
             var dst = Buffers.text();
-            render(src, dst);
+            WfScripts.render(src, dst);
             return dst.Emit();
         }
 
@@ -166,14 +145,5 @@ namespace Z0
                 return new string(content);
             }
         }
-
-        [MethodImpl(Inline), Formatter]
-        public static string format(CmdOptionSpec src)
-            => src.IsAnonymous || src.IsEmpty ? EmptyString : src.Name;
-
-        [MethodImpl(Inline), Formatter, Closures(UnsignedInts)]
-        public static string format<K>(CmdOptionSpec<K> src)
-            where K : unmanaged
-                => src.IsAnonymous || src.IsEmpty ? EmptyString : src.Name;
     }
 }

@@ -79,7 +79,7 @@ namespace Z0.Tools
                     pattern = WfScripts.pattern("dumpbin.loadconfig", string.Format("dumpbin /LOADCONFIG /OUT:{1} {0}", src.Format(PS), output.Format(PS)));
                     break;
             }
-            return Cmd.expr(pattern);
+            return WfScripts.expr(pattern);
         }
     }
 }

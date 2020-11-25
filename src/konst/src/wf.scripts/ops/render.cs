@@ -14,6 +14,15 @@ namespace Z0
     partial struct WfScripts
     {
         [Op]
+        public static void render(CmdScript src, ITextBuffer dst)
+        {
+            var count = src.Length;
+            var parts = src.Content.View;
+            for(var i=0; i<count; i++)
+                dst.AppendLine(skip(parts,i).Format());
+        }
+
+        [Op]
         public static void render(DirVars src, ITextBuffer dst)
         {
             var members = src.Members().View;

@@ -19,7 +19,7 @@ namespace Z0
         public FlairKind Flair => FlairKind.Created;
 
         [MethodImpl(Inline)]
-        public CmdCreatedEvent(CmdHostId id, CorrelationToken ct)
+        public CmdCreatedEvent(ToolId id, CorrelationToken ct)
         {
             EventId = (EventName, id, ct);
         }

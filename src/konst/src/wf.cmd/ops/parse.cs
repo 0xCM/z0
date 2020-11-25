@@ -12,12 +12,12 @@ namespace Z0
     partial struct Cmd
     {
         [Op]
-        public static bool lookup(CmdArgs src, string name, out CmdArg dst)
+        public static bool lookup(CmdArgIndex src, string name, out CmdArg dst)
         {
             for(var i=0; i<src.Count; i++)
             {
                 ref readonly var arg = ref src[i];
-                if(text.equals(arg.Key, name))
+                if(text.equals(arg.Name, name))
                 {
                     dst=arg;
                     return true;

@@ -12,45 +12,68 @@ namespace Z0
 
     public struct CmdArg : ICmdArg
     {
-        public string Key {get;}
+        public string Prefix {get;}
+
+        public string Name {get;}
 
         public string Value {get;}
+
+        public string Specifier {get;}
+
+        [MethodImpl(Inline)]
+        public CmdArg(string prefix, string name, string value)
+        {
+            Name = name;
+            Value = value;
+            Prefix = prefix;
+            Specifier = EmptyString;
+        }
+
+        [MethodImpl(Inline)]
+        public CmdArg(string prefix, string name, string specifier, string value)
+        {
+            Name = name;
+            Value = value;
+            Prefix = prefix;
+            Specifier = specifier;
+        }
 
         [MethodImpl(Inline)]
         public CmdArg(string name, string value)
         {
-            Key = name;
+            Name = name;
             Value = value;
+            Prefix = EmptyString;
+            Specifier = EmptyString;
         }
 
         [MethodImpl(Inline)]
         public CmdArg(string value)
         {
-            Key = EmptyString;
+            Name = EmptyString;
             Value = value;
+            Prefix = EmptyString;
+            Specifier = EmptyString;
         }
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => text.empty(Key) && Value is null;
+            get => text.empty(Name) && Value is null;
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => text.nonempty(Key) || !(Value is null);
+            get => text.nonempty(Name) || !(Value is null);
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.nonempty(Key) ? string.Format(RP.Setting, Key, Value) : Value?.ToString() ?? EmptyString;
+            => text.nonempty(Name) ? string.Format(RP.Setting, Name, Value) : Value?.ToString() ?? EmptyString;
 
         public override string ToString()
             => Format();
-
-        string ICmdArg.Key
-            => Key;
 
         [MethodImpl(Inline)]
         public static implicit operator CmdArg(Pair<string> src)

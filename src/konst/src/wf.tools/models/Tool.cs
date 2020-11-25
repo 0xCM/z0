@@ -9,22 +9,18 @@ namespace Z0
 
     using static Konst;
 
-    public struct CmdDescriptors
+    public readonly struct Tool<T> : ITool<Tool<T>>
     {
-        IndexedSeq<CmdTypeInfo> Data;
+        public ToolId Id {get;}
 
         [MethodImpl(Inline)]
-        public CmdDescriptors(CmdTypeInfo[] src)
-            => Data = src;
-
-        public Span<CmdTypeInfo> Terms
+        public Tool(ToolId id)
         {
-            [MethodImpl(Inline)]
-            get => Data.Terms;
+            Id = id;
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator CmdDescriptors(CmdTypeInfo[] src)
-            => new CmdDescriptors(src);
+        public static implicit operator Tool<T>(string id)
+            => new Tool<T>(id);
     }
 }

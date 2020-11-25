@@ -8,13 +8,15 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static z;
 
-    partial struct Cmd
+    [ApiHost]
+    public readonly struct WinCmd
     {
-        [MethodImpl(Inline)]
-        public static string name<K,T>(in CmdArg<K,T> src)
-            where K : unmanaged
-                => src.Key.ToString();
+        [MethodImpl(Inline), Op]
+        public static CmdLine dir(FS.FolderPath src)
+        {
+            const string Pattern = "cmd /c dir {0}";
+            return string.Format(Pattern, src.Format(PathSeparator.BS));
+        }
     }
 }

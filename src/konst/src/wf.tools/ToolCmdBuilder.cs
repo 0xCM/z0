@@ -2,16 +2,17 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Tools
+namespace Z0
 {
-    using System;
-    using System.Diagnostics;
 
-    public readonly struct Llvm
+    using System;
+    using System.Runtime.CompilerServices;
+
+    public readonly struct ToolCmdBuilder<T>
+        where T : struct, IToolCmd<T>
     {
 
 
-
-
     }
+
 }

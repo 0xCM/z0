@@ -15,11 +15,11 @@ namespace Z0
     {
         [Formatter]
         public static string format(ToolArg src)
-            => string.Format("{0}{2}", Cmd.format(src.Option), src.Value);
+            => string.Format("{0}{2}", CmdOptions.format(src.Option), src.Value);
 
         [Formatter]
         public static string format(ToolArg src, CmdArgPrefix delimiter, char specifier)
-            => string.Format("{0}{1}{2}{3}", Cmd.format(delimiter), Cmd.format(src.Option), specifier, src.Value);
+            => string.Format("{0}{1}{2}{3}", Cmd.format(delimiter), CmdOptions.format(src.Option), specifier, src.Value);
 
         public static string format<K,V>(ToolArg<K,V> src, char specifier)
             where K : unmanaged

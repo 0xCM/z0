@@ -6,14 +6,12 @@ namespace Z0
 {
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    using api = Cmd;
-
     [Free]
     public interface ICmdSpec : IIdentified<CmdId>
     {
         CmdId CmdId {get;}
 
-        CmdArgs Args {get;}
+        CmdArgIndex Args {get;}
 
         CmdId IIdentified<CmdId>.Id
             => CmdId;
@@ -26,8 +24,8 @@ namespace Z0
         CmdId ICmdSpec.CmdId
             => Cmd.id<T>();
 
-        CmdArgs ICmdSpec.Args
-            => api.args((T)this);
+        CmdArgIndex ICmdSpec.Args
+            => CmdArgs.index((T)this);
     }
 
     [Free]

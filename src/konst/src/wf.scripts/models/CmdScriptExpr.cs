@@ -69,7 +69,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator CmdScriptExpr(CmdPattern src)
-            => api.expr(src);
+            => WfScripts.expr(src);
 
         [MethodImpl(Inline)]
         public static implicit operator string(CmdScriptExpr src)
@@ -77,7 +77,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator CmdScriptExpr(Paired<CmdPattern,CmdVarIndex> src)
-            => api.expr(src);
+            => WfScripts.expr(src);
 
         [MethodImpl(Inline)]
         public string Format()

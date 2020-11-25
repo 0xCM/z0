@@ -102,5 +102,13 @@ namespace Z0
         public static DirVar set(DirVar src, FS.FolderPath value)
             => dir(src.Symbol, value);
 
+        [Op]
+        public static void render(DirVars src, ITextBuffer dst)
+        {
+            var members = src.Members().View;
+            var count = members.Length;
+            for(var i=0; i<count; i++)
+                dst.AppendLine(WfScripts.format(skip(members,i)));
+        }
     }
 }

@@ -17,7 +17,7 @@ namespace Z0
     {
         public FS.FolderName CmdRootName;
 
-        public CmdHostId CmdHost;
+        public ToolId CmdHost;
 
         public string CmdArgName;
 
@@ -48,7 +48,7 @@ namespace Z0
         public override string ToString()
             => Format();
 
-        CmdHostId ICmdScriptPattern.CmdHost
+        ToolId ICmdScriptPattern.CmdHost
             => CmdHost;
     }
 }

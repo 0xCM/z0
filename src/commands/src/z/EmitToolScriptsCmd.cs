@@ -7,8 +7,8 @@ namespace Z0
     [Cmd]
     public struct EmitToolScriptsCmd : ICmdSpec<EmitToolScriptsCmd>
     {
-        public CmdHostId Tool;
+        public ToolId Tool;
 
-        public CmdArgs Args {get;}
+        public CmdArgIndex Args {get;}
     }
 }

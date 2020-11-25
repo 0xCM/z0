@@ -13,7 +13,7 @@ namespace Z0
     partial struct Tooling
     {
         [MethodImpl(Inline), Op]
-        public ToolVerb verb(CmdHostId tool, string name)
+        public ToolVerb verb(ToolId tool, string name)
             => new ToolVerb(tool, name);
 
         [MethodImpl(Inline), Op]

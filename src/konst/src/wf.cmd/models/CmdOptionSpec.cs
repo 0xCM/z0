@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Defines a tool option
     /// </summary>
-    public readonly struct CmdOptionSpec : ICmdOption
+    public readonly struct CmdOptionSpec : ICmdOptionSpec
     {
         /// <summary>
         /// The option name
@@ -74,7 +74,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => Cmd.format(this);
+            => CmdOptions.format(this);
 
         public override string ToString()
             => Format();

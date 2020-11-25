@@ -147,10 +147,10 @@ namespace Z0
             where T : struct
                 => TableDir(typeof(T));
 
-        FS.FolderPath Tools(CmdHostId id)
+        FS.FolderPath Tools(ToolId id)
             => ToolRoot() + FS.folder(id.Format());
 
-        FS.FolderPath ToolOutput(CmdHostId id)
+        FS.FolderPath ToolOutput(ToolId id)
             => Tools(id) + FS.folder(PN.output);
 
         FS.FolderPath CapturedExtractDir()

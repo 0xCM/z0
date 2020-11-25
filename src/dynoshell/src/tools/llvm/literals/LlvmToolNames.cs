@@ -2,17 +2,16 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Tools
 {
     using System;
-    using System.Runtime.CompilerServices;
 
-    using static Konst;
-
-    partial struct Tooling
+    partial struct Llvm
     {
-        [MethodImpl(Inline), Op]
-        public static ToolHelp help(ToolId tool, string src)
-            => new ToolHelp(tool, src);
+        public readonly struct ToolNames
+        {
+            public const string LlvmAs = "llvm-as";
+        }
+
     }
 }

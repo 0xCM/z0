@@ -24,7 +24,7 @@ namespace Z0
             HelpExt = FS.ext("help");
         }
 
-        public FS.FilePath Help(CmdHostId tool)
+        public FS.FilePath Help(ToolId tool)
         {
             var match = FS.file(tool.Format());
             var path = HelpDir.Files(HelpExt).Where(f => f.FileName.WithoutExtension.Equals(match)).FirstOrDefault();

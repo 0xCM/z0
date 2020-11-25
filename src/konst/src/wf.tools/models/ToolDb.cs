@@ -41,7 +41,7 @@ namespace Z0
             PrintHelp("llvm-ml");
         }
 
-        public void PrintHelp(CmdHostId tool)
+        public void PrintHelp(ToolId tool)
         {
             var help = Help(tool);
             if(help.IsEmpty)
@@ -84,7 +84,7 @@ namespace Z0
         }
 
 
-        public ToolHelp Help(CmdHostId tool)
+        public ToolHelp Help(ToolId tool)
         {
             var path = _Catalog.Help(tool);
             if(path.IsNonEmpty)

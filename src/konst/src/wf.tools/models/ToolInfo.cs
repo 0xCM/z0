@@ -11,7 +11,7 @@ namespace Z0
     {
         public Name Name;
 
-        public CmdHostId ToolId;
+        public ToolId ToolId;
 
         public UsageSyntax Usage;
 

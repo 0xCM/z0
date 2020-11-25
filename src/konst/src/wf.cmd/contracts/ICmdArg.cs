@@ -9,12 +9,16 @@ namespace Z0
     [Free]
     public interface ICmdArg : ITextual
     {
-        string Key {get;}
+        string Prefix {get;}
+
+        string Name {get;}
+
+        string Specifier {get;}
 
         string Value {get;}
 
         string ITextual.Format()
-            => Render.setting(Key,Value);
+            => Render.setting(Name,Value);
     }
 
     [Free]
@@ -30,9 +34,9 @@ namespace Z0
     public interface ICmdArg<K,T> : ICmdArg<T>
         where K : unmanaged
     {
-        new K Key {get;}
+        // new K Key {get;}
 
-        string ICmdArg.Key
-            => Key.ToString();
+        // string ICmdArg.Key
+        //     => Key.ToString();
     }
 }

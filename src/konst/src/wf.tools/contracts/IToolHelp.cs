@@ -7,7 +7,7 @@ namespace Z0
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface IToolHelp : IContented<string>, IIdentified<CmdHostId>
+    public interface IToolHelp : IContented<string>, IIdentified<ToolId>
     {
 
     }

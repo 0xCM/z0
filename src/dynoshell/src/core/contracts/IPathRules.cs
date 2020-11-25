@@ -4,15 +4,15 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
+    using Free =System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    using static Konst;
 
-    partial struct Tooling
+    [Free]
+    public interface IFsPathRules<H>
+        where H : struct, IFsPathRules<H>
     {
-        [MethodImpl(Inline), Op]
-        public static ToolHelp help(ToolId tool, string src)
-            => new ToolHelp(tool, src);
+        FS.FolderPath Root {get;}
+
+        H Update(FS.FolderPath root);
     }
 }

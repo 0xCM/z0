@@ -48,12 +48,12 @@ namespace Z0.Tools
 
         uint ArgIndex;
 
-        public CmdHostId Id {get;}
+        public ToolId Id {get;}
 
-        public CmdArgs<Flag,object> Args {get;}
+        public CmdArgIndex<Flag,object> Args {get;}
 
         [MethodImpl(Inline)]
-        internal DumpBin(IWfShell wf, CmdHostId id)
+        internal DumpBin(IWfShell wf, ToolId id)
         {
             Wf = wf;
             Id = id;
@@ -66,7 +66,7 @@ namespace Z0.Tools
         {
             if(ArgIndex < MaxVarIndex)
             {
-                Args[ArgIndex++] = Cmd.arg(option, (object)value);
+                Args[ArgIndex++] = CmdArgs.arg(option, (object)value);
             }
             return this;
         }

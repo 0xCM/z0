@@ -29,7 +29,7 @@ namespace Z0
             FieldValues = Records.values(CmdSpec, Fields);
         }
 
-        public CmdHostId ToolId
+        public ToolId ToolId
             => CmdSpec.ToolId;
 
         [MethodImpl(Inline)]

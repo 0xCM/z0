@@ -10,31 +10,29 @@ namespace Z0
     using static Konst;
     using static z;
 
-    using api = Cmd;
-
-    public struct CmdSpec : ICmdSpec, ITextual
+    public struct CmdSpec<T> : ICmdSpec<CmdSpec<T>>, ITextual
+        where T : struct, ICmdSpec<T>
     {
         public CmdId CmdId {get;}
 
         public CmdArgIndex Args {get;}
 
         [MethodImpl(Inline)]
-        public CmdSpec(CmdId id, params CmdArg[] args)
+        public CmdSpec(T spec)
         {
-            CmdId = id;
-            Args = args;
+            CmdId = Cmd.id<T>();
+            Args = CmdArgs.index(spec);
         }
-
         public string Format()
-            => api.format(this);
+            => EmptyString;
 
         public override string ToString()
             => Format();
 
-        public static CmdSpec Empty
+        public static CmdSpec<T> Empty
         {
             [MethodImpl(Inline)]
-            get => new CmdSpec(CmdId.Empty);
+            get => new CmdSpec<T>(default(T));
         }
     }
 }
