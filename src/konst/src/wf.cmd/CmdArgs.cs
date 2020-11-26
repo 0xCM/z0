@@ -130,8 +130,8 @@ namespace Z0
             var t = typeof(T);
             var fields = ClrQuery.fields(t);
             var count = fields.Length;
-            var reflected = alloc<ClrFieldValue>(count);
-            ClrQuery.values(spec, fields, reflected);
+            var reflected = alloc<FieldValue>(count);
+            Records.values(spec, fields, reflected);
             var buffer = alloc<CmdArg>(count);
             var target = span(buffer);
             var source = @readonly(reflected);

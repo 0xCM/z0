@@ -13,7 +13,7 @@ namespace Z0
     partial class BitGrid
     {
         [MethodImpl(Inline)]
-        public static Bit32 readbit<T>(in T src, int bitpos)
+        public static bit readbit<T>(in T src, int bitpos)
             where T : unmanaged
                 => gbits.testbit32(readcell(in src, bitpos), (byte)(bitpos % bitwidth<T>()));
 
@@ -32,7 +32,7 @@ namespace Z0
         /// Reads a bit from a grid
         /// </summary>
         [MethodImpl(Inline)]
-        public static Bit32 readbit<N,T>(N width, in T src, int row, int col)
+        public static bit readbit<N,T>(N width, in T src, int row, int col)
             where T : unmanaged
             where N : unmanaged, ITypeNat
                 => readbit(in src, nat32i<N>()*row + col);
@@ -41,7 +41,7 @@ namespace Z0
         /// Reads a bit from a grid
         /// </summary>
         [MethodImpl(Inline)]
-        public static Bit32 readbit<T>(int width, in T src, int row, int col)
+        public static bit readbit<T>(int width, in T src, int row, int col)
             where T : unmanaged
                 => readbit(in src, width*row + col);
     }

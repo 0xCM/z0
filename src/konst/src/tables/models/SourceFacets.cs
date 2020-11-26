@@ -32,7 +32,6 @@ namespace Z0
 
         public uint RowSize => Facets.RowSize;
 
-
         [MethodImpl(Inline)]
         public SourceFacets(F facets)
         {

@@ -24,8 +24,8 @@ namespace Z0
             => folder + file;
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static FilePath<K> path<K>(string name, K kind)
-            where K : unmanaged
-                => new FilePath<K>(path(name), kind);
+        public static FilePath<K> kind<K>(FS.FilePath src, K kind)
+            where K : struct
+                => new FilePath<K>(src,kind);
     }
 }

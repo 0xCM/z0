@@ -25,8 +25,8 @@ namespace Z0
             for(var i=0u; i<count; i++)
             {
                 ref readonly var srcVal = ref tValues[i];
-                ref readonly var tVal = ref srcVal.Value;
-                ref readonly var srcField = ref srcVal.Field;
+                ref readonly var tVal = ref srcVal.Right;
+                ref readonly var srcField = ref srcVal.Left;
                 seek(dst, i) = new EnumFieldValue<E,T>(srcField, read<E,T>(tVal), tVal);
             }
 

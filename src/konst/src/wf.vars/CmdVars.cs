@@ -19,7 +19,34 @@ namespace Z0
     {
         const NumericKind Closure = UnsignedInts;
 
+        const BindingFlags MemberSelector = BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly;
+
         internal const byte MaxVarCount = 16;
+
+        [MethodImpl(Inline), Op]
+        public static CmdVarSymbol symbol(string name)
+            => new CmdVarSymbol(name);
+
+        public static Index<ICmdVar> members<T>(T set)
+            where T : ICmdVars<T>, new()
+                => typeof(T).GetProperties(MemberSelector).Select(x => (ICmdVar)x.GetValue(set));
+
+        /// <summary>
+        /// Creates a non-valued <see cref='DirVar'/>
+        /// </summary>
+        /// <param name="symbol">The variable symbol</param>
+        [MethodImpl(Inline), Op]
+        public static DirVar dir(CmdVarSymbol symbol)
+            => new DirVar(symbol);
+
+        /// <summary>
+        /// Creates a valued <see cref='DirVar'/>
+        /// </summary>
+        /// <param name="symbol">The variable symbol</param>
+        /// <param name="value">The variable value</param>
+        [MethodImpl(Inline), Op]
+        public static DirVar dir(CmdVarSymbol symbol, FS.FolderPath value)
+            => new DirVar(symbol, value);
 
         /// <summary>
         /// Creates a non-valued <see cref='CmdScriptVar'/>
@@ -77,23 +104,6 @@ namespace Z0
             return dst;
         }
 
-        /// <summary>
-        /// Creates a non-valued <see cref='DirVar'/>
-        /// </summary>
-        /// <param name="symbol">The variable symbol</param>
-        [MethodImpl(Inline), Op]
-        public static DirVar dir(CmdVarSymbol symbol)
-            => new DirVar(symbol);
-
-        /// <summary>
-        /// Creates a valued <see cref='DirVar'/>
-        /// </summary>
-        /// <param name="symbol">The variable symbol</param>
-        /// <param name="value">The variable value</param>
-        [MethodImpl(Inline), Op]
-        public static DirVar dir(CmdVarSymbol symbol, FS.FolderPath value)
-            => new DirVar(symbol, value);
-
         [MethodImpl(Inline), Op]
         public static CmdScriptVar set(CmdScriptVar src, string value)
             => var(src.Symbol, value);
@@ -108,7 +118,33 @@ namespace Z0
             var members = src.Members().View;
             var count = members.Length;
             for(var i=0; i<count; i++)
-                dst.AppendLine(WfScripts.format(skip(members,i)));
+                dst.AppendLine(format(skip(members,i)));
         }
+
+        [Op, Closures(Closure)]
+        public static string format<T>(CmdVarSymbol<T> src)
+            => string.Format("{0}", src.Name);
+
+        [Op]
+        public static string format(CmdVarValue src)
+            => src.Content ?? EmptyString;
+
+        [Op]
+        public static string format(ICmdVar src)
+            => string.Format("{0}={1}", src.Symbol, src.Value);
+
+        [Op]
+        public static string format(CmdVarSymbol src)
+            => string.Format("$({0})",src.Name ?? EmptyString);
+
+        [Op]
+        public static string format(ICmdVars src)
+        {
+            var dst = text.build();
+            foreach(var member in src.Members())
+                dst.AppendLine(format(member));
+            return dst.ToString();
+        }
+
     }
 }

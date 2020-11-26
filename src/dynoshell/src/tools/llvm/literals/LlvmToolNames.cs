@@ -10,8 +10,13 @@ namespace Z0.Tools
     {
         public readonly struct ToolNames
         {
-            public const string LlvmAs = "llvm-as";
-        }
+            public static ToolId @as => "llvm-as";
 
+            public static ToolId tblgen => "llvm-tblgen";
+
+            public static ToolId mc => "llvm-mc";
+
+            public static ToolId opt => "opt";
+        }
     }
 }

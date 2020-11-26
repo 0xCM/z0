@@ -111,10 +111,10 @@ namespace Z0
             var left = z.vparts(n,0,1,2,3);
             var right = z.vparts(n,4,5,6,7);
 
-            Claim.veq(z.vparts(n,0,5,2,7), z.vblend(left, right, Blend4x64.LRLR));
-            Claim.veq(z.vparts(n,4,1,6,3), z.vblend(left, right, Blend4x64.RLRL));
-            Claim.veq(z.vparts(n,0,1,2,3), z.vblend(left, right, Blend4x64.LLLL));
-            Claim.veq(z.vparts(n,4,5,6,7), z.vblend(left, right, Blend4x64.RRRR));
+            Claim.veq(z.vparts(n,0,5,2,7), z.vblend4x64(left, right, Blend4x64.LRLR));
+            Claim.veq(z.vparts(n,4,1,6,3), z.vblend4x64(left, right, Blend4x64.RLRL));
+            Claim.veq(z.vparts(n,0,1,2,3), z.vblend4x64(left, right, Blend4x64.LLLL));
+            Claim.veq(z.vparts(n,4,5,6,7), z.vblend4x64(left, right, Blend4x64.RRRR));
         }
 
         public void vblend_2x64_basecases()
@@ -123,10 +123,10 @@ namespace Z0
             var w = w64;
             var left =  z.vparts(0,1);
             var right = z.vparts(4,5);
-            Claim.veq(z.vparts(0, 5), z.vblend(left, right, Blend2x64.LR));
-            Claim.veq(z.vparts(4, 1), z.vblend(left, right, Blend2x64.RL));
-            Claim.veq(z.vparts(0, 1), z.vblend(left, right, Blend2x64.LL));
-            Claim.veq(z.vparts(4, 5), z.vblend(left, right, Blend2x64.RR));
+            Claim.veq(z.vparts(0, 5), z.vblend2x64(left, right, Blend2x64.LR));
+            Claim.veq(z.vparts(4, 1), z.vblend2x64(left, right, Blend2x64.RL));
+            Claim.veq(z.vparts(0, 1), z.vblend2x64(left, right, Blend2x64.LL));
+            Claim.veq(z.vparts(4, 5), z.vblend2x64(left, right, Blend2x64.RR));
         }
 
         public void vblend_4x32_basecases()

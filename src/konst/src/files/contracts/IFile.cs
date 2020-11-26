@@ -8,6 +8,7 @@ namespace Z0
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
+
     [Free]
     public interface IFile : ITextual
     {
@@ -22,9 +23,10 @@ namespace Z0
     /// </summary>
     /// <typeparam name="K">The classifier type</typeparam>
     [Free]
-    public interface IFile<K> : IFile
-        where K : unmanaged
+    public interface IFile<F,K> : IFile, IFileKind<K>
+        where F : struct, IFile<F,K>
+        where K : struct
     {
-        K Kind {get;}
+
     }
 }

@@ -28,7 +28,7 @@ namespace Z0
             var members = src.Members().View;
             var count = members.Length;
             for(var i=0; i<count; i++)
-                dst.AppendLine(format(skip(members,i)));
+                dst.AppendLine(CmdVars.format(skip(members,i)));
         }
     }
 }

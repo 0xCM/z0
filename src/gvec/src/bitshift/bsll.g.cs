@@ -96,7 +96,7 @@ namespace Z0
             else if(typeof(T) == typeof(long))
                 return generic<T>(z.vbsll(v64i(x), count));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
        }
     }
 }

@@ -27,7 +27,7 @@ namespace Z0
                 => Data.Storage.Cast<ICmdVar>().Array();
 
             public string Format()
-                => format(this);
+                => CmdVars.format(this);
 
             public override string ToString()
                 => Format();

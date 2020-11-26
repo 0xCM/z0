@@ -25,4 +25,9 @@ namespace Z0
         string ITextual.Format()
             => AppName;
     }
+
+    public interface IWfContext<S> : IWfContext
+    {
+        S State {get;}
+    }
 }

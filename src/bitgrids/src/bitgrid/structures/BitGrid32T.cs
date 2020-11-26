@@ -29,7 +29,11 @@ namespace Z0
         /// <summary>
         /// The number of grid cells := {1 | 2 | 4}
         /// </summary>
-        public uint CellCount { [MethodImpl(Inline)] get => 4/size<T>(); }
+        public uint CellCount
+        {
+            [MethodImpl(Inline)]
+            get => 4/size<T>();
+        }
 
         public uint Content { [MethodImpl(Inline)] get => Data; }
 

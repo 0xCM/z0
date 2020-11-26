@@ -21,4 +21,11 @@ namespace Z0
     {
 
     }
+
+    public interface IFsEntry<F,K>
+        where F : struct, IFsEntry<F,K>
+        where K : unmanaged
+    {
+        K Kind {get;}
+    }
 }

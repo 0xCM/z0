@@ -10,8 +10,7 @@ namespace Z0
     using static Konst;
 
     public class t_bg_bitread : t_bitgrids<t_bg_bitread>
-    {        
-
+    {
         public void bg_bitread_20x20x32()
             => check_bitgrid_read<uint>(20,20);
 
@@ -54,7 +53,6 @@ namespace Z0
         public void bg_bitwrite_249x128x8_bench()
             => bg_bitwrite_bench<byte>(249,128);
 
-
         /// <summary>
         /// Verifies correct function of the generic bitgrid read operation
         /// </summary>
@@ -68,24 +66,23 @@ namespace Z0
             {
                 var src = Random.BitGrid<T>(rows,cols);
                 var dstA = BitGrid.alloc<T>(rows,cols);
-                var dstB = BitGrid.alloc<T>(rows,cols);                
+                var dstB = BitGrid.alloc<T>(rows,cols);
 
                 var bitpos = 0;
                 for(var row = 0; row < rows; row++)
                 for(var col = 0; col < cols; col++, bitpos++)
                 {
-                    var b1 = BitGrid.readbit(src.ColCount, in src.Head, row, col);
-                    var b2 = BitGrid.readbit(in src.Head, bitpos);
+                    var b1 = BitGrid.readbit(src.ColCount, src.Head, row, col);
+                    var b2 = BitGrid.readbit(src.Head, bitpos);
                     Claim.Require(b1 == b2);
 
                     dstA[row,col] = b1;
-                    dstB.SetBit(bitpos, b2);                    
+                    dstB.SetBit(bitpos, b2);
                 }
                 var bsA = dstA.ToBitString();
                 var bsB = dstB.ToBitString();
                 Claim.eq(bsA, bsB);
             }
         }
-
     }
 }

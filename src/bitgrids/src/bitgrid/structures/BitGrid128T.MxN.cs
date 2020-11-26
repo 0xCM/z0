@@ -33,65 +33,6 @@ namespace Z0
         /// </summary>
         public const int ByteCount = 16;
 
-        [MethodImpl(Inline)]
-        public static implicit operator Vector128<T>(in BitGrid128<M,N,T> src)
-            => src.Data;
-
-        [MethodImpl(Inline)]
-        public static implicit operator SpanBlock128<T>(in BitGrid128<M,N,T> src)
-            => src.Data.ToBlock();
-
-        /// <summary>
-        /// Creates a grid from the leading source block
-        /// </summary>
-        /// <param name="src">The data source</param>
-        [MethodImpl(Inline)]
-        public static implicit operator BitGrid128<M,N,T>(in SpanBlock128<T> src)
-            => new BitGrid128<M,N,T>(src);
-
-        /// <summary>
-        /// Creates a grid from a generic vector
-        /// </summary>
-        /// <param name="src">The data source</param>
-        [MethodImpl(Inline)]
-        public static implicit operator BitGrid128<M,N,T>(Vector128<T> src)
-            => new BitGrid128<M,N,T>(src);
-
-        /// <summary>
-        /// Creates a grid from a 128x8u vector
-        /// </summary>
-        /// <param name="src">The data source</param>
-        [MethodImpl(Inline)]
-        public static implicit operator BitGrid128<M,N,T>(Vector128<byte> src)
-            => new BitGrid128<M,N,T>(src.As<byte,T>());
-
-        [MethodImpl(Inline)]
-        public static BitGrid128<M,N,T> operator & (in BitGrid128<M,N,T> gx, in BitGrid128<M,N,T> gy)
-            => BitGrid.and(gx,gy);
-
-        [MethodImpl(Inline)]
-        public static BitGrid128<M,N,T> operator | (in BitGrid128<M,N,T> gx, in BitGrid128<M,N,T> gy)
-            => BitGrid.or(gx, gy);
-
-        [MethodImpl(Inline)]
-        public static BitGrid128<M,N,T> operator ^ (in BitGrid128<M,N,T> gx, in BitGrid128<M,N,T> gy)
-            => BitGrid.xor(gx, gy);
-
-        [MethodImpl(Inline)]
-        public static BitGrid128<M,N,T> operator ~ (in BitGrid128<M,N,T> gx)
-            => BitGrid.not(gx);
-
-        [MethodImpl(Inline)]
-        public static BitGrid128<M,N,T> operator - (in BitGrid128<M,N,T> gx)
-            => BitGrid.negate(gx);
-
-        [MethodImpl(Inline)]
-        public static Bit32 operator ==(in BitGrid128<M,N,T> g1, in BitGrid128<M,N,T> g2)
-            => BitGrid.same(g1,g2);
-
-        [MethodImpl(Inline)]
-        public static Bit32 operator !=(in BitGrid128<M,N,T> g1, in BitGrid128<M,N,T> g2)
-            => !BitGrid.same(g1,g2);
 
         [MethodImpl(Inline)]
         internal BitGrid128(Vector128<T> data)
@@ -154,5 +95,65 @@ namespace Z0
 
         public override int GetHashCode()
             => throw new NotSupportedException();
+
+        [MethodImpl(Inline)]
+        public static implicit operator Vector128<T>(in BitGrid128<M,N,T> src)
+            => src.Data;
+
+        [MethodImpl(Inline)]
+        public static implicit operator SpanBlock128<T>(in BitGrid128<M,N,T> src)
+            => src.Data.ToBlock();
+
+        /// <summary>
+        /// Creates a grid from the leading source block
+        /// </summary>
+        /// <param name="src">The data source</param>
+        [MethodImpl(Inline)]
+        public static implicit operator BitGrid128<M,N,T>(in SpanBlock128<T> src)
+            => new BitGrid128<M,N,T>(src);
+
+        /// <summary>
+        /// Creates a grid from a generic vector
+        /// </summary>
+        /// <param name="src">The data source</param>
+        [MethodImpl(Inline)]
+        public static implicit operator BitGrid128<M,N,T>(Vector128<T> src)
+            => new BitGrid128<M,N,T>(src);
+
+        /// <summary>
+        /// Creates a grid from a 128x8u vector
+        /// </summary>
+        /// <param name="src">The data source</param>
+        [MethodImpl(Inline)]
+        public static implicit operator BitGrid128<M,N,T>(Vector128<byte> src)
+            => new BitGrid128<M,N,T>(src.As<byte,T>());
+
+        [MethodImpl(Inline)]
+        public static BitGrid128<M,N,T> operator & (in BitGrid128<M,N,T> gx, in BitGrid128<M,N,T> gy)
+            => BitGrid.and(gx,gy);
+
+        [MethodImpl(Inline)]
+        public static BitGrid128<M,N,T> operator | (in BitGrid128<M,N,T> gx, in BitGrid128<M,N,T> gy)
+            => BitGrid.or(gx, gy);
+
+        [MethodImpl(Inline)]
+        public static BitGrid128<M,N,T> operator ^ (in BitGrid128<M,N,T> gx, in BitGrid128<M,N,T> gy)
+            => BitGrid.xor(gx, gy);
+
+        [MethodImpl(Inline)]
+        public static BitGrid128<M,N,T> operator ~ (in BitGrid128<M,N,T> gx)
+            => BitGrid.not(gx);
+
+        [MethodImpl(Inline)]
+        public static BitGrid128<M,N,T> operator - (in BitGrid128<M,N,T> gx)
+            => BitGrid.negate(gx);
+
+        [MethodImpl(Inline)]
+        public static Bit32 operator ==(in BitGrid128<M,N,T> g1, in BitGrid128<M,N,T> g2)
+            => BitGrid.same(g1,g2);
+
+        [MethodImpl(Inline)]
+        public static Bit32 operator !=(in BitGrid128<M,N,T> g1, in BitGrid128<M,N,T> g2)
+            => !BitGrid.same(g1,g2);
     }
 }

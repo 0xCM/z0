@@ -25,7 +25,7 @@ namespace Z0
             => new Index<ICmdVar>(Data.Storage.Select(x => z.cast<ICmdVar>(x)));
 
         public string Format()
-            => format(this);
+            => CmdVars.format(this);
 
         public override string ToString()
             => Format();

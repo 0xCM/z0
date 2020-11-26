@@ -14,6 +14,7 @@ namespace Z0
     [ApiHost]
     public readonly partial struct Records
     {
+
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static DynamicRow<T> row<T>(uint cells)
             where T : struct
@@ -53,6 +54,11 @@ namespace Z0
             dst.Definition = src;
             return ref dst;
         }
+
+        [MethodImpl(Inline)]
+        public static FieldValue<S,T> value<S,T>(S src, FieldInfo field, T value)
+            where S : struct
+                => new FieldValue<S,T>(src, field, value);
 
         public static RecordFieldValues<T> values<T>(in T src, RecordFields fields)
             where T : struct

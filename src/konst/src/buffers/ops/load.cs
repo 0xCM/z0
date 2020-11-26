@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
     using static Konst;
 
@@ -30,6 +29,5 @@ namespace Z0
             var target = sys.clear(z.cover(dst.Address.Pointer<byte>(), dst.BufferSize));
             return sys.copy(source,target);
         }
-
     }
 }

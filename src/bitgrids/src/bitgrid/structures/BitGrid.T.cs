@@ -96,7 +96,7 @@ namespace Z0
             => BitGrid.setbit(index, state, ref Head);
 
         [MethodImpl(Inline)]
-        public Bit32 ReadBit(int index)
+        public bit ReadBit(int index)
             => BitGrid.readbit(in Head, index);
 
         /// <summary>

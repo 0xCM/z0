@@ -7,7 +7,6 @@ namespace Z0.Tools
     using System;
     using System.Diagnostics;
 
-
     public readonly partial struct Llvm
     {
         public static Llvm service(IWfShell wf)
@@ -26,12 +25,10 @@ namespace Z0.Tools
         public LlvmPaths Paths()
             => new LlvmPaths(SrcRoot);
 
-
-
         public CmdLine llvm_as(FS.FilePath input, FS.FilePath output)
         {
             var dst = Buffers.text();
-            var name = LlvmAsCmd.ToolName;
+            var name = ToolNames.@as;
             dst.AppendFormat("{0}", name);
             dst.AppendFormat(" -o {0}", output.Format(PathSeparator.BS));
             dst.AppendFormat(" {0}", input.Format(PathSeparator.BS));

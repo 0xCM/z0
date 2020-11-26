@@ -18,7 +18,7 @@ namespace Meta.Core
         /// Compares two records of the same type for equality
         /// </summary>
         /// <typeparam name="R">The record type</typeparam>
-        /// <param name="r1">The first recrd</param>
+        /// <param name="r1">The first record</param>
         /// <param name="r2">The second record</param>
         /// <returns></returns>
         internal static bool RecordEquals<R>(this R r1, R r2)
@@ -29,7 +29,7 @@ namespace Meta.Core
         /// Compares a record and an untyped value for equality
         /// </summary>
         /// <typeparam name="R">The type for which the comparison is effected</typeparam>
-        /// <param name="r1">The first recrd</param>
+        /// <param name="r1">The first record</param>
         /// <param name="r2">The second record</param>
         /// <returns></returns>
         internal static bool RecordEquals<R>(this R r1, object r2)
@@ -122,7 +122,7 @@ namespace Meta.Core
         public static Record<X1, X2, X3, X4, X5, X6, X7> AsRecord<X1, X2, X3, X4, X5, X6, X7>(this (X1 x1, X2 x2, X3 x3, X4 x4, X5 x5, X6 x6, X7 x7) x)
                 => Record.make(x);
 
-        
+
 
     }
 

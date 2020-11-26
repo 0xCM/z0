@@ -11,9 +11,4 @@ namespace Z0
 
     }
 
-    public interface IBitFormatter<H,T> : IBitFormatter<H>, IDataFormatter<BitFormat,T>
-        where T : struct
-        where H : IBitFormatter<H,T>
-    {
-    }
 }

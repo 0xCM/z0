@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Reflection;
 
     using static Konst;
     using static z;
@@ -16,6 +15,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static WfTokenizer tokenizer()
             => new WfTokenizer();
+
+        [MethodImpl(Inline), Op]
+        public static IWfContext<C> inject<C>(IWfContext src, C data)
+            => new WfContext<C>(src, data);
 
         [Op]
         public static IWfShell create(string[] args, bool verbose = false)

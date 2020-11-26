@@ -4,22 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static Konst;
+    using System;
 
-    public interface IFileKind : ITextual
-    {
-        string Name {get;}
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-        FS.FileExt Ext
-            => FS.ext(Name);
-        string ITextual.Format()
-            => Name;
-    }
 
-    public interface IFileKind<F> : IFileKind
-        where F : struct, IFileKind<F>
-    {
-        string IFileKind.Name
-            => typeof(F).Name;
-    }
+
 }

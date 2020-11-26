@@ -63,16 +63,16 @@ namespace Z0
         /// <param name="src"></param>
         /// <typeparam name="T"></typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static ClrFieldValues<T> values<T>(Type src)
+        public static Paired<FieldInfo,T>[] values<T>(Type src)
             where T : unmanaged
-                => api.search<T>(src).Select(f => (f, sys.constant<T>(f)));
+                => api.search<T>(src).Select(f => paired(f, sys.constant<T>(f)));
 
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public ClrFieldValues<T> values<T>(Type[] types)
+        public Paired<FieldInfo,T>[] values<T>(Type[] types)
             where T : unmanaged
         {
-            var literals = list<ClrFieldValue<T>>();
+            var literals = list<Paired<FieldInfo,T>>();
             for(var i=0u; i<types.Length; i++)
             {
                 var values = values<T>(types[i]).ToSpan();

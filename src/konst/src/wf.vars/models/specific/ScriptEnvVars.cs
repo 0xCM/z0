@@ -23,11 +23,11 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public Index<ICmdVar> Members()
-                => members(this);
+                => CmdVars.members(this);
 
             [MethodImpl(Inline)]
             public string Format()
-                => format(this);
+                => CmdVars.format(this);
 
             public override string ToString()
                 => Format();

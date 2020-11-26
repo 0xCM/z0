@@ -8,11 +8,9 @@ namespace Z0.Tools
 
     partial struct Llvm
     {
-        [Tool(ToolName)]
+        [Tool]
         public struct LlvmAsCmd : IToolCmd<LlvmAsCmd>
         {
-            public const string ToolName = ToolNames.LlvmAs;
-
             public FS.FilePath SrcPath;
 
             public FS.FilePath DstPath;

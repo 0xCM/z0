@@ -32,25 +32,6 @@ namespace Z0
         /// </summary>
         public const int ByteCount = 2;
 
-        [MethodImpl(Inline)]
-        public static implicit operator BitGrid16<M,N,T>(ushort src)
-            => new BitGrid16<M,N,T>(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator ushort(BitGrid16<M,N,T> src)
-            => src.Data;
-
-        [MethodImpl(Inline)]
-        public static implicit operator BitGrid16<M,N,T>(in SpanBlock16<T> src)
-            => new BitGrid16<M,N,T>(src);
-
-        [MethodImpl(Inline)]
-        public static bool operator ==(BitGrid16<M,N,T> g1, BitGrid16<M,N,T> g2)
-            => g1.Equals(g2);
-
-        [MethodImpl(Inline)]
-        public static bool operator !=(BitGrid16<M,N,T> g1, BitGrid16<M,N,T> g2)
-            => !g1.Equals(g2);
 
         [MethodImpl(Inline)]
         internal BitGrid16(ushort src)
@@ -142,5 +123,25 @@ namespace Z0
 
         public override int GetHashCode()
             => throw new NotSupportedException();
+
+        [MethodImpl(Inline)]
+        public static implicit operator BitGrid16<M,N,T>(ushort src)
+            => new BitGrid16<M,N,T>(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator ushort(BitGrid16<M,N,T> src)
+            => src.Data;
+
+        [MethodImpl(Inline)]
+        public static implicit operator BitGrid16<M,N,T>(in SpanBlock16<T> src)
+            => new BitGrid16<M,N,T>(src);
+
+        [MethodImpl(Inline)]
+        public static bool operator ==(BitGrid16<M,N,T> g1, BitGrid16<M,N,T> g2)
+            => g1.Equals(g2);
+
+        [MethodImpl(Inline)]
+        public static bool operator !=(BitGrid16<M,N,T> g1, BitGrid16<M,N,T> g2)
+            => !g1.Equals(g2);
     }
 }

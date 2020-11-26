@@ -114,10 +114,6 @@ namespace Z0
         FS.FilePath Table<S>(string id, S subject, FS.FileExt? ext = null)
             => Table<S>(Root, id, subject, ext);
 
-        FS.FilePath Table<K>(string id, K kind)
-            where K : unmanaged,  IFileKind<K>
-                => TableRoot() + FS.file(id, kind.Ext);
-
         FS.FilePath Table(string id, PartId part, FS.FileExt? ext = null)
             => TableRoot() +  FS.folder(id) + FS.file(string.Format(RP.SlotDot2, id, part.Format()), ext ?? DefaultFileExt);
 

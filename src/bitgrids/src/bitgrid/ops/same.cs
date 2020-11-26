@@ -12,29 +12,29 @@ namespace Z0
     partial class BitGrid
     {
         /// <summary>
-        /// Returns 1 if the source grids have identical conent and 0 otherwise
+        /// Returns 1 if the source grids have identical content and 0 otherwise
         /// </summary>
         /// <param name="gx">The left grid</param>
         /// <param name="gy">The right grid</param>
         /// <typeparam name="T">The grid cell type</typeparam>
         [MethodImpl(Inline)]
-        public static Bit32 same<T>(BitGrid32<T> gx, BitGrid32<T> gy)
+        public static bit same<T>(BitGrid32<T> gx, BitGrid32<T> gy)
             where T : unmanaged
                 => math.eq(gx,gy);
 
         /// <summary>
-        /// Returns 1 if the source grids have identical conent and 0 otherwise
+        /// Returns 1 if the source grids have identical content and 0 otherwise
         /// </summary>
         /// <param name="gx">The left grid</param>
         /// <param name="gy">The right grid</param>
         /// <typeparam name="T">The grid cell type</typeparam>
         [MethodImpl(Inline)]
-        public static Bit32 same<T>(BitGrid64<T> gx, BitGrid64<T> gy)
+        public static bit same<T>(BitGrid64<T> gx, BitGrid64<T> gy)
             where T : unmanaged
                 => math.eq(gx,gy);
 
         /// <summary>
-        /// Returns 1 if the source grids have identical conent and 0 otherwise
+        /// Returns 1 if the source grids have identical content and 0 otherwise
         /// </summary>
         /// <param name="gx">The left grid</param>
         /// <param name="gy">The right grid</param>
@@ -42,14 +42,14 @@ namespace Z0
         /// <typeparam name="N"></typeparam>
         /// <typeparam name="T">The grid cell type</typeparam>
         [MethodImpl(Inline)]
-        public static Bit32 same<M,N,T>(in BitGrid128<M,N,T> gx, in BitGrid128<M,N,T> gy)
+        public static bit same<M,N,T>(in BitGrid128<M,N,T> gx, in BitGrid128<M,N,T> gy)
             where T : unmanaged
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
                 => gvec.vsame<T>(gx,gy);
 
         /// <summary>
-        /// Returns 1 if the source grids have identical conent and 0 otherwise
+        /// Returns 1 if the source grids have identical content and 0 otherwise
         /// </summary>
         /// <param name="gx">The left grid</param>
         /// <param name="gy">The right grid</param>
@@ -57,14 +57,14 @@ namespace Z0
         /// <typeparam name="N"></typeparam>
         /// <typeparam name="T">The grid cell type</typeparam>
         [MethodImpl(Inline)]
-        public static Bit32 same<M,N,T>(in BitGrid256<M,N,T> gx, in BitGrid256<M,N,T> gy)
+        public static bit same<M,N,T>(in BitGrid256<M,N,T> gx, in BitGrid256<M,N,T> gy)
             where T : unmanaged
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
                 => gvec.vsame<T>(gx,gy);
 
         [MethodImpl(Inline)]
-        public static Bit32 same<T>(in BitGrid<T> gx, in BitGrid<T> gy)
+        public static bit same<T>(in BitGrid<T> gx, in BitGrid<T> gy)
             where T : unmanaged
         {
             var blocks = gx.BlockCount;
@@ -75,7 +75,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// Returns 1 if the source grids have identical conent and 0 otherwise
+        /// Returns 1 if the source grids have identical content and 0 otherwise
         /// </summary>
         /// <param name="gx">The left grid</param>
         /// <param name="gy">The right grid</param>
@@ -83,7 +83,7 @@ namespace Z0
         /// <typeparam name="N"></typeparam>
         /// <typeparam name="T">The grid cell type</typeparam>
         [MethodImpl(Inline)]
-        public static Bit32 same<M,N,T>(in BitGrid<M,N,T> gx, in BitGrid<M,N,T> gy)
+        public static bit same<M,N,T>(in BitGrid<M,N,T> gx, in BitGrid<M,N,T> gy)
             where T : unmanaged
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat

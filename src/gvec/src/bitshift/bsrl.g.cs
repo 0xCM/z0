@@ -14,7 +14,7 @@ namespace Z0
     partial class gvec
     {
         /// <summary>
-        /// Applies a rigtward shift over the full 128 vector bits at byte-level resolution
+        /// Applies a rightward shift over the full 128 vector bits at byte-level resolution
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <param name="count">The number of bytes to shift</param>

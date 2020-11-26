@@ -54,21 +54,6 @@ namespace Z0
         /// </summary>
         public ref T this[int index] { [MethodImpl(Inline)] get => ref Cell(index);}
 
-        [MethodImpl(Inline)]
-        public static implicit operator ushort(BitGrid16<T> src)
-            => src.Data;
-
-        [MethodImpl(Inline)]
-        public static implicit operator BitGrid16<T>(ushort src)
-            => new BitGrid16<T>(src);
-
-        [MethodImpl(Inline)]
-        public static Bit32 operator ==(BitGrid16<T> gx, BitGrid16<T> gy)
-            => gx.Data == gy.Data;
-
-        [MethodImpl(Inline)]
-        public static Bit32 operator !=(BitGrid16<T> gx, BitGrid16<T> gy)
-            => gx.Data != gy.Data;
 
         [MethodImpl(Inline)]
         internal BitGrid16(ushort data)
@@ -95,5 +80,22 @@ namespace Z0
 
         public override int GetHashCode()
             => throw new NotSupportedException();
+
+        [MethodImpl(Inline)]
+        public static implicit operator ushort(BitGrid16<T> src)
+            => src.Data;
+
+        [MethodImpl(Inline)]
+        public static implicit operator BitGrid16<T>(ushort src)
+            => new BitGrid16<T>(src);
+
+        [MethodImpl(Inline)]
+        public static Bit32 operator ==(BitGrid16<T> gx, BitGrid16<T> gy)
+            => gx.Data == gy.Data;
+
+        [MethodImpl(Inline)]
+        public static Bit32 operator !=(BitGrid16<T> gx, BitGrid16<T> gy)
+            => gx.Data != gy.Data;
+
     }
 }
