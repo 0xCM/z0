@@ -5,14 +5,32 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-       
+
     using static Konst;
 
     public struct num<T>
         where T : unmanaged
     {
+        public T Value;
+
+        [MethodImpl(Inline)]
+        public num(T value)
+            => Value = value;
+
+        [MethodImpl(Inline)]
+        public bool Equals(num<T> src)
+            => num.eq(this, src);
+
+        public override int GetHashCode()
+            => Value.GetHashCode();
+
+        public override string ToString()
+            => Value.ToString();
+
+        public override bool Equals(object src)
+            => src is num<T> x && Equals(x);
+
         [MethodImpl(Inline)]
         public static bool operator ==(num<T> a, num<T> b)
             => num.eq(a,b);
@@ -52,7 +70,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static num<T> operator /(num<T> a, num<T> b)
             => num.div(a,b);
-        
+
         [MethodImpl(Inline)]
         public static num<T> operator %(num<T> a, num<T> b)
             => num.mod(a,b);
@@ -90,23 +108,8 @@ namespace Z0
             => src.Value;
 
         [MethodImpl(Inline)]
-        public num(T value)
-            => Value = value;
+        public static implicit operator num<T>(T src)
+            => new num<T>(src);
 
-        public T Value;
-
-        [MethodImpl(Inline)]
-        public bool Equals(num<T> src)
-            => num.eq(this, src);
-
-        public override int GetHashCode()
-            => Value.GetHashCode();
-
-        public override string ToString()
-            => Value.ToString();        
-
-        public override bool Equals(object src)
-            => src is num<T> x && Equals(x);
     }
-
 }

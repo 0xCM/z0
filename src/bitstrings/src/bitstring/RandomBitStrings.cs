@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="random">The random source</param>
         /// <param name="len">The bitstring length</param>
         [MethodImpl(Inline)]
-        public static BitString BitString(this IPolyrand random, int len)
+        public static BitString BitString(this IPolySourced random, int len)
             => BS.load(random.BitStream<byte>().Take((int)len).ToArray());
 
         /// <summary>
@@ -31,7 +31,7 @@ namespace Z0
         /// <param name="minlen">The minimum length of the bitstring</param>
         /// <param name="maxlen">The maximum length of the bitstring</param>
         [MethodImpl(Inline)]
-        public static BitString BitString(this IPolyrand random, int minlen, int maxlen)
+        public static BitString BitString(this IPolySourced random, int minlen, int maxlen)
             => random.BitString(random.Next<int>(minlen, maxlen + 1));
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace Z0
         /// <param name="minlen">The minimum length of the bitstring</param>
         /// <param name="maxlen">The maximum length of the bitstring</param>
         [MethodImpl(Inline)]
-        public static BitString BitString(this IPolyrand random, Interval<int> length)
+        public static BitString BitString(this IPolySourced random, Interval<int> length)
             => random.BitString(length.Left, length.Right);
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace Z0
         /// <param name="random">The random source</param>
         /// <param name="len">The bitstring length</param>
         [MethodImpl(Inline)]
-        public static BitString BitString<N>(this IPolyrand random, N n = default)
+        public static BitString BitString<N>(this IPolySourced random, N n = default)
             where N : unmanaged, ITypeNat
                 => random.BitString((int)n.NatValue);
 
@@ -60,7 +60,7 @@ namespace Z0
         /// <param name="random">The random source</param>
         /// <param name="minlen">The minimum length of the bitstring</param>
         /// <param name="maxlen">The maximum length of the bitstring</param>
-        public static IRngStream<BitString> BitStrings(this IPolyrand random, int minlen, int maxlen)
+        public static IPolyStream<BitString> BitStrings(this IPolySourced random, int minlen, int maxlen)
         {
             IEnumerable<BitString> produce()
             {
@@ -68,7 +68,7 @@ namespace Z0
                     yield return random.BitString(minlen, maxlen);
             }
 
-            return PolyStreams.create(produce(), random.RngKind);
+            return PolyStreams.create(produce());
         }
     }
 }

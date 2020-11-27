@@ -13,7 +13,7 @@ namespace Z0
 
     partial class VServices
     {
-        public readonly struct Ones128<T> : IEmitter128<T>
+        public readonly struct Ones128<T> : SFx.IEmitter128<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]
@@ -21,7 +21,7 @@ namespace Z0
                 => gvec.vones<T>(w128);
         }
 
-        public readonly struct Ones256<T> : IEmitter256<T>
+        public readonly struct Ones256<T> : SFx.IEmitter256<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]

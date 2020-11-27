@@ -141,9 +141,6 @@ namespace Z0
         protected TChecks Claim
             => Checks.Checker;
 
-        protected TCheckInvariant ClaimInvariant
-            => Claim;
-
         protected TCheckPrimal ClaimPrimal
             => Claim;
 
@@ -152,10 +149,6 @@ namespace Z0
 
         protected TCheckNumeric ClaimNumeric
             => CheckNumeric.Checker;
-
-        protected TCheckEquatable ClaimEquatable
-            => CheckEquatable.Checker;
-
 
         public ITestLogPaths TestLogPaths
             => AppPaths.TestLogs;
@@ -177,9 +170,6 @@ namespace Z0
              [MethodImpl(Inline)]
              get => FolderPath.Define(TestRoot.Name) + FolderName.Define(GetType().Name);
         }
-
-        protected string caller([Caller] string caller = null)
-            => caller;
 
         protected string CaseName<C>(string root, C t = default)
             where C : unmanaged

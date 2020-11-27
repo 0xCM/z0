@@ -12,11 +12,4 @@ namespace Z0
     {
 
     }
-
-    [Free]
-    public interface IPolyStream : IPolySourced
-    {
-        IPolyStream<T> Stream<T>()
-            where T : struct;
-    }
 }

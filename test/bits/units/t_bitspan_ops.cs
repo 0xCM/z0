@@ -41,7 +41,7 @@ namespace Z0
             var x = 0b10100001100101010001u;
             var bsSrc = "0000010100001100101010001";
 
-            var bs1 = BitSpans.parse(bsSrc);
+            var bs1 = BitSpans.parse32(bsSrc);
             Claim.eq((int)bs1.Length, bsSrc.Length);
 
             var bs2 = BitSpans.from(x);
@@ -95,7 +95,7 @@ namespace Z0
 
             for(var i=0; i<RepCount; i++)
             {
-                Random.SpanFill(packed);
+                Random.Fill(packed);
                 BitPack.unpack(packed, unpacked);
                 var bitspan = BitSpans.load(unpacked.As<Bit32>());
                 bitspan_check(packed,bitspan);
@@ -249,7 +249,7 @@ namespace Z0
 
             for(var i=0; i<RepCount; i++)
             {
-                Random.SpanFill(buffer);
+                Random.Fill(buffer);
                 var bitspan = BitSpans.load(buffer);
                 bitspan_check(buffer.Bytes(),bitspan);
             }
@@ -300,7 +300,7 @@ namespace Z0
                     var x0 = Random.Next<T>();
                     var x1 = BitSpans.from(x0);
                     var x2 = x1.Format();
-                    var x3 = BitSpans.parse(x2);
+                    var x3 = BitSpans.parse32(x2);
                     var x4 = x3.Convert<T>();
                     Claim.eq(x0,x4);
                 }
@@ -309,7 +309,7 @@ namespace Z0
             CheckAction(check,CaseName(ApiIdentify.sfunc<T>("bsparse")));
         }
 
-        void bitspan_check(Span<byte> packed, BitSpan bitspan)
+        void bitspan_check(Span<byte> packed, BitSpan32 bitspan)
         {
             var bitcount = bitspan.Length;
             for(int i=0, k = 0; i < packed.Length; i++, k += 8)

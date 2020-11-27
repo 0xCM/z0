@@ -9,8 +9,6 @@ namespace Z0
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
 
-    using static Konst;
-
     public interface ITestCaseIdentity : TValidator
     {
         /// <summary>

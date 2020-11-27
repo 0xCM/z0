@@ -45,6 +45,5 @@ namespace Z0
 
             return new Sink<T>(Target);
         }
-
     }
 }

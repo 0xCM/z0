@@ -23,13 +23,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                unpack(uint8(src), dst);
+                unpack8(uint8(src), dst);
             else if(typeof(T) == typeof(ushort))
-                unpack(uint16(src), dst);
+                unpack16(uint16(src), dst);
             else if(typeof(T) == typeof(uint))
-                unpack(uint32(src), dst);
+                unpack32(uint32(src), dst);
             else if(typeof(T) == typeof(ulong))
-                unpack(uint64(src), dst);
+                unpack64(uint64(src), dst);
             else
                 throw no<T>();
         }

@@ -19,7 +19,7 @@ namespace Z0.Logix
 
         public void unary_truth()
         {
-            using var dst = UnitWriter(FileName.define(caller()));
+            using var dst = UnitWriter(FS.file(Validity.caller().Name));
             var src = bitlogix.UnaryOpKinds;
             TabularTruth.save(src, dst);
             //TabularTruth.save(dst,ArityValue.Unary);
@@ -27,7 +27,7 @@ namespace Z0.Logix
 
         public void binary_truth()
         {
-            using var dst = UnitWriter(FileName.define(caller()));
+            using var dst = UnitWriter(FS.file(Validity.caller().Name));
             var src = bitlogix.BinaryOpKinds;
             TabularTruth.save(src, dst);
             //TabularTruth.save(dst,ArityValue.Binary);
@@ -35,7 +35,7 @@ namespace Z0.Logix
 
         public void ternary_truth()
         {
-            using var dst = UnitWriter(FileName.define(caller()));
+            using var dst = UnitWriter(FS.file(Validity.caller().Name));
             var src = bitlogix.TernaryOpKinds;
             TabularTruth.save(src, dst);
             //TabularTruth.save(dst, ArityValue.Ternary);

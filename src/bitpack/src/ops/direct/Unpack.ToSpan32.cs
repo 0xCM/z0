@@ -19,12 +19,12 @@ namespace Z0
         /// <param name="buffer">The intermediate buffer</param>
         /// <param name="dst">The target buffer</param>
         [MethodImpl(Inline), Op]
-        public static void unpack(byte src, Span<uint> dst)
+        public static void unpack8(byte src, Span<uint> dst)
         {
             var buffer = z64;
             ref var tmp = ref uint8(ref buffer);
             ref var lead = ref first(dst);
-            unpack(src, ref tmp);
+            unpack8(src, ref tmp);
             vconvert(n64, in tmp, n256, n32).StoreTo(ref lead);
         }
 
@@ -35,15 +35,15 @@ namespace Z0
         /// <param name="buffer">The intermediate buffer</param>
         /// <param name="dst">The target buffer</param>
         [MethodImpl(Inline), Op]
-        public static void unpack(ushort src, Span<uint> dst)
+        public static void unpack16(ushort src, Span<uint> dst)
         {
             var buffer = z64;
             ref var tmp = ref uint8(ref buffer);
             ref var lead = ref first(dst);
 
-            unpack((byte)src, ref tmp);
+            unpack8((byte)src, ref tmp);
             vconvert(n64, in tmp, n256, n32).StoreTo(ref lead);
-            unpack((byte)(src >> 8), ref tmp);
+            unpack8((byte)(src >> 8), ref tmp);
             vconvert(n64, in tmp, n256, n32).StoreTo(ref lead, 8);
         }
 
@@ -54,19 +54,19 @@ namespace Z0
         /// <param name="buffer">The intermediate buffer</param>
         /// <param name="dst">The target buffer</param>
         [MethodImpl(Inline), Op]
-        public static void unpack(uint src, Span<uint> dst)
+        public static void unpack32(uint src, Span<uint> dst)
         {
             var buffer = z64;
             ref var tmp = ref z.uint8(ref buffer);
             ref var lead = ref z.first(dst);
 
-            unpack((byte)src, ref tmp);
+            unpack8((byte)src, ref tmp);
             vconvert(n64, in tmp, n256, n32).StoreTo(ref lead);
-            unpack((byte)(src >> 8), ref tmp);
+            unpack8((byte)(src >> 8), ref tmp);
             vconvert(n64, in tmp, n256, n32).StoreTo(ref lead, 8);
-            unpack((byte)(src >> 16), ref tmp);
+            unpack8((byte)(src >> 16), ref tmp);
             vconvert(n64, in tmp, n256, n32).StoreTo(ref lead, 16);
-            unpack((byte)(src >> 24), ref tmp);
+            unpack8((byte)(src >> 24), ref tmp);
             vconvert(n64, in tmp, n256, n32).StoreTo(ref lead, 24);
         }
 
@@ -77,26 +77,26 @@ namespace Z0
         /// <param name="buffer">The intermediate buffer</param>
         /// <param name="dst">The target buffer</param>
         [MethodImpl(Inline), Op]
-        public static void unpack(ulong src, Span<uint> dst)
+        public static void unpack64(ulong src, Span<uint> dst)
         {
             var buffer = z64;
             ref var tmp = ref uint8(ref buffer);
             ref var lead = ref first(dst);
-            unpack((byte)src, ref tmp);
+            unpack8((byte)src, ref tmp);
             vconvert(n64, in tmp, n256, n32).StoreTo(ref lead);
-            unpack((byte)(src >> 8), ref tmp);
+            unpack8((byte)(src >> 8), ref tmp);
             vconvert(n64, in tmp, n256, n32).StoreTo(ref lead, 8);
-            unpack((byte)(src >> 16), ref tmp);
+            unpack8((byte)(src >> 16), ref tmp);
             vconvert(n64, in tmp, n256, n32).StoreTo(ref lead, 16);
-            unpack((byte)(src >> 24), ref tmp);
+            unpack8((byte)(src >> 24), ref tmp);
             vconvert(n64, in tmp, n256, n32).StoreTo(ref lead, 24);
-            unpack((byte)(src >> 32), ref tmp);
+            unpack8((byte)(src >> 32), ref tmp);
             vconvert(n64, in tmp, n256, n32).StoreTo(ref lead, 32);
-            unpack((byte)(src >> 40), ref tmp);
+            unpack8((byte)(src >> 40), ref tmp);
             vconvert(n64, in tmp, n256, n32).StoreTo(ref lead, 40);
-            unpack((byte)(src >> 48), ref tmp);
+            unpack8((byte)(src >> 48), ref tmp);
             vconvert(n64, in tmp, n256, n32).StoreTo(ref lead, 48);
-            unpack((byte)(src >> 56), ref tmp);
+            unpack8((byte)(src >> 56), ref tmp);
             vconvert(n64, in tmp, n256, n32).StoreTo(ref lead, 56);
         }
     }

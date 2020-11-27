@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static Validity;
     using static z;
 
     [ApiType]
@@ -16,40 +17,40 @@ namespace Z0
         CallingMember Caller;
 
         public void bb_create_124x8()
-            => check_bitblock_create<byte>(124, z.caller(ref Caller));
+            => check_bitblock_create<byte>(124, caller(ref Caller));
 
         public void bb_create_128x8()
-            => check_bitblock_create<byte>(128, z.caller(ref Caller));
+            => check_bitblock_create<byte>(128, caller(ref Caller));
 
         public void bb_create_13x16()
-            => check_bitblock_create<ushort>(13, z.caller(ref Caller));
+            => check_bitblock_create<ushort>(13, caller(ref Caller));
 
         public void bb_create_125x16()
-            => check_bitblock_create<ushort>(125, z.caller(ref Caller));
+            => check_bitblock_create<ushort>(125, caller(ref Caller));
 
         public void bb_create_128x16()
-            => check_bitblock_create<ushort>(128, z.caller(ref Caller));
+            => check_bitblock_create<ushort>(128, caller(ref Caller));
 
         public void bb_create_13x32()
-            => check_bitblock_create<uint>(13, z.caller(ref Caller));
+            => check_bitblock_create<uint>(13, caller(ref Caller));
 
         public void bb_create_64x32()
-            => check_bitblock_create<uint>(64, z.caller(ref Caller));
+            => check_bitblock_create<uint>(64, caller(ref Caller));
 
         public void bb_create_125x32()
-            => check_bitblock_create<uint>(125, z.caller(ref Caller));
+            => check_bitblock_create<uint>(125, caller(ref Caller));
 
         public void bb_create_128x32()
-            => check_bitblock_create<uint>(128, z.caller(ref Caller));
+            => check_bitblock_create<uint>(128, caller(ref Caller));
 
         public void bb_create_63x64()
-            => check_bitblock_create<ulong>(63, z.caller(ref Caller));
+            => check_bitblock_create<ulong>(63, caller(ref Caller));
 
         public void bb_create_127x64()
-            => check_bitblock_create<ulong>(127, z.caller(ref Caller));
+            => check_bitblock_create<ulong>(127, caller(ref Caller));
 
         public void bb_create_128x64()
-            => check_bitblock_create<ulong>(128, z.caller(ref Caller));
+            => check_bitblock_create<ulong>(128, caller(ref Caller));
 
         public void bb_create_n63x64u()
             => check_bitblock_range<N63,ulong>();

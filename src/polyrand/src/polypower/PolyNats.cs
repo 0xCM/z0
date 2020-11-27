@@ -23,7 +23,7 @@ namespace Z0
         /// <typeparam name="N">The length type</typeparam>
         /// <typeparam name="T">The primal random value type</typeparam>
         [MethodImpl(Inline)]
-        public static NatSpan<N,T> NatSpan<N,T>(this IPolyrand random, Interval<T> domain, N n = default, Func<T,bool> filter = null)
+        public static NatSpan<N,T> NatSpan<N,T>(this IPolySourced random, Interval<T> domain, N n = default, Func<T,bool> filter = null)
             where T : unmanaged
             where N : unmanaged, ITypeNat
                 => TypeNats.span(random.Span<T>((int)value(n), domain, filter), n);
@@ -38,7 +38,7 @@ namespace Z0
         /// <typeparam name="N">The col count type</typeparam>
         /// <typeparam name="T">The primal random value type</typeparam>
         [MethodImpl(Inline)]
-        public static TableSpan<M,N,T> TableSpan<M,N,T>(this IPolyrand random, M rows = default, N cols = default)
+        public static TableSpan<M,N,T> TableSpan<M,N,T>(this IPolySourced random, M rows = default, N cols = default)
             where T : unmanaged
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
@@ -56,7 +56,7 @@ namespace Z0
         /// <typeparam name="N">The col count type</typeparam>
         /// <typeparam name="T">The primal random value type</typeparam>
         [MethodImpl(Inline)]
-        public static TableSpan<M,N,T> TableSpan<M,N,T>(this IPolyrand random, M rows, N cols, Interval<T> domain)
+        public static TableSpan<M,N,T> TableSpan<M,N,T>(this IPolySourced random, M rows, N cols, Interval<T> domain)
             where T : unmanaged
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat

@@ -19,11 +19,8 @@ namespace Z0
         /// <param name="packed">The packed source bits</param>
         /// <param name="unpacked">A reference to the target buffer</param>
         [MethodImpl(Inline), Op]
-        public static void unpack(byte packed, ref byte unpacked)
-        {
-            var m = lsb<ulong>(n8,n1);
-            seek64(unpacked, 0) = scatter((ulong)(byte)packed, m);
-        }
+        public static void unpack8(byte packed, ref byte unpacked)
+            => seek64(unpacked, 0) = scatter((ulong)(byte)packed, lsb<ulong>(n8,n1));
 
         /// <summary>
         /// Distributes each packed source bit to the least significant bit of 16 corresponding target bytes
@@ -31,9 +28,9 @@ namespace Z0
         /// <param name="packed">The packed source bits</param>
         /// <param name="unpacked">The target buffer</param>
         [MethodImpl(Inline), Op]
-        public static void unpack(ushort packed, ref byte unpacked)
+        public static void unpack16(ushort packed, ref byte unpacked)
         {
-            var m = lsb<ulong>(n8,n1);
+            var m = lsb<ulong>(n8, n1);
             seek64(unpacked, 0) = scatter((ulong)(byte)packed, m);
             seek64(unpacked, 1) = scatter((ulong)((byte)(packed >> 8)), m);
         }
@@ -44,7 +41,7 @@ namespace Z0
         /// <param name="packed">The packed source bits</param>
         /// <param name="unpacked">The target buffer</param>
         [MethodImpl(Inline), Op]
-        public static void unpack(uint packed, ref byte unpacked)
+        public static void unpack32(uint packed, ref byte unpacked)
         {
             var m = lsb<ulong>(n8,n1);
             seek64(unpacked, 0) = scatter((ulong)(byte)packed, m);
@@ -59,10 +56,10 @@ namespace Z0
         /// <param name="packed">The packed source bits</param>
         /// <param name="unpacked">The target buffer</param>
         [MethodImpl(Inline), Op]
-        public static void unpack(ulong packed, ref byte unpacked)
+        public static void unpack64(ulong packed, ref byte unpacked)
         {
-            unpack((uint)packed, ref unpacked);
-            unpack((uint)(packed >> 32), ref seek(unpacked, 32));
+            unpack32((uint)packed, ref unpacked);
+            unpack32((uint)(packed >> 32), ref seek(unpacked, 32));
         }
     }
 }

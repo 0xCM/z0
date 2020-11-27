@@ -16,10 +16,10 @@ namespace Z0
     {
         public byte Position {get;}
 
-        public RenderPattern Pattern {get;}
+        public string Pattern {get;}
 
         [MethodImpl(Inline)]
-        internal RenderSlot(byte pos, RenderPattern pattern)
+        internal RenderSlot(byte pos, string pattern)
         {
             Position = pos;
             Pattern = pattern;
@@ -27,12 +27,12 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format(T arg)
-            => Pattern.Apply(arg);
+            => string.Format(Pattern, arg);
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Pattern.IsEmpty;
+            get => text.empty(Pattern);
         }
 
         public bool IsNonEmpty
@@ -53,10 +53,6 @@ namespace Z0
 
        [MethodImpl(Inline)]
        public static implicit operator RenderSlot<T>((byte pos, string pattern) src)
-            => new RenderSlot<T>(src.pos, src.pattern);
-
-       [MethodImpl(Inline)]
-       public static implicit operator RenderSlot<T>((byte pos, RenderPattern pattern) src)
             => new RenderSlot<T>(src.pos, src.pattern);
     }
 }

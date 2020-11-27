@@ -10,10 +10,8 @@ namespace Z0
     using static Konst;
     using static z;
 
-    using api = CaseLogs;
-
     public class CaseLog<F,R> : ICaseLog<R>
-        where R : ITabular
+        where R : struct, ITabular
         where F : unmanaged, Enum
     {
         object Locker;
@@ -29,16 +27,19 @@ namespace Z0
             Target = dst;
             Locker = new object();
             Status = dst.Stream();
-            api.write(api.header<F>(), Status);
+            FS.write(Table.header53<F>(), Status);
             Counter = 0;
         }
 
         public void Deposit(params R[] src)
         {
+            if(src == null || src.Length == 0)
+                return;
+
             try
             {
                 lock(Locker)
-                    api.deposit(src, Status);
+                    Table.emit(src, Status);
             }
             catch(Exception e)
             {
@@ -47,6 +48,6 @@ namespace Z0
         }
 
         public void Dispose()
-            => Status.Dispose();
+            => Status?.Dispose();
     }
 }

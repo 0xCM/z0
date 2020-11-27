@@ -7,6 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using static Validity;
+
     using Assert = CheckPrimal;
 
     [ApiHost]
@@ -18,8 +20,8 @@ namespace Z0
 
         public void check_caller()
         {
-            var caller = z.caller();
-            Assert.eq(caller.Name, nameof(check_caller));
+            var c = caller();
+            Assert.eq(c.Name, nameof(check_caller));
         }
 
         [Op]

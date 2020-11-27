@@ -16,7 +16,15 @@ namespace Z0
         /// </summary>
         /// <param name="len">The length of the bitstring</param>
         [Op]
-        public static BitSpan alloc(int len)
-            => new BitSpan(z.alloc<Bit32>(len));
+        public static BitSpan32 alloc32(int len)
+            => new BitSpan32(z.alloc<Bit32>(len));
+
+        /// <summary>
+        /// Allocates a bitspan with a specified length
+        /// </summary>
+        /// <param name="len">The length of the bitstring</param>
+        [Op]
+        public static BitSpan alloc(uint count)
+            => new BitSpan(z.alloc<bit>(count));
     }
 }

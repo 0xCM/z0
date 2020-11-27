@@ -20,6 +20,15 @@ namespace Z0
             => *((byte*)(&on));
 
         /// <summary>
+        /// Presents an input <see cref='bit'/> value as a <see cref='byte'/> value
+        /// </summary>
+        /// <param name="src">The source bit</param>
+
+        [MethodImpl(Inline), Op]
+        public static ref byte u8(in bit src)
+            => ref @as<bit,byte>(src);
+
+        /// <summary>
         /// Presents a T-references as a <see cref='byte'/> reference
         /// </summary>
         /// <param name="src">The source reference</param>

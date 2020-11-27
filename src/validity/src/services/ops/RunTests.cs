@@ -30,7 +30,8 @@ namespace Z0
             }
             catch (Exception e)
             {
-                Flush(e, TestLog.Create());
+                term.error(e);
+                //Flush(e, TestLog.Create());
             }
         }
     }

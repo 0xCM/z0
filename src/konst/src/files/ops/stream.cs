@@ -23,22 +23,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static FileStream stream(FS.FilePath path, FileMode mode = FileMode.OpenOrCreate, FileAccess access = FileAccess.Write, FileShare share = FileShare.Read)
             => new FileStream(path.CreateParentIfMissing().Name, mode, access, share);
-
-        /// <summary>
-        /// Writes text data to the target
-        /// </summary>
-        /// <param name="src">The source content</param>
-        /// <param name="dst">The target stream</param>
-        /// <param name="encoding">The encoding to use, which defaults to <see cref='Encoding.UTF8'/> if unspecified</param>
-        [Op]
-        public static uint write(string src, FileStream dst, Encoding encoding = null)
-        {
-            encoding = encoding ?? Encoding.UTF8;
-            var data = encoding.GetBytes(src);
-            dst.Seek(0, SeekOrigin.End);
-            dst.Write(data, 0, data.Length);
-            dst.Flush();
-            return (uint)data.Length;
-        }
     }
 }

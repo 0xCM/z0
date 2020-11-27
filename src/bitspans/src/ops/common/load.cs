@@ -13,24 +13,24 @@ namespace Z0
     partial class BitSpans
     {
         [MethodImpl(Inline), Op]
-        public static BitSpan8 init(Span<byte> src)
-            => new BitSpan8(src);
+        public static BitSpan load(Span<bit> src)
+            => new BitSpan(src);
 
         /// <summary>
         /// Wraps a bitspan over a span of extant bits
         /// </summary>
         /// <param name="src">The source bits</param>
         [MethodImpl(Inline), Op]
-        public static BitSpan load(Span<Bit32> src)
-            => new BitSpan(src);
+        public static BitSpan32 load(Span<Bit32> src)
+            => new BitSpan32(src);
 
         /// <summary>
         /// Loads a bitspan from an array
         /// </summary>
         /// <param name="src">The source array</param>
         [MethodImpl(Inline), Op]
-        public static BitSpan load(Bit32[] src)
-            => new BitSpan(src);
+        public static BitSpan32 load(Bit32[] src)
+            => new BitSpan32(src);
 
         /// <summary>
         /// Loads a bitspan from a reference
@@ -38,15 +38,15 @@ namespace Z0
         /// <param name="bits">The bit source</param>
         /// <param name="count">The number of bits to load</param>
         [MethodImpl(Inline), Op]
-        public static BitSpan load(ref Bit32 bits, int count)
-            => new BitSpan(cover(bits,count));
+        public static BitSpan32 load(ref Bit32 bits, int count)
+            => new BitSpan32(cover(bits,count));
 
         /// <summary>
         /// Creates a bitspan from an arbitrary number of packed bytes
         /// </summary>
         /// <param name="packed">The packed data source</param>
         [Op]
-        internal static BitSpan load(ReadOnlySpan<byte> packed)
+        internal static BitSpan32 load(ReadOnlySpan<byte> packed)
         {
             var srcbits = 8*packed.Length;
             var dstbits = 32*srcbits;
@@ -63,7 +63,7 @@ namespace Z0
         /// Creates a bitspan from an arbitrary number of packed bytes
         /// </summary>
         /// <param name="packed">The packed data source</param>
-        internal static BitSpan load(Span<byte> packed)
+        internal static BitSpan32 load(Span<byte> packed)
             => load(packed.ReadOnly());
     }
 }

@@ -21,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Vector128<T> vload<T>(in SpanBlock128<T> src)
             where T : unmanaged
-                => vload(w128,src.Data);
+                => vload(w128, src.Data);
 
         /// <summary>
         /// Loads a 256-bit vector from the leading source block

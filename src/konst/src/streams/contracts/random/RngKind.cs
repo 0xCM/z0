@@ -81,12 +81,6 @@ namespace Z0
         /// </summary>
         MRG32K3Ad = 14,
 
-        User1 = 101,
-
-        User2 = 102,
-
-        User3 = 103,
-
         /// <summary>
         /// Identifies a hardware level entropic source driven by the RDRAND instruction
         /// </summary>

@@ -4,9 +4,18 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
+    using System.Runtime.CompilerServices;
+
+    using static Konst;
+
     [ApiHost]
     public readonly partial struct Render
     {
+        [MethodImpl(Inline), Op]
+        public static RenderCapture capture(IRenderPattern src, params object[] args)
+            => new RenderCapture(src, args);
+
         public const FlairKind Error = FlairKind.Error;
 
         public const FlairKind Created = FlairKind.Created;

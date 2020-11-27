@@ -314,7 +314,7 @@ namespace Z0
                     gmath.or(composite, BitSpans.extract<T>(bs,(int)j));
                 clock.Stop();
 
-                Random.SpanFill(packed);
+                Random.Fill(packed);
             }
 
             ReportBenchmark($"bitspan_pack/{n}", ops, clock);

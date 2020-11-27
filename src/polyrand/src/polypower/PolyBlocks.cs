@@ -195,7 +195,7 @@ namespace Z0
         /// <typeparam name="T">The primal random value type</typeparam>
         public static SpanBlock128<T> Blocks<T>(this IPolySourced random, W128 w, int count = 1)
             where T : unmanaged
-                => random.Stream<T>().ToSpan(B.cellblocks<T>(w,count)).Blocked(w);
+                => random.Stream<T>().ToSpan(B.cellblocks<T>(w, count)).Blocked(w);
 
         /// <summary>
         /// Allocates and fills specified number of 128-bit blocks

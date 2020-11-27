@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <param name="packed">The packed data source</param>
         [MethodImpl(Inline), Op, Closures(Integers)]
-        public static BitSpan load<T>(Span<T> packed)
+        public static BitSpan32 load<T>(Span<T> packed)
             where T : unmanaged
                 => load(packed.Bytes());
 
@@ -25,7 +25,7 @@ namespace Z0
         /// </summary>
         /// <param name="packed">The packed data source</param>
         [MethodImpl(Inline), Op, Closures(Integers)]
-        public static BitSpan load<T>(ReadOnlySpan<T> packed)
+        public static BitSpan32 load<T>(ReadOnlySpan<T> packed)
             where T : unmanaged
                 => load(packed.Bytes());
     }

@@ -7,54 +7,16 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
     using static z;
-    using static BitSpans;
+    using static Konst;
 
-    /// <summary>
-    /// Defines an anti-succinct data structure for bit representation
-    /// </summary>
-    public readonly ref partial struct BitSpan
+    public readonly ref struct BitSpan
     {
-        internal readonly Span<Bit32> Data;
+        readonly Span<bit> Data;
 
         [MethodImpl(Inline)]
-        public static BitSpan operator +(in BitSpan head, in BitSpan tail)
-            => BitSpans.concat(head,tail);
-
-        [MethodImpl(Inline)]
-        public static BitSpan operator &(in BitSpan x, in BitSpan y)
-            => and(x,y);
-
-        [MethodImpl(Inline)]
-        public static BitSpan operator |(in BitSpan x, in BitSpan y)
-            => or(x,y);
-
-        [MethodImpl(Inline)]
-        public static BitSpan operator ^(in BitSpan x, in BitSpan y)
-            => xor(x,y);
-
-        [MethodImpl(Inline)]
-        public static BitSpan operator ~(in BitSpan x)
-            => not(x);
-
-        [MethodImpl(Inline)]
-        public static Bit32 operator ==(in BitSpan x, in BitSpan y)
-            => same(x,y);
-
-        [MethodImpl(Inline)]
-        public static Bit32 operator !=(in BitSpan x, in BitSpan y)
-            => !same(x,y);
-
-        [MethodImpl(Inline)]
-        public BitSpan(Span<Bit32> src)
+        public BitSpan(Span<bit> src)
             => Data = src;
-
-        public Span<Bit32> Edit
-        {
-            [MethodImpl(Inline)]
-            get => Data;
-        }
 
         public int Length
         {
@@ -62,78 +24,30 @@ namespace Z0
             get => Data.Length;
         }
 
-        ref Bit32 Head
+        public uint BitCount
         {
             [MethodImpl(Inline)]
-            get => ref first(Data);
+            get => (uint)Data.Length;
         }
 
-        /// <summary>
-        /// Queries/Manipulates an index-identified bit
-        /// </summary>
-        public ref Bit32 this[int index]
+        public ref bit this[ulong index]
         {
             [MethodImpl(Inline)]
-            get => ref seek(Head, index);
+            get => ref seek(Data,index);
         }
 
-        /// <summary>
-        /// Queries/Manipulates an index-identified bit
-        /// </summary>
-        public ref Bit32 this[uint index]
+        public ref bit this[long index]
         {
             [MethodImpl(Inline)]
-            get => ref seek(Head, index);
+            get => ref seek(Data,index);
         }
 
-        /// <summary>
-        /// Packs a segment selection of at most 8 bits
-        /// </summary>
-        public byte this[int offset, int count, byte t]
+        internal Span<bit> Storage
         {
             [MethodImpl(Inline)]
-            get => BitSpans.bitslice<byte>(this, offset, count);
+            get => Data;
         }
 
-        /// <summary>
-        /// Packs a segment selection of at most 16 bits
-        /// </summary>
-        public ushort this[int offset, int count, ushort t]
-        {
-            [MethodImpl(Inline)]
-            get => BitSpans.bitslice<ushort>(this, offset, count);
-        }
-
-        /// <summary>
-        /// Packs a segment selection of at most 32 bits
-        /// </summary>
-        public uint this[int offset, int count, uint t]
-        {
-            [MethodImpl(Inline)]
-            get => BitSpans.bitslice<uint>(this, offset, count);
-        }
-
-        /// <summary>
-        /// Packs a segment selection of at most 64 bits
-        /// </summary>
-        public ulong this[int offset, int count, ulong t]
-        {
-            [MethodImpl(Inline)]
-            get => BitSpans.bitslice<ulong>(this, offset, count);
-        }
-
-        [MethodImpl(Inline)]
-        public string Format(BitFormat? fmt = null)
-            => format(this, fmt);
-
-        [MethodImpl(Inline)]
-        public bool Equals(in BitSpan rhs)
-            => same(this, rhs);
-
-        public override int GetHashCode()
-            => throw new NotSupportedException();
-
-        public override bool Equals(object rhs)
-            => throw new NotSupportedException();
+        public static BitSpan Empty => default;
     }
 }

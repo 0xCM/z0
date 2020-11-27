@@ -14,8 +14,7 @@ namespace Z0
     partial class BitMasks
     {
         /// <summary>
-        /// [000...001]
-        /// The least bit, relative to the component, is enabled
+        /// The least bit of each cell is enabled
         /// </summary>
         /// <param name="w">The target vector width</param>
         /// <param name="f">The repetition frequency</param>
@@ -177,7 +176,7 @@ namespace Z0
                 => vbroadcast(w,lsb(f,d,t));
 
         /// <summary>
-        /// [01]
+        /// [01 01 01 01]
         /// The least bit of each 2-bit segment is enabled
         /// </summary>
         /// <param name="w">The target vector width</param>
@@ -189,7 +188,7 @@ namespace Z0
                 => vbroadcast(w,lsb(f,d,t));
 
         /// <summary>
-        /// [00010001]
+        /// [0001 0001]
         /// The least bit of each 4-bit segment is enabled
         /// </summary>
         /// <param name="f">The repetition frequency</param>
@@ -197,7 +196,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Vector256<T> vlsb<T>(N256 w, N4 f, N1 d,T t = default)
             where T : unmanaged
-                => vbroadcast(w,lsb<T>(f,d,t));
+                => vbroadcast(w, lsb<T>(f,d,t));
 
         /// <summary>
         /// [00000001]

@@ -7,17 +7,17 @@ namespace Z0
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface IPolySourced : IPolySource,
-        IPolySource<sbyte>,
-        IPolySource<byte>,
-        IPolySource<short>,
-        IPolySource<ushort>,
-        IPolySource<int>,
-        IPolySource<uint>,
-        IPolySource<long>,
-        IPolySource<ulong>,
-        IPolySource<float>,
-        IPolySource<double>
+    public interface IPolySourced : IPolyDomain,
+        IDomainSource<sbyte>,
+        IDomainSource<byte>,
+        IDomainSource<short>,
+        IDomainSource<ushort>,
+        IDomainSource<int>,
+        IDomainSource<uint>,
+        IDomainSource<long>,
+        IDomainSource<ulong>,
+        IDomainSource<float>,
+        IDomainSource<double>
     {
 
     }

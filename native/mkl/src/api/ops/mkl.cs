@@ -32,7 +32,7 @@ namespace Z0.Mkl
             return exit;
         }
 
-        static ICheckRowVector Check => ICheckRowVector.Checker;
+        static ICheckRowVectors Check => ICheckRowVectors.Checker;
 
         /// <summary>
         /// Returns a reference to the location of the first span element

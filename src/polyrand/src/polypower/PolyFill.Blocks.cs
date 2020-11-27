@@ -19,7 +19,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         public static void Fill<T>(this IPolySourced random, in SpanBlock8<T> dst)
             where T : unmanaged
-                => random.SpanFill(dst.Data);
+                => random.Fill(dst.Data);
 
         /// <summary>
         /// Fills caller-allocated block storage with random values
@@ -29,7 +29,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         public static void Fill<T>(this IPolySourced random, in SpanBlock16<T> dst)
             where T : unmanaged
-                => random.SpanFill(dst.Data);
+                => random.Fill(dst.Data);
 
         /// <summary>
         /// Fills caller-allocated block storage with random values
@@ -39,7 +39,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         public static void Fill<T>(this IPolySourced random, in SpanBlock32<T> dst)
             where T : unmanaged
-                => random.SpanFill(dst.Data);
+                => random.Fill(dst.Data);
 
         /// <summary>
         /// Fills caller-allocated block storage with random values
@@ -49,7 +49,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         public static void Fill<T>(this IPolySourced random, in SpanBlock64<T> dst)
             where T : unmanaged
-                => random.SpanFill(dst.Data);
+                => random.Fill(dst.Data);
 
         /// <summary>
         /// Fills caller-allocated block storage with random values
@@ -59,7 +59,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         public static void Fill<T>(this IPolySourced random, in SpanBlock128<T> dst)
             where T : unmanaged
-                => random.SpanFill(dst.Data);
+                => random.Fill(dst.Data);
 
         /// <summary>
         /// Fills caller-allocated block storage with random values
@@ -70,7 +70,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void Fill<T>(this IPolySourced random, in SpanBlock256<T> dst)
             where T : unmanaged
-                => random.SpanFill(dst.Data);
+                => random.Fill(dst.Data);
 
         /// <summary>
         /// Fills caller-allocated block storage with random values
@@ -81,7 +81,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void Fill<T>(this IPolySourced random, in SpanBlock512<T> dst)
             where T : unmanaged
-                => random.SpanFill(dst.Data);
+                => random.Fill(dst.Data);
 
         /// <summary>
         /// Fills caller-allocated block storage with random values

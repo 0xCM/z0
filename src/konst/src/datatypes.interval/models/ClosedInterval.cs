@@ -21,12 +21,12 @@ namespace Z0
         /// <summary>
         /// The left endpoint
         /// </summary>
-        public readonly T Min;
+        public T Min {get;}
 
         /// <summary>
         /// The right endpoint
         /// </summary>
-        public readonly T Max;
+        public T Max {get;}
 
         [MethodImpl(Inline)]
         public ClosedInterval(T min, T max)
@@ -35,21 +35,6 @@ namespace Z0
             Max = max;
         }
 
-        [MethodImpl(Inline)]
-        public static implicit operator ClosedInterval<T>((T left, T right) x)
-            => new ClosedInterval<T>(x.left, x.right);
-
-        [MethodImpl(Inline)]
-        public static implicit operator (T left, T right)(ClosedInterval<T> x)
-            => (x.Min, x.Max);
-
-        [MethodImpl(Inline)]
-        public static implicit operator ConstPair<T>(ClosedInterval<T> x)
-            => x.Pair;
-
-        [MethodImpl(Inline)]
-        public static implicit operator ClosedInterval<T>(ConstPair<T> x)
-            => new ClosedInterval<T>(x.Left, x.Right);
 
         public ConstPair<T> Pair
         {
@@ -81,9 +66,6 @@ namespace Z0
             get => Min.Equals(Max);
         }
 
-        [MethodImpl(Inline)]
-        public bool Contains(T point)
-            => between(uint64(point), LeftU64, RightU64);
 
         /// <summary>
         /// Converts the left and right underlying values
@@ -110,18 +92,6 @@ namespace Z0
             left = Min;
             right = Max;
         }
-
-        [MethodImpl(Inline)]
-        public ClosedInterval<T> New(T left, T right)
-            => new ClosedInterval<T>(left,right);
-
-        [MethodImpl(Inline)]
-        public ClosedInterval<T> WithLeft(T left)
-            => new ClosedInterval<T>(left, Min);
-
-        [MethodImpl(Inline)]
-        public ClosedInterval<T> WithRight(T right)
-            => new ClosedInterval<T>(Min, right);
 
         [MethodImpl(Inline)]
         public string Format()
@@ -167,6 +137,26 @@ namespace Z0
         /// </summary>
         K IInterval.Kind
             => K.Closed;
+
+        [MethodImpl(Inline)]
+        public static implicit operator ClosedInterval<T>((T left, T right) x)
+            => new ClosedInterval<T>(x.left, x.right);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Interval<T>(ClosedInterval<T> src)
+            => new Interval<T>(src.Min, src.Max, IntervalKind.Closed);
+
+        [MethodImpl(Inline)]
+        public static implicit operator (T left, T right)(ClosedInterval<T> x)
+            => (x.Min, x.Max);
+
+        [MethodImpl(Inline)]
+        public static implicit operator ConstPair<T>(ClosedInterval<T> x)
+            => x.Pair;
+
+        [MethodImpl(Inline)]
+        public static implicit operator ClosedInterval<T>(ConstPair<T> x)
+            => new ClosedInterval<T>(x.Left, x.Right);
 
         /// <summary>
         /// The interval of nothingness

@@ -32,11 +32,11 @@ public enum PartId : ulong
 
     Lang = 22,
 
-    Memories = 24,
-
     GMath = 34,
 
     Polyrand = 36,
+
+    PolyrandTest = Polyrand | Test,
 
     DynoShell = 40,
 
@@ -54,12 +54,6 @@ public enum PartId : ulong
     Run = 50,
 
     Canonical = 63,
-
-    Bits = 70,
-
-    Unity = 71,
-
-    CheckDynamic = 72,
 
     MathTest = 73,
 
@@ -102,8 +96,6 @@ public enum PartId : ulong
 
     Identity = 120,
 
-    LSquare = 121,
-
     Blocked = 125,
 
     Nats = 133,
@@ -111,8 +103,6 @@ public enum PartId : ulong
     Mkl = 134,
 
     Stats = 135,
-
-    Blocks = 136,
 
     Dynamic = 137,
 
@@ -139,8 +129,6 @@ public enum PartId : ulong
     Circuits = 154,
 
     Unsigned = 157,
-
-    Identify = 158,
 
     Apps = 160,
 

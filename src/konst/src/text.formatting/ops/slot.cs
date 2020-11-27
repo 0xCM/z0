@@ -19,7 +19,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The slot selector</param>
         [Op]
-        public static RenderPattern slot(N0 n)
+        public static string slot(N0 n)
             => Slot0;
 
         /// <summary>
@@ -27,7 +27,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The slot selector</param>
         [Op]
-        public static RenderPattern slot(N1 n)
+        public static string slot(N1 n)
             => Slot1;
 
         /// <summary>
@@ -35,7 +35,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The slot selector</param>
         [Op]
-        public static RenderPattern slot(N2 n)
+        public static string slot(N2 n)
             => Slot2;
 
         /// <summary>
@@ -43,7 +43,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The slot selector</param>
         [Op]
-        public static RenderPattern slot(N3 n)
+        public static string slot(N3 n)
             => Slot3;
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The slot selector</param>
         [Op]
-        public static RenderPattern slot(N4 n)
+        public static string slot(N4 n)
             => Slot4;
     }
 }

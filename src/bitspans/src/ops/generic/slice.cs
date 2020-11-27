@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
     using static z;
-    
+
     using SB = SpannedBits;
 
     partial class BitSpans
@@ -22,12 +22,12 @@ namespace Z0
         /// <param name="count">The number of bits, at most bitsize[T], to pull</param>
         /// <typeparam name="T">The integral numeric type</typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static T slice<T>(in BitSpan src, int offset, int count)
+        public static T slice<T>(in BitSpan32 src, int offset, int count)
             where T : unmanaged
                 => slice_u<T>(src,offset,count);
 
         [MethodImpl(Inline)]
-        static T slice_u<T>(in BitSpan src, int offset, int count)
+        static T slice_u<T>(in BitSpan32 src, int offset, int count)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -38,12 +38,12 @@ namespace Z0
                 return generic<T>(SB.slice(src, w32, offset, count));
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(SB.slice(src, w64, offset, count));
-            else    
+            else
                 return slice_i<T>(src,offset,count);
         }
-                    
+
         [MethodImpl(Inline)]
-        static T slice_i<T>(in BitSpan src, int offset, int count)
+        static T slice_i<T>(in BitSpan32 src, int offset, int count)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))

@@ -30,7 +30,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The primal element type</typeparam>
     [Free]
-    public interface IRngNav<T> : IRngNav, IRngBoundPointSource<T>
+    public interface IRngNav<T> : IRngNav, IRngDomainValues<T>
         where T : struct
     {
 

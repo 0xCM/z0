@@ -15,7 +15,7 @@ namespace Z0
     public readonly struct BitMaskFormatter : IValueFormatter<F,R>
     {
         public void Format(in R src, DatasetFormatter<F> dst)
-            => BitMasks.render(src,dst);
+            => render(src,dst);
 
         public string Format(in R src)
         {
@@ -35,6 +35,19 @@ namespace Z0
         }
 
         void IValueFormatter<F,R>.Format(in R src, IDatasetFormatter<F> dst)
-            => BitMasks.render(src,dst);
+            => render(src,dst);
+
+
+        [MethodImpl(Inline), Op]
+        static void render(in BitMaskInfo src, IDatasetFormatter<F> dst)
+        {
+            dst.Delimit(F.Name, src.Name);
+            dst.Delimit(F.Base, src.Base);
+            dst.Delimit(F.Data, format(base2, src));
+            dst.Delimit(F.Text, src.Text);
+        }
+
+        static string format(Base2 @base, BitMaskInfo src)
+            => BitFormatter.bits(src.Data, src.TypeCode);
     }
 }

@@ -114,7 +114,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// [01]
+        /// [01 01 01 01]
         /// The least bit of each 2-bit segment is enabled
         /// </summary>
         /// <param name="f">The repetition frequency</param>
@@ -139,7 +139,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// [0001]
+        /// [0001 0001]
         /// The least bit of each 4-bit segment is enabled
         /// </summary>
         /// <param name="f">The repetition frequency</param>
@@ -165,7 +165,7 @@ namespace Z0
 
         /// <summary>
         /// [00000001]
-        /// The least bit of each 8-bit segment is enabled
+        /// Creates a bitmask with the least bit of each 8-bit segment enabled
         /// </summary>
         /// <param name="f">The repetition frequency</param>
         /// <param name="d">The bit density</param>

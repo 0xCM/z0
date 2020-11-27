@@ -7,16 +7,14 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using api = CheckSpans;
-
     public interface TCheckSpans : TValidator, TCheckGeneric
     {
         void Eq<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs)
             where T : unmanaged
-                => api.eq(lhs,rhs);
+                => CheckNumeric.eq(lhs,rhs);
 
         void Eq<T>(Span<T> lhs, Span<T> rhs)
             where T : unmanaged
-                => api.eq(lhs,rhs);
+                => CheckNumeric.eq(lhs,rhs);
     }
 }

@@ -6,11 +6,16 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-        
+
     using static Konst;
 
     partial class XTend
     {
+        [MethodImpl(Inline)]
+        public static bool Contains<T>(this ClosedInterval<T> src, T point)
+            where T : unmanaged
+                => gmath.contains(src, point);
+
         /// <summary>
         /// Determines whether an interval contains a specified point
         /// </summary>
@@ -29,7 +34,7 @@ namespace Z0
         /// <param name="target">The target value to match</param>
         /// <typeparam name="T">The value type</typeparam>
         [MethodImpl(Inline)]
-        public static bool Contains<T>(this ReadOnlySpan<T> src, T target)        
+        public static bool Contains<T>(this ReadOnlySpan<T> src, T target)
             where T : unmanaged
                 => src.BinarySearch(target, gmath.comparer<T>()) >= 0;
     }

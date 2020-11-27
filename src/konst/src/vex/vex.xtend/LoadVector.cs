@@ -138,7 +138,6 @@ namespace Z0
             where T : unmanaged
                 => z.vload(src,block);
 
-
         /// <summary>
         /// Loads a 128-bit vector from a span
         /// </summary>

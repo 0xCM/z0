@@ -13,7 +13,7 @@ namespace Z0
     partial class SpannedBits
     {
         [MethodImpl(Inline), Op]
-        public static BitSpan from(byte src)
+        public static BitSpan32 from(byte src)
         {
             var buffer = StackStores.alloc(w64);
             ref var tmp = ref StackStores.head<byte>(ref buffer);
@@ -21,13 +21,13 @@ namespace Z0
             var storage = StackStores.alloc(w256);
             ref var target = ref StackStores.head<uint>(ref storage);
 
-            BitPack.unpack(src, ref tmp);
+            BitPack.unpack8(src, ref tmp);
             distribute(tmp, 0, ref target);
             return BitSpans.load(StackStores.span<uint>(ref storage).Cast<Bit32>());
         }
 
         [MethodImpl(Inline), Op]
-        public static BitSpan from(ushort src)
+        public static BitSpan32 from(ushort src)
         {
             var buffer = StackStores.alloc(w128);
             ref var tmp = ref StackStores.head<byte>(ref buffer);
@@ -35,14 +35,14 @@ namespace Z0
             var storage = StackStores.alloc(w512);
             ref var target = ref StackStores.head<uint>(ref storage);
 
-            BitPack.unpack(src, ref tmp);
+            BitPack.unpack16(src, ref tmp);
             distribute(tmp, 0, ref target);
             distribute(tmp, 1, ref target);
             return BitSpans.load(StackStores.span<uint>(ref storage).Cast<Bit32>());
         }
 
         [MethodImpl(Inline), Op]
-        public static BitSpan from(uint src)
+        public static BitSpan32 from(uint src)
         {
             var buffer = StackStores.alloc(w256);
             ref var tmp = ref StackStores.head<byte>(ref buffer);
@@ -50,7 +50,7 @@ namespace Z0
             var storage = StackStores.alloc(w1024);
             ref var target = ref StackStores.head<uint>(ref storage);
 
-            BitPack.unpack(src, ref tmp);
+            BitPack.unpack32(src, ref tmp);
             distribute(tmp, 0, ref target);
             distribute(tmp, 1, ref target);
             distribute(tmp, 2, ref target);
@@ -59,7 +59,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static BitSpan from(ulong src)
+        public static BitSpan32 from(ulong src)
         {
             var buffer = StackStores.alloc(w512);
             ref var tmp = ref StackStores.head<byte>(ref buffer);
@@ -67,7 +67,7 @@ namespace Z0
             Span<uint> storage = new uint[64];
             ref var target = ref first(storage);
 
-            BitPack.unpack(src, ref tmp);
+            BitPack.unpack64(src, ref tmp);
             distribute(tmp, 0, ref target);
             distribute(tmp, 1, ref target);
             distribute(tmp, 2, ref target);

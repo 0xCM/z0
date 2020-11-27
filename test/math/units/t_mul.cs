@@ -32,8 +32,8 @@ namespace Z0
                 Claim.eq(hi, b);
 
                 math.mul(z,MAX, out uint c, out uint d);
-                ClaimNumeric.gt(c,0u);
-                ClaimNumeric.gt(d,0u);
+                CheckNumeric.gt(c,0u);
+                CheckNumeric.gt(d,0u);
 
                 var c2 = (uint)(((ulong)z) * ((ulong)(MAX)));
                 Claim.eq(c2, c);
@@ -99,16 +99,15 @@ namespace Z0
 
         public static ulong lo_ref(ulong x, ulong y)
             => x*y;
+
         public void mullo_2x64u()
         {
-
             for(var i=0; i< RepCount; i++)
             {
                 var a = Random.Next<ulong>(uint.MaxValue, ulong.MaxValue);
                 var b = Random.Next<ulong>(uint.MaxValue, ulong.MaxValue);
                 Claim.eq(lo_ref(a,b), math.mullo(a,b));
             }
-
         }
     }
 }

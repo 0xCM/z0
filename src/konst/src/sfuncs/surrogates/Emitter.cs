@@ -14,7 +14,7 @@ namespace Z0
         /// <summary>
         /// Captures a delegate that is exposed as an emitter
         /// </summary>
-        public readonly struct Emitter<T> : IEmitter<T>
+        public readonly struct Emitter<T> : SFx.IEmitter<T>
         {
             public OpIdentity Id {get;}
 

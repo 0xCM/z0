@@ -16,12 +16,12 @@ namespace Z0
     /// </summary>
     public class Polyrand : IPolyrand
     {
-        readonly IRngBoundPointSource<ulong> Points;
+        readonly IRngDomainValues<ulong> Points;
 
         public Option<IRngNav> Navigator {get;}
 
         [MethodImpl(Inline)]
-        internal Polyrand(IRngBoundPointSource<ulong> points)
+        internal Polyrand(IRngDomainValues<ulong> points)
         {
             Points = points;
             Navigator = default;
@@ -139,7 +139,6 @@ namespace Z0
                 return Next_i(min,max);
         }
 
-
         [MethodImpl(Inline)]
         T Next_i<T>(T min, T max)
             where T : struct
@@ -171,7 +170,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public T Next<T>(Interval<T> domain)
             where T : unmanaged
-                => domain.IsEmpty ? Next<T>() :  Next(domain.Left, domain.Right);
+                => domain.IsEmpty ? Next<T>() : Next(domain.Left, domain.Right);
 
         public IEnumerable<T> Take<T>(int count)
             where T : unmanaged

@@ -20,13 +20,13 @@ namespace Z0
         /// Derives the system random rng from polyrand
         /// </summary>
         /// <param name="random">The source rng</param>
-        public static System.Random From(IPolyrand random)
+        public static System.Random From(IPolySourced random)
             => new PolySystem(random);
 
-        public PolySystem(IPolyrand random)
+        public PolySystem(IPolySourced random)
             => this.Random = random;
 
-        readonly IPolyrand Random;
+        readonly IPolySourced Random;
 
         public override int Next()
             => Random.Next(Int32.MaxValue);
@@ -54,8 +54,8 @@ namespace Z0
             while(it.MoveNext())
                 buffer[i++] = it.Current;
         }
-     
+
         public override double NextDouble()
             => Random.Next<double>();
-    }    
+    }
 }

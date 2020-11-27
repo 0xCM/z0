@@ -26,7 +26,7 @@ namespace Z0
             ref readonly var bitsrc = ref first(bytes);
 
             for(var block=0; block < blockcount; block++)
-                unpack(skip(bitsrc, block), dst.Block(block));
+                unpack8(skip(bitsrc, block), dst.Block(block));
         }
 
         /// <summary>

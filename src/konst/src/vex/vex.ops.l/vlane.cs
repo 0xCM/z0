@@ -15,20 +15,38 @@ namespace Z0
 
     partial struct z
     {
+        /// <summary>
+        /// Extracts the lower 128-bit lane from a source vector
+        /// </summary>
+        /// <param name="src">The source</param>
+        /// <param name="lane">The lane selector</param>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Vector128<T> vlane<T>(Vector256<T> src, N0 lane)
             where T : unmanaged
              => Vector256.GetLower(src);
 
+        /// <summary>
+        /// Extracts the lower 128-bit lane from a source vector
+        /// </summary>
+        /// <param name="src">The source</param>
+        /// <param name="lane">The lane selector</param>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Vector128<T> vlane<T>(Vector256<T> src, N1 lane)
             where T : unmanaged
              => Vector256.GetUpper(src);
 
+        /// <summary>
+        /// Extracts the lower 128-bit lane from a source vector
+        /// </summary>
+        /// <param name="src">The source</param>
+        /// <param name="lane">The lane selector</param>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static Vector128<T> vlane<T>(Vector256<T> src, byte index)
+        public static Vector128<T> vlane<T>(Vector256<T> src, byte lane)
             where T : unmanaged
-             => index == 0 ? vlane(src,n0) : vlane(src,n1);
+             => lane == 0 ? vlane(src,n0) : vlane(src,n1);
 
         /// <summary>
         ///  __m256i _mm256_inserti128_si256 (__m256i a, __m128i b, const int imm8) VINSERTI128 ymm, ymm, xmm, imm8

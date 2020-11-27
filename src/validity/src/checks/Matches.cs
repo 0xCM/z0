@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
     using static SFx;
-    using static CheckGeneric;
+    using static CheckNumeric;
 
     public readonly struct Matches
     {

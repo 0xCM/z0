@@ -157,6 +157,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.commands", "src\commands
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.uint.test", "test\uint\z0.uint.test.csproj", "{D35B6485-B8BC-4481-85F2-31A01FA07164}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.polyrand.test", "test\polyrand\z0.polyrand.test.csproj", "{68A41E7A-99B4-4395-BFB3-9BF0625BF816}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		src\share\z0.share.projitems*{666886d1-8cc4-481c-a270-9166da0bc711}*SharedItemsImports = 13
@@ -426,6 +428,10 @@ Global
 		{D35B6485-B8BC-4481-85F2-31A01FA07164}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D35B6485-B8BC-4481-85F2-31A01FA07164}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D35B6485-B8BC-4481-85F2-31A01FA07164}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68A41E7A-99B4-4395-BFB3-9BF0625BF816}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68A41E7A-99B4-4395-BFB3-9BF0625BF816}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68A41E7A-99B4-4395-BFB3-9BF0625BF816}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68A41E7A-99B4-4395-BFB3-9BF0625BF816}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -491,6 +497,7 @@ Global
 		{737D1CCE-513D-4F95-983B-6390932A02E5} = {A510DE7E-0D86-4275-A912-724AE744BADC}
 		{DC63FC33-5F39-4D38-944B-08CBFFCC9D8E} = {A5FA280E-F0F4-49EA-806D-D814BD4014E4}
 		{D35B6485-B8BC-4481-85F2-31A01FA07164} = {A510DE7E-0D86-4275-A912-724AE744BADC}
+		{68A41E7A-99B4-4395-BFB3-9BF0625BF816} = {A510DE7E-0D86-4275-A912-724AE744BADC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {75DBF59A-77AC-430F-B85D-CC30D6061CCB}

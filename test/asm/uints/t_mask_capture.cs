@@ -31,7 +31,7 @@ namespace Z0.Asm
             for(var i=0; i<count; i++)
             {
                 var mask = literals[i];
-                var bits = BitSpans.parse(mask.Text);
+                var bits = BitSpans.parse32(mask.Text);
                 var bitval = bits.Convert<T>();
                 if(gmath.neq(bitval, mask.Data))
                     msg(AppMsg.error($"{bitval} != {mask.Data}"));

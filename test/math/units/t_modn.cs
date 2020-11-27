@@ -9,7 +9,6 @@ namespace Z0
 
     using static Konst;
 
-    
     public sealed class t_modn : UnitTest<t_modn>
     {
         public void mod16()
@@ -34,8 +33,6 @@ namespace Z0
                 var m1 = ops.mod(a);
                 Claim.eq(m0,m1);
             }
-
         }
-
     }
 }

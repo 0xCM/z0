@@ -21,9 +21,9 @@ namespace Z0
         /// <param name="t">A vector component type representative</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static VRandom128<T> vemitter<T>(N128 w, IPolyrand random, T t = default)
+        public static VRand128<T> vemitter<T>(N128 w, IPolySourced random, T t = default)
             where T : unmanaged
-                => new VRandom128<T>(random);
+                => new VRand128<T>(random);
 
         /// <summary>
         /// Creates a 256-bit vectorized emitter predicated an a specified random source
@@ -33,9 +33,9 @@ namespace Z0
         /// <param name="t">A vector component type representative</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static VRandom256<T> vemitter<T>(N256 w, IPolyrand random, T t = default)
+        public static VRand256<T> vemitter<T>(N256 w, IPolySourced random, T t = default)
             where T : unmanaged
-                => new VRandom256<T>(random);
+                => new VRand256<T>(random);
 
         /// <summary>
         /// Evenly projects points from the interval [0,2^31 - 1] onto the interval [0,max]
@@ -63,13 +63,14 @@ namespace Z0
         public static IPolyrand @default(ulong seed)
             => pcg64(seed);
 
+        /// <summary>
+        /// Creates a 32-bit Pcg RNG
+        /// </summary>
+        /// <param name="seed">The initial rng state</param>
+        /// <param name="index">The stream index, if any</param>
         [MethodImpl(Inline), Op]
-        public static IWfShell install(IWfShell dst)
-            => dst.WithRandom(@default());
-
-        [MethodImpl(Inline), Op]
-        public static IWfShell install(IPolyrand src, IWfShell dst)
-            => dst.WithRandom(src);
+        public static IPolyrand pcg32(ulong? seed = null, ulong? index = null)
+            => create(Pcg.pcg32(seed ?? PolySeed64.Seed00, index));
 
         /// <summary>
         /// Creates a 64-bit Pcg RNG
@@ -114,7 +115,7 @@ namespace Z0
             => create(new XOrShift1024(seed ?? PolySeed1024.Default));
 
         [MethodImpl(Inline), Op]
-        public static IPolyrand create(IRngBoundPointSource<ulong> src)
+        public static IPolyrand create(IRngDomainValues<ulong> src)
             => new Polyrand(src);
 
         [MethodImpl(Inline), Op]

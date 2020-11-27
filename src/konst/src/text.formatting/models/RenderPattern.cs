@@ -9,42 +9,44 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct RenderPattern : ITextual
+    public readonly struct RenderPattern : IRenderPattern
     {
-        readonly string Content;
+        public string PatternText {get;}
+
+        readonly Type[] _ArgTypes;
 
         [MethodImpl(Inline)]
-        public RenderPattern(string src)
-            => Content = src;
-
-        public string PatternText
+        public RenderPattern(string src, Type[] types)
         {
-            [MethodImpl(Inline)]
-            get => Content;
+            PatternText = src;
+            _ArgTypes = types;
         }
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => text.empty(Content);
+            get => text.empty(PatternText);
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => text.nonempty(Content);
+            get => text.nonempty(PatternText);
         }
 
+        public byte ArgCount => (byte)(_ArgTypes?.Length ?? 0);
+
+        public ReadOnlySpan<Type> ArgTypes
+            => _ArgTypes;
+
         public string Apply(params object[] args)
-            => string.Format(Content, args);
+            => string.Format(PatternText, args);
+
         public string Format()
             => PatternText;
 
         public override string ToString()
             => Format();
 
-        [MethodImpl(Inline)]
-        public static implicit operator RenderPattern(string src)
-            => new RenderPattern(src);
     }
 }

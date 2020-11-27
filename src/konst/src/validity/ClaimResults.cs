@@ -13,7 +13,38 @@ namespace Z0
     [ApiHost]
     public readonly struct ClaimResults
     {
-        public static ClaimResult define(ClaimKind kind, bool success, AppMsg message)
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static RenderPattern<T,ClosedInterval<T>> NotIn<T>()
+            where T : unmanaged
+                => "not({0} in {1})";
+
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static RenderPattern<T,T> NotEqual<T>()
+            where T : unmanaged
+                => "not({0}=={1})";
+
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static RenderPattern<T,T> NotGreaterThan<T>()
+            where T : unmanaged
+                => "not({0}>{1})";
+
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static RenderPattern<T,T> NotLessThan<T>()
+            where T : unmanaged
+                => "not({0}<{1})";
+
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static RenderPattern<T,T> NotGreaterThanOrEqual<T>()
+            where T : unmanaged
+                => "not({0}>={1})";
+
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static RenderPattern<T,T> NotLessThanOrEqual<T>()
+            where T : unmanaged
+                => "not({0}<={1})";
+
+        [MethodImpl(Inline), Op]
+        public static ClaimResult define(ClaimKind kind, bool success, string message)
             => new ClaimResult(kind,success, message);
 
         public static ClaimResult<A> define<A>(string identifier, ClaimKind claim, bool success, string message, A a)

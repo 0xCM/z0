@@ -28,7 +28,7 @@ namespace Z0
         public void numeq<N,T>(NatSpan<N,T> lhs, NatSpan<N,T> rhs)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => CheckSpans.eq(lhs.Edit,rhs.Edit);
+                => CheckNumeric.eq(lhs.Edit,rhs.Edit);
 
         /// <summary>
         /// Asserts content equality for two tabular spans of coincident dimension
@@ -45,7 +45,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
             where T : unmanaged
-                => CheckSpans.eq(lhs.Data, rhs.Data);
+                => CheckNumeric.eq(lhs.Data, rhs.Data);
 
         public void perm_symbols()
         {

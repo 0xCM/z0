@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="offset">The bit position at which the slice begins</param>
         /// <param name="count">The number of bits, at most 8, to pull</param>
         [MethodImpl(Inline), Op]
-        public static byte slice(in BitSpan src, W8 w, int offset, int count)
+        public static byte slice(in BitSpan32 src, W8 w, int offset, int count)
         {
             var buffer = StackStores.alloc(w64);
             var unpacked = StackStores.span<Bit32>(ref buffer);
@@ -37,7 +37,7 @@ namespace Z0
         /// <param name="offset">The bit position at which the slice begins</param>
         /// <param name="count">The number of bits, at most 16, to pull</param>
         [MethodImpl(Inline), Op]
-        public static ushort slice(in BitSpan src, W16 w, int offset, int count)
+        public static ushort slice(in BitSpan32 src, W16 w, int offset, int count)
         {
             var buffer = StackStores.alloc(w128);
             var unpacked = StackStores.span<Bit32>(ref buffer);
@@ -54,7 +54,7 @@ namespace Z0
         /// <param name="offset">The bit position at which the slice begins</param>
         /// <param name="count">The number of bits, at most 32, to pull</param>
         [MethodImpl(Inline), Op]
-        public static uint slice(in BitSpan src, W32 w, int offset, int count)
+        public static uint slice(in BitSpan32 src, W32 w, int offset, int count)
         {
             var buffer = StackStores.alloc(w256);
             var unpacked = StackStores.span<Bit32>(ref buffer);
@@ -71,7 +71,7 @@ namespace Z0
         /// <param name="offset">The bit position at which the slice begins</param>
         /// <param name="count">The number of bits, at most 64, to pull</param>
         [MethodImpl(Inline), Op]
-        public static ulong slice(in BitSpan src, W64 w, int offset, int count)
+        public static ulong slice(in BitSpan32 src, W64 w, int offset, int count)
         {
             var buffer = StackStores.alloc(w512);
             var unpacked = StackStores.span<Bit32>(ref buffer);
@@ -81,7 +81,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        internal static sbyte islice(in BitSpan src, W8 w, int offset, int count)
+        internal static sbyte islice(in BitSpan32 src, W8 w, int offset, int count)
         {
             var buffer = StackStores.alloc(w64);
             var unpacked = StackStores.span<Bit32>(ref buffer);
@@ -91,7 +91,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        internal static short islice(in BitSpan src, W16 w, int offset, int count)
+        internal static short islice(in BitSpan32 src, W16 w, int offset, int count)
         {
             var buffer = StackStores.alloc(w128);
             var unpacked = StackStores.span<Bit32>(ref buffer);
@@ -101,7 +101,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        internal static int islice(in BitSpan src, W32 w, int offset, int count)
+        internal static int islice(in BitSpan32 src, W32 w, int offset, int count)
         {
             var buffer = StackStores.alloc(w256);
             var unpacked = StackStores.span<Bit32>(ref buffer);
@@ -111,7 +111,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        internal static long islice(in BitSpan src, W64 w, int offset, int count)
+        internal static long islice(in BitSpan32 src, W64 w, int offset, int count)
         {
             var buffer = StackStores.alloc(w512);
             var unpacked = StackStores.span<Bit32>(ref buffer);

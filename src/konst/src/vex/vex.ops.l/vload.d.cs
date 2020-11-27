@@ -88,7 +88,6 @@ namespace Z0
         public static unsafe Vector128<ulong> vload(W128 w, in ulong src)
             => LoadDquVector128(gptr(src));
 
-
         /// <summary>
         ///  __m256i _mm256_lddqu_si256 (__m256i const * mem_addr) VLDDQU ymm, m256
         /// </summary>

@@ -20,6 +20,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public FieldFormatter(StringBuilder dst, char delimiter = FieldDelimiter)
         {
+            z.insist(dst != null);
             Target = dst;
             Delimiter = delimiter;
         }
@@ -28,10 +29,14 @@ namespace Z0
             => Target.Append(Eol);
 
         public void Append(F f, object content)
-            => Target.Append(Render(content).PadRight(Table.width(f)));
+        {
+            z.insist(content != null);
+            Target.Append(Render(content).PadRight(Table.width(f)));
+        }
 
         public void Delimit(F f, object content)
         {
+            z.insist(content != null);
             Target.Append(Delimiter);
             Target.Append(Space);
             Target.Append(Render(content).PadRight(Table.width(f)));
@@ -40,6 +45,7 @@ namespace Z0
         public void Delimit<T>(F f, T content)
             where T : ITextual
         {
+            z.insist(content != null);
             Target.Append(Delimiter);
             Target.Append(Space);
             Target.Append(Render(content).PadRight(Table.width(f)));
@@ -54,7 +60,10 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => Target.ToString();
+        {
+            z.insist(Target != null);
+            return Target.ToString();
+        }
 
 
         public override string ToString()

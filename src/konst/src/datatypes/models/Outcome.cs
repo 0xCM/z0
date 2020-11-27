@@ -35,6 +35,13 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
+        public Outcome(bool success, string message)
+        {
+            Ok = success;
+            Message = success ? AppMsg.info(message) : AppMsg.define(message, LogLevel.Error);
+        }
+
+        [MethodImpl(Inline)]
         public Outcome(AppMsg message)
         {
             Ok = !(message.Kind == LogLevel.Error);
@@ -83,6 +90,10 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator Outcome((bool success, AppMsg msg) src)
+            => new Outcome(src.success, src.msg);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Outcome((bool success, string msg) src)
             => new Outcome(src.success, src.msg);
 
         [MethodImpl(Inline)]

@@ -18,7 +18,7 @@ namespace Z0
             => Log = log;
 
         public void Dispose()
-            => Log.Dispose();
+            => Log?.Dispose();
 
         public void Deposit(params TestCaseRecord[] src)
             => Log.Deposit(src);

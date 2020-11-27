@@ -11,14 +11,14 @@ namespace Z0
     /// <remarks>
     /// Core algorithms taken from the paper: https://arxiv.org/pdf/1402.6246.pdf
     /// </remarks>
-    public class XOrShift1024 : IRngBoundPointSource<ulong>
+    public class XOrShift1024 : IRngDomainValues<ulong>
     {
         readonly ulong[] state;
 
         int p;
 
         [MethodImpl(Inline)]
-        public static IRngBoundPointSource<ulong> Define(params ulong[] seed)
+        public static IRngDomainValues<ulong> Define(params ulong[] seed)
             => new XOrShift1024(seed);
 
         public XOrShift1024(ulong[] seed)

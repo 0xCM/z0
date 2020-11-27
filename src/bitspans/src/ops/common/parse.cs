@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static z;
 
     partial class BitSpans
     {
@@ -16,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         [Op]
-        public static BitSpan parse(string src)
+        public static BitSpan32 parse32(string src)
         {
             var data = BitString.normalize(src);
             var len = data.Length;
@@ -25,6 +26,22 @@ namespace Z0
             for(var i=0; i<= lastix; i++)
                bits[lastix - i] = data[i] == Bit32.Zero ? Bit32.Off : Bit32.On;
             return BitSpans.load(bits);
+        }
+
+        /// <summary>
+        /// Creates a bitspan from text encoding of a binary number
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        [Op]
+        public static BitSpan parse(string src)
+        {
+            var data = @readonly(BitString.normalize(src));
+            var len = data.Length;
+            var lastix = len - 1;
+            Span<bit> bits = new bit[len];
+            for(var i=0; i<= lastix; i++)
+               seek(bits,lastix - i) = skip(data,i) == bit.Zero ? bit.Off : bit.On;
+            return load(bits);
         }
     }
 }

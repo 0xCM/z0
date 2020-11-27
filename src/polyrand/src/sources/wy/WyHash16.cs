@@ -13,7 +13,7 @@ namespace Z0
     /// Implements a 16-bit random number generator
     /// </summary>
     /// <remarks>Algorithms take from https://lemire.me/blog/2019/07/03/a-fast-16-bit-random-number-generator/</remarks>
-    public class WyHash16 : IRngBoundPointSource<ushort>
+    public class WyHash16 : IRngDomainValues<ushort>
     {
         /// <summary>
         /// Creates a wyhash 16-bit rng

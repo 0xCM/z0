@@ -12,22 +12,22 @@ namespace Z0
 
     public readonly struct ClaimResult
     {
-        public readonly ClaimKind Claim;
+        public ClaimKind Claim {get;}
 
-        public readonly bool Success;
+        public bool Success {get;}
 
-        public readonly AppMsg Message;
-
-        [MethodImpl(Inline)]
-        public static implicit operator ClaimResult(Tripled<ClaimKind,bool,AppMsg> src)
-            => new ClaimResult(src.First, src.Second, src.Third);
+        public string Message {get;}
 
         [MethodImpl(Inline)]
-        public ClaimResult(ClaimKind claim, bool success, AppMsg message)
+        public ClaimResult(ClaimKind claim, bool success, string message)
         {
             Claim = claim;
             Success = success;
             Message = message;
         }
+
+        [MethodImpl(Inline)]
+        public static implicit operator ClaimResult(Tripled<ClaimKind,bool,string> src)
+            => new ClaimResult(src.First, src.Second, src.Third);
     }
 }

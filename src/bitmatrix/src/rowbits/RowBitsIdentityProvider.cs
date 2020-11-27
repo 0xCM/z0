@@ -23,7 +23,7 @@ namespace Z0
         const string @base = "rowbits";
 
         public IEnumerable<Type> Identifiable
-            => z.defer(typeof(RowBits<>));
+            => Collective.defer(typeof(RowBits<>));
 
         public TypeIdentity Identify(Type src)
         {

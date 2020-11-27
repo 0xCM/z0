@@ -81,7 +81,7 @@ namespace Z0.Asm
             for(var i=0; i<literals.Length; i++)
             {
                 var literal = literals[i];
-                var bits = BitSpans.parse(literal.Text);
+                var bits = BitSpans.parse32(literal.Text);
                 var bitval = bits.Convert<ulong>();
                 Claim.yea(gmath.eq(bitval, literal.Data));
             }

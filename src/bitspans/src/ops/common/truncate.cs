@@ -17,7 +17,16 @@ namespace Z0
         /// <param name="src">The source bitstring</param>
         /// <param name="maxbits">The maximum length of the target bitstring</param>
         [MethodImpl(Inline), Op]
-        public static BitSpan truncate(in BitSpan src, int maxbits)
-            => src.Length <= maxbits ? src : new BitSpan(src.Data.Slice(0, maxbits));        
+        public static BitSpan32 truncate(in BitSpan32 src, int maxbits)
+            => src.Length <= maxbits ? src : new BitSpan32(src.Data.Slice(0, maxbits));
+
+        /// <summary>
+        /// Clamps the source bitstring to one of a specified maximum length, discarding any excess
+        /// </summary>
+        /// <param name="src">The source bitstring</param>
+        /// <param name="maxbits">The maximum length of the target bitstring</param>
+        [MethodImpl(Inline), Op]
+        public static BitSpan truncate(in BitSpan src, uint maxbits)
+            => src.Length <= maxbits ? src : new BitSpan(src.Storage.Slice(0, (int)maxbits));
     }
 }

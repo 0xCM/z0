@@ -13,15 +13,6 @@ namespace Z0
     partial class BitMasks
     {
         /// <summary>
-        /// Defines a parity index j from a source integer i and a parity bit p, j := i*2 + p
-        /// </summary>
-        /// <param name="i">The source integer</param>
-        /// <param name="p">The parity bit</param>
-        [MethodImpl(Inline)]
-        public static byte pindex(byte i, byte p)
-            => uint8(i*2 + p);
-
-        /// <summary>
         /// Isolate least set bit and complement, computed by dst := ~src | (src - 1),
         /// where all bits in the target are set except for the least set bit in the source
         /// For example, [11101010] |> blisc = [11111101]

@@ -13,7 +13,7 @@ namespace Z0
     /// Implements a 64-bit random number generator
     /// </summary>
     /// <remarks>Algorithms take from https://github.com/lemire/testingRNG/blob/master/source/splitmix64.h</remarks>
-    public class SplitMix64 : IRngBoundPointSource<ulong>
+    public class SplitMix64 : IRngDomainValues<ulong>
     {
         ulong State;
 

@@ -11,32 +11,22 @@ namespace Z0
 
     public readonly struct RenderPattern<T> : IRenderPattern<RenderPattern<T>,T>
     {
-        readonly RenderPattern Pattern;
+        public string PatternText {get;}
 
         [MethodImpl(Inline)]
         public RenderPattern(string src)
-            => Pattern = src;
-
-        [MethodImpl(Inline)]
-        public RenderPattern(RenderPattern src)
-            => Pattern = src;
-
-        public string PatternText
-        {
-            [MethodImpl(Inline)]
-            get => Pattern.PatternText;
-        }
+            => PatternText = src;
 
         [MethodImpl(Inline)]
         public string Apply(in T src)
             => text.format(PatternText, src);
 
         [MethodImpl(Inline)]
-        public static implicit operator RenderPattern<T>(string src)
-            => new RenderPattern<T>(src);
+        public RenderCapture Capture(in T src)
+            => Render.capture(this, src);
 
         [MethodImpl(Inline)]
-        public static implicit operator RenderPattern<T>(RenderPattern src)
+        public static implicit operator RenderPattern<T>(string src)
             => new RenderPattern<T>(src);
     }
 }

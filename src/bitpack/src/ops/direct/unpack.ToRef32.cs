@@ -26,7 +26,7 @@ namespace Z0
 
             for(var i=0; i < count; i++)
             {
-                unpack(skip(src, i), ref tmp);
+                unpack8(skip(src, i), ref tmp);
                 vconvert(n64, in tmp, n256, n32).StoreTo(ref seek(dst, i*8));
             }
         }

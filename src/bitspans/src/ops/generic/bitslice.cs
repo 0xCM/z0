@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="src">The source bits</param>
         /// <typeparam name="T">The scalar type</typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static T bitslice<T>(in BitSpan src, int offset)
+        public static T bitslice<T>(in BitSpan32 src, int offset)
             where T : unmanaged
         {
             var dst = span<Bit32>(bitwidth<T>());
@@ -33,7 +33,7 @@ namespace Z0
         /// <param name="src">The source bits</param>
         /// <typeparam name="T">The scalar type</typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static T bitslice<T>(in BitSpan src)
+        public static T bitslice<T>(in BitSpan32 src)
             where T : unmanaged
         {
             var dst = span<Bit32>(bitwidth<T>());
@@ -50,7 +50,7 @@ namespace Z0
         /// <param name="count">The number of source bits that contribute to the extract</param>
         /// <typeparam name="T">The scalar type</typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static T bitslice<T>(in BitSpan src, int offset, int count)
+        public static T bitslice<T>(in BitSpan32 src, int offset, int count)
             where T : unmanaged
         {
             var dst = span<Bit32>(bitwidth<T>());

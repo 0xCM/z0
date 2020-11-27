@@ -19,15 +19,15 @@ namespace Z0
         const string N2x16 = "{2,-16}";
 
         [MethodImpl(Inline), Op]
-        public static RenderPattern rpad(N0 pos, N16 width)
-            => new RenderPattern(N0x16);
+        public static string rpad(N0 pos, N16 width)
+            => N0x16;
 
         [MethodImpl(Inline), Op]
-        public static RenderPattern rpad(N1 pos, N16 width)
-            => new RenderPattern(N1x16);
+        public static string rpad(N1 pos, N16 width)
+            => N1x16;
 
         [MethodImpl(Inline), Op]
-        public static RenderPattern rpad(N2 pos, N16 width)
-            => new RenderPattern(N2x16);
+        public static string rpad(N2 pos, N16 width)
+            => N2x16;
     }
 }

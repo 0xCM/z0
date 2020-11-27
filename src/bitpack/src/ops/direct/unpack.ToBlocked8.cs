@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="block">The block index</param>
         /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline), Op]
-        public static ref readonly SpanBlock64<byte> unpack(byte src, in SpanBlock64<byte> dst, int block = 0)
+        public static ref readonly SpanBlock64<byte> unpack8(byte src, in SpanBlock64<byte> dst, int block = 0)
         {
             unpack(src, dst.Block(block));
             return ref dst;
@@ -33,7 +33,7 @@ namespace Z0
         /// <param name="block">The block index</param>
         /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline), Op]
-        public static ref readonly SpanBlock128<byte> unpack(ushort src, in SpanBlock128<byte> dst, int block = 0)
+        public static ref readonly SpanBlock128<byte> unpack16(ushort src, in SpanBlock128<byte> dst, int block = 0)
         {
             unpack(src, dst.Block(block));
             return ref dst;
@@ -47,7 +47,7 @@ namespace Z0
         /// <param name="block">The block index</param>
         /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline), Op]
-        public static ref readonly SpanBlock256<byte> unpack(uint src, in SpanBlock256<byte> dst, int block = 0)
+        public static ref readonly SpanBlock256<byte> unpack32(uint src, in SpanBlock256<byte> dst, int block = 0)
         {
             unpack(src, dst.Block(block));
             return ref dst;
@@ -61,7 +61,7 @@ namespace Z0
         /// <param name="block">The block index</param>
         /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline), Op]
-        public static ref readonly SpanBlock512<byte> unpack(ulong src, in SpanBlock512<byte> dst, int block = 0)
+        public static ref readonly SpanBlock512<byte> unpack64(ulong src, in SpanBlock512<byte> dst, int block = 0)
         {
             unpack(src, dst.Block(block));
             return ref dst;

@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="src">The pattern data source</param>
         /// <typeparam name="T">The target vector component type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Vector128<T> vload<T>(N128 n, ReadOnlySpan<byte> src)
+        public static Vector128<T> vload<T>(W128 n, ReadOnlySpan<byte> src)
             where T : unmanaged
                 => generic<T>(vload(n, first(src)));
 
@@ -31,7 +31,7 @@ namespace Z0
         /// <param name="src">The pattern data source</param>
         /// <typeparam name="T">The target vector component type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Vector256<T> vload<T>(N256 n, ReadOnlySpan<byte> src)
+        public static Vector256<T> vload<T>(W256 n, ReadOnlySpan<byte> src)
             where T : unmanaged
                 => generic<T>(vload(n, first(src)));
 
@@ -42,8 +42,8 @@ namespace Z0
         /// <param name="src">The pattern data source</param>
         /// <typeparam name="T">The target vector component type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Vector512<T> vload<T>(N512 n, ReadOnlySpan<byte> src)
+        public static Vector512<T> vload<T>(W512 n, ReadOnlySpan<byte> src)
             where T : unmanaged
-                => generic<T>(vload(n, first(src)));    
+                => generic<T>(vload(n, first(src)));
     }
 }

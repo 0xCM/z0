@@ -130,6 +130,7 @@ namespace Z0
 
         public const ulong DefaultIndex = 1442695040888963407;
 
+        [Op]
         public static ulong advance(ulong state, ulong delta, ulong multiplier, ulong index)
         {
             ulong factor = 1u;
@@ -147,6 +148,5 @@ namespace Z0
             }
             return factor * state + increment;
         }
-
     }
 }

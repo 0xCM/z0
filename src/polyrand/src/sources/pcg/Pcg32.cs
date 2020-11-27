@@ -6,12 +6,11 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-
     using static Konst;
 
     using api = Pcg;
 
-    public class Pcg32 : IRngNav<uint>
+    public class Pcg32 : IRngNav<uint>, IRngDomainValues<ulong>
     {
         [MethodImpl(Inline)]
         internal Pcg32(ulong s0, ulong? index = null)
@@ -95,5 +94,17 @@ namespace Z0
             var dst = rotr((uint)src,(uint)(state >> 59));
             return dst;
         }
+
+        [MethodImpl(Inline)]
+        public ulong Next(ulong max)
+            => Next((uint)max);
+
+        [MethodImpl(Inline)]
+        public ulong Next(ulong min, ulong max)
+            => Next((uint)min, (uint)max);
+
+        ulong ISource<ulong>.Next()
+            => Next();
+
     }
 }

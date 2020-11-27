@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public enum ClaimKind
+    public enum ClaimKind : byte
     {
         Eq,
 

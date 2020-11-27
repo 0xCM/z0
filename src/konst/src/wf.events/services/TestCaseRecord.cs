@@ -48,7 +48,7 @@ namespace Z0
 
         TestCaseRecord(string name, bool succeeded, Duration duration)
         {
-            Case = name;
+            Case = name ?? "<missing_name>";
             Status = succeeded ? TestCaseStatus.Passed : TestCaseStatus.Failed;
             Duration = duration;
             Executed = now();

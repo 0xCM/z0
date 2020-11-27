@@ -22,10 +22,10 @@ namespace Z0
         /// <param name="count">The number of values to sample</param>
         /// <typeparam name="T">The value type</typeparam>
         [MethodImpl(Inline)]
-        public static HashSet<T> Distinct<T>(this IPolyrand random,  T[] source, int count)
+        public static HashSet<T> Distinct<T>(this IPolySourced random,  T[] source, int count)
             => random.Distinct(source.Length, count).Select(i => source[i]).ToHashSet();
 
-        public static HashSet<T> Distinct<T>(this IPolyrand random, T pool, int count)
+        public static HashSet<T> Distinct<T>(this IPolySourced random, T pool, int count)
             where T : unmanaged
         {
             var src = random.Stream(default(T), pool);
@@ -35,7 +35,7 @@ namespace Z0
             return set;
         }
 
-        public static HashSet<T> Distinct<T>(this IPolyrand random, T pool, T count)
+        public static HashSet<T> Distinct<T>(this IPolySourced random, T pool, T count)
             where T : unmanaged
         {
             var src = random.Stream(default(T), pool);
@@ -52,7 +52,7 @@ namespace Z0
         /// <param name="random">The random source</param>
         /// <param name="count">The number of points to take</param>
         /// <typeparam name="T">The element type</typeparam>
-        public static HashSet<T> Distinct<T>(this IPolyrand random, int count)
+        public static HashSet<T> Distinct<T>(this IPolySourced random, int count)
             where T : unmanaged
         {
             var stream = random.Stream<T>();

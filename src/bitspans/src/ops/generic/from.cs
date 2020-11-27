@@ -19,7 +19,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The packed source bits</param>
         [MethodImpl(Inline), Op, Closures(Integers)]
-        public static BitSpan from<T>(T src)
+        public static BitSpan32 from<T>(T src)
             where T : unmanaged
                 => from_u(src);
 
@@ -29,7 +29,7 @@ namespace Z0
         /// <param name="src">The packed source bits</param>
         /// <param name="maxbits">The maximum number of bits to draw from the source</param>
         [MethodImpl(Inline), Op, Closures(Integers)]
-        public static BitSpan from<T>(T src, int maxbits)
+        public static BitSpan32 from<T>(T src, int maxbits)
             where T : unmanaged
         {
             var dst = from(src);
@@ -39,7 +39,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static BitSpan from_u<T>(T src)
+        static BitSpan32 from_u<T>(T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -55,7 +55,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static BitSpan from_i<T>(T src)
+        static BitSpan32 from_i<T>(T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))

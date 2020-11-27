@@ -12,18 +12,4 @@ namespace Z0
     {
 
     }
-
-    [Free]
-    public interface ICellSource : IValueSource
-    {
-
-    }
-
-    [Free]
-    public interface IDomainCells<T> : IDomainValues<T>
-        where T : struct, IDataCell
-    {
-
-    }
-
 }

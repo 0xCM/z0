@@ -14,31 +14,31 @@ namespace Z0
         /// <summary>
         /// Produces an interminable stream of random bits
         /// </summary>
-        /// <param name="random">The random source</param>
-        public static IEnumerable<Bit32> BitStream32(this IValueSource random)
+        /// <param name="source">The random source</param>
+        public static IEnumerable<Bit32> BitStream32(this IValueSource source)
         {
             const int w = 64;
             while(true)
             {
-                var data = random.Next<ulong>();
+                var data = source.Next<ulong>();
                 for(var i=0; i<w; i++)
                     yield return Bit32.test(data,i);
             }
         }
 
         /// <summary>
+        /// Produces an interminable stream of random bits
+        /// </summary>
+        /// <param name="source">The random source</param>
+        public static IEnumerable<bit> BitStream(this IValueSource source)
+            => Sources.bitstream(source);
+
+        /// <summary>
         /// Produces an interminable stream of random bits from a value sequence of parametric type
         /// </summary>
         /// <param name="random">The random source</param>
-        public static IEnumerable<T> BitStream<T>(this IValueSource src)
+        public static IEnumerable<T> BitStream<T>(this IValueSource source)
             where T : unmanaged
-        {
-            while(true)
-            {
-                var data = src.Next<ulong>();
-                for(byte i=0; i<64; i++)
-                    yield return z.force<byte,T>((byte)BitStates.test(data,i));
-            }
-        }
+                => Sources.bitstream<T>(source);
     }
 }

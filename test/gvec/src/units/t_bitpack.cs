@@ -37,7 +37,7 @@ namespace Z0
                 var src = Random.Next<ushort>();
                 var dst = SpanBlocks.alloc<byte>(n128);
 
-                BitPack.unpack(src, dst);
+                BitPack.unpack16(src, dst);
                 unpack_check(src,dst);
 
                 var rebound = BitPack.pack(dst,n8);
@@ -51,7 +51,7 @@ namespace Z0
             {
                 var src = Random.Next<uint>();
                 var dst = SpanBlocks.alloc<byte>(n256);
-                BitPack.unpack(src, dst);
+                BitPack.unpack32(src, dst);
 
                 unpack_check(src,dst);
 
@@ -66,7 +66,7 @@ namespace Z0
             {
                 var src = Random.Next<ulong>();
                 var dst = SpanBlocks.alloc<byte>(n512);
-                BitPack.unpack(src, dst);
+                BitPack.unpack64(src, dst);
 
                 unpack_check(src,dst.Data);
 

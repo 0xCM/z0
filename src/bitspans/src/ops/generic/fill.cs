@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
     using static z;
-    
+
     using SB = SpannedBits;
 
     partial class BitSpans
@@ -19,12 +19,12 @@ namespace Z0
         /// </summary>
         /// <param name="src">The packed source bits</param>
         [MethodImpl(Inline), Op, Closures(Integers)]
-        public static ref readonly BitSpan fill<T>(T src, in BitSpan dst)
+        public static ref readonly BitSpan32 fill<T>(T src, in BitSpan32 dst)
             where T : unmanaged
                 => ref fill_u(src,dst);
 
         [MethodImpl(Inline)]
-        static ref readonly BitSpan fill_u<T>(T src, in BitSpan dst)
+        static ref readonly BitSpan32 fill_u<T>(T src, in BitSpan32 dst)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -40,7 +40,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static ref readonly BitSpan fill_i<T>(T src, in BitSpan dst)
+        static ref readonly BitSpan32 fill_i<T>(T src, in BitSpan32 dst)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -52,7 +52,7 @@ namespace Z0
             else if(typeof(T) == typeof(long))
                 return ref SB.fill(Cast.to<T,ulong>(src),dst);
             else
-                throw Unsupported.define<T>();            
+                throw Unsupported.define<T>();
         }
     }
 }

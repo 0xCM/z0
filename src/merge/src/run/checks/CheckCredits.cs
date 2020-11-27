@@ -166,7 +166,7 @@ namespace Z0
                 ref readonly var literal = ref skip(src,i);
                 var data = literal.Data;
                 var text = literal.Text;
-                var bits = BitSpans.parse(text);
+                var bits = BitSpans.parse32(text);
                 var bitval = bits.Convert<ulong>();
                 seek(dst,i) = gmath.eq(bitval, data);
             }

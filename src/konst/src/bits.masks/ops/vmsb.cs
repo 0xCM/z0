@@ -14,8 +14,7 @@ namespace Z0
     partial class BitMasks
     {
         /// <summary>
-        /// [100...000 ... 100...000]
-        /// The greatest bit of each component is enabled
+        /// The greatest bit of each cell is enabled
         /// </summary>
         /// <typeparam name="T">The component data type</typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]

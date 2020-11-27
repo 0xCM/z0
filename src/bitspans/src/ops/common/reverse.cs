@@ -12,10 +12,18 @@ namespace Z0
     partial class BitSpans
     {
         [MethodImpl(Inline), Op]
-        public static ref readonly BitSpan reverse(in BitSpan src)
+        public static ref readonly BitSpan32 reverse(in BitSpan32 src)
         {
             src.Edit.Reverse();
             return ref src;
         }
+
+        [MethodImpl(Inline), Op]
+        public static ref readonly BitSpan reverse(in BitSpan src)
+        {
+            src.Storage.Reverse();
+            return ref src;
+        }
+
     }
 }

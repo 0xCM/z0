@@ -94,7 +94,6 @@ namespace Z0
             Claim.eq(SByte.MinValue, y1);
             ClaimPrimalSeq.eq("10000000", y1.ToBitString());
 
-
             var x2 = (byte)0;
             var y2 = Bits.enable(x2, 7);
             Claim.eq(SByte.MinValue, (sbyte)y1);

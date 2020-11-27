@@ -228,7 +228,7 @@ namespace Z0
             var literals = Lit<T>();
             foreach(var m in literals.Storage)
             {
-                var bits = BitSpans.parse(m.Text);
+                var bits = BitSpans.parse32(m.Text);
                 var bitval = bits.Convert<T>();
                 var ok = gmath.eq(bitval,m.Data);
 

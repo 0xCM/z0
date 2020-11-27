@@ -12,7 +12,7 @@ namespace Z0
 
     partial class VServices
     {
-        public readonly struct Units128<T> : IEmitter128<T>
+        public readonly struct Units128<T> : SFx.IEmitter128<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]
@@ -20,7 +20,7 @@ namespace Z0
                 => z.vunits(Kinds.vk128<T>());
         }
 
-        public readonly struct Units256<T> : IEmitter256<T>
+        public readonly struct Units256<T> : SFx.IEmitter256<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]

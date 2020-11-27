@@ -179,7 +179,7 @@ namespace Z0
         public static ref readonly SpanBlock16<T> Block<T>(this IPolySourced random, in SpanBlock16<T> dst, int block)
             where T : unmanaged
         {
-            random.SpanFill(dst.Block(block));
+            random.Fill(dst.Block(block));
             return ref dst;
         }
 
@@ -193,7 +193,7 @@ namespace Z0
         public static ref readonly SpanBlock32<T> Block<T>(this IPolySourced random, in SpanBlock32<T> dst, int block)
             where T : unmanaged
         {
-            random.SpanFill(dst.Block(block));
+            random.Fill(dst.Block(block));
             return ref dst;
         }
 
@@ -207,7 +207,7 @@ namespace Z0
         public static ref readonly SpanBlock64<T> Block<T>(this IPolySourced random, in SpanBlock64<T> dst, int block)
             where T : unmanaged
         {
-            random.SpanFill(dst.Block(block));
+            random.Fill(dst.Block(block));
             return ref dst;
         }
 
@@ -221,7 +221,7 @@ namespace Z0
         public static ref readonly SpanBlock128<T> Block<T>(this IPolySourced random, in SpanBlock128<T> dst, int block)
             where T : unmanaged
         {
-            random.SpanFill(dst.Block(block));
+            random.Fill(dst.Block(block));
             return ref dst;
         }
 
@@ -235,7 +235,7 @@ namespace Z0
         public static ref readonly SpanBlock256<T> Block<T>(this IPolySourced random, in SpanBlock256<T> dst, int block)
             where T : unmanaged
         {
-            random.SpanFill(dst.Block(block));
+            random.Fill(dst.Block(block));
             return ref dst;
         }
 
@@ -249,7 +249,7 @@ namespace Z0
         public static ref readonly SpanBlock512<T> Block<T>(this IPolySourced random, in SpanBlock512<T> dst, int block)
             where T : unmanaged
         {
-            random.SpanFill(dst.Block(block));
+            random.Fill(dst.Block(block));
             return ref dst;
         }
 

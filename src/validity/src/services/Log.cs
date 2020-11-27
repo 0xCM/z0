@@ -169,14 +169,14 @@ namespace Z0
                 => Deposit(AppMsg.define(msg,severity ?? LogLevel.Info));
         }
 
-        sealed class AppLogger : TestLogger<AppLogger>
-        {
-            public AppLogger()
-             : base(LogArea.App)
-            {
+        // sealed class AppLogger : TestLogger<AppLogger>
+        // {
+        //     public AppLogger()
+        //      : base(LogArea.App)
+        //     {
 
-            }
-        }
+        //     }
+        // }
 
         sealed class BenchLogger : TestLogger<BenchLogger>
         {

@@ -14,15 +14,15 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ref readonly BitSpan and(in BitSpan x, in BitSpan y, in BitSpan z)
         {
-            var bitcount = z.Length;
-            for(var i=0; i< bitcount; i++)
+            var count = z.BitCount;
+            for(var i=0u; i<count; i++)
                 z[i] = x[i] & y[i];
             return ref z;
         }
 
         [MethodImpl(Inline), Op]
         public static BitSpan and(in BitSpan x, in BitSpan y)
-            => and(x,y, alloc(y.Length));
+            => and(x,y, alloc(y.BitCount));
 
         [MethodImpl(Inline), Op]
         public static ref readonly BitSpan or(in BitSpan x, in BitSpan y, in BitSpan z)
@@ -35,7 +35,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static BitSpan or(in BitSpan x, in BitSpan y)
-            => or(x,y, alloc(y.Length));
+            => or(x,y, alloc(y.BitCount));
 
         [MethodImpl(Inline), Op]
         public static ref readonly BitSpan xor(in BitSpan x, in BitSpan y, in BitSpan z)
@@ -48,7 +48,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static BitSpan xor(in BitSpan x, in BitSpan y)
-            => xor(x,y, alloc(y.Length));
+            => xor(x,y, alloc(y.BitCount));
 
         [MethodImpl(Inline), Op]
         public static ref readonly BitSpan not(in BitSpan x, in BitSpan z)
@@ -61,12 +61,12 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static BitSpan not(in BitSpan x)
-            => not(x,alloc(x.Length));
+            => not(x,alloc(x.BitCount));
 
         [MethodImpl(Inline), Op]
         public static ref readonly BitSpan select(in BitSpan a, in BitSpan b, in BitSpan c, in BitSpan z)
         {
-            var tmp = alloc(z.Length);
+            var tmp = alloc(z.BitCount);
             not(a,tmp);
             and(a,b,z);
             and(tmp,c, tmp);
@@ -81,19 +81,19 @@ namespace Z0
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline), Op]
         public static BitSpan select(in BitSpan a, in BitSpan b, in BitSpan c)
-            => select(a,b,c, alloc(c.Length));
+            => select(a,b,c, alloc(c.BitCount));
 
         [MethodImpl(Inline), Op]
         public static ref readonly BitSpan sll(in BitSpan a, int offset, in BitSpan z)
         {
-            a.Data.Slice(0, offset).CopyTo(z.Data, offset);
+            a.Storage.Slice(0, offset).CopyTo(z.Storage, offset);
             for(var i=0; i<offset; i++)
-                z[i] = Bit32.Off;
+                z[i] = bit.Off;
             return ref z;
         }
 
         [MethodImpl(Inline), Op]
-        public static Bit32 same(in BitSpan a, in BitSpan b)
+        public static bit same(in BitSpan a, in BitSpan b)
         {
             if(a.Length != b.Length)
                 return false;

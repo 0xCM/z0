@@ -10,7 +10,7 @@ namespace Z0
     /// Characterizes a fountain of generic points
     /// </summary>
     [Free]
-    public interface IPolySource : IDomainValues, IValueSource
+    public interface IPolyDomain : IDomainValues, IValueSource
     {
         /// <summary>
         /// Returns the default domain used when producing random points for a parametrically-identified type
@@ -18,12 +18,5 @@ namespace Z0
         /// <typeparam name="T">The point type</typeparam>
         Interval<T> Domain<T>()
             where T : unmanaged;
-    }
-
-    [Free]
-    public interface IPolySource<T> : IDomainValues<T>, IValueSource<T>
-        where T : struct
-    {
-
     }
 }

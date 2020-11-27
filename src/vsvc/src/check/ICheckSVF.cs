@@ -191,7 +191,6 @@ namespace Z0
             }
         }
 
-
         /// <summary>
         /// Verifies that a vectorized pattern source produces the expected pattern
         /// </summary>
@@ -201,7 +200,7 @@ namespace Z0
         /// <typeparam name="T">The component type</typeparam>
         void CheckPattern<F,T>(F f, Vector128<T> expect)
             where T : unmanaged
-            where F : IEmitter128<T>
+            where F : SFx.IEmitter128<T>
         {
             var succeeded = true;
             var casename = ApiTestIdentity.name(f);
@@ -233,7 +232,7 @@ namespace Z0
         /// <typeparam name="T">The component type</typeparam>
         void CheckPattern<F,T>(F f, Vector256<T> expect)
             where T : unmanaged
-            where F : IEmitter256<T>
+            where F : SFx.IEmitter256<T>
         {
             var succeeded = true;
             var casename = ApiTestIdentity.name(f);
