@@ -14,7 +14,8 @@ namespace Z0
     /// <summary>
     /// Defines a refined 64-bit immediate value
     /// </summary>
-    public readonly struct Imm64<K> : IDataType<Imm64<K>,K>
+    [DataType]
+    public readonly struct Imm64<K> : IImmValue<Imm64<K>,W,K>
         where K : unmanaged
     {
         public K Value {get;}

@@ -4,6 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
     using System.Runtime.CompilerServices;
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
@@ -22,6 +23,7 @@ namespace Z0
         where T : struct
     {
         T Value {get;}
+
 
         BitSize IDataType.PhysicalWidth
             => Unsafe.SizeOf<T>();

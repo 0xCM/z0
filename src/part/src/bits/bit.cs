@@ -7,11 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     public readonly struct bit : ITextual, IEquatable<bit>
     {
-        internal readonly bool State;
+        public readonly bool State;
 
         public const char Zero = '0';
 
@@ -53,9 +53,9 @@ namespace Z0
         public bit(long state)
             => State = state != 0;
 
+        [MethodImpl(Inline)]
         public bit(ulong state)
             => State = state != 0;
-
 
         /// <summary>
         /// Constructs a disabled bit
@@ -75,16 +75,13 @@ namespace Z0
              get => true;
         }
 
-        /// <summary>
-        /// Promotes a bit to a numeric value where all target bits are enabled if the state of the
-        /// bit is on; otherwise all target bits are disabled
-        /// </summary>
-        /// <param name="src">The source bit</param>
-        /// <typeparam name="T">The target numeric type</typeparam>
         [MethodImpl(Inline), Op]
-        public T Promote<T>()
-            where T : unmanaged
-                => this ? NumericLiterals.maxval<T>() : default;
+        public char ToChar()
+            => (char)(u8(State) + 48);
+
+        [MethodImpl(Inline)]
+        public string Format()
+            => State ? "1" : "0";
 
         [MethodImpl(Inline), Op]
         public bool Equals(bit b)
@@ -96,18 +93,11 @@ namespace Z0
         public override int GetHashCode()
             => (int)(u8(State));
 
-        [MethodImpl(Inline), Op]
-        public char ToChar()
-            => (char)(u8(State) + 48);
-
-        [MethodImpl(Inline)]
-        public string Format()
-            => State ? "1" : "0";
 
         public override string ToString()
             => Format();
 
-       /// <summary>
+        /// <summary>
         /// Computes the bitwise AND between the operands
         /// </summary>
         /// <param name="a">The left bit</param>

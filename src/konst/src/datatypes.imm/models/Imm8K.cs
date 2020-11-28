@@ -15,7 +15,7 @@ namespace Z0
     /// Defines a refined 8-bit immediate value
     /// </summary>
     [DataType]
-    public readonly struct Imm8<E>
+    public readonly struct Imm8<E> : IImmValue<Imm8<E>,W, E>
         where E : unmanaged
     {
         public E Value {get;}
@@ -49,6 +49,5 @@ namespace Z0
             => new Imm8<E>(src);
 
         public static W W => default;
-
     }
 }

@@ -16,6 +16,17 @@ namespace Z0
         Type TargetType {get;}
     }
 
+    public interface IFormatter<S> : IFormatter
+    {
+        Type IFormatter.SourceType
+            => typeof(S);
+
+        Type IFormatter.TargetType
+            => typeof(Span<byte>);
+
+        Span<byte> Format(in S src);
+    }
+
     public interface IFormatter<S,T> : IFormatter
     {
         T Format(S src);

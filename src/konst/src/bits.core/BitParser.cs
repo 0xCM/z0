@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Linq;
 
     using static AsciCharCode;
     using static Konst;
@@ -14,6 +15,13 @@ namespace Z0
     [ApiHost(ApiNames.BitParser,true)]
     public readonly struct BitParser
     {
+
+        public static Bit32 Parse(string src)
+            => OnLabels.Contains(src.Trim().ToLower());
+
+        static string[] OnLabels
+            => new string[]{"on", "1", "enabled", "true", "yes"};
+
         static ReadOnlySpan<AsciCharCode> Filter
             => new AsciCharCode[]{LBracket, RBracket, AsciCharCode.Space, Underscore, b};
 

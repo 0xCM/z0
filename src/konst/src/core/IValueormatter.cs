@@ -5,14 +5,14 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    partial struct z
+    [Free]
+    public interface IValueFormatter<S> : IFormatter<S>
+        where S : struct
     {
-        [MethodImpl(Inline)]
-        public static ref bit u1(in byte src)
-            => ref memory.u1(src);
+        Span<byte> IFormatter<S>.Format(in S src)
+            => z.bytes(src);
     }
 }

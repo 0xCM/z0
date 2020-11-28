@@ -4,12 +4,13 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+
     public interface IImmValue
     {
 
     }
 
-    public interface IImmValue<T> : IImmValue
+    public interface IImmValue<T> : IImmValue, IDataType<T>
         where T : unmanaged
     {
 

@@ -12,7 +12,7 @@ namespace Z0
     using F = NumericLiteralField;
     using R = NumericLiteral;
 
-    public readonly struct NumericLiteralFormatter : IValueFormatter<F,R>
+    public readonly struct NumericLiteralFormatter : ITextValueFormatter<F,R>
     {
         public void Format(in R src, DatasetFormatter<F> dst)
         {
@@ -42,7 +42,7 @@ namespace Z0
         static string Format(Base2 @base, NumericLiteral src)
             => BitFormatter.bits(src.Data, src.TypeCode);
 
-        void IValueFormatter<F,R>.Format(in R src, IDatasetFormatter<F> dst)
+        void ITextValueFormatter<F,R>.Format(in R src, IDatasetFormatter<F> dst)
         {
             dst.Delimit(NumericLiteralField.Name, src.Name);
             dst.Delimit(NumericLiteralField.Base, src.Base);

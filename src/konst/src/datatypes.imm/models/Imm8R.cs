@@ -13,7 +13,7 @@ namespace Z0
     /// Describes an 8-bit immediate that is potentially refined
     /// </summary>
     [DataType]
-    public readonly struct Imm8R
+    public readonly struct Imm8R : IImmValue<Imm8R,W8,byte>
     {
         public byte Value {get;}
 

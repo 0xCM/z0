@@ -11,21 +11,12 @@ namespace Z0
 
     partial struct z
     {
-        /// <summary>
-        /// Converts a <see cref='bool'/> to a <see cref='uint'/>
-        /// </summary>
-        /// <param name="on">The source state</param>
-        [MethodImpl(Inline), Op]
-        public static unsafe uint u32(bool on)
-            => *((byte*)(&on));
+        [MethodImpl(Inline)]
+        public static unsafe uint u32(bool src)
+            => memory.u32(src);
 
-        /// <summary>
-        /// Presents a parametric references as a <see cref='uint'/> reference
-        /// </summary>
-        /// <param name="src">The source reference</param>
-        /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline)]
         public static ref uint u32<T>(in T src)
-            => ref @as<T,uint>(src);
+            => ref memory.u32(src);
     }
 }

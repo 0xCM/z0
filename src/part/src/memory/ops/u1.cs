@@ -7,12 +7,16 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
-    partial struct z
+    partial struct memory
     {
-        [MethodImpl(Inline)]
+        /// <summary>
+        /// Presents an input source byte as a bit reference
+        /// </summary>
+        /// <param name="src">The source byte</param>
+        [MethodImpl(Inline), Op]
         public static ref bit u1(in byte src)
-            => ref memory.u1(src);
+            => ref @as<byte,bit>(src);
     }
 }

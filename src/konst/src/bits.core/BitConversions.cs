@@ -113,4 +113,29 @@ namespace Z0
                 throw no<T>();
         }
     }
+
+
+    /// <summary>
+    /// Conversion provider for the bit data type
+    /// </summary>
+    readonly struct Bit32Converter : IConversionProvider<Bit32Converter,Bit32>, IBiconverter<Bit32>
+    {
+        public Bit32Converter Converter => default;
+
+        [MethodImpl(Inline)]
+        public T Convert<T>(Bit32 src)
+            => BitConversionOps.from<T>(src);
+
+        [MethodImpl(Inline)]
+        public Bit32 Convert<T>(T src)
+            => BitConversionOps.to<T>(src);
+
+        [MethodImpl(Inline)]
+        public Option<object> ConvertFromTarget(object incoming, Type dst)
+            => BitConversionOps.FromTarget(incoming,dst);
+
+        [MethodImpl(Inline)]
+        public Option<object> ConvertToTarget(object incoming)
+            => BitConversionOps.ToTarget(incoming);
+    }
 }

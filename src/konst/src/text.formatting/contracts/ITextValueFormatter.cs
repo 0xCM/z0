@@ -8,7 +8,7 @@ namespace Z0
 
     using static Konst;
 
-    public interface IValueFormatter<T> : ITextFormatter<T>
+    public interface ITextValueFormatter<T> : ITextFormatter<T>
         where T : struct
     {
         string Format(in T src);
@@ -19,7 +19,7 @@ namespace Z0
         string HeaderText {get;}
     }
 
-    public interface IValueFormatter<F,T> : IValueFormatter<T>
+    public interface ITextValueFormatter<F,T> : ITextValueFormatter<T>
         where F : unmanaged, Enum
         where T : struct
     {
@@ -32,14 +32,14 @@ namespace Z0
                 dst.EmitEol();
         }
 
-        string IValueFormatter<T>.Format(in T src)
+        string ITextValueFormatter<T>.Format(in T src)
         {
             var dst = Formatters.dataset<F>();
             Format(src, dst);
             return dst.Render();
         }
 
-        string IValueFormatter<T>.HeaderText
+        string ITextValueFormatter<T>.HeaderText
             => Formatters.dataset<F>().HeaderText;
     }
 }

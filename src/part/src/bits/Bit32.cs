@@ -8,37 +8,31 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Linq;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// An anti-succinct representation of a bit
     /// </summary>
-    [
-        IdentityProvider(typeof(Bit32)),
-        UserType(UserTypeId.BitId),
-        Width(TypeWidth.W1),
-        ConversionProvider(typeof(Bit32Converter)),
-        ApiHost
-    ]
-    public readonly struct Bit32 : ITextual<Bit32>, ITypeIdentityProvider<Bit32>
+    [ApiHost]
+    public readonly struct Bit32 : ITextual<Bit32>
     {
         public const char Zero = '0';
 
         public const char One = '1';
 
-        readonly uint state;
+        readonly uint State;
 
         [MethodImpl(Inline), Op]
-        unsafe Bit32(bool on)
-            => this.state  = *((byte*)(&on));
+        unsafe Bit32(bool src)
+            => State  = *((byte*)(&src));
 
         [MethodImpl(Inline)]
-        Bit32(uint state)
-            => this.state = state;
+        Bit32(uint src)
+            => State = src;
 
         [MethodImpl(Inline), Op]
         public char ToChar()
-            => (char)(state + 48);
+            => (char)(State + 48);
 
         [MethodImpl(Inline), Op]
         public static Bit32 Parse(char c)
@@ -51,12 +45,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Bit32 specific<T>(T src)
             => Unsafe.As<T,Bit32>(ref src);
-
-        public static Bit32 Parse(string src)
-            => OnLabels.Contains(src.Trim().ToLower());
-
-        static string[] OnLabels
-            => new string[]{"on", "1", "enabled", "true", "yes"};
 
         /// <summary>
         /// Constructs a disabled bit
@@ -288,7 +276,7 @@ namespace Z0
         /// <param name="b">The right bit</param>
         [MethodImpl(Inline), Op]
         public static Bit32 and(Bit32 a, Bit32 b)
-            => Wrap(a.state & b.state);
+            => Wrap(a.State & b.State);
 
         /// <summary>
         /// Computes c = a | b
@@ -297,7 +285,7 @@ namespace Z0
         /// <param name="b">The right bit</param>
         [MethodImpl(Inline), Op]
         public static Bit32 or(Bit32 a, Bit32 b)
-            => Wrap(a.state | b.state);
+            => Wrap(a.State | b.State);
 
         /// <summary>
         /// Computes c = a ^ b
@@ -306,7 +294,7 @@ namespace Z0
         /// <param name="b">The right bit</param>
         [MethodImpl(Inline), Op]
         public static Bit32 xor(Bit32 a, Bit32 b)
-            => Wrap(a.state ^ b.state);
+            => Wrap(a.State ^ b.State);
 
         /// <summary>
         /// Computes c := ~a = !a
@@ -314,7 +302,7 @@ namespace Z0
         /// <param name="a">The source bit</param>
         [MethodImpl(Inline), Op]
         public static Bit32 not(Bit32 a)
-            => SafeWrap(~a.state);
+            => SafeWrap(~a.State);
 
         /// <summary>
         /// Computes c := ~ (a & b)
@@ -323,7 +311,7 @@ namespace Z0
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline), Op]
         public static Bit32 nand(Bit32 a, Bit32 b)
-            => SafeWrap(~(a.state & b.state));
+            => SafeWrap(~(a.State & b.State));
 
         /// <summary>
         /// Computes c := ~ (a | b)
@@ -333,7 +321,7 @@ namespace Z0
         /// <remarks>See https://en.wikipedia.org/wiki/Logical_biconditional</remarks>
         [MethodImpl(Inline), Op]
         public static Bit32 nor(Bit32 a, Bit32 b)
-            => SafeWrap(~(a.state | b.state));
+            => SafeWrap(~(a.State | b.State));
 
         /// <summary>
         /// Computes c := ~ (a ^ b)
@@ -343,7 +331,7 @@ namespace Z0
         /// <remarks>See https://en.wikipedia.org/wiki/Logical_biconditional</remarks>
         [MethodImpl(Inline), Op]
         public static Bit32 xnor(Bit32 a, Bit32 b)
-            => SafeWrap(~(a.state ^ b.state));
+            => SafeWrap(~(a.State ^ b.State));
 
         /// <summary>
         /// Computes c := a -> b := a | ~b
@@ -389,7 +377,7 @@ namespace Z0
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline), Op]
         public static Bit32 select(Bit32 a, Bit32 b, Bit32 c)
-            => SafeWrap((a.state & b.state) | (~a.state & c.state));
+            => SafeWrap((a.State & b.State) | (~a.State & c.State));
 
         /// <summary>
         /// Returns true if the bit is enabled, false otherwise
@@ -397,7 +385,7 @@ namespace Z0
         /// <param name="b">The bit to test</param>
         [MethodImpl(Inline), Op]
         public static bool operator true(Bit32 b)
-            => b.state != 0;
+            => b.State != 0;
 
         /// <summary>
         /// Returns false if the bit is disabled, true otherwise
@@ -405,7 +393,7 @@ namespace Z0
         /// <param name="b">The bit to test</param>
         [MethodImpl(Inline), Op]
         public static bool operator false(Bit32 b)
-            => b.state == 0;
+            => b.State == 0;
 
         /// <summary>
         /// Implicitly constructs a bit from a bool
@@ -421,7 +409,7 @@ namespace Z0
         /// <param name="state">The state of the bit to construct</param>
         [MethodImpl(Inline), Op]
         public static implicit operator bool(Bit32 src)
-            => src.state != 0;
+            => src.State != 0;
 
         /// <summary>
         /// Defines an explicit bit -> byte conversion
@@ -429,7 +417,7 @@ namespace Z0
         /// <param name="src">The source bit</param>
         [MethodImpl(Inline), Op]
         public static explicit operator byte(Bit32 src)
-            => (byte)src.state;
+            => (byte)src.State;
 
         /// <summary>
         /// Defines an explicit bit -> byte conversion
@@ -437,7 +425,7 @@ namespace Z0
         /// <param name="src">The source bit</param>
         [MethodImpl(Inline), Op]
         public static explicit operator sbyte(Bit32 src)
-            => (sbyte)src.state;
+            => (sbyte)src.State;
 
         /// <summary>
         /// Defines an explicit byte -> bit conversion
@@ -453,7 +441,7 @@ namespace Z0
         /// <param name="src">The source bit</param>
         [MethodImpl(Inline), Op]
         public static explicit operator ushort(Bit32 src)
-            => (ushort)src.state;
+            => (ushort)src.State;
 
         /// <summary>
         /// Defines an explicit bit -> ushort conversion
@@ -461,7 +449,7 @@ namespace Z0
         /// <param name="src">The source bit</param>
         [MethodImpl(Inline), Op]
         public static explicit operator short(Bit32 src)
-            => (short)src.state;
+            => (short)src.State;
 
         /// <summary>
         /// Defines an explicit ushort -> bit conversion
@@ -477,7 +465,7 @@ namespace Z0
         /// <param name="src">The source bit</param>
         [MethodImpl(Inline), Op]
         public static explicit operator int(Bit32 src)
-            => (int)src.state;
+            => (int)src.State;
 
         /// <summary>
         /// Defines an *implicit* int -> bit conversion to aid sanity retention
@@ -493,7 +481,7 @@ namespace Z0
         /// <param name="src">The source bit</param>
         [MethodImpl(Inline), Op]
         public static explicit operator uint(Bit32 src)
-            => src.state;
+            => src.State;
 
         /// <summary>
         /// Defines an explicit bit -> long conversion
@@ -501,7 +489,7 @@ namespace Z0
         /// <param name="src">The source bit</param>
         [MethodImpl(Inline), Op]
         public static explicit operator long(Bit32 src)
-            => src.state;
+            => src.State;
 
         /// <summary>
         /// Defines an explicit bit -> float conversion
@@ -509,7 +497,7 @@ namespace Z0
         /// <param name="src">The source bit</param>
         [MethodImpl(Inline), Op]
         public static explicit operator float(Bit32 src)
-            => src.state;
+            => src.State;
 
         /// <summary>
         /// Defines an explicit bit -> double conversion
@@ -517,7 +505,7 @@ namespace Z0
         /// <param name="src">The source bit</param>
         [MethodImpl(Inline), Op]
         public static explicit operator double(Bit32 src)
-            => src.state;
+            => src.State;
 
         /// <summary>
         /// Defines an explicit uint -> bit conversion
@@ -533,7 +521,7 @@ namespace Z0
         /// <param name="src">The source bit</param>
         [MethodImpl(Inline), Op]
         public static explicit operator ulong(Bit32 src)
-            => src.state;
+            => src.State;
 
         [MethodImpl(Inline), Op]
         public static implicit operator Bit32(BitState src)
@@ -562,7 +550,7 @@ namespace Z0
         /// <param name="b">The right bit</param>
         [MethodImpl(Inline)]
         public static Bit32 operator + (Bit32 a, Bit32 b)
-            => Wrap(a.state ^ b.state);
+            => Wrap(a.State ^ b.State);
 
         /// <summary>
         /// Computes the bitwise AND between the operands
@@ -609,35 +597,24 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static bool operator ==(Bit32 a, Bit32 b)
-            => a.state == b.state;
+            => a.State == b.State;
 
         [MethodImpl(Inline)]
         public static bool operator !=(Bit32 a, Bit32 b)
-            => a.state != b.state;
-
-        /// <summary>
-        /// Promotes a bit to a numeric value where all target bits are enabled if the state of the
-        /// bit is on; otherwise all target bits are disabled
-        /// </summary>
-        /// <param name="src">The source bit</param>
-        /// <typeparam name="T">The target numeric type</typeparam>
-        [MethodImpl(Inline), Op]
-        public T Promote<T>()
-            where T : unmanaged
-                => this ? NumericLiterals.maxval<T>() : default;
+            => a.State != b.State;
 
         [MethodImpl(Inline), Op]
         public bool Equals(Bit32 b)
-            => state == b.state;
+            => State == b.State;
 
         public override bool Equals(object b)
             => b is Bit32 x && Equals(x);
 
         public override int GetHashCode()
-            => (int)state;
+            => (int)State;
 
         public string Format()
-            => state.ToString();
+            => State.ToString();
 
         public override string ToString()
             => Format();
@@ -665,33 +642,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         static Bit32 SafeWrap(ulong state)
             => new Bit32((uint)state & 1);
-
-        [MethodImpl(Inline)]
-        public TypeIdentity Identity()
-            => TypeIdentity.define("1u");
-    }
-
-    /// <summary>
-    /// Conversion provider for the bit data type
-    /// </summary>
-    readonly struct Bit32Converter : IConversionProvider<Bit32Converter,Bit32>, IBiconverter<Bit32>
-    {
-        public Bit32Converter Converter => default;
-
-        [MethodImpl(Inline)]
-        public T Convert<T>(Bit32 src)
-            => BitConversionOps.from<T>(src);
-
-        [MethodImpl(Inline)]
-        public Bit32 Convert<T>(T src)
-            => BitConversionOps.to<T>(src);
-
-        [MethodImpl(Inline)]
-        public Option<object> ConvertFromTarget(object incoming, Type dst)
-            => BitConversionOps.FromTarget(incoming,dst);
-
-        [MethodImpl(Inline)]
-        public Option<object> ConvertToTarget(object incoming)
-            => BitConversionOps.ToTarget(incoming);
     }
 }

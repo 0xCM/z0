@@ -10,6 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
+    [DataType]
     public readonly struct utf8 : ITextual, IEquatable<utf8>
     {
         static TextCoder Encoder => TextCoders.utf8();

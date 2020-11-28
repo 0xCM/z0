@@ -15,6 +15,7 @@ namespace Z0
     /// <summary>
     /// Defines a closed T-interval  where an ordering on T is assumed to exist and be well-defined
     /// </summary>
+    [DataType]
     public readonly struct ClosedInterval<T> : IInterval<T>
         where T : unmanaged
     {

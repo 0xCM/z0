@@ -6,13 +6,16 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
 
-    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+    using static Konst;
+    using static z;
 
-    [Free]
-    public interface IRecordFormatter<S,T> : IDataFormatter<S,T>
-        where S : struct, IRecord<S>
+    partial struct Records
     {
-
+        [Op, Closures(Closure)]
+        public static Span<byte> format<T>(in T src)
+            where T : struct, IRecord<T>
+                => z.bytes(src);
     }
 }

@@ -28,15 +28,6 @@ namespace Z0
         }
     }
 
-    public struct RngTestCase<T>
-        where T : unmanaged
-    {
-        public uint SampleSize;
-
-        public uint SampleCount;
-
-        public ClosedInterval<T> SampleDomain;
-    }
 
     public class t_pcg : t_polyrand<t_pcg>
     {

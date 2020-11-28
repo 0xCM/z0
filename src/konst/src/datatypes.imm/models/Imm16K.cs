@@ -14,7 +14,8 @@ namespace Z0
     /// <summary>
     /// Defines a refined 16-bit immediate value
     /// </summary>
-    public readonly struct Imm16<E>
+    [DataType]
+    public readonly struct Imm16<E> : IImmValue<Imm16<E>,W, E>
         where E : unmanaged
     {
         public E Value {get;}

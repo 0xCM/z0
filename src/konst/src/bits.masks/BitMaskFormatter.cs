@@ -12,7 +12,7 @@ namespace Z0
     using R = BitMaskInfo;
     using F = NumericLiteralField;
 
-    public readonly struct BitMaskFormatter : IValueFormatter<F,R>
+    public readonly struct BitMaskFormatter : ITextValueFormatter<F,R>
     {
         public void Format(in R src, DatasetFormatter<F> dst)
             => render(src,dst);
@@ -34,7 +34,7 @@ namespace Z0
                 dst.EmitEol();
         }
 
-        void IValueFormatter<F,R>.Format(in R src, IDatasetFormatter<F> dst)
+        void ITextValueFormatter<F,R>.Format(in R src, IDatasetFormatter<F> dst)
             => render(src,dst);
 
 

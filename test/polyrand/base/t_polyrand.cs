@@ -10,7 +10,5 @@ namespace Z0
         protected override int RepCount => Pow2.T04;
 
         protected override int CycleCount => Pow2.T03;
-
-
     }
 }

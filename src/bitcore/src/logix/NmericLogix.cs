@@ -9,6 +9,7 @@ namespace Z0
 
     using static Konst;
     using static z;
+    using static Bit;
 
     [ApiHost]
     public readonly struct NumericLogix
@@ -197,32 +198,32 @@ namespace Z0
         [MethodImpl(Inline)]
         public static T equals<T>(T a, T b)
             where T : unmanaged
-                => gmath.eq(a,b).Promote<T>();
+                => promote<T>(gmath.eq(a,b));
 
         [MethodImpl(Inline)]
         public static T neq<T>(T a, T b)
             where T : unmanaged
-                => gmath.neq(a,b).Promote<T>();
+                => promote<T>(gmath.neq(a,b));
 
         [MethodImpl(Inline)]
         public static T lt<T>(T a, T b)
             where T : unmanaged
-                => gmath.lt(a,b).Promote<T>();
+                => promote<T>(gmath.lt(a,b));
 
         [MethodImpl(Inline)]
         public static T lteq<T>(T a, T b)
             where T : unmanaged
-                => gmath.lteq(a,b).Promote<T>();
+                => promote<T>(gmath.lteq(a,b));
 
         [MethodImpl(Inline)]
         public static T gt<T>(T a, T b)
             where T : unmanaged
-                => gmath.gt(a,b).Promote<T>();
+                => promote<T>(gmath.gt(a,b));
 
         [MethodImpl(Inline)]
         public static T gteq<T>(T a, T b)
             where T : unmanaged
-                => gmath.gteq(a,b).Promote<T>();
+                => promote<T>(gmath.gteq(a,b));
 
         [MethodImpl(Inline)]
         public static Bit32 same<T>(T a, T b)

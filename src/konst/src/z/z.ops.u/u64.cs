@@ -11,21 +11,12 @@ namespace Z0
 
     partial struct z
     {
-        /// <summary>
-        /// Converts a <see cref='bool'/> to a <see cref='ulong'/>
-        /// </summary>
-        /// <param name="on">The source state</param>
-        [MethodImpl(Inline), Op]
-        public static unsafe ulong u64(bool on)
-            => *((byte*)(&on));
+        [MethodImpl(Inline)]
+        public static ulong u64(bool src)
+            => memory.u64(src);
 
-        /// <summary>
-        /// Presents a T-references as a <see cref='ulong'/> reference
-        /// </summary>
-        /// <param name="src">The source reference</param>
-        /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline)]
         public static ref ulong u64<T>(in T src)
-            => ref @as<T,ulong>(src);
+            => ref memory.u64(src);
     }
 }
