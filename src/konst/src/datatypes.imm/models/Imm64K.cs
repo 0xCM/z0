@@ -18,15 +18,15 @@ namespace Z0
     public readonly struct Imm64<K> : IImmValue<Imm64<K>,W,K>
         where K : unmanaged
     {
-        public K Value {get;}
+        public K Storage {get;}
 
         [MethodImpl(Inline)]
         public Imm64(K src)
-            => Value = src;
+            => Storage = src;
 
         [MethodImpl(Inline)]
         public string Format()
-            => Hex.format(Value, W);
+            => Hex.format(Storage, W);
 
         public override string ToString()
             => Format();
@@ -34,7 +34,7 @@ namespace Z0
         public uint Hash
         {
             [MethodImpl(Inline)]
-            get => z.hash(Value);
+            get => z.hash(Storage);
         }
 
         public override int GetHashCode()
@@ -42,7 +42,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator K(Imm64<K> src)
-            => src.Value;
+            => src.Storage;
 
         [MethodImpl(Inline)]
         public static implicit operator Imm64<K>(K src)

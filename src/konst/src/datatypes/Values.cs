@@ -36,7 +36,7 @@ namespace Z0
         /// <param name="x">The first value</param>
         /// <param name="y">The second value</param>
         /// <typeparam name="T">The structure type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static bool eq<T>(in T x, in T y)
             where T : struct
         {

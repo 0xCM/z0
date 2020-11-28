@@ -7,19 +7,25 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    
+
     using static Konst;
     using static z;
 
     using NK = NumericKind;
-    
+
     public readonly struct variant : IVariant<variant>
     {
-        internal readonly Vector128<ulong> data;
+        readonly Vector128<ulong> data;
 
-        public static variant Zero 
+        public Vector128<ulong> Value
+        {
+            [MethodImpl(Inline), Ignore]
+            get => data;
+        }
+
+        public static variant Zero
             => default;
-        
+
         public NK CellKind
         {
             [MethodImpl(Inline)]
@@ -49,7 +55,7 @@ namespace Z0
         [MethodImpl(Inline)]
         internal variant(Vector128<ulong> src)
             => data = src;
-        
+
         [MethodImpl(Inline)]
         public variant(sbyte value)
             => data = Store(value, NK.I8, 8);
@@ -99,7 +105,7 @@ namespace Z0
 
         public override bool Equals(object src)
             => src is variant v && Equals(v);
- 
+
         public string Format()
         {
             if(CellKind.IsUnsigned())
@@ -108,7 +114,7 @@ namespace Z0
                 return cell<long>(0).ToString();
             else if(CellKind == NK.F32)
                 return cell<float>(0).ToString();
-            else   
+            else
                 return cell<double>(0).ToString();
         }
 

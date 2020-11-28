@@ -17,33 +17,33 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static string format(ByteSize src)
-            => src.Value == 0 ? "0" : src.Value.ToString("#,#");
+            => src.Storage == 0 ? "0" : src.Storage.ToString("#,#");
 
         /// <summary>
         /// Specifies a byte count
         /// </summary>
-        public ulong Value {get;}
+        public ulong Storage {get;}
 
         [MethodImpl(Inline)]
         public ByteSize(int count)
-            => Value = (ulong)count;
+            => Storage = (ulong)count;
 
         [MethodImpl(Inline)]
         public ByteSize(long count)
-            => Value = (ulong)count;
+            => Storage = (ulong)count;
 
         [MethodImpl(Inline)]
         public ByteSize(uint count)
-            => Value = count;
+            => Storage = count;
 
         [MethodImpl(Inline)]
         public ByteSize(ulong count)
-            => Value = count;
+            => Storage = count;
 
         public ulong Bits
         {
             [MethodImpl(Inline)]
-            get => Value*8;
+            get => Storage*8;
         }
 
         [MethodImpl(Inline),Ignore]
@@ -52,16 +52,16 @@ namespace Z0
 
         [MethodImpl(Inline),Ignore]
         public string Format()
-            => Value == 0 ? "0" : Format("#,#");
+            => Storage == 0 ? "0" : Format("#,#");
 
         public override string ToString()
             => Format();
 
         public override int GetHashCode()
-            => Value.GetHashCode();
+            => Storage.GetHashCode();
 
         public bool Equals(ByteSize src)
-            => Value == src.Value;
+            => Storage == src.Storage;
 
         public override bool Equals(object obj)
             => obj is ByteSize ? Equals((ByteSize)obj) : false;
@@ -69,19 +69,19 @@ namespace Z0
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Value == 0;
+            get => Storage == 0;
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => Value != 0;
+            get => Storage != 0;
         }
 
         public bool IsNonZero
         {
             [MethodImpl(Inline)]
-            get => Value != 0;
+            get => Storage != 0;
         }
 
         [MethodImpl(Inline)]
@@ -114,7 +114,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator long(ByteSize src)
-            => (long)src.Value;
+            => (long)src.Storage;
 
         [MethodImpl(Inline)]
         public static implicit operator ByteSize(long src)
@@ -122,15 +122,15 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator int(ByteSize src)
-            => (int)src.Value;
+            => (int)src.Storage;
 
         [MethodImpl(Inline)]
         public static implicit operator uint(ByteSize src)
-            => (uint)src.Value;
+            => (uint)src.Storage;
 
         [MethodImpl(Inline)]
         public static implicit operator ulong(ByteSize src)
-            => src.Value;
+            => src.Storage;
 
         [MethodImpl(Inline)]
         public static explicit operator ByteSize(DataWidth src)
@@ -138,7 +138,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator IntPtr(ByteSize src)
-            => (IntPtr)src.Value;
+            => (IntPtr)src.Storage;
 
         [MethodImpl(Inline)]
         public static implicit operator ByteSize(IntPtr src)
@@ -155,31 +155,31 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static bool operator ==(ByteSize a, ByteSize b)
-            => a.Value == b.Value;
+            => a.Storage == b.Storage;
 
         [MethodImpl(Inline)]
         public static bool operator !=(ByteSize a, ByteSize b)
-            => a.Value != b.Value;
+            => a.Storage != b.Storage;
 
         [MethodImpl(Inline)]
         public static ByteSize operator +(ByteSize a, ByteSize b)
-            => a.Value + b.Value;
+            => a.Storage + b.Storage;
 
         [MethodImpl(Inline)]
         public static ByteSize operator -(ByteSize a, ByteSize b)
-            => a.Value - b.Value;
+            => a.Storage - b.Storage;
 
         [MethodImpl(Inline)]
         public static ByteSize operator *(ByteSize a, ByteSize b)
-            => a.Value * b.Value;
+            => a.Storage * b.Storage;
 
         [MethodImpl(Inline)]
         public static ByteSize operator /(ByteSize a, ByteSize b)
-            => a.Value/b.Value;
+            => a.Storage/b.Storage;
 
         [MethodImpl(Inline)]
         public static ByteSize operator %(ByteSize a, ByteSize b)
-            => a.Value % b.Value;
+            => a.Storage % b.Storage;
 
         public static ByteSize Empty
             => default;

@@ -10,7 +10,6 @@ namespace Z0
     using static z;
     using static Konst;
 
-
     [WfHost]
     public sealed class EmitFieldLiterals : WfHost<EmitFieldLiterals>
     {
@@ -76,7 +75,7 @@ namespace Z0
 
             var content = Literals.format(src).PadRight(48);
             var address = src.Address.Format().PadRight(16);
-            var width = src.Width.Value.ToString().PadRight(16);
+            var width = src.Width.Storage.ToString().PadRight(16);
             var type = src.Field.DeclaringType.Name.PadRight(36);
             var field = src.Field.Name.PadRight(36);
             var line = text.concat(address, Sep, width, Sep,type, Sep, field, Sep, content, Sep);

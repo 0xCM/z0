@@ -13,6 +13,6 @@ namespace Z0
         where S : struct
     {
         Span<byte> IFormatter<S>.Format(in S src)
-            => z.bytes(src);
+            => memory.bytes(src);
     }
 }

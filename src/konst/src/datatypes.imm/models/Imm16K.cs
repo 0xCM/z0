@@ -18,19 +18,19 @@ namespace Z0
     public readonly struct Imm16<E> : IImmValue<Imm16<E>,W, E>
         where E : unmanaged
     {
-        public E Value {get;}
+        public E Storage {get;}
 
         public static W W => default;
 
         public E Content
         {
             [MethodImpl(Inline)]
-            get => Value;
+            get => Storage;
         }
 
         [MethodImpl(Inline)]
         public static implicit operator E(Imm16<E> src)
-            => src.Value;
+            => src.Storage;
 
         [MethodImpl(Inline)]
         public static implicit operator Imm16<E>(E src)
@@ -39,12 +39,12 @@ namespace Z0
         [MethodImpl(Inline)]
         public Imm16(E value)
         {
-            Value = value;
+            Storage = value;
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => Hex.format(Value, W);
+            => Hex.format(Storage, W);
 
         public override string ToString()
             => Format();
@@ -52,7 +52,7 @@ namespace Z0
         public uint Hash
         {
             [MethodImpl(Inline)]
-            get => z.hash(Value);
+            get => z.hash(Storage);
         }
 
         public override int GetHashCode()

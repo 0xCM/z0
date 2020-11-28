@@ -6,19 +6,11 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
- 
+
     using static Konst;
 
     partial class XTend
     {
-        /// <summary>
-        /// Returns 0 in a box
-        /// </summary>
-        /// <param name="kind">The numeric kind of 0 to be put into the box</param>
-        [MethodImpl(Inline)]
-        public static BoxedNumber BoxedZero(this NumericKind kind)
-            => BoxedNumber.Define(z.rebox(byte.MinValue, kind), kind); 
-
         /// <summary>
         /// Puts a value of any numeric kind into a box of any numeric kind
         /// </summary>
@@ -29,7 +21,7 @@ namespace Z0
         public static BoxedNumber Box<T>(this NumericKind dst, T src)
             where T : unmanaged
                 => BoxedNumber.Define(z.rebox(src,dst), dst);
-        
+
         /// <summary>
         /// Puts an enum value into a (numeric) box
         /// </summary>
@@ -37,20 +29,7 @@ namespace Z0
         /// <typeparam name="E">The enum type</typeparam>
         [MethodImpl(Inline)]
         public static BoxedNumber Box<E>(this E src)
-            where E : unmanaged, Enum            
+            where E : unmanaged, Enum
                 => BoxedNumber.From(src);
-
-        [MethodImpl(Inline)]        
-        public static bool LiberalEquals(this BoxedNumber lhs, BoxedNumber rhs)
-        {
-            if(lhs.IsSignedInt && rhs.IsSignedInt)
-                return lhs.Convert<long>() == rhs.Convert<long>();
-            else if(lhs.IsUnsignedInt && rhs.IsUnsignedInt)
-                return lhs.Convert<ulong>() == rhs.Convert<ulong>();
-            else if(lhs.IsFloat && rhs.IsFloat)
-                return lhs.Convert<double>() == rhs.Convert<double>();
-            else   
-                return false;
-        }
-   }
+    }
 }

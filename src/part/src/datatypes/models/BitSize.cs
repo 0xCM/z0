@@ -20,7 +20,7 @@ namespace Z0
         /// <summary>
         /// Specifies a bit count
         /// </summary>
-        public ulong Value {get;}
+        public ulong Storage {get;}
 
         /// <summary>
         /// Computes the bit-size of a parametric type
@@ -52,58 +52,58 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public BitSize(sbyte bits)
-            => Value = (ulong)bits;
+            => Storage = (ulong)bits;
 
         [MethodImpl(Inline)]
         public BitSize(byte bits)
-            => Value = bits;
+            => Storage = bits;
 
         [MethodImpl(Inline)]
         public BitSize(ushort bits)
-            => Value = bits;
+            => Storage = bits;
 
         [MethodImpl(Inline)]
         public BitSize(int bits)
-            => Value = (ulong)bits;
+            => Storage = (ulong)bits;
 
         [MethodImpl(Inline)]
         public BitSize(uint bits)
-            => Value = bits;
+            => Storage = bits;
 
         [MethodImpl(Inline)]
         public BitSize(long bits)
-            => Value = (ulong)bits;
+            => Storage = (ulong)bits;
 
         [MethodImpl(Inline)]
         public BitSize(ulong bits)
-            => Value = bits;
+            => Storage = bits;
 
         public ByteSize Bytes
         {
             [MethodImpl(Inline)]
-            get => Value/8;
+            get => Storage/8;
         }
 
         [MethodImpl(Inline)]
         public bool Equals(BitSize rhs)
-            => Value == rhs.Value;
+            => Storage == rhs.Storage;
 
         public override string ToString()
-            => Value.ToString();
+            => Storage.ToString();
 
         public override int GetHashCode()
-            => (int)Value;
+            => (int)Storage;
 
         public override bool Equals(object obj)
             => obj is BitSize x && Equals(x);
 
         [MethodImpl(Inline)]
         public static implicit operator long(BitSize src)
-            => (long)src.Value;
+            => (long)src.Storage;
 
         [MethodImpl(Inline)]
         public static implicit operator ulong(BitSize src)
-            => src.Value;
+            => src.Storage;
 
         [MethodImpl(Inline)]
         public static implicit operator BitSize(long src)
@@ -123,7 +123,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator DataWidth(BitSize src)
-            => (DataWidth)src.Value;
+            => (DataWidth)src.Storage;
 
         [MethodImpl(Inline)]
         public static implicit operator BitSize(TypeWidth src)
@@ -131,7 +131,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator TypeWidth(BitSize src)
-            => (TypeWidth)src.Value;
+            => (TypeWidth)src.Storage;
 
         [MethodImpl(Inline)]
         public static implicit operator BitSize(VectorWidth src)
@@ -143,7 +143,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator NumericWidth(BitSize src)
-            => (NumericWidth)src.Value;
+            => (NumericWidth)src.Storage;
 
         [MethodImpl(Inline)]
         public static explicit operator BitSize(byte src)
@@ -159,51 +159,51 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator byte(BitSize src)
-            => (byte)src.Value;
+            => (byte)src.Storage;
 
         [MethodImpl(Inline)]
         public static explicit operator int(BitSize src)
-            => (int)src.Value;
+            => (int)src.Storage;
 
         [MethodImpl(Inline)]
         public static explicit operator uint(BitSize src)
-            => (uint)src.Value;
+            => (uint)src.Storage;
 
         [MethodImpl(Inline)]
         public static explicit operator double(BitSize src)
-            => src.Value;
+            => src.Storage;
 
         [MethodImpl(Inline)]
         public static implicit operator BitSize(ByteSize src)
-            => new BitSize(src.Value * 8);
+            => new BitSize(src.Storage * 8);
 
         [MethodImpl(Inline)]
         public static bool operator ==(BitSize lhs, BitSize rhs)
-            => lhs.Value == rhs.Value;
+            => lhs.Storage == rhs.Storage;
 
         [MethodImpl(Inline)]
         public static bool operator !=(BitSize lhs, BitSize rhs)
-            => lhs.Value != rhs.Value;
+            => lhs.Storage != rhs.Storage;
 
         [MethodImpl(Inline)]
         public static BitSize operator +(BitSize lhs, BitSize rhs)
-            => lhs.Value + rhs.Value;
+            => lhs.Storage + rhs.Storage;
 
         [MethodImpl(Inline)]
         public static BitSize operator -(BitSize lhs, BitSize rhs)
-            => lhs.Value - rhs.Value;
+            => lhs.Storage - rhs.Storage;
 
         [MethodImpl(Inline)]
         public static BitSize operator *(BitSize lhs, BitSize rhs)
-            => lhs.Value * rhs.Value;
+            => lhs.Storage * rhs.Storage;
 
         [MethodImpl(Inline)]
         public static BitSize operator /(BitSize lhs, BitSize rhs)
-            => lhs.Value / rhs.Value;
+            => lhs.Storage / rhs.Storage;
 
         [MethodImpl(Inline)]
         public static BitSize operator %(BitSize lhs, BitSize rhs)
-            => lhs.Value % rhs.Value;
+            => lhs.Storage % rhs.Storage;
 
         /// <summary>
         /// The bit with no size

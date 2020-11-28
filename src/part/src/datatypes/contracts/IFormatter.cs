@@ -25,16 +25,17 @@ namespace Z0
             => typeof(Span<byte>);
 
         Span<byte> Format(in S src);
+
     }
 
     public interface IFormatter<S,T> : IFormatter
     {
-        T Format(S src);
-
         Type IFormatter.SourceType
             => typeof(S);
 
         Type IFormatter.TargetType
-            => typeof(T);
+            => typeof(Span<byte>);
+
+        T Format(S src);
     }
 }

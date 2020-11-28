@@ -14,43 +14,43 @@ namespace Z0
         where W : unmanaged, INumericWidth
         where T : unmanaged
     {
-        public T Value {get;}
+        public T Storage {get;}
 
         public static W Width => default;
 
         public ulong Imm64
         {
             [MethodImpl(Inline)]
-            get => Cast.to<T,ulong>(Value);
+            get => Cast.to<T,ulong>(Storage);
         }
 
         public uint Imm32
         {
             [MethodImpl(Inline)]
-            get => Cast.to<T,uint>(Value);
+            get => Cast.to<T,uint>(Storage);
         }
 
         public ushort Imm16
         {
             [MethodImpl(Inline)]
-            get => Cast.to<T,ushort>(Value);
+            get => Cast.to<T,ushort>(Storage);
         }
 
         public byte Imm8
         {
             [MethodImpl(Inline)]
-            get => Cast.to<T,byte>(Value);
+            get => Cast.to<T,byte>(Storage);
         }
 
         [MethodImpl(Inline)]
 
         public Imm(T src)
-            => Value = src;
+            => Storage = src;
 
         public uint Hash
         {
             [MethodImpl(Inline)]
-            get => z.hash(Value);
+            get => z.hash(Storage);
         }
 
         public override int GetHashCode()
@@ -66,7 +66,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => Hex.format(Value, Width);
+            => Hex.format(Storage, Width);
 
         public override string ToString()
             => Format();
