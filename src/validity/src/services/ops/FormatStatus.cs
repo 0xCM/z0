@@ -43,15 +43,10 @@ namespace Z0
             return $"{owner}/{hostname}/{opname}";
         }
 
-        string TestActionName
+        static string TestActionName(Type host)
         {
-            get
-            {
-                var owner = ApiIdentityKinds.OwningPartText(GetType());
-                var hostname = GetType().Name;
-                var opname = "action";
-                return $"{owner}/{hostname}/{opname}";
-            }
+            var owner = ApiIdentityKinds.OwningPartText(host);
+            return $"{owner}/{host.Name}/action";
         }
 
         static AppMsg PreCase(string testName, DateTime start)

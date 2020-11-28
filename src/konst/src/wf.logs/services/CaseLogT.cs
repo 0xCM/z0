@@ -45,7 +45,6 @@ namespace Z0
                     for(var i=0; i<count; i++)
                         FS.write(skip(records,i).DelimitedText(FieldDelimiter), Status);
                 }
-                    //Table.emit(src, Status);
             }
             catch(Exception e)
             {

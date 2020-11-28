@@ -95,7 +95,7 @@ namespace Z0
         /// Prints a sequence of messages in an unbroken block
         /// </summary>
         /// <param name="content">The messages to print</param>
-        public static void print(IEnumerable<AppMsg> content)
+        public static void print(IEnumerable<IAppMsg> content)
             => T.WriteMessages(content);
     }
 }

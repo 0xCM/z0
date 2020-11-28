@@ -170,7 +170,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitString ToBitString<T>(this SpanBlock256<T> src, int? maxbits = null)
             where T : unmanaged
-                => BitString.scalars(src.Data, maxbits ?? w256);
+                => BitString.scalars(src.Storage, maxbits ?? w256);
 
         /// <summary>
         /// Converts an 128-bit intrinsic vector representation to a bitstring

@@ -53,7 +53,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector<byte> ToBitVector<T>(this in SpanBlock256<T> src, N8 n)
             where T : unmanaged
-                => src.Data.TakeUInt8();
+                => src.Storage.TakeUInt8();
 
         /// <summary>
         /// Creates a 16-bit bitvector from the leading cells of a source block
@@ -64,7 +64,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector<ushort> ToBitVector<T>(this in SpanBlock256<T> src, N16 n)
             where T : unmanaged
-                => src.Data.TakeUInt16();
+                => src.Storage.TakeUInt16();
 
         /// <summary>
         /// Creates a 32-bit bitvector from the leading cells of a source block
@@ -75,7 +75,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector<uint> ToBitVector<T>(this in SpanBlock256<T> src, N32 n)
             where T : unmanaged
-                => src.Data.TakeUInt32();
+                => src.Storage.TakeUInt32();
 
         /// <summary>
         /// Creates a 64-bit bitvector from the leading cells of a source block
@@ -86,6 +86,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector<ulong> ToBitVector<T>(this in SpanBlock256<T> src, N64 n)
             where T : unmanaged
-                => src.Data.TakeUInt64();
+                => src.Storage.TakeUInt64();
     }
 }

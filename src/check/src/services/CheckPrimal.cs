@@ -118,6 +118,6 @@ namespace Z0
         /// <param name="msg">The failure description</param>
         [MethodImpl(Inline), Op]
         static ClaimException Failed(ClaimKind claim, IAppMsg msg)
-            => api.failed(claim, msg);
+            => api.exception(claim, msg);
     }
 }

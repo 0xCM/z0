@@ -16,7 +16,7 @@ namespace Z0
         {
             var messages = new List<IAppMsg>();
             var clock = Time.counter(false);
-            var casename = TestActionName;
+            var casename = TestActionName(unit.GetType());
             var control = unit as ITestQueue;
 
             try

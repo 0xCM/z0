@@ -81,7 +81,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static string Format<T>(this SpanBlock256<T> src, char delimiter = ItemDelimiter, int pad = 0)
             where T : unmanaged
-                => src.Data.Format(delimiter, 0, pad, true);
+                => src.Storage.Format(delimiter, 0, pad, true);
 
         /// <summary>
         /// Formats blocked content

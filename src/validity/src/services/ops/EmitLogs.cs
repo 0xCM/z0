@@ -9,9 +9,10 @@ namespace Z0
 
     using static Konst;
 
+
     partial class TestApp<A>
     {
-        void EmitLogs()
+        public void EmitLogs()
         {
             var basename = AppName;
 
@@ -41,11 +42,8 @@ namespace Z0
                 return;
 
             using var writer = dst.Writer();
-
             writer.WriteLine(Table.header53<F>(delimiter));
-
             var formatter = Table.formatter<F>(delimiter);
-
             z.iter(records, r => writer.WriteLine(r.DelimitedText(delimiter)));
         }
 

@@ -11,8 +11,6 @@ namespace Z0
     using static z;
     using static BufferSeqId;
 
-    using K = Kinds;
-
     public interface ICheckFixedDynamic : ITestRandom, TCheckNull, TCheckDynamic, IBufferedChecker
     {
         void CheckFixedMatch<F>(UnaryOpClass k, ApiCodeBlock a, ApiCodeBlock b)

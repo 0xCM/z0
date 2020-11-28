@@ -9,6 +9,7 @@ namespace Z0
     using System.Runtime.InteropServices;
 
     using static Konst;
+    using static z;
 
     /// <summary>
     /// Defines a span of contiguous memory that can be evenly partitioned into 8 and 16-bit segments
@@ -42,7 +43,7 @@ namespace Z0
         public ref T First
         {
             [MethodImpl(Inline)]
-            get => ref MemoryMarshal.GetReference(Data);
+            get => ref first(Data);
         }
 
         public bool IsEmpty

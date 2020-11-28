@@ -6,45 +6,42 @@ namespace Z0
 {
     using System;
     using System.Runtime.Intrinsics;
-    using System.Runtime.CompilerServices;
 
     using static Konst;
     using static z;
 
-    public class t_vsllv : t_inx<t_vsllv>
+    public class t_vsrlv : t_inx<t_vsrlv>
     {
-        public override bool Enabled => false;
-
-        public void vsllv_check()
+        public void vsrlv_check()
         {
-            vsllv_check(n128);
-            vsllv_check(n256);
+            vsrlv_check(n128);
+            vsrlv_check(n256);
         }
 
-        void vsllv_check(W128 w)
+        void vsrlv_check(N128 w)
         {
-            vsllv_check(w, z8);
-            vsllv_check(w, z16);
-            vsllv_check(w, z32);
-            vsllv_check(w, z32i);
-            vsllv_check(w, z64);
-            vsllv_check(w, z64i);
+            vsrlv_check(w, z8);
+            vsrlv_check(w, z16);
+            vsrlv_check(w, z32);
+            vsrlv_check(w, z32i);
+            vsrlv_check(w, z64);
+            vsrlv_check(w, z64i);
         }
 
-        void vsllv_check(W256 w)
+        void vsrlv_check(N256 w)
         {
-            vsllv_check(w, z8);
-            vsllv_check(w, z16);
-            vsllv_check(w, z32);
-            vsllv_check(w, z32i);
-            vsllv_check(w, z64);
-            vsllv_check(w, z64i);
+            vsrlv_check(w, z8);
+            vsrlv_check(w, z16);
+            vsrlv_check(w, z32);
+            vsrlv_check(w, z32i);
+            vsrlv_check(w, z64);
+            vsrlv_check(w, z64i);
         }
 
-        void vsllv_check<T>(W128 w, T t = default)
+        void vsrlv_check<T>(N128 w, T t = default)
             where T : unmanaged
         {
-            var domain = Interval.closed(zero(t), force<uint,T>( (uint)bitwidth(t) - 1));
+            var domain = Interval.closed(z.zero(t),force<uint,T>((uint)bitwidth(t) - 1));
 
             Pair<Vector128<T>> @case(uint i)
             {
@@ -53,10 +50,10 @@ namespace Z0
                 return (x,offsets);
             }
 
-            CheckSVF.CheckCells(VSvc.vsllv(w,t),@case);
+            CheckSVF.CheckCells(VSvc.vsrlv(w,t),@case);
         }
 
-        void vsllv_check<T>(W256 w, T t = default)
+        void vsrlv_check<T>(N256 w, T t = default)
             where T : unmanaged
         {
             var domain = Interval.closed(z.zero(t),force<uint,T>((uint)bitwidth(t) - 1));
@@ -68,7 +65,7 @@ namespace Z0
                 return (x,offsets);
             }
 
-            CheckSVF.CheckCells(VSvc.vsllv(w,t),@case);
+            CheckSVF.CheckCells(VSvc.vsrlv(w,t),@case);
         }
     }
 }

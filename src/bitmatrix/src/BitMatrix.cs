@@ -7,17 +7,12 @@ namespace Z0
      using System;
      using System.Runtime.CompilerServices;
 
-    [ApiHost("api")]
+    [ApiHost]
     public partial class BitMatrix
     {
         const NumericKind Closure = NumericKind.UnsignedInts;
     }
 
-    [ApiHost("logix")]
-    public partial class SquareBitLogix
-    {
-
-    }
 
     /// <summary>
     /// Defines primary api surface for rowbit manipulation
@@ -31,7 +26,8 @@ namespace Z0
 
     public interface IBitMatrixServices
     {
-        IBitMatrixWriter Writer(FilePath dst) => new BitMatrixWriter(dst);
+        IBitMatrixWriter Writer(FilePath dst)
+            => new BitMatrixWriter(dst);
     }
 
     public readonly struct BitMatrixServices : IBitMatrixServices

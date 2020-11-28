@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="n">The col count</param>
         /// <param name="fill">The value with which to fill the grid</param>
         /// <typeparam name="T">The primal cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static BitGrid64<N1,N64,T> loadlo<T>(Vector128<T> src, N1 m = default, N64 n = default)
             where T : unmanaged
                 => src.AsUInt64().GetElement(0);
@@ -33,7 +33,7 @@ namespace Z0
         /// <param name="n">The col count</param>
         /// <param name="fill">The value with which to fill the grid</param>
         /// <typeparam name="T">The primal cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static BitGrid64<N64,N1,T> loadlo<T>(Vector128<T> src, N64 m = default, N1 n = default)
             where T : unmanaged
                 => src.AsUInt64().GetElement(0);
@@ -46,7 +46,7 @@ namespace Z0
         /// <param name="n">The col count</param>
         /// <param name="fill">The value with which to fill the grid</param>
         /// <typeparam name="T">The primal cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static BitGrid64<N2,N32,T> loadlo<T>(Vector128<T> src, N2 m = default, N32 n = default)
             where T : unmanaged
                 => src.AsUInt64().GetElement(0);
@@ -59,7 +59,7 @@ namespace Z0
         /// <param name="n">The col count</param>
         /// <param name="fill">The value with which to fill the grid</param>
         /// <typeparam name="T">The primal cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static BitGrid64<N32,N2,T> loadlo<T>(Vector128<T> src, N32 m = default, N2 n = default)
             where T : unmanaged
                 => src.AsUInt64().GetElement(0);
@@ -72,7 +72,7 @@ namespace Z0
         /// <param name="n">The col count</param>
         /// <param name="fill">The value with which to fill the grid</param>
         /// <typeparam name="T">The primal cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static BitGrid64<N4,N16,T> loadlo<T>(Vector128<T> src, N4 m = default, N16 n = default)
             where T : unmanaged
                 => src.AsUInt64().GetElement(0);
@@ -84,7 +84,7 @@ namespace Z0
         /// <param name="n">The col count</param>
         /// <param name="fill">The value with which to fill the grid</param>
         /// <typeparam name="T">The primal cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static BitGrid64<N16,N4,T> loadlo<T>(Vector128<T> src, N16 m = default, N4 n = default)
             where T : unmanaged
                 => src.AsUInt64().GetElement(0);
@@ -96,7 +96,7 @@ namespace Z0
         /// <param name="n">The col count</param>
         /// <param name="fill">The value with which to fill the grid</param>
         /// <typeparam name="T">The primal cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static BitGrid64<N8,N8,T> loadlo<T>(Vector128<T> src, N8 m = default, N8 n = default)
             where T : unmanaged
                 => src.AsUInt64().GetElement(0);

@@ -70,7 +70,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void Fill<T>(this IPolyStream random, in SpanBlock256<T> dst)
             where T : unmanaged
-                => random.Fill(dst.Data);
+                => random.Fill(dst.Storage);
 
         /// <summary>
         /// Fills caller-allocated block storage with random values
@@ -142,7 +142,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         public static void Fill<T>(this IPolyStream random, T min, T max, in SpanBlock256<T> dst)
             where T : unmanaged
-                => random.Fill(min,max,dst.Data);
+                => random.Fill(min,max,dst.Storage);
 
         /// <summary>
         /// Fills caller-allocated block storage with random values

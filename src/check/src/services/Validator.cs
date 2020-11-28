@@ -26,7 +26,7 @@ namespace Z0
         /// <param name="claim">The sort of claim that failed</param>
         /// <param name="msg">The failure description</param>
         [MethodImpl(Inline), Op]
-        public static ClaimException failed(ClaimKind claim, IAppMsg msg)
+        public static ClaimException exception(ClaimKind claim, IAppMsg msg)
             => ClaimException.Define(claim, msg);
 
         /// <summary>
@@ -34,8 +34,8 @@ namespace Z0
         /// </summary>
         /// <param name="claim">The sort of claim that failed</param>
         [MethodImpl(Inline), Op]
-        public static ClaimException failed(ClaimKind claim, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => failed(claim, AppMsg.error("failed", caller, file,line));
+        public static ClaimException exception(ClaimKind claim, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => exception(claim, AppMsg.error("failed", caller, file,line));
 
         /// <summary>
         /// Raises an exception if an invariant does not hold
@@ -45,7 +45,7 @@ namespace Z0
         public static void require(bool condition, ClaimKind claim, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
         {
             if(!condition)
-                throw failed(claim,caller,file,line);
+                throw exception(claim,caller,file,line);
         }
 
         /// <summary>
@@ -56,11 +56,11 @@ namespace Z0
         /// <param name="file">The source file of the calling function</param>
         /// <param name="line">The source file line number where invocation ocurred</param>
         [MethodImpl(Inline), Op]
-        public static void failmsg(string msg, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => throw failed(ClaimKind.Fail, AppMsg.error(msg, caller, file,line));
+        public static void fail(string msg, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => throw exception(ClaimKind.Fail, AppMsg.error(msg, caller, file,line));
 
         [MethodImpl(Inline), Op]
         public static void fail([Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => throw failed(ClaimKind.Fail, AppMsg.error("failed", caller, file,line));
+            => throw exception(ClaimKind.Fail, AppMsg.error("failed", caller, file,line));
     }
 }

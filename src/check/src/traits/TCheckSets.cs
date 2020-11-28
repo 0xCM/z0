@@ -14,7 +14,6 @@ namespace Z0
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
-
     public interface TCheckSets : TValidator
     {
         /// <summary>

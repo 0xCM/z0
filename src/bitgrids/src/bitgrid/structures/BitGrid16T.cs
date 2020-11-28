@@ -30,11 +30,6 @@ namespace Z0
         public byte BitCount => 16;
 
         /// <summary>
-        /// Returns a copy of the grid's backing storage
-        /// </summary>
-        public ushort Content { [MethodImpl(Inline)] get => Data; }
-
-        /// <summary>
         /// The number of grid cells := {1 | 2}
         /// </summary>
         public uint CellCount { [MethodImpl(Inline)] get => 2/size<T>(); }
@@ -96,6 +91,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Bit32 operator !=(BitGrid16<T> gx, BitGrid16<T> gy)
             => gx.Data != gy.Data;
-
     }
 }

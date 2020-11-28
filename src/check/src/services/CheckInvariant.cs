@@ -19,7 +19,7 @@ namespace Z0
     public readonly struct CheckInvariant : TCheckInvariant
     {
         public static bool require(bool invariant, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => invariant ? true : throw failed(ClaimKind.Invariant, InvariantFailure(caller, file, line));
+            => invariant ? true : throw exception(ClaimKind.Invariant, InvariantFailure(caller, file, line));
 
         /// <summary>
         /// Asserts the operand is true

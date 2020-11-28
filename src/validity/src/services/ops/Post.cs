@@ -11,13 +11,13 @@ namespace Z0
 
     partial class TestApp<A>
     {
-        void PostTestResults(IEnumerable<TestCaseRecord> outcomes)
+        public void PostTestResults(IEnumerable<TestCaseRecord> outcomes)
             => TestResultQueue.Enqueue(outcomes);
 
-        void PostTestResult(TestCaseRecord outcome)
+        public void PostTestResult(TestCaseRecord outcome)
             => TestResultQueue.Enqueue(outcome);
 
-        void PostBenchResult(IEnumerable<BenchmarkRecord> outcomes)
+        public void PostBenchResult(IEnumerable<BenchmarkRecord> outcomes)
             => BenchmarkQueue.Enqueue(outcomes);
     }
 }

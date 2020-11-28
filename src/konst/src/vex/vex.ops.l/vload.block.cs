@@ -31,7 +31,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Vector256<T> vload<T>(in SpanBlock256<T> src)
             where T : unmanaged
-                => vload(w256, src.Data);
+                => vload(w256, src.Storage);
 
         /// <summary>
         /// Loads a 512-bit vector from the leading source block

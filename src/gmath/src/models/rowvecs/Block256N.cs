@@ -99,7 +99,7 @@ namespace Z0
         public Span<T> Unsized
         {
             [MethodImpl(Inline)]
-            get => Data.Data;
+            get => Data.Storage;
         }
 
 

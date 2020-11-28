@@ -10,51 +10,6 @@ namespace Z0
     using static Konst;
     using static SFx;
 
-    public readonly struct CheckBinaryOpSF<T> : ICheckSF<T,T,T>
-        where T : unmanaged
-    {
-        public ITestContext Context {get;}
-
-        public bool ExcludeZero {get;}
-
-        [MethodImpl(Inline)]
-        public CheckBinaryOpSF(ITestContext context, bool xz = false)
-        {
-            Context = context;
-            ExcludeZero = xz;
-        }
-    }
-
-    public readonly struct CheckBinaryPredSF<T> : ICheckSF<T,T,Bit32>
-        where T : unmanaged
-    {
-        public ITestContext Context {get;}
-
-        public bool ExcludeZero {get;}
-
-        [MethodImpl(Inline)]
-        public CheckBinaryPredSF(ITestContext context, bool xz = false)
-        {
-            Context = context;
-            ExcludeZero = xz;
-        }
-    }
-
-    public readonly struct CheckBinaryPredSF8<T> : ICheckSF<T,T,bool>
-        where T : unmanaged
-    {
-        public ITestContext Context {get;}
-
-        public bool ExcludeZero {get;}
-
-        [MethodImpl(Inline)]
-        public CheckBinaryPredSF8(ITestContext context, bool xz = false)
-        {
-            Context = context;
-            ExcludeZero = xz;
-        }
-    }
-
     public interface ICheckSF<T0,T1,R> : ICheckSF
         where T0 : unmanaged
         where T1 : unmanaged

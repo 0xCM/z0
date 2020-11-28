@@ -79,7 +79,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => Data.Data.Format();
+            => Data.Storage.Format();
 
         [MethodImpl(Inline)]
         public ref RowVector256<T> CopyTo(ref RowVector256<T> dst)

@@ -74,7 +74,7 @@ namespace Z0
             var count = length(lhs,rhs);
             for(var i = 0; i< count; i++)
                 if(lhs[i] != rhs[i])
-                    throw failed(ClaimKind.EqItem, ItemsNotEqual(i, lhs[i], rhs[i], caller, file, line));
+                    throw exception(ClaimKind.EqItem, ItemsNotEqual(i, lhs[i], rhs[i], caller, file, line));
         }
 
         /// <summary>

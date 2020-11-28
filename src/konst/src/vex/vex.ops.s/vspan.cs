@@ -38,7 +38,7 @@ namespace Z0
         {
             var dst = SpanBlocks.alloc<T>(w256);
             vsave(src, ref dst.First);
-            return dst.Data;
+            return dst.Storage;
         }
 
         /// <summary>

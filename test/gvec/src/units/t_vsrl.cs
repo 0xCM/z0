@@ -11,8 +11,6 @@ namespace Z0
 
     public class t_vsrl : t_inx<t_vsrl>
     {
-        public  override bool Enabled => false;
-
         public void vsrl_check()
         {
             vsrl_check(n128);

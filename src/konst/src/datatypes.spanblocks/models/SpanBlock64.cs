@@ -66,7 +66,7 @@ namespace Z0
         public int BlockLength
         {
             [MethodImpl(Inline)]
-            get => 8/Unsafe.SizeOf<T>();
+            get => 8/(int)size<T>();
         }
 
         /// <summary>
@@ -84,7 +84,7 @@ namespace Z0
         public ulong BitCount
         {
             [MethodImpl(Inline)]
-            get => (ulong)CellCount * (ulong)Unsafe.SizeOf<T>()*8;
+            get => (ulong)CellCount * (ulong)size<T>()*8;
         }
 
         /// <summary>

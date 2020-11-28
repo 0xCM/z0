@@ -41,12 +41,6 @@ namespace Z0
             => SortedCaseLogRoot() + FS.file(AppName,  ArchiveFileKinds.Csv);
 
         /// <summary>
-        /// The name of the folder into which test results are deposited
-        /// </summary>
-        FS.FolderName OutcomeFolder
-            => FS.folder(Results);
-
-        /// <summary>
         /// The name of the development source folder
         /// </summary>
         FS.FolderName DevSrcFolder

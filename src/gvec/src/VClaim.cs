@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
 
     using static Konst;
     using static AppErrorMsg;
@@ -14,16 +15,8 @@ namespace Z0
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
-    using static Enums;
-
-    public interface TCheckEnum : TValidator
+    public readonly struct VClaim
     {
-        [MethodImpl(Inline)]
-        void eq<E>(E lhs, E rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            where E : unmanaged, Enum
-        {
-            if(!e64u(lhs).Equals(e64u(rhs)))
-                throw Failed(ClaimKind.Eq, NotEqual(lhs,rhs, caller, file, line));
-        }
+
     }
 }

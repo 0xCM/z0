@@ -47,7 +47,7 @@ namespace Z0
             {
                 var y = BitConverter.GetBytes(Random.Next<ulong>()).ToSpan();
                 Unpack(y,buffer64x8);
-                Claim.eq(buffer64x8.Data.PopCount(), y.PopCount());
+                Claim.eq(buffer64x8.Storage.PopCount(), y.PopCount());
             }
 
             // var bits5 = Random.Span<byte>(5);

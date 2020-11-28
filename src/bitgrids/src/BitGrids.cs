@@ -7,18 +7,18 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using static Konst;
 
-    [ApiHost("api")]
+    [ApiHost]
     public partial class BitGrid
     {
-
+        const NumericKind Closure = UnsignedInts;
     }
 
     [ApiHost("allocating")]
     public partial class BitGridA
     {
         internal const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
-
     }
 
     public partial class BGI
@@ -26,7 +26,7 @@ namespace Z0
 
     }
 
-    [ApiHost("patterns")]
+    [ApiHost]
     public partial class GridPatterns
     {
         internal const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;

@@ -27,7 +27,7 @@ namespace Z0
         public static NatSpan<N,T> natspan<N,T>(in SpanBlock256<T> src, N n = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => NatSpan.load(src.Data,n);
+                => NatSpan.load(src.Storage,n);
 
         /// <summary>
         /// Allocates a memory span of specified length

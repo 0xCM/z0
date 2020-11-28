@@ -41,7 +41,7 @@ namespace Z0
             where T : unmanaged
         {
             var dst = SpanBlocks.alloc<T>(n256,lhs.BlockCount);
-            gspan.and(lhs,rhs, dst.Data);
+            gspan.and(lhs,rhs, dst.Storage);
             return dst;
         }
 
@@ -55,7 +55,7 @@ namespace Z0
             var result = Blocked.and(u, v);
             var expect = and(u.Data, v.Data);
 
-            ClaimNumeric.Eq(expect.Data, result.Data);
+            ClaimNumeric.Eq(expect.Storage, result.Data);
         }
     }
 }

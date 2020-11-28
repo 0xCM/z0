@@ -42,8 +42,6 @@ namespace Z0
     {
         public static TestLogPathsLegacy The => default;
 
-        static FileExtension LogExt => FileExtensions.StatusLog;
-
         public FS.FilePath LogPath(LogArea area, string basename, FS.FileExt? ext = null)
             => Settings.LogDir(area) + FS.file(basename, ext ?? ArchiveFileKinds.Log);
 
@@ -168,15 +166,6 @@ namespace Z0
             public void Notify(string msg, LogLevel? severity = null)
                 => Deposit(AppMsg.define(msg,severity ?? LogLevel.Info));
         }
-
-        // sealed class AppLogger : TestLogger<AppLogger>
-        // {
-        //     public AppLogger()
-        //      : base(LogArea.App)
-        //     {
-
-        //     }
-        // }
 
         sealed class BenchLogger : TestLogger<BenchLogger>
         {

@@ -22,7 +22,7 @@ namespace Z0
         [MethodImpl(Inline), Extract, Closures(UnsignedInts)]
         public static T segment<T>(in SpanBlock256<T> src, BitPos<T> firstpos, BitPos<T> lastpos)
             where T : unmanaged
-                => gbits.extract(src.Data, firstpos,lastpos);
+                => gbits.extract(src.Storage, firstpos,lastpos);
 
         /// <summary>
         /// Extracts a T-valued segment, cross-cell or same-cell, from the source as determined by an inclusive linear index range
@@ -34,6 +34,6 @@ namespace Z0
         [MethodImpl(Inline), Extract, Closures(UnsignedInts)]
         public static T segment<T>(in SpanBlock256<T> src, int i0, int i1)
             where T : unmanaged
-                => gbits.extract(src.Data, gbits.bitpos<T>(i0), gbits.bitpos<T>(i1));
+                => gbits.extract(src.Storage, gbits.bitpos<T>(i0), gbits.bitpos<T>(i1));
     }
 }

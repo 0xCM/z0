@@ -249,7 +249,7 @@ namespace Z0
             gvec.vlo(z).StoreTo(dst,0);
             gvec.vhi(z).StoreTo(dst,1);
 
-            var perm = Perm.Init(dst.Data);
+            var perm = Perm.Init(dst.Storage);
             for(var i=0; i< perm.Length; i++)
             {
                 var identity = i == perm[i];
@@ -449,7 +449,7 @@ namespace Z0
             c.Lo.StoreTo(dst,0);
             c.Hi.StoreTo(dst,1);
 
-            var perm = Perm.Init(dst.Data);
+            var perm = Perm.Init(dst.Storage);
             for(var i=0; i< perm.Length; i++)
             {
                 var identity = gmath.eq(force<T>(i), perm[i]);

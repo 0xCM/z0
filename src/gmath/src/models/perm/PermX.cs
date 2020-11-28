@@ -141,7 +141,7 @@ namespace Z0
              if(swaps == null || swaps.Length == 0)
                 return src;
 
-             src.Data.Swap(swaps);
+             src.Storage.Swap(swaps);
              return src;
         }
     }

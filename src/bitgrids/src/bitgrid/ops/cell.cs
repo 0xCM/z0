@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="bitpos">The linear bit position</param>
         /// <param name="src">A reference to grid storage</param>
         /// <typeparam name="T">The storage segment type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T cell<T>(ref T src, int bitpos)
             where T : unmanaged
                 => ref seek(src, bitpos / (int)bitwidth<T>());
@@ -29,7 +29,7 @@ namespace Z0
         /// <param name="bitpos">The linear bit position</param>
         /// <param name="src">A reference to grid storage</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T cell<T>(in BitGrid<T> src, int bitpos)
             where T : unmanaged
                 => ref seek(src.Head, bitpos / bitwidth<T>());

@@ -85,7 +85,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static string FormatHex<T>(this SpanBlock256<T> src, char sep = HexDelimiter, bool specifier = false)
             where T : unmanaged
-                => src.Data.FormatHex(sep, specifier);
+                => src.Storage.FormatHex(sep, specifier);
 
         /// <summary>
         /// Formats blocked content as a sequence of hex values

@@ -13,20 +13,15 @@ namespace Z0
     /// Base type for test applications
     /// </summary>
     /// <typeparam name="A">The concrete subtype</typeparam>
-    public abstract partial class TestApp<A> : TestContext<A>
+    public abstract partial class TestApp<A> : TestContext<A>, ITestApp
         where A : TestApp<A>, new()
     {
         const bool InDiagnosticMode = false;
-
-
-        protected readonly CaseLog CaseLog;
 
         protected virtual string AppName {get;}
 
         protected TestApp()
         {
-            CaseLog = CaseLogs.create(TestLogPaths.CaseLogPath);
-            OnDispose += CaseLog.Dispose;
             AppName = GetType().Assembly.GetSimpleName();
         }
 

@@ -748,3 +748,20 @@ System.NullReferenceException: Object reference not set to an instance of an obj
    at System.Text.StringBuilder.ToString()
    at Z0.CaseLog`2.Deposit(R[] src) in j:\dev\projects\z0\src\konst\src\wf.logs\services\CaseLogT.cs:line 46
 
+Failure trapped by Deposit at j:\dev\projects\z0\src\konst\src\wf.logs\services\CaseLogT.cs 52
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at System.Text.StringBuilder.ToString()
+   at Z0.CaseLog`2.Deposit(R[] src) in j:\dev\projects\z0\src\konst\src\wf.logs\services\CaseLogT.cs:line 46
+
+Failure occurred at RunUnit j:\dev\projects\z0\src\validity\src\services\ops\RunUnit.cs 43
+Harness execution failed: System.NullReferenceException: Object reference not set to an instance of an object.
+   at System.String.Concat(String str0, String str1)
+   at System.Exception.get_StackTrace()
+   at System.Exception.ToString()
+   at Z0.term.error(Exception e, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\konst\src\terminal\ops\kinds.cs:line 68
+   at Z0.CaseLog`2.Deposit(R[] src) in j:\dev\projects\z0\src\konst\src\wf.logs\services\CaseLogT.cs:line 52
+   at Z0.TestApp`1.RunCase(IUnitTest unit, MethodInfo method, IList`1 cases) in j:\dev\projects\z0\src\validity\src\services\ops\RunCase.cs:line 19
+   at Z0.TestApp`1.<>c__DisplayClass37_0.<RunUnit>b__0(MethodInfo t) in j:\dev\projects\z0\src\validity\src\services\ops\RunUnit.cs:line 31
+   at Z0.z.iter[T](IEnumerable`1 items, Action`1 action, Boolean pll) in j:\dev\projects\z0\src\konst\src\z\z.ops.i\iter.cs:line 28
+   at Z0.TestApp`1.RunUnit(Type host, IUnitTest unit) in j:\dev\projects\z0\src\validity\src\services\ops\RunUnit.cs:line 31
+

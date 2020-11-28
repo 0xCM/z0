@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Linq;
     using System.Collections.Generic;
-    using System.Reflection;
 
     using static Konst;
 
@@ -18,10 +17,12 @@ namespace Z0
             var messages = new List<IAppMsg>();
             var control = unit as ITestQueue;
             messages.AddRange(unit.Dequeue());
+
             if(e != null)
                 messages.AddRange(FormatErrors(testName ?? EmptyString, e));
             else
                 messages.Add(AppMsg.info($"{testName} executed. {runtime}"));
+
             return messages.ToArray();
         }
 

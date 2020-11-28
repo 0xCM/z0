@@ -17,16 +17,16 @@ namespace Z0
         Type HostType => GetType();
 
         ClaimException Failed(ClaimKind claim, IAppMsg msg)
-            => api.failed(claim, msg);
+            => api.exception(claim, msg);
 
         void Require(bool condition, ClaimKind claim, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => api.require(condition,claim, caller,file,line);
 
         ClaimException Failed(ClaimKind claim, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => api.failed(claim, AppMsg.error("failed", caller, file,line));
+            => api.exception(claim, AppMsg.error("failed", caller, file,line));
 
         void FailWith(string msg, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => api.failmsg(msg,caller,file,line);
+            => api.fail(msg,caller,file,line);
 
         void Fail([Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => api.fail(caller,file,line);

@@ -12,7 +12,7 @@ namespace Z0
 
     partial class TestApp<A>
     {
-        void RunUnit(Type host, IUnitTest unit)
+        public void RunUnit(Type host, IUnitTest unit)
         {
             if(DiagnosticMode)
                 term.print($"Executing {host.DisplayName()} cases");

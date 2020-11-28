@@ -11,36 +11,6 @@ namespace Z0
     using static z;
     using static SFx;
 
-    public readonly struct CheckTernaryOpSF<T> : ICheckSF<T,T,T,T>
-        where T : unmanaged
-    {
-        public ITestContext Context {get;}
-
-        public bool ExcludeZero {get;}
-
-        [MethodImpl(Inline)]
-        public CheckTernaryOpSF(ITestContext context, bool xz = false)
-        {
-            Context = context;
-            ExcludeZero = xz;
-        }
-    }
-
-    public readonly struct CheckTernaryPredSF<T> : ICheckSF<T,T,T,Bit32>
-        where T : unmanaged
-    {
-        public ITestContext Context {get;}
-
-        public bool ExcludeZero {get;}
-
-        [MethodImpl(Inline)]
-        public CheckTernaryPredSF(ITestContext context, bool xzero = false)
-        {
-            Context = context;
-            ExcludeZero = xzero;
-        }
-    }
-
     public interface ICheckSF<T0,T1,T2,R> : ICheckSF
         where T0 : unmanaged
         where T1 : unmanaged

@@ -11,7 +11,7 @@ namespace Z0
 
     partial class TestApp<A>
     {
-        Type[] FindHosts()
+        public Type[] FindHosts()
             =>  (from t in typeof(A).Assembly.Types().Realize<IUnitTest>()
                 where t.IsConcrete() && t.Untagged<IgnoreAttribute>()
                 orderby t.Name

@@ -136,7 +136,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<T> Slice<T>(this in SpanBlock256<T> src, int offset)
             where T : unmanaged
-                => src.Data.Slice(offset);
+                => src.Storage.Slice(offset);
 
         /// <summary>
         /// Slices a blocked data source at the cellular level
@@ -148,7 +148,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<T> Slice<T>(this in SpanBlock256<T> src, int offset, int length)
             where T : unmanaged
-                => src.Data.Slice(offset,length);
+                => src.Storage.Slice(offset,length);
 
         /// <summary>
         /// Slices a blocked data source at the cellular level
@@ -160,7 +160,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<T> Slice<T>(this in SpanBlock256<T> src, uint offset, uint length)
             where T : unmanaged
-                => src.Data.Slice((int)offset, (int)length);
+                => src.Storage.Slice((int)offset, (int)length);
 
         /// <summary>
         /// Slices a blocked data source at the cellular level

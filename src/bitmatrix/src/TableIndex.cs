@@ -37,7 +37,7 @@ namespace Z0
             => new TableIndex(CellIndex, RowCellCount, BitOffset, BitIndex, RowIndex, ColIndex);
 
         [MethodImpl(Inline)]
-        TableIndex(ushort CellIndex, ushort RowCellCount, byte BitOffset, uint BitIndex, int RowIndex, int ColIndex)
+        internal TableIndex(ushort CellIndex, ushort RowCellCount, byte BitOffset, uint BitIndex, int RowIndex, int ColIndex)
         {
             this.CellIndex = CellIndex;
             this.RowCellCount = RowCellCount;

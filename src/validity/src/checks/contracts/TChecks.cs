@@ -4,8 +4,16 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public readonly struct CheckEnum : TCheckEnum
+    public interface TChecks :
+        TCheckLengths,
+        TCheckPrimal,
+        TCheckPrimalSeq,
+        TCheckClose,
+        TCheckFileSystem,
+        TCheckInvariant,
+        TCheckSets,
+        TCheckNull
     {
-        public static TCheckEnum Checker => default(CheckEnum);
+
     }
 }
