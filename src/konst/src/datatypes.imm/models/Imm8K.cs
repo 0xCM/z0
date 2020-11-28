@@ -15,18 +15,18 @@ namespace Z0
     /// Defines a refined 8-bit immediate value
     /// </summary>
     [DataType]
-    public readonly struct Imm8<E> : IImmValue<Imm8<E>,W, E>
+    public readonly struct Imm8<E> : IImmValue<Imm8<E>,W,E>
         where E : unmanaged
     {
-        public E Storage {get;}
+        public E Content {get;}
 
         [MethodImpl(Inline)]
         public Imm8(E src)
-            => Storage = src;
+            => Content = src;
 
         [MethodImpl(Inline)]
         public string Format()
-            => Hex.format(Storage, W);
+            => Hex.format(Content, W);
 
         public override string ToString()
             => Format();
@@ -34,7 +34,7 @@ namespace Z0
         public uint Hash
         {
             [MethodImpl(Inline)]
-            get => z.hash(Storage);
+            get => z.hash(Content);
         }
 
         public override int GetHashCode()
@@ -42,7 +42,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator E(Imm8<E> src)
-            => src.Storage;
+            => src.Content;
 
         [MethodImpl(Inline)]
         public static implicit operator Imm8<E>(E src)

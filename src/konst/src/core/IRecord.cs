@@ -13,9 +13,10 @@ namespace Z0
     }
 
     [Free]
-    public interface IRecord<T> : IRecord
+    public interface IRecord<T> : IRecord, IDataType<T>
         where T : struct, IRecord<T>
     {
-
+        T IDataType<T>.Content
+            => (T)this;
     }
 }

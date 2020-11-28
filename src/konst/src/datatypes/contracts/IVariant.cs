@@ -19,12 +19,11 @@ namespace Z0
         /// The numeric data type if unsegmented or, if segmented, the numeric cell kind
         /// </summary>
         NumericKind CellKind {get;}
-
     }
 
     [Free]
-    public interface IVariant<V> : IVariant
-        where V : unmanaged, IVariant<V>
+    public interface IVariant<V> : IVariant, IDataType<V>
+        where V : unmanaged
     {
 
     }

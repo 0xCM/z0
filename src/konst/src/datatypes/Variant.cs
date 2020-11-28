@@ -27,11 +27,11 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static variant convert(variant src, NumericKind dst)
-            => from(src.Value.WithElement(1,(ulong)dst));
+            => from(src.Content.WithElement(1,(ulong)dst));
 
         [MethodImpl(Inline)]
         public static NK kind(variant src)
-            => (NK)vcell(src.Value,1);
+            => (NK)vcell(src.Content,1);
 
         [MethodImpl(Inline)]
         public static DataWidth width(variant src)
@@ -40,16 +40,17 @@ namespace Z0
         [MethodImpl(Inline)]
         public static T extract<T>(variant src)
             where T : unmanaged
-                => vcell(vector<T>(src), 0);
 
-        [MethodImpl(Inline)]
-        static variant from(Vector128<ulong> src)
-            => new variant(src);
+                => vcell(vector<T>(src), 0);
 
         [MethodImpl(Inline)]
         static Vector128<T> vector<T>(variant src)
             where T : unmanaged
-                => generic<T>(src.Value);
+                => generic<T>(src.Content);
+
+        [MethodImpl(Inline)]
+        static variant from(Vector128<ulong> src)
+            => new variant(src);
 
         [MethodImpl(Inline)]
         static Vector128<ulong> store(ulong value, NK kind)

@@ -13,15 +13,9 @@ namespace Z0
 
     using NK = NumericKind;
 
-    public readonly struct variant : IVariant<variant>
+    public readonly struct variant : IVariant<Vector128<ulong>>
     {
-        readonly Vector128<ulong> data;
-
-        public Vector128<ulong> Value
-        {
-            [MethodImpl(Inline), Ignore]
-            get => data;
-        }
+        public Vector128<ulong> Content {get;}
 
         public static variant Zero
             => default;
@@ -54,54 +48,54 @@ namespace Z0
 
         [MethodImpl(Inline)]
         internal variant(Vector128<ulong> src)
-            => data = src;
+            => Content = src;
 
         [MethodImpl(Inline)]
         public variant(sbyte value)
-            => data = Store(value, NK.I8, 8);
+            => Content = Store(value, NK.I8, 8);
 
         [MethodImpl(Inline)]
         public variant(byte value)
-            => data = Store(value, NK.U8, 8);
+            => Content = Store(value, NK.U8, 8);
 
         [MethodImpl(Inline)]
         public variant(short value)
-            => data = Store(value, NK.I16, 16);
+            => Content = Store(value, NK.I16, 16);
 
         [MethodImpl(Inline)]
         public variant(ushort value)
-            => data = Store(value, NK.U16, 16);
+            => Content = Store(value, NK.U16, 16);
 
         [MethodImpl(Inline)]
         public variant(int value)
-            => data = Store(value, NK.I32, 32);
+            => Content = Store(value, NK.I32, 32);
 
         [MethodImpl(Inline)]
         public variant(uint value)
-            => data = Store(value, NK.U32, 32);
+            => Content = Store(value, NK.U32, 32);
 
         [MethodImpl(Inline)]
         public variant(long value)
-            => data = Store(value, NK.I64, 64);
+            => Content = Store(value, NK.I64, 64);
 
         [MethodImpl(Inline)]
         public variant(ulong value)
-            => data = Store(value, NK.U64, 64);
+            => Content = Store(value, NK.U64, 64);
 
         [MethodImpl(Inline)]
         public variant(float value)
-            => data = Store(value, NK.F32, 32);
+            => Content = Store(value, NK.F32, 32);
 
         [MethodImpl(Inline)]
         public variant(double value)
-            => data = Store(value, NK.F64, 64);
+            => Content = Store(value, NK.F64, 64);
 
         public override int GetHashCode()
             => Low64.GetHashCode();
 
         [MethodImpl(Inline)]
         public bool Equals(variant src)
-            => data.Equals(src.data);
+            => Content.Equals(src.Content);
 
         public override bool Equals(object src)
             => src is variant v && Equals(v);
@@ -124,7 +118,7 @@ namespace Z0
         [MethodImpl(Inline)]
         Vector128<T> to<T>()
             where T : unmanaged
-                => generic<T>(data);
+                => generic<T>(Content);
 
         [MethodImpl(Inline)]
         T cell<T>(byte index)
@@ -134,7 +128,7 @@ namespace Z0
         ulong Low64
         {
             [MethodImpl(Inline)]
-            get => vcell(data,0);
+            get => vcell(Content,0);
         }
 
         [MethodImpl(Inline)]

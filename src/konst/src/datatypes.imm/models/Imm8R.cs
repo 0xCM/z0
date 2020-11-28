@@ -15,19 +15,14 @@ namespace Z0
     [DataType]
     public readonly struct Imm8R : IImmValue<Imm8R,W8,byte>
     {
-        public byte Storage {get;}
-
-        public bool Refined {get;}
+        public byte Content {get;}
 
         [MethodImpl(Inline)]
-        public Imm8R(byte value, bool refined)
-        {
-            Storage = value;
-            Refined = refined;
-        }
+        public Imm8R(byte value)
+            => Content = value;
 
         [MethodImpl(Inline)]
         public static implicit operator byte(Imm8R imm8)
-            => imm8.Storage;
+            => imm8.Content;
     }
 }

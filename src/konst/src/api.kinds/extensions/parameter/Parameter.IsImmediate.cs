@@ -40,11 +40,11 @@ namespace Z0
 
         [Op]
         public static Imm8R[] ToImm8Values(this byte[] src, ScalarRefinementKind kind)
-            => src.Map(x => new Imm8R(x, kind != 0));
+            => src.Map(x => new Imm8R(x));
 
         [Op]
         public static Imm8R[] ToImm8Values(this IEnumerable<byte> src, ScalarRefinementKind kind)
-            => src.Map(x => new Imm8R(x, kind != 0));
+            => src.Map(x => new Imm8R(x));
 
         /// <summary>
         /// Determines whether a parameters is an unrefined immediate

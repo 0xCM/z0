@@ -5,9 +5,11 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
 
-    [Record]
+    using static Konst;
+
+    [Record, StructLayout(DefaultLayout)]
     public struct Solution : IRecord<Solution>
     {
         public SlnFile Path;

@@ -18,15 +18,15 @@ namespace Z0
     [DataType]
     public readonly struct Imm32 : IImmValue<I,W32, uint>
     {
-        public uint Storage {get;}
+        public uint Content {get;}
 
         [MethodImpl(Inline)]
         public Imm32(uint src)
-            => Storage = src;
+            => Content = src;
 
         [MethodImpl(Inline)]
         public string Format()
-            => Hex.format(Storage, W);
+            => Hex.format(Content, W);
 
         public override string ToString()
             => Format();
@@ -34,7 +34,7 @@ namespace Z0
         public uint Hash
         {
             [MethodImpl(Inline)]
-            get => z.hash(Storage);
+            get => z.hash(Content);
         }
 
         public override int GetHashCode()
@@ -42,22 +42,22 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public int CompareTo(I src)
-            => Storage == src.Storage ? 0 : Storage < src.Storage ? -1 : 1;
+            => Content == src.Content ? 0 : Content < src.Content ? -1 : 1;
 
         [MethodImpl(Inline)]
         public bool Equals(I src)
-            => Storage == src.Storage;
+            => Content == src.Content;
 
         public override bool Equals(object src)
             => src is I x && Equals(x);
 
         [MethodImpl(Inline)]
         public Address32 ToAddress()
-            => Storage;
+            => Content;
 
         [MethodImpl(Inline)]
         public static implicit operator uint(I src)
-            => src.Storage;
+            => src.Content;
 
         [MethodImpl(Inline)]
         public static implicit operator I(uint src)
@@ -65,27 +65,27 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static bool operator <(I a, I b)
-            => a.Storage < b.Storage;
+            => a.Content < b.Content;
 
         [MethodImpl(Inline)]
         public static bool operator >(I a, I b)
-            => a.Storage > b.Storage;
+            => a.Content > b.Content;
 
         [MethodImpl(Inline)]
         public static bool operator <=(I a, I b)
-            => a.Storage <= b.Storage;
+            => a.Content <= b.Content;
 
         [MethodImpl(Inline)]
         public static bool operator >=(I a, I b)
-            => a.Storage >= b.Storage;
+            => a.Content >= b.Content;
 
         [MethodImpl(Inline)]
         public static bool operator ==(I a, I b)
-            => a.Storage == b.Storage;
+            => a.Content == b.Content;
 
         [MethodImpl(Inline)]
         public static bool operator !=(I a, I b)
-            => a.Storage != b.Storage;
+            => a.Content != b.Content;
 
         public static W W => default;
     }

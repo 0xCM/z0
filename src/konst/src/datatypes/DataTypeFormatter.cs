@@ -14,6 +14,6 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public Span<byte> Format(in T src)
-            => memory.bytes(src);
+            => memory.bytes(src.Content);
     }
 }

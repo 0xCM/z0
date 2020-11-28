@@ -13,7 +13,7 @@ namespace Z0
         where S : struct, IDataType<S>
     {
         Span<byte> IFormatter<S>.Format(in S src)
-            => memory.bytes(src.Storage);
+            => memory.bytes(src.Content);
     }
 
     [Free]

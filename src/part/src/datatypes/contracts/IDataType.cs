@@ -22,13 +22,13 @@ namespace Z0
     public interface IDataType<T> : IDataType
         where T : struct
     {
-        T Storage {get;}
+        T Content {get;}
 
         BitSize IDataType.PhysicalWidth
             => Unsafe.SizeOf<T>();
 
         string ITextual.Format()
-            => Storage.ToString();
+            => Content.ToString();
     }
 
     [Free]
