@@ -10,7 +10,7 @@ namespace Z0
 
     public static partial class PolySpan
     {
-        public static Span<T> create<T>(IPolySourced random, int length, Interval<T> domain, Func<T,bool> filter = null)
+        public static Span<T> create<T>(IPolyStream random, int length, Interval<T> domain, Func<T,bool> filter = null)
             where T : unmanaged
         {
             var dst = span<T>(length);
@@ -26,7 +26,7 @@ namespace Z0
         /// <param name="domain">An optional domain to which values are constrained</param>
         /// <param name="filter">An optional filter that refines the domain</param>
         /// <typeparam name="T">The primal random value type</typeparam>
-        public static Span<T> Span<T>(this IPolySourced random, int length, Interval<T> domain)
+        public static Span<T> Span<T>(this IPolyStream random, int length, Interval<T> domain)
             where T : unmanaged
                 => create<T>(random, length, domain);
 
@@ -37,7 +37,7 @@ namespace Z0
         /// <param name="length">The span length</param>
         /// <param name="t">A cell type representative</param>
         /// <typeparam name="T">The cell type</typeparam>
-        public static Span<T> Span<T>(this IPolySourced random, int length)
+        public static Span<T> Span<T>(this IPolyStream random, int length)
             where T : unmanaged
                 => create<T>(random, length, Interval<T>.Full);
 
@@ -48,7 +48,7 @@ namespace Z0
         /// <param name="length">The length of the produced data</param>
         /// <param name="domain">The interval domain to which values are constrained</param>
         /// <typeparam name="T">The primal random value type</typeparam>
-        public static Span<T> Span<T>(this IPolySourced random, int length, Interval<T> domain, Func<T,bool> filter)
+        public static Span<T> Span<T>(this IPolyStream random, int length, Interval<T> domain, Func<T,bool> filter)
             where T : unmanaged
                 => create<T>(random, length, domain, filter);
 
@@ -59,7 +59,7 @@ namespace Z0
         /// <param name="length">The length of the produced data</param>
         /// <param name="domain">The interval domain to which values are constrained</param>
         /// <typeparam name="T">The primal random value type</typeparam>
-        public static Span<T> Span<T>(this IPolySourced random, int length, T min, T max, Func<T,bool> filter = null)
+        public static Span<T> Span<T>(this IPolyStream random, int length, T min, T max, Func<T,bool> filter = null)
             where T : unmanaged
                 => create<T>(random, length, (min, max), filter);
 
@@ -69,7 +69,7 @@ namespace Z0
         /// <param name="random">The random source</param>
         /// <param name="dst">The target span</param>
         /// <typeparam name="T">The cell type</typeparam>
-        public static Span<T> Span<N,T>(this IPolySourced src, N n = default, T t = default)
+        public static Span<T> Span<N,T>(this IPolyStream src, N n = default, T t = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
                 => create<T>(src, (int)nat64u(n), Interval<T>.Full);
@@ -80,7 +80,7 @@ namespace Z0
         /// <param name="random">The random source</param>
         /// <param name="dst">The target span</param>
         /// <typeparam name="T">The cell type</typeparam>
-        public static Span<T> Span<N,T>(this IPolySourced src, T min, T max, N n = default)
+        public static Span<T> Span<N,T>(this IPolyStream src, T min, T max, N n = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
                 => create<T>(src, (int)nat64u(n), (min, max));
@@ -91,7 +91,7 @@ namespace Z0
         /// <param name="random">The random source</param>
         /// <param name="dst">The target span</param>
         /// <typeparam name="T">The cell type</typeparam>
-        public static Span<T> Span<N,T>(this IPolySourced src, Interval<T> domain, N n = default)
+        public static Span<T> Span<N,T>(this IPolyStream src, Interval<T> domain, N n = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
                 => create<T>(src, (int)nat64u(n), domain);
@@ -104,7 +104,7 @@ namespace Z0
         /// <param name="domain">An optional domain to which values are constrained</param>
         /// <param name="filter">An optional filter that refines the domain</param>
         /// <typeparam name="T">The primal random value type</typeparam>
-        public static Span<T> NonZeroSpan<T>(this IPolySourced random, int samples, Interval<T> domain)
+        public static Span<T> NonZeroSpan<T>(this IPolyStream random, int samples, Interval<T> domain)
             where T : unmanaged
                 => random.Span<T>(samples, domain, x => gmath.nonz(x));
 
@@ -116,7 +116,7 @@ namespace Z0
         /// <param name="domain">An optional domain to which values are constrained</param>
         /// <param name="filter">An optional filter that refines the domain</param>
         /// <typeparam name="T">The primal random value type</typeparam>
-        public static Span<T> NonZeroSpan<T>(this IPolySourced random, int samples)
+        public static Span<T> NonZeroSpan<T>(this IPolyStream random, int samples)
             where T : unmanaged
                 => random.Span<T>(samples, ClosedInterval<T>.Full, x => gmath.nonz(x));
     }

@@ -24,7 +24,6 @@ namespace Z0
         public string Format()
             => new DateTime((long)Ticks).ToString(Pattern);
 
-        [MethodImpl(Inline)]
         public override string ToString()
             => Format();
 
@@ -82,6 +81,5 @@ namespace Z0
             => new Timestamp((ulong)src.Ticks);
 
         public static Timestamp Zero => default;
-
     }
 }

@@ -11,7 +11,7 @@ namespace Z0
     /// of any numeric type among: sbyte, byte, short, ushort, int, uint, long, ulong, float, double
     /// </summary>
     [Free]
-    public interface IPolyrand : IRngSource, IPolySourced
+    public interface IPolyrand : IRngSource, IPolyStream
     {
         /// <summary>
         /// Retrieves the random stream navigator, if supported

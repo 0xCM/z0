@@ -91,7 +91,7 @@ namespace Z0
                 var v1 = Random.VectorBlock<N,T>();
                 var v2 = Random.VectorBlock<N,T>();
                 var v3 = RowVectors.blockload(add(v1.Unsized,v2.Unsized), n);
-                BlockVectorOps.add(ref v1, v2);
+                Blocked.add(ref v1, v2);
                 Claim.Require(v3 == v1);
             }
         }
@@ -109,7 +109,7 @@ namespace Z0
                 var v1 = Random.VectorBlock<N,T>();
                 var v2 = Random.VectorBlock<N,T>();
                 sw.Start();
-                BlockVectorOps.add(ref v1, v2);
+                Blocked.add(ref v1, v2);
                 sw.Stop();
             }
             ReportBenchmark(opname, opcount, sw.Elapsed);

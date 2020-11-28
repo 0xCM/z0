@@ -31,7 +31,7 @@ namespace Z0
         /// <param name="max">The exclusive maximum value</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static ConstTriple<T> NextTriple<T>(this IDomainValueSource source, T min, T max)
+        public static ConstTriple<T> NextTriple<T>(this IDomainSource source, T min, T max)
             where T : unmanaged
                 => Sources.ktriple<T>(source, min, max);
     }

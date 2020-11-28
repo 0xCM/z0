@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="t">A vector component type representative</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static VRand128<T> vemitter<T>(N128 w, IPolySourced random, T t = default)
+        public static VRand128<T> vemitter<T>(N128 w, IPolyStream random, T t = default)
             where T : unmanaged
                 => new VRand128<T>(random);
 
@@ -33,7 +33,7 @@ namespace Z0
         /// <param name="t">A vector component type representative</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static VRand256<T> vemitter<T>(N256 w, IPolySourced random, T t = default)
+        public static VRand256<T> vemitter<T>(N256 w, IPolyStream random, T t = default)
             where T : unmanaged
                 => new VRand256<T>(random);
 

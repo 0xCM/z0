@@ -14,54 +14,58 @@ namespace Z0
 
     public enum TestCaseField : uint
     {
-        Case = 0 | (60 << WidthOffset),
+        CaseName = 0 | (60 << WidthOffset),
 
-        Status =  1 | (14 << WidthOffset),
+        Passed =  1 | (14 << WidthOffset),
 
         Duration = 2  | (14 << WidthOffset),
 
         Executed =  3 | (26 << WidthOffset)
     }
 
-    public enum TestCaseStatus : byte
+    public readonly struct TestCaseRecords
     {
-        Failed = 0,
+        public static void render(in TestCaseRecord src, ITextBuffer dst, char delimiter = FieldDelimiter)
+        {
+            dst.AppendValue(src.CaseName, 60u, delimiter);
+            dst.AppendValue(src.Passed, 14u, delimiter);
+            dst.AppendValue(src.Duration, 14u, delimiter);
+            dst.AppendValue(src.Executed, 26u, delimiter);
+        }
 
-        Passed = 1
+        public static string format(in TestCaseRecord src, char delimiter = FieldDelimiter)
+        {
+            var dst = Buffers.text();
+            render(src, dst, delimiter);
+            return dst.Emit();
+        }
     }
 
     /// <summary>
     /// Describes the outcome of a test case
     /// </summary>
-    public readonly struct TestCaseRecord : ITabular<F,R>
+    public struct TestCaseRecord : ITabular<F,R>
     {
-        public readonly string Case;
+        public utf8 CaseName;
 
-        public readonly TestCaseStatus Status;
+        public bool Passed;
 
-        public readonly Duration Duration;
+        public Duration Duration;
 
-        public readonly Timestamp Executed;
+        public Timestamp Executed;
 
-        public static TestCaseRecord Define(string name, bool succeeded, Duration duration)
+        public static TestCaseRecord define(string name, bool succeeded, Duration duration)
             => new TestCaseRecord(name, succeeded, duration);
 
-        TestCaseRecord(string name, bool succeeded, Duration duration)
+        internal TestCaseRecord(string name, bool succeeded, Duration duration)
         {
-            Case = name ?? "<missing_name>";
-            Status = succeeded ? TestCaseStatus.Passed : TestCaseStatus.Failed;
+            CaseName = name ?? "<missing_name>";
+            Passed = succeeded;
             Duration = duration;
             Executed = now();
         }
 
         public string DelimitedText(char delimiter)
-        {
-            var dst = Table.formatter<F>(delimiter);
-            dst.Delimit(F.Case, Case);
-            dst.Delimit(F.Status, Status);
-            dst.Delimit(F.Duration, Duration);
-            dst.Delimit(F.Executed, Executed);
-            return dst.ToString();
-        }
+            => TestCaseRecords.format(this, delimiter);
     }
 }

@@ -14,10 +14,7 @@ namespace Z0
     {
         TestCaseRecord[] SortResults()
         {
-            static TestCaseRecord[] Sort(IEnumerable<TestCaseRecord> src)
-                => src.OrderBy(x => x.Case).Where(x => x.Status == 0).Concat(src.Where(x => x.Status != 0)).ToArray();
-
-            var results = Sort(TestResultQueue);
+            var results = TestResultQueue.OrderBy(x => x.CaseName).Where(x => !x.Passed).Concat(TestResultQueue.Where(x => x.Passed)).Array();
             TestResultQueue.Clear();
             return results;
         }
@@ -28,6 +25,6 @@ namespace Z0
             BenchmarkQueue.Clear();
             Array.Sort(records);
             return records;
-        }        
+        }
     }
 }

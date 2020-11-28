@@ -5,15 +5,15 @@
 namespace Z0
 {
     using System;
-    
+
     using static Konst;
 
     public interface TTestResultSink : ISink<TestCaseRecord>
     {
         void ReportCaseResult(string casename, bool succeeded, TimeSpan duration)
-            => Deposit(TestCaseRecord.Define(casename,succeeded,duration));
-        
+            => Deposit(TestCaseRecord.define(casename,succeeded,duration));
+
         void ISink<TestCaseRecord>.Deposit(TestCaseRecord src)
-            => term.print(src.DelimitedText(Chars.Pipe));
+            => term.print(TestCaseRecords.format(src));
     }
 }

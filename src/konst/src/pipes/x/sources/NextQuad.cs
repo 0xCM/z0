@@ -31,7 +31,7 @@ namespace Z0
         /// <param name="max">The exclusive maximum value</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static ConstQuad<T> NextQuad<T>(this IDomainValueSource source, T min, T max)
+        public static ConstQuad<T> NextQuad<T>(this IDomainSource source, T min, T max)
             where T : unmanaged
                 => (source.NextPair<T>(min,max), source.NextPair<T>(min,max));
     }

@@ -12,14 +12,6 @@ namespace Z0
 
     partial struct z
     {
-        /// <summary>
-        /// Creates a bistream over a T-stream
-        /// </summary>
-        /// <param name="src">The data source</param>
-        /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static BitStream<T> bitstream<T>(IEnumerable<T> src)
-            where T : struct
-                => new BitStream<T>(src);
+
     }
 }

@@ -15,7 +15,7 @@ namespace Z0
     using BS = Z0.BitBlocks;
     using BM = Z0.BitMatrix;
 
-    public static class BitRng
+    public static class BgRng
     {
         /// <summary>
         /// Creates a 16-bit generic bitgrid

@@ -6,11 +6,7 @@ namespace Z0
 {
     using System;
 
-    using Z0.Asm;
-
-    using static z;
-
-    class Control : IDisposable
+    class Control
     {
         public static void Main(params string[] args)
         {
@@ -22,11 +18,6 @@ namespace Z0
             {
                 term.error(e);
             }
-        }
-
-        public void Dispose()
-        {
-
         }
     }
 

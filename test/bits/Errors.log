@@ -33,3 +33,718 @@ System.NullReferenceException: Object reference not set to an instance of an obj
    at Z0.CaseLogs.rows[T](T[] src) in j:\dev\projects\z0\src\konst\src\wf.logs\CaseLogs.cs:line 70
    at Z0.CaseLog`2.Deposit(R[] src) in j:\dev\projects\z0\src\konst\src\wf.logs\services\CaseLogT.cs:line 44
 
+Failure trapped by Deposit at j:\dev\projects\z0\src\konst\src\wf.logs\services\CaseLogT.cs 46
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at System.Text.StringBuilder.ToString()
+   at Z0.TestCaseRecord.DelimitedText(Char delimiter) in j:\dev\projects\z0\src\konst\src\wf.events\services\TestCaseRecord.cs:line 64
+   at Z0.Table.rows[T](T[] src) in j:\dev\projects\z0\src\konst\src\tables\ops\rows.cs:line 24
+   at Z0.CaseLog`2.Deposit(R[] src) in j:\dev\projects\z0\src\konst\src\wf.logs\services\CaseLogT.cs:line 42
+
+Failure trapped by Deposit at j:\dev\projects\z0\src\konst\src\wf.logs\services\CaseLogT.cs 46
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at System.Text.StringBuilder.ToString()
+   at Z0.TestCaseRecord.DelimitedText(Char delimiter) in j:\dev\projects\z0\src\konst\src\wf.events\services\TestCaseRecord.cs:line 64
+   at Z0.Table.rows[T](T[] src) in j:\dev\projects\z0\src\konst\src\tables\ops\rows.cs:line 28
+   at Z0.CaseLog`2.Deposit(R[] src) in j:\dev\projects\z0\src\konst\src\wf.logs\services\CaseLogT.cs:line 42
+
+Failure trapped by Deposit at j:\dev\projects\z0\src\konst\src\wf.logs\services\CaseLogT.cs 46
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at System.Text.StringBuilder.ToString()
+   at Z0.TestCaseRecord.DelimitedText(Char delimiter) in j:\dev\projects\z0\src\konst\src\wf.events\services\TestCaseRecord.cs:line 64
+   at Z0.Table.rows[T](T[] src) in j:\dev\projects\z0\src\konst\src\tables\ops\rows.cs:line 28
+   at Z0.CaseLog`2.Deposit(R[] src) in j:\dev\projects\z0\src\konst\src\wf.logs\services\CaseLogT.cs:line 42
+
+Failure trapped by RunTests at j:\dev\projects\z0\src\validity\src\services\ops\RunTests.cs 33
+System.InvalidOperationException: Failed to compare two elements in the array.
+ ---> System.ArgumentException: At least one object must implement IComparable.
+   at System.Collections.Comparer.Compare(Object a, Object b)
+   at System.Collections.Generic.ObjectComparer`1.Compare(T x, T y)
+   at System.Linq.EnumerableSorter`2.CompareAnyKeys(Int32 index1, Int32 index2)
+   at System.Collections.Generic.ComparisonComparer`1.Compare(T x, T y)
+   at System.Collections.Generic.ArraySortHelper`1.SwapIfGreater(T[] keys, Comparison`1 comparer, Int32 a, Int32 b)
+   at System.Collections.Generic.ArraySortHelper`1.PickPivotAndPartition(T[] keys, Int32 lo, Int32 hi, Comparison`1 comparer)
+   at System.Collections.Generic.ArraySortHelper`1.IntroSort(T[] keys, Int32 lo, Int32 hi, Int32 depthLimit, Comparison`1 comparer)
+   at System.Collections.Generic.GenericArraySortHelper`1.Sort(T[] keys, Int32 index, Int32 length, IComparer`1 comparer)
+   --- End of inner exception stack trace ---
+   at System.Collections.Generic.GenericArraySortHelper`1.Sort(T[] keys, Int32 index, Int32 length, IComparer`1 comparer)
+   at System.Array.Sort[T](T[] array, Int32 index, Int32 length, IComparer`1 comparer)
+   at System.Linq.EnumerableSorter`1.Sort(TElement[] elements, Int32 count)
+   at System.Linq.OrderedEnumerable`1.GetEnumerator()+MoveNext()
+   at System.Linq.Enumerable.WhereEnumerableIterator`1.MoveNext()
+   at System.Collections.Generic.LargeArrayBuilder`1.AddRange(IEnumerable`1 items)
+   at System.Collections.Generic.SparseArrayBuilder`1.ReserveOrAdd(IEnumerable`1 items)
+   at System.Linq.Enumerable.Concat2Iterator`1.ToArray()
+   at Z0.proxy.array[T](IEnumerable`1 src) in j:\dev\projects\z0\src\part\src\sys\proxy\array.cs:line 31
+   at Z0.TestApp`1.SortResults() in j:\dev\projects\z0\src\validity\src\services\ops\SortResults.cs:line 17
+   at Z0.TestApp`1.EmitLogs() in j:\dev\projects\z0\src\validity\src\services\ops\EmitLogs.cs:line 22
+   at Z0.TestApp`1.RunTests(String[] filters) in j:\dev\projects\z0\src\validity\src\services\ops\RunTests.cs:line 29
+
+Failure occurred at RunUnit j:\dev\projects\z0\src\validity\src\services\ops\RunUnit.cs 43
+Harness execution failed: System.IndexOutOfRangeException: Index was outside the bounds of the array.
+   at System.Collections.Generic.List`1.Enumerator.MoveNext()
+   at System.Linq.Enumerable.Any[TSource](IEnumerable`1 source, Func`2 predicate)
+   at Z0.AppMsgLog.Deposit(IEnumerable`1 src) in j:\dev\projects\z0\src\konst\src\wf.events\services\AppMsgLog.cs:line 30
+   at Z0.TestApp`1.RunCase(IUnitTest unit, MethodInfo method, IList`1 cases) in j:\dev\projects\z0\src\validity\src\services\ops\RunCase.cs:line 58
+   at Z0.TestApp`1.<>c__DisplayClass37_0.<RunUnit>b__0(MethodInfo t) in j:\dev\projects\z0\src\validity\src\services\ops\RunUnit.cs:line 31
+   at Z0.z.iter[T](IEnumerable`1 items, Action`1 action, Boolean pll) in j:\dev\projects\z0\src\konst\src\z\z.ops.i\iter.cs:line 27
+   at Z0.TestApp`1.RunUnit(Type host, IUnitTest unit) in j:\dev\projects\z0\src\validity\src\services\ops\RunUnit.cs:line 32
+
+Failure trapped by Deposit at j:\dev\projects\z0\src\konst\src\wf.logs\services\CaseLogT.cs 52
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at System.Text.StringBuilder.set_Length(Int32 value)
+   at Z0.TestCaseRecords.format(TestCaseRecord& src, Char delimiter) in j:\dev\projects\z0\src\konst\src\wf.events\services\TestCaseRecord.cs:line 40
+   at Z0.CaseLog`2.Deposit(R[] src) in j:\dev\projects\z0\src\konst\src\wf.logs\services\CaseLogT.cs:line 46
+
+Failure trapped by Deposit at j:\dev\projects\z0\src\konst\src\wf.logs\services\CaseLogT.cs 52
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at System.Text.StringBuilder.ToString()
+   at Z0.TestCaseRecords.format(TestCaseRecord& src, Char delimiter) in j:\dev\projects\z0\src\konst\src\wf.events\services\TestCaseRecord.cs:line 40
+   at Z0.CaseLog`2.Deposit(R[] src) in j:\dev\projects\z0\src\konst\src\wf.logs\services\CaseLogT.cs:line 46
+
+Failure trapped by Deposit at j:\dev\projects\z0\src\konst\src\wf.logs\services\CaseLogT.cs 52
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at System.Text.StringBuilder.ToString()
+   at Z0.CaseLog`2.Deposit(R[] src) in j:\dev\projects\z0\src\konst\src\wf.logs\services\CaseLogT.cs:line 46
+
+bitsuite.test/t_bitspan_ops/bscreate_8u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bitspan_ops.bitspan_check(Span`1 packed, BitSpan32 bitspan) in J:\dev\projects\z0\test\bits\units\t_bitspan_ops.cs:line 316
+   at Z0.t_bitspan_ops.<>c__DisplayClass32_0`1.<bscreate_check>g__check|0() in J:\dev\projects\z0\test\bits\units\t_bitspan_ops.cs:line 264
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bitspan_ops/bscreate_8i: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bitspan_ops.bitspan_check(Span`1 packed, BitSpan32 bitspan) in J:\dev\projects\z0\test\bits\units\t_bitspan_ops.cs:line 316
+   at Z0.t_bitspan_ops.<>c__DisplayClass32_0`1.<bscreate_check>g__check|0() in J:\dev\projects\z0\test\bits\units\t_bitspan_ops.cs:line 264
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bitspan_ops/bscreate_16u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bitspan_ops.bitspan_check(Span`1 packed, BitSpan32 bitspan) in J:\dev\projects\z0\test\bits\units\t_bitspan_ops.cs:line 316
+   at Z0.t_bitspan_ops.<>c__DisplayClass32_0`1.<bscreate_check>g__check|0() in J:\dev\projects\z0\test\bits\units\t_bitspan_ops.cs:line 264
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bitspan_ops/bscreate_16i: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bitspan_ops.bitspan_check(Span`1 packed, BitSpan32 bitspan) in J:\dev\projects\z0\test\bits\units\t_bitspan_ops.cs:line 316
+   at Z0.t_bitspan_ops.<>c__DisplayClass32_0`1.<bscreate_check>g__check|0() in J:\dev\projects\z0\test\bits\units\t_bitspan_ops.cs:line 264
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bitspan_ops/bscreate_32u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bitspan_ops.bitspan_check(Span`1 packed, BitSpan32 bitspan) in J:\dev\projects\z0\test\bits\units\t_bitspan_ops.cs:line 316
+   at Z0.t_bitspan_ops.<>c__DisplayClass32_0`1.<bscreate_check>g__check|0() in J:\dev\projects\z0\test\bits\units\t_bitspan_ops.cs:line 264
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bitspan_ops/bscreate_32i: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bitspan_ops.bitspan_check(Span`1 packed, BitSpan32 bitspan) in J:\dev\projects\z0\test\bits\units\t_bitspan_ops.cs:line 316
+   at Z0.t_bitspan_ops.<>c__DisplayClass32_0`1.<bscreate_check>g__check|0() in J:\dev\projects\z0\test\bits\units\t_bitspan_ops.cs:line 264
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bitspan_ops/bscreate_64u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bitspan_ops.bitspan_check(Span`1 packed, BitSpan32 bitspan) in J:\dev\projects\z0\test\bits\units\t_bitspan_ops.cs:line 316
+   at Z0.t_bitspan_ops.<>c__DisplayClass32_0`1.<bscreate_check>g__check|0() in J:\dev\projects\z0\test\bits\units\t_bitspan_ops.cs:line 264
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bitspan_ops/bscreate_64i: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bitspan_ops.bitspan_check(Span`1 packed, BitSpan32 bitspan) in J:\dev\projects\z0\test\bits\units\t_bitspan_ops.cs:line 316
+   at Z0.t_bitspan_ops.<>c__DisplayClass32_0`1.<bscreate_check>g__check|0() in J:\dev\projects\z0\test\bits\units\t_bitspan_ops.cs:line 264
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n2x8u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n3x8u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n4x8u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n5x8u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n6x8u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n7x8u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n8x8u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n2x16u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n3x16u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n4x16u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n5x16u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n6x16u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n7x16u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n8x16u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n9x16u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n10x16u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n11x16u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n12x16u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n13x16u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n14x16u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n15x16u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n16x16u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n2x32u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n3x32u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n4x32u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n5x32u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n6x32u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n7x32u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n8x32u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n9x32u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n10x32u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n11x32u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n12x32u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n13x32u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n14x32u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n15x32u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n16x32u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n17x32u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n18x32u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n19x32u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n20x32u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n21x32u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n22x32u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n23x32u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n24x32u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n25x32u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n26x32u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n27x32u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n28x32u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n29x32u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n30x32u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n31x32u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n32x32u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n2x64u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n3x64u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n4x64u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n5x64u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n6x64u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n7x64u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n8x64u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n9x64u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n10x64u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n11x64u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n12x64u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n13x64u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n14x64u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n15x64u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n16x64u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n17x64u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n18x64u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n19x64u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n20x64u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n21x64u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n22x64u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n23x64u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n24x64u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n25x64u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n26x64u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n27x64u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n28x64u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n29x64u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n30x64u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n31x64u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n32x64u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n33x64u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n56x64u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n57x64u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n58x64u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n59x64u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n60x64u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n61x64u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n62x64u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n64x64u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+bitsuite.test/t_bvdot/bvdot_n63x64u: Failure occurred at CheckAction j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs 28
+System.NotSupportedException: The type Bit32, it is a mystery
+   at Z0.CheckNumeric.eq[T](T lhs, T rhs, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\gmath\src\checks\CheckNumeric.cs:line 28
+   at Z0.t_bvdot.<bvdot_natcheck>g__check|12_0[N,T]() in J:\dev\projects\z0\test\bits\units\t_bvdot.cs:line 267
+   at Z0.TCheckAction.CheckAction(Action f, String name) in j:\dev\projects\z0\src\dynamic\src\dynamic.checks\TCheckAction.cs:line 35
+
+Failure trapped by Deposit at j:\dev\projects\z0\src\konst\src\wf.logs\services\CaseLogT.cs 52
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at System.Text.StringBuilder.ToString()
+   at Z0.CaseLog`2.Deposit(R[] src) in j:\dev\projects\z0\src\konst\src\wf.logs\services\CaseLogT.cs:line 46
+
+Failure occurred at RunUnit j:\dev\projects\z0\src\validity\src\services\ops\RunUnit.cs 43
+Harness execution failed: System.NullReferenceException: Object reference not set to an instance of an object.
+   at System.String.Concat(String str0, String str1)
+   at System.Exception.get_StackTrace()
+   at System.Exception.ToString()
+   at Z0.term.error(Exception e, String caller, String file, Nullable`1 line) in j:\dev\projects\z0\src\konst\src\terminal\ops\kinds.cs:line 68
+   at Z0.CaseLog`2.Deposit(R[] src) in j:\dev\projects\z0\src\konst\src\wf.logs\services\CaseLogT.cs:line 52
+   at Z0.TestApp`1.RunCase(IUnitTest unit, MethodInfo method, IList`1 cases) in j:\dev\projects\z0\src\validity\src\services\ops\RunCase.cs:line 19
+   at Z0.TestApp`1.<>c__DisplayClass37_0.<RunUnit>b__0(MethodInfo t) in j:\dev\projects\z0\src\validity\src\services\ops\RunUnit.cs:line 31
+   at Z0.z.iter[T](IEnumerable`1 items, Action`1 action, Boolean pll) in j:\dev\projects\z0\src\konst\src\z\z.ops.i\iter.cs:line 28
+   at Z0.TestApp`1.RunUnit(Type host, IUnitTest unit) in j:\dev\projects\z0\src\validity\src\services\ops\RunUnit.cs:line 31
+
+Failure trapped by Deposit at j:\dev\projects\z0\src\konst\src\wf.logs\services\CaseLogT.cs 52
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at System.Text.StringBuilder.ToString()
+   at Z0.CaseLog`2.Deposit(R[] src) in j:\dev\projects\z0\src\konst\src\wf.logs\services\CaseLogT.cs:line 46
+

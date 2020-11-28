@@ -18,7 +18,6 @@ namespace Z0
     {
         const bool InDiagnosticMode = false;
 
-        protected readonly IAppMsgSink Log;
 
         protected readonly CaseLog CaseLog;
 
@@ -29,7 +28,6 @@ namespace Z0
             CaseLog = CaseLogs.create(TestLogPaths.CaseLogPath);
             OnDispose += CaseLog.Dispose;
             AppName = GetType().Assembly.GetSimpleName();
-            Log = new AppMsgLog(TestLogPaths.TestStatusLogPath, TestLogPaths.TestErrorLogPath);
         }
 
         ConcurrentQueue<TestCaseRecord> TestResultQueue {get;}

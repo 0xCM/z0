@@ -38,7 +38,7 @@ namespace Z0.Logix
         }
 
         [Op, MethodImpl(NotInline)]
-        public static BinaryBitLogixCheck create(BinaryBitLogicKind kind, Func<Bit32,Bit32,Bit32> rule, uint count, IPolySourced source)
+        public static BinaryBitLogixCheck create(BinaryBitLogicKind kind, Func<Bit32,Bit32,Bit32> rule, uint count, IPolyStream source)
         {
             var dst = new BinaryBitLogixCheck();
             dst.Kind = kind;

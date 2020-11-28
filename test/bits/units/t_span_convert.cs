@@ -9,8 +9,6 @@ namespace Z0
 
     public sealed class t_span_convert : UnitTest<t_span_convert,CheckNumeric,TCheckNumeric>
     {
-        //public override bool Enabled => false;
-
         void VerifySpanBytesToValue<T>(Span<byte> src, T expect)
             where T : unmanaged
         {

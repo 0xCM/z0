@@ -6,6 +6,8 @@ namespace Z0
 {
     using System;
 
+    using static z;
+
     public interface ITestAction : TTester
     {
         /// <summary>
@@ -21,12 +23,12 @@ namespace Z0
             try
             {
                 f();
-                return TestCaseRecord.Define(label, true, clock);
+                return TestCaseRecord.define(label, true, clock);
             }
             catch(Exception e)
             {
                 Print(e, label);
-                return TestCaseRecord.Define(label, false, clock);
+                return TestCaseRecord.define(label, false, clock);
             }
         }
 
@@ -43,12 +45,12 @@ namespace Z0
             try
             {
                 f(point);
-                return TestCaseRecord.Define(label, true, clock);
+                return TestCaseRecord.define(label, true, clock);
             }
             catch(Exception e)
             {
                 Print(e, label);
-                return TestCaseRecord.Define(label, false, clock);
+                return TestCaseRecord.define(label, false, clock);
             }
         }
 
@@ -67,12 +69,12 @@ namespace Z0
             try
             {
                 f();
-                return TestCaseRecord.Define(CaseName<T>(label), true, clock);
+                return TestCaseRecord.define(CaseName<T>(label), true, clock);
             }
             catch(Exception e)
             {
                 Print(e, label);
-                return TestCaseRecord.Define(CaseName<T>(label), false, clock);
+                return TestCaseRecord.define(CaseName<T>(label), false, clock);
             }
         }
     }

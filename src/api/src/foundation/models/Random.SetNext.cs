@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="current"></param>
         /// <typeparam name="T">The primal value over which the variable is defined</typeparam>
         [MethodImpl(Inline)]
-        public static T SetNext<T>(this IPolySourced random, VariableExpr<T> current)
+        public static T SetNext<T>(this IPolyStream random, VariableExpr<T> current)
             where T : unmanaged
         {
             var a = random.Next<T>();

@@ -61,6 +61,7 @@ namespace Z0
             return path;
         }
 
+
         void Emit(IReadOnlyList<R> records, char delimiter, bool header, FilePath dst)
         {
             if(records.Count == 0)
@@ -73,6 +74,7 @@ namespace Z0
 
             z.iter(records, r => dst.AppendLine(r.DelimitedText(delimiter)));
         }
+
 
         public void Deposit(IAppMsg src)
         {

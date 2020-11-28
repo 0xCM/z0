@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="random">The random source</param>
         /// <param name="n">The primal bitvector selector</param>
         [MethodImpl(Inline)]
-        public static BitVector4 BitVector(this IDomainValueSource random, N4 n)
+        public static BitVector4 BitVector(this IDomainSource random, N4 n)
             => random.Next<byte>(0,17);
 
         /// <summary>
@@ -175,7 +175,7 @@ namespace Z0
         /// <typeparam name="N">The bit width type</typeparam>
         /// <typeparam name="T">The underlying primal type</typeparam>
         [MethodImpl(Inline)]
-        public static BitVector<N,T> BitVector<N,T>(this IPolyDomain random, N n = default, T t = default)
+        public static BitVector<N,T> BitVector<N,T>(this IDomainSource random, N n = default, T t = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
         {

@@ -36,10 +36,16 @@ namespace Z0
             if(src == null || src.Length == 0)
                 return;
 
+            var count = src.Length;
+            var records = @readonly(src);
             try
             {
                 lock(Locker)
-                    Table.emit(src, Status);
+                {
+                    for(var i=0; i<count; i++)
+                        FS.write(skip(records,i).DelimitedText(FieldDelimiter), Status);
+                }
+                    //Table.emit(src, Status);
             }
             catch(Exception e)
             {

@@ -13,11 +13,11 @@ namespace Z0
     partial struct Buffers
     {
         [MethodImpl(Inline), Op]
-        public static DynamicTextBuffer text()
+        public static ITextBuffer text()
             => new DynamicTextBuffer(new StringBuilder());
 
         [MethodImpl(Inline), Op]
-        public static DynamicTextBuffer text(StringBuilder dst)
+        public static ITextBuffer text(StringBuilder dst)
             => new DynamicTextBuffer(dst);
     }
 }

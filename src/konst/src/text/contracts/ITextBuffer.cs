@@ -17,6 +17,11 @@ namespace Z0
             Append(Eol);
         }
 
+        void AppendFormat(string pattern, params object[] args)
+        {
+            Append(string.Format(pattern, args));
+        }
+
         void Append(ReadOnlySpan<char> src)
             => Append(new string(src));
 
@@ -47,11 +52,11 @@ namespace Z0
             Append($"{value}".PadRight((int)width));
         }
 
-        void AppendDelimited<T>(byte width, T value, char c = FieldDelimiter)
-            where T : ITextual
+        void AppendValue<T>(T value, uint width, char c = FieldDelimiter)
+            where T : struct
         {
             Append(text.rspace(c));
-            Append(value.Format().PadRight(width));
+            Append(value.ToString().PadRight((int)width));
         }
 
         void AppendDelimited<T>(T[] src, char c = FieldDelimiter)

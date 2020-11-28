@@ -30,7 +30,6 @@ namespace Z0
         {
             using var control = CaptureWorkflow.create(state);
             control.Run();
-
         }
 
         public static void run(IWfShell wf)

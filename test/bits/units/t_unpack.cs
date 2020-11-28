@@ -11,6 +11,9 @@ namespace Z0
 
     public class t_unpack : t_bitcore<t_unpack>
     {
+        public override bool Enabled
+            => true;
+
         public void unpack_8x8()
             => unpack_check<byte,byte>();
 
@@ -79,7 +82,7 @@ namespace Z0
                 {
                     var expect = bs[i] ? one<T>() : zero<T>();
                     var actual = dst[i];
-                    Claim.eq(expect,actual);
+                    CheckNumeric.eq(expect, actual);
                 }
             }
 
@@ -91,7 +94,7 @@ namespace Z0
             {
                 var expect = y2[i] ? one<T>() : zero<T>();
                 var actual = y1[i];
-                Claim.Require(gmath.eq(expect,actual));
+                CheckNumeric.eq(expect,actual);
             }
         }
 

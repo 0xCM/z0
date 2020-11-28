@@ -5,13 +5,14 @@
 namespace Z0
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using System.Runtime.CompilerServices;
 
     using static Konst;
     using static z;
 
     [DataType]
-    public readonly struct utf8 : ITextual, IEquatable<utf8>
+    public readonly struct utf8 : ITextual, IEquatable<utf8>, IComparable<utf8>
     {
         static TextCoder Encoder => TextCoders.utf8();
 
@@ -65,7 +66,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => Encoder.Decode(Data, out string _);
+            => IsNonEmpty ? Encoder.Decode(Data, out string _) : EmptyString;
 
         public override int GetHashCode()
             => (int)Hash;
@@ -75,6 +76,9 @@ namespace Z0
 
         public override bool Equals(object src)
           => src is utf8 x && Equals(x);
+
+        public int CompareTo(utf8 src)
+            => Format().CompareTo(src.Format());
 
         public static bool operator ==(utf8 a, utf8 b)
             => a.Equals(b);

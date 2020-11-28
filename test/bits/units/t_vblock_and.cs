@@ -52,7 +52,7 @@ namespace Z0
             var length = nat32i(n);
             var u = Random.VectorBlock(n,t);
             var v = Random.VectorBlock(n,t);
-            var result = BlockVectorOps.and(u, v);
+            var result = Blocked.and(u, v);
             var expect = and(u.Data, v.Data);
 
             ClaimNumeric.Eq(expect.Data, result.Data);

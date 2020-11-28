@@ -10,13 +10,13 @@ namespace Z0
 
     partial class TestApp<A>
     {
-        const int CasePad = (int)((ulong)TestCaseField.Case >> 32);
+        const int CasePad = (int)((ulong)TestCaseField.CaseName >> 32);
 
         const int ExecutedPad = (int)((ulong)TestCaseField.Executed >> 32);
 
         const int DurationPad = (int)((ulong)TestCaseField.Duration >> 32);
 
-        const int StatusPad = (int)((ulong)TestCaseField.Status >> 32);
+        const int StatusPad = (int)((ulong)TestCaseField.Passed >> 32);
 
         const string FieldSep = "| ";
 

@@ -31,7 +31,7 @@ namespace Z0
         /// <param name="max">The exclusive maximum value</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static ConstPair<T> NextPair<T>(this IDomainValueSource source, T min, T max)
+        public static ConstPair<T> NextPair<T>(this IDomainSource source, T min, T max)
             where T : unmanaged
                 => Sources.kpair(source, min, max);
     }

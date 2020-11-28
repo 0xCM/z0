@@ -141,5 +141,6 @@ namespace Z0
         public static ref readonly SpanBlock256<T> select<T>(in SpanBlock256<T> a, in SpanBlock256<T> b, in SpanBlock256<T> c, in SpanBlock256<T> dst)
             where T : unmanaged
                 => ref BSvc.select<T>(w256).Invoke(a, b, c, dst);
+
     }
 }

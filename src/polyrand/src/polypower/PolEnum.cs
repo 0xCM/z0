@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <param name="random">The random source</param>
         /// <typeparam name="E">The enum type</typeparam>
-        public static IEnumerable<E> EnumValues<E>(this IPolySourced random, Func<E,bool> filter)
+        public static IEnumerable<E> EnumValues<E>(this IPolyStream random, Func<E,bool> filter)
             where E : unmanaged, Enum
         {
             IEnumerable<E> produce()
@@ -48,7 +48,7 @@ namespace Z0
         /// <param name="random">The random source</param>
         /// <param name="exclusions">Enum literals to exclude</param>
         /// <typeparam name="E">The enum type</typeparam>
-        public static IEnumerable<E> EnumValues<E>(this IPolySourced random, params E[] exclusions)
+        public static IEnumerable<E> EnumValues<E>(this IPolyStream random, params E[] exclusions)
             where E : unmanaged, Enum
         {
             IEnumerable<E> produce()

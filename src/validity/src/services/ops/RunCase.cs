@@ -40,7 +40,7 @@ namespace Z0
                 outcomes.AddRange(unit.TakeOutcomes().Array());
 
                 if(outcomes.Count == 0)
-                    outcomes.Add(TestCaseRecord.Define(casename, true, clock.Time));
+                    outcomes.Add(TestCaseRecord.define(casename, true, clock.Time));
 
                 if(DiagnosticMode)
                     term.print($"Executed case {unit.HostType.Name}/{method.Name}");
@@ -51,11 +51,11 @@ namespace Z0
                 clock.Stop();
                 messages.AddRange(unit.Dequeue());
                 messages.AddRange(FormatErrors(e, method));
-                outcomes.Add(TestCaseRecord.Define(casename, false, clock.Time));
+                outcomes.Add(TestCaseRecord.define(casename, false, clock.Time));
             }
             finally
             {
-                Log.Deposit(messages);
+                term.print(messages);
                 cases.WithItems(outcomes);
                 CaseLog.Deposit(outcomes.Array());
             }

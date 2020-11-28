@@ -17,12 +17,12 @@ namespace Z0
 
         public Vec128Kind<T> VKind => default;
 
-        readonly IPolySourced Random;
+        readonly IPolyStream Random;
 
         public OpIdentity Id => ApiIdentify.sfunc(Name, VKind);
 
         [MethodImpl(Inline)]
-        internal VRand128(IPolySourced random)
+        internal VRand128(IPolyStream random)
             => this.Random = random;
 
         [MethodImpl(Inline)]
@@ -34,14 +34,14 @@ namespace Z0
     {
         public const string Name = "vrandom";
 
-        readonly IPolySourced Random;
+        readonly IPolyStream Random;
 
         public Vec256Kind<T> VKind => default;
 
         public OpIdentity Id => ApiIdentify.sfunc(Name,VKind);
 
         [MethodImpl(Inline)]
-        internal VRand256(IPolySourced random)
+        internal VRand256(IPolyStream random)
             => this.Random = random;
 
         [MethodImpl(Inline)]

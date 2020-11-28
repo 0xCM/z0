@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="t">A primal type representative</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static T One<T>(this IPolySourced random, T t = default)
+        public static T One<T>(this IPolyStream random, T t = default)
             where T : unmanaged
                 => random.Next<T>();
 
@@ -30,7 +30,7 @@ namespace Z0
         /// <param name="max">The exclusive upper bound</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static T One<T>(this IPolySourced random, T min, T max)
+        public static T One<T>(this IPolyStream random, T min, T max)
             where T : unmanaged
                 => random.Next<T>(min,max);
     }

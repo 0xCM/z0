@@ -11,6 +11,9 @@ namespace Z0
 
     public class t_toggle : t_bitcore<t_toggle>
     {
+        // public override bool Enabled
+        //     => false;
+
         public void toggle_8i()
             => toggle_check<sbyte>();
 

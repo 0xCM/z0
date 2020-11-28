@@ -19,7 +19,7 @@ namespace Z0
             var control = unit as ITestQueue;
             messages.AddRange(unit.Dequeue());
             if(e != null)
-                messages.AddRange(FormatErrors(testName,e));
+                messages.AddRange(FormatErrors(testName ?? EmptyString, e));
             else
                 messages.Add(AppMsg.info($"{testName} executed. {runtime}"));
             return messages.ToArray();
@@ -30,12 +30,12 @@ namespace Z0
             var control = unit as ITestQueue;
             var outcomes = new List<TestCaseRecord>();
             if(e!= null)
-                outcomes.Add(TestCaseRecord.Define(casename,false,runtime));
+                outcomes.Add(TestCaseRecord.define(casename ?? EmptyString, false,runtime));
             else
             {
                 outcomes.AddRange(control.TakeOutcomes());
                 if(outcomes.Count == 0)
-                    outcomes.Add(TestCaseRecord.Define(casename,true,runtime));
+                    outcomes.Add(TestCaseRecord.define(casename ?? EmptyString, true,runtime));
             }
             return outcomes.ToArray();
         }

@@ -35,7 +35,7 @@ namespace Z0
                 if(outcomes.Length != 0)
                     PostTestResults(outcomes);
                 else
-                    PostTestResult(TestCaseRecord.Define(casename,true,clock.Time));
+                    PostTestResult(TestCaseRecord.define(casename,true,clock.Time));
 
             }
             catch(Exception e)
@@ -43,7 +43,7 @@ namespace Z0
                 clock.Stop();
                 messages.AddRange(unit.Dequeue());
                 messages.AddRange(FormatErrors(casename,e));
-                PostTestResult(TestCaseRecord.Define(casename,false,clock.Time));
+                PostTestResult(TestCaseRecord.define(casename,false,clock.Time));
             }
             finally
             {
@@ -76,7 +76,7 @@ namespace Z0
             }
             finally
             {
-                Log.Deposit(messages);
+                term.print(messages);
             }
             return clock;
         }

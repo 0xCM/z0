@@ -21,18 +21,33 @@ namespace Z0
 
             var results = SortResults();
             if(results.Any())
-                EmitTestCaseLog(AppPaths.OutcomeFolder, basename, results);
-
+                EmitTestCaseLog(AppPaths.SortedCaseLogPath(), results);
         }
 
-        static FilePath EmitTestCaseLog(FolderName subdir, string basename,  TestCaseRecord[] records)
+        static FilePath EmitTestCaseLog(FS.FilePath dst,  TestCaseRecord[] records)
         {
             if(records.Length == 0)
                 return FilePath.Empty;
 
-            return TestLog.Create().Write(records, subdir, basename, LogWriteMode.Overwrite, Chars.Pipe, true, FileExtension.Define("csv"));
+            Emit(records, dst, default(TestCaseField));
+            return dst;
         }
 
+        static void Emit<R,F>(R[] records, FS.FilePath dst, F f = default, char delimiter = FieldDelimiter)
+            where R : struct, ITabular
+            where F : unmanaged, Enum
+        {
+            if(records.Length == 0)
+                return;
+
+            using var writer = dst.Writer();
+
+            writer.WriteLine(Table.header53<F>(delimiter));
+
+            var formatter = Table.formatter<F>(delimiter);
+
+            z.iter(records, r => writer.WriteLine(r.DelimitedText(delimiter)));
+        }
 
         static FilePath EmitBenchmarkLog<R>(string basename, R[] records, LogWriteMode mode = LogWriteMode.Create, bool header = true, char delimiter = Chars.Pipe)
             where R : ITabular

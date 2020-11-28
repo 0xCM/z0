@@ -4,6 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
+
+    using static memory;
+
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     /// <summary>
@@ -23,6 +27,21 @@ namespace Z0
             dst = Next();
             return true;
         }
+
+        /// <summary>
+        /// Fills the span, from stem-to-stern with <typeparamref name='T'/> cells from the reifying source
+        /// </summary>
+        /// <param name="dst">The target spen</param>
+        void Fill(Span<T> dst)
+        {
+            var count = dst.Length;
+            if(count != 0)
+            {
+                ref var target = ref first(dst);
+                for(var i=0; i<count; i++)
+                    seek(target,i) = Next();
+            }
+        }
     }
 
     [Free]
@@ -38,6 +57,17 @@ namespace Z0
         {
             dst = Next<T>();
             return true;
+        }
+
+        void Fill<T>(Span<T> dst)
+        {
+            var count = dst.Length;
+            if(count != 0)
+            {
+                ref var target = ref first(dst);
+                for(var i=0; i<count; i++)
+                    seek(target,i) = Next<T>();
+            }
         }
     }
 }

@@ -1,6 +1,6 @@
 echo off
 
-set ProjectId=machine
+set ProjectId=control
 echo ProjectId:%ProjectId%
 
 call %ZDev%\.cmd\project-config.cmd

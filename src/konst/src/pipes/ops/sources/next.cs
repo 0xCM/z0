@@ -15,30 +15,30 @@ namespace Z0
     partial struct Sources
     {
         /// <summary>
-        /// Produces the next value from a specified <see cref='IDomainValueSource'/> source subject to specified domain constraints
+        /// Produces the next value from a specified <see cref='IDomainSource'/> source subject to specified domain constraints
         /// </summary>
         /// <param name="source">The value source</param>
         /// <param name="max">The maximum value to produce</param>
         /// <typeparam name="T">The value type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static T next<T>(IDomainValueSource source, T max)
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static T next<T>(IDomainSource source, T max)
             where T : unmanaged
                 => source.Next<T>(max);
 
         /// <summary>
-        /// Produces the next value from a specified <see cref='IDomainValueSource'/> source subject to specified domain constraints
+        /// Produces the next value from a specified <see cref='IDomainSource'/> source subject to specified domain constraints
         /// </summary>
         /// <param name="source">The value source</param>
         /// <param name="min">The minimum value to produce</param>
         /// <param name="max">The maximum value to produce</param>
         /// <typeparam name="T">The value type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static T next<T>(IDomainValueSource source, T min, T max)
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static T next<T>(IDomainSource source, T min, T max)
             where T : unmanaged
                 => source.Next<T>(min, max);
 
 
-        [MethodImpl(Inline), Closures(UnsignedInts)]
+        [MethodImpl(Inline), Closures(Closure)]
         public static bool next<T>(in ValuePipe<T> pipe, out T dst)
             where T : struct
         {
@@ -48,7 +48,7 @@ namespace Z0
             return false;
         }
 
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static bool next<T>(in Pipe<T> pipe, out T dst)
         {
             if(pipe.Buffer.TryTake(out dst))

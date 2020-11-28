@@ -34,6 +34,12 @@ namespace Z0
         FS.FolderPath DevRoot
             => EnvVars.Common.DevRoot;
 
+        FS.FolderPath SortedCaseLogRoot()
+            => LogRoot + FS.folder("tests") + FS.folder("sorted");
+
+        FS.FilePath SortedCaseLogPath()
+            => SortedCaseLogRoot() + FS.file(AppName,  ArchiveFileKinds.Csv);
+
         /// <summary>
         /// The name of the folder into which test results are deposited
         /// </summary>

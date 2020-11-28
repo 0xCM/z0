@@ -101,7 +101,7 @@ namespace Z0
         /// </summary>
         Option<Exception> Error;
 
-        public IPolySourced Random {get;}
+        public IPolyStream Random {get;}
 
         /// <summary>
         /// Identifies the machine within the process

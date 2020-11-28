@@ -31,7 +31,7 @@ namespace Z0
     /// <typeparam name="T">The primal element type</typeparam>
     [Free]
     public interface IRngNav<T> : IRngNav, IRngDomainValues<T>
-        where T : struct
+        where T : unmanaged
     {
 
     }

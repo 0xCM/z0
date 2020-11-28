@@ -31,7 +31,6 @@ namespace Z0
             catch (Exception e)
             {
                 term.error(e);
-                //Flush(e, TestLog.Create());
             }
         }
     }

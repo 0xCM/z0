@@ -35,7 +35,7 @@ namespace Z0
         /// <param name="minlen">The minimum bitspan length</param>
         /// <param name="maxlen">The maximum bitspan length</param>
         [MethodImpl(Inline), Op]
-        public static BitSpan32 BitSpan(this IPolySourced source, int minlen, int maxlen)
+        public static BitSpan32 BitSpan(this IPolyStream source, int minlen, int maxlen)
             => source.BitSpan(source.Next<int>(minlen, maxlen + 1));
 
         /// <summary>

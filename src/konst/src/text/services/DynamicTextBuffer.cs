@@ -70,9 +70,6 @@ namespace Z0
                 string.Format("{0}{1}", sep, skip(terms,i));
         }
 
-        [MethodImpl(Inline)]
-        public void AppendFormat(string pattern, params object[] args)
-            => Target.AppendFormat(pattern, args);
 
         public override string ToString()
             => Target.ToString();

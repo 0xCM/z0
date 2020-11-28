@@ -109,7 +109,7 @@ namespace Z0
         Assembly[] Components
             => Context.ApiParts.Components;
 
-        IPolySourced PolySource
+        IPolyStream PolySource
             => Random;
 
         FS.FolderPath IndexRoot

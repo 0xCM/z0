@@ -66,7 +66,7 @@ namespace Z0
                 success &= gvec.vtestc(gvec.veq(f(x,y), g.Apply(x,y)));
             }
 
-            return TestCaseRecord.Define(ApiTestIdentity.name<T>(Host,id), success, clock);
+            return TestCaseRecord.define(ApiTestIdentity.name<T>(Host,id), success, clock);
         }
 
         public TestCaseRecord Match<T>(BinaryOp<Vector256<T>> f, BinaryOp256 g, OpIdentity id)
@@ -85,7 +85,7 @@ namespace Z0
                 success &= gvec.vtestc(gvec.veq(f(x,y), g.Apply(x,y)));
             }
 
-            return TestCaseRecord.Define(ApiTestIdentity.name<T>(Host,id), success, clock);
+            return TestCaseRecord.define(ApiTestIdentity.name<T>(Host,id), success, clock);
         }
     }
 }
