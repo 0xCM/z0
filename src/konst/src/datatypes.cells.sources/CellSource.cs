@@ -16,7 +16,7 @@ namespace Z0
     {
         const NumericKind Closure = UnsignedInts;
 
-        readonly IValueSource Provider;
+        readonly ISource Provider;
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref readonly T next<T>(in CellCycle<T> src)
@@ -29,27 +29,27 @@ namespace Z0
                 => new CellCycle<T>(src);
 
         [MethodImpl(Inline), Op]
-        public static Cell8 next(IValueSource source, W8 w)
+        public static Cell8 next(ISource source, W8 w)
             => source.Next<byte>();
 
         [MethodImpl(Inline), Op]
-        public static Cell16 next(IValueSource source, W16 w)
+        public static Cell16 next(ISource source, W16 w)
             => source.Next<ushort>();
 
         [MethodImpl(Inline), Op]
-        public static Cell32 next(IValueSource source, W32 w)
+        public static Cell32 next(ISource source, W32 w)
             => source.Next<uint>();
 
         [MethodImpl(Inline), Op]
-        public static Cell64 next(IValueSource source, W64 w)
+        public static Cell64 next(ISource source, W64 w)
             => source.Next<ulong>();
 
         [MethodImpl(Inline), Op]
-        public static Cell128 next(IValueSource source, W128 w)
+        public static Cell128 next(ISource source, W128 w)
             => source.NextPair<ulong>();
 
         [MethodImpl(Inline), Op]
-        public static Cell256 next(IValueSource source, W256 w)
+        public static Cell256 next(ISource source, W256 w)
         {
             var dst = Cell256.Empty;
             ref var storage = ref Unsafe.As<Cell256,Vector256<ulong>>(ref dst);
@@ -59,7 +59,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static Cell512 next(IValueSource source, W512 w)
+        public static Cell512 next(ISource source, W512 w)
         {
             var lo = next(source,w256);
             var hi = next(source,w256);
@@ -67,16 +67,16 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static CellSource<F> create<F>(IValueSource provider)
+        public static CellSource<F> create<F>(ISource provider)
             where F : struct, IDataCell
                 => new CellSource<F>(provider);
 
         [MethodImpl(Inline), Op]
-        public static CellSource create(IValueSource provider)
+        public static CellSource create(ISource provider)
             => new CellSource(provider);
 
         [MethodImpl(Inline), Op]
-        public CellSource(IValueSource provider)
+        public CellSource(ISource provider)
             => Provider = provider;
 
         [MethodImpl(Inline), Op]

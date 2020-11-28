@@ -118,6 +118,6 @@ namespace Z0
         /// <typeparam name="T">The primal random value type</typeparam>
         public static Span<T> NonZeroSpan<T>(this IPolySourced random, int samples)
             where T : unmanaged
-                => random.Span<T>(samples, random.Domain<T>(), x => gmath.nonz(x));
+                => random.Span<T>(samples, ClosedInterval<T>.Full, x => gmath.nonz(x));
     }
 }

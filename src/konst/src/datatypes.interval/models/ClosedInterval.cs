@@ -163,5 +163,14 @@ namespace Z0
         /// </summary>
         public static ClosedInterval<T> Empty
             => default;
+
+        /// <summary>
+        /// The interval of everything
+        /// </summary>
+        public static ClosedInterval<T> Full
+        {
+            [MethodImpl(Inline)]
+            get => new ClosedInterval<T>(minval<T>(), maxval<T>());
+        }
     }
 }

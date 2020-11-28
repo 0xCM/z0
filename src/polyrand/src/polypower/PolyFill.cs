@@ -36,7 +36,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         public static void Fill<T>(this IPolySourced random, Span<T> dst)
             where T : unmanaged
-                => random.Fill(random.Domain<T>(), dst.Length, ref z.first(dst));
+                => random.Fill(ClosedInterval<T>.Full, dst.Length, ref z.first(dst));
 
         /// <summary>
         /// Fills a caller-allocated span with random values

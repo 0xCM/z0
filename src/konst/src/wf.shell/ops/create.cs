@@ -26,10 +26,9 @@ namespace Z0
             var ci = new WfConfigInfo();
             ci.StartTS = now();
             var clock = Time.counter(true);
-
             var control = controller();
             var controlId = control.Id();
-            var dbRoot = WfEnv.dbRoot();
+            var dbRoot = WfEnv.dbRoot() + FS.folder(controlId.Format());
             var db = Z0.Db.create(new FileDbPaths(dbRoot));
             var parts = WfShell.parts(control, args);
             var partIdList = parts.Api.PartIdentities;

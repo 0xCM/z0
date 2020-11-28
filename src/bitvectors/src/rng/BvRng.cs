@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="random">The random source</param>
         /// <param name="n">The primal bitvector selector</param>
         [MethodImpl(Inline)]
-        public static BitVector4 BitVector(this IDomainValues random, N4 n)
+        public static BitVector4 BitVector(this IDomainValueSource random, N4 n)
             => random.Next<byte>(0,17);
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace Z0
         /// <param name="random">The random source</param>
         /// <param name="n">The primal bitvector selector</param>
         [MethodImpl(Inline)]
-        public static BitVector8 BitVector(this IValueSource random, N8 n)
+        public static BitVector8 BitVector(this ISource random, N8 n)
             => random.Next<byte>();
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace Z0
         /// <param name="n">The primal bitvector selector</param>
         /// <param name="wmax">The effective width</param>
         [MethodImpl(Inline)]
-        public static BitVector8 BitVector(this IValueSource random, N8 n, byte wmax)
+        public static BitVector8 BitVector(this ISource random, N8 n, byte wmax)
         {
             var v = random.Next<byte>();
             var clamp = (byte)(nat8u(n) - math.min(nat8u(n), wmax));
@@ -51,7 +51,7 @@ namespace Z0
         /// <param name="random">The random source</param>
         /// <param name="n">The primal bitvector selector</param>
         [MethodImpl(Inline)]
-        public static BitVector16 BitVector(this IValueSource random, N16 n)
+        public static BitVector16 BitVector(this ISource random, N16 n)
             => random.Next<ushort>();
 
         /// <summary>
@@ -61,7 +61,7 @@ namespace Z0
         /// <param name="n">The primal bitvector selector</param>
         /// <param name="wmax">The effected width</param>
         [MethodImpl(Inline)]
-        public static BitVector16 BitVector(this IValueSource random, N16 n, byte wmax)
+        public static BitVector16 BitVector(this ISource random, N16 n, byte wmax)
         {
             var v = random.Next<ushort>();
             var clamp = (byte)(nat8u(n) - math.min(nat8u(n), wmax));
@@ -74,7 +74,7 @@ namespace Z0
         /// <param name="random">The random source</param>
         /// <param name="n">The primal bitvector selector</param>
         [MethodImpl(Inline)]
-        public static BitVector32 BitVector(this IValueSource random, N32 n)
+        public static BitVector32 BitVector(this ISource random, N32 n)
             => random.Next<uint>();
 
         /// <summary>
@@ -84,7 +84,7 @@ namespace Z0
         /// <param name="n">The primal bitvector selector</param>
         /// <param name="wmax">The maximum effected width</param>
         [MethodImpl(Inline)]
-        public static BitVector32 BitVector(this IValueSource random, N32 n, byte wmax)
+        public static BitVector32 BitVector(this ISource random, N32 n, byte wmax)
         {
             var v = random.Next<uint>();
             var clamp = (byte)(nat8u(n) - math.min(nat8u(n), wmax));
@@ -97,7 +97,7 @@ namespace Z0
         /// <param name="random">The random source</param>
         /// <param name="n">The primal bitvector selector</param>
         [MethodImpl(Inline)]
-        public static BitVector64 BitVector(this IValueSource random, N64 n)
+        public static BitVector64 BitVector(this ISource random, N64 n)
             => random.Next<ulong>();
 
         /// <summary>
@@ -107,7 +107,7 @@ namespace Z0
         /// <param name="n">The primal bitvector selector</param>
         /// <param name="wmax">The maximum effected width</param>
         [MethodImpl(Inline)]
-        public static BitVector64 BitVector(this IValueSource random, N64 n, byte wmax)
+        public static BitVector64 BitVector(this ISource random, N64 n, byte wmax)
         {
             var v = random.Next<ulong>();
             var clamp = (byte)(nat8u(n) - math.min(nat8u(n), wmax));

@@ -8,7 +8,7 @@ namespace Z0
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface IWfDataSink<H,T> : IDataSink<T>
+    public interface IWfDataSink<H,T> : IValueSink<T>
         where T : struct
         where H : struct, IWfDataSink<H,T>
     {

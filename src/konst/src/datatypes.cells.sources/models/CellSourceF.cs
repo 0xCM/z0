@@ -14,10 +14,10 @@ namespace Z0
     public struct CellSource<F> : ICellValues<F>
         where F : struct, IDataCell
     {
-        readonly IValueSource Values;
+        readonly ISource Values;
 
         [MethodImpl(Inline)]
-        public CellSource(IValueSource source)
+        public CellSource(ISource source)
             => Values = source;
 
         [MethodImpl(Inline)]

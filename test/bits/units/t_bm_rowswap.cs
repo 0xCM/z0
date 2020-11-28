@@ -8,14 +8,14 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    
+
     public class t_bm_rowswap : t_bitmatrix<t_bm_rowswap>
-    {        
+    {
         public void bm_rowswap_16x16x16()
         {
             var n = n16;
             var A = Random.BitMatrix(n);
-            
+
             var a = A.Content.Replicate();
             Claim.eq(a.Length, n);
 
@@ -38,7 +38,7 @@ namespace Z0
         {
             var n = n64;
             var A = Random.BitMatrix(n);
-            
+
             var a = A.Content.Replicate();
             Claim.eq(a.Length, n);
 
@@ -54,14 +54,14 @@ namespace Z0
 
             var B = BitMatrix.primal(n,a);
             Claim.Require(A == B);
-                
+
         }
 
         public void bm_rowswap_32x32x32()
         {
             var n = n32;
             var A = Random.BitMatrix(n);
-            
+
             var a = A.Content.Replicate();
             Claim.eq(a.Length, n);
 

@@ -23,20 +23,20 @@ namespace Z0
         }
 
         [Op, Closures(UnsignedInts)]
-        public static IEnumerable<Cell128> stream<T>(IPolyrand random, W128 w, in Interval<T> domain)
+        public static IEnumerable<Cell128> stream<T>(IPolyrand random, W128 w)
             where T : unmanaged
-                => new CellStreamer<Cell128,W128,T>(random, domain).Stream;
+                => new CellStreamer<Cell128,W128,T>(random).Stream;
 
         public static IEnumerable<F> stream<F,W,T>(IPolyrand random, F f = default, T t = default)
             where F : unmanaged, IDataCell
             where W : unmanaged, ITypeWidth
             where T : unmanaged
-                => new CellStreamer<F,W,T>(random, random.Domain<T>()).Stream;
+                => new CellStreamer<F,W,T>(random).Stream;
 
-        public static IEnumerable<F> stream<F,W,T>(IPolyrand random, Interval<T> domain)
+        public static IEnumerable<F> stream<F,W,T>(IPolyrand random)
             where F : unmanaged, IDataCell
             where W : unmanaged, ITypeWidth
             where T : unmanaged
-                => new CellStreamer<F,W,T>(random, domain).Stream;
+                => new CellStreamer<F,W,T>(random).Stream;
     }
 }

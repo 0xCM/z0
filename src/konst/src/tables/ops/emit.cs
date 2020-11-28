@@ -17,11 +17,11 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void emit<T>(T[] src, StreamWriter dst)
             where T : struct, ITabular
-                => z.deposit(Table.rows(src), dst);
+                => Sinks.deposit(Table.rows(src), dst);
 
         [Op]
         public static void emit(ReadOnlySpan<string> rows, FileStream dst)
-            => z.deposit(rows, Streams.sink<string>(dst));
+            => Sinks.deposit(rows, Sinks.create<string>(dst));
 
         [MethodImpl(Inline)]
         public static void emit<T>(T[] src, FileStream dst)

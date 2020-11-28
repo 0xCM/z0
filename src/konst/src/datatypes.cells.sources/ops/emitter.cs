@@ -13,11 +13,11 @@ namespace Z0
     partial struct CellSource
     {
         [MethodImpl(Inline), Op]
-        public static Func<Cell64> emitter(IValueSource source, W64 w, NumericKind nk)
+        public static Func<Cell64> emitter(ISource source, W64 w, NumericKind nk)
             => emitter<Cell64>(source, CellWidth.W64, nk);
 
         [Op, Closures(Closure)]
-        public static Func<F> emitter<F>(IValueSource source, CellWidth width, NumericKind nk)
+        public static Func<F> emitter<F>(ISource source, CellWidth width, NumericKind nk)
             where F : unmanaged
         {
             if(width <= CellWidth.W64)

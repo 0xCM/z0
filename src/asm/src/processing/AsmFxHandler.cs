@@ -14,7 +14,7 @@ namespace Z0.Asm
 
 
 
-    public interface IAsmNodeSink<T> : IDataSink<T>
+    public interface IAsmNodeSink<T> : IValueSink<T>
         where T : struct
     {
 

@@ -9,7 +9,7 @@ namespace Z0
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface ITextCoder<H> : IDataCoder<char,byte>
+    public interface ITextCoder<H> : IValueTransformer<char,byte>
     {
         string EncodingName {get;}
 
@@ -33,10 +33,10 @@ namespace Z0
 
         void GetChars(ReadOnlySpan<byte> src, Span<char> dst);
 
-        ByteSize IDataEncoder<char,byte>.Encode(ReadOnlySpan<char> src, Span<byte> dst)
+        ByteSize IValueEncoder<char,byte>.Encode(ReadOnlySpan<char> src, Span<byte> dst)
             => GetBytes(src,dst);
 
-        void IDataDecoder<byte,char>.Decode(ReadOnlySpan<byte> src, Span<char> dst)
+        void IValueDecoder<byte,char>.Decode(ReadOnlySpan<byte> src, Span<char> dst)
             => GetChars(src,dst);
 
         /// <summary>
