@@ -30,7 +30,7 @@ namespace Z0
         /// <param name="dst">The bit target</param>
         [MethodImpl(Inline), Unpack]
         public static void unpack16x1(ushort src, in SpanBlock128<byte> dst)
-            => unpack16x1(src, dst.Data);
+            => unpack16x1(src, dst.Storage);
 
         [MethodImpl(Inline), Unpack]
         static void unpack16x1(ushort src, ref ulong dst)

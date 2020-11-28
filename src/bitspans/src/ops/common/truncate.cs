@@ -27,6 +27,6 @@ namespace Z0
         /// <param name="maxbits">The maximum length of the target bitstring</param>
         [MethodImpl(Inline), Op]
         public static BitSpan truncate(in BitSpan src, uint maxbits)
-            => src.Length <= maxbits ? src : new BitSpan(src.Storage.Slice(0, (int)maxbits));
+            => src.Length <= maxbits ? src : new BitSpan(z.slice(src.Storage,0, (int)maxbits));
     }
 }

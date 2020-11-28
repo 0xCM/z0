@@ -80,7 +80,7 @@ namespace Z0
         internal BitBlock(T src, uint bitcount)
         {
             data = SpanBlocks.alloc<T>(n256);
-            data.Head = src;
+            data.First = src;
             BitCount = bitcount;
         }
 

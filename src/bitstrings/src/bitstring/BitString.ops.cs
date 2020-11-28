@@ -25,17 +25,9 @@ namespace Z0
         /// Loads a bitstring from a bitseq
         /// </summary>
         /// <param name="bitseq">An array containing only 0's and 1's </param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static BitString load(byte[] bitseq)
             => new BitString(bitseq);
-
-        /// <summary>
-        /// Constructs a bitstring from bitseq
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        [MethodImpl(Inline)]
-        public static BitString load(ReadOnlySpan<byte> src)
-            => new BitString(src);
 
         /// <summary>
         /// Populates a bitstring from a 128-bit cpu vector

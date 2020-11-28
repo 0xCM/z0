@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    public interface ICheckVectorBits : ICheckBitVectors, ICheckBitStrings, TCheckNumeric, ICheckVectors, ICheckBitSpans
+    public interface ICheckVectorBits : ICheckBitVectors, ICheckBitStrings, TCheckNumeric, ICheckVectors
     {
 
     }

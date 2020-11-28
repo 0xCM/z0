@@ -17,28 +17,26 @@ namespace Z0
     public readonly ref struct SpanBlock32<T>
         where T : unmanaged
     {
-        public readonly Span<T> Data;
-
-        [MethodImpl(Inline)]
-        public static implicit operator Span<T>(in SpanBlock32<T> src)
-            => src.Data;
-
-        [MethodImpl(Inline)]
-        public static implicit operator ReadOnlySpan<T>(in SpanBlock32<T> src)
-            => src.Data;
+        readonly Span<T> Data;
 
         [MethodImpl(Inline)]
         public SpanBlock32(Span<T> src)
-            => this.Data = src;
+            => Data = src;
 
         [MethodImpl(Inline)]
         public SpanBlock32(params T[] src)
-            => this.Data = src;
+            => Data = src;
+
+        public Span<T> Storage
+        {
+            [MethodImpl(Inline)]
+            get => Data;
+        }
 
         /// <summary>
         /// The leading storage cell
         /// </summary>
-        public ref T Head
+        public ref T First
         {
             [MethodImpl(Inline)]
             get => ref first(Data);
@@ -92,7 +90,7 @@ namespace Z0
         public ref T this[int index]
         {
             [MethodImpl(Inline)]
-            get => ref Unsafe.Add(ref Head, index);
+            get => ref Unsafe.Add(ref First, index);
         }
 
         /// <summary>
@@ -120,7 +118,7 @@ namespace Z0
         /// <param name="segment">The cell relative block index</param>
         [MethodImpl(Inline)]
         public ref T Cell(int block, int segment)
-            => ref add(Head, BlockLength*block + segment);
+            => ref add(First, BlockLength*block + segment);
 
         /// <summary>
         /// Retrieves an index-identified data block
@@ -173,5 +171,13 @@ namespace Z0
         [MethodImpl(Inline)]
         public ref T GetPinnableReference()
             => ref Data.GetPinnableReference();
+
+        [MethodImpl(Inline)]
+        public static implicit operator Span<T>(in SpanBlock32<T> src)
+            => src.Data;
+
+        [MethodImpl(Inline)]
+        public static implicit operator ReadOnlySpan<T>(in SpanBlock32<T> src)
+            => src.Data;
    }
 }

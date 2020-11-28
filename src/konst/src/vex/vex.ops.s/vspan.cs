@@ -23,8 +23,8 @@ namespace Z0
             where T : unmanaged
         {
             var dst = SpanBlocks.alloc<T>(w128);
-            vsave(src, ref dst.Head);
-            return dst.Data;
+            vsave(src, ref dst.First);
+            return dst.Storage;
         }
 
         /// <summary>
@@ -37,7 +37,7 @@ namespace Z0
             where T : unmanaged
         {
             var dst = SpanBlocks.alloc<T>(w256);
-            vsave(src, ref dst.Head);
+            vsave(src, ref dst.First);
             return dst.Data;
         }
 
@@ -51,8 +51,8 @@ namespace Z0
             where T : unmanaged
         {
             var dst = SpanBlocks.alloc<T>(w512);
-            vsave(src, ref dst.Head);
-            return dst.Data;
+            vsave(src, ref dst.First);
+            return dst.Storage;
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]

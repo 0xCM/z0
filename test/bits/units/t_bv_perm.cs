@@ -24,7 +24,7 @@ namespace Z0
         {
             var p2 = Permute.natural<N16>((1,10), (2,11), (3, 8));
             var bsx2 = ((ushort)0b1000110111000100).ToBitString();
-            var bsy2 =  BitString.load(bsx2.BitSeq.Permute(p2));
+            var bsy2 =  BitString.load(bsx2.BitSeq.Permute(p2).ToArray());
             var bsz2 = bsx2.Permute(p2);
             Claim.eq(bsy2, bsz2);
         }

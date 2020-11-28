@@ -58,7 +58,7 @@ namespace Z0.Asm
         public void digital_render()
         {
             var src = Random.Bytes(8).ToSpan();
-            var bs = src.ToBitSpan();
+            var bs = src.ToBitSpan32();
             Claim.eq(64,bs.Length);
             var expect = bs.Format();
             var actual = Digital.render(Konst.base2, src).Reverse().ToString();

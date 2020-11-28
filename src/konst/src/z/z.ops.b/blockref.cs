@@ -20,7 +20,7 @@ namespace Z0
         [MethodImpl(Inline),Op, Closures(Numeric8k)]
         public static ref T blockref<T>(in SpanBlock8<T> src, int index)
             where T : unmanaged
-                => ref add(src.Head, index*src.BlockLength);
+                => ref add(src.First, index*src.BlockLength);
 
         /// <summary>
         /// Returns a reference to the leading cell of an index-identified block
@@ -31,7 +31,7 @@ namespace Z0
         [MethodImpl(Inline),Op, Closures(Numeric8x16k)]
         public static ref T blockref<T>(in SpanBlock16<T> src, int index)
             where T : unmanaged
-                => ref add(src.Head, index*src.BlockLength);
+                => ref add(src.First, index*src.BlockLength);
 
         /// <summary>
         /// Returns a reference to the leading cell of an index-identified block
@@ -42,7 +42,7 @@ namespace Z0
         [MethodImpl(Inline),Op, Closures(Numeric8x16x32k)]
         public static ref T blockref<T>(in SpanBlock32<T> src, int index)
             where T : unmanaged
-                => ref add(src.Head, index*src.BlockLength);
+                => ref add(src.First, index*src.BlockLength);
 
         /// <summary>
         /// Returns a reference to the leading cell of an index-identified block
@@ -53,7 +53,7 @@ namespace Z0
         [MethodImpl(Inline),Op, Closures(UnsignedInts)]
         public static ref T blockref<T>(in SpanBlock64<T> src, int index)
             where T : unmanaged
-                => ref add(src.Head, index*src.BlockLength);
+                => ref add(src.First, index*src.BlockLength);
 
         /// <summary>
         /// Returns a reference to the leading cell of an index-identified block
@@ -64,7 +64,7 @@ namespace Z0
         [MethodImpl(Inline),Op, Closures(UnsignedInts)]
         public static ref T blockref<T>(in SpanBlock128<T> src, int index)
             where T : unmanaged
-                => ref add(src.Head, index*src.BlockLength);
+                => ref add(src.First, index*src.BlockLength);
 
         /// <summary>
         /// Returns a reference to the leading cell of an index-identified block
@@ -75,7 +75,7 @@ namespace Z0
         [MethodImpl(Inline),Op, Closures(UnsignedInts)]
         public static ref T blockref<T>(in SpanBlock256<T> src, int index)
             where T : unmanaged
-                => ref add(src.Head, index*src.BlockLength);
+                => ref add(src.First, index*src.BlockLength);
 
         /// <summary>
         /// Returns a reference to the leading cell of an index-identified block
@@ -86,6 +86,6 @@ namespace Z0
         [MethodImpl(Inline),Op, Closures(UnsignedInts)]
         public static ref T blockref<T>(in SpanBlock512<T> src, int index)
             where T : unmanaged
-                => ref add(src.Head, index*src.BlockLength);
+                => ref add(src.First, index*src.BlockLength);
     }
 }

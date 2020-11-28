@@ -15,8 +15,8 @@ namespace Z0
         {
             for(var i=0; i<RepCount; i++)
             {
-                var a = Random.One(z64).ToBitSpan();
-                var b = Random.One(z64).ToBitSpan();
+                var a = Random.One(z64).ToBitSpan32();
+                var b = Random.One(z64).ToBitSpan32();
                 var c = a.Replicate();
                 Claim.Require(a != b);
                 Claim.Require(a == c);
@@ -34,7 +34,7 @@ namespace Z0
         public void bstrim()
         {
             var x0 = 0b_01011000_00001000_11111010_01100101u;
-            var x1 = x0.ToBitSpan();
+            var x1 = x0.ToBitSpan32();
             var x2 = x1.Extract<uint>();
             Claim.eq(x0,x2);
 
@@ -45,7 +45,7 @@ namespace Z0
             Claim.eq((int)bs1.Length, bsSrc.Length);
 
             var bs2 = BitSpans.from(x);
-            Claim.eq(bs1.Trim(),bs2.Trim());
+            CheckBitSpans.eq(bs1.Trim(),bs2.Trim());
 
             var y = bs1.Convert<uint>();
             Claim.eq(x,y);
@@ -97,7 +97,7 @@ namespace Z0
             {
                 Random.Fill(packed);
                 BitPack.unpack(packed, unpacked);
-                var bitspan = BitSpans.load(unpacked.As<Bit32>());
+                var bitspan = BitSpans.load32(unpacked.As<Bit32>());
                 bitspan_check(packed,bitspan);
             }
         }
@@ -129,7 +129,7 @@ namespace Z0
         public void bitslice_32()
         {
             var x = BitMasks.Literals.Even32x2;
-            var y = x.ToBitSpan();
+            var y = x.ToBitSpan32();
             var t = z32;
 
             var z0 = y[0,2,t];
@@ -173,8 +173,8 @@ namespace Z0
 
             for(var rep = 0u; rep <= RepCount; rep++)
             {
-                var x = Random.BitSpan(n);
-                var y = Random.BitSpan(n);
+                var x = Random.BitSpan32(n);
+                var y = Random.BitSpan32(n);
                 var z = x & y;
                 var a = x.Extract(t);
                 var b = y.Extract(t);
@@ -190,8 +190,8 @@ namespace Z0
 
             for(var rep = 0; rep <= RepCount; rep++)
             {
-                var x = Random.BitSpan(n);
-                var y = Random.BitSpan(n);
+                var x = Random.BitSpan32(n);
+                var y = Random.BitSpan32(n);
                 var z = x | y;
                 var a = x.Extract(t);
                 var b = y.Extract(t);
@@ -207,8 +207,8 @@ namespace Z0
 
             for(var rep = 0; rep <= RepCount; rep++)
             {
-                var x = Random.BitSpan(n);
-                var y = Random.BitSpan(n);
+                var x = Random.BitSpan32(n);
+                var y = Random.BitSpan32(n);
                 var z = x ^ y;
                 var a = x.Extract(t);
                 var b = y.Extract(t);

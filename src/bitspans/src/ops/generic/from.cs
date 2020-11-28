@@ -34,7 +34,7 @@ namespace Z0
         {
             var dst = from(src);
             return (dst.Length > maxbits && maxbits != 0)
-                ? load(dst.Data.Slice(0, maxbits))
+                ? load32(dst.Data.Slice(0, maxbits))
                 : dst;
         }
 

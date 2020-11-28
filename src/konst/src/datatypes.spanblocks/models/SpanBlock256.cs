@@ -47,7 +47,7 @@ namespace Z0
         /// <summary>
         /// The leading storage cell
         /// </summary>
-        public ref T Head
+        public ref T First
         {
             [MethodImpl(Inline)]
             get => ref MemoryMarshal.GetReference(data);
@@ -104,7 +104,7 @@ namespace Z0
         public ref T this[int index]
         {
             [MethodImpl(Inline)]
-            get => ref Unsafe.Add(ref Head, index);
+            get => ref Unsafe.Add(ref First, index);
         }
 
         /// <summary>
@@ -132,7 +132,7 @@ namespace Z0
         /// <param name="segment">The cell relative block index</param>
         [MethodImpl(Inline)]
         public ref T Cell(int block, int segment)
-            => ref Unsafe.Add(ref Head, BlockLength*block + segment);
+            => ref Unsafe.Add(ref First, BlockLength*block + segment);
 
         /// <summary>
         /// Retrieves an index-identified data block

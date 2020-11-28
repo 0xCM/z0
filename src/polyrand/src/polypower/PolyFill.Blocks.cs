@@ -19,7 +19,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         public static void Fill<T>(this IPolyStream random, in SpanBlock8<T> dst)
             where T : unmanaged
-                => random.Fill(dst.Data);
+                => random.Fill(dst.Storage);
 
         /// <summary>
         /// Fills caller-allocated block storage with random values
@@ -29,7 +29,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         public static void Fill<T>(this IPolyStream random, in SpanBlock16<T> dst)
             where T : unmanaged
-                => random.Fill(dst.Data);
+                => random.Fill(dst.Storage);
 
         /// <summary>
         /// Fills caller-allocated block storage with random values
@@ -39,7 +39,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         public static void Fill<T>(this IPolyStream random, in SpanBlock32<T> dst)
             where T : unmanaged
-                => random.Fill(dst.Data);
+                => random.Fill(dst.Storage);
 
         /// <summary>
         /// Fills caller-allocated block storage with random values
@@ -49,7 +49,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         public static void Fill<T>(this IPolyStream random, in SpanBlock64<T> dst)
             where T : unmanaged
-                => random.Fill(dst.Data);
+                => random.Fill(dst.Storage);
 
         /// <summary>
         /// Fills caller-allocated block storage with random values
@@ -59,7 +59,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         public static void Fill<T>(this IPolyStream random, in SpanBlock128<T> dst)
             where T : unmanaged
-                => random.Fill(dst.Data);
+                => random.Fill(dst.Storage);
 
         /// <summary>
         /// Fills caller-allocated block storage with random values
@@ -81,7 +81,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void Fill<T>(this IPolyStream random, in SpanBlock512<T> dst)
             where T : unmanaged
-                => random.Fill(dst.Data);
+                => random.Fill(dst.Storage);
 
         /// <summary>
         /// Fills caller-allocated block storage with random values
@@ -93,7 +93,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         public static void Fill<T>(this IPolyStream random, T min, T max, in SpanBlock16<T> dst)
             where T : unmanaged
-                => random.Fill(min,max,dst.Data);
+                => random.Fill(min,max,dst.Storage);
 
         /// <summary>
         /// Fills caller-allocated block storage with random values
@@ -105,7 +105,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         public static void Fill<T>(this IPolyStream random, T min, T max, in SpanBlock32<T> dst)
             where T : unmanaged
-                => random.Fill(min,max,dst.Data);
+                => random.Fill(min, max, dst.Storage);
 
         /// <summary>
         /// Fills caller-allocated block storage with random values
@@ -118,7 +118,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void Fill<T>(this IPolyStream random, T min, T max, in SpanBlock64<T> dst)
             where T : unmanaged
-                => random.Fill(min,max,dst.Data);
+                => random.Fill(min,max,dst.Storage);
 
         /// <summary>
         /// Fills caller-allocated block storage with random values
@@ -130,7 +130,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         public static void Fill<T>(this IPolyStream random, T min, T max, in SpanBlock128<T> dst)
             where T : unmanaged
-                => random.Fill(min,max,dst.Data);
+                => random.Fill(min,max,dst.Storage);
 
         /// <summary>
         /// Fills caller-allocated block storage with random values
@@ -154,6 +154,6 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         public static void Fill<T>(this IPolyStream random,T min, T max, in SpanBlock512<T> dst)
             where T : unmanaged
-                => random.Fill(min,max,dst.Data);
+                => random.Fill(min,max,dst.Storage);
     }
 }

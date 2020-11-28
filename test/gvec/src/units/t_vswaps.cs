@@ -52,7 +52,7 @@ namespace Z0
             z.vstore(c, ref head(dst), step*2);
             z.vstore(d, ref head(dst), step*3);
 
-            var A = Matrix.load(order, src.Data.ToArray());
+            var A = Matrix.load(order, src.Storage.ToArray());
             var B = Matrix.load(order, dst);
             for(var i=0; i < order; i++)
             for(var j=0; j < order; j++)

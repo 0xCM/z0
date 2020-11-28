@@ -21,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static string FormatHex<T>(this SpanBlock8<T> src, char sep = HexDelimiter, bool specifier = false)
             where T : unmanaged
-                => src.Data.FormatHex(sep, specifier);
+                => src.Storage.FormatHex(sep, specifier);
 
         /// <summary>
         /// Formats blocked content as a sequence of hex values
@@ -33,7 +33,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static string FormatHex<T>(this SpanBlock16<T> src, char sep = HexDelimiter, bool specifier = false)
             where T : unmanaged
-                => src.Data.FormatHex(sep, specifier);
+                => src.Storage.FormatHex(sep, specifier);
 
         /// <summary>
         /// Formats blocked content as a sequence of hex values
@@ -46,7 +46,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static string FormatHex<T>(this SpanBlock32<T> src, char sep = HexDelimiter, bool specifier = false)
             where T : unmanaged
-                => src.Data.FormatHex(sep, specifier);
+                => src.Storage.FormatHex(sep, specifier);
 
         /// <summary>
         /// Formats blocked content as a sequence of hex values
@@ -59,7 +59,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static string FormatHex<T>(this SpanBlock64<T> src, char sep = HexDelimiter, bool specifier = false)
             where T : unmanaged
-                => src.Data.FormatHex(sep, specifier);
+                => src.Storage.FormatHex(sep, specifier);
 
         /// <summary>
         /// Formats blocked content as a sequence of hex values
@@ -72,7 +72,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static string FormatHex<T>(this SpanBlock128<T> src, char sep = HexDelimiter, bool specifier = false)
             where T : unmanaged
-                => src.Data.FormatHex(sep, specifier);
+                => src.Storage.FormatHex(sep, specifier);
 
         /// <summary>
         /// Formats blocked content as a sequence of hex values
@@ -98,6 +98,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static string FormatHex<T>(this SpanBlock512<T> src, char sep = HexDelimiter, bool specifier = false)
             where T : unmanaged
-                => src.Data.FormatHex(sep, specifier);
+                => src.Storage.FormatHex(sep, specifier);
     }
 }

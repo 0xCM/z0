@@ -287,7 +287,7 @@ namespace Z0
 
             for(var cycle = 0; cycle < Pow2.T12; cycle++)
             {
-                var data = Random.BitSpan(Pow2.T10);
+                var data = Random.BitSpan32(Pow2.T10);
                 clock.Start();
                 for(var i=0; i<data.Length; i+= 32, ops++)
                     last = BitSpans.extract<uint>(data, i);

@@ -120,7 +120,7 @@ namespace Z0
 
                 var up1 = BitStore.select((byte)i);
                 Bits.unpack8x1(b, up2);
-                Claim.eq(BitString.load(up1), BitString.load(up2));
+                Claim.eq(BitString.load(up1.ToArray()), BitString.load(up2.ToArray()));
             }
         }
 

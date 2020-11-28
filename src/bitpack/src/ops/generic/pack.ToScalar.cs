@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="mod">The bit selection modulus</param>
         /// <param name="block">The index of the block to pack</param>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static byte pack<T>(in T src, N8 count, N8 mod)
+        public static byte pack<T>(in T src, N8 n, N8 mod)
             where T : unmanaged
                 => (byte)BitMasks.gather(force<T,ulong>(src), Lsb64x8x1);
 
@@ -28,10 +28,10 @@ namespace Z0
         /// Packs 16 1-bit values taken from the least significant bit of each source byte
         /// </summary>
         /// <param name="src">The bit source</param>
-        /// <param name="count">The number of bits to pack</param>
+        /// <param name="n">The number of bits to pack</param>
         /// <param name="mod">The bit selection modulus</param>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ushort pack<T>(in T src, N16 count, N8 mod)
+        public static ushort pack<T>(in T src, N16 n, N8 mod)
             where T : unmanaged
                 => z.vtakemask(gvec.vsll(z.vload(n128, z.view64u(src)),7));
 
@@ -39,10 +39,10 @@ namespace Z0
         /// Packs 32 1-bit values taken from the least significant bit of each source byte
         /// </summary>
         /// <param name="src">The bit source</param>
-        /// <param name="count">The number of bits to pack</param>
+        /// <param name="n">The number of bits to pack</param>
         /// <param name="mod">The bit selection modulus</param>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static uint pack<T>(in T src, N32 count, N8 mod)
+        public static uint pack<T>(in T src, N32 n, N8 mod)
             where T : unmanaged
                 => z.vtakemask(gvec.vsll(z.vload(n256, z.view64u(src)),7));
 
@@ -50,10 +50,10 @@ namespace Z0
         /// Packs 64 1-bit values taken from the least significant bit of each source byte
         /// </summary>
         /// <param name="src">The bit source</param>
-        /// <param name="count">The number of bits to pack</param>
+        /// <param name="n">The number of bits to pack</param>
         /// <param name="mod">The bit selection modulus</param>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ulong pack<T>(in T src, N64 count, N8 mod)
+        public static ulong pack<T>(in T src, N64 n, N8 mod)
             where T : unmanaged
         {
             var dst = 0ul;

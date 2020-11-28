@@ -28,7 +28,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector128<long> vconvert(in SpanBlock16<sbyte> src, N128 w, long t)
-            => ConvertToVector128Int64(gptr(src.Head));
+            => ConvertToVector128Int64(gptr(src.First));
 
         /// <summary>
         /// PMOVSXBD xmm, m32
@@ -38,7 +38,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector128<int> vconvert(in SpanBlock32<sbyte> src, N128 w, int t )
-            => ConvertToVector128Int32(gptr(src.Head));
+            => ConvertToVector128Int32(gptr(src.First));
 
         /// <summary>
         ///  VPMOVSXBQ ymm, m32
@@ -48,7 +48,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector256<long> vconvert(in SpanBlock32<sbyte> src, N256 w, long t)
-            => ConvertToVector256Int64(gptr(src.Head));
+            => ConvertToVector256Int64(gptr(src.First));
 
         /// <summary>
         /// PMOVSXBW xmm, m64
@@ -58,7 +58,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector128<short> vconvert(in SpanBlock64<sbyte> src, N128 w, short t)
-            => ConvertToVector128Int16(gptr(src.Head));
+            => ConvertToVector128Int16(gptr(src.First));
 
         /// <summary>
         ///  VPMOVSXBD ymm, m64
@@ -68,7 +68,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector256<int> vconvert(in SpanBlock64<sbyte> src, N256 w, int t)
-            => ConvertToVector256Int32(gptr(src.Head));
+            => ConvertToVector256Int32(gptr(src.First));
 
         /// <summary>
         /// VPMOVSXBW ymm, m128
@@ -78,7 +78,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector256<short> vconvert(in SpanBlock128<sbyte> src, N256 w, short t)
-            => ConvertToVector256Int16(gptr(src.Head));
+            => ConvertToVector256Int16(gptr(src.First));
 
         // ~ 8u -> X
         // ~ ------------------------------------------------------------------
@@ -91,7 +91,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector128<long> vconvert(in SpanBlock16<byte> src, N128 w, long t)
-            => ConvertToVector128Int64(gptr(src.Head));
+            => ConvertToVector128Int64(gptr(src.First));
 
         /// <summary>
         /// PMOVZXBQ xmm, m16
@@ -101,7 +101,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector128<ulong> vconvert(in SpanBlock16<byte> src, N128 w, ulong t)
-            => v64u(ConvertToVector128Int64(gptr(src.Head)));
+            => v64u(ConvertToVector128Int64(gptr(src.First)));
 
         /// <summary>
         /// PMOVZXBD xmm, m32
@@ -111,7 +111,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector128<int> vconvert(in SpanBlock32<byte> src, N128 w, int t)
-            => ConvertToVector128Int32(gptr(src.Head));
+            => ConvertToVector128Int32(gptr(src.First));
 
         /// <summary>
         /// PMOVZXBD xmm, m32
@@ -121,7 +121,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector128<uint> vconvert(in SpanBlock32<byte> src, N128 w, uint t)
-            => v32u(ConvertToVector128Int32(gptr(src.Head)));
+            => v32u(ConvertToVector128Int32(gptr(src.First)));
 
         /// <summary>
         /// VPMOVZXBQ ymm, m32
@@ -131,7 +131,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector256<ulong> vconvert(in SpanBlock32<byte> src, N256 w, ulong t)
-            => v64u(ConvertToVector256Int64(gptr(src.Head)));
+            => v64u(ConvertToVector256Int64(gptr(src.First)));
 
         /// <summary>
         /// VPMOVZXBQ ymm, m32
@@ -141,7 +141,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector256<long> vconvert(in SpanBlock32<byte> src, N256 w, long t)
-            => ConvertToVector256Int64(gptr(src.Head));
+            => ConvertToVector256Int64(gptr(src.First));
 
         /// <summary>
         /// PMOVZXBW xmm, m64
@@ -151,7 +151,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector128<short> vconvert(in SpanBlock64<byte> src, N128 w, short t)
-            => ConvertToVector128Int16(gptr(src.Head));
+            => ConvertToVector128Int16(gptr(src.First));
 
         /// <summary>
         /// PMOVZXBW xmm, m64
@@ -161,7 +161,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector128<ushort> vconvert(in SpanBlock64<byte> src, N128 w, ushort t)
-            => v16u(ConvertToVector128Int16(gptr(src.Head)));
+            => v16u(ConvertToVector128Int16(gptr(src.First)));
 
         /// <summary>
         /// VPMOVZXBD ymm, m64
@@ -171,7 +171,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector256<uint> vconvert(in SpanBlock64<byte> src, N256 w, uint t)
-            => v32u(ConvertToVector256Int32(gptr(src.Head)));
+            => v32u(ConvertToVector256Int32(gptr(src.First)));
 
         /// <summary>
         /// VPMOVZXBW ymm, m128
@@ -181,7 +181,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector256<short> vconvert(in SpanBlock128<byte> src, N256 w, short t)
-            => ConvertToVector256Int16(gptr(src.Head));
+            => ConvertToVector256Int16(gptr(src.First));
 
         /// <summary>
         /// VPMOVZXBW ymm, m128
@@ -191,7 +191,7 @@ namespace Z0
         /// <param name="w">The target width</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector256<ushort> vconvert(in SpanBlock128<byte> src, N256 w, ushort t)
-            => v16u(ConvertToVector256Int16(gptr(src.Head)));
+            => v16u(ConvertToVector256Int16(gptr(src.First)));
 
         // ~ 16i -> X
         // ~ ------------------------------------------------------------------
@@ -204,7 +204,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector128<long> vconvert(in SpanBlock32<short> src, N128 w, long t)
-            => ConvertToVector128Int64(gptr(src.Head));
+            => ConvertToVector128Int64(gptr(src.First));
 
         /// <summary>
         /// PMOVSXWD xmm, m64
@@ -214,7 +214,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector128<int> vconvert(in SpanBlock64<short> src, N128 w, int t)
-            => ConvertToVector128Int32(gptr(src.Head));
+            => ConvertToVector128Int32(gptr(src.First));
 
         // ~ 16u -> X
         // ~ ------------------------------------------------------------------
@@ -226,7 +226,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector128<long> vconvert(in SpanBlock32<ushort> src, N128 w, long t)
-            => ConvertToVector128Int64(gptr(src.Head));
+            => ConvertToVector128Int64(gptr(src.First));
 
         /// <summary>
         /// PMOVZXWQ xmm, m32
@@ -236,7 +236,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector128<ulong> vconvert(in SpanBlock32<ushort> src, N128 w, ulong t)
-            => v64u(ConvertToVector128Int64(gptr(src.Head)));
+            => v64u(ConvertToVector128Int64(gptr(src.First)));
 
         /// <summary>
         /// VPMOVZXWQ ymm, m64
@@ -246,7 +246,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector256<ulong> vconvert(in SpanBlock64<ushort> src, N256 w, ulong t)
-            => v64u(ConvertToVector256Int64(gptr(src.Head)));
+            => v64u(ConvertToVector256Int64(gptr(src.First)));
 
         /// <summary>
         /// PMOVSXWD xmm, m64
@@ -256,7 +256,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector128<uint> vconvert(in SpanBlock64<ushort> src, N128 w, uint t)
-            => v32u(ConvertToVector128Int32(gptr(src.Head)));
+            => v32u(ConvertToVector128Int32(gptr(src.First)));
 
         /// <summary>
         /// VPMOVZXWD ymm, m128
@@ -266,7 +266,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector256<uint> vconvert(in SpanBlock128<ushort> src, uint t)
-            => v32u(ConvertToVector256Int32(gptr(src.Head)));
+            => v32u(ConvertToVector256Int32(gptr(src.First)));
 
         /// <summary>
         /// VPMOVZXWD ymm, m128
@@ -276,7 +276,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector256<int> vconvert(in SpanBlock128<ushort> src, int t)
-            => ConvertToVector256Int32(gptr(src.Head));
+            => ConvertToVector256Int32(gptr(src.First));
 
         /// <summary>
         /// VPMOVZXWQ ymm, m64
@@ -286,7 +286,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector256<long> vconvert(in SpanBlock64<ushort> src, N256 w, long t)
-            => ConvertToVector256Int64(gptr(src.Head));
+            => ConvertToVector256Int64(gptr(src.First));
 
         // ~ 32u -> X
         // ~ ------------------------------------------------------------------
@@ -299,7 +299,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector256<long> vconvert(in SpanBlock128<uint> src, N256 w, long t)
-            => ConvertToVector256Int64(gptr(src.Head));
+            => ConvertToVector256Int64(gptr(src.First));
 
         /// <summary>
         /// VPMOVZXDQ ymm, m128
@@ -309,7 +309,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector256<ulong> vconvert(in SpanBlock128<uint> src, ulong t)
-            => v64u(ConvertToVector256Int64(gptr(src.Head)));
+            => v64u(ConvertToVector256Int64(gptr(src.First)));
 
         /// <summary>
         /// PMOVZXDQ xmm, m64
@@ -319,7 +319,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector128<long> vconvert(in SpanBlock64<uint> src, N128 w, ulong t)
-            => ConvertToVector128Int64(gptr(src.Head));
+            => ConvertToVector128Int64(gptr(src.First));
 
         // ~ 32i -> X
         // ~ ------------------------------------------------------------------
@@ -332,7 +332,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector128<long> vconvert(in SpanBlock64<int> src, N128 w, long t)
-            => ConvertToVector128Int64(gptr(src.Head));
+            => ConvertToVector128Int64(gptr(src.First));
 
         /// <summary>
         /// VPMOVSXDQ ymm, m128
@@ -342,7 +342,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector256<long> vconvert(in SpanBlock128<int> src, N256 w, long t)
-            => ConvertToVector256Int64(gptr(src.Head));
+            => ConvertToVector256Int64(gptr(src.First));
 
         // ~ X -> 512
         // ~ ------------------------------------------------------------------
@@ -354,8 +354,8 @@ namespace Z0
         /// <param name="src">The blocked memory source</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector512<uint> vconvert(in SpanBlock256<ushort> src, N512 w, uint t)
-            => (v32u(ConvertToVector256Int32(gptr(src.Head))),
-                v32u(ConvertToVector256Int32(gptr(src.Head, 8))));
+            => (v32u(ConvertToVector256Int32(gptr(src.First))),
+                v32u(ConvertToVector256Int32(gptr(src.First, 8))));
 
         /// <summary>
         /// VPMOVSXWD ymm, m128
@@ -365,8 +365,8 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector512<int> vconvert(in SpanBlock128<short> src, N512 w, int t)
-            => (ConvertToVector256Int32(gptr(src.Head)),
-                ConvertToVector256Int32(gptr(src.Head, 8)));
+            => (ConvertToVector256Int32(gptr(src.First)),
+                ConvertToVector256Int32(gptr(src.First, 8)));
 
         /// <summary>
         /// VPMOVZXBW ymm, m128
@@ -377,8 +377,8 @@ namespace Z0
         /// <param name="hi">The hi target</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector512<ushort> vconvert(in SpanBlock256<byte> src, N512 w, ushort t)
-            => (v16u(ConvertToVector256Int16(gptr(src.Head))),
-                v16u(ConvertToVector256Int16(gptr(src.Head,16))));
+            => (v16u(ConvertToVector256Int16(gptr(src.First))),
+                v16u(ConvertToVector256Int16(gptr(src.First,16))));
 
         /// <summary>
         /// VPMOVZXWQ ymm, m64
@@ -389,8 +389,8 @@ namespace Z0
         /// <param name="hi">The upper target</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector512<ulong> vconvert(in SpanBlock128<ushort> src, N512 w, ulong t)
-            => (v64u(ConvertToVector256Int64(gptr(src.Head))),
-                v64u(ConvertToVector256Int64(gptr(src.Head,4))));
+            => (v64u(ConvertToVector256Int64(gptr(src.First))),
+                v64u(ConvertToVector256Int64(gptr(src.First,4))));
 
         /// <summary>
         /// VPMOVZXDQ ymm, m128
@@ -401,7 +401,7 @@ namespace Z0
         /// <param name="hi">The upper target</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector512<ulong> vconvert(in SpanBlock256<uint> src, N512 w, ulong t)
-            => (v64u(ConvertToVector256Int64(gptr(src.Head))),
-                v64u(ConvertToVector256Int64(gptr(src.Head,4))));
+            => (v64u(ConvertToVector256Int64(gptr(src.First))),
+                v64u(ConvertToVector256Int64(gptr(src.First,4))));
     }
 }

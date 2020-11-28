@@ -36,7 +36,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static void vstore<T>(Vector128<T> src, in SpanBlock128<T> dst)
             where T : unmanaged
-                => vsave(src, ref dst.Head);
+                => vsave(src, ref dst.First);
 
         /// <summary>
         /// Stores the source vector to a specified block in a blocked container
@@ -59,7 +59,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static void vstore<T>(Vector256<T> src, in SpanBlock256<T> dst)
             where T : unmanaged
-                => vsave(src, ref dst.Head);
+                => vsave(src, ref dst.First);
 
         /// <summary>
         /// Stores the source vector to a blocked container
@@ -70,7 +70,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static void vstore<T>(Vector512<T> src, in SpanBlock512<T> dst)
             where T : unmanaged
-                => vsave(src, ref dst.Head);
+                => vsave(src, ref dst.First);
 
         /// <summary>
         /// Stores the source vector to a specified block in a blocked container

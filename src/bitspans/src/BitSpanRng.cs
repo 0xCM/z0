@@ -17,16 +17,16 @@ namespace Z0
         /// </summary>
         /// <param name="source">The random source</param>
         [MethodImpl(Inline)]
-        public static BitSpan32 BitSpan(this ISource source, int length)
-            => Z0.BitSpans.load(source.BitStream32().Take(length).ToArray());
+        public static BitSpan32 BitSpan32(this ISource source, int length)
+            => BitSpans.load32(source.BitStream32().Take(length).ToArray());
 
         /// <summary>
         /// Produces a random bitspan of specified length
         /// </summary>
         /// <param name="source">The random source</param>
         [MethodImpl(Inline)]
-        public static BitSpan32 BitSpan(this ISource source, uint length)
-            => Z0.BitSpans.load(source.BitStream32().Take(length).ToArray());
+        public static BitSpan32 BitSpan32(this ISource source, uint length)
+            => BitSpans.load32(source.BitStream32().Take(length).ToArray());
 
         /// <summary>
         /// Produces a bitspan with randomized length
@@ -35,8 +35,24 @@ namespace Z0
         /// <param name="minlen">The minimum bitspan length</param>
         /// <param name="maxlen">The maximum bitspan length</param>
         [MethodImpl(Inline), Op]
-        public static BitSpan32 BitSpan(this IPolyStream source, int minlen, int maxlen)
+        public static BitSpan BitSpan(this IDomainSource source, int minlen, int maxlen)
             => source.BitSpan(source.Next<int>(minlen, maxlen + 1));
+
+        /// <summary>
+        /// Produces a random bitspan of specified length
+        /// </summary>
+        /// <param name="source">The random source</param>
+        [MethodImpl(Inline)]
+        public static BitSpan BitSpan(this ISource source, int length)
+            => BitSpans.load(source.BitStream().Take(length).ToArray());
+
+        /// <summary>
+        /// Produces a random bitspan of specified length
+        /// </summary>
+        /// <param name="source">The random source</param>
+        [MethodImpl(Inline)]
+        public static BitSpan BitSpan(this ISource source, uint length)
+            => BitSpans.load(source.BitStream().Take(length).ToArray());
 
         /// <summary>
         /// Fills a caller-supplied bitspan with random bits

@@ -108,7 +108,7 @@ namespace Z0
             var g32 = grid.Content.Reblock(n32);
             Claim.eq(g32.BlockCount,w);
 
-            ref var g32src = ref g32.Head;
+            ref var g32src = ref g32.First;
 
             var row124 = z.vload(n, g32.BlockRef(124*cpr));
             var row125 = z.vload(n, g32.BlockRef(125*cpr));

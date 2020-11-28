@@ -38,7 +38,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         internal BitGrid64(SpanBlock64<T> src)
-            => this.Data = src.As<ulong>().Head;
+            => this.Data = src.As<ulong>().First;
 
         public ulong Content
         {

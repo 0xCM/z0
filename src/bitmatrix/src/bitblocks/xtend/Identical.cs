@@ -15,7 +15,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Bit32 Identical<T>(this SpanBlock128<T> xb, SpanBlock128<T> yb)
             where T : unmanaged
-                => xb.Data.Identical(yb.Data);
+                => xb.Storage.Identical(yb.Storage);
 
         [MethodImpl(Inline)]
         public static Bit32 Identical<T>(this SpanBlock256<T> xb, SpanBlock256<T> yb)

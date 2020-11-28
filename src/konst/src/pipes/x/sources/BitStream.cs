@@ -9,6 +9,8 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
+    using static Konst;
+
     partial class XSource
     {
         /// <summary>
@@ -40,5 +42,23 @@ namespace Z0
         public static IEnumerable<T> BitStream<T>(this ISource source)
             where T : unmanaged
                 => Sources.bitstream<T>(source);
+
+        /// <summary>
+        /// Transforms an primal enumerator into a bitstream
+        /// </summary>
+        /// <param name="src">The source stream</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        public static IEnumerable<bit> BitStream<T>(this IEnumerator<T> src)
+            where T : struct
+                => BitStreams.create(src);
+
+        /// <summary>
+        /// Transforms an primal source stream into a bitstream
+        /// </summary>
+        /// <param name="src">The source stream</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        public static IEnumerable<bit> BitStream<T>(this IEnumerable<T> src)
+            where T : struct
+                => BitStreams.create(src);
     }
 }

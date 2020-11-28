@@ -17,46 +17,38 @@ namespace Z0
     public readonly ref struct SpanBlock8<T>
         where T : unmanaged
     {
-        readonly Span<T> data;
-
-        [MethodImpl(Inline)]
-        public static implicit operator Span<T>(in SpanBlock8<T> src)
-            => src.data;
-
-        [MethodImpl(Inline)]
-        public static implicit operator ReadOnlySpan<T>(in SpanBlock8<T> src)
-            => src.data;
+        readonly Span<T> Data;
 
         [MethodImpl(Inline)]
         public SpanBlock8(Span<T> src)
-            => data = src;
+            => Data = src;
 
         [MethodImpl(Inline)]
         public SpanBlock8(params T[] src)
-            => data = src;
+            => Data = src;
 
         /// <summary>
         /// The backing storage
         /// </summary>
-        public Span<T> Data
+        public Span<T> Storage
         {
             [MethodImpl(Inline)]
-            get => data;
+            get => Data;
         }
 
         /// <summary>
         /// The leading storage cell
         /// </summary>
-        public ref T Head
+        public ref T First
         {
             [MethodImpl(Inline)]
-            get => ref first(data);
+            get => ref first(Data);
         }
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => data.IsEmpty;
+            get => Data.IsEmpty;
         }
 
         /// <summary>
@@ -65,7 +57,7 @@ namespace Z0
         public int CellCount
         {
             [MethodImpl(Inline)]
-            get => data.Length;
+            get => Data.Length;
         }
 
         /// <summary>
@@ -107,7 +99,7 @@ namespace Z0
         public ref T this[int index]
         {
             [MethodImpl(Inline)]
-            get => ref add(Head, index);
+            get => ref add(First, index);
         }
 
         /// <summary>
@@ -125,7 +117,7 @@ namespace Z0
         public Span<byte> Bytes
         {
             [MethodImpl(Inline)]
-            get => bytes(data);
+            get => bytes(Data);
         }
 
         /// <summary>
@@ -135,7 +127,7 @@ namespace Z0
         /// <param name="segment">The cell relative block index</param>
         [MethodImpl(Inline)]
         public ref T Cell(int block, int segment)
-            => ref add(Head, BlockLength*block + segment);
+            => ref add(First, BlockLength*block + segment);
 
         /// <summary>
         /// Retrieves an index-identified data block
@@ -143,7 +135,7 @@ namespace Z0
         /// <param name="block">The block index</param>
         [MethodImpl(Inline)]
         public Span<T> Block(int block)
-            => slice(data,block * BlockLength, BlockLength);
+            => slice(Data,block * BlockLength, BlockLength);
 
         /// <summary>
         /// Extracts an index-identified block (non-allocating, but not free due to the price of creating a new wrapper)
@@ -159,14 +151,14 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public void Fill(T src)
-            => data.Fill(src);
+            => Data.Fill(src);
 
         /// <summary>
         /// Zero-fills all blocked cells
         /// </summary>
         [MethodImpl(Inline)]
         public void Clear()
-            => data.Clear();
+            => Data.Clear();
 
         /// <summary>
         /// Copies blocked content to a target span
@@ -174,7 +166,7 @@ namespace Z0
         /// <param name="dst">The target span</param>
         [MethodImpl(Inline)]
         public void CopyTo(Span<T> dst)
-            => data.CopyTo(dst);
+            => Data.CopyTo(dst);
 
         /// <summary>
         /// Reinterprets the storage cell type
@@ -183,14 +175,22 @@ namespace Z0
         [MethodImpl(Inline)]
         public SpanBlock8<S> As<S>()
             where S : unmanaged
-                => new SpanBlock8<S>(z.recover<T,S>(data));
+                => new SpanBlock8<S>(z.recover<T,S>(Data));
 
         [MethodImpl(Inline)]
         public Span<T>.Enumerator GetEnumerator()
-            => data.GetEnumerator();
+            => Data.GetEnumerator();
 
         [MethodImpl(Inline)]
         public ref T GetPinnableReference()
-            => ref data.GetPinnableReference();
+            => ref Data.GetPinnableReference();
+
+        [MethodImpl(Inline)]
+        public static implicit operator Span<T>(in SpanBlock8<T> src)
+            => src.Data;
+
+        [MethodImpl(Inline)]
+        public static implicit operator ReadOnlySpan<T>(in SpanBlock8<T> src)
+            => src.Data;
    }
 }

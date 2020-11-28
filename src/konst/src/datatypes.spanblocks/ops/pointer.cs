@@ -38,7 +38,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Numeric8x16k)]
         public static unsafe T* ptr<T>(in SpanBlock16<T> src)
             where T : unmanaged
-                => ptr(ref src.Head);
+                => ptr(ref src.First);
 
         /// <summary>
         /// Returns a generic pointer to the leading cell of the first block of a 32-bit blocked container
@@ -48,7 +48,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Numeric8x16k | NumericKind.Width32)]
         public static unsafe T* ptr<T>(in SpanBlock32<T> src)
             where T : unmanaged
-                => ptr(ref src.Head);
+                => ptr(ref src.First);
 
         /// <summary>
         /// Returns a generic pointer to the leading cell of the first block of a 64-bit blocked container
@@ -58,7 +58,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static unsafe T* ptr<T>(in SpanBlock64<T> src)
             where T : unmanaged
-                => ptr(ref src.Head);
+                => ptr(ref src.First);
 
         /// <summary>
         /// Returns a generic pointer to the leading cell of the first block of a 128-bit blocked container
@@ -68,7 +68,7 @@ namespace Z0
         [MethodImpl(Inline),Op, Closures(AllNumeric)]
         public static unsafe T* ptr<T>(in SpanBlock128<T> src)
             where T : unmanaged
-                => ptr(ref src.Head);
+                => ptr(ref src.First);
 
         /// <summary>
         /// Returns a generic pointer to the leading cell of the first block of a 256-bit blocked container
@@ -78,7 +78,7 @@ namespace Z0
         [MethodImpl(Inline),Op, Closures(AllNumeric)]
         public static unsafe T* ptr<T>(in SpanBlock256<T> src)
             where T : unmanaged
-                => ptr(ref src.Head);
+                => ptr(ref src.First);
 
         /// <summary>
         /// Returns a generic pointer to the leading cell of an index-identified block of a 16-bit blocked container

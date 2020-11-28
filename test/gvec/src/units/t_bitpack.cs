@@ -68,7 +68,7 @@ namespace Z0
                 var dst = SpanBlocks.alloc<byte>(n512);
                 BitPack.unpack64(src, dst);
 
-                unpack_check(src,dst.Data);
+                unpack_check(src,dst.Storage);
 
                 var rebound = BitPack.pack(dst,n8);
                 Claim.eq(src,rebound);
@@ -169,7 +169,7 @@ namespace Z0
             for(var i=0; i<count; i++)
                 Claim.eq((byte)gbits.testbit32(src, (byte)i), y[i]);
 
-            Claim.eq(BitString.load(y).TakeScalar<T>(), src);
+            Claim.eq(BitString.load(y.ToArray()).TakeScalar<T>(), src);
         }
     }
 }

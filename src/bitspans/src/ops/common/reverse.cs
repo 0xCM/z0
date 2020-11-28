@@ -24,6 +24,5 @@ namespace Z0
             src.Storage.Reverse();
             return ref src;
         }
-
     }
 }

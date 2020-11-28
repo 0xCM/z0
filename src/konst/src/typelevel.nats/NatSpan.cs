@@ -65,7 +65,7 @@ namespace Z0
         /// <summary>
         /// The leading storage cell
         /// </summary>
-        public ref T Head
+        public ref T First
         {
             [MethodImpl(Inline)]
             get => ref first(Data);
@@ -101,7 +101,7 @@ namespace Z0
         public ref T this[long index]
         {
             [MethodImpl(Inline)]
-            get => ref Unsafe.Add(ref Head, (int)index);
+            get => ref Unsafe.Add(ref First, (int)index);
         }
 
         /// <summary>
@@ -110,7 +110,7 @@ namespace Z0
         public ref T this[byte index]
         {
             [MethodImpl(Inline)]
-            get => ref Unsafe.Add(ref Head, (int)index);
+            get => ref Unsafe.Add(ref First, (int)index);
         }
 
         /// <summary>
@@ -119,7 +119,7 @@ namespace Z0
         public ref T this[ushort index]
         {
             [MethodImpl(Inline)]
-            get => ref Unsafe.Add(ref Head, (int)index);
+            get => ref Unsafe.Add(ref First, (int)index);
         }
 
         /// <summary>
@@ -128,7 +128,7 @@ namespace Z0
         public ref T this[uint index]
         {
             [MethodImpl(Inline)]
-            get => ref Unsafe.Add(ref Head, (int)index);
+            get => ref Unsafe.Add(ref First, (int)index);
         }
 
         /// <summary>
@@ -137,7 +137,7 @@ namespace Z0
         public ref T this[ulong index]
         {
             [MethodImpl(Inline)]
-            get => ref Unsafe.Add(ref Head, (int)index);
+            get => ref Unsafe.Add(ref First, (int)index);
         }
 
         /// <summary>
@@ -145,7 +145,7 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public ref S Cell<S>(ulong index)
-            => ref Unsafe.Add(ref @as<T,S>(Head), (int)index);
+            => ref Unsafe.Add(ref @as<T,S>(First), (int)index);
 
         [MethodImpl(Inline)]
         public Span<T>.Enumerator GetEnumerator()

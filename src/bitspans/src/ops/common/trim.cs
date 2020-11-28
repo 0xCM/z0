@@ -56,7 +56,7 @@ namespace Z0
         {
             var pos = msb(src);
             if(pos != 0 && pos != src.Length - 1)
-                return BitSpans.load(src.Data.Slice(0, pos + 1));
+                return BitSpans.load32(src.Data.Slice(0, pos + 1));
             else
                 return src;
         }

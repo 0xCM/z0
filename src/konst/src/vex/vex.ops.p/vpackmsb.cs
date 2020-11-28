@@ -10,24 +10,24 @@ namespace Z0
 
     using static Konst;
 
-    partial class BitPack
+    partial struct z
     {
         /// <summary>
-        /// Packs 16 1-bit values taken from the least significant bit of each source byte
+        /// Packs 16 1-bit values taken from the most significant bit of each source byte
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ushort packlsb<T>(Vector128<T> src, N8 mod)
+        public static ushort vpackmsb<T>(Vector128<T> src)
             where T : unmanaged
-                => vpack(src,0);
+                => z.vtakemask(src);
 
         /// <summary>
-        /// Packs 32 1-bit values taken from the least significant bit of each source byte
+        /// Packs 32 1-bit values taken from the most significant bit of each source byte
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static uint packlsb<T>(Vector256<T> src, N8 mod)
+        public static ulong vpackmsb<T>(Vector256<T> src)
             where T : unmanaged
-                => vpack(src,0);
+                => z.vtakemask(src);
     }
 }

@@ -55,7 +55,7 @@ namespace Z0
         public ref T Head
         {
             [MethodImpl(Inline)]
-            get => ref Data.Head;
+            get => ref Data.First;
         }
 
         /// <summary>

@@ -19,17 +19,17 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source stream</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static Deferred<bit> create<T>(IEnumerable<T> src)
+        public static IEnumerable<bit> create<T>(IEnumerable<T> src)
             where T : struct
-                => Collective.defer(from<T>(src.GetEnumerator()));
+                => create<T>(src.GetEnumerator());
 
         /// <summary>
         /// Transforms an primal enumerator into a bitstream
         /// </summary>
         /// <param name="src">The source stream</param>
         /// <typeparam name="T">The primal type</typeparam>
-        static IEnumerable<bit> from<T>(IEnumerator<T> src)
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static IEnumerable<bit> create<T>(IEnumerator<T> src)
             where T : struct
         {
             while(src.MoveNext())

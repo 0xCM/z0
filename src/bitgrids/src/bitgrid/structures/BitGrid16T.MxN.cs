@@ -39,7 +39,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         internal BitGrid16(SpanBlock16<T> src)
-            => this.Data = src.As<ushort>().Head;
+            => this.Data = src.As<ushort>().First;
 
         /// <summary>
         /// The exposed grid state

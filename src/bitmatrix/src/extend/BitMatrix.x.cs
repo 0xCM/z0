@@ -49,12 +49,12 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-
         {
-            Span<byte> bits = new byte[src.RowCount*src.ColCount];
+            var buffer = new byte[src.RowCount*src.ColCount];
+            Span<byte> bits = buffer;
             for(var i=0;i<src.RowCount; i++)
                 src[i].ToBitString().BitSeq.CopyTo(bits.Slice(i*src.ColCount));
-            return BitString.load(bits);
+            return BitString.load(buffer);
         }
 
         [MethodImpl(Inline)]

@@ -70,7 +70,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         internal SubGrid64(SpanBlock64<T> src)
-            => this.Data = src.As<ulong>().Head;
+            => this.Data = src.As<ulong>().First;
 
         /// <summary>
         /// The exposed grid state

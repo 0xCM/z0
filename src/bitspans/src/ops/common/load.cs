@@ -21,7 +21,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source bits</param>
         [MethodImpl(Inline), Op]
-        public static BitSpan32 load(Span<Bit32> src)
+        public static BitSpan32 load32(Span<Bit32> src)
             => new BitSpan32(src);
 
         /// <summary>
@@ -29,7 +29,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source array</param>
         [MethodImpl(Inline), Op]
-        public static BitSpan32 load(Bit32[] src)
+        public static BitSpan32 load32(Bit32[] src)
             => new BitSpan32(src);
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace Z0
         /// <param name="bits">The bit source</param>
         /// <param name="count">The number of bits to load</param>
         [MethodImpl(Inline), Op]
-        public static BitSpan32 load(ref Bit32 bits, int count)
+        public static BitSpan32 load32(ref Bit32 bits, int count)
             => new BitSpan32(cover(bits,count));
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace Z0
         /// </summary>
         /// <param name="packed">The packed data source</param>
         [Op]
-        internal static BitSpan32 load(ReadOnlySpan<byte> packed)
+        internal static BitSpan32 load32(ReadOnlySpan<byte> packed)
         {
             var srcbits = 8*packed.Length;
             var dstbits = 32*srcbits;
@@ -56,14 +56,14 @@ namespace Z0
             for(var block=0; block<blocks; block++)
                 BitPack.unpack(packed, dst, block);
 
-            return load(dst.As<Bit32>());
+            return load32(dst.As<Bit32>());
         }
 
         /// <summary>
         /// Creates a bitspan from an arbitrary number of packed bytes
         /// </summary>
         /// <param name="packed">The packed data source</param>
-        internal static BitSpan32 load(Span<byte> packed)
-            => load(packed.ReadOnly());
+        internal static BitSpan32 load32(Span<byte> packed)
+            => load32(packed.ReadOnly());
     }
 }

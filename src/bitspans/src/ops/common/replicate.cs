@@ -47,7 +47,7 @@ namespace Z0
             Span<Bit32> data = new Bit32[src.Length * count];
             for(var i=0; i<count; i++)
                 src.Data.CopyTo(data, i*src.Length);
-            return load(data);
+            return load32(data);
         }
     }
 }

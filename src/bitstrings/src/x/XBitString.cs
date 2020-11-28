@@ -41,32 +41,6 @@ namespace Z0
         }
 
         /// <summary>
-        /// Transforms an primal enumerator into a bitstream
-        /// </summary>
-        /// <param name="src">The source stream</param>
-        /// <typeparam name="T">The primal type</typeparam>
-        public static IEnumerable<Bit32> ToBitStream<T>(this IEnumerator<T> src)
-            where T : unmanaged
-        {
-            while(src.MoveNext())
-            {
-                var bs = BitString.scalar(src.Current);
-                for(var i = 0; i< 64; i++)
-                    yield return bs[i];
-            }
-        }
-
-        /// <summary>
-        /// Transforms an primal source stream into a bitstream
-        /// </summary>
-        /// <param name="src">The source stream</param>
-        /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline)]
-        public static IEnumerable<Bit32> ToBitStream<T>(this IEnumerable<T> src)
-            where T : unmanaged
-                => src.GetEnumerator().ToBitStream();
-
-        /// <summary>
         /// Converts the source value to a bitstring
         /// </summary>
         /// <param name="src">The source value</param>
@@ -178,7 +152,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitString ToBitString<T>(this SpanBlock64<T> src, int? maxbits = null)
             where T : unmanaged
-                => BitString.scalars(src.Data, maxbits ?? w64);
+                => BitString.scalars(src.Storage, maxbits ?? w64);
 
         /// <summary>
         /// Converts blocked content to a bitstring
@@ -187,7 +161,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitString ToBitString<T>(this SpanBlock128<T> src, int? maxbits = null)
             where T : unmanaged
-                => BitString.scalars(src.Data, maxbits ?? w128);
+                => BitString.scalars(src.Storage, maxbits ?? w128);
 
         /// <summary>
         /// Converts datablock content to a bitstring

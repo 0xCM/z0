@@ -39,7 +39,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         internal BitGrid32(SpanBlock32<T> src)
-            => this.Data = src.As<uint>().Head;
+            => this.Data = src.As<uint>().First;
 
         /// <summary>
         /// The exposed grid state

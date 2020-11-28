@@ -25,7 +25,7 @@ namespace Z0
             Span<Bit32> bits = new Bit32[len];
             for(var i=0; i<= lastix; i++)
                bits[lastix - i] = data[i] == Bit32.Zero ? Bit32.Off : Bit32.On;
-            return BitSpans.load(bits);
+            return BitSpans.load32(bits);
         }
 
         /// <summary>

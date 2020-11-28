@@ -22,7 +22,7 @@ namespace Z0
             Span<Bit32> dst = new Bit32[head.Length + tail.Length];
             head.Data.CopyTo(dst);
             tail.Data.CopyTo(dst, head.Length);
-            return BitSpans.load(dst);
+            return BitSpans.load32(dst);
         }
 
         /// <summary>

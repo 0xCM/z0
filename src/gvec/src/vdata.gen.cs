@@ -29,10 +29,10 @@ namespace Z0
         {
             var data = SpanBlocks.alloc<T>(n);
             var len = SpanBlocks.blocklength<T>(n);
-            ref var mem = ref data.Head;
+            ref var mem = ref data.First;
             for(var i=0; i<len; i++)
                 seek(mem, i) = gmath.even(i) ? a : b;
-            return vload(n, in data.Head);
+            return vload(n, in data.First);
         }
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace Z0
             var current = first;
             var data = SpanBlocks.alloc<T>(n);
             var len = SpanBlocks.blocklength<T>(n);
-            ref var mem = ref data.Head;
+            ref var mem = ref data.First;
             for(var i=0; i < len; i++)
             {
                 seek(mem, i) = current;
@@ -71,7 +71,7 @@ namespace Z0
             var current = first;
             var data = SpanBlocks.alloc<T>(n);
             var len = SpanBlocks.blocklength<T>(n);
-            ref var mem = ref data.Head;
+            ref var mem = ref data.First;
             for(var i=0; i < len; i++)
             {
                 seek(mem, i) = current;
@@ -94,7 +94,7 @@ namespace Z0
             var current = first;
             var data = SpanBlocks.alloc<T>(n);
             var len = SpanBlocks.blocklength<T>(n);
-            ref var mem = ref data.Head;
+            ref var mem = ref data.First;
             for(var i=0; i < len; i++)
             {
                 seek(mem, i) = current;
@@ -116,7 +116,7 @@ namespace Z0
             var current = first;
             var data = SpanBlocks.alloc<T>(n);
             var len = SpanBlocks.blocklength<T>(n);
-            ref var mem = ref data.Head;
+            ref var mem = ref data.First;
             for(var i=0; i < len; i++)
             {
                 seek(mem, i) = current;
@@ -132,14 +132,14 @@ namespace Z0
             var current = first;
             var data = SpanBlocks.alloc<T>(n);
             var len = SpanBlocks.blocklength<T>(n);
-            ref var mem = ref data.Head;
+            ref var mem = ref data.First;
             for(var i=0; i < len; i++)
             {
                 seek(mem, i) = current;
                 current = gmath.dec(current);
             }
 
-            return vload(n, in data.Swap(swaps).Head);
+            return vload(n, in data.Swap(swaps).First);
         }
 
         [Op, Closures(UnsignedInts)]
@@ -149,14 +149,14 @@ namespace Z0
             var current = first;
             var data = SpanBlocks.alloc<T>(n);
             var len = SpanBlocks.blocklength<T>(n);
-            ref var mem = ref data.Head;
+            ref var mem = ref data.First;
             for(var i=0; i < len; i++)
             {
                 seek(mem, i) = current;
                 current = gmath.dec(current);
             }
 
-            return vload(n, in data.Swap(swaps).Head);
+            return vload(n, in data.Swap(swaps).First);
         }
 
         /// <summary>
@@ -172,7 +172,7 @@ namespace Z0
             var current = first;
             var data = SpanBlocks.alloc<T>(n);
             var len = SpanBlocks.blocklength<T>(n);
-            ref var mem = ref data.Head;
+            ref var mem = ref data.First;
             for(var i=0; i<len; i++)
             {
                 seek(mem, i) = current;
@@ -194,7 +194,7 @@ namespace Z0
             var current = first;
             var data = SpanBlocks.alloc<T>(n);
             var len = SpanBlocks.blocklength<T>(n);
-            ref var mem = ref data.Head;
+            ref var mem = ref data.First;
             for(var i=0; i<len; i++)
             {
                 seek(mem, i) = current;
@@ -211,14 +211,14 @@ namespace Z0
             var current = first;
             var data = SpanBlocks.alloc<T>(n);
             var len = SpanBlocks.blocklength<T>(n);
-            ref var mem = ref data.Head;
+            ref var mem = ref data.First;
             for(var i=0; i<len; i++)
             {
                 seek(mem, i) = current;
                 current = gmath.inc(current);
             }
 
-            return vload(n, in data.Swap(swaps).Head);
+            return vload(n, in data.Swap(swaps).First);
         }
 
         [Op, Closures(UnsignedInts)]
@@ -228,14 +228,14 @@ namespace Z0
             var current = first;
             var data = SpanBlocks.alloc<T>(n);
             var len = SpanBlocks.blocklength<T>(n);
-            ref var mem = ref data.Head;
+            ref var mem = ref data.First;
             for(var i=0; i<len; i++)
             {
                 seek(mem, i) = current;
                 current = gmath.inc(current);
             }
 
-            return vload(n, in data.Swap(swaps).Head);
+            return vload(n, in data.Swap(swaps).First);
         }
 
 

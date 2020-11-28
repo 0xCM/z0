@@ -140,7 +140,7 @@ namespace Z0
                 source.StoreTo(target);
             }
 
-            var a0 = vgather(w, in A.Head, vparts(w,4*12, 4*24, 4*48, 4*64));
+            var a0 = vgather(w, in A.First, vparts(w,4*12, 4*24, 4*48, 4*64));
             Claim.veq(a0,pattern0);
 
             for(var block = 0; block < BlockCount; block++)
@@ -151,7 +151,7 @@ namespace Z0
                 var i3 = i2 + 1;
 
                 var indices = vparts(w,i0,i1,i2,i3);
-                var result = vgather(w, in A.Head, indices);
+                var result = vgather(w, in A.First, indices);
                 var expect = gmath.even(block) ? pattern0 : pattern1;
                 Claim.veq(result,expect);
             }
