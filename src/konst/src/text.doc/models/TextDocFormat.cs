@@ -8,30 +8,51 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-   
+
     public readonly struct TextDocFormat
-    {        
-        public static TextDocFormat Empty
-            => new TextDocFormat(EmptyString);
+    {
+        /// <summary>
+        /// Specifies leading content that identifies a non-semantic row division marker
+        /// </summary>
+        public string RowSeparator {get;}
 
-        public static TextDocFormat Structured 
-            => Define();
+        /// <summary>
+        /// Indicates whether the first line of the data is a header row
+        /// </summary>
+        public bool HasDataHeader {get;}
 
-        public static TextDocFormat Unstructured 
-            => Define(false, false);
+        /// <summary>
+        /// Specifes whether the file contains regular delimited contetn
+        /// </summary>
+        public bool IsDelimited {get;}
+
+        /// <summary>
+        /// The character used to delimit parts of a line, if delimited
+        /// </summary>
+        public char Delimiter {get;}
+
+        /// <summary>
+        /// If specified, indicates the character that begins a comment
+        /// </summary>
+        public char CommentPrefix {get;}
+
+        /// <summary>
+        /// If specified, defines a uniform column width
+        /// </summary>
+        public int? ColWidth {get;}
 
         [MethodImpl(Inline)]
-        public static TextDocFormat Define(bool HasHeader = true, bool delimited = true, 
+        public static TextDocFormat define(bool HasHeader = true, bool delimited = true,
             char Delimiter = Chars.Pipe, char CommentPrefix = Chars.Hash, int? ColWidth = null)
                 => new TextDocFormat(HasHeader, delimited, Delimiter, CommentPrefix,ColWidth);
-        
+
         [MethodImpl(Inline)]
-        TextDocFormat(string empty)
+        internal TextDocFormat(string empty)
             : this()
         {
             RowSeparator = EmptyString;
         }
-        
+
         [MethodImpl(Inline)]
         public TextDocFormat(bool header, bool delimited, char sep, char cp, int? colwidth)
         {
@@ -43,34 +64,13 @@ namespace Z0
             ColWidth = colwidth;
         }
 
-        /// <summary>
-        /// Specifies leading content that identifies a non-semantic row division marker
-        /// </summary>
-        public readonly string RowSeparator;
+        public static TextDocFormat Empty
+            => new TextDocFormat(EmptyString);
 
-        /// <summary>
-        /// Indicates whether the first line of the data is a header row
-        /// </summary>
-        public readonly bool HasDataHeader;
+        public static TextDocFormat Structured
+            => define();
 
-        /// <summary>
-        /// Specifes whether the file contains regular delimited contetn
-        /// </summary>
-        public readonly bool IsDelimited;
-
-        /// <summary>
-        /// The character used to delimit parts of a line, if delimited
-        /// </summary>
-        public readonly char Delimiter;
-
-        /// <summary>
-        /// If specified, indicates the character that begins a comment
-        /// </summary>
-        public readonly char CommentPrefix;
-
-        /// <summary>
-        /// If specified, defines a uniform column width
-        /// </summary>
-        public readonly int? ColWidth;
+        public static TextDocFormat Unstructured
+            => define(false, false);
     }
 }

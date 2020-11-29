@@ -13,15 +13,11 @@ namespace Z0
     partial struct Cmd
     {
         [Op]
-        public static CmdTypeInfo descriptor(Type src)
+        public static CmdTypeInfo cmdtype(Type src)
             => new CmdTypeInfo(src, src.DeclaredInstanceFields());
 
-        public static CmdTypeInfo<T> descriptor<T>()
+        public static CmdTypeInfo<T> cmdtype<T>()
             where T : struct, ICmdSpec<T>
                 => default;
-
-        [Op]
-        public static CmdTypeInfo[] descriptors(IWfShell wf)
-            => typeof(Cmd).Assembly.Types().Tagged<CmdAttribute>().Select(descriptor);
     }
 }

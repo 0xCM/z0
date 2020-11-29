@@ -20,7 +20,7 @@ namespace Z0
 
         public T Value {get;}
 
-        public string Specifier {get;}
+        public string Qualifier {get;}
 
         [MethodImpl(Inline)]
         public CmdArg(string prefix, string name, T value)
@@ -28,7 +28,7 @@ namespace Z0
             Name = name;
             Value = value;
             Prefix = prefix;
-            Specifier = EmptyString;
+            Qualifier = EmptyString;
         }
 
         [MethodImpl(Inline)]
@@ -37,7 +37,7 @@ namespace Z0
             Name = key;
             Value = value;
             Prefix = EmptyString;
-            Specifier = EmptyString;
+            Qualifier = EmptyString;
         }
 
         [MethodImpl(Inline)]
@@ -46,12 +46,12 @@ namespace Z0
             Name = name;
             Value = value;
             Prefix = prefix;
-            Specifier = specifier;
+            Qualifier = specifier;
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => api.format(this);
+            => CmdArgs.format(this);
 
         public override string ToString()
             => Format();

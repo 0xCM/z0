@@ -4,15 +4,17 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-
     using System;
     using System.Runtime.CompilerServices;
 
-    public readonly struct ToolCmdBuilder<T>
-        where T : struct, IToolCmd<T>
+    partial struct CmdSpecs
     {
-
-
+        [Op]
+        public static ICmdSpec[] known()
+        {
+            var types = typeof(CmdSpecs).Assembly.Types().Tagged<CmdAttribute>();
+            var specs = types.Select(t => (ICmdSpec)Activator.CreateInstance(t));
+            return specs;
+        }
     }
-
 }

@@ -73,7 +73,7 @@ namespace Z0
                         continue;
 
                     // skip row separators
-                    if(line.LineText.StartsWith(rowsep))
+                    if(line.Content.StartsWith(rowsep))
                         continue;
 
                     if(fmt.HasDataHeader && docheader.IsNone() && rows.Count == 0)

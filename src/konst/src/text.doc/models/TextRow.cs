@@ -5,7 +5,7 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
 
     using static Konst;
 
@@ -13,8 +13,8 @@ namespace Z0
     /// Defines a row of text parttioned into a sequence of cells
     /// </summary>
     public readonly struct TextRow
-    {        
-        public readonly TextCell[] Cells;
+    {
+        readonly TextCell[] Cells;
 
         [MethodImpl(Inline)]
         public TextRow(params TextCell[] cells)
@@ -37,8 +37,8 @@ namespace Z0
                 z.seek(dst,i) = Cells[i].Content;
             }
         }
-        
-        public string Text 
+
+        public string Text
             => text.concat(CellContent);
 
         public int CellCount
@@ -62,7 +62,7 @@ namespace Z0
         /// <param name="delimiter">The separator to apply to delimit the cell data in the line </param>
         public string Format(char? delimiter = null)
             => string.Join(ColSep(delimiter),  Cells.Select(x => x.Content));
-        
+
         public override string ToString()
             => Format();
     }

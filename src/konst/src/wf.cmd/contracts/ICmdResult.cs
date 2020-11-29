@@ -11,7 +11,7 @@ namespace Z0
     {
         CmdId Id {get;}
 
-        bit Succeeded {get;}
+        bool Succeeded {get;}
     }
 
     [Free]

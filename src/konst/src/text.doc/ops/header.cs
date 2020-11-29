@@ -23,19 +23,19 @@ namespace Z0
                 var parts = src.Split(spec);
                 var count = parts.Length;
                 var dst = z.list<string>();
-                
+
                 if(parts.Length != 0)
                 {
                     for(var i=0; i<count; i++)
                     {
                         var part = parts[i].Trim();
                         if(text.nonempty(part))
-                            dst.Add(part);                
+                            dst.Add(part);
                     }
                 }
-            
-            if(dst.Count != 0)
-                return new TextDocHeader(dst.ToArray());
+
+                if(dst.Count != 0)
+                    return new TextDocHeader(dst.ToArray());
             }
             catch(Exception e)
             {

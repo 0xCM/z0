@@ -10,7 +10,7 @@ namespace Z0
     using static z;
     using static Konst;
 
-    partial struct WfScripts
+    partial struct CmdScripts
     {
         /// <summary>
         /// Allocates a <see cref='CmdScript'/> of specified length

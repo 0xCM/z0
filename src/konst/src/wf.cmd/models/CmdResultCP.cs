@@ -16,7 +16,7 @@ namespace Z0
     {
         public C Cmd;
 
-        public bit Succeeded {get;}
+        public bool Succeeded {get;}
 
         public P Payload {get;}
 

@@ -6,14 +6,14 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
-    using System.Linq;
 
     using static Konst;
+    using static z;
 
-    public readonly struct TextDocs
+    partial struct Cmd
     {
-        
+        [Op]
+        public static CmdTypeInfo[] cmdtypes(IWfShell wf)
+            => typeof(Cmd).Assembly.Types().Tagged<CmdAttribute>().Select(cmdtype);
     }
-
 }

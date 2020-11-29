@@ -9,7 +9,7 @@ namespace Z0
 
     using static z;
     using static Konst;
-    using static WfScripts;
+    using static CmdScripts;
 
     public readonly struct CmdVarSymbol<T> : ICmdVarSymbol<T>
     {

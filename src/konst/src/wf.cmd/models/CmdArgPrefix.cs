@@ -10,8 +10,6 @@ namespace Z0
     using static Konst;
     using static z;
 
-    using api = Tooling;
-
     [DataType]
     public readonly struct CmdArgPrefix
     {
@@ -68,7 +66,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => Cmd.format(this);
+            => CmdArgs.format(this);
 
         public override string ToString()
             => Format();

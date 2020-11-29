@@ -9,6 +9,7 @@ namespace Z0.Lang
 
     using static Konst;
 
+
     /// <summary>
     /// Represents a boolean evaluation
     /// </summary>

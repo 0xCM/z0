@@ -5,14 +5,12 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Reflection;
 
     using static z;
     using static Konst;
     using static CmdPatterns;
 
-    partial struct WfScripts
+    partial struct CmdScripts
     {
         [Op]
         public static CmdScriptPattern tool(IFileDb db, ToolId tool, string root, string arg, string delimiter = null, string type = null)

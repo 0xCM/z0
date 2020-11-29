@@ -10,7 +10,7 @@ namespace Z0
 
     using static z;
     using static Konst;
-    using static WfScripts;
+    using static CmdScripts;
 
     public struct CmdScriptVars : ICmdVars<CmdScriptVars>
     {

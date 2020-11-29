@@ -14,7 +14,7 @@ namespace Z0
     {
         public CmdId CmdId {get;}
 
-        public bit Succeeded {get;}
+        public bool Succeeded {get;}
 
         public BinaryCode Payload {get;}
 

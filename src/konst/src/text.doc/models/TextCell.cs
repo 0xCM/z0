@@ -8,34 +8,34 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-        
+
     /// <summary>
     /// Defines a text segment in the context of a line in a file
     /// </summary>
     public readonly struct TextCell
-    {        
-        public readonly uint Row;
+    {
+        public uint Row {get;}
 
-        public readonly uint Col;
+        public uint Col {get;}
 
-        public readonly string Content;
+        public string Content {get;}
 
-        [MethodImpl(Inline)]
-        public static implicit operator string(TextCell src)
-            => src.Content;
-                
         [MethodImpl(Inline)]
         internal TextCell(uint row, uint col, string content)
         {
             Row = row;
             Col = col;
             Content = content;
-        }    
+        }
 
-        public char this[int index]    
+        public char this[int index]
         {
             [MethodImpl(Inline)]
             get => Content[index];
         }
+
+        [MethodImpl(Inline)]
+        public static implicit operator string(TextCell src)
+            => src.Content;
     }
 }

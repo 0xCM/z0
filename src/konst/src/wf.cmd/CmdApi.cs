@@ -33,10 +33,6 @@ namespace Z0
         public static CmdBuilder builder(IWfShell wf)
             => new CmdBuilder(wf);
 
-        [MethodImpl(Inline), Factory]
-        public CmdArgProtocol protocol(CmdArgPrefix prefix, AsciCharCode qualifier = AsciCharCode.Space)
-            => new CmdArgProtocol(prefix, qualifier);
-
 
         /// <summary>
         /// Creates an option without purpose

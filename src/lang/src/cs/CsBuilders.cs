@@ -10,7 +10,7 @@ namespace Z0.Lang.Cs
     using static ModelKinds;
     using static Konst;
 
-    using K =Microsoft.CodeAnalysis.OperationKind;
+    using K = Microsoft.CodeAnalysis.OperationKind;
 
     [ApiHost(ApiNames.CsBuilder)]
     public ref struct CsBuilders

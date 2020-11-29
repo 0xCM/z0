@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
     using static CmdVarTypes;
 
-    partial struct WfScripts
+    partial struct CmdScripts
     {
         [Op]
         public static void render(CmdScript src, ITextBuffer dst)

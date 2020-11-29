@@ -13,7 +13,7 @@ namespace Z0
 
         string Name {get;}
 
-        string Specifier {get;}
+        string Qualifier {get;}
 
         string Value {get;}
 
@@ -34,9 +34,7 @@ namespace Z0
     public interface ICmdArg<K,T> : ICmdArg<T>
         where K : unmanaged
     {
-        // new K Key {get;}
 
-        // string ICmdArg.Key
-        //     => Key.ToString();
+
     }
 }

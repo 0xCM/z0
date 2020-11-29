@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
 
     [ApiHost(ApiNames.TextEncoders, true)]
-    public unsafe readonly partial struct TextCoders
+    public unsafe readonly partial struct TextEncoders
     {
         [MethodImpl(Inline), Op]
         public static TextCoder service(Encoding src)

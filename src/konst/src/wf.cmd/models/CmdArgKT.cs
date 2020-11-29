@@ -28,7 +28,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => api.format(this);
+            => CmdArgs.format(this);
 
         public override string ToString()
             => Format();

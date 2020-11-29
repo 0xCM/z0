@@ -23,15 +23,15 @@ namespace Z0
 
         public static CmdResult fail<T>(T spec, string message)
             where T : ICmdSpec
-                => new CmdResult(spec.Id, false, TextCoders.utf8().GetBytes(message));
+                => new CmdResult(spec.Id, false, TextEncoders.utf8().GetBytes(message));
 
         [Op]
         public static CmdResult fail(CmdId id, string message)
-            => new CmdResult(id, false, TextCoders.utf8().GetBytes(message));
+            => new CmdResult(id, false, TextEncoders.utf8().GetBytes(message));
 
         [Op]
         public static CmdResult fail(CmdId cmd, Exception e)
-            => new CmdResult(cmd, false, TextCoders.utf8().GetBytes(e?.ToString() ?? EmptyString));
+            => new CmdResult(cmd, false, TextEncoders.utf8().GetBytes(e?.ToString() ?? EmptyString));
 
         [MethodImpl(Inline), Op]
         public static CmdResult fail(CmdId id, params byte[] data)

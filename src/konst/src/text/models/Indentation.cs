@@ -16,12 +16,14 @@ namespace Z0
 
         byte _Current;
 
+        [MethodImpl(Inline)]
         public Indentation(byte current, byte scale)
         {
             _Current = current;
             Scale = scale;
         }
 
+        [MethodImpl(Inline)]
         public Indentation Advance(byte levels)
         {
             _Current = (byte)(_Current + (byte)(levels*Scale));

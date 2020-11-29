@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using static Konst;
 
     public interface ITextDocParser<T> : ITextParser<T>
     {

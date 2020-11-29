@@ -51,7 +51,7 @@ namespace Z0
 
        [MethodImpl(Inline)]
         public string Format()
-            => api.format(this);
+            => CmdScripts.format(this);
 
         public override string ToString()
             => Format();

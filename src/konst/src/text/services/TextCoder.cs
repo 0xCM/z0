@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    using api = TextCoders;
+    using api = TextEncoders;
 
     public readonly unsafe struct TextCoder : ITextCoder<TextCoder>
     {

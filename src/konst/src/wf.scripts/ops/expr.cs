@@ -10,7 +10,7 @@ namespace Z0
     using static z;
     using static Konst;
 
-    partial struct WfScripts
+    partial struct CmdScripts
     {
         [MethodImpl(Inline), Op]
         public static CmdScriptExpr expr(CmdPattern pattern)

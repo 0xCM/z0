@@ -14,7 +14,7 @@ namespace Z0
     [DataType]
     public readonly struct utf8 : ITextual, IEquatable<utf8>, IComparable<utf8>
     {
-        static TextCoder Encoder => TextCoders.utf8();
+        static TextCoder Encoder => TextEncoders.utf8();
 
         readonly byte[] Data;
 

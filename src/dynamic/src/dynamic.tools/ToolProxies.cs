@@ -32,7 +32,7 @@ namespace Z0
         public static CSharpCompilation compilation(ToolProxySpec config)
         {
             z.insist(config.Source.Exists, $"The file {config.Source}, it must exist");
-            var refs = CsLang.pe(typeof(object),typeof(Enumerable),typeof(ProcessStartInfo));
+            var refs = CsLang.pe(typeof(object), typeof(Enumerable), typeof(ProcessStartInfo));
             var dst = FS.create(config.OutDir) + FS.file(config.Name, ArchiveFileKinds.Exe);
             var code = new ToolProxyCode(dst);
             return CsLang.compilation(config.Name, refs, CsLang.parse(code.Generate()));

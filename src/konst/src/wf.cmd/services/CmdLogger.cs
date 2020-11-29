@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.IO;
     using System.Runtime.CompilerServices;
-    using System.Text;
 
     using static Konst;
     using static Render;

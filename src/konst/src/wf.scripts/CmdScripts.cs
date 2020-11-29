@@ -12,7 +12,7 @@ namespace Z0
     using static Konst;
 
     [ApiHost(ApiNames.Scripts, true)]
-    public readonly partial struct WfScripts
+    public readonly partial struct CmdScripts
     {
         const NumericKind Closure = UnsignedInts;
 

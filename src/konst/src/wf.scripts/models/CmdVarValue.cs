@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static WfScripts;
+    using static CmdScripts;
 
     public readonly struct CmdVarValue : ICmdVarValue<string>
     {

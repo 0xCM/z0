@@ -40,7 +40,7 @@ namespace Z0
         }
 
         public string Format()
-            => api.format(this);
+            => CmdArgs.format(this);
 
         public override string ToString()
             => Format();

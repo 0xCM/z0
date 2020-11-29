@@ -5,34 +5,19 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
 
     using static Konst;
     using static z;
 
-    partial struct Cmd
+    partial struct CmdSpecs
     {
         [Op]
-        public static bool lookup(CmdArgIndex src, string name, out CmdArg dst)
-        {
-            for(var i=0; i<src.Count; i++)
-            {
-                ref readonly var arg = ref src[i];
-                if(text.equals(arg.Name, name))
-                {
-                    dst=arg;
-                    return true;
-                }
-            }
-            dst = CmdArg.Empty;
-            return false;
-        }
-
-        [Op]
-        public static ParseResult<CmdArg> arg(string src, char specifier = ' ')
+        static ParseResult<CmdArg> arg(string src, char qualifier = ' ')
         {
             try
             {
-                var i = src.IndexOf(specifier);
+                var i = src.IndexOf(qualifier);
                 if(i == NotFound)
                     return parsed(src, new CmdArg(src));
                 else
@@ -45,7 +30,7 @@ namespace Z0
         }
 
         [Op]
-        public static ParseResult<CmdSpec> parse(string src, string delimiter = EmptyString, char specifier = ' ')
+        public static ParseResult<CmdSpec> parse(string src, string delimiter = EmptyString, char qualifier = ' ')
         {
             var fail = unparsed<CmdSpec>(src);
             var parts = @readonly(text.split(src, delimiter));
@@ -60,7 +45,7 @@ namespace Z0
                     ref readonly var next = ref skip(parts,i);
                     if(!text.blank(next))
                     {
-                        var option = arg(next, specifier);
+                        var option = arg(next, qualifier);
                         if(option)
                             options.Add(option.Value);
                         else

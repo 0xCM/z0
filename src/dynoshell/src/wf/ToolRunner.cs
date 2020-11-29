@@ -217,7 +217,7 @@ namespace Z0
 
         void ShowCmdModels()
         {
-            var models = @readonly(Cmd.descriptors(Wf));
+            var models = @readonly(Cmd.cmdtypes(Wf));
             var buffer = Buffers.text();
             for(var i=0; i<models.Length; i++)
             {
@@ -238,11 +238,11 @@ namespace Z0
 
         void ShowOptions()
         {
-            var result = Cmd.parse(CmdCases.Case0);
+            var result = CmdSpecs.parse(CmdCases.Case0);
             if(result.Succeeded)
             {
                 var value = result.Value;
-                var msg = string.Format("cmd:{0} | options:{1}", value.CmdId, Cmd.format(value.Args));
+                var msg = string.Format("cmd:{0} | options:{1}", value.CmdId, CmdArgs.format(value.Args));
                 Wf.Status(msg);
 
             }
@@ -268,7 +268,7 @@ namespace Z0
 
         public void Run()
         {
-            var models = @readonly(Cmd.descriptors(Wf));
+            var models = @readonly(Cmd.cmdtypes(Wf));
             var count = models.Length;
             for(var i=0; i<count; i++)
             {

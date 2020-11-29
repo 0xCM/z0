@@ -18,7 +18,7 @@ namespace Z0
 
         public string Value {get;}
 
-        public string Specifier {get;}
+        public string Qualifier {get;}
 
         [MethodImpl(Inline)]
         public CmdArg(string prefix, string name, string value)
@@ -26,7 +26,7 @@ namespace Z0
             Name = name;
             Value = value;
             Prefix = prefix;
-            Specifier = EmptyString;
+            Qualifier = EmptyString;
         }
 
         [MethodImpl(Inline)]
@@ -35,7 +35,7 @@ namespace Z0
             Name = name;
             Value = value;
             Prefix = prefix;
-            Specifier = specifier;
+            Qualifier = specifier;
         }
 
         [MethodImpl(Inline)]
@@ -44,7 +44,7 @@ namespace Z0
             Name = name;
             Value = value;
             Prefix = EmptyString;
-            Specifier = EmptyString;
+            Qualifier = EmptyString;
         }
 
         [MethodImpl(Inline)]
@@ -53,7 +53,7 @@ namespace Z0
             Name = EmptyString;
             Value = value;
             Prefix = EmptyString;
-            Specifier = EmptyString;
+            Qualifier = EmptyString;
         }
 
         public bool IsEmpty

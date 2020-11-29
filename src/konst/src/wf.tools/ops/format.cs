@@ -5,11 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Reflection;
-
-    using static Konst;
-    using static z;
 
     partial struct Tooling
     {
@@ -19,7 +14,7 @@ namespace Z0
 
         [Formatter]
         public static string format(ToolArg src, CmdArgPrefix delimiter, char specifier)
-            => string.Format("{0}{1}{2}{3}", Cmd.format(delimiter), CmdOptions.format(src.Option), specifier, src.Value);
+            => string.Format("{0}{1}{2}{3}", CmdArgs.format(delimiter), CmdOptions.format(src.Option), specifier, src.Value);
 
         public static string format<K,V>(ToolArg<K,V> src, char specifier)
             where K : unmanaged

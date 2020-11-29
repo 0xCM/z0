@@ -11,7 +11,7 @@ namespace Z0
     using static z;
     using static Konst;
 
-    partial struct WfScripts
+    partial struct CmdScripts
     {
         [Op]
         public static ref CmdScriptPattern rules(IFileDb db, ref CmdScriptPattern data)

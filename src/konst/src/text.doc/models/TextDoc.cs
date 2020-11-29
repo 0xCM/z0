@@ -10,16 +10,16 @@ namespace Z0
     using System.Linq;
 
     using static Konst;
-    
-    public readonly struct TextDoc  : IConstIndex<TextRow>
+
+    public readonly struct TextDoc : IConstIndex<TextRow>
     {
-        public readonly TextRow[] RowData;        
+        public readonly TextRow[] RowData;
 
         public TextDocFormat Format {get;}
 
         public Option<TextDocHeader> Header {get;}
-        
-        public uint TotalLineCount {get;}
+
+        public uint LineCount {get;}
 
         [MethodImpl(Inline)]
         public TextDoc(TextDocFormat format, Option<TextDocHeader> header, uint count, params TextRow[] rows)
@@ -27,7 +27,7 @@ namespace Z0
             RowData = rows;
             Header = header;
             Format = format;
-            TotalLineCount = count;
+            LineCount = count;
         }
 
         public ReadOnlySpan<TextRow> Rows
@@ -35,7 +35,7 @@ namespace Z0
             [MethodImpl(Inline)]
             get => RowData;
         }
-        
+
         public string Content
         {
             [MethodImpl(Inline)]
@@ -52,13 +52,13 @@ namespace Z0
             }
             return Option.none<TextRow>();
         }
-        
+
         public ref readonly TextRow this[int index]
         {
             [MethodImpl(Inline)]
             get => ref Rows[index];
         }
-        
+
         public int RowCount
         {
             [MethodImpl(Inline)]
@@ -93,7 +93,7 @@ namespace Z0
             }
         }
 
-        public static TextDoc Empty 
-            => new TextDoc(TextDocFormat.Empty, default, 0, Array.Empty<TextRow>());        
+        public static TextDoc Empty
+            => new TextDoc(TextDocFormat.Empty, default, 0, Array.Empty<TextRow>());
     }
 }
