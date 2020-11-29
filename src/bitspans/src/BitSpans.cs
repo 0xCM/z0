@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-
     [ApiHost("api")]
     public partial class BitSpans
     {

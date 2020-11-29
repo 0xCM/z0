@@ -74,7 +74,7 @@ namespace Z0
             => recover<byte,uint7>(W7);
 
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<octet> bits(W8 w)
-             => recover<byte,octet>(W8);
+        public static ReadOnlySpan<uint8T> bits(W8 w)
+             => recover<byte,uint8T>(W8);
     }
 }

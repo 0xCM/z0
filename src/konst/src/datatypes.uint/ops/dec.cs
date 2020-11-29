@@ -24,7 +24,7 @@ namespace Z0
             => !x.IsMin ? new uint7(Bytes.sub(x.data, 1), false) : Z0.uint7.Max;
 
         [MethodImpl(Inline), Op]
-        public static octet dec(octet x)
-            => !x.IsMin ? new octet(Bytes.sub(x.data, 1)) : Z0.octet.Max;
+        public static uint8T dec(uint8T x)
+            => !x.IsMin ? new uint8T(Bytes.sub(x.data, 1)) : Z0.uint8T.Max;
     }
 }

@@ -35,7 +35,7 @@ namespace Z0
             => !x.IsMax ? new uint7(z.add(x.data, 1), false) : Q.uint7.Min;
 
         [MethodImpl(Inline), Op]
-        public static octet inc(octet x)
-            => !x.IsMax ? new octet(z.add(x.data, 1)) : Q.octet.Min;
+        public static uint8T inc(uint8T x)
+            => !x.IsMax ? new uint8T(z.add(x.data, 1)) : Q.uint8T.Min;
     }
 }

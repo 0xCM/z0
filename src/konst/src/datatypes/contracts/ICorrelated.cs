@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static z;
-
     public interface ICorrelated
     {
         CorrelationToken Ct

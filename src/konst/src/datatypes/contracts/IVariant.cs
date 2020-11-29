@@ -23,34 +23,9 @@ namespace Z0
 
     [Free]
     public interface IVariant<V> : IVariant, IDataType<V>
-        where V : unmanaged
+        where V : unmanaged, IVariant<V>
     {
-
-    }
-
-    [Free]
-    public interface ISegmentedVariant<V>  : IVariant, IEquatable<V>
-        where V : unmanaged, ISegmentedVariant<V>
-    {
-
-        /// <summary>
-        /// If covering scalar data, the cell count will always be 1; when blocked or vector data
-        /// is enclosed the cell count will vary based on the specific type
-        /// </summary>
-        int CellCount
-            => 1;
-
-        /// <summary>
-        /// If covering scalar data, will specify the width of the scalar type; otherwise,
-        /// it will specify the width of a vector or block cell
-        /// </summary>
-        int CellWidth
-            => DataWidth;
-
-        /// <summary>
-        /// For scalar data this bit will always be off; otherwise, it will be on
-        /// </summary>
-        bool Segmented
-            => CellWidth < DataWidth;
+        V IDataType<V>.Content
+            => (V)this;
     }
 }

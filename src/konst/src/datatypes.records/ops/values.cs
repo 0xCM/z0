@@ -8,8 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     partial struct Records
     {
@@ -48,7 +48,7 @@ namespace Z0
             where S : struct
         {
             var fields = z.@readonly(typeof(S).DeclaredInstanceFields());
-            var buffer = z.alloc<FieldValue<S>>(fields.Length);
+            var buffer = sys.alloc<FieldValue<S>>(fields.Length);
             var dst = span(buffer);
             ref var target = ref first(dst);
             var tRef = __makeref(src);
@@ -68,7 +68,7 @@ namespace Z0
             var count = fields.Length;
             var fv = fields.View;
 
-            var buffer = alloc<RecordFieldValue>(fields.Count);
+            var buffer = sys.alloc<RecordFieldValue>(fields.Count);
             var dst = span(buffer);
             for(ushort i=0; i<fields.Count; i++)
                 seek(dst,i) = (i, skip(fv, i).Definition.GetValueDirect(tr));
@@ -79,7 +79,7 @@ namespace Z0
         [Op]
         public static RecordFieldValues values(object src, RecordFields fields)
         {
-            var buffer = alloc<RecordFieldValue>(fields.Length);
+            var buffer = sys.alloc<RecordFieldValue>(fields.Length);
             var dst = span(buffer);
             var view = fields.View;
             var count = fields.Length;

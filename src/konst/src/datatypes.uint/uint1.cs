@@ -48,7 +48,7 @@ namespace Z0
         public static N N => default;
 
         [MethodImpl(Inline)]
-        internal uint1(octet src)
+        internal uint1(uint8T src)
             => data = (byte)(src & MaxLiteral);
 
         [MethodImpl(Inline)]
@@ -97,7 +97,7 @@ namespace Z0
             get => (K) data;
         }
 
-        public T Value
+        public T Content
         {
             [MethodImpl(Inline)]
             get => data;
@@ -181,11 +181,11 @@ namespace Z0
             => new uint6(src.data);
 
         [MethodImpl(Inline)]
-        public static implicit operator octet(U src)
-            => new octet(src.data);
+        public static implicit operator uint8T(U src)
+            => new uint8T(src.data);
 
         [MethodImpl(Inline)]
-        public static implicit operator U(octet src)
+        public static implicit operator U(uint8T src)
             => new U(src);
 
         [MethodImpl(Inline)]

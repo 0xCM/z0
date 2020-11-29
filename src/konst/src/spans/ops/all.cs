@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <param name="f">The predicate</param>
         /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline), Closures(UnsignedInts), Op]
+        [MethodImpl(Inline), Closures(Closure), Op]
         public static bool all<T>(ReadOnlySpan<T> src, Func<T,bool> f)
              where T : unmanaged
         {

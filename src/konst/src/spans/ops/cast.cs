@@ -10,13 +10,13 @@ namespace Z0
     using static System.Runtime.InteropServices.MemoryMarshal;
 
     using static Konst;
-    using static z;
+    using static memory;
 
     partial class Spans
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ReadOnlySpan<T> cast<T>(ReadOnlySpan<byte> src, int offset, int length)
             where T : unmanaged
-                => Cast<byte,T>(src.Slice(offset, (int)(length * size<T>())));
+                => Cast<byte,T>(slice(src,offset, (int)(length * size<T>())));
     }
 }

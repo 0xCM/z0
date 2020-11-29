@@ -88,11 +88,11 @@ namespace Z0
 
 
         [MethodImpl(Inline)]
-        public static implicit operator octet(U src)
+        public static implicit operator uint8T(U src)
             => src.data;
 
         [MethodImpl(Inline)]
-        public static implicit operator U(octet src)
+        public static implicit operator U(uint8T src)
             => new U(src);
 
         [MethodImpl(Inline)]
@@ -256,7 +256,7 @@ namespace Z0
             => @bool(x.data >= y.data);
 
         [MethodImpl(Inline)]
-        internal uint7(octet src)
+        internal uint7(uint8T src)
             => data = (byte)(src & MaxLiteral);
 
         [MethodImpl(Inline)]
@@ -318,7 +318,7 @@ namespace Z0
             get => (K) data;
         }
 
-        public T Value
+        public T Content
         {
             [MethodImpl(Inline)]
             get => data;

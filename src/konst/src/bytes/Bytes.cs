@@ -16,6 +16,44 @@ namespace Z0
     [ApiHost]
     public readonly partial struct Bytes
     {
+         /// <summary>
+        /// Joins three operands via <see cref='BitLogicKinds.Or'/>
+        /// </summary>
+        /// <param name="a">The first operand</param>
+        /// <param name="b">The second operand</param>
+        /// <param name="c">The third operand</param>
+        [MethodImpl(Inline), Or]
+        public static byte or(byte a, byte b, byte c)
+            => (byte)(a | b | c);
+
+        /// <summary>
+        /// Joins four operands via the <see cref='BitLogicKinds.Or'/> operator
+        /// </summary>
+        /// <param name="a">The first operand</param>
+        /// <param name="b">The second operand</param>
+        /// <param name="c">The third operand</param>
+        /// <param name="d">The fourth operand</param>
+        [MethodImpl(Inline), Or]
+        public static byte or(byte a, byte b, byte c, byte d)
+            => (byte)(a | b | c | d);
+
+        [MethodImpl(Inline), Or]
+        public static byte or(byte a, byte b, byte c, byte d, byte e)
+
+            => (byte)(a | b | c | d | e);
+
+        [MethodImpl(Inline), Or]
+        public static void or(in byte A, in byte B, ref byte Z)
+            => store8(or(read8(A), read8(B)), ref Z);
+
+        [MethodImpl(Inline), Xor]
+        public static byte xor(byte a, byte b)
+            => (byte)(a ^ b);
+
+        [MethodImpl(Inline), Xor]
+        public static void xor(in byte A, in byte B, ref byte Z)
+            => store8(xor(read8(A), read8(B)), ref Z);
+
         [MethodImpl(Inline), Not]
         public static byte not(byte src)
             => (byte)(~ src);
@@ -154,7 +192,6 @@ namespace Z0
         public static void select(in byte A, in byte B, in byte C, ref byte Z)
             => store8(select(read8(A), read8(B), read8(C)), ref Z);
 
-
         [MethodImpl(Inline), Op]
         public static uint join(byte a, byte b, byte c, byte d)
         {
@@ -247,6 +284,5 @@ namespace Z0
             0xe0, 0xe1, 0xe2, 0xe3, 0xe4, 0xe5, 0xe6, 0xe7, 0xe8, 0xe9, 0xea, 0xeb, 0xec, 0xed, 0xee, 0xef,
             0xf0, 0xf1, 0xf2, 0xf3, 0xf4, 0xf5, 0xf6, 0xf7, 0xf8, 0xf9, 0xfa, 0xff, 0xfc, 0xfd, 0xfe, 0xff,
         };
-
     }
 }

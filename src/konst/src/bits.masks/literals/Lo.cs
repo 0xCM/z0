@@ -38,7 +38,6 @@ namespace Z0
             /// </summary>
             [BitMask ("[11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111111]")]
             public const ulong Lo64u = ulong.MaxValue;
-
         }
     }
 }

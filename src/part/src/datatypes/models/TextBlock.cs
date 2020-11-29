@@ -30,7 +30,7 @@ namespace Z0
             get => Text;
         }
 
-        public BitSize PhysicalWidth
+        public BitSize StorageWidth
         {
             [MethodImpl(Inline)]
             get => (Text.Length * 2)*8;

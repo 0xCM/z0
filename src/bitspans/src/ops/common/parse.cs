@@ -17,31 +17,34 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         [Op]
-        public static BitSpan32 parse32(string src)
+        public static BitSpan parse(string src)
         {
-            var data = BitString.normalize(src);
-            var len = data.Length;
-            var lastix = len - 1;
-            Span<Bit32> bits = new Bit32[len];
-            for(var i=0; i<= lastix; i++)
-               bits[lastix - i] = data[i] == Bit32.Zero ? Bit32.Off : Bit32.On;
-            return BitSpans.load32(bits);
+            var input = span(src);
+            var count = input.Length;
+            var dst = load(span<bit>(count));
+            parse(src, dst);
+            return dst;
         }
 
         /// <summary>
         /// Creates a bitspan from text encoding of a binary number
         /// </summary>
         /// <param name="src">The bit source</param>
-        [Op]
-        public static BitSpan parse(string src)
+        [MethodImpl(Inline), Op]
+        public static void parse(string src, BitSpan dst)
         {
-            var data = @readonly(BitString.normalize(src));
-            var len = data.Length;
-            var lastix = len - 1;
-            Span<bit> bits = new bit[len];
-            for(var i=0; i<= lastix; i++)
-               seek(bits,lastix - i) = skip(data,i) == bit.Zero ? bit.Off : bit.On;
-            return load(bits);
+            ref var target = ref dst.First;
+            var input = span(src);
+            var count = min(input.Length, dst.BitCount);
+            var lastix = count - 1;
+            for(var i=0; i<=lastix; i++)
+            {
+                ref readonly var c = ref skip(input,i);
+                if(c == bit.Zero)
+                    seek(target, lastix - i) = bit.Off;
+                else if(c == bit.One)
+                    seek(target, lastix - i) = bit.On;
+            }
         }
     }
 }

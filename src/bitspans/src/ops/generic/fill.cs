@@ -28,13 +28,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return ref SB.fill(uint8(src),dst);
+                return ref SB.fill32(uint8(src),dst);
             else if(typeof(T) == typeof(ushort))
-                return ref SB.fill(uint16(src),dst);
+                return ref SB.fill32(uint16(src),dst);
             else if(typeof(T) == typeof(uint))
-                return ref SB.fill(uint32(src),dst);
+                return ref SB.fill32(uint32(src),dst);
             else if(typeof(T) == typeof(ulong))
-                return ref SB.fill(uint64(src),dst);
+                return ref SB.fill32(uint64(src),dst);
             else
                 return ref fill_i(src, dst);
         }
@@ -44,13 +44,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return ref SB.fill(Cast.to<T,byte>(src),dst);
+                return ref SB.fill32(Cast.to<T,byte>(src),dst);
             else if(typeof(T) == typeof(short))
-                return ref SB.fill(Cast.to<T,ushort>(src),dst);
+                return ref SB.fill32(Cast.to<T,ushort>(src),dst);
             else if(typeof(T) == typeof(int))
-                return ref SB.fill(Cast.to<T,uint>(src),dst);
+                return ref SB.fill32(Cast.to<T,uint>(src),dst);
             else if(typeof(T) == typeof(long))
-                return ref SB.fill(Cast.to<T,ulong>(src),dst);
+                return ref SB.fill32(Cast.to<T,ulong>(src),dst);
             else
                 throw Unsupported.define<T>();
         }

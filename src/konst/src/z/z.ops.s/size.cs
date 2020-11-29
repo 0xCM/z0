@@ -12,21 +12,21 @@ namespace Z0
 
     partial struct z
     {
-        [MethodImpl(Inline), Op]
-        public static byte scale<T>()
-            => (byte)size<T>();
-
         [MethodImpl(Inline)]
         public static uint size<T>(T t = default)
-            => (uint)SizeOf<T>();
+            => memory.size<T>();
+
+        [MethodImpl(Inline)]
+        public static byte scale<T>()
+            => memory.scale<T>();
 
         [MethodImpl(Inline)]
         public static uint size<T>(uint count)
-            => (uint)SizeOf<T>() * count;
+            => memory.size<T>(count);
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static uint size(string src)
-            => (uint)src.Length*scale<char>();
+            => memory.size(src);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static byte size<T>(W8 w)

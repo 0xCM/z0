@@ -29,7 +29,7 @@ namespace Z0
         public static ulong min<K1,K2>(K1 k1 = default, K2 k2 = default)
             where K1 : unmanaged, ITypeNat
             where K2 : unmanaged, ITypeNat
-                => z.min(value(k1), value(k2));
+                => zfunc.min(value(k1), value(k2));
 
         /// <summary>
         /// Computes k := k1 + k2
@@ -38,12 +38,16 @@ namespace Z0
         public static ulong max<K1,K2>(K1 k1 = default, K2 k2 = default)
             where K1 : unmanaged, ITypeNat
             where K2 : unmanaged, ITypeNat
-                => z.max(value(k1), value(k2));
+                => zfunc.max(value(k1), value(k2));
 
     }
 
     partial class NatCalc
     {
+        [MethodImpl(Inline)]
+        internal static ulong max(ulong a, ulong b)
+            => a > b ? a : b;
+
         /// <summary>
         /// Computes k := k1 + k2
         /// </summary>
@@ -60,7 +64,7 @@ namespace Z0
         public static ulong min<K1,K2>(K1 k1 = default, K2 k2 = default)
             where K1 : unmanaged, ITypeNat
             where K2 : unmanaged, ITypeNat
-                => z.min(value(k1), value(k2));
+                => zfunc.min(value(k1), value(k2));
 
         /// <summary>
         /// Computes k := k1 + k2
@@ -69,7 +73,7 @@ namespace Z0
         public static ulong max<K1,K2>(K1 k1 = default, K2 k2 = default)
             where K1 : unmanaged, ITypeNat
             where K2 : unmanaged, ITypeNat
-                => z.max(value(k1), value(k2));
+                => zfunc.max(value(k1), value(k2));
 
     }
 }

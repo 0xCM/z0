@@ -12,6 +12,18 @@ namespace Z0
 
     partial struct memory
     {
+        // [MethodImpl(Inline)]
+        // public static uint size<T>(T t = default)
+        //     => (uint)SizeOf<T>();
+
+        // [MethodImpl(Inline), Op]
+        // public static byte scale<T>()
+        //     => (byte)size<T>();
+
+        // [MethodImpl(Inline)]
+        // public static uint size<T>(uint count)
+        //     => (uint)SizeOf<T>() * count;
+
         /// <summary>
         /// Adds an offset to a reference
         /// </summary>

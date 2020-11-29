@@ -7,27 +7,63 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     partial class Spans
     {
+        /// <summary>
+        /// Deposits index-identified cells from a specified <see cref='ReadOnlySpan{T}'/> into as specified target <see cref='Span{T}'/>
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="indices">The index selection</param>
+        /// <param name="dst">The target span</param>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static void select<T>(ReadOnlySpan<T> src, ReadOnlySpan<byte> indices, Span<T> dst)
-            => select<byte,T>(src,indices,dst);
+            => select<byte,T>(src, indices, dst);
 
+        /// <summary>
+        /// Deposits index-identified cells from a specified <see cref='ReadOnlySpan{T}'/> into as specified target <see cref='Span{T}'/>
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="indices">The index selection</param>
+        /// <param name="dst">The target span</param>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static void select<T>(ReadOnlySpan<T> src, ReadOnlySpan<ushort> indices, Span<T> dst)
-            => select<ushort,T>(src,indices,dst);
+            => select<ushort,T>(src, indices, dst);
 
+        /// <summary>
+        /// Deposits index-identified cells from a specified <see cref='ReadOnlySpan{T}'/> into as specified target <see cref='Span{T}'/>
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="indices">The index selection</param>
+        /// <param name="dst">The target span</param>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static void select<T>(ReadOnlySpan<T> src, ReadOnlySpan<uint> indices, Span<T> dst)
-            => select<uint,T>(src,indices,dst);
+            => select<uint,T>(src, indices, dst);
 
+        /// <summary>
+        /// Deposits index-identified cells from a specified <see cref='ReadOnlySpan{T}'/> into as specified target <see cref='Span{T}'/>
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="indices">The index selection</param>
+        /// <param name="dst">The target span</param>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static void select<T>(ReadOnlySpan<T> src, ReadOnlySpan<ulong> indices, Span<T> dst)
-            => select<ulong,T>(src,indices,dst);
+            => select<ulong,T>(src, indices, dst);
 
+        /// <summary>
+        /// Deposits index-identified cells from a specified <see cref='ReadOnlySpan{T}'/> into as specified target <see cref='Span{T}'/>
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="indices">The index selection</param>
+        /// <param name="dst">The target span</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        /// <typeparam name="I">The index type</typeparam>
         [MethodImpl(Inline)]
         public static void select<I,T>(ReadOnlySpan<T> src, ReadOnlySpan<I> indices, Span<T> dst)
             where I : unmanaged

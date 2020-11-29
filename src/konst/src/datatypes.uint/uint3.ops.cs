@@ -31,8 +31,8 @@ namespace Z0
         /// <param name="c">Source bits 4-5</param>
         /// <param name="d">Source bits 6-7</param>
         [MethodImpl(Inline), Op]
-        public static octet join(uint3 a, uint3 b, uint2 c)
-            => (octet)a | ((octet)b << 3) | ((octet)c << 6);
+        public static uint8T join(uint3 a, uint3 b, uint2 c)
+            => (uint8T)a | ((uint8T)b << 3) | ((uint8T)c << 6);
 
         [MethodImpl(Inline), Op]
         public static U dec(U x)
@@ -288,7 +288,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="w">The target width</param>
         [MethodImpl(Inline), Op]
-        public static octet extend(U src, W8 w)
+        public static uint8T extend(U src, W8 w)
             => src;
     }
 }

@@ -19,7 +19,7 @@ namespace Z0
                 return input;
 
             var cIn = input.Length;
-            var src = @readonly(input);
+            var src = span(input);
             var actual = cIn < desired ? cIn : desired;
 
             Span<char> dst = stackalloc char[actual];

@@ -43,7 +43,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ReadOnlySpan<T> ToReadOnlySpan<T>(this IEnumerable<T> src)
-            => z.@readonly(src);
+            => z.span(src);
 
         /// <summary>
         /// Constructs a span from an array

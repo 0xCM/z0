@@ -10,21 +10,18 @@ namespace Z0
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface IDataType : ITextual
+    public interface IDataType : ISized, ITextual
     {
-        BitSize PhysicalWidth {get;}
 
-        BitSize EffectiveWidth
-            => PhysicalWidth;
     }
 
     [Free]
     public interface IDataType<T> : IDataType
         where T : struct
     {
-        T Content {get;}
+        T Content => (T)this;
 
-        BitSize IDataType.PhysicalWidth
+        BitSize ISized.StorageWidth
             => Unsafe.SizeOf<T>();
 
         string ITextual.Format()
@@ -33,8 +30,8 @@ namespace Z0
 
     [Free]
     public interface IDataType<H,T> : IDataType<T>
-        where T : struct
         where H : struct, IDataType<H,T>
+        where T : struct
     {
 
     }

@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The item type</typeparam>
         [Op, Closures(Closure)]
-        public static ISet<T> ToSet<T>(this Span<T> src)
+        public static HashSet<T> ToSet<T>(this Span<T> src)
             where T : unmanaged
                 => Spans.set(src.ReadOnly());
 
@@ -28,7 +28,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The item type</typeparam>
         [Op, Closures(Closure)]
-        public static ISet<T> ToSet<T>(this ReadOnlySpan<T> src)
+        public static HashSet<T> ToSet<T>(this ReadOnlySpan<T> src)
             where T : unmanaged
                 => Spans.set(src);
 
@@ -38,7 +38,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The item type</typeparam>
         [Op, Closures(Closure)]
-        public static ISet<T> ToSet<T>(this ReadOnlySpan<T> a, ReadOnlySpan<T> b)
+        public static HashSet<T> ToSet<T>(this ReadOnlySpan<T> a, ReadOnlySpan<T> b)
             where T : unmanaged
                 => Spans.set(a,b);
 
@@ -48,7 +48,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The item type</typeparam>
         [Op, Closures(Closure)]
-        public static ISet<T> ToSet<T>(this Span<T> src, ReadOnlySpan<T> b)
+        public static HashSet<T> ToSet<T>(this Span<T> src, ReadOnlySpan<T> b)
             where T : unmanaged
                 => src.ReadOnly().ToSet(b);
     }

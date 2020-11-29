@@ -9,18 +9,18 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct CharCells : IUnmanagedCells<char>
+    public readonly struct CharCells : IStorageCells<char>
     {
-        public readonly char[] Data;
+        public char[] Storage {get;}
 
         [MethodImpl(Inline)]
         public CharCells(char[] src)
-            => Data = src;
+            => Storage = src;
 
         public uint CellCount
         {
             [MethodImpl(Inline)]
-            get => (uint)Data.Length;
+            get => (uint)Storage.Length;
         }
 
         public ByteSize CellSize
@@ -29,15 +29,12 @@ namespace Z0
             get => 2;
         }
 
-        char[] IUnmanagedCells<char>.Storage
-            => Data;
-
         [MethodImpl(Inline)]
         public static implicit operator CharCells(char[] src)
-            => new UnmanagedCells<char>(src);
+            => new StorageCells<char>(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator CharCells(UnmanagedCells<char> src)
+        public static implicit operator CharCells(StorageCells<char> src)
             => new CharCells(src);
     }
 }

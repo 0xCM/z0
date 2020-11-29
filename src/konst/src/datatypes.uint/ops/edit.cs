@@ -57,15 +57,15 @@ namespace Z0
                 => ref @as<S,uint7>(src);
 
         /// <summary>
-        /// Reinterprets an input reference as a mutable <see cref='Z0.octet'/> reference cell
+        /// Reinterprets an input reference as a mutable <see cref='Z0.uint8T'/> reference cell
         /// </summary>
         /// <param name="src">The source reference</param>
         /// <param name="dst">The target width selector</param>
         /// <typeparam name="S">The source type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref octet cast<S>(in S src, W8 dst)
+        public static ref uint8T cast<S>(in S src, W8 dst)
             where S : unmanaged
-                => ref @as<S,octet>(src);
+                => ref @as<S,uint8T>(src);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref S edit<S>(in uint1 src)
@@ -98,8 +98,8 @@ namespace Z0
                 => ref @as<uint7,S>(src);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref S edit<S>(in octet src)
+        public static ref S edit<S>(in uint8T src)
             where S : unmanaged
-                => ref @as<octet,S>(src);
+                => ref @as<uint8T,S>(src);
     }
 }

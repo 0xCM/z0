@@ -4,13 +4,26 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface INumericLiteral<F> : ILiteral<F>
-        where F : struct, INumericLiteral<F>
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
+    /// <summary>
+    /// Characterizes a representation of a numeric literal
+    /// </summary>
+    /// <typeparam name="T">The representation type</typeparam>
+    [Free]
+    public interface INumericLiteral<T> : ILiteral<T>
+        where T : struct, INumericLiteral<T>
     {
     }
 
-    public interface INumericLiteral<F,T> : INumericLiteral<F>, ILiteral<F,T>
-        where F : struct, INumericLiteral<F,T>
+    /// <summary>
+    /// Characterizes a representation of a numeric literal
+    /// </summary>
+    /// <typeparam name="F">The representation type</typeparam>
+    /// <typeparam name="T">The represented type</typeparam>
+    [Free]
+    public interface INumericLiteral<H,T> : INumericLiteral<H>, ILiteral<H,T>
+        where H : struct, INumericLiteral<H,T>
         where T : unmanaged
     {
 

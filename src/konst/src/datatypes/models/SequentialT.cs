@@ -10,10 +10,25 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public struct Sequential<T> : ITextual
+    [DataType]
+    public struct Sequential<T> : IDataType<T>
         where T : unmanaged
     {
         public T Value;
+
+        [MethodImpl(Inline)]
+        public Sequential(T src)
+            => Value = src;
+
+        [MethodImpl(Inline)]
+        public string Format()
+            => Value.ToString();
+
+        public void Increment()
+        {
+            ref var x = ref @as<T,ulong>(Value);
+            x += 1;
+        }
 
         [MethodImpl(Inline)]
         public static Sequential<T> operator ++(Sequential<T> src)
@@ -29,19 +44,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator T(Sequential<T> src)
             => src.Value;
-
-        [MethodImpl(Inline)]
-        public Sequential(T src)
-            => Value = src;
-
-        [MethodImpl(Inline)]
-        public string Format()
-            => Value.ToString();
-
-        public void Increment()
-        {
-            ref var x = ref @as<T,ulong>(Value);
-            x += 1;
-        }
     }
 }

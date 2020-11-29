@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     partial class XSpan
     {
@@ -52,7 +52,7 @@ namespace Z0
         public static T[] MapArray<S,T>(this ReadOnlySpan<S> src, Func<S,T> f)
         {
             var buffer = new T[src.Length];
-            map(src,f,buffer);
+            z.map(src,f,buffer);
             return buffer;
        }
     }

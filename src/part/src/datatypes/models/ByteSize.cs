@@ -144,7 +144,6 @@ namespace Z0
         public static implicit operator ByteSize(IntPtr src)
             => new ByteSize((ulong)src);
 
-
         [MethodImpl(Inline)]
         public static implicit operator ByteSize(TypeWidth src)
             => new ByteSize((ulong)src/8);

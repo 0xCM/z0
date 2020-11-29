@@ -42,6 +42,12 @@ namespace Z0
             get => ref seek(Data,index);
         }
 
+        public ref bit First
+        {
+            [MethodImpl(Inline)]
+            get => ref first(Data);
+        }
+
         internal Span<bit> Storage
         {
             [MethodImpl(Inline)]

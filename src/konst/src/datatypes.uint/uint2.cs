@@ -111,7 +111,7 @@ namespace Z0
             => uint2(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator U(octet src)
+        public static implicit operator U(uint8T src)
             => new U(src);
 
         [MethodImpl(Inline)]
@@ -135,8 +135,8 @@ namespace Z0
             => new uint7(src.data);
 
         [MethodImpl(Inline)]
-        public static implicit operator octet(U src)
-            => new octet(src.data);
+        public static implicit operator uint8T(U src)
+            => new uint8T(src.data);
 
         [MethodImpl(Inline)]
         public static implicit operator U(K src)
@@ -319,7 +319,7 @@ namespace Z0
             => @bool(lhs.data >= rhs.data);
 
         [MethodImpl(Inline)]
-        internal uint2(octet src)
+        internal uint2(uint8T src)
             => data = (byte)(src & MaxLiteral);
 
         [MethodImpl(Inline)]
@@ -381,7 +381,7 @@ namespace Z0
             get => (K) data;
         }
 
-        public T Value
+        public T Content
         {
             [MethodImpl(Inline)]
             get => data;

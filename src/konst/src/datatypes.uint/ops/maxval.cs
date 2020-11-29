@@ -14,8 +14,8 @@ namespace Z0
     partial struct UI
     {
         [MethodImpl(Inline), Op]
-        public static octet maxval(W8 w)
-            => maxval<octet>();
+        public static uint8T maxval(W8 w)
+            => maxval<uint8T>();
 
         [MethodImpl(Inline), Op]
         public static uint24 maxval(W24 w)
@@ -57,8 +57,8 @@ namespace Z0
                 return cast<S>(Q.uint6.MaxLiteral);
             else if(typeof(S) == typeof(uint7))
                 return cast<S>(Q.uint7.MaxLiteral);
-            else if(typeof(S) == typeof(octet))
-                return cast<S>(Q.octet.MaxLiteral);
+            else if(typeof(S) == typeof(uint8T))
+                return cast<S>(Q.uint8T.MaxLiteral);
             else
                 return maxval<S>(z.w16);
         }

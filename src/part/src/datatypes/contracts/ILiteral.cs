@@ -7,7 +7,7 @@ namespace Z0
     using System;
 
     /// <summary>
-    /// Describes a literal value from a non-parametric perspective
+    /// Characterizes a representation of a compile-time literal
     /// </summary>
     public interface ILiteral : INullity, ITextual
     {
@@ -19,7 +19,7 @@ namespace Z0
         /// <summary>
         /// The literal data
         /// </summary>
-        object Data {get;}        
+        object Data {get;}
 
         /// <summary>
         /// The literal's text representation
@@ -29,43 +29,43 @@ namespace Z0
         bool MultiLiteral
              => false;
 
-        Type SystemType  
+        Type SystemType
             => Data.GetType();
 
-        TypeCode TypeCode 
+        TypeCode TypeCode
             => Type.GetTypeCode(SystemType);
 
-        bool IsEnum  
+        bool IsEnum
             => SystemType.IsEnum;
 
-        string ITextual.Format() 
+        string ITextual.Format()
             => Text;
 
-        bool IsAnonymous 
+        bool IsAnonymous
             => string.IsNullOrWhiteSpace(Name);
     }
 
     /// <summary>
-    /// Characterizes a reified literal description
+    /// Characterizes compile-time literal representation
     /// </summary>
-    public interface ILiteral<F> : ILiteral, INullary<F>, IEquatable<F> 
-        where F : struct, ILiteral<F>
+    public interface ILiteral<H> : ILiteral, INullary<H>, IEquatable<H>, IDataType<H>
+        where H : struct, ILiteral<H>
     {
-        
+
     }
 
     /// <summary>
-    /// Characterizes a reified T-parametric literal description
+    /// Characterizes compile-time literal representation
     /// </summary>
-    public interface ILiteral<F,T> : ILiteral<F> 
-        where F : struct, ILiteral<F,T>
+    public interface ILiteral<H,L> : ILiteral<H>
+        where H : struct, ILiteral<H,L>
     {
         /// <summary>
         /// The literal data
         /// </summary>
-        new T Data {get;}
+        new L Data {get;}
 
-        object ILiteral.Data 
+        object ILiteral.Data
             => Data;
     }
 }

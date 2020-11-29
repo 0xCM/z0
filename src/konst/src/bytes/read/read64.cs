@@ -54,7 +54,7 @@ namespace Z0
             => skip8(src,n);
 
         /// <summary>
-        /// Reads a source byte, identified by natural index
+        /// Reads an index-identified source byte
         /// </summary>
         /// <param name="src">The data source</param>
         /// <param name="n">The byte index selector</param>
@@ -63,7 +63,7 @@ namespace Z0
             => skip8(src,n);
 
         /// <summary>
-        /// Reads a source byte, identified by natural index
+        /// Reads an index-identified source byte
         /// </summary>
         /// <param name="src">The data source</param>
         /// <param name="n">The byte index selector</param>
@@ -72,7 +72,7 @@ namespace Z0
             => skip8(src,n);
 
         /// <summary>
-        /// Reads a source byte, identified by natural index
+        /// Reads an index-identified source byte
         /// </summary>
         /// <param name="src">The data source</param>
         /// <param name="n">The byte index selector</param>
@@ -81,7 +81,7 @@ namespace Z0
             => skip8(src,n);
 
         /// <summary>
-        /// Reads a source byte, identified by natural index
+        /// Reads an index-identified source byte
         /// </summary>
         /// <param name="src">The data source</param>
         /// <param name="n">The byte index selector</param>
@@ -90,7 +90,7 @@ namespace Z0
             => skip8(src,n);
 
         /// <summary>
-        /// Reads a source byte, identified by natural index
+        /// Reads an index-identified source byte
         /// </summary>
         /// <param name="src">The data source</param>
         /// <param name="n">The byte index selector</param>
@@ -99,7 +99,7 @@ namespace Z0
             => skip8(src,n);
 
         /// <summary>
-        /// Reads a source byte, identified by natural index
+        /// Reads an index-identified source byte
         /// </summary>
         /// <param name="src">The data source</param>
         /// <param name="n">The byte index selector</param>
@@ -108,7 +108,7 @@ namespace Z0
             => skip8(src,n);
 
         /// <summary>
-        /// Reads a source byte, identified by natural index
+        /// Reads an index-identified source byte
         /// </summary>
         /// <param name="src">The data source</param>
         /// <param name="n">The byte index selector</param>

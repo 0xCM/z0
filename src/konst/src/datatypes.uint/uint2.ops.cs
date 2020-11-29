@@ -22,7 +22,7 @@ namespace Z0
         /// <param name="w">The target width</param>
         [MethodImpl(Inline), Op]
         public static uint3 extend(U src, W w)
-            => wrap3(src.Value);
+            => wrap3(src.Content);
 
         /// <summary>
         /// Reduces the source value to a width-identified integer via modular arithmetic
@@ -61,8 +61,8 @@ namespace Z0
         /// <param name="c">Source bits 4-5</param>
         /// <param name="d">Source bits 6-7</param>
         [MethodImpl(Inline), Op]
-        public static octet join(U a, U b, U c, U d)
-            => (octet)a | ((octet)b << 2) | ((octet)c << 4) | ((octet)d << 6);
+        public static uint8T join(U a, U b, U c, U d)
+            => (uint8T)a | ((uint8T)b << 2) | ((uint8T)c << 4) | ((uint8T)d << 6);
 
 
         /// <summary>

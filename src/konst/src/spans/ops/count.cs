@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
+    using static memory;
 
     partial class Spans
     {
@@ -17,12 +18,12 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <param name="f">The predicate to evaluate over each element</param>
         /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static int count<T>(ReadOnlySpan<T> src, Func<T,bool> f)
         {
             int count = 0;
             for(var i=0u; i<src.Length; i++)
-                if(f(z.skip(src,i)))
+                if(f(skip(src,i)))
                     count++;
             return count;
         }

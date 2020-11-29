@@ -15,7 +15,7 @@ namespace Z0.Asm
     /// </summary>
     public readonly struct ModRmEncoding
     {
-        readonly octet Input;
+        readonly uint8T Input;
 
         public readonly ModRm Encoded;
 

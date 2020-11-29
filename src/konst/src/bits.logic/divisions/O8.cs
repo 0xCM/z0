@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    using U = octet;
+    using U = uint8T;
 
     partial struct BitLogic
     {

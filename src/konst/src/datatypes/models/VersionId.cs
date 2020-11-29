@@ -14,22 +14,22 @@ namespace Z0
     /// <summary>
     /// Defines a version schema that supports 2, 3 or 4 32-bit segments
     /// </summary>
-    [ApiType]
-    public readonly struct VersionId : ITextual
+    [ApiType, DataType]
+    public readonly struct VersionId : IDataType<VersionId>
     {
-        readonly Vector128<uint> Data;
+        readonly Vector128<uint> Storage;
 
         [MethodImpl(Inline)]
         public VersionId(uint a, uint b)
-            => Data = vparts(w128, a, b, z32, z32);
+            => Storage = vparts(w128, a, b, z32, z32);
 
         [MethodImpl(Inline)]
         public VersionId(uint a, uint b, uint c)
-            => Data = vparts(w128, a, b, c, z32);
+            => Storage = vparts(w128, a, b, c, z32);
 
         [MethodImpl(Inline)]
         public VersionId(uint a, uint b, uint c, uint d)
-            => Data = vparts(w128, a, b, c, d);
+            => Storage = vparts(w128, a, b, c, d);
 
         /// <summary>
         /// The first segment value
@@ -37,7 +37,7 @@ namespace Z0
         public uint A
         {
             [MethodImpl(Inline)]
-            get => vcell(Data,0);
+            get => vcell(Storage,0);
         }
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace Z0
         public uint B
         {
             [MethodImpl(Inline)]
-            get => vcell(Data,1);
+            get => vcell(Storage,1);
         }
 
         /// <summary>
@@ -55,7 +55,7 @@ namespace Z0
         public uint C
         {
             [MethodImpl(Inline)]
-            get => vcell(Data,2);
+            get => vcell(Storage,2);
         }
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace Z0
         public uint D
         {
             [MethodImpl(Inline)]
-            get => vcell(Data,3);
+            get => vcell(Storage,3);
         }
 
         [MethodImpl(Inline), Ignore]

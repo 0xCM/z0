@@ -30,13 +30,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(SB.extract(src, n8, offset));
+                return generic<T>(SB.extract32(src, n8, offset));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(SB.extract(src, n16, offset));
+                return generic<T>(SB.extract32(src, n16, offset));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(SB.extract(src, n32, offset));
+                return generic<T>(SB.extract32(src, n32, offset));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(SB.extract(src, n64, offset));
+                return generic<T>(SB.extract32(src, n64, offset));
             else
                 return extract_i<T>(src,offset);
         }
@@ -46,13 +46,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return force<T>(SB.extract(src, n8, offset));
+                return force<T>(SB.extract32(src, n8, offset));
             else if(typeof(T) == typeof(short))
-                return force<T>(SB.extract(src, n16, offset));
+                return force<T>(SB.extract32(src, n16, offset));
             else if(typeof(T) == typeof(int))
-                return force<T>(SB.extract(src, n32, offset));
+                return force<T>(SB.extract32(src, n32, offset));
             else if(typeof(T) == typeof(long))
-                return force<T>(SB.extract(src, n64, offset));
+                return force<T>(SB.extract32(src, n64, offset));
             else
                 throw no<T>();
         }

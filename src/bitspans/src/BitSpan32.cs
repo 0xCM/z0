@@ -96,7 +96,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format(BitFormat? fmt = null)
-            => format(this, fmt);
+            => format32(this, fmt);
 
         [MethodImpl(Inline)]
         public bool Equals(in BitSpan32 rhs)
@@ -111,7 +111,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static BitSpan32 operator +(in BitSpan32 head, in BitSpan32 tail)
-            => BitSpans.concat(head,tail);
+            => BitSpans.concat32(head,tail);
 
         [MethodImpl(Inline)]
         public static BitSpan32 operator &(in BitSpan32 x, in BitSpan32 y)

@@ -13,9 +13,53 @@ namespace Z0
 
     using NK = NumericKind;
 
-    public readonly struct variant : IVariant<Vector128<ulong>>
+    public readonly struct variant : IVariant<variant>
     {
-        public Vector128<ulong> Content {get;}
+        internal readonly Vector128<ulong> Storage;
+
+        [MethodImpl(Inline)]
+        internal variant(Vector128<ulong> src)
+            => Storage = src;
+
+        [MethodImpl(Inline)]
+        public variant(sbyte value)
+            => Storage = Store(value, NK.I8, 8);
+
+        [MethodImpl(Inline)]
+        public variant(byte value)
+            => Storage = Store(value, NK.U8, 8);
+
+        [MethodImpl(Inline)]
+        public variant(short value)
+            => Storage = Store(value, NK.I16, 16);
+
+        [MethodImpl(Inline)]
+        public variant(ushort value)
+            => Storage = Store(value, NK.U16, 16);
+
+        [MethodImpl(Inline)]
+        public variant(int value)
+            => Storage = Store(value, NK.I32, 32);
+
+        [MethodImpl(Inline)]
+        public variant(uint value)
+            => Storage = Store(value, NK.U32, 32);
+
+        [MethodImpl(Inline)]
+        public variant(long value)
+            => Storage = Store(value, NK.I64, 64);
+
+        [MethodImpl(Inline)]
+        public variant(ulong value)
+            => Storage = Store(value, NK.U64, 64);
+
+        [MethodImpl(Inline)]
+        public variant(float value)
+            => Storage = Store(value, NK.F32, 32);
+
+        [MethodImpl(Inline)]
+        public variant(double value)
+            => Storage = Store(value, NK.F64, 64);
 
         public static variant Zero
             => default;
@@ -46,56 +90,13 @@ namespace Z0
         public static bool operator !=(variant x, variant y)
             => !x.Equals(y);
 
-        [MethodImpl(Inline)]
-        internal variant(Vector128<ulong> src)
-            => Content = src;
-
-        [MethodImpl(Inline)]
-        public variant(sbyte value)
-            => Content = Store(value, NK.I8, 8);
-
-        [MethodImpl(Inline)]
-        public variant(byte value)
-            => Content = Store(value, NK.U8, 8);
-
-        [MethodImpl(Inline)]
-        public variant(short value)
-            => Content = Store(value, NK.I16, 16);
-
-        [MethodImpl(Inline)]
-        public variant(ushort value)
-            => Content = Store(value, NK.U16, 16);
-
-        [MethodImpl(Inline)]
-        public variant(int value)
-            => Content = Store(value, NK.I32, 32);
-
-        [MethodImpl(Inline)]
-        public variant(uint value)
-            => Content = Store(value, NK.U32, 32);
-
-        [MethodImpl(Inline)]
-        public variant(long value)
-            => Content = Store(value, NK.I64, 64);
-
-        [MethodImpl(Inline)]
-        public variant(ulong value)
-            => Content = Store(value, NK.U64, 64);
-
-        [MethodImpl(Inline)]
-        public variant(float value)
-            => Content = Store(value, NK.F32, 32);
-
-        [MethodImpl(Inline)]
-        public variant(double value)
-            => Content = Store(value, NK.F64, 64);
 
         public override int GetHashCode()
             => Low64.GetHashCode();
 
         [MethodImpl(Inline)]
         public bool Equals(variant src)
-            => Content.Equals(src.Content);
+            => Storage.Equals(src.Storage);
 
         public override bool Equals(object src)
             => src is variant v && Equals(v);
@@ -118,7 +119,7 @@ namespace Z0
         [MethodImpl(Inline)]
         Vector128<T> to<T>()
             where T : unmanaged
-                => generic<T>(Content);
+                => generic<T>(Storage);
 
         [MethodImpl(Inline)]
         T cell<T>(byte index)
@@ -128,7 +129,7 @@ namespace Z0
         ulong Low64
         {
             [MethodImpl(Inline)]
-            get => vcell(Content,0);
+            get => vcell(Storage,0);
         }
 
         [MethodImpl(Inline)]

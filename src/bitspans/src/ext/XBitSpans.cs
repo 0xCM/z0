@@ -107,7 +107,7 @@ namespace Z0
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline), Op]
         public static BitSpan32 Trim(this in BitSpan32 src)
-            => BitSpans.trim(src);
+            => BitSpans.trim32(src);
 
         /// <summary>
         /// Clamps the source bitstring to one of a specified maximum length, discarding any excess
@@ -116,7 +116,7 @@ namespace Z0
         /// <param name="maxbits">The maximum length of the target bitstring</param>
         [MethodImpl(Inline), Op]
         public static BitSpan32 Truncate(this in BitSpan32 src, int maxbits)
-            => BitSpans.truncate(src,maxbits);
+            => BitSpans.truncate32(src,maxbits);
 
         /// <summary>
         /// Concatenates two bitspans
@@ -125,6 +125,6 @@ namespace Z0
         /// <param name="tail">The trailing bits</param>
         [MethodImpl(Inline), Op]
         public static BitSpan32 Concat(this in BitSpan32 head, in BitSpan32 tail)
-            => BitSpans.concat(head,tail);
+            => BitSpans.concat32(head,tail);
     }
 }

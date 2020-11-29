@@ -21,7 +21,7 @@ namespace Z0
         where D : unmanaged, ITypeNat
         where T : unmanaged
     {
-        public const string RenderPattern = "f:({0}, d:{1}, t:{2})";
+        public const string RenderPattern = "m:(f:{0}, d:{1}, t:{2})";
 
         public const BitMaskKind M = BitMaskKind.Lsb;
 

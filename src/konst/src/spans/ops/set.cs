@@ -8,28 +8,28 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
 
-    using static Konst;
 
     partial class Spans
     {
-        [Op, Closures(UnsignedInts)]   
-        public static ISet<T> set<T>(ReadOnlySpan<T> src)
+        /// <summary>
+        /// Deposits a <see cref='ReadOnlySpan{T}'/> into a <see cref='HashSet<T>'/>
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [Op, Closures(Closure)]
+        public static HashSet<T> set<T>(ReadOnlySpan<T> src)
         {
             var dst = new HashSet<T>(src.Length);
-            for(var i=0; i<src.Length; i++)
-                dst.Add(src[i]);
+            deposit(src,dst);
             return dst;
         }
 
-        [Op, Closures(UnsignedInts)]   
-        public static ISet<T> set<T>(ReadOnlySpan<T> a, ReadOnlySpan<T> b)
+        [Op, Closures(Closure)]
+        public static HashSet<T> set<T>(ReadOnlySpan<T> a, ReadOnlySpan<T> b)
         {
             var dst = new HashSet<T>(a.Length + b.Length);
-            for(var i=0; i<a.Length; i++)
-                dst.Add(a[i]);
-            for(var i=0; i<b.Length; i++)
-                dst.Add(b[i]);
-            return dst;     
+            deposit(a,b,dst);
+            return dst;
         }
     }
 }

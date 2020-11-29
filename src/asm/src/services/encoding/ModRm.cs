@@ -18,7 +18,7 @@ namespace Z0.Asm
     /// </summary>
     public readonly struct ModRm : ITextual
     {
-        readonly octet Data;
+        readonly uint8T Data;
 
         [MethodImpl(Inline)]
         public static ModRm Define(uint3 rm, uint3 reg, uint2 mod)
@@ -27,11 +27,11 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public ModRm(uint3 rm, uint3 reg, uint2 mod)
         {
-            Data = (octet)rm | ((octet)reg << RegIndex ) | ((octet)mod << ModIndex);
+            Data = (uint8T)rm | ((uint8T)reg << RegIndex ) | ((uint8T)mod << ModIndex);
         }
 
         [MethodImpl(Inline)]
-        public ModRm(octet src)
+        public ModRm(uint8T src)
             => Data = src;
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace Z0.Asm
         /// <summary>
         /// The encoded bitfield value
         /// </summary>
-        public octet Encoded
+        public uint8T Encoded
         {
             [MethodImpl(Inline)]
             get => Data;

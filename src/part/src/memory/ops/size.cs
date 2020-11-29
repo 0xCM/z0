@@ -16,11 +16,11 @@ namespace Z0
         public static byte scale<T>()
             => (byte)size<T>();
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static uint size<T>(T t = default)
             => (uint)SizeOf<T>();
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static uint size<T>(uint count)
             => (uint)SizeOf<T>() * count;
 

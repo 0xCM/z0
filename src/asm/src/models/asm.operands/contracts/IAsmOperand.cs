@@ -21,7 +21,7 @@ namespace Z0
         /// </summary>
         T Content {get;}
 
-        BitSize ISized.Width
+        BitSize ISized.StorageWidth
             => bitwidth<T>();
     }
 
@@ -36,6 +36,6 @@ namespace Z0
         where W : unmanaged, IDataWidth
         where T : unmanaged
     {
-        new W Width => default(W);
+        W Width => default(W);
     }
 }

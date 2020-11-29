@@ -13,9 +13,11 @@ namespace Z0
     {
         string Text {get;}
 
-        ByteSize BufferSize => Text.Length;
+        ByteSize BufferSize
+            => Text.Length;
 
-        uint Length => (uint)Text.Length;
+        uint Length
+            => (uint)Text.Length;
 
         ReadOnlySpan<char> Characters
             => Text;

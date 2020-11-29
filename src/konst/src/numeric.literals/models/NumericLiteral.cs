@@ -7,12 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-
-    using NBK = NumericBaseKind;
+    using static Part;
 
     /// <summary>
-    /// Defines a (boxed) numeric literal relative to a specified base
+    /// Defines a numeric literal relative to a specified base
     /// </summary>
     public readonly struct NumericLiteral : INumericLiteral<NumericLiteral>
     {
@@ -22,10 +20,10 @@ namespace Z0
 
         public string Text {get;}
 
-        public NBK Base {get;}
+        public NumericBaseKind Base {get;}
 
         [MethodImpl(Inline)]
-        public NumericLiteral(string name, object data, string text, NBK @base)
+        public NumericLiteral(string name, object data, string text, NumericBaseKind @base)
         {
             Name = name;
             Data = data ?? 0;

@@ -42,8 +42,8 @@ namespace Z0
             => new StateBuffer<uint7,uint7>(uint7.Count);
 
         [Op]
-        public static StateBuffer<octet,octet> create(W8 w)
-            => new StateBuffer<octet,octet>(256);
+        public static StateBuffer<uint8T,uint8T> create(W8 w)
+            => new StateBuffer<uint8T,uint8T>(256);
 
         [Op]
         public static StateBuffer<T> create<T>(uint count)

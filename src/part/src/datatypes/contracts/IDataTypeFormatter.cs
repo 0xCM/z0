@@ -9,10 +9,10 @@ namespace Z0
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface IDataTypeFormatter<S> : IValueFormatter<S>
-        where S : struct, IDataType<S>
+    public interface IDataTypeFormatter<T> : IValueFormatter<T>
+        where T : struct, IDataType<T>
     {
-        Span<byte> IFormatter<S>.Format(in S src)
+        Span<byte> IFormatter<T>.Format(in T src)
             => memory.bytes(src.Content);
     }
 
