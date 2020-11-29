@@ -10,8 +10,12 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct CmdArgs
+
+    [ApiHost]
+    public readonly partial struct CmdFormat
     {
+        const NumericKind Closure = UnsignedInts;
+
         [Op]
         public static void render(CmdArgIndex src, ITextBuffer dst)
         {
@@ -28,7 +32,7 @@ namespace Z0
         public static string format(in CmdArgIndex src)
         {
             var dst = Buffers.text();
-            CmdArgs.render(src, dst);
+            render(src, dst);
             return dst.Emit();
         }
 
@@ -88,5 +92,53 @@ namespace Z0
         public static string format<K,T>(in CmdArg<K,T> src)
             where K : unmanaged
                 => Render.setting(src.Key, src.Value);
+
+        [Op]
+        public string format(CmdSpec src)
+        {
+            var dst = Buffers.text();
+            dst.AppendFormat("{0} ", src.CmdId.Format());
+            CmdFormat.render(src.Args,dst);
+            return dst.Emit();
+        }
+
+        [Op]
+        public static string format(in CmdSpec src)
+        {
+            var dst = Buffers.text();
+            dst.Append(src.CmdId.Format());
+            CmdFormat.render(src.Args, dst);
+            return dst.Emit();
+        }
+
+        [Op]
+        public static void render(CmdTypeInfo src, ITextBuffer dst)
+        {
+            dst.Append(src.DataType.Name);
+            var fields = src.Fields.Terms;;
+            var count = fields.Length;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var field = ref skip(fields,count);
+                dst.Append(string.Format(" | {0}:{1}", field.Name, field.FieldType.Name));
+            }
+        }
+
+        [Op]
+        public static string format(CmdTypeInfo src)
+        {
+            var buffer = Buffers.text();
+            render(src,buffer);
+            return buffer.Emit();
+        }
+
+        [MethodImpl(Inline), Formatter]
+        public static string format(CmdOptionSpec src)
+            => src.IsAnonymous || src.IsEmpty ? EmptyString : src.Name;
+
+        [MethodImpl(Inline), Formatter, Closures(UnsignedInts)]
+        public static string format<K>(CmdOptionSpec<K> src)
+            where K : unmanaged
+                => src.IsAnonymous || src.IsEmpty ? EmptyString : src.Name;
     }
 }

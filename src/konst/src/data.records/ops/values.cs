@@ -45,7 +45,7 @@ namespace Z0
 
         [Op, Closures(Closure)]
         public static FieldValue<S>[] values<S,T>(S src)
-            where S : struct
+            where S : struct, IRecord<S>
         {
             var fields = z.@readonly(typeof(S).DeclaredInstanceFields());
             var buffer = sys.alloc<FieldValue<S>>(fields.Length);

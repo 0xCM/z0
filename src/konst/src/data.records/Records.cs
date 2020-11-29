@@ -18,7 +18,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static FieldValue<S,T> value<S,T>(S src, FieldInfo field, T value)
-            where S : struct
+            where S : struct, IRecord<S>
                 => new FieldValue<S,T>(src, field, value);
     }
 }

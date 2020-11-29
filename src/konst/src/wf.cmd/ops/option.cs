@@ -10,30 +10,8 @@ namespace Z0
     using static Konst;
     using static z;
 
-    [ApiHost(ApiNames.Cmd, true)]
-    public readonly partial struct Cmd
+    partial struct Cmd
     {
-        internal const byte MaxVarCount = 16;
-
-        internal const string Anonymous = "anonymous";
-
-        internal const string CmdIdNotFound = "Command identifier not found";
-
-        internal const string InvalidOption = "Option text invalid";
-
-        internal const char DefaultSpecifier = Chars.Colon;
-
-        const NumericKind Closure = UnsignedInts;
-
-        [MethodImpl(Inline), Op]
-        public static ICmdCatalog catalog(IWfShell wf)
-            => new CmdCatalog(wf);
-
-        [MethodImpl(Inline), Op]
-        public static CmdBuilder builder(IWfShell wf)
-            => new CmdBuilder(wf);
-
-
         /// <summary>
         /// Creates an option without purpose
         /// </summary>

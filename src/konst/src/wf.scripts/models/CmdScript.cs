@@ -10,8 +10,6 @@ namespace Z0
     using static Konst;
     using static z;
 
-    using api = Cmd;
-
     public readonly struct CmdScript : ICmdScript
     {
         public asci32 Id {get;}
@@ -21,7 +19,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public CmdScript(CmdScriptExpr[] src)
         {
-            Id = api.Anonymous;
+            Id = EmptyString;
             Data = src;
         }
 

@@ -25,7 +25,7 @@ namespace Z0
             => Cmd.id<T>();
 
         CmdArgIndex ICmdSpec.Args
-            => CmdArgs.index((T)this);
+            => Cmd.argidx((T)this);
     }
 
     [Free]

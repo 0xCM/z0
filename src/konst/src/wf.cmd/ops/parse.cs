@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct CmdSpecs
+    partial struct Cmd
     {
         [Op]
         static ParseResult<CmdArg> arg(string src, char qualifier = ' ')
@@ -57,5 +57,7 @@ namespace Z0
 
             return fail;
         }
+
+        internal const string InvalidOption = "Option text invalid";
     }
 }

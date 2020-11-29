@@ -14,7 +14,7 @@ namespace Z0
 
     [Free]
     public interface IRecord<T> : IRecord
-        where T : struct, IRecord<T>
+        where T : struct
     {
 
     }

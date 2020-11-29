@@ -13,13 +13,13 @@ namespace Z0
     partial struct CmdScripts
     {
         [Op]
-        public static CmdScriptPattern tool(IFileDb db, ToolId tool, string root, string arg, string delimiter = null, string type = null)
+        public static CmdScriptPattern tool(IFileDb db, ToolId tool, string root, string arg, CmdArgPrefix? prefix = null, string type = null)
         {
             var data = new CmdScriptPattern();
             data.CmdRootName = FS.folder(root);
             data.CmdHost = tool;
             data.CmdArgName = arg;
-            data.ArgDelimiter = delimiter ?? DefaultArgDelimiter;
+            data.ArgPrefix = prefix ?? CmdArgPrefix.Default;
             data.ScriptType = FS.ext(type ?? DefaultCmdType);
             rules(db, ref data);
             return data;

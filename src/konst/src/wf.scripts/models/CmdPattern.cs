@@ -19,7 +19,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public CmdPattern(string content)
         {
-            PatternId = Cmd.Anonymous;
+            PatternId = EmptyString;
             Content = content;
         }
 

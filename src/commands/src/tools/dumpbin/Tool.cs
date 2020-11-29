@@ -65,9 +65,7 @@ namespace Z0.Tools
         public DumpBin With<T>(Flag option, T value)
         {
             if(ArgIndex < MaxVarIndex)
-            {
-                Args[ArgIndex++] = CmdArgs.arg(option, (object)value);
-            }
+                Args[ArgIndex++] = Cmd.arg(option, (object)value);
             return this;
         }
     }

@@ -13,11 +13,11 @@ namespace Z0
     partial struct Cmd
     {
         [MethodImpl(Inline), Op]
-        public static CmdExecStatus status(CmdProcess runner)
-            => runner.Status();
+        public static CmdExecStatus status(CmdProcess process)
+            => process.Status();
 
         [MethodImpl(Inline), Op]
-        public static ref CmdExecStatus status(CmdProcess runner, ref CmdExecStatus dst)
-            => ref runner.Status(ref dst);
+        public static ref CmdExecStatus status(CmdProcess process, ref CmdExecStatus dst)
+            => ref process.Status(ref dst);
     }
 }

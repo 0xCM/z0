@@ -7,8 +7,22 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    partial struct CmdSpecs
+    using static Konst;
+    using static z;
+
+    [ApiHost(ApiNames.Cmd, true)]
+    public readonly partial struct Cmd
     {
+        const NumericKind Closure = UnsignedInts;
+
+        [MethodImpl(Inline), Op]
+        public static ICmdCatalog catalog(IWfShell wf)
+            => new CmdCatalog(wf);
+
+        [MethodImpl(Inline), Op]
+        public static CmdBuilder builder(IWfShell wf)
+            => new CmdBuilder(wf);
+
         [Op]
         public static ICmdSpec[] known()
         {

@@ -21,7 +21,7 @@ namespace Z0
         public CmdSpec(T spec)
         {
             CmdId = Cmd.id<T>();
-            Args = CmdArgs.index(spec);
+            Args = Cmd.argidx(spec);
         }
         public string Format()
             => EmptyString;

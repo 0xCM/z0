@@ -8,10 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static z;
 
     /// <summary>
-    /// Defines a tool option
+    /// Defines a command option
     /// </summary>
     public readonly struct CmdOptionSpec : ICmdOptionSpec
     {
@@ -74,7 +73,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => CmdOptions.format(this);
+            => CmdFormat.format(this);
 
         public override string ToString()
             => Format();

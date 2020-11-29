@@ -15,6 +15,8 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The field value type</param>
     public readonly struct FieldValue<S,T> : IFieldValue<S,T>
+        where S : struct, IRecord<S>
+
     {
         public S Source {get;}
 

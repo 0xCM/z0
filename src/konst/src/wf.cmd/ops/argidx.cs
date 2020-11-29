@@ -10,9 +10,9 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct CmdArgs
+    partial struct Cmd
     {
-        public static CmdArgIndex index<T>(T src)
+        public static CmdArgIndex argidx<T>(T src)
             where T : struct, ICmdSpec<T>
                 => typeof(T).DeclaredInstanceFields().Select(f => new CmdArg(f.Name, f.GetValue(src)?.ToString() ?? EmptyString));
 
@@ -21,7 +21,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source array</param>
         [MethodImpl(Inline), Op]
-        public static CmdArgIndex index(params CmdArg[] src)
+        public static CmdArgIndex argidx(params CmdArg[] src)
             => new CmdArgIndex(src);
-   }
+    }
 }

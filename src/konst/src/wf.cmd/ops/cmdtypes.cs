@@ -14,6 +14,6 @@ namespace Z0
     {
         [Op]
         public static CmdTypeInfo[] cmdtypes(IWfShell wf)
-            => typeof(Cmd).Assembly.Types().Tagged<CmdAttribute>().Select(cmdtype);
+            => wf.Components.Types().Tagged<CmdAttribute>().Select(cmdtype);
     }
 }

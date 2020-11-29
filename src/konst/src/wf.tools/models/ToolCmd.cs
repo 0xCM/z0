@@ -13,27 +13,24 @@ namespace Z0
     /// <summary>
     /// Defines a tool invocation script
     /// </summary>
-    public struct CmdTypeValue<T> : IToolCmd<T>
+    public struct ToolCmd<T> : IToolCmd<T>
         where T : struct, IToolCmd<T>
     {
         public T CmdSpec {get;}
 
-        public RecordFields Fields {get;}
-
         public RecordFieldValues<T> FieldValues {get;}
 
-        public CmdTypeValue(T src)
+        public ToolCmd(T src, RecordFieldValues<T> values)
         {
             CmdSpec = src;
-            Fields = Records.fields<T>();
-            FieldValues = Records.values(CmdSpec, Fields);
+            FieldValues = values;
         }
 
         public ToolId ToolId
             => CmdSpec.ToolId;
 
         [MethodImpl(Inline)]
-        public static implicit operator CmdTypeValue<T>(T src)
-            => new CmdTypeValue<T>(src);
+        public static implicit operator ToolCmd<T>(T src)
+            => Tooling.cmd(src);
     }
 }

@@ -32,7 +32,6 @@ namespace Z0
     {
         new T Value {get;}
 
-
         object IFieldValue.Value
             => Value;
     }

@@ -10,7 +10,7 @@ namespace Z0
     {
         [Op, Closures(Closure)]
         public static Span<byte> format<T>(in T src)
-            where T : struct, IRecord<T>
+            where T : struct
                 => z.bytes(src);
     }
 }

@@ -21,7 +21,7 @@ namespace Z0
 
         public string CmdArgName;
 
-        public string ArgDelimiter;
+        public CmdArgPrefix ArgPrefix;
 
         public FS.FileExt ScriptType;
 

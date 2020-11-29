@@ -9,11 +9,12 @@ namespace Z0
     using System.Diagnostics;
 
     using static Konst;
+    using static z;
 
-    public class CmdAgent : WfAgent, ICmdObserver
+    partial struct Cmd
     {
         [Op]
-        public static CmdAgent create(IWfShell wf, ICmdObserver observer)
+        public static CmdAgent agent(IWfShell wf, ICmdObserver observer)
         {
             var settings = new CmdAgentSettings();
             settings.AgentKind = CmdAgentKind.CmdExe;
@@ -28,37 +29,6 @@ namespace Z0
             info.CreateNoWindow = true;
             info.Arguments = EmptyString;
             return new CmdAgent(wf, settings, info, observer);
-        }
-
-        CmdAgentSettings Settings {get;}
-
-        ProcessStartInfo StartInfo {get;}
-
-        ICmdObserver Observer {get;}
-
-        WfHost Host {get;}
-
-        IWfShell Wf {get;}
-
-        [MethodImpl(Inline)]
-        public CmdAgent(IWfShell wf, CmdAgentSettings settings, ProcessStartInfo start, ICmdObserver observer = null)
-            : base(new WfAgentContext(wf), new AgentIdentity(10u,10u))
-        {
-            Host = WfShell.host(typeof(CmdAgent));
-            Wf = wf.WithHost(Host);
-            Settings = settings;
-            StartInfo = start;
-            Observer = observer ?? this;
-        }
-
-        public void Information(string data)
-        {
-            Wf.Status(data);
-        }
-
-        public void Error(string data)
-        {
-            Wf.Error(data);
         }
     }
 }

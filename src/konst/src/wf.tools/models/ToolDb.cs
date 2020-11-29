@@ -52,7 +52,7 @@ namespace Z0
 
         public void ListCommands()
         {
-            iter(CmdSpecs.known(), spec => term.print(spec.CmdId));
+            iter(Cmd.known(), spec => term.print(spec.CmdId));
         }
 
         [Op]

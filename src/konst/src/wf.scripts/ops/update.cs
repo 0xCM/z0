@@ -14,11 +14,12 @@ namespace Z0
     partial struct CmdScripts
     {
         [Op]
-        public static ref CmdScriptPattern update(IFileDb db, ref CmdScriptPattern data, string root = null, string name = null, string arg = null, string delimiter = null, string type = null)
+        public static ref CmdScriptPattern update(IFileDb db, ref CmdScriptPattern data,
+            string root = null, string name = null, string arg = null, CmdArgPrefix? prefix = null, string type = null)
         {
             data.CmdRootName = root == null ? data.CmdRootName : FS.folder(root);
             data.CmdArgName = arg == null ? data.CmdArgName : arg;
-            data.ArgDelimiter = delimiter == null ? data.ArgDelimiter : delimiter;
+            data.ArgPrefix = prefix != null ? prefix.Value: data.ArgPrefix;
             data.ScriptType = type == null ? data.ScriptType : FS.ext(type);
             rules(db, ref data);
             return ref data;

@@ -11,7 +11,7 @@ namespace Z0
     using static z;
 
     /// <summary>
-    /// Specifies a kinded tool option
+    /// Specifies a kinded option
     /// </summary>
     public readonly struct CmdOptionSpec<K> : ICmdOptionSpec<K>
         where K : unmanaged

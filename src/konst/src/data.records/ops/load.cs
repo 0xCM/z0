@@ -12,7 +12,7 @@ namespace Z0
 
     partial struct Records
     {
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [Op, Closures(Closure)]
         public static void load<T>(in RecordFields fields, ReadOnlySpan<T> src, in DynamicRows<T> dst)
             where T : struct
         {

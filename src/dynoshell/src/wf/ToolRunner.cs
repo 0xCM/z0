@@ -221,7 +221,7 @@ namespace Z0
             var buffer = Buffers.text();
             for(var i=0; i<models.Length; i++)
             {
-                Cmd.render(skip(models,i), buffer);
+                CmdFormat.render(skip(models,i), buffer);
                 Wf.Row(buffer.Emit());
             }
         }
@@ -238,11 +238,11 @@ namespace Z0
 
         void ShowOptions()
         {
-            var result = CmdSpecs.parse(CmdCases.Case0);
+            var result = Cmd.parse(CmdCases.Case0);
             if(result.Succeeded)
             {
                 var value = result.Value;
-                var msg = string.Format("cmd:{0} | options:{1}", value.CmdId, CmdArgs.format(value.Args));
+                var msg = string.Format("cmd:{0} | options:{1}", value.CmdId, CmdFormat.format(value.Args));
                 Wf.Status(msg);
 
             }
