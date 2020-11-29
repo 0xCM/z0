@@ -1,6 +1,9 @@
 echo off
 
-set SlnId=z0.machine
+set ProjectId=machine
+echo ProjectId:%ProjectId%
+
+set SlnId=z0.%ProjectId%
 echo SlnId:%SlnId%
 
 set CmdSep="--------------------------------------------------------------------------------"
@@ -12,9 +15,11 @@ echo SlnPath:%SlnPath% >> %CmdLog%
 
 set TextLog="%ZDb%\logs\build\%SlnId%.log"
 
-set CmdExec=dotnet build %SlnPath% /p:Configuration=Release /p:Platform="Any CPU" -fl -flp:logfile=%TextLog%;verbosity=detailed -m:6 -graph:true
+set BuildCmdExec=dotnet build %SlnPath% /p:Configuration=Release /p:Platform="Any CPU" -fl -flp:logfile=%TextLog%;verbosity=detailed -m:6 -graph:true
 
-echo CmdExec:%CmdExec% >> %CmdLog%
+echo BuildCmdExec:%BuildCmdExec% >> %CmdLog%
 
 echo on
-call %CmdExec%
+
+call %BuildCmdExec%
+call .cmd\deploy.cmd
