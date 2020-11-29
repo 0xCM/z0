@@ -35,7 +35,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static string format<T>(ReadOnlySpan<T> src)
             where T : unmanaged
-                => formatter<T>().Format(src, HexFormatOptions.HexData);
+                => formatter<T>().Format(src, HexFormatSpecs.HexData);
 
         [MethodImpl(Inline), Op]
         static string format64(ulong src, bool postspec = false)
@@ -185,7 +185,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static string format(ReadOnlySpan<byte> src)
-            => format(src, HexFormatOptions.HexData);
+            => format(src, HexFormatSpecs.HexData);
 
         [MethodImpl(Inline), Op]
         public static string format(ReadOnlySpan<byte> src, in HexFormatOptions config)

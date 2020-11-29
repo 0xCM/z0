@@ -36,6 +36,9 @@ namespace Z0
         where F : struct, IVectorKind<F,W>
         where W : unmanaged, ITypeWidth
     {
+        bool IEquatable<F>.Equals(F other)
+            => true;
+
         DataWidth IDataWidth.DataWidth
             => Widths.data<W>();
     }

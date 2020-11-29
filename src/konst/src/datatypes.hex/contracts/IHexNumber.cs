@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
     using System;
 
     public interface IHexNumber : IByte
@@ -16,14 +16,23 @@ namespace Z0
     {
         new K Value {get;}
 
-        byte IByte.Value 
+        byte IByte.Value
             => (byte)(object)Value;
-    }    
-    
+    }
+
     public interface IHexNumber<F,K> : IHexNumber<K>, IByte<F>
         where F : unmanaged, IHexNumber<F,K>
         where K : unmanaged, Enum
     {
 
+    }
+
+    public interface IHexNumber<F,W,K> : IHexNumber<F,K>, IDataType<F>
+        where F : unmanaged, IHexNumber<F,W,K>
+        where K : unmanaged, Enum
+        where W : unmanaged, IDataWidth
+    {
+        BitSize ISized.DataWidth
+            => default(W).BitWidth;
     }
 }

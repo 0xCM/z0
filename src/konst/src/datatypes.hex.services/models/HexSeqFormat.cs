@@ -16,10 +16,6 @@ namespace Z0
         public string Delimiter {get;}
 
         [MethodImpl(Inline)]
-        public static HexSeqFormat define(in HexFormatOptions hex, string delimiter = null)
-            => new HexSeqFormat(hex, delimiter ?? hex.Delimiter.ToString());
-
-        [MethodImpl(Inline)]
         public HexSeqFormat(in HexFormatOptions hex, string delimiter)
         {
             Delimiter = delimiter;

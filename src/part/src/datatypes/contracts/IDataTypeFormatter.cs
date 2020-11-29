@@ -12,8 +12,7 @@ namespace Z0
     public interface IDataTypeFormatter<T> : IValueFormatter<T>
         where T : struct, IDataType<T>
     {
-        Span<byte> IFormatter<T>.Format(in T src)
-            => memory.bytes(src.Content);
+
     }
 
     [Free]

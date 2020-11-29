@@ -70,7 +70,7 @@ namespace Z0
         public asm(int i)
         {
             state = new object[i];
-            state[0] = HexFormatOptions.define(zpad:false, specifier:false);
+            state[0] = HexFormatSpecs.options(zpad:false, specifier:false);
             state[1] = new StringBuilder(1024);
         }
     }

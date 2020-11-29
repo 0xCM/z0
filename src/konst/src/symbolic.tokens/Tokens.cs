@@ -96,7 +96,6 @@ namespace Z0
         {
             var symbols = src.Symbols;
             var count = symbols.Length;
-
             for(var i=0u; i<count; i++)
                 seek(dst,i) = Symbolic.render(skip(symbols,i));
             return dst;
@@ -107,7 +106,5 @@ namespace Z0
             where K : unmanaged
             where S : unmanaged, ISymbol<S>
                 => new TokenSpec<K,S>(index, kind, id, symbols);
-
-
     }
 }

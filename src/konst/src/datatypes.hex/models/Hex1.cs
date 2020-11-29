@@ -11,8 +11,9 @@ namespace Z0
 
     using H = Hex1;
     using K = Hex1Seq;
+    using W = W1;
 
-    public readonly struct Hex1 : IHexNumber<H,K>
+    public readonly struct Hex1 : IHexNumber<H,W,K>
     {
         public readonly K Value;
 

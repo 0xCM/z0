@@ -13,8 +13,8 @@ namespace Z0
     /// Defines an association between an integer in the range [0,0xFF] and unmanaged data of parametric type
     /// </summary>
     public readonly struct HexLookupEntry<K,T>
+        where K : unmanaged
         where T : struct
-        where K : unmanaged, Enum
     {
         public K Key {get;}
 

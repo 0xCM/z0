@@ -17,6 +17,6 @@ namespace Z0
             => StorageWidth;
 
         ByteSize StorageSize
-            => (ulong)StorageWidth/8ul;
+            => StorageWidth.Bytes;
     }
 }

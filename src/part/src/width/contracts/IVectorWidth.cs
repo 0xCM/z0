@@ -22,7 +22,7 @@ namespace Z0
             => VectorWidth.FormatName();
     }
 
-    public interface IVectorWidth<W> : IVectorWidth
+    public interface IVectorWidth<W> : IVectorWidth, ICellWidth<W>
         where W : unmanaged, IVectorWidth<W>
     {
 

@@ -11,7 +11,6 @@ namespace Z0
 
     partial struct Records
     {
-
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static RowAdapter<T> adapter<T>(in RecordFields fields)
             where T : struct

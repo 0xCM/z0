@@ -12,7 +12,7 @@ namespace Z0
     [Free]
     public interface IDataType : ISized, ITextual
     {
-
+        bool IsFixedWidth => true;
     }
 
     [Free]
@@ -22,17 +22,18 @@ namespace Z0
         T Content => (T)this;
 
         BitSize ISized.StorageWidth
-            => Unsafe.SizeOf<T>();
+            => Unsafe.SizeOf<T>()*8;
 
         string ITextual.Format()
             => Content.ToString();
     }
 
     [Free]
-    public interface IDataType<H,T> : IDataType<T>
-        where H : struct, IDataType<H,T>
+    public interface IDataType<W,T> : IDataType<T>
+        where W : unmanaged, ITypeWidth<W>
         where T : struct
     {
-
+        bool IDataType.IsFixedWidth
+            => true;
     }
 }

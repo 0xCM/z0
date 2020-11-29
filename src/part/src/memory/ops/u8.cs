@@ -46,7 +46,6 @@ namespace Z0
         public static ref byte u8<T>(in T src, int offset)
             => ref add(@as<T,byte>(src), offset);
 
-
         /// <summary>
         /// Converts a <see cref='bool'/> to a <see cref='ushort'/>
         /// </summary>

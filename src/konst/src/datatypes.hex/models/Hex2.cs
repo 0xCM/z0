@@ -11,8 +11,9 @@ namespace Z0
 
     using H = Hex2;
     using K = Hex2Seq;
+    using W = W2;
 
-    public readonly struct Hex2 : IHexNumber<H,K>
+    public readonly struct Hex2 : IHexNumber<H,W,K>
     {
         public K Value {get;}
 
@@ -41,7 +42,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public Hex2(byte src)
             => Value = (K)src & KMax;
-
 
         [MethodImpl(Inline)]
         public bool Equals(H src)

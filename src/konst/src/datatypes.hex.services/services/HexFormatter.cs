@@ -76,9 +76,9 @@ namespace Z0
             => FormatItems(src, DefaultSeqConfig);
 
         static HexFormatOptions DefaultConfig
-            => HexFormatOptions.define();
+            => HexFormatSpecs.options();
 
         static HexSeqFormat DefaultSeqConfig
-            => HexSeqFormat.define(DefaultConfig);
+            => HexFormatSpecs.seq(DefaultConfig);
     }
 }

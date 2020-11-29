@@ -21,7 +21,7 @@ namespace Z0
             => TypeWidth.FormatName();
     }
 
-    public interface ITypeWidth<W> : ITypeWidth, ITypedLiteral<W,TypeWidth,uint>
+    public interface ITypeWidth<W> : ITypeWidth, IDataWidth<W>, ITypedLiteral<W,TypeWidth,uint>
         where W : struct, ITypeWidth<W>
     {
 

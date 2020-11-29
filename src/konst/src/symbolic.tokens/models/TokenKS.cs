@@ -28,7 +28,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public Token(K kind, S[] src)
         {
-
             Kind = kind;
             Data = src;
         }

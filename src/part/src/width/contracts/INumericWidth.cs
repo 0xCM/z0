@@ -22,7 +22,7 @@ namespace Z0
             => NumericWidth.FormatName();
     }
 
-    public interface INumericWidth<W> : INumericWidth, ITypedLiteral<W,NumericWidth,uint>, ITypeWidth<W>
+    public interface INumericWidth<W> : INumericWidth, ITypeWidth<W>, ITypedLiteral<W,NumericWidth,uint>
         where W : struct, INumericWidth<W>
     {
 

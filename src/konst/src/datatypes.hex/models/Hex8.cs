@@ -11,8 +11,9 @@ namespace Z0
 
     using H = Hex8;
     using K = Hex8Seq;
+    using W = W8;
 
-    public readonly struct Hex8 : IHexNumber<H,K>
+    public readonly struct Hex8 : IHexNumber<H,W,K>
     {
         public readonly K Value;
 
@@ -41,6 +42,39 @@ namespace Z0
         public static H Min => KMin;
 
         public static H Max => KMax;
+
+
+        K IHexNumber<K>.Value
+            => Value;
+
+        [MethodImpl(Inline)]
+        public bool Equals(H src)
+            => Value == src.Value;
+
+        public uint Hash
+        {
+            [MethodImpl(Inline)]
+            get => (uint)Value;
+        }
+
+        public override int GetHashCode()
+            => (int)Hash;
+
+        public override bool Equals(object src)
+            => src is H c && Equals(c);
+
+        public string Text
+        {
+            [MethodImpl(Inline)]
+            get => $"{Value}";
+        }
+
+        [MethodImpl(Inline)]
+        public string Format()
+            => Text;
+
+        public override string ToString()
+            => Text;
 
         [MethodImpl(Inline)]
         public static implicit operator H(K src)
@@ -89,37 +123,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator H(Hex5Seq src)
             => new H((byte)src);
-
-        K IHexNumber<K>.Value
-            => Value;
-
-        [MethodImpl(Inline)]
-        public bool Equals(H src)
-            => Value == src.Value;
-
-        public uint Hash
-        {
-            [MethodImpl(Inline)]
-            get => (uint)Value;
-        }
-
-        public override int GetHashCode()
-            => (int)Hash;
-
-        public override bool Equals(object src)
-            => src is H c && Equals(c);
-
-        public string Text
-        {
-            [MethodImpl(Inline)]
-            get => $"{Value}";
-        }
-
-        [MethodImpl(Inline)]
-        public string Format()
-            => Text;
-
-        public override string ToString()
-            => Text;
     }
 }

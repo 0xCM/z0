@@ -91,6 +91,18 @@ namespace Z0
         public const string Hex64 = "x16";
 
         /// <summary>
+        /// Specifies the default configuration for hex data emission
+        /// </summary>
+        public static HexFormatOptions HexData
+            => new HexFormatOptions(true, false, false, false, Space);
+
+        /// <summary>
+        /// The default configuration for array initialization content
+        /// </summary>
+        public static HexFormatOptions HexArray
+            => new HexFormatOptions(true, true, false, true, Chars.Comma);
+
+        /// <summary>
         /// Selects either the uppercase format code 'X' or lowercase format code 'x'
         /// </summary>
         /// <param name="upper">True for uppercase, false for lowercase</param>
@@ -105,5 +117,13 @@ namespace Z0
         [MethodImpl(Inline)]
         public static string ClearSpecs(string src)
             => src.Remove("0x").RemoveAny('h');
+
+        [MethodImpl(Inline)]
+        public static HexFormatOptions options(bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true, char? delimiter = null)
+            => new HexFormatOptions(zpad,specifier, uppercase, prespec, delimiter ?? Space);
+
+        [MethodImpl(Inline)]
+        public static HexSeqFormat seq(in HexFormatOptions hex, string delimiter = null)
+            => new HexSeqFormat(hex, delimiter ?? hex.Delimiter.ToString());
     }
 }

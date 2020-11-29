@@ -13,7 +13,6 @@ namespace Z0
 
     partial struct memory
     {
-
         [MethodImpl(Inline), Op]
         public static ref readonly ushort read(in char src, uint offset)
             => ref read<ushort>(src, (int)offset);

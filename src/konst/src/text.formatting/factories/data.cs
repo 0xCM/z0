@@ -22,6 +22,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static HexDataFormatter<T> data<T>()
             where T : unmanaged
-                => new HexDataFormatter<T>(HexFormatOptions.HexData);
+                => new HexDataFormatter<T>(HexFormatSpecs.HexData);
     }
 }

@@ -34,7 +34,7 @@ namespace Z0
         {
             Wf = wf;
             Buffer = list<string>();
-            DataFormat = HexFormatOptions.HexData;
+            DataFormat = HexFormatSpecs.HexData;
         }
 
 
@@ -225,7 +225,7 @@ namespace Z0
         static HexFormatOptions HexSpec
         {
             [MethodImpl(Inline), Op]
-            get => HexFormatOptions.define(zpad:false, specifier:false);
+            get => HexFormatSpecs.options(zpad:false, specifier:false);
         }
 
         [Op, MethodImpl(NotInline)]

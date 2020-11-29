@@ -9,10 +9,10 @@ namespace Z0
     partial class XTend
     {
         public static string FormatHexBytes(this uint src)
-            => BitConverter.GetBytes(src).FormatHexBytes();
+            => Hex.format(memory.bytes(src));
 
         public static string FormatHexBytes(this ulong src)
-            => BitConverter.GetBytes(src).FormatHexBytes();
+            => Hex.format(memory.bytes(src));
 
         public static string FormatHexBytes(this byte[] src, HexFormatOptions config)
             => Hex.format(src,config);
@@ -24,6 +24,10 @@ namespace Z0
             => Hex.format(src, sep, zpad, specifier);
 
         public static string FormatHexBytes(this ReadOnlySpan<byte> src, char sep, bool zpad = true, bool specifier = true,
+            bool uppercase = false, bool prespec = true, int? segwidth = null)
+                => Hex.format(src,sep,zpad,specifier,uppercase,prespec,segwidth);
+
+        public static string FormatHexBytes(this Span<byte> src, char sep, bool zpad = true, bool specifier = true,
             bool uppercase = false, bool prespec = true, int? segwidth = null)
                 => Hex.format(src,sep,zpad,specifier,uppercase,prespec,segwidth);
     }
