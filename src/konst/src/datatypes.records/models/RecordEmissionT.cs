@@ -9,35 +9,36 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct TableEmission<F,T>
-        where T : struct, ITable<F,T>
-        where F : unmanaged, Enum
+    public readonly struct RecordEmission<T> : IIndex<T>
+        where T : struct
     {
-        public readonly T[] Data {get;}
+        public IndexedSeq<T> Data {get;}
 
         public FS.FilePath Target {get;}
 
         [MethodImpl(Inline)]
-        public static implicit operator DataFlow<T[],FS.FilePath>(TableEmission<F,T> src)
-            => (src.Data,src.Target);
-
-        [MethodImpl(Inline)]
-        public TableEmission(T[] src, FS.FilePath dst)
+        public RecordEmission(T[] src, FS.FilePath dst)
         {
             Data = src;
             Target = dst;
         }
 
-        public Count RowCount
+        public uint RowCount
         {
             [MethodImpl(Inline)]
-            get => Data.Length;
+            get => Data.Count;
+        }
+
+        public T[] Storage
+        {
+            [MethodImpl(Inline)]
+            get => Data.Storage;
         }
 
         public ReadOnlySpan<T> View
         {
             [MethodImpl(Inline)]
-            get => Data;
+            get => Data.View;
         }
     }
 }

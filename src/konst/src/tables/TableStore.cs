@@ -34,18 +34,7 @@ namespace Z0
             where T : struct
                 => new ArchivedTable<T>(src);
 
-        [MethodImpl(Inline)]
-        public static DataFlow<Rowset<T>, ArchivedTable<T>> archived<T>(Rowset<T> src, FS.FilePath dst)
-            where T : struct
-                => (src, new ArchivedTable<T>(dst));
-
-        [MethodImpl(Inline), Op]
-        public static TableEmission<F,T> emission<F,T>(T[] src, FS.FilePath dst, F f = default)
-            where T : struct, ITable<F,T>
-            where F : unmanaged, Enum
-                => new TableEmission<F,T>(src,dst);
-
-        public static DataFlow<TableEmission<F,T>, FS.FilePath> deposit<F,T>(in TableEmission<F,T> src, FS.FilePath dst, IRowFormatter<F> formatter, char delimiter = FieldDelimiter)
+        public static void deposit<F,T>(in RecordEmission<T> src, FS.FilePath dst, IRowFormatter<F> formatter, char delimiter = FieldDelimiter)
             where F : unmanaged, Enum
             where T : struct, ITable<F,T>
         {
@@ -58,10 +47,9 @@ namespace Z0
 
             for(var i=0u; i<count; i++)
                 writer.WriteLine(formatter.Format(skip(rows,i)));
-            return (src,dst);
         }
 
-        public static DataFlow<Dictionary<string,E>,FS.FilePath> deposit<E>(Dictionary<string,E> src, FS.FilePath dst)
+        public static void deposit<E>(Dictionary<string,E> src, FS.FilePath dst)
             where E : unmanaged, Enum
         {
             var header = text.concat("Seq". PadRight(10), SpacePipe, typeof(E).Name);
@@ -73,7 +61,6 @@ namespace Z0
             Array.Sort(keys);
             for(var i=0; i<keys.Length; i++)
                 writer.WriteLine(FormatSequential(i, src[keys[i]]));
-            return (src,dst);
         }
 
         /// <summary>
@@ -82,7 +69,7 @@ namespace Z0
         /// <param name="src">The source</param>
         /// <param name="dst">The target</param>
         /// <typeparam name="E">The enum type</typeparam>
-        public static DataFlow<EnumLiteralDetails<E>,FS.FilePath> deposit<E>(in EnumLiteralDetails<E> src, FS.FilePath dst)
+        public static void deposit<E>(in EnumLiteralDetails<E> src, FS.FilePath dst)
             where E : unmanaged, Enum
         {
             var name = typeof(E).Name;
@@ -95,7 +82,6 @@ namespace Z0
                 var literal = src[i];
                 writer.WriteLine(FormatSequential((int)literal.Position, literal.LiteralValue));
             }
-            return (src,dst);
         }
 
         public static Option<FilePath> save<R,F>(R[] data, TableRenderSpec<F> format, FormatFunctions.FormatDelimited<R> fx, FilePath dst, FileWriteMode mode = Overwrite)

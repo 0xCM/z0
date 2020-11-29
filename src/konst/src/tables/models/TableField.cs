@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Describes a column in a table
     /// </summary>
-    public struct TableField : ITableField
+    public struct TableField
     {
         /// <summary>
         /// The defining type
@@ -40,26 +40,5 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Definition.Name;
         }
-
-        Type IRecordField.RecordType
-            => RecordType;
-
-        ushort IRecordField.FieldIndex
-            => FieldIndex;
-
-        string IRecordField.FieldName
-            => Name;
-
-        Type IRecordField.FieldType
-            => DataType;
-
-        ByteSize IRecordField.FieldSize
-            => Size;
-
-        RenderWidth<ushort> ITableField.RenderWidth
-            => RenderWidth;
-
-        ClrArtifactKey IRecordField.FieldKey
-            => FieldKey;
     }
 }

@@ -7,21 +7,13 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
-    partial class BitSpans
+    partial struct Records
     {
         [MethodImpl(Inline), Op]
-        public static bool same(in BitSpan a, in BitSpan b)
-        {
-            if(a.Length != b.Length)
-                return false;
-
-            for(var i=0; i<a.Length; i++)
-                if(a[i] != b[i])
-                    return false;
-
-            return true;
-        }
+        public static RecordEmission<T> emission<T>(T[] src, FS.FilePath dst)
+            where T : struct
+                => new RecordEmission<T>(src,dst);
     }
 }

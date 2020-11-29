@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Reflection;
 
     using static Konst;
     using static z;
@@ -23,12 +22,6 @@ namespace Z0
         {
             Fields = fields;
             Delimiter = delimiter;
-        }
-
-        public HeaderCell<F> this[byte index]
-        {
-            [MethodImpl(Inline)]
-            get => Cell(index);
         }
 
         public uint CellCount
@@ -52,10 +45,6 @@ namespace Z0
 
         public string HeaderText
             => Format();
-
-        [MethodImpl(Inline)]
-        public HeaderCell<F> Cell(byte index)
-            => new HeaderCell<F>(index, Fields.Spec(index), Value(index));
 
         [MethodImpl(Inline)]
         ref readonly F Value(byte index)

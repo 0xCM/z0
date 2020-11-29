@@ -10,19 +10,29 @@ namespace Z0
     using static Konst;
     using static z;
 
+    using Check = CheckPrimal;
+
+    using static BitSpanTests;
+
     public class t_bitspan : t_polyrand<t_bitspan>
     {
         public void t_bitspan_parse()
         {
-            const uint BitCount = 377;
+            var spec = define(out Parse _);
+            var counts = Random.Stream<ushort>(spec.MinBitCount, spec.MaxBitCount).Take(spec.RepCount).ToSpan();
 
-            var bits = Random.BitSpan(BitSpans.alloc(BitCount));
-            Claim.eq(bits.Length, BitCount);
+            for(var i=0; i<counts.Length; i++)
+            {
+                var count = skip(counts,i);
+                var bits = Random.BitSpan(BitSpans.alloc(count));
+                Check.eq(bits.Length, count);
 
+                var formatted = bits.Format();
+                Check.eq(count, formatted.Length);
 
-            // var input = Random.BitSpan(BitCount);
-
+                var parsed = BitSpans.parse(formatted);
+                Check.require(bits.Equals(parsed));
+            }
         }
     }
-
 }

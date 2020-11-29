@@ -64,7 +64,7 @@ namespace Z0
         public byte this[int offset, int count, byte t]
         {
             [MethodImpl(Inline)]
-            get => BitSpans.bitslice<byte>(this, offset, count);
+            get => BitSpans.bitslice32<byte>(this, offset, count);
         }
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace Z0
         public ushort this[int offset, int count, ushort t]
         {
             [MethodImpl(Inline)]
-            get => BitSpans.bitslice<ushort>(this, offset, count);
+            get => BitSpans.bitslice32<ushort>(this, offset, count);
         }
 
         /// <summary>
@@ -82,7 +82,7 @@ namespace Z0
         public uint this[int offset, int count, uint t]
         {
             [MethodImpl(Inline)]
-            get => BitSpans.bitslice<uint>(this, offset, count);
+            get => BitSpans.bitslice32<uint>(this, offset, count);
         }
 
         /// <summary>
@@ -91,7 +91,7 @@ namespace Z0
         public ulong this[int offset, int count, ulong t]
         {
             [MethodImpl(Inline)]
-            get => BitSpans.bitslice<ulong>(this, offset, count);
+            get => BitSpans.bitslice32<ulong>(this, offset, count);
         }
 
         [MethodImpl(Inline)]

@@ -5,11 +5,14 @@
 namespace Z0
 {
     using System;
-    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+    using System.Runtime.CompilerServices;
 
-    [Free]
-    public interface ITableField : IRecordField
+    using static Konst;
+
+    partial class XBitSpans
     {
-        RenderWidth<ushort> RenderWidth {get;}
+        [MethodImpl(Inline)]
+        public static BitSpan Concat(this BitSpan head, BitSpan tail)
+            => BitSpans.concat(head,tail);
     }
 }

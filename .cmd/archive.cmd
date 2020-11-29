@@ -1,4 +1,4 @@
-echo off
+@echo off
 
 set ZCmd=%ZDev%\.cmd
 echo ZCmd:%ZCmd%

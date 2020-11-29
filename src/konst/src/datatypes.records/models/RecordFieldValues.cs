@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public struct RecordFieldValues
+    public struct RecordFieldValues : IRecordFieldValues
     {
         public object Source {get;}
 

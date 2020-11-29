@@ -10,6 +10,11 @@ namespace Z0
     using static Konst;
     using static BitSpans;
 
+    public static partial class XBitSpans
+    {
+        const NumericKind Closure = Konst.UnsignedInts;
+    }
+
     partial class XBitSpans
     {
         /// <summary>
@@ -30,7 +35,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ref readonly BitSpan32 Clear(this in BitSpan32 src)
         {
-            clear(src);
+            clear32(src);
             return ref src;
         }
 
@@ -43,7 +48,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ref readonly BitSpan32 Clear(this in BitSpan32 src, int i0, int i1)
         {
-            clear(src, i0, i1);
+            clear32(src, i0, i1);
             return ref src;
         }
 
@@ -56,13 +61,6 @@ namespace Z0
         public static BitSpan32 Replicate(this in BitSpan32 src, int copies = 1)
             => replicate(src,copies);
 
-        /// <summary>
-        /// Computes the number of enabled bits covered by source
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        [MethodImpl(Inline), Op]
-        public static int PopCount(this in BitSpan32 src)
-            => pop(src);
 
         /// <summary>
         /// Extracts and packs bitsize[T] source bits
@@ -73,7 +71,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T Extract<T>(this in BitSpan32 src, T t = default)
             where T : unmanaged
-                => BitSpans.extract<T>(src);
+                => BitSpans.extract32<T>(src);
 
         /// <summary>
         /// Extracts a T-valued scalar (or portion thereof) from the source
@@ -83,7 +81,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T Convert<T>(this in BitSpan32 src)
             where T : unmanaged
-                => BitSpans.bitslice<T>(src);
+                => BitSpans.bitslice32<T>(src);
 
         /// <summary>
         /// Extracts a T-valued scalar (or portion thereof) from the source segment [offset,..,offset - (bitsize[T] - 1)]
@@ -94,12 +92,12 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T BitSlice<T>(this in BitSpan32 src, int offset)
             where T : unmanaged
-                => BitSpans.bitslice<T>(src, offset);
+                => BitSpans.bitslice32<T>(src, offset);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T BitSlice<T>(this in BitSpan32 src, int offset, int count)
             where T : unmanaged
-                => BitSpans.bitslice<T>(src, offset, count);
+                => BitSpans.bitslice32<T>(src, offset, count);
 
         /// <summary>
         /// Eliminates leading zeroes, if any, from the source

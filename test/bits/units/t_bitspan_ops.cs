@@ -282,7 +282,7 @@ namespace Z0
                 {
                     var x = Random.One<T>();
                     var y = BitSpans.from(x);
-                    var z = BitSpans.extract<T>(y);
+                    var z = BitSpans.extract32<T>(y);
                     Claim.eq(x,z);
                 }
             }

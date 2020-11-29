@@ -4,12 +4,14 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
+
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface IRecordFormatter<S> : IValueFormatter<S>
-        where S : struct, IRecord<S>
+    public interface IRecordFields : IIndex<RecordField>
     {
 
     }
+
 }

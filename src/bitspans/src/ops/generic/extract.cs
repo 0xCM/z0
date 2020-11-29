@@ -21,12 +21,12 @@ namespace Z0
         /// <param name="count">The number of source bits that contribute to the extract</param>
         /// <typeparam name="T">The scalar type</typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static T extract<T>(in BitSpan32 src, int offset = 0)
+        public static T extract32<T>(in BitSpan32 src, int offset = 0)
             where T : unmanaged
-                => extract_u<T>(src,offset);
+                => extract32_u<T>(src,offset);
 
         [MethodImpl(Inline)]
-        static T extract_u<T>(in BitSpan32 src, int offset = 0)
+        static T extract32_u<T>(in BitSpan32 src, int offset = 0)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -38,11 +38,11 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(SB.extract32(src, n64, offset));
             else
-                return extract_i<T>(src,offset);
+                return extract32_i<T>(src,offset);
         }
 
         [MethodImpl(Inline)]
-        static T extract_i<T>(in BitSpan32 src, int offset = 0)
+        static T extract32_i<T>(in BitSpan32 src, int offset = 0)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))

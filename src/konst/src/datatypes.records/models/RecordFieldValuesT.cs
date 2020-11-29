@@ -10,14 +10,14 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public struct RecordFieldValues<T>
+    public readonly struct RecordFieldValues<T> : IRecordFieldValues<T>
         where T : struct
     {
-        public T Source;
+        public T Source {get;}
 
-        public RecordFields Fields;
+        public RecordFields Fields {get;}
 
-        public RecordFieldValue[] Values;
+        public IndexedSeq<RecordFieldValue> Values {get;}
 
         [MethodImpl(Inline)]
         public RecordFieldValues(T source, RecordFields fields, RecordFieldValue[] values)

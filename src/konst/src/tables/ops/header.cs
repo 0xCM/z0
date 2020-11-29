@@ -12,10 +12,6 @@ namespace Z0
 
     partial struct Table
     {
-        [MethodImpl(Inline), Op]
-        public static TableHeader header(HeaderCell[] data)
-            => data;
-
         public static TableHeader<F> header<F>(char delimiter = FieldDelimiter)
             where F : unmanaged, Enum
                 => new TableHeader<F>(LiteralFields.fields<F>());

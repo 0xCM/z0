@@ -9,12 +9,12 @@ namespace Z0
 
     using static Konst;
 
-    using api = Table;
+    using api = Records;
 
     public struct RowAdapter<T>
         where T : struct
     {
-        public readonly TableFields Fields;
+        public readonly RecordFields Fields;
 
         uint Index;
 
@@ -23,12 +23,12 @@ namespace Z0
         DynamicRow<T> Row;
 
         [MethodImpl(Inline)]
-        public RowAdapter(in TableFields fields, uint index = 0)
+        public RowAdapter(in RecordFields fields, uint index = 0)
         {
             Source = default;
             Index = index;
             Fields = fields;
-            Row = Records.row<T>(fields.Count);
+            Row = api.row<T>(fields.Count);
         }
 
         [MethodImpl(Inline)]

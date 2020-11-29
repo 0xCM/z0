@@ -18,7 +18,6 @@ namespace Z0
 
     partial struct z
     {
-
         /// <summary>
         /// __m256i _mm256_cvtepi32_epi64 (__m128i a) VPMOVSXDQ ymm, xmm/m128
         /// 4x32i -> 4x64i

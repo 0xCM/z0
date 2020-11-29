@@ -12,12 +12,12 @@ namespace Z0
     /// <summary>
     /// Defines an entry in a <see cref='LookupTable{T,K}'/>
     /// </summary>
-    public struct LookupEntry<K,V>
+    public readonly struct LookupEntry<K,V>
         where K : unmanaged
     {
-        public K Key;
+        public K Key {get;}
 
-        public V Value;
+        public V Value {get;}
 
         [MethodImpl(Inline)]
         public static implicit operator LookupEntry<K,V>((K key, V value) src)

@@ -13,30 +13,17 @@ namespace Z0
     /// <summary>
     /// Describes a column in a table
     /// </summary>
-    public struct RecordField : IRecordField
+    public struct RecordField
     {
         /// <summary>
-        /// The defining type
+        /// The defining field
         /// </summary>
-        public Type RecordType;
+        public ClrField Definition;
 
         /// <summary>
         /// The 0-based, declaration order of the field
         /// </summary>
         public ushort FieldIndex;
-
-        /// <summary>
-        /// The clr metdata token
-        /// </summary>
-        public ClrArtifactKey FieldKey;
-
-        public Type DataType;
-
-        public ByteSize Size;
-
-        public ushort RenderWidth;
-
-        public FieldInfo Definition;
 
         public string Name
         {
@@ -44,22 +31,22 @@ namespace Z0
             get => Definition.Name;
         }
 
-        Type IRecordField.RecordType
-            => RecordType;
+        public ClrType RecordType
+        {
+            [MethodImpl(Inline)]
+            get => Definition.DeclaringType;
+        }
 
-        ushort IRecordField.FieldIndex
-            => FieldIndex;
+        public ClrType DataType
+        {
+            [MethodImpl(Inline)]
+            get => Definition.FieldType;
+        }
 
-        string IRecordField.FieldName
-            => Name;
-
-        Type IRecordField.FieldType
-            => DataType;
-
-        ByteSize IRecordField.FieldSize
-            => Size;
-
-        ClrArtifactKey IRecordField.FieldKey
-            => FieldKey;
+        public MemoryAddress HandleAddress
+        {
+            [MethodImpl(Inline)]
+            get => Definition.HandleAddress;
+        }
     }
 }

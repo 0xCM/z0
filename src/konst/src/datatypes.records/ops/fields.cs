@@ -6,9 +6,6 @@ namespace Z0
 {
     using System;
 
-    using static Konst;
-    using static z;
-
     partial struct Records
     {
         [Op, Closures(Closure)]
@@ -21,7 +18,7 @@ namespace Z0
         {
             var fields = src.DeclaredInstanceFields();
             var count = fields.Length;
-            var dst = alloc<RecordField>(count);
+            var dst = sys.alloc<RecordField>(count);
             map(fields,dst);
             return dst;
         }

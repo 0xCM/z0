@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct RecordFieldValue
+    public readonly struct RecordFieldValue : IRecordFieldValue
     {
         public ushort FieldIndex {get;}
 

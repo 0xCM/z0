@@ -22,8 +22,5 @@ namespace Z0
 
     }
 
-    public static partial class XBitSpans
-    {
-        const NumericKind Closure = Konst.UnsignedInts;
-    }
+
 }

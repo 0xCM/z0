@@ -27,89 +27,69 @@ namespace Z0
         /// <param name="caller">The caller member name</param>
         /// <param name="file">The source file of the calling function</param>
         /// <param name="line">The source file line number where invocation ocurred</param>
-        [Op]
-        public static bool yea(bool src, string msg = null, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+        [MethodImpl(Inline), Op]
+        public static bool require(bool src, string msg = null, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => !src ? @throw<bool>(ClaimException.Define(NotTrue(msg, caller, file,line))) : true;
 
-        [Op]
+        [MethodImpl(Inline), Op]
         public static bool eq(char lhs, char rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => lhs == rhs ? true : @throw<bool>(Failed(ClaimKind.Eq, NotEqual(lhs, rhs, caller, file, line)));
 
-        [Op]
+        [MethodImpl(Inline), Op]
         public static bool eq(string lhs, string rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => string.Equals(lhs,rhs) ? true : @throw<bool>(Failed(ClaimKind.Eq, NotEqual(lhs,rhs, caller, file, line)));
 
-        [Op]
+        [MethodImpl(Inline), Op]
         public static bool eq(byte lhs, byte rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => lhs == rhs ? true : @throw<bool>(Failed(ClaimKind.Eq, NotEqual(lhs,rhs, caller, file, line)));
 
-        [Op]
+        [MethodImpl(Inline), Op]
         public static bool eq(sbyte lhs, sbyte rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => lhs == rhs ? true : @throw<bool>(Failed(ClaimKind.Eq, NotEqual(lhs,rhs, caller, file, line)));
 
-        [Op]
+        [MethodImpl(Inline), Op]
         public static bool eq(short lhs, short rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => lhs == rhs ? true : @throw<bool>(Failed(ClaimKind.Eq, NotEqual(lhs,rhs, caller, file, line)));
 
-        [Op]
+        [MethodImpl(Inline), Op]
         public static bool eq(ushort lhs, ushort rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => lhs == rhs ? true : @throw<bool>(Failed(ClaimKind.Eq, NotEqual(lhs,rhs, caller, file, line)));
 
-        [Op]
+        [MethodImpl(Inline), Op]
         public static bool eq(int lhs, int rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => lhs == rhs ? true : @throw<bool>(Failed(ClaimKind.Eq, NotEqual(lhs,rhs, caller, file, line)));
 
-        [Op]
-        public static bool eq(int lhs, int rhs, string msg, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => lhs == rhs ? true : @throw<bool>(Failed(ClaimKind.Eq, NotEqual(lhs,rhs, caller, file, line)));
-
-        [Op]
+        [MethodImpl(Inline), Op]
         public static bool eq(uint lhs, uint rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => lhs == rhs ? true : @throw<bool>(Failed(ClaimKind.Eq, NotEqual(lhs,rhs, caller, file, line)));
 
-        [Op]
+        [MethodImpl(Inline), Op]
         public static bool eq(long lhs, long rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => lhs == rhs ? true : @throw<bool>(Failed(ClaimKind.Eq, NotEqual(lhs,rhs, caller, file, line)));
 
-        [Op]
+        [MethodImpl(Inline), Op]
         public static bool eq(ulong lhs, ulong rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => lhs == rhs ? true : @throw<bool>(Failed(ClaimKind.Eq, NotEqual(lhs,rhs, caller, file, line)));
 
-        [Op]
+        [MethodImpl(Inline), Op]
         public static bool eq(bool lhs, bool rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => lhs == rhs ? true : @throw<bool>(Failed(ClaimKind.Eq, NotEqual(lhs,rhs, caller, file, line)));
 
-        [Op]
-        public static bool eq(uint lhs, uint rhs, AppMsg msg)
-            => lhs == rhs ? true : throw Failed(ClaimKind.Eq, msg);
-
-        [Op]
-        public static bool eq(long lhs, long rhs, AppMsg msg)
-            => lhs == rhs ? true : throw Failed(ClaimKind.Eq, msg);
-
-        [Op]
-        public static bool eq(ulong lhs, ulong rhs, AppMsg msg)
-            => lhs == rhs ? true : throw Failed(ClaimKind.Eq, msg);
-
-        [Op]
+        [MethodImpl(Inline), Op]
         bool neq(char lhs, char rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => lhs != rhs ? true : throw Failed(ClaimKind.NEq, NotEqual(lhs, rhs, caller, file, line));
+            => lhs != rhs ? true : @throw<bool>(Failed(ClaimKind.NEq, NotEqual(lhs, rhs, caller, file, line)));
 
-        [Op]
+        [MethodImpl(Inline), Op]
         bool neq(string lhs, string rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => lhs != rhs ? true : throw Failed(ClaimKind.NEq, Equal(lhs, rhs, caller, file, line));
+            => lhs != rhs ? true : @throw<bool>(Failed(ClaimKind.NEq, Equal(lhs, rhs, caller, file, line)));
 
-        [Op]
+        [MethodImpl(Inline), Op]
         bool neq(long lhs, long rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => lhs != rhs ? true : throw Failed(ClaimKind.NEq, Equal(lhs, rhs, caller, file, line));
+            => lhs != rhs ? true : @throw<bool>(Failed(ClaimKind.NEq, Equal(lhs, rhs, caller, file, line)));
 
-        [Op]
+        [MethodImpl(Inline), Op]
         public static bool eq(int? lhs, int? rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => lhs == rhs ? true : throw Failed(ClaimKind.Eq, NotEqual(lhs, rhs, caller, file, line));
-
-        [Op]
-        public static bool eq(int? lhs, int? rhs, string msg, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => lhs == rhs ? true : throw Failed(ClaimKind.Eq, NotEqual(lhs, rhs, caller, file, line));
+            => lhs == rhs ? true : @throw<bool>(Failed(ClaimKind.Eq, NotEqual(lhs, rhs, caller, file, line)));
 
         /// <summary>
         /// Creates, but does not throw, a claim exception

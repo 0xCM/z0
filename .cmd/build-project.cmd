@@ -1,4 +1,7 @@
-echo off
+@echo off
+
+set ZCmd=%ZDev%\.cmd
+echo ZCmd:%ZCmd%
 
 set CmdSep="--------------------------------------------------------------------------------"
 set CmdLog=%ZDb%\logs\commands\z0.%ProjectId%.build.log
@@ -14,3 +17,6 @@ echo CmdExec:%CmdExec% >> %CmdLog%
 
 echo on
 call %CmdExec%
+
+call %ZCmd%\deploy.cmd
+

@@ -19,7 +19,7 @@ namespace Z0
         public static StringLookup lookup(ReadOnlySpan<StringRef> src)
             => new StringLookup(src);
 
-        [MethodImpl(Inline), Op]
+        [Op]
         public static StringIndex index(params string[] src)
             => new StringIndex(src.Select(z.hash), src);
 

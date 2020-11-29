@@ -4,12 +4,15 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+    using System;
+    using System.Runtime.CompilerServices;
 
-    [Free]
-    public interface IRecordFormatter<S> : IValueFormatter<S>
-        where S : struct, IRecord<S>
+    using static Konst;
+
+    partial class XBitSpans
     {
-
+        [MethodImpl(Inline)]
+        public static bool Equals(this BitSpan a, BitSpan b)
+            => BitSpans.same(a,b);
     }
 }

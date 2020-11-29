@@ -13,7 +13,7 @@ namespace Z0
 
     partial struct Records
     {
-        [Op, Closures(UnsignedInts)]
+        [Op, Closures(Closure)]
         public static void values<T>(in T src, ReadOnlySpan<FieldInfo> fields, Span<FieldValue> dst)
             where T : struct
         {
@@ -43,7 +43,7 @@ namespace Z0
             values(src, fields, dst);
         }
 
-        [Op, Closures(UnsignedInts)]
+        [Op, Closures(Closure)]
         public static FieldValue<S>[] values<S,T>(S src)
             where S : struct
         {

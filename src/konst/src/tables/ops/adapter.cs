@@ -12,14 +12,14 @@ namespace Z0
 
     partial struct Table
     {
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static RowAdapter<T> adapter<T>(in TableFields fields)
-            where T : struct
-                => new RowAdapter<T>(fields);
+        // [MethodImpl(Inline), Op, Closures(Closure)]
+        // public static RowAdapter<T> adapter<T>(in TableFields fields)
+        //     where T : struct
+        //         => new RowAdapter<T>(fields);
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static RowAdapter<T> adapter<T>()
-            where T : struct
-                => adapter<T>(Table.index<T>());
+        // [MethodImpl(Inline), Op, Closures(Closure)]
+        // public static RowAdapter<T> adapter<T>()
+        //     where T : struct
+        //         => adapter<T>(Table.index<T>());
     }
 }

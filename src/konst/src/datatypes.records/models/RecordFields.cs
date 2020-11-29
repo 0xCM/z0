@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct RecordFields
+    public readonly struct RecordFields : IRecordFields
     {
         readonly IndexedSeq<RecordField> Data;
 
@@ -18,10 +18,10 @@ namespace Z0
         public RecordFields(RecordField[] src)
             => Data = src;
 
-        public Count Count
+        public uint Count
         {
             [MethodImpl(Inline)]
-            get => Data.Length;
+            get => (uint)Data.Length;
         }
 
         public int Length

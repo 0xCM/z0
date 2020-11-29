@@ -35,6 +35,7 @@ namespace Z0
 
         public ClrType FieldType
         {
+            [MethodImpl(Inline)]
             get => Definition.FieldType;
         }
 
@@ -44,14 +45,13 @@ namespace Z0
             get => Definition.Attributes;
         }
 
-
         public ClrType DeclaringType
         {
             [MethodImpl(Inline)]
             get => Definition.DeclaringType;
         }
 
-        public MemoryAddress Address
+        public MemoryAddress HandleAddress
         {
             [MethodImpl(Inline)]
             get => Definition.FieldHandle.Value;
@@ -62,6 +62,10 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Definition.IsStatic;
         }
+
+        [MethodImpl(Inline)]
+        public object GetValueDirect(TypedReference src)
+            => Definition.GetValueDirect(src);
 
         [MethodImpl(Inline)]
         public string Format()

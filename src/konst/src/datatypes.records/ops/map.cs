@@ -25,11 +25,6 @@ namespace Z0
         public static ref RecordField map(FieldInfo src, ushort index, ref RecordField dst)
         {
             dst.FieldIndex = index;
-            dst.FieldKey = src.MetadataToken;
-            dst.RecordType = src.DeclaringType;
-            dst.DataType = src.FieldType;
-            dst.RenderWidth = 16;
-            dst.Size = default;
             dst.Definition = src;
             return ref dst;
         }

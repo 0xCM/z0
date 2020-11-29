@@ -4,12 +4,15 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+    using System;
+    using System.Runtime.CompilerServices;
 
-    [Free]
-    public interface IRecordFormatter<S> : IValueFormatter<S>
-        where S : struct, IRecord<S>
+    using static Konst;
+
+    public interface IRecordFieldValue
     {
+        ushort FieldIndex {get;}
 
+        object FieldValue {get;}
     }
 }

@@ -1,5 +1,8 @@
 echo off
 
+set ZCmd=%ZDev%\.cmd
+echo ZCmd:%ZCmd%
+
 set DataSrc=%ZDb%\tables
 echo DataSrc:%DataSrc%
 

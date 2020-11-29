@@ -8,10 +8,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static z;
 
-    partial class BitSpans
+    partial class XBitSpans
     {
-
+        [MethodImpl(Inline)]
+        public static string Format(this BitSpan src, BitFormat? fmt = null)
+            => BitSpans.format(src, fmt);
     }
 }

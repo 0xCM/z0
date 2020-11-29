@@ -13,6 +13,10 @@ namespace Z0
     partial class SpannedBits
     {
         [MethodImpl(Inline), Op]
+        public static Span<uint> extract32(in BitSpan32 src, int offset, int count)
+           => src.Edit.Slice(offset, count).Cast<Bit32,uint>();
+
+        [MethodImpl(Inline), Op]
         public static byte extract32(in BitSpan32 src, N8 count, int offset)
         {
             var v0 = vload(n256, first(extract32(src, offset, count)));
@@ -39,9 +43,5 @@ namespace Z0
             ref readonly var unpacked = ref first(extract32(src, offset, count));
             return BitPack.pack(unpacked, count, w64);
         }
-
-        [MethodImpl(Inline), Op]
-        public static Span<uint> extract32(in BitSpan32 src, int offset, int count)
-           => src.Edit.Slice(offset, count).Cast<Bit32,uint>();
     }
 }
