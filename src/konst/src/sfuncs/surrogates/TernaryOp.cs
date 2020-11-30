@@ -8,10 +8,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static SFx;
 
     partial class Surrogates
     {
-        public readonly struct TernaryOp<T> : Z0.ITernaryOp<T>
+        public readonly struct TernaryOp<T> : ITernaryOp<T>
         {
             readonly Z0.TernaryOp<T> F;
 

@@ -6,6 +6,8 @@ namespace Z0
 {
     using System;
 
+    using static SFx;
+
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;

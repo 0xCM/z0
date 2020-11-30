@@ -3,9 +3,11 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
     using System;
     using System.Collections.Generic;
+
+    using static SFx;
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
 

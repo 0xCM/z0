@@ -9,16 +9,36 @@ namespace Z0
 
     using static Konst;
 
-    [Record, StructLayout(DefaultLayout)]
-    public struct RngTestCase<T> : IRecord<RngTestCase<T>>
-        where T : unmanaged
+    public readonly partial struct RngCases
     {
-        public uint SampleSize;
+        [Record, StructLayout(DefaultLayout)]
+        public struct DomainCase<T> : IRecord<DomainCase<T>>
+            where T : unmanaged
+        {
+            public uint SampleSize;
 
-        public uint SampleCount;
+            public uint SampleCount;
 
-        public ClosedInterval<T> SampleDomain;
+            public ClosedInterval<T> SampleDomain;
 
-        public utf8 Description;
+            public utf8 Description;
+        }
+
+        public struct DomainCase
+        {
+            const uint SampleSizeDefault = Pow2.T16;
+
+            const uint SampleCountDefault = Pow2.T10;
+
+            public static DomainCase<T> init<T>(T min, T max)
+                where T : unmanaged
+            {
+                var dst = new DomainCase<T>();
+                dst.SampleDomain = (min,max);
+                dst.SampleSize = SampleSizeDefault;
+                dst.SampleCount = SampleCountDefault;
+                return dst;
+            }
+        }
     }
 }

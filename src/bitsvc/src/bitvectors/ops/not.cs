@@ -12,9 +12,9 @@ namespace Z0
     partial class BV
     {
         [Closures(UnsignedInts), Not]
-        public readonly struct Not<T> : IUnaryOp<T>
-            where T : unmanaged        
-        {    
+        public readonly struct Not<T> : IBvUnaryOp<T>
+            where T : unmanaged
+        {
             [MethodImpl(Inline)]
             public readonly BitVector<T> Invoke(BitVector<T> a) => BitVector.not(a);
 

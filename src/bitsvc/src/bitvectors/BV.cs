@@ -8,11 +8,13 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static z;
+    using static SFx;
 
     [FunctionalService]
     public partial class BV : ISFxHost<BV>
     {
+        const NumericKind Closure = UnsignedInts;
+
         [MethodImpl(Inline)]
         public static Add<T> add<T>(T t = default)
             where T : unmanaged

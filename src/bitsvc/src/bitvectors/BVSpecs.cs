@@ -7,38 +7,46 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using static SFx;
+
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
     partial class BV
     {
-        public interface IUnaryOp<T> : Z0.IUnaryOp<BitVector<T>>
+        [Free, SFx]
+        public interface IBvUnaryOp<T> : IUnaryOp<BitVector<T>>
             where T : unmanaged
         {
             T Invoke(T a);
         }
 
-        public interface IBinaryOp<T> : Z0.IBinaryOp<BitVector<T>>
+        [Free, SFx]
+        public interface IBvBinaryOp<T> : IBinaryOp<BitVector<T>>
             where T : unmanaged
         {
             T Invoke(T a, T b);
         }
 
-        public interface ITernaryOpBV<T> : Z0.ITernaryOp<BitVector<T>>
+        [Free, SFx]
+        public interface IBvTernaryOp<T> : ITernaryOp<BitVector<T>>
             where T : unmanaged
         {
 
             T Invoke(T a, T b, T c);
         }
 
-        public interface IUnaryPredBV<T> : Z0.IFunc<BitVector<T>, Bit32>
+        [Free, SFx]
+        public interface IBvUnaryPred<T> : IFunc<BitVector<T>, Bit32>
             where T : unmanaged
         {
             Bit32 Invoke(T a);
         }
 
-        public interface IBinaryPred<T> : Z0.IFunc<BitVector<T>,BitVector<T>,Bit32>
+        [Free, SFx]
+        public interface IBvBinaryPred<T> : IFunc<BitVector<T>,BitVector<T>,Bit32>
             where T : unmanaged
         {
             Bit32 Invoke(T a, T b);
         }
-
     }
 }

@@ -5,6 +5,7 @@
 namespace Z0.Dynamics.Operators
 {
     using System;
+    using static SFx;
 
     public static class Zero<T>
     {

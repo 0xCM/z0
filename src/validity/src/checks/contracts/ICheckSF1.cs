@@ -7,6 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using static SFx;
+
     using api = Matches;
 
     public interface ICheckSF<T,R> : ICheckSF

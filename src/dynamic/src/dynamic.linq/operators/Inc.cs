@@ -10,6 +10,7 @@ namespace Z0.Dynamics.Operators
 
     using static z;
     using static LinqXPress;
+    using static SFx;
 
     public readonly struct Inc<T>
     {

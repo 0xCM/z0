@@ -11,6 +11,7 @@ namespace Z0
 
     using static Konst;
     using static LinqXFunc;
+    using static SFx;
 
     partial struct DynamicOps
     {

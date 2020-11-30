@@ -12,9 +12,9 @@ namespace Z0
     partial class BV
     {
         [Closures(UnsignedInts), Xor]
-        public readonly struct Xor<T> : IBinaryOp<T>
-            where T : unmanaged        
-        {    
+        public readonly struct Xor<T> : IBvBinaryOp<T>
+            where T : unmanaged
+        {
             [MethodImpl(Inline)]
             public readonly BitVector<T> Invoke(BitVector<T> a, BitVector<T> b) => BitVector.xor(a,b);
 

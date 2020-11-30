@@ -10,8 +10,6 @@ namespace Z0
     using static Konst;
     using static z;
 
-    using api = Cmd;
-
     public readonly struct CmdScriptExpr : ICmdScriptExpr
     {
         public CmdPattern Pattern {get;}

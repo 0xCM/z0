@@ -12,13 +12,13 @@ namespace Z0
 
     using Check = CheckPrimal;
 
-    using static BitSpanTests;
+    using static BitSpanCases;
 
     public class t_bitspan : t_polyrand<t_bitspan>
     {
         public void t_bitspan_parse()
         {
-            var spec = define(out Parse _);
+            var spec = define(out ParseCase _);
             var counts = Random.Stream<ushort>(spec.MinBitCount, spec.MaxBitCount).Take(spec.RepCount).ToSpan();
 
             for(var i=0; i<counts.Length; i++)

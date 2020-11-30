@@ -9,6 +9,7 @@ namespace Z0
 
     using static Konst;
     using static z;
+    using static SFx;
 
     [FunctionalService]
     public partial class BC : ISFxHost<BC>

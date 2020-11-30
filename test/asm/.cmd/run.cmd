@@ -1,8 +1,10 @@
-echo off
+@echo off
 
 set ProjectId=asm
 echo ProjectId:%ProjectId%
 
-call .cmd\config.cmd
+set ZCmd=%ZDev%\.cmd
+echo ZCmd:%ZCmd%
 
-dotnet run %ProjectPath% -c Release
+call %ZCmd%\build-tests.cmd
+call %TestExe%

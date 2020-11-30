@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct z
+    partial struct SFx
     {
         /// <summary>
         /// Creates a structural function of specified parametric type

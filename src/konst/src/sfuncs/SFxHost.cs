@@ -11,6 +11,7 @@ namespace Z0
     using System.Reflection;
 
     using static Konst;
+    using static SFx;
 
     /// <summary>
     /// Defines service provider implementation predicated on service factory and enclosure types

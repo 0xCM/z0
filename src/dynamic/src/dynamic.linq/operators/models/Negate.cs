@@ -10,6 +10,7 @@ namespace Z0
 
     using static Konst;
     using static LinqXPress;
+    using static SFx;
 
     partial struct DynamicOps
     {

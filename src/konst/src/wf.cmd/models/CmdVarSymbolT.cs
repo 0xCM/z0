@@ -9,7 +9,6 @@ namespace Z0
 
     using static z;
     using static Konst;
-    using static CmdScripts;
 
     public readonly struct CmdVarSymbol<T> : ICmdVarSymbol<T>
     {
@@ -27,7 +26,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => CmdVars.format(this);
+            => CmdFormat.format(this);
 
         public override string ToString()
             => Format();

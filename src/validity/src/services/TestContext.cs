@@ -9,11 +9,11 @@ namespace Z0
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Runtime.CompilerServices;
-    using System.Linq.Expressions;
     using System.Reflection;
     using System.IO;
 
     using static Konst;
+    using static SFx;
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
 

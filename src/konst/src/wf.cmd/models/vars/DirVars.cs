@@ -10,7 +10,6 @@ namespace Z0
 
     using static Konst;
     using static z;
-    using static CmdScripts;
 
     partial struct CmdVarTypes
     {
@@ -27,7 +26,7 @@ namespace Z0
                 => Data.Storage.Cast<ICmdVar>().Array();
 
             public string Format()
-                => CmdVars.format(this);
+                => CmdFormat.format(this);
 
             public override string ToString()
                 => Format();

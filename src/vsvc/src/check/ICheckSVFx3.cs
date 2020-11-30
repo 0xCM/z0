@@ -8,6 +8,8 @@ namespace Z0
     using System.Security;
     using System.Runtime.Intrinsics;
 
+    using static SFx;
+
     [SuppressUnmanagedCodeSecurity]
     public interface ICheckBinarySVFD<W,F,T>
         where T : unmanaged

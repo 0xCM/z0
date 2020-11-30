@@ -12,6 +12,7 @@ namespace Z0.Dynamics.Operators
     using static z;
     using static LinqXPress;
     using static LinqXFunc;
+    using static SFx;
 
     public static class Mul<T>
     {

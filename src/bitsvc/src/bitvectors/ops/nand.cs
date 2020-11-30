@@ -7,14 +7,14 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst; 
+    using static Konst;
 
     partial class BV
     {
         [Closures(UnsignedInts)]
-        public readonly struct Nand<T> : IBinaryOp<T>
-            where T : unmanaged        
-        {    
+        public readonly struct Nand<T> : IBvBinaryOp<T>
+            where T : unmanaged
+        {
             [MethodImpl(Inline)]
             public readonly BitVector<T> Invoke(BitVector<T> a, BitVector<T> b) => BitVector.nand(a,b);
 

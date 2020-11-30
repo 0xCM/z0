@@ -10,30 +10,13 @@ namespace Z0
     using static Konst;
     using static z;
     using static CheckNumeric;
-
-    public readonly struct RngTestCase
-    {
-        const uint SampleSizeDefault = Pow2.T16;
-
-        const uint SampleCountDefault = Pow2.T10;
-
-        public static RngTestCase<T> init<T>(T min, T max)
-            where T : unmanaged
-        {
-            var dst = new RngTestCase<T>();
-            dst.SampleDomain = (min,max);
-            dst.SampleSize = SampleSizeDefault;
-            dst.SampleCount = SampleCountDefault;
-            return dst;
-        }
-    }
-
+    using static RngCases;
 
     public class t_pcg : t_polyrand<t_pcg>
     {
         public void t_pcg64x8()
         {
-            var config = RngTestCase.init(uint8(32), uint8(128));
+            var config = DomainCase.init(uint8(32), uint8(128));
             var source = Rng.pcg64();
             var buffer = span<byte>(config.SampleSize);
 
@@ -47,7 +30,7 @@ namespace Z0
 
         public void t_splitmix64x64()
         {
-            var config = RngTestCase.init(150ul, 0xFFFFFFFFFFul);
+            var config = DomainCase.init(150ul, 0xFFFFFFFFFFul);
             var source = Rng.splitmix();
             var buffer = span<ulong>(config.SampleSize);
 
@@ -59,7 +42,7 @@ namespace Z0
             }
         }
 
-        void check<T>(in RngTestCase<T> spec, ReadOnlySpan<T> points)
+        void check<T>(in DomainCase<T> spec, ReadOnlySpan<T> points)
             where T : unmanaged
         {
             var domain = spec.SampleDomain;

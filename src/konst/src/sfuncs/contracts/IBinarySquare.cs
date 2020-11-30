@@ -8,9 +8,16 @@ namespace Z0
 
     using static SFx;
 
-    public interface IBinarySquare<W,T> : IBinaryRefOp<W,T>, IBinaryRefStepOp<W,T>
-        where T : unmanaged
-        where W : unmanaged, ITypeWidth
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
+    partial struct SFx
     {
+
+        [Free]
+        public interface IBinarySquare<W,T> : IBinaryRefOp<W,T>, IBinaryRefStepOp<W,T>
+            where T : unmanaged
+            where W : unmanaged, ITypeWidth
+        {
+        }
     }
 }

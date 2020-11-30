@@ -8,10 +8,10 @@ namespace Z0.Dynamics.Operators
     using System;
     using System.Linq.Expressions;
 
-    using Z0.Dynamics.Operators;
 
     using static z;
     using static LinqXPress;
+    using static SFx;
 
     public static class LtEq<T>
     {

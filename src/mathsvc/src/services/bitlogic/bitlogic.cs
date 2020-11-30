@@ -10,8 +10,6 @@ namespace Z0
     using static Konst;
     using static MSvcHosts;
 
-    using K = Kinds;
-
     partial class MSvc
     {
         [MethodImpl(Inline)]

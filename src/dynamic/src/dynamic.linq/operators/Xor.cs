@@ -8,8 +8,9 @@ namespace Z0.Dynamics.Operators
     using System.Linq.Expressions;
     using System.Reflection;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
+    using static SFx;
 
     public readonly struct Xor<T> : IFunc<T,T,T>
     {

@@ -10,10 +10,10 @@ namespace Z0
     using static Konst;
 
     [ApiHost]
-    public readonly partial struct BitSpanTests
+    public readonly partial struct BitSpanCases
     {
         [MethodImpl(Inline), Op]
-        public static ref Parse define(out Parse dst, ushort reps = 100, ushort minbits = 18, ushort maxbits = 2058)
+        public static ref ParseCase define(out ParseCase dst, ushort reps = 100, ushort minbits = 18, ushort maxbits = 2058)
         {
             dst.RepCount = reps;
             dst.MinBitCount = minbits;
@@ -21,7 +21,7 @@ namespace Z0
             return ref dst;
         }
 
-        public struct Parse : IRecord<Parse>
+        public struct ParseCase : IRecord<ParseCase>
         {
             public ushort MinBitCount;
 

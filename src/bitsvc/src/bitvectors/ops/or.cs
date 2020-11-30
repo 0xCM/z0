@@ -11,10 +11,10 @@ namespace Z0
 
     partial class BV
     {
-        [Closures(UnsignedInts), Or]
-        public readonly struct Or<T> : IBinaryOp<T>
-            where T : unmanaged        
-        {    
+        [Closures(Closure), Or]
+        public readonly struct Or<T> : IBvBinaryOp<T>
+            where T : unmanaged
+        {
             [MethodImpl(Inline)]
             public readonly BitVector<T> Invoke(BitVector<T> a, BitVector<T> b) => BitVector.or(a,b);
 

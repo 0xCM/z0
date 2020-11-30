@@ -8,7 +8,6 @@ namespace Z0
 
     using static z;
     using static Konst;
-    using static CmdPatterns;
 
     partial struct CmdScripts
     {
@@ -20,7 +19,8 @@ namespace Z0
             data.CmdHost = tool;
             data.CmdArgName = arg;
             data.ArgPrefix = prefix ?? CmdArgPrefix.Default;
-            data.ScriptType = FS.ext(type ?? DefaultCmdType);
+            data.ScriptType = FS.ext(type ?? "exe");
+
             rules(db, ref data);
             return data;
         }

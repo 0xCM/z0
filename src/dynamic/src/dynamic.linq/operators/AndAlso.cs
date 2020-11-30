@@ -7,9 +7,9 @@ namespace Z0.Dynamics.Operators
     using System;
     using System.Linq.Expressions;
 
-    using Z0.Dynamics.Operators;
 
     using static LinqXPress;
+    using static SFx;
 
     public static class AndAlso<T>
     {

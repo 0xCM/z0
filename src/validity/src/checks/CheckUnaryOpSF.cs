@@ -9,8 +9,6 @@ namespace Z0
 
     using static Konst;
 
-    using api = Matches;
-
     public readonly struct CheckUnaryOpSF<T> : ICheckSF<T,T>
         where T : unmanaged
     {

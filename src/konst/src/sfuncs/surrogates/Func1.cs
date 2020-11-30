@@ -7,14 +7,16 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+
     using static Konst;
+    using static SFx;
 
     partial class Surrogates
     {
         /// <summary>
         /// Defines a structured surrogate over a unary function delegate
         /// </summary>
-        public readonly struct Func<X0,R> : Z0.IFunc<X0,R>
+        public readonly struct Func<X0,R> : IFunc<X0,R>
         {
             readonly System.Func<X0,R> F;
 

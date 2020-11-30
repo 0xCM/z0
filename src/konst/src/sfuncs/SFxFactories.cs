@@ -9,6 +9,7 @@ namespace Z0
     using System.Reflection;
 
     using static Konst;
+    using static SFx;
 
     [ApiHost(ApiNames.SFxFactories, true)]
     public readonly struct SFxFactories

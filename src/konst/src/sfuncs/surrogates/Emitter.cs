@@ -8,13 +8,14 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static SFx;
 
     partial class Surrogates
     {
         /// <summary>
         /// Captures a delegate that is exposed as an emitter
         /// </summary>
-        public readonly struct Emitter<T> : SFx.IEmitter<T>
+        public readonly struct Emitter<T> : IEmitter<T>
         {
             public OpIdentity Id {get;}
 

@@ -10,7 +10,6 @@ namespace Z0
 
     using static z;
     using static Konst;
-    using static CmdScripts;
 
     public struct CmdScriptVars : ICmdVars<CmdScriptVars>
     {
@@ -25,7 +24,7 @@ namespace Z0
             => new Index<ICmdVar>(Data.Storage.Select(x => z.cast<ICmdVar>(x)));
 
         public string Format()
-            => CmdVars.format(this);
+            => CmdFormat.format(this);
 
         public override string ToString()
             => Format();

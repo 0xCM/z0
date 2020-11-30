@@ -9,6 +9,9 @@ namespace Z0
 
     using static Part;
 
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
+
     public readonly struct bit : ITextual, IEquatable<bit>
     {
         internal readonly bool State;
@@ -409,6 +412,18 @@ namespace Z0
             [MethodImpl(Inline), Select]
             public static bit select(bit a, bit b, bit c)
                 => new bit((a.State & b.State) | (!a.State & c.State));
+
+            public readonly struct OperatorDelegates
+            {
+                [Free]
+                public delegate bit UnaryOp(bit a);
+
+                [Free]
+                public delegate bit BinaryOp(bit a, bit b);
+
+                [Free]
+                public delegate bit TernaryOp(bit a, bit b, bit c);
+            }
         }
     }
 }

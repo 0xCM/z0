@@ -6,17 +6,18 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-        
-    using static Konst; 
+
+    using static Konst;
+    using static SFx;
 
     partial class MSvcHosts
     {
         [Closures(Integers), Srl]
         public readonly struct Srl<T> : IUnaryImm8Op<T>, ISpanShift<T>
-            where T : unmanaged        
+            where T : unmanaged
         {
             [MethodImpl(Inline)]
-            public T Invoke(T a, byte count) 
+            public T Invoke(T a, byte count)
                 => gmath.srl(a, count);
 
             [MethodImpl(Inline)]
@@ -26,7 +27,7 @@ namespace Z0
 
         [Closures(Integers), Srlv]
         public readonly struct Srlv<T> : IVarSpanShift<T>
-            where T : unmanaged        
+            where T : unmanaged
         {
             [MethodImpl(Inline)]
             public Span<T> Invoke(ReadOnlySpan<T> src, ReadOnlySpan<byte> counts, Span<T> dst)

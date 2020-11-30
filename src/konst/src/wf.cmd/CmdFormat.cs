@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
     using static z;
-
+    using static CmdVarTypes;
 
     [ApiHost]
     public readonly partial struct CmdFormat
@@ -140,5 +140,40 @@ namespace Z0
         public static string format<K>(CmdOptionSpec<K> src)
             where K : unmanaged
                 => src.IsAnonymous || src.IsEmpty ? EmptyString : src.Name;
+
+        [Op]
+        public static void render(DirVars src, ITextBuffer dst)
+        {
+            var members = src.Members().View;
+            var count = members.Length;
+            for(var i=0; i<count; i++)
+                dst.AppendLine(format(skip(members,i)));
+        }
+
+        [Op, Closures(Closure)]
+        public static string format<T>(CmdVarSymbol<T> src)
+            => string.Format("{0}", src.Name);
+
+        [Op]
+        public static string format(CmdVarValue src)
+            => src.Content ?? EmptyString;
+
+        [Op]
+        public static string format(ICmdVar src)
+            => string.Format("{0}={1}", src.Symbol, src.Value);
+
+        [Op]
+        public static string format(CmdVarSymbol src)
+            => string.Format("$({0})",src.Name ?? EmptyString);
+
+        [Op]
+        public static string format(ICmdVars src)
+        {
+            var dst = text.build();
+            foreach(var member in src.Members())
+                dst.AppendLine(format(member));
+            return dst.ToString();
+        }
+
     }
 }

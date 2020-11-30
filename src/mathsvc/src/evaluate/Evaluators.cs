@@ -6,11 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Reflection;
-    using System.Linq;
 
     using static Konst;
-    using static z;
+    using static SFx;
 
     [ApiHost]
     public readonly struct Evaluators

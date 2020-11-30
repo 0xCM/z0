@@ -12,7 +12,7 @@ namespace Z0
     partial class BV
     {
         [Closures(UnsignedInts), Dot]
-        public readonly struct Dot<T> : IBinaryPred<T>
+        public readonly struct Dot<T> : IBvBinaryPred<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]

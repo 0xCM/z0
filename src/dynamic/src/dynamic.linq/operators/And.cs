@@ -10,7 +10,7 @@ namespace Z0.Dynamics.Operators
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static LinqXPress;
+    using static SFx;
 
     public readonly struct And<T> : IFunc<T,T,T>
     {

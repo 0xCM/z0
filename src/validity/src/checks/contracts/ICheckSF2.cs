@@ -46,7 +46,7 @@ namespace Z0
             }
             finally
             {
-                Context.ReportCaseResult(casename,succeeded,clock);
+                Context.ReportCaseResult(casename, succeeded, clock);
             }
         }
 

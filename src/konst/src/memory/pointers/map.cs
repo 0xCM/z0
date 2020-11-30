@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static SFx;
 
     unsafe partial struct Pointers
     {
@@ -30,6 +31,7 @@ namespace Z0
             where T : unmanaged
                 => map(src,new Locate<T>(), dst);
 
+
         readonly struct Locate<T> : IPointedMap<Locate<T>,T,MemoryAddress>
             where T : unmanaged
         {
@@ -37,6 +39,5 @@ namespace Z0
             public MemoryAddress Map(T* pSrc)
                 => pSrc;
         }
-
     }
 }

@@ -11,6 +11,7 @@ namespace Z0
 
     using static Konst;
     using static ApiUriDelimiters;
+    using static SFx;
 
     [ApiHost(ApiNames.ApiTestIdentity, true)]
     public readonly struct ApiTestIdentity

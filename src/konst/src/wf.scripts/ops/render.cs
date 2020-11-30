@@ -21,14 +21,5 @@ namespace Z0
             for(var i=0; i<count; i++)
                 dst.AppendLine(skip(parts,i).Format());
         }
-
-        [Op]
-        public static void render(DirVars src, ITextBuffer dst)
-        {
-            var members = src.Members().View;
-            var count = members.Length;
-            for(var i=0; i<count; i++)
-                dst.AppendLine(CmdVars.format(skip(members,i)));
-        }
-    }
+     }
 }

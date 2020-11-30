@@ -5,10 +5,11 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
+
+    using static SFx;
 
     /// <summary>
     /// Characterizes a service that exposes serviced api operations

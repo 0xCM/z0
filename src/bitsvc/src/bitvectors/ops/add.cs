@@ -7,14 +7,14 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst; 
+    using static Konst;
 
     partial class BV
     {
-        [Closures(UnsignedInts), Add]
-        public readonly struct Add<T> : IBinaryOp<T>
-            where T : unmanaged        
-        {    
+        [Closures(Closure), Add]
+        public readonly struct Add<T> : IBvBinaryOp<T>
+            where T : unmanaged
+        {
             [MethodImpl(Inline)]
             public readonly BitVector<T> Invoke(BitVector<T> a, BitVector<T> b) => BitVector.add(a,b);
 
