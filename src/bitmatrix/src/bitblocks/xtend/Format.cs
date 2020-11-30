@@ -49,7 +49,6 @@ namespace Z0
             where T : unmanaged
                 => src.Bytes().FormatMatrixBits(rowlen, maxbits, showrow);
 
-
         [MethodImpl(Inline)]
         public static string Format<N,T>(this BitBlock<N,T> src, BitFormat? config = null)
             where N : unmanaged, ITypeNat

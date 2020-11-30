@@ -12,7 +12,7 @@ namespace Z0
         /// <param name="buffer">The target buffer</param>
         /// <param name="src">The executable source</param>
         /// <typeparam name="F">The fixed operand type</typeparam>
-        FixedUnaryOp<F> EmitFixedUnary<F>(BufferToken dst, ApiCodeBlock src);
+        UnaryOp<F> EmitFixedUnary<F>(BufferToken dst, ApiCodeBlock src);
 
         /// <summary>
         /// Loads source into a token-identified buffer and covers it with a fixed binary operator
@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="buffer">The target buffer</param>
         /// <param name="src">The code to load</param>
         /// <typeparam name="F">The fixed operand type</typeparam>
-        FixedBinaryOp<F> EmitFixedBinary<F>(BufferToken buffer, ApiCodeBlock src);
+        BinaryOp<F> EmitFixedBinary<F>(BufferToken buffer, ApiCodeBlock src);
 
         /// <summary>
         /// Loads executable source into an identified buffer and creates a fixed unary operator over the buffer
@@ -28,7 +28,7 @@ namespace Z0
         /// <param name="dst">The target buffer</param>
         /// <param name="src">The executable source</param>
         /// <typeparam name="F">The fixed operand type</typeparam>
-        FixedTernaryOp<F> EmitFixedTernary<F>(BufferToken dst, ApiCodeBlock src);
+        TernaryOp<F> EmitFixedTernary<F>(BufferToken dst, ApiCodeBlock src);
 
         /// <summary>
         /// Creates a fixed 8-bit unary operator from caller-supplied x86 source code

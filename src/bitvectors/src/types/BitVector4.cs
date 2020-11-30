@@ -24,7 +24,7 @@ namespace Z0
 
 
         [MethodImpl(Inline)]
-        internal BitVector4(byte data, Bit32 direct)
+        internal BitVector4(byte data, bit direct)
             => this.Data = data;
 
         [MethodImpl(Inline)]
@@ -52,7 +52,7 @@ namespace Z0
         /// <summary>
         /// Returns true if all bits are disabled, false otherwise
         /// </summary>
-        public readonly Bit32 Empty
+        public readonly bit Empty
         {
             [MethodImpl(Inline)]
             get => Data == 0;
@@ -61,7 +61,7 @@ namespace Z0
         /// <summary>
         /// Returns true if at least one bit is enabled, false otherwise
         /// </summary>
-        public readonly Bit32 NonEmpty
+        public readonly bit NonEmpty
         {
             [MethodImpl(Inline)]
             get => Data != 0;
@@ -73,13 +73,13 @@ namespace Z0
             get => (0xF & Data) == 0xF;
         }
 
-        public Bit32 this[byte pos]
+        public bit this[byte pos]
         {
             [MethodImpl(Inline)]
             get => (Data & (1 << pos)) != 0;
 
             [MethodImpl(Inline)]
-            set => Data = Bit32.set(Data, pos, value);
+            set => Data = BitStates.set(Data, pos, value);
         }
 
         public BitVector4 this[byte first, byte last]
@@ -175,7 +175,7 @@ namespace Z0
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static Bit32 operator %(BitVector4 x, BitVector4 y)
+        public static bit operator %(BitVector4 x, BitVector4 y)
             => BitVector.dot(x,y);
 
         [MethodImpl(Inline)]
@@ -205,7 +205,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Bit32 operator ==(BitVector4 x, BitVector4 y)
+        public static bit operator ==(BitVector4 x, BitVector4 y)
             => math.eq(x,y);
 
         /// <summary>
@@ -214,7 +214,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Bit32 operator !=(BitVector4 x, BitVector4 y)
+        public static bit operator !=(BitVector4 x, BitVector4 y)
             => math.neq(x,y);
 
         /// <summary>
@@ -223,7 +223,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Bit32 operator <(BitVector4 x, BitVector4 y)
+        public static bit operator <(BitVector4 x, BitVector4 y)
             => math.lt(x,y);
 
         /// <summary>
@@ -232,7 +232,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Bit32 operator >(BitVector4 x, BitVector4 y)
+        public static bit operator >(BitVector4 x, BitVector4 y)
             => math.gt(x,y);
 
         /// <summary>
@@ -241,7 +241,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Bit32 operator <=(BitVector4 x, BitVector4 y)
+        public static bit operator <=(BitVector4 x, BitVector4 y)
             => math.lteq(x,y);
 
         /// <summary>
@@ -250,7 +250,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Bit32 operator >=(BitVector4 x, BitVector4 y)
+        public static bit operator >=(BitVector4 x, BitVector4 y)
             => math.gteq(x,y);
     }
 }

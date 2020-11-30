@@ -259,7 +259,7 @@ namespace Z0
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static Bit32 operator %(BitVector24 x, BitVector24 y)
+        public static bit operator %(BitVector24 x, BitVector24 y)
             => BitVector.dot(x.Data, y.Data);
 
         /// <summary>

@@ -103,7 +103,7 @@ namespace Z0
             {
                 var x = Random.BitBlock<N,T>();
                 var y = Random.BitBlock<N,T>();
-                Bit32 a = x % y;
+                bit a = x % y;
                 var b = BitBlocks.modprod(x,y);
                 if(a != b)
                     Notify($"nbc {n}x{ApiIdentify.numeric<T>()} is a problem");

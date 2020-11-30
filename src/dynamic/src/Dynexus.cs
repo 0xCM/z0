@@ -163,18 +163,18 @@ namespace Z0
                 => ImmInjector.from(Diviner, I.V256BinaryOpImmInjector.Create<T>(Diviner));
 
         [MethodImpl(Inline)]
-        FixedUnaryOp<F> IFixedDynamic.EmitFixedUnary<F>(BufferToken dst, ApiCodeBlock src)
-            => (FixedUnaryOp<F>)Emit(src.Id, typeof(FixedUnaryOp<F>), typeof(F),
+        UnaryOp<F> IFixedDynamic.EmitFixedUnary<F>(BufferToken dst, ApiCodeBlock src)
+            => (UnaryOp<F>)Emit(src.Id, typeof(UnaryOp<F>), typeof(F),
                     sys.array(typeof(F)), dst.Load(src.Encoded).Handle);
 
         [MethodImpl(Inline)]
-        FixedBinaryOp<F> IFixedDynamic.EmitFixedBinary<F>(BufferToken dst, ApiCodeBlock src)
-            => (FixedBinaryOp<F>)Emit(src.Id, typeof(FixedBinaryOp<F>), typeof(F),
+        BinaryOp<F> IFixedDynamic.EmitFixedBinary<F>(BufferToken dst, ApiCodeBlock src)
+            => (BinaryOp<F>)Emit(src.Id, typeof(BinaryOp<F>), typeof(F),
                     sys.array(typeof(F),typeof(F)),dst.Load(src.Encoded).Handle);
 
         [MethodImpl(Inline)]
-        FixedTernaryOp<F> IFixedDynamic.EmitFixedTernary<F>(BufferToken dst, ApiCodeBlock src)
-            => (FixedTernaryOp<F>)Emit(src.Id, typeof(FixedTernaryOp<F>), typeof(F),
+        TernaryOp<F> IFixedDynamic.EmitFixedTernary<F>(BufferToken dst, ApiCodeBlock src)
+            => (TernaryOp<F>)Emit(src.Id, typeof(TernaryOp<F>), typeof(F),
                     sys.array(typeof(F), typeof(F), typeof(F)), dst.Load(src.Encoded).Handle);
 
         [MethodImpl(Inline)]
@@ -298,28 +298,28 @@ namespace Z0
         [MethodImpl(Inline)]
         UnaryOp<T> EmitUnaryOp<T>(OpIdentity id, BufferToken dst)
             where T : unmanaged
-                => (UnaryOp<T>)EmitFixedUnaryOp(id, typeof(UnaryOp<T>), typeof(T), dst);
+                => (UnaryOp<T>)EmitUnaryOp(id, typeof(UnaryOp<T>), typeof(T), dst);
 
         [MethodImpl(Inline)]
         BinaryOp<T> EmitBinaryOp<T>(OpIdentity id, BufferToken dst)
             where T : unmanaged
-                => (BinaryOp<T>)EmitFixedBinaryOp(id, typeof(BinaryOp<T>), typeof(T), dst);
+                => (BinaryOp<T>)EmitBinaryOp(id, typeof(BinaryOp<T>), typeof(T), dst);
 
         [MethodImpl(Inline)]
         TernaryOp<T> EmitTernaryOp<T>(OpIdentity id, BufferToken dst)
             where T : unmanaged
-                => (TernaryOp<T>)EmitFixedTernaryOp(id,typeof(TernaryOp<T>), typeof(T), dst);
+                => (TernaryOp<T>)EmitTernaryOp(id,typeof(TernaryOp<T>), typeof(T), dst);
 
         [MethodImpl(Inline)]
-        CellDelegate EmitFixedUnaryOp(OpIdentity id, Type operatorType, Type operandType, BufferToken dst)
+        CellDelegate EmitUnaryOp(OpIdentity id, Type operatorType, Type operandType, BufferToken dst)
             => Emit(id, functype: operatorType, result: operandType, args: array(operandType), dst.Handle);
 
         [MethodImpl(Inline)]
-        CellDelegate EmitFixedBinaryOp(OpIdentity id, Type operatorType, Type operandType, BufferToken dst)
+        CellDelegate EmitBinaryOp(OpIdentity id, Type operatorType, Type operandType, BufferToken dst)
             => Emit(id, functype:operatorType, result:operandType, args: array(operandType, operandType), dst.Handle);
 
         [MethodImpl(Inline)]
-        CellDelegate EmitFixedTernaryOp(OpIdentity id, Type operatorType, Type operandType, BufferToken dst)
+        CellDelegate EmitTernaryOp(OpIdentity id, Type operatorType, Type operandType, BufferToken dst)
             => Emit(id, functype:operatorType, result:operandType, args: array(operandType, operandType, operandType), dst.Handle);
 
         CellDelegate Emit(OpIdentity id, Type functype, Type result, Type[] args, IntPtr dst)

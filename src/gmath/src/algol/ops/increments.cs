@@ -15,7 +15,6 @@ namespace Z0
 
     partial struct Algorithmic
     {
-        [Op, Closures(UnsignedInts)]
         public static Span<T> increments<T>(ClosedInterval<T> src)
             where T : unmanaged
         {

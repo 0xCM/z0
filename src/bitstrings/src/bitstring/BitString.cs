@@ -38,10 +38,18 @@ namespace Z0
                 data[i] = (byte)src[i];
         }
 
+        [MethodImpl(Inline)]
+        internal BitString(ReadOnlySpan<bit> src)
+        {
+            data = new byte[src.Length];
+            for(var i=0; i<src.Length; i++)
+                data[i] = (byte)src[i];
+        }
+
         /// <summary>
         /// Queries/manipulates bit at specified index
         /// </summary>
-        public Bit32 this[int index]
+        public bit this[int index]
         {
             [MethodImpl(Inline)]
             get => data[index] == 1;

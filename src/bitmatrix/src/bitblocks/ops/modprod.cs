@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="y">The second vector</param>
         /// <remarks>This should be considered a reference implementation; the dot operation is considerably faster</remarks>
 
-        public static Bit32 modprod<T>(in BitBlock<T> x, in BitBlock<T> y)
+        public static bit modprod<T>(in BitBlock<T> x, in BitBlock<T> y)
             where T : unmanaged
         {
             var result = 0u;
@@ -41,7 +41,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         /// <remarks>This should be considered a reference implementation; the dot operation is considerably faster</remarks>
         [MethodImpl(Inline)]
-        public static Bit32 modprod<N,T>(in BitBlock<N,T> x, in BitBlock<N,T> y)
+        public static bit modprod<N,T>(in BitBlock<N,T> x, in BitBlock<N,T> y)
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => modprod(x.Unsize(),y.Unsize());

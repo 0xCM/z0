@@ -32,49 +32,6 @@ namespace Z0
         public static uint CellWidth
             => bitwidth<T>();
 
-        [MethodImpl(Inline)]
-        public static implicit operator BitBlock<T>(Span<T> src)
-            => new BitBlock<T>(src, bitwidth<T>());
-
-        [MethodImpl(Inline)]
-        public static implicit operator BitBlock<T>(T src)
-            => new BitBlock<T>(src, bitwidth<T>());
-
-        [MethodImpl(Inline)]
-        public static Bit32 operator %(in BitBlock<T> x, in BitBlock<T> y)
-            => BitBlocks.dot(x,y);
-
-        /// <summary>
-        /// Computes the bitwise complement of the operand
-        /// </summary>
-        /// <param name="x">The source operand</param>
-        [MethodImpl(Inline)]
-        public static BitBlock<T> operator ~(in BitBlock<T> src)
-            => default;
-
-        /// <summary>
-        /// Returns true if the source vector is nonzero, false otherwise
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        [MethodImpl(Inline)]
-        public static bool operator true(in BitBlock<T> src)
-            => src.NonEmpty;
-
-        /// <summary>
-        /// Returns false if the source vector is the zero vector, false otherwise
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        [MethodImpl(Inline)]
-        public static bool operator false(in BitBlock<T> src)
-            => !src.NonEmpty;
-
-        [MethodImpl(Inline)]
-        public static bool operator ==(in BitBlock<T> x, in BitBlock<T> y)
-            => x.Equals(y);
-
-        [MethodImpl(Inline)]
-        public static bool operator !=(in BitBlock<T> x, in BitBlock<T> y)
-            => !x.Equals(y);
 
         [MethodImpl(Inline)]
         internal BitBlock(T src, uint bitcount)
@@ -112,7 +69,7 @@ namespace Z0
         /// <summary>
         /// Is true if at least one enabled bit; false otherwise
         /// </summary>
-        public readonly Bit32 NonEmpty
+        public readonly bit NonEmpty
         {
             [MethodImpl(Inline)]
             get => Pop() != 0;
@@ -121,7 +78,7 @@ namespace Z0
         /// <summary>
         /// A bit-level accessor/manipulator
         /// </summary>
-        public Bit32 this[int index]
+        public bit this[int index]
         {
             [MethodImpl(Inline)]
             get => BitBlocks.testbit(data,index);
@@ -174,5 +131,49 @@ namespace Z0
 
         public override string ToString()
             => throw new NotImplementedException();
+
+        [MethodImpl(Inline)]
+        public static implicit operator BitBlock<T>(Span<T> src)
+            => new BitBlock<T>(src, bitwidth<T>());
+
+        [MethodImpl(Inline)]
+        public static implicit operator BitBlock<T>(T src)
+            => new BitBlock<T>(src, bitwidth<T>());
+
+        [MethodImpl(Inline)]
+        public static bit operator %(in BitBlock<T> x, in BitBlock<T> y)
+            => BitBlocks.dot(x,y);
+
+        /// <summary>
+        /// Computes the bitwise complement of the operand
+        /// </summary>
+        /// <param name="x">The source operand</param>
+        [MethodImpl(Inline)]
+        public static BitBlock<T> operator ~(in BitBlock<T> src)
+            => default;
+
+        /// <summary>
+        /// Returns true if the source vector is nonzero, false otherwise
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline)]
+        public static bool operator true(in BitBlock<T> src)
+            => src.NonEmpty;
+
+        /// <summary>
+        /// Returns false if the source vector is the zero vector, false otherwise
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline)]
+        public static bool operator false(in BitBlock<T> src)
+            => !src.NonEmpty;
+
+        [MethodImpl(Inline)]
+        public static bool operator ==(in BitBlock<T> x, in BitBlock<T> y)
+            => x.Equals(y);
+
+        [MethodImpl(Inline)]
+        public static bool operator !=(in BitBlock<T> x, in BitBlock<T> y)
+            => !x.Equals(y);
     }
 }

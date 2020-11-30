@@ -16,10 +16,12 @@ namespace Z0
             where T : unmanaged
         {
             [MethodImpl(Inline)]
-            public readonly Bit32 Invoke(BitVector<T> a, BitVector<T> b) => BitVector.dot(a,b);
+            public readonly bit Invoke(BitVector<T> a, BitVector<T> b)
+                => BitVector.dot(a,b);
 
             [MethodImpl(Inline)]
-            public Bit32 Invoke(T a, T b) => gbits.dot(a,b);
+            public bit Invoke(T a, T b)
+                => gbits.dot(a,b);
         }
     }
 }

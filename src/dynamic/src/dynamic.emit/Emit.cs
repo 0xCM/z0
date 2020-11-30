@@ -76,24 +76,24 @@ namespace Z0
         /// </summary>
         /// <param name="dst">The target buffer</param>
         /// <param name="src">The executable source</param>
-        public static FixedFunc<X0,R> EmitFixedFunc<X0,R>(this BufferToken dst, ApiCodeBlock src)
-            => (FixedFunc<X0,R>)dst.Handle.EmitFixed(src.Id, typeof(FixedFunc<X0,R>), typeof(R), typeof(X0));
+        public static Func<X0,R> EmitFixedFunc<X0,R>(this BufferToken dst, ApiCodeBlock src)
+            => (Func<X0,R>)dst.Handle.EmitFixed(src.Id, typeof(Func<X0,R>), typeof(R), typeof(X0));
 
         /// <summary>
         /// Loads executable source into an identified buffer and creates a fixed binary function over the buffer
         /// </summary>
         /// <param name="dst">The target buffer</param>
         /// <param name="src">The executable source</param>
-        public static FixedFunc<X0,X1,R> EmitFixedFunc<X0,X1,R>(this BufferToken dst, ApiCodeBlock src)
-            => (FixedFunc<X0,X1,R>)dst.Handle.EmitFixed(src.Id, typeof(FixedFunc<X0,X1,R>), typeof(R), typeof(X0), typeof(X1));
+        public static Func<X0,X1,R> EmitFixedFunc<X0,X1,R>(this BufferToken dst, ApiCodeBlock src)
+            => (Func<X0,X1,R>)dst.Handle.EmitFixed(src.Id, typeof(Func<X0,X1,R>), typeof(R), typeof(X0), typeof(X1));
 
         /// <summary>
         /// Loads executable source into an identified buffer and creates a fixed binary function over the buffer
         /// </summary>
         /// <param name="dst">The target buffer</param>
         /// <param name="src">The executable source</param>
-        public static FixedFunc<X0,X1,X2,R> EmitFixedFunc<X0,X1,X2,R>(this BufferToken dst, ApiCodeBlock src)
-            => (FixedFunc<X0,X1,X2,R>)dst.Handle.EmitFixed(src.Id, typeof(FixedFunc<X0,X1,X2,R>), typeof(R), typeof(X0), typeof(X1), typeof(X2));
+        public static Func<X0,X1,X2,R> EmitFixedFunc<X0,X1,X2,R>(this BufferToken dst, ApiCodeBlock src)
+            => (Func<X0,X1,X2,R>)dst.Handle.EmitFixed(src.Id, typeof(Func<X0,X1,X2,R>), typeof(R), typeof(X0), typeof(X1), typeof(X2));
 
         /// <summary>
         /// Loads executable source into an identified buffer and creates a fixed unary operator over the buffer
@@ -101,8 +101,8 @@ namespace Z0
         /// <param name="buffer">The target buffer</param>
         /// <param name="src">The executable source</param>
         /// <typeparam name="F">The fixed operand type</typeparam>
-        public static FixedUnaryOp<F> EmitFixedUnaryOp<F>(this BufferToken dst, ApiCodeBlock src)
-            => (FixedUnaryOp<F>)dst.Handle.EmitFixed(src.Id,  typeof(FixedUnaryOp<F>), typeof(F), typeof(F));
+        public static UnaryOp<F> EmitFixedUnaryOp<F>(this BufferToken dst, ApiCodeBlock src)
+            => (UnaryOp<F>)dst.Handle.EmitFixed(src.Id,  typeof(UnaryOp<F>), typeof(F), typeof(F));
 
         /// <summary>
         /// Loads source into a token-identified buffer and covers it with a fixed binary operator
@@ -110,8 +110,8 @@ namespace Z0
         /// <param name="buffer">The target buffer</param>
         /// <param name="src">The code to load</param>
         /// <typeparam name="F">The fixed operand type</typeparam>
-        public static FixedBinaryOp<F> EmitFixedBinaryOp<F>(this BufferToken buffer, ApiCodeBlock src)
-            => (FixedBinaryOp<F>)buffer.Load(src.Encoded).EmitFixedBinaryOp(src.Id, typeof(FixedBinaryOp<F>), typeof(F));
+        public static BinaryOp<F> EmitFixedBinaryOp<F>(this BufferToken buffer, ApiCodeBlock src)
+            => (BinaryOp<F>)buffer.Load(src.Encoded).EmitFixedBinaryOp(src.Id, typeof(BinaryOp<F>), typeof(F));
 
         /// <summary>
         /// Loads executable source into an identified buffer and creates a fixed unary operator over the buffer
@@ -119,8 +119,8 @@ namespace Z0
         /// <param name="dst">The target buffer</param>
         /// <param name="src">The executable source</param>
         /// <typeparam name="F">The fixed operand type</typeparam>
-        public static FixedTernaryOp<F> EmitFixedTernaryOp<F>(this BufferToken dst, ApiCodeBlock src)
-            => (FixedTernaryOp<F>)dst.Handle.EmitFixed(src.Id, typeof(FixedTernaryOp<F>), typeof(F), typeof(F), typeof(F), typeof(F));
+        public static TernaryOp<F> EmitFixedTernaryOp<F>(this BufferToken dst, ApiCodeBlock src)
+            => (TernaryOp<F>)dst.Handle.EmitFixed(src.Id, typeof(TernaryOp<F>), typeof(F), typeof(F), typeof(F), typeof(F));
 
         /// <summary>
         /// Loads executable code into a token-identified buffer and covers it with a parametric unary operator

@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    public struct ActionController
+    public struct DynamicActionRunner
     {
         readonly WfHost Host;
 
@@ -17,18 +17,18 @@ namespace Z0
 
         int seq;
 
-        public ActionController(IWfShell wf)
+        public DynamicActionRunner(IWfShell wf)
         {
-            Host = WfShell.host(typeof(ActionController));
+            Host = WfShell.host(typeof(DynamicActionRunner));
             Wf = wf.WithHost(Host);
             seq = 0;
         }
 
         [MethodImpl(Inline)]
-        public void Invoke(in ActionDelegate action)
+        public void Invoke(in DynamicAction action)
             => action.Invoke();
 
-        public void Try(in ActionDelegate fx)
+        public void Try(in DynamicAction fx)
         {
             try
             {
@@ -40,7 +40,7 @@ namespace Z0
             }
         }
 
-        public EvalResult Measure(ActionDelegate fx, OpUri f)
+        public EvalResult Measure(DynamicAction fx, OpUri f)
         {
             var clock = Time.counter(true);
             try

@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct ActionDelegate
+    public readonly struct DynamicAction
     {
         /// <summary>
         /// The operation identity
@@ -24,7 +24,7 @@ namespace Z0
         public readonly Action DynamicOp;
 
         [MethodImpl(Inline)]
-        public ActionDelegate(string id, MemoryAddress src, DynamicMethod enclosure, Action dynop)
+        public DynamicAction(string id, MemoryAddress src, DynamicMethod enclosure, Action dynop)
         {
             Id = id;
             SourceAddress = src;
@@ -37,7 +37,7 @@ namespace Z0
             => DynamicOp.Invoke();
 
         [MethodImpl(Inline)]
-        public static implicit operator Delegate(ActionDelegate src)
+        public static implicit operator Delegate(DynamicAction src)
             => src.DynamicOp;
     }
 }

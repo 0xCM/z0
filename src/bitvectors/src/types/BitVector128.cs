@@ -34,7 +34,6 @@ namespace Z0
 
         public static T Zero => default;
 
-
         /// <summary>
         /// Initializes a bitvector with the lo N bits of a scalar source
         /// </summary>
@@ -82,7 +81,7 @@ namespace Z0
         /// <summary>
         /// Specifies whether all bits are disabled
         /// </summary>
-        public Bit32 Empty
+        public bit Empty
         {
             [MethodImpl(Inline)]
             get => !gmath.nonz(Data);
@@ -91,7 +90,7 @@ namespace Z0
         /// <summary>
         /// Specifies whether at least one bit is enabled
         /// </summary>
-        public Bit32 NonEmpty
+        public bit NonEmpty
         {
             [MethodImpl(Inline)]
             get => gmath.nonz(Data);
@@ -164,7 +163,7 @@ namespace Z0
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static Bit32 operator %(in BitVector128<N,T> x, in BitVector128<N,T> y)
+        public static bit operator %(in BitVector128<N,T> x, in BitVector128<N,T> y)
             => BitVector.dot(x,y);
 
         /// <summary>
@@ -221,7 +220,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Bit32 operator ==(in BitVector128<N,T> x, in BitVector128<N,T> y)
+        public static bit operator ==(in BitVector128<N,T> x, in BitVector128<N,T> y)
             => BitVector.eq(x,y);
 
         /// <summary>
@@ -230,7 +229,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Bit32 operator !=(in BitVector128<N,T> x, in BitVector128<N,T> y)
+        public static bit operator !=(in BitVector128<N,T> x, in BitVector128<N,T> y)
             => !BitVector.eq(x,y);
     }
 }

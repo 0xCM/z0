@@ -115,7 +115,7 @@ namespace Z0
         /// <summary>
         /// A bit-level accessor/manipulator
         /// </summary>
-        public Bit32 this[int bitpos]
+        public bit this[int bitpos]
         {
             [MethodImpl(Inline)]
             get => BitBlocks.readbit(in Head, bitpos);
@@ -158,7 +158,7 @@ namespace Z0
         /// Sets all the bits in use to the specified state
         /// </summary>
         /// <param name="state">The source state</param>
-        public void Fill(Bit32 state)
+        public void Fill(bit state)
         {
             if(state)
                 data.Fill(NumericLiterals.maxval<T>());
@@ -213,7 +213,7 @@ namespace Z0
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static Bit32 operator %(in BitBlock<N,T> x, in BitBlock<N,T> y)
+        public static bit operator %(in BitBlock<N,T> x, in BitBlock<N,T> y)
             => BitBlocks.dot(x,y);
 
         /// <summary>
@@ -241,11 +241,11 @@ namespace Z0
             => !x.Nonempty;
 
         [MethodImpl(Inline)]
-        public static Bit32 operator ==(in BitBlock<N,T> x, in BitBlock<N,T> y)
+        public static bit operator ==(in BitBlock<N,T> x, in BitBlock<N,T> y)
             => x.Equals(y);
 
         [MethodImpl(Inline)]
-        public static Bit32 operator !=(in BitBlock<N,T> x, in BitBlock<N,T> y)
+        public static bit operator !=(in BitBlock<N,T> x, in BitBlock<N,T> y)
             => !x.Equals(y);
     }
 }

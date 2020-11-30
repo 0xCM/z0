@@ -18,13 +18,12 @@ namespace Z0
         /// <param name="src">The bit source</param>
         /// <param name="index">The linear index of the target bit, relative to the sequence head</param>
         /// <typeparam name="T">The sequence type</typeparam>
-        [MethodImpl(Inline), TestBit, Closures(AllNumeric)]
-        public static Bit32 testbit<T>(in SpanBlock256<T> src, int index)
+        [MethodImpl(Inline), TestBit, Closures(Closure)]
+        public static bit testbit<T>(in SpanBlock256<T> src, int index)
             where T : unmanaged
         {
             var loc = gbits.bitpos<T>(index);
-            return gbits.testbit32(src[loc.CellIndex], (byte)loc.BitOffset);
+            return gbits.testbit(src[loc.CellIndex], (byte)loc.BitOffset);
         }
-
     }
 }

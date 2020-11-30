@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="firstpos">The sequence-relative position of the first bit</param>
         /// <param name="lastpos">The sequence-relative position of the last bit</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Extract, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Extract, Closures(Closure)]
         public static T segment<T>(in SpanBlock256<T> src, BitPos<T> firstpos, BitPos<T> lastpos)
             where T : unmanaged
                 => gbits.extract(src.Storage, firstpos,lastpos);
@@ -31,7 +31,7 @@ namespace Z0
         /// <param name="i0">The sequence-relative index of the first bit</param>
         /// <param name="i1">The sequence-relative index of the last bit</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Extract, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Extract, Closures(Closure)]
         public static T segment<T>(in SpanBlock256<T> src, int i0, int i1)
             where T : unmanaged
                 => gbits.extract(src.Storage, gbits.bitpos<T>(i0), gbits.bitpos<T>(i1));

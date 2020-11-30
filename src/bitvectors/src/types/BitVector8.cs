@@ -47,7 +47,7 @@ namespace Z0
         /// <summary>
         /// Returns true if no bits are enabled, false otherwise
         /// </summary>
-        public readonly Bit32 Empty
+        public readonly bit Empty
         {
             [MethodImpl(Inline)]
             get => Data == 0;
@@ -56,7 +56,7 @@ namespace Z0
         /// <summary>
         /// Returns true if the vector has at least one enabled bit; false otherwise
         /// </summary>
-        public readonly Bit32 NonEmpty
+        public readonly bit NonEmpty
         {
             [MethodImpl(Inline)]
             get => !Empty;
@@ -65,7 +65,7 @@ namespace Z0
         /// <summary>
         /// Returns true if all bits are enabled, false otherwise
         /// </summary>
-        public readonly Bit32 AllOn
+        public readonly bit AllOn
         {
             [MethodImpl(Inline)]
             get => (0xFF & Data) == 0xFF;
@@ -92,13 +92,13 @@ namespace Z0
         /// <summary>
         /// Gets/sets the state of an index-identified bit
         /// </summary>
-        public Bit32 this[int index]
+        public bit this[int index]
         {
             [MethodImpl(Inline)]
-            get => Bit32.test(Data, index);
+            get => BitStates.test(Data, (byte)index);
 
             [MethodImpl(Inline)]
-            set => Data = Bit32.set(Data, (byte)index, value);
+            set => Data = BitStates.set(Data, (byte)index, value);
         }
 
         /// <summary>
@@ -276,7 +276,7 @@ namespace Z0
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static Bit32 operator %(BitVector8 x, BitVector8 y)
+        public static bit operator %(BitVector8 x, BitVector8 y)
             => BitVector.dot(x,y);
 
         /// <summary>
@@ -316,7 +316,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The ource operand</param>
         [MethodImpl(Inline)]
-        public static Bit32 operator !(BitVector8 src)
+        public static bit operator !(BitVector8 src)
             => src.Empty;
 
         /// <summary>
@@ -325,7 +325,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Bit32 operator ==(BitVector8 x, BitVector8 y)
+        public static bit operator ==(BitVector8 x, BitVector8 y)
             => math.eq(x,y);
 
         /// <summary>
@@ -334,7 +334,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Bit32 operator !=(BitVector8 x, BitVector8 y)
+        public static bit operator !=(BitVector8 x, BitVector8 y)
             => math.neq(x,y);
 
         /// <summary>
@@ -343,7 +343,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Bit32 operator <(BitVector8 x, BitVector8 y)
+        public static bit operator <(BitVector8 x, BitVector8 y)
             => math.lt(x,y);
 
         /// <summary>
@@ -352,7 +352,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Bit32 operator >(BitVector8 x, BitVector8 y)
+        public static bit operator >(BitVector8 x, BitVector8 y)
             => math.gt(x,y);
 
         /// <summary>
@@ -361,7 +361,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Bit32 operator <=(BitVector8 x, BitVector8 y)
+        public static bit operator <=(BitVector8 x, BitVector8 y)
             => math.lteq(x,y);
 
         /// <summary>
@@ -370,7 +370,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Bit32 operator >=(BitVector8 x, BitVector8 y)
+        public static bit operator >=(BitVector8 x, BitVector8 y)
             => math.gteq(x,y);
 
         public static BitVector8 Zero => default;

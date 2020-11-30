@@ -18,8 +18,8 @@ namespace Z0
         /// <param name="src">The bit source</param>
         /// <param name="index">The linear index of the target bit, relative to the sequence head</param>
         /// <typeparam name="T">The sequence type</typeparam>
-        [MethodImpl(Inline), SetBit, Closures(AllNumeric)]
-        public static void setbit<T>(in SpanBlock256<T> src, int index, Bit32 value)
+        [MethodImpl(Inline), SetBit, Closures(Closure)]
+        public static void setbit<T>(in SpanBlock256<T> src, int index, bit value)
             where T : unmanaged
         {
             var loc = gbits.bitpos<T>(index);
@@ -34,7 +34,7 @@ namespace Z0
         /// <param name="dst">A reference to the grid storage</param>
         /// <typeparam name="T">The grid storage segment type</typeparam>
         [MethodImpl(Inline)]
-        internal static void setbit<X>(uint bitpos, Bit32 state, ref X dst)
+        internal static void setbit<X>(uint bitpos, bit state, ref X dst)
             where X : unmanaged
                 => cell(ref dst, bitpos) = gbits.setbit(cell(ref dst, bitpos), (byte)(bitpos % bitwidth<X>()), state);
     }

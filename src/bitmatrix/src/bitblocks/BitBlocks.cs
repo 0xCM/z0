@@ -18,6 +18,8 @@ namespace Z0
     [ApiHost]
     public partial class BitBlocks
     {
+        const NumericKind Closure = UnsignedInts;
+
         /// <summary>
         /// Reads a cell determined by a linear bit position
         /// </summary>
@@ -30,9 +32,9 @@ namespace Z0
                 => ref skip(in src, bitpos / bitwidth<X>());
 
         [MethodImpl(Inline)]
-        internal static Bit32 readbit<X>(in X src, int bitpos)
+        internal static bit readbit<X>(in X src, int bitpos)
             where X : unmanaged
-                => gbits.testbit32(readcell(in src, bitpos), (byte)(bitpos % bitwidth<X>()));
+                => gbits.testbit(readcell(in src, bitpos), (byte)(bitpos % bitwidth<X>()));
 
         /// <summary>
         /// Reads/manipulates a cell identified by a linear bit position

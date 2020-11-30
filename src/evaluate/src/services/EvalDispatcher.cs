@@ -312,7 +312,7 @@ namespace Z0
         /// <param name="index">The index of the target buffer</param>
         /// <param name="src">The executable source that conforms to a fixed binary operator</param>
         /// <typeparam name="F">The operand type</typeparam>
-        FixedBinaryOp<F> LoadFixedinaryOp<F>(BufferTokens buffers, BufferSeqId index, ApiMemberCode src)
+        BinaryOp<F> LoadFixedinaryOp<F>(BufferTokens buffers, BufferSeqId index, ApiMemberCode src)
             where F : unmanaged, IDataCell
                 => buffers[index].EmitFixedBinaryOp<F>(src.Encoded);
 

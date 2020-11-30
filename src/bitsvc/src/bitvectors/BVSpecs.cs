@@ -36,17 +36,17 @@ namespace Z0
         }
 
         [Free, SFx]
-        public interface IBvUnaryPred<T> : IFunc<BitVector<T>, Bit32>
+        public interface IBvUnaryPred<T> : IFunc<BitVector<T>, bit>
             where T : unmanaged
         {
-            Bit32 Invoke(T a);
+            bit Invoke(T a);
         }
 
         [Free, SFx]
-        public interface IBvBinaryPred<T> : IFunc<BitVector<T>,BitVector<T>,Bit32>
+        public interface IBvBinaryPred<T> : IFunc<BitVector<T>,BitVector<T>,bit>
             where T : unmanaged
         {
-            Bit32 Invoke(T a, T b);
+            bit Invoke(T a, T b);
         }
     }
 }

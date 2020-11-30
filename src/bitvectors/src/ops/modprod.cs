@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="y">The second vector</param>
         /// <remarks>This should be considered a reference implementation; the dot operation is considerably faster</remarks>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Bit32 modprod<T>(BitVector<T> x, BitVector<T> y)
+        public static bit modprod<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
         {
             var result = 0;
@@ -39,7 +39,7 @@ namespace Z0
         /// <param name="y">The second vector</param>
         /// <remarks>This should be considered a reference implementation; the dot operation is considerably faster</remarks>
         [MethodImpl(Inline)]
-        public static Bit32 modprod<N,T>(BitVector<N,T> x, BitVector<N,T> y)
+        public static bit modprod<N,T>(BitVector<N,T> x, BitVector<N,T> y)
             where T : unmanaged
             where N : unmanaged, ITypeNat
         {
@@ -56,7 +56,7 @@ namespace Z0
         /// <param name="y">The second vector</param>
         /// <remarks>This should be considered a reference implementation; the dot operation is considerably faster</remarks>
         [MethodImpl(Inline), Op]
-        public static Bit32 modprod(BitVector4 x, BitVector4 y)
+        public static bit modprod(BitVector4 x, BitVector4 y)
         {
             var result = 0;
             for(byte i=0; i<x.Width; i++)
@@ -75,7 +75,7 @@ namespace Z0
         /// <param name="rhs">The second vector</param>
         /// <remarks>This should be considered a reference implementation; the dot operation is considerably faster</remarks>
         [MethodImpl(Inline), Op]
-        public static Bit32 modprod(BitVector8 x, BitVector8 y)
+        public static bit modprod(BitVector8 x, BitVector8 y)
         {
             var result = 0;
             for(var i=0; i<x.Width; i++)
@@ -94,7 +94,7 @@ namespace Z0
         /// <param name="y">The second vector</param>
         /// <remarks>This should be considered a reference implementation; the dot operation is considerably faster</remarks>
         [MethodImpl(Inline), Op]
-        public static Bit32 modprod(BitVector16 x, BitVector16 y)
+        public static bit modprod(BitVector16 x, BitVector16 y)
         {
             var result = 0;
             for(var i=0; i<x.Width; i++)
@@ -113,7 +113,7 @@ namespace Z0
         /// <param name="y">The second vector</param>
         /// <remarks>This should be considered a reference implementation; the dot operation is considerably faster</remarks>
         [MethodImpl(Inline), Op]
-        public static Bit32 modprod(BitVector32 x, BitVector32 y)
+        public static bit modprod(BitVector32 x, BitVector32 y)
         {
             var result = 0;
             for(var i=0; i<x.Width; i++)
@@ -132,7 +132,7 @@ namespace Z0
         /// <param name="y">The second vector</param>
         /// <remarks>This should be considered a reference implementation; the dot operation is considerably faster</remarks>
         [MethodImpl(Inline), Op]
-        public static Bit32 modprod(BitVector64 x, BitVector64 y)
+        public static bit modprod(BitVector64 x, BitVector64 y)
         {
             var result = 0;
             for(var i=0; i<x.Width; i++)

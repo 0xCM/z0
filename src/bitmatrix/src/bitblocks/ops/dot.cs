@@ -16,11 +16,11 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static Bit32 dot<T>(in BitBlock<T> x, in BitBlock<T> y)
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static bit dot<T>(in BitBlock<T> x, in BitBlock<T> y)
             where T : unmanaged
         {
-            var result = Bit32.Off;
+            var result = bit.Off;
             for(var i=0; i<x.BitCount; i++)
                 result ^= x[i] & y[i];
             return result;
@@ -33,11 +33,11 @@ namespace Z0
         /// <typeparam name="N">The bitwidth type</typeparam>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static Bit32 dot<N,T>(in BitBlock<N,T> x, in BitBlock<N,T> y)
+        public static bit dot<N,T>(in BitBlock<N,T> x, in BitBlock<N,T> y)
             where T : unmanaged
             where N : unmanaged, ITypeNat
         {
-            var result = Bit32.Off;
+            var result = bit.Off;
             for(var i=0; i<x.Width; i++)
                 result ^= x[i] & y[i];
             return result;
