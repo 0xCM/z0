@@ -14,17 +14,17 @@ namespace Z0.Logix
     [ApiHost(ApiNames.BinaryBitLogixCheck,true)]
     public ref struct BinaryBitLogixCheck
     {
-        ReadOnlySpan<Bit32> A;
+        ReadOnlySpan<bit> A;
 
-        ReadOnlySpan<Bit32> B;
+        ReadOnlySpan<bit> B;
 
         uint Count;
 
         BinaryBitLogicKind Kind;
 
-        Func<Bit32,Bit32,Bit32> Rule;
+        Func<bit,bit,bit> Rule;
 
-        SequenceJudgement<Bit32> Result;
+        SequenceJudgement<bit> Result;
 
         BitLogix Service;
 
@@ -38,21 +38,21 @@ namespace Z0.Logix
         }
 
         [Op, MethodImpl(NotInline)]
-        public static BinaryBitLogixCheck create(BinaryBitLogicKind kind, Func<Bit32,Bit32,Bit32> rule, uint count, IPolyStream source)
+        public static BinaryBitLogixCheck create(BinaryBitLogicKind kind, Func<bit,bit,bit> rule, uint count, IPolyStream source)
         {
             var dst = new BinaryBitLogixCheck();
             dst.Kind = kind;
             dst.Rule = rule;
             dst.Count = count;
-            dst.A = source.BitStream32().Take(dst.Count).Array();
-            dst.B = source.BitStream32().Take(dst.Count).Array();
-            dst.Result = SequenceJudgement.alloc<Bit32>(dst.Count,true);
+            dst.A = source.BitStream().Take(dst.Count).Array();
+            dst.B = source.BitStream().Take(dst.Count).Array();
+            dst.Result = SequenceJudgement.alloc<bit>(dst.Count,true);
             dst.Service = BitLogix.Service;
             return dst;
         }
 
         [Op, MethodImpl(NotInline)]
-        ref BinaryJudgement<Bit32> Check(in Bit32 a, in Bit32 b, ref BinaryJudgement<Bit32> dst)
+        ref BinaryJudgement<bit> Check(in bit a, in bit b, ref BinaryJudgement<bit> dst)
         {
             var expect = Rule(a, b);
             var actual = Service.Evaluate(Kind, a, b);
@@ -62,7 +62,7 @@ namespace Z0.Logix
         }
 
         [Op, MethodImpl(NotInline)]
-        public SequenceJudgement<Bit32> Run()
+        public SequenceJudgement<bit> Run()
         {
             var dst = Result;
             var service = BitLogix.Service;

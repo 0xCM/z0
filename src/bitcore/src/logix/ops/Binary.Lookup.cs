@@ -19,7 +19,7 @@ namespace Z0
         /// </summary>
         /// <param name="kind">The operator kind</param>
         [Op]
-        public static BinaryOp<Bit32> lookup(BLK kind)
+        public static BinaryOp<bit> lookup(BLK kind)
         {
             switch(kind)
             {

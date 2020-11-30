@@ -24,7 +24,7 @@ namespace Z0
         /// <param name="b">The second operand</param>
         /// <param name="c">The third operand</param>
         [Op]
-        public static Bit32 eval(TLK kind, Bit32 a, Bit32 b, Bit32 c)
+        public static bit eval(TLK kind, bit a, bit b, bit c)
         {
             switch(kind)
             {
@@ -126,7 +126,7 @@ namespace Z0
                 case TLK.X5F: return f5f(a, b, c);
                 case TLK.XCA: return select(a, b, c);
                 case TLK.XFF: return f5a(a, b, c);
-                default: return Unsupported.raise<Bit32>(sig(kind));
+                default: return Unsupported.raise<bit>(sig(kind));
             }
         }
     }

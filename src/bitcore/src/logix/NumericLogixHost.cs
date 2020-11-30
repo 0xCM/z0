@@ -431,7 +431,5 @@ namespace Z0
                 default: throw new NotSupportedException(sig<T>(kind));
             }
         }
-
-
     }
 }

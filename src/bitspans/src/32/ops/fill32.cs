@@ -31,7 +31,7 @@ namespace Z0
             ref var tmp = ref StackStores.head<byte>(ref buffer);
             ref var target = ref Unsafe.As<Bit32,uint>(ref first(dst.Edit));
 
-            BitPack.unpack1x8x16(src, ref tmp);
+            Bits.unpack1x8x16(src, ref tmp);
             distribute32(in tmp, 0, ref target);
             distribute32(in tmp, 1, ref target);
             return ref dst;
@@ -43,7 +43,7 @@ namespace Z0
             ref var tmp = ref first(dst.Edit.Slice(24,8).Cast<Bit32,byte>());
             ref var target = ref Unsafe.As<Bit32,uint>(ref first(dst.Edit));
 
-            BitPack.unpack1x8x32(src, ref tmp);
+            Bits.unpack1x8x32(src, ref tmp);
             distribute32(in tmp, 0, ref target);
             distribute32(in tmp, 1, ref target);
             distribute32(in tmp, 2, ref target);
@@ -58,13 +58,13 @@ namespace Z0
             ref var tmp = ref first(dst.Edit.Slice(56,8).Cast<Bit32,byte>());
             ref var target = ref Unsafe.As<Bit32,uint>(ref first(dst.Edit));
 
-            BitPack.unpack1x8x32((uint)src, ref tmp);
+            Bits.unpack1x8x32((uint)src, ref tmp);
             distribute32(in tmp, 0, ref target, 0);
             distribute32(in tmp, 1, ref target, 1);
             distribute32(in tmp, 2, ref target, 2);
             distribute32(in tmp, 3, ref target, 3);
 
-            BitPack.unpack1x8x32((uint)(src >> 32), ref tmp);
+            Bits.unpack1x8x32((uint)(src >> 32), ref tmp);
             distribute32(in tmp, 0, ref target, 4);
             distribute32(in tmp, 1, ref target, 5);
             distribute32(in tmp, 2, ref target, 6);

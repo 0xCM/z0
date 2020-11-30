@@ -14,18 +14,18 @@ namespace Z0
     partial class BitLogixOps
     {
         [MethodImpl(Inline), Op]
-        public static Bit32 eval(ULK kind, Bit32 a)
+        public static bit eval(ULK kind, bit a)
         {
             if(kind == ULK.False)
-                return Bit32.Off;
+                return bit.Off;
             else if(kind == ULK.Not)
-                return Bit32.not(a);
+                return bit.BitLogic.not(a);
             else if(kind == ULK.Identity)
                 return a;
             else if(kind == ULK.True)
-                return Bit32.On;
+                return bit.On;
             else
-                return Unsupported.raise<Bit32>(kind.ToString());
+                return Unsupported.raise<bit>(kind.ToString());
         }
     }
 }

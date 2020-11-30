@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;    
+    using static Konst;
 
     partial class BitVector
     {
@@ -28,7 +28,7 @@ namespace Z0
         [MethodImpl(Inline), Rotr]
         public static BitVector8 rotr(BitVector8 x, byte offset)
             => gbits.rotr(x.Data,offset);
-            
+
         /// <summary>
         /// Rotates source bits rightward
         /// </summary>
@@ -62,11 +62,10 @@ namespace Z0
         /// <param name="x">The source bitvector</param>
         /// <param name="offset">The rotation magnitude</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), Rotr, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Rotr, Closures(Closure)]
         public static BitVector<T> rotr<T>(BitVector<T> x, byte offset)
             where T : unmanaged
                 => gbits.rotr(x.Data,offset);
-
 
         /// <summary>
         /// Rotates source bits rightward

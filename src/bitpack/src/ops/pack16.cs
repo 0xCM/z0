@@ -43,19 +43,5 @@ namespace Z0
         public static ushort pack16x8x1<T>(ReadOnlySpan<T> src, N16 count, N8 mod, int offset = 0)
             where T : unmanaged
                 => pack16x8x1(skip(src,(uint)offset), count, mod);
-
-        /// <summary>
-        /// Packs the least significant bit from 16 32-bit unsigned integers to a 16-bit target
-        /// </summary>
-        /// <param name="src">The data source</param>
-        /// <param name="dst">The target value</param>
-        [MethodImpl(Inline), Op]
-        public static ref ushort pack16x32x1(in uint src, ref ushort dst)
-        {
-            var v0 = vload(n256, skip(src,0*8));
-            var v1 = vload(n256, skip(src,1*8));
-            dst = vpacklsb(vcompact(v0, v1, n128, z8));
-            return ref dst;
-        }
     }
 }

@@ -20,7 +20,7 @@ namespace Z0
         /// </summary>
         /// <param name="kind">The operator kind</param>
         [Op]
-        public static TernaryOp<Bit32> lookup(TLK kind)
+        public static TernaryOp<bit> lookup(TLK kind)
         {
             switch(kind)
             {

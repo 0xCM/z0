@@ -11,6 +11,7 @@ namespace Z0
     [ApiHost("scalar")]
     public partial class Bits
     {
+        const NumericKind Closure = Konst.UnsignedInts;
 
     }
 

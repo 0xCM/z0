@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics.X86;
 
     using static System.Runtime.Intrinsics.X86.Bmi1;
     using static System.Runtime.Intrinsics.X86.Bmi1.X64;
@@ -14,7 +13,7 @@ namespace Z0
     using static Konst;
 
     partial class Bits
-    {                
+    {
         /// <summary>
         /// unsigned int _blsr_u32 (unsigned int a) BLSR reg, reg/m32
         /// Logically equivalent to the composite operation (src - 1) & src that disables the least set bit in the source
@@ -23,7 +22,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static byte blsr(byte src)
             => (byte)ResetLowestSetBit(src);
- 
+
         /// <summary>
         /// unsigned int _blsr_u32 (unsigned int a) BLSR reg, reg/m32
         /// Logically equivalent to the composite operation (src - 1) & src that disables the least set bit in the source
@@ -32,7 +31,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ushort blsr(ushort src)
             => (ushort)ResetLowestSetBit(src);
- 
+
         /// <summary>
         /// unsigned int _blsr_u32 (unsigned int a) BLSR reg, reg/m32
         /// Logically equivalent to the composite operation (src - 1) & src that disables the least set bit in the source

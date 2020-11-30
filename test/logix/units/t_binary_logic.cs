@@ -20,7 +20,7 @@ namespace Z0.Logix
     {
         protected override int CycleCount => Pow2.T08;
 
-        protected void logic_op_check(BLK kind, Func<Bit32,Bit32,Bit32> rule)
+        protected void logic_op_check(BLK kind, Func<bit,bit,bit> rule)
         {
             var check = BinaryBitLogixCheck.create(kind,rule, (uint)RepCount, Random);
             Claim.yea(check.Run().Result);

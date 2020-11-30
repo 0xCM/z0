@@ -13,20 +13,20 @@ namespace Z0
 
     public interface IBitLogix
     {
-        UnaryOp<Bit32> Lookup(ULK kind);
+        UnaryOp<bit> Lookup(ULK kind);
 
-        BinaryOp<Bit32> Lookup(BLK kind);
+        BinaryOp<bit> Lookup(BLK kind);
 
-        TernaryOp<Bit32> Lookup(TLK kind);
+        TernaryOp<bit> Lookup(TLK kind);
 
-        Bit32 Evaluate(ULK kind, Bit32 a);
+        bit Evaluate(ULK kind, bit a);
 
-        Bit32 Evaluate(BLK kind, Bit32 a, Bit32 b);
+        bit Evaluate(BLK kind, bit a, bit b);
 
-        Bit32 Evaluate<F>(Bit32 a, Bit32 b, F kind = default)
+        bit Evaluate<F>(bit a, bit b, F kind = default)
             where F : unmanaged, IBitLogicKind;
 
-        Bit32 Evaluate(TLK kind, Bit32 a, Bit32 b, Bit32 c);
+        bit Evaluate(TLK kind, bit a, bit b, bit c);
 
         ReadOnlySpan<ULK> UnaryOpKinds {get;}
 

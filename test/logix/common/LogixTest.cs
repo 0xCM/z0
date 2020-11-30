@@ -23,7 +23,7 @@ namespace Z0.Logix
     {
         BitLogix bitlogix => BitLogix.Service;
 
-        protected void logic_expr_check(BLK kind, Func<Bit32,Bit32,Bit32> rule)
+        protected void logic_expr_check(BLK kind, Func<bit,bit,bit> rule)
         {
             var v1 = lvar(1);
             var v2 = lvar(2);
@@ -47,7 +47,7 @@ namespace Z0.Logix
 
             var lhsSamples = Random.BitStream32().Take(RepCount).ToArray();
             var rhsSamples = Random.BitStream32().Take(RepCount).ToArray();
-            var result = Z0.Bit32.Off;
+            var result = Z0.bit.Off;
             var kinds = bitlogix.BinaryOpKinds;
             var opcount = 0;
 

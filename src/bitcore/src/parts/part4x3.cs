@@ -9,20 +9,23 @@ namespace Z0
 
     using static Konst;
     using static z;
-    using static BitMasks;
 
     using L = BitMasks.Literals;
 
     partial struct BitParts
     {
         /// <summary>
-        /// [00000001 ... 00000001]
+        /// Partitions the first 12 bits of a 32-bit source value into 3 target segments each with an effective width of 4
         /// </summary>
         /// <param name="src">The source value</param>
-        /// <typeparam name="T">The source type</typeparam>
+        /// <param name="dst">A target span of sufficient length</param>
         [MethodImpl(Inline), Op]
-        public static T lsb8x1<T>(T src)
-            where T : unmanaged
-                => force<ulong,T>(scatter(force<T,ulong>(src), L.Lsb64x8x1));
+        public static ref byte part4x3(uint src, ref byte dst)
+        {
+            seek(dst, 0) = (byte)((src >> 0) & L.Lsb8x8x4);
+            seek(dst, 1) = (byte)((src >> 4) & L.Lsb8x8x4);
+            seek(dst, 2) = (byte)((src >> 8) & L.Lsb8x8x4);
+            return ref dst;
+        }
     }
 }

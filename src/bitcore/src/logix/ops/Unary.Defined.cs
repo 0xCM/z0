@@ -12,19 +12,19 @@ namespace Z0
     partial struct BitLogix
     {
         [MethodImpl(Inline), Op]
-        public static Bit32 not(Bit32 a)
+        public static bit not(bit a)
             => !a;
 
         [MethodImpl(Inline), Op]
-        public static Bit32 identity(Bit32 a)
+        public static bit identity(bit a)
             => a;
 
         [MethodImpl(Inline), Op]
-        public static Bit32 @false(Bit32 a)
-            => Bit32.Off;
+        public static bit @false(bit a)
+            => bit.Off;
 
         [MethodImpl(Inline), Op]
-        public static Bit32 @true(Bit32 a)
-            => Bit32.On;
+        public static bit @true(bit a)
+            => bit.On;
     }
 }

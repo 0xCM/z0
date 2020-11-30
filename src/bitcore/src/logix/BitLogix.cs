@@ -26,16 +26,16 @@ namespace Z0
         public static BitLogix Service => default(BitLogix);
 
         [MethodImpl(Inline)]
-        public Bit32 Evaluate<F>(Bit32 a, Bit32 b, F kind = default)
+        public bit Evaluate<F>(bit a, bit b, F kind = default)
             where F : unmanaged, IBitLogicKind
                 => BitLogixOps.eval(a, b, kind);
 
         [MethodImpl(Inline), Op]
-        public Bit32 Nand_kind(Bit32 a, Bit32 b)
+        public bit Nand_kind(bit a, bit b)
             => BitLogixOps.eval(a, b, K.nand(n2));
 
         [MethodImpl(Inline), Op]
-        public Bit32 Xor_kind(Bit32 a, Bit32 b)
+        public bit Xor_kind(bit a, bit b)
             => BitLogixOps.eval(a, b, K.xor(n2));
 
         /// <summary>
@@ -61,7 +61,7 @@ namespace Z0
         /// </summary>
         /// <param name="kind">The operator kind</param>
         [MethodImpl(Inline)]
-        public UnaryOp<Bit32> Lookup(ULK kind)
+        public UnaryOp<bit> Lookup(ULK kind)
             => BitLogixOps.lookup(kind);
 
         /// <summary>
@@ -69,7 +69,7 @@ namespace Z0
         /// </summary>
         /// <param name="kind">The operator kind</param>
         [MethodImpl(Inline)]
-        public BinaryOp<Bit32> Lookup(BLK kind)
+        public BinaryOp<bit> Lookup(BLK kind)
             => BitLogixOps.lookup(kind);
 
         /// <summary>
@@ -77,7 +77,7 @@ namespace Z0
         /// </summary>
         /// <param name="kind">The operator kind</param>
         [MethodImpl(Inline)]
-        public TernaryOp<Bit32> Lookup(TLK kind)
+        public TernaryOp<bit> Lookup(TLK kind)
             => BitLogixOps.lookup(kind);
 
         /// <summary>
@@ -86,7 +86,7 @@ namespace Z0
         /// <param name="kind">The operator kind</param>
         /// <param name="a">The operand</param>
         [MethodImpl(Inline)]
-        public Bit32 Evaluate(ULK kind, Bit32 a)
+        public bit Evaluate(ULK kind, bit a)
             => BitLogixOps.eval(kind,a);
 
         /// <summary>
@@ -95,7 +95,7 @@ namespace Z0
         /// <param name="kind">The operator kind</param>
         /// <param name="a">The operand</param>
         [MethodImpl(Inline)]
-        public Bit32 Evaluate(BLK kind, Bit32 a, Bit32 b)
+        public bit Evaluate(BLK kind, bit a, bit b)
             => BitLogixOps.eval(kind, a, b);
 
         /// <summary>
@@ -104,7 +104,7 @@ namespace Z0
         /// <param name="kind">The operator kind</param>
         /// <param name="a">The operand</param>
         [MethodImpl(Inline)]
-        public Bit32 Evaluate(TLK kind, Bit32 a, Bit32 b, Bit32 c)
+        public bit Evaluate(TLK kind, bit a, bit b, bit c)
             => BitLogixOps.eval(kind, a, b, c);
     }
 }

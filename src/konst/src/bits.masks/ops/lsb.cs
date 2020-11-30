@@ -13,6 +13,26 @@ namespace Z0
 
     partial class BitMasks
     {
+        /// <summary>
+        /// [00000001 ... 00000001]
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <typeparam name="T">The source type</typeparam>
+        [MethodImpl(Inline), Op]
+        public static T lsb8x1<T>(T src)
+            where T : unmanaged
+                => force<ulong,T>(scatter(force<T,ulong>(src), Lsb64x8x1));
+
+        /// <summary>
+        /// [00000000 00000000 00000000 0000001 00000000 00000000 00000000 0000001]
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <typeparam name="T">The source type</typeparam>
+        [MethodImpl(Inline), Op]
+        public static T lsb32x1<T>(T src)
+            where T : unmanaged
+                => force<ulong,T>(scatter(force<T,ulong>(src), Lsb64x32x1));
+
         [MethodImpl(Inline)]
         public static LsbMask<F,D,T> LsbSpec<F,D,T>(F f = default, D d = default, T t = default)
             where F : unmanaged, ITypeNat

@@ -35,7 +35,7 @@ namespace Z0
             var srcPop = Bits.pop(src);
             Claim.eq(6,srcPop);
 
-            Bits.unpack16x1(src,buffer16x8);
+            Bits.unpack1x8x16(src,buffer16x8);
 
             var bytes = z.bytes(src);
             Claim.eq(2, bytes.Length);

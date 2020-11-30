@@ -9,20 +9,18 @@ namespace Z0
 
     using static Konst;
     using static z;
+    using static BitMasks.Literals;
     using static BitMasks;
 
-    using L = BitMasks.Literals;
-
-    partial struct BitParts
+    partial class Bits
     {
         /// <summary>
-        /// [00000000 00000000 00000000 0000001 00000000 00000000 00000000 0000001]
+        /// Packs 8 1-bit values taken from the least significant bit of each source byte
         /// </summary>
-        /// <param name="src">The source value</param>
-        /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline), Op]
-        public static T lsb32x1<T>(T src)
+        /// <param name="src">The data source</param>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static byte pack8x8x1<T>(in T src)
             where T : unmanaged
-                => force<ulong,T>(scatter(force<T,ulong>(src), L.Lsb64x32x1));
+                => (byte)BitMasks.gather(force<T,ulong>(src), Lsb64x8x1);
     }
 }

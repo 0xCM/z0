@@ -13,45 +13,6 @@ namespace Z0
     partial class BitPack
     {
         /// <summary>
-        /// Packs the least significant bit from 16 32-bit unsigned integers to a 16-bit target
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        /// <param name="count">The number of bits to pack</param>
-        /// <param name="dst">The target width</param>
-        [MethodImpl(Inline), Op]
-        public static ushort pack16x32x1(in uint src, N16 count, W16 dst)
-        {
-            var buffer = z16;
-            return pack16x32x1(src, ref buffer);
-        }
-
-        /// <summary>
-        /// Packs the least significant bit from 32 32-bit unsigned integers to a 32-bit target
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        /// <param name="count">The number of bits to pack</param>
-        /// <param name="dst">The target width</param>
-        [MethodImpl(Inline), Op]
-        public static uint pack32x32x1(in uint src, N32 count, W32 dst)
-        {
-            var buffer = z32;
-            return pack32x32x1(src, ref buffer);
-        }
-
-        /// <summary>
-        /// Packs the least significant bit from 64 32-bit unsigned integers to a 64-bit target
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        /// <param name="n">The number of bits to pack</param>
-        /// <param name="w">The target width</param>
-        [MethodImpl(Inline), Op]
-        public static ulong pack64x32x1(in uint src, N64 n, W64 w)
-        {
-            var buffer = z64;
-            return pack64x32x1(src, ref buffer);
-        }
-
-        /// <summary>
         /// Packs the leading 8 source bits
         /// </summary>
         /// <param name="src">The bit source</param>
@@ -60,7 +21,7 @@ namespace Z0
         public static byte pack(Span<Bit32> src, N8 count)
         {
             var v0 = vload(n256, first(convert(src, 0, bitwidth<byte>(w8))));
-            return (byte)z.vpacklsb(vcompact(v0, n128,z8));
+            return (byte)vpacklsb(vcompact(v0, n128,z8));
         }
 
         /// <summary>
@@ -72,7 +33,8 @@ namespace Z0
         public static ushort pack(Span<Bit32> src, N16 count)
         {
             ref readonly var unpacked = ref first(convert(src, 0, bitwidth<ushort>(w8)));
-            return pack16x32x1(unpacked, count, w16);
+            var buffer = z16;
+            return Bits.pack16x32x1(unpacked, ref buffer);
         }
 
         /// <summary>
@@ -84,7 +46,8 @@ namespace Z0
         public static uint pack(Span<Bit32> src, N32 count)
         {
             ref readonly var unpacked = ref first(convert(src, 0, bitwidth<uint>(w8)));
-            return pack32x32x1(unpacked,count, w32);
+            var buffer = z32;
+            return Bits.pack32x32x1(unpacked, ref buffer);
         }
 
         /// <summary>
@@ -96,7 +59,8 @@ namespace Z0
         public static ulong pack(Span<Bit32> src, N64 count)
         {
             ref readonly var unpacked = ref first(convert(src, 0, bitwidth<ulong>(w8)));
-            return pack64x32x1(unpacked, count, w64);
+            var buffer = z64;
+            return Bits.pack64x32x1(unpacked, ref buffer);
         }
 
         [MethodImpl(Inline)]

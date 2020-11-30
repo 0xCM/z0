@@ -9,32 +9,27 @@ namespace Z0
 
     using static Konst;
     using static z;
-    using static BitMasks;
-    using static BitMasks.Literals;
-
 
     partial class Bits
     {
-        [MethodImpl(Inline), Unpack]
-        public static ref ulong unpack1x8x16(ushort src, ref ulong dst)
-        {
-            const ulong M = (ulong)Lsb64x8x1;
-            seek(dst, 0) = BitMasks.scatter(src, M);
-            seek(dst, 1) = BitMasks.scatter(uint16(src >> 8), M);
-            return ref dst;
-        }
-
         /// <summary>
-        /// Distributes each packed source bit to the least significant bit of 16 corresponding target bytes
+        /// Distributes each packed source bit to the least significant bit of 64 corresponding target bytes
         /// </summary>
         /// <param name="src">The packed source bits</param>
         /// <param name="dst">The target buffer</param>
         [MethodImpl(Inline), Op]
-        public static ref byte unpack1x8x16(ushort src, ref byte dst)
+        public static ref byte unpack1x8x64(ulong src, ref byte dst)
         {
-            var m = lsb<ulong>(n8, n1);
-            seek64(dst, 0) = scatter((ulong)(byte)src, m);
-            seek64(dst, 1) = scatter((ulong)((byte)(src >> 8)), m);
+            unpack1x8x32((uint)src, ref dst);
+            unpack1x8x32((uint)(src >> 32), ref seek(dst, 32));
+            return ref dst;
+        }
+
+        [MethodImpl(Inline), Unpack]
+        public static ref ulong unpack1x8x64(ulong src, ref ulong dst)
+        {
+            unpack1x8x32((uint)src, ref dst);
+            unpack1x8x32((uint)(src >> 32), ref seek8g(dst, 32));
             return ref dst;
         }
 
@@ -44,17 +39,8 @@ namespace Z0
         /// <param name="src">The bit source</param>
         /// <param name="dst">The bit target</param>
         [MethodImpl(Inline), Unpack]
-        public static void unpack1x8x16(ushort src, Span<byte> dst)
-            => unpack1x8x16(src, ref first64(dst));
-
-        /// <summary>
-        /// Sends each source bit to a corresponding target cell
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        /// <param name="dst">The bit target</param>
-        [MethodImpl(Inline), Unpack]
-        public static void unpack1x8x16(ushort src, in SpanBlock128<byte> dst)
-            => unpack1x8x16(src, dst.Storage);
+        public static void unpack1x8x64(ulong src, Span<byte> dst)
+            => unpack1x8x64(src, ref first64(dst));
 
         /// <summary>
         /// Distributes each packed source bit to the least significant bit of the corresponding target byte
@@ -64,9 +50,9 @@ namespace Z0
         /// <param name="block">The block index</param>
         /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline), Op]
-        public static ref readonly SpanBlock128<byte> unpack1x8x16(ushort src, in SpanBlock128<byte> dst, int block)
+        public static ref readonly SpanBlock512<byte> unpack1x8x64(ulong src, in SpanBlock512<byte> dst, int block)
         {
-            unpack(src, dst.Block(block));
+            unpack1x8x64(src, dst.Block(block));
             return ref dst;
         }
     }

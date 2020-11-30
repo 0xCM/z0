@@ -11,16 +11,16 @@ namespace Z0
     using static z;
     using static BitMasks;
 
-    partial class BitPack
+    partial class Bits
     {
-        /// <summary>
+       /// <summary>
         /// Distributes 8 packed source bits to 8 corresponding target bits
         /// </summary>
         /// <param name="src">The packed source bits</param>
         /// <param name="dst">The target buffer</param>
         [MethodImpl(Inline), Op]
         public static void unpack(byte src, Span<bit> dst)
-            => Bits.unpack1x8x8(src, ref u8(first(dst)));
+            => unpack1x8x8(src, ref u8(first(dst)));
 
         /// <summary>
         /// Distributes 16 packed source bits to 16 corresponding target bits
@@ -30,6 +30,15 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static void unpack(ushort src, Span<bit> dst)
             => unpack1x8x16(src, ref u8(first(dst)));
+
+        /// <summary>
+        /// Distributes 32 packed source bits to 32 corresponding target bits
+        /// </summary>
+        /// <param name="src">The packed source bits</param>
+        /// <param name="dst">The target buffer</param>
+        [MethodImpl(Inline), Op]
+        public static void unpack(uint src, Span<bit> dst)
+            => unpack1x8x32(src, ref u8(first(dst)));
 
         /// <summary>
         /// Distributes 64 packed source bits to 64 corresponding target bits
@@ -48,16 +57,6 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static void unpack(byte src, Span<byte> dst)
             => seek64(first(dst), 0) = scatter((ulong)(byte)src, lsb<ulong>(n8,n1));
-
-        /// <summary>
-        /// Unpacks a specified number source bytes to a corresponding count of 256-bit blocks comprising 32-bit target values
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        /// <param name="blocks">The number of bytes to pack</param>
-        /// <param name="dst">The target buffer</param>
-        [MethodImpl(Inline), Op]
-        public static void unpack(in byte src, int blocks, in SpanBlock256<uint> dst)
-            => unpack(src, blocks, ref dst.First);
 
         /// <summary>
         /// Distributes each packed source bit to the least significant bit of the corresponding target byte
@@ -87,9 +86,19 @@ namespace Z0
 
             for(var i=0; i < count; i++)
             {
-                Bits.unpack1x8x8(skip(src, i), ref tmp);
+                unpack1x8x8(skip(src, i), ref tmp);
                 vconvert(n64, in tmp, n256, n32).StoreTo(ref seek(dst, i*8));
             }
         }
+
+        /// <summary>
+        /// Unpacks a specified number source bytes to a corresponding count of 256-bit blocks comprising 32-bit target values
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <param name="blocks">The number of bytes to pack</param>
+        /// <param name="dst">The target buffer</param>
+        [MethodImpl(Inline), Op]
+        public static void unpack(in byte src, int blocks, in SpanBlock256<uint> dst)
+            => unpack(src, blocks, ref dst.First);
     }
 }

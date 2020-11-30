@@ -27,21 +27,24 @@ namespace Z0
         public static ushort extract32(in BitSpan32 src, N16 count, int offset)
         {
             ref readonly var unpacked = ref first(extract32(src, offset, count));
-            return BitPack.pack16x32x1(unpacked, count, w16);
+            var buffer = z16;
+            return Bits.pack16x32x1(unpacked, ref buffer);
         }
 
         [MethodImpl(Inline), Op]
         public static uint extract32(in BitSpan32 src, N32 count, int offset)
         {
             ref readonly var unpacked = ref first(extract32(src, offset, count));
-            return BitPack.pack32x32x1(unpacked, count, w32);
+            var buffer = z32;
+            return Bits.pack32x32x1(unpacked, ref buffer);
         }
 
         [MethodImpl(Inline), Op]
         public static ulong extract32(in BitSpan32 src, N64 count, int offset)
         {
             ref readonly var unpacked = ref first(extract32(src, offset, count));
-            return BitPack.pack64x32x1(unpacked, count, w64);
+            var buffer = z64;
+            return Bits.pack64x32x1(unpacked, ref buffer);
         }
     }
 }

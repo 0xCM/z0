@@ -18,12 +18,12 @@ namespace Z0
     partial class BitLogixOps
     {
         [MethodImpl(Inline)]
-        public static Bit32 eval<F>(Bit32 a, Bit32 b, F kind = default)
+        public static bit eval<F>(bit a, bit b, F kind = default)
             where F : unmanaged, IBitLogicKind
                 => eval_1(a,b, kind);
 
         [MethodImpl(Inline)]
-        static Bit32 eval_1<F>(Bit32 a, Bit32 b, F kind = default)
+        static bit eval_1<F>(bit a, bit b, F kind = default)
             where F : unmanaged, IBitLogicKind
         {
             if(typeof(F) == typeof(K.True))
@@ -39,7 +39,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static Bit32 eval_2<F>(Bit32 a, Bit32 b, F kind = default)
+        static bit eval_2<F>(bit a, bit b, F kind = default)
             where F : unmanaged, IBitLogicKind
         {
             if (typeof(F) == typeof(K.Or))
@@ -55,7 +55,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static Bit32 eval_3<F>(Bit32 a, Bit32 b, F kind = default)
+        static bit eval_3<F>(bit a, bit b, F kind = default)
             where F : unmanaged, IBitLogicKind
         {
             if (typeof(F) == typeof(K.Impl))
@@ -71,7 +71,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static Bit32 eval_4<F>(Bit32 a, Bit32 b, F kind = default)
+        static bit eval_4<F>(bit a, bit b, F kind = default)
             where F : unmanaged, IBitLogicKind
         {
             if (typeof(F) == typeof(K.LNot))
@@ -94,7 +94,7 @@ namespace Z0
         /// <param name="b">The second operand</param>
         /// <param name="c">The third operand</param>
         [Op]
-        public static Bit32 eval(BLK kind, Bit32 a, Bit32 b)
+        public static bit eval(BLK kind, bit a, bit b)
         {
             switch(kind)
             {

@@ -12,11 +12,6 @@ namespace Z0
 
     partial struct BitParts
     {
-
-    }
-
-    partial class BitMasks
-    {
         /// <summary>
         /// Partitions a 32-bit source value into 4 segments of width 8
         /// </summary>

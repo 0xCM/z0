@@ -8,6 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static z;
+    using static BitMasks.Literals;
+    using static BitMasks;
 
     partial class Bits
     {
@@ -48,41 +51,16 @@ namespace Z0
         }
 
         /// <summary>
-        /// Packs 4 bits into the least bits of an unsigned integer
+        /// Packs the least significant bit from 64 32-bit unsigned integers to a 64-bit target
         /// </summary>
-        [MethodImpl(Inline), Pack]
-        public static uint pack(bit b0, bit b1, bit b2, bit b3)
+        /// <param name="src">The bit source</param>
+        /// <param name="n">The number of bits to pack</param>
+        /// <param name="w">The target width</param>
+        [MethodImpl(Inline), Op]
+        public static ulong pack64x32x1(in uint src, N64 n, W64 w)
         {
-            var dst = (uint)b0;
-            dst |= ((uint)b1 << 1);
-            dst |= ((uint)b2 << 2);
-            dst |= ((uint)b3 << 3);
-            return dst;
-        }
-
-        /// <summary>
-        /// Packs 5 bits into the least bits of an unsigned integer
-        /// </summary>
-        [MethodImpl(Inline), Pack]
-        public static uint pack(bit b0, bit b1, bit b2, bit b3, bit b4)
-        {
-            var dst = (uint)b0;
-            dst |= ((uint)b1 << 1);
-            dst |= ((uint)b2 << 2);
-            dst |= ((uint)b3 << 3);
-            dst |= ((uint)b4 << 4);
-            return dst;
-        }
-
-        /// <summary>
-        /// Packs 8 bits into the least bits of an unsigned integer
-        /// </summary>
-        [MethodImpl(Inline), Pack]
-        public static uint pack(bit b0, bit b1, bit b2, bit b3, bit b4, bit b5, bit b6, bit b7)
-        {
-            var dst = pack(b0, b1, b2, b3);
-            dst |= (pack(b4, b5, b6, b7) << 4);
-            return dst;
+            var buffer = z64;
+            return pack64x32x1(src, ref buffer);
         }
     }
 }

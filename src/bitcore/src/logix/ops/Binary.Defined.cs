@@ -12,71 +12,71 @@ namespace Z0
     partial struct BitLogix
     {
         [MethodImpl(Inline), Op]
-        public static Bit32 @false(Bit32 a, Bit32 b)
-            => Bit32.Off;
+        public static bit @false(bit a, bit b)
+            => bit.Off;
 
         [MethodImpl(Inline), Op]
-        public static Bit32 @true(Bit32 a, Bit32 b)
-            => Bit32.On;
+        public static bit @true(bit a, bit b)
+            => bit.On;
 
         [MethodImpl(Inline), Op]
-        public static Bit32 and(Bit32 a, Bit32 b)
+        public static bit and(bit a, bit b)
             => a & b;
 
         [MethodImpl(Inline), Op]
-        public static Bit32 nand(Bit32 a, Bit32 b)
+        public static bit nand(bit a, bit b)
             => !(a & b);
 
         [MethodImpl(Inline), Op]
-        public static Bit32 or(Bit32 a, Bit32 b)
+        public static bit or(bit a, bit b)
             => a | b;
 
         [MethodImpl(Inline), Op]
-        public static Bit32 nor(Bit32 a, Bit32 b)
+        public static bit nor(bit a, bit b)
             => ~(a | b);
 
         [MethodImpl(Inline), Op]
-        public static Bit32 xor(Bit32 a, Bit32 b)
+        public static bit xor(bit a, bit b)
             => a ^ b;
 
         [MethodImpl(Inline), Op]
-        public static Bit32 xnor(Bit32 a, Bit32 b)
+        public static bit xnor(bit a, bit b)
             => !(a ^ b);
 
         [MethodImpl(Inline), Op]
-        public static Bit32 impl(Bit32 a, Bit32 b)
+        public static bit impl(bit a, bit b)
             => a | ~b;
 
         [MethodImpl(Inline), Op]
-        public static Bit32 nonimpl(Bit32 a, Bit32 b)
+        public static bit nonimpl(bit a, bit b)
             => ~a & b;
 
         [MethodImpl(Inline), Op]
-        public static Bit32 left(Bit32 a, Bit32 b)
+        public static bit left(bit a, bit b)
             => a;
 
         [MethodImpl(Inline), Op]
-        public static Bit32 right(Bit32 a, Bit32 b)
+        public static bit right(bit a, bit b)
             => b;
 
         [MethodImpl(Inline), Op]
-        public static Bit32 lnot(Bit32 a, Bit32 b)
+        public static bit lnot(bit a, bit b)
             => !a;
 
         [MethodImpl(Inline), Op]
-        public static Bit32 rnot(Bit32 a, Bit32 b)
+        public static bit rnot(bit a, bit b)
             => ~b;
 
         [MethodImpl(Inline), Op]
-        public static Bit32 cimpl(Bit32 a, Bit32 b)
+        public static bit cimpl(bit a, bit b)
             => ~a | b;
 
         [MethodImpl(Inline), Op]
-        public static Bit32 cnonimpl(Bit32 a, Bit32 b)
+        public static bit cnonimpl(bit a, bit b)
             => a & ~b;
 
         [MethodImpl(Inline)]
-        public static Bit32 same(Bit32 a, Bit32 b)
+        public static bit same(bit a, bit b)
             => a == b;
     }
 }

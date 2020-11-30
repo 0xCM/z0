@@ -44,7 +44,6 @@ namespace Z0
             where N : unmanaged, ITypeNat
                 => src.Data;
 
-
         /// <summary>
         /// Creates a copy of the source vector
         /// </summary>

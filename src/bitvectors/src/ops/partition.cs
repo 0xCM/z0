@@ -15,7 +15,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Span<BitVector4> partition(ushort src, Span<BitVector4> dst)
         {
-            BitMasks.part4x4(src, ref NatSpan.bytes(dst,n4).First);
+            BitParts.part4x4(src, ref NatSpan.bytes(dst,n4).First);
             return dst;
         }
 
@@ -36,7 +36,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Span<BitVector8> partition(uint src, Span<BitVector8> dst)
         {
-            BitMasks.part4x8(src, ref NatSpan.bytes(dst,n4).First);
+            BitParts.part4x8(src, ref NatSpan.bytes(dst,n4).First);
             return dst;
         }
 
@@ -65,7 +65,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static byte partition(uint src, ref byte dst)
         {
-            BitMasks.part4x8(src, ref dst);
+            BitParts.part4x8(src, ref dst);
             return dst;
         }
 
