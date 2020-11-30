@@ -14,17 +14,35 @@ namespace Z0
     [DataType]
     public readonly struct Name : IName<string>, IEquatable<Name>, IComparable<Name>
     {
-        public readonly string Content;
+        readonly string Data;
 
         [MethodImpl(Inline)]
         public Name(string src)
-            => Content = src;
+            => Data = src;
+
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => text.empty(Data);
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => text.nonempty(Data);
+        }
+
+        public string Content
+        {
+            [MethodImpl(Inline)]
+            get => Data ?? EmptyString;
+        }
 
         [MethodImpl(Inline)]
         public string Format()
             => Content;
 
-        public ReadOnlySpan<char> Data
+        public ReadOnlySpan<char> View
         {
             [MethodImpl(Inline)]
             get => Content;
@@ -62,11 +80,11 @@ namespace Z0
 
         [MethodImpl(Inline), Ignore]
         public int CompareTo(Name src)
-            => api.compare(this,src);
+            => api.compare(this, src);
 
         [MethodImpl(Inline), Ignore]
         public bool Equals(Name src)
-            => string.Equals(Content, src.Content);
+            => string.Equals(Data, src.Data);
 
         [Ignore]
         string IContented<string>.Content
@@ -115,10 +133,16 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static bool operator ==(Name x, Name y)
-            => x.Content == y.Content;
+            => x.Data == y.Data;
 
         [MethodImpl(Inline)]
         public static bool operator !=(Name x, Name y)
-            => x.Content != y.Content;
+            => x.Data != y.Data;
+
+        public static Name Empty
+        {
+            [MethodImpl(Inline)]
+            get => new Name(EmptyString);
+        }
     }
 }

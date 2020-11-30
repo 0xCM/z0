@@ -26,14 +26,14 @@ namespace Z0
             dst.ToolId = toolid(src);
             if(!tag)
             {
-                dst.Name = src.Name;
-                dst.Usage = EmptyString;
+                dst.ToolName = src.Name;
+                dst.Syntax = EmptyString;
             }
             else
             {
                 var attrib = tag.Value;
-                dst.Name = attrib.ToolName;
-                dst.Usage = attrib.UsageSyntax;
+                dst.ToolName = attrib.ToolName;
+                dst.Syntax = attrib.UsageSyntax;
             }
 
             var fields = @readonly(src.InstanceFields().Tagged<SlotAttribute>());
@@ -41,7 +41,6 @@ namespace Z0
             var buffer = alloc<CmdOptionSpec>(kFields);
 
             dst.Options = buffer;
-            dst.Verbs = sys.empty<ToolVerb>();
 
             var options = span(buffer);
             for(ushort i=0; i<kFields; i++)

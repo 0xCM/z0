@@ -119,7 +119,7 @@ namespace Z0
                 ClaimNumeric.ClaimEq(x,y);
 
                 var up1 = BitStore.select((byte)i);
-                Bits.unpack8x1(b, up2);
+                Bits.unpack1x8x8(b, up2);
                 Claim.eq(BitString.load(up1.ToArray()), BitString.load(up2.ToArray()));
             }
         }
@@ -131,7 +131,7 @@ namespace Z0
             for(var i=0; i< RepCount; i++)
             {
                 var src = Random.Next<ulong>();
-                Bits.unpack64x1(src, dst);
+                Bits.unpack1x8x64(src, dst);
                 var bitsPC = dst.PopCount();
                 var bytes = z.bytes(src);
                 var bytesPC = bytes.PopCount();
@@ -146,8 +146,8 @@ namespace Z0
             for(var i=0; i< RepCount; i++)
             {
                 var x = Random.Next<uint>();
-                Bits.unpack32x1(x, y1);
-                Bits.unpack32x1(x, y2);
+                Bits.unpack1x8x32(x, y1);
+                Bits.unpack1x8x32(x, y2);
                 Claim.eq(y1.ToBitString(), y2.ToBitString());
             }
         }

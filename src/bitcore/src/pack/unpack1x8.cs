@@ -8,19 +8,19 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static BitMasks.Literals;
+    using static z;
     using static BitMasks;
 
-    [ApiHost("api")]
-    public partial class BitPack
+    partial class Bits
     {
-        const NumericKind Closure = Konst.UnsignedInts;
 
         /// <summary>
-        /// Packs 8 1-bit values taken from the least significant bit of each source byte
+        /// Sends each source bit to a corresponding target cell
         /// </summary>
-        [MethodImpl(Inline)]
-        static byte pack8(ulong src)
-            => (byte)gather(src, Lsb64x8x1);
+        /// <param name="src">The bit source</param>
+        /// <param name="dst">The bit target</param>
+        [MethodImpl(Inline), Unpack]
+        public static void unpack1x8x64(ulong src, Span<byte> dst)
+            => unpack64x1(src, ref first64(dst));
     }
 }

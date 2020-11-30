@@ -17,6 +17,10 @@ namespace Z0
         const NumericKind Closure = UnsignedInts;
 
         [Op]
+        public static string format(in CmdFlagSpec src)
+            => src.Name.IsEmpty ? src.Index.ToString() : string.Format("{0}:{1}", src.Name, src.Index);
+
+        [Op]
         public static void render(CmdArgIndex src, ITextBuffer dst)
         {
             var count = src.Count;

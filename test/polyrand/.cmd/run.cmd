@@ -1,7 +1,10 @@
-echo off
+@echo off
 
-call .cmd\config.cmd
+set ProjectId=logix
+echo ProjectId:%ProjectId%
 
-:: dotnet run %ProjectPath% -c Release
+set ZCmd=%ZDev%\.cmd
+echo ZCmd:%ZCmd%
 
+call %ZCmd%\build-tests.cmd
 call %TestExe%

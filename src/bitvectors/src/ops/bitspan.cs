@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline), Op]
         public static BitSpan32 bitspan(BitVector4 x, int? maxbits = null)
-            => BitSpans.from(x.Data, maxbits ?? x.Width);
+            => BitSpans.from32(x.Data, maxbits ?? x.Width);
 
         /// <summary>
         /// Converts the vector to a bitspan representation
@@ -25,7 +25,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline), Op]
         public static BitSpan32 bitspan(BitVector8 x, int? maxbits = null)
-            => BitSpans.from(x.Data, maxbits ?? 0);
+            => BitSpans.from32(x.Data, maxbits ?? 0);
 
         /// <summary>
         /// Converts the vector to a bitspan representation
@@ -33,7 +33,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline), Op]
         public static BitSpan32 bitspan(BitVector16 x, int? maxbits = null)
-            => BitSpans.from(x.Data, maxbits ?? 0);
+            => BitSpans.from32(x.Data, maxbits ?? 0);
 
         /// <summary>
         /// Converts the vector to a bitspan representation
@@ -41,7 +41,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline), Op]
         public static BitSpan32 bitspan(BitVector24 x, int? maxbits = null)
-            => BitSpans.from(x.Data, maxbits ?? x.Width);
+            => BitSpans.from32(x.Data, maxbits ?? x.Width);
 
         /// <summary>
         /// Converts the vector to a bitspan representation
@@ -49,7 +49,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline), Op]
         public static BitSpan32 bitspan(BitVector32 x, int? maxbits = null)
-            => BitSpans.from(x.Data, maxbits ?? 0);
+            => BitSpans.from32(x.Data, maxbits ?? 0);
 
         /// <summary>
         /// Converts the vector to a bitspan representation
@@ -57,7 +57,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline), Op]
         public static BitSpan32 bitspan(BitVector64 x, int? maxbits = null)
-            => BitSpans.from(x.Data, maxbits ?? 0);
+            => BitSpans.from32(x.Data, maxbits ?? 0);
 
         /// <summary>
         /// Converts the vector to a bitspan representation
@@ -65,7 +65,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static BitSpan32 bitspan<T>(BitVector<T> src, int? maxbits = null)
             where T : unmanaged
-                => BitSpans.from(src.Data, maxbits ?? 0);
+                => BitSpans.from32(src.Data, maxbits ?? 0);
 
         /// <summary>
         /// Converts the vector to a bitspan representation
@@ -74,6 +74,6 @@ namespace Z0
         public static BitSpan32 bitspan<N,T>(BitVector<N,T> x)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => BitSpans.from(x.Data, (int)TypeNats.value<N>());
+                => BitSpans.from32(x.Data, (int)TypeNats.value<N>());
     }
 }

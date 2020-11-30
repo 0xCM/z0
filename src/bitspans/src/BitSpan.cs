@@ -10,6 +10,8 @@ namespace Z0
     using static z;
     using static Konst;
 
+    using api = BitSpans;
+
     public readonly ref struct BitSpan
     {
         readonly Span<bit> Data;
@@ -54,6 +56,20 @@ namespace Z0
             get => Data;
         }
 
+        [MethodImpl(Inline)]
+        public static bit operator ==(in BitSpan x, in BitSpan y)
+            => api.same(x,y);
+
+        [MethodImpl(Inline)]
+        public static bit operator !=(in BitSpan x, in BitSpan y)
+            => !api.same(x,y);
+
         public static BitSpan Empty => default;
+
+        public override bool Equals(object obj)
+            => throw missing();
+
+        public override int GetHashCode()
+            => throw missing();
     }
 }

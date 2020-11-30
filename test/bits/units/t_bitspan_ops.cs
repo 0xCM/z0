@@ -44,7 +44,7 @@ namespace Z0
             var bs1 = BitSpans.parse32(bsSrc);
             Claim.eq((int)bs1.Length, bsSrc.Length);
 
-            var bs2 = BitSpans.from(x);
+            var bs2 = BitSpans.from32(x);
             CheckBitSpans.eq(bs1.Trim(),bs2.Trim());
 
             var y = bs1.Convert<uint>();
@@ -96,7 +96,7 @@ namespace Z0
             for(var i=0; i<RepCount; i++)
             {
                 Random.Fill(packed);
-                BitPack.unpack(packed, unpacked);
+                BitPack.unpack1x32(packed, unpacked);
                 var bitspan = BitSpans.load32(unpacked.As<Bit32>());
                 bitspan_check(packed,bitspan);
             }
@@ -222,7 +222,7 @@ namespace Z0
         {
             var length = bitwidth<T>();
             var src = BitMasks.even(n2, n1, t);
-            var bitspan = BitSpans.from<T>(src);
+            var bitspan = BitSpans.from32<T>(src);
             var format = bitspan.Format();
 
             Claim.eq(length, bitspan.Length);
@@ -250,7 +250,7 @@ namespace Z0
             for(var i=0; i<RepCount; i++)
             {
                 Random.Fill(buffer);
-                var bitspan = BitSpans.load(buffer);
+                var bitspan = BitSpans.load32(buffer);
                 bitspan_check(buffer.Bytes(),bitspan);
             }
         }
@@ -264,7 +264,7 @@ namespace Z0
                 for(var i=0; i < RepCount; i++)
                 {
                     var src = Random.One(t);
-                    var bitspan = BitSpans.from(src);
+                    var bitspan = BitSpans.from32(src);
                     Sinks.deposit(src, bytes);
                     bitspan_check(bytes, bitspan);
                 }
@@ -281,7 +281,7 @@ namespace Z0
                 for(var i=0; i< RepCount; i++)
                 {
                     var x = Random.One<T>();
-                    var y = BitSpans.from(x);
+                    var y = BitSpans.from32(x);
                     var z = BitSpans.extract32<T>(y);
                     Claim.eq(x,z);
                 }
@@ -298,7 +298,7 @@ namespace Z0
                 for(var i=0; i<RepCount; i++)
                 {
                     var x0 = Random.Next<T>();
-                    var x1 = BitSpans.from(x0);
+                    var x1 = BitSpans.from32(x0);
                     var x2 = x1.Format();
                     var x3 = BitSpans.parse32(x2);
                     var x4 = x3.Convert<T>();

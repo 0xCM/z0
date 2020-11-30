@@ -21,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ref byte pack(in NatSpan<N8,uint> src, ref byte dst)
         {
-            dst = BitPack.pack(src.First, n8, w8);
+            dst = BitPack.pack8x32x1(src.First);
             return ref dst;
         }
 
@@ -33,7 +33,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ref ushort pack(in NatSpan<N16,uint> src, ref ushort dst)
         {
-            dst = BitPack.pack(src.First, n16, w16);
+            dst = BitPack.pack16x32x1(src.First, n16, w16);
             return ref dst;
         }
 
@@ -45,7 +45,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ref uint pack(in NatSpan<N32,uint> src, ref uint dst)
         {
-            dst = BitPack.pack(src.First, n32, w32);
+            dst = BitPack.pack32x32x1(src.First, n32, w32);
             return ref dst;
         }
 
@@ -57,7 +57,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ref ulong pack(in NatSpan<N64,uint> src, ref ulong dst)
         {
-            dst = BitPack.pack(src.First, n64, w64);
+            dst = BitPack.pack64x32x1(src.First, n64, w64);
             return ref dst;
         }
     }

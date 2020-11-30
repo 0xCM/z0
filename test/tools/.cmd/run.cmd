@@ -1,8 +1,10 @@
 @echo off
 
-set ProjectName=tools
-echo ProjectName:%ProjectName%
+set ProjectId=tools
+echo ProjectId:%ProjectId%
 
-call .cmd\config.cmd
+set ZCmd=%ZDev%\.cmd
+echo ZCmd:%ZCmd%
 
-call %RunCmd%
+call %ZCmd%\build-tests.cmd
+call %TestExe%

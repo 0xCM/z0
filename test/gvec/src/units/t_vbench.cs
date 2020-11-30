@@ -310,7 +310,7 @@ namespace Z0
             for(var cycle = 0; cycle < CycleCount; cycle++)
             {
                 clock.Start();
-                var bs =  BitSpans.load(packed);
+                var bs =  BitSpans.load32(packed);
                 for(var j=0u; j < bs.Length; j+= n, ops++)
                     gmath.or(composite, BitSpans.extract32<T>(bs,(int)j));
                 clock.Stop();

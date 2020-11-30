@@ -18,18 +18,18 @@ namespace Z0
         /// <param name="tool">The tool identifier</param>
         /// <param name="verbs"></param>
         [MethodImpl(Inline), Op]
-        public static ToolSpec specify(ToolId tool, ToolVerb[] verbs)
-            => new ToolSpec(tool,verbs);
+        public static ToolSpec specify(ToolId tool, CmdFlagSpec[] flags, CmdOptionSpec[] options, UsageSyntax syntax)
+            => new ToolSpec(tool, flags, options, syntax);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ToolSpec specify<T>(ToolVerb[] verbs)
+        public static ToolSpec specify<T>(CmdFlagSpec[] flags, CmdOptionSpec[] options, UsageSyntax syntax)
             where T : unmanaged
-                => new ToolSpec(typeof(T).Name, verbs);
+                => new ToolSpec(typeof(T).Name, flags, options, syntax);
 
-        [MethodImpl(Inline)]
-        public static ToolSpec specify<T,F>(F[] flags, CmdArg[] options)
-            where T : struct, ITool<T>
-            where F : unmanaged
-                => new ToolSpec(typeof(T).Name, flags.Map(f => Tooling.verb<T>(f.ToString())));
+        // [MethodImpl(Inline)]
+        // public static ToolSpec specify<T,F>(F[] flags, CmdOptionSpec[] options, UsageSyntax syntax)
+        //     where T : struct, ITool<T>
+        //     where F : unmanaged
+        //         => new ToolSpec(typeof(T).Name, options);
     }
 }

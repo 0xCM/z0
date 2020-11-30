@@ -1,0 +1,36 @@
+//-----------------------------------------------------------------------------
+// Copyright   :  (c) Chris Moore, 2020
+// License     :  MIT
+//-----------------------------------------------------------------------------
+namespace Z0
+{
+    using System;
+    using System.Runtime.CompilerServices;
+
+    using static Konst;
+    using static z;
+
+    using L = BitMasks.Literals;
+
+    partial class Bits
+    {
+        /// <summary>
+        /// Sends each source bit to a corresponding target cell
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <param name="dst">The bit target</param>
+        [MethodImpl(Inline), Unpack]
+        public static void unpack16x1(ushort src, in SpanBlock128<byte> dst)
+            => unpack1x8x16(src, dst.Storage);
+
+        [MethodImpl(Inline), Unpack]
+        public static ref ulong unpack16x1(ushort src, ref ulong dst)
+        {
+            const ulong M = (ulong)L.Lsb64x8x1;
+
+            seek(dst, 0) = BitMasks.scatter(src, M);
+            seek(dst, 1) = BitMasks.scatter(uint16(src >> 8), M);
+            return ref dst;
+        }
+    }
+}

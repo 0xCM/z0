@@ -24,6 +24,9 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static int compare(string a, string b)
         {
+            if(a == null || b == null)
+                return 0;
+
             var result = 0;
             ref readonly var x = ref first(a);
             ref readonly var y = ref first(b);
