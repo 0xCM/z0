@@ -16,13 +16,13 @@ namespace Z0
         /// Extracts a T-valued segment, cross-cell or same-cell, from the source as determined by an inclusive position range
         /// </summary>
         /// <param name="src">The bit source</param>
-        /// <param name="firstpos">The sequence-relative position of the first bit</param>
-        /// <param name="lastpos">The sequence-relative position of the last bit</param>
+        /// <param name="i0">The sequence-relative position of the first bit</param>
+        /// <param name="i1">The sequence-relative position of the last bit</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Segment, Closures(Closure)]
-        public static T segment<T>(in SpanBlock256<T> src, BitPos<T> firstpos, BitPos<T> lastpos)
+        public static T segment<T>(in SpanBlock256<T> src, BitPos<T> i0, BitPos<T> i1)
             where T : unmanaged
-                => gbits.segment(src.Storage, firstpos,lastpos);
+                => gbits.segment(src.Storage, i0,i1);
 
         /// <summary>
         /// Extracts a T-valued segment, cross-cell or same-cell, from the source as determined by an inclusive linear index range

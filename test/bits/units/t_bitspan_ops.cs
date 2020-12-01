@@ -15,8 +15,8 @@ namespace Z0
         {
             for(var i=0; i<RepCount; i++)
             {
-                var a = Random.One(z64).ToBitSpan32();
-                var b = Random.One(z64).ToBitSpan32();
+                var a = Random.Next<ulong>().ToBitSpan32();
+                var b = Random.Next<ulong>().ToBitSpan32();
                 var c = a.Replicate();
                 Claim.Require(a != b);
                 Claim.Require(a == c);
@@ -263,7 +263,7 @@ namespace Z0
                 Span<byte> bytes = stackalloc byte[(int)size(t)];
                 for(var i=0; i < RepCount; i++)
                 {
-                    var src = Random.One(t);
+                    var src = Random.Next<T>();
                     var bitspan = BitSpans.from32(src);
                     Sinks.deposit(src, bytes);
                     bitspan_check(bytes, bitspan);
@@ -280,10 +280,10 @@ namespace Z0
             {
                 for(var i=0; i< RepCount; i++)
                 {
-                    var x = Random.One<T>();
-                    var y = BitSpans.from32(x);
-                    var z = BitSpans.extract32<T>(y);
-                    Claim.eq(x,z);
+                    var a = Random.Next<T>();
+                    var b = BitSpans.from32(a);
+                    var c = BitSpans.extract32<T>(b);
+                    Claim.eq(a,c);
                 }
             }
 

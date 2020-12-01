@@ -27,7 +27,6 @@ namespace Z0
         public readonly struct TestZ256<T> : IBlockedBinaryPred256<T>
             where T : unmanaged
         {
-
             [MethodImpl(Inline)]
             public Span<Bit32> Invoke(in SpanBlock256<T> a, in SpanBlock256<T> b, Span<Bit32> dst)
                 => zip(a, b, dst, VSvc.vtestz<T>(w256));

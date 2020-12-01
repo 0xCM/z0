@@ -58,8 +58,5 @@ namespace Z0
         {
             Span<Bit32> Invoke(in SpanBlock512<T> a, in SpanBlock512<T> b, Span<Bit32> dst);
         }
-
     }
-
-
 }

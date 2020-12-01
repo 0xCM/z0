@@ -28,9 +28,7 @@ namespace Z0
                 where T : unmanaged
         {
             const char lf = '\n';
-
             const string crlf = "\r\n";
-
             const char pipe = '|';
 
             var rowlen = colcount;

@@ -34,8 +34,8 @@ namespace Z0
         protected static NatSeq<N2,N1,N3> n213 = default;
 
         [MethodImpl(Inline), And, Closures(Integers)]
-        public static Span<T> and<T>(Span<T> lhs, Span<T> rhs)
+        public static Span<T> and<T>(Span<T> a, Span<T> b)
             where T : unmanaged
-                => SFx.apply(MSvc.and<T>(),lhs,rhs);
+                => SFx.apply(MSvc.and<T>(), a, b);
     }
 }

@@ -12,45 +12,45 @@ namespace Z0
 
     partial class TestApp<A>
     {
-        public Duration RunAction(IUnitTest unit, Action exec)
-        {
-            var messages = new List<IAppMsg>();
-            var clock = Time.counter(false);
-            var casename = TestActionName(unit.GetType());
-            var control = unit as ITestQueue;
+        // public Duration RunAction(IUnitTest unit, Action exec)
+        // {
+        //     var messages = new List<IAppMsg>();
+        //     var clock = Time.counter(false);
+        //     var casename = TestActionName(unit.GetType());
+        //     var control = unit as ITestQueue;
 
-            try
-            {
-                var tsStart = Time.now();
-                messages.Add(PreCase(casename, tsStart));
+        //     try
+        //     {
+        //         var tsStart = Time.now();
+        //         messages.Add(PreCase(casename, tsStart));
 
-                clock.Start();
-                exec();
-                clock.Stop();
+        //         clock.Start();
+        //         exec();
+        //         clock.Stop();
 
-                messages.AddRange(unit.Dequeue());
-                messages.Add(PostCase(casename, clock.Time, tsStart, Time.now()));
+        //         messages.AddRange(unit.Dequeue());
+        //         messages.Add(PostCase(casename, clock.Time, tsStart, Time.now()));
 
-                var outcomes = control.TakeOutcomes().ToArray();
-                if(outcomes.Length != 0)
-                    PostTestResults(outcomes);
-                else
-                    PostTestResult(TestCaseRecord.define(casename,true,clock.Time));
+        //         var outcomes = control.TakeOutcomes().ToArray();
+        //         if(outcomes.Length != 0)
+        //             PostTestResults(outcomes);
+        //         else
+        //             PostTestResult(TestCaseRecord.define(casename,true,clock.Time));
 
-            }
-            catch(Exception e)
-            {
-                clock.Stop();
-                messages.AddRange(unit.Dequeue());
-                messages.AddRange(FormatErrors(casename,e));
-                PostTestResult(TestCaseRecord.define(casename,false,clock.Time));
-            }
-            finally
-            {
-                term.print(messages);
-            }
-            return clock.Time;
-        }
+        //     }
+        //     catch(Exception e)
+        //     {
+        //         clock.Stop();
+        //         messages.AddRange(unit.Dequeue());
+        //         messages.AddRange(FormatErrors(casename,e));
+        //         PostTestResult(TestCaseRecord.define(casename,false,clock.Time));
+        //     }
+        //     finally
+        //     {
+        //         term.print(messages);
+        //     }
+        //     return clock.Time;
+        // }
 
         Duration ExecExplicit(IExplicitTest unit, string hostpath, IList<TestCaseRecord> results)
         {

@@ -194,7 +194,7 @@ namespace Z0
             for(var i=0; i< 16; i++)
             {
                 BitVector4 result = (byte)i;
-                var bbResult = BitBlocks.from(result);
+                var bbResult = BitBlocks.init(result);
 
                 var table = BitMatrix.alloc<N4,N3,byte>();
                 table[0] = BitBlocks.single<N3,byte>((byte)Bits.pack(result[0], off, off));
@@ -211,7 +211,7 @@ namespace Z0
             for(var i=0; i< 256; i++)
             {
                 BitVector8 result = (byte)i;
-                var bbResult = BitBlocks.from(result);
+                var bbResult = BitBlocks.init(result);
 
                 var table = BitMatrix.alloc<N8,N4,byte>();
                 table[0] = BitBlocks.single<N4,byte>((byte)Bits.pack(result[0], off, off, off));

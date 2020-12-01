@@ -13,15 +13,15 @@ namespace Z0
 
     partial struct SFx
     {
-       [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static S.BinaryOp<T> canonical<T>(S.Func<T,T,T> src)
             => S.binary(src.Subject.ToBinaryOp(), src.Id);
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static S.TernaryOp<T> canonical<T>(S.Func<T,T,T,T> src)
             => S.ternary(Delegates.@operator(src.Subject), src.Id);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static S.Emitter<T> canonical<T>(S.Func<T> src)
             => S.emitter(Delegates.emitter(src.Subject), src.Id);
     }

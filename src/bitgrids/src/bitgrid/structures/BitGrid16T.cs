@@ -49,7 +49,6 @@ namespace Z0
         /// </summary>
         public ref T this[int index] { [MethodImpl(Inline)] get => ref Cell(index);}
 
-
         [MethodImpl(Inline)]
         internal BitGrid16(ushort data)
             => Data = data;

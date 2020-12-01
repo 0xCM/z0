@@ -18,12 +18,12 @@ namespace Z0
         /// <param name="src">The bit source</param>
         /// <param name="i0">The index of the first bit to include in the pattern</param>
         /// <param name="i1">The index of the last bit to include in the pattern</param>
-        /// <param name="reps">The number of times to repeat the pattern</param>
+        /// <param name="count">The number of times to repeat the pattern</param>
         /// <typeparam name="T">The source/target type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static T replicate<T>(T src, byte i0, byte i1, int reps)
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static T replicate<T>(T src, byte i0, byte i1, byte count)
             where T : unmanaged
-                => force<T>(Bits.replicate(force<T,ulong>(src), i0, i1, reps));
+                => force<T>(Bits.replicate(force<T,ulong>(src), i0, i1, count));
 
         /// <summary>
         /// [000...000101] -> [101101...101101]
@@ -31,12 +31,12 @@ namespace Z0
         /// </summary>
         /// <param name="src">The value defining the pattern to replicate</param>
         /// <typeparam name="T">The source/target type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static T replicate<T>(T src)
             where T : unmanaged
         {
             var index = hipos(src);
-            var count = ((int)bitwidth<T>() / (index + 1) +  1);
+            var count = (byte)((int)bitwidth<T>() / (index + 1) +  1);
             var replicated = Bits.replicate(force<T,ulong>(src), 0, index, count);
             return force<T>(replicated);
         }
@@ -47,9 +47,9 @@ namespace Z0
         /// <param name="src">The bit source</param>
         /// <param name="t">A target type representative</param>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static T replicate<T>(byte src)
             where T : unmanaged
-                => force<T>(Bits.replicate((ulong)src, 0, 7, (int)bitwidth<T>() / 8));
+                => force<T>(Bits.replicate((ulong)src, 0, 7, (byte)(bitwidth<T>() / 8)));
     }
 }

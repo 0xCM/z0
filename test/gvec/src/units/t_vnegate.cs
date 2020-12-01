@@ -5,7 +5,7 @@
 namespace Z0
 {
     using System;
-    
+
     using static Konst;
 
     public class t_vnegate : t_inx<t_vnegate>
@@ -15,7 +15,7 @@ namespace Z0
             vnegate_check(n128);
             vnegate_check(n256);
         }
-        
+
         void vnegate_check(N128 w)
         {
             vnegate_check(w,z8);
@@ -47,10 +47,9 @@ namespace Z0
         void vnegate_check<T>(N128 w, T t = default)
             where T : unmanaged
                 => CheckSVF.CheckUnaryOp(VSvc.vnegate(w,t), w, t);
-            
+
         void vnegate_check<T>(N256 w, T t = default)
             where T : unmanaged
                 => CheckSVF.CheckUnaryOp(VSvc.vnegate(w,t), w, t);
-
    }
 }

@@ -11,14 +11,14 @@ namespace Z0
         /// <summary>
         /// Counts the number of sample points that lie within a specified interval
         /// </summary>
-        /// <param name="rng">The distribution to analyze</param>
+        /// <param name="source">The distribution to analyze</param>
         /// <param name="domain">The interval within which points will be counted</param>
         /// <param name="count">The number of sample points to use</param>
         /// <typeparam name="T">The distribution point type</typeparam>
-        public static Ratio<double> SamplesWithin<T>(IPolyStream rng, Interval<T> domain, int count)
+        public static Ratio<double> SamplesWithin<T>(IDomainSource source, Interval<T> domain, int count)
             where T : unmanaged
         {
-            var src = rng.Stream(domain).Take((uint)count);
+            var src = source.Stream(domain).Take((uint)count);
             var counter = 0;
             foreach(var sample in src)
                 if(domain.Contains(sample))
@@ -31,7 +31,7 @@ namespace Z0
         /// The test succeeds if the ratio approaches unity as the sample size approaches infinity
         /// </summary>
         /// <param name="samples">The sample count</param>
-        public static double SignRatio(IPolyStream rng, long samples, long radius)
+        public static double SignRatio(IDomainSource source, long samples, long radius)
         {
             var domain = Interval.closed(0 - math.abs(radius), 0 + math.abs(radius));
             var pos = 0L;
@@ -39,7 +39,7 @@ namespace Z0
             var zed = 0L;
             for(var i=0; i<samples; i++)
             {
-                var next = rng.Next(domain);
+                var next = source.Next(domain);
                 if(next > 0)
                     pos++;
                 else if(next < 0)

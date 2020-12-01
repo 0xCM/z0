@@ -50,44 +50,44 @@ namespace Z0
             where T : unmanaged
         {
             const int count = 16;
-            var f = VSvc.vtakemask(w,t);
-            var r = Random.VectorEmitter(w,t);
+            var service = VSvc.vtakemask(w,t);
+            var emitter = Sources.vemitter<T>(w,Random);
 
             void check()
             {
                 for(var rep=0; rep<RepCount; rep++)
                 {
-                    var x = r.Invoke();
-                    var a = f.Invoke(x);
+                    var x = emitter.Invoke();
+                    var a = service.Invoke(x);
                     var y = v8u(x);
                     for(byte j=0; j<count; j++)
-                        Claim.eq(gbits.testbit32(vcell(y,j), 7), gbits.testbit32(a,(byte)j));
+                        Claim.eq(gbits.testbit(vcell(y,j), 7), gbits.testbit(a,(byte)j));
                 }
             }
 
-            CheckAction(check, CaseName(f));
+            CheckAction(check, CaseName(service));
         }
 
         void vtakemask_check<T>(N256 w, T t = default)
             where T : unmanaged
         {
             const int count = 32;
-            var f = VSvc.vtakemask(w,t);
-            var r = Random.VectorEmitter(w,t);
+            var service = VSvc.vtakemask(w,t);
+            var emitter = Sources.vemitter<T>(w,Random);
 
             void check()
             {
                 for(var rep=0; rep<RepCount; rep++)
                 {
-                    var x = r.Invoke();
-                    var a = f.Invoke(x);
+                    var x = emitter.Invoke();
+                    var a = service.Invoke(x);
                     var y = v8u(x);
                     for(byte j=0; j<count; j++)
                         Claim.eq(gbits.testbit32(vcell(y,j), 7), gbits.testbit32(a,(byte)j));
                 }
             }
 
-            CheckAction(check, CaseName(f));
+            CheckAction(check, CaseName(service));
         }
     }
 }

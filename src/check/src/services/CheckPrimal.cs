@@ -61,7 +61,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static bool eq(uint lhs, uint rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => lhs == rhs ? true : @throw<bool>(Failed(ClaimKind.Eq, NotEqual(lhs,rhs, caller, file, line)));
+            => lhs == rhs ? true : @throw<bool>(Failed(ClaimKind.Eq, NotEqual(lhs, rhs, caller, file, line)));
 
         [MethodImpl(Inline), Op]
         public static bool eq(long lhs, long rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)

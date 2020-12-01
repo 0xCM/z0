@@ -21,8 +21,6 @@ namespace Z0
 
         void PostTestResults(IEnumerable<TestCaseRecord> outcomes);
 
-        void PostTestResult(TestCaseRecord outcome);
-
         void PostBenchResult(IEnumerable<BenchmarkRecord> outcomes);
 
         Duration RunCase(IUnitTest unit, MethodInfo method, IList<TestCaseRecord> cases);
@@ -32,7 +30,5 @@ namespace Z0
         BenchmarkRecord[] SortBenchmarks();
 
         void RunUnit(Type host, IUnitTest unit);
-
-        Duration RunAction(IUnitTest unit, Action exec);
     }
 }

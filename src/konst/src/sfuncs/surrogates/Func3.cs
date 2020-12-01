@@ -12,7 +12,6 @@ namespace Z0
 
     partial class Surrogates
     {
-
         /// <summary>
         /// Defines a structured surrogate over a ternary function delegate
         /// </summary>

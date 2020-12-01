@@ -28,6 +28,18 @@ namespace Z0
         internal T Data;
 
         /// <summary>
+        /// Initializes a bitvector with the lo N bits of a scalar source
+        /// </summary>
+        /// <param name="data">The scalar source value</param>
+        [MethodImpl(Inline)]
+        internal BitVector(T data)
+            => this.Data = gmath.and(BitMasks.lo<N,T>(), data);
+
+        [MethodImpl(Inline)]
+        internal BitVector(T data, bit inject)
+            => this.Data = data;
+
+        /// <summary>
         /// The physical width of the vector
         /// </summary>
         public static int MaxWidth => BitSize.measure<T>();
@@ -50,18 +62,6 @@ namespace Z0
         [MethodImpl(Inline)]
         internal static BitVector<N,T> Inject(T src)
             => new BitVector<N,T>(src, true);
-
-        /// <summary>
-        /// Initializes a bitvector with the lo N bits of a scalar source
-        /// </summary>
-        /// <param name="data">The scalar source value</param>
-        [MethodImpl(Inline)]
-        internal BitVector(T data)
-            => this.Data = gmath.and(BitMasks.lo<N,T>(), data);
-
-        [MethodImpl(Inline)]
-        BitVector(T data, bit inject)
-            => this.Data = data;
 
         /// <summary>
         /// The scalar representation of the vector

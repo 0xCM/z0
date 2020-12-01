@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="src">The bit source</param>
         /// <param name="mask">The scatter spec</param>
         /// <typeparam name="T">The mask type</typeparam>
-        [MethodImpl(Inline), Scatter, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Scatter, Closures(Closure)]
         public static T scatter<T>(T src, T mask)
             where T : unmanaged
         {

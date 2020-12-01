@@ -14,30 +14,6 @@ namespace Z0
     public readonly struct Rng
     {
         /// <summary>
-        /// Creates a 128-bit vectorized emitter predicated an a specified random source
-        /// </summary>
-        /// <param name="w">The vector bit width</param>
-        /// <param name="random">The random source</param>
-        /// <param name="t">A vector component type representative</param>
-        /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline)]
-        public static VRand128<T> vemitter<T>(N128 w, IPolyStream random, T t = default)
-            where T : unmanaged
-                => new VRand128<T>(random);
-
-        /// <summary>
-        /// Creates a 256-bit vectorized emitter predicated an a specified random source
-        /// </summary>
-        /// <param name="w">The vector bit width</param>
-        /// <param name="random">The random source</param>
-        /// <param name="t">A vector component type representative</param>
-        /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline)]
-        public static VRand256<T> vemitter<T>(N256 w, IPolyStream random, T t = default)
-            where T : unmanaged
-                => new VRand256<T>(random);
-
-        /// <summary>
         /// Evenly projects points from the interval [0,2^31 - 1] onto the interval [0,max]
         /// </summary>
         /// <param name="src">The value to contract</param>

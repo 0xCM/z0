@@ -12,8 +12,6 @@ namespace Z0
     using static BitMasks;
     using static BitMasks.Literals;
 
-    using L = BitMasks.Literals;
-
     partial struct BitParts
     {
         /// <summary>

@@ -581,7 +581,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitBlock<T> BitBlock<T>(this IPolyrand random, int bitcount)
             where T : unmanaged
-                => BS.load<T>(random.Stream<T>().ToSpan(BS.cellcount<T>(bitcount)), bitcount);
+                => BS.load<T>(random.Stream<T>().ToSpan(BS.cells<T>(bitcount)), bitcount);
 
 
         /// <summary>

@@ -97,7 +97,6 @@ namespace Z0
 
         public void check_block_alloc()
         {
-
             var w = w128;
             var count = Pow2.T08;
 

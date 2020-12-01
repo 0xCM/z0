@@ -13,7 +13,7 @@ namespace Z0
 
     partial class gbits
     {
-        [MethodImpl(Inline), Unpack, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Unpack, Closures(Closure)]
         public static Span<Bit32> unpack<T>(ReadOnlySpan<T> src, Span<Bit32> dst)
             where T : unmanaged
         {
@@ -33,7 +33,7 @@ namespace Z0
         /// <param name="src">The source values to be unpacked</param>
         /// <param name="dst">The target span of length at least bitsize[T]*length(Span[T])</param>
         /// <typeparam name="T">The source value type</typeparam>
-        [MethodImpl(Inline), Unpack, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Unpack, Closures(Closure)]
         public static Span<Bit32> unpack<T>(Span<T> src, Span<Bit32> dst)
             where T : unmanaged
                 => unpack(src.ReadOnly(),dst);
@@ -44,7 +44,7 @@ namespace Z0
         /// <param name="src">The source values to be unpacked</param>
         /// <param name="dst">The target array of length at least bitsize[T]*length(Span[T])</param>
         /// <typeparam name="T">The source value type</typeparam>
-        [MethodImpl(Inline), Unpack, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Unpack, Closures(Closure)]
         public static Span<Bit32> unpack<T>(Span<T> src, Bit32[] dst)
             where T : unmanaged
                 => unpack(src, dst.AsSpan());

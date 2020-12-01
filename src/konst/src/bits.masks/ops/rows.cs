@@ -50,19 +50,19 @@ namespace Z0
                         var length = component.Length;
                         if(length > 0)
                         {
-                            var indicator = NumericBases.indicator(component[0]);
+                            var nbi = NumericBases.indicator(component[0]);
 
-                            if(indicator != 0)
-                                dst[i] = row(NumericLiterals.define(src.Name, value, component.Substring(1), NumericBases.kind(indicator)));
+                            if(nbi != 0)
+                                dst[i] = row(NumericLiterals.define(src.Name, value, component.Substring(1), NumericBases.kind(nbi)));
                             else
                             {
-                                indicator = NumericBases.indicator(component[length - 1]);
-                                indicator = indicator != 0 ? indicator : NBI.Base2;
+                                nbi = NumericBases.indicator(component[length - 1]);
+                                nbi = nbi != 0 ? nbi : NBI.Base2;
                                 dst[i] = BitMasks.row(NumericLiterals.define(
                                     src.Name,
                                     value,
                                     component.Substring(0, length - 1),
-                                    NumericBases.kind(indicator)
+                                    NumericBases.kind(nbi)
                                     ));
                             }
                         }

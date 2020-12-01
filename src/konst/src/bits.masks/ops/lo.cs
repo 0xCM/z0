@@ -63,7 +63,7 @@ namespace Z0
         /// lower bits of the source up to and including the least set bit
         /// </summary>
         /// <param name="src">The bit source</param>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         static T lomask2<T>(T src)
             where T : unmanaged
         {

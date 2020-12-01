@@ -19,11 +19,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static BitPos<T> bitpos<T>(int index)
             where T : unmanaged
-                => BitPos.FromBitIndex<T>((uint)index);
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static BitPos<T> bitpos<T>(int index, NK<T> k)
-            where T : unmanaged
-                => bitpos<T>(index);
+				=> BitPos.FromBitIndex<T>((uint)index);
     }
 }

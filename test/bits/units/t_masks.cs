@@ -63,7 +63,7 @@ namespace Z0
             var maxcount = (int)bitwidth<T>();
             for(var i=0; i< RepCount; i++)
             {
-                var count = Random.One(mincount,maxcount);
+                var count = Random.Next(mincount,maxcount);
                 var mask = BitMasks.hi(count,t);
                 var pop = gbits.pop(mask);
                 if(pop != count)

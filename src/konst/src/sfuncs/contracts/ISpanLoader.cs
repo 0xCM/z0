@@ -33,7 +33,7 @@ namespace Z0
     }
 
     [Free, SFx]
-    public interface ISpanLoader128<S,T> : ISpanLoader<S, Vector128<T>>, IFunc128<T>
+    public interface ISpanLoader128<S,T> : ISpanLoader<S,Vector128<T>>, IFunc128<T>
         where S : unmanaged
         where T : unmanaged
     {
@@ -41,7 +41,7 @@ namespace Z0
     }
 
     [Free, SFx]
-    public interface ISpanLoader256<S,T> : ISpanLoader<S, Vector256<T>>, IFunc256<T>
+    public interface ISpanLoader256<S,T> : ISpanLoader<S,Vector256<T>>, IFunc256<T>
         where S : unmanaged
         where T : unmanaged
     {

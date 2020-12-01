@@ -32,57 +32,6 @@ namespace Z0
         /// </summary>
         public const int ByteCount = 32;
 
-        [MethodImpl(Inline)]
-        public static implicit operator Vector256<T>(in BitGrid256<M,N,T> src)
-            => src.Data;
-
-        [MethodImpl(Inline)]
-        public static implicit operator SpanBlock256<T>(in BitGrid256<M,N,T> src)
-            => src.Data.ToBlock();
-
-        [MethodImpl(Inline)]
-        public static implicit operator BitGrid256<M,N,T>(in SpanBlock256<T> src)
-            => new BitGrid256<M,N,T>(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator BitGrid256<M,N,T>(Vector256<T> src)
-            => new BitGrid256<M,N,T>(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator BitGrid256<M,N,T>(Vector256<byte> src)
-            => new BitGrid256<M,N,T>(src.As<byte,T>());
-
-        [MethodImpl(Inline)]
-        public static implicit operator BitGrid256<M,N,T>(Vector256<ushort> src)
-            => new BitGrid256<M,N,T>(src.As<ushort,T>());
-
-        [MethodImpl(Inline)]
-        public static BitGrid256<M,N,T> operator & (in BitGrid256<M,N,T> gx, in BitGrid256<M,N,T> gy)
-            => BitGrid.and(gx,gy);
-
-        [MethodImpl(Inline)]
-        public static BitGrid256<M,N,T> operator | (in BitGrid256<M,N,T> gx, in BitGrid256<M,N,T> gy)
-            => BitGrid.or(gx, gy);
-
-        [MethodImpl(Inline)]
-        public static BitGrid256<M,N,T> operator ^ (in BitGrid256<M,N,T> gx, in BitGrid256<M,N,T> gy)
-            => BitGrid.xor(gx, gy);
-
-        [MethodImpl(Inline)]
-        public static BitGrid256<M,N,T> operator ~ (in BitGrid256<M,N,T> gx)
-            => BitGrid.not(gx);
-
-        [MethodImpl(Inline)]
-        public static BitGrid256<M,N,T> operator - (in BitGrid256<M,N,T> gx)
-            => BitGrid.negate(gx);
-
-        [MethodImpl(Inline)]
-        public static Bit32 operator ==(in BitGrid256<M,N,T> g1, in BitGrid256<M,N,T> g2)
-            => BitGrid.same(g1,g2);
-
-        [MethodImpl(Inline)]
-        public static Bit32 operator !=(in BitGrid256<M,N,T> g1, in BitGrid256<M,N,T> g2)
-            => !BitGrid.same(g1,g2);
 
         [MethodImpl(Inline)]
         internal BitGrid256(Vector256<T> src)
@@ -142,5 +91,57 @@ namespace Z0
 
         public override int GetHashCode()
             => Data.GetHashCode();
+
+        [MethodImpl(Inline)]
+        public static implicit operator Vector256<T>(in BitGrid256<M,N,T> src)
+            => src.Data;
+
+        [MethodImpl(Inline)]
+        public static implicit operator SpanBlock256<T>(in BitGrid256<M,N,T> src)
+            => src.Data.ToBlock();
+
+        [MethodImpl(Inline)]
+        public static implicit operator BitGrid256<M,N,T>(in SpanBlock256<T> src)
+            => new BitGrid256<M,N,T>(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator BitGrid256<M,N,T>(Vector256<T> src)
+            => new BitGrid256<M,N,T>(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator BitGrid256<M,N,T>(Vector256<byte> src)
+            => new BitGrid256<M,N,T>(src.As<byte,T>());
+
+        [MethodImpl(Inline)]
+        public static implicit operator BitGrid256<M,N,T>(Vector256<ushort> src)
+            => new BitGrid256<M,N,T>(src.As<ushort,T>());
+
+        [MethodImpl(Inline)]
+        public static BitGrid256<M,N,T> operator & (in BitGrid256<M,N,T> gx, in BitGrid256<M,N,T> gy)
+            => BitGrid.and(gx,gy);
+
+        [MethodImpl(Inline)]
+        public static BitGrid256<M,N,T> operator | (in BitGrid256<M,N,T> gx, in BitGrid256<M,N,T> gy)
+            => BitGrid.or(gx, gy);
+
+        [MethodImpl(Inline)]
+        public static BitGrid256<M,N,T> operator ^ (in BitGrid256<M,N,T> gx, in BitGrid256<M,N,T> gy)
+            => BitGrid.xor(gx, gy);
+
+        [MethodImpl(Inline)]
+        public static BitGrid256<M,N,T> operator ~ (in BitGrid256<M,N,T> gx)
+            => BitGrid.not(gx);
+
+        [MethodImpl(Inline)]
+        public static BitGrid256<M,N,T> operator - (in BitGrid256<M,N,T> gx)
+            => BitGrid.negate(gx);
+
+        [MethodImpl(Inline)]
+        public static Bit32 operator ==(in BitGrid256<M,N,T> g1, in BitGrid256<M,N,T> g2)
+            => BitGrid.same(g1,g2);
+
+        [MethodImpl(Inline)]
+        public static Bit32 operator !=(in BitGrid256<M,N,T> g1, in BitGrid256<M,N,T> g2)
+            => !BitGrid.same(g1,g2);
     }
 }

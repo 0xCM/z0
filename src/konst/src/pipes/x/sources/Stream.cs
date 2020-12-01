@@ -11,6 +11,8 @@ namespace Z0
 
     using static Konst;
 
+    using B = SpanBlocks;
+
     partial class XSource
     {
         public static IEnumerable<T> Stream<T>(this IDomainSource source, Interval<T> domain, Func<T,bool> filter = null)
@@ -31,5 +33,6 @@ namespace Z0
             while(true)
                 yield return source.Next<T>();
         }
+
     }
 }

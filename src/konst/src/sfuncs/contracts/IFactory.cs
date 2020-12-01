@@ -6,14 +6,11 @@ namespace Z0
 {
     using System.Runtime.Intrinsics;
 
-    using static SFx;
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-
     partial struct SFx
     {
-
         /// <summary>
         /// Characterizes a function that produces a vector predicated on a source value
         /// </summary>

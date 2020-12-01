@@ -15,32 +15,31 @@ namespace Z0
         /// <summary>
         /// Computes z := (lhs << ldx |  rhs >> rdx) >> ldx
         /// </summary>
-        /// <param name="left">The value that is displaced leftwards</param>
-        /// <param name="ldx">The leftward displacement</param>
-        /// <param name="right">The value that is displaced rightwards</param>
-        /// <param name="rdx">The rightward displacement</param>
+        /// <param name="a">The value that is displaced leftwards</param>
+        /// <param name="i">The leftward displacement</param>
+        /// <param name="b">The value that is displaced rightwards</param>
+        /// <param name="j">The rightward displacement</param>
         /// <typeparam name="T">The primal type</typeparam>
         /// <remarks>
-        /// The way to think about this function is as follows:
         /// The left value is displaced upwards, shifting in zeros, and is combined
         /// with the right value after it is displaced downwards.
         /// This composite is then displaced downwards the same amount by which the
         /// right value was displaced upwards, removing the zeros that were shifted in.
         /// </remarks>
-        [MethodImpl(Inline), Stitch, Closures(UnsignedInts)]
-        public static T stitch<T>(T left, int ldx, T right, int rdx)
+        [MethodImpl(Inline), Stitch, Closures(Closure)]
+        public static T stitch<T>(T a, int i, T b, int j)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(Bits.stitch(uint8(left), ldx, uint8(right), rdx));
+                return generic<T>(Bits.stitch(uint8(a), i, uint8(b), j));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(Bits.stitch(uint16(left), ldx, uint16(right), rdx));
+                return generic<T>(Bits.stitch(uint16(a), i, uint16(b), j));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(Bits.stitch(uint32(left), ldx, uint32(right), rdx));
+                return generic<T>(Bits.stitch(uint32(a), i, uint32(b), j));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(Bits.stitch(uint64(left), ldx, uint64(right), rdx));
+                return generic<T>(Bits.stitch(uint64(a), i, uint64(b), j));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
     }
 }

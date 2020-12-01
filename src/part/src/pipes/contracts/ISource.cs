@@ -10,6 +10,33 @@ namespace Z0
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
+    [Free]
+    public interface ISource
+    {
+        /// <summary>
+        /// Retrieves the next point from the source, bound only by the domain of the type
+        /// </summary>
+        /// <typeparam name="T">The point type</typeparam>
+        T Next<T>();
+
+        bool Next<T>(out T dst)
+        {
+            dst = Next<T>();
+            return true;
+        }
+
+        void Fill<T>(Span<T> dst)
+        {
+            var count = dst.Length;
+            if(count != 0)
+            {
+                ref var target = ref first(dst);
+                for(var i=0; i<count; i++)
+                    seek(target,i) = Next<T>();
+            }
+        }
+    }
+
     /// <summary>
     /// Characterizes an unlimited emitter that produces one element at a time
     /// </summary>
@@ -44,30 +71,5 @@ namespace Z0
         }
     }
 
-    [Free]
-    public interface ISource
-    {
-        /// <summary>
-        /// Retrieves the next point from the source, bound only by the domain of the type
-        /// </summary>
-        /// <typeparam name="T">The point type</typeparam>
-        T Next<T>();
 
-        bool Next<T>(out T dst)
-        {
-            dst = Next<T>();
-            return true;
-        }
-
-        void Fill<T>(Span<T> dst)
-        {
-            var count = dst.Length;
-            if(count != 0)
-            {
-                ref var target = ref first(dst);
-                for(var i=0; i<count; i++)
-                    seek(target,i) = Next<T>();
-            }
-        }
-    }
 }

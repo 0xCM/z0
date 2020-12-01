@@ -18,12 +18,13 @@ namespace Z0
         /// <param name="x">The first vector</param>
         /// <param name="y">The second vector</param>
         /// <remarks>This should be considered a reference implementation; the dot operation is considerably faster</remarks>
-
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static bit modprod<T>(in BitBlock<T> x, in BitBlock<T> y)
             where T : unmanaged
         {
             var result = 0u;
-            for(var i=0; i<x.BitCount; i++)
+            var count = x.BitCount;
+            for(var i=0; i<count; i++)
             {
                 var a = (uint)x[i];
                 var b = (uint)y[i];
@@ -45,6 +46,5 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => modprod(x.Unsize(),y.Unsize());
-
     }
 }

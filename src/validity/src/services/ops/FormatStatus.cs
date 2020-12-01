@@ -12,7 +12,7 @@ namespace Z0
     {
         const int CasePad = (int)((ulong)TestCaseField.CaseName >> 32);
 
-        const int ExecutedPad = (int)((ulong)TestCaseField.Executed >> 32);
+        const int ExecutedPad = (int)((ulong)TestCaseField.Finished >> 32);
 
         const int DurationPad = (int)((ulong)TestCaseField.Duration >> 32);
 

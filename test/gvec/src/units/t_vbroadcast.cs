@@ -12,67 +12,6 @@ namespace Z0
     using static z;
 
 
-    static class VChecks
-    {
-       [MethodImpl(Inline)]
-       public static VBroadcastCheck128<S,T> vbroadcast<S,T>(N128 w, S s = default, T t = default)
-            where S : unmanaged
-            where T : unmanaged
-                => VBroadcastCheck128<S,T>.Op;
-
-       [MethodImpl(Inline)]
-       public static VBroadcastCheck256<S,T> vbroadcast<S,T>(N256 w, S s = default, T t = default)
-            where S : unmanaged
-            where T : unmanaged
-                => VBroadcastCheck256<S,T>.Op;
-    }
-
-    public readonly struct VBroadcastCheck128<S,T> : ICheckSF128<S,T>
-        where S : unmanaged
-        where T : unmanaged
-    {
-        public static VBroadcastCheck128<S,T> Op => default;
-
-        public const string Name = "vbroadcast_check";
-
-        public Vec128Kind<T> VKind => default;
-
-        public OpIdentity Id => ApiIdentify.sfunc(Name,VKind);
-
-        public Bit32 Invoke(S a, Vector128<T> x)
-        {
-            var count = vcount<T>(w128);
-            var result = Bit32.On;
-            var y = x.As<T,S>();
-            for(var i=0; i< count; i++)
-                result &= gmath.eq(a, y.Cell(i));
-            return result;
-        }
-    }
-
-    public readonly struct VBroadcastCheck256<S,T> : ICheckSF256<S,T>
-        where S : unmanaged
-        where T : unmanaged
-    {
-        public static VBroadcastCheck256<S,T> Op => default;
-
-        public Vec256Kind<T> VKind => default;
-
-        public const string Name = "vbroadcast_check";
-
-        public OpIdentity Id => ApiIdentify.sfunc(Name,VKind);
-
-        public Bit32 Invoke(S a, Vector256<T> x)
-        {
-            var count = vcount<T>(w256);
-            var result = Bit32.On;
-            var y = x.As<T,S>();
-            for(var i=0; i< count; i++)
-                result &= gmath.eq(a, y.Cell(i));
-            return result;
-        }
-    }
-
     public class t_vbroadcast : t_inx<t_vbroadcast>
     {
         public void vbroadcast_check()

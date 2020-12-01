@@ -59,6 +59,15 @@ namespace Z0
             Append(value.ToString().PadRight((int)width));
         }
 
+        void Append(string value, uint width, char c = FieldDelimiter)
+        {
+            if(text.nonempty(value))
+            {
+                Append(text.rspace(c));
+                Append(value.PadRight((int)width));
+            }
+        }
+
         void AppendDelimited<T>(T[] src, char c = FieldDelimiter)
             => Append(delimit(src, c).Format());
 

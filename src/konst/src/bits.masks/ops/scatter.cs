@@ -6,11 +6,11 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics.X86;
     using static System.Runtime.Intrinsics.X86.Bmi2;
     using static System.Runtime.Intrinsics.X86.Bmi2.X64;
 
     using static Konst;
+
     using x64 = System.Runtime.Intrinsics.X86.Bmi2.X64;
 
     partial class BitMasks

@@ -22,7 +22,7 @@ namespace Z0
         [MethodImpl(Inline), Segment, Closures(AllNumeric)]
         public static T segment<T>(T src, byte p0, byte p1)
             where T : unmanaged
-                => segment_u(src,p0,p1);
+                => segment_u(src, p0, p1);
 
         /// <summary>
         /// Extracts a contiguous sequence of bits from a source and deposits the result to a caller-supplied target
@@ -47,27 +47,27 @@ namespace Z0
         /// Extracts a T-valued segment, cross-cell or same-cell, from the source as determined by an inclusive position range
         /// </summary>
         /// <param name="src">The bit source</param>
-        /// <param name="firstpos">The sequence-relative position of the first bit</param>
-        /// <param name="lastpos">The sequence-relative position of the last bit</param>
+        /// <param name="i0">The sequence-relative position of the first bit</param>
+        /// <param name="i1">The sequence-relative position of the last bit</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static T segment<T>(Span<T> src, BitPos<T> firstpos, BitPos<T> lastpos)
+        public static T segment<T>(Span<T> src, BitPos<T> i0, BitPos<T> i1)
             where T : unmanaged
         {
-            var bitcount = (uint)(lastpos - firstpos);
+            var bitcount = (uint)(i1 - i0);
             if(bitcount > bitwidth<T>())
                 return NumericLiterals.maxval<T>();
 
-            var sameSeg = firstpos.CellIndex == lastpos.CellIndex;
-            var firstCount = uint8(sameSeg ? bitcount : bitwidth<T>() - firstpos.BitOffset);
-            var part1 = gbits.slice(bitcell(src,firstpos), (byte)firstpos.BitOffset, firstCount);
+            var sameSeg = i0.CellIndex == i1.CellIndex;
+            var firstCount = uint8(sameSeg ? bitcount : bitwidth<T>() - i0.BitOffset);
+            var part1 = gbits.slice(bitcell(src,i0), (byte)i0.BitOffset, firstCount);
 
             if(sameSeg)
                 return part1;
             else
             {
                 var lastCount = uint8(bitcount - firstCount);
-                return gmath.or(part1, gmath.sal(gbits.slice(bitcell(src,lastpos), 0, lastCount), firstCount));
+                return gmath.or(part1, gmath.sal(gbits.slice(bitcell(src,i1), 0, lastCount), firstCount));
             }
         }
 
@@ -76,54 +76,54 @@ namespace Z0
         /// an inclusive linear index range
         /// </summary>
         /// <param name="src">The bit source</param>
-        /// <param name="first">The sequence-relative index of the first bit</param>
-        /// <param name="last">The sequence-relative index of the last bit</param>
+        /// <param name="i0">The sequence-relative index of the first bit</param>
+        /// <param name="i1">The sequence-relative index of the last bit</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static T segment<T>(Span<T> src, int first, int last)
+        public static T segment<T>(Span<T> src, int i0, int i1)
             where T : unmanaged
-                => segment(src, bitpos<T>(first), bitpos<T>(last));
+                => segment(src, bitpos<T>(i0), bitpos<T>(i1));
 
         [MethodImpl(Inline)]
-        static T segment_i<T>(T src, byte p0, byte p1)
+        static T segment_i<T>(T src, byte i0, byte i1)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                 return generic<T>(Bits.segment(int8(src), p0, p1));
+                 return generic<T>(Bits.segment(int8(src), i0, i1));
             else if(typeof(T) == typeof(short))
-                 return generic<T>(Bits.segment(int16(src), p0, p1));
+                 return generic<T>(Bits.segment(int16(src), i0, i1));
             else if(typeof(T) == typeof(int))
-                 return generic<T>(Bits.extract(int32(src), p0, p1));
+                 return generic<T>(Bits.extract(int32(src), i0, i1));
             else if(typeof(T) == typeof(long))
-                 return generic<T>(Bits.extract(int64(src), p0, p1));
+                 return generic<T>(Bits.extract(int64(src), i0, i1));
             else
-                return Segment_f(src,p0,p1);
+                return Segment_f(src,i0,i1);
         }
 
         [MethodImpl(Inline)]
-        static T segment_u<T>(T src, byte p0, byte p1)
+        static T segment_u<T>(T src, byte i0, byte i1)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                 return generic<T>(Bits.segment(uint8(src), p0, p1));
+                 return generic<T>(Bits.segment(uint8(src), i0, i1));
             else if(typeof(T) == typeof(ushort))
-                 return generic<T>(Bits.segment(uint16(src), p0, p1));
+                 return generic<T>(Bits.segment(uint16(src), i0, i1));
             else if(typeof(T) == typeof(uint))
-                 return generic<T>(Bits.extract(uint32(src), p0, p1));
+                 return generic<T>(Bits.extract(uint32(src), i0, i1));
             else if(typeof(T) == typeof(ulong))
-                 return generic<T>(Bits.extract(uint64(src), p0, p1));
+                 return generic<T>(Bits.extract(uint64(src), i0, i1));
             else
-                return segment_i(src,p0,p1);
+                return segment_i(src,i0,i1);
         }
 
         [MethodImpl(Inline)]
-        static T Segment_f<T>(T src, byte p0, byte p1)
+        static T Segment_f<T>(T src, byte i0, byte i1)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                 return generic<T>(Bits.extract(float32(src), p0, p1));
+                 return generic<T>(Bits.extract(float32(src), i0, i1));
             else if(typeof(T) == typeof(double))
-                 return generic<T>(Bits.extract(float64(src),  p0, p1));
+                 return generic<T>(Bits.extract(float64(src),  i0, i1));
             else
                 throw no<T>();
         }

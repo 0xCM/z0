@@ -21,6 +21,10 @@ namespace Z0
     {
         internal uint Data;
 
+        [MethodImpl(Inline)]
+        internal BitGrid32(uint src)
+            => Data = src;
+
         /// <summary>
         /// The number of covered bits
         /// </summary>
@@ -40,22 +44,6 @@ namespace Z0
         public Span<T> Cells { [MethodImpl(Inline)] get => Data.Bytes().Cast<T>(); }
 
         public ref T Head { [MethodImpl(Inline)] get => ref first(Cells); }
-
-        [MethodImpl(Inline)]
-        public static implicit operator uint(BitGrid32<T> src)
-            => src.Data;
-
-        [MethodImpl(Inline)]
-        public static Bit32 operator ==(BitGrid32<T> gx, BitGrid32<T> gy)
-            => gx.Data == gy.Data;
-
-        [MethodImpl(Inline)]
-        public static Bit32 operator !=(BitGrid32<T> gx, BitGrid32<T> gy)
-            => gx.Data != gy.Data;
-
-        [MethodImpl(Inline)]
-        internal BitGrid32(uint data)
-            => Data = data;
 
         /// <summary>
         /// Reads/writes an index-identified cell
@@ -87,5 +75,17 @@ namespace Z0
 
         public override int GetHashCode()
             => throw new NotSupportedException();
+
+        [MethodImpl(Inline)]
+        public static implicit operator uint(BitGrid32<T> src)
+            => src.Data;
+
+        [MethodImpl(Inline)]
+        public static Bit32 operator ==(BitGrid32<T> gx, BitGrid32<T> gy)
+            => gx.Data == gy.Data;
+
+        [MethodImpl(Inline)]
+        public static Bit32 operator !=(BitGrid32<T> gx, BitGrid32<T> gy)
+            => gx.Data != gy.Data;
     }
 }

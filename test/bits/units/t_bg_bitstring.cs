@@ -3,9 +3,17 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
     public class t_bg_bitstring : t_bitgrids<t_bg_bitstring>
-    {        
+    {
+        public void nbg_bitstring_11x3x16()
+            => nbg_bitstring_check(n11,n3, z16);
+
+        public void nbg_bitstring_64x4x8()
+            => nbg_bitstring_check(n64,n4, z8);
+
+        public void nbg_bitstring_113x201x64()
+            => nbg_bitstring_check(TypeNats.seq(n1,n1,n3), TypeNats.seq(n2,n0,n1), z64);
 
         /// <summary>
         /// Verifies correct function of the natural bitgrid bitstring conversion
@@ -25,21 +33,13 @@ namespace Z0
             {
                 var bg = BitGrid.alloc(m,n,zero);
                 var bs = Random.BitString((int)NatCalc.mul(m,n));
+                var count = bs.Length;
 
-                for(var i=0; i<bs.Length; i++)
+                for(var i=0; i<count; i++)
                     bg.SetBit(i, bs[i]);
-                
-                Claim.eq(bg.ToBitString(), bs);        
+
+                Claim.eq(bg.ToBitString(), bs);
             }
         }
-
-       public void nbg_bitstring_11x3x16()
-            => nbg_bitstring_check(n11,n3, z16);
-            
-        public void nbg_bitstring_64x4x8()
-            => nbg_bitstring_check(n64,n4, z8);
-
-        public void nbg_bitstring_113x201x64()
-            => nbg_bitstring_check(TypeNats.seq(n1,n1,n3), TypeNats.seq(n2,n0,n1), z64);
     }
 }

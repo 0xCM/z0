@@ -27,5 +27,4 @@ namespace Z0
             return ref dst;
         }
     }
-
 }

@@ -31,14 +31,6 @@ namespace Z0
         public readonly int ColCount;
 
         [MethodImpl(Inline)]
-        public static bool operator ==(in BitGrid<T> g1, in BitGrid<T> g2)
-            => g1.Equals(g2);
-
-        [MethodImpl(Inline)]
-        public static bool operator !=(in BitGrid<T> g1, in BitGrid<T> g2)
-            => !g1.Equals(g2);
-
-        [MethodImpl(Inline)]
         internal BitGrid(SpanBlock256<T> data, int rows, int cols)
         {
             Data = data;
@@ -136,5 +128,13 @@ namespace Z0
 
         public override int GetHashCode()
             => throw new NotSupportedException();
+
+        [MethodImpl(Inline)]
+        public static bool operator ==(in BitGrid<T> g1, in BitGrid<T> g2)
+            => g1.Equals(g2);
+
+        [MethodImpl(Inline)]
+        public static bool operator !=(in BitGrid<T> g1, in BitGrid<T> g2)
+            => !g1.Equals(g2);
     }
 }

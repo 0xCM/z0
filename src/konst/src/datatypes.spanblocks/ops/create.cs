@@ -73,7 +73,7 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline), Op]
         public static SpanBlock64<byte> create(W64 w, byte x0, byte x1, byte x2, byte x3, byte x4, byte x5, byte x6, byte x7)
-                => new SpanBlock64<byte>(x0,x1,x2,x3,x4,x5,x6,x7);
+            => new SpanBlock64<byte>(x0,x1,x2,x3,x4,x5,x6,x7);
 
         /// <summary>
         /// Creates a 64-bit blocked container from 4 16-bit cells

@@ -20,7 +20,7 @@ namespace Z0
         public void cnonimpl_64u()
             => cnonimpl_check<ulong>();
 
-        protected void cnonimpl_check<T>(T t = default)
+        void cnonimpl_check<T>(T t = default)
             where T : unmanaged
         {
             var vZero = z.vzero<T>(n128);

@@ -20,6 +20,7 @@ namespace Z0
         public static BitSpan32 BitSpan32(this ISource source, int length)
             => BitSpans.load32(source.BitStream32().Take(length).ToArray());
 
+
         /// <summary>
         /// Produces a random bitspan of specified length
         /// </summary>

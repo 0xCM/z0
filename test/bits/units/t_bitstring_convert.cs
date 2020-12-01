@@ -14,7 +14,7 @@ namespace Z0
             for(var i=0; i< RepCount; i++)
             {
                 var bs = Random.BitString(5,233);
-                var bc = BitBlocks.from<T>(bs);
+                var bc = BitBlocks.init<T>(bs);
                 Claim.eq(bs.Length, bc.BitCount);
                 for(var j=0; j<bs.Length; j++)
                 {

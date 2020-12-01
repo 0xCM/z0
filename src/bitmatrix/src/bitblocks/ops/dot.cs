@@ -20,8 +20,9 @@ namespace Z0
         public static bit dot<T>(in BitBlock<T> x, in BitBlock<T> y)
             where T : unmanaged
         {
+            var count = x.BitCount;
             var result = bit.Off;
-            for(var i=0; i<x.BitCount; i++)
+            for(var i=0; i<count; i++)
                 result ^= x[i] & y[i];
             return result;
         }
@@ -37,8 +38,9 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
         {
+            var count = x.Width;
             var result = bit.Off;
-            for(var i=0; i<x.Width; i++)
+            for(var i=0; i<count; i++)
                 result ^= x[i] & y[i];
             return result;
         }

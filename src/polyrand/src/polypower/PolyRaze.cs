@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="filter">An optional filter that refines the domain</param>
         /// <typeparam name="T">The generated value type</typeparam>
         [MethodImpl(Inline)]
-        public static T[] Array<T>(this IPolyStream random, int length)
+        public static T[] Array<T>(this ISource random, int length)
             where T : unmanaged
                 => random.Stream<T>().TakeArray(length);
 
@@ -33,7 +33,7 @@ namespace Z0
         /// <param name="filter">An optional filter that refines the domain</param>
         /// <typeparam name="T">The generated value type</typeparam>
         [MethodImpl(Inline)]
-        public static T[] Array<T>(this IPolyStream random, uint length)
+        public static T[] Array<T>(this ISource random, uint length)
             where T : unmanaged
                 => random.Stream<T>().TakeArray((int)length);
 
@@ -46,7 +46,7 @@ namespace Z0
         /// <param name="filter">An optional filter that refines the domain</param>
         /// <typeparam name="T">The generated value type</typeparam>
         [MethodImpl(Inline)]
-        public static T[] Array<T>(this IPolyStream random, int length, Interval<T> domain)
+        public static T[] Array<T>(this IDomainSource random, int length, Interval<T> domain)
             where T : unmanaged
                 => random.Stream(domain).TakeArray(length);
 
@@ -60,7 +60,7 @@ namespace Z0
         /// <param name="filter">An optional filter that refines the domain</param>
         /// <typeparam name="T">The generated value type</typeparam>
         [MethodImpl(Inline)]
-        public static T[] Array<T>(this IPolyStream random, int length, T min, T max, Func<T,bool> filter)
+        public static T[] Array<T>(this IDomainSource random, int length, T min, T max, Func<T,bool> filter)
             where T : unmanaged
                 => random.Stream((min,max),filter).TakeArray(length);
 

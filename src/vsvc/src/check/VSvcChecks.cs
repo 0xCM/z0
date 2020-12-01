@@ -12,7 +12,7 @@ namespace Z0
     using static z;
     using static SFx;
 
-    [ApiHost("checks")]
+    [ApiHost]
     public class VSvcChecks
     {
         const NumericKind Closure = UnsignedInts;

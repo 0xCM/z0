@@ -12,7 +12,6 @@ namespace Z0
 
     partial class gbits
     {
-
         /// <summary>
         /// Returns 1 if an index-identified bit is enabled, false otherwise
         /// </summary>

@@ -77,7 +77,7 @@ namespace Z0
         {
             var count = vcount(w,t);
             var f = VSvc.vlo(w,t);
-            var r = Random.VectorEmitter(w,t);
+            var r = Sources.vemitter<T>(w,Random);
             for(var rep=0; rep < RepCount; rep++)
             {
                 var x = r.Invoke();
@@ -92,7 +92,7 @@ namespace Z0
             where T : unmanaged
         {
             var f = VSvc.vlo(w,t);
-            var r = Random.VectorEmitter(w,t);
+            var r = Sources.vemitter<T>(w,Random);
             for(var rep=0; rep < RepCount; rep++)
             {
                 var x = r.Invoke();

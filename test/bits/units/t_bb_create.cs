@@ -61,7 +61,7 @@ namespace Z0
         public void bb_create_n32x32u()
             => check_bitblock_range<N32,uint>();
 
-         [MethodImpl(Inline), Ignore]
+        [MethodImpl(Inline), Ignore]
         protected void check_bitblock_create<T>(int bitcount, in CallingMember caller)
             where T : unmanaged
         {
@@ -94,7 +94,7 @@ namespace Z0
             int n = (int)nat64u<N>();
             var rep = default(N);
             var segcount = (int)GridCells.mincells<T>(nat64u<N>());
-            Claim.eq(BitBlock<N,T>.NeededCells, segcount);
+            Claim.eq(BitBlock<N,T>.RequiredCells, segcount);
             var totalcap = BitBlock<N,T>.RequiredWidth;
             var segcap = bitwidth<T>();
             base.Claim.eq(BitBlock<N, T>.CellWidth, (BitVector32)segcap);

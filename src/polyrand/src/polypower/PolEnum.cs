@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <param name="random">The random source</param>
         /// <typeparam name="E">The enum type</typeparam>
-        public static IEnumerable<E> EnumValues<E>(this IPolyStream random, Func<E,bool> filter)
+        public static IEnumerable<E> EnumValues<E>(this IDomainSource random, Func<E,bool> filter)
             where E : unmanaged, Enum
         {
             IEnumerable<E> produce()

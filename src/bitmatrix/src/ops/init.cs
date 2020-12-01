@@ -22,7 +22,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
         {
             var matrix = alloc<N,T>();
-            var srcCellCount = BitBlock<N,T>.NeededCells;
+            var srcCellCount = BitBlock<N,T>.RequiredCells;
             var srcBitCount = nat64u<N>();
             ref readonly var src = ref row.Head;
             ref var dst = ref matrix.Head;
@@ -42,7 +42,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
         {
             var matrix = alloc<M,N,T>();
-            var srcCellCount = BitBlock<N,T>.NeededCells;
+            var srcCellCount = BitBlock<N,T>.RequiredCells;
             var srcBitCount = nat64u<N>();
             ref readonly var src = ref row.Head;
             ref var dst = ref matrix.Head;

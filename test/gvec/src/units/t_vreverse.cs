@@ -73,11 +73,11 @@ namespace Z0
             where F : IUnaryOp128<T>
         {
             var n = vcount(w,t);
-            var r = Random.VectorEmitter(w,t);
+            var emitter = Sources.vemitter<T>(w,Random);
 
             void check()
             {
-                var input = r.Invoke();
+                var input = emitter.Invoke();
                 var output = f.Invoke(input);
                 var expect = z.vzero(w,t);
                 for(byte j = 0; j < n; j++)
@@ -94,11 +94,11 @@ namespace Z0
             where F : IUnaryOp256<T>
         {
             var n = vcount(w,t);
-            var r = Random.VectorEmitter(w,t);
+            var emitter = Sources.vemitter<T>(w,Random);
 
             void check()
             {
-                var input = r.Invoke();
+                var input = emitter.Invoke();
                 var output = f.Invoke(input);
                 var expect = z.vzero(w,t);
                 for(byte j = 0; j < n; j++)

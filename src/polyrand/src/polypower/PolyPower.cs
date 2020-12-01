@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="t">A primal type representative</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static T Power<T>(this IPolyStream random, T t = default)
+        public static T Power<T>(this IDomainSource random, T t = default)
             where T : unmanaged
                 => force<ulong,T>(Z0.Pow2.pow(random.Log2(t)));
 
@@ -31,7 +31,7 @@ namespace Z0
         /// <param name="maxexp">The max exponent value</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static T Power<T>(this IPolyStream random, int minexp, int maxexp)
+        public static T Power<T>(this IDomainSource random, int minexp, int maxexp)
             where T : unmanaged
         {
             var exp = random.Next((byte)minexp, (byte)(maxexp + 1));
@@ -47,8 +47,8 @@ namespace Z0
         /// <param name="t">A primal type representative</param>
         /// <typeparam name="T">The value type</typeparam>
         [MethodImpl(Inline)]
-        public static int Log2<T>(this IPolyStream random, T t = default)
+        public static int Log2<T>(this IDomainSource random, T t = default)
             where T : unmanaged
-                => random.One(0,  BitSize.measure<T>());
+                => random.Next(0, BitSize.measure<T>());
     }
 }

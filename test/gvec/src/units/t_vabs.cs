@@ -5,7 +5,7 @@
 namespace Z0
 {
     using System;
-    
+
     using static Konst;
 
     public class t_vabs : t_inx<t_vabs>
@@ -15,7 +15,7 @@ namespace Z0
             vabs_check(n128);
             vabs_check(n256);
         }
-        
+
         void vabs_check(N128 w)
         {
             vabs_check(w, z8i);
@@ -35,10 +35,9 @@ namespace Z0
         void vabs_check<T>(N128 w, T t = default)
             where T : unmanaged
                 => CheckSVF.CheckUnaryOp(VSvc.vabs(w,t),w,t);
-            
+
         void vabs_check<T>(N256 w, T t = default)
             where T : unmanaged
                 => CheckSVF.CheckUnaryOp(VSvc.vabs(w,t),w,t);
     }
-
 }

@@ -48,7 +48,7 @@ namespace Z0
         /// <param name="domain">The domain of the random variable</param>
         /// <param name="filter">If specified, values that do not satisfy the predicate are excluded from the stream</param>
         /// <typeparam name="T">The element type</typeparam>
-        public static IValueStream<T> create<T>(IPolyStream src, Interval<T> domain, Func<T,bool> filter = null)
+        public static IValueStream<T> create<T>(IDomainSource src, Interval<T> domain, Func<T,bool> filter = null)
             where T : unmanaged
                 => create(forever(src, domain, filter));
 

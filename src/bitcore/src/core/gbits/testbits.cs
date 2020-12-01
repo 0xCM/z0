@@ -18,15 +18,14 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The primal source type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static Span<byte> testbits<T>(T src, Span<byte> dst, int offset = 0)
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Span<bit> testbits<T>(T src, Span<bit> dst, int offset = 0)
             where T : unmanaged
         {
             var n = bitwidth<T>();
             ref var loc = ref seek(first(dst), offset);
-
             for(var i=0; i<n; i++)
-                seek(loc, i) = (byte)testbit32(src, (byte)i);
+                seek(loc, i) = (byte)testbit(src, (byte)i);
             return dst;
         }
 
@@ -35,11 +34,10 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The primal source type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static Span<byte> testbits<T>(T src)
+        public static Span<bit> testbits<T>(T src)
             where T : unmanaged
         {
-            Span<byte> dst = new byte[bitwidth<T>()];
+            var dst = sys.alloc<bit>(bitwidth<T>());
             testbits(src,dst);
             return dst;
         }

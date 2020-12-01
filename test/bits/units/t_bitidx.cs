@@ -16,7 +16,7 @@ namespace Z0
             while(pos < max)
                 pos++;
 
-            Claim.eq(pos.BitIndex, max.BitIndex);
+            Claim.eq(pos.LinearIndex, max.LinearIndex);
         }
 
         public void bit_index_dec()
@@ -26,7 +26,7 @@ namespace Z0
             while(pos > min)
                 pos--;
 
-            Claim.eq(pos.BitIndex, min.BitIndex);
+            Claim.eq(pos.LinearIndex, min.LinearIndex);
         }
 
         public void bit_index_add()
@@ -44,9 +44,9 @@ namespace Z0
                 var pos = posX;
                 for(var j=0; j< add; j++)
                     pos++;
-                
-                Claim.eq(pos.BitIndex, posY.BitIndex);
-            }            
+
+                Claim.eq(pos.LinearIndex, posY.LinearIndex);
+            }
         }
     }
 }

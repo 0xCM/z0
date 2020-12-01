@@ -11,45 +11,73 @@ namespace Z0
     using static z;
 
     /// <summary>
-    /// A data structure that covers and arbitrary number of 256-bit blocks of packed bits
+    /// A data structure that covers a natural count of packed bits
     /// </summary>
-    public readonly ref struct BitBlock<T>
+    /// <typeparam name="N">The number of contained bits</typeparam>
+    /// <typeparam name="T">The storage cell type</typeparam>
+    public readonly ref struct BitBlock<N,T>
+        where N : unmanaged, ITypeNat
         where T : unmanaged
     {
-        /// <summary>
-        /// The bitvector content
-        /// </summary>
-        readonly SpanBlock256<T> data;
+        readonly Span<T> data;
 
         /// <summary>
-        /// The actual number of bits that are represented by the vector
-        /// </summary>
-        public readonly uint BitCount;
-
-        /// <summary>
-        /// The maximum number of bits that can be placed a single segment segment
+        /// The number of bits covered by a cell
         /// </summary>
         public static uint CellWidth
             => bitwidth<T>();
 
+        /// <summary>
+        /// The total number of bits covered by the block
+        /// </summary>
+        public static uint BitCount
+            => (uint)nat64u<N>();
 
-        [MethodImpl(Inline)]
-        internal BitBlock(T src, uint bitcount)
-        {
-            data = SpanBlocks.alloc<T>(n256);
-            data.First = src;
-            BitCount = bitcount;
-        }
+        public static uint WholeCells
+            => BitCount/CellWidth;
 
-        [MethodImpl(Inline)]
-        internal BitBlock(Span<T> src, uint n)
-        {
-            data = SpanBlocks.safeload(n256, src);
-            BitCount = n;
-        }
+        public static bool EvenlyCovered
+            => BitCount % CellWidth == 0;
 
         /// <summary>
-        /// The underlying cell data
+        /// The minimum number of cells needed to cover a block
+        /// </summary>
+        public static uint RequiredCells
+            => WholeCells + (EvenlyCovered ? 0u : 1u);
+
+        /// <summary>
+        /// The storage capacity needed to cover N-bits distributed over a contiguous T-cell sequence
+        /// </summary>
+        public static uint RequiredWidth
+            => RequiredCells * CellWidth;
+
+        const string CapacityExceeded = "The required bit count exceeds allocated capacity";
+
+        static string Format(uint capacity, uint needed)
+            => text.concat(CapacityExceeded.PadRight(70), Space, FieldDelimiter, Space, Chars.LBrace,
+                    "CellWidth*CellCount", Space, Chars.Eq, Space, capacity, Chars.Space, Chars.Lt, Chars.Space, needed);
+
+        [MethodImpl(Inline)]
+        internal BitBlock(Span<T> src)
+        {
+            var allocated = CellWidth * (uint)src.Length;
+            z.insist(allocated >= BitCount, () => Format(allocated, BitCount));
+            data = src;
+        }
+
+        [MethodImpl(Inline)]
+        internal BitBlock(params T[] src)
+            : this(src.AsSpan())
+        {
+
+        }
+
+        [MethodImpl(Inline)]
+        internal BitBlock(Span<T> src, bool skipChecks)
+            => data = src;
+
+        /// <summary>
+        /// The data over which the bitvector is constructed
         /// </summary>
         public Span<T> Data
         {
@@ -58,70 +86,93 @@ namespace Z0
         }
 
         /// <summary>
-        /// Presents the represented data as a span of bytes
+        /// Returns a reference to the leading segment of the underlying storage
         /// </summary>
-        public readonly Span<byte> Bytes
+        public ref T Head
         {
             [MethodImpl(Inline)]
-            get => data.Bytes;
+            get => ref first(data);
         }
 
         /// <summary>
-        /// Is true if at least one enabled bit; false otherwise
+        /// The number of represented bits
         /// </summary>
-        public readonly bit NonEmpty
+        public readonly uint Width
+        {
+            [MethodImpl(Inline)]
+            get => BitCount;
+        }
+
+        /// <summary>
+        /// The number of allocated cells
+        /// </summary>
+        public readonly int Length
+        {
+            [MethodImpl(Inline)]
+            get => data.Length;
+        }
+
+        /// <summary>
+        /// A bit-level accessor/manipulator
+        /// </summary>
+        public bit this[int bitpos]
+        {
+            [MethodImpl(Inline)]
+            get => BitBlocks.readbit(in Head, bitpos);
+
+            [MethodImpl(Inline)]
+            set => BitBlocks.setbit((uint)bitpos, value, ref Head);
+        }
+
+        /// <summary>
+        /// Counts the vector's enabled bits
+        /// </summary>
+        [MethodImpl(Inline)]
+        public int Pop()
+        {
+            var count = 0u;
+            for(var i=0; i < data.Length; i++)
+                count += gbits.pop(Data[i]);
+            return (int)count;
+        }
+
+        /// <summary>
+        /// Returns true if no bits are enabled, false otherwise
+        /// </summary>
+        public bool Empty
+        {
+            [MethodImpl(Inline)]
+            get => Pop() == 0;
+        }
+
+        /// <summary>
+        /// Returns true if the vector has at least one enabled bit; false otherwise
+        /// </summary>
+        public bool Nonempty
         {
             [MethodImpl(Inline)]
             get => Pop() != 0;
         }
 
         /// <summary>
-        /// A bit-level accessor/manipulator
+        /// Sets all the bits in use to the specified state
         /// </summary>
-        public bit this[int index]
+        /// <param name="state">The source state</param>
+        public void Fill(bit state)
         {
-            [MethodImpl(Inline)]
-            get => BitBlocks.testbit(data,index);
-
-            [MethodImpl(Inline)]
-            set => BitBlocks.setbit(data, index,value);
-        }
-
-        /// <summary>
-        /// Retrieves, at most, one cell's worth of bits defined by an inclusive bit index range
-        /// </summary>
-        /// <param name="first">The linear index of the first bit</param>
-        /// <param name="last">The linear index of the last bit</param>
-        [MethodImpl(Inline)]
-        public T TakeScalarBits(int first, int last)
-            => BitBlocks.segment(data, first,last);
-
-        /// <summary>
-        /// Extracts the represented data as a bitstring
-        /// </summary>
-        [MethodImpl(Inline)]
-        public readonly BitString ToBitString()
-            => data.ToBitString((int)BitCount);
-
-        /// <summary>
-        /// Counts the enabled bits
-        /// </summary>
-        [MethodImpl(Inline)]
-        public readonly uint Pop()
-        {
-            var count = 0u;
-            for(var i=0; i< data.CellCount; i++)
-                count += gbits.pop(data[i]);
-            return count;
+            if(state)
+                data.Fill(NumericLiterals.maxval<T>());
+            else
+                data.Clear();
         }
 
         [MethodImpl(Inline)]
-        public bool Equals(in BitBlock<T> y)
-            => data.Identical(y.data);
+        public BitBlock<T> Unsize()
+            => BitBlocks.load(Data, (int)nat64u<N>());
 
         [MethodImpl(Inline)]
-        public string Format(BitFormat? fmt = null)
-            => ToBitString().Format(fmt);
+        public bool Equals(in BitBlock<N,T> rhs)
+            => data.Identical(rhs.data);
 
         public override bool Equals(object obj)
             => throw new NotImplementedException();
@@ -133,47 +184,68 @@ namespace Z0
             => throw new NotImplementedException();
 
         [MethodImpl(Inline)]
-        public static implicit operator BitBlock<T>(Span<T> src)
-            => new BitBlock<T>(src, bitwidth<T>());
+        public static implicit operator BitBlock<T>(in BitBlock<N,T> x)
+            => new BitBlock<T>(x.data, (uint)new N().NatValue);
 
         [MethodImpl(Inline)]
-        public static implicit operator BitBlock<T>(T src)
-            => new BitBlock<T>(src, bitwidth<T>());
+        public static BitBlock<N,T> operator &(in BitBlock<N,T> x, in BitBlock<N,T> y)
+            => new BitBlock<N,T>(gspan.and(x.data, y.data, x.data.Replicate()));
 
         [MethodImpl(Inline)]
-        public static bit operator %(in BitBlock<T> x, in BitBlock<T> y)
+        public static BitBlock<N,T> operator |(in BitBlock<N,T> x, in BitBlock<N,T> y)
+            => new BitBlock<N,T>(gspan.or(x.data, y.data, x.data.Replicate()));
+
+        [MethodImpl(Inline)]
+        public static BitBlock<N,T> operator ^(in BitBlock<N,T> lhs, in BitBlock<N,T> rhs)
+            => new BitBlock<N,T>(gspan.xor(lhs.data, rhs.data, lhs.data.Replicate()));
+
+        /// <summary>
+        /// Computes the bitwise complement of the operand
+        /// </summary>
+        /// <param name="lhs">The source operand</param>
+        [MethodImpl(Inline)]
+        public static BitBlock<N,T> operator ~(in BitBlock<N,T> x)
+            => new BitBlock<N,T>(gspan.not(x.data, x.data.Replicate()));
+
+        /// <summary>
+        /// Computes the scalar product of the operands
+        /// </summary>
+        /// <param name="x">The left operand</param>
+        /// <param name="y">The right operand</param>
+        [MethodImpl(Inline)]
+        public static bit operator %(in BitBlock<N,T> x, in BitBlock<N,T> y)
             => BitBlocks.dot(x,y);
 
         /// <summary>
         /// Computes the bitwise complement of the operand
         /// </summary>
-        /// <param name="x">The source operand</param>
+        /// <param name="lhs">The source operand</param>
         [MethodImpl(Inline)]
-        public static BitBlock<T> operator ~(in BitBlock<T> src)
-            => default;
+        public static BitBlock<N,T> operator -(in BitBlock<N,T> x)
+            => new BitBlock<N,T>(gspan.negate(x.data, x.data.Replicate()));
 
         /// <summary>
         /// Returns true if the source vector is nonzero, false otherwise
         /// </summary>
-        /// <param name="src">The source vector</param>
+        /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
-        public static bool operator true(in BitBlock<T> src)
-            => src.NonEmpty;
+        public static bool operator true(in BitBlock<N,T> x)
+            => x.Nonempty;
 
         /// <summary>
         /// Returns false if the source vector is the zero vector, false otherwise
         /// </summary>
-        /// <param name="src">The source vector</param>
+        /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
-        public static bool operator false(in BitBlock<T> src)
-            => !src.NonEmpty;
+        public static bool operator false(in BitBlock<N,T> x)
+            => !x.Nonempty;
 
         [MethodImpl(Inline)]
-        public static bool operator ==(in BitBlock<T> x, in BitBlock<T> y)
+        public static bit operator ==(in BitBlock<N,T> x, in BitBlock<N,T> y)
             => x.Equals(y);
 
         [MethodImpl(Inline)]
-        public static bool operator !=(in BitBlock<T> x, in BitBlock<T> y)
+        public static bit operator !=(in BitBlock<N,T> x, in BitBlock<N,T> y)
             => !x.Equals(y);
     }
 }

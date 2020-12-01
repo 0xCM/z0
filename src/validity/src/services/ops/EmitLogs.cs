@@ -15,7 +15,6 @@ namespace Z0
         public void EmitLogs()
         {
             var basename = AppName;
-
             var benchmarks = SortBenchmarks();
             if(benchmarks.Any())
                 EmitBenchmarkLog(basename.Replace(".test",".bench"),benchmarks, LogWriteMode.Overwrite);

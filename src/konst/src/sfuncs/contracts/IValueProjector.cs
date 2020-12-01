@@ -13,36 +13,33 @@ namespace Z0
 
     partial struct SFx
     {
+        [Free, SFx]
+        public interface IValueProjector
+        {
+            ValueType Project(ValueType src);
 
+            object Project(object src);
+        }
 
-    }
+        [Free, SFx]
+        public interface IValueProjector<T> : IValueProjector
+            where T : struct
+        {
+            new ref T Project(object src);
 
-    [Free, SFx]
-    public interface IValueProjector
-    {
-        ValueType Project(ValueType src);
+            object IValueProjector.Project(object src)
+                =>  Project(src);
+        }
 
-        object Project(object src);
-    }
+        [Free, SFx]
+        public interface IValueProjector<S,T> : IValueProjector<T>
+            where S : struct
+            where T : struct
+        {
+            ref T Project(in S src);
 
-    [Free, SFx]
-    public interface IValueProjector<T> : IValueProjector
-        where T : struct
-    {
-        new ref T Project(object src);
-
-        object IValueProjector.Project(object src)
-            =>  Project(src);
-    }
-
-    [Free, SFx]
-    public interface IValueProjector<S,T> : IValueProjector<T>
-        where S : struct
-        where T : struct
-    {
-        ref T Project(in S src);
-
-        ref T IValueProjector<T>.Project(object src)
-            => ref Project(z.unbox<T>(src));
+            ref T IValueProjector<T>.Project(object src)
+                => ref Project(z.unbox<T>(src));
+        }
     }
 }

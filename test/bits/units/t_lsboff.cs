@@ -22,17 +22,16 @@ namespace Z0
         public void lsboff_64()
             => lsboff_check<ulong>();
 
-        protected void lsboff_check<T>(T t = default)
+        void lsboff_check<T>(T t = default)
             where T : unmanaged
         {
             for(var i=0; i<RepCount; i++)
             {
-                var x = Random.Next<T>();
-                var y0 = gbits.blsr(x);
-                var y1 = gmath.and(gmath.sub(x, z.one<T>()), x);
-                Claim.eq(y0,y1);
+                var a = Random.Next<T>();
+                var b0 = gbits.blsr(a);
+                var b1 = gmath.and(gmath.sub(a, z.one<T>()), a);
+                Claim.eq(b0, b1);
             }
         }
-
     }
 }

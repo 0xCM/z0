@@ -88,7 +88,6 @@ namespace Z0
             var w = n512;
             var t = z64;
             var maskspec = BitMasks.MsbSpec(n4,n1,t);
-
             var source = gvec.vinc(w,t);
             var blendspec = gvec.vbroadcast(n256, BitMasks.mask(maskspec), maxval(t));
             var target = gvec.vblendp(source, blendspec);
@@ -98,7 +97,6 @@ namespace Z0
             var descrition = describe(maskspec, BitMasks.mask(maskspec.As(z8)), source,target);
             if(EmitInfo)
                 Notify(descrition);
-
         }
 
         /// <summary>

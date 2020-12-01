@@ -12,7 +12,7 @@ namespace Z0
 
     partial class gspan
     {
-        [MethodImpl(Inline), SpanOp, Closures(Integers)]
+        [MethodImpl(Inline), Srl, Closures(Integers)]
         public static Span<T> srl<T>(ReadOnlySpan<T> src, byte count, Span<T> dst)
             where T : unmanaged
         {
@@ -24,7 +24,7 @@ namespace Z0
             return dst;
         }
 
-        [MethodImpl(Inline), SpanOp, Closures(Integers)]
+        [MethodImpl(Inline), Sll, Closures(Integers)]
         public static Span<T> sll<T>(ReadOnlySpan<T> src, byte count, Span<T> dst)
             where T : unmanaged
         {
@@ -36,7 +36,7 @@ namespace Z0
             return dst;
         }
 
-        [MethodImpl(Inline), SpanOp, Closures(Integers)]
+        [MethodImpl(Inline), Sllv, Closures(Integers)]
         public static Span<T> sllv<T>(ReadOnlySpan<T> src, ReadOnlySpan<byte> counts, Span<T> dst)
             where T : unmanaged
         {
@@ -50,7 +50,7 @@ namespace Z0
             return dst;
         }
 
-        [MethodImpl(Inline), SpanOp, Closures(Integers)]
+        [MethodImpl(Inline), Srlv, Closures(Integers)]
         public static Span<T> srlv<T>(ReadOnlySpan<T> src, ReadOnlySpan<byte> counts, Span<T> dst)
             where T : unmanaged
         {
@@ -58,7 +58,6 @@ namespace Z0
             ref readonly var input = ref first(src);
             ref readonly var count = ref first(counts);
             ref var target = ref first(dst);
-
             for(var i=0; i < len; i++)
                 seek(target,i) = gmath.srl(skip(input,i), skip(count,i));
             return dst;

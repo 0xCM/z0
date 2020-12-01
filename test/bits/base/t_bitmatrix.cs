@@ -17,8 +17,6 @@ namespace Z0
 
         protected override int CycleCount => Pow2.T03;
 
-
-
         Span<T> xor<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst)
             where T : unmanaged
         {

@@ -24,8 +24,11 @@ namespace Z0
     /// pseudorandom number generator
     /// </summary>
     [Free]
-    public interface IPolyrandProvider
+    public interface IPolyrandProvider : ISourceProvider<IPolyrand>
     {
         IPolyrand Random {get;}
+
+        IPolyrand ISourceProvider<IPolyrand>.Source
+            => Random;
     }
 }

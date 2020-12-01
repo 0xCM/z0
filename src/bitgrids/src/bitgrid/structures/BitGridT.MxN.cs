@@ -111,7 +111,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public void SetBit(int index, Bit32 state)
+        public void SetBit(int index, bit state)
             => BitGrid.setbit(index, state, ref Head);
 
         [MethodImpl(Inline)]

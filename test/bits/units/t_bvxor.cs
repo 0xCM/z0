@@ -267,6 +267,5 @@ namespace Z0
                 Claim.eq(zbs, z.ToBitString().Truncate(width));
             }
         }
-
     }
 }

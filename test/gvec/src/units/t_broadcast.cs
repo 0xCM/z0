@@ -16,7 +16,6 @@ namespace Z0
                             pattern << 32 | pattern << 40 | pattern << 48 | pattern << 56;
             var actual = broadcast<byte,ulong>((byte)pattern);
             Claim.eq(expect,actual);
-
         }
 
         public void t_broadcast_case2()

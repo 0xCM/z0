@@ -38,8 +38,8 @@ namespace Z0
 		/// <summary>
 		/// Specifies the number of bits that can be placed in one segment
 		/// </summary>
-		public static byte CellWidth
-			=> uint8(bitwidth<T>());
+		public static ushort CellWidth
+			=> uint16(bitwidth<T>());
 
 		/// <summary>
 		/// Constructs a bit position from a linear/absolute index
@@ -50,26 +50,26 @@ namespace Z0
 			=> new BitPos<T>(BitPos.linear(CellWidth,bitindex), BitPos.offset(CellWidth, bitindex));
 
 		[MethodImpl(Inline)]
-		public BitPos(ushort cellindex, byte bitoffset)
+		public BitPos(ushort cellindex, ushort bitoffset)
 		{
 			CellIndex = cellindex;
 			BitOffset = bitoffset;
 		}
 
-		public int BitIndex
+		public int LinearIndex
 		{
 			[MethodImpl(Inline)]
 			get => this.CellIndex * CellWidth + this.BitOffset;
 		}
 
 		[MethodImpl(Inline)]
-		public int CountTo(BitPos<T> other)
-			=> Math.Abs(this.BitIndex - other.BitIndex) + 1;
+		public int CountTo(BitPos<T> src)
+			=> Math.Abs(LinearIndex - src.LinearIndex) + 1;
 
 		[MethodImpl(Inline)]
-        public void Add(uint rhs)
+        public void Add(uint src)
         {
-            var newIndex = (uint)(BitIndex + rhs);
+            var newIndex = (uint)(LinearIndex + src);
             CellIndex = linear(CellWidth,newIndex);
             BitOffset = offset(CellWidth,newIndex);
         }
@@ -77,7 +77,7 @@ namespace Z0
 		[MethodImpl(Inline)]
         public void Sub(uint rhs)
         {
-            var newindex = uint32(BitIndex - rhs);
+            var newindex = uint32(LinearIndex - rhs);
             if(newindex > 0)
 			{
 				CellIndex = linear(CellWidth,newindex);
@@ -123,13 +123,13 @@ namespace Z0
             && this.BitOffset == rhs.BitOffset;
 
 		public string Format()
-			=> string.Format("({0},{1}/{2})", BitIndex, CellIndex, BitOffset);
+			=> string.Format("({0},{1}/{2})", LinearIndex, CellIndex, BitOffset);
 
 		public override string ToString()
 			=> Format();
 
 		public override int GetHashCode()
-			=> BitIndex.GetHashCode();
+			=> LinearIndex.GetHashCode();
 
 		public override bool Equals(object rhs)
             => rhs is BitPos<T> x && Equals(x);
@@ -149,9 +149,9 @@ namespace Z0
 		}
 
 		[MethodImpl(Inline)]
-		public static int operator -(BitPos<T> lhs, BitPos<T> rhs)
+		public static int operator -(BitPos<T> a, BitPos<T> b)
 		{
-			return lhs.CountTo(rhs);
+			return a.CountTo(b);
 		}
 
 		[MethodImpl(Inline)]
@@ -169,28 +169,28 @@ namespace Z0
 		}
 
 		[MethodImpl(Inline)]
-		public static bool operator ==(BitPos<T> lhs, BitPos<T> rhs)
-			=> lhs.Equals(rhs);
+		public static bool operator ==(BitPos<T> a, BitPos<T> b)
+			=> a.Equals(b);
 
 		[MethodImpl(Inline)]
-		public static bool operator !=(BitPos<T> lhs, BitPos<T> rhs)
-			=> !lhs.Equals(rhs);
+		public static bool operator !=(BitPos<T> a, BitPos<T> b)
+			=> !a.Equals(b);
 
 		[MethodImpl(Inline)]
 		public static bool operator <(BitPos<T> lhs, BitPos<T> rhs)
-			=> lhs.BitIndex < rhs.BitIndex;
+			=> lhs.LinearIndex < rhs.LinearIndex;
 
 		[MethodImpl(Inline)]
 		public static bool operator <=(BitPos<T> lhs, BitPos<T> rhs)
-			=> lhs.BitIndex <= rhs.BitIndex;
+			=> lhs.LinearIndex <= rhs.LinearIndex;
 
 		[MethodImpl(Inline)]
 		public static bool operator >(BitPos<T> lhs, BitPos<T> rhs)
-			=> lhs.BitIndex > rhs.BitIndex;
+			=> lhs.LinearIndex > rhs.LinearIndex;
 
 		[MethodImpl(Inline)]
 		public static bool operator >=(BitPos<T> lhs, BitPos<T> rhs)
-			=> lhs.BitIndex >= rhs.BitIndex;
+			=> lhs.LinearIndex >= rhs.LinearIndex;
 
 		[MethodImpl(Inline)]
         public static implicit operator BitPos<T>((ushort cellindex, byte bitoffset) x)

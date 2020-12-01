@@ -21,6 +21,10 @@ namespace Z0
     {
         internal ulong Data;
 
+        [MethodImpl(Inline)]
+        public BitGrid64(ulong src)
+            => Data = src;
+
         /// <summary>
         /// The number of covered bits
         /// </summary>
@@ -33,22 +37,6 @@ namespace Z0
         public Span<T> Cells { [MethodImpl(Inline)] get => Data.Bytes().Cast<T>(); }
 
         public ref T Head { [MethodImpl(Inline)] get => ref first(Cells); }
-
-        [MethodImpl(Inline)]
-        public static implicit operator ulong(BitGrid64<T> src)
-            => src.Data;
-
-        [MethodImpl(Inline)]
-        public static Bit32 operator ==(BitGrid64<T> gx, BitGrid64<T> gy)
-            => gx.Data == gy.Data;
-
-        [MethodImpl(Inline)]
-        public static Bit32 operator !=(BitGrid64<T> gx, BitGrid64<T> gy)
-            => gx.Data != gy.Data;
-
-        [MethodImpl(Inline)]
-        public BitGrid64(ulong data)
-            => this.Data = data;
 
         /// <summary>
         /// Reads/writes an index-identified cell
@@ -80,5 +68,17 @@ namespace Z0
 
         public override int GetHashCode()
             => throw new NotSupportedException();
+
+        [MethodImpl(Inline)]
+        public static implicit operator ulong(BitGrid64<T> src)
+            => src.Data;
+
+        [MethodImpl(Inline)]
+        public static Bit32 operator ==(BitGrid64<T> gx, BitGrid64<T> gy)
+            => gx.Data == gy.Data;
+
+        [MethodImpl(Inline)]
+        public static Bit32 operator !=(BitGrid64<T> gx, BitGrid64<T> gy)
+            => gx.Data != gy.Data;
     }
 }

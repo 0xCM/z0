@@ -10,7 +10,6 @@ namespace Z0
 
     partial struct SFx
     {
-
         [Free, SFx]
         public interface IBlockedUnaryImm8Op8<T> : IBlockedFunc<W8,T>
             where T : unmanaged

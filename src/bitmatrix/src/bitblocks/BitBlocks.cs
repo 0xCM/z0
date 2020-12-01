@@ -42,7 +42,7 @@ namespace Z0
         /// <param name="bitpos">The linear bit position</param>
         /// <param name="src">A reference to grid storage</param>
         /// <typeparam name="T">The storage segment type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         internal static ref X cell<X>(ref X src, uint bitpos)
             where X : unmanaged
                 => ref seek(src, bitpos / bitwidth<X>());
@@ -60,17 +60,6 @@ namespace Z0
             where T : unmanaged
                 => new BitBlock<N,T>(src,true);
 
-        /// <summary>
-        /// Computes the number of primal cells required to cover a specified number of bits
-        /// </summary>
-        /// <param name="bitcount">The number of bits to cover</param>
-        /// <typeparam name="T">The primal cell type</typeparam>
-        [MethodImpl(Inline)]
-        public static int cellcount<T>(int bitcount)
-            where T : unmanaged
-        {
-            var q = Math.DivRem(bitcount, (int)bitwidth<T>(), out int r);
-            return r == 0 ? q : q + 1;
-        }
+
    }
 }

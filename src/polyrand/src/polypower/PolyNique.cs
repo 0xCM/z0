@@ -52,7 +52,7 @@ namespace Z0
         /// <param name="random">The random source</param>
         /// <param name="count">The number of points to take</param>
         /// <typeparam name="T">The element type</typeparam>
-        public static HashSet<T> Distinct<T>(this IPolyStream random, int count)
+        public static HashSet<T> Distinct<T>(this ISource random, int count)
             where T : unmanaged
         {
             var stream = random.Stream<T>();

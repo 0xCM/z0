@@ -22,25 +22,28 @@ namespace Z0
             var messages = new List<IAppMsg>();
             var outcomes = z.list<TestCaseRecord>();
 
+            if(DiagnosticMode)
+                term.print($"Executing case {unit.HostType.Name}/{method.Name}");
+
+            var started = now();
+            var finished = started;
             try
             {
-                if(DiagnosticMode)
-                    term.print($"Executing case {unit.HostType.Name}/{method.Name}");
 
-                var tsStart = now();
-                messages.Add(PreCase(casename, tsStart));
+                messages.Add(PreCase(casename, started));
 
                 clock.Start();
                 method.Invoke(unit,null);
                 clock.Stop();
+                finished = now();
 
                 messages.AddRange(unit.Dequeue());
-                messages.Add(PostCase(casename, clock.Time, tsStart, now()));
+                messages.Add(PostCase(casename, clock.Time, started, finished));
 
                 outcomes.AddRange(unit.TakeOutcomes().Array());
 
                 if(outcomes.Count == 0)
-                    outcomes.Add(TestCaseRecord.define(casename, true, clock.Time));
+                    outcomes.Add(TestCaseRecord.define(casename, true, started, finished, clock.Time));
 
                 if(DiagnosticMode)
                     term.print($"Executed case {unit.HostType.Name}/{method.Name}");
@@ -49,9 +52,11 @@ namespace Z0
             catch(Exception e)
             {
                 clock.Stop();
+                finished = now();
+                var message = format(e);
                 messages.AddRange(unit.Dequeue());
                 messages.AddRange(FormatErrors(e, method));
-                outcomes.Add(TestCaseRecord.define(casename, false, clock.Time));
+                outcomes.Add(TestCaseRecord.define(casename, false, started, finished, clock.Time, message));
             }
             finally
             {
@@ -61,5 +66,15 @@ namespace Z0
 
             return exectime;
         }
+
+        static string format(Exception e)
+            => e switch {
+                TargetInvocationException ie => format(e.InnerException),
+                ClaimException ce => ce.Message.Format(),
+                ArgumentOutOfRangeException re => $"Argument out of range:{re.Source}",
+                FormatException fe => $"Format error:{fe.Source}",
+                _ => e.ToString()
+            };
+
     }
 }

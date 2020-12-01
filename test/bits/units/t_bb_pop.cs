@@ -99,5 +99,17 @@ namespace Z0
         public void nbb_pop_16384x64()
             => bitblock_pop_check<N16384,ulong>();
 
+        void bitblock_pop_check<N,T>(N n = default)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+        {
+            var size = BitBlock<N,byte>.RequiredCells;
+            var src = Random.Span<byte>((int)size);
+            var bc = BitBlocks.load<N,T>(src);
+            var pc1 = bc.Pop();
+            var bs = BitString.scalars(src);
+            var pc2 = bs.PopCount();
+            Claim.eq(pc1,pc2);
+        }
     }
 }

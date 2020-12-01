@@ -7,7 +7,9 @@ namespace Z0
     using System;
     using System.Linq;
     using System.Runtime.CompilerServices;
+
     using static Konst;
+    using static z;
 
     public class t_bb_extract : t_bitspans<t_bb_extract>
     {
@@ -68,14 +70,6 @@ namespace Z0
                 var r1 = v1.BitSeg(lower[i], upper[i]);
                 var r2 = v2[lower[i], upper[i]];
                 Claim.eq(r1,r2);
-
-                // var v1 = BitBlocks.literals(src[i]);
-                // var v2 = BitVector.create(n16,src[i]);
-                // Claim.eq(v1.ToBitVector(n16),v2);
-
-                // var r1 = v1.TakeScalarBits(lower[i], upper[i]);
-                // var r2 = v2[lower[i], upper[i]];
-                // Claim.eq(r1,r2);
             }
         }
 
@@ -138,14 +132,24 @@ namespace Z0
             Claim.eq(y9, bvz.BitSeg(36,39));
         }
 
+        public void bb_extract_40()
+        {
+            const ulong src = 0b01011_00010_01110_11010_00111_00101_01110_10110ul;
+            const byte count = 40;
+            var bvz = BitBlocks.single(src, count);
+            var xSrc =  bytes(src);
+            Claim.eq(8, xSrc.Length);
+            Span<ushort> ySrc = xSrc.AsUInt16();
+            Claim.eq(8, ySrc.Length*2);
+        }
+
         public void bb_extract_arb()
         {
-
             ulong src = 0b01011_00010_01110_11010_00111_00101_01110_10110;
             var bvz = BitBlocks.single(src,40);
             var xSrc =  z.bytes(src);
             Span<ushort> ySrc = xSrc.AsUInt16();
-            Claim.eq(ySrc.Length*4, xSrc.Length);
+            //Claim.eq(ySrc.Length*4, xSrc.Length);
 
             var bvx = BitBlocks.load(xSrc.Slice(0,5).ToArray());
             var bvy = BitBlocks.load(ySrc.Slice(0,2).ToArray());

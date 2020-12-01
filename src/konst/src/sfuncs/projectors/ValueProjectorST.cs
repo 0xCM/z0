@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static SFx;
 
     public readonly struct ValueProjector<S,T> : IValueProjector<S,T>
         where S : struct

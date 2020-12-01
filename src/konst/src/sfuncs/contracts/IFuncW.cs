@@ -10,31 +10,28 @@ namespace Z0
 
     partial struct SFx
     {
+        /// <summary>
+        /// Characterizes a structural function that is width-parametric
+        /// </summary>
+        /// <typeparam name="W">The width type</typeparam>
+        [Free, SFx]
+        public interface IFuncW<W> : IFunc
+            where W : unmanaged, ITypeWidth
+        {
+            TypeWidth TypeWidth
+                => default(W).TypeWidth;
+        }
 
+        /// <summary>
+        /// Characterizes a width-parametric and T-parameteric structural function
+        /// </summary>
+        /// <typeparam name="W">The width type</typeparam>
+        /// <typeparam name="T">Unconstrained</typeparam>
+        [Free, SFx]
+        public interface IFuncWT<W,T> : IFuncW<W>
+            where W : unmanaged, ITypeWidth
+        {
 
-    }
-
-    /// <summary>
-    /// Characterizes a structural function that is width-parametric
-    /// </summary>
-    /// <typeparam name="W">The width type</typeparam>
-    [Free, SFx]
-    public interface IFuncW<W> : IFunc
-        where W : unmanaged, ITypeWidth
-    {
-        TypeWidth TypeWidth
-            => default(W).TypeWidth;
-    }
-
-    /// <summary>
-    /// Characterizes a width-parametric and T-parameteric structural function
-    /// </summary>
-    /// <typeparam name="W">The width type</typeparam>
-    /// <typeparam name="T">Unconstrained</typeparam>
-    [Free, SFx]
-    public interface IFuncWT<W,T> : IFuncW<W>
-        where W : unmanaged, ITypeWidth
-    {
-
+        }
     }
 }

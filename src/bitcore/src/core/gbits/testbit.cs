@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The value to test</param>
         /// <param name="pos">The bit index to check</param>
-        [MethodImpl(Inline), TestBit, Closures(Integers)]
+        [MethodImpl(Inline), TestBit, Closures(AllNumeric)]
         public static bit testbit<T>(T src, byte pos)
             where T : unmanaged
                 => testbit_u(src,pos);

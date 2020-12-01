@@ -22,10 +22,10 @@ namespace Z0
                 var input = Random.BitStream32().Take(4).ToArray();
                 bit i0 = input[0], i1 = input[1], i2 = input[2], i3 = input[3];
 
-                var out0 = Mux.mux(i0, i1, i2, i3, off, off);
-                var out1 = Mux.mux(i0, i1, i2, i3, on,  off);
-                var out2 = Mux.mux(i0, i1, i2, i3, off, on);
-                var out3 = Mux.mux(i0, i1, i2, i3, on,  on);
+                var out0 = Bits.mux(i0, i1, i2, i3, off, off);
+                var out1 = Bits.mux(i0, i1, i2, i3, on,  off);
+                var out2 = Bits.mux(i0, i1, i2, i3, off, on);
+                var out3 = Bits.mux(i0, i1, i2, i3, on,  on);
 
                 Claim.eq(i0, out0);
                 Claim.eq(i1, out1);
@@ -83,7 +83,7 @@ namespace Z0
             {
                 var input = Random.BitVector(n64);
                 var control = Random.BitVector(n8) & 0b111111;
-                var output = Mux.mux(input,control);
+                var output = Bits.mux(input,control);
                 var expect = input[control.Scalar];
                 Claim.eq(expect, output);
             }

@@ -18,7 +18,6 @@ namespace Z0
 
         public CheckSVF(ITestContext context)
             => Context = context;
-
     }
 
     public interface ICheckSVF<T> : ICheckSF, ICheckBinarySVFD<W128,IBinaryOp128D<T>,T>

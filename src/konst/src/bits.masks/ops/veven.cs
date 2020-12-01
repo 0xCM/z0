@@ -65,8 +65,8 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <param name="t">A component type representative</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        static Vector128<T> veven<T>(N128 w, N2 f = default, N1 d = default, T t = default)
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Vector128<T> veven<T>(N128 w, N2 f = default, N1 d = default, T t = default)
             where T : unmanaged
                 => vbroadcast(w, even(f,d,t));
 
@@ -78,8 +78,8 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <param name="t">A component type representative</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        static Vector256<T> veven<T>(N256 w, N2 f = default, N1 d = default, T t = default)
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Vector256<T> veven<T>(N256 w, N2 f = default, N1 d = default, T t = default)
             where T : unmanaged
                 => vbroadcast(w, even(f,d,t));
 
@@ -91,8 +91,8 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <param name="t">A component type representative</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        static Vector128<T> veven<T>(N128 w, N2 f = default, N2 d = default, T t = default)
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Vector128<T> veven<T>(N128 w, N2 f = default, N2 d = default, T t = default)
             where T : unmanaged
                 => vbroadcast(w, even(f,d,t));
 
@@ -104,8 +104,8 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <param name="t">A component type representative</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        static Vector256<T> veven<T>(N256 w, N2 f = default, N2 d = default, T t = default)
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Vector256<T> veven<T>(N256 w, N2 f = default, N2 d = default, T t = default)
             where T : unmanaged
                 => vbroadcast(w, even(f,d,t));
     }
