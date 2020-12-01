@@ -11,12 +11,8 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct AndGate<T> :
-        IBinaryGate<T>,
-        IBinaryGate128<T>,
-        IBinaryGate256<T>,
-        IBinaryGate512<T>
-            where T : unmanaged
+    public readonly struct AndGate<T> : IBinaryGate<T>, IBinaryGate128<T>, IBinaryGate256<T>, IBinaryGate512<T>
+        where T : unmanaged
     {
         /// <summary>
         /// Defines the canonical boolean or function, or:{0,1} x {0,1} -> {0,1}
@@ -24,7 +20,7 @@ namespace Z0
         /// <param name="x">The first input value</param>
         /// <param name="y">The second input value</param>
         [MethodImpl(Inline)]
-        public Bit32 Invoke(Bit32 x, Bit32 y)
+        public bit Invoke(bit x, bit y)
             => x & y;
 
         /// <summary>

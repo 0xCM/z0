@@ -31,7 +31,7 @@ namespace Z0
         public static T[] concat<T>(T[] left, T[] right)
         {
             var length = left.Length + right.Length;
-            var dst = alloc<T>(length);
+            var dst = sys.alloc<T>(length);
             left.CopyTo(dst,0);
             right.CopyTo(dst, left.Length);
             return dst;
@@ -46,7 +46,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static byte[] concat(byte[] left, byte[] right)
         {
-            var ret = alloc<byte>(left.Length + right.Length);
+            var ret = sys.alloc<byte>(left.Length + right.Length);
             Buffer.BlockCopy(left, 0, ret, 0, left.Length);
             Buffer.BlockCopy(right, 0, ret, left.Length, right.Length);
             return ret;

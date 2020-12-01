@@ -31,8 +31,6 @@ namespace Z0
         public static Vector256<byte> digits(Perm32 spec)
             => vshuf32x8(z.vinc<byte>(n256),spec.data);
 
-
-
         [MethodImpl(Inline), Op]
         public static Perm8L permid(N8 n)
             => Perm8Identity;

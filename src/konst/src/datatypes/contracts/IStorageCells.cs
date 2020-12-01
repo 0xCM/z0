@@ -5,10 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Linq;
-
-    using static Konst;
 
     public interface IStorageCells<T> : IDataType<IndexedSeq<T>>
         where T : unmanaged

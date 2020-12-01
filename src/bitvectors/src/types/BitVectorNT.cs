@@ -125,7 +125,7 @@ namespace Z0
         public BitVector<N,T> this[byte first, byte last]
         {
             [MethodImpl(Inline)]
-            get => gbits.extract(Data, first, last);
+            get => gbits.segment(Data, first, last);
         }
 
         [MethodImpl(Inline)]

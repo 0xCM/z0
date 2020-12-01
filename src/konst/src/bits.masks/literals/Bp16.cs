@@ -4,15 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static BitMasks.Bp8;
 
     partial class BitMasks
     {
-        /// <summary>
-        /// Defines a bit pattern set with members of bit-width <see cref='W16'/>
-        /// </summary>
-        [LiteralProvider]
-        public readonly struct Bp16
+        partial struct Literals
         {
             public const ushort b00000001x16 = (ushort)b00000001x8 << 8 | (ushort)b00000001x8;
 
@@ -35,7 +30,6 @@ namespace Z0
             public const ushort b00110011x16 = 0x3333;
 
             public const ushort b00001111x16 = 0x0f0f;
-
         }
     }
 }

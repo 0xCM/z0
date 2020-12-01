@@ -63,19 +63,19 @@ namespace Z0.Asm
 
             [MethodImpl(Inline)]
             static ref byte bytes<H,T>(in H src)
-                where H : struct, IOperand<T>
+                where H : struct, IAsmOperand<T>
                 where T : unmanaged
                     => ref z.@as<H,byte>(src);
 
             [MethodImpl(Inline)]
             public static ReadOnlySpan<byte> data<H,T>(in H src)
-                where H : struct, IOperand<H,T>
+                where H : struct, IAsmOperand<T>
                 where T : unmanaged
                     => z.bytes(src);
 
             [MethodImpl(Inline)]
             public static Operand<T> unify<T>(T src)
-                where T : unmanaged, IOperand<T>
+                where T : unmanaged, IAsmOperand<T>
                     => src;
         }
     }

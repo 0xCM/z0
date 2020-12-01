@@ -10,8 +10,7 @@ namespace Z0
     using static Konst;
 
     partial class XTend
-    {                
-
+    {
         [MethodImpl(Inline)]
         public static BitVector<N,T> Row<M,N,T>(this BitGrid64<M,N,T> g, int index)
             where T : unmanaged

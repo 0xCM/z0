@@ -18,7 +18,7 @@ namespace Z0
         A[] Tail {get;}
 
         public static MultiArrow<A> Empty
-            => new MultiArrow<A>(Arrays.empty<A>());
+            => new MultiArrow<A>(sys.empty<A>());
 
         public Span<A> Nodes
             => Head.Concat(Tail).ToSpan();
@@ -57,14 +57,14 @@ namespace Z0
         internal MultiArrow(A[] nodes)
         {
             Head = nodes;
-            Tail = Arrays.empty<A>();
+            Tail = sys.empty<A>();
             Identifier = DefineIdentifier(Head,Tail);
         }
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Arrays.empty(Head) && Arrays.empty(Tail);
+            get => Arrays.isEmpty(Head) && Arrays.isEmpty(Tail);
         }
 
         MultiArrow<A> INullary<MultiArrow<A>>.Zero

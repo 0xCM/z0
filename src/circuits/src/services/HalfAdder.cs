@@ -16,7 +16,7 @@ namespace Z0
     public readonly struct HalfAdder : IHalfAdder
     {
         [MethodImpl(Inline), Op]
-        public ConstPair<Bit32> Invoke(Bit32 a, Bit32 b)
+        public ConstPair<bit> Invoke(bit a, bit b)
             => (Gates.xor().Invoke(a, b), Gates.and().Invoke(a, b));
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]

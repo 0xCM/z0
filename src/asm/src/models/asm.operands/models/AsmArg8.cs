@@ -12,19 +12,19 @@ namespace Z0.Asm
     /// <summary>
     /// Defines an 8-bit operand
     /// </summary>
-    public readonly struct AsmArg8 : IAsmOperand<AsmArg8,W8,byte>
+    public readonly struct Arg8 : IAsmOperand<Arg8,W8,byte>
     {
         public byte Content {get;}
 
         public SignKind Sign {get;}
 
-        public AsmOperandKind OpKind {get;}
+        public AsmOperandKind Kind {get;}
 
         [MethodImpl(Inline)]
-        public AsmArg8(byte value, SignKind sign, AsmOperandKind kind)
+        public Arg8(byte value, SignKind sign, AsmOperandKind kind)
         {
             Content = value;
-            OpKind = kind;
+            Kind = kind;
             Sign = sign;
         }
     }

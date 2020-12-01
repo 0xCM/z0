@@ -276,7 +276,7 @@ namespace Z0
                 var bsY = BitString.assemble(blocks.Select(x => x.Format()).ToArray());
                 Claim.eq(bsX, bsY);
 
-                var bytes = Arrays.alloc<byte>(8);
+                var bytes = sys.alloc<byte>(8);
                 for(var i=0; i<8; i++)
                     bytes[i] = blocks[i].TakeScalar<byte>();
 

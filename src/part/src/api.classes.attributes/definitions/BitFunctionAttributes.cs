@@ -27,7 +27,7 @@ namespace Z0
 
     public sealed class RankAttribute : A { public RankAttribute() : base(K.Rank) {} }
 
-    public sealed class ExtractAttribute : A { public ExtractAttribute() : base(K.Extract) {} }
+    public sealed class Segment : A { public Segment() : base(K.Extract) {} }
 
     public sealed class TestBitAttribute : A { public TestBitAttribute() : base(K.TestBit) {} }
 

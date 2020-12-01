@@ -15,20 +15,20 @@ namespace Z0
     {
         public void lomask_case1()
         {
-            Claim.eq((Pow2.pow(3) - 1)^Pow2.pow(3), lo64(3));
-            Claim.eq((Pow2.pow(7) - 1)^Pow2.pow(7), lo64(7));
-            Claim.eq((Pow2.pow(13) - 1)^Pow2.pow(13), lo64(13));
-            Claim.eq((Pow2.pow(25) - 1)^Pow2.pow(25), lo64(25));
-            Claim.eq((Pow2.pow(59) - 1)^Pow2.pow(59), lo64(59));
+            Claim.eq((Pow2.pow(3) - 1)^Pow2.pow(3), BitMasks.lo64(3));
+            Claim.eq((Pow2.pow(7) - 1)^Pow2.pow(7), BitMasks.lo64(7));
+            Claim.eq((Pow2.pow(13) - 1)^Pow2.pow(13), BitMasks.lo64(13));
+            Claim.eq((Pow2.pow(25) - 1)^Pow2.pow(25), BitMasks.lo64(25));
+            Claim.eq((Pow2.pow(59) - 1)^Pow2.pow(59), BitMasks.lo64(59));
         }
 
         public void lomask_case2()
         {
-            Claim.eq(4, Bits.pop(lo64(3)));
-            Claim.eq(7, Bits.pop(lo64(6)));
-            Claim.eq(13, Bits.pop(lo64(12)));
-            Claim.eq(25, Bits.pop(lo64(24)));
-            Claim.eq(59, Bits.pop(lo64(58)));
+            Claim.eq(4, Bits.pop(BitMasks.lo64(3)));
+            Claim.eq(7, Bits.pop(BitMasks.lo64(6)));
+            Claim.eq(13, Bits.pop(BitMasks.lo64(12)));
+            Claim.eq(25, Bits.pop(BitMasks.lo64(24)));
+            Claim.eq(59, Bits.pop(BitMasks.lo64(58)));
         }
 
         public void lomask_case3()

@@ -9,8 +9,9 @@ namespace Z0
     using System.Text;
 
     using static Konst;
-    using static z;
     using static Checks;
+    using static z;
+    using static BitMasks;
 
     [ApiHost]
     public ref struct BitMaskChecker
@@ -110,13 +111,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return @as<BinaryLiterals<byte>, BinaryLiterals<T>>(Literals8);
+                return z.@as<BinaryLiterals<byte>, BinaryLiterals<T>>(Literals8);
             else if(typeof(T) == typeof(ushort))
-                return @as<BinaryLiterals<ushort>, BinaryLiterals<T>>(Literals16);
+                return z.@as<BinaryLiterals<ushort>, BinaryLiterals<T>>(Literals16);
             else if(typeof(T) == typeof(uint))
-                return @as<BinaryLiterals<uint>, BinaryLiterals<T>>(Literals32);
+                return z.@as<BinaryLiterals<uint>, BinaryLiterals<T>>(Literals32);
             else if(typeof(T) == typeof(ulong))
-                return @as<BinaryLiterals<ulong>, BinaryLiterals<T>>(Literals64);
+                return z.@as<BinaryLiterals<ulong>, BinaryLiterals<T>>(Literals64);
             else
                 throw no<T>();
         }

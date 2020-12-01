@@ -13,16 +13,16 @@ namespace Z0.Asm
     partial struct AsmLang
     {
         [StructLayout(LayoutKind.Sequential)]
-        public readonly struct Operand<T> : IOperand<Operand<T>,T>
-            where T : unmanaged, IOperand<T>
+        public readonly struct Operand<T> : IAsmOperand<T>
+            where T : unmanaged, IAsmOperand<T>
         {
-            public AsmOperandKind Kind => Value.Kind;
+            public AsmOperandKind Kind => Content.Kind;
 
-            public T Value {get;}
+            public T Content {get;}
 
             [MethodImpl(Inline)]
             public Operand(T value)
-                => Value = value;
+                => Content = value;
 
             [MethodImpl(Inline)]
             public static implicit operator Operand<T>(T src)

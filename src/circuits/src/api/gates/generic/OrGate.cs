@@ -11,11 +11,11 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct OrGate<T> : IBinaryGate<T>,  IBinaryGate<Vector128<T>>, IBinaryGate<Vector256<T>>
+    public readonly struct OrGate<T> : IBinaryGate<T>,  IBinaryGate<Vector128<T>>, IBinaryGate<Vector256<T>>, IBinaryGate<Vector512<T>>
         where T : unmanaged
     {
         [MethodImpl(Inline)]
-        public Bit32 Invoke(Bit32 x, Bit32 y)
+        public bit Invoke(bit x, bit y)
             => x | y;
 
         [MethodImpl(Inline)]
@@ -28,6 +28,10 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public Vector256<T> Invoke(Vector256<T> a, Vector256<T> b)
+            => gvec.vor(a, b);
+
+        [MethodImpl(Inline)]
+        public Vector512<T> Invoke(Vector512<T> a, Vector512<T> b)
             => gvec.vor(a, b);
     }
 }

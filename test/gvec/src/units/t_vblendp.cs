@@ -68,7 +68,7 @@ namespace Z0
             var maskspec = BitMasks.MsbSpec(n2,n1,t);
 
             var source = gvec.vinc(w,t);
-            var blendspec = gvec.vbroadcast(n256, BitMasks.mask(maskspec), z.maxval<ulong>());
+            var blendspec = gvec.vbroadcast(w256, BitMasks.mask(maskspec), z.maxval<ulong>());
             var target = gvec.vblendp(source, blendspec);
             var expect = z.vparts(w,0,5,2,7,4,1,6,3);
             Claim.Require(gvec.vsame(expect,target));
@@ -135,7 +135,7 @@ namespace Z0
             var maskspec = BitMasks.JsbSpec(n8,n2,t);
 
             var source = gvec.vinc(w,t);
-            var blendspec = gvec.vbroadcast(n256, BitMasks.mask(maskspec), maxval(t));
+            var blendspec = gvec.vbroadcast(w256, BitMasks.mask(maskspec), maxval(t));
             var target = gvec.vblendp(source, blendspec);
             var expect = z.vparts(w,4,5,2,3,0,1,6,7);
             Claim.Require(gvec.vsame(expect,target));
@@ -157,7 +157,7 @@ namespace Z0
             var maskspec = BitMasks.JsbSpec(n8,n2,t);
 
             var source = gvec.vinc(w,t);
-            var blendspec = gvec.vbroadcast(n256, BitMasks.mask(maskspec), maxval(t));
+            var blendspec = gvec.vbroadcast(w256, BitMasks.mask(maskspec), maxval(t));
             var target = gvec.vblendp(source, blendspec);
             var expect = z.vparts(w,8,  9,  2,  3,  4,  5, 14, 15,  0,  1, 10, 11, 12, 13,  6,  7);
 
@@ -180,7 +180,7 @@ namespace Z0
             var maskspec = BitMasks.JsbSpec(n8,n2,t);
 
             var source = gvec.vinc(w,t);
-            var blendspec = gvec.vbroadcast(n256, BitMasks.mask(maskspec), maxval(t));
+            var blendspec = gvec.vbroadcast(w256, BitMasks.mask(maskspec), maxval(t));
             var target = gvec.vblendp(source, blendspec);
             var expect = z.vparts(w,16, 17,  2,  3,  4,  5, 22, 23, 24, 25, 10, 11, 12, 13, 30, 31,  0,  1, 18, 19, 20, 21,  6,  7,  8,  9, 26, 27, 28, 29, 14, 15);
             Claim.eq(expect,target);
@@ -202,7 +202,7 @@ namespace Z0
             var maskspec = BitMasks.JsbSpec(n8,n2,t);
 
             var source = gvec.vinc(w,t);
-            var blendspec = gvec.vbroadcast(n256, BitMasks.mask(maskspec), maxval(t));
+            var blendspec = gvec.vbroadcast(w256, BitMasks.mask(maskspec), maxval(t));
             var target = gvec.vblendp(source, blendspec);
 
             var descrition = describe(maskspec, BitMasks.mask(maskspec.As(z64)), source,target);
@@ -215,7 +215,7 @@ namespace Z0
             var w = n512;
             var t = z8;
             var maskspec = BitMasks.JsbSpec(n8,n2,t);
-            var blendspec = gvec.vbroadcast(n256, BitMasks.mask(maskspec), maxval(t));
+            var blendspec = gvec.vbroadcast(w256, BitMasks.mask(maskspec), maxval(t));
 
             var maskbits = BitMasks.mask(maskspec.As(z64));
 
@@ -278,23 +278,23 @@ namespace Z0
 
         static Vector128<T> rrll_pattern<T>(N128 w, T t = default)
             where T : unmanaged
-                => gvec.broadcast(BitMasks.even(n2,n2,z64), enabled(t), SpanBlocks.alloc<T>(w)).LoadVector();
+                => Blocked.broadcast(BitMasks.even(n2,n2,z64), enabled(t), SpanBlocks.alloc<T>(w)).LoadVector();
 
         static Vector128<T> llrr_pattern<T>(N128 w, T t = default)
             where T : unmanaged
-                => gvec.broadcast(BitMasks.odd<ulong>(n2,n2), enabled(t), SpanBlocks.alloc<T>(w)).LoadVector();
+                => Blocked.broadcast(BitMasks.odd<ulong>(n2,n2), enabled(t), SpanBlocks.alloc<T>(w)).LoadVector();
 
         static Vector128<T> rl_pattern<T>(N128 w, T t = default)
             where T : unmanaged
-                => gvec.broadcast(BitMasks.lsb(n2,n1,z64), enabled(t), SpanBlocks.alloc<T>(w)).LoadVector();
+                => Blocked.broadcast(BitMasks.lsb(n2,n1,z64), enabled(t), SpanBlocks.alloc<T>(w)).LoadVector();
 
         static Vector128<T> lr_pattern<T>(N128 w, T t = default)
             where T : unmanaged
-                => gvec.broadcast(BitMasks.msb(n2,n1,z64), enabled(t), SpanBlocks.alloc<T>(w)).LoadVector();
+                => Blocked.broadcast(BitMasks.msb(n2,n1,z64), enabled(t), SpanBlocks.alloc<T>(w)).LoadVector();
 
         static Vector256<T> rl_pattern<T>(N256 w, T t = default)
             where T : unmanaged
-                => gvec.broadcast(BitMasks.lsb(n2,n1,t), enabled(t), SpanBlocks.alloc<T>(w)).LoadVector();
+                => Blocked.broadcast(BitMasks.lsb(n2,n1,t), enabled(t), SpanBlocks.alloc<T>(w)).LoadVector();
 
 
         void vblendp_check<T>(Vector128<T> spec, [Caller] string title = null)

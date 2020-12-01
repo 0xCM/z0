@@ -14,7 +14,7 @@ namespace Z0
     /// Defines an indexed sequence of <typeparamref name='T'/> cells
     /// </summary>
     public readonly struct Cells<T> : ITableSpan<Cells<T>,T>
-        where T : struct, IDataCell
+        where T : struct, IDataCell<T>
     {
         readonly IndexedSeq<T> Data;
 

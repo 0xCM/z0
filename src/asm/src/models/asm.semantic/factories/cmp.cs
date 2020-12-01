@@ -18,7 +18,7 @@ namespace Z0.Asm
         /// <param name="dst"></param>
         /// <param name="src"></param>
         [MethodImpl(Inline), Op]
-        public AsmArgs<al,Imm8> cmp(al dst, Imm8 src)
+        public Args<al,Imm8> cmp(al dst, Imm8 src)
             => args(dst,src);
 
         /// <summary>
@@ -27,7 +27,7 @@ namespace Z0.Asm
         /// <param name="dst"></param>
         /// <param name="src"></param>
         [MethodImpl(Inline),Op]
-        public AsmArgs<M8,Imm8> cmp(M8 dst, Imm8 src)
+        public Args<Mem8,Imm8> cmp(Mem8 dst, Imm8 src)
             => args(dst,src);
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace Z0.Asm
         /// <param name="dst"></param>
         /// <param name="src"></param>
         [MethodImpl(Inline), Op]
-        public AsmArgs<eax,Imm32> cmp(eax dst, Imm32 src)
+        public Args<eax,Imm32> cmp(eax dst, Imm32 src)
             => args(dst,src);
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace Z0.Asm
         /// <param name="dst"></param>
         /// <param name="src"></param>
         [MethodImpl(Inline), Op]
-        public AsmArgs<rax,Imm32> cmp(rax dst, Imm32 src)
+        public Args<rax,Imm32> cmp(rax dst, Imm32 src)
             => args(dst,src);
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace Z0.Asm
         /// <param name="dst"></param>
         /// <param name="src"></param>
         [MethodImpl(Inline), Op]
-        public AsmArgs<R32,R32> cmp(R32 dst, R32 src)
+        public Args<R32,R32> cmp(R32 dst, R32 src)
             => args(dst,src);
 
         /// <summary>
@@ -63,7 +63,7 @@ namespace Z0.Asm
         /// <param name="dst"></param>
         /// <param name="src"></param>
         [MethodImpl(Inline), Op]
-        public AsmArgs<M32,R32> cmp(M32 dst, R32 src)
+        public Args<Mem32,R32> cmp(Mem32 dst, R32 src)
             => args(dst,src);
 
         /// <summary>
@@ -72,7 +72,7 @@ namespace Z0.Asm
         /// <param name="dst"></param>
         /// <param name="src"></param>
         [MethodImpl(Inline), Op]
-        public AsmArgs<R64,R64> cmp(R64 dst, R64 src)
+        public Args<R64,R64> cmp(R64 dst, R64 src)
             => args(dst,src);
 
         /// <summary>
@@ -81,7 +81,7 @@ namespace Z0.Asm
         /// <param name="dst"></param>
         /// <param name="src"></param>
         [MethodImpl(Inline), Op]
-        public AsmArgs<R64,M64> cmp(R64 dst, M64 src)
+        public Args<R64,Mem64> cmp(R64 dst, Mem64 src)
             => args(dst,src);
     }
 }

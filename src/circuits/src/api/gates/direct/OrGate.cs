@@ -10,10 +10,10 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct OrGate : IBinaryLogicGate
+    public readonly struct OrGate : IBinaryGate
     {
         [MethodImpl(Inline)]
-        public Bit32 Invoke(Bit32 x, Bit32 y)
+        public bit Invoke(bit x, bit y)
             => (x | y);
     }
 

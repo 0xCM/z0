@@ -312,7 +312,7 @@ namespace Z0
              keys.IntersectWith(right.Keys);
              var keylist = keys.ToArray();
              var count = keylist.Length;
-             var entries = Arrays.alloc<(OpIdentity,(L,R))>(count);
+             var entries = sys.alloc<(OpIdentity,(L,R))>(count);
              for(var i=0; i<count; i++)
              {
                 var key = keylist[i];

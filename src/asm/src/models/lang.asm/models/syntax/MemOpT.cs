@@ -9,21 +9,19 @@ namespace Z0.Asm
 
     using static Konst;
 
-    using OK = AsmOperandKind;
-
     partial struct AsmLang
     {
-        public readonly struct MemOp<T> : IOperand<MemOp<T>,T>
+        public readonly struct MemOp<T> : IAsmOperand<T>
             where T : unmanaged
         {
             public AsmOperandKind Kind => AsmOperandKind.M;
 
-            public T Value {get;}
+            public T Content {get;}
 
             [MethodImpl(Inline)]
             public MemOp(T src)
             {
-                Value = src;
+                Content = src;
             }
 
             [MethodImpl(Inline)]

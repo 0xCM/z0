@@ -15,9 +15,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ContentKind(MimeType mime)
-        {
-            BasicType = mime;
-        }
+            => BasicType = mime;
 
         public string Format()
             => BasicType.Format();

@@ -61,9 +61,9 @@ namespace Z0
                 var j = Random.Next(2, width - width/2);
                 var y = gbits.zhi(x, (int)j);
 
-                var x0 = gbits.extract(x,0, (byte)(j - 1));
-                var y0 = gbits.extract(y,0, (byte)(j - 1));
-                var y1 = gbits.extract(y,(byte)j, (byte)(width - 1));
+                var x0 = gbits.segment(x,0, (byte)(j - 1));
+                var y0 = gbits.segment(y,0, (byte)(j - 1));
+                var y1 = gbits.segment(y,(byte)j, (byte)(width - 1));
                 Claim.eq(x0,y0);
                 Claim.nea(gmath.nonz(y1));
             }

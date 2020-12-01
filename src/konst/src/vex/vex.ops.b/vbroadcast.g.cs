@@ -14,6 +14,19 @@ namespace Z0
     partial struct z
     {
         /// <summary>
+        /// Broadcasts an S-cell over a T-cell
+        /// </summary>
+        /// <param name="src">The source cell value</param>
+        /// <param name="dst">The target cell</param>
+        /// <typeparam name="S">The source cell type</typeparam>
+        /// <typeparam name="T">The target cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static T broadcast<S,T>(S src)
+            where S : unmanaged
+            where T : unmanaged
+                => vfirst<S,T>(vbroadcast(N128.N, src));
+
+        /// <summary>
         /// Projects a scalar value onto each component of a 128-bit vector
         /// </summary>
         /// <param name="w">The bitness selector</param>
@@ -86,7 +99,7 @@ namespace Z0
                 return generic<T>(z.vbroadcast(w, float32(src)));
             else if(typeof(T) == typeof(double))
                 return generic<T>(z.vbroadcast(w, float64(src)));
-            else 
+            else
                 throw no<T>();
         }
 
@@ -130,8 +143,8 @@ namespace Z0
                 return generic<T>(z.vbroadcast(w, float32(src)));
             else if(typeof(T) == typeof(double))
                 return generic<T>(z.vbroadcast(w, float64(src)));
-            else 
+            else
                 throw no<T>();
-        }        
+        }
     }
 }

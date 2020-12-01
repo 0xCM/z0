@@ -12,17 +12,17 @@ namespace Z0.Asm
     /// <summary>
     /// Captures an operand
     /// </summary>
-    public struct AsmArgs<A> : IAsmOperands<AsmArgs<A>,A>
+    public struct Args<A> : IAsmOperands<Args<A>,A>
         where A : unmanaged
     {
         public A _A;
 
         [MethodImpl(Inline)]
-        public static implicit operator AsmArgs<A>(A src)
-            => new AsmArgs<A>(src);
+        public static implicit operator Args<A>(A src)
+            => new Args<A>(src);
 
         [MethodImpl(Inline)]
-        public AsmArgs(A a)
+        public Args(A a)
             => _A = a;
 
         public A this[N0 n]
@@ -35,7 +35,7 @@ namespace Z0.Asm
     /// <summary>
     /// Captures an operand pair
     /// </summary>
-    public struct AsmArgs<A,B>: IAsmOperands<AsmArgs<A,B>,A,B>
+    public struct Args<A,B>: IAsmOperands<Args<A,B>,A,B>
         where A : unmanaged
         where B : unmanaged
     {
@@ -44,15 +44,15 @@ namespace Z0.Asm
         B _B;
 
         [MethodImpl(Inline)]
-        public static implicit operator AsmArgs<A,B>((A a, B b) src)
-            => new AsmArgs<A,B>(src.a,src.b);
+        public static implicit operator Args<A,B>((A a, B b) src)
+            => new Args<A,B>(src.a,src.b);
 
         [MethodImpl(Inline)]
-        public static implicit operator AsmArgs<A,B>(Paired<A,B> src)
-            => new AsmArgs<A,B>(src.Left, src.Right);
+        public static implicit operator Args<A,B>(Paired<A,B> src)
+            => new Args<A,B>(src.Left, src.Right);
 
         [MethodImpl(Inline)]
-        public AsmArgs(A a, B b)
+        public Args(A a, B b)
         {
             _A = a;
             _B = b;
@@ -81,7 +81,7 @@ namespace Z0.Asm
     /// <summary>
     /// Captures an operand triple
     /// </summary>
-    public struct AsmArgs<A,B,C> : IAsmOperands<AsmArgs<A,B,C>,A,B,C>
+    public struct Args<A,B,C> : IAsmOperands<Args<A,B,C>,A,B,C>
         where A : unmanaged
         where B : unmanaged
         where C : unmanaged
@@ -93,11 +93,11 @@ namespace Z0.Asm
         C _C;
 
         [MethodImpl(Inline)]
-        public static implicit operator AsmArgs<A,B,C>(Tripled<A,B,C> src)
-            => new AsmArgs<A,B,C>(src.First, src.Second, src.Third);
+        public static implicit operator Args<A,B,C>(Tripled<A,B,C> src)
+            => new Args<A,B,C>(src.First, src.Second, src.Third);
 
         [MethodImpl(Inline)]
-        public AsmArgs(A a, B b, C c)
+        public Args(A a, B b, C c)
         {
             _A = a;
             _B = b;
@@ -134,7 +134,7 @@ namespace Z0.Asm
     /// <summary>
     /// Captures an operand quartet
     /// </summary>
-    public struct AsmArgs<A,B,C,D> : IAsmOperands<AsmArgs<A,B,C,D>,A,B,C,D>
+    public struct Args<A,B,C,D> : IAsmOperands<Args<A,B,C,D>,A,B,C,D>
         where A : unmanaged
         where B : unmanaged
         where C : unmanaged
@@ -149,7 +149,7 @@ namespace Z0.Asm
         D _D;
 
         [MethodImpl(Inline)]
-        public AsmArgs(A a, B b, C c, D d)
+        public Args(A a, B b, C c, D d)
         {
             _A = a;
             _B = b;

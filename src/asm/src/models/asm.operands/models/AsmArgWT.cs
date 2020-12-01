@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Konst;
 
-    public readonly struct AsmArg<W,T> : IAsmOperand<AsmArg<W,T>,W,T>
+    public readonly struct Arg<W,T> : IAsmOperand<Arg<W,T>,W,T>
         where T : unmanaged
         where W : unmanaged, IDataWidth
     {
@@ -19,15 +19,15 @@ namespace Z0.Asm
 
         public uint Width {get;}
 
-        public AsmOperandKind OpKind {get;}
+        public AsmOperandKind Kind {get;}
 
         [MethodImpl(Inline)]
-        public AsmArg(T value, SignKind sign, AsmOperandKind kind, uint width)
+        public Arg(T value, SignKind sign, AsmOperandKind kind, uint width)
         {
             Content = value;
             Sign = sign;
             Width =  width;
-            OpKind = kind;
+            Kind = kind;
         }
     }
 }

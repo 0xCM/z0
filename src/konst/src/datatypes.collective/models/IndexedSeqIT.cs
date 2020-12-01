@@ -26,6 +26,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public void Clear()
             => Terms.Clear();
+
         public Span<T> Terms
         {
             [MethodImpl(Inline)]

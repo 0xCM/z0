@@ -19,6 +19,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static T[] Clear<T>(this T[] src)
             where T : struct
-                => Arrays.clear(src);
+                => sys.clear(src);
     }
 }

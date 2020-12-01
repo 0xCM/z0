@@ -13,34 +13,66 @@ namespace Z0
 
     partial class Cells
     {
+        /// <summary>
+        /// Creates a <see cref='Cell8'/> from a specified <see cref='byte'/> value
+        /// </summary>
+        /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
         public static Cell8 cell(byte src)
             => src;
 
+        /// <summary>
+        /// Creates a <see cref='Cell8'/> from a specified <see cref='sbyte'/> value
+        /// </summary>
+        /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
         public static Cell8 cell(sbyte src)
             => src;
 
+        /// <summary>
+        /// Creates a <see cref='Cell16'/> from a specified <see cref='short'/> value
+        /// </summary>
+        /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
         public static Cell16 cell(short src)
             => src;
 
+        /// <summary>
+        /// Creates a <see cref='Cell16'/> from a specified <see cref='ushort'/> value
+        /// </summary>
+        /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
         public static Cell16 cell(ushort src)
             => src;
 
+        /// <summary>
+        /// Creates a <see cref='Cell32'/> from a specified <see cref='int'/> value
+        /// </summary>
+        /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
         public static Cell32 cell(int src)
             => src;
 
+        /// <summary>
+        /// Creates a <see cref='Cell32'/> from a specified <see cref='uint'/> value
+        /// </summary>
+        /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
         public static Cell32 cell(uint src)
             => src;
 
+        /// <summary>
+        /// Creates a <see cref='Cell64'/> from a specified <see cref='long'/> value
+        /// </summary>
+        /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
         public static Cell64 cell(long src)
             => src;
 
+        /// <summary>
+        /// Creates a <see cref='Cell64'/> from a specified <see cref='ulong'/> value
+        /// </summary>
+        /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
         public static Cell64 cell(ulong src)
             => src;
@@ -87,12 +119,17 @@ namespace Z0
             where T : unmanaged
                 => new Cell128(v64u(x));
 
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Cell128 cell<T>(W128 w, T src)
+            where T : unmanaged
+                => init(vscalar(w128,src));
+
         /// <summary>
         /// Initializes a 256-bit value with a 256-bit source vector
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <typeparam name="T">The vector cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Integers)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Cell256 cell<T>(Vector256<T> x)
             where T : unmanaged
                 => new Cell256(v64u(x));

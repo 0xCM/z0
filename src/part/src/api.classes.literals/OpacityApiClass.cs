@@ -103,6 +103,8 @@ namespace Z0
 
       GetCallingAssembly,
 
-      GetFieldValue
+      GetFieldValue,
+
+      FillArray
     }
 }

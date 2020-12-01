@@ -4,15 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static BitMasks.Bp16;
-
     partial class BitMasks
     {
-        /// <summary>
-        /// Defines a bit pattern set with members of bit-width <see cref='W32'/>
-        /// </summary>
-        [LiteralProvider]
-        public readonly struct Bp32
+        partial struct Literals
         {
             public const uint b00000001x32 = (uint)b00000001x16 << 16 | (uint)b00000001x16;
 

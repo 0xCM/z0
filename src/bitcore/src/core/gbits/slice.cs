@@ -13,7 +13,7 @@ namespace Z0
     partial class gbits
     {
         /// <summary>
-        /// Extracts a contiguous range of bits from the source
+        /// Extracts a contiguous range of source bits beginning at a specified index
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="start">The bit position  within the source where extraction should begin</param>

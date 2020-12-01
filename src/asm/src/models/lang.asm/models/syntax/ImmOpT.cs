@@ -11,17 +11,17 @@ namespace Z0.Asm
 
     partial struct AsmLang
     {
-        public readonly struct ImmOp<T> : IOperand<MemOp<T>,T>
+        public readonly struct ImmOp<T> : IAsmOperand<T>
             where T : unmanaged
         {
             public AsmOperandKind Kind => AsmOperandKind.Imm;
 
-            public T Value {get;}
+            public T Content {get;}
 
             [MethodImpl(Inline)]
             public ImmOp(T src)
             {
-                Value = src;
+                Content = src;
             }
 
             [MethodImpl(Inline)]

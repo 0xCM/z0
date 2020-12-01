@@ -21,7 +21,7 @@ namespace Z0
         {
             uint data = (byte)spec;
             for(int i=0, offset = 0; i<dst.Length; i++, offset +=2)
-                dst[i] = (int)gbits.extract(data, (byte)offset, (byte)(offset + 1));
+                dst[i] = (int)gbits.segment(data, (byte)offset, (byte)(offset + 1));
             return ref dst;
         }
 
@@ -37,7 +37,7 @@ namespace Z0
             uint data = (uint)spec;
             var dst = NatPerm<N8>.Alloc();
             for(int i=0, offset = 0; i<dst.Length; i++, offset +=3)
-                dst[i] = (int)gbits.extract(data, (byte)offset, (byte)(offset + 2));
+                dst[i] = (int)gbits.segment(data, (byte)offset, (byte)(offset + 2));
             return dst;
         }
 
@@ -50,7 +50,7 @@ namespace Z0
         {
             ulong data = (ulong)spec;
             for(int i=0, offset = 0; i<dst.Length; i++, offset +=4)
-                dst[i] = (int)gbits.extract(data, (byte)offset, (byte)(offset + 3));
+                dst[i] = (int)gbits.segment(data, (byte)offset, (byte)(offset + 3));
             return ref dst;
         }
 

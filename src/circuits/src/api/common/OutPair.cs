@@ -6,19 +6,33 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
-    
+
     public readonly struct OutPair<T>
         where T : unmanaged
     {
-        public readonly T x;
+        public T A {get;}
 
-        public readonly T y; 
+        public T B {get;}
+
+        [MethodImpl(Inline)]
+        public OutPair(T x, T y)
+        {
+            A = x;
+            B = y;
+        }
+
+        [MethodImpl(Inline)]
+        public void Deconstruct(out T x, out T y)
+        {
+            x = A;
+            y = B;
+        }
 
         [MethodImpl(Inline)]
         public static implicit operator (T x, T y)(OutPair<T> src)
-            => (src.x, src.y);
+            => (src.A, src.B);
 
         [MethodImpl(Inline)]
         public static implicit operator OutPair<T> ((T x, T y) src)
@@ -26,24 +40,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator OutPair<T>(InPair<T> src)
-            => new OutPair<T>(src.x,src.y);
-
-
-        [MethodImpl(Inline)]
-        public OutPair(T x, T y)
-        {
-            this.x = x;
-            this.y = y;
-        }
-
-        [MethodImpl(Inline)]
-        public void Deconstruct(out T x, out T y)
-        {
-            x = this.x;
-            y = this.y;
-        }
+            => new OutPair<T>(src.A,src.B);
 
     }
-
-
 }

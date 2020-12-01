@@ -12,10 +12,6 @@ namespace Z0
 
     partial struct memory
     {
-        [MethodImpl(Inline), Op]
-        public static byte scale<T>()
-            => (byte)size<T>();
-
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static uint size<T>(T t = default)
             => (uint)SizeOf<T>();

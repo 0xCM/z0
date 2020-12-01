@@ -20,9 +20,9 @@ namespace Z0
         /// <param name="index">The zero-based column index, in the inclusive range 0...7</param>
         /// <typeparam name="T">The grid cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(UInt8x16k)]
-        public static Bit32 col<T>(BitGrid16<N1,N16,T> g, int index)
+        public static bit col<T>(BitGrid16<N1,N16,T> g, int index)
             where T : unmanaged
-                => (Bit32)(g.Content & (Lsb16x16x1 << index));
+                => (bit)(g.Content & (Lsb16x16x1 << index));
 
         /// <summary>
         /// Extracts an index-identified 2-bit grid column
@@ -64,7 +64,7 @@ namespace Z0
         /// <param name="index">The zero-based column index, in the inclusive range 0...7</param>
         /// <typeparam name="T">The grid cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(UInt8x16x32k)]
-        public static Bit32 col<T>(BitGrid32<N1,N32,T> g, int index)
+        public static bit col<T>(BitGrid32<N1,N32,T> g, int index)
             where T : unmanaged
                 => gather(g, Lsb32x32x1 << index) == 1;
 

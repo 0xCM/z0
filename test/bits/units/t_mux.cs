@@ -11,16 +11,16 @@ namespace Z0
 
     public class t_mux : t_bitcore<t_mux>
     {
-        Bit32 on => Bit32.On;
+        bit on => bit.On;
 
-        Bit32 off => Bit32.Off;
+        bit off => bit.Off;
 
         public void mux_4()
         {
             for(var i=0; i< RepCount; i++)
             {
                 var input = Random.BitStream32().Take(4).ToArray();
-                Bit32 i0 = input[0], i1 = input[1], i2 = input[2], i3 = input[3];
+                bit i0 = input[0], i1 = input[1], i2 = input[2], i3 = input[3];
 
                 var out0 = Mux.mux(i0, i1, i2, i3, off, off);
                 var out1 = Mux.mux(i0, i1, i2, i3, on,  off);
@@ -87,7 +87,6 @@ namespace Z0
                 var expect = input[control.Scalar];
                 Claim.eq(expect, output);
             }
-
         }
     }
 }

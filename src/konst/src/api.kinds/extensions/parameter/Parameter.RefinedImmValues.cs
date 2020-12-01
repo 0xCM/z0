@@ -16,7 +16,7 @@ namespace Z0
             if(param.IsRefinedImmediate())
                 return param.ParameterType.GetEnumValues().Cast<byte>().ToImm8Values(ScalarRefinementKind.Refined);
             else
-                return Arrays.empty<Imm8R>();
+                return sys.empty<Imm8R>();
         }
     }
 }

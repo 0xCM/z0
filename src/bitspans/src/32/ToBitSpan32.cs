@@ -94,11 +94,11 @@ namespace Z0
 
          [MethodImpl(Inline), Op]
          public static BitSpan32 ToBitSpan32(this float src)
-            => BitSpans.from32<uint>(UI.u32(src));
+            => BitSpans.from32<uint>(BitSeq.u32(src));
 
          [MethodImpl(Inline), Op]
          public static BitSpan32 ToBitSpan32(this double src)
-            => BitSpans.from32<ulong>(UI.u64(src));
+            => BitSpans.from32<ulong>(BitSeq.u64(src));
 
         /// <summary>
         /// Loads a bitspan from a packed span of scalars

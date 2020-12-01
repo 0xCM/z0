@@ -12,7 +12,7 @@ namespace Z0
 
     public interface IHalfAdder
     {
-        ConstPair<Bit32> Invoke(Bit32 a, Bit32 b);
+        ConstPair<bit> Invoke(bit a, bit b);
 
         ConstPair<T> Invoke<T>(T a, T b)
             where T : unmanaged;

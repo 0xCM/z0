@@ -95,8 +95,8 @@ namespace Z0
             for(var i=0u; i<count; i++)
             {
                 ref readonly var d = ref skip(bytes,i);
-                seek(dst, j--) = Hex.code(LowerCase, UI.crop4(d));
-                seek(dst, j--) = Hex.code(LowerCase, UI.srl(d, n4, w4));
+                seek(dst, j--) = Hex.code(LowerCase, BitSeq.crop4(d));
+                seek(dst, j--) = Hex.code(LowerCase, BitSeq.srl(d, n4, w4));
             }
         }
 
@@ -122,8 +122,8 @@ namespace Z0
             for(var i=0u; i<count; i++)
             {
                 ref readonly var d = ref skip(bytes,i);
-                seek(dst, j--) = (char)Hex.code(LowerCase, UI.crop4(d));
-                seek(dst, j--) = (char)Hex.code(LowerCase, UI.srl(d, n4, w4));
+                seek(dst, j--) = (char)Hex.code(LowerCase, BitSeq.crop4(d));
+                seek(dst, j--) = (char)Hex.code(LowerCase, BitSeq.srl(d, n4, w4));
             }
 
             return Render.format(dst);

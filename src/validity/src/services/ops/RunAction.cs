@@ -55,7 +55,7 @@ namespace Z0
         Duration ExecExplicit(IExplicitTest unit, string hostpath, IList<TestCaseRecord> results)
         {
             var clock = Time.counter(false);
-            var messages = Arrays.empty<IAppMsg>();
+            var messages = sys.empty<IAppMsg>();
             var casename = TestCaseName(unit);
 
             try

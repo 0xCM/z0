@@ -10,7 +10,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static z;
 
     using api = Seq;
 
@@ -23,7 +22,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public IndexedSeq(T[] src)
-            => Data = insist(src);
+            => Data = src != null ? src : sys.empty<T>();
 
         [MethodImpl(Inline)]
         public IndexedSeq(T[] src, bool @internal)
@@ -117,7 +116,6 @@ namespace Z0
         public bool Equals(IndexedSeq<T> rhs)
             => Data.Equals(rhs.Data);
 
-        [MethodImpl(Inline)]
         public IndexedSeq<T> Concat(IndexedSeq<T> rhs)
             => api.concat(this, rhs);
 

@@ -57,7 +57,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => new Matrix<N, T>(
-                    Arrays.alloc((int)(nat64u<N>()* nat64u<N>()), fill));
+                    sys.alloc((int)(nat64u<N>()* nat64u<N>()), fill));
 
         /// <summary>
         /// Allocates a blocked square matrix of natual dimension

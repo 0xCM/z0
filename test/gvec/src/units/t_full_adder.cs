@@ -54,8 +54,8 @@ namespace Z0
             for(var i=0; i<xbs.Length; i++)
             {
                 var expect = FullAdder.Compute(xbs[i],ybs[i],cinbs[i]);
-                Claim.eq(expect.x, sumbs[i]);
-                Claim.eq(expect.y, coutbs[i]);
+                Claim.eq(expect.A, sumbs[i]);
+                Claim.eq(expect.B, coutbs[i]);
             }
         }
 
@@ -71,8 +71,8 @@ namespace Z0
             for(var i=0; i<sum.Width; i++)
             {
                 var expect = FullAdder.Compute(x[i], y[i], cin[i]);
-                Claim.eq(expect.x, sum[i]);
-                Claim.eq(expect.y, cout[i]);
+                Claim.eq(expect.A, sum[i]);
+                Claim.eq(expect.B, cout[i]);
             }
         }
     }

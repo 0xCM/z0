@@ -12,19 +12,19 @@ namespace Z0.Asm
     /// <summary>
     /// Defines a 64-bit operand
     /// </summary>
-    public readonly struct AsmArg64 : IAsmOperand<AsmArg64,W64,ulong>
+    public readonly struct Arg64 : IAsmOperand<Arg64,W64,ulong>
     {
         public ulong Content {get;}
 
         public SignKind Sign {get;}
 
-        public AsmOperandKind OpKind {get;}
+        public AsmOperandKind Kind {get;}
 
         [MethodImpl(Inline)]
-        public AsmArg64(ulong value, SignKind sign, AsmOperandKind kind)
+        public Arg64(ulong value, SignKind sign, AsmOperandKind kind)
         {
             Content = value;
-            OpKind = kind;
+            Kind = kind;
             Sign = sign;
         }
     }

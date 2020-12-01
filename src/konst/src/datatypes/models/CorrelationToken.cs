@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     /// <summary>
@@ -16,18 +16,6 @@ namespace Z0
     public readonly struct CorrelationToken : ITextual, IComparable<CorrelationToken>, IEquatable<CorrelationToken>
     {
         public readonly ulong Value;
-
-        [MethodImpl(Inline)]
-        public static implicit operator ulong (CorrelationToken src)
-            => src.Value;
-
-        [MethodImpl(Inline)]
-        public static bool operator==(CorrelationToken a, CorrelationToken b)
-            => a.Equals(b);
-
-        [MethodImpl(Inline)]
-        public static bool operator!=(CorrelationToken a, CorrelationToken b)
-            => !a.Equals(b);
 
         [MethodImpl(Inline)]
         public CorrelationToken(ulong value)
@@ -61,5 +49,17 @@ namespace Z0
 
         public static CorrelationToken Empty
             => default;
+
+        [MethodImpl(Inline)]
+        public static implicit operator ulong (CorrelationToken src)
+            => src.Value;
+
+        [MethodImpl(Inline)]
+        public static bool operator==(CorrelationToken a, CorrelationToken b)
+            => a.Equals(b);
+
+        [MethodImpl(Inline)]
+        public static bool operator!=(CorrelationToken a, CorrelationToken b)
+            => !a.Equals(b);
     }
 }

@@ -36,5 +36,15 @@ namespace Z0
         [MethodImpl(Options),  Op]
         public static byte[] alloc(int count)
             => proxy.alloc<byte>(count);
+
+        /// <summary>
+        /// Allocates a new array and populates it with a specified value
+        /// </summary>
+        /// <param name="length">The array length</param>
+        /// <param name="src">The value with which to populate the array</param>
+        /// <typeparam name="T">The element type</typeparam>
+        [MethodImpl(Options), Op, Closures(Closure)]
+        public static T[] alloc<T>(int length, T src)
+            => proxy.fill(proxy.alloc<T>(length), src);
     }
 }

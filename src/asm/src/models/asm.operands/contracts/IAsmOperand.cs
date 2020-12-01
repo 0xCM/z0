@@ -4,25 +4,16 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static z;
 
-    public interface IAsmOperand : ISized
+    public interface IAsmOperand : ISizedOperand, IKindedOperand<AsmOperandKind>
     {
-        /// <summary>
-        /// The operand sort
-        /// </summary>
-        AsmOperandKind OpKind {get;}
+
     }
 
-    public interface IAsmOperand<T> : IAsmOperand
-    {
-        /// <summary>
-        /// The operand value
-        /// </summary>
-        T Content {get;}
 
-        BitSize ISized.StorageWidth
-            => bitwidth<T>();
+    public interface IAsmOperand<T> : IAsmOperand, ISizedOperand<T>
+    {
+
     }
 
     public interface IAsmOperand<W,T> : IAsmOperand<T>

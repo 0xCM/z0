@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
 
@@ -12,14 +12,6 @@ namespace Z0
 
     partial struct BitWriter
     {
-        [MethodImpl(Inline)]
-        static uint write(uint src, int pos, uint state)                    
-        {
-            var c = ~(uint)state + 1u;
-            src ^= (c ^ src) & (1u << pos);
-            return src;
-        }
-
         /// <summary>
         /// Transfers the state of a naturally-identified source bit to the corresponding bit in the target
         /// </summary>
@@ -98,6 +90,6 @@ namespace Z0
         /// <param name="dst">The target</param>
         [MethodImpl(Inline), Op]
         public static uint Write(N7 n, uint src, uint dst)
-            =>  write(dst, n, bit(n, src));            
+            =>  write(dst, n, bit(n, src));
     }
 }

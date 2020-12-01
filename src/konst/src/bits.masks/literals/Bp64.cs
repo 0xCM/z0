@@ -4,15 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static BitMasks.Bp32;
-
     partial class BitMasks
     {
-        /// <summary>
-        /// Defines a bit pattern set with members of bit-width <see cref='W64'/>
-        /// </summary>
-        [LiteralProvider]
-        public readonly struct Bp64
+        partial struct Literals
         {
             public const ulong b00000001x64 = (ulong)b00000001x32 << 32 | (ulong)b00000001x32;
 

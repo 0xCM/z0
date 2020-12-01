@@ -22,7 +22,7 @@ namespace Z0
             var total = 0ul;
             var emit = CellOps.define(next<byte>);
             for(var i=0; i<RepCount; i++ )
-                total += Cells.scalar(emit());
+                total += Cells.primal(emit());
 
             var expect = (ulong)(maxval<byte>()/2);
             var actual = total/(ulong)RepCount;

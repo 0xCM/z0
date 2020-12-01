@@ -20,7 +20,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T[] replicate<T>(T value, int count)
         {
-            var dst = alloc<T>(count);
+            var dst = sys.alloc<T>(count);
             for(var idx = 0U; idx < count; idx ++)
                 dst[idx] = value;
             return dst;
