@@ -70,7 +70,7 @@ namespace Z0
             return dst;
         }
 
-        static TableStore<ApiParseField,ApiParseBlock> Store => default;
+        static TableArchive<ApiParseField,ApiParseBlock> Store => default;
 
         [MethodImpl(Inline), Op]
         public static Option<FilePath> save(ApiParseBlock[] src, FS.FilePath dst)

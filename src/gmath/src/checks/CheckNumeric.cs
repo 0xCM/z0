@@ -55,7 +55,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Outcome contains<T>(ClosedInterval<T> src, T point)
             where T : unmanaged
-                => src.Contains(point) ? true : (false, Msg.NotIn<T>().Apply(point,src));
+                => src.Contains(point) ? true : (false, Msg.NotIn<T>().Format(point,src));
 
         public static bool gt<T>(T lhs, T rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged

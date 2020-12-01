@@ -50,13 +50,17 @@ namespace Z0
 
         LogLevel Verbosity {get;}
 
-        WfExecFlow Running();
-
         WfExecToken NextExecToken();
 
         WfExecToken CloseExecToken(WfExecToken src);
 
         WfExecToken Ran(WfExecFlow src);
+
+        WfExecFlow Running()
+        {
+            SignalRunning();
+            return Flow();
+        }
 
         string ITextual.Format()
             => AppName;
@@ -124,7 +128,17 @@ namespace Z0
         FS.FolderPath AppData
             => FS.dir(Context.Paths.AppDataRoot.Name);
 
-        IFileDb Db();
+        /// <summary>
+        /// Provides a <see cref='IFileDb'/> rooted at a shell-configured location
+        /// </summary>
+        IFileDb Db()
+            => DbSvc.create(Init.DbRoot);
+
+        /// <summary>
+        /// Provides a <see cref='IFileDb'/> rooted at a specified location
+        /// </summary>
+        IFileDb Db(FS.FolderPath root)
+            => DbSvc.create(root);
 
         WfEventId Raise<E>(in E e)
             where E : IWfEvent

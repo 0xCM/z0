@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    partial struct Db
+    partial struct DbSvc
     {
         public const string dot = AsciCharText.Dot;
 

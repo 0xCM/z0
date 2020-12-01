@@ -14,16 +14,11 @@ namespace Z0
 
     public class FileDb : IFileDb
     {
-        public ArchiveConfig Settings {get;}
-
         [MethodImpl(Inline)]
-        internal FileDb(FileDbPaths paths)
-        {
-            Settings = new ArchiveConfig(paths.Root);
-        }
+        internal FileDb(FS.FolderPath root)
+            => Root = root;
 
-        public FS.FolderPath Root
-            => Settings.Root;
+        public FS.FolderPath Root {get;}
 
         public Files Clear(FS.FolderName id)
             => (TableRoot() + id).Clear(list<FS.FilePath>()).Array();
@@ -37,7 +32,7 @@ namespace Z0
        static Option<FilePath> deposit<F,R,S>(FS.FolderPath root, R[] src, string id, S subject, FS.FileExt type)
             where F : unmanaged, Enum
             where R : struct, ITabular
-                => TableStores.service<F,R>().Save(src, T.renderspec<F>(), (FS.dir(root.Name) + FS.folder(id) + FS.file($"{id}.{subject}",type)));
+                => TableArchives.service<F,R>().Save(src, T.renderspec<F>(), (FS.dir(root.Name) + FS.folder(id) + FS.file($"{id}.{subject}",type)));
         public FS.FolderPath TableRoot()
             => Root + FS.folder(PN.tables);
     }

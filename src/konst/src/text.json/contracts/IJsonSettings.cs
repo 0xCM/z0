@@ -9,6 +9,12 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
+    public interface ISettingsAdapter<T>
+        where T : ISettingsAdapter<T>, new()
+    {
+        T Adapt(IJsonSettings source);
+    }
+
     /// <summary>
     /// Characterizes an app settings collection
     /// </summary>
@@ -27,6 +33,13 @@ namespace Z0
 
         IEnumerator IEnumerable.GetEnumerator()
             => All.GetEnumerator();
+
+        ISettingsAdapter<T> Adapt<T>()
+            where T : ISettingsAdapter<T>, new()
+        {
+            var adapter = new T();
+            return adapter.Adapt(this);
+        }
     }
 
     public interface IJsonSettings<F> : ISettingSource<F>

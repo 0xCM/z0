@@ -101,6 +101,15 @@ namespace Z0
         /// <param name="src">The data source</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
+        public static MutableSeq<T> mutable<T>(IEnumerable<T> src)
+            => new MutableSeq<T>(array(src));
+
+        /// <summary>
+        /// Creates an indexed sequence from a stream
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static IndexedSeq<I,T> indexed<I,T>(IEnumerable<T> src)
             where I : unmanaged
                 => new IndexedSeq<I,T>(array(src));
@@ -113,6 +122,15 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static IndexedSeq<T> indexed<T>(params T[] src)
             => new IndexedSeq<T>(src, true);
+
+        /// <summary>
+        /// Creates a mutable sequence from a parameter array
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static MutableSeq<T> mutable<T>(params T[] src)
+            => new MutableSeq<T>(src, true);
 
         /// <summary>
         /// Creates an index from an array
@@ -171,6 +189,10 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static IndexedSeq<T> concat<T>(IndexedSeq<T> head, IndexedSeq<T> tail)
             => new IndexedSeq<T>(array(head.Storage.Concat(tail.Storage)));
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static MutableSeq<T> concat<T>(MutableSeq<T> head, MutableSeq<T> tail)
+            => new MutableSeq<T>(array(head.Storage.Concat(tail.Storage)));
 
         /// <summary>
         /// Constructs a nonempty stream

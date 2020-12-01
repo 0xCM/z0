@@ -17,5 +17,7 @@ namespace Z0
         public static RenderPattern<CmdId> DispatchingCommand => "Dispatching {0}";
 
         public static RenderPattern<ToolId> ToolHelpNotFound => "Tool {0} help not found";
+
+        public static RenderPattern<FS.FilePath> FileDoesNotExist => "The file {0} does not exist";
     }
 }

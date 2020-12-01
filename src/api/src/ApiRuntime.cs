@@ -134,7 +134,7 @@ namespace Z0
             var kHost = (uint)hosts.Length;
             var buffer = list<ApiRuntimeMember>();
 
-            wf.Status(Msg.IndexingHosts.Apply(kHost));
+            wf.Status(Msg.IndexingHosts.Format(kHost));
 
             var counter = 0u;
             for(var i=0; i<kHost; i++)
@@ -153,7 +153,7 @@ namespace Z0
                         buffer.Add(member);
                     }
 
-                    wf.Status(Msg.IndexedHost.Apply(apicount, catalog.Host.Uri, counter));
+                    wf.Status(Msg.IndexedHost.Format(apicount, catalog.Host.Uri, counter));
                 }
             }
 

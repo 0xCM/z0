@@ -11,7 +11,7 @@ namespace Z0
     using static z;
 
     [ApiHost(ApiNames.Db, true)]
-    public readonly partial struct Db
+    public readonly partial struct DbSvc
     {
         [Op]
         public static PartFiles partfiles(IWfShell wf)
@@ -24,11 +24,11 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static ITableStore tables<S>(IWfShell wf, S subject)
+        public static ITableArchive tables<S>(IWfShell wf, S subject)
             => new FileDbTables<S>(wf.Db(), subject);
 
         [MethodImpl(Inline), Op]
-        public static IFileDb create(FileDbPaths paths)
-            => new FileDb(paths);
+        public static IFileDb create(FS.FolderPath root)
+            => new FileDb(root);
     }
 }

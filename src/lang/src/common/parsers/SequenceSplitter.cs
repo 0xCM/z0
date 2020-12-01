@@ -58,8 +58,8 @@ namespace Z0
             => ++CellPos;
 
         [MethodImpl(Inline)]
-        public readonly BufferSegment<T> MarkSegment()
-            => new BufferSegment<T>(I0, I1);
+        public readonly ClosedInterval<uint> MarkSegment()
+            => new ClosedInterval<uint>(I0, I1);
 
         [MethodImpl(Inline)]
         public readonly bool OnLastPos()

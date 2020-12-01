@@ -8,9 +8,9 @@
   </PropertyGroup>
 
   <PropertyGroup>
+    <Res>$(Src)res/Z0.res.csproj</Res>
     <Share>$(Src)share/z0.share.projitems</Share>
     <ZRoot>$(Src)part/z0.part.csproj</ZRoot>
-
     <Part>$(Src)part/z0.part.csproj</Part>
     <External>$(Src)external/project/z0.external.csproj</External>
     <Sys>$(Src)sys/z0.sys.csproj</Sys>

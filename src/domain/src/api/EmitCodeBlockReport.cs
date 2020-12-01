@@ -48,7 +48,7 @@ namespace Z0
 
         public void Run()
         {
-            var dst = Wf.Db().Table("apihex.index");
+            var dst = Wf.Db().IndexTable("apihex.index");
             Descriptors = ApiArchives.BlockDescriptors(Wf);
             EmissionCount = ApiArchives.emit(Descriptors.Storage, dst);
             Wf.EmittedTable<ApiCodeDescriptor>(EmissionCount, dst);

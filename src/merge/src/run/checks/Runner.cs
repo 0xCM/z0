@@ -314,7 +314,7 @@ namespace Z0
 
         void ListTextResources()
         {
-            var rows = Resources.rows(Resources.strings(typeof(Db.Literals))).View;
+            var rows = Resources.rows(Resources.strings(typeof(DbSvc.Literals))).View;
             var count = rows.Length;
             for(var i=0; i<count; i++)
             {
@@ -348,7 +348,7 @@ namespace Z0
 
         public void Run233()
         {
-            var src = @readonly(Resources.strings<uint>(typeof(Db.Literals)));
+            var src = @readonly(Resources.strings<uint>(typeof(DbSvc.Literals)));
             for(var i=0; i<src.Length; i++)
                 Status(skip(src,i).Format());
         }

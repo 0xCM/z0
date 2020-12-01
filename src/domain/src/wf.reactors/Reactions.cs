@@ -18,7 +18,7 @@ namespace Z0
         [Op]
         public static FS.FilePath react(IWfShell wf, EmitHexIndexCmd cmd)
         {
-            var dst = wf.Db().Table("apihex.index");
+            var dst = wf.Db().IndexTable("apihex.index");
             var descriptors = ApiArchives.BlockDescriptors(wf);
             var count = ApiArchives.emit(descriptors, dst);
             wf.EmittedTable<ApiCodeDescriptor>(count, dst);
@@ -41,13 +41,13 @@ namespace Z0
                 writer.WriteLine(buffer.Emit());
             }
 
-            wf.Status(Msg.EmittedOpIndex.Apply(kHost, target));
+            wf.Status(Msg.EmittedOpIndex.Format(kHost, target));
 
             return Cmd.ok(cmd);
         }
 
         [Op]
-        public static CmdResult react(IWfShell wf, PipeApiHexFilesCmd cmd)
+        public static CmdResult react(IWfShell wf, ListApiHexFilesCmd cmd)
         {
             var archive = ApiArchives.hex(wf);
             var files = archive.List();

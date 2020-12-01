@@ -29,9 +29,16 @@ namespace Z0
             => first(cover<IndexedSeq<T>>(src.BufferAddress, 1)).Storage;
 
         [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref PinnedBuffer<T> deposit<T>(T[] src, ref PinnedBuffer<T> dst)
+        {
+            dst.Deposit(src);
+            return ref dst;
+        }
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T cell<T>(in PinnedBuffer<T> src, uint index, out T value)
         {
-            value = seek(src.Data, index);
+            value = seek(src.Content, index);
             return ref value;
         }
 

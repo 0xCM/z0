@@ -15,7 +15,7 @@ namespace Z0
     using api = Table;
     using X = ArchiveFileKinds;
 
-    public struct FileDbTables<S> : ITableStore
+    public struct FileDbTables<S> : ITableArchive
     {
         public IFileDb Db {get;}
 
@@ -28,7 +28,7 @@ namespace Z0
         {
             Db = archive;
             Subject = subject;
-            Root = archive.TableRoot();
+            Root = archive.TableRoot(subject.ToString());
         }
 
         public void Clear()
@@ -43,12 +43,12 @@ namespace Z0
         public Option<FilePath> Deposit<F,R>(R[] src, FS.FileName name)
             where F : unmanaged, Enum
             where R : struct, ITabular
-                => TableStores.service<F,R>().Save(src, api.renderspec<F>(), Root + FS.file(name.Name));
+                => TableArchives.service<F,R>().Save(src, api.renderspec<F>(), Root + FS.file(name.Name));
 
         public Option<FilePath> Deposit<F,R>(R[] src, FS.FolderName folder, FS.FileName name)
             where F : unmanaged, Enum
             where R : struct, ITabular
-                => TableStores.service<F,R>().Save(src, api.renderspec<F>(), (FS.dir(Root.Name) + folder) + name);
+                => TableArchives.service<F,R>().Save(src, api.renderspec<F>(), (FS.dir(Root.Name) + folder) + name);
 
         public DataFlow<Rowset<T>,ArchivedTable<T>> Deposit<T,M,K>(T[] src, string header, Func<T,string> render,  M m = default)
             where T : struct

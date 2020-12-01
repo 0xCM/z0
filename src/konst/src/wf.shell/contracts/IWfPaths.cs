@@ -71,10 +71,16 @@ namespace Z0
             => FS.folder(AppName);
 
         /// <summary>
+        /// The executing application's folder name
+        /// </summary>
+        FS.FolderName AppDevFolder
+            => FS.folder(AppName.Remove("z0."));
+
+        /// <summary>
         /// The application-relative source code directory
         /// </summary>
         FS.FolderPath AppDevRoot
-            => (DevRoot +  DevSrcFolder) + AppFolder;
+            => (DevRoot +  DevSrcFolder) + AppDevFolder;
 
         /// <summary>
         /// The executing application's configuration file path

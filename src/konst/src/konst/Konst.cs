@@ -205,6 +205,9 @@ namespace Z0
         public static NotSupportedException no<T>()
             => Unsupported.define<T>();
 
+        public static NotSupportedException no()
+            => new NotSupportedException();
+
         [MethodImpl(NotInline), Op, Closures(AllNumeric)]
         public static ArgumentException bad<T>(T arg)
             => new ArgumentException(arg?.ToString() ?? "<null>");

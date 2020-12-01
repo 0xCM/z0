@@ -22,9 +22,9 @@ namespace Z0
             var count = query.ResourceCount;
 
             if(count == 0)
-                wf.Warn(Msg.NoMatchingResources.Apply(cmd.Source, cmd.Match));
+                wf.Warn(Msg.NoMatchingResources.Format(cmd.Source, cmd.Match));
             else
-                wf.Status(Msg.EmittingResources.Apply(cmd.Source, count));
+                wf.Status(Msg.EmittingResources.Format(cmd.Source, count));
 
             if(cmd.ClearTarget)
                 cmd.Target.Clear();

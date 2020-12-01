@@ -46,7 +46,7 @@ namespace Z0
 
         public void Run()
         {
-            var src = Db.partfiles(Wf);
+            var src = DbSvc.partfiles(Wf);
             Wf.Status(src);
             var parsed = src.Parsed.View;
             var count = parsed.Length;

@@ -12,8 +12,15 @@ namespace Z0
 
     using api = PinnedBuffers;
 
+    /// <summary>
+    /// Supertype for covers with locations that will be pinned for the domain lifetime
+    /// </summary>
+    /// <typeparam name="T">The covered content type</typeparam>
     public abstract class PinnedBuffer<T> : IPinnedBuffer<T>
     {
+        /// <summary>
+        /// The number of covered cells
+        /// </summary>
         public abstract uint CellCount {get;}
 
         /// <summary>
@@ -21,7 +28,7 @@ namespace Z0
         /// </summary>
         public MemoryAddress BufferAddress {get; protected set;}
 
-        public Span<T> Data
+        public Span<T> Content
         {
             [MethodImpl(Inline)]
             get => api.covered(this);
@@ -42,6 +49,12 @@ namespace Z0
         public void Enumerate(Action<T> receiver)
             => api.enumerate(this, receiver);
 
-        protected abstract void Populate(Span<T> dst);
+        protected abstract void Fill(Span<T> dst);
+
+        /// <summary>
+        /// Supplies content for the buffer to cover
+        /// </summary>
+        /// <param name="src"></param>
+        public abstract void Deposit(T[] src);
     }
 }

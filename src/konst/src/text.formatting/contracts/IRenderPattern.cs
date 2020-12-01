@@ -21,7 +21,7 @@ namespace Z0
     public interface IRenderPattern<H,T> : IRenderPattern
         where H : struct, IRenderPattern<H,T>
     {
-        string Apply(in T a0);
+        string Format(in T a0);
 
         RenderCapture Capture(in T a0);
 
@@ -34,7 +34,7 @@ namespace Z0
     public interface IRenderPattern<H,A0,A1> : IRenderPattern
         where H : struct, IRenderPattern<H,A0,A1>
     {
-        string Apply(in A0 a0, in A1 a1);
+        string Format(in A0 a0, in A1 a1);
 
         byte IRenderPattern.ArgCount => 2;
 
@@ -45,7 +45,7 @@ namespace Z0
     public interface IRenderPattern<H,A0,A1,A2> : IRenderPattern
         where H : struct, IRenderPattern<H,A0,A1,A2>
     {
-        string Apply(in A0 a0, in A1 a1, in A2 a2);
+        string Format(in A0 a0, in A1 a1, in A2 a2);
 
         RenderCapture Capture(in A0 a0, in A1 a1, in A2 a2);
 
@@ -58,7 +58,7 @@ namespace Z0
     public interface IRenderPattern<H,A0,A1,A2,A3> : IRenderPattern
         where H : struct, IRenderPattern<H,A0,A1,A2,A3>
     {
-        string Apply(in A0 a0, in A1 a1, in A2 a2, in A3 a3);
+        string Format(in A0 a0, in A1 a1, in A2 a2, in A3 a3);
 
         RenderCapture Capture(in A0 a0, in A1 a1, in A2 a2, in A3 a3);
 
@@ -71,7 +71,7 @@ namespace Z0
     public interface IRenderPattern<H,A0,A1,A2,A3,A4> : IRenderPattern
         where H : struct, IRenderPattern<H,A0,A1,A2,A3,A4>
     {
-        string Apply(in A0 a0, in A1 a1, in A2 a2, in A3 a3, in A4 a4);
+        string Format(in A0 a0, in A1 a1, in A2 a2, in A3 a3, in A4 a4);
 
         byte IRenderPattern.ArgCount => 5;
 

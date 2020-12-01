@@ -35,7 +35,7 @@ namespace Z0
 
         readonly XedStage Stage;
 
-        readonly ITableStore Target;
+        readonly ITableArchive Target;
 
         readonly WfHost Host;
 
@@ -47,7 +47,7 @@ namespace Z0
             Settings = config.Settings;
             Source = XedWfOps.SourceArchive(Config.SourceRoot);
             Stage = XedStage.Create(Wf.Db().StageRoot("xed"));
-            Target = Db.tables(wf, "xed");
+            Target = DbSvc.tables(wf, "xed");
             Wf.Created();
         }
 

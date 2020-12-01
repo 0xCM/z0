@@ -29,7 +29,6 @@ namespace Z0
             var control = controller();
             var controlId = control.Id();
             var dbRoot = WfEnv.dbRoot() + FS.folder(controlId.Format());
-            var db = Z0.Db.create(new FileDbPaths(dbRoot));
             var parts = WfShell.parts(control, args);
             var partIdList = parts.Api.PartIdentities;
             var appLogConfig = WfLogs.configure(controlId, dbRoot);
@@ -43,7 +42,7 @@ namespace Z0
             ctx.Paths = _paths;
             ctx.Settings = JsonSettings.Load(_paths.AppConfigPath);
             ctx.Controller = control;
-            var init = new WfInit(db, ctx, appLogConfig, partIdList);
+            var init = new WfInit(dbRoot, ctx, appLogConfig, partIdList);
 
             ci.InitConfigTime = clock.Elapsed;
             clock.Restart();

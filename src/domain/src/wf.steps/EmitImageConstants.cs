@@ -86,7 +86,7 @@ namespace Z0
 
         void Emit(IPart part)
         {
-            var target = Wf.Db().Table(CliConstant.TableId);
+            var target = Wf.Db().IndexTable(CliConstant.TableId);
             Wf.EmittingTable<CliConstant>(target);
 
             var data = Read(part);

@@ -18,9 +18,6 @@ namespace Z0
     /// </summary>
     public class JsonSettings : IJsonSettings
     {
-        public static IJsonSettings Load(FilePath src)
-            => Load(FS.path(src.Name));
-
         public static IJsonSettings Load(FS.FilePath src)
         {
             var dst = new Dictionary<string,string>();
@@ -28,7 +25,7 @@ namespace Z0
             return new JsonSettings(dst.Select(kvp => (kvp.Key, kvp.Value)));
         }
 
-        public static void absorb(FilePath src, Dictionary<string,string> dst)
+        public static void absorb(FS.FilePath src, Dictionary<string,string> dst)
         {
             var settings = new Dictionary<string,string>();
             var ignore = new char[]{Chars.Quote, Chars.Comma};
@@ -46,9 +43,11 @@ namespace Z0
                     }
                 }
             }
+            else
+                term.warn(Msg.FileDoesNotExist.Format(src));
         }
 
-        public static T load<T>(FilePath src)
+        public static T load<T>(FS.FilePath src)
             where T : struct
         {
             var kvp = new Dictionary<string,string>();

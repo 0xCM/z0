@@ -52,7 +52,7 @@ namespace Z0
             parser.InputCount = (uint)src.Length;
             parser.LastPos = parser.InputCount - 1;
 
-            var segment = default(BufferSegment<T>);
+            var segment = default(ClosedInterval<uint>);
             while(parser.Unfinished())
             {
                 ref readonly var cell = ref skip(src, parser.CellPos);
@@ -81,7 +81,7 @@ namespace Z0
                 parser.NextCell();
             }
 
-            dst.SegCount = parser.SegPos + 1;
+            dst.Dispensed = parser.SegPos + 1;
             return ref dst;
         }
     }

@@ -61,7 +61,7 @@ namespace Z0
         where F : unmanaged, Enum
         where R : struct, ITabular
     {
-        public static TableStore<F,R> Log => default;
+        public static TableArchive<F,R> Log => default;
 
         public static Report<F,R> Empty
             => new Report<F,R>();

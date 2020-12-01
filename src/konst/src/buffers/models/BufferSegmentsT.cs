@@ -10,8 +10,6 @@ namespace Z0
     using static Konst;
     using static z;
 
-    using api = BufferSegments;
-
     /// <summary>
     /// Defines a segmented partition over a contiguous buffer
     /// </summary>
@@ -22,14 +20,14 @@ namespace Z0
 
         public Span<ClosedInterval<uint>> Ranges;
 
-        public uint SegCount;
+        public uint Dispensed;
 
         [MethodImpl(Inline)]
         public BufferSegments(Span<T> buffer, uint max)
         {
             Buffer = buffer;
             Ranges = span<ClosedInterval<uint>>(max);
-            SegCount = 0;
+            Dispensed = 0;
         }
 
         [MethodImpl(Inline)]
@@ -37,7 +35,7 @@ namespace Z0
         {
             Buffer = buffer;
             Ranges = ranges;
-            SegCount = 0;
+            Dispensed = 0;
         }
 
         public uint MaxSegCount
@@ -59,6 +57,13 @@ namespace Z0
             => Range(index) = (i0,i1);
 
         public string Format()
-            => api.format(this);
+        {
+            var dst = Buffers.text();
+            dst.Append("<<");
+            for(var i=0u; i<Dispensed; i++)
+                dst.Append(Range(i).Format());
+            dst.Append(">>");
+            return dst.Emit();
+        }
     }
 }

@@ -15,7 +15,7 @@ namespace Z0
     using X = ArchiveFileKinds;
 
     [Free]
-    public interface ITableStore : IFileArchive
+    public interface ITableArchive : IFileArchive
     {
         Option<FilePath> Deposit<F,R>(R[] src, FS.FileName name)
             where F : unmanaged, Enum
@@ -57,7 +57,7 @@ namespace Z0
         Option<FilePath> Save(R[] src, TableRenderSpec format, FilePath dst, FileWriteMode mode = Overwrite);
     }
 
-    public interface ITableStore<F,R> : ITableStore<R>
+    public interface ITableArchive<F,R> : ITableStore<R>
         where F : unmanaged, Enum
         where R : struct
     {

@@ -36,6 +36,17 @@ namespace Z0
             return dst;
         }
 
+        public static string format<T>(ClosedIntervals<T> src)
+            where T : unmanaged
+        {
+            var dst = Buffers.text();
+            dst.Append("<<");
+            for(var i=0u; i<src.SegCount; i++)
+                dst.Append(src.Range(i).Format());
+            dst.Append(">>");
+            return dst.Emit();
+        }
+
         /// <summary>
         /// Computes a sequence of points that partitions an integral range
         /// </summary>

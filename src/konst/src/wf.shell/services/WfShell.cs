@@ -102,14 +102,11 @@ namespace Z0
 
         IWfShell Wf => this;
 
-        public IFileDb Db()
-            => Init.Db;
-
-        public WfExecFlow Running()
-        {
-            Wf.SignalRunning();
-            return Wf.Flow();
-        }
+        // public WfExecFlow Running()
+        // {
+        //     Wf.SignalRunning();
+        //     return Wf.Flow();
+        // }
 
         public WfExecToken Ran(WfExecFlow src)
         {

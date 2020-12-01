@@ -81,11 +81,9 @@ namespace Z0
         public ReadOnlySpan<ManifestResourceHandle> ManifestResourceHandles()
             => CliReader.ManifestResources.ToReadOnlySpan();
 
-
         [MethodImpl(Inline), Op]
         public ManifestResource Read(ManifestResourceHandle src)
             => CliReader.GetManifestResource(src);
-
 
         [MethodImpl(Inline), Op]
         public ref ManifestResource Read(ManifestResourceHandle src, out ManifestResource dst)
@@ -93,8 +91,6 @@ namespace Z0
             dst = Read(src);
             return ref dst;
         }
-
-
 
         [MethodImpl(Inline), Op]
         public Span<CliManifestResourceInfo> Read(ReadOnlySpan<ManifestResourceHandle> src, Span<CliManifestResourceInfo> dst)

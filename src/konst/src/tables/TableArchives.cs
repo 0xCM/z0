@@ -13,13 +13,13 @@ namespace Z0
     using static z;
 
     [ApiHost]
-    public readonly struct TableStores
+    public readonly struct TableArchives
     {
         [MethodImpl(Inline), Op]
-        public ITableStore service(FS.FolderPath root)
-            => new TableStore(root);
+        public ITableArchive service(FS.FolderPath root)
+            => new TableArchive(root);
 
-        public static TableStore<F,R> service<F,R>()
+        public static TableArchive<F,R> service<F,R>()
             where F : unmanaged, Enum
             where R : struct, ITabular
                 => default;

@@ -10,13 +10,18 @@ namespace Z0
     using static Konst;
     using static z;
 
+    /// <summary>
+    /// Supertype for <see cref='PinnedBuffer{T}'/> reifications
+    /// </summary>
+    /// <typeparam name="H">The reifying type</typeparam>
+    /// <typeparam name="T">The buffer cell type</typeparam>
     public abstract class PinnedBuffer<H,T> : PinnedBuffer<T>
         where H : PinnedBuffer<H,T>, new()
     {
         static H Instance;
 
         [FixedAddressValueType]
-        static IndexedSeq<T> Buffer;
+        static MutableSeq<T> Buffer;
 
         static object locker = new object();
 
@@ -30,11 +35,18 @@ namespace Z0
                     Instance = new H();
                     var count = Instance.CellCount;
                     Buffer = alloc<T>(Instance.CellCount);
-                    Instance.Populate(Buffer.Storage);
+                    Instance.Fill(Buffer.Storage);
                     Instance.BufferAddress = address(Buffer);
                 }
                 return Instance;
             }
         }
+
+        public override void Deposit(T[] src)
+            => Buffer.Storage = src;
+
+        public override uint CellCount
+            => Buffer.Count;
+
     }
 }

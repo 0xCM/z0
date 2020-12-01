@@ -18,7 +18,7 @@ namespace Z0
             => PatternText= src;
 
         [MethodImpl(Inline)]
-        public string Apply(in A0 s0, in A1 s1)
+        public string Format(in A0 s0, in A1 s1)
             => text.format(PatternText, s0, s1);
 
         [MethodImpl(Inline)]

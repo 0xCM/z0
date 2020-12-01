@@ -64,7 +64,7 @@ namespace Z0
 
             public static Dictionary<PartId, Dictionary<string,string>> collect(IWfShell wf)
             {
-                var dir = wf.Db().TableDir<SummaryComment>();
+                var dir = wf.Db().TableRoot<SummaryComment>();
                 var src = collect(wf, wf.ApiParts.ManagedSources);
                 var dst = new Dictionary<PartId, Dictionary<string,SummaryComment>>();
                 foreach(var part in src.Keys)

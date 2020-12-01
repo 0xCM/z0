@@ -87,7 +87,7 @@ namespace Z0
         public static void emit(IWfShell wf, PartId[] selection)
         {
             var parts = ApiQuery.enums(wf.Api, selection);
-            var target = wf.Db().Table(EnumLiteralRow.TableId);
+            var target = wf.Db().IndexTable(EnumLiteralRow.TableId);
             var dst = list<EnumLiteralRow>();
             for(var i=0; i<parts.Length; i++)
             {

@@ -5,9 +5,9 @@
 namespace Z0
 {
     [Cmd(Name)]
-    public struct PipeApiHexFilesCmd : ICmdSpec<PipeApiHexFilesCmd>
+    public struct ListApiHexFilesCmd : ICmdSpec<ListApiHexFilesCmd>
     {
-        public const string Name = "pipe-hex";
+        public const string Name = "list-hex";
 
         public Index<PartId> Parts;
     }

@@ -39,14 +39,56 @@ namespace Z0
         FS.FolderPath TableRoot()
             => Root + FS.folder(PN.tables);
 
-        FS.FolderPath SourceRoot()
-            => Root + FS.folder(PN.sources);
+        /// <summary>
+        /// Specifies a table root for an identified subject
+        /// </summary>
+        /// <param name="subject">The subject identifier</param>
+        FS.FolderPath TableRoot(string subject)
+            => TableRoot() + FS.folder(subject);
+
+        /// <summary>
+        /// Specifies a table root for a type-identified subject
+        /// </summary>
+        /// <param name="t">The identifying type</param>
+        FS.FolderPath TableRoot(Type t)
+            => t.Tag<TableAttribute>().MapValueOrElse(a => TableRoot(a.TableId), () => TableRoot(t.Name));
+
+        /// <summary>
+        /// Specifies a table root for a parametrically-identified subject
+        /// </summary>
+        /// <param name="subject">The subject identifier</param>
+        /// <typeparam name="S">The subject type</typeparam>
+        FS.FolderPath TableRoot<T>()
+            where T : struct
+                => TableRoot(typeof(T));
+
+        FS.FilePath Table(string id, PartId part, FS.FileExt? ext = null)
+            => TableRoot(id) + FS.file(string.Format(RP.SlotDot2, id, part.Format()), ext ?? DefaultFileExt);
+
+        FS.FilePath Table(PartId part, string id, FS.FileExt ext)
+            => TableRoot(id) + FS.file(part.Format(), ext);
+
+        FS.FilePath Table(Type t, PartId part)
+            => t.Tag<TableAttribute>().MapValueOrElse(a => Table(part,  a.TableId, DefaultFileExt), () => Table(part, t.Name, DefaultFileExt));
+
+        FS.FilePath Table<T>(PartId part)
+            where T : struct
+                => Table(typeof(T), part);
+
+        FS.FilePath Table<D>(FS.FolderPath root, string id, D subject, FS.FileExt? type = null)
+            => TableRoot()+ FS.folder(id) + FS.file(text.format(PN.QualifiedSubject, id, subject), type ?? X.Csv);
+
+        FS.FilePath Table<S>(string id, S subject, FS.FileExt? ext = null)
+            => Table<S>(Root, id, subject, ext);
+
+        FS.FilePath IndexTable(string id)
+            => TableRoot() + FS.file(id, DefaultFileExt);
+
+        FS.FilePath IndexTable(Type t)
+            => t.Tag<TableAttribute>().MapValueOrElse(a => IndexTable(a.TableId), () => IndexTable(t.Name));
 
         FS.FolderPath DocRoot()
             => Root + FS.folder(PN.docs);
-
-        FS.FolderPath ToolRoot()
-            => Root + FS.folder(PN.tools);
 
         FS.FolderPath Notebooks()
             => Root + FS.folder(PN.notebooks);
@@ -102,46 +144,17 @@ namespace Z0
         FS.FolderPath RefData<S>(S subject)
             => RefDataRoot() + SubjectName(subject);
 
+        FS.FolderPath SourceRoot()
+            => Root + FS.folder(PN.sources);
+
         FS.FolderPath SourceRoot<S>(S subject)
             => SourceRoot() + SubjectName(subject);
 
         FS.FolderPath StageRoot<S>(S subject)
             => StageRoot() + SubjectName(subject);
 
-        FS.FilePath Table(string id)
-            => TableRoot() + FS.file(id, DefaultFileExt);
-
-        FS.FilePath Table<S>(string id, S subject, FS.FileExt? ext = null)
-            => Table<S>(Root, id, subject, ext);
-
-        FS.FilePath Table(string id, PartId part, FS.FileExt? ext = null)
-            => TableRoot() +  FS.folder(id) + FS.file(string.Format(RP.SlotDot2, id, part.Format()), ext ?? DefaultFileExt);
-
-        FS.FilePath Table(PartId part, string id, FS.FileExt ext)
-            => TableRoot() + FS.folder(id) + FS.file(part.Format(), ext);
-
-        FS.FilePath Table<D>(FS.FolderPath root, string id, D subject, FS.FileExt? type = null)
-            => TableRoot()+ FS.folder(id) + FS.file(text.format(PN.QualifiedSubject, id, subject), type ?? X.Csv);
-
-        FS.FilePath Table(Type t)
-            => t.Tag<TableAttribute>().MapValueOrElse(a => Table(a.TableId), () => Table(t.Name));
-
-        FS.FilePath Table(Type t, PartId part)
-            => t.Tag<TableAttribute>().MapValueOrElse(a => Table(part,  a.TableId, DefaultFileExt), () => Table(part, t.Name, DefaultFileExt));
-
-        FS.FilePath Table<T>(PartId part)
-            where T : struct
-                => Table(typeof(T), part);
-
-        FS.FolderPath TableDir(string id)
-            => TableRoot() + FS.folder(id);
-
-        FS.FolderPath TableDir(Type t)
-            => t.Tag<TableAttribute>().MapValueOrElse(a => TableDir(a.TableId), () => TableDir(t.Name));
-
-        FS.FolderPath TableDir<T>()
-            where T : struct
-                => TableDir(typeof(T));
+        FS.FolderPath ToolRoot()
+            => Root + FS.folder(PN.tools);
 
         FS.FolderPath Tools(ToolId id)
             => ToolRoot() + FS.folder(id.Format());

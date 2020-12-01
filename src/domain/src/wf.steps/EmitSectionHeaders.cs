@@ -66,7 +66,7 @@ namespace Z0
             var pCount = Parts.Length;
             var total = 0u;
             var formatter = Formatters.dataset<F>();
-            var dst = Wf.Db().Table(ImageSectionHeader.TableId);
+            var dst = Wf.Db().IndexTable(ImageSectionHeader.TableId);
             using var writer = dst.Writer();
             writer.WriteLine(formatter.HeaderText);
 

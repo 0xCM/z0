@@ -190,14 +190,14 @@ namespace Z0
 
         public void Run(ICmdSpec spec)
         {
-            Wf.Status(Msg.Dispatching().Apply(spec.CmdId));
+            Wf.Status(Msg.Dispatching().Format(spec.CmdId));
             Wf.Router.Dispatch(spec);
         }
 
         public void Run<T>(T spec)
             where T : struct, ICmdSpec<T>
         {
-            Wf.Status(Msg.Dispatching<T>().Apply(spec));
+            Wf.Status(Msg.Dispatching<T>().Format(spec));
             Wf.Router.Dispatch(spec);
         }
 

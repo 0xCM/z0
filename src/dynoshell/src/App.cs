@@ -49,31 +49,24 @@ namespace Z0
             cmd.WaitForExit();
         }
 
+        static void Run32(IWfShell wf)
+        {
+            var llvm = Llvm.service(wf);
+            var paths = llvm.Paths();
+            var cases = paths.Test.ModuleDir(ModuleNames.Analysis, TestSubjects.AliasSet);
+            var cmd = WinCmd.dir(cases);
+            //run(wf, WinCmd.dir(FS.dir(paths.Test.Root)));
+            //run(wf, new CmdLine("llvm-mc --help"));
+
+            run(wf,cmd);
+        }
+
         public static void Main(params string[] args)
         {
             try
             {
                 using var wf = WfShell.create(args).WithRandom(Rng.@default());
-                var llvm = Llvm.service(wf);
-                var paths = llvm.Paths();
-                var cases = paths.Test.ModuleDir(ModuleNames.Analysis, TestSubjects.AliasSet);
-                var cmd = WinCmd.dir(cases);
-                run(wf,cmd);
-                //run(wf, WinCmd.dir(FS.dir(paths.Test.Root)));
-
-                //run(wf, new CmdLine("llvm-mc --help"));
-
-
-                // using var dynoshell = new Dynoshell(wf);
-                // dynoshell.Run();
-
-
-                //var shell = WinCmdShell.create(wf);
-                // var process = adapt(Process.GetCurrentProcess());
-                // var modules = process.Modules.FormatList(Eol);
-                // wf.Row(modules);
-
-                //create().Run(wf);
+                wf.Status(wf.Settings.FormatList());
             }
             catch(Exception e)
             {

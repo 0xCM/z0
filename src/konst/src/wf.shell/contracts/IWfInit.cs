@@ -12,7 +12,7 @@ namespace Z0
     [Free]
     public interface IWfInit
     {
-        IFileDb Db {get;}
+        FS.FolderPath DbRoot {get;}
 
         /// <summary>
         /// The context root

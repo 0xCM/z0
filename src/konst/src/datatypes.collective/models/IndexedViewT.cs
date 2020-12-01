@@ -16,7 +16,6 @@ namespace Z0
     {
         readonly T[] Data;
 
-
         [MethodImpl(Inline)]
         public IndexedView(T[] src)
             => Data = src;

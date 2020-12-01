@@ -20,7 +20,7 @@ namespace Z0
         public WfTermLog(string source)
         {
             Source = source ?? EmptyString;
-            term.print(Msg.SourceLoggerCreated.Apply(Source ?? EmptyString));
+            term.print(Msg.SourceLoggerCreated.Format(Source ?? EmptyString));
         }
 
         [MethodImpl(Inline)]
@@ -33,6 +33,6 @@ namespace Z0
         }
 
         public void Dispose()
-            => term.print(Msg.SourceLoggerDisposed.Apply(Source ?? EmptyString));
+            => term.print(Msg.SourceLoggerDisposed.Format(Source ?? EmptyString));
     }
 }

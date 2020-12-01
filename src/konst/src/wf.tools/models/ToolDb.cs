@@ -45,7 +45,7 @@ namespace Z0
         {
             var help = Help(tool);
             if(help.IsEmpty)
-                Wf.Warn(ToolHelpNotFound.Apply(tool));
+                Wf.Warn(ToolHelpNotFound.Format(tool));
             else
                 Wf.Row(help);
         }

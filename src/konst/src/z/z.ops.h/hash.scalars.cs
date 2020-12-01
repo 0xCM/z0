@@ -131,7 +131,6 @@ namespace Z0
         public static uint hash(string src)
             => (uint)(src?.GetHashCode() ?? int.MaxValue);
 
-
         [MethodImpl(Inline), Op]
         public static unsafe uint hash2(string src)
             => (uint)(pchar2(src ?? EmptyString));

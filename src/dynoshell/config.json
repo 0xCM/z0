@@ -1,6 +1,4 @@
 {
-    "EmitPrimaryArtifacts": "True",
-    "CheckExecution": "True",
-    "EmitImmArtifacts" : "True"
+    "Dispatcher": "domain/image-archives"
 
 }
