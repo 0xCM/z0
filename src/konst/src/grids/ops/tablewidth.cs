@@ -10,9 +10,8 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct GridCells
+    partial struct GridCalcs
     {
-
         /// <summary>
         /// Computes the number of bits covered by a rectangular region and predicated on natural dimensions
         /// </summary>

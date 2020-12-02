@@ -47,11 +47,11 @@ namespace Z0
             => new S.Func<T,T,T,T>(Delegates.func(src.Subject), src.Id);
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static S.Func<T,Bit32> surrogate<T>(S.UnaryPredicate<T> src)
-            => new S.Func<T,Bit32>(Delegates.func(src.Subject), src.Id);
+        public static S.Func<T,bit> surrogate<T>(S.UnaryPredicate<T> src)
+            => new S.Func<T,bit>(Delegates.func(src.Subject), src.Id);
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static S.Func<T,T,Bit32> surrogate<T>(S.BinaryPredicate<T> src)
-            => new S.Func<T,T,Bit32>(Delegates.func(src.Subject), src.Id);
+        public static S.Func<T,T,bit> surrogate<T>(S.BinaryPredicate<T> src)
+            => new S.Func<T,T,bit>(Delegates.func(src.Subject), src.Id);
     }
 }

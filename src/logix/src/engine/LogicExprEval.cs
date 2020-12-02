@@ -13,7 +13,7 @@ namespace Z0.Logix
         static BitLogix bitlogix => BitLogix.Service;
 
         [Op]
-        internal static Bit32 eval(ILogicExpr expr)
+        internal static bit eval(ILogicExpr expr)
         {
             switch(expr)
             {
@@ -36,7 +36,7 @@ namespace Z0.Logix
         /// </summary>
         /// <param name="expr">The expression to evaluate</param>
         [Op]
-        static Bit32 eval(ILogicOpExpr expr)
+        static bit eval(ILogicOpExpr expr)
         {
             switch(expr)
             {

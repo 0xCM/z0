@@ -37,7 +37,49 @@ namespace Z0
         public void vblendp_perm16_g256x32u()
             => vblendp_check(n256, n16, Msb64x64x1, z32);
 
-        static string describe<F,D,T,S>(IMaskSpec<F,D,T> maskspec, S sample, Vector512<T> source, Vector512<T> target)
+        /// <summary>
+        /// Expands a bit-level S-pattern to a vector-level T-pattern
+        /// </summary>
+        /// <param name="w">The vector width selector</param>
+        /// <param name="src">The source pattern</param>
+        /// <param name="enabled">The value to assign to a block when the corresponding index-identified bit is enabled</param>
+        /// <typeparam name="S">The source type</typeparam>
+        /// <typeparam name="T">The target cell type</typeparam>
+        public static Vector128<T> vbroadcast<S,T>(N128 w, S src, T enabled)
+            where S : unmanaged
+            where T : unmanaged
+        {
+            var count = vcount(w, enabled);
+            var buffer = z.vzero<T>(w);
+            ref var dst = ref z.vref(ref buffer);
+            var length = min(count, bitsize<S>());
+            for(var i=0u; i<length; i++)
+                seek(dst, i) = gbits.testbit(src,(byte)i) ? enabled : default;
+            return buffer;
+        }
+
+        /// <summary>
+        /// Expands a bit-level S-pattern to a vector-level T-pattern
+        /// </summary>
+        /// <param name="w">The vector width selector</param>
+        /// <param name="src">The source pattern</param>
+        /// <param name="enabled">The value to assign to a block when the corresponding index-identified bit is enabled</param>
+        /// <typeparam name="S">The source type</typeparam>
+        /// <typeparam name="T">The target cell type</typeparam>
+        public static Vector256<T> vbroadcast<S,T>(W256 w, S src, T enabled)
+            where S : unmanaged
+            where T : unmanaged
+        {
+            var count = vcount(w, enabled);
+            var buffer = z.vzero<T>(w);
+            ref var dst = ref z.vref(ref buffer);
+            var length = min(count, bitsize<S>());
+            for(var i=0u; i<length; i++)
+                seek(dst, i) = gbits.testbit(src,(byte)i) ? enabled : default;
+            return buffer;
+        }
+
+        public static string describe<F,D,T,S>(IMaskSpec<F,D,T> maskspec, S sample, Vector512<T> source, Vector512<T> target)
             where F : unmanaged, ITypeNat
             where D : unmanaged, ITypeNat
             where T : unmanaged
@@ -68,7 +110,7 @@ namespace Z0
             var maskspec = BitMasks.MsbSpec(n2,n1,t);
 
             var source = gvec.vinc(w,t);
-            var blendspec = gvec.vbroadcast(w256, BitMasks.mask(maskspec), z.maxval<ulong>());
+            var blendspec = vbroadcast(w256, BitMasks.mask(maskspec), z.maxval<ulong>());
             var target = gvec.vblendp(source, blendspec);
             var expect = z.vparts(w,0,5,2,7,4,1,6,3);
             Claim.Require(gvec.vsame(expect,target));
@@ -89,7 +131,7 @@ namespace Z0
             var t = z64;
             var maskspec = BitMasks.MsbSpec(n4,n1,t);
             var source = gvec.vinc(w,t);
-            var blendspec = gvec.vbroadcast(n256, BitMasks.mask(maskspec), maxval(t));
+            var blendspec = vbroadcast(n256, BitMasks.mask(maskspec), maxval(t));
             var target = gvec.vblendp(source, blendspec);
             var expect = z.vparts(w,0,1,2,7,4,5,6,3);
             Claim.Require(gvec.vsame(expect,target));
@@ -111,7 +153,7 @@ namespace Z0
             var maskspec = BitMasks.LsbSpec(n2,n1,t);
 
             var source = gvec.vinc(w,t);
-            var blendspec = gvec.vbroadcast(n256, BitMasks.mask(maskspec), maxval(t));
+            var blendspec = vbroadcast(n256, BitMasks.mask(maskspec), maxval(t));
             var target = gvec.vblendp(source, blendspec);
             var expect = z.vparts(w,4,1,6,3,0,5,2,7);
             Claim.Require(gvec.vsame(expect,target));
@@ -133,7 +175,7 @@ namespace Z0
             var maskspec = BitMasks.JsbSpec(n8,n2,t);
 
             var source = gvec.vinc(w,t);
-            var blendspec = gvec.vbroadcast(w256, BitMasks.mask(maskspec), maxval(t));
+            var blendspec = vbroadcast(w256, BitMasks.mask(maskspec), maxval(t));
             var target = gvec.vblendp(source, blendspec);
             var expect = z.vparts(w,4,5,2,3,0,1,6,7);
             Claim.Require(gvec.vsame(expect,target));
@@ -153,12 +195,10 @@ namespace Z0
             var w = n512;
             var t = z32;
             var maskspec = BitMasks.JsbSpec(n8,n2,t);
-
             var source = gvec.vinc(w,t);
-            var blendspec = gvec.vbroadcast(w256, BitMasks.mask(maskspec), maxval(t));
+            var blendspec = vbroadcast(w256, BitMasks.mask(maskspec), maxval(t));
             var target = gvec.vblendp(source, blendspec);
             var expect = z.vparts(w,8,  9,  2,  3,  4,  5, 14, 15,  0,  1, 10, 11, 12, 13,  6,  7);
-
             Claim.Require(gvec.vsame(expect,target));
 
             var descrition = describe(maskspec, BitMasks.mask(maskspec.As(z16)), source,target);
@@ -178,7 +218,7 @@ namespace Z0
             var maskspec = BitMasks.JsbSpec(n8,n2,t);
 
             var source = gvec.vinc(w,t);
-            var blendspec = gvec.vbroadcast(w256, BitMasks.mask(maskspec), maxval(t));
+            var blendspec = vbroadcast(w256, BitMasks.mask(maskspec), maxval(t));
             var target = gvec.vblendp(source, blendspec);
             var expect = z.vparts(w,16, 17,  2,  3,  4,  5, 22, 23, 24, 25, 10, 11, 12, 13, 30, 31,  0,  1, 18, 19, 20, 21,  6,  7,  8,  9, 26, 27, 28, 29, 14, 15);
             Claim.eq(expect,target);
@@ -200,7 +240,7 @@ namespace Z0
             var maskspec = BitMasks.JsbSpec(n8,n2,t);
 
             var source = gvec.vinc(w,t);
-            var blendspec = gvec.vbroadcast(w256, BitMasks.mask(maskspec), maxval(t));
+            var blendspec = vbroadcast(w256, BitMasks.mask(maskspec), maxval(t));
             var target = gvec.vblendp(source, blendspec);
 
             var descrition = describe(maskspec, BitMasks.mask(maskspec.As(z64)), source,target);
@@ -213,16 +253,13 @@ namespace Z0
             var w = n512;
             var t = z8;
             var maskspec = BitMasks.JsbSpec(n8,n2,t);
-            var blendspec = gvec.vbroadcast(w256, BitMasks.mask(maskspec), maxval(t));
-
+            var blendspec = vbroadcast(w256, BitMasks.mask(maskspec), maxval(t));
             var maskbits = BitMasks.mask(maskspec.As(z64));
 
             for(var samples=0; samples< RepCount; samples++)
             {
                 var source = Random.CpuVector(w,t);
                 var target = gvec.vblendp(source,blendspec);
-
-
             }
 
         }

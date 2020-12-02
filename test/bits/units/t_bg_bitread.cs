@@ -53,6 +53,27 @@ namespace Z0
         public void bg_bitwrite_249x128x8_bench()
             => bg_bitwrite_bench<byte>(249,128);
 
+        protected void bm_bitread_bench<T>(SystemCounter counter = default)
+            where T : unmanaged
+        {
+            var last = Bit32.Off;
+            int M = (int)z.bitwidth<T>();
+            int N = (int)z.bitwidth<T>();
+            for(var i = 0; i<CycleCount; i++)
+            {
+                var src = Random.BitMatrix<T>();
+
+                counter.Start();
+                for(var row = 0; row< M; row++)
+                for(var col = 0; col< N; col++)
+                    last = src[row,col];
+                counter.Stop();
+            }
+
+            ReportBenchmark($"gbm_bitread_{ApiIdentify.numeric<T>()}", CycleCount*M*N, counter);
+        }
+
+
         /// <summary>
         /// Verifies correct function of the generic bitgrid read operation
         /// </summary>
@@ -84,5 +105,43 @@ namespace Z0
                 Claim.eq(bsA, bsB);
             }
         }
+
+        void bg_bitread_bench<T>(uint M, uint N, SystemCounter counter = default)
+            where T : unmanaged
+        {
+            var last = Bit32.Off;
+            for(var i = 0; i<CycleCount; i++)
+            {
+                var src = Random.BitGrid<T>(M,N);
+
+                counter.Start();
+                for(var row = 0; row< M; row++)
+                for(var col = 0; col< N; col++)
+                    last = src[row,col];
+                counter.Stop();
+            }
+
+            ReportBenchmark($"gbg_read_{ApiIdentify.numeric<T>()}", CycleCount*M*N, counter);
+        }
+
+        protected void bg_bitwrite_bench<T>(ushort M, ushort N, SystemCounter counter = default)
+            where T : unmanaged
+        {
+            var dst = BitGrid.alloc<T>(M,N);
+            for(var i = 0; i<CycleCount; i++)
+            {
+                var src = Random.BitString(M*N);
+                var pos = 0;
+
+                counter.Start();
+                for(var row = 0; row< M; row++)
+                for(var col = 0; col< N; col++, pos++)
+                    dst[row,col] = src[pos];
+                counter.Stop();
+            }
+
+            ReportBenchmark($"gbg_bitwrite_{ApiIdentify.numeric<T>()}", CycleCount*M*N, counter);
+        }
+
     }
 }

@@ -7,13 +7,13 @@ namespace Z0
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public delegate Bit32 BinaryOp1(Bit32 a, Bit32 b);
+    public delegate bit BinaryOp1(bit a, bit b);
 
     [Free]
-    public delegate Bit32 UnaryOp1(Bit32 a);
+    public delegate bit UnaryOp1(bit a);
 
     [Free]
-    public delegate Bit32 BinaryPredicate<T>(T a, T b);
+    public delegate bit BinaryPredicate<T>(T a, T b);
 
     [Free]
     public delegate bool BinaryPredicate8<T>(T a, T b);

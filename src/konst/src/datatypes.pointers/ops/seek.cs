@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static z;
+    using static memory;
 
     unsafe partial struct Pointers
     {
@@ -59,7 +59,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ref Ptr32 seek(in Ptr32 src, uint count)
         {
-            ref var dst = ref z.edit(src);
+            ref var dst = ref edit(src);
             dst.P += count;
             return ref dst;
         }
@@ -71,7 +71,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ref Ptr64 seek(in Ptr64 src, uint count)
         {
-            ref var dst = ref z.edit(src);
+            ref var dst = ref edit(src);
             dst.P += count;
             return ref dst;
         }

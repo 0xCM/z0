@@ -55,7 +55,7 @@ namespace Z0
             var result = Blocked.and(u, v);
             var expect = and(u.Data, v.Data);
 
-            ClaimNumeric.Eq(expect.Storage, result.Data);
+            ClaimNumeric.eq(expect.Storage, result.Data);
         }
     }
 }

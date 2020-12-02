@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct GridCells
+    partial struct GridCalcs
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static GridSegment<T> segment<T>(ushort rows, ushort cols, ushort width)

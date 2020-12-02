@@ -17,6 +17,8 @@ namespace Z0
         /// </summary>
         public readonly struct Func<R> : IFunc<R>
         {
+            public OpIdentity Id {get;}
+
             internal readonly System.Func<R> F;
 
             [MethodImpl(Inline)]
@@ -25,8 +27,6 @@ namespace Z0
                 F = f;
                 Id = id;
             }
-
-            public OpIdentity Id {get;}
 
             [MethodImpl(Inline)]
             public R Invoke() => F();

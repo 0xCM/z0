@@ -23,33 +23,6 @@ namespace Z0
         public Ptr32(uint* src)
             => P = src;
 
-        [MethodImpl(Inline)]
-        public static uint operator !(Ptr32 x)
-            => *x.P;
-
-        [MethodImpl(Inline)]
-        public static Ptr32 operator ++(Ptr32 x)
-            => api.next(x);
-
-        [MethodImpl(Inline)]
-        public static Ptr32 operator --(Ptr32 x)
-            => api.prior(x);
-
-        [MethodImpl(Inline)]
-        public static implicit operator Ptr<uint>(Ptr32 src)
-            => new Ptr<uint>(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator MemoryAddress(Ptr32 src)
-            => src.Address;
-
-        [MethodImpl(Inline)]
-        public static implicit operator Ptr32(uint* src)
-            => new Ptr32(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator uint*(Ptr32 src)
-            => src.P;
 
         public readonly MemoryAddress Address
         {
@@ -77,5 +50,45 @@ namespace Z0
 
         public override string ToString()
             => Format();
+
+        [MethodImpl(Inline)]
+        public static uint operator !(Ptr32 x)
+            => *x.P;
+
+        [MethodImpl(Inline)]
+        public static Ptr32 operator ++(Ptr32 x)
+            => api.next(x);
+
+        [MethodImpl(Inline)]
+        public static Ptr32 operator --(Ptr32 x)
+            => api.prior(x);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Ptr<uint>(Ptr32 src)
+            => new Ptr<uint>(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator MemoryAddress(Ptr32 src)
+            => src.Address;
+
+        [MethodImpl(Inline)]
+        public static explicit operator Ptr8(Ptr32 src)
+            => new Ptr8((byte*)src.P);
+
+        [MethodImpl(Inline)]
+        public static explicit operator Ptr16(Ptr32 src)
+            => new Ptr16((ushort*)src.P);
+
+        [MethodImpl(Inline)]
+        public static explicit operator Ptr64(Ptr32 src)
+            => new Ptr64((ulong*)src.P);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Ptr32(uint* src)
+            => new Ptr32(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator uint*(Ptr32 src)
+            => src.P;
     }
 }

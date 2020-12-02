@@ -37,7 +37,7 @@ namespace Z0
                 => new CheckTernaryOpSF<T>(context,xzero);
 
         [MethodImpl(Inline)]
-        public static ICheckSF<T,T,Bit32> BinaryPredicateMatch<T>(this ITestContext context, T t = default)
+        public static ICheckSF<T,T,bit> BinaryPredicateMatch<T>(this ITestContext context, T t = default)
             where T : unmanaged
                 => new CheckBinaryPredSF<T>(context);
 
@@ -47,7 +47,7 @@ namespace Z0
                 => new CheckBinaryPredSF8<T>(context);
 
         [MethodImpl(Inline)]
-        public static ICheckSF<T,T,T,Bit32> TernaryPredicateComparer<T>(this ITestContext context, T t = default)
+        public static ICheckSF<T,T,T,bit> TernaryPredicateComparer<T>(this ITestContext context, T t = default)
             where T : unmanaged
                 => new CheckTernaryPredSF<T>(context);
     }

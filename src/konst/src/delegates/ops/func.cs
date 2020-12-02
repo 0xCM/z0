@@ -9,6 +9,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static SFx;
 
     partial class Delegates
     {
@@ -35,16 +36,16 @@ namespace Z0
                 => new System.Func<T>(f);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static System.Func<T,T,Bit32> func<T>(BinaryPredicate<T> f)
-            => new System.Func<T,T,Bit32>(f);
+        public static System.Func<T,T,bit> func<T>(BinaryPredicate<T> f)
+            => new System.Func<T,T,bit>(f);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static System.Func<T,T,bool> func<T>(BinaryPredicate8<T> f)
             => new System.Func<T,T,bool>(f);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static System.Func<T,Bit32> func<T>(UnaryPredicate<T> f)
-            => new System.Func<T,Bit32>(f);
+        public static System.Func<T,bit> func<T>(UnaryPredicate<T> f)
+            => new System.Func<T,bit>(f);
 
         /// <summary>
         /// Creates a function delegate of generic arity 1 from a static method

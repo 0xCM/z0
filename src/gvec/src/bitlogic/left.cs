@@ -5,14 +5,13 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    
-    using static Konst; 
-    
+
+    using static Konst;
+
     partial class gvec
     {
-
         [MethodImpl(Inline), LProject, Closures(Integers)]
         public static Vector128<T> vleft<T>(Vector128<T> a, Vector128<T> b)
             where T : unmanaged

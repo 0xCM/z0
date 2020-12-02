@@ -36,7 +36,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void setbit<T>(int width, int row, int col, Bit32 state, ref T dst)
             where T : unmanaged
-                => setbit(GridCells.linear(width,row,col), state, ref dst);
+                => setbit(GridCalcs.linear(width,row,col), state, ref dst);
 
         /// <summary>
         /// Sets the state of an a coordinate-identified bit
@@ -51,6 +51,6 @@ namespace Z0
         public static void setbit<N,T>(N width, int row, int col, Bit32 state, ref T dst)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => setbit(GridCells.linear(nat32i(width),row,col), state, ref dst);
+                => setbit(GridCalcs.linear(nat32i(width),row,col), state, ref dst);
     }
 }

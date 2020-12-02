@@ -15,45 +15,14 @@ namespace Z0
 
     public class t_vperm : t_permute<t_vperm>
     {
-        /// <summary>
-        /// Asserts content equality for two natural spans of coincident length
-        /// </summary>
-        /// <param name="lhs">The left span</param>
-        /// <param name="rhs">The right span</param>
-        /// <param name="caller">The invoking function</param>
-        /// <param name="file">The file in which the invoking function is defined </param>
-        /// <param name="line">The file line number of invocation</param>
-        /// <typeparam name="N">The length type</typeparam>
-        /// <typeparam name="T">The element type</typeparam>
-        public void numeq<N,T>(NatSpan<N,T> lhs, NatSpan<N,T> rhs)
-            where T : unmanaged
-            where N : unmanaged, ITypeNat
-                => CheckNumeric.eq(lhs.Edit,rhs.Edit);
-
-        /// <summary>
-        /// Asserts content equality for two tabular spans of coincident dimension
-        /// </summary>
-        /// <param name="lhs">The left span</param>
-        /// <param name="rhs">The right span</param>
-        /// <param name="caller">The invoking function</param>
-        /// <param name="file">The file in which the invoking function is defined </param>
-        /// <param name="line">The file line number of invocation</param>
-        /// <typeparam name="M">The row dimension type</typeparam>
-        /// <typeparam name="N">The column dimension type</typeparam>
-        /// <typeparam name="T">The element type</typeparam>
-        public void numeq<M,N,T>(TableSpan<M,N,T> lhs, TableSpan<M,N,T> rhs)
-            where N : unmanaged, ITypeNat
-            where M : unmanaged, ITypeNat
-            where T : unmanaged
-                => CheckNumeric.eq(lhs.Data, rhs.Data);
 
         public void perm_symbols()
         {
-            Claim.ClaimEq($"{Perm4L.ABDC}", Perm4L.ABDC.Format());
-            Claim.ClaimEq($"{Perm4L.DCBA}", Perm4L.DCBA.Format());
-            Claim.ClaimEq($"ABCDEFGH", PermLits.Perm8Identity.Format());
-            Claim.ClaimEq($"HGFEDCBA", PermLits.Perm8Reversed.Format());
-            Claim.ClaimEq($"0123456789ABCDEF", PermLits.Perm16Identity.Format());
+            Claim.eq($"{Perm4L.ABDC}", Perm4L.ABDC.Format());
+            Claim.eq($"{Perm4L.DCBA}", Perm4L.DCBA.Format());
+            Claim.eq($"ABCDEFGH", PermLits.Perm8Identity.Format());
+            Claim.eq($"HGFEDCBA", PermLits.Perm8Reversed.Format());
+            Claim.eq($"0123456789ABCDEF", PermLits.Perm16Identity.Format());
         }
 
         public void perm4_digits()

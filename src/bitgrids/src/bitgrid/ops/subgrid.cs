@@ -114,7 +114,6 @@ namespace Z0
             where T : unmanaged
                 => new SubGrid64<M, N, T>(Cast.to<T,ulong>(data));
 
-
         /// <summary>
         /// Allocates a 0-filled 128-bit subgrid
         /// </summary>

@@ -8,49 +8,49 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Validity;
+    using static CallingMember;
     using static z;
 
     [ApiType]
-    public class t_bb_create : t_bitspans<t_bb_create>
+    public class t_gbb_create : t_bitspans<t_gbb_create>
     {
         CallingMember Caller;
 
         public void bb_create_124x8()
-            => check_bitblock_create<byte>(124, caller(ref Caller));
+            => check_bitblock_create<byte>(124, define(ref Caller));
 
         public void bb_create_128x8()
-            => check_bitblock_create<byte>(128, caller(ref Caller));
+            => check_bitblock_create<byte>(128, define(ref Caller));
 
         public void bb_create_13x16()
-            => check_bitblock_create<ushort>(13, caller(ref Caller));
+            => check_bitblock_create<ushort>(13, define(ref Caller));
 
         public void bb_create_125x16()
-            => check_bitblock_create<ushort>(125, caller(ref Caller));
+            => check_bitblock_create<ushort>(125, define(ref Caller));
 
         public void bb_create_128x16()
-            => check_bitblock_create<ushort>(128, caller(ref Caller));
+            => check_bitblock_create<ushort>(128, define(ref Caller));
 
         public void bb_create_13x32()
-            => check_bitblock_create<uint>(13, caller(ref Caller));
+            => check_bitblock_create<uint>(13, define(ref Caller));
 
         public void bb_create_64x32()
-            => check_bitblock_create<uint>(64, caller(ref Caller));
+            => check_bitblock_create<uint>(64, define(ref Caller));
 
         public void bb_create_125x32()
-            => check_bitblock_create<uint>(125, caller(ref Caller));
+            => check_bitblock_create<uint>(125, define(ref Caller));
 
         public void bb_create_128x32()
-            => check_bitblock_create<uint>(128, caller(ref Caller));
+            => check_bitblock_create<uint>(128, define(ref Caller));
 
         public void bb_create_63x64()
-            => check_bitblock_create<ulong>(63, caller(ref Caller));
+            => check_bitblock_create<ulong>(63, define(ref Caller));
 
         public void bb_create_127x64()
-            => check_bitblock_create<ulong>(127, caller(ref Caller));
+            => check_bitblock_create<ulong>(127, define(ref Caller));
 
         public void bb_create_128x64()
-            => check_bitblock_create<ulong>(128, caller(ref Caller));
+            => check_bitblock_create<ulong>(128, define(ref Caller));
 
         public void bb_create_n63x64u()
             => check_bitblock_range<N63,ulong>();
@@ -65,7 +65,7 @@ namespace Z0
         protected void check_bitblock_create<T>(int bitcount, in CallingMember caller)
             where T : unmanaged
         {
-            var kCells = (int)GridCells.mincells<T>((ulong)bitcount);
+            var kCells = (int)GridCalcs.mincells<T>((ulong)bitcount);
 
             if(DiagnosticMode)
                 term.print($"Executing {caller.Name}: {bitcount} bits covered by {kCells} cells of kind {typeof(T).DisplayName()}");
@@ -93,7 +93,7 @@ namespace Z0
         {
             int n = (int)nat64u<N>();
             var rep = default(N);
-            var segcount = (int)GridCells.mincells<T>(nat64u<N>());
+            var segcount = (int)GridCalcs.mincells<T>(nat64u<N>());
             Claim.eq(BitBlock<N,T>.RequiredCells, segcount);
             var totalcap = BitBlock<N,T>.RequiredWidth;
             var segcap = bitwidth<T>();
@@ -113,5 +113,24 @@ namespace Z0
                     Claim.eq(gbits.testbit32(x,j), bc[j]);
             }
         }
+
+
+        /// <summary>
+        /// Asserts logical bitvector/bitstring equality
+        /// </summary>
+        /// <param name="bv">The bitvector to compare</param>
+        /// <param name="bs">The bitstring to compare</param>
+        /// <typeparam name="N">The vector length type</typeparam>
+        /// <typeparam name="S">The vector cell type</typeparam>
+        protected void ClaimEqual<N,S>(BitBlock<N,S> bv, BitString bs)
+            where N : unmanaged, ITypeNat
+            where S : unmanaged
+        {
+            var n = (int)(new N().NatValue);
+            Claim.eq(bs.Length, n);
+            for(var i=0; i<n; i++)
+                Claim.eq(bv[i], bs[i]);
+        }
+
     }
 }

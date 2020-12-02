@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="cols">The number of columns in the grid</param>
         /// <param name="segwidth">The width of a grid cell</param>
         [MethodImpl(Inline), Op]
-        public static GridMetrics metrics(ushort rows, ushort cols, ushort segwidth)    
-             => GridCells.metrics(GridCells.grid(rows, cols, segwidth));
+        public static GridMetrics metrics(ushort rows, ushort cols, ushort segwidth)
+             => GridCalcs.metrics(GridCalcs.grid(rows, cols, segwidth));
     }
 }

@@ -98,7 +98,7 @@ namespace Z0
         public uint BytCount
         {
             [MethodImpl(Inline)]
-            get => (uint)GridCells.tablesize<M,N>();
+            get => (uint)GridCalcs.tablesize<M,N>();
         }
 
         /// <summary>

@@ -14,7 +14,7 @@ namespace Z0
         /// <summary>
         /// The the total number of segment-aligned bits allocated for storage
         /// </summary>
-        public readonly uint Bits;
+        public readonly uint BitCount;
 
         /// <summary>
         /// The the total number of segments allocated for storage
@@ -24,7 +24,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public GridStorage(uint bits, uint segments)
         {
-            Bits = bits;
+            BitCount = bits;
             Segments = segments;
         }
 
@@ -34,15 +34,15 @@ namespace Z0
         public uint Bytes
         {
             [MethodImpl(Inline)]
-            get => Bits/8;
+            get => BitCount/8;
         }
 
         [MethodImpl(Inline)]
         public bool Equals(GridStorage src)
-            => src.Bits == Bits && src.Segments == Segments;
+            => src.BitCount == BitCount && src.Segments == Segments;
 
         [MethodImpl(Inline)]
         public override int GetHashCode()
-            => HashCode.Combine(Bits,Segments);
+            => HashCode.Combine(BitCount,Segments);
     }
 }

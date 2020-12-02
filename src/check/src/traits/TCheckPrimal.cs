@@ -19,6 +19,9 @@ namespace Z0
 
     public interface TCheckPrimal : TValidator
     {
+        bool eq(bit lhs, bit rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => api.eq(lhs, rhs, caller, file, line);
+
         bool eq(char lhs, char rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => api.eq(lhs, rhs, caller, file, line);
 

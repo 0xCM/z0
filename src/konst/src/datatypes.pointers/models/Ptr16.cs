@@ -23,6 +23,25 @@ namespace Z0
         public Ptr16(ushort* src)
             => P = src;
 
+
+        public readonly MemoryAddress Address
+        {
+            [MethodImpl(Inline)]
+            get => api.address(P);
+        }
+
+        [MethodImpl(Inline)]
+        public bool Equals(Ptr16 src)
+            => P == src.P;
+
+
+        [MethodImpl(Inline)]
+        public string Format()
+            => api.format<ushort>(this);
+
+        public override string ToString()
+            => Format();
+
         [MethodImpl(Inline)]
         public static ushort operator !(Ptr16 x)
             => *x.P;
@@ -44,29 +63,23 @@ namespace Z0
             => src.Address;
 
         [MethodImpl(Inline)]
+        public static explicit operator Ptr8(Ptr16 src)
+            => new Ptr8((byte*)src.P);
+
+        [MethodImpl(Inline)]
+        public static explicit operator Ptr32(Ptr16 src)
+            => new Ptr32((uint*)src.P);
+
+        [MethodImpl(Inline)]
+        public static explicit operator Ptr64(Ptr16 src)
+            => new Ptr64((ulong*)src.P);
+
+        [MethodImpl(Inline)]
         public static implicit operator Ptr16(ushort* src)
             => new Ptr16(src);
 
         [MethodImpl(Inline)]
         public static implicit operator ushort*(Ptr16 src)
             => src.P;
-
-        public readonly MemoryAddress Address
-        {
-            [MethodImpl(Inline)]
-            get => api.address(P);
-        }
-
-        [MethodImpl(Inline)]
-        public bool Equals(Ptr16 src)
-            => P == src.P;
-
-
-        [MethodImpl(Inline)]
-        public string Format()
-            => api.format<ushort>(this);
-
-        public override string ToString()
-            => Format();
     }
 }

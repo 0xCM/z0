@@ -10,7 +10,6 @@ namespace Z0
 
     using static Konst;
     using static z;
-    using static Validity;
 
     using S = Surrogates;
 
@@ -40,7 +39,7 @@ namespace Z0
             where  T : unmanaged
         {
             if(DiagnosticMode)
-                term.print(text.concat("Executing", Space, caller(), $"[{typeof(T).DisplayName()}]"));
+                term.print(text.concat("Executing", Space, CallingMember.define(), $"[{typeof(T).DisplayName()}]"));
 
             var g = MSvc.add(t);
             var validator = this.BinaryOpMatch(t);
@@ -48,7 +47,7 @@ namespace Z0
             validator.CheckSpanMatch(f,g);
 
             if(DiagnosticMode)
-                term.print(text.concat("Execututed", Space, caller(), $"[{typeof(T).DisplayName()}]"));
+                term.print(text.concat("Execututed", Space, CallingMember.define(), $"[{typeof(T).DisplayName()}]"));
         }
 
         public void sub_check()

@@ -54,7 +54,7 @@ namespace Z0
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static BinaryOp<T> binary<T>(D.BinaryOp<T> f, string name, T t = default)
-            => new BinaryOp<T>(f,name);
+            => new BinaryOp<T>(f, name);
 
         /// <summary>
         /// Defines a delegate-predicated structural operator

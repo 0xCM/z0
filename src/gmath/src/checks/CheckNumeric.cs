@@ -82,5 +82,38 @@ namespace Z0
         public static void eq<T>(Span<T> lhs, Span<T> rhs)
             where T : unmanaged
                 => iter(lhs,rhs, (a,b) => eq(a,b));
+
+        /// <summary>
+        /// Asserts content equality for two natural spans of coincident length
+        /// </summary>
+        /// <param name="a">The left span</param>
+        /// <param name="b">The right span</param>
+        /// <param name="caller">The invoking function</param>
+        /// <param name="file">The file in which the invoking function is defined </param>
+        /// <param name="line">The file line number of invocation</param>
+        /// <typeparam name="N">The length type</typeparam>
+        /// <typeparam name="T">The element type</typeparam>
+        public static void eq<N,T>(NatSpan<N,T> a, NatSpan<N,T> b)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+                => eq(a.Edit,b.Edit);
+
+        /// <summary>
+        /// Asserts content equality for two tabular spans of coincident dimension
+        /// </summary>
+        /// <param name="a">The left span</param>
+        /// <param name="b">The right span</param>
+        /// <param name="caller">The invoking function</param>
+        /// <param name="file">The file in which the invoking function is defined </param>
+        /// <param name="line">The file line number of invocation</param>
+        /// <typeparam name="M">The row dimension type</typeparam>
+        /// <typeparam name="N">The column dimension type</typeparam>
+        /// <typeparam name="T">The element type</typeparam>
+        public static void eq<M,N,T>(TableSpan<M,N,T> a, TableSpan<M,N,T> b)
+            where N : unmanaged, ITypeNat
+            where M : unmanaged, ITypeNat
+            where T : unmanaged
+                => eq(a.Data, b.Data);
+
     }
 }

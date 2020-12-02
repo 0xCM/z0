@@ -26,22 +26,6 @@ namespace Z0
         public readonly int Target;
 
         [MethodImpl(Inline)]
-        public static implicit operator PermTerm((int src, int dst) x)
-            => new PermTerm(x.src, x.dst);
-
-        [MethodImpl(Inline)]
-        public static implicit operator (int src, int dst)(PermTerm x)
-            => (x.Source, x.Target);
-
-        [MethodImpl(Inline)]
-        public static bool operator ==(PermTerm lhs, PermTerm rhs)
-            => lhs.Equals(rhs);
-
-        [MethodImpl(Inline)]
-        public static bool operator !=(PermTerm lhs, PermTerm rhs)
-            => !lhs.Equals(rhs);
-
-        [MethodImpl(Inline)]
         public PermTerm(int src, int dst)
         {
             Source = src;
@@ -77,5 +61,21 @@ namespace Z0
 
         public override string ToString()
             => Format();
+
+        [MethodImpl(Inline)]
+        public static implicit operator PermTerm((int src, int dst) x)
+            => new PermTerm(x.src, x.dst);
+
+        [MethodImpl(Inline)]
+        public static implicit operator (int src, int dst)(PermTerm x)
+            => (x.Source, x.Target);
+
+        [MethodImpl(Inline)]
+        public static bool operator ==(PermTerm lhs, PermTerm rhs)
+            => lhs.Equals(rhs);
+
+        [MethodImpl(Inline)]
+        public static bool operator !=(PermTerm lhs, PermTerm rhs)
+            => !lhs.Equals(rhs);
     }
 }

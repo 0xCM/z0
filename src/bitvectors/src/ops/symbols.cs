@@ -7,12 +7,12 @@ namespace Z0
     using System;
     using System.Linq;
 
-    using static Konst;    
+    using static Konst;
 
     partial class BitVector
     {
         /// <summary>
-        /// Assumes that 
+        /// Assumes that
         /// 1. The source vector is a symbol tape upon which fixed-width symbols are sequentially recorded
         /// 2. The symbol alphabet is defined by the last character of the literals defined by an enumeration
         /// With these preconditions, the operation returns the ordered sequence of symbols written to the tape
@@ -28,7 +28,7 @@ namespace Z0
         {
             var index = Enums.dictionary<E,T>();
             var bitcount = maxbits ?? BitSize.measure<T>();
-            var count = GridCells.mincells((ulong)segwidth, (ulong)bitcount);
+            var count = GridCalcs.mincells((ulong)segwidth, (ulong)bitcount);
             Span<char> symbols = new char[count];
             for(int i=0, bitpos = 0; i<count; i++, bitpos += segwidth)
             {

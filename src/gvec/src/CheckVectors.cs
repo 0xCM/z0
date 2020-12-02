@@ -23,11 +23,6 @@ namespace Z0
     {
         public const NumericKind Closure = UnsignedInts;
 
-        // [MethodImpl(Inline), Op, Closures(Closure)]
-        // public static ClaimResult<Vector128<T>,Vector128<T>> veq<T>(Vector128<T> lhs, Vector128<T> rhs)
-        //     where T : unmanaged
-        //         => R.define("veq", ClaimKind.Eq, lhs.Equals(rhs), EmptyString, lhs, rhs);
-
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ClaimResult veq<T>(Vector128<T> a, Vector128<T> b, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged

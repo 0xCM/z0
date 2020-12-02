@@ -23,40 +23,6 @@ namespace Z0
         public static int Width
             => (int)bitwidth<T>();
 
-        /// <summary>
-        /// Computes the bitwise AND between the operands
-        /// </summary>
-        /// <param name="A">The left matrix</param>
-        /// <param name="B">The right matrix</param>
-        [MethodImpl(Inline)]
-        public static RowBits<T> operator &(in RowBits<T> A, in RowBits<T> B)
-            => RowBits.and(A, B);
-
-        /// <summary>
-        /// Computes the bitwise OR between the operands
-        /// </summary>
-        /// <param name="A">The left matrix</param>
-        /// <param name="B">The right matrix</param>
-        [MethodImpl(Inline)]
-        public static RowBits<T> operator |(in RowBits<T> A, in RowBits<T> B)
-            => RowBits.or(A, B);
-
-        /// <summary>
-        /// Computes the bitwise XOR between the operands
-        /// </summary>
-        /// <param name="A">The left matrix</param>
-        /// <param name="B">The right matrix</param>
-        [MethodImpl(Inline)]
-        public static RowBits<T> operator ^(in RowBits<T> A, in RowBits<T> B)
-            => RowBits.xor(A, B);
-
-        /// <summary>
-        /// Computes the bitwise complement of the source matrix
-        /// </summary>
-        /// <param name="src">The source matrix</param>
-        [MethodImpl(Inline)]
-        public static RowBits<T> operator ~(in RowBits<T> src)
-            => RowBits.not(src);
 
         [MethodImpl(Inline)]
         internal RowBits(Span<T> rows)
@@ -118,5 +84,40 @@ namespace Z0
         public RowBits<S> As<S>()
             where S : unmanaged
                 => new RowBits<S>(data.Cast<T,S>());
+
+        /// <summary>
+        /// Computes the bitwise AND between the operands
+        /// </summary>
+        /// <param name="A">The left matrix</param>
+        /// <param name="B">The right matrix</param>
+        [MethodImpl(Inline)]
+        public static RowBits<T> operator &(in RowBits<T> A, in RowBits<T> B)
+            => RowBits.and(A, B);
+
+        /// <summary>
+        /// Computes the bitwise OR between the operands
+        /// </summary>
+        /// <param name="A">The left matrix</param>
+        /// <param name="B">The right matrix</param>
+        [MethodImpl(Inline)]
+        public static RowBits<T> operator |(in RowBits<T> A, in RowBits<T> B)
+            => RowBits.or(A, B);
+
+        /// <summary>
+        /// Computes the bitwise XOR between the operands
+        /// </summary>
+        /// <param name="A">The left matrix</param>
+        /// <param name="B">The right matrix</param>
+        [MethodImpl(Inline)]
+        public static RowBits<T> operator ^(in RowBits<T> A, in RowBits<T> B)
+            => RowBits.xor(A, B);
+
+        /// <summary>
+        /// Computes the bitwise complement of the source matrix
+        /// </summary>
+        /// <param name="src">The source matrix</param>
+        [MethodImpl(Inline)]
+        public static RowBits<T> operator ~(in RowBits<T> src)
+            => RowBits.not(src);
     }
 }

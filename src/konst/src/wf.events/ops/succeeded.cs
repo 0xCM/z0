@@ -18,8 +18,8 @@ namespace Z0
         /// <param name="ct">The correlation token</param>
         /// <param name="flair">The flair</param>
         [MethodImpl(Inline), Op, Closures(UInt64k)]
-        public static CmdSucceeded succeeded(CmdSpec spec, CorrelationToken ct)
-            => new CmdSucceeded(spec, ct);
+        public static CmdSucceededEvent succeeded(CmdSpec spec, CorrelationToken ct)
+            => new CmdSucceededEvent(spec, ct);
 
         /// <summary>
         /// Defines a <see cref='CmdSucceeded{T}'/> event

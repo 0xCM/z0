@@ -13,6 +13,6 @@ namespace Z0
     [ApiHost(ApiNames.Pointers, true)]
     public unsafe readonly partial struct Pointers
     {
-
+        const NumericKind Closure = UnsignedInts;
     }
 }

@@ -7,7 +7,6 @@ namespace Z0
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-
     partial struct SFx
     {
         [Free, SFx]

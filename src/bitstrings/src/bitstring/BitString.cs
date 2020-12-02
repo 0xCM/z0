@@ -242,7 +242,7 @@ namespace Z0
         {
             var count = 0;
             for(var i=0; i<data.Length; i++)
-                if(data[i] == 1)
+                if(data[i] != 0)
                     count++;
             return count;
         }

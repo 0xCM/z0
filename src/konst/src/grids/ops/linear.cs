@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct GridCells
+    partial struct GridCalcs
     {
         /// <summary>
         /// Computes the 0-based linear index determined by column width and a row/col coordinate
@@ -21,6 +21,15 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static int linear(int colwidth, int row, int col)
             => row*colwidth + col;
+
+        /// <summary>
+        /// Computes the 0-based linear index determined by a row/col coordinate
+        /// </summary>
+        /// <param name="row">The 0-based row index</param>
+        /// <param name="col">The 0-based col index</param>
+        [MethodImpl(Inline), Op]
+        public static int linear(in GridMetrics src, int row, int col)
+            => linear(src.ColCount, row, col);
 
         /// <summary>
         /// Computes the 0-based linear index determined by a row/col coordinate and natural column width

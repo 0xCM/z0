@@ -80,11 +80,11 @@ namespace Z0
             var block0 = x.Block(0);
             Claim.eq(4, block0.Length);
             var y = SpanBlocks.safeload(w128, array(1,2,3,4));
-            Claim.Eq(block0, y);
+            Claim.eq(block0, y);
 
             var block2 = x.Block(1);
             Claim.eq(4, block2.Length);
-            Claim.Eq(block2, SpanBlocks.parts(w128,5,6,7,8));
+            Claim.eq(block2, SpanBlocks.parts(w128,5,6,7,8));
 
         }
 

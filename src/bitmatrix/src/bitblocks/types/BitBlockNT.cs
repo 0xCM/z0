@@ -131,7 +131,7 @@ namespace Z0
         public int Pop()
         {
             var count = 0u;
-            for(var i=0; i < data.Length; i++)
+            for(var i=0; i<data.Length; i++)
                 count += gbits.pop(Data[i]);
             return (int)count;
         }

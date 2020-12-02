@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Linq;
 
     using static Konst;
 
@@ -15,15 +14,15 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static RangeModel<StringRef,byte> seg(string id, byte min, byte max)
-            => content(StringRefs.@string(id), min, max);
+            => content(MemRefs.@string(id), min, max);
 
         [MethodImpl(Inline), Op]
         public static RangeModel<StringRef,uint> seg(string id, uint min, uint max)
-            => content(StringRefs.@string(id), min, max);
+            => content(MemRefs.@string(id), min, max);
 
         [MethodImpl(Inline), Op]
         public static RangeModel<StringRef,ulong> seg(string id, ulong min, ulong max)
-            => content(StringRefs.@string(id), min, max);
+            => content(MemRefs.@string(id), min, max);
 
         [MethodImpl(Inline), Op]
         public static RangeModel<char,uint> seg(char id, uint min, uint max)
@@ -41,11 +40,9 @@ namespace Z0
         public static RangeModel<byte,byte> seg(byte id, byte min, byte max)
             => content(id,min,max);
 
-
         [MethodImpl(Inline), Op]
         public static RangeModel<char,byte> seg(char id, byte min, byte max)
             => content(id,min,max);
-
 
         [MethodImpl(Inline)]
         public static RangeModel<T,W> content<T,W>(T id, W min, W max)

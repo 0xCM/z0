@@ -15,10 +15,6 @@ namespace Z0
         public Ptr P;
 
         [MethodImpl(Inline)]
-        public static implicit operator IntPtr(FPtr<D> src)
-            => src.P;
-
-        [MethodImpl(Inline)]
         public unsafe FPtr(void* src)
             => P = src;
 
@@ -27,5 +23,9 @@ namespace Z0
             [MethodImpl(Inline)]
             get => P.Address;
         }
+
+        [MethodImpl(Inline)]
+        public static implicit operator IntPtr(FPtr<D> src)
+            => src.P;
     }
 }

@@ -9,8 +9,8 @@ namespace Z0
 
     using static Konst;
     using static z;
-    
-    partial struct GridCells
+
+    partial struct GridCalcs
     {
         /// <summary>
         /// Computes the minimum number of T-cells required to store N bits
@@ -23,6 +23,6 @@ namespace Z0
         public static int minimum<N,T>(N n = default, T t = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => NatCalc.lteqT(n,t) ? 1 : (int)NatCalc.divceilT(n,t); 
+                => NatCalc.lteqT(n,t) ? 1 : (int)NatCalc.divceilT(n,t);
     }
 }

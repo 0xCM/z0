@@ -27,7 +27,7 @@ namespace Z0.Logix
             foreach(var c in bitcombo(t.Vars.Length))
             {
                 t.SetVars(c);
-                Claim.eq(Z0.Bit32.On, LogicEngine.eval(t));
+                Claim.eq(bit.On, LogicEngine.eval(t));
                 Claim.Require(LogicEngine.satisfied(t, c[0], c[1]));
 
             }

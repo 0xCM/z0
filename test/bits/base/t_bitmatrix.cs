@@ -41,7 +41,7 @@ namespace Z0
                 var C2 = xor(A.Content, B.Content);
                 ClaimNumeric.eq((ulong)A.Order, nat64u<N>());
                 ClaimNumeric.eq((ulong)B.Order, nat64u<N>());
-                ClaimNumeric.Eq(C1,C2);
+                ClaimNumeric.eq(C1,C2);
             }
         }
 

@@ -74,6 +74,18 @@ namespace Z0
             => new Ptr64(src.ToPointer<ulong>());
 
         [MethodImpl(Inline)]
+        public static explicit operator Ptr8(Ptr64 src)
+            => new Ptr8((byte*)src.P);
+
+        [MethodImpl(Inline)]
+        public static explicit operator Ptr16(Ptr64 src)
+            => new Ptr16((ushort*)src.P);
+
+        [MethodImpl(Inline)]
+        public static explicit operator Ptr32(Ptr64 src)
+            => new Ptr32((uint*)src.P);
+
+        [MethodImpl(Inline)]
         public static implicit operator Ptr64(ulong* src)
             => new Ptr64(src);
 

@@ -12,6 +12,11 @@ namespace Z0
 
     public class t_bm_and : t_bitmatrix<t_bm_and>
     {
+        [MethodImpl(Inline), And, Closures(Integers)]
+        public static Span<T> and<T>(Span<T> a, Span<T> b)
+            where T : unmanaged
+                => SFx.apply(MSvc.and<T>(), a, b);
+
         public void bm_and_n64x64x64()
             => bm_and_check<N64,ulong>();
 
@@ -75,7 +80,7 @@ namespace Z0
                 var C2 = and(A.Content, B.Content);
                 ClaimNumeric.eq((ulong)A.Order, nat64u<N>());
                 ClaimNumeric.eq((ulong)B.Order, nat64u<N>());
-                ClaimNumeric.Eq(C1,C2);
+                ClaimNumeric.eq(C1,C2);
             }
         }
 

@@ -51,8 +51,12 @@ namespace Z0
             => default;
 
         [MethodImpl(Inline)]
-        public static implicit operator ulong (CorrelationToken src)
+        public static implicit operator ulong(CorrelationToken src)
             => src.Value;
+
+        [MethodImpl(Inline)]
+        public static implicit operator CorrelationToken(PartId src)
+            => new CorrelationToken((ulong)src);
 
         [MethodImpl(Inline)]
         public static bool operator==(CorrelationToken a, CorrelationToken b)

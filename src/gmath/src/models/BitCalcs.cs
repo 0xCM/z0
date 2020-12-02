@@ -47,7 +47,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ulong tablecells<T>(uint rows, uint cols)
             where T : unmanaged
-                => GridCells.count(rows,  cols, bitwidth<T>());
+                => GridCalcs.count(rows,  cols, bitwidth<T>());
 
         /// <summary>
         /// Calculates the number of 256-bit blocks reqired to cover a grid with a specified number of rows/cols
@@ -86,7 +86,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => GridCells.count((uint)nat64u(m), (uint)nat64u(n), bitwidth<T>());
+                => GridCalcs.count((uint)nat64u(m), (uint)nat64u(n), bitwidth<T>());
 
         /// <summary>
         /// Calculates the number of 256-bit blocks reqired to cover a grid with natural dimensions

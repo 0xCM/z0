@@ -11,7 +11,7 @@ namespace Z0
 
     unsafe partial struct Pointers
     {
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static string format<T>(Ptr<T> src)
             where T : unmanaged
                 => src.Address.Format();

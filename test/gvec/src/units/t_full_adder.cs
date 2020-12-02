@@ -12,29 +12,29 @@ namespace Z0
 
     public class t_full_adder : UnitTest<t_full_adder>
     {
-        Bit32 on => Bit32.On;
+        bit on => bit.On;
 
-        Bit32 off => Bit32.Off;
+        bit off => bit.Off;
 
         public void fulladder_logical()
         {
-            FullAdder.Compute(off, off, off, out Bit32 s0, out Bit32 c0);
+            FullAdder.Compute(off, off, off, out bit s0, out bit c0);
             Claim.eq(s0, off);
             Claim.eq(c0, off);
 
-            FullAdder.Compute(on, off, off, out Bit32 s1, out Bit32 c1);
+            FullAdder.Compute(on, off, off, out bit s1, out bit c1);
             Claim.eq(s1, on);
             Claim.eq(c1, off);
 
-            FullAdder.Compute(on, on, off, out Bit32 s2, out Bit32 c2);
+            FullAdder.Compute(on, on, off, out bit s2, out bit c2);
             Claim.eq(s2, off);
             Claim.eq(c2, on);
 
-            FullAdder.Compute(on, on, on, out Bit32 s3, out Bit32 c3);
+            FullAdder.Compute(on, on, on, out bit s3, out bit c3);
             Claim.eq(s3, on);
             Claim.eq(c3, on);
 
-            FullAdder.Compute(off, off, on, out Bit32 s4, out Bit32 c4);
+            FullAdder.Compute(off, off, on, out bit s4, out bit c4);
             Claim.eq(s4, on);
             Claim.eq(c4, off);
         }

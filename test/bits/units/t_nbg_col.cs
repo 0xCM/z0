@@ -11,7 +11,7 @@ namespace Z0
 
     public class t_nbg_col : t_bitgrids<t_nbg_col>
     {
-        void nbg_col_256x32x8()
+        public void nbg_col_256x32x8()
         {
             var m = n32;
             var n = n8;
@@ -21,7 +21,6 @@ namespace Z0
             {
                 var xg = Random.BitGrid(m,n,t);
                 var xs = BitGrid.bitstring(xg).Transpose(m,n);
-
                 for(var col=0; col<n; col++)
                 {
                     BitVector<uint> bv1 = BitGrid.col(xg,col);
@@ -31,7 +30,7 @@ namespace Z0
             }
         }
 
-        void nbg_col_128x16x8()
+        public void nbg_col_128x16x8()
         {
             var m = n16;
             var n = n8;

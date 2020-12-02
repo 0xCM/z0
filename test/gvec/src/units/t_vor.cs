@@ -149,7 +149,7 @@ namespace Z0
             where T : unmanaged
         {
             var blocks = RepCount;
-            var stats = GridCells.metrics(blocks,w,t);
+            var stats = GridCalcs.metrics(blocks,w,t);
             var step = stats.BlockLength;
             var cells = stats.CellCount;
 
@@ -166,7 +166,7 @@ namespace Z0
             where T : unmanaged
         {
             var blocks = RepCount;
-            var stats = GridCells.metrics(blocks,w,t);
+            var stats = GridCalcs.metrics(blocks,w,t);
             var step = stats.BlockLength;
             var cells = stats.CellCount;
 

@@ -64,6 +64,14 @@ namespace Z0
         public static bit operator !=(in BitSpan x, in BitSpan y)
             => !api.same(x,y);
 
+        [MethodImpl(Inline)]
+        public static implicit operator BitSpan(Span<bit> src)
+            => new BitSpan(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator BitSpan(bit[] src)
+            => new BitSpan(src);
+
         public static BitSpan Empty => default;
 
         public override bool Equals(object obj)

@@ -49,6 +49,13 @@ namespace Z0
                 => SFx.surrogate(this);
 
             [MethodImpl(Inline)]
+            public string Format()
+                => Id;
+
+            public override string ToString()
+                => Format();
+
+            [MethodImpl(Inline)]
             public static implicit operator Func<T>(Emitter<T> src)
                 => src.AsFunc();
 

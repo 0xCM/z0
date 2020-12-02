@@ -9,12 +9,12 @@ namespace Z0
 
     using static Konst;
 
-    partial struct GridCells
+    partial struct GridCalcs
     {
         [MethodImpl(Inline)]
         public static GridConversion<S,T> conversion<S,T>(uint srcCount)
             where S : struct
             where T : struct
-                => new GridConversion<S,T>(srcCount);        
+                => new GridConversion<S,T>(srcCount);
     }
 }

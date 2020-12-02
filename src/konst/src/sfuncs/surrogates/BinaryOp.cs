@@ -43,6 +43,13 @@ namespace Z0
             }
 
             [MethodImpl(Inline)]
+            public string Format()
+                => Id;
+
+            public override string ToString()
+                => Format();
+
+            [MethodImpl(Inline)]
             public Func<T,T,T> AsFunc()
                 => SFx.surrogate(this);
 

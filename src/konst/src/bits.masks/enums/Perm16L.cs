@@ -13,7 +13,7 @@ namespace Z0
     /// </summary>
     public enum Perm16L : ulong
     {
-        X0 = 0b0001,
+        X0 = 0b0000,
 
         X1 = 0b0001,
 

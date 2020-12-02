@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct GridCells
+    partial struct GridCalcs
     {
         /// <summary>
         /// Computes the number of bytes that can be covered by a specified number of cells of parametric type

@@ -11,7 +11,7 @@ namespace Z0
     using static z;
 
     [Event(EventName)]
-    public readonly struct CmdSucceeded : IWfEvent<CmdSucceeded>
+    public readonly struct CmdSucceededEvent : IWfEvent<CmdSucceededEvent>
     {
         public const string EventName = GlobalEvents.CmdExec;
 
@@ -22,7 +22,7 @@ namespace Z0
         public FlairKind Flair  => FlairKind.Ran;
 
         [MethodImpl(Inline)]
-        public CmdSucceeded(CmdSpec cmd, CorrelationToken ct)
+        public CmdSucceededEvent(CmdSpec cmd, CorrelationToken ct)
         {
             EventId = (EventName, cmd.CmdId, ct);
             Cmd = cmd;

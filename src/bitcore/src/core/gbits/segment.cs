@@ -38,7 +38,7 @@ namespace Z0
             where T : unmanaged
         {
             var seg = gbits.segment(a, first, last);
-            var cells = GridCells.minbytes(last - first + 1);
+            var cells = GridCalcs.minbytes(last - first + 1);
             var src = z.bytes<T>(seg).Slice(0,cells);
             src.CopyTo(dst,offset);
         }

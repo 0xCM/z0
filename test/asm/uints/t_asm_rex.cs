@@ -12,10 +12,10 @@ namespace Z0.Asm
         void rex_field_reader()
         {
             var rw48 = RexPrefixBits.Define(b:0, x:0, r:0, w:1, RexPrefixCode.Rex43);
-            Claim.eq(rw48.B, 0);
-            Claim.eq(rw48.X, 0);
-            Claim.eq(rw48.R, 0);
-            Claim.eq(rw48.W, 1);
+            Claim.eq(rw48.B, bit.Off);
+            Claim.eq(rw48.X, bit.Off);
+            Claim.eq(rw48.R, bit.Off);
+            Claim.eq(rw48.W, bit.On);
             Claim.eq(rw48.Code, RexPrefixCode.Rex43);
             Claim.eq((byte)0x48,rw48.Scalar);
 

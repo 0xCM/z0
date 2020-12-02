@@ -79,7 +79,7 @@ namespace Z0
         public int ByteCount
         {
             [MethodImpl(Inline)]
-            get => GridCells.minimum<M,N>();
+            get => GridCalcs.minimum<M,N>();
         }
 
         /// <summary>

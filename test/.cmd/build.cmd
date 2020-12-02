@@ -1,0 +1,22 @@
+echo off
+
+set SlnId=z0.test
+echo SlnId:%SlnId%
+
+set CmdSep="--------------------------------------------------------------------------------"
+set CmdLog=%ZDb%\logs\commands\command.build-tests.log
+echo %CmdSep% >> %CmdLog%
+
+set SlnPath="%ZDev%\test\%SlnId%.sln"
+echo SlnPath:%SlnPath% >> %CmdLog%
+
+set TextLog="%ZDb%\logs\build\%SlnId%.log"
+
+set BuildCmdExec=dotnet build %SlnPath% /p:Configuration=Release /p:Platform="Any CPU" -fl -flp:logfile=%TextLog%;verbosity=detailed -m:6 -graph:true
+
+echo BuildCmdExec:%BuildCmdExec% >> %CmdLog%
+
+echo on
+
+call %BuildCmdExec%
+::call .cmd\deploy.cmd

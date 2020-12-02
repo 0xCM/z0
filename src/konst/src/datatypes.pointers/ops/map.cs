@@ -26,7 +26,7 @@ namespace Z0
             }
         }
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static void locate<T>(Span<T> src, Span<MemoryAddress> dst)
             where T : unmanaged
                 => map(src,new Locate<T>(), dst);

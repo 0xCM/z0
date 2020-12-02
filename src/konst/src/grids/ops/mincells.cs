@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct GridCells
+    partial struct GridCalcs
     {
         /// <summary>
         /// Computes the minimum number of cells required to store a specified number of bits

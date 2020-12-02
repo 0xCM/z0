@@ -40,7 +40,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => StringRefs.define(Address,Length).Format();
+            => MemRefs.@string(Address, Length).Format();
 
         public override string ToString()
             => Format();

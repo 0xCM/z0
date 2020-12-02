@@ -23,29 +23,6 @@ namespace Z0
         public Ptr(T* src)
             => P = src;
 
-        [MethodImpl(Inline)]
-        public static T operator !(Ptr<T> x)
-            => *x.P;
-
-        [MethodImpl(Inline)]
-        public static Ptr<T> operator ++(Ptr<T> x)
-            => api.next(x);
-
-        [MethodImpl(Inline)]
-        public static Ptr<T> operator --(Ptr<T> x)
-            => api.prior(x);
-
-        [MethodImpl(Inline)]
-        public static implicit operator Ptr<T>(T* src)
-            => new Ptr<T>(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator T*(Ptr<T> src)
-            => src.P;
-
-        [MethodImpl(Inline)]
-        public static implicit operator MemoryAddress(Ptr<T> src)
-            => src.Address;
 
         public readonly MemoryAddress Address
         {
@@ -72,5 +49,29 @@ namespace Z0
 
         public override string ToString()
             => Format();
+
+        [MethodImpl(Inline)]
+        public static T operator !(Ptr<T> x)
+            => *x.P;
+
+        [MethodImpl(Inline)]
+        public static Ptr<T> operator ++(Ptr<T> x)
+            => api.next(x);
+
+        [MethodImpl(Inline)]
+        public static Ptr<T> operator --(Ptr<T> x)
+            => api.prior(x);
+
+        [MethodImpl(Inline)]
+        public static implicit operator MemoryAddress(Ptr<T> src)
+            => src.Address;
+
+        [MethodImpl(Inline)]
+        public static implicit operator Ptr<T>(T* src)
+            => new Ptr<T>(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator T*(Ptr<T> src)
+            => src.P;
     }
 }

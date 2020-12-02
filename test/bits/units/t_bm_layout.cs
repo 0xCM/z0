@@ -14,17 +14,17 @@ namespace Z0
     {
         public void bm_cellcount()
         {
-            var row_14x16 = GridCells.minimum<N14,ushort>();
+            var row_14x16 = GridCalcs.minimum<N14,ushort>();
             var total_12x14x16 = BitMatrix.cellcount<N12,N14,ushort>();
             Claim.eq(1, row_14x16);
             Claim.eq(12*1, total_12x14x16);
 
-            var row_64x32 = GridCells.minimum<N64,uint>();
+            var row_64x32 = GridCalcs.minimum<N64,uint>();
             var total_13x64x32 = BitMatrix.cellcount<N13,N64,uint>();
             Claim.eq(2, row_64x32);
             Claim.eq(13*2, total_13x64x32);
 
-            var row_32x8 = GridCells.minimum<N32,byte>();
+            var row_32x8 = GridCalcs.minimum<N32,byte>();
             var total_32x32x8 = BitMatrix.cellcount<N32,N32,byte>();
             Claim.eq(4,row_32x8);
             Claim.eq(32*4, total_32x32x8);
@@ -43,7 +43,7 @@ namespace Z0
             Claim.eq(order, m.Order);
             Claim.eq(order, m.Order);
             Claim.eq(cellcount, BitMatrix<N16,byte>.RowCellCount);
-            Claim.eq(cellcount, GridCells.mincells((ulong)bitwidth(t),(ulong)order));
+            Claim.eq(cellcount, GridCalcs.mincells((ulong)bitwidth(t),(ulong)order));
 
             for(var i=0; i < order; i++)
             for(var j=0; j < order; j++)

@@ -342,7 +342,7 @@ public readonly struct ApiNames
 
     public const string ConstBytesCache = @const + dot + bytes + dot + cache;
 
-    public const string GridCells = grid + dot + cells;
+    public const string GridCalcs = grid + dot + "calcs";
 
     public const string GridMetrics = grid + dot + metrics;
 

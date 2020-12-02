@@ -12,7 +12,7 @@ namespace Z0
 
     partial class Surrogates
     {
-        public readonly struct BinaryPredicate<T> : IFunc<T,T,Bit32>
+        public readonly struct BinaryPredicate<T> : IFunc<T,T,bit>
         {
             readonly Z0.BinaryPredicate<T> F;
 
@@ -33,7 +33,8 @@ namespace Z0
             }
 
             [MethodImpl(Inline)]
-            public Bit32 Invoke(T a, T b) => F(a,b);
+            public bit Invoke(T a, T b)
+                => F(a,b);
 
             public Z0.BinaryPredicate<T> Subject
             {
@@ -42,11 +43,18 @@ namespace Z0
             }
 
             [MethodImpl(Inline)]
-            public Func<T,T,Bit32> AsFunc()
+            public Func<T,T,bit> AsFunc()
                  => SFx.surrogate(this);
 
             [MethodImpl(Inline)]
-            public static implicit operator Func<T,T,Bit32>(BinaryPredicate<T> src)
+            public string Format()
+                => Id;
+
+            public override string ToString()
+                => Format();
+
+            [MethodImpl(Inline)]
+            public static implicit operator Func<T,T,bit>(BinaryPredicate<T> src)
                 => src.AsFunc();
        }
     }

@@ -47,7 +47,7 @@ namespace Z0
         public static int RowCellCount
         {
             [MethodImpl(Inline)]
-            get =>  GridCells.mincells((ulong)bitwidth<T>(),nat64u<N>());
+            get =>  GridCalcs.mincells((ulong)bitwidth<T>(),nat64u<N>());
         }
 
         public static int TotalCellCount
@@ -98,7 +98,7 @@ namespace Z0
             [MethodImpl(Inline)]
             set
             {
-                var index = TableIndex.Create(row, col, NatRep, NatRep, default(T));
+                var index = GridCalcs.index(row, col, NatRep, NatRep, default(T));
                 Data[index.CellIndex] = gbits.setbit(Data[index.CellIndex], index.BitOffset, value);
             }
         }

@@ -259,7 +259,7 @@ namespace Z0
 
             var byx = BitConverter.GetBytes(x).ToSpan();
             var byy = ByteWrite.write(x);
-            ClaimNumeric.Eq(byx,byy);
+            ClaimNumeric.eq(byx,byy);
         }
 
         public void bs_assemble()

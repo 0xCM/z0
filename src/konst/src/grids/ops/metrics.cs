@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct GridCells
+    partial struct GridCalcs
     {
         /// <summary>
         /// Calculates memory block statistics for specified parameters
@@ -48,7 +48,7 @@ namespace Z0
         /// <param name="segwidth">The width of a grid cell</param>
         [MethodImpl(Inline), Op]
         public static GridMetrics metrics(ushort rows, ushort cols, ushort segwidth)
-             => metrics(GridCells.grid(rows, cols, segwidth));
+             => metrics(GridCalcs.grid(rows, cols, segwidth));
 
         /// <summary>
         /// Defines a grid map predicated row count, col count and the bit width of parametric type
@@ -58,7 +58,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static GridMetrics metrics<T>(ushort rows, ushort cols)
             where T : unmanaged
-                => metrics(GridCells.grid<T>(rows,cols));
+                => metrics(GridCalcs.grid<T>(rows,cols));
 
         /// <summary>
         /// Calculates memory block statistics for specified function and type parameters
@@ -86,6 +86,6 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
             where T : unmanaged
-                => metrics(GridCells.grid(m,n, zero));
+                => metrics(GridCalcs.grid(m,n, zero));
     }
 }

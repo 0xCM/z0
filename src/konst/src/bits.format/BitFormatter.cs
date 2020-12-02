@@ -12,7 +12,7 @@ namespace Z0
     using static z;
 
     [ApiHost(ApiNames.BitFormatter, true)]
-    public readonly struct BitFormatter : IBitFormatter<BitFormatter>
+    public readonly struct BitFormatter
     {
         const NumericKind Closure = UnsignedInts;
 

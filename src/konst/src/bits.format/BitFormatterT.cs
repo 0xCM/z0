@@ -15,7 +15,7 @@ namespace Z0
     /// <summary>
     /// Configurable bit data type formatter
     /// </summary>
-    public readonly struct BitFormatter<T> : IBitFormatter<T>
+    public readonly struct BitFormatter<T>
         where T : struct
     {
         [MethodImpl(Inline)]

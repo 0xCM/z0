@@ -8,18 +8,19 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static memory;
 
     unsafe partial struct Pointers
     {
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ref Ptr<T> cast<T>(in Ptr src)
             where T : unmanaged
-                => ref z.@as<Ptr,Ptr<T>>(src);
+                => ref @as<Ptr,Ptr<T>>(src);
 
         [MethodImpl(Inline)]
         public static ref Ptr<T> cast<S,T>(in Ptr<S> src)
             where S : unmanaged
             where T : unmanaged
-                => ref z.@as<Ptr<S>,Ptr<T>>(src);
+                => ref @as<Ptr<S>,Ptr<T>>(src);
     }
 }

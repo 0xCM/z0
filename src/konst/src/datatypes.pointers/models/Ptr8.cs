@@ -23,6 +23,36 @@ namespace Z0
         public Ptr8(byte* src)
             => P = src;
 
+
+        public readonly MemoryAddress Address
+        {
+            [MethodImpl(Inline)]
+            get => api.address(P);
+        }
+
+        public uint Hash
+        {
+            [MethodImpl(Inline)]
+            get => (uint)((ulong)P).GetHashCode();
+        }
+
+        [MethodImpl(Inline)]
+        public string Format()
+            => api.format<byte>(this);
+
+        [MethodImpl(Inline)]
+        public bool Equals(Ptr8 src)
+            => P == src.P;
+
+        public override bool Equals(object src)
+            => src is Ptr8 p && Equals(p);
+
+        public override int GetHashCode()
+            => (int)Hash;
+
+        public override string ToString()
+            => Format();
+
         [MethodImpl(Inline)]
         public static byte operator !(Ptr8 x)
             => *x.P;
@@ -72,36 +102,19 @@ namespace Z0
             => new Ptr8(src);
 
         [MethodImpl(Inline)]
+        public static explicit operator Ptr16(Ptr8 src)
+            => new Ptr16((ushort*)src.P);
+
+        [MethodImpl(Inline)]
+        public static explicit operator Ptr32(Ptr8 src)
+            => new Ptr32((uint*)src.P);
+
+        [MethodImpl(Inline)]
+        public static explicit operator Ptr64(Ptr8 src)
+            => new Ptr64((ulong*)src.P);
+
+        [MethodImpl(Inline)]
         public static implicit operator byte*(Ptr8 src)
             => src.P;
-
-        public readonly MemoryAddress Address
-        {
-            [MethodImpl(Inline)]
-            get => api.address(P);
-        }
-
-        public uint Hash
-        {
-            [MethodImpl(Inline)]
-            get => (uint)((ulong)P).GetHashCode();
-        }
-
-        [MethodImpl(Inline)]
-        public string Format()
-            => api.format<byte>(this);
-
-        [MethodImpl(Inline)]
-        public bool Equals(Ptr8 src)
-            => P == src.P;
-
-        public override bool Equals(object src)
-            => src is Ptr8 p && Equals(p);
-
-        public override int GetHashCode()
-            => (int)Hash;
-
-        public override string ToString()
-            => Format();
     }
 }

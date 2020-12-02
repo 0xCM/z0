@@ -13,7 +13,7 @@ namespace Z0
 
     unsafe partial struct Pointers
     {
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public unsafe static void fix<T>(Span<T> src, PointedReceiver<T> receiver)
             where T : unmanaged
         {

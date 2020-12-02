@@ -55,7 +55,26 @@ namespace Z0
             bitblock_disable_check(n707, (ulong)0);
         }
 
-        protected void bitblock_disable_check<N,T>(N n = default, T rep = default)
+        void bitblock_disable_check<T>(BitSize n)
+            where T : unmanaged
+        {
+            for(var k=0; k<RepCount; k++)
+            {
+                var bv = Random.BitBlock<T>(n);
+                var bs = bv.ToBitString();
+                Claim.eq(bv.BitCount, n);
+                Claim.eq(bv.BitCount, bs.Length);
+                for(var i=0; i<bv.BitCount; i+= 2)
+                {
+                    bv[i] = bit.Off;
+                    bs[i] = bit.Off;
+                }
+
+                Claim.eq(bv.ToBitString(),bs);
+            }
+        }
+
+        void bitblock_disable_check<N,T>(N n = default, T rep = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
         {
@@ -67,8 +86,8 @@ namespace Z0
                 Claim.eq(bc.Width, bs.Length);
                 for(var i=0; i<bc.Width; i+= 2)
                 {
-                    bc[i] = Bit32.Off;
-                    bs[i] = Bit32.Off;
+                    bc[i] = bit.Off;
+                    bs[i] = bit.Off;
                 }
 
                 Claim.eq(bc.ToBitString(),bs);

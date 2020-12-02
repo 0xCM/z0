@@ -26,6 +26,6 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => GridCells.minimum<N,T>() * nat32i<M>();
+                => GridCalcs.minimum<N,T>() * nat32i<M>();
     }
 }

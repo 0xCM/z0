@@ -18,27 +18,27 @@ namespace Z0
                 => apply(MSvc.eq<T>(), l, r, dst);
 
         [MethodImpl(Inline), SpanOp, Closures(Integers)]
-        public static Span<Bit32> neq<T>(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<Bit32> dst)
+        public static Span<bit> neq<T>(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<bit> dst)
             where T : unmanaged
                 => apply(MSvc.neq<T>(), l, r, dst);
 
         [MethodImpl(Inline), SpanOp, Closures(Integers)]
-        public static Span<Bit32> lt<T>(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<Bit32> dst)
+        public static Span<bit> lt<T>(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<bit> dst)
             where T : unmanaged
                 => apply(MSvc.lt<T>(), l, r, dst);
 
         [MethodImpl(Inline), SpanOp, Closures(Integers)]
-        public static Span<Bit32> lteq<T>(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<Bit32> dst)
+        public static Span<bit> lteq<T>(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<bit> dst)
             where T : unmanaged
                 => apply(MSvc.lteq<T>(), l, r, dst);
 
         [MethodImpl(Inline), SpanOp, Closures(Integers)]
-        public static Span<Bit32> gt<T>(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<Bit32> dst)
+        public static Span<bit> gt<T>(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<bit> dst)
             where T : unmanaged
                 => apply(MSvc.gt<T>(), l, r, dst);
 
         [MethodImpl(Inline), SpanOp, Closures(Integers)]
-        public static Span<Bit32> gteq<T>(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<Bit32> dst)
+        public static Span<bit> gteq<T>(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<bit> dst)
             where T : unmanaged
                 => apply(MSvc.gteq<T>(), l, r, dst);
     }

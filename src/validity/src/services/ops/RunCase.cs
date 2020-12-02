@@ -71,8 +71,8 @@ namespace Z0
             => e switch {
                 TargetInvocationException ie => format(e.InnerException),
                 ClaimException ce => ce.Message.Format(),
-                ArgumentOutOfRangeException re => $"Argument out of range:{re.Source}",
-                FormatException fe => $"Format error:{fe.Source}",
+                //ArgumentOutOfRangeException re => $"Argument out of range:{re.Source}",
+                //FormatException fe => $"Format error:{fe.Source}",
                 _ => e.ToString()
             };
 

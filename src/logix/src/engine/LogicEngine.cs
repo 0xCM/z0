@@ -20,7 +20,7 @@ namespace Z0.Logix
         /// </summary>
         /// <param name="expr">The expression to evaluate</param>
         [Op]
-        public static Bit32 eval(ILogicExpr expr)
+        public static bit eval(ILogicExpr expr)
             => LogicExprEval.eval(expr);
 
         /// <summary>

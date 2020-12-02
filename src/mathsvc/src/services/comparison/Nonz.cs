@@ -13,15 +13,15 @@ namespace Z0
     partial class MSvcHosts
     {
         [Closures(AllNumeric), Nonz]
-        public readonly struct Nonz<T> : IFunc<T,Bit32>, IUnarySpanPred<T>
+        public readonly struct Nonz<T> : IFunc<T,bit>, SFx.IUnarySpanPred<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]
-            public Bit32 Invoke(T a)
+            public bit Invoke(T a)
                 => gmath.nonz(a);
 
             [MethodImpl(Inline)]
-            public Span<Bit32> Invoke(ReadOnlySpan<T> src, Span<Bit32> dst)
+            public Span<bit> Invoke(ReadOnlySpan<T> src, Span<bit> dst)
                 => apply(this, src, dst);
         }
     }

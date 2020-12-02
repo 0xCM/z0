@@ -3,8 +3,8 @@
 set ProjectId=math
 echo ProjectId:%ProjectId%
 
-set ZCmd=%ZDev%\.cmd
+set ZCmd=%ZDev%\test\.cmd
 echo ZCmd:%ZCmd%
 
-call %ZCmd%\build-tests.cmd
+call %ZCmd%\build-project.cmd
 call %TestExe%

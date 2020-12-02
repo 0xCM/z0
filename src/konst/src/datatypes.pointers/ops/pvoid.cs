@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static memory;
 
     unsafe partial struct Pointers
     {
@@ -26,7 +27,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ref Ptr pvoid<T>(in Ptr<T> src)
             where T : unmanaged
-                => ref z.@as<Ptr<T>,Ptr>(src);
+                => ref @as<Ptr<T>,Ptr>(src);
 
         /// <summary>
         /// Transforms the source representation to a void representation
@@ -34,7 +35,7 @@ namespace Z0
         /// <param name="src">The source</param>
         [MethodImpl(Inline), Op]
         public static ref Ptr pvoid(in Ptr8 src)
-            => ref z.@as<Ptr8,Ptr>(src);
+            => ref @as<Ptr8,Ptr>(src);
 
         /// <summary>
         /// Creates a void pointer representation
