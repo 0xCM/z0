@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="t">The type to examine</param>
         [Op]
         public static BK kind(Type t)
-            => kind(BlockedKinds.width(t), BlockedKinds.segment(t).NumericId());
+            => kind(BlockedKinds.width(t), BlockedKinds.segment(t).ApiKind());
 
         [Op]
         public static BK kind(TW width, ID id)

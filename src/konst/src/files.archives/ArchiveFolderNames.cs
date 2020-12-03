@@ -13,19 +13,23 @@ namespace Z0
 
         public const string AppsFolder = "apps";
 
-        public const string LogFolder = "logs";
+        public const string Logs = "logs";
+
+        public const string Extracts = "extracts";
 
         public const string Parsed = "parsed";
 
-        public const string HexFolder = "hex";
+        public const string Hex = "hex";
 
-        public const string ImmFolder = "imm";
+        public const string Imm = "imm";
 
         public const string Respack = "respack";
 
         public const string ContentFolder = "content";
 
-        public const string AsmFolder = "asm";
+        public const string Asm = "asm";
+
+        public const string AsmSemantic = "asm.semantic";
 
         public const string IndexFolder = "index";
 

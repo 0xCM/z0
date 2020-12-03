@@ -4,9 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-
-    [ApiHost(ApiNames.NumericKindX)]
-    public static partial class XNumericKinds
+    [ApiHost(ApiNames.XNumericKind)]
+    public static partial class XNumericKind
     {
 
     }

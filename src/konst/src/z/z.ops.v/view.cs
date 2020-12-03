@@ -6,14 +6,68 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
     using static System.Runtime.InteropServices.MemoryMarshal;
-
     using static Konst;
 
     partial struct z
     {
+        [MethodImpl(Inline)]
+        public static ref readonly T view<S,T>(in S src)
+            => ref memory.view<S,T>(src);
+
+        [MethodImpl(Inline)]
+        public static ref readonly sbyte view8i<T>(in T src)
+            => ref memory.view8i(src);
+
+        [MethodImpl(Inline)]
+        public static ref readonly byte view8u<T>(in T src)
+            => ref memory.view8u(src);
+
+        [MethodImpl(Inline)]
+        public static ref readonly short view16i<T>(in T src)
+            => ref memory.view16i(src);
+
+        [MethodImpl(Inline)]
+        public static ref readonly ushort view16u<T>(in T src)
+            => ref memory.view16u(src);
+
+        [MethodImpl(Inline)]
+        public static ref readonly int view32i<T>(in T src)
+            => ref memory.view32i(src);
+
+        [MethodImpl(Inline)]
+        public static ref readonly uint view32u<T>(in T src)
+            => ref memory.view32u(src);
+
+        [MethodImpl(Inline)]
+        public static ref readonly long view64i<T>(in T src)
+            => ref memory.view64i(src);
+
+        [MethodImpl(Inline)]
+        public static ref readonly ulong view64u<T>(in T src)
+            => ref memory.view64u(src);
+
+        [MethodImpl(Inline)]
+        public static ref readonly float view32f<T>(in T src)
+            => ref memory.view32f(src);
+
+        [MethodImpl(Inline)]
+        public static ref readonly double view64f<T>(in T src)
+            => ref memory.view64f(src);
+
+        [MethodImpl(Inline)]
+        public static ref readonly decimal view128f<T>(in T src)
+            => ref memory.view128f(src);
+
+        [MethodImpl(Inline)]
+        public static ref readonly char view16c<T>(in T src)
+            => ref memory.view16c(src);
+
+        [MethodImpl(Inline)]
+        public static ref readonly bool view1u<T>(in T src)
+            => ref memory.view1u(src);
+
         /// <summary>
         /// Reveals the character data identified by a string reference
         /// </summary>
@@ -30,16 +84,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ReadOnlySpan<T> view<T>(in SegRef src)
             => cover(src.Address.Ref<T>(), count<T>(src));
-
-        /// <summary>
-        /// Presents a readonly S-reference as a readonly T-reference
-        /// </summary>
-        /// <param name="src">The data source</param>
-        /// <typeparam name="S">The source type</typeparam>
-        /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline)]
-        public static ref readonly T view<S,T>(in S src)
-            => ref Unsafe.As<S,T>(ref edit(src));
 
         /// <summary>
         /// Creates a T-span from a supplied reference
@@ -90,113 +134,5 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref readonly ulong view<T>(W64 w, in T src)
             => ref view<T,ulong>(src);
-
-        /// <summary>
-        /// Interprets a readonly T-reference as a readonly int8 reference
-        /// </summary>
-        /// <param name="src">The source reference</param>
-        /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref readonly sbyte view8i<T>(in T src)
-            => ref view<T,sbyte>(src);
-
-        /// <summary>
-        /// Interprets a readonly T-reference as a readonly uint8 reference
-        /// </summary>
-        /// <param name="src">The source reference</param>
-        /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref readonly byte view8u<T>(in T src)
-            => ref view<T,byte>(src);
-
-        /// <summary>
-        /// Interprets a readonly T-reference as a readonly int16 reference
-        /// </summary>
-        /// <param name="src">The source reference</param>
-        /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref readonly short view16i<T>(in T src)
-            => ref view<T,short>(src);
-
-        /// <summary>
-        /// Interprets a readonly T-reference as a readonly uint16 reference
-        /// </summary>
-        /// <param name="src">The source reference</param>
-        /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref readonly ushort view16u<T>(in T src)
-            => ref view<T,ushort>(src);
-
-        /// <summary>
-        /// Interprets a readonly T-reference as a readonly int32 reference
-        /// </summary>
-        /// <param name="src">The source reference</param>
-        /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref readonly int view32i<T>(in T src)
-            => ref view<T,int>(src);
-
-        /// <summary>
-        /// Interprets a readonly T-reference as a readonly uint32 reference
-        /// </summary>
-        /// <param name="src">The source reference</param>
-        /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref readonly uint view32u<T>(in T src)
-            => ref view<T,uint>(src);
-
-        /// <summary>
-        /// Interprets a readonly T-reference as a readonly uint64 reference
-        /// </summary>
-        /// <param name="src">The source reference</param>
-        /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref readonly long view64i<T>(in T src)
-            => ref view<T,long>(src);
-
-        /// <summary>
-        /// Interprets a readonly T-reference as a readonly uint64 reference
-        /// </summary>
-        /// <param name="src">The source reference</param>
-        /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref readonly ulong view64u<T>(in T src)
-            => ref view<T,ulong>(src);
-
-        /// <summary>
-        /// Interprets a readonly T-reference as a readonly float64 reference
-        /// </summary>
-        /// <param name="src">The source reference</param>
-        /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref readonly double view64f<T>(in T src)
-             => ref view<T,double>(src);
-
-        /// <summary>
-        /// Interprets a readonly T-reference as a readonly float128 reference
-        /// </summary>
-        /// <param name="src">The source reference</param>
-        /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref readonly decimal view128f<T>(in T src)
-             => ref view<T,decimal>(src);
-
-        /// <summary>
-        /// Interprets a readonly T-reference as a readonly char reference
-        /// </summary>
-        /// <param name="src">The source reference</param>
-        /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref readonly char view16c<T>(in T src)
-            => ref view<T,char>(src);
-
-        /// <summary>
-        /// Interprets a readonly T-reference as a readonly bool reference
-        /// </summary>
-        /// <param name="src">The source reference</param>
-        /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref readonly bool view1u<T>(in T src)
-            => ref view<T,bool>(src);
     }
 }

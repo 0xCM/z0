@@ -9,16 +9,15 @@ namespace Z0
 
     using static Part;
 
-    partial struct Arrays
+    partial class XTend
     {
         /// <summary>
-        /// Adds an offset to the head of an array, measured relative to the reference type
+        /// Constructs a span from an array
         /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="bytes">The number of elements to advance</param>
+        /// <param name="src">The source sequence</param>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref readonly T skip<T>(T[] src, int count)
-            => ref memory.skip(in first<T>(src), (uint)count);
+        public static Span<T> ToSpan<T>(this T[] src)
+            => src;
     }
 }

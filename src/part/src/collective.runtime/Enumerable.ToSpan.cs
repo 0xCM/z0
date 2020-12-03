@@ -9,28 +9,10 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
-    using static Konst;
+    using static Part;
 
     partial class XTend
     {
-        /// <summary>
-        /// Presents a mutable span as a readonly span
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ReadOnlySpan<T> ReadOnly<T>(this Span<T> src)
-            => src;
-
-        /// <summary>
-        /// Constructs a span from an array
-        /// </summary>
-        /// <param name="src">The source sequence</param>
-        /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Span<T> ToSpan<T>(this T[] src)
-            => src;
-
         /// <summary>
         /// Constructs a span from a (presumeably finite) sequence selection
         /// </summary>

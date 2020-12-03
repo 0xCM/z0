@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static NumericCast;
 
     partial struct z
     {
@@ -29,7 +28,7 @@ namespace Z0
         /// <typeparam name="T">The numeric type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T force<T>(sbyte src)
-            => convert8i_u<T>(src);
+            => NumericCast.force<T>(src);
 
         /// <summary>
         /// Unconditionally converts the source value to a value of parametric numeric type
@@ -38,7 +37,7 @@ namespace Z0
         /// <typeparam name="T">The numeric type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T force<T>(byte src)
-            => convert8u_u<T>(src);
+            => NumericCast.force<T>(src);
 
         /// <summary>
         /// If possible, applies the conversion ushort -> T
@@ -47,7 +46,7 @@ namespace Z0
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T force<T>(ushort src)
-            => convert16u_u<T>(src);
+            => NumericCast.force<T>(src);
 
         /// <summary>
         /// If possible, applies the conversion short -> T
@@ -56,7 +55,7 @@ namespace Z0
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T force<T>(short src)
-            => convert16i_u<T>(src);
+            => NumericCast.force<T>(src);
 
         /// <summary>
         /// If possible, applies the conversion int -> T
@@ -65,7 +64,7 @@ namespace Z0
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T force<T>(int src)
-            => convert32i_u<T>(src);
+            => NumericCast.force<T>(src);
 
         /// <summary>
         /// If possible, applies the conversion uint -> T
@@ -74,7 +73,7 @@ namespace Z0
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T force<T>(uint src)
-            => convert32u_u<T>(src);
+            => NumericCast.force<T>(src);
 
         /// <summary>
         /// If possible, applies the conversion long -> T
@@ -83,7 +82,7 @@ namespace Z0
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T force<T>(long src)
-            => convert64i_u<T>(src);
+            => NumericCast.force<T>(src);
 
         /// <summary>
         /// If possible, applies the conversion ulong -> T
@@ -92,7 +91,7 @@ namespace Z0
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T force<T>(ulong src)
-            => convert64u_u<T>(src);
+            => NumericCast.force<T>(src);
 
         /// <summary>
         /// If possible, applies the conversion float -> T
@@ -101,7 +100,7 @@ namespace Z0
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T force<T>(float src)
-            => convert32f_u<T>(src);
+            => NumericCast.force<T>(src);
 
         /// <summary>
         /// If possible, applies the conversion double -> T
@@ -110,7 +109,7 @@ namespace Z0
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T force<T>(double src)
-            => convert64f_u<T>(src);
+            => NumericCast.force<T>(src);
 
         /// <summary>
         /// If possible, applies the conversion char -> T
@@ -119,6 +118,6 @@ namespace Z0
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T force<T>(char src)
-            => convert16c_u<T>(src);
+            => NumericCast.force<T>(src);
     }
 }

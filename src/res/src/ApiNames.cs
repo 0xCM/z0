@@ -125,10 +125,11 @@ public readonly struct ApiNames
 
     public const string CellSource = cells + dot + source;
 
+    public const string CellVecs = cells + dot + vectors;
+
+    public const string CellCopy = cells + dot + copy;
+
     public const string XCell = cells + dot + extensions;
-
-    public const string CellVecs = cells + dot + "vectors";
-
 
     // ~~ Clr Runtime
     // ~~ -----------------------------------------------------------------------------------------
@@ -220,11 +221,9 @@ public readonly struct ApiNames
 
     public const string MemRefs = memory + dot + refs;
 
-    public const string MemCopy = memory + dot + copy;
-
     public const string MemView = memory + dot + view;
 
-    public const string Pointers = "datatypes" + dot + pointers;
+    public const string Pointers = datatypes + dot + pointers;
 
     public const string StringRefs = memory + dot + refs + dot + strings;
 
@@ -313,7 +312,7 @@ public readonly struct ApiNames
 
     public const string NumericArrays = numeric + dot + arrays;
 
-    public const string NumericKindX = numeric + dot + kinds + dot + extensions;
+    public const string XNumericKind = numeric + dot + kinds + dot + extensions;
 
     public const string Widths = widths;
 

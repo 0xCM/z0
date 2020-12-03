@@ -21,25 +21,25 @@ namespace Z0
         public ulong Imm64
         {
             [MethodImpl(Inline)]
-            get => Cast.to<T,ulong>(Content);
+            get => NumericCast.force<T,ulong>(Content);
         }
 
         public uint Imm32
         {
             [MethodImpl(Inline)]
-            get => Cast.to<T,uint>(Content);
+            get => NumericCast.force<T,uint>(Content);
         }
 
         public ushort Imm16
         {
             [MethodImpl(Inline)]
-            get => Cast.to<T,ushort>(Content);
+            get => NumericCast.force<T,ushort>(Content);
         }
 
         public byte Imm8
         {
             [MethodImpl(Inline)]
-            get => Cast.to<T,byte>(Content);
+            get => NumericCast.force<T,byte>(Content);
         }
 
         [MethodImpl(Inline)]

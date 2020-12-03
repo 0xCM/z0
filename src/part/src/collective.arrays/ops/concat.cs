@@ -10,9 +10,56 @@ namespace Z0
     using System.Linq;
 
     using static Part;
+    using static memory;
 
     partial struct Arrays
     {
+        // /// <summary>
+        // /// Concatenates an array sequence
+        // /// </summary>
+        // /// <param name="src">The source arrays</param>
+        // [MethodImpl(Inline), Op, Closures(Closure)]
+        // public static void concat<T>(T[][] src, T[] dst)
+        // {
+        //     ref var target = ref memory.first(span(dst));
+        //     var k = 0u;
+
+        //     var members = span(src);
+        //     var terms = members.Length;
+        //     for(uint i=0u; i<terms; i++)
+        //     {
+        //         var term = span(memory.skip(members,i));
+        //         copy(memory.first(term), (uint)term.Length, ref target, ref k);
+        //     }
+        // }
+
+        /// <summary>
+        /// Computes the total number of cells covered by the source
+        /// </summary>
+        /// <param name="src">The source array</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static uint cells<T>(T[][] src)
+        {
+            var members = span(src);
+            var terms = members.Length;
+            var items = 0u;
+            for(var i=0u; i<terms; i++)
+                items += (uint)memory.skip(members,i).Length;
+            return items;
+        }
+
+        // /// <summary>
+        // /// Concatenates an array sequence
+        // /// </summary>
+        // /// <param name="src">The source arrays</param>
+        // public static T[] concat<T>(T[][] src)
+        // {
+        //     var dst = sys.alloc<T>(cells(src));
+        //     concat(src,dst);
+        //     return dst;
+        // }
+
         /// <summary>
         /// Concatenates a sequence of arrays
         /// </summary>
@@ -57,7 +104,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source arrays</param>
         [Op, Closures(Closure)]
-        public static T[] concat<T>(params T[][] src)
+        public static T[] concat<T>(T[][] src)
         {
             var totalLen = src.Sum(x => x.Length);
             var dst = new T[totalLen];

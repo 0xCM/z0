@@ -46,15 +46,12 @@ namespace Z0
         public void Render(in ApiPartRoutines src)
             => Execute(src);
 
-        [MethodImpl(Inline), Op]
-        public static ISemanticArchive semantic(IWfShell wf)
-            => AsmSemanticArchive.create(wf);
 
         [Op, MethodImpl(NotInline)]
         void Execute(in ApiPartRoutines src)
         {
             var part = src.Part;
-            var dst = semantic(Wf);
+            var dst = AsmSemanticArchive.create(Wf);
             var dir = dst.SemanticDir(part).Clear();
             var view = src.View;
             var count = view.Length;
@@ -67,7 +64,6 @@ namespace Z0
                 Render(host, writer);
             }
         }
-
 
         [Op, MethodImpl(NotInline)]
         void Render(ApiHostRoutines src, StreamWriter dst)

@@ -49,9 +49,9 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static MemorySlots<E> slots<E>(Type src)
-            where E : unmanaged
-                => new MemorySlots<E>(slots(src));
+        public static MemorySlots<I> slots<I>(Type src)
+            where I : unmanaged
+                => new MemorySlots<I>(slots(src));
 
         [MethodImpl(Inline), Op]
         public static MemorySlots slots(Type src)

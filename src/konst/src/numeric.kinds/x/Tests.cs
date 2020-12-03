@@ -7,10 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static NumericKinds;
 
-    partial class XNumericKinds
+    partial class XNumericKind
     {
         /// <summary>
         /// Determines whether a numeric kind designates a floating-point type
@@ -34,18 +34,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool IsUnsigned(this NumericKind src)
             => unsigned(src);
-
-        /// <summary>
-        /// Determines the type identifer of a numeric kind
-        /// </summary>
-        /// <param name="kind">The source kind</param>
-        [MethodImpl(Inline)]
-        public static NumericApiKind NumericId(this NumericKind kind)
-        {
-            var noClass = ((uint)kind << 3) >> 3;
-            var noWidth = (noClass >> 16) << 16;
-            var key = (NumericApiKind)noWidth;
-            return key;
-        }
     }
 }

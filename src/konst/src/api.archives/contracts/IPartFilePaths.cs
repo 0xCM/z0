@@ -15,14 +15,6 @@ namespace Z0
         FilePath AsmFilePath(FolderPath root, FileName name)
             => AsmDirPath(root) + name;
 
-        FilePath[] AsmFilePaths(FolderPath root)
-            => AsmDirPath(root).Files(Asm);
-
-        FilePath[] HexFilePaths(FolderPath root)
-            => X86DirPath(root).Files(HexLine);
-
-        FilePath[] ParseFilePaths(FolderPath root)
-            => ParsedDirPath(root).Files(Parsed);
 
         /// <summary>
         /// The path to which all archive path arithmetic is relative

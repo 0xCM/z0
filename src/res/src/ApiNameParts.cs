@@ -170,6 +170,8 @@ public readonly struct ApiNameParts
 
     public const string primitives = nameof(primitives);
 
+    public const string datatypes = nameof(datatypes);
+
     public const string encoders = nameof(encoders);
 
     public const string archives = nameof(archives);
@@ -409,4 +411,6 @@ public readonly struct ApiNameParts
     public const string integers = nameof(integers);
 
     public const string ui = unsigned + dot + integers;
+
+    public const string vectors = nameof(vectors);
 }

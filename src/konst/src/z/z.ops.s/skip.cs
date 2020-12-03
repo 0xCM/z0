@@ -110,5 +110,25 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref readonly T skip<T>(Span<T> src, long count)
             => ref memory.skip(src,count);
+
+        [MethodImpl(Inline)]
+        public static ref readonly T skip<T>(T[] src, byte count)
+            => ref memory.skip(src,count);
+
+        [MethodImpl(Inline)]
+        public static ref readonly T skip<T>(T[] src, ushort count)
+            => ref memory.skip(src,count);
+
+        [MethodImpl(Inline)]
+        public static ref readonly T skip<T>(T[] src, uint count)
+            => ref memory.skip(src,count);
+
+        [MethodImpl(Inline)]
+        public static ref readonly T skip<T>(T[] src, ulong count)
+            => ref memory.skip(src,count);
+
+        [MethodImpl(Inline)]
+        public static ref readonly T skip<T>(T[] src, long count)
+            => ref memory.skip(src,count);
     }
 }

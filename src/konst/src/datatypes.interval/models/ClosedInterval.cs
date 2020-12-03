@@ -36,7 +36,6 @@ namespace Z0
             Max = max;
         }
 
-
         public ConstPair<T> Pair
         {
             [MethodImpl(Inline)]
@@ -67,7 +66,6 @@ namespace Z0
             get => Min.Equals(Max);
         }
 
-
         /// <summary>
         /// Converts the left and right underlying values
         /// </summary>
@@ -75,7 +73,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public ClosedInterval<U> Convert<U>()
             where U : unmanaged, IComparable<U>, IEquatable<U>
-                => new ClosedInterval<U>(Cast.to<T,U>(Min), Cast.to<T,U>(Max));
+                => new ClosedInterval<U>(force<T,U>(Min), force<T,U>(Max));
 
         /// <summary>
         /// Creates a view of the data in the interval as seen through the
@@ -112,13 +110,13 @@ namespace Z0
         ulong LeftU64
         {
             [MethodImpl(Inline)]
-            get => Cast.to<T,ulong>(Min);
+            get => force<T,ulong>(Min);
         }
 
         ulong RightU64
         {
             [MethodImpl(Inline)]
-            get => Cast.to<T,ulong>(Max);
+            get => force<T,ulong>(Max);
         }
 
         T IInterval<T>.Left

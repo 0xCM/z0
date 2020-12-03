@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Defines a common set of hex formatting options
@@ -49,7 +49,6 @@ namespace Z0
         /// </summary>
         public string FormatCode
             => $"{CaseFormatChar}";
-
 
         [MethodImpl(Inline)]
         public HexFormatOptions(bool zpad, bool specifier, bool uppercase, bool prespec, char delimiter)

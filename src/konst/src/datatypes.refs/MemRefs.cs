@@ -16,6 +16,11 @@ namespace Z0
     {
         const NumericKind Closure = UnsignedInts;
 
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static unsafe void copy<T>(SegRef src, Span<T> dst)
+            where T : unmanaged
+                => MemoryReader.create<T>(src).ReadAll(dst);
+
         [Op]
         public static void locations(in Segments store, Span<MemoryAddress> results)
         {
@@ -34,7 +39,7 @@ namespace Z0
                         ref readonly var x = ref skip(data,j);
                         if(j == 0)
                         {
-                            var a = z.address(x);
+                            var a = address(x);
                             if(source.Address == a)
                                 seek(results,i) = a;
                         }
@@ -43,15 +48,15 @@ namespace Z0
             }
         }
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Ref<byte> from(ReadOnlySpan<byte> src)
             => new Ref<byte>(new Ref(z.address(src), (uint)src.Length));
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Ref<T> define<T>(in T src, uint size)
             => new Ref<T>(new Ref(z.address(src), size));
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<T> read<T>(in Ref src)
             => src.As<T>();
 
@@ -59,7 +64,7 @@ namespace Z0
         public static Span<byte> replicate(in SegRef src)
         {
             Span<byte> dst = sys.alloc<byte>(src.DataSize);
-            MemCopy.copy(src, dst);
+            copy(src, dst);
             return dst;
         }
 
@@ -80,7 +85,7 @@ namespace Z0
         public static Vector128<ulong> location(in SegRef src)
             => vparts(N128.N, src.Address, (ulong)src.DataSize);
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static unsafe Ref<T> one<T>(in T src)
             => new Ref<T>(segref(pvoid(src), size<T>()));
 

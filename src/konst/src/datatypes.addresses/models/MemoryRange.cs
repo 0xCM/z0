@@ -30,33 +30,6 @@ namespace Z0
             get => Length == 0;
         }
 
-        [MethodImpl(Inline)]
-        public static bool operator==(MemoryRange a, MemoryRange b)
-            => a.Equals(b);
-
-        [MethodImpl(Inline)]
-        public static bool operator!=(MemoryRange a, MemoryRange b)
-            => !a.Equals(b);
-
-        [MethodImpl(Inline)]
-        public static bool operator<(MemoryRange a, MemoryRange b)
-            => a.Start < b.Start;
-
-        [MethodImpl(Inline)]
-        public static bool operator>(MemoryRange a, MemoryRange b)
-            => a.Start > b.Start;
-
-        [MethodImpl(Inline)]
-        public static bool operator<=(MemoryRange a, MemoryRange b)
-            => a.Start <= b.Start;
-
-        [MethodImpl(Inline)]
-        public static bool operator>=(MemoryRange a, MemoryRange b)
-            => a.Start >= b.Start;
-
-        [MethodImpl(Inline)]
-        public static implicit operator MemoryRange((MemoryAddress start, MemoryAddress end) src)
-            => new MemoryRange(src.start, src.end);
 
         [MethodImpl(Inline)]
         public MemoryRange(MemoryAddress start, MemoryAddress end)
@@ -104,6 +77,34 @@ namespace Z0
 
         public string Format()
             => bracket(string.Concat(Start.Format(), Chars.Comma, Chars.Space, End.Format()));
+
+        [MethodImpl(Inline)]
+        public static bool operator==(MemoryRange a, MemoryRange b)
+            => a.Equals(b);
+
+        [MethodImpl(Inline)]
+        public static bool operator!=(MemoryRange a, MemoryRange b)
+            => !a.Equals(b);
+
+        [MethodImpl(Inline)]
+        public static bool operator<(MemoryRange a, MemoryRange b)
+            => a.Start < b.Start;
+
+        [MethodImpl(Inline)]
+        public static bool operator>(MemoryRange a, MemoryRange b)
+            => a.Start > b.Start;
+
+        [MethodImpl(Inline)]
+        public static bool operator<=(MemoryRange a, MemoryRange b)
+            => a.Start <= b.Start;
+
+        [MethodImpl(Inline)]
+        public static bool operator>=(MemoryRange a, MemoryRange b)
+            => a.Start >= b.Start;
+
+        [MethodImpl(Inline)]
+        public static implicit operator MemoryRange((MemoryAddress start, MemoryAddress end) src)
+            => new MemoryRange(src.start, src.end);
 
         public static MemoryRange Empty => default;
 

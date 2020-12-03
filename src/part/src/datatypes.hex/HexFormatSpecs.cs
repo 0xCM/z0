@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     public static class HexFormatSpecs
     {
@@ -94,7 +94,7 @@ namespace Z0
         /// Specifies the default configuration for hex data emission
         /// </summary>
         public static HexFormatOptions HexData
-            => new HexFormatOptions(true, false, false, false, Space);
+            => new HexFormatOptions(true, false, false, false, DataDelimiter);
 
         /// <summary>
         /// The default configuration for array initialization content
@@ -120,7 +120,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static HexFormatOptions options(bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true, char? delimiter = null)
-            => new HexFormatOptions(zpad,specifier, uppercase, prespec, delimiter ?? Space);
+            => new HexFormatOptions(zpad,specifier, uppercase, prespec, delimiter ?? DataDelimiter);
 
         [MethodImpl(Inline)]
         public static HexSeqFormat seq(in HexFormatOptions hex, string delimiter = null)

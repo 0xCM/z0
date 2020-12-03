@@ -1,12 +1,12 @@
 echo off
 
-set DataSrc=%ZDb%\docs\asm.semantic\asm.semantic
+set DataSrc=%ZDb%\machine\capture
 echo DataSrc:%DataSrc%
 
-set DataDst=k:\z0.archives\data\asm.semantic
+set DataDst=k:\z0.archives\data\capture
 echo DataDst:%DataDst%
 
-set CopyLog=%ZDb%\etl\asm.semantic-archive.log
+set CopyLog=%ZDb%\etl\machine-capture-archive.log
 echo CopyLog:%CopyLog%
 
 set CopyCmd=robocopy %DataSrc% %DataDst% /log:%CopyLog% /tee /TS /BYTES /V /MIR

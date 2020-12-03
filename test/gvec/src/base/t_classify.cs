@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Linq;
     using System.Collections.Generic;
-    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
     using static Konst;
@@ -23,7 +22,6 @@ namespace Z0
 
         public void classify_numeric()
         {
-
             var fkExpect = hashset(NumericKind.F32, NumericKind.F64);
             var fkActual = NumericKind.Floats.DistinctKinds();
             Claim.seteq(fkExpect,fkActual);
@@ -31,7 +29,6 @@ namespace Z0
             var ftExpect = hashset(typeof(float), typeof(double));
             var ftActual = NumericKind.Floats.DistinctTypes();
             Claim.seteq(ftExpect,ftActual);
-
 
             var ukExpect = hashset(NumericKind.U8, NumericKind.U16, NumericKind.U32, NumericKind.U64);
             var ukActual = NumericKind.UnsignedInts.DistinctKinds();
@@ -67,16 +64,16 @@ namespace Z0
 
         public void check_numeric_identity()
         {
-            Claim.eq(NumericApiKind.U8, NumericKind.U8.NumericId());
-            Claim.eq(NumericApiKind.I8, NumericKind.I8.NumericId());
-            Claim.eq(NumericApiKind.U16, NumericKind.U16.NumericId());
-            Claim.eq(NumericApiKind.I16, NumericKind.I16.NumericId());
-            Claim.eq(NumericApiKind.U32, NumericKind.U32.NumericId());
-            Claim.eq(NumericApiKind.I32, NumericKind.I32.NumericId());
-            Claim.eq(NumericApiKind.U64, NumericKind.U64.NumericId());
-            Claim.eq(NumericApiKind.I64, NumericKind.I64.NumericId());
-            Claim.eq(NumericApiKind.F32, NumericKind.F32.NumericId());
-            Claim.eq(NumericApiKind.F64, NumericKind.F64.NumericId());
+            Claim.eq(NumericApiKind.U8, NumericKind.U8.ApiKind());
+            Claim.eq(NumericApiKind.I8, NumericKind.I8.ApiKind());
+            Claim.eq(NumericApiKind.U16, NumericKind.U16.ApiKind());
+            Claim.eq(NumericApiKind.I16, NumericKind.I16.ApiKind());
+            Claim.eq(NumericApiKind.U32, NumericKind.U32.ApiKind());
+            Claim.eq(NumericApiKind.I32, NumericKind.I32.ApiKind());
+            Claim.eq(NumericApiKind.U64, NumericKind.U64.ApiKind());
+            Claim.eq(NumericApiKind.I64, NumericKind.I64.ApiKind());
+            Claim.eq(NumericApiKind.F32, NumericKind.F32.ApiKind());
+            Claim.eq(NumericApiKind.F64, NumericKind.F64.ApiKind());
         }
 
         public void classify_block_segment_16()

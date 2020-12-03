@@ -7,21 +7,6 @@ namespace Z0
     public interface IPartFileExtensions
     {
         /// <summary>
-        /// Extract log extension
-        /// </summary>
-        FileExtension Extract => FileExtensions.Extract;
-
-        /// <summary>
-        /// Parse log extension
-        /// </summary>
-        FileExtension Parsed => FileExtensions.Parsed;
-
-        /// <summary>
-        /// Parse failure log extension
-        /// </summary>
-        FileExtension Unparsed => FileExtensions.Unparsed;
-
-        /// <summary>
         /// Extension for hex files
         /// </summary>
         FileExtension HexLine => FileExtensions.HexLine;
@@ -31,29 +16,6 @@ namespace Z0
         /// </summary>
         FileExtension Asm => FileExtensions.Asm;
 
-        /// <summary>
-        /// Extension for Cil files
-        /// </summary>
-        FileExtension Il => FileExtensions.Il;
 
-        /// <summary>
-        /// Extension for Cil data files
-        /// </summary>
-        FileExtension IlData => FileExtension.Define($"{Il}.{HexLine}");
-
-        /// <summary>
-        /// Extension for part configuration files
-        /// </summary>
-        FileExtension Config =>  FileExtensions.Json;
-
-        /// <summary>
-        /// Extension for application status logs
-        /// </summary>
-        FileExtension StatusLog => FileExtensions.StatusLog;
-
-        /// <summary>
-        /// Extension for error output capture logs
-        /// </summary>
-        FileExtension ErrorLog => FileExtensions.ErrorLog;
     }
 }

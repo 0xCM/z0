@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    public unsafe readonly struct MemoryAddress : IAddress<MemoryAddress,W64,ulong>, IAddressable
+    public unsafe readonly struct MemoryAddress : IAddress<MemoryAddress,W64,ulong>
     {
         public ulong Location {get;}
 
@@ -31,12 +31,6 @@ namespace Z0
         public string Identifier
             => Location.ToString("x") + HexFormatSpecs.PostSpec;
 
-        MemoryAddress IAddressable.Address
-        {
-            [MethodImpl(Inline)]
-            get => this;
-        }
-
         /// <summary>
         /// Computes the bit-width of the smallest numeric type that can represent the address
         /// </summary>
@@ -55,7 +49,6 @@ namespace Z0
                     return NumericWidth.W64;
             }
         }
-
 
         [MethodImpl(Inline)]
         public MemoryAddress(ulong absolute)

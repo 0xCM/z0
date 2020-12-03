@@ -335,7 +335,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static int iVal(T src)
-            => Cast.to<T,int>(src);
+            => force<T,int>(src);
 
         public string Format(int? colwidth = null)
             => Terms.FormatAsPerm(colwidth);

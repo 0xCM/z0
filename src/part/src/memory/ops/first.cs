@@ -29,7 +29,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static unsafe ref T first<T>(T[] src)
-            => ref GetReference<T>(src);
+            => ref seek<T>(src,0);
 
         /// <summary>
         /// Returns a reference to the head of a readonly span

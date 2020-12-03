@@ -86,7 +86,7 @@ namespace Z0
 
         static OpIdentity identify(MethodInfo src, NumericKind k)
         {
-            var t = k.SystemType();
+            var t = k.ToSystemType();
             if(src.IsOpenGeneric() && t.IsNonEmpty())
                 return identify(src.MakeGenericMethod(t));
             else
@@ -107,7 +107,7 @@ namespace Z0
         /// <param name="generics">Metadata for generic operations</param>
         public static IEnumerable<ClosedApiMethod> Closures(GenericApiMethod op)
              => from k in op.Kinds
-                let pt = k.SystemType().ToOption() where pt.IsSome()
+                let pt = k.ToSystemType().ToOption() where pt.IsSome()
                 let id = Identity.identify(op.Method, k) where !id.IsEmpty
                 select new ClosedApiMethod(op.Host, id, k, op.Method.MakeGenericMethod(pt.Value));
 

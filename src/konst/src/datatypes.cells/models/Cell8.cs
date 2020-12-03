@@ -43,7 +43,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public T As<T>()
             where T : struct
-              => Cast.to<T>(Data);
+              => NumericCast.force<T>(Data);
 
         [MethodImpl(Inline)]
         public bool Equals(Cell8 src)

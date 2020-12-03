@@ -7,12 +7,12 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     using NK = NumericKind;
 
     partial class NumericKinds
-    {            
+    {
         /// <summary>
         /// Determines the numeric kind of a parametrically-identified type
         /// </summary>
@@ -59,7 +59,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return NK.F64;
             else
-                return NK.None;            
+                return NK.None;
         }
     }
 }

@@ -12,7 +12,6 @@ namespace Z0
     using static Konst;
     using static z;
 
-
     /// <summary>
     /// Defines a permutation over the integers [0, 1, ..., n - 1] where n is the permutation length
     /// </summary>
@@ -20,7 +19,6 @@ namespace Z0
     public readonly struct Perm
     {
         const NumericKind Closure = UnsignedInts;
-
 
         /// <summary>
         /// Defines the permutation (0 -> terms[0], 1 -> terms[1], ..., n - 1 -> terms[n-1])
@@ -49,13 +47,13 @@ namespace Z0
         /// <param name="i">The first index</param>
         /// <param name="j">The second index</param>
         /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<T> apply<T>(Span<T> src, params Swap[] swaps)
             where T : unmanaged
         {
             var len = swaps.Length;
             ref var srcmem = ref first(src);
-            ref var swapmem = ref Arrays.first(swaps);
+            ref var swapmem = ref memory.first(swaps);
             for(var k = 0u; k < len; k++)
             {
                 (var i, var j) = skip(in swapmem, k);
@@ -79,7 +77,7 @@ namespace Z0
         /// <param name="swaps">The transposition sequence</param>
         /// <param name="dst">The output sequence</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static void apply<T>(ReadOnlySpan<T> src, ReadOnlySpan<Swap> swaps, Span<T> dst)
             where T : unmanaged
         {
@@ -226,40 +224,6 @@ namespace Z0
         public static Perm<T> Identity<T>(T n)
             where T : unmanaged
                 => new Perm<T>(Algorithmic.stream(default, gmath.dec(n)));
-
-        [MethodImpl(Inline)]
-        public static implicit operator Perm(Span<int> src)
-            => new Perm(src.ToArray());
-
-        [MethodImpl(Inline)]
-        public static implicit operator Perm(ReadOnlySpan<int> src)
-            => Init(src);
-
-        /// <summary>
-        /// Computes the composition h of f and g where f and g have common length n and
-        /// h(i) = g(f(i)) for i = 0, ... n-1
-        /// </summary>
-        /// <param name="f">The left permutation</param>
-        /// <param name="g">The right permutation</param>
-        [MethodImpl(Inline)]
-        public static Perm operator *(Perm f, Perm g)
-            => f.Compose(g);
-
-        [MethodImpl(Inline)]
-        public static Perm operator ++(in Perm lhs)
-            => lhs.Inc();
-
-        [MethodImpl(Inline)]
-        public static Perm operator --(in Perm lhs)
-            => lhs.Dec();
-
-        [MethodImpl(Inline)]
-        public static bool operator ==(Perm lhs, Perm rhs)
-            => lhs.Equals(rhs);
-
-        [MethodImpl(Inline)]
-        public static bool operator !=(Perm lhs, Perm rhs)
-            => !(lhs == rhs);
 
         /// <summary>
         /// Initializes permutation with the identity followed by a sequence of transpostions
@@ -531,5 +495,39 @@ namespace Z0
 
         public override bool Equals(object o)
             => o is Perm p  && Equals(p);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Perm(Span<int> src)
+            => new Perm(src.ToArray());
+
+        [MethodImpl(Inline)]
+        public static implicit operator Perm(ReadOnlySpan<int> src)
+            => Init(src);
+
+        /// <summary>
+        /// Computes the composition h of f and g where f and g have common length n and
+        /// h(i) = g(f(i)) for i = 0, ... n-1
+        /// </summary>
+        /// <param name="f">The left permutation</param>
+        /// <param name="g">The right permutation</param>
+        [MethodImpl(Inline)]
+        public static Perm operator *(Perm f, Perm g)
+            => f.Compose(g);
+
+        [MethodImpl(Inline)]
+        public static Perm operator ++(in Perm src)
+            => src.Inc();
+
+        [MethodImpl(Inline)]
+        public static Perm operator --(in Perm src)
+            => src.Dec();
+
+        [MethodImpl(Inline)]
+        public static bool operator ==(Perm a, Perm b)
+            => a.Equals(b);
+
+        [MethodImpl(Inline)]
+        public static bool operator !=(Perm a, Perm b)
+            => !(a == b);
     }
 }

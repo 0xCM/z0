@@ -276,7 +276,7 @@ namespace Z0
         [Op]
         public static Type[] NumericClosureTypes(MethodInfo m)
             => from c in NumericClosureKinds(m)
-               let t = c.SystemType()
+               let t = c.ToSystemType()
                where t != typeof(void)
                select t;
 

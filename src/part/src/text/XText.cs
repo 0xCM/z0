@@ -2,22 +2,13 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Parts
+namespace Z0
 {
-    using System;
-    using System.Reflection;
-    using System.IO;
 
-    partial class Part
+    [ApiHost]
+    public static partial class XText
     {
 
-        public static class Scripts
-        {
-
-
-
-        }
 
     }
-
 }

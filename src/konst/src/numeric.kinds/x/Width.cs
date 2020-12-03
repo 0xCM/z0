@@ -7,10 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static NumericKinds;
 
-    partial class XNumericKinds
+    partial class XNumericKind
     {
         /// <summary>
         /// Determines whether a numeric kind designates a signed integral type

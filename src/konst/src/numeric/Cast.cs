@@ -23,18 +23,6 @@ namespace Z0
             => z.force<S,T>(src);
 
         [MethodImpl(Inline)]
-        public static T to<T>(sbyte src)
-            => z.force<T>(src);
-
-        [MethodImpl(Inline)]
-        public static T to<T>(byte src)
-            => z.force<T>(src);
-
-        [MethodImpl(Inline)]
-        public static T to<T>(short src)
-            => z.force<T>(src);
-
-        [MethodImpl(Inline)]
         public static T to<T>(ushort src)
             => z.force<T>(src);
 
@@ -47,19 +35,7 @@ namespace Z0
             => z.force<T>(src);
 
         [MethodImpl(Inline)]
-        public static T to<T>(long src)
-            => z.force<T>(src);
-
-        [MethodImpl(Inline)]
         public static T to<T>(ulong src)
-            => z.force<T>(src);
-
-        [MethodImpl(Inline)]
-        public static T to<T>(float src)
-            => z.force<T>(src);
-
-        [MethodImpl(Inline)]
-        public static T to<T>(double src)
             => z.force<T>(src);
    }
 }

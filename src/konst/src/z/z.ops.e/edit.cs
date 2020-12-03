@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static System.Runtime.CompilerServices.Unsafe;
 
     partial struct z
     {
@@ -20,77 +19,49 @@ namespace Z0
         public static unsafe Span<char> edit(in StringRef src)
             => cover<char>(src.Address.Pointer<char>(), (uint)src.Length);
 
-        /// <summary>
-        /// Transforms a readonly T-cell into an editable T-cell
-        /// </summary>
-        /// <param name="src">The source cell</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline)]
         public static ref T edit<T>(in T src)
-            => ref AsRef(src);
+            => ref memory.edit(src);
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline)]
         public static ref byte edit8u<T>(in T src)
-            => ref edit<T,byte>(src);
+            => ref memory.edit8u(src);
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline)]
         public static ref ushort edit16u<T>(in T src)
-            => ref edit<T,ushort>(src);
+            => ref memory.edit16u(src);
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline)]
         public static ref uint edit32u<T>(in T src)
-            => ref edit<T,uint>(src);
+            => ref memory.edit32u(src);
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline)]
         public static ref ulong edit64u<T>(in T src)
-            => ref edit<T,ulong>(src);
+            => ref memory.edit64u(src);
 
-        /// <summary>
-        /// Are you sure you want to do this?
-        /// </summary>
-        /// <param name="src">The immutable, and possibly interned string that were are going to modify</param>
         [MethodImpl(Inline), Op]
         public static unsafe ref char edit(string src)
-            => ref @ref(pchar(src));
+            => ref memory.edit(src);
 
-        /// <summary>
-        /// Covers the content of a readonly span with an editable span
-        /// </summary>
-        /// <param name="src">The memory source</param>
-        /// <param name="count">The number of source cells to read</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        /// <returns>Obviously, this trick could be particularly dangerous</returns>
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline)]
         public static Span<T> edit<T>(ReadOnlySpan<T> src)
-            =>  cover(edit(first(src)), src.Length);
+            =>  memory.edit(src);
 
-        /// <summary>
-        /// Transforms a readonly S-cell into an editable T-cell
-        /// </summary>
-        /// <param name="src">The source cell</param>
-        /// <typeparam name="S">The source type</typeparam>
-        /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline)]
         public static ref T edit<S,T>(in S src)
-            => ref As<S,T>(ref AsRef(src));
+            => ref memory.edit<S,T>(src);
 
-        /// <summary>
-        /// Transforms a readonly S-cell into an editable T-cell
-        /// </summary>
-        /// <param name="src">The source cell</param>
-        /// <param name="dst">The target cell</param>
-        /// <typeparam name="S">The source type</typeparam>
-        /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline)]
         public static ref T edit<S,T>(in S src, ref T dst)
-            => ref As<S,T>(ref AsRef(src));
+            => ref memory.edit(src, ref dst);
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline)]
         public static unsafe Span<T> edit<T>(MemoryAddress src, uint count)
             => cover(src.Ref<T>(), count);
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline)]
         public static unsafe Span<byte> edit(MemoryAddress src, ByteSize size)
             => cover(src.Ref<byte>(), size);
+
     }
 }

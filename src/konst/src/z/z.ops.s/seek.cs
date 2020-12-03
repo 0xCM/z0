@@ -16,51 +16,72 @@ namespace Z0
             => ref memory.seek<S,T>(src,count);
 
         [MethodImpl(Inline)]
+        public static ref T seek<T>(in T src, byte count)
+            => ref memory.seek(src,count);
+
+        [MethodImpl(Inline)]
+        public static ref T seek<T>(in T src, ushort count)
+            => ref memory.seek(src,count);
+
+        [MethodImpl(Inline)]
+        public static ref T seek<T>(in T src, uint count)
+            => ref memory.seek(src,count);
+
+        [MethodImpl(Inline)]
+        public static ref T seek<T>(in T src, ulong count)
+            => ref memory.seek(src,count);
+
+        [MethodImpl(Inline)]
+        public static ref T seek<T>(in T src, long count)
+            => ref memory.seek(src, count);
+
+        [MethodImpl(Inline)]
+        public static ref T seek<T>(in T src, int count)
+            => ref memory.seek(src,count);
+
+        [MethodImpl(Inline)]
         public static ref T seek<T>(Span<byte> src, uint count)
             => ref memory.seek<T>(src,count);
 
         [MethodImpl(Inline)]
-        public static ref T seek<T>(Span<T> src, byte offset)
-            => ref memory.seek(src,offset);
+        public static ref T seek<T>(Span<T> src, byte count)
+            => ref memory.seek(src,count);
 
         [MethodImpl(Inline)]
-        public static ref T seek<T>(Span<T> src, uint offset)
-            => ref memory.seek(src,offset);
+        public static ref T seek<T>(Span<T> src, uint count)
+            => ref memory.seek(src,count);
 
         [MethodImpl(Inline)]
-        public static ref T seek<T>(Span<T> src, long offset)
-            => ref memory.seek(src,offset);
+        public static ref T seek<T>(Span<T> src, long count)
+            => ref memory.seek(src,count);
 
         [MethodImpl(Inline)]
-        public static ref T seek<T>(Span<T> src, ulong offset)
-            => ref memory.seek(src,offset);
+        public static ref T seek<T>(Span<T> src, ulong count)
+            => ref memory.seek(src,count);
 
         [MethodImpl(Inline)]
-        public static ref T seek<T>(Span<T> src, ushort offset)
-            => ref memory.seek(src,offset);
+        public static ref T seek<T>(Span<T> src, ushort count)
+            => ref memory.seek(src,count);
 
         [MethodImpl(Inline)]
-        public static ref T seek<T>(in T src, byte offset)
-            => ref memory.seek(src,offset);
+        public static ref T seek<T>(T[] src, byte count)
+            => ref memory.seek(src,count);
 
         [MethodImpl(Inline)]
-        public static ref T seek<T>(in T src, ushort offset)
-            => ref memory.seek(src,offset);
+        public static ref T seek<T>(T[] src, ushort count)
+            => ref memory.seek(src,count);
 
         [MethodImpl(Inline)]
-        public static ref T seek<T>(in T src, uint offset)
-            => ref memory.seek(src,offset);
+        public static ref T seek<T>(T[] src, uint count)
+            => ref memory.seek(src,count);
 
         [MethodImpl(Inline)]
-        public static ref T seek<T>(in T src, ulong offset)
-            => ref memory.seek(src,offset);
+        public static ref T seek<T>(T[] src, long count)
+            => ref memory.seek(src,count);
 
         [MethodImpl(Inline)]
-        public static ref T seek<T>(in T src, long offset)
-            => ref memory.seek(src, offset);
+        public static ref T seek<T>(T[] src, ulong count)
+            => ref memory.seek(src,count);
 
-        [MethodImpl(Inline)]
-        public static ref T seek<T>(in T src, int offset)
-            => ref memory.seek(src,offset);
     }
 }

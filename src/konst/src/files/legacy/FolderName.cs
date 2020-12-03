@@ -14,7 +14,7 @@ namespace Z0
     /// Defines a folder name in isolation without ascribing additional path content
     /// </summary>
     public class FolderName : PathComponent<FolderName>
-    {        
+    {
         /// <summary>
         /// Describes the sort of file contained by the folder
         /// </summary>
@@ -29,8 +29,8 @@ namespace Z0
         /// </summary>
         /// <param name="part">The owning part</param>
         [MethodImpl(Inline)]
-        public static FolderName Define(PartId part)
-            => new FolderName(part.Format());
+        public static FS.FolderName Define(PartId part)
+            => new FS.FolderName(part.Format());
 
         /// <summary>
         /// Defines the name of an api host-owned folder

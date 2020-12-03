@@ -9,13 +9,13 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct ValueSource<T> : IValueSource<T>
+    public readonly struct ValueSource<T> : ISource<T>
         where T : struct
     {
-        readonly IValueSource Source;
+        readonly ISource Source;
 
         [MethodImpl(Inline)]
-        public ValueSource(IValueSource source)
+        public ValueSource(ISource source)
             => Source = source;
 
         [MethodImpl(Inline)]

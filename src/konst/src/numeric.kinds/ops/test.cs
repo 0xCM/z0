@@ -7,10 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     partial class NumericKinds
-    {            
+    {
         /// <summary>
         /// Returns true if a type is a numeric type, false otherwise
         /// </summary>

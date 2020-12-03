@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct z
+    partial struct NumericCast
     {
         [MethodImpl(Inline)]
         internal static T convert64i_u<T>(long src)

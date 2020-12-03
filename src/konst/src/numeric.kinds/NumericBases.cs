@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     using NBI = NumericBaseIndicator;
     using NBK = NumericBaseKind;
@@ -47,7 +47,7 @@ namespace Z0
                 return NBI.Base3;
             else
                 return NBI.None;
-        }    
+        }
 
         [MethodImpl(Inline), Op]
         public static NBK kind(NBI src)
@@ -64,7 +64,7 @@ namespace Z0
                 return NBK.Base3;
             else
                 return NBK.None;
-        }    
+        }
 
         [MethodImpl(Inline)]
         public static NBI indicator<B>(B b = default)
@@ -81,7 +81,7 @@ namespace Z0
             else if(typeof(B) == typeof(Base16))
                 return NBI.Base16;
             else
-                return NBI.None;            
+                return NBI.None;
         }
 
         [MethodImpl(Inline)]
@@ -99,7 +99,7 @@ namespace Z0
             else if(typeof(B) == typeof(Base16))
                 return NBK.Base16;
             else
-                return NBK.None;            
+                return NBK.None;
         }
     }
 }

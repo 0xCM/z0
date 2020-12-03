@@ -60,7 +60,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static NumericKind NumericKind(this EnumTypeCode k)
-            => k.TypeCode().NumericKind();
+            => k.TypeCode().ToNumericKind();
 
         [MethodImpl(Inline)]
         public static T NumericValue<E,T>(this E src, T dst = default)

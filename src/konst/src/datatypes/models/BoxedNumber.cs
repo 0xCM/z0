@@ -51,7 +51,7 @@ namespace Z0
         public static BoxedNumber From(Enum e)
         {
             var tc = Type.GetTypeCode(e.GetType().GetEnumUnderlyingType());
-            var nk = tc.NumericKind();
+            var nk = tc.ToNumericKind();
             var box = System.Convert.ChangeType(e,tc);
             return Define(box,nk);
         }
@@ -230,7 +230,7 @@ namespace Z0
             => Convert<ulong>().FormatHex(false,true);
 
         public string Format(Base2 @base)
-            => BitFormatter.bits(Boxed, Kind.TypeCode());
+            => BitFormatter.bits(Boxed, Kind.ToTypeCode());
 
         public override string ToString()
             => Boxed.ToString();

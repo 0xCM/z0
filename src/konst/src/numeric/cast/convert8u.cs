@@ -13,7 +13,7 @@ namespace Z0
     partial struct NumericCast
     {
         [MethodImpl(Inline)]
-        internal static T convert8u_u<T>(byte src)
+        static T convert8u_u<T>(byte src)
         {
             if(typeof(T) == typeof(byte))
                 return generic<T>((byte)src);

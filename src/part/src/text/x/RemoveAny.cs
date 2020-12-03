@@ -9,9 +9,8 @@ namespace Z0
     using System.Linq;
 
     using static Part;
-    using static z;
 
-    partial class XTend
+    partial class XText
     {
         /// <summary>
         /// Erases a specified set of character occurrences in a string

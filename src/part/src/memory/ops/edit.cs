@@ -43,7 +43,7 @@ namespace Z0
         /// <param name="src">The immutable, and possibly interned string that were are going to modify</param>
         [MethodImpl(Inline), Op]
         public static unsafe ref char edit(string src)
-            => ref @ref(pchar(src));
+            => ref @ref(pchar2(src));
 
         /// <summary>
         /// Covers the content of a readonly span with an editable span
@@ -76,5 +76,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref T edit<S,T>(in S src, ref T dst)
             => ref As<S,T>(ref AsRef(src));
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Span<T> edit<T>(T[] src)
+            => src;
+
     }
 }

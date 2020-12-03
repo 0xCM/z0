@@ -442,7 +442,7 @@ namespace Z0
             if(count == 0)
                 return;
 
-            ref readonly var data = ref Arrays.first(src);
+            ref readonly var data = ref memory.first(src);
             for(var i=0u; i<count; i++)
                 Collect(z.skip(in data, i));
         }

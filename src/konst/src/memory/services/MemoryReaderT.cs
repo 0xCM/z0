@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static z;
+    using static memory;
 
     /// <summary>
     /// Defines a stream reader (of sorts) over a sequence of pointer-identified unmanaged values
@@ -50,7 +50,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public int Read(int offset, int wantedCount, Span<T> dst)
         {
-            int count = min(wantedCount, State.Remaining);
+            int count = zfunc.min(wantedCount, State.Remaining);
             read<T>(Source, offset, ref first(dst), count);
             State.Advance((uint)count);
             return count;
@@ -66,7 +66,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public int Read(int offset, int wantedCount, ref T dst)
         {
-            int count = Math.Min(wantedCount, State.Remaining);
+            int count = zfunc.min(wantedCount, State.Remaining);
             read<T>(Source, offset, ref dst, count);
             State.Advance((uint)count);
             return count;

@@ -8,9 +8,9 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
-    using static Konst;
+    using static Part;
 
-    partial class XTend
+    partial class XText
     {
         /// <summary>
         /// Determines whether a string contains any of the characters in a supplied sequence

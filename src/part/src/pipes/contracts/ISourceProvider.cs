@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
 
-    using static memory;
-
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     /// <summary>

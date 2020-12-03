@@ -7,18 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
-    partial class XNumericKinds
+    partial class XNumericKind
     {
-        /// <summary>
-        /// Converts a numeric indicator to a character
-        /// </summary>
-        /// <param name="src">The source kind</param>
-        [MethodImpl(Inline), Op]
-        public static char ToChar(this NumericIndicator src)
-            => NumericKinds.@char(src);
-
         /// <summary>
         /// Produces text in the form {'i' | 'u' | 'f'}
         /// </summary>

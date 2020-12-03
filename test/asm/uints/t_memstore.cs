@@ -37,8 +37,6 @@ namespace Z0
                 var result = results[i];
                 Claim.yea(result.IsNonEmpty);
                 dst.WriteLine(result);
-
-                //Trace(result);
             }
         }
 

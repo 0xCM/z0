@@ -13,33 +13,32 @@ namespace Z0
     /// </summary>
     public interface IPartFolderNames
     {
+        FS.FolderName ParsedFolderName
+            => FS.folder(Parsed);
 
-        FolderName ExtractFolderName
-            => FolderName.Define("extracted", "Raw binary extracts");
+        FS.FolderName AsmFolderName
+            => FS.folder(Asm);
 
-        FolderName ParsedFolderName
-            => FolderName.Define(Parsed);
+        FS.FolderName AsmSemanticFolder
+            => FS.folder(AsmSemantic);
 
-        FolderName AsmFolderName
-            => FolderName.Define(L.AsmFolder);
+        FS.FolderName X86FolderName
+            => FS.folder(L.Hex);
 
-        FolderName X86FolderName
-            => FolderName.Define("code", "Hex formatted encoded x86 assembly");
-
-        FolderName CilFolderName
-            => FolderName.Define(CilData);
+        FS.FolderName CilFolderName
+            => FS.folder(CilData);
 
         /// <summary>
         /// The imm root folder name
         /// </summary>
-        FolderName ImmFolderName
-            => FolderName.Define(ImmFolder);
+        FS.FolderName ImmFolder
+            => FS.folder(Imm);
 
         /// <summary>
         /// Defines a part-specific folder name {part}
         /// </summary>
         /// <param name="part">The source part</param>
-        FolderName PartFolderName(PartId part)
+        FS.FolderName PartFolderName(PartId part)
             => FolderName.Define(part);
     }
 }

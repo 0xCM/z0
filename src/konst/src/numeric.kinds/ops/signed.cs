@@ -8,8 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
 
-    using static Konst;
-    using static NumericKinds;
+    using static Part;
 
     using NK = NumericKind;
 

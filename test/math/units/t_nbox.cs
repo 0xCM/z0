@@ -25,7 +25,7 @@ namespace Z0
                 var x = BoxedNumber.Define(Random.Next<byte>());
                 var y = Converters.convert<BoxedNumber,ushort>(x);
                 Claim.Require(y.IsSome());
-                Claim.eq(Cast.to<ushort>((byte)x.Boxed), y.Value);
+                Claim.eq(NumericCast.force<ushort>((byte)x.Boxed), y.Value);
             }
         }
 

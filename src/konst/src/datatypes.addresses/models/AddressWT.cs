@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static z;
 
     public readonly struct Address<W,T> : IAddress<W,T>
         where W : unmanaged, INumericWidth
@@ -21,10 +22,10 @@ namespace Z0
             get => Widths.numeric<W>();
         }
 
-        ulong Location64 
+        ulong Location64
         {
             [MethodImpl(Inline)]
-            get => Cast.to<T,ulong>(Location);
+            get => force<T,ulong>(Location);
         }
 
         public bool NonZero
@@ -33,8 +34,40 @@ namespace Z0
             get => Location64 != 0;
         }
 
-        public string Identifier 
-            => Cast.to<T,ulong>(Location).ToString("x") + "h";        
+        public string Identifier
+            => force<T,ulong>(Location).ToString("x") + "h";
+
+        [MethodImpl(Inline)]
+        public Address(ulong absolute)
+            => Location = Cast.to<ulong,T>(absolute);
+
+        public string Format()
+            => Identifier;
+
+        public string Format(int digits)
+            => Location64.ToString($"x{digits}") + "h";
+
+        [MethodImpl(Inline)]
+        public int CompareTo(Address<W,T> other)
+            => this == other ? 0 : this < other ? -1 : 1;
+
+        [MethodImpl(Inline)]
+        public bool Equals(Address<W,T> src)
+            => Location64 == src.Location64;
+
+        public override bool Equals(object obj)
+            => obj is Address<W,T> x && Equals(x);
+
+        public override int GetHashCode()
+            => Location.GetHashCode();
+
+        public override string ToString()
+            => Format();
+
+        [MethodImpl(Inline)]
+        public unsafe P* ToPointer<P>()
+            where P : unmanaged
+                => (P*)Location64;
 
         [MethodImpl(Inline)]
         public static explicit operator byte(Address<W,T> src)
@@ -84,39 +117,7 @@ namespace Z0
         public static Address<W,T> operator-(Address<W,T> a, Address<W,T> b)
             => new Address<W,T>(a.Location64 - b.Location64);
 
-        [MethodImpl(Inline)]
-        public Address(ulong absolute)
-            => Location = Cast.to<ulong,T>(absolute);
-
-        public string Format()
-            => Identifier;
-
-        public string Format(int digits)
-            => Location64.ToString($"x{digits}") + "h";
-
-        [MethodImpl(Inline)]
-        public int CompareTo(Address<W,T> other)
-            => this == other ? 0 : this < other ? -1 : 1;
-
-        [MethodImpl(Inline)]
-        public bool Equals(Address<W,T> src)
-            => Location64 == src.Location64;
-
-        public override bool Equals(object obj)
-            => obj is Address<W,T> x && Equals(x);                    
-
-        public override int GetHashCode()
-            => Location.GetHashCode();
-
-        public override string ToString() 
-            => Format();
-
-        [MethodImpl(Inline)]
-        public unsafe P* ToPointer<P>()
-            where P : unmanaged
-                => (P*)Location64;
-
-        public static Address<W,T> Zero 
+        public static Address<W,T> Zero
             => default;
     }
 }

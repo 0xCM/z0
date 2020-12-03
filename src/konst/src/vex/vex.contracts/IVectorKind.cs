@@ -56,6 +56,6 @@ namespace Z0
         /// The reified vector type as determined by kind facets
         /// </summary>
         Type Close()
-            => TypeDefinition.MakeGenericType(CellKind.SystemType());
+            => TypeDefinition.MakeGenericType(CellKind.ToSystemType());
     }
 }

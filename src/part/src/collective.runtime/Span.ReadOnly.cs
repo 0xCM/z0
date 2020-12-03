@@ -7,17 +7,17 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static NumericKinds;
+    using static Part;
 
-    partial class XNumericKinds
+    partial class XTend
     {
         /// <summary>
-        /// Determines the numeric kind of a type-code identified type
+        /// Presents a mutable span as a readonly span
         /// </summary>
-        /// <param name="tc">The type code to evaluate</param>
-        [MethodImpl(Inline), Op]
-        public static NumericKind NumericKind(this TypeCode tc)
-            => kind(tc);
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The element type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ReadOnlySpan<T> ReadOnly<T>(this Span<T> src)
+            => src;
     }
 }

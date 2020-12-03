@@ -9,7 +9,7 @@ namespace Z0
     public interface IPartImmPaths : IPartFilePaths
     {
         FolderPath ImmRootDirPath(FolderPath root)
-            => (root + ImmFolderName).Create();
+            => (root + ImmFolder).Create();
 
         /// <summary>
         /// The imm root directory path

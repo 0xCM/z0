@@ -20,7 +20,6 @@ namespace Z0
 
         readonly Vector128<ulong> Segment;
 
-
         [MethodImpl(Inline)]
         public SegRef(Vector128<ulong> src)
             => Segment = src;

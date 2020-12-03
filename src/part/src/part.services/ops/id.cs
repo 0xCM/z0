@@ -8,7 +8,7 @@ namespace Z0
     using System.Reflection;
     using System.Runtime.CompilerServices;
 
-    using A = PartIdAttribute;    
+    using A = PartIdAttribute;
 
     partial struct Part
     {
@@ -19,10 +19,10 @@ namespace Z0
         [Op]
         public static PartId id(Assembly src)
         {
-            if(test(src))
+            if(src != null && test(src))
                 return ((A)Attribute.GetCustomAttribute(src, typeof(A))).Id;
-            else 
-                return PartId.None;     
-        }        
+            else
+                return PartId.None;
+        }
     }
 }

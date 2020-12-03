@@ -7,25 +7,25 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     public readonly struct HexLineConfig
     {
         /// <summary>
         /// The maximum byte-count per line
         /// </summary>
-        public readonly int BytesPerLine;
+        public int BytesPerLine {get;}
 
         /// <summary>
         /// Specifies whether offset labels should be emitted
         /// </summary>
-        public readonly bool LineLabels;
-            
+        public bool LineLabels {get;}
+
         [MethodImpl(Inline)]
         public HexLineConfig(int linebytes, bool linelabels)
         {
             BytesPerLine = linebytes;
             LineLabels = linelabels;
-        } 
+        }
     }
 }
