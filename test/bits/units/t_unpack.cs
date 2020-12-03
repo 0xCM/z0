@@ -72,11 +72,11 @@ namespace Z0
             where S : unmanaged
             where T : unmanaged
         {
-            for(var j=0; j< RepCount; j++)
+            for(var j=0; j<RepCount; j++)
             {
                 var src = Random.Next<S>();
                 Span<T> dst = new T[bitsize<S>()];
-                gbits.unpack32(src,dst);
+                gbits.unpack(src,dst);
                 var bs = BitString.scalar(src);
                 for(var i = 0; i< bs.Length; i++)
                 {
@@ -113,7 +113,7 @@ namespace Z0
             {
                 var src = Random.Next<S>();
                 counter.Start();
-                gbits.unpack32(src,dst);
+                gbits.unpack(src,dst);
                 counter.Stop();
             }
 

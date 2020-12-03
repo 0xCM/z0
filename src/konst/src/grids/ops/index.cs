@@ -18,13 +18,13 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
-            var rowCellCount = uint16(GridCalcs.minimum<N,T>());
-            var rowOffset = uint32(rowCellCount*row);
+            var rowCellCount = ScalarCast.uint16(GridCalcs.minimum<N,T>());
+            var rowOffset = ScalarCast.uint32(rowCellCount*row);
             return index(
-                CellIndex: uint16(rowOffset + BitSize.div(col,t)),
+                CellIndex: ScalarCast.uint16(rowOffset + BitSize.div(col,t)),
                 RowCellCount: rowCellCount,
-                BitOffset: uint8(BitSize.mod(col,t)),
-                BitIndex: uint32(rowOffset + col),
+                BitOffset: ScalarCast.uint8(BitSize.mod(col,t)),
+                BitIndex: ScalarCast.uint32(rowOffset + col),
                 RowIndex: row,
                 ColIndex: col);
         }

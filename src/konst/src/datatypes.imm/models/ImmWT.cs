@@ -77,18 +77,18 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator Imm<W,T>(byte src)
-            => new Imm<W,T>(Cast.to<byte,T>(src));
+            => new Imm<W,T>(NumericCast.force<byte,T>(src));
 
         [MethodImpl(Inline)]
         public static implicit operator Imm<W,T>(ushort src)
-            => new Imm<W,T>(Cast.to<ushort,T>(src));
+            => new Imm<W,T>(NumericCast.force<ushort,T>(src));
 
         [MethodImpl(Inline)]
         public static implicit operator Imm<W,T>(uint src)
-            => new Imm<W,T>(Cast.to<uint,T>(src));
+            => new Imm<W,T>(NumericCast.force<uint,T>(src));
 
         [MethodImpl(Inline)]
         public static implicit operator Imm<W,T>(ulong src)
-            => new Imm<W,T>(Cast.to<ulong,T>(src));
+            => new Imm<W,T>(NumericCast.force<ulong,T>(src));
     }
 }

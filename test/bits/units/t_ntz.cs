@@ -31,7 +31,7 @@ namespace Z0
         protected void ntz_check<T>(T t = default)
             where T : unmanaged
         {
-            for(var i=0; i< RepCount; i++)
+            for(var i=0; i<RepCount; i++)
             {
                 var x = Random.Next<T>();
                 var ntzX = gbits.ntz(x);
@@ -47,7 +47,5 @@ namespace Z0
                 Claim.eq(ntzX, ntzY);
             }
         }
-
     }
-
 }

@@ -170,7 +170,7 @@ namespace Z0
                 z.vmul(x,y).StoreTo(zb);
 
                 for(var j=0; j< count; j++)
-                    eb[j] = uint32(xs[j] * ys[j]);
+                    eb[j] = ScalarCast.uint32(xs[j] * ys[j]);
 
                 Claim.eq(eb,zb);
             }

@@ -10,21 +10,21 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public class t_hipos : t_bitcore<t_hipos>
+    public class t_mbspos : t_bitcore<t_mbspos>
     {
-        public void hipos_8()
-            => hipos_check<byte>();
+        public void msbpos_8()
+            => check_msbpos<byte>();
 
-        public void hipos_16()
-            => hipos_check<ushort>();
+        public void msbpos_16()
+            => check_msbpos<ushort>();
 
-        public void hipos_32()
-            => hipos_check<uint>();
+        public void msbpos_32()
+            => check_msbpos<uint>();
 
-        public void hipos_64()
-            => hipos_check<ulong>();
+        public void msbpos_64()
+            => check_msbpos<ulong>();
 
-        void hipos_check<T>(T t = default)
+        void check_msbpos<T>(T t = default)
             where T : unmanaged
         {
             for(var i=0; i< RepCount; i++)

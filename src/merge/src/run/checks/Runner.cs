@@ -135,7 +135,7 @@ namespace Z0
 
         void ReadRes()
         {
-            using var map = MemoryFile.open(ResPack);
+            using var map = MemoryFiles.open(ResPack);
             var @base = map.BaseAddress;
             var sig = map.Read(@base, 2).AsUInt16();
             var info = map.Description;

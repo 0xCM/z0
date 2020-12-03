@@ -4,11 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public class t_bit_type : t_bitcore<t_bit_type>
+    public class t_bit_datatype : t_bitcore<t_bit_datatype>
     {
-        static Bit32 On = Bit32.On;
+        static bit On = bit.On;
 
-        static Bit32 Off = Bit32.Off;
+        static bit Off = bit.Off;
 
         public void sb_bit_convert()
         {
@@ -29,8 +29,8 @@ namespace Z0
         public void sb_bit_parse()
         {
             //parse
-            Claim.eq(Off, Bit32.Parse('0'));
-            Claim.eq(On, Bit32.Parse('1'));
+            Claim.eq(Off, bit.Parse('0'));
+            Claim.eq(On, bit.Parse('1'));
         }
 
         public void sb_bit_not()

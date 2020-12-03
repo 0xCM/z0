@@ -284,9 +284,6 @@ namespace Z0
             Claim.eq((byte)4, m.Width(0));
             Claim.eq((byte)8, m.Width(1));
             Claim.eq((byte)3, m.Width(2));
-            // Claim.eq("Field1", m.Name(0));
-            // Claim.eq("Field2", m.Name(1));
-            // Claim.eq("Field3", m.Name(2));
         }
     }
 }

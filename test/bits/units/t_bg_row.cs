@@ -13,13 +13,13 @@ namespace Z0
 
     public class t_bg_row : t_bitgrids<t_bg_row>
     {
-        void bg_row_128x32x4()
+        public void bg_row_128x32x4()
         {
             var t = z32;
             var m = n32;
             var n = n4;
 
-            for(var sample = 0; sample < RepCount; sample++)
+            for(var sample = 0; sample<RepCount; sample++)
             {
                 var bg = Random.BitGrid(m,n,t);
                 var bs = BitGrid.bitstring(bg);
@@ -116,6 +116,5 @@ namespace Z0
                 }
             }
         }
-
     }
 }

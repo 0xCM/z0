@@ -46,10 +46,6 @@ namespace Z0
         public static string NotTrue<T>(T src, string caller, string file, int? line)
              => string.Concat(NotTrue(src), Delimiter, AppMsg.source(caller,file,line));
 
-        [MethodImpl(Inline), Op, Closures(UInt64k)]
-        public static AppException nonvalued<T>([Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => AppException.Define($"A value of type {typeof(T).Name} was expected but does not exist", caller,file,line);
-
         const string Unknown = "???";
 
         const int UnknownInt = -1;
@@ -61,14 +57,6 @@ namespace Z0
         [Op]
         public static void Throw(object reason, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => throw AppException.Define(reason, caller,file,line);
-
-        [Op]
-        public static void Throw(AppMsg msg)
-            => throw AppException.Define(msg);
-
-        [Op]
-        public static void Throw(Exception e)
-            => throw e;
 
         [Op]
         public static AppException Equal(object lhs, object rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)

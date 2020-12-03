@@ -30,7 +30,7 @@ namespace Z0
 
             void check()
             {
-                for(var rep = 0; rep < RepCount; rep++)
+                for(var rep = 0; rep<RepCount; rep++)
                 {
                     var range = Random.Interval(min, max);
                     var count = (byte)range.Width;

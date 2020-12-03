@@ -19,6 +19,6 @@ namespace Z0
 		/// <param name="b">The right position</param>
 		[MethodImpl(Inline)]
 		public static uint delta(BitPos a, BitPos b)
-			=> uint32(math.abs((long)a.LinearIndex - (long)b.LinearIndex));
+			=> ScalarCast.uint32(math.abs((long)a.LinearIndex - (long)b.LinearIndex));
     }
 }

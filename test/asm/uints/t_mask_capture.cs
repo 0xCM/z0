@@ -51,7 +51,7 @@ namespace Z0.Asm
         public void test_bit_parse()
         {
             var src = Random.Bytes(8).Array();
-            var formatted = BitFormatter.bitchars(src);
+            var formatted = BitFormatter.chars(src);
             Trace(formatted.ToString());
         }
 
@@ -77,6 +77,5 @@ namespace Z0.Asm
                 asmout.WriteAsm(AsmCheck.Decoder.Decode(captured).Require());
             }
         }
-
     }
 }

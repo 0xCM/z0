@@ -20,10 +20,6 @@ namespace Z0
             => AppMsg.define($"{msg}; caller:{caller}; line:{line ?? 0}; file:{file}", LogLevel.Error);
 
         [Op]
-        static AppMsg Fail(string msg)
-            => AppMsg.define(msg, LogLevel.Error);
-
-        [Op]
         public static AppMsg FeatureUnsupported(object feature, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => Fail($"Unsupported: {feature}", caller, file, line);
 

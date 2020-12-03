@@ -50,24 +50,6 @@ namespace Z0
                 => unpack32(src, dst.AsSpan());
 
         /// <summary>
-        /// Projects each bit from a source value into target span element at the corresponding index
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        /// <param name="dst">The bit target</param>
-        /// <typeparam name="T">The bit source type</typeparam>
-        /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline)]
-        public static Span<T> unpack32<S,T>(S src, Span<T> dst, uint offset = 0)
-            where S : unmanaged
-            where T : unmanaged
-        {
-            var len = bitsize<S>();
-            for(var i=0u; i< len; i++)
-                seek(dst,offset + i)  = testbit32(src, (byte)i) == Bit32.On ? one<T>() : zero<T>();
-            return dst;
-        }
-
-        /// <summary>
         /// Projects each source bit from each source element into an element of the target span at the corresponding index
         /// </summary>
         /// <param name="src">The bit source</param>
@@ -86,8 +68,8 @@ namespace Z0
                 var srcsize = bitsize<S>();
                 var bitcount = bitsize<S>()*src.Length;
                 var k = 0u;
-                for(var i=0; i < src.Length; i++)
-                for(byte j=0; j < srcsize; j++)
+                for(var i=0; i<src.Length; i++)
+                for(byte j=0; j<srcsize; j++)
                     seek(dst,k++)  = testbit32(skip(src,i), j) == Bit32.On ? one<T>() : zero<T>();
                 return dst;
             }

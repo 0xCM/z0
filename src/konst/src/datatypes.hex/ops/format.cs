@@ -140,13 +140,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(W) == typeof(W8))
-                return SmallHex.format(Cast.to<T,byte>(value));
+                return SmallHex.format(NumericCast.force<T,byte>(value));
             else if(typeof(W) == typeof(W16))
-                return SmallHex.format(Cast.to<T,ushort>(value));
+                return SmallHex.format(NumericCast.force<T,ushort>(value));
             else if(typeof(W) == typeof(W32))
-                return SmallHex.format(Cast.to<T,uint>(value));
+                return SmallHex.format(NumericCast.force<T,uint>(value));
             else if(typeof(W) == typeof(W64))
-                return SmallHex.format(Cast.to<T,ulong>(value));
+                return SmallHex.format(NumericCast.force<T,ulong>(value));
             else
                 return default;
         }

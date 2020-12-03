@@ -22,6 +22,11 @@ namespace Z0
         public static ulong uint64<T>(T src)
             => As<T,ulong>(ref src);
 
+        /// <summary>
+        /// Presents a parametric source reference to a <see cref='ulong'/>
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref ulong uint64<T>(ref T src)
             => ref As<T,ulong>(ref src);
@@ -35,61 +40,5 @@ namespace Z0
         public static ulong? uint64<T>(T? src)
             where T : unmanaged
                 => As<T?, ulong?>(ref src);
-
-        /// <summary>
-        /// Converts a <see cref='sbyte'/> to a <see cref='ulong'/>
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline), Op]
-        public static ulong uint64(sbyte src)
-            => (ulong)src;
-
-        /// <summary>
-        /// Converts a <see cref='byte'/> to a <see cref='ulong'/>
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline), Op]
-        public static ulong uint64(byte src)
-            => (ulong)src;
-
-        /// <summary>
-        /// Converts a <see cref='short'/> to a <see cref='ulong'/>
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline), Op]
-        public static ulong uint64(short src)
-            => (ulong)src;
-
-        /// <summary>
-        /// Converts a <see cref='ushort'/> to a <see cref='ulong'/>
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline), Op]
-        public static ulong uint64(ushort src)
-            => (ulong)src;
-
-        [MethodImpl(Inline), Op]
-        public static ulong uint64(int src)
-            => (ulong)src;
-
-        [MethodImpl(Inline), Op]
-        public static ulong uint64(uint src)
-            => (ulong)src;
-
-        [MethodImpl(Inline), Op]
-        public static ulong uint64(long src)
-            => (ulong)src;
-
-        [MethodImpl(Inline), Op]
-        public static ulong uint64(ulong src)
-            => (ulong)src;
-
-        [MethodImpl(Inline), Op]
-        public static ulong uint64(float src)
-            => (ulong)((long)src);
-
-        [MethodImpl(Inline), Op]
-        public static ulong uint64(double src)
-            => (ulong)((long)src);
     }
 }

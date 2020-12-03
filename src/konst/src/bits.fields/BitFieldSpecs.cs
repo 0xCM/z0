@@ -14,11 +14,13 @@ namespace Z0
     [ApiHost(ApiNames.BitFieldSpecs, true)]
     public readonly struct BitFieldSpecs
     {
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        const NumericKind Closure = UnsignedInts;
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static string format(in BitFieldSegment src)
             => string.Format(SegRenderPattern, src.StartPos, src.EndPos);
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static string format<T>(in BitFieldSegment<T> src)
             where T : unmanaged
                 => string.Format(SegRenderPattern, src.StartPos, src.EndPos);
@@ -31,38 +33,37 @@ namespace Z0
         [Op]
         public static string format(ReadOnlySpan<BitFieldSegment> src)
         {
-            const string Sep = ", ";
             const char Left = Chars.LBracket;
             const char Right = Chars.RBracket;
 
-            var formatted = text.build();
+            var dst = text.build();
             var count = src.Length;
             var last = count - 1;
-            formatted.Append(Left);
+            dst.Append(Left);
             for(var i=0; i<count; i++)
             {
                 ref readonly var seg = ref z.skip(src,i);
-                formatted.Append(string.Format(SegRenderPattern, seg.StartPos, seg.EndPos));
+                dst.Append(string.Format(SegRenderPattern, seg.StartPos, seg.EndPos));
                 if(i != last)
-                    formatted.Append(Sep);
+                    dst.Append(SegSep);
             }
 
-            formatted.Append(Right);
-            return formatted.ToString();
+            dst.Append(Right);
+            return dst.ToString();
         }
 
         /// <summary>
         /// Computes the aggregate width of the segments that comprise the bitfield
         /// </summary>
         /// <param name="spec">The bitfield spec</param>
-        [Op]
+        [MethodImpl(Inline), Op]
         public static uint width(in BitFieldSpec spec)
         {
             var total = 0u;
             var count = spec.FieldCount;
             var segments = spec.Segments;
             for(byte i=0; i<count; i++)
-                total += skip(segments,i).Width;
+                total += skip(segments, i).Width;
             return total;
         }
 
@@ -100,25 +101,28 @@ namespace Z0
         {
             var count = src.Length;
             var last = count - 1;
-            var sep =$"{Chars.Comma}{Chars.Space}";
             var formatted = text.build();
             formatted.Append(Chars.LBracket);
             for(var i=0; i<count; i++)
             {
-                formatted.Append(Format(src[(byte)i]));
+                ref readonly var seg = ref skip(src,i);
+                formatted.Append(format<S,T>(seg));
                 if(i != last)
-                    formatted.Append(sep);
+                    formatted.Append(SegSep);
             }
 
             formatted.Append(Chars.RBracket);
             return formatted.ToString();
         }
 
-        [Op, Closures(UnsignedInts)]
-        static string Format<T>(IBitFieldSegment<T> src)
+        [MethodImpl(Inline)]
+        static string format<S,T>(S src)
             where T : unmanaged
+            where S : IBitFieldSegment<T>
                 => $"[{src.Width}:{src.StartPos}..{src.EndPos}]";
 
-        const string SegRenderPattern = "[{1},{2}]";
+        const string SegRenderPattern = "[{0},{1}]";
+
+        const string SegSep = ", ";
     }
 }

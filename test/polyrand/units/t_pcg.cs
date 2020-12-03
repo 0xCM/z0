@@ -16,7 +16,7 @@ namespace Z0
     {
         public void t_pcg64x8()
         {
-            var config = DomainCase.init(uint8(32), uint8(128));
+            var config = DomainCase.init(ScalarCast.uint8(32), ScalarCast.uint8(128));
             var source = Rng.pcg64();
             var buffer = span<byte>(config.SampleSize);
 

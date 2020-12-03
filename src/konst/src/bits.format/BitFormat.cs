@@ -53,10 +53,6 @@ namespace Z0
             => BitFormatter.configure(false);
 
         [MethodImpl(Inline)]
-        public static implicit operator BitFormat(int blockwidth)
-            => BitFormatter.blocked(blockwidth);
-
-        [MethodImpl(Inline)]
         public BitFormat(bool tlz = false, bool specifier = false, int? blockWidth = null, char? blocksep = null, int? rowWidth = null,
             uint? maxbits = null, int? zpad = null)
         {
@@ -68,5 +64,9 @@ namespace Z0
             MaxBitCount = maxbits ?? uint.MaxValue;
             ZPad = zpad ?? 0;
         }
+
+        [MethodImpl(Inline)]
+        public static implicit operator BitFormat(int blockwidth)
+            => BitFormatter.blocked(blockwidth);
     }
 }

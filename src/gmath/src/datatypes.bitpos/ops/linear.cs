@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="index">The linear bit index</param>
 		[MethodImpl(Inline)]
         public static ushort linear(ushort w, uint index)
-			=> uint16(index/w);
+			=> ScalarCast.uint16(index/w);
 
 		/// <summary>
 		/// Computes a linear bit index from a cell index and cell-relative offset

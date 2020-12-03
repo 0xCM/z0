@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    
+
     /// <summary>
     /// Characterizes a uniform distribution
     /// </summary>
@@ -16,7 +16,7 @@ namespace Z0
     /// <remarks>See https://en.wikipedia.org/wiki/Uniform_distribution</remarks>
     public readonly struct UniformSpec<T> : IDistributionSpec<UniformSpec<T>,T>
         where T : unmanaged
-    {   
+    {
         /// <summary>
         /// The lower bound
         /// </summary>
@@ -34,7 +34,7 @@ namespace Z0
         /// <param name="max">The upper bound</param>
         [MethodImpl(Inline)]
         public static UniformSpec<T> Define(T min, T max)
-            => new UniformSpec<T>(min,max);        
+            => new UniformSpec<T>(min,max);
 
         /// <summary>
         /// Defines a uniform distribution bound to an interval domain
@@ -43,8 +43,8 @@ namespace Z0
         /// <typeparam name="T">The sample element type</typeparam>
         [MethodImpl(Inline)]
         public static UniformSpec<T> Define(in Interval<T> src)
-            => new UniformSpec<T>(src.Left,src.Right);        
-        
+            => new UniformSpec<T>(src.Left,src.Right);
+
         [MethodImpl(Inline)]
         public static implicit operator (T min, T max)(in UniformSpec<T> spec)
             => (spec.Min, spec.Max);
@@ -67,23 +67,23 @@ namespace Z0
             Min = min;
             Max = max;
         }
-        
+
         /// <summary>
         /// Classifies the distribution
         /// </summary>
-        public DistributionKind DistKind 
+        public DistributionKind DistKind
             => DistributionKind.Uniform;
 
         [MethodImpl(Inline)]
         public UniformSpec<int> ToInt32()
-            => new UniformSpec<int>(Cast.to<T,int>(Min), Cast.to<T,int>(Max));
+            => new UniformSpec<int>(NumericCast.force<T,int>(Min), NumericCast.force<T,int>(Max));
 
         [MethodImpl(Inline)]
         public UniformSpec<float> ToFloat32()
-            => new UniformSpec<float>(Cast.to<T,float>(Min), Cast.to<T,float>(Max));
+            => new UniformSpec<float>(NumericCast.force<T,float>(Min), NumericCast.force<T,float>(Max));
 
         [MethodImpl(Inline)]
         public UniformSpec<double> ToFloat64()
-            => new UniformSpec<double>(Cast.to<T,double>(Min), Cast.to<T,double>(Max));
+            => new UniformSpec<double>(NumericCast.force<T,double>(Min), NumericCast.force<T,double>(Max));
    }
 }

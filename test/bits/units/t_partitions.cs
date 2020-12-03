@@ -19,7 +19,7 @@ namespace Z0
             var src = BitMasks.msb(n2,n1,z16);
             var dst = NatSpan.alloc(n,t);
             BitParts.part4x4(src, ref dst.First);
-            var segment = uint8(0b1010).ToBitSpan32();
+            var segment = ScalarCast.uint8(0b1010).ToBitSpan32();
             var expect = segment.Replicate(4);
             var actual = dst.Edit.ToBitSpan32();
             Claim.Require(expect.Equals(actual));

@@ -11,33 +11,30 @@ namespace Z0
 
     public readonly struct AppMsgData : ITextual
     {
-        public static AppMsgData Empty
-            => new AppMsgData(EmptyString, "{0}", 0, 0, AppMsgSource.Empty);
-
         /// <summary>
         /// The message payload
         /// </summary>
-        public readonly object Content;
+        public object Content {get;}
 
         /// <summary>
         /// Defines a content render pattern, if applicable
         /// </summary>
-        public readonly string Pattern;
+        public string Pattern {get;}
 
         /// <summary>
         /// The message classification
         /// </summary>
-        public readonly LogLevel Kind;
+        public LogLevel Kind {get;}
 
         /// <summary>
         /// The message foreground color when rendered for display
         /// </summary>
-        public readonly FlairKind Flair;
+        public FlairKind Flair {get;}
 
         /// <summary>
         /// Specifies the emitting executable part
         /// </summary>
-        public readonly AppMsgSource Origin;
+        public AppMsgSource Source {get;}
 
         [MethodImpl(Inline)]
         internal AppMsgData(object content, string pattern, LogLevel kind, FlairKind color, AppMsgSource origin)
@@ -46,7 +43,7 @@ namespace Z0
             Pattern = pattern;
             Kind = kind;
             Flair = color;
-            Origin = origin;
+            Source = origin;
         }
 
         [MethodImpl(Inline)]
@@ -55,6 +52,9 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public AppMsgData<S> Cast<S>()
-            => new AppMsgData<S>(z.@as<object,S>(Content), Pattern, Kind, Flair, Origin);
+            => new AppMsgData<S>(z.@as<object,S>(Content), Pattern, Kind, Flair, Source);
+
+        public static AppMsgData Empty
+            => new AppMsgData(EmptyString, "{0}", 0, 0, AppMsgSource.Empty);
     }
 }

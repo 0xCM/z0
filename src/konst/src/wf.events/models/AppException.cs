@@ -27,6 +27,13 @@ namespace Z0
             : base(src.Format())
                 => Message = src;
 
+        [MethodImpl(Inline)]
+        public AppException(string msg, string caller, string file, int? line)
+            : base(msg)
+        {
+            Message = AppMsg.error(msg, caller, file, line);
+        }
+
         public override string ToString()
             => Message.Format();
     }

@@ -11,9 +11,9 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Bmi1.X64;
 
     using static Konst;
-    
+
     partial class Bits
-    {                
+    {
         /// <summary>
         /// int _mm_tzcnt_32 (unsigned int a) TZCNT reg, reg/m32
         /// Counts the number of trailing zero bits in the source
@@ -72,8 +72,8 @@ namespace Z0
         /// Counts the number of trailing zero bits in the source
         /// </summary>
         /// <param name="src">The bit source</param>
-         [MethodImpl(Inline), Ntz]
-         public static long ntz(long src)
+        [MethodImpl(Inline), Ntz]
+        public static long ntz(long src)
             => (long)TrailingZeroCount((ulong)src);
 
         /// <summary>

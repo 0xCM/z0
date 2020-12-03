@@ -24,7 +24,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format(T src, in BitFormat config)
-            => api.format(bytes(src), config);
+            => api.format(bytes(src).ReadOnly(), config);
 
         [MethodImpl(Inline)]
         public string Format(T src)

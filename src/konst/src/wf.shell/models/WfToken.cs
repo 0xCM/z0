@@ -14,11 +14,11 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static WfToken create(WfPartKind kind, Type src)
-            => new WfToken((((uint)src.MetadataToken & BitMasks.Literals.Lo24u) | ((uint)kind << 24) ) | hash2(src.AssemblyQualifiedName));
+            => new WfToken((((uint)src.MetadataToken & BitMasks.Literals.Lo24u) | ((uint)kind << 24) ) | hash(src.AssemblyQualifiedName));
 
         [MethodImpl(Inline), Op]
         public static WfToken create(WfStepId step)
-            => new WfToken((((uint)step.HostKey & BitMasks.Literals.Lo24u) | (1u << 24) ) | hash2(step.HostName));
+            => new WfToken((((uint)step.HostKey & BitMasks.Literals.Lo24u) | (1u << 24) ) | hash(step.HostName));
 
         public readonly ulong Value;
 

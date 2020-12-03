@@ -13,11 +13,11 @@ namespace Z0
     partial struct z
     {
         /// <summary>
-        /// Partitions a 32-bit source value into 32 8-bit pieces each with an effective width of q
+        /// Partitions a 32-bit source value into 32 8-bit pieces each with an effective width of 1
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<byte> vpart32x8x1(uint src)
+        public static Vector256<byte> vsplit32x8x1(uint src)
         {
             var x = vbroadcast(w256, src);
             var y = vbroadcast(w256, BitMasks.Literals.Msb32x8x7);

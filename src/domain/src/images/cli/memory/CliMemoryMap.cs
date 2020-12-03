@@ -33,7 +33,7 @@ namespace Z0
 
         public CliMemoryMap(IWfShell wf, FS.FilePath src)
         {
-            Source = MemoryFile.open(src.Name);
+            Source = MemoryFiles.open(src);
             Wf = wf;
             BasePointer = Source.BaseAddress.Pointer<byte>();
             PeReader = new PEReader(BasePointer, (int)Source.Size);

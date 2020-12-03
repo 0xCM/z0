@@ -39,7 +39,7 @@ namespace Z0
 		/// Specifies the number of bits that can be placed in one segment
 		/// </summary>
 		public static ushort CellWidth
-			=> uint16(bitwidth<T>());
+			=> ScalarCast.uint16(bitwidth<T>());
 
 		/// <summary>
 		/// Constructs a bit position from a linear/absolute index
@@ -77,7 +77,7 @@ namespace Z0
 		[MethodImpl(Inline)]
         public void Sub(uint rhs)
         {
-            var newindex = uint32(LinearIndex - rhs);
+            var newindex = ScalarCast.uint32(LinearIndex - rhs);
             if(newindex > 0)
 			{
 				CellIndex = linear(CellWidth,newindex);

@@ -16,7 +16,29 @@ namespace Z0
     {
         const NumericKind Closure = UnsignedInts;
 
-        public static BitFormatter Service => default;
+        [MethodImpl(Inline), Op]
+        public static void format(byte[] src, Span<char> dst)
+        {
+            var input = span(src);
+            var config = BitFormat.Default;
+            bits(src, dst.Length, dst);
+        }
+
+        public static string format<T>(ReadOnlySpan<T> src, BitFormat? config = null)
+            where T : unmanaged
+        {
+            var dst = Buffers.text();
+            var cells = src.Length;
+            var wCell = bitwidth<T>();
+            var cfg = config ?? BitFormatter.configure();
+            for(var i=0; i<cells; i++)
+                dst.Append(_format<T>(skip(src,i), cfg));
+            return dst.Emit();
+        }
+
+        public static string format<T>(Span<T> src, BitFormat? config = null)
+            where T : unmanaged
+                => format(src.ReadOnly(), config);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static BitFormatter<T> create<T>()
@@ -36,16 +58,12 @@ namespace Z0
             => BitFormatOptions.bitblock(width, sep, maxbits, specifier);
 
         [MethodImpl(Inline), Op]
-        public void Format(byte src, uint maxbits, Span<char> dst, ref int k)
-            => bits(src, maxbits, dst, ref k);
-
-        [MethodImpl(Inline), Op]
-        public void Format(in byte src, int length, uint maxbits, Span<char> dst)
-            => bits(src,length,maxbits,dst);
+        public static void Format(in byte src, int length, uint maxbits, Span<char> dst)
+            => _format(src, length,maxbits,dst);
 
         [MethodImpl(Inline), Op]
         public static void format(in byte src, int length, uint maxbits, Span<char> dst)
-            => bits(src, length, maxbits, dst);
+            => _format(src, length, maxbits, dst);
 
         [MethodImpl(Inline), Op]
         public void Format(ReadOnlySpan<byte> src, uint maxbits, Span<char> dst)
@@ -53,7 +71,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static void format(byte src, uint maxbits, Span<char> dst, ref int k)
-            => bits(src, maxbits, dst, ref k);
+            => _format(src, maxbits, dst, ref k);
 
         [Op]
         public static string format(params Bit32[] src)
@@ -94,7 +112,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static string format<T>(T src, in BitFormat config)
             where T : struct
-                => format(z.bytes(src), config);
+                => format(z.bytes(src).ReadOnly(), config);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static string format<T>(T src)
@@ -103,44 +121,26 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static string format(ReadOnlySpan<byte> src, in BitFormat config)
-            => bits(src,config);
+            => _format(src,config);
 
-        [MethodImpl(Inline), Op]
-        public static void bits(in byte src, int length, uint maxbits, Span<char> dst)
-        {
-            var k=0;
-            for(var i=0u; i<length; i++)
-            {
-                bits(skip(src,i), maxbits, dst, ref k);
-                if(k >= maxbits)
-                    break;
-            }
-        }
 
         [MethodImpl(Inline), Op]
         public static void bits(ReadOnlySpan<byte> src, Count maxbits, Span<char> dst)
-            => bits(first(src), src.Length, maxbits, dst);
+            => _format(first(src), src.Length, maxbits, dst);
 
         [Op]
-        public static ReadOnlySpan<char> bitchars(byte[] src)
+        public static ReadOnlySpan<char> chars(byte[] src)
         {
             var dst = span<char>(src.Length*8);
             var input = span(src);
             var config = BitFormat.Default;
-            bits(src, dst);
+            format(src, dst);
             return dst;
         }
 
-        [MethodImpl(Inline), Op]
-        public static void bits(byte[] src, Span<char> dst)
-        {
-            var input = span(src);
-            var config = BitFormat.Default;
-            bits(src, dst.Length, dst);
-        }
 
         [MethodImpl(Inline), Op]
-        public static string bits(object src, TypeCode type)
+        public static string format(object src, TypeCode type)
         {
             if(type == TypeCode.Byte || type == TypeCode.SByte)
                 return BitFormatter.create<byte>().Format((byte)rebox(src, NumericKind.U8));
@@ -154,29 +154,12 @@ namespace Z0
                 return EmptyString;
         }
 
-        [MethodImpl(Inline), Op]
-        public static void bits(byte src, uint maxbits, Span<char> dst, ref int k)
-        {
-            for(var j=0; j<8; j++, k++)
-            {
-                if(k>=maxbits)
-                    break;
-                seek(dst, (uint)k) = @char(@bool(testbit(src, j)));
-            }
-        }
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static string bits<T>(T src)
+        static string _format<T>(T src, in BitFormat config)
             where T : struct
-                => bits(src, BitFormatter.configure());
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static string bits<T>(T src, in BitFormat config)
-            where T : struct
-                => bits(bytes(src), config);
+                => _format(bytes(src), config);
 
         [Op]
-        public static string bits(ReadOnlySpan<byte> src, in BitFormat config)
+        static string _format(ReadOnlySpan<byte> src, in BitFormat config)
         {
             var count = src.Length*8;
             var dst = span<char>(count);
@@ -198,6 +181,29 @@ namespace Z0
                 bs = string.Join(config.BlockSep, bs.Partition(config.BlockWidth));
 
             return config.SpecifierPrefix ? "0b" + bs : bs;
+        }
+
+        [MethodImpl(Inline), Op]
+        static void _format(byte src, uint maxbits, Span<char> dst, ref int k)
+        {
+            for(var j=0; j<8; j++, k++)
+            {
+                if(k>=maxbits)
+                    break;
+                seek(dst, (uint)k) = @char(@bool(testbit(src, j)));
+            }
+        }
+
+        [MethodImpl(Inline), Op]
+        static void _format(in byte src, int length, uint maxbits, Span<char> dst)
+        {
+            var k=0;
+            for(var i=0u; i<length; i++)
+            {
+                _format(skip(src,i), maxbits, dst, ref k);
+                if(k >= maxbits)
+                    break;
+            }
         }
     }
 }

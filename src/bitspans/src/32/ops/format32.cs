@@ -24,7 +24,7 @@ namespace Z0
             Span<char> buffer = stackalloc char[(int)bitcount];
             ref var dst = ref first(buffer);
             var digits = 0;
-            for(uint i = 0, j=bitcount-1; i < bitcount; i++, j--)
+            for(uint i = 0, j=bitcount-1; i<bitcount; i++, j--)
             {
                 if(blocked && digits % options.BlockWidth == 0)
                     seek(dst, j--) = options.BlockSep;
@@ -33,7 +33,10 @@ namespace Z0
                 digits++;
             }
 
-            return new string(buffer);
+            if(options.TrimLeadingZeros)
+                return new string(buffer).TrimStart(bit.Zero);
+            else
+                return new string(buffer);
         }
 
         [Op]

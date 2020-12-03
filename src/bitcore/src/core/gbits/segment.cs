@@ -59,14 +59,14 @@ namespace Z0
                 return NumericLiterals.maxval<T>();
 
             var sameSeg = i0.CellIndex == i1.CellIndex;
-            var firstCount = uint8(sameSeg ? bitcount : bitwidth<T>() - i0.BitOffset);
+            var firstCount = ScalarCast.uint8(sameSeg ? bitcount : bitwidth<T>() - i0.BitOffset);
             var part1 = gbits.slice(bitcell(src,i0), (byte)i0.BitOffset, firstCount);
 
             if(sameSeg)
                 return part1;
             else
             {
-                var lastCount = uint8(bitcount - firstCount);
+                var lastCount = ScalarCast.uint8(bitcount - firstCount);
                 return gmath.or(part1, gmath.sal(gbits.slice(bitcell(src,i1), 0, lastCount), firstCount));
             }
         }

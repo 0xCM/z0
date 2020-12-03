@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), Ntz, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Ntz, Closures(Closure)]
         public static T ntz<T>(T src)
             where T : unmanaged
         {

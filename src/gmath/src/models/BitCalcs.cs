@@ -23,7 +23,7 @@ namespace Z0
             where T : unmanaged
         {
             var points = gmath.mul(rows,cols);
-            var mod = gmath.mod(points, Cast.to<T>(8));
+            var mod = gmath.mod(points, NumericCast.force<T>(8));
             var rem = gmath.nonz(mod) ? one<T>() : zero<T>();
             return gmath.add(gmath.srl(points, 3), rem);
         }

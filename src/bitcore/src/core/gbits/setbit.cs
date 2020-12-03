@@ -37,7 +37,7 @@ namespace Z0
             where T : unmanaged
         {
             var x = gmath.negate(gmath.sll(one<T>(), pos));
-            var y = Cast.to<uint,T>((uint)state << pos);
+            var y = NumericCast.force<uint,T>((uint)state << pos);
             var z = gmath.and(src, x);
             return gmath.and(z, y);
         }

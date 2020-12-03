@@ -19,6 +19,6 @@ namespace Z0
         /// <param name="p">The parity bit</param>
         [MethodImpl(Inline)]
         public static byte pindex(byte i, byte p)
-            => uint8(i*2 + p);
+            => ScalarCast.uint8(i*2 + p);
     }
 }

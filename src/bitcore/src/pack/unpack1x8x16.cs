@@ -20,7 +20,7 @@ namespace Z0
         {
             const ulong M = (ulong)Lsb64x8x1;
             seek(dst, 0) = BitMasks.scatter(src, M);
-            seek(dst, 1) = BitMasks.scatter(uint16(src >> 8), M);
+            seek(dst, 1) = BitMasks.scatter(ScalarCast.uint16(src >> 8), M);
             return ref dst;
         }
 

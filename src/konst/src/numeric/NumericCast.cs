@@ -10,6 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
+
     [ApiHost("numeric.cast")]
     public readonly partial struct NumericCast
     {

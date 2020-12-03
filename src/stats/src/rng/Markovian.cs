@@ -118,7 +118,7 @@ namespace Z0
             for(var r = 0; r < (int)n.NatValue; r ++)
             {
                 var row = src.Row(r);
-                var sum =  Cast.to<T,double>(gspan.sum(row.Unsized));
+                var sum =  NumericCast.force<T,double>(gspan.sum(row.Unsized));
                 if(!radius.Contains(sum))
                     return false;
             }

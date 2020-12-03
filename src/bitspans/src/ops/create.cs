@@ -12,6 +12,10 @@ namespace Z0
 
     partial class BitSpans
     {
+        public static BitSpan create<T>(T src)
+            where T : unmanaged
+                => gbits.unpack(src);
+
         public static BitSpan create<T>(ReadOnlySpan<T> src)
             where T : unmanaged
                 => gbits.unpack(src);

@@ -21,12 +21,12 @@ namespace Z0
         /// The first index
         /// </summary>
         Mod<N> i;
-        
+
         /// <summary>
         /// The second index
         /// </summary>
         Mod<N> j;
-        
+
         /// <summary>
         /// The monodial zero
         /// </summary>
@@ -62,11 +62,11 @@ namespace Z0
         [MethodImpl(Inline)]
         public static NatSwap<N,T> FromTuple((T i, T j) src)
             => new NatSwap<N,T>(src);
-        
+
         [MethodImpl(Inline)]
         public static implicit operator NatSwap<N,T>((T i, T j) src)
             => FromTuple(src);
-        
+
         /// <summary>
         /// Implicitly converts the transpostion to its unsized representation
         /// </summary>
@@ -115,7 +115,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static bool operator !=(NatSwap<N,T> lhs, NatSwap<N,T> rhs)
-            => !(lhs == rhs);                    
+            => !(lhs == rhs);
 
         [MethodImpl(Inline)]
         public NatSwap((int i, int j) src)
@@ -127,8 +127,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public NatSwap((T i, T j) src)
         {
-            this.i = Cast.to<T,uint>(src.i);
-            this.j = Cast.to<T,uint>(src.j);
+            this.i = NumericCast.force<T,uint>(src.i);
+            this.j = NumericCast.force<T,uint>(src.j);
         }
 
         [MethodImpl(Inline)]
@@ -143,10 +143,10 @@ namespace Z0
         /// </summary>
         public string Format()
             => $"({i} {j})";
-        
+
         public bool IsEmpy
             => i == Zero.i && j == Zero.j;
-            
+
         /// <summary>
         /// Determines whether this transposition is identical to another.
         /// Note that the order of indices is immaterial
@@ -159,8 +159,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public void Deconstruct(out T i, out T j)
         {
-            i = Cast.to<T>(this.i.State);
-            j = Cast.to<T>(this.j.State);
+            i = NumericCast.force<T>(this.i.State);
+            j = NumericCast.force<T>(this.j.State);
         }
 
         /// <summary>
@@ -170,7 +170,7 @@ namespace Z0
         /// <param name="j">The second term index</param>
         [MethodImpl(Inline)]
         public (T i, T j) ToTuple()
-            => (Cast.to<T>(i.State), Cast.to<T>(j.State));
+            => (NumericCast.force<T>(i.State), NumericCast.force<T>(j.State));
 
         /// <summary>
         /// Creates a copy
@@ -181,7 +181,7 @@ namespace Z0
 
         public override int GetHashCode()
             => throw new NotSupportedException();
-             
+
         public override bool Equals(object o)
             => throw new NotSupportedException();
     }

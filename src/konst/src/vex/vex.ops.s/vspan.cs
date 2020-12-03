@@ -21,11 +21,12 @@ namespace Z0
         [Op, Closures(Closure)]
         public static Span<T> vspan<T>(Vector128<T> src)
             where T : unmanaged
-        {
-            var dst = SpanBlocks.alloc<T>(w128);
-            vsave(src, ref dst.First);
-            return dst.Storage;
-        }
+                => vspan2(src);
+        // {
+        //     var dst = SpanBlocks.alloc<T>(w128);
+        //     vsave(src, ref dst.First);
+        //     return dst.Storage;
+        // }
 
         /// <summary>
         /// Allocates and deposits vector content to a span
@@ -35,11 +36,12 @@ namespace Z0
         [Op, Closures(Closure)]
         public static Span<T> vspan<T>(Vector256<T> src)
             where T : unmanaged
-        {
-            var dst = SpanBlocks.alloc<T>(w256);
-            vsave(src, ref dst.First);
-            return dst.Storage;
-        }
+                => vspan2(src);
+        // {
+        //     var dst = SpanBlocks.alloc<T>(w256);
+        //     vsave(src, ref dst.First);
+        //     return dst.Storage;
+        // }
 
         /// <summary>
         /// Allocates and deposits vector content to a span
@@ -49,14 +51,16 @@ namespace Z0
         [Op, Closures(Closure)]
         public static Span<T> vspan<T>(Vector512<T> src)
             where T : unmanaged
-        {
-            var dst = SpanBlocks.alloc<T>(w512);
-            vsave(src, ref dst.First);
-            return dst.Storage;
-        }
+                => vspan2(src);
+
+        // {
+        //     var dst = SpanBlocks.alloc<T>(w512);
+        //     vsave(src, ref dst.First);
+        //     return dst.Storage;
+        // }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Span<T> vspan2<T>(Vector128<T> src)
+        static Span<T> vspan2<T>(Vector128<T> src)
             where T : unmanaged
         {
             var w = w128;
@@ -67,7 +71,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Span<T> vspan2<T>(Vector256<T> src)
+        static Span<T> vspan2<T>(Vector256<T> src)
             where T : unmanaged
         {
             var w = w256;
@@ -78,7 +82,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Span<T> vspan2<T>(Vector512<T> src)
+        static Span<T> vspan2<T>(Vector512<T> src)
             where T : unmanaged
         {
             var w = w512;

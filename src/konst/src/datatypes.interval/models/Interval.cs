@@ -103,7 +103,7 @@ namespace Z0
         public ulong Width
         {
             [MethodImpl(Inline)]
-            get => Cast.to<T,ulong>(Right) - Cast.to<T,ulong>(Left);
+            get => NumericCast.force<T,ulong>(Right) - NumericCast.force<T,ulong>(Left);
         }
 
         /// <summary>
@@ -263,7 +263,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public Interval<U> Convert<U>()
             where U : unmanaged, IComparable<U>, IEquatable<U>
-                => new Interval<U>(Cast.to<T,U>(Left), Cast.to<T,U>(Right),Kind);
+                => new Interval<U>(NumericCast.force<T,U>(Left), NumericCast.force<T,U>(Right),Kind);
 
         /// <summary>
         /// Creates a view of the data in the inverval as seen through the

@@ -99,15 +99,23 @@ namespace Z0
             var y89 = gmath.or(y8, gmath.sal(y9, 4));
             var bcy = SpanBlocks.literals(n256,y01,y23,y45,y67,y89);
 
-            ulong z = 0b0101100010011101101000111001010111010110;
-            var bvz = SpanBlocks.literals(n256,z);
+            const ulong bLit =  0b0101100010011101101000111001010111010110;
+            const string sLit =  "101100010011101101000111001010111010110";
+
+            var bSpan1 = BitSpans.parse(sLit);
+            var bSpan2 = BitSpans.create(bLit);
+            Claim.eq(sLit, bSpan2.Format(BitFormatter.configure(true)));
+
+
+            var bvz = SpanBlocks.literals(n256,bLit);
 
             var bsy = bcy.ToBitString().Format(true);
             var bsx = bcx.ToBitString().Format(true);
             var bsz = bvz.ToBitString().Format(true);
-            ClaimPrimalSeq.ClaimEq(bsx, "101100010011101101000111001010111010110");
+            ClaimPrimalSeq.ClaimEq(bsx, sLit);
             ClaimPrimalSeq.ClaimEq(bsx, bsy);
             ClaimPrimalSeq.ClaimEq(bsx, bsz);
+
 
             Claim.eq(y0, bcx.BitSeg(0,3));
             Claim.eq(y1, bcx.BitSeg(4,7));

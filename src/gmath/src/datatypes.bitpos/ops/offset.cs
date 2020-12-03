@@ -19,6 +19,6 @@ namespace Z0
         /// <param name="index">The linear bit index</param>
 		[MethodImpl(Inline)]
         public static byte offset(ushort w, uint index)
-			=> uint8(index % w);
+			=> ScalarCast.uint8(index % w);
     }
 }

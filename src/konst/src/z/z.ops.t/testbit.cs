@@ -45,11 +45,11 @@ namespace Z0
 
         [MethodImpl(Inline), TestBit]
         public static BitState testbit(float src, int pos)
-            => (BitState)((uint32(src) >> pos) & 1);
+            => (BitState)((ScalarCast.uint32(src) >> pos) & 1);
 
         [MethodImpl(Inline), TestBit]
         public static BitState testbit(double src, int pos)
-            => (BitState)((uint64(src) >> pos) & 1);
+            => (BitState)((ScalarCast.uint64(src) >> pos) & 1);
 
         [MethodImpl(Inline), TestBit]
         public static BitState testbit(char src, int pos)
