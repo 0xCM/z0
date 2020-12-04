@@ -8,6 +8,10 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
+    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
+    using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
+    using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
+
     [ApiHost("api"), LiteralProvider]
     public readonly partial struct Konst
     {
@@ -191,11 +195,6 @@ namespace Z0
 
         public const ApiProviderKind DataIndex = ApiProviderKind.DataSummary;
 
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static T zed<T>(T t = default)
-            where T : unmanaged
-                => Zero.zed(t);
-
         /// <summary>
         /// Populates a <see cref="NotSupportedException"/> complaining that a
         /// parametrically-identified type is not supported
@@ -212,8 +211,8 @@ namespace Z0
         public static ArgumentException bad<T>(T arg)
             => new ArgumentException(arg?.ToString() ?? "<null>");
 
-        public static T no<S,T>()
-            => Unsupported.raise<T>($"The transformation {typeof(S).Name} -> {typeof(T).Name} is undefined");
+        public static T no<S,T>([Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => Unsupported.raise<S,T>(caller, file, line);
 
         [MethodImpl(Inline), Op]
         public static void ThrowEmptySpanError()

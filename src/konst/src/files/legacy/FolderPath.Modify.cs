@@ -12,25 +12,6 @@ namespace Z0
     partial class FolderPath
     {
         /// <summary>
-        /// Consigns the folder and its contents to oblivion
-        /// </summary>
-        /// <param name="recursive">How sure are you?</param>
-        public Option<int> Delete(bool recursive = true)
-        {
-            try
-            {
-                if(Directory.Exists(Name))
-                    Directory.Delete(Name, recursive);
-                return 0;
-            }
-            catch(Exception e)
-            {
-                Console.Error.WriteLine($"{e}");
-                return Option.none<int>();
-            }
-        }
-
-        /// <summary>
         /// Creates the represented directory in the file system if it doesn't exist
         /// </summary>
         /// <param name="dst">The target path</param>

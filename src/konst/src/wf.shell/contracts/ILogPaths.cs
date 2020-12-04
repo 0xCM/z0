@@ -19,12 +19,6 @@ namespace Z0
         /// </summary>
         FS.FolderPath LogRoot {get;}
 
-        /// <summary>
-        /// The name of the runtime log folder
-        /// </summary>
-        FS.FolderName AppLogFolder
-            => FS.folder(AppsFolder);
-
         string AppName
             => Assembly.GetEntryAssembly().GetSimpleName();
     }

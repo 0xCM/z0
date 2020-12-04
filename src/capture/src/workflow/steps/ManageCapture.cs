@@ -75,8 +75,8 @@ namespace Z0
 
         void RunImm()
         {
-            using var flow = Wf.Running(nameof(SpecializeImm));
-            using var step = new SpecializeImmStep(Wf, new SpecializeImm(), State.Asm, State.Formatter, State.RoutineDecoder, Wf.Db().CaptureRoot());
+            using var flow = Wf.Running(nameof(EmitImmClosures));
+            using var step = new EmitImmClosuresStep(Wf, new EmitImmClosures(), State.Asm, State.Formatter, State.RoutineDecoder, Wf.Db().CaptureRoot());
             step.ClearArchive(Parts);
             step.EmitRefined(Parts);
         }

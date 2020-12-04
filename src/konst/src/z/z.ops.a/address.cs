@@ -46,7 +46,7 @@ namespace Z0
         /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
         public static MemoryAddress address(Ref src)
-            => src.Location;
+            => src.Address;
 
         /// <summary>
         /// Returns the address of the first character in the source string

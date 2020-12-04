@@ -4,22 +4,29 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IPartFilePaths : IPartFileExtensions, IPartFolderNames, IPartFileNames, IPartFolderPaths
+    public interface IPartFilePaths : IPartFolderNames, IPartFileNames
     {
-        FilePath HexFilePath(FolderPath root, FileName name)
-            => X86DirPath(root) + name;
-
-        FilePath HexFilePath(FolderPath root, ApiHostUri host)
-            => X86DirPath(root) + FileName.define(host.Name, HexLine);
-
-        FilePath AsmFilePath(FolderPath root, FileName name)
-            => AsmDirPath(root) + name;
-
-
         /// <summary>
         /// The path to which all archive path arithmetic is relative
         /// </summary>
-        FolderPath ArchiveRoot
-            => FolderPath.Define(EnvVars.Common.LogRoot.Name);
+        FS.FolderPath ArchiveRoot {get;}
+
+        FS.FolderPath X86DirPath(FS.FolderPath root)
+            => (root + X86FolderName);
+
+        FolderPath AsmDirPath(FS.FolderPath root)
+            => (root + AsmFolderName);
+
+        FS.FolderPath AsmSemanticDirPath(FS.FolderPath root)
+            => (root + AsmFolderName);
+
+        FilePath HexFilePath(FS.FolderPath root, FS.FileName name)
+            => X86DirPath(root) + name;
+
+        FilePath HexFilePath(FS.FolderPath root, ApiHostUri host)
+            => X86DirPath(root) + FS.file(host.Name, ArchiveFileKinds.Hex);
+
+        FilePath AsmFilePath(FS.FolderPath root, FS.FileName name)
+            => AsmDirPath(root) + name;
     }
 }

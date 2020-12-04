@@ -101,7 +101,7 @@ namespace Z0
         public static ReadOnlySpan<char> render(Base2 @base, ReadOnlySpan<byte> src)
         {
             Span<char> dst = new char[src.Length*8];
-            render(@base, src,dst);
+            render(@base, src, dst);
             return dst;
         }
     }

@@ -9,12 +9,13 @@ namespace Z0
     using static ArchiveFolderNames;
 
     [Free]
-    public interface IWfPaths : ILogPaths
+    public interface IWfPaths : IDbPaths, ILogPaths
     {
         /// <summary>
-        /// The workflow's database root
+        /// The name of the runtime log folder
         /// </summary>
-        FS.FolderPath DbRoot {get;}
+        FS.FolderName AppLogFolder
+            => FS.folder(AppsFolder);
 
         ITestLogPaths TestLogs
             => TestLogPaths.define(DbRoot + FS.folder("tests"));

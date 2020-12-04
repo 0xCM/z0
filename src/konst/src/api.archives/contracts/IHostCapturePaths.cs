@@ -11,10 +11,10 @@ namespace Z0
     {
         ApiHostUri Host {get;}
 
-        FileName X86FileName
-            => LegalFileName(Host, HexLine);
+        FS.FileName X86FileName
+            => LegalFileName(Host, ArchiveFileKinds.Hex);
 
-        FilePath HostX86Path
+        FS.FilePath HostX86Path
             => X86Dir + X86FileName;
     }
 }

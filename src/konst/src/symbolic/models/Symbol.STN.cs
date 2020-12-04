@@ -41,7 +41,7 @@ namespace Z0
         public T Cell
         {
             [MethodImpl(Inline)]
-            get => Unsafe.As<S,T>(ref edit(Value));
+            get => @as<S,T>(edit(Value));
         }
 
         /// <summary>

@@ -126,7 +126,7 @@ namespace Z0
                 case TLK.X5F: return f5f(a, b, c);
                 case TLK.XCA: return select(a, b, c);
                 case TLK.XFF: return f5a(a, b, c);
-                default: return Unsupported.raise<bit>(sig(kind));
+                default: return Unsupported.raise<bit>();
             }
         }
     }

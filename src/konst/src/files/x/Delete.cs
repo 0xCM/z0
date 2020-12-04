@@ -6,6 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.IO;
+    using System.Collections.Generic;
 
     using static Konst;
 
@@ -18,5 +20,30 @@ namespace Z0
         [Op]
         public static Outcome<FS.FilePath> Delete(this FS.FilePath src)
             => FS.delete(src);
+
+        /// <summary>
+        /// Consigns the folder and its contents to oblivion
+        /// </summary>
+        /// <param name="recursive">How sure are you?</param>
+        public static Option<int> Delete(this FS.FolderPath src, bool recursive = true)
+        {
+            try
+            {
+                if(Directory.Exists(src.Name))
+                    Directory.Delete(src.Name, recursive);
+                return 0;
+            }
+            catch(Exception e)
+            {
+                Console.Error.WriteLine($"{e}");
+                return Option.none<int>();
+            }
+        }
+
+        public static void Delete(this FS.FolderPath[] paths)
+            => z.iter(paths, path => path.Delete(true));
+
+        public static void Delete(this IEnumerable<FS.FolderPath> paths)
+            => z.iter(paths, path => path.Delete(true));
     }
 }

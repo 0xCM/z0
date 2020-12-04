@@ -25,7 +25,7 @@ namespace Z0
             else if(kind == ULK.True)
                 return bit.On;
             else
-                return Unsupported.raise<bit>(kind.ToString());
+                return Unsupported.raise<bit>();
         }
     }
 }

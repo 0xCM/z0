@@ -60,7 +60,7 @@ namespace Z0
             var args = sys.array(tOperand, tOperand);
             var method = new DynamicMethod(id, tOperand, args, tFunc.Module);
             var g = method.GetILGenerator();
-            var address = target.Location;
+            var address = target.Address;
             g.Emit(OpCodes.Ldarg_0);
             g.Emit(OpCodes.Ldarg_1);
             g.Emit(OpCodes.Ldc_I8, address);

@@ -13,23 +13,6 @@ namespace Z0
     partial struct ClrQuery
     {
         [MethodImpl(Inline), Op]
-        public static ClrTypeKind kind(Type src)
-        {
-            if(src.IsClass)
-                return ClrTypeKind.Class;
-            else if (src.IsEnum)
-                return ClrTypeKind.Enum;
-            else if(src.IsInterface)
-                return ClrTypeKind.Interface;
-            else if(src.IsStruct())
-                return ClrTypeKind.Struct;
-            else if(src.IsDelegate())
-                return ClrTypeKind.Delegate;
-            else
-                return 0;
-        }
-
-        [MethodImpl(Inline), Op]
         public static string name(FieldInfo src)
             => src.Name;
 

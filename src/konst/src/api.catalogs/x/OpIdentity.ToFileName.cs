@@ -11,7 +11,7 @@ namespace Z0
     partial class XApiIdentity
     {
         [Op]
-        public static FileName ToFileName(this OpIdentity src, FileExtension ext)
-            => FileName.define(LegalIdentityBuilder.file(src), ext);
+        public static FileName ToFileName(this OpIdentity src, FS.FileExt ext)
+            => FS.file(LegalIdentityBuilder.file(src), ext);
     }
 }

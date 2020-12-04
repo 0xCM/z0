@@ -413,4 +413,18 @@ public readonly struct ApiNameParts
     public const string ui = unsigned + dot + integers;
 
     public const string vectors = nameof(vectors);
+
+    public const string fx = nameof(fx);
+
+    public const string n16 = nameof(n16);
+
+    public const string x8 = nameof(x8);
+
+    public const string check = nameof(check);
+
+    public const string outcomes = nameof(outcomes);
+
+    public const string semantic = nameof(semantic);
+
+    public const string archive = nameof(archive);
 }

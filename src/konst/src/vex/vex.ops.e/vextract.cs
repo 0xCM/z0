@@ -147,7 +147,7 @@ namespace Z0
                 return Extract(src, 13);
             else if(typeof(N) == typeof(N14))
                 return Extract(src, 14);
-            else if(typeof(N) == typeof(N14))
+            else if(typeof(N) == typeof(N15))
                 return Extract(src, 15);
             else
                 throw no<N>();

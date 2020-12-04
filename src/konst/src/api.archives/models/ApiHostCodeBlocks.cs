@@ -79,5 +79,11 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Code.Storage;
         }
+
+        public static ApiHostCodeBlocks Empty
+        {
+            [MethodImpl(Inline)]
+           get => new ApiHostCodeBlocks(ApiHostUri.Empty, sys.empty<ApiCodeBlock>());
+        }
     }
 }

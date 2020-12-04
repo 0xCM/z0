@@ -410,11 +410,7 @@ public readonly struct ApiNames
 
     public const string ApiRuntime = api + dot + runtime;
 
-    public const string ApiSigs = api + dot + signatures;
-
-    public const string UI = ui;
-
-    public const string UBitsLogic = ui + dot + bitlogic;
+    public const string BitSeqApi = bits + dot + seq + dot + api;
 
     public const string BitLogicU1 = ui + dot +  bitlogic + dot + u1;
 
@@ -446,46 +442,17 @@ public readonly struct ApiNames
 
     public const string RegisterQuery = asm + dot + registers + dot + query;
 
-    const string check = nameof(check);
-
-    const string outcomes = nameof(outcomes);
-
     public const string CheckOutcomes = check + dot + outcomes;
-
-    const string asm = nameof(asm);
-
-    const string render = nameof(render);
-
-    const string semantic = nameof(semantic);
-
-    const string archive = nameof(archive);
 
     public const string AsmSemanticRender = asm + dot + semantic + dot + render;
 
     public const string AsmSemanticArchive = asm + dot + semantic + dot + archive;
 
-    const string slots = nameof(slots);
-
-    const string fx = nameof(fx);
-
     public const string FxSlots = fx + dot + slots;
-
-    public const string n16 = nameof(n16);
-
-    public const string u8 = nameof(u8);
-
-    public const string x = nameof(x);
-
-    public const string x8 = nameof(x8);
 
     public const string dot = ApiNameParts.dot;
 
-    const string sep ="_";
-
-    public const string FxSlots_n16x8x8x8 = fx + dot + slots + sep + n16 + x8 + x8 + x8;
-
     public const string Signatures = signatures;
-
 
     public const string sequences = nameof(sequences);
 
@@ -501,23 +468,11 @@ public readonly struct ApiNames
 
     public const string XCmdWorkers = cmd + dot + workers + dot + extensions;
 
-
     public const string CmdSpecs = cmd + dot + specs;
-
-
-    public const string Workers = workers;
-
-
-    public const string WfServices = workflow + dot + services;
-
-    public const string Cs = lang + dot + cs;
-
-    public const string Asm = lang + dot + asm;
 
     public const string DynamicOperators = dynamic + dot + operators;
 
     public const string AlgorithmDynamic = dynamic + dot + algorithms;
-
 
     // ~~ LinqX
     // ~~ -----------------------------------------------------------------------------------------
@@ -530,7 +485,7 @@ public readonly struct ApiNames
 
     public const string LinqXFuncX = linq + dot + expressions + dot + extensions;
 
-   public const string gmath =  math + dot + generic;
+    public const string gmath =  math + dot + generic;
 
     public const string algorithms = nameof(algorithms);
 

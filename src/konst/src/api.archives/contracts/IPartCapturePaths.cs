@@ -8,13 +8,13 @@ namespace Z0
 
     public interface IPartCapturePaths : IPartFilePaths, IPartImmPaths
     {
-        FolderPath X86Dir
+        FS.FolderPath X86Dir
             => X86DirPath(ArchiveRoot);
 
-        FS.FilePath AsmPath(FileName name)
+        FS.FilePath AsmPath(FS.FileName name)
             => FS.path(AsmFilePath(ArchiveRoot, name).Name);
 
-        FilePath HexPath(FileName name)
+        FilePath HexPath(FS.FileName name)
             => HexFilePath(ArchiveRoot, name);
 
         FilePath HexPath(ApiHostUri host)

@@ -30,9 +30,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Option<ConstructorInfo> ctor<T>(params Type[] args)
             => ctor(typeof(T), args);
-
-        [MethodImpl(Inline), Op]
-        public static MethodInfo method(Delegate src)
-            => src.Method;
     }
 }

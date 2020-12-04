@@ -58,7 +58,6 @@ namespace Z0
             return hash(vcell(v,0), vcell(v,1));
         }
 
-
         /// <summary>
         /// Creates an unsigned hash code
         /// </summary>

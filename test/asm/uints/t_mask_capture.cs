@@ -10,15 +10,6 @@ namespace Z0.Asm
     using static Konst;
     using static z;
 
-    public readonly struct HashTable<K,V>
-    {
-        readonly ulong[] Hashed;
-
-        readonly K[] Keys;
-
-        readonly V[] Values;
-    }
-
     public sealed class t_mask_capture : t_asm<t_mask_capture>
     {
         public static T[] binlits<T>(Type declarer, Action<AppMsg> msg)
@@ -58,8 +49,8 @@ namespace Z0.Asm
         public void digital_render()
         {
             var src = Random.Bytes(8).ToSpan();
-            var bs = src.ToBitSpan32();
-            Claim.eq(64,bs.Length);
+            var bs = src.ToBitSpan();
+            Claim.eq(64, bs.Length);
             var expect = bs.Format();
             var actual = Digital.render(Konst.base2, src).Reverse().ToString();
             ClaimPrimal.eq(expect,actual);

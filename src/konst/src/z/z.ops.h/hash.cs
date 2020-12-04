@@ -172,7 +172,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static unsafe uint hash(string src)
-            => (uint)(pchar2(src ?? EmptyString));
+            => (uint)(src?.GetHashCode() ?? 0); //(uint)(pchar2(src ?? EmptyString));
 
         /// <summary>
         /// Calculates a combined hash for 2 unsigned 32-bit integers

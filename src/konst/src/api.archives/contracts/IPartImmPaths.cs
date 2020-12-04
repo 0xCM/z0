@@ -8,36 +8,33 @@ namespace Z0
 
     public interface IPartImmPaths : IPartFilePaths
     {
-        FolderPath ImmRootDirPath(FolderPath root)
-            => (root + ImmFolder).Create();
-
         /// <summary>
         /// The imm root directory path
         /// </summary>
-        FolderPath ImmRoot
-            => ImmRootDirPath(ArchiveRoot);
+        FS.FolderPath ImmRoot
+            => FS.dir(ArchiveRoot.Name) + FS.folder("imm");
 
         /// <summary>
         /// Nonrecursively enumerates directory paths owned by a specified part
         /// </summary>
         /// <param name="part">The owning part</param>
         /// <param name="ext">The extension to match</param>
-        FolderPath[] ImmDirs(PartId part)
-            => ImmRoot.SubDirs.Where(d => d.Name.EndsWith(part.Format()));
+        FS.FolderPath[] ImmDirs(PartId part)
+            => ImmRoot.SubDirs().Where(d => d.Name.EndsWith(part.Format()));
 
-        FolderPath[] ImmHostDirs(PartId part)
-            => ImmDirs(part).SelectMany(path => path.SubDirs).ToArray();
+        FS.FolderPath[] ImmHostDirs(PartId part)
+            => ImmDirs(part).SelectMany(path => path.SubDirs());
 
-        FolderPath[] ImmHostDirs(params PartId[] parts)
+        FS.FolderPath[] ImmHostDirs(params PartId[] parts)
             => parts.SelectMany(ImmHostDirs).ToArray();
 
-        FolderPath ImmSubDir(RelativeLocation name)
+        FS.FolderPath ImmSubDir(FS.FolderName name)
             => (ImmRoot +  name);
 
-        FilePath HexImmPath(PartId owner, ApiHostUri host, OpIdentity id)
-            => ImmSubDir(RelativeLocation.Define(owner.Format(), host.Name)) + HexOpFileName(id);
+        FS.FilePath HexImmPath(PartId owner, ApiHostUri host, OpIdentity id)
+            => ImmSubDir(FS.folder(owner.Format(), host.Name)) + HexOpFileName(id);
 
-        FilePath AsmImmPath(PartId owner, ApiHostUri host, OpIdentity id)
-            => ImmSubDir(RelativeLocation.Define(owner.Format(), host.Name)) + AsmFileName(id);
+        FS.FilePath AsmImmPath(PartId owner, ApiHostUri host, OpIdentity id)
+            => ImmSubDir(FS.folder(owner.Format(), host.Name)) + AsmFileName(id);
     }
 }

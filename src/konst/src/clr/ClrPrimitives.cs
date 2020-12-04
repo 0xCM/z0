@@ -18,10 +18,6 @@ namespace Z0
     [ApiHost(ApiNames.ClrPrimitives, true)]
     public readonly struct ClrPrimitives
     {
-        [MethodImpl(Inline), Op]
-        public static ClrPrimitiveRecord describe(PrimalKind src)
-            => new ClrPrimitiveRecord(src, width(src), sign(src), (PrimalTypeCode)code(src));
-
         /// <summary>
         /// Determines the numeric kind, if any, of a system type
         /// </summary>
@@ -106,7 +102,6 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static PrimalKind filter(PrimalKind src, Field i)
             => filter((byte)src, filter(i));
-
 
         /// <summary>
         /// Returns the type-code identified primal kind

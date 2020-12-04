@@ -37,7 +37,7 @@ namespace Z0
                 case ULK.Identity: return gvec.videntity(a);
                 case ULK.False: return gvec.vfalse(a);
                 case ULK.True: return gvec.vtrue(a);
-                default: throw Unsupported.define<T>(sig<T>(kind));
+                default: throw Unsupported.value(sig<T>(kind));
              }
         }
 
@@ -57,7 +57,7 @@ namespace Z0
                 case BCK.Eq: return gvec.veq(a,b);
                 case BCK.Lt: return gvec.vlt(a,b);
                 case BCK.Gt: return gvec.vgt(a,b);
-                default: throw Unsupported.define<T>(sig<T>(kind));
+                default: throw Unsupported.value(sig<T>(kind));
             }
         }
 
@@ -69,7 +69,7 @@ namespace Z0
             {
                 case BAR.Add: return gvec.vadd(x,y);
                 case BAR.Sub: return gvec.vsub(x,y);
-                default: throw Unsupported.define<T>(sig<T>(kind));
+                default: throw Unsupported.value(sig<T>(kind));
             }
         }
 
@@ -90,7 +90,7 @@ namespace Z0
                 case BSK.Srl: return gvec.vsrl(a,count);
                 case BSK.Rotl: return gvec.vrotl(a,count);
                 case BSK.Rotr: return gvec.vrotr(a,count);
-                default: throw Unsupported.define<T>(sig<T>(kind));
+                default: throw Unsupported.value(sig<T>(kind));
             }
         }
 
@@ -123,7 +123,7 @@ namespace Z0
                 case BLK.NonImpl: return gvec.vnonimpl(a,b);
                 case BLK.CImpl: return gvec.vcimpl(a,b);
                 case BLK.CNonImpl: return gvec.vcnonimpl(a,b);
-                default: throw Unsupported.define<T>(sig<T>(kind));
+                default: throw Unsupported.value(sig<T>(kind));
             }
         }
 
@@ -167,7 +167,7 @@ namespace Z0
                 case BLK.NonImpl: return gvec.vnonimpl;
                 case BLK.CImpl: return gvec.vcimpl;
                 case BLK.CNonImpl: return gvec.vcnonimpl;
-                default: throw Unsupported.define<T>(sig<T>(kind));
+                default: throw Unsupported.value(sig<T>(kind));
             }
         }
 
@@ -209,7 +209,7 @@ namespace Z0
                 case TLK.X19: return f19;
                 case TLK.X1A: return f1a;
                 case TLK.X1B: return f1b;
-                default: throw Unsupported.define<T>(sig<T>(kind));
+                default: throw Unsupported.value(sig<T>(kind));
             }
         }
 

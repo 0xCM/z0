@@ -10,6 +10,11 @@ namespace Z0.Asm
     public interface IAsmImmWriter
     {
         /// <summary>
+        /// The imm root directory
+        /// </summary>
+        FS.FolderPath ImmRoot {get;}
+
+        /// <summary>
         /// The api host
         /// </summary>
         ApiHostUri Uri {get;}
@@ -19,13 +24,13 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The source functions</param>
         /// <param name="append">Whether to append to an existing file or else overwrite</param>
-        Option<FilePath> SaveAsmImm(OpIdentity id, AsmRoutine[] src, bool append);
+        Option<FS.FilePath> SaveAsmImm(OpIdentity id, AsmRoutine[] src, bool append);
 
         /// <summary>
         /// Saves the encoded data contained in an array of decded functions
         /// </summary>
         /// <param name="src">The source functions</param>
         /// <param name="append">Whether to append to an existing file or else overwrite</param>
-        Option<FilePath> SaveHexImm(OpIdentity id, AsmRoutine[] src, bool append);
+        Option<FS.FilePath> SaveHexImm(OpIdentity id, AsmRoutine[] src, bool append);
     }
 }

@@ -15,7 +15,7 @@ namespace Z0
     /// <summary>
     /// Defines the primary interface for clr artifact interrogation
     /// </summary>
-    [ApiHost("reflex.views")]
+    [ApiHost]
     public readonly partial struct ClrViews
     {
         static FieldView field => default;

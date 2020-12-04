@@ -91,7 +91,12 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ApiHostCodeBlocks HostCodeBlocks(ApiHostUri host)
-            => new ApiHostCodeBlocks(host, PartIndex[host]);
+        {
+            if(PartIndex.HostCode(host, out var code))
+                return code;
+            else
+                return ApiHostCodeBlocks.Empty;
+        }
 
         [MethodImpl(Inline)]
         public ApiPartCodeBlocks PartCodeBlocks(PartId id)

@@ -41,7 +41,7 @@ namespace Z0
                 case BLK.NonImpl: return BitVector.nonimpl;
                 case BLK.CImpl: return BitVector.cimpl;
                 case BLK.CNonImpl: return BitVector.cnonimpl;
-                default: throw Unsupported.define<T>(sig<T>(kind));
+                default: throw Unsupported.value(sig<T>(kind));
            }
         }
 
@@ -67,7 +67,7 @@ namespace Z0
                 case BLK.NonImpl: return BitVector.nonimpl(x,y);
                 case BLK.CImpl: return BitVector.cimpl(x,y);
                 case BLK.CNonImpl: return BitVector.cnonimpl(x,y);
-                default: throw Unsupported.define<T>(sig<T>(kind));
+                default: throw Unsupported.value(sig<T>(kind));
             }
         }
 
@@ -93,7 +93,7 @@ namespace Z0
                 case BLK.NonImpl: return nonimpl(x,y);
                 case BLK.CImpl: return cimpl(x,y);
                 case BLK.CNonImpl: return cnonimpl(x,y);
-                default: throw Unsupported.define<T>(sig<T>(kind));
+                default: throw Unsupported.value(sig<T>(kind));
             }
         }
 

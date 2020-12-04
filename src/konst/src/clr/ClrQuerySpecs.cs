@@ -52,34 +52,5 @@ namespace Z0
             [Meaning(DeclaredStatic, Q.DeclaredStatic)]
             public const string DeclaredStatic = "Declared static members";
         }
-
-        public readonly struct SystemKinds
-        {
-            public const B BF_Public = (B)Q.Public;
-
-            public const B BF_NonPublic = (B)Q.NonPublic;
-
-            public const B BF_Static = (B)Q.Static;
-
-            public const B BF_Instance = (B)Q.Instance;
-
-            public const B BF_DeclaredInstance = (B)Q.DeclaredInstance;
-
-            public const B BF_PublicStatic = (B)Q.PublicStatic;
-
-            public const B BF_PublicInstance = (B)Q.PublicInstance;
-
-            public const B BF_NonPublicStatic = (B)Q.NonPublicStatic;
-
-            public const B BF_NonPublicInstance = (B)Q.NonPublicInstance;
-
-            public const B BF_World = (B)Q.World;
-
-            public const B BF_All = (B)Q.All;
-
-            public const B BF_Declared = (B)Q.Declared;
-
-            public const B BF_DeclaredStatic = (B)Q.DeclaredStatic;
-        }
     }
 }

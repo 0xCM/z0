@@ -93,7 +93,7 @@ namespace Z0
                 case BCK.LtEq: return gmath.lteq(a,b);
                 case BCK.Gt: return gmath.gt(a,b);
                 case BCK.GtEq: return gmath.gteq(a,b);
-                default: throw Unsupported.define<T>(sig<T>(kind));
+                default: throw Unsupported.value(sig<T>(kind));
             }
         }
 
@@ -109,7 +109,7 @@ namespace Z0
                 case BCK.LtEq: return gmath.lteq;
                 case BCK.Gt: return gmath.gt;
                 case BCK.GtEq: return gmath.gteq;
-                default: throw Unsupported.define<T>(sig<T>(kind));
+                default: throw Unsupported.value(sig<T>(kind));
             }
         }
 

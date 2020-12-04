@@ -15,7 +15,7 @@ namespace Z0.Asm
     {
         public ApiHostUri Uri {get;}
 
-        public FolderPath ArchiveRoot {get;}
+        public FS.FolderPath ImmRoot {get;}
 
         readonly IAsmFormatter AsmFormatter;
 
@@ -24,16 +24,16 @@ namespace Z0.Asm
         readonly IHostCapturePaths HostArchive;
 
         [MethodImpl(Inline)]
-        public AsmImmWriter(ApiHostUri host, IAsmFormatter formatter, FolderPath root)
+        public AsmImmWriter(ApiHostUri host, IAsmFormatter formatter, FS.FolderPath root)
         {
             Uri = host;
-            ArchiveRoot = root;
+            ImmRoot = root;
             AsmFormatter = formatter;
             HostArchive = ApiArchives.capture(FS.dir(root.Name), host);
             CilFormatter =  Cil.formatter();
         }
 
-        public Option<FilePath> SaveAsmImm(OpIdentity id, AsmRoutine[] src, bool append)
+        public Option<FS.FilePath> SaveAsmImm(OpIdentity id, AsmRoutine[] src, bool append)
         {
             var dst = HostArchive.AsmImmPath(Uri.Owner, Uri, id);
             using var writer = dst.Writer();
@@ -46,7 +46,7 @@ namespace Z0.Asm
             return dst;
         }
 
-        public Option<FilePath> SaveHexImm(OpIdentity id, AsmRoutine[] src, bool append)
+        public Option<FS.FilePath> SaveHexImm(OpIdentity id, AsmRoutine[] src, bool append)
         {
             var path = HostArchive.HexImmPath(Uri.Owner, Uri, id);
             ApiArchives.save(src.Map(x => x.Code), FS.path(path.Name),append);

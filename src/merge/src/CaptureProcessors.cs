@@ -25,7 +25,6 @@ namespace Z0
             for(var i=0; i<count; i++)
             {
                 target.Clear();
-
                 ref readonly var block = ref src[i];
                 decoder.Decode(block, x => target.Add(x));
 
@@ -78,13 +77,17 @@ namespace Z0
             {
                 var processor = new AsmProcessDriver(state, encoded);
                 var result = processor.Process();
+                var records = 0u;
 
                 wf.Processed(delimit(nameof(AsmRow), encoded.Hosts.Length, result.Count));
 
                 var sets = result.View;
                 var count = result.Count;
+                wf.Status($"Emitting {count} instruction tables");
                 for(var i=0; i<count; i++)
-                    process(wf, skip(sets,i));
+                    records += emit(wf, skip(sets,i));
+                wf.Status($"Emitted a total of {records} records for {count} instruction tables");
+
             }
             catch(Exception e)
             {
@@ -92,20 +95,28 @@ namespace Z0
             }
         }
 
-        public static void process(IWfShell wf, in AsmRowSet<Mnemonic> src)
+        public static uint emit(IWfShell wf, in AsmRowSet<Mnemonic> src)
         {
-            var count = src.Count;
-            var records = span(src.Sequenced);
-            var dst = wf.Db().Table(AsmRow.TableId, src.Key.ToString());
+            var count = (uint)src.Count;
+            if(count != 0)
+            {
+                var dst = wf.Db().Table(AsmRow.TableId, src.Key.ToString());
+                var records = span(src.Sequenced);
+                var formatter = Formatters.dataset<AsmRowField>();
+                var header = Table.header53<AsmRowField>();
 
-            var formatter = Formatters.dataset<AsmRowField>();
-            var header = Table.header53<AsmRowField>();
-            using var writer = dst.Writer();
-            writer.WriteLine(header);
-            for(var i=0; i<count; i++)
-                writer.WriteLine(AsmRow.format(skip(records,i), formatter).Render());
-
-            wf.EmittedTable<AsmRow>(count, dst);
+                wf.EmittingTable<AsmRow>(dst);
+                using var writer = dst.Writer();
+                writer.WriteLine(header);
+                for(var i=0; i<count; i++)
+                {
+                    ref readonly var record = ref skip(records,i);
+                    var line = AsmRow.format(record, formatter).Render();
+                    writer.WriteLine(line);
+                }
+                wf.EmittedTable<AsmRow>(count, dst);
+            }
+            return count;
         }
 
         public static Span<ApiPartRoutines> decode(IWfShell wf, IAsmDecoder decoder, in ApiCodeBlockIndex src)
@@ -134,11 +145,16 @@ namespace Z0
                     {
                         var host = hosts[j];
                         var members = src[host];
-                        var fx = decode(decoder, members);
-                        hostFx.Add(fx);
-                        kHosts++;
-                        kMembers += fx.RoutineCount;
-                        kFx += fx.InstructionCount;
+                        if(members.IsNonEmpty)
+                        {
+                            var fx = decode(decoder, members);
+                            hostFx.Add(fx);
+                            kHosts++;
+                            kMembers += fx.RoutineCount;
+                            kFx += fx.InstructionCount;
+                        }
+                        else
+                            wf.Warn($"The host {host} has no members");
                     }
 
                     wf.Status(text.format(WfProgress.DecodedPart, hostFx.Count, part.Format()));

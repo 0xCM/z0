@@ -48,10 +48,9 @@ namespace Z0
             where T : unmanaged
                 => @as<S,char>(src.Value);
 
-
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static char render<S>(S src)
             where S : unmanaged
-                => (char)force<S,ushort>(src);
+                => (char)@as<S,ushort>(src);
     }
 }

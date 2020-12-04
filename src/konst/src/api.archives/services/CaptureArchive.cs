@@ -11,10 +11,10 @@ namespace Z0
 
     public readonly struct CaptureArchive : ICaptureArchive<CaptureArchive>
     {
-        public FolderPath ArchiveRoot {get;}
+        public FS.FolderPath ArchiveRoot {get;}
 
         [MethodImpl(Inline)]
         internal CaptureArchive(FS.FolderPath root)
-            => ArchiveRoot = FolderPath.Define(root.Create().Name);
+            => ArchiveRoot = root;
     }
 }

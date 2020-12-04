@@ -55,5 +55,7 @@ namespace Z0
         public const string notebooks = nameof(notebooks);
 
         public const string indices = nameof(indices);
+
+        public const string imm = "asm.imm";
     }
 }

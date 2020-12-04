@@ -14,5 +14,10 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static FolderName folder(PathPart name)
             => new FolderName(name);
+
+        [MethodImpl(Inline), Op]
+        public static FolderName folder(PathPart a, PathPart b)
+            => folder(a) + folder(b);
+
     }
 }

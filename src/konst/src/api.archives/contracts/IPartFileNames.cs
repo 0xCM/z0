@@ -4,18 +4,18 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IPartFileNames : IPartFileExtensions
+    public interface IPartFileNames
     {
-        FileName LegalFileName(OpIdentity id, FileExtension ext)
-            => id.ToFileName(ext);
+        FS.FileName LegalFileName(OpIdentity id, FS.FileExt ext)
+            => FS.file(id.ToFileName(ext).Name);
 
-        FileName LegalFileName(ApiHostUri host, FileExtension ext)
-            => FileName.define(string.Concat(host.Owner.Format(), Chars.Dot, host.Name), ext);
+        FS.FileName LegalFileName(ApiHostUri host, FS.FileExt ext)
+            => FS.file(string.Concat(host.Owner.Format(), Chars.Dot, host.Name), ext);
 
-        FileName AsmFileName(OpIdentity id)
-            => LegalFileName(id, Asm);
+        FS.FileName AsmFileName(OpIdentity id)
+            => LegalFileName(id, ArchiveFileKinds.Asm);
 
-        FileName HexOpFileName(OpIdentity id)
-            => LegalFileName(id, HexLine);
+        FS.FileName HexOpFileName(OpIdentity id)
+            => LegalFileName(id, ArchiveFileKinds.Hex);
     }
 }

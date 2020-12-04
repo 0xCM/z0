@@ -36,12 +36,12 @@ namespace Z0.Asm
 
         protected IApiHexWriter HexWriter([Caller] string caller = null)
         {
-            var dstPath = TargetArchive.HexPath(FileName.define(caller, FileExtensions.HexLine));
+            var dstPath = TargetArchive.HexPath(FS.file(caller, FileExtensions.HexLine));
             return ApiArchives.hexwriter<ApiHexWriter>(FS.path(dstPath.Name));
         }
 
         protected IAsmWriter AsmWriter([Caller] string caller = null)
-            => ApiAsm.writer(TargetArchive.AsmPath(FileName.define($"{caller}", FileExtensions.Asm)), AsmFormatConfig.DefaultStreamFormat);
+            => ApiAsm.writer(TargetArchive.AsmPath(FS.file($"{caller}", FileExtensions.Asm)), AsmFormatConfig.DefaultStreamFormat);
 
         protected ApiCodeBlock[] ReadHostBits(ApiHostUri host)
         {

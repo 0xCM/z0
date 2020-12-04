@@ -19,8 +19,11 @@ namespace Z0
         /// <typeparam name="T">The type to search</typeparam>
         /// <typeparam name="A1">The first argument type</typeparam>
         /// <typeparam name="A2">The second argument type</typeparam>
-        [MethodImpl(Inline)]
         public static Option<MethodInfo> method<T,X,R>(string name)
             => typeof(T).MatchMethod(name, typeof(X), typeof(R));
+
+        [MethodImpl(Inline), Op]
+        public static MethodInfo method(Delegate src)
+            => src.Method;
     }
 }

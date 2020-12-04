@@ -10,10 +10,21 @@ namespace Z0
     using X = ArchiveFileKinds;
     using PN = DbNames;
 
-    public interface IFileDbPaths : IFileArchivePaths
+    public interface IDbPaths
+    {
+        /// <summary>
+        /// The workflow's database root
+        /// </summary>
+        FS.FolderPath DbRoot {get;}
+    }
+
+    public interface IFileDbPaths : IDbPaths, IFileArchivePaths
     {
         FS.FileName ApiFileName(PartId part, string api, FS.FileExt ext)
             => FS.file(string.Format("{0}.{1}", part.Format(), api), ext);
+
+        FS.FolderPath IDbPaths.DbRoot
+            => Root;
 
         FS.FileExt DefaultFileExt
              => X.Csv;
@@ -95,6 +106,9 @@ namespace Z0
 
         FS.FolderPath CaptureRoot()
             => Root + FS.folder(PN.Capture);
+
+        FS.FolderPath ImmRoot()
+            => CaptureRoot() + FS.folder(PN.imm);
 
         FS.FolderPath JobRoot()
             => Root + FS.folder(PN.jobs);

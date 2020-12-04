@@ -27,7 +27,7 @@ namespace Z0.Asm
         /// <param name="dst"></param>
         /// <param name="src"></param>
         [MethodImpl(Inline),Op]
-        public Args<Mem8,Imm8> cmp(Mem8 dst, Imm8 src)
+        public Args<MemOp8,Imm8> cmp(MemOp8 dst, Imm8 src)
             => args(dst,src);
 
         /// <summary>
@@ -63,7 +63,7 @@ namespace Z0.Asm
         /// <param name="dst"></param>
         /// <param name="src"></param>
         [MethodImpl(Inline), Op]
-        public Args<Mem32,R32> cmp(Mem32 dst, R32 src)
+        public Args<MemOp32,R32> cmp(MemOp32 dst, R32 src)
             => args(dst,src);
 
         /// <summary>
@@ -81,7 +81,7 @@ namespace Z0.Asm
         /// <param name="dst"></param>
         /// <param name="src"></param>
         [MethodImpl(Inline), Op]
-        public Args<R64,Mem64> cmp(R64 dst, Mem64 src)
+        public Args<R64,MemOp64> cmp(R64 dst, MemOp64 src)
             => args(dst,src);
     }
 }

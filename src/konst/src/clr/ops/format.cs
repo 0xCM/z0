@@ -5,8 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Reflection;
 
     partial struct ClrQuery
     {
@@ -16,15 +14,6 @@ namespace Z0
             var dst = Buffers.text();
             render(src, dst);
             return dst.Emit();
-        }
-
-        [Op]
-        public static void render(in MethodMetadata src, ITextBuffer dst)
-        {
-            dst.Append(src.ReturnType.Format());
-            dst.Append(Chars.Space);
-            dst.Append(src.MethodName);
-            dst.Append(src.ValueParams.Format());
         }
     }
 }
