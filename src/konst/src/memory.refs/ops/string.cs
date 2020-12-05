@@ -31,11 +31,11 @@ namespace Z0
             => new StringRef(address, length);
 
         /// <summary>
-        /// Creates a <see cref='StringRef'/> from a specified <see cref='SegRef'/>
+        /// Creates a <see cref='StringRef'/> from a specified <see cref='MemorySegment'/>
         /// </summary>
         /// <param name="src">The source reference</param>
         [MethodImpl(Inline), Op]
-        public static StringRef @string(SegRef src)
+        public static StringRef @string(MemorySegment src)
             => new StringRef(vparts(N128.N, src.Address, (ulong)src.DataSize));
 
         /// <summary>

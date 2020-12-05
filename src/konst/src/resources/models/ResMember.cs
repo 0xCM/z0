@@ -3,13 +3,13 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
     using System;
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
     using static Konst;
-    
+
     /// <summary>
     /// Describes a member that defines a resource
     /// </summary>
@@ -17,22 +17,22 @@ namespace Z0
     {
         public readonly MemberInfo Member;
 
-        public readonly SegRef Reference;
-        
+        public readonly MemorySegment Reference;
+
         [MethodImpl(Inline)]
-        public ResMember(MemberInfo member, in SegRef memref)
+        public ResMember(MemberInfo member, in MemorySegment memref)
         {
             Member = member;
             Reference = memref;
         }
 
-        public MemoryAddress Address 
+        public MemoryAddress Address
         {
             [MethodImpl(Inline)]
             get => Reference.Address;
         }
 
-        public uint DataSize 
+        public uint DataSize
         {
             [MethodImpl(Inline)]
             get => Reference.DataSize;

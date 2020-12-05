@@ -13,10 +13,10 @@ namespace Z0
     {
         public StringRef Name {get;}
 
-        public SegRef Segment {get;}
+        public MemorySegment Segment {get;}
 
         [MethodImpl(Inline)]
-        public ResourceSegment(string name, in SegRef segment)
+        public ResourceSegment(string name, in MemorySegment segment)
         {
             Name = name;
             Segment = segment;

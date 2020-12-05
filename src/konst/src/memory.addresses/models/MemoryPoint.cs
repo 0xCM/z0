@@ -8,13 +8,17 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static z;
 
-    partial struct MemRefs
+    public readonly struct MemoryPoint32
     {
-        [MethodImpl(Inline)]
-        public static ref readonly MemorySegment lookup<E>(MemorySlots<E> src, E index)
-            where E : unmanaged
-                => ref src.Data[z.uint8(index)];
+        public AddressSpace Space {get;}
+
+        public Address32 Coordinate {get;}
+
+        public MemoryPoint32(AddressSpace space, Address32 coord)
+        {
+            Space = space;
+            Coordinate = coord;
+        }
     }
 }

@@ -12,29 +12,29 @@ namespace Z0
     /// <summary>
     /// Indexes a sequence of memory references
     /// </summary>
-    public readonly struct Segments
+    public readonly struct MemorySegments
     {
-        readonly SegRef[] Refs;
+        readonly MemorySegment[] Refs;
 
         [MethodImpl(Inline)]
-        public Segments(SegRef[] src)
+        public MemorySegments(MemorySegment[] src)
             => Refs = src;
 
         [MethodImpl(Inline)]
-        public static Segments create(params SegRef[] src)
-            => new Segments(src);
+        public static MemorySegments create(params MemorySegment[] src)
+            => new MemorySegments(src);
 
         [MethodImpl(Inline)]
-        public static Segments create(MemoryAddress src, uint size)
-            => create(new SegRef(src, size));
+        public static MemorySegments create(MemoryAddress src, uint size)
+            => create(new MemorySegment(src, size));
 
-        public ReadOnlySpan<SegRef> View
+        public ReadOnlySpan<MemorySegment> View
         {
             [MethodImpl(Inline)]
             get => Refs;
         }
 
-        public Span<SegRef> Edit
+        public Span<MemorySegment> Edit
         {
             [MethodImpl(Inline)]
             get => Refs;
@@ -46,13 +46,13 @@ namespace Z0
             get => Refs.Length;
         }
 
-        public ref SegRef this[long index]
+        public ref MemorySegment this[long index]
         {
             [MethodImpl(Inline)]
             get => ref Refs[index];
         }
 
-        public ref SegRef this[ulong index]
+        public ref MemorySegment this[ulong index]
         {
             [MethodImpl(Inline)]
             get => ref Refs[index];

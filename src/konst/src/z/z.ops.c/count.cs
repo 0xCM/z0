@@ -10,13 +10,13 @@ namespace Z0
     using static Konst;
 
     partial struct z
-    {                
+    {
         /// <summary>
         /// Computes the whole number of T-cells identified by a reference
         /// </summary>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static uint count<T>(in SegRef src)
+        public static uint count<T>(in MemorySegment src)
             => (uint)(src.DataSize/size<T>());
     }
 }

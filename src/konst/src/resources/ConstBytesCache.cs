@@ -16,16 +16,16 @@ namespace Z0
         internal ConstBytesCache(ConstBytesReader models)
         {
             Refs = models.Refs;
-            Storage = Segments.create(Refs);
+            Storage = MemorySegments.create(Refs);
             Stores = MemStore.Service;
             Models = models;
         }
 
         readonly ConstBytesReader Models;
 
-        readonly SegRef[] Refs;
+        readonly MemorySegment[] Refs;
 
-        readonly Segments Storage;
+        readonly MemorySegments Storage;
 
         readonly MemStore Stores;
 

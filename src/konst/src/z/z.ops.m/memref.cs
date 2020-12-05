@@ -18,19 +18,19 @@ namespace Z0
         /// <param name="address">The address</param>
         /// <param name="bytes">The number of reference bytes</param>
         [MethodImpl(Inline), Op]
-        public static SegRef memref(MemoryAddress address, ByteSize bytes)
-            => new SegRef(address,bytes);
+        public static MemorySegment memref(MemoryAddress address, ByteSize bytes)
+            => new MemorySegment(address,bytes);
 
         [MethodImpl(Inline), Op]
-        public static SegRef memref(Vector128<ulong> src)
-            => new SegRef(src);
+        public static MemorySegment memref(Vector128<ulong> src)
+            => new MemorySegment(src);
 
         [MethodImpl(Inline), Op]
-        public unsafe static SegRef memref(ReadOnlySpan<byte> src)
+        public unsafe static MemorySegment memref(ReadOnlySpan<byte> src)
             => memref((ulong)gptr(src), src.Length);
-        
+
         [MethodImpl(Inline), Op]
-        public static unsafe SegRef memref(string src)
+        public static unsafe MemorySegment memref(string src)
             => memref(address(src), src.Length*2);
     }
 }

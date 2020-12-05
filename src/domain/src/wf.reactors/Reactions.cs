@@ -160,5 +160,14 @@ namespace Z0
             dst.EndAddress = src.EndAddress;
             dst.Size = src.Size;
         }
+
+        public static CmdResult react(IWfShell wf, in EmitCliTablesCmd cmd)
+        {
+            (var success, var msg) = SRM.MetadataTableEmitter.emit(cmd.Source.Name, cmd.Target.Name);
+            if(success)
+                return Cmd.ok(cmd);
+            else
+                return Cmd.fail(cmd,msg);
+        }
     }
 }

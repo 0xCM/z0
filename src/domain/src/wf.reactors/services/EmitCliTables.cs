@@ -4,16 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public enum MemScaleKind : byte
+    public sealed class EmitCliTables : CmdReactor<EmitCliTablesCmd, CmdResult>
     {
-        None  = 0,
-
-        S1 = 1,
-
-        S2 = 2,
-
-        S4 = 4,
-
-        S8 = 8
+        protected override CmdResult Run(EmitCliTablesCmd cmd)
+            => Reactions.react(Wf, cmd);
     }
 }

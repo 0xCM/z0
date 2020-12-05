@@ -14,22 +14,22 @@ namespace Z0
     /// <summary>
     /// Defines a reference to a memory segment
     /// </summary>
-    public readonly struct SegRef : ISegRef, ITextual, IEquatable<SegRef>, IHashed
+    public readonly struct MemorySegment : IMemorySegment, ITextual, IEquatable<MemorySegment>, IHashed
     {
         public const byte Size = 16;
 
         readonly Vector128<ulong> Segment;
 
         [MethodImpl(Inline)]
-        public SegRef(Vector128<ulong> src)
+        public MemorySegment(Vector128<ulong> src)
             => Segment = src;
 
         [MethodImpl(Inline)]
-        public unsafe SegRef(byte* src, ByteSize length)
+        public unsafe MemorySegment(byte* src, ByteSize length)
             => Segment = vparts((ulong)src, (ulong)length);
 
         [MethodImpl(Inline)]
-        public SegRef(MemoryAddress src, ByteSize size)
+        public MemorySegment(MemoryAddress src, ByteSize size)
             => Segment = vparts((ulong)src, (ulong)size);
 
         public MemoryAddress Address
@@ -106,11 +106,11 @@ namespace Z0
             => hash(Segment);
 
         [MethodImpl(Inline)]
-        public bool Equals(SegRef src)
+        public bool Equals(MemorySegment src)
             => src.Segment.Equals(Segment);
 
         [MethodImpl(Inline)]
-        public static implicit operator Vector128<ulong>(in SegRef src)
+        public static implicit operator Vector128<ulong>(in MemorySegment src)
             => src.Segment;
 
         string ITextual.Format()
@@ -121,11 +121,11 @@ namespace Z0
             get => Hash();
         }
 
-        bool IEquatable<SegRef>.Equals(SegRef src)
+        bool IEquatable<MemorySegment>.Equals(MemorySegment src)
             => Equals(src);
 
         public override bool Equals(object src)
-            => src is SegRef x && Equals(x);
+            => src is MemorySegment x && Equals(x);
 
         public override string ToString()
             => Format();
@@ -133,7 +133,7 @@ namespace Z0
         public override int GetHashCode()
             => (int)Hash();
 
-        public static SegRef Empty
+        public static MemorySegment Empty
             => default;
     }
 }

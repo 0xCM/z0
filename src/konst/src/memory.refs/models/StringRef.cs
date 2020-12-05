@@ -19,7 +19,7 @@ namespace Z0
         internal readonly Vector128<ulong> Data;
 
         [MethodImpl(Inline)]
-        public StringRef(in SegRef src)
+        public StringRef(in MemorySegment src)
             => Data = MemRefs.location(src);
 
         [MethodImpl(Inline)]
@@ -132,7 +132,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static StringRef empty()
-            => new StringRef(SegRef.Empty);
+            => new StringRef(MemorySegment.Empty);
 
         [MethodImpl(Inline)]
         public string Format()
@@ -142,7 +142,7 @@ namespace Z0
             => Text;
 
         [MethodImpl(Inline)]
-        public static implicit operator StringRef(SegRef src)
+        public static implicit operator StringRef(MemorySegment src)
             => new StringRef(src);
 
         [MethodImpl(Inline)]

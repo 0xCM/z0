@@ -364,7 +364,7 @@ namespace Z0
         }
 
         [Op, MethodImpl(NotInline)]
-        static string Render(MemScale src)
+        static string Render(MemoryScale src)
         {
             if(src.IsNonEmpty)
                 return src.Value.ToString();

@@ -27,7 +27,7 @@ namespace Z0
             => new MemoryReader(pSrc, length);
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static MemoryReader<T> create<T>(in SegRef src)
+        public static MemoryReader<T> create<T>(in MemorySegment src)
             where T : unmanaged
                 => create(src.Address.Pointer<T>(), (int)src.DataSize);
 

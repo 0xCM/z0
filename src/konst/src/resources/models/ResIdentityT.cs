@@ -17,10 +17,10 @@ namespace Z0
     {
         public readonly asci32 Name;
 
-        public readonly SegRef Reference;
+        public readonly MemorySegment Reference;
 
         [MethodImpl(Inline)]
-        public ResIdentity(in asci32 name, in SegRef memref)
+        public ResIdentity(in asci32 name, in MemorySegment memref)
         {
             Name = name;
             Reference = memref;

@@ -17,12 +17,12 @@ namespace Z0
         const NumericKind Closure = UnsignedInts;
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static unsafe void copy<T>(SegRef src, Span<T> dst)
+        public static unsafe void copy<T>(MemorySegment src, Span<T> dst)
             where T : unmanaged
                 => MemoryReader.create<T>(src).ReadAll(dst);
 
         [Op]
-        public static void locations(in Segments store, Span<MemoryAddress> results)
+        public static void locations(in MemorySegments store, Span<MemoryAddress> results)
         {
             var sources = store.View;
             var kSources = sources.Length;
@@ -61,7 +61,7 @@ namespace Z0
             => src.As<T>();
 
         [MethodImpl(Inline), Op]
-        public static Span<byte> replicate(in SegRef src)
+        public static Span<byte> replicate(in MemorySegment src)
         {
             Span<byte> dst = sys.alloc<byte>(src.DataSize);
             copy(src, dst);
@@ -82,7 +82,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static Vector128<ulong> location(in SegRef src)
+        public static Vector128<ulong> location(in MemorySegment src)
             => vparts(N128.N, src.Address, (ulong)src.DataSize);
 
         [MethodImpl(Inline), Op, Closures(Closure)]

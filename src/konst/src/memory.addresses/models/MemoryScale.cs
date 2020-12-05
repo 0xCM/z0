@@ -9,13 +9,30 @@ namespace Z0
 
     using static Konst;
 
-    [LiteralCover]
-    public readonly struct MemScale
+    public enum MemoryScaleKind : byte
     {
-        public MemScaleKind Kind {get;}
+        None  = 0,
 
-        public static MemScale Empty
-            => new MemScale(MemScaleKind.None);
+        S1 = 1,
+
+        S2 = 2,
+
+        S4 = 4,
+
+        S8 = 8
+    }
+
+    [LiteralCover]
+    public readonly struct MemoryScale
+    {
+        public MemoryScaleKind Kind {get;}
+
+        [MethodImpl(Inline)]
+        public MemoryAddress Apply(MemoryAddress src)
+            =>(ulong)Kind * src;
+
+        public static MemoryScale Empty
+            => new MemoryScale(MemoryScaleKind.None);
 
         public bool IsEmpty
         {
@@ -32,7 +49,7 @@ namespace Z0
         public bool NonUnital
         {
              [MethodImpl(Inline)]
-             get => Kind != MemScaleKind.S1;
+             get => Kind != MemoryScaleKind.S1;
         }
 
         public bool NonZero
@@ -47,32 +64,32 @@ namespace Z0
             get => (byte) Kind;
         }
 
-        public MemScale Zero
+        public MemoryScale Zero
             => Empty;
 
         [MethodImpl(Inline)]
-        public static implicit operator MemScale(int src)
+        public static implicit operator MemoryScale(int src)
             => From(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator MemScale(MemScaleKind src)
-            => new MemScale(src);
+        public static implicit operator MemoryScale(MemoryScaleKind src)
+            => new MemoryScale(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator MemScaleKind(MemScale src)
+        public static implicit operator MemoryScaleKind(MemoryScale src)
             => src.Kind;
 
         [MethodImpl(Inline)]
-        public static MemScale From(int value)
+        public static MemoryScale From(int value)
         {
             if(value == 1 || value == 2 || value == 4 || value == 8)
-                return new MemScale((MemScaleKind)value);
+                return new MemoryScale((MemoryScaleKind)value);
             else
-                return new MemScale(MemScaleKind.None);
+                return new MemoryScale(MemoryScaleKind.None);
         }
 
         [MethodImpl(Inline)]
-        internal MemScale(MemScaleKind kind)
+        internal MemoryScale(MemoryScaleKind kind)
         {
             Kind = kind;
         }

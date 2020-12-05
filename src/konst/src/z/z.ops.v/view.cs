@@ -82,7 +82,7 @@ namespace Z0
         /// <param name="src">The source reference</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ReadOnlySpan<T> view<T>(in SegRef src)
+        public static ReadOnlySpan<T> view<T>(in MemorySegment src)
             => cover(src.Address.Ref<T>(), count<T>(src));
 
         /// <summary>

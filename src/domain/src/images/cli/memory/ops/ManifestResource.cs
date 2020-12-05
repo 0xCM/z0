@@ -44,7 +44,7 @@ namespace Z0
                     var blobReader = directory.GetReader((int)description.Offset, directory.Length - (int)description.Offset);
                     var length = blobReader.ReadUInt32();
                     MemoryAddress address = blobReader.CurrentPointer;
-                    dst = new ResourceSegment(name, new SegRef(address,length));
+                    dst = new ResourceSegment(name, new MemorySegment(address,length));
                     return true;
                 }
             }
@@ -65,7 +65,7 @@ namespace Z0
                 var blobReader = resdir.GetReader((int)res.Offset, resdir.Length - (int)res.Offset);
                 var length = blobReader.ReadUInt32();
                 MemoryAddress address = blobReader.CurrentPointer;
-                seek(dst,i) = new ResourceSegment(res.Name, new SegRef(address,length));
+                seek(dst,i) = new ResourceSegment(res.Name, new MemorySegment(address,length));
             }
             return dst;
         }

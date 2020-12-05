@@ -10,7 +10,7 @@ namespace Z0
     /// <summary>
     /// Characterizes a segment reference
     /// </summary>
-    public interface ISegRef : INullity, ITextual, IHashed
+    public interface IMemorySegment : INullity, ITextual, IHashed
     {
         uint DataSize  {get;}
 
@@ -33,16 +33,16 @@ namespace Z0
     /// Characterizes a content-parametric segment reference
     /// </summary>
     /// <typeparam name="T">The content type</typeparam>
-    public interface ISegRef<T> : ISegRef
+    public interface ISegRef<T> : IMemorySegment
     {
         Span<S> As<S>();
 
         new ref T Cell(int index);
 
-        ref byte ISegRef.Cell(int index)
+        ref byte IMemorySegment.Cell(int index)
             => ref Unsafe.As<T,byte>(ref Cell(index));
 
-        uint ISegRef.CellSize
+        uint IMemorySegment.CellSize
             => (uint)Unsafe.SizeOf<T>();
 
         new ref T this[int index]
@@ -61,14 +61,14 @@ namespace Z0
             => new F();
     }
 
-    public interface IConstRef : ISegRef
+    public interface IConstRef : IMemorySegment
     {
         ReadOnlySpan<S> As<S>();
     }
 
     public interface IConstRef<T> : IConstRef
     {
-        uint ISegRef.CellSize
+        uint IMemorySegment.CellSize
             => (uint)Unsafe.SizeOf<T>();
 
         new ref readonly T Cell(int index);

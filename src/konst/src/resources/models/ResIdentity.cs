@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
     using System;
     using System.Runtime.CompilerServices;
 
@@ -22,19 +22,19 @@ namespace Z0
         /// <summary>
         /// The memory segment occupied by the resource
         /// </summary>
-        public SegRef Reference {get;}
-        
+        public MemorySegment Reference {get;}
+
         /// <summary>
         /// The resource data type
         /// </summary>
         public PrimalKind DataType {get;}
-        
+
         [MethodImpl(Inline)]
-        public ResIdentity(asci32 name, SegRef memref, PrimalKind type)
+        public ResIdentity(asci32 name, MemorySegment memref, PrimalKind type)
         {
             Name = name;
             Reference = memref;
             DataType = type;
-        }    
+        }
     }
 }

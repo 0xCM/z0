@@ -19,22 +19,22 @@ namespace Z0
         internal ConstBytesReader(ConstBytes256 data)
             => Data = data;
 
-        public SegRef[] Refs
+        public MemorySegment[] Refs
         {
             [MethodImpl(Inline)]
             get => Data.SegRefs();
         }
 
         [MethodImpl(Inline), Op]
-        public Segments store()
-            => Segments.create(Refs);
+        public MemorySegments store()
+            => MemorySegments.create(Refs);
 
         [MethodImpl(Inline), Op]
         public ReadOnlySpan<byte> leads()
             => Data.SegLeads();
 
         [Op]
-        public ReadOnlySpan<MemoryAddress> locations(in Segments store)
+        public ReadOnlySpan<MemoryAddress> locations(in MemorySegments store)
         {
             var sources = store.View;
             var results = sys.alloc<MemoryAddress>(sources.Length);
@@ -66,7 +66,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public SegRef memref(byte n)
+        public MemorySegment memref(byte n)
         {
             if(n == 0)
                 return memref(n0);
@@ -146,12 +146,12 @@ namespace Z0
                 => ref skip(span(n),(uint)i);
 
         [MethodImpl(Inline)]
-        public unsafe SegRef memref<N>(N n = default)
+        public unsafe MemorySegment memref<N>(N n = default)
             where N : unmanaged, ITypeNat
         {
             var src = span<N>(n);
             var pSrc = gptr(z.first(src));
-            return new SegRef(pSrc, src.Length);
+            return new MemorySegment(pSrc, src.Length);
         }
     }
 }

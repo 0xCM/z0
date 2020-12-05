@@ -18,13 +18,13 @@ namespace Z0
                 => new MemorySlots<E>(slots(src));
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static MemorySlots<E> slots<E>(params SegRef[] src)
+        public static MemorySlots<E> slots<E>(params MemorySegment[] src)
             where E : unmanaged
                 => new MemorySlots<E>(src);
 
         [MethodImpl(Inline), Op]
         public static MemorySlots slots(Type src)
-            => ClrDynamic.jit(src).Map(m => new SegRef(m.Address, m.Size));
+            => ClrDynamic.jit(src).Map(m => new MemorySegment(m.Address, m.Size));
 
         [MethodImpl(Inline)]
         public static MemorySlots<E> slots<E,T>(T src)

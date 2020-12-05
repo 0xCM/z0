@@ -12,34 +12,34 @@ namespace Z0
     using api = MemRefs;
 
     /// <summary>
-    /// Defines a key-parametric indexed view over <see cref='SegRef'/> values
+    /// Defines a key-parametric indexed view over <see cref='MemorySegment'/> values
     /// </summary>
     public readonly struct MemorySlots<E>
         where E : unmanaged
     {
-        internal readonly SegRef[] Data;
+        internal readonly MemorySegment[] Data;
 
         [MethodImpl(Inline)]
-        public MemorySlots(SegRef[] slots)
+        public MemorySlots(MemorySegment[] slots)
             => Data = slots;
 
         [MethodImpl(Inline)]
-        public ref readonly SegRef Lookup(E index)
+        public ref readonly MemorySegment Lookup(E index)
             => ref api.lookup(this, index);
 
-        public ref readonly SegRef this[E index]
+        public ref readonly MemorySegment this[E index]
         {
             [MethodImpl(Inline)]
             get => ref Lookup(index);
         }
 
-        public SegRef[] Content
+        public MemorySegment[] Content
         {
             [MethodImpl(Inline)]
             get => Data;
         }
 
-        public ref readonly SegRef this[uint index]
+        public ref readonly MemorySegment this[uint index]
         {
             [MethodImpl(Inline)]
             get => ref Data[index];

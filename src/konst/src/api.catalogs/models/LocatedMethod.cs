@@ -28,14 +28,14 @@ namespace Z0
             get => Size.IsNonZero;
         }
 
-        public SegRef MemRef
+        public MemorySegment MemRef
         {
             [MethodImpl(Inline)]
-            get => new SegRef(Address, Size.IsEmpty ? 0 : (int)Size);
+            get => new MemorySegment(Address, Size.IsEmpty ? 0 : (int)Size);
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator SegRef(LocatedMethod src)
+        public static implicit operator MemorySegment(LocatedMethod src)
             => src.MemRef;
 
         [MethodImpl(Inline)]
@@ -55,7 +55,7 @@ namespace Z0
             return text.concat(name,size, Space, Chars.Eq, Space, address);
         }
 
-        public override string ToString() 
+        public override string ToString()
             => Format();
 
         [MethodImpl(Inline)]

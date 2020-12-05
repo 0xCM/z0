@@ -75,7 +75,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static MemorySlots from(Type src)
-            => ClrDynamic.jit(src).Map(m => new SegRef(m.Address, m.Size));
+            => ClrDynamic.jit(src).Map(m => new MemorySegment(m.Address, m.Size));
 
         [MethodImpl(Inline)]
         public static MemorySlots<E> from<E>(Type src)

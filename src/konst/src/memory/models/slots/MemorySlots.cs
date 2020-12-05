@@ -12,17 +12,17 @@ namespace Z0
 
     public readonly struct MemorySlots
     {
-        readonly SegRef[] Data;
+        readonly MemorySegment[] Data;
 
         [MethodImpl(Inline)]
-        public MemorySlots(SegRef[] src)
+        public MemorySlots(MemorySegment[] src)
             => Data = src;
 
         [MethodImpl(Inline)]
-        public ref readonly SegRef Lookup(byte index)
+        public ref readonly MemorySegment Lookup(byte index)
             => ref Data[index];
 
-        public ref readonly SegRef this[byte index]
+        public ref readonly MemorySegment this[byte index]
         {
             [MethodImpl(Inline)]
             get => ref Lookup(index);
@@ -35,11 +35,11 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator MemorySlots(SegRef[] src)
+        public static implicit operator MemorySlots(MemorySegment[] src)
             => new MemorySlots(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator SegRef[](MemorySlots src)
+        public static implicit operator MemorySegment[](MemorySlots src)
             => src.Data;
     }
 }
