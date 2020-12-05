@@ -21,7 +21,7 @@ namespace Z0.Tools
             public static CmdOptionSpec PrintAssembly
                 => Cmd.option("d", "Print assembly as parsed", CmdArgPrefix.Dash);
 
-            Name IToolCmdInfo<LlvmAsCmdInfo, LlvmAsCmd>.ToolName
+            public ToolId ToolId
                 => ToolName;
         }
     }

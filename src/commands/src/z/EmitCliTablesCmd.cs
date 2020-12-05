@@ -4,11 +4,13 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    [Cmd]
-    public struct EmitHostHexCmd : ICmdSpec<EmitHostHexCmd>
+    [Cmd(CmdName)]
+    public struct EmitCliTablesCmd : ICmdSpec<EmitCliTablesCmd>
     {
-        public ApiHostUri ApiHost;
+        public const string CmdName = "emit-cli-tables";
 
-        public ApiMemberCodeBlocks Source;
+        public FS.FilePath Source;
+
+        public FS.FilePath Target;
     }
 }

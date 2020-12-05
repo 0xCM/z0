@@ -74,7 +74,7 @@ namespace Z0
         public static CmdResult exec(EmitFileListCmd cmd)
         {
             var archive = FileArchives.create(cmd.SourceDir, cmd.FileKinds);
-            var id = Cmd.id(cmd);
+            var id = cmd.Id();
             var list = cmd.EmissionLimit != 0 ? match(cmd.SourceDir, cmd.EmissionLimit, cmd.FileKinds) : match(cmd.SourceDir, cmd.FileKinds);
             var outcome = FileArchives.emit(list, cmd.FileUriMode, cmd.TargetPath);
             return outcome ? Cmd.ok(cmd) : Cmd.fail(cmd,outcome.Format());

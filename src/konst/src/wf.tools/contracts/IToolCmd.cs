@@ -9,17 +9,14 @@ namespace Z0
     [Free]
     public interface IToolCmd : ICmdSpec
     {
-        ToolId ToolId {get;}
+
     }
 
     [Free]
     public interface IToolCmd<T> : IToolCmd, ICmdSpec<T>
         where T : struct, IToolCmd<T>
     {
-        ToolId IToolCmd.ToolId
+        ToolId ICmdSpec.ToolId
             => Tooling.toolid<T>();
-
-        CmdId IIdentified<CmdId>.Id
-            => Cmd.id<T>();
     }
 }

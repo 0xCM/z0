@@ -12,31 +12,26 @@ namespace Z0
 
     partial struct Cmd
     {
-        public static CmdId id<T>()
-            => id(typeof(T));
+        public static CmdName name<T>()
+            => name(typeof(T));
 
+        [MethodImpl(Inline), Op]
+        public static CmdName name(string src)
+            => new CmdName(src);
         [Op]
-        public static CmdId id(Type spec)
+        public static CmdName name(Type spec)
         {
             var tag = spec.Tag<CmdAttribute>();
             if(tag)
             {
                 var name = tag.Value.Name;
                 if(text.empty(name))
-                    return new CmdId(spec.Name);
+                    return new CmdName(spec.Name);
                 else
-                    return new CmdId(name);
+                    return new CmdName(name);
             }
             else
-                return new CmdId(spec.Name);
+                return new CmdName(spec.Name);
         }
-
-        /// <summary>
-        /// Parses a <see cref='CmdId'/> from a command identifier
-        /// </summary>
-        /// <param name="src">The command identifier</param>
-        [MethodImpl(Inline), Op]
-        public static CmdId id(string src)
-            => new CmdId(src);
     }
 }

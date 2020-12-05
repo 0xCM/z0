@@ -4,9 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    [Cmd]
+    [Cmd(CmdName)]
     public struct EmitApiSummariesCmd : ICmdSpec<EmitApiSummariesCmd>
     {
+        public const string CmdName = "emit-api-summaries";
+
         public PartId[] Parts;
 
         public FS.FilePath Target;

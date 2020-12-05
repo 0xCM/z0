@@ -8,44 +8,43 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static z;
 
-    public readonly struct CmdId : ITextual, IEquatable<CmdId>, INullity, IHashed
+    public readonly struct CmdName : ICmdName<CmdName>
     {
-        readonly string Data;
+        public string Content {get;}
 
         [MethodImpl(Inline)]
-        public CmdId(string src)
-            => Data = src;
+        public CmdName(string src)
+            => Content = src;
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => text.empty(Data);
+            get => text.empty(Content);
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => text.nonempty(Data);
+            get => text.nonempty(Content);
         }
 
         public uint Hash
         {
             [MethodImpl(Inline)]
-            get => (uint)Data.GetHashCode();
+            get => (uint)Content.GetHashCode();
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => Data;
+            => Content;
 
         [MethodImpl(Inline)]
-        public bool Equals(CmdId src)
-            => text.equals(Data, src.Data);
+        public bool Equals(CmdName src)
+            => text.equals(Content, src.Content);
 
         public override bool Equals(object obj)
-            => obj is CmdId x ? Equals(x) : false;
+            => obj is CmdName x ? Equals(x) : false;
 
         public override string ToString()
             => Format();
@@ -54,25 +53,17 @@ namespace Z0
             => (int)Hash;
 
         [MethodImpl(Inline)]
-        public static bool operator ==(CmdId a, CmdId b)
+        public static bool operator ==(CmdName a, CmdName b)
             => a.Equals(b);
 
         [MethodImpl(Inline)]
-        public static bool operator !=(CmdId a, CmdId b)
+        public static bool operator !=(CmdName a, CmdName b)
             => !a.Equals(b);
 
         [MethodImpl(Inline)]
-        public static implicit operator CmdId(Type spec)
-            => Cmd.id(spec);
+        public static implicit operator CmdName(Type spec)
+            => new CmdName(spec.Name);
 
-        [MethodImpl(Inline)]
-        public static implicit operator CmdName(CmdId src)
-            => Cmd.name(src.Data);
-
-        [MethodImpl(Inline)]
-        public static implicit operator CmdId(CmdName src)
-            => new CmdId(src.Content);
-
-        public static CmdId Empty => default;
+        public static CmdName Empty => default;
     }
 }

@@ -11,19 +11,12 @@ namespace Z0
 
     public readonly struct CmdJob : ITextual
     {
-        public utf8 Name {get;}
+        public string Name {get;}
 
         public string Spec {get;}
 
         [MethodImpl(Inline)]
         public CmdJob(string name, string spec)
-        {
-            Name = name;
-            Spec = spec;
-        }
-
-        [MethodImpl(Inline)]
-        public CmdJob(in utf8 name, string spec)
         {
             Name = name;
             Spec = spec;

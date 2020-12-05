@@ -3,7 +3,7 @@
 set ZCmd=%ZDev%\.cmd
 echo ZCmd:%ZCmd%
 
-set ScriptCmd=%ZCmd%\archive-machine-capture.cmd
+set ScriptCmd=%ZCmd%\archive-capture.cmd
 echo on
 call %ScriptCmd%
 echo on

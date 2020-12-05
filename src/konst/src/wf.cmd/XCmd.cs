@@ -10,14 +10,10 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct Cmd
+    public static partial class XCmd
     {
-        public static FS.FilePath enqueue<T>(CmdJob<T> job, IFileDb db)
-            where T : struct, ITextual
-        {
-            var dst = db.JobQueue() + FS.file(job.Name, ArchiveFileKinds.Cmd);
-            dst.Overwrite(job.Format());
-            return dst;
-        }
+        public static CmdId Id<T>(this T spec)
+            where T : struct, ICmdSpec<T>
+                => Cmd.id<T>();
     }
 }

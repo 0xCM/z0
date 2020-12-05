@@ -165,8 +165,11 @@ namespace Z0
         FS.FolderPath Tools(ToolId id)
             => ToolRoot() + FS.folder(id.Format());
 
-        FS.FolderPath ToolOutput(ToolId id)
+        FS.FolderPath Output(ToolId id)
             => Tools(id) + FS.folder(PN.output);
+
+        FS.FolderPath Output(ToolId tool, CmdId cmd)
+            => ToolRoot() + FS.folder(string.Concat(tool.Format(), "-", cmd.Format())) + FS.folder(PN.output);
 
         FS.FolderPath CapturedExtractDir()
             => CaptureRoot() + FS.folder(PN.extracts);

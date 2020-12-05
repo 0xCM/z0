@@ -7,14 +7,17 @@ namespace Z0
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface ICmdSpec : IIdentified<CmdId>
+    public interface ICmdSpec
     {
+        ToolId ToolId
+            => new ToolId("ztool");
+
         CmdId CmdId {get;}
 
-        CmdArgIndex Args {get;}
-
-        CmdId IIdentified<CmdId>.Id
+        CmdName CmdName
             => CmdId;
+
+        CmdArgIndex Args {get;}
     }
 
     [Free]

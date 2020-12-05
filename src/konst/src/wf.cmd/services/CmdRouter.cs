@@ -58,14 +58,14 @@ namespace Z0
                     return worker.Invoke(src);
                 else
                 {
-                    Wf.Error(WfEvents.missing(src.Id));
-                    return new CmdResult<T>(src.Id, false);
+                    Wf.Error(WfEvents.missing(src.CmdId));
+                    return new CmdResult<T>(src.CmdId, false);
                 }
             }
             catch(Exception e)
             {
                 Wf.Error(e);
-                return new CmdResult<T>(src.Id, false);
+                return new CmdResult<T>(src.CmdId, false);
             }
         }
 
@@ -89,7 +89,7 @@ namespace Z0
 
         public CmdResult Dispatch(ICmdSpec cmd)
         {
-            Wf.Running(Msg.DispatchingCommand.Format(cmd.Id));
+            Wf.Running(Msg.DispatchingCommand.Format(cmd.CmdId));
             try
             {
                 if(Nodes.TryGetValue(cmd.CmdId, out var node))
@@ -98,7 +98,7 @@ namespace Z0
                 }
                 else
                 {
-                    Wf.Error(WfEvents.missing(cmd.Id));
+                    Wf.Error(WfEvents.missing(cmd.CmdId));
                     return Cmd.fail(cmd);
                 }
             }

@@ -15,7 +15,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static CmdResult fail<T>(T spec)
             where T : ICmdSpec
-                => new CmdResult(spec.Id, false);
+                => new CmdResult(spec.CmdId, false);
 
         public static CmdResult fail<T>(T spec, Exception e)
             where T : ICmdSpec
@@ -23,7 +23,7 @@ namespace Z0
 
         public static CmdResult fail<T>(T spec, string message)
             where T : ICmdSpec
-                => new CmdResult(spec.Id, false, TextEncoders.utf8().GetBytes(message));
+                => new CmdResult(spec.CmdId, false, TextEncoders.utf8().GetBytes(message));
 
         [Op]
         public static CmdResult fail(CmdId id, string message)

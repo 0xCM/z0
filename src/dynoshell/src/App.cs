@@ -68,19 +68,26 @@ namespace Z0
             wf.Status(wf.Db().DbRoot);
         }
 
+        static void react(IWfShell wf, in EmitCliTablesCmd cmd)
+        {
+            (var success, var msg) = SRM.MetadataTableEmitter.emit(cmd.Source.Name, cmd.Target.Name);
+            if(success)
+                wf.Status(msg);
+            else
+                wf.Error(msg);
+        }
+
         public static void Main(params string[] args)
         {
             try
             {
                 using var wf = WfShell.create(args).WithRandom(Rng.@default());
-                var dstDir = wf.Db().ToolOutput(typeof(SRM.MetadataTableEmitter)).Create();
-                var dstPath = dstDir + FS.file("z0.konst.metadata.cli");
-                var konst = wf.Component(PartId.Konst).Require();
-                (var success, var msg) = SRM.MetadataTableEmitter.emit(konst.Location, dstPath.Name);
-                if(success)
-                    wf.Status(msg);
-                else
-                    wf.Error(msg);
+
+                var cmd = new EmitCliTablesCmd();
+                cmd.Source = FS.path(wf.Component(PartId.Konst).Require().Location);
+                cmd.Target = wf.Db().Output(new ToolId("ztool"), cmd.Id()).Create() + FS.file("z0.konst.metadata.cli");
+                react(wf,cmd);
+
             }
             catch(Exception e)
             {

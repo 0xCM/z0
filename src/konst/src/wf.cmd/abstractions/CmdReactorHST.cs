@@ -23,7 +23,7 @@ namespace Z0
 
         public static S Spec() => new S();
 
-        public CmdId CmdId => Spec().Id;
+        public CmdId CmdId => Spec().CmdId;
 
         protected abstract T Run(S cmd);
 
@@ -31,12 +31,12 @@ namespace Z0
         {
             try
             {
-                return new CmdResult<T>(cmd.Id, true, Run(cmd));
+                return new CmdResult<T>(cmd.CmdId, true, Run(cmd));
             }
             catch(Exception e)
             {
                 Wf.Error(e);
-                return new CmdResult<T>(cmd.Id, false);
+                return new CmdResult<T>(cmd.CmdId, false);
             }
         }
 

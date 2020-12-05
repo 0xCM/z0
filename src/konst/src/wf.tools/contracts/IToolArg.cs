@@ -6,6 +6,7 @@ namespace Z0
 {
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
+    [Free]
     public interface IToolArg<V>
     {
         ushort Position {get;}
@@ -15,6 +16,7 @@ namespace Z0
         V Value {get;}
     }
 
+    [Free]
     public interface IToolArg : IToolArg<string>
     {
 

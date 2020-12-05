@@ -29,7 +29,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public CmdResult(ICmdSpec cmd, bit success, params byte[] content)
         {
-            CmdId = cmd.Id;
+            CmdId = cmd.CmdId;
             Payload = content;
             Succeeded = success;
         }

@@ -13,6 +13,7 @@ namespace Z0
     [DataType]
     public struct ToolId : IIdentified<ToolId,string>
     {
+        [Ignore]
         public string Id {get;}
 
         [MethodImpl(Inline)]

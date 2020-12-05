@@ -1,7 +1,6 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
-
 namespace Z0
 {
     using Microsoft.Win32.SafeHandles;
@@ -97,32 +96,55 @@ namespace Z0
             public enum MINIDUMP_TYPE : uint
             {
                 MiniDumpNormal                         = 0,
+
                 MiniDumpWithDataSegs                   = 1 << 0,
+
                 MiniDumpWithFullMemory                 = 1 << 1,
+
                 MiniDumpWithHandleData                 = 1 << 2,
+
                 MiniDumpFilterMemory                   = 1 << 3,
+
                 MiniDumpScanMemory                     = 1 << 4,
+
                 MiniDumpWithUnloadedModules            = 1 << 5,
+
                 MiniDumpWithIndirectlyReferencedMemory = 1 << 6,
+
                 MiniDumpFilterModulePaths              = 1 << 7,
+
                 MiniDumpWithProcessThreadData          = 1 << 8,
+
                 MiniDumpWithPrivateReadWriteMemory     = 1 << 9,
+
                 MiniDumpWithoutOptionalData            = 1 << 10,
+
                 MiniDumpWithFullMemoryInfo             = 1 << 11,
+
                 MiniDumpWithThreadInfo                 = 1 << 12,
+
                 MiniDumpWithCodeSegs                   = 1 << 13,
+
                 MiniDumpWithoutAuxiliaryState          = 1 << 14,
+
                 MiniDumpWithFullAuxiliaryState         = 1 << 15,
+
                 MiniDumpWithPrivateWriteCopyMemory     = 1 << 16,
+
                 MiniDumpIgnoreInaccessibleMemory       = 1 << 17,
+
                 MiniDumpWithTokenInformation           = 1 << 18,
+
                 MiniDumpWithModuleHeaders              = 1 << 19,
+
                 MiniDumpFilterTriage                   = 1 << 20,
+
                 MiniDumpWithAvxXStateContext           = 1 << 21,
+
                 MiniDumpWithIptTrace                   = 1 << 22,
+
                 MiniDumpValidTypeFlags                 = (-1) ^ ((~1) << 22)
             }
         }
-
     }
 }

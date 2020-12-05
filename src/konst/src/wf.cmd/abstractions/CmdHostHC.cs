@@ -14,7 +14,7 @@ namespace Z0
         where H : CmdHost<H,S>, new()
         where S : struct, ICmdSpec<S>
     {
-        public CmdId CmdId => new S().Id;
+        public CmdId CmdId => new S().CmdId;
 
         protected static S Spec() => new S();
 

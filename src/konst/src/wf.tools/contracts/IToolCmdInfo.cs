@@ -11,9 +11,9 @@ namespace Z0
         where I : struct, IToolCmdInfo<I,T>
         where T : struct, IToolCmd<T>
     {
-        Name ToolName {get;}
+        ToolId ToolId {get;}
 
-        CmdId CmdId
-            => Cmd.id(ToolName);
+        CmdName CmdName
+            => Cmd.name<T>();
     }
 }

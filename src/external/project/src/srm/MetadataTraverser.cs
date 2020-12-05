@@ -70,7 +70,7 @@ namespace SRM
 
         public void Visualize(int generation = -1)
         {
-            this.Reader = (generation >= 0) ? Readers[generation] : Readers.Last();
+            Reader = (generation >= 0) ? Readers[generation] : Readers.Last();
 
             WriteModule();
             WriteTypeRef();
@@ -104,27 +104,23 @@ namespace SRM
             WriteGuids();
         }
 
-        private bool IsDelta
-        {
-            get
-            {
-                return Reader.GetTableRowCount(TableIndex.EncLog) > 0;
-            }
-        }
+        bool IsDelta
+            => Reader.GetTableRowCount(TableIndex.EncLog) > 0;
 
-        private void AddHeader(params string[] header)
+
+        void AddHeader(params string[] header)
         {
             Debug.Assert(PendingRows.Count == 0);
             PendingRows.Add(header);
         }
 
-        private void AddRow(params string[] fields)
+        void AddRow(params string[] fields)
         {
             Debug.Assert(PendingRows.Count > 0 && PendingRows.Last().Length == fields.Length);
             PendingRows.Add(fields);
         }
 
-        private void WriteRows(string title)
+        void WriteRows(string title)
         {
             Debug.Assert(PendingRows.Count > 0);
 
@@ -137,7 +133,8 @@ namespace SRM
             Writer.Write(title);
             Writer.WriteLine();
 
-            string columnSeparator = "  ";
+            const string columnSeparator = "  ";
+
             int rowNumberWidth = PendingRows.Count.ToString("x").Length;
 
             int[] columnWidths = new int[PendingRows.First().Length];
@@ -191,7 +188,7 @@ namespace SRM
             PendingRows.Clear();
         }
 
-        private Handle GetAggregateHandle(EntityHandle generationHandle, int generation)
+        Handle GetAggregateHandle(EntityHandle generationHandle, int generation)
         {
             var encMap = EncMaps[generation - 1];
 
@@ -204,37 +201,7 @@ namespace SRM
             return encMap[start + MetadataTokens.GetRowNumber(generationHandle) - 1];
         }
 
-        private static bool TryGetHandleRange(ImmutableArray<EntityHandle> handles, HandleKind handleKind, out int start, out int count)
-        {
-            TableIndex tableIndex;
-            MetadataTokens.TryGetTableIndex(handleKind, out tableIndex);
-
-            int mapIndex = ImmutableArray.BinarySearch<EntityHandle>(handles, MetadataTokens.EntityHandle(tableIndex, 0), TokenTypeComparer.Instance);
-            if (mapIndex < 0)
-            {
-                start = 0;
-                count = 0;
-                return false;
-            }
-
-            int s = mapIndex;
-            while (s >= 0 && handles[s].Kind == handleKind)
-            {
-                s--;
-            }
-
-            int e = mapIndex;
-            while (e < handles.Length && handles[e].Kind == handleKind)
-            {
-                e++;
-            }
-
-            start = s + 1;
-            count = e - start;
-            return true;
-        }
-
-        private TEntity Get<TEntity>(Handle handle, Func<MetadataReader, Handle, TEntity> getter)
+        TEntity Get<TEntity>(Handle handle, Func<MetadataReader, Handle, TEntity> getter)
         {
             if (Aggregator != null)
             {
@@ -248,27 +215,19 @@ namespace SRM
             }
         }
 
-        private string Literal(StringHandle handle)
-        {
-            return Literal(handle, (r, h) => "'" + r.GetString((StringHandle)h) + "'");
-        }
+        string Literal(StringHandle handle)
+            => Literal(handle, (r, h) => "'" + r.GetString((StringHandle)h) + "'");
 
-        private string Literal(NamespaceDefinitionHandle handle)
-        {
-            return Literal(handle, (r, h) => "'" + r.GetString((NamespaceDefinitionHandle)h) + "'");
-        }
+        string Literal(NamespaceDefinitionHandle handle)
+            => Literal(handle, (r, h) => "'" + r.GetString((NamespaceDefinitionHandle)h) + "'");
 
-        private string Literal(GuidHandle handle)
-        {
-            return Literal(handle, (r, h) => "{" + r.GetGuid((GuidHandle)h) + "}");
-        }
+        string Literal(GuidHandle handle)
+            => Literal(handle, (r, h) => "{" + r.GetGuid((GuidHandle)h) + "}");
 
-        private string Literal(BlobHandle handle)
-        {
-            return Literal(handle, (r, h) => BitConverter.ToString(r.GetBlobBytes((BlobHandle)h)));
-        }
+        string Literal(BlobHandle handle)
+            => Literal(handle, (r, h) => BitConverter.ToString(r.GetBlobBytes((BlobHandle)h)));
 
-        private string Literal(Handle handle, Func<MetadataReader, Handle, string> getValue)
+        string Literal(Handle handle, Func<MetadataReader, Handle, string> getValue)
         {
             if (handle.IsNil)
             {
@@ -304,12 +263,12 @@ namespace SRM
             return string.Format("{1:x} (#{0:x})", Reader.GetHeapOffset(handle), getValue(Reader, handle));
         }
 
-        private string Hex(ushort value)
+        string Hex(ushort value)
         {
             return "0x" + value.ToString("X4");
         }
 
-        private string Hex(int value)
+        string Hex(int value)
         {
             return "0x" + value.ToString("X8");
         }
@@ -332,19 +291,8 @@ namespace SRM
             }
         }
 
-        private static string EnumValue<T>(object value) where T : IEquatable<T>
-        {
-            T integralValue = (T)value;
-            if (integralValue.Equals(default(T)))
-            {
-                return "0";
-            }
 
-            return string.Format("0x{0:x8} ({1})", integralValue, value);
-        }
-
-        // TODO (tomat): handle collections should implement IReadOnlyCollection<Handle>
-        private string TokenRange<THandle>(IReadOnlyCollection<THandle> handles, Func<THandle, Handle> conversion)
+        string TokenRange<THandle>(IReadOnlyCollection<THandle> handles, Func<THandle, Handle> conversion)
         {
             var genericHandles = handles.Select(conversion);
             return (handles.Count == 0) ? "nil" : Token(genericHandles.First(), displayTable: false) + "-" + Token(genericHandles.Last(), displayTable: false);
@@ -353,14 +301,12 @@ namespace SRM
         public string TokenList(InterfaceImplementationHandleCollection handles, bool displayTable = false)
         {
             if (handles.Count == 0)
-            {
                 return "nil";
-            }
 
             return string.Join(", ", handles.Select(h => Token(h, displayTable)));
         }
 
-        private void WriteModule()
+        void WriteModule()
         {
             var def = Reader.GetModuleDefinition();
 
@@ -382,7 +328,7 @@ namespace SRM
             WriteRows("Module (0x00):");
         }
 
-        private void WriteTypeRef()
+        void WriteTypeRef()
         {
             AddHeader(
                 "Scope",
@@ -404,7 +350,7 @@ namespace SRM
             WriteRows("TypeRef (0x01):");
         }
 
-        private void WriteTypeDef()
+        void WriteTypeDef()
         {
             AddHeader(
                 "Name",
@@ -442,7 +388,7 @@ namespace SRM
             WriteRows("TypeDef (0x02):");
         }
 
-        private void WriteField()
+        void WriteField()
         {
             AddHeader(
                 "Name",
@@ -472,7 +418,7 @@ namespace SRM
             WriteRows("Field (0x04):");
         }
 
-        private void WriteMethod()
+        void WriteMethod()
         {
             AddHeader(
                 "Name",
@@ -509,7 +455,7 @@ namespace SRM
             WriteRows("Method (0x06, 0x1C):");
         }
 
-        private void WriteParam()
+        void WriteParam()
         {
             AddHeader(
                 "Name",
@@ -533,7 +479,7 @@ namespace SRM
             WriteRows("Param (0x08):");
         }
 
-        private void WriteMemberRef()
+        void WriteMemberRef()
         {
             AddHeader(
                 "Parent",
@@ -555,7 +501,7 @@ namespace SRM
             WriteRows("MemberRef (0x0a):");
         }
 
-        private void WriteConstant()
+        void WriteConstant()
         {
             AddHeader(
                 "Parent",
@@ -577,7 +523,7 @@ namespace SRM
             WriteRows("Constant (0x0b):");
         }
 
-        private void WriteCustomAttribute()
+        void WriteCustomAttribute()
         {
             AddHeader(
                 "Parent",
@@ -599,7 +545,7 @@ namespace SRM
             WriteRows("CustomAttribute (0x0c):");
         }
 
-        private void WriteDeclSecurity()
+        void WriteDeclSecurity()
         {
             AddHeader(
                 "Parent",
@@ -621,7 +567,7 @@ namespace SRM
             WriteRows("DeclSecurity (0x0e):");
         }
 
-        private void WriteStandAloneSig()
+        void WriteStandAloneSig()
         {
             AddHeader("Signature");
 
@@ -635,7 +581,7 @@ namespace SRM
             WriteRows("StandAloneSig (0x11):");
         }
 
-        private void WriteEvent()
+        void WriteEvent()
         {
             AddHeader(
                 "Name",
@@ -662,7 +608,7 @@ namespace SRM
             WriteRows("Event (0x12, 0x14, 0x18):");
         }
 
-        private void WriteProperty()
+        void WriteProperty()
         {
             AddHeader(
                 "Name",
@@ -687,7 +633,7 @@ namespace SRM
             WriteRows("Property (0x15, 0x17, 0x18):");
         }
 
-        private void WriteMethodImpl()
+        void WriteMethodImpl()
         {
             AddHeader(
                 "Type",
@@ -709,7 +655,7 @@ namespace SRM
             WriteRows("MethodImpl (0x19):");
         }
 
-        private void WriteModuleRef()
+        void WriteModuleRef()
         {
             AddHeader("Name");
 
@@ -722,7 +668,7 @@ namespace SRM
             WriteRows("ModuleRef (0x1a):");
         }
 
-        private void WriteTypeSpec()
+        void WriteTypeSpec()
         {
             AddHeader("Name");
 
@@ -735,7 +681,7 @@ namespace SRM
             WriteRows("TypeSpec (0x1b):");
         }
 
-        private void WriteEnCLog()
+        void WriteEnCLog()
         {
             AddHeader(
                 "Entity",
@@ -751,7 +697,7 @@ namespace SRM
             WriteRows("EnC Log (0x1e):");
         }
 
-        private void WriteEnCMap()
+        void WriteEnCMap()
         {
             if (Aggregator != null)
             {
@@ -788,7 +734,7 @@ namespace SRM
             WriteRows("EnC Map (0x1f):");
         }
 
-        private void WriteAssembly()
+        void WriteAssembly()
         {
             if (Reader.IsAssembly)
             {
@@ -816,7 +762,7 @@ namespace SRM
             }
         }
 
-        private void WriteAssemblyRef()
+        void WriteAssemblyRef()
         {
             AddHeader(
                 "Name",
@@ -842,7 +788,7 @@ namespace SRM
             WriteRows("AssemblyRef (0x23):");
         }
 
-        private void WriteFile()
+        void WriteFile()
         {
             AddHeader(
                 "Name",
@@ -864,7 +810,7 @@ namespace SRM
             WriteRows("File (0x26):");
         }
 
-        private void WriteExportedType()
+        void WriteExportedType()
         {
             AddHeader(
                 "Name",
@@ -884,7 +830,7 @@ namespace SRM
             WriteRows("ExportedType - forwarders (0x27):");
         }
 
-        private void WriteManifestResource()
+        void WriteManifestResource()
         {
             AddHeader(
                 "Name",
@@ -908,7 +854,7 @@ namespace SRM
             WriteRows("ManifestResource (0x28):");
         }
 
-        private void WriteGenericParam()
+        void WriteGenericParam()
         {
             AddHeader(
                 "Name",
@@ -932,7 +878,7 @@ namespace SRM
             WriteRows("GenericParam (0x2a):");
         }
 
-        private void WriteMethodSpec()
+        void WriteMethodSpec()
         {
             AddHeader(
                 "Method",
@@ -952,7 +898,7 @@ namespace SRM
             WriteRows("MethodSpec (0x2b):");
         }
 
-        private void WriteGenericParamConstraint()
+        void WriteGenericParamConstraint()
         {
             AddHeader(
                 "Parent",
@@ -972,7 +918,7 @@ namespace SRM
             WriteRows("GenericParamConstraint (0x2c):");
         }
 
-        private void WriteUserStrings()
+        void WriteUserStrings()
         {
             int size = Reader.GetHeapSize(HeapIndex.UserString);
             if (size == 0)
@@ -994,7 +940,7 @@ namespace SRM
             Writer.WriteLine();
         }
 
-        private void WriteStrings()
+        void WriteStrings()
         {
             int size = Reader.GetHeapSize(HeapIndex.String);
             if (size == 0)
@@ -1015,7 +961,7 @@ namespace SRM
             Writer.WriteLine();
         }
 
-        private void WriteBlobs()
+        void WriteBlobs()
         {
             int size = Reader.GetHeapSize(HeapIndex.Blob);
             if (size == 0)
@@ -1036,7 +982,7 @@ namespace SRM
             Writer.WriteLine();
         }
 
-        private void WriteGuids()
+        void WriteGuids()
         {
             int size = Reader.GetHeapSize(HeapIndex.Guid);
             if (size == 0)
@@ -1056,7 +1002,47 @@ namespace SRM
             Writer.WriteLine();
         }
 
-        private sealed class TokenTypeComparer : IComparer<EntityHandle>
+        static bool TryGetHandleRange(ImmutableArray<EntityHandle> handles, HandleKind handleKind, out int start, out int count)
+        {
+            TableIndex tableIndex;
+            MetadataTokens.TryGetTableIndex(handleKind, out tableIndex);
+
+            int mapIndex = ImmutableArray.BinarySearch<EntityHandle>(handles, MetadataTokens.EntityHandle(tableIndex, 0), TokenTypeComparer.Instance);
+            if (mapIndex < 0)
+            {
+                start = 0;
+                count = 0;
+                return false;
+            }
+
+            int s = mapIndex;
+            while (s >= 0 && handles[s].Kind == handleKind)
+            {
+                s--;
+            }
+
+            int e = mapIndex;
+            while (e < handles.Length && handles[e].Kind == handleKind)
+            {
+                e++;
+            }
+
+            start = s + 1;
+            count = e - start;
+            return true;
+        }
+
+        static string EnumValue<T>(object value)
+            where T : IEquatable<T>
+        {
+            T integralValue = (T)value;
+            if (integralValue.Equals(default(T)))
+                return "0";
+
+            return string.Format("0x{0:x8} ({1})", integralValue, value);
+        }
+
+        sealed class TokenTypeComparer : IComparer<EntityHandle>
         {
             public static readonly TokenTypeComparer Instance = new TokenTypeComparer();
 

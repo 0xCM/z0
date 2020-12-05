@@ -4,10 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    [Cmd]
+    [Cmd(CmdName)]
     public struct EmitFileListCmd : ICmdSpec<EmitFileListCmd>
     {
-        public utf8 ListName;
+        public const string CmdName = "emit-file-list";
+
+        public string ListName;
 
         public FS.FolderPath SourceDir;
 
