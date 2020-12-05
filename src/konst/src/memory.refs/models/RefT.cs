@@ -26,7 +26,7 @@ namespace Z0
             => Segment = src;
 
         [MethodImpl(Inline)]
-        public Ref(MemoryAddress address, uint size)
+        public Ref(MemoryAddress address, ulong size)
             => Segment = new Ref(address, size);
 
         [MethodImpl(Inline)]

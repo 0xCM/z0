@@ -518,6 +518,27 @@ namespace Z0
         public delegate bit Emitter1();
 
         [Free]
+        public delegate Cell8 Emitter8();
+
+        [Free]
+        public delegate Cell16 Emitter16();
+
+        [Free]
+        public delegate Cell32 Emitter32();
+
+        [Free]
+        public delegate Cell64 Emitter64();
+
+        [Free]
+        public delegate Cell128 Emitter128();
+
+        [Free]
+        public delegate Cell256 Emitter256();
+
+        [Free]
+        public delegate Cell512 Emitter512();
+
+        [Free]
         public delegate bit UnaryOp1(bit a);
 
         [Free]
@@ -570,6 +591,5 @@ namespace Z0
 
         [Free]
         public delegate bit BinaryPredicate<T>(T a, T b);
-
     }
 }

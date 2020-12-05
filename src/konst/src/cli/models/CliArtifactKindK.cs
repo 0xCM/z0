@@ -13,8 +13,8 @@ namespace Z0
     /// <summary>
     /// Captures an artifact classifier via parametricity
     /// </summary>
-    public readonly struct CliArtifactKind<K> : ICliArtifactKind<K>
-        where K : unmanaged, ICliArtifactKind<K>
+    public readonly struct CliArtifactKind<K> : ICliRowKind<K>
+        where K : unmanaged, ICliRowKind<K>
     {
         public TableIndex Index
             => default(K).Index;

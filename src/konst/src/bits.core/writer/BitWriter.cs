@@ -43,7 +43,5 @@ namespace Z0
             src ^= (byte)((c ^ src) & (1 << pos));
             return src;
         }
-
-
     }
 }

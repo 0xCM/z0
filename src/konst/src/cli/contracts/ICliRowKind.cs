@@ -10,7 +10,7 @@ namespace Z0
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface ICliArtifactKind : ITypedLiteral<TableIndex,byte>, ITextual
+    public interface ICliRowKind : ITypedLiteral<TableIndex,byte>, ITextual
     {
         TableIndex Index {get;}
 
@@ -25,8 +25,8 @@ namespace Z0
     }
 
     [Free]
-    public interface ICliArtifactKind<K> : ICliArtifactKind
-        where K : unmanaged, ICliArtifactKind<K>
+    public interface ICliRowKind<K> : ICliRowKind
+        where K : unmanaged, ICliRowKind<K>
     {
 
     }

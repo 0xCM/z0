@@ -45,7 +45,4 @@ namespace Z0
     public delegate IEnumerable<T> ValueStreamEmitter<T>()
         where T : struct;
 
-    [Free]
-    public delegate Bit32 Emitter1();
-
 }

@@ -52,27 +52,6 @@ namespace Z0
     public delegate Bit32 BinaryPredicate512(Cell512 a, Cell512 b);
 
     [Free]
-    public delegate Cell8 Emitter8();
-
-    [Free]
-    public delegate Cell16 Emitter16();
-
-    [Free]
-    public delegate Cell32 Emitter32();
-
-    [Free]
-    public delegate Cell64 Emitter64();
-
-    [Free]
-    public delegate Cell128 Emitter128();
-
-    [Free]
-    public delegate Cell256 Emitter256();
-
-    [Free]
-    public delegate Cell512 Emitter512();
-
-    [Free]
     public delegate Cell8 UnaryOp8(Cell8 a);
 
     [Free]

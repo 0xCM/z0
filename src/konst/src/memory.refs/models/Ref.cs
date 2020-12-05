@@ -12,6 +12,7 @@ namespace Z0
     using static System.Runtime.CompilerServices.Unsafe;
 
     using static Konst;
+    using static z;
 
     public readonly struct Ref : ISegRef<byte>
     {
@@ -22,10 +23,18 @@ namespace Z0
             => Segment = src;
 
         [MethodImpl(Inline)]
-        public Ref(ulong location, uint size)
+        public unsafe Ref(byte* src, ulong size)
+            => Segment = vparts((ulong)src, size);
+
+        [MethodImpl(Inline)]
+        public Ref(MemoryAddress src, ulong size)
+            => Segment = vparts((ulong)src, (ulong)size);
+
+        [MethodImpl(Inline)]
+        public Ref(ulong location, ulong size)
             => Segment = Vector128.Create(location, (ulong)size);
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline)]
         public Span<T> As<T>()
             => cover<T>(Address, DataSize/size<T>());
 
@@ -96,12 +105,12 @@ namespace Z0
             => src.Buffer;
 
         [MethodImpl(Inline)]
-        public static bool operator ==(Ref lhs, Ref rhs)
-            => lhs.Equals(rhs);
+        public static bool operator ==(Ref a, Ref b)
+            => a.Equals(b);
 
         [MethodImpl(Inline)]
-        public static bool operator !=(Ref lhs, Ref rhs)
-            => !lhs.Equals(rhs);
+        public static bool operator !=(Ref a, Ref b)
+            => !a.Equals(b);
 
         [MethodImpl(Inline)]
         static uint size<T>()

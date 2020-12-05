@@ -10,7 +10,7 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct CliArtifactKind : ICliArtifactKind<CliArtifactKind>
+    public readonly struct CliArtifactKind : ICliRowKind<CliArtifactKind>
     {
         public TableIndex Index {get;}
 

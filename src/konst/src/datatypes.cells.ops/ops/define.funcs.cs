@@ -9,6 +9,7 @@ namespace Z0
 
     using static Konst;
     using static Cells;
+    using static CellDelegates;
 
     partial struct CellOps
     {

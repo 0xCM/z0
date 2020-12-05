@@ -16,21 +16,15 @@ namespace Z0
     [ApiHost]
     public readonly partial struct Cli
     {
-        [MethodImpl(Inline)]
-        public static CliDependency<S,T> dependency<S,T>(S src, T dst)
-            where S : struct
-            where T : struct
-                => new CliDependency<S,T>(src,dst);
-
         /// <summary>
         /// Returns a reference to the cli metadata for an assembly
         /// </summary>
         /// <param name="src">The source assembly</param>
         [MethodImpl(Inline), Op]
-        public static unsafe ref SegRef metadata(Assembly src, out SegRef dst)
+        public static unsafe ref Ref metadata(Assembly src, out Ref dst)
         {
             src.TryGetRawMetadata(out var ptr, out var len);
-            dst = new SegRef(ptr,len);
+            dst = new Ref(ptr,(ulong)len);
             return ref dst;
         }
 

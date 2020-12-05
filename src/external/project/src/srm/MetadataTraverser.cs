@@ -149,7 +149,7 @@ namespace SRM
             int tableWidth = columnWidths.Sum() + columnWidths.Length;
             string horizontalSeparator = new string('=', tableWidth);
 
-            for (int r = 0; r < PendingRows.Count; r++)
+            for (int r = 0; r<PendingRows.Count; r++)
             {
                 var row = PendingRows[r];
 
@@ -263,15 +263,6 @@ namespace SRM
             return string.Format("{1:x} (#{0:x})", Reader.GetHeapOffset(handle), getValue(Reader, handle));
         }
 
-        string Hex(ushort value)
-        {
-            return "0x" + value.ToString("X4");
-        }
-
-        string Hex(int value)
-        {
-            return "0x" + value.ToString("X8");
-        }
 
         public string Token(Handle handle, bool displayTable = true)
         {
@@ -290,7 +281,6 @@ namespace SRM
                 return string.Format("0x{0:x8}", Reader.GetToken(handle));
             }
         }
-
 
         string TokenRange<THandle>(IReadOnlyCollection<THandle> handles, Func<THandle, Handle> conversion)
         {
@@ -444,7 +434,7 @@ namespace SRM
                     Hex(entry.RelativeVirtualAddress),
                     TokenRange(entry.GetParameters(), h => h),
                     TokenRange(entry.GetGenericParameters(), h => h),
-                    EnumValue<int>(entry.Attributes),    // TODO: we need better visualizer than the default enum
+                    EnumValue<int>(entry.Attributes),
                     EnumValue<int>(entry.ImplAttributes),
                     EnumValue<short>(import.Attributes),
                     Literal(import.Name),
@@ -671,8 +661,8 @@ namespace SRM
         void WriteTypeSpec()
         {
             AddHeader("Name");
-
-            for (int i = 1, count = Reader.GetTableRowCount(TableIndex.TypeSpec); i <= count; i++)
+            var count = Reader.GetTableRowCount(TableIndex.TypeSpec);
+            for (int i = 1; i <= count; i++)
             {
                 var value = Reader.GetTypeSpecification(MetadataTokens.TypeSpecificationHandle(i));
                 AddRow(Literal(value.Signature));
@@ -863,10 +853,10 @@ namespace SRM
                 "TypeConstraints"
             );
 
-            for (int i = 1, count = Reader.GetTableRowCount(TableIndex.GenericParam); i <= count; i++)
+            var count = Reader.GetTableRowCount(TableIndex.GenericParam);
+            for (int i = 1; i<=count; i++)
             {
                 var entry = Reader.GetGenericParameter(MetadataTokens.GenericParameterHandle(i));
-
                 AddRow(
                     Literal(entry.Name),
                     entry.Index.ToString(),
@@ -885,10 +875,10 @@ namespace SRM
                 "Signature"
             );
 
-            for (int i = 1, count = Reader.GetTableRowCount(TableIndex.MethodSpec); i <= count; i++)
+            var count = Reader.GetTableRowCount(TableIndex.MethodSpec);
+            for (int i = 1; i<=count; i++)
             {
                 var entry = Reader.GetMethodSpecification(MetadataTokens.MethodSpecificationHandle(i));
-
                 AddRow(
                     Token(entry.Method),
                     Literal(entry.Signature)
@@ -905,7 +895,8 @@ namespace SRM
                 "Type"
             );
 
-            for (int i = 1, count = Reader.GetTableRowCount(TableIndex.GenericParamConstraint); i <= count; i++)
+            var count = Reader.GetTableRowCount(TableIndex.GenericParamConstraint);
+            for (int i = 1; i <= count; i++)
             {
                 var entry = Reader.GetGenericParameterConstraint(MetadataTokens.GenericParameterConstraintHandle(i));
 
@@ -922,11 +913,8 @@ namespace SRM
         {
             int size = Reader.GetHeapSize(HeapIndex.UserString);
             if (size == 0)
-            {
                 return;
-            }
 
-            // TODO: the heap is aligned, don't display the trailing empty strings
             Writer.WriteLine(string.Format("#US (size = {0}):", size));
             var handle = MetadataTokens.UserStringHandle(0);
             do
@@ -944,9 +932,7 @@ namespace SRM
         {
             int size = Reader.GetHeapSize(HeapIndex.String);
             if (size == 0)
-            {
                 return;
-            }
 
             Writer.WriteLine(string.Format("#String (size = {0}):", size));
             var handle = MetadataTokens.StringHandle(0);
@@ -1017,15 +1003,11 @@ namespace SRM
 
             int s = mapIndex;
             while (s >= 0 && handles[s].Kind == handleKind)
-            {
                 s--;
-            }
 
             int e = mapIndex;
             while (e < handles.Length && handles[e].Kind == handleKind)
-            {
                 e++;
-            }
 
             start = s + 1;
             count = e - start;
@@ -1041,6 +1023,12 @@ namespace SRM
 
             return string.Format("0x{0:x8} ({1})", integralValue, value);
         }
+
+        static string Hex(ushort value)
+            => "0x" + value.ToString("X4");
+
+        static string Hex(int value)
+            => "0x" + value.ToString("X8");
 
         sealed class TokenTypeComparer : IComparer<EntityHandle>
         {

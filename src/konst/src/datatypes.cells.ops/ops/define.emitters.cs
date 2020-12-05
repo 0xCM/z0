@@ -8,11 +8,12 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static CellDelegates;
 
     partial struct CellOps
     {
         [MethodImpl(Inline), Op]
-        public static Emitter1 define(Emitter<Bit32> f)
+        public static Emitter1 define(Emitter<bit> f)
             => () => f();
 
         [MethodImpl(Inline), Op]
