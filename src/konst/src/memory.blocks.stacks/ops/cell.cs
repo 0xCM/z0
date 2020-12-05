@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class StackStores
+    partial class MemoryStacks
     {
         // ~ asm(value<T>)
         // ~ movxsd rax,edx

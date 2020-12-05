@@ -74,7 +74,7 @@ namespace Z0
             {
                 var field = fields[i];
                 var value = (T)field.GetRawConstantValue();
-                indices.Add(new EnumLiteralDetail<T>(field, type, i, field.Name, value, string.Empty, UserMetadata.Empty));
+                indices.Add(new EnumLiteralDetail<T>(field, type, i, field.Name, value, string.Empty));
             }
             return indices.ToIndex();
         }

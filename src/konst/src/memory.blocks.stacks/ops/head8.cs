@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial class StackStores
+    partial class MemoryStacks
     {
         /// <summary>
         /// Presents the leading source storage cell as a byte reference

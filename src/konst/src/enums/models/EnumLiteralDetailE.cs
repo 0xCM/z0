@@ -26,42 +26,37 @@ namespace Z0
         /// <summary>
         /// The compiler-emitted field that defines the literal
         /// </summary>
-        public readonly FieldInfo BackingField;
+        public FieldInfo BackingField {get;}
 
         /// <summary>
         /// The kind of primitive specialized by the enum
         /// </summary>
-        public readonly EnumScalarKind PrimalKind;
+        public readonly EnumScalarKind PrimalKind {get;}
 
         /// <summary>
         /// The literal declaration order, unique within the declaring enum
         /// </summary>
-        public readonly uint Position;
+        public readonly uint Position {get;}
 
         /// <summary>
         /// The literal identifier, unique within the declaring enum
         /// </summary>
-        public readonly string Name;
+        public readonly string Name {get;}
 
         /// <summary>
         /// The literal E-value
         /// </summary>
-        public readonly E LiteralValue;
+        public readonly E LiteralValue {get;}
 
         /// <summary>
         /// The system data type
         /// </summary>
-        public readonly Type DataType;
+        public readonly Type DataType {get;}
 
         /// <summary>
         /// The meaning of the literal, if available
         /// </summary>
-        public readonly string Description;
-
-        /// <summary>
-        /// User data attached to the literal, if any
-        /// </summary>
-        public readonly UserMetadata UserData;
+        public readonly string Description {get;}
 
         /// <summary>
         /// The metadata token that identifies the backing field
@@ -75,20 +70,8 @@ namespace Z0
         variant IEnumLiteral.ScalarValue
             => Variant.define(LiteralValue, DataType);
 
-        uint IEnumLiteral.Position
-            => Position;
-
-        E IEnumLiteral<EnumLiteralDetail<E>, E>.LiteralValue
-            => LiteralValue;
-
-        string IEnumLiteral.Name
-            => Name;
-
-        Type IEnumLiteral.DataType
-            => DataType;
-
         [MethodImpl(Inline)]
-        public EnumLiteralDetail(FieldInfo field, EnumScalarKind kind, uint index, string identifier, E value, string description, UserMetadata data)
+        public EnumLiteralDetail(FieldInfo field, EnumScalarKind kind, uint index, string identifier, E value, string description)
         {
             BackingField = field;
             PrimalKind = kind;
@@ -97,7 +80,6 @@ namespace Z0
             Position = index;
             LiteralValue = value;
             Description = description;
-            UserData = data;
         }
 
         [MethodImpl(Inline)]

@@ -61,12 +61,26 @@ namespace Z0
             run(wf,cmd);
         }
 
+        static void ShowConfig(IWfShell wf)
+        {
+            wf.Status(wf.Settings.FormatList());
+            wf.Status(wf.Db().Root);
+            wf.Status(wf.Db().DbRoot);
+        }
+
         public static void Main(params string[] args)
         {
             try
             {
                 using var wf = WfShell.create(args).WithRandom(Rng.@default());
-                wf.Status(wf.Settings.FormatList());
+                var dstDir = wf.Db().ToolOutput(typeof(SRM.MetadataTableEmitter)).Create();
+                var dstPath = dstDir + FS.file("z0.konst.metadata.cli");
+                var konst = wf.Component(PartId.Konst).Require();
+                (var success, var msg) = SRM.MetadataTableEmitter.emit(konst.Location, dstPath.Name);
+                if(success)
+                    wf.Status(msg);
+                else
+                    wf.Error(msg);
             }
             catch(Exception e)
             {

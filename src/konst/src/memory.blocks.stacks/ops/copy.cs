@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial class StackStores
+    partial class MemoryStacks
     {
         [MethodImpl(Inline), Op]
         public static ref StackBlock2 copy(ReadOnlySpan<byte> src, ref StackBlock2 dst)

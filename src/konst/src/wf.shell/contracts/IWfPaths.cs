@@ -11,6 +11,9 @@ namespace Z0
     [Free]
     public interface IWfPaths : IDbPaths, ILogPaths
     {
+        FS.FolderPath ILogPaths.LogRoot
+            => Root + FS.folder("logs");
+
         /// <summary>
         /// The name of the runtime log folder
         /// </summary>

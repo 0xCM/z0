@@ -37,7 +37,7 @@ namespace Z0
                 case BLK.NonImpl: return nonimpl(A,B);
                 case BLK.CImpl: return cimpl(A,B);
                 case BLK.CNonImpl: return cnonimpl(A,B);
-                default: throw Unsupported.define<T>(sig<T>(kind));
+                default: throw Unsupported.value(sig<T>(kind));
             }
         }
 
@@ -49,7 +49,7 @@ namespace Z0
             {
                 case ULK.Not: return not(A);
                 case ULK.Identity: return BitMatrix.identity(A);
-                default: throw Unsupported.define<T>(sig<T>(kind));
+                default: throw Unsupported.value(sig<T>(kind));
             }
         }
     }

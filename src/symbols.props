@@ -12,8 +12,7 @@
     <Share>$(Src)share/z0.share.projitems</Share>
     <ZRoot>$(Src)part/z0.part.csproj</ZRoot>
     <Part>$(Src)part/z0.part.csproj</Part>
-    <External>$(Src)external/project/z0.external.csproj</External>
-    <Sys>$(Src)sys/z0.sys.csproj</Sys>
+    <External>$(Src)external/z0.external.csproj</External>
     <Derivatives>$(Src)derivatives/z0.derivatives.csproj</Derivatives>
 
     <Commands>$(Src)commands/z0.commands.csproj</Commands>

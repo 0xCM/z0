@@ -14,14 +14,10 @@ namespace Z0
     /// </summary>
     public readonly struct WfPaths : IWfPaths
     {
-        public FS.FolderPath LogRoot  => DbRoot + FS.folder("logs");
+        public FS.FolderPath Root {get;}
 
-        public FS.FolderPath DbRoot {get;}
-
-        public WfPaths(WfLogConfig logs)
-        {
-            DbRoot = logs.DbRoot;
-        }
+        public WfPaths(FS.FolderPath root)
+            => Root = root;
     }
 
     /// <summary>
@@ -29,14 +25,9 @@ namespace Z0
     /// </summary>
     public readonly struct WfPaths<A> : IWfPaths<A>
     {
-        public FS.FolderPath LogRoot {get;}
+        public FS.FolderPath Root {get;}
 
-        public FS.FolderPath DbRoot {get;}
-
-        public WfPaths(WfLogConfig logs)
-        {
-            LogRoot = logs.Root;
-            DbRoot = logs.DbRoot;
-        }
+        public WfPaths(FS.FolderPath root)
+            => Root = root;
     }
 }

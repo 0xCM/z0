@@ -4,9 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface INumericFormattable<T> 
-        where T : unmanaged
+    public interface IDbPaths : IFileArchivePaths
     {
-        INumericFormatter<T> Formatter {get;}
+        /// <summary>
+        /// The workflow's database root
+        /// </summary>
+        FS.FolderPath DbRoot
+            => Root;
     }
 }

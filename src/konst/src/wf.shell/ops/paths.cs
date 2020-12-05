@@ -14,10 +14,11 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static IWfPaths paths()
-            => new WfPaths(WfLogs.configure(controller().Id(), WfEnv.dbRoot()));
+            => new WfPaths(WfEnv.dbRoot());
 
         [MethodImpl(Inline), Op]
         public static IWfPaths<A> paths<A>()
-            => new WfPaths<A>(WfLogs.configure(controller<A>().Id(), WfEnv.dbRoot()));
+            => new WfPaths<A>(WfEnv.dbRoot() + FS.folder(controller<A>().Id().Format()));
+                //WfLogs.configure(controller<A>().Id(), WfEnv.dbRoot()));
     }
 }

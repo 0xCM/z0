@@ -42,7 +42,6 @@ namespace Z0
                 names[i] = src[i].Name;
                 literals[i] = src[i].LiteralValue;
                 numeric[i] = src[i].PrimalValue;
-                userData[i] = src[i].UserData;
                 descriptions[i] = src[i].Description;
                 tokens[i] = src[i].Token;
             }

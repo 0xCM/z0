@@ -26,7 +26,7 @@ namespace Z0
             {
                 case ULK.Not: return ref not(A, Z);
                 case ULK.Identity: return ref identity(A, Z);
-                default: throw Unsupported.define<T>(sig<T>(kind));
+                default: throw Unsupported.value(sig<T>(kind));
             }
         }
 
@@ -52,7 +52,7 @@ namespace Z0
                 case BLK.NonImpl: return ref nonimpl(a, b, dst);
                 case BLK.CImpl: return ref cimpl(a, b, dst);
                 case BLK.CNonImpl: return ref cnonimpl(a, b, dst);
-                default: throw Unsupported.define<T>(sig<T>(kind));
+                default: throw Unsupported.value(sig<T>(kind));
             }
         }
 
@@ -77,7 +77,7 @@ namespace Z0
                 case BLK.NonImpl: return nonimpl;
                 case BLK.CImpl: return cimpl;
                 case BLK.CNonImpl: return cnonimpl;
-                default: throw Unsupported.define<T>(sig<T>(kind));
+                default: throw Unsupported.value(sig<T>(kind));
             }
         }
 

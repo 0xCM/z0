@@ -17,7 +17,7 @@ namespace Z0
     /// Represents a potential value
     /// </summary>
     /// <typeparam name="T">The potential value type</typeparam>
-    public readonly struct Option<T> :  IOption<Option<T>,T>
+    public readonly struct Option<T> : IOption<Option<T>,T>
     {
         /// <summary>
         /// The encapsulated value, iff Exists is true
@@ -44,7 +44,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Option<T> None()
             => default;
-        
+
         /// <summary>
         /// Defines a valued option
         /// </summary>
@@ -60,51 +60,6 @@ namespace Z0
             this.Exists = exists;
         }
 
-        [MethodImpl(Inline)]
-        public static implicit operator Option<T>(T x)
-            => x != null  ? Some(x) : None();
-
-        /// <summary>
-        /// Implmements value-based equality
-        /// </summary>
-        /// <param name="lhs">The first value</param>
-        /// <param name="rhs">The second value</param>
-        [MethodImpl(Inline)]
-        public static bool operator == (Option<T> lhs, Option<T> rhs)
-            => (lhs.IsNone() && rhs.IsNone())  ? true : (lhs.Exists && rhs.Exists && lhs.value.Equals(rhs.value));
-
-        /// <summary>
-        /// Implements value-based equality negation
-        /// </summary>
-        /// <param name="lhs">The first value</param>
-        /// <param name="rhs">The second value</param>
-        [MethodImpl(Inline)]
-        public static bool operator != (Option<T> lhs, Option<T> rhs)
-            => !(lhs == rhs);
-
-        /// <summary>
-        /// Returns true if the option has a value and false otherwise
-        /// </summary>
-        /// <param name="x">The option to test</param>
-        [MethodImpl(Inline)]
-        public static bool operator true(Option<T> x)
-            => x.Exists;
-
-        /// <summary>
-        /// Returns false if the option is non-valued and true otherwise
-        /// </summary>
-        /// <param name="x">The option to test</param>
-        [MethodImpl(Inline)]
-        public static bool operator false(Option<T> x)
-            => !x.Exists;
-
-        /// <summary>
-        /// Returns false if the option is non-valued and true otherwise
-        /// </summary>
-        /// <param name="x">The option to test</param>
-        [MethodImpl(Inline)]
-        public static bool operator !(Option<T> x)
-            => !x.Exists;
 
         /// <summary>
         /// Returns true if the value exists
@@ -152,28 +107,27 @@ namespace Z0
                 ifNone();
             return this;
         }
-            
+
         /// <summary>
         /// Yields the encapulated value if present; otherwise, raises an exception
         /// </summary>
         [MethodImpl(Inline)]
         public T Require([Caller]string caller = null, [File]string file = null, [Line]int? line = null)
             =>  Exists ? value : throw new Exception($"The required value doesn't exist: invoked by {caller} on {line} in {file}");
-              //AppErrors.NoValue<T>(caller,file,line);
-                    
-        public T Default 
+
+        public T Default
         {
             [MethodImpl(Inline)]
             get => default;
         }
 
-        bool IOption.IsSome 
+        bool IOption.IsSome
         {
             [MethodImpl(Inline)]
             get => Exists;
         }
 
-        bool IOption.IsNone 
+        bool IOption.IsNone
         {
             [MethodImpl(Inline)]
             get => !Exists;
@@ -198,7 +152,7 @@ namespace Z0
             => Exists ? value : @default;
 
         /// <summary>
-        /// Returns the encapsulated value if it exists; otherwise, invokes the supplied fallback function 
+        /// Returns the encapsulated value if it exists; otherwise, invokes the supplied fallback function
         /// </summary>
         /// <param name="fallback">The function called to produce a value when there is no value in the source</param>
         [MethodImpl(Inline)]
@@ -214,14 +168,14 @@ namespace Z0
             => Exists ? value : fallback;
 
         /// <summary>
-        /// Applies supplied function to value if present, otherwise returns the 
+        /// Applies supplied function to value if present, otherwise returns the
         /// value obtained by invoking the fallback function
         /// </summary>
         /// <typeparam name="S">The output type</typeparam>
         /// <param name="f">The function to apply when value exists</param>
         /// <param name="fallback">The function to invoke when no value exists</param>
         [MethodImpl(Inline)]
-        public S Map<S>(Func<T, S> f, Func<S> fallback)
+        public S Map<S>(Func<T,S> f, Func<S> fallback)
             => Exists  ? f(value)  : fallback();
 
         /// <summary>
@@ -231,7 +185,7 @@ namespace Z0
         /// <param name="f">The function to apply when value exists</param>
         /// <param name="fallback">The function to invoke when no value exists</param>
         [MethodImpl(Inline)]
-        public S Map<S>(Func<T, S> f, S fallback)
+        public S Map<S>(Func<T,S> f, S fallback)
             => Exists  ? f(value)  : fallback;
 
         /// <summary>
@@ -240,7 +194,7 @@ namespace Z0
         /// <typeparam name="S">The output type</typeparam>
         /// <param name="f">The function to apply when value exists</param>
         [MethodImpl(Inline)]
-        public Option<S> TryMap<S>(Func<T, S> f)
+        public Option<S> TryMap<S>(Func<T,S> f)
             => Exists ? Option<S>.Some(f(value)) : Option<S>.None();
 
         /// <summary>
@@ -251,7 +205,7 @@ namespace Z0
         /// <param name="ifSome">The transformer</param>
         /// <param name="fallback">The alternate transformer</param>
         [MethodImpl(Inline)]
-        public S MapValueOrElse<S>(Func<T, S> ifSome, Func<S> fallback)
+        public S MapValueOrElse<S>(Func<T,S> ifSome, Func<S> fallback)
             => Exists  ? ifSome(value)  : fallback();
 
         /// <summary>
@@ -261,8 +215,8 @@ namespace Z0
         /// <param name="ifSome">The function to apply when a value exists</param>
         /// <param name="default">The value to return when no value exists</param>
         [MethodImpl(Inline)]
-        public S MapValueOrDefault<S>(Func<T, S> ifSome, S @default = default)
-            => Exists ? ifSome(value) :  @default;        
+        public S MapValueOrDefault<S>(Func<T,S> ifSome, S @default = default)
+            => Exists ? ifSome(value) :  @default;
 
         /// <summary>
         /// Maps an optional source value to a nullable value type
@@ -282,7 +236,7 @@ namespace Z0
         /// <typeparam name="Y">The target domain type</typeparam>
         /// <param name="x">The point in the monadic space over X</param>
         /// <param name="f">The function to apply to effect the bind</param>
-        public Option<Y> Bind<Y>(Func<T, Option<Y>> f)
+        public Option<Y> Bind<Y>(Func<T,Option<Y>> f)
             => Exists ? f(value) : Option<Y>.None();
 
         /// <summary>
@@ -291,7 +245,7 @@ namespace Z0
         /// <param name="apply">The application projector</param>
         /// <typeparam name="Y">The application range</typeparam>
         [MethodImpl(Inline)]
-        public Option<Y> Select<Y>(Func<T, Y> apply)
+        public Option<Y> Select<Y>(Func<T,Y> apply)
             => TryMap(_x => apply(_x));
 
         /// <summary>
@@ -302,7 +256,7 @@ namespace Z0
         /// <typeparam name="Y">The evaluator range type</typeparam>
         /// <typeparam name="Z">The projector range type</typeparam>
         [MethodImpl(Inline)]
-        public Option<Z> SelectMany<Y, Z>(Func<T, Option<Y>> eval, Func<T, Y, Z> project)
+        public Option<Z> SelectMany<Y,Z>(Func<T, Option<Y>> eval, Func<T,Y,Z> project)
         {
             if (Exists)
             {
@@ -336,7 +290,7 @@ namespace Z0
         public bool Equals(Option<T> y)
         {
             var x = this;
-            
+
             if (!x.Exists && !y.Exists)
                 return true;
 
@@ -354,5 +308,51 @@ namespace Z0
 
         public override bool Equals(object obj)
             => obj is Option<T> x && Equals(x);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Option<T>(T x)
+            => x != null  ? Some(x) : None();
+
+        /// <summary>
+        /// Implmements value-based equality
+        /// </summary>
+        /// <param name="lhs">The first value</param>
+        /// <param name="rhs">The second value</param>
+        [MethodImpl(Inline)]
+        public static bool operator == (Option<T> lhs, Option<T> rhs)
+            => (lhs.IsNone() && rhs.IsNone())  ? true : (lhs.Exists && rhs.Exists && lhs.value.Equals(rhs.value));
+
+        /// <summary>
+        /// Implements value-based equality negation
+        /// </summary>
+        /// <param name="lhs">The first value</param>
+        /// <param name="rhs">The second value</param>
+        [MethodImpl(Inline)]
+        public static bool operator !=(Option<T> lhs, Option<T> rhs)
+            => !(lhs == rhs);
+
+        /// <summary>
+        /// Returns true if the option has a value and false otherwise
+        /// </summary>
+        /// <param name="x">The option to test</param>
+        [MethodImpl(Inline)]
+        public static bool operator true(Option<T> x)
+            => x.Exists;
+
+        /// <summary>
+        /// Returns false if the option is non-valued and true otherwise
+        /// </summary>
+        /// <param name="x">The option to test</param>
+        [MethodImpl(Inline)]
+        public static bool operator false(Option<T> x)
+            => !x.Exists;
+
+        /// <summary>
+        /// Returns false if the option is non-valued and true otherwise
+        /// </summary>
+        /// <param name="x">The option to test</param>
+        [MethodImpl(Inline)]
+        public static bool operator !(Option<T> x)
+            => !x.Exists;
     }
 }

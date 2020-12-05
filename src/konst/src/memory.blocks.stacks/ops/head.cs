@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial class StackStores
+    partial class MemoryStacks
     {
         /// <summary>
         /// Presents the leading source storage cell as a generic reference
@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="src">The source storage</param>
         /// <param name="t">A cell type representative</param>
         /// <typeparam name="T">The reference type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T head<T>(ref BitBlock64 src, T t = default)
             where T : unmanaged
                 => ref @as<ulong,T>(u64(src));
@@ -29,7 +29,7 @@ namespace Z0
         /// <param name="src">The source storage</param>
         /// <param name="t">A cell type representative</param>
         /// <typeparam name="T">The reference type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T head<T>(ref BitBlock128 src, T t = default)
             where T : unmanaged
                 => ref @as<ulong,T>(u64(src));
@@ -51,7 +51,7 @@ namespace Z0
         /// <param name="src">The source storage</param>
         /// <param name="t">A cell type representative</param>
         /// <typeparam name="T">The reference type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T head<T>(ref BitBlock512 src, T t = default)
             where T : unmanaged
                 => ref @as<ulong,T>(u64(src));
@@ -62,7 +62,7 @@ namespace Z0
         /// <param name="src">The source storage</param>
         /// <param name="t">A cell type representative</param>
         /// <typeparam name="T">The reference type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T head<T>(ref BitBlock1024 src, T t = default)
             where T : unmanaged
                 => ref @as<ulong,T>(u64(src));

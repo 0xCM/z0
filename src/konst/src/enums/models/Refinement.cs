@@ -15,7 +15,7 @@ namespace Z0
     public readonly struct Refinement<V,T> : IRefinement<Refinement<V,T>,V,T>
         where V : unmanaged, Enum
         where T : unmanaged
-    {        
+    {
         /// <summary>
         /// The numeric content covered by the refining enumeration
         /// </summary>
@@ -36,6 +36,31 @@ namespace Z0
             get => Enums.kind<V>();
         }
 
+
+        [MethodImpl(Inline)]
+        public Refinement(V value)
+            => Value = value;
+
+        public T Data
+        {
+            [MethodImpl(Inline)]
+            get => Enums.scalar<V,T>(Value);
+        }
+
+        public bool Equals(Refinement<V,T> src)
+            => src.Value.Equals(Value);
+
+        public override bool Equals(object src)
+            => src is Refinement<V,T> r && Equals(r);
+        public string Format()
+            => Value.ToString();
+
+        public override string ToString()
+            => Format();
+
+        public override int GetHashCode()
+            => Value.GetHashCode();
+
         [MethodImpl(Inline)]
         public static bool operator ==(Refinement<V,T> x, Refinement<V,T> y)
             => x.Equals(y);
@@ -55,29 +80,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator V(Refinement<V,T> src)
             => src.Value;
-
-        [MethodImpl(Inline)]
-        public Refinement(V value)
-            => Value = value;
-
-        public T Data 
-        {
-            [MethodImpl(Inline)]
-            get => Enums.scalar<V,T>(Value);
-        }
-        
-        public bool Equals(Refinement<V,T> src)
-            => src.Value.Equals(Value);
-
-        public override bool Equals(object src)
-            => src is Refinement<V,T> r && Equals(r);
-        public string Format()
-            => Value.ToString();
-
-        public override string ToString()
-            => Format();
-
-        public override int GetHashCode()
-            => Value.GetHashCode();    
     }
 }

@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial class StackStores
+    partial class MemoryStacks
     {
         [MethodImpl(Inline), Op]
         public static StackBlock32 init(Vector256<ushort> lo, Vector256<ushort> hi)

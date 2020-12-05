@@ -10,55 +10,41 @@ namespace Z0
     using static Konst;
 
     using X = ArchiveFileKinds;
+    using api = WfLogs;
 
-    public struct WfLogConfig : ITextual
+    public readonly struct WfLogConfig : IWfLogConfig
     {
-        const string FormatPattern = "{0}:{1} | {2}:{3} | {4}:{5} | {6}:{7}";
-
         /// <summary>
         /// The controlling part identifier
         /// </summary>
-        public PartId Control;
+        public PartId ControlId {get;}
 
         /// <summary>
         /// The log file root directory
         /// </summary>
-        public FS.FolderPath Root;
+        public FS.FolderPath LogRoot  {get;}
 
         /// <summary>
         /// The status log path
         /// </summary>
-        public FS.FilePath StatusLog;
+        public FS.FilePath StatusLog {get;}
 
         /// <summary>
         /// The error log path
         /// </summary>
-        public FS.FilePath ErrorLog;
-
-        /// <summary>
-        /// The location to which completed logs are published
-        /// </summary>
-        public FS.FolderPath DbRoot;
+        public FS.FilePath ErrorLog {get;}
 
         [MethodImpl(Inline)]
-        public WfLogConfig(PartId control, FS.FolderPath dbRoot, FS.FolderPath root)
+        public WfLogConfig(PartId control, FS.FolderPath dbRoot)
         {
-            Control = control;
-            Root = root;
-            var app = Control.Format();
-            StatusLog = Root + FS.file(app, X.StatusLog);
-            ErrorLog = Root + FS.file(app, X.ErrorLog);
-            DbRoot = dbRoot;
+            LogRoot = dbRoot + FS.folder("logs");
+            ControlId = control;
+            var app = ControlId.Format();
+            StatusLog = LogRoot + FS.file(app, X.StatusLog);
+            ErrorLog = LogRoot + FS.file(app, X.ErrorLog);
         }
 
-        public string Format()
-            => string.Format(RP.Settings4,
-                nameof(Root), Root.Format(),
-                nameof(StatusLog), StatusLog.Format(),
-                nameof(ErrorLog), ErrorLog.Format(),
-                nameof(DbRoot), DbRoot.Format());
-
         public override string ToString()
-            => Format();
+            => api.format(this);
     }
 }

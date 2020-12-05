@@ -10,15 +10,7 @@ namespace Z0
     using X = ArchiveFileKinds;
     using PN = DbNames;
 
-    public interface IDbPaths
-    {
-        /// <summary>
-        /// The workflow's database root
-        /// </summary>
-        FS.FolderPath DbRoot {get;}
-    }
-
-    public interface IFileDbPaths : IDbPaths, IFileArchivePaths
+    public interface IFileDbPaths : IDbPaths
     {
         FS.FileName ApiFileName(PartId part, string api, FS.FileExt ext)
             => FS.file(string.Format("{0}.{1}", part.Format(), api), ext);

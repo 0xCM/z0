@@ -97,12 +97,6 @@ namespace Z0
             get => Spec.Description;
         }
 
-        public UserMetadata UserData
-        {
-            [MethodImpl(Inline)]
-            get => Spec.UserData;
-        }
-
         P IEnumLiteral<EnumLiteralDetail<E,P>,E,P>.PrimalValue
             => PrimalValue;
 

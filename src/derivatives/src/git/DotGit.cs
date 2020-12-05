@@ -66,11 +66,13 @@ namespace Z0.X.Git
         public static class Hooks
         {
             public const string QueryWatchmanName = "query-watchman";
+
             public const string FsMonitorWatchmanSampleName = "fsmonitor-watchman.sample";
 
             public static readonly string Root = Path.Combine(DotGit.Root, "hooks");
 
             public static readonly string QueryWatchmanPath = Path.Combine(Hooks.Root, QueryWatchmanName);
+
             public static readonly string FsMonitorWatchmanSamplePath = Path.Combine(Hooks.Root, FsMonitorWatchmanSampleName);
         }
 

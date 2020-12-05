@@ -4,10 +4,6 @@
     <OutputType>Library</OutputType>
   </PropertyGroup>
 
-   <ItemGroup>
-    <EmbeddedResource Include="data/**/*.*" />
-   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="$(Konst)" />
   </ItemGroup>

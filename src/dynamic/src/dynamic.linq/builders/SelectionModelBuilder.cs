@@ -95,7 +95,6 @@ namespace Z0.Dynamics
                 CurrentJunction.Item2.Criteria.Add(predicate);
         }
 
-
         void HandleMethodCall(OrderSpecificationMethod method, MethodCallExpression node)
         {
             var arguments = node.Arguments.ToList();

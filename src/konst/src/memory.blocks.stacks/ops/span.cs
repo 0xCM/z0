@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class StackStores
+    partial class MemoryStacks
     {
         /// <summary>
         /// Fills a span with data from a stack storage block

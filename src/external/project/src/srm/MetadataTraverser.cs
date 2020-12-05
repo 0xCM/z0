@@ -13,84 +13,41 @@ using System.IO;
 using System.Linq;
 using System.Reflection.Metadata;
 using System.Reflection.Metadata.Ecma335;
-using System.Reflection.PortableExecutable;
 
-using System.Text;
-
-namespace MdDumper.Visualization
+namespace SRM
 {
-
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            if (args.Length == 0 || new[] {"/?", "-?", "-h", "--help"}.Any(x => string.Equals(args[0], x, StringComparison.OrdinalIgnoreCase)))
-            {
-                PrintUsage();
-                return;
-            }
-
-            foreach (var fileName in args)
-            {
-                Console.WriteLine(fileName);
-                Console.WriteLine(new string('*', 80));
-
-                try
-                {
-                    using (var stream = File.OpenRead(fileName))
-                    using (var peFile = new PEReader(stream))
-                    {
-                        var metadataReader = peFile.GetMetadataReader();
-                        var visualizer = new MetadataTraverser(metadataReader, Console.Out);
-                        visualizer.Visualize();
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
-            }
-        }
-
-        private static void PrintUsage()
-        {
-            Console.WriteLine("This tool dumps the contents of all tables in a set of PE files.");
-            Console.WriteLine("usage: mddumper <file>...");
-        }
-    }
-
     public sealed class MetadataTraverser
     {
-        private readonly TextWriter writer;
+        readonly TextWriter Writer;
 
-        private readonly IReadOnlyList<MetadataReader> readers;
+        readonly IReadOnlyList<MetadataReader> Readers;
 
-        private readonly MetadataAggregator aggregator;
+        readonly MetadataAggregator Aggregator;
 
         // enc map for each delta reader
-        private readonly ImmutableArray<ImmutableArray<EntityHandle>> encMaps;
+        readonly ImmutableArray<ImmutableArray<EntityHandle>> EncMaps;
 
-        private MetadataReader reader;
-        private readonly List<string[]> pendingRows = new List<string[]>();
+        private MetadataReader Reader;
 
-        private MetadataTraverser(TextWriter writer, IReadOnlyList<MetadataReader> readers)
+        readonly List<string[]> PendingRows = new List<string[]>();
+
+        MetadataTraverser(TextWriter writer, IReadOnlyList<MetadataReader> readers)
         {
-            this.writer = writer;
-            this.readers = readers;
+            Writer = writer;
+            Readers = readers;
 
             if (readers.Count > 1)
             {
                 var deltaReaders = new List<MetadataReader>(readers.Skip(1));
-                this.aggregator = new MetadataAggregator(readers[0], deltaReaders);
-
-                this.encMaps = ImmutableArray.CreateRange(deltaReaders.Select(reader => ImmutableArray.CreateRange(reader.GetEditAndContinueMapEntries())));
+                Aggregator = new MetadataAggregator(readers[0], deltaReaders);
+                EncMaps = ImmutableArray.CreateRange(deltaReaders.Select(reader => ImmutableArray.CreateRange(reader.GetEditAndContinueMapEntries())));
             }
         }
 
         public MetadataTraverser(MetadataReader reader, TextWriter writer)
             : this(writer, new[] { reader })
         {
-            this.reader = reader;
+            Reader = reader;
         }
 
         public MetadataTraverser(IReadOnlyList<MetadataReader> readers, TextWriter writer)
@@ -100,12 +57,12 @@ namespace MdDumper.Visualization
 
         public void VisualizeAllGenerations()
         {
-            for (int i = 0; i < readers.Count; i++)
+            for (int i = 0; i<Readers.Count; i++)
             {
-                writer.WriteLine(">>>");
-                writer.WriteLine(string.Format(">>> Generation {0}:", i));
-                writer.WriteLine(">>>");
-                writer.WriteLine();
+                Writer.WriteLine(">>>");
+                Writer.WriteLine(string.Format(">>> Generation {0}:", i));
+                Writer.WriteLine(">>>");
+                Writer.WriteLine();
 
                 Visualize(i);
             }
@@ -113,7 +70,7 @@ namespace MdDumper.Visualization
 
         public void Visualize(int generation = -1)
         {
-            this.reader = (generation >= 0) ? readers[generation] : readers.Last();
+            this.Reader = (generation >= 0) ? Readers[generation] : Readers.Last();
 
             WriteModule();
             WriteTypeRef();
@@ -151,40 +108,40 @@ namespace MdDumper.Visualization
         {
             get
             {
-                return reader.GetTableRowCount(TableIndex.EncLog) > 0;
+                return Reader.GetTableRowCount(TableIndex.EncLog) > 0;
             }
         }
 
         private void AddHeader(params string[] header)
         {
-            Debug.Assert(pendingRows.Count == 0);
-            pendingRows.Add(header);
+            Debug.Assert(PendingRows.Count == 0);
+            PendingRows.Add(header);
         }
 
         private void AddRow(params string[] fields)
         {
-            Debug.Assert(pendingRows.Count > 0 && pendingRows.Last().Length == fields.Length);
-            pendingRows.Add(fields);
+            Debug.Assert(PendingRows.Count > 0 && PendingRows.Last().Length == fields.Length);
+            PendingRows.Add(fields);
         }
 
         private void WriteRows(string title)
         {
-            Debug.Assert(pendingRows.Count > 0);
+            Debug.Assert(PendingRows.Count > 0);
 
-            if (pendingRows.Count == 1)
+            if (PendingRows.Count == 1)
             {
-                pendingRows.Clear();
+                PendingRows.Clear();
                 return;
             }
 
-            writer.Write(title);
-            writer.WriteLine();
+            Writer.Write(title);
+            Writer.WriteLine();
 
             string columnSeparator = "  ";
-            int rowNumberWidth = pendingRows.Count.ToString("x").Length;
+            int rowNumberWidth = PendingRows.Count.ToString("x").Length;
 
-            int[] columnWidths = new int[pendingRows.First().Length];
-            foreach (var row in pendingRows)
+            int[] columnWidths = new int[PendingRows.First().Length];
+            foreach (var row in PendingRows)
             {
                 for (int c = 0; c < row.Length; c++)
                 {
@@ -195,48 +152,48 @@ namespace MdDumper.Visualization
             int tableWidth = columnWidths.Sum() + columnWidths.Length;
             string horizontalSeparator = new string('=', tableWidth);
 
-            for (int r = 0; r < pendingRows.Count; r++)
+            for (int r = 0; r < PendingRows.Count; r++)
             {
-                var row = pendingRows[r];
+                var row = PendingRows[r];
 
                 // header
                 if (r == 0)
                 {
-                    writer.WriteLine(horizontalSeparator);
-                    writer.Write(new string(' ', rowNumberWidth + 2));
+                    Writer.WriteLine(horizontalSeparator);
+                    Writer.Write(new string(' ', rowNumberWidth + 2));
                 }
                 else
                 {
                     string rowNumber = r.ToString("x");
-                    writer.Write(new string(' ', rowNumberWidth - rowNumber.Length));
-                    writer.Write(rowNumber);
-                    writer.Write(": ");
+                    Writer.Write(new string(' ', rowNumberWidth - rowNumber.Length));
+                    Writer.Write(rowNumber);
+                    Writer.Write(": ");
                 }
 
                 for (int c = 0; c < row.Length; c++)
                 {
                     var field = row[c];
 
-                    writer.Write(field);
-                    writer.Write(new string(' ', columnWidths[c] - field.Length));
+                    Writer.Write(field);
+                    Writer.Write(new string(' ', columnWidths[c] - field.Length));
                 }
 
-                writer.WriteLine();
+                Writer.WriteLine();
 
                 // header
                 if (r == 0)
                 {
-                    writer.WriteLine(horizontalSeparator);
+                    Writer.WriteLine(horizontalSeparator);
                 }
             }
 
-            writer.WriteLine();
-            pendingRows.Clear();
+            Writer.WriteLine();
+            PendingRows.Clear();
         }
 
         private Handle GetAggregateHandle(EntityHandle generationHandle, int generation)
         {
-            var encMap = encMaps[generation - 1];
+            var encMap = EncMaps[generation - 1];
 
             int start, count;
             if (!TryGetHandleRange(encMap, generationHandle.Kind, out start, out count))
@@ -279,15 +236,15 @@ namespace MdDumper.Visualization
 
         private TEntity Get<TEntity>(Handle handle, Func<MetadataReader, Handle, TEntity> getter)
         {
-            if (aggregator != null)
+            if (Aggregator != null)
             {
                 int generation;
-                var generationHandle = aggregator.GetGenerationHandle(handle, out generation);
-                return getter(readers[generation], generationHandle);
+                var generationHandle = Aggregator.GetGenerationHandle(handle, out generation);
+                return getter(Readers[generation], generationHandle);
             }
             else
             {
-                return getter(this.reader, handle);
+                return getter(this.Reader, handle);
             }
         }
 
@@ -318,12 +275,12 @@ namespace MdDumper.Visualization
                 return "nil";
             }
 
-            if (aggregator != null)
+            if (Aggregator != null)
             {
                 int generation;
-                Handle generationHandle = aggregator.GetGenerationHandle(handle, out generation);
+                Handle generationHandle = Aggregator.GetGenerationHandle(handle, out generation);
 
-                var generationReader = readers[generation];
+                var generationReader = Readers[generation];
                 string value = getValue(generationReader, generationHandle);
                 int offset = generationReader.GetHeapOffset(handle);
                 int generationOffset = generationReader.GetHeapOffset(generationHandle);
@@ -341,10 +298,10 @@ namespace MdDumper.Visualization
             if (IsDelta)
             {
                 // we can't resolve the literal without aggregate reader
-                return string.Format("#{0:x}", reader.GetHeapOffset(handle));
+                return string.Format("#{0:x}", Reader.GetHeapOffset(handle));
             }
 
-            return string.Format("{1:x} (#{0:x})", reader.GetHeapOffset(handle), getValue(reader, handle));
+            return string.Format("{1:x} (#{0:x})", Reader.GetHeapOffset(handle), getValue(Reader, handle));
         }
 
         private string Hex(ushort value)
@@ -367,11 +324,11 @@ namespace MdDumper.Visualization
             TableIndex table;
             if (displayTable && MetadataTokens.TryGetTableIndex(handle.Kind, out table))
             {
-                return string.Format("0x{0:x8} ({1})", reader.GetToken(handle), table);
+                return string.Format("0x{0:x8} ({1})", Reader.GetToken(handle), table);
             }
             else
             {
-                return string.Format("0x{0:x8}", reader.GetToken(handle));
+                return string.Format("0x{0:x8}", Reader.GetToken(handle));
             }
         }
 
@@ -405,7 +362,7 @@ namespace MdDumper.Visualization
 
         private void WriteModule()
         {
-            var def = reader.GetModuleDefinition();
+            var def = Reader.GetModuleDefinition();
 
             AddHeader(
                 "Gen",
@@ -433,9 +390,9 @@ namespace MdDumper.Visualization
                 "Namespace"
             );
 
-            foreach (var handle in reader.TypeReferences)
+            foreach (var handle in Reader.TypeReferences)
             {
-                var entry = reader.GetTypeReference(handle);
+                var entry = Reader.GetTypeReference(handle);
 
                 AddRow(
                     Token(entry.ResolutionScope),
@@ -462,9 +419,9 @@ namespace MdDumper.Visualization
                 "PackingSize"
             );
 
-            foreach (var handle in reader.TypeDefinitions)
+            foreach (var handle in Reader.TypeDefinitions)
             {
-                var entry = reader.GetTypeDefinition(handle);
+                var entry = Reader.GetTypeDefinition(handle);
 
                 TypeLayout typeLayout = entry.GetLayout();
 
@@ -496,9 +453,9 @@ namespace MdDumper.Visualization
                 "RVA"
             );
 
-            foreach (var handle in reader.FieldDefinitions)
+            foreach (var handle in Reader.FieldDefinitions)
             {
-                var entry = reader.GetFieldDefinition(handle);
+                var entry = Reader.GetFieldDefinition(handle);
 
                 int offset = entry.GetOffset();
 
@@ -530,9 +487,9 @@ namespace MdDumper.Visualization
                 "ImportModule"
             );
 
-            foreach (var handle in reader.MethodDefinitions)
+            foreach (var handle in Reader.MethodDefinitions)
             {
-                var entry = reader.GetMethodDefinition(handle);
+                var entry = Reader.GetMethodDefinition(handle);
                 var import = entry.GetImport();
 
                 AddRow(
@@ -561,9 +518,9 @@ namespace MdDumper.Visualization
                 "Marshalling"
             );
 
-            for (int i = 1, count = reader.GetTableRowCount(TableIndex.Param); i <= count; i++)
+            for (int i = 1, count = Reader.GetTableRowCount(TableIndex.Param); i <= count; i++)
             {
-                var entry = reader.GetParameter(MetadataTokens.ParameterHandle(i));
+                var entry = Reader.GetParameter(MetadataTokens.ParameterHandle(i));
 
                 AddRow(
                     Literal(entry.Name),
@@ -584,9 +541,9 @@ namespace MdDumper.Visualization
                 "Signature"
             );
 
-            foreach (var handle in reader.MemberReferences)
+            foreach (var handle in Reader.MemberReferences)
             {
-                var entry = reader.GetMemberReference(handle);
+                var entry = Reader.GetMemberReference(handle);
 
                 AddRow(
                     Token(entry.Parent),
@@ -606,9 +563,9 @@ namespace MdDumper.Visualization
                 "Value"
             );
 
-            for (int i = 1, count = reader.GetTableRowCount(TableIndex.Constant); i <= count; i++)
+            for (int i = 1, count = Reader.GetTableRowCount(TableIndex.Constant); i <= count; i++)
             {
-                var entry = reader.GetConstant(MetadataTokens.ConstantHandle(i));
+                var entry = Reader.GetConstant(MetadataTokens.ConstantHandle(i));
 
                 AddRow(
                     Token(entry.Parent),
@@ -628,9 +585,9 @@ namespace MdDumper.Visualization
                 "Value"
             );
 
-            foreach (var handle in reader.CustomAttributes)
+            foreach (var handle in Reader.CustomAttributes)
             {
-                var entry = reader.GetCustomAttribute(handle);
+                var entry = Reader.GetCustomAttribute(handle);
 
                 AddRow(
                     Token(entry.Parent),
@@ -650,9 +607,9 @@ namespace MdDumper.Visualization
                 "Action"
             );
 
-            foreach (var handle in reader.DeclarativeSecurityAttributes)
+            foreach (var handle in Reader.DeclarativeSecurityAttributes)
             {
-                var entry = reader.GetDeclarativeSecurityAttribute(handle);
+                var entry = Reader.GetDeclarativeSecurityAttribute(handle);
 
                 AddRow(
                     Token(entry.Parent),
@@ -668,9 +625,9 @@ namespace MdDumper.Visualization
         {
             AddHeader("Signature");
 
-            for (int i = 1, count = reader.GetTableRowCount(TableIndex.StandAloneSig); i <= count; i++)
+            for (int i = 1, count = Reader.GetTableRowCount(TableIndex.StandAloneSig); i <= count; i++)
             {
-                var value = reader.GetStandaloneSignature(MetadataTokens.StandaloneSignatureHandle(i));
+                var value = Reader.GetStandaloneSignature(MetadataTokens.StandaloneSignatureHandle(i));
 
                 AddRow(Literal(value.Signature));
             }
@@ -688,9 +645,9 @@ namespace MdDumper.Visualization
                 "Attributes"
             );
 
-            foreach (var handle in reader.EventDefinitions)
+            foreach (var handle in Reader.EventDefinitions)
             {
-                var entry = reader.GetEventDefinition(handle);
+                var entry = Reader.GetEventDefinition(handle);
                 var accessors = entry.GetAccessors();
 
                 AddRow(
@@ -714,9 +671,9 @@ namespace MdDumper.Visualization
                 "Attributes"
             );
 
-            foreach (var handle in reader.PropertyDefinitions)
+            foreach (var handle in Reader.PropertyDefinitions)
             {
-                var entry = reader.GetPropertyDefinition(handle);
+                var entry = Reader.GetPropertyDefinition(handle);
                 var accessors = entry.GetAccessors();
 
                 AddRow(
@@ -738,9 +695,9 @@ namespace MdDumper.Visualization
                 "Declaration"
             );
 
-            for (int i = 1, count = reader.GetTableRowCount(TableIndex.MethodImpl); i <= count; i++)
+            for (int i = 1, count = Reader.GetTableRowCount(TableIndex.MethodImpl); i <= count; i++)
             {
-                var entry = reader.GetMethodImplementation(MetadataTokens.MethodImplementationHandle(i));
+                var entry = Reader.GetMethodImplementation(MetadataTokens.MethodImplementationHandle(i));
 
                 AddRow(
                     Token(entry.Type),
@@ -756,9 +713,9 @@ namespace MdDumper.Visualization
         {
             AddHeader("Name");
 
-            for (int i = 1, count = reader.GetTableRowCount(TableIndex.ModuleRef); i <= count; i++)
+            for (int i = 1, count = Reader.GetTableRowCount(TableIndex.ModuleRef); i <= count; i++)
             {
-                var value = reader.GetModuleReference(MetadataTokens.ModuleReferenceHandle(i));
+                var value = Reader.GetModuleReference(MetadataTokens.ModuleReferenceHandle(i));
                 AddRow(Literal(value.Name));
             }
 
@@ -769,9 +726,9 @@ namespace MdDumper.Visualization
         {
             AddHeader("Name");
 
-            for (int i = 1, count = reader.GetTableRowCount(TableIndex.TypeSpec); i <= count; i++)
+            for (int i = 1, count = Reader.GetTableRowCount(TableIndex.TypeSpec); i <= count; i++)
             {
-                var value = reader.GetTypeSpecification(MetadataTokens.TypeSpecificationHandle(i));
+                var value = Reader.GetTypeSpecification(MetadataTokens.TypeSpecificationHandle(i));
                 AddRow(Literal(value.Signature));
             }
 
@@ -784,7 +741,7 @@ namespace MdDumper.Visualization
                 "Entity",
                 "Operation");
 
-            foreach (var entry in reader.GetEditAndContinueLogEntries())
+            foreach (var entry in Reader.GetEditAndContinueLogEntries())
             {
                 AddRow(
                     Token(entry.Handle),
@@ -796,7 +753,7 @@ namespace MdDumper.Visualization
 
         private void WriteEnCMap()
         {
-            if (aggregator != null)
+            if (Aggregator != null)
             {
                 AddHeader("Entity", "Gen", "Row", "Edit");
             }
@@ -806,15 +763,15 @@ namespace MdDumper.Visualization
             }
 
 
-            foreach (var entry in reader.GetEditAndContinueMapEntries())
+            foreach (var entry in Reader.GetEditAndContinueMapEntries())
             {
-                if (aggregator != null)
+                if (Aggregator != null)
                 {
                     int generation;
-                    Handle primary = aggregator.GetGenerationHandle(entry, out generation);
-                    bool isUpdate = readers[generation] != reader;
+                    Handle primary = Aggregator.GetGenerationHandle(entry, out generation);
+                    bool isUpdate = Readers[generation] != Reader;
 
-                    var primaryModule = readers[generation].GetModuleDefinition();
+                    var primaryModule = Readers[generation].GetModuleDefinition();
 
                     AddRow(
                         Token(entry),
@@ -833,7 +790,7 @@ namespace MdDumper.Visualization
 
         private void WriteAssembly()
         {
-            if (reader.IsAssembly)
+            if (Reader.IsAssembly)
             {
                 AddHeader(
                     "Name",
@@ -844,7 +801,7 @@ namespace MdDumper.Visualization
                     "HashAlgorithm"
                 );
 
-                var entry = reader.GetAssemblyDefinition();
+                var entry = Reader.GetAssemblyDefinition();
 
                 AddRow(
                     Literal(entry.Name),
@@ -869,9 +826,9 @@ namespace MdDumper.Visualization
                 "Flags"
             );
 
-            foreach (var handle in reader.AssemblyReferences)
+            foreach (var handle in Reader.AssemblyReferences)
             {
-                var entry = reader.GetAssemblyReference(handle);
+                var entry = Reader.GetAssemblyReference(handle);
 
                 AddRow(
                     Literal(entry.Name),
@@ -893,9 +850,9 @@ namespace MdDumper.Visualization
                 "HashValue"
             );
 
-            foreach (var handle in reader.AssemblyFiles)
+            foreach (var handle in Reader.AssemblyFiles)
             {
-                var entry = reader.GetAssemblyFile(handle);
+                var entry = Reader.GetAssemblyFile(handle);
 
                 AddRow(
                     Literal(entry.Name),
@@ -915,9 +872,9 @@ namespace MdDumper.Visualization
                 "Assembly"
             );
 
-            foreach (var handle in reader.ExportedTypes)
+            foreach (var handle in Reader.ExportedTypes)
             {
-                var entry = reader.GetExportedType(handle);
+                var entry = Reader.GetExportedType(handle);
                 AddRow(
                     Literal(entry.Name),
                     Literal(entry.Namespace),
@@ -936,9 +893,9 @@ namespace MdDumper.Visualization
                 "Implementation"
             );
 
-            foreach (var handle in reader.ManifestResources)
+            foreach (var handle in Reader.ManifestResources)
             {
-                var entry = reader.GetManifestResource(handle);
+                var entry = Reader.GetManifestResource(handle);
 
                 AddRow(
                     Literal(entry.Name),
@@ -960,9 +917,9 @@ namespace MdDumper.Visualization
                 "TypeConstraints"
             );
 
-            for (int i = 1, count = reader.GetTableRowCount(TableIndex.GenericParam); i <= count; i++)
+            for (int i = 1, count = Reader.GetTableRowCount(TableIndex.GenericParam); i <= count; i++)
             {
-                var entry = reader.GetGenericParameter(MetadataTokens.GenericParameterHandle(i));
+                var entry = Reader.GetGenericParameter(MetadataTokens.GenericParameterHandle(i));
 
                 AddRow(
                     Literal(entry.Name),
@@ -982,9 +939,9 @@ namespace MdDumper.Visualization
                 "Signature"
             );
 
-            for (int i = 1, count = reader.GetTableRowCount(TableIndex.MethodSpec); i <= count; i++)
+            for (int i = 1, count = Reader.GetTableRowCount(TableIndex.MethodSpec); i <= count; i++)
             {
-                var entry = reader.GetMethodSpecification(MetadataTokens.MethodSpecificationHandle(i));
+                var entry = Reader.GetMethodSpecification(MetadataTokens.MethodSpecificationHandle(i));
 
                 AddRow(
                     Token(entry.Method),
@@ -1002,9 +959,9 @@ namespace MdDumper.Visualization
                 "Type"
             );
 
-            for (int i = 1, count = reader.GetTableRowCount(TableIndex.GenericParamConstraint); i <= count; i++)
+            for (int i = 1, count = Reader.GetTableRowCount(TableIndex.GenericParamConstraint); i <= count; i++)
             {
-                var entry = reader.GetGenericParameterConstraint(MetadataTokens.GenericParameterConstraintHandle(i));
+                var entry = Reader.GetGenericParameterConstraint(MetadataTokens.GenericParameterConstraintHandle(i));
 
                 AddRow(
                     Token(entry.Parameter),
@@ -1017,86 +974,86 @@ namespace MdDumper.Visualization
 
         private void WriteUserStrings()
         {
-            int size = reader.GetHeapSize(HeapIndex.UserString);
+            int size = Reader.GetHeapSize(HeapIndex.UserString);
             if (size == 0)
             {
                 return;
             }
 
             // TODO: the heap is aligned, don't display the trailing empty strings
-            writer.WriteLine(string.Format("#US (size = {0}):", size));
+            Writer.WriteLine(string.Format("#US (size = {0}):", size));
             var handle = MetadataTokens.UserStringHandle(0);
             do
             {
-                string value = reader.GetUserString(handle);
-                writer.WriteLine("  {0:x}: '{1}'", reader.GetHeapOffset(handle), value);
-                handle = reader.GetNextHandle(handle);
+                string value = Reader.GetUserString(handle);
+                Writer.WriteLine("  {0:x}: '{1}'", Reader.GetHeapOffset(handle), value);
+                handle = Reader.GetNextHandle(handle);
             }
             while (!handle.IsNil);
 
-            writer.WriteLine();
+            Writer.WriteLine();
         }
 
         private void WriteStrings()
         {
-            int size = reader.GetHeapSize(HeapIndex.String);
+            int size = Reader.GetHeapSize(HeapIndex.String);
             if (size == 0)
             {
                 return;
             }
 
-            writer.WriteLine(string.Format("#String (size = {0}):", size));
+            Writer.WriteLine(string.Format("#String (size = {0}):", size));
             var handle = MetadataTokens.StringHandle(0);
             do
             {
-                string value = reader.GetString(handle);
-                writer.WriteLine("  {0:x}: '{1}'", reader.GetHeapOffset(handle), value);
-                handle = reader.GetNextHandle(handle);
+                string value = Reader.GetString(handle);
+                Writer.WriteLine("  {0:x}: '{1}'", Reader.GetHeapOffset(handle), value);
+                handle = Reader.GetNextHandle(handle);
             }
             while (!handle.IsNil);
 
-            writer.WriteLine();
+            Writer.WriteLine();
         }
 
         private void WriteBlobs()
         {
-            int size = reader.GetHeapSize(HeapIndex.Blob);
+            int size = Reader.GetHeapSize(HeapIndex.Blob);
             if (size == 0)
             {
                 return;
             }
 
-            writer.WriteLine(string.Format("#Blob (size = {0}):", size));
+            Writer.WriteLine(string.Format("#Blob (size = {0}):", size));
             var handle = MetadataTokens.BlobHandle(0);
             do
             {
-                byte[] value = reader.GetBlobBytes(handle);
-                writer.WriteLine("  {0:x}: {1}", reader.GetHeapOffset(handle), BitConverter.ToString(value));
-                handle = reader.GetNextHandle(handle);
+                byte[] value = Reader.GetBlobBytes(handle);
+                Writer.WriteLine("  {0:x}: {1}", Reader.GetHeapOffset(handle), BitConverter.ToString(value));
+                handle = Reader.GetNextHandle(handle);
             }
             while (!handle.IsNil);
 
-            writer.WriteLine();
+            Writer.WriteLine();
         }
 
         private void WriteGuids()
         {
-            int size = reader.GetHeapSize(HeapIndex.Guid);
+            int size = Reader.GetHeapSize(HeapIndex.Guid);
             if (size == 0)
             {
                 return;
             }
 
-            writer.WriteLine(string.Format("#Guid (size = {0}):", size));
+            Writer.WriteLine(string.Format("#Guid (size = {0}):", size));
             int i = 1;
             while (i <= size / 16)
             {
-                string value = reader.GetGuid(MetadataTokens.GuidHandle(i)).ToString();
-                writer.WriteLine("  {0:x}: {{{1}}}", i, value);
+                string value = Reader.GetGuid(MetadataTokens.GuidHandle(i)).ToString();
+                Writer.WriteLine("  {0:x}: {{{1}}}", i, value);
                 i++;
             }
 
-            writer.WriteLine();
+            Writer.WriteLine();
         }
 
         private sealed class TokenTypeComparer : IComparer<EntityHandle>

@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    partial class StackStores
+    partial class MemoryStacks
     {
         public struct CharStack2
         {

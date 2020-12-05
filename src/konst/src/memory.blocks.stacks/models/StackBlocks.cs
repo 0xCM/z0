@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    partial class StackStores
+    partial class MemoryStacks
     {
         /// <summary>
         /// 1 byte of storage

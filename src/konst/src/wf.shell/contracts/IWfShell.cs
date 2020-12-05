@@ -113,6 +113,16 @@ namespace Z0
         Assembly[] Components
             => Context.ApiParts.Components;
 
+        /// <summary>
+        /// Returns a part-identified component, if found
+        /// </summary>
+        /// <param name="part">The part identifier</param>
+        Option<Assembly> Component(PartId part)
+        {
+            var filtered = Components.Where(c => c.Id() == part);
+            return filtered.Length > 0 ? some(filtered[0]) : none<Assembly>();
+        }
+
         IPolyStream PolySource
             => Random;
 

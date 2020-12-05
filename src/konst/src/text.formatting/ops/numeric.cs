@@ -23,14 +23,5 @@ namespace Z0
             return dst;
         }
 
-        [MethodImpl(Inline)]
-        public static string numeric<F>(F src)
-            where F : unmanaged, INumericFormattable<F>
-                => src.Formatter.Format(src);
-
-        [MethodImpl(Inline)]
-        public static string numeric<F>(F src, NumericBaseKind @base)
-            where F : unmanaged, INumericFormattable<F>
-                => src.Formatter.Format(src, @base);
     }
 }

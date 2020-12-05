@@ -15,8 +15,8 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ref readonly BitSpan32 fill32(byte src, in BitSpan32 dst)
         {
-            var buffer = StackStores.alloc(w64);
-            ref var tmp = ref StackStores.head<byte>(ref buffer);
+            var buffer = MemoryStacks.alloc(w64);
+            ref var tmp = ref MemoryStacks.head<byte>(ref buffer);
             ref var target = ref Unsafe.As<Bit32,uint>(ref first(dst.Edit));
 
             Bits.unpack1x8x8(src, ref tmp);
@@ -27,8 +27,8 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ref readonly BitSpan32 fill32(ushort src, in BitSpan32 dst)
         {
-            var buffer = StackStores.alloc(w128);
-            ref var tmp = ref StackStores.head<byte>(ref buffer);
+            var buffer = MemoryStacks.alloc(w128);
+            ref var tmp = ref MemoryStacks.head<byte>(ref buffer);
             ref var target = ref Unsafe.As<Bit32,uint>(ref first(dst.Edit));
 
             Bits.unpack1x8x16(src, ref tmp);
@@ -54,7 +54,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ref readonly BitSpan32 fill32(ulong src, in BitSpan32 dst)
         {
-            var buffer = StackStores.alloc(w512);
+            var buffer = MemoryStacks.alloc(w512);
             ref var tmp = ref first(dst.Edit.Slice(56,8).Cast<Bit32,byte>());
             ref var target = ref Unsafe.As<Bit32,uint>(ref first(dst.Edit));
 

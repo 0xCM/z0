@@ -109,7 +109,7 @@ namespace System.Reflection.Emit
             // The interface type must be an interface, not a class
             if (!interfaceType.GetTypeInfo().IsInterface)
             {
-                // "T" is the generic parameter seen via the public contract
+                throw new Exception();
                 //throw new ArgumentException(SR.Format(SR.InterfaceType_Must_Be_Interface, interfaceType.FullName), "T");
             }
 
@@ -118,18 +118,21 @@ namespace System.Reflection.Emit
             {
                 // "TProxy" is the generic parameter seen via the public contract
                 //throw new ArgumentException(SR.Format(SR.BaseType_Cannot_Be_Sealed, baseTypeInfo.FullName), "TProxy");
+                throw new Exception();
             }
 
             // The base type cannot be abstract
             if (baseTypeInfo.IsAbstract)
             {
                 //throw new ArgumentException(SR.Format(SR.BaseType_Cannot_Be_Abstract, baseType.FullName), "TProxy");
+                throw new Exception();
             }
 
             // The base type must have a public default ctor
             if (!baseTypeInfo.DeclaredConstructors.Any(c => c.IsPublic && c.GetParameters().Length == 0))
             {
                 //throw new ArgumentException(SR.Format(SR.BaseType_Must_Have_Default_Ctor, baseType.FullName), "TProxy");
+                throw new Exception();
             }
 
             // Create a type that derives from 'baseType' provided by caller

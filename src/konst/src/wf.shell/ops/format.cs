@@ -18,7 +18,7 @@ namespace Z0
             dst.AppendSettingLine(nameof(src.AppConfigPath), src.AppConfigPath);
             dst.AppendSettingLine(nameof(src.Args),  Delimited.list(src.AppConfigPath).Format());
             dst.AppendSettingLine(nameof(src.Controller), src.Controller.Format());
-            dst.AppendSettingLine(nameof(src.LogConfig), src.LogConfig.Format());
+            dst.AppendSettingLine(nameof(src.LogConfig), WfLogs.format(src.LogConfig));
             dst.AppendSettingLine(nameof(src.Parts), Delimited.list(src.Parts).Format());
             dst.AppendSettingLine(nameof(src.StartTS), src.StartTS.Format());
             dst.AppendSettingLine(nameof(src.PathConfigTime), src.PathConfigTime.Format());

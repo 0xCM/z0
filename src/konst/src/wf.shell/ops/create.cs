@@ -28,11 +28,11 @@ namespace Z0
             var clock = Time.counter(true);
             var control = controller();
             var controlId = control.Id();
-            var dbRoot = WfEnv.dbRoot() + FS.folder(controlId.Format());
+            var dbRoot = WfEnv.dbRoot();// + FS.folder(controlId.Format());
             var parts = WfShell.parts(control, args);
             var partIdList = parts.Api.PartIdentities;
             var appLogConfig = WfLogs.configure(controlId, dbRoot);
-            IWfPaths _paths = new WfPaths(appLogConfig);
+            IWfPaths _paths = new WfPaths(dbRoot);
             ci.PathConfigTime = clock.Elapsed;
             clock.Restart();
 
