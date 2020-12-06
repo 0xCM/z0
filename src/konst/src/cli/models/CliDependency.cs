@@ -14,23 +14,23 @@ namespace Z0
     /// </summary>
     public readonly struct CliDependency
     {
-        public ClrArtifactKey Source {get;}
+        public CliArtifactKey Source {get;}
 
-        public ClrArtifactKey Target {get;}
+        public CliArtifactKey Target {get;}
 
         [MethodImpl(Inline)]
-        public CliDependency(ClrArtifactKey src, ClrArtifactKey dst)
+        public CliDependency(CliArtifactKey src, CliArtifactKey dst)
         {
             Source = src;
             Target = dst;
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator CliDependency((ClrArtifactKey src, ClrArtifactKey dst) x)
+        public static implicit operator CliDependency((CliArtifactKey src, CliArtifactKey dst) x)
             => new CliDependency(x.src, x.dst);
 
         [MethodImpl(Inline)]
-        public static implicit operator Pair<ClrArtifactKey>(CliDependency r)
+        public static implicit operator Pair<CliArtifactKey>(CliDependency r)
             =>  z.pair(r.Source, r.Target);
     }
 

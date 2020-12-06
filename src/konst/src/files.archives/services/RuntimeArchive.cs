@@ -78,22 +78,34 @@ namespace Z0
         internal RuntimeArchive(FS.FolderPath root)
         {
             Root = root;
-            Files = root.Files(false, Exe, Dll, Pdb).Where(x => !x.Name.Contains("System.Private.CoreLib"));
+            Files = root.Files(false, Exe, Dll, Pdb, Json, Xml).Where(x => !x.Name.Contains("System.Private.CoreLib"));
         }
 
-        public Files ManagedLibraries
+        public FS.Files ManagedLibraries
             => Files.Where(x => FS.managed(x) && x.Is(Dll)).Array();
 
-        public Files ManagedExecutables
+        public FS.Files ManagedExecutables
             => Files.Where(x => FS.managed(x) && x.Is(Exe)).Array();
 
-        public Files NativeLibraries
+        public FS.Files NativeLibraries
             => Files.Where(x => !FS.managed(x) && x.Is(ArchiveFileKinds.Dll)).Array();
 
-        public Files NativeExecutables
+        public FS.Files NativeExecutables
             => Files.Where(x => !FS.managed(x) && x.Is(Exe)).Array();
 
-        public Files PdbFiles
+        public FS.Files ExeFiles
+            => Files.Where(x => x.Is(Exe)).Array();
+
+        public FS.Files JsonFiles
+            => Files.Where(x => x.Is(Json)).Array();
+
+        public FS.Files XmlFiles
+            => Files.Where(x => x.Is(Xml)).Array();
+
+        public FS.Files DllFiles
+            => Files.Where(x => x.Is(Dll)).Array();
+
+        public FS.Files PdbFiles
             => Files.Where(x => x.Is(Pdb)).Array();
     }
 

@@ -12,7 +12,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public abstract class Interpreter<H> : IWfShellService<H>, IDisposable
+    public abstract class Interpreter<H> : IWfService<H>, IDisposable
         where H : Interpreter<H>, new()
     {
         public static H create()

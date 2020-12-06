@@ -9,7 +9,7 @@ namespace Z0
 
     public struct MethodMetadata : ITextual
     {
-        public ClrArtifactKey MethodId;
+        public CliArtifactKey MethodId;
 
         public Name MethodName;
 

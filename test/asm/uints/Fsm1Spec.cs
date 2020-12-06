@@ -15,7 +15,5 @@ namespace Z0
 
         public MachineTransition<E,S> TransFunc
             => TransRules.ToFunction();
-
     }
-
 }

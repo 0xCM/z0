@@ -18,7 +18,7 @@ namespace Z0
     {
         public const string RenderPattern = "{0} | {1} | {2}";
 
-        public ClrArtifactKey Id;
+        public CliArtifactKey Id;
 
         public MemoryAddress Address;
 

@@ -21,7 +21,7 @@ namespace Z0
         public ClrEnum(Type src)
             => Definition = src;
 
-        public ClrArtifactKey Id
+        public CliArtifactKey Id
         {
             [MethodImpl(Inline)]
             get => Definition.MetadataToken;

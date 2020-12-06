@@ -30,10 +30,10 @@ namespace Z0
         public static implicit operator ApiSignature(ApiSig<R> src)
             => encode(src.Identifier, skip(Types,0));
 
-        public static ClrArtifactKey target()
+        public static CliArtifactKey target()
             => skip(Types,0);
 
-        public static ReadOnlySpan<ClrArtifactKey> Sources
+        public static ReadOnlySpan<CliArtifactKey> Sources
             => default;
 
         public static ReadOnlySpan<Type> Types

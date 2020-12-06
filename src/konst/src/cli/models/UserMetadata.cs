@@ -11,18 +11,18 @@ namespace Z0
 
     public readonly struct UserMetadata
     {
-        public ClrArtifactKey Token {get;}
+        public CliArtifactKey Token {get;}
 
         public byte[] Content {get;}
 
         [MethodImpl(Inline)]
-        public UserMetadata(ClrArtifactKey token, byte[] src)
+        public UserMetadata(CliArtifactKey token, byte[] src)
         {
             Token = token;
             Content = src;
         }
 
         public static UserMetadata Empty
-            => new UserMetadata(ClrArtifactKey.Empty, Array.Empty<byte>());
+            => new UserMetadata(CliArtifactKey.Empty, Array.Empty<byte>());
     }
 }

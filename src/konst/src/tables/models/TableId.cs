@@ -11,12 +11,12 @@ namespace Z0
 
     public readonly struct TableId : ITextual
     {
-        public readonly ClrArtifactKey RecordType;
+        public readonly CliArtifactKey RecordType;
 
         public readonly StringRef Identifier;
 
         [MethodImpl(Inline)]
-        public static implicit operator TableId((ClrArtifactKey shape, string name) src)
+        public static implicit operator TableId((CliArtifactKey shape, string name) src)
             => new TableId(src.shape,src.name);
 
         [MethodImpl(Inline)]
@@ -31,7 +31,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public TableId(ClrArtifactKey shape, string name)
+        public TableId(CliArtifactKey shape, string name)
         {
             RecordType = shape;
             Identifier = name;

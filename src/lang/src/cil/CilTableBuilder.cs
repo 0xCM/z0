@@ -17,6 +17,10 @@ namespace Z0
     [ApiHost(ApiNames.CilTableBuilder, true)]
     public ref partial struct CilTableBuilder
     {
+        readonly Span<CilFieldSpec> Fields;
+
+        ushort Index;
+
         [Op]
         public static CilTableBuilder create(ushort? capacity = null)
             => new CilTableBuilder(capacity ?? 20);
@@ -52,10 +56,6 @@ namespace Z0
 
         public const TypeAttributes SequentialAnsi
             = Default | SequentialLayout;
-
-        readonly Span<CilFieldSpec> Fields;
-
-        ushort Index;
 
         [MethodImpl(Inline),Op]
         public CilTableBuilder(uint capacity)

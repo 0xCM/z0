@@ -267,25 +267,45 @@ namespace Z0
         Conv_Ovf_I1_Un = 0x82,
 
         Conv_Ovf_I2_Un = 0x83,
+
         Conv_Ovf_I4_Un = 0x84,
+
         Conv_Ovf_I8_Un = 0x85,
+
         Conv_Ovf_U1_Un = 0x86,
+
         Conv_Ovf_U2_Un = 0x87,
+
         Conv_Ovf_U4_Un = 0x88,
+
         Conv_Ovf_U8_Un = 0x89,
+
         Conv_Ovf_I_Un = 0x8a,
+
         Conv_Ovf_U_Un = 0x8b,
+
         Box = 0x8c,
+
         Newarr = 0x8d,
+
         Ldlen = 0x8e,
+
         Ldelema = 0x8f,
+
         Ldelem_I1 = 0x90,
+
         Ldelem_U1 = 0x91,
+
         Ldelem_I2 = 0x92,
+
         Ldelem_U2 = 0x93,
+
         Ldelem_I4 = 0x94,
+
         Ldelem_U4 = 0x95,
+
         Ldelem_I8 = 0x96,
+
         Ldelem_I = 0x97,
         Ldelem_R4 = 0x98,
         Ldelem_R8 = 0x99,

@@ -8,14 +8,13 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Reflection.Metadata;
 
     using static Part;
     using static CilOpCodeSpecs;
 
     public readonly struct CilOpCode : IEquatable<CilOpCode>
     {
-        public readonly ILOpCode Value;
+        public readonly CilOpCodeKind Value;
 
         public ushort Index
         {
@@ -28,7 +27,7 @@ namespace Z0
         [MethodImpl(Inline)]
         internal CilOpCode(CilOpCodeKind value, int flags)
         {
-            Value = (ILOpCode)value;
+            Value = value;
             m_flags = flags;
         }
 

@@ -37,7 +37,7 @@ namespace Z0
                 get => Subject.Name;
             }
 
-            public ClrArtifactKey Key
+            public CliArtifactKey Key
             {
                 [MethodImpl(Inline)]
                 get => Subject.MetadataToken;

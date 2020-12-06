@@ -16,7 +16,6 @@
     <ProjectReference Include="$(VSvc)" />
     <ProjectReference Include="$(BitSvc)" />
     <ProjectReference Include="$(Merge)" />
-    <ProjectReference Include="$(Merge)" />
     <ProjectReference Include="$(Fsm)"/>
   </ItemGroup>
 

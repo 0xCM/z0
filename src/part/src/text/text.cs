@@ -44,21 +44,5 @@ namespace Z0
         [MethodImpl(Options), Op]
         public static string rtrim(string src, params char[] chars)
             => blank(src) ? string.Empty : src.TrimEnd(chars);
-
-        /// <summary>
-        /// Produces a line of content
-        /// </summary>
-        /// <param name="src">The line content</param>
-        [MethodImpl(Options), Op]
-        public static string line(string src)
-            => src + Eol;
-
-        /// <summary>
-        /// Renders each item from a sequence as list of values, delimited by end-of-line
-        /// </summary>
-        /// <param name="src">The content to enclose</param>
-        [MethodImpl(Options), Op]
-        public static string line(IEnumerable<object> src)
-            => string.Join(Chars.Eol, src);
     }
 }

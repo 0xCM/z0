@@ -15,7 +15,7 @@ namespace Z0
     using static z;
 
     [ApiHost, Free]
-    public unsafe partial class CliMemoryMap : ICliImageReader
+    public unsafe partial class CliMemoryMap : IDisposable
     {
         readonly IWfShell Wf;
 
@@ -44,6 +44,27 @@ namespace Z0
 
         public static CliMemoryMap create(IWfShell wf, FS.FilePath src)
             => new CliMemoryMap(wf,src);
+
+        public DirectoryEntry ResourcesDirectory
+            => CorHeader.ResourcesDirectory;
+
+        public DirectoryEntry CodeManagerTableDirectory
+            => CorHeader.CodeManagerTableDirectory;
+
+        public DirectoryEntry ExportAddressTableJumpsDirectory
+            => CorHeader.ExportAddressTableJumpsDirectory;
+
+        public CorFlags Flags
+            => CorHeader.Flags;
+
+        public DirectoryEntry ManagedNativeHeaderDirectory
+            => CorHeader.ManagedNativeHeaderDirectory;
+
+        public DirectoryEntry MetadataDirectory
+            => CorHeader.MetadataDirectory;
+
+        public DirectoryEntry VtableFixupsDirectory
+            => CorHeader.VtableFixupsDirectory;
 
         public void Dispose()
         {

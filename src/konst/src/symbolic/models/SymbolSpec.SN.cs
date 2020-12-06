@@ -30,10 +30,10 @@ namespace Z0
         /// <summary>
         /// The storage cell type identifier
         /// </summary>
-        public ClrArtifactKey SegDomain {get;}
+        public CliArtifactKey SegDomain {get;}
 
         [MethodImpl(Inline)]
-        public SymbolSpec(ushort wSeg, ClrArtifactKey dSeg, params S[] symbols)
+        public SymbolSpec(ushort wSeg, CliArtifactKey dSeg, params S[] symbols)
         {
             SegDomain = dSeg;
             SegWidth = wSeg;
@@ -58,7 +58,7 @@ namespace Z0
             get => (ushort)(SegWidth/SymWidth);
         }
 
-        public ClrArtifactKey SymDomain
+        public CliArtifactKey SymDomain
         {
             [MethodImpl(Inline)]
             get => typeof(S);

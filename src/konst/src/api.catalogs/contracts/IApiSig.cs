@@ -24,7 +24,7 @@ namespace Z0
         /// <summary>
         /// The declaring api host
         /// </summary>
-        ClrArtifactKey Host {get;}
+        CliArtifactKey Host {get;}
     }
 
     [Free]

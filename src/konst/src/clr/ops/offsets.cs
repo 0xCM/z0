@@ -14,14 +14,14 @@ namespace Z0
     partial struct ClrQuery
     {
         [MethodImpl(Inline), Op]
-        public static void offsets(Type src, Span<Address16> dst)
+        public static void offsets(Type src, Span<ushort> dst)
         {
             var fields = span(src.DeclaredFields());
             offsets(src,fields,dst);
         }
 
         [MethodImpl(Inline), Op]
-        public static void offsets(Type src, ReadOnlySpan<FieldInfo> fields, Span<Address16> dst)
+        public static void offsets(Type src, ReadOnlySpan<FieldInfo> fields, Span<ushort> dst)
         {
             var count = fields.Length;
             for(var i=0u; i<count; i++)
@@ -32,7 +32,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static Address16[] offsets(Type host, FieldInfo[] fields)
+        public static ushort[] offsets(Type host, FieldInfo[] fields)
             => fields.Select(f => offset(host,f));
     }
 }

@@ -197,15 +197,15 @@ namespace Z0
             where H : WfHost<H>, new()
                 => Raise(error(host.Id, e, Ct));
 
-        IWfShellService Service(Type host)
+        IWfService Service(Type host)
         {
-            var service = (IWfShellService)Activator.CreateInstance(host);
+            var service = (IWfService)Activator.CreateInstance(host);
             service.Init(this);
             return service;
         }
 
         H Service<H>()
-            where H : IWfShellService<H>, new()
+            where H : IWfService<H>, new()
         {
             var svc = new H();
             svc.Init(this);

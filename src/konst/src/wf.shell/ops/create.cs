@@ -28,7 +28,7 @@ namespace Z0
             var clock = Time.counter(true);
             var control = controller();
             var controlId = control.Id();
-            var dbRoot = WfEnv.dbRoot();// + FS.folder(controlId.Format());
+            var dbRoot = WfEnv.dbRoot();
             var parts = WfShell.parts(control, args);
             var partIdList = parts.Api.PartIdentities;
             var appLogConfig = WfLogs.configure(controlId, dbRoot);

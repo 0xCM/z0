@@ -11,7 +11,7 @@ namespace Z0
     using static z;
     using static Konst;
 
-    public struct WfWorkers : IWfShellService<WfWorkers>
+    public struct WfWorkers : IWfService<WfWorkers>
     {
         WfHost Host;
 

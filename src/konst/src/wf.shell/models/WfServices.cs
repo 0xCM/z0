@@ -12,7 +12,7 @@ namespace Z0
 
     public sealed class WfServices
     {
-        readonly ConcurrentDictionary<uint,IWfShellService> Contextual;
+        readonly ConcurrentDictionary<uint,IWfService> Contextual;
 
 
 

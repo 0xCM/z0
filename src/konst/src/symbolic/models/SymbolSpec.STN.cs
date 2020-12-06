@@ -51,13 +51,13 @@ namespace Z0
             get => (ushort)((ushort)bitwidth<T>()/(ushort)Widths.data<W>());
         }
 
-        public ClrArtifactKey SegDomain
+        public CliArtifactKey SegDomain
         {
             [MethodImpl(Inline)]
             get => typeof(T);
         }
 
-        public ClrArtifactKey SymDomain
+        public CliArtifactKey SymDomain
         {
             [MethodImpl(Inline)]
             get => typeof(S);

@@ -24,10 +24,6 @@ namespace Z0
 
         public static W W => default;
 
-        [MethodImpl(Inline)]
-        public static implicit operator MemoryAddress(Address16 src)
-            => src.Location;
-
         public bool IsEmpty
         {
              [MethodImpl(Inline)]
@@ -45,6 +41,32 @@ namespace Z0
              [MethodImpl(Inline)]
              get => Empty;
         }
+
+
+        [MethodImpl(Inline)]
+        public string Format()
+            => Location.FormatAsmHex();
+
+        [MethodImpl(Inline)]
+        public bool Equals(A src)
+            => Location == src.Location;
+
+        [MethodImpl(Inline)]
+        public int CompareTo(A src)
+            => Location == src.Location ? 0 : Location < src.Location ? -1 : 1;
+
+        public override string ToString()
+            => Format();
+
+        public override int GetHashCode()
+            => Location.GetHashCode();
+
+        public override bool Equals(object src)
+            => src is A a && Equals(a);
+
+        [MethodImpl(Inline)]
+        public static implicit operator MemoryAddress(Address16 src)
+            => src.Location;
 
         [MethodImpl(Inline)]
         public static implicit operator A(T src)
@@ -85,27 +107,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool operator!=(A x, A y)
             => x.Location != y.Location;
-
-        [MethodImpl(Inline)]
-        public string Format()
-            => Location.FormatAsmHex();
-
-        [MethodImpl(Inline)]
-        public bool Equals(A src)
-            => Location == src.Location;
-
-        [MethodImpl(Inline)]
-        public int CompareTo(A src)
-            => Location == src.Location ? 0 : Location < src.Location ? -1 : 1;
-
-        public override string ToString()
-            => Format();
-
-        public override int GetHashCode()
-            => Location.GetHashCode();
-
-        public override bool Equals(object src)
-            => src is A a && Equals(a);
 
         public static A Empty
             => new A(0);

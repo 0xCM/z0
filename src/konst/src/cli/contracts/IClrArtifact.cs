@@ -11,7 +11,7 @@ namespace Z0
     {
         ClrArtifactKind Kind {get;}
 
-        ClrArtifactKey Key {get;}
+        CliArtifactKey Key {get;}
 
         string Name {get;}
 

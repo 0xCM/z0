@@ -8,7 +8,6 @@ namespace Z0
     using System.Linq;
     using System.Reflection;
     using System.Collections.Generic;
-    using System.Runtime.CompilerServices;
 
     using Dn = dnlib.DotNet;
     using R = System.Reflection;

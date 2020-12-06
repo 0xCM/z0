@@ -40,6 +40,21 @@ namespace Z0
             wf.Status(output);
         }
 
+        static void PipeRuntimeFiles(IWfShell wf)
+        {
+            var archive = wf.RuntimeArchive();
+            PipeFiles(wf, archive.DllFiles);
+            PipeFiles(wf, archive.ExeFiles);
+            PipeFiles(wf, archive.PdbFiles);
+            PipeFiles(wf, archive.JsonFiles);
+            PipeFiles(wf, archive.XmlFiles);
+        }
+
+        static void PipeFiles(IWfShell wf, FS.Files src)
+        {
+            foreach(var file in src)
+                wf.Status(file.ToUri().Format());
+        }
 
         static void RunInterpreter(IWfShell wf)
         {
@@ -77,17 +92,34 @@ namespace Z0
                 wf.Error(msg);
         }
 
+        static void EmitCilTables(IWfShell wf, params string[] components)
+        {
+            var runtime = wf.RuntimeArchive();
+            var srcdir = runtime.Root;
+            foreach(var component in components)
+            {
+                var srcpath = srcdir + FS.file(component);
+                if(!srcpath.Exists)
+                    wf.Warn($"The {component} component was not found");
+                else
+                {
+                    var cmd = new EmitCliTablesCmd();
+                    var dstfile = FS.file($"{component}.metadata.cli");
+                    var dstdir = wf.Db().Output(new ToolId("ztool"), cmd.Id()).Create() + dstfile;
+                    cmd.Source = srcpath;
+                    cmd.Target = dstdir;
+                    react(wf,cmd);
+                }
+            }
+        }
+
         public static void Main(params string[] args)
         {
             try
             {
                 using var wf = WfShell.create(args).WithRandom(Rng.@default());
-
-                var cmd = new EmitCliTablesCmd();
-                cmd.Source = FS.path(wf.Component(PartId.Konst).Require().Location);
-                cmd.Target = wf.Db().Output(new ToolId("ztool"), cmd.Id()).Create() + FS.file("z0.konst.metadata.cli");
-                react(wf,cmd);
-
+                PipeRuntimeFiles(wf);
+                //EmitCilTables(wf, "z0.gmath.dll");
             }
             catch(Exception e)
             {

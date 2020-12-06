@@ -17,7 +17,7 @@ namespace Z0
 
         public const byte TypeCount = 4;
 
-        static ClrArtifactKey[] _SourceKeys = new ClrArtifactKey[SourceCount]{source(n0), source(n1), source(n2)};
+        static CliArtifactKey[] _SourceKeys = new CliArtifactKey[SourceCount]{source(n0), source(n1), source(n2)};
 
         static Type[] _Types = new Type[TypeCount]{typeof(A), typeof(B), typeof(C), typeof(R)};
 
@@ -33,19 +33,19 @@ namespace Z0
         public static implicit operator ApiSignature(ApiSig<A,B,C,R> src)
             => encode(src.Identifier, skip(Types,0), skip(Types,1), skip(Types,2), skip(Types,3));
 
-        public static ClrArtifactKey target()
+        public static CliArtifactKey target()
             => typeof(R);
 
-        public static ClrArtifactKey source(N0 n)
+        public static CliArtifactKey source(N0 n)
             => typeof(A);
 
-        public static ClrArtifactKey source(N1 n)
+        public static CliArtifactKey source(N1 n)
             => typeof(B);
 
-        public static ClrArtifactKey source(N2 n)
+        public static CliArtifactKey source(N2 n)
             => typeof(C);
 
-        public static ReadOnlySpan<ClrArtifactKey> Sources
+        public static ReadOnlySpan<CliArtifactKey> Sources
             => _SourceKeys;
 
         public static ReadOnlySpan<Type> Types

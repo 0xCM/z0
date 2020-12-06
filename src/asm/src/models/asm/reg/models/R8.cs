@@ -24,6 +24,5 @@ namespace Z0.Asm
 
         public RegisterClass Class
             => RegisterClass.GP;
-
     }
 }

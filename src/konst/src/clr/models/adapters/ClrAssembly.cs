@@ -15,10 +15,10 @@ namespace Z0
     {
         public Assembly Definition {get;}
 
-        public ClrArtifactKey Id
+        public CliArtifactKey Id
         {
             [MethodImpl(Inline)]
-            get => ClrArtifactKey.from(Definition);
+            get => CliArtifactKey.from(Definition);
         }
 
         [MethodImpl(Inline)]
@@ -46,7 +46,7 @@ namespace Z0
         public ClrArtifactKind ClrKind
             => ClrArtifactKind.Assembly;
 
-        public ClrArtifactKey Token
+        public CliArtifactKey Token
             => Definition.GetHashCode();
 
         [MethodImpl(Inline)]

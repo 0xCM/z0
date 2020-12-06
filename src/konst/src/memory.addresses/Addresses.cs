@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
 
     using static Konst;
 
@@ -19,6 +20,14 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static bool equals(RelativeAddress a, RelativeAddress b)
             => a.Offset == b.Offset && a.Grain == b.Grain;
+
+        [MethodImpl(Inline), Op]
+        public static unsafe MemberAddress member(MethodInfo src)
+            => new MemberAddress(src, src.MethodHandle.Value.ToPointer());
+
+        [MethodImpl(Inline), Op]
+        public static unsafe MemberAddress member(FieldInfo src)
+            => new MemberAddress(src, src.FieldHandle.Value.ToPointer());
 
         [Op]
         public static string format(RelativeAddress src)

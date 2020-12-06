@@ -19,7 +19,7 @@ namespace Z0
         where E : unmanaged, Enum
         where T : unmanaged
     {
-        public ClrArtifactKey Id {get;}
+        public CliArtifactKey Id {get;}
 
         public string Description {get;}
 
@@ -29,7 +29,7 @@ namespace Z0
 
         public int EntryCount {get;}
 
-        public ClrArtifactKey[] Tokens {get;}
+        public CliArtifactKey[] Tokens {get;}
 
         public uint[] Indices {get;}
 
@@ -54,7 +54,7 @@ namespace Z0
             => new EnumDatasetEntry<E,T>(Tokens[i], Id, Indices[i], Names[i], Literals[i], Scalars[i], Descriptions[i]);
 
         [MethodImpl(Inline)]
-        public EnumDataset(ClrArtifactKey token, string description, UserMetadata data,  EnumScalarKind type, ClrArtifactKey[] tokens,
+        public EnumDataset(CliArtifactKey token, string description, UserMetadata data,  EnumScalarKind type, CliArtifactKey[] tokens,
             uint[] indices, string[] names, E[] literals, T[] scalars, string[] descriptions, UserMetadata[] entrydata)
         {
             Id = token;

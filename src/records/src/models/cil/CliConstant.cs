@@ -33,7 +33,7 @@ namespace Z0
 
         public Count Sequence;
 
-        public ClrArtifactKey ParentId;
+        public CliArtifactKey ParentId;
 
         public string Source;
 
@@ -42,10 +42,10 @@ namespace Z0
         public BinaryCode Content;
 
         [MethodImpl(Inline)]
-        public CliConstant(Count seq, CliHandleToken parent, ConstantTypeCode tc, BinaryCode value)
+        public CliConstant(Count seq, CliTableIndex parent, ConstantTypeCode tc, BinaryCode value)
         {
             Sequence = seq;
-            ParentId = parent.Token;
+            ParentId = parent.Key;
             Source = parent.Source.ToString();
             DataType = tc;
             Content = value;

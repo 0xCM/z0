@@ -42,10 +42,10 @@ namespace Z0.Asm
         /// </summary>
         YMM = 11,
 
-       /// <summary>
-       /// A zmm vector register of width <see cref='W512'/>
-       /// </summary>
-       ZMM = 12,
+        /// <summary>
+        /// A zmm vector register of width <see cref='W512'/>
+        /// </summary>
+        ZMM = 12,
 
        /// <summary>
        /// A 64-bit mask register

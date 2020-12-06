@@ -14,7 +14,7 @@ namespace Z0
 
     public readonly struct CilTableSpec : ITextual
     {
-        public readonly ClrTypeName TableName;
+        public ClrTypeName TableName {get;}
 
         readonly TableSpan<CilFieldSpec> FieldSpecs;
 

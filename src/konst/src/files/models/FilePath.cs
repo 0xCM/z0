@@ -108,7 +108,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public bool Is(FileExt ext)
-                => string.Compare(Ext.Name.Text, ext.Name.Text, NoCase) == 0;
+                => Name.Text.EndsWith(ext.Name.Text, NoCase);
 
             public FilePath ChangeExtension(FileExt ext)
                 => FolderPath + FS.file(Path.ChangeExtension(Path.GetFileName(Name), ext.Name));

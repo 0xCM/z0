@@ -11,10 +11,10 @@ namespace Z0
     using static Konst;
     using static z;
 
-    using Storage = KeyedValues<ClrArtifactKey,System.Type>;
-    using T = KeyedValue<ClrArtifactKey,System.Type>;
+    using Storage = KeyedValues<CliArtifactKey,System.Type>;
+    using T = KeyedValue<CliArtifactKey,System.Type>;
     using V = System.Type;
-    using K = ClrArtifactKey;
+    using K = CliArtifactKey;
 
     [ApiType(ApiNames.ClrTypes, true)]
     public readonly struct ClrTypes

@@ -6,20 +6,16 @@ namespace Z0
 {
     using Free =System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
+    [Free]
     public interface IWfClient
     {
         IWfShell Wf {get;}
     }
 
-    public interface IWfClient<C> : IWfClient
-    {
-        C Context {get;}
-    }
-
-
     [Free]
-    public interface IWfService : IWfClient
+    public interface IWfClient<C> : IWfClient
+        where C : IWfClient<C>, new()
     {
-
+        C Init(IWfShell wf);
     }
 }

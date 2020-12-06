@@ -20,7 +20,7 @@ namespace Z0
         /// Returns true of the specified op-code is a branch to a label.
         /// </summary>
         [Op]
-        public static bool branch(C opCode)
+        public static bool IsBranch(C opCode)
         {
             switch (opCode)
             {
@@ -65,7 +65,7 @@ namespace Z0
         /// <returns>Long form of the branch op-code.</returns>
         /// <exception cref="ArgumentException">Specified <paramref name="opCode"/> is not a branch op-code.</exception>
         [Op]
-        public static C longBranch(C opCode)
+        public static C LongBranch(C opCode)
         {
             switch (opCode)
             {
@@ -138,7 +138,7 @@ namespace Z0
         /// <returns>Short form of the branch op-code.</returns>
         /// <exception cref="ArgumentException">Specified <paramref name="opCode"/> is not a branch op-code.</exception>
         [Op]
-        public static C shortbranch(C opCode)
+        public static C ShortBranch(C opCode)
         {
             switch (opCode)
             {
@@ -212,7 +212,7 @@ namespace Z0
         /// <returns>1 if <paramref name="opCode"/> is a short branch or 4 if it is a long branch.</returns>
         /// <exception cref="ArgumentException">Specified <paramref name="opCode"/> is not a branch op-code.</exception>
         [Op]
-        public static int branchOpSize(C opCode)
+        public static int BranchOperandSize(C opCode)
         {
             switch (opCode)
             {

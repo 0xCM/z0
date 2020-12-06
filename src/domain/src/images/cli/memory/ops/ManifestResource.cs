@@ -25,8 +25,8 @@ namespace Z0
             return ref dst;
         }
 
-        public DirectoryEntry ResourcesDirectory
-            => CorHeader.ResourcesDirectory;
+        // public DirectoryEntry ResourcesDirectory
+        //     => CorHeader.ResourcesDirectory;
 
         [Op]
         public unsafe bool Search(string name, out ResourceSegment dst)
@@ -50,7 +50,6 @@ namespace Z0
             }
             return false;
         }
-
 
         [Op]
         public unsafe ReadOnlySpan<ResourceSegment> ResourceSegments()

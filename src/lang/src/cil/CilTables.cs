@@ -44,7 +44,7 @@ namespace Z0
             => new CilTableSpec(type, Fields);
 
         [MethodImpl(Inline), Op]
-        public static CilFieldSpec field(ClrMemberName name, ClrTypeName type, ushort position, Address16 offset = default)
+        public static CilFieldSpec field(ClrMemberName name, ClrTypeName type, ushort position, ushort offset = default)
             => new CilFieldSpec(name, type, position, offset);
 
         [Op]

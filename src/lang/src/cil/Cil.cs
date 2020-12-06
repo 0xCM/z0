@@ -14,21 +14,19 @@ namespace Z0
     [ApiHost(ApiNames.Cil, true)]
     public readonly partial struct Cil
     {
-        readonly CilOpCodes Data;
+        readonly Index<CilOpCodeInfo> Data;
 
         [Op]
         public static Cil init()
         {
-            var buffer = sys.alloc<CilOpCodeRow>(300);
+            var buffer = sys.alloc<CilOpCodeInfo>(300);
             ref var dst = ref first(span(buffer));
-            load(ref dst);
+            CilOpCodes.load(ref dst);
             return new Cil(buffer);
         }
 
         [MethodImpl(Inline)]
-        Cil(CilOpCodeRow[] src)
-        {
-            Data = src;
-        }
+        Cil(CilOpCodeInfo[] src)
+            => Data = src;
     }
 }

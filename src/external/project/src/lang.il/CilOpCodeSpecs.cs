@@ -38,9 +38,8 @@ namespace Z0
 
         public const int EndsUncondJmpBlkFlag = 0x01000000;   // 0000000X000000000000000000000000
 
-        // unused                                               // 0000XXX0000000000000000000000000
-
         public const int StackChangeShift = 28;               // XXXX0000000000000000000000000000
+
         const int NopFlags =
             ((int)CilOperandType.InlineNone) |
             ((int)CilFlowControl.Next << FlowControlShift) |

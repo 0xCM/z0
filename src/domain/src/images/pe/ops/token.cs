@@ -14,14 +14,14 @@ namespace Z0
 
     partial class PeTableReader
     {
-        public static CliHandleToken? token(in ReaderState state, Handle handle)
+        public static CliTableIndex? index(in ReaderState state, Handle handle)
         {
             if(!handle.IsNil)
             {
                 var table = index(handle);
                 var token = state.Reader.GetToken(handle);
                 if (table != null)
-                    return new CliHandleToken(handle, token, table.Value);
+                    return new CliTableIndex(token, table.Value);
             }
 
             return null;

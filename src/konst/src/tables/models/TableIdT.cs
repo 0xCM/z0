@@ -17,7 +17,7 @@ namespace Z0
 
         public static Type TableType => typeof(T);
 
-        public ClrArtifactKey RecordType => TableType;
+        public CliArtifactKey RecordType => TableType;
 
         public StringRef Identifier => TableType.Name;
 

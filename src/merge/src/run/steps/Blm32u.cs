@@ -27,12 +27,9 @@ namespace Z0
         {
             Methods = typeof(Blm32u).DeclaredStaticMethods();
             Address = typeof(Blm32u).TypeHandle.Value.ToPointer();
-            MethodAddressData = Methods.Select(MemberAddress.from);
+            MethodAddressData = Methods.Select(Addresses.member);
             Array.Sort(MethodAddressData);
         }
-
-        public static ReadOnlySpan<MemberAddress> Addresses
-            => MethodAddressData;
 
         [MethodImpl(Inline)]
         public MemoryAddress TypeAddress()

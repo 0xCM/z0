@@ -12,14 +12,14 @@ namespace Z0
     public readonly struct DataRef<T>
         where T : struct
     {
-        public ClrArtifactKey Target {get;}
+        public CliArtifactKey Target {get;}
 
         [MethodImpl(Inline)]
-        public DataRef(ClrArtifactKey dst)
+        public DataRef(CliArtifactKey dst)
             => Target = dst;
 
         [MethodImpl(Inline)]
-        public static implicit operator DataRef<T>(ClrArtifactKey dst)
+        public static implicit operator DataRef<T>(CliArtifactKey dst)
             => new DataRef<T>(dst);
     }
 }

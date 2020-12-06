@@ -16,7 +16,7 @@ namespace Z0
     /// </summary>
     public struct CilFunction
     {
-        public ClrArtifactKey Key;
+        public CliArtifactKey Key;
 
         public OpIdentity Identifier;
 
@@ -36,7 +36,7 @@ namespace Z0
         public string Formatted;
 
         [MethodImpl(Inline)]
-        public CilFunction(ClrArtifactKey id, string name, MethodImplAttributes attribs, Instruction[] instructions)
+        public CilFunction(CliArtifactKey id, string name, MethodImplAttributes attribs, Instruction[] instructions)
         {
             Key = id;
             Identifier = default;

@@ -25,7 +25,7 @@ namespace Z0
         /// </summary>
         public ushort FieldIndex;
 
-        public ClrArtifactKey FieldKey;
+        public CliArtifactKey FieldKey;
 
         public Type DataType;
 

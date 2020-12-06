@@ -7,7 +7,7 @@ namespace Z0
     using Free =System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface IInterpreter : IWfShellService
+    public interface IInterpreter : IWfService
     {
         Outcome Start();
 
@@ -15,7 +15,7 @@ namespace Z0
     }
 
     [Free]
-    public interface IInterpreter<H> : IInterpreter, IWfShellService<H>
+    public interface IInterpreter<H> : IInterpreter, IWfService<H>
         where H : Interpreter<H>, new()
     {
 

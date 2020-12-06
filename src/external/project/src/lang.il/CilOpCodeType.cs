@@ -22,5 +22,4 @@ namespace Z0
 
         Primitive = 5,
     }
-
 }

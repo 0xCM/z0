@@ -29,7 +29,7 @@ namespace Z0
             get => Definition.Assembly;
         }
 
-        public ClrArtifactKey Token
+        public CliArtifactKey Token
         {
             [MethodImpl(Inline)]
             get => Definition.MetadataToken;

@@ -77,7 +77,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static ApiMetadataUri host(PartId part, ClrArtifactKey host, ApiPartKindId kind, ClrArtifactKey method)
+        public static ApiMetadataUri host(PartId part, CliArtifactKey host, ApiPartKindId kind, CliArtifactKey method)
             => new ApiMetadataUri(vparts(w128, (uint)part, (uint)host, (uint)kind, (uint)method));
 
         [MethodImpl(Inline), Op]

@@ -46,5 +46,4 @@ namespace Z0
 
         ShortInlineVar = 18,
     }
-
 }

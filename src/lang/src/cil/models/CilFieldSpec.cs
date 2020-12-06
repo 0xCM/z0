@@ -34,10 +34,10 @@ namespace Z0
         /// <summary>
         /// The 0-based offset address of the field in the context of a type with explicit layout; otherwise ignored
         /// </summary>
-        public readonly Address16 Offset;
+        public readonly ushort Offset;
 
         [MethodImpl(Inline)]
-        public CilFieldSpec(ClrMemberName name, ClrTypeName type, ushort pos, Address16 offset = default)
+        public CilFieldSpec(ClrMemberName name, ClrTypeName type, ushort pos, ushort offset = default)
         {
             TypeName = type;
             FieldName = name;

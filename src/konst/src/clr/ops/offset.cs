@@ -14,7 +14,7 @@ namespace Z0
     partial struct ClrQuery
     {
         [MethodImpl(Inline), Op]
-        public static Address16 offset(Type host, FieldInfo field)
+        public static ushort offset(Type host, FieldInfo field)
             => (ushort)Marshal.OffsetOf(host, field.Name);
     }
 }

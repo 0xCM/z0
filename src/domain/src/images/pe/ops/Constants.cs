@@ -20,9 +20,9 @@ namespace Z0
             {
                 var k = ConstantHandle(i);
                 var entry = reader.GetConstant(k);
-                var parent = token(State, entry.Parent);
+                var parent = index(State, entry.Parent);
                 var blob = reader.GetBlobBytes(entry.Value);
-                seek(dst, i - 1u) = new CliConstant(i, parent ?? CliHandleToken.Empty, entry.TypeCode, blob);
+                seek(dst, i - 1u) = new CliConstant(i, parent ?? CliTableIndex.Empty, entry.TypeCode, blob);
             }
             return dst;
         }
