@@ -22,3 +22,8 @@ set ScriptCmd=%ZCmd%\archive-build.cmd
 echo on
 call %ScriptCmd%
 echo on
+
+set ScriptCmd=%ZCmd%\archive-source.cmd
+echo on
+call %ScriptCmd%
+echo on

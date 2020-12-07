@@ -33,6 +33,6 @@ namespace Z0
     partial class XTend
     {
         public static DelimitedIndex<T> Delimited<T>(this IIndex<T> src, char delimiter = Chars.Comma)
-            => z.delimit(src.Storage, delimiter);
+            => Seq.delimited(src.Storage, delimiter);
     }
 }

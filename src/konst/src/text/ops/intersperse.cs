@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     partial class text
@@ -21,7 +21,7 @@ namespace Z0
         public static string intersperse(string src, char c)
         {
             var dst = build();
-            
+
             var input = span(src);
             var count = input.Length;
             for(var i=0u; i< count; i++)
@@ -32,7 +32,7 @@ namespace Z0
 
             return dst.ToString();
         }
-        
+
         /// <summary>
         /// Creates a new string by weaving a substring between each character in the source
         /// </summary>
@@ -49,7 +49,7 @@ namespace Z0
             }
             return dst.ToString();
         }
-            
+
         /// <summary>
         /// Intersperses the source strings with a delimiter followed by a space, i.e.,
         /// result := "{s1}{delimiter} {s2}{delimiter} ... {sn}{delimiter}"
@@ -62,7 +62,7 @@ namespace Z0
             var count = fields.Length;
             for(byte i=0; i<count; i++)
             {
-                dst.Append(z.skip(fields, i));
+                dst.Append(skip(fields, i));
                 if(i != count - 1)
                 {
                     dst.Append(delimiter);

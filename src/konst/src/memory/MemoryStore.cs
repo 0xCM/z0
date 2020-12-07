@@ -9,12 +9,12 @@ namespace Z0
 
     using static Konst;
 
-    [ApiHost(ApiNames.MemStore, true)]
-    public readonly struct MemStore
+    [ApiHost(ApiNames.MemoryStore, true)]
+    public readonly struct MemoryStore
     {
         const NumericKind Closure = UnsignedInts;
 
-        public static MemStore Service => default;
+        public static MemoryStore Service => default;
 
         [MethodImpl(Inline), Op]
         public ReadOnlySpan<byte> load(in MemorySegment src)

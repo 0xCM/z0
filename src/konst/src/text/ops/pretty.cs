@@ -5,23 +5,12 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     partial class text
     {
-        /// <summary>
-        /// Determines whether the source text is of the form "[{content}]"
-        /// </summary>
-        /// <param name="src">The source text</param>
-        [Op]
-        public static bool bracketed(string src)
-            => fenced(src, Chars.LBracket, Chars.RBracket);
-
         /// <summary>
         /// Encloses text between single quote (') characters
         /// </summary>
@@ -45,7 +34,7 @@ namespace Z0
         /// <param name="content">The content to be embraced</param>
         [MethodImpl(Inline), Op]
         public static string embrace(string content)
-            => $"{LBrace}{content}{RBrace}";
+            => $"{Chars.LBrace}{content}{Chars.RBrace}";
 
         /// <summary>
         /// Encloses text in quotation marks if nonempty; otherwise returns empty
@@ -95,6 +84,6 @@ namespace Z0
         /// <param name="content">The labeled content</param>
         [MethodImpl(Inline), Op]
         public static string label(object name, object content)
-            => concat(name, Colon, Space, content);
+            => concat(name, Chars.Colon, Space, content);
     }
 }

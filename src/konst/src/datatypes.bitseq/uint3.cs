@@ -10,7 +10,6 @@ namespace Z0
     using static Konst;
     using static BitSeq;
 
-    using api = BitSeq;
     using U = uint3;
     using K = BitSeq3;
     using W = W3;

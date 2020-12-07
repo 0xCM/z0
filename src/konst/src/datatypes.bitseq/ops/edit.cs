@@ -68,16 +68,6 @@ namespace Z0
                 => ref @as<S,uint8T>(src);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref S edit<S>(in uint1 src)
-            where S : unmanaged
-                => ref @as<uint1,S>(src);
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref S edit<S>(in uint2 src)
-            where S : unmanaged
-                => ref @as<uint2,S>(src);
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref S edit<S>(in uint3 src)
             where S : unmanaged
                 => ref @as<uint3,S>(src);

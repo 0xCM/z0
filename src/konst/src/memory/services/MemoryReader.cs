@@ -10,14 +10,16 @@ namespace Z0
     using static Konst;
     using static z;
 
-    [ApiHost(ApiNames.MemReader, true)]
+    [ApiHost(ApiNames.MemoryReader, true)]
     public unsafe struct MemoryReader
     {
+        const NumericKind Closure = UnsignedInts;
+
         readonly byte* Source;
 
-        MemReaderState State;
+        MemoryReaderState State;
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static MemoryReader<T> create<T>(T* pSrc, int length)
             where T : unmanaged
                 => new MemoryReader<T>(pSrc, length);
@@ -26,7 +28,7 @@ namespace Z0
         public static MemoryReader create(byte* pSrc, int length)
             => new MemoryReader(pSrc, length);
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static MemoryReader<T> create<T>(in MemorySegment src)
             where T : unmanaged
                 => create(src.Address.Pointer<T>(), (int)src.DataSize);
@@ -34,7 +36,7 @@ namespace Z0
         [MethodImpl(Inline)]
         internal MemoryReader(byte* pSrc, int length)
         {
-            State = new MemReaderState(length,0);
+            State = new MemoryReaderState(length,0);
             Source = pSrc;
         }
 

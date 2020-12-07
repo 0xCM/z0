@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    public struct IntegralLoop<I>
+    public struct Loop<I>
         where I : unmanaged
     {
         public I LowerBound;

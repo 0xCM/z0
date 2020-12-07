@@ -8,10 +8,10 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static z;
+    using static memory;
 
-    [ApiHost(ApiNames.Seq)]
-    public static class Seq
+    [ApiHost]
+    public static class Sequence
     {
         const NumericKind Closure = UnsignedInts;
 
@@ -23,6 +23,22 @@ namespace Z0
         public static Seq<T> create<T>(params T[] src)
             => create<T>(@readonly(src));
 
+        /// <summary>
+        /// Renders the term by default as 'a_i = Value' where i denotes the term index
+        /// </summary>
+        /// <param name="name">The sequence identifier, if specified</param>
+        [Op, Closures(Closure)]
+        public static string format<T>(in SeqTerm<T> src, char? name = null)
+            => src.IsEmpty ? "{}" : $"{name ?? 'a'}_{src.Index} = {src.Value}";
+
+        /// <summary>
+        /// Renders the term by default as 'a_i = Value' where i denotes the term index
+        /// </summary>
+        /// <param name="name">The sequence identifier, if specified</param>
+        public static string format<I,T>(in SeqTerm<I,T> src, char? name = null)
+            where I : unmanaged
+                => src.IsEmpty ? "{}" : $"{name ?? 'a'}_{src.Index} = {src.Value}";
+
         [Op, Closures(Closure)]
         public static void format<T>(in Seq<T> src, char delimiter, ITextBuffer dst)
         {
@@ -32,7 +48,7 @@ namespace Z0
             for(var i=0; i<count; i++)
             {
                 ref readonly var term = ref skip(terms,i);
-                dst.Append(term.Format());
+                dst.Append(format(term));
                 if(i != count - 1)
                 {
                     dst.Append(delimiter);
@@ -58,7 +74,7 @@ namespace Z0
                 return empty<T>();
         }
 
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Seq<T> create<T>(params SeqTerm<T>[] src)
             => new Seq<T>(src);
     }

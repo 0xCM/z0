@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Dsl
 {
     using System;
     using System.Runtime.CompilerServices;
@@ -10,16 +10,15 @@ namespace Z0
     using static Konst;
     using static z;
 
-    [ApiHost(ApiNames.AlG)]
-    public readonly struct AlG
+    public readonly struct Expressions
     {
         const NumericKind Closure = UnsignedInts;
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static IntegralLoop<I> loop<I>(Interval<I> bounds)
+        public static Loop<I> loop<I>(Interval<I> bounds)
             where I : unmanaged
        {
-            var dst = new IntegralLoop<I>();
+            var dst = new Loop<I>();
             dst.LowerBound = bounds.Left;
             dst.UpperBound = bounds.Right;
             dst.LowerInclusive = bounds.LeftClosed;
@@ -27,29 +26,15 @@ namespace Z0
             return dst;
        }
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static LoopAction<I> join<I>(IntegralLoop<I> loop, IIntegralLoop<I> action)
-            where I : unmanaged
-       {
-           var dst = new LoopAction<I>();
-           dst.Loop = loop;
-           dst.Action = action;
-           return dst;
-       }
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static LoopHost<Accrue<I>,I> accrue<I>(IntegralLoop<I> loop, Accrue<I> h = default)
-            where I : unmanaged
-                => host(loop, h);
-
         [MethodImpl(Inline)]
         public static LoopHost<H,I> loop<H,I>(Interval<I> bounds, H h = default)
             where I : unmanaged
             where H : struct, ILoopHost<H,I>
                 => host(loop(bounds),h);
 
+
         [MethodImpl(Inline)]
-        public static LoopHost<H,I> host<H,I>(in IntegralLoop<I> loop, in  H host)
+        public static LoopHost<H,I> host<H,I>(in Loop<I> loop, in  H host)
             where I : unmanaged
             where H : struct, ILoopHost<H,I>
         {

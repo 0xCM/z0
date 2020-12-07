@@ -2,21 +2,23 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Dsl
 {
     using System;
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static z;
 
-    partial struct BitSeq
+    public readonly struct Keyword<T>
     {
-        [MethodImpl(Inline), Op]
-        public static ulong u64(ReadOnlySpan<byte> src, int offset = 0)
-            => z.cell<ulong>(src, offset);
+        public string Name {get;}
 
-        [MethodImpl(Inline), Op]
-        public static ulong u64(double src)
-            => (ulong)BitConverter.DoubleToInt64Bits(src);
+        [MethodImpl(Inline)]
+        public Keyword(string src)
+            => Name = src;
+
+        public static implicit operator Keyword<T>(string name)
+            => new Keyword<T>(name);
     }
 }

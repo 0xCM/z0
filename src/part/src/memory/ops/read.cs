@@ -33,7 +33,7 @@ namespace Z0
             => ref @as<byte,T>(first(src));
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref T read2<T>(Span<byte> src)
+        public static ref T read<T>(Span<byte> src)
             => ref @as<byte,T>(first(src));
 
         /// <summary>

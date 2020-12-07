@@ -10,8 +10,8 @@ namespace Z0
     using static Konst;
     using static z;
 
-    [ApiHost(ApiNames.MemView, true)]
-    public readonly struct MemView
+    [ApiHost(ApiNames.MemoryView, true)]
+    public readonly struct MemoryView
     {
         const NumericKind Closure = UnsignedInts;
 

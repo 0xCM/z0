@@ -17,7 +17,7 @@ namespace Z0
         const NumericKind Closure = UInt64k;
 
         public static string format<T>(T[] src)
-            => z.delimit(src).Format();
+            => delimited(src).Format();
 
         /// <summary>
         /// Tests the source index for non-emptiness
@@ -79,7 +79,6 @@ namespace Z0
         public static DataIndex<T> dataindex<T>(T[] src)
             where T : struct
                 => new DataIndex<T>(src);
-
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static IndexedSeq<T> singletons<T>(params IEnumerable<T>[] src)

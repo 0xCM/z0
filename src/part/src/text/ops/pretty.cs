@@ -5,12 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Text;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static Chars;
 
     partial struct text
     {
@@ -45,7 +42,7 @@ namespace Z0
         public static string spaces(int count = 3)
             => new string(Chars.Space, count);
 
-        [MethodImpl(Options), Op, Closures(UnsignedInts)]
+        [MethodImpl(Options), Op, Closures(Closure)]
         public static string rpad<T>(T src, int width, char c = Space)
             => src is null ? EmptyString :  src.ToString().PadRight(width, c);
 

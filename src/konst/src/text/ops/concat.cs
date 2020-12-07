@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
     using static Konst;
@@ -27,7 +26,7 @@ namespace Z0
         /// <param name="src">The text to join</param>
         /// <param name="widths">The corresponding widths</param>
         /// <param name="delimiter">The delimiter to use</param>
-        [MethodImpl(Options), Op]
+        [Op]
         public static string concat(ReadOnlySpan<string> src, ReadOnlySpan<byte> widths, char delimiter = FieldDelimiter)
         {
             var dst = text.build();

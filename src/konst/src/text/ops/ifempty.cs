@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     partial class text
     {
@@ -19,6 +18,6 @@ namespace Z0
         /// <param name="replace">The replacement value if blank</param>
         [MethodImpl(Inline), Op]
         public static string ifempty(string src, string replace)
-            => empty(src) ? replace ?? EmptyString : src;
+            => TextTest.empty(src) ? replace ?? EmptyString : src;
     }
 }

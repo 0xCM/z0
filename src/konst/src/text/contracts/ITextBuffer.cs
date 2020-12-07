@@ -69,7 +69,7 @@ namespace Z0
         }
 
         void AppendDelimited<T>(T[] src, char c = FieldDelimiter)
-            => Append(delimit(src, c).Format());
+            => Append(Seq.delimited(src, c).Format());
 
         void AppendFormatted(string pattern, params object[] args)
             => Append(string.Format(pattern, args));

@@ -41,6 +41,7 @@ namespace Z0
             {
                 term.error(e);
             }
+
             return z.none<TextDocHeader>();
         }
     }

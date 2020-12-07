@@ -18,6 +18,10 @@ namespace Z0
         public static U maxval(W w)
             => maxval<U>();
 
+        [MethodImpl(Inline), Op]
+        public static uint6 dec(uint6 x)
+            => !x.IsMin ? new uint6(Bytes.sub(x.data, 1), false) : Z0.uint6.Max;
+
         /// <summary>
         /// Converts a source integral value to an enum value
         /// </summary>

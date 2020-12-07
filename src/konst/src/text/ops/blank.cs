@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     partial class text
     {
@@ -18,6 +17,6 @@ namespace Z0
         /// <param name="src">The string to evaluate</param>
         [MethodImpl(Inline), Op]
         public static bool blank(string src)
-            => string.IsNullOrWhiteSpace(src);
+            => TextTest.blank(src);
     }
 }

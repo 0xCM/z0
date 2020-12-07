@@ -8,15 +8,14 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static z;
 
-    partial struct BitSeq
+   public struct LoopHost<H,I>
+        where I : unmanaged
+        where H : struct
     {
-        [MethodImpl(Inline), Op]
-        public static uint u32(ReadOnlySpan<byte> src, int offset = 0)
-            => z.cell<uint>(src,offset);
+        public H Host;
 
-        [MethodImpl(Inline), Op]
-        public static uint u32(float src)
-            => (uint)BitConverter.SingleToInt32Bits(src);
+        public Loop<I> Loop;
     }
 }

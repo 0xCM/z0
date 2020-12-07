@@ -31,6 +31,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static string segment(string src, uint i0, uint i1)
             => segment(src,(int)i0, (int)i1);
-
     }
 }

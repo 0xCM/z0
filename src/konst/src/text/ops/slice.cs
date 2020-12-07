@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     partial class text
     {
@@ -50,6 +49,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static string slice(string src, uint offset, uint length)
             => src.Substring((int)offset, (int)length);
-
     }
 }

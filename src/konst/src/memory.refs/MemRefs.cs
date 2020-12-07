@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    [ApiHost(ApiNames.MemRefs, true)]
+    [ApiHost(ApiNames.MemoryRefs, true)]
     public readonly partial struct MemRefs
     {
         const NumericKind Closure = UnsignedInts;
@@ -30,7 +30,7 @@ namespace Z0
             {
                 ref readonly var source = ref skip(sources,i);
                 var length = source.DataSize;
-                var data = MemStore.Service.load(source);
+                var data = MemoryStore.Service.load(source);
 
                 if(data.Length == length)
                 {

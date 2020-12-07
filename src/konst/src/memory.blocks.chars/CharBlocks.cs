@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     [ApiHost(ApiNames.CharBlocks)]
     public readonly partial struct CharBlocks

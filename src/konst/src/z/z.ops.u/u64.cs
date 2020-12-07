@@ -18,5 +18,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref ulong u64<T>(in T src)
             => ref memory.u64(src);
+
+        [MethodImpl(Inline), Op]
+        public static ulong u64(ReadOnlySpan<byte> src, int offset = 0)
+            => cell<ulong>(src, offset);
     }
 }

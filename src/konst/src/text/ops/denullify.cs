@@ -19,6 +19,6 @@ namespace Z0
         /// <param name="replace">The replacement value if blank</param>
         [MethodImpl(Inline), Op]
         public static string denullify(string src)
-            => src == null ? EmptyString : src;
+            => src ?? EmptyString;
     }
 }

@@ -8,8 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     using api = CharBlocks;
 
@@ -37,10 +37,6 @@ namespace Z0
             [MethodImpl(Inline)]
            get => cover<CharBlock512,char>(this, CharCount);
         }
-
-        [MethodImpl(Inline)]
-        public static implicit operator Pair<CharBlock256>(CharBlock512 src)
-            => pair(src.Lo, src.Hi);
 
         [MethodImpl(Inline)]
         public static implicit operator CharBlock512(string src)

@@ -79,7 +79,7 @@ namespace Z0
                 var result = processor.Process();
                 var records = 0u;
 
-                wf.Processed(delimit(nameof(AsmRow), encoded.Hosts.Length, result.Count));
+                wf.Processed(Seq.delimited(nameof(AsmRow), encoded.Hosts.Length, result.Count));
 
                 var sets = result.View;
                 var count = result.Count;

@@ -62,42 +62,102 @@ namespace Z0
         public static ref readonly T skip<T>(in T src, long count)
             => ref Add(ref edit(in src), (int)count);
 
+        /// <summary>
+        /// Skips a specified number of <typeparamref name='T'/> cells and returns a readonly reference to the next cell
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <param name="count">The number of cells to skip</param>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref readonly T skip<T>(ReadOnlySpan<T> src, byte count)
             => ref skip(in first(src), count);
 
+        /// <summary>
+        /// Skips a specified number of <typeparamref name='T'/> cells and returns a readonly reference to the next cell
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <param name="count">The number of cells to skip</param>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref readonly T skip<T>(ReadOnlySpan<T> src, ushort count)
             => ref skip(in first(src), count);
 
+        /// <summary>
+        /// Skips a specified number of <typeparamref name='T'/> cells and returns a readonly reference to the next cell
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <param name="count">The number of cells to skip</param>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref readonly T skip<T>(ReadOnlySpan<T> src, uint count)
             => ref skip(in first(src), count);
 
+        /// <summary>
+        /// Skips a specified number of <typeparamref name='T'/> cells and returns a readonly reference to the next cell
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <param name="count">The number of cells to skip</param>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref readonly T skip<T>(ReadOnlySpan<T> src, ulong count)
             => ref skip(in first(src), count);
 
+        /// <summary>
+        /// Skips a specified number of <typeparamref name='T'/> cells and returns a readonly reference to the next cell
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <param name="count">The number of cells to skip</param>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
         public static ref readonly T skip<T>(ReadOnlySpan<T> src, long count)
             => ref skip(in first(src), count);
 
+        /// <summary>
+        /// Skips a specified number of <typeparamref name='T'/> cells and returns a readonly reference to the next cell
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <param name="count">The number of cells to skip</param>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref readonly T skip<T>(Span<T> src, byte count)
             => ref skip(in first(src), count);
 
+        /// <summary>
+        /// Skips a specified number of <typeparamref name='T'/> cells and returns a readonly reference to the next cell
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <param name="count">The number of cells to skip</param>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref readonly T skip<T>(Span<T> src, ushort count)
             => ref skip(in first(src), count);
 
+        /// <summary>
+        /// Skips a specified number of <typeparamref name='T'/> cells and returns a readonly reference to the next cell
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <param name="count">The number of cells to skip</param>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref readonly T skip<T>(Span<T> src, uint count)
             => ref skip(in first(src), count);
 
+        /// <summary>
+        /// Skips a specified number of <typeparamref name='T'/> cells and returns a readonly reference to the next cell
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <param name="count">The number of cells to skip</param>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref readonly T skip<T>(Span<T> src, ulong count)
             => ref skip(in first(src), count);
 
+        /// <summary>
+        /// Skips a specified number of <typeparamref name='T'/> cells and returns a readonly reference to the next cell
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <param name="count">The number of cells to skip</param>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
         public static ref readonly T skip<T>(Span<T> src, long count)
             => ref skip(in first(src), count);
@@ -151,6 +211,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref readonly T skip<T>(T[] src, ulong count)
             => ref seek(src, count);
-
     }
 }

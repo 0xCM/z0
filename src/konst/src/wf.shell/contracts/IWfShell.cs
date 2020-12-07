@@ -357,7 +357,7 @@ namespace Z0
             => processed(Host, content, Ct);
 
         void Processed<T>(ApiHostUri uri, T content)
-            => processed(Host, delimit(uri,content), Ct);
+            => processed(Host, Seq.delimited(uri,content), Ct);
 
         void Processed<S,T>(S src, T dst)
             => processed(Host, (src, dst), Ct);

@@ -8,16 +8,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static z;
 
     partial class text
     {
-        /// <summary>
-        /// Tests whether the source string is either null or of zero length
-        /// </summary>
-        /// <param name="src">The string to test</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static bool empty(string src)
-            => string.IsNullOrEmpty(src);
+            => TextTest.empty(src);
     }
 }

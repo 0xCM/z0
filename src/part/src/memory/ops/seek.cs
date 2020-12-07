@@ -25,6 +25,12 @@ namespace Z0
         public static ref T seek<S,T>(in S src, uint count)
             => ref Add(ref As<S,T>(ref edit(src)), (int)count);
 
+        /// <summary>
+        /// Returns a reference to a T-measured count-identified cell
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <param name="count">The T-measured count count</param>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T seek<T>(Span<byte> src, uint count)
             => ref seek<byte,T>(skip(src,count*size<T>()), 1);
@@ -173,22 +179,52 @@ namespace Z0
         public static ref T seek<T>(in T src, int count)
             => ref Add(ref edit(src), count);
 
+        /// <summary>
+        /// Returns a reference to a T-measured count-identified cell
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <param name="count">The T-measured count count</param>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T seek<T>(T[] src, byte count)
             => ref seek(src, (ulong)count);
 
+        /// <summary>
+        /// Returns a reference to a T-measured count-identified cell
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <param name="count">The T-measured count count</param>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T seek<T>(T[] src, ushort count)
             => ref seek(src, (ulong)count);
 
+        /// <summary>
+        /// Returns a reference to a T-measured count-identified cell
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <param name="count">The T-measured count count</param>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T seek<T>(T[] src, int count)
             => ref seek(src, (ulong)count);
 
+        /// <summary>
+        /// Returns a reference to a T-measured count-identified cell
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <param name="count">The T-measured count count</param>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T seek<T>(T[] src, uint count)
             => ref seek(src, (ulong)count);
 
+        /// <summary>
+        /// Returns a reference to a T-measured count-identified cell
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <param name="count">The T-measured count count</param>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T seek<T>(T[] src, long count)
             => ref seek(src, (ulong)count);

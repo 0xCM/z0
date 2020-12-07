@@ -170,11 +170,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static unsafe void bitchars(float src, Span<char> dst, int offset)
-            => bitchars(BitSeq.u32(src), dst, offset);
+            => bitchars(NumericCast.force<uint>(src), dst, offset);
 
         [MethodImpl(Inline)]
         static unsafe void bitchars(double src, Span<char> dst, int offset)
-            => bitchars(BitSeq.u64(src), dst, offset);
+            => bitchars(NumericCast.force<ulong>(src), dst, offset);
 
         [MethodImpl(Inline)]
         static unsafe void bitseq(byte src, Span<byte> dst, int offset)
@@ -222,11 +222,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static unsafe void bitseq(float src, Span<byte> dst, int offset)
-            => bitseq(BitSeq.u32(src), dst, offset);
+            => bitseq(NumericCast.force<uint>(src), dst, offset);
 
         [MethodImpl(Inline)]
         static unsafe void bitseq(double src, Span<byte> dst, int offset)
-            => bitseq(BitSeq.u64(src), dst, offset);
+            => bitseq(NumericCast.force<ulong>(src), dst, offset);
 
         [MethodImpl(Inline)]
         static void bitseq_i<T>(T src, Span<byte> dst, int offset)

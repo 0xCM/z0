@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static System.Runtime.CompilerServices.Unsafe;
     using static System.Runtime.InteropServices.MemoryMarshal;
 
     partial struct memory
@@ -29,7 +28,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static unsafe ref T first<T>(T[] src)
-            => ref seek<T>(src,0);
+            => ref seek<T>(src, 0);
 
         /// <summary>
         /// Returns a reference to the head of a readonly span

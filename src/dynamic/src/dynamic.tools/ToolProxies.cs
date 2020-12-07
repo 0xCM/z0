@@ -15,7 +15,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    using Z0.Lang.Cs;
+    using Z0.Lang;
 
     public readonly struct ToolProxies
     {

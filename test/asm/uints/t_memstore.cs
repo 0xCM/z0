@@ -47,7 +47,7 @@ namespace Z0
             var count = reader.ReadAll(dstA);
             Claim.eq(count,src.DataSize);
 
-            var dstB = MemStore.Service.load(src);
+            var dstB = MemoryStore.Service.load(src);
             Claim.eq(count, dstB.Length);
 
             for(var i=0u; i<count; i++)
@@ -91,7 +91,7 @@ namespace Z0
             for(var i=0; i<refs.Length; i++)
             {
                 var r = refs[i];
-                var data = MemView.view(r.Address, r.DataSize);
+                var data = MemoryView.view(r.Address, r.DataSize);
                 dst.WriteLine(data.FormatHexBytes(Chars.Space));
 
             }

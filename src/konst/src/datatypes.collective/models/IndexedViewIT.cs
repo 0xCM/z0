@@ -60,16 +60,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public bool Equals(IndexedView<I,T> rhs)
             => Data?.Equals(rhs.Data) ?? false;
-       public string Format()
-            => z.delimit(Storage).Format();
-
-        [MethodImpl(Inline)]
-        public static implicit operator IndexedView<I,T>(T[] src)
-            => new IndexedView<I,T>(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator T[](IndexedView<I,T> src)
-            => src.Data;
+        public string Format()
+            => Seq.delimited(Storage).Format();
 
         /// <summary>
         /// Creates an indexed sequence from a parameter array
@@ -91,5 +83,13 @@ namespace Z0
 
         public IndexedView<I,T> Where(Func<T,bool> predicate)
             => view(from x in Data where predicate(x) select x);
+
+        [MethodImpl(Inline)]
+        public static implicit operator IndexedView<I,T>(T[] src)
+            => new IndexedView<I,T>(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator T[](IndexedView<I,T> src)
+            => src.Data;
     }
 }

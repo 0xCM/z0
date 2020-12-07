@@ -215,17 +215,15 @@ public readonly struct ApiNames
     // ~~ Memory
     // ~~ -----------------------------------------------------------------------------------------
 
-    public const string MemStore = memory + dot + store;
+    public const string MemoryStore = memory + dot + store;
 
-    public const string MemReader = memory + dot + reader;
+    public const string MemoryReader = memory + dot + reader;
 
-    public const string MemRefs = memory + dot + refs;
+    public const string MemoryRefs = memory + dot + refs;
 
-    public const string MemView = memory + dot + view;
+    public const string MemoryView = memory + dot + view;
 
     public const string Pointers = datatypes + dot + pointers;
-
-    public const string StringRefs = memory + dot + refs + dot + strings;
 
     // ~~ Primal
     // ~~ -----------------------------------------------------------------------------------------
@@ -507,7 +505,7 @@ public readonly struct ApiNames
 
     public const string CsBuilder = lang + dot + cs + dot + builder;
 
-    public const string CsPrototypes = lang + dot + cs + dot + "prototypes";
+    public const string LangPrototypes = lang + dot + "prototypes";
 
     public const string Cil = cil + dot + api;
 

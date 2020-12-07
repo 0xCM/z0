@@ -19,6 +19,20 @@ namespace Z0
         public static U maxval(W1 w)
             => U.Max;
 
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref S edit<S>(in U src)
+            where S : unmanaged
+                => ref @as<U,S>(src);
+
+        /// <summary>
+        /// (a,b) -> [ab]
+        /// </summary>
+        /// <param name="a">Source bit 0</param>
+        /// <param name="b">Source bit 1</param>
+        [MethodImpl(Inline), Op]
+        public static uint3 join(U a, U b, U c)
+            => (uint3)a | ((uint3)b << 1) | ((uint3)c << 2);
+
         /// <summary>
         /// Reduces the source value to a width-identified integer via modular arithmetic
         /// </summary>

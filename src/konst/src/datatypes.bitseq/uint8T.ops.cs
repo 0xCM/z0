@@ -14,6 +14,10 @@ namespace Z0
 
     partial struct BitSeq
     {
+        [MethodImpl(Inline), Op]
+        public static U maxval(W8 w)
+            => maxval<U>();
+
         /// <summary>
         /// Reduces the source value to a width-identified integer via modular arithmetic
         /// </summary>

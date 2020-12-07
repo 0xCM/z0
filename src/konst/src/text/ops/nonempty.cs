@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static z;
 
     partial class text
     {
@@ -18,6 +17,6 @@ namespace Z0
         /// <param name="src">The string to evaluate</param>
         [MethodImpl(Inline), Op]
         public static bool nonempty(string src)
-            => !string.IsNullOrEmpty(src);
+            => TextTest.nonempty(src);
     }
 }

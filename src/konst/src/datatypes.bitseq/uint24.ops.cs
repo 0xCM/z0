@@ -14,6 +14,10 @@ namespace Z0
 
     partial struct BitSeq
     {
+        [MethodImpl(Inline), Op]
+        public static U maxval(W24 w)
+            => maxval<U>();
+
         /// <summary>
         /// Creates a 24-bit unsigned integer, equal to zero or one, according to whether the source is respectively false or true
         /// </summary>

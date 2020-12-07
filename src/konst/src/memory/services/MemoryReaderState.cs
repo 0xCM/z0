@@ -9,14 +9,14 @@ namespace Z0
 
     using static Konst;
 
-    unsafe struct MemReaderState
+    unsafe struct MemoryReaderState
     {
         public readonly int Length;
 
         public int Position;
 
         [MethodImpl(Inline)]
-        internal MemReaderState(int length, int position)
+        internal MemoryReaderState(int length, int position)
         {
             Length = length;
             Position = position;

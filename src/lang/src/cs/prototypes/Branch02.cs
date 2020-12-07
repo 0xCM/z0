@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Lang.Cs
+namespace Z0.Lang
 {
 
     using static Prototypes.Branch02;

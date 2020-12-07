@@ -375,18 +375,7 @@ namespace Z0
                 Wf.Warn("No catalogs");
 
             foreach(var c in catalogs.Terms)
-            {
-                Wf.Row(delimit(c.PartId, c.ApiHosts.Count));
-            }
-
-            // //Wf.Rows(Blm32u.Addresses);
-
-            // var counts = FixedBuffer256<byte>.fetch();
-            // var dst = list<byte>();
-            // counts.Enumerate(c => dst.Add(c));
-            // Wf.Status(counts.BufferAddress);
-            // Wf.Status(delimit(dst));
-
+                Wf.Row(Seq.delimited(c.PartId, c.ApiHosts.Count));
         }
     }
 }

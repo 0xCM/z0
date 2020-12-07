@@ -2,9 +2,15 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Lang.Cs
+namespace Z0.Dsl
 {
-    public readonly partial struct DataModel
+    using System;
+    using System.Runtime.CompilerServices;
+
+    using static Konst;
+    using static z;
+
+    public readonly struct Functions
     {
 
     }

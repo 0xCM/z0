@@ -163,7 +163,7 @@ namespace Z0
         {
             var archive = RuntimeArchive.create();
             var src = archive.ManagedLibraries.Select(x => Assembly.LoadFrom(x.Name));
-            var rows = map(src, f => delimit(f.GetSimpleName(), delimit(DebugFlags(f))));
+            var rows = map(src, f => Seq.delimited(f.GetSimpleName(), delimit(DebugFlags(f))));
             Wf.Rows(rows);
         }
 

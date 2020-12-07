@@ -7,7 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
+
+    using api = Sequence;
 
     /// <summary>
     /// Defines a sequence term
@@ -18,26 +20,12 @@ namespace Z0
         /// <summary>
         /// The sequence index
         /// </summary>
-        public readonly I Index;
+        public I Index {get;}
 
         /// <summary>
         /// The term value
         /// </summary>
-        public readonly T Value;
-
-        public static SeqTerm<I,T> Empty => default;
-
-        [MethodImpl(Inline)]
-        public static implicit operator (I i, T t)(SeqTerm<I,T> src)
-            => (src.Index, src.Value);
-
-        [MethodImpl(Inline)]
-        public static implicit operator T(SeqTerm<I,T> src)
-            => src.Value;
-
-        [MethodImpl(Inline)]
-        public static implicit operator SeqTerm<I,T>((I i, T t) src)
-            => new SeqTerm<I,T>(src.i, src.t);
+        public T Value {get;}
 
         [MethodImpl(Inline)]
         public SeqTerm(I index, T value)
@@ -56,7 +44,21 @@ namespace Z0
         /// Renders the term by default as 'a_i = Value' where i denotes the term index
         /// </summary>
         /// <param name="id">The sequence identifier, if specified</param>
-        public string Format(char? id = null)
-            => IsEmpty ? "{}" : $"{id ?? 'a'}_{Index} = {Value}";
+        public string Format(char? name = null)
+            => api.format(this, name);
+
+        public static SeqTerm<I,T> Empty => default;
+
+        [MethodImpl(Inline)]
+        public static implicit operator (I i, T t)(SeqTerm<I,T> src)
+            => (src.Index, src.Value);
+
+        [MethodImpl(Inline)]
+        public static implicit operator T(SeqTerm<I,T> src)
+            => src.Value;
+
+        [MethodImpl(Inline)]
+        public static implicit operator SeqTerm<I,T>((I i, T t) src)
+            => new SeqTerm<I,T>(src.i, src.t);
     }
 }

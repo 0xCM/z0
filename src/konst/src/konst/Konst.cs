@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
@@ -86,16 +85,6 @@ namespace Z0
         public const char FieldDelimiter = Chars.Pipe;
 
         /// <summary>
-        /// The default left subfield delimiter
-        /// </summary>
-        public const char NestedLeftFence = Chars.LBrace;
-
-        /// <summary>
-        /// The default right subfield delimiter
-        /// </summary>
-        public const char NestedRightFence = Chars.RBrace;
-
-        /// <summary>
         /// What else could this be?
         /// </summary>
         public const string EmptyString = Zero.zS;
@@ -121,16 +110,6 @@ namespace Z0
         public const char LBrace = Chars.LBrace;
 
         /// <summary>
-        /// The ':' character
-        /// </summary>
-        public const char Colon = Chars.Colon;
-
-        /// <summary>
-        /// The ':' character
-        /// </summary>
-        public const char Semicolon = Chars.Semicolon;
-
-        /// <summary>
         /// Indicates that emitted content should overwrite whatever file content may exist
         /// </summary>
         public const FileWriteMode Overwrite = FileWriteMode.Overwrite;
@@ -151,11 +130,6 @@ namespace Z0
         /// The "->" character sequence
         /// </summary>
         public const string AsciArrow = "->";
-
-        /// <summary>
-        /// The ":=" character sequence
-        /// </summary>
-        public const string Define = ":=";
 
         /// <summary>
         /// The " | " character sequence

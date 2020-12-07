@@ -19,13 +19,13 @@ namespace Z0
     {
         readonly T* Source;
 
-        MemReaderState State;
+        MemoryReaderState State;
 
         [MethodImpl(Inline)]
         internal MemoryReader(T* pSrc, int length)
         {
             Source = pSrc;
-            State = new MemReaderState(length, 0);
+            State = new MemoryReaderState(length, 0);
         }
 
         /// <summary>

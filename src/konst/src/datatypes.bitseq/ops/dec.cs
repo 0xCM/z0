@@ -9,14 +9,8 @@ namespace Z0
 
     using static Konst;
 
-    using Q = Z0;
-
     partial struct BitSeq
     {
-        [MethodImpl(Inline), Op]
-        public static uint6 dec(uint6 x)
-            => !x.IsMin ? new uint6(Bytes.sub(x.data, 1), false) : Z0.uint6.Max;
-
         [MethodImpl(Inline), Op]
         public static uint7 dec(uint7 x)
             => !x.IsMin ? new uint7(Bytes.sub(x.data, 1), false) : Z0.uint7.Max;

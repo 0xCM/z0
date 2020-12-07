@@ -19,7 +19,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Int8x64k)]
         public static ref readonly T cell<T>(ReadOnlySpan<byte> src)
             where T : unmanaged
-                => ref read2<T>(src);
+                => ref memory.read2<T>(src);
 
         /// <summary>
         /// Reads a generic value beginning at a specified offset
@@ -40,7 +40,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Int8x64k)]
         public static ref T cell<T>(Span<byte> src)
             where T : unmanaged
-                => ref read2<T>(src);
+                => ref read<T>(src);
 
         /// <summary>
         /// Reads an unmanaged generic value from a bytespan beginning at a specified offset
@@ -51,6 +51,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Int8x64k)]
         public static ref T cell<T>(Span<byte> src, uint offset)
             where T : unmanaged
-                => ref read2<T>(slice(src, offset));
+                => ref read<T>(slice(src, offset));
     }
 }

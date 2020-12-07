@@ -35,6 +35,10 @@ namespace Z0
             => (uint8T)a | ((uint8T)b << 3) | ((uint8T)c << 6);
 
         [MethodImpl(Inline), Op]
+        public static uint3 inc(uint3 x)
+            => !x.IsMax ? new uint3(memory.add(x.data, 1), false) : U.Min;
+
+        [MethodImpl(Inline), Op]
         public static U dec(U x)
             => !x.IsMin ? new U(Bytes.sub(x.data, 1), false) : U.Max;
 

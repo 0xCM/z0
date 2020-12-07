@@ -13,14 +13,6 @@ namespace Z0
 
     partial struct BitSeq
     {
-        [MethodImpl(Inline), Op]
-        public static uint8T maxval(W8 w)
-            => maxval<uint8T>();
-
-        [MethodImpl(Inline), Op]
-        public static uint24 maxval(W24 w)
-            => maxval<uint24>();
-
         [MethodImpl(Inline)]
         static S cast<S>(byte src)
             where S : unmanaged, ISizedInt<S>
