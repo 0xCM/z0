@@ -16,22 +16,22 @@ namespace Z0
         const NumericKind Closure = UnsignedInts;
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static DelimitedList<object> create(params object[] src)
-            => new DelimitedList<object>(src, FieldDelimiter);
+        public static DelimitedIndex<object> create(params object[] src)
+            => new DelimitedIndex<object>(src, FieldDelimiter);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static DelimitedList<T> create<T>(params T[] src)
+        public static DelimitedIndex<T> create<T>(params T[] src)
             where T : unmanaged
-                => new DelimitedList<T>(src, text.delimit, FieldDelimiter);
+                => new DelimitedIndex<T>(src, text.delimit, FieldDelimiter);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static DelimitedList<object> create(char delimiter, params object[] src)
-            => new DelimitedList<object>(src, delimiter);
+        public static DelimitedIndex<object> create(char delimiter, params object[] src)
+            => new DelimitedIndex<object>(src, delimiter);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static DelimitedList<T> create<T>(char delimiter, params T[] src)
+        public static DelimitedIndex<T> create<T>(char delimiter, params T[] src)
             where T : unmanaged
-                => new DelimitedList<T>(src, text.delimit, delimiter);
+                => new DelimitedIndex<T>(src, text.delimit, delimiter);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static EnclosedList<T> create<T>(ListEnclosureKind kind, char delimiter, params T[] src)
@@ -39,11 +39,11 @@ namespace Z0
                 => new EnclosedList<T>(src, kind, delimiter);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static DelimitedList<T> create<T>(Span<T> src, char delimiter = FieldDelimiter)
-            => new DelimitedList<T>(src.ToArray(), delimiter);
+        public static DelimitedIndex<T> create<T>(Span<T> src, char delimiter = FieldDelimiter)
+            => new DelimitedIndex<T>(src.ToArray(), delimiter);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static DelimitedList<T> create<T>(ReadOnlySpan<T> src, char delimiter = FieldDelimiter)
-            => new DelimitedList<T>(src.ToArray(), delimiter);
+        public static DelimitedIndex<T> create<T>(ReadOnlySpan<T> src, char delimiter = FieldDelimiter)
+            => new DelimitedIndex<T>(src.ToArray(), delimiter);
     }
 }

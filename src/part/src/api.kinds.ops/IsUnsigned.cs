@@ -12,12 +12,11 @@ namespace Z0
 
     partial class XKinds
     {
-        /// <summary>
-        /// Determines whether the signed facet of a block classification is enabled
+        /// Determines whether the unsigned facet of a block classification is enabled
         /// </summary>
         /// <param name="k">The vector classifier</param>
-        [MethodImpl(Inline)]
-        public static bool IsSigned(this SegBlockKind k)
-            => ((uint)k & (uint)Z0.NumericKind.Signed) != 0;
+        [MethodImpl(Inline), Op]
+        public static bool IsUnsigned(this SegBlockKind k)
+            => ((uint)k & (uint)Z0.NumericKind.Unsigned) != 0;
     }
 }

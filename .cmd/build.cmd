@@ -19,7 +19,8 @@ set BuildCmdExec=dotnet build %SlnPath% /p:Configuration=Release /p:Platform="An
 
 echo BuildCmdExec:%BuildCmdExec% >> %CmdLog%
 
-echo on
-
 call %BuildCmdExec%
-::call .cmd\deploy.cmd
+
+if errorlevel 0 (
+call .cmd\deploy.cmd
+)

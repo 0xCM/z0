@@ -13,14 +13,15 @@ namespace Z0
     using api = Names;
 
     /// <summary>
-    /// Defines an assembly-qualified type name
+    /// Defines the name of a member
     /// </summary>
-    public readonly struct ClrMemberName : IName<string>, IEquatable<ClrMemberName>, IComparable<ClrMemberName>
+    public readonly struct MemberName : IName<string>, IEquatable<MemberName>, IComparable<MemberName>
     {
+        [Ignore]
         public string Content {get;}
 
         [MethodImpl(Inline)]
-        public ClrMemberName(string src)
+        public MemberName(string src)
             => Content = src;
 
         [MethodImpl(Inline)]
@@ -52,11 +53,11 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Ignore]
-        public int CompareTo(ClrMemberName src)
+        public int CompareTo(MemberName src)
             => api.compare(Content, src.Content);
 
         [MethodImpl(Inline), Ignore]
-        public bool Equals(ClrMemberName src)
+        public bool Equals(MemberName src)
             => string.Equals(Content, src.Content);
 
         public override string ToString()
@@ -66,58 +67,58 @@ namespace Z0
             => (int)Hash;
 
         public override bool Equals(object src)
-            => src is ClrMemberName n && Equals(n);
+            => src is MemberName n && Equals(n);
 
         [MethodImpl(Inline)]
-        public static implicit operator string(ClrMemberName src)
+        public static implicit operator string(MemberName src)
             => src.Content;
 
         [MethodImpl(Inline)]
-        public static implicit operator ClrMemberName(FieldInfo src)
-            => new ClrMemberName(src.Name);
+        public static implicit operator MemberName(FieldInfo src)
+            => new MemberName(src.Name);
 
         [MethodImpl(Inline)]
-        public static implicit operator ClrMemberName(PropertyInfo src)
-            => new ClrMemberName(src.Name);
+        public static implicit operator MemberName(PropertyInfo src)
+            => new MemberName(src.Name);
 
         [MethodImpl(Inline)]
-        public static implicit operator ClrMemberName(EventInfo src)
-            => new ClrMemberName(src.Name);
+        public static implicit operator MemberName(EventInfo src)
+            => new MemberName(src.Name);
 
         [MethodImpl(Inline)]
-        public static implicit operator ClrMemberName(MethodInfo src)
-            => new ClrMemberName(src.Name);
+        public static implicit operator MemberName(MethodInfo src)
+            => new MemberName(src.Name);
 
         [MethodImpl(Inline)]
-        public static implicit operator ClrMemberName(MemberInfo src)
-            => new ClrMemberName(src.Name);
+        public static implicit operator MemberName(MemberInfo src)
+            => new MemberName(src.Name);
 
         [MethodImpl(Inline)]
-        public static implicit operator ReadOnlySpan<char>(ClrMemberName src)
+        public static implicit operator ReadOnlySpan<char>(MemberName src)
             => src.Content;
 
         [MethodImpl(Inline)]
-        public static bool operator <(ClrMemberName x, ClrMemberName y)
+        public static bool operator <(MemberName x, MemberName y)
             => x.CompareTo(y) < 0;
 
         [MethodImpl(Inline)]
-        public static bool operator <=(ClrMemberName x, ClrMemberName y)
+        public static bool operator <=(MemberName x, MemberName y)
             => x.CompareTo(y) <= 0;
 
         [MethodImpl(Inline)]
-        public static bool operator >(ClrMemberName x, ClrMemberName y)
+        public static bool operator >(MemberName x, MemberName y)
             => x.CompareTo(y) > 0;
 
         [MethodImpl(Inline)]
-        public static bool operator >=(ClrMemberName x, ClrMemberName y)
+        public static bool operator >=(MemberName x, MemberName y)
             => x.CompareTo(y) >= 0;
 
         [MethodImpl(Inline)]
-        public static bool operator ==(ClrMemberName x, ClrMemberName y)
+        public static bool operator ==(MemberName x, MemberName y)
             => x.Equals(y);
 
         [MethodImpl(Inline)]
-        public static bool operator !=(ClrMemberName x, ClrMemberName y)
+        public static bool operator !=(MemberName x, MemberName y)
             => !x.Equals(y);
     }
 }

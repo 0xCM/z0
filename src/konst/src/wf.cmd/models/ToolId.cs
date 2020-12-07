@@ -10,7 +10,10 @@ namespace Z0
     using static Konst;
     using static z;
 
-    [DataType]
+    /// <summary>
+    /// Identifies an internal or external tool
+    /// </summary>
+    [Datatype]
     public struct ToolId : IIdentified<ToolId,string>
     {
         [Ignore]

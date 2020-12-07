@@ -7,7 +7,7 @@ namespace Z0
     using static BinarySym;
 
    /// <summary>
-   /// Defines <see cref='BinarySym' /> characteristics
+   /// Defines <see cref='BinarySym' /> classiefiers
    /// </summary>
     public enum BinarySymFacet : ushort
     {

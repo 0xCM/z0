@@ -11,7 +11,6 @@ namespace Z0
 
     using api = FS;
 
-
     public readonly struct FileType
     {
         public ContentKind ContentKind {get;}
@@ -33,7 +32,7 @@ namespace Z0
 
     partial class XTend
     {
-        public static DelimitedList<T> Delimited<T>(this IIndex<T> src, char delimiter = Chars.Comma)
+        public static DelimitedIndex<T> Delimited<T>(this IIndex<T> src, char delimiter = Chars.Comma)
             => z.delimit(src.Storage, delimiter);
     }
 }

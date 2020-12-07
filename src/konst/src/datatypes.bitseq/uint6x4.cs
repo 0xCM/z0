@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// Presents 24 bits as 4 b-bit segments
     /// </summary>
-    [ApiType, DataType]
+    [ApiType, Datatype]
     public readonly struct uint6x4 : IDataType<uint24>
     {
         public uint24 Content {get;}

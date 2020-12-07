@@ -14,23 +14,23 @@ namespace Z0
     public readonly struct Delimited
     {
         [Op]
-        public static DelimitedList<object> list(params object[] src)
+        public static DelimitedIndex<object> list(params object[] src)
             => Seq.delimited(src);
 
         [Op, Closures(UnsignedInts)]
-        public static DelimitedList<T> list<T>(IList<T> src, char delimiter = FieldDelimiter)
+        public static DelimitedIndex<T> list<T>(IList<T> src, char delimiter = FieldDelimiter)
             => Seq.delimited(src.Array(), delimiter);
 
         [Op, Closures(UnsignedInts)]
-        public static DelimitedList<T> list<T>(params T[] src)
+        public static DelimitedIndex<T> list<T>(params T[] src)
             => Seq.delimited(src);
 
         [Op]
-        public static DelimitedList<object> list(char delimiter, params object[] src)
+        public static DelimitedIndex<object> list(char delimiter, params object[] src)
             => Seq.delimited(delimiter, src);
 
         [Op, Closures(UnsignedInts)]
-        public static DelimitedList<T> list<T>(char delimiter, params T[] src)
+        public static DelimitedIndex<T> list<T>(char delimiter, params T[] src)
             => Seq.delimited(delimiter, src);
     }
 }

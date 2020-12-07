@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// Specifies data size in bytes
     /// </summary>
-    [ApiType, DataType]
+    [ApiType, Datatype]
     public readonly struct ByteSize : IDataType<ulong>
     {
         [MethodImpl(Inline)]

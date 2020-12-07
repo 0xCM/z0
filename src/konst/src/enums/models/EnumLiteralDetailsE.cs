@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Defines an E-parametric literal index
     /// </summary>
-    [DataType]
+    [Datatype]
     public readonly struct EnumLiteralDetails<E> : IIndex<EnumLiteralDetail<E>>
         where E : unmanaged, Enum
     {

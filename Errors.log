@@ -1,0 +1,54 @@
+Failure trapped by Main at j:\dev\projects\z0\src\control\src\Control.cs 19
+System.MissingMethodException: Method not found: 'PartId Z0.XTend.Id(System.Reflection.Assembly)'.
+   at Z0.WfShell.create(String[] args, Boolean verbose)
+   at Z0.CaptureWorkflow.run(String[] args) in j:\dev\projects\z0\src\capture\src\workflow\steps\CaptureWorkflow.cs:line 45
+   at Z0.Control.Main(String[] args) in j:\dev\projects\z0\src\control\src\Control.cs:line 15
+
+Failure trapped by Main at j:\dev\projects\z0\src\control\src\Control.cs 19
+System.MissingMethodException: Method not found: 'PartId Z0.XTend.Id(System.Reflection.Assembly)'.
+   at Z0.WfShell.create(String[] args, Boolean verbose)
+   at Z0.CaptureWorkflow.run(String[] args) in j:\dev\projects\z0\src\capture\src\workflow\steps\CaptureWorkflow.cs:line 45
+   at Z0.Control.Main(String[] args) in j:\dev\projects\z0\src\control\src\Control.cs:line 15
+
+Failure trapped by Main at j:\dev\projects\z0\src\control\src\Control.cs 19
+System.Reflection.ReflectionTypeLoadException: Unable to load one or more of the requested types.
+Could not load type 'Z0.Count' from assembly 'z0.konst, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'.
+Could not load type 'Z0.Count' from assembly 'z0.konst, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'.
+   at System.Reflection.RuntimeModule.GetTypes(RuntimeModule module)
+   at System.Reflection.RuntimeModule.GetTypes()
+   at System.Reflection.Assembly.GetTypes()
+   at Z0.ApiCatalogs.resolve(Assembly src) in j:\dev\projects\z0\src\konst\src\api.catalogs\ApiCatalogs.cs:line 111
+   at Z0.ApiCatalogs.part(FilePath src) in j:\dev\projects\z0\src\konst\src\api.catalogs\ApiCatalogs.cs:line 101
+   at Z0.ApiCatalogs.parts(FilePath[] paths) in j:\dev\projects\z0\src\konst\src\api.catalogs\ApiCatalogs.cs:line 94
+   at Z0.ApiCatalogs.system(Files paths) in j:\dev\projects\z0\src\konst\src\api.catalogs\ApiCatalogs.cs:line 26
+   at Z0.ApiCatalogs.siblings(Assembly src, PartId[] parts) in j:\dev\projects\z0\src\konst\src\api.catalogs\ApiCatalogs.cs:line 33
+   at Z0.ApiPartSet..ctor(Assembly src, PartId[] parts) in j:\dev\projects\z0\src\konst\src\api.catalogs\models\ApiPartSet.cs:line 42
+   at Z0.WfShell.parts(Assembly control, String[] args) in j:\dev\projects\z0\src\konst\src\wf.shell\ops\parts.cs:line 25
+   at Z0.WfShell.create(String[] args, Boolean verbose) in j:\dev\projects\z0\src\konst\src\wf.shell\ops\create.cs:line 31
+   at Z0.CaptureWorkflow.run(String[] args) in j:\dev\projects\z0\src\capture\src\workflow\steps\CaptureWorkflow.cs:line 45
+   at Z0.Control.Main(String[] args) in j:\dev\projects\z0\src\control\src\Control.cs:line 15
+System.TypeLoadException: Could not load type 'Z0.Count' from assembly 'z0.konst, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'.
+System.TypeLoadException: Could not load type 'Z0.Count' from assembly 'z0.konst, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'.
+
+Failure trapped by Main at j:\dev\projects\z0\src\control\src\Control.cs 19
+System.Reflection.ReflectionTypeLoadException: Unable to load one or more of the requested types.
+Could not load type 'Z0.ClrMemberName' from assembly 'z0.part, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'.
+Could not load type 'Z0.ClrMemberName' from assembly 'z0.part, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'.
+Could not load type 'Z0.ClrTypeName' from assembly 'z0.part, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'.
+   at System.Reflection.RuntimeModule.GetTypes(RuntimeModule module)
+   at System.Reflection.RuntimeModule.GetTypes()
+   at System.Reflection.Assembly.GetTypes()
+   at Z0.ApiCatalogs.resolve(Assembly src) in j:\dev\projects\z0\src\konst\src\api.catalogs\ApiCatalogs.cs:line 111
+   at Z0.ApiCatalogs.part(FilePath src) in j:\dev\projects\z0\src\konst\src\api.catalogs\ApiCatalogs.cs:line 101
+   at Z0.ApiCatalogs.parts(FilePath[] paths) in j:\dev\projects\z0\src\konst\src\api.catalogs\ApiCatalogs.cs:line 94
+   at Z0.ApiCatalogs.system(Files paths) in j:\dev\projects\z0\src\konst\src\api.catalogs\ApiCatalogs.cs:line 26
+   at Z0.ApiCatalogs.siblings(Assembly src, PartId[] parts) in j:\dev\projects\z0\src\konst\src\api.catalogs\ApiCatalogs.cs:line 33
+   at Z0.ApiPartSet..ctor(Assembly src, PartId[] parts) in j:\dev\projects\z0\src\konst\src\api.catalogs\models\ApiPartSet.cs:line 42
+   at Z0.WfShell.parts(Assembly control, String[] args) in j:\dev\projects\z0\src\konst\src\wf.shell\ops\parts.cs:line 25
+   at Z0.WfShell.create(String[] args, Boolean verbose) in j:\dev\projects\z0\src\konst\src\wf.shell\ops\create.cs:line 31
+   at Z0.CaptureWorkflow.run(String[] args) in j:\dev\projects\z0\src\capture\src\workflow\steps\CaptureWorkflow.cs:line 45
+   at Z0.Control.Main(String[] args) in j:\dev\projects\z0\src\control\src\Control.cs:line 15
+System.TypeLoadException: Could not load type 'Z0.ClrMemberName' from assembly 'z0.part, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'.
+System.TypeLoadException: Could not load type 'Z0.ClrMemberName' from assembly 'z0.part, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'.
+System.TypeLoadException: Could not load type 'Z0.ClrTypeName' from assembly 'z0.part, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'.
+

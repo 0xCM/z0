@@ -1,8 +1,13 @@
-echo off
-
+@echo off
 set ProjectId=konst
-echo ProjectId:%ProjectId%
 
-call %ZDev%\.cmd\project-config.cmd
+set BuildCmd=%ZDev%\.cmd\build-lib.cmd
+echo BuildCmd:%BuildCmd%
 
-dotnet build %ProjectPath% -c Release
+call %BuildCmd%
+
+@echo off
+
+if errorlevel 0 (
+call capture %ProjectId%
+)

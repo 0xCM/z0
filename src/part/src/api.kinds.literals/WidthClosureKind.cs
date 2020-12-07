@@ -4,6 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    /// <summary>
+    /// Clasifies a <see cref='WidthKind'/> closure
+    /// </summary>
     public enum WidthClosureKind : byte
     {
         None = 0,

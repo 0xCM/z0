@@ -4,8 +4,10 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
 
+    /// <summary>
+    /// Defines grid-sort datatype classifiers
+    /// </summary>
     [Flags]
     public enum ApiGridKind : uint
     {

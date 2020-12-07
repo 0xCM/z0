@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
 
     /// <summary>
-    /// Names a value
+    /// Assings a name to a value
     /// </summary>
     public readonly struct NamedValue<V>
     {

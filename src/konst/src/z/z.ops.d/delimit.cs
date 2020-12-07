@@ -12,19 +12,19 @@ namespace Z0
 
     partial struct z
     {
-        public static DelimitedList<object> delimit(params object[] src)
+        public static DelimitedIndex<object> delimit(params object[] src)
             => Delimited.list(src);
 
-        public static DelimitedList<T> delimit<T>(IList<T> src, char delimiter = FieldDelimiter)
+        public static DelimitedIndex<T> delimit<T>(IList<T> src, char delimiter = FieldDelimiter)
             => Delimited.list(src, delimiter);
 
-        public static DelimitedList<T> delimit<T>(params T[] src)
+        public static DelimitedIndex<T> delimit<T>(params T[] src)
             => Delimited.list(src);
 
-        public static DelimitedList<object> delimit(char delimiter, params object[] src)
+        public static DelimitedIndex<object> delimit(char delimiter, params object[] src)
             => Delimited.list(delimiter, src);
 
-        public static DelimitedList<T> delimit<T>(char delimiter, params T[] src)
+        public static DelimitedIndex<T> delimit<T>(char delimiter, params T[] src)
             => Delimited.list(delimiter, src);
     }
 }

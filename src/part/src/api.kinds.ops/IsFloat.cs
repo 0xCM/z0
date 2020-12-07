@@ -15,7 +15,7 @@ namespace Z0
         /// Determines whether the floating facet of a block classification is enabled
         /// </summary>
         /// <param name="k">The vector classifier</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bool IsFloat(this SegBlockKind k)
             => ((uint)k & (uint)Z0.NumericKind.Float) != 0;
     }

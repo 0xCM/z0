@@ -6,10 +6,12 @@ namespace Z0
 {
     using System;
 
-    public enum ApiTypeId : ushort
+    /// <summary>
+    /// Applied to a function to denote inclusion as a keword within the DSL
+    /// </summary>
+    [AttributeUsage(AttributeTargets.Method)]
+    public class KeywordAttribute : OpAttribute
     {
-        None = 0,
 
-        SpanBlock,
     }
 }

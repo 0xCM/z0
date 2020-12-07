@@ -19,12 +19,12 @@ namespace Z0
         /// <summary>
         /// The field's name
         /// </summary>
-        public readonly ClrMemberName FieldName;
+        public readonly MemberName FieldName;
 
         /// <summary>
         /// The assembly-qualified name of the field data type
         /// </summary>
-        public readonly ClrTypeName TypeName;
+        public readonly TypeName TypeName;
 
         /// <summary>
         /// The field's declearation order within the declaring type
@@ -37,7 +37,7 @@ namespace Z0
         public readonly ushort Offset;
 
         [MethodImpl(Inline)]
-        public CilFieldSpec(ClrMemberName name, ClrTypeName type, ushort pos, ushort offset = default)
+        public CilFieldSpec(MemberName name, TypeName type, ushort pos, ushort offset = default)
         {
             TypeName = type;
             FieldName = name;

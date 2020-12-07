@@ -8,9 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static z;
 
-    [DataType]
+    [Datatype]
     public readonly struct CmdArgPrefix
     {
         public static CmdArgPrefix Empty

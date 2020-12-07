@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    [DataType]
+    [Datatype]
     public readonly struct Kind<K> : ITextual
         where K : unmanaged
     {

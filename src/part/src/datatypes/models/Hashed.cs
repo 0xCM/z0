@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// Captures a hash code
     /// </summary>
-    [DataType]
+    [Datatype]
     public readonly struct Hashed : IHashed
     {
         public uint Hash {get;}

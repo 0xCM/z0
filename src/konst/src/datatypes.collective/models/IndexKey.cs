@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// Defines a finite bijection member that correlates keys and indexes
     /// </summary>
-    [DataType]
+    [Datatype]
     public readonly struct IndexKey<K,I>
         where K : unmanaged
         where I : unmanaged

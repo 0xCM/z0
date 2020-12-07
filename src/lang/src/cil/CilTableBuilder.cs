@@ -42,11 +42,11 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static TypeBuilder type(ModuleBuilder mb, ClrTypeName fullName, TypeAttributes attributes, Type parent)
+        public static TypeBuilder type(ModuleBuilder mb, TypeName fullName, TypeAttributes attributes, Type parent)
             => mb.DefineType(fullName, attributes, parent);
 
         [MethodImpl(Inline), Op]
-        public static TypeBuilder @struct(ModuleBuilder mb, ClrTypeName fullName, TypeAttributes attributes)
+        public static TypeBuilder @struct(ModuleBuilder mb, TypeName fullName, TypeAttributes attributes)
             => mb.DefineType(fullName, attributes, typeof(ValueType));
 
         const TypeAttributes Default = BeforeFieldInit | Public | Sealed | AnsiClass;
@@ -76,7 +76,7 @@ namespace Z0
             => WithField(new CilFieldSpec(src, src.PropertyType, Index));
 
         [MethodImpl(Inline),Op]
-        public CilTableBuilder WithField(ClrMemberName name, Type type)
+        public CilTableBuilder WithField(MemberName name, Type type)
             => WithField(new CilFieldSpec(name, type, Index));
 
         [MethodImpl(Inline), Op]
@@ -100,7 +100,7 @@ namespace Z0
         }
 
         [MethodImpl(NotInline), Op]
-        public CilTableSpec Complete(ClrTypeName name)
+        public CilTableSpec Complete(TypeName name)
         {
             var cells = Fields.Slice(0,(int)Index).ToArray();
             Fields.Clear();

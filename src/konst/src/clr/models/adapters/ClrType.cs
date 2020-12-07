@@ -35,7 +35,7 @@ namespace Z0
             get => Definition.MetadataToken;
         }
 
-        public ClrTypeName Name
+        public TypeName Name
         {
             [MethodImpl(Inline)]
             get => Definition;

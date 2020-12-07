@@ -5,13 +5,12 @@
 namespace Z0
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
     using System.Runtime.CompilerServices;
 
     using static Konst;
     using static z;
 
-    [DataType]
+    [Datatype]
     public readonly struct utf8 : ITextual, IEquatable<utf8>, IComparable<utf8>
     {
         static TextCoder Encoder => TextEncoders.utf8();

@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    [DataType]
+    [Datatype]
     public readonly struct Imm<W,T> : IImmValue<Imm<W,T>,W,T>
         where W : unmanaged, INumericWidth
         where T : unmanaged

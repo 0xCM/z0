@@ -15,7 +15,7 @@ namespace Z0
     /// <summary>
     /// Defines a 32-bit immediate value
     /// </summary>
-    [DataType]
+    [Datatype]
     public readonly struct Imm32 : IImmValue<I,W32,uint>
     {
         public uint Content {get;}

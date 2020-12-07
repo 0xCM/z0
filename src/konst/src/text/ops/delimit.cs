@@ -8,40 +8,10 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static z;
+    using static memory;
 
     partial class text
     {
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static string delimit<T>(T[] src, string delimiter)
-        {
-            var count = src.Length;
-            var input = span(src);
-            var buffer = sys.alloc<string>(count);
-            var dst = span(buffer);
-            var b = span(delimiter);
-            for(var i=0u; i<count; i++)
-                seek(dst,i) = Render.format(span(skip(input,i).ToString()),b);
-
-            return string.Concat(buffer);
-        }
-
-        [MethodImpl(Inline), Op]
-        public static string delimit(char delimiter, params object[] src)
-            => delimit(src,delimiter);
-
-        [Op]
-        public static string delimit(ReadOnlySpan<string> src, string delimiter)
-        {
-            var count = src.Length;
-            var buffer = sys.alloc<string>(count);
-            var dst = span(buffer);
-            var b = span(delimiter);
-            for(var i=0u; i< count; i++)
-                seek(dst,i) = Render.format(skip(src,i), b);
-            return string.Concat(buffer);
-        }
-
         [Op, Closures(UnsignedInts)]
         public static string delimit<T>(T[] items, char delimiter)
         {

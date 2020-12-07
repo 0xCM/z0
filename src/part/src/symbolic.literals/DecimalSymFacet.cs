@@ -5,9 +5,9 @@
 namespace Z0
 {
     using static DecimalSym;
-    
+
     /// <summary>
-    /// Defines <see cref='DecimalSym' /> characteristics
+    /// Defines <see cref='DecimalSym' /> classifiers
     /// </summary>
     public enum DecimalSymFacet : ushort
     {

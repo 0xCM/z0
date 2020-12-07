@@ -10,7 +10,11 @@ namespace Z0
 
     using static Part;
 
-    [DataType]
+     /// <summary>
+    /// Captures an <typeparamname name='E'/> parametric enum value and the integral <typeparamref name='P'/> value along with the <see cref='FieldInfo'/>
+    /// that defines the corresponding enum literal
+    /// </summary>
+    [Datatype]
     public readonly struct EnumFieldValue<E,P>
         where E : unmanaged, Enum
     {

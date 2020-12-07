@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    [DataType]
+    [Datatype]
     public readonly struct TextBlock : ITextBlock<char>
     {
         public string Text {get;}

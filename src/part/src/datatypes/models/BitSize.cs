@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// Specifies data size in bits
     /// </summary>
-    [ApiType, DataType]
+    [ApiType, Datatype]
     public readonly struct BitSize : IDataType<ulong>
     {
         const NumericKind Closure = UnsignedInts;
@@ -20,6 +20,7 @@ namespace Z0
         /// <summary>
         /// Specifies a bit count
         /// </summary>
+        [Ignore]
         public ulong Content {get;}
 
         /// <summary>

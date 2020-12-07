@@ -10,33 +10,34 @@ namespace Z0
 
     using static Part;
 
-    partial class XTend
+    partial class XKinds
     {
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
+        public static string Format(this SegBlockKind k)
+            => k != 0 ? k.ToString() : string.Empty;
+
+        [MethodImpl(Inline), Op]
         public static string Format(this PartId id)
             => Part.format(id);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bool IsDefined(this ApiClass src)
             => src != 0;
 
-        [MethodImpl(Inline)]
-        public static bool Opaque(this ApiClass src)
-            => src >= ApiClass.Opaque;
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bool IsUserApi(this ApiClass src)
-            => src.IsDefined() && !src.Opaque();
+            => src.IsDefined() && !src.IsOpaque();
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static string Format(this ApiClass src)
-            => src.Opaque() ? "opaque" : src.ToString().ToLower();
+            => src.IsOpaque() ? "opaque" : src.ToString().ToLower();
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static string Format(this ExternId id)
             => Part.format(id);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static PartId Id(this Assembly src)
             => Part.id(src);
     }

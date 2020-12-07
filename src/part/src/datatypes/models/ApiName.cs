@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    [DataType]
+    [Datatype]
     public readonly struct ApiName<C> : ITextual
     {
         public C Content {get;}

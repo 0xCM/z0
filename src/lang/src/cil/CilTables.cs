@@ -40,23 +40,23 @@ namespace Z0
             => string.Format(RP.PSx4, src.FieldName, src.Position, src.Offset, src.TypeName);
 
         [MethodImpl(Inline), Op]
-        public static CilTableSpec table(ClrTypeName type, params CilFieldSpec[] Fields)
+        public static CilTableSpec table(TypeName type, params CilFieldSpec[] Fields)
             => new CilTableSpec(type, Fields);
 
         [MethodImpl(Inline), Op]
-        public static CilFieldSpec field(ClrMemberName name, ClrTypeName type, ushort position, ushort offset = default)
+        public static CilFieldSpec field(MemberName name, TypeName type, ushort position, ushort offset = default)
             => new CilFieldSpec(name, type, position, offset);
 
         [Op]
-        public static TypeBuilder type(ModuleBuilder mb, ClrTypeName fullName, TypeAttributes attributes, Type parent)
+        public static TypeBuilder type(ModuleBuilder mb, TypeName fullName, TypeAttributes attributes, Type parent)
             => mb.DefineType(fullName, attributes, parent);
 
         [Op]
-        public static TypeBuilder valueType(ModuleBuilder mb, ClrTypeName fullName, TypeAttributes attributes)
+        public static TypeBuilder valueType(ModuleBuilder mb, TypeName fullName, TypeAttributes attributes)
             => mb.DefineType(fullName, attributes, typeof(ValueType));
 
         [Op]
-        public static FieldBuilder field(TypeBuilder tb, ClrMemberName name, string type, Address16? offset = null)
+        public static FieldBuilder field(TypeBuilder tb, MemberName name, string type, Address16? offset = null)
         {
             var fb = tb.DefineField(name, Type.GetType(type), FieldAttributes.Public);
             if(offset != null)
@@ -74,7 +74,7 @@ namespace Z0
         [Op]
         public static CilTableSpec clone(Type src)
         {
-            var name = ClrTypeName.from(src);
+            var name = TypeName.from(src);
             var declared = src.DeclaredInstanceFields();
             var count = declared.Length;
             var buffer = alloc<CilFieldSpec>(count);

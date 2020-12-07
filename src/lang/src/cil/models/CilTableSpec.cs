@@ -14,12 +14,12 @@ namespace Z0
 
     public readonly struct CilTableSpec : ITextual
     {
-        public ClrTypeName TableName {get;}
+        public TypeName TableName {get;}
 
         readonly TableSpan<CilFieldSpec> FieldSpecs;
 
         [MethodImpl(Inline)]
-        public CilTableSpec(ClrTypeName name, CilFieldSpec[] cells)
+        public CilTableSpec(TypeName name, CilFieldSpec[] cells)
         {
             TableName = name;
             FieldSpecs = cells;

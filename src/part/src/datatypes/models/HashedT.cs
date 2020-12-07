@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// Captures a hash code for structured content
     /// </summary>
-    [DataType]
+    [Datatype]
     public readonly struct Hashed<C> : IHashed<Hashed<C>>
         where C : struct
     {

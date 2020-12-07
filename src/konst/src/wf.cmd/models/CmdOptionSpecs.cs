@@ -9,10 +9,13 @@ namespace Z0
 
     using static Konst;
 
-    [DataType]
-    public readonly struct CmdOptionSpecs : IIndexedView<CmdOptionSpecs,ushort,CmdOptionSpec>
+    /// <summary>
+    /// Defines a <see cref='CommandOptionSpec'/> index
+    /// </summary>
+    [Datatype]
+    public readonly struct CmdOptionSpecs : IIndex<CmdOptionSpecs,ushort,CmdOptionSpec>
     {
-        readonly IndexedView<CmdOptionSpec> Data;
+        readonly Index<CmdOptionSpec> Data;
 
         [MethodImpl(Inline)]
         public CmdOptionSpecs(CmdOptionSpec[] src)
@@ -24,7 +27,7 @@ namespace Z0
             get => Data.Count;
         }
 
-        public ref readonly CmdOptionSpec this[ushort index]
+        public ref CmdOptionSpec this[ushort index]
         {
             [MethodImpl(Inline)]
             get => ref Data[index];
@@ -43,7 +46,7 @@ namespace Z0
         }
 
         public string Format()
-            => Seq.format(this);
+            => Seq.format(Storage);
 
         public override string ToString()
             => Format();
@@ -51,5 +54,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator CmdOptionSpecs(CmdOptionSpec[] src)
             => new CmdOptionSpecs(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator CmdOptionSpec[](CmdOptionSpecs src)
+            => src.Storage;
     }
 }

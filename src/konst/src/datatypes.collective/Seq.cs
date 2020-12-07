@@ -16,8 +16,8 @@ namespace Z0
     {
         const NumericKind Closure = UInt64k;
 
-        public static string format<T>(IIndexedView<T> src)
-            => z.delimit(src.Storage).Format();
+        public static string format<T>(T[] src)
+            => z.delimit(src).Format();
 
         /// <summary>
         /// Tests the source index for non-emptiness
@@ -303,21 +303,21 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static DelimitedList<object> delimited(params object[] src)
-            => new DelimitedList<object>(src, FieldDelimiter);
+        public static DelimitedIndex<object> delimited(params object[] src)
+            => new DelimitedIndex<object>(src, FieldDelimiter);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static DelimitedList<T> delimited<T>(params T[] src)
+        public static DelimitedIndex<T> delimited<T>(params T[] src)
             where T : unmanaged
-                => new DelimitedList<T>(src, text.delimit, FieldDelimiter);
+                => new DelimitedIndex<T>(src, text.delimit, FieldDelimiter);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static DelimitedList<object> delimited(char delimiter, params object[] src)
-            => new DelimitedList<object>(src, delimiter);
+        public static DelimitedIndex<object> delimited(char delimiter, params object[] src)
+            => new DelimitedIndex<object>(src, delimiter);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static DelimitedList<T> delimited<T>(char delimiter, params T[] src)
-            => new DelimitedList<T>(src, text.delimit, delimiter);
+        public static DelimitedIndex<T> delimited<T>(char delimiter, params T[] src)
+            => new DelimitedIndex<T>(src, text.delimit, delimiter);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static EnclosedList<T> enclosed<T>(ListEnclosureKind kind, char delimiter, params T[] src)
@@ -325,16 +325,16 @@ namespace Z0
                 => new EnclosedList<T>(src, kind, delimiter);
 
         [MethodImpl(Inline)]
-        public static DelimitedList<T> delimited<T>(IList<T> src, char delimiter = FieldDelimiter)
-            => new DelimitedList<T>(array(src), delimiter);
+        public static DelimitedIndex<T> delimited<T>(IList<T> src, char delimiter = FieldDelimiter)
+            => new DelimitedIndex<T>(array(src), delimiter);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static DelimitedList<T> delimited<T>(Span<T> src, char delimiter = FieldDelimiter)
-            => new DelimitedList<T>(array(src), delimiter);
+        public static DelimitedIndex<T> delimited<T>(Span<T> src, char delimiter = FieldDelimiter)
+            => new DelimitedIndex<T>(array(src), delimiter);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static DelimitedList<T> delimited<T>(ReadOnlySpan<T> src, char delimiter = FieldDelimiter)
-            => new DelimitedList<T>(array(src), delimiter);
+        public static DelimitedIndex<T> delimited<T>(ReadOnlySpan<T> src, char delimiter = FieldDelimiter)
+            => new DelimitedIndex<T>(array(src), delimiter);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Index<T> filter<T>(in Index<T> src, Func<T,bool> predicate)

@@ -10,7 +10,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static Chars;
+    using static memory;
 
     [ApiHost(ApiNames.TextApi, true)]
     readonly partial struct text

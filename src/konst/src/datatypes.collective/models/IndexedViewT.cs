@@ -60,18 +60,10 @@ namespace Z0
             => Data?.Equals(rhs.Data) ?? false;
 
         public string Format()
-            => Seq.format(this);
+            => Seq.format(Storage);
 
         public override string ToString()
             => Format();
-
-        [MethodImpl(Inline)]
-        public static implicit operator IndexedView<T>(T[] src)
-            => new IndexedView<T>(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator T[](IndexedView<T> src)
-            => src.Data;
 
         /// <summary>
         /// Creates an indexed sequence from a parameter array
@@ -93,5 +85,14 @@ namespace Z0
 
         public IndexedView<T> Where(Func<T,bool> predicate)
             => view(from x in Data where predicate(x) select x);
+
+        [MethodImpl(Inline)]
+        public static implicit operator IndexedView<T>(T[] src)
+            => new IndexedView<T>(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator T[](IndexedView<T> src)
+            => src.Data;
+
     }
 }

@@ -13,9 +13,9 @@ namespace Z0
     using K = IntervalKind;
 
     /// <summary>
-    /// Defines a closed T-interval  where an ordering on T is assumed to exist and be well-defined
+    /// Defines a closed T-interval where an ordering on T is assumed to exist and be well-defined
     /// </summary>
-    [DataType]
+    [Datatype]
     public readonly struct ClosedInterval<T> : IInterval<T>
         where T : unmanaged
     {

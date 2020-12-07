@@ -8,9 +8,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static z;
 
-    [DataType]
+    /// <summary>
+    /// Defines the usage syntax of a command or tool
+    /// </summary>
+    [Datatype]
     public readonly struct UsageSyntax : ITextual, IContented<string>
     {
         public string Content {get;}

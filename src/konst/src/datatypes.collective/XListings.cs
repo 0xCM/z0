@@ -12,13 +12,13 @@ namespace Z0
 
     public static class XListings
     {
-        public static DelimitedList<T> Delimit<T>(this ReadOnlySpan<T> src, char delimiter = FieldDelimiter)
+        public static DelimitedIndex<T> Delimit<T>(this ReadOnlySpan<T> src, char delimiter = FieldDelimiter)
             => Listings.create(src, delimiter);
 
-        public static DelimitedList<T> Delimit<T>(this Span<T> src, char delimiter = FieldDelimiter)
+        public static DelimitedIndex<T> Delimit<T>(this Span<T> src, char delimiter = FieldDelimiter)
             => Listings.create(src, delimiter);
 
-        public static DelimitedList<T> Delimit<T>(this T[] src, char delimiter = FieldDelimiter)
+        public static DelimitedIndex<T> Delimit<T>(this T[] src, char delimiter = FieldDelimiter)
             where T : unmanaged
                 => Listings.create(delimiter, src);
     }

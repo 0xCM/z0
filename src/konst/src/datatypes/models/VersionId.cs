@@ -14,7 +14,7 @@ namespace Z0
     /// <summary>
     /// Defines a version schema that supports 2, 3 or 4 32-bit segments
     /// </summary>
-    [ApiType, DataType]
+    [ApiType, Datatype]
     public readonly struct VersionId : IDataType<VersionId>
     {
         readonly Vector128<uint> Storage;

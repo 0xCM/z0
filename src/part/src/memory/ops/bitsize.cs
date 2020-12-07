@@ -13,14 +13,17 @@ namespace Z0
     partial struct memory
     {
         /// <summary>
-        /// Computes the bit-width of a parametrically-identified type
+        /// Computes the bit-width of a parametrically-identified type, returning the result as a <see cref='BitSize'/> value
         /// </summary>
-        /// <param name="w">The result width selector</param>
         /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline), Op]
         public static BitSize bitsize<T>()
             => Unsafe.SizeOf<T>()*8;
 
+        /// <summary>
+        /// Computes the bit-width of a parametrically-identified type, returning the result as a <see cref='uint'/> value
+        /// </summary>
+        /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static uint bitwidth<T>()
             => (uint)SizeOf<T>() * 8;

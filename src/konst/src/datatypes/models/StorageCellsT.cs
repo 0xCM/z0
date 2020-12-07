@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    [DataType]
+    [Datatype]
     public readonly struct StorageCells<T> : IStorageCells<T>
         where T : unmanaged
     {

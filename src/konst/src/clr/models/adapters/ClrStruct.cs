@@ -26,7 +26,7 @@ namespace Z0
             get => Definition;
         }
 
-        public ClrTypeName Name
+        public TypeName Name
         {
             [MethodImpl(Inline)]
             get => Definition;

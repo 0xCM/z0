@@ -15,7 +15,7 @@ namespace Z0
     /// <summary>
     /// Defines an 8-bit immediate value
     /// </summary>
-    [DataType]
+    [Datatype]
     public readonly struct Imm8 : IImmValue<I,W,byte>
     {
         public byte Content {get;}

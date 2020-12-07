@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    [DataType]
+    [Datatype]
     public readonly struct ParseResult2<S> : IParseResult2<S>
     {
         /// <summary>

@@ -10,10 +10,12 @@ namespace Z0
     using static Konst;
     using static z;
 
-    [DataType]
+    [Datatype]
     public struct Sequential<T> : IDataType<T>
         where T : unmanaged
     {
+        const ulong Step = 1;
+
         public T Value;
 
         [MethodImpl(Inline)]
@@ -27,13 +29,26 @@ namespace Z0
         public void Increment()
         {
             ref var x = ref @as<T,ulong>(Value);
-            x += 1;
+            x += Step;
+        }
+
+        public void Decrement()
+        {
+            ref var x = ref @as<T,ulong>(Value);
+            x -= Step;
         }
 
         [MethodImpl(Inline)]
         public static Sequential<T> operator ++(Sequential<T> src)
         {
             src.Increment();
+            return src;
+        }
+
+        [MethodImpl(Inline)]
+        public static Sequential<T> operator --(Sequential<T> src)
+        {
+            src.Decrement();
             return src;
         }
 

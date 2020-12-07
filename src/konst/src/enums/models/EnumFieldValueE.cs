@@ -10,13 +10,16 @@ namespace Z0
 
     using static Part;
 
-    [DataType]
+    /// <summary>
+    /// Captures an <typeparamname name='E'/> parametric enum value along with the <see cref='FieldInfo'/> that defines the corresponding enum literal
+    /// </summary>
+    [Datatype]
     public readonly struct EnumFieldValue<E>
         where E : unmanaged, Enum
     {
-        public readonly FieldInfo Field;
+        public FieldInfo Field {get;}
 
-        public readonly E EnumValue;
+        public E EnumValue {get;}
 
         [MethodImpl(Inline)]
         public EnumFieldValue(FieldInfo field, E value)

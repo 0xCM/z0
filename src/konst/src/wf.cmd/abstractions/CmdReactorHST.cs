@@ -45,8 +45,5 @@ namespace Z0
             Host = WfShell.host(GetType());
             Wf = wf.WithHost(Host);
         }
-
-        CliArtifactKey IWfService.ServiceId
-            => GetType().MetadataToken;
     }
 }

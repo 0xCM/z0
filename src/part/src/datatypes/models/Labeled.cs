@@ -10,7 +10,7 @@ namespace Z0
 
     using static Part;
 
-    [DataType]
+    [Datatype]
     public readonly struct Labeled : ILabeled<Labeled>
     {
         /// <summary>

@@ -39,7 +39,6 @@ namespace Z0
             Kind = TypeClosureKind.Numeric;
         }
 
-
         public ClosuresAttribute(CellWidth spec)
             : this()
         {
