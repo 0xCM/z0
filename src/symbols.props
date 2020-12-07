@@ -74,10 +74,10 @@
     <Identify>$(Src)identify/z0.identify.csproj</Identify>
     <Archives>$(Src)archives/z0.archives.csproj</Archives>
     <MetaReader>$(Src)metareader/z0.metareader.csproj</MetaReader>
-    <Dynamic>$(Src)dynamic/z0.dynamic.csproj</Dynamic>
     <LSquare>$(Src)lsquare/z0.lsquare.csproj</LSquare>
     <Identity>$(Src)identity/z0.identity.csproj</Identity>
 
+    <Dynamic>$(Src)dynamic/lib/z0.dynamic.lib.csproj</Dynamic>
     <Machine>$(Src)machine/z0.machine.csproj</Machine>
 
     <ZXed>$(Src)zxed/z0.zxed.csproj</ZXed>
