@@ -11,12 +11,10 @@ namespace Z0
 
     using static Konst;
 
-    [StructLayout(LayoutKind.Sequential), Table(TableId, FieldCount)]
-    public struct CliConstant
+    [StructLayout(LayoutKind.Sequential), Table(TableId)]
+    public struct CliConstant : IRecord<CliConstant>
     {
         public const string TableId = "cli.constant";
-
-        public const byte FieldCount = 5;
 
         public enum Fields : ushort
         {

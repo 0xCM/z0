@@ -8,18 +8,18 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Diagnostics;
 
-    [StructLayout(LayoutKind.Sequential)]
-    public struct ProcessState
+    [StructLayout(LayoutKind.Sequential), Record]
+    public struct ProcessState : IRecord<ProcessState>
     {
         /// <summary>
         /// The process identifier
         /// </summary>
-        public uint Id;
+        public uint ProcessId;
 
         /// <summary>
         /// The process name
         /// </summary>
-        public StringRef Name;
+        public string ProcessName;
 
         /// <summary>
         /// The base address of the process

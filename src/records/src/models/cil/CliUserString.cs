@@ -9,10 +9,9 @@ namespace Z0
     using System.Runtime.InteropServices;
 
     using static Konst;
-    using static RP;
 
-    [StructLayout(LayoutKind.Sequential)]
-    public struct CliUserString
+    [StructLayout(LayoutKind.Sequential), Table(TableId)]
+    public struct CliUserString : IRecord<CliUserString>
     {
         public const string TableId = "cli.strings.user";
 

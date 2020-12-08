@@ -11,8 +11,6 @@ namespace Z0
     using static Part;
     using static memory;
 
-    using api = CharBlocks;
-
     /// <summary>
     /// Defines a character block b with capacity(b) = 256x16u
     /// </summary>

@@ -69,6 +69,15 @@ namespace Z0
                 get => new FileInfo(Name);
             }
 
+            /// <summary>
+            /// The size of the file in bytes
+            /// </summary>
+            public ByteSize Size
+            {
+                [MethodImpl(Inline)]
+                get => Info.Length;
+            }
+
             public bool IsEmpty
             {
                 [MethodImpl(Inline)]

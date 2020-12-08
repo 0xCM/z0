@@ -14,18 +14,18 @@ namespace Z0
     using static z;
 
     [WfHost]
-    public sealed class EmitLocatedPartsHost : WfHost<EmitLocatedPartsHost>
+    public sealed class EmitLocatedParts : WfHost<EmitLocatedParts>
     {
         protected override void Execute(IWfShell wf)
         {
-            using var step = new EmitLocatedParts(wf.WithHost(this), this);
+            using var step = new EmitLocatedPartsStep(wf.WithHost(this), this);
             wf.Running();
             step.Run();
             wf.Ran();
         }
     }
 
-    public ref struct EmitLocatedParts
+    ref struct EmitLocatedPartsStep
     {
         readonly IWfShell Wf;
 
@@ -40,7 +40,7 @@ namespace Z0
         public Span<LocatedPart> Index;
 
         [MethodImpl(Inline)]
-        public EmitLocatedParts(IWfShell wf, WfHost host)
+        public EmitLocatedPartsStep(IWfShell wf, WfHost host)
         {
             Wf = wf;
             Host = host;

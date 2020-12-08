@@ -56,14 +56,14 @@ namespace Z0
 
         uint EmitUserStrings(IPart part)
         {
-            using var emitter = new EmitPartStringsStep(Wf, part, CliStringRecord.Kind.User, Wf.Ct);
+            using var emitter = new EmitImageStringsStep(Wf, part, CliStringRecord.Kind.User, Wf.Ct);
             emitter.Run();
             return emitter.EmissionCount;
         }
 
         uint EmitSystemStrings(IPart part)
         {
-            using var emitter = new EmitPartStringsStep(Wf, part, CliStringRecord.Kind.System, Wf.Ct);
+            using var emitter = new EmitImageStringsStep(Wf, part, CliStringRecord.Kind.System, Wf.Ct);
             emitter.Run();
             return emitter.EmissionCount;
         }

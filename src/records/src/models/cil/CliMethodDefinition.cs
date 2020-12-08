@@ -16,8 +16,8 @@ namespace Z0
     /// <summary>
     /// Captures <see cref='MethodDefinition'/> data in usable form
     /// </summary>
-    [StructLayout(LayoutKind.Sequential), Table(TableId, FieldCount)]
-    public struct CliMethodDefinition
+    [StructLayout(LayoutKind.Sequential), Record]
+    public struct CliMethodDefinition : IRecord<CliMethodDefinition>
     {
         public const string TableId = "cli.method.definition";
 
@@ -33,5 +33,4 @@ namespace Z0
 
         public MethodImplAttributes ImplAttributes;
     }
-
 }

@@ -14,7 +14,7 @@ namespace Z0
     using W = CliStringRecord.RenderWidths;
     using R = CliStringRecord;
 
-    ref struct EmitPartStringsStep
+    ref struct EmitImageStringsStep
     {
         readonly WfHost Host;
 
@@ -29,9 +29,9 @@ namespace Z0
         readonly FS.FilePath TargetPath;
 
         [MethodImpl(Inline)]
-        public EmitPartStringsStep(IWfShell wf, IPart part, R.Kind sk, CorrelationToken ct)
+        public EmitImageStringsStep(IWfShell wf, IPart part, R.Kind sk, CorrelationToken ct)
         {
-            Host = WfShell.host(typeof(EmitPartStringsStep));
+            Host = WfShell.host(typeof(EmitImageStringsStep));
             Wf = wf.WithHost(Host);
             Part = part;
             if(sk == R.Kind.System)

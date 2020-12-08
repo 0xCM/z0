@@ -10,8 +10,8 @@ namespace Z0
 
     using static Konst;
 
-    [StructLayout(LayoutKind.Sequential), Table(TableId, FieldCount)]
-    public struct CliLiteral
+    [StructLayout(LayoutKind.Sequential), Table(TableId)]
+    public struct CliLiteral : IRecord<CliLiteral>
     {
         public const string TableId = "cli.literal";
 

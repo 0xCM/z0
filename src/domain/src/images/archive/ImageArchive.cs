@@ -41,13 +41,4 @@ namespace Z0
                 _ => array(Dll,Exe,Pdb)
             };
     }
-
-    public enum ImageFormatKind
-    {
-        None = 0,
-
-        Binary = 1,
-
-        Csv = 2,
-    }
 }

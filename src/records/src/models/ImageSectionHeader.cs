@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    [StructLayout(LayoutKind.Sequential), Table(TableId, FieldCount)]
+    [StructLayout(LayoutKind.Sequential), Record]
     public struct ImageSectionHeader
     {
         public const byte FieldCount = 9;

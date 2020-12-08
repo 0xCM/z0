@@ -15,6 +15,12 @@ namespace Z0
         FS.FileName ApiFileName(PartId part, string api, FS.FileExt ext)
             => FS.file(string.Format("{0}.{1}", part.Format(), api), ext);
 
+        FS.FolderPath ArchiveRoot()
+            => EnvVars.Common.ArchiveRoot;
+
+        FS.FolderPath BuildArchiveRoot()
+            => ArchiveRoot() + FS.folder(PN.builds);
+
         FS.FolderPath IDbPaths.DbRoot
             => Root;
 

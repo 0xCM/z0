@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.InteropServices;
 
-    [StructLayout(LayoutKind.Sequential)]
-    public struct ProcessModuleRecord
+    [StructLayout(LayoutKind.Sequential), Record]
+    public struct ProcessModuleRecord : IRecord<ProcessModuleRecord>
     {
         public MemoryAddress Base;
 

@@ -41,7 +41,7 @@ namespace Z0
                 EmitFieldMetadata.create().Run(Wf);
                 EmitSectionHeaders.create().Run(Wf);
                 EmitImageConstants.create().Run(Wf);
-                EmitLocatedPartsHost.create().Run(Wf);
+                EmitLocatedParts.create().Run(Wf);
                 EmitStringRecords.create().Run(Wf);
                 EmitComments.create().Run(Wf);
                 EmitImageBlobs.create().Run(Wf);

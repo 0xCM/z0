@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct ListedFiles
+    public readonly struct ListedFiles : IIndex<ListedFile>
     {
         readonly TableSpan<ListedFile> Data;
 
@@ -69,5 +69,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator ListedFiles(ListedFile[] src)
             => new ListedFiles(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator ListedFile[](ListedFiles src)
+            => src.Storage;
     }
 }

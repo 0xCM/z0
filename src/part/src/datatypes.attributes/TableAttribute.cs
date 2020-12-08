@@ -14,12 +14,10 @@ namespace Z0
     {
         public string TableId {get;}
 
-        public byte FieldCount {get;}
-
-        public TableAttribute(string name, byte fields)
+        public TableAttribute(string name, byte fields = 0)
         {
             TableId = name;
-            FieldCount = fields;
+
         }
     }
 }

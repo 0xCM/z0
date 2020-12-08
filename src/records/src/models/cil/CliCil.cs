@@ -10,12 +10,10 @@ namespace Z0
 
     using static Konst;
 
-    [StructLayout(LayoutKind.Sequential), Table(TableId, FieldCount)]
-    public struct CliCil
+    [StructLayout(LayoutKind.Sequential), Table(TableId)]
+    public struct CliCil : IRecord<CliCil>
     {
         public const string TableId = "cli.cil";
-
-        public const byte FieldCount = 5;
 
         public BinaryCode MethodSig;
 

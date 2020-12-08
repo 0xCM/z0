@@ -9,14 +9,11 @@ namespace Z0
     using System.Runtime.InteropServices;
 
     using static Konst;
-    using static z;
 
-    [StructLayout(LayoutKind.Sequential), Table(TableId, FieldCount)]
-    public struct EnumLiteralRow : IComparable<EnumLiteralRow>
+    [StructLayout(LayoutKind.Sequential), Record]
+    public struct EnumLiteralRow : IComparable<EnumLiteralRow>, IRecord<EnumLiteralRow>
     {
         public const string TableId = "enums.literals";
-
-        public const byte FieldCount = 9;
 
         public enum Fields : ushort
         {

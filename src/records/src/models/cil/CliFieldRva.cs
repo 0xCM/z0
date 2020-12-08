@@ -10,13 +10,9 @@ namespace Z0
 
     using static Konst;
 
-    [StructLayout(LayoutKind.Sequential), Table(TableName, FieldCount)]
-    public struct CliFieldRva
+    [StructLayout(LayoutKind.Sequential), Record]
+    public struct CliFieldRva : IRecord<CliFieldRva>
     {
-        public const string TableName = "cli.fieldrva";
-
-        public const byte FieldCount = 4;
-
         public Address32 Rva;
 
         public string TypeName;

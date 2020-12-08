@@ -1,3 +1,4 @@
+//-----------------------------------------------------------------------------
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
@@ -7,13 +8,23 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static z;
+    using static memory;
+
+    public interface ICellBlock<T>
+        where T : unmanaged, ICellBlock<T>
+    {
+
+    }
 
     [ApiHost]
     public readonly partial struct CellBlocks
     {
-        [MethodImpl(Inline), Op]
-        public static CellBlock8 cover(byte[] src)
-            => new CellBlock8(src);
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        internal static ref T copy<T>(ReadOnlySpan<byte> src, ref T dst)
+            where T : unmanaged
+        {
+            dst = first(recover<T>(src));
+            return ref dst;
+        }
     }
 }

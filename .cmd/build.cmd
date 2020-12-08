@@ -18,8 +18,7 @@ set TextLog="%ZDb%\logs\build\%SlnId%.log"
 set BuildCmdExec=dotnet build %SlnPath% /p:Configuration=Release /p:Platform="Any CPU" -fl -flp:logfile=%TextLog%;verbosity=detailed -m:6 -graph:true
 
 echo BuildCmdExec:%BuildCmdExec% >> %CmdLog%
-
 call %BuildCmdExec%
 
 
-::call .cmd\deploy.cmd
+call .cmd\deploy.cmd

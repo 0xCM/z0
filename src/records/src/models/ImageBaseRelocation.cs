@@ -2,14 +2,17 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Lang
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
 
-   public abstract class Algorithm<T> : CodeModel<T>
-        where T : Algorithm<T>, new()
+    [StructLayout(LayoutKind.Sequential), Record]
+    public struct ImageBaseRelocation : IRecord<ImageBaseRelocation>
     {
+        public uint VirtualAddress;
 
+        public uint SizeOfBlock;
     }
 }

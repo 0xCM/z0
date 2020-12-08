@@ -24,18 +24,13 @@ namespace Z0
             var token = CliArtifactKey.from<E>();
             var datatype = kind<E>();
             var description = string.Empty;
-            var enumData = UserMetadata.Empty;
             var indices = sys.alloc<uint>(count);
             var names = sys.alloc<string>(count);
             var literals = sys.alloc<E>(count);
             var numeric = sys.alloc<T>(count);
             var descriptions = sys.alloc<string>(count);
-            var userData = sys.alloc<UserMetadata>(count);
             var tokens = sys.alloc<CliArtifactKey>(count);
-
-            var dst = new EnumDataset<E,T>(token, description,  UserMetadata.Empty, datatype,
-                tokens, indices,  names, literals, numeric, descriptions, userData);
-
+            var dst = new EnumDataset<E,T>(token, description, datatype, tokens, indices,  names, literals, numeric, descriptions);
             for(var i=0; i<count; i++)
             {
                 indices[i] = src[i].Position;

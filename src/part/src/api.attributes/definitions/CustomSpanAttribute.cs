@@ -10,9 +10,7 @@ namespace Z0
     public class CustomSpanAttribute : Attribute
     {
         public CustomSpanAttribute(string indicator)
-        {
-            this.Indicator = indicator;
-        }
+            => Indicator = indicator;
 
         public string Indicator {get;}
     }

@@ -5,9 +5,9 @@
 namespace Z0
 {
     [Cmd(Name)]
-    public struct ListArchiveFilesCmd : ICmdSpec<ListArchiveFilesCmd>
+    public struct PipeArchiveFilesCmd : ICmdSpec<PipeArchiveFilesCmd>
     {
-        public const string Name = "list-files";
+        public const string Name = "pipe-archive-files";
 
         /// <summary>
         /// The archive classifier

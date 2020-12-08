@@ -10,8 +10,8 @@ namespace Z0
 
     using static Konst;
 
-    [StructLayout(LayoutKind.Sequential), Table(TableId, FieldCount)]
-    public struct CliField
+    [StructLayout(LayoutKind.Sequential), Table(TableId)]
+    public struct CliField : IRecord<CliField>
     {
         public const byte FieldCount = 7;
 

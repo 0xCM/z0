@@ -5,11 +5,9 @@
 namespace Z0
 {
     [Cmd(Name)]
-    public struct ListImageFilesCmd : ICmdSpec<ListImageFilesCmd>
+    public struct PipeImageFilesCmd : ICmdSpec<PipeImageFilesCmd>
     {
-        public const string Verb = "list-files";
-
-        public const string Name = Verb + "--images";
+        public const string Name = "pipe-image-files";
 
         /// <summary>
         /// The archive classifier
@@ -21,6 +19,4 @@ namespace Z0
         /// </summary>
         public FS.FolderPath ArchiveRoot {get;}
     }
-
-
 }

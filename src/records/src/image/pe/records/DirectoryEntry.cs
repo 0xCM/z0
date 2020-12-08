@@ -2,16 +2,20 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Image
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
 
-    using static Konst;
-
-    [ApiHost(ApiNames.ApiCallRoutes, true)]
-    public readonly partial struct ApiCallRoutes
+    partial struct Pe
     {
+        [Record, StructLayout(LayoutKind.Sequential)]
+        public struct DirectoryEntry
+        {
+            public Address32 Rva;
 
+            public uint Size;
+        }
     }
 }

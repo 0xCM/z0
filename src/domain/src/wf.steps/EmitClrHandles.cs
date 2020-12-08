@@ -27,9 +27,7 @@ namespace Z0
             wf.Db().Clear(ClrHandleRecord.TableId);
             var components = wf.Api.Components;
             foreach(var component in components)
-            {
                 EmitClrHandles.create().Run(wf, component);
-            }
             return new CmdResult(cmd, true);
         }
     }

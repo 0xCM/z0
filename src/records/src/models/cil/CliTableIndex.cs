@@ -12,8 +12,8 @@ namespace Z0
 
     using static Konst;
 
-    [StructLayout(LayoutKind.Sequential)]
-    public readonly struct CliTableIndex
+    [StructLayout(LayoutKind.Sequential), Record]
+    public readonly struct CliTableIndex : IRecord<CliTableIndex>
     {
         public readonly CliArtifactKey Key;
 

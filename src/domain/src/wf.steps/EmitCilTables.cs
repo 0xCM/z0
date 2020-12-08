@@ -16,12 +16,12 @@ namespace Z0
     {
         protected override void Execute(IWfShell wf)
         {
-            using var step = new EmitCilTablesStep(wf, this);
+            using var step = new EmitCliTablesStep(wf, this);
             step.Run();
         }
     }
 
-    ref struct EmitCilTablesStep
+    ref struct EmitCliTablesStep
     {
         readonly IWfShell Wf;
 
@@ -34,7 +34,7 @@ namespace Z0
         readonly WfHost Host;
 
         [MethodImpl(Inline)]
-        public EmitCilTablesStep(IWfShell wf, WfHost host)
+        public EmitCliTablesStep(IWfShell wf, WfHost host)
         {
             Wf = wf.WithHost(host);
             Host = host;

@@ -11,8 +11,8 @@ namespace Z0
     using static Konst;
     using static z;
 
-    [StructLayout(LayoutKind.Sequential), Table(TableId,FieldCount)]
-    public struct CliOffset
+    [StructLayout(LayoutKind.Sequential), Table(TableId)]
+    public struct CliOffset : IRecord<CliOffset>
     {
         public const string TableId = "cli.offsets";
 

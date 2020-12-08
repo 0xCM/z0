@@ -14,7 +14,7 @@ namespace Z0
     /// Captures a dependency relationship between two assemblies
     /// </summary>
     [Table(TableId, FieldCount)]
-    public struct AssemblyDependency
+    public struct AssemblyRef : IRecord<AssemblyRef>
     {
         public const string TableId = "cli.assemblyref";
 

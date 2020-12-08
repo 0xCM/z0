@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
     using System.Diagnostics;
     using System.Linq;
 
@@ -51,8 +50,8 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ref ProcessState map(Process src, ref ProcessState dst)
         {
-            dst.Name = src.ProcessName;
-            dst.Id = (uint)src.Id;
+            dst.ProcessName = src.ProcessName;
+            dst.ProcessId = (uint)src.Id;
             dst.Base = src.Handle;
             dst.Capacity = ((ulong)src.MinWorkingSet,(ulong)src.MaxWorkingSet);
             dst.Affinity = (ushort)src.ProcessorAffinity;

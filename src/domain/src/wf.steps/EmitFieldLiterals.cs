@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static z;
-    using static Konst;
 
     [WfHost]
     public sealed class EmitFieldLiterals : WfHost<EmitFieldLiterals>

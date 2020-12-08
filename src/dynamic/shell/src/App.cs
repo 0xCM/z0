@@ -119,7 +119,11 @@ namespace Z0
             try
             {
                 using var wf = WfShell.create(args).WithRandom(Rng.@default());
-                PipeRuntimeFiles(wf);
+                var archive = ImageArchives.csv(wf);
+                wf.Status(archive.Root);
+                zfunc.iter(archive.List().Storage, file => wf.Status(file));
+
+                //PipeRuntimeFiles(wf);
                 //EmitCilTables(wf, "z0.gmath.dll");
             }
             catch(Exception e)

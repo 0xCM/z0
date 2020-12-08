@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Reflection;
 
     using static Konst;
     using static z;
@@ -58,7 +57,6 @@ namespace Z0
             Source = src;
             Target = Wf.Db().Table(ClrEnumLiteralRecord.TableId, Source.Part);
             Records = default;
-            //RenderWidths = ClrEnumLiteralRecord.RenderWidths;
         }
 
         public void Dispose()

@@ -144,12 +144,6 @@ namespace Z0
         IFileDb Db()
             => DbSvc.create(Init.DbRoot);
 
-        /// <summary>
-        /// Provides a <see cref='IFileDb'/> rooted at a specified location
-        /// </summary>
-        IFileDb Db(FS.FolderPath root)
-            => DbSvc.create(root);
-
         WfEventId Raise<E>(in E e)
             where E : IWfEvent
         {

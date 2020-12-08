@@ -6,7 +6,7 @@ echo BuildCmd:%BuildCmd%
 
 call %BuildCmd%
 
-set DeployCmd=%ZDev%\.cmd\deploy.cmd
-echo DeplyCmd:%DeployCmd%
+set DeployCmd=%ZDev%\.cmd\deploy-shell.cmd
+echo DeployCmd:%DeployCmd%
 
-::call %DeployCmd%
+call %DeployCmd%

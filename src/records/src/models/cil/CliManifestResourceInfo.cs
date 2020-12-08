@@ -10,18 +10,13 @@ namespace Z0
     using System.Reflection.Metadata;
     using System.Reflection;
 
-    using static Konst;
-    using static z;
-
     /// <summary>
     /// Captures <see cref='ManifestResource'/> data in usable form
     /// </summary>
-    [StructLayout(LayoutKind.Sequential), Table(TableId, FieldCount)]
-    public struct CliManifestResourceInfo
+    [StructLayout(LayoutKind.Sequential), Table(TableId)]
+    public struct CliManifestResourceInfo : IRecord<CliManifestResourceInfo>
     {
         public const string TableId = "cli.manifest.resource";
-
-        public const byte FieldCount = 3;
 
         public string Name;
 

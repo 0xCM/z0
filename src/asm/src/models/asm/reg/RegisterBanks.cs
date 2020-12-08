@@ -9,9 +9,7 @@ namespace Z0
 
     using static Konst;
     using static Cells;
-    using static RegisterBanks;
     using static z;
-
 
     public readonly struct RegisterBanks
     {

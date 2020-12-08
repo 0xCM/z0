@@ -23,7 +23,6 @@ namespace Z0
             User = 2,
         }
 
-
         public enum Fields : ushort
         {
             Sequence,
