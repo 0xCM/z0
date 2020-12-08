@@ -9,7 +9,7 @@ namespace Z0
 
     public interface ICilIndex
     {
-        Option<CilFunction> FindCil(int id);
+        Option<CilFunctionInfo> FindCil(int id);
 
         Option<Type> FindType(int id);
 

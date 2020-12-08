@@ -18,6 +18,10 @@ namespace Z0
         public static TypeCode typecode<T>()
             => tc_u<T>();
 
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        public static (NK, Type) find<T>()
+            => where_u<T>();
+
         [MethodImpl(Inline)]
         static TC tc_u<T>()
         {
@@ -65,10 +69,6 @@ namespace Z0
                 return TC.Object;
         }
 
-
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        static (NK,Type) find<T>()
-            => where_u<T>();
 
         [MethodImpl(Inline)]
         static unsafe (NK,Type) where_u<T>()

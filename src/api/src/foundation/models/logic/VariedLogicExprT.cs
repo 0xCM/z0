@@ -51,7 +51,7 @@ namespace Z0
             => BaseExpr.Format();
 
         public void SetVars(params ILogicExpr[] values)
-            => SetVars(values.Cast<ILogicExpr<T>>().ToArray());
+            => SetVars(values.Cast<ILogicExpr<T>>());
 
         public void SetVars(params Bit32[] values)
             => throw new NotSupportedException();

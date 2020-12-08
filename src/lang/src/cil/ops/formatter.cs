@@ -8,16 +8,15 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static z;
 
     partial struct Cil
     {
         [MethodImpl(Inline), Op]
-        public static CilFunctionFormatter formatter()
-            => formatter(CilFormatConfig.Default);
+        public static FunctionFormatter formatter()
+            => formatter(FormatConfig.Default);
 
         [MethodImpl(Inline), Op]
-        public static CilFunctionFormatter formatter(CilFormatConfig config)
-            => new CilFunctionFormatter(config);
+        public static FunctionFormatter formatter(FormatConfig config)
+            => new FunctionFormatter(config);
     }
 }

@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Diagnostics;
+    using System.Reflection.Metadata;
 
     using Z0.Tools;
 
@@ -85,7 +86,7 @@ namespace Z0
 
         static void react(IWfShell wf, in EmitCliTablesCmd cmd)
         {
-            (var success, var msg) = SRM.MetadataTableEmitter.emit(cmd.Source.Name, cmd.Target.Name);
+            (var success, var msg) = MetadataTableEmitter.emit(cmd.Source.Name, cmd.Target.Name);
             if(success)
                 wf.Status(msg);
             else

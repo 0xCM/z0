@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     using NBK = NumericBaseKind;
 
@@ -86,6 +86,6 @@ namespace Z0
             => object.Equals(Data, src.Data);
 
         public static NumericLiteral<T> Empty
-            => new NumericLiteral<T>(string.Empty, default, string.Empty, NBK.None);
+            => new NumericLiteral<T>(EmptyString, default, EmptyString, 0);
     }
 }

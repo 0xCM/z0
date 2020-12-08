@@ -14,6 +14,6 @@ namespace Z0
         /// </summary>
         FS.FilePath Target {get;}
 
-        void Write(CilFunction[] src);
+        void Write(CilFunctionInfo[] src);
     }
 }

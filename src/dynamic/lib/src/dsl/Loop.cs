@@ -12,10 +12,12 @@ namespace Z0
     {
         public I LowerBound;
 
-        public bool LowerInclusive;
+        public bit LowerInclusive;
 
         public I UpperBound;
 
-        public bool UpperInclusive;
+        public bit UpperInclusive;
+
+        public I Step;
     }
 }

@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection.Metadata;
 
     using Z0.Asm;
 
@@ -163,7 +164,7 @@ namespace Z0
 
         public static CmdResult react(IWfShell wf, in EmitCliTablesCmd cmd)
         {
-            (var success, var msg) = SRM.MetadataTableEmitter.emit(cmd.Source.Name, cmd.Target.Name);
+            (var success, var msg) = MetadataTableEmitter.emit(cmd.Source.Name, cmd.Target.Name);
             if(success)
                 return Cmd.ok(cmd);
             else

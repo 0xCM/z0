@@ -51,14 +51,14 @@ namespace Z0
         /// recognized floating-point types
         /// </summary>
         [Op]
-        public static IEnumerable<Type> FloatingTypes()
-            => seq(typeof(float), typeof(double));
+        public static Index<Type> FloatingTypes()
+            => sys.array(typeof(float), typeof(double));
 
         /// <summary>
         /// Recognized floating-point kinds
         /// </summary>
         [Op]
-        public static IEnumerable<NumericKind> FloatingKindSeq()
-           => seq(NK.F32, NK.F64);
+        public static Index<NumericKind> FloatingKinds()
+           => sys.array(NK.F32, NK.F64);
     }
 }

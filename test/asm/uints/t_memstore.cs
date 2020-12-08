@@ -8,6 +8,7 @@ namespace Z0
     using System.Linq;
 
     using static z;
+    using static Cil;
 
     using Z0.Asm;
 
@@ -79,7 +80,7 @@ namespace Z0
 
             var decoded = Cil.decode(mod,props.Select(x => x.GetGetMethod())).ToArray();
             var path = FS.path(CasePath(FileExtensions.Il).Name);
-            var cilWriter = new CilFunctionWriter(path);
+            var cilWriter = new FunctionWriter(path);
             cilWriter.Write(decoded);
         }
 

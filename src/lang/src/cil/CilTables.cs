@@ -13,6 +13,7 @@ namespace Z0
 
     using static Konst;
     using static z;
+    using static Cil;
 
     [ApiHost(ApiNames.CilTables, true)]
     public readonly struct CilTables
@@ -26,7 +27,7 @@ namespace Z0
             = Default | SequentialLayout;
 
         [Op]
-        public static string format(in CilTableSpec src)
+        public static string format(in RecordSpec src)
         {
             var dst = text.build();
             dst.AppendLine(src.TableName.ShortName);
@@ -36,16 +37,16 @@ namespace Z0
         }
 
         [Op]
-        public static string format(in CilFieldSpec src)
+        public static string format(in FieldSpec src)
             => string.Format(RP.PSx4, src.FieldName, src.Position, src.Offset, src.TypeName);
 
         [MethodImpl(Inline), Op]
-        public static CilTableSpec table(TypeName type, params CilFieldSpec[] Fields)
-            => new CilTableSpec(type, Fields);
+        public static RecordSpec table(TypeName type, params FieldSpec[] Fields)
+            => new RecordSpec(type, Fields);
 
         [MethodImpl(Inline), Op]
-        public static CilFieldSpec field(MemberName name, TypeName type, ushort position, ushort offset = default)
-            => new CilFieldSpec(name, type, position, offset);
+        public static FieldSpec field(MemberName name, TypeName type, ushort position, ushort offset = default)
+            => new FieldSpec(name, type, position, offset);
 
         [Op]
         public static TypeBuilder type(ModuleBuilder mb, TypeName fullName, TypeAttributes attributes, Type parent)
@@ -72,12 +73,12 @@ namespace Z0
         }
 
         [Op]
-        public static CilTableSpec clone(Type src)
+        public static RecordSpec clone(Type src)
         {
             var name = TypeName.from(src);
             var declared = src.DeclaredInstanceFields();
             var count = declared.Length;
-            var buffer = alloc<CilFieldSpec>(count);
+            var buffer = alloc<FieldSpec>(count);
             var fields = @readonly(declared);
             var fieldOffsets = span(ClrQuery.offsets(src, declared));
 
@@ -89,7 +90,7 @@ namespace Z0
                 seek(dst,i) = field(f, name, i, skip(fieldOffsets,i));
             }
 
-            return new CilTableSpec(name, buffer);
+            return new RecordSpec(name, buffer);
         }
 
         /// <summary>
@@ -97,7 +98,7 @@ namespace Z0
         /// </summary>
         /// <param name="spec">The record definition</param>
         [MethodImpl(NotInline),Op]
-        public static Type type(Name assname, CilTableSpec spec)
+        public static Type type(Name assname, RecordSpec spec)
             => build(module(assname), spec);
 
         /// <summary>
@@ -105,7 +106,7 @@ namespace Z0
         /// </summary>
         /// <param name="spec">The record definition</param>
         [MethodImpl(NotInline), Op]
-        public static Type[] types(Name assname, params CilTableSpec[] specs)
+        public static Type[] types(Name assname, params RecordSpec[] specs)
         {
             var count = specs.Length;
             var buffer = alloc<Type>(count);
@@ -120,7 +121,7 @@ namespace Z0
         }
 
         [Op]
-        static Type build(ModuleBuilder mb, CilTableSpec spec)
+        static Type build(ModuleBuilder mb, RecordSpec spec)
         {
             var tb = valueType(mb, spec.TableName, ExplicitAnsi);
             var fields = spec.Fields;

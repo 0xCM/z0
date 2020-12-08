@@ -17,23 +17,23 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source parameter</param>
         [MethodImpl(Inline), Op]
-        public static CliArgRefKind RefKind(this ParameterInfo src)
+        public static ClrArgRefKind RefKind(this ParameterInfo src)
             => src.IsIn
-            ? Z0.CliArgRefKind.In  : src.IsOut
-            ? Z0.CliArgRefKind.Out : src.ParameterType.IsByRef
-            ? Z0.CliArgRefKind.Ref : Z0.CliArgRefKind.None;
+            ? Z0.ClrArgRefKind.In  : src.IsOut
+            ? Z0.ClrArgRefKind.Out : src.ParameterType.IsByRef
+            ? Z0.ClrArgRefKind.Ref : Z0.ClrArgRefKind.None;
 
         [MethodImpl(Inline), Op]
-        public static string Keyword(this CliArgRefKind src)
+        public static string Keyword(this ClrArgRefKind src)
             => src switch{
-                CliArgRefKind.In => "in",
-                CliArgRefKind.Out => "out",
-                CliArgRefKind.Ref => "ref",
+                ClrArgRefKind.In => "in",
+                ClrArgRefKind.Out => "out",
+                ClrArgRefKind.Ref => "ref",
                 _ => ""
             };
 
         [MethodImpl(Inline), Op]
-        public static string Format(this CliArgRefKind src)
+        public static string Format(this ClrArgRefKind src)
             => src != 0 ? ('~' + src.Keyword()) : string.Empty;
     }
 }

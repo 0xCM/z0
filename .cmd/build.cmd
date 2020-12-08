@@ -21,6 +21,5 @@ echo BuildCmdExec:%BuildCmdExec% >> %CmdLog%
 
 call %BuildCmdExec%
 
-if errorlevel 0 (
-call .cmd\deploy.cmd
-)
+
+::call .cmd\deploy.cmd

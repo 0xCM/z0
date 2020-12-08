@@ -8,7 +8,6 @@ namespace Z0.Dsl
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static z;
 
     /// <summary>
     /// Specifies a dsl keyword

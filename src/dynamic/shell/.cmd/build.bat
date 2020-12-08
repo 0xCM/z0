@@ -1,7 +1,7 @@
 @echo off
-set ProjectId=dynoshell
+set ProjectId=dynamic
 
-set BuildCmd=%ZDev%\.cmd\build-project.cmd
+set BuildCmd=%ZDev%\.cmd\build-shell.cmd
 echo BuildCmd:%BuildCmd%
 
 call %BuildCmd%
@@ -9,4 +9,4 @@ call %BuildCmd%
 set DeployCmd=%ZDev%\.cmd\deploy.cmd
 echo DeplyCmd:%DeployCmd%
 
-call %DeployCmd%
+::call %DeployCmd%

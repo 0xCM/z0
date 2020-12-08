@@ -28,14 +28,4 @@ namespace Z0
 
         internal const MethodImplOptions Options = MethodImplOptions.AggressiveInlining;
     }
-
-    [ApiHost]
-    readonly partial struct proxy
-    {
-        const NumericKind Closure = Integers;
-
-        const string EmptyString = "";
-
-        const MethodImplOptions Options = MethodImplOptions.NoInlining;
-    }
 }

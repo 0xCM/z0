@@ -12,6 +12,6 @@ namespace Z0
     [ApiHost(ApiNames.XArray, true)]
     public static partial class XArray
     {
-
+        const NumericKind Closure = UnsignedInts;
     }
 }

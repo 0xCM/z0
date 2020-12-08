@@ -20,10 +20,10 @@ namespace Z0
 
         public readonly TypeSig Type;
 
-        public readonly CliArgRefKind RefKind;
+        public readonly ClrArgRefKind RefKind;
 
         [MethodImpl(Inline)]
-        public MethodParameter(TypeSig type, CliArgRefKind refkind, string name, ushort pos)
+        public MethodParameter(TypeSig type, ClrArgRefKind refkind, string name, ushort pos)
         {
             Type = type;
             Name = name;

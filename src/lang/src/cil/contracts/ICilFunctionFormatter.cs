@@ -8,6 +8,6 @@ namespace Z0
 
     public interface ICilFunctionFormatter
     {
-        string Format(CilFunction f);
+        string Format(CilFunctionInfo f);
     }
 }

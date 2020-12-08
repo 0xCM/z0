@@ -15,7 +15,7 @@ namespace Z0.Dsl
         const NumericKind Closure = UnsignedInts;
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Loop<I> loop<I>(Interval<I> bounds)
+        public static Loop<I> loop<I>(Interval<I> bounds, I? step = null)
             where I : unmanaged
        {
             var dst = new Loop<I>();
@@ -23,6 +23,7 @@ namespace Z0.Dsl
             dst.UpperBound = bounds.Right;
             dst.LowerInclusive = bounds.LeftClosed;
             dst.UpperInclusive = bounds.RightClosed;
+            dst.Step = step ?? NumericLiterals.one<I>();
             return dst;
        }
 
@@ -31,7 +32,6 @@ namespace Z0.Dsl
             where I : unmanaged
             where H : struct, ILoopHost<H,I>
                 => host(loop(bounds),h);
-
 
         [MethodImpl(Inline)]
         public static LoopHost<H,I> host<H,I>(in Loop<I> loop, in  H host)

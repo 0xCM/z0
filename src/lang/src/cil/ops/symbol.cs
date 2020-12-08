@@ -6,21 +6,19 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Reflection;
     using System.Reflection.Metadata;
 
     using static Konst;
-    using static z;
 
     partial struct Cil
     {
         [MethodImpl(Inline), Op]
-        public static CilOpCodeSymbol symbol(ILOpCode id)
-            => new CilOpCodeSymbol(id);
+        public static OpCodeSymbol symbol(ILOpCode id)
+            => new OpCodeSymbol(id);
 
         [MethodImpl(Inline)]
-        public static CilOpCodeSymbol symbol<K>(K k = default)
+        public static OpCodeSymbol symbol<K>(K k = default)
             where K : unmanaged, ICilOpCode<K>
-                => new CilOpCodeSymbol((ILOpCode)(default(K).Id));
+                => new OpCodeSymbol((ILOpCode)(default(K).Id));
     }
 }

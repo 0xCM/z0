@@ -10,7 +10,6 @@ namespace Z0
     using System.Runtime.InteropServices;
 
     using static Konst;
-    using static z;
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
     using Fp = System.Runtime.InteropServices.UnmanagedFunctionPointerAttribute;

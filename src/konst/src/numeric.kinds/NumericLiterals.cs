@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static z;
 
     using NBK = NumericBaseKind;
 
@@ -207,7 +206,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T one<T>(T t = default)
             where T : unmanaged
-                => force<T>(1);
+                => NumericCast.force<T>(1);
 
         /// <summary>
         /// Ones all bits each and every ... one
@@ -268,13 +267,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return z.force<T>(z8i);
+                return NumericCast.force<T>(z8i);
             else if(typeof(T) == typeof(short))
-                return z.force<T>(z16i);
+                return NumericCast.force<T>(z16i);
             else if(typeof(T) == typeof(int))
-                return z.force<T>(z32i);
+                return NumericCast.force<T>(z32i);
             else
-                return z.force<T>(z64i);
+                return NumericCast.force<T>(z64i);
         }
 
         [MethodImpl(Inline)]
@@ -282,13 +281,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return z.force<T>(z8);
+                return NumericCast.force<T>(z8);
             else if(typeof(T) == typeof(ushort))
-                return z.force<T>(z16);
+                return NumericCast.force<T>(z16);
             else if(typeof(T) == typeof(uint))
-                return z.force<T>(z32);
+                return NumericCast.force<T>(z32);
             else
-                return z.force<T>(z64);
+                return NumericCast.force<T>(z64);
         }
 
         [MethodImpl(Inline)]
@@ -296,9 +295,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return force<T>(z32f);
+                return NumericCast.force<T>(z32f);
             else if(typeof(T) == typeof(double))
-                return force<T>(z64f);
+                return NumericCast.force<T>(z64f);
             else
                 throw no<T>();
         }
@@ -308,13 +307,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return z.force<T>(i8max);
+                return NumericCast.force<T>(i8max);
             else if(typeof(T) == typeof(short))
-                return z.force<T>(i16max);
+                return NumericCast.force<T>(i16max);
             else if(typeof(T) == typeof(int))
-                return z.force<T>(i32max);
+                return NumericCast.force<T>(i32max);
             else
-                return z.force<T>(i64max);
+                return NumericCast.force<T>(i64max);
         }
 
         [MethodImpl(Inline)]
@@ -322,13 +321,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return z.force<T>(u8max);
+                return NumericCast.force<T>(u8max);
             else if(typeof(T) == typeof(ushort))
-                return z.force<T>(u16max);
+                return NumericCast.force<T>(u16max);
             else if(typeof(T) == typeof(uint))
-                return z.force<T>(u32max);
+                return NumericCast.force<T>(u32max);
             else
-                return z.force<T>(u64max);
+                return NumericCast.force<T>(u64max);
         }
 
         [MethodImpl(Inline)]
@@ -336,9 +335,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return z.force<T>(f32max);
+                return NumericCast.force<T>(f32max);
             else if(typeof(T) == typeof(double))
-                return z.force<T>(f64max);
+                return NumericCast.force<T>(f64max);
             else
                 throw no<T>();
         }
@@ -348,13 +347,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return z.force<T>(Ones8u);
+                return NumericCast.force<T>(Ones8u);
             else if(typeof(T) == typeof(ushort))
-                return z.force<T>(Ones16u);
+                return NumericCast.force<T>(Ones16u);
             else if(typeof(T) == typeof(uint))
-                return z.force<T>(Ones32u);
+                return NumericCast.force<T>(Ones32u);
             else if(typeof(T) == typeof(ulong))
-                return z.force<T>(Ones64u);
+                return NumericCast.force<T>(Ones64u);
             else
                 return ones_i<T>();
         }
@@ -364,13 +363,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return z.force<T>(Ones8i);
+                return NumericCast.force<T>(Ones8i);
             else if(typeof(T) == typeof(short))
-                return z.force<T>(Ones16i);
+                return NumericCast.force<T>(Ones16i);
             else if(typeof(T) == typeof(int))
-                return z.force<T>(Ones32i);
+                return NumericCast.force<T>(Ones32i);
             else if(typeof(T) == typeof(long))
-                return z.force<T>(Ones64i);
+                return NumericCast.force<T>(Ones64i);
             else
                  return ones_f<T>();
        }
@@ -380,9 +379,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return z.force<T>((float)Ones32u);
+                return NumericCast.force<T>((float)Ones32u);
             else if(typeof(T) == typeof(double))
-                return z.force<T>((double)Ones64u);
+                return NumericCast.force<T>((double)Ones64u);
             else
                  throw no<T>();
        }

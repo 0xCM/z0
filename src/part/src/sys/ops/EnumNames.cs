@@ -6,8 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Linq;
-    
+
     partial struct sys
     {
         [MethodImpl(Options), Op]
@@ -17,6 +16,6 @@ namespace Z0
         [MethodImpl(Options)]
         public static string[] EnumNames<T>()
             where T : unmanaged, Enum
-                => proxy.EnumNames(typeof(T));            
+                => proxy.EnumNames(typeof(T));
     }
 }

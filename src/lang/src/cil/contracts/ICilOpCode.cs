@@ -7,13 +7,11 @@ namespace Z0
     using System;
     using System.Reflection.Metadata;
 
-    using static Konst;
-
     public interface ICilOpCode
     {
         string Name {get;}
 
-        ILOpCode Id {get;}
+        System.Reflection.Metadata.ILOpCode Id {get;}
     }
 
     public interface ICilOpCode<K> : ICilOpCode

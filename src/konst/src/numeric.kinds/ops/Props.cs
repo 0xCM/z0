@@ -73,7 +73,7 @@ namespace Z0
         /// </summary>
         [Op]
         public static IEnumerable<NumericKind> IntegralKindSeq()
-            => UnsignedKindSeq().Union(SignedKindSeq());
+            => UnsignedKinds().Union(SignedKinds());
 
         /// <summary>
         /// Recognized numeric types

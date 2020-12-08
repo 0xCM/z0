@@ -26,13 +26,13 @@ namespace Z0
         /// Returns true if a parametric type is of signed numeric type, false otherwise
         /// </summary>
         /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline), Op, Closures(NumericKind.All)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static bool signed<T>()
             where T : unmanaged
-            => typeof(T) == typeof(sbyte)
-            || typeof(T) == typeof(short)
-            || typeof(T) == typeof(int)
-            || typeof(T) == typeof(long);
+                => typeof(T) == typeof(sbyte)
+                || typeof(T) == typeof(short)
+                || typeof(T) == typeof(int)
+                || typeof(T) == typeof(long);
 
         /// <summary>
         /// Returns true if the source type is a primal signed type, false otherwise
@@ -53,19 +53,18 @@ namespace Z0
         public static bool signed(object src)
             => src is sbyte || src is short || src is int || src is long;
 
-
-       /// <summary>
+        /// <summary>
         /// Recognized signed integral kinds
         /// </summary>
         [Op]
-        public static IEnumerable<Type> SignedTypes()
-            => seq(typeof(sbyte), typeof(short), typeof(int), typeof(long));
+        public static Index<Type> SignedTypes()
+            => sys.array(typeof(sbyte), typeof(short), typeof(int), typeof(long));
 
         /// <summary>
         /// Recognized signed integral kinds
         /// </summary>
         [Op]
-        public static IEnumerable<NumericKind> SignedKindSeq()
-            => seq(NK.I8, NK.I16, NK.I32, NK.I64);
+        public static Index<NumericKind> SignedKinds()
+            => sys.array(NK.I8, NK.I16, NK.I32, NK.I64);
     }
 }

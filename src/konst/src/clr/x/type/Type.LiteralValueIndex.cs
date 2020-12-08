@@ -19,7 +19,7 @@ namespace Z0
         [Op, Closures(Closure)]
         public static T[] LiteralValues<T>(this Type src)
             where T : unmanaged
-                => src.LiteralFields().LiteralValues().Cast<T>().ToArray();
+                => src.LiteralFields().LiteralValues().Cast<T>();
 
         /// <summary>
         /// Enumerates the literals defined by a type indexed by declaration order and which have names that match a specified filter
