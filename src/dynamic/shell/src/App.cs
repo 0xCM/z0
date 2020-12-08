@@ -114,14 +114,20 @@ namespace Z0
             }
         }
 
+        static void PipeImageFiles(IWfShell wf)
+        {
+            var archive = ImageArchives.csv(wf);
+            wf.Status(archive.Root);
+            zfunc.iter(archive.List().Storage, file => wf.Status(file));
+        }
+
         public static void Main(params string[] args)
         {
             try
             {
                 using var wf = WfShell.create(args).WithRandom(Rng.@default());
-                var archive = ImageArchives.csv(wf);
-                wf.Status(archive.Root);
-                zfunc.iter(archive.List().Storage, file => wf.Status(file));
+                var host = new App();
+                host.Execute(wf);
 
                 //PipeRuntimeFiles(wf);
                 //EmitCilTables(wf, "z0.gmath.dll");

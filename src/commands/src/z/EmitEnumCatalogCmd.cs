@@ -4,9 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    [Cmd]
+    [Cmd(CmdName)]
     public struct EmitEnumCatalogCmd : ICmdSpec<EmitEnumCatalogCmd>
     {
-
+        public const string CmdName = "emit-enum-catalog";
     }
 }

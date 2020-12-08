@@ -4,10 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    [Cmd(Name)]
+    [Cmd(CmdName)]
     public struct PipeArchiveFilesCmd : ICmdSpec<PipeArchiveFilesCmd>
     {
-        public const string Name = "pipe-archive-files";
+        public const string CmdName = "pipe-archive-files";
 
         /// <summary>
         /// The archive classifier

@@ -43,8 +43,6 @@ namespace Z0
                     }
                 }
             }
-            else
-                term.warn(Msg.FileDoesNotExist.Format(src));
         }
 
         public static T load<T>(FS.FilePath src)

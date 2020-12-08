@@ -4,9 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    sealed class PipeApiHexFiles : CmdReactor<ListApiHexFilesCmd,CmdResult>
+    sealed class PipeApiHexFiles : CmdReactor<PipeApiHexFilesCmd,CmdResult>
     {
-        protected override CmdResult Run(ListApiHexFilesCmd cmd)
+        protected override CmdResult Run(PipeApiHexFilesCmd cmd)
             => Reactions.react(Wf,cmd);
     }
 }

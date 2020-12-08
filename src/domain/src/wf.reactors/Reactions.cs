@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Reflection.Metadata;
+    using System.Linq;
 
     using Z0.Asm;
 
@@ -48,7 +49,7 @@ namespace Z0
         }
 
         [Op]
-        public static CmdResult react(IWfShell wf, ListApiHexFilesCmd cmd)
+        public static CmdResult react(IWfShell wf, PipeApiHexFilesCmd cmd)
         {
             var archive = ApiArchives.hex(wf);
             var files = archive.List();
@@ -169,6 +170,25 @@ namespace Z0
                 return Cmd.ok(cmd);
             else
                 return Cmd.fail(cmd,msg);
+        }
+
+        [Op]
+        public static CmdResult react(IWfShell wf, EmitFileListCmd cmd)
+        {
+            var archive = FileArchives.create(cmd.SourceDir);
+            var files = archive.Files(true, cmd.FileKinds).Where(f => !f.Name.EndsWith(".resources.dll"));
+            var counter = 0;
+            using var writer = cmd.TargetPath.Writer();
+
+            foreach(var file in files)
+            {
+                var listed = new ListedFile(counter++, file);
+                writer.WriteLine(listed.Format());
+            }
+
+            wf.EmittedFile(counter, cmd.TargetPath);
+
+            return Cmd.ok(cmd);
         }
     }
 }

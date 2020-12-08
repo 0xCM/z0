@@ -89,12 +89,14 @@ namespace Z0
 
         public CmdResult Dispatch(ICmdSpec cmd)
         {
-            Wf.Running(Msg.DispatchingCommand.Format(cmd.CmdId));
+            using var dispatch = Wf.Running(Msg.DispatchingCommand.Format(cmd.CmdId));
             try
             {
                 if(Nodes.TryGetValue(cmd.CmdId, out var node))
                 {
-                    return node.Invoke(cmd);
+                    var result = node.Invoke(cmd);
+                    Wf.Status(result.Format());
+                    return result;
                 }
                 else
                 {

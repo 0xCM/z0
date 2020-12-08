@@ -4,10 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    [Cmd(Name)]
-    public struct ListApiHexFilesCmd : ICmdSpec<ListApiHexFilesCmd>
+    [Cmd(CmdName)]
+    public struct PipeApiHexFilesCmd : ICmdSpec<PipeApiHexFilesCmd>
     {
-        public const string Name = "list-hex";
+        public const string CmdName = "pipe-api-hex";
 
         public Index<PartId> Parts;
     }

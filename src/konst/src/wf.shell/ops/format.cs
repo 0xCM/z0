@@ -39,9 +39,6 @@ namespace Z0
         public static IJsonSettings json(IWfPaths paths)
             => JsonSettings.Load(paths.AppConfigPath);
 
-        [MethodImpl(Inline), Op]
-        public static FS.FolderPath logRoot()
-            => WfEnv.dbRoot() + FS.folder("logs") + FS.folder("wf");
 
         [MethodImpl(Inline), Op]
         public static WfExecToken token(ulong seq)
