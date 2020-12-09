@@ -28,12 +28,5 @@ namespace Z0
                 get => new TargetFramework(netcoreapp, FrameworkVersions.v3_1);
             }
         }
-
-        public readonly struct FrameworkVersions
-        {
-            public static Version v3_0 = new Version(3);
-
-            public static Version v3_1 = new Version(3,1);
-        }
     }
 }

@@ -31,6 +31,9 @@ namespace Z0
         void Append(char c)
             => Append(c.ToString());
 
+        void AppendCell<T>(T src)
+            => Append(src?.ToString());
+
         void AppendLine<T>(T src)
         {
             if(src != null)

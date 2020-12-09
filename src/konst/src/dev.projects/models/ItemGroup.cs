@@ -10,14 +10,17 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct ItemGroup
+    partial struct ProjectModel
     {
-        public const string TagName = nameof(ItemGroup);
+        public readonly struct ItemGroup
+        {
+            public const string TagName = nameof(ItemGroup);
 
-        public readonly ProjectItem[] Data;
+            public readonly ProjectItem[] Data;
 
-        [MethodImpl(Inline)]
-        public ItemGroup(ProjectItem[] src)
-            => Data = src;
+            [MethodImpl(Inline)]
+            public ItemGroup(ProjectItem[] src)
+                => Data = src;
+        }
     }
 }

@@ -5,20 +5,15 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
+
+    using static Konst;
+    using static TextRules;
 
     partial class text
     {
-        /// <summary>
-        /// Appends each source items to a target stream, appending an EOL after each
-        /// </summary>
-        /// <param name="src">The data source</param>
-        [Op]
+        [MethodImpl(Inline)]
         public static string lines(params string[] src)
-        {
-            var dst = build();
-            foreach(var item in src)
-                dst.AppendLine(item.Trim());
-            return dst.ToString();
-        }
+            => Format.lines(src);
     }
 }

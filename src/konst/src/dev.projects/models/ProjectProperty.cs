@@ -9,22 +9,25 @@ namespace Z0
 
     using static Konst;
     using static z;
-    
-    public readonly struct ProjectProperty : IProjectProperty<ProjectProperty>    
+
+    partial struct ProjectModel
     {
-        readonly IProjectProperty Definition;
+        public readonly struct ProjectProperty : IProjectProperty<ProjectProperty>
+        {
+            readonly IProjectProperty Definition;
 
-        [MethodImpl(Inline)]
-        public ProjectProperty(IProjectProperty src)
-            => Definition = src;
-        
-        string IProjectElement.Name
-            => Definition.Name;
+            [MethodImpl(Inline)]
+            public ProjectProperty(IProjectProperty src)
+                => Definition = src;
 
-        string IProjectElement.Render()
-            => Definition.Render();    
+            string IProjectElement.Name
+                => Definition.Name;
 
-        string IProjectProperty.Value
-            => Definition.Value;
+            string IProjectElement.Render()
+                => Definition.Render();
+
+            string IProjectProperty.Value
+                => Definition.Value;
+        }
     }
 }

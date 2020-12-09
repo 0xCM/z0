@@ -7,9 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
-
     /// <summary>
     /// Represents a basic generative grammar over a finite set of nonterminal <typeparamref name='S'/> symbols
     /// and a necessarily disjoint set of terminal <typeparamref name='T'/> symbols

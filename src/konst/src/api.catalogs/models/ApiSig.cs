@@ -12,24 +12,24 @@ namespace Z0
 
     public readonly struct ApiSig : ITextual
     {
-        public PartId Part {get;}
+        public utf8 Component {get;}
 
-        public utf8 HostName {get;}
+        public utf8 Host {get;}
 
-        public CliSig MemberSig {get;}
+        public CliSig Member {get;}
 
         [MethodImpl(Inline)]
-        public ApiSig(PartId part, string host, CliSig member)
+        public ApiSig(string component, string host, CliSig member)
         {
-            Part = part;
-            HostName = host;
-            MemberSig = member;
+            Component = component;
+            Host = host;
+            Member = member;
         }
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => MemberSig.IsEmpty;
+            get => Member.IsEmpty;
         }
 
         public bool IsNonEmpty
@@ -41,16 +41,16 @@ namespace Z0
         public uint Hash
         {
             [MethodImpl(Inline)]
-            get => hash(MemberSig.Data);
+            get => hash(Member.Data);
         }
         public string Format()
-            => MemberSig.Format();
+            => Member.Format();
 
         public override string ToString()
             => Format();
 
         public bool Equals(ApiSig src)
-            => MemberSig.Equals(src.MemberSig);
+            => Member.Equals(src.Member);
 
         public override bool Equals(object obj)
             => obj is ApiSig s && Equals(s);
@@ -69,7 +69,7 @@ namespace Z0
         public static ApiSig Empty
         {
             [MethodImpl(Inline)]
-            get => new ApiSig(0, EmptyString, CliSig.Empty);
+            get => new ApiSig(EmptyString, EmptyString, CliSig.Empty);
         }
     }
 }

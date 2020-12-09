@@ -8,25 +8,16 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static TextRules;
 
     partial class text
     {
-        /// <summary>
-        /// Splits the string, removing empty entries
-        /// </summary>
-        /// <param name="src">The source text</param>
-        /// <param name="sep">The delimiter</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static string[] split(string src, char sep)
-            => src.Split(sep, StringSplitOptions.RemoveEmptyEntries);
+            => Parse.split(src,sep);
 
-        /// <summary>
-        /// Splits the string, removing empty entries
-        /// </summary>
-        /// <param name="src">The source text</param>
-        /// <param name="sep">The delimiter</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static string[] split(string src, string sep)
-            => src.Split(sep, StringSplitOptions.RemoveEmptyEntries);
+            => Parse.split(src,sep);
     }
 }

@@ -4,8 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static Konst;
-    using static Chars;
+    using static TextRules;
 
     partial class text
     {
@@ -15,7 +14,7 @@ namespace Z0
         /// <param name="src">The source text</param>
         [Op]
         public static string unbracket(string src)
-            => unfence(src, LBracket, RBracket);
+            => Parse.unbracket(src);
 
         /// <summary>
         /// Extracts text that is enclosed between left and right boundaries, i.e. {left}{content}{right} => {content}
@@ -25,17 +24,7 @@ namespace Z0
         /// <param name="right">The right boundary</param>
         [Op]
         public static string unfence(string src, char left, char right)
-        {
-            if(blank(src))
-                return EmptyString;
-
-            if(!TextTest.fenced(src,left,right))
-                return src;
-
-            var data = src.Trim();
-            var length = data.Length;
-            return data.Substring(1, length - 2);
-        }
+            => Parse.unfence(src, left, right);
 
         /// <summary>
         /// Extracts text that is enclosed between left and right boundaries, i.e. {left}{content}{right} => {content}
@@ -45,16 +34,7 @@ namespace Z0
         /// <param name="right">The right boundary</param>
         [Op]
         public static string unfence(string src, string left, string right)
-        {
-            (var i0, var i1) = indices(src, left, right);
-            if(i0 != NotFound && i1 != NotFound &&(i0 < i1))
-            {
-                var start = i0 + left.Length;
-                var length = i1 - start;
-                return slice(src, start, length);
-            }
+            => Parse.unfence(src, left, right);
 
-            return EmptyString;
-        }
     }
 }

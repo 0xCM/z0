@@ -46,7 +46,7 @@ namespace Z0
             => Format();
 
         public bool Equals(ApiSig src)
-            => Data.Equals(src.MemberSig);
+            => Data.Equals(src.Member);
 
         public int CompareTo(CliSig src)
             => Data.CompareTo(src.Data);

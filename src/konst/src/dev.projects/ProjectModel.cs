@@ -9,14 +9,9 @@ namespace Z0
 
     using static Konst;
     using static z;
-    
+
     public readonly partial struct ProjectModel
-    {        
-        public readonly struct ResProject
-        {
-            public const string OutputType = "Library";
-            
-            public const string TargetFramework = "TargetFramework";   
-        }
+    {
+
     }
 }

@@ -18,6 +18,6 @@ namespace Z0
         /// <param name="a">The source assembly</param>
         [MethodImpl(Inline), Op]
         public static string GetSimpleName(this Assembly a)
-            => a?.GetName()?.Name ?? string.Empty;
+            => a?.GetName()?.Name ?? EmptyString;
     }
 }

@@ -12,56 +12,8 @@ namespace Z0
 
     partial struct Projects
     {
-        public readonly struct Comments
+        public readonly struct CommentCollector
         {
-            public enum CommentTargetKind : byte
-            {
-                None = 0,
-
-                Type = 1,
-
-                Method = 2,
-
-                Field = 3,
-
-                Property = 4,
-            }
-
-            [Table(TableId, FieldCount)]
-            public struct SummaryComment
-            {
-                public const string TableId = "comments";
-
-                public const byte FieldCount = 3;
-
-                public CommentTargetKind Kind;
-
-                public string Identifer;
-
-                public string Summary;
-
-                public SummaryComment(CommentTargetKind kind, string identifier, string summary)
-                {
-                    Kind = kind;
-                    Identifer = identifier;
-                    Summary = summary;
-                }
-            }
-
-            static CommentTargetKind kind(char src)
-                => src switch {
-                    'T' => CommentTargetKind.Type,
-                    'M' => CommentTargetKind.Method,
-                    'P' => CommentTargetKind.Property,
-                    'F' => CommentTargetKind.Field,
-                    _ => CommentTargetKind.None,
-                };
-
-            const string Sep = "| ";
-
-            static string format(SummaryComment src)
-                => text.concat(src.Kind.ToString().PadRight(12), Sep, src.Identifer.PadRight(70), Sep, src.Summary);
-
             public static Dictionary<PartId, Dictionary<string,string>> collect(IWfShell wf)
             {
                 var dir = wf.Db().TableRoot<SummaryComment>();
@@ -85,6 +37,20 @@ namespace Z0
                 }
                 return src;
             }
+
+            const string Sep = "| ";
+
+            public static CommentTargetKind kind(char src)
+                => src switch {
+                    'T' => CommentTargetKind.Type,
+                    'M' => CommentTargetKind.Method,
+                    'P' => CommentTargetKind.Property,
+                    'F' => CommentTargetKind.Field,
+                    _ => CommentTargetKind.None,
+                };
+
+            public static string format(SummaryComment src)
+                => text.concat(src.Kind.ToString().PadRight(12), Sep, src.Identifer.PadRight(70), Sep, src.Summary);
 
             static Dictionary<PartId, Dictionary<string,string>> collect(IWfShell wf, FS.FilePath[] paths)
             {

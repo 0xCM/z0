@@ -37,7 +37,7 @@ namespace Z0
         public void Run()
         {
             Wf.Running();
-            Comments.collect(Wf);
+            CommentCollector.collect(Wf);
             Wf.Ran();
         }
 

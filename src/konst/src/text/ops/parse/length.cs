@@ -8,19 +8,14 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static z;
 
-    partial struct ProjectModel
+    public readonly partial struct TextRules
     {
-        public readonly struct PropertyGroup
+        partial struct Parse
         {
-            public const string TagName = nameof(PropertyGroup);
-
-            public readonly ProjectProperty[] Properties;
-
-            [MethodImpl(Inline)]
-            public PropertyGroup(ProjectProperty[] src)
-                => Properties = src;
+            [MethodImpl(Inline), Op]
+            public static int length(string src)
+                => src?.Length ?? 0;
         }
     }
 }

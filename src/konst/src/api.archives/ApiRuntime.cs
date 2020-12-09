@@ -71,7 +71,7 @@ namespace Z0
         public static Count render(in ApiSig src, ITextBuffer dst)
         {
             var count = Count.Zero;
-            var subject = Hex.format(src.MemberSig.Data, Space, true, false);
+            var subject = Hex.format(src.Member.Data, Space, true, false);
             dst.Append(subject);
             count += subject.Length;
             return count;
@@ -110,8 +110,8 @@ namespace Z0
         }
 
         [Op]
-        public static ApiSig sig(PartId part, Type host, MethodInfo src)
-            => new ApiSig(part, host.Name,  Cli.sig(src));
+        public static ApiSig sig(MethodInfo src)
+            => new ApiSig(src.DeclaringType.Assembly.GetSimpleName(), src.DeclaringType.Name, Cli.sig(src));
 
         [Op]
         public static ref ApiRuntimeMember populate(IApiHost host, ApiMember src, ref ApiRuntimeMember dst)
@@ -120,7 +120,7 @@ namespace Z0
             dst.Address = src.Address;
             dst.Uri = src.MetaUri;
             dst.Genericity = method.GenericState();
-            dst.Sig = sig(src.Host.Owner, host.HostType, method);
+            dst.Sig = sig(method);
             dst.Metadata = method.Metadata();
             dst.Cil = src.Cil;
             return ref dst;

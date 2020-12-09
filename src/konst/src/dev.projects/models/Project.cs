@@ -10,11 +10,11 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct ProjectModel
+    public partial struct ProjectModel
     {
         public readonly struct Project
         {
-            public readonly Sdk Sdk;                
+            public readonly Sdk Sdk;
 
             public readonly string Name;
 
@@ -29,11 +29,11 @@ namespace Z0
                 Name = name;
                 Sdk = sdk;
                 PropertyGroups = properties;
-                itemGroups = items;                
-            }                  
+                itemGroups = items;
+            }
 
             public string Render()
                 => EmptyString;
-        }        
+        }
     }
 }

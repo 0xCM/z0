@@ -12,8 +12,6 @@ public readonly struct ApiNames
 
     public const string Memory = memory + dot + core;
 
-    public const string PartExtensions = part + dot + extensions;
-
     public const string LiteralKinds = literals + dot + kinds;
 
     public const string Arrays = collective + dot + arrays;
@@ -74,6 +72,14 @@ public readonly struct ApiNames
     public const string ApiHostQuery = api + dot + query + dot + hosts;
 
     public const string ApiJit = api + dot + jit;
+
+    public const string ApiSpecs = api + dot + specs;
+
+    public const string ApiCallMap = api + dot + calls + dot + "map";
+
+    public const string ApiCallRoutes = api + dot + calls + dot + routes;
+
+    public const string ApiData = api + dot + data;
 
     // ~~ Bitlogic
     // ~~ -----------------------------------------------------------------------------------------
@@ -370,6 +376,8 @@ public readonly struct ApiNames
 
     public const string ApiArchives = api + dot + archives;
 
+    public const string ApiRuntime = api + dot + runtime;
+
     public const string Links = links;
 
     const string v512 = nameof(v512);
@@ -392,21 +400,7 @@ public readonly struct ApiNames
 
     public const string Cmd = cmd + dot + core;
 
-    public const string CmdPatterns = cmd + dot + patterns;
-
-    public const string CmdRunners = cmd + dot + "runners";
-
     public const string JsonDeps = runtime + dot + archives + dot + "dependencies";
-
-    public const string ApiSpecs = api + dot + specs;
-
-    public const string ApiCallMap = api + dot + calls + dot + "map";
-
-    public const string ApiCallRoutes = api + dot + calls + dot + routes;
-
-    public const string ApiData = api + dot + data;
-
-    public const string ApiRuntime = api + dot + runtime;
 
     public const string BitSeqApi = bits + dot + seq + dot + api;
 
@@ -436,11 +430,7 @@ public readonly struct ApiNames
 
     public const string AsmOperands =  AsmLang + dot + operands;
 
-    public const string AsmMachines = asm + dot + machines;
-
     public const string RegisterQuery = asm + dot + registers + dot + query;
-
-    public const string CheckOutcomes = check + dot + outcomes;
 
     public const string AsmSemanticRender = asm + dot + semantic + dot + render;
 
