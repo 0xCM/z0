@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    [Record,StructLayout(LayoutKind.Sequential)]
+    [Record]
     public struct TokenRecord : IRecord<TokenRecord>
     {
         public Sequential Index;

@@ -4,15 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Konst;
-    using static z;
-
-    public struct ApiRuntimeSummary
+    [Record(TableId)]
+    public struct ApiRuntimeSummary : IRecord<ApiRuntimeSummary>
     {
-        public const string TableId = "z0.api";
+        public const string TableId = "api-summary";
 
         public MemoryAddress Address;
 

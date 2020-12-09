@@ -4,14 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Image
 {
-    using System;
-    using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
     partial struct Pe
     {
         [Record, StructLayout(LayoutKind.Sequential)]
-        public struct DirectoryEntry
+        public struct DirectoryEntry : IRecord<DirectoryEntry>
         {
             public Address32 Rva;
 

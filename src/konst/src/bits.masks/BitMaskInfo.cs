@@ -5,16 +5,11 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.InteropServices;
 
-    using static Konst;
-
-    [StructLayout(LayoutKind.Sequential), Table(TableId, FieldCount)]
-    public struct BitMaskInfo
+    [Record(TableId)]
+    public struct BitMaskInfo : IRecord<BitMaskInfo>
     {
         public const string TableId = "bitmasks";
-
-        public const byte FieldCount = 5;
 
         public string Name;
 

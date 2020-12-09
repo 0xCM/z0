@@ -17,6 +17,28 @@ namespace Z0
     }
 
     [Free]
+    public interface ICmdReactor<S> : ICmdReactor
+        where S : struct, ICmdSpec<S>
+    {
+        CmdId ICmdReactor.CmdId
+            => default(S).CmdId;
+
+        CmdResult Invoke(S src);
+
+        CmdResult ICmdReactor.Invoke(ICmdSpec src)
+        {
+            try
+            {
+                Invoke((S)src);
+                return Cmd.ok(src);
+            }
+            catch(Exception e)
+            {
+                return Cmd.fail(src,e);
+            }
+        }
+    }
+    [Free]
     public interface ICmdReactor<S,T> : ICmdReactor
         where S : struct, ICmdSpec<S>
         where T : struct

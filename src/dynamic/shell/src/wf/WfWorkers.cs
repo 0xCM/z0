@@ -9,7 +9,6 @@ namespace Z0
     using System.IO;
 
     using static z;
-    using static Konst;
 
     public struct WfWorkers : IWfService<WfWorkers>
     {

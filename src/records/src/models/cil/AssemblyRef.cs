@@ -7,13 +7,10 @@ namespace Z0
     using System;
     using System.Reflection;
 
-    using static Konst;
-    using static z;
-
     /// <summary>
     /// Captures a dependency relationship between two assemblies
     /// </summary>
-    [Table(TableId, FieldCount)]
+    [Record(TableId, FieldCount)]
     public struct AssemblyRef : IRecord<AssemblyRef>
     {
         public const string TableId = "cli.assemblyref";

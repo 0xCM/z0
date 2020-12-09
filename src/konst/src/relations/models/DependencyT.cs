@@ -16,7 +16,6 @@ namespace Z0
     /// Captures a node-homogenous directed relation
     /// </summary>
     public readonly struct Dependency<T> : IDependency<T>
-        where T : INode<T>
     {
         /// <summary>
         /// The client in the relation that that depends on the <see cref='Target'/>

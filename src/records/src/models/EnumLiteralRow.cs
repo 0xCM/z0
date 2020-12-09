@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    [StructLayout(LayoutKind.Sequential), Record]
+    [StructLayout(LayoutKind.Sequential), Record(TableId)]
     public struct EnumLiteralRow : IComparable<EnumLiteralRow>, IRecord<EnumLiteralRow>
     {
         public const string TableId = "enums.literals";

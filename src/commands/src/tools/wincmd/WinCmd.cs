@@ -13,24 +13,38 @@ namespace Z0.Tools
     [ApiHost]
     public readonly partial struct WinCmd
     {
+        public enum EchoMode
+        {
+            Enable,
+
+            Emit
+        }
+
         public struct Echo : IToolCmd<Echo>
         {
             public bit On;
 
             public utf8 Message;
+
+            public EchoMode Mode;
         }
 
+        [MethodImpl(Inline)]
         public static Echo echo(bit on)
         {
             var cmd = new Echo();
             cmd.On = on;
-            cmd.Message = utf8.Empty;
+            cmd.Mode = EchoMode.Enable;
             return cmd;
         }
 
-        public static utf8 format(Echo cmd)
+        [MethodImpl(Inline)]
+        public static Echo echo(utf8 message)
         {
-            return default;
+            var cmd = new Echo();
+            cmd.Message = message;
+            cmd.Mode = EchoMode.Emit;
+            return cmd;
         }
     }
 }

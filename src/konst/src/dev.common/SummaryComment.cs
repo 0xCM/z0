@@ -19,12 +19,10 @@ namespace Z0
         Property = 4,
     }
 
-    [Table(TableId, FieldCount)]
-    public struct SummaryComment
+    [Record(TableId)]
+    public struct SummaryComment : IRecord<SummaryComment>
     {
         public const string TableId = "comments";
-
-        public const byte FieldCount = 3;
 
         public CommentTargetKind Kind;
 

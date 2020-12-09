@@ -80,11 +80,23 @@ namespace Z0
             return outcome ? Cmd.ok(cmd) : Cmd.fail(cmd,outcome.Format());
         }
 
+        public static EmitFileListCmd EmitFileListCmdSample(IWfShell wf)
+        {
+            var cmd = new EmitFileListCmd();
+            cmd.ListName = "tests";
+            cmd.SourceDir = FS.dir(@"J:\lang\net\runtime\artifacts\tests\coreclr\Windows_NT.x64.Debug");
+            cmd.TargetPath = wf.Db().JobPath(FS.file("coreclr.tests", ArchiveFileKinds.Cmd));
+            cmd.FileUriMode = false;
+            cmd.WithKinds(ArchiveFileKinds.Cmd);
+            cmd.LimitEmissions(20);
+            return cmd;
+        }
+
         // CmdResult EmitToolHelp()
         //     => EmitResourceData.run(Wf, CmdBuilder.EmitResourceData(Parts.Refs.Assembly, "tools/help", ".help"));
 
         CmdResult EmitFileList()
-            => exec(Wf.EmitFileListCmdSample());
+            => exec(EmitFileListCmdSample(Wf));
 
         CmdResult EmitAsmRefs()
         {
@@ -265,6 +277,7 @@ namespace Z0
                 }
             }
         }
+
 
         public void Run()
         {

@@ -4,11 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.InteropServices;
-
-    [StructLayout(LayoutKind.Sequential)]
-    public struct ApiRuntimeMember
+    [Record]
+    public struct ApiRuntimeMember : IRecord<ApiRuntimeMember>
     {
         public MemoryAddress Address;
 
@@ -21,7 +18,5 @@ namespace Z0
         public ApiSig Sig;
 
         public CilMethod Cil;
-
-        //public MachineFunction x86Fx;
     }
 }

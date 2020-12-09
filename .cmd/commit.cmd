@@ -1,1 +1,3 @@
-call "bash.exe" "%ZDev%\.cmd\commit.sh"
+git add -A
+git commit -am "."
+git push

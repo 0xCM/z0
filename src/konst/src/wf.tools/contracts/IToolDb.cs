@@ -9,13 +9,6 @@ namespace Z0
     [Free]
     public interface IToolDb
     {
-        FS.FolderPath Storage {get;}
-    }
-
-    [Free]
-    public interface IToolDb<H> : IToolDb
-        where H : struct, IToolDb<H>
-    {
-
+        FS.FolderPath Root {get;}
     }
 }

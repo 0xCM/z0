@@ -25,7 +25,7 @@ namespace Z0
         }
 
         public static ReadOnlySpan<byte> RenderWidths
-            => new byte[ImageSectionHeader.FieldCount]{60,16,16,12,12,60,16,16,16};
+            => new byte[9]{60,16,16,12,12,60,16,16,16};
 
         public static CmdResult run(IWfShell wf, EmitImageHeadersCmd spec)
         {

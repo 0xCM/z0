@@ -9,10 +9,9 @@ namespace Z0
 
     using static Konst;
     using static z;
+    using static ImageSectionHeader;
 
     using F = ImageSectionHeader.Fields;
-
-    using static ImageSectionHeader;
 
     [WfHost]
     public sealed class EmitSectionHeaders : WfHost<EmitSectionHeaders>

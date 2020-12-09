@@ -9,13 +9,11 @@ namespace Z0
 
     using static Konst;
 
-    using static z;
-
     partial struct Table
     {
         [Op]
         public static string identifier(Type src)
-            => src.Tag<TableAttribute>().MapValueOrElse(a => a.TableId, () => src.Name);
+            => src.Tag<RecordAttribute>().MapValueOrElse(a => a.TableId, () => src.Name);
 
         [MethodImpl(Inline)]
         public static TableId id<T>()
@@ -24,7 +22,7 @@ namespace Z0
 
         [Op]
         public static TableId id(Type src)
-            => src.Tag<TableAttribute>().MapValueOrElse(
+            => src.Tag<RecordAttribute>().MapValueOrElse(
                     a => new TableId(src.MetadataToken, a.TableId),
                     () => new TableId(src.MetadataToken, src.Name));
     }

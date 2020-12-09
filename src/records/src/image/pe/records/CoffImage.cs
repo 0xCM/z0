@@ -5,7 +5,6 @@
 namespace Z0.Image
 {
     using System;
-    using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
     partial struct Pe
@@ -15,7 +14,7 @@ namespace Z0.Image
         /// is a standard COFF file header in the following format. Note that the Windows loader limits
         /// the number of sections to 96.
         /// </summary>
-        [Record(CoffHeaderSchema, CoffHeaderInfo), StructLayout(LayoutKind.Sequential)]
+        [Record, StructLayout(LayoutKind.Sequential)]
         public struct CoffHeader
         {
             public MachineType Machine;

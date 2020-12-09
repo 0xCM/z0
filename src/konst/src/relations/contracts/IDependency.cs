@@ -14,8 +14,6 @@ namespace Z0
     /// <typeparam name="T">The target node type</typeparam>
     [Free]
     public interface IDependency<S,T> : IRelation<S,T>
-        where S : INode<S>
-        where T : INode<T>
     {
     }
 
@@ -25,7 +23,6 @@ namespace Z0
     /// <typeparam name="T">The node type</typeparam>
     [Free]
     public interface IDependency<T> : IDependency<T,T>
-        where T : INode<T>
     {
     }
 }

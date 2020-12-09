@@ -29,6 +29,31 @@ namespace Z0
     }
 
     [Free]
+    public interface IDataTypeComparable<T> : IDataType<T>, IComparable<T>
+        where T : struct
+    {
+
+    }
+
+    [Free]
+    public interface IDataTypeEquatable<T> : IDataType<T>, IEquatable<T>
+        where T : struct
+    {
+
+    }
+
+    /// <summary>
+    /// Characterizes an indexed <see cref='IDataType{T}'/> sequence
+    /// </summary>
+    /// <typeparam name="T">The datatype type</typeparam>
+    [Free]
+    public interface IDataTypeIndex<T> : IIndex<T>
+        where T : struct, IDataType<T>
+    {
+
+    }
+
+    [Free]
     public interface IDataType<W,T> : IDataType<T>
         where W : unmanaged, ITypeWidth<W>
         where T : struct

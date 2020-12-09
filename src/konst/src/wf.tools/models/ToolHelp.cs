@@ -13,7 +13,7 @@ namespace Z0
     {
         public ToolId Id {get;}
 
-        public string Content {get;}
+        public utf8 Content {get;}
 
         [MethodImpl(Inline)]
         public ToolHelp(ToolId id, string content)

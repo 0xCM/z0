@@ -12,8 +12,5 @@ namespace Z0
     [ApiHost]
     public readonly partial struct DataTypes
     {
-        public static DataTypeFormatter<T> formatter<T>()
-            where T : struct, IDataType<T>
-                => default;
     }
 }

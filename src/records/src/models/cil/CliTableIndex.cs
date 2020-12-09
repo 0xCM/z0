@@ -5,19 +5,17 @@
 namespace Z0
 {
     using System;
-    using System.Reflection.Metadata;
     using System.Reflection.Metadata.Ecma335;
-    using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
 
     using static Konst;
 
-    [StructLayout(LayoutKind.Sequential), Record]
-    public readonly struct CliTableIndex : IRecord<CliTableIndex>
+    [Record]
+    public struct CliTableIndex : IRecord<CliTableIndex>
     {
-        public readonly CliArtifactKey Key;
+        public CliArtifactKey Key;
 
-        public readonly TableIndex Source;
+        public TableIndex Source;
 
         [MethodImpl(Inline)]
         public CliTableIndex(CliArtifactKey token, TableIndex src)

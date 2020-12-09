@@ -26,10 +26,5 @@ namespace Z0
             where T : unmanaged
                 => new ToolSpec(typeof(T).Name, flags, options, syntax);
 
-        // [MethodImpl(Inline)]
-        // public static ToolSpec specify<T,F>(F[] flags, CmdOptionSpec[] options, UsageSyntax syntax)
-        //     where T : struct, ITool<T>
-        //     where F : unmanaged
-        //         => new ToolSpec(typeof(T).Name, options);
     }
 }

@@ -5,18 +5,13 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
     using System.Reflection.Metadata;
     using System.Reflection;
-
-    using static Konst;
-    using static z;
 
     /// <summary>
     /// Captures <see cref='MethodDefinition'/> data in usable form
     /// </summary>
-    [StructLayout(LayoutKind.Sequential), Record]
+    [Record(TableId)]
     public struct CliMethodDefinition : IRecord<CliMethodDefinition>
     {
         public const string TableId = "cli.method.definition";

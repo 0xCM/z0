@@ -38,9 +38,6 @@ namespace Z0
             Target = dst;
         }
 
-        public static Type Type
-            => LinkType<S,T,K>.Type;
-
         [MethodImpl(Inline)]
         public static implicit operator Link<S,T,K>(Tripled<S,T,K> src)
             => new Link<S,T,K>(src.First, src.Second, src.Third);

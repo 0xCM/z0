@@ -7,9 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Diagnostics;
-    using System.Reflection;
     using System.Linq;
     using System.IO;
+    using System.Reflection;
 
     using static Konst;
     using static z;
@@ -21,9 +21,45 @@ namespace Z0
         public static LocatedImages locate()
             => locate(Process.GetCurrentProcess());
 
+        public static ReadOnlySpan<ProcessModule> modules(Process src)
+            => src.Modules.Cast<ProcessModule>().Array();
+
         [MethodImpl(Inline), Op]
         public static LocatedImages locate(Process src)
             => src.Modules.Cast<ProcessModule>().Map(locate).OrderBy(x => x.BaseAddress);
+
+        [Op]
+        public static ref EmitImageContentCmd specify(IWfShell wf, ProcessModule src, ref EmitImageContentCmd cmd)
+        {
+            var located = locate(src);
+            cmd.Source = located;
+            cmd.Target = wf.Db().Table(ImageContentRecord.TableId, located.ImagePath.FileName.WithoutExtension);
+            return ref cmd;
+        }
+
+        [Op]
+        public static void specify(IWfShell wf, Process src, out Index<EmitImageContentCmd> buffer)
+        {
+            var pmods = modules(src);
+            var count = pmods.Length;
+            buffer = sys.alloc<EmitImageContentCmd>(count);
+            var dst = buffer.Edit;
+            for(var i=0; i <count; i++)
+                specify(wf, skip(pmods,i) , ref seek(dst,i));
+        }
+
+        [MethodImpl(Inline)]
+        public static EmitImageContentCmd define(LocatedImage src, FS.FilePath dst)
+        {
+            var cmd = new EmitImageContentCmd();
+            cmd.Source = src;
+            cmd.Target = dst;
+            return cmd;
+        }
+
+        [MethodImpl(Inline)]
+        public static EmitImageContentCmd define(IWfShell wf, LocatedImage src)
+            => define(src, wf.Db().Table(ImageContentRecord.TableId, src.ImagePath.FileName.WithoutExtension));
 
         /// <summary>
         /// Creates a <see cref='LocatedImage'/> description from a specified <see cref='ProcessModule'/>
@@ -44,6 +80,14 @@ namespace Z0
         public static MemoryAddress @base(IPart src)
         {
             var match =  Path.GetFileNameWithoutExtension(src.Owner.Location);
+            var module = SystemProcess.modules().Where(m => Path.GetFileNameWithoutExtension(m.Path.Name) == match).First();
+            return module.Base;
+        }
+
+        [MethodImpl(Inline), Op]
+        public static MemoryAddress @base(Assembly src)
+        {
+            var match =  Path.GetFileNameWithoutExtension(src.Location);
             var module = SystemProcess.modules().Where(m => Path.GetFileNameWithoutExtension(m.Path.Name) == match).First();
             return module.Base;
         }

@@ -9,15 +9,10 @@ namespace Z0
 
     using Z0.Asm;
 
-    using static Konst;
-    using static z;
-
-    [Table(TableId, FieldCount), StructLayout(LayoutKind.Sequential)]
+    [Record(TableId), StructLayout(LayoutKind.Sequential)]
     public struct JmpInfo
     {
         public const string TableId = "asm.jumps";
-
-        public const byte FieldCount = 7;
 
         public MemoryAddress Base;
 

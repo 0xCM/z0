@@ -30,14 +30,14 @@ namespace Z0
             get => api.identifier(this);
         }
 
-       [MethodImpl(Inline)]
+        [MethodImpl(Inline)]
         public string Format()
             => Identifier;
 
         public override string ToString()
             => Format();
 
-       [MethodImpl(Inline)]
+        [MethodImpl(Inline)]
         public static implicit operator Link<S,T>((S src, T dst) x)
             => new Link<S,T>(x.src, x.dst);
 

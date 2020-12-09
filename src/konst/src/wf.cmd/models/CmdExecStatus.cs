@@ -6,12 +6,10 @@ namespace Z0
 {
     using System;
 
-    [Table(TableId, FieldCount)]
+    [Record(TableId)]
     public struct CmdExecStatus
     {
         public const string TableId = "cmd.status";
-
-        public const byte FieldCount = 6;
 
         public int Id;
 

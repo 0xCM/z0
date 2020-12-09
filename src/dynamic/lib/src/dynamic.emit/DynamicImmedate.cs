@@ -13,6 +13,7 @@ namespace Z0
 
     using static Konst;
     using static z;
+    using static SpanBlockDelegates;
 
     public static class DynamicImmediate
     {
@@ -140,7 +141,7 @@ namespace Z0
             return Delegates.dynamic<BinaryOp<Vector128<T>>>(idTarget, wrapped, target);
         }
 
-        public static DynamicDelegate<UnaryBlockedOp128<T>> EmbedBlockedUnaryOpImm<T>(W128 w, OpIdentity id, MethodInfo src, byte imm8)
+        public static DynamicDelegate<UnarySpanOp128<T>> EmbedBlockedUnaryOpImm<T>(W128 w, OpIdentity id, MethodInfo src, byte imm8)
             where T : unmanaged
         {
             var wrapped = src.Reify(typeof(T));
@@ -153,7 +154,7 @@ namespace Z0
             gTarget.Emit(OpCodes.Ldarg_1);
             gTarget.EmitCall(OpCodes.Call, wrapped, null);
             gTarget.Emit(OpCodes.Ret);
-            return Delegates.dynamic<UnaryBlockedOp128<T>>(idTarget, wrapped, target);
+            return Delegates.dynamic<UnarySpanOp128<T>>(idTarget, wrapped, target);
         }
     }
 }

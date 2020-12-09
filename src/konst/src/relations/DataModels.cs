@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static z;
 
     [ApiHost(ApiNames.DataModels, true)]
     public readonly partial struct DataModels
@@ -24,10 +23,5 @@ namespace Z0
         public static DataModel<K> define<K>(string name, K kind)
             where K : unmanaged
                 => new DataModel<K>(name, kind);
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static DataRef<T> reference<T>(in T src)
-            where T : struct
-                => new DataRef<T>(typeof(T).MetadataToken);
     }
 }

@@ -13,8 +13,6 @@ namespace Z0
     /// <typeparam name="S">The source node type</typeparam>
     /// <typeparam name="T">The target node type</typeparam>
     public interface IRelation<S,T>
-        where S : INode<S>
-        where T : INode<T>
     {
         S Source {get;}
 
@@ -29,8 +27,6 @@ namespace Z0
     /// <typeparam name="T">The target node type</typeparam>
     public interface IRelation<K,S,T> : IRelation<S,T>, IKinded<K>
         where K : unmanaged
-        where S : INode<S>
-        where T : INode<T>
     {
 
     }

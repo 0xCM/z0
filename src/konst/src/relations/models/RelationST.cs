@@ -8,14 +8,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static z;
 
     /// <summary>
-    /// Defines a directed association from a source to a target
+    /// Defines an undirected association between a source and a target
     /// </summary>
     public readonly struct Relation<S,T>
-        where S : INode<S>
-        where T : INode<T>
     {
         public S Source {get;}
 
@@ -32,5 +29,4 @@ namespace Z0
         public static implicit operator Relation<S,T>((S src, T dst) x)
             => new Relation<S,T>(x.src, x.dst);
     }
-
 }

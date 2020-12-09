@@ -9,12 +9,10 @@ namespace Z0
 
     using static Konst;
 
-    [Table(TableId,FieldCount)]
+    [Record(TableId)]
     public struct SymbolSpec : ISymbolSpec
     {
         public const string TableId = "symbols.spec";
-
-        public const byte FieldCount = 6;
 
         public ushort SymWidth;
 

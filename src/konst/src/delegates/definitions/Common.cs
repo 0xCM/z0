@@ -11,23 +11,6 @@ namespace Z0
 
     partial class Delegates
     {
-        [Free]
-        public delegate A Imm8UnaryOp<A>(A a, byte b);
-
-        [Free]
-        public delegate A Imm8BinaryOp<A>(A a, A b, byte c);
-
-        [Free]
-        public delegate T Projector<T>(in T src);
-
-        /// <summary>
-        /// Characterizes a parametric projector
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <typeparam name="S">The operand type</typeparam>
-        /// <typeparam name="T">The target type</typeparam>
-        [Free]
-        public delegate T Projector<S,T>(in S src);
 
         /// <summary>
         /// Characterizes a receiver that accepts a stream
@@ -42,9 +25,6 @@ namespace Z0
         /// <typeparam name="T">The stream element type</typeparam>
         [Free]
         public delegate void SpanReceiver<T>(Span<T> src);
-
-        [Free]
-        public delegate bool TernaryPredicate<T>(T a, T b, T c);
 
         [Free]
         public delegate bool TernaryPredicate<W,T>(T a, T b, T c)

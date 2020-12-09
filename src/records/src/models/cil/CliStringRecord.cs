@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static Konst;
-    using static RP;
-
     public struct CliStringRecord
     {
         public enum Kind

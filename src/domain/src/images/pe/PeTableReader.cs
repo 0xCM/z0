@@ -10,7 +10,6 @@ namespace Z0
     using System.Reflection.Metadata.Ecma335;
 
     using static Konst;
-    using static z;
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
     using I = System.Reflection.Metadata.Ecma335.TableIndex;

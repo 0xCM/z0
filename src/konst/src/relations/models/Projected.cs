@@ -9,6 +9,9 @@ namespace Z0
 
     using static Konst;
 
+    /// <summary>
+    /// Represents a completed projection from a source node to a target node
+    /// </summary>
     public readonly struct Projected<S,T> : IDataFlow<S,T>
     {
         public S Source {get;}

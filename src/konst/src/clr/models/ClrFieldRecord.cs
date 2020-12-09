@@ -4,15 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
     using System.Reflection;
-    using System.Runtime.InteropServices;
 
-    using static Konst;
-
-    [StructLayout(DefaultLayout), Table(TableId, FieldCount)]
-    public struct ClrFieldRecord
+    [Record(TableId)]
+    public struct ClrFieldRecord : IRecord<ClrFieldRecord>
     {
         public const byte FieldCount = 6;
 

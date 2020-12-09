@@ -57,8 +57,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator LinkType(LinkType<T> src)
             => new LinkType(src.Source, src.Target);
-
-        public static Type Type
-            => typeof(LinkType<T>);
     }
 }

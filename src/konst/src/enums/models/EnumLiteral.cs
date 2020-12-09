@@ -6,18 +6,15 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
     using static Part;
 
     using F = EnumLiteral.Fields;
 
-    [StructLayout(LayoutKind.Sequential), Table(TableId, FieldCount)]
+    [Record(TableId)]
     public struct EnumLiteral
     {
         public const string TableId = "enum.literals";
-
-        public const byte FieldCount = 6;
 
         /// <summary>
         /// Defines the fields into which a literal table is partitioned

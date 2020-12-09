@@ -144,6 +144,9 @@ namespace Z0
         IFileDb Db()
             => DbSvc.create(Init.DbRoot);
 
+        IToolDb ToolDb()
+            => new ToolDb(this);
+
         WfEventId Raise<E>(in E e)
             where E : IWfEvent
         {

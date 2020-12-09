@@ -9,8 +9,7 @@ namespace Z0
 
     using static Konst;
     using static z;
-
-    public delegate int RefComparer<T>(in T key, in T value);
+    using static Delegates;
 
     public struct RefSearch<T>
     {

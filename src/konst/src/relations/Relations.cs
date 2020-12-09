@@ -23,13 +23,14 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static string format<T>(Dependency<T> src)
-            where T : INode<T>
-                => text.format("{0} -> {1}", src.Source, src.Target);
+                => RenderLink<T>().Format(src.Source, src.Target);
 
         [MethodImpl(Inline)]
         public static string format<S,T>(Dependency<S,T> src)
-            where S : INode<S>
-            where T : INode<T>
-                => text.format("{0} -> {1}", src.Source, src.Target);
+            => RenderLink<S,T>().Format(src.Source, src.Target);
+
+        public static RenderPattern<S,T> RenderLink<S,T>() => "{0} -> {1}";
+
+        public static RenderPattern<T,T> RenderLink<T>() => RenderLink<T,T>();
     }
 }

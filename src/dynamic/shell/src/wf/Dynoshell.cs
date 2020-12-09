@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Linq;
     using System.Reflection;
+    using System.Diagnostics;
 
     using static Konst;
     using static z;
@@ -72,6 +73,12 @@ namespace Z0
             PipeChecks.check(Wf);
         }
 
+        void EmitProcessImages(IWfShell wf)
+        {
+            ProcessImages.specify(wf, Process.GetCurrentProcess(), out Index<EmitImageContentCmd> commands);
+            iter(commands, cmd => Dispatch(cmd));
+        }
+
         public void Dispatch(ICmdSpec cmd)
         {
             Wf.Router.Dispatch(cmd);
@@ -79,9 +86,11 @@ namespace Z0
 
         public void Run()
         {
-            var cmd = new LocateImagesCmd();
-            cmd.Target = Wf.Db().IndexFile(LocatedImageRow.TableId);
-            Dispatch(cmd);
+            EmitProcessImages(Wf);
+
+            // var cmd = new LocateImagesCmd();
+            // cmd.Target = Wf.Db().IndexFile(LocatedImageRow.TableId);
+            // Dispatch(cmd);
         }
     }
 

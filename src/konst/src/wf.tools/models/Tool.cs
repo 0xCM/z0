@@ -11,13 +11,12 @@ namespace Z0
 
     public readonly struct Tool<T> : ITool<Tool<T>>
     {
-        public ToolId Id {get;}
+        public string ToolName {get;}
 
         [MethodImpl(Inline)]
-        public Tool(ToolId id)
-        {
-            Id = id;
-        }
+        public Tool(string name)
+            => ToolName = name;
+        public ToolId Id => ToolName;
 
         [MethodImpl(Inline)]
         public static implicit operator Tool<T>(string id)

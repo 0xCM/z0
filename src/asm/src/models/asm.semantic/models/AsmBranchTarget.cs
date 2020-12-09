@@ -6,16 +6,13 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
     using static Konst;
 
-    [StructLayout(LayoutKind.Sequential), Table(TableId, FieldCount)]
+    [Record(TableId)]
     public struct AsmBranchTarget
     {
         public const string TableId = "asm.branch";
-
-        public const byte FieldCount = 4;
 
         /// <summary>
         /// The target address

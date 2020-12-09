@@ -17,14 +17,14 @@ namespace Z0
 
         [Op, Closures(Closure)]
         public static string format(LinkType t)
-            => text.format("{0} -> {1}", t.Source.Name, t.Target.Name);
+            => Relations.RenderLink<string>().Format(t.Source.Name, t.Target.Name);
 
         [Op, Closures(Closure)]
         public static string format<T>(LinkType<T> src)
-            => text.format("{0} -> {1}", src.Source.Name, src.Target.Name);
+            => Relations.RenderLink<string>().Format(src.Source.Name, src.Target.Name);
 
         public static string format<S,T>(LinkType<S,T> src)
-            => text.format("{0} -> {1}", src.Source.Name, src.Target.Name);
+            => Relations.RenderLink<string>().Format(src.Source.Name, src.Target.Name);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Link<T> link<T>(T src, T dst)
@@ -74,10 +74,10 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static string identifier<S,T>(Link<S,T> link)
-            => string.Format("{0} -> {1}", link.Source, link.Target);
+            => Relations.RenderLink<S,T>().Format(link.Source, link.Target);
 
         [MethodImpl(Inline), Closures(Closure)]
         public static string identifier<T>(Link<T> link)
-            => string.Format("{0} -> {1}", link.Source, link.Target);
+            => Relations.RenderLink<T>().Format(link.Source, link.Target);
     }
 }

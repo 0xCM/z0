@@ -11,7 +11,7 @@ namespace Z0
 
     public readonly partial struct RngCases
     {
-        [Record, StructLayout(DefaultLayout)]
+        [StructLayout(DefaultLayout), Record]
         public struct DomainCase<T> : IRecord<DomainCase<T>>
             where T : unmanaged
         {

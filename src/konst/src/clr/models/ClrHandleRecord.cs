@@ -5,17 +5,11 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.InteropServices;
 
-    [StructLayout(LayoutKind.Sequential), Table(TableId, FieldCount)]
-    public struct ClrHandleRecord
+    [Record(TableId)]
+    public struct ClrHandleRecord : IRecord<ClrHandleRecord>
     {
-        public const byte FieldCount = 3;
-
         public const string TableId = "clr.handles";
-
-        public static ReadOnlySpan<byte> RenderWidths
-            => new byte[FieldCount]{16, 16, 16};
 
         public ClrArtifactKind Kind;
 

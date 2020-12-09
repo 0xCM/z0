@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Captures <see cref='ManifestResource'/> data in usable form
     /// </summary>
-    [StructLayout(LayoutKind.Sequential), Table(TableId)]
+    [StructLayout(LayoutKind.Sequential), Record(TableId)]
     public struct CliManifestResourceInfo : IRecord<CliManifestResourceInfo>
     {
         public const string TableId = "cli.manifest.resource";

@@ -6,14 +6,13 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Linq;
 
     using static Konst;
     using static z;
     using static Msg;
 
     [ApiHost]
-    public class ToolDb
+    public class ToolDb : IToolDb
     {
         readonly IWfShell Wf;
 
@@ -21,13 +20,15 @@ namespace Z0
 
         readonly ToolCatalog _Catalog;
 
+        public FS.FolderPath Root {get;}
+
         [MethodImpl(Inline), Op]
         public static Toolset toolset(string id, FS.FolderPath location)
             => new Toolset(id, location);
 
         [MethodImpl(Inline), Op]
-        public static ToolCatalog catalog()
-            => new ToolCatalog(FS.dir("j:/root/tools"));
+        public static ToolCatalog catalog(IWfShell wf)
+            => new ToolCatalog(wf.Db().ToolDbRoot());
 
         public void ListToolHelpFiles()
         {
@@ -69,8 +70,9 @@ namespace Z0
         public ToolDb(IWfShell wf)
         {
             Wf = wf;
+            Root = Wf.Db().ToolDbRoot();
             _Toolsets = toolsets();
-            _Catalog = catalog();
+            _Catalog = catalog(wf);
         }
 
         public ToolCatalog Catalog
@@ -82,7 +84,6 @@ namespace Z0
         {
             Wf.EmittedFile(script.GetType(), script.Length, Cmd.enqueue(Cmd.job(script.Id, script), Wf.Db()));
         }
-
 
         public ToolHelp Help(ToolId tool)
         {

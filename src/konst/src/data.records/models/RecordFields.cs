@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct RecordFields : IRecordFields
+    public readonly struct RecordFields : IIndex<RecordField>
     {
         readonly IndexedSeq<RecordField> Data;
 

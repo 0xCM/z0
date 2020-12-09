@@ -15,6 +15,24 @@ namespace Z0
     [ApiHost(ApiNames.ApiRuntime, true)]
     public readonly struct ApiRuntime
     {
+        const string SummaryRenderPattern = "| {0,-16} | {1,-64} | {2,16} | {3, -64} | {4}";
+
+        public static string format(in ApiRuntimeSummary src)
+            => string.Format(SummaryRenderPattern, src.Address, src.Uri, src.Genericity, src.Sig, src.Metadata);
+
+        [MethodImpl(Inline), Op]
+        public static FS.FilePath target(IFileDb db, string id)
+            => db.IndexFile(id);
+
+        [Op]
+        public static void emit(ReadOnlySpan<ApiRuntimeSummary> src, FS.FilePath dst)
+        {
+            var count = src.Length;
+            using var writer = dst.Writer();
+            for(var i=0; i<count; i++)
+                writer.WriteLine(format(skip(src,i)));
+        }
+
         [RenderFunction]
         public static Count render(in ApiRuntimeMember src, ITextBuffer dst)
         {

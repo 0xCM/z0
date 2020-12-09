@@ -60,7 +60,7 @@ namespace Z0
         /// </summary>
         /// <param name="t">The identifying type</param>
         FS.FolderPath TableRoot(Type t)
-            => t.Tag<TableAttribute>().MapValueOrElse(a => TableRoot(a.TableId), () => TableRoot(t.Name));
+            => t.Tag<RecordAttribute>().MapValueOrElse(a => TableRoot(a.TableId), () => TableRoot(t.Name));
 
         /// <summary>
         /// Specifies a table root for a parametrically-identified subject
@@ -78,7 +78,7 @@ namespace Z0
             => TableRoot(id) + FS.file(part.Format(), ext);
 
         FS.FilePath Table(Type t, PartId part)
-            => t.Tag<TableAttribute>().MapValueOrElse(a => Table(part,  a.TableId, DefaultFileExt), () => Table(part, t.Name, DefaultFileExt));
+            => t.Tag<RecordAttribute>().MapValueOrElse(a => Table(part,  a.TableId, DefaultFileExt), () => Table(part, t.Name, DefaultFileExt));
 
         FS.FilePath Table<T>(PartId part)
             where T : struct
@@ -94,7 +94,7 @@ namespace Z0
             => TableRoot() + FS.file(id, DefaultFileExt);
 
         FS.FilePath IndexTable(Type t)
-            => t.Tag<TableAttribute>().MapValueOrElse(a => IndexTable(a.TableId), () => IndexTable(t.Name));
+            => t.Tag<RecordAttribute>().MapValueOrElse(a => IndexTable(a.TableId), () => IndexTable(t.Name));
 
         FS.FolderPath DocRoot()
             => Root + FS.folder(PN.docs);
@@ -165,17 +165,20 @@ namespace Z0
         FS.FolderPath StageRoot<S>(S subject)
             => StageRoot() + SubjectName(subject);
 
-        FS.FolderPath ToolRoot()
+        FS.FolderPath ToolDbRoot()
+            => DbRoot + FS.folder("tooldb");
+
+        FS.FolderPath ToolExeRoot()
             => Root + FS.folder(PN.tools);
 
         FS.FolderPath Tools(ToolId id)
-            => ToolRoot() + FS.folder(id.Format());
+            => ToolExeRoot() + FS.folder(id.Format());
 
         FS.FolderPath Output(ToolId id)
             => Tools(id) + FS.folder(PN.output);
 
         FS.FolderPath Output(ToolId tool, CmdId cmd)
-            => ToolRoot() + FS.folder(string.Concat(tool.Format(), "-", cmd.Format())) + FS.folder(PN.output);
+            => ToolExeRoot() + FS.folder(string.Concat(tool.Format(), "-", cmd.Format())) + FS.folder(PN.output);
 
         FS.FolderPath CapturedExtractDir()
             => CaptureRoot() + FS.folder(PN.extracts);

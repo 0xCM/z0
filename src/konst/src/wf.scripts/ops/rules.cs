@@ -11,7 +11,7 @@ namespace Z0
         [Op]
         public static ref CmdScriptPattern rules(IFileDb db, ref CmdScriptPattern data)
         {
-            data.CmdRoot = db.ToolRoot() +  data.CmdRootName;
+            data.CmdRoot = db.ToolExeRoot() +  data.CmdRootName;
             data.CmdName = FS.file(data.CmdHost.Format(), data.ScriptType);
             data.CmdOutName = FS.file(string.Format("{0}.{1}", data.CmdHost, data.CmdArgName), db.Log);
             data.CmdOutDir = db.Output(data.CmdHost);

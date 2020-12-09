@@ -28,12 +28,6 @@ namespace Z0
         public string Format()
             => api.format(this);
 
-        public LinkType Type
-        {
-            [MethodImpl(Inline)]
-            get => DataFlows.type(this);
-        }
-
         public string Identifier
         {
             [MethodImpl(Inline)]

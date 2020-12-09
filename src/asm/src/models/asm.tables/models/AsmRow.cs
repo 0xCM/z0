@@ -37,7 +37,7 @@ namespace Z0.Asm
         OpCodeId = 10 | (20 << WidthOffset),
     }
 
-    [StructLayout(LayoutKind.Sequential), Table(TableId, FieldCount)]
+    [StructLayout(LayoutKind.Sequential), Record(TableId, FieldCount)]
     public struct AsmRow
     {
         public const string TableId = "asm.rows";

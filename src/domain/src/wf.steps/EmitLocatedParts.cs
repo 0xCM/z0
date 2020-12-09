@@ -6,11 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Linq;
-    using System.Diagnostics;
 
     using static Konst;
-
     using static z;
 
     [WfHost]
@@ -47,10 +44,8 @@ namespace Z0
             Parts = Wf.Api.Parts;
             Index = default;
             TargetDir = wf.ResourceRoot + FolderName.Define("images");
-            var process = Process.GetCurrentProcess();
-            Images = process.Modules.Cast<ProcessModule>().Map(ProcessImages.locate).OrderBy(x => x.BaseAddress);
+            Images = ProcessImages.locate();
             wf.Created();
-
         }
 
         public void Dispose()
@@ -69,7 +64,7 @@ namespace Z0
                 var @base = ProcessImages.@base(part);
                 var dstpath = TargetDir + FileName.define(part.Format(), FileExtension.Define("csv"));
 
-                using var step = new EmitImageData(Wf, part);
+                using var step = new EmitPartImageData(Wf, part);
                 step.Run();
                 seek(Index,i) = new LocatedPart(part, @base, (uint)(step.OffsetAddress - @base));
              }

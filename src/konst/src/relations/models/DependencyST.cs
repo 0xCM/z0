@@ -16,8 +16,6 @@ namespace Z0
     /// Captures a non-homogenous directed relation
     /// </summary>
     public readonly struct Dependency<S,T> : IDependency<S,T>
-        where S : INode<S>
-        where T : INode<T>
     {
         /// <summary>
         /// The client node that takes a dependency on the target

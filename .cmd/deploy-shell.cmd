@@ -34,3 +34,5 @@ echo DeployLog:%DeployLog%
 
 set DeployCmd=robocopy %DeploySrc% %DeployDst% /log:%DeployLog% /tee /TS /BYTES /V /e
 echo DeployCmd:%DeployCmd%
+
+call %DeployCmd%

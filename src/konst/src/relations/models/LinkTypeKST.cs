@@ -20,9 +20,6 @@ namespace Z0
 
         public Type Target {get;}
 
-        public static Type Type
-            => typeof(Link<S,T,K>);
-
         [MethodImpl(Inline)]
         internal LinkType(Type kind, Type src, Type dst)
         {

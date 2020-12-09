@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.InteropServices;
 
-    [StructLayout(LayoutKind.Sequential), Table(TableId)]
+    [StructLayout(LayoutKind.Sequential), Record(TableId)]
     public struct LocatedImageRow : IRecord<LocatedImageRow>
     {
         public const string TableId = "images.located";

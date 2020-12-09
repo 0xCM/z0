@@ -6,27 +6,15 @@ namespace Z0
 {
     using System;
 
+    /// <summary>
+    /// Identifies a structural type that be serialized as a record, of some sort
+    /// </summary>
     [AttributeUsage(AttributeTargets.Struct)]
     public class RecordAttribute : Attribute
     {
-        public RecordAttribute()
-        {
+        public string TableId {get;}
 
-        }
-
-        public RecordAttribute(string schema)
-        {
-            Schema = schema;
-        }
-
-        public RecordAttribute(string schema, string detail)
-        {
-            Schema = schema;
-            Detail = detail;
-        }
-
-        public string Schema {get;}
-
-        public string Detail {get;}
+        public RecordAttribute(string name = "", byte fields = 0)
+            => TableId = name;
     }
 }

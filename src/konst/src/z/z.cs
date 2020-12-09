@@ -12,13 +12,13 @@ namespace Z0
     [ApiHost]
     public partial struct z
     {
-        [MethodImpl(Inline)]        
+        [MethodImpl(Inline)]
         internal static Span<T> EmptySpan<T>()
             => Span<T>.Empty;
 
         internal static Span<byte> EmptyByteSpan
         {
-            [MethodImpl(Inline)]        
+            [MethodImpl(Inline)]
             get => Span<byte>.Empty;
         }
 
@@ -29,6 +29,5 @@ namespace Z0
     {
         const NumericKind Closure = UnsignedInts;
 
-        const MethodImplOptions MethodOptions = MethodImplOptions.AggressiveInlining;
     }
 }

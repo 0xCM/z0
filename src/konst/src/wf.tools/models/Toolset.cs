@@ -8,11 +8,10 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static z;
 
-    public readonly struct Toolset : IIdentified<string>
+    public readonly struct Toolset : IIdentified<utf8>
     {
-        public string Id {get;}
+        public utf8 Id {get;}
 
         public FS.FolderPath Location {get;}
 
@@ -22,9 +21,5 @@ namespace Z0
             Id = name;
             Location = root;
         }
-
-        [MethodImpl(Inline)]
-        public static implicit operator Toolset(KeyedValue<string,FS.FolderPath> src)
-            => new Toolset(src.Key, src.Value);
     }
 }

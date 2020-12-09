@@ -11,15 +11,16 @@ namespace Z0
     [Free]
     public interface ITool : IIdentified<ToolId>
     {
-        FS.FolderPath Source
-            => FS.FolderPath.Empty;
+
     }
 
     [Free]
     public interface ITool<T> : ITool
         where T : struct, ITool<T>
     {
+        string ToolName {get;}
 
+        ToolId IIdentified<ToolId>.Id
+            => ToolName;
     }
-
 }

@@ -10,11 +10,9 @@ namespace Z0
 
     using static Konst;
 
-    [StructLayout(LayoutKind.Sequential), Record]
+    [StructLayout(LayoutKind.Sequential), Record(TableId)]
     public struct ImageSectionHeader
     {
-        public const byte FieldCount = 9;
-
         public const string TableId = "image.headers";
 
         public enum Fields : uint

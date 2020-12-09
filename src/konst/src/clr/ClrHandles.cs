@@ -29,12 +29,15 @@ namespace Z0
             }
         }
 
+        public static ReadOnlySpan<byte> HandleRenderWidths
+            => new byte[3]{16, 16, 16};
+
         [Op]
         public static uint project(ReadOnlySpan<ClrHandleRecord> src,  StreamWriter dst)
         {
             var count = src.Length;
             var counter = 0u;
-            var formatter = TableFormatter.row<ClrHandleRecord>(ClrHandleRecord.RenderWidths);
+            var formatter = TableFormatter.row<ClrHandleRecord>(HandleRenderWidths);
             for(var i=0; i<count; i++)
             {
                 ref readonly var record = ref skip(src,i);

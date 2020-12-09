@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static z;
 
     [ApiHost(ApiNames.DataFlows, true)]
     public readonly struct DataFlows
@@ -16,15 +15,15 @@ namespace Z0
         const NumericKind Closure = UnsignedInts;
 
         public static string identifier<S,T>(DataFlow<S,T> flow)
-            => text.format("{0} -> {1}", flow.Source, flow.Target);
+            => Relations.RenderLink<S,T>().Format(flow.Source, flow.Target);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static string identifier<T>(DataFlow<T> flow)
-            => text.format("{0} -> {1}", flow.Source, flow.Target);
+            => Relations.RenderLink<T>().Format(flow.Source, flow.Target);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static string format<T>(DataFlow<T> flow)
-            => text.format("{0} -> {1}", flow.Source, flow.Target);
+            => Relations.RenderLink<T>().Format(flow.Source, flow.Target);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static LinkType type<T>(DataFlow<T> flow)
@@ -32,10 +31,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static string format<S,T>(DataFlow<S,T> flow)
-            => text.format("{0} -> {1}", flow.Source, flow.Target);
-
-        [MethodImpl(Inline)]
-        public static LinkType type<S,T>(DataFlow<S,T> flow)
-            => Links.type<S,T>();
+            => Relations.RenderLink<S,T>().Format(flow.Source, flow.Target);
     }
 }

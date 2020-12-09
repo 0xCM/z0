@@ -4,12 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.InteropServices;
-
-    using static Konst;
-
-    [StructLayout(DefaultLayout), Table(TableId, FieldCount)]
+    [Record(TableId)]
     public struct ClrEnumLiteralRecord
     {
         public const byte FieldCount = 8;
