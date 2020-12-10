@@ -11,6 +11,7 @@ namespace Z0
 
     using static Konst;
     using static HexFormatSpecs;
+    using static z;
 
     public readonly struct HexNumericParser : IParametricParser
     {
@@ -21,9 +22,9 @@ namespace Z0
         public static ParseResult<ulong> parse(string src)
         {
             if(ulong.TryParse(ClearSpecs(src), NumberStyles.HexNumber, null,  out ulong value))
-                return z.parsed(src,value);
+                return parsed(src,value);
             else
-                return z.unparsed<ulong>(src);
+                return unparsed<ulong>(src);
         }
 
         public static HexNumericParser Service

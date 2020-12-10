@@ -10,7 +10,7 @@ namespace Z0
             => react(Wf,cmd);
 
         [Op]
-        public static CmdResult react(IWfShell wf, PipeApiHexFilesCmd cmd)
+        static CmdResult react(IWfShell wf, PipeApiHexFilesCmd cmd)
         {
             var archive = ApiArchives.hex(wf);
             var files = archive.List();

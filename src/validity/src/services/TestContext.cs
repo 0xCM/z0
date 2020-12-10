@@ -201,11 +201,18 @@ namespace Z0
             => UnitPath(FileName.define(caller,  ext));
 
         [MethodImpl(Inline)]
+        protected FS.FilePath CasePath(FS.FileExt ext, [CallerMemberName] string caller = null)
+            => FS.path(UnitPath(FS.file(caller,  ext)).Name);
+
+        [MethodImpl(Inline)]
         protected FilePath CasePath(string CaseName, FileExtension ext = null)
-            => UnitPath(FileName.define(CaseName, ext ?? FileExtensions.Csv));
+            => UnitPath(FileName.define(CaseName, ext ?? new FileExtension("csv")));
 
         protected StreamWriter CaseWriter(FileExtension ext, [Caller] string caller = null)
             => CasePath(caller, ext).Writer();
+
+        protected StreamWriter CaseWriter(FS.FileExt ext, [Caller] string caller = null)
+            => FS.path(UnitPath(FS.file(caller, ext)).Name).Writer();
 
         protected StreamWriter CaseWriter(string CaseName, FileExtension ext = null)
             => CasePath(CaseName, ext).Writer();

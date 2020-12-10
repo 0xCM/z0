@@ -15,8 +15,8 @@ namespace Z0
         public static FileExtension Any
             => FileExtension.Define("*.*", "Wildcard");
 
-        public static FileExtension Csv
-            => FileExtension.Define("csv", "Structured text");
+        public static FS.FileExt Csv
+            => FS.ext("csv");
 
         public static FileExtension Cs
             => FileExtension.Define("cs", "CSharp source text");

@@ -114,12 +114,6 @@ namespace Z0
             }
         }
 
-        static void PipeImageFiles(IWfShell wf)
-        {
-            var archive = ImageArchives.csv(wf);
-            wf.Status(archive.Root);
-            zfunc.iter(archive.List().Storage, file => wf.Status(file));
-        }
 
         public static void Main(params string[] args)
         {

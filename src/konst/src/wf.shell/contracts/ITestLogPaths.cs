@@ -39,7 +39,7 @@ namespace Z0
             => FS.path((TestLogRoot + FolderName.Define(StatusLog) + FileName.define($"{AppName}.stdout", FileExtensions.StatusLog)).Name);
 
         FS.FilePath CaseLogPath
-            => FS.path((TestLogRoot + FolderName.Define(StatusLog) + FileName.define($"{AppName}.cases", FileExtensions.Csv)).Name);
+            => TestLogRootDir + FS.folder(StatusLog) + FS.file($"{AppName}.cases", FileExtensions.Csv);
 
         /// <summary>
         /// Defines a test-specific data folder

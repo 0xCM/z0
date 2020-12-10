@@ -56,7 +56,7 @@ namespace Z0
             Wf = wf;
             Host = host;
             Images = src;
-            TargetPath = FS.path((Wf.ResourceRoot + FileName.define("images", FileExtensions.Csv)).Name);
+            TargetPath = FS.path((Wf.ResourceRoot + FS.file("images", FileExtensions.Csv)).Name);
             Wf.Created(Host);
         }
 

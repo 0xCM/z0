@@ -15,7 +15,7 @@ namespace Z0
         protected override CmdResult Run(EmitAsmMnemonicsCmd spec)
             => react(Wf,spec);
 
-        public static CmdResult react(IWfShell wf, EmitAsmMnemonicsCmd cmd)
+        static CmdResult react(IWfShell wf, EmitAsmMnemonicsCmd cmd)
         {
             const string RenderPattern = "{0,-20} | {1,-20} | {2,-20} | {3}";
             const string TableId = "asm.mnemonics";

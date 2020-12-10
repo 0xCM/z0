@@ -13,5 +13,14 @@ namespace Z0
     public readonly partial struct zfunc
     {
         const NumericKind Closure = UnsignedInts;
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static T[] succeed<T>(ParseResult<T[]> src)
+            => src.Failed ? Array.Empty<T>() : src.Value;
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static T succeed<T>(ParseResult<T> src)
+            where T : struct
+                => src.Failed ? default : src.Value;
     }
 }

@@ -7,5 +7,5 @@ set Sep=------------------------------------------------------------------------
 echo %Sep% >> %GitLogPath%
 
 git add -A >> %GitLogPath%
-git commit -am "."  >> %GitLogPath%
-git push  >> %GitLogPath%
+git commit -am "." >> %GitLogPath%
+git push >> %GitLogPath%

@@ -103,6 +103,13 @@ namespace Z0
             EmitImageHeaders.run(Wf, cmd);
         }
 
+        static void PipeImageFiles(IWfShell wf)
+        {
+            var archive = ImageArchives.csv(wf);
+            wf.Status(archive.Root);
+            zfunc.iter(archive.List().Storage, file => wf.Status(file));
+        }
+
         [Op]
         public void EmitBuildArchiveList(FS.FolderPath src, string label)
         {
@@ -110,6 +117,20 @@ namespace Z0
             var types = array(archive.Dll, archive.Exe, archive.Pdb, archive.Lib, archive.Xml, archive.Json);
             var cmd = CmdBuilder.EmitFileList(label + ".build-artifacts", archive.Root, types);
             Wf.Router.Dispatch(cmd);
+        }
+
+        public static void PipeImageData(IWfShell wf, FS.FilePath src)
+        {
+            using var reader = ImageArchives.reader(wf, src, ImageFormatKind.Csv);
+            var record = default(ImageContentRecord);
+            var @continue = true;
+            while(@continue)
+            {
+                if(reader.Read(ref record))
+                    wf.Row(record.Data);
+                else
+                    @continue = false;
+            }
         }
 
         // CmdResult EmitOpCodes()
@@ -128,7 +149,13 @@ namespace Z0
             //EmitProcessImages(Wf);
             //EmitAsmMnemonics();
             //EmitAsmOpCodes();
-            EmitBuildArchiveList(Wf.Db().BuildArchiveRoot(), "zbuild");
+            //EmitBuildArchiveList(Wf.Db().BuildArchiveRoot(), "zbuild");
+
+            var root = Wf.Db().TableRoot<ImageContentRecord>();
+            var archive = ImageArchives.csv(Wf);
+            var path = archive.Root + FS.file("image.content.advapi32", FileExtensions.Csv);
+            PipeImageData(Wf, path);
+
 
             // var cmd = new LocateImagesCmd();
             // cmd.Target = Wf.Db().IndexFile(LocatedImageRow.TableId);

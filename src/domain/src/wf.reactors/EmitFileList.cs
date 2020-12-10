@@ -11,7 +11,7 @@ namespace Z0
         protected override CmdResult Run(EmitFileListCmd cmd)
             => run(Wf,cmd);
 
-        internal static CmdResult run(IWfShell wf, EmitFileListCmd cmd)
+        static CmdResult run(IWfShell wf, EmitFileListCmd cmd)
         {
             var archive = FileArchives.create(cmd.SourceDir);
             var files = archive.Files(true, cmd.FileKinds).Where(f => !f.Name.EndsWith(".resources.dll"));
