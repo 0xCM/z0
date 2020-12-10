@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     /// <summary>
     /// Specifies symbol characteristics
@@ -20,7 +19,7 @@ namespace Z0
         /// <summary>
         /// The specified symbols
         /// </summary>
-        public readonly S[] Symbols;
+        public S[] Symbols {get;}
 
         /// <summary>
         /// The bit-width of a storage cell
@@ -75,9 +74,6 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Symbols != null  && Symbols.Length != 0;
         }
-
-        S[] ISymbolSpec<S>.Symbols
-            => Symbols;
 
         [MethodImpl(Inline)]
         public static implicit operator SymbolSpec(SymbolSpec<S,W> src)

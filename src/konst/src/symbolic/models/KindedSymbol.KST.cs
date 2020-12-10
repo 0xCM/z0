@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     /// <summary>
     /// Attaches a classifier to a symbol
@@ -21,12 +21,19 @@ namespace Z0
         /// <summary>
         /// The symbol kind
         /// </summary>
-        public readonly K Kind;
+        public K Kind {get;}
 
         /// <summary>
         /// The symbol value
         /// </summary>
-        public readonly S Value;
+        public S Value {get;}
+
+        [MethodImpl(Inline)]
+        public KindedSymbol(K kind, S value)
+        {
+            Kind = kind;
+            Value = value;
+        }
 
         /// <summary>
         /// The symbol value, from storage cell perspective
@@ -36,19 +43,6 @@ namespace Z0
             [MethodImpl(Inline)]
             get => @as<S,T>(Value);
         }
-
-        [MethodImpl(Inline)]
-        public KindedSymbol(K kind, S value)
-        {
-            Kind = kind;
-            Value = value;
-        }
-
-        K IKindedSymbol<K,S>.Kind
-            => Kind;
-
-        S ISymbol<S>.Value
-            => Value;
 
         [MethodImpl(Inline)]
         public static implicit operator Symbol<S>(KindedSymbol<K,S,T> src)

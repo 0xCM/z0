@@ -15,9 +15,9 @@ namespace Z0
     public readonly struct NamedSymbol<S> : ITextual
         where S : unmanaged
     {
-        public readonly S Symbol;
+        public S Symbol {get;}
 
-        public readonly SymbolName Name;
+        public SymbolName Name {get;}
 
         [MethodImpl(Inline)]
         public NamedSymbol(S symbol, string name)
@@ -29,6 +29,12 @@ namespace Z0
         [MethodImpl(Inline)]
         public string Format()
             => Name.Format();
+
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Name.IsEmpty;
+        }
 
         public bool IsNonEmpty
         {

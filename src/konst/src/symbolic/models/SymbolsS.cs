@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct Symbols<S> : ITextual
+    public readonly struct Symbols<S> : IIndex<S>, ITextual
         where S : unmanaged, ISymbol
     {
         readonly TableSpan<S> Data;
@@ -39,6 +39,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator Symbols<S>(S[] src)
             => new Symbols<S>(src);
-
     }
 }

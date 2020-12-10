@@ -21,7 +21,7 @@ namespace Z0
         /// <summary>
         /// The symbol value
         /// </summary>
-        public readonly S Value;
+        public S Value {get;}
 
         [MethodImpl(Inline)]
         public Symbol(S src)
@@ -30,9 +30,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public char Render()
             => api.render(this);
-
-        S ISymbol<S>.Value
-            => Value;
 
         [MethodImpl(Inline)]
         public static explicit operator char(Symbol<S> src)

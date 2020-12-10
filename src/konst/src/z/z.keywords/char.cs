@@ -11,35 +11,13 @@ namespace Z0
 
     partial struct z
     {
-        /// <summary>
-        /// Reimagines a boolean value as a character value
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static char @char(bool src)
-            => (char)(u8(src) + 48);
+            => memory.@char(src);
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline)]
         public static ref char @char<E>(in E src)
             where E : unmanaged
-                => ref @as<E,char>(src);
-
-        [MethodImpl(Inline)]
-        public static char @char<S,T,N>(Symbol<S,T,N> src)
-            where S : unmanaged
-            where T : unmanaged
-            where N : unmanaged, ITypeNat
-                => Unsafe.As<S,char>(ref edit(src.Value));
-
-        [MethodImpl(Inline)]
-        public static char @char<S,T>(Symbol<S,T> src)
-            where S : unmanaged
-            where T : unmanaged
-                => Unsafe.As<S,char>(ref edit(src.Value));
-
-        [MethodImpl(Inline)]
-        public static char @char<S>(Symbol<S> src)
-            where S : unmanaged
-                => Unsafe.As<S,char>(ref edit(src.Value));
+                => ref memory.@char(src);
     }
 }

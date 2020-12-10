@@ -8,12 +8,12 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static z;
+    using static memory;
 
     public readonly struct SymbolSpec<S> : ISymbolSpec<SymbolSpec<S>,S>
         where S : unmanaged
     {
-        public readonly S[] Symbols;
+        public S[] Symbols {get;}
 
         public ushort SymWidth {get;}
 
@@ -53,13 +53,16 @@ namespace Z0
             Symbols = symbols;
         }
 
-        public bool NonEmpty
+        public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
             get => Symbols != null  && Symbols.Length != 0;
         }
 
-        S[] ISymbolSpec<S>.Symbols
-            => Symbols;
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => !IsNonEmpty;
+        }
     }
 }

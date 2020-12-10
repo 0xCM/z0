@@ -7,10 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     partial struct Symbolic
-    {   
+    {
         [MethodImpl(Inline)]
         public static SymbolSpec<S,N> spec<S,N>(ushort segwidth, Type segdomain, params S[] symbols)
             where S : unmanaged

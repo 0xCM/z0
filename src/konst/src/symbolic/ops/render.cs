@@ -8,10 +8,15 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static z;
+    using static memory;
 
     partial struct Symbolic
     {
+       [MethodImpl(Inline), Op, Closures(Closure)]
+        public static char render<S>(S src)
+            where S : unmanaged
+                => (char)@as<S,ushort>(src);
+
         [MethodImpl(Inline)]
         public static ReadOnlySpan<char> render<S>(Span<S> src)
             where S : unmanaged, ISymbol
@@ -47,10 +52,5 @@ namespace Z0
             where S : unmanaged
             where T : unmanaged
                 => @as<S,char>(src.Value);
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static char render<S>(S src)
-            where S : unmanaged
-                => (char)@as<S,ushort>(src);
     }
 }

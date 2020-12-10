@@ -5,15 +5,11 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
     using System.Collections.Generic;
     using System.Linq;
 
-    using static Konst;
-    using static z;
-
     partial struct Symbolic
-    {        
+    {
         /// <summary>
         /// Creates value-to-symbol index
         /// </summary>
@@ -22,7 +18,7 @@ namespace Z0
         public static IDictionary<T,char> index<E,T>()
             where E : unmanaged, Enum
             where T : unmanaged
-        {            
+        {
             var values = Enums.dictionary<E,T>();
             var index = new Dictionary<T,char>();
             foreach(var kvp in values)

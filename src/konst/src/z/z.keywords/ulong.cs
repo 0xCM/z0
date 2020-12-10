@@ -7,37 +7,25 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     partial struct z
     {
-        /// <summary>
-        /// Converts a <see cref='bool'/> to a <see cref='ulong'/>
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static unsafe ulong @ulong(bool src)
-            => (*((byte*)(&src))); 
+            => memory.@ulong(src);
 
-        /// <summary>
-        /// Converts a <see cref='double'/> to a <see cref='ulong'/>
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static unsafe ulong @ulong(double src)
-            => (*((ulong*)(&src))); 
+            => memory.@ulong(src);
 
-        /// <summary>
-        /// Converts a <see cref='decimal'/> to a <see cref='ulong'/>
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static unsafe ulong @ulong(decimal src)
-            => (*((ulong*)(&src))); 
+            => memory.@ulong(src);
 
-        [MethodImpl(Inline), Op, Closures(Numeric64k)]
+        [MethodImpl(Inline)]
         public static unsafe ulong @ulong<T>(T src)
-            where T : unmanaged             
-                => *((ulong*)(&src));
+            where T : unmanaged
+                => memory.@ulong(src);
     }
 }

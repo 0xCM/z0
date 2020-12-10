@@ -18,7 +18,7 @@ namespace Z0
         where T : unmanaged
         where W : unmanaged, IDataWidth
     {
-        public readonly S[] Symbols;
+        public S[] Symbols {get;}
 
         [MethodImpl(Inline)]
         public SymbolSpec(params S[] symbols)
@@ -68,9 +68,6 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Symbols != null  && Symbols.Length != 0;
         }
-
-        S[] ISymbolSpec<S>.Symbols
-            => Symbols;
 
         [MethodImpl(Inline)]
         public static implicit operator SymbolSpec(SymbolSpec<S,T,W> src)

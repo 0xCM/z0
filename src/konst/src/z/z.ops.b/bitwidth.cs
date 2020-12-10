@@ -13,9 +13,9 @@ namespace Z0
 
     partial struct z
     {
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline)]
         public static uint bitwidth<T>(T t = default)
-            => (uint)SizeOf<T>() * 8;
+            => memory.bitwidth<T>();
 
         /// <summary>
         /// Computes the bit-width of a parametrically-identified type
@@ -60,6 +60,6 @@ namespace Z0
         /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline), Op]
         public static BitSize bitsize<T>()
-            => Unsafe.SizeOf<T>()*8;
+            => memory.bitsize<T>();
     }
 }

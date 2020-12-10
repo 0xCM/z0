@@ -9,8 +9,42 @@ namespace Z0
 
     using static Konst;
 
+    using BF = BinarySymFacet;
+
     partial struct Symbolic
     {
+        /// <summary>
+        /// Creates a symbol from a <see cref='BinaryDigit'/> source value
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline), Op]
+        public static Symbol<BinarySym,byte,N1> symbol(BinaryDigit src)
+            => symbol<BinarySym,byte,N1>((BinarySym)(src + (byte)BF.First));
+
+        /// <summary>
+        /// Creates a symbol from a <see cref='OctalDigit'/> source value
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline), Op]
+        public static Symbol<OctalSym,byte,N3> symbol(OctalDigit src)
+            => symbol<OctalSym,byte,N3>((OctalSym)((byte)src + (byte)OctalSym.First));
+
+        [MethodImpl(Inline), Op]
+        public static Symbol<BinarySym,byte,N1> symbol(Base2 @base, byte src)
+            => symbol<BinarySym,byte,N1>((BinarySym)(src + (byte)BF.First));
+
+        [MethodImpl(Inline), Op]
+        public static Symbol<DecimalSym,byte,N4> symbol(DecimalDigit src)
+            => symbol<DecimalSym,byte,N4>((DecimalSym)((byte)src + DecimalSymFacet.First));
+
+        [MethodImpl(Inline), Op]
+        public static Symbol<HexSym,byte,N4> symbol(UpperCased @case, HexDigit src)
+            => symbol<HexSym,byte,N4>(((HexSym)asci.code(@case, src)));
+
+        [MethodImpl(Inline), Op]
+        public static Symbol<HexSym,byte,N4> symbol(LowerCased @case, HexDigit src)
+            => symbol<HexSym,byte,N4>(((HexSym)asci.code(@case, src)));
+
         /// <summary>
         /// Creates a symbol from an unmanaged value
         /// </summary>

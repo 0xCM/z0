@@ -9,19 +9,19 @@ namespace Z0
 
     using static Part;
 
-    partial struct z
+    partial struct memory
     {
+        /// <summary>
+        /// Reimagines a boolean value as a character value
+        /// </summary>
+        /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static unsafe byte @byte(bool src)
-            => memory.@byte(src);
+        public static char @char(bool src)
+            => (char)(u8(src) + 48);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref byte @byte<T>(in T src)
-            where T : unmanaged
-                => ref memory.@byte(src);
-
-        [MethodImpl(Inline), Op]
-        public static unsafe byte @byte(in ulong src, byte index)
-            => memory.@byte(src);
+        public static ref char @char<E>(in E src)
+            where E : unmanaged
+                => ref @as<E,char>(src);
     }
 }

@@ -1,0 +1,43 @@
+//-----------------------------------------------------------------------------
+// Copyright   :  (c) Chris Moore, 2020
+// License     :  MIT
+//-----------------------------------------------------------------------------
+namespace Z0
+{
+    using System;
+    using System.Runtime.CompilerServices;
+
+    using static Part;
+
+    partial struct memory
+    {
+        /// <summary>
+        /// Converts a <see cref='bool'/> to a <see cref='ulong'/>
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe ulong @ulong(bool src)
+            => (*((byte*)(&src)));
+
+        /// <summary>
+        /// Converts a <see cref='double'/> to a <see cref='ulong'/>
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe ulong @ulong(double src)
+            => (*((ulong*)(&src)));
+
+        /// <summary>
+        /// Converts a <see cref='decimal'/> to a <see cref='ulong'/>
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe ulong @ulong(decimal src)
+            => (*((ulong*)(&src)));
+
+        [MethodImpl(Inline), Op, Closures(Numeric64k)]
+        public static unsafe ulong @ulong<T>(T src)
+            where T : unmanaged
+                => *((ulong*)(&src));
+    }
+}

@@ -9,15 +9,11 @@ namespace Z0
 
     using static Konst;
 
-    partial struct z
-    {
-        [MethodImpl(Inline)]
-        public static unsafe ushort @ushort(bool src)
-            => memory.@ushort(src);
 
-        [MethodImpl(Inline)]
-        public static unsafe ushort @ushort<T>(T src)
-            where T : unmanaged
-                => memory.@ushort(src);
+    [ApiHost(ApiNames.SymbolicX, true)]
+    public static partial class XSymbolic
+    {
+        const NumericKind Closure = UnsignedInts;
+
     }
 }

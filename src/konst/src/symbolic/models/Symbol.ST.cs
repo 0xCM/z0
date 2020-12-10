@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     using api = Symbolic;
 
@@ -22,7 +22,11 @@ namespace Z0
         /// <summary>
         /// The symbol value
         /// </summary>
-        public readonly S Value;
+        public S Value {get;}
+
+        [MethodImpl(Inline)]
+        public Symbol(S src)
+            => Value = src;
 
         /// <summary>
         /// The symbol value, from storage cell perspective
@@ -32,10 +36,6 @@ namespace Z0
             [MethodImpl(Inline)]
             get => @as<S,T>(Value);
         }
-
-        [MethodImpl(Inline)]
-        public Symbol(S src)
-            => Value = src;
 
         public Symbol<S> Simplified
         {
@@ -52,9 +52,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public char Render()
             => api.render(this);
-
-        S ISymbol<S>.Value
-            => Value;
 
         [MethodImpl(Inline)]
         public static explicit operator char(Symbol<S,T> src)

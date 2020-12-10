@@ -22,12 +22,19 @@ namespace Z0
         /// <summary>
         /// The symbol kind
         /// </summary>
-        public readonly K Kind;
+        public K Kind {get;}
 
         /// <summary>
         /// The symbol value
         /// </summary>
-        public readonly S Value;
+        public S Value {get;}
+
+        [MethodImpl(Inline)]
+        public KindedSymbol(K kind, S value)
+        {
+            Kind = kind;
+            Value = value;
+        }
 
         /// <summary>
         /// The symbol value, from storage cell perspective
@@ -38,18 +45,6 @@ namespace Z0
             get => @as<S,T>(Value);
         }
 
-        [MethodImpl(Inline)]
-        public KindedSymbol(K kind, S value)
-        {
-            Kind = kind;
-            Value = value;
-        }
-
-        K IKindedSymbol<K,S>.Kind
-            => Kind;
-
-        S ISymbol<S>.Value
-            => Value;
 
         [MethodImpl(Inline)]
         public static implicit operator KindedSymbol<K,S,T,N>((K kind, S value) src)

@@ -7,10 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     [Record(TableId)]
-    public struct SymbolSpec : ISymbolSpec
+    public struct SymbolSpec : ISymbolSpec, IRecord<SymbolSpec>
     {
         public const string TableId = "symbols.spec";
 

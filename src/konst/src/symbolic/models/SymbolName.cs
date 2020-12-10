@@ -32,6 +32,12 @@ namespace Z0
         public string Format()
             => Ref.Format();
 
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Ref.IsEmpty;
+        }
+
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]

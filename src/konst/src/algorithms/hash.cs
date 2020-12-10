@@ -11,23 +11,8 @@ namespace Z0
     using static Part;
     using static z;
 
-    [ApiHost]
-    public readonly partial struct Alg
+    partial struct alg
     {
-        const NumericKind Closure = UnsignedInts;
-
-        /// <summary>
-        /// Computes the FNV-1a hash of the source sequence
-        /// See http://en.wikipedia.org/wiki/Fowler%E2%80%93Noll%E2%80%93Vo_hash_function
-        /// </summary>
-        /// <param name="src">The data source</param>
-        /// <remarks>Adapted from the .Net core type System.Reflection.Internal.Hash</remarks>
-        const uint K = 0xA5555529;
-
-        const uint FnvOffsetBias = 2166136261;
-
-        const uint FnvPrime = 16777619;
-
         [MethodImpl(Inline), Op]
         public static uint hash(Type src)
             => (uint)src.MetadataToken;
@@ -175,7 +160,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static unsafe uint hash(string src)
-            => (uint)(pchar2(src ?? EmptyString));
+            => (uint)(memory.pchar2(src ?? EmptyString));
 
         /// <summary>
         /// Calculates a combined hash for 2 unsigned 32-bit integers

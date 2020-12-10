@@ -7,21 +7,27 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using static System.Runtime.CompilerServices.Unsafe;
+
     using static Part;
 
-    partial struct z
+    partial struct memory
     {
+        /// <summary>
+        /// Forcefully coerces a <see cref='bool'/> to a <see cref='byte'/>
+        /// </summary>
+        /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
         public static unsafe byte @byte(bool src)
-            => memory.@byte(src);
+            => (*((byte*)(&src)));
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref byte @byte<T>(in T src)
             where T : unmanaged
-                => ref memory.@byte(src);
+                => ref As<T,byte>(ref edit(src));
 
         [MethodImpl(Inline), Op]
         public static unsafe byte @byte(in ulong src, byte index)
-            => memory.@byte(src);
+            => *((byte*)gptr(src) + index);
     }
 }

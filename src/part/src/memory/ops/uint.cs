@@ -7,18 +7,21 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
-    partial struct z
+    partial struct memory
     {
-        [MethodImpl(Inline)]
+        /// <summary>
+        /// Converts a <see cref='bool'/> to a <see cref='uint'/>
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline), Op]
         public static unsafe uint @uint(bool src)
-            => memory.@uint(src);
+            => (*((byte*)(&src)));
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Numeric32x64k)]
         public static unsafe uint @uint<T>(T src)
             where T : unmanaged
-                => memory.@uint(src);
-
+                => *((uint*)(&src));
     }
 }

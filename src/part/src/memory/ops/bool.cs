@@ -7,16 +7,24 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using static System.Runtime.CompilerServices.Unsafe;
+
     using static Part;
 
-    partial struct z
+    partial struct memory
     {
         [MethodImpl(Inline), TestBit]
         public static unsafe bool @bool(BitState src)
-            => memory.@bool(src);
+        {
+            var dst = false;
+            var pSrc = (byte*)&src;
+            var pDst = (byte*)&dst;
+            *pDst = *pSrc;
+            return dst;
+        }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref bool @bool<T>(in T src)
-            => ref memory.@bool(src);
+            => ref As<T,bool>(ref edit(src));
     }
 }
