@@ -15,14 +15,11 @@ namespace Z0
 
         public FS.FolderPath Root {get;}
 
-        public BuildArchiveSettings Spec {get;}
-
         [MethodImpl(Inline)]
-        public BuildArchive(IWfShell wf, BuildArchiveSettings spec)
+        public BuildArchive(IWfShell wf, FS.FolderPath root)
         {
             Wf = wf;
-            Root = spec.Root;
-            Spec = spec;
+            Root = root;
         }
 
         public IModuleArchive Modules

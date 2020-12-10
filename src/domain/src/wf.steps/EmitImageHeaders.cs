@@ -15,15 +15,6 @@ namespace Z0
 
     public sealed class EmitImageHeaders : CmdHost<EmitImageHeaders, EmitImageHeadersCmd>
     {
-        [MethodImpl(Inline)]
-        public static EmitImageHeadersCmd specify(IWfShell wf, FS.FilePath[] src, FS.FilePath dst)
-        {
-            var cmd = new EmitImageHeadersCmd();
-            cmd.Sources = src;
-            cmd.Target = dst;
-            return cmd;
-        }
-
         public static ReadOnlySpan<byte> RenderWidths
             => new byte[9]{60,16,16,12,12,60,16,16,16};
 
@@ -33,7 +24,7 @@ namespace Z0
             var formatter = TableFormatter.row<ImageSectionHeader>(RenderWidths);
             using var writer = spec.Target.Writer();
             writer.WriteLine(formatter.FormatHeader());
-            foreach(var file in spec.Sources)
+            foreach(var file in spec.Source)
             {
                 var result = read(file, out Span<ImageSectionHeader> dst);
                 if(result)
@@ -41,10 +32,7 @@ namespace Z0
                     var count = result.Data;
 
                     for(var i=0u; i<count; i++)
-                    {
-                        ref readonly var row = ref skip(dst,i);
                         writer.WriteLine(formatter.FormatRow(skip(dst,i)));
-                    }
 
                     total += count;
 

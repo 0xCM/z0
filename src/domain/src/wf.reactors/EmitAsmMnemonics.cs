@@ -5,16 +5,17 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
 
     using Z0.Asm;
 
-    using static Konst;
     using static z;
 
-    public sealed class EmitAsmSymbols : CmdHost<EmitAsmSymbols, EmitAsmSymbolsCmd>
+    public sealed class EmitAsmMnemonics : CmdReactor<EmitAsmMnemonicsCmd, CmdResult>
     {
-        public static CmdResult run(IWfShell wf, in EmitAsmSymbolsCmd spec)
+        protected override CmdResult Run(EmitAsmMnemonicsCmd spec)
+            => react(Wf,spec);
+
+        public static CmdResult react(IWfShell wf, EmitAsmMnemonicsCmd cmd)
         {
             const string RenderPattern = "{0,-20} | {1,-20} | {2,-20} | {3}";
             const string TableId = "asm.mnemonics";
@@ -35,10 +36,7 @@ namespace Z0
                 var rendered = text.format(RenderPattern, symbol.Value, symType.Name, symbol.Cell, cellType.Name);
                 writer.WriteLine(rendered);
             }
-            return Win();
+            return Cmd.ok(cmd);
         }
-
-        protected override CmdResult Execute(IWfShell wf, in EmitAsmSymbolsCmd spec)
-            => Reactions.react(wf,spec);
     }
 }

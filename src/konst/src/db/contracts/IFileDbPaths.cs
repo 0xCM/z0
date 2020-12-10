@@ -40,10 +40,10 @@ namespace Z0
             => ReflectedRoot() + FS.folder(src.GetSimpleName());
 
         FS.FolderPath EtlRoot()
-            => Root + FS.folder(PN.Etl);
+            => Root + FS.folder(PN.etl);
 
         FS.FolderPath LogRoot()
-            => Root + FS.folder(PN.Logs);
+            => Root + FS.folder(PN.logs);
 
         FS.FolderPath TableRoot()
             => Root + FS.folder(PN.tables);
@@ -84,11 +84,8 @@ namespace Z0
             where T : struct
                 => Table(typeof(T), part);
 
-        FS.FilePath Table<D>(FS.FolderPath root, string id, D subject, FS.FileExt? type = null)
-            => TableRoot()+ FS.folder(id) + FS.file(text.format(PN.QualifiedSubject, id, subject), type ?? X.Csv);
-
         FS.FilePath Table<S>(string id, S subject, FS.FileExt? ext = null)
-            => Table<S>(Root, id, subject, ext);
+            => TableRoot()+ FS.folder(id) + FS.file(text.format(PN.QualifiedSubject, id, subject), ext ?? X.Csv);
 
         FS.FilePath IndexTable(string id)
             => TableRoot() + FS.file(id, DefaultFileExt);
@@ -96,14 +93,17 @@ namespace Z0
         FS.FilePath IndexTable(Type t)
             => t.Tag<RecordAttribute>().MapValueOrElse(a => IndexTable(a.TableId), () => IndexTable(t.Name));
 
-        FS.FolderPath DocRoot()
-            => Root + FS.folder(PN.docs);
+        FS.FolderPath ListRoot()
+            => Root + FS.folder(PN.lists);
+
+        FS.FilePath List(string name, FS.FileExt ext)
+            => ListRoot() + FS.file(name, ext);
 
         FS.FolderPath Notebooks()
             => Root + FS.folder(PN.notebooks);
 
         FS.FolderPath CaptureRoot()
-            => Root + FS.folder(PN.Capture);
+            => Root + FS.folder(PN.capture);
 
         FS.FolderPath ImmRoot()
             => CaptureRoot() + FS.folder(PN.imm);
@@ -127,10 +127,13 @@ namespace Z0
             => JobQueue() + file;
 
         FS.FolderPath StageRoot()
-            => Root + FS.folder(PN.Stage);
+            => Root + FS.folder(PN.stage);
 
         FS.FolderPath Notebook(string name)
             => Notebooks() + FS.folder(name);
+
+        FS.FolderPath DocRoot()
+            => Root + FS.folder(PN.docs);
 
         FS.FilePath Doc(string name, FS.FileExt ext)
             => DocRoot() + FS.file(name, ext);
@@ -190,7 +193,7 @@ namespace Z0
             => CaptureRoot() + FS.folder(PN.Parsed);
 
         FS.FolderPath CapturedHexDir()
-            => CaptureRoot() + FS.folder(PN.Hex);
+            => CaptureRoot() + FS.folder(PN.hex);
 
         FS.FolderPath CapturedAsmDir()
             => CaptureRoot() + FS.folder(PN.Asm);

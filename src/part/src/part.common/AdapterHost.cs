@@ -6,7 +6,7 @@ namespace Z0
 {
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     public struct AdapterHost<H,S> : IAdapter<H,S>
         where H : IAdapter<H,S>, new()

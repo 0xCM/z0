@@ -6,7 +6,7 @@ namespace Z0
 {
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     public abstract class Adapter<H,S> : IAdapter<H,S>
         where H : Adapter<H,S>, new()

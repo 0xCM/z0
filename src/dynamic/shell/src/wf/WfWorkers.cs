@@ -16,15 +16,6 @@ namespace Z0
 
         IWfShell Wf;
 
-        [Op]
-        public void list(IWfShell wf, BuildArchiveSettings spec)
-        {
-            var archive = BuildArchives.create(wf, spec);
-            var types = array(archive.Dll, archive.Exe, archive.Pdb, archive.Lib);
-            var cmd = EmitFileListCmd.specify(wf, spec.Label + ".artifacts", archive.Root, types);
-            EmitFileList.run(wf, cmd);
-        }
-
         public void Init(IWfShell wf)
         {
             Host = WfShell.host(typeof(WfWorkers));

@@ -32,11 +32,11 @@ namespace Z0
             => default;
 
         [MethodImpl(Inline), Op]
-        public static EmitAsmSymbolsCmd EmitAsmSymbols(this ICmdCatalog wf)
+        public static EmitAsmMnemonicsCmd EmitAsmSymbols(this ICmdCatalog wf)
             => default;
 
         [MethodImpl(Inline), Op]
-        public static EmitAsmSymbolsCmd EmitHexIndex(this ICmdCatalog wf)
+        public static EmitAsmMnemonicsCmd EmitHexIndex(this ICmdCatalog wf)
             => default;
 
         [MethodImpl(Inline), Op]
@@ -55,7 +55,7 @@ namespace Z0
         public static EmitAsmOpCodesCmd EmitAsmOpCodes(this ICmdCatalog wf)
             => default;
 
-        [MethodImpl(Inline), Op]
+        [Op]
         public static EmitRenderPatternsCmd EmitRenderPatterns(this ICmdCatalog builder, Type src)
         {
             var cmd = new EmitRenderPatternsCmd();
@@ -64,9 +64,38 @@ namespace Z0
             return cmd;
         }
 
-        [MethodImpl(Inline)]
-        public static EmitAsmSymbolsCmd EmitAsmSymbols(this CmdBuilder builder)
-            => new EmitAsmSymbolsCmd();
+        [Op]
+        public static EmitFileListCmd EmitFileList(this CmdBuilder builder, string name, FS.FolderPath src, params FS.FileExt[] kinds)
+        {
+            var cmd = new EmitFileListCmd();
+            cmd.ListName = name;
+            cmd.SourceDir = src;
+            cmd.FileKinds = kinds;
+            cmd.TargetPath = builder.Db.List(name, ArchiveFileExt.Csv);
+            return cmd;
+        }
+
+        // [MethodImpl(Inline), Op]
+        // public static EmitImageHeadersCmd EmitImageHeaders(this CmdBuilder builder, FS.Files src, FS.FilePath? dst = null)
+        // {
+        //     var cmd = new EmitImageHeadersCmd();
+        //     cmd.Source = src;
+        //     cmd.Target = dst ?? builder.Db.Table<ImageSectionHeader>();
+        //     return cmd;
+        // }
+
+
+        [MethodImpl(Inline), Op]
+        public static EmitAsmMnemonicsCmd EmitAsmMnemonics(this CmdBuilder builder)
+            => new EmitAsmMnemonicsCmd();
+
+        [MethodImpl(Inline), Op]
+        public static EmitAsmOpCodesCmd EmitAsmOpCodes(this CmdBuilder builder, FS.FilePath? dst = null)
+        {
+            var cmd = new EmitAsmOpCodesCmd();
+            cmd.Target = dst ?? builder.Db.RefDataPath("asm.opcodes");
+            return cmd;
+        }
 
         [MethodImpl(Inline), Op]
         public static ref EmitAsmOpCodesCmd WithTarget(this ref EmitAsmOpCodesCmd cmd, FS.FilePath dst)

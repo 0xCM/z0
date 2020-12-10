@@ -4,11 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    [Cmd]
-
+    [Cmd(CmdName)]
     public struct CheckBitMasksCmd : ICmdSpec<CheckBitMasksCmd>
     {
-
-
+        public const string CmdName = "check-bitmasks";
     }
 }

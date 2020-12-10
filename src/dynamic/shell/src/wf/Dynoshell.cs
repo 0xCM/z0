@@ -19,10 +19,13 @@ namespace Z0
 
         readonly IWfShell Wf;
 
+        readonly CmdBuilder CmdBuilder;
+
         public Dynoshell(IWfShell wf)
         {
             Host = WfShell.host(typeof(Dynoshell));
             Wf = wf.WithHost(Host);
+            CmdBuilder = wf.CmdBuilder();
         }
 
         public void Dispose()
@@ -57,10 +60,6 @@ namespace Z0
 
             buffer.Add(Wf.CmdCatalog.ShowRuntimeArchive());
 
-            var spec = EmitAsmOpCodes.Spec();
-            spec.WithTarget(Wf.Db().RefDataPath("asm.opcodes"));
-            buffer.Add(spec);
-
             return buffer.Array();
         }
 
@@ -84,9 +83,52 @@ namespace Z0
             Wf.Router.Dispatch(cmd);
         }
 
+        CmdResult EmitAsmMnemonics()
+            => Wf.Router.Dispatch(CmdBuilder.EmitAsmMnemonics());
+
+        void EmitPeHeaders()
+        {
+            var build = BuildArchives.create(Wf);
+            var db = Wf.Db();
+            var dllTarget = db.Table(ImageSectionHeader.TableId, "z0.dll.headers");
+            var exeTarget = db.Table(ImageSectionHeader.TableId, "z0.exe.headers");
+
+            var cmd = Wf.CmdCatalog.EmitImageHeaders();
+            cmd.Source = build.DllFiles().Array();
+            cmd.Target = db.Table(ImageSectionHeader.TableId, "z0.dll.headers");
+            EmitImageHeaders.run(Wf, cmd);
+
+            cmd.Source = build.ExeFiles().Array();
+            cmd.Target = db.Table(ImageSectionHeader.TableId, "z0.exe.headers");
+            EmitImageHeaders.run(Wf, cmd);
+        }
+
+        [Op]
+        public void EmitBuildArchiveList(FS.FolderPath src, string label)
+        {
+            var archive = BuildArchives.create(Wf, src);
+            var types = array(archive.Dll, archive.Exe, archive.Pdb, archive.Lib, archive.Xml, archive.Json);
+            var cmd = CmdBuilder.EmitFileList(label + ".build-artifacts", archive.Root, types);
+            Wf.Router.Dispatch(cmd);
+        }
+
+        // CmdResult EmitOpCodes()
+        // {
+        //     var spec = EmitAsmOpCodes.Spec();
+        //     spec.WithTarget(Wf.Db().RefDataPath("asm.opcodes"));
+        //     return Wf.Router.Dispatch(spec);
+        // }
+
+
+        public CmdResult EmitAsmOpCodes()
+            => Wf.Router.Dispatch(CmdBuilder.EmitAsmOpCodes());
+
         public void Run()
         {
-            EmitProcessImages(Wf);
+            //EmitProcessImages(Wf);
+            //EmitAsmMnemonics();
+            //EmitAsmOpCodes();
+            EmitBuildArchiveList(Wf.Db().BuildArchiveRoot(), "zbuild");
 
             // var cmd = new LocateImagesCmd();
             // cmd.Target = Wf.Db().IndexFile(LocatedImageRow.TableId);

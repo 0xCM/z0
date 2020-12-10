@@ -4,10 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    public interface IWfParser<S,T> : IWfClient, IParser2<S,T>
+    [Cmd]
+    public struct EmitAsmMnemonicsCmd : ICmdSpec<EmitAsmMnemonicsCmd>
     {
 
     }

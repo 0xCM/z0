@@ -14,9 +14,9 @@ namespace Z0
     sealed class EmitResourceData : CmdReactor<EmitResourceDataCmd,CmdResult>
     {
         protected override CmdResult Run(EmitResourceDataCmd cmd)
-            => run(Wf, cmd);
+            => react(Wf, cmd);
 
-        public static CmdResult run(IWfShell wf, EmitResourceDataCmd cmd)
+        public static CmdResult react(IWfShell wf, EmitResourceDataCmd cmd)
         {
             var query = cmd.Match.IsEmpty ? Resources.query(cmd.Source) : Resources.query(cmd.Source, cmd.Match);
             var count = query.ResourceCount;

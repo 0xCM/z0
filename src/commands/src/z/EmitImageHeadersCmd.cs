@@ -9,7 +9,7 @@ namespace Z0
     [Cmd]
     public struct EmitImageHeadersCmd : ICmdSpec<EmitImageHeadersCmd>
     {
-        public Files Sources;
+        public FS.Files Source;
 
         public FS.FilePath Target;
     }

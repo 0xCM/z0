@@ -18,11 +18,7 @@ namespace Z0
         /// <param name="root">The archive root</param>
         [MethodImpl(Inline), Op]
         public static IBuildArchive create(IWfShell wf,  FS.FolderPath root)
-            => new BuildArchive(wf, new BuildArchiveSettings(EmptyString, root));
-
-        [MethodImpl(Inline), Op]
-        public static IBuildArchive create(IWfShell wf,  BuildArchiveSettings spec)
-            => new BuildArchive(wf, spec);
+            => new BuildArchive(wf, root);
 
         [MethodImpl(Inline), Op]
         public static IBuildArchive create(IWfShell wf)

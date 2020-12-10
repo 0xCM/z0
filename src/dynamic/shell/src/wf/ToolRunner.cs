@@ -41,18 +41,9 @@ namespace Z0
             Wf.Disposed();
         }
 
-        CmdResult EmitOpCodes()
-        {
-            var spec = EmitAsmOpCodes.Spec();
-            spec.WithTarget(Wf.Db().RefDataPath("asm.opcodes"));
-            return Wf.Router.Dispatch(spec);
-        }
 
         CmdResult EmitPatterns()
             => EmitRenderPatterns.run(Wf, Wf.CmdCatalog.EmitRenderPatterns(typeof(RP)));
-
-        CmdResult EmitSymbols()
-            => EmitAsmSymbols.run(Wf, CmdBuilder.EmitAsmSymbols());
 
         [Op]
         public static FS.FilePath[] match(FS.FolderPath root, params FS.FileExt[] ext)
@@ -92,8 +83,6 @@ namespace Z0
             return cmd;
         }
 
-        // CmdResult EmitToolHelp()
-        //     => EmitResourceData.run(Wf, CmdBuilder.EmitResourceData(Parts.Refs.Assembly, "tools/help", ".help"));
 
         CmdResult EmitFileList()
             => exec(EmitFileListCmdSample(Wf));
@@ -121,22 +110,6 @@ namespace Z0
                 ref readonly var block = ref skip(src,i);
                 writer.WriteLine(string.Format(ApiCodeDescriptor.FormatPattern, block.Part, block.Host, block.Base, block.Size, block.Uri));
             }
-        }
-
-        void EmitPeHeaders()
-        {
-            var build = BuildArchives.create(Wf);
-            var dllTarget = Wf.Db().Table(ImageSectionHeader.TableId, "z0.dll.headers");
-            var exeTarget = Wf.Db().Table(ImageSectionHeader.TableId, "z0.exe.headers");
-
-            var cmd = Wf.CmdCatalog.EmitImageHeaders();
-            cmd.Sources = build.DllFiles().Array();
-            cmd.Target = Wf.Db().Table(ImageSectionHeader.TableId, "z0.dll.headers");
-            EmitImageHeaders.run(Wf, cmd);
-
-            cmd.Sources = build.ExeFiles().Array();
-            cmd.Target = Wf.Db().Table(ImageSectionHeader.TableId, "z0.exe.headers");
-            EmitImageHeaders.run(Wf, cmd);
         }
 
         void RunFxWorkflows()
@@ -240,12 +213,9 @@ namespace Z0
 
         void RunAll()
         {
-            EmitOpCodes();
             EmitPatterns();
             //EmitToolHelp();
-            EmitSymbols();
             EmitAsmRefs();
-            EmitPeHeaders();
         }
 
         void ShowOptions()

@@ -12,25 +12,27 @@ namespace Z0
     {
         public const string docs = nameof(docs);
 
+        public const string lists = nameof(lists);
+
         public const string tables = nameof(tables);
 
         public const string sources = nameof(sources);
 
-        public const string Stage = "stage";
+        public const string stage = nameof(stage);
 
         public const string tools = nameof(tools);
 
         public const string jobs = nameof(jobs);
 
-        public const string Capture = "capture";
+        public const string capture = nameof(capture);
 
-        public const string Logs = "logs";
+        public const string logs = nameof(logs);
 
         public const string Refs = "refs";
 
         public const string Events = "events";
 
-        public const string Etl = "etl";
+        public const string etl = nameof(etl);
 
         public const string Queue = "queue";
 
@@ -42,7 +44,7 @@ namespace Z0
 
         public const string Asm = "asm";
 
-        public const string Hex = "hex";
+        public const string hex = nameof(hex);
 
         public const string extracts = nameof(extracts);
 

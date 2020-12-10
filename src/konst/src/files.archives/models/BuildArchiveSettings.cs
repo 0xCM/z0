@@ -8,18 +8,14 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static z;
 
     public struct BuildArchiveSettings
     {
-        public string Label;
-
         public FS.FolderPath Root;
 
         [MethodImpl(Inline)]
-        public BuildArchiveSettings(string label, FS.FolderPath root)
+        public BuildArchiveSettings(FS.FolderPath root)
         {
-            Label = label;
             Root = root;
         }
     }
