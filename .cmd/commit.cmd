@@ -1,4 +1,8 @@
-set DstPath=%ZDb%\logs\git\git-actions.log
-git add -A >> %DstPath%
-git commit -am "."  >> %DstPath%
-git push  >> %DstPath%
+@echo off
+
+set GitLogPath=%ZDb%\logs\git\git-actions.log
+echo GitLogPath:%GitLogPath%
+
+git add -A >> %GitLogPath%
+git commit -am "."  >> %GitLogPath%
+git push  >> %GitLogPath%
