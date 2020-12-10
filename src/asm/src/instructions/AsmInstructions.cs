@@ -88,6 +88,7 @@ namespace Z0.Asm
             => Format();
         IEnumerator<Instruction> IEnumerable<Instruction>.GetEnumerator()
             => Data.AsEnumerable().GetEnumerator();
+
         IEnumerator IEnumerable.GetEnumerator()
             => Data.AsEnumerable().GetEnumerator();
     }

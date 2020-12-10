@@ -21,7 +21,7 @@ namespace Z0.Asm
             => default;
     }
 
-    public interface IRegister<T> : IRegister, IAsmContent<T>
+    public interface IRegister<T> : IRegister, IContented<T>
         where T : unmanaged
     {
 

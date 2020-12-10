@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-
     using K = JccKind;
     using I = IKinded<Asm.JccKind>;
 

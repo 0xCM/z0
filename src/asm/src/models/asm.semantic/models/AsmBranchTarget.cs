@@ -10,7 +10,7 @@ namespace Z0.Asm
     using static Konst;
 
     [Record(TableId)]
-    public struct AsmBranchTarget
+    public struct AsmBranchTarget : IRecord<AsmBranchTarget>
     {
         public const string TableId = "asm.branch";
 

@@ -23,7 +23,6 @@ namespace Z0
         public Ptr(T* src)
             => P = src;
 
-
         public readonly MemoryAddress Address
         {
             [MethodImpl(Inline)]

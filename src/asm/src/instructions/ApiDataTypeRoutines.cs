@@ -11,7 +11,6 @@ namespace Z0
     using static Konst;
     using static z;
 
-    [StructLayout(LayoutKind.Sequential)]
     public readonly struct ApiDataTypeRoutines
     {
         readonly TableSpan<ApiDataTypeRoutine> Members;

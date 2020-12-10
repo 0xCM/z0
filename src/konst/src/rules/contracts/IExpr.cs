@@ -25,11 +25,10 @@ namespace Z0
 
     }
 
-    public interface IExpr<F,T>
+    public interface IExpr<F,T> : IExpr<T>
         where T : struct
         where F : struct, IExpr<F,T>
     {
-
 
     }
 }

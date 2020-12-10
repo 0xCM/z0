@@ -11,29 +11,26 @@ namespace Z0
 
     readonly partial struct Rules
     {
-        partial struct Sequence
+        /// <summary>
+        /// Defines a rule r:seq[T] -> seq[T] that requires a specified sequence element, if found, is replaced with another
+        /// </summary>
+        public readonly struct Replacement<T>
         {
             /// <summary>
-            /// Defines a rule r:seq[T] -> seq[T] that requires a specified sequence element, if found, is replaced with another
+            /// The sequence term to match
             /// </summary>
-            public readonly struct Replacement<T>
+            public T Match {get;}
+
+            /// <summary>
+            /// The replacement value when matched
+            /// </summary>
+            public T Replace {get;}
+
+            [MethodImpl(Inline)]
+            public Replacement(T match, T replace)
             {
-                /// <summary>
-                /// The sequence term to match
-                /// </summary>
-                public T Match {get;}
-
-                /// <summary>
-                /// The replacement value when matched
-                /// </summary>
-                public T Replace {get;}
-
-                [MethodImpl(Inline)]
-                public Replacement(T match, T replace)
-                {
-                    Match = match;
-                    Replace = replace;
-                }
+                Match = match;
+                Replace = replace;
             }
         }
     }

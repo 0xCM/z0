@@ -31,50 +31,5 @@ namespace Z0
 			}
             return 0;
 		}
-
-        /// <summary>
-        /// Gets the register value of a naturally-identified operand
-        /// </summary>
-        /// <param name="src">The source instruction</param>
-        /// <param name="n">The operand selector</param>
-        [MethodImpl(Inline), Op]
-		public IceRegister register(in Instruction src, N0 n)
-            => src.Op0Register;
-
-        /// <summary>
-        /// Gets the register value of a naturally-identified operand
-        /// </summary>
-        /// <param name="src">The source instruction</param>
-        /// <param name="n">The operand selector</param>
-        [MethodImpl(Inline), Op]
-		public IceRegister register(in Instruction src, N1 n)
-            => src.Op1Register;
-
-        /// <summary>
-        /// Gets the register value of a naturally-identified operand
-        /// </summary>
-        /// <param name="src">The source instruction</param>
-        /// <param name="n">The operand selector</param>
-        [MethodImpl(Inline), Op]
-		public IceRegister register(in Instruction src, N2 n)
-            => src.Op2Register;
-
-        /// <summary>
-        /// Gets the register value of a naturally-identified operand
-        /// </summary>
-        /// <param name="src">The source instruction</param>
-        /// <param name="n">The operand selector</param>
-        [MethodImpl(Inline), Op]
-		public IceRegister register(in Instruction src, N3 n)
-            => src.Op3Register;
-
-        /// <summary>
-        /// Gets the register value of a naturally-identified operand
-        /// </summary>
-        /// <param name="src">The source instruction</param>
-        /// <param name="n">The operand selector</param>
-        [MethodImpl(Inline), Op]
-		public IceRegister register(in Instruction src, N4 n)
-            => src.Op4Register;
     }
 }

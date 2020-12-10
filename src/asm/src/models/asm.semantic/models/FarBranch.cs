@@ -6,27 +6,25 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
     using static Konst;
 
-    [StructLayout(LayoutKind.Sequential)]
     public readonly struct FarBranch
     {
         /// <summary>
         /// The target address
         /// </summary>
-        public readonly MemoryAddress Target;
+        public MemoryAddress Target {get;}
 
         /// <summary>
         /// The target size
         /// </summary>
-        public readonly BranchTargetWidth Width;
+        public BranchTargetWidth Width {get;}
 
         /// <summary>
         /// Specifies a branch target selector
         /// </summary>
-        public readonly Address16 Selector;
+        public Address16 Selector {get;}
 
         [MethodImpl(Inline)]
         public FarBranch(MemoryAddress target, BranchTargetWidth width, Address16 selector)

@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     public readonly struct Expr<T> : IExpr<Expr<T>,T>
         where T : unmanaged
     {
@@ -13,7 +11,6 @@ namespace Z0
         /// The identified expression
         /// </summary>
         public IExpr<T> Encoding {get;}
-
         public string Format()
             => string.Empty;
     }

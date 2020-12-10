@@ -9,16 +9,23 @@ namespace Z0
 
     using static Konst;
     using static z;
-    using static Rules.Sequence;
 
     [ApiHost]
     public readonly partial struct Rules
     {
-        public readonly partial struct Sequence
-        {
+        const NumericKind Closure = UnsignedInts;
 
 
-        }
+        /// <summary>
+        /// Defines a scalar range expression
+        /// </summary>
+        /// <param name="min">The minimum scalar in the range</param>
+        /// <param name="max">The maximum scalar in the range</param>
+        /// <typeparam name="T">The scalar type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static RangeExpr<T> range<T>(T min, T max, T? step = null)
+            where T : unmanaged
+                => new RangeExpr<T>(min,max,step ?? z.one<T>());
 
         [MethodImpl(Inline)]
         public static Replacement<T> replace<T>(T src, T dst)

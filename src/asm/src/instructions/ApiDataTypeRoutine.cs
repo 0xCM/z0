@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
     using Z0.Asm;
 
@@ -15,7 +14,6 @@ namespace Z0
     /// <summary>
     /// Describes a <see cref='ApiDataType'/> member operation
     /// </summary>
-    [StructLayout(LayoutKind.Sequential)]
     public readonly struct ApiDataTypeRoutine
     {
         /// <summary>

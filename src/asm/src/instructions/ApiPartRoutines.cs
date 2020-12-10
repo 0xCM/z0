@@ -16,14 +16,14 @@ namespace Z0.Asm
     public readonly struct ApiPartRoutines
     {
         /// <summary>
-        /// The defining part
-        /// </summary>
-        public PartId Part {get;}
-
-        /// <summary>
         /// The decoded instructions
         /// </summary>
         readonly TableSpan<ApiHostRoutines> Data;
+
+        /// <summary>
+        /// The defining part
+        /// </summary>
+        public PartId Part {get;}
 
         [MethodImpl(Inline)]
         public ApiPartRoutines(PartId part, ApiHostRoutines[] hosts)

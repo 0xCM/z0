@@ -11,9 +11,9 @@ namespace Z0.Asm
 
     public readonly struct AsmTableSeg<T>
     {
-        public readonly T Key;
+        public T Key {get;}
 
-        public readonly ArraySegment<AsmRow> Content;
+        public ArraySegment<AsmRow> Content {get;}
 
         [MethodImpl(Inline)]
         public AsmTableSeg(T key, ArraySegment<AsmRow> data)

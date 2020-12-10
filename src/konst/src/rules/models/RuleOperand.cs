@@ -8,21 +8,17 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static z;
 
-    /// <summary>
-    /// Defines an item selection
-    /// </summary>
-    public readonly struct Choice<T> : IChoice<Choice<T>,T>
+    public readonly struct RuleOperand<T>
     {
-        public T Chosen {get;}
+        public T[] Data {get;}
 
         [MethodImpl(Inline)]
-        public Choice(T chosen)
-            => Chosen = chosen;
+        public RuleOperand(T[] src)
+            => Data = src;
 
         [MethodImpl(Inline)]
-        public static implicit operator Choice<T>(T src)
-            => new Choice<T>(src);
+        public static implicit operator RuleOperand<T>(T[] src)
+            => new RuleOperand<T>(src);
     }
 }

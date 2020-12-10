@@ -9,15 +9,21 @@ namespace Z0.Asm
 
     using static Konst;
 
-    public readonly struct AsmRowSets<T>
+    public readonly struct AsmRowSets<T> : IIndex<AsmRowSet<T>>
     {
-        readonly AsmRowSet<T>[] Data;
+        readonly Index<AsmRowSet<T>> Data;
 
         [MethodImpl(Inline)]
         public AsmRowSets(params AsmRowSet<T>[] src)
             => Data = src;
 
         public ReadOnlySpan<AsmRowSet<T>> View
+        {
+            [MethodImpl(Inline)]
+            get => Data;
+        }
+
+        public AsmRowSet<T>[] Storage
         {
             [MethodImpl(Inline)]
             get => Data;

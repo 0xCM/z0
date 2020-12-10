@@ -13,7 +13,6 @@ namespace Z0.Asm
     {
         public readonly struct Movzx
         {
-
             [MethodImpl(Inline)]
             public static Movzx<S,T> create<S,T>(S src, T dst)
                 => new Movzx<S,T>(src,dst);

@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static z;
 
     public readonly struct RangeModel<T,W>
         where W : unmanaged

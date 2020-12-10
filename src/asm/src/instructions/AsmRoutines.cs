@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Konst;
 
-    public readonly struct AsmRoutines
+    public readonly struct AsmRoutines : IIndex<AsmRoutine>
     {
         public readonly AsmRoutine[] Data;
 

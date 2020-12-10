@@ -17,17 +17,17 @@ namespace Z0.Asm
         /// <summary>
         /// Encoded assembly
         /// </summary>
-        public readonly ApiCodeBlock Encoded;
+        public ApiCodeBlock Encoded {get;}
 
         /// <summary>
         /// The decoded instructions
         /// </summary>
-        public readonly Instruction[] Decoded;
+        public Instruction[] Decoded {get;}
 
         /// <summary>
         /// The reason capture was terminated
         /// </summary>
-        public readonly ExtractTermCode TermCode;
+        public ExtractTermCode TermCode {get;}
 
         [MethodImpl(Inline)]
         public ApiBlockAsm(ApiCodeBlock encoded, Instruction[] decoded, ExtractTermCode term)

@@ -9,6 +9,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+
     using BSK = BitShiftApiClass;
 
     partial struct TypedLogicSpec

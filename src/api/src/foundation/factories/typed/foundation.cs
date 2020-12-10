@@ -68,16 +68,5 @@ namespace Z0
         public static TernaryBitwiseOpExpr<T> ternary<T>(TernaryBitLogicKind op, IExpr<T> a, IExpr<T> b, IExpr<T> c)
             where T : unmanaged
                 => new TernaryBitwiseOpExpr<T>(op,a,b,c);
-
-        /// <summary>
-        /// Defines a scalar range expression
-        /// </summary>
-        /// <param name="min">The minimum scalar in the range</param>
-        /// <param name="max">The maximum scalar in the range</param>
-        /// <typeparam name="T">The scalar type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static RangeExpr<T> rangexpr<T>(T min, T max, T? step = null)
-            where T : unmanaged
-                => new RangeExpr<T>(min,max,step ?? z.one<T>());
     }
 }

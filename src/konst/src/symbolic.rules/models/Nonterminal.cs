@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static z;
 
    public readonly struct Nonterminal<S> : INonterminal<S>
         where S : unmanaged

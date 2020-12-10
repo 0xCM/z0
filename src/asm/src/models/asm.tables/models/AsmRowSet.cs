@@ -11,13 +11,9 @@ namespace Z0.Asm
 
     public readonly struct AsmRowSet<T>
     {
-        public readonly T Key;
+        public T Key {get;}
 
         readonly AsmRow[] Rows;
-
-        [MethodImpl(Inline)]
-        public static implicit operator AsmRow[](AsmRowSet<T> src)
-            => src.Rows;
 
         [MethodImpl(Inline)]
         public AsmRowSet(T key, AsmRow[] data)
@@ -37,5 +33,9 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             get => Rows.Length;
         }
+
+        [MethodImpl(Inline)]
+        public static implicit operator AsmRow[](AsmRowSet<T> src)
+            => src.Rows;
     }
 }

@@ -38,7 +38,7 @@ namespace Z0.Asm
     }
 
     [StructLayout(LayoutKind.Sequential), Record(TableId, FieldCount)]
-    public struct AsmRow
+    public struct AsmRow : IRecord<AsmRow>
     {
         public const string TableId = "asm.rows";
 

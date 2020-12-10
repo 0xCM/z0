@@ -4,15 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Konst;
-
     /// <summary>
     /// Describes an operand in the context of an assembly instruction
     /// </summary>
-    public struct AsmOperandInfo
+    [Record]
+    public struct AsmOperandInfo : IRecord<AsmOperandInfo>
     {
         /// <summary>
         /// The 0-based operand position
@@ -43,16 +39,5 @@ namespace Z0.Asm
         /// Instruction branching info, if applicable
         /// </summary>
         public AsmBranch Branch;
-
-        [MethodImpl(Inline)]
-        public AsmOperandInfo(int index, OpKind kind, in ImmInfo imm, in MemInfo memory, in IceRegister register, AsmBranch branch)
-        {
-            Index = (byte)index;
-            Kind = kind;
-            ImmInfo = imm;
-            Memory = memory;
-            Register = register;
-            Branch = branch;
-        }
     }
 }

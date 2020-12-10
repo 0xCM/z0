@@ -14,17 +14,9 @@ namespace Z0
     /// </summary>
     public readonly struct OffsetSequence : ITextual
     {
-        public readonly ushort Seq;
+        public ushort Seq {get;}
 
-        public readonly uint Offset;
-
-        [MethodImpl(Inline)]
-        public static OffsetSequence operator ++(OffsetSequence src)
-            => src.Next();
-
-        [MethodImpl(Inline)]
-        public static implicit operator OffsetSequence((ushort seq, ushort offset) src)
-            => new OffsetSequence(src.seq, src.offset);
+        public uint Offset {get;}
 
         [MethodImpl(Inline)]
         public OffsetSequence(ushort seq, uint offset)
@@ -52,5 +44,13 @@ namespace Z0
 
         public static OffsetSequence Zero
             => default(OffsetSequence);
+
+        [MethodImpl(Inline)]
+        public static OffsetSequence operator ++(OffsetSequence src)
+            => src.Next();
+
+        [MethodImpl(Inline)]
+        public static implicit operator OffsetSequence((ushort seq, ushort offset) src)
+            => new OffsetSequence(src.seq, src.offset);
     }
 }

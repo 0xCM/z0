@@ -6,8 +6,8 @@ namespace Z0.Asm
 {
     using System.Runtime.InteropServices;
 
-    [StructLayout(LayoutKind.Sequential)]
-    public struct JccInfo
+    [StructLayout(LayoutKind.Sequential), Record(TableId)]
+    public struct JccInfo : IRecord<JccInfo>
     {
         public const string TableId = "asm.jcc";
 

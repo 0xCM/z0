@@ -4,11 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Konst;
-
     public struct AsmMemory
     {
         public RegisterKind MemoryBase;
@@ -33,5 +28,4 @@ namespace Z0.Asm
 
         public MemoryAddress IPRelativeMemoryAddress;
     }
-
 }

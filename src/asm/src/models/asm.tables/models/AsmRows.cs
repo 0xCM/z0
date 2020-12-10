@@ -9,9 +9,19 @@ namespace Z0.Asm
 
     using static Konst;
 
-    public readonly struct AsmRows
+    public readonly struct AsmRows : IIndex<AsmRow>
     {
         readonly AsmRow[] Data;
+
+        [MethodImpl(Inline)]
+        public AsmRows(AsmRow[] src)
+            => Data = src;
+
+        public AsmRow[] Storage
+        {
+            [MethodImpl(Inline)]
+            get => Data;
+        }
 
         [MethodImpl(Inline)]
         public static implicit operator AsmRows(AsmRow[] src)
@@ -20,15 +30,5 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public static implicit operator AsmRow[](AsmRows src)
             => src.Data;
-
-        [MethodImpl(Inline)]
-        public AsmRows(AsmRow[] src)
-            => Data = src;
-
-        public AsmRow[] Content
-        {
-            [MethodImpl(Inline)]
-            get => Data;
-        }
     }
 }

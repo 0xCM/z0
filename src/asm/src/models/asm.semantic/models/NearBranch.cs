@@ -6,22 +6,20 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
     using static Konst;
 
-    [StructLayout(LayoutKind.Sequential)]
     public readonly struct NearBranch
     {
         /// <summary>
         /// The target address
         /// </summary>
-        public readonly MemoryAddress Target;
+        public MemoryAddress Target {get;}
 
         /// <summary>
         /// The target size
         /// </summary>
-        public readonly BranchTargetWidth Width;
+        public BranchTargetWidth Width {get;}
 
         [MethodImpl(Inline)]
         public NearBranch(MemoryAddress target, BranchTargetWidth width)

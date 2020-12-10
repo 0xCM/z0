@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static z;
     using static SymbolicTests;
 
     [ApiHost(ApiNames.Rules, true)]
@@ -16,14 +15,14 @@ namespace Z0
     {
         const NumericKind Closure = UnsignedInts;
 
+        [MethodImpl(Inline), Op]
+        public static IsOneOf oneOf(params char[] src)
+            => new IsOneOf(src);
+
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static SymbolicRange<T> range<T>(T min, T max)
             where T : unmanaged
                 => new SymbolicRange<T>(min,max);
-
-        [MethodImpl(Inline), Op]
-        public static IsOneOf oneOf(params char[] src)
-            => new IsOneOf(src);
 
         [MethodImpl(Inline), Op]
         public static IsInRange inRange(char min, char max)

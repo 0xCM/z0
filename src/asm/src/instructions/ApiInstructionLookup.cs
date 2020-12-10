@@ -14,7 +14,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public sealed class ApiInstructionLookup : Dictionary<MemoryAddress, ApiInstruction>
+    public sealed class ApiInstructionLookup : Dictionary<MemoryAddress,ApiInstruction>
     {
         [MethodImpl(Inline)]
         public ApiInstructionLookup(int capacity)

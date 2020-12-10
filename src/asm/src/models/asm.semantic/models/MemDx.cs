@@ -14,12 +14,12 @@ namespace Z0
         /// <summary>
         /// The size of the displacement in bytes
         /// </summary>
-        public readonly MemDxSize Size;
+        public MemDxSize Size {get;}
 
         /// <summary>
         /// The displacement value
         /// </summary>
-        public readonly ulong Value;
+        public ulong Value {get;}
 
         [MethodImpl(Inline)]
         public MemDx(ulong value, MemDxSize size)

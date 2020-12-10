@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
     using static z;
-    using static Rules.Sequence;
+    using static Rules;
 
     partial struct TextRules
     {

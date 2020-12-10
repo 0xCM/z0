@@ -9,17 +9,19 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct AspectData<T>
+    /// <summary>
+    /// Defines an item selection
+    /// </summary>
+    public readonly struct Choice<T> : IChoice<Choice<T>,T>
     {
-        public T Source {get;}
-
-        public string[] Rows {get;}
+        public T Chosen {get;}
 
         [MethodImpl(Inline)]
-        public AspectData(T src, string[] rows)
-        {
-            Source = src;
-            Rows = rows;
-        }
+        public Choice(T chosen)
+            => Chosen = chosen;
+
+        [MethodImpl(Inline)]
+        public static implicit operator Choice<T>(T src)
+            => new Choice<T>(src);
     }
 }

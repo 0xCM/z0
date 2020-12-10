@@ -2,15 +2,10 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
-    using System;
-    using System.Runtime.InteropServices;
-
-    using Z0.Asm;
-
-    [Record(TableId), StructLayout(LayoutKind.Sequential)]
-    public struct JmpInfo
+    [Record(TableId)]
+    public struct AsmJmpInfo : IRecord<AsmJmpInfo>
     {
         public const string TableId = "asm.jumps";
 

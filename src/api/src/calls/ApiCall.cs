@@ -8,14 +8,17 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static Konst;
-
     /// <summary>
     /// Represents a call to a classified operation that accepts no arguments
     /// </summary>
     [StructLayout(LayoutKind.Sequential)]
     public struct ApiCall
     {
+        /// <summary>
+        /// The defining part
+        /// </summary>
+        public PartId Part;
+
         /// <summary>
         /// The operation class
         /// </summary>
@@ -30,7 +33,12 @@ namespace Z0
     public struct ApiCall<A0>
     {
         /// <summary>
-        /// The operator class
+        /// The defining part
+        /// </summary>
+        public PartId Part;
+
+        /// <summary>
+        /// The operation class
         /// </summary>
         public ApiClass Class;
 
@@ -49,7 +57,12 @@ namespace Z0
     public struct ApiCall<A0,A1>
     {
         /// <summary>
-        /// The operator class
+        /// The defining part
+        /// </summary>
+        public PartId Part;
+
+        /// <summary>
+        /// The operation class
         /// </summary>
         public ApiClass Class;
 
@@ -74,7 +87,12 @@ namespace Z0
     public struct ApiCall<A0,A1,A2>
     {
         /// <summary>
-        /// The operator class
+        /// The defining part
+        /// </summary>
+        public PartId Part;
+
+        /// <summary>
+        /// The operation class
         /// </summary>
         public ApiClass Class;
 
@@ -105,7 +123,12 @@ namespace Z0
     public struct ApiCall<A0,A1,A2,A3>
     {
         /// <summary>
-        /// The operator class
+        /// The defining part
+        /// </summary>
+        public PartId Part;
+
+        /// <summary>
+        /// The operation class
         /// </summary>
         public ApiClass Class;
 

@@ -49,7 +49,6 @@ namespace Z0.Asm
         /// </summary>
         public ApiMetadataUri MetaUri {get;}
 
-
         [MethodImpl(Inline)]
         public AsmRoutine(ApiMetadataUri meta, OpUri uri, string sig, ApiCodeBlock code, ExtractTermCode term, AsmFxList instructions)
         {

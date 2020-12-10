@@ -12,7 +12,8 @@ namespace Z0.Asm
     /// <summary>
     /// Captures operation invocation information from the client perspective
     /// </summary>
-    public struct AsmCall : ITextual
+    [Record]
+    public struct AsmCall : ITextual, IRecord<AsmCall>
     {
         /// <summary>
         /// The invoking operation

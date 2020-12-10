@@ -14,11 +14,11 @@ namespace Z0
     /// </summary>
     public readonly struct ScaledOffset
     {
-        public readonly ulong Base;
+        public ulong Base {get;}
 
-        public readonly ushort Offset;
+        public ushort Offset {get;}
 
-        public readonly byte Scale;
+        public byte Scale {get;}
 
         [MethodImpl(Inline)]
         public ScaledOffset(ulong @base, ushort offset, byte scale)

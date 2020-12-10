@@ -11,16 +11,9 @@ namespace Z0.Asm
 
     public readonly struct AsmRoutineCode
     {
-        public static AsmRoutineCode Empty
-            => default;
-
         public AsmRoutine Routine {get;}
 
         public ApiCaptureBlock Code {get;}
-
-        [MethodImpl(Inline)]
-        public static implicit operator AsmRoutineCode((AsmRoutine f, ApiCaptureBlock code) src)
-            => new AsmRoutineCode(src.f, src.code);
 
         [MethodImpl(Inline)]
         public AsmRoutineCode(AsmRoutine f, ApiCaptureBlock code)
@@ -40,5 +33,13 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             get => (Routine != null && Routine.IsNonEmpty) && Code.IsNonEmpty;
         }
+
+
+        [MethodImpl(Inline)]
+        public static implicit operator AsmRoutineCode((AsmRoutine f, ApiCaptureBlock code) src)
+            => new AsmRoutineCode(src.f, src.code);
+
+        public static AsmRoutineCode Empty
+            => default;
     }
 }
