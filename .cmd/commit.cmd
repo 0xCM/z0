@@ -1,6 +1,6 @@
 @echo off
 
-set GitLogPath=%ZDb%\logs\git\git-actions.log
+set GitLogPath=%ZDb%\logs\git\z0-git.log
 echo GitLogPath:%GitLogPath%
 
 set Sep=--------------------------------------------------------------------------------------
