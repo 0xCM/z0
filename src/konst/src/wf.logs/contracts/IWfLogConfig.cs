@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    using X = ArchiveFileKinds;
+    using X = ArchiveFileExt;
     using api = WfLogs;
 
     public interface IWfLogConfig : ITextual

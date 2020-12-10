@@ -52,7 +52,7 @@ namespace Z0
             if(records.Length == 0)
                 return FilePath.Empty;
 
-            return Z0.Log.BenchLog.Write(records, FS.FolderName.Empty, basename, mode, delimiter, header, ArchiveFileKinds.Csv);
+            return Z0.Log.BenchLog.Write(records, FS.FolderName.Empty, basename, mode, delimiter, header, ArchiveFileExt.Csv);
         }
     }
 }

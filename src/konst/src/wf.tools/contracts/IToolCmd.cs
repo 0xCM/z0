@@ -21,9 +21,9 @@ namespace Z0
     }
 
     [Free]
-    public interface IToolCmd<T,C> : IToolCmd<C>, ICmdSpec<C>
-        where T : struct, ITool<T>
+    public interface IToolCmd<C,T> : IToolCmd<C>, ICmdSpec<C>
         where C : struct, IToolCmd<C>
+        where T : struct, ITool<T>
     {
         ToolId ICmdSpec.ToolId
             => default(T).Id;

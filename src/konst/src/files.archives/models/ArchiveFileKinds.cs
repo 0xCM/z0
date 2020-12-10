@@ -4,51 +4,47 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static ArchiveFileKindNames;
-    using static FS;
 
     public readonly struct ArchiveFileKinds
     {
-        public static FileExt Cmd => ext(cmd);
+        public readonly struct Pdb : IFileKind<Pdb>
+        {
+            public FS.FileExt DefaultExt => ArchiveFileExt.Pdb;
 
-        public static FileExt Asm => ext(asm);
+            public static implicit operator FS.FileExt(Pdb src)
+                => src.DefaultExt;
+        }
 
-        public static FileExt Csv => ext(csv);
+        public readonly struct Csv : IFileKind<Csv>
+        {
+            public FS.FileExt DefaultExt => ArchiveFileExt.Csv;
 
-        public static FileExt Cs => ext(cs);
+            public static implicit operator FS.FileExt(Csv src)
+                => src.DefaultExt;
+        }
 
-        public static FileExt Dll => ext(dll);
+        public readonly struct Asm : IFileKind<Asm>
+        {
+            public FS.FileExt DefaultExt => ArchiveFileExt.Asm;
 
-        public static FileExt Pdb => ext(pdb);
+            public static implicit operator FS.FileExt(Asm src)
+                => src.DefaultExt;
+        }
 
-        public static FileExt Xml => ext(xml);
+        public readonly struct Dll : IFileKind<Dll>
+        {
+            public FS.FileExt DefaultExt => ArchiveFileExt.Dll;
 
-        public static FileExt Json => ext(json);
+            public static implicit operator FS.FileExt(Dll src)
+                => src.DefaultExt;
+        }
 
-        public static FileExt Exe => ext(exe);
+        public readonly struct Sln : IFileKind<Sln>
+        {
+            public FS.FileExt DefaultExt => ArchiveFileExt.Sln;
 
-        public static FileExt Txt => ext(txt);
-
-        public static FileExt Il => ext(il);
-
-        public static FileExt IlData => ext(il,csv);
-
-        public static FileExt Hex => ext(hex);
-
-        public static FileExt XCsv => ext(xcsv);
-
-        public static FileExt PCsv => ext(pcsv);
-
-        public static FileExt Log => ext(log);
-
-        public static FileExt Lib => ext(lib);
-
-        public static FileExt Idx => ext(idx, csv);
-
-        public static FileExt StatusLog => ext(status) + Log;
-
-        public static FileExt ErrorLog => ext(error) + Log;
-
-        public static FileExt JsonDeps => ext(deps, json);
+            public static implicit operator FS.FileExt(Sln src)
+                => src.DefaultExt;
+        }
     }
 }

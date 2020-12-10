@@ -11,7 +11,7 @@ namespace Z0
     {
         string Name {get;}
 
-        System.Reflection.Metadata.ILOpCode Id {get;}
+        ILOpCode Id {get;}
     }
 
     public interface ICilOpCode<K> : ICilOpCode

@@ -33,7 +33,7 @@ namespace Z0
         {
             z.insist(config.Source.Exists, $"The file {config.Source}, it must exist");
             var refs = CsLang.pe(typeof(object), typeof(Enumerable), typeof(ProcessStartInfo));
-            var dst = FS.create(config.OutDir) + FS.file(config.Name, ArchiveFileKinds.Exe);
+            var dst = FS.create(config.OutDir) + FS.file(config.Name, ArchiveFileExt.Exe);
             var code = new ToolProxyCode(dst);
             return CsLang.compilation(config.Name, refs, CsLang.parse(code.Generate()));
         }

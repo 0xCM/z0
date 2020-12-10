@@ -14,7 +14,7 @@ namespace Z0
             cmd.ListName = name;
             cmd.SourceDir = src;
             cmd.FileKinds = kinds;
-            cmd.TargetPath = wf.Db().Doc(name, ArchiveFileKinds.Csv);
+            cmd.TargetPath = wf.Db().Doc(name, ArchiveFileExt.Csv);
             return cmd;
         }
 

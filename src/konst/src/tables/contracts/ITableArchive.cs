@@ -12,7 +12,7 @@ namespace Z0
     using static Konst;
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
-    using X = ArchiveFileKinds;
+    using X = ArchiveFileExt;
 
     [Free]
     public interface ITableArchive : IFileArchive

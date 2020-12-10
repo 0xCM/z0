@@ -34,7 +34,7 @@ namespace Z0.Xed
         }
 
         public IEnumerable<FS.FilePath> Files
-            => ArchiveRoot.Files(ArchiveFileKinds.Txt,true);
+            => ArchiveRoot.Files(ArchiveFileExt.Txt,true);
 
         public int FileCount => Files.Count();
 

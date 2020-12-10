@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.InteropServices;
 
-    [StructLayout(LayoutKind.Sequential), Record]
+    [Record]
     public struct ProcessModuleRecord : IRecord<ProcessModuleRecord>
     {
         public MemoryAddress Base;
@@ -16,7 +16,7 @@ namespace Z0
 
         public ByteSize Size;
 
-        public StringRef Name;
+        public utf8 Name;
 
         public FS.FilePath Path;
 

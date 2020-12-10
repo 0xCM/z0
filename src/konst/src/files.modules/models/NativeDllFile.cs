@@ -26,7 +26,7 @@ namespace Z0
             => Path = path;
 
         public FS.FileExt DefaultExt
-            =>  ArchiveFileKinds.Dll;
+            =>  ArchiveFileExt.Dll;
 
         [MethodImpl(Inline)]
         public static implicit operator FileModule(NativeDllFile src)

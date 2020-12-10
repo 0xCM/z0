@@ -8,7 +8,6 @@ namespace Z0
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-
     [Free]
     public interface IFileType
     {
@@ -21,21 +20,5 @@ namespace Z0
     {
         Type IFileType.FileType
             => typeof(T);
-    }
-
-    [Free]
-    public interface IFileKind : IFileType
-    {
-
-    }
-
-    [Free]
-    public interface IFileKind<K> : IFileKind
-        where K : struct
-    {
-        K Kind {get;}
-
-        Type IFileType.FileType
-            => typeof(K);
     }
 }

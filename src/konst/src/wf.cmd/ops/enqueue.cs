@@ -15,7 +15,7 @@ namespace Z0
         public static FS.FilePath enqueue<T>(CmdJob<T> job, IFileDb db)
             where T : struct, ITextual
         {
-            var dst = db.JobQueue() + FS.file(job.Name, ArchiveFileKinds.Cmd);
+            var dst = db.JobQueue() + FS.file(job.Name, ArchiveFileExt.Cmd);
             dst.Overwrite(job.Format());
             return dst;
         }

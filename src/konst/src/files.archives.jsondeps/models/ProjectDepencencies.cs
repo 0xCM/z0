@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using Microsoft.Extensions.DependencyModel;
 
-    using static Konst;
     using static z;
 
     partial struct JsonDeps

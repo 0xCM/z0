@@ -55,7 +55,7 @@ namespace Z0
             EmissionCount = (uint)entries.Length;
 
             var f = Table.formatter<ContentLibField>();
-            var target = Wf.Db().RefDataRoot() + FS.file("index", ArchiveFileKinds.Csv);
+            var target = Wf.Db().RefDataRoot() + FS.file("index", ArchiveFileExt.Csv);
             for(var i=0u; i<EmissionCount; i++)
             {
                 ref readonly var entry = ref skip(entries, i);

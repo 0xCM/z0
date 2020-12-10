@@ -24,7 +24,7 @@ namespace Z0
             => X86DirPath(root) + name;
 
         FilePath HexFilePath(FS.FolderPath root, ApiHostUri host)
-            => X86DirPath(root) + FS.file(host.Name, ArchiveFileKinds.Hex);
+            => X86DirPath(root) + FS.file(host.Name, ArchiveFileExt.Hex);
 
         FilePath AsmFilePath(FS.FolderPath root, FS.FileName name)
             => AsmDirPath(root) + name;

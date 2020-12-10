@@ -12,12 +12,14 @@ namespace Z0.Tools
 
     partial struct Llvm
     {
-        public struct Lli : ITool<Lli>
+        [Tool]
+        public readonly struct Lli : ITool<Lli>
         {
             public string ToolName => "lli";
         }
 
-        public struct LliCmd : IToolCmd<Lli,LliCmd>
+        [Cmd]
+        public struct LliCmd : IToolCmd<LliCmd,Lli>
         {
 
         }

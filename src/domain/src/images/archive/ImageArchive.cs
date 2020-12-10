@@ -8,24 +8,23 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
 
-    using static Konst;
     using static z;
 
-    using static ArchiveFileKinds;
+    using static ArchiveFileExt;
 
     [FileArchive]
-    public readonly struct ImageArchive : IFileArchive<ImageFormatKind>
+    public readonly struct ImageArchive : IFileArchive
     {
         public FS.FolderPath Root {get;}
 
-        public ImageFormatKind ArchiveKind {get;}
+        public ImageFormatKind FormatKind {get;}
 
         public FS.FileExt[] Extensions {get;}
 
         public ImageArchive(FS.FolderPath root, ImageFormatKind kind)
         {
             Root = root;
-            ArchiveKind = kind;
+            FormatKind = kind;
             Extensions = extensions(kind);
         }
 

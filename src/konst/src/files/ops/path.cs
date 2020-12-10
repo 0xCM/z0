@@ -23,9 +23,9 @@ namespace Z0
         public static FilePath path(FolderPath folder, FileName file)
             => folder + file;
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static FilePath<K> kind<K>(FS.FilePath src, K kind)
-            where K : struct
+        [MethodImpl(Inline)]
+        public static FilePath<K> kind<K>(FS.FilePath src, K kind = default)
+            where K : struct, IFileKind<K>
                 => new FilePath<K>(src,kind);
     }
 }

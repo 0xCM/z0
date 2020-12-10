@@ -4,15 +4,16 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Reflection;
-
-    public interface ICilIndex
+    public interface IToolsetDist : IFileArchive
     {
-        Option<CilFunctionInfo> FindCil(int id);
+        ToolId ToolsetId {get;}
 
-        Option<Type> FindType(int id);
+        Index<ToolId> Tools {get;}
+    }
 
-        Option<MethodInfo> FindMethod(int id);
+    public interface IToolsetDist<H> : IToolsetDist
+        where H : IToolsetDist<H>, new()
+    {
+
     }
 }

@@ -19,6 +19,6 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static CmdLogger logger(IWfShell wf, string name)
-            => new CmdLogger(wf, wf.Paths.AppDataDir + FS.file(name, ArchiveFileKinds.StatusLog));
+            => new CmdLogger(wf, wf.Paths.AppDataDir + FS.file(name, ArchiveFileExt.StatusLog));
     }
 }

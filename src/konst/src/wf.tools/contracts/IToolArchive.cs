@@ -21,7 +21,7 @@ namespace Z0
     }
 
     [Free]
-    public interface IToolArchive<T> : IToolArchive, IFileArchive<ToolArchiveKind>
+    public interface IToolArchive<T> : IToolArchive, IFileArchive
         where T : struct, ITool<T>
     {
 

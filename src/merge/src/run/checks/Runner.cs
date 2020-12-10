@@ -307,7 +307,7 @@ namespace Z0
         {
             var asmWf = AsmWorkflows.create(Wf);
             var methods = typeof(BitMaskChecker).Methods().WithNameStartingWith("CheckLoMask");
-            var dst = Wf.AppData + FS.file("bitmasks", ArchiveFileKinds.Asm);
+            var dst = Wf.AppData + FS.file("bitmasks", ArchiveFileExt.Asm);
             var routines = asmWf.Decode(methods, dst);
             Wf.Router.Dispatch(CheckBitMasksReactor.Spec());
         }

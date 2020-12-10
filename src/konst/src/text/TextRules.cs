@@ -26,6 +26,12 @@ namespace Z0
 
         }
 
+        [ApiHost("text.rules.transform")]
+        public readonly partial struct Transform
+        {
+
+        }
+
         [ApiHost("text.rules.parse")]
         public readonly partial struct Parse
         {

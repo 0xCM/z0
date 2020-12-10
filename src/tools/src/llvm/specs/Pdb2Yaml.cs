@@ -9,12 +9,13 @@ namespace Z0.Tools
     partial struct Llvm
     {
         [Tool]
-        public struct TblGen : ITool<TblGen>
+        public readonly struct PdbToYaml : ITool<PdbToYaml>
         {
-            public string ToolName => ToolNames.tblgen;
+            public string ToolName => ToolNames.pdb2yaml;
         }
 
-        public struct TableGenCmd : IToolCmd<TblGen,TableGenCmd>
+        [Cmd]
+        public struct PdbToYamlCmd : IToolCmd<PdbToYamlCmd,PdbToYaml>
         {
 
         }

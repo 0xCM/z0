@@ -12,7 +12,7 @@ namespace Z0
     partial struct FS
     {
         public struct FilePath<K> : IFile<FilePath<K>,K>
-            where K : struct
+            where K : struct, IFileKind<K>
         {
             public FS.FilePath Path {get;}
 

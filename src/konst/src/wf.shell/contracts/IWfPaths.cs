@@ -42,7 +42,7 @@ namespace Z0
             => LogRoot + FS.folder("tests") + FS.folder("sorted");
 
         FS.FilePath SortedCaseLogPath()
-            => SortedCaseLogRoot() + FS.file(AppName,  ArchiveFileKinds.Csv);
+            => SortedCaseLogRoot() + FS.file(AppName,  ArchiveFileExt.Csv);
 
         /// <summary>
         /// The name of the development source folder

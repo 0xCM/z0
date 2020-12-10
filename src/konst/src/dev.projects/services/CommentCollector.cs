@@ -62,7 +62,7 @@ namespace Z0
                     var id = path.Owner;
                     if(id.IsSome())
                     {
-                        var xmlfile = path.ChangeExtension(ArchiveFileKinds.Xml);
+                        var xmlfile = path.ChangeExtension(ArchiveFileExt.Xml);
                         if(xmlfile.Exists)
                         {
                             var data = xmlfile.ReadText();

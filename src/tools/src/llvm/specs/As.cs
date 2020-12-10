@@ -8,13 +8,14 @@ namespace Z0.Tools
 
     partial struct Llvm
     {
-        public struct As : ITool<As>
+        [Tool]
+        public readonly struct As : ITool<As>
         {
             public string ToolName => ToolNames.@as;
         }
 
-        [Tool]
-        public struct AsCmd : IToolCmd<As,AsCmd>
+        [Cmd]
+        public struct AsCmd : IToolCmd<AsCmd,As>
         {
             public FS.FilePath SrcPath;
 

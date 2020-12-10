@@ -8,6 +8,23 @@ namespace Z0
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
+    [Free]
+    public interface IFileKind : IFileType
+    {
+        FS.FileExt DefaultExt {get;}
+    }
 
+    [Free]
+    public interface IFileKind<H> : IFileKind, IFileType<H>
+        where H : struct, IFileKind<H>
+    {
+    }
 
+    [Free]
+    public interface IFileKind<H,K> : IFileKind<H>
+        where H : struct, IFileKind<H,K>
+        where K : unmanaged
+    {
+        K Classifier {get;}
+    }
 }

@@ -127,5 +127,21 @@ namespace Z0
         /// Defines the 'deps' literal
         /// </summary>
         public const string deps = nameof(deps);
+
+        /// <summary>
+        /// Defines the 'sln' literal
+        /// </summary>
+        public const string sln = nameof(sln);
+
+        /// <summary>
+        /// Defines the 'csproj' literal
+        /// </summary>
+        public const string csproj = nameof(csproj);
+
+        /// <summary>
+        /// Defines the 'targets' literal
+        /// </summary>
+        public const string targets = nameof(targets);
+
     }
 }

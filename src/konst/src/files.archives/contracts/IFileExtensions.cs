@@ -6,7 +6,7 @@ namespace Z0
 {
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    using X = ArchiveFileKinds;
+    using X = ArchiveFileExt;
 
     using static FS;
 

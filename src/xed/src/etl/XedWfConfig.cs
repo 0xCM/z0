@@ -37,7 +37,7 @@ namespace Z0
             => FS.folder("categories");
 
         public FS.FileExt DataFileExt
-            => ArchiveFileKinds.Csv;
+            => ArchiveFileExt.Csv;
 
         public xed_ext[] Extensions
         {

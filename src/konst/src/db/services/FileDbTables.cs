@@ -13,7 +13,7 @@ namespace Z0
     using static z;
 
     using api = Table;
-    using X = ArchiveFileKinds;
+    using X = ArchiveFileExt;
 
     public struct FileDbTables<S> : ITableArchive
     {

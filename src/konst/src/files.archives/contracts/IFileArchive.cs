@@ -33,7 +33,7 @@ namespace Z0
     /// <typeparam name="K">The archive's classifying type</typeparam>
     [Free]
     public interface IFileArchive<K> : IFileArchive
-        where K : unmanaged
+        where K : struct, IFileKind
     {
         /// <summary>
         /// Specifies the archive classifier

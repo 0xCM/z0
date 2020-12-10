@@ -43,20 +43,20 @@ namespace Z0
         public static TestLogPathsLegacy The => default;
 
         public FS.FilePath LogPath(LogArea area, string basename, FS.FileExt? ext = null)
-            => Settings.LogDir(area) + FS.file(basename, ext ?? ArchiveFileKinds.Log);
+            => Settings.LogDir(area) + FS.file(basename, ext ?? ArchiveFileExt.Log);
 
         public FS.FilePath LogPath(LogArea area, FS.FolderName subdir, string basename, FS.FileExt? ext = null)
-            => Settings.LogDir(area, subdir) + FS.file(basename, ext ?? ArchiveFileKinds.Log);
+            => Settings.LogDir(area, subdir) + FS.file(basename, ext ?? ArchiveFileExt.Log);
 
         public FS.FilePath Timestamped(LogArea area, string basename, FS.FileExt? ext = null)
-            => Settings.LogDir(area) + FS.file($"{basename}.{LogDate}", ext ?? ArchiveFileKinds.Log);
+            => Settings.LogDir(area) + FS.file($"{basename}.{LogDate}", ext ?? ArchiveFileExt.Log);
 
         public FS.FilePath UniqueLogPath(LogArea area, string basename, FS.FileExt? ext = null)
         {
             var first = new DateTime(2019,1,1);
             var current = Time.now();
             var elapsed = (long) (current - first).TotalMilliseconds;
-            return LogPath(area, basename, ext ?? ArchiveFileKinds.Log, elapsed);
+            return LogPath(area, basename, ext ?? ArchiveFileExt.Log, elapsed);
         }
 
         public FS.FilePath UniqueLogPath(LogArea area, FS.FolderName subdir, string basename, FS.FileExt? ext = null)
@@ -64,7 +64,7 @@ namespace Z0
             var first = new DateTime(2019,1,1);
             var current = Time.now();
             var elapsed = (long) (current - first).TotalMilliseconds;
-            return LogPath(area, subdir, basename, ext ?? ArchiveFileKinds.Log, elapsed);
+            return LogPath(area, subdir, basename, ext ?? ArchiveFileExt.Log, elapsed);
         }
 
         static FS.FilePath LogPath(LogArea area, string basename, FS.FileExt ext, long timestamp)
@@ -138,7 +138,7 @@ namespace Z0
                 if(records.Length == 0)
                     return FS.FilePath.Empty;
 
-                ext = ext.IsEmpty ? ArchiveFileKinds.Log : ext;
+                ext = ext.IsEmpty ? ArchiveFileExt.Log : ext;
 
                 var path = ComputePath(subdir,basename, mode == LogWriteMode.Create, ext);
 

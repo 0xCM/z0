@@ -71,7 +71,7 @@ namespace Z0.Asm
 
         Outcome<uint> ClearExtracts(PartId part)
         {
-            var kind = ArchiveFileKinds.XCsv;
+            var kind = ArchiveFileExt.XCsv;
             var files = Wf.Db().CapturedExtractFiles(part);
             var result = Clear(files);
             if(result)
@@ -83,7 +83,7 @@ namespace Z0.Asm
 
         Outcome<uint> ClearParsed(PartId part)
         {
-            var kind = ArchiveFileKinds.PCsv;
+            var kind = ArchiveFileExt.PCsv;
             var files = Wf.Db().ParsedExtractFiles(part);
             var result = Clear(files);
             if(result)
@@ -95,7 +95,7 @@ namespace Z0.Asm
 
         Outcome<uint> ClearAsm(PartId part)
         {
-            var kind = ArchiveFileKinds.Asm;
+            var kind = ArchiveFileExt.Asm;
             var files = Wf.Db().CapturedAsmFiles(part);
             var result = Clear(files);
             if(result)
@@ -107,7 +107,7 @@ namespace Z0.Asm
 
         Outcome<uint> ClearHex(PartId part)
         {
-            var kind = ArchiveFileKinds.Hex;
+            var kind = ArchiveFileExt.Hex;
             var files = Wf.Db().CapturedHexFiles(part);
             var result = Clear(files);
             if(result)
@@ -119,7 +119,7 @@ namespace Z0.Asm
 
         Outcome<uint> ClearCil(PartId part)
         {
-            var kind = ArchiveFileKinds.IlData;
+            var kind = ArchiveFileExt.IlData;
             var files = Wf.Db().CapturedCilDataFiles(part);
             var result = Clear(files);
             if(result)

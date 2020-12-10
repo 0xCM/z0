@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Reflection;
 
-    using X = ArchiveFileKinds;
+    using X = ArchiveFileExt;
     using PN = DbNames;
 
     public interface IFileDbPaths : IDbPaths
@@ -205,7 +205,7 @@ namespace Z0
             => CapturedAsmDir() + name;
 
         FS.FilePath CapturedAsmFile(ApiHostUri host)
-            => CapturedAsmFile(host.FileName(ArchiveFileKinds.Asm));
+            => CapturedAsmFile(host.FileName(ArchiveFileExt.Asm));
 
         FS.FilePath CapturedAsmFile(PartId part, string api)
             => CapturedAsmDir() + ApiFileName(part, api, Asm);
@@ -223,7 +223,7 @@ namespace Z0
             => CapturedHexDir() + ApiFileName(part, api, Hex);
 
         FS.FilePath CapturedHexFile(ApiHostUri host)
-            => CapturedHexFile(host.FileName(ArchiveFileKinds.Hex));
+            => CapturedHexFile(host.FileName(ArchiveFileExt.Hex));
 
         FS.FolderPath CapturedCilDir()
             => CaptureRoot() + FS.folder(PN.Cil);
@@ -232,7 +232,7 @@ namespace Z0
             => CapturedCilDir() + name;
 
         FS.FilePath CapturedCilDataFile(ApiHostUri host)
-            => CapturedCilDataFile(host.FileName(ArchiveFileKinds.IlData));
+            => CapturedCilDataFile(host.FileName(ArchiveFileExt.IlData));
 
         FS.FilePath[] CapturedCilDataFiles()
             => CapturedCilDir().Files(Csv);
@@ -241,7 +241,7 @@ namespace Z0
             => CapturedCilDataFiles().Where(f => f.IsOwner(part));
 
         FS.FilePath CapturedExtractFile(ApiHostUri host)
-            => CapturedExtractFile(host.FileName(ArchiveFileKinds.XCsv));
+            => CapturedExtractFile(host.FileName(ArchiveFileExt.XCsv));
 
         FS.FilePath CapturedExtractFile(FS.FileName name)
             => CapturedExtractDir() + name;
@@ -253,7 +253,7 @@ namespace Z0
             => ParsedExtractDir() + name;
 
         FS.FilePath ParsedExtractFile(ApiHostUri host)
-            => ParsedExtractFile(host.FileName(ArchiveFileKinds.PCsv));
+            => ParsedExtractFile(host.FileName(ArchiveFileExt.PCsv));
 
         FS.FilePath[] ParsedExtractFiles()
             => ParsedExtractDir().AllFiles;

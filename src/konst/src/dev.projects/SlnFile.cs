@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static z;
+    using static ArchiveFileKinds;
 
     /// <summary>
     /// Represents a path to a file that defines a solution
@@ -43,7 +43,7 @@ namespace Z0
             => src.Path;
 
         [MethodImpl(Inline)]
-        public static implicit operator FS.FilePath<SlnFile>(SlnFile src)
-            => FS.kind(src.Path,src);
+        public static implicit operator FS.FilePath<Sln>(SlnFile src)
+            => FS.kind<Sln>(src.Path);
     }
 }

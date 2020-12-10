@@ -11,7 +11,7 @@ namespace Z0
 
     using static z;
     using static Konst;
-    using static ArchiveFileKinds;
+    using static ArchiveFileExt;
 
     [ApiHost]
     public readonly struct RuntimeArchive : IFileArchive
@@ -88,7 +88,7 @@ namespace Z0
             => Files.Where(x => FS.managed(x) && x.Is(Exe)).Array();
 
         public FS.Files NativeLibraries
-            => Files.Where(x => !FS.managed(x) && x.Is(ArchiveFileKinds.Dll)).Array();
+            => Files.Where(x => !FS.managed(x) && x.Is(ArchiveFileExt.Dll)).Array();
 
         public FS.Files NativeExecutables
             => Files.Where(x => !FS.managed(x) && x.Is(Exe)).Array();
