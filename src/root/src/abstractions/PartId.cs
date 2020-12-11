@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     public abstract class PartId<P> : IPartId<P>
         where P : PartId<P>, IPartId<P>,  new()
@@ -16,7 +16,7 @@ namespace Z0
 
         protected PartId(PartId id)
             => Id = id;
-        
+
         [MethodImpl(Inline)]
         public static implicit operator PartId(PartId<P> src)
             => src.Id;
@@ -37,17 +37,17 @@ namespace Z0
             => src is P x && Equals(x);
 
         public uint Hash
-        { 
+        {
             [MethodImpl(Inline)]
             get => hash(Id);
         }
 
-        public override int GetHashCode() 
+        public override int GetHashCode()
             => (int)Hash;
 
         [MethodImpl(Inline)]
-        public string Format() 
-            => format(Id);
+        public string Format()
+            => Root.format(Id);
 
         public override string ToString()
             => Format();

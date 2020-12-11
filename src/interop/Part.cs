@@ -6,8 +6,8 @@
 
 namespace Z0.Parts
 {
-    public sealed class Interop : Part<Interop>
-    {
+    // public sealed class Interop : Part<Interop>
+    // {
 
-    }
+    // }
 }

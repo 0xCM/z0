@@ -2,16 +2,12 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Refs
+[assembly: PartId(PartId.Res)]
+
+namespace Z0.Parts
 {
-
-    using static ApiNameParts;
-
-    [LiteralProvider]
-    public readonly struct Intel
+    public sealed class Res : Part<Res>
     {
-        const string intel = nameof(intel);
 
-        public const string intrinsics = intel + dot + nameof(intrinsics);
     }
 }

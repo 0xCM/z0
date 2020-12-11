@@ -14,6 +14,38 @@ namespace Z0
     [ApiHost]
     public readonly partial struct Part
     {
+        [MethodImpl(Inline), Op]
+        public static PartId @base(PartId src)
+            => Root.@base(src);
+
+        [Op]
+        public static string name(Assembly src)
+            => Root.name(src);
+
+        [Op]
+        public static string format(PartId src)
+            => Root.format(src);
+
+        [MethodImpl(Inline), Op]
+        public static string format(ExternId src)
+            => Root.format(src);
+
+        [MethodImpl(Inline), Op]
+        public static uint hash(PartId src)
+            => Root.hash(src);
+
+        /// <summary>
+        /// Retrieves the part identifier, if any, of a specified assembly
+        /// </summary>
+        /// <param name="src">The source assembly</param>
+        [Op]
+        public static PartId id(Assembly src)
+            => Root.id(src);
+
+        [Op]
+        public static bool test(Assembly src)
+            => Root.test(src);
+
         /// <summary>
         /// Retrieves the part identifier, if any, of the entry assembly
         /// </summary>

@@ -21,4 +21,4 @@ echo BuildCmdExec:%BuildCmdExec% >> %CmdLog%
 call %BuildCmdExec%
 
 
-call .cmd\deploy.cmd
+::call .cmd\deploy.cmd

@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-using K = Z0.Pow2x16;
+using K = Pow2Literals;
 
 /// <summary>
 /// Defines operand kind identity classifiers
@@ -393,7 +393,7 @@ public enum ApiClass : ushort
     // ~~ Hardware intrinsics
     // ~~ -------------------------------------------------------------------------------------------------------------
 
-    Intrinsic = K.P2ᐞ11,
+    Intrinsic = K.T11,
 
     // ~~ System-level operations
     // ~~ -------------------------------------------------------------------------------------------------------------
@@ -401,7 +401,7 @@ public enum ApiClass : ushort
     /// <summary>
     /// Identifies a function that invokes framework/system operations which are located in an external scope that does not dissolve
     /// </summary>
-    Opaque = K.P2ᐞ12,
+    Opaque = K.T12,
 
-    KindFactory = K.P2ᐞ13,
+    KindFactory = K.T13,
 }

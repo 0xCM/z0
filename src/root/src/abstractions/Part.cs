@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Part;
+    using static Root;
 
     public abstract class Part<P> : IPart<P>
         where P : Part<P>, IPart<P>, new()
@@ -19,24 +19,6 @@ namespace Z0
             => typeof(P).Assembly;
 
         public Assembly Owner {get;}
-
-        RuntimePart<P> _Runtime {get;}
-
-        public RuntimePart<P> Runtime
-        {
-            [MethodImpl(Inline)]
-            get => _Runtime;
-        }
-
-        protected PartBox Box;
-
-        public ref readonly PartBox Slots
-        {
-            [MethodImpl(Inline)]
-            get => ref Box;
-        }
-
-        public virtual PartId[] Needs {get;}
 
         protected static PartId[] parts(params PartId[] src)
             => src;
@@ -49,17 +31,8 @@ namespace Z0
 
         protected Part()
         {
-            Box = new PartBox();
             Owner = typeof(P).Assembly;
             Id =  id(Owner);
-            _Runtime = new RuntimePart<P>(Box);
-        }
-
-        protected Part(PartBox box)
-            : this()
-        {
-            Box = box;
-            _Runtime = new RuntimePart<P>(Box);
         }
 
         [MethodImpl(Inline)]

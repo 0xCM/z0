@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    using K = Pow2;
+    using K = Pow2Literals;
 
     /// <summary>
     /// Defines primal-representable powers of 2 and integers of the form 2^n - 1 where n = 0,..,64
@@ -68,12 +68,12 @@ namespace Z0
         /// 2^10 = 1024
         /// </summary>
         P2ᐞ10 = K.T10,
-        
+
         /// <summary>
         /// 2^11 = 2048
         /// </summary>
         P2ᐞ11 = K.T11,
-        
+
         /// <summary>
         /// 2^12 = 4096
         /// </summary>
@@ -88,7 +88,7 @@ namespace Z0
         /// 2^14 = 16,384
         /// </summary>
         P2ᐞ14 = K.T14,
-        
+
         /// <summary>
         /// 2^15 = 32,768
         /// </summary>
@@ -98,7 +98,7 @@ namespace Z0
         /// 2^16 = 65,536
         /// </summary>
         P2ᐞ16 = K.T16,
-        
+
         /// <summary>
         /// 2^17 = 131,072
         /// </summary>
@@ -118,7 +118,7 @@ namespace Z0
         /// 2^20 = 1,048,576
         /// </summary>
         P2ᐞ20 = K.T20,
-        
+
         /// <summary>
         /// 2^21 = 2,097,152
         /// </summary>
@@ -133,7 +133,7 @@ namespace Z0
         /// 2^23 = 8,388,608
         /// </summary>
         P2ᐞ23 = K.T23,
-        
+
         /// <summary>
         /// 2^24 = 16,777,216
         /// </summary>
@@ -143,27 +143,27 @@ namespace Z0
         /// 2^25 = 33,554,432
         /// </summary>
         P2ᐞ25 = K.T25,
-        
+
         /// <summary>
         /// 2^26 = 67,108,864 = 0x4000000
         /// </summary>
         P2ᐞ26 = K.T26,
-        
+
         /// <summary>
         /// 2^27 = 134,217,728 = 0x8000000
         /// </summary>
         P2ᐞ27 = K.T27,
-        
+
         /// <summary>
         /// 2^28 = 268,435,456 = 0x10000000
         /// </summary>
         P2ᐞ28 = K.T28,
-        
+
         /// <summary>
         /// 2^29 = 536,870,912 = 0x20000000,
         /// </summary>
         P2ᐞ29 = K.T29,
-        
+
         /// <summary>
         /// 2^30 = 1,073,741,824 = 0x40000000
         /// </summary>
@@ -178,84 +178,84 @@ namespace Z0
         /// 2^32 = 4,294,967,296 = 0x100000000
         /// </summary>
         P2ᐞ32 = 2*(long)P2ᐞ31,
-                                                         
+
         /// <summary>
         /// 2^33
         /// </summary>
         P2ᐞ33 = 2*P2ᐞ32,
-        
+
         /// <summary>
         /// 2^34
         /// </summary>
         P2ᐞ34 = 2*P2ᐞ33,
-        
+
         /// <summary>
         /// 2^35
         /// </summary>
         P2ᐞ35 = 2*P2ᐞ34,
-        
+
         /// <summary>
         /// 2^36
         /// </summary>
         P2ᐞ36 = 2*P2ᐞ35,
-        
+
         /// <summary>
         /// 2^37
         /// </summary>
         P2ᐞ37 = 2*P2ᐞ36,
-        
+
         /// <summary>
         /// 2^38
         /// </summary>
         P2ᐞ38 = 2*P2ᐞ37,
-        
+
         /// <summary>
         /// 2^39
         /// </summary>
         P2ᐞ39 = 2*P2ᐞ38,
-        
+
         /// <summary>
         /// 2^40
         /// </summary>
         P2ᐞ40 = 2*P2ᐞ39,
-        
+
         /// <summary>
         /// 2^41
         /// </summary>
         P2ᐞ41 = 2*P2ᐞ40,
-        
+
         /// <summary>
         /// 2^42
         /// </summary>
         P2ᐞ42 = 2*P2ᐞ41,
-        
+
         /// <summary>
         /// 2^43
         /// </summary>
         P2ᐞ43 = 2*P2ᐞ42,
-        
+
         /// <summary>
         /// 2^44
         /// </summary>
         P2ᐞ44 = 2*P2ᐞ43,
-        
+
         /// <summary>
         /// 2^45
         /// </summary>
         P2ᐞ45 = 2*P2ᐞ44,
-        
+
         P2ᐞ46 = 2*P2ᐞ45,
 
         P2ᐞ47 = 2*P2ᐞ46,
-        
+
         P2ᐞ48 = 2*P2ᐞ47,
-        
+
         P2ᐞ49 = 2*P2ᐞ48,
 
         P2ᐞ50 = 2*P2ᐞ49,
 
         P2ᐞ51 = 2*P2ᐞ50,
-                
+
         P2ᐞ52 = 2*P2ᐞ51,
 
         P2ᐞ53 = 2*P2ᐞ52,
@@ -271,15 +271,15 @@ namespace Z0
         P2ᐞ58 = 2*P2ᐞ57,
 
         P2ᐞ59 = 2*P2ᐞ58,
-        
+
         P2ᐞ60 = 2*P2ᐞ59,
 
         P2ᐞ61 = 2*P2ᐞ60,
 
-        P2ᐞ62 = 2*P2ᐞ61,        
+        P2ᐞ62 = 2*P2ᐞ61,
 
         /// <summary>
-        /// T63 = 9223372036854775808 
+        /// T63 = 9223372036854775808
         /// </summary>
         P2ᐞ63 = 2*(ulong)P2ᐞ62,
     }

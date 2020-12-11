@@ -10,6 +10,7 @@ namespace Z0
     using static Part;
     using static System.Runtime.CompilerServices.Unsafe;
 
+
     partial struct memory
     {
         [MethodImpl(Inline), Op, Closures(Closure)]

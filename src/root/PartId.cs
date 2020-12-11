@@ -10,9 +10,9 @@ public enum PartId : ulong
 {
     None = 0,
 
-    Part = 1,
+    Root = 1,
 
-    Sys = 2,
+    Part = 2,
 
     Konst = 3,
 
@@ -28,7 +28,7 @@ public enum PartId : ulong
 
     Check = 19,
 
-    Imagine = 20,
+    Res = 20,
 
     Lang = 22,
 
@@ -49,6 +49,7 @@ public enum PartId : ulong
     Driver = 44,
 
     Interop = 45,
+
 
     // ~ 50
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

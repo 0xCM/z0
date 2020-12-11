@@ -2,14 +2,9 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Refs
+[assembly: PartId(PartId.Root)]
+
+namespace Z0.Parts
 {
-
-    using static ApiNameParts;
-
-    [LiteralProvider]
-    public readonly struct Tools
-    {
-        const string tools = nameof(tools);
-    }
+    public sealed class Root : Part<Root> { }
 }

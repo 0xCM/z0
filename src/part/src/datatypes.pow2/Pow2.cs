@@ -77,7 +77,6 @@ namespace Z0
         public static ulong log2(ulong src)
             => (ulong)BitOperations.Log2(src);
 
-
         [MethodImpl(Inline), Op]
         public static ulong lookup(byte i)
         {

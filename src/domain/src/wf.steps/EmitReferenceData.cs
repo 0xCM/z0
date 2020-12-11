@@ -50,7 +50,7 @@ namespace Z0
 
             XedEtlWfHost.create().Run(Wf);
 
-            var provider = TableContentProvider.create(Parts.Refs.Assembly);
+            var provider = TableContentProvider.create(Parts.Res.Assembly);
             var entries = provider.Entries;
             EmissionCount = (uint)entries.Length;
 

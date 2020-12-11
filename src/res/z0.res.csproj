@@ -4,4 +4,18 @@
     <OutputType>Library</OutputType>
   </PropertyGroup>
 
+   <ItemGroup>
+    <EmbeddedResource Include="content/**/*.*" />
+   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="$(Root)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="winres/TableIndex.resources">
+      <LogicalName>TableIndex.resources</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+
 </Project>

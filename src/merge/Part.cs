@@ -9,8 +9,7 @@ namespace Z0.Parts
 {
     public sealed class Merge : Part<Merge>
     {
-        public override PartId[] Needs
-            => parts(PartId.Konst);
+
     }
 }
 
