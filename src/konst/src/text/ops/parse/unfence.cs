@@ -25,7 +25,7 @@ namespace Z0
                 if(text.blank(src))
                     return EmptyString;
 
-                if(!TextTest.fenced(src,left,right))
+                if(!Test.fenced(src,left,right))
                     return src;
 
                 var data = src.Trim();

@@ -157,6 +157,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.dynamic.lib", "src\dynam
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.dynamic.shell", "src\dynamic\shell\z0.dynamic.shell.csproj", "{900973D6-50EA-4184-9DE4-1A014A6C9E70}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.interop", "src\interop\z0.interop.csproj", "{8D9C1E2F-A90A-48BB-B4B7-70784F417645}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		src\share\z0.share.projitems*{666886d1-8cc4-481c-a270-9166da0bc711}*SharedItemsImports = 13
@@ -422,6 +424,10 @@ Global
 		{900973D6-50EA-4184-9DE4-1A014A6C9E70}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{900973D6-50EA-4184-9DE4-1A014A6C9E70}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{900973D6-50EA-4184-9DE4-1A014A6C9E70}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D9C1E2F-A90A-48BB-B4B7-70784F417645}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D9C1E2F-A90A-48BB-B4B7-70784F417645}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D9C1E2F-A90A-48BB-B4B7-70784F417645}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D9C1E2F-A90A-48BB-B4B7-70784F417645}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -488,6 +494,7 @@ Global
 		{C095E9B2-CDB0-483B-9E9C-644D30D41F30} = {A5FA280E-F0F4-49EA-806D-D814BD4014E4}
 		{45DE4B9A-E59F-49C6-B236-6190EFA1DAC7} = {C095E9B2-CDB0-483B-9E9C-644D30D41F30}
 		{900973D6-50EA-4184-9DE4-1A014A6C9E70} = {C095E9B2-CDB0-483B-9E9C-644D30D41F30}
+		{8D9C1E2F-A90A-48BB-B4B7-70784F417645} = {A5FA280E-F0F4-49EA-806D-D814BD4014E4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {75DBF59A-77AC-430F-B85D-CC30D6061CCB}

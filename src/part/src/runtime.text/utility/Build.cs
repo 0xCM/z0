@@ -5,15 +5,12 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
+    using System.Text;
 
-    using static Konst;
-    using static TextRules;
-
-    partial class text
+    partial class XText
     {
-        [MethodImpl(Inline)]
-        public static bool empty(string src)
-            => Test.empty(src);
+        [TextUtility]
+        public static StringBuilder Build(this string src)
+            => new StringBuilder(src);
     }
 }

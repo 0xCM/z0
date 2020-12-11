@@ -5,15 +5,12 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static TextRules;
+    using static Part;
 
-    partial class text
+    public class TextParserAttribute : Attribute
     {
-        [MethodImpl(Inline)]
-        public static bool empty(string src)
-            => Test.empty(src);
+
     }
+
 }

@@ -20,7 +20,7 @@ echo off
 set DataSrc=%ZDb%\etl
 echo DataSrc:%DataSrc%
 
-set DataDst=k:\z0.archives\logs.etl
+set DataDst=k:\z0.archives\logs\etl
 echo DataDst:%DataDst%
 
 set CopyLog=%ZDb%\etl\etl-log-archive.log

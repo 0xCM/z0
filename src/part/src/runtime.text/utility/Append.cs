@@ -5,15 +5,15 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
+    using System.Text;
 
-    using static Konst;
-    using static TextRules;
-
-    partial class text
+    partial class XText
     {
-        [MethodImpl(Inline)]
-        public static bool empty(string src)
-            => Test.empty(src);
+        [TextUtility]
+        public static void Append<T>(this StringBuilder sb, T content, Padding pad)
+            where T : ITextual
+        {
+            sb.Append($"{content.Format()}".PadRight((int)pad));
+        }
     }
 }

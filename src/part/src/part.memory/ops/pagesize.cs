@@ -7,13 +7,5 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static TextRules;
 
-    partial class text
-    {
-        [MethodImpl(Inline)]
-        public static bool empty(string src)
-            => Test.empty(src);
-    }
 }

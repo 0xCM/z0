@@ -7,17 +7,14 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static TextRules;
-
-    partial class text
+    partial class XText
     {
         /// <summary>
-        /// Tests whether the source string is nonempty
+        /// Encloses text between less than and greater than characters
         /// </summary>
-        /// <param name="src">The string to evaluate</param>
-        [MethodImpl(Inline), Op]
-        public static bool nonempty(string src)
-            => Test.nonempty(src);
+        /// <param name="content">The content to enclose</param>
+        [TextUtility]
+        public static string Angled(this string content)
+            => String.IsNullOrWhiteSpace(content) ? "" : $"<{content}>";
     }
 }

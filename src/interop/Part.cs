@@ -2,15 +2,12 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
-{
-    using System;
-    using System.Runtime.CompilerServices;
+[assembly: PartId(PartId.Interop)]
 
-    partial struct Part
+namespace Z0.Parts
+{
+    public sealed class Interop : Part<Interop>
     {
-        [MethodImpl(Inline), Op]
-        public static PartId @base(PartId a)
-            => withoutTest(withoutSvc(a));
+
     }
 }

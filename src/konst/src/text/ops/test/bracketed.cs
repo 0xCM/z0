@@ -13,12 +13,15 @@ namespace Z0
 
     partial struct TextRules
     {
-
-
-
-        [ApiHost]
-        public readonly partial struct TextTest
+        partial struct Test
         {
-       }
+            /// <summary>
+            /// Determines whether the source text is of the form "[{content}]"
+            /// </summary>
+            /// <param name="src">The source text</param>
+            [Op]
+            public static bool bracketed(string src)
+                => fenced(src, Chars.LBracket, Chars.RBracket);
+        }
     }
 }

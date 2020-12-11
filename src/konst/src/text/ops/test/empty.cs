@@ -6,14 +6,15 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Text;
 
-    using static Konst;
-    using static TextRules;
+    using static Part;
 
-    partial class text
+    partial struct TextRules
     {
-        [MethodImpl(Inline)]
-        public static bool empty(string src)
-            => Test.empty(src);
+        partial struct Test
+        {
+
+        }
     }
 }

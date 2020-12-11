@@ -4,10 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Reflection;
     using System.Runtime.CompilerServices;
-    
+
     partial struct Part
     {
         [Op]
@@ -15,7 +13,7 @@ namespace Z0
         {
             var baseId = @base(src);
             var dst = baseId.ToString().ToLower();
-                        
+
             if(isTest(src))
                 return dst + TestSuffix;
             else if(isSvc(src))
@@ -26,12 +24,12 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static string format(ExternId id)
-            => id.ToString().ToLower();        
+            => id.ToString().ToLower();
 
         const string TestSuffix = ".test";
-        
+
         const string SvcSuffix = ".svc";
-        
+
         const string BaseSuffix = "";
     }
 }

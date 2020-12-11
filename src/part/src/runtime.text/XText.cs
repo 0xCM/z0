@@ -4,16 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Konst;
-    using static TextRules;
-
-    partial class text
+    [ApiHost]
+    public static partial class XText
     {
-        [MethodImpl(Inline)]
-        public static bool empty(string src)
-            => Test.empty(src);
+
     }
 }

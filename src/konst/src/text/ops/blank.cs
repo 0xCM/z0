@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static TextRules;
 
     partial class text
     {
@@ -17,6 +18,6 @@ namespace Z0
         /// <param name="src">The string to evaluate</param>
         [MethodImpl(Inline), Op]
         public static bool blank(string src)
-            => TextTest.blank(src);
+            => Test.blank(src);
     }
 }
