@@ -12,7 +12,7 @@ namespace Z0
     using static Konst;
 
     [ApiHost(ApiNames.FilePathParser, true), ParserHost]
-    public readonly struct FilePathParser : ITextParser2<FS.FilePath>
+    public readonly struct FilePathParser : ITextParser<FS.FilePath>
     {
         public static IParser service()
             => default(FilePathParser);
@@ -26,19 +26,27 @@ namespace Z0
             => IO.Path.IsPathFullyQualified(src);
 
         [Op]
-        public ParseResult2<string> Parse(string src, out FS.FilePath dst)
+        public bool Parse(string src, out FS.FilePath dst)
         {
             var success = false;
             if(test(src))
             {
                 dst = FS.path(src);
-                return src;
+                return true;
             }
             else
             {
                 dst = FS.FilePath.Empty;
-                return (src,false);
+                return false;
             }
+        }
+
+        public ParseResult<FS.FilePath> Parse(string src)
+        {
+            if(Parse(src, out var dst))
+                return z.parsed(src, dst);
+            else
+                return z.unparsed<FS.FilePath>(src);
         }
     }
 }

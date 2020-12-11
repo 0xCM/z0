@@ -14,11 +14,4 @@ namespace Z0
         IEnumerable<ParseResult<T>> Parse(IEnumerable<string> src)
             => src.Select(Parse);
     }
-
-   public interface IStreamParser<P,S,T> : IParser<S,T>
-        where P : IParser<S,T>
-    {
-        IEnumerable<ParseResult<S,T>> Parse(IEnumerable<S> src)
-            => src.Select(Parse);
-    }
 }

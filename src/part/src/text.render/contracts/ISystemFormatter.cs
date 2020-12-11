@@ -7,21 +7,21 @@ namespace Z0
     public interface ISystemFormatter
     {
         string Format(object src, string spec = null);
-    }    
-    
+    }
+
     public interface ISystemFormatter<T> : ISystemFormatter
         where T : struct
     {
         string Format(T src, string spec = null);
 
         string ISystemFormatter.Format(object src, string spec)
-            => Format((T)src, spec);        
+            => Format((T)src, spec);
     }
 
-    interface ISystemFormatter<F,T> : ISystemFormatter<T>
+    public interface ISystemFormatter<F,T> : ISystemFormatter<T>
         where F : struct, ISystemFormatter<F,T>
         where T : struct
     {
-        
-    }    
+
+    }
 }

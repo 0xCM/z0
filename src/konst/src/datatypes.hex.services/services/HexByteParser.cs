@@ -71,6 +71,12 @@ namespace Z0
             }
         }
 
+        public byte Succeed(char c)
+            => Parse(c).ValueOrDefault();
+
+        public byte[] Succeed(string text)
+            => ParseData(text).ValueOrDefault(Array.Empty<byte>());
+
         public byte[] ParseData(string text, byte[] @default)
             => ParseData(text).ValueOrDefault(@default);
 
@@ -80,5 +86,21 @@ namespace Z0
         /// <param name="src">hex text</param>
         public byte ParseByte(string src)
             => byte.Parse(ClearSpecs(src), NumberStyles.HexNumber);
+
+        ParseResult<char,byte> IParser<char,byte>.Parse(char src)
+        {
+            var result = Parse(src);
+            return Parser.lift<char,byte>(result);
+        }
+
+        public ParseResult Parse(object src)
+        {
+            if(src is string s)
+                return ParseData(s);
+            else if(src is char c)
+                return Parse(c);
+            else
+                throw Unsupported.define(src?.GetType() ?? typeof(void));
+        }
     }
 }

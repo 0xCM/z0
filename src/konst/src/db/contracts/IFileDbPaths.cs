@@ -28,7 +28,7 @@ namespace Z0
              => X.Csv;
 
         FS.FolderPath EventRoot()
-            => Root + FS.folder(PN.Events);
+            => Root + FS.folder(PN.events);
 
         FS.FolderPath RefDataRoot()
             => Root + FS.folder(PN.Refs);
@@ -41,6 +41,12 @@ namespace Z0
 
         FS.FolderPath EtlRoot()
             => Root + FS.folder(PN.etl);
+
+        FS.FolderPath TmpDir()
+            => Root + FS.folder(PN.tmp);
+
+        FS.FilePath TmpFile(FS.FileName file)
+            => TmpDir() + file;
 
         FS.FolderPath LogRoot()
             => Root + FS.folder(PN.logs);
@@ -196,7 +202,7 @@ namespace Z0
             => CaptureRoot() + FS.folder(PN.hex);
 
         FS.FolderPath CapturedAsmDir()
-            => CaptureRoot() + FS.folder(PN.Asm);
+            => CaptureRoot() + FS.folder(PN.asm);
 
         FS.FilePath[] CapturedAsmFiles()
             => CapturedAsmDir().Files(Asm,true);

@@ -18,15 +18,6 @@ namespace Z0
         object Value {get;}
     }
 
-    public interface IParseResult2<S>
-    {
-        S Source {get;}
-
-        bool Succeeded {get;}
-
-        string Message {get;}
-    }
-
     public interface IParseResult<S,T> : IParseResult
     {
         Type IParseResult.SourceType
@@ -39,10 +30,5 @@ namespace Z0
 
         object IParseResult.Value
             => Value;
-    }
-
-    public interface IParseResult<T> : IParseResult<string,T>
-    {
-
     }
 }

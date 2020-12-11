@@ -14,6 +14,8 @@ namespace Z0
         Type SourceType {get;}
 
         Type TargetType {get;}
+
+        ParseResult Parse(object src);
     }
 
     public interface IParser<S,T> : IParser
@@ -25,28 +27,23 @@ namespace Z0
             => typeof(T);
 
         ParseResult<S,T> Parse(S src);
-    }
 
-    public interface IParser2<S,T> : IParser<S,T>
-    {
-        ParseResult2<S> Parse(in S src, out T dst);
+        ParseResult IParser.Parse(object src)
+            => Parse((S)src);
 
-        ParseResult<S,T> IParser<S,T>.Parse(S src)
+        bool Parse(in S src, out T dst)
         {
-            var x = Parse(src, out var dst);
-            if(x)
-                return ParseResult<S,T>.Success(src, dst);
-            else
-                return ParseResult<S,T>.Fail(src, x.Message);
+            var adapter = new ParseAdapter<S,T>(this);
+            return adapter.Parse(src, out dst);
         }
-    }
 
-    [Free]
-    public interface ITextParser2<T> : IParser2<string,T>
-    {
-        ParseResult2<string> Parse(string src, out T dst);
+        bool Parse(in S src, out T dst, out string message)
+        {
+            var adapter = new ParseAdapter<S,T>(this);
+            return adapter.Parse(src, out dst, out message);
+        }
 
-        ParseResult2<string> IParser2<string,T>.Parse(in string src, out T dst)
-            => Parse(src, out dst);
+        T Succeed(in S src, T @default)
+            => new ParseAdapter<S,T>(this).Succeed(src, @default);
     }
 }

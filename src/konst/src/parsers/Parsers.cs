@@ -13,7 +13,7 @@ namespace Z0
     public readonly struct Parsers
     {
         [MethodImpl(Inline)]
-        public static KeyValueParser<K,V> kvp<K,V>(ITextParser2<K> kp, ITextParser2<V> vp, string delimiter = CharText.Eq)
+        public static KeyValueParser<K,V> kvp<K,V>(ITextParser<K> kp, ITextParser<V> vp, string delimiter = CharText.Eq)
             => new KeyValueParser<K,V>(kp, vp, delimiter);
 
         [Op]
@@ -35,7 +35,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static T apply<T>(IParser2<string,T> parser, string src)
+        public static T apply<T>(IParser<string,T> parser, string src)
             where T : struct
                 => parser.Parse(src).ValueOrDefault(default(T));
 

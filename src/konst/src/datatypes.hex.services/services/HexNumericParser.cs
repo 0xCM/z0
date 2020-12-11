@@ -13,7 +13,7 @@ namespace Z0
     using static HexFormatSpecs;
     using static z;
 
-    public readonly struct HexNumericParser : IParametricParser
+    public readonly struct HexNumericParser
     {
         /// <summary>
         /// Attempts to parse a hex string as an unsigned long

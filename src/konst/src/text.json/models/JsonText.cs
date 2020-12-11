@@ -27,17 +27,22 @@ namespace Z0
             get => (uint)Content.GetHashCode();
         }
 
-        [MethodImpl(Inline)]
-        public static implicit operator JsonText(string src)
-            => new JsonText(src);
-
-        public static JsonText Empty
-           => new JsonText(EmptyString);
-
         public int Length
         {
             [MethodImpl(Inline)]
             get => Content?.Length ?? 0;
         }
+
+        [MethodImpl(Inline)]
+        public static implicit operator JsonText(string src)
+            => new JsonText(src);
+
+
+        [MethodImpl(Inline)]
+        public static implicit operator string(JsonText src)
+            => src.Content;
+
+       public static JsonText Empty
+           => new JsonText(EmptyString);
     }
 }

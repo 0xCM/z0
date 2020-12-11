@@ -38,7 +38,7 @@ namespace Z0
             var failed = attempts.Where(r => !r.Succeeded);
             var success = attempts.Where(r => r.Succeeded).Select(r => r.Value);
             if(failed.Length != 0 && success.Length == 0)
-                return ParseResult.Fail<ApiParseBlock[]>(src.Name, failed[0].Reason);
+                return ParseResult.Fail<ApiParseBlock[]>(src.Name, failed[0].Message);
             else
                 return ParseResult.Success<ApiParseBlock[]>(src.Name, success);
         }

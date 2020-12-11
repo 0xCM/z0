@@ -29,7 +29,7 @@ namespace Z0
                 if(block)
                     seek(dst,i) = block.Value;
                  else
-                    term.error(block.Reason);
+                    term.error(block.Message);
             }
             return buffer;
         }

@@ -11,15 +11,9 @@ namespace Z0
 
     using api = ApiUri;
 
-    public readonly struct OpIdentityParser : IInfallibleParser<OpIdentity>
+    public readonly struct OpIdentityParser : IParser<string,OpIdentity>
     {
         public static OpIdentityParser Service => default(OpIdentityParser);
-
-        OpIdentity INullary<OpIdentity>.Zero
-            => OpIdentity.Empty;
-
-        OpIdentity IInfallibleParser<OpIdentity>.Parse(string text)
-            => api.operation(text);
 
         [MethodImpl(Inline)]
         public static OpIdentity parse(string src)
@@ -28,5 +22,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public OpIdentity Parse(string text)
             => api.operation(text);
+
+        ParseResult<string, OpIdentity> IParser<string, OpIdentity>.Parse(string src)
+            => z.parsed(src, Parse(src));
+
     }
 }

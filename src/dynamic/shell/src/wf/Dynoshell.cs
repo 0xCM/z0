@@ -133,6 +133,14 @@ namespace Z0
             }
         }
 
+        public static void PipeImageData(IWfShell wf)
+        {
+            var root = wf.Db().TableRoot<ImageContentRecord>();
+            var archive = ImageArchives.csv(wf);
+            var path = archive.Root + FS.file("image.content.advapi32", FileExtensions.Csv);
+            PipeImageData(wf, path);
+
+        }
         // CmdResult EmitOpCodes()
         // {
         //     var spec = EmitAsmOpCodes.Spec();
@@ -151,11 +159,13 @@ namespace Z0
             //EmitAsmOpCodes();
             //EmitBuildArchiveList(Wf.Db().BuildArchiveRoot(), "zbuild");
 
-            var root = Wf.Db().TableRoot<ImageContentRecord>();
-            var archive = ImageArchives.csv(Wf);
-            var path = archive.Root + FS.file("image.content.advapi32", FileExtensions.Csv);
-            PipeImageData(Wf, path);
-
+            var db = Wf.Db();
+            var commands = Commands();
+            foreach(var c in commands)
+            {
+                var dst = db.TmpFile(FS.file(c.CmdName, FileExtensions.Json));
+                var data = JsonData.serialize(c,dst);
+            }
 
             // var cmd = new LocateImagesCmd();
             // cmd.Target = Wf.Db().IndexFile(LocatedImageRow.TableId);

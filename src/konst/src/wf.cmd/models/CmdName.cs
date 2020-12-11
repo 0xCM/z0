@@ -64,6 +64,10 @@ namespace Z0
         public static implicit operator CmdName(Type spec)
             => new CmdName(spec.Name);
 
+        [MethodImpl(Inline)]
+        public static implicit operator string(CmdName src)
+            => src.Content;
+
         public static CmdName Empty => default;
     }
 }

@@ -229,7 +229,7 @@ namespace Z0
 
             }
             else
-                Wf.Error(result.Reason);
+                Wf.Error(result.Message);
         }
 
         void ShowCases()

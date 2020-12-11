@@ -15,10 +15,10 @@ namespace Z0
 
         readonly TextFormatFunction<K> Formatter;
 
-        readonly TextParseFunction<K> Parser;
+        readonly ITextParser<K> Parser;
 
         [MethodImpl(Inline)]
-        public SettingKey(K key, TextFormatFunction<K> render, TextParseFunction<K> parse)
+        public SettingKey(K key, TextFormatFunction<K> render, ITextParser<K> parse)
         {
             Key = key;
             Formatter = render;
@@ -35,7 +35,7 @@ namespace Z0
 
         public bool Parse(string src, out SettingKey<K> dst)
         {
-            if( Parser != null && Parser(src, out var key))
+            if( Parser != null && Parser.Parse(src, out var key))
             {
                 dst = new SettingKey<K>(key, Formatter,Parser);
                 return true;

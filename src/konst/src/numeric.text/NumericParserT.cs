@@ -17,12 +17,12 @@ namespace Z0
             => NumericParser.parse<T>(src);
     }
 
-    public readonly struct InfallibleNumericParser<T> : IInfallibleParser<T>
+    public readonly struct InfallibleNumericParser<T> : ITextParser<T>
         where T : unmanaged
     {
         [MethodImpl(Inline)]
-        public T Parse(string src)
-            => NumericParser.parse<T>(src).ValueOrDefault();
+        public ParseResult<T> Parse(string src)
+            => NumericParser.parse<T>(src);
 
         public T Zero => default;
     }

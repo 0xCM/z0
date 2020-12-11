@@ -30,7 +30,7 @@ namespace Z0
 
         public const string Refs = "refs";
 
-        public const string Events = "events";
+        public const string events = nameof(events);
 
         public const string etl = nameof(etl);
 
@@ -42,7 +42,7 @@ namespace Z0
 
         public const string Cil = "cil";
 
-        public const string Asm = "asm";
+        public const string asm = nameof(asm);
 
         public const string hex = nameof(hex);
 
@@ -61,5 +61,7 @@ namespace Z0
         public const string imm = "asm.imm";
 
         public const string builds = "builds";
+
+        public const string tmp = nameof(tmp);
     }
 }

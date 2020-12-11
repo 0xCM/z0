@@ -14,11 +14,39 @@ namespace Z0
     [ApiHost]
     public readonly struct JsonData
     {
-        const NumericKind Closure = AllNumeric;
+        const NumericKind Closure = UInt64k;
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static JsonText serialize<T>(T src)
-            => JsonSerializer.Serialize(src);
+        public static JsonDataPacket<T> packet<T>(T src)
+            => src;
+
+        [Op, Closures(Closure)]
+        public static JsonText serialize<T>(T src, bool indented = true)
+            => JsonSerializer.Serialize(src, new JsonSerializerOptions{WriteIndented = indented});
+
+        [Op, Closures(Closure)]
+        public static JsonText serialize<T>(T src, FS.FilePath dst, bool indented = true)
+        {
+            var data = serialize(src, indented);
+            using var writer = dst.Writer();
+            writer.Write(data);
+            return data;
+        }
+
+        [Op, Closures(Closure)]
+        public static T materialize<T>(JsonText src)
+        {
+            var packet = JsonSerializer.Deserialize<JsonDataPacket<T>>(src);
+            return packet.Content;
+        }
+
+        [Op, Closures(Closure)]
+        public static T materialize<T>(FS.FilePath src)
+        {
+            using var reader = src.Reader();
+            var data = reader.ReadToEnd();
+            return materialize<T>(data);
+        }
 
         [MethodImpl(Inline), Op]
         public static JsonText json(string src)

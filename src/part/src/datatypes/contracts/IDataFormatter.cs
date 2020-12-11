@@ -6,12 +6,15 @@ namespace Z0
 {
     using System;
 
-    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+    public interface DataFormatter<S> : IFormatter
+        where S : struct
+    {
+        Type IFormatter.SourceType
+            => typeof(S);
 
-    [Free]
-    public delegate ParseResult2<S> ParseFunction<S,T>(in S src, out T dst);
+        Type IFormatter.TargetType
+            => typeof(Span<byte>);
 
-
-    [Free]
-    public delegate ParseResult2<string> TextParseFunction<T>(string src, out T dst);
+        Span<byte> Format(in S src);
+    }
 }

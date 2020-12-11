@@ -12,8 +12,6 @@ namespace Z0
     {
         public const string TableId = "images.located";
 
-        public const byte FieldCount = 7;
-
         public enum Fields : ushort
         {
             ImageName = 60,

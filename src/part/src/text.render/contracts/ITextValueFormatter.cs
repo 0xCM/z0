@@ -6,14 +6,14 @@ namespace Z0
 {
     using System;
 
-    public interface ITextFormatter<S> : IFormatter<S,string>
+    public interface ITextValueFormatter<T> : ITextFormatter<T>
+        where T : struct
     {
+        string Format(in T src);
 
-    }
+        string IFormatter<T,string>.Format(T src)
+            => Format(src);
 
-    public interface ITextFormatter<H,S> : ITextFormatter<S>, IService<H,ITextFormatter<S>,S>
-        where H : ITextFormatter<H,S>
-    {
-
+        string HeaderText {get;}
     }
 }

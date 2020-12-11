@@ -56,7 +56,7 @@ namespace Z0
             var term = Enums.parse<ExtractTermCode>(fields[3]).ValueOrDefault();
             var uri = ApiUriParser.Service.Parse(fields[4]);
             if(uri.Failed)
-                sys.@throw($"{uri.Reason}");
+                sys.@throw($"{uri.Message}");
 
             var data = fields[5].SplitClean(HexFormatSpecs.DataDelimiter).Select(Parsers.hex(true).Succeed);
             var extract = new BasedCodeBlock(address, data);

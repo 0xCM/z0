@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct ParseResult<S,T> : IParseResult<T>
+    public readonly struct ParseResult<S,T> : IParseResult<S,T>
     {
         /// <summary>
         /// The content that was parsed...or not
@@ -35,20 +35,25 @@ namespace Z0
         public Option<object> Reason {get;}
 
         [MethodImpl(Inline)]
+        public T Require()
+        {
+            if(Succeeded)
+                return Value;
+            else
+                return Throw();
+        }
+
+        T Throw()
+            => throw new Exception(Reason.MapValueOrElse(r => r.ToString(), () => $"Unable to parse {typeof(T).Name}"));
+
+
+        [MethodImpl(Inline)]
         public static ParseResult<S,T> Success(S source, T value)
             => new ParseResult<S,T>(source, value);
 
         [MethodImpl(Inline)]
         public static ParseResult<S,T> Fail(S source, object reason = null)
             => new ParseResult<S,T>(source, default, reason);
-
-        [MethodImpl(Inline)]
-        public static implicit operator ParseResult<S,T>((S source, T value) src)
-            => Success(src.source, src.value);
-
-        [MethodImpl(Inline)]
-        public static implicit operator ParseResult(ParseResult<S,T> src)
-            => ParseResult.Define(src.Source.ToString(), typeof(T), src.Succeeded, src.Value);
 
         [MethodImpl(Inline)]
         public static bool operator true(ParseResult<S,T> src)
@@ -59,7 +64,7 @@ namespace Z0
             => src.Failed;
 
         [MethodImpl(Inline)]
-        ParseResult(S source, T value, object reason = null)
+        internal ParseResult(S source, T value, object reason = null)
         {
             Source = source;
             Succeeded = true;
@@ -125,14 +130,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public Y MapValueOrDefault<Y>(Func<T,Y> success, Y @default)
             => Succeeded ? success(Value) : @default;
-
-        public T Require()
-        {
-            if(Succeeded)
-                return Value;
-            else
-                throw new Exception($"{Source} unparsed:{Reason}");
-        }
 
         /// <summary>
         /// Extracts the encapsulated value if it exists; otherwise, returns the default value for
@@ -214,5 +211,15 @@ namespace Z0
 
         public override string ToString()
              => Format();
+
+        [MethodImpl(Inline)]
+        public static implicit operator ParseResult<S,T>((S source, T value) src)
+            => Success(src.source, src.value);
+
+        [MethodImpl(Inline)]
+        public static implicit operator ParseResult(ParseResult<S,T> src)
+            => ParseResult.Define(src.Source.ToString(), typeof(T), src.Succeeded, src.Value);
+
+
    }
 }

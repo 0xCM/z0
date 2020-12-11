@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct ParseResult<T> : IParseResult<T>
+    public readonly struct ParseResult<T> : IParseResult<string,T>
     {
         /// <summary>
         /// The text that was parsed...or not
@@ -26,7 +26,7 @@ namespace Z0
         /// </summary>
         public T Value {get;}
 
-        public object Reason {get;}
+        public object Message {get;}
 
         public bool Failed
         {
@@ -34,41 +34,6 @@ namespace Z0
             get => !Succeeded;
         }
 
-        [MethodImpl(Inline)]
-        public static implicit operator ParseResult<T>(ParseResult<string,T> src)
-            => new ParseResult<T>(src.Source, src.Value, src.Reason);
-
-        [MethodImpl(Inline)]
-        public static ParseResult<T> Success(string source, T value)
-            => new ParseResult<T>(source, value, null);
-
-        [MethodImpl(Inline)]
-        public static ParseResult<T> Fail(string source, object reason)
-            => new ParseResult<T>(source, default, reason);
-
-        [MethodImpl(Inline)]
-        public static ParseResult<T> Fail(string source)
-            => new ParseResult<T>(source, default, null);
-
-        [MethodImpl(Inline)]
-        public static implicit operator ParseResult<T>((string source, T value) src)
-            => Success(src.source, src.value);
-
-        [MethodImpl(Inline)]
-        public static implicit operator ParseResult(ParseResult<T> src)
-            => ParseResult.Define(src.Source, typeof(T), src.Succeeded, src.Value);
-
-        [MethodImpl(Inline)]
-        public static bool operator true(ParseResult<T> src)
-            => src.Succeeded;
-
-        [MethodImpl(Inline)]
-        public static bool operator false(ParseResult<T> src)
-            => src.Failed;
-
-        [MethodImpl(Inline)]
-        public static implicit operator bool(ParseResult<T> src)
-            => src.Succeeded;
 
         [MethodImpl(Inline)]
         ParseResult(string source, T value, object reason)
@@ -76,7 +41,7 @@ namespace Z0
             Source = source;
             Succeeded = true;
             Value = value;
-            Reason = reason ?? EmptyString;
+            Message = reason ?? EmptyString;
         }
 
         [MethodImpl(Inline)]
@@ -204,13 +169,17 @@ namespace Z0
         public Y MapValueOrDefault<Y>(Func<T,Y> success, Y @default)
             => Succeeded ? success(Value) : @default;
 
+        [MethodImpl(Inline)]
         public T Require()
         {
             if(Succeeded)
                 return Value;
             else
-                throw new Exception($"{Source} unparsed:{Reason}");
+                return Throw();
         }
+
+        T Throw()
+            => throw new Exception(Message?.ToString() ?? $"Unable to parse {typeof(T).Name}");
 
         [MethodImpl(Inline)]
         public Option<T> ToOption()
@@ -218,12 +187,52 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ParseResult<X> As<X>()
-            => new ParseResult<X>(Source, (X)(object)Value, Reason);
+            => new ParseResult<X>(Source, (X)(object)Value, Message);
 
         public string Format()
             => ParseResult.Format(this);
 
         public override string ToString()
              => Format();
+
+        [MethodImpl(Inline)]
+        public static implicit operator ParseResult<T>(ParseResult<string,T> src)
+            => new ParseResult<T>(src.Source, src.Value, src.Reason);
+
+        [MethodImpl(Inline)]
+        public static implicit operator ParseResult<string,T>(ParseResult<T> src)
+            => new ParseResult<string,T>(src.Source, src.Value, src.Message);
+
+        [MethodImpl(Inline)]
+        public static ParseResult<T> Success(string source, T value)
+            => new ParseResult<T>(source, value, null);
+
+        [MethodImpl(Inline)]
+        public static ParseResult<T> Fail(string source, object reason)
+            => new ParseResult<T>(source, default, reason);
+
+        [MethodImpl(Inline)]
+        public static ParseResult<T> Fail(string source)
+            => new ParseResult<T>(source, default, null);
+
+        [MethodImpl(Inline)]
+        public static implicit operator ParseResult<T>((string source, T value) src)
+            => Success(src.source, src.value);
+
+        [MethodImpl(Inline)]
+        public static implicit operator ParseResult(ParseResult<T> src)
+            => ParseResult.Define(src.Source, typeof(T), src.Succeeded, src.Value);
+
+        [MethodImpl(Inline)]
+        public static bool operator true(ParseResult<T> src)
+            => src.Succeeded;
+
+        [MethodImpl(Inline)]
+        public static bool operator false(ParseResult<T> src)
+            => src.Failed;
+
+        [MethodImpl(Inline)]
+        public static implicit operator bool(ParseResult<T> src)
+            => src.Succeeded;
    }
 }

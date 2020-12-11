@@ -47,6 +47,18 @@ namespace Z0
             get => !Succeeded;
         }
 
+        [MethodImpl(Inline)]
+        public object Require()
+        {
+            if(Succeeded)
+                return Value;
+            else
+                return Throw();
+        }
+
+        object Throw()
+            => throw new Exception(Reason.MapValueOrElse(r => r.ToString(), () => "Parser failed"));
+
         /// <summary>
         /// Defines a successful parse result
         /// </summary>

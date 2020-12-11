@@ -8,7 +8,7 @@ namespace Z0.Image
 
     partial struct Pe
     {
-        [Record, StructLayout(LayoutKind.Sequential)]
+        [StructLayout(LayoutKind.Sequential), Record]
         public struct DirectoryEntry : IRecord<DirectoryEntry>
         {
             public Address32 Rva;
