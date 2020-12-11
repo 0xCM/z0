@@ -17,7 +17,7 @@ namespace Z0
         where C : struct, IToolCmd<C>
     {
         ToolId ICmdSpec.ToolId
-            => Tooling.toolid<C>();
+            => CmdTools.toolid<C>();
     }
 
     [Free]

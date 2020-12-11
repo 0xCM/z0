@@ -6,17 +6,17 @@ namespace Z0
 {
     using System;
 
-    partial struct Tooling
+    partial struct CmdTools
     {
         [Formatter]
-        public static string format(ToolArg src)
-            => string.Format("{0}{2}", CmdFormat.format(src.Option), src.Value);
+        public static string format(CmdToolArg src)
+            => string.Format("{0}{2}", Cmd.format(src.Option), src.Value);
 
         [Formatter]
-        public static string format(ToolArg src, CmdArgPrefix delimiter, char specifier)
-            => string.Format("{0}{1}{2}{3}", CmdFormat.format(delimiter), CmdFormat.format(src.Option), specifier, src.Value);
+        public static string format(CmdToolArg src, CmdArgPrefix delimiter, char specifier)
+            => string.Format("{0}{1}{2}{3}", Cmd.format(delimiter), Cmd.format(src.Option), specifier, src.Value);
 
-        public static string format<K,V>(ToolArg<K,V> src, char specifier)
+        public static string format<K,V>(CmdToolArg<K,V> src, char specifier)
             where K : unmanaged
                 => string.Format("{0}{1}{2}", src.Option, specifier, src.Value);
     }

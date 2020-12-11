@@ -12,7 +12,6 @@ namespace Z0
 
     using static Konst;
     using static LinqXPress;
-    using static z;
     using static DynamicOps;
 
     [ApiHost]
@@ -37,7 +36,7 @@ namespace Z0
             if(typeof(T) == typeof(byte))
                 return new Xor<T>(Delegates.generic<T>(Ops8u.Xor));
             else if(typeof(T) == typeof(ushort))
-                return new Xor<T>(Delegates.generic<T>(Ops16u.Xor));
+                return new Xor<T>(Delegates.generic<T>(DLinq.xor16u().Compile()));
             else if(typeof(T) == typeof(uint))
                 return new Xor<T>(Delegates.generic<T>(Ops32u.Xor));
             else if(typeof(T) == typeof(ulong))

@@ -6,10 +6,8 @@
 namespace Z0.Dynamics.Operators
 {
     using System;
-    using System.Linq;
     using System.Linq.Expressions;
 
-    using static Konst;
     using static LinqXFunc;
 
     partial struct DynamicOps

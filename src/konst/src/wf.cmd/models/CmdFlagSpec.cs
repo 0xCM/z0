@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     /// <summary>
     /// Defines a tool flag argument
@@ -55,7 +54,7 @@ namespace Z0
             => new CmdFlagSpec(Index,name);
 
         public string Format()
-            => CmdFormat.format(this);
+            => Cmd.format(this);
 
         public override string ToString()
             => Format();

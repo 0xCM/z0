@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="src">The source stream</param>
         [Op]
         public static object[] LiteralValues(this FieldInfo[] src)
-            => src.Literals().Select(f => f.GetRawConstantValue()).ToArray();
+            => src.Literals().Select(f => f.GetRawConstantValue());
 
         /// <summary>
         /// Queries literal fields for values of parametric type

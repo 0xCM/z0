@@ -9,16 +9,16 @@ namespace Z0
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface IToolModel
+    public interface ICmdToolModel
     {
         Type ModelType {get;}
     }
 
     [Free]
-    public interface IToolModel<T> : IToolModel
-        where T : struct, IToolModel<T>
+    public interface ICmdToolModel<T> : ICmdToolModel
+        where T : struct, ICmdToolModel<T>
     {
-        Type IToolModel.ModelType
+        Type ICmdToolModel.ModelType
             => typeof(T);
     }
 }

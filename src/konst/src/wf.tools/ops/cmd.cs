@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    partial struct Tooling
+    partial struct CmdTools
     {
         public static ToolCmd<T> cmd<T>(T src)
             where T : struct, IToolCmd<T>

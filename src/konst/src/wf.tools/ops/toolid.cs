@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct Tooling
+    partial struct CmdTools
     {
         /// <summary>
         /// Creates a parametrically-predicated tool identifier

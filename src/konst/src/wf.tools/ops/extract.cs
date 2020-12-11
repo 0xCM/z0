@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct Tooling
+    partial struct CmdTools
     {
         [Projector]
         static ref CmdOptionSpec extract(MemberInfo src, out CmdOptionSpec dst)

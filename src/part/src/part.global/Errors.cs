@@ -12,6 +12,10 @@ namespace Z0
        public static NotSupportedException no<T>()
             => new NotSupportedException($"The type {typeof(T).Name} is not supported");
 
+        [Op, Closures(UnsignedInts)]
+        public static ArgumentException badarg<T>(T arg)
+            => new ArgumentException(arg?.ToString() ?? "<null>");
+
         [MethodImpl(Inline), Op]
         public static void ThrowEmptySpanError()
             => sys.@throw($"The span, it is empty");

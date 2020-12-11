@@ -23,10 +23,5 @@ namespace Z0
     [Free]
     public delegate Span<T> Imm8ShiftSpanOp<T>(ReadOnlySpan<T> src, byte imm8, Span<T> dst);
 
-    /// <summary>
-    /// Characterizes a function that produces spans values
-    /// </summary>
-    /// <typeparam name="T">The emission type</typeparam>
-    [Free]
-    public delegate Span<T> SpanEmitter<T>();
+
 }

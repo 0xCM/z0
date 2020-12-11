@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Dynamics
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Text;
 
     public sealed class ComparisonOperatorApplication<F,T> : OperatorApplication<F>
         where F : BinaryOperator<F>

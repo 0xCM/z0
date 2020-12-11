@@ -29,8 +29,4 @@ namespace Z0
     [Free]
     public delegate ref T RefMap<S,T>(in S src, ref T dst);
 
-    [Free]
-    public delegate void ValueReceiver<T>(in T src)
-        where T : struct;
-
 }

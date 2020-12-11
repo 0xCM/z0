@@ -11,7 +11,6 @@ namespace Z0
 
     partial class Delegates
     {
-
         /// <summary>
         /// Characterizes a receiver that accepts a stream
         /// </summary>
@@ -28,6 +27,60 @@ namespace Z0
 
         [Free]
         public delegate bool TernaryPredicate<W,T>(T a, T b, T c)
+            where W : unmanaged, ITypeWidth;
+
+        /// <summary>
+        /// Characterizes a unary operator with known operand width
+        /// </summary>
+        /// <param name="a">The operand</param>
+        /// <typeparam name="W">The width type</typeparam>
+        /// <typeparam name="T">The operand type</typeparam>
+        [Free]
+        public delegate T UnaryOp<W,T>(T a)
+            where W : unmanaged, ITypeWidth;
+
+        /// <summary>
+        /// Characterizes a function that produces a stream of values
+        /// </summary>
+        /// <param name="count">If specified, the number of elements to produce</param>
+        /// <typeparam name="T">The emission type</typeparam>
+        [Free]
+        public delegate IEnumerable<T> StreamEmitter<T>();
+
+        /// <summary>
+        /// Characterizes a function that produces a stream of values
+        /// </summary>
+        /// <param name="count">If specified, the number of elements to produce</param>
+        /// <typeparam name="T">The emission type</typeparam>
+        [Free]
+        public delegate IEnumerable<T> ValueStreamEmitter<T>()
+            where T : struct;
+
+        /// <summary>
+        /// Characterizes a binary operator with known operand width
+        /// </summary>
+        /// <param name="a">The left operand</param>
+        /// <param name="b">The right operand</param>
+        /// <typeparam name="W">The width type</typeparam>
+        /// <typeparam name="T">The operand type</typeparam>
+        [Free]
+        public delegate T BinaryOp<W,T>(T a, T b)
+            where W : unmanaged, ITypeWidth;
+
+        /// <summary>
+        /// Characterizes a ternary operator with known operand width
+        /// </summary>
+        /// <param name="a">The first operand</param>
+        /// <param name="b">The second operand</param>
+        /// <param name="c">The third operand</param>
+        /// <typeparam name="W">The width type</typeparam>
+        /// <typeparam name="T">The operand type</typeparam>
+        [Free]
+        public delegate T TernaryOp<W,T>(T a, T b, T c)
+            where W : unmanaged, ITypeWidth;
+
+        [Free]
+        public delegate bit UnaryPredicate<W,T>(T a)
             where W : unmanaged, ITypeWidth;
     }
 }

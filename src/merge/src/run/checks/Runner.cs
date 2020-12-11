@@ -193,32 +193,32 @@ namespace Z0
             }
         }
 
-        void Capture()
-        {
-            var component = Parts.Canonical.Assembly;
-            var part = Parts.Canonical.Resolved;
-            var id = component.Id();
+        // void Capture()
+        // {
+        //     var component = Parts.Canonical.Assembly;
+        //     var part = Parts.Canonical.Resolved;
+        //     var id = component.Id();
 
-            using var step = new CapturePartStep(Wf, State.Asm, new CapturePartHost());
-            var captured = step.Capture(part);
-            var dst = Wf.Paths.AppCaptureRoot + FS.file(id.Format(), FileExtensions.Asm);
-            using var writer = dst.Writer();
-            var count = captured.Length;
-            // if(count != 0)
-            // {
-            //     ref readonly var f0 = ref first(captured);
-            //     ref readonly var fn = ref skip(f0, count - 1);
+        //     using var step = new CapturePartStep(Wf, State.Asm, new CapturePartHost());
+        //     var captured = step.Capture(part);
+        //     var dst = Wf.Paths.AppCaptureRoot + FS.file(id.Format(), FileExtensions.Asm);
+        //     using var writer = dst.Writer();
+        //     var count = captured.Length;
+        //     if(count != 0)
+        //     {
+        //         ref readonly var f0 = ref first(captured);
+        //         ref readonly var fn = ref skip(f0, count - 1);
 
-            //     for(var i=0u; i<count; i++)
-            //     {
-            //         ref readonly var fx = ref skip(f0,i);
-            //         writer.Write(fx);
-            //     }
+        //         for(var i=0u; i<count; i++)
+        //         {
+        //             ref readonly var fx = ref skip(f0,i);
+        //             writer.Write(fx);
+        //         }
 
-            //     var seg = new MemoryRange(f0.Base, fn.Base + fn.Size);
-            //     Emit(seg, dst.ChangeExtension(FileExtensions.HexLine));
-            // }
-        }
+        //         var seg = new MemoryRange(f0.Base, fn.Base + fn.Size);
+        //         Emit(seg, dst.ChangeExtension(FileExtensions.HexLine));
+        //     }
+        // }
 
         void Run59()
         {

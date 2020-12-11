@@ -8,8 +8,4 @@ namespace Z0
 
     [Free]
     public delegate bit UnaryPredicate<T>(T a);
-
-    [Free]
-    public delegate bit UnaryPredicate<W,T>(T a)
-         where W : unmanaged, ITypeWidth;
 }

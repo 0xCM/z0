@@ -39,14 +39,14 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public S ReadSeg(I index)
-            => cast<T,S>(gbits.slice(Data, Pos8u(index), Width8u(index)));
+            => @as<T,S>(gbits.slice(Data, Pos8u(index), Width8u(index)));
 
         [MethodImpl(Inline)]
         public void WriteSeg(I index, S value)
         {
             var pos = Pos8u(index);
             var width = Width8u(index);
-            Data = gbits.copy(cast<S,T>(value), pos, width, Data);
+            Data = gbits.copy(@as<S,T>(value), pos, width, Data);
         }
 
         public S this[I index]

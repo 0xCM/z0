@@ -30,6 +30,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator ToolCmd<T>(T src)
-            => Tooling.cmd(src);
+            => CmdTools.cmd(src);
     }
 }

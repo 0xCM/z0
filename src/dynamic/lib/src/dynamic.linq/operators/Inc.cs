@@ -10,20 +10,18 @@ namespace Z0.Dynamics.Operators
 
     using static z;
     using static LinqXPress;
-    using static SFx;
 
     public readonly struct Inc<T>
     {
         static readonly Option<Func<T,T>> _OPSafe
             = TryConstruct();
 
-        static Func<T, T> _OP
+        static Func<T,T> _OP
             => _OPSafe.Require();
 
         static Option<Func<T,T>> TryConstruct()
             => Try(() =>
             {
-
                 switch (sys.typecode<T>())
                 {
                     case TypeCode.Byte:

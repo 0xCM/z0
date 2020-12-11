@@ -12,9 +12,9 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct Tooling
+    partial struct CmdTools
     {
-        public static async Task<int> start(ToolExecSpec spec, WfStatusRelay dst)
+        public static async Task<int> start(CmdExecSpec spec, WfStatusRelay dst)
         {
             var info = new ProcessStartInfo
             {

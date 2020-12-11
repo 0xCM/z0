@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct Tooling
+    partial struct CmdTools
     {
         /// <summary>
         /// Creates an option without purpose

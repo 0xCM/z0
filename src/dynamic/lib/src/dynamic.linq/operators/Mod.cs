@@ -8,7 +8,6 @@ namespace Z0.Dynamics.Operators
     using System.Linq.Expressions;
 
     using static LinqXPress;
-    using static SFx;
 
     public static class Mod<T>
     {

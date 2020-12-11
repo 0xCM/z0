@@ -12,18 +12,16 @@ namespace Z0.Dynamics.Operators
     using static z;
     using static LinqXPress;
     using static LinqXFunc;
-    using static SFx;
 
     public static class Mul<T>
     {
         static readonly Func<T,T,T> _OP
             = Construct();
 
-        static Func<T, T, T> Construct()
+        static Func<T,T,T> Construct()
         {
             switch (sys.typecode<T>())
             {
-
                 case TypeCode.String:
                     return fx(ClrQuery.method<T,T,T>(nameof(String.Concat)).Require().Func<T,T,T>()).Compile();
                 case TypeCode.Byte:
@@ -31,7 +29,7 @@ namespace Z0.Dynamics.Operators
                 case TypeCode.SByte:
                     return cast<Func<T,T,T>>(Ops8i.Mul.Compile());
                 case TypeCode.UInt16:
-                    return cast<Func<T,T,T>>(Ops16u.Mul.Compile());
+                    return cast<Func<T,T,T>>(DLinq.mul16u().Compile());
                 default:
                     return lambda<T,T,T>(Expression.Multiply).Compile();
             }

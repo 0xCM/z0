@@ -10,7 +10,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static ReflectionFlags;
 
     partial class XClrQuery
     {
@@ -22,8 +21,6 @@ namespace Z0
         /// <param name="paramTypes">The method parameter types in ordinal position</param>
         [MethodImpl(Inline), Op]
         public static Option<MethodInfo> MatchMethod(this Type declarer, string name, params Type[] paramTypes)
-            => paramTypes.Length != 0
-                ? declarer.GetMethod(name, bindingAttr: BF_All, binder: null, types: paramTypes, modifiers: null)
-                : declarer.GetMethod(name, BF_All);
+            => ClrQuery.method(declarer, name, paramTypes);
     }
 }

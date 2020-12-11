@@ -5,6 +5,7 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
 
     using Z0.Asm;
 
@@ -15,6 +16,29 @@ namespace Z0
 
     public readonly struct CaptureProcessors
     {
+        public static ApiRoutineObsolete project(MemoryAddress @base, ApiCodeBlock code, Instruction[] src)
+            => new ApiRoutineObsolete(@base, project(code, src));
+
+        public static ApiInstruction[] project(ApiCodeBlock code, Instruction[] src)
+        {
+            var @base = code.Base;
+            var offseq = OffsetSequence.Zero;
+            var count = src.Length;
+            var dst = new ApiInstruction[count];
+
+            for(ushort i=0; i<count; i++)
+            {
+                var fx = src[i];
+                var len = fx.ByteLength;
+                var data = span(code.Code.Data);
+                var slice = data.Slice((int)offseq.Offset, len).ToArray();
+                var recoded = new ApiCodeBlock(code.Uri, fx.IP, slice);
+                dst[i] = new ApiInstruction(@base, fx, recoded);
+                offseq = offseq.AccrueOffset((uint)len);
+            }
+            return dst;
+        }
+
         public static ApiHostRoutines decode(IAsmDecoder decoder, in ApiHostCodeBlocks src)
         {
             var instructions = list<ApiRoutineObsolete>();
@@ -31,7 +55,7 @@ namespace Z0
                 if(i == 0)
                     ip = target[0].IP;
 
-                instructions.Add(AsmProjections.project(ip, block, target.ToArray()));
+                instructions.Add(project(ip, block, target.ToArray()));
             }
 
             return new ApiHostRoutines(src.Host, instructions.ToArray());

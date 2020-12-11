@@ -6,7 +6,7 @@ namespace Z0.Tools
 {
     using System;
 
-    public struct Pdb2Xml : IToolModel<Pdb2Xml>
+    public struct Pdb2Xml : ICmdToolModel<Pdb2Xml>
     {
         public const string Name = "pdb2xml";
 

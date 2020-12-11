@@ -19,7 +19,7 @@ namespace Z0
 
         public static RenderPattern<ToolId> ToolHelpNotFound => "Tool {0} help not found";
 
-        public static RenderPattern<FS.FilePath> FileDoesNotExist => "The file {0} does not exist";
+        public static RenderPattern<FS.FilePath> NoSuchFile => "The file {0} does not exist";
 
         public static RenderPattern<Assembly,utf8> NoMatchingResources => "No {0} resources found that match {1}";
 
@@ -30,6 +30,6 @@ namespace Z0
         public static RenderPattern<T> Dispatching<T>()
             where T : struct, ICmdSpec<T> => "Dispatching {0}";
 
-        public static RenderPattern<Assembly,uint>  EmittingResources => "Emitting {1} {0} resources";
+        public static RenderPattern<Assembly,uint> EmittingResources => "Emitting {1} {0} resources";
     }
 }

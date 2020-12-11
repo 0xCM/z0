@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct Tooling
+    partial struct CmdTools
     {
         [MethodImpl(Inline)]
         public static ToolArchive<T> archive<T>(ToolId tool, FS.FolderPath root, ToolArchiveKind kind)

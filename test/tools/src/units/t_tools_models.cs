@@ -15,7 +15,7 @@ namespace Z0
     {
         public void check_pdb2xml()
         {
-            var model = Tooling.describe<Pdb2Xml>();
+            var model = CmdTools.describe<Pdb2Xml>();
             Check.eq(Pdb2Xml.Usage, model.Syntax);
             var options = model.Options;
             var count = options.Count;

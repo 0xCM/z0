@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System.Collections.Generic;
+    using System;
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
@@ -29,20 +29,9 @@ namespace Z0
     public delegate T Emitter<T,C>();
 
     /// <summary>
-    /// Characterizes a function that produces a stream of values
+    /// Characterizes a function that produces spans values
     /// </summary>
-    /// <param name="count">If specified, the number of elements to produce</param>
     /// <typeparam name="T">The emission type</typeparam>
     [Free]
-    public delegate IEnumerable<T> StreamEmitter<T>();
-
-    /// <summary>
-    /// Characterizes a function that produces a stream of values
-    /// </summary>
-    /// <param name="count">If specified, the number of elements to produce</param>
-    /// <typeparam name="T">The emission type</typeparam>
-    [Free]
-    public delegate IEnumerable<T> ValueStreamEmitter<T>()
-        where T : struct;
-
+    public delegate Span<T> SpanEmitter<T>();
 }

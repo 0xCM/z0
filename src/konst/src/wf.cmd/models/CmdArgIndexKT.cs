@@ -7,10 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
-
-    using api = Cmd;
+    using static Part;
 
     public readonly struct CmdArgIndex<K,T> : ITextual, IIndex<CmdArg<K,T>>
         where K : unmanaged
@@ -40,7 +37,7 @@ namespace Z0
         }
 
         public string Format()
-            => CmdFormat.format(this);
+            => Cmd.format(this);
 
         public override string ToString()
             => Format();

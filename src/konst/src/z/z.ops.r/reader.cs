@@ -8,10 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.IO;
 
-    using static Konst;
-
     partial struct z
-    {        
+    {
         /// <summary>
         /// Allocates a caller-disposed reader for the source
         /// </summary>

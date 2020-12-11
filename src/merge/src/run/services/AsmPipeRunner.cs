@@ -116,7 +116,7 @@ namespace Z0.Asm
             var t2 = asm.trigger(Mnemonic.Vmovupd, Handlers.OnVmovupd);
             var t3 = asm.trigger(Mnemonic.Call, Handlers.OnCall);
             var triggers = asm.triggers(t1,t2,t3);
-            var decoded = UriHexDecoder.decode(src).Map(ToList);
+            var decoded = CodeBlockDecoder.decode(src).Map(ToList);
             var fxFlow = asm.flow(decoded, triggers);
             var fxPipe = asm.pipe(Pipe);
             var results = fxFlow.Push(fxPipe);

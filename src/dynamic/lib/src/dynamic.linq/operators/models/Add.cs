@@ -37,7 +37,7 @@ namespace Z0
                         case TypeCode.SByte:
                             return cast<Func<T,T,T>>(Ops8i.Add.Compile());
                         case TypeCode.UInt16:
-                            return cast<Func<T,T,T>>(Ops16u.Add.Compile());
+                            return cast<Func<T,T,T>>(DLinq.add16u().Compile());
                         default:
                             return lambda<T,T,T>(Expression.Add).Compile();
                     }

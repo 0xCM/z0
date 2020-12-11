@@ -10,10 +10,10 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct Tooling
+    partial struct CmdTools
     {
         [MethodImpl(Inline), Op]
-        public static ToolExecSpec execspec(FS.FilePath tool, string args, FS.FolderPath? root = null)
-            => new ToolExecSpec(tool, args, root);
+        public static CmdExecSpec execspec(FS.FilePath tool, string args, FS.FolderPath? root = null)
+            => new CmdExecSpec(tool, args, root);
     }
 }

@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     public struct CmdSpec<T> : ICmdSpec<CmdSpec<T>>, ITextual
         where T : struct, ICmdSpec<T>
@@ -21,7 +20,7 @@ namespace Z0
         public CmdSpec(T spec)
         {
             CmdId = Cmd.id<T>();
-            Args = Cmd.argidx(spec);
+            Args = Cmd.index(spec);
         }
         public string Format()
             => EmptyString;
@@ -30,9 +29,6 @@ namespace Z0
             => Format();
 
         public static CmdSpec<T> Empty
-        {
-            [MethodImpl(Inline)]
-            get => new CmdSpec<T>(default(T));
-        }
+            => default;
     }
 }

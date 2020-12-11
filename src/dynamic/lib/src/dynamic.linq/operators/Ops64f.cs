@@ -9,7 +9,6 @@ namespace Z0
     using System.Linq;
     using System.Linq.Expressions;
 
-    using static Konst;
     using static LinqXFunc;
 
     partial struct DynamicOps

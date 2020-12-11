@@ -16,6 +16,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public Tool(string name)
             => ToolName = name;
+
         public ToolId Id => ToolName;
 
         [MethodImpl(Inline)]

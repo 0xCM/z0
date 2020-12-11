@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.IO;
     using System.Reflection;
-    using System.Collections.Generic;
 
     using Z0.Asm;
 
@@ -31,6 +30,8 @@ namespace Z0
 
         readonly WfHost Host;
 
+        readonly string[] DataTypeMemberExclusions;
+
         public CapturePartStep(IWfShell wf, IAsmContext asm, WfHost host)
         {
             Wf = wf;
@@ -47,14 +48,10 @@ namespace Z0
 
 
         public void Dispose()
-        {
-            Wf.Disposed(Host.Id);
-        }
+            => Wf.Disposed(Host.Id);
 
         static IMultiDiviner Diviner
             => MultiDiviner.Service;
-
-        readonly string[] DataTypeMemberExclusions;
 
         [MethodImpl(Inline)]
         bool IsExcluded(in ApiDataType type, MethodInfo method)
@@ -93,7 +90,7 @@ namespace Z0
                 buffer.Clear();
                 var routine = new AsmMemberRoutine();
                 ref readonly var member = ref skip(members, i);
-                var capture = CaptureAlt.capture(member,buffer);
+                var capture = CaptureAlt.capture(member, buffer);
                 var decoded = Decoder.Decode(capture).Require();
                 routine.Member = member;
                 routine.Encoded = capture;

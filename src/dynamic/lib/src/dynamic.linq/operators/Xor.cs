@@ -5,7 +5,6 @@
 namespace Z0.Dynamics.Operators
 {
     using System;
-    using System.Linq.Expressions;
     using System.Reflection;
     using System.Runtime.CompilerServices;
 

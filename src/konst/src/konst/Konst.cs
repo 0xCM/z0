@@ -181,8 +181,8 @@ namespace Z0
         public static NotSupportedException no()
             => new NotSupportedException();
 
-        [MethodImpl(NotInline), Op, Closures(AllNumeric)]
-        public static ArgumentException bad<T>(T arg)
+        [Op, Closures(AllNumeric)]
+        public static ArgumentException badarg<T>(T arg)
             => new ArgumentException(arg?.ToString() ?? "<null>");
 
         public static T no<S,T>([Caller] string caller = null, [File] string file = null, [Line] int? line = null)

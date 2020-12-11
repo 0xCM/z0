@@ -20,4 +20,8 @@ namespace Z0
     [Free]
     public unsafe delegate void PointedReceiver<T>(T* pSrc)
         where T : unmanaged;
+
+    [Free]
+    public delegate void ValueReceiver<T>(in T src)
+        where T : struct;
 }

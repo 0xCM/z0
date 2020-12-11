@@ -9,19 +9,19 @@ namespace Z0
 
     using static Konst;
 
-    partial struct Tooling
+    partial struct CmdTools
     {
         [MethodImpl(Inline), Factory]
-        public static ToolArg arg(CmdOptionSpec option, ushort position, string value)
-            => new ToolArg(option, position, value);
+        public static CmdToolArg arg(CmdOptionSpec option, ushort position, string value)
+            => new CmdToolArg(option, position, value);
 
         [MethodImpl(Inline), Factory]
-        public static ToolArg<T> arg<T>(CmdOptionSpec option, ushort position, T value)
-            => new ToolArg<T>(option, position, value);
+        public static CmdToolArg<T> arg<T>(CmdOptionSpec option, ushort position, T value)
+            => new CmdToolArg<T>(option, position, value);
 
         [MethodImpl(Inline)]
-        public static ToolArg<K,V> arg<K,V>(CmdOptionSpec<K> option, ushort position, V value)
+        public static CmdToolArg<K,V> arg<K,V>(CmdOptionSpec<K> option, ushort position, V value)
             where K : unmanaged
-                => new ToolArg<K,V>(option, position, value);
+                => new CmdToolArg<K,V>(option, position, value);
     }
 }

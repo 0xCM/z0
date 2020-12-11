@@ -19,13 +19,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref T read<T>(Span<byte> src)
             => ref memory.read<T>(src);
-
-        [MethodImpl(Inline)]
-        public static ref readonly T read<S,T>(in S src)
-            => ref memory.read<S,T>(src);
-
-        [MethodImpl(Inline)]
-        public static ref readonly T read<S,T>(in S src, int offset)
-            => ref memory.read<S,T>(src, offset);
     }
 }

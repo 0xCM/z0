@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct Tooling
+    partial struct CmdTools
     {
         [MethodImpl(Inline), Op]
         public static ToolHelp help(ToolId tool, string src)
