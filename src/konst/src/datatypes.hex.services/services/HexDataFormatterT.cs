@@ -10,7 +10,6 @@ namespace Z0
 
     using static Konst;
     using static z;
-    using api = Render;
 
     public readonly struct HexDataFormatter<T>
         where T : unmanaged

@@ -166,7 +166,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
         public static U create(W w, bool src)
-            => new U(z.bitstate(src));
+            => new U(BitStates.bitstate(src));
 
         /// <summary>
         /// Creates a 2-bit unsigned integer from the least 2 source bits
@@ -243,7 +243,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static U uint2(bool src)
-            => new U(z.bitstate(src));
+            => new U(BitStates.bitstate(src));
 
         /// <summary>
         /// Creates a 2-bit unsigned integer from the first two source bits

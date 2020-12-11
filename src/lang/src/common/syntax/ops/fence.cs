@@ -13,13 +13,13 @@ namespace Z0
     partial struct SyntaxModels
     {
         [MethodImpl(Inline), Op]
-        public static Fence fence(char left, char right)
-            => new Fence(left,right);
+        public static SyntaxFence fence(char left, char right)
+            => new SyntaxFence(left,right);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Fence<T> fence<T>(T left, T right)
+        public static SyntaxFence<T> fence<T>(T left, T right)
             where T : unmanaged
-                => new Fence<T>(left,right);
+                => new SyntaxFence<T>(left,right);
 
     }
 }

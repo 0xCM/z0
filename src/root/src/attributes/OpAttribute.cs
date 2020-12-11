@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     /// <summary>
     /// Identifies a formal operation for inclusing in the identity assignment and catalog system
     /// </summary>

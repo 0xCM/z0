@@ -65,11 +65,11 @@ namespace Z0
         public bool Equals(ConstQuad<T> rhs)
             => First.Equals(rhs.First) && Second.Equals(rhs.Second) && Third.Equals(rhs.Third) && Fourth.Equals(rhs.Fourth);
 
-        public string Format(TupleFormat style)
-            => style == TupleFormat.Coordinate ? $"({First},{Second},{Third},{Fourth})" : $"{First}x{Second}x{Third}x{Fourth}";
+        public string Format(TupleFormatKind style)
+            => style == TupleFormatKind.Coordinate ? $"({First},{Second},{Third},{Fourth})" : $"{First}x{Second}x{Third}x{Fourth}";
 
         public string Format()
-            => Format(TupleFormat.Coordinate);
+            => Format(TupleFormatKind.Coordinate);
 
         public override int GetHashCode()
             => HashCode.Combine(First,Second,Third);

@@ -11,70 +11,28 @@ namespace Z0
 
     partial struct z
     {
-        /// <summary>
-        /// Defines a parse result that signals failure
-        /// </summary>
-        /// <param name="source">The input value</param>
-        /// <param name="target">The (invalid) target value</param>
-        /// <typeparam name="S">The input type</typeparam>
-        /// <typeparam name="T">The parse target type</typeparam>
         [MethodImpl(Inline)]
         public static ParseResult<S,T> unparsed<S,T>(S source, T target = default)
-            => ParseResult<S,T>.Fail(source);
+            => zfunc.unparsed(source, target);
 
-        /// <summary>
-        /// Defines a parse result that signals failure
-        /// </summary>
-        /// <param name="source">The input value</param>
-        /// <param name="target">The (invalid) target value</param>
-        /// <param name="reason">The failure reason</param>
-        /// <typeparam name="S">The input type</typeparam>
-        /// <typeparam name="T">The parse target type</typeparam>
         [MethodImpl(Inline)]
         public static ParseResult<S,T> unparsed<S,T>(S source, T target, string reason)
-            => ParseResult<S,T>.Fail(source, reason);
+            => zfunc.unparsed<S,T>(source, target, reason);
 
-        /// <summary>
-        /// Defines a parse result that signals failure
-        /// </summary>
-        /// <param name="source">The input value</param>
-        /// <param name="target">The (invalid) target value</param>
-        /// <param name="reason">The failure reason, if available</param>
-        /// <typeparam name="S">The input type</typeparam>
-        /// <typeparam name="T">The parse target type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ParseResult<string,T> unparsed<T>(string source, T target = default)
-            => ParseResult<string,T>.Fail(text.ifempty(source, EmptyString), text.blank(source) ? $"There was no source text to parse" : EmptyString);
+            => zfunc.unparsed(source, target);
 
-        /// <summary>
-        /// Defines a parse result that signals failure
-        /// </summary>
-        /// <param name="source">The input value</param>
-        /// <param name="error">The excaption that occurred</param>
-        /// <param name="target">The default (and invalid) target value</param>
-        /// <typeparam name="T">The parse target type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline)]
         public static ParseResult<string,T> unparsed<T>(string source, Exception error, T target = default)
-            => ParseResult<string,T>.Fail(text.ifempty(source, EmptyString), error?.ToString() ?? EmptyString);
+            => zfunc.unparsed<T>(source, error, target);
 
-        /// <summary>
-        /// Defines a parse result that signals failure
-        /// </summary>
-        /// <param name="source">The input value</param>
-        /// <param name="reason">The failure reason</param>
-        /// <typeparam name="T">The parse target type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline)]
         public static ParseResult<string,T> unparsed<T>(string source, string reason)
-            => ParseResult<string,T>.Fail(text.ifempty(source, EmptyString), reason);
+            => zfunc.unparsed<T>(source, reason);
 
-        /// <summary>
-        /// Defines a parse result that signals failure
-        /// </summary>
-        /// <param name="source">The input value</param>
-        /// <param name="reason">The failure reason, if available</param>
-        /// <typeparam name="T">The parse target type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline)]
         public static ParseResult<T> unparsed<T>(char source, object reason = null)
-            => ParseResult<T>.Fail(source.ToString(), reason);
+            => zfunc.unparsed<T>(source, reason);
     }
 }

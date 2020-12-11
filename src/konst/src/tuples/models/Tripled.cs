@@ -64,10 +64,10 @@ namespace Z0
         public bool Equals(Tripled<T0,T1,T2> rhs)
             => First.Equals(rhs.First) && Second.Equals(rhs.Second) && Third.Equals(rhs.Third);
 
-        public string Format(TupleFormat style)
-            => style == TupleFormat.Coordinate ? $"({First},{Second},{Third})" : $"{First}x{Second}x{Third}";
+        public string Format(TupleFormatKind style)
+            => style == TupleFormatKind.Coordinate ? $"({First},{Second},{Third})" : $"{First}x{Second}x{Third}";
         public string Format()
-            => Format(TupleFormat.Coordinate);
+            => Format(TupleFormatKind.Coordinate);
 
         public override int GetHashCode()
             => HashCode.Combine(First,Second);

@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     partial struct Render
@@ -22,6 +22,5 @@ namespace Z0
                 seek(dst, i) = formatter.Format(skip(src,i), NumericBaseKind.Base16);
             return dst;
         }
-
     }
 }

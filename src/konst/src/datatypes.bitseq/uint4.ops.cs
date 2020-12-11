@@ -92,7 +92,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
         public static U uint4(bool src)
-            => wrap4((byte)z.bitstate(src));
+            => wrap4((byte)BitStates.bitstate(src));
 
         /// <summary>
         /// Creates a 4-bit unsigned integer from the least 4 bits of the source

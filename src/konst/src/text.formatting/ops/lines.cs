@@ -9,7 +9,7 @@ namespace Z0
     using System.Text;
     using System.Collections.Generic;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     partial struct Render

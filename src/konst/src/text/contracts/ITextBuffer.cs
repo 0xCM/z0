@@ -9,6 +9,30 @@ namespace Z0
     using static Konst;
     using static z;
 
+    public interface ITextValueFormatter<F,T> : ITextValueFormatter<T>
+        where F : unmanaged, Enum
+        where T : struct
+    {
+        void Format(in T src, IDatasetFormatter<F> dst);
+
+        void Format(in T src, IDatasetFormatter<F> dst, bool eol)
+        {
+            Format(src, dst);
+            if(eol)
+                dst.EmitEol();
+        }
+
+        string ITextValueFormatter<T>.Format(in T src)
+        {
+            var dst = Formatters.dataset<F>();
+            Format(src, dst);
+            return dst.Render();
+        }
+
+        string ITextValueFormatter<T>.HeaderText
+            => Formatters.dataset<F>().HeaderText;
+    }
+
     public interface ITextBuffer : IRenderBuffer<string,string>
     {
         void AppendLine(string src)

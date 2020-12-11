@@ -26,7 +26,7 @@ namespace Z0.Asm
         public FlairKind Flair {get;}
 
         [MethodImpl(Inline)]
-        public ExtractsParsed(WfStepId step, ApiHostUri host, Count count, CorrelationToken ct, FlairKind flair = Ran)
+        public ExtractsParsed(WfStepId step, ApiHostUri host, Count count, CorrelationToken ct, FlairKind flair = FlairKind.Ran)
         {
             EventId = (EventName, step, ct);
             Host = host;

@@ -43,7 +43,7 @@ namespace Z0.Asm
                 dst, ct);
 
         [MethodImpl(Inline)]
-        public SpecializedImmEvent(WfStepId step, ApiHostUri uri, bool generic, ScalarRefinementKind source, Type refinement, FilePath dst, CorrelationToken ct, FlairKind flair = Ran)
+        public SpecializedImmEvent(WfStepId step, ApiHostUri uri, bool generic, ScalarRefinementKind source, Type refinement, FilePath dst, CorrelationToken ct, FlairKind flair = FlairKind.Ran)
         {
             EventId = (EventName, step, ct);
             Host = uri;

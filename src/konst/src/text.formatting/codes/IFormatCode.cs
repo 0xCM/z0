@@ -7,9 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using api = FormatCodes;
-
     public interface IFormatCode : ITextual
     {
         FormatCodeKind Kind {get;}
@@ -38,11 +35,6 @@ namespace Z0
 
         object IFormatCode.Code
             => Code;
-    }
-
-    public interface IFormatCode<C> : IFormatCode<FormatCodeKind,C>
-    {
-
     }
 
     public interface IFormatCodeHost<H,K,C> : IFormatCode<K,C>

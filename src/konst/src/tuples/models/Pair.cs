@@ -66,11 +66,11 @@ namespace Z0
         public bool Equals(Pair<T> rhs)
             => Left.Equals(rhs.Left) && Right.Equals(rhs.Right);
 
-        public string Format(TupleFormat style)
-            => style == TupleFormat.Coordinate ? $"({Left},{Right})" : $"{Left}x{Right}";
+        public string Format(TupleFormatKind style)
+            => style == TupleFormatKind.Coordinate ? $"({Left},{Right})" : $"{Left}x{Right}";
 
         public string Format()
-            => Format(TupleFormat.Coordinate);
+            => Format(TupleFormatKind.Coordinate);
 
         public override int GetHashCode()
             => HashCode.Combine(Left,Right);

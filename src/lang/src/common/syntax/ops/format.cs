@@ -8,21 +8,20 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static z;
 
     partial struct SyntaxModels
     {
         [Op]
-        public static string format(Fence src)
+        public static string format(SyntaxFence src)
             => string.Format(FencePattern, src.Left, src.Right);
 
         [Op, Closures(UnsignedInts)]
-        public static string format<T>(Fence<T> src)
+        public static string format<T>(SyntaxFence<T> src)
             where T : unmanaged
                 => string.Format(FencePattern, src.Left, src.Right);
 
         [Op]
-        public static string format(in Fence src)
+        public static string format(in SyntaxFence src)
             => format(FencePattern, src.Left, src.Right);
 
         [MethodImpl(Inline)]

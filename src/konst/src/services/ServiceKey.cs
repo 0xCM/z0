@@ -14,7 +14,7 @@ namespace Z0
     /// <summary>
     /// Identifies a service reification
     /// </summary>
-    public readonly struct ServiceKey : ITextFormatter<ServiceKey>, ITextParser<ServiceKey>
+    public readonly struct ServiceKey
     {
         readonly Vector128<uint> Data;
 

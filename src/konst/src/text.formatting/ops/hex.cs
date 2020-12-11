@@ -6,11 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Text;
-    using System.Collections.Generic;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     partial struct Render
     {

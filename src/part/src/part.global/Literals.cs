@@ -18,7 +18,10 @@ namespace Z0
 
         public const string EmptyString = "";
 
-        public const string Connector = " -> ";
+        /// <summary>
+        /// The end-of-line escape sequence
+        /// </summary>
+        public const string Eol = Chars.Eol;
 
         /// <summary>
         /// The number of bits to shift a field specifier left/right to reveal/specify the width of an identified field

@@ -13,7 +13,7 @@ namespace Z0
     [Free]
     public interface ITuple
     {
-        string Format(TupleFormat style);
+        string Format(TupleFormatKind style);
     }
 
     /// <summary>

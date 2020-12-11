@@ -5,8 +5,8 @@
 namespace Z0
 {
     partial struct Formatters
-    {   
-        public static DefaultFormatter Default     
-            => DefaultFormatter.Service;
+    {
+        public static DefaultTextFormatter Default
+            => DefaultTextFormatter.Service;
     }
 }

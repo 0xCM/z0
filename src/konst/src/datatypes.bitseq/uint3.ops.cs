@@ -84,7 +84,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
         public static U uint3(bool src)
-            => new U(z.bitstate(src));
+            => new U(BitStates.bitstate(src));
 
         /// <summary>
         /// Creates a 3-bit unsigned integer from the least 3 source bits

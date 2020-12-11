@@ -5,10 +5,8 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     partial struct Render
@@ -26,7 +24,6 @@ namespace Z0
                     dst.Append(sep);
 
                 ref readonly var s = ref skip(src,i);
-
                 if(i != last)
                     dst.Append(s.PadRight(16));
                 else

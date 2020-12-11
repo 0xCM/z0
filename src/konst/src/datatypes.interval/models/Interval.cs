@@ -294,7 +294,7 @@ namespace Z0
             => Format();
 
         [MethodImpl(Inline)]
-        public string Format(TupleFormat style)
+        public string Format(TupleFormatKind style)
             => Format();
 
         [MethodImpl(Inline)]

@@ -67,7 +67,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
         public static U uint6(bool src)
-            => new U(z.bitstate(src));
+            => new U(BitStates.bitstate(src));
 
         /// <summary>
         /// Creates a 6-bit unsigned integer from the least 6 bits of the source
@@ -204,7 +204,6 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static U sll(U lhs, byte rhs)
             => uint6(lhs.data << rhs);
-
 
         [MethodImpl(Inline), Op]
         public static BitState test(U src, byte pos)

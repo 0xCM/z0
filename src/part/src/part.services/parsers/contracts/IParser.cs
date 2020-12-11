@@ -9,23 +9,13 @@ namespace Z0
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface IParser
+    public interface IParser : ITransformer
     {
-        Type SourceType {get;}
-
-        Type TargetType {get;}
-
         ParseResult Parse(object src);
     }
 
-    public interface IParser<S,T> : IParser
+    public interface IParser<S,T> : IParser, ITransformer<S,T>
     {
-        Type IParser.SourceType
-            => typeof(S);
-
-        Type IParser.TargetType
-            => typeof(T);
-
         ParseResult<S,T> Parse(S src);
 
         ParseResult IParser.Parse(object src)

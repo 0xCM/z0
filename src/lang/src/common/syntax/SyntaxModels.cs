@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static z;
 
     [ApiHost(ApiNames.SyntaxModels, true)]
     public readonly partial struct SyntaxModels

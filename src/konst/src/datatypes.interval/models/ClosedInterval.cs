@@ -97,7 +97,7 @@ namespace Z0
             => text.concat(Chars.LBracket, Min, Chars.Comma, Max, Chars.RBracket);
 
         [MethodImpl(Inline)]
-        public string Format(TupleFormat style)
+        public string Format(TupleFormatKind style)
             => Format();
 
         [MethodImpl(Inline)]

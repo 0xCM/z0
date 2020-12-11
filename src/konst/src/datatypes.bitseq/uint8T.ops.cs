@@ -63,7 +63,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
         public static U uint8(bool src)
-            => new U(z.bitstate(src));
+            => new U(BitStates.bitstate(src));
 
         /// <summary>
         /// Creates a 8-bit unsigned integer from the least 8 source bits

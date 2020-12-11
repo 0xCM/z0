@@ -37,6 +37,5 @@ namespace Z0
         where H : unmanaged, IIsomorphic<H,S,T>
     {
 
-
     }
 }

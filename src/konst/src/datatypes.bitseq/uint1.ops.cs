@@ -94,7 +94,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static U uint1(bool src)
-            => new U(z.bitstate(src));
+            => new U(BitStates.bitstate(src));
 
         /// <summary>
         /// Creates a 1-bit unsigned integer from the first bit of the source

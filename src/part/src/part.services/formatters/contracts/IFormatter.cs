@@ -9,26 +9,22 @@ namespace Z0
     /// <summary>
     /// Characterizes a text serializer
     /// </summary>
-    public interface IFormatter
+    public interface IFormatter : ITransformer
     {
-        Type SourceType {get;}
-
-        Type TargetType {get;}
-
         object Format(object src);
     }
 
-    public interface IFormatter<S,T> : IFormatter
+    public interface IFormatter<S,T> : IFormatter, ITransformer<S,T>
     {
-        Type IFormatter.SourceType
-            => typeof(S);
-
-        Type IFormatter.TargetType
-            => typeof(Span<byte>);
-
         T Format(S src);
 
         object IFormatter.Format(object src)
             => ((S)src);
+    }
+
+    public interface IFormatter<K,S,T> : IFormatter<S,T>, ITransformer<K,S,T>
+        where K : unmanaged
+    {
+
     }
 }

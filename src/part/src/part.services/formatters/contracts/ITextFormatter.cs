@@ -10,17 +10,12 @@ namespace Z0
     {
         new string Format(object src);
 
-        Type IFormatter.TargetType => typeof(string);
-
         object IFormatter.Format(object src)
             => Format(src);
     }
 
     public interface ITextFormatter<T> : ITextFormatter, IFormatter<T,string>
     {
-        Type IFormatter.TargetType => typeof(string);
-
-        Type IFormatter.SourceType => typeof(T);
 
         object IFormatter.Format(object src)
             => Format(src);

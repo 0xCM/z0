@@ -35,7 +35,7 @@ namespace Z0.Xed
         public FlairKind Flair {get;}
 
         [MethodImpl(Inline)]
-        public ParsedXedInstructions(WfStepId step, FS.FilePath source, Count count, CorrelationToken ct, FlairKind flair = Ran)
+        public ParsedXedInstructions(WfStepId step, FS.FilePath source, Count count, CorrelationToken ct, FlairKind flair = FlairKind.Ran)
         {
             EventId = (EventName, step, ct);
             Source = source;

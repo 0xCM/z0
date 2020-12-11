@@ -8,7 +8,7 @@ namespace Z0
     using System.Linq;
     using System.Text;
 
-    using static Konst;
+    using static Part;
 
     partial class XTend
     {

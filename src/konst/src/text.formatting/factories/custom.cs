@@ -18,7 +18,7 @@ namespace Z0
             if(attrib != null)
                 return custom(attrib.Realization);
             else
-                return DefaultFormatter.Service;
+                return DefaultTextFormatter.Service;
         }
 
         public static IFormatter custom(Type host)
@@ -29,7 +29,7 @@ namespace Z0
             }
             catch(Exception)
             {
-                return DefaultFormatter.Service;
+                return DefaultTextFormatter.Service;
             }
         }
     }

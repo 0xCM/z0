@@ -7,9 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
-        
+    using static Part;
+
     partial struct Render
     {
         /// <summary>
@@ -19,7 +18,7 @@ namespace Z0
         /// <param name="delimiter">The cell delimiter</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static string textual<T>(ReadOnlySpan<T> src, string delimiter)            
+        public static string textual<T>(ReadOnlySpan<T> src, string delimiter)
             where T : ITextual
                 => concat(items(src),delimiter);
     }

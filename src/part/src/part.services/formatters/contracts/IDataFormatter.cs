@@ -9,10 +9,10 @@ namespace Z0
     public interface DataFormatter<S> : IFormatter
         where S : struct
     {
-        Type IFormatter.SourceType
+        Type ITransformer.SourceType
             => typeof(S);
 
-        Type IFormatter.TargetType
+        Type ITransformer.TargetType
             => typeof(Span<byte>);
 
         Span<byte> Format(in S src);

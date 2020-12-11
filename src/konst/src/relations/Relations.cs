@@ -22,8 +22,16 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
+        public static Isomorphic<S,T> isomorphic<S,T>(S src, T dst)
+            => default;
+
+        [MethodImpl(Inline)]
+        public static Isomorphic isomorphic(Type src, Type dst)
+            => new Isomorphic(src, dst);
+
+        [MethodImpl(Inline)]
         public static string format<T>(Dependency<T> src)
-                => RenderLink<T>().Format(src.Source, src.Target);
+            => RenderLink<T>().Format(src.Source, src.Target);
 
         [MethodImpl(Inline)]
         public static string format<S,T>(Dependency<S,T> src)
