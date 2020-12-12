@@ -159,8 +159,8 @@ namespace Z0
             => @byte(x);
 
         [MethodImpl(Inline), Op]
-        public static unsafe uint hash(string src)
-            => (uint)(memory.pchar2(src ?? EmptyString));
+        public static uint hash(string src)
+            => (uint)(src?.GetHashCode() ?? 0);
 
         /// <summary>
         /// Calculates a combined hash for 2 unsigned 32-bit integers
@@ -316,6 +316,31 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static uint hash<T>(T x, T y)
             => hash_u(x,y);
+
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        public static uint hash<T>(ReadOnlySpan<T> src)
+        {
+            var length = src.Length;
+            if(length == 0)
+                return 0;
+
+            var rolling = FnvOffsetBias;
+            for(var i=0u; i<length-1; i++)
+            {
+                ref readonly var x = ref skip(src,i);
+                ref readonly var y = ref skip(src,i + 1);
+                rolling = hash(rolling, hash(x,y))*FnvPrime;
+            }
+            return rolling;
+        }
+
+        [MethodImpl(Inline)]
+        public static uint hash<T>(Span<T> src)
+            => hash(@readonly(src));
+
+        [MethodImpl(Inline)]
+        public static uint hash<T>(T[] src)
+            => hash(span(src));
 
         [MethodImpl(Inline)]
         static uint hash_u<T>(T src)

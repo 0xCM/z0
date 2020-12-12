@@ -31,6 +31,18 @@ namespace Z0
         public int PointCount
             => Source.PointCount;
 
+        public ref Pair<T> First
+        {
+            [MethodImpl(Inline)]
+            get => ref Target.First;
+        }
+
+        public ref Pair<T> this[int index]
+        {
+            [MethodImpl(Inline)]
+            get => ref Target[index];
+        }
+
         public string LeftLabel
             => Target.LeftLabel;
 

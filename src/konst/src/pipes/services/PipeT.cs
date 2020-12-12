@@ -9,22 +9,35 @@ namespace Z0
     using System.Collections.Concurrent;
 
     using static Konst;
+    using static SFx;
 
     public readonly struct Pipe<T> : IPipe<T>
     {
-        readonly ConcurrentBag<T> Buffer;
+        readonly PipeBuffer<T> Buffer;
+
+        readonly IProjector<T> Projector;
 
         [MethodImpl(Inline)]
-        internal Pipe(ConcurrentBag<T> buffer)
-            => Buffer = buffer;
+        internal Pipe(PipeBuffer<T> buffer, IProjector<T> projector)
+        {
+            Buffer = buffer;
+            Projector = projector;
+        }
 
         [MethodImpl(Inline)]
         public void Deposit(T src)
-            => Buffer.Add(src);
+            => Buffer.Enqueue(src);
 
-        [MethodImpl(Inline)]
         public bool Next(out T dst)
-            => Buffer.TryTake(out dst);
+        {
+            if(Buffer.TryDequeue(out var src))
+            {
+                dst = Projector.Invoke(src);
+                return true;
+            }
+            dst = default;
+            return false;
+        }
 
         T ISource<T>.Next()
         {

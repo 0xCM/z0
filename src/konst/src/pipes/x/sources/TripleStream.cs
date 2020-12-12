@@ -13,8 +13,8 @@ namespace Z0
 
     partial class XSource
     {
-        public static IEnumerable<Triple<T>> TripleStream<T>(this ISource source, T t = default)
+        public static IEnumerable<Triple<T>> TripleStream<T>(this ISource src, T t = default)
             where T : struct
-                => Sources.triplestream(source, t);
+                => Sources.triplestream(src, t);
     }
 }

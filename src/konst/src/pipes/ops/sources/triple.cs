@@ -7,13 +7,13 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Konst;
 
     partial struct Sources
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Pair<T> pair<T>(ISource src)
+        public static Triple<T> triple<T>(ISource src, T t = default)
             where T : struct
-                => Tuples.pair(next<T>(src), next<T>(src));
+                => Tuples.triple(next<T>(src), next<T>(src), next<T>(src));
     }
 }

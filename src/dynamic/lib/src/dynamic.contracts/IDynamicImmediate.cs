@@ -49,7 +49,6 @@ namespace Z0
         /// <param name="w">The vector operand width</param>
         /// <param name="k">The operator kind</param>
         /// <typeparam name="T">The vector cell type</typeparam>
-        [MethodImpl(Inline)]
         IImmInjector<UnaryOp<Vector128<T>>> UnaryInjector<T>(W128 w)
             where T : unmanaged;
 
@@ -59,7 +58,6 @@ namespace Z0
         /// <param name="w">The vector operand width</param>
         /// <param name="k">The operator kind</param>
         /// <typeparam name="T">The vector cell type</typeparam>
-        [MethodImpl(Inline)]
         IImmInjector<UnaryOp<Vector256<T>>> UnaryInjector<T>(W256 w)
             where T : unmanaged;
 
@@ -89,7 +87,6 @@ namespace Z0
         /// <param name="src">The defining method</param>
         /// <param name="imm">The immediate value to embed</param>
         /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline)]
         DynamicDelegate<UnaryOp<Vector128<T>>> CreateUnaryOp<T>(MethodInfo src, W128 w, byte imm)
             where T : unmanaged;
 

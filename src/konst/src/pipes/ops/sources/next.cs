@@ -12,12 +12,12 @@ namespace Z0
     partial struct Sources
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static T one<T>(ISource src, T t = default)
+        public static T next<T>(ISource src)
             where T : struct
                 => src.Next<T>();
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref readonly T one<T>(IRefSource<T> src)
+        public static ref readonly T next<T>(IRefSource<T> src)
             where T : struct
                 => ref src.Next();
 

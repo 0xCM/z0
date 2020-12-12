@@ -13,7 +13,7 @@ namespace Z0
     partial class MSvcHosts
     {
         [Closures(AllNumeric), Parse]
-        public readonly struct Parse<T>  : ISFParser<T>
+        public readonly struct Parse<T> : ITextParserFunc<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]

@@ -14,7 +14,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ConstTriple<T> ktriple<T>(ISource source, T t = default)
             where T : struct
-                => (one(source, t), one(source, t), one(source, t));
+                => (next<T>(source), next<T>(source), next<T>(source));
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ConstTriple<T> ktriple<T>(IDomainSource source, T min, T max)

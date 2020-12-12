@@ -6,14 +6,13 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Text;
 
     using static Konst;
 
-    partial struct Sources
+    partial struct Encoded
     {
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Triple<T> triple<T>(ISource src, T t = default)
-            where T : struct
-                => Tuples.triple(one(src, t), one(src, t), one(src, t));
+        public static TaggedCodeBlock tag(BasedCodeBlock src, string tag)
+            => new TaggedCodeBlock(src, tag);
     }
 }

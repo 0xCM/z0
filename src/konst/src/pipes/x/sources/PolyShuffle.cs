@@ -15,27 +15,27 @@ namespace Z0
         /// <summary>
         /// Shuffles span content in-place
         /// </summary>
-        /// <param name="random">The data source</param>
-        /// <param name="src">The input/output span</param>
+        /// <param name="src">The data source</param>
+        /// <param name="io">The input/output span</param>
         /// <typeparam name="T">The primal type</typeparam>
-        public static Span<T> Shuffle<T>(this IDomainSource random, Span<T> src)
+        public static Span<T> Shuffle<T>(this IDomainSource src, Span<T> io)
         {
-            for (var i = 0u; i < src.Length; i++)
-                swap(ref seek(src,i), ref seek(src,(uint)(i + random.Next(0, src.Length - i))));
-            return src;
+            for (var i = 0u; i < io.Length; i++)
+                swap(ref seek(io,i), ref seek(io,(uint)(i + src.Next(0, io.Length - i))));
+            return io;
         }
 
         /// <summary>
         /// Shuffles array content in-place
         /// </summary>
-        /// <param name="random">The data source</param>
-        /// <param name="src">The input/output array</param>
+        /// <param name="src">The data source</param>
+        /// <param name="io">The input/output array</param>
         /// <typeparam name="T">The primal type</typeparam>
-        public static T[] Shuffle<T>(this IDomainSource random, T[] src)
+        public static T[] Shuffle<T>(this IDomainSource src, T[] io)
         {
-            for (var i = 0u; i < src.Length; i++)
-                swap(ref src[i], ref src[i + random.Next(0,src.Length - i)]);
-            return src;
+            for (var i = 0u; i < io.Length; i++)
+                swap(ref io[i], ref io[i + src.Next(0,io.Length - i)]);
+            return io;
         }
 
         /// <summary>

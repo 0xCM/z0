@@ -9,6 +9,7 @@ namespace Z0
 
     using static Konst;
     using static z;
+    using static SFx;
 
     public class t_vreverse : t_inx<t_vreverse>
     {

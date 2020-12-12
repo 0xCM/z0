@@ -14,7 +14,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ConstPair<T> kpair<T>(ISource source, T t = default)
             where T : struct
-                => (one<T>(source), one<T>(source));
+                => (next<T>(source), next<T>(source));
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ConstPair<T> kpair<T>(IDomainSource source, T min, T max)

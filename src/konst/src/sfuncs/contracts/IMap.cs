@@ -11,22 +11,11 @@ namespace Z0
     partial struct SFx
     {
         /// <summary>
-        /// Characterizes a structural transformation function
-        /// </summary>
-        /// <typeparam name="A">The source domain type</typeparam>
-        /// <typeparam name="B">The target domain type</typeparam>
-        [Free, SFx]
-        public interface IProjector<A,B> : IFunc<A,B>
-        {
-
-        }
-
-        /// <summary>
         /// Characterizes an operator that materializes a primal value from a string
         /// </summary>
         /// <typeparam name="T">The primal value type</typeparam>
         [Free, SFx]
-        public interface ISFParser<T> : IFunc<string,T>
+        public interface ITextParserFunc<T> : IFunc<string,T>
             where T : unmanaged
         {
 

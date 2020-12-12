@@ -37,6 +37,12 @@ namespace Z0
             get => ref Pair(index);
         }
 
+        public ref Pair<T> First
+        {
+            [MethodImpl(Inline)]
+            get => ref Target.First;
+        }
+
         public int PointCount
         {
             [MethodImpl(Inline)]

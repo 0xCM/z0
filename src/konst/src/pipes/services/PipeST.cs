@@ -10,25 +10,30 @@ namespace Z0
 
     using static z;
     using static Konst;
+    using static SFx;
 
     public readonly struct Pipe<S,T> : IPipe<S,T>
     {
-        readonly ConcurrentBag<S> Buffer;
+        readonly PipeBuffer<S> Buffer;
+
+        readonly IProjector<S,T> Projector;
 
         [MethodImpl(Inline)]
-        internal Pipe(ConcurrentBag<S> buffer)
-            => Buffer = buffer;
+        internal Pipe(PipeBuffer<S> buffer, IProjector<S,T> projector)
+        {
+            Buffer = buffer;
+            Projector = projector;
+        }
 
         [MethodImpl(Inline)]
         public void Deposit(S src)
-            => Buffer.Add(src);
+            => Buffer.Enqueue(src);
 
-        [MethodImpl(Inline)]
         public bool Next(out T dst)
         {
-            if(Buffer.TryTake(out var src))
+            if(Buffer.TryDequeue(out var src))
             {
-                dst = z.@as<S,T>(src);
+                dst = Projector.Invoke(src);
                 return true;
             }
             dst = default;

@@ -62,12 +62,11 @@ namespace Z0
             where N : unmanaged, ITypeNat
                 => Z0.TableSpans.load<M,N,T>(src.Span<T>((int)NatCalc.mul(rows, cols), domain), rows, cols);
 
-
-        static Span<T> create<T>(IDomainSource random, int length, Interval<T> domain, Func<T,bool> filter = null)
+        static Span<T> create<T>(IDomainSource src, int length, Interval<T> domain, Func<T,bool> filter = null)
             where T : unmanaged
         {
             var dst = span<T>(length);
-            random.Fill(domain, length, ref first(dst), filter);
+            src.Fill(domain, length, ref first(dst), filter);
             return dst;
         }
 

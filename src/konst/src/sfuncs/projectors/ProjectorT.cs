@@ -8,19 +8,18 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static SFx;
 
-    partial struct z
+    public readonly struct Projector<T> : IProjector<T>
     {
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static uint hash<T>(ReadOnlySpan<T> src)
-            => alg.hash(src);
+        readonly System.Func<T,T> Fx;
 
         [MethodImpl(Inline)]
-        public static uint hash<T>(Span<T> src)
-            => alg.hash(src);
+        public Projector(System.Func<T,T> fx)
+            => Fx = fx;
 
         [MethodImpl(Inline)]
-        public static uint hash<T>(T[] src)
-            => alg.hash(src);
+        public T Invoke(T a)
+            => Fx(a);
     }
 }

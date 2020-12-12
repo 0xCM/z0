@@ -10,6 +10,7 @@ namespace Z0
     using System.Linq;
 
     using static Konst;
+    using static memory;
 
     /// <summary>
     /// Captures a pair sequence
@@ -32,7 +33,7 @@ namespace Z0
         /// <param name="index">The zero-based sequence index</param>
         [MethodImpl(Inline)]
         public ref Pair<T> Select(int index)
-            => ref z.seek(Data, (uint)index);
+            => ref seek(Data, (uint)index);
 
         /// <summary>
         /// Returns a mutable reference to an index-identified sequence element
@@ -42,6 +43,12 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => ref Select(index);
+        }
+
+        public ref Pair<T> First
+        {
+            [MethodImpl(Inline)]
+            get => ref first(Data);
         }
 
         /// <summary>

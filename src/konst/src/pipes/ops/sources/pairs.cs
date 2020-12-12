@@ -13,18 +13,18 @@ namespace Z0
     partial struct Sources
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Pairs<T> pairs<T>(ISource source, int count)
+        public static Pairs<T> pairs<T>(ISource src, int count)
             where T : struct
-                => Streams.pairs<T>(source).Take(count).Array();
+                => Streams.pairs<T>(src).Take(count).Array();
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Pairs<T> pairs<T>(ISource source, Span<Pair<T>> dst)
+        public static Pairs<T> pairs<T>(ISource src, Span<Pair<T>> dst)
             where T : struct
-                => Sinks.deposit(Streams.pairs<T>(source).Take(dst.Length),dst);
+                => Sinks.deposit(Streams.pairs<T>(src).Take(dst.Length),dst);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Pairs<T> pairs<T>(ISource source, Pair<T>[] dst)
+        public static Pairs<T> pairs<T>(ISource src, Pair<T>[] dst)
             where T : struct
-                => Sinks.deposit(Streams.pairs<T>(source).Take(dst.Length), dst);
+                => Sinks.deposit(Streams.pairs<T>(src).Take(dst.Length), dst);
     }
 }

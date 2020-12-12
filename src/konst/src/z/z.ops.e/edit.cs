@@ -62,6 +62,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe Span<byte> edit(MemoryAddress src, ByteSize size)
             => cover(src.Ref<byte>(), size);
-
     }
 }
