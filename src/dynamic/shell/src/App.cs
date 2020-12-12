@@ -5,8 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Diagnostics;
-    using System.Reflection.Metadata;
 
     using Z0.Tools;
 
@@ -65,6 +63,7 @@ namespace Z0
             cmd.WaitForExit();
         }
 
+
         static void Run32(IWfShell wf)
         {
             var llvm = Llvm.service(wf);
@@ -84,41 +83,11 @@ namespace Z0
             wf.Status(wf.Db().DbRoot);
         }
 
-        static void react(IWfShell wf, in EmitCliTablesCmd cmd)
-        {
-            (var success, var msg) = MetadataTableEmitter.emit(cmd.Source.Name, cmd.Target.Name);
-            if(success)
-                wf.Status(msg);
-            else
-                wf.Error(msg);
-        }
-
-        static void EmitCilTables(IWfShell wf, params string[] components)
-        {
-            var runtime = wf.RuntimeArchive();
-            var srcdir = runtime.Root;
-            foreach(var component in components)
-            {
-                var srcpath = srcdir + FS.file(component);
-                if(!srcpath.Exists)
-                    wf.Warn($"The {component} component was not found");
-                else
-                {
-                    var cmd = new EmitCliTablesCmd();
-                    var dstfile = FS.file($"{component}.metadata.cli");
-                    var dstdir = wf.Db().Output(new ToolId("ztool"), cmd.Id()).Create() + dstfile;
-                    cmd.Source = srcpath;
-                    cmd.Target = dstdir;
-                    react(wf,cmd);
-                }
-            }
-        }
-
-
         public static void Main(params string[] args)
         {
             try
             {
+
                 using var wf = WfShell.create(args).WithRandom(Rng.@default());
                 var host = new App();
                 host.Execute(wf);

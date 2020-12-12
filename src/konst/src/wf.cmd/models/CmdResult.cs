@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     public readonly struct CmdResult : ITextual
     {
@@ -18,25 +17,56 @@ namespace Z0
 
         public BinaryCode Payload {get;}
 
+        public string Message {get;}
+
         [MethodImpl(Inline)]
-        public CmdResult(CmdId id, bit success, params byte[] content)
+        public CmdResult(CmdId id, bit success)
         {
             CmdId = id;
-            Payload = content;
+            Payload = default;
             Succeeded = success;
+            Message = string.Format("{0} execution {1}", CmdId, Succeeded ? "succeeded" : "failed");
         }
 
         [MethodImpl(Inline)]
-        public CmdResult(ICmdSpec cmd, bit success, params byte[] content)
+        public CmdResult(CmdId id, bit success, byte[] payload)
+        {
+            CmdId = id;
+            Payload = payload;
+            Succeeded = success;
+            Message = string.Format("{0} execution {1}", CmdId, Succeeded ? "succeeded" : "failed");
+        }
+
+        [MethodImpl(Inline)]
+        public CmdResult(CmdId id, bit success, string message)
+        {
+            CmdId = id;
+            Payload = default;
+            Succeeded = success;
+            Message = text.ifempty(message, string.Format("{0} execution {1}", CmdId, Succeeded ? "succeeded" : "failed"));
+        }
+
+        [MethodImpl(Inline)]
+        public CmdResult(ICmdSpec cmd, bit success, byte[] content, string message)
         {
             CmdId = cmd.CmdId;
             Payload = content;
             Succeeded = success;
+            Message = text.ifempty(message, string.Format("{0} execution {1}", CmdId, Succeeded ? "succeeded" : "failed"));
+        }
+
+        [MethodImpl(Inline)]
+        public CmdResult(ICmdSpec cmd, bit success, string message)
+        {
+            CmdId = cmd.CmdId;
+            Payload = default;
+            Succeeded = success;
+            Message = text.ifempty(message, string.Format("{0} execution {1}", CmdId, Succeeded ? "succeeded" : "failed"));
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => string.Format(Succeeded ?"{0} executed successfully" : "{0} execution failed", CmdId);
+            => Message;
 
         public static CmdResult Empty
             => default;

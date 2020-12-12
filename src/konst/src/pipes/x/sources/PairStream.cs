@@ -4,17 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
-    using System.Linq;
-
-    using static Konst;
 
     partial class XSource
     {
-        public static IEnumerable<Pair<T>> PairStream<T>(this ISource source, T t = default)
+        public static Deferred<Pair<T>> PairStream<T>(this ISource src)
             where T : struct
-                => Sources.pairstream(source,t);
+                => Seq.defer(Sources.pairstream<T>(src));
     }
 }

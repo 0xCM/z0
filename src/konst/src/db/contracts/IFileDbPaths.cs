@@ -187,7 +187,7 @@ namespace Z0
             => Tools(id) + FS.folder(PN.output);
 
         FS.FolderPath Output(ToolId tool, CmdId cmd)
-            => ToolExeRoot() + FS.folder(string.Concat(tool.Format(), "-", cmd.Format())) + FS.folder(PN.output);
+            => ToolExeRoot() + FS.folder(tool.Format()) + FS.folder(cmd.Format()) + FS.folder(PN.output);
 
         FS.FolderPath CapturedExtractDir()
             => CaptureRoot() + FS.folder(PN.extracts);

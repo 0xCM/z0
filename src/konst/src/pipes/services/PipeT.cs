@@ -8,28 +8,23 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Concurrent;
 
-    using static z;
     using static Konst;
-
-    using api = Pipes;
 
     public readonly struct Pipe<T> : IPipe<T>
     {
-        internal readonly ConcurrentBag<T> Buffer;
+        readonly ConcurrentBag<T> Buffer;
 
         [MethodImpl(Inline)]
         internal Pipe(ConcurrentBag<T> buffer)
-        {
-            Buffer = buffer;
-        }
+            => Buffer = buffer;
 
         [MethodImpl(Inline)]
         public void Deposit(T src)
-            => Sinks.deposit(src, this);
+            => Buffer.Add(src);
 
         [MethodImpl(Inline)]
         public bool Next(out T dst)
-            => Sources.next(this, out dst);
+            => Buffer.TryTake(out dst);
 
         T ISource<T>.Next()
         {

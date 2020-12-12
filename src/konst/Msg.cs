@@ -15,7 +15,7 @@ namespace Z0
 
         public static RenderPattern<string> SourceLoggerDisposed => "Logger for {0} disposed";
 
-        public static RenderPattern<CmdId> DispatchingCommand => "Dispatching {0}";
+        public static RenderPattern<string> DispatchingCommand => "Dispatching {0}";
 
         public static RenderPattern<ToolId> ToolHelpNotFound => "Tool {0} help not found";
 

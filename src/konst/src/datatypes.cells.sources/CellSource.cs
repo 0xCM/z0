@@ -46,7 +46,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static Cell128 next(ISource source, W128 w)
-            => source.NextPair<ulong>();
+            => source.ConstPair<ulong>();
 
         [MethodImpl(Inline), Op]
         public static Cell256 next(ISource source, W256 w)

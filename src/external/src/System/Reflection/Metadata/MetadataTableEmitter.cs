@@ -9,7 +9,7 @@ namespace System.Reflection.Metadata
 
     public readonly struct MetadataTableEmitter
     {
-        public static void emit(string[] args)
+        public static void emit(params string[] args)
         {
             if (args.Length == 0 || new[] {"/?", "-?", "-h", "--help"}.Any(x => string.Equals(args[0], x, StringComparison.OrdinalIgnoreCase)))
             {

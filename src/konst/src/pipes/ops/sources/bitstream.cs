@@ -40,7 +40,7 @@ namespace Z0
             {
                 var data = src.Next<ulong>();
                 for(byte i=0; i<64; i++)
-                    yield return z.force<byte,T>((byte)BitStates.test(data,i));
+                    yield return force<byte,T>((byte)BitStates.test(data,i));
             }
         }
     }

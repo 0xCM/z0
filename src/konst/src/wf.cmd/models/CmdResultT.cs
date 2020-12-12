@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static z;
 
     public struct CmdResult<P> : ICmdResult<P>
         where P : struct

@@ -13,8 +13,7 @@ namespace Z0
     partial struct Pipes
     {
         [Op, Closures(Closure)]
-        public static void flow<T>(in ValuePipeConnector<T> connector, ReadOnlySpan<T> src)
-            where T : struct
+        public static void flow<T>(in PipeConnector<T> connector, ReadOnlySpan<T> src)
         {
             var count = src.Length;
             for(var i=0; i<count; i++)
@@ -24,9 +23,7 @@ namespace Z0
                 connector.Target.Deposit(dst);
         }
 
-        public static void flow<S,T>(in ValuePipeConnector<S,T> connector, ReadOnlySpan<S> src)
-            where S : struct
-            where T : struct
+        public static void flow<S,T>(in PipeConnector<S,T> connector, ReadOnlySpan<S> src)
         {
             var count = src.Length;
             for(var i=0; i<count; i++)
@@ -35,5 +32,5 @@ namespace Z0
             while(connector.Source.Next(out var dst))
                 connector.Target.Deposit(dst);
         }
-    }
+     }
 }

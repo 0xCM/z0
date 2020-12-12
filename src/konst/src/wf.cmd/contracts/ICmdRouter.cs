@@ -16,14 +16,6 @@ namespace Z0
         void Enlist(params ICmdReactor[] reactors);
 
         CmdResult Dispatch(ICmdSpec cmd);
-
-        CmdResult<T> Dispatch<S,T>(S cmd)
-            where S : struct, ICmdSpec<S>
-            where T : struct;
-
-        ReadOnlySpan<CmdResult<T>> Dispatch<S,T>(ReadOnlySpan<S> src, bool pll)
-            where S : struct, ICmdSpec<S>
-            where T : struct;
     }
 
     [Free]

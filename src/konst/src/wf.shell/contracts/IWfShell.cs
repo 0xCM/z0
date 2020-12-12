@@ -167,7 +167,7 @@ namespace Z0
             => Raise(status(step, data, Ct));
 
         void Status<T>(T data)
-            => Status(Host,data);
+            => Status(Host, data);
 
         void Warn<T>(WfStepId step, T content)
             => Raise(warn(step, content, Ct));

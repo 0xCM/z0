@@ -8,7 +8,10 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Linq;
     using System.Reflection;
+    using System.Reflection.Metadata;
     using System.Diagnostics;
+
+    using Z0.Tools;
 
     using static Konst;
     using static z;
@@ -93,7 +96,7 @@ namespace Z0
             var dllTarget = db.Table(ImageSectionHeader.TableId, "z0.dll.headers");
             var exeTarget = db.Table(ImageSectionHeader.TableId, "z0.exe.headers");
 
-            var cmd = Wf.CmdCatalog.EmitImageHeaders();
+            var cmd = CmdBuilder.EmitImageHeaders();
             cmd.Source = build.DllFiles().Array();
             cmd.Target = db.Table(ImageSectionHeader.TableId, "z0.dll.headers");
             EmitImageHeaders.run(Wf, cmd);
@@ -152,13 +155,9 @@ namespace Z0
         public CmdResult EmitAsmOpCodes()
             => Wf.Router.Dispatch(CmdBuilder.EmitAsmOpCodes());
 
-        public void Run()
-        {
-            //EmitProcessImages(Wf);
-            //EmitAsmMnemonics();
-            //EmitAsmOpCodes();
-            //EmitBuildArchiveList(Wf.Db().BuildArchiveRoot(), "zbuild");
 
+        void WriteJson()
+        {
             var db = Wf.Db();
             var commands = Commands();
             foreach(var c in commands)
@@ -166,6 +165,44 @@ namespace Z0
                 var dst = db.TmpFile(FS.file(c.CmdName, FileExtensions.Json));
                 var data = JsonData.serialize(c,dst);
             }
+        }
+
+
+        static void EmitCilTables(IWfShell wf, params string[] components)
+        {
+            var runtime = wf.RuntimeArchive();
+            var srcdir = runtime.Root;
+            foreach(var component in components)
+            {
+                var srcpath = srcdir + FS.file(component);
+                if(!srcpath.Exists)
+                    wf.Warn($"The {component} component was not found");
+                else
+                {
+                    var cmd = new EmitCliTableDocCmd();
+                    var dstfile = FS.file($"{component}.metadata.cli");
+                    var dstdir = wf.Db().Output(new ToolId("ztool"), cmd.Id()).Create() + dstfile;
+                    cmd.Source = srcpath;
+                    cmd.Target = dstdir;
+                    (var success, var msg) = MetadataTableEmitter.emit(cmd.Source.Name, cmd.Target.Name);
+                    if(success)
+                        wf.Status(msg);
+                    else
+                        wf.Error(msg);
+                }
+            }
+        }
+
+        public void Run()
+        {
+            //EmitProcessImages(Wf);
+            //EmitAsmMnemonics();
+            //EmitAsmOpCodes();
+            //EmitBuildArchiveList(Wf.Db().BuildArchiveRoot(), "zbuild");
+
+            EmitCilTables(Wf, "z0.bitcore.dll");
+            // var component = Wf.Api.FindComponent(PartId.BitCore).Require();
+            // var result = Cli.EmitCilTableDoc(Wf, component);
 
             // var cmd = new LocateImagesCmd();
             // cmd.Target = Wf.Db().IndexFile(LocatedImageRow.TableId);

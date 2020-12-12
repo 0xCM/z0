@@ -14,16 +14,17 @@ namespace Z0
     {
         public CmdId CmdId {get;}
 
-        public CmdArgIndex Args {get;}
+        public CmdArgs Args {get;}
 
         [MethodImpl(Inline)]
         public CmdSpec(T spec)
         {
             CmdId = Cmd.id<T>();
-            Args = Cmd.index(spec);
+            Args = Cmd.args(spec);
         }
+
         public string Format()
-            => EmptyString;
+            => Cmd.format(this);
 
         public override string ToString()
             => Format();

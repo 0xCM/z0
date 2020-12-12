@@ -8,15 +8,12 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static z;
-
-    using api = Cmd;
 
     public struct CmdSpec : ICmdSpec, ITextual
     {
         public CmdId CmdId {get;}
 
-        public CmdArgIndex Args {get;}
+        public CmdArgs Args {get;}
 
         [MethodImpl(Inline)]
         public CmdSpec(CmdId id, params CmdArg[] args)

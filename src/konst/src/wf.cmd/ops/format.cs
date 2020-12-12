@@ -54,22 +54,24 @@ namespace Z0
             return dst.ToString();
         }
 
-        [Op]
-        public static string format(in CmdArgIndex src)
+        public static string format<T>(T src)
+            where T : ICmdSpec
         {
             var dst = Buffers.text();
-            Cmd.render(src, dst);
+            dst.Append(src.CmdId.Format());
+            dst.Append("[");
+            for(var i=0; i<src.Args.Count; i++)
+            {
+                ref readonly var arg = ref src.Args[i];
+                dst.Append(arg.Format());
+                dst.Append(Space);
+            }
+
+            dst.Append("]");
             return dst.Emit();
+
         }
 
-        [Op]
-        public static string format(CmdSpec src)
-        {
-            var dst = Buffers.text();
-            dst.AppendFormat("{0} ", src.CmdId.Format());
-            Cmd.render(src.Args,dst);
-            return dst.Emit();
-        }
 
         [MethodImpl(Inline), Formatter]
         public static string format(CmdOptionSpec src)
@@ -143,7 +145,7 @@ namespace Z0
         }
 
         [Op]
-        public static void render(CmdArgIndex src, ITextBuffer dst)
+        public static void render(CmdArgs src, ITextBuffer dst)
         {
             var count = src.Count;
             for(var i=0u; i<count; i++)

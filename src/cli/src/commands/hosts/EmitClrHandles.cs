@@ -11,10 +11,10 @@ namespace Z0
     using static Konst;
     using static z;
 
-    [WfHost(CommandName)]
+    [WfHost(CmdName)]
     public sealed class EmitClrHandles : WfHost<EmitClrHandles,ClrAssembly>
     {
-        public const string CommandName = nameof(EmitClrHandles);
+        public const string CmdName = nameof(EmitClrHandles);
 
         protected override void Execute(IWfShell wf, in ClrAssembly src)
         {
@@ -28,7 +28,7 @@ namespace Z0
             var components = wf.Api.Components;
             foreach(var component in components)
                 EmitClrHandles.create().Run(wf, component);
-            return new CmdResult(cmd, true);
+            return Cmd.ok(cmd);
         }
     }
 

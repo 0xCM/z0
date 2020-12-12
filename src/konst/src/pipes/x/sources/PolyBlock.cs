@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
 
-    using static Konst;
-
     using B = SpanBlocks;
 
     public static class PolyBlock
@@ -15,32 +13,32 @@ namespace Z0
         /// <summary>
         /// Fills a single caller-allocated 16-bit block with random values
         /// </summary>
-        /// <param name="random">The data source</param>
+        /// <param name="src">The data source</param>
         /// <param name="dst">The target block</param>
         /// <param name="min">The inclusive cell value lower bound</param>
         /// <param name="max">The exclusive cell value upper bound</param>
         /// <param name="block">The target block index</param>
         /// <typeparam name="T">The block cell type</typeparam>
-        public static ref readonly SpanBlock16<T> Block<T>(this IDomainSource random, T min, T max, in SpanBlock16<T> dst, int block)
+        public static ref readonly SpanBlock16<T> Block<T>(this IDomainSource src, T min, T max, in SpanBlock16<T> dst, int block)
             where T : unmanaged
         {
-            random.Fill(min,max,dst.Block(block));
+            src.Fill(min,max,dst.Block(block));
             return ref dst;
         }
 
         /// <summary>
         /// Fills a single caller-allocated 32-bit block with random values
         /// </summary>
-        /// <param name="random">The data source</param>
+        /// <param name="src">The data source</param>
         /// <param name="min">The inclusive cell value lower bound</param>
         /// <param name="max">The exclusive cell value upper bound</param>
         /// <param name="dst">The target block</param>
         /// <param name="block">The target block index</param>
         /// <typeparam name="T">The block cell type</typeparam>
-        public static ref readonly SpanBlock32<T> Block<T>(this IDomainSource random, T min, T max, in SpanBlock32<T> dst, int block)
+        public static ref readonly SpanBlock32<T> Block<T>(this IDomainSource src, T min, T max, in SpanBlock32<T> dst, int block)
             where T : unmanaged
         {
-            random.Fill(min,max,dst.Block(block));
+            src.Fill(min,max,dst.Block(block));
             return ref dst;
         }
 

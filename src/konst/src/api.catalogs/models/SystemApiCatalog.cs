@@ -74,5 +74,8 @@ namespace Z0
                         where parts.Contains(h.PartId)
                         select h;
         }
+
+        public Option<Assembly> FindComponent(PartId id)
+            => Components.Where(c => c.Id() == id).FirstOrDefault();
     }
 }

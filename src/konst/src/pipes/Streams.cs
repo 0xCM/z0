@@ -14,12 +14,14 @@ namespace Z0
     [ApiHost]
     public readonly struct Streams
     {
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static IEnumerable<Pair<T>> pairs<T>(ISource source, T t = default)
+        const NumericKind Closure = UnsignedInts;
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static IEnumerable<Pair<T>> pairs<T>(ISource src)
             where T : struct
         {
             while(true)
-                yield return Sources.pair(source,t);
+                yield return Sources.pair<T>(src);
         }
     }
 }

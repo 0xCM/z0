@@ -9,12 +9,12 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct CmdArgIndex : IIndex<CmdArg>
+    public readonly struct CmdArgs : IIndex<CmdArg>
     {
         readonly IndexedSeq<CmdArg> Data;
 
         [MethodImpl(Inline)]
-        public CmdArgIndex(CmdArg[] src)
+        public CmdArgs(CmdArg[] src)
             => Data = src;
 
         public ref CmdArg this[int index]
@@ -60,13 +60,13 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator CmdArgIndex(CmdArg[] src)
-            => new CmdArgIndex(src);
+        public static implicit operator CmdArgs(CmdArg[] src)
+            => new CmdArgs(src);
 
-        public static CmdArgIndex Empty
+        public static CmdArgs Empty
         {
             [MethodImpl(Inline)]
-            get => new CmdArgIndex(sys.empty<CmdArg>());
+            get => new CmdArgs(sys.empty<CmdArg>());
         }
     }
 }

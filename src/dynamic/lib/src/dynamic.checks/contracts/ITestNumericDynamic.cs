@@ -35,7 +35,7 @@ namespace Z0
             {
                 for(var i=0; i<RepCount; i++)
                 {
-                    (var x, var y) = Random.NextPair<T>();
+                    (var x, var y) = Random.ConstPair<T>();
                     eq(f(x,y),g(x,y));
                 }
             }
@@ -51,7 +51,7 @@ namespace Z0
             {
                 for(var i=0; i<RepCount; i++)
                 {
-                    (var x, var y, var z) = Random.NextTriple<T>();
+                    (var x, var y, var z) = Random.ConstTriple<T>();
                     eq(f(x,y,z),g(x,y,z));
                 }
             }

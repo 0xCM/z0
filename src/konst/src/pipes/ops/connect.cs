@@ -11,16 +11,12 @@ namespace Z0
 
     partial struct Pipes
     {
-        [MethodImpl(Inline)]
-        public static ValuePipeConnector<S,T> connect<S,T>(ValuePipe<S,T> src, ValuePipe<T> dst)
-            where S : unmanaged
-            where T : unmanaged
-                => new ValuePipeConnector<S,T>(src,dst);
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static PipeConnector<T> connect<T>(Pipe<T> src, Pipe<T> dst)
+            => new PipeConnector<T>(src,dst);
 
         [MethodImpl(Inline)]
         public static PipeConnector<S,T> connect<S,T>(Pipe<S,T> src, Pipe<T> dst)
-            where S : unmanaged
-            where T : unmanaged
-                => new PipeConnector<S,T>(src,dst);
+            => new PipeConnector<S,T>(src,dst);
     }
 }

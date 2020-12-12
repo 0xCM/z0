@@ -11,10 +11,9 @@ namespace Z0
 
     partial struct Sources
     {
-
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Pair<T> pair<T>(ISource source, T t = default)
+        public static Pair<T> pair<T>(ISource src)
             where T : struct
-                => Tuples.pair(one(source, t), one(source, t));
+                => Tuples.pair(one<T>(src), one<T>(src));
     }
 }

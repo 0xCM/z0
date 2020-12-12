@@ -4,16 +4,14 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
-    using System.Linq;
-
-    using static Konst;
-    using static z;
-
-    partial struct Sources
+    [Cmd(CmdName)]
+    public struct EmitCilCmd : ICmdSpec<EmitCilCmd>
     {
+        public const string CmdName = "emit-cil";
+        public FS.Files Source;
 
+        public FS.FilePath SummaryTarget;
+
+        public FS.FilePath CilTarget;
     }
 }

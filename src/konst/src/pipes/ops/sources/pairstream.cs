@@ -7,19 +7,17 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
-    using System.Linq;
 
     using static Konst;
-    using static z;
 
     partial struct Sources
     {
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static IEnumerable<Pair<T>> pairstream<T>(ISource source, T t = default)
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static IEnumerable<Pair<T>> pairstream<T>(ISource src)
             where T : struct
         {
             while(true)
-                yield return pair(source,t);
+                yield return pair<T>(src);
         }
     }
 }

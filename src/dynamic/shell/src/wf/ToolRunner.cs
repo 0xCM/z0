@@ -224,8 +224,7 @@ namespace Z0
             if(result.Succeeded)
             {
                 var value = result.Value;
-                var msg = string.Format("cmd:{0} | options:{1}", value.CmdId, Cmd.format(value.Args));
-                Wf.Status(msg);
+                Wf.Status(Cmd.format(value));
 
             }
             else

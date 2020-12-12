@@ -7,26 +7,52 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using static Konst;
+
     partial class XSource
     {
-        public static Pair<T> Pair<T>(this ISource source, T t = default)
+        public static Pair<T> Pair<T>(this ISource src)
             where T : struct
-                => Sources.pair(source,t);
+                => Sources.pair<T>(src);
 
-        public static Pairs<T> Pairs<T>(this ISource source, int count, T t = default)
+        public static Pairs<T> Pairs<T>(this ISource src, int count)
             where T : struct
-                => Sources.pairs(source,count,t);
+                => Sources.pairs<T>(src, count);
 
-        public static Pairs<T> Pairs<T>(this ISource source, Span<Pair<T>> dst)
+        public static Pairs<T> Pairs<T>(this ISource src, Span<Pair<T>> dst)
             where T : struct
-                => Sources.pairs(source, dst);
+                => Sources.pairs(src, dst);
 
-        public static Pairs<T> Pairs<T>(this ISource source, Pair<T>[] dst)
+        public static Pairs<T> Pairs<T>(this ISource src, Pair<T>[] dst)
             where T : struct
-                => Sources.pairs(source, dst);
+                => Sources.pairs(src, dst);
 
-        public static Pairs<T> Pairs<T>(this ISource source, uint count, T t = default)
+        public static Pairs<T> Pairs<T>(this ISource src, uint count)
             where T : struct
-                => Sources.pairs(source, (int)count,t);
+                => Sources.pairs<T>(src, (int)count);
+
+        /// <summary>
+        /// Yields the next source-provided pair
+        /// </summary>
+        /// <param name="src">The value source</param>
+        /// <param name="a">The first element in the pair</param>
+        /// <param name="t">A primal type representative</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]
+        public static ConstPair<T> ConstPair<T>(this ISource src, T t = default)
+            where T : struct
+                => Sources.kpair(src,t);
+
+        /// <summary>
+        /// Yields the next source-provided pair over a specified domain
+        /// </summary>
+        /// <param name="src">The value source</param>
+        /// <param name="min">The inclusive minimum value</param>
+        /// <param name="max">The exclusive maximum value</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]
+        public static ConstPair<T> ConstPair<T>(this IDomainSource src, T min, T max)
+            where T : unmanaged
+                => Sources.kpair(src, min, max);
     }
 }

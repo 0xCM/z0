@@ -16,7 +16,7 @@ namespace Z0
         {
             using var running = wf.Running();
 
-            var pipe = Pipes.create<ushort>();
+            var pipe = Pipes.pipe<ushort>();
             var count = 10;
             var input = wf.Random.Span<ushort>(count);
             for(var i=0; i<count; i++)

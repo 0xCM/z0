@@ -13,7 +13,7 @@ namespace Z0
     partial struct CmdScripts
     {
         /// <summary>
-        /// Creates a <see cref='CmdArgIndex'/> collection from an array
+        /// Creates a <see cref='CmdArgs'/> collection from an array
         /// </summary>
         /// <param name="src">The source array</param>
         [MethodImpl(Inline), Op]

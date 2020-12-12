@@ -5,9 +5,9 @@
 namespace Z0
 {
     [Cmd(CmdName)]
-    public struct EmitCliTablesCmd : ICmdSpec<EmitCliTablesCmd>
+    public struct EmitCliTableDocCmd : ICmdSpec<EmitCliTableDocCmd>
     {
-        public const string CmdName = "emit-cli-tables";
+        public const string CmdName = "emit-cli-tabledoc";
 
         public FS.FilePath Source;
 

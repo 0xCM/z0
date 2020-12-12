@@ -6,9 +6,11 @@ namespace Z0
 {
     using System;
 
-    [Cmd]
+    [Cmd(CmdName)]
     public struct EmitImageHeadersCmd : ICmdSpec<EmitImageHeadersCmd>
     {
+        public const string CmdName = "emit-image-headers";
+
         public FS.Files Source;
 
         public FS.FilePath Target;

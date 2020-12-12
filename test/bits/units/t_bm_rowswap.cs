@@ -21,7 +21,7 @@ namespace Z0
 
             for(var sample=0; sample < RepCount; sample++)
             {
-                (var i, var j) = Random.NextPair(0,n);
+                (var i, var j) = Random.ConstPair(0,n);
                 A.RowSwap(i,j);
 
                 var tmp = a[i];
@@ -44,7 +44,7 @@ namespace Z0
 
             for(var sample=0; sample < RepCount; sample++)
             {
-                (var i, var j) = Random.NextPair(0,n);
+                (var i, var j) = Random.ConstPair(0,n);
                 A.RowSwap(i,j);
 
                 var tmp = a[i];
@@ -67,7 +67,7 @@ namespace Z0
 
             for(var sample=0; sample < RepCount; sample++)
             {
-                (var i, var j) = Random.NextPair(0,n);
+                (var i, var j) = Random.ConstPair(0,n);
                 BitMatrix.rowswap(A,(uint)i,(uint)j);
 
                 var tmp = a[i];

@@ -13,13 +13,11 @@ namespace Z0
 
     public readonly struct Pipe<S,T> : IPipe<S,T>
     {
-        internal readonly ConcurrentBag<S> Buffer;
+        readonly ConcurrentBag<S> Buffer;
 
         [MethodImpl(Inline)]
         internal Pipe(ConcurrentBag<S> buffer)
-        {
-            Buffer = buffer;
-        }
+            => Buffer = buffer;
 
         [MethodImpl(Inline)]
         public void Deposit(S src)

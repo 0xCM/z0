@@ -4,9 +4,13 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    [Cmd]
-    public struct EmitCilTablesCmd : ICmdSpec<EmitCilTablesCmd>
+    [Cmd(CmdName)]
+    public struct EmitILTablesCmd : ICmdSpec<EmitILTablesCmd>
     {
+        public const string CmdName = "emit-il-tables";
 
+        public FS.FilePath Source;
+
+        public FS.FilePath Target;
     }
 }

@@ -11,16 +11,14 @@ namespace Z0
 
     using static Konst;
 
-    using B = SpanBlocks;
-
     partial class XSource
     {
-        public static IEnumerable<T> Stream<T>(this IDomainSource source, Interval<T> domain, Func<T,bool> filter = null)
+        public static IEnumerable<T> Stream<T>(this IDomainSource src, Interval<T> domain, Func<T,bool> filter = null)
             where T : unmanaged
         {
             while(true)
             {
-                var candidate = source.Next(domain);
+                var candidate = src.Next(domain);
                 if(filter != null && filter(candidate))
                     yield return candidate;
                 else
@@ -28,11 +26,10 @@ namespace Z0
             }
         }
 
-        public static IEnumerable<T> Stream<T>(this ISource source)
+        public static IEnumerable<T> Stream<T>(this ISource src)
         {
             while(true)
-                yield return source.Next<T>();
+                yield return src.Next<T>();
         }
-
     }
 }

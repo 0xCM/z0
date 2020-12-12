@@ -33,8 +33,8 @@ namespace Z0
         public static FileExtension Exe
             => FileExtension.Define("exe", "Application executable");
 
-        public static FileExtension Txt
-            => FileExtension.Define("txt", "Plaintext");
+        public static FS.FileExt Txt
+            => FS.ext("txt", "Plaintext");
 
         public static FileExtension Il
             => FileExtension.Define("il", "Microsoft intermediate language");

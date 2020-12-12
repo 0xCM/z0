@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.InteropServices;
-
     [Record]
     public struct ProcessModuleRecord : IRecord<ProcessModuleRecord>
     {

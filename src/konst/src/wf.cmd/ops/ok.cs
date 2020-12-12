@@ -17,6 +17,11 @@ namespace Z0
                 => new CmdResult(spec.CmdId, true);
 
         [MethodImpl(Inline)]
+        public static CmdResult ok<T>(T spec, string message)
+            where T : ICmdSpec
+                => new CmdResult(spec.CmdId, true, message);
+
+        [MethodImpl(Inline)]
         public static CmdResult ok<T>(T spec, byte[] payload)
             where T : ICmdSpec
                 => new CmdResult(spec.CmdId, true, payload);

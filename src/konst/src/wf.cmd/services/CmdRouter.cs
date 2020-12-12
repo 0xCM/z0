@@ -15,6 +15,8 @@ namespace Z0
     {
         IWfShell Wf;
 
+        WfHost Host;
+
         ConcurrentDictionary<CmdId,ICmdReactor> Nodes;
 
         public IndexedView<CmdId> SupportedCommands
@@ -33,19 +35,20 @@ namespace Z0
 
         public CmdRouter()
         {
-
+            Host = WfShell.host(GetType());
         }
 
         public void Init(IWfShell wf)
         {
-            Wf = wf;
-            Nodes = new ConcurrentDictionary<CmdId, ICmdReactor>();
+
+            Wf = wf.WithHost(Host);
+            Nodes = new ConcurrentDictionary<CmdId,ICmdReactor>();
         }
 
         public CmdRouter(IWfShell wf)
         {
             Wf =wf;
-            Nodes = new ConcurrentDictionary<CmdId, ICmdReactor>();
+            Nodes = new ConcurrentDictionary<CmdId,ICmdReactor>();
         }
 
         public CmdResult<T> Dispatch<S,T>(S src)
@@ -55,7 +58,15 @@ namespace Z0
             try
             {
                 if(Nodes.TryGetValue(src.CmdId, out var node) && node is ICmdReactor<S,T> worker)
-                    return worker.Invoke(src);
+                {
+                    var result = worker.Invoke(src);
+                    if(result.Succeeded)
+                        Wf.Error(result);
+                    else
+                        Wf.Status(result);
+
+                    return result;
+                }
                 else
                 {
                     Wf.Error(WfEvents.missing(src.CmdId));
@@ -69,33 +80,19 @@ namespace Z0
             }
         }
 
-        public ReadOnlySpan<CmdResult<T>> Dispatch<S,T>(ReadOnlySpan<S> src, bool pll)
-            where S : struct, ICmdSpec<S>
-            where T : struct
-        {
-            var count = src.Length;
-            var dst = span<CmdResult<T>>(count);
-            if(pll)
-            {
-                @throw(missing());
-            }
-            else
-            {
-                for(var i=0; i<count; i++)
-                    seek(dst,i) = Dispatch<S,T>(skip(src,i));
-            }
-            return dst;
-        }
-
         public CmdResult Dispatch(ICmdSpec cmd)
         {
-            using var dispatch = Wf.Running(Msg.DispatchingCommand.Format(cmd.CmdId));
+            using var dispatch = Wf.Running(Msg.DispatchingCommand.Format(cmd.Format()));
             try
             {
                 if(Nodes.TryGetValue(cmd.CmdId, out var node))
                 {
+                    Wf.Status($"Dispatching {cmd.CmdId} to reactor {node.GetType().Name}");
                     var result = node.Invoke(cmd);
-                    Wf.Status(result.Format());
+                    if(result.Succeeded)
+                        Wf.Error(result);
+                    else
+                        Wf.Status(result);
                     return result;
                 }
                 else

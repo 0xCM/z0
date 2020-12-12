@@ -6,69 +6,42 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
-    using System.Linq;
 
     using static Konst;
-    using static z;
 
     partial struct Sources
     {
-        /// <summary>
-        /// Produces the next value from a specified <see cref='IDomainSource'/> source subject to specified domain constraints
-        /// </summary>
-        /// <param name="source">The value source</param>
-        /// <param name="max">The maximum value to produce</param>
-        /// <typeparam name="T">The value type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static T next<T>(IDomainSource source, T max)
-            where T : unmanaged
-                => source.Next<T>(max);
+        public static T one<T>(ISource src, T t = default)
+            where T : struct
+                => src.Next<T>();
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref readonly T one<T>(IRefSource<T> src)
+            where T : struct
+                => ref src.Next();
 
         /// <summary>
         /// Produces the next value from a specified <see cref='IDomainSource'/> source subject to specified domain constraints
         /// </summary>
-        /// <param name="source">The value source</param>
+        /// <param name="src">The data source</param>
+        /// <param name="max">The maximum value to produce</param>
+        /// <typeparam name="T">The value type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static T next<T>(IDomainSource src, T max)
+            where T : unmanaged
+                => src.Next<T>(max);
+
+        /// <summary>
+        /// Produces the next value from a specified <see cref='IDomainSource'/> source subject to specified domain constraints
+        /// </summary>
+        /// <param name="src">The value source</param>
         /// <param name="min">The minimum value to produce</param>
         /// <param name="max">The maximum value to produce</param>
         /// <typeparam name="T">The value type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static T next<T>(IDomainSource source, T min, T max)
+        public static T next<T>(IDomainSource src, T min, T max)
             where T : unmanaged
-                => source.Next<T>(min, max);
-
-
-        [MethodImpl(Inline), Closures(Closure)]
-        public static bool next<T>(in ValuePipe<T> pipe, out T dst)
-            where T : struct
-        {
-            if(pipe.Buffer.TryTake(out dst))
-                return true;
-            dst = default;
-            return false;
-        }
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static bool next<T>(in Pipe<T> pipe, out T dst)
-        {
-            if(pipe.Buffer.TryTake(out dst))
-                return true;
-            dst = default;
-            return false;
-        }
-
-        [MethodImpl(Inline)]
-        public static bool next<S,T>(in ValuePipe<S,T> pipe, out T dst)
-            where S : struct
-            where T : struct
-        {
-            if(pipe.Buffer.TryTake(out var src))
-            {
-                dst = z.@as<S,T>(src);
-                return true;
-            }
-            dst = default;
-            return false;
-        }
+                => src.Next<T>(min, max);
     }
 }

@@ -12,7 +12,6 @@ namespace Z0
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     using static Konst;
-    using static z;
 
     [ApiHost, Free]
     public unsafe partial class CliMemoryMap : IDisposable

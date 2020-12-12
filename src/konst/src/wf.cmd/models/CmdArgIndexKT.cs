@@ -47,7 +47,7 @@ namespace Z0
             => new CmdArgIndex<K,T>(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator CmdArgIndex(CmdArgIndex<K,T> src)
-            => new CmdArgIndex(src.Storage.Select(x => (CmdArg)x));
+        public static implicit operator CmdArgs(CmdArgIndex<K,T> src)
+            => new CmdArgs(src.Storage.Select(x => (CmdArg)x));
     }
 }

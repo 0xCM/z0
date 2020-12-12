@@ -9,7 +9,6 @@ namespace Z0
     using System.Reflection.Metadata;
 
     using static Konst;
-    using static z;
 
     partial class CliMemoryMap
     {

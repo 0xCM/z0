@@ -13,9 +13,9 @@ namespace Z0
 
     using static Konst;
     using static z;
+
     partial struct Cil
     {
-
         [ApiHost(ApiNames.CilTableBuilder, true)]
         public ref partial struct RecordSpecBuilder
         {

@@ -15,7 +15,7 @@ namespace Z0
         /// <summary>
         /// Shuffles span content in-place
         /// </summary>
-        /// <param name="random">The random source</param>
+        /// <param name="random">The data source</param>
         /// <param name="src">The input/output span</param>
         /// <typeparam name="T">The primal type</typeparam>
         public static Span<T> Shuffle<T>(this IDomainSource random, Span<T> src)
@@ -28,7 +28,7 @@ namespace Z0
         /// <summary>
         /// Shuffles array content in-place
         /// </summary>
-        /// <param name="random">The random source</param>
+        /// <param name="random">The data source</param>
         /// <param name="src">The input/output array</param>
         /// <typeparam name="T">The primal type</typeparam>
         public static T[] Shuffle<T>(this IDomainSource random, T[] src)
@@ -41,7 +41,7 @@ namespace Z0
         /// <summary>
         /// Replicates and shuffles a source span
         /// </summary>
-        /// <param name="random">The random source</param>
+        /// <param name="random">The data source</param>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]

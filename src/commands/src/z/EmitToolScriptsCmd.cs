@@ -9,6 +9,6 @@ namespace Z0
     {
         public ToolId Tool;
 
-        public CmdArgIndex Args {get;}
+        public CmdArgs Args {get;}
     }
 }

@@ -7,20 +7,18 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static z;
     using static Konst;
 
     using api = Pipes;
 
-    public readonly struct ValuePipeConnector<T> : IValuePipeConnector<T,T>
-        where T : struct
+    public readonly struct PipeConnector<T> : IPipeConnector<T,T>
     {
-        internal readonly ValuePipe<T> Source;
+        internal readonly Pipe<T> Source;
 
-        internal readonly ValuePipe<T> Target;
+        internal readonly Pipe<T> Target;
 
         [MethodImpl(Inline)]
-        internal ValuePipeConnector(ValuePipe<T> src, ValuePipe<T> dst)
+        internal PipeConnector(Pipe<T> src, Pipe<T> dst)
         {
             Source = src;
             Target = dst;

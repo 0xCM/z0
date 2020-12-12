@@ -6,29 +6,27 @@ namespace Z0
 {
     using System;
     using System.Linq;
-    using System.Collections.Generic;
 
     using static z;
 
     public static class PolyFill
     {
-
         /// <summary>
         /// Fills a caller-allocated target with a specified number of values from a random source
         /// </summary>
-        /// <param name="random">The random source</param>
+        /// <param name="random">The data source</param>
         /// <param name="domain">The domain of the random variable</param>
         /// <param name="count">The number of values to send to the target</param>
         /// <param name="dst">A reference to the target location</param>
         /// <param name="filter">If specified, values that do not satisfy the predicate are excluded from the stream</param>
         /// <typeparam name="T">The element type</typeparam>
-        public static void Fill<T>(this IDomainSource source, Interval<T> domain, int count, ref T dst, Func<T,bool> filter = null)
+        public static void Fill<T>(this IDomainSource src, Interval<T> domain, int count, ref T dst, Func<T,bool> filter = null)
             where T : unmanaged
         {
             var counter = 0;
             while(counter < count)
             {
-                var candidate = source.Next(domain);
+                var candidate = src.Next(domain);
                 if(filter != null)
                 {
                     if(filter(candidate))
@@ -48,7 +46,7 @@ namespace Z0
         /// <summary>
         /// Fills a caller-allocated target with a specified number of values from a random source
         /// </summary>
-        /// <param name="random">The random source</param>
+        /// <param name="random">The data source</param>
         /// <param name="domain">The domain of the random variable</param>
         /// <param name="count">The number of values to send to the target</param>
         /// <param name="dst">A reference to the target location</param>
@@ -65,7 +63,7 @@ namespace Z0
         /// <summary>
         /// Fills a caller-allocated buffer with random values
         /// </summary>
-        /// <param name="source">The random source</param>
+        /// <param name="source">The data source</param>
         /// <param name="dst">The target span</param>
         /// <typeparam name="T">The cell type</typeparam>
         public static void Fill<T>(this IDomainSource source, Span<T> dst)
@@ -75,7 +73,7 @@ namespace Z0
         /// <summary>
         /// Fills a caller-allocated span with random values
         /// </summary>
-        /// <param name="source">The random source</param>
+        /// <param name="source">The data source</param>
         /// <param name="dst">The target span</param>
         /// <param name="min">The inclusive lower bound</param>
         /// <param name="max">The exclusive upper bound</param>
@@ -90,7 +88,7 @@ namespace Z0
         /// <summary>
         /// Fills a caller-allocated span with random values
         /// </summary>
-        /// <param name="random">The random source</param>
+        /// <param name="random">The data source</param>
         /// <param name="dst">The target span</param>
         /// <param name="min">The inclusive lower bound</param>
         /// <param name="max">The exclusive upper bound</param>
@@ -105,7 +103,7 @@ namespace Z0
         /// <summary>
         /// Fills a caller-allocated target with a specified number of values from the source
         /// </summary>
-        /// <param name="source">The random source</param>
+        /// <param name="source">The data source</param>
         /// <param name="count">The number of values to send to the target</param>
         /// <param name="dst">A reference to the target location</param>
         /// <typeparam name="T">The element type</typeparam>
@@ -121,8 +119,8 @@ namespace Z0
         /// <summary>
         /// Fills a caller-supplied target with random bits
         /// </summary>
-        /// <param name="random">The random source</param>
-        public static void Fill(this IDomainSource random, Span<bit> dst)
+        /// <param name="source">The data source</param>
+        public static void Fill(this IDomainSource source, Span<bit> dst)
         {
             const int w = 64;
             var pos = -1;
@@ -130,7 +128,7 @@ namespace Z0
 
             while(pos <= last)
             {
-                var data = random.Next<ulong>();
+                var data = source.Next<ulong>();
 
                 var i = -1;
                 while(++pos <= last && ++i < w)
@@ -141,143 +139,143 @@ namespace Z0
         /// <summary>
         /// Fills caller-allocated block storage with random values
         /// </summary>
-        /// <param name="random">The random source</param>
+        /// <param name="source">The data source</param>
         /// <param name="dst">The target block</param>
         /// <typeparam name="T">The cell type</typeparam>
-        public static void Fill<T>(this ISource random, in SpanBlock8<T> dst)
+        public static void Fill<T>(this ISource source, in SpanBlock8<T> dst)
             where T : unmanaged
-                => random.Fill(dst.Storage);
+                => source.Fill(dst.Storage);
 
         /// <summary>
         /// Fills caller-allocated block storage with random values
         /// </summary>
-        /// <param name="random">The random source</param>
+        /// <param name="source">The data source</param>
         /// <param name="dst">The target block</param>
         /// <typeparam name="T">The cell type</typeparam>
-        public static void Fill<T>(this ISource random, in SpanBlock16<T> dst)
+        public static void Fill<T>(this ISource source, in SpanBlock16<T> dst)
             where T : unmanaged
-                => random.Fill(dst.Storage);
+                => source.Fill(dst.Storage);
 
         /// <summary>
         /// Fills caller-allocated block storage with random values
         /// </summary>
-        /// <param name="random">The random source</param>
+        /// <param name="source">The data source</param>
         /// <param name="dst">The target block</param>
         /// <typeparam name="T">The cell type</typeparam>
-        public static void Fill<T>(this ISource random, in SpanBlock32<T> dst)
+        public static void Fill<T>(this ISource source, in SpanBlock32<T> dst)
             where T : unmanaged
-                => random.Fill(dst.Storage);
+                => source.Fill(dst.Storage);
 
         /// <summary>
         /// Fills caller-allocated block storage with random values
         /// </summary>
-        /// <param name="random">The random source</param>
+        /// <param name="source">The data source</param>
         /// <param name="dst">The target block</param>
         /// <typeparam name="T">The cell type</typeparam>
-        public static void Fill<T>(this ISource random, in SpanBlock64<T> dst)
+        public static void Fill<T>(this ISource source, in SpanBlock64<T> dst)
             where T : unmanaged
-                => random.Fill(dst.Storage);
+                => source.Fill(dst.Storage);
 
         /// <summary>
         /// Fills caller-allocated block storage with random values
         /// </summary>
-        /// <param name="random">The random source</param>
+        /// <param name="source">The data source</param>
         /// <param name="dst">The target block</param>
         /// <typeparam name="T">The cell type</typeparam>
-        public static void Fill<T>(this ISource random, in SpanBlock128<T> dst)
+        public static void Fill<T>(this ISource source, in SpanBlock128<T> dst)
             where T : unmanaged
-                => random.Fill(dst.Storage);
+                => source.Fill(dst.Storage);
 
         /// <summary>
         /// Fills caller-allocated block storage with random values
         /// </summary>
-        /// <param name="random">The random source</param>
+        /// <param name="src">The data source</param>
         /// <param name="dst">The target block</param>
         /// <typeparam name="T">The cell type</typeparam>
-        public static void Fill<T>(this ISource random, in SpanBlock256<T> dst)
+        public static void Fill<T>(this ISource src, in SpanBlock256<T> dst)
             where T : unmanaged
-                => random.Fill(dst.Storage);
+                => src.Fill(dst.Storage);
 
         /// <summary>
         /// Fills caller-allocated block storage with random values
         /// </summary>
-        /// <param name="random">The random source</param>
+        /// <param name="src">The data source</param>
         /// <param name="dst">The target block</param>
         /// <typeparam name="T">The cell type</typeparam>
-        public static void Fill<T>(this ISource random, in SpanBlock512<T> dst)
+        public static void Fill<T>(this ISource src, in SpanBlock512<T> dst)
             where T : unmanaged
-                => random.Fill(dst.Storage);
+                => src.Fill(dst.Storage);
 
         /// <summary>
         /// Fills caller-allocated block storage with random values
         /// </summary>
-        /// <param name="random">The random source</param>
+        /// <param name="src">The data source</param>
         /// <param name="dst">The target block</param>
         /// <param name="min">The inclusive lower bound</param>
         /// <param name="max">The exclusive upper bound</param>
         /// <typeparam name="T">The cell type</typeparam>
-        public static void Fill<T>(this IDomainSource random, T min, T max, in SpanBlock16<T> dst)
+        public static void Fill<T>(this IDomainSource src, T min, T max, in SpanBlock16<T> dst)
             where T : unmanaged
-                => random.Fill(min,max,dst.Storage);
+                => src.Fill(min,max,dst.Storage);
 
         /// <summary>
         /// Fills caller-allocated block storage with random values
         /// </summary>
-        /// <param name="random">The random source</param>
+        /// <param name="src">The data source</param>
         /// <param name="dst">The target block</param>
         /// <param name="min">The inclusive lower bound</param>
         /// <param name="max">The exclusive upper bound</param>
         /// <typeparam name="T">The cell type</typeparam>
-        public static void Fill<T>(this IDomainSource random, T min, T max, in SpanBlock32<T> dst)
+        public static void Fill<T>(this IDomainSource src, T min, T max, in SpanBlock32<T> dst)
             where T : unmanaged
-                => random.Fill(min, max, dst.Storage);
+                => src.Fill(min, max, dst.Storage);
 
         /// <summary>
         /// Fills caller-allocated block storage with random values
         /// </summary>
-        /// <param name="random">The random source</param>
+        /// <param name="src">The data source</param>
         /// <param name="dst">The target block</param>
         /// <param name="min">The inclusive lower bound</param>
         /// <param name="max">The exclusive upper bound</param>
         /// <typeparam name="T">The cell type</typeparam>
-        public static void Fill<T>(this IDomainSource random, T min, T max, in SpanBlock64<T> dst)
+        public static void Fill<T>(this IDomainSource src, T min, T max, in SpanBlock64<T> dst)
             where T : unmanaged
-                => random.Fill(min,max,dst.Storage);
+                => src.Fill(min,max,dst.Storage);
 
         /// <summary>
         /// Fills caller-allocated block storage with random values
         /// </summary>
-        /// <param name="random">The random source</param>
+        /// <param name="src">The data source</param>
         /// <param name="dst">The target block</param>
         /// <param name="min">The inclusive lower bound</param>
         /// <param name="max">The exclusive upper bound</param>
         /// <typeparam name="T">The cell type</typeparam>
-        public static void Fill<T>(this IDomainSource random, T min, T max, in SpanBlock128<T> dst)
+        public static void Fill<T>(this IDomainSource src, T min, T max, in SpanBlock128<T> dst)
             where T : unmanaged
-                => random.Fill(min,max,dst.Storage);
+                => src.Fill(min,max,dst.Storage);
 
         /// <summary>
         /// Fills caller-allocated block storage with random values
         /// </summary>
-        /// <param name="random">The random source</param>
+        /// <param name="src">The data source</param>
         /// <param name="dst">The target block</param>
         /// <param name="min">The inclusive lower bound</param>
         /// <param name="max">The exclusive upper bound</param>
         /// <typeparam name="T">The cell type</typeparam>
-        public static void Fill<T>(this IDomainSource random, T min, T max, in SpanBlock256<T> dst)
+        public static void Fill<T>(this IDomainSource src, T min, T max, in SpanBlock256<T> dst)
             where T : unmanaged
-                => random.Fill(min,max,dst.Storage);
+                => src.Fill(min,max,dst.Storage);
 
         /// <summary>
         /// Fills caller-allocated block storage with random values
         /// </summary>
-        /// <param name="random">The random source</param>
+        /// <param name="src">The data source</param>
         /// <param name="dst">The target block</param>
         /// <param name="min">The inclusive lower bound</param>
         /// <param name="max">The exclusive upper bound</param>
         /// <typeparam name="T">The cell type</typeparam>
-        public static void Fill<T>(this IDomainSource random,T min, T max, in SpanBlock512<T> dst)
+        public static void Fill<T>(this IDomainSource src,T min, T max, in SpanBlock512<T> dst)
             where T : unmanaged
-                => random.Fill(min,max,dst.Storage);
+                => src.Fill(min,max,dst.Storage);
     }
 }

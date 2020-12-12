@@ -4,15 +4,13 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    [Cmd(Name)]
+    [Cmd(CmdName)]
     public struct LocateImagesCmd : ICmdSpec<LocateImagesCmd,FS.FilePath>
     {
-        public const string Name = "locate-images";
+        public const string CmdName = "locate-images";
 
-        [CmdParam("procid")]
         public int ProcessId;
 
-        [CmdParam("out")]
         public FS.FilePath Target;
     }
 }

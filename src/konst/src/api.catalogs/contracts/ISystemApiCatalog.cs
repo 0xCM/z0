@@ -28,6 +28,8 @@ namespace Z0
 
         Option<IApiHost> FindHost(ApiHostUri uri);
 
+        Option<Assembly> FindComponent(PartId id);
+
         IEnumerable<IApiPartCatalog> PartCatalogs(params PartId[] parts);
 
         IEnumerable<IApiHost> PartHosts(params PartId[] parts);

@@ -30,4 +30,4 @@ echo BuildCmdLine:%BuildCmdLine% >> %CmdLog%
 call %BuildCmdLine%
 
 
-::call .cmd\deploy.cmd
+call .cmd\deploy.cmd
