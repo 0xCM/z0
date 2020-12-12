@@ -9,7 +9,7 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     [ApiType(ApiNames.ClrStruct, true)]
     public readonly struct ClrStruct

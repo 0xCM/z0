@@ -22,6 +22,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static uint u32(ReadOnlySpan<byte> src, int offset = 0)
             => cell<uint>(src,offset);
-
     }
 }

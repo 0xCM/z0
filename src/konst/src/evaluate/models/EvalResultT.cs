@@ -9,11 +9,21 @@ namespace Z0
 
     using static Konst;
 
+    /// <summary>
+    /// Captures an evaluation outcome
+    /// </summary>
     public readonly struct EvalResult<T>
     {
-        public readonly EvalResult Outcome;
+        public EvalResult Outcome {get;}
 
-        public readonly T Transition;
+        public T Transition {get;}
+
+        [MethodImpl(Inline)]
+        public EvalResult(EvalResult outcome, T transition)
+        {
+            Transition = transition;
+            Outcome = outcome;
+        }
 
         [MethodImpl(Inline)]
         public static implicit operator EvalResult(EvalResult<T> src)
@@ -22,12 +32,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator EvalResult<T>((EvalResult outcome, T transition) src)
             => new EvalResult<T>(src.outcome, src.transition);
-
-        [MethodImpl(Inline)]
-        public EvalResult(EvalResult outcome, T transition)
-        {
-            Transition = transition;
-            Outcome = outcome;
-        }
     }
 }

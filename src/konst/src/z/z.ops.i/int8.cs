@@ -26,7 +26,6 @@ namespace Z0
         public static ref sbyte int8<T>(ref T src)
             => ref As<T,sbyte>(ref src);
 
-
         [MethodImpl(Inline), Op]
         public static sbyte int8(sbyte src)
             => (sbyte)src;

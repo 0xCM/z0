@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-
     partial class XSource
     {
         public static Pair<T> Pair<T>(this ISource source, T t = default)

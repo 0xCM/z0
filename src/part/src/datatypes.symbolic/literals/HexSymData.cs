@@ -17,6 +17,7 @@ namespace Z0
     /// <summary>
     /// Defines codes and symbol datasets for hex digits
     /// </summary>
+    [ApiType]
     public readonly struct HexSymData
     {
         /// <summary>

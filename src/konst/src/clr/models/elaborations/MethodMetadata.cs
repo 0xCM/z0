@@ -25,25 +25,16 @@ namespace Z0
 
         public TypeParameters TypeParams;
 
-        public MethodMetadata(
-            int MethodId,
-            string DefiningAssembly,
-            string DefiningModule,
-            TypeSig DeclaringType,
-            string MethodName,
-            TypeSig ReturnType,
-            MethodParameters Args,
-            TypeParameters TypeParams
-            )
+        public MethodMetadata(int id, string assembly, string module, TypeSig type, string name, TypeSig tReturn, MethodParameters args, TypeParameters tParams)
         {
-            this.MethodId = MethodId;
-            this.DefiningAssembly = DefiningAssembly;
-            this.DefiningModule = DefiningModule;
-            this.DeclaringType = DeclaringType;
-            this.MethodName = MethodName;
-            this.ReturnType = ReturnType;
-            this.ValueParams = Args;
-            this.TypeParams = TypeParams;
+            MethodId = id;
+            DefiningAssembly = assembly;
+            DefiningModule = module;
+            DeclaringType = type;
+            MethodName = name;
+            ReturnType = tReturn;
+            ValueParams = args;
+            TypeParams = tParams;
         }
 
         public string Format()

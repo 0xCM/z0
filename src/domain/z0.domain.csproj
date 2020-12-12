@@ -8,6 +8,7 @@
     <ProjectReference Include="$(Konst)" />
     <ProjectReference Include="$(Records)" />
     <ProjectReference Include="$(Commands)" />
+    <ProjectReference Include="$(Cli)" />
 
     <ProjectReference Include="$(math)" />
     <ProjectReference Include="$(gmath)" />

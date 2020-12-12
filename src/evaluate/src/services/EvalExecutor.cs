@@ -13,14 +13,14 @@ namespace Z0
 
     class EvalExecutor : IEvalExecutor
     {
-        readonly IPolyrand Random;
+        readonly IPolyStream Random;
 
         readonly int RepCount;
 
         ExecutorContext Context;
 
         [MethodImpl(Inline)]
-        internal EvalExecutor(IPolyrand random)
+        internal EvalExecutor(IPolyStream random)
         {
             RepCount = 128;
             Random = random;

@@ -17,6 +17,7 @@ namespace Z0
 
         string Name
             => Class.ToString().ToLower();
+
     }
 
     /// <summary>

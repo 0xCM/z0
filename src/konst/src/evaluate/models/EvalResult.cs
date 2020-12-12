@@ -15,23 +15,23 @@ namespace Z0
     /// <summary>
     /// Describes the outcome of a test case
     /// </summary>
-    public readonly struct EvalResult : ITabular<F,R>
+    public struct EvalResult : ITabular<F,R>
     {
         public EvalAspectKey FieldKind => EvalAspectKey.Sequence;
 
-        public readonly int Sequence;
+        public int Sequence;
 
-        public readonly string CaseName;
+        public string CaseName;
 
-        public readonly EvalStatusKind Status;
+        public EvalStatusKind Status;
 
-        public readonly Duration Duration;
+        public Duration Duration;
 
-        public readonly DateTime Timestamp;
+        public DateTime Timestamp;
 
-        public readonly object Message;
+        public string Message;
 
-        public EvalResult(int seq, string name, bool succeeded, Duration duration, object message)
+        public EvalResult(int seq, string name, bool succeeded, Duration duration, string message)
         {
             Sequence = seq;
             CaseName = name;

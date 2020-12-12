@@ -15,9 +15,10 @@ namespace Z0
         /// Tests whether an array is empty
         /// </summary>
         /// <param name="src">The array to test</param>
-        /// <typeparam name="T">The element type</typeparam>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static bool isEmpty<T>(T[] src)
             => src == null || src.Length == 0;
+
     }
 }

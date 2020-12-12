@@ -8,7 +8,7 @@ namespace Z0
     using System.Reflection;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     [ApiType(ApiNames.ClrProperty, true)]
     public readonly struct ClrProperty : IClrRuntimeMember<ClrProperty, PropertyInfo>

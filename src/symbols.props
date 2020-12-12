@@ -12,6 +12,7 @@
 
   <PropertyGroup>
     <Api>$(Src)api/z0.api.csproj</Api>
+    <Apps>$(Src)apps/z0.apps.csproj</Apps>
     <Asm>$(Src)asm/z0.asm.csproj</Asm>
 
     <Bits>$(Src)bits/z0.bits.csproj</Bits>
@@ -23,65 +24,52 @@
     <BitGrids>$(Src)bitgrids/z0.bitgrids.csproj</BitGrids>
     <BitSpans>$(Src)bitspans/z0.bitspans.csproj</BitSpans>
     <BitMatrix>$(Src)bitmatrix/z0.bitmatrix.csproj</BitMatrix>
+    <BitSvc>$(Src)bitsvc/z0.bitsvc.csproj</BitSvc>
     <Blocked>$(Src)blocked/z0.blocked.csproj</Blocked>
 
+    <Capture>$(Src)capture/z0.capture.csproj</Capture>
     <Check>$(Src)check/z0.check.csproj</Check>
+    <Circuits>$(Src)circuits/z0.circuits.csproj</Circuits>
+    <Cli>$(Src)cli/z0.cli.csproj</Cli>
     <Commands>$(Src)commands/z0.commands.csproj</Commands>
+    <Checks>$(Src)checks/z0.checks.csproj</Checks>
+    <Canonical>$(Src)canonical/z0.canonical.csproj</Canonical>
 
     <Domain>$(Src)domain/z0.domain.csproj</Domain>
+    <Dynamic>$(Src)dynamic/lib/z0.dynamic.lib.csproj</Dynamic>
+    <DVec>$(Src)dvec/z0.dvec.csproj</DVec>
 
     <Evaluate>$(Src)evaluate/z0.evaluate.csproj</Evaluate>
     <External>$(Src)external/z0.external.csproj</External>
     <Extract>$(Src)extract/z0.extract.csproj</Extract>
 
-    <Records>$(Src)records/z0.records.csproj</Records>
-
     <Fsm>$(Src)fsm/z0.fsm.csproj</Fsm>
+    <FVec>$(Src)fvec/z0.fvec.csproj</FVec>
+
+    <GMath>$(Src)gmath/z0.gmath.csproj</GMath>
+    <GVec>$(Src)gvec/z0.gvec.csproj</GVec>
 
     <Lang>$(Src)lang/z0.lang.csproj</Lang>
-
-    <Merge>$(Src)merge/z0.merge.csproj</Merge>
+    <Logix>$(Src)logix/z0.logix.csproj</Logix>
 
     <Math>$(Src)math/z0.math.csproj</Math>
-    <GMath>$(Src)gmath/z0.gmath.csproj</GMath>
-    <Polyrand>$(Src)polyrand/z0.polyrand.csproj</Polyrand>
-    <Blocks>$(Src)blocks/z0.blocks.csproj</Blocks>
-    <Apps>$(Src)apps/z0.apps.csproj</Apps>
-    <Datasets>$(Src)datasets/z0.datasets.csproj</Datasets>
-    <Identify>$(Src)identify/z0.identify.csproj</Identify>
-    <Archives>$(Src)archives/z0.archives.csproj</Archives>
-    <MetaReader>$(Src)metareader/z0.metareader.csproj</MetaReader>
-    <LSquare>$(Src)lsquare/z0.lsquare.csproj</LSquare>
-    <Identity>$(Src)identity/z0.identity.csproj</Identity>
-
-    <Dynamic>$(Src)dynamic/lib/z0.dynamic.lib.csproj</Dynamic>
+    <MathSvc>$(Src)mathsvc/z0.mathsvc.csproj</MathSvc>
+    <Matrix>$(Src)matrix/z0.matrix.csproj</Matrix>
     <Machine>$(Src)machine/z0.machine.csproj</Machine>
+    <Merge>$(Src)merge/z0.merge.csproj</Merge>
 
-    <ZXed>$(Src)zxed/z0.zxed.csproj</ZXed>
-
-    <VRoot>$(Src)vroot/z0.vroot.csproj</VRoot>
-    <Capture>$(Src)capture/z0.capture.csproj</Capture>
     <Nats>$(Src)nats/z0.nats.csproj</Nats>
-    <Validity>$(Src)validity/z0.validity.csproj</Validity>
-    <Vectors>$(Src)vectors/z0.vectors.csproj</Vectors>
-    <FVec>$(Src)fvec/z0.fvec.csproj</FVec>
-    <DVec>$(Src)dvec/z0.dvec.csproj</DVec>
-    <GVec>$(Src)gvec/z0.gvec.csproj</GVec>
-    <Circuits>$(Src)circuits/z0.circuits.csproj</Circuits>
 
-    <Text>$(Src)text/z0.text.csproj</Text>
+    <Polyrand>$(Src)polyrand/z0.polyrand.csproj</Polyrand>
+
+    <Records>$(Src)records/z0.records.csproj</Records>
+
+    <Stats>$(Src)stats/z0.stats.csproj</Stats>
+
     <Tools>$(Src)tools/z0.tools.csproj</Tools>
 
+    <Validity>$(Src)validity/z0.validity.csproj</Validity>
     <VSvc>$(Src)vsvc/z0.vsvc.csproj</VSvc>
-    <MathSvc>$(Src)mathsvc/z0.mathsvc.csproj</MathSvc>
-    <BitSvc>$(Src)bitsvc/z0.bitsvc.csproj</BitSvc>
-    <Checks>$(Src)checks/z0.checks.csproj</Checks>
-
-    <Canonical>$(Src)canonical/z0.canonical.csproj</Canonical>
-    <Stats>$(Src)stats/z0.stats.csproj</Stats>
-    <Logix>$(Src)logix/z0.logix.csproj</Logix>
-    <Matrix>$(Src)matrix/z0.matrix.csproj</Matrix>
-    <Machines>$(Src)machines/z0.machines.csproj</Machines>
 
     <Xed>$(Src)xed/z0.xed.csproj</Xed>
   </PropertyGroup>

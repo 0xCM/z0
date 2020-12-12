@@ -6,8 +6,6 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Konst)" />
-    <ProjectReference Include="$(Unsigned)" />
-
   </ItemGroup>
 
 </Project>

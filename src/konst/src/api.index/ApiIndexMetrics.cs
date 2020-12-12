@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Linq;
 
-    using static Konst;
 
     /// <summary>
     /// Collects statistics of encoded data known to a <see cref='ApiCodeBlockIndex'/>

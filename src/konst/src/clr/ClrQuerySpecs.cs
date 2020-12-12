@@ -7,7 +7,6 @@ namespace Z0
     using System;
 
     using Q = ClrQuerySpec;
-    using B = System.Reflection.BindingFlags;
 
     public readonly struct ClrQuerySpecs
     {

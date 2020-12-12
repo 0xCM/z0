@@ -10,7 +10,7 @@ namespace Z0
     using System.Reflection;
     using System.Linq;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Represents a parametrically-identified clr enum

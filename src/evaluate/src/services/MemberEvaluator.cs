@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
     using static BufferSeqId;
 
-    public readonly ref struct MemberEvaluator
+    public readonly struct MemberEvaluator
     {
         readonly BufferTokens Tokens;
 
@@ -54,7 +54,7 @@ namespace Z0
         /// <param name="api">The api member</param>
         /// <param name="src">The source pairs over which to evaluate the operator</param>
         /// <typeparam name="T">The operand type</typeparam>
-        public Triples<F> EvalFixed<F>(in ApiMemberCode api, BinaryOpClass op, in Pairs<F> src)
+        public Triples<F> EvalCellular<F>(in ApiMemberCode api, BinaryOpClass op, in Pairs<F> src)
             where F : unmanaged, IDataCell
         {
             var count = src.PointCount;

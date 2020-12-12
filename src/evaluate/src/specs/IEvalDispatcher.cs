@@ -6,12 +6,12 @@ namespace Z0
 {
     public interface IEvalDispatcher
     {
-        Bit32 EvalFixedOperators(BufferTokens buffers, ApiMemberCode[] api);
+        bit EvalCellOperators(BufferTokens buffers, ApiMemberCode[] api);
 
         void Dispatch(BufferTokens buffers, in ApiMemberCode api, BinaryOpClass k);
 
         void Dispatch(BufferTokens buffers, in ApiMemberCode api, UnaryOpClass k);
 
-        Bit32 EvalFixedOperator(BufferTokens buffers, in ApiMemberCode api);
+        bit EvalCellOperator(BufferTokens buffers, in ApiMemberCode api);
     }
 }

@@ -44,7 +44,7 @@ namespace Z0
         public static ref MemorySlot<I> retreat<I>(ref MemorySlot<I> slot)
             where I : unmanaged
         {
-            subtract(slot.Index, 1);
+            memory.sub(slot.Index, 1);
             return ref slot;
         }
 

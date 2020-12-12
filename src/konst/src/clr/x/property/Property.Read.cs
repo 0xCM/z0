@@ -8,7 +8,6 @@ namespace Z0
     using System;
     using System.Reflection;
 
-    using static Konst;
     using static Option;
 
     partial class XClrQuery

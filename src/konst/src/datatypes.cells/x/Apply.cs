@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="random">The random source</param>
         /// <typeparam name="F">The fixed type</typeparam>
-        public static IEnumerable<F> CellStream<F>(this IPolyrand random)
+        public static IEnumerable<F> CellStream<F>(this ISource random)
             where F: unmanaged, IDataCell
                 => CellSource.stream(create<F>(random));
     }

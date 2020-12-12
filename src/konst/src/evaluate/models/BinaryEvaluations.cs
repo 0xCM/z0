@@ -16,7 +16,7 @@ namespace Z0
     public readonly ref struct BinaryEvaluations<T>
         where T : unmanaged
     {
-        public readonly Pairs<T> Source;
+        public Pairs<T> Source {get;}
 
         public readonly PairEvalResults<T> Target;
 

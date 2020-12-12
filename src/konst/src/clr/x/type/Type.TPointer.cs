@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     partial class XClrQuery
     {
@@ -17,6 +17,6 @@ namespace Z0
         /// <param name="src">The source type</param>
         [MethodImpl(Inline), Op]
         public static Type TPointer(this Type src)
-            => src.IsPointer ? src.GetElementType() : EmptyType;
+            => src.IsPointer ? src.GetElementType() : typeof(void);
     }
 }

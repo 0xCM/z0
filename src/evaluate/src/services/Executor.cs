@@ -11,8 +11,6 @@ namespace Z0
     using static z;
     using static BufferSeqId;
 
-    using K = Kinds;
-
     public readonly struct Executor
     {
         public static EvalResult<ExecutorContext> validate(ExecutorContext context, in NativeBuffers buffers, BinaryOpClass k, N8 w, in ConstPair<ApiMemberCode> pair)
@@ -52,12 +50,12 @@ namespace Z0
             {
                 action();
                 var outcome =  Eval.result(context.Sequence, (f,g), clock, true );
-                return (outcome,context);
+                return (outcome, context);
             }
             catch(Exception e)
             {
                 var outcome = Eval.result(context.Sequence, (f,g), clock, e);
-                return (outcome,context);
+                return (outcome, context);
             }
         }
     }

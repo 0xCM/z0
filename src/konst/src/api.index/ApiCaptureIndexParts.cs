@@ -10,6 +10,8 @@ namespace Z0
 
     using static Konst;
 
+
+
     public readonly struct ApiCaptureIndexParts
     {
         public readonly struct UriAddresses

@@ -25,13 +25,13 @@ namespace Z0
         [Op]
         public static MethodMetadata Metadata(this MethodInfo src)
             => new MethodMetadata(
-                MethodId: src.MetadataToken,
-                DefiningAssembly: src.Module.Assembly.GetSimpleName(),
-                DefiningModule: src.Module.Name,
-                DeclaringType: TypeSig.from(src.DeclaringType),
-                MethodName: src.DisplayName(),
-                ReturnType: TypeSig.from(src.ReturnType),
-                Args: src.GetParameters().Select(p => new MethodParameter(TypeSig.from(p), p.RefKind(), p.Name, (ushort)p.Position)),
-                TypeParams: src.TypeParameters());
+                id: src.MetadataToken,
+                assembly: src.Module.Assembly.GetSimpleName(),
+                module: src.Module.Name,
+                type: TypeSig.from(src.DeclaringType),
+                name: src.DisplayName(),
+                tReturn: TypeSig.from(src.ReturnType),
+                args: src.GetParameters().Select(p => new MethodParameter(TypeSig.from(p), p.RefKind(), p.Name, (ushort)p.Position)),
+                tParams: src.TypeParameters());
     }
 }

@@ -10,7 +10,7 @@ namespace Z0
     using System.Reflection;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static ReflectionFlags;
 
     partial class XClrQuery

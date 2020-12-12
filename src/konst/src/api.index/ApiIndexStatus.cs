@@ -7,11 +7,13 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
-    public struct ApiIndexStatus : ITextual
+    [Record(TableId)]
+    public struct ApiIndexStatus : IRecord<ApiIndexStatus>, ITextual
     {
+        public const string TableId = "api-index.status";
+
         public PartId[] Parts;
 
         public ApiHostUri[] Hosts;

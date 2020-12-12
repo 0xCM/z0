@@ -9,8 +9,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.IO;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     [ApiHost(ApiNames.ClrHandles, true)]
     public readonly struct ClrHandles

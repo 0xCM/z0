@@ -10,7 +10,7 @@ public readonly struct ApiNames
 
     public const string SymbolQuery = symbolic + dot + query;
 
-    public const string Memory = memory + dot + core;
+    public const string Memory = memory;
 
     public const string LiteralKinds = literals + dot + kinds;
 

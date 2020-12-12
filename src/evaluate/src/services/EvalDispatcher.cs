@@ -16,16 +16,16 @@ namespace Z0
 
     class EvalDispatcher : IEvalDispatcher
     {
-        readonly IPolyrand Random;
+        readonly IPolyStream DataSource;
 
         readonly IAppMsgSink Sink;
 
         readonly uint BufferSize;
 
         [MethodImpl(Inline)]
-        public EvalDispatcher(IPolyrand random, IAppMsgSink sink, uint bufferSize)
+        public EvalDispatcher(IPolyStream  random, IAppMsgSink sink, uint bufferSize)
         {
-            Random = random;
+            DataSource = random;
             Sink = sink;
             BufferSize = bufferSize;
         }
@@ -57,7 +57,7 @@ namespace Z0
             where T : unmanaged
         {
             var target = init<T>();
-            var src = Random.Array<T>(target.PointCount);
+            var src = DataSource.Array<T>(target.PointCount);
             var context = Eval.context(buffers, code, Eval.unary(src, target));
             return Evaluate.compute(context, error);
         }
@@ -66,7 +66,7 @@ namespace Z0
             where T : unmanaged
         {
             var target = init<T>();
-            var src = Random.Pairs<T>(target.PointCount);
+            var src = DataSource.Pairs<T>(target.PointCount);
             var context = Eval.context(buffers, code, Eval.binary(src, target));
             return Evaluate.compute(context, error);
         }
@@ -79,10 +79,10 @@ namespace Z0
         public void Notify(AppMsg msg)
             => Sink.NotifyConsole(msg);
 
-        public Bit32 EvalFixedOperators(BufferTokens buffers, ApiMemberCode[] api)
+        public bit EvalCellOperators(BufferTokens buffers, ApiMemberCode[] api)
         {
             for(var i=0; i<api.Length; i++)
-                EvalFixedOperator(buffers, api[i]);
+                EvalCellOperator(buffers, api[i]);
             return 0;
         }
 
@@ -95,12 +95,12 @@ namespace Z0
         public Pairs<F> FixedPairs<F>(int count, F t = default)
             where F : unmanaged, IDataCell
         {
-            var s1 = Random.CellStream<F>().Take(count);
-            var s2 = Random.CellStream<F>().Take(count);
+            var s1 = DataSource.CellStream<F>().Take(count);
+            var s2 = DataSource.CellStream<F>().Take(count);
             return s1.Zip(s2).Select(a =>  Tuples.pair(a.First, a.Second)).ToArray();
         }
 
-        public Bit32 EvalFixedOperator(BufferTokens buffers, in ApiMemberCode api)
+        public bit EvalCellOperator(BufferTokens buffers, in ApiMemberCode api)
         {
             var nk = api.Method.ReturnType.NumericKind();
             var kid = api.Member.ApiKind;
@@ -364,7 +364,7 @@ namespace Z0
         Bit32 Dispatch(BufferTokens buffers, in Pairs<Cell8> src, in ApiMemberCode api)
         {
 
-            var dst = Evaluator(buffers).EvalFixed(api, K.BinaryOp, src);
+            var dst = Evaluator(buffers).EvalCellular(api, K.BinaryOp, src);
             Analyze(src, dst, api);
             return 1;
         }
@@ -372,14 +372,13 @@ namespace Z0
         Bit32 Dispatch(BufferTokens buffers, in Pairs<Cell16> src, in ApiMemberCode api)
         {
 
-            var dst = Evaluator(buffers).EvalFixed(api, K.BinaryOp, src);
+            var dst = Evaluator(buffers).EvalCellular(api, K.BinaryOp, src);
             Analyze(src, dst, api);
             return 1;
         }
 
         void Analyze<T>(in Pairs<T> src, in Triples<T> dst, in ApiMemberCode api)
             where T : unmanaged
-
         {
 
         }

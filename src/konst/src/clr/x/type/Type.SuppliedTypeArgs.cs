@@ -5,8 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
 
     partial class XClrQuery
     {

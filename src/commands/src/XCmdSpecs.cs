@@ -47,9 +47,6 @@ namespace Z0
         public static EmitRenderPatternsCmd EmitRenderPatterns(this ICmdCatalog wf)
             => default;
 
-        [MethodImpl(Inline), Op]
-        public static EmitImageHeadersCmd EmitImageHeaders(this ICmdCatalog wf)
-            => default;
 
         [MethodImpl(Inline), Op]
         public static EmitAsmOpCodesCmd EmitAsmOpCodes(this ICmdCatalog wf)

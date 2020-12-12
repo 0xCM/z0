@@ -6,11 +6,9 @@ namespace Z0
 {
     using System;
     using System.Reflection;
-    using System.Linq;
 
     partial class XClrQuery
     {
-
         /// <summary>
         /// Selects the public/non-public static/instance methods declared by a stream of types
         /// </summary>

@@ -14,8 +14,7 @@ namespace Z0
     partial struct memory
     {
         /// <summary>
-        /// Advances an S-reference in units measured by T-cells and returns
-        /// the resulting T-cell reference
+        /// Advances an S-reference in units measured by T-cells and returns the resulting T-cell reference
         /// </summary>
         /// <param name="src">The data source</param>
         /// <param name="count">The number of T-cells to advance</param>

@@ -12,7 +12,7 @@ namespace Z0
     public readonly ref struct BinaryEvalContext<T>
         where T : unmanaged
     {
-        public readonly EvalContext Context;
+        public EvalContext Context {get;}
 
         public readonly BinaryEvaluations<T> Target;
 

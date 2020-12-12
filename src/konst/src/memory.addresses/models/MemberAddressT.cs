@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     public readonly struct MemberAddress<T> : IAddressable<MemberAddress<T>, MemoryAddress>
         where T : IClrRuntimeMember

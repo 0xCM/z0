@@ -14,11 +14,11 @@ namespace Z0
     public readonly struct Evaluate
     {
         [MethodImpl(Inline), Op]
-        public static ExecutorContext context(IPolyrand src, uint count)
-            => new ExecutorContext(src,count,0);
+        public static ExecutorContext context(IPolyStream src, uint count)
+            => new ExecutorContext(src, count,0);
 
         [MethodImpl(Inline), Op]
-        public static IEvalDispatcher dispatcher(IPolyrand random, IAppMsgSink sink, uint bufferSize)
+        public static IEvalDispatcher dispatcher(IPolyStream random, IAppMsgSink sink, uint bufferSize)
             => new EvalDispatcher(random, sink, bufferSize);
 
         public static ref readonly UnaryEvaluations<T> compute<T>(in UnaryEvalContext<T> exchange, Action<Exception> error)
@@ -116,6 +116,5 @@ namespace Z0
                 return true;
             }
         }
-
     }
 }

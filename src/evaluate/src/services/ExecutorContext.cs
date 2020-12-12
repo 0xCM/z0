@@ -11,13 +11,13 @@ namespace Z0
 
     public readonly struct ExecutorContext
     {
-        public readonly IPolyrand DataSource;
+        public IPolyStream DataSource {get;}
 
-        public readonly uint PointCount;
+        public uint PointCount {get;}
 
-        public readonly uint Sequence;
-        
-        internal ExecutorContext(IPolyrand src, uint count, uint seq)
+        public uint Sequence {get;}
+
+        internal ExecutorContext(IPolyStream src, uint count, uint seq)
         {
             DataSource = src;
             PointCount = count;

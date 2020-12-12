@@ -14,7 +14,7 @@ namespace Z0
     using T = System.UInt16;
 
     [ApiType]
-    public readonly struct Address16
+    public readonly struct Address16 : IAddress<A,W,T>
     {
         public T Location {get;}
 

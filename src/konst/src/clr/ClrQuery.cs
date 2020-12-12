@@ -8,8 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     [ApiHost(ApiNames.ClrQuery, true)]
     public readonly partial struct ClrQuery

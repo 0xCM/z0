@@ -12,7 +12,7 @@ namespace Z0
 
     using Z0.Asm;
 
-    public readonly struct MachineCallInfo : IMachineCallInfo
+    public readonly struct MachineCallInfo
     {
         readonly ApiInstruction Fx;
 

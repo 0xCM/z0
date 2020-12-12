@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
     [ApiHost(ApiNames.Memory)]
     public readonly partial struct memory
     {

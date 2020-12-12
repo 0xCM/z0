@@ -77,7 +77,7 @@ namespace Z0.Asm
             if(result)
                 TypeStatus(part, kind, result.Data);
             else
-                Wf.Error(result.Error);
+                Wf.Error(result.Message);
             return result;
         }
 
@@ -89,7 +89,7 @@ namespace Z0.Asm
             if(result)
                 TypeStatus(part, kind, result.Data);
             else
-                Wf.Error(result.Error);
+                Wf.Error(result.Message);
             return result;
         }
 
@@ -101,7 +101,7 @@ namespace Z0.Asm
             if(result)
                 TypeStatus(part, kind, result.Data);
             else
-                Wf.Error(result.Error);
+                Wf.Error(result.Message);
             return result;
         }
 
@@ -113,7 +113,7 @@ namespace Z0.Asm
             if(result)
                 TypeStatus(part, kind, result.Data);
             else
-                Wf.Error(result.Error);
+                Wf.Error(result.Message);
             return result;
         }
 
@@ -125,7 +125,7 @@ namespace Z0.Asm
             if(result)
                 TypeStatus(part, kind, result.Data);
             else
-                Wf.Error(result.Error);
+                Wf.Error(result.Message);
             return result;
         }
     }

@@ -7,21 +7,16 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     partial struct z
     {
-        [MethodImpl(Inline), Op]
-        public static unsafe sbyte i8(bool on)
-            => *((sbyte*)(&on));
+        [MethodImpl(Inline)]
+        public static unsafe sbyte i8(bool src)
+            => memory.i8(src);
 
-        /// <summary>
-        /// Presents a T-references as a <see cref='sbyte'/> reference
-        /// </summary>
-        /// <param name="src">The source reference</param>
-        /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline)]
         public static ref sbyte i8<T>(in T src)
-            => ref @as<T,sbyte>(src);
+            => ref memory.i8(src);
     }
 }

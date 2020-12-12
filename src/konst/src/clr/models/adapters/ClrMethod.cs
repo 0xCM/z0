@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Reflection;
     using System.Runtime.CompilerServices;
-    using static Konst;
+
+    using static Part;
 
     [ApiType(ApiNames.ClrMethod, true)]
     public readonly struct ClrMethod : IClrRuntimeMember<ClrMethod,MethodInfo>

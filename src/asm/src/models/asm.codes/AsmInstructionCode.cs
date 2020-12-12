@@ -8,7 +8,6 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static z;
 
     /// <summary>
     /// Pairs an instruction definition together with the corresponding source code representation
