@@ -11,23 +11,10 @@ namespace Z0
 
     partial struct z
     {
-        /// <summary>
-        /// Presents an S-cell as a T-cell
-        /// </summary>
-        /// <param name="src">The source cell</param>
-        /// <typeparam name="S">The source type</typeparam>
-        /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline)]
         public static ref T @as<S,T>(in S src)
             => ref memory.@as<S,T>(src);
 
-        /// <summary>
-        /// Presents an S-cell as a T-cell
-        /// </summary>
-        /// <param name="src">The source cell</param>
-        /// <param name="src">The target cell</param>
-        /// <typeparam name="S">The source type</typeparam>
-        /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline)]
         public static ref T @as<S,T>(in S src, ref T dst)
             => ref memory.@as<S,T>(src, ref dst);

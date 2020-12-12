@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     public readonly struct TypeSign : ITypeSign<TypeSign>
     {
@@ -23,8 +23,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public TypeSign(TypeSignKind kind)
-        {
-            Sign = kind;
-        }
+            => Sign = kind;
+
     }
 }

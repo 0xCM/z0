@@ -7,16 +7,16 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     using P = bit;
     using NK = NumericKind;
 
     public readonly struct U1 : INumericKind<P>
     {
-        public const bool MinLiteral = false;
+        public const bool Max = true;
 
-        public const bool MaxLiteral = true;
+        public const bool Min = false;
 
         [MethodImpl(Inline)]
         public static implicit operator NK(U1 src)

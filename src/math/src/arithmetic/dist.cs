@@ -6,7 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
+    using static Konst;
+
     partial class math
     {
         /// <summary>
@@ -44,7 +46,7 @@ namespace Z0
         [MethodImpl(Inline), Dist]
         public static ulong dist(ushort a, ushort b)
             => a >= b ? (ulong)(a - b) : (ulong)(b - a);
-    
+
         /// <summary>
         /// Computes the nonnegative distance between two numbers
         /// </summary>

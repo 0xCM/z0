@@ -4,8 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface TNumericWidth<W> : INumericWidth<W>
-        where W : struct, TNumericWidth<W>
+    public interface WNumeric<W> : INumericWidth<W>
+        where W : struct, WNumeric<W>
     {
         NumericWidth INumericWidth.NumericWidth
             => Widths.numeric<W>();

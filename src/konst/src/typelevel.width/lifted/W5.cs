@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    
+    using static Part;
+
     using DW = DataWidth;
     using TS = TypeSignKind;
 
@@ -17,9 +17,9 @@ namespace Z0
     /// <summary>
     /// Defines a type-level representation of <see cref='DW.W5'/>
     /// </summary>
-    public readonly struct W5 : TDataWidth<W> 
-    { 
-        public const DW Width = DW.W5; 
+    public readonly struct W5 : WData<W>
+    {
+        public const DW Width = DW.W5;
 
         public const TS Sign = TS.Unsigned;
 
@@ -33,41 +33,41 @@ namespace Z0
         /// </summary>
         public const string Identifier = "w5";
 
-        public string Id 
+        public string Id
             => Identifier;
 
-        public DW DataWidth 
+        public DW DataWidth
             => Width;
 
         public TS TypeSign
             => Sign;
 
         [MethodImpl(Inline)]
-        public static implicit operator int(W src) 
+        public static implicit operator int(W src)
             => (int)Width;
 
         [MethodImpl(Inline)]
-        public static implicit operator DW(W src) 
+        public static implicit operator DW(W src)
             => Width;
 
         [MethodImpl(Inline)]
-        public static implicit operator DataWidth<W>(W src) 
+        public static implicit operator DataWidth<W>(W src)
             => default;
 
-        [MethodImpl(Inline)]        
-        public bool Equals(W w) 
+        [MethodImpl(Inline)]
+        public bool Equals(W w)
             => true;
 
         [MethodImpl(Inline)]
         public string Format()
             => Width.FormatValue();
 
-        public override string ToString() 
+        public override string ToString()
             => Format();
-        
-        public override int GetHashCode() 
+
+        public override int GetHashCode()
             => (int)Width;
-        
-        public override bool Equals(object obj) 
+
+        public override bool Equals(object obj)
             => obj is W;    }
 }

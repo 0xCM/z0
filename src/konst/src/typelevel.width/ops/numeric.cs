@@ -7,20 +7,20 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     using K = NumericWidth;
 
     partial class Widths
-    {        
+    {
         public static K numeric(Type t)
         {
             var k = NumericKinds.kind(t);
             if(k != 0)
                 return (K)(uint)k;
             else
-                return K.None;            
-        }         
+                return K.None;
+        }
 
         /// <summary>
         /// Computes the literal numeric width from a parametric width
@@ -40,7 +40,7 @@ namespace Z0
                 return K.W32;
             else if(typeof(W) == typeof(W64))
                 return K.W64;
-            else 
+            else
                 return 0;
         }
 
@@ -57,7 +57,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static short int16<W>(W w = default)
             where W : struct, INumericWidth
-                => (short)default(W).TypeWidth;         
+                => (short)default(W).TypeWidth;
 
         [MethodImpl(Inline)]
         public static ushort uint16<W>(W w = default)
@@ -72,7 +72,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static uint uint32<W>(W w = default)
             where W : struct, INumericWidth
-                => (uint)default(W).TypeWidth;         
+                => (uint)default(W).TypeWidth;
 
         [MethodImpl(Inline)]
         public static long int64<W>(W w = default)

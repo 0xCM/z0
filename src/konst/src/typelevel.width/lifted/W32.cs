@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     using DW = DataWidth;
     using TW = TypeWidth;
@@ -20,7 +20,7 @@ namespace Z0
     /// <summary>
     /// Defines a type-level representation of <see cref='DW.W32'/>
     /// </summary>
-    public readonly struct W32 : TNumericWidth<W>
+    public readonly struct W32 : WNumeric<W>
     {
         public const DW Width = DW.W32;
 

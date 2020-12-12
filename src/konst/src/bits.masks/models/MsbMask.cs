@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Defines a specification for producing MSB-oriented masks
@@ -36,7 +36,7 @@ namespace Z0
                 => default;
 
         public string Format()
-            => $"msb(f:{Typed.value<F>()}, d:{Typed.value<D>()}, t:{typeof(T).NumericKind().Format()})";
+            => $"msb(f:{z.nat32u<F>()}, d:{z.nat32u<D>()}, t:{typeof(T).NumericKind().Format()})";
 
         public override string ToString()
             => Format();

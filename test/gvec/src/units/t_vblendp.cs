@@ -447,7 +447,7 @@ namespace Z0
             where S : unmanaged
             where P : unmanaged, ITypeNat
         {
-            var spec = @as(z.vbroadcast(w, pattern), t);
+            var spec = memory.@as(z.vbroadcast(w, pattern), t);
             var a = gvec.vinc(w, t);
             var b = gvec.vadd(a, gmath.add(a.LastCell(), z.one(t)));
             var c = gvec.vblendp(a,b,spec);
@@ -475,7 +475,7 @@ namespace Z0
             where S : unmanaged
             where P : unmanaged, ITypeNat
         {
-            var spec = @as(z.vbroadcast(w, pattern),t);
+            var spec = memory.@as(z.vbroadcast(w, pattern),t);
             var a = gvec.vinc(w, t);
             var b = gvec.vadd(a, gmath.add(a.LastCell(), z.one(t)));
             var c = gvec.vblendp(a,b,spec);

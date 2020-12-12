@@ -17,7 +17,7 @@ namespace Z0
         /// For a natural number n <= 9, returns the type of the corresponding natural primitive. If n > 9, returns the zero type
         /// </summary>
         /// <param name="n">The number to evaluate</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Type primitive(byte n)
         {
             if(n == 1)
@@ -140,7 +140,6 @@ namespace Z0
             where D4 : unmanaged, INatPrimitive<D4>
                 => NatSeq<D0,D1,D2,D3,D4>.Rep;
 
-
         /// <summary>
         /// Creates a reflected two-term natural sequence {d0, d1} from three primitive values d0 and d1
         /// </summary>
@@ -148,8 +147,7 @@ namespace Z0
         /// <param name="d1">The value of the second term</param>
         [MethodImpl(Inline)]
         public static INatSeq seq(byte d0, byte d1)
-            => (INatSeq) Activator.CreateInstance(close(NT.sequence(2), primitive(d0), primitive(d1)
-                    ));
+            => (INatSeq) Activator.CreateInstance(close(NT.sequence(2), primitive(d0), primitive(d1)));
 
         /// <summary>
         /// Creates a reflected three-term natural sequence {d0, d1, d2} from three primitive values d0, d1, d2

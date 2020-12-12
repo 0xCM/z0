@@ -8,14 +8,16 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Typed;
+    using static z;
 
     public readonly struct AsciTestCase02 : ITestCase<AsciTestCase02>
     {
+        [MethodImpl(Inline)]
         public static AsciTestCase02 Create(AsciCharCode c0 = AsciCharCode.Bang)
             => new AsciTestCase02((sbyte)c0);
 
-        AsciTestCase02(sbyte c0)
+        [MethodImpl(Inline)]
+        internal AsciTestCase02(sbyte c0)
         {
             C0 = (AsciCharCode)c0;
             A2 = asci.init(n2, asci.codes(c0,2));

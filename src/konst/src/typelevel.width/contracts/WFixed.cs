@@ -4,10 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface TTypeWidth<W> : ITypeWidth<W>
-        where W : struct, TTypeWidth<W>
+    public interface WFixed<F> : ICellWidth, WType<F>, ITypedLiteral<F,CellWidth,uint>
+        where F : struct, WFixed<F>
     {
-        TypeWidth ITypeWidth.TypeWidth
-            => Widths.type<W>();
+        CellWidth ICellWidth.CellWidth
+            => Widths.cell<F>();
     }
 }

@@ -29,12 +29,12 @@ namespace Z0
             => MaskSpec.define<F,D,T>(M);
 
         uint IBitFrequency.F
-            => (uint)TypeNats.value<F>();
+            => z.nat32u<F>();
 
         uint IBitDensity.D
-            => (uint)TypeNats.value<D>();
+            => z.nat32u<D>();
 
         string ITextual.Format()
-            => $"lsb(f:{Typed.value<F>()}, d:{Typed.value<D>()}, t:{typeof(T).NumericKind().Format()})";
+            => $"lsb(f:{z.nat32u<F>()}, d:{z.nat32u<D>()}, t:{typeof(T).NumericKind().Format()})";
     }
 }

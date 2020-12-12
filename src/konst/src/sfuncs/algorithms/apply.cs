@@ -25,30 +25,6 @@ namespace Z0
             where F : IBinaryOp<T>
                 => f.Invoke(x,y);
 
-        // [MethodImpl(Inline)]
-        // public static Span<Bit32> apply<F,T>(F f, ReadOnlySpan<T> src, Span<Bit32> dst)
-        //     where F : IFunc<T,Bit32>
-        // {
-        //     var count = dst.Length;
-        //     ref readonly var input = ref first(src);
-        //     ref var target = ref first(dst);
-        //     for(var i=0u; i<count; i++)
-        //         seek(target, i) = f.Invoke(skip(in input, i));
-        //     return dst;
-        // }
-
-        // [MethodImpl(Inline)]
-        // public static Span<bit> apply<F,T>(F f, ReadOnlySpan<T> src, Span<bit> dst)
-        //     where F : IFunc<T,bit>
-        // {
-        //     var count = dst.Length;
-        //     ref readonly var input = ref first(src);
-        //     ref var target = ref first(dst);
-        //     for(var i=0u; i<count; i++)
-        //         seek(target, i) = f.Invoke(skip(in input, i));
-        //     return dst;
-        // }
-
         [MethodImpl(Inline)]
         public static Span<T> apply<F,T>(F f, ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs)
             where T : unmanaged
@@ -70,18 +46,6 @@ namespace Z0
             where F : IBinaryOp<T>
                 => apply(f, lhs.ReadOnly(), rhs.ReadOnly());
 
-        [MethodImpl(Inline)]
-        public static Span<Bit32> apply<F,T>(F f, ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<Bit32> dst)
-            where F : IFunc<T,T,Bit32>
-        {
-            var count = dst.Length;
-            ref readonly var lSrc = ref first(lhs);
-            ref readonly var rSrc = ref first(rhs);
-            ref var target = ref first(dst);
-            for(var i=0u; i<count; i++)
-                seek(target, i) = f.Invoke(skip(lSrc, i), skip(rSrc, i));
-            return dst;
-        }
 
         [MethodImpl(Inline)]
         public static Span<T3> apply<F,T0,T1,T2,T3>(F f, ReadOnlySpan<T0> A, ReadOnlySpan<T1> B, ReadOnlySpan<T2> C,  Span<T3> dst)

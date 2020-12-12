@@ -7,16 +7,16 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     using P = System.Byte;
     using NK = NumericKind;
 
     public readonly struct U8 : INumericKind<P>
     {
-        public const P MaxLiteral = P.MaxValue;
+        public const P Max = P.MaxValue;
 
-        public const P MinLiteral = P.MinValue;
+        public const P Min = P.MinValue;
 
         [MethodImpl(Inline)]
         public static implicit operator NK(U8 src)

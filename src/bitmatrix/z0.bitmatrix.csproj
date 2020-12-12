@@ -6,7 +6,6 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Matrix)" />
-    <ProjectReference Include="$(Numeric)" />
     <ProjectReference Include="$(BitCore)" />
     <ProjectReference Include="$(BitVectors)" />
     <ProjectReference Include="$(GVec)" />

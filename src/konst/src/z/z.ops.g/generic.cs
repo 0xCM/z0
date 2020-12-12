@@ -7,63 +7,60 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static System.Runtime.CompilerServices.Unsafe;
-
-    using static Konst;
+    using static Part;
 
     partial struct z
     {
-
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline)]
         public static T generic<T>(char src)
-            => As<char,T>(ref src);
+            => memory.generic<T>(src);
 
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline)]
         public static T generic<T>(bool src)
-            => As<bool,T>(ref src);
+            => memory.generic<T>(src);
 
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline)]
         public static T generic<T>(sbyte src)
-            => As<sbyte,T>(ref src);
+            => memory.generic<T>(src);
 
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline)]
         public static T generic<T>(byte src)
-            => As<byte,T>(ref src);
+            => memory.generic<T>(src);
 
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline)]
         public static T generic<T>(short src)
-            => As<short,T>(ref src);
+            => memory.generic<T>(src);
 
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline)]
         public static T generic<T>(ushort src)
-            => As<ushort,T>(ref src);
+            => memory.generic<T>(src);
 
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline)]
         public static T generic<T>(int src)
-            => As<int,T>(ref src);
+            => memory.generic<T>(src);
 
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline)]
         public static T generic<T>(uint src)
-            => As<uint,T>(ref src);
+            => memory.generic<T>(src);
 
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline)]
         public static T generic<T>(long src)
-            => As<long,T>(ref src);
+            => memory.generic<T>(src);
 
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline)]
         public static T generic<T>(ulong src)
-            => As<ulong,T>(ref src);
+            => memory.generic<T>(src);
 
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline)]
         public static T generic<T>(float src)
-            => As<float,T>(ref src);
+            => memory.generic<T>(src);
 
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline)]
         public static T generic<T>(double src)
-            => As<double,T>(ref src);
+            => memory.generic<T>(src);
 
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline)]
         public static T generic<T>(decimal src)
-            => As<decimal,T>(ref src);
+            => memory.generic<T>(src);
     }
 }

@@ -32,7 +32,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public Ref(ulong location, ulong size)
-            => Segment = Vector128.Create(location, (ulong)size);
+            => Segment = vparts(location, (ulong)size);
 
         [MethodImpl(Inline)]
         public Span<T> As<T>()

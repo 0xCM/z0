@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
 
     using static Part;
     using static System.Runtime.CompilerServices.Unsafe;
@@ -154,5 +155,31 @@ namespace Z0
         [MethodImpl(Inline), Keyword, Closures(AllNumeric)]
         public static ref T @as<T>(in string src)
             => ref As<string,T>(ref AsRef(src));
+
+        /// <summary>
+        /// Reinterprets a vector over S-cells as a vector over T-cells
+        /// </summary>
+        /// <param name="x">The source vector</param>
+        /// <param name="t">A target cell type representative</param>
+        /// <typeparam name="S">The source cell type</typeparam>
+        /// <typeparam name="T">The target cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static ref Vector128<T> @as<S,T>(in Vector128<S> x, T t = default)
+            where S : unmanaged
+            where T : unmanaged
+                => ref @as<Vector128<S>,Vector128<T>>(x);
+
+        /// <summary>
+        /// Reinterprets a vector over S-cells as a vector over T-cells
+        /// </summary>
+        /// <param name="x">The source vector</param>
+        /// <param name="t">A target cell type representative</param>
+        /// <typeparam name="S">The source cell type</typeparam>
+        /// <typeparam name="T">The target cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static ref Vector256<T> @as<S,T>(in Vector256<S> x, T t = default)
+            where S : unmanaged
+            where T : unmanaged
+                => ref @as<Vector256<S>,Vector256<T>>(x);
     }
 }

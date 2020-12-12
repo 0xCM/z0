@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Linq;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Defines identity for a pair NxT or MxNxT where M and N are natural types and T is numeric

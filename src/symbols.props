@@ -42,7 +42,6 @@
 
     <Merge>$(Src)merge/z0.merge.csproj</Merge>
 
-    <Numeric>$(Src)numeric/z0.numeric.csproj</Numeric>
     <Math>$(Src)math/z0.math.csproj</Math>
     <GMath>$(Src)gmath/z0.gmath.csproj</GMath>
     <Polyrand>$(Src)polyrand/z0.polyrand.csproj</Polyrand>

@@ -73,19 +73,43 @@ namespace Z0
             => default;
 
         [KindFactory, Closures(Closure)]
-        public static And<T> and<T>(N2 n, T t = default)
+        public static And<T> and<T>(N2 n)
             => default;
 
         [KindFactory, Closures(Closure)]
-        public static Nand<T> nand<T>(N2 n, T t = default)
+        public static Nand<T> nand<T>(N2 n)
             => default;
 
         [KindFactory, Closures(Closure)]
-        public static Or<T> or<T>(N2 n, T t = default)
+        public static Or<T> or<T>(N2 n)
             => default;
 
         [KindFactory, Closures(Closure)]
-        public static Nor<T> nor<T>(N2 n, T t = default)
+        public static Nor<T> nor<T>(N2 n)
+            => default;
+
+        [KindFactory, Closures(Closure)]
+        public static Impl<T> impl<T>(N2 n)
+            => default;
+
+        [KindFactory, Closures(Closure)]
+        public static NonImpl<T> nonimpl<T>(N2 n)
+            => default;
+
+        [KindFactory, Closures(Closure)]
+        public static CImpl<T> cimpl<T>(N2 n)
+            => default;
+
+        [KindFactory, Closures(Closure)]
+        public static CNonImpl<T> cnonimpl<T>(N2 n)
+            => default;
+
+        [KindFactory, Closures(Closure)]
+        public static Not<T> not<T>(N1 n)
+            => default;
+
+        [KindFactory, Closures(Closure)]
+        public static Select<T> select<T>(N3 n)
             => default;
 
         public readonly struct And : I { K I.Kind => K.And; }

@@ -74,6 +74,5 @@ namespace Z0
             where K1 : unmanaged, ITypeNat
             where K2 : unmanaged, ITypeNat
                 => zfunc.max(value(k1), value(k2));
-
     }
 }

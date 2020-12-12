@@ -21,33 +21,30 @@ namespace Z0.Logix
         {
             using var dst = UnitWriter(FS.file(CallingMember.define().Name));
             var src = bitlogix.UnaryOpKinds;
-            TabularTruth.save(src, dst);
-            //TabularTruth.save(dst,ArityValue.Unary);
+            TruthTables.save(src, dst);
         }
 
         public void binary_truth()
         {
             using var dst = UnitWriter(FS.file(CallingMember.define().Name));
             var src = bitlogix.BinaryOpKinds;
-            TabularTruth.save(src, dst);
-            //TabularTruth.save(dst,ArityValue.Binary);
+            TruthTables.save(src, dst);
         }
 
         public void ternary_truth()
         {
             using var dst = UnitWriter(FS.file(CallingMember.define().Name));
             var src = bitlogix.TernaryOpKinds;
-            TabularTruth.save(src, dst);
-            //TabularTruth.save(dst, ArityValue.Ternary);
+            TruthTables.save(src, dst);
         }
 
         public void unary_sig_check()
         {
             foreach(var op in bitlogix.UnaryOpKinds)
             {
-                var table = TabularTruth.table(op);
+                var table = TruthTables.table(op);
                 var result = table.GetCol(table.ColCount - 1).ToBitVector(n8).Lo;
-                var sig = TabularTruth.vector(n4, op);
+                var sig = TruthTables.vector(n4, op);
                 Claim.eq(result,sig);
             }
         }
@@ -56,9 +53,9 @@ namespace Z0.Logix
         {
             foreach(var op in bitlogix.BinaryOpKinds)
             {
-                var table = TabularTruth.table(op);
+                var table = TruthTables.table(op);
                 var result = table.GetCol(table.ColCount - 1).ToBitVector(n8).Lo;
-                var sig = TabularTruth.vector(n4,op);
+                var sig = TruthTables.vector(n4,op);
                 Claim.eq(result,sig);
             }
         }
@@ -67,9 +64,9 @@ namespace Z0.Logix
         {
             foreach(var op in bitlogix.TernaryOpKinds)
             {
-                var table = TabularTruth.table(op);
+                var table = TruthTables.table(op);
                 var result = table.GetCol(table.ColCount - 1).ToBitVector(n8);
-                var sig = TabularTruth.vector(n8,op);
+                var sig = TruthTables.vector(n8,op);
                 Claim.eq(result,sig);
             }
         }
@@ -144,7 +141,7 @@ namespace Z0.Logix
             dst[1] = (byte)(NumericLogixHost.eval(op, on,off) & on) == on;
             dst[2] = (byte)(NumericLogixHost.eval(op, off,on) & on) == on;
             dst[3] = (byte)(NumericLogixHost.eval(op, on,on) & on) == on;
-            var sig = TabularTruth.vector(n4, op);
+            var sig = TruthTables.vector(n4, op);
             Claim.eq(sig,dst);
         }
 
@@ -155,15 +152,15 @@ namespace Z0.Logix
             dst[1] = bitlogix.Evaluate(op, Z0.Bit32.On, Z0.Bit32.Off);
             dst[2] = bitlogix.Evaluate(op, Z0.Bit32.Off, Z0.Bit32.On);
             dst[3] = bitlogix.Evaluate(op, Z0.Bit32.On, Z0.Bit32.On);
-            var sig = TabularTruth.vector(n4, op);
+            var sig = TruthTables.vector(n4, op);
             Claim.eq(sig,dst);
         }
 
         public void truth_vectors()
         {
-            Notify(TabularTruth.vector(n16, BLK.And).Format());
-            Notify(TabularTruth.vector(n16, BLK.Or).Format());
-            Notify(TabularTruth.vector(n16,BLK.Nand).Format());
+            Notify(TruthTables.vector(n16, BLK.And).Format());
+            Notify(TruthTables.vector(n16, BLK.Or).Format());
+            Notify(TruthTables.vector(n16,BLK.Nand).Format());
         }
     }
 }

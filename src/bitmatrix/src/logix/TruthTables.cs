@@ -7,10 +7,10 @@ namespace Z0
     using System;
     using System.IO;
 
-    using static Typed;
+    using static z;
 
     [ApiHost]
-    public readonly struct TabularTruth
+    public readonly struct TruthTables
     {
         static Bit32 on => Bit32.On;
 
@@ -157,21 +157,21 @@ namespace Z0
 
         public static BitMatrix<N2,N2,byte> save(UnaryBitLogicKind spec, IBitMatrixWriter dst)
         {
-            var table = TabularTruth.table(spec);
+            var table = TruthTables.table(spec);
             dst.Write(table,spec);
             return table;
         }
 
         public static BitMatrix<N4,N3,byte> save(BinaryBitLogicKind spec, IBitMatrixWriter dst)
         {
-            var table = TabularTruth.table(spec);
+            var table = TruthTables.table(spec);
             dst.Write(table,spec);
             return table;
         }
 
         public static BitMatrix<N8,N4,byte> save(TernaryBitLogicKind spec, IBitMatrixWriter dst)
         {
-            var table = TabularTruth.table(spec);
+            var table = TruthTables.table(spec);
             dst.Write(table,spec);
             return table;
         }

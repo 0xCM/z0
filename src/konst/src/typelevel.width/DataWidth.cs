@@ -7,11 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    
-    public readonly struct DataWidth<W> : TDataWidth<DataWidth<W>>
-        where W : unmanaged, IDataWidth        
-    {           
+    using static Part;
+
+    public readonly struct DataWidth<W> : WData<DataWidth<W>>
+        where W : unmanaged, IDataWidth
+    {
         public static W Width => default;
 
         public uint BitWidth
@@ -34,7 +34,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator uint(DataWidth<W> src)
-            => src.BitWidth;    
+            => src.BitWidth;
 
         [MethodImpl(Inline)]
         public static implicit operator W(DataWidth<W> src)
@@ -42,6 +42,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator DataWidth(DataWidth<W> src)
-            => src.Kind;                
+            => src.Kind;
     }
 }

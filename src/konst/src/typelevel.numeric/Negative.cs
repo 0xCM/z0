@@ -4,11 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Konst;
-
     /// <summary>
     /// Promotes the literal classifier <See cref="SignKind.Signed"/> to a type
     /// </summary>

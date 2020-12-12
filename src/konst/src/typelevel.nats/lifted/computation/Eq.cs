@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     /// <summary>
     /// Captures evidence that n1 == n2
@@ -27,9 +26,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public NatEq(K1 k1, K2 k2)
-        {
-            insist(NatCalc.eq(k1,k2), Description);
-        }
+            => nfunc.demand(NatCalc.eq(k1,k2), Description);
 
         public override string ToString()
             => Description;
@@ -50,12 +47,9 @@ namespace Z0
 
         public static string Description => $"{k1} != {k2}";
 
-
         [MethodImpl(Inline)]
         public NatNEq(K1 n1, K2 n2)
-        {
-            insist(n1.NatValue != n2.NatValue, Description);
-        }
+            => nfunc.demand(n1.NatValue != n2.NatValue, Description);
 
         public override string ToString()
             => Description;

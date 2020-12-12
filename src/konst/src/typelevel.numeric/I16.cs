@@ -7,9 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     using NK = NumericKind;
+    using P = System.Int16;
 
     public readonly struct I16 : INumericKind<short>
     {
@@ -25,5 +26,4 @@ namespace Z0
         public static implicit operator NK<short>(I16 src)
             => default;
     }
-
 }

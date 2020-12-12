@@ -20,7 +20,7 @@ namespace Z0
         /// <typeparam name="T">The target vector component type</typeparam>
         [Free, SFx]
         public interface IFactory<W,S,V,T> : IFunc<S,V>
-            where W : unmanaged, TTypeWidth<W>
+            where W : unmanaged, WType<W>
             where T : unmanaged
             where V : struct
         {

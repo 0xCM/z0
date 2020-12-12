@@ -10,17 +10,17 @@ namespace Z0
     using System.Runtime.InteropServices;
 
     using static Konst;
-    using static Typed;
+    using static z;
 
     [StructLayout(LayoutKind.Sequential, Size = 64), Vector(TypeWidth.W512)]
     public readonly struct Vector512<T>
         where T : unmanaged
-    {                
+    {
         /// <summary>
-        /// The lo 256 bits 
+        /// The lo 256 bits
         /// </summary>
         public readonly Vector256<T> Lo;
-        
+
         /// <summary>
         /// The hi 256 bits
         /// </summary>
@@ -39,11 +39,11 @@ namespace Z0
             => (src.Lo, src.Hi);
 
         [MethodImpl(Inline)]
-        public static bool operator ==(in Vector512<T> a, in Vector512<T> b)        
+        public static bool operator ==(in Vector512<T> a, in Vector512<T> b)
             => a.Equals(b);
 
         [MethodImpl(Inline)]
-        public static bool operator !=(in Vector512<T> a, in Vector512<T> b)        
+        public static bool operator !=(in Vector512<T> a, in Vector512<T> b)
             => a.Equals(b);
 
         [MethodImpl(Inline)]
@@ -51,14 +51,14 @@ namespace Z0
         {
             Lo = a;
             Hi = b;
-        }                
+        }
 
         [MethodImpl(Inline)]
         public Vector512(Vector128<T> a, Vector128<T> b, Vector128<T> c, Vector128<T> d)
         {
             Lo = Vector256.WithUpper(Vector256.WithLower(default, a), b);
             Hi = Vector256.WithUpper(Vector256.WithLower(default, c), d);
-        }                
+        }
 
         public Vector128<T> this[N0 n]
         {
@@ -116,23 +116,22 @@ namespace Z0
 
         public override int GetHashCode()
             => HashCode.Combine(Lo,Hi);
-        
+
         public override bool Equals(object obj)
             => obj is Vector512<T> x && Equals(x);
 
         public override string ToString()
             => string.Join(" ", Lo.ToString(), Hi.ToString());
 
-        public static Vector512<T> Zero 
+        public static Vector512<T> Zero
             => default;
-    
+
         public const int Size = 64;
-        
+
         /// <summary>
         /// The number of cells covered by the vector
         /// </summary>
-        public static int Count 
+        public static int Count
             => 2*Vector256<T>.Count;
-
     }
 }

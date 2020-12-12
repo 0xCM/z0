@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     public readonly struct Base10 : INumericBase<Base10>
     {
@@ -21,10 +21,10 @@ namespace Z0
         public static implicit operator NumericBaseKind(Base10 src)
             => src.Modulus;
 
-        public NumericBaseKind Modulus 
-            => NumericBaseKind.Base10;        
+        public NumericBaseKind Modulus
+            => NumericBaseKind.Base10;
 
-        public NumericBaseIndicator Indicator 
+        public NumericBaseIndicator Indicator
             => NumericBaseIndicator.Base10;
-    }    
+    }
 }

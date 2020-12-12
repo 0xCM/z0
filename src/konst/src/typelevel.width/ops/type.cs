@@ -7,12 +7,12 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     using K = TypeWidth;
 
     partial class Widths
-    {        
+    {
         /// <summary>
         /// Computes the literal type width from a parametric width
         /// </summary>
@@ -31,7 +31,7 @@ namespace Z0
                 return K.W32;
             else if(typeof(W) == typeof(W64))
                 return K.W64;
-            else 
+            else
                 return type_128<W>();
         }
 

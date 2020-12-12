@@ -9,7 +9,13 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
-        
+
+    partial struct vex
+    {
+
+
+    }
+
     partial struct z
     {
         /// <summary>
@@ -30,7 +36,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Vector256<double> v64f<T>(Vector256<T> x)
             where T : unmanaged
-                => x.AsDouble(); 
+                => x.AsDouble();
 
         /// <summary>
         /// Presents a generic cpu vector as a cpu vector with components of type float64
@@ -40,6 +46,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Vector512<double> v64f<T>(Vector512<T> x)
             where T : unmanaged
-                => x.As<double>(); 
+                => x.As<double>();
     }
 }

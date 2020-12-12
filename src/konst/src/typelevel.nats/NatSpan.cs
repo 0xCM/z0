@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     /// <summary>
     /// Defines a span of natural length N
@@ -50,7 +50,7 @@ namespace Z0
         public uint Count
         {
             [MethodImpl(Inline)]
-            get => nat32u<N>();
+            get => z.nat32u<N>();
         }
 
         public N NatCount
@@ -92,7 +92,7 @@ namespace Z0
         public int Length
         {
             [MethodImpl(Inline)]
-            get => nat32i<N>();
+            get => z.nat32i<N>();
         }
 
         /// <summary>

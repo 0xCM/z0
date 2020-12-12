@@ -4,11 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
-    public interface IMultiArrow<A> : ITextual, IMeasured
-        where A : IEquatable<A>
+    public interface WType<W> : ITypeWidth<W>
+        where W : struct, WType<W>
     {
-        Span<A> Nodes {get;}
+        TypeWidth ITypeWidth.TypeWidth
+            => Widths.type<W>();
     }
 }

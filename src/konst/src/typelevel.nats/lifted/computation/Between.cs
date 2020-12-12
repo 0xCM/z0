@@ -8,8 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static nfunc;
-    using static Konst;
-    
+    using static Part;
+
     /// <summary>
     /// Captures evidence that k1 <= k <= k2
     /// </summary>
@@ -19,7 +19,7 @@ namespace Z0
         where K: unmanaged, ITypeNat
         where K1: unmanaged, ITypeNat
         where K2: unmanaged, ITypeNat
-    {        
+    {
         static K k => default;
 
         static K1 k1 => default;
@@ -30,10 +30,10 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public NatBetween(K k, K1 k1, K2 k2)
-        {            
+        {
             demand(NatCalc.between(k,k1,k2));
         }
-                    
+
         public override string ToString()
             => Description;
     }

@@ -3,13 +3,12 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static AsciKonst;
-    using static z;
 
     partial struct asci
     {
@@ -19,7 +18,7 @@ namespace Z0
         /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
         public static Span<byte> bytes(Span<AsciCharCode> src)
-            => z.recover<AsciCharCode,byte>(src);        
+            => z.recover<AsciCharCode,byte>(src);
 
         /// <summary>
         /// Presents a span of asci symbols as a bytespan
@@ -27,7 +26,7 @@ namespace Z0
         /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
         public static Span<byte> bytes(Span<AsciSymbol> src)
-            => z.recover<AsciSymbol,byte>(src);        
+            => z.recover<AsciSymbol,byte>(src);
 
         /// <summary>
         /// Selects a contiguous asci character sequence encoded as as bytespan
@@ -36,7 +35,7 @@ namespace Z0
         /// <param name="count"></param>
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<byte> bytes(byte offset, byte count)
-            => z.slice(CharBytes, offset, count);        
+            => z.slice(CharBytes, offset, count);
 
         /// <summary>
         /// Presents the source content as a bytespan

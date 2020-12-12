@@ -9,8 +9,7 @@ namespace Z0
 
     using Z0.Asm;
 
-    using static Konst;
-    using static Typed;
+    using static z;
 
     public readonly struct TestDynamicVectors
     {

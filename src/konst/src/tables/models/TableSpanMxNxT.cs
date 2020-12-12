@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
     using static Demands;
-    using static Typed;
+    using static z;
 
     /// <summary>
     /// Defines a tabular span of dimension MxN
@@ -30,13 +30,13 @@ namespace Z0
         /// The number of rows in the structure
         /// </summary>
         public static int RowCount
-            => (int)value<M>();
+            => z.nat32i<M>();
 
         /// <summary>
         /// The number of columns in the structure
         /// </summary>
         public static int ColCount
-            => (int)value<N>();
+            => z.nat32i<N>();
 
         /// <summary>
         /// The number of cells in each row
@@ -208,7 +208,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public NatSpan<N,T> Row<I>()
             where I : unmanaged, ITypeNat
-                => Row((int)value<I>());
+                => Row(nat32i<I>());
 
         public TableSpan<N,M,T> Transpose()
         {
@@ -220,7 +220,7 @@ namespace Z0
         }
 
         public string Format(int? padlen = null, char? padchar = null, char? rowsep = null, char? cellsep = null)
-            => Data.FormatTable((int)value<M>(), (int)value<N>(),  padlen, padchar, rowsep, cellsep);
+            => Data.FormatTable(nat32i<M>(), nat32i<N>(),  padlen, padchar, rowsep, cellsep);
 
         public override bool Equals(object rhs)
             => throw new NotSupportedException();
