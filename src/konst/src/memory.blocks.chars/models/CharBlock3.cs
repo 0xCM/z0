@@ -30,10 +30,19 @@ namespace Z0
         /// <summary>
         /// The block content presented as an editable buffer
         /// </summary>
-        public ReadOnlySpan<char> Data
+        public Span<char> Data
         {
             [MethodImpl(Inline)]
            get => cover<B,char>(this, CharCount);
+        }
+
+        /// <summary>
+        /// Specifies a reference to the leading cell
+        /// </summary>
+        public ref char First
+        {
+            [MethodImpl(Inline)]
+            get => ref first(Data);
         }
 
         [MethodImpl(Inline)]

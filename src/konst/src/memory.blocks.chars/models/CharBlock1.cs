@@ -30,6 +30,15 @@ namespace Z0
            get => cover<CharBlock1,char>(this, CharCount);
         }
 
+        /// <summary>
+        /// Specifies a reference to the leading (only) cell
+        /// </summary>
+        public ref char First
+        {
+            [MethodImpl(Inline)]
+            get => ref first(Data);
+        }
+
         public uint Length
         {
             [MethodImpl(Inline)]

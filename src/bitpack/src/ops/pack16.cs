@@ -21,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ushort pack16x8x1<T>(in T src, N16 n, N8 mod)
             where T : unmanaged
-                => z.vtakemask(gvec.vsll(z.vload(n128, z.view64u(src)),7));
+                => vtakemask(gvec.vsll(vload(n128, z.view64u(src)),7));
 
         /// <summary>
         /// Pack 16 1-bit values taken from the least significant bit of each source byte

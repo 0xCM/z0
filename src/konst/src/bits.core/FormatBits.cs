@@ -33,7 +33,6 @@ namespace Z0
         public static string FormatBits(this long src, BitFormat? config = null)
             => api.format(src, config ?? BitFormatter.configure());
 
-
         public static string Format(this byte src, NumericBaseKind @base)
             => @base switch{
                 NumericBaseKind.Base2 => src.FormatBits(),

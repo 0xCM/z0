@@ -5,17 +5,15 @@
 namespace Z0
 {
     using System;
-    using System.Reflection;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Konst;
+    using static z;
 
-    partial struct ClrQuery
+    public readonly partial struct CellFuncs
     {
-        [MethodImpl(Inline)]
-        public static A tag<T,A>(T member, A a = default)
-            where T : MemberInfo
-            where A : Attribute
-                => member.GetCustomAttribute<A>();
+        [MethodImpl(Inline), Op]
+        public static CellFuncSig sig(utf8 name, TypeWidth[] args, TypeWidth result)
+            => new CellFuncSig(name, args, result);
     }
 }

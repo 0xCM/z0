@@ -5,17 +5,15 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Buffers;
     using System.Reflection;
+    using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
-    partial struct ClrQuery
+    public static partial class XCli
     {
         [MethodImpl(Inline), Op]
-        public static Module[] modules(Assembly src)
-            => src.Modules.Array();
+        public static ClrMemberIdentity Identity(this EventInfo src)
+            => new ClrMemberIdentity(src);
     }
 }

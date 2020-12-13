@@ -14,6 +14,17 @@ namespace Z0
     {
         const NumericKind Closure = UnsignedInts;
 
+        /// <summary>
+        /// Creates a <see cref='DataFlow{S,T}'/> from a specified source to a specified target;
+        /// </summary>
+        /// <param name="src">The source</param>
+        /// <param name="dst">The target</param>
+        /// <typeparam name="S">The source type</typeparam>
+        /// <typeparam name="T">The target type</typeparam>
+        [MethodImpl(Inline)]
+        public static DataFlow<S,T> flow<S,T>(in S src, in T dst)
+            => new DataFlow<S,T>(src,dst);
+
         public static string identifier<S,T>(DataFlow<S,T> flow)
             => Relations.RenderLink<S,T>().Format(flow.Source, flow.Target);
 

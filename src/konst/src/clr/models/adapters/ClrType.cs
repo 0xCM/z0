@@ -17,7 +17,7 @@ namespace Z0
         public Type Definition {get;}
 
         public ClrTypeKind TypeKind
-            => api.kind(Definition);
+            => Definition.TypeKind();
 
         [MethodImpl(Inline)]
         public ClrType(Type src)

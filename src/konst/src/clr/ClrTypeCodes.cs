@@ -195,7 +195,6 @@ namespace Z0
             }
         }
 
-
         [MethodImpl(Inline)]
         internal Type type_u<T>()
         {

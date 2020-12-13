@@ -64,7 +64,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return generic<T>(fmath.nonz(float64(a),float64(alt)));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
     }
 }

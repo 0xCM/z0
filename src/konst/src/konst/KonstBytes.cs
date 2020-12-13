@@ -318,7 +318,7 @@ namespace Z0
         public static ReadOnlySpan<byte> PackUSHi32x256x16u
             => new byte[32]{
                 FF,FF,FF,FF,FF,FF,FF,FF,
-                0,1,4,5,8,9,12,13,
+                0, 1, 4, 5, 8, 9, 12,13,
                 FF,FF,FF,FF,FF,FF,FF,FF,
                 0,1,4,5,8,9,12,13
                 };
@@ -406,7 +406,6 @@ namespace Z0
                 4,0,0,0,0,0,0,0,5,0,0,0,0,0,0,0,
                 6,0,0,0,0,0,0,0,7,0,0,0,0,0,0,0,
                 };
-
 
         public static ReadOnlySpan<byte> ClearAlt256x8u
             => new byte[32]{0x00,0xff,0x02,0xff,0x04,0xff,0x06,0xff,0x08,0xff,0x0a,0xff,0x0c,0xff,0x0e,0xff,0x00,0xff,0x02,0xff,0x04,0xff,0x06,0xff,0x08,0xff,0x0a,0xff,0x0c,0xff,0x0e,0xff};

@@ -4,13 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Security;
-    using System.Runtime.Intrinsics;
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     using static SFx;
 
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public interface ICheckBinarySVFD<W,F,T>
         where T : unmanaged
         where W : ITypeWidth

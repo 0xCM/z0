@@ -14,10 +14,10 @@ namespace Z0
     /// </summary>
     public readonly struct LiteralLogicSeqExpr : ILiteralLogicSeqExpr
     {
-        public Bit32[] Terms {get;}
+        public bit[] Terms {get;}
 
         [MethodImpl(Inline)]
-        public LiteralLogicSeqExpr(Bit32[] src)
+        public LiteralLogicSeqExpr(bit[] src)
             => Terms = src;
 
         /// <summary>
@@ -26,7 +26,7 @@ namespace Z0
         public LogicExprKind ExprKind
             => LogicExprKind.Literal;
 
-        public Bit32 this[int index]
+        public bit this[int index]
         {
             [MethodImpl(Inline)]
             get => Terms[index];

@@ -114,6 +114,5 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where T : unmanaged
                 => eq(a.Data, b.Data);
-
     }
 }

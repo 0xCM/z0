@@ -23,7 +23,7 @@ namespace Z0
             where T : unmanaged
         {
             for(var i=0; i<count; i++)
-                seek(dst,i) = z.force<T>(i);
+                seek(dst,i) = force<T>(i);
         }
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace Z0
             where T : unmanaged
         {
             for(var i=0; i<count; i++)
-                seek(dst,i) = gmath.sub(first, z.force<T>(i));
+                seek(dst,i) = gmath.sub(first, force<T>(i));
         }
 
         /// <summary>

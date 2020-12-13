@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="bs">The source bitstring</param>
         public static LiteralLogicSeqExpr ToLogicSeq(this BitString bs)
         {
-            var terms = new Bit32[bs.Length];
+            var terms = new bit[bs.Length];
             for(var i=0; i<terms.Length; i++)
                 terms[i] = bs[i];
             return new LiteralLogicSeqExpr(terms);

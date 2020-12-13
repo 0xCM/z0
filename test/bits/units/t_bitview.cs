@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
 
-    using static Konst;
     using static z;
 
     public class t_bitview : t_bitcore<t_bitview>
@@ -27,7 +26,7 @@ namespace Z0
             where T : unmanaged
         {
             var src = maxval<T>();
-            var view = Bit.editor(ref src);
+            var view = Bit.editor(src);
             var bytecount = size<T>();
 
             for(var i=0; i<bytecount; i++)
@@ -35,7 +34,7 @@ namespace Z0
                 view[i,j] = j % 2 == 0;
 
             var bs = BitString.scalar(src);
-            for(var i=0; i< bytecount*8; i++)
+            for(var i=0; i<bytecount*8; i++)
                 Claim.Require(bs[i] == (i%2 == 0));
         }
     }

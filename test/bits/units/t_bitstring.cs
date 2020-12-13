@@ -16,7 +16,7 @@ namespace Z0
         void bs_bitview()
         {
             var x = Random.CpuVector<int>(n128);
-            var y = Bit.editor(ref x);
+            var y = Bit.editor(x);
             var ys = y.Bytes.ToBitString();
             var xs = x.ToBitString();
             Claim.eq(ys,xs);

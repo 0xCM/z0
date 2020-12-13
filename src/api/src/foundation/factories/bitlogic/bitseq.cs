@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <param name="terms">The sequence terms</param>
         [MethodImpl(Inline)]
-        public static LiteralLogicSeqExpr bitseq(params Bit32[] terms)
+        public static LiteralLogicSeqExpr bitseq(params bit[] terms)
             => new LiteralLogicSeqExpr(terms);
 
         /// <summary>
@@ -25,7 +25,7 @@ namespace Z0
         /// <param name="length">The natural length of the sequence</param>
         /// <param name="terms">The sequence terms</param>
         [MethodImpl(Inline)]
-        public static LiteralLogicSeqExpr<N> bitseq<N>(N length, params Bit32[] terms)
+        public static LiteralLogicSeqExpr<N> bitseq<N>(N length, params bit[] terms)
             where N : unmanaged, ITypeNat
         {
             z.insist<N>(terms.Length);

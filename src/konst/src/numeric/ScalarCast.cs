@@ -8,13 +8,10 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static z;
 
     [ApiHost]
     public readonly struct ScalarCast
     {
-
-
         /// <summary>
         /// Converts a <see cref='sbyte'/> to a <see cref='byte'/>
         /// </summary>
@@ -83,14 +80,26 @@ namespace Z0
         public static sbyte int8(float src)
             => (sbyte)((int)src);
 
+        /// <summary>
+        /// Forces a <see cref='double'/> to a <see cref='sbyte'/>
+        /// </summary>
+        /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
         public static sbyte int8(double src)
             => (sbyte)((long)src);
 
+        /// <summary>
+        /// Forces a <see cref='float'/> to a <see cref='short'/>
+        /// </summary>
+        /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
         public static short int16(float src)
             => (short)((int)src);
 
+        /// <summary>
+        /// Forces a <see cref='double'/> to a <see cref='short'/>
+        /// </summary>
+        /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
         public static short int16(double src)
             => (short)((long)src);
@@ -122,7 +131,6 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ushort uint16(double src)
             => (ushort)((long)src);
-
 
         [MethodImpl(Inline), Op]
         public static int int32(float src)
@@ -160,7 +168,6 @@ namespace Z0
         public static ulong uint64(double src)
             => (ulong)((long)src);
 
-
         [MethodImpl(Inline), Op]
         public static ushort uint16(sbyte src)
             => (ushort)src;
@@ -169,30 +176,53 @@ namespace Z0
         public static ushort uint16(byte src)
             => (ushort)src;
 
+        /// <summary>
+        /// Forces a <see cref='short'/> to a <see cref='ushort'/>
+        /// </summary>
+        /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
         public static ushort uint16(short src)
             => (ushort)src;
 
+        /// <summary>
+        /// Defines an indentity operator over the <see cref='ushort'/> domain
+        /// </summary>
+        /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
         public static ushort uint16(ushort src)
             => (ushort)src;
 
+        /// <summary>
+        /// Forces a <see cref='int'/> to a <see cref='ushort'/>
+        /// </summary>
+        /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
         public static ushort uint16(int src)
             => (ushort)src;
 
+        /// <summary>
+        /// Forces a <see cref='uint'/> to a <see cref='ushort'/>
+        /// </summary>
+        /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
         public static ushort uint16(uint src)
             => (ushort)src;
 
+        /// <summary>
+        /// Forces a <see cref='long'/> to a <see cref='ushort'/>
+        /// </summary>
+        /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
         public static ushort uint16(long src)
             => (ushort)src;
 
+        /// <summary>
+        /// Forces a <see cref='ulong'/> to a <see cref='ushort'/>
+        /// </summary>
+        /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
         public static ushort uint16(ulong src)
             => (ushort)src;
-
 
         /// <summary>
         /// Forces a <see cref='sbyte'/> to a <see cref='uint'/>
@@ -321,5 +351,86 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static long int64(ulong src)
             => (long)src;
+
+        [MethodImpl(Inline), Op]
+        public static float float32(sbyte src)
+            => (float)src;
+
+        [MethodImpl(Inline), Op]
+        public static float float32(byte src)
+            => (float)(int)src;
+
+        [MethodImpl(Inline), Op]
+        public static float float32(short src)
+            => (float)src;
+
+        [MethodImpl(Inline), Op]
+        public static float float32(ushort src)
+            => (float)(int)src;
+
+        [MethodImpl(Inline), Op]
+        public static float float32(int src)
+            => (float)src;
+
+        [MethodImpl(Inline), Op]
+        public static float float32(uint src)
+            => (float)(int)src;
+
+        [MethodImpl(Inline), Op]
+        public static float float32(long src)
+            => (float)(int)src;
+
+        [MethodImpl(Inline), Op]
+        public static float float32(ulong src)
+            => (float)(int)src;
+
+        [MethodImpl(Inline), Op]
+        public static float float32(float src)
+            => (float)src;
+
+        [MethodImpl(Inline), Op]
+        public static float float32(double src)
+            => (float)src;
+
+        [MethodImpl(Inline), Op]
+        public static double float64(sbyte src)
+            => (double)(long)src;
+
+        [MethodImpl(Inline), Op]
+        public static double float64(byte src)
+            => (double)(long)src;
+
+        [MethodImpl(Inline), Op]
+        public static double float64(short src)
+            => (double)(long)src;
+
+        [MethodImpl(Inline), Op]
+        public static double float64(ushort src)
+            => (double)(int)src;
+
+        [MethodImpl(Inline), Op]
+        public static double float64(int src)
+            => (double)(long)src;
+
+        [MethodImpl(Inline), Op]
+        public static double float64(uint src)
+            => (double)(long)src;
+
+        [MethodImpl(Inline), Op]
+        public static double float64(long src)
+            => (double)(long)src;
+
+        [MethodImpl(Inline), Op]
+        public static double float64(ulong src)
+            => (double)(long)src;
+
+        [MethodImpl(Inline), Op]
+        public static double float64(float src)
+            => (double)src;
+
+        [MethodImpl(Inline), Op]
+        public static double float64(double src)
+            => (double)src;
+
     }
 }

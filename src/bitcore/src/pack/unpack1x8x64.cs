@@ -29,7 +29,7 @@ namespace Z0
         public static ref ulong unpack1x8x64(ulong src, ref ulong dst)
         {
             unpack1x8x32((uint)src, ref dst);
-            unpack1x8x32((uint)(src >> 32), ref seek8g(dst, 32));
+            unpack1x8x32((uint)(src >> 32), ref seek8(dst, 32));
             return ref dst;
         }
 

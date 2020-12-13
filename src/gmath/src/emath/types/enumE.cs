@@ -17,9 +17,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public @enum(E literal)
-        {
-            Literal = literal;
-        }
+            => Literal = literal;
 
         public DataWidth Width
         {

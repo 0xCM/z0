@@ -147,18 +147,18 @@ namespace Z0
         }
 
         [Op]
-        static ReadOnlySpan<Hex1> CheckLiterals()
+        static ReadOnlySpan<bit> CheckLiterals()
         {
             var index = z8;
             var src = Enums.BinaryLiterals<DocField,ulong>().ToReadOnlySpan();
             var count = src.Length;
-            var dst = span<Hex1>(count);
+            var dst = span<bit>(count);
             Check(src,dst);
             return dst;
         }
 
         [MethodImpl(Inline), Op]
-        static void Check(ReadOnlySpan<BinaryLiteral<ulong>> src, Span<Hex1> dst)
+        static void Check(ReadOnlySpan<BinaryLiteral<ulong>> src, Span<bit> dst)
         {
             var count = src.Length;
             for(var i=0u; i<count; i++)

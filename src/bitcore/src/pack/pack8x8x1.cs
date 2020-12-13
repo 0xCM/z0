@@ -10,7 +10,6 @@ namespace Z0
     using static Konst;
     using static z;
     using static BitMasks.Literals;
-    using static BitMasks;
 
     partial class Bits
     {

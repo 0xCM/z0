@@ -13,9 +13,6 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static unsafe TypeCode lookup(in ClrTypeCodes src, byte index)
-        {
-            var address = z.address(src);
-            return (TypeCode)(*(address + index).Pointer<byte>());
-        }
+            => (TypeCode)(*(z.address(src) + index).Pointer<byte>());
     }
 }

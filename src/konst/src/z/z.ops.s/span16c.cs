@@ -8,27 +8,16 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static System.Runtime.InteropServices.MemoryMarshal;
 
     partial struct z
     {
-        /// <summary>
-        /// Creates a u16 span from a T-cell reference
-        /// </summary>
-        /// <param name="src">The reference cell</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline)]
         public static Span<char> span16c<T>(in T src)
             where T : struct
-                => recover<char>(AsBytes(CreateSpan(ref edit(src), 1)));
+                => memory.span16c(src);
 
-        /// <summary>
-        /// Creates a u16 span from a T-cell reference
-        /// </summary>
-        /// <param name="src">The reference cell</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static ReadOnlySpan<char> span16c(ReadOnlySpan<byte> src)
-            => recover<char>(src);            
+            => memory.span16c(src);
     }
 }

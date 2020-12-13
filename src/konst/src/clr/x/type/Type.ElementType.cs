@@ -12,6 +12,23 @@ namespace Z0
 
     partial class XClrQuery
     {
+        [MethodImpl(Inline), Op]
+        public static ClrTypeKind TypeKind(this Type src)
+        {
+            if(src.IsClass)
+                return ClrTypeKind.Class;
+            else if (src.IsEnum)
+                return ClrTypeKind.Enum;
+            else if(src.IsInterface)
+                return ClrTypeKind.Interface;
+            else if(src.IsStruct())
+                return ClrTypeKind.Struct;
+            else if(src.IsDelegate())
+                return ClrTypeKind.Delegate;
+            else
+                return 0;
+        }
+
         /// <summary>
         /// Queries the source <see cref='Type'/> for the <see cref='Type'/> it wraps
         /// </summary>

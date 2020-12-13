@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static memory;
 
     /// <summary>
     /// Represents a value as an ordered sequence of bits/bytes
@@ -21,8 +22,8 @@ namespace Z0
         public readonly Span<byte> Bytes;
 
         [MethodImpl(Inline)]
-        public BitEdit(ref T src)
-            => Bytes = new Span<byte>(Unsafe.AsPointer(ref src), Unsafe.SizeOf<T>());
+        public BitEdit(in T src)
+            => Bytes = new Span<byte>(gptr(src), (int)size<T>());
 
         /// <summary>
         /// The total number of represented bytes
@@ -48,19 +49,19 @@ namespace Z0
         public ref byte this[ByteSize offset]
         {
             [MethodImpl(Inline)]
-            get => ref Bytes[offset];
+            get => ref seek(Bytes, offset);
         }
 
         /// <summary>
         /// Queries/Manipulates the source at the bit-level
         /// </summary>
-        public Bit32 this[ByteSize offset, byte pos]
+        public bit this[ByteSize offset, byte pos]
         {
             [MethodImpl(Inline)]
-            get => Bit32.test(Bytes[offset], pos);
+            get => BitStates.test(Bytes[offset], pos);
 
             [MethodImpl(Inline)]
-            set => Bytes[offset] = Bit32.set(Bytes[offset], pos, value);
+            set => Bytes[offset] = BitStates.set(Bytes[offset], pos, value);
         }
 
         [MethodImpl(Inline)]

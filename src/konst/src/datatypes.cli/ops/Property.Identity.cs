@@ -5,18 +5,15 @@
 namespace Z0
 {
     using System;
+    using System.Reflection;
     using System.Runtime.CompilerServices;
 
     using static Part;
 
-    partial struct ClrQuery
+    partial class XCli
     {
         [MethodImpl(Inline), Op]
-        public static ref readonly Type coded(in ClrTypeCodes src, TypeCode tc)
-            => ref src[tc];
-
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static Type coded<T>(in ClrTypeCodes src)
-            => src.type_u<T>();
+        public static ClrMemberIdentity Identity(this PropertyInfo src)
+            => new ClrMemberIdentity(src);
     }
 }

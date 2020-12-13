@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The source value</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Integers)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static SignKind signum<T>(T a)
             where T : unmanaged
                 => signum_u(a);

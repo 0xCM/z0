@@ -5,17 +5,15 @@
 namespace Z0
 {
     using System;
+    using System.Reflection;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
-    partial class XTend
+    partial class XCli
     {
-        [MethodImpl(Inline)]
-        public static void OnNone(this Bit32 x, Action f)
-        {
-            if(!x)
-                f();
-        }
+        [MethodImpl(Inline), Op]
+        public static ClrMemberIdentity Identity(this MethodInfo src)
+            => new ClrMemberIdentity(src);
     }
 }

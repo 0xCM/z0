@@ -5,9 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
-    using System.Linq;
 
     using static Konst;
     using static gmath;
@@ -15,13 +12,13 @@ namespace Z0
 
     partial struct Algorithmic
     {
-        public static Span<T> increments<T>(ClosedInterval<T> src)
+        public static T[] increments<T>(ClosedInterval<T> src)
             where T : unmanaged
         {
             var min = src.Min;
             var max = src.Max;
             var count = src.Width + 1;
-            Span<T> dst = sys.alloc<T>(src.Width + 1);
+            var dst = sys.alloc<T>(src.Width + 1);
             increments(src,dst);
             return dst;
         }

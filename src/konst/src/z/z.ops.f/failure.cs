@@ -32,9 +32,6 @@ namespace Z0
         /// <typeparam name="T">The result payload type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Outcome<T> fail<T>(string message)
-        {
-            var code = (ulong)address(string.Intern(message));
-            return new Outcome<T>(false, default(T), code);
-        }
+            => new Outcome<T>(false, default(T), (ulong)address(string.Intern(message)));
     }
 }

@@ -35,7 +35,7 @@ namespace Z0
         public void Run()
         {
             using var flow = Wf.Running();
-            Wf.Status(delimit(Wf.Api.PartIdentities));
+            Wf.Status(Seq.delimited(Wf.Api.PartIdentities));
             try
             {
                 EmitFieldMetadata.create().Run(Wf);

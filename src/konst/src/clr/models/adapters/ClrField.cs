@@ -15,6 +15,7 @@ namespace Z0
     [ApiType(ApiNames.ClrField, true)]
     public readonly struct ClrField : IClrRuntimeMember<ClrField,FieldInfo>
     {
+        [Ignore]
         public FieldInfo Definition {get;}
 
         [MethodImpl(Inline)]
@@ -70,10 +71,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public string Format()
             => Definition.Name;
-
-        [Ignore]
-        FieldInfo IClrRuntimeObject<FieldInfo>.Definition
-            => Definition;
 
         [Ignore]
         ClrArtifactKind IClrRuntimeObject.ClrKind

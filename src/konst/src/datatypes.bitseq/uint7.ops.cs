@@ -18,6 +18,10 @@ namespace Z0
         public static U maxval(W w)
             => U.Max;
 
+        [MethodImpl(Inline), Op]
+        public static U dec(U x)
+            => !x.IsMin ? new U(Bytes.sub(x.data, 1), false) : U.Max;
+
         /// <summary>
         /// Reduces the source value to a width-identified integer via modular arithmetic
         /// </summary>

@@ -6,24 +6,31 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
 
     partial class XTend
     {
-
-        [MethodImpl(Inline)]
-        public static void OnSome(this bool x, Action f)
+        [MethodImpl(Inline), Op]
+        public static void OnNone(this bit x, Action f)
         {
-            if(x)
+            if(!x)
                 f();
         }
 
-        public static void OnSome<T>(this T? x, Action<T> f)
+        [MethodImpl(Inline), Op]
+        public static void OnNone(this bool x, Action f)
+        {
+            if(!x)
+                f();
+        }
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static void OnNone<T>(this T? x, Action f)
             where T : struct
         {
-            if(x.HasValue)
-                f(x.Value); 
+            if(!x.HasValue)
+                f();
         }
     }
 }

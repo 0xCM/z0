@@ -5,16 +5,13 @@
 namespace Z0
 {
     using System;
+    using System.Reflection;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
-
-    public readonly partial struct CellFuncs
+    partial class XClrQuery
     {
-        [MethodImpl(Inline), Op]
-        public static CellFuncSig sig(utf8 name, TypeWidth[] args, TypeWidth result)
-            => new CellFuncSig(name, args, result);
-
+        [Op]
+        public static Module[] Modules(this Assembly src)
+            => src.Modules.Array();
     }
 }

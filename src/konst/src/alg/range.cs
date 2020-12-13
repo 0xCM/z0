@@ -2,19 +2,21 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace alg
 {
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using Z0;
 
-    [ApiHost]
-    public readonly struct Ranges
+    using static Z0.Part;
+    using static Z0.memory;
+
+    [ApiHost("alg.range")]
+    public readonly struct range
     {
        [MethodImpl(Inline), Op, Closures(Integers)]
-       public static void range8i<T>(T x0, T x1, T? step, Span<T> dst)
+       public static void i8<T>(T x0, T x1, T? step, Span<T> dst)
             where T : unmanaged
         {
             var min = Unsafe.As<T,sbyte>(ref x0);
@@ -25,18 +27,18 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(Integers)]
-        public static void range8u<T>(T x0, T x1, T? step, Span<T> dst)
+        public static void u8<T>(T x0, T x1, T? step, Span<T> dst)
             where T : unmanaged
         {
             var min = Unsafe.As<T,byte>(ref x0);
             var max = Unsafe.As<T,byte>(ref x1);
-            var _step = Unsafe.As<T?, byte?>(ref step) ??(byte)1;
+            var _step = Unsafe.As<T?,byte?>(ref step) ??(byte)1;
             for(var i = min; i <= max; i += _step)
                 seek(dst, i) = Unsafe.As<byte,T>(ref i);
         }
 
         [MethodImpl(Inline), Op, Closures(Integers)]
-        public static void range16i<T>(T x0, T x1, T? step, Span<T> dst)
+        public static void i16<T>(T x0, T x1, T? step, Span<T> dst)
             where T : unmanaged
         {
             var min = Unsafe.As<T,short>(ref x0);
@@ -47,7 +49,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(Integers)]
-        public static void range16u<T>(T x0, T x1, T? step, Span<T> dst)
+        public static void u16<T>(T x0, T x1, T? step, Span<T> dst)
             where T : unmanaged
         {
             var min = Unsafe.As<T,ushort>(ref x0);
@@ -58,7 +60,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(Integers)]
-        public static void range32i<T>(T x0, T x1, T? step, Span<T> dst)
+        public static void i32<T>(T x0, T x1, T? step, Span<T> dst)
             where T : unmanaged
         {
             var min = Unsafe.As<T,int>(ref x0);
@@ -69,7 +71,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(Integers)]
-        public static void range32u<T>(T x0, T x1, T? step, Span<T> dst)
+        public static void u32<T>(T x0, T x1, T? step, Span<T> dst)
             where T : unmanaged
         {
             var min = Unsafe.As<T,uint>(ref x0);
@@ -80,7 +82,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(Integers)]
-        public static void range64i<T>(T x0, T x1, T? step, Span<T> dst)
+        public static void i64<T>(T x0, T x1, T? step, Span<T> dst)
             where T : unmanaged
         {
             var min = Unsafe.As<T,long>(ref x0);
@@ -91,14 +93,25 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(Integers)]
-        public static void range64u<T>(T x0, T x1, T? step, Span<T> dst)
+        public static void u64<T>(T x0, T x1, T? step, Span<T> dst)
             where T : unmanaged
         {
             var min = Unsafe.As<T,ulong>(ref x0);
             var max = Unsafe.As<T,ulong>(ref x1);
-            var _step = Unsafe.As<T?, ulong?>(ref step) ?? 1ul;
+            var _step = Unsafe.As<T?,ulong?>(ref step) ?? 1ul;
             for(var i = min; i <= max; i += _step)
                 seek(dst, i) = Unsafe.As<ulong,T>(ref i);
+        }
+
+        [MethodImpl(Inline), Op, Closures(Integers)]
+        public static void u64<T>(T x0, T x1, T step, Span<T> dst)
+            where T : unmanaged
+        {
+            var min = @as<T,ulong>(x0);
+            var max = @as<T,ulong>(x1);
+            var _step = @as<T,ulong>(step);
+            for(var i=min; i<=max; i+=_step)
+                seek(dst, i) = @as<ulong,T>(i);
         }
     }
 }

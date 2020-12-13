@@ -12,20 +12,5 @@ namespace Z0
 
     partial struct ClrQuery
     {
-        [MethodImpl(Inline), Op]
-        public static ClrMemberIdentity identity(FieldInfo src)
-            => new ClrMemberIdentity(src);
-
-        [MethodImpl(Inline), Op]
-        public static ClrMemberIdentity identity(MethodInfo src)
-            => new ClrMemberIdentity(src);
-
-        [MethodImpl(Inline), Op]
-        public static ClrMemberIdentity identity(PropertyInfo src)
-            => new ClrMemberIdentity(src);
-
-        [MethodImpl(Inline), Op]
-        public static ClrMemberIdentity identity(EventInfo src)
-            => new ClrMemberIdentity(src);
     }
 }

@@ -31,6 +31,30 @@ namespace Z0
             => view(src.ManifestModule);
 
         /// <summary>
+        /// Defines a reference to an artifact of parametric type
+        /// </summary>
+        /// <param name="src">The source artifact</param>
+        /// <typeparam name="A">The artifact type</typeparam>
+        [MethodImpl(Inline)]
+        public static ClrArtifactRef<A> reference<A>(A src)
+            where A : struct, IClrArtifact<A>
+                => src;
+
+        [MethodImpl(Inline), Op]
+        public static ClrFieldRecord record(FieldInfo src)
+        {
+            var data = view(src);
+            var dst = new ClrFieldRecord();
+            dst.Key = reference(data);
+            dst.DeclaringType = data.DeclaringType.Key;
+            dst.DataType = data.FieldType.Key;
+            dst.Attributes = data.Attributes;
+            dst.Address = data.Address;
+            dst.IsStatic = data.IsStatic;
+            return dst;
+        }
+
+        /// <summary>
         /// Defines a <see cref='ModuleView'/> over the source
         /// </summary>
         /// <param name="src">The source module</param>
@@ -113,6 +137,15 @@ namespace Z0
             => memory.recover<Type,TypeView>(@readonly(src.Types()));
 
         /// <summary>
+        /// Queries the host type for a <see cref='ClrInterfaceMap'/>
+        /// </summary>
+        /// <param name="host"></param>
+        /// <param name="contract"></param>
+        [MethodImpl(Inline), Op]
+        public static ClrInterfaceMap iMap(Type host, Type contract)
+            => @as<InterfaceMapping, ClrInterfaceMap>(host.InterfaceMap(contract));
+
+        /// <summary>
         /// Provides a non-allocated <see cref='FieldView'> sequence that covers the fields defined by the source
         /// </summary>
         /// <param name="src">The source type</param>
@@ -126,7 +159,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<ModuleView> vModules(Assembly src)
-            => View(ClrQuery.modules(src), module);
+            => View(src.Modules(), module);
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<TypeView> vTypes(Assembly src)

@@ -19,12 +19,12 @@ namespace Z0
         /// <param name="b">The second operand</param>
         /// <typeparam name="T">The numeric type</typeparam>
         [MethodImpl(Inline), Lt, Closures(AllNumeric)]
-        public static Bit32 lt<T>(T a, T b)
+        public static bit lt<T>(T a, T b)
             where T : unmanaged
                 => lt_u(a,b);
 
         [MethodImpl(Inline)]
-        static Bit32 lt_u<T>(T a, T b)
+        static bit lt_u<T>(T a, T b)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -40,7 +40,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static Bit32 lt_i<T>(T a, T b)
+        static bit lt_i<T>(T a, T b)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))

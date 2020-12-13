@@ -21,14 +21,6 @@ namespace Z0
         public readonly ReadOnlySpan<byte> Bytes;
 
         [MethodImpl(Inline)]
-        public static bool operator ==(BitView<T> lhs, BitView<T> rhs)
-            => lhs.Bytes.SequenceEqual(rhs.Bytes);
-
-        [MethodImpl(Inline)]
-        public static bool operator !=(BitView<T> lhs, BitView<T> rhs)
-            => !(lhs == rhs);
-
-        [MethodImpl(Inline)]
         public BitView(in T src)
         {
             Bytes =  z.bytes(src);
@@ -51,7 +43,7 @@ namespace Z0
             [MethodImpl(Inline)]
             get => (BitSize)ByteCount;
         }
-        
+
         /// <summary>
         /// Selects an offset-identified byte
         /// </summary>
@@ -64,7 +56,7 @@ namespace Z0
         /// <summary>
         /// Queries/Manipulates the source at the bit-level
         /// </summary>
-        public BitState this[ByteSize offset, byte pos]        
+        public BitState this[ByteSize offset, byte pos]
         {
             [MethodImpl(Inline)]
             get => z.testbit(Bytes[offset], pos);
@@ -79,5 +71,13 @@ namespace Z0
 
         public override int GetHashCode()
             => throw new NotSupportedException();
+
+        [MethodImpl(Inline)]
+        public static bool operator ==(BitView<T> lhs, BitView<T> rhs)
+            => lhs.Bytes.SequenceEqual(rhs.Bytes);
+
+        [MethodImpl(Inline)]
+        public static bool operator !=(BitView<T> lhs, BitView<T> rhs)
+            => !(lhs == rhs);
     }
 }

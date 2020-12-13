@@ -42,7 +42,7 @@ namespace Z0
 
         public void Run()
         {
-            Wf.Running(Host, delimit(Extracted.Length, Decoded.Length));
+            Wf.Running(Host, Seq.delimited(Extracted.Length, Decoded.Length));
 
             try
             {
@@ -64,7 +64,7 @@ namespace Z0
                 Wf.Error(Host, e);
             }
 
-            Wf.Ran(Host, delimit(Extracted.Length, Decoded.Length));
+            Wf.Ran(Host, Seq.delimited(Extracted.Length, Decoded.Length));
         }
     }
 }

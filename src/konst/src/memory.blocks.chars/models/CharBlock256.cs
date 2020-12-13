@@ -33,6 +33,15 @@ namespace Z0
             get => cover<CharBlock256,char>(this, CharCount);
         }
 
+        /// <summary>
+        /// Specifies a reference to the leading cell
+        /// </summary>
+        public ref char First
+        {
+            [MethodImpl(Inline)]
+            get => ref first(Data);
+        }
+
         [MethodImpl(Inline)]
         public static implicit operator CharBlock256(in Pair<CharBlock128> src)
         {

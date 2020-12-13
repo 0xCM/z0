@@ -20,12 +20,12 @@ namespace Z0
         /// <param name="delta">The tolerance</param>
         /// <typeparam name="T">The numeric type</typeparam>
         [MethodImpl(Inline), Within, Closures(AllNumeric)]
-        public static Bit32 within<T>(T a, T b, T delta)
+        public static bit within<T>(T a, T b, T delta)
             where T : unmanaged
                 => within_u(a,b,delta);
 
         [MethodImpl(Inline)]
-        static Bit32 within_u<T>(T a, T b, T delta)
+        static bit within_u<T>(T a, T b, T delta)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -41,7 +41,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static Bit32 within_i<T>(T a, T b, T delta)
+        static bit within_i<T>(T a, T b, T delta)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -54,7 +54,6 @@ namespace Z0
                 return math.within(int64(a), int64(b), int64(delta));
             else
                 return gfp.within(a,b,delta);
-
         }
     }
 }

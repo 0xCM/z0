@@ -28,7 +28,7 @@ namespace Z0.Logix
         /// </summary>
         /// <param name="expr">The expression to evaluate</param>
         [Op, Closures(UnsignedInts)]
-        public static Bit32 eval<T>(ILogicExpr<T> expr)
+        public static bit eval<T>(ILogicExpr<T> expr)
             where T : unmanaged
                 => LogicExprEval.eval(expr);
 
@@ -79,7 +79,7 @@ namespace Z0.Logix
         /// <param name="expr">The predicate to evaluate</param>
         /// <typeparam name="T">The type over which the comparison is defined</typeparam>
         [Op, Closures(UnsignedInts)]
-        public static Bit32 eval<T>(IComparisonPredExpr<T> expr)
+        public static bit eval<T>(IComparisonPredExpr<T> expr)
             where T : unmanaged
                 => CmpExprEval.eval(expr);
 
@@ -118,7 +118,7 @@ namespace Z0.Logix
         /// <param name="a">The first variable value</param>
         /// <param name="b">The second variable value</param>
         [Op]
-        public static Bit32 satisfied(ComparisonExpr expr, Bit32 a, Bit32 b)
+        public static bit satisfied(ComparisonExpr expr, bit a, bit b)
         {
             expr.SetVars(a,b);
             return LogicEngine.eval(expr);
@@ -132,7 +132,7 @@ namespace Z0.Logix
         /// <param name="a">The first variable value</param>
         /// <param name="b">The second variable value</param>
         [Op, Closures(Integers)]
-        public static Bit32 satisfied<T>(ComparisonExpr<T> expr, T a, T b)
+        public static bit satisfied<T>(ComparisonExpr<T> expr, T a, T b)
             where T :unmanaged
         {
             expr.SetVars(a,b);
@@ -147,7 +147,7 @@ namespace Z0.Logix
         /// <param name="a">The first variable value</param>
         /// <param name="b">The second variable value</param>
         [Op, Closures(Integers)]
-        public static Bit32 satisfied<T>(ComparisonExpr<Vector128<T>> expr, Vector128<T> a, Vector128<T> b)
+        public static bit satisfied<T>(ComparisonExpr<Vector128<T>> expr, Vector128<T> a, Vector128<T> b)
             where T :unmanaged
         {
             expr.SetVars(a,b);
@@ -163,7 +163,7 @@ namespace Z0.Logix
         /// <param name="a">The first variable value</param>
         /// <param name="b">The second variable value</param>
         [Op, Closures(Integers)]
-        public static Bit32 satisfied<T>(ComparisonExpr<Vector256<T>> expr, Vector256<T> a, Vector256<T> b)
+        public static bit satisfied<T>(ComparisonExpr<Vector256<T>> expr, Vector256<T> a, Vector256<T> b)
             where T :unmanaged
         {
             expr.SetVars(a,b);
@@ -177,7 +177,7 @@ namespace Z0.Logix
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         [Op]
-        public static Bit32 equal(VariedLogicExpr a, VariedLogicExpr b)
+        public static bit equal(VariedLogicExpr a, VariedLogicExpr b)
         {
             var count = a.Vars.Length;
             foreach(var vars in BitLogicSpec.bitcombo(count))

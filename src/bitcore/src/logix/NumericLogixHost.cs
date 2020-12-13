@@ -29,7 +29,7 @@ namespace Z0
     /// <param name="b">The second operand</param>
     /// <typeparam name="T">The domain over which the predicate is evaluated</typeparam>
     [Free]
-    public delegate Bit32 BinaryPred<T>(T a, T b)
+    public delegate bit BinaryPred<T>(T a, T b)
         where T : unmanaged;
 
     /// <summary>
@@ -81,8 +81,8 @@ namespace Z0
         public static ReadOnlySpan<BCK> BinaryComparisonKinds
             => Enums.literals<BCK>();
 
-        [Closures(Integers)]
-        public static Bit32 eval<T>(BCK kind, T a, T b)
+        [Op, Closures(Integers)]
+        public static bit eval<T>(BCK kind, T a, T b)
             where T : unmanaged
         {
             switch(kind)
@@ -97,7 +97,7 @@ namespace Z0
             }
         }
 
-        [Closures(Integers)]
+        [Op, Closures(Integers)]
         public static BinaryPred<T> lookup<T>(BCK kind)
             where T : unmanaged
         {
@@ -113,7 +113,7 @@ namespace Z0
             }
         }
 
-        [NumericClosures(Integers)]
+        [Op, Closures(Integers)]
         public static T eval<T>(BLK kind, T a, T b)
             where T : unmanaged
         {
@@ -139,7 +139,7 @@ namespace Z0
             }
         }
 
-        [NumericClosures(Integers)]
+        [Op, Closures(Integers)]
         public static T eval<T>(ULK kind, T a)
             where T : unmanaged
         {
@@ -158,7 +158,7 @@ namespace Z0
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         /// <param name="c">The third operand</param>
-        [NumericClosures(Integers)]
+        [Op, Closures(Integers)]
         public static T eval<T>(TLK kind, T a, T b, T c)
             where T : unmanaged
         {
@@ -263,7 +263,7 @@ namespace Z0
             }
         }
 
-        [NumericClosures(UnsignedInts)]
+        [Op, Closures(UnsignedInts)]
         public static T eval<T>(BSK kind, T a, byte count)
             where T : unmanaged
         {
@@ -277,7 +277,7 @@ namespace Z0
             }
         }
 
-        [NumericClosures(Integers)]
+        [Op, Closures(Integers)]
         public static Shifter<T> lookup<T>(BSK kind)
             where T : unmanaged
         {
@@ -291,7 +291,7 @@ namespace Z0
             }
         }
 
-        [NumericClosures(Integers)]
+        [Op, NumericClosures(Integers)]
         public static UnaryOp<T> lookup<T>(ULK kind)
             where T : unmanaged
         {

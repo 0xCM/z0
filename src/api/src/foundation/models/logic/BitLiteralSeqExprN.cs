@@ -15,13 +15,13 @@ namespace Z0
    public readonly struct LiteralLogicSeqExpr<N> : ILiteralLogicSeqExpr
         where N : unmanaged, ITypeNat
     {
-        public Bit32[] Terms {get;}
+        public bit[] Terms {get;}
 
         [MethodImpl(Inline)]
-        public LiteralLogicSeqExpr(Bit32[] terms)
+        public LiteralLogicSeqExpr(bit[] terms)
             => Terms = terms;
 
-        public Bit32 this[int index]
+        public bit this[int index]
         {
             [MethodImpl(Inline)]
             get => Terms[index];

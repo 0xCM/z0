@@ -17,6 +17,6 @@ namespace Z0
         /// <param name="t">The type to examine</param>
         [MethodImpl(Inline), Op]
         public static bool IsStatic(this Type t)
-            => ClrQuery.IsStatic(t);
+            => t.IsAbstract && t.IsSealed;
     }
 }

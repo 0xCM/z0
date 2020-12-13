@@ -5,11 +5,65 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
+
+    using static Part;
 
     using NK = NumericKind;
 
     partial class NumericKinds
     {
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        public static string keyword<T>()
+            where T : unmanaged
+                => keyword_u<T>();
+
+        [MethodImpl(Inline)]
+        static string keyword_u<T>()
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte))
+                return "byte";
+            else if(typeof(T) == typeof(ushort))
+                return "ushort";
+            else if(typeof(T) == typeof(uint))
+                return "uint";
+            else if(typeof(T) == typeof(ulong))
+                return "ulong";
+            else
+                return keyword_i<T>();
+        }
+
+        [MethodImpl(Inline)]
+        static string keyword_i<T>()
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(sbyte))
+                return "sbyte";
+            else if(typeof(T) == typeof(short))
+                return "short";
+            else if(typeof(T) == typeof(int))
+                return "int";
+            else if(typeof(T) == typeof(long))
+                return "long";
+            else
+                return keyword_f<T>();
+        }
+
+        [MethodImpl(Inline)]
+        static string keyword_f<T>()
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(float))
+                return "float";
+            else if(typeof(T) == typeof(double))
+                return "double";
+            else if(typeof(T) == typeof(decimal))
+                return "decimal";
+            else
+                throw no<T>();
+        }
+
         /// <summary>
         /// Specifies the C# keyword used to designate a kind-identified primal type
         /// </summary>

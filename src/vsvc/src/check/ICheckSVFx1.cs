@@ -11,6 +11,8 @@ namespace Z0
     using static SFx;
     using static z;
 
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
     public readonly struct CheckSVF<T> : ICheckSVF<T>
         where T : unmanaged
     {

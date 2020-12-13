@@ -46,10 +46,10 @@ namespace Z0.Logix
             }
         }
 
-        void identity_bench(string opname, Func<ComparisonExpr,Bit32,Bit32,Bit32> checker, SystemCounter clock = default)
+        void identity_bench(string opname, Func<ComparisonExpr,bit,bit,bit> checker, SystemCounter clock = default)
         {
             var opcount = 0;
-            var sat = Z0.Bit32.On;
+            var sat = bit.On;
 
             clock.Start();
             for(var i=0; i<CycleCount; i++)

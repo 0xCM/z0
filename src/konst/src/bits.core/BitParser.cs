@@ -15,7 +15,7 @@ namespace Z0
     [ApiHost(ApiNames.BitParser,true)]
     public readonly struct BitParser
     {
-        public static Bit32 Parse(string src)
+        public static bit Parse(string src)
             => OnLabels.Contains(src.Trim().ToLower());
 
         static string[] OnLabels
@@ -34,22 +34,22 @@ namespace Z0
         }
 
         /// <summary>
-        /// Creates a bitspan from text encoding of a binary number
+        /// Creates a bitspan from the text encoding of a binary number
         /// </summary>
         /// <param name="src">The bit source</param>
         [Op]
-        public static ReadOnlySpan<bit> parse(string input)
+        public static ReadOnlySpan<bit> parse(string src)
         {
-            var src = span(input);
-            var count = src.Length;
+            var data = span(src);
+            var count = data.Length;
             var dst = sys.span<bit>(count);
 
             var j=0u;
             for(uint i=0u; i<count; i++)
             {
-                ref readonly var c = ref skip(src,i);
+                ref readonly var c = ref skip(data,i);
                 if(!exclude(c))
-                    seek(dst, j++) = skip(src,i) == bit.One;
+                    seek(dst, j++) = skip(data,i) == bit.One;
             }
             return slice(dst,0,j);
         }

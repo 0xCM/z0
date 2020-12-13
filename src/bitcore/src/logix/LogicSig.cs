@@ -8,65 +8,50 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static z;
 
     using ULK = UnaryBitLogicKind;
     using BLK = BinaryBitLogicKind;
     using TLK = TernaryBitLogicKind;
 
-    public class LogicSig
+    [ApiHost]
+    public readonly struct LogicSig
     {
-        [MethodImpl(Inline)]
-        static string keyword<T>()
-            where T : unmanaged
-                => typeof(T).NumericKeyword();
-
-        [MethodImpl(Inline)]
         public static string sig(ULK kind)
-            => text.concat(format(kind), Chars.Colon, nameof(Bit32));
+            => text.concat(format(kind), Chars.Colon, nameof(bit));
 
-        [MethodImpl(Inline)]
         public static string sig(BLK kind)
-            => text.concat(format(kind), Chars.Colon, nameof(Bit32));
+            => text.concat(format(kind), Chars.Colon, nameof(bit));
 
-        [MethodImpl(Inline)]
         public static string sig(TLK kind)
-            => text.concat(format(kind), Chars.Colon, nameof(Bit32));
+            => text.concat(format(kind), Chars.Colon, nameof(bit));
 
-        [MethodImpl(Inline)]
         public static string sig(BinaryBitLogicApiClass kind)
-            => text.concat(format(kind), Chars.Colon, nameof(Bit32));
+            => text.concat(format(kind), Chars.Colon, nameof(bit));
 
-        [MethodImpl(Inline)]
         public static string sig<T>(ULK kind)
              where T : unmanaged
-                => text.concat(format(kind), Chars.Colon, keyword<T>());
+                => text.concat(format(kind), Chars.Colon, NumericKinds.keyword<T>());
 
-        [MethodImpl(Inline)]
         public static string sig<T>(BLK kind)
             where T : unmanaged
-                => text.concat(format(kind), Chars.Colon, keyword<T>());
+                => text.concat(format(kind), Chars.Colon, NumericKinds.keyword<T>());
 
         public static string sig<T>(TLK kind)
             where T : unmanaged
-                => text.concat(format(kind), Chars.Colon, keyword<T>());
+                => text.concat(format(kind), Chars.Colon, NumericKinds.keyword<T>());
 
-        [MethodImpl(Inline), Op, Closures(Integers)]
         public static string sig<T>(BitShiftApiClass kind)
             where T : unmanaged
                 => $"{kind}:{typeof(T).NumericKind().Keyword()}";
 
-        [MethodImpl(Inline), Op, Closures(Integers)]
         public static string sig<T>(BinaryComparisonApiClass kind)
             where T : unmanaged
                 => $"{kind}:{typeof(T).NumericKind().Keyword()}";
 
-        [MethodImpl(Inline), Op, Closures(Integers)]
         public static string sig<T>(UnaryArithmeticApiClass kind)
             where T : unmanaged
                 => $"{kind}:{typeof(T).NumericKind().Keyword()}";
 
-        [MethodImpl(Inline), Op, NumericClosures(Integers)]
         public static string sig<T>(BinaryArithmeticApiClass kind)
             where T : unmanaged
                 => $"{kind}:{typeof(T).NumericKind().Keyword()}";

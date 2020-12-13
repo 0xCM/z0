@@ -105,7 +105,7 @@ namespace Z0
 
         public void Run()
         {
-            using var exec = Wf.Running(flow(SourceDir, TargetDir));
+            using var exec = Wf.Running(DataFlows.flow(SourceDir, TargetDir));
 
             try
             {

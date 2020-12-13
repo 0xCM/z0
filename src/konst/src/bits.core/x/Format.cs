@@ -13,9 +13,9 @@ namespace Z0
 
     partial class XTend
     {
-        public static string Format(this IEnumerable<Bit32> src, bool reversed = true)
+        public static string Format(this IEnumerable<bit> src, bool reversed = true)
         {
-            var chars = src.Select(x => x.ToChar()).ToArray();
+            var chars = src.Select(x => x.ToChar()).Array();
             if(reversed)
                 return new string(chars.Reverse());
             else

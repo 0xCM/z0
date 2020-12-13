@@ -46,7 +46,7 @@ namespace Z0
         static T convert64f_x<T>(double src)
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(float32(src));
+                return generic<T>(ScalarCast.float32(src));
             else if(typeof(T) == typeof(double))
                 return generic<T>(src);
             else if(typeof(T) == typeof(char))

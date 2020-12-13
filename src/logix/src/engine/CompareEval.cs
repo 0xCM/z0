@@ -10,7 +10,7 @@ namespace Z0.Logix
 
     using static Konst;
 
-    [ApiHost("expr.cmp.eval")]
+    [ApiHost]
     public static class CmpExprEval
     {
         [Op, Closures(UnsignedInts)]
@@ -19,7 +19,7 @@ namespace Z0.Logix
                 => PredicateApi.eval(expr.ComparisonKind, eval(expr.LeftArg).Value, eval(expr.RightArg).Value);
 
         [Op, Closures(UnsignedInts)]
-        public static Bit32 eval<T>(IComparisonPredExpr<T> expr)
+        public static bit eval<T>(IComparisonPredExpr<T> expr)
             where T : unmanaged
                 => NumericLogixHost.eval(expr.ComparisonKind, eval(expr.LeftArg).Value, eval(expr.RightArg).Value);
 

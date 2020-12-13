@@ -90,6 +90,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static CharBlock256 alloc(N256 n)
             => default;
-
     }
 }

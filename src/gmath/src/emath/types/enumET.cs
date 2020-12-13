@@ -18,7 +18,45 @@ namespace Z0
         where E : unmanaged, Enum
         where T : unmanaged
     {
-        public readonly E Literal;
+        public E Literal {get;}
+
+        [MethodImpl(Inline)]
+        public @enum(E literal)
+            => Literal = literal;
+
+        [MethodImpl(Inline)]
+        public @enum(T scalar)
+            => Literal = EnumValue.literal<E,T>(scalar);
+
+        public T Scalar
+        {
+            [MethodImpl(Inline)]
+            get => Scalars.scalar<E,T>(Literal);
+        }
+
+        public DataWidth Width
+        {
+            [MethodImpl(Inline)]
+            get => (DataWidth)bitwidth<T>();
+        }
+
+        [MethodImpl(Inline)]
+        public bool Equals(E src)
+            => Literal.Equals(src);
+
+        [MethodImpl(Inline)]
+        public bool Equals(@enum<E,T> src)
+            => Literal.Equals(src.Literal);
+
+        public override bool Equals(object src)
+            => src is @enum<E,T> x && Equals(x);
+        public override int GetHashCode()
+            => Literal.GetHashCode();
+       public string Format()
+            => $"{Literal}";
+
+       public override string ToString()
+            => Format();
 
         [MethodImpl(Inline)]
         public static implicit operator E(@enum<E,T> src)
@@ -107,50 +145,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static @enum<E,T> operator ~(@enum<E,T> a)
             => emath.not(a);
-
-        [MethodImpl(Inline)]
-        public @enum(E literal)
-        {
-            Literal = literal;
-        }
-
-        [MethodImpl(Inline)]
-        public @enum(T scalar)
-        {
-            Literal = EnumValue.literal<E,T>(scalar);
-        }
-
-        public T Scalar
-        {
-            [MethodImpl(Inline)]
-            get => scalar<E,T>(Literal);
-        }
-
-        public DataWidth Width
-        {
-            [MethodImpl(Inline)]
-            get => (DataWidth)bitwidth<T>();
-        }
-
-        E IEnum<E>.Literal
-            => Literal;
-
-        [MethodImpl(Inline)]
-        public bool Equals(E src)
-            => Literal.Equals(src);
-
-        [MethodImpl(Inline)]
-        public bool Equals(@enum<E,T> src)
-            => Literal.Equals(src.Literal);
-
-        public override bool Equals(object src)
-            => src is @enum<E,T> x && Equals(x);
-        public override int GetHashCode()
-            => Literal.GetHashCode();
-       public string Format()
-            => $"{Literal}";
-
-       public override string ToString()
-            => Format();
     }
 }

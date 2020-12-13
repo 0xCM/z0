@@ -13,6 +13,10 @@ namespace Z0
     public interface ICharBlock<T>
         where T : unmanaged, ICharBlock<T>
     {
+        Span<char> Data {get;}
 
+        ref char First => ref first(Data);
+
+        uint Length => (uint)Data.Length;
     }
 }

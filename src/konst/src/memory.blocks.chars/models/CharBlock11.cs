@@ -35,6 +35,15 @@ namespace Z0
            get => cover<CharBlock11,char>(this, CharCount);
         }
 
+        /// <summary>
+        /// Specifies a reference to the leading cell
+        /// </summary>
+        public ref char First
+        {
+            [MethodImpl(Inline)]
+            get => ref first(Data);
+        }
+
         [MethodImpl(Inline)]
         public static implicit operator CharBlock11(string src)
             => api.init(src, out CharBlock11 dst);

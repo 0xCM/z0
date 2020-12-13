@@ -3,11 +3,11 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static Pow2;
 
     partial struct BitReader
@@ -82,7 +82,7 @@ namespace Z0
         /// <param name="n">The bit selector</param>
         [MethodImpl(Inline), Op]
         public static ulong bit(N7 n, ulong src)
-            => (ulong)(T07 & src);                
+            => (ulong)(T07 & src);
 
         /// <summary>
         /// Reads the state of a naturally-identified bit
@@ -154,6 +154,6 @@ namespace Z0
         /// <param name="n">The bit selector</param>
         [MethodImpl(Inline), Op]
         public static ulong bit(N15 n, ulong src)
-            => (ulong)(T15 & src);                            
+            => (ulong)(T15 & src);
     }
 }

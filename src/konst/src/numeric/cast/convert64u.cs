@@ -46,9 +46,9 @@ namespace Z0
         static T convert64u_x<T>(ulong src)
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(float32(src));
+                return generic<T>(ScalarCast.float32(src));
             else if(typeof(T) == typeof(double))
-                return generic<T>(float64(src));
+                return generic<T>(ScalarCast.float64(src));
             else if(typeof(T) == typeof(char))
                 return generic<T>((char)src);
             else

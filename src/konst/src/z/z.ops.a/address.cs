@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="src">The source type</param>
         [MethodImpl(Inline), Op]
         public static unsafe MemoryAddress address(Type src)
-            => pointer(handle(src));
+            => pointer(sys.handle(src));
 
         /// <summary>
         /// Presents a uint64 as an address
@@ -90,7 +90,7 @@ namespace Z0
         /// <typeparam name="T">The stored type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static unsafe MemoryAddress address<T>(T[] src, int index)
-            =>  pvoid(in src[index]);
+            =>  pvoid(seek(src,index));
 
         [MethodImpl(Inline), Op]
         public unsafe static MemoryAddress address(void* p)
@@ -103,10 +103,10 @@ namespace Z0
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static MemoryAddress address<T>(Span<T> src)
-            => Unsafe.As<T, ulong>(ref MemoryMarshal.GetReference(src));
+            => Unsafe.As<T,ulong>(ref MemoryMarshal.GetReference(src));
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static unsafe MemoryAddress address<T>(ReadOnlySpan<T> src)
-            => Unsafe.As<T, ulong>(ref MemoryMarshal.GetReference(src));
+            => Unsafe.As<T,ulong>(ref MemoryMarshal.GetReference(src));
     }
 }

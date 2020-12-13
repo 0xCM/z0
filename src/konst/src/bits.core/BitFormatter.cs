@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Text;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     [ApiHost(ApiNames.BitFormatter, true)]
@@ -72,20 +72,6 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static void format(byte src, uint maxbits, Span<char> dst, ref int k)
             => _format(src, maxbits, dst, ref k);
-
-        [Op]
-        public static string format(params Bit32[] src)
-        {
-            var count = src.Length;
-            if(count == 0)
-                return EmptyString;
-
-            var terms = @readonly(src);
-            Span<char> dst = stackalloc char[count];
-            for(var i=0u; i<count; i++)
-                seek(dst,i) = skip(terms,i).ToChar();
-            return new string(dst);
-        }
 
         [Op]
         public static string format(params bit[] src)

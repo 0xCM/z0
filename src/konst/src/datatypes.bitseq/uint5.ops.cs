@@ -7,15 +7,38 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
+    using static memory;
 
     using U = uint5;
     using W = W5;
 
     partial struct BitSeq
     {
+        /// <summary>
+        /// Reinterprets an input reference as a mutable <see cref='Z0.uint4'/> reference cell
+        /// </summary>
+        /// <param name="src">The source reference</param>
+        /// <param name="dst">The target width selector</param>
+        /// <typeparam name="S">The source type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref U edit<S>(in S src, W dst)
+            where S : unmanaged
+                => ref @as<S,U>(src);
+
+        /// <summary>
+        /// Reinterprets an input reference as a mutable <see cref='Z0.uint5'/> reference cell
+        /// </summary>
+        /// <param name="src">The source reference</param>
+        /// <param name="dst">The target width selector</param>
+        /// <typeparam name="S">The source type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref S edit<S>(in U src)
+            where S : unmanaged
+                => ref @as<U,S>(src);
+
         [MethodImpl(Inline), Op]
-        public static uint5 maxval(W w)
+        public static U maxval(W w)
             => U.Max;
 
         [MethodImpl(Inline), Op]

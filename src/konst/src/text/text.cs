@@ -34,7 +34,7 @@ namespace Z0
         public static int width<E>(E field)
             where E : unmanaged, Enum
         {
-            var w = scalar<E,uint>(field) >> 16;
+            var w = Scalars.scalar<E,uint>(field) >> 16;
             return (int)w;
         }
     }

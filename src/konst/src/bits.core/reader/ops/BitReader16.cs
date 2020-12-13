@@ -3,11 +3,11 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static Pow2;
 
     partial struct BitReader
@@ -82,7 +82,7 @@ namespace Z0
         /// <param name="n">The bit selector</param>
         [MethodImpl(Inline), Op]
         public static ushort bit(N7 n, ushort src)
-            => (ushort)(T07 & src);                
+            => (ushort)(T07 & src);
 
         /// <summary>
         /// Reads the state of a naturally-identified bit
@@ -154,6 +154,6 @@ namespace Z0
         /// <param name="n">The bit selector</param>
         [MethodImpl(Inline), Op]
         public static ushort bit(N15 n, ushort src)
-            => (ushort)(T15 & src);                            
+            => (ushort)(T15 & src);
     }
 }

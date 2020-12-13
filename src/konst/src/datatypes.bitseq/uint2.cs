@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-
+    using static Part;
     using static BitSeq;
 
     using U = uint2;
@@ -90,7 +89,133 @@ namespace Z0
             get => new U(1,true);
         }
 
+
         [MethodImpl(Inline)]
+        internal uint2(uint8T src)
+            => data = (byte)(src & MaxLiteral);
+
+        [MethodImpl(Inline)]
+        internal uint2(byte src)
+            => data = (byte)(src & MaxLiteral);
+
+        [MethodImpl(Inline)]
+        internal uint2(byte src, bool @unchecked)
+            => data = (byte)src;
+
+        [MethodImpl(Inline)]
+        internal uint2(sbyte src)
+            => data = (byte)((byte)src & MaxLiteral);
+
+        [MethodImpl(Inline)]
+        internal uint2(short src)
+            => data = (byte)((byte)src & MaxLiteral);
+
+        [MethodImpl(Inline)]
+        internal uint2(ushort src)
+            => data = (byte)(src & MaxLiteral);
+
+        [MethodImpl(Inline)]
+        internal uint2(int x)
+            => data = (byte)((byte)x & MaxLiteral);
+
+        [MethodImpl(Inline)]
+        internal uint2(uint src)
+            => data = (byte)(src & MaxLiteral);
+
+        [MethodImpl(Inline)]
+        internal uint2(long src)
+            => data = (byte)((byte)src & MaxLiteral);
+
+        [MethodImpl(Inline)]
+        internal uint2(uint src, bool safe)
+            => data = (byte)src;
+
+        [MethodImpl(Inline)]
+        internal uint2(K src)
+            => data = (byte)src;
+
+        [MethodImpl(Inline)]
+        internal uint2(BitState src)
+            => data = (byte)src;
+
+        /// <summary>
+        /// Queries an index-identified bit
+        /// </summary>
+        public BitState this[byte pos]
+        {
+            [MethodImpl(Inline)]
+            get => test(this, pos);
+        }
+
+        public K Kind
+        {
+            [MethodImpl(Inline)]
+            get => (K) data;
+        }
+
+        public T Content
+        {
+            [MethodImpl(Inline)]
+            get => data;
+        }
+
+        public bool IsZero
+        {
+            [MethodImpl(Inline)]
+            get => data == 0;
+        }
+
+        public bool IsNonZero
+        {
+            [MethodImpl(Inline)]
+            get => data != 0;
+        }
+
+        /// <summary>
+        /// Specifies whether the current value is the maximum value
+        /// </summary>
+        public bool IsMax
+        {
+            [MethodImpl(Inline)]
+            get => data == MaxLiteral;
+        }
+
+        /// <summary>
+        /// Specifies whether the current value is the minimum value
+        /// </summary>
+        public bool IsMin
+        {
+            [MethodImpl(Inline)]
+            get => data == MinLiteral;
+        }
+
+        /// <summary>
+        /// Renders the source value as as hexadecimal string
+        /// </summary>
+        [MethodImpl(Inline)]
+        public string Format()
+             => format(this);
+
+        public override string ToString()
+            => Format();
+
+        [MethodImpl(Inline)]
+        public bool Equals(U rhs)
+            => eq(this,rhs);
+
+        public override bool Equals(object rhs)
+            => rhs is U x && Equals(x);
+
+        public uint Hash
+        {
+            [MethodImpl(Inline)]
+            get => data;
+        }
+
+        public override int GetHashCode()
+            => (int)Hash;
+
+       [MethodImpl(Inline)]
         public static explicit operator U(uint3 src)
             => uint2(src);
 
@@ -317,130 +442,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static U operator >= (U lhs, U rhs)
             => @bool(lhs.data >= rhs.data);
-
-        [MethodImpl(Inline)]
-        internal uint2(uint8T src)
-            => data = (byte)(src & MaxLiteral);
-
-        [MethodImpl(Inline)]
-        internal uint2(byte src)
-            => data = (byte)(src & MaxLiteral);
-
-        [MethodImpl(Inline)]
-        internal uint2(byte src, bool @unchecked)
-            => data = (byte)src;
-
-        [MethodImpl(Inline)]
-        internal uint2(sbyte src)
-            => data = (byte)((byte)src & MaxLiteral);
-
-        [MethodImpl(Inline)]
-        internal uint2(short src)
-            => data = (byte)((byte)src & MaxLiteral);
-
-        [MethodImpl(Inline)]
-        internal uint2(ushort src)
-            => data = (byte)(src & MaxLiteral);
-
-        [MethodImpl(Inline)]
-        internal uint2(int x)
-            => data = (byte)((byte)x & MaxLiteral);
-
-        [MethodImpl(Inline)]
-        internal uint2(uint src)
-            => data = (byte)(src & MaxLiteral);
-
-        [MethodImpl(Inline)]
-        internal uint2(long src)
-            => data = (byte)((byte)src & MaxLiteral);
-
-        [MethodImpl(Inline)]
-        internal uint2(uint src, bool safe)
-            => data = (byte)src;
-
-        [MethodImpl(Inline)]
-        internal uint2(K src)
-            => data = (byte)src;
-
-        [MethodImpl(Inline)]
-        internal uint2(BitState src)
-            => data = (byte)src;
-
-        /// <summary>
-        /// Queries an index-identified bit
-        /// </summary>
-        public BitState this[byte pos]
-        {
-            [MethodImpl(Inline)]
-            get => test(this, pos);
-        }
-
-        public K Kind
-        {
-            [MethodImpl(Inline)]
-            get => (K) data;
-        }
-
-        public T Content
-        {
-            [MethodImpl(Inline)]
-            get => data;
-        }
-
-        public bool IsZero
-        {
-            [MethodImpl(Inline)]
-            get => data == 0;
-        }
-
-        public bool IsNonZero
-        {
-            [MethodImpl(Inline)]
-            get => data != 0;
-        }
-
-        /// <summary>
-        /// Specifies whether the current value is the maximum value
-        /// </summary>
-        public bool IsMax
-        {
-            [MethodImpl(Inline)]
-            get => data == MaxLiteral;
-        }
-
-        /// <summary>
-        /// Specifies whether the current value is the minimum value
-        /// </summary>
-        public bool IsMin
-        {
-            [MethodImpl(Inline)]
-            get => data == MinLiteral;
-        }
-
-        /// <summary>
-        /// Renders the source value as as hexadecimal string
-        /// </summary>
-        [MethodImpl(Inline)]
-        public string Format()
-             => format(this);
-
-        public override string ToString()
-            => Format();
-
-        [MethodImpl(Inline)]
-        public bool Equals(U rhs)
-            => eq(this,rhs);
-
-        public override bool Equals(object rhs)
-            => rhs is U x && Equals(x);
-
-        public uint Hash
-        {
-            [MethodImpl(Inline)]
-            get => data;
-        }
-
-        public override int GetHashCode()
-            => (int)Hash;
    }
 }

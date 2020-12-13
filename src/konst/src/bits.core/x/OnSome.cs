@@ -11,26 +11,25 @@ namespace Z0
 
     partial class XTend
     {
-        [MethodImpl(Inline)]
-        public static void OnNone(this bool x, Action f)
+        [MethodImpl(Inline), Op]
+        public static void OnSome(this bool x, Action f)
         {
-            if(!x)
+            if(x)
                 f();
         }
 
-        [MethodImpl(Inline)]
-        public static T IfSome<T>(this bool x, Func<T> f, T @default)
-        {
-            if(x)
-                return f();
-            else
-                return @default;
-        }
-
-        public static void OnNone<T>(this T? x, Action f)
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static void OnSome<T>(this T? x, Action<T> f)
             where T : struct
         {
-            if(!x.HasValue)
+            if(x.HasValue)
+                f(x.Value);
+        }
+
+        [MethodImpl(Inline), Op]
+        public static void OnSome(this bit x, Action f)
+        {
+            if(x)
                 f();
         }
     }

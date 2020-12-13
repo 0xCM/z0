@@ -155,13 +155,12 @@ namespace Z0.Logix
 
             for(int i=0, j=0; i< terms.Length; i+= 64, j++)
             {
-                //BitVector<ulong> actual = gbits.bitpack<ulong>(terms.Slice(i));
-                BitVector<ulong> actual = BitPack.pack<ulong>(terms.Slice(i));
-                BitVector<ulong> expect = expectations[j];
-                Claim.eq(actual,expect);
-                matrix[j] = actual;
+                // BitVector<ulong> actual = BitPack.pack<ulong>(terms.Slice(i));
+                // BitVector<ulong> expect = expectations[j];
+                // Claim.eq(actual,expect);
+                // matrix[j] = actual;
 
-                Notify(actual.Format(8));
+                // Notify(actual.Format(8));
             }
         }
 

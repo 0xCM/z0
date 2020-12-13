@@ -21,6 +21,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static string Format(this PrimalTypeCode src)
-            => $"{src}";
+            => src.ToString();
     }
 }

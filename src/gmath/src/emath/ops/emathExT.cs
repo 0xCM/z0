@@ -42,39 +42,38 @@ namespace Z0
             where T : unmanaged
                 => new @enum<E,T>(gmath.mod(a.Scalar, b.Scalar));
 
-
         [MethodImpl(Inline)]
-        public static Bit32 eq<E,T>(@enum<E,T> a, @enum<E,T> b)
+        public static bit eq<E,T>(@enum<E,T> a, @enum<E,T> b)
             where E : unmanaged, Enum
             where T : unmanaged
                 => gmath.eq(a.Scalar, b.Scalar);
 
         [MethodImpl(Inline)]
-        public static Bit32 neq<E,T>(@enum<E,T> a, @enum<E,T> b)
+        public static bit neq<E,T>(@enum<E,T> a, @enum<E,T> b)
             where E : unmanaged, Enum
             where T : unmanaged
                 => gmath.neq(a.Scalar, b.Scalar);
 
         [MethodImpl(Inline)]
-        public static Bit32 lt<E,T>(@enum<E,T> a, @enum<E,T> b)
+        public static bit lt<E,T>(@enum<E,T> a, @enum<E,T> b)
             where E : unmanaged, Enum
             where T : unmanaged
                 => gmath.lt(a.Scalar, b.Scalar);
 
         [MethodImpl(Inline)]
-        public static Bit32 lteq<E,T>(@enum<E,T> a, @enum<E,T> b)
+        public static bit lteq<E,T>(@enum<E,T> a, @enum<E,T> b)
             where E : unmanaged, Enum
             where T : unmanaged
                 => gmath.lteq(a.Scalar, b.Scalar);
 
         [MethodImpl(Inline)]
-        public static Bit32 gt<E,T>(@enum<E,T> a, @enum<E,T> b)
+        public static bit gt<E,T>(@enum<E,T> a, @enum<E,T> b)
             where E : unmanaged, Enum
             where T : unmanaged
                 => gmath.lt(a.Scalar, b.Scalar);
 
         [MethodImpl(Inline)]
-        public static Bit32 gteq<E,T>(@enum<E,T> a, @enum<E,T> b)
+        public static bit gteq<E,T>(@enum<E,T> a, @enum<E,T> b)
             where E : unmanaged, Enum
             where T : unmanaged
                 => gmath.lteq(a.Scalar, b.Scalar);
@@ -98,7 +97,7 @@ namespace Z0
                 => new @enum<E,T>(gmath.negate(a.Scalar));
 
         [MethodImpl(Inline)]
-        public static Bit32 nonz<E,T>(@enum<E,T> a)
+        public static bit nonz<E,T>(@enum<E,T> a)
             where E : unmanaged, Enum
             where T : unmanaged
                 => gmath.nonz(a.Scalar);

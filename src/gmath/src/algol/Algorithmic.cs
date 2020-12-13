@@ -10,22 +10,11 @@ namespace Z0
 
     using static Konst;
     using static gmath;
-    using static z;
+    using static memory;
 
     [ApiHost]
     public readonly partial struct Algorithmic
     {
-        /// <summary>
-        /// Creates an enumerable sequence that ranges between inclusive upper and lower bounds
-        /// </summary>
-        /// <param name="x0">The lower bound</param>
-        /// <param name="x1">The upper bound</param>
-        /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static IEnumerable<T> stream<T>(T x0, T x1)
-            where T : unmanaged
-                => range_1(x0,x1,null);
-
         /// <summary>
         /// Defines a scalar sequence {0,1,...,count-1}
         /// </summary>
@@ -35,6 +24,17 @@ namespace Z0
         public static IEnumerable<T> stream<T>(T count)
             where T : unmanaged
                 => stream(default(T), count);
+
+        /// <summary>
+        /// Creates an enumerable sequence that ranges between inclusive upper and lower bounds
+        /// </summary>
+        /// <param name="x0">The lower bound</param>
+        /// <param name="x1">The upper bound</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        public static IEnumerable<T> stream<T>(T x0, T x1)
+            where T : unmanaged
+                => range_1(x0, x1, null);
 
         /// <summary>
         /// Creates a numeric sequence that ranges between inclusive upper and lower bounds
@@ -97,7 +97,7 @@ namespace Z0
         {
             var min = Unsafe.As<T,sbyte>(ref x0);
             var max = Unsafe.As<T,sbyte>(ref x1);
-            var _step = Unsafe.As<T?, sbyte?>(ref step) ??(sbyte)1;
+            var _step = Unsafe.As<T?,sbyte?>(ref step) ??(sbyte)1;
             for(var i = min; i <= max; i += _step)
                 yield return Unsafe.As<sbyte,T>(ref i);
         }
@@ -204,7 +204,7 @@ namespace Z0
         {
             if(xs.Length != ys.Length)
                 return false;
-            return Algorithmic.identical(ref z.first(xs), ref z.first(ys), (uint)xs.Length);
+            return identical(ref first(xs), ref first(ys), (uint)xs.Length);
         }
 
         /// <summary>
@@ -219,7 +219,7 @@ namespace Z0
         {
             if(xs.Length != ys.Length)
                 return false;
-            return Algorithmic.identical(ref z.edit(in z.first(xs)), ref z.edit(in z.first(ys)), (uint)xs.Length);
+            return identical(ref edit(in first(xs)), ref edit(in first(ys)), (uint)xs.Length);
         }
 
         /// <summary>
@@ -239,36 +239,36 @@ namespace Z0
             {
                 count -= 8;
 
-                x = z.add<T>(first, offset + 0);
-                y = z.add<T>(second, offset + 0);
+                x = add<T>(first, offset + 0);
+                y = add<T>(second, offset + 0);
                 if(neq(x, y))
                     return false;
-                x = z.add<T>(first, offset + 1);
-                y = z.add<T>(second, offset + 1);
+                x = add<T>(first, offset + 1);
+                y = add<T>(second, offset + 1);
                 if(neq(x, y))
                     return false;
-                x = z.add<T>(first, offset + 2);
-                y = z.add<T>(second, offset + 2);
+                x = add<T>(first, offset + 2);
+                y = add<T>(second, offset + 2);
                 if(neq(x, y))
                     return false;
-                x = z.add<T>(first, offset + 3);
-                y = z.add<T>(second, offset + 3);
+                x = add<T>(first, offset + 3);
+                y = add<T>(second, offset + 3);
                 if(neq(x, y))
                     return false;
-                x = z.add<T>(first, offset + 4);
-                y = z.add<T>(second, offset + 4);
+                x = add<T>(first, offset + 4);
+                y = add<T>(second, offset + 4);
                 if(neq(x, y))
                     return false;
-                x = z.add<T>(first, offset + 5);
-                y = z.add<T>(second, offset + 5);
+                x = add<T>(first, offset + 5);
+                y = add<T>(second, offset + 5);
                 if(neq(x, y))
                     return false;
-                x = z.add<T>(first, offset + 6);
-                y = z.add<T>(second, offset + 6);
+                x = add<T>(first, offset + 6);
+                y = add<T>(second, offset + 6);
                 if(neq(x, y))
                     return false;
-                x = z.add<T>(first, offset + 7);
-                y = z.add<T>(second, offset + 7);
+                x = add<T>(first, offset + 7);
+                y = add<T>(second, offset + 7);
                 if(neq(x, y))
                     return false;
 
@@ -279,20 +279,20 @@ namespace Z0
             {
                 count -= 4;
 
-                x = z.add<T>(first, offset);
-                y = z.add<T>(second, offset);
+                x = add<T>(first, offset);
+                y = add<T>(second, offset);
                 if(gmath.neq(x, y))
                     return false;
-                x = z.add<T>(first, offset + 1);
-                y = z.add<T>(second, offset + 1);
+                x = add<T>(first, offset + 1);
+                y = add<T>(second, offset + 1);
                 if(gmath.neq(x, y))
                     return false;
-                x = z.add<T>(first, offset + 2);
-                y = z.add<T>(second, offset + 2);
+                x = add<T>(first, offset + 2);
+                y = add<T>(second, offset + 2);
                 if(gmath.neq(x, y))
                     return false;
-                x = z.add<T>(first, offset + 3);
-                y = z.add<T>(second, offset + 3);
+                x = add<T>(first, offset + 3);
+                y = add<T>(second, offset + 3);
                 if(gmath.neq(x, y))
                     return false;
 
@@ -301,8 +301,8 @@ namespace Z0
 
             while (count > 0)
             {
-                x = z.add<T>(first, offset);
-                y = z.add<T>(second, offset);
+                x = add<T>(first, offset);
+                y = add<T>(second, offset);
                 if(gmath.neq(x, y))
                     return false;
                 offset += 1;

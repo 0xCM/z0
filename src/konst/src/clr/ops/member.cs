@@ -13,14 +13,6 @@ namespace Z0
     partial struct ClrQuery
     {
         /// <summary>
-        /// Determines whether a type is static
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        [MethodImpl(Inline), Op]
-        public static bool IsStatic(Type t)
-            => t.IsAbstract && t.IsSealed;
-
-        /// <summary>
         /// Defines a tagged member
         /// </summary>
         /// <param name="m">The member</param>

@@ -13,6 +13,8 @@ namespace Z0
     [ApiHost]
     public partial class Bit
     {
+        const NumericKind Closure = UnsignedInts;
+
         public static bit[] unpack<T>(T src)
             where T : struct
         {
@@ -21,7 +23,7 @@ namespace Z0
             return buffer;
         }
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static void unpack<T>(in T src, Span<bit> dst)
             where T : struct
         {
@@ -42,17 +44,6 @@ namespace Z0
         /// <param name="src">The source bit</param>
         /// <typeparam name="T">The target numeric type</typeparam>
         [MethodImpl(Inline), Op]
-        public static T promote<T>(Bit32 src)
-            where T : unmanaged
-                => src? NumericLiterals.maxval<T>() : default;
-
-        /// <summary>
-        /// Promotes a bit to a numeric value where all target bits are enabled if the state of the
-        /// bit is on; otherwise all target bits are disabled
-        /// </summary>
-        /// <param name="src">The source bit</param>
-        /// <typeparam name="T">The target numeric type</typeparam>
-        [MethodImpl(Inline), Op]
         public static T promote<T>(bit src)
             where T : unmanaged
                 => src? NumericLiterals.maxval<T>() : default;
@@ -62,9 +53,9 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source reference</param>
         /// <typeparam name="T">The generic type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static BitEdit<T> editor<T>(ref T src)
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static BitEdit<T> editor<T>(in T src)
             where T : unmanaged
-                => new BitEdit<T>(ref src);
+                => new BitEdit<T>(src);
     }
 }

@@ -18,12 +18,12 @@ namespace Z0
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         [MethodImpl(Inline), Neq, Closures(AllNumeric)]
-        public static Bit32 neq<T>(T a, T b)
+        public static bit neq<T>(T a, T b)
             where T : unmanaged
                 => neq_u(a,b);
 
         [MethodImpl(Inline)]
-        static Bit32 neq_u<T>(T a, T b)
+        static bit neq_u<T>(T a, T b)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -39,7 +39,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static Bit32 neq_i<T>(T a, T b)
+        static bit neq_i<T>(T a, T b)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))

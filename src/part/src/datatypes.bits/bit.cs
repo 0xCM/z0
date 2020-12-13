@@ -18,6 +18,12 @@ namespace Z0
 
         public const char One = '1';
 
+        public static bit[] B01
+        {
+            [MethodImpl(Inline)]
+            get => new bit[]{Off,On};
+        }
+
         [MethodImpl(Inline)]
         public static bit Parse(char c)
             => c == One;

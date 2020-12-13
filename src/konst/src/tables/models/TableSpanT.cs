@@ -100,7 +100,7 @@ namespace Z0
         }
 
         public string Format()
-            => delimit(Data).Format();
+            => Seq.delimited(Data).Format();
 
         public override string ToString()
             => Format();

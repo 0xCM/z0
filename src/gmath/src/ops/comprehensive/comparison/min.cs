@@ -12,7 +12,7 @@ namespace Z0
 
     partial class gmath
     {
-        [MethodImpl(Inline), Min, Closures(Integers)]
+        [MethodImpl(Inline), Min, Closures(AllNumeric)]
         public static T min<T>(T a, T b)
             where T : unmanaged
                 => min_u(a,b);
