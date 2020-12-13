@@ -45,8 +45,8 @@ namespace Z0
         /// <param name="seed">The initial rng state</param>
         /// <param name="index">The stream index, if any</param>
         [MethodImpl(Inline), Op]
-        public static IPolyrand pcg32(ulong? seed = null, ulong? index = null)
-            => create(Pcg.pcg32(seed ?? PolySeed64.Seed00, index));
+        public static IPolyrand pcg32(ulong seed, ulong index)
+            => create(Pcg.pcg32(seed, index));
 
         /// <summary>
         /// Creates a 64-bit Pcg RNG
@@ -54,8 +54,17 @@ namespace Z0
         /// <param name="seed">The initial rng state</param>
         /// <param name="index">The stream index, if any</param>
         [MethodImpl(Inline), Op]
-        public static IPolyrand pcg64(ulong? seed = null, ulong? index = null)
-            => create(Pcg.pcg64(seed ?? PolySeed64.Seed00, index));
+        public static IPolyrand pcg64()
+            => create(Pcg.pcg64(PolySeed64.Seed00));
+
+        /// <summary>
+        /// Creates a 64-bit Pcg RNG
+        /// </summary>
+        /// <param name="seed">The initial rng state</param>
+        /// <param name="index">The stream index, if any</param>
+        [MethodImpl(Inline), Op]
+        public static IPolyrand pcg64(ulong seed, ulong? index = null)
+            => create(Pcg.pcg64(seed, index));
 
         /// <summary>
         /// Creates a new WyHash16 generator

@@ -35,7 +35,7 @@ namespace Z0
             Id = id;
             Wf = wf;
             CurrentState = ground;
-            Random = Wf.Random;
+            Random = Wf.PolyStream;
             EndState = end;
             Error = none<Exception>();
             Transition = transition;

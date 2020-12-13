@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-
     public interface IIntegralLoop<I>
         where I : unmanaged
     {

@@ -8,9 +8,10 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static memory;
 
-    //[ApiHost]
-    public static class Pcg
+    [ApiHost]
+    public readonly struct Pcg
     {
         /// <summary>
         /// Creates a pcg 64-bit rng
@@ -40,21 +41,13 @@ namespace Z0
             => new Pcg32(seed ?? PolySeed64.Seed00, index);
 
         /// <summary>
-        /// Creates a 64-bit Pcg RNG suite predicated on an array of seed and stream indices
+        /// Creates a 32-bit Pcg RNG
         /// </summary>
-        /// <param name="seed">The initial state of a generator</param>
-        /// <param name="index">The stream index</param>
+        /// <param name="seed">The initial rng state</param>
+        /// <param name="index">The stream index, if any</param>
         [MethodImpl(Inline), Op]
-        public static Pcg32[] nav32Suite(params (ulong seed, ulong index)[] specs)
-        {
-            var suite = new Pcg32[specs.Length];
-            for(var i=0; i < suite.Length; i++)
-            {
-                (var seed, var index) = specs[i];
-                suite[i] = nav32(seed, index);
-            }
-            return suite;
-        }
+        public static Pcg32 nav32()
+            => new Pcg32(PolySeed64.Seed00);
 
         /// <summary>
         /// Creates a 32-bit Pcg RNG suite predicated on spans of seeds and stream indices
@@ -65,7 +58,7 @@ namespace Z0
         public static Span<Pcg32> nav32Suite(Span<ulong> seeds, Span<ulong> indices)
         {
             var count = seeds.Length;
-            var g = Spans.alloc<Pcg32>(count);
+            var g = span<Pcg32>(count);
             for(var i=0; i<count; i++)
                 g[i] = nav32(seeds[i], indices[i]);
             return g;
@@ -118,7 +111,7 @@ namespace Z0
         /// <param name="state">The source state</param>
         /// <remarks>Follows the implementation of pcg_output_rxs_m_xs_64_64</remarks>
         [MethodImpl(Inline), Op]
-        static ulong grind64(ulong state)
+        internal static ulong grind64(ulong state)
         {
             var shift = (int) ((state >> 59) + 5);
             var src = ((state >> shift) ^ state) * 12605985483714917081ul;

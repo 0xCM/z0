@@ -24,7 +24,8 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => new OperatorClass(Kind);
-        }    }
+        }
+    }
 
     /// <summary>
     /// Defines an operand-parametric type-level lift for the <see cref='ApiOperatorKind.BinaryOp'/> classifier

@@ -14,7 +14,7 @@ namespace Z0
     /// </summary>
     public struct MachineFunction
     {
-        public ApiSig Sig {get;}
+        public string Label {get;}
 
         public MemoryAddress BaseAddress {get;}
 
@@ -23,9 +23,9 @@ namespace Z0
         public AsciEncoded Asm {get;}
 
         [MethodImpl(Inline)]
-        public MachineFunction(ApiSig sig, MemoryAddress @base, BinaryCode instructions, string asm = null)
+        public MachineFunction(string label, MemoryAddress @base, BinaryCode instructions, string asm = null)
         {
-            Sig = sig;
+            Label = label;
             BaseAddress = @base;
             Encoded = instructions;
             Asm = asm ?? EmptyString;
@@ -34,7 +34,7 @@ namespace Z0
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Sig.IsEmpty;
+            get => text.empty(Label);
         }
 
         public bool IsNonEmpty

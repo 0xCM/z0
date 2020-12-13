@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="dst">The leading target cell</param>
         /// <param name="count">The cell count</param>
         /// <typeparam name="T">The primal cell type</typeparam>
-        [MethodImpl(Inline), Rotr, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Rotr, Closures(Closure)]
         public static void rotr<T>(in T src, byte offset, ref T dst, int count)
             where T : unmanaged
         {

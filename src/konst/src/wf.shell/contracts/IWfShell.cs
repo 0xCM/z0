@@ -44,7 +44,7 @@ namespace Z0
 
         IWfInit Init {get;}
 
-        IPolyrand Random {get;}
+        IPolyStream PolyStream {get;}
 
         WfHost Host {get;}
 
@@ -66,13 +66,13 @@ namespace Z0
             => AppName;
 
         IWfShell WithHost(WfHost host)
-            => clone(this, host, Random, Verbosity);
+            => clone(this, host, PolyStream, Verbosity);
 
-        IWfShell WithRandom(IPolyrand random)
+        IWfShell WithRandom(IPolyStream random)
             => clone(this, Host, random, Verbosity);
 
         IWfShell WithVerbosity(LogLevel level)
-            => clone(this, Host, Random, level);
+            => clone(this, Host, PolyStream, level);
 
         WfExecFlow EmittingTable(Type type, FS.FilePath dst)
         {
@@ -122,9 +122,6 @@ namespace Z0
             var filtered = Components.Where(c => c.Id() == part);
             return filtered.Length > 0 ? some(filtered[0]) : none<Assembly>();
         }
-
-        IPolyStream PolySource
-            => Random;
 
         FS.FolderPath IndexRoot
             => FS.dir(Init.IndexDir.Name);

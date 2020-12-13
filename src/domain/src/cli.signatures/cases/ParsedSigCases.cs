@@ -6,21 +6,11 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
 
     using static Konst;
 
     public interface ICodeBlockIndex : IBinaryResourceIndex
     {
-        BasedCodeBlock Case(ApiClass k, params NumericKind[] kinds)
-        {
-            var id = ApiSignatures.NumericOp(k, kinds).ToPropertyName();
-            var resource = TryFind(id);
-            if(!resource)
-                throw new KeyNotFoundException(id);
-
-            return new BasedCodeBlock(MemoryAddress.Empty, resource.Require().Data.ToArray());
-        }
     }
 
     readonly struct ParsedSigCases : IBinaryResourceIndex, ICodeBlockIndex

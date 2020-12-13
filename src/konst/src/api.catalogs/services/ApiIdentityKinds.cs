@@ -13,7 +13,7 @@ namespace Z0
 
     using static Konst;
 
-    [ApiHost("api.identity.kinds")]
+    [ApiHost]
     public partial class ApiIdentityKinds
     {
         /// <summary>

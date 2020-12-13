@@ -185,7 +185,7 @@ public readonly struct ApiNames
 
     public const string ClrEnums = ClrMetadata + dot + enums;
 
-    public const string ClrSigs = ClrMetadata + dot + signatures;
+    public const string ClrSigs = ClrMetadata + dot + sigs;
 
     // ~~ Delegates
     // ~~ -----------------------------------------------------------------------------------------
@@ -440,7 +440,7 @@ public readonly struct ApiNames
 
     public const string dot = ApiNameParts.dot;
 
-    public const string Signatures = signatures;
+    public const string Sigs = sigs;
 
     public const string sequences = nameof(sequences);
 

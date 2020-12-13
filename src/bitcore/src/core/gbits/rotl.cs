@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="dst">The leading target cell</param>
         /// <param name="count">The cell count</param>
         /// <typeparam name="T">The primal cell type</typeparam>
-        [MethodImpl(Inline), Rotl, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Rotl, Closures(Closure)]
         public static void rotl<T>(in T src, byte offset, ref T dst, int count)
             where T : unmanaged
         {
@@ -33,7 +33,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="offset">The magnitude of the rotation</param>
-        [MethodImpl(Inline), Rotl, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Rotl, Closures(Closure)]
         public static T rotl<T>(T src, byte offset)
             where T : unmanaged
         {
@@ -46,7 +46,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(Bits.rotl(uint64(src), offset));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
         /// <summary>
@@ -55,7 +55,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="offset">The magnitude of the rotation</param>
         /// <param name="width">The effective bit-width of the source value</param>
-        [MethodImpl(Inline), Rotl, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Rotl, Closures(Closure)]
         public static T rotl<T>(T src, byte offset, int width)
             where T : unmanaged
         {

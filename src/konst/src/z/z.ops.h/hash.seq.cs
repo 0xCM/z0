@@ -13,14 +13,14 @@ namespace Z0
     {
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static uint hash<T>(ReadOnlySpan<T> src)
-            => alg.hash(src);
+            => alg.hash.calc(src);
 
         [MethodImpl(Inline)]
         public static uint hash<T>(Span<T> src)
-            => alg.hash(src);
+            => alg.hash.calc(src);
 
         [MethodImpl(Inline)]
         public static uint hash<T>(T[] src)
-            => alg.hash(src);
+            => alg.hash.calc(src);
     }
 }

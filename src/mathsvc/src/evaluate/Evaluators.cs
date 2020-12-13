@@ -17,7 +17,7 @@ namespace Z0
 
         readonly WfHost Host;
 
-        readonly IPolyrand Source;
+        readonly IPolyStream Source;
 
         readonly uint SampleCount;
 
@@ -25,7 +25,7 @@ namespace Z0
         {
             Wf = wf;
             Host = host;
-            Source = wf.Random;
+            Source = wf.PolyStream;
             SampleCount = Pow2.T14;
         }
 

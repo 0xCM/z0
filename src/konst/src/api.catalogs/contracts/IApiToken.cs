@@ -5,21 +5,19 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
     public interface IApiToken : IIdentified
     {
-
+        IdentityTargetKind TargetKind {get;}
     }
 
     [Free]
-    public interface IApiToken<H,T> : IIdentified, IEquatable<T>, IComparable<T>
+    public interface IApiToken<H,T> : IApiToken, IEquatable<T>, IComparable<T>
         where H : unmanaged, IApiToken<H,T>
     {
-        IdentityTargetKind TargetKind {get;}
 
     }
 }

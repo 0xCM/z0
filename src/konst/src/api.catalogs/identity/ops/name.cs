@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Reflection;
     using System.Runtime.CompilerServices;
 
     using static Konst;
@@ -15,17 +14,17 @@ namespace Z0
         /// <summary>
         /// Produces the canonical name of a kinded operation
         /// </summary>
-        /// <param name="k">The operation kind id</param>
+        /// <param name="src">The operation kind id</param>
         [MethodImpl(Inline)]
-        public static string name(ApiClass k)
-            => k.Format();
+        public static string name(ApiClass src)
+            => src.Format();
 
         /// <summary>
         /// Produces the canonical name of a kinded vectorized operation
         /// </summary>
-        /// <param name="k">The operation kind id</param>
+        /// <param name="src">The operation kind id</param>
         [MethodImpl(Inline)]
-        public static string vname(ApiClass k)
-            => k.Format(true);
+        public static string vname(ApiClass src)
+            => src.FormatV();
     }
 }

@@ -85,7 +85,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Fsm<T,T> create<T>(IWfShell wf, PrimalFsmSpec<T> spec)
             where T : unmanaged
-                => Fsm.machine(identify(spec), wf, spec.StartState, spec.EndState, transition(wf.Random, spec), spec.ReceiptLimit);
+                => Fsm.machine(identify(spec), wf, spec.StartState, spec.EndState, transition(wf.PolyStream, spec), spec.ReceiptLimit);
 
         /// <summary>
         /// Executes one or more primal state machines
@@ -168,16 +168,16 @@ namespace Z0
         }
 
         [Op, Closures(Closure)]
-        static MachineTransition<T,T> transition<T>(IPolyrand random, PrimalFsmSpec<T> spec)
+        static MachineTransition<T,T> transition<T>(IPolyStream src, PrimalFsmSpec<T> spec)
             where T : unmanaged
         {
             var sources = Algorithmic.stream<T>(spec.StateCount).ToArray();
             var rules = new List<TransitionRule<T,T>>();
             foreach(var source in sources)
             {
-                var evss = random.Next<T>(spec.MinEventSamples, spec.MaxEventSamples);
-                var targets = from t in random.Distinct(spec.StateCount, evss) where gmath.neq(t,source) select t;
-                var events = random.Distinct(spec.EventCount, evss);
+                var evss = src.Next<T>(spec.MinEventSamples, spec.MaxEventSamples);
+                var targets = from t in src.Distinct(spec.StateCount, evss) where gmath.neq(t,source) select t;
+                var events = src.Distinct(spec.EventCount, evss);
                 rules.AddRange(events.Zip(targets).Select(x => Fsm.transition(x.First, source, x.Second)));
             }
             return rules.ToFunction();

@@ -29,10 +29,6 @@ namespace Z0
             => $"{kind.Format()}({arg1}, {arg2})";
 
         [Op]
-        public static string Format(this ApiClass id, bool vectorized)
-            => vectorized ? $"v{id.Format()}" : id.Format();
-
-        [Op]
         public static string Format(this ApiClass? id)
             => id.HasValue ? id.Value.Format() : "unkinded";
 

@@ -7,4 +7,4 @@ set ProjectId=control
 echo ProjectId:%ProjectId%
 
 call %ZCmd%\build-project.cmd
-call %ZCmd%\deploy-capture-tool.cmd
+call .cmd\deploy.cmd

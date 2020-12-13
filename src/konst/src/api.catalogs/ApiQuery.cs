@@ -95,43 +95,6 @@ namespace Z0
         }
 
         [Op]
-        public static uint identities(ReadOnlySpan<OpIdentity> src, Span<ApiIdentityToken> dst)
-        {
-            var count = min(src.Length,dst.Length);
-            if(count == 0)
-                return 0;
-
-            var duplicates = 0u;
-            ref readonly var source = ref first(src);
-
-            for(var i=0u; i<count; i++)
-            {
-                ref readonly var identity = ref skip(source,i);
-                var k = ApiIdentityTokens.key(identity);
-                if(ApiIdentityTokens.Index.TryAdd(k, identity))
-                    seek(dst,i) = new ApiIdentityToken(k);
-                else
-                {
-                    seek(dst,i) = ApiIdentityToken.Empty;
-                    duplicates++;
-                }
-            }
-            return duplicates;
-        }
-
-        [Op]
-        public static KeyedValues<PartId,Type>[] types(ClrTypeKind kind, ISystemApiCatalog src)
-        {
-            switch(kind)
-            {
-                case ClrTypeKind.Enum:
-                    return enums(src);
-                default:
-                    return default;
-            }
-        }
-
-        [Op]
         public static ApiMemberIndex index(ApiHostCatalog src)
         {
             var ix = index(src.Storage.Select(h => (h.Id, h)),true);
@@ -353,53 +316,6 @@ namespace Z0
         static ApiOpIndex<ApiCodeBlock> CodeBlockIndex(ApiCodeBlock[] src)
             => index(src.Select(x => (x.OpUri.OpId, x)));
 
-        /// <summary>
-        /// Creates an operation index from an api member span, readonly that is
-        /// </summary>
-        /// <param name="src">The members to index</param>
-        /// <typeparam name="M">The member type</typeparam>
-        static ApiOpIndex<M> index<M>(ReadOnlySpan<M> src)
-            where M : struct, IApiMember
-                => index(src.MapArray(h => (h.Id, h)));
-
-        static MethodInfo[] GenericMethods<K>(IApiHost src, K kind)
-            where K : unmanaged, Enum
-                => from m in src.HostType.DeclaredMethods().OpenGeneric(1)
-                where m.Tagged<OpAttribute>()
-                && m.Tagged<ClosuresAttribute>()
-                && !m.AcceptsImmediate()
-                && m.KindId().ToString() == kind.ToString()
-                select m;
-
-        static MethodInfo[] DirectMethods<K>(IApiHost src, K kind)
-            where K : unmanaged, Enum
-                => from m in src.HostType.DeclaredMethods().NonGeneric()
-                where m.Tagged<OpAttribute>()
-                && !m.AcceptsImmediate()
-                && m.KindId().ToString() == kind.ToString()
-                select m;
-
-        /// <summary>
-        /// Computes a types's numeric closures, predicated on available metadata
-        /// </summary>
-        /// <param name="t">The source type</param>
-        [Op]
-        static NumericKind[] NumericClosureKinds(Type t)
-            => (from tag in t.Tag<ClosuresAttribute>()
-                where tag.Kind == TypeClosureKind.Numeric
-                let spec = (NumericKind)tag.Spec
-                select spec.DistinctKinds().ToArray()).ValueOrElse(() => sys.empty<NumericKind>());
-
-        /// <summary>
-        /// Computes a method's natural closures, predicated on available metadata
-        /// </summary>
-        /// <param name="m">The source method</param>
-        [Op]
-        static Type[] NaturalClosureTypes(MethodInfo m)
-            => (from tag in m.Tag<ClosuresAttribute>()
-                where tag.Kind == TypeClosureKind.Natural
-                let spec = (NatClosureKind)tag.Spec
-                select NativeNaturals.FindTypes(spec).ToArray()).ValueOrElse(() => sys.empty<Type>());
 
       internal static Type[] ResAccessorTypes
             => new Type[]{typeof(ReadOnlySpan<byte>), typeof(ReadOnlySpan<char>)};

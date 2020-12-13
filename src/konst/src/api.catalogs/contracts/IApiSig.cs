@@ -4,70 +4,83 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+    using System;
 
-    [Free]
     public interface IApiSig
     {
+        StringRef Identifier {get;}
 
+        CliArtifactKey TargetKey {get;}
+
+        uint SourceCount => 0;
+
+        ReadOnlySpan<CliArtifactKey> Sources => default;
     }
 
-    [Free]
-    public interface IApiTypeSig : IApiSig
+    public interface IApiSig<H> : IApiSig
+        where H : unmanaged, IApiSig<H>
     {
 
     }
 
-    [Free]
-    public interface IApiOpSig : IApiSig
+    public interface IApiSig<H,R> : IApiSig
+        where H : unmanaged, IApiSig<H,R>
     {
-        /// <summary>
-        /// The declaring api host
-        /// </summary>
-        CliArtifactKey Host {get;}
+        uint IApiSig.SourceCount
+            => ApiSig<R>.SourceCount;
+
+        CliArtifactKey IApiSig.TargetKey
+            => ApiSig<R>.target();
+
+        ReadOnlySpan<CliArtifactKey> IApiSig.Sources
+            => ApiSig<R>.Sources;
     }
 
-    [Free]
-    public interface IApiOpSig<S> : IApiOpSig
-        where S : struct, IApiOpSig<S>
+    public interface IApiSig<H,A,R> : IApiSig<H,R>
+        where H : unmanaged, IApiSig<H,A,R>
     {
+        CliArtifactKey Source(N0 n)
+            => ApiSig<A,R>.source(n);
 
+        uint IApiSig.SourceCount
+            => ApiSig<A,R>.SourceCount;
+
+        ReadOnlySpan<CliArtifactKey> IApiSig.Sources
+            => ApiSig<A,R>.Sources;
     }
 
-    [Free]
-    public interface IApiOpSig<S,T0> : IApiOpSig
-        where S : struct, IApiOpSig<S,T0>
-        where T0: IApiTypeSig
+    public interface IApiSig<H,A,B,R> : IApiSig<H,R>
+        where H : unmanaged, IApiSig<H,A,B,R>
     {
+        CliArtifactKey Source(N0 n)
+            => ApiSig<A,B,R>.source(n);
 
+        CliArtifactKey Source(N1 n)
+            => ApiSig<A,B,R>.source(n);
+
+        uint IApiSig.SourceCount
+            => ApiSig<A,B,R>.SourceCount;
+
+        ReadOnlySpan<CliArtifactKey> IApiSig.Sources
+            => ApiSig<A,B,R>.Sources;
     }
 
-    [Free]
-    public interface IApiOpSig<S,T0,T1> : IApiOpSig
-        where S : struct, IApiOpSig<S,T0,T1>
-        where T0: IApiTypeSig
-        where T1: IApiTypeSig
+    public interface IApiSig<H,A,B,C,R> : IApiSig<H,R>
+        where H : unmanaged, IApiSig<H,A,B,C,R>
     {
+        CliArtifactKey Source(N0 n)
+            => ApiSig<A,B,C,R>.source(n);
 
-    }
+        CliArtifactKey Source(N1 n)
+            => ApiSig<A,B,C,R>.source(n);
 
-    [Free]
-    public interface IApiOpSig<S,T0,T1,T2> : IApiOpSig
-        where S : struct, IApiOpSig<S,T0,T1,T2>
-        where T0: IApiTypeSig
-        where T1: IApiTypeSig
-        where T2: IApiTypeSig
-    {
+        CliArtifactKey Source(N2 n)
+            => ApiSig<A,B,C,R>.source(n);
 
-    }
+        uint IApiSig.SourceCount
+            => ApiSig<A,B,C,R>.SourceCount;
 
-    [Free]
-    public interface IApiOpSig<S,T0,T1,T2,T3> : IApiOpSig
-        where T1: IApiTypeSig
-        where T0: IApiTypeSig
-        where T2: IApiTypeSig
-        where T3: IApiTypeSig
-    {
-
+        ReadOnlySpan<CliArtifactKey> IApiSig.Sources
+            => ApiSig<A,B,C,R>.Sources;
     }
 }

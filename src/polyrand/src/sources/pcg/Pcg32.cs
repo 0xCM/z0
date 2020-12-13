@@ -11,11 +11,21 @@ namespace Z0
 
     using api = Pcg;
 
-    public class Pcg32 : IRngNav<uint>, IRngDomainValues<ulong>
+    public struct Pcg32 : IRngNav<uint>, IRngDomainValues<ulong>
     {
         [MethodImpl(Inline)]
         internal Pcg32(ulong s0, ulong? index = null)
-            => Init(s0, index ?? Pcg.DefaultIndex);
+            : this()
+        {
+            Init(s0, index ?? Pcg.DefaultIndex);
+        }
+
+        [MethodImpl(Inline)]
+        internal Pcg32(ulong s0)
+            : this()
+        {
+            Init(s0, Pcg.DefaultIndex);
+        }
 
         internal ulong State;
 
@@ -26,7 +36,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public uint Next()
-            => grind32(Step());
+            => Pcg.grind32(Step());
 
         [MethodImpl(Inline)]
         public uint Next(uint max)
@@ -71,27 +81,6 @@ namespace Z0
 
         const ulong Multiplier = Pcg.DefaultMultiplier;
 
-        /// <summary>
-        /// Rotates bits in the source rightwards by a specified offset
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="offset">The magnitude of the rotation</param>
-        [MethodImpl(Inline)]
-        static uint rotr(uint src, uint offset)
-            => (src >> (int)offset) | (src << (32 - (int)offset));
-
-        /// <summary>
-        /// Produces a pseudorandom output from a given source state
-        /// </summary>
-        /// <param name="state">The source state</param>
-        /// <remarks>Follows the implementation of pcg_output_xsh_rr_64_32</remarks>
-        [MethodImpl(Inline)]
-        internal static uint grind32(ulong state)
-        {
-            var src = ((state >> 18) ^ state) >> 27;
-            var dst = rotr((uint)src,(uint)(state >> 59));
-            return dst;
-        }
 
         [MethodImpl(Inline)]
         public ulong Next(ulong max)
@@ -103,6 +92,5 @@ namespace Z0
 
         ulong ISource<ulong>.Next()
             => Next();
-
     }
 }

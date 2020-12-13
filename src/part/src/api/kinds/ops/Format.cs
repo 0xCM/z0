@@ -24,6 +24,13 @@ namespace Z0
         public static bool IsDefined(this ApiClass src)
             => src != 0;
 
+        /// <summary>
+        /// Produces the canonical name of a kinded vectorized operation
+        /// </summary>
+        /// <param name="src">The operation kind id</param>
+        [MethodImpl(Inline), Op]
+        public static string FormatV(this ApiClass src)
+            => $"v{src.Format()}";
 
         [MethodImpl(Inline), Op]
         public static bool IsUserApi(this ApiClass src)

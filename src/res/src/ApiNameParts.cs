@@ -186,7 +186,7 @@ public readonly struct ApiNameParts
 
     public const string files = nameof(files);
 
-    public const string signatures = nameof(signatures);
+    public const string sigs = nameof(sigs);
 
     public const string shell = nameof(shell);
 

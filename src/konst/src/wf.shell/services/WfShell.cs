@@ -41,7 +41,7 @@ namespace Z0
 
         public WfController Controller {get;}
 
-        public IPolyrand Random {get; private set;}
+        public IPolyStream PolyStream {get; private set;}
 
         public WfHost Host {get; private set;}
 
@@ -67,7 +67,7 @@ namespace Z0
             WfSink = WfLogs.events(Init.LogConfig);
             Broker = new WfBroker(WfSink, Ct);
             Host = new WfHost(typeof(WfShell), typeof(WfShell), _ => throw no<WfShell>());
-            Random = default;
+            PolyStream = default;
             Verbosity = LogLevel.Info;
             Paths = Init.Shell.Paths;
             Args = Init.Shell.Args;
@@ -79,7 +79,7 @@ namespace Z0
             Router = new CmdRouter(this);
         }
 
-        internal WfShell(IWfInit config, CorrelationToken ct, IWfEventSink sink, IWfBroker broker, WfHost host, IPolyrand random, LogLevel verbosity, ICmdRouter router)
+        internal WfShell(IWfInit config, CorrelationToken ct, IWfEventSink sink, IWfBroker broker, WfHost host, IPolyStream random, LogLevel verbosity, ICmdRouter router)
         {
             Init = config;
             Context = Init.Shell;
@@ -95,7 +95,7 @@ namespace Z0
             WfSink = sink;
             Broker = broker;
             Host = host;
-            Random = random;
+            PolyStream = random;
             Verbosity = verbosity;
             Router = router;
         }

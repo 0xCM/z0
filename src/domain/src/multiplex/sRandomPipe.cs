@@ -18,7 +18,7 @@ namespace Z0
 
             var pipe = Pipes.pipe<ushort>();
             var count = 10;
-            var input = wf.Random.Span<ushort>(count);
+            var input = wf.PolyStream.Span<ushort>(count);
             for(var i=0; i<count; i++)
                 pipe.Deposit(skip(input,i));
 
