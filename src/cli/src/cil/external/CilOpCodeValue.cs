@@ -5,7 +5,7 @@ namespace Z0
 {
     using System;
 
-    public enum CilOpCodeKind : ushort
+    public enum CilOpCodeValue : ushort
     {
         Nop = 0x00,
 

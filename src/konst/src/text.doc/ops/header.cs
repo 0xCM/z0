@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source line</param>
         /// <param name="spec">The text format</param>
-        public static Option<TextDocHeader> header(TextDocLine src, in TextDocFormat spec)
+        public static Option<TextDocHeader> header(TextLine src, in TextDocFormat spec)
         {
             try
             {

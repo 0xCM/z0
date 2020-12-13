@@ -56,7 +56,14 @@ namespace Z0
 
         public bool IsNonEmpty
         {
+            [MethodImpl(Inline)]
             get => !IsEmpty;
+        }
+
+        public static CilFunctionInfo Empty
+        {
+            [MethodImpl(Inline)]
+            get => new CilFunctionInfo(CliArtifactKey.Empty, EmptyString, 0);
         }
     }
 }

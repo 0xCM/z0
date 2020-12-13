@@ -8,7 +8,7 @@ call %ZCmd%\config-project-bin
 set DeploySrc=%ProjectBinRoot%
 echo DeploySrc:%DeploySrc%
 
-set DeployDst=%ZTools%
+set DeployDst=j:\tools\z\bin
 echo DeployDst:%DeployDst%
 
 set DeployLog=%ZDb%\etl\deploy-%ProjectId%.log

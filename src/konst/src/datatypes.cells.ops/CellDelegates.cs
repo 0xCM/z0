@@ -204,7 +204,7 @@ namespace Z0
             => a => f(a.Content);
 
         [MethodImpl(NotInline), Op]
-        public static UnaryPredicate1 define(UnaryPredicate<Bit32> f)
+        public static UnaryPredicate1 define(UnaryPredicate<bit> f)
             => a => f(a);
 
         [MethodImpl(NotInline), Op]

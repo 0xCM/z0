@@ -63,7 +63,7 @@ namespace Z0
         /// <summary>
         /// The new-line control symbol \n', asci code 10
         /// </summary>
-        NL = '\n',
+        LF = '\n',
 
         /// <summary>
         /// The form-feed control symbol '\f', asci code 12

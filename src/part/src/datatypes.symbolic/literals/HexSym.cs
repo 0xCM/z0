@@ -10,6 +10,7 @@ namespace Z0
     /// <summary>
     /// Defines the symbols that represent both upper and lower-case base-16 digits
     /// </summary>
+    [SymbolProvider]
     public enum HexSym : ushort
     {
         /// <summary>
@@ -21,12 +22,12 @@ namespace Z0
         /// Specifies 1 base 16, asci code 49
         /// </summary>
         x1 = Lo.x1,
-        
+
         /// <summary>
         /// Specifies 2 base 16, asci code 50
         /// </summary>
         x2 = Lo.x2,
-        
+
         /// <summary>
         /// Specifies 3 base 16, asci code 51
         /// </summary>
@@ -51,12 +52,12 @@ namespace Z0
         /// Specifies 7 base 16
         /// </summary>
         x7 = '7',
-        
+
         /// <summary>
         /// Specifies 8 base 16
         /// </summary>
         x8 = '8',
-        
+
         /// <summary>
         /// Specifies 9 base 16
         /// </summary>
@@ -121,5 +122,5 @@ namespace Z0
         /// Specifies 10 base 16, asci code 102
         /// </summary>
         f = Lo.f,
-    }    
+    }
 }

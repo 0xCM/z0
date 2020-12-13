@@ -76,9 +76,9 @@ namespace Z0
             var cmd = new EmitFileListCmd();
             cmd.ListName = "tests";
             cmd.SourceDir = FS.dir(@"J:\lang\net\runtime\artifacts\tests\coreclr\Windows_NT.x64.Debug");
-            cmd.TargetPath = wf.Db().JobPath(FS.file("coreclr.tests", ArchiveFileExt.Cmd));
+            cmd.TargetPath = wf.Db().JobPath(FS.file("coreclr.tests", FileExtensions.Cmd));
             cmd.FileUriMode = false;
-            cmd.WithKinds(ArchiveFileExt.Cmd);
+            cmd.WithKinds(FileExtensions.Cmd);
             cmd.LimitEmissions(20);
             return cmd;
         }
@@ -91,7 +91,7 @@ namespace Z0
         {
             var srcDir = FS.dir("k:/z0/builds/nca.3.1.win-x64");
             var sources = array(srcDir + FS.file("z0.konst.dll"), srcDir + FS.file("z0.asm.dll"));
-            var dst = Db.Doc("AssemblyReferences", ArchiveFileExt.Csv);
+            var dst = Db.Doc("AssemblyReferences", FileExtensions.Csv);
             var cmd = EmitAssemblyRefs.specify(Wf, sources, dst);
             return EmitAssemblyRefs.run(Wf,cmd);
         }

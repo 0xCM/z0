@@ -14,31 +14,50 @@ namespace Z0
 
     partial struct Cil
     {
-        public static IEnumerable<CilFunctionInfo> decode(Module module, MethodInfo[] src)
+        public static Index<CilFunctionInfo> decode(Module module, MethodInfo[] src)
         {
-            var types = module.GetTypes();
+            var dst = list<CilFunctionInfo>(src.Length);
+            var types = @readonly(module.GetTypes());
             var lookup = src.Select(x => ((uint)x.MetadataToken, x)).ToDictionary();
-
-            foreach(var type in types)
+            var kTypes = types.Length;
+            for(var i=0; i<kTypes; i++)
             {
-                foreach(var method in type.Methods())
+                var methods = @readonly(skip(types,i).Methods());
+                var kMethods = methods.Length;
+                for(var j=0; j<kMethods; j++)
                 {
+                    ref readonly var method = ref skip(methods,j);
+                    var token = (uint)method.MetadataToken;
                     var body = method.GetMethodBody();
                     if(body != null)
                     {
-                        Index<byte> data = body.GetILAsByteArray();
-                        if(data.IsNonEmpty)
+                        var data = body.GetILAsByteArray() ?? Array.Empty<byte>();
+                        var length = data.Length;
+                        if(length != 0)
                         {
-                            var token = (uint)method.MetadataToken;
                             if(lookup.ContainsKey(token))
                             {
-                                var fx = new CilFunctionInfo(token, method.Name, method.MethodImplementationFlags);
-                                yield return fx;
+
+                                dst.Add(new CilFunctionInfo(token, method.Name, method.MethodImplementationFlags));
                             }
                         }
                     }
                 }
             }
+
+            return dst.ToArray();
+        }
+
+        public static Index<Instruction> decode(ReadOnlySpan<byte> src)
+        {
+            var dst = list<Instruction>();
+            var count = src.Length;
+            ref readonly var source = ref first(src);
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var b = ref skip(source,i);
+            }
+            return dst.ToArray();
         }
     }
 }

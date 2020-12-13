@@ -9,11 +9,9 @@ namespace Z0
 
     using static Part;
 
-    using K = System.Reflection.Metadata.ILOpCode;
-
     public struct CilOpCodeInfo
     {
-        public K OpCode;
+        public ILOpCode OpCode;
 
         public string Name;
 
@@ -28,7 +26,7 @@ namespace Z0
         public CilStackBehaviour Sb2;
 
         [MethodImpl(Inline)]
-        public CilOpCodeInfo(K id, string name, CilOpCodeType type, CilOperandType optype, byte opcount, CilStackBehaviour sb1, CilStackBehaviour sb2)
+        public CilOpCodeInfo(ILOpCode id, string name, CilOpCodeType type, CilOperandType optype, byte opcount, CilStackBehaviour sb1, CilStackBehaviour sb2)
         {
             OpCode = id;
             Name =  name;
@@ -40,9 +38,9 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public CilOpCodeInfo(CilOpCodeKind id, string name, CilOpCodeType type, CilOperandType optype, byte opcount, CilStackBehaviour sb1, CilStackBehaviour sb2)
+        public CilOpCodeInfo(CilOpCodeValue id, string name, CilOpCodeType type, CilOperandType optype, byte opcount, CilStackBehaviour sb1, CilStackBehaviour sb2)
         {
-            OpCode = (K)id;
+            OpCode = (ILOpCode)id;
             Name =  name;
             CodeType = type;
             ArgType =  optype;

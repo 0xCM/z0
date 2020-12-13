@@ -22,9 +22,7 @@ namespace Z0
         [MethodImpl(Inline)]
         internal Pcg64(ulong s0, ulong? index = null)
             : this()
-        {
-            Init(s0, index ?? Pcg.DefaultIndex);
-        }
+                => Init(s0, index ?? Pcg.DefaultIndex);
 
         internal ulong State;
 

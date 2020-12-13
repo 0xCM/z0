@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static ArchiveFileExt;
+    using static FileExtensions;
 
     public struct ModuleArchive : IModuleArchive
     {

@@ -3,17 +3,18 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
     /// <summary>
     /// Defines an arbitrary collection of text literals
     /// </summary>
+    [LiteralProvider]
     public static class CharText
     {
         /// <summary>
         /// The ':' character text
         /// </summary>
         public const string Colon = ":";
-     
+
         /// <summary>
         /// The '=' character text
         /// </summary>
@@ -32,6 +33,6 @@ namespace Z0
         /// The ''' character text
         /// </summary>
         public const string SQuote = "\'";
-    
+
     }
 }

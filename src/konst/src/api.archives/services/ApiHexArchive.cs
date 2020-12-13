@@ -24,7 +24,7 @@ namespace Z0
             => Root = wf.Db().CapturedHexDir();
 
         public FS.FileExt DefaultExt
-            => ArchiveFileExt.Hex;
+            => FileExtensions.Hex;
 
         /// <summary>
         /// Reads the archived files owned by a specified host

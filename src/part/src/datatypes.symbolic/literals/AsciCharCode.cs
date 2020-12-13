@@ -6,7 +6,7 @@ namespace Z0
 {
     using AC = AsciChar;
 
-    [CodeProvider]
+    [CodeProvider(typeof(AC))]
     public enum AsciCharCode : byte
     {
         /// <summary>
@@ -22,7 +22,7 @@ namespace Z0
         /// <summary>
         /// The new-line character code 10
         /// </summary>
-        NL = (byte)AC.NL,
+        NL = (byte)AC.LF,
 
         /// <summary>
         /// The line-feed character code 13

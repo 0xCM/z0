@@ -162,7 +162,7 @@ namespace Z0
             var commands = Commands();
             foreach(var c in commands)
             {
-                var dst = db.TmpFile(FS.file(c.CmdName, FileExtensions.Json));
+                var dst = db.TmpFile(FS.file(c.CmdName.Format(), FileExtensions.Json));
                 var data = JsonData.serialize(c,dst);
             }
         }

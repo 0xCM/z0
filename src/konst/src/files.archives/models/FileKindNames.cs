@@ -5,7 +5,7 @@
 namespace Z0
 {
     [LiteralProvider]
-    public readonly struct ArchiveFileKindNames
+    public readonly struct FileKindNames
     {
         const string dot = ".";
 
@@ -143,5 +143,9 @@ namespace Z0
         /// </summary>
         public const string targets = nameof(targets);
 
+        /// <summary>
+        /// Defines the 'sorted' literal
+        /// </summary>
+        public const string sorted = nameof(sorted);
     }
 }

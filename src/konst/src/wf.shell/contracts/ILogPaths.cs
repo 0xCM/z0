@@ -15,7 +15,7 @@ namespace Z0
         /// <summary>
         /// The global application log root
         /// </summary>
-        FS.FolderPath LogRoot {get;}
+        FS.FolderPath Root {get;}
 
         string AppName
             => Assembly.GetEntryAssembly().GetSimpleName();

@@ -45,7 +45,7 @@ namespace Z0.Logix
             var survey = SurveyBuilder.template<ushort>(1, "Survey 16u", 11, 5);
             var matrix = Survey.Matrix(survey);
 
-            using var dst = BitMatrixServices.Factory.Writer(CasePath(FileExtension.Define("survey.table")));
+            using var dst = BitMatrixServices.Factory.Writer(CasePath(FS.ext("survey.table")));
             dst.Write(matrix);
 
             var response = Survey.Respond(survey, Random);
@@ -63,9 +63,8 @@ namespace Z0.Logix
         {
             var survey = SurveyBuilder.template<ulong>(1, "Survey 64u", 60, 10);
             var matrix = Survey.Matrix(survey);
-            using var dst = BitMatrixServices.Factory.Writer(CasePath(FileExtension.Define("table")));
+            using var dst = BitMatrixServices.Factory.Writer(CasePath(FS.ext("table")));
             dst.Write(matrix);
-
         }
     }
 }

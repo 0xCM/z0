@@ -4,6 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    [SymbolProvider]
     public enum AsciSymSymbol : ushort
     {
         /// <summary>

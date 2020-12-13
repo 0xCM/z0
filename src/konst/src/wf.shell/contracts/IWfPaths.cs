@@ -4,15 +4,17 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using Free =System.Security.SuppressUnmanagedCodeSecurityAttribute;
+    using System.Reflection;
+
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     using static ArchiveFolderNames;
 
     [Free]
-    public interface IWfPaths : IDbPaths, ILogPaths
+    public interface IWfPaths : IDbPaths
     {
-        FS.FolderPath ILogPaths.LogRoot
-            => Root + FS.folder("logs");
+        string AppName
+            => Assembly.GetEntryAssembly().GetSimpleName();
 
         /// <summary>
         /// The name of the runtime log folder
@@ -20,8 +22,8 @@ namespace Z0
         FS.FolderName AppLogFolder
             => FS.folder(AppsFolder);
 
-        ITestLogPaths TestLogs
-            => TestLogPaths.define(DbRoot + FS.folder("tests"));
+        ITestRunPaths TestPaths
+            => TestRunPaths.define(DbRoot + FS.folder("tests"));
 
         FS.FolderPath CodeGenRoot
             => FS.dir(@"j:\dev\projects\z0.generated");
@@ -30,7 +32,7 @@ namespace Z0
         /// The executing application's data directory
         /// </summary>
         FS.FolderPath AppDataDir
-            => (LogRoot + FS.folder(AppsFolder)) + FS.folder(AppName);
+            => (Root + FS.folder(AppsFolder)) + FS.folder(AppName);
 
         /// <summary>
         /// The path to the root development directory
@@ -39,10 +41,10 @@ namespace Z0
             => EnvVars.Common.DevRoot;
 
         FS.FolderPath SortedCaseLogRoot()
-            => LogRoot + FS.folder("tests") + FS.folder("sorted");
+            => Root + FS.folder("tests") + FS.folder("sorted");
 
         FS.FilePath SortedCaseLogPath()
-            => SortedCaseLogRoot() + FS.file(AppName,  ArchiveFileExt.Csv);
+            => SortedCaseLogRoot() + FS.file(AppName,  FileExtensions.Csv);
 
         /// <summary>
         /// The name of the development source folder
@@ -60,7 +62,7 @@ namespace Z0
         /// The path to the root application resource directory
         /// </summary>
         FS.FolderPath ResourceRoot
-            => LogRoot + FS.folder(RespackContent);
+            => Root + FS.folder(RespackContent);
 
         /// <summary>
         /// The path to the resource index directory
@@ -96,7 +98,7 @@ namespace Z0
         /// The executing application's data directory
         /// </summary>
         FS.FolderPath AppDataRoot
-            => (LogRoot + AppLogFolder) + AppFolder;
+            => (Root + AppLogFolder) + AppFolder;
 
         /// <summary>
         /// The application-relative capture directory
@@ -109,11 +111,5 @@ namespace Z0
         /// </summary>
         IWfPaths ForApp()
             => WfShell.paths();
-    }
-
-    public interface IWfPaths<A> : IWfPaths, ILogPaths<A>
-    {
-        IWfPaths IWfPaths.ForApp()
-            => WfShell.paths<A>();
     }
 }

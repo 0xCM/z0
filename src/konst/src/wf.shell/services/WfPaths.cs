@@ -10,23 +10,13 @@ namespace Z0
     using static Konst;
 
     /// <summary>
-    /// Reifies default application path service
+    /// Provides the canonical <see cref='IWfPaths'/> implementation
     /// </summary>
     public readonly struct WfPaths : IWfPaths
     {
         public FS.FolderPath Root {get;}
 
-        public WfPaths(FS.FolderPath root)
-            => Root = root;
-    }
-
-    /// <summary>
-    /// Reifies default application path service
-    /// </summary>
-    public readonly struct WfPaths<A> : IWfPaths<A>
-    {
-        public FS.FolderPath Root {get;}
-
+        [MethodImpl(Inline)]
         public WfPaths(FS.FolderPath root)
             => Root = root;
     }

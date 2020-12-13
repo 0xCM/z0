@@ -65,7 +65,7 @@ namespace Z0
                     if(text.blank(data))
                         continue;
 
-                    var line = new TextDocLine(counter, data);
+                    var line = new TextLine(counter, data);
                     var lead = line[0];
 
                     // skip comments

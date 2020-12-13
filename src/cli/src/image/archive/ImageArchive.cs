@@ -10,7 +10,7 @@ namespace Z0
 
     using static z;
 
-    using static ArchiveFileExt;
+    using static FileExtensions;
 
     [FileArchive]
     public readonly struct ImageArchive : IFileArchive

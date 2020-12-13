@@ -6,9 +6,10 @@ namespace Z0
 {
     using static BinarySym;
 
-   /// <summary>
-   /// Defines <see cref='BinarySym' /> classiefiers
-   /// </summary>
+    /// <summary>
+    /// Defines <see cref='BinarySym' /> classiefiers
+    /// </summary>
+    [FacetProvider(typeof(BinarySym))]
     public enum BinarySymFacet : ushort
     {
         /// <summary>

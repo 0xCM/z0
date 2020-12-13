@@ -35,9 +35,9 @@ namespace Z0
             Wf = wf.WithHost(Host);
             Part = part;
             if(sk == R.Kind.System)
-                TargetPath = Wf.Db().Table(part.Id, CliSystemString.TableId, ArchiveFileExt.Csv);
+                TargetPath = Wf.Db().Table(part.Id, CliSystemString.TableId, FileExtensions.Csv);
             else
-                TargetPath = Wf.Db().Table(part.Id, CliUserString.TableId, ArchiveFileExt.Csv);
+                TargetPath = Wf.Db().Table(part.Id, CliUserString.TableId, FileExtensions.Csv);
             StringKind = sk;
             EmissionCount = 0;
             Wf.Created();

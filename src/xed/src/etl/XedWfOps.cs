@@ -14,6 +14,6 @@ namespace Z0
     {
         [Op]
         public static FS.FileName TargetRuleFile(FS.FileName src, string name)
-            => FS.file(text.format("{0}.{1}.{2}.{3}", "xed", "rules", src.WithoutExtension, name), ArchiveFileExt.Csv);
+            => FS.file(text.format("{0}.{1}.{2}.{3}", "xed", "rules", src.WithoutExtension, name), FileExtensions.Csv);
     }
 }

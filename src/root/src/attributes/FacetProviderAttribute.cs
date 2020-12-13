@@ -5,16 +5,14 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Text;
 
-    using static Part;
-
-    partial struct TextRules
+    public class FacetProviderAttribute : Attribute
     {
-        partial struct Test
-        {
+        public Type TargetType {get;}
 
+        public FacetProviderAttribute(Type target)
+        {
+            TargetType = target;
         }
     }
 }

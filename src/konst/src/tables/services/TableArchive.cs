@@ -13,7 +13,7 @@ namespace Z0
 
     using api = Table;
 
-    using X = ArchiveFileExt;
+    using X = FileExtensions;
 
     public readonly struct TableArchive : ITableArchive
     {

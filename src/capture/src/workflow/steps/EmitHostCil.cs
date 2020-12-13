@@ -46,7 +46,7 @@ namespace Z0
 
         ref FS.FilePath EmitDecoded(IWfShell wf, in ApiMemberCodeBlocks src, out FS.FilePath dst)
         {
-            dst = wf.Db().CapturedAsmFile(Uri).ChangeExtension(ArchiveFileExt.Il);
+            dst = wf.Db().CapturedAsmFile(Uri).ChangeExtension(FileExtensions.Il);
             if(src.Count != 0)
             {
                 wf = wf.WithHost(this);

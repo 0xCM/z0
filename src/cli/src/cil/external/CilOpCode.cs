@@ -11,7 +11,7 @@ namespace Z0
 
     public readonly struct CilOpCode : IEquatable<CilOpCode>
     {
-        public readonly CilOpCodeKind Value;
+        public readonly CilOpCodeValue Value;
 
         public ushort Index
         {
@@ -22,7 +22,7 @@ namespace Z0
         readonly int m_flags;
 
         [MethodImpl(Inline)]
-        internal CilOpCode(CilOpCodeKind value, int flags)
+        internal CilOpCode(CilOpCodeValue value, int flags)
         {
             Value = value;
             m_flags = flags;

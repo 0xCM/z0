@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    [ApiHost]
+    //[ApiHost]
     public static class Pcg
     {
         /// <summary>

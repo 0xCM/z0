@@ -13,9 +13,9 @@ namespace Z0
             => FS.file(string.Concat(host.Owner.Format(), Chars.Dot, host.Name), ext);
 
         FS.FileName AsmFileName(OpIdentity id)
-            => LegalFileName(id, ArchiveFileExt.Asm);
+            => LegalFileName(id, FileExtensions.Asm);
 
         FS.FileName HexOpFileName(OpIdentity id)
-            => LegalFileName(id, ArchiveFileExt.Hex);
+            => LegalFileName(id, FileExtensions.Hex);
     }
 }

@@ -9,7 +9,7 @@ namespace Z0
     using System.Reflection;
 
     using static Konst;
-    using static ArchiveFileExt;
+    using static FileExtensions;
 
     partial struct FS
     {

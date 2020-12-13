@@ -5,7 +5,7 @@ namespace Z0
 {
     using System;
 
-    using K = CilOpCodeKind;
+    using K = CilOpCodeValue;
 
     [ApiType]
     public readonly struct CilOpCodeSpecs

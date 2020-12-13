@@ -150,8 +150,8 @@ namespace Z0
         protected TCheckNumeric ClaimNumeric
             => CheckNumeric.Checker;
 
-        public ITestLogPaths TestLogPaths
-            => AppPaths.TestLogs;
+        public ITestRunPaths TestPaths
+            => AppPaths.TestPaths;
 
         protected PartId TestedPart
         {
@@ -162,13 +162,13 @@ namespace Z0
         FS.FolderPath TestRoot
         {
              [MethodImpl(Inline)]
-             get => TestLogPaths.TestDataRoot + FS.folder(TestedPart.Format());
+             get => TestPaths.DataRoot + FS.folder(TestedPart.Format());
         }
 
-        protected FolderPath UnitDataDir
+        protected FS.FolderPath UnitDataDir
         {
              [MethodImpl(Inline)]
-             get => FolderPath.Define(TestRoot.Name) + FolderName.Define(GetType().Name);
+             get => TestRoot + FS.folder(GetType().Name);
         }
 
         protected string CaseName<C>(string root, C t = default)
@@ -187,34 +187,27 @@ namespace Z0
             => ApiTestIdentity.name(f);
 
         public CasePaths Paths
-            => new CasePaths(TestLogPaths.TestDataRoot, TestedPart, GetType());
+            => new CasePaths(TestPaths.DataRoot, TestedPart, GetType());
 
         [MethodImpl(Inline)]
-        protected FilePath UnitPath(FileName name)
+        protected FS.FilePath UnitPath(FS.FileName name)
             => UnitDataDir + name;
 
-        protected StreamWriter UnitWriter(FileName filename)
+        protected StreamWriter UnitWriter(FS.FileName filename)
             => UnitPath(filename).Writer();
 
         [MethodImpl(Inline)]
-        protected FilePath CasePath(FileExtension ext, [CallerMemberName] string caller = null)
-            => UnitPath(FileName.define(caller,  ext));
-
-        [MethodImpl(Inline)]
         protected FS.FilePath CasePath(FS.FileExt ext, [CallerMemberName] string caller = null)
-            => FS.path(UnitPath(FS.file(caller,  ext)).Name);
+            => UnitPath(FS.file(caller,  ext));
 
         [MethodImpl(Inline)]
-        protected FilePath CasePath(string CaseName, FileExtension ext = null)
-            => UnitPath(FileName.define(CaseName, ext ?? new FileExtension("csv")));
-
-        protected StreamWriter CaseWriter(FileExtension ext, [Caller] string caller = null)
-            => CasePath(caller, ext).Writer();
+        protected FS.FilePath CasePath(string CaseName, FS.FileExt? ext = null)
+            => UnitPath(FS.file(CaseName, ext ?? FS.ext("csv")));
 
         protected StreamWriter CaseWriter(FS.FileExt ext, [Caller] string caller = null)
-            => FS.path(UnitPath(FS.file(caller, ext)).Name).Writer();
+            => CasePath(caller, ext).Writer();
 
-        protected StreamWriter CaseWriter(string CaseName, FileExtension ext = null)
+        protected StreamWriter CaseWriter(string CaseName, FS.FileExt? ext = null)
             => CasePath(CaseName, ext).Writer();
 
         protected BenchmarkRecord Benchmark(long opcount, Duration time, [Caller] string label = null)

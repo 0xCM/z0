@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+
     using static Konst;
 
     using api = Pcg;
@@ -14,9 +15,7 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         internal Pcg32(ulong s0, ulong? index = null)
-        {
-            Init(s0, index ?? Pcg.DefaultIndex);
-        }
+            => Init(s0, index ?? Pcg.DefaultIndex);
 
         internal ulong State;
 
@@ -61,10 +60,9 @@ namespace Z0
             //The index must be odd; so at this point either an exception must be
             //thrown or the index must be manipulated; the latter was chosen
             index = index % 2 == 0 ? index + 1 : index;
-
-            this.Index = (index << 1) | 1u;
+            Index = (index << 1) | 1u;
             Step();
-            this.State += s0;
+            State += s0;
             Step();
         }
 

@@ -33,7 +33,7 @@ namespace Z0
         }
 
         public FS.FileExt DefaultExt
-            =>  ArchiveFileExt.Exe;
+            =>  FileExtensions.Exe;
 
         public FileModuleKind ModuleKind
             => FileModuleKind.ManagedExe;

@@ -13,7 +13,7 @@ namespace Z0
         [Op]
         public static EmitRenderPatternsCmd specify(IWfShell wf, Type src)
         {
-            var dst = wf.Db().Doc("render.patterns", src.Name, ArchiveFileExt.Csv);
+            var dst = wf.Db().Doc("render.patterns", src.Name, FileExtensions.Csv);
             var cmd = new EmitRenderPatternsCmd();
             cmd.Source = src;
             cmd.Target = dst;

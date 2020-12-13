@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// Represents a line of text in the context of a line-oriented text data source
     /// </summary>
-    public readonly struct TextDocLine
+    public readonly struct TextLine
     {
         /// <summary>
         /// The line number of the data source from which the line was extracted
@@ -25,9 +25,16 @@ namespace Z0
         public string Content {get;}
 
         [MethodImpl(Inline)]
-        public TextDocLine(uint number, string text)
+        public TextLine(uint number, string text)
         {
             Index = number;
+            Content = text ?? EmptyString;
+        }
+
+        [MethodImpl(Inline)]
+        public TextLine(int number, string text)
+        {
+            Index = (uint)number;
             Content = text ?? EmptyString;
         }
 
@@ -59,14 +66,22 @@ namespace Z0
             => Content.Substring(startpos, endpos - startpos + 1);
 
         [MethodImpl(Inline)]
-        public static explicit operator TextDocLine(string text)
-            =>  new TextDocLine(0, text);
+        public static explicit operator TextLine(string text)
+            =>  new TextLine(0, text);
 
         [MethodImpl(Inline)]
-        public static implicit operator string(TextDocLine line)
+        public static implicit operator TextLine((int index, string text) src)
+            =>  new TextLine(src.index, src.text);
+
+        [MethodImpl(Inline)]
+        public static implicit operator TextLine((uint index, string text) src)
+            =>  new TextLine(src.index, src.text);
+
+        [MethodImpl(Inline)]
+        public static implicit operator string(TextLine line)
             => line.Content;
 
-        public static TextDocLine Empty
-            => new TextDocLine(0, EmptyString);
+        public static TextLine Empty
+            => new TextLine(0, EmptyString);
     }
 }

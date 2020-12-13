@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Reflection;
+    using System.Reflection.Metadata;
 
     using static Part;
 
@@ -17,11 +17,15 @@ namespace Z0
         /// </summary>
         public readonly struct Instruction
         {
-            public CilOpCodeKind OpCode {get;}
+            public ILOpCode OpCode {get;}
 
-            public Instruction(CilOpCodeKind kind)
+            public Index<byte> Args {get;}
+
+            [MethodImpl(Inline)]
+            public Instruction(ILOpCode op, params byte[] args)
             {
-                OpCode = kind;
+                OpCode = op;
+                Args = args;
             }
 
             public string Format()

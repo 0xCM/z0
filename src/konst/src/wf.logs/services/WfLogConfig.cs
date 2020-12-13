@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    using X = ArchiveFileExt;
+    using X = FileExtensions;
     using api = WfLogs;
 
     public readonly struct WfLogConfig : IWfLogConfig

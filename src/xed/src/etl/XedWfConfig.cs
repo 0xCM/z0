@@ -15,7 +15,7 @@ namespace Z0
         {
             Settings = XedSettings.Default();
             SourceRoot = wf.Db().SourceRoot("xed");
-            TargetRoot = FS.dir(wf.Paths.LogRoot.Name) + FS.folder("data") + FS.folder("xed");
+            TargetRoot = FS.dir(wf.Paths.Root.Name) + FS.folder("data") + FS.folder("xed");
         }
 
         public FS.FileName SummaryFile
@@ -37,7 +37,7 @@ namespace Z0
             => FS.folder("categories");
 
         public FS.FileExt DataFileExt
-            => ArchiveFileExt.Csv;
+            => FileExtensions.Csv;
 
         public xed_ext[] Extensions
         {

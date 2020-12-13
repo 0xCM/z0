@@ -9,7 +9,7 @@ namespace Z0
     /// <summary>
     /// Defines the symbols that represent the base-10 digits
     /// </summary>
-    [CodeProvider]
+    [CodeProvider(typeof(S))]
     public enum AsciDigitCode : byte
     {
         /// <summary>

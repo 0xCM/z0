@@ -62,7 +62,7 @@ namespace Z0
                     var id = path.Owner;
                     if(id.IsSome())
                     {
-                        var xmlfile = path.ChangeExtension(ArchiveFileExt.Xml);
+                        var xmlfile = path.ChangeExtension(FileExtensions.Xml);
                         if(xmlfile.Exists)
                         {
                             var data = xmlfile.ReadText();
@@ -100,7 +100,7 @@ namespace Z0
                 {
                     var k = kind(components[0][0]);
                     var name = components[1];
-                    var summary = text.unfence(value, "<summary>", "</summary>").RemoveAny((char)AsciControl.CR, (char)AsciControl.NL).Trim();
+                    var summary = text.unfence(value, "<summary>", "</summary>").RemoveAny((char)AsciControl.CR, (char)AsciControl.LF).Trim();
                     return ParseResult.Success(key, new SummaryComment(k, name, summary));
                 }
                 else

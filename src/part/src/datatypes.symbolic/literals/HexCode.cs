@@ -10,6 +10,7 @@ namespace Z0
     /// <summary>
     /// Defines identifiers for the ASCI codes that correspond to both upper/lower-case hex digits
     /// </summary>
+    [CodeProvider(typeof(Lo), typeof(Up))]
     public enum HexCode : ushort
     {
         /// <summary>
@@ -26,12 +27,12 @@ namespace Z0
         /// Specifies the asci code for the eponymous hex digit
         /// </summary>
         x1 = (byte)Lo.x1,
-        
+
         /// <summary>
         /// Specifies the asci code for the eponymous hex digit
         /// </summary>
         x2 = (byte)Lo.x2,
-        
+
         /// <summary>
         /// Specifies the asci code for the eponymous hex digit
         /// </summary>
@@ -56,12 +57,12 @@ namespace Z0
         /// Specifies the asci code for the eponymous hex digit
         /// </summary>
         x7 = (byte)Lo.x7,
-        
+
         /// <summary>
         /// Specifies the asci code for the eponymous hex digit
         /// </summary>
         x8 = (byte)Lo.x8,
-        
+
         /// <summary>
         /// Specifies the asci code for the eponymous hex digit
         /// </summary>
@@ -126,6 +127,6 @@ namespace Z0
         /// <summary>
         /// Specifies the asci code for the eponymous hex digit
         /// </summary>
-        f = (byte)Lo.f, 
+        f = (byte)Lo.f,
     }
 }

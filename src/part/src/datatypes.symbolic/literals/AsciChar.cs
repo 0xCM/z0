@@ -498,7 +498,7 @@ namespace Z0
         /// <summary>
         /// The line-feed character
         /// </summary>
-        NL = CSym.NL,
+        LF = CSym.LF,
 
         /// <summary>
         /// The carriage-return character

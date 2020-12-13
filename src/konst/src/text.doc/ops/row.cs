@@ -13,7 +13,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source text</param>
         /// <param name="spec">The text format spec</param>
-        public static Option<TextRow> row(TextDocLine src, in TextDocFormat spec)
+        public static Option<TextRow> row(TextLine src, in TextDocFormat spec)
         {
             if(src.IsEmpty ||  src[0] == spec.CommentPrefix)
                 return default;

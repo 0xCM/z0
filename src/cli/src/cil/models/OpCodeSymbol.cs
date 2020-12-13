@@ -33,7 +33,7 @@ namespace Z0
                 => new OpCodeSymbol(src);
 
             [MethodImpl(Inline)]
-            public static implicit operator OpCodeSymbol(CilOpCodeKind src)
+            public static implicit operator OpCodeSymbol(CilOpCodeValue src)
                 => new OpCodeSymbol((ILOpCode)src);
         }
     }

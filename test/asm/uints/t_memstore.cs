@@ -41,6 +41,27 @@ namespace Z0
             }
         }
 
+        public void emit_data()
+        {
+            var refs = Hex.HexRefs;
+            using var dst = CasePath($"Symbolic").Writer();
+            for(var i=0; i<refs.Length; i++)
+            {
+                var r = refs[i];
+                var data = MemoryView.view(r.Address, r.DataSize);
+                dst.WriteLine(data.FormatHexBytes(Chars.Space));
+            }
+        }
+
+        public void run_2()
+        {
+            var svc = Resources.stores(n256);
+            var store = svc.store();
+            var sources = store.View;
+            for(var i=0u; i<sources.Length; i++)
+                Process(skip(sources,i), store);
+        }
+
         unsafe void Process(in MemorySegment src, in MemorySegments store)
         {
             var reader = MemoryReader.create(src.Address.Pointer<byte>(), (int)src.DataSize);
@@ -78,33 +99,11 @@ namespace Z0
                 summary.WriteLine(line);
             }
 
-            var decoded = Cil.decode(mod,props.Select(x => x.GetGetMethod())).ToArray();
+            var getters = props.Getters();
+            var decoded = Cil.decode(mod, getters);
             var path = FS.path(CasePath(FileExtensions.Il).Name);
             var cilWriter = new FunctionWriter(path);
             cilWriter.Write(decoded);
-        }
-
-        public void emit_data()
-        {
-
-            var refs = Hex.HexRefs;
-            using var dst = CasePath($"Symbolic").Writer();
-            for(var i=0; i<refs.Length; i++)
-            {
-                var r = refs[i];
-                var data = MemoryView.view(r.Address, r.DataSize);
-                dst.WriteLine(data.FormatHexBytes(Chars.Space));
-
-            }
-        }
-
-        public void run_2()
-        {
-            var svc = Resources.stores(n256);
-            var store = svc.store();
-            var sources = store.View;
-            for(var i=0u; i<sources.Length; i++)
-                Process(skip(sources,i), store);
         }
     }
 }

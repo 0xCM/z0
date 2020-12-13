@@ -6,7 +6,7 @@ namespace Z0
 {
     using S = AsciSymSymbol;
 
-    [CodeProvider]
+    [CodeProvider(typeof(S))]
     public enum AsciSymCode : byte
     {
         /// <summary>

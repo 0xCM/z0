@@ -57,7 +57,7 @@ namespace Z0
         {
             var cmd = new EmitRenderPatternsCmd();
             cmd.Source = src;
-            cmd.Target = builder.Db.Doc("render.patterns", src.Name, ArchiveFileExt.Csv);
+            cmd.Target = builder.Db.Doc("render.patterns", src.Name, FileExtensions.Csv);
             return cmd;
         }
 
@@ -68,7 +68,7 @@ namespace Z0
             cmd.ListName = name;
             cmd.SourceDir = src;
             cmd.FileKinds = kinds;
-            cmd.TargetPath = builder.Db.List(name, ArchiveFileExt.Csv);
+            cmd.TargetPath = builder.Db.List(name, FileExtensions.Csv);
             return cmd;
         }
 

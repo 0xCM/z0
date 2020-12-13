@@ -3,13 +3,14 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
     using static HexSymLo;
     using static HexSymUp;
 
     using L = HexSymLo;
 
-    public enum HexSymFacet : ushort   
+    [FacetProvider(typeof(HexSym))]
+    public enum HexSymFacet : ushort
     {
         /// <summary>
         /// The 'x0' code
@@ -29,7 +30,7 @@ namespace Z0
         /// <summary>
         /// The 'f' code
         /// </summary>
-        LastLetterLo = f,       
+        LastLetterLo = f,
 
         /// <summary>
         /// The 'a' code
@@ -39,7 +40,7 @@ namespace Z0
         /// <summary>
         /// The 'f' code
         /// </summary>
-        LastLetterUp = B,       
+        LastLetterUp = B,
 
         /// <summary>
         /// The value to subtract from a symbolic digit [a..b] to compute an index in the range [0..15]

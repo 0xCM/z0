@@ -9,7 +9,7 @@ namespace Z0
     {
         public readonly struct Pdb : IFileKind<Pdb>
         {
-            public FS.FileExt DefaultExt => ArchiveFileExt.Pdb;
+            public FS.FileExt DefaultExt => FileExtensions.Pdb;
 
             public static implicit operator FS.FileExt(Pdb src)
                 => src.DefaultExt;
@@ -17,7 +17,7 @@ namespace Z0
 
         public readonly struct Csv : IFileKind<Csv>
         {
-            public FS.FileExt DefaultExt => ArchiveFileExt.Csv;
+            public FS.FileExt DefaultExt => FileExtensions.Csv;
 
             public static implicit operator FS.FileExt(Csv src)
                 => src.DefaultExt;
@@ -25,7 +25,7 @@ namespace Z0
 
         public readonly struct Asm : IFileKind<Asm>
         {
-            public FS.FileExt DefaultExt => ArchiveFileExt.Asm;
+            public FS.FileExt DefaultExt => FileExtensions.Asm;
 
             public static implicit operator FS.FileExt(Asm src)
                 => src.DefaultExt;
@@ -33,7 +33,7 @@ namespace Z0
 
         public readonly struct Dll : IFileKind<Dll>
         {
-            public FS.FileExt DefaultExt => ArchiveFileExt.Dll;
+            public FS.FileExt DefaultExt => FileExtensions.Dll;
 
             public static implicit operator FS.FileExt(Dll src)
                 => src.DefaultExt;
@@ -41,7 +41,7 @@ namespace Z0
 
         public readonly struct Sln : IFileKind<Sln>
         {
-            public FS.FileExt DefaultExt => ArchiveFileExt.Sln;
+            public FS.FileExt DefaultExt => FileExtensions.Sln;
 
             public static implicit operator FS.FileExt(Sln src)
                 => src.DefaultExt;

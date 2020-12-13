@@ -11,7 +11,7 @@ namespace Z0.Tools
     using static Konst;
     using static DumpBin.Flag;
 
-    using X = ArchiveFileExt;
+    using X = FileExtensions;
 
     public partial struct DumpBin
     {

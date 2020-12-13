@@ -10,18 +10,18 @@ namespace Z0
 
     using static Konst;
 
-    partial struct TextDocParser    
+    partial struct TextDocParser
     {
-        public static ParseResult<TextDocLine[]> lines(string src)
+        public static ParseResult<TextLine[]> lines(string src)
         {
-            var lines = new List<TextDocLine>();
+            var lines = new List<TextLine>();
             var lineNumber = 0u;
             using (var reader = new StringReader(src))
             {
                 var next = reader.ReadLine();
                 while (next != null)
                 {
-                    lines.Add(new TextDocLine(++lineNumber, next));
+                    lines.Add(new TextLine(++lineNumber, next));
                 }
             }
             return ParseResult.Success(src, lines.ToArray());
