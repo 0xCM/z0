@@ -73,7 +73,7 @@ namespace Z0.Logix
                 ref readonly var a = ref skip(A,i);
                 ref readonly var b = ref skip(B,i);
                 ref var judgement = ref Check(a,b, ref seek(target,i));
-                result &= judgement.Success;
+                result &= judgement.Result;
             }
             return Result;
         }

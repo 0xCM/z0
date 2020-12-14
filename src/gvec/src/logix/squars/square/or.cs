@@ -9,7 +9,6 @@ namespace Z0
 
     using static Konst;
     using static z;
-    using static In;
 
     using BL = BitLogic.Bytes;
 
@@ -23,15 +22,41 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-               BL.or(in uint8(in A), in uint8(in B), ref uint8(ref Z));
+               BL.or(memory.u8(A), memory.u8(B), ref memory.u8(Z));
             else if(typeof(T) == typeof(ushort))
-                or(w, in A, in B, ref Z);
+                or(w, A, B, ref Z);
             else if(typeof(T) == typeof(uint))
-                or(w, 4, 8, in A, in B, ref Z);
+                or(w, 4, 8,A, B, ref Z);
             else if(typeof(T) == typeof(ulong))
-                or(w, 16, 4, in A, in B, ref Z);
+                or(w, 16, 4, A, B, ref Z);
             else
                 throw no<T>();
+        }
+
+        [MethodImpl(Inline), Or, Closures(Closure)]
+        public static void or<T>(W128 w, in T a, in T b, ref T z)
+            where T : unmanaged
+                => vsave(vor(w, a, b), ref z);
+
+        [MethodImpl(Inline), Or, Closures(Closure)]
+        public static void or<T>(W128 w, int vcount, int blocklen, in T a, in T b, ref T dst)
+            where T : unmanaged
+        {
+            for(int i=0, offset = 0; i < vcount; i++, offset += blocklen)
+                or(w, skip(a, offset), skip(b, offset), ref seek(dst, offset));
+        }
+
+        [MethodImpl(Inline), Or, Closures(Closure)]
+        public static void or<T>(W256 w, in T a, in T b, ref T dst)
+            where T : unmanaged
+                => z.vsave(vor(w, a, b), ref dst);
+
+        [MethodImpl(Inline), Or, Closures(Closure)]
+        public static void or<T>(W256 w, int vcount, int blocklen, in T a, in T b, ref T dst)
+            where T : unmanaged
+        {
+            for(int i=0, offset = 0; i < vcount; i++, offset += blocklen)
+                or(w, skip(a, offset), skip(b, offset), ref seek(dst, offset));
         }
     }
 }

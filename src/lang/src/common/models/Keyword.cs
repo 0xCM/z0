@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Dsl
+namespace Z0.Lang
 {
     using System;
     using System.Runtime.CompilerServices;
@@ -12,7 +12,7 @@ namespace Z0.Dsl
     /// <summary>
     /// Specifies a dsl keyword
     /// </summary>
-    public readonly struct Keyword : ITextual
+    public readonly struct Keyword : IKeyword
     {
         public string Name {get;}
 

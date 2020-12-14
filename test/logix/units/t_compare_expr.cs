@@ -9,7 +9,7 @@ namespace Z0.Logix
 
     using static LogicEngine;
 
-    using CS = TypedComparisonSpec;
+    using CS = Comparisons;
 
     public class t_compare_expr : TypedLogixTest<t_compare_expr>
     {

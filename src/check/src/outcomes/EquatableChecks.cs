@@ -9,6 +9,7 @@ namespace Z0
 
     using static Konst;
     using static z;
+
     using api = Judgements;
 
     public readonly struct EquatableChecks
@@ -27,7 +28,7 @@ namespace Z0
                 ref readonly var x = ref skip(a,i);
                 ref readonly var y = ref skip(b,i);
                 dst[i] = check(x,y, out var judgement);
-                success &= judgement.Success;
+                success &= judgement.Result;
             }
             dst.Result = success;
             return ref dst;

@@ -2,15 +2,13 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Lang
 {
     using System;
     using System.Runtime.CompilerServices;
 
     using static Konst;
     using static z;
-
-    using api = SyntaxParsers;
 
     using C = AsciCharCode;
 
@@ -54,9 +52,9 @@ namespace Z0
             const char Delimiter = ',';
             const byte SegCount = 4;
 
-            api.create(Delimiter, out SequenceSplitter<char> parser);
+            var parser = SeqSplitter.create(Delimiter);
             var input = edit(span(Input));
-            api.run(parser, input, out var segments);
+            SeqSplitter.run(parser, input, out var segments);
             return segments;
         }
 
@@ -67,9 +65,9 @@ namespace Z0
             const char Delimiter = '.';
             const byte SegCount = 6;
 
-            api.create(Delimiter, out SequenceSplitter<ushort> parser);
+            var parser = SeqSplitter.create<ushort>(Delimiter);
             var input = Spans.s16u(edit(span(Input)));
-            api.run(parser, input, out var segments);
+            SeqSplitter.run(parser, input, out var segments);
             return segments;
         }
 
@@ -82,9 +80,9 @@ namespace Z0
             const char Delimiter = '.';
             const byte SegCount = 6;
 
-            api.create(AsciCharCode.Dot, out SequenceSplitter<AsciCharCode> parser);
+            var parser = SeqSplitter.create(AsciCharCode.Dot);
             var input = edit(Case2Input);
-            api.run(parser, input, out var segments);
+            SeqSplitter.run(parser, input, out var segments);
             return segments;
         }
     }

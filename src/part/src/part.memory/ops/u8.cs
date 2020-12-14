@@ -45,6 +45,5 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref byte u8<T>(in T src, int offset)
             => ref add(@as<T,byte>(src), offset);
-
     }
 }

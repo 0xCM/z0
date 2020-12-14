@@ -80,20 +80,31 @@ namespace Z0
             => lhs == rhs ? true : @throw<bit>(Failed(ClaimKind.Eq, NotEqual(lhs, rhs, caller, file, line)));
 
         [MethodImpl(Inline), Op]
-        bool neq(char lhs, char rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static bool neq(char lhs, char rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => lhs != rhs ? true : @throw<bool>(Failed(ClaimKind.NEq, NotEqual(lhs, rhs, caller, file, line)));
 
         [MethodImpl(Inline), Op]
-        bool neq(string lhs, string rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static bool neq(string lhs, string rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => lhs != rhs ? true : @throw<bool>(Failed(ClaimKind.NEq, Equal(lhs, rhs, caller, file, line)));
 
         [MethodImpl(Inline), Op]
-        bool neq(long lhs, long rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static bool neq(long lhs, long rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => lhs != rhs ? true : @throw<bool>(Failed(ClaimKind.NEq, Equal(lhs, rhs, caller, file, line)));
 
         [MethodImpl(Inline), Op]
         public static bool eq(int? lhs, int? rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => lhs == rhs ? true : @throw<bool>(Failed(ClaimKind.Eq, NotEqual(lhs, rhs, caller, file, line)));
+
+        /// <summary>
+        /// Asserts the pointer is not null
+        /// </summary>
+        /// <param name="p">The pointer to check</param>
+        /// <param name="msg">An optional message describint the assertion</param>
+        /// <param name="caller">The caller member name</param>
+        /// <param name="file">The source file of the calling function</param>
+        /// <param name="line">The source file line number where invocation ocurred</param>
+        public static unsafe void notnull(void* p, string msg = null, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => (p != null).OnNone(() => throw new ArgumentNullException(AppMsg.called($"Pointer was null", LogLevel.Error, caller,file,line).ToString()));
 
         /// <summary>
         /// Creates, but does not throw, a claim exception

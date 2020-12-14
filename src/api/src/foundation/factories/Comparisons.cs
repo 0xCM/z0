@@ -19,8 +19,45 @@ namespace Z0
     /// Constructs type operator comparison expressions
     /// </summary>
     [ApiHost]
-    public readonly struct TypedComparisonSpec
+    public readonly struct Comparisons
     {
+        /// <summary>
+        /// Defines comparison expression
+        /// </summary>
+        /// <param name="kind">The comparisonkind</param>
+        /// <param name="lhs">The left expression</param>
+        /// <param name="rhs">The right expression</param>
+        /// <typeparam name="T">The operand type</typeparam>
+        [MethodImpl(Inline)]
+        public static ComparisonExpr<T> define<T>(BCK kind, IExpr<T> lhs, IExpr<T> rhs, params IVarExpr<T>[] vars)
+            where T : unmanaged
+                => new ComparisonExpr<T>(kind,lhs,rhs,vars);
+
+        [MethodImpl(Inline)]
+        public static ComparisonExpr define(BCK kind, ILogicExpr lhs, ILogicExpr rhs, params ILogicVarExpr[] vars)
+            => new ComparisonExpr(kind,lhs,rhs,vars);
+
+        /// <summary>
+        /// Defines an equality comparison expression
+        /// </summary>
+        /// <param name="lhs">The left expression</param>
+        /// <param name="rhs">The right expression</param>
+        /// <typeparam name="T">The operand type</typeparam>
+        [MethodImpl(Inline)]
+        public static ComparisonExpr equals(ILogicExpr lhs, ILogicExpr rhs, params ILogicVarExpr[] variables)
+            => define(BinaryComparisonApiClass.Eq, lhs,rhs,variables);
+
+        /// <summary>
+        /// Defines an equality comparison expression
+        /// </summary>
+        /// <param name="lhs">The left expression</param>
+        /// <param name="rhs">The right expression</param>
+        /// <typeparam name="T">The operand type</typeparam>
+        [MethodImpl(Inline)]
+        public static ComparisonExpr<T> equals<T>(ILogicExpr<T> lhs, ILogicExpr<T> rhs, params IVarExpr<T>[] variables)
+            where T : unmanaged
+                => define(BinaryComparisonApiClass.Eq, lhs,rhs, variables);
+
         /// <summary>
         /// Defines a comparison expression of specified kind over typed expressions
         /// </summary>

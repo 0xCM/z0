@@ -2,18 +2,25 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Lang
 {
     using System;
     using System.Runtime.CompilerServices;
 
     using static Konst;
 
-    [ApiHost(ApiNames.SyntaxModels, true)]
-    public readonly partial struct SyntaxModels
+    public readonly struct Adjacency<T>
+        where T : unmanaged
     {
-        const string FencePattern = "<<{0}..{1}>>";
+        public T A {get;}
 
-        const NumericKind Closure = UnsignedInts;
+        public T B {get;}
+
+        [MethodImpl(Inline)]
+        public Adjacency(T a, T b)
+        {
+            A = a;
+            B = b;
+        }
     }
 }

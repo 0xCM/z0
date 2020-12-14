@@ -34,15 +34,6 @@ namespace Z0
         /// </summary>
         public ILogicVarExpr[] Vars {get;}
 
-        [MethodImpl(Inline)]
-        public static ComparisonExpr<T> define<T>(BinaryComparisonApiClass kind, IExpr<T> lhs, IExpr<T> rhs, params IVarExpr<T>[] vars)
-            where T : unmanaged
-                => new ComparisonExpr<T>(kind,lhs,rhs,vars);
-
-        [MethodImpl(Inline)]
-        public static ComparisonExpr define(BinaryComparisonApiClass kind, ILogicExpr lhs, ILogicExpr rhs, params ILogicVarExpr[] vars)
-            => new ComparisonExpr(kind,lhs,rhs,vars);
-
         internal ComparisonExpr(BinaryComparisonApiClass kind, ILogicExpr lhs, ILogicExpr rhs, params ILogicVarExpr[] vars)
         {
             ComparisonKind = kind;
@@ -65,7 +56,7 @@ namespace Z0
                 Vars[i].Set(values[i]);
         }
 
-        public void SetVars(params Bit32[] values)
+        public void SetVars(params bit[] values)
         {
             var count = Math.Min(Vars.Length, values.Length);
             for(var i=0; i<count; i++)
@@ -73,20 +64,20 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public void SetVar(Bit32 a)
+        public void SetVar(bit a)
         {
             Vars[0].Set(a);
         }
 
         [MethodImpl(Inline)]
-        public void SetVars(Bit32 a, Bit32 b)
+        public void SetVars(bit a, bit b)
         {
             Vars[0].Set(a);
             Vars[1].Set(b);
         }
 
         [MethodImpl(Inline)]
-        public void SetVars(Bit32 a, Bit32 b, Bit32 c)
+        public void SetVars(bit a, bit b, bit c)
         {
             Vars[0].Set(a);
             Vars[1].Set(b);

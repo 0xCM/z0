@@ -2,14 +2,14 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Lang
 {
     using System;
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static z;
-    using static SyntaxModels;
+
+    using api = SyntaxModels;
 
     public readonly struct SyntaxFence<T> : ITextual
         where T : unmanaged
@@ -18,12 +18,14 @@ namespace Z0
 
         public T Right {get;}
 
+        [MethodImpl(Inline)]
         public SyntaxFence(T left, T right)
         {
             Left = left;
             Right = right;
         }
 
+        [MethodImpl(Inline)]
         public SyntaxFence(Pair<T> src)
         {
             Left = src.Left;
@@ -32,7 +34,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => format(this);
+            => api.format(this);
 
         public override string ToString()
             => Format();

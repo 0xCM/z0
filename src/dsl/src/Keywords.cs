@@ -4,11 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Dsl
 {
-    using System;
-    using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using Z0.Lang;
 
     [ApiType]
     public struct Keywords
@@ -212,6 +209,5 @@ namespace Z0.Dsl
         /// Specifies a natural number
         /// </summary>
         public static Keyword nat() => "nat";
-
     }
 }

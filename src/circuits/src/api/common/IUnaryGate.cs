@@ -19,7 +19,6 @@ namespace Z0
         bit Invoke(bit a);
     }
 
-
     /// <summary>
     /// Characterizes a set of logic gates where each member accepts 1 bit of input
     /// </summary>

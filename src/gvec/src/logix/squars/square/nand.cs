@@ -8,8 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static z;
-    using static In;
+    using static memory;
 
     using BL = BitLogic.Bytes;
 
@@ -18,12 +17,12 @@ namespace Z0
     /// </summary>
     partial class LogicSquare
     {
-        [MethodImpl(Inline), Nand, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Nand, Closures(Closure)]
         public static void nand<T>(in T A, in T B, ref T Z)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-               BL.nand(in uint8(in A), in uint8(in B), ref uint8(ref Z));
+               BL.nand(in u8(in A), in u8(in B), ref u8(Z));
             else if(typeof(T) == typeof(ushort))
                 nand(w, in A, in B, ref Z);
             else if(typeof(T) == typeof(uint))

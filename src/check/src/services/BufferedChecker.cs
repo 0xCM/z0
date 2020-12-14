@@ -17,9 +17,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public BufferedChecker(uint length, byte count)
-        {
-            Tokens = Buffers.sequence(length, count, out BufferAlloc).Tokenize();
-        }
+            => Tokens = Buffers.sequence(length, count, out BufferAlloc).Tokenize();
 
         public void Dispose()
             => BufferAlloc.Dispose();

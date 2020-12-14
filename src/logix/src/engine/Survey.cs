@@ -19,10 +19,15 @@ namespace Z0
         /// <param name="bs">The source bitstring</param>
         public static LiteralLogicSeqExpr ToLogicSeq(this BitString bs)
         {
-            var terms = new bit[bs.Length];
-            for(var i=0; i<terms.Length; i++)
-                terms[i] = bs[i];
-            return new LiteralLogicSeqExpr(terms);
+            var count = bs.Length;
+            if(count == 0)
+                return LiteralLogicSeqExpr.Empty;
+
+            var buffer = sys.alloc<bit>(count);
+            ref var dst = ref first(buffer);
+            for(var i=0; i<buffer.Length; i++)
+                seek(dst,i) = bs[i];
+            return new LiteralLogicSeqExpr(buffer);
         }
 
         /// <summary>
@@ -37,7 +42,6 @@ namespace Z0
             z.insist<N>(src.Length);
             return new LiteralLogicSeqExpr<N>(src.ToLogicSeq().Terms);
         }
-
     }
 
     public class Survey

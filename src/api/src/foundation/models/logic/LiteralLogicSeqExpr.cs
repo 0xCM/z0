@@ -46,5 +46,11 @@ namespace Z0
 
         public override string ToString()
             => Format();
+
+        public static LiteralLogicSeqExpr Empty
+        {
+            [MethodImpl(Inline)]
+            get => new LiteralLogicSeqExpr(sys.empty<bit>());
+        }
     }
 }

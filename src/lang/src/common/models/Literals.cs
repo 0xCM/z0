@@ -9,7 +9,7 @@ namespace Z0.Lang
 
     using static Konst;
 
-    public readonly struct Literals<C,T> : ITableSpan<Literals<C,T>,Literal<C,T>>
+    public readonly struct Literals<C,T> : IIndex<Literal<C,T>>
     {
         readonly TableSpan<Literal<C,T>> Data;
 
@@ -17,9 +17,6 @@ namespace Z0.Lang
         public Literals(Literal<C,T>[] src)
             => Data = src;
 
-        [MethodImpl(Inline)]
-        public static implicit operator Literals<C,T>(Literal<C,T>[] src)
-            => new Literals<C,T>(src);
 
         public ReadOnlySpan<Literal<C,T>> View
         {
@@ -55,5 +52,9 @@ namespace Z0.Lang
         [MethodImpl(Inline)]
         public Literals<C,T> Refresh(Literal<C,T>[] src)
             => src;
+
+        [MethodImpl(Inline)]
+        public static implicit operator Literals<C,T>(Literal<C,T>[] src)
+            => new Literals<C,T>(src);
     }
 }

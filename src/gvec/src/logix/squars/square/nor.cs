@@ -8,8 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static z;
-    using static In;
+    using static memory;
 
     using BL = BitLogic.Bytes;
 
@@ -23,13 +22,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-               BL.nor(in uint8(in A), in uint8(in B), ref uint8(ref Z));
+               BL.nor(u8(A), u8(B), ref u8(Z));
             else if(typeof(T) == typeof(ushort))
-                nor(w, in A, in B, ref Z);
+                nor(w, A, B, ref Z);
             else if(typeof(T) == typeof(uint))
-                nor(w, 4, 8, in A, in B, ref Z);
+                nor(w, 4, 8, A, B, ref Z);
             else if(typeof(T) == typeof(ulong))
-                nor(w, 16, 4, in A, in B, ref Z);
+                nor(w, 16, 4, A, B, ref Z);
             else
                 throw no<T>();
         }

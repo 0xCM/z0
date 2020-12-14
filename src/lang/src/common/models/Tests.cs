@@ -12,39 +12,39 @@ namespace Z0.Lang
     public readonly struct Tests
     {
         [MethodImpl(Inline)]
-        public static Tests<C,T> alloc<C,T>(uint count)
-            => new Tests<C,T>(count);
+        public static Tests<C> alloc<C>(uint count)
+            => new Tests<C>(count);
     }
 
-    public readonly struct Tests<C,T> : ITableSpan<Tests<C,T>,Test<C,T>>
+    public readonly struct Tests<C> : ITableSpan<Tests<C>,Test<C>>
     {
-        readonly TableSpan<Test<C,T>> Data;
+        readonly TableSpan<Test<C>> Data;
 
         [MethodImpl(Inline)]
-        public Tests(Test<C,T>[] src)
+        public Tests(Test<C>[] src)
             => Data = src;
 
         [MethodImpl(Inline)]
         public Tests(uint count)
-            => Data = sys.alloc<Test<C,T>>(count);
+            => Data = sys.alloc<Test<C>>(count);
 
         [MethodImpl(Inline)]
-        public static implicit operator Tests<C,T>(Test<C,T>[] src)
-            => new Tests<C,T>(src);
+        public static implicit operator Tests<C>(Test<C>[] src)
+            => new Tests<C>(src);
 
-        public ReadOnlySpan<Test<C,T>> View
+        public ReadOnlySpan<Test<C>> View
         {
             [MethodImpl(Inline)]
             get => Data.View;
         }
 
-        public Span<Test<C,T>> Edit
+        public Span<Test<C>> Edit
         {
             [MethodImpl(Inline)]
             get => Data.Edit;
         }
 
-        public ref Test<C,T> First
+        public ref Test<C> First
         {
             [MethodImpl(Inline)]
             get => ref Data.First;
@@ -56,7 +56,7 @@ namespace Z0.Lang
             get => Data.Count;
         }
 
-        public Test<C,T>[] Storage
+        public Test<C>[] Storage
         {
             [MethodImpl(Inline)]
             get => Data.Storage;
@@ -64,8 +64,7 @@ namespace Z0.Lang
 
 
         [MethodImpl(Inline)]
-        public Tests<C,T> Refresh(Test<C,T>[] src)
+        public Tests<C> Refresh(Test<C>[] src)
             => src;
-
     }
 }

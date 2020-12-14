@@ -2,20 +2,21 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Lang
 {
-    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+    using System;
 
-    [Free]
-    public interface ILanguageTable
+    public interface IKeyword : ITextual
     {
+        string Name {get;}
 
+        string ITextual.Format()
+            => Name;
     }
 
-    [Free]
-    public interface ILanguageTable<R> : ILanguageTable
-        where R : struct, ILanguageTable<R>
+    public interface IKeyword<K> : IKeyword
+        where K : unmanaged
     {
-
+        K Kind {get;}
     }
 }

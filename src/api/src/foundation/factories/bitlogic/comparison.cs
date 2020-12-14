@@ -11,7 +11,7 @@ namespace Z0
 
     partial struct BitLogicSpec
     {
-       /// <summary>
+        /// <summary>
         /// Defines comparison expression
         /// </summary>
         /// <param name="kind">The comparisonkind</param>
@@ -20,7 +20,7 @@ namespace Z0
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
         public static ComparisonExpr compare(BinaryComparisonApiClass kind, ILogicExpr lhs, ILogicExpr rhs, params ILogicVarExpr[] variables)
-            => ComparisonExpr.define(kind, lhs,rhs,variables);
+            => Comparisons.define(kind, lhs,rhs,variables);
 
         /// <summary>
         /// Defines comparison expression
@@ -32,7 +32,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ComparisonExpr<T> compare<T>(BinaryComparisonApiClass kind, ILogicExpr<T> lhs, ILogicExpr<T> rhs, params IVarExpr<T>[] variables)
             where T : unmanaged
-                => ComparisonExpr.define(kind, lhs,rhs, variables);
+                => Comparisons.define(kind, lhs,rhs, variables);
 
         /// <summary>
         /// Defines an equality comparison expression
@@ -42,7 +42,7 @@ namespace Z0
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
         public static ComparisonExpr equals(ILogicExpr lhs, ILogicExpr rhs, params ILogicVarExpr[] variables)
-            => ComparisonExpr.define(BinaryComparisonApiClass.Eq, lhs,rhs,variables);
+            => Comparisons.define(BinaryComparisonApiClass.Eq, lhs,rhs,variables);
 
         /// <summary>
         /// Defines an equality comparison expression
@@ -53,6 +53,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ComparisonExpr<T> equals<T>(ILogicExpr<T> lhs, ILogicExpr<T> rhs, params IVarExpr<T>[] variables)
             where T : unmanaged
-                => ComparisonExpr.define(BinaryComparisonApiClass.Eq, lhs,rhs, variables);
+                => Comparisons.define(BinaryComparisonApiClass.Eq, lhs,rhs, variables);
     }
 }
