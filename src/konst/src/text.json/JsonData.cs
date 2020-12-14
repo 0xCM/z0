@@ -7,6 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Text.Json;
+    using System.Collections.Generic;
+    using System.Reflection;
 
     using static z;
     using static Konst;
@@ -20,9 +22,53 @@ namespace Z0
         public static JsonDataPacket<T> packet<T>(T src)
             => src;
 
+        public static string format(JsonSetting src)
+            => JsonSerializer.Serialize(src);
+
+        public static string format<T>(JsonSetting<T> src)
+            => JsonSerializer.Serialize(src);
+
         [Op, Closures(Closure)]
         public static JsonText serialize<T>(T src, bool indented = true)
             => JsonSerializer.Serialize(src, new JsonSerializerOptions{WriteIndented = indented});
+
+        public static void absorb(FS.FilePath src, Dictionary<string,string> dst)
+        {
+            var settings = new Dictionary<string,string>();
+            var ignore = new char[]{Chars.Quote, Chars.Comma};
+            if(src.Exists)
+            {
+                var lines = src.ReadLines().Select(l => l.Trim().RemoveAny(ignore));
+                foreach(var line in lines)
+                {
+                    var parts = line.SplitClean(Chars.Colon);
+                    if(parts.Length == 2)
+                    {
+                        var key = parts[0].Trim();
+                        var value = parts[1].Trim();
+                        dst.TryAdd(key,value);
+                    }
+                }
+            }
+        }
+
+        public static T materialize2<T>(FS.FilePath src)
+            where T : struct
+        {
+            var kvp = new Dictionary<string,string>();
+            var dst = new T();
+            var fields = typeof(T).GetFields(BindingFlags.Instance).Select(x => (x.Name, x)).ToDictionary();
+            JsonData.absorb(src, kvp);
+            foreach(var key in kvp.Keys)
+            {
+                if(fields.TryGetValue(key, out FieldInfo f))
+                {
+                    var dstType = f.FieldType;
+                    Option.Try(() => Convert.ChangeType(kvp[key], dstType)).OnSome(value => f.SetValue(dst,value));
+                }
+            }
+            return dst;
+        }
 
         [Op, Closures(Closure)]
         public static JsonText serialize<T>(T src, FS.FilePath dst, bool indented = true)

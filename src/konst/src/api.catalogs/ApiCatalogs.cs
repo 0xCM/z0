@@ -17,6 +17,7 @@ namespace Z0
     [ApiHost(ApiNames.ApiCatalogs, true)]
     public readonly struct ApiCatalogs
     {
+
         /// <summary>
         /// Creates a system-level api catalog over a set of path-identified components
         /// </summary>

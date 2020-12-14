@@ -23,11 +23,17 @@ namespace Z0
         string Value {get;}
     }
 
-    public interface ISetting<K,V> : ISetting
+    public interface ISetting<T> : ISetting
+    {
+        new T Value {get;}
+
+        string ISetting.Value
+            => Value?.ToString() ?? string.Empty;
+    }
+
+    public interface ISetting<K,V> : ISetting<V>
     {
         new K Name {get;}
-
-        new V Value {get;}
 
         string ISetting.Name
             => Name.ToString();

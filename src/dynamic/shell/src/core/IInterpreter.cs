@@ -9,15 +9,8 @@ namespace Z0
     [Free]
     public interface IInterpreter : IWfService
     {
-        Outcome Start();
+        void Run();
 
-        void Post(string command);
-    }
-
-    [Free]
-    public interface IInterpreter<H> : IInterpreter, IWfService<H>
-        where H : Interpreter<H>, new()
-    {
-
+        void Submit(string command);
     }
 }

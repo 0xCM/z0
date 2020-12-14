@@ -20,8 +20,6 @@ namespace Z0
 
         Type[] ContractArgs => new Type[]{};
 
-        byte ParametricArity => (byte)ContractArgs.Length;
-
         uint Discriminator => 0;
 
         ServiceSpec Spec
@@ -29,44 +27,40 @@ namespace Z0
     }
 
     /// <summary>
-    /// Characterizes a service that extends a parametric context with operational semantics.
+    /// Characterizes reified service
     /// </summary>
-    /// <typeparam name="C">The context type</typeparam>
+    /// <typeparam name="H">The service host type</typeparam>
     [Free]
-    public interface IService<H,C> : IService
-        where H : IService<H,C>
-        where C : class
+    public interface IService<H> : IService
+        where H : IService<H>, new()
     {
         Type IService.HostType => typeof(H);
+    }
 
+    /// <summary>
+    /// Characterizes reified service with a parametrically-identified contract
+    /// </summary>
+    /// <typeparam name="H">The service host type</typeparam>
+    /// <typeparam name="C">The contract type</typeparam>
+    [Free]
+    public interface IService<H,C> : IService<H>
+        where H : IService<H,C>, new()
+    {
         Type IService.ContractType => typeof(C);
     }
 
+    [Free]
     public interface IService<H,C,A0> : IService<H,C>
-        where H : IService<H,C,A0>
-        where C : class
+        where H : IService<H,C,A0>, new()
     {
-        Type[] IService.ContractArgs => new Type[1]{typeof(A0)};
+        Type[] IService.ContractArgs
+            => new Type[1]{typeof(A0)};
     }
 
     public interface IService<H,C,A0,A1> : IService<H,C>
-        where H : IService<H,C,A0,A1>
-        where C : class
+        where H : IService<H,C,A0,A1>, new()
     {
-        Type[] IService.ContractArgs => new Type[2]{typeof(A0), typeof(A1)};
-    }
-
-    public interface IService<H,C,A0,A1,A2> : IService<H,C>
-        where H : IService<H,C,A0,A1,A2>
-        where C : class
-    {
-        Type[] IService.ContractArgs => new Type[3]{typeof(A0), typeof(A1), typeof(A2)};
-    }
-
-    public interface IService<H,C,A0,A1,A2,A3> : IService<H,C>
-        where H : IService<H,C,A0,A1,A2,A3>
-        where C : class
-    {
-        Type[] IService.ContractArgs => new Type[4]{typeof(A0), typeof(A1), typeof(A2), typeof(A3)};
+        Type[] IService.ContractArgs
+            => new Type[2]{typeof(A0), typeof(A1)};
     }
 }

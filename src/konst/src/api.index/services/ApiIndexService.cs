@@ -12,19 +12,8 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public class ApiIndexService : IWfService<ApiIndexService>
+    public class ApiIndexService : WfService<ApiIndexService,IApiIndexService>
     {
-        public static ApiCodeBlockIndex blocks(IWfShell wf)
-        {
-            using var builder = new ApiIndexService();
-            builder.Init(wf);
-            builder.Run();
-            var target = builder.Product;
-            var metrics = ApiIndexMetrics.from(target);
-            wf.Status(ApiIndexMetrics.from(target));
-            return target;
-        }
-
         public ApiCodeBlockIndex Product;
 
         public ApiIndexStatus IndexStatus;
@@ -35,21 +24,6 @@ namespace Z0
 
         Dictionary<OpUri,ApiCodeBlock> Locations;
 
-        IWfShell Wf;
-
-        WfHost Host;
-
-        public void Dispose()
-        {
-            Wf.Disposed(Host);
-        }
-
-        public void Init(IWfShell wf)
-        {
-            Host = WfShell.host(typeof(ApiIndexService));
-            Wf = wf.WithHost(Host);
-        }
-
         public ApiIndexService()
         {
             CodeAddress = dict<MemoryAddress,ApiCodeBlock>();
@@ -58,59 +32,48 @@ namespace Z0
             Product = ApiCodeBlockIndex.Empty;
         }
 
-        // public ApiIndexService(IWfShell wf, WfHost host)
-        // {
-        //     Host = host;
-        //     Wf = wf.WithHost(Host);
-        //     CodeAddress = dict<MemoryAddress,ApiCodeBlock>();
-        //     UriAddress = dict<MemoryAddress,OpUri>();
-        //     Locations = dict<OpUri,ApiCodeBlock>();
-        //     Product = default;
-        // }
-
-        public void Run()
+        public ApiCodeBlockIndex CreateIndex()
         {
-            var src = DbSvc.partfiles(Wf);
+            var src = Wf.Db().PartFiles();
             Wf.Status(src);
             var parsed = src.Parsed.View;
             var count = parsed.Length;
-            Wf.Status(text.format("Indexing {0} datasets",count));
+            Wf.Status(Msg.IndexingPartFiles.Format(count));
 
             for(var i=0; i<count; i++)
             {
                 ref readonly var path = ref skip(parsed,i);
-
                 var result = ApiParseBlocks.load(path);
                 if(result)
                 {
                     var blocks = result.Value;
                     Include(blocks);
-                    Wf.Status(text.format("Included {0} blocks from {1}", blocks.Length, path));
+                    Wf.Status(Msg.AbsorbedCodeBlocks.Format(blocks.Length, path));
                 }
                 else
-                    Wf.Error($"Could not parse {path}");
+                    Wf.Error(Msg.Unparsed(path));
             }
 
             IndexStatus = Status();
             Wf.Status(IndexStatus.Format());
             Product = Freeze();
-        }
 
-        [MethodImpl(Inline)]
-        static Triple<T> triple<T>(T a, T b, T c)
-            => new Triple<T>(a,b,c);
+            var metrics = ApiIndexMetrics.from(Product);
+            Wf.Status(metrics);
+            return Product;
+        }
 
         void Include(in ApiParseBlock src)
         {
             if(src.Address.IsEmpty)
             {
-                Wf.Warn($"{src.Uri} code has no base address");
+                Wf.Warn(Msg.Unbased.Format(src.Uri));
                 return;
             }
 
             var inclusion = Include(new ApiCodeBlock(src.Uri, src.Data));
             if(inclusion.Any(x => x == false))
-                Wf.Warn($"Duplicate | {src.Uri.Format()}");
+                Wf.Warn(Msg.DuplicateUri.Format(src.Uri));
         }
 
         Triple<bool> Include(in ApiCodeBlock src)

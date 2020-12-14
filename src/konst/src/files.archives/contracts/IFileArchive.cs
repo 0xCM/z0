@@ -12,7 +12,7 @@ namespace Z0
     /// Characterizes a file system repository
     /// </summary>
     [Free]
-    public interface IFileArchive : IFileArchivePaths
+    public interface IFileArchive : IArchivePaths
     {
         IEnumerable<FS.FilePath> Files(bool recurse, params FS.FileExt[] ext)
             => Root.EnumerateFiles(recurse, ext);

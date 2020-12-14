@@ -25,12 +25,4 @@ namespace Z0
 
         Type IRenderService.TargetType => typeof(T);
     }
-
-    [Free]
-    public interface IRenderService<H,S,T,B> : IRenderService<S,T,B>, IService<H,IRenderService<S,T,B>,S,T,B>
-        where B : IRenderBuffer<S,T>
-        where H : IRenderService<H,S,T,B>
-    {
-
-    }
 }

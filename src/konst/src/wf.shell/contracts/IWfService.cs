@@ -9,14 +9,11 @@ namespace Z0
     using System;
 
     [Free]
-    public interface IWfService : IDisposable
+    public interface IWfService : IService, IDisposable
     {
         void Init(IWfShell wf);
 
-        void IDisposable.Dispose()
-        {
-
-        }
+        void IDisposable.Dispose() {}
     }
 
     /// <summary>
@@ -24,8 +21,15 @@ namespace Z0
     /// </summary>
     /// <typeparam name="H">The reifying type</typeparam>
     [Free]
-    public interface IWfService<H> : IWfService
+    public interface IWfService<H> : IWfService, IService<H>
         where H : IWfService<H>, new()
+    {
+
+    }
+
+    [Free]
+    public interface IWfService<H,C> : IWfService<H>, IService<H,C>
+        where H : IWfService<H,C>, new()
     {
 
     }

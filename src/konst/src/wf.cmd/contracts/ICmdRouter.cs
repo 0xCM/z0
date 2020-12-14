@@ -19,7 +19,7 @@ namespace Z0
     }
 
     [Free]
-    public interface ICmdRouter<H> : ICmdRouter, IWfService<H>
+    public interface ICmdRouter<H> : ICmdRouter, IWfService<H,ICmdRouter>
         where H : ICmdRouter<H>, new()
     {
 

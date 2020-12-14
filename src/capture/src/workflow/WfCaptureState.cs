@@ -19,8 +19,6 @@ namespace Z0.Asm
 
         public IWfCaptureContext CWf {get;}
 
-        public CaptureConfig Settings {get;}
-
         public IWfInit Config {get;}
 
         public AsmFormatConfig FormatConfig {get;}
@@ -49,7 +47,6 @@ namespace Z0.Asm
             var dstpath = wf.Paths.AppCaptureRoot;
             var src = new ArchiveConfig(srcpath);
             var dst = new ArchiveConfig(dstpath);
-            Settings = CaptureConfig.From(wf.Settings);
             Services = CaptureServices.create(Asm);
             FormatConfig = AsmFormatConfig.WithSectionDelimiter;
             Formatter = Services.Formatter(FormatConfig);

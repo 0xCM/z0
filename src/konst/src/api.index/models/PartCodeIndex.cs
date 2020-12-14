@@ -25,13 +25,20 @@ namespace Z0
 
         public readonly PartId[] Parts;
 
-        readonly LU Data;
+        readonly ApiHostCodeLookup Data;
+
+        [MethodImpl(Inline)]
+        public PartCodeIndex(PartId[] parts, ApiHostCodeLookup src)
+        {
+            Parts = parts;
+            Data = src;
+        }
 
         [MethodImpl(Inline)]
         public PartCodeIndex(PartId[] parts, LU src)
         {
             Parts = parts;
-            Data = src;
+            Data = ApiHostCodeLookup.create(src);
         }
 
         public PartCodeIndexEntry[] Entries
@@ -71,7 +78,7 @@ namespace Z0
         public static PartCodeIndex Empty
         {
             [MethodImpl(Inline)]
-            get => new PartCodeIndex(sys.empty<PartId>(), new LU());
+            get => new PartCodeIndex(sys.empty<PartId>(), ApiHostCodeLookup.Empty);
         }
     }
 }

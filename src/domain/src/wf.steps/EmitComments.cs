@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    using static Projects;
+    using static DevProjects;
 
     [WfHost]
     public sealed class EmitComments : WfHost<EmitComments>

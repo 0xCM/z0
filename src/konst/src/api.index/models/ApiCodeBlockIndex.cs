@@ -10,7 +10,6 @@ namespace Z0
 
     using static Konst;
 
-    [StructLayout(LayoutKind.Sequential)]
     public struct ApiCodeBlockIndex
     {
         PartCodeAddresses Memories;

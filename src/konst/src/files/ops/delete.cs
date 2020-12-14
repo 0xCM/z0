@@ -33,7 +33,6 @@ namespace Z0
             return dst;
         }
 
-
         /// <summary>
         /// Deletes the file if it exists
         /// </summary>

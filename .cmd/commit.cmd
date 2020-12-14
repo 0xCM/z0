@@ -1,11 +1,11 @@
-@echo off
+@REM @echo off
 
-set GitLogPath=%ZDb%\logs\git\z0-git.log
-echo GitLogPath:%GitLogPath%
+@REM set GitLogPath=%ZDb%\logs\git\z0-git.log
+@REM echo GitLogPath:%GitLogPath%
 
-set Sep=--------------------------------------------------------------------------------------
-echo %Sep% >> %GitLogPath%
+@REM set Sep=--------------------------------------------------------------------------------------
+@REM echo %Sep% >> %GitLogPath%
 
-git add -A >> %GitLogPath%
-git commit -am "." >> %GitLogPath%
-git push >> %GitLogPath%
+@REM git add -A >> %GitLogPath%
+@REM git commit -am "." >> %GitLogPath%
+@REM git push >> %GitLogPath%

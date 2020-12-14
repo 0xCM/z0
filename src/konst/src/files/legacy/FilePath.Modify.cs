@@ -12,25 +12,11 @@ namespace Z0
     partial class XTend
     {
         /// <summary>
-        /// Reads the full content of a text file
-        /// </summary>
-        /// <param name="src">The file path</param>
-        public static string ReadText(this FilePath src)
-            => FileOps.ReadText(src);
-
-        /// <summary>
         /// Reads the line-partitioned content of a text file
         /// </summary>
         /// <param name="src">The file path</param>
         public static string[] ReadLines(this FilePath src)
             => FileOps.ReadLines(src);
-
-        /// <summary>
-        /// Reads the full content of a file into a byte array
-        /// </summary>
-        /// <param name="src">The file path</param>
-        public static byte[] ReadBytes(this FilePath src)
-            => FileOps.ReadBytes(src);
 
         /// <summary>
         /// Deletes the file if it exists
@@ -55,13 +41,6 @@ namespace Z0
         public static void Append(this FilePath dst, params string[] src)
         {
             using var writer = new StreamWriter(reifyParent(dst).Name, true);
-            foreach(var line in src)
-                writer.WriteLine(line);
-        }
-
-        public static void Overwrite(this FS.FilePath dst, params string[] src)
-        {
-            using var writer = new StreamWriter(dst.CreateParentIfMissing().Name, false);
             foreach(var line in src)
                 writer.WriteLine(line);
         }

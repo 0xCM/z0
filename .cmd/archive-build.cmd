@@ -1,16 +1,16 @@
-echo off
+@REM echo off
 
-set DataSrc=%ZDev%\.build\bin\release\z0.machine
-echo DataSrc:%DataSrc%
+@REM set DataSrc=%ZDev%\.build\bin\release\z0.machine
+@REM echo DataSrc:%DataSrc%
 
-set DataDst=k:\z0.archives\builds\release\machine
-echo DataDst:%DataDst%
+@REM set DataDst=k:\z0.archives\builds\release\machine
+@REM echo DataDst:%DataDst%
 
-set CopyLog=%ZDb%\etl\build-archive.log
-echo CopyLog:%CopyLog%
+@REM set CopyLog=%ZDb%\etl\build-archive.log
+@REM echo CopyLog:%CopyLog%
 
-set CopyCmd=robocopy %DataSrc% %DataDst% /log:%CopyLog% /tee /TS /BYTES /V /MIR
-echo CopyCmd:%CopyCmd%
+@REM set CopyCmd=robocopy %DataSrc% %DataDst% /log:%CopyLog% /tee /TS /BYTES /V /MIR
+@REM echo CopyCmd:%CopyCmd%
 
-echo on
-call %CopyCmd%
+@REM echo on
+@REM call %CopyCmd%

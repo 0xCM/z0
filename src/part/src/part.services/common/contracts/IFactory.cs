@@ -12,7 +12,7 @@ namespace Z0
     /// <typeparam name="H">The host type</typeparam>
     /// <typeparam name="T">The production type</typeparam>
     public interface IFactory<H,T> : IService<H,IFactory<H,T>,T>
-        where H : IFactory<H,T>
+        where H : IFactory<H,T>, new()
     {
         T Create();
     }
@@ -24,7 +24,7 @@ namespace Z0
     /// <typeparam name="C">The configuration type</typeparam>
     /// <typeparam name="T">The production type</typeparam>
     public interface IFactory<H,C,T> : IFactory<H,T>, IService<H,IFactory<H,C,T>,C,T>
-        where H : IFactory<H,C,T>
+        where H : IFactory<H,C,T>, new()
     {
         T Create(C config);
     }

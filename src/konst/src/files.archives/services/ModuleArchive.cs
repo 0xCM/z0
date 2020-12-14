@@ -11,6 +11,7 @@ namespace Z0
     using static Konst;
     using static FileExtensions;
 
+    [Service]
     public struct ModuleArchive : IModuleArchive
     {
         /// <summary>
@@ -23,7 +24,7 @@ namespace Z0
 
         public FS.FolderPath Root;
 
-        FS.FolderPath IFileArchivePaths.Root
+        FS.FolderPath IArchivePaths.Root
             => Root;
 
         [MethodImpl(Inline)]

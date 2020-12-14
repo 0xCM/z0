@@ -4,13 +4,17 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface IFileDb : IFileDbPaths, IFileDbOps, IFileArchiveOps, IFileArchive
+    public interface IFileDb : IFileDbPaths, IFileDbOps, IArchiveOps, IFileArchive
     {
-
+        PartFiles PartFiles()
+        {
+            var parsed = ParsedExtractFiles();
+            var hex = CapturedHexFiles();
+            var asm = CapturedAsmFiles();
+            return new PartFiles(parsed, hex, asm);
+        }
     }
 }

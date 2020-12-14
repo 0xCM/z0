@@ -243,10 +243,10 @@ namespace Z0
         FS.FilePath CapturedCilDataFile(ApiHostUri host)
             => CapturedCilDataFile(host.FileName(FileExtensions.IlData));
 
-        FS.FilePath[] CapturedCilDataFiles()
+        FS.Files CapturedCilDataFiles()
             => CapturedCilDir().Files(Csv);
 
-        FS.FilePath[] CapturedCilDataFiles(PartId part)
+        FS.Files CapturedCilDataFiles(PartId part)
             => CapturedCilDataFiles().Where(f => f.IsOwner(part));
 
         FS.FilePath CapturedExtractFile(ApiHostUri host)
@@ -255,7 +255,7 @@ namespace Z0
         FS.FilePath CapturedExtractFile(FS.FileName name)
             => CapturedExtractDir() + name;
 
-        FS.FilePath[] CapturedExtractFiles(PartId part)
+        FS.Files CapturedExtractFiles(PartId part)
             => CapturedExtractFiles().Where(f => f.IsOwner(part));
 
         FS.FilePath ParsedExtractFile(FS.FileName name)
@@ -264,14 +264,15 @@ namespace Z0
         FS.FilePath ParsedExtractFile(ApiHostUri host)
             => ParsedExtractFile(host.FileName(FileExtensions.PCsv));
 
-        FS.FilePath[] ParsedExtractFiles()
+        FS.Files ParsedExtractFiles()
             => ParsedExtractDir().AllFiles;
 
-        FS.FilePath[] ParsedExtractFiles(PartId part)
+        FS.Files ParsedExtractFiles(PartId part)
             => ParsedExtractFiles().Where(f => f.IsOwner(part));
+
     }
 
-    public interface IFileDbPaths<H> : IFileDbPaths, IFileArchivePaths<H>
+    public interface IFileDbPaths<H> : IFileDbPaths, IArchivePaths<H>
         where H : struct, IFileDbPaths<H>
     {
 

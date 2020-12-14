@@ -1,29 +1,29 @@
-@echo off
+@REM @echo off
 
-set ZCmd=%ZDev%\.cmd
-echo ZCmd:%ZCmd%
+@REM set ZCmd=%ZDev%\.cmd
+@REM echo ZCmd:%ZCmd%
 
-set ScriptCmd=%ZCmd%\archive-capture.cmd
-echo on
-call %ScriptCmd%
-echo on
+@REM set ScriptCmd=%ZCmd%\archive-capture.cmd
+@REM echo on
+@REM call %ScriptCmd%
+@REM echo on
 
-set ScriptCmd=%ZCmd%\archive.tables.cmd
-echo on
-call %ScriptCmd%
-echo on
+@REM set ScriptCmd=%ZCmd%\archive.tables.cmd
+@REM echo on
+@REM call %ScriptCmd%
+@REM echo on
 
-set ScriptCmd=%ZCmd%\archive-logs.cmd
-echo on
-call %ScriptCmd%
-echo on
+@REM set ScriptCmd=%ZCmd%\archive-logs.cmd
+@REM echo on
+@REM call %ScriptCmd%
+@REM echo on
 
-set ScriptCmd=%ZCmd%\archive-build.cmd
-echo on
-call %ScriptCmd%
-echo on
+@REM set ScriptCmd=%ZCmd%\archive-build.cmd
+@REM echo on
+@REM call %ScriptCmd%
+@REM echo on
 
-set ScriptCmd=%ZCmd%\archive-source.cmd
-echo on
-call %ScriptCmd%
-echo on
+@REM set ScriptCmd=%ZCmd%\archive-source.cmd
+@REM echo on
+@REM call %ScriptCmd%
+@REM echo on

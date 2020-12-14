@@ -24,4 +24,10 @@ namespace Z0
 
         new IEnumerable<FileModule> Files();
     }
+
+    public interface IModuleArchive<H> : IService<H,IModuleArchive>
+        where H : IModuleArchive<H>, new()
+    {
+
+    }
 }

@@ -9,8 +9,10 @@ namespace Z0
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface ICmdReactor : IWfService
+    public interface ICmdReactor
     {
+        void Init(IWfShell wf);
+
         CmdId CmdId {get;}
 
         CmdResult Invoke(ICmdSpec cmd);

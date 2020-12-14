@@ -43,16 +43,4 @@ namespace Z0
                 Append(item);
         }
     }
-
-    /// <summary>
-    /// Characterizes an S-cell aggregator that produces accumulated S-cells as T-cells
-    /// </summary>
-    /// <typeparam name="S">The input source type</typeparam>
-    /// <typeparam name="T">The emission target type</typeparam>
-    [Free]
-    public interface IRenderBuffer<H,S,T> : IRenderBuffer<S,T>, IService<H,IRenderBuffer<S,T>,S,T>
-        where H : IRenderBuffer<H,S,T>
-    {
-
-    }
 }

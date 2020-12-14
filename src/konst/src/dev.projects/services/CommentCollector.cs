@@ -10,7 +10,7 @@ namespace Z0
     using System.Xml;
     using System.IO;
 
-    partial struct Projects
+    partial struct DevProjects
     {
         public readonly struct CommentCollector
         {

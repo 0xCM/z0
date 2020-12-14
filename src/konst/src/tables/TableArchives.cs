@@ -15,6 +15,11 @@ namespace Z0
     [ApiHost]
     public readonly struct TableArchives
     {
+        public static Option<FilePath> deposit<F,R,S>(FS.FolderPath root, R[] src, string id, S subject, FS.FileExt type)
+            where F : unmanaged, Enum
+            where R : struct, ITabular
+                => TableArchives.service<F,R>().Save(src, Table.renderspec<F>(), (FS.dir(root.Name) + FS.folder(id) + FS.file($"{id}.{subject}",type)));
+
         [MethodImpl(Inline), Op]
         public ITableArchive service(FS.FolderPath root)
             => new TableArchive(root);

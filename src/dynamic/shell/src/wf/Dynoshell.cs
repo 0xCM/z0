@@ -199,8 +199,11 @@ namespace Z0
             //EmitAsmMnemonics();
             //EmitAsmOpCodes();
             //EmitBuildArchiveList(Wf.Db().BuildArchiveRoot(), "zbuild");
+            //EmitCilTables(Wf, "z0.bitcore.dll");
 
-            EmitCilTables(Wf, "z0.bitcore.dll");
+            var svc = ApiIndex.service(Wf);
+            var index = svc.CreateIndex();
+
             // var component = Wf.Api.FindComponent(PartId.BitCore).Require();
             // var result = Cli.EmitCilTableDoc(Wf, component);
 

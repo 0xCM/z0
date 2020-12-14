@@ -1,33 +1,33 @@
-echo off
+@REM echo off
 
-set DataSrc=%ZDb%\logs
-echo DataSrc:%DataSrc%
+@REM set DataSrc=%ZDb%\logs
+@REM echo DataSrc:%DataSrc%
 
-set DataDst=k:\z0.archives\data\logs
-echo DataDst:%DataDst%
+@REM set DataDst=k:\z0.archives\data\logs
+@REM echo DataDst:%DataDst%
 
-set CopyLog=%ZDb%\etl\log-archive.log
-echo CopyLog:%CopyLog%
+@REM set CopyLog=%ZDb%\etl\log-archive.log
+@REM echo CopyLog:%CopyLog%
 
-set CopyCmd=robocopy %DataSrc% %DataDst% /log:%CopyLog% /tee /TS /BYTES /V /MIR
-echo CopyCmd:%CopyCmd%
+@REM set CopyCmd=robocopy %DataSrc% %DataDst% /log:%CopyLog% /tee /TS /BYTES /V /MIR
+@REM echo CopyCmd:%CopyCmd%
 
-echo on
-call %CopyCmd%
+@REM echo on
+@REM call %CopyCmd%
 
-echo off
+@REM echo off
 
-set DataSrc=%ZDb%\etl
-echo DataSrc:%DataSrc%
+@REM set DataSrc=%ZDb%\etl
+@REM echo DataSrc:%DataSrc%
 
-set DataDst=k:\z0.archives\logs\etl
-echo DataDst:%DataDst%
+@REM set DataDst=k:\z0.archives\logs\etl
+@REM echo DataDst:%DataDst%
 
-set CopyLog=%ZDb%\etl\etl-log-archive.log
-echo CopyLog:%CopyLog%
+@REM set CopyLog=%ZDb%\etl\etl-log-archive.log
+@REM echo CopyLog:%CopyLog%
 
-set CopyCmd=robocopy %DataSrc% %DataDst% /log:%CopyLog% /tee /TS /BYTES /V /MIR
-echo CopyCmd:%CopyCmd%
+@REM set CopyCmd=robocopy %DataSrc% %DataDst% /log:%CopyLog% /tee /TS /BYTES /V /MIR
+@REM echo CopyCmd:%CopyCmd%
 
-echo on
-call %CopyCmd%
+@REM echo on
+@REM call %CopyCmd%

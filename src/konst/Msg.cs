@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Reflection;
 
-    readonly struct Msg
+    [ApiType]
+    readonly partial struct Msg
     {
         public static RenderPattern<Type,Type> ContractMismatch => "The source type {0} does not reify {1}";
 
@@ -19,7 +20,7 @@ namespace Z0
 
         public static RenderPattern<ToolId> ToolHelpNotFound => "Tool {0} help not found";
 
-        public static RenderPattern<FS.FilePath> NoSuchFile => "The file {0} does not exist";
+        public static RenderPattern<FS.FilePath> FileDoesNotExist => "The file {0} does not exist";
 
         public static RenderPattern<Assembly,utf8> NoMatchingResources => "No {0} resources found that match {1}";
 

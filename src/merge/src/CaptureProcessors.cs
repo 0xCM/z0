@@ -63,7 +63,9 @@ namespace Z0
 
         public static void Run(IWfShell wf, in WfCaptureState state)
         {
-            var index = ApiIndexService.blocks(wf);
+            var svc = ApiIndexService.init(wf);
+            //var index = ApiIndexService.blocks(wf);
+            var index = svc.CreateIndex();
             run(wf, state, index);
             process(wf, decode(wf, state.RoutineDecoder, index));
             ResBytesEmitter.create().WithIndex(index).Run(wf);

@@ -4,15 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     public interface IProjectElement
     {
-        string Name {get;}            
+        string Name {get;}
 
         string Render() => EmptyString;
     }
@@ -20,6 +17,6 @@ namespace Z0
     public interface IProjectElement<F> : IProjectElement
         where F : struct, IProjectElement<F>
     {
-        
-    }    
+
+    }
 }

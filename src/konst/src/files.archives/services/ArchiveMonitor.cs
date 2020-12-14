@@ -12,7 +12,7 @@ namespace Z0
 
     using CK = FS.ChangeKind;
 
-    public readonly struct ArchiveMonitor : IFileArchiveMonitor
+    public readonly struct ArchiveMonitor : IArchiveMonitor
     {
         public void run(IWfShell wf, params string[] args)
         {
@@ -23,10 +23,10 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static IFileArchiveMonitor create(IWfShell wf, FS.FolderPath src, FS.ChangeHandler handler = null, bool recursive = true, string filter = null)
+        public static IArchiveMonitor create(IWfShell wf, FS.FolderPath src, FS.ChangeHandler handler = null, bool recursive = true, string filter = null)
             => new ArchiveMonitor(wf, src, handler, recursive, filter);
 
-        public FS.FolderPath ArchiveRoot {get;}
+        public FS.FolderPath Root {get;}
 
         readonly FileSystemWatcher Watcher;
 
@@ -38,7 +38,7 @@ namespace Z0
             : this()
         {
             Wf = wf;
-            ArchiveRoot = subject;
+            Root = subject;
             Watcher = new FileSystemWatcher(subject.Name, filter ?? EmptyString);
             Watcher.IncludeSubdirectories = recursive;
             Handler = handler ?? OnChange;
@@ -72,9 +72,9 @@ namespace Z0
             }
         }
 
-        FS.Change Log(FsEntry subject, FS.ChangeKind kind)
+        FileChange Log(FsEntry subject, FS.ChangeKind kind)
         {
-            var record = new FS.Change(subject.Name, subject.Kind, kind);
+            var record = new FileChange(subject.Name, subject.Kind, kind);
 
             return record;
         }
@@ -125,9 +125,7 @@ namespace Z0
             => Watcher.EnableRaisingEvents = false;
 
         public void Dispose()
-        {
-            Watcher?.Dispose();
-        }
+            => Watcher?.Dispose();
 
         void Error(object sender, ErrorEventArgs e)
         {
