@@ -18,13 +18,13 @@ namespace Z0
 
         public IAppMsgQueue MessageQueue {get;}
 
-        public IWfPaths Paths {get;}
+        public IWfAppPaths Paths {get;}
 
         public IApiParts ApiParts {get;}
 
         public event Action<IAppMsg> Next;
 
-        public AppContext(IWfPaths paths, ISystemApiCatalog parts, IPolyrand random, IJsonSettings settings, IAppMsgQueue queue)
+        public AppContext(IWfAppPaths paths, ISystemApiCatalog parts, IPolyrand random, IJsonSettings settings, IAppMsgQueue queue)
         {
             Paths = paths;
             Next = msg => {};

@@ -15,17 +15,17 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static ByteSize size<A>()
-            where A : unmanaged, IBytes
+            where A : unmanaged, IByteSeq
                 => (ByteSize)size<A>();
 
         [MethodImpl(Inline)]
         public static ulong offset<A>(int index)
-            where A : unmanaged, IBytes
+            where A : unmanaged, IByteSeq
                 => index*size<A>();
 
         [MethodImpl(Inline)]
         public static ulong count<A>(int datasize)
-            where A : unmanaged, IBytes
+            where A : unmanaged, IByteSeq
                 => datasize/size<A>();
     }
 }

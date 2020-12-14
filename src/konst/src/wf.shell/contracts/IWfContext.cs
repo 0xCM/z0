@@ -6,7 +6,7 @@ namespace Z0
 {
     public interface IWfContext : ITextual
     {
-        IWfPaths Paths {get;}
+        IWfAppPaths Paths {get;}
 
         IJsonSettings Settings {get;}
 

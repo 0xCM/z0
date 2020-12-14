@@ -16,10 +16,10 @@ namespace Z0
         public static void render(in WfConfigInfo src, ITextBuffer dst)
         {
             dst.AppendSettingLine(nameof(src.AppConfigPath), src.AppConfigPath);
-            dst.AppendSettingLine(nameof(src.Args),  Seq.delimited(src.AppConfigPath).Format());
+            dst.AppendSettingLine(nameof(src.Args),  Seq.delimit(src.AppConfigPath).Format());
             dst.AppendSettingLine(nameof(src.Controller), src.Controller.Format());
             dst.AppendSettingLine(nameof(src.LogConfig), WfLogs.format(src.LogConfig));
-            dst.AppendSettingLine(nameof(src.Parts), Seq.delimited(src.Parts).Format());
+            dst.AppendSettingLine(nameof(src.Parts), Seq.delimit(src.Parts).Format());
             dst.AppendSettingLine(nameof(src.StartTS), src.StartTS.Format());
             dst.AppendSettingLine(nameof(src.PathConfigTime), src.PathConfigTime.Format());
             dst.AppendSettingLine(nameof(src.InitConfigTime), src.InitConfigTime.Format());
@@ -36,7 +36,7 @@ namespace Z0
             => typeof(A).Assembly;
 
         [MethodImpl(Inline), Op]
-        public static IJsonSettings json(IWfPaths paths)
+        public static IJsonSettings json(IWfAppPaths paths)
             => JsonSettings.Load(paths.AppConfigPath);
 
 

@@ -29,10 +29,4 @@ namespace Z0
         public override string ToString()
             => Format();
     }
-
-    partial class XTend
-    {
-        public static DelimitedIndex<T> Delimited<T>(this IIndex<T> src, char delimiter = Chars.Comma)
-            => Seq.delimited(src.Storage, delimiter);
-    }
 }

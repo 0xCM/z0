@@ -253,7 +253,7 @@ namespace Z0
             var x = from part in  src.Parts
                     let enums = part.Owner.Enums()
                         orderby part.Id
-                        select Seq.keyed(part.Id, enums);
+                        select Lookups.keyed(part.Id, enums);
             return x;
         }
 
@@ -264,7 +264,7 @@ namespace Z0
             var x = from part in  selection
                     let enums = part.Owner.Enums()
                     orderby part.Id
-                    select Seq.keyed(part.Id, enums);
+                    select Lookups.keyed(part.Id, enums);
             return x;
         }
 

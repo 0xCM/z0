@@ -13,11 +13,11 @@ namespace Z0
     partial class WfShell
     {
         [MethodImpl(Inline), Op]
-        public static IWfPaths paths()
+        public static IWfAppPaths paths()
             => new WfPaths(WfEnv.dbRoot());
 
         [MethodImpl(Inline), Op]
-        public static IWfPaths paths<A>()
+        public static IWfAppPaths paths<A>()
             => new WfPaths(WfEnv.dbRoot() + FS.folder(controller<A>().Id().Format()));
     }
 }

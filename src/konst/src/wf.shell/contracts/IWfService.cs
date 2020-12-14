@@ -6,10 +6,17 @@ namespace Z0
 {
     using Free =System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
+    using System;
+
     [Free]
-    public interface IWfService
+    public interface IWfService : IDisposable
     {
         void Init(IWfShell wf);
+
+        void IDisposable.Dispose()
+        {
+
+        }
     }
 
     /// <summary>

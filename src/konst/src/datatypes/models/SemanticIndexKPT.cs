@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct SemanticIndex<K,P,T> : ISemanticIndex<SemanticIndex<K,P,T>,K,P,T>
+    public readonly struct SemanticIndex<K,P,T> : ISemanticLookup<SemanticIndex<K,P,T>,K,P,T>
         where K : unmanaged, Enum
         where P : unmanaged
     {

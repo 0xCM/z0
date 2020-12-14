@@ -54,6 +54,10 @@ namespace Z0
 
         public static FileExt Json => ext(json);
 
+        public static FileExt Config => ext(config);
+
+        public static FileExt JsonConfig => ext(config, json);
+
         public static FileExt JsonDeps => ext(deps, json);
 
         public static FileExt Pdb => ext(pdb);

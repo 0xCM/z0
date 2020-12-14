@@ -28,5 +28,6 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ClrStruct @struct(Type src)
             => new ClrStruct(src);
+
     }
 }

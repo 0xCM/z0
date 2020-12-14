@@ -11,7 +11,6 @@ namespace Z0
     using static z;
 
     using H = HexSymData;
-    using C = AsciCharCode;
 
     partial struct Digital
     {

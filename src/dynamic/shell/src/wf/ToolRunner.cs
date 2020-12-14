@@ -148,7 +148,7 @@ namespace Z0
         {
             var archive = RuntimeArchive.create();
             var src = archive.ManagedLibraries.Select(x => Assembly.LoadFrom(x.Name));
-            var rows = map(src, f => Seq.delimited(f.GetSimpleName(), Seq.delimited(DebugFlags(f))));
+            var rows = map(src, f => Seq.delimit(f.GetSimpleName(), Seq.delimit(DebugFlags(f))));
             Wf.Rows(rows);
         }
 
@@ -161,7 +161,7 @@ namespace Z0
         void ShowTokens()
         {
             var tokens = array<int>(typeof(byte).MetadataToken, typeof(sbyte).MetadataToken, typeof(char).MetadataToken);
-            Wf.Status(Seq.delimited(tokens.Map(t => t.FormatHex())));
+            Wf.Status(Seq.delimit(tokens.Map(t => t.FormatHex())));
         }
 
         void ShowApiHex()

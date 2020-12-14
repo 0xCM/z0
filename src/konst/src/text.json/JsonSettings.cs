@@ -10,8 +10,10 @@ namespace Z0
     using System.Linq;
     using System.Text;
     using System.Reflection;
+    using System.Text.Json;
 
     using static Konst;
+    using static memory;
 
     /// <summary>
     /// Defines the canonical <see cref='IJsonSettings'/> reification
@@ -23,6 +25,27 @@ namespace Z0
             var dst = new Dictionary<string,string>();
             absorb(src, dst);
             return new JsonSettings(dst.Select(kvp => (kvp.Key, kvp.Value)));
+        }
+
+        public static string format<S>(S src)
+            where S : IJsonSettings
+        {
+            var dst = Buffers.text();
+            var settings = @readonly(src.All.Array());
+            var count = settings.Length;
+            dst.AppendLine(Chars.LBrace);
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var setting = ref skip(settings,i);
+                var value = JsonSerializer.Serialize(setting.Value);
+                dst.AppendFormat("{0}: {1}", setting.Name, value);
+                if(i != count - 1)
+                    dst.Append(Chars.Comma);
+                dst.AppendLine();
+            }
+
+            dst.AppendLine(Chars.RBrace);
+            return dst.Emit();
         }
 
         public static void absorb(FS.FilePath src, Dictionary<string,string> dst)
@@ -165,7 +188,6 @@ namespace Z0
             for(var i=0; i<src.Length; i++)
             {
                 var line = src[i].Format();
-
                 if(i != src.Length - 1)
                     line += Chars.Comma;
 

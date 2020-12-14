@@ -135,7 +135,7 @@ namespace Z0
         public override string ToString()
             => Text;
 
-        ReadOnlySpan<byte> IBytes.View
+        ReadOnlySpan<byte> IByteSeq.View
             => z.bytes(this);
 
         bool INullity.IsEmpty
@@ -144,7 +144,7 @@ namespace Z0
         bool INullity.IsNonEmpty
             => IsNonEmpty;
 
-        int IBytes.Length
+        int IByteSeq.Length
             => 1;
 
         bool IEquatable<C>.Equals(C src)

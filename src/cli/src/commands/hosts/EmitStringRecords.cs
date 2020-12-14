@@ -78,7 +78,7 @@ namespace Z0
                 EmissionCount += EmitSystemStrings(part);
             }
 
-            Wf.Ran2(Seq.delimited(PartCount, EmissionCount));
+            Wf.Ran2(Seq.delimit(PartCount, EmissionCount));
         }
     }
 }

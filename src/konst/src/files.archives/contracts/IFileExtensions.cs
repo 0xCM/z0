@@ -29,6 +29,10 @@ namespace Z0
 
         FileExt Json => X.Json;
 
+        FileExt Config => X.Config;
+
+        FileExt JsonConfig => X.JsonConfig;
+
         FileExt Exe => X.Exe;
 
         FileExt Txt => X.Txt;

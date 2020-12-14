@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
 
     public readonly struct AsciResource<A> : IAsciResource<A>
-        where A : IBytes
+        where A : IByteSeq
     {
         public asci32 Name {get;}
 

@@ -14,16 +14,16 @@ namespace Z0
         [MethodImpl(Inline)]
         public static EnclosedList<T> enclose<T>(params T[] src)
             where T : unmanaged
-                => Seq.enclosed(ListEnclosureKind.Embraced, Chars.Comma, src);
+                => Seq.enclose(ListEnclosureKind.Embraced, Chars.Comma, src);
 
         [MethodImpl(Inline)]
         public static EnclosedList<T> enclose<T>(ListEnclosureKind kind, params T[] src)
             where T : unmanaged
-                => Seq.enclosed(kind, Chars.Comma, src);
+                => Seq.enclose(kind, Chars.Comma, src);
 
         [MethodImpl(Inline)]
         public static EnclosedList<T> enclose<T>(ListEnclosureKind kind, char delimiter, params T[] src)
             where T : unmanaged
-                => Seq.enclosed(kind, delimiter, src);
+                => Seq.enclose(kind, delimiter, src);
     }
 }

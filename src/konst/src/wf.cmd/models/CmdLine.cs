@@ -14,15 +14,21 @@ namespace Z0
     /// </summary>
     public readonly struct CmdLine
     {
-        public string Content {get;}
+        readonly Index<string> Data;
 
         [MethodImpl(Inline)]
-        public CmdLine(string content)
-            => Content = content;
+        public CmdLine(params string[] content)
+            => Data = content;
+
+        public ReadOnlySpan<CmdLinePart> Parts
+        {
+            [MethodImpl(Inline)]
+            get => memory.recover<string,CmdLinePart>(Data.Edit);
+        }
 
         [MethodImpl(Inline)]
         public string Format()
-            => Content;
+            => Seq.delimit(Chars.Space, Data).Format();
 
         public override string ToString()
             => Format();
@@ -32,7 +38,11 @@ namespace Z0
             => new CmdLine(src);
 
         [MethodImpl(Inline)]
+        public static implicit operator CmdLine(string[] src)
+            => new CmdLine(src);
+
+        [MethodImpl(Inline)]
         public static implicit operator string(CmdLine src)
-            => src.Content;
+            => src.Format();
     }
 }

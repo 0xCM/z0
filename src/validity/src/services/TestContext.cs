@@ -52,7 +52,7 @@ namespace Z0
         Queue<BenchmarkRecord> Benchmarks {get;}
             = new Queue<BenchmarkRecord>();
 
-        protected IWfPaths AppPaths {get;}
+        protected IWfAppPaths AppPaths {get;}
 
         protected TestContext()
         {

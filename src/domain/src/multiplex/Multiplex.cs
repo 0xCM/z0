@@ -18,7 +18,7 @@ namespace Z0
     {
         void OnChange(FsEntry entry, FS.ChangeKind kind)
         {
-            Wf.Status(Seq.delimited(entry.Name, kind));
+            Wf.Status(Seq.delimit(entry.Name, kind));
         }
 
         readonly WfHost Host;

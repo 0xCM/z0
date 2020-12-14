@@ -22,7 +22,7 @@ namespace Z0
             State = state;
         }
 
-        public IWfPaths Paths
+        public IWfAppPaths Paths
             => Root.Paths;
 
         public IJsonSettings Settings

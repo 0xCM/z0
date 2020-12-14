@@ -14,7 +14,7 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static unsafe void copy<A>(ReadOnlySpan<A> src, Span<byte> dst)
-            where A : unmanaged, IBytes
+            where A : unmanaged, IByteSeq
         {
             for(var i=0u; i<src.Length; i++)
                 copy(z.skip(src,i), ref z.seek(dst,i*64));
@@ -22,12 +22,12 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static void copy<A>(in A src, ref byte dst)
-            where A : unmanaged, IBytes
+            where A : unmanaged, IByteSeq
                 => copy(n2, src, ref dst);
 
         [MethodImpl(Inline)]
         static void copy<A>(N2 n, in A src, ref byte dst)
-            where A : unmanaged, IBytes
+            where A : unmanaged, IByteSeq
         {
             if(typeof(A) == typeof(asci2))
                 copy(cast(n2, src), ref dst);
@@ -43,7 +43,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static void copy<A>(N32 n, in A src, ref byte dst)
-            where A : unmanaged, IBytes
+            where A : unmanaged, IByteSeq
         {
             if(typeof(A) == typeof(asci32))
                 copy(cast(n32, src), ref dst);

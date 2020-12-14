@@ -26,5 +26,33 @@ namespace Z0
         [Op]
         public static Span<FieldInfo> literals(Type src, Span<FieldInfo> dst)
             => literals(fields(src), dst);
+
+        /// <summary>
+        /// Collects the <typeparamref name='T'/> literals defined by a source <see cref='Type'/>
+        /// </summary>
+        /// <param name="src">The source type</param>
+        /// <typeparam name="T">The primitive literal type</typeparam>
+        public static ClrFieldValues<T> literals<T>(Type src)
+        {
+            var fields = src.LiteralFields(typeof(T));
+            var count = fields.Length;
+            if(count == 0)
+                return ClrFieldValues<T>.Empty;
+            var buffer = alloc<ClrFieldValue<T>>(count);
+            literals<T>(fields, buffer);
+            return buffer;
+        }
+
+        [Op, Closures(Closure)]
+        public static void literals<T>(ReadOnlySpan<FieldInfo> fields, Span<ClrFieldValue<T>> dst)
+        {
+            var count = fields.Length;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var field = ref skip(fields,i);
+                var value = @as<object,T>(field.GetRawConstantValue());
+                seek(dst,i) = new ClrFieldValue<T>(field, value);
+            }
+        }
     }
 }

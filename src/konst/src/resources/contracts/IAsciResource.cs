@@ -5,7 +5,7 @@
 namespace Z0
 {
     public interface IAsciResource<A> : IContented<A>
-        where A : IBytes
+        where A : IByteSeq
     {
         asci32 Name {get;}
 

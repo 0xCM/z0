@@ -6,6 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
+    using System.Linq;
 
     using static Konst;
     using static z;
@@ -220,5 +222,23 @@ namespace Z0
                 seek(tv, i) = @as<LookupEntry<S,V>,LookupEntry<T,V>>(skip(sv,i));
             return tv;
         }
+
+
+        [MethodImpl(NotInline)]
+        static T[] array<T>(IEnumerable<T> src)
+            => src.Array();
+
+        [MethodImpl(Inline)]
+        public static KeyedValues<K,V> keyed<K,V>(KeyedValue<K,V>[] src)
+            => new KeyedValues<K,V>(src);
+
+        public static KeyedValues<K,V> keyed<K,V>(Dictionary<K,V> src)
+            => new KeyedValues<K,V>(array(src.Select(x => KeyedValue.define(x.Key, x.Value))));
+
+        public static KeyedValues<K,V> keyed<K,V>(K key, V[] values)
+            => new KeyedValues<K,V>(array(values.Select(value => KeyedValue.define(key, value))));
+
+        public static KeyedValues<K,V> keyed<K,V>(Paired<K,V>[] src)
+            => new KeyedValues<K,V>(src.Select(x => new KeyedValue<K,V>(x.Left, x.Right)));
     }
 }

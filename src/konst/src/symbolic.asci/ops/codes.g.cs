@@ -14,12 +14,12 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static ReadOnlySpan<AsciCharCode> codes<A>(in A src)
-            where A : unmanaged, IBytes
+            where A : unmanaged, IByteSeq
                 => codes(n2, src);
 
         [MethodImpl(Inline)]
         static ReadOnlySpan<AsciCharCode> codes<A>(N2 n, in A src)
-            where A : unmanaged, IBytes
+            where A : unmanaged, IByteSeq
         {
             if(typeof(A) == typeof(asci2))
                 return recover<AsciCharCode>(cast(n2,src).View);
@@ -35,7 +35,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static ReadOnlySpan<AsciCharCode> codes<A>(N32 n, in A src)
-            where A : unmanaged, IBytes
+            where A : unmanaged, IByteSeq
         {
             if(typeof(A) == typeof(asci32))
                 return recover<AsciCharCode>(cast(n32,src).View);

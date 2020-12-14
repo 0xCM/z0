@@ -61,38 +61,12 @@ namespace Z0
             return new ApiHostRoutines(src.Host, instructions.ToArray());
         }
 
-        public static ApiCodeBlockIndex BuildIndex(IWfShell wf, WfHost host)
-        {
-            using var builder = new ApiIndexBuilder(wf, host);
-            builder.Run();
-            var target = builder.Product;
-            var metrics = ApiIndexMetrics.from(target);
-            wf.Status(ApiIndexMetrics.from(target));
-            return target;
-        }
-
         public static void Run(IWfShell wf, in WfCaptureState state)
         {
-            var index = BuildIndex(wf, WfShell.host(typeof(CaptureProcessors)));
+            var index = ApiIndexService.blocks(wf);
             run(wf, state, index);
             process(wf, decode(wf, state.RoutineDecoder, index));
             ResBytesEmitter.create().WithIndex(index).Run(wf);
-        }
-
-        public static void decode(PartId part, HostBlockDecoder decoder, in ApiCodeBlockIndex src, ref ApiPartRoutines dst)
-        {
-            var hosts = @readonly(src.Hosts.Where(h => h.Owner == part));
-            var count = hosts.Length;
-            var buffer = alloc<ApiHostRoutines>(count);
-            ref var _dst = ref first(span(buffer));
-            for(var j=0; j<count; j++)
-            {
-                ref readonly var host = ref skip(hosts,j);
-                var blocks = src[host];
-                var decoded = decoder(blocks);
-                seek(_dst,j) = decoded;
-            }
-            dst = new ApiPartRoutines(part, buffer);
         }
 
         public static void run(IWfShell wf, IWfCaptureState state, in ApiCodeBlockIndex encoded)
@@ -103,7 +77,7 @@ namespace Z0
                 var result = processor.Process();
                 var records = 0u;
 
-                wf.Processed(Seq.delimited(nameof(AsmRow), encoded.Hosts.Length, result.Count));
+                wf.Processed(Seq.delimit(nameof(AsmRow), encoded.Hosts.Length, result.Count));
 
                 var sets = result.View;
                 var count = result.Count;

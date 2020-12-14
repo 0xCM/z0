@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Covers a sequence of asci-encoded bytes
     /// </summary>
-    public readonly struct AsciSequence : IBytes
+    public readonly struct AsciSequence : IByteSeq
     {
         internal readonly BinaryCode Storage;
 

@@ -10,9 +10,9 @@ namespace Z0
     using static Konst;
 
     /// <summary>
-    /// Provides the canonical <see cref='IWfPaths'/> implementation
+    /// Provides the canonical <see cref='IWfAppPaths'/> implementation
     /// </summary>
-    public readonly struct WfPaths : IWfPaths
+    public readonly struct WfPaths : IWfAppPaths
     {
         public FS.FolderPath Root {get;}
 

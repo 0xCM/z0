@@ -59,6 +59,11 @@ namespace Z0
         public const string json = nameof(json);
 
         /// <summary>
+        /// Defines the 'config' literal
+        /// </summary>
+        public const string config = nameof(config);
+
+        /// <summary>
         /// Defines the 'pdb' literal
         /// </summary>
         public const string pdb = nameof(pdb);

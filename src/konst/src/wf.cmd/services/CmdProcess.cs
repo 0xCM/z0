@@ -136,9 +136,9 @@ namespace Z0
             _commandLine = commandLine;
 
             // See if the command is quoted and match it in that case
-            Match m = Regex.Match(commandLine.Content, "^\\s*\"(.*?)\"\\s*(.*)");
+            Match m = Regex.Match(commandLine, "^\\s*\"(.*?)\"\\s*(.*)");
             if (!m.Success)
-                m = Regex.Match(commandLine.Content, @"\s*(\S*)\s*(.*)"); // thing before first space is command
+                m = Regex.Match(commandLine, @"\s*(\S*)\s*(.*)"); // thing before first space is command
 
 
             ProcessStartInfo startInfo = new ProcessStartInfo(m.Groups[1].Value, m.Groups[2].Value)

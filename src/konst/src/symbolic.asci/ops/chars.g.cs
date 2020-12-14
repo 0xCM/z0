@@ -14,12 +14,12 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static ReadOnlySpan<char> chars<A>(in A src)
-            where A : unmanaged, IBytes
+            where A : unmanaged, IByteSeq
                 => chars(n2, src);
 
         [MethodImpl(Inline)]
         static ReadOnlySpan<char> chars<A>(N2 n, in A src)
-            where A : unmanaged, IBytes
+            where A : unmanaged, IByteSeq
         {
             if(typeof(A) == typeof(asci2))
                 return decode(cast(n2,src));
@@ -35,7 +35,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static ReadOnlySpan<char> chars<A>(N32 n, in A src)
-            where A : unmanaged, IBytes
+            where A : unmanaged, IByteSeq
         {
             if(typeof(A) == typeof(asci32))
                 return decode(cast(n32,src));

@@ -9,16 +9,23 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
+    using api = JsonSettings;
+
     public interface ISettingsAdapter<T>
         where T : ISettingsAdapter<T>, new()
     {
         T Adapt(IJsonSettings source);
     }
 
+    public interface IJsonSetting : ISetting
+    {
+
+    }
+
     /// <summary>
     /// Characterizes an app settings collection
     /// </summary>
-    public interface IJsonSettings : IEnumerable<ISetting>
+    public interface IJsonSettings : IEnumerable<ISetting>, ITextual
     {
         Option<string> Setting(string name);
 
@@ -33,6 +40,9 @@ namespace Z0
 
         IEnumerator IEnumerable.GetEnumerator()
             => All.GetEnumerator();
+
+        string ITextual.Format()
+            => api.format(this);
 
         ISettingsAdapter<T> Adapt<T>()
             where T : ISettingsAdapter<T>, new()

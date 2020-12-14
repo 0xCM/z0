@@ -12,8 +12,8 @@ namespace Z0
     /// <summary>
     /// Covers an A-parametric sequence of asci sequences
     /// </summary>
-    public readonly struct AsciSequence<A> : IByteContainer<A>
-        where A : unmanaged, IBytes
+    public readonly struct AsciSequence<A> : IByteSeq<A>
+        where A : unmanaged, IByteSeq
     {
         public A Content {get;}
 

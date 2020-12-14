@@ -78,7 +78,7 @@ namespace Z0
         public bool Equals(AsciEncoded src)
             => Encoded.Equals(src.Encoded);
 
-        ReadOnlySpan<byte> IBytes.View
+        ReadOnlySpan<byte> IByteSeq.View
             => Bytes;
     }
 }

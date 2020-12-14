@@ -29,7 +29,7 @@ namespace Z0
 
         public string[] Args {get;}
 
-        public IWfPaths Paths {get;}
+        public IWfAppPaths Paths {get;}
 
         public IJsonSettings Settings {get;}
 

@@ -34,7 +34,7 @@ namespace Z0
 
         void Ran<C,T>(WfExecFlow flow, C @case, T data)
         {
-            Wf.Ran2(flow, Seq.delimited(@case, data));
+            Wf.Ran2(flow, Seq.delimit(@case, data));
         }
 
         [Op]

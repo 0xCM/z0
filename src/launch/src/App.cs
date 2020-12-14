@@ -6,6 +6,9 @@ namespace Z0
 {
     using System;
 
+    using static Konst;
+    using static memory;
+
     readonly struct Launch
     {
         readonly WfHost Host;
@@ -23,12 +26,18 @@ namespace Z0
             try
             {
                 using var wf = WfShell.create(args);
+                var app = new Launch(wf);
                 if(args.Length == 0)
-                    wf.Status("usage: launch <dir>");
+                {
+                    wf.Status("usage: launch <verb> [options]");
+                    app.Run(new ShowVerbsCmd());
+                    app.Run(new ShowConfigCmd());
+                }
                 else
                 {
-                    var app = new Launch(wf);
-                    app.Run(args[0]);
+                    CmdLine cmd = args;
+                    wf.Status(cmd.Format());
+                    app.Run(cmd);
                 }
 
                 // var cmd1 = new CmdLine("cmd /c code.exe j:\\");
@@ -43,7 +52,7 @@ namespace Z0
             }
         }
 
-        public void Run(string arg)
+        void LaunchCode(string arg)
         {
             var dir = FS.dir(Environment.CurrentDirectory) + FS.folder(arg);
             var app = FS.file("code", FileExtensions.Exe);
@@ -53,6 +62,33 @@ namespace Z0
             Wf.Status(string.Format("CmdLine: {0}", cmd.Format()));
             var process = Cmd.process(Wf,cmd);
             Wf.Status(string.Format("Launched process {0}", process.ProcessId));
+        }
+
+        public void Run(CmdLine cmd)
+        {
+            var args = cmd.Parts;
+            var count = args.Length;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var arg = ref skip(args,i);
+
+
+            }
+        }
+
+        void Run(ShowConfigCmd cmd)
+        {
+            var settings = Wf.Settings;
+            Wf.Row(settings.Format());
+        }
+
+        void Run(ShowVerbsCmd cmd)
+        {
+            var verbs = AppCmdNames.index();
+            for(var i=0u; i<verbs.Count; i++)
+            {
+                Wf.Status(verbs[i]);
+            }
         }
     }
 }

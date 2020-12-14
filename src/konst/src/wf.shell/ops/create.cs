@@ -32,7 +32,7 @@ namespace Z0
             var parts = WfShell.parts(control, args);
             var partIdList = parts.Api.PartIdentities;
             var appLogConfig = WfLogs.configure(controlId, dbRoot);
-            IWfPaths _paths = new WfPaths(dbRoot);
+            IWfAppPaths _paths = new WfPaths(dbRoot);
             ci.PathConfigTime = clock.Elapsed;
             clock.Restart();
 

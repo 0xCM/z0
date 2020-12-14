@@ -16,7 +16,7 @@ namespace Z0.Asm
     {
         public FilePath LogPath {get;}
 
-        public IWfPaths AppPaths
+        public IWfAppPaths AppPaths
             => WfShell.paths();
 
         readonly AsmFxHandlers Handlers;
