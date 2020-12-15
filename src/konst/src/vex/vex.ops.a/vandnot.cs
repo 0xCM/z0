@@ -28,7 +28,7 @@ namespace Z0
             => AndNot(y, x);
 
         /// <summary>
-        /// _mm_andnot_pd:
+        ///  __m128d _mm_andnot_pd (__m128d a, __m128d b) ADDNPD xmm, xmm/m128
         /// Effects the composite operation x & (~y) for the left and right operands
         /// </summary>
         /// <param name="x">The left operand</param>

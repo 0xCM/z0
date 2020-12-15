@@ -11,8 +11,7 @@ namespace Z0
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     /// <summary>
-    /// Characterizes a value emitter that supports placing upper and/or lower bounds on
-    /// the values produced
+    /// Characterizes a value emitter that supports placing upper and/or lower bounds on the values produced
     /// </summary>
     /// <typeparam name="T">The production value type</typeparam>
     [Free]

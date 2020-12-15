@@ -8,19 +8,18 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static z;
 
-    public readonly struct StringResourceRows
+    public readonly struct StringResRows
     {
-        readonly TableSpan<StringResourceRow> Data;
+        readonly TableSpan<StringResRow> Data;
 
         [MethodImpl(Inline)]
-        public StringResourceRows(StringResourceRow[] src)
+        public StringResRows(StringResRow[] src)
             => Data = src;
 
         [MethodImpl(Inline)]
-        public static implicit operator StringResourceRows(StringResourceRow[] src)
-            => new StringResourceRows(src);
+        public static implicit operator StringResRows(StringResRow[] src)
+            => new StringResRows(src);
 
         public uint Count
         {
@@ -28,7 +27,7 @@ namespace Z0
             get => Data.Count;
         }
 
-        public ReadOnlySpan<StringResourceRow> View
+        public ReadOnlySpan<StringResRow> View
         {
             [MethodImpl(Inline)]
             get => Data.View;

@@ -9,18 +9,18 @@ namespace Z0
 
     using static Konst;
 
-    public interface ICodeBlockIndex : IBinaryResourceIndex
+    public interface ICodeBlockIndex : IBinaryResLookup
     {
     }
 
-    readonly struct ParsedSigCases : IBinaryResourceIndex, ICodeBlockIndex
+    readonly struct ParsedSigCases : IBinaryResLookup, ICodeBlockIndex
     {
         [MethodImpl(Inline)]
         internal ParsedSigCases(int _)
         {
             var providers = Resources.BinaryProviders<ParsedSigCases>();
             var count = providers.Length;
-            Data = z.alloc<BinaryResource>(count);
+            Data = z.alloc<BinaryRes>(count);
 
             var index = 0;
             Register(index++, OpIdentityParser.parse(nameof(or_ᐤ8uㆍ8uᐤ)), or_ᐤ8uㆍ8uᐤ);
@@ -30,9 +30,9 @@ namespace Z0
             Register(index++, OpIdentityParser.parse(nameof(within_ᐤ8uㆍ8uㆍ8uᐤ)), within_ᐤ8uㆍ8uㆍ8uᐤ);
         }
 
-        public readonly BinaryResource[] Data;
+        public readonly BinaryRes[] Data;
 
-        BinaryResource[] IContented<BinaryResource[]>.Content
+        BinaryRes[] IContented<BinaryRes[]>.Content
             => Data;
 
         [MethodImpl(Inline)]

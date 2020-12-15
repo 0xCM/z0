@@ -11,19 +11,18 @@ namespace Z0
     using System.Reflection;
 
     using static Konst;
-    using static z;
 
     public readonly struct TableContentProvider
     {
-        public static IEnumerable<DocLibEntry> entries(Assembly src)
+        public static TableContentProvider create(Assembly src)
+            => new TableContentProvider(src);
+
+        static IEnumerable<DocLibEntry> entries(Assembly src)
         {
             var names = ResExtractor.Service(src).ResourceNames;
             foreach(var name in names)
                 yield return new DocLibEntry(name, Path.GetExtension(name));
         }
-
-        public static TableContentProvider create(Assembly src)
-            => new TableContentProvider(src);
 
         readonly Assembly Source;
 

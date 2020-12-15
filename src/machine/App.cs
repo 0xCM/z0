@@ -34,45 +34,25 @@ namespace Z0
     {
         IWfShell Wf;
 
-        bool RunCapture {get;}
+        WfCaptureState State;
 
-        bool RunMachine {get;}
-
-        App(IWfShell wf)
+        App(IWfShell wf, WfCaptureState state)
         {
             Wf = wf;
-            RunCapture = true;
-            RunMachine = true;
+            State = state;
         }
 
         void Run()
-        {
+            => MachineRunner.create(State).Run(Wf);
 
-            var ctx = Apps.context(Wf);
-            var asm = new AsmContext(ctx, Wf);
-            var state = new WfCaptureState(Wf, asm);
-            var capture = CaptureWorkflow.create(state);
+        static App app(IWfShell wf)
+            => new App(wf, WfCaptureState.create(wf));
 
-            if(RunCapture)
-                capture.Run();
-
-            if(RunMachine)
-                MachineRunner.create(state).Run(Wf);
-        }
+        public static IWfShell wf(string[] args)
+            => WfShell.create(args).WithRandom(Rng.@default());
 
         public static void Main(params string[] args)
-        {
-            try
-            {
-                using var wf = WfShell.create(args).WithRandom(Rng.@default());
-                var app = new App(wf);
-                app.Run();
-            }
-            catch(Exception e)
-            {
-                term.error(e);
-            }
-        }
+            => @try(() => app(wf(args)).Run());
     }
 
     public static partial class XTend {}

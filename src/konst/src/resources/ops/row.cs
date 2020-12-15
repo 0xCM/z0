@@ -8,14 +8,13 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static z;
 
     partial struct Resources
     {
         [MethodImpl(Inline), Op]
-        public unsafe static StringResourceRow row(in StringResource src)
+        public unsafe static StringResRow row(in StringRes src)
         {
-            var dst = new StringResourceRow();
+            var dst = new StringResRow();
             dst.Id = src.Source.MetadataToken;
             dst.Address = src.Address;
             dst.Length = (uint)src.Value.Length;
@@ -23,7 +22,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public unsafe static ref StringResourceRow row(in StringResource src, out StringResourceRow dst)
+        public unsafe static ref StringResRow row(in StringRes src, out StringResRow dst)
         {
             dst.Id = src.Source.MetadataToken;
             dst.Address = src.Address;

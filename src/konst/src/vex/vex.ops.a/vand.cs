@@ -177,13 +177,8 @@ namespace Z0
         public static Vector256<ulong> vand(Vector256<ulong> x, Vector256<ulong> y)
             => And(x, y);
 
-        [MethodImpl(Inline), And, Closures(UnsignedInts)]
-        public static Vector256<byte> vand8u<T>(Vector256<T> x, Vector256<T> y)
-            where T : unmanaged
-                => vand(z.v8u(x), z.v8u(y));
-
         /// <summary>
-        /// __m128 _mm_and_ps (__m128 a, __m128 b)ANDPS xmm, xmm/m128
+        /// __m128 _mm_and_ps (__m128 a, __m128 b) ANDPS xmm, xmm/m128
         /// Computes the logical and of the operands
         /// </summary>
         /// <param name="x">The left vector</param>

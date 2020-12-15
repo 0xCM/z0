@@ -176,6 +176,102 @@ namespace Z0
         public static ushort uint16(byte src)
             => (ushort)src;
 
+        [MethodImpl(Inline), Op]
+        public static short int16(sbyte src)
+            => (short)src;
+
+        [MethodImpl(Inline), Op]
+        public static short int16(byte src)
+            => (short)src;
+
+        [MethodImpl(Inline), Op]
+        public static short int16(short src)
+            => (short)src;
+
+        [MethodImpl(Inline), Op]
+        public static short int16(ushort src)
+            => (short)src;
+
+        [MethodImpl(Inline), Op]
+        public static short int16(int src)
+            => (short)src;
+
+        [MethodImpl(Inline), Op]
+        public static short int16(uint src)
+            => (short)src;
+
+        [MethodImpl(Inline), Op]
+        public static short int16(long src)
+            => (short)src;
+
+        [MethodImpl(Inline), Op]
+        public static short int16(ulong src)
+            => (short)src;
+
+        [MethodImpl(Inline), Op]
+        public static sbyte int8(sbyte src)
+            => (sbyte)src;
+
+        [MethodImpl(Inline), Op]
+        public static sbyte int8(byte src)
+            => (sbyte)src;
+
+        [MethodImpl(Inline), Op]
+        public static sbyte int8(short src)
+            => (sbyte)src;
+
+        [MethodImpl(Inline), Op]
+        public static sbyte int8(ushort src)
+            => (sbyte)src;
+
+        [MethodImpl(Inline), Op]
+        public static sbyte int8(int src)
+            => (sbyte)src;
+
+        [MethodImpl(Inline), Op]
+        public static sbyte int8(uint src)
+            => (sbyte)src;
+
+        [MethodImpl(Inline), Op]
+        public static sbyte int8(long src)
+            => (sbyte)src;
+
+        [MethodImpl(Inline), Op]
+        public static sbyte int8(ulong src)
+            => (sbyte)src;
+
+        [MethodImpl(Inline), Op]
+        public static int int32(sbyte src)
+            => (int)src;
+
+        [MethodImpl(Inline), Op]
+        public static int int32(byte src)
+            => (int)src;
+
+        [MethodImpl(Inline), Op]
+        public static int int32(short src)
+            => (int)src;
+
+        [MethodImpl(Inline), Op]
+        public static int int32(ushort src)
+            => (int)src;
+
+        [MethodImpl(Inline), Op]
+        public static int int32(int src)
+            => (int)src;
+
+        [MethodImpl(Inline), Op]
+        public static int int32(uint src)
+            => (int)src;
+
+        [MethodImpl(Inline), Op]
+        public static int int32(long src)
+            => (int)src;
+
+        [MethodImpl(Inline), Op]
+        public static int int32(ulong src)
+            => (int)src;
+
         /// <summary>
         /// Forces a <see cref='short'/> to a <see cref='ushort'/>
         /// </summary>

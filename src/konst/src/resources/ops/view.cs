@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static z;
 
     partial struct Resources
     {
@@ -29,7 +28,7 @@ namespace Z0
             => MemoryView.view<byte>(res.Address, (i1 - i0 + 1));
 
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<char> view(in StringResourceRow src)
+        public static ReadOnlySpan<char> view(in StringResRow src)
             => MemoryView.view<char>(src.Address, src.Length);
     }
 }

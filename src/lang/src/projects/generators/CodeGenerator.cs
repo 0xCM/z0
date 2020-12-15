@@ -18,7 +18,7 @@ namespace Z0
 
     public class CodeGenerator : ICodeGenerator
     {
-        public static string property(BinaryResourceSpec src, int level = 2)
+        public static string property(BinaryResSpec src, int level = 2)
             => text.concat("public static ReadOnlySpan<byte> ",
             src.Identifier,
             Space,

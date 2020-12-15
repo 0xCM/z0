@@ -18,7 +18,7 @@ namespace Z0
         /// <typeparam name="T">The result type</typeparam>
         /// <param name="f">The function to evaluate</param>
         [MethodImpl(Inline)]
-        public static Option<T> Try<T>(Func<T> f, Action<Exception> handler = null)
+        public static Option<T> @try<T>(Func<T> f, Action<Exception> handler = null)
             => Option.Try(f,handler ?? OnTryFail);
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace Z0
         /// <param name="f">The function to evaluate</param>
         /// <typeparam name="T">The function result type, if successful</typeparam>
         [MethodImpl(Inline)]
-        public static Option<T> Try<T>(Func<Option<T>> f, Action<Exception> handler = null)
+        public static Option<T> @try<T>(Func<Option<T>> f, Action<Exception> handler = null)
             => Option.Try(f,handler ?? OnTryFail);
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace Z0
         /// <param name="f">The action to invoke</param>
         /// <param name="onerror">The error handler to call, if specified</param>
         [MethodImpl(Inline)]
-        public static void Try(Action f, Action<Exception> handler = null)
+        public static void @try(Action f, Action<Exception> handler = null)
             => Option.Try(f,handler ?? OnTryFail);
 
         /// <summary>
@@ -50,13 +50,12 @@ namespace Z0
         /// <param name="x">The input value</param>
         /// <param name="f">The function to evaluate</param>
         [MethodImpl(Inline)]
-        public static Option<Y> Try<X,Y>(X x, Func<X,Y> f, Action<X,Exception> handler = null)
+        public static Option<Y> @try<X,Y>(X x, Func<X,Y> f, Action<X,Exception> handler = null)
             => Option.Try(x, f, handler ?? OnTryFail<X>);
 
         [MethodImpl(Inline)]
         static void OnTryFail(Exception e)
             => term.error(e);
-
 
         [MethodImpl(Inline)]
         static void OnTryFail<X>(X x, Exception e)

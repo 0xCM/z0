@@ -1,8 +1,6 @@
 echo off
 
-set ProjectId=machine
-echo ProjectId:%ProjectId%
+set ZCmd=%ZDev%\.cmd
+echo ZCmd:%ZCmd%
 
-call %ZDev%\.cmd\project-config.cmd
-
-dotnet build %ProjectPath% -c Release
+call %ZCmd%\build.cmd

@@ -28,12 +28,12 @@ namespace Z0
        /// <summary>
        /// Classifies a signature position
        /// </summary>
-        FixedSlot = FixedSigClass << 1,
+        Slotted = FixedSigClass << 1,
 
        /// <summary>
        /// Classifies a fixed operand type
        /// </summary>
-        Operand = FixedSlot << 1,
+        Operand = Slotted << 1,
 
        /// <summary>
        /// Classifies a fixed return type
@@ -230,46 +230,45 @@ namespace Z0
         /// </summary>
         TernaryOp512 = Operator | Fixed512x0 | Fixed512x1 | Fixed512x2 | Return512,
 
-
         /// <summary>
         /// 1-bit value in slot
         /// </summary>
-        FixedSlot1 = FixedSlot | W.W1,
+        FixedSlot1 = Slotted | W.W1,
 
         /// <summary>
         /// 8-bit value in slot
         /// </summary>
-        FixedSlot8 = FixedSlot | W.W8,
+        FixedSlot8 = Slotted | W.W8,
 
         /// <summary>
         /// 16-bit value in slot
         /// </summary>
-        FixedSlot16 = FixedSlot | W.W16,
+        FixedSlot16 = Slotted | W.W16,
 
         /// <summary>
         /// 32-bit value in slot
         /// </summary>
-        FixedSlot32 = FixedSlot | W.W32,
+        FixedSlot32 = Slotted | W.W32,
 
         /// <summary>
         /// 54-bit value in slot
         /// </summary>
-        FixedSlot64 = FixedSlot | W.W64,
+        FixedSlot64 = Slotted | W.W64,
 
         /// <summary>
         /// 128-bit value in slot
         /// </summary>
-        FixedSlot128 = FixedSlot | W.W128,
+        FixedSlot128 = Slotted | W.W128,
 
         /// <summary>
         /// 256-bit value in slot
         /// </summary>
-        FixedSlot256 = FixedSlot | W.W256,
+        FixedSlot256 = Slotted | W.W256,
 
         /// <summary>
         /// 512-bit value in slot
         /// </summary>
-        FixedSlot512 = FixedSlot | W.W512,
+        FixedSlot512 = Slotted | W.W512,
 
         /// <summary>
         /// The first operand slot

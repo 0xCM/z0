@@ -46,7 +46,7 @@ namespace Z0
             => AlignRight(x, y, offset);
 
         /// <summary>
-        /// __m256i _mm256_alignr_epi8 (__m256i a, __m256i b, const int count)VPALIGNR ymm, ymm, ymm/m256, imm8
+        /// __m256i _mm256_alignr_epi8 (__m256i a, __m256i b, const int count) VPALIGNR ymm, ymm, ymm/m256, imm8
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>

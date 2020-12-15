@@ -5,17 +5,17 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
     using static System.Runtime.Intrinsics.X86.Sse41;
-    using static System.Runtime.Intrinsics.X86.Avx;    
-    using static System.Runtime.Intrinsics.X86.Avx2;    
-     
-    using static Konst; 
+    using static System.Runtime.Intrinsics.X86.Avx;
+    using static System.Runtime.Intrinsics.X86.Avx2;
+
+    using static Konst;
 
     partial struct z
-    {                            
+    {
         // ~ 128x8i -> X
         // ~ ------------------------------------------------------------------
 
@@ -26,7 +26,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<short> vmaplo(Vector128<sbyte> src, N128 w, short t)
+        public static Vector128<short> vmaplo16i(Vector128<sbyte> src, N128 w, short t)
             => ConvertToVector128Int16(src);
 
         /// <summary>
@@ -37,7 +37,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<ushort> vmaplo(Vector128<sbyte> src, N128 w, ushort t)
+        public static Vector128<ushort> vmaplo16u(Vector128<sbyte> src, N128 w, ushort t)
             => v16u(ConvertToVector128Int16(src));
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<int> vmaplo(Vector128<sbyte> src, N256 w, int t)
+        public static Vector256<int> vmaplo32i(Vector128<sbyte> src, N256 w, int t)
             => ConvertToVector256Int32(src);
 
         // ~ 128x8u -> X
@@ -61,7 +61,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<short> vmaplo(Vector128<byte> src, N128 w, short t)
+        public static Vector128<short> vmaplo16i(Vector128<byte> src, N128 w, short t)
             => ConvertToVector128Int16(src);
 
         /// <summary>
@@ -72,7 +72,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<ushort> vmaplo(Vector128<byte> src, N128 w, ushort t)
+        public static Vector128<ushort> vmaplo16u(Vector128<byte> src, N128 w, ushort t)
             => v16u(ConvertToVector128Int16(src));
 
         /// <summary>
@@ -82,7 +82,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<uint> vmaplo(Vector128<byte> src, N256 w, uint t)
+        public static Vector256<uint> vmaplo32u(Vector128<byte> src, N256 w, uint t)
             => v32u(ConvertToVector256Int32(src));
 
         /// <summary>
@@ -92,7 +92,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<int> vmaplo(Vector128<byte> src, N256 w, int t)
+        public static Vector256<int> vmaplo32i(Vector128<byte> src, N256 w, int t)
             => ConvertToVector256Int32(src);
 
         // ~ 128x16i -> X
@@ -104,7 +104,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<int> vmaplo(Vector128<short> src, N128 w, int t)
+        public static Vector128<int> vmaplo32i(Vector128<short> src, N128 w, int t)
             => ConvertToVector128Int32(src);
 
         /// <summary>
@@ -114,7 +114,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<long> vmaplo(Vector128<short> src, N256 w, long t)
+        public static Vector256<long> vmaplo64i(Vector128<short> src, N256 w, long t)
             => ConvertToVector256Int64(src);
 
         // ~ 128x16u -> X
@@ -126,7 +126,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<uint> vmaplo(Vector128<ushort> src, N128 w, uint t)
+        public static Vector128<uint> vmaplo32u(Vector128<ushort> src, N128 w, uint t)
             => v32u(ConvertToVector128Int32(src));
 
         /// <summary>
@@ -135,7 +135,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<long> vmaplo(Vector128<ushort> src, N256 w, long t)
+        public static Vector256<long> vmaplo64i(Vector128<ushort> src, N256 w, long t)
             => ConvertToVector256Int64(src);
 
         /// <summary>
@@ -144,7 +144,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<ulong> vmaplo(Vector128<ushort> src, N256 w, ulong t)
+        public static Vector256<ulong> vmaplo64u(Vector128<ushort> src, N256 w, ulong t)
             => v64u(ConvertToVector256Int64(src));
 
         // ~ 128x32u -> X
@@ -158,7 +158,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<long> vmaplo(Vector128<uint> src, N128 w, long t)
+        public static Vector128<long> vmaplo64i(Vector128<uint> src, N128 w, long t)
             => ConvertToVector128Int64(src);
 
         /// <summary>
@@ -169,7 +169,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<ulong> vmaplo(Vector128<uint> src, N128 w, ulong t)
+        public static Vector128<ulong> vmaplo64u(Vector128<uint> src, N128 w, ulong t)
             => v64u(ConvertToVector128Int64(src));
 
         // ~ 256x8i -> X
@@ -182,18 +182,9 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<short> vmaplo(Vector256<sbyte> src, N256 w, short t)
+        public static Vector256<short> vmaplo16i(Vector256<sbyte> src, N256 w, short t)
             => ConvertToVector256Int16(vlo(src));
 
-        /// <summary>
-        /// __m256i _mm256_cvtepi8_epi16 (__m128i a) VPMOVSXBW ymm, xmm/m128
-        /// 16x8u -> 16x16i
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline), Op]
-        public static Vector256<short> vmaphi(Vector256<sbyte> src, N256 w, short t)
-            => ConvertToVector256Int16(vhi(src));
 
         // ~ 256x8u -> X
         // ~ ------------------------------------------------------------------
@@ -205,7 +196,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<ushort> vmaplo(Vector256<byte> src, N256 w, ushort t)
+        public static Vector256<ushort> vmaplo16u(Vector256<byte> src, N256 w, ushort t)
             => v16u(ConvertToVector256Int16(vlo(src)));
 
         /// <summary>
@@ -215,12 +206,12 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<short> vmaplo(Vector256<byte> src, N256 w, short t)
+        public static Vector256<short> vmaplo16i(Vector256<byte> src, N256 w, short t)
             => ConvertToVector256Int16(vlo(src));
 
         // ~ 256x16i -> X
         // ~ ------------------------------------------------------------------
-        
+
         /// <summary>
         /// __m256i _mm256_cvtepi16_epi32 (__m128i a) VPMOVSXWD ymm, xmm/m128
         /// 8x16i -> 8x32i
@@ -228,7 +219,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<int> vmaplo(Vector256<short> src, N256 w, int t)
+        public static Vector256<int> vmaplo32i(Vector256<short> src, N256 w, int t)
             => ConvertToVector256Int32(vlo(src));
 
         // ~ 256x16u -> X
@@ -241,7 +232,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<uint> vmaplo(Vector256<ushort> src, N256 w, uint t)
+        public static Vector256<uint> vmaplo32u(Vector256<ushort> src, N256 w, uint t)
             => v32u(ConvertToVector256Int32(vlo(src)));
 
         // ~ 256x32i -> X
@@ -254,7 +245,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<long> vmaplo(Vector256<int> src, N256 w, long t)
+        public static Vector256<long> vmaplo64i(Vector256<int> src, N256 w, long t)
             => ConvertToVector256Int64(vlo(src));
 
         // ~ 256x32u -> X
@@ -267,7 +258,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<ulong> vmaplo(Vector256<uint> src, N256 w, ulong t)
+        public static Vector256<ulong> vmaplo64u(Vector256<uint> src, N256 w, ulong t)
             => v64u(ConvertToVector256Int64(vlo(src)));
     }
 }

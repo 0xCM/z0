@@ -8,8 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static z;
-    using static In;
+    using static memory;
 
     using BL = BitLogic.Bytes;
 
@@ -18,18 +17,18 @@ namespace Z0
     /// </summary>
     partial class LogicSquare
     {
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static void xnor<T>(in T a, in T b, ref T dst)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-               BL.xnor(in uint8(in a), in uint8(in b), ref uint8(ref dst));
+               BL.xnor(u8(a), u8(b), ref u8(dst));
             else if(typeof(T) == typeof(ushort))
-                xnor(w, in a, in b, ref dst);
+                xnor(w, a, b, ref dst);
             else if(typeof(T) == typeof(uint))
-                xnor(w, 4, 8, in a, in b, ref dst);
+                xnor(w, 4, 8, a, b, ref dst);
             else if(typeof(T) == typeof(ulong))
-                xnor(w, 16, 4, in a, in b, ref dst);
+                xnor(w, 16, 4, a, b, ref dst);
             else
                 throw no<T>();
         }

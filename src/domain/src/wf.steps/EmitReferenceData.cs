@@ -48,26 +48,9 @@ namespace Z0
         {
             Wf.Running();
 
+            EmitResData.index(Wf);
+            EmitResData.refs(Wf);
             XedEtlWfHost.create().Run(Wf);
-
-            var provider = TableContentProvider.create(Parts.Res.Assembly);
-            var entries = provider.Entries;
-            EmissionCount = (uint)entries.Length;
-
-            var f = Table.formatter<ContentLibField>();
-            var target = Wf.Db().RefDataRoot() + FS.file("index", FileExtensions.Csv);
-            for(var i=0u; i<EmissionCount; i++)
-            {
-                ref readonly var entry = ref skip(entries, i);
-                f.Append(F.Type, entry.Type);
-                f.Delimit(F.Name, entry.Name);
-                f.EmitEol();
-            }
-
-            using var dst = target.Writer();
-            dst.Write(f.Format());
-
-            Wf.EmittedTable<DocLibEntry>(Host, EmissionCount, target);
         }
     }
 }

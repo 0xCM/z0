@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Linq;
     using System.Reflection;
-    using System.IO;
 
     using static Konst;
     using static z;
@@ -21,21 +20,21 @@ namespace Z0
         /// </summary>
         /// <param name="src">The type to query</param>
         [Op]
-        public static ApiResource[] api(Type src)
+        public static ApiMemberRes[] api(Type src)
             => src.StaticProperties()
                  .Ignore()
                   .WithPropertyType(Q.ResAccessorTypes)
                   .Select(p => p.GetGetMethod(true))
                   .Where(m  => m != null)
                   .Concrete()
-                  .Select(x => new ApiResource(Q.uri(src), x, Q.FormatAccessor(x.ReturnType)));
+                  .Select(x => new ApiMemberRes(Q.uri(src), x, Q.FormatAccessor(x.ReturnType)));
 
         /// <summary>
         /// Queries the source assemblies for ByteSpan property getters
         /// </summary>
         /// <param name="src">The assemblies to query</param>
         [MethodImpl(Inline), Op]
-        public static ResourceAccessors accessors(Assembly[] src)
+        public static ResAccessors accessors(Assembly[] src)
             => accessors(src.SelectMany(x => x.GetTypes()));
 
         /// <summary>
@@ -43,7 +42,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The assembly to query</param>
         [MethodImpl(Inline), Op]
-        public static ResourceAccessors accessors(Assembly src)
+        public static ResAccessors accessors(Assembly src)
             => accessors(src.GetTypes());
 
         /// <summary>
@@ -51,7 +50,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The types to query</param>
         [MethodImpl(Inline), Op]
-        public static ResourceAccessors accessors(Type[] src)
+        public static ResAccessors accessors(Type[] src)
             => src.Where(t => !t.IsInterface).SelectMany(api).Array();
 
         /// <summary>
@@ -59,9 +58,9 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source assembly</param>
         [Op]
-        public static ResourceDeclarations[] declarations(Assembly src)
+        public static ResDeclarations[] declarations(Assembly src)
             => (from a in accessors(src).Accessors
                 let t = a.Member.DeclaringType
-                group a by t).Map(x => new ResourceDeclarations(x.Key, x.ToArray()));
+                group a by t).Map(x => new ResDeclarations(x.Key, x.ToArray()));
     }
 }

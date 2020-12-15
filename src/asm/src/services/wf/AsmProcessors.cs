@@ -6,13 +6,11 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
 
     using static Konst;
     using static z;
 
     using Z0.Asm;
-
 
     [ApiHost]
     public readonly struct AsmProcessors
@@ -37,7 +35,7 @@ namespace Z0
         public static PartAsmProcessor parts(IWfShell wf)
             => new PartAsmProcessor(wf);
 
-        public static void save(ReadOnlySpan<CapturedApiResource> src, FS.FilePath dst)
+        public static void save(ReadOnlySpan<CapturedApiRes> src, FS.FilePath dst)
         {
             const ulong Cut = 0x55005500550;
             const string Sep = SpacePipe;

@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Describes/models a literal text resource
     /// </summary>
-    public struct StringResource : ITextual
+    public struct StringRes : ITextual
     {
         const string RenderPattern = "{0,-10} | {1,-16} | {2}";
 
@@ -33,7 +33,7 @@ namespace Z0
         public string Value;
 
         [MethodImpl(Inline)]
-        public StringResource(FieldInfo src, MemoryAddress address, string value)
+        public StringRes(FieldInfo src, MemoryAddress address, string value)
         {
             Source = src;
             Address = address;

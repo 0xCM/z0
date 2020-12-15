@@ -435,19 +435,5 @@ namespace Z0
         double NextF64()
             => ((double)Points.Next())/double.MaxValue;
 
-        public Interval<T> Domain<T>()
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(double))
-                return (force<T>(long.MinValue/2), force<T>(long.MaxValue/2));
-            else if(typeof(T) == typeof(float))
-                return (force<T>(int.MinValue/2), force<T>(int.MaxValue/2));
-            else
-            {
-                var min = NumericKinds.signed<T>() ? gmath.negate(gmath.sra(z.maxval<T>(), 1)) : z.minval<T>();
-                var max = NumericKinds.signed<T>() ? gmath.sra(z.maxval<T>(), 1)  : z.maxval<T>();
-                return (min,max);
-            }
-        }
     }
 }

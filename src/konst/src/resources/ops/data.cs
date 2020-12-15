@@ -8,20 +8,19 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static z;
 
     partial struct Resources
     {
         /// <summary>
-        /// Reveals the data represented by a <see cref='ResourceDescriptor'/>
+        /// Reveals the data represented by a <see cref='ResDescriptor'/>
         /// </summary>
         /// <param name="src">The source descriptor</param>
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<byte> data(in ResourceDescriptor src)
+        public static ReadOnlySpan<byte> data(in ResDescriptor src)
             => MemoryView.view(src.Address, src.Size);
 
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<char> utf8(in ResourceDescriptor src)
+        public static ReadOnlySpan<char> utf8(in ResDescriptor src)
             => Encoded.utf8(data(src));
     }
 }

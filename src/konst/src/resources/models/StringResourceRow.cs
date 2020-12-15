@@ -9,12 +9,11 @@ namespace Z0
     using System.Runtime.InteropServices;
 
     using static Konst;
-    using static z;
 
     using api = Resources;
 
     [StructLayout(LayoutKind.Sequential)]
-    public struct StringResourceRow : ITextual
+    public struct StringResRow : ITextual
     {
         public const string RenderPattern = "{0} | {1} | {2}";
 

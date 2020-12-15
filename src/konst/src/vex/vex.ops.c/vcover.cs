@@ -23,7 +23,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref Vector128<T> vcover<S,T>(W128 w, ref S src)
             where T : unmanaged
-                => ref z.@as<S,Vector128<T>>(src);
+                => ref @as<S,Vector128<T>>(src);
 
         /// <summary>
         /// Hydrates a 256-bit T-vector from an S-reference

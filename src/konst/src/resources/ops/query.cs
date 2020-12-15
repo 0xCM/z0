@@ -13,11 +13,11 @@ namespace Z0
     partial struct Resources
     {
         [MethodImpl(Inline), Op]
-        public static ResourceQuery query(Assembly src)
-            => new ResourceQuery(src, Resources.descriptors(src));
+        public static ResQuery query(Assembly src)
+            => new ResQuery(src, Resources.descriptors(src));
 
         [MethodImpl(Inline), Op]
-        public static ResourceQuery query(Assembly src, utf8 match)
-            => new ResourceQuery(src, Resources.descriptors(src, match));
+        public static ResQuery query(Assembly src, utf8 match)
+            => new ResQuery(src, Resources.descriptors(src, match));
     }
 }

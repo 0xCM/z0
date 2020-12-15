@@ -8,13 +8,12 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static z;
 
     partial struct Resources
     {
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static StringResource<E> define<E>(E id, MemoryAddress location, uint length)
+        public static StringRes<E> define<E>(E id, MemoryAddress location, uint length)
             where E : unmanaged
-                => new StringResource<E>(id, location, length);
+                => new StringRes<E>(id, location, length);
     }
 }

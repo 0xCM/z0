@@ -16,7 +16,7 @@ namespace Z0
         /// Packs 2 bits into the least bits of an unsigned integer
         /// </summary>
         [MethodImpl(Inline), Pack]
-        public static uint pack(Bit32 b0, Bit32 b1)
+        public static uint pack(bit b0, bit b1)
         {
             var dst = (uint)b0;
             dst |= ((uint)b1 << 1);
@@ -27,7 +27,7 @@ namespace Z0
         /// Packs 3 bits into the least bits of an unsigned integer
         /// </summary>
         [MethodImpl(Inline), Pack]
-        public static uint pack(Bit32 b0, Bit32 b1, Bit32 b2)
+        public static uint pack(bit b0, bit b1, bit b2)
         {
             var dst = (uint)b0;
             dst |= ((uint)b1 << 1);
@@ -39,7 +39,7 @@ namespace Z0
         /// Packs 4 bits into the least bits of an unsigned integer
         /// </summary>
         [MethodImpl(Inline), Pack]
-        public static uint pack(Bit32 b0, Bit32 b1, Bit32 b2, Bit32 b3)
+        public static uint pack(bit b0, bit b1, bit b2, bit b3)
         {
             var dst = (uint)b0;
             dst |= ((uint)b1 << 1);

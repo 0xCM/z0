@@ -26,13 +26,13 @@ namespace Z0
             ref var tmp = ref uint8(ref buffer);
             ref var lead = ref first(dst);
             unpack1x8x8((byte)src, ref tmp);
-            vconvert(n64, in tmp, n256, n32).StoreTo(ref lead);
+            vconvert32u(n64, in tmp, n256).StoreTo(ref lead);
             unpack1x8x8((byte)(src >> 8), ref tmp);
-            vconvert(n64, in tmp, n256, n32).StoreTo(ref lead, 8);
+            vconvert32u(n64, in tmp, n256).StoreTo(ref lead, 8);
             unpack1x8x8((byte)(src >> 16), ref tmp);
-            vconvert(n64, in tmp, n256, n32).StoreTo(ref lead, 16);
+            vconvert32u(n64, in tmp, n256).StoreTo(ref lead, 16);
             unpack1x8x8((byte)(src >> 24), ref tmp);
-            vconvert(n64, in tmp, n256, n32).StoreTo(ref lead, 24);
+            vconvert32u(n64, in tmp, n256).StoreTo(ref lead, 24);
         }
     }
 }

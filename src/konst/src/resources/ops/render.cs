@@ -5,19 +5,16 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Text;
 
     using static Konst;
-    using static z;
 
-    using F = BinaryResourceField;
+    using F = BinaryResField;
 
     partial struct Resources
     {
         [Op]
-        public void render(in BinaryResourceRow src, StringBuilder dst)
+        public void render(in BinaryResRow src, StringBuilder dst)
         {
             delimit(dst, F.Offset, src.Offset.Format());
             delimit(dst, F.Address, src.Address);

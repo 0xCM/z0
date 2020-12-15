@@ -27,7 +27,7 @@ namespace Z0
         {
             var a = vinflate(x, n256, z16i);
             var b = vinflate(y, n256, z16i);
-            return vcompact(vhadd(a,b), n128, z8i);
+            return vcompact8i(vhadd(a,b), n128, z8i);
         }
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace Z0
         {
             var z0 = vinflate(x, n256, z16i);
             var z1 = vinflate(y, n256, z16i);
-            return vcompact(vhadd(z0,z1), n128, z8);
+            return vcompact8u(vhadd(z0,z1), n128, z8);
         }
 
         /// <summary>
@@ -71,7 +71,7 @@ namespace Z0
         {
             (var x0, var x1) = vinflate(x,n512, z16i);
             (var y0, var y1) = vinflate(x,n512, z16i);
-            return vcompact(vhadd(x0,y0),vhadd(x1,y1),n256,z8i);
+            return vcompact8i(vhadd(x0,y0),vhadd(x1,y1),n256,z8i);
         }
 
         /// <summary>

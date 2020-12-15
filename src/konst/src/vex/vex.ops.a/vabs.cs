@@ -35,7 +35,7 @@ namespace Z0
             => v16i(Abs(src));
 
         /// <summary>
-        /// __m128i _mm_abs_epi32 (__m128i a)PABSD xmm, xmm/m128
+        /// __m128i _mm_abs_epi32 (__m128i a) PABSD xmm, xmm/m128
         /// Computes the absolute value of each source component
         /// </summary>
         /// <param name="src">The source vector</param>
@@ -64,7 +64,7 @@ namespace Z0
             => v8i(Abs(src));
 
         /// <summary>
-        /// __m256i _mm256_abs_epi16 (__m256i a)VPABSW ymm, ymm/m256
+        /// __m256i _mm256_abs_epi16 (__m256i a) VPABSW ymm, ymm/m256
         /// Computes the absolute value of each source component
         /// </summary>
         /// <param name="src">The source vector</param>
@@ -74,7 +74,7 @@ namespace Z0
 
         /// <summary>
         /// Computes the absolute value of each source component
-        ///  __m256i _mm256_abs_epi32 (__m256i a)VPABSD ymm, ymm/m256
+        ///  __m256i _mm256_abs_epi32 (__m256i a) VPABSD ymm, ymm/m256
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Abs]

@@ -12,11 +12,14 @@ namespace Z0
 
     partial struct z
     {
-
+        /// <summary>
+        /// Creates a <see cref='List<T>'/> from a parameter array
+        /// </summary>
+        /// <param name="src">The source elements</param>
+        /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static List<T> list<T>(params T[] src)
             => sys.list(src);
-
 
         /// <summary>
         /// Creates a list with specified capacity

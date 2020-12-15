@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static z;
 
     [ApiHost(ApiNames.Links, true)]
     public readonly struct Links
@@ -30,6 +29,13 @@ namespace Z0
         public static Link<T> link<T>(T src, T dst)
             => new Link<T>(src,dst);
 
+        /// <summary>
+        /// Defines a link from a source to a target
+        /// </summary>
+        /// <param name="src">The source</param>
+        /// <param name="dst">THe target</param>
+        /// <typeparam name="S">The source type</typeparam>
+        /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline)]
         public static Link<S,T> link<S,T>(S src, T dst)
             => new Link<S,T>(src, dst);
@@ -41,11 +47,11 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static uint hash32(LinkType src)
-            => hash(src.Source) ^ hash(src.Target) ^ hash(src.Kind);
+            => alg.hash.calc(src.Source) ^ alg.hash.calc(src.Target) ^ alg.hash.calc(src.Kind);
 
         [MethodImpl(Inline), Op]
         public static ulong hash64(LinkType src)
-            => hash(src.Kind, src.Source, src.Target);
+            => alg.hash.calc(src.Kind, src.Source, src.Target);
 
         [MethodImpl(Inline), Op]
         public static bool eq(LinkType a, LinkType b)

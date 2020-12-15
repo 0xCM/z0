@@ -13,11 +13,11 @@ namespace Z0
     partial struct Resources
     {
         [Op]
-        public static StringResource[] strings(Type src)
+        public static StringRes[] strings(Type src)
         {
             var values = span(Literals.values2<string>(src));
             var count = values.Length;
-            var buffer = alloc<StringResource>(count);
+            var buffer = alloc<StringRes>(count);
             var dst = span(buffer);
             for(var i=0u; i<count; i++)
             {
@@ -31,12 +31,12 @@ namespace Z0
         }
 
         [Op, Closures(UnsignedInts)]
-        public static StringResource<T>[] strings<T>(Type src)
+        public static StringRes<T>[] strings<T>(Type src)
             where T : unmanaged
         {
             var values = span(Literals.values2<string>(src));
             var count = values.Length;
-            var buffer = alloc<StringResource<T>>(count);
+            var buffer = alloc<StringRes<T>>(count);
             var dst = span(buffer);
             for(var i=0u; i<count; i++)
             {

@@ -26,7 +26,7 @@ namespace Z0
         {
             var y = v16u(count);
             var dst = vsllr(vinflate(src,w256,z16),y);
-            return z.vcompact(dst, w128, z8);
+            return z.vcompact8u(dst, w128, z8);
         }
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace Z0
         {
             var y = v16i(count);
             var dst = vsllr(vinflate(src,w256,z16i),y);
-            return z.vcompact(dst, w128, z8i);
+            return z.vcompact8i(dst, w128, z8i);
         }
 
         /// <summary>
@@ -112,7 +112,7 @@ namespace Z0
             var y = v16i(count);
             var lo = vsllr(vinflate(z.vlo(src),w256,z16i),y);
             var hi = vsllr(vinflate(z.vhi(src),w256,z16i),y);
-            return z.vcompact(lo,hi, w256, z8i);
+            return z.vcompact8i(lo,hi, w256, z8i);
         }
 
         /// <summary>
@@ -126,7 +126,7 @@ namespace Z0
             var y = v16u(count);
             var lo = vsllr(vinflate(z.vlo(src),w256,z16),y);
             var hi = vsllr(vinflate(z.vhi(src),w256,z16),y);
-            return z.vcompact(lo,hi, w256, z8);
+            return z.vcompact8u(lo,hi, w256, z8);
         }
 
         /// <summary>

@@ -27,9 +27,9 @@ namespace Z0
             ref var lead = ref first(dst);
 
             Bits.unpack1x8x8((byte)src, ref tmp);
-            vconvert(n64, in tmp, n256, n32).StoreTo(ref lead);
+            vconvert32u(n64, in tmp, n256).StoreTo(ref lead);
             Bits.unpack1x8x8((byte)(src >> 8), ref tmp);
-            vconvert(n64, in tmp, n256, n32).StoreTo(ref lead, 8);
+            vconvert32u(n64, in tmp, n256).StoreTo(ref lead, 8);
         }
     }
 }

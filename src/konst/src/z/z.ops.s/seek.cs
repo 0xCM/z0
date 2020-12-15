@@ -72,6 +72,10 @@ namespace Z0
             => ref memory.seek(src,count);
 
         [MethodImpl(Inline)]
+        public static ref T seek<T>(T[] src, int count)
+            => ref memory.seek(src, (ulong)count);
+
+        [MethodImpl(Inline)]
         public static ref T seek<T>(T[] src, uint count)
             => ref memory.seek(src,count);
 

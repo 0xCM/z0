@@ -13,7 +13,7 @@ namespace Z0
     partial struct Resources
     {
         [MethodImpl(Inline), Op]
-        public static string format(in StringResourceRow src)
-            => Z0.text.format(StringResourceRow.RenderPattern, src.Id, src.Address, z.format(Resources.view(src)));
+        public static string format(in StringResRow src)
+            => Z0.text.format(StringResRow.RenderPattern, src.Id, src.Address, z.format(Resources.view(src)));
     }
 }

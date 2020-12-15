@@ -22,7 +22,7 @@ namespace Z0.Dynamics.Operators
             => _OPSafe.Require();
 
         static Option<Func<T,T,bool>> TryConstruct()
-            => Try(() =>
+            => @try(() =>
                 {
                     switch (sys.typecode<T>())
                     {

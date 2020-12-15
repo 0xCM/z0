@@ -5,7 +5,7 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
     using static Konst;
@@ -41,7 +41,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <param name="w">The target component width</param>
         [MethodImpl(Inline), VZip]
-        public static Vector256<sbyte> vzip(Vector256<short> x, Vector256<short> y, W8 w)            
+        public static Vector256<sbyte> vzip(Vector256<short> x, Vector256<short> y, W8 w)
             => vperm4x64(vpackss(x,y), Perm4L.ACBD);
 
         /// <summary>
@@ -61,7 +61,7 @@ namespace Z0
         /// <param name="y">The second source vector</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), VZip]
-        public static Vector256<byte> vzip(Vector256<ushort> x, Vector256<ushort> y, W8 w)            
+        public static Vector256<byte> vzip(Vector256<ushort> x, Vector256<ushort> y, W8 w)
             => vperm4x64(vpackus(x,y), Perm4L.ACBD);
 
         /// <summary>
@@ -80,7 +80,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <param name="w">The target component width</param>
         [MethodImpl(Inline), VZip]
-        public static Vector256<short> vzip(Vector256<int> x, Vector256<int> y, W16 w)            
+        public static Vector256<short> vzip(Vector256<int> x, Vector256<int> y, W16 w)
             => vperm4x64(vpackss(x,y), Perm4L.ACBD);
 
         /// <summary>
@@ -94,7 +94,7 @@ namespace Z0
             => vpackus(x,y);
 
         /// <summary>
-        ///__m128i _mm_packus_epi32 (__m128i a, __m128i b)PACKUSDW xmm, xmm/m128 
+        ///__m128i _mm_packus_epi32 (__m128i a, __m128i b)PACKUSDW xmm, xmm/m128
         /// (4x32w,4x32w) -> 8x16w
         /// </summary>
         /// <param name="x">The left vector</param>
@@ -135,13 +135,13 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <param name="w">The target component width</param>
-        /// <remarks>The vpackus intrinsic emits a vector in the following form: 
+        /// <remarks>The vpackus intrinsic emits a vector in the following form:
         /// [0, 1, 2, 3, 8, 9, 10, 11, 4, 5, 6, 7, 12, 13, 14, 15]
-        /// To make use of the result, it must be permuted to a more reasonable order, 
+        /// To make use of the result, it must be permuted to a more reasonable order,
         /// [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
         /// </remarks>
         [MethodImpl(Inline), VZip]
-        public static Vector256<ushort> vzip(Vector256<uint> x, Vector256<uint> y, W16 w)            
+        public static Vector256<ushort> vzip(Vector256<uint> x, Vector256<uint> y, W16 w)
             => vperm4x64(vpackus(x,y), Perm4L.ACBD);
 
         /// <summary>
@@ -151,8 +151,8 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <param name="w">The target component width</param>
         [MethodImpl(Inline), VZip]
-        public static Vector128<byte> vzip(Vector256<uint> x, Vector256<uint> y, W8 w)  
-            => vcompact(vcompact(x, y, n256,z16), w128, z8);
+        public static Vector128<byte> vzip(Vector256<uint> x, Vector256<uint> y, W8 w)
+            => vcompact8u(vcompact16u(x, y, n256,z16), w128, z8);
 
         /// <summary>
         /// (2x64w,2x64w) -> 4x32w
@@ -172,7 +172,7 @@ namespace Z0
         /// <param name="w">The target component width</param>
         [MethodImpl(Inline), VZip]
         public static Vector256<uint> vzip(Vector256<ulong> x, Vector256<ulong> y, W32 w)
-            => vconcat(vcompact(x, n128,z32), vcompact(y, n128,z32));
+            => vconcat(vcompact32u(x, n128,z32), vcompact32u(y, n128,z32));
 
         /// <summary>
         /// (4x32u,4x32u,4x32u,4x32u) -> 16x8u
@@ -183,8 +183,8 @@ namespace Z0
         /// <param name="x3">The fourth source vector</param>
         /// <param name="w">The target component width</param>
         [MethodImpl(Inline), VZip]
-        public static Vector128<byte> vzip(Vector128<uint> x0, Vector128<uint> x1, Vector128<uint> x2, Vector128<uint> x3, W8 w)            
-            => vcompact(vcompact(x0,x1,n128,z8), vcompact(x2,x3,n128,z8),w128,z8);
+        public static Vector128<byte> vzip(Vector128<uint> x0, Vector128<uint> x1, Vector128<uint> x2, Vector128<uint> x3, W8 w)
+            => vcompact8u(vcompact16u(x0,x1,n128,z8), vcompact16u(x2,x3,n128,z8),w128,z8);
 
         /// <summary>
         /// (8x32u,8x32u,8x32u,8x32u) -> 32x8w
@@ -195,7 +195,7 @@ namespace Z0
         /// <param name="x3">The fourth source vector</param>
         /// <param name="w">The target component width</param>
         [MethodImpl(Inline), VZip]
-        public static Vector256<byte> vzip(Vector256<uint> x0, Vector256<uint> x1, Vector256<uint> x2, Vector256<uint> x3, W8 w) 
-            => vcompact(vcompact(x0,x1,n256,z16), vcompact(x2,x3,n256,z16), w256, z8);
+        public static Vector256<byte> vzip(Vector256<uint> x0, Vector256<uint> x1, Vector256<uint> x2, Vector256<uint> x3, W8 w)
+            => vcompact8u(vcompact16u(x0,x1,n256,z16), vcompact16u(x2,x3,n256,z16), w256, z8);
     }
 }

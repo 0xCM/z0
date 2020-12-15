@@ -39,7 +39,7 @@ namespace Z0
         {
             var x = v16u(ShiftRightLogical(z.vinflate(src, n256, z16i),count));
             var y = z.vand(x,v16u(z.vbroadcast(n256, byte.MaxValue)));
-            return v8i(z.vcompact(y,n128,z8));
+            return v8i(z.vcompact8u(y,n128,z8));
         }
 
         /// <summary>
@@ -113,7 +113,7 @@ namespace Z0
             var x = v16u(ShiftRightLogical(vinflate(z.vlo(src), n256, z16i),count));
             var y = v16u(ShiftRightLogical(vinflate(z.vhi(src), n256, z16i),count));
             var m = v16u(z.vbroadcast(n256, byte.MaxValue));
-            return v8i(z.vcompact(z.vand(x,m), z.vand(y,m),n256,z8));
+            return v8i(z.vcompact8u(z.vand(x,m), z.vand(y,m),n256,z8));
         }
 
         /// <summary>

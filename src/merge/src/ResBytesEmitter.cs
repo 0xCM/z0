@@ -9,7 +9,6 @@ namespace Z0
     using System.Collections.Generic;
 
     using static CodeGenerator;
-    using static Konst;
     using static z;
 
     [WfHost]
@@ -29,10 +28,10 @@ namespace Z0
             step.Run();
         }
 
-        public static HostResources emit(in ApiHostCodeBlocks src, FS.FolderPath dst)
+        public static ApiHostRes emit(in ApiHostCodeBlocks src, FS.FolderPath dst)
         {
             var target = (dst + FS.folder("src")) + FS.file(src.Host.FileName(FileExtensions.Cs).Name);
-            var resources = HostResources.from(src);
+            var resources = ApiHostRes.from(src);
             var hostname = src.Host.Name.ReplaceAny(array('.'), '_');
             var typename = text.concat(src.Host.Owner.Format(), Chars.Underscore, hostname);
             var members = new HashSet<string>();
@@ -101,7 +100,7 @@ namespace Z0
             Wf.Disposed();
         }
 
-        void Emitted(HostResources src)
+        void Emitted(ApiHostRes src)
             => Wf.Processed(src.Host, src.Count);
 
         public void Run()

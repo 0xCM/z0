@@ -41,7 +41,7 @@ namespace Z0
         /// <param name="t">A target cell type representative</param>
         [MethodImpl(Inline), Op]
         public static Vector256<ushort> vinflate(Vector128<byte> src, W16 w)
-            => vconvert(src, w256, z16);
+            => vconvert16u(src, w256, z16);
 
         /// <summary>
         /// 8x16i -> 8x32i
@@ -51,7 +51,7 @@ namespace Z0
         /// <param name="t">A target component type representative</param>
         [MethodImpl(Inline), Op]
         public static Vector256<int> vinflate(Vector128<short> src, W32 w)
-            => vconvert(src, w256, z32i);
+            => vconvert32i(src, w256, z32i);
 
         /// <summary>
         /// 4x32u -> 4x64u
@@ -61,7 +61,7 @@ namespace Z0
         /// <param name="x1">The second target vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<ulong> vinflate(Vector128<uint> src, W64 w)
-            => vconvert(src, w256, z64);
+            => vconvert64u(src, w256, z64);
 
         /// <summary>
         /// 4x32w -> 4x64w
@@ -70,7 +70,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<long> vinflate(Vector128<int> src, W64 w)
-            => vconvert(src, w256, w64i);
+            => vconvert64i(src, w256, w64i);
 
         /// <summary>
         /// 16x8u -> 16x32u
@@ -80,7 +80,7 @@ namespace Z0
         /// <param name="t">A target component type representative</param>
         [MethodImpl(Inline), Op]
         public static Vector512<uint> vinflate(Vector128<byte> src, W32 w)
-            => vconvert(src, w512, z32);
+            => vconvert32u(src, w512, z32);
 
         /// <summary>
         /// 8x16u -> 8x32u
@@ -91,12 +91,21 @@ namespace Z0
         /// <param name="t">A target component type representative</param>
         [MethodImpl(Inline), Op]
         public static Vector256<uint> vinflate(Vector128<ushort> src, W32 w)
-            => vconvert(src, w256, z32);
+            => vconvert32u(src, w256, z32);
 
+        /// <summary>
+        /// __m256i _mm256_cvtepu8_epi16 (__m128i a) VPMOVZXBW ymm, xmm
+        /// </summary>
+        /// <param name="w"></param>
+        /// <param name="src"></param>
         [MethodImpl(Inline), Op]
         public static Vector256<ushort> vinflate(W128 w, in byte src)
             => ConvertToVector256Int16(vload(w, src)).AsUInt16();
 
+        /// <summary>
+        /// __m256i _mm256_cvtepu8_epi16 (__m128i a) VPMOVZXBW ymm, xmm
+        /// </summary>
+        /// <param name="src"></param>
         [MethodImpl(Inline), Op]
         public static Vector256<ushort> vinflate(Vector128<byte> src)
             => ConvertToVector256Int16(src).AsUInt16();
@@ -109,7 +118,7 @@ namespace Z0
         /// <param name="hi">The target for the upper source elements</param>
         [MethodImpl(Inline), Op]
         public static Vector256<short> vinflate(Vector128<sbyte> src, W16 w, short t)
-            => vconcat(vmaplo(src, n128, t), vmaphi(src, n128, t));
+            => vconcat(vmaplo16i(src, n128, t), vmaphi16i(src, n128, t));
 
         /// <summary>
         /// 16x8u -> 16x16u
@@ -119,7 +128,7 @@ namespace Z0
         /// <param name="t">A target cell type representative</param>
         [MethodImpl(Inline), Op]
         public static Vector256<short> vinflate(Vector128<byte> src, N256 w, short t)
-            => vconvert(src, w, t);
+            => vconvert16i(src, w, t);
 
         /// <summary>
         /// 16x8i -> 16x16i
@@ -129,7 +138,7 @@ namespace Z0
         /// <param name="hi">The target for the upper source elements</param>
         [MethodImpl(Inline), Op]
         public static Vector256<short> vinflate(Vector128<sbyte> src, N256 w, short t)
-            => vconcat(vmaplo(src, n128, t), vmaphi(src, n128, t));
+            => vconcat(vmaplo16i(src, n128, t), vmaphi16i(src, n128, t));
 
         /// <summary>
         /// 16x8u -> 16x16u
@@ -139,7 +148,7 @@ namespace Z0
         /// <param name="t">A target cell type representative</param>
         [MethodImpl(Inline), Op]
         public static Vector256<ushort> vinflate(Vector128<byte> src, N256 w, ushort t)
-            => vconvert(src, w, t);
+            => vconvert16u(src, w, t);
 
         /// <summary>
         /// 8x16i -> 8x32i
@@ -149,7 +158,7 @@ namespace Z0
         /// <param name="t">A target component type representative</param>
         [MethodImpl(Inline), Op]
         public static Vector256<int> vinflate(Vector128<short> src, N256 w, int t)
-            => vconvert(src, w,t);
+            => vconvert32i(src, w,t);
 
         /// <summary>
         /// 4x32u -> 4x64u
@@ -159,7 +168,7 @@ namespace Z0
         /// <param name="x1">The second target vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<ulong> vinflate(Vector128<uint> src, N256 w, ulong t)
-            => vconvert(src, w, t);
+            => vconvert64u(src, w, t);
 
         /// <summary>
         /// 4x32w -> 4x64w
@@ -168,7 +177,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<long> vinflate(Vector128<int> src, N256 w, W64i t)
-            => vconvert(src, w, t);
+            => vconvert64i(src, w, t);
 
         /// <summary>
         /// 16x8u -> 16x32u
@@ -178,7 +187,7 @@ namespace Z0
         /// <param name="t">A target component type representative</param>
         [MethodImpl(Inline), Op]
         public static Vector512<uint> vinflate(Vector128<byte> src, N512 w, uint t)
-            => vconvert(src, w, t);
+            => vconvert32u(src, w, t);
 
         /// <summary>
         /// 8x16u -> 8x32u
@@ -189,6 +198,6 @@ namespace Z0
         /// <param name="t">A target component type representative</param>
         [MethodImpl(Inline), Op]
         public static Vector256<uint> vinflate(Vector128<ushort> src, N256 w, uint t)
-            => vconvert(src, w, t);
+            => vconvert32u(src, w, t);
     }
 }

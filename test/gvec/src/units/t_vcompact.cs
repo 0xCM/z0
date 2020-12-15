@@ -20,11 +20,11 @@ namespace Z0
             var c = gvec.vinc<uint>(n,8);
             var d = gvec.vinc<uint>(n,12);
             Vector512<uint> v512 = (a,b,c,d);
-            var abActual = z.vcompact(a,b,n128,z16);
+            var abActual = z.vcompact16u(a,b,n128,z16);
             var abExpect = z.vinc<ushort>(n);
             Claim.veq(abExpect, abActual);
 
-            var abcdActual = vcompact(a,b,c,d, n128, z8);
+            var abcdActual = vcompact8u(a,b,c,d, n128, z8);
             var abcdExpect = vinc<byte>(n);
             Claim.veq(abcdExpect, abcdActual);
         }
@@ -40,7 +40,7 @@ namespace Z0
 
             var x = vsub(vsmax, gvec.vinc(w, z16));
             var y = vsub(vsmax, gvec.vinc(w, (ushort)8));
-            var actual = vcompact(x,y,n128,z8);
+            var actual = vcompact8u(x,y,n128,z8);
 
             Claim.veq(expect,actual);
         }
@@ -56,7 +56,7 @@ namespace Z0
 
             var x = vsub(vsmax, gvec.vinc(w, z16));
             var y = vsub(vsmax, gvec.vinc(w, (ushort)16));
-            var actual = vcompact(x,y,n256,z8);
+            var actual = vcompact8u(x,y,n256,z8);
 
             Claim.veq(expect,actual);
         }
@@ -72,7 +72,7 @@ namespace Z0
 
             var x = vsub(vsmax, gvec.vinc(w, 0u));
             var y = vsub(vsmax, gvec.vinc(w, 4u));
-            var actual = vcompact(x,y,n128,z16);
+            var actual = vcompact16u(x,y,n128,z16);
 
             Claim.veq(expect,actual);
         }
@@ -87,7 +87,7 @@ namespace Z0
 
             var x = vsub(vsmax, gvec.vinc(w, 0u));
             var y = vsub(vsmax, gvec.vinc(w, 8u));
-            var v = vcompact(x,y,n256,z16);
+            var v = vcompact16u(x,y,n256,z16);
             var expect = vsub(vtmax, gvec.vinc(w,z16));
             Claim.veq(expect,v);
         }
@@ -97,7 +97,7 @@ namespace Z0
             var n = n128;
             var x0 = vparts(n, 25, 50);
             var x1 = vparts(n, 75, 10);
-            var dst = vcompact(x0,x1,n128,z32);
+            var dst = vcompact32u(x0,x1,n128,z32);
             var expect = vparts(n,25,50,75,10);
             Claim.veq(expect,dst);
         }

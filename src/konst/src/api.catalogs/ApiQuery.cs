@@ -168,14 +168,14 @@ namespace Z0
         }
 
         [Op]
-        internal static ApiResourceKind FormatAccessor(Type match)
+        internal static ApiResKind FormatAccessor(Type match)
         {
             ref readonly var src = ref first(span(ResAccessorTypes));
-            var kind = ApiResourceKind.None;
+            var kind = ApiResKind.None;
             if(skip(src,0).Equals(match))
-                kind = ApiResourceKind.ByteSpan;
+                kind = ApiResKind.ByteSpan;
             else if(skip(src,1).Equals(match))
-                kind = ApiResourceKind.CharSpan;
+                kind = ApiResKind.CharSpan;
             return kind;
         }
 

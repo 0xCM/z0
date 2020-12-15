@@ -9,7 +9,6 @@ namespace Z0
     using System.Linq;
     using System.Reflection;
 
-    using static Konst;
     using static z;
 
     using Q = ApiQuery;
@@ -17,7 +16,6 @@ namespace Z0
     [ApiHost(ApiNames.ApiCatalogs, true)]
     public readonly struct ApiCatalogs
     {
-
         /// <summary>
         /// Creates a system-level api catalog over a set of path-identified components
         /// </summary>
@@ -122,7 +120,7 @@ namespace Z0
         /// </summary>
         [Op]
         static Option<IPart> resolve(PropertyInfo src)
-            => Try(src, x => (IPart)x.GetValue(null));
+            => @try(src, x => (IPart)x.GetValue(null));
 
         /// <summary>
         /// Searches an assembly for types tagged with the <see cref="ApiHostAttribute"/>

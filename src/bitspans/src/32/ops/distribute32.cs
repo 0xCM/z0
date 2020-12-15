@@ -14,10 +14,10 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static void distribute32(in byte src, int step, ref uint dst)
-            => vstore(vconvert(w64, in skip(src, step*8), w256, w32), ref seek(dst, step*8));
+            => vstore(vconvert32u(w64, in skip(src, step*8), w256), ref seek(dst, step*8));
 
         [MethodImpl(Inline), Op]
         public static void distribute32(in byte src, int srcstep, ref uint dst, int dststep)
-            => vstore(vconvert(w64, skip(src, srcstep*8), w256, w32), ref seek(dst, dststep*8));
+            => vstore(vconvert32u(w64, skip(src, srcstep*8), w256), ref seek(dst, dststep*8));
     }
 }

@@ -10,14 +10,14 @@ namespace Z0
 
     using static System.Runtime.CompilerServices.Unsafe;
     using static System.Runtime.InteropServices.MemoryMarshal;
-    
+
     using static Konst;
-   
+
     partial struct z
-    {   
+    {
         [MethodImpl(Inline), Op]
         public static unsafe Vector128<ulong> segment(string src)
-            => vparts(N128.N, (ulong)pchar(src), size(src));         
+            => vparts(N128.N, (ulong)pchar2(src), size(src));
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public unsafe static ReadOnlySpan<T> segment<T>(ReadOnlySpan<T> src, int i0, int i1)
@@ -25,7 +25,7 @@ namespace Z0
         {
             var count = i1 - i0 + 1;
             ref readonly var first = ref skip(src, (uint)i0);
-            return CreateReadOnlySpan(ref edit(first), count);      
+            return CreateReadOnlySpan(ref edit(first), count);
         }
 
         [MethodImpl(Inline)]
@@ -35,7 +35,7 @@ namespace Z0
         {
             var count = i1 - i0 + 1;
             ref readonly var first = ref skip(src, (uint)i0);
-            return recover<S,T>(CreateReadOnlySpan(ref edit(first), (int)count));      
+            return recover<S,T>(CreateReadOnlySpan(ref edit(first), (int)count));
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
@@ -45,7 +45,7 @@ namespace Z0
             var count = i1 - i0 + 1;
             var pFirst = Add<T>(pSrc, count);
             ref var first = ref AsRef<T>(pFirst);
-            return CreateReadOnlySpan<T>(ref first, count);      
-        }            
+            return CreateReadOnlySpan<T>(ref first, count);
+        }
     }
 }

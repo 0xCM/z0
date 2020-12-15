@@ -13,21 +13,21 @@ namespace Z0
 
     partial struct Resources
     {
-        public static TableSpan<BinaryResourceRow> rows(BinaryResources src)
+        public static TableSpan<BinaryResRow> rows(BinaryResLookup src)
         {
             var view = src.View;
             var count = view.Length;
             if(count == 0)
                 return default;
 
-            var buffer = alloc<BinaryResourceRow>(count);
+            var buffer = alloc<BinaryResRow>(count);
             rows(src,buffer);
 
             return buffer;
         }
 
         [Op]
-        public static void rows(BinaryResources src, Span<BinaryResourceRow> dst)
+        public static void rows(BinaryResLookup src, Span<BinaryResRow> dst)
         {
             var view = src.View;
             var count = view.Length;
@@ -52,7 +52,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static StringResourceRows rows(StringResource[] src)
+        public static StringResRows rows(StringRes[] src)
             => src.Select(r => row(r));
     }
 }

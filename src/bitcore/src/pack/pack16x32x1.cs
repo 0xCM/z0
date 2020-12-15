@@ -22,7 +22,7 @@ namespace Z0
         {
             var v0 = vload(n256, skip(src,0*8));
             var v1 = vload(n256, skip(src,1*8));
-            dst = vpacklsb(vcompact(v0, v1, n128, z8));
+            dst = vpacklsb(vcompact8u(v0, v1, n128, z8));
             return ref dst;
         }
 

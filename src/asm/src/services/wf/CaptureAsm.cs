@@ -9,12 +9,9 @@ namespace Z0
 
     using Z0.Asm;
 
-    using static Konst;
-    using static z;
-
     partial struct AsmRecapture
     {
-        public CapturedApiResource[] Capture(FS.FilePath src, FS.FolderPath dst)
-            => ApiResources.capture(Context, src, dst);
+        public CapturedApiRes[] Capture(FS.FilePath src, FS.FolderPath dst)
+            => ApiRes.capture(Context, src, dst);
     }
 }

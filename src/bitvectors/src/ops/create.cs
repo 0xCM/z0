@@ -53,7 +53,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The target width selector</param>
         [MethodImpl(Inline), Op]
-        public static BitVector4 create(N4 n, Bit32 b0, Bit32 b1)
+        public static BitVector4 create(N4 n, bit b0, bit b1)
         {
             var data = 0u;
             if(b0)
@@ -69,7 +69,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The target width selector</param>
         [MethodImpl(Inline), Op]
-        public static BitVector4 create(N4 n, Bit32 b0, Bit32 b1, Bit32 b2)
+        public static BitVector4 create(N4 n, bit b0, bit b1, bit b2)
         {
             var data = create(n4,b0,b1);
             if(b2)
@@ -82,7 +82,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The target width selector</param>
         [MethodImpl(Inline), Op]
-        public static BitVector4 create(N4 n, Bit32 b0, Bit32 b1, Bit32 b2, Bit32 b3)
+        public static BitVector4 create(N4 n, bit b0, bit b1, bit b2, bit b3)
         {
             var data = create(n,b0,b1,b2);
             if(b3)
@@ -113,16 +113,9 @@ namespace Z0
         /// </summary>
         /// <param name="n">The target width selector</param>
         [MethodImpl(Inline), Op]
-        public static BitVector8 create(N8 n, Bit32 b0, Bit32 b1, Bit32 b2, Bit32 b3)
+        public static BitVector8 create(N8 n, bit b0, bit b1, bit b2, bit b3)
             => (byte)Bits.pack(b0, b1, b2, b3);
 
-        /// <summary>
-        /// Creates an 8-bit bitvector from 4 explicit bits
-        /// </summary>
-        /// <param name="n">The target width selector</param>
-        [MethodImpl(Inline), Op]
-        public static BitVector8 create(N8 n, bit b0, bit b1, bit b2, bit b3)
-            => (byte)Bits.pack4x1(b0, b1, b2, b3);
 
         /// <summary>
         /// Creates an 8-bit bitvector from 8 explicit bits

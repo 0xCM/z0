@@ -23,9 +23,9 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector128<sbyte> vsllv(Vector128<sbyte> src, Vector128<sbyte> counts)
         {
-            var x = z.vinflate(src,n256,z16i);
-            var y = z.vinflate(counts,n256,z16i);
-            return z.vcompact(vsllv(x,y), n128, z8i);
+            var x = vinflate(src,n256,z16i);
+            var y = vinflate(counts,n256,z16i);
+            return vcompact8i(vsllv(x,y), n128, z8i);
         }
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace Z0
         {
             var x = vinflate(src,n256,z16);
             var y = vinflate(counts,n256,z16);
-            return z.vcompact(vsllv(x,y), n128, z8);
+            return vcompact8u(vsllv(x,y), n128, z8);
         }
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace Z0
             var a = vinflate(src, n256, z32i);
             var b = v32u(vinflate(counts,n256,z32i));
             var x = ShiftLeftLogicalVariable(a,b);
-            return z.vcompact(x,n128,z16i);
+            return vcompact16i(x,n128);
         }
 
         /// <summary>
@@ -66,7 +66,7 @@ namespace Z0
             var a = vinflate(src,n256,z16);
             var b = vinflate(counts,n256,z16);
             var c = ShiftLeftLogicalVariable(a,b);
-            return z.vcompact(c, n128, z16);
+            return vcompact16u(c, n128, z16);
         }
 
         /// <summary>
@@ -119,7 +119,7 @@ namespace Z0
         {
             (var x0, var x1) = vinflate(src, n512, z16i);
             (var s0, var s1) = vinflate(counts, n512, z16i);
-            return z.vcompact(vsllv(x0,s0),vsllv(x1,s1),n256,z8i);
+            return vcompact8i(vsllv(x0,s0),vsllv(x1,s1),n256);
         }
 
         /// <summary>
@@ -132,7 +132,7 @@ namespace Z0
         {
             (var x0, var x1) = vinflate(src, n512, z16);
             (var s0, var s1) = vinflate(counts, n512, z16);
-            return vcompact(vsllv(x0,s0),vsllv(x1,s1),n256,z8);
+            return vcompact8u(vsllv(x0,s0),vsllv(x1,s1),n256,z8);
         }
 
         /// <summary>
@@ -145,7 +145,7 @@ namespace Z0
         {
             (var x0, var x1) = vinflate(src, n512, z32i);
             (var s0, var s1) = vinflate(counts, n512, z32i);
-            return vcompact(vsllv(x0,s0),vsllv(x1,s1),n256,z16i);
+            return vcompact16i(vsllv(x0,s0),vsllv(x1,s1),n256,z16i);
         }
 
         /// <summary>
@@ -158,7 +158,7 @@ namespace Z0
         {
             (var x0, var x1) = vinflate(src, n512, z32);
             (var s0, var s1) = vinflate(counts, n512, z32);
-            return vcompact(vsllv(x0,s0), vsllv(x1,s1),n256,z16);
+            return vcompact16u(vsllv(x0,s0), vsllv(x1,s1),n256,z16);
         }
 
         /// <summary>

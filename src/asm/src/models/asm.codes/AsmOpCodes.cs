@@ -257,7 +257,7 @@ namespace Z0.Asm
         /// returns the first match; otherwise returns an empty document
         /// </summary>
         /// <param name="match">The resource identifier to match</param>
-        public static AppResourceDoc structured(string match)
+        public static AppResDoc structured(string match)
             => Extractor.MatchDocument(match);
 
         [MethodImpl(Inline), Op]
@@ -265,7 +265,7 @@ namespace Z0.Asm
             => MemoryMarshal.CreateReadOnlySpan(ref z.edit(src),1).Bytes();
 
         [Op, MethodImpl(Inline)]
-        public static void parse(in AppResourceDoc specs, Span<AsmOpCodeRow> dst)
+        public static void parse(in AppResDoc specs, Span<AsmOpCodeRow> dst)
         {
             var fields = Enums.literals<F>();
             var src = span(specs.Rows);
@@ -274,7 +274,7 @@ namespace Z0.Asm
         }
 
         [Op, MethodImpl(Inline)]
-        public static Span<AsmOpCodeRow> opcodes(in AppResourceDoc specs)
+        public static Span<AsmOpCodeRow> opcodes(in AppResDoc specs)
         {
             var dst = Spans.alloc<AsmOpCodeRow>(specs.Rows.Length);
             parse(specs, dst);
