@@ -5,8 +5,6 @@
 namespace Z0.Asm
 {
     using System;
-    using System.Linq;
-    using System.IO;
     using System.Runtime.CompilerServices;
 
     using static Konst;
@@ -29,7 +27,7 @@ namespace Z0.Asm
             Uri = host;
             ImmRoot = root;
             AsmFormatter = formatter;
-            HostArchive = ApiArchives.capture(FS.dir(root.Name), host);
+            HostArchive = WfArchives.capture(FS.dir(root.Name), host);
             CilFormatter =  Cil.formatter();
         }
 
@@ -49,7 +47,7 @@ namespace Z0.Asm
         public Option<FS.FilePath> SaveHexImm(OpIdentity id, AsmRoutine[] src, bool append)
         {
             var path = HostArchive.HexImmPath(Uri.Owner, Uri, id);
-            ApiArchives.save(src.Map(x => x.Code), FS.path(path.Name),append);
+            ApiCode.emit(src.Map(x => x.Code), FS.path(path.Name),append);
             return path;
         }
     }

@@ -80,7 +80,6 @@ namespace Z0
         {
             wf.Status(wf.Settings.FormatList());
             wf.Status(wf.Db().Root);
-            wf.Status(wf.Db().DbRoot);
         }
 
         public static void Main(params string[] args)

@@ -9,9 +9,6 @@ namespace Z0
 
     using Z0.Asm;
 
-    using static Konst;
-    using static z;
-
     public sealed class EmitHostAsm : WfHost<EmitHostAsm,ApiMemberCodeBlocks,AsmRoutines>
     {
         ICaptureContext Context;

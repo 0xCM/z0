@@ -11,7 +11,7 @@ namespace Z0
 
     partial struct Cmd
     {
-        public static FS.FilePath enqueue<T>(CmdJob<T> job, IFileDb db)
+        public static FS.FilePath enqueue<T>(CmdJob<T> job, IWfDb db)
             where T : struct, ITextual
         {
             var dst = db.JobQueue() + FS.file(job.Name, FileExtensions.Cmd);

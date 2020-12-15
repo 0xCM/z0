@@ -14,7 +14,7 @@ namespace Z0
     partial struct CmdScripts
     {
         [Op]
-        public static ref CmdScriptPattern update(IFileDb db, ref CmdScriptPattern data,
+        public static ref CmdScriptPattern update(IWfDb db, ref CmdScriptPattern data,
             string root = null, string name = null, string arg = null, CmdArgPrefix? prefix = null, string type = null)
         {
             data.CmdRootName = root == null ? data.CmdRootName : FS.folder(root);

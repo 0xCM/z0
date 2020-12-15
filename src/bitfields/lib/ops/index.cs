@@ -8,8 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Konst;
-
     partial class BitFields
     {
        public static BitFieldIndex<I,W> index<I,U,W>()

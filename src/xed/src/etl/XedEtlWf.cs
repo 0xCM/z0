@@ -46,8 +46,9 @@ namespace Z0
             Config = config;
             Settings = config.Settings;
             Source = XedWfOps.SourceArchive(Config.SourceRoot);
-            Stage = XedStage.Create(Wf.Db().StageRoot("xed"));
-            Target = DbSvc.tables(wf, "xed");
+            var db = Wf.Db();
+            Stage = XedStage.Create(db.StageRoot("xed"));
+            Target = db.TableArchive("xed");
             Wf.Created();
         }
 

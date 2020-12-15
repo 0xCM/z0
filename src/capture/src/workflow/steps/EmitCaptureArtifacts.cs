@@ -5,11 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
 
     using Z0.Asm;
 
-    using static Konst;
     using static z;
 
     public sealed class EmitCaptureArtifacts : WfHost<EmitCaptureArtifacts>
@@ -110,10 +108,12 @@ namespace Z0
 
             var parser = ApiExtractParsers.member();
             ParsedBlocks = parser.ParseMembers(Extracts);
-            Wf.Raise(new ExtractsParsed(Host, HostUri, ParsedBlocks.Count, Ct));
+
 
             if(ParsedBlocks.Count == 0)
                 return;
+
+            Wf.Status(string.Format("Parsed {0} {1} extract blocks", ParsedBlocks.Count, HostUri));
 
             EmitHostHex.run(Wf, HostUri, ParsedBlocks, out var payload);
         }

@@ -13,8 +13,8 @@ namespace Z0
         static FS.FilePath react(IWfShell wf, EmitHexIndexCmd cmd)
         {
             var dst = wf.Db().IndexTable("apihex.index");
-            var descriptors = ApiArchives.BlockDescriptors(wf);
-            var count = ApiArchives.emit(descriptors, dst);
+            var descriptors = ApiCode.descriptors(wf);
+            var count = ApiCode.emit(descriptors, dst);
             wf.EmittedTable<ApiCodeDescriptor>(count, dst);
             return dst;
         }

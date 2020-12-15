@@ -91,7 +91,7 @@ namespace Z0
             SourceDir = FS.dir(wf.Paths.AppCaptureRoot.Name);
             var root = FS.dir(@"j:\dev\projects\z0.generated");
             TargetDir = root + FS.folder(ProjectName);
-            Archive = ApiArchives.hex(FS.dir(SourceDir.Name));
+            Archive = WfArchives.hex(FS.dir(SourceDir.Name));
             Wf.Created(Host);
         }
 

@@ -9,7 +9,7 @@ namespace Z0
     partial struct CmdScripts
     {
         [Op]
-        public static ref CmdScriptPattern rules(IFileDb db, ref CmdScriptPattern data)
+        public static ref CmdScriptPattern rules(IWfDb db, ref CmdScriptPattern data)
         {
             data.CmdRoot = db.ToolExeRoot() +  data.CmdRootName;
             data.CmdName = FS.file(data.CmdHost.Format(), data.ScriptType);

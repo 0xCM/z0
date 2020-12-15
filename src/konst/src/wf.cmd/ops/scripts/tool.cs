@@ -6,13 +6,10 @@ namespace Z0
 {
     using System;
 
-    using static z;
-    using static Konst;
-
     partial struct CmdScripts
     {
         [Op]
-        public static CmdScriptPattern tool(IFileDb db, ToolId tool, string root, string arg, CmdArgPrefix? prefix = null, string type = null)
+        public static CmdScriptPattern tool(IWfDb db, ToolId tool, string root, string arg, CmdArgPrefix? prefix = null, string type = null)
         {
             var data = new CmdScriptPattern();
             data.CmdRootName = FS.folder(root);

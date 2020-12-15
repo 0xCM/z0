@@ -9,10 +9,6 @@ namespace Z0.Asm
     using System.Reflection;
     using System.Linq;
 
-    using static Konst;
-
-    using static z;
-
     public sealed class EmitImmClosures : WfHost<EmitImmClosures>
     {
         protected override void Execute(IWfShell shell)
@@ -41,7 +37,7 @@ namespace Z0.Asm
             Wf = wf.WithHost(host);
             Asm = asm;
             Formatter = formatter;
-            CodeArchive = ApiArchives.capture(root);
+            CodeArchive = WfArchives.capture(root);
             Specializer = Capture.Services.ImmSpecializer(decoder);
             Wf.Created();
         }

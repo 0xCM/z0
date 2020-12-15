@@ -24,7 +24,7 @@ namespace Z0
         public PartAsmProcessor(IWfShell wf)
         {
             Wf = wf;
-            broker = BitBrokers.broker64<AsmHandlerKind,ApiPartRoutines>();
+            broker = BitFields.broker64<AsmHandlerKind,ApiPartRoutines>();
             (this as IWfDataProcessor).Connect();
         }
 

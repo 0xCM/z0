@@ -79,7 +79,7 @@ public readonly struct ApiNames
 
     public const string ApiCallRoutes = api + dot + calls + dot + routes;
 
-    public const string ApiData = api + dot + data;
+    public const string ApiCode = api + dot + "code";
 
     // ~~ Bitlogic
     // ~~ -----------------------------------------------------------------------------------------
@@ -374,7 +374,6 @@ public readonly struct ApiNames
 
     public const string ApiParseBlocks = api + dot + blocks + parse;
 
-    public const string ApiArchives = api + dot + archives;
 
     public const string ApiRuntime = api + dot + runtime;
 
@@ -516,4 +515,7 @@ public readonly struct ApiNames
     public const string StateBuffers = buffers + dot + states;
 
     public const string PinnedBuffers = buffers + dot + "pinned";
+
+    public const string WfArchives = wf + dot + archives;
+
 }

@@ -13,7 +13,7 @@ namespace Z0
     {
         readonly IWfShell _Wf;
 
-        readonly IFileDb _Db;
+        readonly IWfDb _Db;
 
         [MethodImpl(Inline)]
         public CmdBuilder(IWfShell wf)
@@ -28,7 +28,7 @@ namespace Z0
             get => _Wf;
         }
 
-        public IFileDb Db
+        public IWfDb Db
         {
             [MethodImpl(Inline)]
             get => _Db;

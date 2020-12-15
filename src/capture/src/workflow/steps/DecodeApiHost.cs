@@ -70,7 +70,7 @@ namespace Z0
                     dst[i] = decoded ? decoded.Value : AsmRoutine.Empty;
                 }
 
-                Wf.Raise(new FunctionsDecoded(Host, uri, dst, Wf.Ct));
+                Wf.Status(string.Format("Decoded {0} {1} functions", dst.Length, uri));
                 return dst;
             }
             catch(Exception e)

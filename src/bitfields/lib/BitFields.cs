@@ -16,6 +16,11 @@ namespace Z0
         const NumericKind Closure = UnsignedInts;
 
         [MethodImpl(Inline)]
+        public static BitBroker<K,T> broker64<K,T>(K kind = default, T rep = default)
+            where K : unmanaged, Enum
+                => new BitBroker<K,T>(kind);
+
+        [MethodImpl(Inline)]
         public static BitField64<E> bf64<E>(E state)
             where E : unmanaged, Enum
                 => new BitField64<E>(state);

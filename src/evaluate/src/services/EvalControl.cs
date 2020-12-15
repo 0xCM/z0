@@ -8,7 +8,6 @@ namespace Z0
 
     using K = Kinds;
 
-    using static Konst;
     using static z;
 
     public class EvalControl : IEvalControl
@@ -31,13 +30,13 @@ namespace Z0
             BufferSize = buffersize;
             Context = context;
             Dispatcher = Evaluate.dispatcher(random, context, buffersize);
-            CodeArchive = ApiArchives.capture(root);
+            CodeArchive = WfArchives.capture(root);
             ApiSet = context.Api;
         }
 
         void ExecuteHost(BufferTokens buffers, IApiHost host)
         {
-            var dst = ApiArchives.capture(FS.dir(CodeArchive.ArchiveRoot.Name), host.Uri);
+            var dst = WfArchives.capture(FS.dir(CodeArchive.ArchiveRoot.Name), host.Uri);
             if(dst.HostX86Path.Exists)
             {
                 var code = ApiQuery.code(ApiSet, host.Uri, CodeArchive.ArchiveRoot).Members;

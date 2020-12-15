@@ -8,9 +8,6 @@ namespace Z0
 
     using Z0.Asm;
 
-    using static Konst;
-    using static z;
-
     class Machine : IDisposable
     {
         readonly WfCaptureState State;
@@ -38,20 +35,20 @@ namespace Z0
             Wf.Status(Seq.delimit(Wf.Api.PartIdentities));
             try
             {
-                //CaptureWorkflow.create(State).Run();
-                EmitReferenceData.create().Run(Wf);
-                // EmitFieldMetadata.create().Run(Wf);
-                // EmitSectionHeaders.create().Run(Wf);
-                // EmitImageConstants.create().Run(Wf);
-                // EmitLocatedParts.create().Run(Wf);
-                // EmitStringRecords.create().Run(Wf);
-                // EmitComments.create().Run(Wf);
-                // EmitImageBlobs.create().Run(Wf);
-                // EmitCilTables.create().Run(Wf);
-                // EmitEnumCatalog.create().Run(Wf);
-                // EmitFieldLiterals.create().Run(Wf);
-                // EmitBitMasks.create().Run(Wf);
-                // CaptureProcessors.Run(Wf,State);
+                CaptureWorkflow.create(State).Run();
+                //EmitReferenceData.create().Run(Wf);
+                EmitFieldMetadata.create().Run(Wf);
+                EmitSectionHeaders.create().Run(Wf);
+                EmitImageConstants.create().Run(Wf);
+                EmitLocatedParts.create().Run(Wf);
+                EmitStringRecords.create().Run(Wf);
+                EmitComments.create().Run(Wf);
+                EmitImageBlobs.create().Run(Wf);
+                EmitCilTables.create().Run(Wf);
+                EmitEnumCatalog.create().Run(Wf);
+                EmitFieldLiterals.create().Run(Wf);
+                EmitBitMasks.create().Run(Wf);
+                CaptureProcessors.Run(Wf,State);
             }
             catch(Exception e)
             {

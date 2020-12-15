@@ -11,7 +11,6 @@ namespace Z0
 
     partial struct Cmd
     {
-
         /// <summary>
         /// Defines a <see cref='CmdArg'/>
         /// </summary>

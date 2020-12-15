@@ -7,28 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     partial struct Cmd
     {
-        [Op]
-        static ParseResult<CmdArg> arg(string src, char qualifier = ' ')
-        {
-            try
-            {
-                var i = src.IndexOf(qualifier);
-                if(i == NotFound)
-                    return parsed(src, new CmdArg(src));
-                else
-                    return parsed(src, new CmdArg(src.LeftOfIndex(i), src.RightOfIndex(i)));
-            }
-            catch(Exception e)
-            {
-                return unparsed<CmdArg>(src,e);
-            }
-        }
-
         [Op]
         public static ParseResult<CmdSpec> parse(string src, string delimiter = EmptyString, char qualifier = ' ')
         {
@@ -56,6 +39,23 @@ namespace Z0
             }
 
             return fail;
+        }
+
+        [Op]
+        static ParseResult<CmdArg> arg(string src, char qualifier = ' ')
+        {
+            try
+            {
+                var i = src.IndexOf(qualifier);
+                if(i == NotFound)
+                    return parsed(src, new CmdArg(src));
+                else
+                    return parsed(src, new CmdArg(src.LeftOfIndex(i), src.RightOfIndex(i)));
+            }
+            catch(Exception e)
+            {
+                return unparsed<CmdArg>(src,e);
+            }
         }
 
         internal const string InvalidOption = "Option text invalid";

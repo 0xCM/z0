@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static z;
     using static Konst;
 
     [WfHost]
@@ -49,8 +48,8 @@ namespace Z0
         public void Run()
         {
             var dst = Wf.Db().IndexTable("apihex.index");
-            Descriptors = ApiArchives.BlockDescriptors(Wf);
-            EmissionCount = ApiArchives.emit(Descriptors.Storage, dst);
+            Descriptors = ApiCode.descriptors(Wf);
+            EmissionCount = ApiCode.emit(Descriptors.Storage, dst);
             Wf.EmittedTable<ApiCodeDescriptor>(EmissionCount, dst);
         }
     }

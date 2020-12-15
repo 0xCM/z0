@@ -50,7 +50,7 @@ namespace Z0
             try
             {
                 var target = Wf.Db().CapturedExtractFile(Uri);
-                Emitted = ApiArchives.save(Source.Map(x => new ApiCodeBlock(x.Address, x.OpUri, x.Encoded)), target);
+                Emitted = ApiCode.emit(Source.Map(x => new ApiCodeBlock(x.Address, x.OpUri, x.Encoded)), target);
                 Wf.EmittedTable<ApiCodeRow>(Emitted.Length, target);
             }
             catch(Exception e)

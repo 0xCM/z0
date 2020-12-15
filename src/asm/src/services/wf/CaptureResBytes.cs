@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
@@ -30,7 +30,7 @@ namespace Z0
             var resfile = Workflow.ResBytesCompiled;
             var captured = Workflow.Capture(resfile, Workflow.ResBytesUncompiled);
             var csvfile = Workflow.ResIndexDir + FS.file("z0.res.bytes", FileExtensions.Csv);
-            AsmProcessors.save(captured, csvfile);
+            AsmWriter.emit(captured, csvfile);
         }
     }
 }

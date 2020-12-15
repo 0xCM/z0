@@ -15,7 +15,7 @@ namespace Z0
 
         protected IWfShell Wf;
 
-        protected IFileDb Db => Wf.Db();
+        protected IWfDb Db => Wf.Db();
 
         public static S Spec() => new S();
 

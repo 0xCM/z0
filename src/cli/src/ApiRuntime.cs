@@ -21,7 +21,7 @@ namespace Z0
             => string.Format(SummaryRenderPattern, src.Address, src.Uri, src.Genericity, src.Sig, src.Metadata);
 
         [MethodImpl(Inline), Op]
-        public static FS.FilePath target(IFileDb db, string id)
+        public static FS.FilePath target(IWfDb db, string id)
             => db.IndexFile(id);
 
         [Op]

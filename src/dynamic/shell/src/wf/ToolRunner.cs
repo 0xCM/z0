@@ -24,7 +24,7 @@ namespace Z0
 
         readonly CmdBuilder CmdBuilder;
 
-        readonly IFileDb Db;
+        readonly IWfDb Db;
 
         public ToolRunner(IWfShell wf, WfHost host)
         {
@@ -166,7 +166,7 @@ namespace Z0
 
         void ShowApiHex()
         {
-            var archive = ApiArchives.hex(Wf);
+            var archive = WfArchives.hex(Wf);
             var listing = archive.List();
             if(listing.Count == 0)
                 Wf.Warn(Host, $"No files found in archive with root {archive.Root}");

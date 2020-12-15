@@ -62,8 +62,6 @@
 
     <Polyrand>$(Src)polyrand/z0.polyrand.csproj</Polyrand>
 
-    <Records>$(Src)records/z0.records.csproj</Records>
-
     <Stats>$(Src)stats/z0.stats.csproj</Stats>
 
     <Tools>$(Src)tools/z0.tools.csproj</Tools>

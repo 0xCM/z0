@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using Z0.Asm;
 
-    using static InstructionProcessors;
-
     public sealed class ProcessInstructions : WfHost<ProcessInstructions,ApiPartRoutines>
     {
         protected override void Execute(IWfShell wf, in ApiPartRoutines state)
@@ -16,24 +14,6 @@ namespace Z0
             var step = new ProcessInstructionsStep(wf, this, state);
             step.Run();
         }
-    }
-
-    public readonly struct InstructionProcessors
-    {
-        public static void ProcessJumps(IWfShell wf, in ApiPartRoutines src)
-        {
-            using var step = new AsmJmpProcessor(wf, src);
-            step.Process();
-        }
-
-        public static void RenderSemantic(IWfShell wf, in ApiPartRoutines src)
-            => AsmSemanticRender.create(wf).Render(src);
-
-        public static void ProcessEnlisted(IWfShell wf, in ApiPartRoutines src)
-            => AsmProcessors.parts(wf).Process(src);
-
-        public static void ProcessCalls(IWfShell wf, in ApiPartRoutines src)
-            => EmitCallIndex.create(src).Run(wf);
     }
 
     ref struct ProcessInstructionsStep
@@ -57,15 +37,30 @@ namespace Z0
             Wf.Disposed();
         }
 
+        void ProcessJumps(in ApiPartRoutines src)
+        {
+            using var step = new AsmJmpProcessor(Wf, src);
+            step.Process();
+        }
+
+        void RenderSemantic(in ApiPartRoutines src)
+            => AsmSemanticRender.create(Wf).Render(src);
+
+        void ProcessEnlisted(in ApiPartRoutines src)
+            => AsmProcessors.parts(Wf).Process(src);
+
+        void ProcessCalls(in ApiPartRoutines src)
+            => EmitCallIndex.create(src).Run(Wf);
+
         public void Run()
         {
             Wf.Running();
             try
             {
-                ProcessJumps(Wf, Source);
-                ProcessEnlisted(Wf, Source);
-                RenderSemantic(Wf, Source);
-                ProcessCalls(Wf, Source);
+                ProcessJumps(Source);
+                ProcessEnlisted(Source);
+                RenderSemantic(Source);
+                ProcessCalls(Source);
             }
             catch(Exception e)
             {

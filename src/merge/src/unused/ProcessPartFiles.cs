@@ -11,16 +11,6 @@ namespace Z0
 
     using static Konst;
 
-    // [WfHost]
-    // public class ProcessPartFiles : WfHost<ProcessPartFiles,AsmContextProvider>
-    // {
-    //     protected override void Execute(IWfShell wf, in AsmContextProvider state)
-    //     {
-    //         using var step = new ProcessPartFilesStep(wf, this, state.Context);
-    //         step.Run();
-    //     }
-    // }
-
     public ref struct ProcessPartFilesStep
     {
         const uint DefaultBufferSize = CpuBuffer.BufferSize;

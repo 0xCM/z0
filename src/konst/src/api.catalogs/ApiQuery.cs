@@ -109,8 +109,8 @@ namespace Z0
                 return ApiHostMemberCode.Empty;
 
             var idx = index(catalog);
-            var archive =  ApiArchives.capture(root);
-            var paths =  ApiArchives.capture(FS.dir(root.Name), host);
+            var archive =  WfArchives.capture(root);
+            var paths =  WfArchives.capture(FS.dir(root.Name), host);
             var code = ApiHexReader.Service.Read(paths.HostX86Path);
             var opIndex =  CodeBlockIndex(code);
             return new ApiHostMemberCode(host, MemberCodeIndex(idx, opIndex));
@@ -317,7 +317,7 @@ namespace Z0
             => index(src.Select(x => (x.OpUri.OpId, x)));
 
 
-      internal static Type[] ResAccessorTypes
+         internal static Type[] ResAccessorTypes
             => new Type[]{typeof(ReadOnlySpan<byte>), typeof(ReadOnlySpan<char>)};
     }
 }

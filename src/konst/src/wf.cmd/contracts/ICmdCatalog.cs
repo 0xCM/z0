@@ -11,7 +11,7 @@ namespace Z0
     {
         IWfShell Wf {get;}
 
-        IFileDb Db => Wf.Db();
+        IWfDb Db => Wf.Db();
     }
 
     [Free]

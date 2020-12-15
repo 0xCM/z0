@@ -136,10 +136,10 @@ namespace Z0
             => FS.dir(Context.Paths.AppDataRoot.Name);
 
         /// <summary>
-        /// Provides a <see cref='IFileDb'/> rooted at a shell-configured location
+        /// Provides a <see cref='IWfDb'/> rooted at a shell-configured location
         /// </summary>
-        IFileDb Db()
-            => DbSvc.create(Init.DbRoot);
+        IWfDb Db()
+            => new WfDb(Init.DbRoot);
 
         IToolDb ToolDb()
             => new ToolDb(this);
