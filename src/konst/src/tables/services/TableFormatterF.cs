@@ -12,7 +12,7 @@ namespace Z0
     using static Konst;
 
     public struct TableFormatter<F> : ITableFormatter<F>
-        where F : unmanaged, Enum
+        where F : unmanaged
     {
         readonly StringBuilder Target;
 

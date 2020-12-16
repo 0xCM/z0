@@ -10,7 +10,6 @@ namespace Z0
     using System.Linq;
 
     using static z;
-    using static Konst;
 
     using Z0.Xed;
     using xed_ext = Xed.xed_extension_enum_t;

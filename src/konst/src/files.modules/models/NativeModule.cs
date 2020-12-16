@@ -6,8 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using Windows;
 
-    using static Konst;
+    using static Part;
 
     public readonly struct NativeModule : INativeModule
     {
@@ -35,7 +36,7 @@ namespace Z0
         public void Dispose()
         {
             if (Handle != IntPtr.Zero)
-                OS.FreeLibrary(Handle);
+                Kernel32.FreeLibrary(Handle);
         }
 
         [MethodImpl(Inline)]

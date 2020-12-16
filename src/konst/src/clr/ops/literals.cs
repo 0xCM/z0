@@ -11,6 +11,26 @@ namespace Z0
 
     partial struct ClrQuery
     {
+        [Op, Closures(Closure)]
+        public static LiteralIndex<T> literalIndex<T>()
+            where T : unmanaged
+        {
+            var fields = typeof(T).Fields().Literals();
+            var count = (uint)fields.Length;
+            var nameBuffer = sys.alloc<string>(count);
+            var valueBuffer = sys.alloc<T>(count);
+            ref var names = ref first(span(nameBuffer));
+            ref var values = ref first(span(valueBuffer));
+            var src = span(fields);
+            for(var i=0u; i<count; i++)
+            {
+                ref readonly var field = ref skip(src,i);
+                seek(names,i) = field.Name;
+                seek(values, i) = (T)field.GetRawConstantValue();
+            }
+            return new LiteralIndex<T>(fields,nameBuffer,valueBuffer);
+        }
+
         [Op]
         public static Span<FieldInfo> literals(in IndexedSeq<FieldInfo> src, Span<FieldInfo> dst)
         {

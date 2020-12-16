@@ -17,11 +17,11 @@ namespace Z0
     [Free]
     public interface ITableArchive : IFileArchive
     {
-        Option<FilePath> Deposit<F,R>(R[] src, FS.FileName name)
+        Option<FS.FilePath> Deposit<F,R>(R[] src, FS.FileName name)
             where F : unmanaged, Enum
             where R : struct, ITabular;
 
-        Option<FilePath> Deposit<F,R>(R[] src, FS.FolderName folder, FS.FileName name)
+        Option<FS.FilePath> Deposit<F,R>(R[] src, FS.FolderName folder, FS.FileName name)
             where F : unmanaged, Enum
             where R : struct, ITabular;
 
@@ -51,19 +51,19 @@ namespace Z0
             => (Root + (subject ?? FS.folder("asm"))).Files(X.Csv, true);
     }
 
-    public interface ITableStore<R>
+    public interface ITableArchive<R>
         where R : struct
     {
-        Option<FilePath> Save(R[] src, TableRenderSpec format, FilePath dst, FileWriteMode mode = Overwrite);
+        Option<FS.FilePath> Save(R[] src, TableRenderSpec format, FS.FilePath dst, FileWriteMode mode = Overwrite);
     }
 
-    public interface ITableArchive<F,R> : ITableStore<R>
-        where F : unmanaged, Enum
+    public interface ITableArchive<F,R> : ITableArchive<R>
+        where F : unmanaged
         where R : struct
     {
-        Option<FilePath> Save(R[] src, TableRenderSpec<F> format, FilePath dst, FileWriteMode mode = Overwrite);
+        Option<FS.FilePath> Save(R[] src, TableRenderSpec<F> format, FS.FilePath dst, FileWriteMode mode = Overwrite);
 
-        Option<FilePath> ITableStore<R>.Save(R[] src, TableRenderSpec format, FilePath dst, FileWriteMode mode)
+        Option<FS.FilePath> ITableArchive<R>.Save(R[] src, TableRenderSpec format, FS.FilePath dst, FileWriteMode mode)
             => Save(src, format, dst, mode);
 
         /// <summary>
@@ -72,6 +72,6 @@ namespace Z0
         /// <param name="src">The source data</param>
         /// <param name="dst">The target file</param>
         /// <typeparam name="R">The source type</typeparam>
-        Option<FilePath> Save(R[] src, FilePath dst);
+        Option<FS.FilePath> Save(R[] src, FS.FilePath dst);
     }
 }

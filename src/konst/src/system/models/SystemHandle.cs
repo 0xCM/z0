@@ -6,8 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using Windows;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Defines a uniform structural representation for so-called 'handles'
@@ -24,7 +25,7 @@ namespace Z0
         public void Dispose()
         {
             if(IsOwner)
-                OS.CloseHandle(Address);
+                Kernel32.CloseHandle(Address);
         }
 
         public MemoryAddress Address

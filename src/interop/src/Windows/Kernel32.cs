@@ -8,85 +8,139 @@ namespace Windows
     using System.IO;
     using System.Diagnostics;
 
+    using static System.Runtime.InteropServices.CallingConvention;
+
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+    using Fp = System.Runtime.InteropServices.UnmanagedFunctionPointerAttribute;
+
     public readonly partial struct Kernel32
     {
-        const string LibName = "kernel32.dll";
+        public const string LibName = "kernel32.dll";
 
-        [DllImport(LibName)]
+        /// <summary>
+        /// Get the OS ID of the current thread
+        /// </summary>
+        [DllImport(LibName), Free]
+        public static extern uint GetCurrentThreadId();
+
+        /// <summary>
+        /// Gets the handle of the current thread
+        /// </summary>
+        [DllImport(LibName), Free]
+        public static extern IntPtr GetCurrentThread();
+
+        [Fp(StdCall), Free]
+        public delegate int DllMainDelegate(IntPtr instance, int reason, IntPtr reserved);
+
+        [Fp(StdCall), Free]
+        public delegate IntPtr GetProcAddressDelegate(IntPtr module, string name);
+
+        [DllImport(LibName), Free]
         public static extern bool GetProcessWorkingSetSizeEx(IntPtr hProcess, out IntPtr lpMinimumWorkingSetSize, out IntPtr lpMaximumWorkingSetSize, out uint flags);
 
-        [DllImport(LibName)]
+        [DllImport(LibName), Free]
         internal static extern bool ProcessIdToSessionId(uint dwProcessId, out uint pSessionId);
 
-        [DllImport(LibName)]
+        [DllImport(LibName), Free]
         public static extern int GetProcessId(IntPtr nativeHandle);
 
-        [DllImport(LibName)]
+        [DllImport(LibName), Free]
         public static unsafe extern int ReadProcessMemory(IntPtr hProcess, IntPtr lpBaseAddress, byte* lpBuffer, IntPtr dwSize, out IntPtr lpNumberOfBytesRead);
 
-        [DllImport(LibName, SetLastError = true, EntryPoint = "K32EnumProcesses")]
+        [DllImport(LibName, SetLastError = true, EntryPoint = "K32EnumProcesses"), Free]
         public static extern unsafe bool EnumProcesses(int[] lpidProcess, int cb, out int lpcbNeeded);
 
-        [DllImport(LibName)]
+        [DllImport(LibName), Free]
         [return: MarshalAs(UnmanagedType.Bool)]
         public static extern bool FreeLibrary(IntPtr hModule);
 
-        [DllImport(LibName, CharSet = CharSet.Unicode, SetLastError = true, EntryPoint = "LoadLibraryW")]
+        [DllImport(LibName, CharSet = CharSet.Unicode, SetLastError = true, EntryPoint = "LoadLibraryW"), Free]
         public static extern IntPtr LoadLibrary(string lpLibFileName);
 
-        [DllImport(LibName)]
+        [DllImport(LibName), Free]
         public static extern IntPtr GetProcAddress(IntPtr hModule, string procedureName);
 
-        [DllImport(LibName, SetLastError = true)]
+        [DllImport(LibName, SetLastError = true), Free]
         static extern UIntPtr VirtualAlloc(UIntPtr lpAddress, UIntPtr allocSize, [MarshalAs(UnmanagedType.U4)] VirtualAllocType allocationType, [MarshalAs(UnmanagedType.U4)] VirtualAllocProtection protection);
 
-        [DllImport(LibName, SetLastError = true)]
+        [DllImport(LibName, SetLastError = true), Free]
         [return: MarshalAs(UnmanagedType.Bool)]
         public static unsafe extern bool VirtualFree(void* lpAddress, UIntPtr sizeToFree, [MarshalAs(UnmanagedType.U4)] VirtualFreeType freeType);
 
-        [DllImport(LibName, ExactSpelling = true)]
+        [DllImport(LibName, ExactSpelling = true), Free]
         public static extern unsafe void* VirtualAlloc(void* lpAddress, UIntPtr dwSize, int flAllocationType, int flProtect);
 
-        [DllImport(LibName, SetLastError = true, ExactSpelling = true)]
+        [DllImport(LibName, SetLastError = true, ExactSpelling = true), Free]
         public static extern unsafe UIntPtr VirtualQuery(void* lpAddress, ref MEMORY_BASIC_INFORMATION lpBuffer, UIntPtr dwLength);
 
-        [DllImport(LibName, SetLastError = true)]
+        [DllImport(LibName), Free]
+        public static extern bool VirtualProtectEx(IntPtr hProc, IntPtr pCode, UIntPtr codelen, uint flags, out uint oldFlags);
+
+        [DllImport(LibName, SetLastError = true), Free]
         public static extern IntPtr OpenProcess(int dwDesiredAccess, bool bInheritHandle, int dwProcessId);
 
-        [DllImport(LibName, SetLastError = true)]
+        [DllImport(LibName, SetLastError = true), Free]
         public static extern IntPtr GetProcessHeap();
 
-        [DllImport(LibName)]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        public static extern bool QueryPerformanceCounter(out long lpPerformanceCount);
+        [DllImport(LibName), Free]
+        public static extern int QueryPerformanceCounter(ref long count);
 
-        [DllImport(LibName, SetLastError = true)]
+        [DllImport(LibName, SetLastError = true), Free]
         public static extern void GetSystemInfo(ref SYSTEM_INFO lpSystemInfo);
 
-        [DllImport(LibName, SetLastError = true)]
+        [DllImport(LibName, SetLastError = true), Free]
         [return: MarshalAs(UnmanagedType.Bool)]
         public static extern bool AllocateUserPhysicalPages(IntPtr processHandle, ref UIntPtr numberOfPages, UIntPtr pageArray);
 
-        [DllImport(LibName, SetLastError = true)]
+        [DllImport(LibName, SetLastError = true), Free]
         [return: MarshalAs(UnmanagedType.Bool)]
         public static extern bool MapUserPhysicalPages(UIntPtr virtualAddress, UIntPtr numberOfPages, UIntPtr pageArray);
 
-        [DllImport(LibName, SetLastError = true)]
+        [DllImport(LibName, SetLastError = true), Free]
         [return: MarshalAs(UnmanagedType.Bool)]
         public static extern bool FreeUserPhysicalPages(IntPtr processHandle, ref UIntPtr numberOfPages, UIntPtr pageArray);
 
-        [DllImport(LibName, CharSet = CharSet.Auto, SetLastError = true)]
+        [DllImport(LibName, CharSet = CharSet.Auto, SetLastError = true), Free]
         [return: MarshalAs(UnmanagedType.Bool)]
         public static extern bool CloseHandle(IntPtr handle);
 
-        [DllImport(LibName, SetLastError = true)]
+        [DllImport(LibName, SetLastError = true), Free]
         public static extern bool ReadFile(IntPtr hFile, UIntPtr lpBuffer, uint nNumberOfBytesToRead, out uint lpNumberOfBytesRead, IntPtr lpOverlapped);
 
-        [DllImport(LibName)]
+        [DllImport(LibName), Free]
         public static extern UIntPtr HeapAlloc(IntPtr heapHandle, [MarshalAs(UnmanagedType.U4)] HeapFlags heapFlags, UIntPtr bytesRequested);
 
-        [DllImport(LibName, SetLastError = true)]
+        [DllImport(LibName, SetLastError = true), Free]
         public static extern UIntPtr HeapSize(IntPtr heap, uint flags, UIntPtr lpMem);
+
+        /// <summary>
+        /// Retrieves the number of performance counter counts per second.
+        /// </summary>
+        /// <remarks>This is determined by the OS at boot time and is invariant until the next reboot</remarks>
+        [DllImport(LibName), Free]
+        public static extern int QueryPerformanceFrequency(ref long frequency);
+
+        /// <summary>
+        /// Retrieves the cyle time for a specified thread
+        /// </summary>
+        /// <param name="hThread">The handle to the thread</param>
+        /// <param name="cycles">The number of cpu clock cycles used by the thread</param>
+        [DllImport(LibName), Free]
+        public static extern bool QueryThreadCycleTime(IntPtr hThread, ref ulong cycles);
+
+        /// <summary>
+        /// Retrieves the sum of the cycle time of all threads of the specified process.
+        /// </summary>
+        /// <param name="hProc">The handle to the process</param>
+        /// <param name="cycles">The number of cpu clock cycles used by the threads of the process</param>
+        [DllImport(LibName), Free]
+        public static extern bool QueryProcessCycleTime(IntPtr hProc, ref ulong cycles);
+
+        [DllImport(LibName), Free]
+        public static extern void QueryInterruptTime(ref ulong time);
+
+        [DllImport(LibName), Free]
+        public static extern void QueryInterruptTimePrecise(ref ulong time);
 
         public static UIntPtr VirtualAlloc(uint allocSize, VirtualAllocType type, VirtualAllocProtection protection)
             => VirtualAlloc(lpAddress: UIntPtr.Zero, new UIntPtr(allocSize), type, protection);
@@ -159,14 +213,14 @@ namespace Windows
             return res;
         }
 
-        [DllImport(LibName, SetLastError = true)]
+        [DllImport(LibName, SetLastError = true), Free]
         static extern bool ReadFile(IntPtr hFile, IntPtr lpBuffer, uint nNumberOfBytesToRead, out uint lpNumberOfBytesRead, IntPtr lpOverlapped);
 
-        [DllImport(LibName, SetLastError = true)]
+        [DllImport(LibName, SetLastError = true), Free]
         [return: MarshalAs(UnmanagedType.Bool)]
         static extern bool HeapFree(IntPtr heapHandle, [MarshalAs(UnmanagedType.U4)] HeapFlags heapFlags, UIntPtr lpMem);
 
-        [DllImport(LibName, CharSet = CharSet.Auto, SetLastError = true)]
+        [DllImport(LibName, CharSet = CharSet.Auto, SetLastError = true), Free]
         static extern IntPtr CreateFile([MarshalAs(UnmanagedType.LPTStr)] string filename,
                                                 [MarshalAs(UnmanagedType.U4)] FileAccess access,
                                                 [MarshalAs(UnmanagedType.U4)] FileShare share,
@@ -175,7 +229,7 @@ namespace Windows
                                                 [MarshalAs(UnmanagedType.U4)] FileAttributes flagsAndAttributes,
                                                 IntPtr templateFile);
 
-        [DllImport(LibName)]
+        [DllImport(LibName), Free]
         static extern bool SetFilePointerEx(IntPtr hFile, long liDistanceToMove, IntPtr lpNewFilePointer, [MarshalAs(UnmanagedType.U4)] SeekOrigin dwMoveMethod);
 
     }

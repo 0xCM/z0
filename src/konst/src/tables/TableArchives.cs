@@ -12,24 +12,32 @@ namespace Z0
     using static Konst;
     using static z;
 
+    using api = Table;
+
     [ApiHost]
     public readonly struct TableArchives
     {
-        public static Option<FilePath> deposit<F,R,S>(FS.FolderPath root, R[] src, string id, S subject, FS.FileExt type)
+        public static void clear(FS.FolderPath root)
+            => root.Clear();
+
+        public static void clear(FS.FolderPath root, FS.FolderName folder)
+            => (root + folder).Clear();
+
+        public static Option<FS.FilePath> deposit<F,R,S>(FS.FolderPath root, R[] src, string id, S subject, FS.FileExt type)
             where F : unmanaged, Enum
             where R : struct, ITabular
                 => TableArchives.service<F,R>().Save(src, Table.renderspec<F>(), (FS.dir(root.Name) + FS.folder(id) + FS.file($"{id}.{subject}",type)));
 
         [MethodImpl(Inline), Op]
-        public ITableArchive service(FS.FolderPath root)
-            => new TableArchive(root);
+        public ITableArchive service(IWfShell wf, FS.FolderPath? root = null)
+            => new TableArchive(wf, root);
 
         public static TableArchive<F,R> service<F,R>()
-            where F : unmanaged, Enum
+            where F : unmanaged
             where R : struct, ITabular
                 => default;
 
-        public static Option<FilePath> save<F,R>(R[] src, FS.FilePath dst)
+        public static Option<FS.FilePath> deposit<F,R>(R[] src, FS.FilePath dst)
             where F : unmanaged, Enum
             where R : struct, ITabular
                 => service<F,R>().Save(src, dst);
@@ -38,6 +46,44 @@ namespace Z0
         public static ArchivedTable<T> archived<T>(FS.FilePath src)
             where T : struct
                 => new ArchivedTable<T>(src);
+
+        public static Option<FS.FilePath> deposit<F,R>(FS.FolderPath root, R[] src, FS.FileName name)
+            where F : unmanaged, Enum
+            where R : struct, ITabular
+                => deposit(src, api.renderspec<F>(), root + FS.file(name.Name));
+
+        public static Option<FS.FilePath> deposit<F,R>(FS.FolderPath root, R[] src, FS.FolderName folder, FS.FileName name)
+            where F : unmanaged, Enum
+            where R : struct, ITabular
+                => deposit(src, api.renderspec<F>(), (root + folder) + name);
+
+        public static Option<FS.FilePath> deposit<F,R>(R[] data, TableRenderSpec<F> spec, FS.FilePath dst, FileWriteMode mode = Overwrite)
+            where F : unmanaged
+            where R : struct, ITabular
+        {
+            if(data == null || data.Length == 0)
+                return Option.none<FS.FilePath>();
+
+            try
+            {
+                dst.FolderPath.Create();
+                var overwrite = mode == FileWriteMode.Overwrite;
+                var emitHeader = spec.EmitHeader && (overwrite || !dst.Exists);
+
+                using var writer = dst.Writer(mode);
+
+                if(emitHeader)
+                    writer.WriteLine(spec.FormatHeader());
+
+                z.iter(data, r => writer.WriteLine(r.DelimitedText(spec.Delimiter)));
+                return dst;
+            }
+            catch(Exception e)
+            {
+                term.error(e);
+                return Option.none<FS.FilePath>();
+            }
+        }
 
         public static void deposit<F,T>(in RecordEmission<T> src, FS.FilePath dst, IRowFormatter<F> formatter, char delimiter = FieldDelimiter)
             where F : unmanaged, Enum
@@ -89,33 +135,24 @@ namespace Z0
             }
         }
 
-        public static Option<FilePath> save<R,F>(R[] data, TableRenderSpec<F> format, FormatFunctions.FormatDelimited<R> fx, FilePath dst, FileWriteMode mode = Overwrite)
-            where F : unmanaged, Enum
-            where R : struct
-       {
-            if(data == null || data.Length == 0)
-                return Option.none<FilePath>();
+        public static ArchivedRowset<T> deposit<T,M,K>(FS.FolderPath root, T[] src, string header, Func<T,string> render,  M m = default)
+            where T : struct
+            where M : struct, IDataModel
+            where K : unmanaged
+        {
+            var path = root + FS.folder(m.Name) + FS.file(typeof(T).Name);
+            var records = z.span(src);
+            var count = records.Length;
 
-            try
-            {
-                dst.FolderPath.Create();
-                var overwrite = mode == FileWriteMode.Overwrite;
-                var emitHeader = format.EmitHeader && (overwrite || !dst.Exists);
+            using var writer = path.Writer();
+            writer.WriteLine(header);
 
-                using var writer = dst.Writer(mode);
+            for(var i=0u; i<count; i++)
+                writer.WriteLine(render(skip(records, i)));
 
-                if(emitHeader)
-                    writer.WriteLine(format.FormatHeader());
-
-                z.iter(data, r => writer.WriteLine(fx(r,format.Delimiter)));
-                return dst;
-            }
-            catch(Exception e)
-            {
-                term.error(e);
-                return Option.none<FilePath>();
-            }
+            return (TableRows.rowset<T>(src), new ArchivedTable<T>(path));
         }
+
 
         static string FormatSequential<E>(int seq, E value)
             => text.concat(seq.ToString().PadRight(10), SpacePipe, value.ToString());

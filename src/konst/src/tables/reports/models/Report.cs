@@ -51,7 +51,7 @@ namespace Z0
         public bool IsNonEmpty
             => RecordCount != 0;
 
-        public abstract Option<FilePath> Save(FilePath dst);
+        public abstract Option<FS.FilePath> Save(FS.FilePath dst);
 
         public virtual string ReportName
             => GetType().DisplayName();
@@ -81,7 +81,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public override Option<FilePath> Save(FilePath dst)
+        public override Option<FS.FilePath> Save(FS.FilePath dst)
             => Log.Save(Records, dst);
     }
 

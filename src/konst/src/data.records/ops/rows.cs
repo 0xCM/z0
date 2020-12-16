@@ -26,7 +26,7 @@ namespace Z0
         [Op, Closures(Closure)]
         public static DynamicRows<T> rows<T>(in RecordFields fields, uint rowcount)
             where T : struct
-                => first(recover<byte,DynamicRows<T>>(span<byte>(Table.rowsize<T>(rowcount, fields.Count))));
+                => first(recover<byte,DynamicRows<T>>(span<byte>(rowsize<T>(rowcount, fields.Count))));
 
         [Op, Closures(Closure)]
         public static DynamicRows<T> rows<T>(in RecordFields fields, ReadOnlySpan<T> src)

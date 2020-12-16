@@ -41,28 +41,12 @@ namespace Z0
             => new ApiHexArchive(root);
 
         /// <summary>
-        /// Creates an archive over a set of capture artifacts
+        /// Creates a <see cref='ICaptureArchive'/> rooted at a specified path
         /// </summary>
         /// <param name="root">The archive root</param>
         [MethodImpl(Inline), Op]
         public static ICaptureArchive capture(FS.FolderPath root)
             => new CaptureArchive(root);
-
-        /// <summary>
-        /// Creates an archive over a set of capture artifacts
-        /// </summary>
-        /// <param name="root">The archive configuration</param>
-        [MethodImpl(Inline), Op]
-        public static ICaptureArchive capture(ArchiveConfig config)
-            => capture(config.Root);
-
-        /// <summary>
-        /// Creates a <see cref='ICaptureArchive'/> rooted at a specified path
-        /// </summary>
-        /// <param name="root">The archive root</param>
-        [MethodImpl(Inline), Op]
-        public static ICaptureArchive capture(FolderPath root)
-            => new CaptureArchive(FS.dir(root.Name));
 
         /// <summary>
         /// Creates a <see cref='ICaptureArchive'/> rooted at a specified path and specialized for an identified <see cref='PartId'/>

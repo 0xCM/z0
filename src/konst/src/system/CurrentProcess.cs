@@ -10,10 +10,10 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
     using System.Runtime.InteropServices;
-    using System.Security;
     using System.Threading;
 
-    using static Konst;
+    using static Part;
+    using static Windows.Kernel32;
 
     /// <summary>
     /// Surfaces information about the currently executing process
@@ -21,7 +21,7 @@ namespace Z0
     [ApiHost]
     public readonly struct CurrentProcess
     {
-        public static Process Current 
+        public static Process Current
         {
             [MethodImpl(Inline), Op]
             get => Process.GetCurrentProcess();
@@ -30,7 +30,7 @@ namespace Z0
         /// <summary>
         /// Gets the OS thread ID - not the CRL thread id
         /// </summary>
-        public static uint OsThreadId 
+        public static uint OsThreadId
         {
             [MethodImpl(Inline), Op]
             get => GetCurrentThreadId();
@@ -39,7 +39,7 @@ namespace Z0
         public static int ManagedThreadId
         {
             [MethodImpl(Inline), Op]
-            get => Thread.CurrentThread.ManagedThreadId;            
+            get => Thread.CurrentThread.ManagedThreadId;
         }
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace Z0
         /// <summary>
         /// The handle for the current process
         /// </summary>
-        public static IntPtr ProcessHandle 
+        public static IntPtr ProcessHandle
         {
             [MethodImpl(Inline), Op]
             get => Current.Handle;
@@ -69,13 +69,13 @@ namespace Z0
             get => GetCurrentThread();
         }
 
-        public static string Name 
+        public static string Name
         {
             [MethodImpl(Inline), Op]
             get => Current.ProcessName;
         }
 
-        public static IEnumerable<ProcessThread> Threads 
+        public static IEnumerable<ProcessThread> Threads
             => from ProcessThread pt in Current.Threads select pt;
 
         /// <summary>
@@ -84,17 +84,5 @@ namespace Z0
         /// <param name="id">The OS thread Id</param>
         public static ProcessThread ProcessThread(uint id)
             => Threads.FirstOrDefault(t => t.Id == id);
-
-        /// <summary>
-        /// Get the OS ID of the current thread
-        /// </summary>
-        [DllImport(Kernel32)]
-        static extern uint GetCurrentThreadId();
-
-        /// <summary>
-        /// Gets the handle of the current thread
-        /// </summary>
-        [DllImport(Kernel32)]
-        static extern IntPtr GetCurrentThread();
     }
 }

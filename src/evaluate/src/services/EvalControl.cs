@@ -24,7 +24,7 @@ namespace Z0
 
         readonly ISystemApiCatalog ApiSet;
 
-        internal EvalControl(IAppContext context, IPolyrand random, FolderPath root, uint buffersize)
+        internal EvalControl(IAppContext context, IPolyrand random, FS.FolderPath root, uint buffersize)
         {
             BufferCount = 3;
             BufferSize = buffersize;

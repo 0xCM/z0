@@ -9,36 +9,36 @@ namespace Z0
     using System.Runtime.InteropServices;
 
     using static Konst;
-    using static z;
-
-    using static OS.Delegates;
+    using static Windows.Kernel32;
 
     [ApiHost]
     public readonly partial struct NativeModules
     {
+        const string Kernel32 = Windows.Kernel32.LibName;
+
         [MethodImpl(Inline), Op]
         public static NativeModule kernel32()
-            => new NativeModule(Kernel32, OS.LoadLibrary(Kernel32));
+            => new NativeModule(Kernel32, LoadLibrary(Kernel32));
 
         [MethodImpl(Inline), Op]
         public static NativeModule load(FS.FileName src)
-            => new NativeModule(Kernel32, OS.LoadLibrary(src.Name));
+            => new NativeModule(Kernel32, LoadLibrary(src.Name));
 
         [MethodImpl(Inline), Op]
         public static NativeModule load(FS.FilePath src)
-            => new NativeModule(src.Name, OS.LoadLibrary(src.Name));
+            => new NativeModule(src.Name, LoadLibrary(src.Name));
 
         [MethodImpl(Inline), Op]
-        public static DllMain main(NativeModule src)
-            => proc<DllMain>(src, nameof(OS.Delegates.DllMain));
+        public static DllMainDelegate main(NativeModule src)
+            => proc<DllMainDelegate>(src, nameof(OS.Delegates.DllMain));
 
         [MethodImpl(Inline), Op]
         public static MemoryAddress procaddress(NativeModule src, string name)
-            => OS.GetProcAddress(src.Address, name);
+            => GetProcAddress(src.Address, name);
 
         [MethodImpl(Inline), Op]
         public unsafe static FPtr fptr(NativeModule src, string name)
-            => new FPtr(OS.GetProcAddress(src.Address,name).ToPointer());
+            => new FPtr(GetProcAddress(src.Address,name).ToPointer());
 
         [MethodImpl(Inline), Op]
         public static unsafe Delegate proc(FPtr src, Type t)
@@ -60,7 +60,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public unsafe static FPtr<D> fptr<D>(NativeModule src, string name)
             where D : Delegate
-                => new FPtr<D>(OS.GetProcAddress(src.Address,name).ToPointer());
+                => new FPtr<D>(GetProcAddress(src.Address,name).ToPointer());
 
         [MethodImpl(Inline)]
         public static unsafe D proc<D>(FPtr src)
@@ -70,6 +70,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static D proc<D>(NativeModule src, string name)
             where D : Delegate
-                =>  (D)Marshal.GetDelegateForFunctionPointer(procaddress(src,name), typeof(D));
+                => (D)Marshal.GetDelegateForFunctionPointer(procaddress(src,name), typeof(D));
     }
 }

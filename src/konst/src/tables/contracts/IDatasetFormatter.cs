@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Text;
 
-    using static Konst;
+    using static Part;
     using static Datasets;
 
     public interface IDatasetFormatter : ITextual
@@ -50,7 +50,7 @@ namespace Z0
             => header<F>().Render(Delimiter);
 
         string[] IDatasetFormatter.Labels
-            => LiteralIndex.create<F>().Names;
+            => ClrQuery.literalIndex<F>().Names;
 
         void Append(F f, object content)
         {

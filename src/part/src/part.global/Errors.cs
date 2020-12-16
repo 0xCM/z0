@@ -6,6 +6,12 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
+
+
+    using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
+    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
+    using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
     partial struct Part
     {
@@ -19,5 +25,9 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static void ThrowEmptySpanError()
             => sys.@throw($"The span, it is empty");
+
+        [Op]
+        public static Exception DuplicateKeyException(IEnumerable<object> keys, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => new Exception(text.concat($"Duplicate keys were detected {keys.FormatList()}",  caller,file, line));
     }
 }

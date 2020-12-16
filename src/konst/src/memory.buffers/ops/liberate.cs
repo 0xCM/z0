@@ -6,10 +6,10 @@ namespace Z0
 {
     using System;
     using System.Runtime.InteropServices;
-    using System.Security;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
+    using static Windows.Kernel32;
 
     unsafe partial struct Buffers
     {
@@ -87,7 +87,7 @@ namespace Z0
         {
             var pSrc = Unsafe.AsPointer(ref src);
             IntPtr buffer = (IntPtr)pSrc;
-            if (!Buffers.VirtualProtectEx(CurrentProcess.ProcessHandle, buffer, (UIntPtr)length, 0x40, out uint _))
+            if (!VirtualProtectEx(CurrentProcess.ProcessHandle, buffer, (UIntPtr)length, 0x40, out uint _))
                 Buffers.ThrowLiberationError(buffer, length);
             return (T*)pSrc;
         }
@@ -98,11 +98,5 @@ namespace Z0
             var end = start + (ulong)Length;
             throw new Exception($"An attempt to liberate {Length} bytes of memory for execution failed");
         }
-
-        /// <summary>
-        /// Windows API that applies memory protection attributes
-        /// </summary>
-        [DllImport(Kernel32)]
-        internal static extern bool VirtualProtectEx(IntPtr hProc, IntPtr pCode, UIntPtr codelen, uint flags, out uint oldFlags);
     }
 }

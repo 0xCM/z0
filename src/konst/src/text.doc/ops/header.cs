@@ -5,9 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-
-    using static Konst;
 
     partial struct TextDocParser
     {

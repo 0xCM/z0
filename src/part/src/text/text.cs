@@ -41,5 +41,13 @@ namespace Z0
         [MethodImpl(Options), Op]
         public static string rtrim(string src, params char[] chars)
             => blank(src) ? string.Empty : src.TrimEnd(chars);
+
+        /// <summary>
+        /// Joins the string representation of a sequence of items with no interspersed separator
+        /// </summary>
+        /// <param name="src">The values to be joined</param>
+        [MethodImpl(Inline), Op]
+        public static string concat(params object[] src)
+            => string.Concat(src);
     }
 }

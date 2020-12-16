@@ -7,7 +7,7 @@ namespace Z0
     using System;
 
     public interface ITableFormatter<F> : ITextual
-        where F : unmanaged, Enum
+        where F : unmanaged
     {
         void EmitEol();
 

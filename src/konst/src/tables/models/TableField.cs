@@ -23,10 +23,16 @@ namespace Z0
         /// <summary>
         /// The 0-based, declaration order of the field
         /// </summary>
-        public ushort FieldIndex;
+        public ushort Index;
 
-        public CliArtifactKey FieldKey;
+        /// <summary>
+        /// The field's metadata identifier
+        /// </summary>
+        public CliArtifactKey Key;
 
+        /// <summary>
+        /// The field datatype
+        /// </summary>
         public Type DataType;
 
         public ByteSize Size;

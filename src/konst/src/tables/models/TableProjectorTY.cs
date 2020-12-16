@@ -8,9 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static z;
 
-    public readonly struct TableProjector<T,Y> : ITableProjector<TableProjector<T,Y>,T,Y>
+    public readonly struct TableProjector<T,Y> : ITableProjector<T,Y>
         where T : struct
     {
         readonly Func<T,Y> Fx;

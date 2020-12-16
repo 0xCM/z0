@@ -274,6 +274,13 @@ namespace Z0
         FS.Files ParsedExtractFiles(PartId part)
             => ParsedExtractFiles().Where(f => f.IsOwner(part));
 
+        PartFiles PartFiles()
+        {
+            var parsed = ParsedExtractFiles();
+            var hex = CapturedHexFiles();
+            var asm = CapturedAsmFiles();
+            return new PartFiles(parsed, hex, asm);
+        }
     }
 
     public interface IFileDbPaths<H> : IWfDbPaths, IArchivePaths<H>

@@ -10,12 +10,6 @@ namespace Z0
 
     using static Konst;
 
-    sealed class PipeBuffer<T> : ConcurrentQueue<T>
-    {
-
-
-    }
-
     [ApiHost]
     public readonly partial struct Pipes
     {

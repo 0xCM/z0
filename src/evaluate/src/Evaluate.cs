@@ -44,7 +44,7 @@ namespace Z0
             => new EvalExecutor(random);
 
         [MethodImpl(Inline), Op]
-        public static IEvalControl control(IAppContext context, FolderPath root, uint bufferSize)
+        public static IEvalControl control(IAppContext context, FS.FolderPath root, uint bufferSize)
             => new EvalControl(context, context.Random, root, bufferSize);
 
         static void @try<T>(in UnaryEvalContext<T> exchange, Action<Exception> handler)

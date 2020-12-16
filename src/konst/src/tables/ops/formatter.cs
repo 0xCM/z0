@@ -8,8 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Text;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     partial struct Table
     {
@@ -19,19 +18,19 @@ namespace Z0
             where W : unmanaged, Enum
                 => new RecordFormatter<F,W>(text.build(), delimiter);
 
-        [MethodImpl(Inline)]
+        [Op, Closures(UnsignedInts)]
         public static TableFormatter<F> formatter<F>(in LiteralFieldValues<F> fields, StringBuilder dst, char delimiter)
-            where F : unmanaged, Enum
+            where F : unmanaged
                 => new TableFormatter<F>(dst, delimiter, fields);
 
-        [MethodImpl(Inline)]
+        [Op, Closures(UnsignedInts)]
         public static TableFormatter<F> formatter<F>(F f = default)
-            where F : unmanaged, Enum
+            where F : unmanaged
                 => new TableFormatter<F>(text.build(), FieldDelimiter, LiteralFields.fields<F>());
 
-        [MethodImpl(Inline)]
+        [Op, Closures(UnsignedInts)]
         public static TableFormatter<F> formatter<F>(in LiteralFieldValues<F> fields, char delimiter = FieldDelimiter)
-            where F : unmanaged, Enum
+            where F : unmanaged
                 => new TableFormatter<F>(text.build(), delimiter, fields);
 
         [MethodImpl(Inline)]

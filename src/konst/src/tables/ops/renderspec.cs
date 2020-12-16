@@ -5,8 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Text;
 
     using static Konst;
     using static z;
@@ -18,9 +16,9 @@ namespace Z0
         /// </summary>
         /// <typeparam name="T">The source type</typeparam>
         public static TableRenderSpec<F> renderspec<F>(char delimiter = FieldDelimiter)
-            where F : unmanaged, Enum
+            where F : unmanaged
         {
-            var literals = @readonly(LiteralIndex.create<F>().Literals);
+            var literals = @readonly(ClrQuery.literalIndex<F>().Literals);
             var count = literals.Length;
             var headBuffer = sys.alloc<string>(count);
             var fieldBuffer = sys.alloc<TableColumn<F>>(count);
@@ -40,9 +38,9 @@ namespace Z0
         /// </summary>
         /// <typeparam name="T">The source type</typeparam>
         public static TableRenderSpec<F> renderspec2<F>(char delimiter = FieldDelimiter)
-            where F : unmanaged, Enum
+            where F : unmanaged
         {
-            var literals = @readonly(LiteralIndex.create<F>().Literals);
+            var literals = @readonly(ClrQuery.literalIndex<F>().Literals);
             var count = literals.Length;
             var headBuffer = sys.alloc<string>(count);
             var fieldBuffer = sys.alloc<TableColumn<F>>(count);

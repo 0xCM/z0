@@ -5,11 +5,10 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.InteropServices;
-    using System.Security;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
+    using static Windows.Kernel32;
 
     /// <summary>
     /// Defines counter api surface
@@ -89,37 +88,5 @@ namespace Z0
                 dst = 0ul;
             return ref dst;
         }
-
-        [DllImport(Kernel32), SuppressUnmanagedCodeSecurity]
-        static extern int QueryPerformanceCounter(ref long count);
-
-        /// <summary>
-        /// Retrieves the number of performance counter counts per second.
-        /// </summary>
-        /// <remarks>This is determined by the OS at boot time and is invariant until the next reboot</remarks>
-        [DllImport(Kernel32), SuppressUnmanagedCodeSecurity]
-        static extern int QueryPerformanceFrequency(ref long frequency);
-
-        /// <summary>
-        /// Retrieves the cyle time for a specified thread
-        /// </summary>
-        /// <param name="hThread">The handle to the thread</param>
-        /// <param name="cycles">The number of cpu clock cycles used by the thread</param>
-        [DllImport(Kernel32), SuppressUnmanagedCodeSecurity]
-        static extern bool QueryThreadCycleTime(IntPtr hThread, ref ulong cycles);
-
-        /// <summary>
-        /// Retrieves the sum of the cycle time of all threads of the specified process.
-        /// </summary>
-        /// <param name="hProc">The handle to the process</param>
-        /// <param name="cycles">The number of cpu clock cycles used by the threads of the process</param>
-        [DllImport(Kernel32), SuppressUnmanagedCodeSecurity]
-        static extern bool QueryProcessCycleTime(IntPtr hProc, ref ulong cycles);
-
-        [DllImport(Kernel32), SuppressUnmanagedCodeSecurity]
-        static extern void QueryInterruptTime(ref ulong time);
-
-        [DllImport(Kernel32), SuppressUnmanagedCodeSecurity]
-        static extern void QueryInterruptTimePrecise(ref ulong time);
     }
 }

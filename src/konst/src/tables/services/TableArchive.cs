@@ -7,57 +7,55 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
-    using System.Linq;
 
-    using static Konst;
+    using static Part;
 
     using api = Table;
 
     using X = FileExtensions;
 
-    public readonly struct TableArchive : ITableArchive
+    public struct TableArchive : ITableArchive, IWfService<TableArchive,ITableArchive>
     {
-        public FS.FolderPath Root {get;}
+        IWfShell Wf;
+
+        public FS.FolderPath Root {get; private set;}
 
         [MethodImpl(Inline)]
-        internal TableArchive(FS.FolderPath root)
-            => Root = root;
+        internal TableArchive(IWfShell wf, FS.FolderPath? root = null)
+        {
+            Wf = wf;
+            Root = root ?? Wf.Db().TableRoot();
+        }
+
+        public void Init(IWfShell wf)
+        {
+            Wf = wf;
+            Root = wf.Db().TableRoot();
+        }
 
         public void Clear()
-            => Root.Clear();
+            => TableArchives.clear(Root);
 
         public void Clear(FS.FolderName folder)
-            => (FS.dir(Root.Name) + folder).Clear();
+            => TableArchives.clear(Root, folder);
 
         public IEnumerable<FS.FilePath> Files()
             => Root.Files(X.Csv, true);
 
-        public Option<FilePath> Deposit<F,R>(R[] src, FS.FileName name)
+        public Option<FS.FilePath> Deposit<F,R>(R[] src, FS.FileName name)
             where F : unmanaged, Enum
             where R : struct, ITabular
-                => TableArchives.service<F,R>().Save(src, api.renderspec<F>(), Root + FS.file(name.Name));
+                => TableArchives.deposit<F,R>(Root, src, name);
 
-        public Option<FilePath> Deposit<F,R>(R[] src, FS.FolderName folder, FS.FileName name)
+        public Option<FS.FilePath> Deposit<F,R>(R[] src, FS.FolderName folder, FS.FileName name)
             where F : unmanaged, Enum
             where R : struct, ITabular
-                => TableArchives.service<F,R>().Save(src, api.renderspec<F>(), (FS.dir(Root.Name) + folder) + name);
+                => TableArchives.deposit<F,R>(Root, src, folder, name);
 
-        public DataFlow<Rowset<T>,ArchivedTable<T>> Deposit<T,M,K>(T[] src, string header, Func<T,string> render,  M m = default)
+        public ArchivedRowset<T> Deposit<T,M,K>(T[] src, string header, Func<T,string> render, M m = default)
             where T : struct
             where M : struct, IDataModel
-            where K : unmanaged, Enum
-        {
-            var path = Root + FS.folder(m.Name) + FS.file(typeof(T).Name);
-            var records = z.span(src);
-            var count = records.Length;
-
-            using var writer = path.Writer();
-            writer.WriteLine(header);
-
-            for(var i=0u; i<count; i++)
-                writer.WriteLine(render(z.skip(records, i)));
-
-            return (Table.rowset<T>(src), new ArchivedTable<T>(path));
-        }
+            where K : unmanaged
+                => TableArchives.deposit<T,M,K>(Root, src, header, render, m);
     }
 }

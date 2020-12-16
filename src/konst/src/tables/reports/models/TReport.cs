@@ -42,11 +42,11 @@ namespace Z0
         string[] IReport.HeaderLabels
         {
             [MethodImpl(Inline)]
-            get => LiteralIndex.create<F>().Names;
+            get => ClrQuery.literalIndex<F>().Names;
         }
 
         [MethodImpl(Inline)]
-        Option<FilePath> Save(FilePath dst)
+        Option<FS.FilePath> Save(FS.FilePath dst)
             => Log.Save(Records, dst);
 
         TableRenderSpec<F> RenderSpec

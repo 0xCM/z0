@@ -16,19 +16,6 @@ namespace Z0
 
     public readonly partial struct OS
     {
-        [DllImport(Kernel32), Free]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        public static extern bool FreeLibrary(IntPtr hModule);
-
-        [Free, DllImport(Kernel32, SetLastError = true)]
-        public static extern bool CloseHandle(IntPtr hObject);
-
-        [DllImport(Kernel32, CharSet = CharSet.Unicode, SetLastError = true, EntryPoint = "LoadLibraryW"), Free]
-        public static extern IntPtr LoadLibrary(string lpLibFileName);
-
-        [DllImport(Kernel32), Free]
-        public static extern IntPtr GetProcAddress(IntPtr hModule, string procedureName);
-
         public readonly struct Delegates
         {
             [Fp(StdCall), Free]

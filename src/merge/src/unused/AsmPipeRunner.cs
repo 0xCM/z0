@@ -128,11 +128,11 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        ICaptureArchive CaptureArchive(FolderPath root)
+        ICaptureArchive CaptureArchive(FS.FolderPath root)
             => WfArchives.capture(root);
 
         [MethodImpl(Inline)]
-        ApiHexArchive UriBitsArchive(FolderPath root)
-            => WfArchives.hex(FS.dir(root.Name));
+        ApiHexArchive UriBitsArchive(FS.FolderPath root)
+            => WfArchives.hex(root);
     }
 }

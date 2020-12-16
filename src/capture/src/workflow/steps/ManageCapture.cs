@@ -10,8 +10,6 @@ namespace Z0
 
     using Z0.Asm;
 
-    using static z;
-
     [WfHost]
     public sealed class ManageCapture : WfHost<ManageCapture>
     {

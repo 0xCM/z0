@@ -8,8 +8,6 @@ namespace Z0
     using System.IO;
     using System.Collections.Generic;
 
-    using static Konst;
-
     partial struct TextDocParser
     {
         public static ParseResult<TextLine[]> lines(string src)

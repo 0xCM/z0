@@ -12,11 +12,11 @@ namespace Z0
     partial struct Pipes
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static PipeConnector<T> connect<T>(Pipe<T> src, Pipe<T> dst)
-            => new PipeConnector<T>(src,dst);
+        public static Conduit<T> connect<T>(Pipe<T> src, Pipe<T> dst)
+            => new Conduit<T>(src,dst);
 
         [MethodImpl(Inline)]
-        public static PipeConnector<S,T> connect<S,T>(Pipe<S,T> src, Pipe<T> dst)
-            => new PipeConnector<S,T>(src,dst);
+        public static Conduit<S,T> connect<S,T>(Pipe<S,T> src, Pipe<T> dst)
+            => new Conduit<S,T>(src,dst);
     }
 }

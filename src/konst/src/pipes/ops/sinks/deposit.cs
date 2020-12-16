@@ -26,8 +26,8 @@ namespace Z0
         }
 
         [Op]
-        public static void deposit(ReadOnlySpan<string> rows, StreamWriter dst)
-            => deposit(rows, Sinks.create<string>(dst));
+        public static void deposit(ReadOnlySpan<string> src, StreamWriter dst)
+            => deposit(src, Sinks.create<string>(dst));
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static void deposit<T>(in T src, in Pipe<T> dst)

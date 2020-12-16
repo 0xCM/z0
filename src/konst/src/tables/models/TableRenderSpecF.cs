@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
 
     public readonly struct TableRenderSpec<F> : ITextual
-        where F : unmanaged, Enum
+        where F : unmanaged
     {
         /// <summary>
         /// The field specifications

@@ -8,6 +8,8 @@ namespace Z0
     using System.Collections;
     using System.Collections.Generic;
 
+    using static memory;
+
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
@@ -18,23 +20,29 @@ namespace Z0
         Span<T> Terms
             => Storage;
 
+        Span<T> Edit
+            => Storage;
+
+        ReadOnlySpan<T> View
+            => Storage;
+
         int IMeasured.Length
             => Storage.Length;
 
         ref T this[int index]
-            => ref Storage[index];
+            => ref seek(Storage,index);
 
         ref T Lookup(int index)
-            => ref this[index];
+            => ref seek(Storage, index);
 
         ref T First
-            => ref this[0];
+            => ref first(Storage);
 
         ref T Last
-            => ref this[Length - 1];
+            => ref seek(Storage,Length - 1);
 
         bool INullity.IsEmpty
-            => false;
+            => Length == 0;
 
         IEnumerator IEnumerable.GetEnumerator()
             => Storage.GetEnumerator();

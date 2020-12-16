@@ -151,6 +151,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static string[] labels()
-            => LiteralIndex.create<F>().Names;
+            => ClrQuery.literalIndex<F>().Names;
     }
 }

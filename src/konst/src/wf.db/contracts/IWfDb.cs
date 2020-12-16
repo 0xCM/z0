@@ -10,8 +10,12 @@ namespace Z0
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    public interface IWfDbOps : IArchiveOps, IWfDbPaths
+    [Free]
+    public interface IWfDb : IWfDbPaths, IArchiveOps, IFileArchive
     {
+        ITableArchive TableArchive<S>(S subject)
+            => new DbTables<S>(this, subject);
+
         FS.FilePath CopyToNotebook(FS.FilePath src, string notebook)
             => src.CopyTo(Notebook(notebook));
 
@@ -20,20 +24,5 @@ namespace Z0
 
         FS.Files IArchiveOps.Clear(FS.FolderName id)
             => (TableRoot() + id).Clear(list<FS.FilePath>()).Array();
-    }
-
-    [Free]
-    public interface IWfDb : IWfDbPaths, IWfDbOps, IArchiveOps, IFileArchive
-    {
-        ITableArchive TableArchive<S>(S subject)
-            => new FileDbTables<S>(this, subject);
-
-        PartFiles PartFiles()
-        {
-            var parsed = ParsedExtractFiles();
-            var hex = CapturedHexFiles();
-            var asm = CapturedAsmFiles();
-            return new PartFiles(parsed, hex, asm);
-        }
     }
 }

@@ -8,13 +8,23 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static z;
+    using static memory;
 
     using api = Seq;
 
     public readonly struct Index<T> : IIndex<T>
     {
         internal readonly T[] Data;
+
+        [MethodImpl(Inline)]
+        public Index(T[] content)
+            => Data = content;
+
+        public Span<T> Edit
+        {
+            [MethodImpl(Inline)]
+            get => Data;
+        }
 
         public ReadOnlySpan<T> View
         {
@@ -23,12 +33,6 @@ namespace Z0
         }
 
         public Span<T> Terms
-        {
-            [MethodImpl(Inline)]
-            get => Data;
-        }
-
-        public Span<T> Edit
         {
             [MethodImpl(Inline)]
             get => Data;
@@ -43,7 +47,7 @@ namespace Z0
         public Deferred<T> Deferred
         {
             [MethodImpl(Inline)]
-            get => new Deferred<T>(Storage);
+            get => api.defer(this);
         }
 
         public MemoryAddress Address
@@ -68,20 +72,16 @@ namespace Z0
         public bit Search(Func<T,bool> predicate, out T found)
             => api.search(this, predicate, out found);
 
-        [MethodImpl(Inline)]
-        public Index(T[] content)
-            => Data = content;
-
         public ref T this[long i]
         {
             [MethodImpl(Inline)]
-            get => ref Data[i];
+            get => ref seek(Data,i);
         }
 
         public ref T this[ulong i]
         {
             [MethodImpl(Inline)]
-            get => ref Data[i];
+            get => ref seek(Data,i);
         }
 
         public int Length
@@ -97,19 +97,22 @@ namespace Z0
         }
 
         public ref T First
-            => ref this[0];
-
-        public ref T Last
-             => ref this[Length - 1];
-
-        public Index<T> Reverse()
         {
-            Array.Reverse(Data);
-            return this;
+            [MethodImpl(Inline)]
+            get => ref api.first(this);
         }
 
+        public ref T Last
+        {
+            [MethodImpl(Inline)]
+            get => ref api.last(this);
+        }
+
+        public Index<T> Reverse()
+            => api.reverse(this);
+
         public Index<Y> Cast<Y>()
-            => new Index<Y>(Storage.Select(x => cast<Y>(x)));
+            => new Index<Y>(Storage.Select(x => z.cast<Y>(x)));
 
         public Index<Y> Select<Y>(Func<T,Y> selector)
              => api.map(this, selector);
@@ -123,12 +126,6 @@ namespace Z0
         public Index<T> Where(Func<T,bool> predicate)
             => api.filter(this, predicate);
 
-        public static Index<T> Empty
-        {
-           [MethodImpl(Inline)]
-           get => api.EmptyIndex<T>();
-        }
-
         [MethodImpl(Inline)]
         public static implicit operator Span<T>(Index<T> src)
             => src.Terms;
@@ -141,8 +138,14 @@ namespace Z0
         public static implicit operator Index<T>(T[] src)
             => new Index<T>(src);
 
-       [MethodImpl(Inline)]
+        [MethodImpl(Inline)]
         public static implicit operator T[](Index<T> src)
             => src.Data;
+
+        public static Index<T> Empty
+        {
+           [MethodImpl(Inline)]
+           get => api.EmptyIndex<T>();
+        }
     }
 }

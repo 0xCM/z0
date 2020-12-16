@@ -21,6 +21,7 @@ namespace Z0
     {
         T Content => (T)this;
 
+
         BitSize ISized.StorageWidth
             => Unsafe.SizeOf<T>()*8;
 
@@ -28,18 +29,20 @@ namespace Z0
             => Content.ToString();
     }
 
-    [Free]
-    public interface IDataTypeComparable<T> : IDataType<T>, IComparable<T>
-        where T : struct
-    {
-
-    }
 
     [Free]
     public interface IDataTypeEquatable<T> : IDataType<T>, IEquatable<T>
         where T : struct
     {
 
+    }
+
+    [Free]
+    public interface IDataTypeComparable<T> : IDataTypeEquatable<T>, IComparable<T>
+        where T : struct
+    {
+        bool IEquatable<T>.Equals(T src)
+            => CompareTo(src) == 0;
     }
 
     /// <summary>

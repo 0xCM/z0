@@ -4,9 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using static Part;
+
     [ApiHost]
     public static partial class XText
     {
-
+        const NumericKind Closure = UnsignedInts;
     }
 }

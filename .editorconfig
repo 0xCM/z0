@@ -13,8 +13,8 @@ indent_size = 2
 curly_bracket_next_line = true
 indent_brace_style = Allman
 
-[csproj]
+[*.csproj]
 indent_size = 2
 
-[props]
+[*.props]
 indent_size = 2

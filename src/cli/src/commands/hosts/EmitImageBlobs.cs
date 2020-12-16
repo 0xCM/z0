@@ -78,7 +78,7 @@ namespace Z0
             writer.WriteLine(header);
 
             for(var i=0u; i<count; i++)
-                writer.WriteLine(format(skip(data,i),columns, buffer));
+                writer.WriteLine(format(skip(data,i), columns, buffer));
 
             EmissionCount += count;
 
