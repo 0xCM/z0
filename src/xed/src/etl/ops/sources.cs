@@ -12,7 +12,7 @@ namespace Z0
     partial struct XedWfOps
     {
         [MethodImpl(Inline), Op]
-        public static XedSources SourceArchive(FS.FolderPath root)
+        public static XedSources sources(FS.FolderPath root)
             => new XedSources(root);
     }
 }

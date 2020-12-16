@@ -223,7 +223,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ref readonly AsciSequence encode(string src, in AsciSequence dst)
         {
-            var buffer = dst.Storage.Data;
+            var buffer = dst.Storage;
             encode(src, buffer);
             return ref dst;
         }

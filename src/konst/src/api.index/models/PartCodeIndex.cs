@@ -15,14 +15,6 @@ namespace Z0
 
     public readonly struct PartCodeIndex
     {
-        public static PartCodeIndexEntry[] entries(in PartCodeIndex src)
-        {
-            var buffer = list<PartCodeIndexEntry>(src.Data.Count);
-            foreach(var item in src.Data)
-                buffer.Add(new PartCodeIndexEntry(item.Key, item.Value));
-            return buffer.ToArray();
-        }
-
         public readonly PartId[] Parts;
 
         readonly ApiHostCodeLookup Data;
@@ -42,9 +34,7 @@ namespace Z0
         }
 
         public PartCodeIndexEntry[] Entries
-        {
-            get => entries(this);
-        }
+            => entries(this);
 
         public bool HostCode(ApiHostUri host, out ApiHostCodeBlocks code)
         {
@@ -69,16 +59,24 @@ namespace Z0
             get => Data.Keys.ToArray();
         }
 
-        public TableSpan<ApiCodeBlock> this[ApiHostUri src]
+        public Index<ApiCodeBlock> this[ApiHostUri src]
         {
             [MethodImpl(Inline)]
-            get => Data[src].Code;
+            get => Data[src].Storage;
         }
 
         public static PartCodeIndex Empty
         {
             [MethodImpl(Inline)]
             get => new PartCodeIndex(sys.empty<PartId>(), ApiHostCodeLookup.Empty);
+        }
+
+        static PartCodeIndexEntry[] entries(in PartCodeIndex src)
+        {
+            var buffer = list<PartCodeIndexEntry>(src.Data.Count);
+            foreach(var item in src.Data)
+                buffer.Add(new PartCodeIndexEntry(item.Key, item.Value));
+            return buffer.ToArray();
         }
     }
 }

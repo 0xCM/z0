@@ -20,20 +20,20 @@ namespace Z0
             => new MemberExtractor(bufferlen);
 
         [MethodImpl(Inline), Op]
-        public static Option<BasedCodeBlock> parse(BasedCodeBlock src, byte[] buffer)
+        public static Option<CodeBlock> parse(CodeBlock src, byte[] buffer)
         {
             if(ApiExtractParsers.parse(src, buffer, out var dst))
                 return Option.some(dst);
             else
-                return Option.none<BasedCodeBlock>();
+                return Option.none<CodeBlock>();
         }
 
         [MethodImpl(Inline), Op]
-        public static BasedCodeBlock extract(MemoryAddress src, byte[] buffer)
+        public static CodeBlock extract(MemoryAddress src, byte[] buffer)
         {
             Span<byte> target = buffer;
             var length = MemoryExtractor.read(src, target);
-            return new BasedCodeBlock(src, sys.array(target.Slice(0,length)));
+            return new CodeBlock(src, sys.array(target.Slice(0,length)));
         }
 
         [MethodImpl(Inline), Op]
@@ -42,7 +42,7 @@ namespace Z0
             var address = src.Address;
             var length = MemoryExtractor.read(address, buffer);
             var extracted = sys.array(buffer.Slice(0,length));
-            return new ApiMemberExtract(src, new BasedCodeBlock(address, extracted));
+            return new ApiMemberExtract(src, new CodeBlock(address, extracted));
         }
 
         [Op]

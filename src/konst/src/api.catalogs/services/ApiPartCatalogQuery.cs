@@ -94,7 +94,7 @@ namespace Z0
                 dst.TermCode = Enums.parse(fields[index++], ExtractTermCode.None);
                 dst.Uri = ApiUriParser.Service.Parse(fields[index++]).Require();
                 dst.OpSig = fields[index++];
-                dst.Data = new BasedCodeBlock(dst.Address, Parsers.hex(true).ParseData(fields[index++], sys.empty<byte>()));
+                dst.Data = new CodeBlock(dst.Address, Parsers.hex(true).ParseData(fields[index++], sys.empty<byte>()));
                 return ParseResult.Success(src, dst);
             }
             catch(Exception e)

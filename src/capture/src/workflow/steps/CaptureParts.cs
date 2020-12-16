@@ -93,7 +93,7 @@ namespace Z0
 
             ClearCaptureArchives.create().Run(Wf);
 
-            var catalogs = Config.Api.Catalogs.Terms;
+            var catalogs = Config.Api.Catalogs.View;
             var count = catalogs.Length;
             for(var i=0; i<count; i++)
                 CapturePart(skip(catalogs,i));

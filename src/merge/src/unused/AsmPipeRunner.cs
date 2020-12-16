@@ -71,7 +71,7 @@ namespace Z0.Asm
             using var log = Db.TaskLogPath("AsmPipeRunner").Writer();
 
             var capture = CaptureArchive(Db.CaptureRoot());
-            var archive = UriBitsArchive(capture.X86Dir);
+            var archive = UriBitsArchive(capture.HexDir);
             for(var i=0; i<parts.Length; i++)
             {
                 var part = parts[i];
@@ -103,7 +103,7 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         AsmFxList ToList(AsmInstructions src)
-            => asm.list(src, new BasedCodeBlock(BaseAddress, src.Encoded));
+            => asm.list(src, new CodeBlock(BaseAddress, src.Data));
 
         void RunPipe(ReadOnlySpan<ApiCodeBlock> src, StreamWriter log)
         {

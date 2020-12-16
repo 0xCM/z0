@@ -20,6 +20,18 @@ namespace Z0
         public IndexedView(T[] src)
             => Data = src;
 
+        public T[] Storage
+        {
+            [MethodImpl(Inline)]
+            get => Data;
+        }
+
+        public ReadOnlySpan<T> View
+        {
+            [MethodImpl(Inline)]
+            get => Data;
+        }
+
         public ReadOnlySpan<T> Terms
         {
             [MethodImpl(Inline)]
@@ -29,7 +41,7 @@ namespace Z0
         public ref readonly T this[uint index]
         {
             [MethodImpl(Inline)]
-            get => ref skip(Terms, index);
+            get => ref skip(Data, index);
         }
 
         uint Length
@@ -44,11 +56,6 @@ namespace Z0
             get => Length;
         }
 
-        public T[] Storage
-        {
-            [MethodImpl(Inline)]
-            get => Data;
-        }
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
@@ -93,6 +100,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator T[](IndexedView<T> src)
             => src.Data;
-
     }
 }

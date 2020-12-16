@@ -4,8 +4,13 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IWfArchives
-    {
+    using System;
 
+    public interface ICodeBlock : IEncoded
+    {
+        /// <summary>
+        /// The head of the memory location from which the data originated
+        /// </summary>
+        MemoryAddress Base {get;}
     }
 }

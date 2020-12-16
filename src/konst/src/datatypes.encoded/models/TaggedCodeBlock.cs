@@ -19,10 +19,10 @@ namespace Z0
         /// <summary>
         /// The encoded content
         /// </summary>
-        public BasedCodeBlock Encoded {get;}
+        public CodeBlock Encoded {get;}
 
         [MethodImpl(Inline)]
-        public TaggedCodeBlock(BasedCodeBlock code, string tag)
+        public TaggedCodeBlock(CodeBlock code, string tag)
         {
             Tag = tag;
             Encoded = code;
@@ -34,7 +34,7 @@ namespace Z0
         public byte[] Data
         {
             [MethodImpl(Inline)]
-            get => Encoded.Data;
+            get => Encoded.Code;
         }
 
         public int Length
@@ -85,7 +85,7 @@ namespace Z0
         internal TaggedCodeBlock(ulong zero)
         {
             Tag = EmptyString;
-            Encoded = BasedCodeBlock.Empty;
+            Encoded = CodeBlock.Empty;
         }
 
         [MethodImpl(Inline)]

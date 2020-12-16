@@ -39,7 +39,7 @@ namespace Z0
         public ApiCodeBlock[] Read(FS.FilePath src)
             => ApiHexReader.read(src).Where(x => x.IsNonEmpty);
 
-        public ListedFiles List()
+        public ListedFiles Listing()
             => FS.list(Root.Files(DefaultExt));
 
         /// <summary>
@@ -96,7 +96,7 @@ namespace Z0
         /// </summary>
         public IEnumerable<ApiCodeBlock> ApiCode()
         {
-            var list = List();
+            var list = Listing();
             var iCount = list.Count;
             for(var i=0; i<iCount; i++)
             {
@@ -130,13 +130,6 @@ namespace Z0
                     yield return item;
             }
         }
-
-        /// <summary>
-        /// Reads the code defined by a specified file
-        /// </summary>
-        /// <param name="src">The source path</param>
-        public ApiCodeBlock[] Read(FilePath src)
-            => ApiHexReader.Service.Read(src);
 
         public ApiHostCodeBlocks Index(FS.FilePath src)
         {

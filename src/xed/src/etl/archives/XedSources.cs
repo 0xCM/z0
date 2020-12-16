@@ -11,15 +11,15 @@ namespace Z0
 
     public readonly struct XedSources : IPartFilePaths
     {
-        public FS.FolderPath ArchiveRoot {get;}
+        public FS.FolderPath Root {get;}
 
         public FS.FilePath[] Files {get;}
 
         [MethodImpl(Inline)]
         internal XedSources(FS.FolderPath root)
         {
-            ArchiveRoot = root;
-            Files = ArchiveRoot.Files(FileExtensions.Txt,true);
+            Root = root;
+            Files = Root.Files(FileExtensions.Txt, true);
         }
 
         bool DefinesInstructions(FS.FilePath file)

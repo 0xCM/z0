@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// The hex bits found at the end of a uri
     /// </summary>
-    public readonly struct ApiCodeBlock : ITextual
+    public readonly struct ApiCodeBlock
     {
         /// <summary>
         /// The operation uri
@@ -22,27 +22,39 @@ namespace Z0
         /// <summary>
         /// The encoded operation data
         /// </summary>
-        public BasedCodeBlock Code {get;}
+        public CodeBlock Code {get;}
 
         [MethodImpl(Inline)]
         public ApiCodeBlock(MemoryAddress @base, OpUri uri, BinaryCode src)
         {
             Uri = uri;
-            Code = new BasedCodeBlock(@base,src);
+            Code = new CodeBlock(@base,src);
         }
 
         [MethodImpl(Inline)]
         public ApiCodeBlock(OpUri uri, MemoryAddress @base, BinaryCode src)
         {
             Uri = uri;
-            Code = new BasedCodeBlock(@base,src);
+            Code = new CodeBlock(@base,src);
         }
 
         [MethodImpl(Inline)]
-        public ApiCodeBlock(OpUri uri, BasedCodeBlock code)
+        public ApiCodeBlock(OpUri uri, CodeBlock code)
         {
             Code = code;
             Uri = uri;
+        }
+
+        public byte[] Storage
+        {
+            [MethodImpl(Inline)]
+            get => Code.Storage;
+        }
+
+        public ReadOnlySpan<byte> View
+        {
+            [MethodImpl(Inline)]
+            get => Code.Storage;
         }
 
         /// <summary>
@@ -90,7 +102,7 @@ namespace Z0
         public byte[] Data
         {
             [MethodImpl(Inline)]
-            get => Encoded.Data;
+            get => Encoded.Storage;
         }
 
         public uint Size
@@ -157,7 +169,7 @@ namespace Z0
             => src.Code;
 
         [MethodImpl(Inline)]
-        public static implicit operator BasedCodeBlock(ApiCodeBlock src)
-            => new BasedCodeBlock(src.Base, src.Code);
+        public static implicit operator CodeBlock(ApiCodeBlock src)
+            => new CodeBlock(src.Base, src.Code);
     }
 }

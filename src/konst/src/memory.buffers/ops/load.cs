@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
+    using static memory;
 
     partial struct Buffers
     {
@@ -25,8 +26,8 @@ namespace Z0
         public static unsafe Span<byte> load(in BinaryCode src, BufferToken dst)
         {
             @check(src,dst);
-            var source = z.span(src.Data);
-            var target = sys.clear(z.cover(dst.Address.Pointer<byte>(), dst.BufferSize));
+            var source = span(src.Storage);
+            var target = sys.clear(memory.cover(dst.Address.Pointer<byte>(), dst.BufferSize));
             return sys.copy(source,target);
         }
     }

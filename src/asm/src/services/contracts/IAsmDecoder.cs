@@ -29,7 +29,7 @@ namespace Z0.Asm
         /// Decodes an instruction list
         /// </summary>
         /// <param name="src">The code source</param>
-        Option<AsmFxList> Decode(BasedCodeBlock src);
+        Option<AsmFxList> Decode(CodeBlock src);
 
         Option<AsmInstructions> Decode(ApiCodeBlock src);
 
@@ -37,7 +37,7 @@ namespace Z0.Asm
 
         Option<AsmFxList> Decode(ApiCodeBlock src, Action<Instruction> f);
 
-        Option<AsmFxList> Decode(BasedCodeBlock src, Action<Instruction> f);
+        Option<AsmFxList> Decode(CodeBlock src, Action<Instruction> f);
 
         Option<AsmInstructions> Decode(BinaryCode code, MemoryAddress @base);
     }

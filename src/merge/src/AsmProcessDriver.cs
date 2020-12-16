@@ -93,17 +93,17 @@ namespace Z0
             return asm.sets(sets);
         }
 
-        void Process(in BasedCodeBlock code, in AsmFxList asm)
+        void Process(in CodeBlock code, in AsmFxList asm)
         {
-            var data = code.Data;
-            var bytes = data.ToReadOnlySpan();
+            var data = code.Code;
+            var bytes = data.View;
             var instructions = asm.Data;
-            Process(code.Encoded, instructions);
+            Process(code.Code, instructions);
         }
 
         void Process(in BinaryCode code, Instruction[] asm)
         {
-            var bytes = span(code.Data);
+            var bytes = span(code.Storage);
             ushort offset = 0;
 
             for(var i=0; i<asm.Length; i++)

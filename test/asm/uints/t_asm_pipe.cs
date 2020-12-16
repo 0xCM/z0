@@ -47,7 +47,7 @@ namespace Z0.Asm
             var id = PartId.GMath;
             var paths = AppPaths.ForApp();
             var capture = WfArchives.capture(paths.AppCaptureRoot);
-            var archive = WfArchives.hex(FS.dir(capture.X86Dir.Name));
+            var archive = WfArchives.hex(FS.dir(capture.HexDir.Name));
             var direct = archive.Read(dSrc).ToArray();
             var generic = archive.Read(gSrc).ToArray();
             check_unary_ops(direct);

@@ -23,6 +23,6 @@ namespace Z0
         }
 
         public IModuleArchive Modules
-            => ModuleArchive.create(Root);
+            => FileArchives.modules(Root);
     }
 }

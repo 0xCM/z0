@@ -39,7 +39,7 @@ namespace Z0
 
         public readonly string OpSig;
 
-        public readonly BasedCodeBlock Data;
+        public readonly CodeBlock Data;
 
         const int FieldCount = 6;
 
@@ -56,11 +56,11 @@ namespace Z0
             var uri = ApiUriParser.Service.Parse(fields[3]).ValueOrDefault(OpUri.Empty);
             var sig = fields[4];
             var data = fields[5].SplitClean(HexFormatSpecs.DataDelimiter).Select(Parsers.hex(true).Succeed).ToArray();
-            var extract = new BasedCodeBlock(address, data);
+            var extract = new CodeBlock(address, data);
             return new R(seq, address, len, uri, sig, extract);
         }
 
-        public ApiExtractBlock(int Sequence, MemoryAddress Address, int Length, OpUri Uri, string OpSig, BasedCodeBlock Data)
+        public ApiExtractBlock(int Sequence, MemoryAddress Address, int Length, OpUri Uri, string OpSig, CodeBlock Data)
         {
             this.Sequence = Sequence;
             this.Address = Address;
@@ -83,6 +83,6 @@ namespace Z0
         }
 
         public static R Empty
-            => new R(0, MemoryAddress.Empty, 0, OpUri.Empty, EmptyString, BasedCodeBlock.Empty);
+            => new R(0, MemoryAddress.Empty, 0, OpUri.Empty, EmptyString, CodeBlock.Empty);
     }
 }

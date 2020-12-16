@@ -7,12 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     public readonly struct ApiCodeBlocks
     {
-        public TableSpan<ApiCodeBlock> Code {get;}
+        public Index<ApiCodeBlock> Code {get;}
 
         [MethodImpl(Inline)]
         public ApiCodeBlocks(ApiCodeBlock[] code)

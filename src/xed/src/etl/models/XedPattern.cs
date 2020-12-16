@@ -9,35 +9,36 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct XedPattern
+    [Record]
+    public struct XedPattern : IRecord<XedPattern>
     {
-        public string Class {get;}
+        public string Class;
 
-        public string Category {get;}
+        public string Category;
 
-        public string Extension {get;}
+        public string Extension;
 
-        public string IsaSet {get;}
+        public string IsaSet;
 
-        public string PatternText {get;}
+        public string PatternText;
 
-        public string OperandText {get;}
+        public string OperandText;
 
-        public string[] Parts {get;}
+        public string[] Parts;
 
-        public string[] Operands  {get;}
+        public string[] Operands;
 
-        [MethodImpl(Inline)]
-        public XedPattern(string @class, string category, string extension, string isaset, string patternText, string operandText)
-        {
-            Class = @class ?? string.Empty;
-            Category = category ?? string.Empty;
-            Extension = extension ?? string.Empty;
-            IsaSet = isaset ?? string.Empty;
-            PatternText = patternText ?? string.Empty;
-            Parts = PatternText.SplitClean(Space);
-            OperandText = operandText ?? string.Empty;
-            Operands = OperandText.SplitClean(Space);
-        }
+        // [MethodImpl(Inline)]
+        // public XedPattern(string @class, string category, string extension, string isaset, string patternText, string operandText)
+        // {
+        //     Class = @class ?? string.Empty;
+        //     Category = category ?? string.Empty;
+        //     Extension = extension ?? string.Empty;
+        //     IsaSet = isaset ?? string.Empty;
+        //     PatternText = patternText ?? string.Empty;
+        //     Parts = PatternText.SplitClean(Space);
+        //     OperandText = operandText ?? string.Empty;
+        //     Operands = OperandText.SplitClean(Space);
+        // }
     }
 }

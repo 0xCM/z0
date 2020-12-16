@@ -25,25 +25,25 @@ namespace Z0
             => new PatternExtractParser(sys.alloc<byte>(size));
 
         [MethodImpl(Inline), Op]
-        public static ParseResult<BinaryCode,BasedCodeBlock> parse(in BasedCodeBlock src, in BinaryCode buffer)
+        public static ParseResult<BinaryCode,CodeBlock> parse(in CodeBlock src, in BinaryCode buffer)
         {
             var parser = pattern(buffer);
             var status = parser.Parse(src);
             var matched = parser.Result;
             var succeeded = matched.IsSome() && status.Success();
             return succeeded
-                ? ParseResult.Success(buffer, new BasedCodeBlock(src.Base, parser.Parsed))
-                : ParseResult.Fail<BinaryCode,BasedCodeBlock>(buffer);
+                ? ParseResult.Success(buffer, new CodeBlock(src.Base, parser.Parsed))
+                : ParseResult.Fail<BinaryCode,CodeBlock>(buffer);
         }
 
         [MethodImpl(Inline), Op]
-        public static bool parse(in BasedCodeBlock src, in BinaryCode buffer, out BasedCodeBlock dst)
+        public static bool parse(in CodeBlock src, in BinaryCode buffer, out CodeBlock dst)
         {
             var result = parse(src, buffer);
             if(result.Succeeded)
                 dst = result.Value;
             else
-                dst = BasedCodeBlock.Empty;
+                dst = CodeBlock.Empty;
             return result.Succeeded;
         }
     }

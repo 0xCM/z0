@@ -7,23 +7,21 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     [ApiHost]
     public readonly struct ByteSpans
     {
         [MethodImpl(Inline), Op]
-        public static string property(BasedCodeBlock src, ApiMetadataUri uri)
+        public static string property(CodeBlock src, ApiMetadataUri uri)
             => comment(new ByteSpanProperty(uri.Identifier, src).Format());
 
         [MethodImpl(Inline), Op]
-        public static string property(BasedCodeBlock src, OpIdentity id)
+        public static string property(CodeBlock src, OpIdentity id)
             => comment(new ByteSpanProperty(LegalIdentityBuilder.code(id), src).Format());
 
         [MethodImpl(Inline), Op]
         public static string comment(string text)
             =>  $"; {text}";
-
     }
 }

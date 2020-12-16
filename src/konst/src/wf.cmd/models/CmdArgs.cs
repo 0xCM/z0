@@ -38,7 +38,7 @@ namespace Z0
         public Span<CmdArg> Terms
         {
             [MethodImpl(Inline)]
-            get => Data.Terms;
+            get => Data.Storage;
         }
 
         public uint Count

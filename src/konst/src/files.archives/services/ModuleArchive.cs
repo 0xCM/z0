@@ -14,18 +14,7 @@ namespace Z0
     [Service]
     public struct ModuleArchive : IModuleArchive
     {
-        /// <summary>
-        /// Creates an archive over both managed and unmanaged modules
-        /// </summary>
-        /// <param name="root">The archive root</param>
-        [MethodImpl(Inline), Op]
-        public static IModuleArchive create(FS.FolderPath root)
-            => new ModuleArchive(root);
-
-        public FS.FolderPath Root;
-
-        FS.FolderPath IArchivePaths.Root
-            => Root;
+        public FS.FolderPath Root {get;}
 
         [MethodImpl(Inline)]
         internal ModuleArchive(FS.FolderPath root)

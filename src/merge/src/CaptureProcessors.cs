@@ -30,7 +30,7 @@ namespace Z0
             {
                 var fx = src[i];
                 var len = fx.ByteLength;
-                var data = span(code.Code.Data);
+                var data = span(code.Storage);
                 var slice = data.Slice((int)offseq.Offset, len).ToArray();
                 var recoded = new ApiCodeBlock(code.Uri, fx.IP, slice);
                 dst[i] = new ApiInstruction(@base, fx, recoded);
@@ -66,7 +66,11 @@ namespace Z0
             var svc = ApiIndexService.init(wf);
             var index = svc.CreateIndex();
             run(wf, state, index);
-            process(wf, decode(wf, state.RoutineDecoder, index));
+
+            var decoded = decode(wf, state.RoutineDecoder, index);
+
+            process(wf, decoded);
+
             ResBytesEmitter.create().WithIndex(index).Run(wf);
         }
 
@@ -129,6 +133,8 @@ namespace Z0
             var kParts = 0u;
             var kFx = 0u;
 
+            wf.Status($"Decoding {partCount} parts");
+
             for(var i=0; i<partCount; i++)
             {
                 hostFx.Clear();
@@ -140,12 +146,18 @@ namespace Z0
                     var hosts = src.Hosts.Where(h => h.Owner == part);
                     var hostCount = hosts.Length;
 
+                    wf.Status($"Decoding {hostCount} {part} hosts");
+
                     for(var j=0; j<hostCount; j++)
                     {
                         var host = hosts[j];
-                        var members = src[host];
+                        wf.Status($"Decoding {host}");
+
+                        var members = src.HostCodeBlocks(host);
                         if(members.IsNonEmpty)
                         {
+                            wf.Status($"Decoding {members.Count} {host} members");
+
                             var fx = decode(decoder, members);
                             hostFx.Add(fx);
                             kHosts++;

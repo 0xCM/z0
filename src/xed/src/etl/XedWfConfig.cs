@@ -14,21 +14,20 @@ namespace Z0
         public XedWfConfig(IWfShell wf)
         {
             Settings = XedSettings.Default();
-            SourceRoot = wf.Db().SourceRoot("xed");
-            TargetRoot = FS.dir(wf.Paths.Root.Name) + FS.folder("data") + FS.folder("xed");
+            var db = wf.Db();
+
+            Source = db.DevData("xed");
+            Target = db.RefData("xed");
         }
 
         public FS.FileName SummaryFile
             => FS.file(text.format("{0}.{1}", "xed", "summary"), DataFileExt);
 
-        public readonly XedSettings Settings;
+        public XedSettings Settings {get;}
 
-        public readonly FS.FolderPath SourceRoot;
+        public FS.FolderPath Source {get;}
 
-        public readonly FS.FolderPath TargetRoot;
-
-        public FS.FolderPath ExtractRoot
-            => TargetRoot + FS.folder("extracts");
+        public FS.FolderPath Target {get;}
 
         public FS.FolderName ExtensionFolder
             => FS.folder("extensions");

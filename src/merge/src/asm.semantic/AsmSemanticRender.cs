@@ -134,7 +134,7 @@ namespace Z0
 
         [Op, MethodImpl(NotInline)]
         string Format(BinaryCode src)
-            => text.concat("encoded", text.bracket(src.Length), Assign, src.Data.FormatHexBytes(DataFormat));
+            => text.concat("encoded", text.bracket(src.Length), Assign, src.Storage.FormatHexBytes(DataFormat));
 
         [Op, MethodImpl(NotInline)]
         string Footer(ApiInstruction src)

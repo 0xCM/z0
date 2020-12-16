@@ -8,17 +8,19 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static memory;
+    using static z;
 
     using api = Seq;
 
     public readonly struct Index<T> : IIndex<T>
     {
-        internal readonly T[] Data;
+        readonly T[] Data;
 
         [MethodImpl(Inline)]
         public Index(T[] content)
             => Data = content;
+        public string Format()
+            => Seq.format(Data);
 
         public Span<T> Edit
         {
@@ -53,7 +55,7 @@ namespace Z0
         public MemoryAddress Address
         {
             [MethodImpl(Inline)]
-            get => z.address(Data);
+            get => address(Data);
         }
 
         public bool IsEmpty
@@ -93,7 +95,7 @@ namespace Z0
         public uint Count
         {
             [MethodImpl(Inline)]
-            get => (uint)Length;
+            get => (uint)Data.Length;
         }
 
         public ref T First
@@ -128,11 +130,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator Span<T>(Index<T> src)
-            => src.Terms;
+            => src.Storage;
 
         [MethodImpl(Inline)]
         public static implicit operator ReadOnlySpan<T>(Index<T> src)
-            => src.View;
+            => src.Storage;
 
         [MethodImpl(Inline)]
         public static implicit operator Index<T>(T[] src)
@@ -140,12 +142,12 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator T[](Index<T> src)
-            => src.Data;
+            => src.Storage;
 
         public static Index<T> Empty
         {
            [MethodImpl(Inline)]
-           get => api.EmptyIndex<T>();
+           get => new Index<T>(sys.empty<T>());
         }
     }
 }

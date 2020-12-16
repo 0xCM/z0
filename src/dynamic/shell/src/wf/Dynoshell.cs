@@ -11,9 +11,6 @@ namespace Z0
     using System.Reflection.Metadata;
     using System.Diagnostics;
 
-    using Z0.Tools;
-
-    using static Konst;
     using static z;
 
     class Dynoshell : IDisposable
@@ -110,7 +107,7 @@ namespace Z0
         {
             var archive = ImageArchives.csv(wf);
             wf.Status(archive.Root);
-            zfunc.iter(archive.List().Storage, file => wf.Status(file));
+            zfunc.iter(archive.Listing().Storage, file => wf.Status(file));
         }
 
         [Op]
@@ -193,6 +190,18 @@ namespace Z0
             }
         }
 
+        void EmitReferenceData()
+        {
+            var xed = XedWf.create(Wf);
+            xed.Run();
+        }
+
+        void CreateApiIndex()
+        {
+            var svc = ApiIndex.service(Wf);
+            var index = svc.CreateIndex();
+        }
+
         public void Run()
         {
             //EmitProcessImages(Wf);
@@ -201,9 +210,7 @@ namespace Z0
             //EmitBuildArchiveList(Wf.Db().BuildArchiveRoot(), "zbuild");
             //EmitCilTables(Wf, "z0.bitcore.dll");
 
-            var svc = ApiIndex.service(Wf);
-            var index = svc.CreateIndex();
-
+            EmitReferenceData();
             // var component = Wf.Api.FindComponent(PartId.BitCore).Require();
             // var result = Cli.EmitCilTableDoc(Wf, component);
 

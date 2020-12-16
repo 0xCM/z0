@@ -5,9 +5,6 @@
 namespace Z0
 {
 
-    using System;
-    using System.Runtime.CompilerServices;
-
     using static Konst;
 
     public enum XedInstructionField : uint
@@ -24,5 +21,4 @@ namespace Z0
 
         Reg = 5 | 8 << WidthOffset,
     }
-
 }

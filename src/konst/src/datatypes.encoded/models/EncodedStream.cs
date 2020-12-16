@@ -20,7 +20,7 @@ namespace Z0
         public EncodedStream(BinaryCode src)
         {
             Store = src;
-            Stream =  new MemoryStream(src.Encoded);
+            Stream =  new MemoryStream(src.Storage);
         }
 
         public void Dispose()

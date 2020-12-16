@@ -20,13 +20,19 @@ namespace Z0
         public IApiPartCatalog[] Storage
         {
             [MethodImpl(Inline)]
-            get => Data;
+            get => Data.Storage;
         }
 
         public ReadOnlySpan<IApiPartCatalog> Terms
         {
             [MethodImpl(Inline)]
             get => Data.Terms;
+        }
+
+        public ReadOnlySpan<IApiPartCatalog> View
+        {
+            [MethodImpl(Inline)]
+            get => Data.Storage;
         }
 
         public Type[] EnumTypes

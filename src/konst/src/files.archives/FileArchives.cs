@@ -10,10 +10,17 @@ namespace Z0
 
     using static Konst;
 
-
     [ApiHost]
     public readonly partial struct FileArchives
     {
+        /// <summary>
+        /// Creates an archive over both managed and unmanaged modules
+        /// </summary>
+        /// <param name="root">The archive root</param>
+        [MethodImpl(Inline), Op]
+        public static IModuleArchive modules(FS.FolderPath root)
+            => new ModuleArchive(root);
+
         [Op]
         public static FS.Files match(FS.FolderPath root, params FS.FileExt[] ext)
         {
@@ -72,7 +79,5 @@ namespace Z0
                 return e;
             }
         }
-
     }
-
 }

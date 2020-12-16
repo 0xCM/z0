@@ -6,9 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Reflection;
     using System.Linq;
-    using System.Collections.Generic;
 
     using static Konst;
     using static z;
@@ -19,7 +17,7 @@ namespace Z0
         public static ApiCodeDescriptor[] descriptors(IWfShell wf)
         {
             var archive = WfArchives.hex(wf);
-            var files = @readonly(archive.List().Storage);
+            var files = @readonly(archive.Listing().Storage);
             var dst = list<ApiCodeDescriptor>();
             var count = files.Length;
             for(var i=0u; i<count; i++)
@@ -67,7 +65,7 @@ namespace Z0
         public static ApiCodeDescriptor[] descriptors(FS.FolderPath src)
         {
             var archive = WfArchives.hex(src);
-            var files = archive.List();
+            var files = archive.Listing();
             var dst = list<ApiCodeDescriptor>();
             foreach(var file in files.Storage)
                 dst.AddRange(archive.Read(file.Path).Select(x => descriptor(x)));

@@ -15,11 +15,6 @@ namespace Z0
         public static string Format(this SpanKind kind)
             => kind != 0 ? (kind == SpanKind.Mutable ? IDI.Span : IDI.ReadOnlySpan) : EmptyString;
 
-        [MethodImpl(Inline)]
-        public static string Format<K>(this K kind)
-            where K : IApiKey
-                => kind.Format();
-
         [MethodImpl(Inline), Op]
         public static string Format(this ComparisonApiClass kind)
             => kind.ToString().ToLower();

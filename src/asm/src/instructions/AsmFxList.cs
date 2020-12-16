@@ -18,14 +18,14 @@ namespace Z0.Asm
     {
         readonly Instruction[] Source;
 
-        public BasedCodeBlock Encoded {get;}
+        public CodeBlock Encoded {get;}
 
         [MethodImpl(Inline)]
         public static implicit operator Instruction[](AsmFxList src)
             => src.Source;
 
         [MethodImpl(Inline)]
-        public AsmFxList(Instruction[] src, BasedCodeBlock data)
+        public AsmFxList(Instruction[] src, CodeBlock data)
         {
             Source = src;
             Encoded = data;
@@ -73,6 +73,6 @@ namespace Z0.Asm
             => Source.GetEnumerator();
 
         public static AsmFxList Empty
-            => new AsmFxList(z.array<Instruction>(), BasedCodeBlock.Empty);
+            => new AsmFxList(z.array<Instruction>(), CodeBlock.Empty);
     }
 }

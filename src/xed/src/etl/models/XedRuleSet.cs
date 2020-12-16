@@ -9,19 +9,19 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct XedRuleSet
+    public struct XedRuleSet
     {
-        public FS.FileName SourceFile {get;}
+        public FS.FileName SourceFile;
 
-        public FS.FileName TargetFile {get;}
+        public FS.FileName TargetFile;
 
-        public string Name {get;}
+        public string Name;
 
-        public string ReturnType {get;}
+        public string ReturnType;
 
-        public XedRule[] Terms {get;}
+        public XedRule[] Terms;
 
-        public string Description {get;}
+        public string Description;
 
         [MethodImpl(Inline)]
         public XedRuleSet(FS.FileName src, string name, string returns, XedRule[] terms, FS.FileName dst)

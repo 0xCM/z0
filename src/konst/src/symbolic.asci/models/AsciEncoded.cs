@@ -8,31 +8,23 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static z;
+    using static memory;
 
-    public readonly struct AsciEncoded : IBytes<AsciEncoded>, IEncoded<AsciEncoded>
+    public readonly struct AsciEncoded : IBytes<AsciEncoded>
     {
-        public BinaryCode Encoded {get;}
+        public BinaryCode Data {get;}
 
         [MethodImpl(Inline)]
         public AsciEncoded(BinaryCode src)
-            => Encoded = src;
+            => Data = src;
 
         [MethodImpl(Inline)]
         public AsciEncoded(string src)
         {
             var buffer = sys.alloc<byte>(src.Length);
             asci.encode(src,buffer);
-            Encoded = buffer;
+            Data = buffer;
         }
-
-        [MethodImpl(Inline)]
-        public static implicit operator AsciEncoded(string src)
-            => new AsciEncoded(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator AsciEncoded(byte[] src)
-            => new AsciEncoded(src);
 
         public ReadOnlySpan<AsciSymbol> View
         {
@@ -43,42 +35,50 @@ namespace Z0
         public Span<AsciSymbol> Edit
         {
             [MethodImpl(Inline)]
-            get => z.recover<byte,AsciSymbol>(Bytes);
+            get => recover<byte,AsciSymbol>(Bytes);
         }
 
         public int Length
         {
             [MethodImpl(Inline)]
-            get => Encoded.Length;
+            get => Data.Length;
         }
 
         public uint Count
         {
             [MethodImpl(Inline)]
-            get => (uint)Encoded.Length;
+            get => (uint)Data.Length;
         }
 
         Span<byte> Bytes
         {
             [MethodImpl(Inline)]
-            get => Encoded.Data;
+            get => Data.Edit;
         }
 
         public int Capacity
             => Length;
 
         public bool IsEmpty
-            => Encoded.IsEmpty;
+            => Data.IsEmpty;
 
         [MethodImpl(Inline)]
         public string Format()
-            => Digital.format(Encoded);
+            => Digital.format(Data);
 
         [MethodImpl(Inline)]
         public bool Equals(AsciEncoded src)
-            => Encoded.Equals(src.Encoded);
+            => Data.Equals(src.Data);
 
         ReadOnlySpan<byte> IByteSeq.View
             => Bytes;
+
+        [MethodImpl(Inline)]
+        public static implicit operator AsciEncoded(string src)
+            => new AsciEncoded(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator AsciEncoded(byte[] src)
+            => new AsciEncoded(src);
     }
 }

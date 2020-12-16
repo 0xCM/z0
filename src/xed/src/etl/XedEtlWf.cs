@@ -38,16 +38,18 @@ namespace Z0
 
         readonly WfHost Host;
 
+        const string Subject = "xed";
+
         public XedWf(IWfShell wf, XedWfConfig config)
         {
             Host = WfShell.host(typeof(XedWf));
             Wf = wf.WithHost(Host);
             Config = config;
             Settings = config.Settings;
-            Source = XedWfOps.SourceArchive(Config.SourceRoot);
+            Source = XedWfOps.sources(Config.Source);
             var db = Wf.Db();
-            Stage = XedStage.Create(db.StageRoot("xed"));
-            Target = db.TableArchive("xed");
+            Stage = XedStage.Create(db.TmpDir(Subject));
+            Target = db.TableArchive(Subject);
             Wf.Created();
         }
 
@@ -65,10 +67,9 @@ namespace Z0
             const string kind = "instructions";
             try
             {
-                for(var i=0; i< files.Length; i++)
+                for(var i=0; i<files.Length; i++)
                 {
                     ref readonly var file = ref skip(files,i);
-                    //var id = Wf.Raise(new ParsingXedInstructions(ParseInstructionsStep.StepId, file, Wf.Ct));
                     Wf.ProcessingFile(file, kind);
                     var parsed = span(parser.ParseInstructions(file));
                     for(var j = 0; j< parsed.Length; j++)
@@ -108,7 +109,7 @@ namespace Z0
         public XedPatternRow[] Emit(XedPattern[] src)
         {
             var sorted = (src as IEnumerable<XedPattern>).OrderBy(x => x.Class).ThenBy(x => x.Category).ThenBy(x => x.Extension).ThenBy(x => x.IsaSet).Array();
-            var records = sorted.Map(p => XedWfOps.summary(p));
+            var records = sorted.Map(p => XedWfOps.row(p));
 
             var id = Config.SummaryFile.WithoutExtension.Name;
             var type = Config.SummaryFile.FileExt;
@@ -123,14 +124,10 @@ namespace Z0
         XedPatternRow[] Filter(XedPatternRow[] src, xed_cat match)
             => src.Where(p => p.Category == XedConst.Name(match)).ToArray();
 
-
         void SaveExtensions(XedPatternRow[] src)
         {
             foreach(var selected in Config.Extensions)
-            {
-                Target.Deposit<F,R>(Filter(src, selected),
-                                    Config.ExtensionFolder, FS.file(XedConst.Name(selected), Config.DataFileExt));
-            }
+                Target.Deposit<F,R>(Filter(src, selected), Config.ExtensionFolder, FS.file(XedConst.Name(selected), Config.DataFileExt));
         }
 
         void SaveCategories(XedPatternRow[] src)

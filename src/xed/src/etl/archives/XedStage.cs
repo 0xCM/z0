@@ -14,7 +14,7 @@ namespace Z0.Xed
         public static XedStage Create(FS.FolderPath root)
             => new XedStage(root);
 
-        public FS.FolderPath ArchiveRoot {get;}
+        public FS.FolderPath Root {get;}
 
         public FS.FolderName InstructionFolder
             => FS.folder("instructions");
@@ -23,18 +23,16 @@ namespace Z0.Xed
             => FS.folder("functions");
 
         public FS.FolderPath InstructionDir
-            => ArchiveRoot + InstructionFolder;
+            => Root + InstructionFolder;
 
         public FS.FolderPath FunctionDir
-            => ArchiveRoot + FunctionFolder;
+            => Root + FunctionFolder;
 
         public XedStage(FS.FolderPath root)
-        {
-            ArchiveRoot = root;
-        }
+            => Root = root;
 
         public IEnumerable<FS.FilePath> Files
-            => ArchiveRoot.Files(FileExtensions.Txt,true);
+            => Root.Files(FileExtensions.Txt,true);
 
         public int FileCount => Files.Count();
 

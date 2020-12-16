@@ -14,12 +14,12 @@ namespace Z0
     {
         public readonly MemoryAddress Base;
 
-        public readonly BasedCodeBlock Input;
+        public readonly CodeBlock Input;
 
-        public readonly BasedCodeBlock Output;
+        public readonly CodeBlock Output;
 
         [MethodImpl(Inline)]
-        public CapturedCodeBlock(MemoryAddress @base, BasedCodeBlock input, BasedCodeBlock output)
+        public CapturedCodeBlock(MemoryAddress @base, CodeBlock input, CodeBlock output)
         {
             insist(@base, input.Base);
             insist(@base, output.Base);
@@ -32,8 +32,8 @@ namespace Z0
         public CapturedCodeBlock(MemoryAddress @base, byte[] input, byte[] output)
         {
             Base = @base;
-            Input = new BasedCodeBlock(@base, input);
-            Output = new BasedCodeBlock(@base, output);
+            Input = new CodeBlock(@base, input);
+            Output = new CodeBlock(@base, output);
         }
 
         public int Length
@@ -60,10 +60,10 @@ namespace Z0
             get => Output.IsNonEmpty;
         }
 
-        public BasedCodeBlock Source
+        public CodeBlock Source
             => Input;
 
-        public BasedCodeBlock Target
+        public CodeBlock Target
             => Output;
 
         [MethodImpl(Inline)]
@@ -77,7 +77,7 @@ namespace Z0
             => Format();
 
         [MethodImpl(Inline)]
-        public static implicit operator DataFlow<BasedCodeBlock>(CapturedCodeBlock src)
+        public static implicit operator DataFlow<CodeBlock>(CapturedCodeBlock src)
             => (src.Input,src.Output);
     }
 }

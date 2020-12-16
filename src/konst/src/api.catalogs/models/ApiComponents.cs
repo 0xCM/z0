@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Linq;
 
     using static Konst;
 
@@ -45,7 +44,7 @@ namespace Z0
         public ref ApiComponent LeadingCell
         {
             [MethodImpl(Inline)]
-            get => ref z.first(Terms);
+            get => ref Data.First;
         }
 
         public Span<ApiComponent> Terms

@@ -33,7 +33,7 @@ namespace Z0
             Source = src.IP;
             Encoded = src.Encoded;
             InstructionSize = (byte)src.Size;
-            var bytes = span(src.EncodedData.Data);
+            var bytes = span(src.EncodedData.Storage);
             var count = (byte)(Encoded.Length - 1); //op code takes up one byte
             var offset = ByteRead.read(bytes.Slice(1));
             Target = src.NextIp + offset;

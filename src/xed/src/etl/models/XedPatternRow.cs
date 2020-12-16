@@ -7,30 +7,28 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-
     using F = XedPatternField;
     using R = XedPatternRow;
 
-    public readonly struct XedPatternRow : ITabular<F,R>
+    public struct XedPatternRow : ITabular<F,R>
     {
-        public readonly string Class;
+        public string Class;
 
-        public readonly string Category;
+        public string Category;
 
-        public readonly string Extension;
+        public string Extension;
 
-        public readonly string IsaSet;
+        public string IsaSet;
 
-        public readonly BinaryCode BaseCode;
+        public BinaryCode BaseCode;
 
-        public readonly string Mod;
+        public string Mod;
 
-        public readonly string Reg;
+        public string Reg;
 
-        public readonly string Pattern;
+        public string Pattern;
 
-        public readonly string Operands;
+        public string Operands;
 
         public XedPatternRow(string Class, string Category, string Extension, string IsaSet, BinaryCode BaseCode, string Mod, string Reg, string Pattern, string Operands)
         {

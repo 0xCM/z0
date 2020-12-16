@@ -50,6 +50,6 @@ namespace Z0
 
         [Op]
         public static ListedFiles react(IWfShell wf, PipeImageFilesCmd cmd)
-            => create(cmd.ArchiveRoot, (ImageFormatKind)cmd.ArchiveKind).List();
+            => create(cmd.ArchiveRoot, (ImageFormatKind)cmd.ArchiveKind).Listing();
     }
 }

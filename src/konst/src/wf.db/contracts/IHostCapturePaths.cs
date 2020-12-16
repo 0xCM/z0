@@ -15,6 +15,6 @@ namespace Z0
             => LegalFileName(Host, FileExtensions.Hex);
 
         FS.FilePath HostX86Path
-            => X86Dir + X86FileName;
+            => HexDir + X86FileName;
     }
 }

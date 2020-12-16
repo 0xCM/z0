@@ -6,37 +6,29 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Linq;
 
-    using static Konst;
+    using static Part;
     using static Encoded;
+    using static z;
 
     /// <summary>
     /// Encoded x86 bytes extracted from a memory source
     /// </summary>
-    public readonly struct BinaryCode : IEncoded<BinaryCode,byte[]>, IComparable<BinaryCode>
+    public readonly struct BinaryCode : IComparable<BinaryCode>, ITextual, IEncoded
     {
         /// <summary>
         /// The encoded bytes
         /// </summary>
-        public byte[] Encoded {get;}
+        readonly byte[] Data;
 
         [MethodImpl(Inline)]
         public BinaryCode(byte[] bytes)
-            => Encoded = z.insist(bytes);
+            => Data = insist(bytes);
+
         public byte[] Storage
         {
             [MethodImpl(Inline)]
-            get => Encoded;
-        }
-
-        /// <summary>
-        /// The encoded content as byte array
-        /// </summary>
-        public byte[] Data
-        {
-            [MethodImpl(Inline)]
-            get => Encoded;
+            get => Data;
         }
 
         /// <summary>
@@ -45,7 +37,7 @@ namespace Z0
         public ReadOnlySpan<byte> View
         {
             [MethodImpl(Inline)]
-            get => Encoded;
+            get => Data;
         }
 
         /// <summary>
@@ -54,7 +46,7 @@ namespace Z0
         public Span<byte> Edit
         {
             [MethodImpl(Inline)]
-            get => Encoded;
+            get => Data;
         }
 
         /// <summary>
@@ -69,13 +61,13 @@ namespace Z0
         public int Length
         {
             [MethodImpl(Inline)]
-            get => Encoded?.Length ?? 0;
+            get => Data?.Length ?? 0;
         }
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => (Length == 0 ) || (Length == 1 && Encoded[0] == 0);
+            get => (Length == 0 ) || (Length == 1 && Data[0] == 0);
         }
 
         public bool IsNonEmpty
@@ -87,19 +79,19 @@ namespace Z0
         public ref byte this[long index]
         {
             [MethodImpl(Inline)]
-            get => ref Encoded[index];
+            get => ref Data[index];
         }
 
         public ref byte this[ulong index]
         {
             [MethodImpl(Inline)]
-            get => ref Encoded[index];
+            get => ref Data[index];
         }
 
         public uint Count
         {
             [MethodImpl(Inline)]
-            get => (uint)Encoded.Length;
+            get => (uint)Data.Length;
         }
 
 
@@ -108,10 +100,10 @@ namespace Z0
             => equals(this,src);
 
         public string Format()
-            => Encoded.FormatHexBytes();
+            => Data.FormatHexBytes();
 
         public string Format(HexFormatOptions config)
-            => Encoded.FormatHexBytes(config);
+            => Data.FormatHexBytes(config);
 
         public override int GetHashCode()
             => View.GetHashCode();
@@ -135,7 +127,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator byte[](BinaryCode src)
-            => src.Encoded;
+            => src.Data;
 
         [MethodImpl(Inline)]
         public static implicit operator BinaryCode(byte[] src)
@@ -143,7 +135,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator ReadOnlySpan<byte>(BinaryCode src)
-            => src.Encoded;
+            => src.Data;
 
         [MethodImpl(Inline)]
         public static bool operator==(BinaryCode a, BinaryCode b)

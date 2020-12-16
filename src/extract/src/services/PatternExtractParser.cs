@@ -54,16 +54,16 @@ namespace Z0
             return dstLen <= 0 ? src.Length : dstLen;
         }
 
-        BasedCodeBlock Locate(MemoryAddress address, byte[] src, int cut = 0)
+        CodeBlock Locate(MemoryAddress address, byte[] src, int cut = 0)
         {
             if(cut == 0)
-                return new BasedCodeBlock(address, src);
+                return new CodeBlock(address, src);
             else
             {
                 Span<byte> data = src;
                 var len = CalcLength(data, cut, 0xC3);
                 var keep = data.Slice(0, len);
-                return new BasedCodeBlock(address, keep.ToArray());
+                return new CodeBlock(address, keep.ToArray());
             }
         }
 

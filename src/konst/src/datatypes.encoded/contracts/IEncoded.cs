@@ -6,24 +6,20 @@ namespace Z0
 {
     using System;
 
-    public interface IEncoded
+    public interface IEncoded : IMeasured, ITextual
     {
-        BinaryCode Encoded => BinaryCode.Empty;
+        byte[] Storage {get;}
+
+        int IMeasured.Length
+            => Storage.Length;
+
+        string ITextual.Format()
+            => Storage.FormatHexBytes();
     }
 
-    public interface IEncoded<F> : IEncoded, IEquatable<F>, IMeasured, ITextual
+    public interface IEncoded<F> : IEncoded, IEquatable<F>
         where F : struct, IEncoded<F>
     {
-        int IMeasured.Length
-            => Encoded.Length;
-    }
 
-    public interface IEncoded<F,C> : IEncoded<F>
-        where F : struct, IEncoded<F,C>
-    {
-        /// <summary>
-        /// The encoded data
-        /// </summary>
-        new C Encoded {get;}
     }
 }

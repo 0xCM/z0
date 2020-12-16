@@ -6,11 +6,7 @@ namespace Z0
 {
     public interface IApiHexReader : IArchiveReader
     {
-        ApiCodeBlock[] Read(FilePath src);
-
-        ApiCodeBlock[] Read(FS.FilePath src)
-            => Read(FilePath.Define(src.Name));
-
+        ApiCodeBlock[] Read(FS.FilePath src);
     }
 
     public interface IApiHexReader<H> : IApiHexReader, IArchiveReader<H>

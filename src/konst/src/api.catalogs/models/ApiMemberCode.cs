@@ -18,22 +18,22 @@ namespace Z0
         /// <summary>
         /// The extraction index
         /// </summary>
-        public readonly uint Sequence;
+        public uint Sequence {get;}
 
         /// <summary>
         /// The member to which executable code is attached
         /// </summary>
-        public readonly ApiMember Member;
+        public ApiMember Member {get;}
 
         /// <summary>
         /// The extraction termination code
         /// </summary>
-        public readonly ExtractTermCode TermCode;
+        public ExtractTermCode TermCode {get;}
 
         /// <summary>
         /// The encoded data
         /// </summary>
-        public readonly ApiCodeBlock Encoded;
+        public ApiCodeBlock Encoded {get;}
 
         public OpUri OpUri
         {
@@ -47,10 +47,10 @@ namespace Z0
             get => Member.MetaUri;
         }
 
-        public byte[] Data
+        public byte[] Storage
         {
             [MethodImpl(Inline)]
-            get => Encoded.Data;
+            get => Encoded.Storage;
         }
 
         public int Length

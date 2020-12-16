@@ -9,9 +9,8 @@ namespace Z0
 
     using static Konst;
 
-    using F = XedInstructionField;
-
-    public struct XedInstructionRow
+    [Record]
+    public struct XedInstructionRow : IRecord<XedInstructionRow>
     {
         public int Sequence;
 
@@ -34,18 +33,6 @@ namespace Z0
             BaseCode = @base;
             Mod = mod;
             Reg = reg;
-        }
-
-        public string DelimitedText(char delimiter)
-        {
-            var formatter = Formatters.dataset<F>(delimiter);
-            formatter.Delimit(F.Sequence, Sequence);
-            formatter.Delimit(F.Mnemonic, Mnemonic);
-            formatter.Delimit(F.Extension, Extension);
-            formatter.Delimit(F.BaseCode, BaseCode);
-            formatter.Delimit(F.Mod, Mod);
-            formatter.Delimit(F.Reg, Reg);
-            return string.Empty;
         }
     }
 }

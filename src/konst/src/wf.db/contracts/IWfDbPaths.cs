@@ -7,28 +7,40 @@ namespace Z0
     using System;
     using System.Reflection;
 
-    using X = FileExtensions;
-    using PN = DbNames;
-
-    public interface IWfDbPaths : IArchivePaths
+    public interface IWfDbPaths : IFileArchive
     {
+        FS.FolderName SubjectFolder<S>(S src)
+            => FS.folder(src.ToString().ToLowerInvariant());
+
+        FS.FolderName SubjecFolder<A,B>(A s1, B s2)
+            => FS.folder(string.Format(DbNames.delimiter, SubjectFolder(s1), SubjectFolder(s2)));
+
         FS.FileName ApiFileName(PartId part, string api, FS.FileExt ext)
             => FS.file(string.Format("{0}.{1}", part.Format(), api), ext);
+
+        FS.FolderPath DevRoot()
+            => EnvVars.Common.DevRoot;
+
+        FS.FolderPath DevDataRoot()
+            => DevRoot() +FS.folder(DbNames.data);
+
+        FS.FolderPath DevData<S>(S subject)
+            => DevDataRoot() + SubjectFolder(subject);
 
         FS.FolderPath ArchiveRoot()
             => EnvVars.Common.ArchiveRoot;
 
         FS.FolderPath BuildArchiveRoot()
-            => ArchiveRoot() + FS.folder(PN.builds);
+            => ArchiveRoot() + FS.folder(DbNames.builds);
 
         FS.FileExt DefaultFileExt
-             => X.Csv;
+             => Csv;
 
         FS.FolderPath EventRoot()
-            => Root + FS.folder(PN.events);
+            => Root + FS.folder(DbNames.events);
 
         FS.FolderPath RefDataRoot()
-            => Root + FS.folder(PN.Refs);
+            => Root + FS.folder(DbNames.refdata);
 
         FS.FolderPath ReflectedRoot()
             => Root + FS.folder("reflected");
@@ -37,19 +49,22 @@ namespace Z0
             => ReflectedRoot() + FS.folder(src.GetSimpleName());
 
         FS.FolderPath EtlRoot()
-            => Root + FS.folder(PN.etl);
+            => Root + FS.folder(DbNames.etl);
 
-        FS.FolderPath TmpDir()
-            => Root + FS.folder(PN.tmp);
+        FS.FolderPath TmpRoot()
+            => Root + FS.folder(DbNames.tmp);
 
         FS.FilePath TmpFile(FS.FileName file)
-            => TmpDir() + file;
+            => TmpRoot() + file;
+
+        FS.FolderPath TmpDir<S>(S subject)
+            => TmpRoot() + SubjectFolder(subject);
 
         FS.FolderPath LogRoot()
-            => Root + FS.folder(PN.logs);
+            => Root + FS.folder(DbNames.logs);
 
         FS.FolderPath TableRoot()
-            => Root + FS.folder(PN.tables);
+            => Root + FS.folder(DbNames.tables);
 
         /// <summary>
         /// Defines a task-specific log path
@@ -95,7 +110,7 @@ namespace Z0
                 => Table(typeof(T), part);
 
         FS.FilePath Table<S>(string id, S subject, FS.FileExt? ext = null)
-            => TableRoot()+ FS.folder(id) + FS.file(text.format(PN.QualifiedSubject, id, subject), ext ?? X.Csv);
+            => TableRoot()+ FS.folder(id) + FS.file(text.format(DbNames.qualified, id, subject), ext ?? Csv);
 
         FS.FilePath IndexTable(string id)
             => TableRoot() + FS.file(id, DefaultFileExt);
@@ -104,25 +119,25 @@ namespace Z0
             => t.Tag<RecordAttribute>().MapValueOrElse(a => IndexTable(a.TableId), () => IndexTable(t.Name));
 
         FS.FolderPath ListRoot()
-            => Root + FS.folder(PN.lists);
+            => Root + FS.folder(DbNames.lists);
 
         FS.FilePath List(string name, FS.FileExt ext)
             => ListRoot() + FS.file(name, ext);
 
         FS.FolderPath Notebooks()
-            => Root + FS.folder(PN.notebooks);
+            => Root + FS.folder(DbNames.notebooks);
 
         FS.FolderPath CaptureRoot()
-            => Root + FS.folder(PN.capture);
+            => Root + FS.folder(DbNames.capture);
 
         FS.FolderPath ImmRoot()
-            => CaptureRoot() + FS.folder(PN.imm);
+            => CaptureRoot() + FS.folder(DbNames.asm_imm);
 
         FS.FolderPath JobRoot()
-            => Root + FS.folder(PN.jobs);
+            => Root + FS.folder(DbNames.jobs);
 
         FS.FolderPath IndexRoot()
-            => Root + FS.folder(PN.indices);
+            => Root + FS.folder(DbNames.indices);
 
         FS.FilePath IndexFile(string id)
             => IndexRoot() + FS.file(id, Idx);
@@ -131,87 +146,81 @@ namespace Z0
             => IndexRoot().Files(Idx);
 
         FS.FolderPath JobQueue()
-            => JobRoot() + FS.folder(PN.Queue);
+            => JobRoot() + FS.folder(DbNames.queue);
 
         FS.FilePath JobPath(FS.FileName file)
             => JobQueue() + file;
 
         FS.FolderPath StageRoot()
-            => Root + FS.folder(PN.stage);
+            => Root + FS.folder(DbNames.stage);
 
         FS.FolderPath Notebook(string name)
             => Notebooks() + FS.folder(name);
 
         FS.FolderPath DocRoot()
-            => Root + FS.folder(PN.docs);
+            => Root + FS.folder(DbNames.docs);
 
         FS.FilePath Doc(string name, FS.FileExt ext)
             => DocRoot() + FS.file(name, ext);
 
         FS.FilePath Doc<S>(S subject, string name, FS.FileExt ext)
-            => DocRoot() + SubjectName(subject) + FS.file(name, ext);
-
-        FS.FolderName SubjectName<S>(S subject)
-            => FS.folder(subject.ToString().ToLowerInvariant());
-
-        FS.FolderName SubjectName<A,B>(A s1, B s2)
-            => FS.folder(string.Format(PN.SubjectDelimiter, SubjectName(s1), SubjectName(s2)));
+            => DocRoot() + SubjectFolder(subject) + FS.file(name, ext);
 
         FS.FilePath RefDataPath(string id, FS.FileExt? ext = null)
             => RefDataRoot() + FS.file(id, ext ?? DefaultFileExt);
 
         FS.FilePath RefDataPath<S>(S subject, string id, FS.FileExt? ext = null)
-            => RefDataRoot() + SubjectName(subject) + FS.file(id, ext ?? DefaultFileExt);
+            => RefDataRoot() + SubjectFolder(subject) + FS.file(id, ext ?? DefaultFileExt);
 
         FS.FilePath RefDataPath<S>(S subject, FS.FileName file)
-            => RefDataRoot() + SubjectName(subject) + file;
+            => RefDataRoot() + SubjectFolder(subject) + file;
 
         FS.FolderPath RefData<S>(S subject)
-            => RefDataRoot() + SubjectName(subject);
-
-        FS.FolderPath SourceRoot()
-            => Root + FS.folder(PN.sources);
-
-        FS.FolderPath SourceRoot<S>(S subject)
-            => SourceRoot() + SubjectName(subject);
+            => RefDataRoot() + SubjectFolder(subject);
 
         FS.FolderPath StageRoot<S>(S subject)
-            => StageRoot() + SubjectName(subject);
+            => StageRoot() + SubjectFolder(subject);
 
         FS.FolderPath ToolDbRoot()
             => Root + FS.folder("tooldb");
 
         FS.FolderPath ToolExeRoot()
-            => Root + FS.folder(PN.tools);
+            => Root + FS.folder(DbNames.tools);
+
+        FS.FolderPath CapturedHexRoot()
+            => (CaptureRoot() + FS.folder(DbNames.hex));
+
+        FS.FilePath CapturedHexPath(FS.FileName name)
+            => CapturedHexRoot() + name;
 
         FS.FolderPath Tools(ToolId id)
             => ToolExeRoot() + FS.folder(id.Format());
 
         FS.FolderPath Output(ToolId id)
-            => Tools(id) + FS.folder(PN.output);
+            => Tools(id) + FS.folder(DbNames.output);
 
         FS.FolderPath Output(ToolId tool, CmdId cmd)
-            => ToolExeRoot() + FS.folder(tool.Format()) + FS.folder(cmd.Format()) + FS.folder(PN.output);
+            => ToolExeRoot() + FS.folder(tool.Format()) + FS.folder(cmd.Format()) + FS.folder(DbNames.output);
 
         FS.FolderPath CapturedExtractDir()
-            => CaptureRoot() + FS.folder(PN.extracts);
+            => CaptureRoot() + FS.folder(DbNames.extracts);
 
-        FS.FilePath[] CapturedExtractFiles()
+        FS.Files CapturedExtractFiles()
             => CapturedExtractDir().AllFiles;
 
         FS.FolderPath ParsedExtractDir()
-            => CaptureRoot() + FS.folder(PN.Parsed);
+            => CaptureRoot() + FS.folder(DbNames.parsed);
 
         FS.FolderPath CapturedHexDir()
-            => CaptureRoot() + FS.folder(PN.hex);
+            => CaptureRoot() + FS.folder(DbNames.hex);
 
         FS.FolderPath CapturedAsmDir()
-            => CaptureRoot() + FS.folder(PN.asm);
+            => CaptureRoot() + FS.folder(DbNames.asm);
 
-        FS.FilePath[] CapturedAsmFiles()
+        FS.Files CapturedAsmFiles()
             => CapturedAsmDir().Files(Asm,true);
 
-        FS.FilePath[] CapturedAsmFiles(PartId part)
+        FS.Files CapturedAsmFiles(PartId part)
             => CapturedAsmFiles().Where(f => f.IsOwner(part));
 
         FS.FilePath CapturedAsmFile(FS.FileName name)
@@ -223,10 +232,10 @@ namespace Z0
         FS.FilePath CapturedAsmFile(PartId part, string api)
             => CapturedAsmDir() + ApiFileName(part, api, Asm);
 
-        FS.FilePath[] CapturedHexFiles()
+        FS.Files CapturedHexFiles()
             => CapturedHexDir().Files(Hex);
 
-        FS.FilePath[] CapturedHexFiles(PartId part)
+        FS.Files CapturedHexFiles(PartId part)
             => CapturedHexFiles().Where(f => f.IsOwner(part));
 
         FS.FilePath CapturedHexFile(FS.FileName name)
@@ -239,7 +248,7 @@ namespace Z0
             => CapturedHexFile(host.FileName(FileExtensions.Hex));
 
         FS.FolderPath CapturedCilDir()
-            => CaptureRoot() + FS.folder(PN.Cil);
+            => CaptureRoot() + FS.folder(DbNames.cil);
 
         FS.FilePath CapturedCilDataFile(FS.FileName name)
             => CapturedCilDir() + name;
@@ -281,11 +290,5 @@ namespace Z0
             var asm = CapturedAsmFiles();
             return new PartFiles(parsed, hex, asm);
         }
-    }
-
-    public interface IFileDbPaths<H> : IWfDbPaths, IArchivePaths<H>
-        where H : struct, IFileDbPaths<H>
-    {
-
     }
 }

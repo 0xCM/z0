@@ -31,7 +31,7 @@ namespace Z0
         FS.FilePath TablePath(FS.FolderName folder, FS.FileName file)
             => Root + folder + file;
 
-        FS.FilePath[] Clear(FS.FolderName id)
+        new FS.FilePath[] Clear(FS.FolderName id)
             => (Root + id).Clear(z.list<FS.FilePath>()).ToArray();
 
         void Clear()

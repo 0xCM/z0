@@ -7,41 +7,28 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
     using static XedSourceMarkers;
 
     partial struct XedWfOps
     {
-        [Op]
-        public static ref XedPattern[] map(in XedInstructionDoc src, out XedPattern[] dst)
+        public static string pattern(XedInstructionDoc src, string name)
         {
-            var patterns = list<XedPattern>();
-            var count = src.RowCount;
-            var last = count - 1;
-            for(var i=0; i<count; i++)
+            for(var i=0; i<src.RowCount; i++)
             {
-                if(src.IsProp(i,PATTERN) && i != last)
+                var row = src.Data[i];
+                var rowText = row.Text;
+                if(text.nonempty(rowText) && rowText.StartsWith(name))
                 {
-                    if(src.IsProp(i + 1, OPERANDS))
-                    {
-                        patterns.Add(new XedPattern(
-                            src.Class,
-                            src.Category,
-                            src.Extension,
-                            src.IsaSet,
-                            src.ExtractProp(i),
-                            src.ExtractProp(i + 1)
-                            ));
-                    }
+                    var value = rowText.RightOfFirst(PROP_DELIMITER);
+                    if(text.nonempty(value))
+                        return value.Trim();
                 }
             }
-            dst = patterns.ToArray();
-            return ref dst;
+            return EmptyString;
         }
 
         public static XedPattern[] patterns(in XedInstructionDoc src)
             => map(src, out var _);
-
     }
 }

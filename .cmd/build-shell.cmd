@@ -19,3 +19,6 @@ echo CmdExec:%CmdExec% >> %CmdLog%
 echo on
 call %CmdExec%
 
+call %ZCmd%\config-shell-deploy.cmd
+call %DeployCmd%
+

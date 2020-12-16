@@ -16,21 +16,23 @@ namespace Z0
         ReadOnlySpan<T> Terms
             => Storage;
 
+        ReadOnlySpan<T> View
+            => Storage;
+
         ref readonly T this[long index]
-            => ref memory.skip(Terms, index);
+            => ref memory.skip(View, index);
 
         ref readonly T this[ulong index]
-            => ref memory.skip(Terms, index);
+            => ref memory.skip(View, index);
 
         int IMeasured.Length
-            => Terms.Length;
+            => View.Length;
 
         bool INullity.IsEmpty
             => Length == 0;
 
         bool INullity.IsNonEmpty
             => Length != 0;
-
     }
 
     /// <summary>
@@ -43,16 +45,16 @@ namespace Z0
         where I : unmanaged
     {
         ref readonly T this[I index]
-            => ref memory.skip(Terms, memory.@as<I,uint>(index));
+            => ref memory.skip(View, memory.@as<I,uint>(index));
 
         int IMeasured.Length
-            => Terms.Length;
+            => View.Length;
 
         I IMeasured<I>.Length
-            => memory.@as<uint,I>((uint)Terms.Length);
+            => memory.@as<uint,I>((uint)View.Length);
 
         I ICounted<I>.Count
-            => memory.@as<uint,I>((uint)Terms.Length);
+            => memory.@as<uint,I>((uint)View.Length);
     }
 
     [Free]

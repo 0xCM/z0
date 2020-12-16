@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IPartFileNames
+    public interface IPartFileNames : IFileExtensions
     {
         FS.FileName LegalFileName(OpIdentity id, FS.FileExt ext)
             => FS.file(id.ToFileName(ext).Name);
@@ -13,9 +13,9 @@ namespace Z0
             => FS.file(string.Concat(host.Owner.Format(), Chars.Dot, host.Name), ext);
 
         FS.FileName AsmFileName(OpIdentity id)
-            => LegalFileName(id, FileExtensions.Asm);
+            => LegalFileName(id, Asm);
 
         FS.FileName HexOpFileName(OpIdentity id)
-            => LegalFileName(id, FileExtensions.Hex);
+            => LegalFileName(id, Hex);
     }
 }

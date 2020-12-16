@@ -45,6 +45,6 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static void write(BinaryCode src, ByteSize size, MemoryAddress dst)
-            => src.Data.CopyTo(z.edit<byte>(dst, size));
+            => src.View.CopyTo(z.edit<byte>(dst, size));
     }
 }

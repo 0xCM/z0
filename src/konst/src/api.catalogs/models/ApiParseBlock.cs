@@ -49,7 +49,7 @@ namespace Z0
 
         public string OpSig;
 
-        public BasedCodeBlock Data;
+        public CodeBlock Data;
 
         public string DelimitedText(char delimiter)
         {

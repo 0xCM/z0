@@ -9,7 +9,6 @@ namespace Z0
     using System.Collections.Generic;
 
     using static z;
-
     using static FileExtensions;
 
     [FileArchive]
@@ -28,7 +27,7 @@ namespace Z0
             Extensions = extensions(kind);
         }
 
-        public ListedFiles List()
+        public ListedFiles Listing()
             => FS.list(Files().Array());
 
         public IEnumerable<FS.FilePath> Files()
@@ -37,7 +36,7 @@ namespace Z0
         static FS.FileExt[] extensions(ImageFormatKind kind)
             => kind switch {
                 ImageFormatKind.Csv => array(Csv),
-                _ => array(Dll,Exe,Pdb)
+                _ => array(Dll, Exe, Pdb)
             };
     }
 }

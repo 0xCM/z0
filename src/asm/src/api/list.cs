@@ -10,12 +10,11 @@ namespace Z0
     using Z0.Asm;
 
     using static Konst;
-    using static z;
 
     partial struct asm
     {
         [MethodImpl(Inline), Op]
-        public static AsmFxList list(Instruction[] src, BasedCodeBlock data)
+        public static AsmFxList list(Instruction[] src, CodeBlock data)
             => new AsmFxList(src, data);
     }
 }

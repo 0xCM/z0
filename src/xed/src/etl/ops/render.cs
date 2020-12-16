@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     using F = XedPatternField;
     using XF = XedInstructionField;
@@ -22,9 +21,9 @@ namespace Z0
             dst.Delimit(F.Category, src.Category);
             dst.Delimit(F.Extension, src.Extension);
             dst.Delimit(F.IsaSet, src.IsaSet);
-            dst.Delimit(F.BaseCode, src.BaseCode());
-            dst.Delimit(F.Mod, src.Mod());
-            dst.Delimit(F.Reg, src.Reg());
+            dst.Delimit(F.BaseCode, code(src));
+            dst.Delimit(F.Mod, mod(src));
+            dst.Delimit(F.Reg, reg(src));
             dst.Delimit(F.Pattern, src.PatternText);
             dst.Delimit(F.Operands, src.Operands);
             return ref dst;

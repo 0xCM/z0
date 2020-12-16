@@ -13,10 +13,14 @@ namespace Z0
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface IIndex<T> : IMeasured, IEnumerable<T>
+    public interface IIndex<T> : IMeasured, IEnumerable<T>, ITextual
     {
         T[] Storage {get;}
 
+        char CellDelimiter
+            => Chars.Semicolon;
+        string ITextual.Format()
+            => new DelimitedIndex<T>(Storage, CellDelimiter).Format();
         Span<T> Terms
             => Storage;
 

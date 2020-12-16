@@ -12,7 +12,7 @@ namespace Z0
         /// The imm root directory path
         /// </summary>
         FS.FolderPath ImmRoot
-            => FS.dir(ArchiveRoot.Name) + FS.folder("imm");
+            => FS.dir(Root.Name) + FS.folder("imm");
 
         /// <summary>
         /// Nonrecursively enumerates directory paths owned by a specified part

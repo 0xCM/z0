@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
     [LiteralProvider]
     public readonly struct DbNames
     {
@@ -28,19 +25,21 @@ namespace Z0
 
         public const string logs = nameof(logs);
 
-        public const string Refs = "refs";
+        public const string refs = nameof(refs);
+
+        public const string refdata = nameof(refdata);
 
         public const string events = nameof(events);
 
         public const string etl = nameof(etl);
 
-        public const string Queue = "queue";
+        public const string queue = nameof(queue);
 
-        public const string Parsed = "parsed";
+        public const string parsed = nameof(parsed);
 
-        public const string Il = "il";
+        public const string il = nameof(il);
 
-        public const string Cil = "cil";
+        public const string cil = nameof(cil);
 
         public const string asm = nameof(asm);
 
@@ -50,18 +49,22 @@ namespace Z0
 
         public const string output = nameof(output);
 
-        public const string SubjectDelimiter = ".";
+        public const string delimiter = ".";
 
-        public const string QualifiedSubject = "{0}" + SubjectDelimiter + "{1}";
+        public const string qualified = "{0}" + delimiter + "{1}";
 
         public const string notebooks = nameof(notebooks);
 
         public const string indices = nameof(indices);
 
-        public const string imm = "asm.imm";
+        public const string imm = nameof(imm);
 
-        public const string builds = "builds";
+        public const string asm_imm = asm + delimiter + imm;
+
+        public const string builds = nameof(builds);
 
         public const string tmp = nameof(tmp);
+
+        public const string data = nameof(data);
     }
 }

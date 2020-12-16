@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    public struct XedSettings
+    public struct XedSettings : ISettings<XedSettings>
     {
         [MethodImpl(Inline)]
         public static XedSettings Default()

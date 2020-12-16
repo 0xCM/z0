@@ -16,13 +16,13 @@ namespace Z0
     {
         public ApiHostUri Host {get;}
 
-        public FS.FolderPath ArchiveRoot {get;}
+        public FS.FolderPath Root {get;}
 
         [MethodImpl(Inline)]
         internal HostCaptureArchive(FS.FolderPath root, ApiHostUri host)
         {
             Host = host;
-            ArchiveRoot = root;
+            Root = root;
         }
     }
 }

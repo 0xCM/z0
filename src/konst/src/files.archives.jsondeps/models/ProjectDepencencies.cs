@@ -42,7 +42,7 @@ namespace Z0
             {
                 var count = CompilationLibraries.Count;
                 var target = span<Library>(count);
-                var libs = CompilationLibraries.Terms;
+                var libs = CompilationLibraries.View;
                 for(var i=0u; i<count; i++)
                     map(skip(libs, i), ref seek(target,i));
                 return target;

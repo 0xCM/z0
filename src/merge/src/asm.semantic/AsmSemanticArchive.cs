@@ -18,20 +18,20 @@ namespace Z0
 
         readonly IWfShell Wf;
 
-        public FS.FolderPath ArchiveRoot {get;}
+        public FS.FolderPath Root {get;}
 
         [MethodImpl(Inline)]
         public AsmSemanticArchive(IWfShell wf)
         {
             Wf = wf;
-            ArchiveRoot = wf.Db().CaptureRoot() + FS.folder("asm.semantic");
+            Root = wf.Db().CaptureRoot() + FS.folder("asm.semantic");
         }
 
         public FS.FolderPath SemanticDir(PartId part)
-            => SemanticDirRule(ArchiveRoot, FS.folder(part.Format()));
+            => SemanticDirRule(Root, FS.folder(part.Format()));
 
         public FS.FilePath SemanticPath(ApiHostUri host)
-            => SemanticPathRule(ArchiveRoot, host);
+            => SemanticPathRule(Root, host);
 
         [MethodImpl(Inline), Op]
         static FS.FileName LegalFileNameRule(ApiHostUri host, FS.FileExt ext)

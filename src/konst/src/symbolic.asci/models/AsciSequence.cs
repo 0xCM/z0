@@ -15,36 +15,45 @@ namespace Z0
     /// </summary>
     public readonly struct AsciSequence : IByteSeq
     {
-        internal readonly BinaryCode Storage;
+        readonly BinaryCode Data;
 
         public int Length  {get;}
 
         public AsciSequence(BinaryCode src)
         {
-            Storage = src;
+            Data = src;
             Length = asci.length(src);
         }
 
         public int Capacity
         {
             [MethodImpl(Inline)]
-            get => Storage.Length;
+            get => Data.Length;
+        }
+
+        public byte[] Storage
+        {
+            [MethodImpl(Inline)]
+            get => Data.Storage;
         }
 
         public ReadOnlySpan<byte> View
-            => Storage.Data;
+        {
+            [MethodImpl(Inline)]
+            get => Data.View;
+        }
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Storage.IsEmpty;
+            get => Data.IsEmpty;
         }
 
         public string Format()
         {
-            var dst = span(sys.alloc<char>(Storage.Length));
-            for(var i=0u; i<Storage.Length; i++)
-                seek(dst,i) = (char)Storage[(int)i];
+            var dst = span(sys.alloc<char>(Data.Length));
+            for(var i=0u; i<Data.Length; i++)
+                seek(dst,i) = (char)Data[(int)i];
             return sys.@string(dst);
         }
     }

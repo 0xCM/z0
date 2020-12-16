@@ -18,7 +18,7 @@ namespace Z0.Tools
         {
             var tool = DumpBin.create(Wf);
             var path = FS.FolderPath.Empty;
-            var archive = ModuleArchive.create(path);
+            var archive = FileArchives.modules(path);
             var exe = archive.NativeExeFiles().Array();
             var libs = archive.StaticLibs().Array();
             var managed = archive.Files().Where(f => f.IsManaged).Array();

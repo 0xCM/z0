@@ -56,7 +56,7 @@ namespace Z0
         static ref ApiCodeRow row(ApiCodeBlock src, ref ApiCodeRow dst)
         {
             dst.Base = src.Code.Base;
-            dst.Encoded = src.Data;
+            dst.Encoded = src.Storage;
             dst.Uri =src.Uri.Format();
             return ref dst;
         }

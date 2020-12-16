@@ -5,15 +5,14 @@
 namespace Z0
 {
     using System;
-    using static Konst;
 
-    using static z;
+    using static memory;
 
     public readonly struct ApiHexReader : IApiHexReader
     {
         public static IApiHexReader Service => default(ApiHexReader);
 
-        public ApiCodeBlock[] Read(FilePath src)
+        public ApiCodeBlock[] Read(FS.FilePath src)
             => read(FS.path(src.Name));
 
         public static ApiCodeBlock[] read(FS.FilePath src)

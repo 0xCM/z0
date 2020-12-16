@@ -26,8 +26,8 @@ namespace Z0.Asm
                 let block = asm.block(src.UriHex, i, src.TermCode)
                 select ApiAsm.routine(src.MetaUri, src.OpUri, src.Method.Metadata().Format(), block);
 
-        public Option<AsmFxList> Decode(BasedCodeBlock src)
-            => Decode(src.Encoded, src.Base).TryMap(x => asm.list(x, src));
+        public Option<AsmFxList> Decode(CodeBlock src)
+            => Decode(src.Code, src.Base).TryMap(x => asm.list(x, src));
 
         public Option<AsmInstructions> Decode(ApiCodeBlock src)
             => Decode(src.Encoded, src.Base);
@@ -35,12 +35,12 @@ namespace Z0.Asm
         public Option<AsmRoutine> Decode(ApiCaptureBlock src, Action<Asm.Instruction> f)
             => Decode(src.Parsed,f).TryMap(x => ApiAsm.routine(src,x));
 
-        public Option<AsmFxList> Decode(BasedCodeBlock src, Action<Asm.Instruction> f)
+        public Option<AsmFxList> Decode(CodeBlock src, Action<Asm.Instruction> f)
         {
             try
             {
                 var decoded = new Iced.InstructionList();
-                var reader = new Iced.ByteArrayCodeReader(src.Encoded);
+                var reader = new Iced.ByteArrayCodeReader(src.Code);
                 var formatter = Capture.formatter(AsmFormat);
                 var decoder = Iced.Decoder.Create(IntPtr.Size * 8, reader);
                 var @base = src.Base;
@@ -78,7 +78,7 @@ namespace Z0.Asm
                 }
 
                 var decoded = new Iced.InstructionList();
-                var reader = new Iced.ByteArrayCodeReader(code.Encoded);
+                var reader = new Iced.ByteArrayCodeReader(code.Storage);
                 var decoder = Iced.Decoder.Create(IntPtr.Size * 8, reader);
                 decoder.IP = @base;
                 while (reader.CanReadByte)
@@ -103,7 +103,7 @@ namespace Z0.Asm
 
         public Option<AsmFxList> Decode(ApiCodeBlock src, Action<Instruction> f)
         {
-            var x86 = new BasedCodeBlock(src.Base,src.Data);
+            var x86 = new CodeBlock(src.Base,src.Data);
             return Decode(x86,f);
         }
 

@@ -12,18 +12,18 @@ namespace Z0
 
     public readonly struct ApiMemberExtract
     {
-        public readonly BasedCodeBlock Encoded;
+        public CodeBlock Encoded {get;}
 
-        public readonly OpIdentity Id;
+        public OpIdentity Id {get;}
 
-        public readonly OpUri OpUri;
+        public OpUri OpUri {get;}
 
-        public readonly ApiMember Member;
+        public ApiMember Member {get;}
 
         public byte[] Data
         {
             [MethodImpl(Inline)]
-            get => Encoded.Data;
+            get => Encoded.Code;
         }
 
         public int Length
@@ -51,7 +51,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public ApiMemberExtract(OpIdentity id, OpUri uri, ApiMember member, BasedCodeBlock encoded)
+        public ApiMemberExtract(OpIdentity id, OpUri uri, ApiMember member, CodeBlock encoded)
         {
             Id = id;
             OpUri = uri;
@@ -60,7 +60,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public ApiMemberExtract(ApiMember member, BasedCodeBlock encoded)
+        public ApiMemberExtract(ApiMember member, CodeBlock encoded)
             : this(member.Id, member.OpUri, member, encoded)
             {
 
@@ -90,6 +90,6 @@ namespace Z0
             => Encoded.Equals(src.Encoded);
 
         public static ApiMemberExtract Empty
-            => new ApiMemberExtract(ApiMember.Empty, BasedCodeBlock.Empty);
+            => new ApiMemberExtract(ApiMember.Empty, CodeBlock.Empty);
     }
 }

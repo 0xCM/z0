@@ -17,9 +17,9 @@ namespace Z0
     [ApiType]
     public struct ApiCaptureBlock
     {
-        readonly BasedCodeBlock Extracted;
+        readonly CodeBlock Extracted;
 
-        public BasedCodeBlock Parsed;
+        public CodeBlock Parsed;
 
         public OpUri OpUri;
 
@@ -33,7 +33,7 @@ namespace Z0
             => Method;
 
         [MethodImpl(Inline)]
-        public ApiCaptureBlock(OpIdentity id, MethodInfo method, BasedCodeBlock extracted, BasedCodeBlock parsed, ExtractTermCode term)
+        public ApiCaptureBlock(OpIdentity id, MethodInfo method, CodeBlock extracted, CodeBlock parsed, ExtractTermCode term)
         {
             Extracted = extracted;
             Parsed = parsed;
@@ -47,13 +47,13 @@ namespace Z0
         public ReadOnlySpan<byte> InputData
         {
             [MethodImpl(Inline)]
-            get => Extracted.Encoded;
+            get => Extracted.Code;
         }
 
         public ReadOnlySpan<byte> OutputData
         {
             [MethodImpl(Inline)]
-            get => Parsed.Encoded;
+            get => Parsed.Code;
         }
 
         public ByteSize InputSize

@@ -7,12 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     public readonly struct ListedFiles : IIndex<ListedFile>
     {
-        readonly TableSpan<ListedFile> Data;
+        readonly Index<ListedFile> Data;
 
         [MethodImpl(Inline)]
         public ListedFiles(ListedFile[] src)

@@ -42,7 +42,7 @@ namespace Z0
         public ReadOnlySpan<T> View
         {
             [MethodImpl(Inline)]
-            get => Terms;
+            get => Data;
         }
 
         public T[] Storage

@@ -36,10 +36,10 @@ namespace Z0
 
         void ExecuteHost(BufferTokens buffers, IApiHost host)
         {
-            var dst = WfArchives.capture(FS.dir(CodeArchive.ArchiveRoot.Name), host.Uri);
+            var dst = WfArchives.capture(FS.dir(CodeArchive.Root.Name), host.Uri);
             if(dst.HostX86Path.Exists)
             {
-                var code = ApiQuery.code(ApiSet, host.Uri, CodeArchive.ArchiveRoot).Members;
+                var code = ApiQuery.code(ApiSet, host.Uri, CodeArchive.Root).Members;
                 Context.Notify($"Correlated {code.EntryCount} {host} implemented operations with executable code");
 
                 foreach(var api in code.UnaryOperators)

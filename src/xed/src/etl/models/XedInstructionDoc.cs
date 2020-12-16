@@ -16,7 +16,7 @@ namespace Z0
     /// </summary>
     public readonly struct XedInstructionDoc
     {
-        public readonly TextRow[] Data {get;}
+        public TextRow[] Data {get;}
 
         [MethodImpl(Inline)]
         public XedInstructionDoc(params TextRow[] rows)
@@ -44,22 +44,22 @@ namespace Z0
             => Data.Length;
 
         public string Class
-            => this.ExtractProp(M.ICLASS);
+            => XedWfOps.pattern(this, M.ICLASS);
 
         public string Category
-            => this.ExtractProp(M.CATEGORY);
+            => XedWfOps.pattern(this, M.CATEGORY);
 
         public string Extension
-            => this.ExtractProp(M.EXTENSION);
+            => XedWfOps.pattern(this, M.EXTENSION);
 
         public string IsaSet
-            => this.ExtractProp(M.ISA_SET);
+            => XedWfOps.pattern(this, M.ISA_SET);
 
         public string AttributeText
-            => this.ExtractProp(M.ATTRIBUTES);
+            => XedWfOps.pattern(this, M.ATTRIBUTES);
 
         public string RealOpCode
-            => this.ExtractProp(M.REAL_OPCODE);
+            => XedWfOps.pattern(this, M.REAL_OPCODE);
 
         public XedPattern[] Patterns
             => XedWfOps.patterns(this);

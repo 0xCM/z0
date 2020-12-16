@@ -11,13 +11,11 @@ namespace Z0
 
     public readonly struct XedRule : ITextual
     {
-        public readonly string Expression;
+        public string Expression {get;}
 
         [MethodImpl(Inline)]
         public XedRule(string src)
-        {
-            Expression = src;
-        }
+            => Expression = src;
 
         [MethodImpl(Inline)]
         public string Format()

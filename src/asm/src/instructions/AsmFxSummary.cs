@@ -17,7 +17,7 @@ namespace Z0.Asm
         /// <summary>
         /// The encoded bytes
         /// </summary>
-        public readonly BasedCodeBlock Encoded;
+        public readonly CodeBlock Encoded;
 
         /// <summary>
         /// The zero-based offset of the function, relative to the base address
@@ -42,7 +42,7 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public AsmFxSummary(MemoryAddress @base, uint offset, string content, AsmSpecifier spec, AsmOperandInfo[] operands, byte[] encoded)
         {
-            Encoded = new BasedCodeBlock(@base, encoded);
+            Encoded = new CodeBlock(@base, encoded);
             Offset = offset;
             Formatted = content;
             Operands = operands;

@@ -2,14 +2,17 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Xed
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
 
-    public readonly struct ParseInstructionsStep : IWfStep<ParseInstructionsStep>
+    using static Part;
+
+    partial struct XedWfOps
     {
-        public static WfStepId StepId
-            => typeof(ParseInstructionsStep);
+        [Op]
+        public static FS.FileName rulefile(FS.FileName src, string name)
+            => FS.file(text.format("{0}.{1}.{2}.{3}", "xed", "rules", src.WithoutExtension, name), FileExtensions.Csv);
     }
 }

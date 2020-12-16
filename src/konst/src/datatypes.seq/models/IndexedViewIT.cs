@@ -30,7 +30,7 @@ namespace Z0
         public ref readonly T this[I index]
         {
             [MethodImpl(Inline)]
-            get => ref skip(Terms, @as<I,uint>(index));
+            get => ref skip(Data, @as<I,uint>(index));
         }
 
         uint Length
