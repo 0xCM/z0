@@ -11,6 +11,8 @@ namespace Z0
     [Free]
     public interface IWfService : IService, IDisposable
     {
+        IWfShell Wf {get;}
+        
         void Init(IWfShell wf);
 
         void IDisposable.Dispose() {}

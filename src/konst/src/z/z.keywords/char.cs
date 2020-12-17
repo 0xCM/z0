@@ -19,5 +19,13 @@ namespace Z0
         public static ref char @char<E>(in E src)
             where E : unmanaged
                 => ref memory.@char(src);
+
+        [MethodImpl(Inline)]
+        public static unsafe ref char @char(string src)
+            => ref memory.@char(src);
+
+        [MethodImpl(Inline)]
+        public static unsafe ref char @char(string src, int index)
+            => ref memory.@char(src, index);
     }
 }

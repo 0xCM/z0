@@ -24,7 +24,7 @@ namespace Z0.Asm
 
         readonly Span<CpuidExpression> cpuid;
 
-        readonly Span<AsmOperatingMode> modes;
+        readonly Span<OperatingMode> modes;
 
         readonly Span<uint> MnemonicSeq;
 
@@ -36,7 +36,7 @@ namespace Z0.Asm
             codes = new AsmOpCodeExpression[count];
             mnemonics = new MnemonicExpression[count];
             cpuid = new CpuidExpression[count];
-            modes = new AsmOperatingMode[count];
+            modes = new OperatingMode[count];
         }
 
         [MethodImpl(Inline), Op]
@@ -58,7 +58,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
-        public void Include(uint seq, in AsmOperatingMode src)
+        public void Include(uint seq, in OperatingMode src)
         {
 
             Mode(seq) = src;
@@ -117,7 +117,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
-        public void Include(AsmOpCodePartitoner ocp, in AsmOperatingMode src)
+        public void Include(AsmOpCodePartitoner ocp, in OperatingMode src)
         {
 
             Mode((uint)ocp.Sequence) = src;
@@ -153,7 +153,7 @@ namespace Z0.Asm
             get => mnemonics;
         }
 
-        public ReadOnlySpan<AsmOperatingMode> Modes
+        public ReadOnlySpan<OperatingMode> Modes
         {
             [MethodImpl(Inline)]
             get => modes;
@@ -168,7 +168,7 @@ namespace Z0.Asm
             => ref seek(codes, seq);
 
         [MethodImpl(Inline), Op]
-        ref AsmOperatingMode Mode(uint seq)
+        ref OperatingMode Mode(uint seq)
             => ref seek(modes, seq);
 
         [MethodImpl(Inline), Op]

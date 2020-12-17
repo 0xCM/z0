@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-
     public struct ApiDecoderStats : ITextual
     {
         public static ApiDecoderStats init()
@@ -24,5 +23,4 @@ namespace Z0
         public string Format()
             => text.format(WfProgress.DecodingMachine, PartCount, HostCount, MemberCount, InstructionCount);
     }
-
 }

@@ -1,13 +1,8 @@
 @echo off
+set ZCmd=%ZDev%\.cmd
 set ProjectId=part
 
-set BuildCmd=%ZDev%\.cmd\build-lib.cmd
+set BuildCmd=%ZCmd%\build-lib.cmd
 echo BuildCmd:%BuildCmd%
 
 call %BuildCmd%
-
-@echo off
-
-if errorlevel 0 (
-call capture %ProjectId%
-)

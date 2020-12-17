@@ -17,7 +17,7 @@ namespace Z0
         /// <summary>
         /// Identifies chatty content
         /// </summary>
-        Babble = FlairKind.Initializing,
+        Babble = FlairKind.Babble,
 
         /// <summary>
         /// Identifies informational content
@@ -43,7 +43,5 @@ namespace Z0
         /// Cyan foreground
         /// </summary>
         HiliteCL = FlairKind.Ran,
-
-
     }
 }

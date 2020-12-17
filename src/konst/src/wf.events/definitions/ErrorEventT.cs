@@ -25,9 +25,7 @@ namespace Z0
 
         public FlairKind Flair => FlairKind.Error;
 
-        public string Summary => Exception ? Exception.Value.Message : Payload.Format();
-
-        public string Detail => Exception ? Exception.Value.ToString() : Payload.Format();
+        public string Summary {get;}
 
         [MethodImpl(Inline)]
         public ErrorEvent(CmdId cmd, T data, CorrelationToken ct, AppMsgSource source)
@@ -36,6 +34,7 @@ namespace Z0
             Exception = none<Exception>();
             Payload = data;
             Source = source;
+            Summary = Payload.Format();
         }
 
         [MethodImpl(Inline)]
@@ -45,6 +44,17 @@ namespace Z0
             Exception = error;
             Payload = data;
             Source = source;
+            Summary = Exception ? Exception.Value.Message : Payload.Format();
+        }
+
+        [MethodImpl(Inline)]
+        public ErrorEvent(string cmd, T data, CorrelationToken ct, AppMsgSource source)
+        {
+            EventId = (EventName, cmd, ct);
+            Exception = none<Exception>();
+            Payload = data;
+            Source = source;
+            Summary = Payload.Format();
         }
 
         [MethodImpl(Inline)]
@@ -54,12 +64,11 @@ namespace Z0
             Exception = none<Exception>();
             Payload = data;
             Source = source;
+            Summary = Payload.Format();            
         }
 
         public string Format()
-            => string.Format(RP.PSx3, EventId, Source, Detail);
-
-        public string FormatSummary()
             => string.Format(RP.PSx3, EventId, Source, Summary);
+
     }
 }

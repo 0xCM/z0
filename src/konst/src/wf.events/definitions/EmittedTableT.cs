@@ -8,7 +8,6 @@ namespace Z0
     using System;
 
     using static Konst;
-    using static RP;
 
     [Event(EventName)]
     public readonly struct EmittedTableEvent<T> : IWfEvent<EmittedTableEvent<T>>

@@ -7,38 +7,21 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static System.Runtime.CompilerServices.Unsafe;
-
     using static Konst;
 
     partial struct z
     {
-        /// <summary>
-        /// Converts a parametric source to a <see cref='ulong'/>
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline)]
         public static ulong uint64<T>(T src)
-            => As<T,ulong>(ref src);
+            => memory.uint64(src);
 
-        /// <summary>
-        /// Presents a parametric source reference to a <see cref='ulong'/>
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline)]
         public static ref ulong uint64<T>(ref T src)
-            => ref As<T,ulong>(ref src);
+            => ref memory.uint64(ref src);
 
-        /// <summary>
-        /// Converts a nullable parametric source to a nullable <see cref='ulong'/>
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline)]
         public static ulong? uint64<T>(T? src)
             where T : unmanaged
-                => As<T?, ulong?>(ref src);
+                => memory.uint64(src);
     }
 }

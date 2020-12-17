@@ -19,11 +19,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ref T unbox<T>(object src)
             where T : struct
-                => ref sys.unbox<T>(src);
-
-        [MethodImpl(Inline)]
-        public static ref T unbox<T>(Enum src)
-            where T : unmanaged, Enum
-                => ref sys.unbox<T>(src);
+                => ref memory.unbox<T>(src);
     }
 }

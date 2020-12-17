@@ -22,7 +22,7 @@ namespace Z0
 
         public EventPayload<T> Payload {get;}
 
-        public FlairKind Flair => FlairKind.DataRow;
+        public FlairKind Flair => FlairKind.Data;
 
         [MethodImpl(Inline)]
         public RowsEvent(T data)

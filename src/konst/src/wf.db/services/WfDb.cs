@@ -9,13 +9,26 @@ namespace Z0
 
     using static Konst;
 
-    [Service]
-    public readonly struct WfDb : IWfDb, IService<WfDb,IWfDb>
-    {
-        public FS.FolderPath Root {get;}
+    [WfService]
+    public sealed class WfDb : WfService<WfDb,IWfDb>, IWfDb
+    {        
+        public FS.FolderPath Root {get; private set;}
+
+        public WfDb()
+        {
+
+        }
 
         [MethodImpl(Inline)]
-        internal WfDb(FS.FolderPath root)
-            => Root = root;
+        internal WfDb(IWfShell wf)
+            : base(wf)
+        {
+            Root = Wf.DbRoot;
+        }
+
+        protected override void OnInit()
+        {
+            Root = Wf.DbRoot;
+        } 
     }
 }

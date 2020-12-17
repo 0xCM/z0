@@ -7,25 +7,26 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static RP;
+    using static Part;
 
-    public readonly struct TableId<T>
+    public readonly struct TableId<T> : ITableId<T>
         where T : struct
     {
-        public static TableId<T> Value => default;
-
-        public static Type TableType => typeof(T);
-
-        public CliArtifactKey RecordType => TableType;
-
-        public StringRef Identifier => TableType.Name;
-
-        public static implicit operator TableId(TableId<T> src)
-            => TableType;
+        public StringRef RecordType 
+            => typeof(T).Name;
+        
+        public StringRef Identifier     
+            => Table.id<T>().Identifier;
 
         [MethodImpl(Inline)]
         public string Format()
-            => TextFormatter.format(RecordType, Identifier);
+            => Identifier.Format();
+
+        public override string ToString()
+            => Format();
+
+        [MethodImpl(Inline)]
+        public static implicit operator TableId(TableId<T> src)
+            => Table.id<T>();
     }
 }

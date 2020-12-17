@@ -132,10 +132,10 @@ namespace Z0
             => contract.Properties().Instance().Where(p => p.NotIgnored());
 
         static string label(PropertyInfo src)
-            => AspectLabels.GetOrAdd(src, p =>  Labeled.from(p));
+            => AspectLabels.GetOrAdd(src, p =>  Labels.from(p));
 
         static string label(Type src)
-            => TypeLabels.GetOrAdd(src, t => Labeled.from(t));
+            => TypeLabels.GetOrAdd(src, t => Labels.from(t));
 
         static ConcurrentDictionary<Type, string> TypeLabels {get;}
             = new ConcurrentDictionary<Type, string>();

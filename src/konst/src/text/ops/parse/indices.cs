@@ -34,6 +34,17 @@ namespace Z0
             [MethodImpl(Inline), Op]
             public static Pair<int> indices(string src, string first, string second)
                 => pair(src.IndexOf(first), src.IndexOf(second));
+
+            [MethodImpl(Inline), Op]
+            public static int index(string src, char match)
+            {
+                var count = src.Length;
+                ref readonly var c = ref @char(src);
+                for(var i=0; i<count; i++)
+                    if(skip(c,i) == match)
+                        return i;
+                return NotFound;
+            }
         }
     }
 }

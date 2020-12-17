@@ -16,6 +16,6 @@ namespace Z0
         /// <param name="color">The foreground color</param>
         [MethodImpl(Inline)]
         public static void write(char c, FlairKind? color = null)
-            => T.WriteChar(c, color ?? FlairKind.DarkMagenta);
+            => T.WriteChar(c, color ?? FlairKind.Status);
     }
 }

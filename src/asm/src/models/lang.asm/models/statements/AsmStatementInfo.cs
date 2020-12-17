@@ -19,7 +19,7 @@ namespace Z0.Asm
 
         public AsmInstructionPattern Instruction {get;}
 
-        public AsmOperatingMode Mode {get;}
+        public OperatingMode Mode {get;}
 
         public CpuidExpression Cpuid {get;}
     }

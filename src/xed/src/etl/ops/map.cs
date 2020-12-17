@@ -13,7 +13,6 @@ namespace Z0
 
     partial struct XedWfOps
     {
-
         [Op]
         public static void map(ReadOnlySpan<XedPattern> src, Span<XedInstructionRow> dst)
         {

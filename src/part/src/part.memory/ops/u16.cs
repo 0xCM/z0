@@ -27,5 +27,15 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref ushort u16<T>(in T src)
             => ref @as<T,ushort>(src);
+
+        /// <summary>
+        /// Adds a <see cref='ushort'/> measured offset to a parametric reference and presents the resulting as a <see cref='ushort'/> cell reference
+        /// </summary>
+        /// <param name="src">The source reference</param>
+        /// <param name="offset">The offset count, measured in bytes</param>
+        /// <typeparam name="T">The source type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref ushort u16<T>(in T src, int offset)
+            => ref add(@as<T,ushort>(src), offset);
     }
 }

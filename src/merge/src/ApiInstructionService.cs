@@ -12,18 +12,29 @@ namespace Z0
     using static Part;
     using static z;
 
-    [WfService]
-    public struct ApiInstructionService : IWfService<ApiInstructionService,ApiInstructionService>
+
+    public interface IApiInstructionService : IWfService
     {
-        IWfShell Wf;
+        ApiHostRoutines Decode(IAsmDecoder decoder, in ApiHostCodeBlocks src);
+    }
+
+    public sealed class ApiInstructionService : WfService<ApiInstructionService,IApiInstructionService>, IApiInstructionService
+    {
+        [MethodImpl(Inline)]
+        public static ApiInstructionService create(IWfShell wf)
+            => new ApiInstructionService(wf);
+
+        public ApiInstructionService()
+        {
+
+        }
 
         [MethodImpl(Inline)]
         ApiInstructionService(IWfShell wf)
-            => Wf = wf;
+            : base(wf)
+        {
 
-        [MethodImpl(Inline)]
-        public static ApiInstructionService create(IWfShell wf)
-            => new ApiInstructionService();
+        }
 
         ApiRoutineObsolete Load(MemoryAddress @base, ApiCodeBlock code, Instruction[] src)
             => new ApiRoutineObsolete(@base, Load(code, src));
@@ -67,12 +78,6 @@ namespace Z0
             }
 
             return new ApiHostRoutines(src.Host, instructions.ToArray());
-        }
-
-        [MethodImpl(Inline)]
-        public void Init(IWfShell wf)
-        {
-            Wf = wf;
         }
     }
 }

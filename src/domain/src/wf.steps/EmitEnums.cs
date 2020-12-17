@@ -69,11 +69,11 @@ namespace Z0
             if(Records.Length != 0)
             {
                 var t = default(ClrEnumLiteralRecord);
-                var formatter = TableFormatter.row(RenderWidths,t);
-                Wf.Running(Host, Source.SimpleName);
+                var formatter = TableFormatter.row<ClrEnumLiteralRecord>(RenderWidths);
+                var flow = Wf.EmittingTable<ClrEnumLiteralRecord>(Target);
                 var counter = 0u;
                 Execute(ref counter, formatter);
-                Wf.EmittedTable(Host, counter, Target, t);
+                Wf.EmittedTable<ClrEnumLiteralRecord>(Host, counter, Target);
             }
         }
 

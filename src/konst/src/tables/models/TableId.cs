@@ -9,39 +9,36 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct TableId : ITextual
+    public readonly struct TableId : ITableId
     {
-        public readonly CliArtifactKey RecordType;
+        public StringRef RecordType {get;}
 
-        public readonly StringRef Identifier;
+        public StringRef Identifier {get;}
 
-        [MethodImpl(Inline)]
-        public static implicit operator TableId((CliArtifactKey shape, string name) src)
-            => new TableId(src.shape,src.name);
-
-        [MethodImpl(Inline)]
-        public static implicit operator TableId(Type src)
-            => new TableId(src);
 
         [MethodImpl(Inline)]
         public TableId(Type shape)
         {
-            RecordType = shape;
+            RecordType = shape.Name;
             Identifier = shape.Name;
         }
 
         [MethodImpl(Inline)]
         public TableId(CliArtifactKey shape, string name)
         {
-            RecordType = shape;
+            RecordType = name;
             Identifier = name;
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => TextFormatter.format(RecordType, Identifier);
+            => Identifier.Format();
 
         public override string ToString()
             => Format();
+
+        [MethodImpl(Inline)]
+        public static implicit operator TableId(Type src)
+            => Table.id(src);
     }
 }

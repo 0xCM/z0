@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Defines common messages that are issued during setup/execution
@@ -19,7 +19,7 @@ namespace Z0
         public static AppMsg Completed(string machine, FsmStats stats, bool asPlanned)
             => AppMsg.colorize($"{machine} executed for {stats.Runtime.Ms} ms and completed"
             + (asPlanned ? $" as planned after receiving {stats.ReceiptCount} events and experiencing {stats.TransitionCount} transitions" : " abnormally"),
-                FlairKind.Blue);
+                FlairKind.Status);
 
         public static AppMsg Receipt<E>(string machine, E input, ulong receipts)
             => AppMsg.babble($"{machine} received event {input.ToString().PadLeft(6)} | Total Receipts: {receipts}");

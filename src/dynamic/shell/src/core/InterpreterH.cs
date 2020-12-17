@@ -15,6 +15,8 @@ namespace Z0
     public abstract class Interpreter<H> : IWfService<H,IInterpreter>, IInterpreter,  IDisposable
         where H : Interpreter<H>, new()
     {
+        public IWfShell Wf {get; private set;}
+        
         public static H create()
             => new H();
 
@@ -80,7 +82,6 @@ namespace Z0
 
         protected abstract FS.FilePath ExePath {get;}
 
-        protected IWfShell Wf {get; private set;}
 
         IWfProcLog WorkerLog;
 

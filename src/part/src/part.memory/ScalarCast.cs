@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     [ApiHost]
     public readonly struct ScalarCast
@@ -527,6 +527,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static double float64(double src)
             => (double)src;
-
     }
 }

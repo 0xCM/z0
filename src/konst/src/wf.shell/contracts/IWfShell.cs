@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Reflection;
 
-    using static Konst;
     using static z;
     using static WfShellUtility;
     using static WfEvents;
@@ -74,11 +73,40 @@ namespace Z0
         IWfShell WithVerbosity(LogLevel level)
             => clone(this, Host, PolyStream, level);
 
+        void SignalTableEmitting(Type type, FS.FilePath dst)
+            => Raise(tableEmitting(Host, type, dst, Ct));
+
+        void SignalTableEmitting<T>(FS.FilePath dst)
+            => Raise(tableEmitting<T>(Host, dst, Ct));
+
         WfExecFlow EmittingTable(Type type, FS.FilePath dst)
         {
             SignalTableEmitting(type, dst);
-            return new WfExecFlow(this, NextExecToken());
+            return Flow();
         }
+
+        WfExecFlow EmittingTable<T>(FS.FilePath dst)
+            where T : struct
+        {
+            SignalTableEmitting<T>(dst);
+            return Flow();
+        }
+
+        void EmittedTable<T>(WfStepId step, Count count, FS.FilePath dst)
+            where T : struct
+                => Raise(tableOut<T>(step, count, dst, Ct));
+
+        void EmittedTable<T>(Count count, FS.FilePath dst, WfExecFlow flow)
+            where T : struct
+                => Raise(tableOut<T>(Host, count, dst, Ct));
+
+        void EmittedTable<T>(Count count, FS.FilePath dst)
+            where T : struct
+                => Raise(tableOut<T>(Host, count, dst, Ct));
+
+        void EmittedTable(Type type, Count count, FS.FilePath dst)
+            => Raise(tableOut(Host, type, count, dst, Ct));
+
 
         void Ran()
             => SignalRan();
@@ -91,9 +119,6 @@ namespace Z0
 
         WfExecFlow Flow()
             => new WfExecFlow(this, NextExecToken());
-
-        void SignalTableEmitting(Type type, FS.FilePath dst)
-            => Raise(tableEmitting(Host, type, dst, Ct));
 
         void SignalRunning()
             => Raise(running(Host, Ct));
@@ -123,26 +148,21 @@ namespace Z0
             return filtered.Length > 0 ? some(filtered[0]) : none<Assembly>();
         }
 
-        FS.FolderPath IndexRoot
-            => FS.dir(Init.IndexDir.Name);
 
         FolderPath ResourceRoot
             => FolderPath.Define(Init.ResDir.Name);
 
-        FS.FolderPath Resources
-            => FS.dir(ResourceRoot.Name);
-
         FS.FolderPath AppData
             => FS.dir(Context.Paths.AppDataRoot.Name);
+
+        FS.FolderPath DbRoot
+            => Init.DbRoot;
 
         /// <summary>
         /// Provides a <see cref='IWfDb'/> rooted at a shell-configured location
         /// </summary>
         IWfDb Db()
-            => new WfDb(Init.DbRoot);
-
-        IToolDb ToolDb()
-            => new ToolDb(this);
+            => new WfDb(this);
 
         WfEventId Raise<E>(in E e)
             where E : IWfEvent
@@ -153,12 +173,6 @@ namespace Z0
 
         // ~ Levels
         // ~ ---------------------------------------------------------------------------
-
-        void Trace<T>(WfStepId step, T data)
-            => Raise(trace(step, data, Ct));
-
-        void Trace<T>(T data)
-            => Trace(Host, data);
 
         void Status<T>(WfStepId step, T data)
             => Raise(status(step, data, Ct));
@@ -206,9 +220,6 @@ namespace Z0
             return svc;
         }
 
-        void Created(ToolId tool)
-            => Raise(created(tool, Ct));
-
         void Created(WfStepId id)
         {
             if(Verbosity.Babble())
@@ -217,12 +228,6 @@ namespace Z0
 
         void Created()
             => Created(Host);
-
-        void Created<T>(WfStepId id, T content)
-        {
-            if(Verbosity.Babble())
-                Raise(created(id, content, Ct));
-        }
 
         void Created<H>(H host)
             where H : IWfHost<H>, new()
@@ -295,9 +300,6 @@ namespace Z0
         void EmittingFile<T>(T source, FS.FilePath dst)
             => Raise(fileEmitting<T>(Host, source, dst, Ct));
 
-        void EmittingTable<T>(FS.FilePath dst, T t = default)
-            where T : struct
-                => Raise(tableEmitting<T>(Host, dst, Ct));
 
         void Running(CmdId cmd)
             => Raise(new RunningCmdEvent(cmd, Ct));
@@ -336,16 +338,6 @@ namespace Z0
         void EmittedFile(Count count, FS.FilePath dst)
             => Raise(fileOut(Host, dst, count, Ct));
 
-        void EmittedTable<T>(WfStepId step, Count count, FS.FilePath dst, T t = default)
-            where T : struct
-                => Raise(tableOut<T>(step, count, dst, Ct));
-
-        void EmittedTable<T>(Count count, FS.FilePath dst, T t = default)
-            where T : struct
-                => Raise(tableOut<T>(Host, count, dst, Ct));
-
-        void EmittedTable(Type type, Count count, FS.FilePath dst)
-            => Raise(tableOut(Host, type, count, dst, Ct));
 
         void Processed<T>(T content)
             => processed(Host, content, Ct);

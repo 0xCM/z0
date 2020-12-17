@@ -20,6 +20,6 @@ namespace Z0
         /// <param name="f">The mapping function</param>
         [MethodImpl(Inline)]
         public static T[] Select<S,T>(this S[] src, Func<S,T> f)
-            => map(src,f);
+            => Arrays.map(src,f);
     }
 }

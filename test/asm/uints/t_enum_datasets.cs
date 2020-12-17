@@ -10,9 +10,6 @@ namespace Z0.Asm
     using static Konst;
     using static z;
 
-    using F = EnumDatasetField;
-
-
     public class t_enum_datasets : t_asm<t_enum_datasets>
     {
         public t_enum_datasets()
@@ -44,7 +41,7 @@ namespace Z0.Asm
             emit<RegisterIndex,byte>();
             emit<RegisterClass,byte>();
             emit<RegisterWidth,ushort>();
-            emit<AsmOperatingMode,byte>();
+            emit<OperatingMode,byte>();
             emit<AsmTokenKind,byte>();
             emit<AsmOpCodeTokenKind,byte>();
         }

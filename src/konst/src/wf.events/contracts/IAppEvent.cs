@@ -14,7 +14,7 @@ namespace Z0
     public interface IAppEvent : ICorrelated, ITextual, IChronic
     {
         FlairKind Flair
-            => FlairKind.Blue;
+            => FlairKind.Status;
 
         bool IsError
             => Flair == FlairKind.Error;

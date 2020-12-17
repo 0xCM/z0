@@ -10,10 +10,6 @@ namespace Z0
     {
         Unspecified = ConsoleColor.White,
 
-        Initializing = ConsoleColor.DarkGray,
-
-        Initialized = ConsoleColor.DarkGray,
-
         Created = ConsoleColor.Blue,
 
         Running = ConsoleColor.Cyan,
@@ -26,20 +22,14 @@ namespace Z0
 
         Error = ConsoleColor.Red,
 
+        Babble = ConsoleColor.DarkGray,
+
         Disposed = ConsoleColor.Gray,
 
         Status = ConsoleColor.Cyan,
 
-        Blue = ConsoleColor.Blue,
-
-        DataRow = ConsoleColor.DarkCyan,
-
-        DarkMagenta = ConsoleColor.DarkMagenta,
+        Data = ConsoleColor.DarkCyan,
 
         Trace = ConsoleColor.DarkMagenta,
-
-        Reserved1 = ConsoleColor.DarkYellow,
-
-        Reserved2 = ConsoleColor.DarkRed,
     }
 }

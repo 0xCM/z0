@@ -20,6 +20,16 @@ namespace Z0
     [ApiHost(ApiNames.AsmSemanticRender, true)]
     public readonly struct AsmSemanticRender : IDisposable
     {
+        public static void exec(IWfShell wf, ReadOnlySpan<ApiPartRoutines> src)
+        {
+            var count = src.Length;
+            for(var i=0; i<count; i++)
+            {
+                var processor = PartRoutinesProcessor.service(wf, skip(src,i));
+                processor.RenderSemantic();
+            }
+        }
+
         [MethodImpl(Inline), Op]
         public static AsmSemanticRender create(IWfShell wf)
             => new AsmSemanticRender(wf);

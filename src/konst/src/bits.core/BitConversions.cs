@@ -114,7 +114,6 @@ namespace Z0
         }
     }
 
-
     /// <summary>
     /// Conversion provider for the bit data type
     /// </summary>

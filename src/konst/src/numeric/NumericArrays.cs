@@ -17,52 +17,52 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T[] force<T>(byte[] src, T[] dst)
             where T : unmanaged
-                => NumericArrays.force<byte,T>(src, dst);
+                => force<byte,T>(src, dst);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T[] force<T>(sbyte[] src, T[] dst)
             where T : unmanaged
-                => NumericArrays.force<sbyte,T>(src, dst);
+                => force<sbyte,T>(src, dst);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T[] force<T>(short[] src, T[] dst)
             where T : unmanaged
-                => NumericArrays.force<short,T>(src, dst);
+                => force<short,T>(src, dst);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T[] force<T>(ushort[] src, T[] dst)
             where T : unmanaged
-                => NumericArrays.force<ushort,T>(src, dst);
+                => force<ushort,T>(src, dst);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T[] force<T>(int[] src, T[] dst)
             where T : unmanaged
-                => NumericArrays.force<int,T>(src, dst);
+                => force<int,T>(src, dst);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T[] force<T>(uint[] src, T[] dst)
             where T : unmanaged
-                => NumericArrays.force<uint,T>(src, dst);
+                => force<uint,T>(src, dst);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T[] force<T>(long[] src, T[] dst)
             where T : unmanaged
-                => NumericArrays.force<long,T>(src, dst);
+                => force<long,T>(src, dst);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T[] force<T>(ulong[] src, T[] dst)
             where T : unmanaged
-                => NumericArrays.force<ulong,T>(src, dst);
+                => force<ulong,T>(src, dst);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T[] force<T>(float[] src, T[] dst)
             where T : unmanaged
-                => NumericArrays.force<float,T>(src, dst);
+                => force<float,T>(src, dst);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T[] force<T>(double[] src, T[] dst)
             where T : unmanaged
-                => NumericArrays.force<double,T>(src, dst);
+                => force<double,T>(src, dst);
 
         /// <summary>
         /// Unconditionally converts the source values to values of parametric numeric type

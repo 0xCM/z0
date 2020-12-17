@@ -8,11 +8,11 @@ namespace Z0
 
     using static z;
 
-    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
-
-    [Free]
-    public interface IWfDb : IWfDbPaths, IFileArchive
+    public interface IWfDb :  IWfService, IWfDbPaths, IFileArchive
     {
+        IToolDb ToolDb()
+            => new ToolDb(Wf);
+
         ITableArchive TableArchive<S>(S subject)
             => new DbTables<S>(this, subject);
 

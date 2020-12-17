@@ -7,37 +7,21 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static System.Runtime.CompilerServices.Unsafe;
     using static Konst;
 
     partial struct z
     {
-        /// <summary>
-        /// Converts a parametric source to a <see cref='byte'/>
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline)]
         public static byte uint8<T>(T src)
-            => As<T,byte>(ref src);
+            => memory.uint8(src);
 
-        /// <summary>
-        /// Presents a parametric source reference to a <see cref='byte'/>
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline)]
         public static ref byte uint8<T>(ref T src)
-            => ref As<T,byte>(ref src);
+            => ref memory.uint8(ref src);
 
-        /// <summary>
-        /// Converts a nullable parametric source to a nullable <see cref='byte'/>
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline)]
         public static byte? uint8<T>(T? src)
             where T : struct
-                => As<T?, byte?>(ref src);
+                => memory.uint8(ref src);
     }
 }

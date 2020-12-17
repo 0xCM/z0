@@ -30,7 +30,7 @@ namespace Z0
             return service;
         }
 
-        protected IWfShell Wf {get; private set;}
+        public IWfShell Wf {get; private set;}
 
         protected WfHost Host {get; private set;}
 
@@ -41,6 +41,17 @@ namespace Z0
             Host = WfShell.host(typeof(H));
             Wf = wf.WithHost(Host);
             OnInit();
+        }
+
+        protected WfService()
+        {
+
+        }
+
+        protected WfService(IWfShell wf)
+        {
+            Host = WfShell.host(typeof(H));
+            Wf = wf.WithHost(Host);
         }
 
         protected virtual void OnInit() {}

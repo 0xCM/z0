@@ -15,7 +15,6 @@ namespace Z0
     public delegate ApiHostRoutines HostBlockDecoder(in ApiHostCodeBlocks blocks);
 
 
-
     public readonly struct CaptureProcessors
     {
         public static void Run(IWfShell wf, in WfCaptureState state)
@@ -23,11 +22,7 @@ namespace Z0
             var svc = ApiIndexService.init(wf);
             var index = svc.CreateIndex();
             run(wf, state, index);
-
-            var decoded = decode(wf, state.RoutineDecoder, index);
-
-            process(wf, decoded);
-
+            process(wf, decode(wf, state.RoutineDecoder, index));
             ResBytesEmitter.create().WithIndex(index).Run(wf);
         }
 
@@ -56,28 +51,7 @@ namespace Z0
         }
 
         public static uint emit(IWfShell wf, in AsmRowSet<Mnemonic> src)
-        {
-            var count = (uint)src.Count;
-            if(count != 0)
-            {
-                var dst = wf.Db().Table(AsmRow.TableId, src.Key.ToString());
-                var records = span(src.Sequenced);
-                var formatter = Formatters.dataset<AsmRowField>();
-                var header = Table.header53<AsmRowField>();
-
-                wf.EmittingTable<AsmRow>(dst);
-                using var writer = dst.Writer();
-                writer.WriteLine(header);
-                for(var i=0; i<count; i++)
-                {
-                    ref readonly var record = ref skip(records,i);
-                    var line = AsmRow.format(record, formatter).Render();
-                    writer.WriteLine(line);
-                }
-                wf.EmittedTable<AsmRow>(count, dst);
-            }
-            return count;
-        }
+            => AsmRowsets.emit(wf,src);
 
         public static Span<ApiPartRoutines> decode(IWfShell wf, IAsmDecoder decoder, in ApiCodeBlockIndex src)
         {
@@ -139,15 +113,10 @@ namespace Z0
         {
             try
             {
-                var count = src.Length;
-                for(var i=0; i<count; i++)
-                {
-                    var processor = PartRoutinesProcessor.service(wf, skip(src,i));
-                    processor.ProcessJumps();
-                    processor.ProcessEnlisted();
-                    processor.RenderSemantic();
-                    processor.ProcessCalls();
-                }
+                EmitCallIndex.exec(wf,src);
+                AsmJmpProcessor.exec(wf,src);
+                AsmProcessors.exec(wf,src);
+                AsmSemanticRender.exec(wf,src);
             }
             catch(Exception e)
             {

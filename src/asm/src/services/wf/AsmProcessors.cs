@@ -8,10 +8,18 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static z;
 
     [ApiHost]
     public readonly struct AsmProcessors
     {
+        public static void exec(IWfShell wf, ReadOnlySpan<ApiPartRoutines> src)
+        {
+            var count = src.Length;
+            for(var i=0; i<count; i++)
+                parts(wf).Process(skip(src,i));
+        }
+
         /// <summary>
         /// Creates an asm processor
         /// </summary>

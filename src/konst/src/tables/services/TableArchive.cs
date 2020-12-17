@@ -14,24 +14,32 @@ namespace Z0
 
     using X = FileExtensions;
 
-    public struct TableArchive : ITableArchive, IWfService<TableArchive,ITableArchive>
+    public sealed class TableArchive : WfService<TableArchive,ITableArchive>, ITableArchive
     {
-        IWfShell Wf;
-
         public FS.FolderPath Root {get; private set;}
 
+        public TableArchive()
+        {
+
+        }
+        
         [MethodImpl(Inline)]
         internal TableArchive(IWfShell wf, FS.FolderPath? root = null)
+            : base(wf)
         {
-            Wf = wf;
             Root = root ?? Wf.Db().TableRoot();
         }
 
-        public void Init(IWfShell wf)
+        protected override void OnInit()
         {
-            Wf = wf;
-            Root = wf.Db().TableRoot();
+            Root = Wf.Db().TableRoot();
         }
+        
+        // public void Init(IWfShell wf)
+        // {
+        //     Wf = wf;
+        //     Root = wf.Db().TableRoot();
+        // }
 
         public void Clear()
             => TableArchives.clear(Root);

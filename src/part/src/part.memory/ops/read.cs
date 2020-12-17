@@ -9,10 +9,13 @@ namespace Z0
 
     using static Part;
     using static System.Runtime.CompilerServices.Unsafe;
-    using static System.Runtime.InteropServices.MemoryMarshal;
 
     partial struct memory
     {
+        /// <summary>
+        /// Reads a <see cref='ushort'> from an offset identifed <see cref='char'/> cell
+        /// </summary>
+        /// <param name="src">The source span</param>
         [MethodImpl(Inline), Op]
         public static ref readonly ushort read(in char src, uint offset)
             => ref read<ushort>(src, (int)offset);
@@ -22,11 +25,10 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The target type</typeparam>
-
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static T read<T>(ReadOnlySpan<byte> src)
+        public static ref readonly T read<T>(ReadOnlySpan<byte> src)
             where T : struct
-                => Read<T>(src);
+                => ref @as<byte,T>(first(src));
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref readonly T read2<T>(ReadOnlySpan<byte> src)

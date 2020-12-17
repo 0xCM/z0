@@ -1,9 +1,8 @@
 @echo off
-
+set ZCmd=%ZDev%\.cmd
 set ProjectId=xed
 
-set BuildCmd=%ZDev%\.cmd\build-app.cmd
+set BuildCmd=%ZCmd%\build-lib.cmd
 echo BuildCmd:%BuildCmd%
 
 call %BuildCmd%
-

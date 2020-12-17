@@ -25,7 +25,7 @@ namespace Z0
 
         public T Content {get;}
 
-        public FlairKind Flair => FlairKind.DataRow;
+        public FlairKind Flair => FlairKind.Data;
 
         [MethodImpl(Inline)]
         public RowsEvent(T data, K kind)

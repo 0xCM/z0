@@ -10,7 +10,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Text;
 
-    using static Konst;
+    using static Part;
     using static NumericCast;
 
     /// <summary>

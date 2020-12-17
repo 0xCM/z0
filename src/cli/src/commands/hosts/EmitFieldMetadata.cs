@@ -64,20 +64,21 @@ namespace Z0
 
         uint Emit(IPart part)
         {
-            var t = new CliField();
-            var path = Wf.Db().Table(CliField.TableId, part.Id);
+            var target = Wf.Db().Table(CliField.TableId, part.Id);
+            var flow = Wf.EmittingTable<CliField>(target);
+
             var assembly = part.Owner;
             using var reader = PeTableReader.open(FS.path(assembly.Location));
             var src = reader.Fields();
             var count = (uint)src.Length;
 
-            var formatter = TableFormatter.row(RenderWidths, t);
-            using var writer = path.Writer();
+            var formatter = TableFormatter.row<CliField>(RenderWidths);
+            using var writer = target.Writer();
             writer.WriteLine(formatter.FormatHeader());
             foreach(var item in src)
                 writer.WriteLine(formatter.FormatRow(item));
 
-            Wf.EmittedTable(Host, src.Length, FS.path(path.Name),t);
+            Wf.EmittedTable<CliField>(Host, src.Length, target);
             return count;
         }
 

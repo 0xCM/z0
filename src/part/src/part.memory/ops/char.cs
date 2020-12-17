@@ -23,5 +23,13 @@ namespace Z0
         public static ref char @char<E>(in E src)
             where E : unmanaged
                 => ref @as<E,char>(src);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static unsafe ref char @char(string src)
+            =>  ref @ref(pchar2(src));
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static unsafe ref char @char(string src, int index)
+            => ref seek(@ref(pchar2(src)), index);
     }
 }

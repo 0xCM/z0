@@ -11,13 +11,26 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public class CmdRouter : ICmdRouter<CmdRouter>
+    public sealed class CmdRouter : WfService<CmdRouter,ICmdRouter<CmdRouter>>, ICmdRouter<CmdRouter>
     {
-        IWfShell Wf;
-
-        WfHost Host;
 
         ConcurrentDictionary<CmdId,ICmdReactor> Nodes;
+    
+        public CmdRouter()
+        {
+            Nodes = new ConcurrentDictionary<CmdId,ICmdReactor>();
+        }
+
+        public CmdRouter(IWfShell wf)
+            : base(wf)
+        {
+            Nodes = new ConcurrentDictionary<CmdId,ICmdReactor>();
+        }
+
+        protected override void OnInit()
+        {
+            
+        }
 
         public IndexedView<CmdId> SupportedCommands
             => Nodes.Keys.Array();
@@ -33,23 +46,6 @@ namespace Z0
             iter(src, cmd => Nodes.TryAdd(cmd.CmdId, cmd));
         }
 
-        public CmdRouter()
-        {
-            Host = WfShell.host(GetType());
-        }
-
-        public void Init(IWfShell wf)
-        {
-
-            Wf = wf.WithHost(Host);
-            Nodes = new ConcurrentDictionary<CmdId,ICmdReactor>();
-        }
-
-        public CmdRouter(IWfShell wf)
-        {
-            Wf =wf;
-            Nodes = new ConcurrentDictionary<CmdId,ICmdReactor>();
-        }
 
         public CmdResult<T> Dispatch<S,T>(S src)
             where S : struct, ICmdSpec<S>

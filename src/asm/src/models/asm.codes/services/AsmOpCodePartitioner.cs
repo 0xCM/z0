@@ -48,7 +48,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
-        void Process(AsmOperatingMode src, in AsmOpCodeGroup handler)
+        void Process(OperatingMode src, in AsmOpCodeGroup handler)
         {
             handler.Include(this, src);
         }

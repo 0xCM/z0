@@ -9,22 +9,18 @@ namespace Z0
 
     using static Part;
 
-    public struct WfWorkers : IWfService<WfWorkers,WfWorkers>
+    public sealed class WfWorkers : WfService<WfWorkers,WfWorkers>
     {
-        WfHost Host;
+        // WfHost Host;
 
-        IWfShell Wf;
+        // IWfShell Wf;
 
-        [MethodImpl(Inline)]
-        public void Init(IWfShell wf)
-        {
-            Host = WfShell.host(typeof(WfWorkers));
-            Wf = wf.WithHost(Host);
-        }
+        // [MethodImpl(Inline)]
+        // public void Init(IWfShell wf)
+        // {
+        //     Host = WfShell.host(typeof(WfWorkers));
+        //     Wf = wf.WithHost(Host);
+        // }
 
-        public void Run()
-        {
-
-        }
     }
 }

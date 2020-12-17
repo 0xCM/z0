@@ -12,7 +12,7 @@ namespace Z0.Asm
 
     using Index = SemanticIndex<AsmTokenKind,string>;
 
-    public readonly struct AsmTokens
+    public readonly struct AsmTokenLookup
     {
         public readonly TableSpan<TokenRecord> Models;
 
@@ -52,7 +52,7 @@ namespace Z0.Asm
             get => Models.Length;
         }
 
-        public AsmTokens(AsmTokenIndex index)
+        public AsmTokenLookup(AsmTokenIndex index)
         {
             Models = index.Model;
             Meanings = index.Meaning;

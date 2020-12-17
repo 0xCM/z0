@@ -84,7 +84,7 @@ public readonly struct ApiNames
     // ~~ Bitlogic
     // ~~ -----------------------------------------------------------------------------------------
 
-    public const string BitLogicBits = bitlogic + dot + bits;
+    public const string BitLogicBits =  bits + logic;
 
     public const string BitLogicU8 = bitlogic + dot + u8;
 
@@ -109,7 +109,6 @@ public readonly struct ApiNames
 
     public const string SpanBlocks = blocks + dot + spans;
 
-
     public const string Spans = spans;
 
     public const string XSpans = spans + dot + extensions;
@@ -130,8 +129,6 @@ public readonly struct ApiNames
     public const string CellBuffers = cells + dot + buffers;
 
     public const string CellSource = cells + dot + source;
-
-    public const string CellVecs = cells + dot + vectors;
 
     public const string CellCopy = cells + dot + copy;
 

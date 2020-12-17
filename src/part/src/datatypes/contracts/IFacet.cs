@@ -10,6 +10,7 @@ namespace Z0
     public interface IFacet<K,V> : IKeyed<K>
     {
         V Value {get;}
+
         string ITextual.Format()
             => string.Format("{0}:{1}", Key, Value);
     }

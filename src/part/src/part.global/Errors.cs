@@ -18,6 +18,9 @@ namespace Z0
        public static NotSupportedException no<T>()
             => new NotSupportedException($"The type {typeof(T).Name} is not supported");
 
+        public static T no<S,T>([Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => Unsupported.raise<S,T>(caller, file, line);
+
         [Op, Closures(UnsignedInts)]
         public static ArgumentException badarg<T>(T arg)
             => new ArgumentException(arg?.ToString() ?? "<null>");

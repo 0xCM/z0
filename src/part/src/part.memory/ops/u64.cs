@@ -27,5 +27,15 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref ulong u64<T>(in T src)
             => ref @as<T,ulong>(src);
+
+        /// <summary>
+        /// Adds a <see cref='ulong'/> measured offset to a parametric reference and presents the resulting cell
+        /// </summary>
+        /// <param name="src">The source reference</param>
+        /// <param name="offset">The offset count, measured in bytes</param>
+        /// <typeparam name="T">The source type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref ulong u64<T>(in T src, int offset)
+            => ref add(@as<T,ulong>(src), offset);
     }
 }

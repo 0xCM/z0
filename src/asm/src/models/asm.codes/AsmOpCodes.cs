@@ -167,7 +167,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
-        static void process(AsmOperatingMode src, in AsmOpCodeGroup handler, ref uint seq)
+        static void process(OperatingMode src, in AsmOpCodeGroup handler, ref uint seq)
         {
             handler.Include(seq, src);
         }

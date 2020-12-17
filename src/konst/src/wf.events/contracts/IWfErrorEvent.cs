@@ -10,8 +10,6 @@ namespace Z0
     public interface IWfErrorEvent : IWfEvent
     {
         bool IAppEvent.IsError
-            => true;
-
-        string FormatSummary();
+            => true;        
     }
 }

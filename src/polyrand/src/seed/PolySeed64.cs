@@ -17,7 +17,7 @@ namespace Z0
         public static ulong Lookup(uint i)
         {
             if(i < Count)
-                return z.cell<ulong>(RawBytes, (int)(i*8));
+                return memory.cell<ulong>(RawBytes, (int)(i*8));
             else
             {
                 throw new Exception("bad");
@@ -126,5 +126,5 @@ namespace Z0
             0x51, 0xe3, 0x5d, 0x0c, 0xe2, 0xdf, 0x2c, 0x66,
             0xc2, 0x6e, 0xbc, 0x2c, 0xde, 0xc3, 0x0d, 0xd7,
         };
-  }
+    }
 }

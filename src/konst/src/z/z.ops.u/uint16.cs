@@ -7,38 +7,21 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static System.Runtime.CompilerServices.Unsafe;
-
     using static Konst;
 
     partial struct z
     {
-        /// <summary>
-        /// Presents a parametric source to a <see cref='ushort'/>
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline)]
         public static ushort uint16<T>(T src)
-            => As<T,ushort>(ref src);
+            => memory.uint16(src);
 
-        /// <summary>
-        /// Presents a parametric source reference to a <see cref='ushort'/>
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline)]
         public static ref ushort uint16<T>(ref T src)
-            => ref As<T,ushort>(ref src);
+            => ref memory.uint16(ref src);
 
-        /// <summary>
-        /// Converts a nullable parametric source to a nullable <see cref='ushort'/>
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline)]
         public static ushort? uint16<T>(T? src)
             where T : unmanaged
-                => As<T?, ushort?>(ref src);
+                => memory.uint16(ref src);
     }
 }

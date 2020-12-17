@@ -48,7 +48,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static string summary(IWfErrorEvent src)
-            => string.Concat(src.FormatSummary(), Eol);
+            => string.Concat(src.Format(), Eol);
 
         public void Deposit(IAppMsg e)
         {

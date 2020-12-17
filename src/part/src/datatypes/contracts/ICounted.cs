@@ -33,6 +33,6 @@ namespace Z0
         new T Count {get;}
 
         uint ICounted.Count
-            => Part.uint32(Count);
+            => memory.uint32(Count);
     }
 }

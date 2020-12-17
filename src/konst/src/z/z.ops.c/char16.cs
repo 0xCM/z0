@@ -2,21 +2,17 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
 
-    [Flags]
-    public enum AsmOperatingMode : byte
+    using static Konst;
+
+    partial struct z
     {
-        None = 0,
-
-        Mode16 = 0b10000,
-
-        Mode32 = 0b100000,
-
-        Mode64 = 0b1000000,
-
-        Non64 = Mode16 | Mode32
+        [MethodImpl(Inline)]
+        public static char char16<T>(T src)
+            => memory.char16(src);
     }
 }

@@ -18,9 +18,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref uint u32<T>(in T src)
             => ref memory.u32(src);
-
-        [MethodImpl(Inline), Op]
-        public static uint u32(ReadOnlySpan<byte> src, int offset = 0)
-            => cell<uint>(src,offset);
     }
 }
