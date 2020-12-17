@@ -20,7 +20,7 @@ namespace Z0
     public class Graph<V>
         where V : unmanaged
     {
-        readonly Node<V>[] Vertices;
+        readonly Node<V>[] Nodes;
 
         readonly Link<V>[] Edges;
 
@@ -29,7 +29,7 @@ namespace Z0
         [MethodImpl(Inline)]
         internal Graph(Node<V>[] vertices, Link<V>[] edges)
         {
-            Vertices = vertices;
+            Nodes = vertices;
             Edges = edges;
             Index = Nodes<V>.Build(vertices, edges);
         }
@@ -56,7 +56,7 @@ namespace Z0
         /// <param name="index">The vertex index</param>
         [MethodImpl(Inline)]
         public ref Node<V> Vertex(V index)
-            => ref Vertices[force<V,ulong>(index)];
+            => ref Nodes[force<V,ulong>(index)];
 
         /// <summary>
         /// Looks up an edge based on its index
@@ -86,7 +86,7 @@ namespace Z0
         /// Specifies the number of vertices declared by the graph
         /// </summary>
         public int VertexCount
-            => Vertices.Length;
+            => Nodes.Length;
 
         /// <summary>
         /// Computes the in-degree of a vertex; i.e. the count of incoming vertices

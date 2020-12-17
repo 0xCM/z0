@@ -4,11 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IRule<T> :  INode
+    public interface IRule<T> : INode
     {
         RuleId RuleId {get;}
 
-        bool INode.IsNonEmpty
-            => RuleId.IsEmpty;
     }
 }

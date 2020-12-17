@@ -29,5 +29,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator Label(string src)
             => new Label(src);
+
+        public static Label Empty
+            => new Label(EmptyString);
     }
 }

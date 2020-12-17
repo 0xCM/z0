@@ -34,8 +34,11 @@ namespace Z0
             Content = content;
         }
 
+        public string Format()
+            => string.Format("{0}:{1}", Index, Content);
+
         public override string ToString()
-            => $"({Index}, {Content})";
+            => Format();
 
         [MethodImpl(Inline)]
         public static Link<I> operator +(in Node<I,T> src, in Node<I,T> dst)

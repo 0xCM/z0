@@ -4,16 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Konst;
-    using static z;
-
     public interface ISymbolicRule<T> :  IRule<T>
         where T : unmanaged
     {
-
 
     }
 }

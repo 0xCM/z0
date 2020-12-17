@@ -11,37 +11,20 @@ namespace Z0
 
     public readonly struct Node<T> : INode<Node<T>,T>
     {
+        public Label Label {get;}
+
         public T Content {get;}
 
-        public bool IsNonEmpty {get;}
-
         [MethodImpl(Inline)]
-        public Node(T content)
+        public Node(T content, Label? label = null)
         {
             Content = content;
-            IsNonEmpty = false;
-        }
-
-        [MethodImpl(Inline)]
-        public Node(T content, bool empty)
-        {
-            Content = content;
-            IsNonEmpty = empty;
-        }
-
-        [MethodImpl(Inline)]
-        public Node<T> Create(T content)
-            => new Node<T>(content);
-
-        public bool IsEmpty
-        {
-            [MethodImpl(Inline)]
-            get => !IsNonEmpty;
+            Label = label ?? Label.Empty;
         }
 
         [MethodImpl(Inline)]
         public static implicit operator Node<T>(T src)
-            => new Node<T>(src, false);
+            => new Node<T>(src);
 
         [MethodImpl(Inline)]
         public static implicit operator T(Node<T> src)

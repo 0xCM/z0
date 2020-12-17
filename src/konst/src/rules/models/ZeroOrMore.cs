@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     public readonly struct ZeroOrMore<T>
     {
@@ -37,5 +36,4 @@ namespace Z0
         public static implicit operator ZeroOrMore<T>(T[] src)
             => new ZeroOrMore<T>(src);
     }
-
 }

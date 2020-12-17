@@ -4,23 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Konst;
-    using static z;
-
     public interface INode
     {
-        /// <summary>
-        /// Specifies whether the node covers nonempty content
-        /// </summary>
-        bool IsNonEmpty {get;}
 
-        /// <summary>
-        /// Specifies whether the node covers nonempty content
-        /// </summary>
-        bool IsEmpty => !IsNonEmpty;
     }
 
     /// <summary>
@@ -29,10 +15,7 @@ namespace Z0
     /// <typeparam name="T">The value type</typeparam>
     public interface INode<T> : INode
     {
-        /// <summary>
-        /// The defining content
-        /// </summary>
-        T Content {get;}
+
     }
 
     /// <summary>
@@ -40,7 +23,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="H">The reifying type</typeparam>
     /// <typeparam name="T">The node value type</typeparam>
-    public interface INode<H,T> : INode<T>, INodeFactory<H,T>
+    public interface INode<H,T> : INode<T>
         where H : INode<H,T>, new()
     {
 

@@ -4,12 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Konst;
-    using static z;
-
     public interface ISymbolicChoice<T> : IChoice<T>, ISymbolicRule<T>
         where T : unmanaged
     {
