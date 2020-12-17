@@ -11,12 +11,12 @@ namespace Z0
     {
         protected override void Execute(IWfShell wf, in ApiPartRoutines state)
         {
-            var step = new ProcessInstructionsStep(wf, this, state);
+            var step = new PartRoutinesProcessor(wf, this, state);
             step.Run();
         }
     }
 
-    ref struct ProcessInstructionsStep
+    public readonly struct PartRoutinesProcessor
     {
         readonly IWfShell Wf;
 
@@ -24,50 +24,49 @@ namespace Z0
 
         readonly ApiPartRoutines Source;
 
-        public ProcessInstructionsStep(IWfShell wf, WfHost host, ApiPartRoutines src)
+        public static PartRoutinesProcessor service(IWfShell wf, ApiPartRoutines src)
+            => new PartRoutinesProcessor(wf, WfShell.host(typeof(PartRoutinesProcessor)), src);
+
+        public PartRoutinesProcessor(IWfShell wf, WfHost host, ApiPartRoutines src)
         {
             Wf = wf.WithHost(host);
             Host = host;
             Source = src;
-            Wf.Created();
         }
 
         public void Dispose()
         {
-            Wf.Disposed();
+
         }
 
-        void ProcessJumps(in ApiPartRoutines src)
+        public void ProcessEnlisted()
+            => AsmProcessors.parts(Wf).Process(Source);
+
+        public void ProcessCalls()
+            => EmitCallIndex.create(Source).Run(Wf);
+
+        public void RenderSemantic()
+            => AsmSemanticRender.create(Wf).Render(Source);
+
+        public void ProcessJumps()
         {
-            using var step = new AsmJmpProcessor(Wf, src);
+            using var step = new AsmJmpProcessor(Wf, Source);
             step.Process();
         }
 
-        void RenderSemantic(in ApiPartRoutines src)
-            => AsmSemanticRender.create(Wf).Render(src);
-
-        void ProcessEnlisted(in ApiPartRoutines src)
-            => AsmProcessors.parts(Wf).Process(src);
-
-        void ProcessCalls(in ApiPartRoutines src)
-            => EmitCallIndex.create(src).Run(Wf);
-
         public void Run()
         {
-            Wf.Running();
-            try
-            {
-                ProcessJumps(Source);
-                ProcessEnlisted(Source);
-                RenderSemantic(Source);
-                ProcessCalls(Source);
-            }
-            catch(Exception e)
-            {
-                Wf.Error(e);
-            }
-
-            Wf.Ran();
+            // try
+            // {
+            //     ProcessJumps();
+            //     ProcessEnlisted();
+            //     RenderSemantic();
+            //     ProcessCalls();
+            // }
+            // catch(Exception e)
+            // {
+            //     Wf.Error(e);
+            // }
         }
     }
 }

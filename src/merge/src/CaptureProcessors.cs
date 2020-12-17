@@ -14,53 +14,10 @@ namespace Z0
 
     public delegate ApiHostRoutines HostBlockDecoder(in ApiHostCodeBlocks blocks);
 
+
+
     public readonly struct CaptureProcessors
     {
-        public static ApiRoutineObsolete project(MemoryAddress @base, ApiCodeBlock code, Instruction[] src)
-            => new ApiRoutineObsolete(@base, project(code, src));
-
-        public static ApiInstruction[] project(ApiCodeBlock code, Instruction[] src)
-        {
-            var @base = code.Base;
-            var offseq = OffsetSequence.Zero;
-            var count = src.Length;
-            var dst = new ApiInstruction[count];
-
-            for(ushort i=0; i<count; i++)
-            {
-                var fx = src[i];
-                var len = fx.ByteLength;
-                var data = span(code.Storage);
-                var slice = data.Slice((int)offseq.Offset, len).ToArray();
-                var recoded = new ApiCodeBlock(code.Uri, fx.IP, slice);
-                dst[i] = new ApiInstruction(@base, fx, recoded);
-                offseq = offseq.AccrueOffset((uint)len);
-            }
-            return dst;
-        }
-
-        public static ApiHostRoutines decode(IAsmDecoder decoder, in ApiHostCodeBlocks src)
-        {
-            var instructions = list<ApiRoutineObsolete>();
-            var ip = MemoryAddress.Empty;
-            var target = list<Instruction>();
-            var count = src.Length;
-
-            for(var i=0; i<count; i++)
-            {
-                target.Clear();
-                ref readonly var block = ref src[i];
-                decoder.Decode(block, x => target.Add(x));
-
-                if(i == 0)
-                    ip = target[0].IP;
-
-                instructions.Add(project(ip, block, target.ToArray()));
-            }
-
-            return new ApiHostRoutines(src.Host, instructions.ToArray());
-        }
-
         public static void Run(IWfShell wf, in WfCaptureState state)
         {
             var svc = ApiIndexService.init(wf);
@@ -128,10 +85,8 @@ namespace Z0
             var partCount = parts.Length;
             var dst = alloc<ApiPartRoutines>(partCount);
             var hostFx = list<ApiHostRoutines>();
-            var kMembers = 0u;
-            var kHosts = 0u;
-            var kParts = 0u;
-            var kFx = 0u;
+            var stats = ApiDecoderStats.init();
+            var svc = ApiInstructionService.create(wf);
 
             wf.Status($"Decoding {partCount} parts");
 
@@ -158,11 +113,11 @@ namespace Z0
                         {
                             wf.Status($"Decoding {members.Count} {host} members");
 
-                            var fx = decode(decoder, members);
+                            var fx = svc.Decode(decoder, members);
                             hostFx.Add(fx);
-                            kHosts++;
-                            kMembers += fx.RoutineCount;
-                            kFx += fx.InstructionCount;
+                            stats.HostCount++;
+                            stats.MemberCount += fx.RoutineCount;
+                            stats.InstructionCount += fx.InstructionCount;
                         }
                         else
                             wf.Warn($"The host {host} has no members");
@@ -171,8 +126,8 @@ namespace Z0
                     wf.Status(text.format(WfProgress.DecodedPart, hostFx.Count, part.Format()));
                     dst[i] = new ApiPartRoutines(part, hostFx.ToArray());
 
-                    kParts++;
-                    wf.Status(text.format(WfProgress.DecodingMachine, kParts, kHosts, kMembers, kFx));
+                    stats.PartCount++;
+                    wf.Status(stats.Format());
                 }
             }
 
@@ -182,12 +137,17 @@ namespace Z0
 
         public static void process(IWfShell wf, ReadOnlySpan<ApiPartRoutines> src)
         {
-            var processors = ProcessInstructions.create();
             try
             {
                 var count = src.Length;
                 for(var i=0; i<count; i++)
-                    processors.Run(wf, skip(src,i));
+                {
+                    var processor = PartRoutinesProcessor.service(wf, skip(src,i));
+                    processor.ProcessJumps();
+                    processor.ProcessEnlisted();
+                    processor.RenderSemantic();
+                    processor.ProcessCalls();
+                }
             }
             catch(Exception e)
             {

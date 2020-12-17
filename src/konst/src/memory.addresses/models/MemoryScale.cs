@@ -23,7 +23,7 @@ namespace Z0
     }
 
     [LiteralCover]
-    public readonly struct MemoryScale
+    public readonly struct MemoryScale : ITextual
     {
         public MemoryScaleKind Kind {get;}
 
@@ -94,7 +94,10 @@ namespace Z0
             Kind = kind;
         }
 
+        public string Format()
+            => IsNonEmpty ? ((byte)Kind).ToString() : EmptyString;
+
         public override string ToString()
-            => ((byte)Kind).ToString();
+            => Format();
     }
 }

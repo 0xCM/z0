@@ -36,6 +36,7 @@ namespace Z0.Asm
 
         protected IApiHexWriter HexWriter([Caller] string caller = null)
         {
+
             var dstPath = TargetArchive.HexPath(FS.file(caller, FileExtensions.Hex));
             return WfArchives.hexwriter<ApiHexWriter>(FS.path(dstPath.Name));
         }
