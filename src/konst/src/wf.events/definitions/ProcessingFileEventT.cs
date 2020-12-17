@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Render;
+    using static TextFormatter;
     using static z;
 
     [Event(EventName)]
@@ -34,6 +34,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => Render.format(EventId, SourcePath.ToUri());
+            => TextFormatter.format(EventId, SourcePath.ToUri());
     }
 }

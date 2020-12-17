@@ -31,7 +31,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => Render.format(EventId, TableId, Target.ToUri());
+            => TextFormatter.format(EventId, TableId, Target.ToUri());
 
         public override string ToString()
             => Format();

@@ -12,12 +12,12 @@ namespace Z0
     using static Part;
     using static z;
 
-    partial struct Render
+    partial struct TextFormatter
     {
         [MethodImpl(Inline), Op]
         public static void lines<F>(IEnumerable<F> src, StringBuilder dst)
             where F : ITextual
-                => dst.Lines(Render.format(src));
+                => dst.Lines(TextFormatter.format(src));
 
         [MethodImpl(Inline), Op]
         public static void lines(IEnumerable<string> src, StringBuilder dst)

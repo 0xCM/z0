@@ -34,7 +34,7 @@ namespace Z0
         }
 
         public string Format()
-            => Render.format(EventId, TableId, RowCount, Target.ToUri());
+            => TextFormatter.format(EventId, TableId, RowCount, Target.ToUri());
 
         public override string ToString()
             => Format();

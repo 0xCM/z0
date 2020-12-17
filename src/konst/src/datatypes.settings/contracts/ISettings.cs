@@ -5,15 +5,19 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
 
     public interface ISettings
     {
+        Func<ISettings> Factory {get;}
     }
 
-    public interface ISettings<T> : ISettings
-        where T : ISettings<T>, new()
+    public interface ISettings<S> : ISettings
+        where S : ISettings<S>, new()
     {
+        new Func<S> Factory
+            => () => new S();
 
+        Func<ISettings> ISettings.Factory
+            => () => new S();
     }
 }

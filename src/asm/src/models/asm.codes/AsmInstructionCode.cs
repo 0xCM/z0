@@ -32,7 +32,7 @@ namespace Z0.Asm
         }
 
         public string Format()
-            => Render.format(SourceCode, Instruction);
+            => TextFormatter.format(SourceCode, Instruction);
 
         [MethodImpl(Inline)]
         public static implicit operator AsmInstructionCode(Paired<PackedInstruction,AsmStatementCode> src)

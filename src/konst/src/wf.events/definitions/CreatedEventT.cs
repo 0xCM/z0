@@ -29,6 +29,6 @@ namespace Z0
         }
 
         public string Format()
-            => Render.format(EventId, Content);
+            => TextFormatter.format(EventId, Content);
     }
 }

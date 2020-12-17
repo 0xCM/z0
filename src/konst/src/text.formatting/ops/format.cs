@@ -12,8 +12,17 @@ namespace Z0
     using static Part;
     using static RP;
 
-    partial struct Render
+    partial struct TextFormatter
     {
+        /// <summary>
+        /// Renders a source value as text
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <typeparam name="T">The source type</typeparam>
+        [Op, Closures(Closure)]
+        public static string format<T>(T src)
+            => src is ITextual t ? t.Format() : (src?.ToString() ?? EmptyString);
+
         /// <summary>
         /// Formats the pair of strings represented by respective character spans
         /// </summary>
@@ -51,24 +60,9 @@ namespace Z0
         public static string format(in StringRef src)
             => src.Format();
 
-        /// <summary>
-        /// Formats a source operand according to a specified pattern
-        /// </summary>
-        /// <param name="pattern">The format pattern</param>
-        /// <param name="arg0">The source operand</param>
         [MethodImpl(Inline), Op]
-        public static string format(in StringRef pattern, in StringRef arg0)
-            => string.Format(format(pattern), format(arg0));
-
-        /// <summary>
-        /// Formats two operands according to a specified pattern
-        /// </summary>
-        /// <param name="pattern">The format pattern</param>
-        /// <param name="arg0">The first operand</param>
-        /// <param name="arg1">The second operand</param>
-        [MethodImpl(Inline), Op]
-        public static string format(in StringRef pattern, in StringRef arg0, in StringRef arg1)
-            => string.Format(format(pattern), format(arg0), format(arg1));
+        static string format(string src)
+            => src ?? EmptyString;
 
         /// <summary>
         /// Formats three operands according to a specified pattern
@@ -78,7 +72,7 @@ namespace Z0
         /// <param name="arg1">The second operand</param>
         /// <param name="arg2">The third operand</param>
         [MethodImpl(Inline), Op]
-        public static string format(in StringRef pattern, in StringRef arg0, in StringRef arg1, in StringRef arg2)
+        public static string format(string pattern, string arg0, string arg1, string arg2)
             => string.Format(format(pattern), format(arg0), format(arg1), format(arg2));
 
         /// <summary>
@@ -87,7 +81,7 @@ namespace Z0
         /// <param name="pattern">The format pattern</param>
         /// <param name="arg0">The source operand</param>
         [MethodImpl(Inline), Op]
-        public static string format(string pattern, in StringRef arg0)
+        public static string format(string pattern, string arg0)
             => string.Format(pattern, format(arg0));
 
         /// <summary>
@@ -97,28 +91,8 @@ namespace Z0
         /// <param name="arg0">The first operand</param>
         /// <param name="arg1">The second operand</param>
         [MethodImpl(Inline), Op]
-        public static string format(string pattern, in StringRef arg0, in StringRef arg1)
+        public static string format(string pattern, string arg0, string arg1)
             => string.Format(pattern, format(arg0), format(arg1));
-
-        /// <summary>
-        /// Formats three operands according to a specified pattern
-        /// </summary>
-        /// <param name="pattern">The format pattern</param>
-        /// <param name="arg0">The first operand</param>
-        /// <param name="arg1">The second operand</param>
-        /// <param name="arg2">The third operand</param>
-        [MethodImpl(Inline), Op]
-        public static string format(string pattern, in StringRef arg0, in StringRef arg1, in StringRef arg2)
-            => string.Format(pattern, format(arg0), format(arg1), format(arg2));
-
-        /// <summary>
-        /// Renders a source value as text
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static string format<T>(T src)
-            => string.Format(Slot0, src);
 
         /// <summary>
         /// Renders a pair of <see cref='ITextual'/> values as pipe-delimited text

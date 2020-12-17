@@ -11,24 +11,20 @@ namespace Z0
 
     public readonly struct PathSetting : ITextual
     {
-        public readonly StringRef Name;
+        public string Name {get;}
 
-        public readonly StringRef Value;
-
-        [MethodImpl(Inline)]
-        public static implicit operator SettingValue<StringRef>(PathSetting src)
-            => new SettingValue<StringRef>(src.Name, src.Value);
+        public string Value {get;}
 
         [MethodImpl(Inline)]
         public PathSetting(string name, string value)
         {
             Name = name;
-            Value = value;
+            Value = value ?? EmptyString;
         }
 
         [MethodImpl(Inline)]
         public string Format(bool json)
-            => json ? Render.format(RP.JsonProp, Name, Value) : Value.Format();
+            => json ? TextFormatter.format(RP.JsonProp, Name, Value) : Value;
 
         [MethodImpl(Inline)]
         public string Format()

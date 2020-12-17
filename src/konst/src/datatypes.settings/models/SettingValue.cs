@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// Defines a nonparametric kvp application setting
     /// </summary>
-    public readonly struct SettingValue : ITextual<SettingValue, SettingFormat>, ISetting
+    public readonly struct SettingValue : ISetting
     {
         /// <summary>
         /// The setting name
@@ -31,19 +31,19 @@ namespace Z0
             Value = value;
         }
 
-        public string Format(SettingFormat config)
+        public string Format(bool json)
         {
-            if(config.FormatAsJson)
+            if(json)
                 return string.Concat(Name.Enquote(), Chars.Colon, Chars.Space, Value.Enquote());
             else
-                return Render.setting(Name,Value);
+                return TextFormatter.setting(Name,Value);
         }
 
         public string Format()
-            => Format(new SettingFormat(true));
+            => Format(true);
 
 
         public override string ToString()
-            => Format(new SettingFormat(false));
+            => Format();
     }
 }

@@ -28,6 +28,6 @@ namespace Z0
             Path = path;
         }
         public string Format()
-            => Render.format(EventId, SegmentCount, Path.ToUri());
+            => TextFormatter.format(EventId, SegmentCount, Path.ToUri());
     }
 }

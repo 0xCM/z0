@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    partial struct Render
+    partial struct TextFormatter
     {
         /// <summary>
         /// Creates a title formatter from a rendering function render:T -> string

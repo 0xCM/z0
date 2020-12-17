@@ -18,7 +18,7 @@ namespace Z0
         string Value {get;}
 
         string ITextual.Format()
-            => Render.setting(Name,Value);
+            => TextFormatter.setting(Name,Value);
     }
 
     [Free]

@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
     using static z;
 
-    partial struct Render
+    partial struct TextFormatter
     {
         [Op]
         public static RenderPatternSources sources(Type src)

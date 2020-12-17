@@ -10,7 +10,7 @@ namespace Z0
 
     using static RP;
 
-    partial struct Render
+    partial struct TextFormatter
     {
         /// <summary>
         /// Retrieves the <see cref='Slot0' /> literal

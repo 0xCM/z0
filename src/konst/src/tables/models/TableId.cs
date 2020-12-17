@@ -39,7 +39,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => Render.format(RecordType, Identifier);
+            => TextFormatter.format(RecordType, Identifier);
 
         public override string ToString()
             => Format();

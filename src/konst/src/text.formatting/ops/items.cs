@@ -9,40 +9,38 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
+    using static Part;
     using static z;
 
-    partial struct Render
+    partial struct TextFormatter
     {
         public static ReadOnlySpan<string> items<T>(ReadOnlySpan<T> src)
-            where T : ITextual
         {
             var count = src.Length;
-            var dst = z.span<string>(count);
+            var dst = span<string>(count);
             for(var i=0u; i<count; i++)
-                z.seek(dst, i) = skip(src,i).Format();
+                seek(dst, i) = format(skip(src,i));
             return dst;
         }
 
         public static ReadOnlySpan<string> items<T,D>(ReadOnlySpan<T> src, D delimiter)
-            where T : ITextual
         {
             var sep = delimiter.ToString();
             var count = src.Length;
-            var dst = z.span<string>(count);
+            var dst = span<string>(count);
             for(var i=0u; i<count; i++)
             {
                 ref readonly var item = ref skip(src,i);
-                var itemText = item.Format();
+                var itemText = format(item);
                 if(i != 0)
-                    z.seek(dst, i) = string.Format("{0}{1}", delimiter, itemText);
+                    seek(dst, i) = string.Format("{0}{1}", delimiter, itemText);
                 else
-                    z.seek(dst,i) = itemText;
+                    seek(dst,i) = itemText;
             }
             return dst;
         }
 
         public static IEnumerable<string> items<F>(IEnumerable<F> items)
-            where F : ITextual
-                => items.Select(m => m.Format());
+            => items.Select(format);
     }
 }

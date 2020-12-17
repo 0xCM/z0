@@ -132,10 +132,10 @@ namespace Z0
                     LocalOffset: offset,
                     GlobalOffset: NextOffset,
                     Mnemonic: mnemonic.ToString().ToUpper(),
-                    OpCode: src.InstructionCode.OpCode,
+                    OpCode: src.Specifier.OpCode,
                     Encoded: new BinaryCode(encoded.TrimEnd().ToArray()),
                     SourceCode: src.FormattedInstruction,
-                    Instruction: src.InstructionCode.Instruction,
+                    Instruction: src.Specifier.Instruction,
                     CpuId: text.embrace(src.CpuidFeatures.Select(x => x.ToString()).Concat(",")),
                     Id: (OpCodeId)src.Code
                     );

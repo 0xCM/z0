@@ -7,9 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
-    public readonly struct Setting
+    public readonly struct Setting : ITextual
     {
         public string Name {get;}
 
@@ -18,9 +18,18 @@ namespace Z0
         [MethodImpl(Inline)]
         public Setting(string name, dynamic value)
         {
-            Name = name;
-            Value = value;
+            Name = name ?? EmptyString;
+            Value = value ?? EmptyString;
         }
+
+        public string Format(bool json)
+            => new SettingValue(Name, Value).Format(json);
+
+        public string Format()
+            => Format(true);
+
+        public override string ToString()
+            => Format();
 
         [MethodImpl(Inline)]
         public static implicit operator Setting((string name, dynamic value) src)
@@ -29,7 +38,7 @@ namespace Z0
         public static Setting Empty
         {
             [MethodImpl(Inline)]
-            get => new Setting(EmptyString,EmptyString);
+            get => new Setting(EmptyString, EmptyString);
         }
     }
 }

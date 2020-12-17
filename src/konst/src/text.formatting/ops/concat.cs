@@ -10,7 +10,7 @@ namespace Z0
 
     using static Part;
 
-    partial struct Render
+    partial struct TextFormatter
     {
         /// <summary>
         /// Concatenates a sequence of characters with no intervening delimiter

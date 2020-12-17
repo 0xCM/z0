@@ -69,7 +69,7 @@ namespace Z0
 
         public static string attrib(string name, params object[] arguments)
             => arguments.Length == 0
-            ? bracket(Render.concat(name))
+            ? bracket(TextFormatter.concat(name))
             : bracket(text.concat(name, Chars.LParen, args(arguments), Chars.RParen));
 
         protected CodeGenerator()
@@ -161,14 +161,14 @@ namespace Z0
         public static void OpenStructDeclaration(TextWriter dst, string name, params string[] modifiers)
         {
 
-            dst.WriteLine(level(TypeLevel, Render.concat($"{spaced(modifiers)} struct {name}")));
+            dst.WriteLine(level(TypeLevel, TextFormatter.concat($"{spaced(modifiers)} struct {name}")));
             dst.WriteLine(level(TypeLevel, LBrace));
         }
 
         public static void OpenClassDeclaration(TextWriter dst, string name, params string[] modifiers)
         {
 
-            dst.WriteLine(level(TypeLevel, Render.concat($"{spaced(modifiers)} class {name}")));
+            dst.WriteLine(level(TypeLevel, TextFormatter.concat($"{spaced(modifiers)} class {name}")));
             dst.WriteLine(level(TypeLevel, LBrace));
         }
 

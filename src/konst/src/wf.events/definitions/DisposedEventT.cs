@@ -29,6 +29,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => Render.format(EventId, Payload);
+            => TextFormatter.format(EventId, Payload);
     }
 }

@@ -105,7 +105,7 @@ namespace Z0
         /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
         public static string format(in CmdArg src)
-            => Render.setting(src.Name, src.Value);
+            => TextFormatter.setting(src.Name, src.Value);
 
         /// <summary>
         /// Renders a specified option as text
@@ -114,7 +114,7 @@ namespace Z0
         /// <typeparam name="T">The option value type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static string format<T>(in CmdArg<T> src)
-            => Render.setting(src.Name, src.Value);
+            => TextFormatter.setting(src.Name, src.Value);
 
         /// <summary>
         /// Renders a specified option as text
@@ -125,7 +125,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static string format<K,T>(in CmdArg<K,T> src)
             where K : unmanaged
-                => Render.setting(src.Key, src.Value);
+                => TextFormatter.setting(src.Key, src.Value);
         [Op]
         public static string format(CmdTypeInfo src)
         {

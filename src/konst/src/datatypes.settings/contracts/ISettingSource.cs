@@ -21,7 +21,7 @@ namespace Z0
         /// Saves the settings to a file
         /// </summary>
         /// <param name="dst">The target path</param>
-        void Save(FilePath dst);
+        void Save(FS.FilePath dst);
     }
 
     /// <summary>

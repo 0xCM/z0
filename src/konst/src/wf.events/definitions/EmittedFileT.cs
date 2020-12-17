@@ -35,6 +35,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => Render.format(EventId, Payload, SegmentCount, Target.ToUri());
+            => TextFormatter.format(EventId, Payload, SegmentCount, Target.ToUri());
     }
 }

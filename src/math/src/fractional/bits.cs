@@ -9,24 +9,25 @@ namespace Z0
     using System.Runtime.InteropServices;
 
     using static math;
+    using static memory;
 
     partial class fmath
     {
         [MethodImpl(Inline), Op]
         public static uint bits(float src)
-            => z.@as<float,uint>(src);
+            => @as<float,uint>(src);
 
         [MethodImpl(Inline), Op]
         public static ulong bits(double src)
-            => z.@as<double,ulong>(src);
+            => @as<double,ulong>(src);
 
         [MethodImpl(Inline), Op]
         public static ulong lobits(decimal src)
-            => z.@as<decimal,ulong>(src);
+            => @as<decimal,ulong>(src);
 
         [MethodImpl(Inline), Op]
         public static ulong hibits(decimal src)
-            => z.skip(z.@as<decimal,ulong>(src), 1);
+            => skip(@as<decimal,ulong>(src), 1);
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 4)]

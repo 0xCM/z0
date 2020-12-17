@@ -31,7 +31,7 @@ namespace Z0.Asm
         public static AsmSpecifier specifier(Iced.Instruction src)
         {
             var opcode = Iced.EncoderCodeExtensions.ToOpCode(src.Code);
-            return new AsmSpecifier(opcode.ToInstructionString(), opcode.ToOpCodeString());
+            return AsmSpecifier.create(opcode.ToInstructionString(), opcode.ToOpCodeString());
         }
 
         [MethodImpl(Inline), Op]
@@ -56,7 +56,7 @@ namespace Z0.Asm
                 UsedMemory = UsedMemory(info),
                 UsedRegisters = UsedRegisters(info),
                 Access = OpAccessDefer(info),
-                InstructionCode = specifier(src),
+                Specifier = specifier(src),
                 ByteLength = src.ByteLength,
                 ConditionCode = Deicer.Thaw(src.ConditionCode),
                 CodeSize = Deicer.Thaw(src.CodeSize),

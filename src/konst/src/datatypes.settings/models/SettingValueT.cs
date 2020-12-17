@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Defines a value-parametric application setting
@@ -17,7 +17,7 @@ namespace Z0
         /// <summary>
         /// The setting name
         /// </summary>
-        public readonly StringRef Name;
+        public string Name {get;}
 
         /// <summary>
         /// The setting value
@@ -28,17 +28,11 @@ namespace Z0
         public static implicit operator SettingValue(SettingValue<T> src)
             => src.NonGeneric;
 
-        [MethodImpl(Inline)]
-        public SettingValue(in StringRef name, T value)
-        {
-            Name = name;
-            Value = value;
-        }
 
         [MethodImpl(Inline)]
         public SettingValue(string name, T value)
         {
-            Name = name;
+            Name = name ?? EmptyString;
             Value = value;
         }
 
@@ -52,7 +46,7 @@ namespace Z0
             => Format(false);
 
         public string Format(bool json)
-            => json ? text.format(RP.JsonProp, Name.Format(), Value) : text.format(Value);
+            => json ? text.format(RP.JsonProp, Name, Value) : text.format(Value);
 
         public override string ToString()
             => Format();

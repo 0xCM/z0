@@ -95,7 +95,7 @@ namespace Z0
         public static ulong avg(ReadOnlySpan<ulong> src)
             => avg(src, true);
 
-       [MethodImpl(Inline), Avg]
+        [MethodImpl(Inline), Avg]
         public static float avg(ReadOnlySpan<float> src, bool @checked)
             => @checked? avg_checked(src) : avg_unchecked(src);
 

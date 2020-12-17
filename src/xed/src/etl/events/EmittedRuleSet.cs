@@ -38,6 +38,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => Render.format(EventId, LineCount, Target);
+            => TextFormatter.format(EventId, LineCount, Target);
     }
 }

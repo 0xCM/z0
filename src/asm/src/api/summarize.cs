@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     using Z0.Asm;
@@ -16,7 +16,7 @@ namespace Z0
     {
         [Op]
         public static AsmFxSummary summarize(MemoryAddress @base, in Instruction src, ReadOnlySpan<byte> encoded, string formatted, uint offset)
-            => new AsmFxSummary(@base, offset,  formatted,  src.InstructionCode, operands(@base, src),  encoded.Slice((int)offset, src.ByteLength).ToArray());
+            => new AsmFxSummary(@base, offset,  formatted,  src.Specifier, operands(@base, src),  encoded.Slice((int)offset, src.ByteLength).ToArray());
 
         [Op]
         public static AsmFxSummary Summarize(MemoryAddress @base, in Instruction src, ReadOnlySpan<byte> encoded, string formatted, uint offset)

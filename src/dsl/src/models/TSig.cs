@@ -4,11 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static Part;
+    using System;
+    using System.Runtime.CompilerServices;
 
-    [ApiHost]
-    public readonly partial struct TextFormatter
+
+    public readonly struct TSig<S>
     {
-        const NumericKind Closure = UnsignedInts;
+
     }
 }

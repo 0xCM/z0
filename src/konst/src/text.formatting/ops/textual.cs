@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    partial struct Render
+    partial struct TextFormatter
     {
         /// <summary>
         /// Formats a sequence of <see cref='ITextual'/> cells
@@ -18,8 +18,8 @@ namespace Z0
         /// <param name="delimiter">The cell delimiter</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static string textual<T>(ReadOnlySpan<T> src, string delimiter)
+        public static string delimit<T>(ReadOnlySpan<T> src, string delimiter)
             where T : ITextual
-                => concat(items(src),delimiter);
+                => concat(items(src), delimiter);
     }
 }

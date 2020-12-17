@@ -17,32 +17,30 @@ namespace Z0
 
         public readonly bool IsStatic;
 
-        public readonly VisibilityKind Access;
 
         const string PropDataType = "ReadOnlySpan<byte>";
 
         const string PropLambda = " => ";
 
         [MethodImpl(Inline)]
-        public ByteSpanProperty(string name, byte[] data, bool isStatic = true, VisibilityKind access = VisibilityKind.Public)
+        public ByteSpanProperty(string name, byte[] data, bool isStatic = true)
         {
             Name = name;
             Data = data;
             IsStatic = isStatic;
-            Access = access;
         }
 
         public string Format()
         {
             var dst = text.build();
-            dst.Append(Access.ToString().ToLower());
+            dst.Append("public");
             dst.Append(Chars.Space);
             dst.Append(IsStatic ? text.rspace("static") : string.Empty);
             dst.Append(PropDataType);
             dst.Append(Chars.Space);
             dst.Append(Name);
             dst.Append(PropLambda);
-            dst.Append(string.Concat("new byte", text.bracket(Data.Length), text.embrace(Render.hexarray<byte>(Data))));
+            dst.Append(string.Concat("new byte", text.bracket(Data.Length), text.embrace(TextFormatter.hexarray<byte>(Data))));
             dst.Append(Chars.Semicolon);
             return dst.ToString();
         }

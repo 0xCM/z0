@@ -32,6 +32,6 @@ namespace Z0
         }
 
         public string Format()
-            => Render.format(EventId, StepId, Payload);
+            => TextFormatter.format(EventId, StepId, Payload);
     }
 }

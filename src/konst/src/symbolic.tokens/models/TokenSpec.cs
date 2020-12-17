@@ -50,6 +50,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => Render.format(Index, Kind, Identifier);
+            => TextFormatter.format(Index, Kind, Identifier);
     }
 }

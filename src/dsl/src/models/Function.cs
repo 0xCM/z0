@@ -9,11 +9,10 @@ namespace Z0.Dsl
 
     using static Konst;
 
-    public readonly struct Function<D,B>
+    public readonly struct FunctioFn<D,B>
     {
         public D Declaration {get;}
 
         public B Body {get;}
-
     }
 }

@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System.Collections.Generic;
-    using System.Linq;
-
     /// <summary>
     /// Characterizes a nonparametric application setting
     /// </summary>
@@ -40,8 +37,9 @@ namespace Z0
 
         string ISetting.Value
             => Value.ToString();
+
         string ITextual.Format()
-            => Render.setting(Name,Value);
+            => TextFormatter.setting(Name, Value);
     }
 
     public interface ISetting<H,K,V> : ISetting<K,V>

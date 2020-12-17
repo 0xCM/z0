@@ -29,8 +29,8 @@ namespace Z0.Asm
         public string FormattedInstruction
             => Instruction.FormattedInstruction;
 
-        public AsmSpecifier InstructionCode
-            => Instruction.InstructionCode;
+        public AsmSpecifier Specifier
+            => Instruction.Specifier;
 
         public MemoryAddress IP
             => Instruction.IP;

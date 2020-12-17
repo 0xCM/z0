@@ -40,7 +40,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => Render.format(Identifier, Claim, Success, Message, Arg0, Arg1, Arg2);
+            => TextFormatter.format(Identifier, Claim, Success, Message, Arg0, Arg1, Arg2);
 
         public override string ToString()
             => Format();

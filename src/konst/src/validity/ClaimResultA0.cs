@@ -34,7 +34,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => Render.format(Identifier, Claim, Success, Message, Arg0);
+            => TextFormatter.format(Identifier, Claim, Success, Message, Arg0);
 
         public override string ToString()
             => Format();

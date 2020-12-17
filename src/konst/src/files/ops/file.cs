@@ -13,7 +13,7 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static FileName file(PartId part, FileExt ext)
-            => file(Render.concat(part.Format()), ext);
+            => file(TextFormatter.concat(part.Format()), ext);
 
         [MethodImpl(Inline), Op]
         public static FileName file(ApiHostUri host, FileExt ext)

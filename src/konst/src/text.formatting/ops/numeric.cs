@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
     using static z;
 
-    partial struct Render
+    partial struct TextFormatter
     {
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ReadOnlySpan<string> numeric<T>(ReadOnlySpan<T> src, Base16 @base, Span<string> dst)

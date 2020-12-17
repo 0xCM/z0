@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    partial struct Render
+    partial struct TextFormatter
     {
         /// <summary>
         /// Formats a sequence of primal numeric calls as data-formatted hex

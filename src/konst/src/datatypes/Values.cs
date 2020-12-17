@@ -126,7 +126,7 @@ namespace Z0
                 seek(dst, j--) = (char)Hex.code(LowerCase, BitSeq.srl(d, n4, w4));
             }
 
-            return Render.format(dst);
+            return TextFormatter.format(dst);
         }
 
         /// <summary>

@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Render;
+    using static TextFormatter;
 
     public readonly struct CmdLogger : IDisposable
     {

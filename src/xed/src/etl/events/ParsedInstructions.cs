@@ -8,7 +8,7 @@ namespace Z0.Xed
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Render;
+    using static TextFormatter;
 
     public readonly struct ParsedXedInstructions : IWfEvent<ParsedXedInstructions>
     {
@@ -45,6 +45,6 @@ namespace Z0.Xed
 
         [MethodImpl(Inline)]
         public string Format()
-            => Render.format(EventId, Count, Source.ToUri());
+            => TextFormatter.format(EventId, Count, Source.ToUri());
     }
 }

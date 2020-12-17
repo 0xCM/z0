@@ -49,7 +49,7 @@ namespace Z0
         [Op, Closures(Closure)]
         public static string format<T>(in DataLayout<T> src)
             where T : unmanaged
-                => Render.format(src.Id, src.Storage);
+                => TextFormatter.format(src.Id, src.Storage);
 
         [MethodImpl(Inline), Op]
         public static void render(in LayoutPartition src, ITextBuffer dst)

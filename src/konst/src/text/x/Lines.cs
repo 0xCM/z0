@@ -14,6 +14,6 @@ namespace Z0
     partial class XTend
     {
         public static void Lines(this StringBuilder dst, IEnumerable<string> src)
-            => Render.lines(src,dst);
+            => TextFormatter.lines(src,dst);
     }
 }
