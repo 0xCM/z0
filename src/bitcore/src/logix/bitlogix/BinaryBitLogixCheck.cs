@@ -11,7 +11,6 @@ namespace Z0.Logix
     using static Konst;
     using static z;
 
-    [ApiHost(ApiNames.BinaryBitLogixCheck,true)]
     public ref struct BinaryBitLogixCheck
     {
         ReadOnlySpan<bit> A;
@@ -24,45 +23,45 @@ namespace Z0.Logix
 
         Func<bit,bit,bit> Rule;
 
-        SequenceJudgement<bit> Result;
+        SeqEval<bit> Result;
 
         BitLogix Service;
 
         readonly IWfShell Wf;
 
         [MethodImpl(Inline), Op]
-        BinaryBitLogixCheck(IWfShell wf)
+        internal BinaryBitLogixCheck(IWfShell wf)
             : this()
         {
             Wf = wf;
         }
 
-        [Op, MethodImpl(NotInline)]
-        public static BinaryBitLogixCheck create(BinaryBitLogicKind kind, Func<bit,bit,bit> rule, uint count, IPolyStream source)
+        [Op]
+        public static BinaryBitLogixCheck create(IWfShell wf, BinaryBitLogicKind kind, Func<bit,bit,bit> rule, uint count, IPolyStream source)
         {
-            var dst = new BinaryBitLogixCheck();
+            var dst = new BinaryBitLogixCheck(wf);
             dst.Kind = kind;
             dst.Rule = rule;
             dst.Count = count;
             dst.A = source.BitStream().Take(dst.Count).Array();
             dst.B = source.BitStream().Take(dst.Count).Array();
-            dst.Result = SequenceJudgement.alloc<bit>(dst.Count,true);
+            dst.Result = EvalSeq.alloc<bit>(dst.Count,true);
             dst.Service = BitLogix.Service;
             return dst;
         }
 
-        [Op, MethodImpl(NotInline)]
-        ref BinaryJudgement<bit> Check(in bit a, in bit b, ref BinaryJudgement<bit> dst)
+        [Op]
+        ref BinaryEval<bit> Check(in bit a, in bit b, ref BinaryEval<bit> dst)
         {
             var expect = Rule(a, b);
             var actual = Service.Evaluate(Kind, a, b);
             var result = expect == actual;
-            dst = Judgements.binary(a, b, result);
+            dst = new BinaryEval<bit>(a, b, result);
             return ref dst;
         }
 
-        [Op, MethodImpl(NotInline)]
-        public SequenceJudgement<bit> Run()
+        [Op]
+        public SeqEval<bit> Run()
         {
             var dst = Result;
             var service = BitLogix.Service;

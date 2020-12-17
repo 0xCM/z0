@@ -12,7 +12,7 @@ namespace Z0
 
     using api = CheckPrimalSeq;
 
-    public interface TCheckPrimalSeq : TCheckLengths, TCheckInvariant, TCheckPrimal
+    public interface ICheckPrimalSeq : ICheckLengths, ICheckInvariant, ICheckPrimal
     {
         bool TestEq(ReadOnlySpan<char> lhs, ReadOnlySpan<char> rhs)
             => api.TestEq(lhs,rhs);

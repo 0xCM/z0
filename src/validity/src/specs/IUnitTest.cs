@@ -3,9 +3,11 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
-    public interface IUnitTest : ITestContext 
+{
+    public interface IUnitTest : ITestContext
     {
         void SetMode(bool diagnostic);
-    }    
+
+        void SetShell(IWfShell wf);
+    }
 }

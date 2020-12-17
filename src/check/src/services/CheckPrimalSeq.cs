@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static AppErrorMsg;
     using static CheckLengths;
     using static CheckInvariant;
@@ -17,7 +17,7 @@ namespace Z0
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
-    public readonly struct CheckPrimalSeq : TCheckPrimalSeq
+    public readonly struct CheckPrimalSeq : ICheckPrimalSeq
     {
         /// <summary>
         /// Returns true if the character spans are equal as strings, false otherwise

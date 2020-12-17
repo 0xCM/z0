@@ -6,17 +6,21 @@ namespace Z0
 {
     using System;
 
+    using static AppErrorMsg;
+
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
-    public interface TCheckNull : TValidator
+    using static Enums;
+
+    public interface ICheckEnum : IValidator
     {
-        void notnull<T>(T src, string msg = null, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            where T : class
+       void eq<E>(E lhs, E rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            where E : unmanaged, Enum
         {
-            if(src is null)
-                throw new ArgumentNullException(AppMsg.called($"Argument was null", LogLevel.Error, caller,file,line).ToString());
+            if(!e64u(lhs).Equals(e64u(rhs)))
+                throw Failed(ClaimKind.Eq, NotEqual(lhs,rhs, caller, file, line));
         }
     }
 }

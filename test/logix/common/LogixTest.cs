@@ -8,7 +8,6 @@ namespace Z0.Logix
     using System.Linq;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
     using static z;
 
     using static BitLogicSpec;
@@ -17,8 +16,7 @@ namespace Z0.Logix
 
     using BLK = BinaryBitLogicKind;
 
-
-    public abstract class LogixTest<X> : UnitTest<X, CheckVectorBits, ICheckVectorBits>
+    public abstract class LogixTest<X> : UnitTest<X,CheckVectorBits,ICheckVectorBits>
         where X : LogixTest<X>
     {
         BitLogix bitlogix => BitLogix.Service;

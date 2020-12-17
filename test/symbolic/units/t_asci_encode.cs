@@ -39,7 +39,7 @@ namespace Z0
             const string Data = "dalkfaldjflakdjfkadjflajdflajdkfajlskdfjasjdflkajfasf";
             var a1 = address(memory.pchar(Data));
             var a2 = address(memory.pchar2(Data));
-            PrimalChecks.eq(a1,a2);
+            EvalPrimal.eq(a1,a2);
         }
 
         public void test_case_02()

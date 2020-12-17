@@ -3,8 +3,8 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
-    public interface TCheckOptions
+{
+    public interface ICheckSettings
     {
         int RepCount => 128;
 
@@ -12,7 +12,7 @@ namespace Z0
         /// Specifies whether the test is enabled
         /// </summary>
         bool Enabled  => true;
-        
+
         /// <summary>
         /// The number times to repeat an action
         /// </summary>
@@ -22,5 +22,5 @@ namespace Z0
         /// The number of times to repeat a cycle
         /// </summary>
         int RoundCount => Pow2.T01;
-    }    
+    }
 }

@@ -6,7 +6,7 @@ namespace Z0
 {
     public abstract class UnitTest<U> : TestContext<U>, IUnitTest
         where U : UnitTest<U>
-    {        
+    {
         public static N0 n0 => default;
 
         public static N1 n1 => default;
@@ -14,7 +14,7 @@ namespace Z0
         public static N2 n2 => default;
 
         public static N3 n3 => default;
-        
+
         public static N4 n4 => default;
 
         public static N5 n5 => default;
@@ -22,11 +22,11 @@ namespace Z0
         public static N7 n7 => default;
 
         public static N8 n8 => default;
-        
+
         public static N9 n9 => default;
-        
+
         public static N10 n10 => default;
-        
+
         public static N11 n11 => default;
 
         public static N12 n12 => default;
@@ -65,21 +65,21 @@ namespace Z0
 
         public const float z32f = 0;
 
-        public const double z64f = 0; 
+        public const double z64f = 0;
     }
 
     public abstract class UnitTest<U,V> : UnitTest<U>
         where U : UnitTest<U>
-        where V : TValidator
-    {        
+        where V : IValidator
+    {
         protected new abstract V Claim {get;}
     }
 
     public abstract class UnitTest<U,V,I> : UnitTest<U,I>
         where U : UnitTest<U>
         where V : struct, I
-        where I : TValidator
-    {        
+        where I : IValidator
+    {
         protected override I Claim => default(V);
     }
 }

@@ -57,6 +57,7 @@ namespace Z0
             if(unit.Enabled)
             {
                 unit.SetMode(DiagnosticMode);
+                unit.SetShell(Wf);
                 RunUnit(host, unit);
             }
         }

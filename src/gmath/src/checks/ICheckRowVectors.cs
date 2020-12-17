@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    public interface ICheckRowVectors : TValidator
+    public interface ICheckRowVectors : IValidator
     {
         static ICheckRowVectors<CheckRowVectors> Checker => default(CheckRowVectors);
 

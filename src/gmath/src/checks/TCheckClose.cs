@@ -8,7 +8,7 @@ namespace Z0
 
     using api = CheckClose;
 
-    public interface TCheckClose : TCheckLengths
+    public interface TCheckClose : ICheckLengths
     {
         bool almost(float lhs, float rhs)
             => api.almost(lhs,rhs);

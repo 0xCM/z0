@@ -13,9 +13,9 @@ namespace Z0
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
-    public interface ICheckBitVectors : TCheckPrimal, TCheckInvariant
+    public interface ICheckBitVectors : ICheckPrimal, ICheckInvariant
     {
-        TCheckPrimal Primal => this;
+        ICheckPrimal Primal => this;
 
         [MethodImpl(Inline)]
         void eq(BitVector4 x, BitVector4 y, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)

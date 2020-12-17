@@ -5,13 +5,10 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-
-    using static Konst;
 
     using api = CheckLengths;
 
-    public interface TCheckLengths : TValidator
+    public interface ICheckLengths : IValidator
     {
         int length<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs)
             => api.length(lhs, rhs);

@@ -37,7 +37,7 @@ namespace Z0
         int RepCount
             => ActionTest.RepCount;
 
-        TCheckEquatable Claim
+        ICheckEquatable Claim
             => CheckEquatable.Checker;
 
         /// <summary>

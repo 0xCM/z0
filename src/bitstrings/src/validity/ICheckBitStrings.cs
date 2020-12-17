@@ -5,7 +5,7 @@
 namespace Z0
 {
     using System;
-        
+
     using static Konst;
     using static AppErrorMsg;
 
@@ -18,7 +18,7 @@ namespace Z0
         public static ICheckBitStrings Checker => default(CheckBitStrings);
     }
 
-    public interface ICheckBitStrings : TValidator
+    public interface ICheckBitStrings : IValidator
     {
         void eq(BitString a, BitString b, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
         {

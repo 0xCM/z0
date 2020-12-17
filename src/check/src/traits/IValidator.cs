@@ -12,7 +12,7 @@ namespace Z0
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
-    public interface TValidator
+    public interface IValidator
     {
         Type HostType => GetType();
 
@@ -32,9 +32,9 @@ namespace Z0
             => api.fail(caller,file,line);
     }
 
-    public interface TValidator<V,I> : TValidator
-        where V : struct, TValidator<V,I>, I
-        where I : TValidator
+    public interface IValidator<V,I> : IValidator
+        where V : struct, IValidator<V,I>, I
+        where I : IValidator
     {
         I Validator
             => default(V);

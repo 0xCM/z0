@@ -245,7 +245,7 @@ namespace Z0
             }
         }
 
-        static TCheckEquatable Claim => CheckEquatable.Checker;
+        static ICheckEquatable Claim => CheckEquatable.Checker;
 
         static int _checkseq;
 

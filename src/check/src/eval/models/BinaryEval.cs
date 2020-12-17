@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    public struct BinaryJudgement<T> : IBinaryJudgement<T>
+    public struct BinaryEval<T> : IBinaryEval<T>
     {
         public T A {get;}
 
@@ -18,7 +18,7 @@ namespace Z0
         public bit Result {get;}
 
         [MethodImpl(Inline)]
-        public BinaryJudgement(T a, T b, bit success)
+        public BinaryEval(T a, T b, bit success)
         {
             A = a;
             B = b;
@@ -26,11 +26,11 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static bool operator true(BinaryJudgement<T> src)
+        public static bool operator true(BinaryEval<T> src)
             => src.Result;
 
         [MethodImpl(Inline)]
-        public static bool operator false(BinaryJudgement<T> src)
+        public static bool operator false(BinaryEval<T> src)
             => !src.Result;
     }
 }

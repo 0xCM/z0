@@ -4,13 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static z;
     using static CheckInvariant;
-
-    using C = AsciCharCode;
 
     public class t_cmd_parse : t_symbolic<t_cmd_parse>
     {
@@ -22,8 +16,7 @@ namespace Z0
         {
             var src = Cases[0];
             var result = Cmd.parse(src);
-            yea(result);
-
+            require(result);
             Trace(result.Value.Format());
         }
     }

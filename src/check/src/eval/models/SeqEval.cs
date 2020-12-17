@@ -7,54 +7,54 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static z;
 
-    public readonly struct SequenceJudgement
+    public readonly struct SeqEval
     {
         [MethodImpl(NotInline)]
-        public static SequenceJudgement<T> alloc<T>(uint count, bit result)
-            => new SequenceJudgement<T>(new BinaryJudgement<T>[count], result);
+        public static SeqEval<T> alloc<T>(uint count, bit result)
+            => new SeqEval<T>(new BinaryEval<T>[count], result);
     }
 
-    public struct SequenceJudgement<T> : ISequenceJudgement<SequenceJudgement<T>,BinaryJudgement<T>>
+    public struct SeqEval<T> : ISeqEval<SeqEval<T>,BinaryEval<T>>
     {
-        readonly BinaryJudgement<T>[] Data;
+        readonly BinaryEval<T>[] Data;
 
         public bit Result;
 
         [MethodImpl(Inline)]
-        internal SequenceJudgement(BinaryJudgement<T>[] src, bit result)
+        internal SeqEval(BinaryEval<T>[] src, bit result)
         {
             Result = result;
             Data = src;
         }
 
-        public ref BinaryJudgement<T> First
+        public ref BinaryEval<T> First
         {
             [MethodImpl(Inline)]
             get => ref first(span(Data));
         }
 
-        public ref BinaryJudgement<T> this[ulong index]
+        public ref BinaryEval<T> this[ulong index]
         {
             [MethodImpl(Inline)]
             get => ref seek(First, index);
         }
 
-        public ref BinaryJudgement<T> this[long index]
+        public ref BinaryEval<T> this[long index]
         {
             [MethodImpl(Inline)]
             get => ref seek(First, (ulong)index);
         }
 
-        public ReadOnlySpan<BinaryJudgement<T>> View
+        public ReadOnlySpan<BinaryEval<T>> View
         {
             [MethodImpl(Inline)]
             get => Data;
         }
 
-        public Span<BinaryJudgement<T>> Edit
+        public Span<BinaryEval<T>> Edit
         {
             [MethodImpl(Inline)]
             get => Data;
@@ -66,21 +66,21 @@ namespace Z0
             get => (uint)Data.Length;
         }
 
-        public BinaryJudgement<T>[] Storage
+        public BinaryEval<T>[] Storage
         {
             [MethodImpl(Inline)]
             get => Data;
         }
 
-        bit IJudgement.Result
+        bit IEval.Result
             => Result;
 
         [MethodImpl(Inline)]
-        public static bool operator true(SequenceJudgement<T> src)
+        public static bool operator true(SeqEval<T> src)
             => src.Result;
 
         [MethodImpl(Inline)]
-        public static bool operator false(SequenceJudgement<T> src)
+        public static bool operator false(SeqEval<T> src)
             => !src.Result;
     }
 }

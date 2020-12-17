@@ -14,7 +14,7 @@ namespace Z0
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
-    public interface TCheckSets : TValidator
+    public interface ICheckSets : IValidator
     {
         /// <summary>
         /// Asserts the equality of two sets
@@ -37,7 +37,7 @@ namespace Z0
         /// <param name="line">The source file line number where invocation ocurred</param>
         /// <typeparam name="T"></typeparam>
         bool contains<T>(ISet<T> set, T item, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => set.Contains(item) ? true : throw  Failed(ClaimKind.NotIn, AppMsg.error($"Item {item} not in set", caller, file, line));
+            => set.Contains(item) ? true : throw Failed(ClaimKind.NotIn, AppMsg.error($"Item {item} not in set", caller, file, line));
 
         /// <summary>
         /// Asserts that a set contains a specified element

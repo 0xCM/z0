@@ -10,19 +10,19 @@ namespace Z0
 
     using api = CheckInvariant;
 
-    public interface TCheckInvariant : TValidator
+    public interface ICheckInvariant : IValidator
     {
         bool Require(bool invariant, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => api.require(invariant, caller, file, line);
 
         void yea(bool src, string msg = null, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => api.yea(src, msg, caller, file, line);
+            => api.require(src, msg, caller, file, line);
 
         void nea(bool src, string msg = null, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => api.nea(src, msg, caller, file, line);
+            => api.not(src, msg, caller, file, line);
 
         void yea<T>(bool src, string msg = null, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged
-                => api.yea<T>(src, msg, caller, file, line);
+                => api.require<T>(src, msg, caller, file, line);
     }
 }

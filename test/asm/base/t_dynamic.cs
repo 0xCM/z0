@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public readonly struct DynamicCase : IDynamicCase, TValidator<DynamicCase,IDynamicCase>
+    public readonly struct DynamicCase : IDynamicCase, IValidator<DynamicCase,IDynamicCase>
     {
         public static IDynamicCase Checker => default(DynamicCase);
     }

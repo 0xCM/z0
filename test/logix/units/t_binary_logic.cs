@@ -7,7 +7,6 @@ namespace Z0.Logix
     using System;
     using System.Linq;
 
-    using static Konst;
     using static z;
 
     using static BitLogicSpec;
@@ -22,7 +21,7 @@ namespace Z0.Logix
 
         protected void logic_op_check(BLK kind, Func<bit,bit,bit> rule)
         {
-            var check = BinaryBitLogixCheck.create(kind,rule, (uint)RepCount, Random);
+            var check = BinaryBitLogixCheck.create(Wf, kind,rule, (uint)RepCount, Random);
             Claim.yea(check.Run().Result);
         }
 

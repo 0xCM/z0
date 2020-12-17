@@ -17,7 +17,7 @@ namespace Z0
 
     }
 
-    public interface TTester : TClocked, TCheckOptions, ITestCaseIdentity, TCheckError
+    public interface TTester : TClocked, ICheckSettings, ITestCaseIdentity, ICheckError
     {
 
     }

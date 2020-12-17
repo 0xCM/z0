@@ -4,16 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface TChecker : 
-        TCheckError, 
-        TCheckInvariant, 
-        TCheckLengths, 
-        TCheckFileSystem, 
-        TCheckNull, 
-        TCheckOptions, 
-        TCheckPrimal,
-        TCheckSets
+
+    public interface IBinaryEval<T> : IEval
     {
-    
+        T A {get;}
+
+        T B {get;}
     }
 }

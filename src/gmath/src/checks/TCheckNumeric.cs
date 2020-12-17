@@ -4,11 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface TCheckNumeric : 
-        TCheckGeneric, 
-        TCheckSpans, 
+    public interface TCheckNumeric :
+        TCheckGeneric,
+        TCheckSpans,
         TCheckClose,
-        TCheckPrimalSeq
+        ICheckPrimalSeq
     {
     }
 }

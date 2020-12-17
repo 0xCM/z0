@@ -4,15 +4,15 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface TChecks :
-        ICheckLengths,
-        ICheckPrimal,
-        ICheckPrimalSeq,
-        TCheckClose,
-        ICheckFiles,
+    public interface IChecker :
+        ICheckError,
         ICheckInvariant,
-        ICheckSets,
-        ICheckNull
+        ICheckLengths,
+        ICheckFiles,
+        ICheckNull,
+        ICheckSettings,
+        ICheckPrimal,
+        ICheckSets
     {
 
     }

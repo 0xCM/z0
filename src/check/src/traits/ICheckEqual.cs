@@ -5,24 +5,25 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
 
-    using static Konst;
     using static AppErrorMsg;
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
-
-    public interface TCheckEquatable : TValidator
+    public interface ICheckEqual : IValidator
     {
-        [MethodImpl(Inline)]
         void Eq<T>(T lhs, T rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            where T : IEquatable<T>
         {
-            if(!lhs.Equals(rhs))
+            if(!object.Equals(lhs,rhs))
                 throw Failed(ClaimKind.Eq, NotEqual(lhs,rhs, caller, file, line));
-        }        
-    }    
+        }
+
+        void Neq<T>(T lhs, T rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+        {
+            if(object.Equals(lhs,rhs))
+                throw Failed(ClaimKind.Eq, NotEqual(lhs,rhs, caller, file, line));
+        }
+    }
 }

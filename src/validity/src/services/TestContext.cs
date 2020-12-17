@@ -21,10 +21,13 @@ namespace Z0
     {
         public bool DiagnosticMode {get; private set;}
 
+        protected IWfShell Wf {get; private set;}
+
         public void SetMode(bool diagnostic)
-        {
-            DiagnosticMode = diagnostic;
-        }
+            => DiagnosticMode = diagnostic;
+
+        public void SetShell(IWfShell wf)
+            => Wf = wf;
 
         protected TestContext()
         {
@@ -141,10 +144,10 @@ namespace Z0
         protected TChecks Claim
             => Checks.Checker;
 
-        protected TCheckPrimal ClaimPrimal
+        protected ICheckPrimal ClaimPrimal
             => Claim;
 
-        protected TCheckPrimalSeq ClaimPrimalSeq
+        protected ICheckPrimalSeq ClaimPrimalSeq
             => Claim;
 
         protected TCheckNumeric ClaimNumeric

@@ -4,8 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public readonly struct CheckEqual : TCheckEqual
+    public readonly struct CheckEqual : ICheckEqual
     {
-        public static TCheckEqual Checker => default(CheckEqual);
+        public static ICheckEqual Checker => default(CheckEqual);
     }
 }

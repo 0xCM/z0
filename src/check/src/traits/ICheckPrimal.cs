@@ -11,7 +11,7 @@ namespace Z0
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
-    public interface TCheckPrimal : TValidator
+    public interface ICheckPrimal : IValidator
     {
         bool eq(bit lhs, bit rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => api.eq(lhs, rhs, caller, file, line);

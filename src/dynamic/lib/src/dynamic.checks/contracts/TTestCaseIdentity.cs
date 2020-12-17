@@ -10,7 +10,7 @@ namespace Z0
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
 
-    public interface ITestCaseIdentity : TValidator
+    public interface ITestCaseIdentity : IValidator
     {
         /// <summary>
         /// Produces a test case name predicated on an operation identity

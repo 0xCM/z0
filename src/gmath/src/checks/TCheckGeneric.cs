@@ -14,7 +14,7 @@ namespace Z0
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
-    public interface TCheckGeneric : TValidator
+    public interface TCheckGeneric : IValidator
     {
         [MethodImpl(Inline)]
         void eq<T>(T lhs, T rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)

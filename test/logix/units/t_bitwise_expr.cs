@@ -7,7 +7,6 @@ namespace Z0.Logix
     using System;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
     using static z;
     using static TypedLogicSpec;
 

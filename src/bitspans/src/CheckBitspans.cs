@@ -14,7 +14,7 @@ namespace Z0
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
     using api = Validator;
 
-    public readonly struct CheckBitSpans : TValidator
+    public readonly struct CheckBitSpans : IValidator
     {
         /// <summary>
         /// Asserts the equality of two bitspans
