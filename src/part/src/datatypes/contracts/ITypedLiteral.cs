@@ -10,7 +10,7 @@ namespace Z0
     /// Characterizes type classifiers predicated on enumerations
     /// </summary>
     /// <typeparam name="E">The enum type that defines the classifier superset</typeparam>
-    public interface ITypedLiteral<E> : IClassT<E>
+    public interface ITypedLiteral<E>
         where E : unmanaged
     {
         E Class {get;}

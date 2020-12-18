@@ -14,7 +14,7 @@ namespace Z0
     /// <typeparam name="F">The reification type</typeparam>
     /// <typeparam name="E">The class type</typeparam>
     [Free]
-    public interface IOperationalClassHost<F,E> : IOperationalClass<E>, IClassF<F>
+    public interface IOperationalClassHost<F,E> : IOperationalClass<E>
         where F : IOperationalClassHost<F,E>, new()
         where E : unmanaged, Enum
     {

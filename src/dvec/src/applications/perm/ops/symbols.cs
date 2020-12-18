@@ -22,7 +22,7 @@ namespace Z0
         /// <param name="src">The source permutation</param>
         [MethodImpl(Inline), Op]
         public static Perm16 vinit(W128 w, Perm<byte> spec)
-            => new Perm16(z.vload(w128, spec.Terms));
+            => new Perm16(vload(w128, spec.Terms));
 
         /// <summary>
         /// Creates a fixed 32-bit permutation over a generic permutation over 32 elements
@@ -30,15 +30,15 @@ namespace Z0
         /// <param name="src">The source permutation</param>
         [MethodImpl(Inline), Op]
         public static Perm32 vinit(W256 w, Perm<byte> src)
-            => new Perm32(z.vload(w, src.Terms));
+            => new Perm32(vload(w, src.Terms));
 
         [MethodImpl(Inline), Op]
         public static Perm16 vspec(Vector128<byte> data)
-            => new Perm16(z.vand(data, z.vbroadcast(w128, Msb8x8x3)));
+            => new Perm16(vand(data, vbroadcast(w128, Msb8x8x3)));
 
         [MethodImpl(Inline), Op]
         public static Perm32 vspec(Vector256<byte> data)
-            => new Perm32(z.vand(data, z.vbroadcast(w256, Msb8x8x3)));
+            => new Perm32(vand(data, vbroadcast(w256, Msb8x8x3)));
 
         /// <summary>
         /// Enumerates all permutation map format strings on 4 symbols
@@ -135,7 +135,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static Vector128<byte> shuffles(NatPerm<N16> src)
-            => z.vload(n128, first(z.transform<byte>(src.Terms)));
+            => vload(n128, (byte)first(src.Terms));
 
         /// <summary>
         /// Shuffles the permutation in-place using a provided random source.

@@ -9,8 +9,8 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     public readonly struct IndexedView<I,T> : IIndexedView<IndexedView<I,T>,I,T>
         where I : unmanaged

@@ -12,6 +12,19 @@ namespace Z0
 
     partial struct NumericCast
     {
+        [MethodImpl(Inline)]
+        public static Span<T> force<S,T>(Span<S> src)
+            where T : unmanaged
+            where S : unmanaged
+        {
+            var count =src.Length;
+            ref readonly var input = ref first(src);
+            ref var output = ref @as<S,T>(first(src));
+            for(var i=0; i<count; i++)
+                seek(output,i) = force<T>(skip(input,i));
+            return cover(output,count);
+        }
+
         /// <summary>
         /// Unconditionally converts the source value to a value of parametric numeric type
         /// </summary>

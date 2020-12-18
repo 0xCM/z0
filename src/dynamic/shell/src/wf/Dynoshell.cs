@@ -115,7 +115,7 @@ namespace Z0
         {
             var archive = BuildArchives.create(Wf, src);
             var types = array(archive.Dll, archive.Exe, archive.Pdb, archive.Lib, archive.Xml, archive.Json);
-            var cmd = CmdBuilder.EmitFileList(label + ".build-artifacts", archive.Root, types);
+            var cmd = CmdBuilder.ListFiles(label + ".build-artifacts", archive.Root, types);
             Wf.Router.Dispatch(cmd);
         }
 

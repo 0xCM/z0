@@ -62,24 +62,24 @@ namespace Z0
         }
 
         [Op]
-        public static CmdResult exec(EmitFileListCmd cmd)
+        public static CmdResult exec(ListFilesCmd cmd)
         {
-            var archive = FileArchives.create(cmd.SourceDir, cmd.FileKinds);
+            var archive = FileArchives.create(cmd.SourceDir, cmd.Extensions);
             var id = cmd.Id();
-            var list = cmd.EmissionLimit != 0 ? match(cmd.SourceDir, cmd.EmissionLimit, cmd.FileKinds) : match(cmd.SourceDir, cmd.FileKinds);
+            var list = cmd.EmissionLimit != 0 ? match(cmd.SourceDir, cmd.EmissionLimit, cmd.Extensions) : match(cmd.SourceDir, cmd.Extensions);
             var outcome = FileArchives.emit(list, cmd.FileUriMode, cmd.TargetPath);
             return outcome ? Cmd.ok(cmd) : Cmd.fail(cmd,outcome.Format());
         }
 
-        public static EmitFileListCmd EmitFileListCmdSample(IWfShell wf)
+        public static ListFilesCmd EmitFileListCmdSample(IWfShell wf)
         {
-            var cmd = new EmitFileListCmd();
+            var cmd = new ListFilesCmd();
             cmd.ListName = "tests";
             cmd.SourceDir = FS.dir(@"J:\lang\net\runtime\artifacts\tests\coreclr\Windows_NT.x64.Debug");
             cmd.TargetPath = wf.Db().JobPath(FS.file("coreclr.tests", FileExtensions.Cmd));
             cmd.FileUriMode = false;
-            cmd.WithKinds(FileExtensions.Cmd);
-            cmd.LimitEmissions(20);
+            cmd.WithExt(FileExtensions.Cmd);
+            cmd.WithLimit(20);
             return cmd;
         }
 

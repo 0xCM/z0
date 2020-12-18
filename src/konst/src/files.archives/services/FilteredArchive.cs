@@ -14,22 +14,33 @@ namespace Z0
     {
         public FS.FolderPath Root {get;}
 
-        public string Filter {get;}
+        public string TextFilter {get;}
+
+        public Index<FS.FileExt> ExtFilter {get;}
 
         [MethodImpl(Inline)]
         internal FilteredArchive(FS.FolderPath root, string filter)
         {
             Root = root;
-            Filter = filter;
+            TextFilter = filter;
+            ExtFilter = Index<FS.FileExt>.Empty;
+        }
+
+        [MethodImpl(Inline)]
+        internal FilteredArchive(FS.FolderPath root, FS.FileExt[] ext)
+        {
+            Root = root;
+            TextFilter = EmptyString;
+            ExtFilter = ext;
         }
 
         public IEnumerable<FS.FolderPath> Directories()
             => Root.SubDirs(true);
 
-        public IEnumerable<FS.FilePath> Files()
-            => Root.Files(Filter, true);
+        public Deferred<FS.FilePath> Files()
+            =>  ExtFilter.IsNonEmpty
+            ?  Root.EnumerateFiles(ExtFilter, true)
+            :  Root.EnumerateFiles(TextFilter, true);
 
-        public IEnumerable<FS.FilePath> Files(FS.FileExt ext)
-            => Root.Files(ext, true);
     }
 }

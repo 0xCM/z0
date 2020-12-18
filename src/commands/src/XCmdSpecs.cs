@@ -62,25 +62,16 @@ namespace Z0
         }
 
         [Op]
-        public static EmitFileListCmd EmitFileList(this CmdBuilder builder, string name, FS.FolderPath src, params FS.FileExt[] kinds)
+        public static ListFilesCmd ListFiles(this CmdBuilder builder, string name, FS.FolderPath src, params FS.FileExt[] kinds)
         {
-            var cmd = new EmitFileListCmd();
+            var cmd = new ListFilesCmd();
             cmd.ListName = name;
             cmd.SourceDir = src;
-            cmd.FileKinds = kinds;
+            cmd.Extensions = kinds;
             cmd.TargetPath = builder.Db.List(name, FileExtensions.Csv);
+            cmd.ListFormat = ListFormatKind.Markdown;
             return cmd;
         }
-
-        // [MethodImpl(Inline), Op]
-        // public static EmitImageHeadersCmd EmitImageHeaders(this CmdBuilder builder, FS.Files src, FS.FilePath? dst = null)
-        // {
-        //     var cmd = new EmitImageHeadersCmd();
-        //     cmd.Source = src;
-        //     cmd.Target = dst ?? builder.Db.Table<ImageSectionHeader>();
-        //     return cmd;
-        // }
-
 
         [MethodImpl(Inline), Op]
         public static EmitAsmMnemonicsCmd EmitAsmMnemonics(this CmdBuilder builder)
@@ -94,12 +85,6 @@ namespace Z0
             return cmd;
         }
 
-        [MethodImpl(Inline), Op]
-        public static ref EmitAsmOpCodesCmd WithTarget(this ref EmitAsmOpCodesCmd cmd, FS.FilePath dst)
-        {
-            cmd.Target = dst;
-            return ref cmd;
-        }
 
         [MethodImpl(Inline), Op]
         public static EmitResourceDataCmd EmitResourceData(this CmdBuilder builder, Assembly src, string id, string match = null)
@@ -111,13 +96,19 @@ namespace Z0
             return dst;
         }
 
-        public static ref EmitFileListCmd WithKinds(this ref EmitFileListCmd cmd, params FS.FileExt[] ext)
+        public static ref ListFilesCmd WithExt(this ref ListFilesCmd cmd, params FS.FileExt[] ext)
         {
-            cmd.FileKinds = ext;
+            cmd.Extensions = ext;
             return ref cmd;
         }
 
-        public static ref EmitFileListCmd LimitEmissions(this ref EmitFileListCmd cmd, uint max)
+        public static ref ListFilesCmd WithFormat(this ref ListFilesCmd cmd, ListFormatKind format)
+        {
+            cmd.ListFormat = format;
+            return ref cmd;
+        }
+
+        public static ref ListFilesCmd WithLimit(this ref ListFilesCmd cmd, uint max)
         {
             cmd.EmissionLimit = max;
             return ref cmd;

@@ -6,19 +6,22 @@ namespace Z0
 {
     using System.IO;
 
-    [Record(TableId)]
-    public struct FsEntryDetail
+    partial struct FS
     {
-        public const string TableId = "fs.entry";
+        [Record(TableId)]
+        public struct FsEntryDetail
+        {
+            public const string TableId = "fs.entry";
 
-        public FS.FilePath Path;
+            public FS.FilePath Path;
 
-        public ByteSize Size;
+            public ByteSize Size;
 
-        public Timestamp CreateTS;
+            public Timestamp CreateTS;
 
-        public Timestamp UpdateTS;
+            public Timestamp UpdateTS;
 
-        public FileAttributes Attributes;
+            public FileAttributes Attributes;
+        }
     }
 }

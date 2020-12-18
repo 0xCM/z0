@@ -15,9 +15,9 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public Label(string label)
-            => Content = label;
+            => Content = label ?? EmptyString;
         public string Format()
-            => Content;
+            => Content ?? EmptyString;
 
         public override string ToString()
             => Format();

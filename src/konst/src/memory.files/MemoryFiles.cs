@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.IO;
-    using System.IO.MemoryMappedFiles;
 
     using static Konst;
     using static z;
@@ -24,7 +22,7 @@ namespace Z0
             var dst = new MemoryFileInfo();
             dst.BaseAddress = src.BaseAddress;
             var fi = src.Path.Info;
-            var desc =new FsEntryDetail();
+            var desc =new FS.FsEntryDetail();
             desc.Path = FS.path(src.Path.Name);
             desc.Size = (ByteSize)fi.Length;
             desc.CreateTS = fi.CreationTime;

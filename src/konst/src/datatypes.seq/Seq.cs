@@ -16,16 +16,9 @@ namespace Z0
     public readonly partial struct Seq
     {
         const NumericKind Closure = UInt64k;
+
         public static string format<T>(T[] src)
             => delimit(src).Format();
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref T first<T>(Index<T> src)
-            => ref memory.first(src.Storage);
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref T last<T>(Index<T> src)
-             => ref memory.seek(src.Storage, src.Count - 1);
 
         /// <summary>
         /// Tests the source index for non-emptiness
@@ -167,17 +160,6 @@ namespace Z0
             where I : unmanaged
                 => new IndexedView<I,T>(src);
 
-        [Op, Closures(Closure)]
-        public static Index<T> reverse<T>(Index<T> src)
-        {
-            Array.Reverse(src.Storage);
-            return src;
-        }
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Deferred<T> defer<T>(Index<T> src)
-            => new Deferred<T>(src.Storage);
-
         /// <summary>
         /// All of your streams belong to us
         /// </summary>
@@ -186,23 +168,5 @@ namespace Z0
         [Op, Closures(Closure)]
         public static Deferred<T> join<T>(params IEnumerable<T>[] src)
             => src.SelectMany(x => x);
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static bit search<T>(in Index<T> src, Func<T,bool> predicate, out T found)
-        {
-            var view = src.View;
-            var count = view.Length;
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var candidate = ref skip(view,i);
-                if(predicate(candidate))
-                {
-                    found = candidate;
-                    return true;
-                }
-            }
-            found = default;
-            return false;
-        }
    }
 }

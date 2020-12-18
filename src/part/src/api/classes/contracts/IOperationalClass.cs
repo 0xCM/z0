@@ -12,7 +12,7 @@ namespace Z0
     /// Identifies a class that classifies operations
     /// </summary>
     [Free]
-    public interface IOperationalClass : IClassifier
+    public interface IOperationalClass
     {
 
     }
@@ -37,7 +37,7 @@ namespace Z0
     /// <typeparam name="T">The operand type</typeparam>
     /// <typeparam name="E">The class type</typeparam>
     [Free]
-    public interface IOperationalClass<E,T> : IOperationalClass<E>, IClassT<T>
+    public interface IOperationalClass<E,T> : IOperationalClass<E>
         where E : unmanaged, Enum
     {
 

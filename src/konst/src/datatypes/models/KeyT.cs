@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     public readonly struct Key<T> : ITextual, IHashed<Key<T>>
         where T : unmanaged
@@ -21,7 +20,7 @@ namespace Z0
         public Key(T src)
         {
             Value = src;
-            Hash = hash(src);
+            Hash = alg.hash.calc(src);
         }
 
         [MethodImpl(Inline)]

@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static z;
 
     /// <summary>
     /// Correlates a value with a key that uniquely identifies the value within some context
@@ -39,7 +38,7 @@ namespace Z0
             => Value.ToString();
 
         public override int GetHashCode()
-            => (int)hash(Value);
+            => (int)alg.hash.calc(Value);
 
         public override bool Equals(object src)
             => src is CorrelationToken t && Equals(t);

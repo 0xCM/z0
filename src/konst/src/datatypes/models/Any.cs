@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     /// <summary>
     /// A parametric T-equatable value
@@ -20,22 +20,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Any<T> From<S>(in S src)
             => new Any<T>(Unsafe.As<S,T>(ref edit(src)));
-
-        [MethodImpl(Inline)]
-        public static bool operator ==(Any<T> x, Any<T> y)
-            => x.Equals(y);
-
-        [MethodImpl(Inline)]
-        public static bool operator !=(Any<T> x, Any<T> y)
-            => !x.Equals(y);
-
-        [MethodImpl(Inline)]
-        public static implicit operator Any<T>(T src)
-            => new Any<T>(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator T(Any<T> src)
-            => src.Value;
 
         [MethodImpl(Inline)]
         public Any(T src)
@@ -71,5 +55,22 @@ namespace Z0
 
         public override bool Equals(object src)
             => src is Any<T> a && Equals(a);
+
+
+        [MethodImpl(Inline)]
+        public static bool operator ==(Any<T> x, Any<T> y)
+            => x.Equals(y);
+
+        [MethodImpl(Inline)]
+        public static bool operator !=(Any<T> x, Any<T> y)
+            => !x.Equals(y);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Any<T>(T src)
+            => new Any<T>(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator T(Any<T> src)
+            => src.Value;
     }
 }

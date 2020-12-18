@@ -9,7 +9,7 @@ namespace Z0
     using System.Reflection;
 
     using static Konst;
-    using static z;
+    using static FS;
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 

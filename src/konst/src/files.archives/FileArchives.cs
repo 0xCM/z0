@@ -51,7 +51,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static IFileArchive create(FS.FolderPath root, params FS.FileExt[] ext)
-            => new FileKinds(root, ext);
+            => new FilteredArchive(root, ext);
 
         [MethodImpl(Inline)]
         internal static SearchOption option(bool recurse)

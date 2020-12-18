@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     [ApiHost]
     public readonly struct ClassifierMap
@@ -24,7 +24,7 @@ namespace Z0
             where K : unmanaged
         {
             var source = @readonly(src);
-            var count = min((byte)src.Length, U8.Max);
+            var count = zfunc.min((byte)src.Length, U8.Max);
             var iK = alloc<Paired<byte,K>>(count);
             var Ki = alloc<Paired<K,byte>>(count);
             var indexed = span(iK);
@@ -44,7 +44,7 @@ namespace Z0
             where K : unmanaged
         {
             var source = @readonly(src);
-            var count = min((ushort)src.Length, U16.MaxLiteral);
+            var count = zfunc.min((ushort)src.Length, U16.MaxLiteral);
             var iK = alloc<Paired<ushort,K>>(count);
             var Ki = alloc<Paired<K,ushort>>(count);
             var indexed = span(iK);
@@ -64,7 +64,7 @@ namespace Z0
             where K : unmanaged
         {
             var source = @readonly(src);
-            var count = min((uint)src.Length, U32.Max);
+            var count = zfunc.min((uint)src.Length, U32.Max);
             var iK = alloc<Paired<uint,K>>(count);
             var Ki = alloc<Paired<K,uint>>(count);
             var indexed = span(iK);
@@ -84,7 +84,7 @@ namespace Z0
             where K : unmanaged
         {
             var source = @readonly(src);
-            var count = min((ulong)src.Length, U32.Max);
+            var count = zfunc.min((ulong)src.Length, U32.Max);
             var iK = alloc<Paired<ulong,K>>(count);
             var Ki = alloc<Paired<K,ulong>>(count);
             var indexed = span(iK);

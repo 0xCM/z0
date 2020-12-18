@@ -30,13 +30,13 @@ namespace Z0
                 yield return FS.dir(path.Name);
         }
 
-        IEnumerable<FS.FilePath> Files()
+        Deferred<FS.FilePath> Files()
             => Root.EnumerateFiles(true);
 
-        IEnumerable<FS.FilePath> Files(bool recurse, params FS.FileExt[] ext)
-            => Root.EnumerateFiles(recurse, ext);
+        Deferred<FS.FilePath> Files(FS.FileExt[] ext, bool recurse)
+            => Root.EnumerateFiles(ext, recurse);
 
-        IEnumerable<FS.FilePath> Files(string pattern, bool recurse)
+        Deferred<FS.FilePath> Files(string pattern, bool recurse)
             => Root.EnumerateFiles(pattern, recurse);
 
         ListedFiles Listing()

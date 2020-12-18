@@ -10,14 +10,15 @@ namespace Z0
     using static Konst;
 
     partial struct z
-    {                        
+    {
         [MethodImpl(Inline)]
         public static ReadOnlySpan<char> chars<E>(ReadOnlySpan<E> src)
-            where E : unmanaged, Enum
-                => recover<E,char>(src);
+            where E : unmanaged
+                => memory.chars(src);
+
 
         [MethodImpl(Inline)]
         public static ReadOnlySpan<char> chars(string src)
-                => src;
+            => src;
     }
 }

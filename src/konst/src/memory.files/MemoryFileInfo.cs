@@ -6,6 +6,8 @@ namespace Z0
 {
     using System;
 
+    using static FS;
+
     public struct MemoryFileInfo
     {
         public MemoryAddress BaseAddress;

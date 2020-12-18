@@ -9,7 +9,7 @@ namespace Z0
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface IApiKey : IKind, ITextual
+    public interface IApiKey : ITextual
     {
         ApiClass Id {get;}
 

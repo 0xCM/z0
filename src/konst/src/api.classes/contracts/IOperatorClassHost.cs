@@ -16,7 +16,7 @@ namespace Z0
     }
 
     [Free]
-    public interface IOperatorClassHost<F,E,T> : IOperatorClassHost<F,E>, IClassT<T>
+    public interface IOperatorClassHost<F,E,T> : IOperatorClassHost<F,E>
         where F : struct, IOperatorClassHost<F,E>
         where E : unmanaged, Enum
     {

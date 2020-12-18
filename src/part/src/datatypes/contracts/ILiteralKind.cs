@@ -10,7 +10,7 @@ namespace Z0
     /// Characterizes a parametric literal: typed literals that support kind partitioning
     /// </summary>
     /// <typeparam name="E">The classifying enum type</typeparam>
-    public interface ILiteralKind<E> : IKind, ITypedLiteral<E>
+    public interface ILiteralKind<E> : ITypedLiteral<E>
         where E : unmanaged, Enum
     {
 
@@ -21,7 +21,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="F">The reification type</typeparam>
     /// <typeparam name="E">The classifier type</typeparam>
-    public interface ILiteralKind<F,E> : ILiteralKind<E>, IClass<F,E>
+    public interface ILiteralKind<F,E> : ILiteralKind<E>
         where F : ILiteralKind<F,E>, new()
         where E : unmanaged, Enum
     {
@@ -29,7 +29,7 @@ namespace Z0
     }
 
     /// <summary>
-    /// Characterizes a T-parametric literal kind 
+    /// Characterizes a T-parametric literal kind
     /// </summary>
     /// <typeparam name="K">The literal kind </typeparam>
     /// <typeparam name="E">The kind classifier type</typeparam>
@@ -38,7 +38,7 @@ namespace Z0
         where F : ILiteralKind<E>, new()
         where E : unmanaged, Enum
     {
-        E ITypedLiteral<E>.Class 
+        E ITypedLiteral<E>.Class
             => new F().Class;
     }
 }

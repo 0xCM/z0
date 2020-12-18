@@ -9,6 +9,7 @@ namespace Z0
     using System.IO;
 
     using static Konst;
+    using static FS;
 
     using CK = FS.ChangeKind;
 

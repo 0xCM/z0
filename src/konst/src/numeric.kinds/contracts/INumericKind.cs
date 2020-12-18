@@ -6,7 +6,7 @@ namespace Z0
 {
     using System.Runtime.CompilerServices;
 
-    public interface INumericKind : IKind, ILiteralKind<NumericKind>
+    public interface INumericKind : ILiteralKind<NumericKind>
     {
 
     }

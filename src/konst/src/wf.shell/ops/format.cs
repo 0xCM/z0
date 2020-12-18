@@ -9,6 +9,7 @@ namespace Z0
     using System.Reflection;
 
     using static Konst;
+    using static Seq;
     using static z;
 
     partial class WfShell
@@ -16,10 +17,10 @@ namespace Z0
         public static void render(in WfConfigInfo src, ITextBuffer dst)
         {
             dst.AppendSettingLine(nameof(src.AppConfigPath), src.AppConfigPath);
-            dst.AppendSettingLine(nameof(src.Args),  Seq.delimit(src.AppConfigPath).Format());
+            dst.AppendSettingLine(nameof(src.Args),  delimit(src.AppConfigPath).Format());
             dst.AppendSettingLine(nameof(src.Controller), src.Controller.Format());
             dst.AppendSettingLine(nameof(src.LogConfig), WfLogs.format(src.LogConfig));
-            dst.AppendSettingLine(nameof(src.Parts), Seq.delimit(src.Parts).Format());
+            dst.AppendSettingLine(nameof(src.Parts), delimit(src.Parts).Format());
             dst.AppendSettingLine(nameof(src.StartTS), src.StartTS.Format());
             dst.AppendSettingLine(nameof(src.PathConfigTime), src.PathConfigTime.Format());
             dst.AppendSettingLine(nameof(src.InitConfigTime), src.InitConfigTime.Format());

@@ -8,6 +8,6 @@ namespace Z0
     readonly struct FileTypeFormatter : ITextFormatter<FileType>
     {
         public string Format(FileType src)
-            => FS.format(src);
+            => FileTypes.format(src);
     }
 }

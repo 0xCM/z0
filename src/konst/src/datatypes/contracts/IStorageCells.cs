@@ -4,9 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
+    using static memory;
 
-    public interface IStorageCells<T> : IDataType<IndexedSeq<T>>
+    public interface IStorageCells<T> : IDataType<Index<T>>
         where T : unmanaged
     {
         T[] Storage {get;}
@@ -15,15 +15,15 @@ namespace Z0
             => Storage.Length;
 
         BitSize CellWidth
-            => z.bitsize<T>();
+            => bitsize<T>();
 
         ByteSize CellSize
-            => z.size<T>();
+            => size<T>();
 
         ByteSize ISized.StorageSize
             => CellSize * CellCount;
 
-        IndexedSeq<T> IDataType<IndexedSeq<T>>.Content
+        Index<T> IDataType<Index<T>>.Content
             => Storage;
 
         BitSize ISized.StorageWidth

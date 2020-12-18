@@ -50,43 +50,5 @@ namespace Z0
             for(var i=0u; i<count; i++)
                 seek(formatted,i) = format(skip(file,i));
         }
-
-        [Op]
-        public static string format(FileType src)
-        {
-            var dst = Buffers.text();
-            render(src,dst);
-            return dst.Emit();
-        }
-
-        [Op]
-        public static void render(FileType src, ITextBuffer dst)
-        {
-            var extensions = text.bracket(src.Extensions.Delimited().Format());
-            var content = src.ContentKind.Format();
-            dst.Append(text.bracket(src.Extensions.Delimited().Format()));
-            dst.Append(" | ");
-            dst.Append(src.ContentKind.Format());
-        }
-
-        [Op]
-        public static void render(FileTypes src, ITextBuffer dst)
-        {
-            var count = src.Count;
-            var view = src.View;
-            for(var i=0; i<count; i++)
-            {
-                render(skip(view,i), dst);
-                dst.AppendLine();
-            }
-        }
-
-        [Op]
-        public static string format(FileTypes src)
-        {
-            var dst = Buffers.text();
-            render(src,dst);
-            return dst.Emit();
-        }
     }
 }
