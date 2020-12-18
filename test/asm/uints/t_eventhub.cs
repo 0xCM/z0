@@ -9,7 +9,7 @@ namespace Z0
 
     using static CheckPrimalSeq;
 
-    public class EventHubTest : UnitTest<EventHubTest>
+    public class t_eventhub : UnitTest<t_eventhub>
     {
         public static BinaryCode code(params byte[] src)
             => src;
@@ -28,15 +28,10 @@ namespace Z0
 
         public void test_1()
         {
-            var examples = ExampleEvents.Examples;
-            var hub = HubClientExample.create(WfBrokers.relay(x => Receiver(x)));
-
-            hub.Broadcast(examples.Event1.Define(E1, D1));
-            hub.Broadcast(examples.Event2.Define(E2, D2));
-            hub.Broadcast(examples.Event3.Define(E3, D3));
-
-            static void Receiver(IDataEvent e)
+            var received = z.hashset<IDataEvent>();
+            void Receiver(IDataEvent e)
             {
+                received.Add(e);
                 switch(e.Id)
                 {
                     case E1:
@@ -50,6 +45,20 @@ namespace Z0
                         break;
                 }
             }
+
+            var examples = ExampleEvents.Examples;
+            var hub = HubClientExample.create(WfBrokers.relay(x => Receiver(x)));
+            var e1 = examples.Event1.Define(E1, D1);
+            var e2 = examples.Event2.Define(E2, D2);
+            var e3 = examples.Event3.Define(E3, D3);
+
+            hub.Broadcast(e1);
+            hub.Broadcast(e2);
+            hub.Broadcast(e3);
+
+            Claim.contains(received, e1);
+            Claim.contains(received, e2);
+            Claim.contains(received, e3);
         }
     }
 }

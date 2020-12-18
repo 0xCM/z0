@@ -10,12 +10,6 @@ namespace Z0.Dynamics.Operators
 
     using static LinqXFunc;
 
-    partial struct DynamicOps
-    {
-
-
-    }
-
     public class Ops16u
     {
         public static Expression<Func<ushort, ushort>> Abs

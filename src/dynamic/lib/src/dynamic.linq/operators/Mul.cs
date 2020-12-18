@@ -6,7 +6,7 @@ namespace Z0.Dynamics.Operators
 {
     using System;
     using System.Linq.Expressions;
-    using System.Runtime.CompilerServices;
+    using System.Reflection;
 
     using static Konst;
     using static z;
@@ -37,6 +37,9 @@ namespace Z0.Dynamics.Operators
 
         public static T Apply(T x, T y)
             => _OP(x, y);
+
+        public static MethodInfo Method => _OP.Method;
+
     }
 
     public static class MultiplyChecked<T>
@@ -46,5 +49,8 @@ namespace Z0.Dynamics.Operators
 
         public static T Apply(T x, T y)
             => _OP(x, y);
+
+        public static MethodInfo Method => _OP.Method;
+
     }
 }

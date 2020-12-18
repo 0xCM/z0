@@ -10,7 +10,7 @@ namespace Z0
 
     using static Fsm1Spec.StateKinds;
 
-    public class Fsm1Test : UnitTest<Fsm1Test>
+    public class t_fsm1 : UnitTest<t_fsm1>
     {
         public void Run()
         {

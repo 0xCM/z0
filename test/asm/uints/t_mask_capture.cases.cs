@@ -14,20 +14,20 @@ namespace Z0.Asm
 
     static class MaskCases
     {
-        static T central<T>(N8 f, N2 d)
+        public static T central<T>(N8 f, N2 d)
             where T : unmanaged
                 => BitMasks.central<T>(f,d);
 
-        static T central<T>(N8 f, N4 d)
+        public static T central<T>(N8 f, N4 d)
             where T : unmanaged
                 => BitMasks.central<T>(f,d);
 
-        static T central<T>(N8 f, N6 d)
+        public static T central<T>(N8 f, N6 d)
             where T : unmanaged
                 => BitMasks.central<T>(f,d);
 
         [MethodImpl(Inline), NumericClosures(UnsignedInts), Naturals(4,6,8,10,12,14,16,18,32,64)]
-        static T lsb<N,T>(N w, N2 f, N1 d, T t = default)
+        public static T lsb<N,T>(N w, N2 f, N1 d, T t = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => BitMasks.lsb<N,T>(w, f, d);
@@ -36,12 +36,14 @@ namespace Z0.Asm
             => typeof(MaskCases).DeclaredStaticMethods().OpenGeneric(1);
 
         static IEnumerable<MethodInfo> NaturalDefs
-            => typeof(MaskCases).DeclaredStaticMethods().OpenGeneric(2).GenericDefinitions();
+            => typeof(BitMasks).DeclaredStaticMethods().OpenGeneric(2).GenericDefinitions();
 
         public static IEnumerable<MethodInfo> NaturalClosures
             => from def in NaturalDefs
-                let attrib = def.Tag<NaturalsAttribute>().Require()
-                from number in attrib.Values
+                let tag = def.Tag<NaturalsAttribute>()
+                where tag.Exists
+                let numbers = tag.Value.Values
+                from number in numbers
                 let n = NativeNaturals.FindType(number).Require()
                 from t in NumericArgs
                 let m = def.MakeGenericMethod(n,t)
@@ -56,5 +58,4 @@ namespace Z0.Asm
         public static Type[] NumericArgs
             => z.array(typeof(byte), typeof(ushort), typeof(uint), typeof(ulong));
     }
-
 }

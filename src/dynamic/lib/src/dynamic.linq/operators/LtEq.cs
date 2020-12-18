@@ -7,9 +7,11 @@ namespace Z0.Dynamics.Operators
 {
     using System;
     using System.Linq.Expressions;
-
+    using System.Reflection;
+    using System.Runtime.CompilerServices;
 
     using static z;
+    using static Part;
     using static LinqXPress;
     using static SFx;
 
@@ -45,5 +47,11 @@ namespace Z0.Dynamics.Operators
 
         public static bool Apply(T x, T y)
             => _OP(x, y);
+
+        public static MethodInfo Method
+        {
+            [MethodImpl(Inline)]
+            get => _OP.Method;
+        }
     }
 }

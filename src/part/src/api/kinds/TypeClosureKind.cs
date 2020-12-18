@@ -12,14 +12,14 @@ namespace Z0
 
         Natural = 2,
 
-        Imm8 = 3,
+        Imm8 = 4,
 
-        Width = 4,
+        Width = 8,
 
-        Fixed = 5,
+        Fixed = 16,
 
-        NaturalPairs = 6,
+        NaturalPairs = 32,
 
-        Opaque = 7,
+        Opaque = 64,
     }
 }

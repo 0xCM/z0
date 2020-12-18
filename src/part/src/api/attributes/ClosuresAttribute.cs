@@ -23,7 +23,6 @@ namespace Z0
             Kind = 0;
             Values = new ulong[]{};
             Pairs = new (ulong,ulong)[]{};
-
         }
 
         public ClosuresAttribute(ulong spec)
@@ -51,6 +50,14 @@ namespace Z0
         {
             this.Spec = (ulong)spec;
             this.Kind = TypeClosureKind.Natural;
+            this.Values = values;
+        }
+
+        public ClosuresAttribute(NumericKind numeric, NatClosureKind spec, params ulong[] values)
+            : this()
+        {
+            this.Spec = (ulong)spec;
+            this.Kind = TypeClosureKind.Natural | TypeClosureKind.Numeric;
             this.Values = values;
         }
 

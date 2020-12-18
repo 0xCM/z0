@@ -11,42 +11,36 @@ namespace Z0
 
     using static LinqXFunc;
 
-    partial struct DynamicOps
+    public readonly struct DynamicOps64u
     {
-
-
-    }
-
-    public class Ops64f
-    {
-        public static Expression<Func<double, double>> Abs
+        public static Expression<Func<double, double>> Abs64f
             => f((double x) => x);
 
-        public static Expression<Func<double, double, double>> Add
+        public static Expression<Func<double, double, double>> Add64f
             => f<double>((x, y) => (double)(x + y));
 
-        public static Expression<Func<double, double, double>> Mul
+        public static Expression<Func<double, double, double>> Mul64f
             => f<double>((x, y) => (double)(x * y));
 
-        public static Expression<Func<double, double, double>> Sub
+        public static Expression<Func<double, double, double>> Sub64f
             => f<double>((x, y) => (double)(x - y));
 
-        public static Expression<Func<double, double>> Inc
+        public static Expression<Func<double, double>> Inc64f
             => f((double x) => ++x);
 
-        public static Expression<Func<double, double>> Dec
+        public static Expression<Func<double, double>> Dec64f
             => f((double x) => --x);
 
-        public static Expression<Func<double, double, bool>> LT
+        public static Expression<Func<double, double, bool>> Lt64f
             => f((double x, double y) => x < y);
 
-        public static Expression<Func<double, double, bool>> LTEQ
+        public static Expression<Func<double, double, bool>> LtEq64f
             => f((double x, double y) => x <= y);
 
-        public static Expression<Func<double, double, bool>> GT
+        public static Expression<Func<double, double, bool>> Gt64f
             => f((double x, double y) => x > y);
 
-        public static Expression<Func<double, double, bool>> GTEQ
+        public static Expression<Func<double, double, bool>> GtEq64f
             => f((double x, double y) => x >= y);
     }
 }

@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Linq;
     using System.Linq.Expressions;
+    using System.Reflection;
 
     using static Konst;
     using static LinqXFunc;

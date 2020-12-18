@@ -63,16 +63,17 @@ namespace Z0.Asm
                 AsmCheck.Capture(m.Identify(), m).OnSome(capture => AsmCheck.WriteAsm(capture, dst));
         }
 
-        public void capture_dynamic_delegates()
+        void capture_dynamic_delegates()
         {
             using var dst = CaseWriter(FileExtensions.Asm);
-            var f = LinqDynamic.xor<uint>();
-            var id = Identity.identify(f.Method);
-            var capture = CaptureAlt.capture(new IdentifiedMethod(id, f.Method));
-            AsmCheck.WriteAsm(capture, dst);
+            var xor = LD.xor<uint>();
+            AsmCheck.WriteAsm(CaptureAlt.capture(new IdentifiedMethod(Identity.identify(xor.Method), xor.Method)), dst);
+            var gteq = LD.gteq<uint>();
+            AsmCheck.WriteAsm(CaptureAlt.capture(new IdentifiedMethod(Identity.identify(xor.Method), xor.Method)), dst);
         }
 
-        public void capture_dynamic_delegate_batch()
+
+        void capture_dynamic_delegate_batch()
         {
             using var dst = CaseWriter(FileExtensions.Asm);
             var methods = z.array(

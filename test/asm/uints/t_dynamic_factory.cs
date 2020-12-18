@@ -109,7 +109,7 @@ namespace Z0.Asm
         static Func<Vector256<uint>, Vector256<uint>> shuffler(N3 n)
             => v => Avx2.Shuffle(v, (byte)Arrange4L.ABCD);
 
-        void capture_shuffler()
+        public void capture_shuffler()
         {
             var f = shuffler<uint>(n2);
             var g = shuffler(n3);

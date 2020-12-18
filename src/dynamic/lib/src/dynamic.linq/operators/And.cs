@@ -20,7 +20,6 @@ namespace Z0.Dynamics.Operators
         public static implicit operator Func<T,T,T>(And<T> src)
             => src.F;
 
-
         [MethodImpl(Inline)]
         internal And(Func<T,T,T> f)
             => F = f;

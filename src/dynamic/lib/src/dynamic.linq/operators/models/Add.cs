@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Linq;
     using System.Linq.Expressions;
+    using System.Reflection;
 
     using Z0.Dynamics.Operators;
 
@@ -51,6 +52,8 @@ namespace Z0
 
             public static T Apply(T x, T y)
                 => _OP(x, y);
+
+            public static MethodInfo Method => _OP.Method;
         }
 
         public static class AddChecked<T>

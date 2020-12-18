@@ -13,7 +13,7 @@ namespace Z0
 
     using static z;
 
-    public class t_invoke : t_dynamic<t_invoke>
+    public class t_invoke : t_asm<t_invoke>
     {
         public static AsmCall Invoke8u
             => asm.call("Arrays.empty_8u ", 0x7ff9af96c260, 0x0f, 0x7ff9af96b9c8, "sys.empty_8u", 0x7ff9af971d40);

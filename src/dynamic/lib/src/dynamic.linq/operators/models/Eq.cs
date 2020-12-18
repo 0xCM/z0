@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Linq.Expressions;
+    using System.Reflection;
 
     using static Z0.LinqXPress;
 
@@ -18,6 +19,8 @@ namespace Z0
 
             public static bool Apply(T x, T y)
                 => _OP(x, y);
+
+            public static MethodInfo Method => _OP.Method;
         }
     }
 }

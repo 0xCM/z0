@@ -30,5 +30,11 @@ namespace Z0.Dynamics.Operators
         [MethodImpl(Inline)]
         public bool Invoke(T x, T y)
             => F(x, y);
+
+        public MethodInfo Method
+        {
+            [MethodImpl(Inline)]
+            get => F.Method;
+        }
     }
 }

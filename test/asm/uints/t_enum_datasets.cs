@@ -25,12 +25,10 @@ namespace Z0.Asm
             where E : unmanaged, Enum
                 => FS.path(CasePath($"{typeof(E).Name}.Identifiers").Name);
 
-        void emit<E,T>()
+        EnumDataset<E,T> emit<E,T>()
             where E : unmanaged, Enum
             where T : unmanaged
-        {
-            EnumLiteralEmitter.emit<E,T>(LiteralEmissionKind.EnumDataset, EnumDatasetPath<E>());
-        }
+                => EnumLiteralEmitter.emit<E,T>(LiteralEmissionKind.EnumDataset, EnumDatasetPath<E>());
 
         public void ds_1()
         {
@@ -53,10 +51,5 @@ namespace Z0.Asm
             EnumTables.emit(enums,path);
         }
 
-        public void enum_dataset_convert(FS.FilePath dst)
-        {
-            var enums = @readonly(Enums.describe<AsmTokenKind,byte>());
-            EnumTables.emit(enums,dst);
-        }
     }
 }

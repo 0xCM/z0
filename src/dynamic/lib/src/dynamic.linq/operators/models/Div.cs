@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Linq.Expressions;
+    using System.Reflection;
 
     using static LinqXPress;
 

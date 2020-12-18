@@ -3,11 +3,11 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Linq;
 
-    public class Fsm2Test : UnitTest<Fsm2Test>
+    public class t_fsm2 : UnitTest<t_fsm2>
     {
         public void run()
         {

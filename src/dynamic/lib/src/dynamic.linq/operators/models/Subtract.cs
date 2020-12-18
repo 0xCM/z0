@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Linq.Expressions;
+    using System.Reflection;
 
     using static Konst;
     using static z;
@@ -25,7 +26,6 @@ namespace Z0
 
                 switch (sys.typecode<T>())
                 {
-
                     case TypeCode.Byte:
                         return cast<Func<T,T,T>>(Ops8u.Sub.Compile());
                     case TypeCode.SByte:
@@ -39,6 +39,8 @@ namespace Z0
 
             public static T Apply(T x, T y)
                 => _OP(x, y);
+
+            public static MethodInfo Method => _OP.Method;
         }
 
         public static class SubtractChecked<T>
@@ -48,6 +50,8 @@ namespace Z0
 
             public static T Apply(T x, T y)
                 => _OP(x, y);
+
+            public static MethodInfo Method => _OP.Method;
         }
     }
 }

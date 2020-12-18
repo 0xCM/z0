@@ -7,6 +7,7 @@ namespace Z0.Dynamics.Operators
 {
     using System;
     using System.Linq.Expressions;
+    using System.Reflection;
 
     using static Konst;
     using static z;
@@ -45,5 +46,7 @@ namespace Z0.Dynamics.Operators
 
         public static bool Apply(T x, T y)
             => _OP(x, y);
+
+        public static MethodInfo Method => _OP.Method;
     }
 }
