@@ -9,15 +9,15 @@ namespace Z0
     using static Part;
     using static memory;
 
-    readonly struct Launch
+    readonly struct Runner
     {
         readonly WfHost Host;
 
         readonly IWfShell Wf;
 
-        Launch(IWfShell wf)
+        Runner(IWfShell wf)
         {
-            Host = WfShell.host(typeof(Launch));
+            Host = WfShell.host(typeof(Runner));
             Wf = wf.WithHost(Host);
         }
 
@@ -26,17 +26,15 @@ namespace Z0
             try
             {
                 using var wf = WfShell.create(args);
-                var app = new Launch(wf);
+                var app = new Runner(wf);
                 if(args.Length == 0)
                 {
                     wf.Status("usage: launch <verb> [options]");
-                    app.Run(new ShowVerbsCmd());
                     app.Run(new ShowConfigCmd());
                 }
                 else
                 {
                     CmdLine cmd = args;
-                    wf.Status(cmd.Format());
                     app.Run(cmd);
                 }
 
@@ -71,9 +69,13 @@ namespace Z0
             for(var i=0; i<count; i++)
             {
                 ref readonly var arg = ref skip(args,i);
-
-
+                Wf.Status(string.Format("({0}) {1}", i, arg.Format()));
             }
+        }
+
+        void Run(ListFilesCmd cmd)
+        {
+
         }
 
         void Run(ShowConfigCmd cmd)

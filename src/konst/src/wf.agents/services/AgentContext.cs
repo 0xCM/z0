@@ -11,7 +11,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static z;
 
     /// <summary>
     /// Defines a shared context for a set of agents

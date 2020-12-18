@@ -6,10 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Linq;
 
-    using static z;
-    using static Konst;
+    using static Part;
+    using static memory;
 
     public struct CmdScriptVars : ICmdVars<CmdScriptVars>
     {
@@ -21,7 +20,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public Index<ICmdVar> Members()
-            => new Index<ICmdVar>(Data.Storage.Select(x => z.cast<ICmdVar>(x)));
+            => new Index<ICmdVar>(Data.Storage.Select(x => cast<ICmdVar>(x)));
 
         public string Format()
             => Cmd.format(this);

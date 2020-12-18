@@ -141,35 +141,14 @@ namespace Z0
         public virtual void Dispose()
             => Terminate().Wait();
 
-        protected virtual void OnConfigure(dynamic config)
-        {
+        protected virtual void OnConfigure(dynamic config) { }
 
-        }
+        protected virtual void OnRun() { }
 
-        protected virtual void OnRun()
-        {
+        protected virtual void OnStop() { }
 
-        }
+        protected virtual void OnStart() { }
 
-        protected virtual void OnStop()
-        {
-
-        }
-
-        /// <summary>
-        /// May be specialized to perform service-specific initialization/precondition operations
-        /// </summary>
-        protected virtual void OnStart()
-        {
-
-        }
-
-        /// <summary>
-        /// May be specialized to perform service-specific cleanup/postcondition operations
-        /// </summary>
-        protected virtual void OnTerminate()
-        {
-
-        }
+        protected virtual void OnTerminate() { }
     }
 }

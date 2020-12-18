@@ -18,7 +18,7 @@ namespace Z0
         {
             AgentContext = context;
             Wf = WfShell.create(args);
-            Control = WfAgentControl.FromContext(Wf.Context);
+            Control = WfAgents.control(Wf.Context);
         }
 
         void Exec()
@@ -26,7 +26,7 @@ namespace Z0
             Terminal.Get().SetTerminationHandler(OnTerminate);
 
             Wf.Status($"Starting server complex");
-            WfAgentComplex.Start(AgentContext).ContinueWith(complex =>
+            WfAgents.complex(AgentContext).ContinueWith(complex =>
                 {
                     Complex = complex.Result;
                     Wf.Status("Server complex started");

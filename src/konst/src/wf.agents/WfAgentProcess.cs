@@ -8,7 +8,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     /// <summary>
@@ -16,14 +16,6 @@ namespace Z0
     /// </summary>
     public class WfAgentProcess : WfAgent
     {
-        /// <summary>
-        /// Creates and configures, but does not start, a server process
-        /// </summary>
-        /// <param name="Context">The context to which the server process will be assigned</param>
-        /// <param name="ServerId">The server id</param>
-        /// <param name="ServerAgents">The agents to be managed on behalf of the server</param>
-        public static WfAgentProcess create(IAgentContext Context, uint ServerId, uint CoreNumber, params IWfAgent[] ServerAgents)
-            => new WfAgentProcess(Context, ServerId, CoreNumber, ServerAgents);
 
         internal WfAgentProcess(IAgentContext context, uint server, uint core, params IWfAgent[] agents)
             : base(context, (server, 1u))

@@ -19,14 +19,14 @@ namespace Z0
         public CmdScriptExpr(string pattern)
         {
             Pattern = pattern;
-            Variables = CmdVars.init();
+            Variables = Cmd.vars();
         }
 
         [MethodImpl(Inline)]
         internal CmdScriptExpr(CmdPattern pattern)
         {
             Pattern = pattern;
-            Variables = CmdVars.init();
+            Variables = Cmd.vars();
         }
 
         [MethodImpl(Inline)]
@@ -66,7 +66,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator CmdScriptExpr(CmdPattern src)
-            => CmdScripts.expr(src);
+            => Cmd.expr(src);
 
         [MethodImpl(Inline)]
         public static implicit operator string(CmdScriptExpr src)
@@ -74,11 +74,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator CmdScriptExpr(Paired<CmdPattern,CmdVarIndex> src)
-            => CmdScripts.expr(src);
+            => Cmd.expr(src);
 
         [MethodImpl(Inline)]
         public string Format()
-            => CmdScripts.format(this);
+            => Cmd.format(this);
 
         public override string ToString()
             => Format();

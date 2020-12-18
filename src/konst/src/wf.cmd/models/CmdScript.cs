@@ -53,7 +53,7 @@ namespace Z0
             => new CmdScript(src);
 
         public string Format()
-            => CmdScripts.format(this);
+            => Cmd.format(this);
 
         public override string ToString()
             => Format();

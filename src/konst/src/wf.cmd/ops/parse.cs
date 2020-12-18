@@ -18,17 +18,18 @@ namespace Z0
             var fail = unparsed<CmdSpec>(src);
             var parts = @readonly(text.split(src, delimiter));
             var count = parts.Length;
+            ushort pos = 0;
             if(count != 0)
             {
                 ref readonly var part = ref first(parts);
                 var id = Cmd.id(part);
                 var options = list<CmdArg>();
-                for(var i = 1; i<count; i++)
+                for(var i=1; i<count; i++)
                 {
                     ref readonly var next = ref skip(parts,i);
                     if(!text.blank(next))
                     {
-                        var option = arg(next, qualifier);
+                        var option = arg(pos++,next, qualifier);
                         if(option)
                             options.Add(option.Value);
                         else
@@ -42,15 +43,15 @@ namespace Z0
         }
 
         [Op]
-        static ParseResult<CmdArg> arg(string src, char qualifier = ' ')
+        static ParseResult<CmdArg> arg(ushort pos, string src, char qualifier = ' ')
         {
             try
             {
                 var i = src.IndexOf(qualifier);
                 if(i == NotFound)
-                    return parsed(src, new CmdArg(src));
+                    return parsed(src, new CmdArg(pos, src));
                 else
-                    return parsed(src, new CmdArg(src.LeftOfIndex(i), src.RightOfIndex(i)));
+                    return parsed(src, new CmdArg(pos, src.LeftOfIndex(i), src.RightOfIndex(i)));
             }
             catch(Exception e)
             {

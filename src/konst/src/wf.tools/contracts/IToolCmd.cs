@@ -13,11 +13,12 @@ namespace Z0
     }
 
     [Free]
-    public interface IToolCmd<C> : IToolCmd, ICmdSpec<C>
+    public interface IToolCmd<C> : IToolCmd, ICmdSpec<C>, IDataType<C>
         where C : struct, IToolCmd<C>
     {
         ToolId ICmdSpec.ToolId
             => CmdTools.toolid<C>();
+
     }
 
     [Free]

@@ -4,11 +4,15 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    /// <summary>
-    /// Defines identifiers for intrinsic system events
-    /// </summary>
-    public static class IntrinsicEvents
+    using System;
+    using System.Runtime.CompilerServices;
+
+    using static Part;
+
+    partial struct Cmd
     {
-        public const ulong Pulse = 10;
+        [MethodImpl(Inline), Op]
+        public static CmdVarSymbol symbol(string name)
+            => new CmdVarSymbol(name);
     }
 }

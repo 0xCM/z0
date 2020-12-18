@@ -7,14 +7,14 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
-    public struct CmdTypeIndex : IIndex<CmdTypeInfo>
+    public struct CmdTypes : IIndex<CmdTypeInfo>
     {
         IndexedSeq<CmdTypeInfo> Data;
 
         [MethodImpl(Inline)]
-        public CmdTypeIndex(CmdTypeInfo[] src)
+        public CmdTypes(CmdTypeInfo[] src)
             => Data = src;
 
         public CmdTypeInfo[] Storage
@@ -24,7 +24,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator CmdTypeIndex(CmdTypeInfo[] src)
-            => new CmdTypeIndex(src);
+        public static implicit operator CmdTypes(CmdTypeInfo[] src)
+            => new CmdTypes(src);
     }
 }

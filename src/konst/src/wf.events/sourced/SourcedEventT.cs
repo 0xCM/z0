@@ -8,8 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Serialization;
     using System.Runtime.InteropServices;
-        
-    using static Konst;
+
+    using static Part;
 
     /// <summary>
     /// Represents an application-level/logical event with which data specific to an event class is associated
@@ -40,13 +40,13 @@ namespace Z0
         {
             EventId = id;
             Payload = data;
-        }            
+        }
 
         /// <summary>
         /// Renders the event as a sequence of bytes
         /// </summary>
         [MethodImpl(Inline)]
         public Span<byte> Serialize()
-            => z.bytes(this);       
+            => z.bytes(this);
     }
 }

@@ -10,8 +10,18 @@ namespace Z0
 
     using static Konst;
 
-    partial class XFuncX
+    partial class XTend
     {
+
+        /// <summary>
+        /// Extracts the name of the value member referenced by an expression delegate
+        /// </summary>
+        /// <typeparam name="T">The member selector</typeparam>
+        /// <typeparam name="M">The member type</typeparam>
+        /// <param name="selector">The selecting expression that identifies the desired member</param>
+        public static string GetValueMemberName<T,M>(this Expression<Func<T,M>> selector)
+            => selector.GetDataMember().Name;
+
         /// <summary>
         /// Extracts the member info for the member referenced by an expression delegate
         /// </summary>

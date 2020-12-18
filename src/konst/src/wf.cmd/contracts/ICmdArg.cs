@@ -9,13 +9,30 @@ namespace Z0
     [Free]
     public interface ICmdArg : ITextual
     {
+        /// <summary>
+        /// The argument's relative position
+        /// </summary>
+        ushort Position {get;}
+
+        /// <summary>
+        /// The (required) argument value
+        /// </summary>
+        string Value {get;}
+
+        /// <summary>
+        /// The argument prefix, if any; typically either '-', '--', or '/'
+        /// </summary>
         string Prefix {get;}
 
-        string Name {get;}
+        /// <summary>
+        /// The argument name, if any
+        /// </summary>
+        CmdName Name {get;}
 
+        /// <summary>
+        /// The delimiter between an argument name/value pair, typically ' ' or ':'
+        /// </summary>
         string Qualifier {get;}
-
-        string Value {get;}
 
         string ITextual.Format()
             => TextFormatter.setting(Name,Value);

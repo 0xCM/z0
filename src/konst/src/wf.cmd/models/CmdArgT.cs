@@ -8,23 +8,29 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static z;
-
-    using api = Cmd;
 
     public struct CmdArg<T> : ICmdArg<T>
     {
+        /// <summary>
+        /// The argument's relative position
+        /// </summary>
+        public ushort Position {get;}
+
+        /// <summary>
+        /// The (required) argument value
+        /// </summary>
+        public T Value {get;}
+
         public string Prefix {get;}
 
-        public string Name {get;}
-
-        public T Value {get;}
+        public CmdName Name {get;}
 
         public string Qualifier {get;}
 
         [MethodImpl(Inline)]
-        public CmdArg(string prefix, string name, T value)
+        public CmdArg(ushort index, string prefix, string name, T value)
         {
+            Position = index;
             Name = name;
             Value = value;
             Prefix = prefix;
@@ -34,6 +40,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public CmdArg(string key, T value)
         {
+            Position = 0;
             Name = key;
             Value = value;
             Prefix = EmptyString;
@@ -41,8 +48,9 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public CmdArg(string prefix, string name, string specifier, T value)
+        public CmdArg(ushort index, string prefix, string name, string specifier, T value)
         {
+            Position = index;
             Name = name;
             Value = value;
             Prefix = prefix;

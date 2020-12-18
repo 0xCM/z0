@@ -7,9 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static TextFormatter;
-    using static z;
+    using static Part;
 
     [Event(EventName)]
     public readonly struct ProcessingFileEvent<T> : IWfEvent<ProcessingFileEvent<T>>

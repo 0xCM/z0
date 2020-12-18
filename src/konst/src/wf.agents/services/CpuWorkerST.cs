@@ -8,7 +8,6 @@ namespace Z0
     using System.Threading;
     using System.Diagnostics;
 
-    using static Konst;
     using static z;
 
     using api = CpuWorkers;
@@ -17,27 +16,17 @@ namespace Z0
         where S : struct
         where T : struct
     {
-        CpuWorkerSettings Spec;
+        internal CpuWorkerSettings Spec;
 
-        Func<S,T> Projector;
+        internal Func<S,T> Projector;
 
-        ITableExchange<S,T> Exchange;
+        internal ITableExchange<S,T> Exchange;
 
-        ProcessThread NativeThread;
+        internal ProcessThread NativeThread;
 
-        Thread ManagedThread;
+        internal Thread ManagedThread;
 
-        bool Continue;
-
-        public static CpuWorker<S,T> create(CpuWorkerSettings spec, Func<S,T> projector, ITableExchange<S,T> exchange)
-        {
-            var worker = new CpuWorker<S,T>();
-            worker.Spec = spec;
-            worker.Exchange = exchange;
-            worker.Projector = projector;
-            worker.Continue = true;
-            return worker;
-        }
+        internal bool Continue;
 
         void Execute()
         {

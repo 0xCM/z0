@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     [Event(EventName)]
@@ -64,11 +64,10 @@ namespace Z0
             Exception = none<Exception>();
             Payload = data;
             Source = source;
-            Summary = Payload.Format();            
+            Summary = Payload.Format();
         }
 
         public string Format()
             => string.Format(RP.PSx3, EventId, Source, Summary);
-
     }
 }

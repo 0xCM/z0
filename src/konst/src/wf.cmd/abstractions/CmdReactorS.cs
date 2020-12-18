@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
 
     [CmdReactor]
     public abstract class CmdReactor<S> : ICmdReactor<S>

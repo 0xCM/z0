@@ -8,10 +8,10 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
-    public readonly struct CmdTypeInfo : ICmdTypeInfo
+    [Datatype]
+    public readonly struct CmdTypeInfo : ICmdTypeInfo, IDataType<CmdTypeInfo>
     {
         public CmdId CmdId {get;}
 

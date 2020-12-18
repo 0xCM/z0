@@ -7,26 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     [Datatype]
-    public readonly struct CmdArgPrefix
+    public readonly struct CmdArgPrefix : IDataType<CmdArgPrefix>
     {
-        public static CmdArgPrefix Empty
-            => default;
-
-        public static CmdArgPrefix DoubleDash
-            => new CmdArgPrefix(AsciCharCode.Dash, AsciCharCode.Dash);
-
-        public static CmdArgPrefix Dash
-            => new CmdArgPrefix(AsciCharCode.Dash);
-
-        public static CmdArgPrefix FSlash
-            => new CmdArgPrefix(AsciCharCode.FSlash);
-
-        public static CmdArgPrefix Default
-            => DoubleDash;
-
         internal readonly AsciCharCode C0;
 
         internal readonly AsciCharCode C1;
@@ -73,5 +58,21 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator string(CmdArgPrefix src)
             => src.Format();
+
+        public static CmdArgPrefix Empty
+            => default;
+
+        public static CmdArgPrefix DoubleDash
+            => new CmdArgPrefix(AsciCharCode.Dash, AsciCharCode.Dash);
+
+        public static CmdArgPrefix Dash
+            => new CmdArgPrefix(AsciCharCode.Dash);
+
+        public static CmdArgPrefix FSlash
+            => new CmdArgPrefix(AsciCharCode.FSlash);
+
+        public static CmdArgPrefix Default
+            => DoubleDash;
+
     }
 }

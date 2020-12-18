@@ -11,9 +11,6 @@ namespace Z0
     /// </summary>
     public class WfServer : WfAgent
     {
-        public static WfServer create(IAgentContext context, WfServerConfig config)
-            => new WfServer(context, config);
-
         WfServerConfig Config {get;}
 
         WfAgentProcess Worker {get; }
@@ -25,17 +22,13 @@ namespace Z0
             var pulse =  SourcedEvents.emitter(context,
                 AgentIdentityPool.NextAgentId(PartId),
                 new PulseEmitterConfig(new TimeSpan(0,0,1)));
-            Worker = WfAgentProcess.create(context, PartId, config.CoreNumber, new IWfAgent[]{pulse});
+            Worker = WfAgents.process(context, PartId, config.CoreNumber, new IWfAgent[]{pulse});
         }
 
         protected override async void OnStart()
-        {
-            await Worker.Start();
-        }
+            => await Worker.Start();
 
         protected override async void OnStop()
-        {
-            await Worker.Stop();
-        }
+            => await Worker.Stop();
     }
 }

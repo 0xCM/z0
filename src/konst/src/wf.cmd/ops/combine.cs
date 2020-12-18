@@ -9,12 +9,12 @@ namespace Z0
 
     partial struct Cmd
     {
-        public static FS.FilePath enqueue<T>(CmdJob<T> job, IWfDb db)
-            where T : struct, ITextual
-        {
-            var dst = db.JobQueue() + FS.file(job.Name, FileExtensions.Cmd);
-            dst.Overwrite(job.Format());
-            return dst;
-        }
+        [Op]
+        public static CmdVarSymbol combine(CmdVarSymbol a, CmdVarSymbol b)
+            => new CmdVarSymbol(string.Format("{0}{1}", a, b));
+
+        [Op]
+        public static CmdVarSymbol combine<T>(CmdVarSymbol<T> a, CmdVarSymbol<T> b)
+            => new CmdVarSymbol(string.Format("{0}{1}", a,b));
     }
 }

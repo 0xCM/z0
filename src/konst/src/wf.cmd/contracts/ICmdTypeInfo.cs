@@ -10,7 +10,7 @@ namespace Z0
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface ICmdTypeInfo
+    public interface ICmdTypeInfo : IDataType
     {
         CmdId CmdId {get;}
 
@@ -34,7 +34,7 @@ namespace Z0
     }
 
     [Free]
-    public interface ICmdTypeInfo<H,T> : ICmdDescriptor<T>
+    public interface ICmdTypeInfo<H,T> : ICmdDescriptor<T>, IDataType<H>
         where T : struct, ICmdSpec<T>
         where H : struct, ICmdTypeInfo<H,T>
     {

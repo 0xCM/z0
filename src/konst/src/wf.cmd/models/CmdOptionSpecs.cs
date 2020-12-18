@@ -7,12 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Defines a <see cref='CommandOptionSpec'/> index
     /// </summary>
-    [Datatype]
     public readonly struct CmdOptionSpecs : IIndex<CmdOptionSpecs,ushort,CmdOptionSpec>
     {
         readonly Index<CmdOptionSpec> Data;

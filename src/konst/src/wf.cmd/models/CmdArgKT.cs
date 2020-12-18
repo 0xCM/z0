@@ -9,8 +9,6 @@ namespace Z0
 
     using static Part;
 
-    using api = Cmd;
-
     public struct CmdArg<K,T>
         where K : unmanaged
     {

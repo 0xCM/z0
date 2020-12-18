@@ -20,7 +20,7 @@ namespace Z0
         internal CmdScriptExpr(CmdPattern pattern)
         {
             Pattern = pattern;
-            Variables = CmdVars.init<K>();
+            Variables = Cmd.vars<K>();
         }
 
         [MethodImpl(Inline)]
@@ -48,7 +48,7 @@ namespace Z0
 
        [MethodImpl(Inline)]
         public string Format()
-            => CmdScripts.format(this);
+            => Cmd.format(this);
 
         public override string ToString()
             => Format();

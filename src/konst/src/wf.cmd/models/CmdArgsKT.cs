@@ -9,13 +9,13 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct CmdArgIndex<K,T> : ITextual, IIndex<CmdArg<K,T>>
+    public readonly struct CmdArgs<K,T> : IIndex<CmdArg<K,T>>
         where K : unmanaged
     {
         readonly TableSpan<CmdArg<K,T>> Data;
 
         [MethodImpl(Inline)]
-        public CmdArgIndex(CmdArg<K,T>[] src)
+        public CmdArgs(CmdArg<K,T>[] src)
             => Data = src;
 
         public ReadOnlySpan<CmdArg<K,T>> View
@@ -43,11 +43,11 @@ namespace Z0
             => Format();
 
         [MethodImpl(Inline)]
-        public static implicit operator CmdArgIndex<K,T>(CmdArg<K,T>[] src)
-            => new CmdArgIndex<K,T>(src);
+        public static implicit operator CmdArgs<K,T>(CmdArg<K,T>[] src)
+            => new CmdArgs<K,T>(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator CmdArgs(CmdArgIndex<K,T> src)
+        public static implicit operator CmdArgs(CmdArgs<K,T> src)
             => new CmdArgs(src.Storage.Select(x => (CmdArg)x));
     }
 }

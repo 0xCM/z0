@@ -9,19 +9,40 @@ namespace Z0
 
     using static Part;
 
+    /// <summary>
+    /// Represents an argument, typically but not necessarily, on the command-line
+    /// </summary>
     public struct CmdArg : ICmdArg
     {
-        public string Prefix {get;}
+        /// <summary>
+        /// The argument's relative position
+        /// </summary>
+        public ushort Position {get;}
 
-        public string Name {get;}
-
+        /// <summary>
+        /// The (required) argument value
+        /// </summary>
         public string Value {get;}
 
+        /// <summary>
+        /// The argument prefix, if any; typically either '-', '--', or '/'
+        /// </summary>
+        public string Prefix {get;}
+
+        /// <summary>
+        /// The argument name, if any
+        /// </summary>
+        public CmdName Name {get;}
+
+        /// <summary>
+        /// The delimiter between an argument name/value pair, typically ' ' or ':'
+        /// </summary>
         public string Qualifier {get;}
 
         [MethodImpl(Inline)]
-        public CmdArg(string prefix, string name, string value)
+        public CmdArg(ushort pos, string prefix, string name, string value)
         {
+            Position = pos;
             Name = name;
             Value = value;
             Prefix = prefix;
@@ -29,17 +50,19 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public CmdArg(string prefix, string name, string specifier, string value)
+        public CmdArg(ushort pos, string prefix, string name, string qualifier, string value)
         {
+            Position = pos;
             Name = name;
             Value = value;
             Prefix = prefix;
-            Qualifier = specifier;
+            Qualifier = qualifier;
         }
 
         [MethodImpl(Inline)]
         public CmdArg(string name, string value)
         {
+            Position = 0;
             Name = name;
             Value = value;
             Prefix = EmptyString;
@@ -47,8 +70,20 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public CmdArg(string value)
+        public CmdArg(ushort pos, string name, string value)
         {
+            Position = pos;
+            Name = name;
+            Value = value;
+            Prefix = EmptyString;
+            Qualifier = EmptyString;
+        }
+
+
+        [MethodImpl(Inline)]
+        public CmdArg(ushort pos, string value)
+        {
+            Position = pos;
             Name = EmptyString;
             Value = value;
             Prefix = EmptyString;
@@ -58,18 +93,18 @@ namespace Z0
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => text.empty(Name) && Value is null;
+            get => text.empty(Value);
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => text.nonempty(Name) || !(Value is null);
+            get => !text.empty(Value);
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.nonempty(Name) ? string.Format(RP.Setting, Name, Value) : Value?.ToString() ?? EmptyString;
+            => Cmd.format(this);
 
         public override string ToString()
             => Format();

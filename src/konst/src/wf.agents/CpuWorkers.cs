@@ -12,7 +12,7 @@ namespace Z0
 
     using static Konst;
 
-    [ApiHost("cpu.workers")]
+    [ApiHost]
     public readonly struct CpuWorkers
     {
         public const ulong DefaultCycleCount = ulong.MaxValue;
@@ -69,6 +69,18 @@ namespace Z0
         {
             const string Pattern = "{0}/{1}";
             return string.Format(Pattern,  core, worker);
+        }
+
+        public static CpuWorker<S,T> create<S,T>(CpuWorkerSettings spec, Func<S,T> projector, ITableExchange<S,T> exchange)
+            where S : struct
+            where T : struct
+        {
+            var worker = new CpuWorker<S,T>();
+            worker.Spec = spec;
+            worker.Exchange = exchange;
+            worker.Projector = projector;
+            worker.Continue = true;
+            return worker;
         }
 
         [Op]

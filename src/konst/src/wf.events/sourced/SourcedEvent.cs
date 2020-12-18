@@ -6,8 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-        
-    using static Konst;
+
+    using static Part;
 
     /// <summary>
     /// Identifies an application-level/logical event

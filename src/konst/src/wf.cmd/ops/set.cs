@@ -7,12 +7,17 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
+    using static CmdVarTypes;
 
-    partial struct CmdScripts
+    partial struct Cmd
     {
         [MethodImpl(Inline), Op]
-        public static CmdScript script(string id, CmdScriptExpr[] expr)
-            => new CmdScript(id, expr);
+        public static CmdScriptVar set(CmdScriptVar src, string value)
+            => Cmd.var(src.Symbol, value);
+
+        [MethodImpl(Inline), Op]
+        public static DirVar set(DirVar src, FS.FolderPath value)
+            => new DirVar(src.Symbol, value);
     }
 }

@@ -50,7 +50,7 @@ namespace Z0.Tools
 
         public ToolId Id {get;}
 
-        public CmdArgIndex<Flag,object> Args {get;}
+        public CmdArgs<Flag,object> Args {get;}
 
         [MethodImpl(Inline)]
         internal DumpBin(IWfShell wf, ToolId id)

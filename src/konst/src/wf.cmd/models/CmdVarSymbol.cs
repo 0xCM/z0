@@ -7,9 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static z;
-    using static Konst;
-    using static CmdScripts;
+    using static Part;
 
     public readonly struct CmdVarSymbol : ICmdVarSymbol
     {
@@ -40,6 +38,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static CmdVarSymbol operator + (CmdVarSymbol a, CmdVarSymbol b)
-            => CmdVars.combine(a,b);
+            => Cmd.combine(a,b);
     }
 }

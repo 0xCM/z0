@@ -8,6 +8,14 @@ namespace Z0.Parts
 {
     public sealed class Dynamic : Part<Dynamic>
     {
-        
+
+    }
+}
+
+namespace Z0
+{
+    public static partial class XTend
+    {
+
     }
 }

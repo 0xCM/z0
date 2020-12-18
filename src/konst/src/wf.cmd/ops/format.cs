@@ -14,6 +14,41 @@ namespace Z0
     partial struct Cmd
     {
         [Op]
+        public static string format(CmdScriptVar src)
+            => string.Format("{0}={1}",src.Symbol, src.Value);
+
+        [Op]
+        public static string format(in CmdScript src)
+        {
+            var dst = Buffers.text();
+            render(src, dst);
+            return dst.Emit();
+        }
+
+        [Op]
+        public static string format(in CmdScriptExpr src)
+            => format(src.Pattern, src.Variables.Storage);
+
+        [Op]
+        public static string format<K>(in CmdScriptExpr<K> src)
+            where K : unmanaged
+            => format(src.Pattern, src.Variables.Storage);
+
+        [Op]
+        public static CmdScriptExpr format(in CmdPattern pattern, params CmdVar[] args)
+            => string.Format(pattern.Content, args.Select(a => a.Format()));
+
+        [Op, Closures(Closure)]
+        public static CmdScriptExpr format<K>(in CmdPattern<K> pattern, params CmdVar[] args)
+            where K : unmanaged
+                => string.Format(pattern.Content, args.Select(a => a.Format()));
+
+        [Op, Closures(Closure)]
+        public static CmdScriptExpr format<K>(in CmdPattern pattern, params CmdVar<K>[] args)
+            where K : unmanaged
+                => string.Format(pattern.Content, args.Select(a => a.Format()));
+
+        [Op]
         public static string format(in CmdFlagSpec src)
             => src.Name.IsEmpty ? src.Index.ToString() : string.Format("{0}:{1}", src.Name, src.Index);
 
@@ -43,7 +78,7 @@ namespace Z0
             return dst.ToString();
         }
 
-        public static string format<K,T>(in CmdArgIndex<K,T> src)
+        public static string format<K,T>(in CmdArgs<K,T> src)
             where K : unmanaged
         {
             var dst = text.build();
@@ -71,6 +106,12 @@ namespace Z0
             return dst.Emit();
 
         }
+
+        [MethodImpl(Inline)]
+        public static string Format(in CmdArg src)
+            => text.nonempty(src.Name)
+             ? string.Format(RP.Setting, src.Name, src.Value)
+             : src.Value?.ToString() ?? EmptyString;
 
 
         [MethodImpl(Inline), Formatter]
@@ -134,6 +175,15 @@ namespace Z0
             return buffer.Emit();
         }
 
+
+        [Op]
+        public static void render(CmdScript src, ITextBuffer dst)
+        {
+            var count = src.Length;
+            var parts = src.Content.View;
+            for(var i=0; i<count; i++)
+                dst.AppendLine(skip(parts,i).Format());
+        }
 
         [Op]
         public static void render(DirVars src, ITextBuffer dst)

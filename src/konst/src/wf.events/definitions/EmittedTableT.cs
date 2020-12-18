@@ -7,7 +7,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System;
 
-    using static Konst;
+    using static Part;
 
     [Event(EventName)]
     public readonly struct EmittedTableEvent<T> : IWfEvent<EmittedTableEvent<T>>

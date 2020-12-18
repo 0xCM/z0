@@ -24,13 +24,13 @@ namespace Z0
 
         readonly uint Core;
 
-        public readonly TimeSpan Frequency;
+        public TimeSpan Frequency {get;}
 
-        public readonly ulong CycleLength;
+        public ulong CycleLength {get;}
 
-        public readonly ulong MaxCycles;
+        public ulong MaxCycles {get;}
 
-        public readonly uint WorkerId;
+        public uint WorkerId {get;}
 
         readonly Func<T,T> WorkerFunc;
 

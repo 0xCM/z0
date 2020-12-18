@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static CmdScripts;
 
     /// <summary>
     /// Defines a script variable
@@ -41,7 +40,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => format(this);
+            => Cmd.format(this);
 
         public override string ToString()
             => Format();

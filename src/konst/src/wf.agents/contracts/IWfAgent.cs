@@ -50,9 +50,4 @@ namespace Z0
             => (PartId, HostId);
     }
 
-    public interface IAgent<A> : IWfAgent
-        where A : IAgent<A>
-    {
-
-    }
 }

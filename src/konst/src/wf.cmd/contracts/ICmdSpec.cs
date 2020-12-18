@@ -7,7 +7,7 @@ namespace Z0
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface ICmdSpec : ITextual
+    public interface ICmdSpec : IDataType
     {
         ToolId ToolId
             => new ToolId("ztool");
@@ -24,7 +24,7 @@ namespace Z0
     }
 
     [Free]
-    public interface ICmdSpec<T> : IEntity<T>, ICmdSpec
+    public interface ICmdSpec<T> : IEntity<T>, ICmdSpec, IDataType<T>
         where T : struct, ICmdSpec<T>
     {
         CmdId ICmdSpec.CmdId
@@ -32,6 +32,9 @@ namespace Z0
 
         CmdArgs ICmdSpec.Args
             => Cmd.args((T)this);
+
+        string ITextual.Format()
+            => Cmd.format(this);
     }
 
     [Free]

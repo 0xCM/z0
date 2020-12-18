@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     public readonly struct CmdName : ICmdName<CmdName>
     {
@@ -67,6 +67,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator string(CmdName src)
             => src.Content;
+
+        [MethodImpl(Inline)]
+        public static implicit operator CmdName(string src)
+            => new CmdName(src);
 
         public static CmdName Empty => default;
     }

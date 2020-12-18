@@ -10,16 +10,13 @@ namespace Z0
 
     public class WfAgentControl : AgentControl<IWfAgentControl,IAgentContext>, IWfAgentControl
     {
-        public static IWfAgentControl FromContext(IWfContext context)
-            => new WfAgentControl(context);
+        IAgentContext AgentContext;
 
         public WfAgentControl(IWfContext Context)
             : base(Context)
         {
 
         }
-
-        IAgentContext AgentContext;
 
         void UpdateAgentContext(IAgentContext context)
         {
@@ -28,9 +25,7 @@ namespace Z0
         }
 
         protected override async Task Configure(IAgentContext context)
-        {
-            await Task.Factory.StartNew(() => UpdateAgentContext(context));
-        }
+            => await Task.Factory.StartNew(() => UpdateAgentContext(context));
 
         Task IWfAgentControl.Configure(IAgentContext context)
             => Configure(context);

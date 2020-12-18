@@ -7,13 +7,12 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     [Event(EventName)]
     public readonly struct CmdSucceeded<T> : IWfEvent<CmdSucceeded<T>>
     {
-        public const string EventName = nameof(GlobalEvents.CmdExec);
+        public const string EventName = GlobalEvents.CmdExec;
 
         public WfEventId EventId {get;}
 

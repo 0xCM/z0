@@ -8,7 +8,7 @@ namespace Z0
     using System.IO;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     [Event(EventName)]
     public readonly struct RunningCmdEvent : IWfEvent<RunningCmdEvent>
