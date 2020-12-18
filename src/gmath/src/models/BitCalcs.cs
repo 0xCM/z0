@@ -45,9 +45,9 @@ namespace Z0
         /// <param name="cols">The number of columns in the grid</param>
         /// <typeparam name="T">The storage cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static ulong tablecells<T>(uint rows, uint cols)
+        public static ulong cellcount<T>(uint rows, uint cols)
             where T : unmanaged
-                => GridCalcs.count(rows,  cols, bitwidth<T>());
+                => GridCalcs.cellcount(rows, cols, bitwidth<T>());
 
         /// <summary>
         /// Calculates the number of 256-bit blocks reqired to cover a grid with a specified number of rows/cols
@@ -59,7 +59,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ulong tableblocks<T>(N256 w, uint rows, uint cols)
             where T : unmanaged
-                => SpanBlocks.cellcover<T>(w, tablecells<T>(rows,cols));
+                => SpanBlocks.cellcover<T>(w, cellcount<T>(rows,cols));
 
         /// <summary>
         /// Computes the number of bits covered by a rectangular region and predicated on natural dimensions
@@ -86,7 +86,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => GridCalcs.count((uint)nat64u(m), (uint)nat64u(n), bitwidth<T>());
+                => GridCalcs.cellcount((uint)nat64u(m), (uint)nat64u(n), bitwidth<T>());
 
         /// <summary>
         /// Calculates the number of 256-bit blocks reqired to cover a grid with natural dimensions
@@ -103,6 +103,6 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => SpanBlocks.cellcover<T>(w, tablecells<T>((uint)nat64u(m), (uint)nat64u(n)));
+                => SpanBlocks.cellcover<T>(w, cellcount<T>((uint)nat64u(m), (uint)nat64u(n)));
     }
 }

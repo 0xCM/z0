@@ -273,8 +273,6 @@ public readonly struct ApiNames
 
     public const string WfShell = workflow + dot + shell;
 
-    public const string WfShellInit = workflow + dot + shell + dot + init;
-
     public const string WfEvents = workflow + dot + events;
 
     public const string WfControl = workflow + dot + control;
@@ -345,6 +343,8 @@ public readonly struct ApiNames
     public const string GridCalcs = grid + dot + "calcs";
 
     public const string GridMetrics = grid + dot + metrics;
+
+    public const string Grids = grids;
 
     public const string XKinds = kinds + dot + extensions;
 

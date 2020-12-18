@@ -32,7 +32,7 @@ namespace Z0
             const ushort rows = 32;
             const ushort cols = 8;
             const ushort cellwidth = 8;
-            var map = BitGrid.metrics(rows, cols, cellwidth);
+            var map = GridCalcs.metrics(rows, cols, cellwidth);
             Claim.eq(8*32, map.StoreWidth);
 
             var current = 0;
@@ -53,7 +53,7 @@ namespace Z0
             var points = rows*cols;
             var bytes = points/8 + (points % 8 != 0 ? 1 : 0);
             var bits = bytes/8;
-            var map = BitGrid.metrics(rows,cols,segwidth);
+            var map = GridCalcs.metrics(rows,cols,segwidth);
             Claim.eq(bytes, map.CellCount);
             Claim.eq(points, map.CellCount);
 

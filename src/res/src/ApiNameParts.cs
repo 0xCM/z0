@@ -427,4 +427,6 @@ public readonly struct ApiNameParts
     public const string semantic = nameof(semantic);
 
     public const string archive = nameof(archive);
+
+    public const string grids = nameof(grids);
 }

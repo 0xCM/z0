@@ -9,44 +9,40 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct RenderPattern : IRenderPattern
+    /// <summary>
+    /// Defines a pattern to service as a projection domain for render patterns
+    /// </summary>
+    /// <remarks>
+    /// The template may include any character sequence that may be tokenzied by fence-matching on '{' and '}' with corresponding escape-matching when needed
+    /// </remarns>
+    [Datatype]
+    public readonly struct RenderTemplate : IRenderTemplate
     {
-        public string PatternText {get;}
-
-        readonly Type[] _ArgTypes;
+        public string Content {get;}
 
         [MethodImpl(Inline)]
-        public RenderPattern(string src, Type[] types)
-        {
-            PatternText = src;
-            _ArgTypes = types;
-        }
+        public RenderTemplate(string src)
+            => Content = src;
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => text.empty(PatternText);
+            get => text.empty(Content);
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => text.nonempty(PatternText);
+            get => text.nonempty(Content);
         }
 
-        public byte ArgCount => (byte)(_ArgTypes?.Length ?? 0);
-
-        public ReadOnlySpan<Type> ArgTypes
-            => _ArgTypes;
-
-        public string Apply(params object[] args)
-            => string.Format(PatternText, args);
-
-        public string Format()
-            => PatternText;
-
         public override string ToString()
-            => Format();
+            => Content;
 
+        public static implicit operator RenderTemplate(string src)
+            => new RenderTemplate(src);
+
+        public static implicit operator string(RenderTemplate src)
+            => src.Content;
     }
 }

@@ -2,17 +2,14 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+using System;
+
+public class FacetProviderAttribute : Attribute
 {
-    using System;
+    public Type TargetType {get;}
 
-    public class FacetProviderAttribute : Attribute
+    public FacetProviderAttribute(Type target)
     {
-        public Type TargetType {get;}
-
-        public FacetProviderAttribute(Type target)
-        {
-            TargetType = target;
-        }
+        TargetType = target;
     }
 }

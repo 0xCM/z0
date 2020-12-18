@@ -17,29 +17,25 @@ namespace Z0
 
     [Free]
     public interface IDataType<T> : IDataType
-        where T : struct
     {
         T Content => (T)this;
-
 
         BitSize ISized.StorageWidth
             => Unsafe.SizeOf<T>()*8;
 
         string ITextual.Format()
-            => Content.ToString();
+            => Content?.ToString() ?? string.Empty;
     }
 
 
     [Free]
     public interface IDataTypeEquatable<T> : IDataType<T>, IEquatable<T>
-        where T : struct
     {
 
     }
 
     [Free]
     public interface IDataTypeComparable<T> : IDataTypeEquatable<T>, IComparable<T>
-        where T : struct
     {
         bool IEquatable<T>.Equals(T src)
             => CompareTo(src) == 0;
@@ -51,7 +47,7 @@ namespace Z0
     /// <typeparam name="T">The datatype type</typeparam>
     [Free]
     public interface IDataTypeIndex<T> : IIndex<T>
-        where T : struct, IDataType<T>
+        where T : IDataType<T>
     {
 
     }
@@ -59,7 +55,6 @@ namespace Z0
     [Free]
     public interface IDataType<W,T> : IDataType<T>
         where W : unmanaged, ITypeWidth<W>
-        where T : struct
     {
         bool IDataType.IsFixedWidth
             => true;

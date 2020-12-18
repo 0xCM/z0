@@ -2,29 +2,25 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+
+/// <summary>
+/// Applied to an exposed surface to classify its role/purpose
+/// </summary>
+public class ApiProviderAttribute : ApiPartAttribute
 {
-    using System;
+    public ApiProviderKind Kind {get;}
 
-    /// <summary>
-    /// Applied to an exposed surface to classify its role/purpose
-    /// </summary>
-    public class ApiProviderAttribute : ApiPartAttribute
+    public bool Global {get;}
+
+    public ApiProviderAttribute(ApiProviderKind kind)
     {
-        public ApiProviderKind Kind {get;}
+        Kind = kind;
+        Global = false;
+    }
 
-        public bool Global {get;}
-
-        public ApiProviderAttribute(ApiProviderKind kind)
-        {
-            Kind = kind;
-            Global = false;
-        }
-
-        public ApiProviderAttribute(ApiProviderKind kind, bool global)
-        {
-            Kind = kind;
-            Global = global;
-        }
+    public ApiProviderAttribute(ApiProviderKind kind, bool global)
+    {
+        Kind = kind;
+        Global = global;
     }
 }

@@ -7,14 +7,13 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using A = AsciCharText;
+    using A = data.tchars;
     using C = AsciChar;
     using NI = NumericIndicator;
     using NK = NumericKinds;
 
 
     using static Konst;
-    using static z;
 
     [LiteralProvider]
     public readonly struct NumericIndicators

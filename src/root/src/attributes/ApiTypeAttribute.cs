@@ -2,34 +2,31 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+using System;
+
+/// <summary>
+/// Marks a type as an api data type
+/// </summary>
+[AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct)]
+public class ApiTypeAttribute : ApiProviderAttribute
 {
-    using System;
+    public string Name {get;}
 
-    /// <summary>
-    /// Marks a type as an api data type
-    /// </summary>
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct)]
-    public class ApiTypeAttribute : ApiProviderAttribute
+    public ApiTypeAttribute()
+        : base(ApiProviderKind.DataType)
     {
-        public string Name {get;}
+        Name = string.Empty;
+    }
 
-        public ApiTypeAttribute()
-            : base(ApiProviderKind.DataType)
-        {
-            Name = string.Empty;
-        }
+    public ApiTypeAttribute(string name)
+        : base(ApiProviderKind.DataType)
+    {
+        Name = name;
+    }
 
-        public ApiTypeAttribute(string name)
-            : base(ApiProviderKind.DataType)
-        {
-            Name = name;
-        }
-
-        public ApiTypeAttribute(string name, bool global)
-            : base(ApiProviderKind.DataType, global)
-        {
-            Name = name;
-        }
+    public ApiTypeAttribute(string name, bool global)
+        : base(ApiProviderKind.DataType, global)
+    {
+        Name = name;
     }
 }

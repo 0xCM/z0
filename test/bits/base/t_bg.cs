@@ -24,7 +24,7 @@ namespace Z0
             var gz = BitGrid.alloc(m,n,t);
 
             base.Claim.eq((uint)gz.BlockCount, (BitVector64)BitCalcs.tableblocks<T>(n256, m, n));
-            base.Claim.eq((uint)gz.CellCount, (BitVector64)BitCalcs.tablecells<T>(m, n));
+            base.Claim.eq((uint)gz.CellCount, (BitVector64)BitCalcs.cellcount<T>(m, n));
 
             BitGrid.and(gx,gy,gz);
 
@@ -41,7 +41,7 @@ namespace Z0
             var gz = BitGrid.alloc(m,n,t);
 
             base.Claim.eq((uint)gz.BlockCount, (BitVector64)BitCalcs.tableblocks<T>(n256, m, n));
-            base.Claim.eq((uint)gz.CellCount, (BitVector64)BitCalcs.tablecells<T>(m, n));
+            base.Claim.eq((uint)gz.CellCount, (BitVector64)BitCalcs.cellcount<T>(m, n));
 
             BitGrid.xor(gx,gy,gz);
 

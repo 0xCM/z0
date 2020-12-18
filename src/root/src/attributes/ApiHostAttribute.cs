@@ -2,34 +2,31 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+using System;
+
+/// <summary>
+/// Identifies an api host
+/// </summary>
+[AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct)]
+public class ApiHostAttribute : ApiProviderAttribute
 {
-    using System;
+    public string HostName {get;}
 
-    /// <summary>
-    /// Identifies an api host
-    /// </summary>
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct)]
-    public class ApiHostAttribute : ApiProviderAttribute
+    public ApiHostAttribute(string name)
+        : base(ApiProviderKind.Stateless)
     {
-        public string HostName {get;}
+        HostName = name;
+    }
 
-        public ApiHostAttribute(string name)
-            : base(ApiProviderKind.Stateless)
-        {
-            HostName = name;
-        }
+    public ApiHostAttribute(string name, bool global)
+        : base(ApiProviderKind.Stateless, global)
+    {
+        HostName = name;
+    }
 
-        public ApiHostAttribute(string name, bool global)
-            : base(ApiProviderKind.Stateless, global)
-        {
-            HostName = name;
-        }
+    public ApiHostAttribute()
+        : this(string.Empty)
+    {
 
-        public ApiHostAttribute()
-            : this(string.Empty)
-        {
-
-        }
     }
 }

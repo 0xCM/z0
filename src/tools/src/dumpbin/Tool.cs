@@ -40,7 +40,7 @@ namespace Z0.Tools
         public static DumpBin create(IWfShell wf)
             => new DumpBin(wf, typeof(DumpBin));
 
-        public const string FlagPrefix = AsciCharText.FS;
+        public const string FlagPrefix = data.tchars.FS;
 
         const byte MaxVarCount = 12;
 

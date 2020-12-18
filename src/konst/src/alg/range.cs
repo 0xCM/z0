@@ -6,6 +6,7 @@ namespace alg
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
 
     using Z0;
 
@@ -112,6 +113,52 @@ namespace alg
             var _step = @as<T,ulong>(step);
             for(var i=min; i<=max; i+=_step)
                 seek(dst, i) = @as<ulong,T>(i);
+        }
+
+        [Op, Closures(Integers)]
+        public static IEnumerable<T> stream<T>(T x0, T x1, T step)
+            where T : unmanaged
+        {
+            var min = @as<T,ulong>(x0);
+            var max = @as<T,ulong>(x1);
+            var inc = @as<T,ulong>(step);
+            var count = (max - min)/inc;
+            var buffer = sys.alloc<T>(count);
+            stream_1(x0,x1,step,buffer);
+            foreach(var point in buffer)
+                yield return point;
+        }
+
+        [MethodImpl(Inline)]
+        static void stream_1<T>(T x0, T x1, T step, Span<T> dst)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(sbyte))
+                i8(x0,x1,step,dst);
+            else if(typeof(T) == typeof(byte))
+                u8(x0,x1,step,dst);
+            else if(typeof(T) == typeof(short))
+                i16(x0,x1,step,dst);
+            else if(typeof(T) == typeof(ushort))
+                u16(x0,x1,step,dst);
+            else
+                stream_2(x0,x1,step,dst);
+        }
+
+        [MethodImpl(Inline)]
+        static void stream_2<T>(T x0, T x1, T step, Span<T> dst)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(int))
+                i32(x0,x1,step,dst);
+            else if(typeof(T) == typeof(uint))
+                u32(x0,x1,step,dst);
+            else if(typeof(T) == typeof(long))
+                i64(x0,x1,step,dst);
+            else if(typeof(T) == typeof(ulong))
+                u64(x0,x1,step,dst);
+            else
+                throw no<T>();
         }
     }
 }
