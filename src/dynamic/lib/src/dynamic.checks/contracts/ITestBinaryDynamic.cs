@@ -12,7 +12,7 @@ namespace Z0
     using K = BinaryOpClass;
     using Test = TestBinaryDynamic;
 
-    public interface ITestBinaryDynamic : TTestOperatorMatch, TCheckDynamic
+    public interface ITestBinaryDynamic : ITestOperatorMatch, ICheckDynamic
     {
         [MethodImpl(Inline)]
         TestCaseRecord Match(K k, TypeWidth w, ApiCodeBlock a, ApiCodeBlock b, BufferTokens dst)

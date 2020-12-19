@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Defines the outcome of an operation/process
@@ -18,6 +18,8 @@ namespace Z0
 
         public string Message {get;}
 
+        public ulong MessageCode {get;}
+
         public bool Fail => !Ok;
 
         [MethodImpl(Inline)]
@@ -25,6 +27,7 @@ namespace Z0
         {
             Ok = success;
             Message = success ? "Good" : "Bad";
+            MessageCode = memory.u8(Ok);
         }
 
         [MethodImpl(Inline)]
@@ -32,6 +35,7 @@ namespace Z0
         {
             Ok = success;
             Message = message.Format();
+            MessageCode = memory.u8(Ok);
         }
 
         [MethodImpl(Inline)]
@@ -39,6 +43,7 @@ namespace Z0
         {
             Ok = success;
             Message = message;
+            MessageCode = memory.u8(Ok);
         }
 
         [MethodImpl(Inline)]
@@ -46,6 +51,7 @@ namespace Z0
         {
             Ok = !(message.Kind == LogLevel.Error);
             Message = message.Format();
+            MessageCode = memory.u8(Ok);
         }
 
         [MethodImpl(Inline)]
@@ -53,6 +59,7 @@ namespace Z0
         {
             Ok = !(data.Kind == LogLevel.Error);
             Message = AppMsg.define(data).Format();
+            MessageCode = memory.u8(Ok);
         }
 
         [MethodImpl(Inline)]
@@ -60,8 +67,28 @@ namespace Z0
         {
             Ok = false;
             Message = AppMsg.error(e).Format();
+            MessageCode = memory.u8(Ok);
         }
 
+        [MethodImpl(Inline)]
+        Outcome(ulong code)
+        {
+            Ok = false;
+            Message = EmptyString;
+            MessageCode = code;
+        }
+
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => MessageCode == ulong.MaxValue;
+        }
+
+        public static Outcome Empty
+        {
+            [MethodImpl(Inline)]
+            get => new Outcome(ulong.MaxValue);
+        }
 
         [MethodImpl(Inline)]
         public string Format()

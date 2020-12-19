@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface TTestOperatorMatch : TTestFixedMatch, ITestNumericMatch
+    public interface ITester : IClocked, ICheckSettings, ITestCaseIdentity, ICheckError
     {
 
     }

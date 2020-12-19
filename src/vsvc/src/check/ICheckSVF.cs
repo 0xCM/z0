@@ -8,13 +8,12 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
     using static SFx;
     using static z;
 
     using K = Kinds;
 
-    public interface ICheckSVF : ITestService, ICheckVectors, ITestRandom, TCheckAction
+    public interface ICheckSVF : ITestService, ICheckVectors, ITestRandom, ICheckAction
     {
         ICheckSVF<T> Typed<T>()
             where T : unmanaged

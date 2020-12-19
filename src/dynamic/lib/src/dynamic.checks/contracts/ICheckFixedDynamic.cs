@@ -7,11 +7,10 @@ namespace Z0
     using System;
     using System.Linq;
 
-    using static Konst;
     using static z;
     using static BufferSeqId;
 
-    public interface ICheckFixedDynamic : ITestRandom, ICheckNull, TCheckDynamic, IBufferedChecker
+    public interface ICheckFixedDynamic : ITestRandom, ICheckNull, ICheckDynamic, IBufferedChecker
     {
         void CheckFixedMatch<F>(UnaryOpClass k, ApiCodeBlock a, ApiCodeBlock b)
             where F : unmanaged, IDataCell

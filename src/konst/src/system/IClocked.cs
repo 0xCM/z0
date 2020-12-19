@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    public interface TClocked
+    public interface IClocked
     {
         /// <summary>
         /// Allocates and optionally starts a system counter

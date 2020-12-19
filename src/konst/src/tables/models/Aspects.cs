@@ -9,7 +9,7 @@ namespace Z0
     using System.Collections.Concurrent;
     using System.Reflection;
 
-    using static Konst;
+    using static Part;
 
     public readonly struct Aspects
     {
@@ -36,7 +36,7 @@ namespace Z0
 
             if(!hostType.Reifies(contractType))
             {
-                var msg = Msg.ContractMismatch.Format(hostType, contractType);
+                var msg = PartMsg.ContractMismatch.Format(hostType, contractType);
                 return new Aspects(new AspectRow("Error", hostType, src, msg));
             }
 

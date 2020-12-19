@@ -8,7 +8,7 @@ namespace Z0.Adapters
     using System.Runtime.CompilerServices;
     using System.Linq;
 
-    using static Konst;
+    using static Part;
 
     using S = System.Diagnostics.ProcessModule;
     using D = System.Diagnostics;

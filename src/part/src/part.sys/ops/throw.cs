@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     partial struct sys
-    {        
+    {
         [MethodImpl(Options), Op]
         public static void @throw(string msg)
             => proxy.@throw(msg);
@@ -26,7 +26,7 @@ namespace Z0
             => proxy.@throw<T>(e);
 
         [MethodImpl(Options), Op]
-        public static void @throw(object msg)
-            => proxy.@throw(msg);
+        public static T @throw<T>(object msg)
+            => proxy.@throw<T>(msg);
     }
 }

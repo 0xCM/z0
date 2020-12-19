@@ -20,13 +20,13 @@ namespace Z0
             /// <param name="left">The left boundary</param>
             /// <param name="right">The right boundary</param>
             [Op]
-            public static string unfence(string src, char left, char right)
+            public static Outcome<string> unfence(string src, char left, char right)
             {
                 if(text.blank(src))
-                    return EmptyString;
+                    return false;
 
                 if(!Test.fenced(src,left,right))
-                    return src;
+                    return false;
 
                 var data = src.Trim();
                 var length = data.Length;

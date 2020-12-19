@@ -10,7 +10,7 @@ namespace Z0.Adapters
     using System.ComponentModel;
     using System.IO;
 
-    using static Konst;
+    using static Part;
 
     using S = System.Diagnostics.Process;
     using D = System.Diagnostics;

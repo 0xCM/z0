@@ -4,8 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public readonly struct CheckDynamic : ICheckDynamic
+    public interface ITestOperatorMatch : ITestBinaryCellOp, ITestUnaryCellOp, ITestNumericMatch
     {
-        public static ICheckDynamic Checker => default(CheckDynamic);
+
     }
 }

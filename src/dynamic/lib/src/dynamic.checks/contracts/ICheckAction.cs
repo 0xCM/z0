@@ -6,9 +6,7 @@ namespace Z0
 {
     using System;
 
-    using static Konst;
-
-    public interface TCheckAction : TTestChecker
+    public interface ICheckAction : ITester, TTestResultSink
     {
         /// <summary>
         /// Manages the execution of an action that performs a validation exercise

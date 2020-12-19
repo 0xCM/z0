@@ -8,7 +8,7 @@ namespace Z0
 
     using static BufferSeqId;
 
-    public interface ITestNumericDynamic : ITestRandom, TTestOperatorMatch, TCheckNumeric, TCheckDynamic
+    public interface ITestNumericDynamic : ITestRandom, ITestOperatorMatch, TCheckNumeric, ICheckDynamic
     {
         TestCaseRecord MatchNumeric<T>(in NativeBuffers buffers, UnaryOp<T> f, ApiCodeBlock src)
             where T : unmanaged

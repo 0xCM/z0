@@ -6,9 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Linq;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     using BP = BytePatternParser<EncodingPatternKind>;
@@ -80,7 +79,7 @@ namespace Z0
                     return new ApiMemberCode(src.Member, new ApiCodeBlock(code.Base, src.OpUri, code), seq, term);
                 }
                 else
-                    return z.fail<ApiMemberCode>(term.ToString());
+                    return Outcomes.fail<ApiMemberCode>(term.ToString());
             }
             catch(Exception e)
             {

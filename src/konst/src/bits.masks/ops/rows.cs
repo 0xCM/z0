@@ -10,6 +10,7 @@ namespace Z0
 
     using static Konst;
     using static z;
+    using static TextRules;
 
     using NBI = NumericBaseIndicator;
 
@@ -38,9 +39,10 @@ namespace Z0
         {
             if(src.MultiLiteral)
             {
-                var content = text.unbracket(src.Text);
-                if(!text.blank(content))
+                var result = Parse.unbracket(src.Text);
+                if(result)
                 {
+                    var content = result.Data;
                     var components = content.SplitClean(FieldDelimiter);
                     var count = components.Length;
                     var dst = alloc<BitMaskInfo>(count);

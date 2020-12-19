@@ -22,9 +22,29 @@ namespace Z0
         public string ProcessName;
 
         /// <summary>
+        /// The path of the process image
+        /// </summary>
+        public FS.FilePath ImagePath;
+
+        /// <summary>
+        /// The process image version
+        /// </summary>
+        public VersionId ImageVersion;
+
+        /// <summary>
         /// The base address of the process
         /// </summary>
-        public MemoryAddress Base;
+        public MemoryAddress BaseAddress;
+
+        /// <summary>
+        /// The address of the entry point
+        /// </summary>
+        public MemoryAddress EntryAddress;
+
+        /// <summary>
+        /// The number of bytes occupied by the main process module
+        /// </summary>
+        public ByteSize MemorySize;
 
         /// <summary>
         /// Captures the min/max working set size

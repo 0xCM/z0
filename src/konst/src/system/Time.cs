@@ -10,7 +10,7 @@ namespace Z0
     using System.Diagnostics;
     using System.Collections.Generic;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     [ApiHost]

@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     public readonly struct Timestamp : ITextual, IComparable<Timestamp>, IEquatable<Timestamp>
     {
@@ -42,7 +41,7 @@ namespace Z0
         public uint Hashed
         {
             [MethodImpl(Inline)]
-            get => hash(Ticks);
+            get => alg.hash.calc(Ticks);
         }
 
         public override int GetHashCode()

@@ -8,7 +8,7 @@ namespace Z0
 
     using static z;
 
-    public interface ITestAction : TTester
+    public interface ITestAction : ITester
     {
         /// <summary>
         /// Captures the outcome of an action invocation, identified by a supplied label

@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Diagnostics;
     using System.Runtime.CompilerServices;
-    
-    using static Konst;
+
+    using static Part;
 
     /// <summary>
     /// Captures and explores the relationship between hardware ticks and measured time
@@ -17,7 +17,7 @@ namespace Z0
     {
         readonly ulong TicksPerSecond;
 
-        public static TimerTicks Default 
+        public static TimerTicks Default
         {
             [MethodImpl(Inline)]
             get => new TimerTicks((ulong)Stopwatch.Frequency);
@@ -37,16 +37,16 @@ namespace Z0
         /// <param name="ticks">The tick count</param>
         [MethodImpl(Inline)]
         public static ulong ns(long ticks)
-            => Default.NsPerTick * (ulong)ticks;        
-        
-        [MethodImpl(Inline)]        
+            => Default.NsPerTick * (ulong)ticks;
+
+        [MethodImpl(Inline)]
         internal TimerTicks(ulong frequency)
             => TicksPerSecond = frequency;
-        
+
         /// <summary>
         /// The number of nanoseconds that elapse during a timer tick
         /// </summary>
-        public ulong NsPerTick 
+        public ulong NsPerTick
         {
             [MethodImpl(Inline)]
             get => 1_000_000_000/TicksPerSecond;
@@ -55,10 +55,10 @@ namespace Z0
         /// <summary>
         /// The number of ticks per second
         /// </summary>
-        public double TicksPerMs 
+        public double TicksPerMs
         {
             [MethodImpl(Inline)]
             get => (double)TicksPerSecond/1000.0;
-        }    
+        }
     }
 }

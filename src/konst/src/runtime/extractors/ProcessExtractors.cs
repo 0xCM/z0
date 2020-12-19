@@ -14,11 +14,10 @@ namespace Z0
     using static Konst;
     using static z;
 
-    [ApiHost]
-    public readonly struct ProcessImages
+    public readonly struct ProcessExtractors
     {
         [MethodImpl(Inline), Op]
-        public static LocatedImages locate()
+        public static LocatedImages images()
             => locate(Process.GetCurrentProcess());
 
         public static ReadOnlySpan<ProcessModule> modules(Process src)
@@ -28,44 +27,11 @@ namespace Z0
         public static LocatedImages locate(Process src)
             => src.Modules.Cast<ProcessModule>().Map(locate).OrderBy(x => x.BaseAddress);
 
-        [Op]
-        public static ref EmitImageContentCmd specify(IWfShell wf, ProcessModule src, ref EmitImageContentCmd cmd)
-        {
-            var located = locate(src);
-            cmd.Source = located;
-            cmd.Target = wf.Db().Table(ImageContentRecord.TableId, located.ImagePath.FileName.WithoutExtension);
-            return ref cmd;
-        }
-
-        [Op]
-        public static void specify(IWfShell wf, Process src, out Index<EmitImageContentCmd> buffer)
-        {
-            var pmods = modules(src);
-            var count = pmods.Length;
-            buffer = sys.alloc<EmitImageContentCmd>(count);
-            var dst = buffer.Edit;
-            for(var i=0; i <count; i++)
-                specify(wf, skip(pmods,i) , ref seek(dst,i));
-        }
-
-        [MethodImpl(Inline)]
-        public static EmitImageContentCmd define(LocatedImage src, FS.FilePath dst)
-        {
-            var cmd = new EmitImageContentCmd();
-            cmd.Source = src;
-            cmd.Target = dst;
-            return cmd;
-        }
-
-        [MethodImpl(Inline)]
-        public static EmitImageContentCmd define(IWfShell wf, LocatedImage src)
-            => define(src, wf.Db().Table(ImageContentRecord.TableId, src.ImagePath.FileName.WithoutExtension));
-
         /// <summary>
         /// Creates a <see cref='LocatedImage'/> description from a specified <see cref='ProcessModule'/>
         /// </summary>
         /// <param name="src">The source module</param>
-        [MethodImpl(Inline), Op]
+        [Op]
         public static LocatedImage locate(ProcessModule src)
         {
             var path = FS.path(src.FileName);
@@ -80,7 +46,7 @@ namespace Z0
         public static MemoryAddress @base(IPart src)
         {
             var match =  Path.GetFileNameWithoutExtension(src.Owner.Location);
-            var module = SystemProcess.modules().Where(m => Path.GetFileNameWithoutExtension(m.Path.Name) == match).First();
+            var module = modules().Where(m => Path.GetFileNameWithoutExtension(m.Path.Name) == match).First();
             return module.Base;
         }
 
@@ -88,25 +54,34 @@ namespace Z0
         public static MemoryAddress @base(Assembly src)
         {
             var match =  Path.GetFileNameWithoutExtension(src.Location);
-            var module = SystemProcess.modules().Where(m => Path.GetFileNameWithoutExtension(m.Path.Name) == match).First();
+            var module = modules().Where(m => Path.GetFileNameWithoutExtension(m.Path.Name) == match).First();
             return module.Base;
         }
 
+        [MethodImpl(Inline), Op]
+        public static Process current()
+            => Process.GetCurrentProcess();
+
+        [MethodImpl(Inline), Op]
+        public static ProcessModuleRecord[] modules()
+            => ModuleExtractors.modules(current());
+
         [Op]
-        public static void summarize(LocatedImages src, FS.FilePath dst)
+        public static Index<LocatedImageRow> summarize(LocatedImages src, FS.FilePath dst)
         {
             var count = src.Count;
             var images = src.View;
             var fields = Table.columns<LocatedImageRow.Fields>();
             var header = Table.header(fields);
-            var summaries = span<LocatedImageRow>(count);
-
+            var buffer = alloc<LocatedImageRow>(count);
+            var target = span(buffer);
             var rows = text.build();
+
             rows.AppendLine(header);
             for(var i=0u; i<count; i++)
             {
                 ref readonly var image = ref skip(images, i);
-                ref var summary = ref seek(summaries,i);
+                ref var summary = ref seek(target,i);
 
                 var name = image.Name;
                 summary.ImageName = name;
@@ -144,6 +119,7 @@ namespace Z0
 
             using var writer = dst.Writer();
             writer.Write(rows.ToString());
+            return buffer;
         }
     }
 }

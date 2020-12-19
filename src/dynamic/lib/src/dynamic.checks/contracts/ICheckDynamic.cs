@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface TCheckDynamic : IValidator
+    public interface ICheckDynamic : IValidator
     {
         IDynexus Dynamic => Dynops.Dynexus;
     }

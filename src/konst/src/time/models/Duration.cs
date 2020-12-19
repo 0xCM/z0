@@ -7,12 +7,12 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Captures a duration
     /// </summary>
-    [ConversionProvider(typeof(DurationConverter)), UserType(UserTypeId.DurationId)]
+    [ConversionProvider(typeof(DurationConverter))]
     public readonly struct Duration : ITextual<Duration>, IEquatable<Duration>, IComparable<Duration>
     {
         /// <summary>

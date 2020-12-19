@@ -6,18 +6,7 @@ namespace Z0
 {
     using System;
 
-    public interface ITestRandom : TTester, IPolyrandProvider
-    {
-
-
-    }
-
-    public interface TTestChecker : TTester, TTestResultSink
-    {
-
-    }
-
-    public interface TTester : TClocked, ICheckSettings, ITestCaseIdentity, ICheckError
+    public interface ITestRandom : ITester, IPolyrandProvider
     {
 
     }

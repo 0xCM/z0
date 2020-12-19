@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Describes an operation result
@@ -22,27 +22,30 @@ namespace Z0
 
         public ulong MessageCode {get;}
 
-        public bool IsEmpty
-        {
-            [MethodImpl(Inline)]
-            get => MessageCode == 0;
-        }
-
         [MethodImpl(Inline)]
-        public Outcome(bool ok, T data, ulong code = default)
+        public Outcome(bool ok, T data = default)
         {
             Ok = ok;
             Data = data;
-            Message = default;
-            MessageCode = code;
+            Message = EmptyString;
+            MessageCode = memory.u8(Ok);
         }
 
         [MethodImpl(Inline)]
-        internal Outcome(ulong code)
+        public Outcome(bool ok, T data, string message)
+        {
+            Ok = ok;
+            Data = data;
+            Message = message ?? EmptyString;
+            MessageCode = memory.u8(Ok);
+        }
+
+        [MethodImpl(Inline)]
+        Outcome(ulong code)
         {
             Ok = false;
             Data = default;
-            Message = default;
+            Message = EmptyString;
             MessageCode = code;
         }
 
@@ -52,23 +55,32 @@ namespace Z0
             Ok = false;
             Data = data;
             Message = e.ToString();
-            MessageCode = default;
+            MessageCode = memory.u8(Ok);
         }
 
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => MessageCode == ulong.MaxValue;
+        }
+
+        /// <summary>
+        /// Extracts the enclosed data, if <see cref='Ok'/> is true
+        /// </summary>
+        /// <param name="content">Upon success, the payload</param>
         [MethodImpl(Inline)]
-        public Outcome<T> OnSuccess(Action<Outcome<T>> f)
+        public bool Payload(out T content)
         {
             if(Ok)
-                f(this);
-            return this;
-        }
-
-        [MethodImpl(Inline)]
-        public Outcome<T> OnFailure(Action<Outcome<T>> f)
-        {
-            if(!Ok)
-                f(this);
-            return this;
+            {
+                content = Data;
+                return true;
+            }
+            else
+            {
+                content = default;
+                return false;
+            }
         }
 
         [MethodImpl(Inline)]
@@ -96,8 +108,8 @@ namespace Z0
             => new Outcome<T>(src.ok, src.data);
 
         [MethodImpl(Inline)]
-        public static implicit operator Outcome<T>((bool ok, T data, ulong code) src)
-            => new Outcome<T>(src.ok, src.data, src.code);
+        public static implicit operator Outcome<T>(bool ok)
+            => new Outcome<T>(ok, default(T));
 
         [MethodImpl(Inline)]
         public static implicit operator Outcome<T>(Exception error)
@@ -110,7 +122,7 @@ namespace Z0
         public static Outcome<T> Empty
         {
             [MethodImpl(Inline)]
-            get => new Outcome<T>(0ul);
+            get => new Outcome<T>(ulong.MaxValue);
         }
     }
 }

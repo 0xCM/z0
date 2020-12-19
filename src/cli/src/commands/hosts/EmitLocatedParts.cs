@@ -44,7 +44,7 @@ namespace Z0
             Parts = Wf.Api.Parts;
             Index = default;
             TargetDir = wf.ResourceRoot + FolderName.Define("images");
-            Images = ProcessImages.locate();
+            Images = ProcessExtractors.images();
             wf.Created();
         }
 
@@ -61,7 +61,7 @@ namespace Z0
              for(var i=0u; i<count; i++)
              {
                 ref readonly var part = ref skip(Parts, i);
-                var @base = ProcessImages.@base(part);
+                var @base = ProcessExtractors.@base(part);
                 var dstpath = TargetDir + FileName.define(part.Format(), FileExtension.Define("csv"));
 
                 using var step = new EmitPartImageData(Wf, part);

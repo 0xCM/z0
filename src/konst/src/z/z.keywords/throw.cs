@@ -22,5 +22,9 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static void @throw(string msg)
             => sys.@throw(msg);
+
+        [MethodImpl(Inline), Op]
+        public static T @throw<T>(object msg)
+            => sys.@throw<T>(msg);
     }
 }

@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     /// <summary>
     /// Defines inclusive lower and upper bounds for a comparable set of values

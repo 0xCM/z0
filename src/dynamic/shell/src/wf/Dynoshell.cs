@@ -70,17 +70,6 @@ namespace Z0
             PipeChecks.check(Wf);
         }
 
-        void EmitProcessImages(IWfShell wf)
-        {
-            ProcessImages.specify(wf, Process.GetCurrentProcess(), out Index<EmitImageContentCmd> commands);
-            iter(commands, cmd => Dispatch(cmd));
-        }
-
-        public void Dispatch(ICmdSpec cmd)
-        {
-            Wf.Router.Dispatch(cmd);
-        }
-
         CmdResult EmitAsmMnemonics()
             => Wf.Router.Dispatch(CmdBuilder.EmitAsmMnemonics());
 

@@ -16,6 +16,10 @@ namespace Z0
             => throw new Exception(msg);
 
         [MethodImpl(Options), Opaque(Throw)]
+        public static T @throw<T>(object msg)
+            => throw new Exception(msg?.ToString() ?? EmptyString);
+
+        [MethodImpl(Options), Opaque(Throw)]
         public static void @throw(Exception e)
             => throw e;
 

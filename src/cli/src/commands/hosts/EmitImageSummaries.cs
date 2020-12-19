@@ -29,7 +29,7 @@ namespace Z0
         public static new WfHost create()
         {
             var host = new EmitImageSummaries();
-            host.Source = Process.GetCurrentProcess().Modules.Cast<ProcessModule>().Map(ProcessImages.locate).OrderBy(x => x.BaseAddress);
+            host.Source = Process.GetCurrentProcess().Modules.Cast<ProcessModule>().Map(ProcessExtractors.locate).OrderBy(x => x.BaseAddress);
             return host;
         }
 
@@ -62,7 +62,7 @@ namespace Z0
 
         public void Run()
         {
-            ProcessImages.summarize(Images, TargetPath);
+            ProcessExtractors.summarize(Images, TargetPath);
         }
 
         public void Dispose()

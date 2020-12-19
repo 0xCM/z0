@@ -8,14 +8,14 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Concurrent;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     public sealed class CmdRouter : WfService<CmdRouter,ICmdRouter<CmdRouter>>, ICmdRouter<CmdRouter>
     {
 
         ConcurrentDictionary<CmdId,ICmdReactor> Nodes;
-    
+
         public CmdRouter()
         {
             Nodes = new ConcurrentDictionary<CmdId,ICmdReactor>();
@@ -29,7 +29,7 @@ namespace Z0
 
         protected override void OnInit()
         {
-            
+
         }
 
         public IndexedView<CmdId> SupportedCommands
@@ -78,7 +78,7 @@ namespace Z0
 
         public CmdResult Dispatch(ICmdSpec cmd)
         {
-            using var dispatch = Wf.Running(Msg.DispatchingCommand.Format(cmd.Format()));
+            using var dispatch = Wf.Running(PartMsg.DispatchingCommand.Format(cmd.Format()));
             try
             {
                 if(Nodes.TryGetValue(cmd.CmdId, out var node))

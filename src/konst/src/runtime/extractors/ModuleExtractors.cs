@@ -12,29 +12,8 @@ namespace Z0
     using static Konst;
     using static z;
 
-    [ApiHost]
-    public readonly struct SystemProcess
+    public readonly struct ModuleExtractors
     {
-        [MethodImpl(Inline), Op]
-        public static Process current()
-            => Process.GetCurrentProcess();
-
-        [MethodImpl(Inline), Op]
-        public static ProcessModuleRecord[] modules()
-            => modules(current());
-
-        /// <summary>
-        /// Captures the current process state
-        /// </summary>
-        /// <param name="src">The source process</param>
-        [MethodImpl(Inline), Op]
-        public static ProcessState state(Process src)
-        {
-            var dst = new ProcessState();
-            map(src, ref dst);
-            return dst;
-        }
-
         [Op]
         public static ProcessModuleRecord[] modules(Process src)
         {
@@ -52,12 +31,16 @@ namespace Z0
         {
             dst.ProcessName = src.ProcessName;
             dst.ProcessId = (uint)src.Id;
-            dst.Base = src.Handle;
+            dst.BaseAddress = src.Handle;
             dst.Capacity = ((ulong)src.MinWorkingSet,(ulong)src.MaxWorkingSet);
             dst.Affinity = (ushort)src.ProcessorAffinity;
             dst.StartTime = src.StartTime;
             dst.TotalRuntime = src.TotalProcessorTime;
             dst.UserRuntime = src.UserProcessorTime;
+            dst.ImagePath = FS.path(src.MainModule.FileName);
+            dst.MemorySize = src.MainModule.ModuleMemorySize;
+            dst.ImageVersion = pair((uint)src.MainModule.FileVersionInfo.FileMajorPart, (uint)src.MainModule.FileVersionInfo.FileMinorPart);
+            dst.EntryAddress = src.MainModule.EntryPointAddress;
             map(src.MainModule, ref dst.Main);
             return ref dst;
         }
@@ -92,6 +75,19 @@ namespace Z0
             ref var t = ref first(span(dst));
             for(var i=0u; i<count; i++)
                 map(skip(s,i), ref seek(t,i));
+        }
+
+
+        /// <summary>
+        /// Captures the current process state
+        /// </summary>
+        /// <param name="src">The source process</param>
+        [MethodImpl(Inline), Op]
+        public static ProcessState state(Process src)
+        {
+            var dst = new ProcessState();
+            map(src, ref dst);
+            return dst;
         }
     }
 }
