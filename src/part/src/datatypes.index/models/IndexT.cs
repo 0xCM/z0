@@ -74,7 +74,7 @@ namespace Z0
         public uint Count
         {
             [MethodImpl(Inline)]
-            get => (uint)Data.Length;
+            get => (uint)Length;
         }
 
         public ref T First
@@ -126,12 +126,12 @@ namespace Z0
             => src.Storage;
 
         [MethodImpl(Inline)]
-        public static implicit operator Index<T>(T[] src)
-            => new Index<T>(src);
-
-        [MethodImpl(Inline)]
         public static implicit operator T[](Index<T> src)
             => src.Storage;
+
+        [MethodImpl(Inline)]
+        public static implicit operator Index<T>(T[] src)
+            => new Index<T>(src);
 
         public static Index<T> Empty
         {

@@ -64,5 +64,10 @@ namespace Z0
         public static implicit operator ApiMemberCode[](ApiMemberCodeBlocks src)
             => src.Storage;
 
+        public static ApiMemberCodeBlocks Empty
+        {
+            [MethodImpl(Inline)]
+            get => new ApiMemberCodeBlocks(sys.empty<ApiMemberCode>());
+        }
     }
 }

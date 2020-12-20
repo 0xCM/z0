@@ -20,7 +20,7 @@ namespace Z0
         char CellDelimiter
             => Chars.Semicolon;
         string ITextual.Format()
-            => new DelimitedIndex<T>(Storage, CellDelimiter).Format();
+            => string.Format("({0}:{1})*", typeof(T).Name, Storage?.Length ?? 0);
         Span<T> Terms
             => Storage;
 
@@ -31,7 +31,7 @@ namespace Z0
             => Storage;
 
         int IMeasured.Length
-            => Storage.Length;
+            => Storage?.Length ?? 0;
 
         ref T this[int index]
             => ref seek(Storage,index);

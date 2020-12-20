@@ -27,11 +27,11 @@ namespace Z0
 
         protected override void Execute(IWfShell wf)
         {
-            if(MemberBlocks.Length == 0)
-                return;
-
-            using var step = new EmitParsedExtractsStep(wf, this, HostUri, MemberBlocks);
-            step.Run();
+           if(MemberBlocks != null && MemberBlocks.Length != 0)
+           {
+                using var step = new EmitParsedExtractsStep(wf, this, HostUri, MemberBlocks);
+                step.Run();
+           }
         }
     }
 
