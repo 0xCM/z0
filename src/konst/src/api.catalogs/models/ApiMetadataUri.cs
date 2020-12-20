@@ -37,7 +37,7 @@ namespace Z0
             get => api.part(this);
         }
 
-        public CliArtifactKey HostId
+        public CliKey HostId
         {
             [MethodImpl(Inline)]
             get => vcell(Data, HostIndex);
@@ -49,7 +49,7 @@ namespace Z0
             get => api.kind(this);
         }
 
-        public CliArtifactKey OperationId
+        public CliKey OperationId
         {
             [MethodImpl(Inline)]
             get => vcell(Data, OpIndex);

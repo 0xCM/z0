@@ -7,13 +7,13 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     public readonly struct AppRes : IAppRes<string>
     {
-        public readonly string Name;
+        public string Name {get;}
 
-        public readonly string Content;
+        public string Content {get;}
 
         [MethodImpl(Inline)]
         public AppRes(string name, string data)
@@ -32,12 +32,6 @@ namespace Z0
 
         public override string ToString()
             => Format();
-
-        string IAppRes.Name
-            => Name;
-
-        string IAppRes<string>.Content
-            => Content;
 
         [MethodImpl(Inline)]
         public static implicit operator AppRes<string>(AppRes src)

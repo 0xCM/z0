@@ -18,9 +18,9 @@ namespace Z0
     /// </summary>
     public readonly struct ApiOpAddress : IAddress<A,W,T>
     {
-        public readonly MemoryAddress Location;
+        public MemoryAddress Location {get;}
 
-        public readonly ApiMetadataUri Uri;
+        public ApiMetadataUri Uri {get;}
 
         public bool IsEmpty
         {
@@ -38,24 +38,14 @@ namespace Z0
             => Empty;
 
         [MethodImpl(Inline)]
-        public static implicit operator ApiOpAddress((ApiMetadataUri uri, MemoryAddress address) src)
-            => new ApiOpAddress(src.uri, src.address);
-
-        [MethodImpl(Inline)]
         public ApiOpAddress(ApiMetadataUri uri, MemoryAddress address)
         {
             Uri = uri;
             Location = address;
         }
 
-         T IAddress<T>.Location
-            => Location;
-
         public string Format()
             => Uri.Format() + Chars.Dash + Location.Format();
-
-        public static ApiOpAddress Empty
-            => (ApiMetadataUri.Empty, MemoryAddress.Empty);
 
         public uint Hash
         {
@@ -76,5 +66,12 @@ namespace Z0
         [MethodImpl(Inline)]
         public int CompareTo(A src)
             => Location == src.Location ? 0 : Location < src.Location ? -1 : 1;
+
+        [MethodImpl(Inline)]
+        public static implicit operator ApiOpAddress((ApiMetadataUri uri, MemoryAddress address) src)
+            => new ApiOpAddress(src.uri, src.address);
+
+        public static ApiOpAddress Empty
+            => (ApiMetadataUri.Empty, MemoryAddress.Empty);
     }
 }

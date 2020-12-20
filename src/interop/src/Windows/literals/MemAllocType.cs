@@ -5,7 +5,7 @@ using System;
 namespace Windows
 {
     [Flags]
-    public enum VirtualAllocType : uint
+    public enum MemAllocType : uint
     {
         MEM_COMMIT = 0x1000,
 

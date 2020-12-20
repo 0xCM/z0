@@ -12,7 +12,7 @@ namespace Z0
     [Datatype]
     public readonly struct WfStepId : IWfStepId
     {
-        public CliArtifactKey HostKey {get;}
+        public CliKey HostKey {get;}
 
         public string HostName {get;}
 

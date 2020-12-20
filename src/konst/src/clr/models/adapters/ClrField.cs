@@ -22,7 +22,7 @@ namespace Z0
         public ClrField(FieldInfo src)
             => Definition = src;
 
-        public CliArtifactKey Token
+        public CliKey Token
         {
             [MethodImpl(Inline)]
             get => Definition.MetadataToken;

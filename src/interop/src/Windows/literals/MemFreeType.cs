@@ -3,7 +3,7 @@
 // See the LICENSE file in the project root for more information.
 namespace Windows
 {
-    public enum VirtualFreeType : uint
+    public enum MemFreeType : uint
     {
         CoalescePlaceholders = 0x00000001,
 

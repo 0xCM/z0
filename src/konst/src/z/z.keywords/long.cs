@@ -11,17 +11,13 @@ namespace Z0
 
     partial struct z
     {
-        /// <summary>
-        /// Converts a <see cref='bool'/> to a <see cref='long'/>
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline), Op]
-        public static unsafe short @long(bool src)
-            => (*((byte*)(&src))); 
+        [MethodImpl(Inline)]
+        public static unsafe long @long(bool src)
+            => memory.@long(src);
 
-        [MethodImpl(Inline), Op, Closures(Numeric64k)]
+        [MethodImpl(Inline)]
         public static unsafe long @long<T>(T src)
-            where T : unmanaged             
-                => *((long*)(&src));
+            where T : unmanaged
+                => memory.@long(src);
     }
 }

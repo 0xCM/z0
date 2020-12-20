@@ -6,15 +6,14 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Reflection;
 
+    using static System.Runtime.CompilerServices.Unsafe;
     using static Part;
-    using static memory;
 
-    partial struct ClrQuery
+    partial struct memory
     {
-        [MethodImpl(Inline), Op]
-        public static ClrPrimitiveRecord describe(PrimalKind src)
-            => new ClrPrimitiveRecord(src, ClrPrimitives.width(src), ClrPrimitives.sign(src), (PrimalTypeCode)ClrPrimitives.code(src));
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        public static decimal float128<T>(T src)
+            => As<T,decimal>(ref src);
     }
 }

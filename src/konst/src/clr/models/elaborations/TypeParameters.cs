@@ -5,25 +5,19 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Represents the open type parameters defined by a method
     /// </summary>
     public readonly struct TypeParameters  : ITextual
     {
-        public readonly TypeParameter[] Items;
+        public readonly TypeParamInfo[] Items;
 
         [MethodImpl(Inline)]
-        public static implicit operator TypeParameters(TypeParameter[] src)
-            => new TypeParameters(src);
-
-        [MethodImpl(Inline)]
-        public TypeParameters(TypeParameter[] reps)
+        public TypeParameters(TypeParamInfo[] reps)
             => Items = reps;
 
         public string Format(bool fence)
@@ -40,5 +34,9 @@ namespace Z0
 
         public override string ToString()
             => Format();
+
+        [MethodImpl(Inline)]
+        public static implicit operator TypeParameters(TypeParamInfo[] src)
+            => new TypeParameters(src);
     }
 }

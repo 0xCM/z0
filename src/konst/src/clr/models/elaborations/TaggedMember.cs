@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Pairs a member attribute value with its target
@@ -30,18 +30,18 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator TaggedMember<M,A>((M member, A tag) src)
             => new TaggedMember<M,A>(src.member, src.tag);
-        
+
         [MethodImpl(Inline)]
         public TaggedMember(M member, A tag)
         {
             Member = member;
             Tag = tag;
         }
-        
-        M IPaired<M,A>.Left 
+
+        M IPaired<M,A>.Left
             => Member;
 
-        A IPaired<M,A>.Right 
+        A IPaired<M,A>.Right
             => Tag;
     }
 }

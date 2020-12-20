@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static System.Runtime.CompilerServices.Unsafe;
-
     using static Part;
 
     partial struct memory
@@ -35,9 +34,5 @@ namespace Z0
         public static ReadOnlySpan<double> float64<T>(ReadOnlySpan<T> src)
             where T : struct
                 => recover<T,double>(src);
-
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static decimal float128<T>(T src)
-            => As<T,decimal>(ref src);
     }
 }

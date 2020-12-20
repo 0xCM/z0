@@ -7,29 +7,21 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
+    using static Chars;
 
     /// <summary>
     /// Describes an embedded data resource
     /// </summary>
     public readonly struct BinaryRes
     {
-        public readonly StringRef Identifier;
+        public StringRef Identifier {get;}
 
-        public readonly PartId Owner;
+        public PartId Owner {get;}
 
-        public readonly ByteSize Size;
+        public ByteSize Size {get;}
 
-        public readonly MemoryAddress Address;
-
-        public ReadOnlySpan<byte> Data
-            => Bytes;
-
-        public bool IsEmpty
-            => Address == 0;
-
-        public string Uri
-            => string.Concat("res", Chars.Colon, Chars.FSlash, Chars.FSlash, Owner.Format(), Chars.FSlash, Identifier);
+        public MemoryAddress Address {get;}
 
         [MethodImpl(Inline)]
         internal BinaryRes(PartId part, string id, ByteSize length, MemoryAddress address)
@@ -40,7 +32,13 @@ namespace Z0
             Address = address;
         }
 
-        unsafe ReadOnlySpan<byte> Bytes
+        public bool IsEmpty
+            => Address == 0;
+
+        public string Uri
+            => string.Concat("res", Colon, FSlash, FSlash, Owner.Format(), FSlash, Identifier);
+
+        public unsafe ReadOnlySpan<byte> Data
         {
             [MethodImpl(Inline)]
             get => new ReadOnlySpan<byte>(Address.Pointer<byte>(), Size);

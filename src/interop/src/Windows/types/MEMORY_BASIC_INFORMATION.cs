@@ -13,14 +13,14 @@ namespace Windows
 
         public byte* AllocationBase;
 
-        public VirtualAllocProtection AllocationProtect;
+        public PageProtection AllocationProtect;
 
         public ulong RegionSize;
 
-        public VirtualAllocType State;
+        public MemAllocType State;
 
-        public VirtualAllocProtection Protect;
+        public PageProtection Protect;
 
-        public VirtualAllocType Type;
+        public MemAllocType Type;
     }
 }

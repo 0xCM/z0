@@ -13,7 +13,7 @@ namespace Z0
     partial struct ClrQuery
     {
         [MethodImpl(Inline), Op]
-        public static CliArtifactKey identity(in Type src)
+        public static CliKey identity(in Type src)
             => src.MetadataToken;
 
         [MethodImpl(Inline), Op]
@@ -21,7 +21,7 @@ namespace Z0
             => src.GetTypes();
 
         [MethodImpl(Inline), Op]
-        public static Type type(in Index<Type>  src, CliArtifactKey id)
+        public static Type type(in Index<Type>  src, CliKey id)
         {
             for(var i=0; i<src.Length; i++)
             {

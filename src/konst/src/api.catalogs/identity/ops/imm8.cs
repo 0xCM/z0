@@ -12,7 +12,7 @@ namespace Z0
 
     partial struct ApiIdentify
     {
-       /// <summary>
+        /// <summary>
         /// Extracts an 8-bit immediate value from an identity if it contains an immediate suffix; otherwise, returns none
         /// </summary>
         /// <param name="src">The source identity</param>

@@ -29,7 +29,7 @@ namespace Z0
         IEnumerable<IClrRuntimeType> NestedTypes
             => z.stream<IClrRuntimeType>();
 
-        CliArtifactKey IClrRuntimeObject.Token
+        CliKey IClrRuntimeObject.Token
             => Definition.MetadataToken;
     }
 

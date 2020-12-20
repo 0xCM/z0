@@ -7,18 +7,18 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Indexes a sequence of memory references
     /// </summary>
-    public readonly struct MemorySegments
+    public readonly struct MemorySegments : IIndex<MemorySegment>
     {
-        readonly MemorySegment[] Refs;
+        readonly Index<MemorySegment> Data;
 
         [MethodImpl(Inline)]
         public MemorySegments(MemorySegment[] src)
-            => Refs = src;
+            => Data = src;
 
         [MethodImpl(Inline)]
         public static MemorySegments create(params MemorySegment[] src)
@@ -31,31 +31,37 @@ namespace Z0
         public ReadOnlySpan<MemorySegment> View
         {
             [MethodImpl(Inline)]
-            get => Refs;
+            get => Data;
         }
 
         public Span<MemorySegment> Edit
         {
             [MethodImpl(Inline)]
-            get => Refs;
+            get => Data;
         }
 
         public Count Count
         {
             [MethodImpl(Inline)]
-            get => Refs.Length;
+            get => Data.Length;
+        }
+
+        public MemorySegment[] Storage
+        {
+            [MethodImpl(Inline)]
+            get => Data;
         }
 
         public ref MemorySegment this[long index]
         {
             [MethodImpl(Inline)]
-            get => ref Refs[index];
+            get => ref Data[index];
         }
 
         public ref MemorySegment this[ulong index]
         {
             [MethodImpl(Inline)]
-            get => ref Refs[index];
+            get => ref Data[index];
         }
 
         /// <summary>
@@ -64,6 +70,6 @@ namespace Z0
         /// <param name="index">The ref index</param>
         [MethodImpl(Inline)]
         public ReadOnlySpan<byte> Load(ulong index)
-            => Refs[index].Load();
+            => Data[index].Load();
     }
 }

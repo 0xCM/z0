@@ -17,12 +17,12 @@ namespace Z0
         /// <summary>
         /// The artifact identifier of the defining literal
         /// </summary>
-        public CliArtifactKey Id;
+        public CliKey Id;
 
         /// <summary>
         /// The defining <see cref='Enum'/> id
         /// </summary>
-        public CliArtifactKey EnumId;
+        public CliKey EnumId;
 
         /// <summary>
         /// The 0-based declaration order of the defining literal
@@ -45,7 +45,7 @@ namespace Z0
         public StringRef Description;
 
         [MethodImpl(Inline)]
-        public EnumDatasetEntry(CliArtifactKey id, CliArtifactKey enumId, uint index, StringRef name, variant scalar, StringRef description)
+        public EnumDatasetEntry(CliKey id, CliKey enumId, uint index, StringRef name, variant scalar, StringRef description)
         {
             Id = id;
             EnumId = enumId;

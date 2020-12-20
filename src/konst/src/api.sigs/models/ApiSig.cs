@@ -26,7 +26,7 @@ namespace Z0
             Identifier = identifier;
         }
 
-        public CliArtifactKey TargetKey
+        public CliKey TargetKey
         {
             [MethodImpl(Inline)]
             get => vcell(Data,PartCount - 1);

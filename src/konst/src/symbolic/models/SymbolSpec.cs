@@ -20,14 +20,14 @@ namespace Z0
 
         public ushort SegCapacity;
 
-        public CliArtifactKey SegDomain;
+        public CliKey SegDomain;
 
-        public CliArtifactKey SymDomain;
+        public CliKey SymDomain;
 
-        public CliArtifactKey KindDomain;
+        public CliKey KindDomain;
 
         [MethodImpl(Inline)]
-        public SymbolSpec(ushort symwidth, ushort segwidth, CliArtifactKey seg, CliArtifactKey sym, CliArtifactKey kind = default)
+        public SymbolSpec(ushort symwidth, ushort segwidth, CliKey seg, CliKey sym, CliKey kind = default)
         {
             SymWidth = symwidth;
             SegWidth = segwidth;
@@ -46,10 +46,10 @@ namespace Z0
         ushort ISymbolSpec.SegCapacity
             => SegCapacity;
 
-        CliArtifactKey ISymbolSpec.SegDomain
+        CliKey ISymbolSpec.SegDomain
             => SegDomain;
 
-        CliArtifactKey ISymbolSpec.SymDomain
+        CliKey ISymbolSpec.SymDomain
             => SymDomain;
     }
 }

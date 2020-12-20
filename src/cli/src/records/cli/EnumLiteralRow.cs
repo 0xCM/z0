@@ -38,7 +38,7 @@ namespace Z0
 
         public string Component;
 
-        public CliArtifactKey TypeId;
+        public CliKey TypeId;
 
         public MemoryAddress TypeAddress;
 

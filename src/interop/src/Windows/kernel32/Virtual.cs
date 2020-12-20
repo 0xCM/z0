@@ -1,0 +1,36 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+namespace Windows
+{
+    using System;
+    using System.Runtime.InteropServices;
+
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
+    partial struct Kernel32
+    {
+        [DllImport(LibName), Free]
+        public static extern bool GetProcessWorkingSetSizeEx(IntPtr hProcess, out IntPtr lpMinimumWorkingSetSize, out IntPtr lpMaximumWorkingSetSize, out uint flags);
+
+        public static UIntPtr VirtualAlloc(uint allocSize, MemAllocType type, PageProtection protection)
+            => VirtualAlloc(lpAddress: UIntPtr.Zero, new UIntPtr(allocSize), type, protection);
+
+        [DllImport(LibName, SetLastError = true), Free]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static unsafe extern bool VirtualFree(void* lpAddress, UIntPtr sizeToFree, [MarshalAs(UnmanagedType.U4)] MemFreeType freeType);
+
+        [DllImport(LibName, ExactSpelling = true), Free]
+        public static extern unsafe void* VirtualAlloc(void* lpAddress, UIntPtr dwSize, int flAllocationType, int flProtect);
+
+        [DllImport(LibName, SetLastError = true, ExactSpelling = true), Free]
+        public static extern unsafe UIntPtr VirtualQuery(void* lpAddress, ref MEMORY_BASIC_INFORMATION lpBuffer, UIntPtr dwLength);
+
+        [DllImport(LibName), Free]
+        public static extern bool VirtualProtectEx(IntPtr hProc, IntPtr pCode, UIntPtr codelen, uint flags, out uint oldFlags);
+
+        [DllImport(LibName, SetLastError = true), Free]
+        static extern UIntPtr VirtualAlloc(UIntPtr lpAddress, UIntPtr allocSize, [MarshalAs(UnmanagedType.U4)] MemAllocType allocationType,
+            [MarshalAs(UnmanagedType.U4)] PageProtection protection);
+    }
+}

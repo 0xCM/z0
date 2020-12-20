@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static z;
+    using static memory;
 
     /// <summary>
     /// Defines a cli signature
@@ -36,7 +36,7 @@ namespace Z0
         public uint Hash
         {
             [MethodImpl(Inline)]
-            get => hash(Data.View);
+            get => alg.hash.calc(Data.View);
         }
 
         public string Format()

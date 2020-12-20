@@ -24,7 +24,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public TableId(CliArtifactKey shape, string name)
+        public TableId(CliKey shape, string name)
         {
             RecordType = name;
             Identifier = name;

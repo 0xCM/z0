@@ -14,12 +14,12 @@ namespace Z0
     {
         public ClrArtifactKind Kind {get;}
 
-        public CliArtifactKey Key {get;}
+        public CliKey Key {get;}
 
         public Ptr Pointer {get;}
 
         [MethodImpl(Inline)]
-        public ClrHandle(ClrArtifactKind kind, CliArtifactKey key, Ptr ptr)
+        public ClrHandle(ClrArtifactKind kind, CliKey key, Ptr ptr)
         {
             Kind = kind;
             Key = key;

@@ -30,10 +30,10 @@ namespace Z0
         public static implicit operator ApiSig(ApiSig<R> src)
             => encode(src.Identifier, skip(Types,0));
 
-        public static CliArtifactKey target()
+        public static CliKey target()
             => skip(Types,0);
 
-        public static ReadOnlySpan<CliArtifactKey> Sources
+        public static ReadOnlySpan<CliKey> Sources
             => default;
 
         public static ReadOnlySpan<Type> Types

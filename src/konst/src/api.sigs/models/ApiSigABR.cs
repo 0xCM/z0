@@ -17,7 +17,7 @@ namespace Z0
 
         public const byte TypeCount = 3;
 
-        static CliArtifactKey[] _SourceKeys = new CliArtifactKey[SourceCount]{source(n0), source(n1)};
+        static CliKey[] _SourceKeys = new CliKey[SourceCount]{source(n0), source(n1)};
 
         static Type[] _Types = new Type[TypeCount]{typeof(A), typeof(B), typeof(R)};
 
@@ -31,16 +31,16 @@ namespace Z0
         public static implicit operator ApiSig(ApiSig<A,B,R> src)
             => encode(src.Identifier, skip(Types,0), skip(Types,1), skip(Types,2));
 
-        public static CliArtifactKey target()
+        public static CliKey target()
             => typeof(R);
 
-        public static CliArtifactKey source(N0 n)
+        public static CliKey source(N0 n)
             => typeof(A);
 
-        public static CliArtifactKey source(N1 n)
+        public static CliKey source(N1 n)
             => typeof(B);
 
-        public static ReadOnlySpan<CliArtifactKey> Sources
+        public static ReadOnlySpan<CliKey> Sources
             => _SourceKeys;
 
         public static ReadOnlySpan<Type> Types

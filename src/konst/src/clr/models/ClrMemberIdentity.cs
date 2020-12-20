@@ -17,13 +17,13 @@ namespace Z0
     {
         readonly ulong Data;
 
-        public CliArtifactKey OwnerId
+        public CliKey OwnerId
         {
             [MethodImpl(Inline)]
             get => (uint)(Data >> 32);
         }
 
-        public CliArtifactKey MemberId
+        public CliKey MemberId
         {
             [MethodImpl(Inline)]
             get => (uint)(Data);
@@ -97,9 +97,6 @@ namespace Z0
         public override bool Equals(object src)
             => src is ClrMemberIdentity t && Equals(t);
 
-        public static ClrMemberIdentity Empty
-            => default;
-
         [MethodImpl(Inline)]
         public static bool operator ==(ClrMemberIdentity x, ClrMemberIdentity y)
             => x.Equals(y);
@@ -119,5 +116,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator ClrMemberIdentity(MethodInfo src)
             => new ClrMemberIdentity(src);
+
+        public static ClrMemberIdentity Empty
+            => default;
     }
 }

@@ -20,6 +20,16 @@ namespace Z0
         public const string EmptyString = "";
 
         /// <summary>
+        /// An abbreviation for the ridiculously long "StringComparison.InvariantCultureIgnoreCase"
+        /// </summary>
+        public const StringComparison NoCase = StringComparison.InvariantCultureIgnoreCase;
+
+        /// <summary>
+        /// An abbreviation for the somewhat verbose "StringComparison.InvariantCulture"
+        /// </summary>
+        public const StringComparison Cased = StringComparison.InvariantCulture;
+
+        /// <summary>
         /// The end-of-line escape sequence
         /// </summary>
         public const string Eol = Chars.Eol;

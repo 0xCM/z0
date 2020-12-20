@@ -10,11 +10,11 @@ namespace Z0
     {
         StringRef Identifier {get;}
 
-        CliArtifactKey TargetKey {get;}
+        CliKey TargetKey {get;}
 
         uint SourceCount => 0;
 
-        ReadOnlySpan<CliArtifactKey> Sources => default;
+        ReadOnlySpan<CliKey> Sources => default;
     }
 
     public interface IApiSig<H> : IApiSig
@@ -29,58 +29,58 @@ namespace Z0
         uint IApiSig.SourceCount
             => ApiSig<R>.SourceCount;
 
-        CliArtifactKey IApiSig.TargetKey
+        CliKey IApiSig.TargetKey
             => ApiSig<R>.target();
 
-        ReadOnlySpan<CliArtifactKey> IApiSig.Sources
+        ReadOnlySpan<CliKey> IApiSig.Sources
             => ApiSig<R>.Sources;
     }
 
     public interface IApiSig<H,A,R> : IApiSig<H,R>
         where H : unmanaged, IApiSig<H,A,R>
     {
-        CliArtifactKey Source(N0 n)
+        CliKey Source(N0 n)
             => ApiSig<A,R>.source(n);
 
         uint IApiSig.SourceCount
             => ApiSig<A,R>.SourceCount;
 
-        ReadOnlySpan<CliArtifactKey> IApiSig.Sources
+        ReadOnlySpan<CliKey> IApiSig.Sources
             => ApiSig<A,R>.Sources;
     }
 
     public interface IApiSig<H,A,B,R> : IApiSig<H,R>
         where H : unmanaged, IApiSig<H,A,B,R>
     {
-        CliArtifactKey Source(N0 n)
+        CliKey Source(N0 n)
             => ApiSig<A,B,R>.source(n);
 
-        CliArtifactKey Source(N1 n)
+        CliKey Source(N1 n)
             => ApiSig<A,B,R>.source(n);
 
         uint IApiSig.SourceCount
             => ApiSig<A,B,R>.SourceCount;
 
-        ReadOnlySpan<CliArtifactKey> IApiSig.Sources
+        ReadOnlySpan<CliKey> IApiSig.Sources
             => ApiSig<A,B,R>.Sources;
     }
 
     public interface IApiSig<H,A,B,C,R> : IApiSig<H,R>
         where H : unmanaged, IApiSig<H,A,B,C,R>
     {
-        CliArtifactKey Source(N0 n)
+        CliKey Source(N0 n)
             => ApiSig<A,B,C,R>.source(n);
 
-        CliArtifactKey Source(N1 n)
+        CliKey Source(N1 n)
             => ApiSig<A,B,C,R>.source(n);
 
-        CliArtifactKey Source(N2 n)
+        CliKey Source(N2 n)
             => ApiSig<A,B,C,R>.source(n);
 
         uint IApiSig.SourceCount
             => ApiSig<A,B,C,R>.SourceCount;
 
-        ReadOnlySpan<CliArtifactKey> IApiSig.Sources
+        ReadOnlySpan<CliKey> IApiSig.Sources
             => ApiSig<A,B,C,R>.Sources;
     }
 }

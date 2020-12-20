@@ -5,10 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Reflection;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     public readonly struct TypeArg : ITextual
     {
@@ -16,12 +15,12 @@ namespace Z0
 
         public readonly Type Target;
 
-        public readonly TypeParameter Parameter;
+        public readonly TypeParamInfo Parameter;
 
         public readonly Type Argument;
 
         [MethodImpl(Inline)]
-        public TypeArg(Type target, TypeParameter parameter, Type arg)
+        public TypeArg(Type target, TypeParamInfo parameter, Type arg)
         {
             Name = arg.Name;
             Target = target;

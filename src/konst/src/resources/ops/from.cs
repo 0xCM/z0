@@ -9,11 +9,26 @@ namespace Z0
     using System.Linq;
     using System.Reflection;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     partial struct Resources
     {
+        public static ApiHostRes from(ApiHostCodeBlocks src)
+        {
+            var count = src.Length;
+            var buffer = alloc<BinaryResSpec>(count);
+            var dst = span(buffer);
+            var blocks = span(src.Storage);
+            for(var i=0u; i<count; i++)
+            {
+                ref readonly var code = ref skip(blocks,i);
+                var name = LegalIdentityBuilder.code(code.Id);
+                seek(dst,i) = new BinaryResSpec(name, code.Encoded);
+            }
+            return new ApiHostRes(src.Host, buffer);
+        }
+
         /// <summary>
         /// Collects all resource accessors defined by a specified assembly
         /// </summary>

@@ -75,7 +75,7 @@ namespace Z0
         public uint Hash
         {
             [MethodImpl(Inline)]
-            get => alg.hash.calc(Segment);
+            get => z.vhash(Segment);
         }
 
         public ref byte this[int index]

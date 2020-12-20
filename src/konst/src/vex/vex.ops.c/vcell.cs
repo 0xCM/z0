@@ -8,10 +8,10 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
+    using static Part;
 
     partial struct z
-    {        
+    {
         /// <summary>
         /// Returns a reference to an index-identified cell
         /// </summary>
@@ -33,7 +33,7 @@ namespace Z0
         public static T vcell<T>(Vector256<T> src, byte index)
             where T : unmanaged
                 => src.GetElement(index);
- 
+
         /// <summary>
         /// Sets an index-identified component to a specified value
         /// </summary>
@@ -57,7 +57,7 @@ namespace Z0
         public static Vector128<T> vcell<T>(T src, byte index, Vector128<T> dst)
             where T : unmanaged
                 => dst.WithElement(index, src);
-                
+
         /// <summary>
         /// Sets an index-identified component to a specified value
         /// </summary>

@@ -6,19 +6,13 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
 
+    using static Part;
     using static System.Runtime.CompilerServices.Unsafe;
     using static System.Runtime.InteropServices.MemoryMarshal;
 
-    using static Konst;
-
-    partial struct z
+    partial struct memory
     {
-        [MethodImpl(Inline), Op]
-        public static unsafe Vector128<ulong> segment(string src)
-            => vparts(N128.N, (ulong)pchar2(src), size(src));
-
         [MethodImpl(Inline), Op, Closures(Closure)]
         public unsafe static ReadOnlySpan<T> segment<T>(ReadOnlySpan<T> src, int i0, int i1)
             where T : unmanaged

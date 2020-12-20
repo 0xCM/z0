@@ -21,7 +21,7 @@ namespace Z0
             public ModuleView(R.Module src)
                 => Subject = src;
 
-            public CliArtifactKey Key
+            public CliKey Key
             {
                 [MethodImpl(Inline)]
                 get => Subject.MetadataToken;

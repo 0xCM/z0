@@ -11,25 +11,17 @@ namespace Z0
 
     partial struct z
     {
-        /// <summary>
-        /// Forcefully coerces a <see cref='bool'/> to a <see cref='int'/>
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline), Op]
-        public static unsafe int @int(bool src)
-            => (*((byte*)(&src))); 
+        [MethodImpl(Inline)]
+        public static int @int(bool src)
+            => memory.@int(src);
 
-        /// <summary>
-        /// Forcefully coerces a <see cref='float'/> to a <see cref='int'/>
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline), Op]
-        public static unsafe int @int(float src)
-            => (*((int*)(&src))); 
+        [MethodImpl(Inline)]
+        public static int @int(float src)
+            => memory.@int(src);
 
-        [MethodImpl(Inline), Op, Closures(Numeric32x64k)]
-        public static unsafe int @int<T>(T src)
-            where T : unmanaged             
-                => *((int*)(&src));         
+        [MethodImpl(Inline)]
+        public static int @int<T>(T src)
+            where T : unmanaged
+                => memory.@int(src);
     }
 }

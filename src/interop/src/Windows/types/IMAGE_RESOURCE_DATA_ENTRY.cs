@@ -14,6 +14,7 @@ namespace Windows
     /// decoding code point values within the resource data.  Typically for new
     /// applications the code page would be the Unicode code page.
     /// </summary>
+    [StructLayout(LayoutKind.Sequential)]
     public struct IMAGE_RESOURCE_DATA_ENTRY
     {
         public int RvaToData;

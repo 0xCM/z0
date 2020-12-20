@@ -74,7 +74,7 @@ namespace Z0
             get => IsField ? ClrArtifactKind.Field : ClrArtifactKind.Assembly;
         }
 
-        public CliArtifactKey Token
+        public CliKey Token
         {
             [MethodImpl(Inline)]
             get => Definition.MetadataToken;

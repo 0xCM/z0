@@ -11,7 +11,7 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Avx;
     using static System.Runtime.Intrinsics.X86.Avx2;
 
-    using static Konst;
+    using static Part;
 
     partial struct z
     {
@@ -23,7 +23,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <param name="spec">The blend specification</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<int> vblend4x32(Vector128<int> x, Vector128<int> y, [Imm] byte spec)        
+        public static Vector128<int> vblend4x32(Vector128<int> x, Vector128<int> y, [Imm] byte spec)
             => Blend(x, y, spec);
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <param name="spec">The blend specification</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<uint> vblend4x32(Vector128<uint> x, Vector128<uint> y, [Imm] byte spec)        
+        public static Vector128<uint> vblend4x32(Vector128<uint> x, Vector128<uint> y, [Imm] byte spec)
             => Blend(x, y, spec);
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <param name="spec">The blend specification</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<int> vblend(Vector128<int> x, Vector128<int> y, [Imm] Blend4x32 spec)        
+        public static Vector128<int> vblend(Vector128<int> x, Vector128<int> y, [Imm] Blend4x32 spec)
             => Blend(x, y, (byte)spec);
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <param name="spec">The blend specification</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<uint> vblend(Vector128<uint> x, Vector128<uint> y, [Imm] Blend4x32 spec)        
-            => Blend(x, y, (byte)spec); 
+        public static Vector128<uint> vblend(Vector128<uint> x, Vector128<uint> y, [Imm] Blend4x32 spec)
+            => Blend(x, y, (byte)spec);
     }
 }

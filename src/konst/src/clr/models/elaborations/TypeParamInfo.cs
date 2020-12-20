@@ -7,19 +7,19 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Represents a type parameter in a generic artifact definition
     /// </summary>
-    public readonly struct TypeParameter : ITextual
+    public readonly struct TypeParamInfo : ITextual
     {
         public readonly string Name;
 
         public ushort Position {get;}
 
         [MethodImpl(Inline)]
-        public TypeParameter(string name, int position)
+        public TypeParamInfo(string name, int position)
         {
             Name = name;
             Position = (ushort)position;

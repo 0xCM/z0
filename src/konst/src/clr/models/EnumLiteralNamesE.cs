@@ -7,37 +7,43 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
-    public readonly struct EnumLiteralNames<E>
+    public readonly struct EnumLiteralNames<E> : IIndex<string>
         where E : unmanaged, Enum
     {
-        public readonly string[] Storage;
+        readonly Index<string> Data;
 
         [MethodImpl(Inline)]
         public EnumLiteralNames(string[] src)
-            => Storage = src;
-        
+            => Data = src;
+
+        public string[] Storage
+        {
+            [MethodImpl(Inline)]
+            get => Data.Storage;
+        }
+
         public string this[ulong index]
         {
             [MethodImpl(Inline)]
-            get => Storage[index];
+            get => Data[index];
         }
 
         [MethodImpl(Inline)]
         public ref string Name(ulong index)
-            => ref Storage[index];
-        
+            => ref Data[index];
+
         public ReadOnlySpan<string> View
         {
             [MethodImpl(Inline)]
-            get => Storage;
+            get => Data;
         }
 
         public Span<string> Edit
         {
             [MethodImpl(Inline)]
-            get => Storage;
+            get => Data;
         }
     }
 }

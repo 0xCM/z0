@@ -23,7 +23,7 @@ namespace Z0
         public ClrMethod(MethodInfo src)
             => Definition = src;
 
-        public CliArtifactKey Token
+        public CliKey Token
         {
             [MethodImpl(Inline)]
             get => Definition.MetadataToken;

@@ -9,7 +9,8 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using AES = System.Runtime.Intrinsics.X86.Aes;
-    using static Konst;
+
+    using static Part;
 
     /// <summary>
     /// Surfaces AES intrinsics

@@ -8,22 +8,22 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Describes a member that defines a resource
     /// </summary>
     public readonly struct ResMember : ITextual
     {
-        public readonly MemberInfo Member;
+        public MemberInfo Member {get;}
 
-        public readonly MemorySegment Reference;
+        public MemorySegment Reference {get;}
 
         [MethodImpl(Inline)]
-        public ResMember(MemberInfo member, in MemorySegment memref)
+        public ResMember(MemberInfo member, MemorySegment seg)
         {
             Member = member;
-            Reference = memref;
+            Reference = seg;
         }
 
         public MemoryAddress Address

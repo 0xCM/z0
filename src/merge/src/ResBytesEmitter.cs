@@ -31,7 +31,7 @@ namespace Z0
         public static ApiHostRes emit(in ApiHostCodeBlocks src, FS.FolderPath dst)
         {
             var target = (dst + FS.folder("src")) + FS.file(src.Host.FileName(FileExtensions.Cs).Name);
-            var resources = ApiHostRes.from(src);
+            var resources = Resources.from(src);
             var hostname = src.Host.Name.ReplaceAny(array('.'), '_');
             var typename = text.concat(src.Host.Owner.Format(), Chars.Underscore, hostname);
             var members = new HashSet<string>();

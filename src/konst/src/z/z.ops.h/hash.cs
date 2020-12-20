@@ -34,11 +34,6 @@ namespace Z0
         public static ulong hash(Type t1, Type t2, Type t3)
             => alg.hash.calc(t1, t2, t3);
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static uint hash<T>(Vector128<T> src)
-            where T : unmanaged
-                => alg.hash.calc(src);
-
         /// <summary>
         /// Creates an unsigned hash code
         /// </summary>

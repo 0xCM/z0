@@ -18,12 +18,12 @@ namespace Z0
 
         public readonly ushort Position;
 
-        public readonly TypeSig Type;
+        public readonly TypeSigInfo Type;
 
         public readonly ClrArgRefKind RefKind;
 
         [MethodImpl(Inline)]
-        public MethodParameter(TypeSig type, ClrArgRefKind refkind, string name, ushort pos)
+        public MethodParameter(TypeSigInfo type, ClrArgRefKind refkind, string name, ushort pos)
         {
             Type = type;
             Name = name;

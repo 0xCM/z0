@@ -9,9 +9,26 @@ namespace Z0
     using System.Reflection;
 
     using static Part;
+    using static ClrViews;
 
     partial struct ClrQuery
     {
+        [MethodImpl(Inline), Op]
+        public static ClrPrimitiveRecord record(PrimalKind src)
+            => new ClrPrimitiveRecord(src, ClrPrimitives.width(src), ClrPrimitives.sign(src), (PrimalTypeCode)ClrPrimitives.code(src));
 
+        [MethodImpl(Inline), Op]
+        public static ClrFieldRecord record(FieldInfo src)
+        {
+            var data = view(src);
+            var dst = new ClrFieldRecord();
+            dst.Key = reference(data);
+            dst.DeclaringType = data.DeclaringType.Key;
+            dst.DataType = data.FieldType.Key;
+            dst.Attributes = data.Attributes;
+            dst.Address = data.Address;
+            dst.IsStatic = data.IsStatic;
+            return dst;
+        }
     }
 }

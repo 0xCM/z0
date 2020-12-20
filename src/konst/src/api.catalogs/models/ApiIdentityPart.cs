@@ -5,10 +5,10 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
     using System.Runtime.CompilerServices;
 
     using static Konst;
+
     using api = ApiIdentify;
 
     /// <summary>
@@ -21,30 +21,6 @@ namespace Z0
         public readonly ApiIdentityPartKind Kind;
 
         public string Identifier {get;}
-
-        /// <summary>
-        /// Defines an identity part
-        /// </summary>
-        /// <param name="width">The scalar bit-width</param>
-        [MethodImpl(Inline)]
-        public static ApiIdentityPart Define(byte index, ApiIdentityPartKind kind, string text)
-            => new ApiIdentityPart(index, kind, text);
-
-        [MethodImpl(Inline)]
-        public static implicit operator ApiIdentityPart((byte index, ApiIdentityPartKind kind, string text) src)
-            => new ApiIdentityPart(src.index, src.kind, src.text);
-
-        [MethodImpl(Inline)]
-        public static implicit operator string(ApiIdentityPart src)
-            => src.Identifier;
-
-        [MethodImpl(Inline)]
-        public static bool operator==(ApiIdentityPart a, ApiIdentityPart b)
-            => a.Equals(b);
-
-        [MethodImpl(Inline)]
-        public static bool operator!=(ApiIdentityPart a, ApiIdentityPart b)
-            => !a.Equals(b);
 
         public ApiIdentityPart(byte index, ApiIdentityPartKind kind, string text)
         {
@@ -84,5 +60,22 @@ namespace Z0
 
         public override bool Equals(object obj)
             => api.equals(this, obj);
+
+
+        [MethodImpl(Inline)]
+        public static implicit operator ApiIdentityPart((byte index, ApiIdentityPartKind kind, string text) src)
+            => new ApiIdentityPart(src.index, src.kind, src.text);
+
+        [MethodImpl(Inline)]
+        public static implicit operator string(ApiIdentityPart src)
+            => src.Identifier;
+
+        [MethodImpl(Inline)]
+        public static bool operator==(ApiIdentityPart a, ApiIdentityPart b)
+            => a.Equals(b);
+
+        [MethodImpl(Inline)]
+        public static bool operator!=(ApiIdentityPart a, ApiIdentityPart b)
+            => !a.Equals(b);
     }
 }

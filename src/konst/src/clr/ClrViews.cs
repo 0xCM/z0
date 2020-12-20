@@ -40,20 +40,6 @@ namespace Z0
             where A : struct, IClrArtifact<A>
                 => src;
 
-        [MethodImpl(Inline), Op]
-        public static ClrFieldRecord record(FieldInfo src)
-        {
-            var data = view(src);
-            var dst = new ClrFieldRecord();
-            dst.Key = reference(data);
-            dst.DeclaringType = data.DeclaringType.Key;
-            dst.DataType = data.FieldType.Key;
-            dst.Attributes = data.Attributes;
-            dst.Address = data.Address;
-            dst.IsStatic = data.IsStatic;
-            return dst;
-        }
-
         /// <summary>
         /// Defines a <see cref='ModuleView'/> over the source
         /// </summary>
@@ -90,26 +76,6 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ClrTypeCodes TypeCodes()
             => ClrTypeCodes.cached();
-
-        [MethodImpl(Inline), Op]
-        public static MemberName name(FieldInfo src)
-            => new MemberName(src.Name);
-
-        [MethodImpl(Inline), Op]
-        public static MemberName name(PropertyInfo src)
-            => new MemberName(src.Name);
-
-        [MethodImpl(Inline), Op]
-        public static MemberName name(MethodInfo src)
-            => new MemberName(src.Name);
-
-        [MethodImpl(Inline), Op]
-        public static MemberName name(EventInfo src)
-            => new MemberName(src.Name);
-
-        [MethodImpl(Inline), Op]
-        public static TypeName name(Type src)
-            => new TypeName(src.AssemblyQualifiedName);
 
         [MethodImpl(Inline), Op]
         public static MethodInfo[] methods(Type src)
@@ -166,7 +132,7 @@ namespace Z0
             => View(src.Types(), type);
 
         [MethodImpl(Inline), Op]
-        static ReadOnlySpan<V> View<S,V>(S[] src, V v = default)
+        internal static ReadOnlySpan<V> View<S,V>(S[] src, V v = default)
             => memory.recover<S,V>(@readonly(src));
 
         [MethodImpl(Inline)]

@@ -13,7 +13,7 @@ namespace Z0
 
         public ClrArtifactKind Kind;
 
-        public CliArtifactKey Key;
+        public CliKey Key;
 
         public MemoryAddress Address;
     }

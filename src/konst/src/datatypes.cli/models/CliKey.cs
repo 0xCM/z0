@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Identifies a metadata element
     /// </summary>
-    public readonly struct CliArtifactKey : ITextual, IEquatable<CliArtifactKey>, INullity
+    public readonly struct CliKey : ITextual, IEquatable<CliKey>, INullity
     {
         readonly uint Data;
 
@@ -34,148 +34,148 @@ namespace Z0
             => Data.FormatHex();
 
         [MethodImpl(Inline)]
-        public static CliArtifactKey from(Type src)
-            => new CliArtifactKey(src);
+        public static CliKey from(Type src)
+            => new CliKey(src);
 
         [MethodImpl(Inline)]
-        public static CliArtifactKey from<T>()
-            => new CliArtifactKey(typeof(T));
+        public static CliKey from<T>()
+            => new CliKey(typeof(T));
 
         [MethodImpl(Inline)]
-        public static CliArtifactKey from(FieldInfo src)
-            => new CliArtifactKey(src);
+        public static CliKey from(FieldInfo src)
+            => new CliKey(src);
 
         [MethodImpl(Inline)]
-        public static CliArtifactKey from(PropertyInfo src)
-            => new CliArtifactKey(src);
+        public static CliKey from(PropertyInfo src)
+            => new CliKey(src);
 
         [MethodImpl(Inline)]
-        public static CliArtifactKey from(MethodInfo src)
-            => new CliArtifactKey(src);
+        public static CliKey from(MethodInfo src)
+            => new CliKey(src);
 
         [MethodImpl(Inline)]
-        public static CliArtifactKey from(ParameterInfo src)
-            => new CliArtifactKey(src);
+        public static CliKey from(ParameterInfo src)
+            => new CliKey(src);
 
         [MethodImpl(Inline)]
-        public static CliArtifactKey from(Assembly src)
-            => new CliArtifactKey(src);
+        public static CliKey from(Assembly src)
+            => new CliKey(src);
 
         [MethodImpl(Inline)]
-        internal CliArtifactKey(Type src)
+        internal CliKey(Type src)
             : this(src.MetadataToken)
         {
 
         }
 
         [MethodImpl(Inline)]
-        internal CliArtifactKey(Assembly src)
+        internal CliKey(Assembly src)
             : this(src.GetHashCode())
         {
 
         }
 
         [MethodImpl(Inline)]
-        internal CliArtifactKey(FieldInfo src)
+        internal CliKey(FieldInfo src)
             : this(src.MetadataToken)
         {
 
         }
 
         [MethodImpl(Inline)]
-        internal CliArtifactKey(PropertyInfo src)
+        internal CliKey(PropertyInfo src)
             : this(src.MetadataToken)
         {
 
         }
 
         [MethodImpl(Inline)]
-        internal CliArtifactKey(ParameterInfo src)
+        internal CliKey(ParameterInfo src)
             : this(src.MetadataToken)
         {
 
         }
 
         [MethodImpl(Inline)]
-        internal CliArtifactKey(MethodInfo src)
+        internal CliKey(MethodInfo src)
             : this(src.MetadataToken)
         {
 
         }
 
         [MethodImpl(Inline)]
-        internal CliArtifactKey(Module src)
+        internal CliKey(Module src)
             : this(src.MetadataToken)
         {
 
         }
 
         [MethodImpl(Inline)]
-        internal CliArtifactKey(int token)
+        internal CliKey(int token)
             => Data = (uint)token;
 
         [MethodImpl(Inline)]
-        internal CliArtifactKey(uint token)
+        internal CliKey(uint token)
             => Data = token;
 
         public override string ToString()
             => Format();
 
         [MethodImpl(Inline)]
-        public bool Equals(CliArtifactKey src)
+        public bool Equals(CliKey src)
             => Data == src.Data;
 
         public override int GetHashCode()
             => Data.GetHashCode();
 
         public override bool Equals(object src)
-            => src is CliArtifactKey t && Equals(t);
+            => src is CliKey t && Equals(t);
 
         [MethodImpl(Inline)]
-        public static implicit operator CliArtifactKey(int src)
-            => new CliArtifactKey(src);
+        public static implicit operator CliKey(int src)
+            => new CliKey(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator CliArtifactKey(uint src)
-            => new CliArtifactKey(src);
+        public static implicit operator CliKey(uint src)
+            => new CliKey(src);
 
         [MethodImpl(Inline)]
-        public static bool operator ==(CliArtifactKey x, CliArtifactKey y)
+        public static bool operator ==(CliKey x, CliKey y)
             => x.Equals(y);
 
         [MethodImpl(Inline)]
-        public static bool operator !=(CliArtifactKey x, CliArtifactKey y)
+        public static bool operator !=(CliKey x, CliKey y)
             => !x.Equals(y);
 
         [MethodImpl(Inline)]
-        public static implicit operator CliArtifactKey(Type src)
-            => new CliArtifactKey(src);
+        public static implicit operator CliKey(Type src)
+            => new CliKey(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator CliArtifactKey(FieldInfo src)
-            => new CliArtifactKey(src);
+        public static implicit operator CliKey(FieldInfo src)
+            => new CliKey(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator CliArtifactKey(PropertyInfo src)
-            => new CliArtifactKey(src);
+        public static implicit operator CliKey(PropertyInfo src)
+            => new CliKey(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator CliArtifactKey(MethodInfo src)
-            => new CliArtifactKey(src);
+        public static implicit operator CliKey(MethodInfo src)
+            => new CliKey(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator CliArtifactKey(ParameterInfo src)
-            => new CliArtifactKey(src);
+        public static implicit operator CliKey(ParameterInfo src)
+            => new CliKey(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator uint(CliArtifactKey src)
+        public static implicit operator uint(CliKey src)
             => src.Data;
 
         [MethodImpl(Inline)]
-        public static explicit operator int(CliArtifactKey src)
+        public static explicit operator int(CliKey src)
             => (int)src.Data;
 
-        public static CliArtifactKey Empty
+        public static CliKey Empty
             => default;
     }
 }

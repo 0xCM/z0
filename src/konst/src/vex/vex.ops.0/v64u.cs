@@ -8,13 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
-
-    partial struct vex
-    {
-
-
-    }
+    using static Part;
 
     partial struct z
     {

@@ -12,6 +12,14 @@ namespace Z0
     partial struct z
     {
         /// <summary>
+        /// Presents a string as a <see cref='Ref'/>
+        /// </summary>
+        /// <param name="src">The source string</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe Ref<string> segref(string src)
+            => new Ref<string>(vparts(N128.N, (ulong)pchar2(src), size(src)));
+
+        /// <summary>
         /// Presents a reference as a .. reference
         /// </summary>
         /// <param name="src">The leading cell</param>

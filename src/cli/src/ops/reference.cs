@@ -38,11 +38,11 @@ namespace Z0
             => EmitCilTableDoc(wf, FS.path(src.Location));
 
         /// <summary>
-        /// Defines an <see cref='CliArtfactRef'/> predicated on an a <see cref='CliArtifactKey'/>
+        /// Defines an <see cref='CliArtfactRef'/> predicated on an a <see cref='CliKey'/>
         /// </summary>
         /// <param name="src">The defining type</param>
         [MethodImpl(Inline), Op]
-        public static CliArtifactRef reference(CliArtifactKey id, ClrArtifactKind kind, StringRef name)
+        public static CliArtifactRef reference(CliKey id, ClrArtifactKind kind, StringRef name)
             => new CliArtifactRef(id,kind,name);
     }
 }

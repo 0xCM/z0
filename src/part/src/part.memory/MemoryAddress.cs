@@ -7,11 +7,19 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
-    public unsafe readonly struct MemoryAddress : IAddress<MemoryAddress,W64,ulong>
+    public unsafe readonly struct MemoryAddress :  IAddress<ulong>, IDataTypeComparable<MemoryAddress>
     {
         public ulong Location {get;}
+
+        [MethodImpl(Inline)]
+        public MemoryAddress(ulong absolute)
+            => Location = absolute;
+
+        [MethodImpl(Inline)]
+        public MemoryAddress(void* pSrc)
+            => Location = (ulong)pSrc;
 
         public bool IsEmpty
         {
@@ -50,14 +58,6 @@ namespace Z0
             }
         }
 
-        [MethodImpl(Inline)]
-        public MemoryAddress(ulong absolute)
-            => Location = absolute;
-
-        [MethodImpl(Inline)]
-        public MemoryAddress(void* pSrc)
-            => Location = (ulong)pSrc;
-
         public string Format()
             => Location.ToString("x") + HexFormatSpecs.PostSpec;
 
@@ -90,8 +90,16 @@ namespace Z0
         public uint Hash
         {
             [MethodImpl(Inline)]
-            get => z.hash(Location);
+            get => alg.hash.calc(Location);
         }
+
+        [MethodImpl(Inline)]
+        public unsafe ref T Ref<T>()
+            => ref Unsafe.AsRef<T>((void*)Location);
+
+        [MethodImpl(Inline)]
+        public unsafe void* Pointer()
+            => (void*)Location;
 
         public override int GetHashCode()
             => (int)Hash;
@@ -103,17 +111,9 @@ namespace Z0
             => Format();
 
         [MethodImpl(Inline)]
-        public unsafe ref T Ref<T>()
-            => ref Unsafe.AsRef<T>((void*)Location);
-
-        [MethodImpl(Inline)]
         public unsafe T* Pointer<T>()
             where T : unmanaged
                 => (T*)Location;
-
-        [MethodImpl(Inline)]
-        public unsafe void* Pointer()
-            => (void*)Location;
 
         [MethodImpl(Inline)]
         public static implicit operator MemoryAddress(void* pSrc)

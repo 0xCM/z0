@@ -5,11 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Reflection;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     using api = ClrHandles;
 
@@ -18,12 +16,12 @@ namespace Z0
     {
         public ClrArtifactKind Kind {get;}
 
-        public CliArtifactKey Key {get;}
+        public CliKey Key {get;}
 
         public T Handle {get;}
 
         [MethodImpl(Inline)]
-        public ClrHandle(ClrArtifactKind kind, CliArtifactKey key, T handle)
+        public ClrHandle(ClrArtifactKind kind, CliKey key, T handle)
         {
             Kind = kind;
             Key = key;

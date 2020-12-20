@@ -5,8 +5,10 @@
   </PropertyGroup>
 
 
-    <ItemGroup>
-        <ProjectReference Include="$(Part)" />
-    </ItemGroup>
+  <ItemGroup>
+      <ProjectReference Include="$(Part)" />
+      <ProjectReference Include="$(Refs)" />
+      <ProjectReference Include="$(Interop)" />
+  </ItemGroup>
 
 </Project>

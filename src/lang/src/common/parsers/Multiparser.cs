@@ -17,12 +17,12 @@ namespace Z0
         [FixedAddressValueType]
         static Multiparser _Service;
 
-        Dictionary<CliArtifactKey,IParser> Parsers;
+        Dictionary<CliKey,IParser> Parsers;
 
         static Multiparser()
         {
             _Service = new Multiparser();
-            _Service.Parsers = dict<CliArtifactKey,IParser>();
+            _Service.Parsers = dict<CliKey,IParser>();
             _Service.Include(FilePathParser.service());
         }
 
@@ -39,7 +39,7 @@ namespace Z0
             => Parsers.TryGetValue(target, out parser);
 
         [MethodImpl(Inline)]
-        public bool Lookup(CliArtifactKey target, out IParser parser)
+        public bool Lookup(CliKey target, out IParser parser)
             => Parsers.TryGetValue(target, out parser);
 
         [MethodImpl(Inline)]
@@ -47,7 +47,7 @@ namespace Z0
             => Parsers.ContainsKey(target);
 
         [MethodImpl(Inline)]
-        public bool CanParse(CliArtifactKey target)
+        public bool CanParse(CliKey target)
             => Parsers.ContainsKey(target);
 
         [MethodImpl(Inline)]
@@ -55,7 +55,7 @@ namespace Z0
             => Parsers[target];
 
         [MethodImpl(Inline)]
-        public IParser Require(CliArtifactKey target)
+        public IParser Require(CliKey target)
             => Parsers[target];
     }
 }

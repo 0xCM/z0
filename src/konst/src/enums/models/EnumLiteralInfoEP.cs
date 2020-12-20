@@ -13,7 +13,7 @@ namespace Z0
         where E : unmanaged, Enum
         where P : unmanaged
     {
-        public CliArtifactKey Id {get;}
+        public CliKey Id {get;}
 
         public uint Position {get;}
 
@@ -24,7 +24,7 @@ namespace Z0
         public P Scalar {get;}
 
         [MethodImpl(Inline)]
-        public EnumLiteralInfo(CliArtifactKey id, uint index, string name, E literal, P scalar)
+        public EnumLiteralInfo(CliKey id, uint index, string name, E literal, P scalar)
         {
             Id = id;
             Position = index;

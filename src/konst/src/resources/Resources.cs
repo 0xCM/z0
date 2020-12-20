@@ -4,9 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using static Part;
+
     [ApiHost(ApiNames.Resources)]
     public readonly partial struct Resources
     {
-
+        const NumericKind Closure = UnsignedInts;
     }
 }

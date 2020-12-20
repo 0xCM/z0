@@ -11,12 +11,12 @@ namespace Z0
 
     public readonly struct PairEvalResult<T>
     {
-        public readonly Pair<CliArtifactKey> Source;
+        public readonly Pair<CliKey> Source;
 
         public readonly Pair<T> Target;
 
         [MethodImpl(Inline)]
-        public PairEvalResult(Pair<CliArtifactKey> src, Pair<T> dst)
+        public PairEvalResult(Pair<CliKey> src, Pair<T> dst)
         {
             Source = src;
             Target = dst;

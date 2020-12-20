@@ -61,7 +61,7 @@ namespace Z0
         /// <summary>
         /// The metadata token that identifies the backing field
         /// </summary>
-        public CliArtifactKey Id
+        public CliKey Id
         {
             [MethodImpl(Inline)]
             get => BackingField;

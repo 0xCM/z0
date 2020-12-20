@@ -14,7 +14,7 @@ namespace Z0
     partial struct ClrQuery
     {
         [MethodImpl(Inline), Op]
-        public static bool type(in ClrTypes src, string name, out Type dst)
+        public static bool type(in ClrTypeLookup src, string name, out Type dst)
         {
             dst = default;
             for(var i=0u; i<src.Count; i++)

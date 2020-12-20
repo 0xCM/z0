@@ -7,11 +7,10 @@ namespace alg
     using System;
     using System.Runtime.CompilerServices;
 
-    using Z0;
-
     using static Z0.Part;
     using static Z0.memory;
 
+    [ApiHost("alg.ihash")]
     public readonly struct ihash
     {
         /// <summary>

@@ -22,12 +22,11 @@ namespace Z0
             => src.GetInterfaces();
 
         [MethodImpl(Inline), Op]
-        public static ClrTypes index(Type[] src)
-            => new ClrTypes(src);
+        public static ClrTypeLookup lookup(Type[] src)
+            => new ClrTypeLookup(src);
 
         [MethodImpl(Inline), Op]
         public static ClrStruct @struct(Type src)
             => new ClrStruct(src);
-
     }
 }

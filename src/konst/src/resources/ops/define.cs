@@ -11,7 +11,7 @@ namespace Z0
 
     partial struct Resources
     {
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static StringRes<E> define<E>(E id, MemoryAddress location, uint length)
             where E : unmanaged
                 => new StringRes<E>(id, location, length);

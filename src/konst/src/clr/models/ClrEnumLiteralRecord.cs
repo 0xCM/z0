@@ -24,7 +24,7 @@ namespace Z0
         /// <summary>
         /// The metadata token of the defining type
         /// </summary>
-        public CliArtifactKey TypeId;
+        public CliKey TypeId;
 
         /// <summary>
         /// The name of the literal identifier
@@ -34,7 +34,7 @@ namespace Z0
         /// <summary>
         /// The metadata token of the defining field
         /// </summary>
-        public CliArtifactKey FieldId;
+        public CliKey FieldId;
 
         /// <summary>
         /// The kind of primitive specialized by the enum

@@ -7,12 +7,12 @@ namespace Z0
     using System;
     using System.Reflection;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// A succinct type signature
     /// </summary>
-    public struct TypeSig
+    public struct TypeSigInfo
     {
         public string DisplayName;
 
@@ -30,15 +30,15 @@ namespace Z0
 
         public bool IsPointer;
 
-        public static TypeSig from(Type src)
-            => new TypeSig(src.DisplayName(), src.IsConstructedGenericType,src.IsGenericType && !src.IsConstructedGenericType,
+        public static TypeSigInfo from(Type src)
+            => new TypeSigInfo(src.DisplayName(), src.IsConstructedGenericType,src.IsGenericType && !src.IsConstructedGenericType,
                     src.IsByRef, false, false, src.IsPointer);
 
-        public static TypeSig from(ParameterInfo src)
+        public static TypeSigInfo from(ParameterInfo src)
         {
             var type = src.ParameterType;
             var name = type.EffectiveType().DisplayName();
-            return new TypeSig(name,
+            return new TypeSigInfo(name,
                 type.IsConstructedGenericType,
                 type.IsGenericType && !type.IsConstructedGenericType,
                 type.IsRef(),
@@ -47,7 +47,7 @@ namespace Z0
                 type.IsPointer);
         }
 
-        internal TypeSig(string DisplayName, bool IsOpenGeneric, bool IsClosedGeneric, bool IsByRef, bool IsIn, bool IsOut, bool IsPointer)
+        internal TypeSigInfo(string DisplayName, bool IsOpenGeneric, bool IsClosedGeneric, bool IsByRef, bool IsIn, bool IsOut, bool IsPointer)
         {
             this.DisplayName = DisplayName;
             this.IsOpenGeneric = IsOpenGeneric;

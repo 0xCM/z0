@@ -5,33 +5,29 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
-    public readonly struct MethodParameters : ITextual
+    public readonly struct MethodParameters : IIndex<MethodParameter>
     {
-        public readonly TableSpan<MethodParameter> Index;
+        readonly Index<MethodParameter> Data;
 
-        [MethodImpl(Inline)]
-        public static implicit operator MethodParameters(MethodParameter[] src)
-            => new MethodParameters(src);
-
-        [MethodImpl(Inline)]
-        public MethodParameters(IEnumerable<MethodParameter> refs)
-            => this.Index = refs.ToArray();
+        public MethodParameter[] Storage
+        {
+            [MethodImpl(Inline)]
+            get => Data.Storage;
+        }
 
         [MethodImpl(Inline)]
         public MethodParameters(params MethodParameter[] src)
-            => this.Index = src;
+            => Data = src;
 
         public string Format(bool fence)
         {
-            if(Index.IsNonEmpty)
+            if(Data.IsNonEmpty)
             {
-                var content = string.Join(", ", Index.Storage. Select(x => x.Format()));
+                var content = string.Join(", ", Data.Storage. Select(x => x.Format()));
                 return fence ?  (Chars.LParen + content + Chars.RParen) : content;
             }
             else
@@ -43,5 +39,9 @@ namespace Z0
 
         public override string ToString()
             => Format();
+
+        [MethodImpl(Inline)]
+        public static implicit operator MethodParameters(MethodParameter[] src)
+            => new MethodParameters(src);
     }
 }

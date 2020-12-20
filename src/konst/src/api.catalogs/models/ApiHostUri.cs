@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     public readonly struct ApiHostUri : IApiUri<ApiHostUri>, INullary<ApiHostUri>
@@ -71,7 +71,7 @@ namespace Z0
             => UriText?.CompareTo(src.UriText) ?? int.MaxValue;
 
         public override int GetHashCode()
-            => (int)hash(UriText);
+            => (int)alg.hash.calc(UriText);
 
         public override bool Equals(object src)
             => src is ApiHostUri x && Equals(x);

@@ -6,12 +6,11 @@ namespace alg
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
 
     using Z0;
 
     using static Z0.Part;
-    using static Z0.z;
+    using static Z0.memory;
 
     /// <summary>
     /// Computes the FNV-1a hash of various things
@@ -51,14 +50,6 @@ namespace alg
         [MethodImpl(Inline)]
         public static ulong calc(Type t1, Type t2, Type t3)
             => calc(t1,t2) ^ calc(t1, t3);
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static uint calc<T>(Vector128<T> src)
-            where T : unmanaged
-        {
-            var v = v64u(src);
-            return calc(vcell(v,0), vcell(v,1));
-        }
 
         /// <summary>
         /// Creates an unsigned calc code
@@ -367,7 +358,7 @@ namespace alg
             else if(typeof(T) == typeof(ushort))
                 return calc(uint16(src));
             else if(typeof(T) == typeof(uint))
-                return calc(z.uint32(src));
+                return calc(uint32(src));
             else if(typeof(T) == typeof(ulong))
                 return calc(uint64(src));
             else
@@ -421,7 +412,7 @@ namespace alg
             else if(typeof(T) == typeof(ushort))
                 return calc(uint16(x), uint16(y));
             else if(typeof(T) == typeof(uint))
-                return calc(z.uint32(x), z.uint32(y));
+                return calc(uint32(x), uint32(y));
             else if(typeof(T) == typeof(ulong))
                 return calc(uint64(x), uint64(y));
             else

@@ -13,12 +13,12 @@ namespace Z0
     [Record]
     public struct CliTableIndex : IRecord<CliTableIndex>
     {
-        public CliArtifactKey Key;
+        public CliKey Key;
 
         public TableIndex Source;
 
         [MethodImpl(Inline)]
-        public CliTableIndex(CliArtifactKey token, TableIndex src)
+        public CliTableIndex(CliKey token, TableIndex src)
         {
             Key = token;
             Source = src;

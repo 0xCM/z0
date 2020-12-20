@@ -9,7 +9,7 @@ namespace Z0
 
     public struct MethodMetadata : ITextual
     {
-        public CliArtifactKey MethodId;
+        public CliKey MethodId;
 
         public Name MethodName;
 
@@ -17,15 +17,15 @@ namespace Z0
 
         public Name DefiningModule;
 
-        public TypeSig DeclaringType;
+        public TypeSigInfo DeclaringType;
 
-        public TypeSig ReturnType;
+        public TypeSigInfo ReturnType;
 
         public MethodParameters ValueParams;
 
         public TypeParameters TypeParams;
 
-        public MethodMetadata(int id, string assembly, string module, TypeSig type, string name, TypeSig tReturn, MethodParameters args, TypeParameters tParams)
+        public MethodMetadata(int id, string assembly, string module, TypeSigInfo type, string name, TypeSigInfo tReturn, MethodParameters args, TypeParameters tParams)
         {
             MethodId = id;
             DefiningAssembly = assembly;

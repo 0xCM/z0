@@ -7,32 +7,16 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     /// <summary>
     /// Defines the content of a set of binary resources for an api host
     /// </summary>
     public readonly struct ApiHostRes
     {
-        public static ApiHostRes from(ApiHostCodeBlocks src)
-        {
-            var count = src.Length;
-            var buffer = alloc<BinaryResSpec>(count);
-            var dst = span(buffer);
-            var blocks = span(src.Storage);
-            for(var i=0u; i<count; i++)
-            {
-                ref readonly var code = ref skip(blocks,i);
-                var name = LegalIdentityBuilder.code(code.Id);
-                seek(dst,i) = new BinaryResSpec(name, code.Encoded);
-            }
-            return new ApiHostRes(src.Host, buffer);
-        }
+        public ApiHostUri Host {get;}
 
-        public readonly ApiHostUri Host;
-
-        public readonly BinaryResSpec[] Data;
+        public BinaryResSpec[] Data {get;}
 
         [MethodImpl(Inline)]
         public ApiHostRes(ApiHostUri host, BinaryResSpec[] src)

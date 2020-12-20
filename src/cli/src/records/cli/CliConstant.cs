@@ -31,7 +31,7 @@ namespace Z0
 
         public Count Sequence;
 
-        public CliArtifactKey ParentId;
+        public CliKey ParentId;
 
         public string Source;
 

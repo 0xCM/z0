@@ -9,36 +9,6 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Part;
-    using static memory;
-
-    partial struct vex
-    {
-        /// <summary>
-        /// Presents a generic cpu vector as a cpu vector with components of type uint16
-        /// </summary>
-        /// <param name="x">The source vector</param>
-        /// <typeparam name="T">The source vector primal component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Vector128<ushort> v16u<T>(Vector128<T> x)
-            where T : unmanaged
-                => x.AsUInt16();
-
-        /// <summary>
-        /// Presents a generic cpu vector as a cpu vector with components of type uint16
-        /// </summary>
-        /// <param name="x">The source vector</param>
-        /// <typeparam name="T">The source vector primal component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Vector256<ushort> v16u<T>(Vector256<T> x)
-            where T : unmanaged
-                => x.AsUInt16();
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref Vector256<ushort> v16u<T>(in Vector256<T> src)
-            where T : unmanaged
-                => ref @as<Vector256<T>,Vector256<ushort>>(src);
-
-    }
 
     partial struct z
     {

@@ -9,13 +9,13 @@ namespace Z0
 
     using static Part;
 
-    using Storage = KeyedValues<CliArtifactKey,System.Type>;
-    using T = KeyedValue<CliArtifactKey,System.Type>;
+    using Storage = KeyedValues<CliKey,System.Type>;
+    using T = KeyedValue<CliKey,System.Type>;
     using V = System.Type;
-    using K = CliArtifactKey;
+    using K = CliKey;
 
     [ApiType(ApiNames.ClrTypes, true)]
-    public readonly struct ClrTypes
+    public readonly struct ClrTypeLookup
     {
         readonly Storage Data;
 
@@ -24,11 +24,11 @@ namespace Z0
             => t.MetadataToken;
 
         [MethodImpl(Inline)]
-        public ClrTypes(ReadOnlySpan<V> src)
+        public ClrTypeLookup(ReadOnlySpan<V> src)
             => Data = new Storage(kf, src);
 
         [MethodImpl(Inline)]
-        public ClrTypes(Storage src)
+        public ClrTypeLookup(Storage src)
             => Data = src;
 
         public ref V this[in K id]

@@ -27,7 +27,6 @@ namespace Z0
             => Content?.ToString() ?? string.Empty;
     }
 
-
     [Free]
     public interface IDataTypeEquatable<T> : IDataType<T>, IEquatable<T>
     {

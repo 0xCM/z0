@@ -8,10 +8,18 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
+    using static Part;
 
     partial struct z
     {
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static uint vhash<T>(Vector128<T> src)
+            where T : unmanaged
+        {
+            var v = v64u(src);
+            return alg.hash.calc(vcell(v,0), vcell(v,1));
+        }
+
         /// <summary>
         /// Creates a 128-bit hash code predicated on four type parameters
         /// </summary>
