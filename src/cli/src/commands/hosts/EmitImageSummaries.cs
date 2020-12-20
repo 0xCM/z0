@@ -15,10 +15,10 @@ namespace Z0
     [WfHost]
     public sealed class EmitImageSummaries : WfHost<EmitImageSummaries>
     {
-        LocatedImages Source;
+        LocatedImageIndex Source;
 
         [MethodImpl(Inline)]
-        public static WfHost create(in LocatedImages src)
+        public static WfHost create(in LocatedImageIndex src)
         {
             var host = new EmitImageSummaries();
             host.Source = src;
@@ -29,7 +29,7 @@ namespace Z0
         public static new WfHost create()
         {
             var host = new EmitImageSummaries();
-            host.Source = Process.GetCurrentProcess().Modules.Cast<ProcessModule>().Map(ProcessExtractors.locate).OrderBy(x => x.BaseAddress);
+            host.Source = Process.GetCurrentProcess().Modules.Cast<ProcessModule>().Map(LocatedImages.locate).OrderBy(x => x.BaseAddress);
             return host;
         }
 
@@ -46,12 +46,12 @@ namespace Z0
 
         readonly WfHost Host;
 
-        readonly LocatedImages Images;
+        readonly LocatedImageIndex Images;
 
         readonly FS.FilePath TargetPath;
 
         [MethodImpl(Inline)]
-        public EmitImageSummariesStep(IWfShell wf, WfHost host, LocatedImages src)
+        public EmitImageSummariesStep(IWfShell wf, WfHost host, LocatedImageIndex src)
         {
             Wf = wf;
             Host = host;
@@ -62,7 +62,7 @@ namespace Z0
 
         public void Run()
         {
-            ProcessExtractors.summarize(Images, TargetPath);
+            LocatedImages.emit(Images, TargetPath);
         }
 
         public void Dispose()

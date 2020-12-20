@@ -49,7 +49,7 @@ namespace Z0
         where P : unmanaged
     {
         new ReadOnlySpan<EnumLiteralDetail<K,P>> KeyIndex
-            => Enums.values<K,P>().Content;
+            => Enums.values<K,P>().Storage;
     }
 
     [Free]

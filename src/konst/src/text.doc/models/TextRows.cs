@@ -6,21 +6,25 @@ namespace Z0
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;    
-    using System.Runtime.CompilerServices;    
+    using System.Linq;
+    using System.Runtime.CompilerServices;
 
     using static Konst;
 
-    public readonly struct TextRows : IConstIndex<TextRow>
-    {        
-        readonly TextRow[] RowData;        
+    public readonly struct TextRows : IIndex<TextRow>
+    {
+        readonly TextRow[] RowData;
 
         [MethodImpl(Inline)]
         public TextRows(TextRow[] data)
+            => RowData = data;
+
+        public TextRow[] Storage
         {
-            RowData = data;
+            [MethodImpl(Inline)]
+            get => RowData;
         }
-        
+
         public int Length
         {
             [MethodImpl(Inline)]
@@ -41,10 +45,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public ReadOnlySpan<TextRow> Slice(int offset)
             => Rows.Slice(offset);
-    
+
         [MethodImpl(Inline)]
         public ReadOnlySpan<TextRow> Slice(int offset, int length)
             => Rows.Slice(offset, length);
-    
+
     }
 }

@@ -44,7 +44,7 @@ namespace Z0
             Wf = wf.WithHost(Host);
             Part = part;
             PartId = part.Id;
-            BaseAddress = ProcessExtractors.@base(Part);
+            BaseAddress = LocatedImages.@base(Part);
             TargetPath = Wf.Db().Table(ImageContentRecord.TableId, PartId);
             Formatter = Formatters.data(BaseAddress);
             Offset = 0;

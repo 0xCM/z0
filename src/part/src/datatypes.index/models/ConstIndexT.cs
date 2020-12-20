@@ -10,39 +10,20 @@ namespace Z0
     using static Part;
     using static memory;
 
-    public readonly struct Index<T> : IIndex<T>
+    public readonly struct ConstIndex<T> : IConstIndex<T>
     {
         readonly T[] Data;
 
         [MethodImpl(Inline)]
-        public Index(T[] content)
+        public ConstIndex(T[] content)
             => Data = content;
-
         public int Length
         {
             [MethodImpl(Inline)]
             get => Data?.Length ?? 0;
         }
 
-        public Span<T> Edit
-        {
-            [MethodImpl(Inline)]
-            get => Data;
-        }
-
-        public ReadOnlySpan<T> View
-        {
-            [MethodImpl(Inline)]
-            get => Data;
-        }
-
-        public Span<T> Terms
-        {
-            [MethodImpl(Inline)]
-            get => Data;
-        }
-
-        public T[] Storage
+        public ReadOnlySpan<T> Terms
         {
             [MethodImpl(Inline)]
             get => Data;
@@ -91,7 +72,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public ConstIndex<T> Freeze()
+        public Index<T> Thaw()
             => Data;
         public string Format()
             => Index.delimit(Data).Format();
@@ -102,45 +83,36 @@ namespace Z0
         public Index<T> Reverse()
             => Index.reverse(Data);
 
-        [MethodImpl(Inline)]
         public bit Search(Func<T,bool> predicate, out T found)
-            => Index.search(this, predicate, out found);
+            => Index.search(Data, predicate, out found);
 
-        public Index<Y> Cast<Y>()
-            => new Index<Y>(Data.Select(x => cast<Y>(x)));
+        public ConstIndex<Y> Cast<Y>()
+            => Data.Select(x => cast<Y>(x));
 
-        public Index<Y> Select<Y>(Func<T,Y> selector)
+        public ConstIndex<Y> Select<Y>(Func<T,Y> selector)
              => Index.map(Data, selector);
 
-        public Index<Z> SelectMany<Y,Z>(Func<T,Index<Y>> lift, Func<T,Y,Z> project)
+        public ConstIndex<Z> SelectMany<Y,Z>(Func<T,Index<Y>> lift, Func<T,Y,Z> project)
              => Index.map(Data, lift, project);
 
-        public Index<Y> SelectMany<Y>(Func<T,Index<Y>> lift)
+        public ConstIndex<Y> SelectMany<Y>(Func<T,Index<Y>> lift)
              => Index.map(Data, lift);
 
-        public Index<T> Where(Func<T,bool> predicate)
+        public ConstIndex<T> Where(Func<T,bool> predicate)
             => Index.filter(Data, predicate);
 
         [MethodImpl(Inline)]
-        public static implicit operator Span<T>(Index<T> src)
-            => src.Storage;
+        public static implicit operator ReadOnlySpan<T>(ConstIndex<T> src)
+            => src.Terms;
 
         [MethodImpl(Inline)]
-        public static implicit operator ReadOnlySpan<T>(Index<T> src)
-            => src.Storage;
+        public static implicit operator ConstIndex<T>(T[] src)
+            => new ConstIndex<T>(src);
 
-        [MethodImpl(Inline)]
-        public static implicit operator T[](Index<T> src)
-            => src.Storage;
-
-        [MethodImpl(Inline)]
-        public static implicit operator Index<T>(T[] src)
-            => new Index<T>(src);
-
-        public static Index<T> Empty
+        public static ConstIndex<T> Empty
         {
            [MethodImpl(Inline)]
-           get => new Index<T>(sys.empty<T>());
+           get => new ConstIndex<T>(sys.empty<T>());
         }
     }
 }

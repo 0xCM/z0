@@ -15,7 +15,7 @@ namespace Z0
     /// <summary>
     /// Defines an E-V parametric literal index
     /// </summary>
-     public readonly struct EnumLiteralDetails<E,P> : IEnumerable<EnumLiteralDetail<E,P>>, IConstIndex<EnumLiteralDetail<E,P>>
+     public readonly struct EnumLiteralDetails<E,P> : IEnumerable<EnumLiteralDetail<E,P>>, IIndex<EnumLiteralDetail<E,P>>
         where E : unmanaged, Enum
         where P : unmanaged
     {
@@ -26,7 +26,7 @@ namespace Z0
             => new EnumLiteralDetails<E,P>(src);
 
         [MethodImpl(Inline)]
-        public EnumLiteralDetails(EnumLiteralDetail<E,P>[] src) 
+        public EnumLiteralDetails(EnumLiteralDetail<E,P>[] src)
             => Data = src;
 
         public int Length
@@ -35,7 +35,7 @@ namespace Z0
             get => Data.Length;
         }
 
-        public EnumLiteralDetail<E,P>[] Content
+        public EnumLiteralDetail<E,P>[] Storage
         {
             [MethodImpl(Inline)]
             get => Data;
@@ -55,7 +55,7 @@ namespace Z0
 
         public IEnumerator<EnumLiteralDetail<E,P>> GetEnumerator()
             => ((IEnumerable<EnumLiteralDetail<E,P>>)Data).GetEnumerator();
-        
+
         IEnumerator IEnumerable.GetEnumerator()
             => Data.GetEnumerator();
 

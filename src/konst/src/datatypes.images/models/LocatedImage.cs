@@ -7,13 +7,13 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Describes a PE image from the perspective of process entry point
     /// </summary>
     [Datatype]
-    public readonly struct LocatedImage : IDataTypeComparable<LocatedImage>, IAddressable<LocatedImage, MemoryAddress>
+    public readonly struct LocatedImage : ILocatedImage<LocatedImage>
     {
         /// <summary>
         /// The image source path
@@ -74,7 +74,7 @@ namespace Z0
         public MemoryRange Range
         {
             [MethodImpl(Inline)]
-            get =>  (BaseAddress, EndAddress);
+            get => (BaseAddress, EndAddress);
         }
 
         MemoryAddress IAddressable<MemoryAddress>.Address

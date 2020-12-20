@@ -30,7 +30,7 @@ namespace Z0
 
         readonly Span<IPart> Parts;
 
-        readonly LocatedImages Images;
+        readonly LocatedImageIndex Images;
 
         readonly FolderPath TargetDir;
 
@@ -44,7 +44,7 @@ namespace Z0
             Parts = Wf.Api.Parts;
             Index = default;
             TargetDir = wf.ResourceRoot + FolderName.Define("images");
-            Images = ProcessExtractors.images();
+            Images = LocatedImages.current();
             wf.Created();
         }
 
@@ -61,7 +61,7 @@ namespace Z0
              for(var i=0u; i<count; i++)
              {
                 ref readonly var part = ref skip(Parts, i);
-                var @base = ProcessExtractors.@base(part);
+                var @base = LocatedImages.@base(part);
                 var dstpath = TargetDir + FileName.define(part.Format(), FileExtension.Define("csv"));
 
                 using var step = new EmitPartImageData(Wf, part);

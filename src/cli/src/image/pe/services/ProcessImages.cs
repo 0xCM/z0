@@ -8,8 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Diagnostics;
     using System.Linq;
-    using System.IO;
-    using System.Reflection;
 
     using static Konst;
     using static z;
@@ -17,6 +15,10 @@ namespace Z0
     [ApiHost]
     public readonly struct ProcessImages
     {
+
+        public static ReadOnlySpan<ProcessModule> modules(Process src)
+            => src.Modules.Cast<ProcessModule>().Array();
+
         public static void EmitContent(IWfShell wf)
         {
             ProcessImages.specify(wf, Process.GetCurrentProcess(), out Index<EmitImageContentCmd> commands);
@@ -31,7 +33,7 @@ namespace Z0
         [Op]
         public static ref EmitImageContentCmd specify(IWfShell wf, ProcessModule src, ref EmitImageContentCmd cmd)
         {
-            var located = ProcessExtractors.locate(src);
+            var located = LocatedImages.locate(src);
             cmd.Source = located;
             cmd.Target = wf.Db().Table(ImageContentRecord.TableId, located.ImagePath.FileName.WithoutExtension);
             return ref cmd;
@@ -40,7 +42,7 @@ namespace Z0
         [Op]
         public static void specify(IWfShell wf, Process src, out Index<EmitImageContentCmd> buffer)
         {
-            var pmods = ProcessExtractors.modules(src);
+            var pmods = modules(src);
             var count = pmods.Length;
             buffer = sys.alloc<EmitImageContentCmd>(count);
             var dst = buffer.Edit;

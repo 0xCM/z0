@@ -46,7 +46,7 @@ namespace Z0
             nameIndex = Enums.NameIndex<K>();
             keys = Enums.literals<K>();
             literals = Enums.values<K,P>();
-            keyIndex = literals.Content;
+            keyIndex = literals.Storage;
             keyNames = Enums.names<K>();
             keyKind = Enums.kind<K>();
         }

@@ -11,7 +11,7 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct TextDoc : IConstIndex<TextRow>
+    public readonly struct TextDoc : IIndex<TextRow>
     {
         public readonly TextRow[] RowData;
 
@@ -31,6 +31,12 @@ namespace Z0
         }
 
         public ReadOnlySpan<TextRow> Rows
+        {
+            [MethodImpl(Inline)]
+            get => RowData;
+        }
+
+        public TextRow[] Storage
         {
             [MethodImpl(Inline)]
             get => RowData;

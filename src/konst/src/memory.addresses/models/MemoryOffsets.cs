@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct MemoryOffsets : IConstIndex<MemoryOffset>
+    public readonly struct MemoryOffsets
     {
         readonly MemoryOffset[] Offsets;
 

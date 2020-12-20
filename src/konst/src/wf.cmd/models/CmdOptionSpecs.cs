@@ -38,12 +38,6 @@ namespace Z0
             get => Data;
         }
 
-        public ReadOnlySpan<CmdOptionSpec> Terms
-        {
-            [MethodImpl(Inline)]
-            get => Data.Terms;
-        }
-
         public string Format()
             => Seq.format(Storage);
 

@@ -5,19 +5,14 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
 
     using static Part;
 
-    [ApiHost]
-    public readonly partial struct Index
+    partial struct Index
     {
-        const NumericKind Closure = UInt64k;
-
-        [Op, Closures(Closure)]
-        public static Index<T> reverse<T>(T[] src)
-        {
-            Array.Reverse(src);
-            return src;
-        }
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static DelimitedIndex<T> delimit<T>(T[] src, char delimiter = FieldDelimiter)
+            => new DelimitedIndex<T>(src, delimiter);
     }
 }

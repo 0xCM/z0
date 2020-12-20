@@ -4,20 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     using static Part;
 
     [ApiHost]
-    public readonly partial struct Index
+    public static partial class XIndex
     {
         const NumericKind Closure = UInt64k;
-
-        [Op, Closures(Closure)]
-        public static Index<T> reverse<T>(T[] src)
-        {
-            Array.Reverse(src);
-            return src;
-        }
     }
 }

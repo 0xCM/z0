@@ -10,7 +10,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static z;
+    using static memory;
 
     using api = Seq;
 
@@ -25,13 +25,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public void Clear()
-            => Terms.Clear();
-
-        public Span<T> Terms
-        {
-            [MethodImpl(Inline)]
-            get => Data ?? EmptyTermSeq;
-        }
+            => Edit.Clear();
 
         public Span<T> Edit
         {
@@ -54,7 +48,7 @@ namespace Z0
         public ref T this[I index]
         {
             [MethodImpl(Inline)]
-            get => ref seek(Terms, @as<I,uint>(index));
+            get => ref seek(Storage, @as<I,uint>(index));
         }
 
         public I Count

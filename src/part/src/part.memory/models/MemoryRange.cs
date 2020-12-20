@@ -7,16 +7,22 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Defines an inclusive address range
     /// </summary>
     public readonly struct MemoryRange : IMemoryRange<MemoryRange>
     {
-        public readonly MemoryAddress Start;
+        /// <summary>
+        /// The inclusive address at which the range begins
+        /// </summary>
+        public MemoryAddress Start {get;}
 
-        public readonly MemoryAddress End;
+        /// <summary>
+        /// The inclusive address at which the range ends
+        /// </summary>
+        public MemoryAddress End {get;}
 
         public ulong Length
         {
@@ -30,7 +36,6 @@ namespace Z0
             get => Length == 0;
         }
 
-
         [MethodImpl(Inline)]
         public MemoryRange(MemoryAddress start, MemoryAddress end)
         {
@@ -38,15 +43,9 @@ namespace Z0
             End = end;
         }
 
-        [MethodImpl(Inline)]
-        public void Deconstruct(out MemoryAddress start, out MemoryAddress end)
-        {
-            start = Start;
-            end = End;
-        }
 
         public override int GetHashCode()
-            => (int)z.hash((ulong)Start, (ulong)End);
+            => (int)alg.hash.calc((ulong)Start, (ulong)End);
 
         [MethodImpl(Inline)]
         public bool Equals(MemoryRange src)
@@ -107,6 +106,5 @@ namespace Z0
             => new MemoryRange(src.start, src.end);
 
         public static MemoryRange Empty => default;
-
     }
 }

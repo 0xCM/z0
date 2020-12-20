@@ -25,7 +25,7 @@ namespace Z0
         new T Address {get;}
 
         MemoryAddress IAddressable.Address
-            => z.force<T,ulong>(Address);
+            => memory.@as<T,ulong>(Address);
     }
 
     /// <summary>

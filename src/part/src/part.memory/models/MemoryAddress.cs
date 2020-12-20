@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    public unsafe readonly struct MemoryAddress :  IAddress<ulong>, IDataTypeComparable<MemoryAddress>
+    public unsafe readonly struct MemoryAddress : IAddress<ulong>, IDataTypeComparable<MemoryAddress>
     {
         public ulong Location {get;}
 
