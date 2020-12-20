@@ -24,16 +24,16 @@ namespace Z0
                 => new DataLayout(src.Id, src.Storage.Map(x => untyped(x)));
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static LayoutPartition untyped<T>(in LayoutPartition<T> src)
+        public static LayoutPart untyped<T>(in LayoutPart<T> src)
             where T : unmanaged
-                => new LayoutPartition(src.Id, src.Left, src.Right);
+                => new LayoutPart(src.Id, src.Left, src.Right);
 
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static LayoutPartition untyped<T,R>(in LayoutPartition<T,R> src)
+        public static LayoutPart untyped<T,R>(in LayoutPart<T,R> src)
             where T : unmanaged
             where R : unmanaged
-                => new LayoutPartition(src.Id, @as<R,ulong>(src.Left), @as<R,ulong>(src.Right));
+                => new LayoutPart(src.Id, @as<R,ulong>(src.Left), @as<R,ulong>(src.Right));
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static LayoutIdentity untyped<T>(in LayoutIdentity<T> src)

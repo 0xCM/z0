@@ -29,11 +29,11 @@ namespace Z0
 
 
         /// <summary>
-        /// Computes the aggregate width of a <see cref='LayoutPartition'/> sequence
+        /// Computes the aggregate width of a <see cref='LayoutPart'/> sequence
         /// </summary>
         /// <param name="src">The source sequence</param>
         [MethodImpl(Inline), Op]
-        public static BitSize width(ReadOnlySpan<LayoutPartition> src)
+        public static BitSize width(ReadOnlySpan<LayoutPart> src)
         {
             var total = 0ul;
             var count = src.Length;
@@ -44,12 +44,12 @@ namespace Z0
         }
 
         /// <summary>
-        /// Computes the aggregate width of a <see cref='LayoutPartition{T}'/> sequence
+        /// Computes the aggregate width of a <see cref='LayoutPart{T}'/> sequence
         /// </summary>
         /// <param name="src">The source sequence</param>
         /// <typeparam name="T">The partition kind</typeparam>
         [MethodImpl(Inline), Op]
-        public static BitSize width<T>(ReadOnlySpan<LayoutPartition<T>> src)
+        public static BitSize width<T>(ReadOnlySpan<LayoutPart<T>> src)
             where T : unmanaged
         {
             var total = 0ul;
@@ -61,7 +61,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static BitSize width<T,R>(ReadOnlySpan<LayoutPartition<T,R>> src)
+        public static BitSize width<T,R>(ReadOnlySpan<LayoutPart<T,R>> src)
             where T : unmanaged
             where R : unmanaged
         {

@@ -31,6 +31,7 @@ namespace Z0
             dst.Delimit(F.Data, src.Data.Format());
             return dst.Format();
         }
+
         [Op]
         public static ParseResult<ApiParseBlock[]> load(FS.FilePath src)
         {
@@ -44,12 +45,12 @@ namespace Z0
         }
 
         [Op]
-        public static ApiParseBlock[] create(ApiHostUri host, ApiMemberCodeBlocks members)
+        public static ApiParseBlock[] create(ApiHostUri host, ApiMemberCode[] members)
         {
-            var count = members.Count;
+            var count = members.Length;
             var buffer = alloc<ApiParseBlock>(count);
             var dst = span(buffer);
-            var src = members.View;
+            ref readonly var src = ref first(members);
             for(var i=0u; i<count; i++)
                 seek(dst,i) = record(skip(src,i), i);
             return buffer;

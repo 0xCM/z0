@@ -7,14 +7,13 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     partial struct DataLayouts
     {
         [MethodImpl(Inline), Op]
         public static LayoutIdentity identify(uint index, ulong kind)
-            => new LayoutIdentity(index,kind);
+            => new LayoutIdentity(index, kind);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static LayoutIdentity<T> identify<T>(uint index, T kind)

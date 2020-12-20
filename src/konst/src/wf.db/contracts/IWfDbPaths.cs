@@ -48,9 +48,6 @@ namespace Z0
         FS.FolderPath Reflected(Assembly src)
             => ReflectedRoot() + FS.folder(src.GetSimpleName());
 
-        FS.FolderPath EtlRoot()
-            => Root + FS.folder(DbNames.etl);
-
         FS.FolderPath TmpRoot()
             => Root + FS.folder(DbNames.tmp);
 

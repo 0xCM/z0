@@ -11,24 +11,30 @@ namespace Z0
 
     public readonly struct MethodParameters : IIndex<MethodParameter>
     {
-        readonly Index<MethodParameter> Data;
+        readonly MethodParameter[] Data;
 
         public MethodParameter[] Storage
         {
             [MethodImpl(Inline)]
-            get => Data.Storage;
+            get => Data;
         }
 
         [MethodImpl(Inline)]
         public MethodParameters(params MethodParameter[] src)
             => Data = src;
 
+        public int Length
+        {
+            [MethodImpl(Inline)]
+            get => Data?.Length ?? 0;
+        }
+
         public string Format(bool fence)
         {
-            if(Data.IsNonEmpty)
+            if(Length !=0)
             {
-                var content = string.Join(", ", Data.Storage. Select(x => x.Format()));
-                return fence ?  (Chars.LParen + content + Chars.RParen) : content;
+                var content = string.Join(", ", Data.Select(x => x.Format()));
+                return fence ? (Chars.LParen + content + Chars.RParen) : content;
             }
             else
                 return EmptyString;

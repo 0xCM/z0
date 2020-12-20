@@ -15,8 +15,10 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source type</param>
         [Op]
-        public static string DisplayName(this Type src)
+        public static string DisplayName(this Type src, int recursion = 0)
         {
+            if(recursion > 2)
+                return $"Recursive fail for {src.Name}";
             try
             {
                 if(src.IsGenericMethodParameter || src.IsGenericParameter || src.IsGenericTypeParameter)
@@ -29,10 +31,10 @@ namespace Z0
                     return src.GetCustomAttribute<DisplayNameAttribute>().DisplayName;
 
                 if(src.IsEnum && src.IsConcrete())
-                    return src.Name + ':' + src.GetEnumUnderlyingType().DisplayName();
+                    return src.Name + ':' + src.GetEnumUnderlyingType().DisplayName(recursion + 1);
 
                 if(src.IsPointer)
-                    return $"{src.GetElementType().DisplayName()}*";
+                    return $"{src.GetElementType().DisplayName(recursion + 1)}*";
 
                 if(src.IsSystemDefined())
                 {
@@ -44,7 +46,7 @@ namespace Z0
                     return src.FormatGeneric();
 
                 if(src.IsRef())
-                    return src.GetElementType().DisplayName();
+                    return src.GetElementType().DisplayName(recursion + 1);
 
                 return src.Name;
 
@@ -64,7 +66,7 @@ namespace Z0
             {
                 name = name.Replace($"`{args.Length}", string.Empty);
                 name += "<";
-                for(var i= 0; i< args.Length; i++)
+                for(var i= 0; i<args.Length; i++)
                 {
                     name += args[i].DisplayName();
                     if(i != args.Length - 1)

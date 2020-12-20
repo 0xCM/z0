@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct Key<T> : ITextual, IHashed<Key<T>>
+    public readonly struct Key<T> : ITextual, IHashed
         where T : unmanaged
     {
         public T Value {get;}

@@ -12,13 +12,9 @@ namespace Z0
     /// <summary>
     /// Defines a sequence of <see cref='ApiMemberCode'/> records
     /// </summary>
-    public readonly struct ApiMemberCodeBlocks : ITableSpan<ApiMemberCode>
+    public readonly struct ApiMemberCodeBlocks : IIndex<ApiMemberCode>
     {
-        readonly TableSpan<ApiMemberCode> Data;
-
-        [MethodImpl(Inline)]
-        public static implicit operator ApiMemberCodeBlocks(ApiMemberCode[] src)
-            => new ApiMemberCodeBlocks(src);
+        readonly Index<ApiMemberCode> Data;
 
         [MethodImpl(Inline)]
         public ApiMemberCodeBlocks(ApiMemberCode[] src)
@@ -59,5 +55,14 @@ namespace Z0
             [MethodImpl(Inline)]
             get => ref Data[index];
         }
+
+        [MethodImpl(Inline)]
+        public static implicit operator ApiMemberCodeBlocks(ApiMemberCode[] src)
+            => new ApiMemberCodeBlocks(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator ApiMemberCode[](ApiMemberCodeBlocks src)
+            => src.Storage;
+
     }
 }

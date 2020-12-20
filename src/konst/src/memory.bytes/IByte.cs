@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
     /// <summary>
     /// A byte, just one
     /// </summary>
@@ -11,11 +11,11 @@ namespace Z0
     {
         byte Value {get;}
 
-        uint IHashed.Hash 
+        uint IHashed.Hash
             => Value;
     }
 
-    public interface IByte<F> : IByte, IHashed<F>
+    public interface IByte<F> : IByte, IHashed
         where F : unmanaged, IByte<F>
     {
 

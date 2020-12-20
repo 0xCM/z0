@@ -14,7 +14,7 @@ namespace Z0
     /// Identifies a rectangular region within a table
     /// </summary>
     [StructLayout(LayoutKind.Sequential)]
-    public readonly struct TableRegion : IDataTypeComparable<TableRegion>, IHashed<TableRegion>
+    public readonly struct TableRegion : IDataTypeComparable<TableRegion>, IHashed
     {
         /// <summary>
         /// The top-left cell

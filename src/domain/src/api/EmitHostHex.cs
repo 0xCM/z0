@@ -68,8 +68,10 @@ namespace Z0
             try
             {
                 Wf.Running(Spec.ApiHost);
-                var report = ApiParseBlocks.create(Spec.ApiHost, Spec.Source);
+                var source = Spec.Source.Storage;
                 var target = Wf.Db().CapturedHexFile(Spec.ApiHost);
+                Wf.Status($"Emitting {source.Length} blocks to {target}");
+                var report = ApiParseBlocks.create(Spec.ApiHost, source);
                 ApiParseBlocks.save(report, target);
                 Emitted = report;
                 Wf.EmittedTable<ApiParseBlock>(Emitted.Length, target);

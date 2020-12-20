@@ -19,7 +19,7 @@ namespace Z0
     }
 
     [Free]
-    public interface ICmdName<T> : ICmdName, IEquatable<T>, IHashed<T>
+    public interface ICmdName<T> : ICmdName, IEquatable<T>, IHashed
         where T : struct, ICmdName<T>
     {
         bool IEquatable<T>.Equals(T src)

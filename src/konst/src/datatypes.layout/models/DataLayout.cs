@@ -8,8 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     using api = DataLayouts;
 
@@ -18,10 +17,10 @@ namespace Z0
     {
         public LayoutIdentity Id {get;}
 
-        readonly TableSpan<LayoutPartition> Data;
+        readonly TableSpan<LayoutPart> Data;
 
         [MethodImpl(Inline)]
-        public DataLayout(LayoutIdentity id, LayoutPartition[] parts)
+        public DataLayout(LayoutIdentity id, LayoutPart[] parts)
         {
             Id = id;
             Data = parts;
@@ -39,19 +38,19 @@ namespace Z0
             get => Data.Count;
         }
 
-        public ReadOnlySpan<LayoutPartition> Partitions
+        public ReadOnlySpan<LayoutPart> Partitions
         {
             [MethodImpl(Inline)]
             get => Data.View;
         }
 
-        public ref LayoutPartition FirstPartition
+        public ref LayoutPart FirstPartition
         {
             [MethodImpl(Inline)]
             get => ref Data.First;
         }
 
-        public ref LayoutPartition this[uint index]
+        public ref LayoutPart this[uint index]
         {
             [MethodImpl(Inline)]
             get => ref Data[index];

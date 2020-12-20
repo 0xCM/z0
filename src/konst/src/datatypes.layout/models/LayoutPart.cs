@@ -8,21 +8,19 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     using api = DataLayouts;
 
-    /// <summary>
-    /// Defines a <typeparamref name='T'/> kinded segment partition
-    /// </summary>
     [StructLayout(LayoutKind.Sequential)]
-    public readonly struct LayoutPartition<T>
-        where T : unmanaged
+    public readonly struct LayoutPart : IDataLayout<LayoutPart>
     {
-        public LayoutIdentity<T> Id {get;}
+        /// <summary>
+        /// Defines enclosure-relative partition identity
+        /// </summary>
+        public LayoutIdentity Id {get;}
 
-        readonly ClosedInterval<ulong> Range;
+        readonly PartitionRange<ulong> Range;
 
         /// <summary>
         /// The enclosure-relative partition index
@@ -30,14 +28,14 @@ namespace Z0
         public uint Index => Id.Index;
 
         [MethodImpl(Inline)]
-        public LayoutPartition(LayoutIdentity<T> id, ulong start, ulong end)
+        public LayoutPart(LayoutIdentity id, ulong start, ulong end)
         {
             Id = id;
-            Range = new ClosedInterval<ulong>(start,end);
+            Range = new PartitionRange<ulong>(start,end);
         }
 
         /// <summary>
-        /// The inclusive lower index
+        /// The bit position at which partition begins
         /// </summary>
         public ulong Left
         {
@@ -46,7 +44,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// The inclusive upper index
+        /// The bit position at which partition ends
         /// </summary>
         public ulong Right
         {
@@ -54,9 +52,6 @@ namespace Z0
             get => Range.Max;
         }
 
-        /// <summary>
-        /// The partition width determined by <see cref='Right'/> - <see cref='Left'/>
-        /// </summary>
         public BitSize Width
         {
             [MethodImpl(Inline)]
@@ -69,9 +64,5 @@ namespace Z0
 
         public override string ToString()
             => Format();
-
-        [MethodImpl(Inline)]
-        public static implicit operator LayoutPartition(LayoutPartition<T> src)
-            => api.untyped(src);
     }
 }

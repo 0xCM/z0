@@ -8,21 +8,20 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     using api = DataLayouts;
 
     [StructLayout(LayoutKind.Sequential)]
-    public readonly struct DataLayout<T> : IDataLayout<DataLayout<T>,LayoutPartition<T>,T>
+    public readonly struct DataLayout<T> : IDataLayout<DataLayout<T>,LayoutPart<T>,T>
         where T : unmanaged
     {
         public LayoutIdentity<T> Id {get;}
 
-        readonly TableSpan<LayoutPartition<T>> Data;
+        readonly TableSpan<LayoutPart<T>> Data;
 
         [MethodImpl(Inline)]
-        public DataLayout(LayoutIdentity<T> id, LayoutPartition<T>[] parts)
+        public DataLayout(LayoutIdentity<T> id, LayoutPart<T>[] parts)
         {
             Id = id;
             Data = parts;
@@ -40,25 +39,25 @@ namespace Z0
             get => Data.Count;
         }
 
-        public TableSpan<LayoutPartition<T>> Storage
+        public TableSpan<LayoutPart<T>> Storage
         {
             [MethodImpl(Inline)]
             get => Data;
         }
 
-        public ReadOnlySpan<LayoutPartition<T>> Partitions
+        public ReadOnlySpan<LayoutPart<T>> Partitions
         {
             [MethodImpl(Inline)]
             get => Data.View;
         }
 
-        public ref LayoutPartition<T> FirstPartition
+        public ref LayoutPart<T> FirstPartition
         {
             [MethodImpl(Inline)]
             get => ref Data.First;
         }
 
-        public ref LayoutPartition<T> this[uint index]
+        public ref LayoutPart<T> this[uint index]
         {
             [MethodImpl(Inline)]
             get => ref Data[index];

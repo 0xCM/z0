@@ -8,8 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     using api = DataLayouts;
 
@@ -17,13 +16,12 @@ namespace Z0
     /// Defines a <typeparamref name='T'/> kinded segment partition
     /// </summary>
     [StructLayout(LayoutKind.Sequential)]
-    public readonly struct LayoutPartition<T,R>
+    public readonly struct LayoutPart<T>
         where T : unmanaged
-        where R : unmanaged
     {
         public LayoutIdentity<T> Id {get;}
 
-        readonly ClosedInterval<R> Range;
+        readonly PartitionRange<ulong> Range;
 
         /// <summary>
         /// The enclosure-relative partition index
@@ -31,16 +29,16 @@ namespace Z0
         public uint Index => Id.Index;
 
         [MethodImpl(Inline)]
-        public LayoutPartition(LayoutIdentity<T> id, R start, R end)
+        public LayoutPart(LayoutIdentity<T> id, ulong start, ulong end)
         {
             Id = id;
-            Range = new ClosedInterval<R>(start,end);
+            Range = new PartitionRange<ulong>(start,end);
         }
 
         /// <summary>
         /// The inclusive lower index
         /// </summary>
-        public R Left
+        public ulong Left
         {
             [MethodImpl(Inline)]
             get => Range.Min;
@@ -49,7 +47,7 @@ namespace Z0
         /// <summary>
         /// The inclusive upper index
         /// </summary>
-        public R Right
+        public ulong Right
         {
             [MethodImpl(Inline)]
             get => Range.Max;
@@ -71,5 +69,8 @@ namespace Z0
         public override string ToString()
             => Format();
 
+        [MethodImpl(Inline)]
+        public static implicit operator LayoutPart(LayoutPart<T> src)
+            => api.untyped(src);
     }
 }

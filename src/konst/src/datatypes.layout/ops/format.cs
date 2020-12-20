@@ -7,27 +7,27 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     partial struct DataLayouts
     {
-        public const string PartitionFormat = "[{0}..{1}]({2})";
+        public const string PartitionFormat = "[{0}..{1})";
 
         [Op, MethodImpl(Inline)]
-        public static string format(in LayoutPartition src)
-            => string.Format(PartitionFormat, src.Left, src.Right, src.Width);
+        public static string format(in LayoutPart src)
+            => string.Format(PartitionFormat, src.Left, src.Right);
 
         [Op, MethodImpl(Inline)]
-        public static string format<T>(in LayoutPartition<T> src)
+        public static string format<T>(in LayoutPart<T> src)
             where T : unmanaged
-                => string.Format(PartitionFormat, src.Left, src.Right, src.Width);
+                => string.Format(PartitionFormat, src.Left, src.Right);
 
         [Op, MethodImpl(Inline)]
-        public static string format<T,R>(in LayoutPartition<T,R> src)
+        public static string format<T,R>(in LayoutPart<T,R> src)
             where T : unmanaged
             where R : unmanaged
-                => string.Format(PartitionFormat, src.Left, src.Right, src.Width);
+                => string.Format(PartitionFormat, src.Left, src.Right);
 
         [Op, Closures(Closure)]
         public static string format<T>(in LayoutIdentity<T> src)
@@ -52,7 +52,7 @@ namespace Z0
                 => TextFormatter.format(src.Id, src.Storage);
 
         [MethodImpl(Inline), Op]
-        public static void render(in LayoutPartition src, ITextBuffer dst)
+        public static void render(in LayoutPart src, ITextBuffer dst)
             => dst.Append(DataLayouts.format(src));
 
         [Op]

@@ -18,13 +18,13 @@
     <PackageReference Include="Microsoft.CodeAnalysis.Scripting" Version="3.8.0-5.final" />
     <PackageReference Include="Microsoft.CodeAnalysis.Common" Version="3.8.0-5.final" />
 
-    <PackageReference Include="Microsoft.FileFormats" Version="1.0.161401" />
     <PackageReference Include="Microsoft.SymbolStore" Version="1.0.161401" />
+
+    <!-- <PackageReference Include="Microsoft.FileFormats" Version="1.0.161401" />
     <PackageReference Include="Microsoft.DiaSymReader.Native" Version="1.7.0"/>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" /> -->
 
     <PackageReference Include="Microsoft.Diagnostics.Tracing.TraceEvent" Version="2.0.44" />
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
-    <PackageReference Include="Microsoft.DiaSymReader.Native" Version="1.7.0" />
     <PackageReference Include="Microsoft.DotNet.PlatformAbstractions" Version="3.1.6" />
 
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.9" />

@@ -21,15 +21,5 @@ namespace Z0
             => (int)Hash;
     }
 
-    /// <summary>
-    /// Characterizes a structural <see cref='IHashed'/> reification
-    /// </summary>
-    /// <typeparam name="F">The reification type</typeparam>
-    /// <typeparam name="C">The hashed content type</typeparam>
-    public interface IHashed<F> : IHashed
-        where F : struct, IHashed<F>
 
-     {
-
-     }
 }

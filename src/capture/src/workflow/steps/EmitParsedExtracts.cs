@@ -15,9 +15,9 @@ namespace Z0
     {
         ApiHostUri HostUri;
 
-        ApiMemberCodeBlocks MemberBlocks;
+        ApiMemberCode[] MemberBlocks;
 
-        public static EmitParsedExtracts create(ApiHostUri uri, ApiMemberCodeBlocks src)
+        public static EmitParsedExtracts create(ApiHostUri uri, params ApiMemberCode[] src)
         {
             var dst = new EmitParsedExtracts();
             dst.HostUri = uri;
@@ -27,7 +27,7 @@ namespace Z0
 
         protected override void Execute(IWfShell wf)
         {
-            if(MemberBlocks.Count == 0)
+            if(MemberBlocks.Length == 0)
                 return;
 
             using var step = new EmitParsedExtractsStep(wf, this, HostUri, MemberBlocks);
@@ -47,7 +47,7 @@ namespace Z0
 
         readonly ApiMemberCodeBlocks Source;
 
-        public EmitParsedExtractsStep(IWfShell wf, WfHost host, ApiHostUri uri, ApiMemberCodeBlocks src)
+        public EmitParsedExtractsStep(IWfShell wf, WfHost host, ApiHostUri uri, ApiMemberCode[] src)
         {
             Host = host;
             Wf = wf.WithHost(Host);

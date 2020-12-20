@@ -8,22 +8,21 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     using api = DataLayouts;
 
     [StructLayout(LayoutKind.Sequential)]
-    public readonly struct DataLayout<T,R> : IDataLayout<DataLayout<T,R>,LayoutPartition<T,R>,T>
+    public readonly struct DataLayout<T,R> : IDataLayout<DataLayout<T,R>,LayoutPart<T,R>,T>
         where T : unmanaged
         where R : unmanaged
     {
         public LayoutIdentity<T> Id {get;}
 
-        readonly TableSpan<LayoutPartition<T,R>> Data;
+        readonly TableSpan<LayoutPart<T,R>> Data;
 
         [MethodImpl(Inline)]
-        public DataLayout(LayoutIdentity<T> id, LayoutPartition<T,R>[] parts)
+        public DataLayout(LayoutIdentity<T> id, LayoutPart<T,R>[] parts)
         {
             Id = id;
             Data = parts;
@@ -41,25 +40,25 @@ namespace Z0
             get => Data.Count;
         }
 
-        public TableSpan<LayoutPartition<T,R>> Storage
+        public TableSpan<LayoutPart<T,R>> Storage
         {
             [MethodImpl(Inline)]
             get => Data;
         }
 
-        public ReadOnlySpan<LayoutPartition<T,R>> Partitions
+        public ReadOnlySpan<LayoutPart<T,R>> Partitions
         {
             [MethodImpl(Inline)]
             get => Data.View;
         }
 
-        public ref LayoutPartition<T,R> FirstPartition
+        public ref LayoutPart<T,R> FirstPartition
         {
             [MethodImpl(Inline)]
             get => ref Data.First;
         }
 
-        public ref LayoutPartition<T,R> this[uint index]
+        public ref LayoutPart<T,R> this[uint index]
         {
             [MethodImpl(Inline)]
             get => ref Data[index];
