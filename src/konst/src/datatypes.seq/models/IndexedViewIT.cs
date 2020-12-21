@@ -12,7 +12,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    public readonly struct IndexedView<I,T> : IIndexedView<IndexedView<I,T>,I,T>
+    public readonly struct IndexedView<I,T>
         where I : unmanaged
     {
         readonly T[] Data;

@@ -5,9 +5,8 @@
 namespace Z0
 {
     using System;
-    using System.Text;
-    using System.Runtime.CompilerServices;    
-        
+    using System.Runtime.CompilerServices;
+
     using static Konst;
 
     [ApiHost]
@@ -38,7 +37,7 @@ namespace Z0
                 => new Observations<T>(src, dim);
 
         /// <summary>
-        /// Allocates a sample 
+        /// Allocates a sample
         /// </summary>
         /// <param name="dim">The sample dimension</param>
         /// <param name="count">The number of observation vectors in the sample</param>

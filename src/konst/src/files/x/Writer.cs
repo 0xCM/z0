@@ -9,6 +9,9 @@ namespace Z0
 
     partial class XFs
     {
+        public static string SearchPattern(params FS.FileExt[] src)
+            => text.join(";*.", src.Select(e => e.Name));
+
         public static StreamWriter Writer(this FS.FilePath dst, bool append)
             => FS.writer(dst, append ? FileWriteMode.Append : FileWriteMode.Overwrite);
 

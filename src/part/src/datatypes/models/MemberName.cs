@@ -17,16 +17,11 @@ namespace Z0
     /// </summary>
     public readonly struct MemberName : IName<string>, IEquatable<MemberName>, IComparable<MemberName>
     {
-        [Ignore]
         public string Content {get;}
 
         [MethodImpl(Inline)]
         public MemberName(string src)
             => Content = src;
-
-        [MethodImpl(Inline)]
-        public string Format()
-            => Content;
 
         public uint Hash
         {
@@ -59,6 +54,10 @@ namespace Z0
         [MethodImpl(Inline), Ignore]
         public bool Equals(MemberName src)
             => string.Equals(Content, src.Content);
+
+        [MethodImpl(Inline)]
+        public string Format()
+            => Content;
 
         public override string ToString()
             => Content;

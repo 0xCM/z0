@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Reflection;
     using System.Reflection.Metadata;
-    using System.Diagnostics;
+
+    using Z0.Images;
 
     using static z;
 
@@ -90,42 +91,13 @@ namespace Z0
             EmitImageHeaders.run(Wf, cmd);
         }
 
-        static void PipeImageFiles(IWfShell wf)
-        {
-            var archive = ImageArchives.csv(wf);
-            wf.Status(archive.Root);
-            zfunc.iter(archive.Listing().Storage, file => wf.Status(file));
-        }
-
-        [Op]
-        public void EmitBuildArchiveList(FS.FolderPath src, string label)
-        {
-            var archive = BuildArchives.create(Wf, src);
-            var types = array(archive.Dll, archive.Exe, archive.Pdb, archive.Lib, archive.Xml, archive.Json);
-            var cmd = CmdBuilder.ListFiles(label + ".build-artifacts", archive.Root, types);
-            Wf.Router.Dispatch(cmd);
-        }
-
-        public static void PipeImageData(IWfShell wf, FS.FilePath src)
-        {
-            using var reader = ImageArchives.reader(wf, src, ImageFormatKind.Csv);
-            var record = default(ImageContentRecord);
-            var @continue = true;
-            while(@continue)
-            {
-                if(reader.Read(ref record))
-                    wf.Row(record.Data);
-                else
-                    @continue = false;
-            }
-        }
 
         public static void PipeImageData(IWfShell wf)
         {
             var root = wf.Db().TableRoot<ImageContentRecord>();
             var archive = ImageArchives.csv(wf);
             var path = archive.Root + FS.file("image.content.advapi32", FileExtensions.Csv);
-            PipeImageData(wf, path);
+            ImageArchives.PipeImageData(wf, path);
 
         }
         // CmdResult EmitOpCodes()
@@ -138,7 +110,6 @@ namespace Z0
 
         public CmdResult EmitAsmOpCodes()
             => Wf.Router.Dispatch(CmdBuilder.EmitAsmOpCodes());
-
 
         void WriteJson()
         {

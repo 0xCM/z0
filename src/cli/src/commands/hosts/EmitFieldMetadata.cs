@@ -27,7 +27,7 @@ namespace Z0
 
         readonly IPart[] Parts;
 
-        readonly FolderPath TargetDir;
+        readonly FS.FolderPath TargetDir;
 
         [MethodImpl(Inline)]
         public EmitFieldMetadataStep(IWfShell wf, WfHost host)
@@ -35,7 +35,7 @@ namespace Z0
             Wf = wf;
             Host = host;
             Parts = wf.Api.Parts;
-            TargetDir = wf.ResourceRoot + FolderName.Define("fields");
+            TargetDir = wf.ResourceRoot + FS.folder("fields");
             Wf.Created(Host);
         }
 

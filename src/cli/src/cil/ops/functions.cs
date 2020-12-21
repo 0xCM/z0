@@ -5,9 +5,7 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
     using System.Reflection;
-    using System.Collections.Generic;
 
     using static Konst;
     using static z;

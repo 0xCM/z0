@@ -1,20 +1,18 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
-
-using Microsoft.FileFormats;
-using Microsoft.SymbolStore;
-using Microsoft.SymbolStore.KeyGenerators;
-using System;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Reflection.Metadata.Ecma335;
-using System.Reflection.PortableExecutable;
-using System.Runtime.InteropServices;
-
 namespace SOS
 {
+    using Microsoft.FileFormats;
+    using Microsoft.SymbolStore;
+    using Microsoft.SymbolStore.KeyGenerators;
+    using System;
+    using System.Diagnostics;
+    using System.IO;
+    using System.Linq;
+    using System.Reflection.PortableExecutable;
+    using System.Runtime.InteropServices;
+
     public class MetadataHelper
     {
         const int S_OK = 0;
@@ -37,15 +35,9 @@ namespace SOS
         /// <param name="pMetadataSize">size of outgoing metadata</param>
         /// <returns>HRESULT</returns>
         public static int GetMetadataLocator(
-            [MarshalAs(UnmanagedType.LPWStr)] string imagePath,
-            uint imageTimestamp,
-            uint imageSize,
+            [MarshalAs(UnmanagedType.LPWStr)] string imagePath, uint imageTimestamp, uint imageSize,
             [MarshalAs(UnmanagedType.LPArray, SizeConst = 16)] byte[] mvid,
-            uint mdRva,
-            uint flags,
-            uint bufferSize,
-            IntPtr pMetadata,
-            IntPtr pMetadataSize)
+            uint mdRva, uint flags, uint bufferSize, IntPtr pMetadata,IntPtr pMetadataSize)
         {
             int hr = S_OK;
             int dataSize = 0;

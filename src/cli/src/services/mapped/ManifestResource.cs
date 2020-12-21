@@ -7,9 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Reflection.Metadata;
-    using System.Reflection.PortableExecutable;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     partial class CliMemoryMap

@@ -18,16 +18,7 @@ namespace Z0
             => Directory.Exists(src.Name);
 
         [MethodImpl(Inline), Op]
-        public static bool missing(FolderPath src)
-            => !Directory.Exists(src.Name);
-
-        [MethodImpl(Inline), Op]
         public static bool exists(FilePath src)
             => File.Exists(src.Name);
-
-        [MethodImpl(Inline), Op]
-        public static bool missing(FilePath src)
-            => !File.Exists(src.Name);
-
     }
 }

@@ -10,10 +10,7 @@ namespace Z0
     using static Konst;
 
     public readonly partial struct FileOps
-    {        
-        public static string SearchPattern(params FileExtension[] extensions)
-            => text.join(";*.", extensions.Select(e => e.Name));
-    
+    {
         /// <summary>
         /// Creates the containing folder if it does not exist
         /// </summary>
@@ -28,7 +25,7 @@ namespace Z0
         public static string CreateParent(string path)
         {
             var dir = Path.GetDirectoryName(path);
-            if(!Directory.Exists(dir)) 
+            if(!Directory.Exists(dir))
                 Directory.CreateDirectory(dir);
             return path;
         }
@@ -39,8 +36,8 @@ namespace Z0
         /// <param name="dst">The source path</param>
         /// <remarks>The operation is idempotent</remarks>
         public static FolderPath create(FolderPath dst)
-        {   
-            if(!Directory.Exists(dst.Name)) 
+        {
+            if(!Directory.Exists(dst.Name))
                 Directory.CreateDirectory(dst.Name);
             return dst;
         }

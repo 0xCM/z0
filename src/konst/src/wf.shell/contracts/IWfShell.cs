@@ -15,7 +15,7 @@ namespace Z0
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
-    public interface IWfShell : IDisposable, ITextual
+    public partial interface IWfShell : IDisposable, ITextual
     {
         IWfAppPaths Paths {get;}
 
@@ -55,12 +55,6 @@ namespace Z0
 
         WfExecToken Ran(WfExecFlow src);
 
-        WfExecFlow Running()
-        {
-            SignalRunning();
-            return Flow();
-        }
-
         string ITextual.Format()
             => AppName;
 
@@ -72,65 +66,6 @@ namespace Z0
 
         IWfShell WithVerbosity(LogLevel level)
             => clone(this, Host, PolyStream, level);
-
-        void SignalTableEmitting(Type type, FS.FilePath dst)
-            => Raise(tableEmitting(Host, type, dst, Ct));
-
-        void SignalTableEmitting<T>(FS.FilePath dst)
-            => Raise(tableEmitting<T>(Host, dst, Ct));
-
-        WfExecFlow EmittingTable(Type type, FS.FilePath dst)
-        {
-            SignalTableEmitting(type, dst);
-            return Flow();
-        }
-
-        WfExecFlow EmittingTable<T>(FS.FilePath dst)
-            where T : struct
-        {
-            SignalTableEmitting<T>(dst);
-            return Flow();
-        }
-
-        void EmittedTable<T>(WfStepId step, Count count, FS.FilePath dst)
-            where T : struct
-                => Raise(tableOut<T>(step, count, dst, Ct));
-
-        void EmittedTable<T>(Count count, FS.FilePath dst, WfExecFlow flow)
-            where T : struct
-                => Raise(tableOut<T>(Host, count, dst, Ct));
-
-        void EmittedTable<T>(Count count, FS.FilePath dst)
-            where T : struct
-                => Raise(tableOut<T>(Host, count, dst, Ct));
-
-        void EmittedTable(Type type, Count count, FS.FilePath dst)
-            => Raise(tableOut(Host, type, count, dst, Ct));
-
-
-        void Ran()
-            => SignalRan();
-
-        WfExecFlow Running<T>(T content)
-        {
-            SignalRunning(content);
-            return Flow();
-        }
-
-        WfExecFlow Flow()
-            => new WfExecFlow(this, NextExecToken());
-
-        void SignalRunning()
-            => Raise(running(Host, Ct));
-
-        void SignalRunning<T>(T src)
-            => Raise(running(Host, src, Ct));
-
-        void SignalRan()
-            => Raise(new RanEvent(Host, Ct));
-
-        void SignalRan<T>(T content)
-            => Raise(ran(Host, content, Ct));
 
         ICmdCatalog CmdCatalog
             => new CmdCatalog(this);
@@ -148,9 +83,8 @@ namespace Z0
             return filtered.Length > 0 ? some(filtered[0]) : none<Assembly>();
         }
 
-
-        FolderPath ResourceRoot
-            => FolderPath.Define(Init.ResDir.Name);
+        FS.FolderPath ResourceRoot
+            => FS.dir(Init.ResDir.Name);
 
         FS.FolderPath AppData
             => FS.dir(Context.Paths.AppDataRoot.Name);
@@ -220,22 +154,6 @@ namespace Z0
             return svc;
         }
 
-        void Created(WfStepId id)
-        {
-            if(Verbosity.Babble())
-                Raise(created(id, Ct));
-        }
-
-        void Created()
-            => Created(Host);
-
-        void Created<H>(H host)
-            where H : IWfHost<H>, new()
-        {
-            if(Verbosity.Babble())
-                Raise(created(host.Id, Ct));
-        }
-
         void Disposed(WfStepId step)
         {
             if(Verbosity.Babble())
@@ -267,12 +185,6 @@ namespace Z0
         // ~ Running
         // ~ ---------------------------------------------------------------------------
 
-        void Running(WfStepId step)
-        {
-            if(Verbosity.Babble())
-                Raise(running(step, Ct));
-        }
-
         void Running(WfHost host)
         {
             if(Verbosity.Babble())
@@ -285,36 +197,15 @@ namespace Z0
                 Raise(running(step, content, Ct));
         }
 
-        void Running<T>(WfStepId step, T content)
-        {
-            if(Verbosity.Babble())
-                Raise(running(step, content, Ct));
-        }
-
-        void ProcessingFile<T>(FS.FilePath src, T kind)
-        {
-            if(Verbosity.Babble())
-                Raise(new ProcessingFileEvent<T>(Host, kind, src, Ct));
-        }
-
-        void EmittingFile<T>(T source, FS.FilePath dst)
-            => Raise(fileEmitting<T>(Host, source, dst, Ct));
-
-
-        void Running(CmdId cmd)
-            => Raise(new RunningCmdEvent(cmd, Ct));
-
-        void Succeeded<T>(CmdSpec cmd, T payload)
-            => Raise(succeeded(cmd, payload, Ct));
-
-        void Succeeded<T>(CmdSpec cmd)
-            => Raise(succeeded(cmd, Ct));
-
         void Ran(CmdResult cmd)
             => Raise(new RanCmdEvent(cmd, Ct));
 
         void Ran(WfStepId step)
             => Raise(ran(step, Ct));
+
+        void Ran<H,T>(H host, T content)
+            where H : IWfHost<H>, new()
+                => Raise(ran(host, content, Ct));
 
         void Ran2<T>(T content)
             => Raise(ran(Host, content, Ct));
@@ -325,20 +216,6 @@ namespace Z0
             Ran(flow);
         }
 
-        void Ran<H,T>(H host, T content)
-            where H : IWfHost<H>, new()
-                => Raise(ran(host, content, Ct));
-
-        void Emitted(WfStepId step, FS.FilePath dst, Count? segments = default)
-            => Raise(fileOut(step, dst, segments ?? 0, Ct));
-
-        void EmittedFile<T>(T source, Count count, FS.FilePath dst)
-            => Raise(fileOut(Host, source, count, dst, Ct));
-
-        void EmittedFile(Count count, FS.FilePath dst)
-            => Raise(fileOut(Host, dst, count, Ct));
-
-
         void Processed<T>(T content)
             => processed(Host, content, Ct);
 
@@ -347,12 +224,6 @@ namespace Z0
 
         void Processed<S,T>(S src, T dst)
             => processed(Host, (src, dst), Ct);
-
-        void ProcessedFile<T>(FS.FilePath src, T kind)
-            => Raise(fileProcessed(Host, src, kind, Ct));
-
-        void ProcessedFile<T,M>(FS.FilePath src, T kind, M metric)
-            => Raise(fileProcessed(Host, src, kind, metric, Ct));
 
         void Row<T>(T data)
             => Raise(row(data));

@@ -3,7 +3,6 @@
 // See the LICENSE file in the project root for more information.
 namespace SOS
 {
-
     using Microsoft.FileFormats;
     using Microsoft.FileFormats.ELF;
     using Microsoft.FileFormats.MachO;
@@ -24,15 +23,9 @@ namespace SOS
     using System.Threading;
     using System.Threading.Tasks;
 
-    public struct SymbolReaderConfig
-    {
-
-
-    }
-
     public class SymbolReader
     {
-        private sealed class OpenedReader : IDisposable
+        sealed class OpenedReader : IDisposable
         {
             public readonly MetadataReaderProvider Provider;
 
@@ -53,7 +46,7 @@ namespace SOS
         /// <summary>
         /// Stream implementation to read debugger target memory for in-memory PDBs
         /// </summary>
-        private class TargetStream : Stream
+        class TargetStream : Stream
         {
             readonly ulong _address;
 
@@ -129,10 +122,11 @@ namespace SOS
         /// Symbol server URLs
         /// </summary>
         const string MsdlSymbolServer = "http://msdl.microsoft.com/download/symbols/";
+
         const string SymwebSymbolServer = "http://symweb.corp.microsoft.com/";
 
         [DllImport("sos.dll")]
-        private static extern int InitializeBySymbolReader([In, MarshalAs(UnmanagedType.Struct)] ref SOSNetCoreCallbacks callbacks, int callbacksSize);
+        static extern int InitializeBySymbolReader([In, MarshalAs(UnmanagedType.Struct)] ref SOSNetCoreCallbacks callbacks, int callbacksSize);
 
         /// <summary>
         /// Read memory callback
@@ -170,9 +164,7 @@ namespace SOS
         /// <param name="argument">SOS module path</param>
         /// <returns>0 success, !0 failure</returns>
         public static int InitializeSymbolReader(string argument)
-        {
-            return InitializeBySymbolReader(ref SymbolCallbacks, Marshal.SizeOf<SOSNetCoreCallbacks>());
-        }
+            => InitializeBySymbolReader(ref SymbolCallbacks, Marshal.SizeOf<SOSNetCoreCallbacks>());
 
         /// <summary>
         /// Initializes symbol loading. Adds the symbol server and/or the cache path (if not null) to the list of
@@ -200,31 +192,32 @@ namespace SOS
             string symbolDirectoryPath,
             string windowsSymbolPath)
         {
-            if (logging) {
+            if (logging)
+            {
                 // Uses the standard console to do the logging instead of sending it to the hosting debugger console
                 // because windbg/cdb can only output on the client thread without dead locking. Microsoft.SymbolStore
                 // can log on any thread.
                 Trace.Listeners.Add(new TextWriterTraceListener(Console.OpenStandardOutput()));
             }
-            if (TempDirectory == null) {
+            if (TempDirectory == null)
                 TempDirectory = tempDirectory;
-            }
-            SymbolStore store = s_symbolStore;
+
+            var store = s_symbolStore;
 
             // Build the symbol stores
-            if (windowsSymbolPath != null) {
+            if (windowsSymbolPath != null)
+            {
                 // Parse the Windows symbol path syntax (srv*, cache*, etc)
-                if (!ParseSymbolPath(ref store, windowsSymbolPath)) {
+                if (!ParseSymbolPath(ref store, windowsSymbolPath))
                     return false;
-                }
             }
-            else {
+            else
+            {
                 // Add the default symbol cache if no cache specified and adding server
                 if (symbolCachePath == null)
                 {
-                    if (msdl || symweb || symbolServerPath != null) {
+                    if (msdl || symweb || symbolServerPath != null)
                         symbolCachePath = DefaultSymbolCache;
-                    }
                 }
                 // Build the symbol stores using the other parameters
                 if (!GetServerSymbolStore(ref store, msdl, symweb, symbolServerPath, authToken, timeoutInMinutes, symbolCachePath, symbolDirectoryPath)) {
@@ -253,9 +246,7 @@ namespace SOS
         /// This function disables any symbol downloading support.
         /// </summary>
         public static void DisableSymbolStore()
-        {
-            s_symbolStore = null;
-        }
+            => s_symbolStore = null;
 
         /// <summary>
         /// Load native symbols and modules (i.e. DAC, DBI).
@@ -267,14 +258,8 @@ namespace SOS
         /// <param name="address">module base address</param>
         /// <param name="size">module size</param>
         /// <param name="readMemory">read memory callback delegate</param>
-        public static void LoadNativeSymbols(
-            SymbolFileCallback callback,
-            IntPtr parameter,
-            RuntimeConfiguration config,
-            string moduleFilePath,
-            ulong address,
-            int size,
-            ReadMemoryDelegate readMemory)
+        public static void LoadNativeSymbols(SymbolFileCallback callback, IntPtr parameter, RuntimeConfiguration config,
+            string moduleFilePath, ulong address, int size, ReadMemoryDelegate readMemory)
         {
             if (IsSymbolStoreEnabled())
             {
@@ -315,14 +300,8 @@ namespace SOS
         /// <param name="specialKeys">if true, returns the DBI/DAC keys, otherwise the identity key</param>
         /// <param name="moduleIndexSize">build id size</param>
         /// <param name="moduleIndex">pointer to build id</param>
-        public static void LoadNativeSymbolsFromIndex(
-            SymbolFileCallback callback,
-            IntPtr parameter,
-            RuntimeConfiguration config,
-            string moduleFilePath,
-            bool specialKeys,
-            int moduleIndexSize,
-            IntPtr moduleIndex)
+        public static void LoadNativeSymbolsFromIndex(SymbolFileCallback callback, IntPtr parameter, RuntimeConfiguration config,
+            string moduleFilePath, bool specialKeys, int moduleIndexSize, IntPtr moduleIndex)
         {
             try
             {
@@ -381,12 +360,7 @@ namespace SOS
         /// <param name="size">module size</param>
         /// <param name="readMemory">read memory callback delegate</param>
         /// <returns>KeyGenerator or null if error</returns>
-        public static KeyGenerator GetKeyGenerator(
-            RuntimeConfiguration config,
-            string moduleFilePath,
-            ulong address,
-            int size,
-            ReadMemoryDelegate readMemory)
+        public static KeyGenerator GetKeyGenerator(RuntimeConfiguration config, string moduleFilePath, ulong address, int size, ReadMemoryDelegate readMemory)
         {
             Stream stream = new TargetStream(address, size, readMemory);
             KeyGenerator generator = null;
@@ -532,15 +506,12 @@ namespace SOS
         /// </summary>
         /// <param name="expression">hex number</param>
         /// <returns>value</returns>
-        public static ulong GetExpression(
-            string expression)
+        public static ulong GetExpression(string expression)
         {
             if (expression != null)
             {
                 if (ulong.TryParse(expression.Replace("0x", ""), NumberStyles.HexNumber, CultureInfo.InvariantCulture, out ulong result))
-                {
                     return result;
-                }
             }
             return 0;
         }
@@ -622,7 +593,7 @@ namespace SOS
         /// <param name="lineNumber">source line number return</param>
         /// <param name="fileName">source file name return</param>
         /// <returns> true if information is available</returns>
-        private static bool GetSourceLineByILOffset(IntPtr symbolReaderHandle, int methodToken, long ilOffset, out int lineNumber, out string fileName)
+        static bool GetSourceLineByILOffset(IntPtr symbolReaderHandle, int methodToken, long ilOffset, out int lineNumber, out string fileName)
         {
             Debug.Assert(symbolReaderHandle != IntPtr.Zero);
             lineNumber = 0;
@@ -696,7 +667,7 @@ namespace SOS
         /// <param name="localIndex">local variable index</param>
         /// <param name="localVarName">local variable name return</param>
         /// <returns>true if name has been found</returns>
-        private static bool GetLocalVariableByIndex(IntPtr symbolReaderHandle, int methodToken, int localIndex, out string localVarName)
+        static bool GetLocalVariableByIndex(IntPtr symbolReaderHandle, int methodToken, int localIndex, out string localVarName)
         {
             Debug.Assert(symbolReaderHandle != IntPtr.Zero);
             localVarName = null;
@@ -710,9 +681,9 @@ namespace SOS
                 if (handle.Kind != HandleKind.MethodDefinition)
                     return false;
 
-                MethodDebugInformationHandle methodDebugHandle = ((MethodDefinitionHandle)handle).ToDebugInformationHandle();
-                LocalScopeHandleCollection localScopes = reader.GetLocalScopes(methodDebugHandle);
-                foreach (LocalScopeHandle scopeHandle in localScopes)
+                var methodDebugHandle = ((MethodDefinitionHandle)handle).ToDebugInformationHandle();
+                var localScopes = reader.GetLocalScopes(methodDebugHandle);
+                foreach(LocalScopeHandle scopeHandle in localScopes)
                 {
                     LocalScope scope = reader.GetLocalScope(scopeHandle);
                     LocalVariableHandleCollection localVars = scope.GetLocalVariables();
@@ -736,7 +707,7 @@ namespace SOS
             return false;
         }
 
-        private static bool GetLocalsInfoForMethod(string assemblyPath, int methodToken, out List<LocalVarInfo> locals)
+        static bool GetLocalsInfoForMethod(string assemblyPath, int methodToken, out List<LocalVarInfo> locals)
         {
             locals = null;
 
@@ -791,7 +762,7 @@ namespace SOS
         /// <param name="debugInfo">structure with debug information return</param>
         /// <returns>true if information is available</returns>
         /// <remarks>used by the gdb JIT support (not SOS). Does not support in-memory PEs or PDBs</remarks>
-        internal static bool GetInfoForMethod(string assemblyPath, int methodToken, ref MethodDebugInfo debugInfo)
+        public static bool GetInfoForMethod(string assemblyPath, int methodToken, ref MethodDebugInfo debugInfo)
         {
             try
             {
@@ -845,7 +816,7 @@ namespace SOS
         /// <param name="points">list of debug information for each sequence point return</param>
         /// <returns>true if information is available</returns>
         /// <remarks>used by the gdb JIT support (not SOS). Does not support in-memory PEs or PDBs</remarks>
-        private static bool GetDebugInfoForMethod(string assemblyPath, int methodToken, out List<DebugInfo> points)
+        static bool GetDebugInfoForMethod(string assemblyPath, int methodToken, out List<DebugInfo> points)
         {
             points = null;
 
@@ -895,20 +866,16 @@ namespace SOS
         /// <remarks>
         /// Assumes that neither PE image nor PDB loaded into memory can be unloaded or moved around.
         /// </remarks>
-        private static OpenedReader GetReader(string assemblyPath, bool isFileLayout, Stream peStream, Stream pdbStream)
-        {
-            return (pdbStream != null) ? TryOpenReaderForInMemoryPdb(pdbStream) : TryOpenReaderFromAssembly(assemblyPath, isFileLayout, peStream);
-        }
+        static OpenedReader GetReader(string assemblyPath, bool isFileLayout, Stream peStream, Stream pdbStream)
+            => (pdbStream != null) ? TryOpenReaderForInMemoryPdb(pdbStream) : TryOpenReaderFromAssembly(assemblyPath, isFileLayout, peStream);
 
-        private static OpenedReader TryOpenReaderForInMemoryPdb(Stream pdbStream)
+        static OpenedReader TryOpenReaderForInMemoryPdb(Stream pdbStream)
         {
             Debug.Assert(pdbStream != null);
 
             byte[] buffer = new byte[sizeof(uint)];
             if (pdbStream.Read(buffer, 0, sizeof(uint)) != sizeof(uint))
-            {
                 return null;
-            }
             uint signature = BitConverter.ToUInt32(buffer, 0);
 
             // quick check to avoid throwing exceptions below in common cases:
@@ -934,9 +901,7 @@ namespace SOS
             finally
             {
                 if (result == null)
-                {
                     provider?.Dispose();
-                }
             }
 
             return result;
@@ -989,7 +954,7 @@ namespace SOS
             return null;
         }
 
-        private static void ReadPortableDebugTableEntries(PEReader peReader, out DebugDirectoryEntry codeViewEntry, out DebugDirectoryEntry embeddedPdbEntry)
+        static void ReadPortableDebugTableEntries(PEReader peReader, out DebugDirectoryEntry codeViewEntry, out DebugDirectoryEntry embeddedPdbEntry)
         {
             // See spec: https://github.com/dotnet/corefx/blob/master/src/System.Reflection.Metadata/specs/PE-COFF.md
 
@@ -1013,7 +978,7 @@ namespace SOS
             }
         }
 
-        private static OpenedReader TryOpenReaderFromCodeView(PEReader peReader, DebugDirectoryEntry codeViewEntry, string assemblyPath)
+        static OpenedReader TryOpenReaderFromCodeView(PEReader peReader, DebugDirectoryEntry codeViewEntry, string assemblyPath)
         {
             OpenedReader result = null;
             MetadataReaderProvider provider = null;
@@ -1077,7 +1042,7 @@ namespace SOS
             return result;
         }
 
-        private static OpenedReader TryOpenReaderFromEmbeddedPdb(PEReader peReader, DebugDirectoryEntry embeddedPdbEntry)
+        static OpenedReader TryOpenReaderFromEmbeddedPdb(PEReader peReader, DebugDirectoryEntry embeddedPdbEntry)
         {
             OpenedReader result = null;
             MetadataReaderProvider provider = null;
@@ -1136,7 +1101,7 @@ namespace SOS
         /// <param name="store">symbol store to chain</param>
         /// <param name="symbolPath">Windows symbol path</param>
         /// <returns>if false, error parsing symbol path</returns>
-        private static bool ParseSymbolPath(ref SymbolStore store, string symbolPath)
+        static bool ParseSymbolPath(ref SymbolStore store, string symbolPath)
         {
             string[] paths = symbolPath.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
 
@@ -1211,7 +1176,7 @@ namespace SOS
             return true;
         }
 
-        private static bool GetServerSymbolStore(ref SymbolStore store, bool msdl, bool symweb, string symbolServerPath, string authToken, int timeoutInMinutes, string symbolCachePath, string symbolDirectoryPath)
+        static bool GetServerSymbolStore(ref SymbolStore store, bool msdl, bool symweb, string symbolServerPath, string authToken, int timeoutInMinutes, string symbolCachePath, string symbolDirectoryPath)
         {
             bool internalServer = false;
 
@@ -1288,7 +1253,7 @@ namespace SOS
             return true;
         }
 
-        private static void AddCachePath(ref SymbolStore store, string symbolCachePath)
+        static void AddCachePath(ref SymbolStore store, string symbolCachePath)
         {
             symbolCachePath = Path.GetFullPath(symbolCachePath);
 
@@ -1300,7 +1265,7 @@ namespace SOS
             }
         }
 
-        private static bool IsDuplicateSymbolStore<T>(SymbolStore symbolStore, Func<T, bool> match)
+        static bool IsDuplicateSymbolStore<T>(SymbolStore symbolStore, Func<T, bool> match)
             where T : SymbolStore
         {
             while (symbolStore != null)
@@ -1318,7 +1283,7 @@ namespace SOS
             return false;
         }
 
-        private static string s_defaultSymbolCache;
+        static string s_defaultSymbolCache;
 
         /// <summary>
         /// The default symbol cache path:
@@ -1352,7 +1317,7 @@ namespace SOS
         /// </summary>
         /// <param name="path">file path</param>
         /// <returns>stream or null if doesn't exist or error</returns>
-        internal static Stream TryOpenFile(string path)
+        public static Stream TryOpenFile(string path)
         {
             if (File.Exists(path))
             {
@@ -1370,7 +1335,7 @@ namespace SOS
         /// <summary>
         /// Compares two file paths using OS specific casing.
         /// </summary>
-        private static bool IsPathEqual(string path1, string path2)
+        static bool IsPathEqual(string path1, string path2)
         {
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
@@ -1387,7 +1352,7 @@ namespace SOS
         /// </summary>
         /// <param name="pathName"> File path to be processed </param>
         /// <returns>Last component of path</returns>
-        private static string GetFileName(string pathName)
+        static string GetFileName(string pathName)
         {
             int pos = pathName.LastIndexOfAny(new char[] { '/', '\\'});
             if (pos < 0)

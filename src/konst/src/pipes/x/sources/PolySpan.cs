@@ -10,6 +10,21 @@ namespace Z0
 
     public static class PolySpan
     {
+        /// <summary>
+        /// Produces a span of random values
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <param name="length">The span length</param>
+        /// <param name="t">A cell type representative</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        public static Span<T> Span<T>(this ISource src, int length)
+            where T : unmanaged
+        {
+            var dst = span<T>(length);
+            src.Fill(length, ref first(dst));
+            return dst;
+        }
+
         static Span<T> create<T>(IDomainSource src, int length, Interval<T> domain, Func<T,bool> filter = null)
             where T : unmanaged
         {
@@ -45,20 +60,6 @@ namespace Z0
             return dst;
         }
 
-        /// <summary>
-        /// Produces a span of random values
-        /// </summary>
-        /// <param name="src">The data source</param>
-        /// <param name="length">The span length</param>
-        /// <param name="t">A cell type representative</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        public static Span<T> Span<T>(this IDomainSource src, int length)
-            where T : unmanaged
-        {
-            var dst = span<T>(length);
-            src.Fill(length, ref first(dst));
-            return dst;
-        }
 
         /// <summary>
         /// Produces a span of random values constraint to a specified domain

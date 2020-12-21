@@ -80,7 +80,7 @@ namespace Z0
         ReadOnlySpan<CliConstant> Read(IPart part)
         {
             using var reader = PeTableReader.open(part.PartPath());
-            return reader.Constants();
+            return reader.constants();
         }
 
         void Emit(IPart part)

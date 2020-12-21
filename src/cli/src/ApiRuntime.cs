@@ -9,7 +9,7 @@ namespace Z0
     using System.Reflection;
     using System.Linq;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     [ApiHost(ApiNames.ApiRuntime, true)]
@@ -84,7 +84,6 @@ namespace Z0
             dst.Append(content);
             return (uint)content.Length;
         }
-
 
         [RenderFunction]
         public static Count render(in ApiMetadataUri src, ITextBuffer dst)

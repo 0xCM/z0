@@ -20,6 +20,13 @@ namespace Z0
         public V Value {get;}
 
         [MethodImpl(Inline)]
+        public LookupEntry(K key, V value)
+        {
+            Key = key;
+            Value = value;
+        }
+
+        [MethodImpl(Inline)]
         public static implicit operator LookupEntry<K,V>((K key, V value) src)
             => new LookupEntry<K,V>(src.key, src.value);
 
@@ -30,12 +37,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator Paired<K,V>(LookupEntry<K,V> src)
             => z.paired(src.Key,src.Value);
-
-        [MethodImpl(Inline)]
-        public LookupEntry(K key, V value)
-        {
-            Key = key;
-            Value = value;
-        }
     }
 }

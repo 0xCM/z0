@@ -11,7 +11,7 @@ namespace Z0
     using System.IO;
     using System.Linq;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     public readonly struct CliFileReader : IDisposable
@@ -43,7 +43,7 @@ namespace Z0
 
         public static ReadOnlySpan<CliCil> cil(PartId part, FS.FilePath src)
         {
-            var dst = list<CliCil>();
+            var dst = sys.list<CliCil>();
 
             using var stream = File.OpenRead(src.Name);
             using var pe = new PEReader(stream);

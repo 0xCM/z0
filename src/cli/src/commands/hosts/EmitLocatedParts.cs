@@ -43,7 +43,7 @@ namespace Z0
             Host = host;
             Parts = Wf.Api.Parts;
             Index = default;
-            TargetDir = wf.ResourceRoot + FolderName.Define("images");
+            TargetDir = wf.ResourceRoot + FS.folder("images");
             Images = LocatedImages.current();
             wf.Created();
         }

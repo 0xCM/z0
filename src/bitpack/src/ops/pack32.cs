@@ -12,7 +12,6 @@ namespace Z0
 
     partial class BitPack
     {
-
         /// <summary>
         /// Packs 32 1-bit values taken from the least significant bit of each source byte
         /// </summary>

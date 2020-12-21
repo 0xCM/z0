@@ -31,33 +31,6 @@ namespace Z0
         /// </summary>
         public const int ByteCount = 4;
 
-        [MethodImpl(Inline)]
-        public static implicit operator SubGrid32<M,N,T>(in SpanBlock32<T> src)
-            => new SubGrid32<M,N,T>(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator SubGrid32<M,N,T>(uint src)
-            => new SubGrid32<M,N,T>(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator uint(SubGrid32<M,N,T> src)
-            => src.Data;
-
-        [MethodImpl(Inline)]
-        public static implicit operator BitGrid32<T>(SubGrid32<M,N,T> src)
-            => new BitGrid32<T>(src.Data);
-
-        [MethodImpl(Inline)]
-        public static implicit operator SubGrid32<M,N,T>(BitGrid32<T> src)
-            => new SubGrid32<M,N,T>(src);
-
-        [MethodImpl(Inline)]
-        public static bool operator ==(SubGrid32<M,N,T> g1, SubGrid32<M,N,T> g2)
-            => g1.Equals(g2);
-
-        [MethodImpl(Inline)]
-        public static bool operator !=(SubGrid32<M,N,T> g1, SubGrid32<M,N,T> g2)
-            => !g1.Equals(g2);
 
         [MethodImpl(Inline)]
         internal SubGrid32(uint src)
@@ -143,5 +116,34 @@ namespace Z0
 
         public override int GetHashCode()
             => throw new NotSupportedException();
+
+
+        [MethodImpl(Inline)]
+        public static implicit operator SubGrid32<M,N,T>(in SpanBlock32<T> src)
+            => new SubGrid32<M,N,T>(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator SubGrid32<M,N,T>(uint src)
+            => new SubGrid32<M,N,T>(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator uint(SubGrid32<M,N,T> src)
+            => src.Data;
+
+        [MethodImpl(Inline)]
+        public static implicit operator BitGrid32<T>(SubGrid32<M,N,T> src)
+            => new BitGrid32<T>(src.Data);
+
+        [MethodImpl(Inline)]
+        public static implicit operator SubGrid32<M,N,T>(BitGrid32<T> src)
+            => new SubGrid32<M,N,T>(src);
+
+        [MethodImpl(Inline)]
+        public static bool operator ==(SubGrid32<M,N,T> g1, SubGrid32<M,N,T> g2)
+            => g1.Equals(g2);
+
+        [MethodImpl(Inline)]
+        public static bool operator !=(SubGrid32<M,N,T> g1, SubGrid32<M,N,T> g2)
+            => !g1.Equals(g2);
     }
 }

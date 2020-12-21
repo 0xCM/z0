@@ -37,32 +37,12 @@ namespace Z0
         public static N16 W => default;
 
         [MethodImpl(Inline)]
-        public static implicit operator SubGrid16<M,N,T>(in SpanBlock16<T> src)
-            => new SubGrid16<M, N, T>(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator SubGrid16<M,N,T>(ushort src)
-            => new SubGrid16<M,N,T>(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator ushort(SubGrid16<M,N,T> src)
-            => src.Data;
-
-        [MethodImpl(Inline)]
-        public static bool operator ==(SubGrid16<M,N,T> g1, SubGrid16<M,N,T> g2)
-            => g1.Equals(g2);
-
-        [MethodImpl(Inline)]
-        public static bool operator !=(SubGrid16<M,N,T> g1, SubGrid16<M,N,T> g2)
-            => !g1.Equals(g2);
-
-        [MethodImpl(Inline)]
         internal SubGrid16(ushort src)
-            => this.Data = src;
+            => Data = src;
 
         [MethodImpl(Inline)]
         internal SubGrid16(SpanBlock16<T> src)
-            => this.Data = src.As<ushort>().First;
+            => Data = src.As<ushort>().First;
 
         /// <summary>
         /// The exposed grid state
@@ -134,7 +114,6 @@ namespace Z0
             where U : unmanaged
                 => new SubGrid16<M,N,U>(Data);
 
-
         [MethodImpl(Inline)]
         public bool Equals(SubGrid16<M,N,T> rhs)
             => Data.Equals(rhs.Data);
@@ -144,5 +123,25 @@ namespace Z0
 
         public override int GetHashCode()
             => throw new NotSupportedException();
+
+        [MethodImpl(Inline)]
+        public static implicit operator SubGrid16<M,N,T>(in SpanBlock16<T> src)
+            => new SubGrid16<M, N, T>(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator SubGrid16<M,N,T>(ushort src)
+            => new SubGrid16<M,N,T>(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator ushort(SubGrid16<M,N,T> src)
+            => src.Data;
+
+        [MethodImpl(Inline)]
+        public static bool operator ==(SubGrid16<M,N,T> g1, SubGrid16<M,N,T> g2)
+            => g1.Equals(g2);
+
+        [MethodImpl(Inline)]
+        public static bool operator !=(SubGrid16<M,N,T> g1, SubGrid16<M,N,T> g2)
+            => !g1.Equals(g2);
     }
 }

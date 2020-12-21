@@ -17,6 +17,12 @@ namespace Z0
         public FileArchive(FS.FolderPath root)
             => Root = root;
 
+        public ListedFiles Listing()
+            => FS.list(Files().Array());
+
+        public Deferred<FS.FilePath> Files()
+            => Root.EnumerateFiles(true);
+
         [MethodImpl(Inline)]
         public static implicit operator FileArchive(FS.FolderPath src)
             => new FileArchive(src);

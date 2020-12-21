@@ -8,8 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection.Metadata;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     partial class CliMemoryMap
     {

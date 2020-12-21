@@ -12,7 +12,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct IndexedView<T> : IIndexedView<IndexedView<T>,uint,T>
+    public readonly struct IndexedView<T>
     {
         readonly T[] Data;
 

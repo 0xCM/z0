@@ -36,33 +36,6 @@ namespace Z0
         /// </summary>
         public static N64 W => default;
 
-        [MethodImpl(Inline)]
-        public static implicit operator SubGrid64<M,N,T>(in SpanBlock64<T> src)
-            => new SubGrid64<M,N,T>(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator SubGrid64<M,N,T>(ulong src)
-            => new SubGrid64<M,N,T>(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator ulong(SubGrid64<M,N,T> src)
-            => src.Data;
-
-        [MethodImpl(Inline)]
-        public static implicit operator BitGrid64<T>(SubGrid64<M,N,T> src)
-            => new BitGrid64<T>(src.Data);
-
-        [MethodImpl(Inline)]
-        public static implicit operator SubGrid64<M,N,T>(BitGrid64<T> src)
-            => new SubGrid64<M,N,T>(src);
-
-        [MethodImpl(Inline)]
-        public static bool operator ==(SubGrid64<M,N,T> g1, SubGrid64<M,N,T> g2)
-            => g1.Equals(g2);
-
-        [MethodImpl(Inline)]
-        public static bool operator !=(SubGrid64<M,N,T> g1, SubGrid64<M,N,T> g2)
-            => !g1.Equals(g2);
 
         [MethodImpl(Inline)]
         internal SubGrid64(ulong src)
@@ -142,5 +115,33 @@ namespace Z0
 
         public override int GetHashCode()
             => throw new NotSupportedException();
+
+        [MethodImpl(Inline)]
+        public static implicit operator SubGrid64<M,N,T>(in SpanBlock64<T> src)
+            => new SubGrid64<M,N,T>(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator SubGrid64<M,N,T>(ulong src)
+            => new SubGrid64<M,N,T>(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator ulong(SubGrid64<M,N,T> src)
+            => src.Data;
+
+        [MethodImpl(Inline)]
+        public static implicit operator BitGrid64<T>(SubGrid64<M,N,T> src)
+            => new BitGrid64<T>(src.Data);
+
+        [MethodImpl(Inline)]
+        public static implicit operator SubGrid64<M,N,T>(BitGrid64<T> src)
+            => new SubGrid64<M,N,T>(src);
+
+        [MethodImpl(Inline)]
+        public static bool operator ==(SubGrid64<M,N,T> g1, SubGrid64<M,N,T> g2)
+            => g1.Equals(g2);
+
+        [MethodImpl(Inline)]
+        public static bool operator !=(SubGrid64<M,N,T> g1, SubGrid64<M,N,T> g2)
+            => !g1.Equals(g2);
     }
 }

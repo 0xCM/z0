@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     partial class BitSpans
     {
@@ -22,8 +22,6 @@ namespace Z0
 
         [Op]
         public static BitSpan not(in BitSpan x)
-            => not(x,alloc(x.BitCount));
-
-
+            => not(x, alloc(x.BitCount));
     }
 }
