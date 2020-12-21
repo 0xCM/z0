@@ -7,19 +7,16 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
-
     [WfHost]
-    public sealed class EmitParsedExtracts : WfHost<EmitParsedExtracts>
+    public sealed class EmitApiHexRows : WfHost<EmitApiHexRows>
     {
         ApiHostUri HostUri;
 
         ApiMemberCode[] MemberBlocks;
 
-        public static EmitParsedExtracts create(ApiHostUri uri, params ApiMemberCode[] src)
+        public static EmitApiHexRows create(ApiHostUri uri, params ApiMemberCode[] src)
         {
-            var dst = new EmitParsedExtracts();
+            var dst = new EmitApiHexRows();
             dst.HostUri = uri;
             dst.MemberBlocks = src;
             return dst;
@@ -29,15 +26,15 @@ namespace Z0
         {
            if(MemberBlocks != null && MemberBlocks.Length != 0)
            {
-                using var step = new EmitParsedExtractsStep(wf, this, HostUri, MemberBlocks);
+                using var step = new EmitApiHexRowsStep(wf, this, HostUri, MemberBlocks);
                 step.Run();
            }
         }
     }
 
-    ref struct EmitParsedExtractsStep
+    ref struct EmitApiHexRowsStep
     {
-        public ApiParseBlock[] Emitted;
+        public ApiHexRow[] Emitted;
 
         readonly IWfShell Wf;
 
@@ -47,7 +44,7 @@ namespace Z0
 
         readonly ApiMemberCodeBlocks Source;
 
-        public EmitParsedExtractsStep(IWfShell wf, WfHost host, ApiHostUri uri, ApiMemberCode[] src)
+        public EmitApiHexRowsStep(IWfShell wf, WfHost host, ApiHostUri uri, ApiMemberCode[] src)
         {
             Host = host;
             Wf = wf.WithHost(Host);
@@ -67,7 +64,7 @@ namespace Z0
             var target = Wf.Db().ParsedExtractFile(Uri);
             Emitted = ApiParseBlocks.create(Uri, Source);
             if(ApiParseBlocks.save(Emitted,target))
-                Wf.EmittedTable<ApiParseBlock>(Emitted.Length, target);
+                Wf.EmittedTable<ApiHexRow>(Emitted.Length, target);
             else
                 Wf.Error($"Could not save {target}");
         }

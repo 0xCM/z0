@@ -62,7 +62,7 @@ namespace Z0
             return Product;
         }
 
-        void Include(in ApiParseBlock src)
+        void Include(in ApiHexRow src)
         {
             if(src.Address.IsEmpty)
             {
@@ -83,7 +83,7 @@ namespace Z0
             return triple(a,b,c);
         }
 
-        void Include(ReadOnlySpan<ApiParseBlock> src)
+        void Include(ReadOnlySpan<ApiHexRow> src)
         {
             var count = src.Length;
             for(var i=0; i<count; i++)

@@ -9,7 +9,6 @@ namespace Z0
 
     using Z0.Asm;
 
-    using static Konst;
     using static z;
 
     [WfHost]

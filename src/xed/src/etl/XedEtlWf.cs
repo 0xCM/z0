@@ -32,13 +32,13 @@ namespace Z0
 
         readonly XedSources Source;
 
-        readonly XedStage Stage;
-
         readonly ITableArchive Target;
 
         readonly WfHost Host;
 
         const string Subject = "xed";
+
+        readonly FS.FolderPath Root;
 
         public XedWf(IWfShell wf, XedWfConfig config)
         {
@@ -48,8 +48,9 @@ namespace Z0
             Settings = config.Settings;
             Source = XedWfOps.sources(Config.Source);
             var db = Wf.Db();
-            Stage = XedStage.Create(db.TmpDir(Subject));
+            //Stage = XedStage.Create(db.TmpDir(Subject));
             Target = db.TableArchive(Subject);
+            Root = Target.Root;
             Wf.Created();
         }
 
@@ -76,7 +77,7 @@ namespace Z0
                     {
                         ref readonly var p = ref skip(parsed,j);
                         patterns.AddRange(p.Patterns);
-                        Stage.Deposit(parsed, file.FileName);
+                        Save(parsed, file.FileName);
                     }
 
                     Wf.ProcessedFile(FS.path(file.Name), kind, parsed.Length);
@@ -90,20 +91,54 @@ namespace Z0
             return patterns.ToArray();
         }
 
-        public XedRuleSet[] ExtractRules()
+        public FS.FolderName InstructionFolder
+            => FS.folder("instructions");
+
+        public FS.FolderName FunctionFolder
+            => FS.folder("functions");
+
+        public FS.FolderPath InstructionDir
+            => Root + InstructionFolder;
+
+        public FS.FolderPath FunctionDir
+            => Root + FunctionFolder;
+
+        const string HSep = RP.PageBreak120;
+
+        public void Save(ReadOnlySpan<XedInstructionDoc> src, FS.FileName name)
         {
-            var functions = list<XedRuleSet>();
-            var parser = XedSourceParser.Service;
-            foreach(var file in Source.FunctionFiles)
+            var path = InstructionDir + name;
+            using var writer = path.Writer();
+            for(var i=0; i<src.Length; i++)
             {
-                var parsed = parser.ParseFunctions(file);
-                if(parsed.Length != 0)
+                var rows = src[i];
+                for(var j = 0; j < rows.RowCount; j++)
+                    writer.WriteLine(rows[j].Text);
+                if(i != src.Length - 1)
+                    writer.WriteLine(HSep);
+            }
+        }
+
+        public void Save(XedRuleSet[] src, FS.FileName name)
+        {
+            var path = FunctionDir + name;
+            using var writer = path.Writer();
+            for(var i=0; i<src.Length; i++)
+            {
+                ref readonly var f = ref src[i];
+                var body = f.Terms;
+                if(body.Length != 0)
                 {
-                    functions.AddRange(parsed);
-                    Stage.Deposit(parsed, file.FileName);
+                    writer.WriteLine(f.Description);
+                    writer.WriteLine(HSep);
+
+                    for(var j = 0; j < body.Length; j++)
+                        writer.WriteLine(body[j]);
+
+                    if(i != src.Length - 1)
+                        writer.WriteLine();
                 }
             }
-            return functions.ToArray();
         }
 
         public XedPatternRow[] Emit(XedPattern[] src)
@@ -159,14 +194,14 @@ namespace Z0
             var parser = XedSourceParser.Service;
             var paths = @readonly(Source.FunctionFiles);
             var count = paths.Length;
-            for(var i=0; i< count; i++)
+            for(var i=0; i<count; i++)
             {
                 ref readonly var path = ref skip(paths,i);
                 var rules = parser.ParseFunctions(path);
                 var jCount = rules.Length;
                 if(jCount != 0)
                 {
-                    Stage.Deposit(rules, path.FileName);
+                    Save(rules, path.FileName);
 
                     var view = @readonly(rules);
                     for(var j=0; j<jCount; j++)

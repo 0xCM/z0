@@ -15,18 +15,10 @@ namespace Z0
 
         public static CmdResult fail<T>(T spec, Exception e)
             where T : ICmdSpec
-                => fail<T>(spec, e.ToString());
+                => new CmdResult(spec.CmdId, e);
 
         public static CmdResult fail<T>(T spec, string message)
             where T : ICmdSpec
                 => new CmdResult(spec.CmdId, false, message);
-
-        [Op]
-        public static CmdResult fail(CmdId id, string message)
-            => new CmdResult(id, false, message);
-
-        [Op]
-        public static CmdResult fail(CmdId cmd, Exception e)
-            => new CmdResult(cmd, false, e.ToString());
     }
 }

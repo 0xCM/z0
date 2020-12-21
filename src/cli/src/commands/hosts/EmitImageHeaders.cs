@@ -18,13 +18,13 @@ namespace Z0
         public static ReadOnlySpan<byte> RenderWidths
             => new byte[9]{60,16,16,12,12,60,16,16,16};
 
-        public static CmdResult run(IWfShell wf, EmitImageHeadersCmd spec)
+        public static CmdResult run(IWfShell wf, EmitImageHeadersCmd cmd)
         {
             var total = Count.Zero;
             var formatter = TableFormatter.row<ImageSectionHeader>(RenderWidths);
-            using var writer = spec.Target.Writer();
+            using var writer = cmd.Target.Writer();
             writer.WriteLine(formatter.FormatHeader());
-            foreach(var file in spec.Source)
+            foreach(var file in cmd.Source)
             {
                 var result = read(file, out Span<ImageSectionHeader> dst);
                 if(result)
@@ -36,14 +36,14 @@ namespace Z0
 
                     total += count;
 
-                    wf.EmittedFile(total, spec.Target);
+                    wf.EmittedFile(total, cmd.Target);
                 }
             }
-            return Win();
+            return Cmd.ok(cmd);
         }
 
-        protected override CmdResult Execute(IWfShell wf, in EmitImageHeadersCmd spec)
-            => run(wf,spec);
+        protected override CmdResult Execute(IWfShell wf, in EmitImageHeadersCmd cmd)
+            => run(wf,cmd);
 
         public static Outcome<uint> read(FS.FilePath path, out Span<ImageSectionHeader> target)
         {

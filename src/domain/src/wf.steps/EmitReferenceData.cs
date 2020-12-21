@@ -48,8 +48,8 @@ namespace Z0
         {
             Wf.Running();
 
-            EmitResData.index(Wf);
-            EmitResData.refs(Wf);
+            ResDataEmitter.index(Wf);
+            ResDataEmitter.reference(Wf);
             XedEtlWfHost.create().Run(Wf);
         }
     }

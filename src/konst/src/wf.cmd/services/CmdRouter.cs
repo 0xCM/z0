@@ -46,7 +46,6 @@ namespace Z0
             iter(src, cmd => Nodes.TryAdd(cmd.CmdId, cmd));
         }
 
-
         public CmdResult<T> Dispatch<S,T>(S src)
             where S : struct, ICmdSpec<S>
             where T : struct
@@ -86,9 +85,9 @@ namespace Z0
                     Wf.Status($"Dispatching {cmd.CmdId} to reactor {node.GetType().Name}");
                     var result = node.Invoke(cmd);
                     if(result.Succeeded)
-                        Wf.Error(result);
-                    else
                         Wf.Status(result);
+                    else
+                        Wf.Error(result);
                     return result;
                 }
                 else

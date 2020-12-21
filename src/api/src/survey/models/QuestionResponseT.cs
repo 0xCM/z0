@@ -20,8 +20,8 @@ namespace Z0
 
         public QuestionResponse(uint questionId, params QuestionChoice<T>[] chosen)
         {
-            this.QuestionId = questionId;
-            this.Chosen = chosen;
+            QuestionId = questionId;
+            Chosen = chosen;
         }
 
         public string Format(bool bracket = false, char sep = Chars.Comma)

@@ -24,7 +24,7 @@ namespace Z0
         /// <param name="b">The right expression</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ComparisonPredExpr<T> compare<T>(BinaryComparisonApiClass kind, IExpr<T> a, IExpr<T> b)
+        public static ComparisonPredExpr<T> predicate<T>(BinaryComparisonApiClass kind, IExpr<T> a, IExpr<T> b)
             where T : unmanaged
                 => new ComparisonPredExpr<T>(kind,a,b);
 
@@ -36,7 +36,7 @@ namespace Z0
         /// <param name="b">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ComparisonPredExpr<T> compare<T>(BinaryComparisonApiClass kind, T a, T b)
+        public static ComparisonPredExpr<T> predicate<T>(BinaryComparisonApiClass kind, T a, T b)
             where T : unmanaged
                 => new ComparisonPredExpr<T>(kind, literal(a), literal(b));
 
@@ -49,7 +49,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ComparisonPredExpr<T> equals<T>(IExpr<T> a, IExpr<T> b)
             where T : unmanaged
-                => compare(Eq, a, b);
+                => predicate(Eq, a, b);
 
         /// <summary>
         /// Defines an equality comparison expression over literal operands
@@ -60,7 +60,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ComparisonPredExpr<T> equals<T>(T a, T b)
             where T : unmanaged
-                => compare(Eq, a, b);
+                => predicate(Eq, a, b);
 
         /// <summary>
         /// Defines a less-than comparison expression
@@ -71,7 +71,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ComparisonPredExpr<T> lt<T>(IExpr<T> a, IExpr<T> b)
             where T : unmanaged
-                => compare(Lt, a, b);
+                => predicate(Lt, a, b);
 
         /// <summary>
         /// Defines a less-than comparison expression over literal operands
@@ -82,7 +82,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ComparisonPredExpr<T> lt<T>(T a, T b)
             where T : unmanaged
-                => compare(Lt, a, b);
+                => predicate(Lt, a, b);
 
         /// <summary>
         /// Defines a less-than or equal comparison expression
@@ -93,7 +93,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ComparisonPredExpr<T> lteq<T>(IExpr<T> a, IExpr<T> b)
             where T : unmanaged
-                => compare(LtEq, a, b);
+                => predicate(LtEq, a, b);
 
         /// <summary>
         /// Defines a less-than or equal comparison expression over literal operands
@@ -104,7 +104,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ComparisonPredExpr<T> lteq<T>(T a, T b)
             where T : unmanaged
-                => compare(LtEq, a, b);
+                => predicate(LtEq, a, b);
 
         /// <summary>
         /// Defines a greater-than comparison expression
@@ -115,7 +115,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ComparisonPredExpr<T> gt<T>(IExpr<T> a, IExpr<T> b)
             where T : unmanaged
-                => compare(Gt, a, b);
+                => predicate(Gt, a, b);
 
         /// <summary>
         /// Defines a greater-than comparison expression over literal operands
@@ -126,7 +126,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ComparisonPredExpr<T> gt<T>(T a, T b)
             where T : unmanaged
-                => compare(Gt, a, b);
+                => predicate(Gt, a, b);
 
         /// <summary>
         /// Defines a greater-than or equal comparison expression
@@ -137,7 +137,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ComparisonPredExpr<T> gteq<T>(IExpr<T> a, IExpr<T> b)
             where T : unmanaged
-                => compare(GtEq, a, b);
+                => predicate(GtEq, a, b);
 
         /// <summary>
         /// Defines a greater-than or equal comparison expression over literal operands
@@ -148,6 +148,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ComparisonPredExpr<T> gteq<T>(T a, T b)
             where T : unmanaged
-                => compare(GtEq, a, b);
+                => predicate(GtEq, a, b);
     }
 }

@@ -13,9 +13,9 @@ namespace Z0
         static CmdResult react(IWfShell wf, ListApiHexFilesCmd cmd)
         {
             var archive = WfArchives.hex(wf);
-            var files = archive.Listing();
+            var files = archive.List();
             wf.Status(string.Format("Discovered {0} files in {1}", files.Count, archive.Root));
-            z.iter(archive.Listing().Storage, file => wf.Status(file));
+            z.iter(archive.List().Storage, file => wf.Status(file));
             return Cmd.ok(cmd);
         }
     }

@@ -28,7 +28,7 @@ namespace Z0
         public ApiCodeBlock(MemoryAddress @base, OpUri uri, BinaryCode src)
         {
             Uri = uri;
-            Code = new CodeBlock(@base,src);
+            Code = new CodeBlock(@base, src);
         }
 
         [MethodImpl(Inline)]

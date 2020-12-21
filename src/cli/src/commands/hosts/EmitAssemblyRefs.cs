@@ -44,7 +44,7 @@ namespace Z0
                     writer.WriteLine(formatter.FormatRow(skip(data,i)));
             }
 
-            return Win();
+            return Cmd.ok(cmd);
         }
 
         [MethodImpl(Inline), Op]

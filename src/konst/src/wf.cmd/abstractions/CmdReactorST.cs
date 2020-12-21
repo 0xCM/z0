@@ -32,7 +32,7 @@ namespace Z0
             catch(Exception e)
             {
                 Wf.Error(e);
-                return new CmdResult<T>(cmd.CmdId, false);
+                return new CmdResult<T>(cmd.CmdId, e);
             }
         }
 

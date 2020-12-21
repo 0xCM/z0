@@ -24,7 +24,7 @@ namespace Z0
             for(var i=1u; i<count; i++)
             {
                 ref readonly var line = ref skip(lines,i);
-                var block = ApiHexParser.parse(line);
+                var block = ApiHexParser.extracts(line);
                 if(block)
                     seek(dst,i) = block.Value;
                  else

@@ -19,10 +19,6 @@ namespace Z0
         public ApiHexArchive(FS.FolderPath root)
             => Root = root;
 
-        [MethodImpl(Inline)]
-        public ApiHexArchive(IWfShell wf)
-            => Root = wf.Db().CapturedHexDir();
-
         public FS.FileExt DefaultExt
             => FileExtensions.Hex;
 
@@ -39,14 +35,11 @@ namespace Z0
         public ApiCodeBlock[] Read(FS.FilePath src)
             => ApiHexReader.read(src).Where(x => x.IsNonEmpty);
 
-        public ListedFiles Listing()
+        public ListedFiles List()
             => FS.list(Root.Files(DefaultExt));
 
-        /// <summary>
-        /// Enumerates the archived files
-        /// </summary>
-        public FS.FilePath[] Files()
-            => Root.Files(DefaultExt, true);
+        public Deferred<FS.FilePath> ArchivedFiles()
+            => Root.EnumerateFiles(DefaultExt, true);
 
         /// <summary>
         /// Enumerates the archived files owned by a specified part
@@ -82,7 +75,7 @@ namespace Z0
             }
             else
             {
-                foreach(var file in Files())
+                foreach(var file in ArchivedFiles())
                 {
                     var idx = HostCode(file);
                     if(idx.IsNonEmpty)
@@ -96,7 +89,7 @@ namespace Z0
         /// </summary>
         public IEnumerable<ApiCodeBlock> ApiCode()
         {
-            var list = Listing();
+            var list = List();
             var iCount = list.Count;
             for(var i=0; i<iCount; i++)
             {
@@ -123,7 +116,7 @@ namespace Z0
         /// </summary>
         public IEnumerable<ApiCodeBlock> ApiCode(Func<FS.FileName,bool> predicate)
         {
-            foreach(var file in Files().Where(f => predicate(f.FileName)))
+            foreach(var file in ArchivedFiles().Where(f => predicate(f.FileName)))
             foreach(var item in Read(file))
             {
                 if(item.IsNonEmpty)

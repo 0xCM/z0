@@ -21,8 +21,8 @@ namespace Z0.Tools
             var archive = FileArchives.modules(path);
             var exe = archive.NativeExeFiles().Array();
             var libs = archive.StaticLibs().Array();
-            var managed = archive.Files().Where(f => f.IsManaged).Array();
-            var modules = managed;
+            // var managed = archive.Files().Where(f => f.IsManaged).Array();
+            // var modules = managed;
 
             // Emit(tool.Script("dumpbin.headers",  DumpBin.CmdId.EmitHeaders, modules));
             // Emit(tool.Script("dumpbin.exports",  DumpBin.CmdId.EmitExports, modules));

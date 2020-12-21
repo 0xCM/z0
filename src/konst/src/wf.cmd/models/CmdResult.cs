@@ -15,58 +15,41 @@ namespace Z0
 
         public bool Succeeded {get;}
 
-        public BinaryCode Payload {get;}
-
         public string Message {get;}
 
         [MethodImpl(Inline)]
         public CmdResult(CmdId id, bit success)
         {
             CmdId = id;
-            Payload = default;
             Succeeded = success;
-            Message = string.Format("{0} execution {1}", CmdId, Succeeded ? "succeeded" : "failed");
-        }
-
-        [MethodImpl(Inline)]
-        public CmdResult(CmdId id, bit success, byte[] payload)
-        {
-            CmdId = id;
-            Payload = payload;
-            Succeeded = success;
-            Message = string.Format("{0} execution {1}", CmdId, Succeeded ? "succeeded" : "failed");
+            Message = DefaultMsg(id, success);
         }
 
         [MethodImpl(Inline)]
         public CmdResult(CmdId id, bit success, string message)
         {
             CmdId = id;
-            Payload = default;
             Succeeded = success;
-            Message = text.ifempty(message, string.Format("{0} execution {1}", CmdId, Succeeded ? "succeeded" : "failed"));
+            Message = text.ifempty(message, DefaultMsg(id,success));
         }
 
         [MethodImpl(Inline)]
-        public CmdResult(ICmdSpec cmd, bit success, byte[] content, string message)
+        public CmdResult(CmdId id, Exception e)
         {
-            CmdId = cmd.CmdId;
-            Payload = content;
-            Succeeded = success;
-            Message = text.ifempty(message, string.Format("{0} execution {1}", CmdId, Succeeded ? "succeeded" : "failed"));
+            CmdId = id;
+            Succeeded = false;
+            Message = e.ToString();
         }
 
-        [MethodImpl(Inline)]
-        public CmdResult(ICmdSpec cmd, bit success, string message)
-        {
-            CmdId = cmd.CmdId;
-            Payload = default;
-            Succeeded = success;
-            Message = text.ifempty(message, string.Format("{0} execution {1}", CmdId, Succeeded ? "succeeded" : "failed"));
-        }
+        internal static string DefaultMsg(CmdId id, bit success)
+            => string.Format("{0} execution {1}", id, success ? "succeeded" : "failed");
 
         [MethodImpl(Inline)]
         public string Format()
             => Message;
+
+        public override string ToString()
+            => Format();
 
         public static CmdResult Empty
             => default;

@@ -22,7 +22,7 @@ namespace Z0
         /// <summary>
         /// The answered survey questions
         /// </summary>
-        public TableSpan<QuestionResponse<T>> Answered {get;}
+        public Index<QuestionResponse<T>> Answered {get;}
 
         public SurveyResponse(uint id, params QuestionResponse<T>[] answered)
         {

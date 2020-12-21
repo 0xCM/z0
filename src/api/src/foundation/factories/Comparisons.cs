@@ -21,6 +21,8 @@ namespace Z0
     [ApiHost]
     public readonly struct Comparisons
     {
+        const NumericKind Closure = UInt64k;
+
         /// <summary>
         /// Defines comparison expression
         /// </summary>

@@ -13,11 +13,11 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static ApiCodeBlock[] blocks(IWfShell wf, ApiHostUri host)
-            => new ApiHexArchive(wf).Read(host);
+            => new ApiHexArchive(wf.Db().CapturedHexDir()).Read(host);
 
         [Op]
         public static ApiCodeBlock[] blocks(FS.FilePath src)
-            => from line in src.ReadLines().Select(ApiHexParser.parse)
+            => from line in src.ReadLines().Select(ApiHexParser.extracts)
                 where line.Succeeded
                 select line.Value;
     }

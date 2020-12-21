@@ -17,10 +17,10 @@ namespace Z0
         public FileArchive(FS.FolderPath root)
             => Root = root;
 
-        public ListedFiles Listing()
-            => FS.list(Files().Array());
+        public ListedFiles List()
+            => FS.list(Root.EnumerateFiles(true).Array());
 
-        public Deferred<FS.FilePath> Files()
+        public Deferred<FS.FilePath> Enumerate()
             => Root.EnumerateFiles(true);
 
         [MethodImpl(Inline)]

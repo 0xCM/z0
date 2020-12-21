@@ -23,7 +23,7 @@ namespace Z0
         protected override CmdResult Run(ShowRuntimeArchiveCmd cmd)
         {
             var archive = RuntimeArchive.create();
-            var resolver = new PathAssemblyResolver(archive.Files.Select(x => x.Name.Text));
+            var resolver = new PathAssemblyResolver(archive.ArchivedFiles().Select(x => x.Name.Text));
             using var context = new MetadataLoadContext(resolver);
             iter(archive.ManagedLibraries, path => context.LoadFromAssemblyPath(path.Name));
             var assemblies = context.GetAssemblies();

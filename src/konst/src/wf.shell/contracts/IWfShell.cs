@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Reflection;
+    using System.Threading.Tasks;
 
     using static z;
     using static WfShellUtility;
@@ -55,6 +56,12 @@ namespace Z0
 
         WfExecToken Ran(WfExecFlow src);
 
+        CmdBuilder CmdBuilder()
+            => new CmdBuilder(this);
+
+        Task<CmdResult> Dispatch(ICmdSpec cmd)
+            => Task.Factory.StartNew(() => Router.Dispatch(cmd));
+
         string ITextual.Format()
             => AppName;
 
@@ -66,9 +73,6 @@ namespace Z0
 
         IWfShell WithVerbosity(LogLevel level)
             => clone(this, Host, PolyStream, level);
-
-        ICmdCatalog CmdCatalog
-            => new CmdCatalog(this);
 
         Assembly[] Components
             => Context.ApiParts.Components;

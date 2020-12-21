@@ -104,9 +104,9 @@ namespace Z0.Logix
             var va = var_a<T>();
             var vb = var_b<T>();
             var vc = var_c<T>();
-            var x = compare(BinaryComparisonApiClass.Lt,va,vb);
-            var y = compare(BinaryComparisonApiClass.Lt,vb,vc);
-            var z = compare(BinaryComparisonApiClass.Lt,vc,va);
+            var x = predicate(BinaryComparisonApiClass.Lt,va,vb);
+            var y = predicate(BinaryComparisonApiClass.Lt,vb,vc);
+            var z = predicate(BinaryComparisonApiClass.Lt,vc,va);
             for(var i=0; i<RepCount; i++)
             {
                 var a = va.Set(Random);
@@ -133,7 +133,7 @@ namespace Z0.Logix
         {
             var va = var_a<T>();
             var vb = var_b<T>();
-            var x = compare(kind,va,vb);
+            var x = predicate(kind,va,vb);
             for(var i=0; i<RepCount; i++)
             {
                 var a = va.Set(Random);

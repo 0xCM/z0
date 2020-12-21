@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System.Collections.Generic;
-
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     using static z;
@@ -21,25 +19,19 @@ namespace Z0
         FS.Files Clear(FS.FolderName id)
             => (Root + id).Clear(list<FS.FilePath>()).Array();
 
+        Deferred<FS.FilePath> ArchivedFiles()
+            => Root.EnumerateFiles(true);
+
         FS.Files Clear(string id)
             => Clear(FS.folder(id));
 
-        IEnumerable<FS.FolderPath> Directories()
-        {
-            foreach(var path in Root.SubDirs(true))
-                yield return FS.dir(path.Name);
-        }
-
-        Deferred<FS.FilePath> Files()
-            => Root.EnumerateFiles(true);
-
-        Deferred<FS.FilePath> Files(FS.FileExt[] ext, bool recurse)
+        Deferred<FS.FilePath> Enumerate(FS.FileExt[] ext, bool recurse)
             => Root.EnumerateFiles(ext, recurse);
 
-        Deferred<FS.FilePath> Files(string pattern, bool recurse)
+        Deferred<FS.FilePath> Enumerate(string pattern, bool recurse)
             => Root.EnumerateFiles(pattern, recurse);
 
-        ListedFiles Listing()
-            => FS.list(Files().Array());
+        ListedFiles List()
+            => FS.list(ArchivedFiles().Array());
     }
 }

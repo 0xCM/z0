@@ -24,7 +24,7 @@ namespace Z0
         [Op]
         public static FS.Files match(FS.FolderPath root, params FS.FileExt[] ext)
         {
-            var files = create(root, ext).Files().Array();
+            var files = create(root, ext).ArchivedFiles().Array();
             Array.Sort(files);
             return files;
         }
@@ -32,7 +32,7 @@ namespace Z0
         [Op]
         public static FS.Files match(FS.FolderPath root, uint max, params FS.FileExt[] ext)
         {
-            var files = create(root, ext).Files().Take(max).Array();
+            var files = create(root, ext).ArchivedFiles().Take(max).Array();
             Array.Sort(files);
             return files;
         }

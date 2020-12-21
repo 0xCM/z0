@@ -118,12 +118,12 @@ namespace Z0
             return new XedRuleSet(srcName, name, rt, body.Map(x => new XedRule(x)), XedWfOps.rulefile(srcName, name));
         }
 
-
         public XedRuleSet[] ParseFunctions(FS.FilePath src)
         {
             var dst = list<XedRuleSet>();
             var data = LoadSource(src);
-            for(var i=0; i<data.RowCount; i++)
+            var count = data.RowCount;
+            for(var i=0; i<count; i++)
             {
                 var row = data[i];
                 if(Contains(data[i], RuleMarker))

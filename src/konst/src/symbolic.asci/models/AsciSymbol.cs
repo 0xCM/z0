@@ -18,25 +18,11 @@ namespace Z0
     [ApiHost]
     public readonly struct AsciSymbol : IBytes<C,N>
     {
-        public const int Length = 1;
-
-        internal readonly AsciCharCode Code;
+        readonly AsciCharCode Code;
 
         [MethodImpl(Inline), Op]
         public AsciSymbol(AsciCharCode code)
             => Code = code;
-
-        [MethodImpl(Inline), Op]
-        public static ref readonly AsciSymbol define(in byte src)
-            => ref z.view<byte,AsciSymbol>(src);
-
-        [MethodImpl(Inline), Op]
-        public static string format(AsciSymbol src)
-            => src.Text;
-
-        [MethodImpl(Inline), Op]
-        public static char @char(AsciSymbol src)
-            => (char)src;
 
         public string Text
         {
@@ -74,55 +60,55 @@ namespace Z0
             get => Code != 0;
         }
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public bool Equals(C src)
             => Code == src.Code;
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public string Format()
             => Text;
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static implicit operator C(AsciCharCode src)
             => new AsciSymbol(src);
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static implicit operator AsciCharCode(C src)
             => src.Code;
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static implicit operator C(char src)
             => new AsciSymbol((AsciCharCode)src);
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static implicit operator char(C src)
             => (char)src.Code;
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static implicit operator C(AsciChar src)
             => new AsciSymbol((AsciCharCode)src);
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static implicit operator AsciChar(C src)
             => (AsciChar)src.Code;
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static implicit operator C(byte src)
             => new AsciSymbol((AsciCharCode)src);
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static implicit operator byte(C src)
             => (byte)src.Code;
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static explicit operator uint(C src)
             => (uint)src.Code;
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static explicit operator ushort(C src)
             => (ushort)src.Code;
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static explicit operator ulong(C src)
             => (ulong)src.Code;
 

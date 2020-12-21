@@ -37,5 +37,9 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static string format(in asci64 src)
             => F.format(src);
+
+        [MethodImpl(Inline), Op]
+        public static string format(AsciSymbol src)
+            => src.Text;
     }
 }

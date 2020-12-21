@@ -4,11 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Konst;
-
     [Record]
     public struct XedPattern : IRecord<XedPattern>
     {
@@ -27,6 +22,5 @@ namespace Z0
         public string[] Parts;
 
         public string[] Operands;
-
     }
 }

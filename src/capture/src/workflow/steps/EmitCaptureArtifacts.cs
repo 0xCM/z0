@@ -73,7 +73,7 @@ namespace Z0
             {
                 EmitExtracts();
                 ParseMembers();
-                EmitParsedExtracts.create(HostUri, ParsedBlocks).Run(Wf);
+                EmitApiHexRows.create(HostUri, ParsedBlocks).Run(Wf);
                 EmitHostCil.create(HostUri).Run(Wf, ParsedBlocks, out var _);
                 DecodeMembers();
             }

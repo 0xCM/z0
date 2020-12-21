@@ -27,7 +27,7 @@ namespace Z0
 
         Count EmissionCount;
 
-        TableSpan<ApiCodeDescriptor> Descriptors;
+        Index<ApiCodeDescriptor> Descriptors;
 
         [MethodImpl(Inline)]
         public EmitCodeBlockReportStep(IWfShell wf, WfHost host)

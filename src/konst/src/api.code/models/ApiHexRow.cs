@@ -6,13 +6,10 @@ namespace Z0
 {
     using System;
 
-    using static Konst;
-    using static z;
+    using F = ApiHexField;
+    using R = ApiHexRow;
 
-    using F = ApiParseField;
-    using R = ApiParseBlock;
-
-    public enum ApiParseField : uint
+    public enum ApiHexField : uint
     {
         Seq = 0 | 12 << 16,
 
@@ -31,7 +28,7 @@ namespace Z0
         Data = 7 | 1 << 16
     }
 
-    public struct ApiParseBlock : ITabular<F,R>
+    public struct ApiHexRow
     {
         public const int FieldCount = 8;
 
@@ -51,7 +48,7 @@ namespace Z0
 
         public CodeBlock Data;
 
-        public string DelimitedText(char delimiter)
+        public string DelimitedText(char delimiter = Chars.Pipe)
         {
             var dst = Table.formatter<F>(delimiter);
             dst.Delimit(F.Seq, Seq);

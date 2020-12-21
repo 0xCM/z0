@@ -35,14 +35,13 @@ namespace Z0
         /// </summary>
         public IVarExpr<T>[] Vars {get;}
 
-
         [MethodImpl(Inline)]
         public ComparisonExpr(BinaryComparisonApiClass kind, IExpr<T> lhs, IExpr<T> rhs, params IVarExpr<T>[] vars)
         {
-            this.ComparisonKind = kind;
-            this.LeftArg = lhs;
-            this.RightArg = rhs;
-            this.Vars = vars;
+            ComparisonKind = kind;
+            LeftArg = lhs;
+            RightArg = rhs;
+            Vars = vars;
         }
 
         public void SetVars(params IExpr<T>[] values)

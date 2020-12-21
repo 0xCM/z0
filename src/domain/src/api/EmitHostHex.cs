@@ -12,7 +12,7 @@ namespace Z0
 
     public struct EmitHostCodeBlockPayload
     {
-        public ApiParseBlock[] Emitted;
+        public ApiHexRow[] Emitted;
     }
 
     [WfHost]
@@ -46,7 +46,7 @@ namespace Z0
 
         readonly EmitHostHexCmd Spec;
 
-        public ApiParseBlock[] Emitted;
+        public ApiHexRow[] Emitted;
 
         [MethodImpl(Inline)]
         public EmitHostHexStep(IWfShell wf, WfHost host, EmitHostHexCmd spec)
@@ -74,7 +74,7 @@ namespace Z0
                 var report = ApiParseBlocks.create(Spec.ApiHost, source);
                 ApiParseBlocks.save(report, target);
                 Emitted = report;
-                Wf.EmittedTable<ApiParseBlock>(Emitted.Length, target);
+                Wf.EmittedTable<ApiHexRow>(Emitted.Length, target);
             }
             catch(Exception e)
             {

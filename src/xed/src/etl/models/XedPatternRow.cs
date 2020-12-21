@@ -30,19 +30,6 @@ namespace Z0
 
         public string Operands;
 
-        public XedPatternRow(string Class, string Category, string Extension, string IsaSet, BinaryCode BaseCode, string Mod, string Reg, string Pattern, string Operands)
-        {
-            this.Class = Class;
-            this.Category = Category;
-            this.Extension = Extension;
-            this.IsaSet = IsaSet;
-            this.Mod = Mod;
-            this.Pattern = Pattern;
-            this.Reg = Reg;
-            this.Operands = Operands;
-            this.BaseCode = BaseCode;
-        }
-
         public string DelimitedText(char sep)
             => XedWfOps.format(this,sep);
     }

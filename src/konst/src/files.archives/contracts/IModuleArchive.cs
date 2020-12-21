@@ -21,8 +21,6 @@ namespace Z0
         IEnumerable<FileModule> NativeExeFiles();
 
         IEnumerable<FileModule> StaticLibs();
-
-        new IEnumerable<FileModule> Files();
     }
 
     public interface IModuleArchive<H> : IService<H,IModuleArchive>

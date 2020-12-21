@@ -14,14 +14,6 @@ namespace Z0
     {
         const NumericKind Closure = UnsignedInts;
 
-        [MethodImpl(Inline), Op]
-        public static ICmdCatalog catalog(IWfShell wf)
-            => new CmdCatalog(wf);
-
-        [MethodImpl(Inline), Op]
-        public static CmdBuilder builder(IWfShell wf)
-            => new CmdBuilder(wf);
-
         [Op]
         public static ICmdSpec[] known()
         {

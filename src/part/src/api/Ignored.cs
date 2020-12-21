@@ -8,12 +8,11 @@ namespace Z0
     using System.Reflection;
     using System.Linq;
     using System.Collections.Generic;
-    using System.Runtime.CompilerServices;
 
     partial class XTend
     {
         /// <summary>
-        /// Returns true if the [Ignore] attributed is applied to the target 
+        /// Returns true if the [Ignore] attributed is applied to the target
         /// </summary>
         /// <param name="target">The target</param>
         public static bool Ignored(this MemberInfo target)

@@ -4,6 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
+    using System.Runtime.CompilerServices;
+
+    using static Konst;
+
     [Cmd(CmdName)]
     public struct ListFilesCmd : ICmdSpec<ListFilesCmd>
     {
@@ -31,5 +36,38 @@ namespace Z0
         Csv,
 
         Markdown
+    }
+
+    partial class XCmdSpecs
+    {
+        [Op]
+        public static ListFilesCmd ListFiles(this CmdBuilder builder, string name, FS.FolderPath src, params FS.FileExt[] kinds)
+        {
+            var cmd = new ListFilesCmd();
+            cmd.ListName = name;
+            cmd.SourceDir = src;
+            cmd.Extensions = kinds;
+            cmd.TargetPath = builder.Db.List(name, FileExtensions.Csv);
+            cmd.ListFormat = ListFormatKind.Markdown;
+            return cmd;
+        }
+
+        public static ref ListFilesCmd WithExt(this ref ListFilesCmd cmd, params FS.FileExt[] ext)
+        {
+            cmd.Extensions = ext;
+            return ref cmd;
+        }
+
+        public static ref ListFilesCmd WithFormat(this ref ListFilesCmd cmd, ListFormatKind format)
+        {
+            cmd.ListFormat = format;
+            return ref cmd;
+        }
+
+        public static ref ListFilesCmd WithLimit(this ref ListFilesCmd cmd, uint max)
+        {
+            cmd.EmissionLimit = max;
+            return ref cmd;
+        }
     }
 }

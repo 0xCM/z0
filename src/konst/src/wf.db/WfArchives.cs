@@ -34,7 +34,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static ApiHexArchive hex(IWfShell wf)
-            => new ApiHexArchive(wf);
+            => new ApiHexArchive(wf.Db().CapturedHexDir());
 
         [MethodImpl(Inline), Op]
         public static ApiHexArchive hex(FS.FolderPath root)

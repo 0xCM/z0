@@ -38,10 +38,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public ComparisonPredExpr(BinaryComparisonApiClass op, IExpr<T> left, IExpr<T> right, params IVarExpr<T>[] vars)
         {
-            this.ComparisonKind = op;
-            this.LeftArg = left;
-            this.RightArg = right;
-            this.Vars = vars;
+            ComparisonKind = op;
+            LeftArg = left;
+            RightArg = right;
+            Vars = vars;
         }
 
         public void SetVars(params IExpr<T>[] values)

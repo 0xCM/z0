@@ -93,7 +93,7 @@ namespace Z0
         public IEnumerable<FileModule> StaticLibs()
             => lib_native();
 
-        public IEnumerable<FileModule> Files()
+        public IEnumerable<FileModule> ArchivedFiles()
             => modules();
     }
 }

@@ -33,19 +33,19 @@ namespace Z0
         }
 
         [Op]
-        public static CmdResult run(IWfShell wf, in EmitRenderPatternsCmd spec)
+        public static CmdResult run(IWfShell wf, in EmitRenderPatternsCmd cmd)
         {
-            using var writer = spec.Target.Writer();
-            var patterns = sources(spec.Source);
+            using var writer = cmd.Target.Writer();
+            var patterns = sources(cmd.Source);
             var view = patterns.View;
             var count = view.Length;
             for(var i=0; i<count; i++)
                 writer.WriteLine(skip(view,i).Format());
-            wf.EmittedFile(count, spec.Target);
-            return Win();
+            wf.EmittedFile(count, cmd.Target);
+            return Cmd.ok(cmd);
         }
 
-        protected override CmdResult Execute(IWfShell wf, in EmitRenderPatternsCmd spec)
-            => run(wf, spec);
+        protected override CmdResult Execute(IWfShell wf, in EmitRenderPatternsCmd cmd)
+            => run(wf, cmd);
     }
 }

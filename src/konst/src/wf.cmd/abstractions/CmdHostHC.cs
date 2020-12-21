@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
 
-
     public abstract class CmdHost<H,S> : WfHost<H>
         where H : CmdHost<H,S>, new()
         where S : struct, ICmdSpec<S>
@@ -14,12 +13,6 @@ namespace Z0
         public CmdId CmdId => new S().CmdId;
 
         protected static S Spec() => new S();
-
-        protected static CmdResult Fail(params byte[] data)
-            => new CmdResult(new CmdId(), false, data);
-
-        protected static CmdResult Win(params byte[] data)
-            => new CmdResult(new CmdId(), true, data);
 
         public CmdResult Run(IWfShell wf, in S spec)
         {
@@ -34,7 +27,7 @@ namespace Z0
             catch(Exception e)
             {
                 wf.Error(e);
-                return Fail();
+                return Cmd.fail(spec,e);
             }
         }
 

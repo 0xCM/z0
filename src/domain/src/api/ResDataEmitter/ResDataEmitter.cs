@@ -4,17 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System.Reflection;
-
-    [Cmd]
-    public struct EmitResourceDataCmd : ICmdSpec<EmitResourceDataCmd>
+    public readonly partial struct ResDataEmitter
     {
-        public Assembly Source;
 
-        public FS.FolderPath Target;
-
-        public utf8 Match;
-
-        public bool ClearTarget;
     }
 }
