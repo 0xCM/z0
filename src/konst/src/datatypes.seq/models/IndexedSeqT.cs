@@ -34,6 +34,12 @@ namespace Z0
             get => Data;
         }
 
+        public Span<T> Edit
+        {
+            [MethodImpl(Inline)]
+            get => Data;
+        }
+
         public ReadOnlySpan<T> View
         {
             [MethodImpl(Inline)]

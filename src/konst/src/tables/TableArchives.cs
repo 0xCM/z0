@@ -23,24 +23,10 @@ namespace Z0
         public static void clear(FS.FolderPath root, FS.FolderName folder)
             => (root + folder).Clear();
 
-        public static Option<FS.FilePath> deposit<F,R,S>(FS.FolderPath root, R[] src, string id, S subject, FS.FileExt type)
-            where F : unmanaged, Enum
-            where R : struct, ITabular
-                => TableArchives.service<F,R>().Save(src, Table.renderspec<F>(), (FS.dir(root.Name) + FS.folder(id) + FS.file($"{id}.{subject}",type)));
-
-        [MethodImpl(Inline), Op]
-        public ITableArchive service(IWfShell wf, FS.FolderPath? root = null)
-            => new TableArchive(wf, root);
-
         public static TableArchive<F,R> service<F,R>()
             where F : unmanaged
             where R : struct, ITabular
                 => default;
-
-        public static Option<FS.FilePath> deposit<F,R>(R[] src, FS.FilePath dst)
-            where F : unmanaged, Enum
-            where R : struct, ITabular
-                => service<F,R>().Save(src, dst);
 
         [MethodImpl(Inline)]
         public static ArchivedTable<T> archived<T>(FS.FilePath src)
@@ -83,21 +69,6 @@ namespace Z0
                 term.error(e);
                 return Option.none<FS.FilePath>();
             }
-        }
-
-        public static void deposit<F,T>(in RecordEmission<T> src, FS.FilePath dst, IRowFormatter<F> formatter, char delimiter = FieldDelimiter)
-            where F : unmanaged, Enum
-            where T : struct, ITable<F,T>
-        {
-            var header = Table.header<F>(delimiter);
-            var count = src.RowCount;
-            var rows = src.View;
-
-            using var writer = dst.Writer();
-            writer.WriteLine(header.HeaderText);
-
-            for(var i=0u; i<count; i++)
-                writer.WriteLine(formatter.Format(skip(rows,i)));
         }
 
         public static void deposit<E>(Dictionary<string,E> src, FS.FilePath dst)
@@ -152,7 +123,6 @@ namespace Z0
 
             return (TableRows.rowset<T>(src), new ArchivedTable<T>(path));
         }
-
 
         static string FormatSequential<E>(int seq, E value)
             => text.concat(seq.ToString().PadRight(10), SpacePipe, value.ToString());

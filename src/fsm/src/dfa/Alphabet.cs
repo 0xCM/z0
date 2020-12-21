@@ -5,13 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Runtime.CompilerServices;
-    using System.Diagnostics;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     public interface IAlphabet<A> : IIndex<ushort,A>
         where A : unmanaged, ISymbol
@@ -40,11 +36,12 @@ namespace Z0
             get => Data.Storage;
         }
 
-        public Span<A> Terms
+        public Span<A> Edit
         {
             [MethodImpl(Inline)]
-            get => Data.Terms;
+            get => Data.Edit;
         }
+
 
         [MethodImpl(Inline)]
         public static implicit operator Alphabet<A>(A[] src)

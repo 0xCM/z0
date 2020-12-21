@@ -12,12 +12,12 @@ namespace Z0
 
     public class t_fsm1 : UnitTest<t_fsm1>
     {
-        public void Run()
+        public void t_run()
         {
             var spec = new Fsm1Spec();
             var tasks = new Task[Pow2.T08];
             var indices = Algorithmic.stream(0xFFFFul, 0xFFFFFFFFul).Where(x => x % 2 != 0).Take(Pow2.T08).ToArray();
-            for(var i=0u; i< tasks.Length; i++)
+            for(var i=0u; i<tasks.Length; i++)
             {
                 var random = Rng.pcg64(0,indices[i]);
                 var context = Fsm.context(random);

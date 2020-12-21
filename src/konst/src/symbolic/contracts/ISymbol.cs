@@ -35,10 +35,10 @@ namespace Z0
         S Value {get;}
 
         char ISymbol.Render()
-            => (char)z.force<S,ushort>(Value);
+            => (char)memory.c16<S>(Value);
 
         BinaryCode ISymbol.Encoded
-            => bytes(Value);
+            => memory.bytes(Value);
     }
 
     public interface ISymbol<S,T> : ISymbol<S>

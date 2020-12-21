@@ -13,7 +13,7 @@ namespace Z0
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface IIndex<T> : IMeasured, IEnumerable<T>, ITextual
+    public interface IIndex<T> : ISeq<T>, IMeasured, IEnumerable<T>, ITextual
     {
         T[] Storage {get;}
 
@@ -21,7 +21,8 @@ namespace Z0
             => Chars.Semicolon;
         string ITextual.Format()
             => string.Format("({0}:{1})*", typeof(T).Name, Storage?.Length ?? 0);
-        Span<T> Terms
+
+        ReadOnlySpan<T> ISeq<T>.Items
             => Storage;
 
         Span<T> Edit

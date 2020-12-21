@@ -33,10 +33,10 @@ namespace Z0
             get => Data.Storage;
         }
 
-        public Span<Facet<S,T>> Terms
+        public Span<Facet<S,T>> Edit
         {
             [MethodImpl(Inline)]
-            get => Data.Terms;
+            get => Data.Edit;
         }
 
         public uint Count

@@ -35,7 +35,7 @@ namespace Z0
         public static Span<FieldInfo> literals(in IndexedSeq<FieldInfo> src, Span<FieldInfo> dst)
         {
             var k = 0u;
-            var view = src.Terms;
+            var view = src.Edit;
             var count = view.Length;
             for(var i=0u; i<count; i++)
                 if(skip(view,i).IsLiteral)

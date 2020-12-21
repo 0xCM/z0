@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface ILiteralLogicSeqExpr : ILiteralSeqExpr<bit>, ILogicExpr
+    public interface ILiteralLogicSeqExpr : ISeqExpr<bit>, ILogicExpr
     {
 
     }

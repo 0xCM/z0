@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// Defines an item selection
     /// </summary>
-    public readonly struct SymbolicChoice<T> : ISymbolicChoice<SymbolicChoice<T>,T>
+    public readonly struct SymbolicChoice<T>
         where T : unmanaged
     {
         public T Chosen {get;}

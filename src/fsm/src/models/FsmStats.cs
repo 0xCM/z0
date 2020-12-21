@@ -9,37 +9,38 @@ namespace Z0
     /// <summary>
     /// Captures state machine execution metrics
     /// </summary>
-    public class FsmStats
-    {        
+    [Record]
+    public struct FsmStats : IRecord<FsmStats>
+    {
         /// <summary>
         /// Identifies the machine within the executing process
         /// </summary>
-        public string MachineId {get; set;}
+        public string MachineId;
 
         /// <summary>
         /// The time the machine received the start signal
         /// </summary>
-        public ulong? StartTime {get; set;}
+        public ulong? StartTime;
 
         /// <summary>
         /// The time the machine workflow completed
         /// </summary>
-        public ulong? EndTime {get; set;}
+        public ulong? EndTime;
 
         /// <summary>
         /// The number of received events
         /// </summary>
-        public ulong ReceiptCount {get; set;}
+        public ulong ReceiptCount;
 
         /// <summary>
         /// The number of state transitions that have occurred
         /// </summary>
-        public uint TransitionCount {get; set;}      
+        public uint TransitionCount;
 
         /// <summary>
         /// The time spent during active execution
         /// </summary>
-        public Duration Runtime {get; set;}  
+        public Duration Runtime;
 
         public override int GetHashCode()
             => MachineId.GetHashCode();

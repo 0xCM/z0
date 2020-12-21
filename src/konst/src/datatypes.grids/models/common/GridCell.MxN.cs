@@ -14,26 +14,18 @@ namespace Z0
     /// Defines an MxN indexed T-cell
     /// </summary>
     public readonly struct GridCell<T,M,N>
-        where T : struct
         where M : unmanaged
         where N : unmanaged
     {
-        public T Data {get;}
-
         public M Row {get;}
 
         public N Col {get;}
 
         [MethodImpl(Inline)]
-        public GridCell(T data, M row, N col)
+        public GridCell(M row, N col)
         {
             Row = row;
             Col = col;
-            Data = data;
         }
-
-        [MethodImpl(Inline)]
-        public static implicit operator T(in GridCell<T,M,N> src)
-            => src.Data;
     }
 }

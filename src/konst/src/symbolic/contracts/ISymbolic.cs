@@ -9,7 +9,7 @@ namespace Z0
 
     }
 
-    public interface ISymbolic<H,S> :  ISymbolic, ISymExpr<H,S>
+    public interface ISymbolic<H,S> : ISymbolic, ISymExpr<H,S>
         where H : struct, ISymbolic<H,S>
         where S : unmanaged
     {

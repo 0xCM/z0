@@ -354,8 +354,8 @@ namespace Z0
         /// <typeparam name="S">The state type</typeparam>
         /// <typeparam name="A">The entry action type</typeparam>
         [MethodImpl(Inline)]
-        public static Fsm<E,S,A> machine<E,S,A>(string id, IWfShell wf, IPolyrand random, S s0, S sZ, MachineTransition<E,S> t, EntryFunction<S,A> entry, ExitFunction<S,A> exit, ulong? limit = null)
-            => new Fsm<E,S,A>(id, wf, random, s0, sZ, t, entry,exit, limit);
+        public static Fsm<E,S,A> machine<E,S,A>(string id, IWfShell wf, S s0, S sZ, MachineTransition<E,S> t, EntryFunction<S,A> entry, ExitFunction<S,A> exit, ulong? limit = null)
+            => new Fsm<E,S,A>(id, wf, s0, sZ, t, entry,exit, limit);
 
         /// <summary>
         /// Creates a default machine observer

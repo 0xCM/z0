@@ -12,9 +12,9 @@ namespace Z0
 
     partial struct Table
     {
-        public static TableHeader<F> header<F>(char delimiter = FieldDelimiter)
+        public static RowHeader<F> header<F>(char delimiter = FieldDelimiter)
             where F : unmanaged, Enum
-                => new TableHeader<F>(LiteralFields.fields<F>());
+                => new RowHeader<F>(LiteralFields.fields<F>());
         [Op]
         public static string header53<T>(char delimiter = FieldDelimiter)
             where T : unmanaged, Enum

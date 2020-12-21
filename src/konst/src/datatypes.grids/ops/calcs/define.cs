@@ -11,18 +11,22 @@ namespace Z0
 
     partial struct GridCalcs
     {
+        [MethodImpl(Inline)]
+        public static GridCell<T> cell<T>(uint row, uint col)
+            where T : struct
+                => new GridCell<T>(row, col);
 
         [MethodImpl(Inline)]
-        public static GridCell<T,K> define<T,K>(T data, K row, K col)
+        public static GridCell<T,K> cell<T,K>(K row, K col)
             where T : struct
             where K : unmanaged
-                => new GridCell<T,K>(data, row, col);
+                => new GridCell<T,K>(row, col);
 
         [MethodImpl(Inline)]
-        public static GridCell<T,M,N> define<T,M,N>(T data, M row, N col)
+        public static GridCell<T,M,N> cell<T,M,N>(M row, N col)
             where T : struct
             where M : unmanaged
             where N : unmanaged
-                => new GridCell<T,M,N>(data, row, col);
+                => new GridCell<T,M,N>(row, col);
     }
 }

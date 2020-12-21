@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// Defines an item selection
     /// </summary>
-    public readonly struct Choice<T> : IChoice<Choice<T>,T>
+    public readonly struct Choice<T>
     {
         public T Chosen {get;}
 

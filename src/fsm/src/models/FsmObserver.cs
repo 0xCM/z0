@@ -13,6 +13,21 @@ namespace Z0
     /// <typeparam name="S">The state type</typeparam>
     public class FsmObserver<E,S>
     {
+        readonly Fsm<E,S> Machine;
+
+
+        readonly ObserverTrace Tracing;
+
+        readonly int ReceiptEmitRate;
+
+        int ReceiptCounter;
+
+        int TransitionCount;
+
+        int CompletionCount;
+
+        ulong ReceiptCount;
+
         public FsmObserver(Fsm<E,S> machine, ObserverTrace? tracing = null, int? receiptEmitRate = null)
         {
             Machine = machine;
@@ -26,21 +41,7 @@ namespace Z0
             CompletionCount = 0;
         }
 
-        Fsm<E,S> Machine;
-
         string Id => Machine.Id;
-
-        readonly ObserverTrace Tracing;
-
-        readonly int ReceiptEmitRate;
-
-        int ReceiptCounter;
-
-        int TransitionCount;
-
-        int CompletionCount;
-
-        ulong ReceiptCount;
 
         void Trace(IAppMsg msg)
         {

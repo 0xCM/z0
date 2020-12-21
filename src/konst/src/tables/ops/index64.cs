@@ -113,15 +113,5 @@ namespace Z0
             }
             return dst.ToArray();
         }
-
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static ulong index64<I>(I index)
-            where I : unmanaged
-        {
-            var storage = 0ul;
-            ref var dst = ref @as<I>(storage);
-            dst = index;
-            return storage;
-        }
     }
 }

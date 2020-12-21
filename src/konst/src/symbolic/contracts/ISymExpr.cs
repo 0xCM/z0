@@ -16,7 +16,7 @@ namespace Z0
         T Body {get;}
     }
 
-    public interface ISymExpr<F,T> :  ISymExpr<T>, INullary<F>, IEquatable<F>
+    public interface ISymExpr<F,T> : ISymExpr<T>, INullary<F>, IEquatable<F>
         where F : struct, ISymExpr<F,T>
     {
 

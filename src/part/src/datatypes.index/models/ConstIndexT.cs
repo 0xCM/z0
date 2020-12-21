@@ -23,7 +23,7 @@ namespace Z0
             get => Data?.Length ?? 0;
         }
 
-        public ReadOnlySpan<T> Terms
+        public ReadOnlySpan<T> Items
         {
             [MethodImpl(Inline)]
             get => Data;
@@ -41,13 +41,13 @@ namespace Z0
             get => !IsNonEmpty;
         }
 
-        public ref T this[long i]
+        public ref readonly T this[long i]
         {
             [MethodImpl(Inline)]
             get => ref seek(Data,i);
         }
 
-        public ref T this[ulong i]
+        public ref readonly T this[ulong i]
         {
             [MethodImpl(Inline)]
             get => ref seek(Data,i);
@@ -59,13 +59,13 @@ namespace Z0
             get => (uint)Length;
         }
 
-        public ref T First
+        public ref readonly T First
         {
             [MethodImpl(Inline)]
             get => ref Index.first(Data);
         }
 
-        public ref T Last
+        public ref readonly T Last
         {
             [MethodImpl(Inline)]
             get => ref Index.last(Data);
@@ -103,7 +103,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator ReadOnlySpan<T>(ConstIndex<T> src)
-            => src.Terms;
+            => src.Items;
 
         [MethodImpl(Inline)]
         public static implicit operator ConstIndex<T>(T[] src)

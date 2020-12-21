@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
 
     using static Part;
     using static memory;
@@ -36,7 +37,7 @@ namespace Z0
             get => Data;
         }
 
-        public Span<T> Terms
+        public ReadOnlySpan<T> Items
         {
             [MethodImpl(Inline)]
             get => Data;
@@ -93,7 +94,11 @@ namespace Z0
         [MethodImpl(Inline)]
         public ConstIndex<T> Freeze()
             => Data;
-        public string Format()
+
+        public bool Equals<C>(Index<T> other, C comparer)
+            where C : IEqualityComparer<T>
+                => Index.equals(Items, other.Items, comparer);
+       public string Format()
             => Index.delimit(Data).Format();
 
         public override string ToString()

@@ -6,27 +6,11 @@ namespace Z0
 {
     using System.Collections.Generic;
 
-    public interface ISeqExpr : IExpr
-    {
-
-    }
-
-    public interface ILazySeqExpr<T> : ISeqExpr
-        where T : unmanaged
-    {
-        /// <summary>
-        /// The terms in the sequence that are evaluated on-demand
-        /// </summary>
-        IEnumerable<T> Terms {get;}
-
-        int? Length{get;}
-    }
-
     /// <summary>
     /// Characterizes a finite sequence of terms
     /// </summary>
     /// <typeparam name="T">The term type</typeparam>
-    public interface ISeqExpr<T> : ISeqExpr
+    public interface ISeqExpr<T> : IExpr
         where T : unmanaged
     {
         /// <summary>

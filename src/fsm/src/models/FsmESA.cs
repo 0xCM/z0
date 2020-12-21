@@ -14,7 +14,7 @@ namespace Z0
    /// <typeparam name="A">The action type</typeparam>
     public class Fsm<E,S,A> : Fsm<E,S>
     {
-        internal Fsm(string Id, IWfShell wf, IPolyrand random, S ground, S end,
+        internal Fsm(string Id, IWfShell wf, S ground, S end,
                 MachineTransition<E,S> Transition, EntryFunction<S,A> entry, ExitFunction<S,A> exit, ulong? limit = null)
             : base(Id, wf, ground, end, Transition, limit)
         {
@@ -51,6 +51,5 @@ namespace Z0
         {
             ExitFunc.Eval(s).OnSome(action => ExitAction?.Invoke(s,action));
         }
-
     }
 }

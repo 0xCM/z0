@@ -4,9 +4,16 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IRule<T> : INode
-    {
-        RuleId RuleId {get;}
+    using System;
 
+    public interface IRule : ITerm
+    {
+
+    }
+
+    public interface IRule<P> : IRule
+        where P : IProposition, IEquatable<P>
+    {
+        Index<P> Terms {get;}
     }
 }

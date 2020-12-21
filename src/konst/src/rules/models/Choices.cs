@@ -8,35 +8,24 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static z;
 
     /// <summary>
     /// Defines a sequence of potential choices
     /// </summary>
-    public readonly struct Choices<T> : IChoices<T>
+    public readonly struct Choices<T>
     {
-        public RuleId RuleId {get;}
-
-        public Index<T> Items {get;}
+        public Index<T> Terms {get;}
 
         [MethodImpl(Inline)]
         public Choices(T[] choices)
         {
-            RuleId = RuleId.Empty;
-            Items = choices;
-        }
-
-        [MethodImpl(Inline)]
-        public Choices(RuleId rule, T[] choices)
-        {
-            RuleId = rule;
-            Items = choices;
+            Terms = choices;
         }
 
         public uint Count
         {
             [MethodImpl(Inline)]
-            get => Items.Count;
+            get => Terms.Count;
         }
 
         [MethodImpl(Inline)]

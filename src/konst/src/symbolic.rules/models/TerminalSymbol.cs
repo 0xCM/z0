@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-   public readonly struct TerminalSymbol<S> : ITerminal<S>
+   public readonly struct TerminalSymbol<S> : ITerminalSymbol<S>
         where S : unmanaged
     {
         public S Value {get;}

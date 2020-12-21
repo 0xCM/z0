@@ -5,73 +5,53 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Runtime.CompilerServices;
-    using System.Diagnostics;
 
     using static Konst;
-    using static z;
-
-    public interface IDfaStates<Q,I,S> : IIndex<I,S>
-        where Q : struct, IIndex<S>
-        where I : unmanaged
-        where S : struct, IDfaState<S>
-    {
-
-    }
-
-    public interface IDfaStates<Q,S> : IDfaStates<Q,ushort,S>
-        where Q : struct, IIndex<S>
-        where S : struct, IDfaState<S>
-    {
-
-    }
 
     public interface IDfaState<S>
-        where S : struct
+        where S : IEquatable<S>
     {
-
+        S Value {get;}
     }
 
-    public interface IDfaState<H,S> : IDfaState<S>
-        where H : struct, IDfaState<H,S>
-        where S : struct
+    public readonly struct DfaState<S> : IDfaState<S>
+        where S : IEquatable<S>
     {
-
-    }
-
-    public readonly struct DfaState<S> : IDfaState<DfaState<S>,S>
-        where S : struct
-    {
-
-    }
-
-    public readonly struct DfaStates<S> : IDfaStates<DfaStates<S>,ushort,S>
-        where S : struct, IDfaState<S>
-    {
-        readonly S[] States;
+        public S Value {get;}
 
         [MethodImpl(Inline)]
-        public DfaStates(S[] states)
+        public DfaState(S value)
+        {
+            Value = value;
+        }
+    }
+
+    public readonly struct DfaStates<S> : IIndex<ushort,DfaState<S>>
+        where S : IEquatable<S>
+    {
+        readonly Index<DfaState<S>> States;
+
+        [MethodImpl(Inline)]
+        public DfaStates(DfaState<S>[] states)
             => States = states;
 
-        public ref S this[ushort index]
+        public ref DfaState<S> this[ushort index]
         {
             [MethodImpl(Inline)]
             get => ref States[z.u32(index)];
         }
 
-        public S[] Storage
+        public DfaState<S>[] Storage
         {
             [MethodImpl(Inline)]
             get => States;
         }
 
-        public Span<S> Terms
+        public ReadOnlySpan<DfaState<S>> Items
         {
             [MethodImpl(Inline)]
-            get => States;
+            get => States.Items;
         }
 
         public uint Count
@@ -80,35 +60,4 @@ namespace Z0
             get => (uint)States.Length;
         }
     }
-
-    public interface IDfaTransition<Q,A>
-        where A : unmanaged, ISymbol<A>
-        where Q : struct, IIndex<A>
-    {
-        Q Next(Q q, Alphabet<A> s);
-    }
-
-    public readonly struct DfaTransition<Q,A> : IDfaTransition<Q,A>
-        where A : unmanaged, ISymbol<A>
-        where Q : struct, IIndex<A>
-    {
-        public Q Next(Q q, Alphabet<A> s)
-        {
-            return default;
-        }
-    }
-
-    public readonly struct Dfa<Q,I,A,T>
-        where A : unmanaged, ISymbol<A>
-        where Q : struct, IIndex<A>
-    {
-        public Q States {get;}
-
-        public Alphabet<A> Alphabet {get;}
-
-        public A Initial {get;}
-
-        public DfaTransition<Q,A> Transition {get;}
-    }
-
 }
