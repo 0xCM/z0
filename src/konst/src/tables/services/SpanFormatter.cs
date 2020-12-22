@@ -10,15 +10,12 @@ namespace Z0
     using static Konst;
 
     public readonly struct SpanFormatter<T> : ISpanFormatter<T>
-        where T : ITextual
     {
         readonly SeqFormatConfig Config;
 
         [MethodImpl(Inline)]
         public SpanFormatter(SeqFormatConfig config)
-        {
-            Config = config;
-        }
+            => Config = config;
 
         [MethodImpl(Inline)]
         public string Format(ReadOnlySpan<T> src)
@@ -30,8 +27,8 @@ namespace Z0
             var count = src.Length;
             var dst = z.span<string>(count);
             for(var i=0u; i<count; i++)
-                z.seek(dst, i) = z.skip(src,i).Format();
+                z.seek(dst, i) = z.skip(src,i).ToString();
             return dst;
-        }        
+        }
     }
 }

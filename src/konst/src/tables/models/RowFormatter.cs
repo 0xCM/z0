@@ -32,7 +32,7 @@ namespace Z0
 
         readonly TableFields Fields;
 
-        readonly TableSpan<ushort> Widths;
+        readonly Index<ushort> Widths;
 
         readonly StringBuilder Target;
 

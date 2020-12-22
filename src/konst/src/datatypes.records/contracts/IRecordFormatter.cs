@@ -4,18 +4,16 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
+    using static memory;
 
-    public readonly struct ArchivedTable<T>
+    public interface IRecordFormatter<T>
         where T : struct
     {
-        public FS.FilePath Location {get;}
+        string Formt(in T src);
 
-        [MethodImpl(Inline)]
-        public ArchivedTable(FS.FilePath path)
-            => Location = path;
+        string Format(in DynamicRow<T> src);
     }
 }

@@ -21,7 +21,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public MemberName(string src)
-            => Content = src;
+            => Content = src ?? EmptyString;
 
         public uint Hash
         {

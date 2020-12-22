@@ -18,11 +18,14 @@ namespace Z0
 
         public Index<CellFormatSpec> Cells {get;}
 
+        public RowFormatPattern Pattern {get;}
+
         [MethodImpl(Inline)]
         public RowFormatSpec(RowHeader header, CellFormatSpec[] src)
         {
             Header = header;
             Cells = src;
+            Pattern = Records.pattern(Cells, Header.Delimiter);
         }
 
         public uint CellCount

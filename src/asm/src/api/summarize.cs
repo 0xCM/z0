@@ -32,7 +32,7 @@ namespace Z0
             var count = src.Length;
             var buffer = new AsmFxSummary[count];
             var offset = 0u;
-            var @base = src.Encoded.Base;
+            var @base = src.Encoded.BaseAddress;
             var view = src.View;
             var dst = span(buffer);
 

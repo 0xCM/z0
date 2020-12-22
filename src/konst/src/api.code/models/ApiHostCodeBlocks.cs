@@ -29,7 +29,7 @@ namespace Z0
         public ApiHostCodeBlocks(ApiHostUri host, ApiCodeBlock[] code)
         {
             Host = host;
-            Data = code.OrderBy(x => x.Base);
+            Data = code.OrderBy(x => x.BaseAddress);
         }
 
         public ref readonly ApiCodeBlock this[long index]

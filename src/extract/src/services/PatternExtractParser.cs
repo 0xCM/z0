@@ -75,8 +75,8 @@ namespace Z0
                 var term = status.HasFailed() ? ExtractTermCode.Fail : parser.Result.ToTermCode();
                 if(term != ExtractTermCode.Fail)
                 {
-                    var code = Locate(src.Encoded.Base, parser.Parsed, term == ExtractTermCode.CTC_Zx7 ? Zx7Cut : 0);
-                    return new ApiMemberCode(src.Member, new ApiCodeBlock(code.Base, src.OpUri, code), seq, term);
+                    var code = Locate(src.Encoded.BaseAddress, parser.Parsed, term == ExtractTermCode.CTC_Zx7 ? Zx7Cut : 0);
+                    return new ApiMemberCode(src.Member, new ApiCodeBlock(code.BaseAddress, src.OpUri, code, src.ApiSig), seq, term);
                 }
                 else
                     return Outcomes.fail<ApiMemberCode>(term.ToString());

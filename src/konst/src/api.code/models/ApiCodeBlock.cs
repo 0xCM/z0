@@ -5,6 +5,7 @@
 namespace Z0
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using System.Runtime.CompilerServices;
 
     using static Konst;
@@ -12,7 +13,7 @@ namespace Z0
     /// <summary>
     /// The hex bits found at the end of a uri
     /// </summary>
-    public readonly struct ApiCodeBlock
+    public readonly struct ApiCodeBlock : IComparable<ApiCodeBlock>
     {
         /// <summary>
         /// The operation uri
@@ -24,25 +25,22 @@ namespace Z0
         /// </summary>
         public CodeBlock Code {get;}
 
+        public CliSig ApiSig {get;}
+
         [MethodImpl(Inline)]
-        public ApiCodeBlock(MemoryAddress @base, OpUri uri, BinaryCode src)
+        public ApiCodeBlock(MemoryAddress @base, OpUri uri, BinaryCode src, CliSig? sig = null)
         {
             Uri = uri;
             Code = new CodeBlock(@base, src);
+            ApiSig = sig ?? CliSig.Empty;
         }
 
         [MethodImpl(Inline)]
-        public ApiCodeBlock(OpUri uri, MemoryAddress @base, BinaryCode src)
-        {
-            Uri = uri;
-            Code = new CodeBlock(@base,src);
-        }
-
-        [MethodImpl(Inline)]
-        public ApiCodeBlock(OpUri uri, CodeBlock code)
+        public ApiCodeBlock(OpUri uri, CodeBlock code, CliSig? sig = null)
         {
             Code = code;
             Uri = uri;
+            ApiSig = sig ?? CliSig.Empty;
         }
 
         public byte[] Storage
@@ -60,16 +58,16 @@ namespace Z0
         /// <summary>
         /// The code's base address
         /// </summary>
-        public MemoryAddress Base
+        public MemoryAddress BaseAddress
         {
              [MethodImpl(Inline)]
-             get => Code.Base;
+             get => Code.BaseAddress;
         }
 
-        public string OpId
+        public OpIdentity OpId
         {
              [MethodImpl(Inline)]
-             get => Uri.OpId.Identifier;
+             get => Uri.OpId;
         }
 
         /// <summary>
@@ -149,7 +147,7 @@ namespace Z0
             => Encoded.Equals(src.Encoded);
 
         public string Format(int uripad)
-            => text.concat(Base.Format(), Space, OpUri.UriText.PadRight(uripad), Space, Encoded.Format());
+            => text.concat(BaseAddress.Format(), Space, OpUri.UriText.PadRight(uripad), Space, Encoded.Format());
 
         public string Format()
             => Format(60);
@@ -157,6 +155,9 @@ namespace Z0
 
         public override string ToString()
             => Format();
+
+        public int CompareTo(ApiCodeBlock src)
+            => BaseAddress.CompareTo(src.BaseAddress);
 
         /// <summary>
         /// No code, no identity, no life
@@ -170,6 +171,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator CodeBlock(ApiCodeBlock src)
-            => new CodeBlock(src.Base, src.Code);
+            => new CodeBlock(src.BaseAddress, src.Code);
     }
 }

@@ -19,17 +19,17 @@ namespace Z0
         /// <param name="src">The data source</param>
         /// <typeparam name="T">The record type</typeparam>
         [Op, Closures(Closure)]
-        public static TableEmission<DynamicRow<T>> emit<T>(DynamicRows<T> src, in RowFormatSpec spec, FS.FilePath dst)
+        public static RowsetEmissions<DynamicRow<T>> emit<T>(DynamicRows<T> src, in RowFormatSpec spec, FS.FilePath dst)
             where T : struct
         {
             var count = src.Count;
             var data = src.Items;
             using var writer = dst.Writer();
-            writer.WriteLine(RowFormat.format(spec.Header));
+            writer.WriteLine(format(spec.Header));
             var buffer = Buffers.text();
             for(var i=0; i<count; i++)
             {
-                RowFormat.render(skip(data,i), spec, buffer);
+                render(skip(data,i), spec, buffer);
                 writer.WriteLine(buffer.Emit());
             }
 
@@ -44,7 +44,7 @@ namespace Z0
             var data = src.Items;
 
             using var writer = dst.Writer();
-            writer.WriteLine(RowFormat.format(header));
+            writer.WriteLine(format(header));
             ref readonly var row = ref src.First;
             for(var i=0u; i<count; i++)
                 writer.WriteLine(formatter.Format(skip(row,i)));

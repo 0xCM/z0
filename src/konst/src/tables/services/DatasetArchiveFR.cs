@@ -10,7 +10,7 @@ namespace Z0
 
     using api = Table;
 
-    public readonly struct TableArchive<F,R> : ITableArchive<F,R>
+    public readonly struct DatasetArchive<F,R> : IDatasetArchive<F,R>
         where F : unmanaged
         where R : struct, ITabular
     {

@@ -70,15 +70,15 @@ namespace Z0
                 return;
             }
 
-            var inclusion = Include(new ApiCodeBlock(src.Uri, src.Data));
+            var inclusion = Include(new ApiCodeBlock(src.Uri, src.Data, src.ApiSig));
             if(inclusion.Any(x => x == false))
                 Wf.Warn(Msg.DuplicateUri.Format(src.Uri));
         }
 
         Triple<bool> Include(in ApiCodeBlock src)
         {
-            var a = CodeAddress.TryAdd(src.Base, src);
-            var b = UriAddress.TryAdd(src.Base, src.Uri);
+            var a = CodeAddress.TryAdd(src.BaseAddress, src);
+            var b = UriAddress.TryAdd(src.BaseAddress, src.Uri);
             var c = Locations.TryAdd(src.Uri, src);
             return triple(a,b,c);
         }

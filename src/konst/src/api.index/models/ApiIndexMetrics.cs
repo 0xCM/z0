@@ -31,9 +31,9 @@ namespace Z0
             stats.PartCount = (uint)src.Parts.Length;
             stats.HostCount = (uint)src.Hosts.Length;
             stats.AddressCount =(uint)src.Locations.Length;
-            stats.FunctionCount = (uint)src.MemberCode.Length;
+            stats.FunctionCount = src.CodeBlocks.Count;
             stats.IdentityCount = (uint)src.Identities.Length;
-            stats.ByteCount = src.MemberCode.Sum(x => x.Data.Length);
+            stats.ByteCount = src.CodeBlocks.Storage.Sum(x => x.Data.Length);
             return stats;
         }
 

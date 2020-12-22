@@ -41,6 +41,5 @@ namespace Z0
             StreamOut.Flush();
             StreamOut.Dispose();
         }
-
     }
 }

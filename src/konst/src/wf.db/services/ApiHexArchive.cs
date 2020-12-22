@@ -47,42 +47,7 @@ namespace Z0
         public FS.FilePath[] Files(PartId owner)
             => Root.Files(owner, DefaultExt, true);
 
-        public ApiHostCodeBlocks HostCode(FS.FilePath src)
-        {
-            var uri = ApiUri.host(src.Name);
-            if(uri.Failed || uri.Value.IsEmpty)
-                return default;
 
-            var dst = z.list<ApiCodeBlock>();
-            foreach(var item in read(src))
-                if(item.IsNonEmpty)
-                    dst.Add(item);
-
-            return new ApiHostCodeBlocks(uri.Value, dst.Array());
-        }
-
-        public IEnumerable<ApiHostCodeBlocks> HostCode(PartId[] parts)
-        {
-            if(parts.Length != 0)
-            {
-                foreach(var owner in parts)
-                foreach(var file in Files(owner))
-                {
-                    var idx = Index(file);
-                    if(idx.IsNonEmpty)
-                        yield return idx;
-                }
-            }
-            else
-            {
-                foreach(var file in ArchivedFiles())
-                {
-                    var idx = HostCode(file);
-                    if(idx.IsNonEmpty)
-                        yield return idx;
-                }
-            }
-        }
 
         /// <summary>
         /// Enumerates the content of all archived files

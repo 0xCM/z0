@@ -89,7 +89,7 @@ namespace Z0
             var dst = new ApiCodeDescriptor();
             dst.Part = src.Uri.Part;
             dst.Host = src.Uri.Host.Name;
-            dst.Base = src.Code.Base;
+            dst.Base = src.Code.BaseAddress;
             dst.Size = src.Code.Length;
             dst.Uri = src.Identifier;
             return dst;
@@ -100,7 +100,7 @@ namespace Z0
         {
             dst.Part = src.Uri.Part;
             dst.Host = src.Uri.Host.Name;
-            dst.Base = src.Code.Base;
+            dst.Base = src.Code.BaseAddress;
             dst.Size = src.Code.Length;
             dst.Uri = src.Identifier;
             return ref dst;

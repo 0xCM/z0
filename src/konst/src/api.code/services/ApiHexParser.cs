@@ -18,27 +18,6 @@ namespace Z0
         ParseResult<ApiCodeBlock> ITextParser<ApiCodeBlock>.Parse(string src)
             => extracts(src);
 
-        public static ParseResult<ApiCodeBlock> parse(string src)
-        {
-            try
-            {
-                var parts = src.SplitClean(FieldDelimiter);
-                var parser = Parsers.hex(true);
-                if(parts.Length != 3)
-                    return unparsed<ApiCodeBlock>(src, $"components = {parts.Length} != 3");
-
-                var address = Parsers.hex().Parse(parts[(byte)ApiCodeField.Base]).ValueOrDefault();
-                var uri = ApiUri.parse(parts[(byte)ApiCodeField.Uri].Trim()).ValueOrDefault();
-                var bytes = parts[(byte)ApiCodeField.Encoded].SplitClean(HexFormatSpecs.DataDelimiter).Select(parser.Succeed);
-                return parsed(src, new ApiCodeBlock(address, uri, bytes));
-            }
-            catch(Exception e)
-            {
-                return unparsed<ApiCodeBlock>(src,e);
-            }
-        }
-
-
         public static ParseResult<ApiCodeBlock> extracts(string src)
         {
             try
@@ -51,7 +30,7 @@ namespace Z0
                 var address = Parsers.hex().Parse(parts[(byte)ApiCodeField.Base]).ValueOrDefault();
                 var uri = ApiUri.parse(parts[(byte)ApiCodeField.Uri].Trim()).ValueOrDefault();
                 var bytes = parts[(byte)ApiCodeField.Encoded].SplitClean(HexFormatSpecs.DataDelimiter).Select(parser.Succeed);
-                return parsed(src, new ApiCodeBlock(address, uri, bytes));
+                return parsed(src, new ApiCodeBlock(address, uri, bytes, CliSig.Empty));
             }
             catch(Exception e)
             {

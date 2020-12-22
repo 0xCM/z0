@@ -10,29 +10,18 @@ namespace Z0
     using static Part;
     using static memory;
 
-    [ApiHost]
-    public readonly struct RowFormat
+    partial struct Records
     {
-        const NumericKind Closure = UnsignedInts;
-
         /// <summary>
-        /// Defines a <see cref='RowFormatSpec'/>
+        /// Formats a <see cref='DynamicRow{T}'/> according to supplied specifiecation
         /// </summary>
-        /// <param name="header">The row header</param>
-        /// <param name="cells">The cell specs</param>
-        [MethodImpl(Inline), Op]
-        public static RowFormatSpec rowspec(RowHeader header, CellFormatSpec[] cells)
-            => new RowFormatSpec(header, cells);
-
-        /// <summary>
-        /// Defines a <see cref='CellFormatSpec'/>
-        /// </summary>
-        /// <param name="pattern">The cell format pattern</param>
-        /// <param name="lpad"></param>
-        /// <param name="rpad"></param>
-        [MethodImpl(Inline), Op]
-        public static CellFormatSpec cellspec(string pattern, ushort lpad, ushort rpad = 0)
-            => new CellFormatSpec(pattern, lpad, rpad);
+        /// <param name="row">The row to format</param>
+        /// <param name="spec">The format spec</param>
+        /// <typeparam name="T">The record type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static string format<T>(DynamicRow<T> row, RowFormatSpec spec)
+            where T : struct
+                => spec.Pattern.Apply(row);
 
         /// <summary>
         /// Formats a <see cref='RowHeader'/>
@@ -42,18 +31,19 @@ namespace Z0
         {
             var dst = text.build();
             for(var i=0; i<src.Count; i++)
-                dst.Append(text.format(RP.SlottedSpacePipe, src[i].Format()));
+            {
+                dst.Append(src.Delimiter);
+                dst.Append(src[i].Format());
+            }
             return dst.ToString();
         }
 
         [Op]
-        public static string format(dynamic src, in CellFormatSpec spec)
+        static string format(dynamic src, CellFormatSpec spec)
         {
             string data = spec.Pattern.Format(src);
-            if(spec.LeftPad != 0)
-                data = data.PadLeft(spec.LeftPad);
-            if(spec.RightPad != 0)
-                data = data.PadRight(spec.RightPad);
+            if(spec.Width != 0)
+                data.PadRight(spec.Width);
             return data;
         }
 

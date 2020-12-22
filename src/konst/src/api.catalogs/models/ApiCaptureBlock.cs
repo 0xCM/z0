@@ -29,6 +29,8 @@ namespace Z0
 
         public CilMethod Cil;
 
+        public CliSig ApiSig;
+
         public ApiMetadataUri MetaUri
             => Method;
 
@@ -38,10 +40,11 @@ namespace Z0
             Extracted = extracted;
             Parsed = parsed;
             Method = method;
-            insist(extracted.Base, parsed.Base);
+            insist(extracted.BaseAddress, parsed.BaseAddress);
             OpUri = OpUri.hex(ApiQuery.uri(method.DeclaringType), method.Name, id);
             TermCode = term;
             Cil = ClrDynamic.cil(method);
+            ApiSig = CliSigs.resolve(method);
         }
 
         public ReadOnlySpan<byte> InputData
@@ -98,10 +101,10 @@ namespace Z0
             get => Parsed.IsNonEmpty;
         }
 
-        public ApiCodeBlock UriHex
+        public ApiCodeBlock CodeBlock
         {
              [MethodImpl(Inline)]
-             get => new ApiCodeBlock(BaseAddress, OpUri, Parsed);
+             get => new ApiCodeBlock(BaseAddress, OpUri, Parsed, ApiSig);
         }
 
         public OpIdentity MemberId
@@ -113,7 +116,7 @@ namespace Z0
         public MemoryAddress BaseAddress
         {
             [MethodImpl(Inline)]
-            get => Extracted.Base;
+            get => Extracted.BaseAddress;
         }
 
         public uint Hash

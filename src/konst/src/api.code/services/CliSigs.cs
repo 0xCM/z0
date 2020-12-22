@@ -12,17 +12,34 @@ namespace Z0
     using static memory;
     using static zfunc;
 
-    partial struct Cli
+    public readonly struct CliSigs
     {
         /// <summary>
         /// Determines the <see cref='CliSig'/> for a specified <see cref='MethodInfo'/>
         /// </summary>
         /// <param name="src">The source method</param>
         [MethodImpl(Inline), Op]
-        public static CliSig sig(MethodInfo src)
-            => new CliSig(src.Module.ResolveSignature(src.MetadataToken));
+        public static CliSig resolve(MethodInfo src)
+        {
+            TryResolve(src, out var dst);
+            return dst;
+        }
 
-        public static Index<CliSig> sigs(MethodInfo[] src)
+        static bool TryResolve(MethodInfo src, out CliSig dst)
+        {
+            try
+            {
+                dst = src.Module.ResolveSignature(src.MetadataToken);
+                return true;
+            }
+            catch
+            {
+                dst = CliSig.Empty;
+                return false;
+            }
+        }
+
+        public static Index<CliSig> resolve(MethodInfo[] src)
         {
             var count = zfunc.count(src);
             if(count==0)
@@ -42,7 +59,7 @@ namespace Z0
                 ref readonly var input = ref first(src);
                 ref var output = ref first(dst);
                 for(var i=0; i<k; i++)
-                    seek(output,i) = sig(skip(input,i));
+                    seek(output,i) = resolve(skip(input,i));
             }
         }
 
@@ -51,7 +68,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source type</param>
         [Op]
-        public static Outcome<CliSig> sig(Type src)
+        public static Outcome<CliSig> resolve(Type src)
         {
             var module = src.Module;
             try
@@ -71,7 +88,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source type</param>
         [Op]
-        public static CliSig sig(FieldInfo src)
+        public static CliSig resolve(FieldInfo src)
             => new CliSig(src.Module.ResolveSignature(src.MetadataToken));
     }
 }

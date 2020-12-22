@@ -18,9 +18,9 @@ namespace Z0
         PartCodeIndex PartIndex;
 
         [MethodImpl(Inline)]
-        public ApiCodeBlockIndex(PartCodeAddresses members, PartUriAddresses memuri, PartCodeIndex code)
+        public ApiCodeBlockIndex(PartCodeAddresses memories, PartUriAddresses memuri, PartCodeIndex code)
         {
-            Memories = members;
+            Memories = memories;
             UriLocations = memuri;
             PartIndex = code;
         }
@@ -49,7 +49,7 @@ namespace Z0
         /// <summary>
         /// All indexed code
         /// </summary>
-        public ApiCodeBlock[] MemberCode
+        public ApiCodeBlocks CodeBlocks
         {
             [MethodImpl(Inline)]
             get => Memories.Encoded;

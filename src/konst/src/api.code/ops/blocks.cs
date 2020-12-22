@@ -11,10 +11,6 @@ namespace Z0
 
     partial struct ApiCode
     {
-        [MethodImpl(Inline), Op]
-        public static ApiCodeBlock[] blocks(IWfShell wf, ApiHostUri host)
-            => new ApiHexArchive(wf.Db().CapturedHexDir()).Read(host);
-
         [Op]
         public static ApiCodeBlock[] blocks(FS.FilePath src)
             => from line in src.ReadLines().Select(ApiHexParser.extracts)

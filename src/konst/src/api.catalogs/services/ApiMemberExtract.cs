@@ -20,6 +20,12 @@ namespace Z0
 
         public ApiMember Member {get;}
 
+        public CliSig ApiSig
+        {
+            [MethodImpl(Inline)]
+            get => Member.ApiSig;
+        }
+
         public byte[] Data
         {
             [MethodImpl(Inline)]
@@ -72,7 +78,7 @@ namespace Z0
         public MemoryAddress Address
         {
             [MethodImpl(Inline)]
-            get => Encoded.Base;
+            get => Encoded.BaseAddress;
         }
 
         public ApiHostUri Host

@@ -15,7 +15,7 @@ namespace Z0
     partial struct XedWfOps
     {
         [MethodImpl(Inline), Op]
-        public static ref readonly FieldFormatter<XedPatternField> render(in XedPattern src, in FieldFormatter<XedPatternField> dst)
+        public static ref readonly DatasetFieldFormatter<XedPatternField> render(in XedPattern src, in DatasetFieldFormatter<XedPatternField> dst)
         {
             dst.Delimit(F.Class, src.Class);
             dst.Delimit(F.Category, src.Category);
@@ -30,7 +30,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static ref readonly FieldFormatter<XedPatternField> render(in XedPatternRow src, in FieldFormatter<XedPatternField> dst)
+        public static ref readonly DatasetFieldFormatter<XedPatternField> render(in XedPatternRow src, in DatasetFieldFormatter<XedPatternField> dst)
         {
             dst.Delimit(F.Class, src.Class);
             dst.Delimit(F.Category, src.Category);

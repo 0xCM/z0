@@ -9,7 +9,10 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct Rowset<T>
+    /// <summary>
+    /// Defines a <typeparamref name='T'/> row index
+    /// </summary>
+    public readonly struct Rowset<T> : IIndex<T>
         where T : struct
     {
         readonly T[] Data;
@@ -17,6 +20,12 @@ namespace Z0
         [MethodImpl(Inline)]
         public Rowset(T[] data)
             => Data = data;
+
+        public T[] Storage
+        {
+            [MethodImpl(Inline)]
+            get => Data;
+        }
 
         public ReadOnlySpan<T> View
         {

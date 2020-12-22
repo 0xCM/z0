@@ -35,6 +35,12 @@ namespace Z0
         /// </summary>
         public ApiCodeBlock Encoded {get;}
 
+        public CliSig ApiSig
+        {
+            [MethodImpl(Inline)]
+            get => Member.ApiSig;
+        }
+
         public OpUri OpUri
         {
             [MethodImpl(Inline)]
@@ -95,14 +101,14 @@ namespace Z0
         {
             Sequence = seq;
             Member = member;
-            Encoded = new ApiCodeBlock(member.Address, member.OpUri, code);
+            Encoded = new ApiCodeBlock(member.Address, member.OpUri, code, member.ApiSig);
             TermCode = term;
         }
 
         public MemoryAddress Address
         {
             [MethodImpl(Inline)]
-            get => Encoded.Base;
+            get => Encoded.BaseAddress;
         }
 
         public ApiClass KindId

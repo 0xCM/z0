@@ -11,53 +11,54 @@ namespace Z0
 
     public readonly struct RowHeader : IIndex<HeaderCell>, ITextual
     {
-        public HeaderCell[] Data {get;}
+        public HeaderCell[] Cells {get;}
+
+        public string Delimiter {get;}
 
         [MethodImpl(Inline)]
-        public RowHeader(HeaderCell[] data)
-            => Data = data;
+        public RowHeader(HeaderCell[] data, string delimiter)
+        {
+            Cells = data;
+            Delimiter = delimiter;
+        }
 
         public HeaderCell[] Storage
         {
             [MethodImpl(Inline)]
-            get => Data;
+            get => Cells;
         }
 
         public ref HeaderCell this[uint index]
         {
             [MethodImpl(Inline)]
-            get => ref Data[index];
+            get => ref Cells[index];
         }
 
         public ref HeaderCell this[int index]
         {
             [MethodImpl(Inline)]
-            get => ref Data[index];
+            get => ref Cells[index];
         }
 
         public int Length
         {
             [MethodImpl(Inline)]
-            get => Data.Length;
+            get => Cells.Length;
         }
 
         public uint Count
         {
             [MethodImpl(Inline)]
-            get => (uint)Data.Length;
+            get => (uint)Cells.Length;
         }
 
         public string Format()
-            => RowFormat.format(this);
+            => Records.format(this);
 
         public override string ToString()
             => Format();
 
-        [MethodImpl(Inline)]
-        public static implicit operator RowHeader(HeaderCell[] data)
-            => new RowHeader(data);
-
         public static RowHeader Empty
-            => new RowHeader(sys.empty<HeaderCell>());
+            => new RowHeader(sys.empty<HeaderCell>(), EmptyString);
     }
 }

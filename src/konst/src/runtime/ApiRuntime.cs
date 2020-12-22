@@ -119,7 +119,7 @@ namespace Z0
 
         [Op]
         public static string sig(MethodInfo src)
-            => string.Format("{0}/{1}/{2}",src.DeclaringType.Assembly.GetSimpleName(), src.DeclaringType.Name, Cli.sig(src));
+            => string.Format("{0}/{1}/{2}",src.DeclaringType.Assembly.GetSimpleName(), src.DeclaringType.Name, CliSigs.resolve(src));
 
         [Op]
         public static ref ApiRuntimeMember populate(IApiHost host, ApiMember src, ref ApiRuntimeMember dst)

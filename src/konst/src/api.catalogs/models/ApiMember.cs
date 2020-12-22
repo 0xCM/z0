@@ -30,6 +30,7 @@ namespace Z0
 
         public CilMethod Cil {get;}
 
+        public CliSig ApiSig {get;}
         public ApiMetadataUri MetaUri
             => Method;
 
@@ -37,7 +38,7 @@ namespace Z0
             => Empty;
 
         [MethodImpl(Inline)]
-        public ApiMember(OpUri uri, MethodInfo method, ApiClass kindId, MemoryAddress address)
+        public ApiMember(OpUri uri, MethodInfo method, ApiClass kindId, MemoryAddress address, CliSig? sig = null)
         {
             Id = uri.OpId;
             OpUri = uri;
@@ -46,18 +47,7 @@ namespace Z0
             Address = address;
             Host = OpUri.Host;
             Cil = ClrDynamic.cil(method);
-        }
-
-        [MethodImpl(Inline)]
-        public ApiMember(OpUri uri, LocatedMethod method, ApiClass kindId)
-        {
-            Id = uri.OpId;
-            OpUri = uri;
-            ApiKind = kindId;
-            Method = method.Method;
-            Address = method.Address;
-            Host = OpUri.Host;
-            Cil = ClrDynamic.cil(Method);
+            ApiSig = sig ?? CliSig.Empty;
         }
 
         [MethodImpl(Inline)]

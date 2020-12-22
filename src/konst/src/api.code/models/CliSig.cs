@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
 
     using static Part;
 
@@ -14,6 +15,15 @@ namespace Z0
     /// </summary>
     public readonly struct CliSig : ITextual, IComparable<CliSig>
     {
+        public static CliSig Parse(string data)
+        {
+            var bytes = HexByteParser.Service.ParseData(data);
+            if(bytes)
+                return bytes.Value;
+            else
+                return CliSig.Empty;
+        }
+
         public BinaryCode Data {get;}
 
         [MethodImpl(Inline)]

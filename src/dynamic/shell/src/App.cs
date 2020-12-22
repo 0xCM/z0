@@ -399,20 +399,42 @@ namespace Z0
         Task<CmdResult> EmitHexIndex()
             => Wf.Dispatch(CmdBuilder.EmitHexIndex());
 
-        void EmitResData()
-        {
-            var cmd = Wf.Dispatch(CmdBuilder.EmitResData(Parts.Res.Assembly, "resdata"));
-            cmd.ContinueWith(result => EmitHexIndex().Wait()).Wait();
+        // void EmitResData()
+        // {
+        //     var cmd = Wf.Dispatch(CmdBuilder.EmitResData(Parts.Res.Assembly, "resdata"));
+        //     cmd.ContinueWith(result => EmitHexIndex().Wait()).Wait();
 
-            // var xed = XedWf.create(Wf);
-            // xed.Run();
-
-        }
+        // }
 
         void CreateApiIndex()
         {
             var svc = ApiIndex.service(Wf);
-            var index = svc.CreateIndex();
+            var api = svc.CreateIndex();
+            Array.Sort(api.CodeBlocks.Storage);
+            var blocks = api.CodeBlocks.View;
+
+            var path = Db.IndexFile(ApiHexIndexRow.TableId);
+            var count = blocks.Length;
+            var buffer = sys.alloc<ApiHexIndexRow>(count);
+            var target = span(buffer);
+            var widths = array<byte>(10, 16, 20, 80, 120);
+            var header = Records.header<ApiHexIndexRow>(widths);
+            var spec = Records.rowspec(header, header.Cells.Select(x => x.CellFormat));
+            var adapter = Records.adapter<ApiHexIndexRow>();
+            using var writer = path.Writer();
+            writer.WriteLine(header.Format());
+            for(var i=0u; i<count; i++)
+            {
+                ref readonly var src = ref skip(blocks,i);
+                ref var dst = ref seek(target, i);
+                dst.Seqence = i;
+                dst.Address = src.BaseAddress;
+                dst.Name = src.OpId.Name;
+                dst.Sig = src.ApiSig;
+                dst.Uri = src.Uri;
+                var row = adapter.Adapt(dst).Adapted;
+                writer.WriteLine(Records.format(row, spec));
+            }
         }
 
         public void Run()
@@ -423,7 +445,9 @@ namespace Z0
             //EmitBuildArchiveList(Wf.Db().BuildArchiveRoot(), "zbuild");
             //EmitCilTables(Wf, "z0.bitcore.dll");
 
-            EmitResData();
+            CreateApiIndex();
+
+            //EmitResData();
             // var component = Wf.Api.FindComponent(PartId.BitCore).Require();
             // var result = Cli.EmitCilTableDoc(Wf, component);
 

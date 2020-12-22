@@ -29,8 +29,8 @@ namespace Z0
         /// <param name="dst"></param>
         /// <typeparam name="T"></typeparam>
         [MethodImpl(Inline), Op]
-        public static TableEmission<DynamicRow<T>> emission<T>(DynamicRows<T> src, FS.FilePath dst)
+        public static RowsetEmissions<DynamicRow<T>> emission<T>(DynamicRows<T> src, FS.FilePath dst)
             where T : struct
-                => new TableEmission<DynamicRow<T>>(src.Storage, dst);
+                => new RowsetEmissions<DynamicRow<T>>(src.Rowset, dst);
     }
 }

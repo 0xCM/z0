@@ -17,12 +17,15 @@ namespace Z0
 
         public RenderWidth Width {get;}
 
+        public CellFormatSpec CellFormat {get;}
+
         [MethodImpl(Inline)]
         public HeaderCell(uint index, string name, RenderWidth width)
         {
             Index = index;
             Name = name;
             Width = width;
+            CellFormat = new CellFormatSpec("{0}", width);
         }
 
         [MethodImpl(Inline)]

@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct RowHeader<F>
+    public readonly struct TableHeader<F>
         where F : unmanaged
     {
         readonly LiteralFieldValues<F> Fields;
@@ -18,7 +18,7 @@ namespace Z0
         readonly char Delimiter;
 
         [MethodImpl(Inline)]
-        public RowHeader(LiteralFieldValues<F> fields, char delimiter = FieldDelimiter)
+        public TableHeader(LiteralFieldValues<F> fields, char delimiter = FieldDelimiter)
         {
             Fields = fields;
             Delimiter = delimiter;

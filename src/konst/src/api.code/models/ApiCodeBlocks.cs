@@ -17,6 +17,31 @@ namespace Z0
         public ApiCodeBlocks(ApiCodeBlock[] code)
             => Code = code;
 
+        public uint Count
+        {
+            [MethodImpl(Inline)]
+            get => Code.Count;
+        }
+
+        public ReadOnlySpan<ApiCodeBlock> View
+        {
+            [MethodImpl(Inline)]
+            get => Code.View;
+        }
+
+        public Span<ApiCodeBlock> Edit
+        {
+            [MethodImpl(Inline)]
+            get => Code.Edit;
+        }
+
+
+        public ApiCodeBlock[] Storage
+        {
+            [MethodImpl(Inline)]
+            get => Code.Storage;
+        }
+
         [MethodImpl(Inline)]
         public static implicit operator ApiCodeBlocks(ApiCodeBlock[] src)
             => new ApiCodeBlocks(src);

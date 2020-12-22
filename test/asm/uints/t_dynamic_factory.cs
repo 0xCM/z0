@@ -118,11 +118,11 @@ namespace Z0.Asm
             using var asmTarget = AsmWriter();
 
             var fCaptured = AsmCheck.Capture(f.Identify(), f).Require();
-            hexTarget.Write(fCaptured.UriHex);
+            hexTarget.Write(fCaptured.CodeBlock);
             asmTarget.WriteAsm(AsmCheck.Decoder.Decode(fCaptured).Require());
 
             var gCaptured = AsmCheck.Capture(g.Identify(), g).Require();
-            hexTarget.Write(gCaptured.UriHex);
+            hexTarget.Write(gCaptured.CodeBlock);
             asmTarget.WriteAsm(AsmCheck.Decoder.Decode(gCaptured).Require());
         }
 

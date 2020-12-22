@@ -21,8 +21,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public CapturedCodeBlock(MemoryAddress @base, CodeBlock input, CodeBlock output)
         {
-            insist(@base, input.Base);
-            insist(@base, output.Base);
+            insist(@base, input.BaseAddress);
+            insist(@base, output.BaseAddress);
             Base = @base;
             Input = input;
             Output = output;

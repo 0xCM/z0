@@ -57,7 +57,7 @@ namespace Z0
         Option<FS.FilePath> Save(R[] src, TableRenderSpec format, FS.FilePath dst, FileWriteMode mode = Overwrite);
     }
 
-    public interface ITableArchive<F,R> : ITableArchive<R>
+    public interface IDatasetArchive<F,R> : ITableArchive<R>
         where F : unmanaged
         where R : struct
     {

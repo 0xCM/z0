@@ -18,7 +18,7 @@ namespace Z0
     public struct RowAdapter<T>
         where T : struct
     {
-        public readonly RecordFields Fields;
+        public RecordFields Fields {get;}
 
         uint Index;
 

@@ -9,22 +9,22 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct ArchivedRowset<T> : IDataFlow<Rowset<T>, ArchivedTable<T>>
+    public readonly struct RowsetEmissions<T> : IDataFlow<Rowset<T>, FS.FilePath>
         where T : struct
     {
         public Rowset<T> Source {get;}
 
-        public ArchivedTable<T> Target {get;}
+        public FS.FilePath Target {get;}
 
         [MethodImpl(Inline)]
-        public ArchivedRowset(Rowset<T> src, ArchivedTable<T> dst)
+        public RowsetEmissions(Rowset<T> src, FS.FilePath dst)
         {
             Source = src;
             Target = dst;
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator ArchivedRowset<T>((Rowset<T> src, ArchivedTable<T> dst) x)
-            => new ArchivedRowset<T>(x.src, x.dst);
+        public static implicit operator RowsetEmissions<T>((Rowset<T> src, FS.FilePath dst) x)
+            => new RowsetEmissions<T>(x.src, x.dst);
     }
 }

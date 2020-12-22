@@ -23,15 +23,11 @@ namespace Z0
         public static void clear(FS.FolderPath root, FS.FolderName folder)
             => (root + folder).Clear();
 
-        public static TableArchive<F,R> service<F,R>()
+        public static DatasetArchive<F,R> service<F,R>()
             where F : unmanaged
             where R : struct, ITabular
                 => default;
 
-        [MethodImpl(Inline)]
-        public static ArchivedTable<T> archived<T>(FS.FilePath src)
-            where T : struct
-                => new ArchivedTable<T>(src);
 
         public static Option<FS.FilePath> deposit<F,R>(FS.FolderPath root, R[] src, FS.FileName name)
             where F : unmanaged, Enum
@@ -106,7 +102,7 @@ namespace Z0
             }
         }
 
-        public static ArchivedRowset<T> deposit<T,M,K>(FS.FolderPath root, T[] src, string header, Func<T,string> render,  M m = default)
+        public static RowsetEmissions<T> deposit<T,M,K>(FS.FolderPath root, T[] src, string header, Func<T,string> render,  M m = default)
             where T : struct
             where M : struct, IDataModel
             where K : unmanaged
@@ -121,7 +117,7 @@ namespace Z0
             for(var i=0u; i<count; i++)
                 writer.WriteLine(render(skip(records, i)));
 
-            return (TableRows.rowset<T>(src), new ArchivedTable<T>(path));
+            return (Records.rowset<T>(src), path);
         }
 
         static string FormatSequential<E>(int seq, E value)

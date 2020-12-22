@@ -49,7 +49,7 @@ namespace Z0
         }
 
         [Op]
-        static ref readonly RecordFormatter<F,W> format(in CliSystemString src, in RecordFormatter<F,W> dst)
+        static ref readonly DatasetFormatter<F,W> format(in CliSystemString src, in DatasetFormatter<F,W> dst)
         {
             dst.Delimit(F.Sequence, src.Sequence);
             dst.Delimit(F.Source, src.Source);
@@ -62,7 +62,7 @@ namespace Z0
         }
 
         [Op]
-        static ref readonly RecordFormatter<F,W> format(in CliUserString src, in RecordFormatter<F,W> dst)
+        static ref readonly DatasetFormatter<F,W> format(in CliUserString src, in DatasetFormatter<F,W> dst)
         {
             dst.Delimit(F.Sequence, src.Sequence);
             dst.Delimit(F.Source, src.Source);

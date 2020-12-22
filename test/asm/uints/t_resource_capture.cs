@@ -26,7 +26,7 @@ namespace Z0.Asm
             foreach(var src in methods)
             {
                 var captured = AsmCheck.Capture(src.Identify(), src).Require();
-                hexout.Write(captured.UriHex);
+                hexout.Write(captured.CodeBlock);
                 asmout.WriteAsm(AsmCheck.Decoder.Decode(captured).Require());
             }
         }

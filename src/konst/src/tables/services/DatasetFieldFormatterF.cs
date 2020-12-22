@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    public struct FieldFormatter<F>
+    public struct DatasetFieldFormatter<F>
         where F : unmanaged, Enum
     {
         readonly StringBuilder Target;
@@ -18,7 +18,7 @@ namespace Z0
         char Delimiter;
 
         [MethodImpl(Inline)]
-        public FieldFormatter(StringBuilder dst, char delimiter = FieldDelimiter)
+        public DatasetFieldFormatter(StringBuilder dst, char delimiter = FieldDelimiter)
         {
             z.insist(dst != null);
             Target = dst;
@@ -51,7 +51,7 @@ namespace Z0
             Target.Append(Render(content).PadRight(Table.width(f)));
         }
 
-        public FieldFormatter<F> Reset(char? delimiter = null)
+        public DatasetFieldFormatter<F> Reset(char? delimiter = null)
         {
             Target.Clear();
             Delimiter = delimiter ?? FieldDelimiter;

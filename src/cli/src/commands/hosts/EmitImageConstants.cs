@@ -102,7 +102,7 @@ namespace Z0
             Wf.EmittedTable<CliConstant>(count, target);
         }
 
-        static ref readonly RecordFormatter<F,W> format(in CliConstant src, in RecordFormatter<F,W> dst, bool eol = true)
+        static ref readonly DatasetFormatter<F,W> format(in CliConstant src, in DatasetFormatter<F,W> dst, bool eol = true)
         {
             dst.Delimit(F.Sequence, src.Sequence);
             dst.Delimit(F.ParentId, src.ParentId);

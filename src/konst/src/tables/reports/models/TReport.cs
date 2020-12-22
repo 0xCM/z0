@@ -18,7 +18,7 @@ namespace Z0
         string IReport.ReportName
             => typeof(R).DisplayName();
 
-        TableArchive<F,R> Log
+        DatasetArchive<F,R> Log
             => default;
 
         int IReport.RecordCount

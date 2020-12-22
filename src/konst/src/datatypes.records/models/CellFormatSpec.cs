@@ -16,16 +16,13 @@ namespace Z0
     {
         public RenderPattern<dynamic> Pattern {get;}
 
-        public ushort LeftPad {get;}
-
-        public ushort RightPad {get;}
+        public RenderWidth Width {get;}
 
         [MethodImpl(Inline)]
-        public CellFormatSpec(string pattern, ushort lpad, ushort rpad)
+        public CellFormatSpec(string pattern, RenderWidth width)
         {
-            LeftPad = lpad;
-            RightPad = rpad;
-            Pattern  = pattern;
+            Pattern = pattern;
+            Width = width;
         }
     }
 }

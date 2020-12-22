@@ -12,7 +12,7 @@ namespace Z0
     public readonly struct RenderWidth<T> : ITextual
         where T : unmanaged
     {
-        public readonly T Value;
+        public T Value {get;}
 
         [MethodImpl(Inline)]
         public static implicit operator RenderWidth<T>(T src)

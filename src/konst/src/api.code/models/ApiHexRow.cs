@@ -44,7 +44,7 @@ namespace Z0
 
         public OpUri Uri;
 
-        public string OpSig;
+        public CliSig ApiSig;
 
         public CodeBlock Data;
 
@@ -57,7 +57,7 @@ namespace Z0
             dst.Delimit(F.Length, Length);
             dst.Delimit(F.TermCode, TermCode);
             dst.Delimit(F.Uri, Uri);
-            dst.Delimit(F.OpSig, OpSig);
+            dst.Delimit(F.OpSig, ApiSig.Format());
             dst.Delimit(F.Data, Data.Format());
             return dst.Format();
         }

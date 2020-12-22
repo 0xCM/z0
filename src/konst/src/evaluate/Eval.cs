@@ -59,7 +59,7 @@ namespace Z0
         }
 
         [Op]
-        public static ref readonly FieldFormatter<K> emit(in EvalResult src, in FieldFormatter<K> dst)
+        public static ref readonly DatasetFieldFormatter<K> emit(in EvalResult src, in DatasetFieldFormatter<K> dst)
         {
             dst.Append(K.Sequence, src.Sequence);
             dst.Delimit(K.CaseName, src.CaseName);

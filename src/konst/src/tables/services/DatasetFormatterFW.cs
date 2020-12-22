@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct RecordFormatter<F,W> : IDatasetFormatter<F>
+    public readonly struct DatasetFormatter<F,W> : IDatasetFormatter<F>
         where F : unmanaged, Enum
         where W : unmanaged, Enum
     {
@@ -22,11 +22,11 @@ namespace Z0
 
         readonly W[] Widths;
 
-        public static implicit operator string(RecordFormatter<F,W> src)
+        public static implicit operator string(DatasetFormatter<F,W> src)
             => src.Format();
 
         [MethodImpl(Inline)]
-        public RecordFormatter(StringBuilder state, char delimiter = FieldDelimiter)
+        public DatasetFormatter(StringBuilder state, char delimiter = FieldDelimiter)
         {
             State = state;
             Delimiter = delimiter;

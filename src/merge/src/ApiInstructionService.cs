@@ -41,7 +41,7 @@ namespace Z0
 
         ApiInstruction[] Load(ApiCodeBlock code, Instruction[] src)
         {
-            var @base = code.Base;
+            var @base = code.BaseAddress;
             var offseq = OffsetSequence.Zero;
             var count = src.Length;
             var dst = new ApiInstruction[count];
@@ -52,7 +52,7 @@ namespace Z0
                 var len = fx.ByteLength;
                 var data = span(code.Storage);
                 var slice = data.Slice((int)offseq.Offset, len).ToArray();
-                var recoded = new ApiCodeBlock(code.Uri, fx.IP, slice);
+                var recoded = new ApiCodeBlock(fx.IP, code.Uri, slice, code.ApiSig);
                 dst[i] = new ApiInstruction(@base, fx, recoded);
                 offseq = offseq.AccrueOffset((uint)len);
             }

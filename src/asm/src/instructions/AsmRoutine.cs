@@ -67,7 +67,7 @@ namespace Z0.Asm
         public MemoryAddress BaseAddress
         {
             [MethodImpl(Inline)]
-            get => Code.Base;
+            get => Code.BaseAddress;
         }
 
         /// <summary>

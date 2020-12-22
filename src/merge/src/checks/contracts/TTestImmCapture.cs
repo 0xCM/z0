@@ -94,7 +94,7 @@ namespace Z0.Asm
                 var capture = CaptureService.Capture(CaptureExchange.Context, dynop.Id, dynop).Require();
                 var asm = Decoder.Decode(capture).Require();
 
-                var f = Dynamic.EmitFixedUnary<Cell256>(this[Main], capture.UriHex);
+                var f = Dynamic.EmitFixedUnary<Cell256>(this[Main], capture.CodeBlock);
                 var v2 = f(x.ToCell()).ToVector<T>();
                 veq(v1,v2);
             }

@@ -18,7 +18,7 @@ namespace Z0
         /// <summary>
         /// The head of the memory location from which the data originated
         /// </summary>
-        public MemoryAddress Base {get;}
+        public MemoryAddress BaseAddress {get;}
 
         /// <summary>
         /// The encoded content
@@ -28,14 +28,14 @@ namespace Z0
         [MethodImpl(Inline)]
         public CodeBlock(MemoryAddress src, byte[] data)
         {
-            Base = insist(src, x => x.IsNonEmpty);
+            BaseAddress = insist(src, x => x.IsNonEmpty);
             Code = new BinaryCode(insist(data));
         }
 
         public MemoryRange MemorySegment
         {
             [MethodImpl(Inline)]
-            get => (Base, Base + (MemoryAddress)Code.Length);
+            get => (BaseAddress, BaseAddress + (MemoryAddress)Code.Length);
         }
 
         public byte[] Storage
@@ -97,7 +97,7 @@ namespace Z0
         [MethodImpl(Inline)]
         CodeBlock(ulong zero)
         {
-            Base = zero;
+            BaseAddress = zero;
             Code = Array.Empty<byte>();
         }
 

@@ -12,11 +12,7 @@ namespace Z0
 
     public readonly struct TableFields : ITableSpan<TableFields,TableField>
     {
-        readonly TableSpan<TableField> Data;
-
-        [MethodImpl(Inline)]
-        public static implicit operator TableFields(TableField[] src)
-            => new TableFields(src);
+        readonly Index<TableField> Data;
 
         [MethodImpl(Inline)]
         public TableFields(TableField[] src)
@@ -101,5 +97,8 @@ namespace Z0
         public TableFields Refresh(TableField[] src)
             => src;
 
+        [MethodImpl(Inline)]
+        public static implicit operator TableFields(TableField[] src)
+            => new TableFields(src);
     }
 }

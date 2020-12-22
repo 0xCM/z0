@@ -47,7 +47,7 @@ namespace Z0
             where R : struct, ITabular
                 => TableArchives.deposit<F,R>(Root, src, folder, name);
 
-        public ArchivedRowset<T> Deposit<T,M,K>(T[] src, string header, Func<T,string> render,  M m = default)
+        public RowsetEmissions<T> Deposit<T,M,K>(T[] src, string header, Func<T,string> render,  M m = default)
             where T : struct
             where M : struct, IDataModel
             where K : unmanaged, Enum
