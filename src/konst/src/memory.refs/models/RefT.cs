@@ -41,7 +41,7 @@ namespace Z0
         public Span<byte> Buffer
         {
             [MethodImpl(Inline)]
-            get => Segment.Buffer;
+            get => Segment.Edit;
         }
 
         public uint DataSize
@@ -62,27 +62,21 @@ namespace Z0
             get => DataSize/CellSize;
         }
 
-        public ulong Location
+        public MemoryAddress BaseAddress
         {
             [MethodImpl(Inline)]
-            get => Segment.Address;
-        }
-
-        public MemoryAddress Address
-        {
-            [MethodImpl(Inline)]
-            get => Segment.Address;
+            get => Segment.BaseAddress;
         }
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Location == 0 || DataSize == 0;
+            get => BaseAddress == 0 || DataSize == 0;
         }
 
         [MethodImpl(Inline)]
         public unsafe ref T Cell(int index)
-            => ref Unsafe.AsRef<T>((void*)(Location + (uint)index*CellSize));
+            => ref Unsafe.AsRef<T>((void*)(BaseAddress + (ulong)index*CellSize));
 
         public ref T this[int index]
         {
@@ -111,7 +105,7 @@ namespace Z0
             => src is Ref<T> r && Equals(r);
 
         public override int GetHashCode()
-            => (int) Location;
+            => (int)Hash;
 
         public static Ref<T> Empty
             => default;

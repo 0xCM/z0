@@ -67,7 +67,7 @@ namespace Z0
             get => View.ToString();
         }
 
-        public MemoryAddress Address
+        public MemoryAddress BaseAddress
         {
             [MethodImpl(Inline)]
             get => MemRefs.location(Data);

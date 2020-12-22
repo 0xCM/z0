@@ -74,16 +74,7 @@ namespace Z0
         /// <param name="src">The source reference</param>
         [MethodImpl(Inline), Op]
         public static unsafe ReadOnlySpan<char> view(in StringRef src)
-            => cover<char>(src.Address.Pointer<char>(), (uint)src.Length);
-
-        /// <summary>
-        /// Covers a memory reference with a readonly span
-        /// </summary>
-        /// <param name="src">The source reference</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ReadOnlySpan<T> view<T>(in MemorySegment src)
-            => cover(src.Address.Ref<T>(), count<T>(src));
+            => cover<char>(src.BaseAddress.Pointer<char>(), (uint)src.Length);
 
         /// <summary>
         /// Creates a T-span from a supplied reference

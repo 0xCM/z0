@@ -24,11 +24,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public unsafe ReadOnlySpan<char> Chars(K index)
-            => cover((char*)(Ref.Address + z.uint8(index)*8), 2);
+            => cover((char*)(Ref.BaseAddress + z.uint8(index)*8), 2);
 
         [MethodImpl(Inline)]
         public unsafe string String(K index)
-            => @as<char,string>(@ref<char>((char*)(Ref.Address + z.uint8(index)*8)));
+            => @as<char,string>(@ref<char>((char*)(Ref.BaseAddress + z.uint8(index)*8)));
 
         public static HexString<K> Empty
             => new HexString<K>(StringRef.Empty);

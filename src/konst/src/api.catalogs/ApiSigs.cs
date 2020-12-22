@@ -5,15 +5,15 @@
 namespace Z0
 {
     using System;
-    using System.Reflection;
     using System.Runtime.CompilerServices;
+    using static Konst;
+    using static z;
 
-    using static Part;
-
-    public static partial class XCli
+    [ApiHost(ApiNames.Sigs, true)]
+    public readonly partial struct ApiSigs
     {
-        [MethodImpl(Inline), Op]
-        public static ClrMemberIdentity Identity(this EventInfo src)
-            => new ClrMemberIdentity(src);
+        static W256 W => default;
+
+
     }
 }

@@ -91,7 +91,7 @@ namespace Z0
         public MemoryAddress Address
         {
             [MethodImpl(Inline)]
-            get => Segment.Address;
+            get => Segment.BaseAddress;
         }
 
         /// <summary>

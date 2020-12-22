@@ -7,18 +7,18 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static System.Runtime.CompilerServices.Unsafe;
+    using static Part;
 
-    partial struct MemRefs
+    partial struct memory
     {
+       [MethodImpl(Inline), Op]
+        public static unsafe void* pointer(IntPtr src)
+            => src.ToPointer();
+
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static void store<T>(ReadOnlySpan<Ref> src, Span<T> dst)
-            where T : struct
-        {
-            var count = src.Length;
-            for(var i=0u; i<count; i++)
-                seek(dst,i) = first(recover<T>(skip(src,i).Edit));
-        }
+        public static unsafe T* pointer<T>(ref T src)
+            where T : unmanaged
+                => (T*)AsPointer(ref src);
     }
 }

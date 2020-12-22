@@ -48,7 +48,7 @@ namespace Z0
             for(var i=0; i<refs.Length; i++)
             {
                 var r = refs[i];
-                var data = MemoryView.view(r.Address, r.DataSize);
+                var data = MemoryView.view(r.BaseAddress, r.DataSize);
                 dst.WriteLine(data.FormatHexBytes(Chars.Space));
             }
         }
@@ -64,7 +64,7 @@ namespace Z0
 
         unsafe void Process(in MemorySegment src, in MemorySegments store)
         {
-            var reader = MemoryReader.create(src.Address.Pointer<byte>(), (int)src.DataSize);
+            var reader = MemoryReader.create(src.BaseAddress.Pointer<byte>(), (int)src.DataSize);
             var dstA = Spans.alloc<byte>(src.DataSize);
             var count = reader.ReadAll(dstA);
             Claim.eq(count,src.DataSize);

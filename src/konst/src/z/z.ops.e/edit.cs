@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="src">The source reference</param>
         [MethodImpl(Inline), Op]
         public static unsafe Span<char> edit(in StringRef src)
-            => cover<char>(src.Address.Pointer<char>(), (uint)src.Length);
+            => cover<char>(src.BaseAddress.Pointer<char>(), (uint)src.Length);
 
         [MethodImpl(Inline)]
         public static ref T edit<T>(in T src)

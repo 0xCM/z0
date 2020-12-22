@@ -10,10 +10,8 @@ namespace Z0
 
     using static Part;
 
-    partial class XCli
+    public static partial class XCli
     {
-        [MethodImpl(Inline), Op]
-        public static ClrMemberIdentity Identity(this PropertyInfo src)
-            => new ClrMemberIdentity(src);
+
     }
 }

@@ -26,10 +26,10 @@ namespace Z0
             get => R.As<T>();
         }
 
-        public ReadOnlySpan<byte> Buffer
+        public ReadOnlySpan<byte> View
         {
             [MethodImpl(Inline)]
-            get => R.Buffer;
+            get => R.Edit;
         }
 
         public uint DataSize
@@ -50,21 +50,21 @@ namespace Z0
             get => DataSize/CellSize;
         }
 
-        public ulong Location
+        public MemoryAddress BaseAddress
         {
             [MethodImpl(Inline)]
-            get => R.Address;
+            get => R.BaseAddress;
         }
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Location == 0 || DataSize == 0;
+            get => BaseAddress == 0 || DataSize == 0;
         }
 
         [MethodImpl(Inline)]
         public unsafe ref readonly T Cell(int index)
-            => ref Unsafe.AsRef<T>((void*)(Location + (uint)index*CellSize));
+            => ref Unsafe.AsRef<T>((void*)(BaseAddress + (uint)index*CellSize));
 
         public ref readonly T this[int index]
         {
@@ -84,7 +84,7 @@ namespace Z0
             => src is ConstRef<T> r && Equals(r);
 
         public override int GetHashCode()
-            => (int)Location;
+            => (int)BaseAddress;
 
         public static ConstRef<T> Empty
             => default;

@@ -32,7 +32,7 @@ namespace Z0
         public MemorySegment(MemoryAddress src, ByteSize size)
             => Segment = vparts((ulong)src, (ulong)size);
 
-        public MemoryAddress Address
+        public MemoryAddress BaseAddress
         {
             [MethodImpl(Inline)]
             get => vcell(Segment, 0);
@@ -51,13 +51,13 @@ namespace Z0
         public Span<byte> Buffer
         {
             [MethodImpl(Inline)]
-            get => cover(Address, DataSize);
+            get => cover(BaseAddress, DataSize);
         }
 
         public MemoryRange Range
         {
             [MethodImpl(Inline)]
-            get => new MemoryRange(Address, Address + DataSize);
+            get => new MemoryRange(BaseAddress, BaseAddress + DataSize);
         }
 
         public bool IsEmpty
@@ -74,7 +74,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public unsafe ref byte Cell(int offset)
-            => ref @ref<byte>((void*)(Address + offset));
+            => ref memory.@ref<byte>((void*)(BaseAddress + offset));
 
         public ref byte this[int index]
         {
@@ -87,19 +87,19 @@ namespace Z0
         /// </summary>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public int Count<T>()
-            => (int)(DataSize/size<T>());
+        public uint CellCount<T>()
+            => Addresses.count<T>(this);
 
         public string Format()
-            => Address.Format();
+            => BaseAddress.Format();
 
         [MethodImpl(Inline)]
         public ReadOnlySpan<byte> Load()
-            => view<byte>(this);
+            => Addresses.view<byte>(this);
 
         [MethodImpl(Inline)]
         public ReadOnlySpan<T> Load<T>()
-            => view<T>(this);
+            => Addresses.view<T>(this);
 
         [MethodImpl(Inline)]
         public uint Hash()
@@ -117,9 +117,7 @@ namespace Z0
             => Format();
 
         uint IHashed.Hash
-        {
-            get => Hash();
-        }
+            => Hash();
 
         bool IEquatable<MemorySegment>.Equals(MemorySegment src)
             => Equals(src);

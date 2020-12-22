@@ -31,7 +31,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static MemoryReader<T> create<T>(in MemorySegment src)
             where T : unmanaged
-                => create(src.Address.Pointer<T>(), (int)src.DataSize);
+                => create(src.BaseAddress.Pointer<T>(), (int)src.DataSize);
 
         [MethodImpl(Inline)]
         internal MemoryReader(byte* pSrc, int length)

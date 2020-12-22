@@ -29,7 +29,7 @@ namespace Z0
         public MemoryAddress Address
         {
             [MethodImpl(Inline)]
-            get => Reference.Address;
+            get => Reference.BaseAddress;
         }
 
         public uint DataSize

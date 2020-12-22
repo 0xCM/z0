@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
 
     using static Part;
@@ -19,7 +18,7 @@ namespace Z0
         /// <param name="src">The buffer to let it be what it wants</param>
         [MethodImpl(Inline), Op]
         public static byte* liberate(Span<byte> src)
-            => liberate((byte*)z.pointer(ref z.first(src)), src.Length);
+            => liberate((byte*)memory.pointer(ref memory.first(src)), src.Length);
 
         /// <summary>
         /// This may not be the best idea to solve your problem
@@ -27,7 +26,7 @@ namespace Z0
         /// <param name="src">The buffer to let it be what it wants</param>
         [MethodImpl(Inline)]
         public static unsafe byte* liberate(ReadOnlySpan<byte> src)
-            => Buffers.liberate<byte>(ref z.edit(z.first(src)), src.Length);
+            => Buffers.liberate<byte>(ref memory.edit(memory.first(src)), src.Length);
 
         /// <summary>
         /// Enables execution over a reference-identified memory segment of specified length
@@ -35,7 +34,7 @@ namespace Z0
         /// <param name="src">The buffer to let it be what it wants</param>
         [MethodImpl(Inline), Op]
         public static byte* liberate(ref byte src, int length)
-            => liberate((byte*)z.pointer(ref src), length);
+            => liberate((byte*)memory.pointer(ref src), length);
 
         [MethodImpl(Inline)]
         public static ref readonly BinaryCode liberate(in BinaryCode src)
@@ -48,7 +47,7 @@ namespace Z0
         public static unsafe ref readonly Ref<T> liberate<T>(in Ref<T> src)
             where T : unmanaged
         {
-            Buffers.liberate((T*)src.Location, (int)src.DataSize);
+            Buffers.liberate(src.BaseAddress.Pointer<T>(), (int)src.DataSize);
             return ref src;
         }
 

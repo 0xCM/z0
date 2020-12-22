@@ -95,7 +95,7 @@ namespace Z0
         /// <typeparam name="T">The reference type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static unsafe ref T @ref<T>(void* pSrc)
-            => ref AsRef<T>(pSrc);
+            => ref memory.@ref<T>(pSrc);
 
         /// <summary>
         /// Returns a reference to an identified location
@@ -104,7 +104,7 @@ namespace Z0
         /// <typeparam name="T">The reference type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static unsafe ref T @ref<T>(MemoryAddress src)
-            => ref AsRef<T>((void*)src.Location);
+            => ref memory.@ref<T>(src);
 
         /// <summary>
         /// Presents an S-pointer as a T-reference
@@ -115,6 +115,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe ref T @ref<S,T>(S* pSrc)
             where S : unmanaged
-                => ref @as<S,T>(@ref<S>(pSrc));
+                => ref memory.@ref<S,T>(pSrc);
     }
 }

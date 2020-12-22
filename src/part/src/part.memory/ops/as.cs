@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    using System.Collections.Generic;
 
     using static Part;
     using static System.Runtime.CompilerServices.Unsafe;
@@ -15,6 +14,10 @@ namespace Z0
 
     partial struct memory
     {
+        [MethodImpl(Inline)]
+        public static unsafe ref T @as<T>(void* pSrc)
+            => ref AsRef<T>(pSrc);
+
         /// <summary>
         /// Presents an S-cell as a T-cell
         /// </summary>

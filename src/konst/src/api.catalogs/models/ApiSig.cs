@@ -5,15 +5,23 @@
 namespace Z0
 {
     using System;
-    using System.Reflection;
     using System.Runtime.CompilerServices;
 
     using static Part;
 
-    partial class XCli
+    public readonly struct ApiSig : IApiSig
     {
-        [MethodImpl(Inline), Op]
-        public static ClrMemberIdentity Identity(this FieldInfo src)
-            => new ClrMemberIdentity(src);
+        readonly BinaryCode Data;
+
+        [MethodImpl(Inline)]
+        internal ApiSig(BinaryCode src)
+            => Data = src;
+
+        public string Format()
+            => Data.Format();
+
+
+        public override string ToString()
+            => Format();
     }
 }

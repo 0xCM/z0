@@ -51,10 +51,10 @@ namespace Z0
 
         public string Format()
             => text.concat(
-                "s0 = ", S0.Address, text.bracket(S0.CellCount), Space, text.embrace(S0.Data.Format()),
-                "s1 = ", S1.Address, text.bracket(S1.CellCount), Space, text.embrace(S1.Data.Format()),
-                "s2 = ", S2.Address, text.bracket(S2.CellCount), Space, text.embrace(S2.Data.Format()),
-                "s3 = ", S3.Address, text.bracket(S3.CellCount), Space, text.embrace(S3.Data.Format())
+                "s0 = ", S0.BaseAddress, text.bracket(S0.CellCount), Space, text.embrace(S0.Data.Format()),
+                "s1 = ", S1.BaseAddress, text.bracket(S1.CellCount), Space, text.embrace(S1.Data.Format()),
+                "s2 = ", S2.BaseAddress, text.bracket(S2.CellCount), Space, text.embrace(S2.Data.Format()),
+                "s3 = ", S3.BaseAddress, text.bracket(S3.CellCount), Space, text.embrace(S3.Data.Format())
                 );
 
         public override string ToString()

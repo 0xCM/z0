@@ -23,7 +23,7 @@ namespace Z0
         public unsafe ReadOnlySpan<char> Chars(uint index)
         {
             ref var src = ref Refs[index];
-            return cover(src.Address.Pointer<char>(), (uint)src.Length);
+            return cover(src.BaseAddress.Pointer<char>(), (uint)src.Length);
         }
 
         [MethodImpl(Inline)]

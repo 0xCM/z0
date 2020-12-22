@@ -36,12 +36,12 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public Span<T> As<T>()
-            => cover<T>(Address, DataSize/size<T>());
+            => cover<T>(BaseAddress, DataSize/size<T>());
 
-        public Span<byte> Buffer
+        public Span<byte> Edit
         {
             [MethodImpl(Inline)]
-            get => cover(Address, DataSize);
+            get => cover(BaseAddress, DataSize);
         }
 
         public uint DataSize
@@ -50,7 +50,7 @@ namespace Z0
             get => (uint)Segment.GetElement(1);
         }
 
-        public MemoryAddress Address
+        public MemoryAddress BaseAddress
         {
             [MethodImpl(Inline)]
             get => Segment.GetElement(0);
@@ -70,7 +70,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public unsafe ref byte Cell(int index)
-            => ref Unsafe.AsRef<byte>((void*)(Address + (uint)index));
+            => ref Unsafe.AsRef<byte>((void*)(BaseAddress + (uint)index));
 
         public uint Hash
         {
@@ -88,13 +88,13 @@ namespace Z0
         public bool Equals(Ref src)
             => Segment.Equals(src.Segment);
         public string Format()
-            => string.Format("{0}:{1}", Address, DataSize);
+            => string.Format("{0}:{1}", BaseAddress, DataSize);
 
         public override bool Equals(object src)
             => src is Ref r && Equals(r);
 
         public override int GetHashCode()
-            => (int) Address;
+            => (int)Hash;
 
         /// <summary>
         /// Dereferences the reference
@@ -102,7 +102,7 @@ namespace Z0
         /// <param name="src">The source reference</param>
         [MethodImpl(Inline)]
         public static Span<byte> operator !(Ref src)
-            => src.Buffer;
+            => src.Edit;
 
         [MethodImpl(Inline)]
         public static bool operator ==(Ref a, Ref b)
@@ -117,7 +117,7 @@ namespace Z0
             => (uint)SizeOf<T>();
 
         [MethodImpl(Inline)]
-        static unsafe Span<byte> cover(ulong location, uint count)
+        static unsafe Span<byte> cover(MemoryAddress location, uint count)
             => cover<byte>((void*)location, count);
 
         [MethodImpl(Inline)]

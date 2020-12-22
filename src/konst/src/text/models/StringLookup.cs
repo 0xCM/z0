@@ -26,11 +26,11 @@ namespace Z0
             Count = (uint)src.Length;
             Offsets = alloc<uint>(Count);
             Lengths = alloc<uint>(Count);
-            Base = skip(src,0).Address;
+            Base = skip(src,0).BaseAddress;
             for(var i=0u; i<Count; i++)
             {
                 ref readonly var current = ref skip(src,i);
-                seek(Offsets,i) = (uint)(current.Address - Base);
+                seek(Offsets,i) = (uint)(current.BaseAddress - Base);
                 seek(Lengths,i) = (uint)current.Length;
             }
         }

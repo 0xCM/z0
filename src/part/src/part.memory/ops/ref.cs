@@ -43,5 +43,14 @@ namespace Z0
         public static unsafe ref T @ref<S,T>(S* pSrc)
             where S : unmanaged
                 => ref @as<S,T>(@ref<S>(pSrc));
+
+        /// <summary>
+        /// Returns a reference to an identified location
+        /// </summary>
+        /// <param name="src">The source address</param>
+        /// <typeparam name="T">The reference type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static unsafe ref T @ref<T>(MemoryAddress src)
+            => ref AsRef<T>((void*)src.Location);
     }
 }

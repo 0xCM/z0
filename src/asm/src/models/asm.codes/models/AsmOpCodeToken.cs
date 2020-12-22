@@ -29,7 +29,7 @@ namespace Z0.Asm
         public ReadOnlySpan<char> Symbols
         {
             [MethodImpl(Inline)]
-            get => cover<char>(Source.Address, Source.CellCount);
+            get => cover<char>(Source.BaseAddress, Source.CellCount);
         }
     }
 }

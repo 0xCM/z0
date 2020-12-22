@@ -40,7 +40,7 @@ namespace Z0
                         if(j == 0)
                         {
                             var a = address(x);
-                            if(source.Address == a)
+                            if(source.BaseAddress == a)
                                 seek(results,i) = a;
                         }
                     }
@@ -83,7 +83,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static Vector128<ulong> location(in MemorySegment src)
-            => vparts(N128.N, src.Address, (ulong)src.DataSize);
+            => vparts(N128.N, src.BaseAddress, (ulong)src.DataSize);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static unsafe Ref<T> one<T>(in T src)

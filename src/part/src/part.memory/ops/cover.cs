@@ -9,8 +9,32 @@ namespace Z0
 
     using static Part;
     using static System.Runtime.InteropServices.MemoryMarshal;
+
     partial struct memory
     {
+        /// <summary>
+        /// Creates a span over a memory segment
+        /// </summary>
+        /// <param name="base">The segment base address</param>
+        /// <param name="size">The length of the segment in byte</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe Span<byte> cover(MemoryAddress @base, ByteSize size)
+            => cover<byte>((void*)@base, size);
+
+        /// <summary>
+        /// Creates a <see cref='Span{T}'/> over a <typeparamref name='T'/> measured memory segment
+        /// </summary>
+        /// <param name="base">The segment base address</param>
+        /// <param name="count">The number of cells to cover</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static unsafe Span<T> cover<T>(MemoryAddress @base, uint count)
+            => cover<T>(@base.Pointer(), count);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static unsafe Span<T> cover<T>(void* pSrc, uint count)
+            => cover(@as<T>(pSrc), count);
+
         /// <summary>
         /// Creates a T-counted T-span from an S-cell data source
         /// </summary>

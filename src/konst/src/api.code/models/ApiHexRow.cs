@@ -7,7 +7,6 @@ namespace Z0
     using System;
 
     using F = ApiHexField;
-    using R = ApiHexRow;
 
     public enum ApiHexField : uint
     {

@@ -20,7 +20,7 @@ namespace Z0
             var o = 0u;
             for(var i=0u; i<m; i++)
             {
-                var c = skip(src,i).Buffer;
+                var c = skip(src,i).Edit;
                 var p = c.Length;
 
                 for(var j=0u; j<p && o<n; j++, o++)
