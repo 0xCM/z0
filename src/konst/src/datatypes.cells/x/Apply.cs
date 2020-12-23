@@ -8,17 +8,16 @@ namespace Z0
     using System.Collections.Generic;
 
     using static CellSource;
-    using static Konst;
 
     partial class XCell
     {
         /// <summary>
         /// Creates a stream of fixed values
         /// </summary>
-        /// <param name="random">The random source</param>
+        /// <param name="src">The random source</param>
         /// <typeparam name="F">The fixed type</typeparam>
-        public static IEnumerable<F> CellStream<F>(this ISource random)
+        public static IEnumerable<F> CellStream<F>(this ISource src)
             where F: unmanaged, IDataCell
-                => CellSource.stream(create<F>(random));
+                => Sources.cells(create<F>(src));
     }
 }

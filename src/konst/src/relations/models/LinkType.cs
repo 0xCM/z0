@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    using api = Links;
+    using api = Graphs;
 
     public readonly struct LinkType : IEquatable<LinkType>
     {

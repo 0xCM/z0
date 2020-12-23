@@ -14,6 +14,16 @@ namespace Z0
     {
         const NumericKind Closure = UnsignedInts;
 
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static DataModel<K> model<K>(utf8 name, K kind)
+            where K : unmanaged
+                => new DataModel<K>(name, kind);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static DataModel<K> model<K>(string name, K kind)
+            where K : unmanaged
+                => new DataModel<K>(name, kind);
+
         /// <summary>
         /// Creates a <see cref='DataFlow{S,T}'/> from a specified source to a specified target;
         /// </summary>
@@ -38,7 +48,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static LinkType type<T>(DataFlow<T> flow)
-            => Links.type<T>();
+            => Graphs.type<T>();
 
         [MethodImpl(Inline)]
         public static string format<S,T>(DataFlow<S,T> flow)

@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="source">The value source</param>
         [Op]
         public static Deferred<byte> bytes(ISource source)
-            => Collective.defer(stream(w8, source));
+            => Seq.defer(stream(w8, source));
 
         [Op]
         static IEnumerable<byte> stream(W8 w, ISource source)

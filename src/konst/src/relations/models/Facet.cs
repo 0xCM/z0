@@ -9,21 +9,21 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct Facet : IFacet<asci32,variant>
+    public readonly struct Facet : IFacet<string,object>
     {
-        public asci32 Key {get;}
+        public string Key {get;}
 
-        public variant Value {get;}
+        public object Value {get;}
 
         [MethodImpl(Inline)]
-        public Facet(string name, variant value)
+        public Facet(string name, object value)
         {
             Key = name;
             Value = value;
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator Facet((string name, variant value) src)
+        public static implicit operator Facet((string name, object value) src)
             => new Facet(src.name, src.value);
     }
 }

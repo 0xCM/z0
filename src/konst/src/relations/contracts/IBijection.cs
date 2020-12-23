@@ -14,5 +14,4 @@ namespace Z0
         Count ICounted<Count>.Count
             => Terms.Count;
     }
-
 }

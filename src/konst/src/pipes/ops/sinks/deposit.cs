@@ -9,7 +9,7 @@ namespace Z0
     using System.IO;
     using System.Collections.Generic;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     partial struct Sinks
@@ -30,7 +30,7 @@ namespace Z0
             => deposit(src, Sinks.create<string>(dst));
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static void deposit<T>(in T src, in Pipe<T> dst)
+        public static void deposit<T>(in T src, Pipe<T> dst)
             => dst.Deposit(src);
 
         /// <summary>

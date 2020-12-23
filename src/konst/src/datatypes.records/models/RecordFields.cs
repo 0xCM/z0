@@ -7,11 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     public readonly struct RecordFields : IIndex<RecordField>
     {
-        readonly IndexedSeq<RecordField> Data;
+        readonly Index<RecordField> Data;
 
         [MethodImpl(Inline)]
         public RecordFields(RecordField[] src)

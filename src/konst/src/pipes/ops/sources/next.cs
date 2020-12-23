@@ -16,11 +16,6 @@ namespace Z0
             where T : struct
                 => src.Next<T>();
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref readonly T next<T>(IRefSource<T> src)
-            where T : struct
-                => ref src.Next();
-
         /// <summary>
         /// Produces the next value from a specified <see cref='IDomainSource'/> source subject to specified domain constraints
         /// </summary>

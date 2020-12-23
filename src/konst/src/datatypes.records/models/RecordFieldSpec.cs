@@ -7,22 +7,25 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
-    public readonly struct RecordFieldValue : IRecordFieldValue
+    public struct RecordFieldSpec
     {
         public ushort FieldIndex {get;}
 
-        public object FieldValue {get;}
+        public string FieldName {get;}
+
+        public string DataType {get;}
 
         [MethodImpl(Inline)]
-        public RecordFieldValue(ushort index, object value)
+        public RecordFieldSpec(ushort index, string name, string type)
         {
             FieldIndex = index;
-            FieldValue = value;
+            FieldName = name;
+            DataType = type;
         }
 
-        public static implicit operator RecordFieldValue((ushort index, object value) src)
-            => new RecordFieldValue(src.index, src.value);
+        public string Format()
+            => string.Format("[{0} {1}:{2}]", FieldIndex, FieldName, DataType);
     }
 }

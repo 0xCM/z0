@@ -5,9 +5,7 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
 
-    using static Konst;
 
     public interface IHexType
     {
@@ -18,9 +16,6 @@ namespace Z0
         where H : unmanaged, IHexType<H>
     {
         Type Reified
-        {
-            [MethodImpl(Inline)]
-            get => typeof(H);
-        }
+            => typeof(H);
     }
 }

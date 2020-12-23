@@ -39,32 +39,7 @@ namespace System.Reflection.Metadata
             }
         }
 
-        /// <summary>
-        /// Emits cli metadata from a source file to a target file
-        /// </summary>
-        /// <param name="src">The source path</param>
-        /// <param name="dst">The target path</param>
-        public static (bool, string) emit(string src, string dst)
-        {
-            const string ErrorMsg = "Emission of {0} to {1} failed:{2}";
-            const string StatusMsg = "Emitted {0} to {1}";
-            try
-            {
-                using var stream = File.OpenRead(src);
-                using var peFile = new PEReader(stream);
-                using var target = new StreamWriter(dst, false);
-                var reader = peFile.GetMetadataReader();
-                var viz = new MetadataTraverser(reader, target);
-                viz.Visualize();
-
-                return (true, string.Format(StatusMsg, src, dst));
-            }
-            catch(Exception e)
-            {
-                return (false, string.Format(ErrorMsg, src, dst, e));
-            }
-        }
-        private static void PrintUsage()
+       private static void PrintUsage()
         {
             Console.WriteLine("This tool dumps the contents of all tables in a set of PE files.");
             Console.WriteLine("usage: mddumper <file>...");

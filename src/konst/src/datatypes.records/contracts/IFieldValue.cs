@@ -9,23 +9,12 @@ namespace Z0
 
     public interface IFieldValue
     {
-        object Source {get;}
-
         FieldInfo Field {get;}
 
         object Value {get;}
     }
 
-    public interface IFieldValue<S> : IFieldValue
-    {
-        new S Source {get;}
-
-        object IFieldValue.Source
-            => Source;
-
-    }
-
-    public interface IFieldValue<S,T> : IFieldValue<S>
+    public interface IFieldValue<S,T> : IFieldValue
     {
         new T Value {get;}
 

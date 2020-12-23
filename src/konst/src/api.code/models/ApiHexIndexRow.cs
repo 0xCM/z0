@@ -15,9 +15,11 @@ namespace Z0
 
         public MemoryAddress Address;
 
-        public string Name;
+        public string Component;
 
-        public CliSig Sig;
+        public string HostName;
+
+        public string MethodName;
 
         public OpUri Uri;
     }

@@ -8,6 +8,6 @@ namespace Z0
     {
         public static ToolCmd<T> cmd<T>(T src)
             where T : struct, IToolCmd<T>
-                => new ToolCmd<T>(src, Records.values(src, Records.fields<T>()));
+                => new ToolCmd<T>(src, Records.values(src, typeof(T).DeclaredInstanceFields()));
     }
 }

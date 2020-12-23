@@ -9,7 +9,7 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     public class Nodes<V>
         where V : unmanaged

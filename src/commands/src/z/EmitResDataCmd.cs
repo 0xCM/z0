@@ -22,7 +22,7 @@ namespace Z0
         public bool ClearTarget;
     }
 
-    partial class XCmdSpecs
+    partial class XCmd
     {
         [MethodImpl(Inline), Op]
         public static EmitResDataCmd EmitResData(this CmdBuilder builder, Assembly src, string id, string match = null)

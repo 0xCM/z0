@@ -8,8 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.IO;
 
-    using static Part;
-    using static z;
 
     partial struct ResDataEmitter
     {
@@ -21,7 +19,7 @@ namespace Z0
             var utf = Resources.utf8(src);
             using var writer = target.Writer();
             writer.Write(utf);
-            return link(src,target);
+            return Graphs.link(src,target);
         }
     }
 }

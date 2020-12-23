@@ -10,12 +10,12 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Captures a random stream along with the generator classification
     /// </summary>
-    public readonly struct PolyStream<T> : IRngStream<T>
+    public readonly struct ValueStream<T> : IValueStream<T>
         where T : struct
     {
         readonly IEnumerable<T> Src;
@@ -23,7 +23,7 @@ namespace Z0
         public RngKind RngKind {get;}
 
         [MethodImpl(Inline)]
-        public PolyStream(IEnumerable<T> src, RngKind kind = RngKind.None)
+        public ValueStream(IEnumerable<T> src, RngKind kind = RngKind.None)
         {
             Src = src;
             RngKind = kind;

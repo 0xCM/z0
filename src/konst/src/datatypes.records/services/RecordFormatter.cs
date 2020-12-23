@@ -23,9 +23,12 @@ namespace Z0
         }
 
         public string Format(in DynamicRow<T> src)
-            => string.Format(Spec.Pattern.Apply(src), src.Cells);
+            => string.Format(Spec.Pattern, src.Cells);
 
-        public string Formt(in T src)
+        public string Format(in T src)
             => Format(Adapter.Adapt(src).Adapted);
+
+        public string FormatHeader()
+            => Spec.Header.Format();
     }
 }

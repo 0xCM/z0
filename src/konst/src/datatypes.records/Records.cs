@@ -19,7 +19,7 @@ namespace Z0
             => delimiter + RP.slot(index, (short)(-(short)width));
 
         [Op]
-        internal static RowFormatPattern pattern(Index<CellFormatSpec> cells, string delimiter = DefaultDelimiter)
+        internal static string pattern(Index<CellFormatSpec> cells, string delimiter = DefaultDelimiter)
         {
             var count = cells.Count;
             var view = cells.View;
@@ -29,9 +29,8 @@ namespace Z0
                 var cell = skip(view,i);
                 seek(parts,i) = Records.slot(i, cell.Width, delimiter);
             }
-            return new RowFormatPattern(string.Concat(parts));
+            return string.Concat(parts);
         }
-
     }
 
     partial struct Msg

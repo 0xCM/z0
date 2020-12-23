@@ -27,7 +27,7 @@ namespace Z0
                 writer.WriteLine(buffer.Emit());
             }
 
-            wf.Status(Msg.EmittedOpIndex.Format(kHost, target));
+            wf.Status(Msg.EmittedRuntimeIndex.Format(kHost, target));
 
             return Cmd.ok(cmd);
         }

@@ -10,7 +10,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static memory;
 
     [ApiHost(ApiNames.Seq, true)]
     public readonly partial struct Seq

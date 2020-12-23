@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Defines a vertex to which data may be attached
@@ -18,14 +18,14 @@ namespace Z0
         where I : unmanaged
     {
         /// <summary>
-        /// The vertex payload
-        /// </summary>
-        public T Content {get;}
-
-        /// <summary>
         /// The index of the vertex that uniquely identifies it within a graph
         /// </summary>
         public I Index {get;}
+
+        /// <summary>
+        /// The vertex payload
+        /// </summary>
+        public T Content {get;}
 
         [MethodImpl(Inline)]
         public Node(I index, T content)

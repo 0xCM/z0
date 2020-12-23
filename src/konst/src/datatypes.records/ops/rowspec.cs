@@ -19,5 +19,12 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static RowFormatSpec rowspec(RowHeader header, CellFormatSpec[] cells)
             => new RowFormatSpec(header, cells);
+
+        public static RowFormatSpec rowspec<T>(ReadOnlySpan<byte> widths)
+            where T : struct
+        {
+            var header = Records.header<T>(widths);
+            return Records.rowspec(header, header.Cells.Select(x => x.CellFormat));
+        }
     }
 }

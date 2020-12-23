@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Defines a connection from a source <see cref='Pipe{T}'/> to a target <see cref='Pipe{T}'/>

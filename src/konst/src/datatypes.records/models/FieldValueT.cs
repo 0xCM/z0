@@ -17,16 +17,13 @@ namespace Z0
     public readonly struct FieldValue<T> : IFieldValue<T,object>
         where T : struct
     {
-        public T Source {get;}
-
         public FieldInfo Field {get;}
 
         public object Value {get;}
 
         [MethodImpl(Inline)]
-        public FieldValue(T source, FieldInfo field, object value)
+        public FieldValue(FieldInfo field, object value)
         {
-            Source = source;
             Field = field;
             Value = value;
         }

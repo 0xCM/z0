@@ -5,14 +5,13 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
 
-    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+    using static Konst;
 
-    [Free]
-    public interface IValuePipeConnector<S,T>
-        where S : struct
-        where T : struct
+    [ApiHost]
+    public static partial class XCmd
     {
-        void Flow(ReadOnlySpan<S> src);
+
     }
 }

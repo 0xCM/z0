@@ -38,7 +38,7 @@ namespace Z0
         Markdown
     }
 
-    partial class XCmdSpecs
+    partial class XCmd
     {
         [Op]
         public static ListFilesCmd ListFiles(this CmdBuilder builder, string name, FS.FolderPath src, params FS.FileExt[] kinds)

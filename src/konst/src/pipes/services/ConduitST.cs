@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static memory;
 
     /// <summary>
     /// Defines a connection from a source <see cref='Pipe{S,T}'/> to a target <see cref='Pipe{T}'/>

@@ -1,8 +1,15 @@
-echo off
+@echo off
+
+set ZCmd=%ZDev%\.cmd
+echo ZCmd:%ZCmd%
 
 set ProjectId=control
-echo ProjectId:%ProjectId%
 
-call %ZDev%\.cmd\project-config.cmd
+set BuildCmd=%ZCmd%\build-project.cmd
+echo BuildCmd:%BuildCmd%
 
-dotnet build %ProjectPath% -c Release
+set DeployExeCmd=%ZCmd%\deploy-exe.cmd
+echo DeployExeCmd:%DeployExeCmd%
+
+call %BuildCmd%
+call %DeployExeCmd%

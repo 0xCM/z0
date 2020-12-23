@@ -25,7 +25,7 @@ namespace Z0
         }
     }
 
-    partial class XCmdSpecs
+    partial class XCmd
     {
         [MethodImpl(Inline), Op]
         public static ShowCmd Show(this CmdBuilder builder, string target)

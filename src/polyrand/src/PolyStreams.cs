@@ -5,9 +5,7 @@
 namespace Z0
 {
     using System;
-    using System.Collections;
     using System.Collections.Generic;
-    using System.Linq;
     using System.Runtime.CompilerServices;
 
     using static Konst;
@@ -15,29 +13,29 @@ namespace Z0
     public static class PolyStreams
     {
         [MethodImpl(Inline)]
-        public static IRngStream<T> create<T>(IEnumerable<T> src, RngKind kind)
+        public static IValueStream<T> create<T>(IEnumerable<T> src, RngKind kind)
             where T : struct
-                => new PolyStream<T>(src,kind);
+                => new ValueStream<T>(src, kind);
 
         [MethodImpl(Inline)]
         public static IValueStream<T> create<T>(IEnumerable<T> src)
             where T : struct
-                => new PolyStream<T>(src);
+                => new ValueStream<T>(src);
 
         /// <summary>
         /// Produces a random stream of unfiltered/unbounded points from a source
         /// </summary>
         /// <param name="src">The point source</param>
         /// <typeparam name="T">The point type</typeparam>
-        public static IRngStream<T> create<T>(IPolyrand src)
+        public static IValueStream<T> create<T>(IPolyrand src)
             where T : unmanaged
                 => create(forever<T>(src), src.RngKind);
 
-        public static IRngStream<T> create<T>(IPolyrand src, T min, T max)
+        public static IValueStream<T> create<T>(IPolyrand src, T min, T max)
             where T : unmanaged
                 => create(forever(src,min,max), src.RngKind);
 
-        public static IRngStream<T> create<T>(IPolyrand src, ClosedInterval<T> domain, Func<T,bool> filter = null)
+        public static IValueStream<T> create<T>(IPolyrand src, ClosedInterval<T> domain, Func<T,bool> filter = null)
             where T : unmanaged
                 => create(forever(src, domain, filter), src.RngKind);
 

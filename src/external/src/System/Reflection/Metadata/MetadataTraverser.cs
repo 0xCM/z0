@@ -40,7 +40,7 @@ namespace System.Reflection.Metadata
         }
 
         public MetadataTraverser(MetadataReader reader, TextWriter writer)
-            : this(writer, new[] { reader })
+            : this(writer, new[] {reader})
         {
             Reader = reader;
         }
@@ -225,9 +225,7 @@ namespace System.Reflection.Metadata
         string Literal(Handle handle, Func<MetadataReader, Handle, string> getValue)
         {
             if (handle.IsNil)
-            {
                 return "nil";
-            }
 
             if (Aggregator != null)
             {

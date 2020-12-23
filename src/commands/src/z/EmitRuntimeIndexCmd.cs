@@ -9,4 +9,16 @@ namespace Z0
     {
 
     }
+
+
+    partial class XCmd
+    {
+        [Op]
+        public static EmitRuntimeIndexCmd EmitRuntimeIndex(this CmdBuilder builder)
+        {
+            var dst = new EmitRuntimeIndexCmd();
+
+            return dst;
+        }
+    }
 }

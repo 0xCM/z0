@@ -18,7 +18,7 @@ namespace Z0
 
         public Index<CellFormatSpec> Cells {get;}
 
-        public RowFormatPattern Pattern {get;}
+        public string Pattern {get;}
 
         [MethodImpl(Inline)]
         public RowFormatSpec(RowHeader header, CellFormatSpec[] src)

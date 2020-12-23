@@ -17,9 +17,9 @@ namespace Z0
     {
         public T CmdSpec {get;}
 
-        public RecordFieldValues<T> FieldValues {get;}
+        public FieldValues<T> FieldValues {get;}
 
-        public ToolCmd(T src, RecordFieldValues<T> values)
+        public ToolCmd(T src, FieldValues<T> values)
         {
             CmdSpec = src;
             FieldValues = values;

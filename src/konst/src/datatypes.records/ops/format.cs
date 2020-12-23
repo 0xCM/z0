@@ -21,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static string format<T>(DynamicRow<T> row, RowFormatSpec spec)
             where T : struct
-                => spec.Pattern.Apply(row);
+                => string.Format(spec.Pattern, row.Cells);
 
         /// <summary>
         /// Formats a <see cref='RowHeader'/>

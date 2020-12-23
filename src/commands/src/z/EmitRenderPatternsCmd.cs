@@ -14,7 +14,7 @@ namespace Z0
         public FS.FilePath Target;
     }
 
-    partial class XCmdSpecs
+    partial class XCmd
     {
         [Op]
         public static EmitRenderPatternsCmd EmitRenderPatterns(this CmdBuilder builder, Type src)

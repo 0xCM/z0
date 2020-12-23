@@ -6,7 +6,7 @@ namespace Z0
 {
     public interface INode
     {
-
+        Label Label {get;}
     }
 
     /// <summary>
@@ -15,7 +15,7 @@ namespace Z0
     /// <typeparam name="T">The value type</typeparam>
     public interface INode<T> : INode
     {
-
+        T Content {get;}
     }
 
     /// <summary>

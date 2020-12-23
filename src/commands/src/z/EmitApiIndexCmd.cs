@@ -5,17 +5,17 @@
 namespace Z0
 {
     [Cmd(CmdName)]
-    public struct EmitHexIndexCmd : ICmdSpec<EmitHexIndexCmd>
+    public struct EmitApiIndexCmd : ICmdSpec<EmitApiIndexCmd>
     {
         public const string CmdName = "emit-hex-index";
     }
 
-    partial class XCmdSpecs
+    partial class XCmd
     {
         [Op]
-        public static EmitHexIndexCmd EmitHexIndex(this CmdBuilder builder)
+        public static EmitApiIndexCmd EmitApiIndex(this CmdBuilder builder)
         {
-            var dst = new EmitHexIndexCmd();
+            var dst = new EmitApiIndexCmd();
 
             return dst;
         }

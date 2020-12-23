@@ -18,6 +18,29 @@ namespace Z0
     [ApiHost]
     public readonly struct HexTextIndex
     {
+        /// <summary>
+        /// Returns the address of the first character in the source string
+        /// </summary>
+        /// <param name="src">The source string</param>
+        [MethodImpl(Inline), Op]
+        static unsafe MemoryAddress address(string src)
+            => z.address(memory.pchar2(src));
+
+        [MethodImpl(Inline), Op]
+        public static ref StringTable<ushort> strings(ref StringTable<ushort> dst)
+        {
+            var i=0u;
+            dst.Assign(i++, (ushort)(address(T.x00) - dst.BaseAddress), 3);
+            dst.Assign(i++, (ushort)(address(T.x01) - dst.BaseAddress), 3);
+            dst.Assign(i++, (ushort)(address(T.x02) - dst.BaseAddress), 3);
+            dst.Assign(i++, (ushort)(address(T.x03) - dst.BaseAddress), 3);
+            dst.Assign(i++, (ushort)(address(T.x04) - dst.BaseAddress), 3);
+            dst.Assign(i++, (ushort)(address(T.x05) - dst.BaseAddress), 3);
+            dst.Assign(i++, (ushort)(address(T.x06) - dst.BaseAddress), 3);
+            dst.Assign(i++, (ushort)(address(T.x07) - dst.BaseAddress), 3);
+            return ref dst;
+        }
+
         [MethodImpl(Inline), Op]
         public static HexStrings<K> strings(N n, StringRef[] dst)
         {

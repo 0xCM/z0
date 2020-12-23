@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    using api = Links;
+    using api = Graphs;
 
     /// <summary>
     /// Defines the type signature for a node-homogenous link

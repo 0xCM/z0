@@ -7,12 +7,18 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     [ApiHost(ApiNames.Relations, true)]
     public readonly struct Relations
     {
+        const NumericKind Closure = UnsignedInts;
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Node<T> node<T>(T src)
+            => new Node<T>(src);
+
         [MethodImpl(Inline)]
         public static void project<S,T>(ReadOnlySpan<S> a, ReadOnlySpan<T> b, Span<Paired<S,T>> dst)
         {

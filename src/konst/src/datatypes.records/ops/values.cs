@@ -13,20 +13,6 @@ namespace Z0
 
     partial struct Records
     {
-        [Op, Closures(Closure)]
-        public static void values<T>(in T src, ReadOnlySpan<FieldInfo> fields, Span<FieldValue> dst)
-            where T : struct
-        {
-            ref var target = ref first(dst);
-            var tRef = __makeref(edit(src));
-            var count = fields.Length;
-            for(var i=0u; i<count; i++)
-            {
-                ref readonly var f = ref skip(fields,i);
-                seek(target,i) = new FieldValue(src, f, f.GetValueDirect(tRef));
-            }
-        }
-
         public static ReadOnlySpan<FieldValue> values<T>(in T src)
             where T : struct
         {
@@ -56,41 +42,41 @@ namespace Z0
             for(var i=0u; i<count; i++)
             {
                 ref readonly var f = ref skip(fields,i);
-                seek(target,i) = new FieldValue<S>(src, f, f.GetValueDirect(tRef));
+                seek(target,i) = new FieldValue<S>(f, f.GetValueDirect(tRef));
             }
             return buffer;
         }
 
-        public static RecordFieldValues<T> values<T>(in T src, RecordFields fields)
+        public static FieldValues<T> values<T>(in T src, FieldInfo[] fields)
             where T : struct
         {
             var tr = __makeref(edit(src));
             var count = fields.Length;
-            var fv = fields.View;
+            var fv = @readonly(fields);
 
-            var buffer = sys.alloc<RecordFieldValue>(fields.Count);
+            var buffer = sys.alloc<FieldValue<T>>(count);
             var dst = span(buffer);
-            for(ushort i=0; i<fields.Count; i++)
-                seek(dst,i) = (i, skip(fv, i).Definition.GetValueDirect(tr));
-
-            return new RecordFieldValues<T>(src, fields, buffer);
-        }
-
-        [Op]
-        public static RecordFieldValues values(object src, RecordFields fields)
-        {
-            var buffer = sys.alloc<RecordFieldValue>(fields.Length);
-            var dst = span(buffer);
-            var view = fields.View;
-            var count = fields.Length;
             for(ushort i=0; i<count; i++)
             {
-                ref readonly var field = ref fields[i];
-                var name = field.Name;
-                var value = sys.value(src, field.Definition);
-                seek(dst,i) = (i, value);
+                ref readonly var field = ref skip(fv,i);
+                seek(dst,i) = new FieldValue<T>(field,  field.GetValueDirect(tr));
             }
-            return new RecordFieldValues(src, fields, buffer);
+
+            return new FieldValues<T>(buffer);
+        }
+
+        [Op, Closures(Closure)]
+        public static void values<T>(in T src, ReadOnlySpan<FieldInfo> fields, Span<FieldValue> dst)
+            where T : struct
+        {
+            ref var target = ref first(dst);
+            var tRef = __makeref(edit(src));
+            var count = fields.Length;
+            for(var i=0u; i<count; i++)
+            {
+                ref readonly var f = ref skip(fields,i);
+                seek(target,i) = new FieldValue(f, f.GetValueDirect(tRef));
+            }
         }
     }
 }

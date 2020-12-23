@@ -7,7 +7,7 @@ namespace Z0
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
    [Free]
-   public interface IRngSampler<T> : IRngStream<T>
+   public interface IRngSampler<T> : IRngSource, IValueStream<T>
         where T : struct
     {
         /// <summary>
@@ -18,6 +18,6 @@ namespace Z0
         /// <summary>
         /// The type of distribution being sampled
         /// </summary>
-        DistributionKind DistKind{get;}
+        DistributionKind DistKind {get;}
     }
 }

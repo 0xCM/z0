@@ -8,18 +8,21 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static memory;
 
-    public readonly struct RowFormatPattern
+    public readonly struct RecordSchema
     {
-        readonly string PatternText;
+        public TableId Id {get;}
+
+        public Index<RecordFieldSpec> Fields {get;}
 
         [MethodImpl(Inline)]
-        public RowFormatPattern(string content)
-            => PatternText = content;
+        public RecordSchema(TableId id, RecordFieldSpec[] fields)
+        {
+            Id = id;
+            Fields = fields;
+        }
 
-        public string Apply<T>(DynamicRow<T> src)
-            where T : struct
-                => string.Format(PatternText, src.Cells);
+        public static RecordSchema Empty
+            => default;
     }
 }

@@ -15,7 +15,7 @@ namespace Z0
         public FS.FilePath Target;
     }
 
-    partial class XCmdSpecs
+    partial class XCmd
     {
         [MethodImpl(Inline), Op]
         public static EmitAsmOpCodesCmd EmitAsmOpCodes(this CmdBuilder builder, FS.FilePath? dst = null)

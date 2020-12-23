@@ -10,6 +10,55 @@ namespace Z0
     using static Konst;
     using static z;
 
+    [ApiHost]
+    public readonly struct StringTable
+    {
+        [Op, Closures(UnsignedInts)]
+        internal static StringTable<T> define<T>(MemoryAddress @base, T[] offsets, T[] lengths)
+            => new StringTable<T>(@base, offsets, lengths);
+
+        public static StringTable<T> alloc<T>(MemoryAddress @base, uint count)
+            => new StringTable<T>(@base, sys.alloc<T>(count), sys.alloc<T>(count));
+
+    }
+
+    public readonly struct StringTable<T>
+    {
+        public MemoryAddress BaseAddress {get;}
+
+        readonly T[] Offsets;
+
+        readonly T[] Lengths;
+
+        internal StringTable(MemoryAddress @base, T[] offsets, T[] lengths)
+        {
+            BaseAddress = @base;
+            Offsets = offsets;
+            Lengths = lengths;
+        }
+
+        public void Assign(uint index, T offset, T length)
+        {
+            seek(Offsets,index) = offset;
+            seek(Lengths,index) = length;
+        }
+
+        public ReadOnlySpan<char> this[uint index]
+        {
+            [MethodImpl(Inline)]
+            get => Lookup(index);
+        }
+
+        [MethodImpl(Inline)]
+        public unsafe ReadOnlySpan<char> Lookup(uint index)
+        {
+            var @base = BaseAddress + NumericCast.force<ulong>(skip(Offsets, index));
+            var length = NumericCast.force<uint>(skip(Lengths, index));
+            return cover(@base.Pointer<char>(), length);
+        }
+    }
+
+
     public readonly struct HexStrings<K>
         where K : unmanaged
     {
