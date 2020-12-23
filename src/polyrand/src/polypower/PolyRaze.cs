@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="filter">An optional filter that refines the domain</param>
         /// <typeparam name="T">The generated value type</typeparam>
         [MethodImpl(Inline)]
-        public static T[] Array<T>(this ISource random, int length)
+        public static T[] Array<T>(this IDataSource random, int length)
             where T : unmanaged
                 => random.Stream<T>().TakeArray(length);
 
@@ -33,7 +33,7 @@ namespace Z0
         /// <param name="filter">An optional filter that refines the domain</param>
         /// <typeparam name="T">The generated value type</typeparam>
         [MethodImpl(Inline)]
-        public static T[] Array<T>(this ISource random, uint length)
+        public static T[] Array<T>(this IDataSource random, uint length)
             where T : unmanaged
                 => random.Stream<T>().TakeArray((int)length);
 

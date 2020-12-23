@@ -60,7 +60,7 @@ namespace Z0
         /// <param name="random">The random source</param>
         /// <param name="minlen">The minimum length of the bitstring</param>
         /// <param name="maxlen">The maximum length of the bitstring</param>
-        public static IValueStream<BitString> BitStrings(this IPolyStream random, int minlen, int maxlen)
+        public static IDataStream<BitString> BitStrings(this IPolyStream random, int minlen, int maxlen)
         {
             IEnumerable<BitString> produce()
             {

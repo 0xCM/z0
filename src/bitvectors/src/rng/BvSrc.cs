@@ -27,7 +27,7 @@ namespace Z0
         /// <param name="source">The random source</param>
         /// <param name="n">The primal bitvector selector</param>
         [MethodImpl(Inline)]
-        public static BitVector8 BitVector(this ISource source, N8 n)
+        public static BitVector8 BitVector(this IDataSource source, N8 n)
             => source.Next<byte>();
 
         /// <summary>
@@ -37,7 +37,7 @@ namespace Z0
         /// <param name="n">The primal bitvector selector</param>
         /// <param name="wmax">The effective width</param>
         [MethodImpl(Inline)]
-        public static BitVector8 BitVector(this ISource source, N8 n, byte wmax)
+        public static BitVector8 BitVector(this IDataSource source, N8 n, byte wmax)
         {
             var v = source.Next<byte>();
             var clamp = (byte)(nat8u(n) - math.min(nat8u(n), wmax));
@@ -50,7 +50,7 @@ namespace Z0
         /// <param name="source">The random source</param>
         /// <param name="n">The primal bitvector selector</param>
         [MethodImpl(Inline)]
-        public static BitVector16 BitVector(this ISource source, N16 n)
+        public static BitVector16 BitVector(this IDataSource source, N16 n)
             => source.Next<ushort>();
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace Z0
         /// <param name="n">The primal bitvector selector</param>
         /// <param name="wmax">The effected width</param>
         [MethodImpl(Inline)]
-        public static BitVector16 BitVector(this ISource source, N16 n, byte wmax)
+        public static BitVector16 BitVector(this IDataSource source, N16 n, byte wmax)
         {
             var v = source.Next<ushort>();
             var clamp = (byte)(nat8u(n) - math.min(nat8u(n), wmax));
@@ -73,7 +73,7 @@ namespace Z0
         /// <param name="random">The random source</param>
         /// <param name="n">The primal bitvector selector</param>
         [MethodImpl(Inline)]
-        public static BitVector32 BitVector(this ISource random, N32 n)
+        public static BitVector32 BitVector(this IDataSource random, N32 n)
             => random.Next<uint>();
 
         /// <summary>
@@ -83,7 +83,7 @@ namespace Z0
         /// <param name="n">The primal bitvector selector</param>
         /// <param name="wmax">The maximum effected width</param>
         [MethodImpl(Inline)]
-        public static BitVector32 BitVector(this ISource random, N32 n, byte wmax)
+        public static BitVector32 BitVector(this IDataSource random, N32 n, byte wmax)
         {
             var v = random.Next<uint>();
             var clamp = (byte)(nat8u(n) - math.min(nat8u(n), wmax));
@@ -96,7 +96,7 @@ namespace Z0
         /// <param name="source">The random source</param>
         /// <param name="n">The primal bitvector selector</param>
         [MethodImpl(Inline)]
-        public static BitVector64 BitVector(this ISource source, N64 n)
+        public static BitVector64 BitVector(this IDataSource source, N64 n)
             => source.Next<ulong>();
 
         /// <summary>
@@ -106,7 +106,7 @@ namespace Z0
         /// <param name="n">The primal bitvector selector</param>
         /// <param name="wmax">The maximum effected width</param>
         [MethodImpl(Inline)]
-        public static BitVector64 BitVector(this ISource source, N64 n, byte wmax)
+        public static BitVector64 BitVector(this IDataSource source, N64 n, byte wmax)
         {
             var v = source.Next<ulong>();
             var clamp = (byte)(nat8u(n) - math.min(nat8u(n), wmax));
@@ -128,7 +128,7 @@ namespace Z0
         /// <param name="source">The random source</param>
         /// <typeparam name="T">The underlying primal type</typeparam>
         [MethodImpl(Inline)]
-        public static BitVector<T> BitVector<T>(this ISource source)
+        public static BitVector<T> BitVector<T>(this IDataSource source)
             where T : unmanaged
                 => source.Next<T>();
 
@@ -138,7 +138,7 @@ namespace Z0
         /// <param name="source">The random source</param>
         /// <typeparam name="T">The underlying primal type</typeparam>
         [MethodImpl(Inline)]
-        public static BitVector<T> BitVector<T>(this ISource source, int wmax)
+        public static BitVector<T> BitVector<T>(this IDataSource source, int wmax)
             where T : unmanaged
         {
             var v = source.Next<T>();
@@ -164,7 +164,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static BitVector128<N,T> BitVector<N,T>(this ISource source, N128 block, N n = default, T t = default)
+        public static BitVector128<N,T> BitVector<N,T>(this IDataSource source, N128 block, N n = default, T t = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
         {

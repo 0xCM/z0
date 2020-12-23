@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="random">The random source</param>
         /// <param name="domain">The domain of the random variable</param>
         /// <typeparam name="T">The element type</typeparam>
-        public static IValueStream<T> NonZStream<T>(this IDomainSource random, Interval<T> domain)
+        public static IDataStream<T> NonZStream<T>(this IDomainSource random, Interval<T> domain)
             where T : unmanaged
                 => PolyStreams.create<T>(random, domain, x => gmath.nonz(x));
 

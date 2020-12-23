@@ -13,7 +13,7 @@ namespace Z0
         /// Produces an interminable stream of random bytes
         /// </summary>
         /// <param name="source">The data source</param>
-        public static IEnumerable<byte> Bytes(this ISource source)
+        public static IEnumerable<byte> Bytes(this IDataSource source)
         {
             var cache = new byte[8];
             while(true)
@@ -30,7 +30,7 @@ namespace Z0
         /// </summary>
         /// <param name="source">The data source</param>
         /// <param name="count">The maximum number of bytes to produce</param>
-        public static IEnumerable<byte> Bytes(this ISource source, int count)
+        public static IEnumerable<byte> Bytes(this IDataSource source, int count)
         {
             var counter = 0;
             var bytes = new byte[8];

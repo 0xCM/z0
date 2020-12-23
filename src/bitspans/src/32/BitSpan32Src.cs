@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="source">The random source</param>
         [Op]
-        public static BitSpan32 BitSpan32(this ISource source, int length)
+        public static BitSpan32 BitSpan32(this IDataSource source, int length)
             => BitSpans.load32(source.BitStream32().Take(length).ToArray());
 
 
@@ -26,7 +26,7 @@ namespace Z0
         /// </summary>
         /// <param name="source">The random source</param>
         [Op]
-        public static BitSpan32 BitSpan32(this ISource source, uint length)
+        public static BitSpan32 BitSpan32(this IDataSource source, uint length)
             => BitSpans.load32(source.BitStream32().Take(length).ToArray());
 
     }

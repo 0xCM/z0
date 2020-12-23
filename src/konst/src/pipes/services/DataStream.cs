@@ -15,7 +15,7 @@ namespace Z0
     /// <summary>
     /// Captures a random stream along with the generator classification
     /// </summary>
-    public readonly struct ValueStream<T> : IValueStream<T>
+    public readonly struct DataStream<T> : IDataStream<T>
         where T : struct
     {
         readonly IEnumerable<T> Src;
@@ -23,7 +23,7 @@ namespace Z0
         public RngKind RngKind {get;}
 
         [MethodImpl(Inline)]
-        public ValueStream(IEnumerable<T> src, RngKind kind = RngKind.None)
+        public DataStream(IEnumerable<T> src, RngKind kind = RngKind.None)
         {
             Src = src;
             RngKind = kind;

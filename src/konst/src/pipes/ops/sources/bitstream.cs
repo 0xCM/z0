@@ -16,7 +16,7 @@ namespace Z0
         /// Produces an interminable stream of <see cref='bit'/> values
         /// </summary>
         /// <param name="random">The value source</param>
-        public static IEnumerable<bit> bitstream(ISource src)
+        public static IEnumerable<bit> bitstream(IDataSource src)
         {
             while(true)
             {
@@ -31,7 +31,7 @@ namespace Z0
         /// </summary>
         /// <param name="random">The random source</param>
         /// <typeparam name="T">The numeric type</typeparam>
-        public static IEnumerable<T> bitstream<T>(ISource src)
+        public static IEnumerable<T> bitstream<T>(IDataSource src)
             where T : unmanaged
         {
             while(true)

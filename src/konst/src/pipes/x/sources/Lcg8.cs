@@ -11,7 +11,7 @@ namespace Z0
 
     using api = Lcg8Ops;
 
-    public struct Lcg8 : ISource<byte>
+    public struct Lcg8 : IDataSource<byte>
     {
         internal readonly byte Mul;
 

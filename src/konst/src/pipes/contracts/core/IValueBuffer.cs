@@ -7,7 +7,7 @@ namespace Z0
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface IValueBuffer<H,T> : IValueSource<T>
+    public interface IValueBuffer<H,T> : IDataSource<T>
         where T : struct
         where H : struct, IValueBuffer<H,T>
     {

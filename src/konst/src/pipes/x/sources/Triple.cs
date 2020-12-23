@@ -11,7 +11,7 @@ namespace Z0
 
     partial class XSource
     {
-        public static Triple<T> Triple<T>(this ISource src)
+        public static Triple<T> Triple<T>(this IDataSource src)
             where T : struct
                 => Sources.triple<T>(src);
 
@@ -23,7 +23,7 @@ namespace Z0
         /// <param name="t">A primal type representative</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static ConstTriple<T> ConstTriple<T>(this ISource src)
+        public static ConstTriple<T> ConstTriple<T>(this IDataSource src)
             where T : struct
                 => Sources.ktriple<T>(src);
 

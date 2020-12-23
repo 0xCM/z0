@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Defines pseudorandom number generator
     /// </summary>
-    public struct XOrShift128 : IRngSource, IValueSource<uint>
+    public struct XOrShift128 : IRngSource, IDataSource<uint>
     {
         uint a;
 

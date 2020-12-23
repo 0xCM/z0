@@ -11,7 +11,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The primal type</typeparam>
     [Free]
-    public interface IRngDomainValues<T> : IRngSource, IValueSource<T>, IDomainSource<T>
+    public interface IRngDomainValues<T> : IRngSource, IDataSource<T>, IDomainSource<T>
         where T : unmanaged
     {
     }

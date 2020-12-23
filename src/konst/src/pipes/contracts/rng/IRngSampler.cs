@@ -7,7 +7,7 @@ namespace Z0
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
    [Free]
-   public interface IRngSampler<T> : IRngSource, IValueStream<T>
+   public interface IRngSampler<T> : IRngSource, IDataStream<T>
         where T : struct
     {
         /// <summary>

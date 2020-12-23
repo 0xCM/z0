@@ -17,11 +17,11 @@ namespace Z0
         /// </summary>
         /// <param name="source">The value source</param>
         [Op]
-        public static Deferred<byte> bytes(ISource source)
+        public static Deferred<byte> bytes(IDataSource source)
             => Seq.defer(stream(w8, source));
 
         [Op]
-        static IEnumerable<byte> stream(W8 w, ISource source)
+        static IEnumerable<byte> stream(W8 w, IDataSource source)
         {
             while(true)
             {

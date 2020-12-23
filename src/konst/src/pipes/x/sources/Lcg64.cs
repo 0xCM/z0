@@ -11,7 +11,7 @@ namespace Z0
 
     using api = Lcg64Ops;
 
-    public struct Lcg64 : ISource<ulong>
+    public struct Lcg64 : IDataSource<ulong>
     {
         internal readonly ulong Mul;
 

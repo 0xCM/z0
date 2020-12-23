@@ -5,16 +5,12 @@
 namespace Z0
 {
     using System;
+    using System.Collections.Generic;
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    /// <summary>
-    /// Characterizes an unlimited value emitter
-    /// </summary>
-    /// <typeparam name="T">The production value type</typeparam>
     [Free]
-    public interface IValueSource<T> : ISource<T>
-        where T : struct
+    public interface IDataStream<T> : IEnumerable<T>, IDataSource<T>
     {
 
     }

@@ -26,7 +26,7 @@ namespace Z0
             }
         }
 
-        public static IEnumerable<T> Stream<T>(this ISource src)
+        public static IEnumerable<T> Stream<T>(this IDataSource src)
         {
             while(true)
                 yield return src.Next<T>();

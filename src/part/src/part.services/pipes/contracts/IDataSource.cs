@@ -11,7 +11,7 @@ namespace Z0
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface ISource
+    public interface IDataSource
     {
         /// <summary>
         /// Retrieves the next point from the source, bound only by the domain of the type
@@ -42,7 +42,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The production element type</typeparam>
     [Free]
-    public interface ISource<T>
+    public interface IDataSource<T>
     {
         /// <summary>
         /// Retrieves the next item from the source

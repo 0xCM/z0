@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
 
-    using static Konst;
-
     public static class PolyStream
     {
         /// <summary>
@@ -15,7 +13,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The point source</param>
         /// <typeparam name="T">The point type</typeparam>
-        public static IValueStream<T> Stream<T>(this IPolyStream src)
+        public static IDataStream<T> Stream<T>(this IPolyStream src)
             where T : unmanaged
                 => PolyStreams.create<T>((IPolyrand)src);
 
@@ -26,7 +24,7 @@ namespace Z0
         /// <param name="domain">If specified, the domain of the random variable</param>
         /// <param name="filter">If specified, values that do not satisfy the predicate are excluded from the stream</param>
         /// <typeparam name="T">The element type</typeparam>
-        public static IValueStream<T> Stream<T>(this IPolyStream src, T min, T max)
+        public static IDataStream<T> Stream<T>(this IPolyStream src, T min, T max)
             where T : unmanaged
                 => PolyStreams.create((IPolyrand)src,min,max);
 
@@ -37,7 +35,7 @@ namespace Z0
         /// <param name="domain">The domain of the random variable</param>
         /// <param name="filter">If specified, values that do not satisfy the predicate are excluded from the stream</param>
         /// <typeparam name="T">The element type</typeparam>
-        public static IValueStream<T> Stream<T>(this IPolyStream src, Interval<T> domain)
+        public static IDataStream<T> Stream<T>(this IPolyStream src, Interval<T> domain)
             where T : unmanaged
                 => PolyStreams.create((IPolyrand)src,domain);
 
@@ -48,7 +46,7 @@ namespace Z0
         /// <param name="domain">The domain of the random variable</param>
         /// <param name="filter">If specified, values that do not satisfy the predicate are excluded from the stream</param>
         /// <typeparam name="T">The element type</typeparam>
-        public static IValueStream<T> Stream<T>(this IPolyStream src, Interval<T> domain, Func<T,bool> filter)
+        public static IDataStream<T> Stream<T>(this IPolyStream src, Interval<T> domain, Func<T,bool> filter)
             where T : unmanaged
                 => PolyStreams.create((IPolyrand)src, domain, filter);
     }

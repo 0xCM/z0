@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="t">A vector component type representative</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static VEmitter128<T> vemitter<T>(N128 w, ISource src)
+        public static VEmitter128<T> vemitter<T>(N128 w, IDataSource src)
             where T : unmanaged
                 => new VEmitter128<T>(src);
 
@@ -31,7 +31,7 @@ namespace Z0
         /// <param name="t">A vector component type representative</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static VEmitter256<T> vemitter<T>(N256 w, ISource src)
+        public static VEmitter256<T> vemitter<T>(N256 w, IDataSource src)
             where T : unmanaged
                 => new VEmitter256<T>(src);
 
@@ -43,7 +43,7 @@ namespace Z0
         /// <param name="t">A vector component type representative</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static VEmitter512<T> vemitter<T>(N512 w, ISource src)
+        public static VEmitter512<T> vemitter<T>(N512 w, IDataSource src)
             where T : unmanaged
                 => new VEmitter512<T>(src);
     }

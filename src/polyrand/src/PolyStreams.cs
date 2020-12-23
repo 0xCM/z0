@@ -13,29 +13,29 @@ namespace Z0
     public static class PolyStreams
     {
         [MethodImpl(Inline)]
-        public static IValueStream<T> create<T>(IEnumerable<T> src, RngKind kind)
+        public static IDataStream<T> create<T>(IEnumerable<T> src, RngKind kind)
             where T : struct
-                => new ValueStream<T>(src, kind);
+                => new DataStream<T>(src, kind);
 
         [MethodImpl(Inline)]
-        public static IValueStream<T> create<T>(IEnumerable<T> src)
+        public static IDataStream<T> create<T>(IEnumerable<T> src)
             where T : struct
-                => new ValueStream<T>(src);
+                => new DataStream<T>(src);
 
         /// <summary>
         /// Produces a random stream of unfiltered/unbounded points from a source
         /// </summary>
         /// <param name="src">The point source</param>
         /// <typeparam name="T">The point type</typeparam>
-        public static IValueStream<T> create<T>(IPolyrand src)
+        public static IDataStream<T> create<T>(IPolyrand src)
             where T : unmanaged
                 => create(forever<T>(src), src.RngKind);
 
-        public static IValueStream<T> create<T>(IPolyrand src, T min, T max)
+        public static IDataStream<T> create<T>(IPolyrand src, T min, T max)
             where T : unmanaged
                 => create(forever(src,min,max), src.RngKind);
 
-        public static IValueStream<T> create<T>(IPolyrand src, ClosedInterval<T> domain, Func<T,bool> filter = null)
+        public static IDataStream<T> create<T>(IPolyrand src, ClosedInterval<T> domain, Func<T,bool> filter = null)
             where T : unmanaged
                 => create(forever(src, domain, filter), src.RngKind);
 
@@ -46,7 +46,7 @@ namespace Z0
         /// <param name="domain">The domain of the random variable</param>
         /// <param name="filter">If specified, values that do not satisfy the predicate are excluded from the stream</param>
         /// <typeparam name="T">The element type</typeparam>
-        public static IValueStream<T> create<T>(IDomainSource src, Interval<T> domain, Func<T,bool> filter = null)
+        public static IDataStream<T> create<T>(IDomainSource src, Interval<T> domain, Func<T,bool> filter = null)
             where T : unmanaged
                 => create(forever(src, domain, filter));
 

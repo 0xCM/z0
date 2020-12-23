@@ -14,7 +14,7 @@ namespace Z0
     partial struct Sources
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static IEnumerable<Pair<T>> pairs<T>(ISource src)
+        public static IEnumerable<Pair<T>> pairs<T>(IDataSource src)
             where T : struct
         {
             while(true)
@@ -22,17 +22,17 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Pairs<T> pairs<T>(ISource src, int count)
+        public static Pairs<T> pairs<T>(IDataSource src, int count)
             where T : struct
                 => pairs<T>(src).Take(count).Array();
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Pairs<T> pairs<T>(ISource src, Span<Pair<T>> dst)
+        public static Pairs<T> pairs<T>(IDataSource src, Span<Pair<T>> dst)
             where T : struct
                 => Sinks.deposit(pairs<T>(src).Take(dst.Length),dst);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Pairs<T> pairs<T>(ISource src, Pair<T>[] dst)
+        public static Pairs<T> pairs<T>(IDataSource src, Pair<T>[] dst)
             where T : struct
                 => Sinks.deposit(pairs<T>(src).Take(dst.Length), dst);
     }

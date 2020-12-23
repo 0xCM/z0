@@ -238,7 +238,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        sbyte ISource<sbyte>.Next()
+        sbyte IDataSource<sbyte>.Next()
              => (sbyte) (Points.Next((ulong)sbyte.MaxValue*2) - (ulong)SByte.MaxValue);
 
         [MethodImpl(Inline)]
@@ -266,11 +266,11 @@ namespace Z0
             => (byte)Points.Next((ulong)max);
 
         [MethodImpl(Inline)]
-        byte ISource<byte>.Next()
+        byte IDataSource<byte>.Next()
             => (byte)Points.Next((ulong)byte.MaxValue);
 
         [MethodImpl(Inline)]
-        short ISource<short>.Next()
+        short IDataSource<short>.Next()
             => (short) (Points.Next((ulong)short.MaxValue*2) - (ulong)Int16.MaxValue);
 
         [MethodImpl(Inline)]
@@ -294,7 +294,7 @@ namespace Z0
             => (short)Points.Next(((ulong)short.MaxValue*2) - (ulong)short.MaxValue);
 
         [MethodImpl(Inline)]
-        ushort ISource<ushort>.Next()
+        ushort IDataSource<ushort>.Next()
             => (ushort)Points.Next((ushort)ushort.MaxValue);
 
         [MethodImpl(Inline)]
@@ -306,7 +306,7 @@ namespace Z0
             => (ushort)Points.Next((ulong)min, (ulong)max);
 
         [MethodImpl(Inline)]
-        int ISource<int>.Next()
+        int IDataSource<int>.Next()
             => (int) (Points.Next((ulong)int.MaxValue*2) - Int32.MaxValue);
 
         [MethodImpl(Inline)]
@@ -330,7 +330,7 @@ namespace Z0
             => (int) (Points.Next((ulong)int.MaxValue*2) - Int32.MaxValue);
 
         [MethodImpl(Inline)]
-        uint ISource<uint>.Next()
+        uint IDataSource<uint>.Next()
             =>(uint)Points.Next((ulong)uint.MaxValue);
 
         [MethodImpl(Inline)]
@@ -355,7 +355,7 @@ namespace Z0
             =>  src |= (1L << pos);
 
         [MethodImpl(Inline)]
-        long ISource<long>.Next()
+        long IDataSource<long>.Next()
         {
             var next = (long)Points.Next(long.MaxValue);
             var negative = Bit32.test(next, 7);
@@ -380,7 +380,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        ulong ISource<ulong>.Next()
+        ulong IDataSource<ulong>.Next()
             => Points.Next();
 
         [MethodImpl(Inline)]
@@ -392,7 +392,7 @@ namespace Z0
             => Points.Next(min, max);
 
         [MethodImpl(Inline)]
-        float ISource<float>.Next()
+        float IDataSource<float>.Next()
             => NextF32();
 
         [MethodImpl(Inline)]
@@ -410,7 +410,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        double ISource<double>.Next()
+        double IDataSource<double>.Next()
             => NextF64();
 
         [MethodImpl(Inline)]

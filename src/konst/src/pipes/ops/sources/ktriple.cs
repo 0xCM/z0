@@ -12,7 +12,7 @@ namespace Z0
     partial struct Sources
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ConstTriple<T> ktriple<T>(ISource source, T t = default)
+        public static ConstTriple<T> ktriple<T>(IDataSource source, T t = default)
             where T : struct
                 => (next<T>(source), next<T>(source), next<T>(source));
 

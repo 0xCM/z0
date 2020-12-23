@@ -11,23 +11,23 @@ namespace Z0
 
     partial class XSource
     {
-        public static Pair<T> Pair<T>(this ISource src)
+        public static Pair<T> Pair<T>(this IDataSource src)
             where T : struct
                 => Sources.pair<T>(src);
 
-        public static Pairs<T> Pairs<T>(this ISource src, int count)
+        public static Pairs<T> Pairs<T>(this IDataSource src, int count)
             where T : struct
                 => Sources.pairs<T>(src, count);
 
-        public static Pairs<T> Pairs<T>(this ISource src, Span<Pair<T>> dst)
+        public static Pairs<T> Pairs<T>(this IDataSource src, Span<Pair<T>> dst)
             where T : struct
                 => Sources.pairs(src, dst);
 
-        public static Pairs<T> Pairs<T>(this ISource src, Pair<T>[] dst)
+        public static Pairs<T> Pairs<T>(this IDataSource src, Pair<T>[] dst)
             where T : struct
                 => Sources.pairs(src, dst);
 
-        public static Pairs<T> Pairs<T>(this ISource src, uint count)
+        public static Pairs<T> Pairs<T>(this IDataSource src, uint count)
             where T : struct
                 => Sources.pairs<T>(src, (int)count);
 
@@ -39,7 +39,7 @@ namespace Z0
         /// <param name="t">A primal type representative</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static ConstPair<T> ConstPair<T>(this ISource src, T t = default)
+        public static ConstPair<T> ConstPair<T>(this IDataSource src, T t = default)
             where T : struct
                 => Sources.kpair(src,t);
 

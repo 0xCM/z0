@@ -8,11 +8,11 @@ namespace Z0
 
     partial class XSource
     {
-        public static Triples<T> Triples<T>(this ISource src, int count, T t = default)
+        public static Triples<T> Triples<T>(this IDataSource src, int count, T t = default)
             where T : struct
                 => Sources.triples(src, count, t);
 
-        public static Triples<T> Triples<T>(this ISource src, Span<Triple<T>> dst)
+        public static Triples<T> Triples<T>(this IDataSource src, Span<Triple<T>> dst)
             where T : struct
                 => Sources.triples(src, dst);
     }

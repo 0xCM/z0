@@ -17,7 +17,7 @@ namespace Z0
         where W : unmanaged, ITypeWidth
         where T : unmanaged
     {
-        readonly ISource Source;
+        readonly IDataSource Source;
 
         readonly CellWidth Width;
 
@@ -25,7 +25,7 @@ namespace Z0
 
         readonly Func<F> ValueEmitter;
 
-        public CellStreamer(ISource src)
+        public CellStreamer(IDataSource src)
         {
             Source = src;
             Width = (CellWidth)default(F).Width;
@@ -47,7 +47,7 @@ namespace Z0
             where K : struct
                 => z.@as<K,F>(x);
 
-        public static Func<F> CreateEmitter(ISource source, CellWidth width, NumericKind nk)
+        public static Func<F> CreateEmitter(IDataSource source, CellWidth width, NumericKind nk)
         {
 
             if(width <= CellWidth.W64)

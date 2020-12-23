@@ -129,7 +129,7 @@ namespace Z0
             rng_bench(samplers.uniform(src, (RangeF64)));
         }
 
-        void rng_bench<T>(IValueStream<T> stream, [CallerMemberName] string caller = null)
+        void rng_bench<T>(IDataStream<T> stream, [CallerMemberName] string caller = null)
             where T : unmanaged
         {
             var segment = Pow2.T08;

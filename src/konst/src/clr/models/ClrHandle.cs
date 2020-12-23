@@ -10,6 +10,7 @@ namespace Z0
 
     using static Konst;
 
+    [Datatype]
     public readonly struct ClrHandle
     {
         public ClrArtifactKind Kind {get;}

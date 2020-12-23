@@ -13,7 +13,7 @@ namespace Z0
     partial struct Sources
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static IEnumerable<Triple<T>> triplestream<T>(ISource source, T t = default)
+        public static IEnumerable<Triple<T>> triplestream<T>(IDataSource source, T t = default)
             where T : struct
         {
             while(true)

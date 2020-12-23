@@ -12,7 +12,7 @@ namespace Z0
     partial struct Sources
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static T next<T>(ISource src)
+        public static T next<T>(IDataSource src)
             where T : struct
                 => src.Next<T>();
 

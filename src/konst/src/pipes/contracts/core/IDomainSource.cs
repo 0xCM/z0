@@ -15,7 +15,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The production value type</typeparam>
     [Free]
-    public interface IDomainSource<T> : IValueSource<T>
+    public interface IDomainSource<T> : IDataSource<T>
         where T : unmanaged
     {
         /// <summary>
@@ -53,7 +53,7 @@ namespace Z0
     /// Characterizes a source that emits parametric value constrained to a specified domain
     /// </summary>
     [Free]
-    public interface IDomainSource : ISource
+    public interface IDomainSource : IDataSource
     {
         /// <summary>
         /// Retrieves the next point from the source, constrained by an upper bounds
