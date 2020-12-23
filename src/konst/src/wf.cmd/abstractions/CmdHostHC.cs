@@ -37,8 +37,7 @@ namespace Z0
             => Execute(wf, Spec());
 
         public virtual CmdResult Run(IWfShell wf, CmdSpec spec)
-        {
-            return Execute(wf, Spec());
-        }
+            => Execute(wf, Spec());
+
     }
 }

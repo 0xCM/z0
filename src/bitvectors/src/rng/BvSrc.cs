@@ -164,7 +164,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static BitVector128<N,T> BitVector<N,T>(this IPolyStream source, N128 block, N n = default, T t = default)
+        public static BitVector128<N,T> BitVector<N,T>(this ISource source, N128 block, N n = default, T t = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
         {

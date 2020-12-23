@@ -12,17 +12,6 @@ namespace Z0
     partial class BitVector
     {
         /// <summary>
-        /// Computes the bitwise TRUE operator
-        /// </summary>
-        /// <param name="x">The left vector</param>
-        /// <param name="y">The right vector</param>
-        /// <typeparam name="T">The primal scalar upon which the bitvector is predicated</typeparam>
-        [MethodImpl(Inline), True, Closures(Closure)]
-        public static BitVector<T> @true<T>(BitVector<T> x, BitVector<T> y)
-            where T : unmanaged
-                => BitVector.ones<T>();
-
-        /// <summary>
         /// Computes the bitwise FALSE operator
         /// </summary>
         /// <param name="x">The left vector</param>
@@ -31,6 +20,6 @@ namespace Z0
         [MethodImpl(Inline), False, Closures(Closure)]
         public static BitVector<T> @false<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
-                => BitVector.zero<T>();
+                => zero<T>();
     }
 }

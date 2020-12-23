@@ -7,9 +7,6 @@ namespace Z0
     using System;
     using System.Reflection;
     using System.Linq;
-    using System.Runtime.CompilerServices;
-
-    using static Konst;
 
     using static LinqXPress;
 

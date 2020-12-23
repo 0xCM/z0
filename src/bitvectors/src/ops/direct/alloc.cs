@@ -11,7 +11,6 @@ namespace Z0
 
     partial class BitVector
     {
-
         /// <summary>
         /// Allocates a 4-bit primal bitvector
         /// </summary>

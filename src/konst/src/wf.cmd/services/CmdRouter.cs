@@ -46,43 +46,15 @@ namespace Z0
             iter(src, cmd => Nodes.TryAdd(cmd.CmdId, cmd));
         }
 
-        public CmdResult<T> Dispatch<S,T>(S src)
-            where S : struct, ICmdSpec<S>
-            where T : struct
-        {
-            try
-            {
-                if(Nodes.TryGetValue(src.CmdId, out var node) && node is ICmdReactor<S,T> worker)
-                {
-                    var result = worker.Invoke(src);
-                    if(result.Succeeded)
-                        Wf.Error(result);
-                    else
-                        Wf.Status(result);
-
-                    return result;
-                }
-                else
-                {
-                    Wf.Error(WfEvents.missing(src.CmdId));
-                    return new CmdResult<T>(src.CmdId, false);
-                }
-            }
-            catch(Exception e)
-            {
-                Wf.Error(e);
-                return new CmdResult<T>(src.CmdId, false);
-            }
-        }
-
         public CmdResult Dispatch(ICmdSpec cmd)
         {
-            using var dispatch = Wf.Running(PartMsg.DispatchingCommand.Format(cmd.Format()));
+            using var dispatch = Wf.Running("Dispatching");
             try
             {
                 if(Nodes.TryGetValue(cmd.CmdId, out var node))
                 {
-                    Wf.Status($"Dispatching {cmd.CmdId} to reactor {node.GetType().Name}");
+
+                    Wf.Status(Msg.DispatchingCmd.Format(cmd.CmdId, node.GetType().Name));
                     var result = node.Invoke(cmd);
                     if(result.Succeeded)
                         Wf.Status(result);
@@ -102,5 +74,10 @@ namespace Z0
                 return Cmd.fail(cmd, e);
             }
         }
+    }
+
+    partial struct Msg
+    {
+        public static RenderPattern<CmdId,string> DispatchingCmd => "Dispatching {0} command to {1}";
     }
 }

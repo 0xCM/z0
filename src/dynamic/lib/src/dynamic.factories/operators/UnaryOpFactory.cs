@@ -6,9 +6,7 @@ namespace Z0
 {
     using System;
     using System.Reflection;
-    using System.Runtime.CompilerServices;
 
-    using static Konst;
     using static LinqXPress;
 
     public readonly struct UnaryOpFactory<T> : IUnaryOpFactory<T>

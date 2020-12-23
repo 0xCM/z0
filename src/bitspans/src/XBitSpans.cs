@@ -59,7 +59,7 @@ namespace Z0
         /// <param name="count">The number of source copies to produce</param>
         [MethodImpl(Inline), Op]
         public static BitSpan32 Replicate(this in BitSpan32 src, int copies = 1)
-            => replicate(src,copies);
+            => replicate32(src,copies);
 
 
         /// <summary>

@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
     using static z;
-    using static HexFormatSpecs;
+    using static HexCharData;
 
     partial class Hex
     {
@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="src">The value to be hex-encoded</param>
         [MethodImpl(Inline), Op]
         public static HexCodeUp code(UpperCased upper, uint4 src)
-            => (HexCodeUp)skip(first(Hex.UpperHexDigits), src);
+            => (HexCodeUp)skip(first(UpperHexDigits), src);
 
         /// <summary>
         /// Returns the hex character code for a <see cref='uint4'/> value
@@ -27,6 +27,6 @@ namespace Z0
         /// <param name="src">The value to be hex-encoded</param>
         [MethodImpl(Inline), Op]
         public static HexCodeLo code(LowerCased lower, uint4 src)
-            => (HexCodeLo)skip(first(Hex.LowerHexDigits), src);
+            => (HexCodeLo)skip(first(LowerHexDigits), src);
     }
 }

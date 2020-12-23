@@ -36,6 +36,9 @@ namespace Z0
             }
         }
 
+        CmdResult ICmdReactor.Invoke(ICmdSpec src)
+            => Invoke((S)src);
+
         public void Init(IWfShell wf)
         {
             Host = WfShell.host(GetType());

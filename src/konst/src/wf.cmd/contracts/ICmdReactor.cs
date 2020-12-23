@@ -27,18 +27,6 @@ namespace Z0
 
         CmdResult Invoke(S src);
 
-        CmdResult ICmdReactor.Invoke(ICmdSpec src)
-        {
-            try
-            {
-                Invoke((S)src);
-                return Cmd.ok(src);
-            }
-            catch(Exception e)
-            {
-                return Cmd.fail(src,e);
-            }
-        }
     }
     [Free]
     public interface ICmdReactor<S,T> : ICmdReactor
@@ -49,18 +37,5 @@ namespace Z0
             => default(S).CmdId;
 
         CmdResult<T> Invoke(S src);
-
-        CmdResult ICmdReactor.Invoke(ICmdSpec src)
-        {
-            try
-            {
-                Invoke((S)src);
-                return Cmd.ok(src);
-            }
-            catch(Exception e)
-            {
-                return Cmd.fail(src,e);
-            }
-        }
     }
 }

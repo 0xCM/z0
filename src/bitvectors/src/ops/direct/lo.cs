@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     partial class BitVector
     {
@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The count of least significant bits</param>
         [MethodImpl(Inline), LoSeg, Closures(Closure)]
-        public static BitVector<T> loseg<T>(BitVector<T> src, byte n)
+        public static BitVector<T> lo<T>(BitVector<T> src, byte n)
             where T : unmanaged
                 => segment(src, 0, n -=1);
 
@@ -25,7 +25,7 @@ namespace Z0
         /// </summary>
         /// <param name="count">The count of least significant bits</param>
         [MethodImpl(Inline), LoSeg]
-        public static BitVector4 loseg(BitVector4 x, byte count)
+        public static BitVector4 lo(BitVector4 x, byte count)
             => segment(x, 0, (byte)(count - 1));
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace Z0
         /// </summary>
         /// <param name="count">The count of least significant bits</param>
         [MethodImpl(Inline), LoSeg]
-        public static BitVector8 loseg(BitVector8 x, byte count)
+        public static BitVector8 lo(BitVector8 x, byte count)
             => segment(x,0, count -=1);
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace Z0
         /// </summary>
         /// <param name="count">The count of least significant bits</param>
         [MethodImpl(Inline), LoSeg]
-        public static BitVector16 loseg(BitVector16 src, byte count)
+        public static BitVector16 lo(BitVector16 src, byte count)
             => segment(src.Data,0,count -=1);
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace Z0
         /// </summary>
         /// <param name="count">The count of least significant bits</param>
         [MethodImpl(Inline), LoSeg]
-        public static BitVector32 loseg(BitVector32 src, byte count)
+        public static BitVector32 lo(BitVector32 src, byte count)
             => segment(src.Data,0,count -=1);
 
         /// <summary>
@@ -57,8 +57,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The count of least significant bits</param>
         [MethodImpl(Inline), LoSeg]
-        public static BitVector64 loseg(BitVector64 src, byte n)
+        public static BitVector64 lo(BitVector64 src, byte n)
             => segment(src.Data,0, n -=1);
-
     }
 }

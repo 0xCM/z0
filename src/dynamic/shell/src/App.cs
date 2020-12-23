@@ -10,7 +10,6 @@ namespace Z0
     using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
-    using System.Diagnostics;
 
     using Z0.Images;
     using Z0.Tools;
@@ -405,6 +404,20 @@ namespace Z0
         Task<CmdResult> DumpCliTables(Assembly src)
             => Wf.Dispatch(CmdBuilder.DumpCliTables(src));
 
+       Task<CmdResult> EmitDocComments()
+            => Wf.Dispatch(CmdBuilder.EmitDocComments());
+
+
+        void ShowPartSummary()
+        {
+            var api = Wf.ApiParts;
+            foreach(var c in api.Components)
+                Wf.Row(c.GetSimpleName());
+
+            foreach(var p in api.ManagedSources)
+                Wf.Row(string.Format("Managed: {0}", p));
+        }
+
 
         public void Run()
         {
@@ -414,7 +427,8 @@ namespace Z0
             //EmitBuildArchiveList(Wf.Db().BuildArchiveRoot(), "zbuild");
             //EmitCilTables(Wf, "z0.bitcore.dll");
 
-            DumpCliTables(typeof(math).Assembly).Wait();
+            ShowPartSummary();
+            //EmitDocComments().Wait();
 
             //EmitResData();
             // var component = Wf.Api.FindComponent(PartId.BitCore).Require();

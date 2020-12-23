@@ -31,9 +31,12 @@ namespace Z0
             catch(Exception e)
             {
                 Wf.Error(e);
-                return new CmdResult(cmd.CmdId, false);
+                return new CmdResult(cmd.CmdId, e);
             }
         }
+
+        CmdResult ICmdReactor.Invoke(ICmdSpec src)
+            => Invoke((S)src);
 
         public void Init(IWfShell wf)
         {

@@ -10,6 +10,7 @@ namespace Z0
 
     using static Konst;
     using static HexFormatSpecs;
+    using static HexCharData;
     using static z;
 
     public readonly struct HexByteParser : IHexParser<byte>
@@ -31,11 +32,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public bool HasPreSpec(string src)
-            => src.TrimStart().StartsWith(HexFormatSpecs.PreSpec);
+            => src.TrimStart().StartsWith(PreSpec);
 
         [MethodImpl(Inline)]
         public bool HasPostSpec(string src)
-            => src.TrimEnd().EndsWith(HexFormatSpecs.PostSpec);
+            => src.TrimEnd().EndsWith(PostSpec);
 
         /// <summary>
         /// Parses a single hex digit
@@ -46,9 +47,9 @@ namespace Z0
         {
             var u = Char.ToUpperInvariant(c);
             if(HexTest.scalar(c))
-                return parsed(c, (byte)((byte)u - Hex.MinScalarCode));
+                return parsed(c, (byte)((byte)u - MinScalarCode));
             else if(HexTest.upper(c))
-                return parsed(c, (byte)((byte)u - Hex.MinCharCodeU + 0xA));
+                return parsed(c, (byte)((byte)u - MinCharCodeU + 0xA));
             else
                 return unparsed<byte>(c);
         }

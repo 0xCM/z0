@@ -4,9 +4,22 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    [Cmd]
+    using System.Reflection;
+    using System;
+    using System.Runtime.CompilerServices;
+
+    using static Part;
+
+    [Cmd(CmdName)]
     public struct EmitDocCommentsCmd : ICmdSpec<EmitDocCommentsCmd>
     {
+        public const string CmdName = "emit-doc-comments";
+    }
 
+    partial class XCmd
+    {
+        [MethodImpl(Inline), Op]
+        public static EmitDocCommentsCmd EmitDocComments(this CmdBuilder builder)
+            => new EmitDocCommentsCmd();
     }
 }

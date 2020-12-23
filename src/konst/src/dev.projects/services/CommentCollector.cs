@@ -58,7 +58,6 @@ namespace Z0
                 var t = default(SummaryComment);
                 foreach(var path in paths)
                 {
-
                     var id = path.Owner;
                     if(id.IsSome())
                     {

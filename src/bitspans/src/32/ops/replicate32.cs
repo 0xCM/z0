@@ -10,6 +10,20 @@ namespace Z0
     partial class BitSpans
     {
         /// <summary>
+        /// Replicates the content of a source bitspan into a new bitspan
+        /// </summary>
+        /// <param name="src">The source bits</param>
+        /// <param name="count">The number of source copies to produce</param>
+        [Op]
+        public static BitSpan32 replicate32(in BitSpan32 src, int count = 1)
+        {
+            Span<Bit32> data = new Bit32[src.Length * count];
+            for(var i=0; i<count; i++)
+                src.Data.CopyTo(data, i*src.Length);
+            return load32(data);
+        }
+
+        /// <summary>
         /// Replicates the content of a source bitspan into a target bitspan, repeatedly
         /// or partially depending on the available space in the target
         /// </summary>

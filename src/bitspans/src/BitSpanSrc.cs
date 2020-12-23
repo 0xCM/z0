@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    public static class BitSpanSrc
+    public static class BitSpanSource
     {
         /// <summary>
         /// Produces a bitspan with randomized length

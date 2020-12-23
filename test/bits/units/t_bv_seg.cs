@@ -18,7 +18,7 @@ namespace Z0
             {
                 var bv = Random.BitVector(width);
                 var n = Random.Next((byte)1, (byte)bv.Width);
-                var result = BitVector.loseg(bv,n).ToBitString();
+                var result = BitVector.lo(bv,n).ToBitString();
                 var expect = bv.ToBitString()[0, n - 1];
                 Claim.eq(expect, result);
             }
@@ -31,7 +31,7 @@ namespace Z0
             {
                 var bv = Random.BitVector(width);
                 var n = Random.Next((byte)1, (byte)bv.Width);
-                var result = BitVector.loseg(bv,n).ToBitString();
+                var result = BitVector.lo(bv,n).ToBitString();
                 var expect = bv.ToBitString()[0, n - 1];
                 Claim.eq(expect, result);
             }
@@ -44,7 +44,7 @@ namespace Z0
             {
                 var bv = Random.BitVector(width);
                 var n = Random.Next((byte)1, (byte)bv.Width);
-                var result = BitVector.loseg(bv,n).ToBitString();
+                var result = BitVector.lo(bv,n).ToBitString();
                 var expect = bv.ToBitString()[0, n - 1];
                 Claim.eq(expect, result);
             }
@@ -57,7 +57,7 @@ namespace Z0
             {
                 var bv = Random.BitVector(width);
                 var n = Random.Next((byte)1, (byte)bv.Width);
-                var result = BitVector.loseg(bv,n).ToBitString();
+                var result = BitVector.lo(bv,n).ToBitString();
                 var expect = bv.ToBitString()[0, n - 1];
                 Claim.eq(expect, result);
             }

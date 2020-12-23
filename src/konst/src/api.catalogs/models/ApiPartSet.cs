@@ -6,10 +6,6 @@ namespace Z0
 {
     using System;
     using System.Reflection;
-    using System.Linq;
-
-    using static Konst;
-    using static z;
 
     /// <summary>
     /// Associates a collection of components along with a<see cref = 'ISystemApiCatalog'/>
@@ -50,11 +46,5 @@ namespace Z0
             Api =  ApiCatalogs.system(ManagedSources);
             Components = Api.Components;
         }
-
-        FS.Files IApiParts.ManagedSources
-            => ManagedSources;
-
-        Assembly[] IApiParts.Components
-            => Components;
     }
 }

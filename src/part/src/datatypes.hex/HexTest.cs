@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
+    using static HexCharData;
 
     [ApiHost]
     public readonly struct HexTest
@@ -22,7 +23,7 @@ namespace Z0
         /// <param name="c">The character to test</param>
         [MethodImpl(Inline), Op]
         public static bool scalar(char c)
-            => (byte)c >= Hex.MinScalarCode && (byte)c <= Hex.MaxScalarCode;
+            => (byte)c >= MinScalarCode && (byte)c <= MaxScalarCode;
 
         /// <summary>
         /// Determines whether a character corresponds to one of the uppercase hex code characters
@@ -30,7 +31,7 @@ namespace Z0
         /// <param name="c">The character to test</param>
         [MethodImpl(Inline), Op]
         public static bool upper(char c)
-            => (byte)c >= Hex.MinCharCodeU && (byte)c <= Hex.MaxCharCodeU;
+            => (byte)c >= MinCharCodeU && (byte)c <= MaxCharCodeU;
 
         /// <summary>
         /// Determines whether a character corresponds to one of the lowercase hex code characters
@@ -38,7 +39,7 @@ namespace Z0
         /// <param name="c">The character to test</param>
         [MethodImpl(Inline), Op]
         public static bool lower(char c)
-            => (byte)c >= Hex.MinCharCodeL && (byte)c <= Hex.MaxCharCodeL;
+            => (byte)c >= MinCharCodeL && (byte)c <= MaxCharCodeL;
 
         [MethodImpl(Inline), Op]
         public static HexDigitKind classify(char src)
@@ -51,7 +52,7 @@ namespace Z0
             else if(lower(src))
                 return HexDigitKind.LowerLetter;
             else
-                return 0;            ;
+                return 0;
         }
     }
 }
