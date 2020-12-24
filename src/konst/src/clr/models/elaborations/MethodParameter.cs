@@ -14,13 +14,13 @@ namespace Z0
     /// </summary>
     public readonly struct MethodParameter : ITextual
     {
-        public readonly string Name;
+        public string Name {get;}
 
-        public readonly ushort Position;
+        public ushort Position {get;}
 
-        public readonly TypeSigInfo Type;
+        public TypeSigInfo Type {get;}
 
-        public readonly ClrArgRefKind RefKind;
+        public ClrArgRefKind RefKind {get;}
 
         [MethodImpl(Inline)]
         public MethodParameter(TypeSigInfo type, ClrArgRefKind refkind, string name, ushort pos)

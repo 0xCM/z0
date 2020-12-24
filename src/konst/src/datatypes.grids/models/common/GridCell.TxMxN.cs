@@ -6,22 +6,26 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
 
     using static Part;
 
     /// <summary>
-    /// Defines an item selection
+    /// Defines an MxN indexed T-cell
     /// </summary>
-    public readonly struct Choice<T>
+    public readonly struct GridCell<T,M,N>
+        where M : unmanaged
+        where N : unmanaged
     {
-        public T Chosen {get;}
+        public M Row {get;}
+
+        public N Col {get;}
 
         [MethodImpl(Inline)]
-        public Choice(T chosen)
-            => Chosen = chosen;
-
-        [MethodImpl(Inline)]
-        public static implicit operator Choice<T>(T src)
-            => new Choice<T>(src);
+        public GridCell(M row, N col)
+        {
+            Row = row;
+            Col = col;
+        }
     }
 }

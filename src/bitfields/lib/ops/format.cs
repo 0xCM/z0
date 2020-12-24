@@ -13,7 +13,7 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static string format(ReadOnlySpan<BitFieldSegment> src)
-            => BitFieldSpecs.format(src);
+            => BitFieldModels.format(src);
 
         public static string format<F>(F src)
             where F : unmanaged, IBitFieldIndexEntry<F>
@@ -42,6 +42,6 @@ namespace Z0
         public static string format<S,T>(ReadOnlySpan<S> src)
             where T : unmanaged
             where S : IBitFieldSegment<T>
-                => BitFieldSpecs.format<S,T>(src);
+                => BitFieldModels.format<S,T>(src);
     }
 }

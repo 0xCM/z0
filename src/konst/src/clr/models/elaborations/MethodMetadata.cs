@@ -24,19 +24,6 @@ namespace Z0
         public MethodParameters ValueParams;
 
         public TypeParameters TypeParams;
-
-        public MethodMetadata(int id, string assembly, string module, TypeSigInfo type, string name, TypeSigInfo tReturn, MethodParameters args, TypeParameters tParams)
-        {
-            MethodId = id;
-            DefiningAssembly = assembly;
-            DefiningModule = module;
-            DeclaringType = type;
-            MethodName = name;
-            ReturnType = tReturn;
-            ValueParams = args;
-            TypeParams = tParams;
-        }
-
         public string Format()
             => ClrQuery.format(this);
 

@@ -13,7 +13,7 @@ namespace Z0
     using NBK = NumericBaseKind;
 
     [ApiHost]
-    public partial class NumericBases
+    public class NumericBases
     {
         [MethodImpl(Inline), Op]
         public static NBI indicator(char src)

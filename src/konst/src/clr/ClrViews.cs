@@ -148,21 +148,5 @@ namespace Z0
                     writer.WriteLine(skip(lead, i));
             }
         }
-
-        public static void EmitTypes(IWfShell wf, Assembly src, FS.FilePath dst)
-        {
-            var types = sTypes(src);
-            var count = types.Length;
-            if(count != 0)
-            {
-                using var writer = dst.Writer();
-                ref readonly var lead = ref types.First;
-                for(var i=0; i<count; i++)
-                {
-                    ref readonly var type = ref skip(lead,i);
-                    writer.WriteLine(string.Format("{0,-16} | {1}", type.Key, type.Name));
-                }
-            }
-        }
     }
 }

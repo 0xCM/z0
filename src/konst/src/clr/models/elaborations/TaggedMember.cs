@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Pairs a member attribute value with its target
     /// </summary>
-    public readonly struct TaggedMember<M,A> : IPaired<M,A>
+    public readonly struct TaggedMember<M,A>
         where M : MemberInfo
         where A : Attribute
     {
@@ -28,20 +28,14 @@ namespace Z0
         public readonly A Tag;
 
         [MethodImpl(Inline)]
-        public static implicit operator TaggedMember<M,A>((M member, A tag) src)
-            => new TaggedMember<M,A>(src.member, src.tag);
-
-        [MethodImpl(Inline)]
         public TaggedMember(M member, A tag)
         {
             Member = member;
             Tag = tag;
         }
 
-        M IPaired<M,A>.Left
-            => Member;
-
-        A IPaired<M,A>.Right
-            => Tag;
+        [MethodImpl(Inline)]
+        public static implicit operator TaggedMember<M,A>((M member, A tag) src)
+            => new TaggedMember<M,A>(src.member, src.tag);
     }
 }

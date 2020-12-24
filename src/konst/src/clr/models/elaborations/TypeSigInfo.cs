@@ -30,33 +30,33 @@ namespace Z0
 
         public bool IsPointer;
 
-        public static TypeSigInfo from(Type src)
-            => new TypeSigInfo(src.DisplayName(), src.IsConstructedGenericType,src.IsGenericType && !src.IsConstructedGenericType,
-                    src.IsByRef, false, false, src.IsPointer);
-
         public static TypeSigInfo from(ParameterInfo src)
         {
+            var dst = new TypeSigInfo();
             var type = src.ParameterType;
-            var name = type.EffectiveType().DisplayName();
-            return new TypeSigInfo(name,
-                type.IsConstructedGenericType,
-                type.IsGenericType && !type.IsConstructedGenericType,
-                type.IsRef(),
-                src.IsIn,
-                src.IsOut,
-                type.IsPointer);
+            dst.DisplayName= type.EffectiveType().DisplayName();
+            dst.IsOpenGeneric = type.IsGenericType && !type.IsConstructedGenericType;
+            dst.IsClosedGeneric = type.IsConstructedGenericType;
+            dst.IsByRef = type.IsRef();
+            dst.IsIn = src.IsIn;
+            dst.IsOut = src.IsOut;
+            dst.IsPointer = type.IsPointer;
+            dst.Modifier = dst.IsIn ? "in " : dst.IsOut ? "out " : dst.IsByRef ? "ref " : EmptyString;
+            return dst;
         }
 
-        internal TypeSigInfo(string DisplayName, bool IsOpenGeneric, bool IsClosedGeneric, bool IsByRef, bool IsIn, bool IsOut, bool IsPointer)
+        public static TypeSigInfo from(Type type)
         {
-            this.DisplayName = DisplayName;
-            this.IsOpenGeneric = IsOpenGeneric;
-            this.IsClosedGeneric = IsClosedGeneric;
-            this.IsByRef = IsByRef;
-            this.IsIn = IsIn;
-            this.IsOut = IsOut;
-            this.IsPointer = IsPointer;
-            Modifier = IsIn ? "in " : IsOut ? "out " : IsByRef ? "ref " : EmptyString;
+            var dst = new TypeSigInfo();
+            dst.DisplayName= type.EffectiveType().DisplayName();
+            dst.IsOpenGeneric = type.IsGenericType && !type.IsConstructedGenericType;
+            dst.IsClosedGeneric = type.IsConstructedGenericType;
+            dst.IsByRef = type.IsRef();
+            dst.IsIn = false;
+            dst.IsOut = false;
+            dst.IsPointer = type.IsPointer;
+            dst.Modifier = dst.IsIn ? "in " : dst.IsOut ? "out " : dst.IsByRef ? "ref " : EmptyString;
+            return dst;
         }
 
         public string Format()

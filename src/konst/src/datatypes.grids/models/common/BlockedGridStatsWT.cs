@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Captures memory block statistics for blocks of natural width N over generic T-cells

@@ -20,7 +20,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BoxedNumber Box<T>(this NumericKind dst, T src)
             where T : unmanaged
-                => BoxedNumber.Define(z.rebox(src,dst), dst);
+                => BoxedNumber.Define(NumericBox.rebox(src,dst), dst);
 
         /// <summary>
         /// Puts an enum value into a (numeric) box

@@ -12,7 +12,7 @@ namespace Z0
     using static z;
 
     [ApiHost(ApiNames.BitFieldSpecs, true)]
-    public readonly struct BitFieldSpecs
+    public readonly struct BitFieldModels
     {
         const NumericKind Closure = UnsignedInts;
 

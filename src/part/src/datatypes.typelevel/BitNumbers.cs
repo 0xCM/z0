@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    partial struct Konst
+    public readonly struct BitNumbers
     {
         /// <summary>
         /// Identifies term 0 of a bit sequence
@@ -256,4 +256,5 @@ namespace Z0
         /// </summary>
         public const byte Bit49 = 49;
     }
+
 }

@@ -40,7 +40,7 @@ namespace Z0
             => ref seek(First, GridCalcs.linear(Dim, row, col));
 
         [MethodImpl(Inline)]
-        public ref T Cell(GridPoint point)
+        public ref T Cell(GridCell point)
             => ref seek(First, GridCalcs.linear(Dim, point));
 
         public ref T this[uint row, uint col]

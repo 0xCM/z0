@@ -7,32 +7,32 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     public readonly struct Letter
     {
-        
+
     }
 
     public readonly struct Number
     {
-        
+
     }
 
     public readonly struct LetterCase
     {
-        public bool IsUpper {get;}    
+        public bool IsUpper {get;}
 
-        public bool IsLower {get;}    
+        public bool IsLower {get;}
 
-        public LetterCaseKind Kind {get;}        
-        
+        public LetterCaseKind Kind {get;}
+
         [MethodImpl(Inline)]
         internal LetterCase(bool upper, bool lower, LetterCaseKind kind)
         {
             IsUpper = upper;
             IsLower = lower;
             Kind = kind;
-        }         
+        }
     }
 }

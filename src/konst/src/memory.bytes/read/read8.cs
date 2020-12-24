@@ -17,33 +17,23 @@ namespace Z0
         /// </summary>
         /// <param name="src">The value to read</param>
         [MethodImpl(Inline), Op]
-        public static unsafe Span<byte> ReadAll(in short src)
-            => new Span<byte>(gptr(src), 2);
+        public static unsafe Span<byte> read8(in long src)
+            => new Span<byte>(gptr(in src), 8);
 
         /// <summary>
         /// Reads the bytes that define a numeric value
         /// </summary>
         /// <param name="src">The value to read</param>
         [MethodImpl(Inline), Op]
-        public static unsafe Span<byte> ReadAll(in ushort src)
-            => new Span<byte>(gptr(src), 2);
+        public static unsafe Span<byte> read8(in ulong src)
+            => new Span<byte>(gptr(src), 8);
 
         /// <summary>
-        /// Reads a source byte, identified by natural index
+        /// Reads the bytes that define a numeric value
         /// </summary>
-        /// <param name="src">The data source</param>
-        /// <param name="n">The byte index selector</param>
+        /// <param name="src">The value to read</param>
         [MethodImpl(Inline), Op]
-        public static byte read(ushort src, N0 n)
-            => skip8(src,n);
-
-        /// <summary>
-        /// Reads a source byte, identified by natural index
-        /// </summary>
-        /// <param name="src">The data source</param>
-        /// <param name="n">The byte index selector</param>
-        [MethodImpl(Inline), Op]
-        public static byte read(ushort src, N1 n)
-            => skip8(src,n);
+        public static unsafe Span<byte> read8(in double src)
+            => new Span<byte>(gptr(src), 8);
     }
 }

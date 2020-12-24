@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    using api = BitFieldSpecs;
+    using api = BitFieldModels;
 
     /// <summary>
     /// Defines a partition over a contiguous sequence of bits

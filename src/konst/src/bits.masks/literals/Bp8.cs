@@ -32,10 +32,13 @@ namespace Z0
             [BitMask("[10000000]")]
             public const byte b10000000x8 = 0b10000000;
 
+            [BitMask("[00001111]")]
             public const byte b00001111x8 = 0b00001111;
 
+            [BitMask("[11110000]")]
             public const byte b11110000x8 = 0b11110000;
 
+            [BitMask("[01010101]")]
             public const byte b01010101x8 = 0x55;
 
             public const byte b00110011x8 = 0x33;

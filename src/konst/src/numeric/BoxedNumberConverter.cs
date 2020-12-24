@@ -13,17 +13,17 @@ namespace Z0
 
     readonly struct BoxedNumberConverter : IConversionProvider<BoxedNumberConverter,BoxedNumber>, IBiconverter<BoxedNumber>
     {
-        public BoxedNumberConverter Converter 
+        public BoxedNumberConverter Converter
             => default;
-        
+
         /// <summary>
         /// Pulls a number of kind parametric from a box - whose kind it matters not
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The target numeric type</typeparam>
         [MethodImpl(Inline)]
-        public T Convert<T>(BoxedNumber src) 
-            => (T)z.rebox(src.Boxed, NumericKinds.kind<T>());
+        public T Convert<T>(BoxedNumber src)
+            => (T)NumericBox.rebox(src.Boxed, NumericKinds.kind<T>());
 
         /// <summary>
         /// Puts a number in a box of kind parametric
@@ -31,7 +31,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The source value type</typeparam>
         [MethodImpl(Inline)]
-        public BoxedNumber Convert<T>(T src) 
+        public BoxedNumber Convert<T>(T src)
             => BoxedNumber.Define(src, NumericKinds.kind<T>());
 
         public Option<object> ConvertFromTarget(object incoming, Type dst)
@@ -39,7 +39,7 @@ namespace Z0
             try
             {
                 var src = (BoxedNumber)incoming;
-                return rebox(src.Boxed, dst.NumericKind());
+                return NumericBox.rebox(src.Boxed, dst.NumericKind());
             }
             catch(Exception e)
             {

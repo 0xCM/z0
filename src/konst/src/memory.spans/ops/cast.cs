@@ -9,7 +9,7 @@ namespace Z0
 
     using static System.Runtime.InteropServices.MemoryMarshal;
 
-    using static Konst;
+    using static Part;
     using static memory;
 
     partial class Spans

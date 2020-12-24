@@ -11,19 +11,16 @@ namespace Z0
 
     public static class Converters
     {
-        public static Converter<S,T> create<S,T>(IBiconverter<S> service)
-            => new Converter<S,T>(service);
-
         /// <summary>
         /// Converts an incoming value of the target type to a value of specified type, if possible
         /// </summary>
         /// <param name="src">The value to convert</param>
         public static Option<T> convert<S,T>(S src)
-            => @try(() => from converter in Converters.get<S>()
+            => @try(() => from converter in converter<S>()
                     from converted in converter.ConvertFromTarget(src,typeof(T))
                     select (T)converted);
 
-        public static Option<IBiconverter<S>> get<S>()
+        public static Option<IBiconverter<S>> converter<S>()
         {
             lock(locker)
             {

@@ -27,13 +27,6 @@ namespace Z0
         public string HeaderText
             => Formatters.dataset<F>().HeaderText;
 
-        public void Format(in R src, DatasetFormatter<F> dst, bool eol)
-        {
-            Format(src, dst);
-            if(eol)
-                dst.EmitEol();
-        }
-
         void ITextValueFormatter<F,R>.Format(in R src, IDatasetFormatter<F> dst)
             => render(src,dst);
 

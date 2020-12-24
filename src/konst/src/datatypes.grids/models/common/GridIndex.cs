@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Correlates a linear bit index, a cell index and bit offset, and a row/column coordinate in a grid/matrix

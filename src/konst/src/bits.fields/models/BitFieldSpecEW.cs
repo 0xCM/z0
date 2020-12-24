@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using api = BitFieldSpecs;
+    using api = BitFieldModels;
 
    public readonly struct BitFieldSpec<E,W> : ITextual<BitFieldSpec<E,W>>
         where E : unmanaged

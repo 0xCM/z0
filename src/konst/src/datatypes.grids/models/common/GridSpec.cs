@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Characterizes the memory layout of a 2-d grid

@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     unsafe partial struct Pointers
     {
@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="pSrc">The source pointer</param>
         [MethodImpl(Inline), Op]
         public static Ptr32 p32(uint* pSrc)
-            => new Ptr32(pSrc);            
+            => new Ptr32(pSrc);
 
         /// <summary>
         /// Creates a representation over a specified pointer
@@ -25,6 +25,6 @@ namespace Z0
         /// <param name="pSrc">The source pointer</param>
         [MethodImpl(Inline), Op]
         public static Ptr32 p32(void* pSrc)
-            => new Ptr32((uint*)pSrc);                        
+            => new Ptr32((uint*)pSrc);
     }
 }

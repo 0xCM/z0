@@ -6,11 +6,11 @@ namespace Z0
 {
     using System;
 
-    using static Part;
-
     [AttributeUsage(AttributeTargets.Field)]
     public class BitMaskAttribute : BinaryLiteralAttribute
     {
+        public BitMaskKind Kind {get;}
+
         public BitMaskAttribute(string src)
             : base(src)
         {
@@ -27,9 +27,6 @@ namespace Z0
             : base(src,pattern,arg0,arg1)
         {
 
-
         }
-
-        public BitMaskKind Kind {get;}
     }
 }

@@ -7,10 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     partial struct z
-    {                    
+    {
         /// <summary>
         /// Presents a generic reference as an sbyte pointer
         /// </summary>

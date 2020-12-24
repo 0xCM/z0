@@ -7,7 +7,7 @@ namespace Z0
     [Record(TableId)]
     public struct ApiRuntimeSummary : IRecord<ApiRuntimeSummary>
     {
-        public const string TableId = "api-summary";
+        public const string TableId = "api.summary";
 
         public MemoryAddress Address;
 

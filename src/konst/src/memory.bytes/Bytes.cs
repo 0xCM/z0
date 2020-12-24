@@ -10,7 +10,8 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Bmi1;
     using static System.Runtime.Intrinsics.X86.Bmi1.X64;
 
-    using static Konst;
+    using static Part;
+    using static memory;
     using static Buffers;
 
     [ApiHost]
@@ -266,6 +267,45 @@ namespace Z0
         public static bool testc(in byte A)
             => z.testc(read8(A));
 
+        [MethodImpl(Inline)]
+        public static ReadOnlySpan<T> cells<T>(N2 n)
+            where T : unmanaged
+                => z.recover<byte,T>(slice(Bytes.B256x8u,0,2));
+
+        [MethodImpl(Inline)]
+        public static ReadOnlySpan<T> cells<T>(N4 n)
+            where T : unmanaged
+                => z.recover<byte,T>(slice(Bytes.B256x8u,0,4));
+
+        [MethodImpl(Inline)]
+        public static ReadOnlySpan<T> cells<T>(N8 n)
+            where T : unmanaged
+                => z.recover<byte,T>(slice(Bytes.B256x8u,0,8));
+
+        [MethodImpl(Inline)]
+        public static ReadOnlySpan<T> cells<T>(N16 n)
+            where T : unmanaged
+                => z.recover<byte,T>(slice(Bytes.B256x8u,0,16));
+
+        [MethodImpl(Inline)]
+        public static ReadOnlySpan<T> cells<T>(N32 n)
+            where T : unmanaged
+                => z.recover<byte,T>(slice(Bytes.B256x8u,0,32));
+
+        [MethodImpl(Inline)]
+        public static ReadOnlySpan<T> cells<T>(N64 n)
+            where T : unmanaged
+                => z.recover<byte,T>(slice(Bytes.B256x8u,0,64));
+
+        [MethodImpl(Inline)]
+        public static ReadOnlySpan<T> cells<T>(N128 n)
+            where T : unmanaged
+                => z.recover<byte,T>(slice(Bytes.B256x8u,0,128));
+
+        [MethodImpl(Inline)]
+        public static ReadOnlySpan<T> cells<T>(N256 n)
+            where T : unmanaged
+                => z.recover<byte,T>(Bytes.B256x8u);
         internal static ReadOnlySpan<byte> B256x8u => new byte[Pow2.T08]{
             0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
             0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x1f,

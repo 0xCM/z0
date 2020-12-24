@@ -11,6 +11,7 @@ namespace Z0
     using static z;
 
     public readonly struct OneOrMany<T>
+        where T : IEquatable<T>
     {
         public Choices<T> Value {get;}
 

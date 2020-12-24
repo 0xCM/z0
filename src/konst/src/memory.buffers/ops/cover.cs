@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     partial struct Buffers
@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline), Op]
         public static unsafe Span<byte> cover(BufferToken src)
-            => z.cover(src.Address.Pointer<byte>(), src.BufferSize);
+            => memory.cover(src.Address.Pointer<byte>(), src.BufferSize);
 
         /// <summary>
         /// Covers a token-identified buffer with a span
@@ -25,6 +25,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static unsafe Span<T> cover<T>(BufferToken src)
             where T : unmanaged
-                => z.cover(src.Address.Pointer<byte>(), src.BufferSize).Cast<T>();
+                => memory.cover(src.Address.Pointer<byte>(), src.BufferSize).Cast<T>();
     }
 }

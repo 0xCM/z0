@@ -29,7 +29,7 @@ namespace Z0
             var dst = Buffers.text();
             var cells = src.Length;
             var wCell = bitwidth<T>();
-            var cfg = config ?? BitFormatter.configure();
+            var cfg = config ?? configure();
             for(var i=0; i<cells; i++)
                 dst.Append(_format<T>(skip(src,i), cfg));
             return dst.Emit();
@@ -97,7 +97,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static string format<T>(T src, in BitFormat config)
             where T : struct
-                => format(z.bytes(src).ReadOnly(), config);
+                => format(memory.bytes(src).ReadOnly(), config);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static string format<T>(T src)
@@ -123,18 +123,17 @@ namespace Z0
             return dst;
         }
 
-
-        [MethodImpl(Inline), Op]
+        [Op]
         public static string format(object src, TypeCode type)
         {
             if(type == TypeCode.Byte || type == TypeCode.SByte)
-                return BitFormatter.create<byte>().Format((byte)rebox(src, NumericKind.U8));
+                return create<byte>().Format((byte)NumericBox.rebox(src, NumericKind.U8));
             else if(type == TypeCode.UInt16 || type == TypeCode.Int16)
-                return BitFormatter.create<ushort>().Format((ushort)rebox(src, NumericKind.U16));
+                return create<ushort>().Format((ushort)NumericBox.rebox(src, NumericKind.U16));
             else if(type == TypeCode.UInt32  || type == TypeCode.Int32 || type == TypeCode.Single)
-                return BitFormatter.create<uint>().Format((uint)rebox(src, NumericKind.U32));
+                return create<uint>().Format((uint)NumericBox.rebox(src, NumericKind.U32));
             else if(type == TypeCode.UInt64 || type == TypeCode.Int64 || type == TypeCode.Double)
-                return BitFormatter.create<ulong>().Format((ulong)rebox(src, NumericKind.U64));
+                return create<ulong>().Format((ulong)NumericBox.rebox(src, NumericKind.U64));
             else
                 return EmptyString;
         }
@@ -171,11 +170,11 @@ namespace Z0
         [MethodImpl(Inline), Op]
         static void _format(byte src, uint maxbits, Span<char> dst, ref int k)
         {
-            for(var j=0; j<8; j++, k++)
+            for(byte j=0; j<8; j++, k++)
             {
                 if(k>=maxbits)
                     break;
-                seek(dst, (uint)k) = @char(@bool(testbit(src, j)));
+                seek(dst, (uint)k) = @char(@bool(BitStates.test(src, j)));
             }
         }
 

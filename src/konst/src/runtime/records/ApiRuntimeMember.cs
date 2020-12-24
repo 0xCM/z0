@@ -4,9 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    [Record]
+    [Record(TableId)]
     public struct ApiRuntimeMember : IRecord<ApiRuntimeMember>
     {
+        public const string TableId ="api.member";
+
         public MemoryAddress Address;
 
         public ApiMetadataUri Uri;

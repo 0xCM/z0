@@ -68,11 +68,6 @@ namespace Z0
             get => Host != 0 && Contract != 0;
         }
 
-        public string Format(ServiceKey src)
-            => IsKinded
-            ? string.Format("{0}->{1}[{2}:{3}]")
-            : string.Format("{0}->{1}", Host, Contract);
-
         public ParseResult<ServiceKey> Parse(string src)
         {
             var fail = unparsed<ServiceKey>(src);

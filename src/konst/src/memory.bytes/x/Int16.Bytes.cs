@@ -13,6 +13,6 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static unsafe Span<byte> Bytes(this short src)
-            => ByteRead.ReadAll(src);
+            => ByteRead.read2(src);
     }
 }

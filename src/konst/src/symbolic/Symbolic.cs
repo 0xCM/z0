@@ -4,10 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Defines an api surface for <see cref='ISymbol'/> manipulation

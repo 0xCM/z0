@@ -11,13 +11,13 @@ namespace Z0
 
     public readonly struct TypeArg : ITextual
     {
-        public readonly string Name;
+        public string Name {get;}
 
-        public readonly Type Target;
+        public Type Target {get;}
 
-        public readonly TypeParamInfo Parameter;
+        public TypeParamInfo Parameter {get;}
 
-        public readonly Type Argument;
+        public Type Argument {get;}
 
         [MethodImpl(Inline)]
         public TypeArg(Type target, TypeParamInfo parameter, Type arg)

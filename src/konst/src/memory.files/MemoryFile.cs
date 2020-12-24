@@ -9,7 +9,7 @@ namespace Z0
     using System.IO;
     using System.IO.MemoryMappedFiles;
 
-    using static Konst;
+    using static Part;
 
     using api = MemoryFiles;
 

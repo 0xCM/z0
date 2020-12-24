@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     public ref struct CellCycle<T>
@@ -30,7 +30,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public ref readonly T Next()
         {
-            ref readonly var x = ref skip(Cells,Current++);
+            ref readonly var x = ref skip(Cells, Current++);
             if(Current == Last)
                 Current = 0;
             return ref x;

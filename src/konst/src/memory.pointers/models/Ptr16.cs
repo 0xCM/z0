@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     using api = Pointers;
 
@@ -22,8 +22,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public Ptr16(ushort* src)
             => P = src;
-
-
         public readonly MemoryAddress Address
         {
             [MethodImpl(Inline)]

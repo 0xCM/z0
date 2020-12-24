@@ -14,10 +14,10 @@ namespace Z0
     readonly struct BitConversionOps
     {
         public static Option<object> FromTarget(object incoming, Type dst)
-            => Option.Try(() => rebox((uint)(Bit32)incoming, dst.NumericKind()));
+            => Option.Try(() => NumericBox.rebox((uint)(Bit32)incoming, dst.NumericKind()));
 
         public static Option<object> ToTarget(object incoming)
-            => Option.Try(() => (Bit32)(byte)rebox(incoming, NumericKind.U8));
+            => Option.Try(() => (Bit32)(byte)NumericBox.rebox(incoming, NumericKind.U8));
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Bit32 to<T>(T src)

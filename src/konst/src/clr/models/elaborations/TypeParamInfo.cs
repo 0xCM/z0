@@ -14,7 +14,7 @@ namespace Z0
     /// </summary>
     public readonly struct TypeParamInfo : ITextual
     {
-        public readonly string Name;
+        public string Name {get;}
 
         public ushort Position {get;}
 

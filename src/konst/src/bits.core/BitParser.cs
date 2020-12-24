@@ -38,12 +38,11 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         [Op]
-        public static ReadOnlySpan<bit> parse(string src)
+        public static Span<bit> parse(string src)
         {
             var data = span(src);
             var count = data.Length;
             var dst = sys.span<bit>(count);
-
             var j=0u;
             for(uint i=0u; i<count; i++)
             {

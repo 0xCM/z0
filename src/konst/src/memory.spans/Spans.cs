@@ -50,7 +50,5 @@ namespace Z0
     public static partial class XSpan
     {
         const NumericKind Closure = UnsignedInts;
-
-
     }
 }

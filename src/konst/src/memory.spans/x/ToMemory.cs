@@ -20,7 +20,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [Op, Closures(Closure)]
         public static Memory<T> ToMemory<T>(this IEnumerable<T> src)
-            => src.ToArray();
+            => src.Array();
 
         /// <summary>
         ///  Constructs a memory segment from the content of the (hopefully finite) stream (allocating)

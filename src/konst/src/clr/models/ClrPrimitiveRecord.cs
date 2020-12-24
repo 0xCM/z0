@@ -30,5 +30,8 @@ namespace Z0
 
         public string Format()
             => Kind.ToString();
+
+        public override string ToString()
+            => Format();
     }
 }

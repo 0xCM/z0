@@ -4,11 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-    using System.Security;
-
-    using static Konst;
+    using static Part;
 
     [ApiHost(ApiNames.Pointers, true)]
     public unsafe readonly partial struct Pointers

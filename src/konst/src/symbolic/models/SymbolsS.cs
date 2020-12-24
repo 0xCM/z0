@@ -7,12 +7,12 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     public readonly struct Symbols<S> : IIndex<S>, ITextual
         where S : unmanaged, ISymbol
     {
-        readonly TableSpan<S> Data;
+        readonly Index<S> Data;
 
         public Symbols(S[] src)
             => Data = src;

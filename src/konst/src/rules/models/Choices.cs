@@ -13,14 +13,13 @@ namespace Z0
     /// Defines a sequence of potential choices
     /// </summary>
     public readonly struct Choices<T>
+        where T : IEquatable<T>
     {
         public Index<T> Terms {get;}
 
         [MethodImpl(Inline)]
         public Choices(T[] choices)
-        {
-            Terms = choices;
-        }
+            => Terms = choices;
 
         public uint Count
         {

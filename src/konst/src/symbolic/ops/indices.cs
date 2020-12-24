@@ -54,7 +54,6 @@ namespace Z0
             return dst.Slice(0,j);
         }
 
-
         [Op]
         public static Span<int> indices(ReadOnlySpan<byte> src, byte match)
         {

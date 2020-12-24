@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
+    using static memory;
 
     /// <summary>
     /// Represents a value as an ordered sequence of bits/bytes
@@ -23,7 +24,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public BitView(in T src)
         {
-            Bytes =  z.bytes(src);
+            Bytes =  bytes(src);
         }
 
         /// <summary>
@@ -59,7 +60,7 @@ namespace Z0
         public BitState this[ByteSize offset, byte pos]
         {
             [MethodImpl(Inline)]
-            get => z.testbit(Bytes[offset], pos);
+            get => BitStates.test(Bytes[offset], pos);
         }
 
         [MethodImpl(Inline)]

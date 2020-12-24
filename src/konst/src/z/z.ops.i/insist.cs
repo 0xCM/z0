@@ -42,29 +42,11 @@ namespace Z0
             return src;
         }
 
-        [MethodImpl(NotInline)]
-        public static int insist<A,B>(A[] a, B[] b)
-        {
-            if(a == null || b == null)
-                sys.@throw(AppErrors.NullArg());
-            var length = a.Length;
-            if(length != b.Length)
-                z.@throw(AppErrors.LengthMismatch(a.Length, b.Length));
-            return length;
-        }
-
-        [MethodImpl(Inline), Op, Closures(UInt8k)]
-        public static IEnumerable<T> insist<T>(IEnumerable<T> src)
-        {
-            require(src != null, AppErrors.NullArg);
-            return src;
-        }
-
         [MethodImpl(Inline), Op, Closures(UInt8k)]
         public static void insist<T>(T lhs, T rhs)
             where T : IEquatable<T>
         {
-            if(z.nullnot(lhs) && z.nullnot(rhs) && lhs.Equals(rhs))
+            if(nullnot(lhs) && nullnot(rhs) && lhs.Equals(rhs))
                 return;
 
             require(false, () => AppErrors.neq<T>(lhs,rhs));
@@ -110,27 +92,6 @@ namespace Z0
             return src;
         }
 
-        [MethodImpl(Inline), Op, Closures(UInt64k)]
-        public static T insist<T>(T src, Func<T,bool> f, bool locate, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-        {
-            require(f(src), () => AppErrors.NotTrue(src, caller, file, line));
-            return src;
-        }
-
-        [MethodImpl(Inline), Op, Closures(UInt64k)]
-        public static T[] insist<T>(T[] src, bool locate, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-        {
-            require(src != null, () => AppErrors.NullArg(caller, file, line));
-            return src;
-        }
-
-        [MethodImpl(Inline), Op, Closures(UInt64k)]
-        public static IEnumerable<T> insist<T>(IEnumerable<T> src, bool locate, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-        {
-            require(src != null, () => AppErrors.NullArg(caller, file, line));
-            return src;
-        }
-
         [MethodImpl(Inline)]
         public static T insist<T>(T src, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : class
@@ -157,7 +118,7 @@ namespace Z0
         public static T insist<T>(T lhs, T rhs, bool locate, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : IEquatable<T>
         {
-            if(z.nullnot(lhs) && z.nullnot(rhs) && lhs.Equals(rhs))
+            if(nullnot(lhs) && nullnot(rhs) && lhs.Equals(rhs))
                 return lhs;
             else
                 require(false, $"{lhs} != {rhs}", caller, file, line);

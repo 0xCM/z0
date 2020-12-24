@@ -6,16 +6,24 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
 
-    using static Part;
+    using static Konst;
 
     /// <summary>
-    /// Defines the coordinates of a cell in a 2-dimensionsl <typeparamref name='T'/> grid
+    /// Locates a cell within a grid
     /// </summary>
-    public readonly struct GridCell<T>
+     [StructLayout(LayoutKind.Sequential), Datatype]
+     public readonly struct GridCell : IDataTypeEquatable<GridCell>
      {
+        /// <summary>
+        /// The cell row
+        /// </summary>
         public uint Row {get;}
 
+        /// <summary>
+        /// The cell column
+        /// </summary>
         public uint Col {get;}
 
         [MethodImpl(Inline)]
@@ -25,12 +33,35 @@ namespace Z0
             Col = col;
         }
 
-        [MethodImpl(Inline)]
-        public static implicit operator GridCell<T>(in GridCell<T,uint> src)
-            => new GridCell<T>(src.Row, src.Col);
+        public uint Hashed
+        {
+            [MethodImpl(Inline)]
+            get => alg.hash.calc(Row,Col);
+        }
 
         [MethodImpl(Inline)]
-        public static implicit operator GridCell<T>(in GridCell<T,uint,uint> src)
-            => new GridCell<T>(src.Row, src.Col);
+        public bool Equals(GridCell src)
+            => Row == src.Row && Col == src.Col;
+
+        public override int GetHashCode()
+            => (int)Hashed;
+
+        public override bool Equals(object src)
+            => src is GridCell x && Equals(x);
+
+        public string Format()
+            => $"({Row},{Col})";
+
+
+        public override string ToString()
+            => Format();
+
+        [MethodImpl(Inline)]
+        public static implicit operator GridCell((uint row, uint col) src)
+            => new GridCell(src.row,src.col);
+
+        [MethodImpl(Inline)]
+        public static implicit operator (uint row, uint col)(GridCell src)
+            => (src.Row, src.Col);
     }
 }

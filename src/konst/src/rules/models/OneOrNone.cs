@@ -11,6 +11,7 @@ namespace Z0
     using static z;
 
     public readonly struct OneOrNone<T>
+        where T : IEquatable<T>
     {
         public Option<T> Value {get;}
 
@@ -39,5 +40,4 @@ namespace Z0
         public static implicit operator OneOrNone<T>(T src)
             => new OneOrNone<T>(src);
     }
-
 }

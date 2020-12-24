@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static  z;
+    using static Part;
+    using static z;
 
     partial class XSpan
     {
@@ -22,6 +22,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static void Swap<T>(this Span<T> src, uint i, uint j)
             where T : unmanaged
-                => swap(src,i,j);
+                => Swaps.swap(src,i,j);
     }
 }

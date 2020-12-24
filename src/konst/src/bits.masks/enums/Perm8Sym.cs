@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     public enum Perm8Sym : uint
     {
         /// <summary>
@@ -26,26 +24,26 @@ namespace Z0
         /// <summary>
         /// Identifies the fourth permutation symbol
         /// </summary>
-        D = 0b011, 
+        D = 0b011,
 
         /// <summary>
         /// Identifies the fifth permutation symbol
         /// </summary>
-        E = 0b100, 
+        E = 0b100,
 
         /// <summary>
         /// Identifies the sixth permutation symbol
         /// </summary>
-        F = 0b101, 
+        F = 0b101,
 
         /// <summary>
         /// Identifies the seventh permutation symbol
         /// </summary>
-        G = 0b110, 
+        G = 0b110,
 
         /// <summary>
         /// Identifies the eighth permutation symbol
         /// </summary>
-        H = 0b111, 
+        H = 0b111,
     }
 }

@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
 
-    using static Konst;
+    using static Part;
 
     public readonly struct ComparerProxy<T> : IComparer<T>
         where T : unmanaged

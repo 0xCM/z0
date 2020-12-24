@@ -17,6 +17,6 @@ namespace Z0
         /// <param name="kind">The numeric kind of 0 to be put into the box</param>
         [MethodImpl(Inline), Op]
         public static BoxedNumber ZBox(this NumericKind kind)
-            => BoxedNumber.Define(z.rebox(byte.MinValue, kind), kind);
+            => BoxedNumber.Define(NumericBox.rebox(byte.MinValue, kind), kind);
    }
 }

@@ -9,6 +9,7 @@ namespace Z0
     using System.Collections.Generic;
 
     using static Part;
+    using static memory;
 
     [ApiHost(ApiNames.BitStream, true)]
     public readonly struct BitStreams
@@ -31,9 +32,13 @@ namespace Z0
         public static IEnumerable<bit> create<T>(IEnumerator<T> src)
             where T : struct
         {
+            var buffer = alloc<bit>(size<T>());
             while(src.MoveNext())
-                foreach(var b in Bit.unpack(src.Current))
+            {
+                Bit.unpack(src.Current, buffer.Clear());
+                foreach(var b in buffer)
                     yield return b;
+            }
         }
     }
 }

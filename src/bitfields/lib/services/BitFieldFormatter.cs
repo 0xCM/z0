@@ -14,7 +14,7 @@ namespace Z0
         [Op, Closures(UnsignedInts)]
         public static string format<T>(ReadOnlySpan<BitFieldSegment<T>> src)
             where T : unmanaged
-                => BitFieldSpecs.format<BitFieldSegment<T>,T>(src);
+                => BitFieldModels.format<BitFieldSegment<T>,T>(src);
 
         [MethodImpl(Inline)]
         public static string format<F>(F entry)
