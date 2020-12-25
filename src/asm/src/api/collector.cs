@@ -3,14 +3,13 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
 
     using Z0.Asm;
 
-    using static Konst;    
-    using static z;
+    using static Part;
 
     partial struct asm
     {

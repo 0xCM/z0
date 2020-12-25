@@ -22,11 +22,11 @@ namespace Z0
         {
             var k = kind(src, (byte)index);
 
-            if(isMem(k))
+            if(AsmTest.isMem(k))
             {
-                var direct = isMemDirect(k);
-                var segBase = isSegBase(k);
-                var mem64 = isMem64(k);
+                var direct = AsmTest.isMemDirect(k);
+                var segBase = AsmTest.isSegBase(k);
+                var mem64 = AsmTest.isMem64(k);
                 var info = new MemInfo();
                 var sz = src.MemorySize;
                 var memdirect = direct ? memDirect(src) : MemDirect.Empty;

@@ -26,9 +26,8 @@ namespace Z0
             var dst = new AsmOperandInfo();
             dst.Index = index;
             dst.Kind = kind(fx, index);
-            dst.Branch = isBranch(dst.Kind) ? branch(@base, fx, branch(fx,index)) : default;
+            dst.Branch = AsmTest.isBranch(dst.Kind) ? branch(@base, fx, branch(fx,index)) : default;
             return dst;
         }
-
     }
 }

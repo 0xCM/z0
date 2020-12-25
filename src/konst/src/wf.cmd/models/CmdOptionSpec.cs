@@ -27,14 +27,14 @@ namespace Z0
         /// <summary>
         /// The option protocol
         /// </summary>
-        public CmdArgProtocol Protocol {get;}
+        public ArgProtocol Protocol {get;}
 
         [MethodImpl(Inline)]
         public CmdOptionSpec(string name)
         {
             Name = name;
             Purpose = EmptyString;
-            Protocol = new CmdArgProtocol(CmdArgPrefix.Default);
+            Protocol = new ArgProtocol(ArgPrefix.Default);
         }
 
         [MethodImpl(Inline)]
@@ -42,11 +42,11 @@ namespace Z0
         {
             Name = name;
             Purpose = purpose;
-            Protocol = new CmdArgProtocol(CmdArgPrefix.Default);
+            Protocol = new ArgProtocol(ArgPrefix.Default);
         }
 
         [MethodImpl(Inline)]
-        public CmdOptionSpec(string name, string purpose, CmdArgProtocol protocol)
+        public CmdOptionSpec(string name, string purpose, ArgProtocol protocol)
         {
             Name = name;
             Purpose = purpose;

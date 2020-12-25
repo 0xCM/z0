@@ -33,7 +33,7 @@ namespace Z0
         /// <summary>
         /// The option protocol
         /// </summary>
-        public CmdArgProtocol Protocol {get;}
+        public ArgProtocol Protocol {get;}
 
         [MethodImpl(Inline)]
         public CmdOptionSpec(K kind)
@@ -41,7 +41,7 @@ namespace Z0
             Name = kind.ToString();
             Kind = kind;
             Purpose = EmptyString;
-            Protocol = new CmdArgProtocol(CmdArgPrefix.Default);
+            Protocol = new ArgProtocol(ArgPrefix.Default);
         }
 
         [MethodImpl(Inline)]
@@ -50,11 +50,11 @@ namespace Z0
             Name = name;
             Kind = kind;
             Purpose = EmptyString;
-            Protocol = new CmdArgProtocol(CmdArgPrefix.Default);
+            Protocol = new ArgProtocol(ArgPrefix.Default);
         }
 
         [MethodImpl(Inline)]
-        public CmdOptionSpec(string name, K kind, string purpose, CmdArgProtocol protocol)
+        public CmdOptionSpec(string name, K kind, string purpose, ArgProtocol protocol)
         {
             Name = name;
             Kind = kind;

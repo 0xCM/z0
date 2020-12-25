@@ -12,7 +12,7 @@ namespace Z0
     partial struct Cmd
     {
         [MethodImpl(Inline), Factory]
-        public CmdArgProtocol protocol(CmdArgPrefix prefix, AsciCharCode qualifier = AsciCharCode.Space)
-            => new CmdArgProtocol(prefix, qualifier);
+        public ArgProtocol protocol(ArgPrefix prefix, AsciCharCode? qualifier = null)
+            => new ArgProtocol(prefix, qualifier ?? AsciCharCode.Space);
     }
 }

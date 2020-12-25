@@ -14,7 +14,6 @@ namespace Z0
     using SI = SegmentedIdentity;
     using FIX = CellWidth;
 
-    using static Konst;
 
     using Z0.Asm;
 

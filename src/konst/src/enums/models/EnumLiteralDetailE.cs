@@ -31,7 +31,7 @@ namespace Z0
         /// <summary>
         /// The kind of primitive specialized by the enum
         /// </summary>
-        public readonly EnumScalarKind PrimalKind {get;}
+        public readonly EnumLiteralKind PrimalKind {get;}
 
         /// <summary>
         /// The literal declaration order, unique within the declaring enum
@@ -71,7 +71,7 @@ namespace Z0
             => Variant.define(LiteralValue, DataType);
 
         [MethodImpl(Inline)]
-        public EnumLiteralDetail(FieldInfo field, EnumScalarKind kind, uint index, string identifier, E value, string description)
+        public EnumLiteralDetail(FieldInfo field, EnumLiteralKind kind, uint index, string identifier, E value, string description)
         {
             BackingField = field;
             PrimalKind = kind;

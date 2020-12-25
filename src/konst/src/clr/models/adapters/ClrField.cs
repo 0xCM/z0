@@ -28,7 +28,7 @@ namespace Z0
             get => Definition.MetadataToken;
         }
 
-        public MemberName Name
+        public ClrMemberName Name
         {
             [MethodImpl(Inline)]
             get => Definition;

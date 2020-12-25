@@ -22,18 +22,22 @@ namespace Z0
         /// <summary>
         /// The argument prefix, if any; typically either '-', '--', or '/'
         /// </summary>
-        string Prefix {get;}
+        ArgPrefix Prefix {get;}
 
         /// <summary>
         /// The argument name, if any
         /// </summary>
-        CmdName Name {get;}
+        string Name {get;}
 
         /// <summary>
-        /// The delimiter between an argument name/value pair, typically ' ' or ':'
+        /// The delimiter between an argument name/value pair, typically '=' or ':' if present
         /// </summary>
-        string Qualifier {get;}
+        ArgQualifier Qualifier {get;}
 
+        /// <summary>
+        /// Specifies the extant argument components
+        /// </summary>
+        ArgPartKind Classifier {get;}
         string ITextual.Format()
             => TextFormatter.setting(Name,Value);
     }

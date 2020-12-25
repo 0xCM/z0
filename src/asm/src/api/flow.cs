@@ -6,22 +6,13 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
 
     using Z0.Asm;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     partial struct asm
     {
-        [MethodImpl(Inline), Op]
-        public static DataFlow<Vector128<byte>,EncodedInstruction> flow(Vector128<byte> src, out EncodedInstruction dst)
-        {
-            dst = asm.encoded(src);
-            return new DataFlow<Vector128<byte>, EncodedInstruction>(src, dst);
-        }
-
         [MethodImpl(Inline), Op]
         public static AsmFlow flow(AsmFxList[] fxList, in AsmTriggerSet triggers, params AsmFxHandler[] handlers)
             => new AsmFlow(fxList, triggers, handlers);

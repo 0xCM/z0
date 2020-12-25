@@ -13,32 +13,32 @@ namespace Z0
     partial struct Cmd
     {
         /// <summary>
-        /// Creates a <see cref='CmdArgPrefix'/>
+        /// Creates a <see cref='ArgPrefix'/>
         /// </summary>
         /// <param name="c0">The delimiter</param>
         [MethodImpl(Inline), Factory]
-        public static CmdArgPrefix prefix(char c0)
-            => new CmdArgPrefix((AsciCharCode)c0);
+        public static ArgPrefix prefix(char c0)
+            => new ArgPrefix((AsciCharCode)c0);
 
         /// <summary>
-        /// Creates a <see cref='CmdArgPrefix'/>
+        /// Creates a <see cref='ArgPrefix'/>
         /// </summary>
         /// <param name="c0">The first part of the delimiter</param>
         /// <param name="c1">The second part of the delimiter</param>
         [MethodImpl(Inline), Factory]
-        public static CmdArgPrefix prefix(char c0, char c1)
-            => new CmdArgPrefix((AsciCharCode)c0, (AsciCharCode)c1);
+        public static ArgPrefix prefix(char c0, char c1)
+            => new ArgPrefix((AsciCharCode)c0, (AsciCharCode)c1);
 
-        [MethodImpl(Inline), Factory]
-        public static CmdArgPrefix prefix(string src)
+        [MethodImpl(Inline)]
+        public static ArgPrefix prefix(string src)
         {
-            var count = src.Length;
-            if(count == 0 || count > 2)
-                @throw(badarg(src));
-            if(count == 1)
-                return prefix(src[0]);
+            var count = text.length(src);
+            if(count == 0)
+                return ArgPrefix.Empty;
+            else if(count == 1)
+                return new ArgPrefix((AsciCharCode)src[0]);
             else
-                return prefix(src[0], src[1]);
+                return new ArgPrefix((AsciCharCode)src[0], (AsciCharCode)src[1]);
         }
     }
 }

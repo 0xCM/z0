@@ -20,5 +20,24 @@ namespace Z0
             else
                 return Ref<byte>.Empty;
         }
+
+        /// <summary>
+        /// Derives a signature from reflected method metadata
+        /// </summary>
+        /// <param name="src">The source method</param>
+        [Op]
+        public static MethodMetadata metadata(MethodInfo src)
+        {
+            var dst = new MethodMetadata();
+            dst.MethodId = src.MetadataToken;
+            dst.MethodName = src.DisplayName();
+            dst.DefiningAssembly = src.Module.Assembly.GetSimpleName();
+            dst.DefiningModule = src.Module.Name;
+            dst.DeclaringType = TypeSigInfo.from(src.DeclaringType);
+            dst.ReturnType = TypeSigInfo.from(src.ReturnType);
+            dst.ValueParams = src.GetParameters().Select(p => new MethodParameter(TypeSigInfo.from(p), p.RefKind(), p.Name, (ushort)p.Position));
+            dst.TypeParams = src.TypeParameters();
+            return dst;
+        }
     }
 }

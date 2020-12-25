@@ -47,7 +47,7 @@ namespace Z0.Dynamics
 
         Tuple<BinaryExpression, Junction> CurrentJunction;
 
-        SelectionModelBuilder(Expression X, params SelectionFacet[] facets)
+        internal SelectionModelBuilder(Expression X, params SelectionFacet[] facets)
         {
             this.facets = facets.ToList();
             var visitor = new LinqExpressionVisitor();
@@ -56,7 +56,6 @@ namespace Z0.Dynamics
             visitor.ConstantExpressionTraversed += Traversed;
             visitor.Visit(X);
         }
-
 
         static bool SpecifiesMemberPredicate(BinaryExpression X)
             => X.Left.IsOneOf<NewExpression, ConstantExpression, MemberExpression>()

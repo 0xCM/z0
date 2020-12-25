@@ -18,14 +18,6 @@ namespace Z0
 
         public virtual WfStepId Id {get;}
 
-        [MethodImpl(Inline)]
-        public static implicit operator WfStepId(WfHost<H> src)
-            => src.Id;
-
-        [MethodImpl(Inline)]
-        public static implicit operator WfHost(WfHost<H> src)
-            => new WfHost(src.Id, src.Type, src.Execute);
-
         public Type Type {get;}
 
         public StringRef Name
@@ -41,21 +33,31 @@ namespace Z0
             Id = Type;
         }
 
-        public virtual void Run(IWfShell shell)
+        public virtual void Run(IWfShell wf)
         {
             try
             {
-                Execute(shell);
+                Execute(wf.WithHost(this));
             }
             catch(Exception e)
             {
-                shell.Error(Id,e);
+                wf.Error(Id,e);
             }
         }
+
+        protected virtual void Init() { }
 
         protected abstract void Execute(IWfShell shell);
 
         public virtual string Format()
             => Id.Format();
+
+        [MethodImpl(Inline)]
+        public static implicit operator WfStepId(WfHost<H> src)
+            => src.Id;
+
+        [MethodImpl(Inline)]
+        public static implicit operator WfHost(WfHost<H> src)
+            => new WfHost(src.Id, src.Type, src.Execute);
     }
 }

@@ -14,7 +14,7 @@ namespace Z0
     [Free]
     public interface ICmdOptionSpec : INamed, ITextual
     {
-        CmdArgProtocol Protocol {get;}
+        ArgProtocol Protocol {get;}
 
         string Purpose => string.Empty;
     }

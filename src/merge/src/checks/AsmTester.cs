@@ -10,7 +10,7 @@ namespace Z0.Asm
     using static Konst;
     using static BufferSeqId;
 
-    public readonly struct AsmTester : TAsmTester
+    public readonly struct AsmTester : IAsmChecker
     {
         public IAsmContext Context {get;}
 

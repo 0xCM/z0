@@ -22,7 +22,7 @@ namespace Z0
 
         public string Description {get;}
 
-        public EnumScalarKind DataType {get;}
+        public EnumLiteralKind DataType {get;}
 
         public int EntryCount {get;}
 
@@ -49,7 +49,7 @@ namespace Z0
             => new EnumDatasetEntry<E,T>(Tokens[i], Id, Indices[i], Names[i], Literals[i], Scalars[i], Descriptions[i]);
 
         [MethodImpl(Inline)]
-        public EnumDataset(CliKey token, string description, EnumScalarKind type, CliKey[] tokens,
+        public EnumDataset(CliKey token, string description, EnumLiteralKind type, CliKey[] tokens,
             uint[] indices, string[] names, E[] literals, T[] scalars, string[] descriptions)
         {
             Id = token;

@@ -10,8 +10,35 @@ namespace Z0.Asm
 
     using System.Linq;
 
+    using static z;
+    using static Konst;
+
     public readonly struct AsmQueries
     {
+        public static AsmCallRow[] calls(ApiInstructions src)
+        {
+            var calls = asm.filter(src, Mnemonic.Call).View;
+            var count = calls.Length;
+            var buffer = alloc<AsmCallRow>(count);
+            ref var row = ref first(span(buffer));
+            for(var i=0u; i<count; i++)
+            {
+                ref readonly var call = ref skip(calls,i);
+                ref var dst = ref seek(row,i);
+                var bytes = span(call.EncodedData.Storage);
+                var offset = ByteRead.read(bytes.Slice(1));// + ((uint)bytes.Length - 1); //op code takes up one byte
+                var target = call.NextIp + offset;
+                dst.Source = call.IP;
+                dst.Target = target;
+                dst.InstructionSize = call.Size;
+                dst.TargetOffset = target - (call.IP + src.Length);
+                dst.Instruction = call.FormattedInstruction;
+                dst.Encoded = call.Encoded.Storage;
+            }
+            return buffer;
+        }
+
+
         /// <summary>
         /// Selects a (non-distinct) sequence of far addresses that are target by call instructions in the source function
         /// </summary>

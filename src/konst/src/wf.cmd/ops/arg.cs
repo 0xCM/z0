@@ -20,19 +20,23 @@ namespace Z0
         public static CmdArg arg(string name, string value)
             => new CmdArg(name, value);
 
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static CmdArg<T> arg<T>(ushort pos, ArgPrefix prefix, string name, ArgQualifier qualifier, T value)
+            => new CmdArg<T>(pos, prefix, name, qualifier, value);
+
         [Op]
         public static CmdArg arg(string name, string[] values)
             => new CmdArg(name, values.Concat(';'));
 
         /// <summary>
-        /// Defines a <see cref='CmdArg{T}'/>
+        /// Defines a <see cref='CmdArg{T}'/> predicated on a positional value
         /// </summary>
-        /// <param name="name">The option identifier</param>
-        /// <param name="value">The option value</param>
+        /// <param name="pos">The argument position</param>
+        /// <param name="value">The argument value</param>
         /// <typeparam name="T">The option value type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static CmdArg<T> arg<T>(string name, T value)
-            => new CmdArg<T>(name, value);
+        public static CmdArg<T> arg<T>(ushort pos, T value)
+            => new CmdArg<T>(pos, value);
 
         /// <summary>
         /// Defines a <see cref='CmdArg{K,T}'/>

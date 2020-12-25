@@ -50,7 +50,7 @@ namespace Z0
 
         [Op]
         public static ref CmdScriptPattern update(IWfDb db, ref CmdScriptPattern data,
-            string root = null, string name = null, string arg = null, CmdArgPrefix? prefix = null, string type = null)
+            string root = null, string name = null, string arg = null, ArgPrefix? prefix = null, string type = null)
         {
             data.CmdRootName = root == null ? data.CmdRootName : FS.folder(root);
             data.CmdArgName = arg == null ? data.CmdArgName : arg;

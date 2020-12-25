@@ -45,9 +45,6 @@ namespace Z0
         public void ProcessCalls()
             => EmitCallIndex.create(Source).Run(Wf);
 
-        public void RenderSemantic()
-            => AsmSemanticRender.create(Wf).Render(Source);
-
         public void ProcessJumps()
         {
             using var step = new AsmJmpProcessor(Wf, Source);

@@ -9,7 +9,6 @@ namespace Z0
 
     using static Part;
 
-
     /// <summary>
     /// Specifies data size in bytes
     /// </summary>

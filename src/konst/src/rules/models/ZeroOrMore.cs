@@ -10,6 +10,7 @@ namespace Z0
     using static Part;
 
     public readonly struct ZeroOrMore<T>
+        where T : IEquatable<T>
     {
         public Choices<T> Value {get;}
 

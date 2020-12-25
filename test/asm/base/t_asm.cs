@@ -22,11 +22,11 @@ namespace Z0.Asm
         public t_asm()
         {
             Context = new AsmContext(Apps.context());
-            AsmCheck = AsmTest.tester(Context);
+            AsmCheck = Z0.AsmChecks.tester(Context);
             UnitDataDir.Clear();
         }
 
-        protected readonly TAsmTester AsmCheck;
+        protected readonly IAsmChecker AsmCheck;
 
         protected StreamWriter AsmCaseWriter([Caller] string caller = null)
             => CaseWriter(FileExtensions.Asm,caller);

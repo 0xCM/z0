@@ -10,8 +10,7 @@ namespace Z0
 
     using Z0.Asm;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     partial struct asm
     {

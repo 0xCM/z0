@@ -46,10 +46,10 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public AsmProcessDriver(IWfCaptureState state, in ApiCodeBlockIndex encoded)
+        public AsmProcessDriver(IWfShell wf, IAsmContext asm, in ApiCodeBlockIndex encoded)
         {
-            Wf = state.Wf;
-            Asm = state.Asm;
+            Wf = wf;
+            Asm = asm;
             Encoded = encoded;
             Parser = AsmMnemonicParser.Create();
             Index = new Dictionary<Mnemonic, ArrayBuilder<AsmRow>>();
@@ -88,9 +88,9 @@ namespace Z0
             for(var i=0; i<count; i++)
             {
                 var key = keys[i];
-                sets[i] = asm.set(key, Index[key].Emit());
+                sets[i] = asm.rowset(key, Index[key].Emit());
             }
-            return asm.sets(sets);
+            return asm.rowsets(sets);
         }
 
         void Process(in CodeBlock code, in AsmFxList asm)

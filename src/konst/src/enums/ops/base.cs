@@ -7,11 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
-
     using NK = NumericKind;
-    using BK = EnumScalarKind;
+    using BK = EnumLiteralKind;
 
     partial class Enums
     {
@@ -19,16 +16,16 @@ namespace Z0
         /// Determines the integral type refined by a parametrically-identified enum type
         /// </summary>
         /// <typeparam name="E">The enum type</typeparam>
-        public static EnumScalarKind @base<E>()
+        public static EnumLiteralKind @base<E>()
             where E : unmanaged, Enum
-             => @base(typeof(E).GetEnumUnderlyingType().NumericKind()); 
+             => @base(typeof(E).GetEnumUnderlyingType().NumericKind());
 
         /// <summary>
         /// Determines the integral type refined by a value-identified enum type
         /// </summary>
         /// <param name="value">The enum value</typeparam>
         [Op]
-        public static EnumScalarKind @base(Enum value)
+        public static EnumLiteralKind @base(Enum value)
             => @base(value.GetType().GetEnumUnderlyingType().NumericKind());
 
         /// <summary>
@@ -36,11 +33,11 @@ namespace Z0
         /// </summary>
         /// <typeparam name="E">The enum type</typeparam>
         [Op]
-        public static EnumScalarKind @base(Type et)
+        public static EnumLiteralKind @base(Type et)
             => @base(et.NumericKind());
-        
+
         [Op]
-        public static EnumScalarKind @base(NumericKind src)
+        public static EnumLiteralKind @base(NumericKind src)
              => src switch{
                 NK.U8 => BK.U8,
                 NK.I8 => BK.I8,
@@ -49,8 +46,8 @@ namespace Z0
                 NK.U32 => BK.U32,
                 NK.I32 => BK.I32,
                 NK.I64 => BK.I64,
-                NK.U64 => BK.U64,                
-                _ => EnumScalarKind.None,
+                NK.U64 => BK.U64,
+                _ => EnumLiteralKind.None,
             };
     }
 }

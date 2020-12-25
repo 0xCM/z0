@@ -12,14 +12,14 @@ namespace Z0
     partial class Enums
     {
         [MethodImpl(Inline)]
-        public static EnumScalarKind kind(Type e)
+        public static EnumLiteralKind kind(Type e)
         {
             var tc = Type.GetTypeCode(e.GetEnumUnderlyingType());
-            return (EnumScalarKind)ClrPrimitives.kind(tc);
+            return (EnumLiteralKind)ClrPrimitives.kind(tc);
         }
 
         [MethodImpl(Inline)]
-        public static EnumScalarKind kind<E>(E e = default)
+        public static EnumLiteralKind kind<E>(E e = default)
             where E : unmanaged, Enum
                 => kind(typeof(E));
     }

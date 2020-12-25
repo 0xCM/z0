@@ -67,7 +67,7 @@ namespace Z0
         /// <summary>
         /// The numeric kind refined by the enum
         /// </summary>
-        public EnumScalarKind PrimalKind
+        public EnumLiteralKind PrimalKind
         {
             [MethodImpl(Inline)]
             get => Enums.@base<E>();

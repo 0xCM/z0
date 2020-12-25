@@ -7,8 +7,6 @@ namespace Z0.Asm
     using System;
     using System.Reflection;
 
-    using static Konst;
-
     /// <summary>
     /// Exposes capture services without the hassle of passing a ref struct about hither thither and yon
     /// </summary>

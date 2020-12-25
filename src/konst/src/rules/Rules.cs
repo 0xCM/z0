@@ -77,14 +77,16 @@ namespace Z0
         /// <typeparam name="T">The scalar type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static RangeSpec<T> range<T>(T min, T max, T? step = null)
-            where T : unmanaged
+            where T : unmanaged, IEquatable<T>
                 => new RangeSpec<T>(min,max,step ?? z.one<T>());
 
         [MethodImpl(Inline)]
         public static Replacement<T> replace<T>(T src, T dst)
+            where T : IEquatable<T>
             => new Replacement<T>(src,dst);
 
         public static Replacements<T> replace<T>(T[] src, T dst)
+            where T : IEquatable<T>
         {
             var count = src.Length;
             var buffer = sys.alloc<Replacement<T>>(count);
@@ -97,7 +99,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static unsafe void apply<T>(Replacement<T> rule, ReadOnlySpan<T> src, Span<T> dst, int offset = 0)
-            where T : unmanaged
+            where T : unmanaged, IEquatable<T>
         {
             var count = src.Length;
             var input = span(src);
@@ -107,6 +109,7 @@ namespace Z0
         }
 
         public static Replacements<T> replace<T>(Bijection<T> spec)
+            where T : IEquatable<T>
         {
             var src = spec.Source;
             var dst = spec.Target;
@@ -122,6 +125,7 @@ namespace Z0
         }
 
         public static Replacements<T> replace<T>(T[] src, T[] dst)
-            => replace(Relations.bijection<T>(src,dst));
+            where T : IEquatable<T>
+                => replace(Relations.bijection<T>(src,dst));
     }
 }

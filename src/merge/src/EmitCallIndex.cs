@@ -11,7 +11,6 @@ namespace Z0
 
     using static z;
 
-
     [WfHost]
     public sealed class EmitCallIndex : WfHost<EmitCallIndex>
     {
@@ -24,7 +23,7 @@ namespace Z0
                 processor.ProcessCalls();
             }
         }
-        
+
         ApiPartRoutines Routines;
 
         public static WfHost create(in ApiPartRoutines routines)
@@ -67,7 +66,7 @@ namespace Z0
             var dst = Wf.Db().Table(AsmCallRow.TableId, Source.Part);
             Wf.EmittingTable<AsmCallRow>(dst);
             using var writer = dst.Writer();
-            var records = @readonly(asm.calls(Source.Instructions));
+            var records = @readonly(AsmQueries.calls(Source.Instructions));
             var count = records.Length;
             writer.WriteLine(AsmCallRow.header());
             for(var i=0; i<count; i++)

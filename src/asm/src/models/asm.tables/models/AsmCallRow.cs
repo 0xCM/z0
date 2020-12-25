@@ -14,7 +14,7 @@ namespace Z0.Asm
     {
         public const string TableId = "asm.calls";
 
-        public const string RenderPattern = "| {0,-16} | {1,-16} | {2,-16} | {3,-16} | {4}";
+        public const string RenderPattern = "| {0,-16} | {1,-16} | {2,-16} | {3,-16} | {4, -22} | {5}";
 
         public MemoryAddress Source;
 
@@ -24,14 +24,16 @@ namespace Z0.Asm
 
         public MemoryAddress TargetOffset;
 
+        public string Instruction;
+
         public BinaryCode Encoded;
 
         [MethodImpl(Inline)]
         public static string format(in AsmCallRow src)
-            => string.Format(AsmCallRow.RenderPattern, src.Source, src.Target, src.InstructionSize, src.TargetOffset, src.Encoded);
+            => string.Format(AsmCallRow.RenderPattern, src.Source, src.Target, src.InstructionSize, src.TargetOffset, src.Instruction, src.Encoded);
 
         [MethodImpl(Inline)]
         public static string header()
-            => string.Format(RenderPattern, nameof(Source), nameof(Target), nameof(InstructionSize), nameof(TargetOffset), nameof(Encoded));
+            => string.Format(RenderPattern, nameof(Source), nameof(Target), nameof(InstructionSize), nameof(TargetOffset), nameof(Instruction), nameof(Encoded));
     }
 }

@@ -48,8 +48,8 @@ namespace Z0
         public static CaptureWorkflowMain create(WfCaptureState state)
             => new CaptureWorkflowMain(state, new CaptureWorkflow());
 
-        public static CaptureWorkflowMain create(IAsmWf asm)
-            => new CaptureWorkflowMain(asm, new CaptureWorkflow());
+        public static CaptureWorkflowMain create(IWfShell wf, IAsmContext asm)
+            => new CaptureWorkflowMain(wf, asm, new CaptureWorkflow());
 
         protected override void Execute(IWfShell shell)
         {
@@ -65,13 +65,13 @@ namespace Z0
 
         public WfCaptureState State {get;}
 
-        readonly IAsmWf Asm;
+        readonly IAsmContext Asm;
 
-        public CaptureWorkflowMain(IAsmWf asm, WfHost host)
+        public CaptureWorkflowMain(IWfShell wf, IAsmContext asm, WfHost host)
         {
             Host = host;
             Asm = asm;
-            Wf = asm.Wf;
+            Wf = wf;
             State = default;
             Wf.Created();
         }
@@ -81,7 +81,7 @@ namespace Z0
             Host = host;
             State = state;
             Wf = state.Wf.WithHost(host);
-            Asm = AsmWorkflows.create(Wf);
+            Asm = state.Asm;
             Wf.Created();
         }
 

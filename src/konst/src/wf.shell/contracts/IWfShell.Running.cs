@@ -23,7 +23,6 @@ namespace Z0
             return Flow();
         }
 
-
         WfExecFlow Running<T>(T content)
         {
             SignalRunning(content);

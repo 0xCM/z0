@@ -15,7 +15,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The scalar type</typeparam>
     public readonly struct RangeSpec<T>
-        where T : unmanaged
+        where T : unmanaged, IEquatable<T>
     {
         /// <summary>
         /// The min value in the range

@@ -15,20 +15,6 @@ namespace Z0
     [ApiHost]
     public readonly partial struct asm
     {
-        static MachineCallInfo[] MachineCalls(ApiInstructions src)
-            => filter(src, Mnemonic.Call).Select(x => new MachineCallInfo(x)).Where(x => !x.Target.IsEmpty).OrderBy(x => x.TargetOffset).Array();
-
-        public static AsmCallRow[] calls(ApiInstructions src)
-        {
-            var calls = @readonly(MachineCalls(src));
-            var count = calls.Length;
-            var buffer = alloc<AsmCallRow>(count);
-            ref var dst = ref first(span(buffer));
-            for(var i=0u; i<count; i++)
-                skip(calls,i).Fill(ref seek(dst,i));
-            return buffer;
-        }
-
         [Op]
         public static ApiInstructionLookup deduplicate(ApiInstruction[] src, out ApiInstructionDuplication stats)
         {

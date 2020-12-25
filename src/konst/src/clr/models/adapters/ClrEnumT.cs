@@ -41,7 +41,7 @@ namespace Z0
             get => _Literals;
         }
 
-        public TypeName Name
+        public ClrTypeName Name
         {
             [MethodImpl(Inline)]
             get => Definition;

@@ -1,4 +1,7 @@
 @echo off
 
-set BuildCmd=shell\.cmd\build.bat
+set ProjectId=dynamic
+set BuildCmd=%ZDev%\.cmd\build-shell.cmd
+echo BuildCmd:%BuildCmd%
 call %BuildCmd%
+

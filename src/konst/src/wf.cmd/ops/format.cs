@@ -119,7 +119,7 @@ namespace Z0
             => src.IsAnonymous || src.IsEmpty ? EmptyString : src.Name;
 
         [Formatter]
-        public static string format(CmdArgPrefix src)
+        public static string format(ArgPrefix src)
         {
             var len = src.Length;
             if(len == 0)
@@ -166,7 +166,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static string format<K,T>(in CmdArg<K,T> src)
             where K : unmanaged
-                => TextFormatter.setting(src.Key, src.Value);
+                => TextFormatter.setting(src.Kind, src.Value);
         [Op]
         public static string format(CmdTypeInfo src)
         {

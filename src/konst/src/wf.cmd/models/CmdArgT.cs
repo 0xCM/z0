@@ -21,40 +21,45 @@ namespace Z0
         /// </summary>
         public T Value {get;}
 
-        public string Prefix {get;}
+        public ArgPrefix Prefix {get;}
 
-        public CmdName Name {get;}
+        public string Name {get;}
 
-        public string Qualifier {get;}
+        public ArgQualifier Qualifier {get;}
 
-        [MethodImpl(Inline)]
-        public CmdArg(ushort index, string prefix, string name, T value)
-        {
-            Position = index;
-            Name = name;
-            Value = value;
-            Prefix = prefix;
-            Qualifier = EmptyString;
-        }
+        public ArgPartKind Classifier {get;}
 
         [MethodImpl(Inline)]
-        public CmdArg(string key, T value)
+        public CmdArg(ushort pos, T value)
         {
-            Position = 0;
-            Name = key;
+            Position = pos;
+            Name = EmptyString;
             Value = value;
             Prefix = EmptyString;
-            Qualifier = EmptyString;
+            Qualifier = ArgQualifier.Empty;
+            Classifier = ArgPartKind.Position | ArgPartKind.Value;
         }
 
         [MethodImpl(Inline)]
-        public CmdArg(ushort index, string prefix, string name, string specifier, T value)
+        public CmdArg(string name, T value)
         {
-            Position = index;
+            Position = 0;
+            Name = name;
+            Value = value;
+            Prefix = EmptyString;
+            Qualifier = ArgQualifier.Empty;
+            Classifier = ArgPartKind.Name | ArgPartKind.Value;
+        }
+
+        [MethodImpl(Inline)]
+        public CmdArg(ushort pos, ArgPrefix prefix, string name, ArgQualifier qualifier, T value)
+        {
+            Position = pos;
             Name = name;
             Value = value;
             Prefix = prefix;
-            Qualifier = specifier;
+            Qualifier = qualifier;
+            Classifier = ArgPartKind.Position |  ArgPartKind.Prefix | ArgPartKind.Name | ArgPartKind.Qualifier | ArgPartKind.Value;
         }
 
         [MethodImpl(Inline)]

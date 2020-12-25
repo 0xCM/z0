@@ -14,23 +14,37 @@ namespace Z0
 
     public delegate ApiHostRoutines HostBlockDecoder(in ApiHostCodeBlocks blocks);
 
-
     public readonly struct CaptureProcessors
     {
-        public static void Run(IWfShell wf, in WfCaptureState state)
+        public static void Run(IWfShell wf, IAsmContext asm)
         {
             var svc = ApiIndexService.init(wf);
             var index = svc.CreateIndex();
-            run(wf, state, index);
-            process(wf, decode(wf, state.RoutineDecoder, index));
+            run(wf, asm, index);
+            process(wf, decode(wf, asm, index));
             ResBytesEmitter.create().WithIndex(index).Run(wf);
         }
 
-        public static void run(IWfShell wf, IWfCaptureState state, in ApiCodeBlockIndex encoded)
+        public static void process(IWfShell wf, ReadOnlySpan<ApiPartRoutines> src)
         {
             try
             {
-                var processor = new AsmProcessDriver(state, encoded);
+                EmitCallIndex.exec(wf,src);
+                AsmJmpProcessor.exec(wf,src);
+                AsmProcessors.exec(wf,src);
+                AsmSemanticRender.exec(wf,src);
+            }
+            catch(Exception e)
+            {
+                wf.Error(e);
+            }
+        }
+
+        public static void run(IWfShell wf, IAsmContext asm, in ApiCodeBlockIndex encoded)
+        {
+            try
+            {
+                var processor = new AsmProcessDriver(wf, asm, encoded);
                 var result = processor.Process();
                 var records = 0u;
 
@@ -51,10 +65,32 @@ namespace Z0
         }
 
         public static uint emit(IWfShell wf, in AsmRowSet<Mnemonic> src)
-            => AsmRowsets.emit(wf,src);
-
-        public static Span<ApiPartRoutines> decode(IWfShell wf, IAsmDecoder decoder, in ApiCodeBlockIndex src)
         {
+            var count = (uint)src.Count;
+            if(count != 0)
+            {
+                var dst = wf.Db().Table(AsmRow.TableId, src.Key.ToString());
+                var records = span(src.Sequenced);
+                var formatter = Formatters.dataset<AsmRowField>();
+                var header = Table.header53<AsmRowField>();
+
+                wf.EmittingTable<AsmRow>(dst);
+                using var writer = dst.Writer();
+                writer.WriteLine(header);
+                for(var i=0; i<count; i++)
+                {
+                    ref readonly var record = ref skip(records,i);
+                    var line = AsmRow.format(record, formatter).Render();
+                    writer.WriteLine(line);
+                }
+                wf.EmittedTable<AsmRow>(count, dst);
+            }
+            return count;
+        }
+
+        public static Span<ApiPartRoutines> decode(IWfShell wf, IAsmContext asm, in ApiCodeBlockIndex src)
+        {
+            var decoder = asm.RoutineDecoder;
             var parts = src.Parts;
             var partCount = parts.Length;
             var dst = alloc<ApiPartRoutines>(partCount);
@@ -107,21 +143,6 @@ namespace Z0
 
             wf.Status(text.format(WfProgress.DecodedMachine, src.EntryCount, src.Parts.Length));
             return dst;
-        }
-
-        public static void process(IWfShell wf, ReadOnlySpan<ApiPartRoutines> src)
-        {
-            try
-            {
-                EmitCallIndex.exec(wf,src);
-                AsmJmpProcessor.exec(wf,src);
-                AsmProcessors.exec(wf,src);
-                AsmSemanticRender.exec(wf,src);
-            }
-            catch(Exception e)
-            {
-                wf.Error(e);
-            }
         }
     }
 }

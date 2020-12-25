@@ -21,7 +21,7 @@ namespace Z0
         /// <summary>
         /// The key's primal type
         /// </summary>
-        readonly EnumScalarKind keyKind;
+        readonly EnumLiteralKind keyKind;
 
         /// <summary>
         /// The indexed data
@@ -105,7 +105,7 @@ namespace Z0
             get => keyNames;
         }
 
-        public EnumScalarKind KeyKind
+        public EnumLiteralKind KeyKind
         {
             [MethodImpl(Inline)]
             get => keyKind;

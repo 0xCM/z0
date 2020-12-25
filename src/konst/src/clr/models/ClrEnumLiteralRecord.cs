@@ -39,7 +39,7 @@ namespace Z0
         /// <summary>
         /// The kind of primitive specialized by the enum
         /// </summary>
-        public EnumScalarKind DataType;
+        public EnumLiteralKind DataType;
 
         /// <summary>
         /// The literal declaration order within the defining enum

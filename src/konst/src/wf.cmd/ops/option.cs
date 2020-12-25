@@ -35,7 +35,7 @@ namespace Z0
         /// <param name="purpose">The option's significance</param>
         /// <param name="purpose">The invocation protocol</param>
         [MethodImpl(Inline), Factory]
-        public static CmdOptionSpec option(string name, string purpose, CmdArgPrefix prefix)
+        public static CmdOptionSpec option(string name, string purpose, ArgPrefix prefix)
             => new CmdOptionSpec(name, purpose, prefix);
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace Z0
         /// <param name="purpose">The option's significance</param>
         /// <param name="purpose">The invocation protocol</param>
         [MethodImpl(Inline), Factory]
-        public static CmdOptionSpec option(string name, string purpose, CmdArgProtocol protocol)
+        public static CmdOptionSpec option(string name, string purpose, ArgProtocol protocol)
             => new CmdOptionSpec(name, purpose, protocol);
     }
 }

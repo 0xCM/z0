@@ -84,7 +84,7 @@ namespace Z0
         public static ref CmdArg untype<K,T>(in CmdArg<K,T> src, ref CmdArg dst)
             where K : unmanaged
         {
-            dst = new CmdArg(src.Key.ToString(), src.Value.ToString());
+            dst = new CmdArg(src.Kind.ToString(), src.Value.ToString());
             return ref dst;
         }
     }

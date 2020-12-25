@@ -117,7 +117,7 @@ namespace Z0
                 => api.e64u(src);
 
         [MethodImpl(Inline)]
-        public static EnumScalarKind EnumScalarKind(this Type src)
+        public static EnumLiteralKind EnumScalarKind(this Type src)
             => api.kind(src);
     }
 }

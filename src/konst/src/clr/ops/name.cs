@@ -13,23 +13,23 @@ namespace Z0
     partial struct ClrQuery
     {
         [MethodImpl(Inline), Op]
-        public static MemberName name(FieldInfo src)
-            => new MemberName(src.Name);
+        public static ClrMemberName name(FieldInfo src)
+            => new ClrMemberName(src.Name);
 
         [MethodImpl(Inline), Op]
-        public static MemberName name(PropertyInfo src)
-            => new MemberName(src.Name);
+        public static ClrMemberName name(PropertyInfo src)
+            => new ClrMemberName(src.Name);
 
         [MethodImpl(Inline), Op]
-        public static MemberName name(MethodInfo src)
-            => new MemberName(src.Name);
+        public static ClrMemberName name(MethodInfo src)
+            => new ClrMemberName(src.Name);
 
         [MethodImpl(Inline), Op]
-        public static MemberName name(EventInfo src)
-            => new MemberName(src.Name);
+        public static ClrMemberName name(EventInfo src)
+            => new ClrMemberName(src.Name);
 
         [MethodImpl(Inline), Op]
-        public static TypeName name(Type src)
-            => new TypeName(src.AssemblyQualifiedName);
+        public static ClrTypeName name(Type src)
+            => new ClrTypeName(src.AssemblyQualifiedName);
     }
 }

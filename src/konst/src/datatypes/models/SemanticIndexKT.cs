@@ -24,7 +24,7 @@ namespace Z0
 
         readonly string[] keyNames;
 
-        readonly EnumScalarKind keyKind;
+        readonly EnumLiteralKind keyKind;
 
         [MethodImpl(Inline)]
         public SemanticIndex(T[] data)
@@ -92,7 +92,7 @@ namespace Z0
             get => keyNames;
         }
 
-        public EnumScalarKind KeyKind
+        public EnumLiteralKind KeyKind
         {
             [MethodImpl(Inline)]
             get => keyKind;

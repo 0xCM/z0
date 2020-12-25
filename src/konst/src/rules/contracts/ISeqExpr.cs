@@ -5,13 +5,14 @@
 namespace Z0
 {
     using System.Collections.Generic;
+    using System;
 
     /// <summary>
     /// Characterizes a finite sequence of terms
     /// </summary>
     /// <typeparam name="T">The term type</typeparam>
     public interface ISeqExpr<T> : IExpr
-        where T : unmanaged
+        where T : IEquatable<T>
     {
         /// <summary>
         /// The terms in the sequence

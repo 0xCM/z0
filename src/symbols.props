@@ -37,6 +37,8 @@
 
     <Domain>$(Src)domain/z0.domain.csproj</Domain>
     <Dynamic>$(Src)dynamic/lib/z0.dynamic.lib.csproj</Dynamic>
+    <Gen>$(Src)gen/lib/z0.gen.lib.csproj</Gen>
+
     <DVec>$(Src)dvec/z0.dvec.csproj</DVec>
 
     <Evaluate>$(Src)evaluate/z0.evaluate.csproj</Evaluate>

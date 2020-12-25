@@ -20,7 +20,7 @@ namespace Z0
 
         public string CmdArgName;
 
-        public CmdArgPrefix ArgPrefix;
+        public ArgPrefix ArgPrefix;
 
         public FS.FileExt ScriptType;
 

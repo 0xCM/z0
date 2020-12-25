@@ -27,36 +27,43 @@ namespace Z0
         /// <summary>
         /// The argument prefix, if any; typically either '-', '--', or '/'
         /// </summary>
-        public string Prefix {get;}
+        public ArgPrefix Prefix {get;}
 
         /// <summary>
         /// The argument name, if any
         /// </summary>
-        public CmdName Name {get;}
+        public string Name {get;}
 
         /// <summary>
         /// The delimiter between an argument name/value pair, typically ' ' or ':'
         /// </summary>
-        public string Qualifier {get;}
+        public ArgQualifier Qualifier {get;}
+
+        /// <summary>
+        /// The argument classifier
+        /// </summary>
+        public ArgPartKind Classifier {get;}
 
         [MethodImpl(Inline)]
-        public CmdArg(ushort pos, string prefix, string name, string value)
+        public CmdArg(ushort pos, ArgPrefix prefix, string name, string value)
         {
             Position = pos;
             Name = name;
             Value = value;
             Prefix = prefix;
-            Qualifier = EmptyString;
+            Qualifier = ArgQualifier.Empty;
+            Classifier = ArgPartKind.Position | ArgPartKind.Prefix | ArgPartKind.Name | ArgPartKind.Value;
         }
 
         [MethodImpl(Inline)]
-        public CmdArg(ushort pos, string prefix, string name, string qualifier, string value)
+        public CmdArg(ushort pos, ArgPrefix prefix, string name, ArgQualifier qualifier, string value)
         {
             Position = pos;
             Name = name;
             Value = value;
             Prefix = prefix;
             Qualifier = qualifier;
+            Classifier = ArgPartKind.Position | ArgPartKind.Prefix | ArgPartKind.Name | ArgPartKind.Qualifier | ArgPartKind.Value;
         }
 
         [MethodImpl(Inline)]
@@ -66,7 +73,8 @@ namespace Z0
             Name = name;
             Value = value;
             Prefix = EmptyString;
-            Qualifier = EmptyString;
+            Qualifier = ArgQualifier.Empty;
+            Classifier = ArgPartKind.Name | ArgPartKind.Value;
         }
 
         [MethodImpl(Inline)]
@@ -76,7 +84,8 @@ namespace Z0
             Name = name;
             Value = value;
             Prefix = EmptyString;
-            Qualifier = EmptyString;
+            Qualifier = ArgQualifier.Empty;
+            Classifier = ArgPartKind.Position | ArgPartKind.Name | ArgPartKind.Value;
         }
 
 
@@ -87,7 +96,8 @@ namespace Z0
             Name = EmptyString;
             Value = value;
             Prefix = EmptyString;
-            Qualifier = EmptyString;
+            Qualifier = ArgQualifier.Empty;
+            Classifier = ArgPartKind.Position | ArgPartKind.Value;
         }
 
         public bool IsEmpty

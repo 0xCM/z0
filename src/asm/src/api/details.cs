@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using Z0.Asm;
-    using static Konst;
 
     partial struct asm
     {

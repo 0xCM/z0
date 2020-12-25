@@ -48,7 +48,7 @@ namespace Z0
                 EmitEnumCatalog.create().Run(Wf);
                 EmitFieldLiterals.create().Run(Wf);
                 EmitBitMasks.create().Run(Wf);
-                CaptureProcessors.Run(Wf,State);
+                CaptureProcessors.Run(Wf, State.Asm);
             }
             catch(Exception e)
             {

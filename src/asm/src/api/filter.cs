@@ -9,8 +9,6 @@ namespace Z0
 
     using Z0.Asm;
 
-    using static Konst;
-    using static z;
 
     partial struct asm
     {
@@ -19,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The data sourde</param>
         /// <param name="mnemonic">The mnemonic of interest</param>
-        public static ApiInstruction[] filter(ApiInstructions src, Mnemonic mnemonic)
+        public static ApiInstructions filter(ApiInstructions src, Mnemonic mnemonic)
             => from a in src.All
                 let i = a.Instruction
                 where i.Mnemonic == mnemonic

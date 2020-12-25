@@ -34,7 +34,7 @@ namespace Z0
             {
                 ref readonly var f = ref skip(fields,i);
                 var nameAddress = z.address(f.Name);
-                seek(dst,i) = new EnumLiteralRow(part, type, address, (ushort)i, f.Name, nameAddress, (EnumScalarKind)ecode, Enums.unbox(ecode, f.GetRawConstantValue()));
+                seek(dst,i) = new EnumLiteralRow(part, type, address, (ushort)i, f.Name, nameAddress, (EnumLiteralKind)ecode, Enums.unbox(ecode, f.GetRawConstantValue()));
             }
         }
 

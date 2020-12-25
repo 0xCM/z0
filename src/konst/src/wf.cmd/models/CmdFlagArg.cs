@@ -17,7 +17,7 @@ namespace Z0
         /// <summary>
         /// The flag name
         /// </summary>
-        public Name Name {get;}
+        public Name FlagName {get;}
 
         /// <summary>
         /// Whether the flag is enabled
@@ -27,7 +27,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public CmdFlagArg(string name, bool enabled)
         {
-            Name = name;
+            FlagName = name;
             Value = enabled;
         }
 

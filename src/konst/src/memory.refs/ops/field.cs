@@ -16,7 +16,7 @@ namespace Z0
         [Op]
         public unsafe static FieldRef field(MemoryAddress @base, MemoryAddress offset, FieldInfo src)
         {
-            var data = Literals.value(src);
+            var data = sys.constant(src);
             var type = src.FieldType;
 
             var datatype = ClrPrimitives.kind(type);

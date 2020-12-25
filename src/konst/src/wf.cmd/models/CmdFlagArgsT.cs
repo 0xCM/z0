@@ -9,23 +9,23 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct CmdFlagArgs<T> : IIndex<CmdFlagArg<T>>
+    public readonly struct CmdFlagArgs<T> : IIndex<CmdFlagArg>
         where T : unmanaged
     {
-        readonly IndexedSeq<CmdFlagArg<T>> Data;
+        readonly IndexedSeq<CmdFlagArg> Data;
 
         [MethodImpl(Inline)]
-        public CmdFlagArgs(CmdFlagArg<T>[] src)
+        public CmdFlagArgs(CmdFlagArg[] src)
             => Data = src;
 
-        public CmdFlagArg<T>[] Storage
+        public CmdFlagArg[] Storage
         {
             [MethodImpl(Inline)]
             get => Data.Storage;
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator CmdFlagArgs<T>(CmdFlagArg<T>[] src)
+        public static implicit operator CmdFlagArgs<T>(CmdFlagArg[] src)
             => new CmdFlagArgs<T>(src);
     }
 }

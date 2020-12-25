@@ -15,7 +15,7 @@ namespace Z0
 
         Type KeyType {get;}
 
-        EnumScalarKind KeyKind {get;}
+        EnumLiteralKind KeyKind {get;}
 
         ReadOnlySpan<string> KeyNames {get;}
     }
@@ -27,7 +27,7 @@ namespace Z0
         Type ISemanticLookup.KeyType
             => typeof(K);
 
-        EnumScalarKind ISemanticLookup.KeyKind
+        EnumLiteralKind ISemanticLookup.KeyKind
             => Enums.kind<K>();
 
         EnumLiteralNames<K> KeyNameIndex

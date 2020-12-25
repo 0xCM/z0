@@ -9,17 +9,20 @@ namespace Z0
 
     using static Part;
 
+    /// <summary>
+    /// Defines a kinded argument
+    /// </summary>
     public struct CmdArg<K,T>
         where K : unmanaged
     {
-        public K Key {get;}
+        public K Kind {get;}
 
         public T Value {get;}
 
         [MethodImpl(Inline)]
-        public CmdArg(K key, T value)
+        public CmdArg(K kind, T value)
         {
-            Key = key;
+            Kind = kind;
             Value = value;
         }
 
@@ -40,10 +43,10 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator CmdArg(CmdArg<K,T> src)
-            => new CmdArg(src.Key.ToString(), src.Value?.ToString() ?? EmptyString);
+            => new CmdArg(src.Kind.ToString(), src.Value?.ToString() ?? EmptyString);
 
         [MethodImpl(Inline)]
         public static implicit operator CmdArg<T>(CmdArg<K,T> src)
-            => new CmdArg<T>(src.Key.ToString(), src.Value);
+            => new CmdArg<T>(src.Kind.ToString(), src.Value);
     }
 }
