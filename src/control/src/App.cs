@@ -12,7 +12,7 @@ namespace Z0
         {
             try
             {
-                CaptureRunner.run(args);
+                ApiCaptureRunner.run(args);
             }
             catch(Exception e)
             {

@@ -1,102 +1,83 @@
-//-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2020
-// License     :  MIT
-//-----------------------------------------------------------------------------
-namespace Z0
-{
-    using System;
-    using System.Runtime.CompilerServices;
-    using System.Reflection;
+// //-----------------------------------------------------------------------------
+// // Copyright   :  (c) Chris Moore, 2020
+// // License     :  MIT
+// //-----------------------------------------------------------------------------
+// namespace Z0
+// {
+//     using System;
+//     using System.Runtime.CompilerServices;
+//     using System.Reflection;
 
-    using Z0.Asm;
+//     using Z0.Asm;
 
-    [WfHost]
-    public sealed class ManageCapture : WfHost<ManageCapture>
-    {
-        IAsmContext Asm;
+//     public struct ManageCaptureStep : IManageCapture
+//     {
+//         readonly WfHost Host;
 
-        public static WfHost create(IAsmContext asm)
-        {
-            var host = create();
-            host.Asm = asm;
-            return host;
-        }
+//         readonly IWfShell Wf;
 
-        protected override void Execute(IWfShell wf)
-        {
-            using var step = new ManageCaptureStep(wf, this, Asm);
-            step.Run();
-        }
-    }
+//         readonly IAsmContext Asm;
 
-    public struct ManageCaptureStep : IManageCapture
-    {
-        readonly WfHost Host;
+//         public IWfCaptureBroker Broker {get;}
 
-        readonly IWfShell Wf;
+//         public IWfEventSink Sink {get;}
 
-        readonly IAsmContext Asm;
+//         readonly IAppContext App;
 
-        public IWfCaptureBroker Broker {get;}
+//         readonly PartId[] Parts;
 
-        public IWfEventSink Sink {get;}
+//         public ManageCaptureStep(IWfShell wf, WfHost host, IAsmContext asm)
+//         {
+//             Host = host;
+//             Wf = wf.WithHost(Host);
+//             App = asm.ContextRoot;
+//             Sink = Wf.WfSink;
+//             Parts = Wf.Api.PartIdentities;
+//             Broker = AsmWorkflows.broker(wf);
+//             Asm = asm;
+//             Wf.Created();
+//         }
 
-        readonly IAppContext App;
+//         public void Dispose()
+//         {
+//             Wf.Disposed();
+//         }
 
-        readonly PartId[] Parts;
+//         void RunPrimary()
+//         {
+//             using var flow = Wf.Running(nameof(PartCaptureService));
+//             using var step = PartCaptureService.create(Wf, Asm);
+//             step.Run();
+//         }
 
-        public ManageCaptureStep(IWfShell wf, WfHost host, IAsmContext asm)
-        {
-            Host = host;
-            Wf = wf.WithHost(Host);
-            App = asm.ContextRoot;
-            Sink = Wf.WfSink;
-            Parts = Wf.Api.PartIdentities;
-            Broker = AsmWorkflows.broker(wf);
-            Asm = asm;
-            Wf.Created();
-        }
+//         void RunImm()
+//         {
+//             using var flow = Wf.Running(nameof(EmitImmClosures));
+//             using var step = new EmitImmClosuresStep(Wf, new EmitImmClosures(), Asm, Asm.Formatter, Asm.RoutineDecoder, Wf.Db().CaptureRoot());
+//             step.ClearArchive(Parts);
+//             step.EmitRefined(Parts);
+//         }
 
-        public void Dispose()
-        {
-            Wf.Disposed();
-        }
+//         void RunEvaluate()
+//         {
+//             using var flow = Wf.Running(nameof(Evaluate));
+//             var evaluate = Evaluate.control(App, Wf.Paths.AppCaptureRoot, Pow2.T14);
+//             evaluate.Execute();
+//         }
 
-        void RunPrimary()
-        {
-            using var flow = Wf.Running(nameof(PartCaptureService));
-            using var step = PartCaptureService.create(Wf, Asm);
-            step.Run();
-        }
+//         void EmitReports()
+//         {
+//             using var flow = Wf.Running(MethodInfo.GetCurrentMethod().Name);
+//             EmitCodeBlockReport.create().Run(Wf);
+//         }
 
-        void RunImm()
-        {
-            using var flow = Wf.Running(nameof(EmitImmClosures));
-            using var step = new EmitImmClosuresStep(Wf, new EmitImmClosures(), Asm, Asm.Formatter, Asm.RoutineDecoder, Wf.Db().CaptureRoot());
-            step.ClearArchive(Parts);
-            step.EmitRefined(Parts);
-        }
-
-        void RunEvaluate()
-        {
-            using var flow = Wf.Running(nameof(Evaluate));
-            var evaluate = Evaluate.control(App, Wf.Paths.AppCaptureRoot, Pow2.T14);
-            evaluate.Execute();
-        }
-
-        void EmitReports()
-        {
-            using var flow = Wf.Running(MethodInfo.GetCurrentMethod().Name);
-            EmitCodeBlockReport.create().Run(Wf);
-        }
-
-        public void Run()
-        {
-            using var flow = Wf.Running();
-            RunPrimary();
-            RunImm();
-            RunEvaluate();
-            EmitReports();
-        }
-    }
-}
+//         public void Run()
+//         {
+//             using var flow = Wf.Running();
+//             RunPrimary();
+//             RunImm();
+//             RunEvaluate();
+//             EmitReports();
+//         }
+//     }
+// }

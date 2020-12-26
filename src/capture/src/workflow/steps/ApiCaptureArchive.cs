@@ -9,26 +9,18 @@ namespace Z0.Asm
 
     using static Konst;
 
-    [WfHost]
-    public sealed class ClearCaptureArchives : WfHost<ClearCaptureArchives>
+    readonly struct ApiCaptureArchive : IDisposable
     {
-        protected override void Execute(IWfShell wf)
-        {
-            using var step = new ClearCaptureArchivesStep(wf,this);
-            step.Run();
-        }
-    }
-
-    readonly ref struct ClearCaptureArchivesStep
-    {
+        public static ApiCaptureArchive create(IWfShell wf)
+            => new ApiCaptureArchive(wf);
         readonly IWfShell Wf;
 
         readonly WfHost Host;
 
         [MethodImpl(Inline)]
-        public ClearCaptureArchivesStep(IWfShell wf, WfHost host)
+        public ApiCaptureArchive(IWfShell wf)
         {
-            Host = host;
+            Host = WfShell.host(typeof(ApiCaptureArchive));
             Wf = wf.WithHost(Host);
             Wf.Created();
         }
@@ -39,6 +31,12 @@ namespace Z0.Asm
         }
 
         public void Run()
+        {
+            foreach(var part in Wf.Api.PartIdentities)
+                Clear(part);
+        }
+
+        public void Clear()
         {
             foreach(var part in Wf.Api.PartIdentities)
                 Clear(part);

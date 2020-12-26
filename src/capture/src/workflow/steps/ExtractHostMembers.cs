@@ -1,52 +1,52 @@
-//-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2020
-// License     :  MIT
-//-----------------------------------------------------------------------------
-namespace Z0
-{
-    using System;
-    using System.Runtime.CompilerServices;
+// //-----------------------------------------------------------------------------
+// // Copyright   :  (c) Chris Moore, 2020
+// // License     :  MIT
+// //-----------------------------------------------------------------------------
+// namespace Z0
+// {
+//     using System;
+//     using System.Runtime.CompilerServices;
 
-    using static Konst;
+//     using static Konst;
 
-    ref struct ExtractHostMembersStep
-    {
-        readonly IWfShell Wf;
+//     ref struct ExtractHostMembersStep
+//     {
+//         readonly IWfShell Wf;
 
-        readonly WfHost Host;
+//         readonly WfHost Host;
 
-        readonly IApiHost Api;
+//         readonly IApiHost Api;
 
-        public ApiMemberExtract[] Extracts;
+//         public ApiMemberExtract[] Extracts;
 
-        [MethodImpl(Inline)]
-        public ExtractHostMembersStep(IWfShell wf, WfHost host, IApiHost src)
-        {
-            Host = host;
-            Wf = wf.WithHost(Host);
-            Api = src;
-            Extracts = new ApiMemberExtract[0]{};
-            Wf.Created();
-        }
+//         [MethodImpl(Inline)]
+//         public ExtractHostMembersStep(IWfShell wf, WfHost host, IApiHost src)
+//         {
+//             Host = host;
+//             Wf = wf.WithHost(Host);
+//             Api = src;
+//             Extracts = new ApiMemberExtract[0]{};
+//             Wf.Created();
+//         }
 
-        public void Dispose()
-        {
-            Wf.Disposed();
-        }
+//         public void Dispose()
+//         {
+//             Wf.Disposed();
+//         }
 
-        public void Run()
-        {
-            using var flow = Wf.Running();
+//         public void Run()
+//         {
+//             using var flow = Wf.Running();
 
-            try
-            {
-                using var step = new ExtractMembers(Wf, new ExtractMembersHost());
-                Extracts = step.Extract(Api);
-            }
-            catch(Exception e)
-            {
-                Wf.Error(e);
-            }
-        }
-    }
-}
+//             try
+//             {
+//                 using var step = new ExtractMembers(Wf, new ExtractMembersHost());
+//                 Extracts = step.Extract(Api);
+//             }
+//             catch(Exception e)
+//             {
+//                 Wf.Error(e);
+//             }
+//         }
+//     }
+// }

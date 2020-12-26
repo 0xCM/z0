@@ -10,14 +10,11 @@ namespace Z0
 
     using static z;
 
-    public sealed class EmitCaptureArtifacts : WfHost<EmitCaptureArtifacts>
+    public struct ApiCaptureEmitter : IDisposable
     {
-        protected override void Execute(IWfShell wf)
-            => missing();
-    }
+        public static ApiCaptureEmitter create(IWfShell wf, WfHost host, IAsmContext asm, ApiHostUri src, ApiMemberExtract[] extracts)
+            => new ApiCaptureEmitter(wf,host, asm, src, extracts);
 
-    public ref struct EmitCaptureArtifactsStep
-    {
         readonly CorrelationToken Ct;
 
         readonly ApiMemberExtract[] Extracts;
@@ -32,7 +29,7 @@ namespace Z0
 
         readonly IAsmContext Asm;
 
-        public EmitCaptureArtifactsStep(IWfShell wf, WfHost host, IAsmContext asm, ApiHostUri src, ApiMemberExtract[] extracts)
+        public ApiCaptureEmitter(IWfShell wf, WfHost host, IAsmContext asm, ApiHostUri src, ApiMemberExtract[] extracts)
         {
             Host = host;
             Wf = wf.WithHost(host);

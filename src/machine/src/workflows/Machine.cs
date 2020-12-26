@@ -36,7 +36,7 @@ namespace Z0
             Wf.Status(Seq.delimit(Wf.Api.PartIdentities));
             try
             {
-                CaptureRunner.run(Wf);
+                ApiCaptureRunner.run(Wf);
                 EmitReferenceData.create().Run(Wf);
                 EmitFieldMetadata.create().Run(Wf);
                 EmitSectionHeaders.create().Run(Wf);

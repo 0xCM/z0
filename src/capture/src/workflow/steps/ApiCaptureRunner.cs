@@ -12,10 +12,10 @@ namespace Z0
 
     using static z;
 
-    public readonly struct CaptureRunner : IDisposable
+    public readonly struct ApiCaptureRunner : IDisposable
     {
-        public static CaptureRunner create(IWfShell wf, IAsmContext asm)
-            => new CaptureRunner(wf, asm, WfShell.host(typeof(CaptureRunner)));
+        public static ApiCaptureRunner create(IWfShell wf, IAsmContext asm)
+            => new ApiCaptureRunner(wf, asm, WfShell.host(typeof(ApiCaptureRunner)));
 
         public static void run(IWfShell wf, IAsmContext asm)
         {
@@ -31,7 +31,7 @@ namespace Z0
 
         static IWfShell Configure(IWfShell wf)
             => describe(wf.WithRandom(Rng.@default())
-                 .WithHost(WfShell.host(typeof(CaptureRunner)))
+                 .WithHost(WfShell.host(typeof(ApiCaptureRunner)))
                  .WithVerbosity(LogLevel.Babble));
 
         public static void run(IWfShell wf)
@@ -56,7 +56,7 @@ namespace Z0
 
         readonly PartId[] Parts;
 
-        public CaptureRunner(IWfShell wf, IAsmContext asm, WfHost host)
+        public ApiCaptureRunner(IWfShell wf, IAsmContext asm, WfHost host)
         {
             Host = host;
             Wf = wf.WithHost(Host);
@@ -79,13 +79,12 @@ namespace Z0
             RunImm();
             RunEvaluate();
             EmitReports();
-            //ManageCapture.create(Asm).Run(Wf);
         }
 
         void RunPrimary()
         {
-            using var flow = Wf.Running(nameof(PartCaptureService));
-            using var step = PartCaptureService.create(Wf, Asm);
+            using var flow = Wf.Running(nameof(ApiCaptureService));
+            using var step = ApiCaptureService.create(Wf, Asm);
             step.Run();
         }
 

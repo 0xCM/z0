@@ -30,7 +30,7 @@ namespace Z0
             var app = Apps.context(wf);
             var asm = new AsmContext(app, wf);
             var cstate = new WfCaptureState(wf, asm);
-            using var control = CaptureRunner.create(wf, asm);
+            using var control = ApiCaptureRunner.create(wf, asm);
             control.Run();
         }
 
@@ -39,7 +39,7 @@ namespace Z0
             var app = Apps.context(wf);
             var asm = new AsmContext(app, wf);
             var cstate = new WfCaptureState(wf, asm);
-            using var control = CaptureRunner.create(wf,asm);
+            using var control = ApiCaptureRunner.create(wf,asm);
             control.Run();
         }
     }
