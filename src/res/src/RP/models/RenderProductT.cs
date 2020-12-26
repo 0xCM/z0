@@ -7,14 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-
-    public interface IRenderProduct<T>
-    {
-        IRenderPattern Pattern {get;}
-
-        T Product {get;}
-    }
+    using static Root;
 
     public readonly struct RenderProduct<T> : IRenderProduct<T>
     {

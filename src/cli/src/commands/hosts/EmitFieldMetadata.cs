@@ -45,7 +45,7 @@ namespace Z0
         public void Run()
         {
             var count = 0u;
-            Wf.Running(Host, Parts.Length);
+            var flow = Wf.Running(Host, Parts.Length);
 
             foreach(var part in Parts)
             {
@@ -59,7 +59,7 @@ namespace Z0
                 }
             }
 
-            Wf.Ran(Host, count);
+            Wf.Ran(flow, Host, count);
         }
 
         uint Emit(IPart part)

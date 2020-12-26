@@ -23,10 +23,6 @@ namespace Z0
         public static ErrorEvent<T> error<T>(WfStepId step, T content, CorrelationToken ct, [Caller] string caller  = null, [File] string file = null, [Line] int? line = null)
             => new ErrorEvent<T>(step, content, ct, source(caller,file,line));
 
-        [Op, Closures(UInt64k)]
-        public static ErrorEvent<T> error<T>(WfHost host, Exception e, T content, CorrelationToken ct,  AppMsgSource origin)
-            => new ErrorEvent<T>(e, content, ct, origin);
-
         [Op]
         public static ErrorEvent<Exception> error(WfHost host, Exception e, CorrelationToken ct, [Caller] string caller  = null, [File] string file = null, [Line] int? line = null)
         {

@@ -164,7 +164,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public void Notify(string msg, LogLevel? severity = null)
-                => Deposit(AppMsg.define(msg,severity ?? LogLevel.Info));
+                => Deposit(AppMsg.define(msg,severity ?? LogLevel.Status));
         }
 
         sealed class BenchLogger : TestLogger<BenchLogger>

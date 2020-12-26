@@ -46,7 +46,7 @@ namespace Z0
 
         public void Emit()
         {
-            Wf.Running();
+            var flow = Wf.Running();
 
             try
             {
@@ -61,7 +61,7 @@ namespace Z0
                 Wf.Error(e);
             }
 
-            Wf.Ran();
+            Wf.Ran(flow);
         }
 
         void EmitExtracts()

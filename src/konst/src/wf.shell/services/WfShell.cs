@@ -68,7 +68,7 @@ namespace Z0
             Broker = new WfBroker(WfSink, Ct);
             Host = new WfHost(typeof(WfShell), typeof(WfShell), _ => throw no<WfShell>());
             PolyStream = default;
-            Verbosity = LogLevel.Info;
+            Verbosity = LogLevel.Status;
             Paths = Init.Shell.Paths;
             Args = Init.Shell.Args;
             Settings = Init.Shell.Settings;

@@ -4,16 +4,15 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
-    [ApiHost]
-    public readonly struct RenderPatterns
+    partial struct RP
     {
-        [MethodImpl(Inline), Op]
-        public static RenderCapture capture(IRenderPattern src, params object[] args)
-            => new RenderCapture(src, args);
-    }
+        [MethodImpl(Inline)]
+        public static RenderCapture capture<T>(T src, params object[] args)
+            where T : IRenderPattern
+                => new RenderCapture(src, args);
+   }
 }

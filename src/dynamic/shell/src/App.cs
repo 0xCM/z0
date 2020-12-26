@@ -6,10 +6,8 @@ namespace Z0
 {
     using System;
     using System.Reflection;
-    using System.Reflection.Metadata;
     using System.IO;
     using System.Linq;
-    using System.Threading.Tasks;
 
     using Z0.Images;
     using Z0.Tools;
@@ -443,9 +441,21 @@ namespace Z0
         }
 
 
+        void Jit()
+        {
+            var catalog = Wf.ApiParts.Api;
+            var parts = catalog.Parts;
+            foreach(var part in parts)
+            {
+                var flow = Wf.Running(string.Format("Jitting {0}", part.Name));
+                var members = ApiJit.jit(part);
+                Wf.Ran(flow, string.Format("Jitted {0} {1} members", members.Count, part.Name));
+            }
+
+        }
         public void Run()
         {
-            ShowHandlers();
+            //ShowHandlers();
 
             //Run(Args);
             //EmitProcessImages(Wf);
@@ -453,7 +463,6 @@ namespace Z0
             //EmitAsmOpCodes();
             //EmitBuildArchiveList(Wf.Db().BuildArchiveRoot(), "zbuild");
             //EmitCilTables(Wf, "z0.bitcore.dll");
-
 
             //ShowPartSummary();
             //EmitDocComments().Wait();

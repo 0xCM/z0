@@ -6,9 +6,9 @@ namespace Z0
 {
     using System;
 
-    public interface IRenderTemplate<T> : IDataType<T>
+    public interface IRenderTemplate<T>
     {
-
+        T Content {get;}
     }
 
     public interface IRenderTemplate<H,T> : IRenderTemplate<T>
@@ -19,10 +19,6 @@ namespace Z0
 
     public interface IRenderTemplate : IRenderTemplate<string>
     {
-        bool IDataType.IsFixedWidth
-            => false;
 
-        BitSize ISized.StorageWidth
-            => (2*8)*(Content?.Length ?? 0);
     }
 }

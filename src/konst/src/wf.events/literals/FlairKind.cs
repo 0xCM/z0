@@ -6,30 +6,30 @@ namespace Z0
 {
     using System;
 
-    public enum FlairKind
+    public enum FlairKind : byte
     {
-        Unspecified = ConsoleColor.White,
+        None = LogLevel.None,
 
-        Created = ConsoleColor.Blue,
+        Created = LogLevel.Babble,
+
+        Disposed = LogLevel.Babble,
 
         Running = ConsoleColor.Cyan,
 
         Ran = ConsoleColor.Magenta,
 
-        Processed = ConsoleColor.Blue,
+        Processed = ConsoleColor.Magenta,
 
-        Warning = ConsoleColor.Yellow,
+        Babble = LogLevel.Babble,
 
-        Error = ConsoleColor.Red,
+        Status = LogLevel.Status,
 
-        Babble = ConsoleColor.DarkGray,
+        Trace = LogLevel.Trace,
 
-        Disposed = ConsoleColor.Gray,
-
-        Status = ConsoleColor.Cyan,
+        Warning = LogLevel.Warning,
 
         Data = ConsoleColor.DarkCyan,
 
-        Trace = ConsoleColor.DarkMagenta,
+        Error = LogLevel.Error,
     }
 }

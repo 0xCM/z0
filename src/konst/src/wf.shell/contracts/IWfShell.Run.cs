@@ -13,78 +13,57 @@ namespace Z0
 
     partial interface IWfShell
     {
-        void SignalRunning()
-            => Raise(running(Host, Ct));
-
-        void SignalRunning(WfHost host)
-            => Raise(running(host, Ct));
-
-        void SignalRunning<T>(WfHost host, T data)
-            => Raise(running(host, data, Ct));
-
-        void SignalRunning<T>(T src)
-            => Raise(running(Host, src, Ct));
-
         WfExecFlow Running()
         {
-            SignalRunning();
+            signal(this).Running();
             return Flow();
         }
 
         WfExecFlow Running<T>(T data, [Caller] string caller = null)
         {
-            SignalRunning(data);
+            signal(this).Running(data);
             return Flow();
         }
 
         WfExecFlow Running(WfHost host, [Caller] string caller = null)
         {
-            SignalRunning(host);
+            signal(this).Running(host);
             return Flow();
         }
 
         WfExecFlow Running<T>(WfHost host, T data, [Caller] string caller = null)
         {
-            SignalRunning(host,data);
+            signal(this).Running(host, data);
             return Flow();
-        }
-
-        void Ran()
-            => signal(this).Ran();
-
-        void Ran(WfStepId step)
-        {
-            signal(this).Ran(step);
         }
 
         void Ran(WfExecFlow flow, WfStepId step)
         {
             signal(this).Ran(step);
             Ran(flow);
+            flow.Dispose();
         }
 
-        void Ran<H,T>(H host, T data)
+        void Ran<H,T>(WfExecFlow flow, H host, T data)
             where H : IWfHost<H>, new()
-                => Raise(ran(host, data, Ct));
-
-        void Ran2<T>(T data)
-            => signal(this).Ran(data);
-
-        void Ran(CmdResult cmd)
         {
-            signal(this).Ran(cmd);
+            signal(this).Ran(data);
+            Ran(flow);
+            flow.Dispose();
         }
 
         void Ran<T>(WfExecFlow flow, T data)
         {
             signal(this).Ran(data);
             Ran(flow);
+            flow.Dispose();
         }
 
         void Ran(WfExecFlow flow, CmdResult result)
         {
             signal(this).Ran(result);
             Ran(flow);
+            flow.Dispose();
         }
     }
 }

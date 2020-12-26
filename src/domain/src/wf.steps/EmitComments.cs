@@ -34,9 +34,9 @@ namespace Z0
 
         public void Run()
         {
-            Wf.Running();
+            var flow = Wf.Running();
             CommentCollector.collect(Wf);
-            Wf.Ran();
+            Wf.Ran(flow);
         }
 
         public void Dispose()

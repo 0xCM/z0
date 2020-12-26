@@ -234,9 +234,9 @@ namespace Z0
         }
 
         protected void TypeCaseStart<C>([Caller] string caller = null)
-            => Trace(AppMsg.define($"{GetType().DisplayName()}/{caller}<{typeof(C).DisplayName()}> executing", LogLevel.HiliteCL));
+            => Trace(AppMsg.define($"{GetType().DisplayName()}/{caller}<{typeof(C).DisplayName()}> executing", LogLevel.Status));
 
         protected void TypeCaseEnd<C>([Caller] string caller = null)
-            => Trace(AppMsg.define($"{GetType().DisplayName()}/{caller}<{typeof(C).DisplayName()}> succeeded", LogLevel.HiliteCL));
+            => Trace(AppMsg.define($"{GetType().DisplayName()}/{caller}<{typeof(C).DisplayName()}> succeeded", LogLevel.Status));
     }
 }

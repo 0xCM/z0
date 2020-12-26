@@ -125,7 +125,7 @@ namespace Z0
         [Op]
         public void Run()
         {
-            Wf.Running();
+            var flow = Wf.Running();
             var results = 0ul;
             var index = z8;
             Check(base2);
@@ -135,7 +135,7 @@ namespace Z0
             Himask(w32);
             Himask(w64);
             Counts = (SuccessCount,FailureCount);
-            Wf.Ran2(Counts);
+            Wf.Ran(flow, Counts);
         }
 
         [Op]

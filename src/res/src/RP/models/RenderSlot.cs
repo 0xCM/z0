@@ -7,12 +7,12 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     /// <summary>
-    /// Represents a slot within a render pattern
+    /// Represents a slot within a format pattern
     /// </summary>
-    public readonly struct RenderSlot<T>
+    public readonly struct RenderSlot
     {
         public byte Position {get;}
 
@@ -25,14 +25,10 @@ namespace Z0
             Pattern = pattern;
         }
 
-        [MethodImpl(Inline)]
-        public string Format(T arg)
-            => string.Format(Pattern, arg);
-
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => text.empty(Pattern);
+            get => string.IsNullOrEmpty(Pattern);
         }
 
         public bool IsNonEmpty
@@ -44,11 +40,11 @@ namespace Z0
         public static RenderSlot Empty
         {
             [MethodImpl(Inline)]
-            get => new RenderSlot(0, EmptyString);
+            get => new RenderSlot(0, string.Empty);
         }
 
        [MethodImpl(Inline)]
-       public static implicit operator RenderSlot<T>((byte pos, string pattern) src)
-            => new RenderSlot<T>(src.pos, src.pattern);
+       public static implicit operator RenderSlot((byte pos, string pattern) src)
+            => new RenderSlot(src.pos, src.pattern);
     }
 }

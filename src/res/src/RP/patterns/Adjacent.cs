@@ -23,6 +23,5 @@ namespace Z0
         /// </summary>
         [RenderPattern(4, Adjacent4)]
         public const string Adjacent4 = "{0}{1}{2}{3}";
-
     }
 }

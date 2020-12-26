@@ -87,13 +87,13 @@ namespace Z0
 
         public void Run()
         {
-            Wf.Running();
+            var flow = Wf.Running();
 
             Wf.Db().Clear(FS.folder(TableId));
             foreach(var part in Parts)
                 Emit(part);
 
-            Wf.Ran();
+            Wf.Ran(flow);
         }
     }
 }

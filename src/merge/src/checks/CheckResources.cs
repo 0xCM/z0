@@ -41,9 +41,9 @@ namespace Z0
 
         public void Run()
         {
-            Wf.Running(Host);
+            var flow = Wf.Running(Host);
             TryRun();
-            Wf.Ran(Host);
+            Wf.Ran(flow, Host);
         }
 
         void Execute()

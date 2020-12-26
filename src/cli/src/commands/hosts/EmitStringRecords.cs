@@ -70,7 +70,7 @@ namespace Z0
 
         public void Run()
         {
-            Wf.Running();
+            var flow = Wf.Running();
 
             foreach(var part in Parts)
             {
@@ -78,7 +78,7 @@ namespace Z0
                 EmissionCount += EmitSystemStrings(part);
             }
 
-            Wf.Ran2(Seq.delimit(PartCount, EmissionCount));
+            Wf.Ran(flow, Seq.delimit(PartCount, EmissionCount));
         }
     }
 }

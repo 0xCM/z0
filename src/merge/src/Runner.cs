@@ -234,7 +234,7 @@ namespace Z0
 
 
             {
-                Wf.Running(Host);
+                var flow = Wf.Running(Host);
 
                 using var kernel = NativeModules.kernel32();
                 Wf.Row(kernel);
@@ -245,13 +245,13 @@ namespace Z0
                 var a = (MemoryAddress)f.Invoke(kernel, "CreateDirectoryA");
                 Wf.Row(a);
 
-                Wf.Ran(Host);
+                Wf.Ran(flow, Host);
             }
         }
 
         void IceStuff()
         {
-            Wf.Running(Host);
+            var flow = Wf.Running(Host);
 
             var bitfield = Ice.IceInstructionBits.init();
             var indices = bitfield.Indices;
@@ -259,7 +259,7 @@ namespace Z0
             foreach(var i in info)
                 Wf.Row(i);
 
-            Wf.Ran(Host);
+            Wf.Ran(flow, Host);
         }
 
 

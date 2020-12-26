@@ -7,26 +7,26 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
-    public readonly struct RenderPattern<A0,A1> : IRenderPattern<RenderPattern<A0,A1>,A0,A1>
+    public readonly struct RenderPattern<T> : IRenderPattern<RenderPattern<T>,T>
     {
         public string PatternText {get;}
 
         [MethodImpl(Inline)]
         public RenderPattern(string src)
-            => PatternText= src;
+            => PatternText = src;
 
         [MethodImpl(Inline)]
-        public string Format(in A0 s0, in A1 s1)
-            => text.format(PatternText, s0, s1);
+        public string Format(in T src)
+            => string.Format(PatternText, src);
 
         [MethodImpl(Inline)]
-        public RenderCapture Capture(in A0 s0, in A1 s1)
-            => RenderPatterns.capture(this, s0, s1);
+        public RenderCapture Capture(in T src)
+            => RP.capture(this, src);
 
         [MethodImpl(Inline)]
-        public static implicit operator RenderPattern<A0,A1>(string src)
-            => new RenderPattern<A0,A1>(src);
+        public static implicit operator RenderPattern<T>(string src)
+            => new RenderPattern<T>(src);
     }
 }

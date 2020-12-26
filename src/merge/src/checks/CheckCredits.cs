@@ -45,7 +45,7 @@ namespace Z0
 
         public void Run()
         {
-            Wf.Running();
+            var flow = Wf.Running();
             try
             {
                 Exec(CheckCreditFields, default(Step));
@@ -59,7 +59,7 @@ namespace Z0
                 Wf.Error(e);
             }
 
-            Wf.Ran();
+            Wf.Ran(flow);
         }
 
         void Exec<C,R>(Func<R> f, C step = default)

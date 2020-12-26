@@ -93,7 +93,7 @@ namespace Z0
 
         CapturedBlock Capture(MemoryAddress src)
         {
-            Wf.Running(Host, src);
+            var flow = Wf.Running(Host, src);
 
             ClearBuffers();
 
@@ -126,7 +126,7 @@ namespace Z0
                 }
             }
 
-            Wf.Ran(Host, captured);
+            Wf.Ran(flow, Host, captured);
 
             return captured;
         }

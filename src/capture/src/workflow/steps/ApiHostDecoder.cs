@@ -12,29 +12,6 @@ namespace Z0
     using static Konst;
     using static z;
 
-    // [WfHost]
-    // public sealed class DecodeApiHost : WfHost<DecodeApiHost, ApiMemberCodeBlocks, AsmRoutines>
-    // {
-    //     IAsmDecoder Decoder;
-
-    //     ApiHostUri Uri;
-
-    //     public static DecodeApiHost create(IAsmDecoder decoder, ApiHostUri uri)
-    //     {
-    //         var dst = create();
-    //         dst.Decoder = decoder;
-    //         dst.Uri = uri;
-    //         return dst;
-    //     }
-
-    //     protected override ref AsmRoutines Execute(IWfShell wf, in ApiMemberCodeBlocks src, out AsmRoutines dst)
-    //     {
-    //         using var step = new ApiHostDecoder(wf, this, Decoder);
-    //         dst = step.Decode(Uri, src);
-    //         return ref dst;
-    //     }
-    // }
-
     readonly struct ApiHostDecoder : IDisposable
     {
         public static ApiHostDecoder create(IWfShell wf, IAsmDecoder decoder)

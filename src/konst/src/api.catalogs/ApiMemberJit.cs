@@ -16,7 +16,23 @@ namespace Z0
     [ApiHost(ApiNames.ApiJit)]
     public readonly struct ApiJit
     {
-        [MethodImpl(Inline)]
+        [Op]
+        public static ApiMembers jit(IPart src)
+        {
+            var dst = list<ApiMember>();
+            var catalog = ApiCatalogs.part(src);
+            var types = catalog.ApiDataTypes;
+            var hosts = catalog.ApiHosts;
+
+            foreach(var t in types.Storage)
+                dst.AddRange(jit(t));
+            foreach(var h in hosts.Storage)
+                dst.AddRange(jit(h).Storage);
+
+            return dst.ToArray();
+        }
+
+        [Op]
         public static MemoryAddress jit(MethodInfo src)
         {
             RuntimeHelpers.PrepareMethod(src.MethodHandle);

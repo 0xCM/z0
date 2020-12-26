@@ -7,24 +7,23 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Konst;
 
-    public readonly struct RenderCapture
+    public readonly struct EventOrigin : ITextual
     {
-        readonly IRenderPattern Pattern;
+        public Name OriginName {get;}
 
-        readonly object[] Args;
+        public CallingMember Caller {get;}
 
         [MethodImpl(Inline)]
-        internal RenderCapture(IRenderPattern pattern, object[] args)
+        public EventOrigin(string name, in CallingMember caller)
         {
-            Pattern = pattern;
-            Args = args;
+            OriginName = name;
+            Caller = caller;
         }
 
-        [MethodImpl(Inline)]
         public string Format()
-            => string.Format(Pattern.PatternText, Args);
+            => RP.piped(OriginName, Caller);
 
         public override string ToString()
             => Format();

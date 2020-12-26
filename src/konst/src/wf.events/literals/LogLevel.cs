@@ -4,44 +4,41 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
+
     /// <summary>
     /// Classifier for application messages
     /// </summary>
-    public enum LogLevel
+    public enum LogLevel : byte
     {
         /// <summary>
         /// Boring
         /// </summary>
-        None = FlairKind.Unspecified,
+        None = ConsoleColor.White,
 
         /// <summary>
         /// Identifies chatty content
         /// </summary>
-        Babble = FlairKind.Babble,
+        Babble = ConsoleColor.DarkGray,
 
         /// <summary>
         /// Identifies informational content
         /// </summary>
-        Info = FlairKind.Status,
+        Status = ConsoleColor.Cyan,
+
+        /// <summary>
+        /// Identifies trace content
+        /// </summary>
+        Trace = ConsoleColor.DarkMagenta,
 
         /// <summary>
         /// Identifies warning content
         /// </summary>
-        Warning = FlairKind.Warning,
+        Warning = ConsoleColor.Yellow,
 
         /// <summary>
         /// Identifies error content
         /// </summary>
-        Error = FlairKind.Error,
-
-        /// <summary>
-        /// Identifies benchmark/timing result
-        /// </summary>
-        Benchmark = FlairKind.Running,
-
-        /// <summary>
-        /// Cyan foreground
-        /// </summary>
-        HiliteCL = FlairKind.Ran,
+        Error = ConsoleColor.Red,
     }
 }

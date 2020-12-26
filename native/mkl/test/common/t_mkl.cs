@@ -66,7 +66,7 @@ namespace Z0.Mkl
         /// <param name="msg">The message to submit</param>
         protected void TracePerf(string msg)
         {
-            Trace(AppMsg.define($"{msg}", LogLevel.Benchmark));
+            Trace(AppMsg.define($"{msg}", LogLevel.Status));
         }
     }
 }

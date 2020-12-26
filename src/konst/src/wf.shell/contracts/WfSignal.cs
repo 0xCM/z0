@@ -52,5 +52,17 @@ namespace Z0
 
         public void Ran(CmdResult cmd)
             => Raise(new RanCmdEvent(cmd, Ct));
+
+        public void Running()
+            => Raise(running(Host, Ct));
+
+        public void Running(WfHost host)
+            => Raise(running(host, Ct));
+
+        public void Running<T>(WfHost host, T data)
+            => Raise(running(host, data, Ct));
+
+        public void Running<T>(T src)
+            => Raise(running(Host, src, Ct));
     }
 }

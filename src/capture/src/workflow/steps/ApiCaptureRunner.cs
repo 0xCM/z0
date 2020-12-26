@@ -66,30 +66,34 @@ namespace Z0
 
         void RunPrimary()
         {
-            using var flow = Wf.Running(nameof(ApiCaptureService));
+            var flow = Wf.Running(nameof(ApiCaptureService));
             using var step = ApiCaptureService.create(Wf, Asm);
             step.Run();
+            Wf.Ran(flow);
         }
 
         void RunImm()
         {
-            using var flow = Wf.Running(nameof(EmitImmClosures));
+            var flow = Wf.Running(nameof(EmitImmClosures));
             using var step = new EmitImmClosuresStep(Wf, new EmitImmClosures(), Asm, Asm.Formatter, Asm.RoutineDecoder, Wf.Db().CaptureRoot());
             step.ClearArchive(Parts);
             step.EmitRefined(Parts);
+            Wf.Ran(flow);
         }
 
         void RunEvaluate()
         {
-            using var flow = Wf.Running(nameof(Evaluate));
+            var flow = Wf.Running(nameof(Evaluate));
             var evaluate = Evaluate.control(App, Wf.Paths.AppCaptureRoot, Pow2.T14);
             evaluate.Execute();
+            Wf.Ran(flow);
         }
 
         void EmitReports()
         {
-            using var flow = Wf.Running(MethodInfo.GetCurrentMethod().Name);
+            var flow = Wf.Running(MethodInfo.GetCurrentMethod().Name);
             EmitCodeBlockReport.create().Run(Wf);
+            Wf.Ran(flow);
         }
 
         static void run(IWfShell wf, IAsmContext asm)

@@ -39,11 +39,11 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static AppMsg colorize(object content, FlairKind color)
-            => new AppMsg(content, LogLevel.Info, color, string.Empty, EmptyString, null);
+            => new AppMsg(content, LogLevel.Status, color, string.Empty, EmptyString, null);
 
         [MethodImpl(Inline), Op]
         public static AppMsg info(object content)
-            => new AppMsg(content, LogLevel.Info, FlairKind.Status, EmptyString, EmptyString, null);
+            => new AppMsg(content, LogLevel.Status, FlairKind.Status, EmptyString, EmptyString, null);
 
         [MethodImpl(Inline), Op]
         public static AppMsg babble(object content)

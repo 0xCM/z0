@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     /// <summary>
     /// Defines a pattern to service as a projection domain for render patterns
@@ -15,7 +15,6 @@ namespace Z0
     /// <remarks>
     /// The template may include any character sequence that may be tokenzied by fence-matching on '{' and '}' with corresponding escape-matching when needed
     /// </remarns>
-    [Datatype]
     public readonly struct RenderTemplate : IRenderTemplate
     {
         public string Content {get;}
@@ -27,13 +26,13 @@ namespace Z0
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => text.empty(Content);
+            get => string.IsNullOrEmpty(Content);
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => text.nonempty(Content);
+            get => !IsEmpty;
         }
 
         public override string ToString()

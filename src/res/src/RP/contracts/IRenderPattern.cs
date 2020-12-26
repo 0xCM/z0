@@ -4,6 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+
     using System;
 
     public interface IRenderPattern
@@ -25,7 +26,7 @@ namespace Z0
         byte IRenderPattern.ArgCount => 1;
 
         ReadOnlySpan<Type> IRenderPattern.ArgTypes
-            => sys.array(typeof(T));
+            => Root.array(typeof(T));
     }
 
     public interface IRenderPattern<H,A0,A1> : IRenderPattern
@@ -36,7 +37,7 @@ namespace Z0
         byte IRenderPattern.ArgCount => 2;
 
         ReadOnlySpan<Type> IRenderPattern.ArgTypes
-            => sys.array(typeof(A0), typeof(A1));
+            => Root.array(typeof(A0), typeof(A1));
     }
 
     public interface IRenderPattern<H,A0,A1,A2> : IRenderPattern
@@ -49,7 +50,7 @@ namespace Z0
         byte IRenderPattern.ArgCount => 3;
 
         ReadOnlySpan<Type> IRenderPattern.ArgTypes
-            => sys.array(typeof(A0), typeof(A1), typeof(A2));
+            => Root.array(typeof(A0), typeof(A1), typeof(A2));
     }
 
     public interface IRenderPattern<H,A0,A1,A2,A3> : IRenderPattern
@@ -62,7 +63,7 @@ namespace Z0
         byte IRenderPattern.ArgCount => 4;
 
         ReadOnlySpan<Type> IRenderPattern.ArgTypes
-            => sys.array(typeof(A0), typeof(A1), typeof(A2), typeof(A3));
+            => Root.array(typeof(A0), typeof(A1), typeof(A2), typeof(A3));
     }
 
     public interface IRenderPattern<H,A0,A1,A2,A3,A4> : IRenderPattern
@@ -73,6 +74,6 @@ namespace Z0
         byte IRenderPattern.ArgCount => 5;
 
         ReadOnlySpan<Type> IRenderPattern.ArgTypes
-            => sys.array(typeof(A0), typeof(A1), typeof(A2), typeof(A3), typeof(A4));
+            => Root.array(typeof(A0), typeof(A1), typeof(A2), typeof(A3), typeof(A4));
     }
 }

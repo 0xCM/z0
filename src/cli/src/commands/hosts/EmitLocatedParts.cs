@@ -16,9 +16,9 @@ namespace Z0
         protected override void Execute(IWfShell wf)
         {
             using var step = new EmitLocatedPartsStep(wf.WithHost(this), this);
-            wf.Running();
+            var flow = wf.Running();
             step.Run();
-            wf.Ran();
+            wf.Ran(flow);
         }
     }
 

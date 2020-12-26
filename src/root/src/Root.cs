@@ -25,6 +25,9 @@ namespace Z0
         public static bool isTest(PartId a)
             => (a & PartId.Test) != 0;
 
+        public static T[] array<T>(params T[] src)
+            => src;
+
         [Op]
         public static bool test(Assembly src)
             => Attribute.IsDefined(src, typeof(PartIdAttribute));

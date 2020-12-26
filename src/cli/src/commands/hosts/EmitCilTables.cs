@@ -52,7 +52,7 @@ namespace Z0
 
         public void Run()
         {
-            Wf.Running();
+            var flow = Wf.Running();
 
             foreach(var part in Parts)
             {
@@ -66,7 +66,7 @@ namespace Z0
                 }
             }
 
-            Wf.Ran2(EmissionCount);
+            Wf.Ran(flow, EmissionCount);
         }
 
         static string format(in CliCil src)

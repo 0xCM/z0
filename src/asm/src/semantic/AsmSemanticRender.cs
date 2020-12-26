@@ -57,8 +57,9 @@ namespace Z0
 
         public void Render(in ApiPartRoutines src)
         {
-            using var run = Wf.Running(string.Format("Running {0} semantic render", src.Part));
+            var flow = Wf.Running(string.Format("Running {0} semantic render", src.Part));
             Execute(src);
+            Wf.Ran(flow);
         }
 
         [Op]

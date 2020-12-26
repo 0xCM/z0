@@ -36,7 +36,7 @@ namespace Z0
 
         public void Run()
         {
-            Wf.Running(Host, Seq.delimit(Extracted.Length, Decoded.Length));
+            var flow = Wf.Running(Host, Seq.delimit(Extracted.Length, Decoded.Length));
 
             try
             {
@@ -58,7 +58,7 @@ namespace Z0
                 Wf.Error(Host, e);
             }
 
-            Wf.Ran(Host, Seq.delimit(Extracted.Length, Decoded.Length));
+            Wf.Ran(flow, Host, Seq.delimit(Extracted.Length, Decoded.Length));
         }
     }
 }

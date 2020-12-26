@@ -11,14 +11,18 @@ namespace Z0
 
     public readonly struct EventLevel : ITextual
     {
-        readonly FlairKind Kind;
+        readonly LogLevel LogLevel;
 
         [MethodImpl(Inline)]
-        internal EventLevel(FlairKind flair)
-            => Kind = flair;
+        internal EventLevel(FlairKind src)
+            => LogLevel = (LogLevel)src;
+
+        [MethodImpl(Inline)]
+        internal EventLevel(LogLevel src)
+            => LogLevel = src;
 
         public string Format()
-            => Kind.ToString();
+            => LogLevel.ToString();
 
         public override string ToString()
             => Format();
@@ -28,7 +32,11 @@ namespace Z0
             => new EventLevel(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator FlairKind(EventLevel src)
-            => src.Kind;
+        public static implicit operator EventLevel(LogLevel src)
+            => new EventLevel(src);
+
+        // [MethodImpl(Inline)]
+        // public static implicit operator FlairKind(EventLevel src)
+        //     => (FlairKind)src.Kind;
     }
 }

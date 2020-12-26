@@ -19,9 +19,9 @@ namespace Z0
             try
             {
                 wf = wf.WithHost(this);
-                wf.Running(this);
+                var flow = wf.Running(this);
                 var result = Execute(wf, spec);
-                wf.Ran(result);
+                wf.Ran(flow, result);
                 return result;
             }
             catch(Exception e)

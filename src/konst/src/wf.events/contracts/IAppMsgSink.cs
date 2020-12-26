@@ -10,19 +10,12 @@ namespace Z0
     public interface IAppMsgSink : ISink<IAppMsg>
     {
         void Deposit(IEnumerable<IAppMsg> msg)
-            => z.iter(msg, Deposit);
+            => corefunc.iter(msg, Deposit);
 
         void Notify(string msg, LogLevel? kind = null)
-            => Deposit(AppMsg.define(msg, kind ?? LogLevel.Info));
+            => Deposit(AppMsg.define(msg, kind ?? LogLevel.Status));
 
         void NotifyConsole(IAppMsg msg)
-        {
-            // if(msg.Kind == LogLevel.Error)
-            //     term.print(msg);
-            // else
-            //     term.print(msg, msg.Flair);
-
-            Deposit(msg);
-        }
+            => Deposit(msg);
     }
 }
