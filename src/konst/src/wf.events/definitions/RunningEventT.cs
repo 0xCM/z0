@@ -9,10 +9,12 @@ namespace Z0
 
     using static Part;
 
-    [Event(EventName)]
+    [Event(Kind)]
     public readonly struct RunningEvent<T> : IWfEvent<RunningEvent<T>,T>
     {
         public const string EventName = GlobalEvents.Running;
+
+        public const EventKind Kind = EventKind.Running;
 
         public static EventLevel Level => FlairKind.Status;
 

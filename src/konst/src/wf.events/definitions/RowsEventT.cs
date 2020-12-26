@@ -9,11 +9,13 @@ namespace Z0
 
     using static Part;
 
-    [Event(EventName)]
+    [Event(Kind)]
     public readonly struct RowsEvent<T> : IWfEvent<RowsEvent<T>,T>
         where T : ITextual
     {
         public const string EventName = GlobalEvents.Rows;
+
+        public const EventKind Kind = EventKind.Rows;
 
         public WfEventId EventId {get;}
 

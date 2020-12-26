@@ -22,16 +22,6 @@ namespace Z0
             => new CreatedEvent(id, ct);
 
         /// <summary>
-        /// Defines a <see cref='CmdCreatedEvent'/> event
-        /// </summary>
-        /// <param name="id">The step identifier</param>
-        /// <param name="ct">The correlation token</param>
-        /// <param name="flair">The flair</param>
-        [MethodImpl(Inline), Op]
-        public static CmdCreatedEvent created(ToolId id, CorrelationToken ct)
-            => new CmdCreatedEvent(id, ct);
-
-        /// <summary>
         /// Defines a <see cref='CreatedEvent{T}'/> event
         /// </summary>
         /// <param name="id">The step identifier</param>

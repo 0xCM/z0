@@ -9,10 +9,12 @@ namespace Z0
 
     using static Part;
 
-    [Event(EventName)]
+    [Event(Kind)]
     public readonly struct EmittedTableEvent<T> : IWfEvent<EmittedTableEvent<T>>
     {
         public const string EventName = GlobalEvents.EmittedTable;
+
+        public const EventKind Kind = EventKind.EmittedTable;
 
         public WfEventId EventId {get;}
 

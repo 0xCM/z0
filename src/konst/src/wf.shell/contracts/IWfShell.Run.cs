@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Reflection;
-
     using static WfEvents;
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
@@ -37,33 +34,33 @@ namespace Z0
             return Flow();
         }
 
-        void Ran(WfExecFlow flow, WfStepId step)
+        WfExecToken Ran(WfExecFlow flow, WfStepId step)
         {
+            var token = Ran(flow);
             signal(this).Ran(step);
-            Ran(flow);
-            flow.Dispose();
+            return token;
         }
 
-        void Ran<H,T>(WfExecFlow flow, H host, T data)
+        WfExecToken Ran<H,T>(WfExecFlow flow, H host, T data)
             where H : IWfHost<H>, new()
         {
+            var token = Ran(flow);
             signal(this).Ran(data);
-            Ran(flow);
-            flow.Dispose();
+            return token;
         }
 
-        void Ran<T>(WfExecFlow flow, T data)
+        WfExecToken Ran<T>(WfExecFlow flow, T data)
         {
+            var token = Ran(flow);
             signal(this).Ran(data);
-            Ran(flow);
-            flow.Dispose();
+            return token;
         }
 
-        void Ran(WfExecFlow flow, CmdResult result)
+        WfExecToken Ran(WfExecFlow flow, CmdResult result)
         {
+            var token = Ran(flow);
             signal(this).Ran(result);
-            Ran(flow);
-            flow.Dispose();
+            return token;
         }
     }
 }

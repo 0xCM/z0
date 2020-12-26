@@ -9,19 +9,23 @@ namespace Z0
 
     using static Part;
 
-    [Event(EventName)]
-    public readonly struct CmdCreatedEvent : IWfEvent<CmdCreatedEvent>
+    [Event(Kind)]
+    public readonly struct RunningEvent : IWfEvent<RunningEvent>
     {
-        public const string EventName = GlobalEvents.CreatedToolCmd;
+        public const string EventName = GlobalEvents.Running;
+
+        public const EventKind Kind = EventKind.Running;
+
+        public static EventLevel Level => FlairKind.Status;
+
+        public FlairKind Flair => FlairKind.Running;
 
         public WfEventId EventId {get;}
 
-        public FlairKind Flair => FlairKind.Created;
-
         [MethodImpl(Inline)]
-        public CmdCreatedEvent(ToolId id, CorrelationToken ct)
+        public RunningEvent(WfStepId step, CorrelationToken ct)
         {
-            EventId = (EventName, id, ct);
+            EventId = (EventName, step, Level, ct);
         }
 
         [MethodImpl(Inline)]

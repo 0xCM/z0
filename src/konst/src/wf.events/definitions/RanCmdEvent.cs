@@ -10,10 +10,12 @@ namespace Z0
 
     using static Konst;
 
-    [Event(EventName)]
+    [Event(Kind)]
     public readonly struct RanCmdEvent : IWfEvent<RanCmdEvent>
     {
         public const string EventName = GlobalEvents.RanCmd;
+
+        public const EventKind Kind = EventKind.CmdRan;
 
         public WfEventId EventId {get;}
 

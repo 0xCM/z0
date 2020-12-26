@@ -9,16 +9,20 @@ namespace Z0
     [AttributeUsage(AttributeTargets.Struct)]
     public class EventAttribute : Attribute
     {
-        public EventAttribute()
+        public EventAttribute(EventKind kind)
         {
-            EventName = "";
+            EventKind = kind;
+            EventName = kind.ToString();
         }
 
-        public EventAttribute(string name)
+        public EventAttribute(EventKind kind, string name)
         {
+            EventKind = kind;
             EventName = name;
         }
 
         public string EventName {get;}
+
+        public EventKind EventKind {get;}
     }
 }

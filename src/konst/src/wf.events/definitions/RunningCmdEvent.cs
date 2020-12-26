@@ -5,25 +5,26 @@
 namespace Z0
 {
     using System;
+    using System.IO;
     using System.Runtime.CompilerServices;
 
     using static Part;
 
-    [Event(EventName)]
-    public readonly struct RunningEvent : IWfEvent<RunningEvent>
+    [Event(Kind)]
+    public readonly struct RunningCmdEvent : IWfEvent<RunningCmdEvent>
     {
-        public const string EventName = GlobalEvents.Running;
+        public const string EventName = GlobalEvents.RunningCmd;
 
-        public static EventLevel Level => FlairKind.Status;
-
-        public FlairKind Flair => FlairKind.Running;
+        public const EventKind Kind = EventKind.RunningCmd;
 
         public WfEventId EventId {get;}
 
+        public FlairKind Flair => FlairKind.Running;
+
         [MethodImpl(Inline)]
-        public RunningEvent(WfStepId step, CorrelationToken ct)
+        public RunningCmdEvent(CmdId cmd, CorrelationToken ct)
         {
-            EventId = (EventName, step, Level, ct);
+            EventId = (EventName, cmd, ct);
         }
 
         [MethodImpl(Inline)]

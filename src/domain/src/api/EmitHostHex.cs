@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static RP;
 
     public struct EmitHostCodeBlockPayload
     {
@@ -67,7 +66,7 @@ namespace Z0
         {
             try
             {
-                Wf.Running(Spec.ApiHost);
+                var flow = Wf.Running(Spec.ApiHost);
                 var source = Spec.Source.Storage;
                 var target = Wf.Db().CapturedHexFile(Spec.ApiHost);
                 Wf.Status($"Emitting {source.Length} blocks to {target}");
@@ -75,6 +74,7 @@ namespace Z0
                 ApiParseBlocks.save(report, target);
                 Emitted = report;
                 Wf.EmittedTable<ApiHexRow>(Emitted.Length, target);
+                Wf.Ran(flow, Spec.ApiHost);
             }
             catch(Exception e)
             {
