@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
 
     using Z0.Asm;
 
@@ -51,11 +52,17 @@ namespace Z0
 
         readonly IAsmContext Asm;
 
+        readonly IAppContext App;
+
+        readonly PartId[] Parts;
+
         public CaptureRunner(IWfShell wf, IAsmContext asm, WfHost host)
         {
             Host = host;
             Wf = wf.WithHost(Host);
+            App = asm.ContextRoot;
             Asm = asm;
+            Parts = Wf.Api.PartIdentities;
             Wf.Created();
         }
 
@@ -68,7 +75,39 @@ namespace Z0
         {
             using var flow = Wf.Running();
             Wf.Status(enclose(Wf.Api.PartIdentities));
-            ManageCapture.create(Asm).Run(Wf);
+            RunPrimary();
+            RunImm();
+            RunEvaluate();
+            EmitReports();
+            //ManageCapture.create(Asm).Run(Wf);
+        }
+
+        void RunPrimary()
+        {
+            using var flow = Wf.Running(nameof(PartCaptureService));
+            using var step = PartCaptureService.create(Wf, Asm);
+            step.Run();
+        }
+
+        void RunImm()
+        {
+            using var flow = Wf.Running(nameof(EmitImmClosures));
+            using var step = new EmitImmClosuresStep(Wf, new EmitImmClosures(), Asm, Asm.Formatter, Asm.RoutineDecoder, Wf.Db().CaptureRoot());
+            step.ClearArchive(Parts);
+            step.EmitRefined(Parts);
+        }
+
+        void RunEvaluate()
+        {
+            using var flow = Wf.Running(nameof(Evaluate));
+            var evaluate = Evaluate.control(App, Wf.Paths.AppCaptureRoot, Pow2.T14);
+            evaluate.Execute();
+        }
+
+        void EmitReports()
+        {
+            using var flow = Wf.Running(MethodInfo.GetCurrentMethod().Name);
+            EmitCodeBlockReport.create().Run(Wf);
         }
     }
 }
