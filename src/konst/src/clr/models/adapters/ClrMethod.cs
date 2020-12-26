@@ -53,21 +53,6 @@ namespace Z0
             get => Definition.CallingConvention;
         }
 
-        [MethodImpl(Inline)]
-        public static bool operator ==(ClrMethod lhs, ClrMethod rhs)
-            => lhs.Equals(rhs);
-
-        [MethodImpl(Inline)]
-        public static bool operator !=(ClrMethod lhs, ClrMethod rhs)
-            => !lhs.Equals(rhs);
-
-        [MethodImpl(Inline)]
-        public static implicit operator MethodInfo(ClrMethod src)
-            => src.Definition;
-
-        [MethodImpl(Inline)]
-        public static implicit operator ClrMethod(MethodInfo src)
-            => from(src);
 
         [MethodImpl(Inline)]
         public string Format()
@@ -89,5 +74,21 @@ namespace Z0
 
         public override string ToString()
             => Format();
+
+        [MethodImpl(Inline)]
+        public static bool operator ==(ClrMethod lhs, ClrMethod rhs)
+            => lhs.Equals(rhs);
+
+        [MethodImpl(Inline)]
+        public static bool operator !=(ClrMethod lhs, ClrMethod rhs)
+            => !lhs.Equals(rhs);
+
+        [MethodImpl(Inline)]
+        public static implicit operator MethodInfo(ClrMethod src)
+            => src.Definition;
+
+        [MethodImpl(Inline)]
+        public static implicit operator ClrMethod(MethodInfo src)
+            => from(src);
     }
 }

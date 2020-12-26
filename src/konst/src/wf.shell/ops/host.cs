@@ -13,8 +13,10 @@ namespace Z0
 
     partial class WfShell
     {
-       [MethodImpl(Inline)]
+        [MethodImpl(Inline)]
         public static WfSelfHost host(Type self)
             => new WfSelfHost(self);
+
+
     }
 }

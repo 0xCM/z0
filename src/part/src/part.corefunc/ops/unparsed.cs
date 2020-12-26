@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    partial struct zfunc
+    partial struct corefunc
     {
        /// <summary>
         /// Defines a parse result that signals failure

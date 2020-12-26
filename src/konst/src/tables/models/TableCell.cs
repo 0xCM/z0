@@ -22,7 +22,7 @@ namespace Z0
         public uint Row {get;}
 
         /// <summary>
-        /// A zero-based columnt index
+        /// A zero-based column index
         /// </summary>
         public uint Col {get;}
 
@@ -32,10 +32,6 @@ namespace Z0
             Row = row;
             Col = col;
         }
-
-        [MethodImpl(Inline)]
-        public static implicit operator TableCell((uint row, uint col) src)
-            => new TableCell(src.row, src.col);
 
         public string Format()
             => string.Format("({0},{1})", Row, Col);
@@ -68,6 +64,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool operator !=(TableCell a, TableCell b)
             => a.Equals(b);
+
+        [MethodImpl(Inline)]
+        public static implicit operator TableCell((uint row, uint col) src)
+            => new TableCell(src.row, src.col);
 
         public static TableCell Zero => default;
 

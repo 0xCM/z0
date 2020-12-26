@@ -39,7 +39,7 @@ namespace Z0
         public static int indices(ReadOnlySpan<byte> src, byte match, Span<int> dst)
         {
             var j = 0u;
-            var count = zfunc.min(src.Length, dst.Length);
+            var count = corefunc.min(src.Length, dst.Length);
             for(var i=0u; i<count; i++)
                 if(skip(src,i) == match)
                     seek(dst, j++) =(int)i;

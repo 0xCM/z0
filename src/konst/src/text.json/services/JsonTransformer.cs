@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
 
-    using static Konst;
-
     public readonly struct JsonTransformer<T> : IJsonTransformer<JsonTransformer<T>,T>
     {
         readonly ITextParser<T> Parser;

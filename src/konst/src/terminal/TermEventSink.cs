@@ -11,8 +11,7 @@ namespace Z0
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     /// <summary>
     /// Reifies a workflow event receiver that emits received events to the terminal
@@ -44,7 +43,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public void Deposit<T>(T content, CorrelationToken ct, LogLevel kind = LogLevel.Info, [Caller]string caller = null, [File] string file = null, [Line] int? line = null)
-                => term.print(AppMsg.called(content, kind, caller, file, line));
+            => term.print(AppMsg.called(content, kind, caller, file, line));
 
         public void Dispose()
             => Deposit("Finished", Ct);

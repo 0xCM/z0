@@ -11,7 +11,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    partial struct zfunc
+    partial struct corefunc
     {
         /// <summary>
         /// Projects a sequence of <typeparamref name='S'/> cells into an allocated <typeparamref name='T'/> indexed cell receiver

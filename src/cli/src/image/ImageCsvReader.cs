@@ -10,7 +10,7 @@ namespace Z0.Images
 
     using static Konst;
     using static z;
-    using static zfunc;
+    using static corefunc;
 
     public ref struct ImageCsvReader
     {

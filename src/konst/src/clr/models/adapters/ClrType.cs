@@ -9,8 +9,6 @@ namespace Z0
 
     using static Part;
 
-    using api = ClrQuery;
-
     [ApiType(ApiNames.ClrType, true)]
     public readonly struct ClrType : IClrRuntimeType<ClrType>
     {

@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    partial struct zfunc
+    partial struct corefunc
     {
 
         [MethodImpl(Inline), Op]

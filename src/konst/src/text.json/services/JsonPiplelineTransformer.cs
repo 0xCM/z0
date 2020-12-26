@@ -9,9 +9,6 @@ namespace Z0
     using System.Text.Json;
     using System.Text.Json.Serialization;
 
-    using static Konst;
-
-
     sealed class JsonPiplelineTransformer<T> : JsonConverter<T>
     {
         JsonTransformer<T> Transformer;

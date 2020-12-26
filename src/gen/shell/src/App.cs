@@ -21,7 +21,7 @@ namespace Z0
         protected override void Execute(IWfShell wf)
         {
             using var flow = wf.Running();
-            zfunc.iter(wf.Args, arg => wf.Row(arg));
+            corefunc.iter(wf.Args, arg => wf.Row(arg));
         }
     }
 

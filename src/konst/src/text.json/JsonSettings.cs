@@ -57,7 +57,6 @@ namespace Z0
             return dst.Emit();
         }
 
-
         internal JsonSettings(IEnumerable<(string,string)> pairs)
             => Pairs = pairs.Select(pair => new KeyValuePair<string, string>(pair.Item1, pair.Item2)).ToArray();
 

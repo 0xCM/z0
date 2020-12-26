@@ -16,7 +16,7 @@ namespace Z0.Images
         {
             var archive = csv(wf);
             wf.Status(archive.Root);
-            zfunc.iter(archive.List().Storage, file => wf.Status(file));
+            corefunc.iter(archive.List().Storage, file => wf.Status(file));
         }
 
         public static void PipeImageData(IWfShell wf, FS.FilePath src)

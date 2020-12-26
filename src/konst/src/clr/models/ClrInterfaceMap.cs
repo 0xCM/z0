@@ -9,7 +9,7 @@ namespace Z0
     using System.Reflection;
     using System.Text;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Captures the same information found in a <see cref="InterfaceMapping"/>

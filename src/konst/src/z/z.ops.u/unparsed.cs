@@ -13,26 +13,26 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static ParseResult<S,T> unparsed<S,T>(S source, T target = default)
-            => zfunc.unparsed(source, target);
+            => corefunc.unparsed(source, target);
 
         [MethodImpl(Inline)]
         public static ParseResult<S,T> unparsed<S,T>(S source, T target, string reason)
-            => zfunc.unparsed<S,T>(source, target, reason);
+            => corefunc.unparsed<S,T>(source, target, reason);
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline)]
         public static ParseResult<string,T> unparsed<T>(string source, T target = default)
-            => zfunc.unparsed(source, target);
+            => corefunc.unparsed(source, target);
 
         [MethodImpl(Inline)]
         public static ParseResult<string,T> unparsed<T>(string source, Exception error, T target = default)
-            => zfunc.unparsed<T>(source, error, target);
+            => corefunc.unparsed<T>(source, error, target);
 
         [MethodImpl(Inline)]
         public static ParseResult<string,T> unparsed<T>(string source, string reason)
-            => zfunc.unparsed<T>(source, reason);
+            => corefunc.unparsed<T>(source, reason);
 
         [MethodImpl(Inline)]
         public static ParseResult<T> unparsed<T>(char source, object reason = null)
-            => zfunc.unparsed<T>(source, reason);
+            => corefunc.unparsed<T>(source, reason);
     }
 }

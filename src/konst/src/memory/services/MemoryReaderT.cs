@@ -50,7 +50,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public int Read(int offset, int wantedCount, Span<T> dst)
         {
-            int count = zfunc.min(wantedCount, State.Remaining);
+            int count = corefunc.min(wantedCount, State.Remaining);
             read<T>(Source, offset, ref first(dst), count);
             State.Advance((uint)count);
             return count;
@@ -66,7 +66,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public int Read(int offset, int wantedCount, ref T dst)
         {
-            int count = zfunc.min(wantedCount, State.Remaining);
+            int count = corefunc.min(wantedCount, State.Remaining);
             read<T>(Source, offset, ref dst, count);
             State.Advance((uint)count);
             return count;

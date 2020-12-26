@@ -7,7 +7,7 @@ namespace Z0
 
     using static Part;
 
-    partial struct zfunc
+    partial struct corefunc
     {
         [MethodImpl(Inline), Op]
         public static sbyte max(sbyte a, sbyte b)

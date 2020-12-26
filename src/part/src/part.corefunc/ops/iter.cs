@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    partial struct zfunc
+    partial struct corefunc
     {
         /// <summary>
         /// Iterates over the supplied items, invoking a receiver for each

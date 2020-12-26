@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static zfunc;
+    using static corefunc;
 
     [Formatter]
     readonly struct ByteSizeFormatter : ITextFormatter<ByteSize>
@@ -31,7 +31,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                return zfunc.unparsed<ByteSize>(src,e);
+                return corefunc.unparsed<ByteSize>(src,e);
             }
         }
     }

@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
 
     [ApiHost]
-    public readonly partial struct zfunc
+    public readonly partial struct corefunc
     {
         const NumericKind Closure = UnsignedInts;
 

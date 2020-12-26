@@ -10,8 +10,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Reflection;
 
-    using static z;
-    using static Konst;
+    using static Part;
 
     [ApiHost]
     public readonly struct JsonData
@@ -21,6 +20,14 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static JsonDataPacket<T> packet<T>(T src)
             => src;
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static JsonSetting<T> setting<T>(string name, T value)
+            => new JsonSetting<T>(name, value);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static JsonSetting setting(string name, string value)
+            => new JsonSetting(name, value);
 
         public static string format(JsonSetting src)
             => JsonSerializer.Serialize(src);

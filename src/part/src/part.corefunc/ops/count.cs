@@ -6,12 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
 
     using static Part;
-    using static memory;
-
-    partial struct zfunc
+    partial struct corefunc
     {
         /// <summary>
         /// Returns the number of cells in an array

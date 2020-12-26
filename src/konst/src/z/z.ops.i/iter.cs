@@ -13,23 +13,20 @@ namespace Z0
 
     partial struct z
     {
+        [MethodImpl(Inline)]
         public static void iter<T>(IEnumerable<T> src, Action<T> action, bool pll = false)
-            => zfunc.iter(src, action, pll);
-
-        // [MethodImpl(Inline)]
-        // public static void iter<T>(T[] src, Action<T> action)
-        //     => zfunc.iter(src,action);
+            => corefunc.iter(src, action, pll);
 
         [MethodImpl(Inline)]
         public static void iter<T>(ReadOnlySpan<T> src, Action<T> action)
-            => zfunc.iter(src, action);
+            => corefunc.iter(src, action);
 
         [MethodImpl(Inline)]
         public static void iter<S,T>(ReadOnlySpan<S> a, ReadOnlySpan<T> b, Action<S,T> f)
-            => zfunc.iter(a, b, f);
+            => corefunc.iter(a, b, f);
 
         [MethodImpl(Inline)]
         public static void iter<S,T>(Span<S> a, Span<T> b, Action<S,T> f)
-            => zfunc.iter(a, b, f);
+            => corefunc.iter(a, b, f);
     }
 }

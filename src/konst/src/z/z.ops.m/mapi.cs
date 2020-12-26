@@ -13,6 +13,6 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static Y[] mapi<X,Y>(IEnumerable<X> seq, Func<int,X,Y> f)
-            => zfunc.mapi(seq,f);
+            => corefunc.mapi(seq,f);
     }
 }

@@ -15,18 +15,18 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static Span<T> map<S,T>(ReadOnlySpan<S> src, Func<S,T> f, Span<T> dst)
-            => zfunc.map(src,f,dst);
+            => corefunc.map(src,f,dst);
 
         [MethodImpl(Inline)]
         public static T[] map<S,T>(IEnumerable<S> src, Func<S,T> f)
-            => zfunc.map(src,f);
+            => corefunc.map(src,f);
 
         [MethodImpl(Inline)]
         public static Span<R> map<S,T,R>(ReadOnlySpan<S> x, ReadOnlySpan<T> y, Func<S,T,R> f, Span<R> dst)
-            => zfunc.map(x,y,f,dst);
+            => corefunc.map(x,y,f,dst);
 
         [MethodImpl(Inline)]
         public static Span<R> map<S,T,R>(ReadOnlySpan<S> x, ReadOnlySpan<T> y, Func<S,T,R> f)
-            => zfunc.map(x, y, f);
+            => corefunc.map(x, y, f);
     }
 }

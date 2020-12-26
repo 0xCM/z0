@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     partial class Enums
     {
@@ -23,8 +22,8 @@ namespace Z0
                 => Enum.GetNames(typeof(E));
 
         [MethodImpl(Inline)]
-        public static EnumLiteralNames<E> NameIndex<E>(E e = default)                   
+        public static EnumLiteralNames<E> NameIndex<E>(E e = default)
             where E : unmanaged, Enum
-                => new EnumLiteralNames<E>(Enum.GetNames(typeof(E)));    
+                => new EnumLiteralNames<E>(Enum.GetNames(typeof(E)));
     }
 }
