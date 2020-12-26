@@ -8,8 +8,6 @@ namespace Z0
 
     using Z0.Asm;
 
-    using static z;
-
     public struct ApiCaptureEmitter : IDisposable
     {
         public static ApiCaptureEmitter create(IWfShell wf, WfHost host, IAsmContext asm, ApiHostUri src, ApiMemberExtract[] extracts)
@@ -46,7 +44,7 @@ namespace Z0
             Wf.Disposed();
         }
 
-        public void Run()
+        public void Emit()
         {
             Wf.Running();
 
@@ -73,8 +71,12 @@ namespace Z0
                 if(Extracts.Length == 0)
                     return;
 
-                using var step = new EmitCapturedExtractsStep(Wf, new EmitCapturedExtracts(), HostUri, Extracts);
-                step.Run();
+                var dst = Wf.Db().CapturedExtractFile(HostUri);
+                var emitted = ApiCode.emit(Extracts.Map(x => new ApiCodeBlock(x.Address, x.OpUri, x.Encoded, x.ApiSig)), dst);
+                Wf.EmittedTable<ApiCodeRow>(emitted.Length, dst);
+
+                // using var step = new EmitCapturedExtractsStep(Wf, new EmitCapturedExtracts(), HostUri, Extracts);
+                // step.Run();
             }
             catch(Exception e)
             {

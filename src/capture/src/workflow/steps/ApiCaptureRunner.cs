@@ -17,23 +17,6 @@ namespace Z0
         public static ApiCaptureRunner create(IWfShell wf, IAsmContext asm)
             => new ApiCaptureRunner(wf, asm, WfShell.host(typeof(ApiCaptureRunner)));
 
-        public static void run(IWfShell wf, IAsmContext asm)
-        {
-            using var control = create(wf, asm);
-            control.Run();
-        }
-
-        static IWfShell describe(IWfShell wf)
-        {
-            iter(wf.Settings, s => wf.Status(string.Format("{0}:{1}", s.Name, s.Value )));
-            return wf;
-        }
-
-        static IWfShell Configure(IWfShell wf)
-            => describe(wf.WithRandom(Rng.@default())
-                 .WithHost(WfShell.host(typeof(ApiCaptureRunner)))
-                 .WithVerbosity(LogLevel.Babble));
-
         public static void run(IWfShell wf)
         {
             var app = Apps.context(wf);
@@ -56,7 +39,7 @@ namespace Z0
 
         readonly PartId[] Parts;
 
-        public ApiCaptureRunner(IWfShell wf, IAsmContext asm, WfHost host)
+        ApiCaptureRunner(IWfShell wf, IAsmContext asm, WfHost host)
         {
             Host = host;
             Wf = wf.WithHost(Host);
@@ -108,5 +91,23 @@ namespace Z0
             using var flow = Wf.Running(MethodInfo.GetCurrentMethod().Name);
             EmitCodeBlockReport.create().Run(Wf);
         }
+
+        static void run(IWfShell wf, IAsmContext asm)
+        {
+            using var control = create(wf, asm);
+            control.Run();
+        }
+
+        static IWfShell describe(IWfShell wf)
+        {
+            iter(wf.Settings, s => wf.Status(string.Format("{0}:{1}", s.Name, s.Value )));
+            return wf;
+        }
+
+        static IWfShell Configure(IWfShell wf)
+            => describe(wf.WithRandom(Rng.@default())
+                 .WithHost(WfShell.host(typeof(ApiCaptureRunner)))
+                 .WithVerbosity(LogLevel.Babble));
+
     }
 }

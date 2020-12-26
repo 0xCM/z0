@@ -42,8 +42,6 @@ namespace Z0
         {
             using var flow = Wf.Running();
             ClearArchive();
-            //ClearCaptureArchives.create().Run(Wf);
-
             var catalogs = Wf.Api.Catalogs.View;
             var count = catalogs.Length;
             for(var i=0; i<count; i++)
@@ -65,16 +63,14 @@ namespace Z0
             Capture(src.OperationHosts);
         }
 
-        public void Capture(IApiHost api)
+        void Capture(IApiHost api)
         {
             using var flow = Wf.Running(api.Name);
             try
             {
-                // using var extract = new ExtractHostMembersStep(Wf, Host, api);
-                // extract.Run();
                 var extracted = Extract(api);
-                using var emit = ApiCaptureEmitter.create(Wf, Host, Asm, api.Uri, extracted);
-                emit.Run();
+                using var emitter = ApiCaptureEmitter.create(Wf, Host, Asm, api.Uri, extracted);
+                emitter.Emit();
             }
             catch(Exception e)
             {
@@ -82,7 +78,7 @@ namespace Z0
             }
         }
 
-        public void Capture(ApiHost[] src)
+        void Capture(ApiHost[] src)
         {
             var count = src.Length;
             var hosts = @readonly(src);
@@ -90,18 +86,18 @@ namespace Z0
                 Capture(skip(hosts,i));
         }
 
-        public void Capture(ApiDataTypes src)
+        void Capture(ApiDataTypes src)
         {
             var extracted = @readonly(Extract(src).GroupBy(x => x.Host).Select(x => kvp(x.Key, x.Array())).Array());
             for(var i=0; i<extracted.Length; i++)
             {
                 ref readonly var x = ref skip(extracted,i);
                 using var emit = new ApiCaptureEmitter(Wf, Host, Asm, x.Key, x.Value);
-                emit.Run();
+                emit.Emit();
             }
         }
 
-        public ApiMemberExtract[] Extract(IApiHost host)
+        ApiMemberExtract[] Extract(IApiHost host)
         {
             try
             {
@@ -115,7 +111,7 @@ namespace Z0
             }
         }
 
-        public ApiMemberExtract[] Extract(ApiDataTypes types)
+        ApiMemberExtract[] Extract(ApiDataTypes types)
         {
             try
             {

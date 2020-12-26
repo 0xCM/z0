@@ -12,31 +12,34 @@ namespace Z0
     using static Konst;
     using static z;
 
-    [WfHost]
-    public sealed class DecodeApiHost : WfHost<DecodeApiHost, ApiMemberCodeBlocks, AsmRoutines>
+    // [WfHost]
+    // public sealed class DecodeApiHost : WfHost<DecodeApiHost, ApiMemberCodeBlocks, AsmRoutines>
+    // {
+    //     IAsmDecoder Decoder;
+
+    //     ApiHostUri Uri;
+
+    //     public static DecodeApiHost create(IAsmDecoder decoder, ApiHostUri uri)
+    //     {
+    //         var dst = create();
+    //         dst.Decoder = decoder;
+    //         dst.Uri = uri;
+    //         return dst;
+    //     }
+
+    //     protected override ref AsmRoutines Execute(IWfShell wf, in ApiMemberCodeBlocks src, out AsmRoutines dst)
+    //     {
+    //         using var step = new ApiHostDecoder(wf, this, Decoder);
+    //         dst = step.Decode(Uri, src);
+    //         return ref dst;
+    //     }
+    // }
+
+    readonly struct ApiHostDecoder : IDisposable
     {
-        IAsmDecoder Decoder;
+        public static ApiHostDecoder create(IWfShell wf, IAsmDecoder decoder)
+            => new ApiHostDecoder(wf, WfShell.host(typeof(ApiHostDecoder)), decoder);
 
-        ApiHostUri Uri;
-
-        public static DecodeApiHost create(IAsmDecoder decoder, ApiHostUri uri)
-        {
-            var dst = create();
-            dst.Decoder = decoder;
-            dst.Uri = uri;
-            return dst;
-        }
-
-        protected override ref AsmRoutines Execute(IWfShell wf, in ApiMemberCodeBlocks src, out AsmRoutines dst)
-        {
-            using var step = new DecodeApiHostStep(wf, this, Decoder);
-            dst = step.Run(Uri, src);
-            return ref dst;
-        }
-    }
-
-    readonly ref struct DecodeApiHostStep
-    {
         public IWfShell Wf {get;}
 
         readonly WfHost Host;
@@ -44,7 +47,7 @@ namespace Z0
         readonly IAsmDecoder Decoder;
 
         [MethodImpl(Inline)]
-        internal DecodeApiHostStep(IWfShell wf, WfHost host, IAsmDecoder decoder)
+        internal ApiHostDecoder(IWfShell wf, WfHost host, IAsmDecoder decoder)
         {
             Wf = wf;
             Host = host;
@@ -52,7 +55,7 @@ namespace Z0
             Wf.Created(Host);
         }
 
-        public AsmRoutine[] Run(ApiHostUri uri, ApiMemberCodeBlocks src)
+        public AsmRoutine[] Decode(ApiHostUri uri, ApiMemberCodeBlocks src)
         {
             try
             {

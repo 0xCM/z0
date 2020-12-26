@@ -12,6 +12,7 @@ namespace Z0.Asm
     public readonly struct SpecializedImmEvent : IWfEvent<SpecializedImmEvent>
     {
         public const string EventName = nameof(SpecializedImmEvent);
+
         public WfEventId EventId {get;}
 
         readonly ApiHostUri Host;

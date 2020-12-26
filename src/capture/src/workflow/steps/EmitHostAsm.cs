@@ -56,13 +56,20 @@ namespace Z0
         {
             var flow = Wf.Running();
 
-            DecodeApiHost.create(Asm.RoutineDecoder, Uri).Run(Wf, src, out dst);
+            Decode(src, out dst);
+            //DecodeApiHost.create(Asm.RoutineDecoder, Uri).Run(Wf, src, out dst);
             var emitted = Z0.Asm.ApiAsm.emit(Wf, Uri, dst.Storage, Asm.Formatter.Config);
             if(emitted.IsNonEmpty)
                 Wf.EmittedFile(dst, dst.Count, emitted);
 
             Wf.Ran(flow);
             return ref dst;
+        }
+
+        void Decode(in ApiMemberCodeBlocks src, out AsmRoutines dst)
+        {
+            using var decoder = ApiHostDecoder.create(Wf, Asm.RoutineDecoder);
+            dst = decoder.Decode(Uri, src);
         }
     }
 }

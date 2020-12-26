@@ -13,6 +13,7 @@ namespace Z0.Asm
     {
         public static ApiCaptureArchive create(IWfShell wf)
             => new ApiCaptureArchive(wf);
+
         readonly IWfShell Wf;
 
         readonly WfHost Host;

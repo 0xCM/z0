@@ -16,14 +16,6 @@ namespace Z0
     {
         public BK Class {get;}
 
-        [MethodImpl(Inline)]
-        public static implicit operator BlockedKind<T>(BK src)
-            => new BlockedKind<T>(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator SegBlockKind(BlockedKind<T> src)
-            => src.Class;
-
         public NumericKind CellKind
         {
             [MethodImpl(Inline)]
@@ -33,5 +25,13 @@ namespace Z0
         [MethodImpl(Inline)]
         public BlockedKind(SegBlockKind kind)
             => Class = kind;
+
+        [MethodImpl(Inline)]
+        public static implicit operator BlockedKind<T>(BK src)
+            => new BlockedKind<T>(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator SegBlockKind(BlockedKind<T> src)
+            => src.Class;
     }
 }
