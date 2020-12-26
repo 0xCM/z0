@@ -11,7 +11,7 @@ namespace Z0
 
         public Name ToolName;
 
-        public UsageSyntax Syntax;
+        public ToolUsage Syntax;
 
         public CmdOptionSpecs Options;
     }

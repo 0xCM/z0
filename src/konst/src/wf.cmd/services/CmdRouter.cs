@@ -13,7 +13,6 @@ namespace Z0
 
     public sealed class CmdRouter : WfService<CmdRouter,ICmdRouter<CmdRouter>>, ICmdRouter<CmdRouter>
     {
-
         ConcurrentDictionary<CmdId,ICmdReactor> Nodes;
 
         public CmdRouter()
@@ -48,7 +47,7 @@ namespace Z0
 
         public CmdResult Dispatch(ICmdSpec cmd)
         {
-            using var dispatch = Wf.Running("Dispatching");
+            using var dispatch = Wf.Running($"Dispatching {cmd.CmdName}");
             try
             {
                 if(Nodes.TryGetValue(cmd.CmdId, out var node))

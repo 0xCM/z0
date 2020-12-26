@@ -87,5 +87,4 @@ namespace Z0
         public static Span<T> cover<T>(in T src, ulong count)
             => CreateSpan(ref edit(src), (int)count);
     }
-
 }

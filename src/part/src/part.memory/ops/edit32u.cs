@@ -11,13 +11,13 @@ namespace Z0
 
     partial struct memory
     {
+        /// <summary>
+        /// Presents a readonly <typeparamref name='T'/> reference as a mutable <see cref='uint'/> reference
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ReadOnlySpan<char> chars<E>(ReadOnlySpan<E> src)
-            where E : unmanaged
-                => recover<E,char>(src);
-
-        [MethodImpl(Inline), Op]
-        public static unsafe ReadOnlySpan<char> chars(string src)
-            => cover(pchar2(src), (uint)src.Length);
+        public static ref uint edit32u<T>(in T src)
+            => ref edit<T,uint>(src);
     }
 }

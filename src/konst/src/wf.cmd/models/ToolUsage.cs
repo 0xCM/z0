@@ -13,12 +13,12 @@ namespace Z0
     /// Defines the usage syntax of a command or tool
     /// </summary>
     [Datatype]
-    public readonly struct UsageSyntax : ITextual, IContented<string>
+    public readonly struct ToolUsage : ITextual, IContented<string>
     {
         public string Content {get;}
 
         [MethodImpl(Inline)]
-        public UsageSyntax(string content)
+        public ToolUsage(string content)
             => Content = content;
 
         [MethodImpl(Inline)]
@@ -29,11 +29,11 @@ namespace Z0
             => Format();
 
         [MethodImpl(Inline)]
-        public static implicit operator UsageSyntax(string src)
-            => new UsageSyntax(src);
+        public static implicit operator ToolUsage(string src)
+            => new ToolUsage(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator string(UsageSyntax src)
+        public static implicit operator string(ToolUsage src)
             => src.Content;
     }
 }

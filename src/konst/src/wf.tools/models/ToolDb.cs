@@ -22,6 +22,14 @@ namespace Z0
 
         public FS.FolderPath Root {get;}
 
+        public ToolDb(IWfShell wf)
+        {
+            Wf = wf;
+            Root = Wf.Db().ToolDbRoot();
+            _Toolsets = toolsets();
+            _Catalog = catalog(wf);
+        }
+
         [MethodImpl(Inline), Op]
         public static Toolset toolset(string id, FS.FolderPath location)
             => new Toolset(id, location);
@@ -53,7 +61,10 @@ namespace Z0
 
         public void ListCommands()
         {
-            iter(Cmd.known(), spec => term.print(spec.CmdId));
+            foreach(var a in Wf.Components)
+            {
+                iter(Cmd.search(a), spec => term.print(spec.CmdId));
+            }
         }
 
         [Op]
@@ -65,14 +76,6 @@ namespace Z0
                 toolset("Msys64", FS.dir("j:/tools/msys64/usr/bin"))
             );
             return new Toolsets(data);
-        }
-
-        public ToolDb(IWfShell wf)
-        {
-            Wf = wf;
-            Root = Wf.Db().ToolDbRoot();
-            _Toolsets = toolsets();
-            _Catalog = catalog(wf);
         }
 
         public ToolCatalog Catalog

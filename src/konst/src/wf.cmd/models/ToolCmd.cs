@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Defines a tool invocation script
@@ -30,6 +30,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator ToolCmd<T>(T src)
-            => CmdTools.cmd(src);
+            => new ToolCmd<T>(src, Records.values(src, typeof(T).DeclaredInstanceFields()));
     }
 }

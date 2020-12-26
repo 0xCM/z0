@@ -4,10 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    [Cmd]
+    [Cmd(CmdName)]
     public struct EmitRuntimeIndexCmd : ICmdSpec<EmitRuntimeIndexCmd>
     {
-
+        public const string CmdName = "emit-runtime-index";
     }
 
 

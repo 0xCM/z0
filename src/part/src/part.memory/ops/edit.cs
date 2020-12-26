@@ -21,22 +21,6 @@ namespace Z0
         public static ref T edit<T>(in T src)
             => ref AsRef(src);
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref byte edit8u<T>(in T src)
-            => ref edit<T,byte>(src);
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref ushort edit16u<T>(in T src)
-            => ref edit<T,ushort>(src);
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref uint edit32u<T>(in T src)
-            => ref edit<T,uint>(src);
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref ulong edit64u<T>(in T src)
-            => ref edit<T,ulong>(src);
-
         /// <summary>
         /// Are you sure you want to do this?
         /// </summary>
@@ -80,6 +64,5 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<T> edit<T>(T[] src)
             => src;
-
     }
 }

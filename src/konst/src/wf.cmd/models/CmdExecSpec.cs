@@ -7,19 +7,17 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-
     public struct CmdExecSpec
     {
         /// <summary>
         /// The path to the tool executable
         /// </summary>
-        public readonly FS.FilePath ToolPath;
+        public FS.FilePath CmdPath;
 
         /// <summary>
         /// The arguments to pass to the tool
         /// </summary>
-        public readonly string Args;
+        public string Args;
 
         /// <summary>
         /// The working folder, if any
@@ -30,14 +28,5 @@ namespace Z0
         /// Environment variables to use, if any
         /// </summary>
         public NamedValues<string> Vars;
-
-        [MethodImpl(Inline)]
-        public CmdExecSpec(FS.FilePath tool, string args, FS.FolderPath? root = null)
-        {
-            ToolPath = tool;
-            Args = args;
-            WorkingDir = root ?? FS.FolderPath.Empty;
-            Vars = default;
-        }
     }
 }

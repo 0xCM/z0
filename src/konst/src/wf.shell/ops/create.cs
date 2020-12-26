@@ -42,13 +42,11 @@ namespace Z0
             ctx.Paths = _paths;
             ctx.Settings = JsonSettings.Load(_paths.AppConfigPath);
             ctx.Controller = control;
-            var init = new WfInit(dbRoot, ctx, appLogConfig, partIdList);
-
             ci.InitConfigTime = clock.Elapsed;
             clock.Restart();
 
-            IWfShell wf = new WfShell(init);
-            wf.Router.Enlist(WfShell.reactors(wf,parts.Components));
+            IWfShell wf = new WfShell(new WfInit(dbRoot, ctx, appLogConfig, partIdList));
+            wf.Router.Enlist(WfShell.reactors(wf));
 
             ci.ShellCreateTime = clock.Elapsed;
             ci.FinishTS = now();

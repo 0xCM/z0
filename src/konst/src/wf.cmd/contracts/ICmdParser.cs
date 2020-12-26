@@ -5,15 +5,16 @@
 namespace Z0
 {
     using System;
+    using System.IO;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
+    using static memory;
 
-    partial struct CmdTools
+    public interface ICmdParser : IWfService
     {
-        [MethodImpl(Inline)]
-        public static ToolArchive<T> archive<T>(ToolId tool, FS.FolderPath root, ToolArchiveKind kind)
-            where T : struct, ITool<T>
-                => new ToolArchive<T>(tool, root, kind);
+        bool Parse(CmdLine src, out CmdSpec dst);
+
+        bool Parse(ReadOnlySpan<char> src, out ArgPrefix dst);
     }
 }

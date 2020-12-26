@@ -7,7 +7,7 @@ namespace Z0
     [Cmd(CmdName)]
     public struct EmitApiIndexCmd : ICmdSpec<EmitApiIndexCmd>
     {
-        public const string CmdName = "emit-hex-index";
+        public const string CmdName = "emit-api-index";
     }
 
     partial class XCmd

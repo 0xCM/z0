@@ -12,11 +12,13 @@ namespace Z0
     partial class WfShell
     {
         [Op]
-        public static ICmdReactor[] reactors(IWfShell wf, params Assembly[] components)
+        public static ICmdReactor[] reactors(IWfShell wf)
         {
-            var types = components.Length == 0 ? wf.Components.Types() : components.Types();
+            var types = wf.Components.Types();
+            wf.Status($"Searching {types.Length} types for reactors");
             var reactors = types.Concrete().Tagged<CmdReactorAttribute>().Select(t => (ICmdReactor)Activator.CreateInstance(t));
             iter(reactors, r => r.Init(wf));
+            wf.Status($"Found {reactors.Length} reactors");
             return reactors;
         }
     }

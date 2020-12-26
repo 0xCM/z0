@@ -9,7 +9,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    readonly struct Runner
+    class Runner
     {
         readonly WfHost Host;
 
@@ -29,7 +29,7 @@ namespace Z0
                 var app = new Runner(wf);
                 if(args.Length == 0)
                 {
-                    wf.Status("usage: launch <verb> [options]");
+                    wf.Status("usage: run <command> [options]");
                     app.Run(new ShowConfigCmd());
                 }
                 else
@@ -62,14 +62,40 @@ namespace Z0
             Wf.Status(string.Format("Launched process {0}", process.ProcessId));
         }
 
+        void ShowHandlers()
+        {
+            zfunc.iter(Wf.Router.SupportedCommands, c => Wf.Status(c));
+        }
+
         public void Run(CmdLine cmd)
         {
+            ShowHandlers();
             var args = cmd.Parts;
             var count = args.Length;
+            var commands = Commands.service(Wf);
             for(var i=0; i<count; i++)
             {
                 ref readonly var arg = ref skip(args,i);
-                Wf.Status(string.Format("({0}) {1}", i, arg.Format()));
+                if(arg.IsNonEmpty)
+                {
+                    switch(arg.Content)
+                    {
+                        case EmitApiIndexCmd.CmdName:
+                            commands.EmitApiIndex().Wait();
+                        break;
+                        case EmitRuntimeIndexCmd.CmdName:
+                            commands.EmitRuntimeIndex().Wait();
+                        break;
+                        case DumpCliTablesCmd.CmdName:
+                            commands.DumpCliTables(Parts.Commands.Assembly).Wait();
+                        break;
+                        default:
+                            Wf.Status(string.Format("Not processor found for {0}", arg));
+                            break;
+                    }
+                }
+
+                //Wf.Status(string.Format("({0}) {1}", i, arg.Format()));
             }
         }
 

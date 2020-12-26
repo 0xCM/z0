@@ -6,14 +6,15 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
 
     using static Konst;
     using static z;
 
-    partial struct CmdTools
+    partial class XWf
     {
-        [MethodImpl(Inline), Op]
-        public static CmdExecSpec execspec(FS.FilePath tool, string args, FS.FolderPath? root = null)
-            => new CmdExecSpec(tool, args, root);
+        public static CmdId CmdId<T>(this T spec)
+            where T : struct, ICmdSpec<T>
+                => Cmd.id<T>();
     }
 }

@@ -8,7 +8,7 @@ namespace Z0
 
     using static z;
 
-    public interface IWfDb :  IWfService, IWfDbPaths, IFileArchive
+    public interface IWfDb : IWfService, IWfDbPaths, IFileArchive
     {
         IToolDb ToolDb()
             => new ToolDb(Wf);

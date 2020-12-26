@@ -6,14 +6,22 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
 
     using static Konst;
     using static z;
 
-    public static partial class XCmd
+    partial class XWf
     {
-        public static CmdId Id<T>(this T spec)
-            where T : struct, ICmdSpec<T>
-                => Cmd.id<T>();
+        public static IEnumerable<ICmdSpec> FindCommands(this IWfShell wf)
+        {
+            foreach(var a in wf.Components)
+            {
+                foreach(var c in Cmd.search(a))
+                {
+                    yield return c;
+                }
+            }
+        }
     }
 }

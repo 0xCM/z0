@@ -41,13 +41,15 @@ namespace Z0
 
         readonly CmdBuilder CmdBuilder;
 
+        readonly CmdLine Args;
+
         public App(IWfShell wf)
         {
             Host = WfShell.host(typeof(App));
             Wf = wf.WithHost(Host);
             CmdBuilder = wf.CmdBuilder();
             Db = Wf.Db();
-
+            Args = wf.Args;
         }
 
         public static void run(IWfShell wf, CmdLine cmd)
@@ -67,6 +69,11 @@ namespace Z0
             //run(wf, new CmdLine("llvm-mc --help"));
 
             run(wf,cmd);
+        }
+
+        void ShowHandlers()
+        {
+            zfunc.iter(Wf.Router.SupportedCommands, c => Wf.Status(c));
         }
 
         public static void show(IWfShell wf, CmdLine cmd)
@@ -99,17 +106,18 @@ namespace Z0
         }
 
 
-        static void PipeRuntimeFiles(IWfShell wf)
+        static void ListRuntimeFiles(IWfShell wf, FS.FilePath dst)
         {
             var archive = wf.RuntimeArchive();
-            PipeFiles(wf, archive.DllFiles);
-            PipeFiles(wf, archive.ExeFiles);
-            PipeFiles(wf, archive.PdbFiles);
-            PipeFiles(wf, archive.JsonFiles);
-            PipeFiles(wf, archive.XmlFiles);
+            using var writer = dst.Writer();
+            ListFiles(wf, archive.DllFiles, writer);
+            ListFiles(wf, archive.ExeFiles, writer);
+            ListFiles(wf, archive.PdbFiles, writer);
+            ListFiles(wf, archive.JsonFiles, writer);
+            ListFiles(wf, archive.XmlFiles, writer);
         }
 
-        static void PipeFiles(IWfShell wf, FS.Files src)
+        static void ListFiles(IWfShell wf, FS.Files src, StreamWriter dst)
         {
             foreach(var file in src)
                 wf.Status(file.ToUri().Format());
@@ -169,12 +177,11 @@ namespace Z0
             return files;
         }
 
-
         [Op]
         public static CmdResult exec(ListFilesCmd cmd)
         {
             var archive = FileArchives.create(cmd.SourceDir, cmd.Extensions);
-            var id = cmd.Id();
+            var id = cmd.CmdId();
             var list = cmd.EmissionLimit != 0 ? match(cmd.SourceDir, cmd.EmissionLimit, cmd.Extensions) : match(cmd.SourceDir, cmd.Extensions);
             var outcome = FileArchives.emit(list, cmd.FileUriMode, cmd.TargetPath);
             return outcome ? Cmd.ok(cmd) : Cmd.fail(cmd,outcome.Format());
@@ -249,9 +256,6 @@ namespace Z0
         //     return Wf.Router.Dispatch(spec);
         // }
 
-
-        public CmdResult EmitAsmOpCodes()
-            => Wf.Router.Dispatch(CmdBuilder.EmitAsmOpCodes());
 
         void WriteJson()
         {
@@ -395,18 +399,6 @@ namespace Z0
             Wf.Rows(rows);
         }
 
-        Task<CmdResult> EmitApiIndex()
-            => Wf.Dispatch(CmdBuilder.EmitApiIndex());
-
-        Task<CmdResult> EmitRuntimeIndex()
-            => Wf.Dispatch(CmdBuilder.EmitRuntimeIndex());
-
-        Task<CmdResult> DumpCliTables(Assembly src)
-            => Wf.Dispatch(CmdBuilder.DumpCliTables(src));
-
-       Task<CmdResult> EmitDocComments()
-            => Wf.Dispatch(CmdBuilder.EmitDocComments());
-
 
         void ShowPartSummary()
         {
@@ -419,15 +411,51 @@ namespace Z0
         }
 
 
+        public void Run(CmdLine cmd)
+        {
+            var args = cmd.Parts;
+            var count = args.Length;
+            var commands = Commands.service(Wf);
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var arg = ref skip(args,i);
+                if(arg.IsNonEmpty)
+                {
+                    switch(arg.Content)
+                    {
+                        case EmitApiIndexCmd.CmdName:
+                            commands.EmitApiIndex().Wait();
+                        break;
+                        case EmitRuntimeIndexCmd.CmdName:
+                            commands.EmitRuntimeIndex().Wait();
+                        break;
+                        case DumpCliTablesCmd.CmdName:
+                            commands.DumpCliTables(Parts.Commands.Assembly).Wait();
+                        break;
+                        default:
+                            Wf.Status(string.Format("Not processor found for {0}", arg));
+                            break;
+                    }
+                }
+
+                //Wf.Status(string.Format("({0}) {1}", i, arg.Format()));
+            }
+        }
+
+
         public void Run()
         {
+            ShowHandlers();
+
+            //Run(Args);
             //EmitProcessImages(Wf);
             //EmitAsmMnemonics();
             //EmitAsmOpCodes();
             //EmitBuildArchiveList(Wf.Db().BuildArchiveRoot(), "zbuild");
             //EmitCilTables(Wf, "z0.bitcore.dll");
 
-            ShowPartSummary();
+
+            //ShowPartSummary();
             //EmitDocComments().Wait();
 
             //EmitResData();

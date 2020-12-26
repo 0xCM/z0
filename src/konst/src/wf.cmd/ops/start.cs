@@ -12,13 +12,13 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct CmdTools
+    partial struct Cmd
     {
         public static async Task<int> start(CmdExecSpec spec, WfStatusRelay dst)
         {
             var info = new ProcessStartInfo
             {
-                FileName = spec.ToolPath.Name,
+                FileName = spec.CmdPath.Name,
                 Arguments = spec.Args,
                 RedirectStandardError = true,
                 RedirectStandardOutput = true,

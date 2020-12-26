@@ -12,7 +12,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct IndexedView<T>
+    public readonly struct IndexedView<T> : IConstIndex<T>
     {
         readonly T[] Data;
 
@@ -33,6 +33,12 @@ namespace Z0
         }
 
         public ReadOnlySpan<T> Terms
+        {
+            [MethodImpl(Inline)]
+            get => Data;
+        }
+
+        public ReadOnlySpan<T> Items
         {
             [MethodImpl(Inline)]
             get => Data;

@@ -15,13 +15,27 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public CmdLinePart(string content)
+            => Content = content;
+
+        public ReadOnlySpan<char> Chars
         {
-            Content = content;
+            [MethodImpl(Inline)]
+            get => memory.chars(Content);
+        }
+
+        public bool IsEmpty
+        {
+            get => text.empty(Content);
+        }
+
+        public bool IsNonEmpty
+        {
+            get => !text.empty(Content);
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => Content;
+            => Content ?? EmptyString;
 
         public override string ToString()
             => Format();

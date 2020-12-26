@@ -5,15 +5,14 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
 
-    [ApiHost]
-    public readonly struct BuildScripts
+    using static Konst;
+    using static z;
+
+    public static partial class XWf
     {
-        public bool config<T>(string src, out T dst)
-            where T : struct
-        {
-            dst = default;
-            return true;
-        }
+
     }
 }
