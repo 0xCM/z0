@@ -65,7 +65,7 @@ namespace Z0
             OperationHosts = opHosts;
             ServiceHosts = svcHostTypes;
             ApiHosts = dtHosts.Cast<IApiHost>().Cast<IApiHost>().Concat(OperationHosts.Cast<IApiHost>()).Array();
-            Operations = ApiHosts.Storage.SelectMany(x => x.DeclaredMethods);
+            Operations = ApiHosts.Storage.SelectMany(x => x.Methods);
         }
 
         /// <summary>

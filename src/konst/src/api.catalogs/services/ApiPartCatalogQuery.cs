@@ -30,14 +30,14 @@ namespace Z0
         public MethodInfo[] Vectorized<T>(W128 w, bool generic)
             where T : unmanaged
                 => (from host in Source.ApiHosts.Storage
-                    from m in host.DeclaredMethods.VectorizedDirect<T>(w)
+                    from m in host.Methods.VectorizedDirect<T>(w)
                     where m.IsGenericMethod == generic
                     select m).Array();
 
         public MethodInfo[] Generic
         {
             get => (from host in Source.ApiHosts.Storage
-                from m in host.DeclaredMethods.OpenGeneric()
+                from m in host.Methods.OpenGeneric()
                 select m).Array();
         }
 
@@ -45,7 +45,7 @@ namespace Z0
         {
             [Op, MethodImpl(NotInline)]
             get => (from host in Source.ApiHosts.Storage
-                from m in host.DeclaredMethods.NonGeneric()
+                from m in host.Methods.NonGeneric()
                 select m).Array();
         }
 
@@ -53,7 +53,7 @@ namespace Z0
         public MethodInfo[] Vectorized<T>(W256 w, bool generic)
             where T : unmanaged
                 => (from host in Source.ApiHosts.Storage
-                    from m in host.DeclaredMethods.VectorizedDirect<T>(w)
+                    from m in host.Methods.VectorizedDirect<T>(w)
                     where m.IsGenericMethod == generic
                     select m).Array();
 

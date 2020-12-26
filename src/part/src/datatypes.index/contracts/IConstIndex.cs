@@ -16,25 +16,25 @@ namespace Z0
     public interface IConstIndex<T> : ISeq<T>, IMeasured, IEnumerable<T>, ITextual
     {
         ref readonly T First
-            => ref first(Items);
+            => ref first(View);
 
         ref readonly T Last
-            => ref skip(Items, Length - 1);
+            => ref skip(View, Length - 1);
 
         ref readonly T this[long index]
-            => ref memory.skip(Items, index);
+            => ref memory.skip(View, index);
 
         ref readonly T this[ulong index]
-            => ref memory.skip(Items, index);
+            => ref memory.skip(View, index);
 
         ref readonly T Lookup(long index)
-            => ref memory.skip(Items,index);
+            => ref memory.skip(View,index);
 
         ref readonly T Lookup(ulong index)
-            => ref memory.skip(Items,index);
+            => ref memory.skip(View,index);
 
         int IMeasured.Length
-            => Items.Length;
+            => View.Length;
 
         bool INullity.IsEmpty
             => Length == 0;
@@ -43,9 +43,9 @@ namespace Z0
             => string.Format("({0}:{1})*", typeof(T).Name, Length);
 
         IEnumerator IEnumerable.GetEnumerator()
-            => Index.enumerator(Items);
+            => Index.enumerator(View);
 
         IEnumerator<T> IEnumerable<T>.GetEnumerator()
-            => Index.enumerator(Items);
+            => Index.enumerator(View);
     }
 }

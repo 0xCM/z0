@@ -22,13 +22,10 @@ namespace Z0
         string ITextual.Format()
             => string.Format("({0}:{1})*", typeof(T).Name, Storage?.Length ?? 0);
 
-        ReadOnlySpan<T> ISeq<T>.Items
-            => Storage;
-
         Span<T> Edit
             => Storage;
 
-        ReadOnlySpan<T> View
+        ReadOnlySpan<T> ISeq<T>.View
             => Storage;
 
         int IMeasured.Length

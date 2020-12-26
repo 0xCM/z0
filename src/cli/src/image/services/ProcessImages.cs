@@ -34,7 +34,7 @@ namespace Z0
         [Op]
         public static ref EmitImageContentCmd specify(IWfShell wf, ProcessModule src, ref EmitImageContentCmd cmd)
         {
-            var located = LocatedImages.locate(src);
+            var located = ImageMaps.locate(src);
             cmd.Source = located;
             cmd.Target = wf.Db().Table(ImageContentRecord.TableId, located.ImagePath.FileName.WithoutExtension);
             return ref cmd;

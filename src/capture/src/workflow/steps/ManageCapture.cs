@@ -52,7 +52,6 @@ namespace Z0
             App = asm.ContextRoot;
             Sink = Wf.WfSink;
             Parts = Wf.Api.PartIdentities;
-            //Broker = state.CaptureBroker;
             Broker = AsmWorkflows.broker(wf);
             Asm = asm;
             Wf.Created();

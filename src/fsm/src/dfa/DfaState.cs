@@ -48,10 +48,10 @@ namespace Z0
             get => States;
         }
 
-        public ReadOnlySpan<DfaState<S>> Items
+        public ReadOnlySpan<DfaState<S>> View
         {
             [MethodImpl(Inline)]
-            get => States.Items;
+            get => States.View;
         }
 
         public uint Count

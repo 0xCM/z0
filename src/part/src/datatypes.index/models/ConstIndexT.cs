@@ -23,7 +23,7 @@ namespace Z0
             get => Data?.Length ?? 0;
         }
 
-        public ReadOnlySpan<T> Items
+        public ReadOnlySpan<T> View
         {
             [MethodImpl(Inline)]
             get => Data;
@@ -103,7 +103,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator ReadOnlySpan<T>(ConstIndex<T> src)
-            => src.Items;
+            => src.View;
 
         [MethodImpl(Inline)]
         public static implicit operator ConstIndex<T>(T[] src)

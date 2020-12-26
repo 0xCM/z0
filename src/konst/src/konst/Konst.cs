@@ -38,11 +38,6 @@ namespace Z0
         public const char HexDelimiter = Chars.Space;
 
         /// <summary>
-        /// A type considered to be empty
-        /// </summary>
-        public static Type EmptyType => typeof(void);
-
-        /// <summary>
         /// Uppercase letter classifier accessor
         /// </summary>
         public static UpperCased UpperCase => default;

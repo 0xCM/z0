@@ -53,7 +53,7 @@ namespace Z0
 
         public void Run()
         {
-            LocatedImages.emit(Images, TargetPath);
+            ImageMaps.emit(Images, TargetPath);
         }
 
         public void Dispose()

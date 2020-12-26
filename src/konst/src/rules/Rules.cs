@@ -55,7 +55,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool equals<A>(Antecedant<A> src, Antecedant<A> dst)
             where A : IEquatable<A>
-                => Index.equals(src.Terms.Items, dst.Terms.Items);
+                => Index.equals(src.Terms.View, dst.Terms.View);
 
         [MethodImpl(Inline)]
         public static bool equals<C>(Consequent<C> src, Consequent<C> dst)

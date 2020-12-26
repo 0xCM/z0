@@ -23,7 +23,7 @@ namespace Z0
 
         public ApiHostUri Uri {get;}
 
-        public MethodInfo[] DeclaredMethods {get;}
+        public MethodInfo[] Methods {get;}
 
         [MethodImpl(Inline)]
         public ApiHost(Type type, string name, PartId part, ApiHostUri uri)
@@ -32,7 +32,7 @@ namespace Z0
             HostType = type;
             PartId = part;
             Uri = uri;
-            DeclaredMethods = HostType.DeclaredMethods();
+            Methods = HostType.DeclaredMethods();
         }
 
         public bool IsEmpty
@@ -81,6 +81,6 @@ namespace Z0
             => !a.Equals(b);
 
         public static ApiHost Empty
-            => new ApiHost(EmptyType, EmptyString, 0, ApiHostUri.Empty);
+            => new ApiHost(typeof(void), EmptyString, 0, ApiHostUri.Empty);
     }
 }

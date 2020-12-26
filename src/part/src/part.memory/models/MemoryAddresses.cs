@@ -20,10 +20,10 @@ namespace Z0
         internal MemoryAddresses(MemoryAddress[] src)
             => Data = src;
 
-        public ReadOnlySpan<MemoryAddress> Items
+        public ReadOnlySpan<MemoryAddress> View
         {
             [MethodImpl(Inline)]
-            get => Data.Items;
+            get => Data.View;
         }
 
         public uint Count

@@ -11,12 +11,18 @@ namespace Z0
 
     public readonly struct ImageMap
     {
+        public static ImageMap load(LocatedImageIndex images, MemoryAddress[] locations)
+        {
+            Array.Sort(locations);
+            return new ImageMap(images, memory.sort(locations));
+        }
+
         readonly LocatedImageIndex Images;
 
         readonly MemoryAddresses Locations;
 
         [MethodImpl(Inline)]
-        internal ImageMap(LocatedImageIndex images, MemoryAddresses locations)
+        ImageMap(LocatedImageIndex images, MemoryAddresses locations)
         {
             Images = images;
             Locations = locations;

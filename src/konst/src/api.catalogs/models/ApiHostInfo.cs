@@ -20,7 +20,7 @@ namespace Z0
 
         public PartId PartId {get;}
 
-        public MethodInfo[] DeclaredMethods {get;}
+        public MethodInfo[] Methods {get;}
 
         public Type HostType {get;}
 
@@ -30,7 +30,7 @@ namespace Z0
             HostType = host;
             Uri = uri;
             PartId = part;
-            DeclaredMethods = methods;
+            Methods = methods;
         }
     }
 }

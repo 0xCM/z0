@@ -13,11 +13,6 @@ namespace Z0
         [Op, Closures(Closure)]
         public static IEnumerable<T> enumerate<T>(ReadOnlySpan<T> src)
             => src.ToArray();
-        // {
-        //     var e = src.GetEnumerator();
-        //     while(e.MoveNext())
-        //         yield return e.Current;
-        // }
 
 
         [Op, Closures(Closure)]

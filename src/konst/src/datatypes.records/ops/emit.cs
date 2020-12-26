@@ -39,7 +39,7 @@ namespace Z0
             where T : struct
         {
             var count = src.Count;
-            var data = src.Items;
+            var data = src.View;
 
             using var writer = dst.Writer();
             writer.WriteLine(format(header));

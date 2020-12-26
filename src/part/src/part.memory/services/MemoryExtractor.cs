@@ -6,15 +6,17 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
-    using static Konst;
-    using static z;
-    
+
+    using static Part;
+
+    /// <summary>
+    /// Defines *core* memory extraction operations
+    /// </summary>
     [ApiHost]
     public unsafe readonly struct MemoryExtractor
     {
         const int MaxZeroCount = 10;
-        
+
         public static MemoryExtractor Service => default;
 
         [MethodImpl(Inline), Op]
@@ -32,23 +34,23 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static int read(MemoryAddress src, ref byte dst, int count)
         {
-            var pSrc = z.pointer(ref dst);
+            var pSrc = memory.pointer(ref dst);
             return read(ref pSrc, count, ref dst);
         }
 
         [MethodImpl(Inline), Op]
-        public static int read(ref byte* pSrc, int count, Span<byte> dst)
-            => read(ref pSrc, count, ref first(dst));
+        static int read(ref byte* pSrc, int count, Span<byte> dst)
+            => read(ref pSrc, count, ref memory.first(dst));
 
         [MethodImpl(Inline), Op]
-        public static int read(ref byte* pSrc, int limit, ref byte dst)
+        static int read(ref byte* pSrc, int limit, ref byte dst)
         {
             var offset = 0;
             var count = 0;
-            while(offset < limit && count < MaxZeroCount)        
+            while(offset < limit && count < MaxZeroCount)
             {
                 var value = Unsafe.Read<byte>(pSrc++);
-                seek(dst, offset++) = value;
+                memory.seek(dst, offset++) = value;
                 if(value != 0)
                     count = 0;
                 else

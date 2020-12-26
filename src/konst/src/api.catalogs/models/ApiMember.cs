@@ -8,13 +8,12 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     /// <summary>
     /// Describes a reified api member which may be of hosted or located state
     /// </summary>
-    public struct ApiMember : IApiMember<ApiMember>
+    public readonly struct ApiMember : IApiMember<ApiMember>
     {
         public OpIdentity Id {get;}
 
@@ -31,6 +30,7 @@ namespace Z0
         public CilMethod Cil {get;}
 
         public CliSig ApiSig {get;}
+
         public ApiMetadataUri MetaUri
             => Method;
 

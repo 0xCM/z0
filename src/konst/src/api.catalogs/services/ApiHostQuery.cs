@@ -9,7 +9,7 @@ namespace Z0
     using System.Linq;
     using System.Reflection;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Defines api queries over a specific host
@@ -32,7 +32,7 @@ namespace Z0
         /// All hosted methods
         /// </summary>
         public MethodInfo[] Hosted
-            => ApiHostMethods.create(Source, Source.DeclaredMethods);
+            => ApiHostMethods.create(Source, Source.Methods);
 
         /// <summary>
         /// All hosted generic methods

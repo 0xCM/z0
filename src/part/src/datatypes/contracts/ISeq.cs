@@ -11,6 +11,6 @@ namespace Z0
     [Free]
     public interface ISeq<T>
     {
-        ReadOnlySpan<T> Items {get;}
+        ReadOnlySpan<T> View {get;}
     }
 }

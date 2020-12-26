@@ -37,12 +37,6 @@ namespace Z0
             get => Data;
         }
 
-        public ReadOnlySpan<T> Items
-        {
-            [MethodImpl(Inline)]
-            get => Data;
-        }
-
         public T[] Storage
         {
             [MethodImpl(Inline)]
@@ -97,7 +91,7 @@ namespace Z0
 
         public bool Equals<C>(Index<T> other, C comparer)
             where C : IEqualityComparer<T>
-                => Index.equals(Items, other.Items, comparer);
+                => Index.equals(View, other.View, comparer);
        public string Format()
             => Index.delimit(Data).Format();
 

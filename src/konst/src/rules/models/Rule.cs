@@ -26,6 +26,6 @@ namespace Z0
         }
 
         public bool Equals(Rule<A,C> src)
-            => Index.equals(Terms.Items, src.Terms.Items);
+            => Index.equals(Terms.View, src.Terms.View);
     }
 }
