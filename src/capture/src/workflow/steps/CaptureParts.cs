@@ -13,72 +13,23 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct ApiPartCapture
+    public struct PartCaptureService : IDisposable
     {
-        static WfHost Host => WfShell.host(typeof(ApiPartCapture));
-
-        public static void capture(IAsmWf asm, IApiPartCatalog src)
-        {
-            if(src.IsEmpty)
-                return;
-
-            capture(asm, src.ApiDataTypes);
-            capture(asm, src.OperationHosts);
-        }
-
-        public static void capture(IAsmWf asm, ApiHost[] src)
-        {
-            var count = src.Length;
-            var hosts = @readonly(src);
-            for(var i=0; i<count; i++)
-                CaptureApiHost.create(asm, skip(hosts,i)).Run(asm.Wf);
-        }
-
-        public static void capture(IAsmWf asm, ApiDataTypes src)
-        {
-            using var step = new ExtractMembers(asm.Wf, Host);
-            var extracted = @readonly(step.Extract(src).GroupBy(x => x.Host).Select(x => kvp(x.Key, x.Array())).Array());
-            for(var i=0; i<extracted.Length; i++)
-            {
-                ref readonly var x = ref skip(extracted,i);
-                using var emit = new EmitCaptureArtifactsStep(asm, Host, x.Key, x.Value);
-                emit.Run();
-            }
-        }
-    }
-
-    public sealed class CaptureParts : WfHost<CaptureParts,WfCaptureState>
-    {
-        protected override void Execute(IWfShell shell, in WfCaptureState state)
-        {
-            using var step = new CapturePartsStep(state, this);
-            step.Run();
-        }
-    }
-
-    public struct CapturePartsStep : IDisposable
-    {
-        readonly WfCaptureState State;
+        public static PartCaptureService create(IWfShell wf, IAsmContext asm)
+            => new PartCaptureService(wf, WfShell.host(typeof(PartCaptureService)), asm);
 
         readonly IWfShell Wf;
 
-        public IWfInit Config;
-
-        readonly CorrelationToken Ct;
-
-        readonly ICaptureContext Context;
+        readonly IAsmContext Asm;
 
         readonly WfHost Host;
 
         [MethodImpl(Inline)]
-        public CapturePartsStep(WfCaptureState state, WfHost host)
+        public PartCaptureService(IWfShell wf, WfHost host, IAsmContext asm)
         {
-            State = state;
             Host = host;
-            Wf = state.Wf.WithHost(Host);
-            Ct = Wf.Ct;
-            Config = State.Config;
-            Context = State.CWf.Context;
+            Wf = wf.WithHost(Host);
+            Asm = asm;
             Wf.Created();
         }
 
@@ -93,7 +44,7 @@ namespace Z0
 
             ClearCaptureArchives.create().Run(Wf);
 
-            var catalogs = Config.Api.Catalogs.View;
+            var catalogs = Wf.Api.Catalogs.View;
             var count = catalogs.Length;
             for(var i=0; i<count; i++)
                 CapturePart(skip(catalogs,i));
@@ -113,7 +64,7 @@ namespace Z0
             var count = src.Length;
             var hosts = @readonly(src);
             for(var i=0; i<count; i++)
-                CaptureApiHost.create(State, skip(hosts,i)).Run(Wf);
+                CaptureApiHost.create(Asm, skip(hosts,i)).Run(Wf);
         }
 
         void Capture(ApiDataTypes src)
@@ -123,7 +74,7 @@ namespace Z0
             for(var i=0; i<extracted.Length; i++)
             {
                 ref readonly var x = ref skip(extracted,i);
-                using var emit = new EmitCaptureArtifactsStep(State, Host, x.Key, x.Value);
+                using var emit = new EmitCaptureArtifactsStep(Wf, Host, Asm, x.Key, x.Value);
                 emit.Run();
             }
         }

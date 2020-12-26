@@ -48,9 +48,9 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public ErrorEvent(string cmd, T data, CorrelationToken ct, AppMsgSource source)
+        public ErrorEvent(string label, T data, CorrelationToken ct, AppMsgSource source)
         {
-            EventId = (EventName, cmd, ct);
+            EventId = (EventName, label, ct);
             Exception = none<Exception>();
             Payload = data;
             Source = source;

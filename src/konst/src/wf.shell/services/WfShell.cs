@@ -100,17 +100,9 @@ namespace Z0
             Router = router;
         }
 
-        IWfShell Wf => this;
-
-        // public WfExecFlow Running()
-        // {
-        //     Wf.SignalRunning();
-        //     return Wf.Flow();
-        // }
-
         public WfExecToken Ran(WfExecFlow src)
         {
-            Wf.SignalRan();
+            WfEvents.signal(this).Ran();
             var token = CloseExecToken(src.Token);
             Tokens.TryAdd(token.Started, token);
             return token;

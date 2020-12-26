@@ -23,7 +23,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public RowEvent(T data)
         {
-            EventId = WfEventId.define(EventName);
+            EventId = EventName;
             Payload = data;
         }
 

@@ -6,23 +6,29 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Text;
 
     using static Konst;
-    using static z;
-
-    using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
-    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
-    using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
     partial struct WfEvents
     {
-        [MethodImpl(Inline), Op]
-        public static ClaimFailedEvent failed(ClaimKind claim, string description, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => new ClaimFailedEvent(claim,description, CallingMember.define(caller,file,line), CorrelationToken.Empty);
+        /// <summary>
+        /// Defines a <see cref='CmdRanEvent{T}'/> event indicating failure
+        /// </summary>
+        /// <param name="id">The step identifier</param>
+        /// <param name="ct">The correlation token</param>
+        /// <param name="flair">The flair</param>
+        [MethodImpl(Inline), Op, Closures(UInt64k)]
+        public static CmdRanEvent fail(CmdSpec spec, CorrelationToken ct)
+            => new CmdRanEvent(spec, false, ct);
 
-        [MethodImpl(Inline), Op]
-        public static ClaimFailedEvent failed(ClaimKind claim, string description, CallingMember origin, PartId part = 0)
-            => new ClaimFailedEvent(claim,description, origin, part);
+        /// <summary>
+        /// Defines a <see cref='CmdRanEvent{T}'/> event indicating failure
+        /// </summary>
+        /// <param name="id">The step identifier</param>
+        /// <param name="ct">The correlation token</param>
+        /// <param name="flair">The flair</param>
+        [MethodImpl(Inline), Op, Closures(UInt64k)]
+        public static CmdRanEvent<T> fail<T>(CmdSpec spec, CorrelationToken ct)
+            => new CmdRanEvent<T>(spec, false, default(T), ct);
     }
 }

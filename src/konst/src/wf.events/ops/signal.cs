@@ -11,10 +11,8 @@ namespace Z0
 
     partial struct WfEvents
     {
-        [MethodImpl(Inline)]
-        public static PairedEvents<S,T> pair<S,T>(in S a, in T b)
-            where S : struct, IWfEvent<S>
-            where T : struct, IWfEvent<T>
-                => new PairedEvents<S,T>(a,b);
+        [MethodImpl(Inline), Op]
+        internal static WfSignal signal(IWfShell wf)
+            => WfSignal.create(wf);
     }
 }

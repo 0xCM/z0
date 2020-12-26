@@ -10,9 +10,9 @@ namespace Z0
     using static Part;
 
     [Event(EventName)]
-    public readonly struct CmdSucceeded<T> : IWfEvent<CmdSucceeded<T>>
+    public readonly struct CmdRanEvent<T> : IWfEvent<CmdRanEvent<T>>
     {
-        public const string EventName = GlobalEvents.CmdExec;
+        public const string EventName = GlobalEvents.CmdRan;
 
         public WfEventId EventId {get;}
 
@@ -20,14 +20,17 @@ namespace Z0
 
         public EventPayload<T> Payload {get;}
 
-        public FlairKind Flair => FlairKind.Ran;
+        public bool Ok {get;}
+
+        public FlairKind Flair => Ok ? FlairKind.Ran : FlairKind.Error;
 
         [MethodImpl(Inline)]
-        public CmdSucceeded(CmdSpec cmd, T payload, CorrelationToken ct)
+        public CmdRanEvent(CmdSpec cmd, bool ok, T data, CorrelationToken ct)
         {
             EventId = (EventName, cmd.CmdId, ct);
+            Ok = ok;
             Cmd = cmd;
-            Payload = payload;
+            Payload = data;
         }
 
         [MethodImpl(Inline)]

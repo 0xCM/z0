@@ -10,20 +10,23 @@ namespace Z0
     using static Part;
 
     [Event(EventName)]
-    public readonly struct CmdSucceededEvent : IWfEvent<CmdSucceededEvent>
+    public readonly struct CmdRanEvent : IWfEvent<CmdRanEvent>
     {
-        public const string EventName = GlobalEvents.CmdExec;
+        public const string EventName = GlobalEvents.CmdRan;
 
         public WfEventId EventId {get;}
 
         public CmdSpec Cmd {get;}
 
-        public FlairKind Flair  => FlairKind.Ran;
+        public bool Ok {get;}
+
+        public FlairKind Flair => Ok ? FlairKind.Ran : FlairKind.Error;
 
         [MethodImpl(Inline)]
-        public CmdSucceededEvent(CmdSpec cmd, CorrelationToken ct)
+        public CmdRanEvent(CmdSpec cmd, bool ok, CorrelationToken ct)
         {
             EventId = (EventName, cmd.CmdId, ct);
+            Ok = ok;
             Cmd = cmd;
         }
 

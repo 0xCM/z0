@@ -10,19 +10,20 @@ namespace Z0
 
     class Machine : IDisposable
     {
-        readonly WfCaptureState State;
-
         readonly IWfShell Wf;
 
         readonly WfHost Host;
 
-        internal Machine(WfCaptureState state, WfHost host)
+        readonly IAsmContext Asm;
+
+        internal Machine(IWfShell wf, IAsmContext asm)
         {
-            Host = host;
-            State = state;
-            Wf = State.Wf.WithHost(host);
+            Host = WfShell.host(typeof(Machine));
+            Wf = wf.WithHost(Host);
+            Asm = asm;
             Wf.Created();
         }
+
 
         public void Dispose()
         {
@@ -35,7 +36,7 @@ namespace Z0
             Wf.Status(Seq.delimit(Wf.Api.PartIdentities));
             try
             {
-                CaptureWorkflow.create(State).Run();
+                CaptureRunner.run(Wf);
                 EmitReferenceData.create().Run(Wf);
                 EmitFieldMetadata.create().Run(Wf);
                 EmitSectionHeaders.create().Run(Wf);
@@ -48,7 +49,7 @@ namespace Z0
                 EmitEnumCatalog.create().Run(Wf);
                 EmitFieldLiterals.create().Run(Wf);
                 EmitBitMasks.create().Run(Wf);
-                CaptureProcessors.Run(Wf, State.Asm);
+                CaptureProcessors.Run(Wf, Asm);
             }
             catch(Exception e)
             {

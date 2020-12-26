@@ -14,6 +14,8 @@ namespace Z0
     {
         public const string EventName = GlobalEvents.Ran;
 
+        public static EventLevel Level => FlairKind.Status;
+
         public WfEventId EventId {get;}
 
         public WfStepId StepId {get;}
@@ -23,7 +25,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public RanEvent(WfStepId step, CorrelationToken ct)
         {
-            EventId = (EventName, step, ct);
+            EventId = (EventName, step, Level, ct);
             StepId = step;
         }
 

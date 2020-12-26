@@ -5,54 +5,46 @@
 namespace Z0
 {
     using System;
-    using System.Reflection;
 
     using Z0.Asm;
 
-    using static z;
-
-    [WfHost]
-    sealed class MachineRunner : WfHost<MachineRunner>
-    {
-        WfCaptureState State;
-
-        public static WfHost create(in WfCaptureState state)
-        {
-            var host = new MachineRunner();
-            host.State = state;
-            return host;
-        }
-
-        protected override void Execute(IWfShell wf)
-        {
-            using var machine = new Machine(State, this);
-            machine.Run();
-        }
-    }
-
     struct App
     {
+        public static void run(string[] args)
+            => app(wf(args)).Run();
+
         IWfShell Wf;
 
-        WfCaptureState State;
+        IAsmContext Asm;
 
-        App(IWfShell wf, WfCaptureState state)
+        App(IWfShell wf, IAsmContext asm)
         {
             Wf = wf;
-            State = state;
+            Asm = asm;
         }
 
-        void Run()
-            => MachineRunner.create(State).Run(Wf);
-
         static App app(IWfShell wf)
-            => new App(wf, WfCaptureState.create(wf));
+            => new App(wf, AsmWorkflows.context(wf));
 
-        public static IWfShell wf(string[] args)
+
+        static IWfShell wf(string[] args)
             => WfShell.create(args).WithRandom(Rng.@default());
 
+        void Run()
+        {
+            try
+            {
+                using var machine = new Machine(Wf, Asm);
+                machine.Run();
+            }
+            catch(Exception e)
+            {
+                Wf.Error(e);
+            }
+        }
+
         public static void Main(params string[] args)
-            => @try(() => app(wf(args)).Run());
+            => run(args);
     }
 
     public static partial class XTend {}

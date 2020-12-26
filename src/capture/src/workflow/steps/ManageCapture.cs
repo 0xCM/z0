@@ -13,18 +13,18 @@ namespace Z0
     [WfHost]
     public sealed class ManageCapture : WfHost<ManageCapture>
     {
-        WfCaptureState State;
+        IAsmContext Asm;
 
-        public static WfHost create(WfCaptureState state)
+        public static WfHost create(IAsmContext asm)
         {
             var host = create();
-            host.State = state;
+            host.Asm = asm;
             return host;
         }
 
         protected override void Execute(IWfShell wf)
         {
-            using var step = new ManageCaptureStep(State,this);
+            using var step = new ManageCaptureStep(wf, this, Asm);
             step.Run();
         }
     }
@@ -35,9 +35,7 @@ namespace Z0
 
         readonly IWfShell Wf;
 
-        readonly WfCaptureState State;
-
-        readonly IAsmWf Asm;
+        readonly IAsmContext Asm;
 
         public IWfCaptureBroker Broker {get;}
 
@@ -47,16 +45,16 @@ namespace Z0
 
         readonly PartId[] Parts;
 
-        public ManageCaptureStep(WfCaptureState state, WfHost host)
+        public ManageCaptureStep(IWfShell wf, WfHost host, IAsmContext asm)
         {
             Host = host;
-            Wf = state.Wf.WithHost(host);
-            State = state;
-            App = state.Asm.ContextRoot;
+            Wf = wf.WithHost(Host);
+            App = asm.ContextRoot;
             Sink = Wf.WfSink;
             Parts = Wf.Api.PartIdentities;
-            Broker = state.CaptureBroker;
-            Asm = AsmWorkflows.create(Wf, Host);
+            //Broker = state.CaptureBroker;
+            Broker = AsmWorkflows.broker(wf);
+            Asm = asm;
             Wf.Created();
         }
 
@@ -67,14 +65,15 @@ namespace Z0
 
         void RunPrimary()
         {
-            using var flow = Wf.Running(nameof(CaptureParts));
-            CaptureParts.create().Run(Wf, State);
+            using var flow = Wf.Running(nameof(PartCaptureService));
+            using var step = PartCaptureService.create(Wf, Asm);
+            step.Run();
         }
 
         void RunImm()
         {
             using var flow = Wf.Running(nameof(EmitImmClosures));
-            using var step = new EmitImmClosuresStep(Wf, new EmitImmClosures(), State.Asm, State.Formatter, State.RoutineDecoder, Wf.Db().CaptureRoot());
+            using var step = new EmitImmClosuresStep(Wf, new EmitImmClosures(), Asm, Asm.Formatter, Asm.RoutineDecoder, Wf.Db().CaptureRoot());
             step.ClearArchive(Parts);
             step.EmitRefined(Parts);
         }

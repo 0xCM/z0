@@ -11,13 +11,13 @@ namespace Z0
 
     partial struct WfEvents
     {
-        [MethodImpl(Inline)]
-        public static StatusEvent<T> ran<H,T>(H host, T data, CorrelationToken ct)
-            where H : IWfHost<H>, new()
-                => new StatusEvent<T>(host.Id, GlobalEvents.Ran, data, ct);
-
         [MethodImpl(Inline), Op]
-        public static StatusEvent<string> ran(WfStepId step, CorrelationToken ct)
-            => new StatusEvent<string>(step, GlobalEvents.Ran, ct);
+        public static EventLevel level(FlairKind flair)
+            => flair;
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static EventLevel level<T>(IWfEvent<T> src)
+            where T : struct, IWfEvent<T>
+                => src.Flair;
     }
 }

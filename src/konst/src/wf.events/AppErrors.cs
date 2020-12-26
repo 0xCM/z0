@@ -19,14 +19,6 @@ namespace Z0
     {
         const string Delimiter = " | ";
 
-        /// <summary>
-        /// Creates an error event
-        /// </summary>
-        /// <param name="content">The event content</param>
-        [MethodImpl(Inline), Op, Closures(UInt64k)]
-        public static AppError<T> define<T>(string source, T content)
-            => new AppError<T>(EventId.define(nameof(AppError<T>), source), content);
-
         public static AppException missing([Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => AppException.Define(AppErrorMsg.NotImplemented(caller,file,line));
 

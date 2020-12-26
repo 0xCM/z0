@@ -10,17 +10,15 @@ namespace Z0
     using Z0.Asm;
 
     using static Konst;
-    using static z;
 
     [WfHost]
     public sealed class CaptureApiHost : WfHost<CaptureApiHost>
     {
-        WfCaptureState State;
-
         IApiHost Api;
 
-        IAsmWf Asm;
-        public static WfHost create(IAsmWf asm, IApiHost api)
+        IAsmContext Asm;
+
+        public static WfHost create(IAsmContext asm, IApiHost api)
         {
             var host = new CaptureApiHost();
             host.Asm = asm;
@@ -28,38 +26,30 @@ namespace Z0
             return host;
         }
 
-        public static WfHost create(WfCaptureState state, IApiHost api)
-        {
-            var host = new CaptureApiHost();
-            host.State = state;
-            host.Api = api;
-            return host;
-        }
-
         protected override void Execute(IWfShell wf)
         {
-            using var step = new CaptureApiHostStep(State, this, Api);
+            using var step = new CaptureApiHostStep(wf, this, Asm, Api);
             step.Run();
         }
     }
 
     readonly ref struct CaptureApiHostStep
     {
-        public WfCaptureState State {get;}
-
         readonly IWfShell Wf;
 
         readonly WfHost Host;
 
         readonly IApiHost Api;
 
+        readonly IAsmContext Asm;
+
         [MethodImpl(Inline)]
-        public CaptureApiHostStep(WfCaptureState state, WfHost host, IApiHost api)
+        public CaptureApiHostStep(IWfShell wf, WfHost host, IAsmContext asm, IApiHost api)
         {
             Host = host;
-            Wf = state.Wf.WithHost(Host);
+            Wf = wf.WithHost(Host);
+            Asm = asm;
             Api = api;
-            State = state;
             Wf.Created();
         }
 
@@ -76,7 +66,7 @@ namespace Z0
             {
                 using var extract = new ExtractHostMembersStep(Wf, Host, Api);
                 extract.Run();
-                using var emit = new EmitCaptureArtifactsStep(State, Host, Api.Uri, extract.Extracts);
+                using var emit = new EmitCaptureArtifactsStep(Wf, Host, Asm, Api.Uri, extract.Extracts);
                 emit.Run();
             }
             catch(Exception e)

@@ -14,14 +14,16 @@ namespace Z0
     {
         public const string EventName = GlobalEvents.Running;
 
-        public WfEventId EventId {get;}
+        public static EventLevel Level => FlairKind.Status;
 
         public FlairKind Flair => FlairKind.Running;
+
+        public WfEventId EventId {get;}
 
         [MethodImpl(Inline)]
         public RunningEvent(WfStepId step, CorrelationToken ct)
         {
-            EventId = (EventName, step, ct);
+            EventId = (EventName, step, Level, ct);
         }
 
         [MethodImpl(Inline)]

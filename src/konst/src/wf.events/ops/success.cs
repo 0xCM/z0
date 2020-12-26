@@ -12,23 +12,23 @@ namespace Z0
     partial struct WfEvents
     {
         /// <summary>
-        /// Defines a <see cref='CmdSucceeded{T}'/> event
+        /// Defines a <see cref='CmdRanEvent{T}'/> event indicating success
         /// </summary>
         /// <param name="id">The step identifier</param>
         /// <param name="ct">The correlation token</param>
         /// <param name="flair">The flair</param>
         [MethodImpl(Inline), Op, Closures(UInt64k)]
-        public static CmdSucceededEvent succeeded(CmdSpec spec, CorrelationToken ct)
-            => new CmdSucceededEvent(spec, ct);
+        public static CmdRanEvent success(CmdSpec spec, CorrelationToken ct)
+            => new CmdRanEvent(spec, true, ct);
 
         /// <summary>
-        /// Defines a <see cref='CmdSucceeded{T}'/> event
+        /// Defines a <see cref='CmdRanEvent{T}'/>  event indicating success
         /// </summary>
         /// <param name="id">The step identifier</param>
         /// <param name="ct">The correlation token</param>
         /// <param name="flair">The flair</param>
         [MethodImpl(Inline), Op, Closures(UInt64k)]
-        public static CmdSucceeded<T> succeeded<T>(CmdSpec spec, T payload, CorrelationToken ct)
-            => new CmdSucceeded<T>(spec, payload, ct);
+        public static CmdRanEvent<T> success<T>(CmdSpec spec, T payload, CorrelationToken ct)
+            => new CmdRanEvent<T>(spec, true, payload, ct);
     }
 }

@@ -9,13 +9,8 @@ namespace Z0
 
     using Z0.Asm;
 
-    using static Konst;
-    using static z;
-
     ref struct MatchAddressesStep
     {
-        readonly IWfCaptureState State;
-
         readonly IWfShell Wf;
 
         readonly ApiMemberExtract[] Extracted;
@@ -24,11 +19,10 @@ namespace Z0
 
         readonly WfHost Host;
 
-        public MatchAddressesStep(IWfCaptureState state, WfHost host, ApiMemberExtract[] extracted, AsmRoutine[] decoded, CorrelationToken ct)
+        public MatchAddressesStep(IWfShell wf, WfHost host, ApiMemberExtract[] extracted, AsmRoutine[] decoded, CorrelationToken ct)
         {
-            State = state;
-            Wf =state.Wf;
             Host = host;
+            Wf = wf.WithHost(host);
             Extracted = extracted;
             Decoded = decoded;
             Wf.Created(Host);

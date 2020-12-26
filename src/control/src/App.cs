@@ -12,7 +12,7 @@ namespace Z0
         {
             try
             {
-                CaptureWorkflow.run(args);
+                CaptureRunner.run(args);
             }
             catch(Exception e)
             {

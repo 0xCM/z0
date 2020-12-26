@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
     public readonly struct GlobalEvents
     {
         public const string Created = nameof(Created);
@@ -21,7 +18,7 @@ namespace Z0
 
         public const string RunningCmd = nameof(RunningCmd);
 
-        public const string CmdExec = nameof(CmdExec);
+        public const string CmdRan = nameof(CmdRan);
 
         public const string ClaimFailed = nameof(ClaimFailed);
 

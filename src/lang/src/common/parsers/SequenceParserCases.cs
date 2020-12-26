@@ -32,7 +32,7 @@ namespace Z0.Lang
 
         void Ran<C,T>(WfExecFlow flow, C @case, T data)
         {
-            Wf.Ran2(flow, Seq.delimit(@case, data));
+            Wf.Ran(flow, Seq.delimit(@case, data));
         }
 
         [Op]

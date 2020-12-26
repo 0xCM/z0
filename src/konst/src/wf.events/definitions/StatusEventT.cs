@@ -21,10 +21,17 @@ namespace Z0
         public FlairKind Flair => FlairKind.Status;
 
         [MethodImpl(Inline)]
-        public StatusEvent(WfStepId step, T content, CorrelationToken ct)
+        public StatusEvent(WfStepId step, T data, CorrelationToken ct)
         {
             EventId = (EventName, step, ct);
-            Payload = content;
+            Payload = data;
+        }
+
+        [MethodImpl(Inline)]
+        public StatusEvent(WfStepId step, string label, T data, CorrelationToken ct)
+        {
+            EventId = (EventName, label, step, ct);
+            Payload = data;
         }
 
         [MethodImpl(Inline)]

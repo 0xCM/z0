@@ -21,22 +21,22 @@ namespace Z0
         /// <summary>
         /// Specifies the emitting executable part
         /// </summary>
-        public readonly PartId Part;
+        public PartId Part {get;}
 
         /// <summary>
         /// The name of the member that originated the message
         /// </summary>
-        public readonly string Caller;
+        public string Caller {get;}
 
         /// <summary>
         /// The path to the source file in which the message originated
         /// </summary>
-        public readonly FS.FilePath File;
+        public FS.FilePath File {get;}
 
         /// <summary>
         /// The source file line number on which the message originated
         /// </summary>
-        public readonly uint Line;
+        public uint Line {get;}
 
         [MethodImpl(Inline)]
         public AppMsgSource(PartId part, string caller, string file, int? line)

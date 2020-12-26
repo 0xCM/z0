@@ -18,8 +18,6 @@ namespace Z0
 
     public ref struct EmitCaptureArtifactsStep
     {
-        public IWfCaptureState State {get;}
-
         readonly CorrelationToken Ct;
 
         readonly ApiMemberExtract[] Extracts;
@@ -32,27 +30,13 @@ namespace Z0
 
         readonly WfHost Host;
 
-        readonly IAsmWf Asm;
+        readonly IAsmContext Asm;
 
-        public EmitCaptureArtifactsStep(IAsmWf asm, WfHost host, ApiHostUri src, ApiMemberExtract[] extracts)
+        public EmitCaptureArtifactsStep(IWfShell wf, WfHost host, IAsmContext asm, ApiHostUri src, ApiMemberExtract[] extracts)
         {
+            Host = host;
+            Wf = wf.WithHost(host);
             Asm = asm;
-            Wf = asm.Wf.WithHost(host);
-            Host = host;
-            State = default;
-            Ct = Wf.Ct;
-            HostUri = src;
-            Extracts = extracts;
-            ParsedBlocks = default;
-            Wf.Created();
-        }
-
-        public EmitCaptureArtifactsStep(IWfCaptureState state, WfHost host, ApiHostUri src, ApiMemberExtract[] extracts)
-        {
-            Wf = state.Wf.WithHost(host);
-            Host = host;
-            Asm = default;
-            State = state;
             Ct = Wf.Ct;
             HostUri = src;
             Extracts = extracts;
@@ -120,10 +104,10 @@ namespace Z0
 
         void DecodeMembers()
         {
-            EmitHostAsm.create(State.CWf.Context, HostUri).Run(Wf, ParsedBlocks, out var decoded);
+            EmitHostAsm.create(Asm, HostUri).Run(Wf, ParsedBlocks, out var decoded);
             if(decoded.Count != 0)
             {
-                using var match = new MatchAddressesStep(State, Host, Extracts, decoded.Storage, Ct);
+                using var match = new MatchAddressesStep(Wf, Host, Extracts, decoded.Storage, Ct);
                 match.Run();
             }
        }

@@ -12,7 +12,7 @@ namespace Z0
     [Event(EventName)]
     public readonly struct ClaimFailedEvent : IWfEvent<ClaimFailedEvent>
     {
-        public const string EventName = GlobalEvents.CmdExec;
+        public const string EventName = GlobalEvents.CmdRan;
 
         public WfEventId EventId {get;}
 

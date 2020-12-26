@@ -12,20 +12,12 @@ namespace Z0
     partial struct WfEvents
     {
         [MethodImpl(Inline), Op]
-        public static RunningEvent running(WfStepId step, CorrelationToken ct)
-            => new RunningEvent(step, ct);
-
-        [MethodImpl(Inline), Op, Closures(UInt64k)]
-        public static RunningEvent<T> running<T>(WfStepId step, T content, CorrelationToken ct)
-            => new RunningEvent<T>(step, content, ct);
+        public static StatusEvent<string> running(WfStepId step, CorrelationToken ct)
+            => new StatusEvent<string>(step, GlobalEvents.Running, ct);
 
         [MethodImpl(Inline)]
-        public static RunningEvent<T> running<H,T>(H host, T content, CorrelationToken ct)
+        public static StatusEvent<T> running<H,T>(H host, T data, CorrelationToken ct)
             where H : IWfHost<H>, new()
-                => new RunningEvent<T>(host.Id, content, ct);
-
-        [MethodImpl(Inline)]
-        public static RunningEvent<DataFlow<S,T>> running<S,T>(WfStepId step, DataFlow<S,T> flow, CorrelationToken ct)
-            => new RunningEvent<DataFlow<S,T>>(step, flow, ct);
+                => new StatusEvent<T>(host.Id, GlobalEvents.Running, data, ct);
     }
 }
