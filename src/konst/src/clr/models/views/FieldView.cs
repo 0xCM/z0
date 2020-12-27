@@ -37,7 +37,7 @@ namespace Z0
                 get => Subject.Name;
             }
 
-            public CliKey Key
+            public CliToken Key
             {
                 [MethodImpl(Inline)]
                 get => Subject.MetadataToken;

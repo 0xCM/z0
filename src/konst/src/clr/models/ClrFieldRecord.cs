@@ -15,9 +15,9 @@ namespace Z0
 
         public CliArtifactRef Key;
 
-        public CliKey DeclaringType;
+        public CliToken DeclaringType;
 
-        public CliKey DataType;
+        public CliToken DataType;
 
         public FieldAttributes Attributes;
 

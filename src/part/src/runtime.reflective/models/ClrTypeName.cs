@@ -17,9 +17,9 @@ namespace Z0
     [ApiType]
     public readonly struct ClrTypeName : IName<string>, IEquatable<ClrTypeName>, IComparable<ClrTypeName>
     {
-        [MethodImpl(Inline)]
-        public static ClrTypeName from(Type src)
-            => new ClrTypeName(src.AssemblyQualifiedName);
+        [MethodImpl(Inline), Op]
+        public static ClrTypeName define(string src)
+            => new ClrTypeName(src);
 
         [Ignore]
         public string Content {get;}
@@ -79,17 +79,6 @@ namespace Z0
         public override bool Equals(object src)
             => src is ClrTypeName n && Equals(n);
 
-        [MethodImpl(Inline)]
-        public static implicit operator string(ClrTypeName src)
-            => src.Content;
-
-        [MethodImpl(Inline)]
-        public static implicit operator ClrTypeName(Type src)
-            => from(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator ReadOnlySpan<char>(ClrTypeName src)
-            => src.Content;
 
         [MethodImpl(Inline)]
         public static bool operator <(ClrTypeName x, ClrTypeName y)
@@ -114,5 +103,17 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool operator !=(ClrTypeName x, ClrTypeName y)
             => !x.Equals(y);
+
+        [MethodImpl(Inline)]
+        public static implicit operator string(ClrTypeName src)
+            => src.Content;
+
+        [MethodImpl(Inline)]
+        public static implicit operator ClrTypeName(Type src)
+            => new ClrTypeName(src.AssemblyQualifiedName);
+
+        [MethodImpl(Inline)]
+        public static implicit operator ReadOnlySpan<char>(ClrTypeName src)
+            => src.Content;
     }
 }

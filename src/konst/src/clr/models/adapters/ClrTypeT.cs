@@ -18,7 +18,7 @@ namespace Z0
 
         public Type Definition => TD;
 
-        public CliKey Id
+        public CliToken Id
         {
             [MethodImpl(Inline)]
             get => Definition.MetadataToken;

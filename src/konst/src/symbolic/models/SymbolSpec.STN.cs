@@ -51,13 +51,13 @@ namespace Z0
             get => (ushort)((ushort)bitwidth<T>()/(ushort)Widths.data<W>());
         }
 
-        public CliKey SegDomain
+        public CliToken SegDomain
         {
             [MethodImpl(Inline)]
             get => typeof(T);
         }
 
-        public CliKey SymDomain
+        public CliToken SymDomain
         {
             [MethodImpl(Inline)]
             get => typeof(S);

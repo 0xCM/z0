@@ -20,7 +20,7 @@ namespace Z0
         /// <summary>
         /// The artifact key that, together with the artifact kind, forms an identity
         /// </summary>
-        CliKey Key {get;}
+        CliToken Key {get;}
 
         /// <summary>
         /// The name of the referenced artifact

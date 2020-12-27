@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
     using System.Runtime.CompilerServices;
 
     using static Part;
@@ -26,10 +25,10 @@ namespace Z0
             get => Definition;
         }
 
-        public ClrTypeName Name
+        public ClrStructName Name
         {
             [MethodImpl(Inline)]
-            get => Definition;
+            get => new ClrStructName(Definition.FullName);
         }
 
         [MethodImpl(Inline)]
@@ -39,10 +38,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator Type(ClrStruct src)
             => src.Definition;
-
-        [MethodImpl(Inline)]
-        internal static ClrStruct Unchecked(Type src)
-            => new ClrStruct(src);
 
         public IEnumerable<ClrStruct> NestedTypes
             => Definition.GetNestedTypes().Select(t => new ClrStruct(t));

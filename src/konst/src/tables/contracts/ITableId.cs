@@ -20,12 +20,12 @@ namespace Z0
 
     [Free]
     public interface ITableId<T> : ITableId
-        where T : struct
+        where T : struct, IRecord<T>
     {
-        StringRef ITableId.RecordType 
+        StringRef ITableId.RecordType
             => typeof(T).Name;
 
         StringRef ITableId.Identifier
-            => Table.id<T>().Identifier;        
+            => Table.id<T>().Identifier;
     }
 }

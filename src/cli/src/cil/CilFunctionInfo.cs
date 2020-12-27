@@ -16,7 +16,7 @@ namespace Z0
     /// </summary>
     public struct CilFunctionInfo
     {
-        public CliKey Key;
+        public CliToken Key;
 
         public OpIdentity Identifier;
 
@@ -36,7 +36,7 @@ namespace Z0
         public string Formatted;
 
         [MethodImpl(Inline)]
-        public CilFunctionInfo(CliKey id, string name, MethodImplAttributes attribs, params Instruction[] instructions)
+        public CilFunctionInfo(CliToken id, string name, MethodImplAttributes attribs, params Instruction[] instructions)
         {
             Key = id;
             Identifier = default;
@@ -63,7 +63,7 @@ namespace Z0
         public static CilFunctionInfo Empty
         {
             [MethodImpl(Inline)]
-            get => new CilFunctionInfo(CliKey.Empty, EmptyString, 0);
+            get => new CilFunctionInfo(CliToken.Empty, EmptyString, 0);
         }
     }
 }

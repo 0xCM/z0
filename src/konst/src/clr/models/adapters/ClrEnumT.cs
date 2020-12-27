@@ -23,7 +23,7 @@ namespace Z0
         public static ClrEnum<T> create()
             => default;
 
-        public CliKey Id
+        public CliToken Id
         {
             [MethodImpl(Inline)]
             get => Definition.MetadataToken;

@@ -14,11 +14,11 @@ namespace Z0
     partial struct Cli
     {
         /// <summary>
-        /// Defines an <see cref='CliArtfactRef'/> predicated on an a <see cref='CliKey'/>
+        /// Defines an <see cref='CliArtfactRef'/> predicated on an a <see cref='CliToken'/>
         /// </summary>
         /// <param name="src">The defining type</param>
         [MethodImpl(Inline), Op]
-        public static CliArtifactRef reference(CliKey id, ClrArtifactKind kind, StringRef name)
+        public static CliArtifactRef reference(CliToken id, ClrArtifactKind kind, StringRef name)
             => new CliArtifactRef(id,kind,name);
     }
 }

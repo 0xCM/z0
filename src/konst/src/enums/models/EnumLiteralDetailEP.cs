@@ -73,7 +73,7 @@ namespace Z0
             get => Enums.@base<E>();
         }
 
-        public CliKey Token
+        public CliToken Token
         {
             [MethodImpl(Inline)]
             get => Spec.Id;

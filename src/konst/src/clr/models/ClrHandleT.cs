@@ -16,12 +16,12 @@ namespace Z0
     {
         public ClrArtifactKind Kind {get;}
 
-        public CliKey Key {get;}
+        public CliToken Key {get;}
 
         public T Handle {get;}
 
         [MethodImpl(Inline)]
-        public ClrHandle(ClrArtifactKind kind, CliKey key, T handle)
+        public ClrHandle(ClrArtifactKind kind, CliToken key, T handle)
         {
             Kind = kind;
             Key = key;

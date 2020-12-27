@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Identifies a metadata element
     /// </summary>
-    public readonly struct CliKey : ITextual, IEquatable<CliKey>, INullity
+    public readonly struct CliToken : ITextual, IEquatable<CliToken>, INullity
     {
         readonly uint Data;
 
@@ -34,148 +34,148 @@ namespace Z0
             => Data.FormatHex();
 
         [MethodImpl(Inline)]
-        public static CliKey from(Type src)
-            => new CliKey(src);
+        public static CliToken from(Type src)
+            => new CliToken(src);
 
         [MethodImpl(Inline)]
-        public static CliKey from<T>()
-            => new CliKey(typeof(T));
+        public static CliToken from<T>()
+            => new CliToken(typeof(T));
 
         [MethodImpl(Inline)]
-        public static CliKey from(FieldInfo src)
-            => new CliKey(src);
+        public static CliToken from(FieldInfo src)
+            => new CliToken(src);
 
         [MethodImpl(Inline)]
-        public static CliKey from(PropertyInfo src)
-            => new CliKey(src);
+        public static CliToken from(PropertyInfo src)
+            => new CliToken(src);
 
         [MethodImpl(Inline)]
-        public static CliKey from(MethodInfo src)
-            => new CliKey(src);
+        public static CliToken from(MethodInfo src)
+            => new CliToken(src);
 
         [MethodImpl(Inline)]
-        public static CliKey from(ParameterInfo src)
-            => new CliKey(src);
+        public static CliToken from(ParameterInfo src)
+            => new CliToken(src);
 
         [MethodImpl(Inline)]
-        public static CliKey from(Assembly src)
-            => new CliKey(src);
+        public static CliToken from(Assembly src)
+            => new CliToken(src);
 
         [MethodImpl(Inline)]
-        internal CliKey(Type src)
+        internal CliToken(Type src)
             : this(src.MetadataToken)
         {
 
         }
 
         [MethodImpl(Inline)]
-        internal CliKey(Assembly src)
+        internal CliToken(Assembly src)
             : this(src.GetHashCode())
         {
 
         }
 
         [MethodImpl(Inline)]
-        internal CliKey(FieldInfo src)
+        internal CliToken(FieldInfo src)
             : this(src.MetadataToken)
         {
 
         }
 
         [MethodImpl(Inline)]
-        internal CliKey(PropertyInfo src)
+        internal CliToken(PropertyInfo src)
             : this(src.MetadataToken)
         {
 
         }
 
         [MethodImpl(Inline)]
-        internal CliKey(ParameterInfo src)
+        internal CliToken(ParameterInfo src)
             : this(src.MetadataToken)
         {
 
         }
 
         [MethodImpl(Inline)]
-        internal CliKey(MethodInfo src)
+        internal CliToken(MethodInfo src)
             : this(src.MetadataToken)
         {
 
         }
 
         [MethodImpl(Inline)]
-        internal CliKey(Module src)
+        internal CliToken(Module src)
             : this(src.MetadataToken)
         {
 
         }
 
         [MethodImpl(Inline)]
-        internal CliKey(int token)
+        internal CliToken(int token)
             => Data = (uint)token;
 
         [MethodImpl(Inline)]
-        internal CliKey(uint token)
+        internal CliToken(uint token)
             => Data = token;
 
         public override string ToString()
             => Format();
 
         [MethodImpl(Inline)]
-        public bool Equals(CliKey src)
+        public bool Equals(CliToken src)
             => Data == src.Data;
 
         public override int GetHashCode()
             => Data.GetHashCode();
 
         public override bool Equals(object src)
-            => src is CliKey t && Equals(t);
+            => src is CliToken t && Equals(t);
 
         [MethodImpl(Inline)]
-        public static implicit operator CliKey(int src)
-            => new CliKey(src);
+        public static implicit operator CliToken(int src)
+            => new CliToken(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator CliKey(uint src)
-            => new CliKey(src);
+        public static implicit operator CliToken(uint src)
+            => new CliToken(src);
 
         [MethodImpl(Inline)]
-        public static bool operator ==(CliKey x, CliKey y)
+        public static bool operator ==(CliToken x, CliToken y)
             => x.Equals(y);
 
         [MethodImpl(Inline)]
-        public static bool operator !=(CliKey x, CliKey y)
+        public static bool operator !=(CliToken x, CliToken y)
             => !x.Equals(y);
 
         [MethodImpl(Inline)]
-        public static implicit operator CliKey(Type src)
-            => new CliKey(src);
+        public static implicit operator CliToken(Type src)
+            => new CliToken(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator CliKey(FieldInfo src)
-            => new CliKey(src);
+        public static implicit operator CliToken(FieldInfo src)
+            => new CliToken(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator CliKey(PropertyInfo src)
-            => new CliKey(src);
+        public static implicit operator CliToken(PropertyInfo src)
+            => new CliToken(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator CliKey(MethodInfo src)
-            => new CliKey(src);
+        public static implicit operator CliToken(MethodInfo src)
+            => new CliToken(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator CliKey(ParameterInfo src)
-            => new CliKey(src);
+        public static implicit operator CliToken(ParameterInfo src)
+            => new CliToken(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator uint(CliKey src)
+        public static implicit operator uint(CliToken src)
             => src.Data;
 
         [MethodImpl(Inline)]
-        public static explicit operator int(CliKey src)
+        public static explicit operator int(CliToken src)
             => (int)src.Data;
 
-        public static CliKey Empty
+        public static CliToken Empty
             => default;
     }
 }

@@ -17,7 +17,7 @@ namespace Z0
     {
         public const string RenderPattern = "{0} | {1} | {2}";
 
-        public CliKey Id;
+        public CliToken Id;
 
         public MemoryAddress Address;
 

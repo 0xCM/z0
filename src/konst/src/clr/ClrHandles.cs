@@ -85,7 +85,7 @@ namespace Z0
         {
             var count = src.Length;
             for(var i=0u; i<count; i++)
-                seek(dst,i) = field(module, CliKey.from(skip(src,i)));
+                seek(dst,i) = field(module, CliToken.from(skip(src,i)));
         }
 
 
@@ -94,7 +94,7 @@ namespace Z0
         {
             var count = src.Length;
             for(var i=0u; i<count; i++)
-                seek(dst,i) = type(module, CliKey.from(skip(src,i)));
+                seek(dst,i) = type(module, CliToken.from(skip(src,i)));
         }
 
         [MethodImpl(Inline), Op]
@@ -102,19 +102,19 @@ namespace Z0
         {
             var count = src.Length;
             for(var i=0u; i<count; i++)
-                seek(dst,i) = method(module, CliKey.from(skip(src,i)));
+                seek(dst,i) = method(module, CliToken.from(skip(src,i)));
         }
 
         [MethodImpl(Inline), Op]
-        public static ClrHandle<RuntimeMethodHandle> method(Module src, CliKey key)
+        public static ClrHandle<RuntimeMethodHandle> method(Module src, CliToken key)
             => new ClrHandle<RuntimeMethodHandle>(ClrArtifactKind.Method, key, src.ModuleHandle.GetRuntimeMethodHandleFromMetadataToken((int)key));
 
         [MethodImpl(Inline), Op]
-        public static ClrHandle<RuntimeTypeHandle> type(Module src, CliKey key)
+        public static ClrHandle<RuntimeTypeHandle> type(Module src, CliToken key)
             => new ClrHandle<RuntimeTypeHandle>(ClrArtifactKind.Type, key, src.ModuleHandle.GetRuntimeTypeHandleFromMetadataToken((int)key));
 
         [MethodImpl(Inline), Op]
-        public static ClrHandle<RuntimeFieldHandle> field(Module src, CliKey key)
+        public static ClrHandle<RuntimeFieldHandle> field(Module src, CliToken key)
             => new ClrHandle<RuntimeFieldHandle>(ClrArtifactKind.Field, key, src.ModuleHandle.GetRuntimeFieldHandleFromMetadataToken((int)key));
 
         [MethodImpl(Inline), Op]

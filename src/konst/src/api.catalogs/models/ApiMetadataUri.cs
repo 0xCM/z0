@@ -37,7 +37,7 @@ namespace Z0
             get => api.part(this);
         }
 
-        public CliKey HostId
+        public CliToken HostId
         {
             [MethodImpl(Inline)]
             get => vcell(Data, HostIndex);
@@ -49,7 +49,7 @@ namespace Z0
             get => api.kind(this);
         }
 
-        public CliKey OperationId
+        public CliToken OperationId
         {
             [MethodImpl(Inline)]
             get => vcell(Data, OpIndex);

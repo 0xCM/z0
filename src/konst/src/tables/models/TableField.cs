@@ -28,7 +28,7 @@ namespace Z0
         /// <summary>
         /// The field's metadata identifier
         /// </summary>
-        public CliKey Key;
+        public CliToken Key;
 
         /// <summary>
         /// The field datatype

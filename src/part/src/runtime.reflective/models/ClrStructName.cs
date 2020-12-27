@@ -5,28 +5,34 @@
 namespace Z0
 {
     using System;
+    using System.Reflection;
     using System.Runtime.CompilerServices;
 
     using static Part;
 
-    public readonly struct TableId<T> : ITableId<T>
-        where T : struct, IRecord<T>
+    public readonly struct ClrStructName : ITextual
     {
-        public StringRef RecordType
-            => typeof(T).Name;
-
-        public StringRef Identifier
-            => Table.id<T>().Identifier;
+        readonly string FullName;
 
         [MethodImpl(Inline)]
+        public ClrStructName(string name)
+            => FullName = name;
+
+        public ClrTypeName Name
+        {
+            [MethodImpl(Inline)]
+            get => ClrTypeName.define(FullName);
+        }
+
         public string Format()
-            => Identifier.Format();
+            => FullName;
 
         public override string ToString()
             => Format();
 
+
         [MethodImpl(Inline)]
-        public static implicit operator TableId(TableId<T> src)
-            => Table.id<T>();
+        public static implicit operator ClrTypeName(ClrStructName src)
+            => src.Name;
     }
 }
