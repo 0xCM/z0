@@ -5,14 +5,13 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
-    partial struct Buffers
+    partial struct ApiQuery
     {
-        [MethodImpl(Inline), Op]
-        public static NativeBuffer own(BufferToken token)
-            => new NativeBuffer(token);
+        [Op]
+        public static BitMaskInfo[] bitmasks(Type src)
+            => BitMasks.rows(src);
     }
 }

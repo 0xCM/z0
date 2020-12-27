@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     partial struct Literals
@@ -21,7 +21,7 @@ namespace Z0
                 seek<string>(dst,i) = (string)skip(fields,i).GetRawConstantValue();
         }
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static void extract<T>(ReadOnlySpan<FieldInfo> fields, Span<T> dst)
             where T : unmanaged
         {

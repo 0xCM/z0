@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static z;
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Identifies a resource of parametric type along with a reference to the memory segment it occupies

@@ -5,14 +5,15 @@
 namespace Z0
 {
     using System;
+    using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
-    partial struct Resources
+    partial struct ApiQuery
     {
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<MemoryAddress> addresses(Type declarer)
-            => Literals.values<string>(declarer).Map(z.address);
+        public static ApiPartTypes types(IPart src)
+            => new ApiPartTypes(src.Id, src.Owner.Types());
     }
 }

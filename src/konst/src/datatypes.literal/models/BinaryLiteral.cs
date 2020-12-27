@@ -60,7 +60,6 @@ namespace Z0
             get => Empty;
         }
 
-
         [MethodImpl(Inline)]
         public string Format()
              => api.format(this);

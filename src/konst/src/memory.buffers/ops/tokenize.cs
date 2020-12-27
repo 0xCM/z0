@@ -11,7 +11,6 @@ namespace Z0
 
     partial struct Buffers
     {
-
         /// <summary>
         /// Creates an array of tokens that identify a sequence of buffers
         /// </summary>

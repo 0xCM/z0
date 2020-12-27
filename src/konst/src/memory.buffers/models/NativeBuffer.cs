@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Represents a native buffer allocation
@@ -21,10 +21,6 @@ namespace Z0
         public readonly uint Size;
 
         [MethodImpl(Inline)]
-        public static implicit operator BufferToken(NativeBuffer src)
-            => src.Token;
-
-        [MethodImpl(Inline)]
         internal NativeBuffer(BufferToken token)
         {
             Handle = token.Handle;
@@ -34,7 +30,7 @@ namespace Z0
         public BufferToken Token
         {
             [MethodImpl(Inline)]
-            get => Buffers.token(Handle, Size);
+            get => new BufferToken(Handle, Size);
         }
 
         /// <summary>
@@ -49,5 +45,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public void Dispose()
             => Marshal.FreeHGlobal(Handle);
+
+        [MethodImpl(Inline)]
+        public static implicit operator BufferToken(NativeBuffer src)
+            => src.Token;
     }
 }

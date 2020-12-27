@@ -9,10 +9,10 @@ namespace Z0
 
     using static Konst;
 
-    partial struct Buffers
+    partial struct Resources
     {
         [MethodImpl(Inline), Op]
-        public static BufferToken token(MemoryAddress location, uint size)
-            => new BufferToken(location, size);
+        public static ReadOnlySpan<char> utf8(in ResDescriptor src)
+            => Encoded.utf8(data(src));
     }
 }

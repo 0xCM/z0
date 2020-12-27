@@ -10,7 +10,7 @@ namespace Z0
     using System.Reflection;
     using System.Collections.Generic;
 
-    using static Konst;
+    using static Part;
 
     [ApiHost(ApiNames.ApiServices, true)]
     public readonly struct ApiServices

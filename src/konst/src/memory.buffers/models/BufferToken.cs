@@ -8,35 +8,16 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Describes an allocated buffer
     /// </summary>
     public readonly struct BufferToken : IBufferToken
     {
-        public readonly MemoryAddress Address;
+        public MemoryAddress Address {get;}
 
-        public readonly uint BufferSize;
-
-        [MethodImpl(Inline)]
-        public static implicit operator Span<byte>(BufferToken src)
-            => Buffers.cover(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator BufferToken((IntPtr handle, uint size) src)
-            => new BufferToken(src.handle, src.size);
-
-        [MethodImpl(Inline)]
-        public static implicit operator IntPtr(BufferToken src)
-            => src.Handle;
-
-        [MethodImpl(Inline)]
-        BufferToken(IntPtr handle, int size)
-        {
-            Address = handle;
-            BufferSize = (uint)size;
-        }
+        public uint BufferSize {get;}
 
         [MethodImpl(Inline)]
         internal BufferToken(MemoryAddress address, uint size)
@@ -66,5 +47,17 @@ namespace Z0
             Buffers.load(src, this);
             return this;
         }
+
+        [MethodImpl(Inline)]
+        public static implicit operator Span<byte>(BufferToken src)
+            => Buffers.cover(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator BufferToken((IntPtr handle, uint size) src)
+            => new BufferToken(src.handle, src.size);
+
+        [MethodImpl(Inline)]
+        public static implicit operator IntPtr(BufferToken src)
+            => src.Handle;
     }
 }

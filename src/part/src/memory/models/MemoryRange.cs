@@ -24,10 +24,10 @@ namespace Z0
         /// </summary>
         public MemoryAddress End {get;}
 
-        public ulong Length
+        public ByteSize Length
         {
             [MethodImpl(Inline)]
-            get => End - Start;
+            get => (ulong)End - (ulong)Start;
         }
 
         public bool IsEmpty
@@ -42,7 +42,6 @@ namespace Z0
             Start = start;
             End = end;
         }
-
 
         public override int GetHashCode()
             => (int)alg.hash.calc((ulong)Start, (ulong)End);
@@ -76,6 +75,9 @@ namespace Z0
 
         public string Format()
             => bracket(string.Concat(Start.Format(), Chars.Comma, Chars.Space, End.Format()));
+
+        public override string ToString()
+            => Format();
 
         [MethodImpl(Inline)]
         public static bool operator==(MemoryRange a, MemoryRange b)

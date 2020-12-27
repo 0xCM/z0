@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="src">The data source</param>
         /// <typeparam name="T">The record type</typeparam>
         [Op, Closures(Closure)]
-        public static RowsetEmissions<DynamicRow<T>> emit<T>(DynamicRows<T> src, in RowFormatSpec spec, FS.FilePath dst)
+        public static RowsetEmissions<DynamicRow<T>> emit<T>(DynamicRows<T> src, RowFormatSpec spec, FS.FilePath dst)
             where T : struct
         {
             var count = src.Count;
@@ -35,18 +35,23 @@ namespace Z0
         }
 
         [Op, Closures(Closure)]
-        public static TableEmission<T> emit<T>(Index<T> src, FS.FilePath dst, RowHeader header, IRowFormatter<T> formatter)
+        public static TableEmission<T> emit<T>(Index<T> src, RowFormatSpec spec, FS.FilePath dst)
             where T : struct
         {
             var count = src.Count;
             var data = src.View;
-
+            var formatter = Records.formatter<T>(spec);
             using var writer = dst.Writer();
-            writer.WriteLine(format(header));
-            ref readonly var row = ref src.First;
-            for(var i=0u; i<count; i++)
-                writer.WriteLine(formatter.Format(skip(row,i)));
-            return emission(src.Storage, dst);
+            writer.WriteLine(format(spec.Header));
+            for(var i=0; i<count; i++)
+                writer.WriteLine(formatter.Format(skip(data,i)));
+
+            return emission(src, dst);
         }
+
+        [Op, Closures(Closure)]
+        public static TableEmission<T> emit<T>(Index<T> src, ReadOnlySpan<byte> widths, FS.FilePath dst)
+            where T : struct
+                => emit(src, rowspec<T>(widths), dst);
     }
 }

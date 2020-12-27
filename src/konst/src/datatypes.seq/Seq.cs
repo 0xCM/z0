@@ -25,16 +25,6 @@ namespace Z0
         /// <param name="src">The index to test</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static uint count<T>(in DataIndex<T> src)
-            where T : struct
-                => (uint)(src.Data?.Length ?? 0);
-
-        /// <summary>
-        /// Tests the source index for non-emptiness
-        /// </summary>
-        /// <param name="src">The index to test</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
         public static bool nonempty<T>(in DataIndex<T> src)
             where T : struct
                 => count(src) == 0;
@@ -70,36 +60,9 @@ namespace Z0
         /// <param name="src">The data source</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static IndexedSeq<T> indexed<T>(IEnumerable<T> src)
-            => new IndexedSeq<T>(src.Array());
-
-        /// <summary>
-        /// Creates an indexed sequence from a stream
-        /// </summary>
-        /// <param name="src">The data source</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
         public static MutableSeq<T> mutable<T>(IEnumerable<T> src)
             => new MutableSeq<T>(src.Array());
 
-        /// <summary>
-        /// Creates an indexed sequence from a stream
-        /// </summary>
-        /// <param name="src">The data source</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static IndexedSeq<I,T> indexed<I,T>(IEnumerable<T> src)
-            where I : unmanaged
-                => new IndexedSeq<I,T>(array(src));
-
-        /// <summary>
-        /// Creates an indexed sequence from a parameter array
-        /// </summary>
-        /// <param name="src">The data source</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static IndexedSeq<T> indexed<T>(params T[] src)
-            => new IndexedSeq<T>(src, true);
 
         /// <summary>
         /// Creates a mutable sequence from a parameter array
@@ -147,17 +110,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static IndexedView<T> view<T>(T[] src)
             => new IndexedView<T>(src);
-
-        /// <summary>
-        /// Creates a <see cref='IndexedView{I,T}'/> from an array
-        /// </summary>
-        /// <param name="src">The data source</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        /// <typeparam name="I">The index type</typeparam>
-        [MethodImpl(Inline)]
-        public static IndexedView<I,T> view<I,T>(T[] src, I i = default)
-            where I : unmanaged
-                => new IndexedView<I,T>(src);
 
         /// <summary>
         /// All of your streams belong to us

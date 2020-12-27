@@ -116,7 +116,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public IndexedSeq<T> WithContent(IEnumerable<T> content)
-            => api.indexed(content);
+            => api.index(content);
 
         [MethodImpl(Inline)]
         public bool Equals(IndexedSeq<T> rhs)
@@ -126,24 +126,24 @@ namespace Z0
             => api.concat(this, rhs);
 
         public IndexedSeq<Y> Select<Y>(Func<T,Y> selector)
-             => api.indexed(from x in Data select selector(x));
+             => api.index(from x in Data select selector(x));
 
         public IndexedSeq<Z> SelectMany<Y,Z>(Func<T,IndexedSeq<Y>> lift, Func<T,Y,Z> project)
-            => api.indexed(from x in Data
+            => api.index(from x in Data
                           from y in lift(x).Data
                           select project(x, y));
 
         public IndexedSeq<Y> SelectMany<Y>(Func<T,IndexedSeq<Y>> lift)
-            => api.indexed(from x in Data
+            => api.index(from x in Data
                           from y in lift(x).Data
                           select y);
 
         public IndexedSeq<T> Where(Func<T,bool> predicate)
-            => api.indexed(from x in Data where predicate(x) select x);
+            => api.index(from x in Data where predicate(x) select x);
 
         [MethodImpl(Inline)]
         public static implicit operator IndexedSeq<T>(T[] src)
-            => api.indexed(src);
+            => api.index(src);
 
         [MethodImpl(Inline)]
         public static implicit operator T[](IndexedSeq<T> src)

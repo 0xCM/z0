@@ -69,7 +69,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public IndexedSeq<I,T> WithContent(IEnumerable<T> content)
-            => api.indexed<I,T>(content);
+            => api.index<I,T>(content);
 
         [MethodImpl(Inline)]
         public IndexedSeq<I,T> Concat(IndexedSeq<I,T> rhs)

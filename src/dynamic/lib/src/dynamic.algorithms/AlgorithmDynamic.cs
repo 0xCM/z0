@@ -19,7 +19,7 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static unsafe DynamicAction action(string id, ReadOnlySpan<byte> f)
-            => action(id, Buffers.liberate(f));
+            => action(id, memory.liberate(f));
 
         [MethodImpl(Inline), Op]
         public static unsafe DynamicAction action(string id, MemoryAddress f)

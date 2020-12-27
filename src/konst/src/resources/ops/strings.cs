@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     partial struct Resources
@@ -15,7 +15,7 @@ namespace Z0
         [Op]
         public static StringRes[] strings(Type src)
         {
-            var values = span(Literals.values2<string>(src));
+            var values = span(Literals.values<string>(src));
             var count = values.Length;
             var buffer = alloc<StringRes>(count);
             var dst = span(buffer);
@@ -34,7 +34,7 @@ namespace Z0
         public static StringRes<T>[] strings<T>(Type src)
             where T : unmanaged
         {
-            var values = span(Literals.values2<string>(src));
+            var values = span(Literals.values<string>(src));
             var count = values.Length;
             var buffer = alloc<StringRes<T>>(count);
             var dst = span(buffer);

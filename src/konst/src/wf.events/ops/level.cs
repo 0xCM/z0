@@ -15,7 +15,7 @@ namespace Z0
         public static EventLevel level(FlairKind flair)
             => flair;
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline)]
         public static EventLevel level<T>(IWfEvent<T> src)
             where T : struct, IWfEvent<T>
                 => src.Flair;

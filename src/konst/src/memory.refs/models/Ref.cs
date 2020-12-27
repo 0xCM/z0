@@ -11,7 +11,7 @@ namespace Z0
     using static System.Runtime.InteropServices.MemoryMarshal;
     using static System.Runtime.CompilerServices.Unsafe;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     public readonly struct Ref : ISegRef<byte>

@@ -8,8 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     public struct LiteralCover
     {
@@ -27,12 +27,12 @@ namespace Z0
         [MethodImpl(Inline)]
         public void WriteValues(Span<object> dst)
         {
-            var view = z.@readonly(Covered);
+            var view = @readonly(Covered);
             var count = view.Length;
             var tRef = __makeref(Cover);
-            ref var target = ref z.first(dst);
+            ref var target = ref first(dst);
             for(var i=0u; i<Covered.Length; i++)
-                z.seek(dst,i) = z.skip(view,i).GetValueDirect(tRef);
+                seek(dst,i) = skip(view,i).GetValueDirect(tRef);
         }
     }
 }

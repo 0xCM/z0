@@ -13,6 +13,10 @@ namespace Z0
     {
         public MethodInfo Method {get;}
 
+        [MethodImpl(Inline)]
+        public MethodAddress(MethodInfo src)
+            => Method = src;
+
         public MemoryAddress Address
             => Method.MethodHandle.Value;
 
@@ -41,6 +45,5 @@ namespace Z0
 
         public override string ToString()
             => Format();
-
     }
 }

@@ -22,7 +22,7 @@ namespace Z0
         /// <summary>
         /// The memory segment occupied by the resource
         /// </summary>
-        public MemorySegment Reference {get;}
+        public MemorySegment Segment {get;}
 
         /// <summary>
         /// The resource data type
@@ -30,10 +30,10 @@ namespace Z0
         public PrimalKind DataType {get;}
 
         [MethodImpl(Inline)]
-        public ResIdentity(asci32 name, MemorySegment memref, PrimalKind type)
+        public ResIdentity(asci32 name, MemorySegment seg, PrimalKind type)
         {
             Name = name;
-            Reference = memref;
+            Segment = seg;
             DataType = type;
         }
     }

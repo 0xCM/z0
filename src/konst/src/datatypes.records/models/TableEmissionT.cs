@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// Captures the emission of a record sequence to a file-system target
     /// </summary>
-    public readonly struct TableEmission<T>
+    public readonly struct TableEmission<T> : ITextual
         where T : struct
     {
         public IndexedSeq<T> Data {get;}
@@ -43,5 +43,11 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Data.View;
         }
+
+        public string Format()
+            => string.Format("{0}({1}): {2}", typeof(T).Name, RowCount, Target.ToUri());
+
+        public override string ToString()
+            => Format();
     }
 }

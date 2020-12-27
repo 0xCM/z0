@@ -4,11 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
     using System.Reflection;
-
-    using static Part;
 
     /// <summary>
     /// Characterizes a type that defines views over captured literals

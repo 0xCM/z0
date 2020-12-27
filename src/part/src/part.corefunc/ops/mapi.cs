@@ -31,6 +31,13 @@ namespace Z0
             return buffer;
         }
 
+        public static Index<T> mapi<S,T>(Index<S> src, Func<int,S,T> f)
+        {
+            var dst = sys.alloc<T>(src.Length);
+            mapi(src.View, f, dst);
+            return dst;
+        }
+
         /// <summary>
         /// Projects a sequence of <typeparamref name='S'/> cells into a caller-supplied <typeparamref name='T'/> cell receiver
         /// </summary>

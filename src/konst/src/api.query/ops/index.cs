@@ -54,7 +54,6 @@ namespace Z0
             return new ApiMemberIndex(ix.HashTable, ix.Duplicates);
         }
 
-
         static ApiOpIndex<T> freeze<T>(IEnumerable<(OpIdentity,T)> src)
         {
             try

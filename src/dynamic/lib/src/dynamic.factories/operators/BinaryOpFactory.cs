@@ -17,7 +17,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static unsafe BinaryOp<T> create<T>(OpIdentity id, ReadOnlySpan<byte> code)
             where T : unmanaged
-                => emit<T>(id, Buffers.liberate(code));
+                => emit<T>(id, memory.liberate(code));
 
         [MethodImpl(Inline)]
         public static BinaryOp<T> create<T>(string name, ReadOnlySpan<byte> f)

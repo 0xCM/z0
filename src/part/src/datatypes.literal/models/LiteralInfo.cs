@@ -70,7 +70,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public bool Equals(LiteralInfo src)
-            => object.Equals(Data,src.Data);
+            => object.Equals(Data, src.Data);
 
         [MethodImpl(Inline)]
         public string Format()

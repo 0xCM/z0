@@ -17,10 +17,6 @@ namespace Z0
         /// <param name="src">The source descriptor</param>
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<byte> data(in ResDescriptor src)
-            => MemoryView.view(src.Address, src.Size);
-
-        [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<char> utf8(in ResDescriptor src)
-            => Encoded.utf8(data(src));
+            => memory.view(src.Address, src.Size);
     }
 }

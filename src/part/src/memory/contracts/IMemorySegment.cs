@@ -14,9 +14,6 @@ namespace Z0
     {
         MemoryAddress BaseAddress {get;}
 
-        // unsafe ReadOnlySpan<byte> View
-        //     => memory.cover<byte>(BaseAddress.Pointer<byte>(), DataSize);
-
         uint DataSize  {get;}
 
         bool INullity.IsEmpty

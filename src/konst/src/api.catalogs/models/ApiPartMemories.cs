@@ -52,5 +52,11 @@ namespace Z0
             [MethodImpl(Inline)]
             get => ref Data.Last;
         }
+
+        public MemoryRange Range
+        {
+            [MethodImpl(Inline)]
+            get => (First.Address, Last.Address);
+        }
     }
 }

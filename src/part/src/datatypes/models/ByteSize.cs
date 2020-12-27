@@ -15,10 +15,6 @@ namespace Z0
     [ApiType, Datatype]
     public readonly struct ByteSize : IDataType<ulong>
     {
-        [MethodImpl(Inline)]
-        public static string format(ByteSize src)
-            => src.Content == 0 ? "0" : src.Content.ToString("#,#");
-
         /// <summary>
         /// Specifies a byte count
         /// </summary>
@@ -40,19 +36,16 @@ namespace Z0
         public ByteSize(ulong count)
             => Content = count;
 
-        public ulong Bits
+        public BitSize Bits
         {
             [MethodImpl(Inline)]
             get => Content*8;
         }
 
-        [MethodImpl(Inline),Ignore]
-        public string Format(string pattern)
-            => format(this);
 
         [MethodImpl(Inline),Ignore]
         public string Format()
-            => Content == 0 ? "0" : Format("#,#");
+            => Content == 0 ? "0" : Content.ToString("#,#");
 
         public override string ToString()
             => Format();

@@ -8,8 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     partial struct Literals
     {
@@ -28,6 +27,5 @@ namespace Z0
         public static LiteralInfo multiliteral(FieldInfo target)
             => target.Tag<MultiLiteralAttribute>()
                      .MapValueOrDefault(tag => multiliteral(target, tag.Data), LiteralInfo.Empty);
-
     }
 }

@@ -445,17 +445,43 @@ namespace Z0
         {
             var catalog = Wf.ApiParts.Api;
             var parts = catalog.Parts;
+            var outer = Wf.Running($"Jitting {parts.Length} parts");
+            var all = list<MethodAddress>();
+            var total = 0u;
             foreach(var part in parts)
             {
-                var flow = Wf.Running(string.Format("Jitting {0}", part.Name));
                 var members = ApiJit.jit(part);
-                Wf.Ran(flow, string.Format("Jitted {0} {1} members", members.Count, part.Name));
+                if(members.Count != 0)
+                {
+                    var flow = Wf.Running(Msg.Jitting.Format(part));
+                    var addresses = members.Storage.Select(m => new MethodAddress(m.Method));
+                    all.AddRange(addresses);
+                    var memories = ApiPartMemories.load(part.Owner, addresses);
+                    var first = memories.First;
+                    var last = memories.Last;
+                    var range = memories.Range;
+                    var length = range.Length/1024;
+                    if(length == 0)
+                        length = 1;
+                    total += length;
+
+                    Wf.Ran(flow, Msg.Jitted.Format(members.Count, part, range, length));
+                }
             }
+            Wf.Ran(outer, string.Format("Jitted {0:#,#}mb member data", total));
+
+            var sorted = Index.sort(all.ToArray());
+            var records = corefunc.mapi(sorted, (i,x) => ApiQuery.record((uint)i, x));
+            var target = Db.IndexFile(ApiAddressRecord.TableId);
+            var emission = Records.emit(records, new byte[]{12,16,16,32,80,64}, target);
+            Wf.Status(emission);
+            //Records.emit(records,)
 
         }
         public void Run()
         {
             //ShowHandlers();
+            Jit();
 
             //Run(Args);
             //EmitProcessImages(Wf);
@@ -482,6 +508,10 @@ namespace Z0
         public static RenderPattern<uint,ApiHostUri,uint> IndexedHost => "{2} | {0} | {1} | Api summary accumulation";
 
         public static RenderPattern<uint,FS.FilePath> EmittedOpIndex => "Emitted operation index for {0} hosts to {1}";
+
+        public static RenderPattern<IPart> Jitting => "Jitting {0}";
+
+        public static RenderPattern<uint,IPart,MemoryRange,ByteSize> Jitted => "Jitted {0} {1} members that cover memory segment {2} of size {3}mb";
 
         public static RenderPattern<T> Dispatching<T>()
             where T : struct, ICmdSpec<T> => "Dispatching {0}";

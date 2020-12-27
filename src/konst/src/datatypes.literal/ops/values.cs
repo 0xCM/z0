@@ -50,11 +50,7 @@ namespace Z0
         }
 
         [Op, Closures(Closure)]
-        public static T[] values<T>(Type src)
-            => map(search<T>(src),sys.constant<T>);
-
-        [Op, Closures(Closure)]
-        public static Paired<FieldInfo,T>[] values2<T>(Type src)
+        public static Paired<FieldInfo,T>[] values<T>(Type src)
         {
             var fields = @readonly(search<T>(src));
             var buffer = alloc<Paired<FieldInfo,T>>(fields.Length);

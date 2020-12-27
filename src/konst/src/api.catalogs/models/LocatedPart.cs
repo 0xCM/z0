@@ -63,7 +63,7 @@ namespace Z0
             dst.Append(SpacePipe);
             dst.Append(BaseAddress.Format().PadRight(16));
             dst.Append(SpacePipe);
-            dst.Append(Size.Format("#,#").PadRight(10));
+            dst.Append(Size.Format().PadRight(10));
             dst.Append(SpacePipe);
             dst.Append(Range.End.Format().PadRight(16));
             return dst.ToString();

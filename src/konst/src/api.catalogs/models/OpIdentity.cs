@@ -22,10 +22,6 @@ namespace Z0
         public static OpIdentity define(string src)
             => new OpIdentity(src);
 
-        [MethodImpl(Inline)]
-        public static OpIdentity define(string text, string name, string suffix, bool generic, bool imm, string[] components)
-            => new OpIdentity(text, name, suffix, generic, imm, components);
-
         /// <summary>
         /// The operation identifier
         /// </summary>
@@ -92,8 +88,11 @@ namespace Z0
         public override bool Equals(object obj)
             => Identified.Same(obj);
 
-        public override string ToString()
+        public string Format()
             => Identified.Format();
+
+        public override string ToString()
+            => Format();
 
         [MethodImpl(Inline)]
         public static implicit operator string(OpIdentity src)

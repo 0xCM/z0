@@ -8,22 +8,13 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
     using System.Linq;
-    using System.Collections.Generic;
 
     using static Konst;
     using static z;
 
-    using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
-    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
-    using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
-
     [ApiHost(ApiNames.ApiQuery, true)]
     public readonly partial struct ApiQuery
     {
-        [MethodImpl(Inline), Op]
-        public static ApiPartCatalogQuery catalog(IApiPartCatalog src)
-            => new ApiPartCatalogQuery(src);
-
         [MethodImpl(Inline), Op]
         public static ApiQueries over(ApiMembers src)
             => new ApiQueries(src);
@@ -45,10 +36,6 @@ namespace Z0
             => src.Tagged<OpAttribute>() && src.Tagged<ClosuresAttribute>() && !src.AcceptsImmediate();
 
         [Op]
-        public static BitMaskInfo[] bitmasks(Type src)
-            => BitMasks.rows(src);
-
-        [Op]
         public static PartId id(Assembly src)
         {
             if(isPart(src))
@@ -60,24 +47,6 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static bool isPart(Assembly src)
             => Attribute.IsDefined(src, typeof(PartIdAttribute));
-
-        [MethodImpl(Inline), Op]
-        public static ApiPartTypes types(IPart src)
-            => new ApiPartTypes(src.Id, src.Owner.Types());
-
-        [Op]
-        public static ApiHostUri uri(Type host)
-        {
-            if(host != null)
-            {
-                var tag = host.Tag<ApiHostAttribute>();
-                var name = ifempty(tag.MapValueOrDefault(x => x.HostName), host.Name);
-                var owner = host.Assembly.Id();
-                return new ApiHostUri(owner, name);
-            }
-            else
-                return ApiHostUri.Empty;
-        }
 
         [Op]
         internal static ApiResKind FormatAccessor(Type match)
@@ -108,11 +77,6 @@ namespace Z0
                let t = c.ToSystemType()
                where t != typeof(void)
                select t;
-
-        // [Op]
-        // static Exception DuplicateKeyException(IEnumerable<object> keys, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-        //     => new Exception(text.concat($"Duplicate keys were detected {keys.FormatList()}",  caller,file, line));
-
 
         /// <summary>
         /// Creates an operation index from a uri bitstream

@@ -13,6 +13,6 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static string format(in StringResRow src)
-            => Z0.text.format(StringResRow.RenderPattern, src.Id, src.Address, z.format(Resources.view(src)));
+            => string.Format(StringResRow.RenderPattern, src.Id, src.Address, z.format(view(src)));
     }
 }

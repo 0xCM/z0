@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static Konst;
+    using static Part;
 
     public enum NumericLiteralField : uint
     {
@@ -15,5 +15,5 @@ namespace Z0
         Data = 2  | (80 << WidthOffset),
 
         Text = 3 | (80 << WidthOffset),
-    }         
+    }
 }

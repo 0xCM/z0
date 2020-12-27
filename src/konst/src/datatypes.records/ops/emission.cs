@@ -22,6 +22,11 @@ namespace Z0
             where T : struct
                 => new TableEmission<T>(src,dst);
 
+        [MethodImpl(Inline), Op]
+        public static TableEmission<T> emission<T>(Index<T> src, FS.FilePath dst)
+            where T : struct
+                => new TableEmission<T>(src, dst);
+
         /// <summary>
         /// Records a record sequence emission to a file
         /// </summary>

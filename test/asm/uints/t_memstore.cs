@@ -48,7 +48,7 @@ namespace Z0
             for(var i=0; i<refs.Length; i++)
             {
                 var r = refs[i];
-                var data = MemoryView.view(r.BaseAddress, r.DataSize);
+                var data = memory.view(r.BaseAddress, r.DataSize);
                 dst.WriteLine(data.FormatHexBytes(Chars.Space));
             }
         }

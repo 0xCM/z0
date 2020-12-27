@@ -17,6 +17,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public ConstIndex(T[] content)
             => Data = content;
+
         public int Length
         {
             [MethodImpl(Inline)]

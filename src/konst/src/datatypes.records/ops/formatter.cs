@@ -29,6 +29,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static RecordFormatter<T> formatter<T>(ReadOnlySpan<byte> widths)
             where T : struct
-                => formatter<T>(rowspec<ApiHexIndexRow>(widths));
+                => formatter<T>(rowspec<T>(widths));
     }
 }

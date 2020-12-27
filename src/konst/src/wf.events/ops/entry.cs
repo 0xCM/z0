@@ -29,7 +29,6 @@ namespace Z0
             return dst;
         }
 
-        [Op, Closures(Closure)]
         public static EventLogEntry entry<H>(IWfEvent<H> src)
             where H : struct, IWfEvent<H>
         {
@@ -44,7 +43,6 @@ namespace Z0
             return dst;
         }
 
-        [Op, Closures(Closure)]
         public static EventLogEntry entry<H,T>(IWfEvent<H,T> src)
             where T : struct, IWfEvent<T>
             where H : struct, IWfEvent<H,T>
