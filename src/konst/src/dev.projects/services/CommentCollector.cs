@@ -69,7 +69,7 @@ namespace Z0
                             if(parsed.Count != 0)
                             {
                                 dst[id] = parsed;
-                                wf.ProcessedFile(path, t, dst[id].Count);
+                                wf.Processed(path, t, dst[id].Count);
                             }
                         }
                     }

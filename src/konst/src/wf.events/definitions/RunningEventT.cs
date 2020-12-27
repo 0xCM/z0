@@ -24,6 +24,8 @@ namespace Z0
 
         public EventPayload<T> Payload {get;}
 
+        public Name Operation {get;}
+
         public FlairKind Flair => FlairKind.Running;
 
         [MethodImpl(Inline)]
@@ -35,7 +37,16 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
+        public RunningEvent(WfStepId step, string operation, T data, CorrelationToken ct)
+        {
+            EventId = (EventName, step, Level, ct);
+            Operation = operation;
+            StepId = step;
+            Payload = data;
+        }
+
+        [MethodImpl(Inline)]
         public string Format()
-            => TextFormatter.format(EventId, Payload);
+            => Operation.IsEmpty ? TextFormatter.format(EventId, Payload) : TextFormatter.format(EventId, Operation, Payload);
     }
 }

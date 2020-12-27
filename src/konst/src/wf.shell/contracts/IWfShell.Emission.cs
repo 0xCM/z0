@@ -27,7 +27,7 @@ namespace Z0
             where T : struct
                 => Raise(tableOut<T>(step, count, dst, Ct));
 
-        void EmittedTable<T>(Count count, FS.FilePath dst, WfExecFlow flow)
+        void EmittedTable<T>(WfExecFlow flow, Count count, FS.FilePath dst)
             where T : struct
                 => Raise(tableOut<T>(Host, count, dst, Ct));
 

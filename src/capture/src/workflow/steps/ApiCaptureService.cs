@@ -65,17 +65,18 @@ namespace Z0
 
         void Capture(IApiHost api)
         {
-            using var flow = Wf.Running(api.Name);
+            var flow = Wf.Running(api.Name);
             try
             {
                 var extracted = Extract(api);
-                using var emitter = ApiCaptureEmitter.create(Wf, Host, Asm, api.Uri, extracted);
+                var emitter = ApiCaptureEmitter.create(Wf, Asm, api.Uri, extracted);
                 emitter.Emit();
             }
             catch(Exception e)
             {
                 Wf.Error(e);
             }
+            Wf.Ran(flow, api.Name);
         }
 
         void Capture(ApiHost[] src)
@@ -92,8 +93,8 @@ namespace Z0
             for(var i=0; i<extracted.Length; i++)
             {
                 ref readonly var x = ref skip(extracted,i);
-                using var emit = new ApiCaptureEmitter(Wf, Host, Asm, x.Key, x.Value);
-                emit.Emit();
+                var emititter = ApiCaptureEmitter.create(Wf, Asm, x.Key, x.Value);
+                emititter.Emit();
             }
         }
 

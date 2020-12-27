@@ -62,7 +62,13 @@ namespace Z0
         public void Running<T>(WfHost host, T data)
             => Raise(running(host, data, Ct));
 
-        public void Running<T>(T src)
-            => Raise(running(Host, src, Ct));
+        public void Running<T>(T data)
+            => Raise(running(Host, data, Ct));
+
+        public void Running<T>(string operation, T data)
+            => Raise(running(Host, operation, data, Ct));
+
+        public void Processing<T>(FS.FilePath src, T kind)
+            => Raise(processing(Host, src, kind, Ct));
     }
 }

@@ -12,7 +12,7 @@ namespace Z0
 
     using BP = BytePatternParser<EncodingPatternKind>;
 
-    public readonly struct PatternExtractParser : IExtractParser
+    public readonly struct PatternExtractParser
     {
         /// <summary>
         /// The default length of the segment removed from the tail of the parsed byte array when the term code is Zx7
@@ -76,7 +76,7 @@ namespace Z0
                 if(term != ExtractTermCode.Fail)
                 {
                     var code = Locate(src.Encoded.BaseAddress, parser.Parsed, term == ExtractTermCode.CTC_Zx7 ? Zx7Cut : 0);
-                    return new ApiMemberCode(src.Member, new ApiCodeBlock(code.BaseAddress, src.OpUri, code, src.ApiSig), seq, term);
+                    return new ApiMemberCode(src.Member, new ApiCodeBlock(code.BaseAddress, src.OpUri, code), seq, term);
                 }
                 else
                     return Outcomes.fail<ApiMemberCode>(term.ToString());
@@ -87,13 +87,13 @@ namespace Z0
             }
         }
 
-        public ApiMemberCodeBlocks ParseMembers(ReadOnlySpan<ApiMemberExtract> src)
+        public Index<ApiMemberCode> ParseMembers(ReadOnlySpan<ApiMemberExtract> src)
         {
             var count = src.Length;
             if(count == 0)
                 return default;
 
-            var buffer = alloc<ApiMemberCode>(src.Length);
+            var buffer = alloc<ApiMemberCode>(count);
             ref var dst = ref first(span(buffer));
             for(var i=0u; i<count; i++)
             {

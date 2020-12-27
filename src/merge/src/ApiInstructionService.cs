@@ -12,7 +12,6 @@ namespace Z0
     using static Part;
     using static z;
 
-
     public interface IApiInstructionService : IWfService
     {
         ApiHostRoutines Decode(IAsmDecoder decoder, in ApiHostCodeBlocks src);
@@ -52,7 +51,7 @@ namespace Z0
                 var len = fx.ByteLength;
                 var data = span(code.Storage);
                 var slice = data.Slice((int)offseq.Offset, len).ToArray();
-                var recoded = new ApiCodeBlock(fx.IP, code.Uri, slice, code.ApiSig);
+                var recoded = new ApiCodeBlock(fx.IP, code.Uri, slice);
                 dst[i] = new ApiInstruction(@base, fx, recoded);
                 offseq = offseq.AccrueOffset((uint)len);
             }

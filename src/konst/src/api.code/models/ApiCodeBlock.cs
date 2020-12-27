@@ -25,22 +25,18 @@ namespace Z0
         /// </summary>
         public CodeBlock Code {get;}
 
-        public CliSig ApiSig {get;}
-
         [MethodImpl(Inline)]
-        public ApiCodeBlock(MemoryAddress @base, OpUri uri, BinaryCode src, CliSig? sig = null)
+        public ApiCodeBlock(MemoryAddress @base, OpUri uri, BinaryCode src)
         {
             Uri = uri;
             Code = new CodeBlock(@base, src);
-            ApiSig = sig ?? CliSig.Empty;
         }
 
         [MethodImpl(Inline)]
-        public ApiCodeBlock(OpUri uri, CodeBlock code, CliSig? sig = null)
+        public ApiCodeBlock(OpUri uri, CodeBlock code)
         {
             Code = code;
             Uri = uri;
-            ApiSig = sig ?? CliSig.Empty;
         }
 
         public byte[] Storage

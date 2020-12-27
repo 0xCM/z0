@@ -42,7 +42,7 @@ namespace Z0
             for(var i=0; i<count; i++)
             {
                 ref readonly var path = ref skip(parsed,i);
-                var result = ApiParseBlocks.load(path);
+                var result = ApiHexRows.load(path);
                 if(result)
                 {
                     var blocks = result.Value;
@@ -70,7 +70,7 @@ namespace Z0
                 return;
             }
 
-            var inclusion = Include(new ApiCodeBlock(src.Uri, src.Data, src.ApiSig));
+            var inclusion = Include(new ApiCodeBlock(src.Address, src.Uri, src.Data));
             if(inclusion.Any(x => x == false))
                 Wf.Warn(Msg.DuplicateUri.Format(src.Uri));
         }

@@ -11,6 +11,7 @@
     <ProjectReference Include="$(Capture)" />
     <ProjectReference Include="$(Domain)" />
     <ProjectReference Include="$(Tools)" />
+    <ProjectReference Include="$(Dsl)" />
     <ProjectReference Include="$(Commands)" />
   </ItemGroup>
 

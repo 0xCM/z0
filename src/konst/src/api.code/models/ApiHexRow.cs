@@ -7,6 +7,8 @@ namespace Z0
     using System;
 
     using F = ApiHexField;
+    using W = ApiHexFieldWidth;
+    using I = ApiHexFieldIndex;
 
     public enum ApiHexField : uint
     {
@@ -22,14 +24,47 @@ namespace Z0
 
         Uri = 5 | 110 << 16,
 
-        OpSig = 6 | 110 << 16,
-
         Data = 7 | 1 << 16
     }
 
-    public struct ApiHexRow
+    public enum ApiHexFieldIndex : byte
     {
-        public const int FieldCount = 8;
+        Seq = 0,
+
+        SourceSeq = 1,
+
+        Address = 2,
+
+        Length = 3,
+
+        TermCode = 4,
+
+        Uri = 5,
+
+        Data = 6
+    }
+
+    public enum ApiHexFieldWidth : byte
+    {
+        Seq = 12,
+
+        SourceSeq = 12,
+
+        Address = 16,
+
+        Length = 8,
+
+        TermCode = 20,
+
+        Uri = 110,
+
+        Data = 110
+    }
+
+    [Record(TableId)]
+    public struct ApiHexRow : IRecord<ApiHexRow>
+    {
+        public const string TableId = "api.hex";
 
         public int Seq;
 
@@ -43,22 +78,17 @@ namespace Z0
 
         public OpUri Uri;
 
-        public CliSig ApiSig;
+        public BinaryCode Data;
+    }
 
-        public CodeBlock Data;
+    public readonly struct ApiHexRowSpec
+    {
+        public const byte FieldCount = 7;
 
-        public string DelimitedText(char delimiter = Chars.Pipe)
-        {
-            var dst = Table.formatter<F>(delimiter);
-            dst.Delimit(F.Seq, Seq);
-            dst.Delimit(F.SourceSeq, SourceSeq);
-            dst.Delimit(F.Address, Address);
-            dst.Delimit(F.Length, Length);
-            dst.Delimit(F.TermCode, TermCode);
-            dst.Delimit(F.Uri, Uri);
-            dst.Delimit(F.OpSig, ApiSig.Format());
-            dst.Delimit(F.Data, Data.Format());
-            return dst.Format();
-        }
+        ReadOnlySpan<ApiHexFieldWidth> _Widths
+            => new ApiHexFieldWidth[FieldCount]{W.Seq, W.SourceSeq, W.Address, W.Length, W.TermCode, W.Uri, W.Data};
+
+        public ReadOnlySpan<byte> Widths
+            => _Widths.AsUInt8();
     }
 }

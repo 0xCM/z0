@@ -47,7 +47,7 @@ namespace Z0.Asm
         public Option<FS.FilePath> SaveHexImm(OpIdentity id, AsmRoutine[] src, bool append)
         {
             var path = HostArchive.HexImmPath(Uri.Owner, Uri, id);
-            ApiCode.emit(src.Map(x => x.Code), FS.path(path.Name),append);
+            ApiCodeExtracts.emit(src.Map(x => x.Code), FS.path(path.Name),append);
             return path;
         }
     }

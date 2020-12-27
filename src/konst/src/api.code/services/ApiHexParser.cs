@@ -30,12 +30,13 @@ namespace Z0
                 var address = Parsers.hex().Parse(parts[(byte)ApiCodeField.Base]).ValueOrDefault();
                 var uri = ApiUri.parse(parts[(byte)ApiCodeField.Uri].Trim()).ValueOrDefault();
                 var bytes = parts[(byte)ApiCodeField.Encoded].SplitClean(HexFormatSpecs.DataDelimiter).Select(parser.Succeed);
-                return parsed(src, new ApiCodeBlock(address, uri, bytes, CliSig.Empty));
+                return parsed(src, new ApiCodeBlock(address, uri, bytes));
             }
             catch(Exception e)
             {
                 return unparsed<ApiCodeBlock>(src,e);
             }
         }
+
     }
 }

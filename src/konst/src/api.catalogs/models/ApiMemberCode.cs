@@ -83,9 +83,6 @@ namespace Z0
             get => Encoded.IsNonEmpty;
         }
 
-        [MethodImpl(Inline)]
-        public static implicit operator BinaryCode(ApiMemberCode src)
-            => src.Encoded.Encoded;
 
         [MethodImpl(Inline)]
         public ApiMemberCode(ApiMember member, ApiCodeBlock code, uint seq = 0, ExtractTermCode term = 0)
@@ -97,12 +94,12 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public ApiMemberCode(ApiMember member, BinaryCode code, uint seq = 0, ExtractTermCode term = 0)
+        ApiMemberCode(ApiMember member, BinaryCode code)
         {
-            Sequence = seq;
+            Sequence = 0;
             Member = member;
-            Encoded = new ApiCodeBlock(member.Address, member.OpUri, code, member.ApiSig);
-            TermCode = term;
+            Encoded = ApiCodeBlock.Empty;
+            TermCode = 0;
         }
 
         public MemoryAddress Address
@@ -144,6 +141,10 @@ namespace Z0
 
         public override string ToString()
             => Format();
+
+        [MethodImpl(Inline)]
+        public static implicit operator BinaryCode(ApiMemberCode src)
+            => src.Encoded.Encoded;
 
         public static ApiMemberCode Empty
             => new ApiMemberCode(ApiMember.Empty, BinaryCode.Empty);

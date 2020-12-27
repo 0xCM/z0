@@ -104,7 +104,7 @@ namespace Z0
         public ApiCodeBlock CodeBlock
         {
              [MethodImpl(Inline)]
-             get => new ApiCodeBlock(BaseAddress, OpUri, Parsed, ApiSig);
+             get => new ApiCodeBlock(BaseAddress, OpUri, Parsed);
         }
 
         public OpIdentity MemberId

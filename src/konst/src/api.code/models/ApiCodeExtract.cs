@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.InteropServices;
 
     [StructLayout(LayoutKind.Sequential)]
-    public struct ApiCodeRow
+    public struct ApiCodeExtract
     {
         public MemoryAddress Base;
 

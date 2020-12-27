@@ -65,6 +65,13 @@ namespace Z0
             return Target.ToString();
         }
 
+        public string Emit()
+        {
+            var x =  Target.ToString();
+            Reset();
+            return x;
+        }
+
 
         public override string ToString()
             => Format();

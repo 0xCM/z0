@@ -91,9 +91,9 @@ namespace Z0
 
         void EmitReports()
         {
-            var flow = Wf.Running(MethodInfo.GetCurrentMethod().Name);
-            EmitCodeBlockReport.create().Run(Wf);
-            Wf.Ran(flow);
+            //var flow = Wf.Running(MethodInfo.GetCurrentMethod().Name);
+            //EmitCodeBlockReport.create().Run(Wf);
+            //Wf.Ran(flow);
         }
 
         static void run(IWfShell wf, IAsmContext asm)

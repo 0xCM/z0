@@ -71,7 +71,7 @@ namespace Z0
                 for(var i=0; i<files.Length; i++)
                 {
                     ref readonly var file = ref skip(files,i);
-                    Wf.ProcessingFile(file, kind);
+                    Wf.Processing(file, kind);
                     var parsed = span(parser.ParseInstructions(file));
                     for(var j = 0; j< parsed.Length; j++)
                     {
@@ -80,7 +80,7 @@ namespace Z0
                         Save(parsed, file.FileName);
                     }
 
-                    Wf.ProcessedFile(FS.path(file.Name), kind, parsed.Length);
+                    Wf.Processed(FS.path(file.Name), kind, parsed.Length);
                 }
             }
             catch(Exception e)

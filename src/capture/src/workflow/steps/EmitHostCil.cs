@@ -13,13 +13,6 @@ namespace Z0
     {
         ApiHostUri Uri;
 
-        public static EmitHostCil create(ApiHostUri uri)
-        {
-            var host = new EmitHostCil();
-            host.Uri = uri;
-            return host;
-        }
-
         protected override ref FS.FilePath Execute(IWfShell wf, in ApiMemberCodeBlocks src, out FS.FilePath dst)
         {
             var path = wf.Db().CapturedCilDataFile(Uri);

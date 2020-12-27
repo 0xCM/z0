@@ -32,17 +32,16 @@ namespace Z0
             Wf.Created(Host);
         }
 
-        public AsmRoutine[] Decode(ApiHostUri uri, ApiMemberCodeBlocks src)
+        public AsmRoutine[] Decode(ApiHostUri uri, ReadOnlySpan<ApiMemberCode> src)
         {
             try
             {
                 Wf.Running(Host, uri);
-                var count = src.Count;
-                var view = src.View;
+                var count = src.Length;
                 var dst = alloc<AsmRoutine>(count);
                 for(var i=0; i<count; i++)
                 {
-                    ref readonly var member = ref skip(view,i);
+                    ref readonly var member = ref skip(src, i);
                     var decoded = Decoder.Decode(member);
                     if(!decoded)
                         HandleFailure(member);

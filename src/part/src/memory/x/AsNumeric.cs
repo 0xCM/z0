@@ -174,6 +174,16 @@ namespace Z0
                 => recover<T,sbyte>(src);
 
         /// <summary>
+        /// Presents a readonly span of generic values as a span of signed bytes
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The source span element type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ReadOnlySpan<byte> AsUInt8<T>(this ReadOnlySpan<T> src)
+            where T : struct
+                => recover<T,byte>(src);
+
+        /// <summary>
         /// Presents a span of generic values as a span of signed 16-bit integers
         /// </summary>
         /// <param name="src">The source span</param>

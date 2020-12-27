@@ -9,20 +9,17 @@ namespace Z0
 
     using static WfEvents;
 
-    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
-
     partial interface IWfShell
     {
-        void ProcessingFile<T>(FS.FilePath src, T kind)
+        void Processing<T>(FS.FilePath src, T kind)
         {
-            if(Verbosity.Babble())
-                Raise(new ProcessingFileEvent<T>(Host, kind, src, Ct));
+            signal(this).Processing(src, kind);
         }
 
-       void ProcessedFile<T>(FS.FilePath src, T kind)
+        void Processed<T>(FS.FilePath src, T kind)
             => Raise(fileProcessed(Host, src, kind, Ct));
 
-        void ProcessedFile<T,M>(FS.FilePath src, T kind, M metric)
+        void Processed<T,M>(FS.FilePath src, T kind, M metric)
             => Raise(fileProcessed(Host, src, kind, metric, Ct));
 
         void Processed<T>(T content)
@@ -30,7 +27,6 @@ namespace Z0
 
         void Processed<T>(ApiHostUri uri, T content)
             => processed(Host, Seq.delimit(uri,content), Ct);
-
 
         void Created(WfStepId id)
         {

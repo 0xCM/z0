@@ -4,6 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System.Reflection;
     using static WfEvents;
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
@@ -13,6 +14,30 @@ namespace Z0
         WfExecFlow Running()
         {
             signal(this).Running();
+            return Flow();
+        }
+
+        WfExecFlow Running(string operation)
+        {
+            signal(this).Running(operation);
+            return Flow();
+        }
+
+        WfExecFlow Running(MethodInfo operation)
+        {
+            signal(this).Running(operation.Name);
+            return Flow();
+        }
+
+        WfExecFlow Running<T>(string operation, T data)
+        {
+            signal(this).Running(operation, data);
+            return Flow();
+        }
+
+        WfExecFlow Running<T>(MethodInfo operation, T data)
+        {
+            signal(this).Running(operation.Name, data);
             return Flow();
         }
 
