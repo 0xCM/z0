@@ -38,7 +38,7 @@ namespace Z0
 
         public string Component;
 
-        public CliToken TypeId;
+        public ClrToken TypeId;
 
         public MemoryAddress TypeAddress;
 

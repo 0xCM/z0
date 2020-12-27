@@ -12,12 +12,12 @@ namespace Z0
 
         ushort SegCapacity {get;}
 
-        CliToken SegDomain {get;}
+        ClrToken SegDomain {get;}
 
-        CliToken SymDomain {get;}
+        ClrToken SymDomain {get;}
 
-        CliToken KindDomain
-            => CliToken.Empty;
+        ClrToken KindDomain
+            => ClrToken.Empty;
     }
 
     public interface ISymbolSpec<S> : ISymbolSpec

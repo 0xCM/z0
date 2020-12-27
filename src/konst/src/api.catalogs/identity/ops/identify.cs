@@ -23,8 +23,8 @@ namespace Z0
             var component = src.Assembly;
             var id = text.format(RP.SlotDot3,
                 "type",
-                CliToken.from(component),
-                CliToken.from(src)
+                ClrToken.from(component),
+                ClrToken.from(src)
                 );
             return TypeIdentity.define(id);
         }
@@ -40,9 +40,9 @@ namespace Z0
             var component = type.Assembly;
             var id = text.format(RP.SlotDot4,
                 "method",
-                CliToken.from(component),
-                CliToken.from(type),
-                CliToken.from(src)
+                ClrToken.from(component),
+                ClrToken.from(type),
+                ClrToken.from(src)
                 );
 
             return OpIdentity.define(id);
@@ -60,9 +60,9 @@ namespace Z0
             var component = type.Assembly;
             var id = text.format(RP.SlotDot5,
                 "delegate",
-                CliToken.from(component),
-                CliToken.from(type),
-                CliToken.from(method),
+                ClrToken.from(component),
+                ClrToken.from(type),
+                ClrToken.from(method),
                 src.GetHashCode()
                 );
             return OpIdentity.define(id);

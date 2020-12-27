@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Identifies a metadata element
     /// </summary>
-    public readonly struct CliToken : ITextual, IEquatable<CliToken>, INullity
+    public readonly struct ClrToken : ITextual, IEquatable<ClrToken>, INullity
     {
         readonly uint Data;
 
@@ -34,148 +34,148 @@ namespace Z0
             => Data.FormatHex();
 
         [MethodImpl(Inline)]
-        public static CliToken from(Type src)
-            => new CliToken(src);
+        public static ClrToken from(Type src)
+            => new ClrToken(src);
 
         [MethodImpl(Inline)]
-        public static CliToken from<T>()
-            => new CliToken(typeof(T));
+        public static ClrToken from<T>()
+            => new ClrToken(typeof(T));
 
         [MethodImpl(Inline)]
-        public static CliToken from(FieldInfo src)
-            => new CliToken(src);
+        public static ClrToken from(FieldInfo src)
+            => new ClrToken(src);
 
         [MethodImpl(Inline)]
-        public static CliToken from(PropertyInfo src)
-            => new CliToken(src);
+        public static ClrToken from(PropertyInfo src)
+            => new ClrToken(src);
 
         [MethodImpl(Inline)]
-        public static CliToken from(MethodInfo src)
-            => new CliToken(src);
+        public static ClrToken from(MethodInfo src)
+            => new ClrToken(src);
 
         [MethodImpl(Inline)]
-        public static CliToken from(ParameterInfo src)
-            => new CliToken(src);
+        public static ClrToken from(ParameterInfo src)
+            => new ClrToken(src);
 
         [MethodImpl(Inline)]
-        public static CliToken from(Assembly src)
-            => new CliToken(src);
+        public static ClrToken from(Assembly src)
+            => new ClrToken(src);
 
         [MethodImpl(Inline)]
-        internal CliToken(Type src)
+        internal ClrToken(Type src)
             : this(src.MetadataToken)
         {
 
         }
 
         [MethodImpl(Inline)]
-        internal CliToken(Assembly src)
+        internal ClrToken(Assembly src)
             : this(src.GetHashCode())
         {
 
         }
 
         [MethodImpl(Inline)]
-        internal CliToken(FieldInfo src)
+        internal ClrToken(FieldInfo src)
             : this(src.MetadataToken)
         {
 
         }
 
         [MethodImpl(Inline)]
-        internal CliToken(PropertyInfo src)
+        internal ClrToken(PropertyInfo src)
             : this(src.MetadataToken)
         {
 
         }
 
         [MethodImpl(Inline)]
-        internal CliToken(ParameterInfo src)
+        internal ClrToken(ParameterInfo src)
             : this(src.MetadataToken)
         {
 
         }
 
         [MethodImpl(Inline)]
-        internal CliToken(MethodInfo src)
+        internal ClrToken(MethodInfo src)
             : this(src.MetadataToken)
         {
 
         }
 
         [MethodImpl(Inline)]
-        internal CliToken(Module src)
+        internal ClrToken(Module src)
             : this(src.MetadataToken)
         {
 
         }
 
         [MethodImpl(Inline)]
-        internal CliToken(int token)
+        internal ClrToken(int token)
             => Data = (uint)token;
 
         [MethodImpl(Inline)]
-        internal CliToken(uint token)
+        internal ClrToken(uint token)
             => Data = token;
 
         public override string ToString()
             => Format();
 
         [MethodImpl(Inline)]
-        public bool Equals(CliToken src)
+        public bool Equals(ClrToken src)
             => Data == src.Data;
 
         public override int GetHashCode()
             => Data.GetHashCode();
 
         public override bool Equals(object src)
-            => src is CliToken t && Equals(t);
+            => src is ClrToken t && Equals(t);
 
         [MethodImpl(Inline)]
-        public static implicit operator CliToken(int src)
-            => new CliToken(src);
+        public static implicit operator ClrToken(int src)
+            => new ClrToken(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator CliToken(uint src)
-            => new CliToken(src);
+        public static implicit operator ClrToken(uint src)
+            => new ClrToken(src);
 
         [MethodImpl(Inline)]
-        public static bool operator ==(CliToken x, CliToken y)
+        public static bool operator ==(ClrToken x, ClrToken y)
             => x.Equals(y);
 
         [MethodImpl(Inline)]
-        public static bool operator !=(CliToken x, CliToken y)
+        public static bool operator !=(ClrToken x, ClrToken y)
             => !x.Equals(y);
 
         [MethodImpl(Inline)]
-        public static implicit operator CliToken(Type src)
-            => new CliToken(src);
+        public static implicit operator ClrToken(Type src)
+            => new ClrToken(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator CliToken(FieldInfo src)
-            => new CliToken(src);
+        public static implicit operator ClrToken(FieldInfo src)
+            => new ClrToken(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator CliToken(PropertyInfo src)
-            => new CliToken(src);
+        public static implicit operator ClrToken(PropertyInfo src)
+            => new ClrToken(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator CliToken(MethodInfo src)
-            => new CliToken(src);
+        public static implicit operator ClrToken(MethodInfo src)
+            => new ClrToken(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator CliToken(ParameterInfo src)
-            => new CliToken(src);
+        public static implicit operator ClrToken(ParameterInfo src)
+            => new ClrToken(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator uint(CliToken src)
+        public static implicit operator uint(ClrToken src)
             => src.Data;
 
         [MethodImpl(Inline)]
-        public static explicit operator int(CliToken src)
+        public static explicit operator int(ClrToken src)
             => (int)src.Data;
 
-        public static CliToken Empty
+        public static ClrToken Empty
             => default;
     }
 }

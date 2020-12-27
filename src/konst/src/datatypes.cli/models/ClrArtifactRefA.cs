@@ -23,7 +23,7 @@ namespace Z0
             get => Artifact.Kind;
         }
 
-        public CliToken Key
+        public ClrToken Key
         {
             [MethodImpl(Inline)]
             get => Artifact.Key;

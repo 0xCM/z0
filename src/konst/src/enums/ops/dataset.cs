@@ -21,7 +21,7 @@ namespace Z0
         {
             var src = LiteralSequence<E,T>();
             var count = src.Length;
-            var token = CliToken.from<E>();
+            var token = ClrToken.from<E>();
             var datatype = kind<E>();
             var description = string.Empty;
             var indices = sys.alloc<uint>(count);
@@ -29,7 +29,7 @@ namespace Z0
             var literals = sys.alloc<E>(count);
             var numeric = sys.alloc<T>(count);
             var descriptions = sys.alloc<string>(count);
-            var tokens = sys.alloc<CliToken>(count);
+            var tokens = sys.alloc<ClrToken>(count);
             var dst = new EnumDataset<E,T>(token, description, datatype, tokens, indices,  names, literals, numeric, descriptions);
             for(var i=0; i<count; i++)
             {

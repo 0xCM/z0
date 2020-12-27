@@ -15,7 +15,7 @@ namespace Z0
     {
         public PropertyInfo Definition {get;}
 
-        public CliToken Token
+        public ClrToken Token
         {
             [MethodImpl(Inline)]
             get => Definition.MetadataToken;

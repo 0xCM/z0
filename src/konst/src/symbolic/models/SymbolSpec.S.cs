@@ -27,12 +27,12 @@ namespace Z0
         /// </summary>
         public ushort SegCapacity {get;}
 
-        public CliToken SegDomain {get;}
+        public ClrToken SegDomain {get;}
 
-        public CliToken SymDomain {get;}
+        public ClrToken SymDomain {get;}
 
         [MethodImpl(Inline)]
-        public SymbolSpec(ushort symwidth, ushort segwidth, CliToken segdomain,  CliToken symdomain, params S[] symbols)
+        public SymbolSpec(ushort symwidth, ushort segwidth, ClrToken segdomain,  ClrToken symdomain, params S[] symbols)
         {
             SymWidth = symwidth;
             SegWidth = segwidth;
@@ -43,7 +43,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public SymbolSpec(ushort symwidth, CliToken symdomain, params S[] symbols)
+        public SymbolSpec(ushort symwidth, ClrToken symdomain, params S[] symbols)
         {
             SymWidth = symwidth;
             SegWidth = (ushort)bitwidth<S>();

@@ -17,13 +17,13 @@ namespace Z0
     {
         readonly ulong Data;
 
-        public CliToken OwnerId
+        public ClrToken OwnerId
         {
             [MethodImpl(Inline)]
             get => (uint)(Data >> 32);
         }
 
-        public CliToken MemberId
+        public ClrToken MemberId
         {
             [MethodImpl(Inline)]
             get => (uint)(Data);

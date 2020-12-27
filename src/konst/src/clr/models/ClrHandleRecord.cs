@@ -14,7 +14,7 @@ namespace Z0
 
         public ClrArtifactKind Kind;
 
-        public CliToken Key;
+        public ClrToken Key;
 
         public MemoryAddress Address;
     }

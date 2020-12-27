@@ -15,10 +15,10 @@ namespace Z0
     {
         public Assembly Definition {get;}
 
-        public CliToken Id
+        public ClrToken Id
         {
             [MethodImpl(Inline)]
-            get => CliToken.from(Definition);
+            get => ClrToken.from(Definition);
         }
 
         [MethodImpl(Inline)]
@@ -46,7 +46,7 @@ namespace Z0
         public ClrArtifactKind ClrKind
             => ClrArtifactKind.Assembly;
 
-        public CliToken Token
+        public ClrToken Token
             => Definition.GetHashCode();
 
         [MethodImpl(Inline)]
