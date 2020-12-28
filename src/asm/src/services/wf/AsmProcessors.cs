@@ -13,12 +13,12 @@ namespace Z0.Asm
     [ApiHost]
     public readonly struct AsmProcessors
     {
-        public static void exec(IWfShell wf, ReadOnlySpan<ApiPartRoutines> src)
-        {
-            var count = src.Length;
-            for(var i=0; i<count; i++)
-                parts(wf).Process(skip(src,i));
-        }
+        // public static void exec(IWfShell wf, ReadOnlySpan<ApiPartRoutines> src)
+        // {
+        //     var count = src.Length;
+        //     for(var i=0; i<count; i++)
+        //         AsmProcessors.parts(wf).Process(skip(src,i));
+        // }
 
         /// <summary>
         /// Creates an asm processor

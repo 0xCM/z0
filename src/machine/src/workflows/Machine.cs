@@ -49,7 +49,7 @@ namespace Z0
                 EmitEnumCatalog.create().Run(Wf);
                 EmitFieldLiterals.create().Run(Wf);
                 EmitBitMasks.create().Run(Wf);
-                CaptureProcessors.Run(Wf, Asm);
+                ApiProcessors.create(Wf, Asm).Run();
             }
             catch(Exception e)
             {

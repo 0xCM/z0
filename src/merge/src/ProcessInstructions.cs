@@ -7,15 +7,6 @@ namespace Z0
     using System;
     using Z0.Asm;
 
-    public sealed class ProcessInstructions : WfHost<ProcessInstructions,ApiPartRoutines>
-    {
-        protected override void Execute(IWfShell wf, in ApiPartRoutines state)
-        {
-            var step = new PartRoutinesProcessor(wf, this, state);
-            step.Run();
-        }
-    }
-
     public readonly struct PartRoutinesProcessor
     {
         readonly IWfShell Wf;
@@ -49,21 +40,6 @@ namespace Z0
         {
             using var step = new AsmJmpProcessor(Wf, Source);
             step.Process();
-        }
-
-        public void Run()
-        {
-            // try
-            // {
-            //     ProcessJumps();
-            //     ProcessEnlisted();
-            //     RenderSemantic();
-            //     ProcessCalls();
-            // }
-            // catch(Exception e)
-            // {
-            //     Wf.Error(e);
-            // }
         }
     }
 }

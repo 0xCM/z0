@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    public struct ApiCodeBlockIndex
+    public class ApiCodeBlockIndex
     {
         PartCodeAddresses Memories;
 
