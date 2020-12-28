@@ -30,8 +30,6 @@ namespace Z0
 
         }
 
-        public void ProcessEnlisted()
-            => AsmProcessors.parts(Wf).Process(Source);
 
         public void ProcessCalls()
             => EmitCallIndex.create(Source).Run(Wf);

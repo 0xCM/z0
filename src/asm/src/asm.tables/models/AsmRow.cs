@@ -8,9 +8,7 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static Konst;
-
-    using F = Asm.AsmRowField;
+    using static Part;
 
     public enum AsmRowField : uint
     {
@@ -38,13 +36,13 @@ namespace Z0.Asm
     }
 
     [StructLayout(LayoutKind.Sequential), Record(TableId, FieldCount)]
-    public struct AsmRow : IRecord<AsmRow>
+    public struct AsmRow : IRecord<AsmRow>, IComparable<AsmRow>
     {
         public const string TableId = "asm.rows";
 
         public const byte FieldCount = 11;
 
-        public int Sequence;
+        public Sequential Sequence;
 
         public MemoryAddress Address;
 
@@ -68,7 +66,7 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         public AsmRow(
-            int Sequence,
+            Sequential Sequence,
             MemoryAddress Address,
             Address32 GlobalOffset,
             Address16 LocalOffset,
@@ -105,21 +103,8 @@ namespace Z0.Asm
             get => !IsEmpty;
         }
 
-        [Op]
-        public static ref readonly DatasetFormatter<AsmRowField> format(in AsmRow src, in DatasetFormatter<AsmRowField> dst)
-        {
-            dst.Delimit(F.Sequence, src.Sequence);
-            dst.Delimit(F.Address, src.Address);
-            dst.Delimit(F.GlobalOffset, src.GlobalOffset);
-            dst.Delimit(F.LocalOffset, src.LocalOffset);
-            dst.Delimit(F.Mnemonic, src.Mnemonic);
-            dst.Delimit(F.OpCode, src.OpCode);
-            dst.Delimit(F.Instruction, src.Instruction);
-            dst.Delimit(F.SourceCode, src.SourceCode);
-            dst.Delimit(F.Encoded, src.Encoded);
-            dst.Delimit(F.CpuId, src.CpuId);
-            dst.Delimit(F.OpCodeId, src.OpCodeId);
-            return ref dst;
-        }
+        [MethodImpl(Inline)]
+        public int CompareTo(AsmRow src)
+            => Sequence.CompareTo(src.Sequence);
     }
 }

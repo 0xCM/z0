@@ -46,6 +46,12 @@ namespace Z0
             Append(string.Format(pattern, args));
         }
 
+        void Delimit<T>(T src, ushort width)
+        {
+            var pattern = " | " + text.embrace($"0,-{width}");
+            AppendFormat(pattern, src);
+        }
+
         void Append(ReadOnlySpan<char> src)
             => Append(new string(src));
 
@@ -94,6 +100,8 @@ namespace Z0
                 Append(value.PadRight((int)width));
             }
         }
+
+
 
         void AppendDelimited<T>(T[] src, char c = FieldDelimiter)
             => Append(Seq.delimit(src, c).Format());

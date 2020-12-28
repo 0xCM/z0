@@ -2,17 +2,19 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
 
-    using static Part;
+    using static Konst;
+    using static memory;
 
-    public static partial class XTend
+    partial struct AsmTables
     {
         [MethodImpl(Inline), Op]
-        public static unsafe Span<byte> Bytes(this ulong src)
-            => ByteRead.read8(src);
+        public ReadOnlySpan<byte> encode(AsmSyntaxEncoding src)
+            => src.Bytes;
     }
 }

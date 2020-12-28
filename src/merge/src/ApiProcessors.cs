@@ -67,13 +67,20 @@ namespace Z0
             }
         }
 
+        void ProcessJumps(ApiPartRoutines src)
+        {
+            using var step = new AsmJmpProcessor(Wf, src);
+            step.Process();
+        }
+
         void ProcessJumps()
         {
             var count = Decoded.Length;
             for(var i=0; i<count; i++)
             {
-                var processor = PartRoutinesProcessor.service(Wf, skip(Decoded,i));
-                processor.ProcessJumps();
+                // var processor = PartRoutinesProcessor.service(Wf, skip(Decoded,i));
+                // processor.ProcessJumps();
+                ProcessJumps(skip(Decoded,i));
             }
         }
 

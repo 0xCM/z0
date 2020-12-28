@@ -19,11 +19,16 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public AsmSyntaxEncoding(ulong data)
             => Data = data;
-            
+
+        public ReadOnlySpan<byte> Bytes
+        {
+            [MethodImpl(Inline)]
+            get => Data.Bytes();
+        }
         public string Format()
             => asci.format(Data);
 
-        public override string ToString() 
+        public override string ToString()
             => Format();
     }
 }

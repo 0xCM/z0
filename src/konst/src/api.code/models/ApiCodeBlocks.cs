@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct ApiCodeBlocks
+    public readonly struct ApiCodeBlocks : IIndex<ApiCodeBlock>
     {
         public Index<ApiCodeBlock> Code {get;}
 
@@ -34,7 +34,6 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Code.Edit;
         }
-
 
         public ApiCodeBlock[] Storage
         {
