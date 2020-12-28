@@ -12,9 +12,9 @@ namespace Z0
     {
         public const string TableId = "clr.handles";
 
-        public ClrArtifactKind Kind;
+        public ClrToken Token;
 
-        public ClrToken Key;
+        public ClrArtifactKind Kind;
 
         public MemoryAddress Address;
     }

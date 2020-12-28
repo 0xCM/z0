@@ -10,7 +10,6 @@ namespace Z0
 
     using static Part;
 
-    [ApiType(ApiNames.ClrStruct, true)]
     public readonly struct ClrStruct
     {
         public Type Definition {get;}

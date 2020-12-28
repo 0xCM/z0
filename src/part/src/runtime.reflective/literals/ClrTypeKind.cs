@@ -6,24 +6,22 @@ namespace Z0
 {
     using System;
 
-    using static Pow2x8;
-
     /// <summary>
     /// Defines classifiers that correspond to the basic CLR types
     /// </summary>
     [Flags]
-    public enum ClrTypeKind : byte
+    public enum ClrTypeKind : uint
     {
         None = 0,
 
-        Class = P2ᐞ00,
+        Class = ClrArtifactKind.Class,
 
-        Struct = P2ᐞ01,
+        Struct = ClrArtifactKind.Struct,
 
-        Delegate = P2ᐞ02,
+        Delegate = ClrArtifactKind.Delegate,
 
-        Enum = P2ᐞ03,
+        Enum = ClrArtifactKind.Enum,
 
-        Interface = P2ᐞ04
+        Interface = ClrArtifactKind.Interface
     }
 }

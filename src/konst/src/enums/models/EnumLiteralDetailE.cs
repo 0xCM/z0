@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Defines an enumeration literal as the triple (index,identifier,value)
@@ -31,32 +31,32 @@ namespace Z0
         /// <summary>
         /// The kind of primitive specialized by the enum
         /// </summary>
-        public readonly EnumLiteralKind PrimalKind {get;}
+        public EnumLiteralKind PrimalKind {get;}
 
         /// <summary>
         /// The literal declaration order, unique within the declaring enum
         /// </summary>
-        public readonly uint Position {get;}
+        public uint Position {get;}
 
         /// <summary>
         /// The literal identifier, unique within the declaring enum
         /// </summary>
-        public readonly string Name {get;}
+        public string Name {get;}
 
         /// <summary>
         /// The literal E-value
         /// </summary>
-        public readonly E LiteralValue {get;}
+        public E LiteralValue {get;}
 
         /// <summary>
         /// The system data type
         /// </summary>
-        public readonly Type DataType {get;}
+        public Type DataType {get;}
 
         /// <summary>
         /// The meaning of the literal, if available
         /// </summary>
-        public readonly string Description {get;}
+        public string Description {get;}
 
         /// <summary>
         /// The metadata token that identifies the backing field

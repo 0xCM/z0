@@ -70,14 +70,6 @@ namespace Z0
             => new StringRef((ulong)pchar(src), (uint)src.Length, user);
 
         /// <summary>
-        /// Creates a character reference from a <see cref='StringRef'/?
-        /// </summary>
-        /// <param name="src">The source reference</param>
-        [MethodImpl(Inline), Op]
-        public static ref char @ref(in StringRef src)
-            => ref @as<ulong,char>(address(src));
-
-        /// <summary>
         /// Presents a pointer as a reference
         /// </summary>
         /// <param name="ptr">The source pointer</param>

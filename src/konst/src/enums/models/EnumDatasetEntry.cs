@@ -37,20 +37,19 @@ namespace Z0
         /// <summary>
         /// The literal name
         /// </summary>
-        public StringRef Name;
+        public Name Name;
 
         /// <summary>
         /// The description, if available
         /// </summary>
-        public StringRef Description;
+        public string Description;
 
         [MethodImpl(Inline)]
-        public EnumDatasetEntry(ClrToken id, ClrToken enumId, uint index, StringRef name, variant scalar, StringRef description)
+        public EnumDatasetEntry(ClrToken id, ClrToken enumId, uint index, Name name, variant scalar, string description)
         {
             Id = id;
             EnumId = enumId;
             Index = index;
-
             Name = name;
             ScalarValue = scalar;
             Description = description;

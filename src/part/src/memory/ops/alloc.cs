@@ -11,6 +11,7 @@ namespace Z0
 
     partial struct memory
     {
+
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T[] alloc<T>(uint count)
             => sys.alloc<T>(count);

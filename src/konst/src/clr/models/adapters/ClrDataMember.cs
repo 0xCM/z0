@@ -28,8 +28,18 @@ namespace Z0
         public ClrDataMember(FieldInfo src)
             => Definition = src;
 
-        bool IsField
+        public bool IsField
             => Definition is FieldInfo;
+
+        public bool IsProperty
+            => Definition is PropertyInfo;
+
+        [Ignore]
+        public ClrArtifactKind Kind
+        {
+            [MethodImpl(Inline)]
+            get => IsField ? ClrArtifactKind.Field : ClrArtifactKind.Property;
+        }
 
         public object GetValue(object o)
         {

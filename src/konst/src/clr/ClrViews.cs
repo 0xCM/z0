@@ -24,10 +24,10 @@ namespace Z0
 
         static TypeView type => default;
 
-        static ModuleView module => default;
+        static ClrModule module => default;
 
         [MethodImpl(Inline), Op]
-        public static ModuleView vManifest(Assembly src)
+        public static ClrModule vManifest(Assembly src)
             => view(src.ManifestModule);
 
         /// <summary>
@@ -41,19 +41,27 @@ namespace Z0
                 => src;
 
         /// <summary>
-        /// Defines a <see cref='ModuleView'/> over the source
+        /// Defines an <see cref='CliArtfactRef'/> predicated on an a <see cref='ClrToken'/>
+        /// </summary>
+        /// <param name="src">The defining type</param>
+        [MethodImpl(Inline), Op]
+        public static ClrArtifactRef reference(ClrToken id, ClrArtifactKind kind, StringRef name)
+            => new ClrArtifactRef(id,kind,name);
+
+        /// <summary>
+        /// Defines a <see cref='ClrModule'/> over the source
         /// </summary>
         /// <param name="src">The source module</param>
         [MethodImpl(Inline), Op]
-        public static ModuleView view(Module src)
+        public static ClrModule view(Module src)
             => src;
 
         /// <summary>
-        /// Defines a <see cref='MethodView'/> over the source
+        /// Defines a <see cref='ClrMethod'/> over the source
         /// </summary>
         /// <param name="src">The source module</param>
         [MethodImpl(Inline), Op]
-        public static MethodView view(MethodInfo src)
+        public static ClrMethod view(MethodInfo src)
             => src;
 
         /// <summary>
@@ -61,7 +69,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source module</param>
         [MethodImpl(Inline), Op]
-        public static FieldView view(FieldInfo src)
+        public static ClrField view(FieldInfo src)
             => src;
 
         /// <summary>
@@ -124,7 +132,7 @@ namespace Z0
             => View(methods(src), method);
 
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<ModuleView> vModules(Assembly src)
+        public static ReadOnlySpan<ClrModule> vModules(Assembly src)
             => View(src.Modules(), module);
 
         [MethodImpl(Inline), Op]

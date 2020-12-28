@@ -13,6 +13,10 @@ namespace Z0
     public interface IClrRuntimeMember : IClrRuntimeObject
     {
         MemberInfo Definition {get;}
+
+        string IClrArtifact.Name => Definition.Name;
+
+        ClrToken IClrArtifact.Token => Definition.MetadataToken;
     }
 
     [Free]
@@ -23,8 +27,9 @@ namespace Z0
             => (this as IClrRuntimeObject<D>).Definition;
     }
 
+
     [Free]
-    public interface IClrRuntimeMember<H,D> : IClrRuntimeMember<D>, IClrRuntimeObject<H,D>
+    public interface IClrRuntimeMember<H,D> : IClrRuntimeMember<D>, IClrRuntimeObject<H,D>, IClrArtifact<H>
         where D : MemberInfo
         where H : struct, IClrRuntimeMember<H,D>
     {

@@ -13,7 +13,7 @@ namespace Z0
 
         public const string TableId = "clr.fields";
 
-        public CliArtifactRef Key;
+        public ClrArtifactRef Key;
 
         public ClrToken DeclaringType;
 

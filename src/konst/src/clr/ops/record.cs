@@ -23,8 +23,8 @@ namespace Z0
             var data = view(src);
             var dst = new ClrFieldRecord();
             dst.Key = reference(data);
-            dst.DeclaringType = data.DeclaringType.Key;
-            dst.DataType = data.FieldType.Key;
+            dst.DeclaringType = data.DeclaringType.Token;
+            dst.DataType = data.FieldType.Token;
             dst.Attributes = data.Attributes;
             dst.Address = data.Address;
             dst.IsStatic = data.IsStatic;

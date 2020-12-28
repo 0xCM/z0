@@ -23,30 +23,34 @@ namespace Z0
             get => Artifact.Kind;
         }
 
-        public ClrToken Key
+        public ClrToken Token
         {
             [MethodImpl(Inline)]
-            get => Artifact.Key;
+            get => Artifact.Token;
         }
 
-        public StringRef Name
+        public string Name
         {
             [MethodImpl(Inline)]
             get => Artifact.Name;
         }
 
-        string IClrArtifact.Name
-            => Name;
 
         [MethodImpl(Inline)]
         public ClrArtifactRef(A artifact)
             => Artifact = artifact;
 
+        public string Format()
+            => string.Format(RP.PSx3, Kind, Token, Name);
+
+        public override string ToString()
+            => Format();
+
         public static implicit operator ClrArtifactRef<A>(A src)
             => new ClrArtifactRef<A>(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator CliArtifactRef(ClrArtifactRef<A> src)
-            => new CliArtifactRef(src.Key, src.Kind, src.Name);
+        public static implicit operator ClrArtifactRef(ClrArtifactRef<A> src)
+            => new ClrArtifactRef(src.Token, src.Kind, src.Name);
     }
 }

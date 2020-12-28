@@ -16,18 +16,18 @@ namespace Z0
     /// </summary>
     public struct ClrInterfaceMap
     {
-        public ClrMethod[] Specs;
+        public Index<ClrMethod> Specs;
 
         public ClrType ContractType;
 
-        public ClrMethod[] Implementors;
+        public Index<ClrMethod> Implementors;
 
         public ClrType HostType;
 
         public uint OperationCount
         {
             [MethodImpl(Inline)]
-            get => (uint)Specs.Length;
+            get => Specs.Count;
         }
 
         public static void format(in ClrInterfaceMap src, StringBuilder dst)

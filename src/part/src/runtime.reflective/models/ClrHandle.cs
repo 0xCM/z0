@@ -5,26 +5,26 @@
 namespace Z0
 {
     using System;
+    using System.Reflection;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
     using static Part;
 
-    [StructLayout(LayoutKind.Sequential)]
-    public readonly struct CliArtifactRef : ICliArtifact
+    [Datatype]
+    public readonly struct ClrHandle
     {
+        public ClrToken Token {get;}
+
         public ClrArtifactKind Kind {get;}
 
-        public ClrToken Key {get;}
-
-        public StringRef Name {get;}
+        public Ptr Pointer {get;}
 
         [MethodImpl(Inline)]
-        public CliArtifactRef(ClrToken id, ClrArtifactKind kind, StringRef name)
+        public ClrHandle(ClrArtifactKind kind, ClrToken key, Ptr ptr)
         {
-            Key = id;
             Kind = kind;
-            Name = name;
+            Token = key;
+            Pointer = ptr;
         }
     }
 }

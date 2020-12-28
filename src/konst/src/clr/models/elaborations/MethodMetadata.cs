@@ -9,7 +9,7 @@ namespace Z0
 
     public struct MethodMetadata : ITextual
     {
-        public ClrToken MethodId;
+        public ClrToken Token;
 
         public Name MethodName;
 
@@ -24,6 +24,7 @@ namespace Z0
         public MethodParameters ValueParams;
 
         public TypeParameters TypeParams;
+
         public string Format()
             => ClrQuery.format(this);
 

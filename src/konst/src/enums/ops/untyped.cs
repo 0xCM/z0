@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     using NK = NumericKind;
 
@@ -18,7 +17,7 @@ namespace Z0
         public static EnumDatasetEntry untyped<E,T>(in EnumDatasetEntry<E,T> src)
             where E : unmanaged, Enum
             where T : unmanaged
-                => new EnumDatasetEntry(src.Id, src.EnumId, src.Index, src.Name, Variant.from(src.ScalarValue), src.Description);
+                => new EnumDatasetEntry(src.Token, src.EnumId, src.Index, src.Name, Variant.from(src.ScalarValue), src.Description);
 
         public static unsafe ulong untyped<E>(E src)
             where E : unmanaged, Enum

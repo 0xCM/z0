@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Defines a <see cref='EnumDataset{E,T}'/> entry
@@ -21,7 +21,7 @@ namespace Z0
         /// <summary>
         /// The artifact identifier of the defining literal
         /// </summary>
-        public ClrToken Id;
+        public ClrToken Token;
 
         /// <summary>
         /// The defining <see cref='Enum'/> id
@@ -41,12 +41,12 @@ namespace Z0
         /// <summary>
         /// The literal name
         /// </summary>
-        public StringRef Name;
+        public Name Name;
 
         /// <summary>
         /// The description, if available
         /// </summary>
-        public StringRef Description;
+        public string Description;
 
         /// <summary>
         /// The enum value
@@ -56,7 +56,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public EnumDatasetEntry(ClrToken token, ClrToken declarer, uint index, string identifier, E literal, T numeric, string description)
         {
-            Id = token;
+            Token = token;
             EnumId = declarer;
             Index = index;
             Name = identifier;

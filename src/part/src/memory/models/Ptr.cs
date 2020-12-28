@@ -9,8 +9,6 @@ namespace Z0
 
     using static Part;
 
-    using api = Pointers;
-
     /// <summary>
     /// Captures and represents a void pointer
     /// </summary>
@@ -40,7 +38,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => api.format<ulong>((ulong*)this);
+            => Address.Format();
 
         public override int GetHashCode()
             => (int)Hash;

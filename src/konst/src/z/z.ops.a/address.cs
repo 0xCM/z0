@@ -6,56 +6,11 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
     using static Konst;
 
     partial struct z
     {
-        /// <summary>
-        /// Derives the address of a <see cref='Type'/> from the value of its <see cref='Type.TypeHandle' />
-        /// </summary>
-        /// <param name="src">The source type</param>
-        [MethodImpl(Inline), Op]
-        public static unsafe MemoryAddress address(Type src)
-            => pointer(sys.handle(src));
-
-        /// <summary>
-        /// Presents a uint64 as an address
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline), Op]
-        public static MemoryAddress address(ulong src)
-            => new MemoryAddress(src);
-
-        [MethodImpl(Inline), Op]
-        public static MemoryAddress address(IntPtr src)
-            => new MemoryAddress((ulong)src.ToInt64());
-
-        /// <summary>
-        /// Extracts the address captured by a <see cref='StringRef'/>
-        /// </summary>
-        /// <param name="src">The source reference</param>
-        [MethodImpl(Inline), Op]
-        public static ref ulong address(in StringRef src)
-            => ref @as<StringRef,ulong>(src);
-
-        /// <summary>
-        /// Defines an address predicated on the leading source cell
-        /// </summary>
-        /// <param name="src">The data source</param>
-        [MethodImpl(Inline), Op]
-        public static MemoryAddress address(Ref src)
-            => src.BaseAddress;
-
-        /// <summary>
-        /// Returns the address of the first character in the source string
-        /// </summary>
-        /// <param name="src">The source string</param>
-        [MethodImpl(Inline), Op]
-        public static unsafe MemoryAddress address(string src)
-            => address(pchar(src));
-
         [MethodImpl(Inline), Op]
         public static unsafe MemoryAddress address(in byte src)
             => p8u(src);
@@ -64,49 +19,49 @@ namespace Z0
         public static unsafe MemoryAddress address(in char src)
             => p16c(src);
 
-        /// <summary>
-        /// Determines the address of a reference
-        /// </summary>
-        /// <param name="src">The source reference</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static unsafe MemoryAddress address<T>(in T src)
-            => new MemoryAddress(pvoid(src));
-
-        /// <summary>
-        /// Determines the address of the leading source cell
-        /// </summary>
-        /// <param name="src">The data source</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op]
-        public static unsafe MemoryAddress address<T>(T[] src)
-            => pvoid(in src[0]);
-
-        /// <summary>
-        /// Determines the address of a cell in an array
-        /// </summary>
-        /// <param name="src">The source array</param>
-        /// <param name="index">The cell index</param>
-        /// <typeparam name="T">The stored type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static unsafe MemoryAddress address<T>(T[] src, int index)
-            =>  pvoid(seek(src,index));
-
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public unsafe static MemoryAddress address(void* p)
-            => address((ulong)p);
+            => memory.address(p);
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline)]
         public static unsafe MemoryAddress address<P>(P* pSrc)
             where P : unmanaged
-                => new MemoryAddress(pSrc);
+                => memory.address(pSrc);
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline)]
         public static MemoryAddress address<T>(Span<T> src)
-            => Unsafe.As<T,ulong>(ref MemoryMarshal.GetReference(src));
+            => memory.address(src);
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline)]
         public static unsafe MemoryAddress address<T>(ReadOnlySpan<T> src)
-            => Unsafe.As<T,ulong>(ref MemoryMarshal.GetReference(src));
+            => memory.address(src);
+
+        [MethodImpl(Inline)]
+        public static unsafe MemoryAddress address(Type src)
+            => memory.address(src);
+
+        [MethodImpl(Inline)]
+        public static MemoryAddress address(ulong src)
+            => memory.address(src);
+
+        [MethodImpl(Inline)]
+        public static unsafe MemoryAddress address(string src)
+            => memory.address(src);
+
+        [MethodImpl(Inline)]
+        public static unsafe MemoryAddress address<T>(in T src)
+            => memory.address(src);
+
+        [MethodImpl(Inline), Op]
+        public static MemoryAddress address(IntPtr src)
+            => memory.address(src);
+
+        [MethodImpl(Inline)]
+        public static unsafe MemoryAddress address<T>(T[] src)
+            => memory.address(src);
+
+        [MethodImpl(Inline)]
+        public static unsafe MemoryAddress address<T>(T[] src, int index)
+            =>  memory.address(src,index);
     }
 }

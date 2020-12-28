@@ -37,7 +37,7 @@ namespace Z0
                 get => Subject.Name;
             }
 
-            public ClrToken Key
+            public ClrToken Token
             {
                 [MethodImpl(Inline)]
                 get => Subject.MetadataToken;

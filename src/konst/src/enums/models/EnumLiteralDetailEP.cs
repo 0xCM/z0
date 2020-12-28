@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Defines an E-V parametric enum value
@@ -17,12 +17,12 @@ namespace Z0
         where E : unmanaged, Enum
         where P : unmanaged
     {
-        public readonly EnumLiteralDetail<E> Spec;
+        public EnumLiteralDetail<E> Spec {get;}
 
         /// <summary>
         /// The literal V-value
         /// </summary>
-        public readonly P PrimalValue;
+        public P PrimalValue {get;}
 
         [MethodImpl(Inline)]
         public EnumLiteralDetail(EnumLiteralDetail<E> spec, P v)
@@ -97,8 +97,6 @@ namespace Z0
             get => Spec.Description;
         }
 
-        P IEnumLiteral<EnumLiteralDetail<E,P>,E,P>.PrimalValue
-            => PrimalValue;
 
         [MethodImpl(Inline)]
         public bool Equals(EnumLiteralDetail<E,P> src)

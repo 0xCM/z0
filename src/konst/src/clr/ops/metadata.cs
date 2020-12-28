@@ -29,7 +29,7 @@ namespace Z0
         public static MethodMetadata metadata(MethodInfo src)
         {
             var dst = new MethodMetadata();
-            dst.MethodId = src.MetadataToken;
+            dst.Token = src.MetadataToken;
             dst.MethodName = src.DisplayName();
             dst.DefiningAssembly = src.Module.Assembly.GetSimpleName();
             dst.DefiningModule = src.Module.Name;

@@ -14,21 +14,15 @@ namespace Z0
     /// Characterizes a model of a CLR type during runtime
     /// </summary>
     [Free]
-    public interface IClrRuntimeType : IClrRuntimeObject, IClrRuntimeObject<Type>
+    public interface IClrRuntimeType : IClrRuntimeObject<Type>
     {
-        ClrTypeKind TypeKind
-            => Definition.Kind();
-
-        ClrArtifactKind IClrRuntimeObject.ClrKind
-            => (ClrArtifactKind)TypeKind;
-
         /// <summary>
         /// Models of the types nested within the subject, if any
         /// </summary>
         IEnumerable<IClrRuntimeType> NestedTypes
-            => z.stream<IClrRuntimeType>();
+            => corefunc.stream<IClrRuntimeType>();
 
-        ClrToken IClrRuntimeObject.Token
+        ClrToken IClrArtifact.Token
             => Definition.MetadataToken;
     }
 
@@ -36,7 +30,7 @@ namespace Z0
     public interface IClrRuntimeType<T> : IClrRuntimeType
     {
         new IEnumerable<T> NestedTypes
-            => z.stream<T>();
+            => corefunc.stream<T>();
 
         IEnumerable<IClrRuntimeType> IClrRuntimeType.NestedTypes
             => NestedTypes.Cast<IClrRuntimeType>();

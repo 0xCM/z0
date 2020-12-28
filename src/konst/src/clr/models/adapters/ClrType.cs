@@ -8,14 +8,15 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
 
     [ApiType(ApiNames.ClrType, true)]
     public readonly struct ClrType : IClrRuntimeType<ClrType>
     {
         public Type Definition {get;}
 
-        public ClrTypeKind TypeKind
-            => Definition.TypeKind();
+        public ClrArtifactKind Kind
+            => (ClrArtifactKind)Definition.TypeKind();
 
         [MethodImpl(Inline)]
         public ClrType(Type src)
@@ -42,8 +43,11 @@ namespace Z0
         public ReadOnlySpan<ClrType> NestedTypes
         {
             [MethodImpl(Inline)]
-            get => z.recover<Type,ClrType>(ClrQuery.nested(Definition));
+            get => recover<Type,ClrType>(ClrQuery.nested(Definition));
         }
+
+        string IClrArtifact.Name
+            => Definition.Name;
 
         [MethodImpl(Inline), Closures(AllNumeric)]
         public static ClrType<T> From<T>()
@@ -63,6 +67,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator Type(ClrType src)
             => src.Definition;
-
     }
 }

@@ -21,7 +21,7 @@ namespace Z0
             public ValueParamView(R.ParameterInfo src)
                 => Subject = src;
 
-            public ClrToken Key
+            public ClrToken Token
             {
                 [MethodImpl(Inline)]
                 get => Subject.MetadataToken;

@@ -10,20 +10,17 @@ namespace Z0
 
     using static Part;
 
-    [ApiType(ApiNames.ClrAssembly, true)]
     public readonly struct ClrAssembly : IClrRuntimeObject<ClrAssembly,Assembly>
     {
         public Assembly Definition {get;}
 
-        public ClrToken Id
-        {
-            [MethodImpl(Inline)]
-            get => ClrToken.from(Definition);
-        }
-
         [MethodImpl(Inline)]
         public ClrAssembly(Assembly src)
             => Definition = src;
+
+        [Ignore]
+        public ClrArtifactKind Kind
+            => ClrArtifactKind.Assembly;
 
         public PartId Part
         {
@@ -48,6 +45,9 @@ namespace Z0
 
         public ClrToken Token
             => Definition.GetHashCode();
+
+        string IClrArtifact.Name
+            => Definition.FullName;
 
         [MethodImpl(Inline)]
         public static implicit operator Assembly(ClrAssembly src)

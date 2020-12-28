@@ -9,14 +9,23 @@ namespace Z0
     [Free]
     public interface IClrArtifact : ITextual
     {
-        ClrArtifactKind Kind {get;}
+        /// <summary>
+        /// The artifact metadata token
+        /// </summary>
+        ClrToken Token {get;}
 
-        ClrToken Key {get;}
-
+        /// <summary>
+        /// The artifact name
+        /// </summary>
         string Name {get;}
 
-        CliArtifactRef Ref
-            => new CliArtifactRef(Key, Kind ,Name);
+        /// <summary>
+        /// The artifact classifier
+        /// </summary>
+        ClrArtifactKind Kind {get;}
+
+        ClrArtifactRef Ref
+            => new ClrArtifactRef(Token, Kind ,Name);
         string ITextual.Format()
             => Name;
     }

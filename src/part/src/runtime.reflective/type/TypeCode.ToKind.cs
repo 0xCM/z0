@@ -7,12 +7,12 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
-    partial struct Cli
+    partial class XClrQuery
     {
-        [MethodImpl(Inline), Op]
-        public static string format(in CliArtifactRef src)
-            => text.format(RP.PSx3, src.Kind, src.Key, src.Name);
+        [MethodImpl(Inline)]
+        public static PrimalTypeCode ToKind(this TypeCode src)
+            => (PrimalTypeCode)src;
     }
 }

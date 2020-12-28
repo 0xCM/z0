@@ -11,7 +11,7 @@ namespace Z0
 
     public readonly struct GenericState : ITextual
     {
-        public readonly GenericStateKind State;
+        public GenericStateKind State {get;}
 
         [MethodImpl(Inline)]
         public GenericState(byte state)

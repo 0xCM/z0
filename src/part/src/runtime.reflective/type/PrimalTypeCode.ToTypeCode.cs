@@ -11,16 +11,8 @@ namespace Z0
 
     partial class XClrQuery
     {
-        [MethodImpl(Inline)]
-        public static PrimalTypeCode ToKind(this TypeCode src)
-            => (PrimalTypeCode)src;
-
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static TypeCode ToTypeCode(this PrimalTypeCode src)
             => (TypeCode)src;
-
-        [MethodImpl(Inline)]
-        public static string Format(this PrimalTypeCode src)
-            => src.ToString();
     }
 }

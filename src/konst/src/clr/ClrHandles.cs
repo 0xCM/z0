@@ -24,7 +24,7 @@ namespace Z0
                 ref readonly var handle = ref skip(src,i);
                 ref var record = ref seek(dst,i);
                 record.Address = handle.Pointer.Address;
-                record.Key = handle.Key;
+                record.Token = handle.Token;
                 record.Kind = handle.Kind;
             }
         }
@@ -106,16 +106,16 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static ClrHandle<RuntimeMethodHandle> method(Module src, ClrToken key)
-            => new ClrHandle<RuntimeMethodHandle>(ClrArtifactKind.Method, key, src.ModuleHandle.GetRuntimeMethodHandleFromMetadataToken((int)key));
+        public static ClrHandle<RuntimeMethodHandle> method(Module src, ClrToken token)
+            => new ClrHandle<RuntimeMethodHandle>(ClrArtifactKind.Method, token, src.ModuleHandle.GetRuntimeMethodHandleFromMetadataToken((int)token));
 
         [MethodImpl(Inline), Op]
-        public static ClrHandle<RuntimeTypeHandle> type(Module src, ClrToken key)
-            => new ClrHandle<RuntimeTypeHandle>(ClrArtifactKind.Type, key, src.ModuleHandle.GetRuntimeTypeHandleFromMetadataToken((int)key));
+        public static ClrHandle<RuntimeTypeHandle> type(Module src, ClrToken token)
+            => new ClrHandle<RuntimeTypeHandle>(ClrArtifactKind.Type, token, src.ModuleHandle.GetRuntimeTypeHandleFromMetadataToken((int)token));
 
         [MethodImpl(Inline), Op]
-        public static ClrHandle<RuntimeFieldHandle> field(Module src, ClrToken key)
-            => new ClrHandle<RuntimeFieldHandle>(ClrArtifactKind.Field, key, src.ModuleHandle.GetRuntimeFieldHandleFromMetadataToken((int)key));
+        public static ClrHandle<RuntimeFieldHandle> field(Module src, ClrToken token)
+            => new ClrHandle<RuntimeFieldHandle>(ClrArtifactKind.Field, token, src.ModuleHandle.GetRuntimeFieldHandleFromMetadataToken((int)token));
 
         [MethodImpl(Inline), Op]
         public static ClrHandle untype(in ClrHandle<RuntimeMethodHandle> src)

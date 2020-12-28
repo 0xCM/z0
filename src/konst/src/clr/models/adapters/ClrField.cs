@@ -22,6 +22,18 @@ namespace Z0
         public ClrField(FieldInfo src)
             => Definition = src;
 
+        public ClrArtifactKind Kind
+        {
+            [MethodImpl(Inline)]
+            get => ClrArtifactKind.Field;
+        }
+
+        public bool IsStatic
+        {
+            [MethodImpl(Inline)]
+            get => Definition.IsStatic;
+        }
+
         public ClrToken Token
         {
             [MethodImpl(Inline)]
@@ -52,16 +64,10 @@ namespace Z0
             get => Definition.DeclaringType;
         }
 
-        public MemoryAddress HandleAddress
+        public MemoryAddress Address
         {
             [MethodImpl(Inline)]
             get => Definition.FieldHandle.Value;
-        }
-
-        public bool IsStatic
-        {
-            [MethodImpl(Inline)]
-            get => Definition.IsStatic;
         }
 
         [MethodImpl(Inline)]
@@ -71,10 +77,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public string Format()
             => Definition.Name;
-
-        [Ignore]
-        ClrArtifactKind IClrRuntimeObject.ClrKind
-            => ClrArtifactKind.Field;
 
         public override bool Equals(object obj)
             => Definition.Equals(obj);

@@ -30,7 +30,11 @@ namespace Z0
             get => z.recover<Type,ClrType>(ClrQuery.nested(Definition));
         }
 
-        public ClrTypeKind TypeKind => Definition.Kind();
+        public ClrArtifactKind Kind
+            => (ClrArtifactKind)Definition.Kind();
+
+        string IClrArtifact.Name
+            => Definition.Name;
 
         [MethodImpl(Inline)]
         public string Format()

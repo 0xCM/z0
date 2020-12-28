@@ -11,7 +11,6 @@ namespace Z0
 
     using static Part;
 
-    [ApiType(ApiNames.ClrEnum, true)]
     public readonly struct ClrEnum
     {
         public Type Definition {get;}

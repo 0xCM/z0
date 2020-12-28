@@ -10,7 +10,6 @@ namespace Z0
 
     using static Part;
 
-    [ApiType(ApiNames.ClrMember, true)]
     public readonly struct ClrMember : IClrRuntimeMember<ClrMember, MemberInfo>
     {
         [MethodImpl(Inline)]
@@ -40,7 +39,7 @@ namespace Z0
             => Definition;
 
         [Ignore]
-        ClrArtifactKind IClrRuntimeObject.ClrKind
+        ClrArtifactKind IClrArtifact.Kind
             => throw new NotImplementedException();
 
         [MethodImpl(Inline)]

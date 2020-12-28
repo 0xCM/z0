@@ -19,7 +19,7 @@ namespace Z0
         /// <summary>
         /// The name of the defining type
         /// </summary>
-        public StringRef TypeName;
+        public Name TypeName;
 
         /// <summary>
         /// The metadata token of the defining type
@@ -29,7 +29,7 @@ namespace Z0
         /// <summary>
         /// The name of the literal identifier
         /// </summary>
-        public StringRef FieldName;
+        public Name FieldName;
 
         /// <summary>
         /// The metadata token of the defining field

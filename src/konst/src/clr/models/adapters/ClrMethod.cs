@@ -10,7 +10,6 @@ namespace Z0
 
     using static Part;
 
-    [ApiType(ApiNames.ClrMethod, true)]
     public readonly struct ClrMethod : IClrRuntimeMember<ClrMethod,MethodInfo>
     {
         [MethodImpl(Inline)]
@@ -63,7 +62,7 @@ namespace Z0
             => Definition;
 
         [Ignore]
-        ClrArtifactKind IClrRuntimeObject.ClrKind
+        public ClrArtifactKind Kind
             => ClrArtifactKind.Method;
 
         public override bool Equals(object obj)

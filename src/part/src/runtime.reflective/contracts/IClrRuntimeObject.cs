@@ -10,11 +10,9 @@ namespace Z0
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface IClrRuntimeObject
+    public interface IClrRuntimeObject : IClrArtifact
     {
-        ClrArtifactKind ClrKind {get;}
 
-        ClrToken Token {get;}
     }
 
     [Free]

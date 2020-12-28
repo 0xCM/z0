@@ -18,7 +18,7 @@ namespace Z0
         where E : unmanaged, Enum
         where T : unmanaged
     {
-        public ClrToken Id {get;}
+        public ClrToken Token {get;}
 
         public string Description {get;}
 
@@ -46,13 +46,13 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public EnumDatasetEntry<E,T> Entry(int i)
-            => new EnumDatasetEntry<E,T>(Tokens[i], Id, Indices[i], Names[i], Literals[i], Scalars[i], Descriptions[i]);
+            => new EnumDatasetEntry<E,T>(Tokens[i], Token, Indices[i], Names[i], Literals[i], Scalars[i], Descriptions[i]);
 
         [MethodImpl(Inline)]
         public EnumDataset(ClrToken token, string description, EnumLiteralKind type, ClrToken[] tokens,
             uint[] indices, string[] names, E[] literals, T[] scalars, string[] descriptions)
         {
-            Id = token;
+            Token = token;
             DataType = type;
             EntryCount = tokens.Length;
             Description = description;

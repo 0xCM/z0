@@ -36,7 +36,7 @@ namespace Z0
             where T : unmanaged
         {
             var dst = text.build();
-            dst.Delimit(D.Token, src.Id);
+            dst.Delimit(D.Token, src.Token);
             dst.Delimit(D.Index, src.Index);
             dst.Delimit(D.Name, src.Name);
             dst.Delimit(D.Scalar, src.ScalarValue);
@@ -49,7 +49,7 @@ namespace Z0
             where T : unmanaged
         {
             var dst = text.build();
-            dst.Delimit(D.Token, src.Id);
+            dst.Delimit(D.Token, src.Token);
             dst.Delimit(D.Index, src.Position);
             dst.Delimit(D.Name, src.Name);
             dst.Delimit(D.Scalar, src.Scalar);

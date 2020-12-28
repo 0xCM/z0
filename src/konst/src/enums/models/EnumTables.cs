@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     using F = EnumDatasetField;
 
@@ -50,7 +49,7 @@ namespace Z0
             where E : unmanaged, Enum
             where T : unmanaged
         {
-            dst.AppendDelimited(F.Token, src.Id);
+            dst.AppendDelimited(F.Token, src.Token);
             dst.AppendDelimited(F.Index, src.Position);
             dst.AppendDelimited(F.Name, src.Name);
             dst.AppendDelimited(F.Scalar, src.Scalar);

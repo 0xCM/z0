@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-
+    using static Part;
     using static z;
 
     partial class Enums
@@ -42,7 +41,7 @@ namespace Z0
             for(var i=0u; i<count; i++)
             {
                 var entry = dataset[(int)i];
-                seek(dst,i) = describe(entry.Id, entry.Index, entry.Name, entry.EnumValue, entry.ScalarValue);
+                seek(dst,i) = describe(entry.Token, entry.Index, entry.Name, entry.EnumValue, entry.ScalarValue);
             }
             return buffer;
         }
