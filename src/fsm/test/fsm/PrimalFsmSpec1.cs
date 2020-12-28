@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
 
@@ -41,8 +41,8 @@ namespace Z0
             Results = results;
             Rules = rules;
         }
-        
-        public MachineTransition<Event,State> Transition        
+
+        public TransitionFunction<Event,State> Transition
         {
             [MethodImpl(Inline)]
             get => Fsm.transition(Rules.Storage);
@@ -59,7 +59,7 @@ namespace Z0
         }
 
         public enum Result : byte
-        {            
+        {
             O0, O1, O2, O3, O4, O5, O6, O7, O8, O9, O10
         }
     }

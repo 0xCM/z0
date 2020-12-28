@@ -14,6 +14,10 @@ namespace Z0
 
     partial class WfShell
     {
+        [MethodImpl(Inline), Op]
+        internal static IWfShell clone(IWfShell src, WfHost host, IPolyStream random, LogLevel verbosity)
+            => new WfShell(src.Init, src.Ct, src.WfSink, src.Broker, host, random, verbosity, src.Router);
+
         public static void render(in WfConfigInfo src, ITextBuffer dst)
         {
             dst.AppendSettingLine(nameof(src.AppConfigPath), src.AppConfigPath);

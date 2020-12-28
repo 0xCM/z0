@@ -7,9 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
-
     public readonly struct FsmFx
     {
         /// <summary>
@@ -18,7 +15,7 @@ namespace Z0
         /// <param name="input">The input event</param>
         /// <typeparam name="E">The input event type</typeparam>
         public delegate void InputReceipt<E>(E input);
-        
+
         /// <summary>
         /// Delegate for event that fires when a state transition occurs
         /// </summary>

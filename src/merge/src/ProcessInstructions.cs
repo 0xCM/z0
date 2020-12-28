@@ -33,11 +33,5 @@ namespace Z0
 
         public void ProcessCalls()
             => EmitCallIndex.create(Source).Run(Wf);
-
-        public void ProcessJumps()
-        {
-            using var step = new AsmJmpProcessor(Wf, Source);
-            step.Process();
-        }
     }
 }

@@ -9,17 +9,17 @@ namespace Z0.Asm
 
     using static Konst;
 
-    public readonly struct AsmRoutineHeader
+    public struct AsmRoutineHeader
     {
-        public readonly OpUri Uri;
+        public OpUri Uri;
 
-        public readonly string OpSig;
+        public string OpSig;
 
-        public readonly string DataProp;
+        public string DataProp;
 
-        public readonly MemoryAddress BaseAddress;
+        public MemoryAddress BaseAddress;
 
-        public readonly ExtractTermCode TermCode;
+        public ExtractTermCode TermCode;
 
         [MethodImpl(Inline)]
         public AsmRoutineHeader(OpUri uri, string sig, string prop, MemoryAddress @base, ExtractTermCode term)

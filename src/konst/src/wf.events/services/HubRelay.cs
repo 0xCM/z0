@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Defines a sink that forwards deposits to a receiver
@@ -19,7 +19,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public HubRelay(EventReceiver receiver)
             => Receiver = receiver;
-        
+
         [MethodImpl(Inline)]
         public void Deposit(IDataEvent e)
             => Receiver(e);

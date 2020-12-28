@@ -18,43 +18,9 @@ namespace Z0
     public class Fsm<E,S>
     {
         /// <summary>
-        /// Initializes a state machine
+        /// Identifies the machine within the process
         /// </summary>
-        /// <param name="id">The state machine identifier</param>
-        /// <param name="wf">The executing workflow</param>
-        /// <param name="random"></param>
-        /// <param name="ground"></param>
-        /// <param name="end"></param>
-        /// <param name="transition"></param>
-        /// <param name="limit"></param>
-        public Fsm(string id, IWfShell wf, S ground, S end, IFsmFunc<E,S> transition, ulong? limit = null)
-        {
-            Id = id;
-            Wf = wf;
-            CurrentState = ground;
-            Random = Wf.PolyStream;
-            EndState = end;
-            Error = none<Exception>();
-            Transition = transition;
-            ReceiptCount = 0;
-            TransitionCount = 0;
-            Limit = limit ?? ulong.MaxValue;
-            Runtime = Time.stopwatch(false);
-        }
-
-        public Fsm(string id, IFsmContext context, S ground, S end, IFsmFunc<E,S> transition)
-        {
-            Id = id;
-            CurrentState = ground;
-            EndState = end;
-            Random = context.Random;
-            Error = none<Exception>();
-            Transition = transition;
-            ReceiptCount = 0;
-            TransitionCount = 0;
-            Limit = context.ReceiptLimit ?? ulong.MaxValue;
-            Runtime = Time.stopwatch(false);
-        }
+        public string Id {get;}
 
         readonly IWfShell Wf;
 
@@ -100,10 +66,6 @@ namespace Z0
 
         public IPolyStream Random {get;}
 
-        /// <summary>
-        /// Identifies the machine within the process
-        /// </summary>
-        public string Id {get;}
 
         /// <summary>
         /// Fires when input is received
@@ -124,6 +86,46 @@ namespace Z0
         /// Fires when an error is trapped
         /// </summary>
         public event FsmFx.MachineError Oops;
+
+        /// <summary>
+        /// Initializes a state machine
+        /// </summary>
+        /// <param name="id">The state machine identifier</param>
+        /// <param name="wf">The executing workflow</param>
+        /// <param name="random"></param>
+        /// <param name="ground"></param>
+        /// <param name="end"></param>
+        /// <param name="transition"></param>
+        /// <param name="limit"></param>
+        public Fsm(string id, IWfShell wf, S ground, S end, IFsmFunc<E,S> transition, ulong? limit = null)
+        {
+            Id = id;
+            Wf = wf;
+            CurrentState = ground;
+            Random = Wf.PolyStream;
+            EndState = end;
+            Error = none<Exception>();
+            Transition = transition;
+            ReceiptCount = 0;
+            TransitionCount = 0;
+            Limit = limit ?? ulong.MaxValue;
+            Runtime = Time.stopwatch(false);
+        }
+
+        public Fsm(string id, IFsmContext context, S ground, S end, IFsmFunc<E,S> transition)
+        {
+            Id = id;
+            CurrentState = ground;
+            EndState = end;
+            Random = context.Random;
+            Error = none<Exception>();
+            Transition = transition;
+            ReceiptCount = 0;
+            TransitionCount = 0;
+            Limit = context.ReceiptLimit ?? ulong.MaxValue;
+            Runtime = Time.stopwatch(false);
+        }
+
 
         /// <summary>
         /// Specifies the events that the machine can accept

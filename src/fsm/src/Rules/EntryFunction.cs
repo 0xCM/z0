@@ -19,10 +19,7 @@ namespace Z0
         readonly Dictionary<int, IFsmActionRule<A>> RuleIndex;
 
         public EntryFunction(IEnumerable<IFsmActionRule<A>> rules)
-        {
-            //System.Reflection.Emit.SignatureHelper
-            RuleIndex = rules.Select(rule => (rule.RuleId, rule)).ToDictionary();
-        }
+            => RuleIndex = rules.Select(rule => (rule.RuleId, rule)).ToDictionary();
 
         public Option<A> Eval(S source)
             => Rule(Fsm.entryKey(source)).TryMap(r => r.Action);

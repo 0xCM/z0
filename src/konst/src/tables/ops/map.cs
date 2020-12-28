@@ -25,7 +25,7 @@ namespace Z0
         public static ref TableField map(FieldInfo src, ushort index, ref TableField dst)
         {
             dst.Index = index;
-            dst.Key = src.MetadataToken;
+            dst.Token = src.MetadataToken;
             dst.RecordType = src.DeclaringType;
             dst.DataType = src.FieldType;
             dst.RenderWidth = 16;
@@ -38,7 +38,7 @@ namespace Z0
         public static ref TableField map(FieldInfo src, ushort index, byte width, ref TableField dst)
         {
             dst.Index = index;
-            dst.Key = src.MetadataToken;
+            dst.Token = src.MetadataToken;
             dst.RecordType = src.DeclaringType;
             dst.DataType = src.FieldType;
             dst.RenderWidth = width;

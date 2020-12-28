@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
 
-    using static Konst;
-
     public class AppContext : IAppContext
     {
         public ISystemApiCatalog Api {get;}

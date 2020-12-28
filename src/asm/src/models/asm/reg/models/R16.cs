@@ -10,6 +10,9 @@ namespace Z0.Asm
     using static Konst;
     using static math;
 
+    /// <summary>
+    /// Defines a 16-bit register and its content
+    /// </summary>
     public readonly struct R16 : IRegister<R16,W16,ushort>
     {
         public readonly ulong Data;
@@ -30,9 +33,7 @@ namespace Z0.Asm
         public R16(ushort value, RegisterKind kind)
             => Data = or((ulong)value, sll((ulong)kind, 32));
 
-
         public RegisterClass Class
             => RegisterClass.GP;
-
     }
 }

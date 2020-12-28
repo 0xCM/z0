@@ -7,15 +7,11 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     public readonly struct AsmRoutines : IIndex<AsmRoutine>
     {
         public readonly AsmRoutine[] Data;
-
-        [MethodImpl(Inline)]
-        public static implicit operator AsmRoutines(AsmRoutine[] src)
-            => new AsmRoutines(src);
 
         [MethodImpl(Inline)]
         public AsmRoutines(AsmRoutine[] src)
@@ -44,5 +40,9 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             get => Data;
         }
+
+        [MethodImpl(Inline)]
+        public static implicit operator AsmRoutines(AsmRoutine[] src)
+            => new AsmRoutines(src);
     }
 }

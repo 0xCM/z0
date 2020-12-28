@@ -28,7 +28,7 @@ namespace Z0
         /// <summary>
         /// The field's metadata identifier
         /// </summary>
-        public ClrToken Key;
+        public ClrToken Token;
 
         /// <summary>
         /// The field datatype

@@ -12,7 +12,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    readonly struct ApiHostDecoder : IDisposable
+    readonly struct ApiHostDecoder
     {
         public static ApiHostDecoder create(IWfShell wf, IAsmDecoder decoder)
             => new ApiHostDecoder(wf, WfShell.host(typeof(ApiHostDecoder)), decoder);
@@ -29,7 +29,6 @@ namespace Z0
             Wf = wf;
             Host = host;
             Decoder = decoder;
-            Wf.Created(Host);
         }
 
         public AsmRoutine[] Decode(ApiHostUri uri, ReadOnlySpan<ApiMemberCode> src)
@@ -62,11 +61,6 @@ namespace Z0
         void HandleFailure(in ApiMemberCode member)
         {
             Wf.Error(Host, $"Could not decode {member}");
-        }
-
-        public void Dispose()
-        {
-            Wf.Disposed(Host);
         }
     }
 }

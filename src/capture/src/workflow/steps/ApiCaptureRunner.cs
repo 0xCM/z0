@@ -19,7 +19,7 @@ namespace Z0
 
         public static void run(IWfShell wf)
         {
-            var app = Apps.context(wf);
+            var app = Apps.context(wf, Rng.@default());
             run(wf, new AsmContext(app, wf));
         }
 

@@ -7,12 +7,12 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Defines a sink that forwards deposits to a receiver
     /// </summary>
-    public readonly struct EventRelay<E> : IAppEventSink<E>
+    public readonly struct EventRelay<E> : ISink<E>
         where E : IAppEvent
     {
         readonly Action<E> Receiver;
@@ -24,9 +24,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public void Deposit(E e)
             => Receiver(e);
-
-        [MethodImpl(Inline)]
-        public void Deposit(IAppEvent e)
-            => Receiver((E)e);
     }
 }

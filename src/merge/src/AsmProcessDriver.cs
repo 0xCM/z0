@@ -11,7 +11,7 @@ namespace Z0
 
     using Z0.Asm;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     public readonly struct AsmProcessDriver

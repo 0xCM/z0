@@ -15,7 +15,6 @@ namespace Z0
     {
         readonly Fsm<E,S> Machine;
 
-
         readonly ObserverTrace Tracing;
 
         readonly int ReceiptEmitRate;

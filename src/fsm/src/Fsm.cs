@@ -141,7 +141,7 @@ namespace Z0
             where T : unmanaged
         {
             var stats = new ConcurrentBag<FsmStats>();
-            for(var i=0; i< seeds.Length; i++)
+            for(var i=0; i<seeds.Length; i++)
             {
                var machine = create(spec, seeds[i], indices[i]);
                var result = Fsm.run(machine).Result;
@@ -151,7 +151,7 @@ namespace Z0
         }
 
         [Op, Closures(Closure)]
-        static MachineTransition<T,T> transition<T>(IFsmContext context, PrimalFsmSpec<T> spec)
+        static TransitionFunction<T,T> transition<T>(IFsmContext context, PrimalFsmSpec<T> spec)
             where T : unmanaged
         {
             var sources = Algorithmic.stream<T>(spec.StateCount).ToArray();
@@ -168,7 +168,7 @@ namespace Z0
         }
 
         [Op, Closures(Closure)]
-        static MachineTransition<T,T> transition<T>(IPolyStream src, PrimalFsmSpec<T> spec)
+        static TransitionFunction<T,T> transition<T>(IPolyStream src, PrimalFsmSpec<T> spec)
             where T : unmanaged
         {
             var sources = Algorithmic.stream<T>(spec.StateCount).ToArray();
@@ -203,8 +203,8 @@ namespace Z0
         /// <typeparam name="E">The event type</typeparam>
         /// <typeparam name="S">The state type</typeparam>
         [MethodImpl(Inline)]
-        public static MachineTransition<E,S> transition<E,S>(IEnumerable<ITransitionRule<E,S>> rules)
-            => new MachineTransition<E,S>(rules);
+        public static TransitionFunction<E,S> transition<E,S>(IEnumerable<ITransitionRule<E,S>> rules)
+            => new TransitionFunction<E,S>(rules);
 
         /// <summary>
         /// Defines an output rule of the form (trigger : E, source : S) -> output : O
@@ -227,8 +227,8 @@ namespace Z0
         /// <typeparam name="E">The event type</typeparam>
         /// <typeparam name="S">The state type</typeparam>
         [MethodImpl(Inline)]
-        public static MachineOutput<E,S,O> output<E,S,O>(IEnumerable<IOutputRule<E,S,O>> rules)
-            => new MachineOutput<E, S, O>(rules);
+        public static OutputFunction<E,S,O> output<E,S,O>(IEnumerable<IOutputRule<E,S,O>> rules)
+            => new OutputFunction<E, S, O>(rules);
 
         /// <summary>
         /// Defines an action that fires upon state entry
@@ -249,7 +249,7 @@ namespace Z0
         /// <typeparam name="A">The action type</typeparam>
         [MethodImpl(Inline)]
         public static EntryFunction<S,A> entry<S,A>(IEnumerable<IFsmActionRule<S,A>> rules)
-            => new EntryFunction<S, A>(rules);
+            => new EntryFunction<S,A>(rules);
 
         /// <summary>
         /// Defines an action that fires upon state exit
@@ -282,7 +282,7 @@ namespace Z0
         /// <typeparam name="E">The event type</typeparam>
         /// <typeparam name="S">The state type</typeparam>
         [MethodImpl(Inline)]
-        public static Fsm<E,S> machine<E,S>(string id, IFsmContext context, S s0, S sZ, MachineTransition<E,S> f)
+        public static Fsm<E,S> machine<E,S>(string id, IFsmContext context, S s0, S sZ, TransitionFunction<E,S> f)
             => new Fsm<E,S>(id, context, s0, sZ, f);
 
         /// <summary>
@@ -295,7 +295,7 @@ namespace Z0
         /// <typeparam name="E">The event type</typeparam>
         /// <typeparam name="S">The state type</typeparam>
         [MethodImpl(Inline)]
-        public static Fsm<E,S> machine<E,S>(string id, IWfShell wf, S s0, S sZ, MachineTransition<E,S> f, ulong? limit = null)
+        public static Fsm<E,S> machine<E,S>(string id, IWfShell wf, S s0, S sZ, TransitionFunction<E,S> f, ulong? limit = null)
             => new Fsm<E,S>(id, wf, s0, sZ, f, limit);
 
         /// <summary>
@@ -354,7 +354,7 @@ namespace Z0
         /// <typeparam name="S">The state type</typeparam>
         /// <typeparam name="A">The entry action type</typeparam>
         [MethodImpl(Inline)]
-        public static Fsm<E,S,A> machine<E,S,A>(string id, IWfShell wf, S s0, S sZ, MachineTransition<E,S> t, EntryFunction<S,A> entry, ExitFunction<S,A> exit, ulong? limit = null)
+        public static Fsm<E,S,A> machine<E,S,A>(string id, IWfShell wf, S s0, S sZ, TransitionFunction<E,S> t, EntryFunction<S,A> entry, ExitFunction<S,A> exit, ulong? limit = null)
             => new Fsm<E,S,A>(id, wf, s0, sZ, t, entry,exit, limit);
 
         /// <summary>
@@ -406,7 +406,7 @@ namespace Z0
         /// <typeparam name="E">The input event type</typeparam>
         /// <typeparam name="S">The state type</typeparam>
         [MethodImpl(Inline)]
-        public static MachineTransition<E,S> transition<E,S>(params TransitionRule<E,S>[] rules)
-            => new MachineTransition<E,S>(rules);
+        public static TransitionFunction<E,S> transition<E,S>(params TransitionRule<E,S>[] rules)
+            => new TransitionFunction<E,S>(rules);
     }
 }

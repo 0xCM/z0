@@ -18,8 +18,7 @@ namespace Z0
         public static ApiProcessors create(IWfShell wf, IAsmContext asm)
         {
             var processors = new ApiProcessors(wf, asm);
-            processors.Index = ApiIndexService.init(wf).CreateIndex();
-            processors.Decoded = processors.DecodeIndex();
+            processors.Init();
             return processors;
         }
 
@@ -39,6 +38,12 @@ namespace Z0
             Decoded = default;
         }
 
+        void Init()
+        {
+            Index = ApiIndexService.init(Wf).CreateIndex();
+            Decoded = DecodeIndex();
+        }
+
         public void Run()
         {
             try
@@ -48,13 +53,18 @@ namespace Z0
                 ProcessJumps();
                 ProcessEnlisted();
                 ProcessSemantic();
-                ResBytesEmitter.create().WithIndex(Index).Run(Wf);
+                EmitResBytes();
 
             }
             catch(Exception e)
             {
                 Wf.Error(e);
             }
+        }
+
+        void EmitResBytes()
+        {
+            ResBytesEmitter.create().WithIndex(Index).Run(Wf);
         }
 
         void ProcessCalls()
@@ -77,11 +87,7 @@ namespace Z0
         {
             var count = Decoded.Length;
             for(var i=0; i<count; i++)
-            {
-                // var processor = PartRoutinesProcessor.service(Wf, skip(Decoded,i));
-                // processor.ProcessJumps();
                 ProcessJumps(skip(Decoded,i));
-            }
         }
 
         void ProcessEnlisted()

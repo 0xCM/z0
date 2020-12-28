@@ -9,6 +9,7 @@ namespace Z0.Asm
     using System.Collections.Generic;
 
     using static Konst;
+    using static AsmFxCheck;
     using static z;
 
     using Iced = Iced.Intel;
@@ -24,7 +25,7 @@ namespace Z0.Asm
         public Option<AsmRoutine> Decode(ApiCaptureBlock src)
             => from i in Decode(src.Parsed)
                 let block = asm.block(src.CodeBlock, i, src.TermCode)
-                select ApiAsm.routine(src.MetaUri, src.OpUri, src.Method.Metadata().Format(), block);
+                select routine(src.MetaUri, src.OpUri, src.Method.Metadata().Format(), block);
 
         public Option<AsmFxList> Decode(CodeBlock src)
             => Decode(src.Code, src.BaseAddress).TryMap(x => asm.list(x, src));
@@ -33,7 +34,7 @@ namespace Z0.Asm
             => Decode(src.Encoded, src.BaseAddress);
 
         public Option<AsmRoutine> Decode(ApiCaptureBlock src, Action<Asm.Instruction> f)
-            => Decode(src.Parsed,f).TryMap(x => ApiAsm.routine(src,x));
+            => Decode(src.Parsed,f).TryMap(x => routine(src,x));
 
         public Option<AsmFxList> Decode(CodeBlock src, Action<Asm.Instruction> f)
         {
@@ -102,16 +103,13 @@ namespace Z0.Asm
         }
 
         public Option<AsmFxList> Decode(ApiCodeBlock src, Action<Instruction> f)
-        {
-            var x86 = new CodeBlock(src.BaseAddress,src.Data);
-            return Decode(x86,f);
-        }
+            => Decode(new CodeBlock(src.BaseAddress,src.Data),f);
 
         public Option<AsmRoutine> Decode(ApiMemberCode src)
         {
             var result = Decode(src.Encoded);
             if(result)
-                return ApiAsm.routine(src, result.Value);
+                return routine(src, result.Value);
             else
                 return none<AsmRoutine>();
         }
@@ -130,5 +128,42 @@ namespace Z0.Asm
                 return false;
             }
         }
+
+        static AsmRoutine routine(ApiMetadataUri meta, OpUri uri, string sig, ApiBlockAsm src, bool check = false)
+        {
+            var count = src.InstructionCount;
+            var info = new AsmFxSummary[count];
+            var offset = 0u;
+            var @base = src.BaseAddress;
+
+            for(var i=0; i<count; i++)
+            {
+                var instruction = src[i];
+                if(check)
+                    CheckInstructionSize(instruction, offset, src);
+                info[i] = asm.summarize(@base, instruction, src.Encoded.Code, instruction.FormattedInstruction, offset);
+                offset += (uint)instruction.ByteLength;
+            }
+
+            if(check)
+                CheckBlockLength(src);
+
+            return new AsmRoutine(meta, uri, sig, src.Encoded, src.TermCode, asm.list(src.Decoded, src.Encoded.Code));
+        }
+
+        static AsmRoutine routine(ApiCaptureBlock captured, AsmFxList src)
+        {
+            var code = new ApiCodeBlock(captured.OpUri, captured.Parsed);
+            var sig = captured.Method.Metadata().Format();
+            return new AsmRoutine(captured.MetaUri, captured.OpUri, sig, code, captured.TermCode, src);
+        }
+
+        static AsmRoutine routine(ApiMemberCode member, AsmInstructions asm)
+        {
+            var code = new ApiCodeBlock(member.OpUri, member.Encoded);
+            var sig = member.Method.Metadata().Format();
+            return new AsmRoutine(member.MetaUri, member.OpUri, sig, code, member.TermCode, new AsmFxList(asm, member.Encoded));
+        }
+
     }
 }

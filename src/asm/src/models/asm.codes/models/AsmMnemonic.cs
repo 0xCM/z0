@@ -7,8 +7,6 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-
     public readonly struct AsmMnemonic
     {
         public readonly asci32 Name;

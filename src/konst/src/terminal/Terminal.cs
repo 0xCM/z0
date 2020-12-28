@@ -15,10 +15,6 @@ namespace Z0
     public readonly partial struct term
     {
         static readonly Terminal T = Terminal.Get();
-
-        [MethodImpl(Inline)]
-        public static TermEventSink sink(CorrelationToken ct)
-            => new TermEventSink(ct);
     }
 
     /// <summary>

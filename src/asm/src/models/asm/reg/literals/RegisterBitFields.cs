@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
-{        
+{
     public readonly struct RegisterBitFields
     {
         /// <summary>
@@ -36,6 +36,9 @@ namespace Z0.Asm
         /// </summary>
         public const byte WidthWidth = 16;
 
+        /// <summary>
+        /// The maximum number of register classes
+        /// </summary>
         public const byte MaxClass = 31;
-    }        
+    }
 }

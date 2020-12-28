@@ -13,7 +13,6 @@ namespace Z0.Asm
 
     readonly struct AsmWf : IAsmWf
     {
-
         public IWfShell Wf {get;}
 
         public AsmFormatConfig FormatConfig {get;}

@@ -8,12 +8,15 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Konst;
+    using static Part;
 
     public readonly struct Apps
     {
         public static IAppContext context(IWfShell wf)
             => new AppContext(wf.Paths, wf.Api, Rng.@default(), WfShell.json(wf.Paths), WfMsgExchange.Create(wf));
+
+        public static IAppContext context(IWfShell wf, IPolyrand random)
+            => new AppContext(wf.Paths, wf.Api, random, WfShell.json(wf.Paths), WfMsgExchange.Create(wf));
 
         public static IAppContext context()
             => context(WfShell.parts(Assembly.GetEntryAssembly()), WfShell.paths());

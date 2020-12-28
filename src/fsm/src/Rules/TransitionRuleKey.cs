@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     /// <summary>
     /// Defines a key, predicated on input event and current state, identifies a transition rule
@@ -16,14 +15,14 @@ namespace Z0
     public readonly struct TransitionRuleKey<E,S> : IRuleKey<E,S>
     {
         /// <summary>
-        /// The triggering event
-        /// </summary>
-        public E Trigger {get;}
-
-        /// <summary>
         /// The source state
         /// </summary>
         public S Source {get;}
+
+        /// <summary>
+        /// The triggering event
+        /// </summary>
+        public E Trigger {get;}
 
         public int Hash {get;}
 

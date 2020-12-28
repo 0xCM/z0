@@ -15,7 +15,7 @@ namespace Z0
     public class Fsm<E,S,A> : Fsm<E,S>
     {
         internal Fsm(string Id, IWfShell wf, S ground, S end,
-                MachineTransition<E,S> Transition, EntryFunction<S,A> entry, ExitFunction<S,A> exit, ulong? limit = null)
+                TransitionFunction<E,S> Transition, EntryFunction<S,A> entry, ExitFunction<S,A> exit, ulong? limit = null)
             : base(Id, wf, ground, end, Transition, limit)
         {
             EntryFunc = entry;

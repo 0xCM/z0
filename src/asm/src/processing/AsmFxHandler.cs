@@ -4,30 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-    using System.Security;
 
-    using static Konst;
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public delegate void AsmFxHandler(in Instruction src);
-
-
-
-    public interface IAsmNodeSink<T> : IValueSink<T>
-        where T : struct
-    {
-
-    }
-
-    public interface IAsmConditionTest<T> : IDataConditionTest<T>
-        where T : struct
-    {
-
-    }
-
-    public interface IAsmInstructionSink : IAsmNodeSink<Instruction>
-    {
-
-    }
 }

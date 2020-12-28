@@ -14,16 +14,6 @@ namespace Z0
     [WfHost]
     public sealed class EmitCallIndex : WfHost<EmitCallIndex>
     {
-        // public static void exec(IWfShell wf, ReadOnlySpan<ApiPartRoutines> src)
-        // {
-        //     var count = src.Length;
-        //     for(var i=0; i<count; i++)
-        //     {
-        //         var processor = PartRoutinesProcessor.service(wf, skip(src,i));
-        //         processor.ProcessCalls();
-        //     }
-        // }
-
         ApiPartRoutines Routines;
 
         public static WfHost create(in ApiPartRoutines routines)

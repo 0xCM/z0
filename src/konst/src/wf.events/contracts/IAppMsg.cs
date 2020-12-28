@@ -6,7 +6,6 @@ namespace Z0
 {
     public interface IAppMsg : ITextual
     {
-
         /// <summary>
         /// The message classification
         /// </summary>
@@ -22,10 +21,5 @@ namespace Z0
         /// </summary>
         bool IsError
             => Kind == LogLevel.Error;
-    }
-
-    public interface IAppMsg<T> : IAppMsg
-    {
-        T Content {get;}
     }
 }

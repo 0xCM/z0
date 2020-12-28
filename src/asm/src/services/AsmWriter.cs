@@ -13,7 +13,41 @@ namespace Z0.Asm
 
     public readonly struct AsmWriter : IAsmWriter
     {
+        [MethodImpl(Inline), Op]
+        public static AsmWriter create(FS.FilePath dst)
+            => new AsmWriter(dst, new AsmFormatter());
+
+        [MethodImpl(Inline), Op]
+        public static AsmWriter create(FS.FilePath dst, in AsmFormatConfig config)
+            => new AsmWriter(dst, new AsmFormatter(config));
+
+        [MethodImpl(Inline), Op]
+        public static AsmWriter create(FS.FilePath dst, IAsmFormatter formatter)
+            => new AsmWriter(dst, formatter);
+
+        public static FS.FilePath emit(IWfShell wf, ApiHostUri uri, ReadOnlySpan<AsmRoutine> src, in AsmFormatConfig format)
+        {
+            var count = src.Length;
+            if(count != 0)
+            {
+                var path = wf.Db().CapturedAsmFile(uri);
+                using var writer = path.Writer();
+                var buffer = Buffers.text();
+
+                for(var i=0; i<count; i++)
+                {
+                    ref readonly var routine = ref skip(src,i);
+                    AsmRender.format(routine, format, buffer);
+                    writer.Write(buffer.Emit());
+                }
+                return path;
+            }
+            else
+                return FS.FilePath.Empty;
+        }
+
         public static void emit(ReadOnlySpan<CapturedApiRes> src, FS.FilePath dst)
+
         {
             const ulong Cut = 0x55005500550;
             const string Sep = SpacePipe;
@@ -52,9 +86,6 @@ namespace Z0.Asm
         readonly IAsmFormatter Formatter;
 
         public FS.FilePath TargetPath {get;}
-
-        public static AsmTextWriterFactory Factory
-            => (dst,formatter) => new AsmWriter(dst,formatter);
 
         [MethodImpl(Inline)]
         public AsmWriter(FilePath path, IAsmFormatter formatter)

@@ -9,6 +9,9 @@ namespace Z0.Asm
 
     using static Konst;
 
+    /// <summary>
+    /// Defines a 32-bit register and its content
+    /// </summary>
     public readonly struct R32 : IRegister<R32,W32,uint>
     {
         public uint Content  {get;}

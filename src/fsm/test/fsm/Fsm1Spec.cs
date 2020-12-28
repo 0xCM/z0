@@ -18,7 +18,7 @@ namespace Z0
 
         public virtual IEnumerable<OutputRule<E,S,O>> OutputRules{get;}
 
-        public MachineTransition<E,S> TransFunc
+        public TransitionFunction<E,S> TransFunc
             => TransRules.ToFunction();
     }
 

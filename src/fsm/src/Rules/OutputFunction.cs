@@ -13,21 +13,19 @@ namespace Z0
     using static z;
 
     /// <summary>
-    /// Defines a partial state machine output function of the form 
+    /// Defines a partial state machine output function of the form
     /// (source : S, target : S) -> output : Option[O]
-    /// for source/target pairs in the domain. If an input value (s1:S, s2:S) 
+    /// for source/target pairs in the domain. If an input value (s1:S, s2:S)
     /// is not in the function domain, en empty option is returned
     /// </summary>
-    public class MachineOutput<E,S,O> : IFsmFunc
+    public class OutputFunction<E,S,O> : IFsmFunc
     {
-        readonly Dictionary<int,IOutputRule<E,S,O>> RuleIndex;        
+        readonly Dictionary<int,IOutputRule<E,S,O>> RuleIndex;
 
         [MethodImpl(Inline)]
-        public MachineOutput(IEnumerable<IOutputRule<E,S,O>> Rules)
-        {
-            RuleIndex = Rules.Select(x => (Fsm.outKey(x.Trigger, x.Source).Hash,x)).ToDictionary();
-        }
-        
+        public OutputFunction(IEnumerable<IOutputRule<E,S,O>> Rules)
+            => RuleIndex = Rules.Select(x => (Fsm.outKey(x.Trigger, x.Source).Hash,x)).ToDictionary();
+
         /// <summary>
         /// Computes the output value, if any, for a specified source state and event
         /// </summary>

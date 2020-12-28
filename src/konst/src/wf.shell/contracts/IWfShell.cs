@@ -9,7 +9,6 @@ namespace Z0
     using System.Threading.Tasks;
 
     using static z;
-    using static WfShellUtility;
     using static WfEvents;
 
     public partial interface IWfShell : IDisposable, ITextual
@@ -65,13 +64,13 @@ namespace Z0
             => Task.Factory.StartNew(() => Router.Dispatch(cmd));
 
         IWfShell WithHost(WfHost host)
-            => clone(this, host, PolyStream, Verbosity);
+            => WfShell.clone(this, host, PolyStream, Verbosity);
 
         IWfShell WithRandom(IPolyStream random)
-            => clone(this, Host, random, Verbosity);
+            => WfShell.clone(this, Host, random, Verbosity);
 
         IWfShell WithVerbosity(LogLevel level)
-            => clone(this, Host, PolyStream, level);
+            => WfShell.clone(this, Host, PolyStream, level);
 
         Assembly[] Components
             => Context.ApiParts.Components;

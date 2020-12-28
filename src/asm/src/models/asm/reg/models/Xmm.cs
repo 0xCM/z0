@@ -8,7 +8,6 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static z;
     using static X86Registers;
 
     using K = RegisterKind;

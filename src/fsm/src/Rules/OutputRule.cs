@@ -52,7 +52,7 @@ namespace Z0
             Trigger = trigger;
             Source = source;
             Output = output;
-            Key = Fsm.outKey(trigger,source);
+            Key = Fsm.outKey(trigger, source);
         }
 
         [MethodImpl(Inline)]

@@ -17,11 +17,4 @@ namespace Z0
         F INullary<F>.Zero
             => default;
     }
-
-    [Free]
-    public interface IAppEvent<F,T> : IAppEvent<F>
-        where F : struct, IAppEvent<F,T>
-    {
-        EventPayload<T> Content => default;
-    }
 }

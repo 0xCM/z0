@@ -20,9 +20,7 @@ namespace Z0.Asm
 
             [MethodImpl(Inline)]
             public MemOp(T src)
-            {
-                Content = src;
-            }
+                => Content = src;
 
             [MethodImpl(Inline)]
             public static implicit operator MemOp<T>(T src)

@@ -9,6 +9,9 @@ namespace Z0.Asm
 
     using static Konst;
 
+    /// <summary>
+    /// Defines an 8-bit register and its content
+    /// </summary>
     public readonly struct R8 : IRegister<R8,W8,byte>
     {
         public byte Content  {get;}

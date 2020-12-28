@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     [ApiHost]
     public readonly struct HubClientExample : IHubClientExample
@@ -52,16 +52,16 @@ namespace Z0
 
     public readonly struct ExampleEvent1 : IDataEvent<ExampleEvent1>
     {
-        public StringRef Id {get;}
+        public string Id {get;}
 
         public BinaryCode Encoded {get;}
 
         [MethodImpl(Inline)]
-        public ExampleEvent1 Define(StringRef id, BinaryCode data)
+        public ExampleEvent1 Define(string id, BinaryCode data)
             => new ExampleEvent1(id,data);
 
         [MethodImpl(Inline)]
-        public ExampleEvent1(StringRef id, BinaryCode data)
+        public ExampleEvent1(string id, BinaryCode data)
         {
             Id = id;
             Encoded = data;
@@ -71,15 +71,15 @@ namespace Z0
     public readonly struct ExampleEvent2 : IDataEvent<ExampleEvent2>
     {
         [MethodImpl(Inline)]
-        public ExampleEvent2 Define(StringRef id, BinaryCode data)
-            => new ExampleEvent2(id,data);
+        public ExampleEvent2 Define(string id, BinaryCode data)
+            => new ExampleEvent2(id, data);
 
-        public StringRef Id {get;}
+        public string Id {get;}
 
         public BinaryCode Encoded {get;}
 
         [MethodImpl(Inline)]
-        public ExampleEvent2(StringRef id, BinaryCode data)
+        public ExampleEvent2(string id, BinaryCode data)
         {
             Id = id;
             Encoded = data;
@@ -89,15 +89,15 @@ namespace Z0
     public readonly struct ExampleEvent3 : IDataEvent<ExampleEvent3>
     {
         [MethodImpl(Inline)]
-        public ExampleEvent3 Define(StringRef id, BinaryCode data)
+        public ExampleEvent3 Define(string id, BinaryCode data)
             => new ExampleEvent3(id,data);
 
-        public StringRef Id {get;}
+        public string Id {get;}
 
         public BinaryCode Encoded {get;}
 
         [MethodImpl(Inline)]
-        public ExampleEvent3(StringRef id, BinaryCode data)
+        public ExampleEvent3(string id, BinaryCode data)
         {
             Id = id;
             Encoded = data;
@@ -123,7 +123,6 @@ namespace Z0
 
         void OnEvent(in ExampleEvent3 e)
             => Deposit(e);
-
 
         void IWfHubClient.Connect()
         {

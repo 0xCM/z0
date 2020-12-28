@@ -8,12 +8,12 @@ namespace Z0
     using System.Security;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     public struct ValueBuffer<T> : IValueBuffer<ValueBuffer<T>, T>
         where T : struct
     {
-        readonly TableSpan<T> Data;
+        readonly Index<T> Data;
 
         uint Position;
 

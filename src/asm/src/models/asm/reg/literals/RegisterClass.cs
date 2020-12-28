@@ -47,9 +47,9 @@ namespace Z0.Asm
         /// </summary>
         ZMM = 12,
 
-       /// <summary>
-       /// A 64-bit mask register
-       /// </summary>
-       Mask = 13,
+        /// <summary>
+        /// A 64-bit mask register
+        /// </summary>
+        Mask = 13,
     }
 }

@@ -32,7 +32,7 @@ namespace Z0
         {
             var flow = Wf.Running();
             Decode(src, out dst);
-            var emitted = Z0.Asm.ApiAsm.emit(Wf, Uri, dst.Storage, Asm.Formatter.Config);
+            var emitted = AsmWriter.emit(Wf, Uri, dst.Storage, Asm.Formatter.Config);
             if(emitted.IsNonEmpty)
                 Wf.EmittedFile(dst, dst.Count, emitted);
 
@@ -42,7 +42,7 @@ namespace Z0
 
         void Decode(ReadOnlySpan<ApiMemberCode> src, out AsmRoutines dst)
         {
-            using var decoder = ApiHostDecoder.create(Wf, Asm.RoutineDecoder);
+            var decoder = ApiHostDecoder.create(Wf, Asm.RoutineDecoder);
             dst = decoder.Decode(Uri, src);
         }
     }

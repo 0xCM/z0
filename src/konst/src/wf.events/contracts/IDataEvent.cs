@@ -9,7 +9,7 @@ namespace Z0
     [Free]
     public interface IDataEvent : IAppEvent
     {
-        StringRef Id {get;}
+        string Id {get;}
 
         BinaryCode Encoded {get;}
         string ITextual.Format()

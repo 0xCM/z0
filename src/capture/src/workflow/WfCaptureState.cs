@@ -11,9 +11,6 @@ namespace Z0.Asm
 
     public readonly struct WfCaptureState : IWfCaptureState
     {
-        public static WfCaptureState create(IWfShell wf)
-            => new WfCaptureState(wf, new AsmContext(Apps.context(wf), wf));
-
         public IWfShell Wf {get;}
 
         public IAppContext App {get;}
