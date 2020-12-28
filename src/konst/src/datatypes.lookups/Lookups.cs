@@ -208,7 +208,6 @@ namespace Z0
             where K : unmanaged
                 => new LookupTable<K,V>(src);
 
-
         [MethodImpl(Inline)]
         public static Span<LookupEntry<T,V>> convert<S,V,T>(Span<LookupEntry<S,V>> src, T t = default)
             where S : unmanaged

@@ -8,9 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections;
     using System.Collections.Generic;
-    using System.Linq;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Defines an E-V parametric literal index

@@ -21,7 +21,7 @@ namespace Z0
                 => new IdentifierIndex(TokenCount);
 
             public SemanticIndex<AsmTokenKind,string> semantic()
-                => SemanticIndex.create(Storage,AsmTokenKind.None);
+                => SemanticIndex.create(Storage, AsmTokenKind.None);
 
             [MethodImpl(Inline)]
             public IdentifierIndex(uint count)

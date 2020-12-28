@@ -12,11 +12,11 @@ namespace Z0
     public readonly struct TableId<T> : ITableId<T>
         where T : struct, IRecord<T>
     {
-        public StringRef RecordType
+        public Name RecordType
             => typeof(T).Name;
 
-        public StringRef Identifier
-            => Table.id<T>().Identifier;
+        public Name Identifier
+            => Records.tableid<T>().Identifier;
 
         [MethodImpl(Inline)]
         public string Format()
@@ -27,6 +27,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator TableId(TableId<T> src)
-            => Table.id<T>();
+            => Records.tableid<T>();
     }
 }

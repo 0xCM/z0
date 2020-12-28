@@ -9,6 +9,8 @@ namespace Z0
 
     using static Part;
 
+    using api = ImageMaps;
+
     /// <summary>
     /// Describes a PE image from the perspective of process entry point
     /// </summary>
@@ -84,10 +86,8 @@ namespace Z0
             => BaseAddress.CompareTo(src.BaseAddress);
 
         public string Format()
-        {
-            var expression = text.bracket(text.concat(BaseAddress, Chars.Comma, Chars.Space, EndAddress, Chars.Colon, Size));
-            return text.assign(Name, expression);
-        }
+            => api.format(this);
+
 
         public override string ToString()
             => Format();

@@ -8,7 +8,11 @@ namespace Z0
 
     using static SFx;
 
+
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
+    [Free]
+    public delegate Span<T> Imm8ShiftSpanOp<T>(ReadOnlySpan<T> src, byte imm8, Span<T> dst);
 
     partial struct SFx
     {

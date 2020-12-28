@@ -5,11 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Threading;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     using api = Histograms;
 

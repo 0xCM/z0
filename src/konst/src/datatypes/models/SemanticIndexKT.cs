@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     public readonly struct SemanticIndex<K,T> : ISemanticIndex<SemanticIndex<K,T>,K,T>
         where K : unmanaged, Enum

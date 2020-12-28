@@ -9,9 +9,9 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct LocatedImageIndex : IDataTypeIndex<LocatedImage>
+    public readonly struct LocatedImageIndex : IIndex<LocatedImage>
     {
-        public readonly LocatedImage[] Data;
+        readonly Index<LocatedImage> Data;
 
         [MethodImpl(Inline)]
         public LocatedImageIndex(LocatedImage[] src)
@@ -26,7 +26,7 @@ namespace Z0
         public ref LocatedImage First
         {
             [MethodImpl(Inline)]
-            get => ref memory.first(Data);
+            get => ref Data.First;
         }
 
         public ReadOnlySpan<LocatedImage> View
@@ -50,5 +50,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator LocatedImageIndex(LocatedImage[] src)
             => new LocatedImageIndex(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator LocatedImage[](LocatedImageIndex src)
+            => src.Storage;
     }
 }

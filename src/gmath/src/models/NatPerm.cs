@@ -69,6 +69,5 @@ namespace Z0
                 dst |= (ulong)src[i] << offset;
             return (Perm16L)dst;
         }
-
     }
 }

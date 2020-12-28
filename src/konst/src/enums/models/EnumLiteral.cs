@@ -12,7 +12,7 @@ namespace Z0
     using F = EnumLiteral.Fields;
 
     [Record(TableId)]
-    public struct EnumLiteral
+    public struct EnumLiteral : IRecord<EnumLiteral>
     {
         public const string TableId = "enum.literals";
 

@@ -10,9 +10,9 @@ namespace Z0
     [Free]
     public interface ITableId : ITextual
     {
-        StringRef RecordType {get;}
+        Name RecordType {get;}
 
-        StringRef Identifier {get;}
+        Name Identifier {get;}
 
         string ITextual.Format()
             => Identifier.Format();
@@ -22,10 +22,10 @@ namespace Z0
     public interface ITableId<T> : ITableId
         where T : struct, IRecord<T>
     {
-        StringRef ITableId.RecordType
+        Name ITableId.RecordType
             => typeof(T).Name;
 
-        StringRef ITableId.Identifier
-            => Table.id<T>().Identifier;
+        Name ITableId.Identifier
+            => Records.tableid<T>().Identifier;
     }
 }

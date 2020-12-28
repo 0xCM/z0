@@ -6,10 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     /// <summary>
     /// Defines a version schema that supports 2, 3 or 4 32-bit segments
@@ -17,59 +15,38 @@ namespace Z0
     [ApiType, Datatype]
     public readonly struct VersionId : IDataType<VersionId>
     {
-        readonly Vector128<uint> Storage;
-
-        [MethodImpl(Inline)]
-        public VersionId(uint a, uint b)
-            => Storage = vparts(w128, a, b, z32, z32);
-
-        [MethodImpl(Inline)]
-        public VersionId(uint a, uint b, uint c)
-            => Storage = vparts(w128, a, b, c, z32);
-
-        [MethodImpl(Inline)]
-        public VersionId(uint a, uint b, uint c, uint d)
-            => Storage = vparts(w128, a, b, c, d);
-
         /// <summary>
         /// The first segment value
         /// </summary>
-        public uint A
-        {
-            [MethodImpl(Inline)]
-            get => vcell(Storage,0);
-        }
+        public uint A {get;}
 
         /// <summary>
         /// The second segment value
         /// </summary>
-        public uint B
-        {
-            [MethodImpl(Inline)]
-            get => vcell(Storage,1);
-        }
+        public uint B {get;}
 
         /// <summary>
         /// The third segment value, or 0 if none
         /// </summary>
-        public uint C
-        {
-            [MethodImpl(Inline)]
-            get => vcell(Storage,2);
-        }
+        public uint C {get;}
 
         /// <summary>
         /// The fourth segment value, or 0 if none
         /// </summary>
-        public uint D
+        public uint D {get;}
+
+        [MethodImpl(Inline)]
+        public VersionId(uint a, uint b, uint c = 0, uint d = 0)
         {
-            [MethodImpl(Inline)]
-            get => vcell(Storage,3);
+            A = a;
+            B = b;
+            C = c;
+            D = d;
         }
 
         [MethodImpl(Inline), Ignore]
         public string Format()
-            => text.format(RenderPattern, A, B, C, D);
+            => string.Format(RenderPattern, A, B, C, D);
 
         public override string ToString()
             => Format();

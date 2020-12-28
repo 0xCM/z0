@@ -475,7 +475,8 @@ namespace Z0
             var target = Db.IndexFile(ApiAddressRecord.TableId);
             var emission = Records.emit(records, new byte[]{12,16,16,32,80,64}, target);
             Wf.Status(emission);
-            //Records.emit(records,)
+
+            var image = ImageMaps.map();
 
         }
         public void Run()

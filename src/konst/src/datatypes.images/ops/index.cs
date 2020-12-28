@@ -5,11 +5,14 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
+    using System.Diagnostics;
+    using System.Linq;
 
-    [ApiHost("emath.closures")]
-    public readonly partial struct EClosures
+
+    partial struct ImageMaps
     {
-
+        [Op]
+        public static LocatedImageIndex index(Process src)
+            => src.Modules.Cast<ProcessModule>().Map(locate).OrderBy(x => x.BaseAddress);
     }
 }

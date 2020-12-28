@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     /// <summary>
@@ -50,12 +50,13 @@ namespace Z0
 
         public override bool Equals(object src)
             => src is @enum<E,T> x && Equals(x);
+
         public override int GetHashCode()
             => Literal.GetHashCode();
-       public string Format()
+        public string Format()
             => $"{Literal}";
 
-       public override string ToString()
+        public override string ToString()
             => Format();
 
         [MethodImpl(Inline)]

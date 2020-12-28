@@ -7,12 +7,13 @@ namespace Z0
     using System;
     using System.Runtime.InteropServices;
 
+
     [StructLayout(LayoutKind.Sequential), Record(TableId)]
     public struct LocatedImageRow : IRecord<LocatedImageRow>
     {
         public const string TableId = "images.located";
 
-        public enum Fields : ushort
+        public enum Widths : byte
         {
             ImageName = 60,
 
@@ -29,7 +30,7 @@ namespace Z0
             Gap = 10
         }
 
-        public StringRef ImageName;
+        public Name ImageName;
 
         public PartId PartId;
 

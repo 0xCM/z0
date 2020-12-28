@@ -20,8 +20,4 @@ namespace Z0
     public delegate void SpanPartitioner<S,T>(S src, Span<T> dst)
         where T : unmanaged;
 
-    [Free]
-    public delegate Span<T> Imm8ShiftSpanOp<T>(ReadOnlySpan<T> src, byte imm8, Span<T> dst);
-
-
 }

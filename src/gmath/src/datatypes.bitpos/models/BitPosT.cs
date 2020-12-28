@@ -119,8 +119,8 @@ namespace Z0
 
 		[MethodImpl(Inline)]
 		public bool Equals(BitPos<T> rhs)
-			=> this.CellIndex == rhs.CellIndex
-            && this.BitOffset == rhs.BitOffset;
+			=> CellIndex == rhs.CellIndex
+            && BitOffset == rhs.BitOffset;
 
 		public string Format()
 			=> string.Format("({0},{1}/{2})", LinearIndex, CellIndex, BitOffset);

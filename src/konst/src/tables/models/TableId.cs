@@ -7,24 +7,16 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     public readonly struct TableId : ITableId
     {
-        public StringRef RecordType {get;}
+        public Name RecordType {get;}
 
-        public StringRef Identifier {get;}
-
-
-        [MethodImpl(Inline)]
-        public TableId(Type shape)
-        {
-            RecordType = shape.Name;
-            Identifier = shape.Name;
-        }
+        public Name Identifier {get;}
 
         [MethodImpl(Inline)]
-        public TableId(ClrToken shape, string name)
+        public TableId(Type shape, string name)
         {
             RecordType = name;
             Identifier = name;
@@ -39,6 +31,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator TableId(Type src)
-            => Table.id(src);
+            => Records.tableid(src);
     }
 }

@@ -5,7 +5,7 @@
 namespace Z0
 {
     [Record]
-    public struct ProcessModuleRecord : IRecord<ProcessModuleRecord>
+    public struct ProcessModuleRow : IRecord<ProcessModuleRow>
     {
         public MemoryAddress Base;
 

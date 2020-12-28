@@ -11,21 +11,21 @@ namespace Z0
 
     public readonly struct ImageMap
     {
-        public static ImageMap load(LocatedImageIndex images, MemoryAddress[] locations)
-        {
-            Array.Sort(locations);
-            return new ImageMap(images, memory.sort(locations));
-        }
+        public ProcessState Process {get;}
 
-        readonly LocatedImageIndex Images;
+        public Index<LocatedImage> Images {get;}
 
-        readonly MemoryAddresses Locations;
+        public MemoryAddresses Locations {get;}
+
+        public Index<ProcessModuleRow> Modules {get;}
 
         [MethodImpl(Inline)]
-        ImageMap(LocatedImageIndex images, MemoryAddresses locations)
+        public ImageMap(ProcessState state, LocatedImage[] images, MemoryAddresses locations, ProcessModuleRow[] modules)
         {
+            Process = state;
             Images = images;
             Locations = locations;
+            Modules = modules;
         }
     }
 }

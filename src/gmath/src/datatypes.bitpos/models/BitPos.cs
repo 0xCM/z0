@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
 	[ApiType]
 	public partial struct BitPos
@@ -26,6 +26,14 @@ namespace Z0
 		/// The bit-width of a cell
 		/// </summary>
 		public ushort CellWidth;
+
+		[MethodImpl(Inline)]
+		public BitPos(ushort cellwidth, uint cellindex, ushort bitoffset)
+		{
+			CellWidth = cellwidth;
+			CellIndex = cellindex;
+			BitOffset = bitoffset;
+		}
 
 		/// <summary>
 		/// Defines a bit position predicated on the width of a storage cell and the 0-based linear bit index
@@ -64,14 +72,6 @@ namespace Z0
 		public static BitPos<T> FromBitIndex<T>(uint index)
 			where T : unmanaged
 				=> BitPos<T>.FromLinearIndex(index);
-
-		[MethodImpl(Inline)]
-		public BitPos(ushort cellwidth, uint cellindex, ushort bitoffset)
-		{
-			CellWidth = cellwidth;
-			CellIndex = cellindex;
-			BitOffset = bitoffset;
-		}
 
 		/// <summary>
 		/// The linear/absolute bit index of the represented position

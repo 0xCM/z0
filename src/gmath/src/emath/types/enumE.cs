@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     public readonly struct @enum<E> : IEnum<E>, IEquatable<@enum<E>>
