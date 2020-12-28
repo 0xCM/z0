@@ -7,7 +7,7 @@ namespace Z0.Lang
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Represents a legal identifier
@@ -19,6 +19,13 @@ namespace Z0.Lang
         [MethodImpl(Inline)]
         public Identifier(T src)
             => Value = src;
+
+        [MethodImpl(Inline)]
+        public string Format()
+            => Value?.ToString() ?? EmptyString;
+
+        public override string ToString()
+            => Format();
 
         [MethodImpl(Inline)]
         public static implicit operator Identifier<T>(T src)

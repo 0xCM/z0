@@ -14,6 +14,7 @@ namespace Z0
 
     public readonly struct Clr
     {
-
+        public static Assembly load(FS.FilePath image, FS.FilePath pdb)
+            => Assembly.Load(image.ReadBytes(), pdb.ReadBytes());
     }
 }

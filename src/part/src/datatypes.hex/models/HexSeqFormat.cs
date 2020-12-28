@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct HexSeqFormat : ISeqFormat<HexSeqFormat>
+    public readonly struct HexSeqFormat : ISeqFormatSpec<HexSeqFormat>
     {
         public HexFormatOptions HexFormat {get;}
 

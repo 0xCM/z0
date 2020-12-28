@@ -30,7 +30,6 @@ namespace Z0
         void ITextValueFormatter<F,R>.Format(in R src, IDatasetFormatter<F> dst)
             => render(src,dst);
 
-
         [MethodImpl(Inline), Op]
         static void render(in BitMaskInfo src, IDatasetFormatter<F> dst)
         {

@@ -106,14 +106,12 @@ namespace Z0
         public static MethodBase method(RuntimeMethodHandle src)
              => MethodBase.GetMethodFromHandle(src);
 
-
         [MethodImpl(Inline), Op]
         public static LocatedMethod jit(IdentifiedMethod src, int? size = null)
         {
             RuntimeHelpers.PrepareMethod(src.MethodHandle);
             return new LocatedMethod(src.Id, src.Method, (MemoryAddress)src.MethodHandle.GetFunctionPointer(), size);
         }
-
 
         [MethodImpl(Inline)]
         public static MemoryAddress jit(ApiMember src)

@@ -7,13 +7,13 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     [Datatype]
     public readonly struct utf8 : ITextual, IEquatable<utf8>, IComparable<utf8>
     {
-        static TextCoder Encoder => TextEncoders.utf8();
+        static TextEncoding Encoder => TextEncoders.utf8();
 
         readonly byte[] Data;
 

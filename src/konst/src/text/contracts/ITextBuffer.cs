@@ -15,13 +15,6 @@ namespace Z0
     {
         void Format(in T src, IDatasetFormatter<F> dst);
 
-        void Format(in T src, IDatasetFormatter<F> dst, bool eol)
-        {
-            Format(src, dst);
-            if(eol)
-                dst.EmitEol();
-        }
-
         string ITextValueFormatter<T>.Format(in T src)
         {
             var dst = Formatters.dataset<F>();
@@ -100,8 +93,6 @@ namespace Z0
                 Append(value.PadRight((int)width));
             }
         }
-
-
 
         void AppendDelimited<T>(T[] src, char c = FieldDelimiter)
             => Append(Seq.delimit(src, c).Format());

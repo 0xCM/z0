@@ -7,14 +7,14 @@ namespace Z0.Lang
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Specifies a dsl keyword
     /// </summary>
-    public readonly struct Keyword : IKeyword
+    public readonly struct Keyword
     {
-        public string Name {get;}
+        public Name Name {get;}
 
         [MethodImpl(Inline)]
         public unsafe Keyword(string src)

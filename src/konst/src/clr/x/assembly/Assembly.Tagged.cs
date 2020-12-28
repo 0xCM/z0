@@ -8,7 +8,6 @@ namespace Z0
     using System.Reflection;
     using System.Runtime.CompilerServices;
 
-
     partial class XClrQuery
     {
         /// <summary>

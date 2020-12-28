@@ -5,21 +5,15 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Linq;
 
-    using static Konst;
+    using static Part;
 
     [ApiHost("api.parsers.part")]
     public readonly struct ApiPartIdParser : IPartIdParser
     {
         [Op]
-        public static PartId part(FilePath src)
-            => single(src.FileName.Name.Replace("z0.", EmptyString).Replace(".dll", EmptyString).Replace(".exe", EmptyString));
-
-        [Op]
         public static PartId part(FS.FilePath src)
-            => part(FilePath.Define(src.Name));
+            => single(src.FileName.Name.Replace("z0.", EmptyString).Replace(".dll", EmptyString).Replace(".exe", EmptyString));
 
         [Op]
         public static PartId single(string src)

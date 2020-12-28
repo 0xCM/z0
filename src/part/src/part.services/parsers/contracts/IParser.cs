@@ -9,19 +9,19 @@ namespace Z0
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface IParser : ICellMap
+    public interface IParser : ITransformer
     {
         ParseResult Parse(object src);
     }
 
-    public interface IParser<S,T> : IParser, ICellMap<S,T>
+    public interface IParser<S,T> : IParser, ITransformer<S,T>
     {
         ParseResult<S,T> Parse(S src);
 
         ParseResult IParser.Parse(object src)
             => Parse((S)src);
 
-        bool ICellMap<S,T>.Transform(in S src, out T dst)
+        bool ITransformer<S,T>.Transform(in S src, out T dst)
             => Parse(src, out dst);
 
         bool Parse(in S src, out T dst)

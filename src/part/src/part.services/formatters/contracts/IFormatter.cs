@@ -9,16 +9,16 @@ namespace Z0
     /// <summary>
     /// Characterizes a text serializer
     /// </summary>
-    public interface IFormatter : ICellMap
+    public interface IFormatter : ITransformer
     {
         object Format(object src);
     }
 
-    public interface IFormatter<S,T> : IFormatter, ICellMap<S,T>
+    public interface IFormatter<S,T> : IFormatter, ITransformer<S,T>
     {
         T Format(S src);
 
-        bool ICellMap<S,T>.Transform(in S src, out T dst)
+        bool ITransformer<S,T>.Transform(in S src, out T dst)
         {
             dst = Format(src);
             return true;

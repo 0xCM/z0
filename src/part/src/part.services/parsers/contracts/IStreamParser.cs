@@ -8,7 +8,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
-   public interface IStreamParser<P,T> : ITextParser<T>
+    public interface IStreamParser<P,T> : ITextParser<T>
         where P : ITextParser<T>
     {
         IEnumerable<ParseResult<T>> Parse(IEnumerable<string> src)

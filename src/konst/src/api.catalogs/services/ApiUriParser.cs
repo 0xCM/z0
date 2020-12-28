@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
 
-    using static z;
-
     using api = ApiUri;
 
     public readonly struct ApiUriParser : ITextParser<OpUri>

@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
     using static data.tchars;
 
-    public readonly struct SeqFormatConfig : ISeqFormat<SeqFormatConfig>
+    public readonly struct SeqFormatConfig : ISeqFormatSpec<SeqFormatConfig>
     {
         [MethodImpl(Inline), Op]
         public static SeqFormatConfig define(string delimiter = Comma)

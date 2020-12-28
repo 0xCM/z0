@@ -15,7 +15,6 @@ namespace Z0
     {
         const NumericKind Closure = UnsignedInts;
 
-
         [MethodImpl(Inline), Op]
         public static string value(in StringIndex src, uint key)
         {
@@ -49,6 +48,5 @@ namespace Z0
                 value = EmptyString;
             return false;
         }
-
     }
 }

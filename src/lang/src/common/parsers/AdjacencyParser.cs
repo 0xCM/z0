@@ -13,12 +13,11 @@ namespace Z0.Lang
     public readonly struct AdjacencyParser
     {
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static Adjacency<T> create<T>(T left, T right)
-            where T : unmanaged
-                => new Adjacency<T>(left, right);
+        public static Adjacent<T> create<T>(T left, T right)
+            => new Adjacent<T>(left, right);
 
         [Op, Closures(UnsignedInts)]
-        public static uint run<T>(in Adjacency<T> parser, ReadOnlySpan<T> src, Span<uint> dst)
+        public static uint run<T>(in Adjacent<T> parser, ReadOnlySpan<T> src, Span<uint> dst)
             where T : unmanaged, IEquatable<T>
         {
             var terms = math.min(src.Length - 1, dst.Length);

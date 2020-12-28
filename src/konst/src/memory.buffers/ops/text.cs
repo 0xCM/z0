@@ -14,10 +14,10 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static ITextBuffer text()
-            => new DynamicTextBuffer(new StringBuilder());
+            => new TextBuffer(new StringBuilder());
 
         [MethodImpl(Inline), Op]
         public static ITextBuffer text(StringBuilder dst)
-            => new DynamicTextBuffer(dst);
+            => new TextBuffer(dst);
     }
 }

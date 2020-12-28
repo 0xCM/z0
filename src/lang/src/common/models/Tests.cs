@@ -7,16 +7,9 @@ namespace Z0.Lang
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
-    public readonly struct Tests
-    {
-        [MethodImpl(Inline)]
-        public static Tests<C> alloc<C>(uint count)
-            => new Tests<C>(count);
-    }
-
-    public readonly struct Tests<C> : ITableSpan<Tests<C>,Test<C>>
+    public readonly struct Tests<C> : IIndex<Test<C>>
     {
         readonly TableSpan<Test<C>> Data;
 

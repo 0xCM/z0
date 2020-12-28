@@ -14,10 +14,6 @@ namespace Z0
         readonly TableSpan<RenderPatternSource> Data;
 
         [MethodImpl(Inline)]
-        public static implicit operator RenderPatternSources(RenderPatternSource[] src)
-            => new RenderPatternSources(src);
-
-        [MethodImpl(Inline)]
         public RenderPatternSources(RenderPatternSource[] src)
             => Data = src;
 
@@ -38,5 +34,9 @@ namespace Z0
             [MethodImpl(Inline)]
             get => ref Data[index];
         }
+
+        [MethodImpl(Inline)]
+        public static implicit operator RenderPatternSources(RenderPatternSource[] src)
+            => new RenderPatternSources(src);
     }
 }

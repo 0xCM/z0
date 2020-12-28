@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    public readonly struct DefaultSeqFormat : ISeqFormat<DefaultSeqFormat>
+    public readonly struct DefaultSeqFormat : ISeqFormatSpec<DefaultSeqFormat>
     {
         public static DefaultSeqFormat Default => default;
 

@@ -12,6 +12,18 @@ namespace Z0
 
     partial struct Formatters
     {
+        /// <summary>
+        /// Formats anything via <see cref='object.ToString()'/>
+        /// </summary>
+        public readonly struct DefaultTextFormatter : ITextFormatter<DefaultTextFormatter,object>
+        {
+            public static DefaultTextFormatter Service => default;
+
+            [MethodImpl(Inline)]
+            public string Format(object src)
+                => src?.ToString() ?? "<null>";
+        }
+
         public static IFormatter custom(object src)
         {
             var attrib = src?.GetType()?.GetCustomAttribute<FormatterServiceAttribute>();

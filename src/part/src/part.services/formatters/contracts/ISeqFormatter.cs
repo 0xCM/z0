@@ -4,28 +4,28 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface ISequenceFormatter
+    public interface ISeqFormatter
     {
         string FormatItem(object src);
     }
 
-    public interface ISequenceFormatter<T> : ISequenceFormatter
+    public interface ISeqFormatter<T> : ISeqFormatter
     {
         string FormatItem(T src)
             => FormatItem(src);
 
-        string ISequenceFormatter.FormatItem(object src)
+        string ISeqFormatter.FormatItem(object src)
             => FormatItem((T)src);
     }
 
-    public interface ISequenceFormatter<T,C> : ISequenceFormatter<T>
-        where C : ISeqFormat
+    public interface ISeqFormatter<T,C> : ISeqFormatter<T>
+        where C : ISeqFormatSpec
     {
 
     }
 
-    public interface ISequenceFormatter<T,C,E> : ISequenceFormatter<T,C>
-        where C : ISeqFormat
+    public interface ISeqFormatter<T,C,E> : ISeqFormatter<T,C>
+        where C : ISeqFormatSpec
     {
         string FormatItem(T src, in E config);
     }

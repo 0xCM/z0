@@ -9,16 +9,14 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct ProvidedFormatter<T> : IFormatProvider
+    public readonly struct ProvidedFormatter<T> : IFormatProvider<T>
         where T : IFormattable
     {
         readonly IFormatProvider Provider;
 
         [MethodImpl(Inline)]
         public ProvidedFormatter(IFormatProvider weak)
-        {
-            Provider = weak;
-        }
+            => Provider = weak;
 
         [MethodImpl(Inline)]
         public string Format(string pattern, in T src)

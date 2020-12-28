@@ -7,7 +7,7 @@ namespace Z0.Lang
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     [ApiHost(ApiNames.SyntaxModels, true)]
     public readonly partial struct SyntaxModels
@@ -16,14 +16,10 @@ namespace Z0.Lang
 
         const NumericKind Closure = UnsignedInts;
 
-        [MethodImpl(Inline), Op]
-        public static SyntaxFence fence(char left, char right)
-            => new SyntaxFence(left,right);
-
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static SyntaxFence<T> fence<T>(T left, T right)
+        public static FenceSyntax<T> fence<T>(T left, T right)
             where T : unmanaged
-                => new SyntaxFence<T>(left,right);
+                => new FenceSyntax<T>(left,right);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Label<T> label<T>(T src)
@@ -33,28 +29,21 @@ namespace Z0.Lang
         public static Identifier<T> identifier<T>(T src)
             => new Identifier<T>(src);
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Identifier<StringRef> identifier(string src)
-            => new Identifier<StringRef>(src);
+        [MethodImpl(Inline), Op]
+        public static Identifier<Name> identifier(string src)
+            => new Identifier<Name>(src);
 
         [MethodImpl(Inline)]
         public static Literal<I,T> literal<I,T>(I id, T value)
             => new Literal<I,T>(id,value);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Literal<StringRef,T> literal<T>(string id, T value)
-            => new Literal<StringRef,T>(identifier(id), value);
-        [Op]
-        public static string format(SyntaxFence src)
-            => string.Format(FencePattern, src.Left, src.Right);
+        public static Literal<Name,T> literal<T>(string id, T value)
+            => new Literal<Name,T>(identifier(id), value);
 
-        [Op, Closures(UnsignedInts)]
-        public static string format<T>(SyntaxFence<T> src)
-            where T : unmanaged
-                => string.Format(FencePattern, src.Left, src.Right);
-        [Op]
-        public static string format(in SyntaxFence src)
-            => format(FencePattern, src.Left, src.Right);
+        [Op, Closures(Closure)]
+        public static string format<T>(FenceSyntax<T> src)
+            => string.Format(FencePattern, src.Left, src.Right);
 
         [MethodImpl(Inline)]
         static string format<A,B>(string pattern, A a, B b)

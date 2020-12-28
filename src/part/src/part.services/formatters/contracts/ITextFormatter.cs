@@ -16,7 +16,6 @@ namespace Z0
 
     public interface ITextFormatter<T> : ITextFormatter, IFormatter<T,string>
     {
-
         object IFormatter.Format(object src)
             => Format(src);
 

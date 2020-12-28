@@ -4,6 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    /// <summary>
+    /// Defines common format function delegates
+    /// </summary>
     public readonly struct FormatFunctions
     {
         public delegate T RenderArray<S,T>(S[] src);
