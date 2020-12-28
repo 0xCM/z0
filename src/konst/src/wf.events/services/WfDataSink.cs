@@ -18,10 +18,10 @@ namespace Z0
     {
         public IWfShell Wf {get;}
 
-        readonly ValueReceiver<T> Fx;
+        readonly Receiver<T> Fx;
 
         [MethodImpl(Inline)]
-        public WfDataSink(IWfShell wf, ValueReceiver<T> f)
+        public WfDataSink(IWfShell wf, Receiver<T> f)
         {
             Wf = wf;
             Fx = f;

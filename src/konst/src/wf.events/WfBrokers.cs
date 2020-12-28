@@ -29,7 +29,7 @@ namespace Z0
         /// <param name="f">The process function</param>
         /// <typeparam name="T">The data type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static WfDataSink<T> sink<T>(IWfShell wf, ValueReceiver<T> f)
+        public static WfDataSink<T> sink<T>(IWfShell wf, Receiver<T> f)
             where T : struct
                 => new WfDataSink<T>(wf, f);
 

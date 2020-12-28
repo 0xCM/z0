@@ -20,16 +20,4 @@ namespace Z0
     public delegate void EventReceiver<E>(in E e)
         where E : struct, IDataEvent;
 
-    partial struct WfDelegates
-    {
-        [Free]
-        public delegate void DataReceiver<C,T>(C context,T data);
-
-        [Free]
-        public delegate void EventReceiver(IDataEvent e);
-
-        [Free]
-        public delegate void EventReceiver<E>(in E e)
-            where E : struct, IDataEvent;
-    }
 }

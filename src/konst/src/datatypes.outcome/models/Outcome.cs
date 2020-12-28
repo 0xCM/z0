@@ -47,14 +47,6 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public Outcome(AppMsg message)
-        {
-            Ok = !(message.Kind == LogLevel.Error);
-            Message = message.Format();
-            MessageCode = memory.u8(Ok);
-        }
-
-        [MethodImpl(Inline)]
         public Outcome(AppMsgData data)
         {
             Ok = !(data.Kind == LogLevel.Error);
