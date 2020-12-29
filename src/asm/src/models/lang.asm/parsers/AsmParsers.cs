@@ -8,7 +8,7 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static z;
+    using static memory;
 
     public readonly struct AsmParsers
     {
@@ -37,7 +37,7 @@ namespace Z0.Asm
             var prop = lines[1].RightOfFirst(CommentMarker);
             var l2Parts = lines[2].RightOfFirst(CommentMarker).SplitClean(Assign);
             var baseText = l2Parts.Length == 2 ? l2Parts[1] : string.Empty;
-            var @base = z.address(HexScalarParser.Service.Parse(baseText).ValueOrDefault(0ul));
+            var @base = address(HexScalarParser.Service.Parse(baseText).ValueOrDefault(0ul));
             var l3Parts = lines[3].RightOfFirst(CommentMarker).SplitClean(Assign);
             var tcText = l3Parts.Length == 2 ? l3Parts[1] : string.Empty;
             var tcVal = Enums.parse(tcText, ExtractTermCode.None);

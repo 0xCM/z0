@@ -20,13 +20,17 @@ namespace Z0
         public static MemoryAddress address(ulong src)
             => new MemoryAddress(src);
 
+        /// <summary>
+        /// Presents a <see cref='Ptr'/> as a <see cref='MemoryAddress'/>
+        /// </summary>
+        /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
         public static MemoryAddress address(IntPtr src)
             => new MemoryAddress((ulong)src.ToInt64());
 
         [MethodImpl(Inline), Op]
-        public unsafe static MemoryAddress address(void* p)
-            => address((ulong)p);
+        public unsafe static MemoryAddress address(void* pSrc)
+            => address((ulong)pSrc);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static unsafe MemoryAddress address<P>(P* pSrc)
