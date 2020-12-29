@@ -15,5 +15,4 @@ namespace Z0.Lang
         public static Tests<C> alloc<C>(uint count)
             => new Tests<C>(count);
     }
-
 }

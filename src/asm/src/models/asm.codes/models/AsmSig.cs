@@ -13,31 +13,23 @@ namespace Z0.Asm
     /// Represents an expression that identifies an instruction
     /// </summary>
     /// <remarks>
-    /// Instruction expressions are of the form
+    /// Instruction signatures are of the form
     /// 0 operands: {Mnemonic}
     /// 1 operand: {Mnemonic}{ }{op1}
     /// 2 operands: {Mnemonic}{ }{op1}{,}{op2}
     /// 3 operands: {Mnemonic}{ }{op1}{,}{op2},{op3}
     /// Example: PCMPISTRI xmm1, xmm2/m128, imm8
     /// <remarks>
-    public readonly struct AsmInstructionPattern : ITextual
+    public readonly struct AsmSig : ITextual
     {
         public readonly asci64 Value;
 
         [MethodImpl(Inline)]
-        public static implicit operator TextExpression(AsmInstructionPattern src)
-            => new TextExpression(src.Value.Format());
-
-        [MethodImpl(Inline)]
-        public static implicit operator AsmInstructionPattern(string src)
-            => new AsmInstructionPattern(src);
-
-        [MethodImpl(Inline)]
-        public AsmInstructionPattern(string src)
+        public AsmSig(string src)
             => Value = src;
 
         [MethodImpl(Inline)]
-        public AsmInstructionPattern(in asci64 src)
+        public AsmSig(in asci64 src)
             => Value = src;
 
         /// <summary>
@@ -73,15 +65,15 @@ namespace Z0.Asm
             get => asci.decode(Value);
         }
 
-        public AsmInstructionPattern Zero
+        public AsmSig Zero
             => Empty;
 
         [MethodImpl(Inline)]
-        public bool Equals(AsmInstructionPattern src)
+        public bool Equals(AsmSig src)
              => src.Value.Equals(Value);
 
         public override bool Equals(object src)
-            => src is AsmInstructionPattern x && Equals(x);
+            => src is AsmSig x && Equals(x);
 
         public override int GetHashCode()
             => Value.GetHashCode();
@@ -93,7 +85,15 @@ namespace Z0.Asm
         public override string ToString()
             => Format();
 
-        public static AsmInstructionPattern Empty
-            => new AsmInstructionPattern(EmptyString);
+        [MethodImpl(Inline)]
+        public static implicit operator TextExpression(AsmSig src)
+            => new TextExpression(src.Value.Format());
+
+        [MethodImpl(Inline)]
+        public static implicit operator AsmSig(string src)
+            => new AsmSig(src);
+
+        public static AsmSig Empty
+            => new AsmSig(EmptyString);
     }
 }

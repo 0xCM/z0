@@ -7,9 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
-
+    using static Part;
+    using static memory;
 
     partial struct SymbolStore
     {
@@ -18,7 +17,6 @@ namespace Z0
             where S : unmanaged, Enum
             where T : unmanaged
                 => named(symbols<S,T>());
-
 
         [MethodImpl(Inline)]
         public static NamedSymbols<S,T> named<S,T>(in SymbolStore<S,T> src)

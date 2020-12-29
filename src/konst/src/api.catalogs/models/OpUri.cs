@@ -6,12 +6,11 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Reflection;
 
     using static Konst;
     using static ApiUriDelimiters;
 
-    using api = ApiIdentify;
+    using api = ApiIdentity;
 
     public readonly struct OpUri : IApiUri<OpUri>, INullary<OpUri>
     {
@@ -84,35 +83,11 @@ namespace Z0
             => !a.Equals(b);
 
         [MethodImpl(Inline)]
-        public static OpUri Define(ApiUriScheme scheme, ApiHostUri host, string group, OpIdentity opid)
-            => new OpUri(scheme, host, group, opid);
-
-        [MethodImpl(Inline)]
         public static OpUri hex(ApiHostUri host, string group, OpIdentity opid)
             => new OpUri(ApiUriScheme.Hex, host, group, opid);
 
         [MethodImpl(Inline)]
-        public static OpUri hex(OpIdentity opid, MethodInfo src)
-            => new OpUri(ApiUriScheme.Hex, ApiQuery.uri(src.DeclaringType), src.Name, opid);
-
-        [MethodImpl(Inline)]
-        public static OpUri located(OpIdentity opid, MethodInfo src)
-            => new OpUri(ApiUriScheme.Located, ApiQuery.uri(src.DeclaringType), src.Name, opid);
-
-        [MethodImpl(Inline)]
-        public static OpUri asm(ApiHostUri host, string group)
-            => new OpUri(ApiUriScheme.Asm, host, group, OpIdentity.Empty);
-
-        [MethodImpl(Inline)]
-        public static OpUri asm(ApiHostUri host, string group, OpIdentity opid)
-            => new OpUri(ApiUriScheme.Asm, host, group, opid);
-
-        [MethodImpl(Inline)]
-        public static OpUri asm(OpIdentity opid, MethodInfo src)
-            => new OpUri(ApiUriScheme.Asm, ApiQuery.uri(src.DeclaringType), src.Name, opid);
-
-        [MethodImpl(Inline)]
-        OpUri(ApiUriScheme scheme, ApiHostUri host, string group, OpIdentity opid)
+        internal OpUri(ApiUriScheme scheme, ApiHostUri host, string group, OpIdentity opid)
         {
             Scheme = scheme;
             Host = host;
@@ -129,7 +104,7 @@ namespace Z0
             => UriText;
 
         public OpUri WithScheme(ApiUriScheme scheme)
-            => Define(scheme, Host, GroupName, OpId);
+            => new OpUri(scheme, Host, GroupName, OpId);
 
         [MethodImpl(Inline)]
         public int CompareTo(OpUri other)
@@ -154,10 +129,10 @@ namespace Z0
         public static OpUri Empty
             => new OpUri(ApiUriScheme.None, ApiHostUri.Empty, string.Empty, OpIdentity.Empty);
 
-        static string QueryText(ApiUriScheme scheme, PartId catalog, string host, string group)
-            => $"{scheme.ToString().ToLower()}{UriEndOfScheme}{catalog.Format()}{UriPathSep}{host}{UriQuery}{group}";
+        static string QueryText(ApiUriScheme scheme, PartId part, string host, string group)
+            => $"{scheme.ToString().ToLower()}{UriEndOfScheme}{part.Format()}{UriPathSep}{host}{UriQuery}{group}";
 
-        static string FullUriText(ApiUriScheme scheme, PartId catalog, string host, string group, OpIdentity opid)
-            => $"{scheme.ToString().ToLower()}{UriEndOfScheme}{catalog.Format()}{UriPathSep}{host}{UriQuery}{group}{UriFragment}{opid.Identifier}";
+        static string FullUriText(ApiUriScheme scheme, PartId part, string host, string group, OpIdentity opid)
+            => $"{scheme.ToString().ToLower()}{UriEndOfScheme}{part.Format()}{UriPathSep}{host}{UriQuery}{group}{UriFragment}{opid.Identifier}";
     }
 }

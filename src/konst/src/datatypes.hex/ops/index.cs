@@ -74,6 +74,10 @@ namespace Z0
             => index<Hex6>(src);
 
         [MethodImpl(Inline), Op]
+        public static HexIndex<Hex7> index(Hex7[] src)
+            => index<Hex7>(src);
+
+        [MethodImpl(Inline), Op]
         public static HexIndex<Hex8> index(Hex8[] src)
             => index<Hex8>(src);
     }

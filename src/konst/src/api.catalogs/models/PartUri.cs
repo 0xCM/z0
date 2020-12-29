@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    using api = ApiIdentify;
+    using api = ApiIdentity;
 
     /// <summary>
     /// Uri for .net clr assembly

@@ -26,6 +26,36 @@ namespace Z0
 
         internal const byte OpIndex = 3;
 
+        public static FS.FileName file(ApiHostUri host, FS.FileExt ext)
+            => FS.file(text.concat(host.Owner.Format(), Chars.Dot, host.Name), ext);
+
+        public static FS.FileName file(ApiHostUri host, FS.FileExt a, FS.FileExt b)
+            => FS.file(text.concat(host.Owner.Format(), Chars.Dot, host.Name, a), b);
+
+        [MethodImpl(Inline), Op]
+        public static OpUri uri(ApiUriScheme scheme, ApiHostUri host, string group, OpIdentity opid)
+            => new OpUri(scheme, host, group, opid);
+
+        [MethodImpl(Inline)]
+        public static int compare<T>(in T a, in T b)
+            where T : IIdentified
+                => text.denullify(a.Identifier).CompareTo(b.Identifier);
+
+        [MethodImpl(Inline)]
+        public static bool equals<T>(in T a, object b)
+            where T : IIdentified
+                => text.equals(a.Identifier, b is T x ? x.Identifier : EmptyString, NoCase);
+
+        [MethodImpl(Inline)]
+        public static bool equals<T>(in T a, in T b)
+            where T : IIdentified
+                => text.equals(a.Identifier, b.Identifier, NoCase);
+
+        [MethodImpl(Inline)]
+        public static int hash<T>(in T src)
+            where T : IIdentified
+                => text.denullify(src.Identifier).GetHashCode();
+
         /// <summary>
         /// Defines the name of an api member predicated on a tag, if present, or the metadata-defined name if not
         /// </summary>

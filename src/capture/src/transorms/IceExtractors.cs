@@ -8,7 +8,6 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using Iced.Intel;
 
     using Iced = Iced.Intel;
 
@@ -31,7 +30,7 @@ namespace Z0.Asm
         public static AsmSpecifier specifier(Iced.Instruction src)
         {
             var opcode = Iced.EncoderCodeExtensions.ToOpCode(src.Code);
-            return AsmSpecifier.create(opcode.ToInstructionString(), opcode.ToOpCodeString());
+            return AsmOpCodes.specifier(opcode.ToInstructionString(), opcode.ToOpCodeString());
         }
 
         [MethodImpl(Inline), Op]

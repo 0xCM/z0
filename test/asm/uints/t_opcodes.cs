@@ -11,7 +11,7 @@ namespace Z0.Asm
 
     public class t_opcodes : t_asmd<t_opcodes>
     {
-        void emit(ReadOnlySpan<AsmInstructionPattern> src)
+        void emit(ReadOnlySpan<AsmSig> src)
         {
             var dstPath = CasePath($"InstructionExpression");
             using var writer = dstPath.Writer();

@@ -32,7 +32,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static ReadOnlySpan<char> render<S>(Span<S> src, Span<char> dst)
-            where S : unmanaged
+            where S : unmanaged, ISymbol
         {
             var count = (uint)src.Length;
             for(var i=0u; i<count; i++)

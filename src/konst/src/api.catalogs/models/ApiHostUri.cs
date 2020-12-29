@@ -12,20 +12,11 @@ namespace Z0
 
     public readonly struct ApiHostUri : IApiUri<ApiHostUri>, INullary<ApiHostUri>
     {
-        public readonly PartId Owner;
+        public PartId Owner {get;}
 
-        public readonly string Name;
+        public string Name {get;}
 
         public string UriText {get;}
-
-        public FolderName HostFolder
-            => FolderName.Define(Name);
-
-        public FS.FileName FileName(FS.FileExt ext)
-            => FS.file(text.concat(Owner.Format(), Chars.Dot, Name), ext);
-
-        public FS.FileName FileName(FS.FileExt a, FS.FileExt b)
-            => FS.file(text.concat(Owner.Format(), Chars.Dot, Name, a), b);
 
         public bool IsEmpty
         {

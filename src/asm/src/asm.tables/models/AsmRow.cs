@@ -54,7 +54,7 @@ namespace Z0.Asm
 
 		public AsmOpCodePattern OpCode;
 
-        public AsmInstructionPattern Instruction;
+        public AsmSig Instruction;
 
         public asci64 SourceCode;
 
@@ -73,7 +73,7 @@ namespace Z0.Asm
             asci16 Mnemonic,
             AsmOpCodePattern OpCode,
             BinaryCode Encoded,
-            AsmInstructionPattern Instruction,
+            AsmSig Instruction,
             asci64 SourceCode,
             asci16 CpuId,
             OpCodeId Id)

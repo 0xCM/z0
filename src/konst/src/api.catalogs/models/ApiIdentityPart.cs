@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    using api = ApiIdentify;
+    using api = ApiIdentity;
 
     /// <summary>
     /// Defines an identity component
@@ -60,7 +60,6 @@ namespace Z0
 
         public override bool Equals(object obj)
             => api.equals(this, obj);
-
 
         [MethodImpl(Inline)]
         public static implicit operator ApiIdentityPart((byte index, ApiIdentityPartKind kind, string text) src)

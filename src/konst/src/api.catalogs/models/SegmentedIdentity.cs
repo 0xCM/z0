@@ -8,7 +8,7 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     public readonly struct SegmentedIdentity
     {
@@ -112,7 +112,7 @@ namespace Z0
             => Identifier.CompareTo(src.Identifier);
 
          public override int GetHashCode()
-            => (int)z.hash(Identifier);
+            => (int)Identifier.GetHashCode();
 
         public override bool Equals(object src)
             => src is SegmentedIdentity x && Equals(x);

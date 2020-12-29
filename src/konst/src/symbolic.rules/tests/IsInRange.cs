@@ -19,13 +19,9 @@ namespace Z0
             public IsInRange(SymbolicRange<char> range)
                 => Range = range;
 
-            [MethodImpl(Inline), Op]
-            public static bit check(char src, SymbolicRange<char> range)
-                => src >= range.Min && src <= range.Max;
-
             [MethodImpl(Inline)]
             public bit Check(char c)
-                => check(c, Range);
+                => contains(Range,c);
         }
     }
 }

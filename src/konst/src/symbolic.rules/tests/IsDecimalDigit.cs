@@ -6,9 +6,7 @@ namespace Z0
 {
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-
-    using DF = DecimalSymFacet;
+    using static Part;
 
     partial struct SymbolicTests
     {
@@ -18,12 +16,9 @@ namespace Z0
         public readonly struct IsDecimalDigit : ISymbolicTest<IsDecimalDigit,char>
         {
             [MethodImpl(Inline)]
-            public static bit check(char c)
-                => (DF)c >= DF.First && (DF)c <= DF.Last;
-
-            [MethodImpl(Inline)]
             public bit Check(char c)
-                => check(c);
+                => @decimal(c);
         }
+
     }
 }

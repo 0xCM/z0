@@ -8,19 +8,13 @@ namespace Z0
 
     using static Part;
 
-    using AC = AsciCharCode;
-
     partial struct SymbolicTests
     {
         public readonly struct IsTab : ISymbolicTest<IsTab,char>
         {
             [MethodImpl(Inline)]
-            public static bit check(char c)
-                => (ushort)AC.Tab == (ushort)c;
-
-            [MethodImpl(Inline)]
             public bit Check(char c)
-                => check(c);
+                => tab(c);
         }
     }
 }

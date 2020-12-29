@@ -16,7 +16,7 @@ namespace Z0.Asm
         public static AsmOpCodeGroup Create(int count)
             => new AsmOpCodeGroup((uint)count);
 
-        readonly Span<AsmInstructionPattern> instructions;
+        readonly Span<AsmSig> instructions;
 
         readonly Span<AsmOpCodeExpression> codes;
 
@@ -32,7 +32,7 @@ namespace Z0.Asm
         internal AsmOpCodeGroup(uint count)
         {
             MnemonicSeq = new uint[1];
-            instructions = new AsmInstructionPattern[count];
+            instructions = new AsmSig[count];
             codes = new AsmOpCodeExpression[count];
             mnemonics = new MnemonicExpression[count];
             cpuid = new CpuidExpression[count];
@@ -40,7 +40,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
-        public void Include(uint seq, in AsmInstructionPattern src)
+        public void Include(uint seq, in AsmSig src)
         {
             Instruction(seq) = src;
         }
@@ -65,7 +65,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
-        public void Include(in AsmOpCodePartitoner ocp, in AsmInstructionPattern src)
+        public void Include(in AsmOpCodePartitoner ocp, in AsmSig src)
         {
             Instruction((uint)ocp.Sequence) = src;
         }
@@ -129,7 +129,7 @@ namespace Z0.Asm
             get => codes.Length;
         }
 
-        public ReadOnlySpan<AsmInstructionPattern> Instructions
+        public ReadOnlySpan<AsmSig> Instructions
         {
             [MethodImpl(Inline)]
             get => instructions;
@@ -172,7 +172,7 @@ namespace Z0.Asm
             => ref seek(modes, seq);
 
         [MethodImpl(Inline), Op]
-        ref AsmInstructionPattern Instruction(uint seq)
+        ref AsmSig Instruction(uint seq)
             => ref seek(instructions, seq);
 
         // [MethodImpl(Inline), Op]

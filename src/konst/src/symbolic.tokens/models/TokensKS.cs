@@ -14,13 +14,13 @@ namespace Z0
         where S : unmanaged, ISymbol
         where I : unmanaged
     {
-        readonly TableSpan<Token<K,S>> Data;
+        readonly Index<Token<K,S>> Data;
 
         [MethodImpl(Inline)]
         public Tokens(Token<K,S>[] src)
             => Data = src;
 
-        public ref Token<K, S> this[I index]
+        public ref Token<K,S> this[I index]
         {
             get => ref Data[memory.@as<I,uint>(index)];
         }
@@ -49,7 +49,8 @@ namespace Z0
             get => ref Data.First;
         }
 
-        public Token<K, S>[] Storage => throw new NotImplementedException();
+        public Token<K,S>[] Storage
+            => Data.Storage;
 
         [MethodImpl(Inline)]
         public static implicit operator Tokens<I,K,S>(Token<K,S>[] src)

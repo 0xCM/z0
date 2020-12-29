@@ -14,7 +14,7 @@ namespace Z0
     /// <summary>
     /// Defines a symbol, characterized by its value, that defines an atomic element in some vocabulary/grammar
     /// </summary>
-    public readonly struct Symbol<S> : ISymbol<S>
+    public readonly struct Symbol<S> : ISymbol<S>, IEquatable<Symbol<S>>
         where S : unmanaged
     {
         /// <summary>
@@ -27,8 +27,21 @@ namespace Z0
             => Value = src;
 
         [MethodImpl(Inline)]
-        public char Render()
-            => api.render(this);
+        public bool Equals(Symbol<S> src)
+            => Value.Equals(src.Value);
+
+        [MethodImpl(Inline)]
+        public string Format()
+            => Value.ToString();
+
+        public override string ToString()
+            => Format();
+
+        public override bool Equals(object src)
+            => src is Symbol<S> x && Equals(x);
+
+        public override int GetHashCode()
+            => Value.GetHashCode();
 
         [MethodImpl(Inline)]
         public static explicit operator char(Symbol<S> src)

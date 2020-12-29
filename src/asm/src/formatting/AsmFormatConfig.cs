@@ -30,7 +30,7 @@ namespace Z0.Asm
 
         public HexFormatOptions HeaderEncodingFormat;
 
-        const string SectionSep = text.PageBreak + text.PageBreak;
+        const string SectionSep = "; " + text.PageBreak + text.PageBreak;
 
         const string FieldSep = RP.FieldSep;
 

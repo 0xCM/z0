@@ -15,6 +15,14 @@ namespace Z0
     {
         const NumericKind Closure = UnsignedInts;
 
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Bijection<T> bijection<T>(T[] src, T[] dst)
+            => new Bijection<T>(src,dst);
+
+        [MethodImpl(Inline)]
+        public static Bijection<S,T> bijection<S,T>(S[] src, T[] dst)
+            => new Bijection<S,T>(src,dst);
+
         [MethodImpl(Inline)]
         public static Implication<I,A,C> implies<I,A,C>(I index, A @if, C then)
             where I : unmanaged, IEquatable<I>
@@ -126,6 +134,6 @@ namespace Z0
 
         public static Replacements<T> replace<T>(T[] src, T[] dst)
             where T : IEquatable<T>
-                => replace(Relations.bijection<T>(src,dst));
+                => replace(Rules.bijection<T>(src,dst));
     }
 }

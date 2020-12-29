@@ -10,8 +10,7 @@ namespace Z0
     using static Part;
 
     /// <summary>
-    /// Defines a stewise-contiguous sequence of scalar values, available on-demand,
-    /// that satisfy upper/lower bound constraints
+    /// Defines a stewise-contiguous sequence of scalar values, available on-demand, that satisfy upper/lower bound constraints
     /// </summary>
     /// <typeparam name="T">The scalar type</typeparam>
     public readonly struct RangeSpec<T>

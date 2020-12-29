@@ -68,7 +68,7 @@ namespace Z0
             => UriText?.CompareTo(src.UriText) ?? int.MaxValue;
 
         public override int GetHashCode()
-            => (int)hash(UriText);
+            => (int)UriText.GetHashCode();
 
         public override bool Equals(object src)
             => src is AppServiceUri x && Equals(x);

@@ -166,6 +166,10 @@ namespace alg
         public static uint calc(bool x)
             => @byte(x);
 
+        /// <summary>
+        /// Computes a hash code for a string
+        /// </summary>
+        /// <param name="src">The source string</param>
         [MethodImpl(Inline), Op]
         public static uint calc(string src)
             => (uint)(src?.GetHashCode() ?? 0);

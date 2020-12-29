@@ -36,6 +36,10 @@ namespace Z0
             => new Hex6(src);
 
         [MethodImpl(Inline), Op]
+        public static Hex7 hex(Hex7Seq src)
+            => new Hex7(src);
+
+        [MethodImpl(Inline), Op]
         public static Hex8 hex(Hex8Seq src)
             => new Hex8(src);
 

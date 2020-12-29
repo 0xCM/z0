@@ -6,7 +6,7 @@ namespace Z0
 {
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     partial struct SymbolicTests
     {
@@ -15,13 +15,9 @@ namespace Z0
         /// </summary>
         public readonly struct IsHexDigit : ISymbolicTest<IsHexDigit,char>
         {
-            [MethodImpl(Inline), Op]
-            public static bit check(char src)
-                => IsLowerHexDigit.check(src) || IsUpperHexDigit.check(src);
-
             [MethodImpl(Inline)]
             public bit Check(char c)
-                => check(c);
+                => hex(c);
         }
     }
 }

@@ -14,15 +14,13 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static WfToken create(WfPartKind kind, Type src)
-            => new WfToken((((uint)src.MetadataToken & BitMasks.Literals.Lo24u) | ((uint)kind << 24) ) | hash(src.AssemblyQualifiedName));
+            => new WfToken((((uint)src.MetadataToken & BitMasks.Literals.Lo24u) | ((uint)kind << 24) ) | alg.hash.calc(src.AssemblyQualifiedName));
 
         [MethodImpl(Inline), Op]
         public static WfToken create(WfStepId step)
-            => new WfToken((((uint)step.HostKey & BitMasks.Literals.Lo24u) | (1u << 24) ) | hash(step.HostName));
+            => new WfToken((((uint)step.HostKey & BitMasks.Literals.Lo24u) | (1u << 24) ) | alg.hash.calc(step.HostName));
 
-        public readonly ulong Value;
-
-        public static WfToken Empty => default;
+        public ulong Value {get;}
 
         [MethodImpl(Inline)]
         public WfToken(ulong value)
@@ -88,5 +86,7 @@ namespace Z0
 
         public override string ToString()
             => Format();
+
+        public static WfToken Empty => default;
     }
 }

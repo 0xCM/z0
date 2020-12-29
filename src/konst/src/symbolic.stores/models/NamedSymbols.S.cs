@@ -7,16 +7,12 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
-    public readonly struct NamedSymbols<S> : ITableSpan<NamedSymbol<S>>
+    public readonly struct NamedSymbols<S> : IIndex<NamedSymbol<S>>
         where S : unmanaged
     {
-        readonly TableSpan<NamedSymbol<S>> Data;
-
-        [MethodImpl(Inline)]
-        public static implicit operator NamedSymbols<S>(NamedSymbol<S>[] src)
-            => new NamedSymbols<S>(src);
+        readonly Index<NamedSymbol<S>> Data;
 
         [MethodImpl(Inline)]
         public NamedSymbols(NamedSymbol<S>[] src)
@@ -63,5 +59,9 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Data.Storage;
         }
+
+        [MethodImpl(Inline)]
+        public static implicit operator NamedSymbols<S>(NamedSymbol<S>[] src)
+            => new NamedSymbols<S>(src);
     }
 }

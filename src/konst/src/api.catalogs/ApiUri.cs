@@ -75,7 +75,7 @@ namespace Z0
 
             var id = OpIdentityParser.parse(rest.TakeAfter(UriFragment));
             var group = rest.Between(UriQuery,UriFragment);
-            var uri = OpUri.Define(scheme, path.Value, group, id);
+            var uri = ApiIdentity.uri(scheme, path.Value, group, id);
             return parsed(src, uri);
         }
 

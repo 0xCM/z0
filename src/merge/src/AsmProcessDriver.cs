@@ -135,7 +135,7 @@ namespace Z0
                     OpCode: src.Specifier.OpCode,
                     Encoded: new BinaryCode(encoded.TrimEnd().ToArray()),
                     SourceCode: src.FormattedInstruction,
-                    Instruction: src.Specifier.Instruction,
+                    Instruction: src.Specifier.Sig,
                     CpuId: text.embrace(src.CpuidFeatures.Select(x => x.ToString()).Concat(",")),
                     Id: (OpCodeId)src.Code
                     );

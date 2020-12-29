@@ -6,49 +6,46 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
     using System.Text;
 
     using static Konst;
     using static z;
+    using static AsmDocParts;
 
     [ApiHost]
     public readonly struct AsmRender
     {
-        const char Space = Chars.Space;
+        [Op]
+        public static string format(in LineLabel src)
+            => src.Width switch{
+                DataWidth.W8 => ScalarCast.uint8(src.Offset).FormatAsmHex() + CharText.Space,
+                DataWidth.W16 => ScalarCast.uint16(src.Offset).FormatAsmHex() + CharText.Space,
+                DataWidth.W32 => ScalarCast.uint32(src.Offset).FormatAsmHex() + CharText.Space,
+                DataWidth.W64 => src.Offset.FormatAsmHex() + CharText.Space,
+                _ => EmptyString
+            };
 
-        const string PageBreak = text.PageBreak;
+        [Op]
+        public static byte lines(in BlockHeader src, Span<string> dst)
+        {
+            var i = z8;
+            memory.seek(dst, i++) = src.Separator;
+            memory.seek(dst, i++) = AsmRender.comment($"{src.Signature}, {src.Uri}");
+            memory.seek(dst, i++) = ByteSpans.property(src.CodeBlock, src.Uri.OpId);
+            memory.seek(dst, i++) = AsmRender.comment(text.concat(nameof(src.CodeBlock.BaseAddress), text.spaced(Chars.Eq), src.CodeBlock.BaseAddress));
+            memory.seek(dst, i++) = AsmRender.comment(text.concat(nameof(src.TermCode), text.spaced(Chars.Eq), src.TermCode.ToString()));
+            return i;
+        }
 
         /// <summary>
         /// Formats the function header
         /// </summary>
         /// <param name="src">The source function</param>
-        public static ReadOnlySpan<string> header(AsmRoutine src, in AsmFormatConfig config)
+        public static ReadOnlySpan<string> header(AsmRoutine src)
         {
-            var lines = new List<string>();
-            lines.Add(comment($"{src.OpSig}, {src.Uri}"));
-
-            if(config.EmitFunctionHeaderEncoding)
-                lines.Add(ByteSpans.property(src.Code.Code, src.Uri.OpId));
-            else
-                lines.Add(comment(src.Code.Uri.OpId));
-
-            if(config.EmitBaseAddress)
-                lines.Add(comment(text.concat("Base", text.spaced(Chars.Eq), src.Code.BaseAddress)));
-
-            if(config.EmitCaptureTermCode)
-            {
-                var cidesc = string.Empty;
-                if(config.EmitCaptureTermCode)
-                    cidesc += text.concat(nameof(src.TermCode), text.spaced(Chars.Eq), src.TermCode.ToString());
-
-                lines.Add(comment(cidesc));
-            }
-
-            if(config.EmitFunctionTimestamp)
-                lines.Add(comment(Time.now().ToLexicalString()));
-
-            return lines.ToArray();
+            var dst = span<string>(8);
+            var count = lines(AsmDocs.header(src), dst);
+            return slice(dst, 0, count);
         }
 
         /// <summary>
@@ -91,19 +88,7 @@ namespace Z0.Asm
 
         [MethodImpl(Inline), Op]
         public static string format(AsmSpecifier src, byte[] encoded, string sep)
-            => text.format("{0,-32}{1}{2,-32}{3}{4,-3}{5}{6}", src.Instruction, sep, src.OpCode, sep, encoded.Length, sep, encoded.FormatHexBytes(Space,true,false));
-
-        /// <summary>
-        /// Formats a line label
-        /// </summary>
-        /// <param name="src">The relative line location</param>
-        [MethodImpl(Inline), Op]
-        public static string label(ushort src)
-            => text.concat(src.FormatSmallHex(), HexFormatSpecs.PostSpec, Space);
-
-        [MethodImpl(Inline), Op]
-        public static string label(ulong src)
-            => text.concat(src.FormatAsmHex(), Space);
+            => text.format("{0,-32}{1}{2,-32}{3}{4,-3}{5}{6}", src.Sig, sep, src.OpCode, sep, encoded.Length, sep, encoded.FormatHexBytes(Space,true,false));
 
         [Op]
         public static string format(in MemoryAddress @base, in AsmFxSummary src, in AsmFormatConfig config)
@@ -116,15 +101,12 @@ namespace Z0.Asm
         [Op]
         public static void format(in MemoryAddress @base, in AsmFxSummary src, in AsmFormatConfig config, StringBuilder dst)
         {
+            var label = AsmDocs.label(w16, src.Offset);
             var absolute = @base + src.Offset;
-            var ll = label((ushort)src.Offset);
-            dst.Append(text.concat(ll, src.Formatted.PadRight(config.InstructionPad, Space)));
+            dst.Append(text.concat(format(label), src.Formatted.PadRight(config.InstructionPad, Space)));
             dst.Append(comment(format(src.Spec, src.Encoded, config.FieldDelimiter)));
         }
 
-        [MethodImpl(Inline), Op]
-        public static string format(in MemoryAddress @base, in AsmFxSummary src)
-            => format(@base, src, AsmFormatConfig.Default);
 
         [Op]
         public static void format(in AsmRoutines src, in AsmFormatConfig config, ITextBuffer dst)
@@ -137,11 +119,7 @@ namespace Z0.Asm
                 {
                     var l = lines(skip(x,i), config);
                     dst.Append(l.Concat(Eol));
-
-                    if(config.EmitSectionDelimiter)
-                        dst.AppendLine(PageBreak);
-                    else
-                        dst.AppendLine();
+                    dst.AppendLine();
                 }
             }
         }
@@ -157,11 +135,8 @@ namespace Z0.Asm
         [Op]
         public static void format(in AsmRoutine src, in AsmFormatConfig config, StringBuilder dst)
         {
-            if(config.EmitSectionDelimiter)
-                dst.AppendLine(config.SectionDelimiter);
-
             if(config.EmitFunctionHeader)
-                foreach(var line in header(src, config))
+                foreach(var line in header(src))
                     dst.AppendLine(line);
 
             dst.AppendLine(lines(src, config).Concat(Eol));
@@ -170,11 +145,11 @@ namespace Z0.Asm
         [Op]
         public static void format(in AsmRoutine src, in AsmFormatConfig config, ITextBuffer dst)
         {
-            if(config.EmitSectionDelimiter)
-                dst.AppendLine(config.SectionDelimiter);
+            // if(config.EmitSectionDelimiter)
+            //     dst.AppendLine(config.SectionDelimiter);
 
             if(config.EmitFunctionHeader)
-                foreach(var line in header(src, config))
+                foreach(var line in header(src))
                     dst.AppendLine(line);
 
             dst.AppendLine(lines(src, config).Concat(Eol));

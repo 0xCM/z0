@@ -45,7 +45,6 @@ namespace Z0
             get => @as<S,T>(Value);
         }
 
-
         [MethodImpl(Inline)]
         public static implicit operator KindedSymbol<K,S,T,N>((K kind, S value) src)
             => new KindedSymbol<K,S,T,N>(src.kind, src.value);

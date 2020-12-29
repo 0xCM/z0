@@ -14,24 +14,20 @@ namespace Z0.Asm
     /// </summary>
     public readonly struct AsmSpecifier : ITextual
     {
-        [MethodImpl(Inline)]
-        public static AsmSpecifier create(in AsmInstructionPattern fx, in AsmOpCodePattern opcode)
-            => new AsmSpecifier(fx, opcode);
-
-        public AsmInstructionPattern Instruction {get;}
+        public AsmSig Sig {get;}
 
         public AsmOpCodePattern OpCode {get;}
 
         [MethodImpl(Inline)]
-        public AsmSpecifier(in AsmInstructionPattern pattern, in AsmOpCodePattern opcode)
+        public AsmSpecifier(in AsmSig pattern, in AsmOpCodePattern opcode)
         {
-            Instruction = pattern;
+            Sig = pattern;
             OpCode = opcode;
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => TextFormatter.format(Instruction, OpCode);
+            => TextFormatter.format(Sig, OpCode);
 
         public override string ToString()
             => Format();

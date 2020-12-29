@@ -50,10 +50,6 @@ namespace Z0
             => typeof(T);
 
         [MethodImpl(Inline)]
-        public char Render()
-            => api.render(this);
-
-        [MethodImpl(Inline)]
         public static explicit operator char(Symbol<S,T> src)
             => api.render(src);
 

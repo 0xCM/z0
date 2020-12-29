@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Defines a rule r:seq[T] -> seq[T] that requires a specified sequence element, if found, is replaced with another

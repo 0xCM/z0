@@ -49,13 +49,13 @@ namespace Z0
         /// The <typeparamref name='T' /> cell bit-width
         /// </summary>
         ushort SegWidth
-            => (ushort)bitwidth<T>();
+            => (ushort)memory.bitwidth<T>();
 
         /// <summary>
         /// The <typeparamref name='T' /> cell value
         /// </summary>
         T Cell
-            => Unsafe.As<S,T>(ref edit(Value));
+            => Unsafe.As<S,T>(ref memory.edit(Value));
     }
 
     public interface ISymbol<S,T,N> : ISymbol<S,T>
@@ -74,5 +74,14 @@ namespace Z0
         /// </summary>
         ushort Capacity
             => (ushort)(SegWidth/SymWidth);
+    }
+
+    public interface ISymbol<H,S,T,N> : ISymbol<S,T,N>
+        where H : unmanaged, ISymbol<H,S,T,N>
+        where S : unmanaged
+        where T : unmanaged
+        where N : unmanaged, ITypeNat
+    {
+
     }
 }

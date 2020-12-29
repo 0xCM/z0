@@ -7,26 +7,14 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     public readonly struct SymbolStore<S,T,N>
         where S : unmanaged
         where T : unmanaged
         where N : unmanaged, ITypeNat
     {
-        readonly TableSpan<Symbol<S,T,N>> Data;
-
-        [MethodImpl(Inline)]
-        public static implicit operator ReadOnlySpan<S>(SymbolStore<S,T,N> src)
-            => src.Data.View.Map(x => x.Value);
-
-        [MethodImpl(Inline)]
-        public static implicit operator SymbolStore<S>(SymbolStore<S,T,N> src)
-            => new SymbolStore<S>(src.Data.Map(x => x.Simplified));
-
-        [MethodImpl(Inline)]
-        public static implicit operator SymbolStore<S,T,N>(Symbol<S,T,N>[] src)
-            => new SymbolStore<S,T,N>(src);
+        readonly Index<Symbol<S,T,N>> Data;
 
         [MethodImpl(Inline)]
         public SymbolStore(Symbol<S,T,N>[] src)
@@ -49,5 +37,17 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Data.Count;
         }
+
+        [MethodImpl(Inline)]
+        public static implicit operator ReadOnlySpan<S>(SymbolStore<S,T,N> src)
+            => src.Data.View.Map(x => x.Value);
+
+        [MethodImpl(Inline)]
+        public static implicit operator SymbolStore<S>(SymbolStore<S,T,N> src)
+            => new SymbolStore<S>(src.Data.Map(x => x.Simplified));
+
+        [MethodImpl(Inline)]
+        public static implicit operator SymbolStore<S,T,N>(Symbol<S,T,N>[] src)
+            => new SymbolStore<S,T,N>(src);
     }
 }

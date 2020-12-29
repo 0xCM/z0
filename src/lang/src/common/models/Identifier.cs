@@ -49,22 +49,22 @@ namespace Z0.Lang
             get => Content;
         }
 
+        public int Length
+        {
+            [MethodImpl(Inline)]
+            get => Content?.Length ?? 0;
+        }
+
         public uint Hash
         {
             [MethodImpl(Inline)]
-            get => alg.hash.calc(Data);
+            get =>  Length != 0 ? (uint)Data.GetHashCode() : 0;
         }
 
         public Count Count
         {
             [MethodImpl(Inline)]
-            get => Content.Length;
-        }
-
-        public int Length
-        {
-            [MethodImpl(Inline)]
-            get => Content.Length;
+            get => Length;
         }
 
         [MethodImpl(Inline), Ignore]

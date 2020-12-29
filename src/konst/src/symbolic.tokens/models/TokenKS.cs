@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     using api = Symbolic;
 
@@ -62,7 +62,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => z.format(Render());
+            => new string(Render());
 
         [MethodImpl(Inline)]
         public static implicit operator Token<K,S>(Paired<K,S[]> src)

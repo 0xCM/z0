@@ -34,7 +34,7 @@ namespace Z0
             => Symbolic.render<S>(Data.Storage);
 
         public string Format()
-            => z.format(Render());
+            => new string(Render());
 
         [MethodImpl(Inline)]
         public static implicit operator Symbols<S>(S[] src)

@@ -17,7 +17,7 @@ namespace Z0.Asm
 
         public AsmOpCodeExpression OpCode {get;}
 
-        public AsmInstructionPattern Instruction {get;}
+        public AsmSig Instruction {get;}
 
         public OperatingMode Mode {get;}
 

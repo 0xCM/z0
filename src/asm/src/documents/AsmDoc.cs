@@ -9,6 +9,7 @@ namespace Z0.Asm
 
     using static Konst;
     using static z;
+    using static AsmDocParts;
 
     public struct AsmDoc
     {

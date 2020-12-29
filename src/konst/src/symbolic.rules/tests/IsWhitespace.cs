@@ -12,12 +12,9 @@ namespace Z0
     {
         public readonly struct IsWhitespace : ISymbolicTest<IsWhitespace,char>
         {
-            public static bit check(char c)
-                => IsSpace.check(c) || IsTab.check(c) || IsNewLine.check(c);
-
             [MethodImpl(Inline)]
             public bit Check(char c)
-                => check(c);
+                => whitespace(c);
         }
     }
 }

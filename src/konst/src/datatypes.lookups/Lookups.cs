@@ -27,10 +27,6 @@ namespace Z0
             => new StringLookup(src);
 
         [Op]
-        public static StringIndex index(params string[] src)
-            => new StringIndex(src.Select(z.hash), src);
-
-        [Op]
         public static KeyedValues<uint,string> pairs(in StringIndex src)
             => pairs(src,sys.alloc<KeyedValue<uint,string>>(src.Count));
 

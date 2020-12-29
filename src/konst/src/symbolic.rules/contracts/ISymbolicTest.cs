@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-
     public interface ISymbolicTest<S>
         where S : unmanaged
     {
@@ -19,7 +17,6 @@ namespace Z0
         where H : struct, ISymbolicTest<H,S>
         where S : unmanaged
     {
-
         string IKeyed<string>.Key
             => typeof(H).AssemblyQualifiedName;
     }

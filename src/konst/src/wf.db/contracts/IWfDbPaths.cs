@@ -224,7 +224,7 @@ namespace Z0
             => CapturedAsmDir() + name;
 
         FS.FilePath CapturedAsmFile(ApiHostUri host)
-            => CapturedAsmFile(host.FileName(FileExtensions.Asm));
+            => CapturedAsmFile(ApiIdentity.file(host, FileExtensions.Asm));
 
         FS.FilePath CapturedAsmFile(PartId part, string api)
             => CapturedAsmDir() + ApiFileName(part, api, Asm);
@@ -242,7 +242,7 @@ namespace Z0
             => CapturedHexDir() + ApiFileName(part, api, Hex);
 
         FS.FilePath CapturedHexFile(ApiHostUri host)
-            => CapturedHexFile(host.FileName(FileExtensions.Hex));
+            => CapturedHexFile(ApiIdentity.file(host, FileExtensions.Hex));
 
         FS.FolderPath CapturedCilDir()
             => CaptureRoot() + FS.folder(DbNames.cil);
@@ -251,7 +251,7 @@ namespace Z0
             => CapturedCilDir() + name;
 
         FS.FilePath CapturedCilDataFile(ApiHostUri host)
-            => CapturedCilDataFile(host.FileName(FileExtensions.IlData));
+            => CapturedCilDataFile(ApiIdentity.file(host, FileExtensions.IlData));
 
         FS.Files CapturedCilDataFiles()
             => CapturedCilDir().Files(Csv);
@@ -260,7 +260,7 @@ namespace Z0
             => CapturedCilDataFiles().Where(f => f.IsOwner(part));
 
         FS.FilePath CapturedExtractFile(ApiHostUri host)
-            => CapturedExtractFile(host.FileName(FileExtensions.XCsv));
+            => CapturedExtractFile(ApiIdentity.file(host, FileExtensions.XCsv));
 
         FS.FilePath CapturedExtractFile(FS.FileName name)
             => CapturedExtractDir() + name;
@@ -272,7 +272,7 @@ namespace Z0
             => ParsedExtractDir() + name;
 
         FS.FilePath ParsedExtractFile(ApiHostUri host)
-            => ParsedExtractFile(host.FileName(FileExtensions.PCsv));
+            => ParsedExtractFile(ApiIdentity.file(host, FileExtensions.PCsv));
 
         FS.Files ParsedExtractFiles()
             => ParsedExtractDir().AllFiles;

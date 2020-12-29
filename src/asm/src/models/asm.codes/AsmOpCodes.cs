@@ -18,6 +18,11 @@ namespace Z0.Asm
     [ApiHost(ApiNames.AsmOpCodes, true)]
     public readonly struct AsmOpCodes
     {
+        [MethodImpl(Inline), Op]
+        public static AsmSpecifier specifier(in AsmSig fx, in AsmOpCodePattern opcode)
+            => new AsmSpecifier(fx, opcode);
+
+
         public static AsmOpCodeTokens tokens(ReadOnlySpan<FieldRef> src)
         {
             var dst = alloc<AsmOpCodeToken>(src.Length);
@@ -60,7 +65,6 @@ namespace Z0.Asm
         public static void emit(FS.FilePath dst)
             => emit(AsmOpCodes.dataset(), dst);
 
-
         [Op]
         public static void emit(in AsmOpCodeDataset src, FS.FilePath dst)
         {
@@ -76,12 +80,12 @@ namespace Z0.Asm
             }
         }
 
-       public static void emit(ReadOnlySpan<AsmInstructionPattern> src)
+       public static void emit(ReadOnlySpan<AsmSig> src)
         {
             emit(src, AsmOpCodes.CasePath($"InstructionExpression"));
         }
 
-        public static void emit(ReadOnlySpan<AsmInstructionPattern> src, FS.FilePath dstPath)
+        public static void emit(ReadOnlySpan<AsmSig> src, FS.FilePath dstPath)
         {
             using var writer = dstPath.Writer();
             writer.WriteLine("Instruction");
@@ -173,7 +177,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
-        static void process(in AsmInstructionPattern src, in AsmOpCodeGroup handler, uint seq)
+        static void process(in AsmSig src, in AsmOpCodeGroup handler, uint seq)
         {
             handler.Include(seq, src);
         }

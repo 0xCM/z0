@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Defines an <typeparamref name='S'/> symbol sequence
@@ -15,19 +15,7 @@ namespace Z0
     public readonly struct SymbolStore<S>
         where S : unmanaged
     {
-        readonly TableSpan<Symbol<S>> Data;
-
-        [MethodImpl(Inline)]
-        public static implicit operator SymbolStore<S>(Symbol<S>[] src)
-            => new SymbolStore<S>(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator ReadOnlySpan<S>(SymbolStore<S> src)
-            => src.Data.View.Map(x => x.Value);
-
-        [MethodImpl(Inline)]
-        public static implicit operator ReadOnlySpan<Symbol<S>>(SymbolStore<S> src)
-            => src.Data.View;
+        readonly Index<Symbol<S>> Data;
 
         [MethodImpl(Inline)]
         public SymbolStore(Symbol<S>[] src)
@@ -50,5 +38,17 @@ namespace Z0
             [MethodImpl(Inline)]
             get => ref Data[index];
         }
+
+        [MethodImpl(Inline)]
+        public static implicit operator SymbolStore<S>(Symbol<S>[] src)
+            => new SymbolStore<S>(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator ReadOnlySpan<S>(SymbolStore<S> src)
+            => src.Data.View.Map(x => x.Value);
+
+        [MethodImpl(Inline)]
+        public static implicit operator ReadOnlySpan<Symbol<S>>(SymbolStore<S> src)
+            => src.Data.View;
     }
 }

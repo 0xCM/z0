@@ -22,6 +22,15 @@ namespace Z0
             => cover<byte>((void*)@base, size);
 
         /// <summary>
+        /// Creates a span over a memory segment
+        /// </summary>
+        /// <param name="base">The segment base address</param>
+        /// <param name="size">The length of the segment in byte</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe Span<char> cover(string src)
+            => cover<char>(pchar2(src), (uint)src.Length);
+
+        /// <summary>
         /// Creates a <see cref='Span{T}'/> over a <typeparamref name='T'/> measured memory segment
         /// </summary>
         /// <param name="base">The segment base address</param>
@@ -54,6 +63,17 @@ namespace Z0
         /// <typeparam name="T">The span cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static unsafe Span<T> cover<T>(T* pSrc, uint count)
+            where T : unmanaged
+                => CreateSpan(ref @ref<T>(pSrc), (int)count);
+
+        /// <summary>
+        /// Covers a pointer-identified T-counted buffer with a span
+        /// </summary>
+        /// <param name="pSrc">The memory source</param>
+        /// <param name="count">The number of cells to cover</param>
+        /// <typeparam name="T">The span cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static unsafe Span<T> cover<T>(T* pSrc, int count)
             where T : unmanaged
                 => CreateSpan(ref @ref<T>(pSrc), (int)count);
 

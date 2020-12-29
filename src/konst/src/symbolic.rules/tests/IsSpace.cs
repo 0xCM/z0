@@ -16,11 +16,17 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             public static bool check(char c)
-                => (ushort)AC.Space == (ushort)c;
+                => (ushort)AsciCharCode.Space == (ushort)c;
 
             [MethodImpl(Inline)]
             public bit Check(char c)
-                => check(c);
+                => space(c);
         }
+
+
+        [MethodImpl(Inline), Op]
+        public static bool space(char c)
+            => (ushort)AsciCharCode.Space == (ushort)c;
+
     }
 }

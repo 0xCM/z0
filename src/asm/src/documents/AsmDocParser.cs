@@ -7,29 +7,12 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static AsmDocParts;
     using static TextRules;
     using static z;
 
     public struct AsmDocParser
     {
-        public enum Tokens
-        {
-            None = 0,
-
-            Comment,
-
-            LineNumber,
-
-            Instruction,
-
-            Form,
-
-            OpCode,
-
-            Encoding
-        }
-
         AsmDocLine parse(TextLine src)
         {
             return new AsmDocLine(src);

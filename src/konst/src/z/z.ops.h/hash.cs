@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
 
     using static Part;
 
@@ -148,10 +147,6 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static uint hash(bool x)
             => alg.hash.calc(x);
-
-        [MethodImpl(Inline), Op]
-        public static unsafe uint hash(string src)
-            => alg.hash.calc(src);
 
         /// <summary>
         /// Calculates a combined hash for 2 unsigned 32-bit integers

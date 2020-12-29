@@ -16,12 +16,5 @@ namespace Z0
 
     }
 
-    public interface ISymbolic<H,S,T,N> : ISymbol<S,T,N>
-        where H : unmanaged, ISymbolic<H,S,T,N>
-        where S : unmanaged
-        where T : unmanaged
-        where N : unmanaged, ITypeNat
-    {
 
-    }
 }
