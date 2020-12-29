@@ -7,46 +7,33 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
-    public readonly struct SemanticIndex<K,P,T> : ISemanticLookup<SemanticIndex<K,P,T>,K,P,T>
+    public readonly struct SemanticLookup<K,T> : ISemanticIndex<SemanticLookup<K,T>,K,T>
         where K : unmanaged, Enum
-        where P : unmanaged
     {
-        /// <summary>
-        /// The key's system type
-        /// </summary>
-        readonly Type keyType;
+        readonly Type Key;
 
-        /// <summary>
-        /// The key's primal type
-        /// </summary>
-        readonly EnumLiteralKind keyKind;
-
-        /// <summary>
-        /// The indexed data
-        /// </summary>
-        readonly T[] Data;
+        readonly T[] Storage;
 
         readonly EnumLiteralNames<K> nameIndex;
 
         readonly K[] keys;
 
-        readonly EnumLiteralDetails<K,P> literals;
-
-        readonly EnumLiteralDetail<K,P>[] keyIndex;
+        readonly EnumLiteralDetail<K>[] keyIndex;
 
         readonly string[] keyNames;
 
+        readonly EnumLiteralKind keyKind;
+
         [MethodImpl(Inline)]
-        public SemanticIndex(T[] data)
+        public SemanticLookup(T[] data)
         {
-            Data = data;
-            keyType = typeof(K);
+            Storage = data;
+            Key = typeof(K);
             nameIndex = Enums.NameIndex<K>();
             keys = Enums.literals<K>();
-            literals = Enums.values<K,P>();
-            keyIndex = literals.Storage;
+            keyIndex = Enums.index<K>().Content;
             keyNames = Enums.names<K>();
             keyKind = Enums.kind<K>();
         }
@@ -54,31 +41,31 @@ namespace Z0
         public ReadOnlySpan<T> View
         {
             [MethodImpl(Inline)]
-            get => Data;
+            get => Storage;
         }
 
         public Span<T> Edit
         {
             [MethodImpl(Inline)]
-            get => Data;
+            get => Storage;
         }
 
         public ref T this[K index]
         {
             [MethodImpl(Inline)]
-            get => ref Data[EnumValue.scalar<K,ushort>(index)];
+            get => ref Storage[EnumValue.scalar<K,ushort>(index)];
         }
 
         public Count EntryCount
         {
             [MethodImpl(Inline)]
-            get => Data.Length;
+            get => Storage.Length;
         }
 
         public Type KeyType
         {
             [MethodImpl(Inline)]
-            get => keyType;
+            get => Key;
         }
 
         public EnumLiteralNames<K> KeyNameIndex
@@ -93,7 +80,7 @@ namespace Z0
             get => keys;
         }
 
-        public ReadOnlySpan<EnumLiteralDetail<K,P>> KeyIndex
+        public ReadOnlySpan<EnumLiteralDetail<K>> KeyIndex
         {
             [MethodImpl(Inline)]
             get => keyIndex;

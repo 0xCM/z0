@@ -166,14 +166,14 @@ namespace Z0.Asm
         {
             var unary = from g in groups
                         let members = g.Members.Where(m => m.Method.IsVectorizedUnaryImm(ScalarRefinementKind.Unrefined))
-                        select (g,members);
+                        select (g,members.Array());
 
             foreach(var (g,members) in unary)
-                EmitUnrefinedUnary(exchange, g.GroupId, members.Storage, imm8, dst);
+                EmitUnrefinedUnary(exchange, g.GroupId, members, imm8, dst);
 
             var binary = from g in groups
                         let members = g.Members.Where(m => m.Method.IsVectorizedBinaryImm(ScalarRefinementKind.Unrefined))
-                        select (g,members);
+                        select (g,members.Array());
 
             foreach(var (g,members) in binary)
                 EmitUnrefinedBinary(exchange, g.GroupId, members, imm8, dst);

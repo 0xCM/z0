@@ -8,8 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static System.Runtime.Intrinsics.X86.Pclmulqdq;
-    using static Konst;
-    using static z;
+    using static Part;
 
     partial struct z
     {

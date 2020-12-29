@@ -65,11 +65,11 @@ namespace Z0
             => Cmd.id(spec);
 
         [MethodImpl(Inline)]
-        public static implicit operator CmdName(CmdId src)
+        public static implicit operator Name(CmdId src)
             => Cmd.name(src.Data);
 
         [MethodImpl(Inline)]
-        public static implicit operator CmdId(CmdName src)
+        public static implicit operator CmdId(Name src)
             => new CmdId(src.Content);
 
         public static CmdId Empty => default;

@@ -15,13 +15,9 @@ namespace Z0
     }
 
     [Free]
-    public interface ISpanBuffer<T> : ISpanBuffer, IIndexedBuffer<T>
+    public interface ISpanBuffer<T> : ISpanBuffer, IIndex<T>
     {
-        Span<T> Edit
-            => Storage;
 
-        ReadOnlySpan<T> View
-            => Storage;
     }
 
     [Free]

@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     public interface IInterval
     {
@@ -34,18 +34,18 @@ namespace Z0
         /// <summary>
         ///  Specifies whether the interval is closed
         /// </summary>
-        bool Closed 
-        { 
-            [MethodImpl(Inline)] 
+        bool Closed
+        {
+            [MethodImpl(Inline)]
             get => Kind == IntervalKind.Closed;
         }
 
         /// <summary>
         ///  Specifies whether the interval is open
         /// </summary>
-        bool Open 
+        bool Open
         {
-            [MethodImpl(Inline)] 
+            [MethodImpl(Inline)]
             get => Kind == IntervalKind.Open;
         }
 

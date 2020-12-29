@@ -17,7 +17,6 @@ namespace Z0.Lang
         public Literals(Literal<C,T>[] src)
             => Data = src;
 
-
         public ReadOnlySpan<Literal<C,T>> View
         {
             [MethodImpl(Inline)]

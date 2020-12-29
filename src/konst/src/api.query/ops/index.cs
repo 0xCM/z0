@@ -39,7 +39,7 @@ namespace Z0
                 if(deduplicate)
                     HashTable = items.Where(i => !duplicates.Contains(i.Item1.Identifier)).ToDictionary();
                 else
-                    @throw(DuplicateKeyException(duplicates));
+                    corefunc.@throw(DuplicateKeyException(duplicates));
             }
             else
                 HashTable = src.ToDictionary();

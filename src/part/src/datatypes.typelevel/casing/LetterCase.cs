@@ -9,16 +9,6 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct Letter
-    {
-
-    }
-
-    public readonly struct Number
-    {
-
-    }
-
     public readonly struct LetterCase
     {
         public bool IsUpper {get;}

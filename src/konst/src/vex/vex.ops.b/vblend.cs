@@ -17,7 +17,7 @@ namespace Z0
     partial struct z
     {
         /// <summary>
-        /// __m128i _mm_blend_epi16 (__m128i a, __m128i b, const int imm8)PBLENDW xmm, xmm/m128, imm8
+        /// __m128i _mm_blend_epi16 (__m128i a, __m128i b, const int imm8) PBLENDW xmm, xmm/m128, imm8
         /// Combines components from left/right vectors per the blend spec
         /// </summary>
         /// <param name="x">The left vector</param>
@@ -81,7 +81,6 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector256<uint> vblend(Vector256<uint> x, Vector256<uint> y, [Imm] Blend8x32 spec)
             => Blend(x, y, (byte)spec);
-
 
         /// <summary>
         /// __m128d _mm_blend_pd (__m128d a, __m128d b, const int imm8) BLENDPD xmm, xmm/m128, imm8

@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static AsmTokenIdentifier;
 
     partial class AsmTokenIndex
@@ -20,8 +20,8 @@ namespace Z0
             public static IdentifierIndex create()
                 => new IdentifierIndex(TokenCount);
 
-            public SemanticIndex<AsmTokenKind,string> semantic()
-                => SemanticIndex.create(Storage, AsmTokenKind.None);
+            public SemanticLookup<AsmTokenKind,string> semantic()
+                => Lookups.semantic(Storage, AsmTokenKind.None);
 
             [MethodImpl(Inline)]
             public IdentifierIndex(uint count)
@@ -38,7 +38,6 @@ namespace Z0
                     mV, m32bcst, m64bcst, zmmノm512ノm32bcst, zmmノm512ノm64bcst,
                     ᐸZMM0ᐳ,
                 };
-
             }
 
             public ReadOnlySpan<string> View
@@ -59,6 +58,6 @@ namespace Z0
             }
         }
 
-        public readonly SemanticIndex<AsmTokenKind,string> Identifier;
+        public readonly SemanticLookup<AsmTokenKind,string> Identifier;
     }
 }

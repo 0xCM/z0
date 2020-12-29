@@ -14,7 +14,7 @@ namespace Z0
 
         CmdId CmdId {get;}
 
-        CmdName CmdName
+        Name CmdName
             => CmdId;
 
         CmdArgs Args {get;}

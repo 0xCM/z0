@@ -5,37 +5,36 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;    
     using System.Linq;
     using System.Runtime.CompilerServices;
-    
-    using static Konst;
+
+    using static Part;
 
     /// <summary>
     /// Encodes a finite, ordered sequence of symbols over some alphabet A
     /// In the literature, a 'word' in this context is often referred to as a
     /// 'string' - the usage of which is avoided here, for obvious reasons.
     /// </summary>
-    public readonly struct LegacyWord<A> : ILegacyWord<LegacyWord<A>,A>
-        where A : struct, ILegacyAlphabet<A>
-    {            
+    public readonly struct Word<S>
+        where S : unmanaged, IEquatable<S>
+    {
         /// <summary>
         /// Represents the empty word, with an invariant length of 0
         /// </summary>
         /// <typeparam name="A">The alphabet type</typeparam>
-        public static LegacyWord<A> Empty => new LegacyWord<A>(LegacySymbol<A>.Empty);
+        public static Word<S> Empty => new Word<S>(Symbol<S>.Empty);
 
         /// <summary>
         /// The symbols that comprise the word
         /// </summary>
-        public readonly LegacySymbol<A>[] Symbols;
+        public readonly Symbol<S>[] Symbols;
 
         /// <summary>
         /// Determines whether two words are equivalent
         /// </summary>
         /// <param name="lhs">The first word</param>
         /// <param name="rhs">The second word</param>
-        public static bool operator == (LegacyWord<A> lhs, LegacyWord<A> rhs)
+        public static bool operator == (Word<S> lhs, Word<S> rhs)
             => lhs.Symbols == rhs.Symbols;
 
         /// <summary>
@@ -43,14 +42,14 @@ namespace Z0
         /// </summary>
         /// <param name="lhs">The first word</param>
         /// <param name="rhs">The second word</param>
-        public static bool operator != (LegacyWord<A> lhs, LegacyWord<A> rhs)
+        public static bool operator != (Word<S> lhs, Word<S> rhs)
             => lhs != rhs;
 
         /// <summary>
         /// Converts the word to a string via a canonical format
         /// </summary>
         /// <param name="src">The source word</param>
-        public static implicit operator string(LegacyWord<A> src)
+        public static implicit operator string(Word<S> src)
             => src.Format();
 
         /// <summary>
@@ -58,28 +57,28 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source symbols</param>
         /// <typeparam name="A">The alphabet</typeparam>
-        public static implicit operator LegacyWord<A>(LegacySymbol<A>[] src)
-            => new LegacyWord<A>(src);
+        public static implicit operator Word<S>(Symbol<S>[] src)
+            => new Word<S>(src);
 
         /// <summary>
         /// Converts a word to its equivalent symbolic representation
         /// </summary>
         /// <param name="src">The source word</param>
-        public static implicit operator LegacySymbol<A>[](LegacyWord<A> src)
+        public static implicit operator Symbol<S>[](Word<S> src)
             => src.Symbols;
-    
+
         /// <summary>
         /// Concatenates a word w1 with a word w2 to form a word w' = w1w2
         /// </summary>
         /// <param name="w1">The first word</param>
         /// <param name="w2">The second word</param>
-        public static LegacyWord<A> operator +(LegacyWord<A> w1, LegacyWord<A> w2)
-            => new LegacyWord<A>(w1,w2);
+        public static Word<S> operator +(Word<S> w1, Word<S> w2)
+            => new Word<S>(w1,w2);
 
         /// <summary>
         /// The empty word containing no symbols
         /// </summary>
-        public LegacyWord<A> Zero 
+        public Word<S> Zero
             => Empty;
 
         /// <summary>
@@ -89,11 +88,11 @@ namespace Z0
             => Symbols.Length;
 
         [MethodImpl(Inline)]
-        public LegacyWord(params LegacyWord<A>[] Words)
+        public Word(params Word<S>[] Words)
         {
-            
+
             var len = Words.Sum(s => s.Length);
-            this.Symbols = new LegacySymbol<A>[len];
+            this.Symbols = new Symbol<S>[len];
             var symidx = 0;
             for(var i=0; i< Words.Length; i++)
             {
@@ -104,15 +103,15 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public LegacyWord(params LegacySymbol<A>[] Symbols)
-        {            
-            if(Symbols.Length == 1 && Symbols[0] == LegacySymbol<A>.Empty)
-                this.Symbols = new LegacySymbol<A>[]{};
+        public Word(params Symbol<S>[] Symbols)
+        {
+            if(Symbols.Length == 1 && Symbols[0].Value.Equals(Symbol<S>.Empty))
+                this.Symbols = new Symbol<S>[]{};
             else
                 this.Symbols = Symbols;
         }
 
-        public LegacySymbol<A> this[int index]
+        public Symbol<S> this[int index]
         {
             [MethodImpl(Inline)]
             get => Symbols[index];
@@ -131,31 +130,31 @@ namespace Z0
             => string.Join(string.Empty, Symbols);
 
         [MethodImpl(Inline)]
-        public bool Equals(LegacyWord<A> rhs)
+        public bool Equals(Word<S> rhs)
         {
             if(Length != rhs.Length)
                 return false;
 
-            for(var i=0; i< rhs.Symbols.Length; i++)   
+            for(var i=0; i< rhs.Symbols.Length; i++)
                 if(!Symbols[i].Equals(rhs.Symbols[i]))
                     return false;
             return true;
         }
 
-        public override int GetHashCode() 
+        public override int GetHashCode()
             => Format().GetHashCode();
 
-        public override string ToString() 
+        public override string ToString()
             => Format();
 
         public override bool Equals(Object rhs)
-            => rhs is LegacyWord<A> ? Equals((LegacyWord<A>)rhs) : false;
+            => rhs is Word<S> ? Equals((Word<S>)rhs) : false;
 
         /// <summary>
         /// Concatenates this word w1 with another word w2 to form a new word w1w2
         /// </summary>
         /// <param name="w2">The word to concatenate with the current word</param>
-        public LegacyWord<A> Concat(LegacyWord<A> w2)
-            => new LegacyWord<A>(this,w2);
+        public Word<S> Concat(Word<S> w2)
+            => new Word<S>(this,w2);
     }
 }

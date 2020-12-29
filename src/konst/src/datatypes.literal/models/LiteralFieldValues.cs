@@ -36,7 +36,7 @@ namespace Z0
             get => FieldSpecs.Length;
         }
 
-        public ReadOnlySpan<FieldInfo> Specs
+        public ReadOnlySpan<FieldInfo> Fields
         {
             [MethodImpl(Inline)]
             get => FieldSpecs;

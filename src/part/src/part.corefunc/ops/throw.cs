@@ -6,10 +6,11 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
 
-    using static Konst;
+    using static Part;
 
-    partial struct z
+    partial struct corefunc
     {
         [Op]
         public static void @throw(Exception e)

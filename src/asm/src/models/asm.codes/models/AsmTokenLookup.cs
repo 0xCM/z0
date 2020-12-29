@@ -10,7 +10,7 @@ namespace Z0.Asm
 
     using static Konst;
 
-    using Index = SemanticIndex<AsmTokenKind,string>;
+    using Index = SemanticLookup<AsmTokenKind,string>;
 
     public readonly struct AsmTokenLookup
     {

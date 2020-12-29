@@ -11,26 +11,26 @@ namespace Z0
 
     partial struct Cmd
     {
-        public static CmdName name<T>()
+        public static Name name<T>()
             => name(typeof(T));
 
         [MethodImpl(Inline), Op]
-        public static CmdName name(string src)
-            => new CmdName(src);
+        public static Name name(string src)
+            => new Name(src);
         [Op]
-        public static CmdName name(Type spec)
+        public static Name name(Type spec)
         {
             var tag = spec.Tag<CmdAttribute>();
             if(tag)
             {
                 var name = tag.Value.Name;
                 if(text.empty(name))
-                    return new CmdName(spec.Name);
+                    return spec.Name;
                 else
-                    return new CmdName(name);
+                    return name;
             }
             else
-                return new CmdName(spec.Name);
+                return spec.Name;
         }
     }
 }

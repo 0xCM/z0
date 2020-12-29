@@ -24,6 +24,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UInt64k)]
         public static RowFormatter<T> row<T>(ReadOnlySpan<byte> widths, T t = default, char delimiter = FieldDelimiter)
             where T : struct
-                => new RowFormatter<T>(Table.index<T>(widths), text.build(), FieldDelimiter);
+                => new RowFormatter<T>(Table.fields<T>(widths), text.build(), FieldDelimiter);
     }
 }

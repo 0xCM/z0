@@ -7,16 +7,14 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static memory;
 
     using B = BinaryDigit;
     using D = DecimalDigit;
     using X = HexDigit;
 
-    using BS = BinarySym;
-    using HSL = HexSymLo;
-    using HSU = HexSymUp;
+    //using BS = BinarySym;
 
     /// <summary>
     /// Defines operations over character digits
@@ -214,7 +212,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static void digits(ReadOnlySpan<HSL> src, Span<X> dst)
+        public static void digits(ReadOnlySpan<HexSymLo> src, Span<X> dst)
         {
             var len = src.Length;
             for(var i=0u; i<len; i++)
@@ -222,7 +220,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static void digits(ReadOnlySpan<HSU> src, Span<X> dst)
+        public static void digits(ReadOnlySpan<HexSymUp> src, Span<X> dst)
         {
             var len = src.Length;
             for(var i=0u; i<len; i++)
@@ -238,34 +236,34 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static void digits(byte src, Span<B> dst)
+        public static void digits(byte src, Span<BinaryDigit> dst)
         {
-            seek(dst,0) = (B)((0b00000001 & src) >> 0);
-            seek(dst,1) = (B)((0b00000010 & src) >> 1);
-            seek(dst,2) = (B)((0b00000100 & src) >> 2);
-            seek(dst,3) = (B)((0b00001000 & src) >> 3);
-            seek(dst,4) = (B)((0b00010000 & src) >> 4);
-            seek(dst,5) = (B)((0b00100000 & src) >> 5);
-            seek(dst,6) = (B)((0b01000000 & src) >> 6);
-            seek(dst,7) = (B)((0b10000000 & src) >> 7);
+            seek(dst,0) = (BinaryDigit)((0b00000001 & src) >> 0);
+            seek(dst,1) = (BinaryDigit)((0b00000010 & src) >> 1);
+            seek(dst,2) = (BinaryDigit)((0b00000100 & src) >> 2);
+            seek(dst,3) = (BinaryDigit)((0b00001000 & src) >> 3);
+            seek(dst,4) = (BinaryDigit)((0b00010000 & src) >> 4);
+            seek(dst,5) = (BinaryDigit)((0b00100000 & src) >> 5);
+            seek(dst,6) = (BinaryDigit)((0b01000000 & src) >> 6);
+            seek(dst,7) = (BinaryDigit)((0b10000000 & src) >> 7);
         }
 
         [MethodImpl(Inline), Op]
-        public static void digits(ushort src, Span<B> dst)
+        public static void digits(ushort src, Span<BinaryDigit> dst)
         {
             digits((byte)src, dst);
             digits((byte)(src >> 8), dst.Slice(8));
         }
 
         [MethodImpl(Inline), Op]
-        public static void digits(uint src, Span<B> dst)
+        public static void digits(uint src, Span<BinaryDigit> dst)
         {
             digits((ushort)src,dst);
             digits((ushort)(src >> 16),dst.Slice(16));
         }
 
         [MethodImpl(Inline), Op]
-        public static void digits(ulong src, Span<B> dst)
+        public static void digits(ulong src, Span<BinaryDigit> dst)
         {
             digits((uint)src,dst);
             digits((uint)(src >> 32), dst.Slice(32));
@@ -309,7 +307,7 @@ namespace Z0
             => digits(src,NatSpan.alloc<N4,byte>());
 
         [MethodImpl(Inline), Op]
-        public static void digits(ReadOnlySpan<BS> src, Span<B> dst)
+        public static void digits(ReadOnlySpan<BinarySym> src, Span<B> dst)
         {
             var len = src.Length;
             for(var i=0u; i<len; i++)

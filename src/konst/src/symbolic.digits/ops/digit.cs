@@ -15,12 +15,10 @@ namespace Z0
     using D = DecimalDigit;
     using X = HexDigit;
 
-    using BS = BinarySym;
     using OC = OctalSym;
     using DS = DecimalSym;
 
     using DF = DecimalSymFacet;
-    using XF = HexSymFacet;
     using BF = BinarySymFacet;
 
     partial struct Digital
@@ -48,10 +46,10 @@ namespace Z0
         /// <param name="src">The symbol to test</param>
         [MethodImpl(Inline), Op]
         static bit test(char c)
-            => (DF)c >= DF.First && (DF)c <= DF.Last;
+            => (DecimalSymFacet)c >= DecimalSymFacet.First && (DecimalSymFacet)c <= DF.Last;
 
         [MethodImpl(Inline), Op]
-        public static B digit(BS c)
+        public static B digit(BinarySym c)
             => (B)((BF)c - BF.First);
 
         [MethodImpl(Inline), Op]
@@ -77,8 +75,8 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static X digit(Base16 @base, LowerCased @case, char src)
             => test(src)
-            ? (X)((XF)src - XF.NumberOffset)
-            : (X)((XF)src - XF.LetterOffsetLo);
+            ? (X)((HexSymFacet)src - HexSymFacet.NumberOffset)
+            : (X)((HexSymFacet)src - HexSymFacet.LetterOffsetLo);
 
         /// <summary>
         /// Computes the numeric value in in the range [0,..F] identified by a lowercase hex symbol
@@ -87,8 +85,8 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static X digit(Base16 @base, UpperCased @case, char src)
             => test(src)
-            ? (X)((XF)src - XF.NumberOffset)
-            : (X)((XF)src - XF.LetterOffsetUp);
+            ? (X)((HexSymFacet)src - HexSymFacet.NumberOffset)
+            : (X)((HexSymFacet)src - HexSymFacet.LetterOffsetUp);
 
         /// <summary>
         /// Computes the numeric value in in the range [0,..F] identified by a lowercase hex symbol
@@ -97,8 +95,8 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static HexDigit digit(HexSymLo src)
             => number(src)
-            ? (X)((XF)src - XF.NumberOffset)
-            : (X)((XF)src - XF.LetterOffsetLo);
+            ? (X)((HexSymFacet)src - HexSymFacet.NumberOffset)
+            : (X)((HexSymFacet)src - HexSymFacet.LetterOffsetLo);
 
         /// <summary>
         /// Computes the numeric value in in the range [0,..F] identified by an uppercase hex symbol
@@ -107,12 +105,12 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static HexDigit digit(HexSymUp src)
             => number(src)
-            ? (X)((XF)src - XF.NumberOffset)
-            : (X)((XF)src - XF.LetterOffsetUp);
+            ? (X)((HexSymFacet)src - HexSymFacet.NumberOffset)
+            : (X)((HexSymFacet)src - HexSymFacet.LetterOffsetUp);
 
         [MethodImpl(Inline), Op]
-        public static D digit(Base10 @base, char c)
-            => (D)((DF)c - DF.First);
+        public static DecimalDigit digit(Base10 @base, char c)
+            => (DecimalDigit)((DF)c - DF.First);
 
         /// <summary>
         /// Extracts an index-identified encoded digit
@@ -121,8 +119,8 @@ namespace Z0
         /// <param name="src">The digit source</param>
         /// <param name="index">An integer in the inclusive range [0, 1] that identifies the digit to extract</param>
         [MethodImpl(Inline), Op]
-        public static D digit(Base10 @base, ushort src, byte index)
-            => (D)(F & (src >> index*4));
+        public static DecimalDigit digit(Base10 @base, ushort src, byte index)
+            => (DecimalDigit)(F & (src >> index*4));
 
         /// <summary>
         /// Extracts an index-identified encoded digit
@@ -131,8 +129,8 @@ namespace Z0
         /// <param name="src">The digit source</param>
         /// <param name="index">An integer in the inclusive range [0, 3] that identifies the digit to extract</param>
         [MethodImpl(Inline), Op]
-        public static D digit(Base10 @base, uint src, byte index)
-            => (D)(F & (src >> index*4));
+        public static DecimalDigit digit(Base10 @base, uint src, byte index)
+            => (DecimalDigit)(F & (src >> index*4));
 
         /// <summary>
         /// Extracts an index-identified encoded digit
@@ -141,7 +139,7 @@ namespace Z0
         /// <param name="src">The digit source</param>
         /// <param name="index">An integer in the inclusive range [0, 7] that identifies the digit to extract</param>
         [MethodImpl(Inline), Op]
-        public static D digit(Base10 @base, ulong src, byte index)
-            => (D)(F & (src >> index*4));
+        public static DecimalDigit digit(Base10 @base, ulong src, byte index)
+            => (DecimalDigit)(F & (src >> index*4));
     }
 }

@@ -9,7 +9,6 @@ namespace Z0.Images
     using System.IO;
 
     using static Konst;
-    using static z;
     using static corefunc;
 
     public ref struct ImageCsvReader
@@ -17,7 +16,7 @@ namespace Z0.Images
         public static ImageCsvReader create(IWfShell wf, FS.FilePath src)
         {
             if(!src.Exists)
-                @throw(FS.missing(src));
+                corefunc.@throw(FS.missing(src));
 
             return new ImageCsvReader(wf, src);
         }
@@ -42,7 +41,7 @@ namespace Z0.Images
             Source = src;
             CurrentIndex = 0;
             if(!src.Exists)
-                @throw(new FileNotFoundException(src.ToUri().Format()));
+                corefunc.@throw(new FileNotFoundException(src.ToUri().Format()));
             Reader = src.Reader();
             FileSize = src.Size;
             Header = Reader.ReadLine();

@@ -3,12 +3,12 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
-    
-    using static Konst;
+
+    using static Part;
 
     public readonly struct AsmFxCollector
     {
@@ -28,7 +28,7 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public void Collect(IEnumerable<Instruction> src)
             => items.AddRange(src);
-        
+
         [MethodImpl(Inline)]
         public Instruction[] Collected()
             => items.ToArray();

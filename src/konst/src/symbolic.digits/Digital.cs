@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     /// <summary>
     /// Defines operations over character digits
@@ -16,18 +15,6 @@ namespace Z0
     [ApiHost(ApiNames.SymbolicDigits, true)]
     public readonly partial struct Digital
     {
-        /// <summary>
-        /// Defines the asci character codes for uppercase hex digits 1,2, ..., 9, A, ..., F
-        /// </summary>
-        public static ReadOnlySpan<byte> UpperHexDigits
-            => new byte[]{48,49,50,51,52,53,54,55,56,57,65,66,67,68,69,70};
-
-        /// <summary>
-        /// Defines the asci character codes for uppercase hex digits 1,2, ..., 9, a, ..., f
-        /// </summary>
-        public static ReadOnlySpan<byte> LowerHexDigits
-            => new byte[]{48,49,50,51,52,53,54,55,56,57,97,98,99,100,101,102};
-
         /// <summary>
         /// Extracts the four lo digits
         /// </summary>

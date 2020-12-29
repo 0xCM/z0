@@ -10,20 +10,17 @@ namespace Z0
     using static Konst;
     using static z;
 
-    using HSU = HexSymUp;
-    using HSL = HexSymLo;
-    using H = HexSymData;
     using XF = HexSymFacet;
 
     partial struct Digital
     {
         [MethodImpl(Inline), Op]
-        public static HSL hex(LowerCased casing, byte index)
-            => skip(H.LowerSymbols, index);
+        public static HexSymLo hex(LowerCased casing, byte index)
+            => skip(HexSymData.LowerSymbols, index);
 
         [MethodImpl(Inline), Op]
-        public static HSU hex(UpperCased casing, byte index)
-            => skip(H.UpperSymbols, index);
+        public static HexSymUp hex(UpperCased casing, byte index)
+            => skip(HexSymData.UpperSymbols, index);
 
         [MethodImpl(Inline), Op]
         public static HexSym hex(LowerCased @case, HexDigit src)
@@ -46,7 +43,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The symbol to test</param>
         [MethodImpl(Inline), Op]
-        public static bool number(HSL src)
+        public static bool number(HexSymLo src)
             => (XF)src <= XF.LastNumber;
 
         /// <summary>
@@ -54,7 +51,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The symbol to test</param>
         [MethodImpl(Inline), Op]
-        public static bool number(HSU src)
+        public static bool number(HexSymUp src)
             => (XF)src <= XF.LastNumber;
 
         /// <summary>
@@ -62,7 +59,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The symbol to test</param>
         [MethodImpl(Inline), Op]
-        public static bool hex(HSL src)
+        public static bool hex(HexSymLo src)
             => (XF)src >= XF.FirstLetterLo;
 
         /// <summary>
@@ -70,7 +67,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The symbol to test</param>
         [MethodImpl(Inline), Op]
-        public static bool hex(HSU src)
+        public static bool hex(HexSymUp src)
             => (XF)src >= XF.FirstLetterUp;
 
         /// <summary>

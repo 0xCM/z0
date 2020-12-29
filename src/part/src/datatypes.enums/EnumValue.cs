@@ -10,6 +10,8 @@ namespace Z0
     using static Part;
     using static memory;
 
+    using NK = NumericKind;
+
     [ApiHost]
     public readonly struct EnumValue
     {
@@ -49,6 +51,7 @@ namespace Z0
             where E : unmanaged
             where T : unmanaged
                 => ref @as<E,T>(eVal);
+
 
         /// <summary>
         /// Envisions an E-enum value of primal i8-kind as a like-kinded scalar value
@@ -100,21 +103,41 @@ namespace Z0
             where E : unmanaged
                 => ref scalar<E,char>(eVal);
 
+        /// <summary>
+        /// Interprets an enum value as a signed 32-bit integer
+        /// </summary>
+        /// <param name="e">The enum value</param>
+        /// <typeparam name="E">The enum type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref int e32i<E>(in E eVal)
             where E : unmanaged
                 => ref scalar<E,int>(eVal);
 
+        /// <summary>
+        /// Interprets an enum value as an unsigned 32-bit integer
+        /// </summary>
+        /// <param name="e">The enum value</param>
+        /// <typeparam name="E">The enum type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref uint e32u<E>(in E eVal)
             where E : unmanaged
                 => ref scalar<E,uint>(eVal);
 
+        /// <summary>
+        /// Interprets an enum value as a signed 64-bit integer
+        /// </summary>
+        /// <param name="e">The enum value</param>
+        /// <typeparam name="E">The enum type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static long e64i<E>(E eVal)
             where E : unmanaged
                 => scalar<E,long>(eVal);
 
+        /// <summary>
+        /// Interprets an enum value as an unsigned 64-bit integer
+        /// </summary>
+        /// <param name="e">The enum value</param>
+        /// <typeparam name="E">The enum type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ulong e64u<E>(E eVal)
             where E : unmanaged

@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     using api = Literals;
@@ -18,7 +18,7 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static string @string(FieldInfo f)
-            => z.constant<string>(f);
+            => sys.constant<string>(f);
 
         [MethodImpl(Inline), Op]
         public static FieldInfo[] fields(Type src)
@@ -49,7 +49,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static LiteralFieldValues<F> fields<F>()
+        public static LiteralFieldValues<F> values<F>()
             where F : unmanaged
         {
             var specs = typeof(F).LiteralFields();

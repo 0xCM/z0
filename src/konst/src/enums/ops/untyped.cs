@@ -22,7 +22,7 @@ namespace Z0
         public static unsafe ulong untyped<E>(E src)
             where E : unmanaged, Enum
                 => typeof(E).GetEnumUnderlyingType().NumericKind() switch {
-                    NK.U8 => (ulong)e8u(src),
+                    NK.U8 => (ulong)EnumValue.e8u(src),
                     NK.I8 => (ulong)e8i(src),
                     NK.U16 => (ulong)e16u(src),
                     NK.I16 => (ulong)e16i(src),
@@ -32,5 +32,6 @@ namespace Z0
                     NK.U64 => e64u(src),
                     _ => 0ul,
                 };
+
     }
 }

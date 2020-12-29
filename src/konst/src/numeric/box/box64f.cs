@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-
     using NK = NumericKind;
 
     partial struct NumericBox

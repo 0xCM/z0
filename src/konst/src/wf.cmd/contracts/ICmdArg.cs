@@ -50,12 +50,4 @@ namespace Z0
         string ICmdArg.Value
             => Value?.ToString() ?? string.Empty;
     }
-
-    [Free]
-    public interface ICmdArg<K,T> : ICmdArg<T>
-        where K : unmanaged
-    {
-
-
-    }
 }

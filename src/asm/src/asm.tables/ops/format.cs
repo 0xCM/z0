@@ -31,5 +31,10 @@ namespace Z0.Asm
             dst.Delimit(F.OpCodeId, src.OpCodeId);
             return ref dst;
         }
+
+        [MethodImpl(Inline)]
+        public static string format(in AsmCallRow src)
+            => string.Format(AsmCallRow.RenderPattern, src.Source, src.Target, src.InstructionSize, src.TargetOffset, src.Instruction, src.Encoded);
+
     }
 }

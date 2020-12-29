@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     using api = Symbolic;
 
@@ -41,5 +41,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator Symbol<S>(S src)
             => new Symbol<S>(src);
+
+        public static Symbol<S> Empty
+            => default;
     }
 }

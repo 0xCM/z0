@@ -11,7 +11,7 @@ namespace Z0
 
     public struct TokenSpec<K,S>
         where K : unmanaged
-        where S : unmanaged, ISymbol<S>
+        where S : unmanaged, ISymbol
     {
         public readonly Sequential Index;
 

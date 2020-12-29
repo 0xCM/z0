@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     public enum MemoryScaleKind : byte
     {
@@ -26,6 +26,10 @@ namespace Z0
     public readonly struct MemoryScale : ITextual
     {
         public MemoryScaleKind Kind {get;}
+
+        [MethodImpl(Inline)]
+        public MemoryScale(MemoryScaleKind kind)
+            => Kind = kind;
 
         [MethodImpl(Inline)]
         public MemoryAddress Apply(MemoryAddress src)
@@ -86,12 +90,6 @@ namespace Z0
                 return new MemoryScale((MemoryScaleKind)value);
             else
                 return new MemoryScale(MemoryScaleKind.None);
-        }
-
-        [MethodImpl(Inline)]
-        internal MemoryScale(MemoryScaleKind kind)
-        {
-            Kind = kind;
         }
 
         public string Format()

@@ -8,7 +8,6 @@ namespace Z0
     using System.Diagnostics;
     using System.Linq;
 
-
     partial struct ImageMaps
     {
         [Op]

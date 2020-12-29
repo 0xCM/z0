@@ -6,9 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Reflection;
 
-    using static Konst;
+    using static Part;
 
     public readonly struct ApiMemberIdentifier : IIdentifier<ApiMemberIdentifier, StringRef>
     {
@@ -119,7 +118,7 @@ namespace Z0
                         if(char.IsLetterOrDigit(c))
                             dst[i] = c;
                         else
-                            z.@throw(new Exception($"Unexpected character {c} in api text"));
+                            corefunc.@throw(new Exception($"Unexpected character {c} in api text"));
                     break;
                 }
             }

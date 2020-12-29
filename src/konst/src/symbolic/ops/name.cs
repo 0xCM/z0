@@ -19,7 +19,7 @@ namespace Z0
         /// <typeparam name="S">The symbol type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static NamedSymbol<S> name<S>(S symbol, string name)
-            where S : unmanaged
+            where S : unmanaged, IEquatable<S>
                 => new NamedSymbol<S>(symbol, name);
     }
 }

@@ -9,7 +9,7 @@ namespace Z0
     using System.Text;
     using System.Reflection;
 
-    using static Konst;
+    using static Part;
 
     public struct TableFormatter<F> : ITableFormatter<F>
         where F : unmanaged
@@ -42,7 +42,7 @@ namespace Z0
         public string FormatHeader()
         {
             var dst = text.build();
-            var fields = Fields.Specs;
+            var fields = Fields.Fields;
             for(var i=0u; i<fields.Length; i++)
             {
                 if(i != 0)

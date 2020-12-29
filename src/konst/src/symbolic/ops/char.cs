@@ -14,18 +14,18 @@ namespace Z0
     {
         [MethodImpl(Inline), Closures(Closure)]
         public static char @char<S>(Symbol<S> src)
-            where S : unmanaged
+            where S : unmanaged, IEquatable<S>
                 => Unsafe.As<S,char>(ref edit(src.Value));
 
         [MethodImpl(Inline)]
         public static char @char<S,T>(Symbol<S,T> src)
-            where S : unmanaged
+            where S : unmanaged, IEquatable<S>
             where T : unmanaged
                 => Unsafe.As<S,char>(ref edit(src.Value));
 
         [MethodImpl(Inline)]
         public static char @char<S,T,N>(Symbol<S,T,N> src)
-            where S : unmanaged
+            where S : unmanaged, IEquatable<S>
             where T : unmanaged
             where N : unmanaged, ITypeNat
                 => Unsafe.As<S,char>(ref edit(src.Value));

@@ -75,7 +75,7 @@ namespace Z0
         static void format(ValueType src, StringBuilder dst)
         {
             var type = src.GetType();
-            var fields = Table.index(src.GetType()).View;
+            var fields = Table.fields(src.GetType()).View;
             var count = fields.Length;
             for(var i=0; i<count; i++)
             {
@@ -99,7 +99,7 @@ namespace Z0
                 return;
 
             var type = src.GetType();
-            var fields = Table.index(type).View;
+            var fields = Table.fields(type).View;
             var count = fields.Length;
             for(var i=0; i<count; i++)
             {

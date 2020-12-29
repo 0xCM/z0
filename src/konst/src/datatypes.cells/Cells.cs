@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     using static Part;
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;

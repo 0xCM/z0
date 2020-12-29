@@ -61,7 +61,7 @@ namespace Z0
             var count = records.Length;
             writer.WriteLine(AsmCallRow.header());
             for(var i=0; i<count; i++)
-                writer.WriteLine(AsmCallRow.format(skip(records,i)));
+                writer.WriteLine(AsmTables.format(skip(records,i)));
             Wf.EmittedTable<AsmCallRow>(count, dst);
         }
     }

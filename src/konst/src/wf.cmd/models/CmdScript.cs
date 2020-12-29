@@ -9,11 +9,11 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct CmdScript : ICmdScript
+    public readonly struct CmdScript : ITextual
     {
         public asci32 Id {get;}
 
-        readonly TableSpan<CmdScriptExpr> Data;
+        readonly Index<CmdScriptExpr> Data;
 
         [MethodImpl(Inline)]
         public CmdScript(CmdScriptExpr[] src)
@@ -42,11 +42,18 @@ namespace Z0
             get => Data.Length;
         }
 
-        public TableSpan<CmdScriptExpr> Content
+        public Span<CmdScriptExpr> Edit
         {
             [MethodImpl(Inline)]
             get => Data;
         }
+
+        public ReadOnlySpan<CmdScriptExpr> View
+        {
+            [MethodImpl(Inline)]
+            get => Data;
+        }
+
 
         [MethodImpl(Inline)]
         public static implicit operator CmdScript(CmdScriptExpr[] src)

@@ -21,7 +21,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The table type</typeparam>
     [Free]
-    public interface ITableSpan<T> : ITableSpan, ISpanBuffer<T>
+    public interface ITableSpan<T> : ISpanBuffer<T>
         where T : struct
     {
     }

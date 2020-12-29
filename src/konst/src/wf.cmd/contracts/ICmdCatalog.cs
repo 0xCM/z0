@@ -13,11 +13,4 @@ namespace Z0
 
         IWfDb Db => Wf.Db();
     }
-
-    [Free]
-    public interface ICmdCatalog<H> : ICmdCatalog
-        where H : ICmdCatalog<H>, new()
-    {
-
-    }
 }

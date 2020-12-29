@@ -28,9 +28,6 @@ namespace Z0.Asm
 
         public BinaryCode Encoded;
 
-        [MethodImpl(Inline)]
-        public static string format(in AsmCallRow src)
-            => string.Format(AsmCallRow.RenderPattern, src.Source, src.Target, src.InstructionSize, src.TargetOffset, src.Instruction, src.Encoded);
 
         [MethodImpl(Inline)]
         public static string header()

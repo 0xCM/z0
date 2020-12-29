@@ -13,7 +13,7 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Avx;
     using static System.Runtime.Intrinsics.X86.Avx2;
 
-    using static Konst;
+    using static Part;
 
     partial struct z
     {
@@ -43,7 +43,6 @@ namespace Z0
         [MethodImpl(Inline), CImpl]
         public static Vector128<short> vcimpl(Vector128<short> x, Vector128<short> y)
             => Or(vnot(x),y);
-
 
         /// <summary>
         /// Computes the converse implication, ~x | y for vectors x and y

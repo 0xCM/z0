@@ -20,7 +20,7 @@ namespace Z0
         [Op, Closures(UnsignedInts)]
         public static TableFormatter<F> formatter<F>(F f = default)
             where F : unmanaged
-                => new TableFormatter<F>(text.build(), FieldDelimiter, LiteralFields.fields<F>());
+                => new TableFormatter<F>(text.build(), FieldDelimiter, LiteralFields.values<F>());
 
         [Op, Closures(UnsignedInts)]
         public static TableFormatter<F> formatter<F>(in LiteralFieldValues<F> fields, char delimiter = FieldDelimiter)

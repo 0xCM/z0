@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     using api = Pcg;
 
@@ -65,7 +64,7 @@ namespace Z0
         void Init(ulong s0, ulong index)
         {
             if(index % 2 == 0)
-                @throw(new ArgumentException($"Then index value {index} is not odd"));
+                corefunc.@throw(new ArgumentException($"Then index value {index} is not odd"));
 
             Index = (index << 1) | 1u;
             Step();

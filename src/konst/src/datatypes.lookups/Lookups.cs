@@ -9,13 +9,18 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     [ApiHost(ApiNames.Lookups)]
     public partial struct Lookups
     {
         const NumericKind Closure = UnsignedInts;
+
+        [MethodImpl(Inline)]
+        public static SemanticLookup<K,T> semantic<K,T>(T[] data, K key = default)
+            where K : unmanaged, Enum
+                => new SemanticLookup<K,T>(data);
 
         [MethodImpl(Inline), Op]
         public static StringLookup lookup(ReadOnlySpan<StringRef> src)

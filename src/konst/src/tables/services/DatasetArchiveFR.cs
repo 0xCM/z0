@@ -18,6 +18,6 @@ namespace Z0
             => Save(src, api.renderspec<F>(), dst, Overwrite);
 
         public Option<FS.FilePath> Save(R[] data, TableRenderSpec<F> spec, FS.FilePath dst, FileWriteMode mode = Overwrite)
-            => TableArchives.deposit(data,spec,dst,mode);
+            => TableArchives.deposit(data, spec, dst, mode);
     }
 }

@@ -12,7 +12,7 @@ namespace Z0
 
     partial struct corefunc
     {
-         /// <summary>
+        /// <summary>
         /// Procduces a possibly-empty but finite value stream
         /// </summary>
         /// <typeparam name="T">The element type</typeparam>

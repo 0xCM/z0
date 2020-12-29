@@ -10,7 +10,7 @@ namespace Z0
     using System.Linq;
 
     using static Part;
-    using static z;
+    using static memory;
 
     partial struct ImageMaps
     {

@@ -11,8 +11,6 @@ namespace Z0
 
     using H = HexSymData;
 
-
-
     [ApiHost(ApiNames.SymbolicHex, true)]
     public partial class Hex
     {

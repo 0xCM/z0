@@ -13,7 +13,7 @@ namespace Z0
     partial struct Table
     {
         [Op]
-        public static TableFields index(Type type)
+        public static TableFields fields(Type type)
         {
             if(!type.IsStruct() || type.IsPrimitive)
                 return TableFields.Empty;
@@ -27,7 +27,7 @@ namespace Z0
             return new TableFields(buffer);
         }
 
-        public static TableFields index(Type src, bool recurse)
+        public static TableFields fields(Type src, bool recurse)
         {
             var collected = list<TableField>();
             ushort j = 0;
@@ -43,7 +43,7 @@ namespace Z0
                     var ft = def.FieldType;
                     if(ft.IsStruct() && !ft.IsPrimitive && recurse)
                     {
-                        var subfields = index(ft, recurse);
+                        var subfields = fields(ft, recurse);
                         collected.AddRange(subfields.Storage);
                     }
                 }
@@ -59,14 +59,14 @@ namespace Z0
         }
 
         [Op, Closures(UnsignedInts)]
-        public static TableFields index<T>(ReadOnlySpan<byte> widths)
+        public static TableFields fields<T>(ReadOnlySpan<byte> widths)
             where T : struct
         {
             var type = typeof(T);
             var declared = @readonly(type.DeclaredInstanceFields());
             var count = declared.Length;
             if(count != widths.Length)
-                @throw(AppErrors.LengthMismatch(count, widths.Length));
+                corefunc.@throw(AppErrors.LengthMismatch(count, widths.Length));
 
             var buffer = alloc<TableField>(count);
             var fields = span(buffer);
@@ -77,7 +77,7 @@ namespace Z0
         }
 
         [Op, Closures(UnsignedInts)]
-        public static TableFields index<T>()
+        public static TableFields fields<T>()
             where T : struct
         {
             var type = typeof(T);
@@ -91,16 +91,16 @@ namespace Z0
             return new TableFields(buffer);
         }
 
-        public static TableFields<F> index<F,T>()
+        public static TableFields<F> fields<F,T>()
             where F : unmanaged, Enum
             where T : struct, ITable<F,T>
         {
             var t = typeof(T);
-            var tFields = index(t);
-            var literals = LiteralFields.fields<F>();
-            var lFields = literals.Specs;
+            var tFields = fields(t);
+            var literals = LiteralFields.values<F>();
+            var lFields = literals.Fields;
 
-            var specs = index<T>();
+            var specs = fields<T>();
             var dst = list<TableField<F>>(lFields.Length);
             for(var i=0u; i<lFields.Length; i++)
             {

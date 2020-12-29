@@ -6,9 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Reflection;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Defines an identifiable association between two homogenous literal values
@@ -33,14 +32,6 @@ namespace Z0
         public readonly P Second;
 
         [MethodImpl(Inline)]
-        public static implicit operator LiteralPair<K,P>((K key, P first, P second) src)
-            => new LiteralPair<K,P>(src.key,src.first,src.second);
-
-        [MethodImpl(Inline)]
-        public static implicit operator LiteralPair<K,P,P>(LiteralPair<K,P> src)
-            => new LiteralPair<K,P,P>(src.Key, src.First, src.Second);
-
-        [MethodImpl(Inline)]
         public LiteralPair(K key, P first, P second)
         {
             Key = key;
@@ -58,5 +49,14 @@ namespace Z0
         [MethodImpl(Inline)]
         public string Format()
             => text.format(RP.Tuple3, Key, First, Second);
+
+
+        [MethodImpl(Inline)]
+        public static implicit operator LiteralPair<K,P>((K key, P first, P second) src)
+            => new LiteralPair<K,P>(src.key,src.first,src.second);
+
+        [MethodImpl(Inline)]
+        public static implicit operator LiteralPair<K,P,P>(LiteralPair<K,P> src)
+            => new LiteralPair<K,P,P>(src.Key, src.First, src.Second);
     }
 }

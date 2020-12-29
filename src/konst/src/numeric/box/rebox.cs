@@ -4,11 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
-
-    using static Part;
     using static z;
 
     using NK = NumericKind;
@@ -58,7 +53,7 @@ namespace Z0
                 case NK.F64:
                     return box((double)src, dst);
             }
-            return @throw<object>($"The type {type} is not supported");
+            return corefunc.@throw<object>($"The type {type} is not supported");
         }
     }
 }

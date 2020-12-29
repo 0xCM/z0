@@ -30,6 +30,16 @@ namespace Z0
         public const StringComparison Cased = StringComparison.InvariantCulture;
 
         /// <summary>
+        /// Uppercase letter classifier accessor
+        /// </summary>
+        public static UpperCased UpperCase => default;
+
+        /// <summary>
+        /// Lowercase letter classifier accessor
+        /// </summary>
+        public static LowerCased LowerCase => default;
+
+        /// <summary>
         /// The end-of-line escape sequence
         /// </summary>
         public const string Eol = Chars.Eol;

@@ -48,16 +48,6 @@ namespace Z0
         public static LowerCased LowerCase => default;
 
         /// <summary>
-        /// Letter classifier accessor
-        /// </summary>
-        public static Letter Letter => default;
-
-        /// <summary>
-        /// Number classifier accessor
-        /// </summary>
-        public static Number Number => default;
-
-        /// <summary>
         /// An abbreviation for the ridiculously long "StringComparison.InvariantCultureIgnoreCase"
         /// </summary>
         public const StringComparison NoCase = StringComparison.InvariantCultureIgnoreCase;

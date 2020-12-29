@@ -33,6 +33,6 @@ namespace Z0.Lang
         public static Constant<S,T> constant<S,T>(Identifier name, S src, ITransformer<S,T> map)
             => map.Transform(src, out var dst)
               ? new Constant<S,T>(name, src, dst,LiteralKinds.kind<T>())
-              : @throw<Constant<S,T>>(new AppException(Msg.TransformFailed<S,T>(src)));
+              : corefunc.@throw<Constant<S,T>>(new AppException(Msg.TransformFailed<S,T>(src)));
     }
 }
