@@ -15,17 +15,17 @@ namespace Z0
     }
 
     [Free]
-    public interface IToken<K> : IToken, IKinded<K>
-        where K : unmanaged
+    public interface IToken<S> : IToken
+        where S : unmanaged, ISymbol
     {
+        ReadOnlySpan<S> Symbols {get;}
 
     }
 
     [Free]
-    public interface IToken<K,S> : IToken<K>
+    public interface IToken<K,S> : IToken<S>, IKinded<K>
         where S : unmanaged, ISymbol
         where K : unmanaged
     {
-        ReadOnlySpan<S> Symbols {get;}
     }
 }

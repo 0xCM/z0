@@ -9,26 +9,30 @@ namespace Z0
 
     using static Part;
 
-    /// <summary>
-    /// Specifies an if->then style rule as described by https://en.wikipedia.org/wiki/Material_conditional
-    /// </summary>
-    public readonly struct Implication<I,A,C> : IImplication<I,A,C>
-        where I : unmanaged, IEquatable<I>
-        where A : IEquatable<A>
-        where C : IEquatable<C>
+    partial struct Rules
     {
-        public I Index {get;}
 
-        public A Antecedant {get;}
-
-        public C Consequent {get;}
-
-        [MethodImpl(Inline)]
-        public Implication(I index, A a, C c)
+        /// <summary>
+        /// Specifies an if->then style rule as described by https://en.wikipedia.org/wiki/Material_conditional
+        /// </summary>
+        public readonly struct Implication<I,A,C> : IImplication<I,A,C>
+            where I : unmanaged, IEquatable<I>
+            where A : IEquatable<A>
+            where C : IEquatable<C>
         {
-            Index = index;
-            Antecedant = a;
-            Consequent = c;
+            public I Index {get;}
+
+            public A Antecedant {get;}
+
+            public C Consequent {get;}
+
+            [MethodImpl(Inline)]
+            public Implication(I index, A a, C c)
+            {
+                Index = index;
+                Antecedant = a;
+                Consequent = c;
+            }
         }
     }
 }

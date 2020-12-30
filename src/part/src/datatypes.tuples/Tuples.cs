@@ -4,19 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
+    using static Part;
 
-    public interface IProposition : ITerm
+    [ApiHost(ApiNames.Tuples)]
+    public partial class Tuples
     {
-
-    }
-
-    public interface IProposition<A,C> : IProposition
-        where A : IAntecedant
-        where C : IConsequent
-    {
-        A Antecedant {get;}
-
-        C Consequence {get;}
+        const NumericKind Closure = UnsignedInts;
     }
 }

@@ -13,25 +13,11 @@ namespace Z0
     public readonly struct OneOrNone<T>
         where T : IEquatable<T>
     {
-        public Option<T> Value {get;}
-
-        public bool IsOne
-        {
-            [MethodImpl(Inline)]
-            get => Value.IsSome();
-        }
-
-        public bool IsNone
-        {
-            [MethodImpl(Inline)]
-            get => Value.IsNone();
-        }
+        public T Value {get;}
 
         [MethodImpl(Inline)]
         public OneOrNone(T src)
-        {
-            Value = some(src);
-        }
+            => Value = src;
 
         public MultiplicityKind Multiplicity
             => MultiplicityKind.ZeroOrOne;

@@ -5,27 +5,31 @@
 namespace Z0
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
     using System.Runtime.CompilerServices;
 
     using static Part;
 
-    public readonly struct Rule<A,C> : IRule<Proposition<A,C>>, IEquatable<Rule<A,C>>
-        where A : IEquatable<A>
-        where C : IEquatable<C>
+    partial struct Rules
     {
-        public TermId Id {get;}
 
-        public Index<Proposition<A,C>> Terms {get;}
-
-        [MethodImpl(Inline)]
-        public Rule(TermId id, Proposition<A,C>[] terms)
+        public readonly struct Rule<A,C> : IRule<Proposition<A,C>>, IEquatable<Rule<A,C>>
+            where A : IEquatable<A>
+            where C : IEquatable<C>
         {
-            Id  = id;
-            Terms = terms;
+            public TermId Id {get;}
+
+            public Index<Proposition<A,C>> Terms {get;}
+
+            [MethodImpl(Inline)]
+            public Rule(TermId id, Proposition<A,C>[] terms)
+            {
+                Id  = id;
+                Terms = terms;
+            }
+
+            public bool Equals(Rule<A,C> src)
+                => Index.equals(Terms.View, src.Terms.View);
         }
 
-        public bool Equals(Rule<A,C> src)
-            => Index.equals(Terms.View, src.Terms.View);
     }
 }

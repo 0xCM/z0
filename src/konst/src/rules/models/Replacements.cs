@@ -9,25 +9,28 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct Replacements<T> : IIndex<Replacement<T>>
+    partial struct Rules
     {
-        readonly Index<Replacement<T>> Data;
-
-        public Replacements(Replacement<T>[] src)
-            => Data = src;
-
-        public Replacement<T>[] Storage
+        public readonly struct Replacements<T> : IIndex<Replacement<T>>
         {
+            readonly Index<Replacement<T>> Data;
+
+            public Replacements(Replacement<T>[] src)
+                => Data = src;
+
+            public Replacement<T>[] Storage
+            {
+                [MethodImpl(Inline)]
+                get => Data.Storage;
+            }
+
             [MethodImpl(Inline)]
-            get => Data.Storage;
+            public static implicit operator Replacements<T>(Replacement<T>[] src)
+                => new Replacements<T>(src);
+
+            [MethodImpl(Inline)]
+            public static implicit operator Replacement<T>[](Replacements<T> src)
+                => src.Storage;
         }
-
-        [MethodImpl(Inline)]
-        public static implicit operator Replacements<T>(Replacement<T>[] src)
-            => new Replacements<T>(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator Replacement<T>[](Replacements<T> src)
-            => src.Storage;
     }
 }

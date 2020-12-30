@@ -9,27 +9,30 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct Antecedant<A> : IAntecedant<A>, IEquatable<Antecedant<A>>
-        where A : IEquatable<A>
+    partial struct Rules
     {
-        public TermId Id {get;}
-
-        public Index<A> Terms {get;}
-
-        [MethodImpl(Inline)]
-        public Antecedant(TermId id, A[] terms)
+        public readonly struct Antecedant<A> : IAntecedant<A>, IEquatable<Antecedant<A>>
+            where A : IEquatable<A>
         {
-            Id = id;
-            Terms = terms;
+            public TermId Id {get;}
+
+            public Index<A> Terms {get;}
+
+            [MethodImpl(Inline)]
+            public Antecedant(TermId id, A[] terms)
+            {
+                Id = id;
+                Terms = terms;
+            }
+
+            public string Format()
+                => Rules.format(this);
+
+            public override string ToString()
+                => Format();
+
+            public bool Equals(Antecedant<A> src)
+                => Rules.equals(this,src);
         }
-
-        public string Format()
-            => Rules.format(this);
-
-        public override string ToString()
-            => Format();
-
-        public bool Equals(Antecedant<A> src)
-            => Rules.equals(this,src);
     }
 }

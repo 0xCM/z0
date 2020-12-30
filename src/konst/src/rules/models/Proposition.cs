@@ -9,25 +9,28 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct Proposition<A,C> : IProposition<A,C>, IEquatable<Proposition<A,C>>
-        where A : IEquatable<A>
-        where C : IEquatable<C>
+    partial struct Rules
     {
-        public TermId Id {get;}
-
-        public Antecedant<A> Antecedant {get;}
-
-        public Consequent<C> Consequence {get;}
-
-        [MethodImpl(Inline)]
-        public Proposition(TermId id, Antecedant<A> a, Consequent<C> c)
+        public readonly struct Proposition<A,C> : IProposition<Antecedant<A>,Consequent<C>>, IEquatable<Proposition<A,C>>
+            where A : IEquatable<A>
+            where C : IEquatable<C>
         {
-            Id = id;
-            Antecedant = a;
-            Consequence = c;
-        }
+            public TermId Id {get;}
 
-        public bool Equals(Proposition<A,C> src)
-            => Rules.equals(this, src);
+            public Antecedant<A> Antecedant {get;}
+
+            public Consequent<C> Consequence {get;}
+
+            [MethodImpl(Inline)]
+            public Proposition(TermId id, Antecedant<A> a, Consequent<C> c)
+            {
+                Id = id;
+                Antecedant = a;
+                Consequence = c;
+            }
+
+            public bool Equals(Proposition<A,C> src)
+                => Rules.equals(this, src);
+        }
     }
 }

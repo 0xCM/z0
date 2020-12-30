@@ -5,18 +5,15 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
 
-    public interface IProposition : ITerm
+    using static Part;
+
+    partial class Tuples
     {
-
-    }
-
-    public interface IProposition<A,C> : IProposition
-        where A : IAntecedant
-        where C : IConsequent
-    {
-        A Antecedant {get;}
-
-        C Consequence {get;}
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Pairs<T> index<T>(Pair<T>[] src)
+            where T : unmanaged
+                => src;
     }
 }

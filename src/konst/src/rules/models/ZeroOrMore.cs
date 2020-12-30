@@ -9,32 +9,35 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct ZeroOrMore<T>
-        where T : IEquatable<T>
+    partial struct Rules
     {
-        public Choices<T> Value {get;}
-
-        public bool IsZero
+        public readonly struct ZeroOrMore<T>
+            where T : IEquatable<T>
         {
+            public Index<T> Value {get;}
+
+            public bool IsZero
+            {
+                [MethodImpl(Inline)]
+                get => Value.Count == 0;
+            }
+
+            public bool IsMore
+            {
+                [MethodImpl(Inline)]
+                get => Value.Count > 0;
+            }
+
+            public MultiplicityKind Multiplicity
+                => MultiplicityKind.ZeroOrMore;
+
             [MethodImpl(Inline)]
-            get => Value.Count == 0;
-        }
+            public ZeroOrMore(T[] src)
+                => Value = src;
 
-        public bool IsMore
-        {
             [MethodImpl(Inline)]
-            get => Value.Count > 0;
+            public static implicit operator ZeroOrMore<T>(T[] src)
+                => new ZeroOrMore<T>(src);
         }
-
-        public MultiplicityKind Multiplicity
-            => MultiplicityKind.ZeroOrMore;
-
-        [MethodImpl(Inline)]
-        public ZeroOrMore(T[] src)
-            => Value = src;
-
-        [MethodImpl(Inline)]
-        public static implicit operator ZeroOrMore<T>(T[] src)
-            => new ZeroOrMore<T>(src);
     }
 }

@@ -13,7 +13,7 @@ namespace Z0
     public readonly struct OneOrMany<T>
         where T : IEquatable<T>
     {
-        public Choices<T> Value {get;}
+        public Index<T> Value {get;}
 
         public bool IsOne
         {

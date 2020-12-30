@@ -9,8 +9,6 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-
     partial class XSpan
     {
         /// <summary>

@@ -9,40 +9,43 @@ namespace Z0
 
     using static Part;
 
-    /// <summary>
-    /// Defines a stewise-contiguous sequence of scalar values, available on-demand, that satisfy upper/lower bound constraints
-    /// </summary>
-    /// <typeparam name="T">The scalar type</typeparam>
-    public readonly struct RangeSpec<T>
-        where T : unmanaged, IEquatable<T>
+    partial struct Rules
     {
         /// <summary>
-        /// The min value in the range
+        /// Defines a stewise-contiguous sequence of scalar values, available on-demand, that satisfy upper/lower bound constraints
         /// </summary>
-        public readonly T Min;
-
-        /// <summary>
-        /// The max value in the range
-        /// </summary>
-        public readonly T Max;
-
-        /// <summary>
-        /// The distance between successive range points
-        /// </summary>
-        public readonly T Step;
-
-        [MethodImpl(Inline)]
-        public RangeSpec(T min, T max, T step)
+        /// <typeparam name="T">The scalar type</typeparam>
+        public readonly struct RangeSpec<T>
+            where T : unmanaged, IEquatable<T>
         {
-            Min = min;
-            Max = max;
-            Step = step;
+            /// <summary>
+            /// The min value in the range
+            /// </summary>
+            public readonly T Min;
+
+            /// <summary>
+            /// The max value in the range
+            /// </summary>
+            public readonly T Max;
+
+            /// <summary>
+            /// The distance between successive range points
+            /// </summary>
+            public readonly T Step;
+
+            [MethodImpl(Inline)]
+            public RangeSpec(T min, T max, T step)
+            {
+                Min = min;
+                Max = max;
+                Step = step;
+            }
+
+            public string Format()
+                => text.embrace($"{Min}...{Max}") + text.bracket($"{Step}") ;
+
+            public override string ToString()
+                => Format();
         }
-
-        public string Format()
-            => text.embrace($"{Min}...{Max}") + text.bracket($"{Step}") ;
-
-        public override string ToString()
-            => Format();
     }
 }

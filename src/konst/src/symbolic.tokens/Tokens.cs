@@ -14,6 +14,11 @@ namespace Z0
     public readonly struct Tokens
     {
         [MethodImpl(Inline)]
+        public static Token<S> token<S>(params S[] symbols)
+            where S : unmanaged, ISymbol
+                => new Token<S>(symbols);
+
+        [MethodImpl(Inline)]
         public static Token<K,S> token<K,S>(K kind, params S[] symbols)
             where K : unmanaged
             where S : unmanaged, ISymbol

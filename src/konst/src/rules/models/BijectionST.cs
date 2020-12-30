@@ -10,26 +10,29 @@ namespace Z0
     using static Part;
     using static z;
 
-    /// <summary>
-    /// Represents a bijective correspondence between two sequences
-    /// </summary>
-    public readonly  struct Bijection<S,T>
+    partial struct Rules
     {
-        public S[] Source {get;}
-
-        public T[] Target {get;}
-
-        public Bijection(S[] src, T[] dst)
+        /// <summary>
+        /// Represents a bijective correspondence between two sequences
+        /// </summary>
+        public readonly  struct Bijection<S,T>
         {
-            Demands.insist(src != null && dst != null && src.Length == dst.Length);
-            Source = src;
-            Target = dst;
-        }
+            public S[] Source {get;}
 
-        public Paired<S,T> this[uint i]
-        {
-            [MethodImpl(Inline)]
-            get => paired(skip(Source,i), skip(Target,i));
+            public T[] Target {get;}
+
+            public Bijection(S[] src, T[] dst)
+            {
+                Demands.insist(src != null && dst != null && src.Length == dst.Length);
+                Source = src;
+                Target = dst;
+            }
+
+            public Paired<S,T> this[uint i]
+            {
+                [MethodImpl(Inline)]
+                get => paired(skip(Source,i), skip(Target,i));
+            }
         }
     }
 }
