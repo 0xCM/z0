@@ -25,11 +25,11 @@ namespace Z0
 
         public void bitfield_a()
         {
-            var spec = BitFields.specify(
-                BitFields.segment(BF_A.F08_0, 0, 1),
-                BitFields.segment(BF_A.F08_1, 2, 3),
-                BitFields.segment(BF_A.F08_2, 4, 5),
-                BitFields.segment(BF_A.F08_3, 6, 7)
+            var spec = BitFieldModels.specify(
+                BitFieldModels.segment(BF_A.F08_0, 0, 1),
+                BitFieldModels.segment(BF_A.F08_1, 2, 3),
+                BitFieldModels.segment(BF_A.F08_2, 4, 5),
+                BitFieldModels.segment(BF_A.F08_3, 6, 7)
                 );
 
 
@@ -81,11 +81,11 @@ namespace Z0
 
         public void bitfield_b()
         {
-            var spec = BitFields.specify(
-                BitFields.segment(BFB_I.BFB_0, 0, 3),
-                BitFields.segment(BFB_I.BFB_1, 4, 7),
-                BitFields.segment(BFB_I.BFB_2, 8, 9),
-                BitFields.segment(BFB_I.BFB_3, 10, 15)
+            var spec = BitFieldModels.specify(
+                BitFieldModels.segment(BFB_I.BFB_0, 0, 3),
+                BitFieldModels.segment(BFB_I.BFB_1, 4, 7),
+                BitFieldModels.segment(BFB_I.BFB_2, 8, 9),
+                BitFieldModels.segment(BFB_I.BFB_3, 10, 15)
                 );
             var dst = z.alloc<ushort>(spec.FieldCount);
             var bf = BitFields.create<ushort>(spec);
@@ -133,7 +133,7 @@ namespace Z0
 
         public void bitfield_c()
         {
-            var spec = BitFields.specify<BFC_I,BFC_W>();
+            var spec = BitFieldModels.specify<BFC_I,BFC_W>();
             var bf = BitFields.create<byte>(spec);
             var dst = alloc<byte>(spec.FieldCount);
 
@@ -220,7 +220,7 @@ namespace Z0
 
         public void bitfield_d()
         {
-            var spec = BitFields.specify<BFD_I,BFD_W>();
+            var spec = BitFieldModels.specify<BFD_I,BFD_W>();
             var bf = BitFields.create<ulong>(spec);
             var dst = span(alloc<ulong>(spec.FieldCount));
             var tmp = span(alloc<ulong>(spec.FieldCount));
@@ -261,7 +261,7 @@ namespace Z0
 
         public void bitfield_IxW()
         {
-            var spec = BitFields.specify<BFD_I,BFD_W>();
+            var spec = BitFieldModels.specify<BFD_I,BFD_W>();
             var bf = BitFields.create<ulong>(spec);
         }
 
@@ -277,7 +277,7 @@ namespace Z0
 
         public void bitfield_model()
         {
-            var m = BitFields.model(new string[]{"Field1","Field2","Field3"}, new byte[]{4,8,3});
+            var m = BitFieldModels.create(new string[]{"Field1","Field2","Field3"}, new byte[]{4,8,3});
             Claim.eq((byte)0, m.Position(0));
             Claim.eq((byte)4, m.Position(1));
             Claim.eq((byte)12, m.Position(2));

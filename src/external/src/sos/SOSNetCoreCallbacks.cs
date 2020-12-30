@@ -11,77 +11,35 @@ namespace SOS
 
     public readonly struct SOSCallbackDelegates
     {
-        public delegate bool InitializeSymbolStoreDelegate(
-            bool logging,
-            bool msdl,
-            bool symweb,
-            string tempDirectory,
-            string symbolServerPath,
-            string authToken,
-            int timeoutInMintues,
-            string symbolCachePath,
-            string symbolDirectoryPath,
-            string windowsSymbolPath);
+        public delegate bool InitializeSymbolStore(bool logging, bool msdl, bool symweb, string tempDirectory,
+            string symbolServerPath, string authToken, int timeoutInMintues, string symbolCachePath,
+            string symbolDirectoryPath, string windowsSymbolPath);
 
-        public delegate void DisplaySymbolStoreDelegate(WriteLine writeLine);
+        public delegate void DisplaySymbolStore(WriteLine writeLine);
 
-        public delegate void DisableSymbolStoreDelegate();
+        public delegate void DisableSymbolStore();
 
-        public delegate void LoadNativeSymbolsDelegate(
-            SymbolFileCallback callback,
-            IntPtr parameter,
-            RuntimeConfiguration config,
-            string moduleFilePath,
-            ulong address,
-            int size,
-            ReadMemoryDelegate readMemory);
+        public delegate void LoadNativeSymbols(SymbolFileCallback callback, IntPtr parameter, RuntimeConfiguration config,
+            string moduleFilePath, ulong address, int size, ReadMemoryDelegate readMemory);
 
-        public delegate void LoadNativeSymbolsFromIndexDelegate(
-            SymbolFileCallback callback,
-            IntPtr parameter,
-            RuntimeConfiguration config,
-            string moduleFilePath,
-            bool specialKeys,
-            int moduleIndexSize,
-            IntPtr moduleIndex);
+        public delegate void LoadNativeSymbolsFromIndex(SymbolFileCallback callback, IntPtr parameter, RuntimeConfiguration config,
+            string moduleFilePath, bool specialKeys, int moduleIndexSize, IntPtr moduleIndex);
 
-        public delegate IntPtr LoadSymbolsForModuleDelegate(
-            string assemblyPath,
-            bool isFileLayout,
-            ulong loadedPeAddress,
-            int loadedPeSize,
-            ulong inMemoryPdbAddress,
-            int inMemoryPdbSize,
-            ReadMemoryDelegate readMemory);
+        public delegate IntPtr LoadSymbolsForModule(string assemblyPath, bool isFileLayout, ulong loadedPeAddress, int loadedPeSize,
+            ulong inMemoryPdbAddress, int inMemoryPdbSize, ReadMemoryDelegate readMemory);
 
-        public delegate void DisposeDelegate(
-            IntPtr symbolReaderHandle);
+        public delegate void Dispose(IntPtr symbolReaderHandle);
 
-        public delegate bool ResolveSequencePointDelegate(
-            IntPtr symbolReaderHandle,
-            string filePath,
-            int lineNumber,
-            out int methodToken,
-            out int ilOffset);
+        public delegate bool ResolveSequencePoint(IntPtr symbolReaderHandle, string filePath, int lineNumber, out int methodToken, out int ilOffset);
 
-        public delegate bool GetLineByILOffsetDelegate(
-            IntPtr symbolReaderHandle,
-            int methodToken,
-            long ilOffset,
-            out int lineNumber,
-            out IntPtr fileName);
+        public delegate bool GetLineByILOffset(IntPtr symbolReaderHandle, int methodToken, long ilOffset, out int lineNumber, out IntPtr fileName);
 
-        public delegate bool GetLocalVariableNameDelegate(
-            IntPtr symbolReaderHandle,
-            int methodToken,
-            int localIndex,
-            out IntPtr localVarName);
+        public delegate bool GetLocalVariableName(IntPtr symbolReaderHandle, int methodToken, int localIndex, out IntPtr localVarName);
 
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate ulong GetExpressionDelegate(
-            [In, MarshalAs(UnmanagedType.LPStr)] string expression);
+        public delegate ulong GetExpression([In, MarshalAs(UnmanagedType.LPStr)] string expression);
 
-        public delegate int GetMetadataLocatorDelegate(
+        public delegate int GetMetadataLocator(
             [MarshalAs(UnmanagedType.LPWStr)] string imagePath,
             uint imageTimestamp,
             uint imageSize,
@@ -92,13 +50,8 @@ namespace SOS
             IntPtr buffer,
             IntPtr dataSize);
 
-        public delegate int GetICorDebugMetadataLocatorDelegate(
-            [MarshalAs(UnmanagedType.LPWStr)] string imagePath,
-            uint imageTimestamp,
-            uint imageSize,
-            uint pathBufferSize,
-            IntPtr pPathBufferSize,
-            IntPtr pPathBuffer);
+        public delegate int GetICorDebugMetadataLocator([MarshalAs(UnmanagedType.LPWStr)] string imagePath,
+            uint imageTimestamp, uint imageSize, uint pathBufferSize, IntPtr pPathBufferSize, IntPtr pPathBuffer);
     }
 
     /// <summary>
@@ -123,30 +76,30 @@ namespace SOS
             GetICorDebugMetadataLocatorDelegate = MetadataHelper.GetICorDebugMetadataLocator
         };
 
-        public InitializeSymbolStoreDelegate InitializeSymbolStoreDelegate;
+        public InitializeSymbolStore InitializeSymbolStoreDelegate;
 
-        public DisplaySymbolStoreDelegate DisplaySymbolStoreDelegate;
+        public DisplaySymbolStore DisplaySymbolStoreDelegate;
 
-        public DisableSymbolStoreDelegate DisableSymbolStoreDelegate;
+        public DisableSymbolStore DisableSymbolStoreDelegate;
 
-        public LoadNativeSymbolsDelegate LoadNativeSymbolsDelegate;
+        public LoadNativeSymbols LoadNativeSymbolsDelegate;
 
-        public LoadNativeSymbolsFromIndexDelegate LoadNativeSymbolsFromIndexDelegate;
+        public LoadNativeSymbolsFromIndex LoadNativeSymbolsFromIndexDelegate;
 
-        public LoadSymbolsForModuleDelegate LoadSymbolsForModuleDelegate;
+        public LoadSymbolsForModule LoadSymbolsForModuleDelegate;
 
-        public DisposeDelegate DisposeDelegate;
+        public Dispose DisposeDelegate;
 
-        public ResolveSequencePointDelegate ResolveSequencePointDelegate;
+        public ResolveSequencePoint ResolveSequencePointDelegate;
 
-        public GetLineByILOffsetDelegate GetLineByILOffsetDelegate;
+        public GetLineByILOffset GetLineByILOffsetDelegate;
 
-        public GetLocalVariableNameDelegate GetLocalVariableNameDelegate;
+        public GetLocalVariableName GetLocalVariableNameDelegate;
 
-        public GetMetadataLocatorDelegate GetMetadataLocatorDelegate;
+        public GetMetadataLocator GetMetadataLocatorDelegate;
 
-        public GetExpressionDelegate GetExpressionDelegate;
+        public GetExpression GetExpressionDelegate;
 
-        public GetICorDebugMetadataLocatorDelegate GetICorDebugMetadataLocatorDelegate;
+        public GetICorDebugMetadataLocator GetICorDebugMetadataLocatorDelegate;
     }
 }

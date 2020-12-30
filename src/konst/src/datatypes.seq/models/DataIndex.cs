@@ -43,22 +43,22 @@ namespace Z0
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => api.empty(this);
+            get => Length == 0;
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => api.nonempty(this);
+            get => Length != 0;
         }
 
         [MethodImpl(Inline)]
         public ref T Lookup(byte index)
-            => ref Data[index];
+            => ref seek(Data,index);
 
         [MethodImpl(Inline)]
         public ref T Lookup(ushort index)
-            => ref Data[index];
+            => ref seek(Data,index);
 
         [MethodImpl(Inline)]
         public ref T Lookup(uint index)
@@ -66,11 +66,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ref T Lookup(ulong index)
-            => ref Data[index];
+            => ref seek(Data,index);
 
         [MethodImpl(Inline)]
         public ref T Lookup(long index)
-            => ref Data[index];
+            => ref seek(Data,index);
 
         public ref T this[byte index]
         {
@@ -114,16 +114,16 @@ namespace Z0
             get => Data;
         }
 
-        public ref T Head
+        public ref T First
         {
             [MethodImpl(Inline)]
-            get => ref Data[0];
+            get => ref first(Data);
         }
 
-        public ref T Tail
+        public ref T Last
         {
             [MethodImpl(Inline)]
-            get => ref Data[Length - 1];
+            get => ref seek(Data,Length - 1);
         }
 
         [MethodImpl(Inline)]
@@ -143,7 +143,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public DataIndex<T> Concat(in DataIndex<T> rhs)
-            => api.values(concat(Data,rhs.Data));
+            => api.values(concat(Data, rhs.Data));
 
         [MethodImpl(Inline)]
         public unsafe DataIndex<S> Cast<S>()

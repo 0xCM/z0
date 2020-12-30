@@ -35,12 +35,12 @@ namespace SOS
             {
                 Debug.Assert(provider != null);
                 Debug.Assert(reader != null);
-
                 Provider = provider;
                 Reader = reader;
             }
 
-            public void Dispose() => Provider.Dispose();
+            public void Dispose()
+                => Provider.Dispose();
         }
 
         /// <summary>
@@ -180,17 +180,8 @@ namespace SOS
         /// <param name="symbolDirectoryPath">symbol directory path to search (optional)</param>
         /// <param name="windowsSymbolPath">windows symbol path (optional)</param>
         /// <returns>if false, failure</returns>
-        public static bool InitializeSymbolStore(
-            bool logging,
-            bool msdl,
-            bool symweb,
-            string tempDirectory,
-            string symbolServerPath,
-            string authToken,
-            int timeoutInMinutes,
-            string symbolCachePath,
-            string symbolDirectoryPath,
-            string windowsSymbolPath)
+        public static bool InitializeSymbolStore(bool logging, bool msdl, bool symweb, string tempDirectory, string symbolServerPath,
+            string authToken, int timeoutInMinutes, string symbolCachePath, string symbolDirectoryPath, string windowsSymbolPath)
         {
             if (logging)
             {
@@ -816,7 +807,7 @@ namespace SOS
         /// <param name="points">list of debug information for each sequence point return</param>
         /// <returns>true if information is available</returns>
         /// <remarks>used by the gdb JIT support (not SOS). Does not support in-memory PEs or PDBs</remarks>
-        static bool GetDebugInfoForMethod(string assemblyPath, int methodToken, out List<DebugInfo> points)
+        public static bool GetDebugInfoForMethod(string assemblyPath, int methodToken, out List<DebugInfo> points)
         {
             points = null;
 
@@ -907,7 +898,7 @@ namespace SOS
             return result;
         }
 
-        private static OpenedReader TryOpenReaderFromAssembly(string assemblyPath, bool isFileLayout, Stream peStream)
+        static OpenedReader TryOpenReaderFromAssembly(string assemblyPath, bool isFileLayout, Stream peStream)
         {
             if (assemblyPath == null && peStream == null)
                 return null;
@@ -954,7 +945,7 @@ namespace SOS
             return null;
         }
 
-        static void ReadPortableDebugTableEntries(PEReader peReader, out DebugDirectoryEntry codeViewEntry, out DebugDirectoryEntry embeddedPdbEntry)
+        public static void ReadPortableDebugTableEntries(PEReader peReader, out DebugDirectoryEntry codeViewEntry, out DebugDirectoryEntry embeddedPdbEntry)
         {
             // See spec: https://github.com/dotnet/corefx/blob/master/src/System.Reflection.Metadata/specs/PE-COFF.md
 
@@ -1101,7 +1092,7 @@ namespace SOS
         /// <param name="store">symbol store to chain</param>
         /// <param name="symbolPath">Windows symbol path</param>
         /// <returns>if false, error parsing symbol path</returns>
-        static bool ParseSymbolPath(ref SymbolStore store, string symbolPath)
+        public static bool ParseSymbolPath(ref SymbolStore store, string symbolPath)
         {
             string[] paths = symbolPath.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
 

@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     [Datatype]
     public readonly struct Imm<W,T> : IImmValue<Imm<W,T>,W,T>

@@ -9,30 +9,6 @@ namespace Z0
 
     using static Part;
 
-    [Datatype]
-    public readonly struct ApiName<C> : ITextual
-    {
-        public C Content {get;}
-
-        [MethodImpl(Inline)]
-        public ApiName(C content)
-        {
-            Content = content;
-        }
-
-        [MethodImpl(Inline)]
-        public static implicit operator ApiName<C>(C src)
-            => new ApiName<C>(src);
-
-
-        [MethodImpl(Inline)]
-        public string Format()
-            => string.Format("{0}",Content);
-
-        public override string ToString()
-            => Format();
-    }
-
     public readonly struct ApiName : ITextual
     {
         public string Content {get;}
@@ -47,9 +23,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ApiName(string src)
-        {
-            Content = src;
-        }
+            => Content = src;
 
         [MethodImpl(Inline)]
         public string Format()

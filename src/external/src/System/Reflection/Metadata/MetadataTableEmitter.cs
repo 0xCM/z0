@@ -39,7 +39,7 @@ namespace System.Reflection.Metadata
             }
         }
 
-       private static void PrintUsage()
+        private static void PrintUsage()
         {
             Console.WriteLine("This tool dumps the contents of all tables in a set of PE files.");
             Console.WriteLine("usage: mddumper <file>...");

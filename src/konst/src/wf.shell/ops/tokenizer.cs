@@ -4,13 +4,15 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+    using System;
+    using System.Runtime.CompilerServices;
 
-    [Free]
-    public interface IBitLogicHost<H,T> : IBinaryBitLogic<T>
-        where H : struct, IBitLogicHost<H,T>
-        where T : struct
+    using static Part;
+
+    partial class WfShell
     {
-
+        [MethodImpl(Inline), Op]
+        public static WfTokenizer tokenizer()
+            => new WfTokenizer();
     }
 }

@@ -6,8 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
-    using static Konst;
+
+    using static Part;
 
     readonly struct SystemHexFormatters
     {
@@ -57,17 +57,17 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return generalize<HexFormatter64f,ISystemFormatter<T>>(HexFormatter64f.Service);
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
-        
+
         readonly struct HexFormatter8i : ISystemFormatter<HexFormatter8i,sbyte>
         {
             public static HexFormatter8i Service => default;
 
             [MethodImpl(Inline)]
             public string Format(sbyte src, string format = null)
-                => src.ToString(format ?? string.Empty);                        
+                => src.ToString(format ?? string.Empty);
         }
 
         readonly struct HexFormatter8u : ISystemFormatter<HexFormatter8u,byte>
@@ -76,7 +76,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public string Format(byte src, string format = null)
-                => src.ToString(format ?? string.Empty);            
+                => src.ToString(format ?? string.Empty);
         }
 
         readonly struct HexFormatter16i : ISystemFormatter<HexFormatter16i,short>
@@ -154,6 +154,6 @@ namespace Z0
         [MethodImpl(Inline)]
         static ref readonly F generalize<X,F>(in X src)
             where X : struct
-                => ref Unsafe.As<X,F>(ref z.edit(src));        
+                => ref Unsafe.As<X,F>(ref z.edit(src));
     }
 }

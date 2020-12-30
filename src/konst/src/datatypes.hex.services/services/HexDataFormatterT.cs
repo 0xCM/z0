@@ -8,8 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Text;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     public readonly struct HexDataFormatter<T>
         where T : unmanaged

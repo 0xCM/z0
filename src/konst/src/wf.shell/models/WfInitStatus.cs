@@ -4,8 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-
-    public struct WfConfigInfo
+    public struct WfInitStatus
     {
         public Timestamp StartTS;
 

@@ -10,7 +10,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static Seq;
 
     /// <summary>
     /// Defines a LINQ-monadic cover for a deferred finite or infinite parametric sequence
@@ -26,7 +25,7 @@ namespace Z0
         public readonly IEnumerable<T> Content
         {
             [MethodImpl(Inline)]
-            get => E;
+            get => E ?? sys.empty<T>();
         }
 
         [MethodImpl(Inline)]
@@ -37,22 +36,21 @@ namespace Z0
             => new Deferred<T>(Content.Concat(rhs.Content));
 
         public Deferred<Y> Select<Y>(Func<T,Y> selector)
-             => defer(from x in Content select selector(x));
+             => new Deferred<Y>(from x in Content select selector(x));
 
         public Deferred<Z> SelectMany<Y,Z>(Func<T,Deferred<Y>> lift, Func<T,Y,Z> project)
-            => defer(from x in Content
+            => new Deferred<Z>(from x in Content
                           from y in lift(x).Content
                           select project(x, y));
 
         public Deferred<Y> SelectMany<Y>(Func<T,Deferred<Y>> lift)
-            => defer(from x in Content
+            => new Deferred<Y>(from x in Content
                           from y in lift(x).Content
                           select y);
 
         public Deferred<T> Where(Func<T,bool> predicate)
-            => defer(from x in Content where predicate(x) select x);
+            => new Deferred<T>(from x in Content where predicate(x) select x);
 
-       [MethodImpl(Inline)]
         public static Deferred<T> operator + (Deferred<T> lhs, Deferred<T> rhs)
             => lhs.Concat(rhs);
 

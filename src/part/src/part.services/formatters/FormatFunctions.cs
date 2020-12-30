@@ -9,9 +9,7 @@ namespace Z0
     /// </summary>
     public readonly struct FormatFunctions
     {
-        public delegate T RenderArray<S,T>(S[] src);
-
-        public delegate T DelimitArray<S,T>(S[] src, char delimiter);
+        public delegate string FormatIndex<T>(T[] src, char delimiter);
 
         /// <summary>
         /// Characterizes a content render function

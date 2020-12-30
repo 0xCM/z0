@@ -10,7 +10,6 @@ namespace Z0
 
     using static Konst;
     using static Seq;
-    using static z;
 
     partial class WfShell
     {
@@ -18,7 +17,7 @@ namespace Z0
         internal static IWfShell clone(IWfShell src, WfHost host, IPolyStream random, LogLevel verbosity)
             => new WfShell(src.Init, src.Ct, src.WfSink, src.Broker, host, random, verbosity, src.Router);
 
-        public static void render(in WfConfigInfo src, ITextBuffer dst)
+        public static void render(in WfInitStatus src, ITextBuffer dst)
         {
             dst.AppendSettingLine(nameof(src.AppConfigPath), src.AppConfigPath);
             dst.AppendSettingLine(nameof(src.Args),  delimit(src.AppConfigPath).Format());
@@ -31,22 +30,5 @@ namespace Z0
             dst.AppendSettingLine(nameof(src.ShellCreateTime), src.ShellCreateTime.Format());
             dst.AppendSettingLine(nameof(src.FinishTS), src.FinishTS.Format());
         }
-
-        [MethodImpl(Inline), Op]
-        public static Assembly controller()
-            => WfEnv.entry();
-
-        [MethodImpl(Inline)]
-        public static Assembly controller<A>()
-            => typeof(A).Assembly;
-
-        [MethodImpl(Inline), Op]
-        public static IJsonSettings json(IWfAppPaths paths)
-            => JsonSettings.Load(paths.AppConfigPath);
-
-
-        [MethodImpl(Inline), Op]
-        public static WfExecToken token(ulong seq)
-            => new WfExecToken(seq, timestamp());
     }
 }

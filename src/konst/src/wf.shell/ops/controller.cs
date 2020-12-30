@@ -6,20 +6,18 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
 
-    using static Part;
+    using static Konst;
 
-    [Datatype]
-    public readonly struct MetadataHandle<T>
+    partial class WfShell
     {
-        public T Value {get;}
+       [MethodImpl(Inline), Op]
+        public static Assembly controller()
+            => WfEnv.entry();
 
         [MethodImpl(Inline)]
-        public MetadataHandle(T src)
-            => Value = src;
-
-        [MethodImpl(Inline)]
-        public static implicit operator MetadataHandle<T>(T src)
-            => new MetadataHandle<T>(src);
+        public static Assembly controller<A>()
+            => typeof(A).Assembly;
     }
 }

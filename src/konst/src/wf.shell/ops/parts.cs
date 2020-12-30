@@ -8,14 +8,17 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     partial class WfShell
     {
         [Op]
         public static ApiPartSet parts()
             => parts(WfShell.controller(), WfEnv.args());
+
+        [Op]
+        public static ApiPartSet parts(FS.FolderPath src)
+            => new ApiPartSet(src);
 
         [Op]
         public static ApiPartSet parts(Assembly control, string[] args)

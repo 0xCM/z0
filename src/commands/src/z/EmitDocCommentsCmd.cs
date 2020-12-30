@@ -16,7 +16,7 @@ namespace Z0
         public const string CmdName = "emit-doc-comments";
     }
 
-    partial class XCmd
+    public static partial class XCmd
     {
         [MethodImpl(Inline), Op]
         public static EmitDocCommentsCmd EmitDocComments(this CmdBuilder builder)

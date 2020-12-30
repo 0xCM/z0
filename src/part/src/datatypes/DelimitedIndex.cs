@@ -16,7 +16,7 @@ namespace Z0
 
         public readonly char Delimiter;
 
-        readonly DelimitArray<T,string> Render;
+        readonly FormatIndex<T> Render;
 
         [MethodImpl(Inline)]
         public DelimitedIndex(T[] src, char delimiter =  FieldDelimiter)
@@ -27,7 +27,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public DelimitedIndex(T[] src, DelimitArray<T,string> fx, char delimiter = FieldDelimiter)
+        public DelimitedIndex(T[] src, FormatIndex<T> fx, char delimiter = FieldDelimiter)
         {
             Data = src;
             Delimiter = delimiter;

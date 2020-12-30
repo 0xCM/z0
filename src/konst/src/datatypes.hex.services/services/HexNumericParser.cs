@@ -7,9 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Globalization;
-    using System.Linq;
 
-    using static Konst;
+    using static Part;
     using static HexFormatSpecs;
     using static z;
 

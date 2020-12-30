@@ -20,26 +20,6 @@ namespace Z0
             => delimit(src).Format();
 
         /// <summary>
-        /// Tests the source index for non-emptiness
-        /// </summary>
-        /// <param name="src">The index to test</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static bool nonempty<T>(in DataIndex<T> src)
-            where T : struct
-                => count(src) == 0;
-
-        /// <summary>
-        /// Tests the source index for emptiness
-        /// </summary>
-        /// <param name="src">The index to test</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static bool empty<T>(in DataIndex<T> src)
-            where T : struct
-                => src.Data == null || src.Data.Length == 0;
-
-        /// <summary>
         /// Creates a value index from an array
         /// </summary>
         /// <param name="src">The data source</param>

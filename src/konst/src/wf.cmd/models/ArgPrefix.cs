@@ -78,6 +78,14 @@ namespace Z0
         public static implicit operator ArgPrefix(string src)
             => Cmd.prefix(src);
 
+        [MethodImpl(Inline)]
+        public static bool operator ==(ArgPrefix a, ArgPrefix b)
+            => a.Equals(b);
+
+        [MethodImpl(Inline)]
+        public static bool operator !=(ArgPrefix a, ArgPrefix b)
+            => !a.Equals(b);
+
         public static ArgPrefix Empty
             => default;
 

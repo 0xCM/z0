@@ -10,7 +10,9 @@ namespace SOS
     public struct DebugInfo
     {
         public int lineNumber;
+
         public int ilOffset;
+
         public string fileName;
     }
 

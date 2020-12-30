@@ -8,7 +8,7 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     partial struct Seq
     {
@@ -45,6 +45,5 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Deferred<T> concat<T>(Deferred<T> s1, Deferred<T> s2, Deferred<T> s3)
             => s1.Concat(s2).Concat(s3);
-
     }
 }

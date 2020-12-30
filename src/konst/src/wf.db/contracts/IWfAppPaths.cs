@@ -22,6 +22,9 @@ namespace Z0
         FS.FolderName AppLogFolder
             => FS.folder(AppsFolder);
 
+        FS.FolderPath DbRoot
+            => WfEnv.dbRoot();
+
         ITestRunPaths TestPaths
             => TestRunPaths.define(Root + FS.folder("tests"));
 

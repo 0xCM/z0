@@ -35,7 +35,7 @@ namespace Z0
         public T this[E index]
         {
             [MethodImpl(Inline)]
-            get => BitFields.read(this,index);
+            get => BitFields.read(this, index);
         }
     }
 }

@@ -59,7 +59,7 @@ namespace Z0
             where E : unmanaged, Enum
             where T : unmanaged
             where W : unmanaged, Enum
-                => new BitField<E,T>(specify<E,T,W>());
+                => new BitField<E,T>(BitFieldModels.specify<E,T,W>());
 
         /// <summary>
         /// Creates a stateful numeric bitfield api surface
@@ -93,7 +93,7 @@ namespace Z0
             where W : unmanaged, Enum
         {
             var data = fixedalloc<T>(bitcount);
-            var spec = new BitFieldSpec<E,W>(specify<E,T,W>(), bitcount);
+            var spec = new BitFieldSpec<E,W>(BitFieldModels.specify<E,T,W>(), bitcount);
             return new FixedBits<E,T,W>(data, spec);
         }
 
@@ -111,6 +111,6 @@ namespace Z0
             where E : unmanaged, Enum
             where W : unmanaged, Enum
             where T : unmanaged
-                => new BitField<S,E,T>(specify<E,T,W>());
+                => new BitField<S,E,T>(BitFieldModels.specify<E,T,W>());
     }
 }

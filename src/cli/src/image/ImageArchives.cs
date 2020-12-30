@@ -5,6 +5,8 @@
 namespace Z0.Images
 {
     using System;
+    using System.IO;
+    using System.Reflection.Metadata;
 
     using static Konst;
     using static z;
@@ -56,5 +58,11 @@ namespace Z0.Images
         /// <param name="wf">The workflow source</param>
         public static FileArchive build(IWfShell wf)
             => new FileArchive(wf.Db().BuildArchiveRoot());
+
+        public unsafe static MetadataReaderProvider provider(byte* pStart, ByteSize size)
+            => MetadataReaderProvider.FromMetadataImage(pStart, size);
+
+        public static MetadataReaderProvider provider(Stream stream, MetadataStreamOptions options = MetadataStreamOptions.Default)
+            => MetadataReaderProvider.FromMetadataStream(stream, options);
     }
 }

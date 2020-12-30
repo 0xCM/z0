@@ -35,9 +35,16 @@ namespace SOS
         /// <param name="pMetadataSize">size of outgoing metadata</param>
         /// <returns>HRESULT</returns>
         public static int GetMetadataLocator(
-            [MarshalAs(UnmanagedType.LPWStr)] string imagePath, uint imageTimestamp, uint imageSize,
+            [MarshalAs(UnmanagedType.LPWStr)] string imagePath,
+            uint imageTimestamp,
+            uint imageSize,
             [MarshalAs(UnmanagedType.LPArray, SizeConst = 16)] byte[] mvid,
-            uint mdRva, uint flags, uint bufferSize, IntPtr pMetadata,IntPtr pMetadataSize)
+            uint mdRva,
+            uint flags,
+            uint bufferSize,
+            IntPtr pMetadata,
+            IntPtr pMetadataSize
+            )
         {
             int hr = S_OK;
             int dataSize = 0;
@@ -103,13 +110,8 @@ namespace SOS
         /// <param name="imageSize">module image</param>
         /// <param name="localFilePath">local file path of the module</param>
         /// <returns>HRESULT</returns>
-        public static int GetICorDebugMetadataLocator(
-            [MarshalAs(UnmanagedType.LPWStr)] string imagePath,
-            uint imageTimestamp,
-            uint imageSize,
-            uint pathBufferSize,
-            IntPtr pPathBufferSize,
-            IntPtr pPathBuffer)
+        public static int GetICorDebugMetadataLocator([MarshalAs(UnmanagedType.LPWStr)] string imagePath, uint imageTimestamp,
+            uint imageSize, uint pathBufferSize, IntPtr pPathBufferSize, IntPtr pPathBuffer)
         {
             int hr = S_OK;
             int actualSize = 0;
@@ -148,9 +150,7 @@ namespace SOS
             }
 
             if (pPathBufferSize != IntPtr.Zero)
-            {
                 Marshal.WriteInt32(pPathBufferSize, actualSize);
-            }
 
             return hr;
         }

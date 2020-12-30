@@ -27,7 +27,7 @@ namespace Z0
         public Ref<K> Ref
         {
             [MethodImpl(Inline)]
-            get => MemRefs.from(in Data[0], Data.Length);
+            get => MemRefs.from(memory.first(Data), Data.Length);
         }
 
         public Span<K> Span

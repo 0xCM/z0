@@ -12,10 +12,6 @@ namespace Z0
 
     partial class WfShell
     {
-        [MethodImpl(Inline)]
-        public static WfTokenizer tokenizer()
-            => new WfTokenizer();
-
         [MethodImpl(Inline), Op]
         public static IWfContext<C> inject<C>(IWfContext src, C data)
             => new WfContext<C>(src, data);
@@ -23,8 +19,8 @@ namespace Z0
         [Op]
         public static IWfShell create(string[] args, bool verbose = false)
         {
-            var ci = new WfConfigInfo();
-            ci.StartTS = now();
+            var status = new WfInitStatus();
+            status.StartTS = now();
             var clock = Time.counter(true);
             var control = controller();
             var controlId = control.Id();
@@ -33,7 +29,7 @@ namespace Z0
             var partIdList = parts.Api.PartIdentities;
             var appLogConfig = WfLogs.configure(controlId, dbRoot);
             IWfAppPaths _paths = new WfPaths(dbRoot);
-            ci.PathConfigTime = clock.Elapsed;
+            status.PathConfigTime = clock.Elapsed;
             clock.Restart();
 
             var ctx = new WfContext();
@@ -42,24 +38,24 @@ namespace Z0
             ctx.Paths = _paths;
             ctx.Settings = JsonSettings.Load(_paths.AppConfigPath);
             ctx.Controller = control;
-            ci.InitConfigTime = clock.Elapsed;
+            status.InitConfigTime = clock.Elapsed;
             clock.Restart();
 
             IWfShell wf = new WfShell(new WfInit(dbRoot, ctx, appLogConfig, partIdList));
             wf.Router.Enlist(WfShell.reactors(wf));
 
-            ci.ShellCreateTime = clock.Elapsed;
-            ci.FinishTS = now();
-            ci.Args = args;
-            ci.Controller = controlId;
-            ci.LogConfig = appLogConfig;
-            ci.Parts = partIdList;
-            ci.AppConfigPath = _paths.AppConfigPath;
+            status.ShellCreateTime = clock.Elapsed;
+            status.FinishTS = now();
+            status.Args = args;
+            status.Controller = controlId;
+            status.LogConfig = appLogConfig;
+            status.Parts = partIdList;
+            status.AppConfigPath = _paths.AppConfigPath;
 
             if(verbose)
             {
                 var dst = Buffers.text();
-                render(ci, dst);
+                render(status, dst);
                 wf.Status(dst.Emit());
             }
 

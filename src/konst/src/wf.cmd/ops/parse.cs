@@ -13,6 +13,10 @@ namespace Z0
     partial struct Cmd
     {
         [Op]
+        public static CmdParser parser(IWfShell wf)
+            => CmdParser.init(wf);
+
+        [Op]
         public static ParseResult<CmdSpec> parse(string src, string delimiter = EmptyString, char qualifier = ' ')
         {
             var fail = unparsed<CmdSpec>(src);

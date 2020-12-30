@@ -11,20 +11,20 @@ namespace Z0
     using static Part;
 
     [Datatype]
-    public readonly struct FullAssemblyName : IDataTypeEquatable<FullAssemblyName>
+    public readonly struct ClrAssemblyName : IDataTypeEquatable<ClrAssemblyName>
     {
         public string Content {get;}
 
         [MethodImpl(Inline)]
-        public FullAssemblyName(string content)
+        public ClrAssemblyName(string content)
             => Content = content;
 
         [MethodImpl(Inline)]
-        public FullAssemblyName(AssemblyName src)
+        public ClrAssemblyName(AssemblyName src)
             => Content = src.FullName;
 
         [MethodImpl(Inline)]
-        public FullAssemblyName(Assembly src)
+        public ClrAssemblyName(Assembly src)
             => Content = src.FullName;
 
         [MethodImpl(Inline)]
@@ -35,20 +35,20 @@ namespace Z0
             => Format();
 
         [MethodImpl(Inline)]
-        public static implicit operator FullAssemblyName(AssemblyName src)
-            => new FullAssemblyName(src);
+        public static implicit operator ClrAssemblyName(AssemblyName src)
+            => new ClrAssemblyName(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator FullAssemblyName(Assembly src)
-            => new FullAssemblyName(src);
+        public static implicit operator ClrAssemblyName(Assembly src)
+            => new ClrAssemblyName(src);
 
         public override int GetHashCode()
             => Content?.GetHashCode() ?? 0;
 
-        public bool Equals(FullAssemblyName src)
+        public bool Equals(ClrAssemblyName src)
             => string.Equals(Content, src.Content);
 
         public override bool Equals(object src)
-            => src is FullAssemblyName n && Equals(n);
+            => src is ClrAssemblyName n && Equals(n);
     }
 }

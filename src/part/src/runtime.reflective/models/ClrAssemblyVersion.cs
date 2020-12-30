@@ -11,7 +11,7 @@ namespace Z0
     using static Part;
 
     [Datatype, StructLayout(LayoutKind.Sequential)]
-    public struct AssemblyVersion
+    public struct ClrAssemblyVersion
     {
         public ushort Major;
 
@@ -22,7 +22,7 @@ namespace Z0
         public ushort Revision;
 
         [MethodImpl(Inline)]
-        public AssemblyVersion(ushort a, ushort b, ushort c, ushort d)
+        public ClrAssemblyVersion(ushort a, ushort b, ushort c, ushort d)
         {
             Major = a;
             Minor = b;

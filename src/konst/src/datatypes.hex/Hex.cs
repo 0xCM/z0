@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     using H = HexSymData;
