@@ -9,12 +9,33 @@ namespace Z0.Asm
 
     using static Konst;
     using static RegisterBitFields;
+    using static z;
 
     using W = RegisterWidth;
 
-    [ApiHost(ApiNames.RegisterQuery)]
-    public readonly struct RegisterQuery
+    [ApiHost(ApiNames.AsmRegisters)]
+    public readonly struct Registers
     {
+        [Op]
+        public static RegMachine512 machine(W512 w)
+            => new RegMachine512(Registers.bank(w,32), Registers.bank(w64, 16));
+
+        [Op]
+        public static RegBank512 bank(W512 w, byte count)
+            => new RegBank512(new Cell512[count]);
+
+        [Op]
+        public static RegBank256 bank(W256 w, byte count)
+            => new RegBank256(new Cell256[count]);
+
+        [Op]
+        public static RegBank128 bank(W128 w, byte count)
+            => new RegBank128(new Cell128[count]);
+
+        [Op]
+        public static RegBank64 bank(W64 w, byte count)
+            => new RegBank64(new Cell64[count]);
+
         /// <summary>
         /// Determines the register code from the kind
         /// </summary>
@@ -104,7 +125,8 @@ namespace Z0.Asm
 
     }
 
-    public readonly partial struct X86Registers
+    [ApiHost]
+    public readonly partial struct XRegisters
     {
 
     }

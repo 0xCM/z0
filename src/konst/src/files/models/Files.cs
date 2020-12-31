@@ -52,6 +52,9 @@ namespace Z0
             public Files Where(Func<FilePath,bool> f)
                 => Data.Storage.Where(f);
 
+            public Files Where(FileExt f)
+                => Data.Storage.Where(x => x.Ext == f);
+
             public ref FilePath this[ulong index]
             {
                 [MethodImpl(Inline)]

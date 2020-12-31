@@ -8,7 +8,7 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static X86Registers;
+    using static XRegisters;
 
     using K = RegisterKind;
 
@@ -21,7 +21,7 @@ namespace Z0.Asm
         public RegisterIndex Index
         {
             [MethodImpl(Inline)]
-            get => RegisterQuery.code(Kind);
+            get => Registers.code(Kind);
         }
 
         [MethodImpl(Inline)]

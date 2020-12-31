@@ -10,11 +10,11 @@ namespace Z0.Asm
     using static Konst;
     using static z;
 
-    using static X86Registers;
+    using static XRegisters;
 
-    public unsafe readonly ref struct XmmBank
+    public unsafe readonly ref struct RegBankXmm
     {
-        public static void render(in XmmBank src, ITextBuffer dst)
+        public static void render(in RegBankXmm src, ITextBuffer dst)
         {
             var count = src.CellCount;
             ref var lead = ref src.First;
@@ -37,11 +37,11 @@ namespace Z0.Asm
         public readonly uint BankSize;
 
         [MethodImpl(Inline)]
-        public static XmmBank Create(N16 n)
-            => new XmmBank(16);
+        public static RegBankXmm Create(N16 n)
+            => new RegBankXmm(16);
 
         [MethodImpl(Inline)]
-        XmmBank(byte count)
+        RegBankXmm(byte count)
         {
             CellCount = count;
             Buffer = new Cell128[count];

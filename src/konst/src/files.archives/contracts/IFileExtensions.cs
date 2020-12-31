@@ -54,5 +54,11 @@ namespace Z0
         FileExt Idx => X.Idx;
 
         FileExt JsonDeps => X.JsonDeps;
+
+        FileExt Cfg => X.Cfg;
+
+        FileExt Bat => X.Bat;
+
+        FileExt Ps1 => X.Ps1;
     }
 }

@@ -21,12 +21,12 @@ namespace Z0
 
         public string ReturnType;
 
-        public XedRule[] Terms;
+        public Index<XedExpr> Terms;
 
         public string Description;
 
         [MethodImpl(Inline)]
-        public XedRuleSet(FS.FileName src, string name, string returns, XedRule[] terms, FS.FileName dst)
+        public XedRuleSet(FS.FileName src, string name, string returns, Index<XedExpr> terms, FS.FileName dst)
         {
             SourceFile = src;
             TargetFile = dst;

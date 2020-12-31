@@ -426,7 +426,7 @@ public readonly struct ApiNames
 
     public const string AsmOperands =  AsmLang + dot + operands;
 
-    public const string RegisterQuery = asm + dot + registers + dot + query;
+    public const string AsmRegisters = asm + dot + registers;
 
     public const string AsmSemanticRender = asm + dot + semantic + dot + render;
 

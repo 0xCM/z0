@@ -75,7 +75,7 @@ namespace Z0
             WfStepId step = typeof(XedWf);
             var patterns = list<XedPattern>();
             var parser = XedSourceParser.Service;
-            var files = @readonly(Source.InstructionFiles);
+            var files = Source.InstructionFiles.View;
             const string kind = "instructions";
             try
             {

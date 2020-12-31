@@ -4,8 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    [Record]
-    public struct XedPattern : IRecord<XedPattern>
+    public struct XedPattern
     {
         public string Class;
 

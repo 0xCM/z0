@@ -40,12 +40,12 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         public RegBits(RegisterKind src)
-            => RegisterQuery.split(src, out Code, out Class, out Width);
+            => Registers.split(src, out Code, out Class, out Width);
 
         public RegisterKind Joined
         {
             [MethodImpl(Inline)]
-            get => RegisterQuery.join(Code,Class,Width);
+            get => Registers.join(Code,Class,Width);
         }
 
         [MethodImpl(Inline)]

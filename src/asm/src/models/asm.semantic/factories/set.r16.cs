@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Konst;
 
-    using static X86Registers;
+    using static XRegisters;
 
     partial struct AsmSemantic
     {

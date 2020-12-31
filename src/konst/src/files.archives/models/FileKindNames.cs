@@ -152,5 +152,30 @@ namespace Z0
         /// Defines the 'sorted' literal
         /// </summary>
         public const string sorted = nameof(sorted);
+
+        /// <summary>
+        /// Defines the 'cfg' literal
+        /// </summary>
+        public const string cfg = nameof(cfg);
+
+        /// <summary>
+        /// Defines the 'deps.json' literal
+        /// </summary>
+        public const string djson = deps + dot + json;
+
+        /// <summary>
+        /// Defines the 'config.json' literal
+        /// </summary>
+        public const string cjson = config + dot + json;
+
+        /// <summary>
+        /// Defines the 'bat' literal
+        /// </summary>
+        public const string bat = nameof(bat);
+
+        /// <summary>
+        /// Defines the 'ps1' literal
+        /// </summary>
+        public const string ps1 = nameof(ps1);
     }
 }

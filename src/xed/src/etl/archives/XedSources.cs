@@ -13,7 +13,7 @@ namespace Z0
     {
         public FS.FolderPath Root {get;}
 
-        public FS.FilePath[] Files {get;}
+        public FS.Files Files {get;}
 
         [MethodImpl(Inline)]
         internal XedSources(FS.FolderPath root)
@@ -37,13 +37,18 @@ namespace Z0
             return false;
         }
 
-        public FS.FilePath[] InstructionFiles
+        public FS.Files InstructionFiles
             => Files.Where(DefinesInstructions);
 
-        public FS.FilePath[] FunctionFiles
+        static FS.FileExt Cfg => FS.ext("cfg");
+
+        public FS.Files ConfigFiles
+            => Files.Where(Cfg);
+
+        public FS.Files FunctionFiles
             => Files.Where(DefinesFunctions);
 
-        public FS.FilePath[] EnumFiles
+        public FS.Files EnumFiles
             => Files.Where(f => f.FileName.EndsWith("enum"));
     }
 }

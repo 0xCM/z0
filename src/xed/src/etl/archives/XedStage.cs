@@ -40,7 +40,7 @@ namespace Z0
             for(var i=0; i<src.Length; i++)
             {
                 var rows = src[i];
-                for(var j = 0; j < rows.RowCount; j++)
+                for(var j = 0; j <rows.RowCount; j++)
                     writer.WriteLine(rows[j].Text);
                 if(i != src.Length - 1)
                     writer.WriteLine(HSep);

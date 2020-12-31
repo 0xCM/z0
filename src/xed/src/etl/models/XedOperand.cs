@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     public readonly struct RuleOperand
     {
@@ -15,12 +15,14 @@ namespace Z0
 
         public TextBlock Value {get;}
 
+        [MethodImpl(Inline)]
         public RuleOperand(string name, string value)
         {
             Name = name;
             Value = value;
         }
 
+        [MethodImpl(Inline)]
         public RuleOperand(string value)
         {
             Name = Name.Empty;

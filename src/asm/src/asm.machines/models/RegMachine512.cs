@@ -2,25 +2,21 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static RegisterBanks;
+    using static Part;
     using static z;
 
-    public readonly struct RegisterMachine
+    public readonly struct RegMachine512
     {
-        public static RegisterMachine create()
-            => new RegisterMachine(alloc(w512,32), alloc(w64, 16));
+        readonly RegBank512 V;
 
-        readonly RV512 V;
+        readonly RegBank64 Gp;
 
-        readonly Gp64 Gp;
-
-        internal RegisterMachine(RV512 v, Gp64 gp)
+        internal RegMachine512(RegBank512 v, RegBank64 gp)
         {
             V = v;
             Gp = gp;

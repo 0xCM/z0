@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using R = X86Registers;
+    using R = XRegisters;
 
     [ApiType]
     public readonly struct RegModels

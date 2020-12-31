@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct XedProposition : IXedRule<XedProposition>
+    public readonly struct XedProp : IXedRule<XedProp>
     {
         public XedRuleKind RuleKind => XedRuleKind.Proposition;
 
@@ -23,7 +23,7 @@ namespace Z0
 
         public TextBlock Consequent {get;}
 
-        public XedProposition(uint index, FS.FileName src, Name name, Index<RuleOperand> operands, TextBlock consequent)
+        public XedProp(uint index, FS.FileName src, Name name, Index<RuleOperand> operands, TextBlock consequent)
         {
             Index = index;
             Source = src;

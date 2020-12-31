@@ -7,10 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Text;
-
-    using static Konst;
     using Z0.Asm;
-    using static z;
+
+    using static Part;
 
     [ApiHost]
     public readonly partial struct asm

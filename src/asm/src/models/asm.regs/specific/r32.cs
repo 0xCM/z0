@@ -11,7 +11,7 @@ namespace Z0.Asm
 
     using K = RegisterKind;
 
-    partial struct X86Registers
+    partial struct XRegisters
     {
         public struct eax : IRegister<eax,W32,uint>
         {

@@ -39,7 +39,7 @@ namespace Z0
         {
             for(var i=0; i<src.RowCount; i++)
             {
-                var row = src.Data[i];
+                var row = src.Content[i];
                 var rowText = row.Text;
                 if(text.nonempty(rowText) && rowText.StartsWith(name))
                 {
@@ -127,7 +127,7 @@ namespace Z0
         public static void emit(IWfShell wf, in XedWfConfig config, in XedSources xs)
         {
             var parser = XedSourceParser.Service;
-            var sources = @readonly(xs.FunctionFiles);
+            var sources = xs.FunctionFiles.View;
             var kSrc = sources.Length;
 
             var rulepath = config.Target + FS.file("rules", FileExtensions.Txt);
@@ -179,7 +179,7 @@ namespace Z0
         [Op]
         public static void emit(in XedRuleSet ruleset, StreamWriter writer)
         {
-            var content = @readonly(ruleset.Terms);
+            var content = ruleset.Terms.View;
             var kTerms = content.Length;
 
             if(kTerms != 0)

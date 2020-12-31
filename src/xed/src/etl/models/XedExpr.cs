@@ -9,21 +9,21 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct XedRule : ITextual, IXedRule<XedRule>
+    public readonly struct XedExpr : ITextual, IXedRule<XedExpr>
     {
         public XedRuleKind RuleKind => XedRuleKind.Expression;
 
-        public string Expression {get;}
+        public TextBlock Content {get;}
 
         [MethodImpl(Inline)]
-        public XedRule(string src)
-            => Expression = src;
+        public XedExpr(string src)
+            => Content = src;
 
         [MethodImpl(Inline)]
         public string Format()
-            => Expression;
+            => Content;
 
         public override string ToString()
-            => Expression;
+            => Content;
     }
 }

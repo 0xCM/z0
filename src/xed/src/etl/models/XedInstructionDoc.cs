@@ -15,22 +15,22 @@ namespace Z0
     {
         public XedRuleKind RuleKind => XedRuleKind.Instruction;
 
-        public TextRow[] Data {get;}
+        public Index<TextRow> Content {get;}
 
         [MethodImpl(Inline)]
         public XedInstructionDoc(params TextRow[] rows)
-            => Data = rows;
+            => Content = rows;
 
         public ref readonly TextRow this[int i]
         {
             [MethodImpl(Inline)]
-            get => ref Data[i];
+            get => ref Content[i];
         }
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => (Data?.Length ?? 0) == 0;
+            get => Content.IsEmpty;
         }
 
         public bool IsNonEmpty
@@ -40,7 +40,7 @@ namespace Z0
         }
 
         public int RowCount
-            => Data.Length;
+            => Content.Length;
 
         public string Class
             => Xed.pattern(this, M.ICLASS);
