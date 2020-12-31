@@ -40,14 +40,12 @@ namespace Z0
         public static RuntimeAssembly assembly(Assembly component, FS.FilePath path)
             => new RuntimeAssembly(component, path);
 
-
         [MethodImpl(Inline)]
         internal RuntimeArchive(FS.FolderPath root)
         {
             Root = root;
             Files = root.Files(false, Exe, Dll, Pdb, Json, Xml).Where(x => !x.Name.Contains("System.Private.CoreLib"));
         }
-
     }
 
     partial class XTend

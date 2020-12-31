@@ -450,7 +450,7 @@ namespace Z0
         }
 
 
-        void Jit()
+        unsafe void Jit()
         {
             var catalog = Wf.ApiParts.Api;
             var parts = catalog.Parts;
@@ -494,12 +494,13 @@ namespace Z0
             var patterns = store.Patterns();
             Wf.Status($"{patterns.Length}");
         }
+
         public void Run()
         {
             //ShowHandlers();
-            //Jit();
+            Jit();
             //PipeImageData();
-            LoadAsmStore();
+            //LoadAsmStore();
 
             //Run(Args);
             //EmitProcessImages(Wf);

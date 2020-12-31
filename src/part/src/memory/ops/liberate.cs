@@ -36,6 +36,14 @@ namespace Z0
         public static unsafe byte* liberate(ref byte src, int length)
             => liberate((byte*)memory.pointer(ref src), length);
 
+        /// <summary>
+        /// Enables execution over a specified memory range
+        /// </summary>
+        /// <param name="range">The range to liberate</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe byte* liberate(MemoryRange range)
+            => liberate(range.Start.Pointer<byte>(), range.Length);
+
         [MethodImpl(Inline)]
         public static unsafe T* liberate<T>(T* pSrc, int length)
             where T : unmanaged

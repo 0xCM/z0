@@ -56,5 +56,4 @@ namespace Z0
         /// </summary>
         TypeWidth OperandWidth => Widths.type<W>();
     }
-
 }
