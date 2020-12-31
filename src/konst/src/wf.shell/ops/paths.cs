@@ -16,6 +16,10 @@ namespace Z0
             => new WfPaths(WfEnv.dbRoot());
 
         [MethodImpl(Inline), Op]
+        public static IWfAppPaths paths(FS.FolderPath root)
+            => new WfPaths(root);
+
+        [MethodImpl(Inline), Op]
         public static IWfAppPaths paths<A>()
             => new WfPaths(WfEnv.dbRoot() + FS.folder(controller<A>().Id().Format()));
     }

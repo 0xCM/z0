@@ -13,6 +13,11 @@ namespace Z0
     public readonly struct ApiPartSet : IApiParts
     {
         /// <summary>
+        /// The controlling assembly
+        /// </summary>
+        public Assembly Control {get;}
+
+        /// <summary>
         /// The root of the archive one which the api module set is predicated
         /// </summary>
         public FS.FolderPath Source {get;}
@@ -23,25 +28,28 @@ namespace Z0
 
         public ISystemApiCatalog Api {get;}
 
-        public ApiPartSet(FS.FolderPath src)
+        public ApiPartSet(Assembly control, FS.FolderPath src)
         {
+            Control = control;
             Source = src;
             ManagedSources = src.Exclude("System.Private.CoreLib").Where(f => FS.managed(f));
             Components = ApiQuery.components(ManagedSources);
             Api = ApiCatalogs.system(ManagedSources);
         }
 
-        public ApiPartSet(Assembly src, PartId[] parts)
+        public ApiPartSet(Assembly control, PartId[] parts)
         {
-            Source = FS.path(src.Location).FolderPath;
+            Control = control;
+            Source = FS.path(control.Location).FolderPath;
             ManagedSources = Source.Exclude("System.Private.CoreLib").Where(f => FS.managed(f));
-            Api = ApiCatalogs.siblings(src,parts);
+            Api = ApiCatalogs.siblings(control, parts);
             Components = Api.Components;
         }
 
-        public ApiPartSet(Assembly src)
+        public ApiPartSet(Assembly control)
         {
-            Source = FS.path(src.Location).FolderPath;
+            Control = control;
+            Source = FS.path(control.Location).FolderPath;
             ManagedSources = Source.Exclude("System.Private.CoreLib").Where(f => FS.managed(f));
             Api =  ApiCatalogs.system(ManagedSources);
             Components = Api.Components;

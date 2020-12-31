@@ -25,7 +25,7 @@ namespace Z0
         {
             try
             {
-                using var wf = WfShell.create(args);
+                using var wf = WfShell.create(WfShell.parts(Index<PartId>.Empty), args);
                 var app = new Runner(wf);
                 if(args.Length == 0)
                 {
@@ -64,39 +64,38 @@ namespace Z0
 
         void ShowHandlers()
         {
-            zfunc.iter(Wf.Router.SupportedCommands, c => Wf.Status(c));
+            corefunc.iter(Wf.Router.SupportedCommands, c => Wf.Status(c));
         }
 
         public void Run(CmdLine cmd)
         {
             ShowHandlers();
             var args = cmd.Parts;
-            var count = args.Length;
-            var commands = Commands.service(Wf);
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var arg = ref skip(args,i);
-                if(arg.IsNonEmpty)
-                {
-                    switch(arg.Content)
-                    {
-                        case EmitApiIndexCmd.CmdName:
-                            commands.EmitApiIndex().Wait();
-                        break;
-                        case EmitRuntimeIndexCmd.CmdName:
-                            commands.EmitRuntimeIndex().Wait();
-                        break;
-                        case DumpCliTablesCmd.CmdName:
-                            commands.DumpCliTables(Parts.Commands.Assembly).Wait();
-                        break;
-                        default:
-                            Wf.Status(string.Format("Not processor found for {0}", arg));
-                            break;
-                    }
-                }
+            if(args.IsEmpty)
+            return;
 
-                //Wf.Status(string.Format("({0}) {1}", i, arg.Format()));
+            var commands = Commands.service(Wf);
+            var name =  first(args).Content;
+
+            switch(name)
+            {
+                case EmitApiIndexCmd.CmdName:
+                    commands.EmitApiIndex().Wait();
+                break;
+                case EmitRuntimeIndexCmd.CmdName:
+                    commands.EmitRuntimeIndex().Wait();
+                break;
+                case DumpCliTablesCmd.CmdName:
+                    commands.DumpCliTables(Parts.Commands.Assembly).Wait();
+                break;
+                case RunStepCmd.CmdName:
+                    commands.RunStep(slice(args,1)).Wait();
+                break;
+                default:
+                    Wf.Error(string.Format("Processor for {0} not found", name));
+                    break;
             }
+
         }
 
         void Run(ListFilesCmd cmd)

@@ -20,7 +20,7 @@ namespace Z0
         /// a line containing a single left-brace and below by a line cotaining a
         /// single right-brace
         /// </summary>
-        public const string InstructionSeq = "INSTRUCTIONS()::";
+        public const string Instructions = "INSTRUCTIONS()::";
 
         /// <summary>
         /// When encountered, signals a sequence of lines that describe an instruction
@@ -28,9 +28,14 @@ namespace Z0
         public const string FuncBodyBegin = "{" ;
 
         /// <summary>
-        /// When encountered, signals that a sequence of instruction description lines has concluded
+        /// Signals that a sequence of instruction description lines has concluded
         /// </summary>
         public const string FuncBodyEnd = "}" ;
+
+        /// <summary>
+        /// Signals a forthcoming named symbol index
+        /// </summary>
+        public const string SEQUENCE = nameof(SEQUENCE);
 
         public const char ASSIGN = Chars.Eq;
 
@@ -63,5 +68,11 @@ namespace Z0
         public const string MODIDX = MOD + CharText.Eq;
 
         public const string REG = nameof(REG);
+
+        public const string IMPLIES = "->";
+
+        public const string Separator = RP.PageBreak120;
+
+        public const string PRODUCTION = " | ";
     }
 }

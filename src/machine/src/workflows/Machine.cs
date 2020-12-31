@@ -37,7 +37,10 @@ namespace Z0
             try
             {
                 //ApiCaptureRunner.run(Wf);
-                EmitReferenceData.create().Run(Wf);
+                ResDataEmitter.index(Wf);
+                ResDataEmitter.reference(Wf);
+                XedEtlWfHost.create().Run(Wf);
+                //EmitReferenceData.create().Run(Wf);
                 EmitFieldMetadata.create().Run(Wf);
                 EmitSectionHeaders.create().Run(Wf);
                 EmitImageConstants.create().Run(Wf);

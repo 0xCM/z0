@@ -13,8 +13,7 @@ namespace Z0
     {
         public static void index(IWfShell wf)
         {
-            wf.Running();
-
+            var flow = wf.Running();
             var provider = TableContentProvider.create(Parts.Res.Assembly);
             var entries = provider.Entries;
             var count = (uint)entries.Length;
@@ -33,6 +32,8 @@ namespace Z0
             dst.Write(f.Format());
 
             wf.EmittedTable<DocLibEntry>(count, target);
+
+            wf.Ran(flow);
         }
     }
 }

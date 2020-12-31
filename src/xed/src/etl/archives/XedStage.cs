@@ -11,9 +11,6 @@ namespace Z0
 
     readonly struct XedStage : IPartFilePaths
     {
-        public static XedStage Create(FS.FolderPath root)
-            => new XedStage(root);
-
         public FS.FolderPath Root {get;}
 
         public FS.FolderName InstructionFolder

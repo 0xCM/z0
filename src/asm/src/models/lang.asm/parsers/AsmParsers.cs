@@ -29,7 +29,7 @@ namespace Z0.Asm
 
             var l0 = lines[0].RightOfFirst(CommentMarker);
             var sig = l0.LeftOfFirst(LocatedMarker);
-            var uriParse = ApiUriParser.Service.Parse(text.concat(LocatedMarker,l0.RightOf(LocatedMarker)));
+            var uriParse = ApiUriParser.Service.Parse(text.concat(LocatedMarker,l0.RightOfFirst(LocatedMarker)));
             if(uriParse.Failed)
                 return fail;
 

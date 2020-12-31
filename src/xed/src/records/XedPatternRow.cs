@@ -15,26 +15,6 @@ namespace Z0
     {
         public const string TableId = "xed.summary";
 
-        public static bool load(in TextRow src, ref XedPatternRow dst)
-        {
-            if(src.CellCount == 9)
-            {
-                var i=0;
-                dst.Class = src[i++];
-                dst.Category = src[i++];
-                dst.Extension = src[i++];
-                dst.IsaSet = src[i++];
-                dst.BaseCode = HexByteParser.Service.ParseData(src[i++]).Value ?? BinaryCode.Empty;
-                dst.Mod = src[i++];
-                dst.Reg = src[i++];
-                dst.Pattern = src[i++];
-                dst.Operands = src[i++];
-                return true;
-            }
-
-            return false;
-        }
-
         public string Class;
 
         public string Category;
@@ -54,6 +34,6 @@ namespace Z0
         public string Operands;
 
         public string DelimitedText(char sep)
-            => XedWfOps.format(this,sep);
+            => XedTables.format(this,sep);
     }
 }

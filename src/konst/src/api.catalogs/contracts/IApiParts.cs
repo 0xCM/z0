@@ -12,6 +12,14 @@ namespace Z0
     [Free]
     public interface IApiParts
     {
+        /// <summary>
+        /// The controlling assembly
+        /// </summary>
+        Assembly Control {get;}
+
+        /// <summary>
+        /// The root of the archive one which the api module set is predicated
+        /// </summary>
         FS.FolderPath Source {get;}
 
         FS.Files ManagedSources {get;}

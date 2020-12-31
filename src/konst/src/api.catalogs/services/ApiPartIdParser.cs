@@ -25,10 +25,11 @@ namespace Z0
         /// </summary>
         /// <param name="parts">The part identifiers</param>
         [Op]
-        public static PartId[] parse(params string[] parts)
+        public static PartId[] parse(string[] parts)
         {
-            var dst = sys.alloc<PartId>(parts.Length);
-            for(var i=0; i<parts.Length; i++)
+            var count = parts.Length;
+            var dst = sys.alloc<PartId>(count);
+            for(var i=0; i<count; i++)
                 dst[i] = parse<PartId>(parts[i]).ValueOrDefault();
             return dst;
         }
@@ -46,8 +47,7 @@ namespace Z0
         {
             try
             {
-                var src = text.remove(name, Chars.Dot);
-                return ParseResult.Success(name, Enum.Parse<E>(src,true));
+                return ParseResult.Success(name, Enum.Parse<E>(text.remove(name, Chars.Dot),true));
             }
             catch(Exception e)
             {

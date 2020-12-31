@@ -13,6 +13,7 @@ namespace Z0
     {
         public static ResEmission[] reference(IWfShell wf)
         {
+            var flow = wf.Running("Emitting reference data");
             var descriptors = Resources.query(Parts.Res.Assembly).Descriptors();
             var count = descriptors.Length;
             var root = wf.Db().RefDataRoot();
@@ -30,6 +31,7 @@ namespace Z0
                     wf.Error(e);
                 }
             }
+            wf.Ran(flow);
             return emissions;
         }
     }

@@ -18,7 +18,7 @@ namespace Z0.Asm
         protected override void OnInit()
         {
             XedArchive = Db.TableArchive("xed");
-            Summaries = Xed.patterns(XedArchive);
+            Summaries = XedTables.patterns(XedArchive);
         }
 
         public ReadOnlySpan<XedPatternRow> Patterns()

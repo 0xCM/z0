@@ -9,10 +9,18 @@ namespace Z0
 
     using static Konst;
 
-    partial struct XedWfOps
+    public readonly struct XedSeq : IXedRule<XedSeq>
     {
-        [MethodImpl(Inline), Op]
-        public static XedSources sources(FS.FolderPath root)
-            => new XedSources(root);
+        public XedRuleKind RuleKind => XedRuleKind.Sequence;
+
+        public string Name {get;}
+
+        public Index<string> Terms {get;}
+
+        public XedSeq(string name, string[] terms)
+        {
+            Name = name;
+            Terms = terms;
+        }
     }
 }

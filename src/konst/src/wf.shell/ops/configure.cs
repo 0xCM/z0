@@ -7,23 +7,22 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     partial class WfShell
     {
         [Op]
-        public static ref WfConfig configure(string[] args, ref WfConfig dst)
+        public static ref WfConfig configure(ref WfConfig dst)
         {
-            IWfAppPaths paths = new WfPaths(WfEnv.dbRoot());
+            var paths = WfShell.paths(WfEnv.dbRoot());
             var control = controller();
             var runroot = FS.path(control.CodeBase).FolderPath;
             dst.Controller = control.GetSimpleName();
             dst.DbRoot = paths.DbRoot;
-            dst.Args = mapi(args, (i,arg) => new CmdArg((ushort)i, arg));
             dst.ConfigPath = paths.AppConfigPath;
             dst.RuntimeRoot = runroot;
-            dst.Components = parts(runroot).Components.Select(x => new Name(x.GetSimpleName()));
+            dst.Components = parts(control, runroot).Components.Select(ClrAssemblyNames.from);
             return ref dst;
         }
 
@@ -31,7 +30,8 @@ namespace Z0
         public static WfConfig configure(string[] args)
         {
             var dst = new WfConfig();
-            configure(args, ref dst);
+            dst.Args = mapi(args, (i,arg) => new CmdArg((ushort)i, arg));
+            configure(ref dst);
             return dst;
         }
     }

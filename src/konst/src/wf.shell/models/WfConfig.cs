@@ -17,7 +17,7 @@ namespace Z0
 
         public FS.FolderPath RuntimeRoot;
 
-        public Index<Name> Components;
+        public Index<ClrAssemblyName> Components;
 
         public CmdArgs Args;
     }

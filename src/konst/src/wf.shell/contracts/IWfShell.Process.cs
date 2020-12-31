@@ -11,16 +11,23 @@ namespace Z0
 
     partial interface IWfShell
     {
-        void Processing<T>(FS.FilePath src, T kind)
+        WfExecFlow Processing<T>(FS.FilePath src, T data)
         {
-            signal(this).Processing(src, kind);
+            signal(this).Processing(src, data);
+            return Flow();
         }
 
-        void Processed<T>(FS.FilePath src, T kind)
-            => Raise(fileProcessed(Host, src, kind, Ct));
+        void Processed<T>(WfExecFlow flow, FS.FilePath src, T data)
+        {
+            signal(this).Processed(src, data);
+            Ran(flow);
+        }
 
-        void Processed<T,M>(FS.FilePath src, T kind, M metric)
-            => Raise(fileProcessed(Host, src, kind, metric, Ct));
+        void Processed<T,M>(WfExecFlow flow, FS.FilePath src, T data, M metric)
+        {
+            signal(this).Processed(src, data, metric);
+            Ran(flow);
+        }
 
         void Processed<T>(T content)
             => processed(Host, content, Ct);

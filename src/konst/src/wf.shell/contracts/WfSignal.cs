@@ -68,7 +68,13 @@ namespace Z0
         public void Running<T>(string operation, T data)
             => Raise(running(Host, operation, data, Ct));
 
-        public void Processing<T>(FS.FilePath src, T kind)
-            => Raise(processing(Host, src, kind, Ct));
+        public void Processing<T>(FS.FilePath src, T data)
+            => Raise(processing(Host, src, data, Ct));
+
+        public void Processed<T>(FS.FilePath src, T data)
+            => Raise(processed(Host, src, data, Ct));
+
+        public void Processed<T,M>(FS.FilePath src, T data, M metric)
+            => Raise(processed(Host, src, data, metric, Ct));
     }
 }

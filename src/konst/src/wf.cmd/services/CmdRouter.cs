@@ -34,7 +34,7 @@ namespace Z0
         public IndexedView<CmdId> SupportedCommands
             => Nodes.Keys.Array();
 
-        public void Enlist(params ICmdReactor[] src)
+        public void Enlist(Index<ICmdReactor> src)
         {
             var count = 0;
             foreach(var reactor in src)

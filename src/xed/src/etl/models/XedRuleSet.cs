@@ -9,8 +9,10 @@ namespace Z0
 
     using static Konst;
 
-    public struct XedRuleSet
+    public struct XedRuleSet : IXedRule<XedRuleSet>
     {
+        public XedRuleKind RuleKind => XedRuleKind.Ruleset;
+
         public FS.FileName SourceFile;
 
         public FS.FileName TargetFile;

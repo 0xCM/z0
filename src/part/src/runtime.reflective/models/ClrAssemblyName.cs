@@ -10,29 +10,64 @@ namespace Z0
 
     using static Part;
 
-    [Datatype]
-    public readonly struct ClrAssemblyName : IDataTypeEquatable<ClrAssemblyName>
-    {
-        public string Content {get;}
+    using api = ClrAssemblyNames;
 
-        [MethodImpl(Inline)]
-        public ClrAssemblyName(string content)
-            => Content = content;
+    public enum AssemblyNameKind : byte
+    {
+        Full = 0,
+
+        Simple = 1,
+    }
+
+    public readonly struct ClrAssemblyName : IEquatable<ClrAssemblyName>
+    {
+        readonly AssemblyName Subject;
 
         [MethodImpl(Inline)]
         public ClrAssemblyName(AssemblyName src)
-            => Content = src.FullName;
+            => Subject = src;
 
         [MethodImpl(Inline)]
         public ClrAssemblyName(Assembly src)
-            => Content = src.FullName;
+            => Subject = src.GetName();
+
+        public string FullName
+        {
+            [MethodImpl(Inline)]
+            get => Subject.FullName;
+        }
+
+        public string SimpleName
+        {
+            [MethodImpl(Inline)]
+            get => Subject.Name;
+        }
+
+        public ClrAssemblyVersion Version
+        {
+            [MethodImpl(Inline)]
+            get => api.version(Subject);
+        }
 
         [MethodImpl(Inline)]
         public string Format()
-            => Content;
+            => api.format(Subject);
+
+        [MethodImpl(Inline)]
+        public string Format(AssemblyNameKind kind)
+            => api.format(Subject, kind);
 
         public override string ToString()
             => Format();
+
+        public override int GetHashCode()
+            => Subject?.GetHashCode() ?? 0;
+
+        public bool Equals(ClrAssemblyName src)
+            => Subject?.Equals(src.Subject) ?? false;
+
+        public override bool Equals(object src)
+            => src is ClrAssemblyName n && Equals(n);
 
         [MethodImpl(Inline)]
         public static implicit operator ClrAssemblyName(AssemblyName src)
@@ -41,14 +76,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator ClrAssemblyName(Assembly src)
             => new ClrAssemblyName(src);
-
-        public override int GetHashCode()
-            => Content?.GetHashCode() ?? 0;
-
-        public bool Equals(ClrAssemblyName src)
-            => string.Equals(Content, src.Content);
-
-        public override bool Equals(object src)
-            => src is ClrAssemblyName n && Equals(n);
     }
 }

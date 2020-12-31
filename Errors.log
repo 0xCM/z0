@@ -52,3 +52,39 @@ System.TypeLoadException: Could not load type 'Z0.ClrMemberName' from assembly '
 System.TypeLoadException: Could not load type 'Z0.ClrMemberName' from assembly 'z0.part, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'.
 System.TypeLoadException: Could not load type 'Z0.ClrTypeName' from assembly 'z0.part, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'.
 
+Failure trapped by Main at j:\dev\projects\z0\src\control\src\App.cs 19
+System.FormatException: Index (zero based) must be greater than or equal to zero and less than the size of the argument list.
+   at System.Text.StringBuilder.AppendFormatHelper(IFormatProvider provider, String format, ParamsArray args)
+   at System.String.FormatHelper(IFormatProvider provider, String format, ParamsArray args)
+   at System.String.Format(String format, Object[] args)
+   at Z0.WfLogs.format(IWfLogConfig& src) in j:\dev\projects\z0\src\konst\src\wf.logs\WfLogs.cs:line 18
+   at Z0.WfShell.render(WfInitStatus& src, ITextBuffer dst) in j:\dev\projects\z0\src\konst\src\wf.shell\ops\format.cs:line 25
+   at Z0.WfShell.create(ApiPartSet parts, String[] args, Boolean verbose) in j:\dev\projects\z0\src\konst\src\wf.shell\ops\create.cs:line 80
+   at Z0.WfShell.create(String[] args, Boolean verbose) in j:\dev\projects\z0\src\konst\src\wf.shell\ops\create.cs:line 106
+   at Z0.ApiCaptureRunner.run(String[] args) in j:\dev\projects\z0\src\capture\src\workflow\steps\ApiCaptureRunner.cs:line 28
+   at Z0.App.Main(String[] args) in j:\dev\projects\z0\src\control\src\App.cs:line 15
+
+Failure trapped by Main at j:\dev\projects\z0\src\control\src\App.cs 19
+System.FormatException: Index (zero based) must be greater than or equal to zero and less than the size of the argument list.
+   at System.Text.StringBuilder.AppendFormatHelper(IFormatProvider provider, String format, ParamsArray args)
+   at System.String.FormatHelper(IFormatProvider provider, String format, ParamsArray args)
+   at System.String.Format(String format, Object[] args)
+   at Z0.WfLogs.format(IWfLogConfig& src) in j:\dev\projects\z0\src\konst\src\wf.logs\WfLogs.cs:line 18
+   at Z0.WfShell.render(WfInitStatus& src, ITextBuffer dst) in j:\dev\projects\z0\src\konst\src\wf.shell\ops\format.cs:line 25
+   at Z0.WfShell.create(ApiPartSet parts, String[] args, Boolean verbose) in j:\dev\projects\z0\src\konst\src\wf.shell\ops\create.cs:line 85
+   at Z0.WfShell.create(String[] args, Boolean verbose) in j:\dev\projects\z0\src\konst\src\wf.shell\ops\create.cs:line 111
+   at Z0.ApiCaptureRunner.run(String[] args) in j:\dev\projects\z0\src\capture\src\workflow\steps\ApiCaptureRunner.cs:line 28
+   at Z0.App.Main(String[] args) in j:\dev\projects\z0\src\control\src\App.cs:line 15
+
+Failure trapped by Main at j:\dev\projects\z0\src\control\src\App.cs 19
+System.FormatException: Index (zero based) must be greater than or equal to zero and less than the size of the argument list.
+   at System.Text.StringBuilder.AppendFormatHelper(IFormatProvider provider, String format, ParamsArray args)
+   at System.String.FormatHelper(IFormatProvider provider, String format, ParamsArray args)
+   at System.String.Format(String format, Object[] args)
+   at Z0.WfLogs.format(IWfLogConfig& src) in j:\dev\projects\z0\src\konst\src\wf.logs\WfLogs.cs:line 18
+   at Z0.WfShell.render(WfInitStatus& src, ITextBuffer dst) in j:\dev\projects\z0\src\konst\src\wf.shell\ops\format.cs:line 25
+   at Z0.WfShell.create(ApiPartSet parts, String[] args, Boolean verbose) in j:\dev\projects\z0\src\konst\src\wf.shell\ops\create.cs:line 85
+   at Z0.WfShell.create(String[] args, Boolean verbose) in j:\dev\projects\z0\src\konst\src\wf.shell\ops\create.cs:line 111
+   at Z0.ApiCaptureRunner.run(String[] args) in j:\dev\projects\z0\src\capture\src\workflow\steps\ApiCaptureRunner.cs:line 28
+   at Z0.App.Main(String[] args) in j:\dev\projects\z0\src\control\src\App.cs:line 15
+

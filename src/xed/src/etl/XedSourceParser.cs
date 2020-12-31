@@ -46,7 +46,7 @@ namespace Z0
             return new XedInstructionDoc(rows.ToArray());
         }
 
-        XedInstructionDoc[] ParseSequence(TextDocRows data, int ix)
+        XedInstructionDoc[] ParseInstructions(TextDocRows data, int ix)
         {
             var dst = list<XedInstructionDoc>();
             for(var i=0; i<data.RowCount; i++)
@@ -63,8 +63,8 @@ namespace Z0
             var data = LoadSource(src);
             for(var i=0; i<data.RowCount; i++)
             {
-                if(data[i].Text.ContainsAny(InstructionSeq))
-                    return ParseSequence(data, i);
+                if(data[i].Text.ContainsAny(Instructions))
+                    return ParseInstructions(data, i);
             }
             return z.array<XedInstructionDoc>();
         }
@@ -115,7 +115,7 @@ namespace Z0
             var rt = parts.Length == 2 ? parts[0] : string.Empty;
             var name = parts.Length == 1 ? parts[0] : (parts.Length == 2 ? parts[1] : EmptyString);
             var srcName = data.Source.FileName;
-            return new XedRuleSet(srcName, name, rt, body.Map(x => new XedRule(x)), XedWfOps.rulefile(srcName, name));
+            return new XedRuleSet(srcName, name, rt, body.Map(x => new XedRule(x)), Xed.rulefile(srcName, name));
         }
 
         public XedRuleSet[] ParseFunctions(FS.FilePath src)
@@ -144,6 +144,9 @@ namespace Z0
 
         bool IsEmpty(TextRow src)
             => text.blank(src.Text);
+
+        bool IsSeqHeader(TextRow src)
+            => src.Text.StartsWith(SEQUENCE);
 
         bool Contains(TextRow src, string substring)
             => src.Text.ContainsAny(substring);

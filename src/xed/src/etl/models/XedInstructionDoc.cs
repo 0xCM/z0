@@ -11,11 +11,10 @@ namespace Z0
 
     using M = XedSourceMarkers;
 
-    /// <summary>
-    /// Defines a container over the data found in an instruction resource file for a single instruction
-    /// </summary>
-    public readonly struct XedInstructionDoc
+    public readonly struct XedInstructionDoc : IXedRule<XedInstructionDoc>
     {
+        public XedRuleKind RuleKind => XedRuleKind.Instruction;
+
         public TextRow[] Data {get;}
 
         [MethodImpl(Inline)]
@@ -44,25 +43,25 @@ namespace Z0
             => Data.Length;
 
         public string Class
-            => XedWfOps.pattern(this, M.ICLASS);
+            => Xed.pattern(this, M.ICLASS);
 
         public string Category
-            => XedWfOps.pattern(this, M.CATEGORY);
+            => Xed.pattern(this, M.CATEGORY);
 
         public string Extension
-            => XedWfOps.pattern(this, M.EXTENSION);
+            => Xed.pattern(this, M.EXTENSION);
 
         public string IsaSet
-            => XedWfOps.pattern(this, M.ISA_SET);
+            => Xed.pattern(this, M.ISA_SET);
 
         public string AttributeText
-            => XedWfOps.pattern(this, M.ATTRIBUTES);
+            => Xed.pattern(this, M.ATTRIBUTES);
 
         public string RealOpCode
-            => XedWfOps.pattern(this, M.REAL_OPCODE);
+            => Xed.pattern(this, M.REAL_OPCODE);
 
         public XedPattern[] Patterns
-            => XedWfOps.patterns(this);
+            => Xed.patterns(this);
 
         [MethodImpl(Inline)]
         internal bool IsProp(int index, string Name)

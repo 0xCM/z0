@@ -21,19 +21,19 @@ namespace Z0
         /// </summary>
         /// <param name="paths">The source paths</param>
         [Op]
-        public static SystemApiCatalog system(FS.Files paths)
-            => new SystemApiCatalog(parts(paths.Storage));
+        public static ISystemApiCatalog system(FS.Files paths)
+            => new SystemApiCatalog(paths.Storage.Select(part).Where(x => x.IsSome()).Select(x => x.Value).OrderBy(x => x.Id));
 
         [Op]
         public static ISystemApiCatalog siblings(Assembly src, PartId[] parts)
         {
             var path = FS.path(src.Location).FolderPath;
             var managed = path.Exclude("System.Private.CoreLib").Where(f => FS.managed(f));
-            var catalog =
+            return
                 parts.Length != 0
                 ? new SystemApiCatalog(system(managed).Parts.Where(x => parts.Contains(x.Id)))
                 : system(managed);
-            return catalog;
+
         }
 
         /// <summary>
@@ -87,10 +87,6 @@ namespace Z0
                 return z.none<IPart>();
             }
         }
-
-        [Op]
-        static IPart[] parts(FS.FilePath[] paths)
-            => paths.Select(part).Where(x => x.IsSome()).Select(x => x.Value).OrderBy(x => x.Id);
 
         /// <summary>
         /// Attempts to resolve a part from an assembly file path

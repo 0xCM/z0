@@ -52,18 +52,21 @@ namespace Z0
             return cmd;
         }
 
+        [Op]
         public static ref ListFilesCmd WithExt(this ref ListFilesCmd cmd, params FS.FileExt[] ext)
         {
             cmd.Extensions = ext;
             return ref cmd;
         }
 
+        [Op]
         public static ref ListFilesCmd WithFormat(this ref ListFilesCmd cmd, ListFormatKind format)
         {
             cmd.ListFormat = format;
             return ref cmd;
         }
 
+        [Op]
         public static ref ListFilesCmd WithLimit(this ref ListFilesCmd cmd, uint max)
         {
             cmd.EmissionLimit = max;

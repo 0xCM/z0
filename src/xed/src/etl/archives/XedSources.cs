@@ -23,7 +23,7 @@ namespace Z0
         }
 
         bool DefinesInstructions(FS.FilePath file)
-            => file.Contains(XedSourceMarkers.InstructionSeq, out var _);
+            => file.Contains(XedSourceMarkers.Instructions, out var _);
 
         bool DefinesFunctions(FS.FilePath file)
         {
@@ -31,7 +31,7 @@ namespace Z0
             while(!reader.EndOfStream)
             {
                 var line = reader.ReadLine();
-                if(line.Contains(XedSourceMarkers.RuleMarker) && !line.Contains(XedSourceMarkers.InstructionSeq))
+                if(line.Contains(XedSourceMarkers.RuleMarker) && !line.Contains(XedSourceMarkers.Instructions))
                     return true;
             }
             return false;

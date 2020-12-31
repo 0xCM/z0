@@ -13,7 +13,7 @@ namespace Z0
     {
         IndexedView<CmdId> SupportedCommands {get;}
 
-        void Enlist(params ICmdReactor[] reactors);
+        void Enlist(Index<ICmdReactor> reactors);
 
         CmdResult Dispatch(ICmdSpec cmd);
     }

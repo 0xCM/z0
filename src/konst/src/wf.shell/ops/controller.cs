@@ -12,7 +12,7 @@ namespace Z0
 
     partial class WfShell
     {
-       [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Op]
         public static Assembly controller()
             => WfEnv.entry();
 

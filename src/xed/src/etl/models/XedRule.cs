@@ -9,8 +9,10 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct XedRule : ITextual
+    public readonly struct XedRule : ITextual, IXedRule<XedRule>
     {
+        public XedRuleKind RuleKind => XedRuleKind.Expression;
+
         public string Expression {get;}
 
         [MethodImpl(Inline)]

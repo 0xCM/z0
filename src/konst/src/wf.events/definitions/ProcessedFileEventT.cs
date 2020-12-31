@@ -20,20 +20,20 @@ namespace Z0
 
         public FS.FilePath SourcePath {get;}
 
-        public T FileKind {get;}
+        public T Data {get;}
 
         public FlairKind Flair => FlairKind.Processed;
 
         [MethodImpl(Inline)]
-        public ProcessedFileEvent(WfStepId step, FS.FilePath src, T kind, CorrelationToken ct)
+        public ProcessedFileEvent(WfStepId step, FS.FilePath src, T data, CorrelationToken ct)
         {
             EventId = (EventName, step, ct);
             SourcePath = src;
-            FileKind = kind;
+            Data = data;
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => string.Format(RP.PSx3, EventId, FileKind, SourcePath.ToUri());
+            => string.Format(RP.PSx3, EventId, Data, SourcePath.ToUri());
     }
 }

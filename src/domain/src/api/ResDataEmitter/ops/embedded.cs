@@ -16,6 +16,8 @@ namespace Z0
     {
         public static Index<ResEmission> embedded(IWfShell wf, Assembly src, FS.FolderPath root, utf8 match = default,  bool clear = true)
         {
+            var flow = wf.Running(string.Format("Emitting resources embedded in {0}", src.GetSimpleName()));
+
             var query = match.IsEmpty ? Resources.query(src) : Resources.query(src, match);
             var count = query.ResourceCount;
 
@@ -38,6 +40,8 @@ namespace Z0
                 seek(emission,i) = emit(descriptor, root);
                 wf.EmittedFile((uint)descriptor.Size, emission.Target);
             }
+
+            wf.Ran(flow);
             return buffer;
         }
     }

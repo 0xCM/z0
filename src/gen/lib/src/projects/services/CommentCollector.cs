@@ -64,13 +64,15 @@ namespace Z0
                         var xmlfile = path.ChangeExtension(FileExtensions.Xml);
                         if(xmlfile.Exists)
                         {
+                            var flow = wf.Processing(xmlfile, "Processing XML documentation comment file");
                             var data = xmlfile.ReadText();
                             var parsed = parse(data);
                             if(parsed.Count != 0)
                             {
                                 dst[id] = parsed;
-                                wf.Processed(path, t, dst[id].Count);
                             }
+
+                            wf.Processed(flow, path, t, parsed.Count);
                         }
                     }
                 }

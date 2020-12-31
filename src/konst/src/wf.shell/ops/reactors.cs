@@ -11,7 +11,7 @@ namespace Z0
     partial class WfShell
     {
         [Op]
-        public static ICmdReactor[] reactors(IWfShell wf)
+        public static Index<ICmdReactor> reactors(IWfShell wf)
         {
             var types = wf.Components.Types();
             var reactors = types.Concrete().Tagged<CmdReactorAttribute>().Select(t => (ICmdReactor)Activator.CreateInstance(t));

@@ -52,13 +52,13 @@ namespace Z0
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => !IsNonEmpty;
+            get => Length != 0;
         }
 
         public ref T this[long i]
         {
             [MethodImpl(Inline)]
-            get => ref seek(Data,i);
+            get => ref seek(Data, i);
         }
 
         public ref T this[ulong i]
@@ -89,9 +89,9 @@ namespace Z0
         public ConstIndex<T> Freeze()
             => Data;
 
-        public bool Equals<C>(Index<T> other, C comparer)
+        public bool Equals<C>(Index<T> src, C comparer)
             where C : IEqualityComparer<T>
-                => Index.equals(View, other.View, comparer);
+                => Index.equals(View, src.View, comparer);
        public string Format()
             => Index.delimit(Data).Format();
 
@@ -122,15 +122,15 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator Span<T>(Index<T> src)
-            => src.Storage;
+            => src.Edit;
 
         [MethodImpl(Inline)]
         public static implicit operator ReadOnlySpan<T>(Index<T> src)
-            => src.Storage;
+            => src.View;
 
         [MethodImpl(Inline)]
         public static implicit operator T[](Index<T> src)
-            => src.Storage;
+            => src.Data;
 
         [MethodImpl(Inline)]
         public static implicit operator Index<T>(T[] src)
