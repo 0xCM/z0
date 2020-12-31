@@ -6,20 +6,27 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.IO;
 
     using static Part;
     using static memory;
 
-    partial struct XedWfOps
+
+    public readonly struct RecordParser<T> : IRecordParser<T>
+        where T : struct
     {
-        [Op]
-        public static Index<XedInstructionRow> instructions(XedPattern[] src)
+        static readonly RecordFields Fields;
+
+        static RecordParser()
         {
-            var input = @readonly(src);
-            var count = input.Length;
-            var dst = alloc<XedInstructionRow>(count);
-            map(src,dst);
-            return dst;
+            Fields = Records.fields<T>();
+        }
+
+        public Outcome Parse(string src, out T dst)
+        {
+
+            dst = default;
+            return default;
         }
     }
 }

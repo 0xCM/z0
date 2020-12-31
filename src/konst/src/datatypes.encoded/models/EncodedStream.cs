@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.IO;
 
-    using static Konst;
+    using static Part;
 
     public readonly struct EncodedStream : IDisposable
     {
@@ -24,8 +24,7 @@ namespace Z0
         }
 
         public void Dispose()
-        {
-            Stream?.Dispose();
-        }
+            => Stream?.Dispose();
+
     }
 }

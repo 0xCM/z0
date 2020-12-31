@@ -2,18 +2,17 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Xed
+namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
-    using System.Linq;
-
-    using static Part;
-    using static memory;
-
-    partial struct XedWfOps
+    partial struct JsonDepsModel
     {
+        public struct RuntimeFileInfo
+        {
+            public FS.FilePath Path;
 
+            public string AssemblyVersion;
+
+            public string FileVersion;
+        }
     }
 }

@@ -4,11 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IRecordFormatter<T>
+    using System;
+
+    public interface IRecordParser<T>
         where T : struct
     {
-        string Format(in T src);
-
-        string Format(in DynamicRow<T> src);
+        Outcome Parse(string src, out T dst);
     }
 }

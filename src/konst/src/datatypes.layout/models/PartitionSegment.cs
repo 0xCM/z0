@@ -11,8 +11,11 @@ namespace Z0
     using static Part;
     using static NumericCast;
 
+    /// <summary>
+    /// Defines a <see cref='Partition{T}'/> segment
+    /// </summary>
     [StructLayout(LayoutKind.Sequential)]
-    public readonly struct PartitionRange<T>
+    public readonly struct PartitionSegment<T>
         where T : unmanaged
     {
         public T Min {get;}
@@ -20,20 +23,20 @@ namespace Z0
         public T Max {get;}
 
         [MethodImpl(Inline)]
-        public PartitionRange(T min, T max)
+        public PartitionSegment(T min, T max)
         {
             Min = min;
             Max = max;
         }
-
-        [MethodImpl(Inline)]
-        public static implicit operator PartitionRange<T>((T min, T max) src)
-            => new PartitionRange<T>(src.min, src.max);
 
         public ulong Width
         {
             [MethodImpl(Inline)]
             get => force<ulong>(Max) - force<ulong>(Min);
         }
+
+        [MethodImpl(Inline)]
+        public static implicit operator PartitionSegment<T>((T min, T max) src)
+            => new PartitionSegment<T>(src.min, src.max);
     }
 }

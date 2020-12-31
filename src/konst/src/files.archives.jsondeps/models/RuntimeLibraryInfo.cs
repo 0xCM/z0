@@ -4,15 +4,15 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
-    partial struct JsonDeps
+    partial struct JsonDepsModel
     {
-        public struct LibDependency
+        public struct RuntimeLibraryInfo
         {
-            public string Name;
+            public Index<AssetGroupInfo> AssemblyGroups;
 
-            public string Version;
+            public Index<AssetGroupInfo> NativeLibraries;
+
+            public Index<ResourceAssembly> ResourceAssemblies;
         }
     }
 }

@@ -12,7 +12,8 @@ namespace Z0
     /// <summary>
     /// Describes a column in a table
     /// </summary>
-    public struct RecordField
+    public struct RecordField<T>
+        where T : struct
     {
         /// <summary>
         /// The defining field
@@ -49,6 +50,15 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => Definition.DeclaringType;
+        }
+
+        [MethodImpl(Inline)]
+        public static implicit operator RecordField(RecordField<T> src)
+        {
+            var dst = new RecordField();
+            dst.Definition = src.Definition;
+            dst.FieldIndex = src.FieldIndex;
+            return dst;
         }
     }
 }

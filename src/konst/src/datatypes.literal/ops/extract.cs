@@ -9,16 +9,16 @@ namespace Z0
     using System.Reflection;
 
     using static Part;
-    using static z;
+    using static memory;
 
     partial struct Literals
     {
         [MethodImpl(Inline), Op]
-        public static void extract(ReadOnlySpan<FieldInfo> fields, Span<string> dst)
+        public static void extract(ReadOnlySpan<FieldInfo> fields, Span<object> dst)
         {
             var count = fields.Length;
             for(var i=0u; i<count; i++)
-                seek<string>(dst,i) = (string)skip(fields,i).GetRawConstantValue();
+                seek(dst,i) = skip(fields,i).GetRawConstantValue();
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]

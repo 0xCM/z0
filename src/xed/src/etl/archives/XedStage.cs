@@ -2,14 +2,14 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Xed
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
     using System.Linq;
 
-    public readonly struct XedStage : IPartFilePaths
+    readonly struct XedStage : IPartFilePaths
     {
         public static XedStage Create(FS.FolderPath root)
             => new XedStage(root);

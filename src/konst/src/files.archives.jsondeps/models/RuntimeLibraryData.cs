@@ -4,11 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    partial struct JsonDeps
+    partial struct JsonDepsModel
     {
         public struct RuntimeLibInfo
         {
-            public Library Library;
+            public LibraryInfo Library;
         }
     }
 }

@@ -7,16 +7,16 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     public readonly struct CapturedCodeBlock
     {
-        public readonly MemoryAddress Base;
+        public MemoryAddress Base {get;}
 
-        public readonly CodeBlock Input;
+        public CodeBlock Input {get;}
 
-        public readonly CodeBlock Output;
+        public CodeBlock Output {get;}
 
         [MethodImpl(Inline)]
         public CapturedCodeBlock(MemoryAddress @base, CodeBlock input, CodeBlock output)
@@ -59,12 +59,6 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Output.IsNonEmpty;
         }
-
-        public CodeBlock Source
-            => Input;
-
-        public CodeBlock Target
-            => Output;
 
         [MethodImpl(Inline)]
         public bool Equals(CapturedCodeBlock src)

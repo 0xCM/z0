@@ -20,7 +20,7 @@ namespace Z0
         /// </summary>
         public LayoutIdentity Id {get;}
 
-        readonly PartitionRange<ulong> Range;
+        readonly PartitionSegment<ulong> Range;
 
         /// <summary>
         /// The enclosure-relative partition index
@@ -31,7 +31,7 @@ namespace Z0
         public LayoutPart(LayoutIdentity id, ulong start, ulong end)
         {
             Id = id;
-            Range = new PartitionRange<ulong>(start,end);
+            Range = new PartitionSegment<ulong>(start,end);
         }
 
         /// <summary>

@@ -12,18 +12,18 @@ namespace Z0
     /// <summary>
     /// Captures a symbol name assignment
     /// </summary>
-    public readonly struct NamedSymbol<S> : ITextual
+    public readonly struct NamedSymbol<S> : ISymbol<S>
         where S : unmanaged
     {
-        public S Symbol {get;}
+        public S Value {get;}
 
         public SymbolName Name {get;}
 
         [MethodImpl(Inline)]
-        public NamedSymbol(S symbol, string name)
+        public NamedSymbol(S symbol, SymbolName name)
         {
             Name = name;
-            Symbol = symbol;
+            Value = symbol;
         }
 
         [MethodImpl(Inline)]

@@ -7,7 +7,7 @@ namespace Z0.Asm
     using R = X86Registers;
 
     [ApiType]
-    public readonly struct X86RegModels
+    public readonly struct RegModels
     {
         public static R.al al => default;
 

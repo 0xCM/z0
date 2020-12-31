@@ -4,11 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    partial struct JsonDeps
+    partial struct JsonDepsModel
     {
         public struct Options
         {
-            public IndexedSeq<string> Defines;
+            public Index<string> Defines;
 
             public string LanguageVersion;
 

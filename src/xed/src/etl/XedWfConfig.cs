@@ -6,9 +6,6 @@ namespace Z0
 {
     using System;
 
-    using xed_ext = Xed.xed_extension_enum_t;
-    using xed_cat = Xed.xed_category_enum_t;
-
     public readonly struct XedWfConfig
     {
         public XedWfConfig(IWfShell wf)
@@ -17,7 +14,7 @@ namespace Z0
             var db = wf.Db();
 
             Source = db.DevData("xed");
-            Target = db.RefData("xed");
+            Target = db.TableRoot("xed");
         }
 
         public FS.FileName SummaryFile
@@ -35,38 +32,53 @@ namespace Z0
         public FS.FolderName CategoryFolder
             => FS.folder("categories");
 
+        public FS.FolderName FunctionFolder
+            => FS.folder("functions");
+
+        public FS.FolderName InstructionFolder
+            => FS.folder("instructions");
+
+        public FS.FolderName RuleFolder
+            => FS.folder("rules");
+
+        public FS.FolderPath InstructionDir
+            => Target + InstructionFolder;
+
+        public FS.FolderPath FunctionDir
+            => Target + FunctionFolder;
+
         public FS.FileExt DataFileExt
             => FileExtensions.Csv;
 
-        public xed_ext[] Extensions
+        public XedExtension[] Extensions
         {
             [Op]
             get => ExtensionData;
         }
 
-        public xed_cat[] Categories
+        public XedCategory[] Categories
         {
             [Op]
             get => CategoryData;
         }
 
-       static xed_ext[] ExtensionData => new xed_ext[]{
-            xed_ext.XED_EXTENSION_BASE,
-            xed_ext.XED_EXTENSION_AVX,
-            xed_ext.XED_EXTENSION_AVX2,
-            xed_ext.XED_EXTENSION_BMI1,
-            xed_ext.XED_EXTENSION_BMI2,
-            xed_ext.XED_EXTENSION_SSE,
-            xed_ext.XED_EXTENSION_SSE2,
+       static XedExtension[] ExtensionData => new XedExtension[]{
+            XedExtension.XED_EXTENSION_BASE,
+            XedExtension.XED_EXTENSION_AVX,
+            XedExtension.XED_EXTENSION_AVX2,
+            XedExtension.XED_EXTENSION_BMI1,
+            XedExtension.XED_EXTENSION_BMI2,
+            XedExtension.XED_EXTENSION_SSE,
+            XedExtension.XED_EXTENSION_SSE2,
         };
 
-       static xed_cat[] CategoryData => new xed_cat[]{
-            xed_cat.XED_CATEGORY_BINARY,
-            xed_cat.XED_CATEGORY_SHIFT,
-            xed_cat.XED_CATEGORY_BITBYTE,
-            xed_cat.XED_CATEGORY_COND_BR,
-            xed_cat.XED_CATEGORY_UNCOND_BR,
-            xed_cat.XED_CATEGORY_LOGICAL,
+       static XedCategory[] CategoryData => new XedCategory[]{
+            XedCategory.XED_CATEGORY_BINARY,
+            XedCategory.XED_CATEGORY_SHIFT,
+            XedCategory.XED_CATEGORY_BITBYTE,
+            XedCategory.XED_CATEGORY_COND_BR,
+            XedCategory.XED_CATEGORY_UNCOND_BR,
+            XedCategory.XED_CATEGORY_LOGICAL,
         };
     }
 }

@@ -4,11 +4,17 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IRecordFormatter<T>
-        where T : struct
+    partial struct JsonDepsModel
     {
-        string Format(in T src);
+        public struct TargetInfo
+        {
+            public string Framework;
 
-        string Format(in DynamicRow<T> src);
+            public string Runtime;
+
+            public string RuntimeSignature;
+
+            public bool IsPortable;
+        }
     }
 }

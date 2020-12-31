@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// Characterizes a sequence of bits with external semantics
     /// </summary>
-    public interface ISymbol
+    public interface ISymbol : ITextual
     {
         /// <summary>
         /// The encoded symbol value
@@ -20,6 +20,9 @@ namespace Z0
         BinaryCode Encoded {get;}
 
         char Render();
+
+        string ITextual.Format()
+            => Render().ToString();
     }
 
     /// <summary>

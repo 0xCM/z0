@@ -14,9 +14,9 @@ namespace Z0
     {
         public OpIdentity Id {get;}
 
-        public readonly CaptureOutcome Outcome;
+        public CaptureOutcome Outcome {get;}
 
-        public readonly CapturedCodeBlock Encoded;
+        public CapturedCodeBlock Encoded {get;}
 
         public byte[] Data
         {

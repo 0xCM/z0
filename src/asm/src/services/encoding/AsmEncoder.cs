@@ -20,7 +20,7 @@ namespace Z0.Asm
             => RexPrefixBits.define(src);
 
         [Op]
-        public static string format(X86RegBits src)
+        public static string format(RegBits src)
         {
             const string Sep = " | ";
             var seg0 = BitFields.format<RegisterIndex,byte>(src.Code);

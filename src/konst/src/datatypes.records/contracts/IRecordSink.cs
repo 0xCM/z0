@@ -4,11 +4,17 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IRecordFormatter<T>
+    using System;
+
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
+    [Free]
+    public interface IRecordSink<T> : ISink<T>
         where T : struct
     {
-        string Format(in T src);
+        void Deposit(in T src);
 
-        string Format(in DynamicRow<T> src);
+        void ISink<T>.Deposit(T src)
+            => Deposit(in src);
     }
 }

@@ -2,11 +2,15 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
-    [ApiHost("patterns")]
-    public partial class AsmPatterns
+    partial struct JsonDepsModel
     {
+        public struct ResourceAssembly
+        {
+            public string Locale;
 
+            public FS.FilePath Path;
+        }
     }
 }

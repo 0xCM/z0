@@ -9,7 +9,11 @@ namespace Z0
 
     using static Part;
 
-    partial struct DataLayouts
+    partial struct Records
     {
+        [MethodImpl(Inline)]
+        public static RecordSink<T> sink<T>(Receiver<T> dst)
+            where T : struct
+                => new RecordSink<T>(dst);
     }
 }

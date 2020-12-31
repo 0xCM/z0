@@ -7,13 +7,13 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// The register bitfield
     /// </summary>
     [ApiHost]
-    public readonly struct X86RegBits
+    public readonly struct RegBits
     {
         /// <summary>
         /// The register code data (1 byte)
@@ -31,7 +31,7 @@ namespace Z0.Asm
         public readonly RegisterWidth Width;
 
         [MethodImpl(Inline)]
-        public X86RegBits(RegisterIndex c, RegisterClass k, RegisterWidth w)
+        public RegBits(RegisterIndex c, RegisterClass k, RegisterWidth w)
         {
             Code = c;
             Class = k;
@@ -39,7 +39,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        public X86RegBits(RegisterKind src)
+        public RegBits(RegisterKind src)
             => RegisterQuery.split(src, out Code, out Class, out Width);
 
         public RegisterKind Joined
@@ -49,8 +49,8 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator X86RegBits(RegisterKind src)
-            => new X86RegBits(src);
+        public static implicit operator RegBits(RegisterKind src)
+            => new RegBits(src);
     }
 
     enum FI : byte

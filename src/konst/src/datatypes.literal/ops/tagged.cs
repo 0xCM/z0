@@ -8,9 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Konst;
-    using static z;
-
     partial struct Literals
     {
         public static LiteralInfo tagged(FieldInfo target)

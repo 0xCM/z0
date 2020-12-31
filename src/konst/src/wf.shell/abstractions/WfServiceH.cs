@@ -34,12 +34,15 @@ namespace Z0
 
         protected WfHost Host {get; private set;}
 
-        public abstract Type ContractType { get; }
+        protected IWfDb Db {get; private set;}
+
+        public abstract Type ContractType {get;}
 
         public void Init(IWfShell wf)
         {
             Host = WfShell.host(typeof(H));
             Wf = wf.WithHost(Host);
+            Db = wf.Db();
             OnInit();
         }
 

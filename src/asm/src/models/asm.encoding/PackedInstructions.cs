@@ -13,13 +13,9 @@ namespace Z0.Asm
     /// <summary>
     /// Defines a <see cref='PackedInstruction'/> sequence
     /// </summary>
-    public readonly struct PackedInstructions : ISequentialHost<PackedInstructions,PackedInstruction>
+    public readonly struct PackedInstructions : IIndex<PackedInstruction>
     {
-        readonly TableSpan<PackedInstruction> Data;
-
-        [MethodImpl(Inline)]
-        public static implicit operator PackedInstructions(PackedInstruction[] src)
-            => new PackedInstructions(src);
+        readonly Index<PackedInstruction> Data;
 
         [MethodImpl(Inline)]
         public PackedInstructions(PackedInstruction[] src)
@@ -31,7 +27,14 @@ namespace Z0.Asm
             get => Data.IsEmpty;
         }
 
-        Pairings<uint,PackedInstruction> IBijection<uint, PackedInstruction>.Terms
-            => Data.View.Map((i,x) => paired(i,x), z32);
+        public PackedInstruction[] Storage
+        {
+            [MethodImpl(Inline)]
+            get => Data.Storage;
+        }
+
+        [MethodImpl(Inline)]
+        public static implicit operator PackedInstructions(PackedInstruction[] src)
+            => new PackedInstructions(src);
     }
 }

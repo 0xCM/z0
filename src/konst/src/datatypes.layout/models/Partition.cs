@@ -6,10 +6,12 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
     using static Part;
 
+    /// <summary>
+    /// Defines a partition over an interval
+    /// </summary>
     public readonly struct Partition<T>
         where T : unmanaged
     {
@@ -18,16 +20,16 @@ namespace Z0
         /// </summary>
         public ClosedInterval<T> Range {get;}
 
-        readonly Index<PartitionRange<T>> Data;
+        readonly Index<PartitionSegment<T>> Data;
 
         [MethodImpl(Inline)]
-        public Partition(T min, T max, params PartitionRange<T>[] parts)
+        public Partition(T min, T max, params PartitionSegment<T>[] segs)
         {
             Range = (min,max);
-            Data = parts;
+            Data = segs;
         }
 
-        public ReadOnlySpan<PartitionRange<T>> Parts
+        public ReadOnlySpan<PartitionSegment<T>> Segments
         {
             [MethodImpl(Inline)]
             get => Data.Edit;

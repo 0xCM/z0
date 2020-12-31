@@ -3,9 +3,9 @@
 // Copyright   : (c) Chris Moore, 2020
 // License     : Apache
 //-----------------------------------------------------------------------------
-namespace Z0.Xed
+namespace Z0
 {
-    public enum xed_category_enum_t : byte
+    public enum XedCategory : byte
     {
         XED_CATEGORY_INVALID,
 

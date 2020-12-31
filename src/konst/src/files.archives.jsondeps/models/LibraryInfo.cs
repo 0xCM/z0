@@ -4,9 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    partial struct JsonDeps
+    partial struct JsonDepsModel
     {
-        public struct Library
+        public struct LibraryInfo
         {
             public string Type;
 
@@ -16,7 +16,7 @@ namespace Z0
 
             public string Hash;
 
-            public IndexedView<LibDependency> Dependencies;
+            public Index<LibraryDependency> Dependencies;
 
             public bool Serviceable;
 
@@ -25,6 +25,10 @@ namespace Z0
             public string HashPath;
 
             public string RuntimeStoreManifestName;
+
+            public Index<string> Assemblies;
+
+            public Index<FS.FilePath> ReferencePaths;
         }
     }
 }

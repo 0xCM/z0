@@ -7,7 +7,7 @@ namespace Z0
     using System;
 
     [LiteralProvider]
-    public readonly struct XedSourceMarkers
+    readonly struct XedSourceMarkers
     {
         public static string RuleHeader(string name)
             => $"{name}()::";

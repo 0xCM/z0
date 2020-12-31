@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    partial struct JsonDeps
+    partial struct JsonDepsModel
     {
         public struct ProjectDependency
         {

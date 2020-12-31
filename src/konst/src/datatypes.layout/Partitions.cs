@@ -15,7 +15,7 @@ namespace Z0
         const NumericKind Closure = UnsignedInts;
 
         [Op, Closures(Closure)]
-        public static string format<T>(PartitionRange<T> src)
+        public static string format<T>(PartitionSegment<T> src)
             where T : unmanaged
                 => RenderPart<T>().Format(src.Min, src.Max);
 

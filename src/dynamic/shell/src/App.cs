@@ -11,6 +11,7 @@ namespace Z0
 
     using Z0.Images;
     using Z0.Tools;
+    using Z0.Asm;
 
     using static z;
     using static Tools.Llvm;
@@ -239,12 +240,19 @@ namespace Z0
             EmitImageHeaders.run(Wf, cmd);
         }
 
-        public static void PipeImageData(IWfShell wf)
+        void Receive(in ImageContentRecord src)
         {
-            var root = wf.Db().TableRoot<ImageContentRecord>();
-            var archive = ImageArchives.csv(wf);
-            var path = archive.Root + FS.file("image.content.advapi32", FileExtensions.Csv);
-            ImageArchives.PipeImageData(wf, path);
+            Wf.Row(src.Data);
+        }
+
+        public void PipeImageData()
+        {
+            var dst = Records.sink<ImageContentRecord>(Receive);
+            var archive = ImageArchives.csv(Wf);
+            var path = archive.Root + FS.file("image.content.genapp", FileExtensions.Csv);
+            ImageArchives.pipe(Wf, path, dst);
+
+            //ImageArchives.PipeImageData(wf, path);
 
         }
         // CmdResult EmitOpCodes()
@@ -288,11 +296,12 @@ namespace Z0
 
         void ShowDependencies(Assembly src)
         {
-            var deps = JsonDeps.dependencies(src);
-            var libs = deps.Libraries();
-
-
-            //Wf.Row(JsonDeps.json(src));
+            //var json = JsonDepsLoader.json(src);
+            var deps = JsonDepsLoader.from(src);
+            var libs = deps.Libs();
+            var options = deps.Options();
+            var target = deps.Target();
+            iter(libs, lib => Wf.Row(lib.Name));
         }
 
 
@@ -477,12 +486,20 @@ namespace Z0
             Wf.Status(emission);
 
             var image = ImageMaps.map();
+        }
 
+        public void LoadAsmStore()
+        {
+            var store = AsmStore.init(Wf);
+            var patterns = store.Patterns();
+            Wf.Status($"{patterns.Length}");
         }
         public void Run()
         {
             //ShowHandlers();
-            Jit();
+            //Jit();
+            //PipeImageData();
+            LoadAsmStore();
 
             //Run(Args);
             //EmitProcessImages(Wf);

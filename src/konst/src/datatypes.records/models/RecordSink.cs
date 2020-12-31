@@ -9,10 +9,17 @@ namespace Z0
 
     using static Part;
 
-    partial struct Encoded
+    public readonly struct RecordSink<T> : IRecordSink<T>
+        where T : struct
     {
-        [MethodImpl(Inline), Op]
-        public static TaggedCodeBlock tag(CodeBlock src, string tag)
-            => new TaggedCodeBlock(src, tag);
+        readonly Receiver<T> Receiver;
+
+        [MethodImpl(Inline)]
+        public RecordSink(Receiver<T> dst)
+            => Receiver = dst;
+
+        [MethodImpl(Inline)]
+        public void Deposit(in T src)
+            => Receiver?.Invoke(src);
     }
 }

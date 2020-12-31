@@ -37,7 +37,6 @@ namespace Z0
         public static implicit operator JsonText(string src)
             => new JsonText(src);
 
-
         [MethodImpl(Inline)]
         public static implicit operator string(JsonText src)
             => src.Content;

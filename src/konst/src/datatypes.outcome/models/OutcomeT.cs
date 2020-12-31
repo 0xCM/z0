@@ -23,6 +23,15 @@ namespace Z0
         public ulong MessageCode {get;}
 
         [MethodImpl(Inline)]
+        public Outcome(Outcome src)
+        {
+            Ok = src.Ok;
+            Data = default;
+            Message = src.Message;
+            MessageCode = src.MessageCode;
+        }
+
+        [MethodImpl(Inline)]
         public Outcome(bool ok, T data = default)
         {
             Ok = ok;
@@ -102,6 +111,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator Outcome<T>(T data)
             => new Outcome<T>(true, data);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Outcome<T>(Outcome src)
+            => new Outcome<T>(src);
 
         [MethodImpl(Inline)]
         public static implicit operator Outcome<T>((bool ok, T data) src)

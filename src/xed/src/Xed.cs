@@ -4,18 +4,27 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
+    using static memory;
 
-    using F = XedPatternField;
-    using R = XedPatternRow;
-
-    [Record(TableId)]
-    public struct XedPatternRow : ITabular<F,R>
+    public readonly partial struct Xed
     {
-        public const string TableId = "xed.summary";
+        public static Index<XedPatternRow> patterns(ITableArchive archive)
+        {
+            var src = archive.TablePath(FS.file(XedPatternRow.TableId, FileExtensions.Csv));
+            var doc = archive.Document(src).Require();
+            var count = doc.RowCount;
+            var buffer = sys.alloc<XedPatternRow>(count);
+            if(count != 0)
+            {
+                ref var dst = ref first(buffer);
+                for(var i=0; i<count; i++)
+                    load(doc[i], ref seek(dst, i));
+            }
 
-        public static bool load(in TextRow src, ref XedPatternRow dst)
+            return buffer;
+        }
+
+        static bool load(in TextRow src, ref XedPatternRow dst)
         {
             if(src.CellCount == 9)
             {
@@ -34,26 +43,5 @@ namespace Z0
 
             return false;
         }
-
-        public string Class;
-
-        public string Category;
-
-        public string Extension;
-
-        public string IsaSet;
-
-        public BinaryCode BaseCode;
-
-        public string Mod;
-
-        public string Reg;
-
-        public string Pattern;
-
-        public string Operands;
-
-        public string DelimitedText(char sep)
-            => XedWfOps.format(this,sep);
     }
 }

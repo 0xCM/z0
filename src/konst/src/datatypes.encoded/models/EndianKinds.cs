@@ -6,8 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
-    using static Konst;
+
+    using static Part;
 
     public readonly struct EndianLittle : IEndianKind<EndianLittle>
     {
@@ -15,17 +15,17 @@ namespace Z0
         public static implicit operator EndianKind<EndianLittle>(EndianLittle src)
             => default(EndianKind<EndianLittle>);
 
-        public EndianKind Id 
+        public EndianKind Id
             => EndianKind.Little;
     }
-    
+
     public readonly struct EndianBig : IEndianKind<EndianBig>
     {
         [MethodImpl(Inline)]
         public static implicit operator EndianKind<EndianBig>(EndianBig src)
             => default(EndianKind<EndianBig>);
-        
-        public EndianKind Id 
+
+        public EndianKind Id
             => EndianKind.Bit;
     }
 }

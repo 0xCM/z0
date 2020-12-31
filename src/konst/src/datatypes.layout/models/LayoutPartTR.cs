@@ -22,7 +22,7 @@ namespace Z0
     {
         public LayoutIdentity<T> Id {get;}
 
-        readonly PartitionRange<R> Range;
+        readonly PartitionSegment<R> Range;
 
         /// <summary>
         /// The enclosure-relative partition index
@@ -33,7 +33,7 @@ namespace Z0
         public LayoutPart(LayoutIdentity<T> id, R start, R end)
         {
             Id = id;
-            Range = new PartitionRange<R>(start,end);
+            Range = new PartitionSegment<R>(start,end);
         }
 
         /// <summary>

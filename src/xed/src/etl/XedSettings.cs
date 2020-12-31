@@ -19,6 +19,7 @@ namespace Z0
             settings.EmitRules = true;
             settings.EmitMnemonicList = true;
             settings.EmitExtensions = true;
+            settings.EmitCategories = true;
             return settings;
         }
 

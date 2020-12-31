@@ -8,7 +8,7 @@ namespace Z0.Images
     using System.IO;
     using System.Reflection.Metadata;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     [ApiHost]
@@ -21,7 +21,7 @@ namespace Z0.Images
             corefunc.iter(archive.List().Storage, file => wf.Status(file));
         }
 
-        public static void PipeImageData(IWfShell wf, FS.FilePath src)
+        public static void pipe(IWfShell wf, FS.FilePath src, RecordSink<ImageContentRecord> dst)
         {
             using var reader = ImageCsvReader.create(wf, src);
             var record = default(ImageContentRecord);
@@ -29,7 +29,7 @@ namespace Z0.Images
             while(@continue)
             {
                 if(reader.Read(ref record))
-                    wf.Row(record.Data);
+                    dst.Deposit(record);
                 else
                     @continue = false;
             }

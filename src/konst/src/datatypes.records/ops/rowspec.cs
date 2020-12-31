@@ -20,6 +20,12 @@ namespace Z0
         public static RowFormatSpec rowspec(RowHeader header, CellFormatSpec[] cells)
             => new RowFormatSpec(header, cells);
 
+        /// <summary>
+        /// Defines a <see cref='RowFormatSpec{T}'/>
+        /// </summary>
+        /// <param name="widths">The cell widths</param>
+        /// <typeparam name="T">The record type</typeparam>
+        [Op, Closures(Closure)]
         public static RowFormatSpec rowspec<T>(ReadOnlySpan<byte> widths)
             where T : struct
         {
