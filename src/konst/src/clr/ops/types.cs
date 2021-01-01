@@ -13,8 +13,8 @@ namespace Z0
     partial struct ClrQuery
     {
         [MethodImpl(Inline), Op]
-        public static Type[] types(Assembly src)
-            => src.GetTypes();
+        public static ReadOnlySpan<ClrType> types(Assembly src)
+            => view(src.GetTypes(), ClrViews.type);
 
         [MethodImpl(Inline), Op]
         public static Type type(Index<Type> src, ClrToken id)

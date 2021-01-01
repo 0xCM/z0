@@ -64,6 +64,12 @@ namespace Z0
             get => Definition.DeclaringType;
         }
 
+        public bool IsLiteral
+        {
+            [MethodImpl(Inline)]
+            get => Definition.IsLiteral;
+        }
+
         public MemoryAddress Address
         {
             [MethodImpl(Inline)]

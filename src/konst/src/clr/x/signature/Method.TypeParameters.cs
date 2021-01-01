@@ -15,7 +15,7 @@ namespace Z0
         /// </summary>
         /// <param name="method">The method to examine</param>
         [Op]
-        public static TypeParamInfo[] TypeParameters(this MethodInfo method)
-            => method.GenericParameters(false).Mapi((i,t) => new TypeParamInfo(t.DisplayName(), i));
+        public static ClrTypeParamInfo[] TypeParameters(this MethodInfo method)
+            => method.GenericParameters(false).Mapi((i,t) => new ClrTypeParamInfo(t.DisplayName(), i));
     }
 }

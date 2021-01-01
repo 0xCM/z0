@@ -27,7 +27,7 @@ namespace Z0
         public ReadOnlySpan<ClrType> NestedTypes
         {
             [MethodImpl(Inline)]
-            get => z.recover<Type,ClrType>(ClrQuery.nested(Definition));
+            get => ClrQuery.nested(Definition);
         }
 
         public ClrArtifactKind Kind

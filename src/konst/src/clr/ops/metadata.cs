@@ -31,11 +31,11 @@ namespace Z0
             var dst = new MethodMetadata();
             dst.Token = src.MetadataToken;
             dst.MethodName = src.DisplayName();
-            dst.DefiningAssembly = src.Module.Assembly.GetSimpleName();
+            dst.DefiningAssembly = src.Module.Assembly;
             dst.DefiningModule = src.Module.Name;
-            dst.DeclaringType = TypeSigInfo.from(src.DeclaringType);
-            dst.ReturnType = TypeSigInfo.from(src.ReturnType);
-            dst.ValueParams = src.GetParameters().Select(p => new MethodParameter(TypeSigInfo.from(p), p.RefKind(), p.Name, (ushort)p.Position));
+            dst.DeclaringType = ClrTypeSigInfo.from(src.DeclaringType);
+            dst.ReturnType = ClrTypeSigInfo.from(src.ReturnType);
+            dst.ValueParams = src.GetParameters().Select(p => new ClrParamInfo(ClrTypeSigInfo.from(p), p.RefKind(), p.Name, (ushort)p.Position));
             dst.TypeParams = src.TypeParameters();
             return dst;
         }

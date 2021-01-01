@@ -78,5 +78,19 @@ namespace Z0
                 seek(target,i) = new FieldValue(f, f.GetValueDirect(tRef));
             }
         }
+
+        [Op, Closures(Closure)]
+        public static void values<T>(in T src, ReadOnlySpan<ClrField> fields, Span<FieldValue> dst)
+            where T : struct
+        {
+            ref var target = ref first(dst);
+            var tRef = __makeref(edit(src));
+            var count = fields.Length;
+            for(var i=0u; i<count; i++)
+            {
+                ref readonly var f = ref skip(fields,i);
+                seek(target,i) = new FieldValue(f, f.GetValueDirect(tRef));
+            }
+        }
     }
 }

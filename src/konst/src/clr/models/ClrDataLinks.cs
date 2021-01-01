@@ -16,7 +16,7 @@ namespace Z0
     /// <typeparam name="T">The target type</typeparam>
     public sealed class ClrDataLinks<S,T> : IEnumerable<ClrDataLink>
     {
-        HashSet<ClrDataLink> Associations { get; }
+        HashSet<ClrDataLink> Associations {get;}
 
         public ClrDataLinks(IEnumerable<ClrDataLink> associations)
             => Associations = associations.ToHashSet();

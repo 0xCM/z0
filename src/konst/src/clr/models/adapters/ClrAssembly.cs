@@ -40,11 +40,23 @@ namespace Z0
             get => Definition.GetSimpleName();
         }
 
+        public ClrAssemblyName Name
+            => Definition;
+
         public ClrArtifactKind ClrKind
             => ClrArtifactKind.Assembly;
 
+        public ReadOnlySpan<ClrAssemblyName> ReferencedAssemblies
+            => ClrQuery.references(Definition);
+
         public ClrToken Token
-            => Definition.GetHashCode();
+            => default;
+
+        public Ref<byte> RawMetadata
+        {
+            [MethodImpl(Inline)]
+            get => ClrQuery.metadata(Definition);
+        }
 
         string IClrArtifact.Name
             => Definition.FullName;

@@ -28,23 +28,22 @@ namespace Z0
                 seek(names,i) = field.Name;
                 seek(values, i) = (T)field.GetRawConstantValue();
             }
-            return new LiteralIndex<T>(fields,nameBuffer,valueBuffer);
+            return new LiteralIndex<T>(fields, nameBuffer, valueBuffer);
         }
 
         [Op]
-        public static Span<FieldInfo> literals(in IndexedSeq<FieldInfo> src, Span<FieldInfo> dst)
+        public static Span<ClrField> literals(ReadOnlySpan<ClrField> src, Span<ClrField> dst)
         {
             var k = 0u;
-            var view = src.Edit;
-            var count = view.Length;
+            var count = src.Length;
             for(var i=0u; i<count; i++)
-                if(skip(view,i).IsLiteral)
-                    seek(dst, k++) = skip(view,i);
+                if(skip(src,i).IsLiteral)
+                    seek(dst, k++) = skip(src,i);
             return slice(dst,k);
         }
 
         [Op]
-        public static Span<FieldInfo> literals(Type src, Span<FieldInfo> dst)
+        public static Span<ClrField> literals(Type src, Span<ClrField> dst)
             => literals(fields(src), dst);
 
         /// <summary>

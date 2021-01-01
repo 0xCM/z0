@@ -16,15 +16,15 @@ namespace Z0
     /// Defines the primary interface for clr artifact interrogation
     /// </summary>
     [ApiHost]
-    public readonly partial struct ClrViews
+    readonly partial struct ClrViews
     {
-        static FieldView field => default;
+        public static ClrField field => default;
 
-        static MethodView method => default;
+        public static ClrMethod method => default;
 
-        static TypeView type => default;
+        public static ClrType type => default;
 
-        static ClrModule module => default;
+        public static ClrModule module => default;
 
         [MethodImpl(Inline), Op]
         public static ClrModule vManifest(Assembly src)
@@ -57,33 +57,12 @@ namespace Z0
             => src;
 
         /// <summary>
-        /// Defines a <see cref='ClrMethod'/> over the source
-        /// </summary>
-        /// <param name="src">The source module</param>
-        [MethodImpl(Inline), Op]
-        public static ClrMethod view(MethodInfo src)
-            => src;
-
-        /// <summary>
-        /// Defines a <see cref='FieldView'/> over the source
+        /// Defines a <see cref='ClrField'/> over the source
         /// </summary>
         /// <param name="src">The source module</param>
         [MethodImpl(Inline), Op]
         public static ClrField view(FieldInfo src)
             => src;
-
-        /// <summary>
-        /// Defines a <see cref='ValueParamView'/> over the source
-        /// </summary>
-        /// <param name="src">The source module</param>
-
-        [MethodImpl(Inline), Op]
-        public static ValueParamView view(ParameterInfo src)
-            => src;
-
-        [MethodImpl(Inline), Op]
-        public static ClrTypeCodes TypeCodes()
-            => ClrTypeCodes.cached();
 
         [MethodImpl(Inline), Op]
         public static MethodInfo[] methods(Type src)
@@ -110,37 +89,10 @@ namespace Z0
         public static ClrArtifactSet<TypeView> sTypes(Assembly src)
             => memory.recover<Type,TypeView>(@readonly(src.Types()));
 
-        /// <summary>
-        /// Queries the host type for a <see cref='ClrInterfaceMap'/>
-        /// </summary>
-        /// <param name="host"></param>
-        /// <param name="contract"></param>
-        [MethodImpl(Inline), Op]
-        public static ClrInterfaceMap iMap(Type host, Type contract)
-            => @as<InterfaceMapping, ClrInterfaceMap>(host.InterfaceMap(contract));
 
-        /// <summary>
-        /// Provides a non-allocated <see cref='FieldView'> sequence that covers the fields defined by the source
-        /// </summary>
-        /// <param name="src">The source type</param>
-        [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<FieldView> vFields(Type src)
-            => View(ClrQuery.fields(src), field);
 
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<MethodView> vMethods(Type src)
-            => View(methods(src), method);
-
-        [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<ClrModule> vModules(Assembly src)
-            => View(src.Modules(), module);
-
-        [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<TypeView> vTypes(Assembly src)
-            => View(src.Types(), type);
-
-        [MethodImpl(Inline), Op]
-        internal static ReadOnlySpan<V> View<S,V>(S[] src, V v = default)
+        public static ReadOnlySpan<V> view<S,V>(S[] src, V v = default)
             => memory.recover<S,V>(@readonly(src));
 
         [MethodImpl(Inline)]

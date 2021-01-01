@@ -43,7 +43,7 @@ namespace Z0
         public ClrType DeclaringType
         {
             [MethodImpl(Inline)]
-            get => Definition.DeclaringType;
+            get => Definition.DeclaringType ?? typeof(void);
         }
 
         public CallingConventions CallingConvention

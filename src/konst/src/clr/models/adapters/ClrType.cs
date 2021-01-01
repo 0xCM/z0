@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static memory;
 
     [ApiType(ApiNames.ClrType, true)]
     public readonly struct ClrType : IClrRuntimeType<ClrType>
@@ -43,7 +42,7 @@ namespace Z0
         public ReadOnlySpan<ClrType> NestedTypes
         {
             [MethodImpl(Inline)]
-            get => recover<Type,ClrType>(ClrQuery.nested(Definition));
+            get => ClrQuery.nested(Definition);
         }
 
         string IClrArtifact.Name

@@ -24,15 +24,7 @@ namespace Z0
             => ref ClrTypeCodeCache.Data;
 
         [MethodImpl(Inline), Op]
-        public static TypeCodeIndex index(in ClrTypeCodes src)
-            => new TypeCodeIndex(src.Types);
-
-        [MethodImpl(Inline), Op]
         public static ref readonly Type type(in ClrTypeCodes src, TypeCode tc)
-            => ref src[tc];
-
-        [MethodImpl(Inline), Op]
-        public static ref readonly Type type(in TypeCodeIndex src, TypeCode tc)
             => ref src[tc];
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]

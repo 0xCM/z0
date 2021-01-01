@@ -163,8 +163,6 @@ public readonly struct ApiNames
 
     public const string ClrQuery = ClrRuntime + dot + query;
 
-    public const string ClrQuerySvc = ClrRuntime + dot + query + dot + svc;
-
     public const string XClrQuery = ClrRuntime + dot + query + dot + extensions;
 
     // ~~ Clr Metadata

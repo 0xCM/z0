@@ -13,7 +13,7 @@ namespace Z0
     partial struct ClrQuery
     {
         [MethodImpl(Inline), Op]
-        public static Type[] nested(Type src)
-            => src.GetNestedTypes();
+        public static ReadOnlySpan<ClrType> nested(Type src)
+            => memory.recover<Type,ClrType>(src.GetNestedTypes());
     }
 }

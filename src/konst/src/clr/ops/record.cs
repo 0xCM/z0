@@ -14,13 +14,13 @@ namespace Z0
     partial struct ClrQuery
     {
         [MethodImpl(Inline), Op]
-        public static ClrPrimitiveRecord record(PrimalKind src)
-            => new ClrPrimitiveRecord(src, ClrPrimitives.width(src), ClrPrimitives.sign(src), (PrimalTypeCode)ClrPrimitives.code(src));
+        public static ClrPrimitiveInfo record(PrimalKind src)
+            => new ClrPrimitiveInfo(src, ClrPrimitives.width(src), ClrPrimitives.sign(src), (PrimalTypeCode)ClrPrimitives.code(src));
 
         [MethodImpl(Inline), Op]
         public static ClrFieldRecord record(FieldInfo src)
         {
-            var data = view(src);
+            var data = ClrViews.view(src);
             var dst = new ClrFieldRecord();
             dst.Key = reference(data);
             dst.DeclaringType = data.DeclaringType.Token;

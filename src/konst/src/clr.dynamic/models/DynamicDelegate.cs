@@ -9,8 +9,8 @@ namespace Z0
     using System.Reflection.Emit;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-        
+    using static Part;
+
     /// <summary>
     /// Encloses a delegate that was manufactured dynamically
     /// </summary>

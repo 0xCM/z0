@@ -13,18 +13,17 @@ namespace Z0
 
         public Name MethodName;
 
-        public Name DefiningAssembly;
+        public ClrAssemblyName DefiningAssembly;
 
         public Name DefiningModule;
 
-        public TypeSigInfo DeclaringType;
+        public ClrTypeSigInfo DeclaringType;
 
-        public TypeSigInfo ReturnType;
+        public ClrTypeSigInfo ReturnType;
 
-        public MethodParameters ValueParams;
+        public Index<ClrParamInfo> ValueParams;
 
-        public TypeParameters TypeParams;
-
+        public Index<ClrTypeParamInfo> TypeParams;
         public string Format()
             => ClrQuery.format(this);
 

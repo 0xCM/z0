@@ -8,16 +8,13 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Konst;
+    using static ReflectionFlags;
+    using static Part;
 
     partial struct ClrQuery
     {
-        /// <summary>
-        /// Selects all instance/static and public/non-public fields declared or inherited by a type
-        /// </summary>
-        /// <param name="src">The type to examine</param>
         [MethodImpl(Inline), Op]
-        public static Index<MethodInfo> methods(Type src)
-            => src.GetMethods(BF);
+        public static ReadOnlySpan<ClrMethod> methods(Type src)
+            => view(src.GetMethods(BF_All), ClrViews.method);
     }
 }

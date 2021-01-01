@@ -13,11 +13,15 @@ namespace Z0
     partial struct ClrQuery
     {
         /// <summary>
-        /// Returns a <see cref='FieldInfo'/> array of the fields defined by the source
+        /// Returns a <see cref='ClrField'/> readonly span of the fields defined by the source
         /// </summary>
         /// <param name="src">The source type</param>
         [MethodImpl(Inline), Op]
-        public static FieldInfo[] fields(Type src)
-            => src.GetFields(BF);
+        public static ReadOnlySpan<ClrField> fields(Type src)
+            => view(src.GetFields(BF), ClrViews.field);
+
+        [Op, Closures(Closure)]
+        public static ReadOnlySpan<ClrField> fields<T>(Type src)
+            => memory.recover<FieldInfo,ClrField>(src.Fields().Where(f => f.FieldType == typeof(T)));
     }
 }

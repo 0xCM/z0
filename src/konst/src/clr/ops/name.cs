@@ -13,6 +13,10 @@ namespace Z0
     partial struct ClrQuery
     {
         [MethodImpl(Inline), Op]
+        public static ClrAssemblyName name(Assembly src)
+            => new ClrAssemblyName(src);
+
+        [MethodImpl(Inline), Op]
         public static ClrMemberName name(FieldInfo src)
             => new ClrMemberName(src.Name);
 

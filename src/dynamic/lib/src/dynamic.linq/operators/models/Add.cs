@@ -32,7 +32,7 @@ namespace Z0
                     {
 
                         case TypeCode.String:
-                            return fx(ClrQuery.method<T,T,T>(nameof(String.Concat)).Require().Func<T,T,T>()).Compile();
+                            return fx(LinqDynamic.method<T,T,T>(nameof(String.Concat)).Require().Func<T,T,T>()).Compile();
                         case TypeCode.Byte:
                             return cast<Func<T,T,T>>(Ops8u.Add.Compile());
                         case TypeCode.SByte:
