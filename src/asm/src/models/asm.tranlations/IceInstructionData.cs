@@ -6,10 +6,6 @@ namespace Z0.Ice
 {
     using System;
     using System.Runtime.InteropServices;
-    using System.Runtime.CompilerServices;
-
-    using static Konst;
-    using static z;
 
     [StructLayout(LayoutKind.Sequential)]
     public struct IceInstructionData

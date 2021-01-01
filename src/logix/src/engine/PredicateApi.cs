@@ -10,13 +10,13 @@ namespace Z0.Logix
     using static Konst;
     using static LogicSig;
 
-    using BCK = BinaryComparisonApiClass;
+    using BCK = ComparisonApiClass;
 
     [ApiHost]
     public readonly struct PredicateApi
     {
         [Op, NumericClosures(Integers)]
-        public static T eval<T>(BinaryComparisonApiClass kind, T a, T b)
+        public static T eval<T>(ComparisonApiClass kind, T a, T b)
             where T : unmanaged
         {
             switch(kind)

@@ -17,7 +17,7 @@ namespace Z0
     using BLK = BinaryBitLogicKind;
     using TLK = TernaryBitLogicKind;
     using BSK = BitShiftApiClass;
-    using BCK = BinaryComparisonApiClass;
+    using BCK = ComparisonApiClass;
     using BAR = BinaryArithmeticApiClass;
 
     [ApiHost]

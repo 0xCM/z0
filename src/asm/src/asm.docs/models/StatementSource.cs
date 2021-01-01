@@ -7,26 +7,28 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Konst;
 
     partial struct AsmDocParts
     {
-        public readonly struct AsmDocLine
+        public readonly struct StatementSource : ITextual
         {
-            public TextLine Text {get;}
+            public TextBlock Asm {get;}
 
             [MethodImpl(Inline)]
-            public AsmDocLine(TextLine text)
-            {
-                Text = text;
-            }
+            public StatementSource(string asm)
+                => Asm = asm;
 
             [MethodImpl(Inline)]
             public string Format()
-                => Text.Content;
+                => Asm;
 
             public override string ToString()
                 => Format();
+
+            [MethodImpl(Inline)]
+            public static implicit operator StatementSource(string src)
+                => new StatementSource(src);
         }
     }
 }

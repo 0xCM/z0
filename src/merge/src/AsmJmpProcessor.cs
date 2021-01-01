@@ -23,7 +23,7 @@ namespace Z0
 
         public readonly FS.FilePath Target;
 
-        readonly List<AsmJmpInfo> Collected;
+        readonly List<AsmJmpRow> Collected;
 
 
         public void Dispose()
@@ -37,8 +37,8 @@ namespace Z0
             Wf = wf;
             broker = AsmBrokers.jmp();
             Source = src;
-            Collected = list<AsmJmpInfo>();
-            Target = Wf.Db().Table(AsmJmpInfo.TableId, src.Part);
+            Collected = list<AsmJmpRow>();
+            Target = Wf.Db().Table(AsmJmpRow.TableId, src.Part);
         }
 
         void Dispatch(in ApiInstruction fx)
@@ -51,18 +51,18 @@ namespace Z0
 
         public const string RenderPattern = "| {0,-16} | {1,-16} | {2,-16} | {3,-16} | {4,-16} | {5,-16:g} | {6,-32}";
 
-        public static string format(in AsmJmpInfo jmp)
+        public static string format(in AsmJmpRow jmp)
             => string.Format(RenderPattern, jmp.Base, jmp.Source, jmp.InstructionSize, jmp.CallSite, jmp.Target, jmp.Kind, jmp.Asm);
 
         public static string header()
             => string.Format(RenderPattern,
-                nameof(AsmJmpInfo.Base),
-                nameof(AsmJmpInfo.Source),
-                nameof(AsmJmpInfo.InstructionSize),
-                nameof(AsmJmpInfo.CallSite),
-                nameof(AsmJmpInfo.Target),
-                nameof(AsmJmpInfo.Kind),
-                nameof(AsmJmpInfo.Asm)
+                nameof(AsmJmpRow.Base),
+                nameof(AsmJmpRow.Source),
+                nameof(AsmJmpRow.InstructionSize),
+                nameof(AsmJmpRow.CallSite),
+                nameof(AsmJmpRow.Target),
+                nameof(AsmJmpRow.Kind),
+                nameof(AsmJmpRow.Asm)
                 );
 
         public void Process()
@@ -114,7 +114,7 @@ namespace Z0
             }
         }
 
-        static ref AsmJmpInfo init(in ApiInstruction src, JccKind jk, out AsmJmpInfo dst)
+        static ref AsmJmpRow init(in ApiInstruction src, JccKind jk, out AsmJmpRow dst)
         {
             var target = asm.branch(src.Base, src.Instruction, 0);
             dst.Kind = jk;

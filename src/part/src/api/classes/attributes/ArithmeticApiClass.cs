@@ -87,6 +87,7 @@ namespace Z0
 
         Pow = Id.Pow,
 
-        Log2 = Id.Log2
+        Log2 = Id.Log2,
+
     }
 }

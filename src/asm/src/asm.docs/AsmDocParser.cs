@@ -13,9 +13,9 @@ namespace Z0.Asm
 
     public struct AsmDocParser
     {
-        AsmDocLine parse(TextLine src)
+        DocLine parse(TextLine src)
         {
-            return new AsmDocLine(src);
+            return new DocLine(src);
         }
 
         public static AsmDoc parse(string src)
@@ -23,7 +23,7 @@ namespace Z0.Asm
             var parser = new AsmDocParser();
             var lines = Parse.lines(src);
             var count = lines.Count;
-            var dst = sys.alloc<AsmDocLine>(count);
+            var dst = sys.alloc<DocLine>(count);
             ref var target = ref first(dst);
             ref readonly var source = ref lines.First;
             for(var i=0; i<count; i++)

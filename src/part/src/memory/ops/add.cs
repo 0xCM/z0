@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="src">The source reference</param>
         /// <param name="count">The T-cell count to add</param>
         /// <typeparam name="T">The reference type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline), MemAdd, Closures(AllNumeric)]
         public static ref T add<T>(in T src, sbyte count)
             => ref Add(ref edit(src), count);
 
@@ -28,7 +28,7 @@ namespace Z0
         /// <param name="src">The source reference</param>
         /// <param name="count">The T-cell count to subtract</param>
         /// <typeparam name="T">The reference type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline), MemAdd, Closures(AllNumeric)]
         public static ref T add<T>(in T src, byte count)
             => ref Add(ref edit(src), count);
 
@@ -38,7 +38,7 @@ namespace Z0
         /// <param name="src">The source reference</param>
         /// <param name="count">The T-cell count to subtract</param>
         /// <typeparam name="T">The reference type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline), MemAdd, Closures(AllNumeric)]
         public static ref T add<T>(in T src, short count)
             => ref Add(ref edit(src), count);
 
@@ -48,7 +48,7 @@ namespace Z0
         /// <param name="src">The source reference</param>
         /// <param name="count">The T-cell count to subtract</param>
         /// <typeparam name="T">The reference type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline), MemAdd, Closures(AllNumeric)]
         public static ref T add<T>(in T src, ushort count)
             => ref Add(ref edit(src), (int)count);
 
@@ -63,7 +63,7 @@ namespace Z0
         /// u32: movsxd rax,edx -> lea rax,[rcx+rax*4]
         /// u64: movsxd rax,edx -> lea rax,[rcx+rax*8]
         /// </remarks>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline), MemAdd, Closures(AllNumeric)]
         public static ref T add<T>(in T src, int count)
             => ref Add(ref edit(src), count);
 
@@ -79,7 +79,7 @@ namespace Z0
         /// u32: movsxd rax,edx -> lea rax,[rcx+rax*4]
         /// u64: movsxd rax,edx -> lea rax,[rcx+rax*8]
         /// </remarks>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline), MemAdd, Closures(AllNumeric)]
         public static ref T add<T>(in T src, uint count)
             => ref Add(ref edit(src), (int)count);
 
@@ -89,7 +89,7 @@ namespace Z0
         /// <param name="src">The source reference</param>
         /// <param name="count">The T-cell count to add</param>
         /// <typeparam name="T">The reference type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline), MemAdd, Closures(AllNumeric)]
         public static ref T add<T>(in T src, long count)
             => ref Add(ref edit(src), (int)count);
 
@@ -99,7 +99,7 @@ namespace Z0
         /// <param name="src">The source reference</param>
         /// <param name="count">The T-cell count to subtract</param>
         /// <typeparam name="T">The reference type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline), MemAdd, Closures(AllNumeric)]
         public static ref T add<T>(in T src, ulong count)
             => ref Add(ref edit(src), (int)count);
     }

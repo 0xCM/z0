@@ -44,7 +44,7 @@ namespace Z0
             where T : unmanaged
                 => $"{kind}:{typeof(T).NumericKind().Keyword()}";
 
-        public static string sig<T>(BinaryComparisonApiClass kind)
+        public static string sig<T>(ComparisonApiClass kind)
             where T : unmanaged
                 => $"{kind}:{typeof(T).NumericKind().Keyword()}";
 

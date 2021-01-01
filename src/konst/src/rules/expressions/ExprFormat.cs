@@ -28,7 +28,7 @@ namespace Z0
             => $"{kind.Format()}({arg1}, {arg2})";
 
         [Op]
-        public static string format(BinaryComparisonApiClass kind)
+        public static string format(ComparisonApiClass kind)
             => kind.ToString().ToLower();
 
         [Op]
@@ -46,7 +46,7 @@ namespace Z0
         public static string format<T>(BinaryArithmeticApiClass kind, T arg1, T arg2)
             => $"{kind.ToString().ToLower()}({arg1}, {arg2})";
 
-        public static string format<T>(BinaryComparisonApiClass kind, T arg1, T arg2)
+        public static string format<T>(ComparisonApiClass kind, T arg1, T arg2)
             => $"{kind.Format()}({arg1}, {arg2})";
     }
 }

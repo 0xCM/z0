@@ -21,7 +21,7 @@ namespace Z0.Asm
             /// </summary>
             /// <param name="src">The defining source value</param>
             /// <typeparam name="T">The operand type</typeparam>
-            [MethodImpl(Inline)]
+            [MethodImpl(Inline), Op, Closures(Closure)]
             public static ImmOp<T> imm<T>(T src)
                 where T : unmanaged
                     => src;
@@ -31,7 +31,7 @@ namespace Z0.Asm
             /// </summary>
             /// <param name="src">The defining source value</param>
             /// <typeparam name="T">The operand type</typeparam>
-            [MethodImpl(Inline)]
+            [MethodImpl(Inline), Op, Closures(Closure)]
             public static MemOp<T> mem<T>(T src)
                 where T : unmanaged
                     => src;
@@ -41,22 +41,22 @@ namespace Z0.Asm
             /// </summary>
             /// <param name="src">The defining source value</param>
             /// <typeparam name="T">The operand type</typeparam>
-            [MethodImpl(Inline)]
+            [MethodImpl(Inline), Op, Closures(Closure)]
             public static RegOp<T> reg<T>(T src)
-                where T : unmanaged, IRegister<T>
+                where T : unmanaged
                     => src;
 
-            [MethodImpl(Inline)]
+            [MethodImpl(Inline), Op, Closures(Closure)]
             public static ref byte edit<T>(in RegOp<T> src)
-                where T : unmanaged, IRegister<T>
+                where T : unmanaged
                     => ref bytes<RegOp<T>,T>(src);
 
-            [MethodImpl(Inline)]
+            [MethodImpl(Inline), Op, Closures(Closure)]
             public static ref byte edit<T>(in ImmOp<T> src)
                 where T : unmanaged
                     => ref bytes<ImmOp<T>,T>(src);
 
-            [MethodImpl(Inline)]
+            [MethodImpl(Inline), Op, Closures(Closure)]
             public static ref byte edit<T>(in MemOp<T> src)
                 where T : unmanaged
                     => ref bytes<MemOp<T>,T>(src);

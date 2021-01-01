@@ -11,7 +11,6 @@ namespace Z0.Parts
 
     public sealed class Refs : Part<Refs>
     {
-
         public readonly struct Imports
         {
             public Assembly MsBuildFramework

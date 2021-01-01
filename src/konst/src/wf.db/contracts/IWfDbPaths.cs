@@ -33,7 +33,7 @@ namespace Z0
         FS.FolderPath BuildArchiveRoot()
             => ArchiveRoot() + FS.folder(DbNames.builds);
 
-        FS.FileExt DefaultFileExt
+        FS.FileExt DefaultTableExt
              => Csv;
 
         FS.FolderPath EventRoot()
@@ -93,14 +93,17 @@ namespace Z0
             where T : struct
                 => TableRoot(typeof(T));
 
-        FS.FilePath Table(string id, PartId part, FS.FileExt? ext = null)
-            => TableRoot(id) + FS.file(string.Format(RP.SlotDot2, id, part.Format()), ext ?? DefaultFileExt);
+        FS.FilePath Table(string id, PartId part)
+            => TableRoot(id) + FS.file(string.Format(RP.SlotDot2, id, part.Format()), DefaultTableExt);
+
+        FS.FilePath Table(string id)
+            => TableRoot() + FS.file(id, DefaultTableExt);
 
         FS.FilePath Table(PartId part, string id, FS.FileExt ext)
             => TableRoot(id) + FS.file(part.Format(), ext);
 
         FS.FilePath Table(Type t, PartId part)
-            => t.Tag<RecordAttribute>().MapValueOrElse(a => Table(part,  a.TableId, DefaultFileExt), () => Table(part, t.Name, DefaultFileExt));
+            => t.Tag<RecordAttribute>().MapValueOrElse(a => Table(part,  a.TableId, DefaultTableExt), () => Table(part, t.Name, DefaultTableExt));
 
         FS.FilePath Table<T>(PartId part)
             where T : struct
@@ -110,7 +113,7 @@ namespace Z0
             => TableRoot()+ FS.folder(id) + FS.file(text.format(DbNames.qualified, id, subject), ext ?? Csv);
 
         FS.FilePath IndexTable(string id)
-            => TableRoot() + FS.file(id, DefaultFileExt);
+            => TableRoot() + FS.file(id, DefaultTableExt);
 
         FS.FilePath IndexTable(Type t)
             => t.Tag<RecordAttribute>().MapValueOrElse(a => IndexTable(a.TableId), () => IndexTable(t.Name));
@@ -164,10 +167,10 @@ namespace Z0
             => DocRoot() + SubjectFolder(subject) + FS.file(name, ext);
 
         FS.FilePath RefDataPath(string id, FS.FileExt? ext = null)
-            => RefDataRoot() + FS.file(id, ext ?? DefaultFileExt);
+            => RefDataRoot() + FS.file(id, ext ?? DefaultTableExt);
 
         FS.FilePath RefDataPath<S>(S subject, string id, FS.FileExt? ext = null)
-            => RefDataRoot() + SubjectFolder(subject) + FS.file(id, ext ?? DefaultFileExt);
+            => RefDataRoot() + SubjectFolder(subject) + FS.file(id, ext ?? DefaultTableExt);
 
         FS.FilePath RefDataPath<S>(S subject, FS.FileName file)
             => RefDataRoot() + SubjectFolder(subject) + file;

@@ -133,6 +133,14 @@ namespace Z0
             => new WfEventId(src.name, src.step, src.ct);
 
         [MethodImpl(Inline)]
+        public static implicit operator WfEventId((EventKind kind, WfStepId step, CorrelationToken ct) src)
+            => new WfEventId(src.kind.ToString(), src.step, src.ct);
+
+        [MethodImpl(Inline)]
+        public static implicit operator WfEventId((EventKind kind, CmdId cmd, CorrelationToken ct) src)
+            => new WfEventId(src.kind.ToString(), src.cmd, src.ct);
+
+        [MethodImpl(Inline)]
         public static implicit operator WfEventId((string name, WfStepId step, EventLevel level, CorrelationToken ct) src)
             => new WfEventId(src.name, src.step, src.level, src.ct);
 

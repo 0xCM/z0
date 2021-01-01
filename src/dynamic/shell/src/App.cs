@@ -198,7 +198,6 @@ namespace Z0
             return cmd;
         }
 
-
         CmdResult EmitFileList()
             => exec(EmitFileListCmdSample(Wf));
 
@@ -262,17 +261,6 @@ namespace Z0
         //     return Wf.Router.Dispatch(spec);
         // }
 
-
-        void WriteJson()
-        {
-            var db = Wf.Db();
-            // var commands = Commands();
-            // foreach(var c in commands)
-            // {
-            //     var dst = db.TmpFile(FS.file(c.CmdName.Format(), FileExtensions.Json));
-            //     var data = JsonData.serialize(c,dst);
-            // }
-        }
 
         void ShowLetters()
         {
@@ -417,7 +405,6 @@ namespace Z0
                 Wf.Row(string.Format("Managed: {0}", p));
         }
 
-
         public void Run(CmdLine cmd)
         {
             var args = cmd.Parts;
@@ -449,6 +436,11 @@ namespace Z0
             }
         }
 
+        public void EmitAmsOpCodes()
+        {
+            var cmd = CmdBuilder.EmitAsmOpCodes(Db.Table("asmopcodes"));
+            Wf.Router.Dispatch(cmd);
+        }
 
         unsafe void Jit()
         {
@@ -498,9 +490,10 @@ namespace Z0
         public void Run()
         {
             //ShowHandlers();
-            Jit();
+            //Jit();
             //PipeImageData();
             //LoadAsmStore();
+            EmitAmsOpCodes();
 
             //Run(Args);
             //EmitProcessImages(Wf);

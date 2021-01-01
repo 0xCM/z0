@@ -12,6 +12,9 @@ namespace Z0
 
     partial struct ImageMaps
     {
+        public static Index<LocatedImageRow> emit(FS.FilePath dst)
+            => emit(current(), dst);
+
         public static Index<LocatedImageRow> emit(LocatedImageIndex src, FS.FilePath dst)
         {
             var images = ImageMaps.current();

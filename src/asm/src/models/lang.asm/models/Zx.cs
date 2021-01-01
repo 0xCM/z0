@@ -15,13 +15,10 @@ namespace Z0.Asm
     [LiteralCover]
     public readonly struct Zx : ILiteralCover<Zx>
     {
-        public readonly NumericWidth SourceWidth;
+        public NumericWidth SourceWidth {get;}
 
-        public readonly NumericWidth TargetWidth;
+        public NumericWidth TargetWidth {get;}
 
-        [MethodImpl(Inline)]
-        public static implicit operator Zx((NumericWidth src, NumericWidth dst) x)
-            => new Zx(x.src, x.dst);
 
         [MethodImpl(Inline)]
         public Zx(NumericWidth src, NumericWidth dst)
@@ -29,5 +26,9 @@ namespace Z0.Asm
             SourceWidth = src;
             TargetWidth = dst;
         }
+
+        [MethodImpl(Inline)]
+        public static implicit operator Zx((NumericWidth src, NumericWidth dst) x)
+            => new Zx(x.src, x.dst);
     }
 }

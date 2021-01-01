@@ -12,7 +12,6 @@ namespace Z0
     [Event(Kind)]
     public readonly struct ProcessedFileEvent<T,M> : IWfEvent<ProcessedFileEvent<T,M>>
     {
-        public const string EventName = GlobalEvents.ProcessedFile;
 
         public const EventKind Kind = EventKind.ProcessedFile;
 
@@ -29,7 +28,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public ProcessedFileEvent(WfStepId step, FS.FilePath src, T kind,  M metric, CorrelationToken ct)
         {
-            EventId = (EventName, step, ct);
+            EventId = (Kind, step, ct);
             SourcePath = src;
             FileKind = kind;
             Metric = metric;

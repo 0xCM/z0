@@ -13,7 +13,7 @@ namespace Z0
     using static TypedLogicSpec;
 
     using TLS = TypedLogicSpec;
-    using BCK = BinaryComparisonApiClass;
+    using BCK = ComparisonApiClass;
 
     /// <summary>
     /// Constructs type operator comparison expressions
@@ -47,7 +47,7 @@ namespace Z0
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
         public static ComparisonExpr equals(ILogicExpr lhs, ILogicExpr rhs, params ILogicVarExpr[] variables)
-            => define(BinaryComparisonApiClass.Eq, lhs,rhs,variables);
+            => define(ComparisonApiClass.Eq, lhs,rhs,variables);
 
         /// <summary>
         /// Defines an equality comparison expression
@@ -58,7 +58,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ComparisonExpr<T> equals<T>(ILogicExpr<T> lhs, ILogicExpr<T> rhs, params IVarExpr<T>[] variables)
             where T : unmanaged
-                => define(BinaryComparisonApiClass.Eq, lhs,rhs, variables);
+                => define(ComparisonApiClass.Eq, lhs,rhs, variables);
 
         /// <summary>
         /// Defines a comparison expression of specified kind over typed expressions

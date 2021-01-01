@@ -19,7 +19,7 @@ namespace Z0
     using ULK = UnaryBitLogicKind;
     using UAR = UnaryArithmeticApiClass;
     using BAR = BinaryArithmeticApiClass;
-    using BCK = BinaryComparisonApiClass;
+    using BCK = ComparisonApiClass;
     using BSK = BitShiftApiClass;
 
     /// <summary>

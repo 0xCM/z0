@@ -8,24 +8,25 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static AsmDocParts;
 
     /// <summary>
     /// Pairs an instruction definition together with the corresponding source code representation
     /// </summary>
     public readonly struct AsmInstructionCode
     {
-        public readonly PackedInstruction Instruction;
+        public PackedInstruction Instruction {get;}
 
-        public readonly AsmStatementCode SourceCode;
+        public StatementSource SourceCode {get;}
 
         public PackedInstruction Source
             => Instruction;
 
-        public AsmStatementCode Target
+        public StatementSource Target
             => SourceCode;
 
         [MethodImpl(Inline)]
-        public AsmInstructionCode(in PackedInstruction detail, in AsmStatementCode asm)
+        public AsmInstructionCode(in PackedInstruction detail, in StatementSource asm)
         {
             Instruction = detail;
             SourceCode = asm;
@@ -35,7 +36,7 @@ namespace Z0.Asm
             => TextFormatter.format(SourceCode, Instruction);
 
         [MethodImpl(Inline)]
-        public static implicit operator AsmInstructionCode(Paired<PackedInstruction,AsmStatementCode> src)
+        public static implicit operator AsmInstructionCode(Paired<PackedInstruction,StatementSource> src)
             => new AsmInstructionCode(src.Left, src.Right);
     }
 }

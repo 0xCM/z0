@@ -5,7 +5,7 @@
 namespace Z0.Asm
 {
     [Record(TableId)]
-    public struct AsmJmpInfo : IRecord<AsmJmpInfo>
+    public struct AsmJmpRow : IRecord<AsmJmpRow>
     {
         public const string TableId = "asm.jumps";
 

@@ -17,7 +17,7 @@ namespace Z0
         /// <summary>
         /// The operator kind
         /// </summary>
-        public BinaryComparisonApiClass ComparisonKind {get;}
+        public ComparisonApiClass ComparisonKind {get;}
 
         /// <summary>
         /// The left operand
@@ -34,7 +34,7 @@ namespace Z0
         /// </summary>
         public ILogicVarExpr[] Vars {get;}
 
-        internal ComparisonExpr(BinaryComparisonApiClass kind, ILogicExpr lhs, ILogicExpr rhs, params ILogicVarExpr[] vars)
+        internal ComparisonExpr(ComparisonApiClass kind, ILogicExpr lhs, ILogicExpr rhs, params ILogicVarExpr[] vars)
         {
             ComparisonKind = kind;
             Lhs = lhs;

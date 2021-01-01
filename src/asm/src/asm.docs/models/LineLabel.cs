@@ -13,9 +13,9 @@ namespace Z0.Asm
     {
         public readonly struct LineLabel
         {
-            internal ulong Offset {get;}
+            public ulong Offset {get;}
 
-            internal DataWidth Width {get;}
+            public DataWidth Width {get;}
 
             [MethodImpl(Inline)]
             internal LineLabel(byte offset)

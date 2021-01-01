@@ -12,8 +12,6 @@ namespace Z0
     [Event(Kind)]
     public readonly struct ProcessedEvent<T> : IWfEvent<ProcessedEvent<T>,T>
     {
-        public const string EventName = GlobalEvents.Processed;
-
         public const EventKind Kind = EventKind.Processed;
 
         public WfEventId EventId {get;}
@@ -25,7 +23,7 @@ namespace Z0
         [MethodImpl (Inline)]
         public ProcessedEvent(WfStepId step, T payload, CorrelationToken ct)
         {
-            EventId = (EventName, step, ct);
+            EventId = (Kind, step, ct);
             Payload = payload;
         }
 

@@ -8,12 +8,13 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
+    using static AsmDocParts;
     using static z;
 
     using Z0.Ice;
 
-    public struct AsmStatementTrace
+
+    public struct AsmStatementDetail
     {
         public BinaryCode Source;
 
@@ -23,7 +24,7 @@ namespace Z0.Asm
 
         public byte EncodedSize;
 
-        public AsmStatementCode Statement;
+        public StatementSource Statement;
 
         public IceInstructionData Data;
 

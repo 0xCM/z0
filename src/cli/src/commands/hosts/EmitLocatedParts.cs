@@ -32,7 +32,7 @@ namespace Z0
 
         readonly LocatedImageIndex Images;
 
-        readonly FolderPath TargetDir;
+        readonly FS.FolderPath TargetDir;
 
         public Span<LocatedPart> Index;
 
@@ -62,14 +62,12 @@ namespace Z0
              {
                 ref readonly var part = ref skip(Parts, i);
                 var @base = ImageMaps.@base(part);
-                var dstpath = TargetDir + FileName.define(part.Format(), FileExtension.Define("csv"));
-
                 using var step = new EmitPartImageData(Wf, part);
                 step.Run();
                 seek(Index,i) = new LocatedPart(part, @base, (uint)(step.OffsetAddress - @base));
              }
 
-            EmitImageSummaries.create(Images).Run(Wf);
+             ImageMaps.emit(Images, TargetDir + FS.file("imagemaps", FileExtension.Define("csv")));
         }
     }
 }

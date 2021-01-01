@@ -14,19 +14,25 @@ namespace Z0.Asm
 
     public readonly struct AsmTokenLookup
     {
-        public readonly TableSpan<TokenRecord> Models;
+        public Index<TokenRecord> Models {get;}
 
-        public readonly string[] Meanings;
+        public string[] Meanings {get;}
 
-        public readonly Index Identity;
+        public Index Identity {get;}
 
-        public readonly string[] Definitions;
+        public string[] Definitions {get;}
 
-        public readonly byte[] ValueEncoding;
+        public byte[] ValueEncoding {get;}
 
-        [MethodImpl(Inline), Op]
-        static uint EncodeDefinitions(string[] src, byte[] dst)
-            => asci.encode(src, dst, EncodingDelimiter);
+        public AsmTokenLookup(AsmTokenIndex index)
+        {
+            Models = index.Records;
+            Meanings = index.Meaning;
+            Identity = index.Identifier;
+            Definitions = index.Value;
+            ValueEncoding = new byte[Definitions.Map(x => x.Length).Sum() + Definitions.Length];
+            EncodeDefinitions(Definitions,ValueEncoding);
+        }
 
         [MethodImpl(Inline), Op]
         public string Definition(AsmTokenKind id)
@@ -44,22 +50,17 @@ namespace Z0.Asm
         public ref readonly string Identifier(AsmTokenKind id)
             => ref Identity[id];
 
-        public const byte EncodingDelimiter = 0xFF;
-
         public int TokenCount
         {
             [MethodImpl(Inline)]
             get => Models.Length;
         }
 
-        public AsmTokenLookup(AsmTokenIndex index)
-        {
-            Models = index.Model;
-            Meanings = index.Meaning;
-            Identity = index.Identifier;
-            Definitions = index.Value;
-            ValueEncoding = new byte[Definitions.Map(x => x.Length).Sum() + Definitions.Length];
-            EncodeDefinitions(Definitions,ValueEncoding);
-        }
+        public const byte EncodingDelimiter = 0xFF;
+
+        [MethodImpl(Inline), Op]
+        static uint EncodeDefinitions(string[] src, byte[] dst)
+            => asci.encode(src, dst, EncodingDelimiter);
+
     }
 }

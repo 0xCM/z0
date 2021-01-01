@@ -11,9 +11,9 @@ namespace Z0.Asm
 
     public readonly struct AsmOpCodeDataset
     {
-        public TableSpan<AsmOpCodeRow> Entries {get;}
+        public Index<AsmOpCodeRow> Entries {get;}
 
-        public TableSpan<AsmOpCodePattern> Identity {get;}
+        public Index<AsmOpCodePattern> Identity {get;}
 
         public AsmOpCodeDataset(AsmOpCodeRow[] records, AsmOpCodePattern[] identifiers)
         {

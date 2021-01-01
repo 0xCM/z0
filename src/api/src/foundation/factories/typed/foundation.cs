@@ -53,7 +53,7 @@ namespace Z0
         /// <param name="right">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ComparisonExpr<T> binary<T>(BinaryComparisonApiClass op, IExpr<T> left, IExpr<T> right)
+        public static ComparisonExpr<T> binary<T>(ComparisonApiClass op, IExpr<T> left, IExpr<T> right)
             where T : unmanaged
                 => new ComparisonExpr<T>(op,left,right);
 

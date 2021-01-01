@@ -2,15 +2,11 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Images
 {
-    using Id = ApiClass;
-
-    [ApiClass]
-    public enum UnaryBitLogicApiClass : ushort
+    sealed class EmitImageMaps : CmdReactor<EmitImageMapsCmd, Index<LocatedImageRow>>
     {
-        None = 0,
-
-        Not = Id.Not,
+        protected override Index<LocatedImageRow> Run(EmitImageMapsCmd cmd)
+            => ImageMaps.emit(cmd.Target);
     }
 }

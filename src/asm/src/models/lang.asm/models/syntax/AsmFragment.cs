@@ -11,13 +11,9 @@ namespace Z0.Asm
 
     public readonly struct AsmFragment
     {
-        public readonly AsmFragmentKind Kind;
+        public AsmFragmentKind Kind {get;}
 
-        public readonly string Data;
-
-        [MethodImpl(Inline)]
-        public static implicit operator AsmFragment((string data, AsmFragmentKind kind) src)
-            => new AsmFragment(src.data, src.kind);
+        public string Data {get;}
 
         [MethodImpl(Inline)]
         public AsmFragment(string data, AsmFragmentKind kind)
@@ -25,5 +21,9 @@ namespace Z0.Asm
             Data = data;
             Kind = kind;
         }
+
+        [MethodImpl(Inline)]
+        public static implicit operator AsmFragment((string data, AsmFragmentKind kind) src)
+            => new AsmFragment(src.data, src.kind);
     }
 }

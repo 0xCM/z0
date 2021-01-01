@@ -7,36 +7,19 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Konst;
+    using static z;
 
     using F = AsmOpCodeField;
 
-    partial struct AsmTables
+    partial struct AsmOpCodes
     {
         [Op]
-        public static Span<AsmOpCodeRow> opcodes(in AppResDoc specs)
-        {
-            var dst = Spans.alloc<AsmOpCodeRow>(specs.Rows.Length);
-            parse(specs, dst);
-            return dst;
-        }
-
-        [Op]
-        public static void parse(in AppResDoc specs, Span<AsmOpCodeRow> dst)
-        {
-            var fields = Enums.literals<F>();
-            var src = specs.Rows.View;
-            var count = src.Length;
-            for(var i=0u; i<count; i++)
-               parse(skip(src,i), fields, ref seek(dst,i));
-        }
-
-        [Op]
-        static ref readonly AsmOpCodeRow parse(in TextRow src, ReadOnlySpan<AsmOpCodeField> fields, ref AsmOpCodeRow dst)
+        static ref readonly AsmOpCodeRow parse(in TextRow src, ReadOnlySpan<F> fields, ref AsmOpCodeRow dst)
         {
             ReadOnlySpan<string> cells = src.CellContent;
-            var count = z.length(cells, fields);
+            var count = length(cells,fields);
+
             var parser = new AsmFieldParser();
             for(var i=0; i<count; i++)
             {
@@ -76,5 +59,6 @@ namespace Z0.Asm
 
             return ref dst;
         }
+
     }
 }

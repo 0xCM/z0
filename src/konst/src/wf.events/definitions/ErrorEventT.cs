@@ -32,7 +32,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public ErrorEvent(CmdId cmd, T data, CorrelationToken ct, AppMsgSource source)
         {
-            EventId = (EventName, cmd, ct);
+            EventId = (Kind, cmd, ct);
             Exception = none<Exception>();
             Payload = data;
             Source = source;

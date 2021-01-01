@@ -40,11 +40,7 @@ namespace Z0
             => ExprFormat.format(kind, arg1, arg2);
 
         [MethodImpl(Inline)]
-        public static string Format(this BinaryComparisonApiClass kind)
-            => ExprFormat.format(kind);
-
-        [MethodImpl(Inline)]
-        public static string Format<T>(this BinaryComparisonApiClass kind, T arg1, T arg2)
+        public static string Format<T>(this ComparisonApiClass kind, T arg1, T arg2)
             => ExprFormat.format(kind, arg1, arg2);
     }
 }

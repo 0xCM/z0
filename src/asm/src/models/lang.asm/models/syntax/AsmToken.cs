@@ -11,11 +11,11 @@ namespace Z0.Asm
 
     public readonly struct AsmToken
     {
-        public readonly byte Index;
+        public byte Index {get;}
 
-        public readonly AsmTokenKind Identifier;
+        public AsmTokenKind Identifier {get;}
 
-        public readonly asci16 Value;
+        public asci16 Value {get;}
 
         [MethodImpl(Inline)]
         public AsmToken(byte index, AsmTokenKind identifier, asci16 value)

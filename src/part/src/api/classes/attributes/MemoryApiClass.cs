@@ -29,5 +29,9 @@ namespace Z0
         /// and returns the buffer unaltered but with an alternate presentation, such as a T-span
         /// </summary>
         Recover = ApiClass.Recover,
+
+        MemAdd = ApiClass.MemAdd,
+
+        MemSub = ApiClass.MemSub,
     }
 }

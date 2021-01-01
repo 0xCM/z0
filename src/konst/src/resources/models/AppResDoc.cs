@@ -22,7 +22,7 @@ namespace Z0
             Content = doc;
         }
 
-        public TextRow[] Rows
+        public Index<TextRow> Rows
         {
             [MethodImpl(Inline)]
             get => Content.RowData;

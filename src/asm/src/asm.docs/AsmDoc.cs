@@ -13,10 +13,10 @@ namespace Z0.Asm
 
     public struct AsmDoc
     {
-        public Index<AsmDocLine> Lines {get;}
+        public Index<DocLine> Lines {get;}
 
         [MethodImpl(Inline)]
-        public AsmDoc(AsmDocLine[] lines)
+        public AsmDoc(DocLine[] lines)
         {
             Lines = lines;
         }

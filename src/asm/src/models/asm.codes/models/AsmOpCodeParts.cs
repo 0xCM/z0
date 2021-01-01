@@ -14,9 +14,9 @@ namespace Z0.Asm
     /// </summary>
     public readonly struct AsmOpCodeParts
     {
-        public readonly AsmOpCodeExpression Expression;
+        public AsmOpCodeExpression Expression {get;}
 
-        public readonly TableSpan<AsmOpCodePart> Parts;
+        public Index<AsmOpCodePart> Parts {get;}
 
         [MethodImpl(Inline)]
         public AsmOpCodeParts(AsmOpCodeExpression expression, params AsmOpCodePart[] parts)

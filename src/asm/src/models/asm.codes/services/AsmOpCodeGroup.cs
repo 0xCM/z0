@@ -12,19 +12,15 @@ namespace Z0.Asm
 
     public readonly ref struct AsmOpCodeGroup
     {
-        [MethodImpl(Inline), Op]
-        public static AsmOpCodeGroup Create(int count)
-            => new AsmOpCodeGroup((uint)count);
+        readonly Span<AsmSig> SigData;
 
-        readonly Span<AsmSig> instructions;
+        readonly Span<AsmOpCodeExpression> OpCodeData;
 
-        readonly Span<AsmOpCodeExpression> codes;
+        readonly Span<MnemonicExpression> MnemonicData;
 
-        readonly Span<MnemonicExpression> mnemonics;
+        readonly Span<CpuidExpression> CpuidData;
 
-        readonly Span<CpuidExpression> cpuid;
-
-        readonly Span<OperatingMode> modes;
+        readonly Span<OperatingMode> ModeData;
 
         readonly Span<uint> MnemonicSeq;
 
@@ -32,68 +28,53 @@ namespace Z0.Asm
         internal AsmOpCodeGroup(uint count)
         {
             MnemonicSeq = new uint[1];
-            instructions = new AsmSig[count];
-            codes = new AsmOpCodeExpression[count];
-            mnemonics = new MnemonicExpression[count];
-            cpuid = new CpuidExpression[count];
-            modes = new OperatingMode[count];
+            SigData = new AsmSig[count];
+            OpCodeData = new AsmOpCodeExpression[count];
+            MnemonicData = new MnemonicExpression[count];
+            CpuidData = new CpuidExpression[count];
+            ModeData = new OperatingMode[count];
         }
 
         [MethodImpl(Inline), Op]
         public void Include(uint seq, in AsmSig src)
-        {
-            Instruction(seq) = src;
-        }
+            => Sig(seq) = src;
 
         [MethodImpl(Inline), Op]
         public void Include(uint seq, in AsmOpCodeExpression src)
-        {
-            OpCode(seq) = src;
-        }
+            => OpCode(seq) = src;
 
         [MethodImpl(Inline), Op]
         public void Include(uint seq, in CpuidExpression src)
-        {
-            seek(cpuid, seq) = src;
-        }
+            => seek(CpuidData, seq) = src;
 
         [MethodImpl(Inline), Op]
         public void Include(uint seq, in OperatingMode src)
-        {
-
-            Mode(seq) = src;
-        }
+            => Mode(seq) = src;
 
         [MethodImpl(Inline), Op]
         public void Include(in AsmOpCodePartitoner ocp, in AsmSig src)
-        {
-            Instruction((uint)ocp.Sequence) = src;
-        }
+            => Sig((uint)ocp.Sequence) = src;
 
         [MethodImpl(Inline), Op]
         public void Include(in AsmOpCodePartitoner ocp, in AsmOpCodeExpression src)
-        {
-            OpCode((uint)ocp.Sequence) = src;
-        }
+            => OpCode((uint)ocp.Sequence) = src;
 
         [MethodImpl(Inline), Op]
         void Include(in MnemonicExpression src)
-            => z.seek(mnemonics, first(MnemonicSeq)++) = src;
+            => seek(MnemonicData, first(MnemonicSeq)++) = src;
 
         ref readonly MnemonicExpression LastMnemonic
         {
             [MethodImpl(Inline)]
-            get => ref skip(mnemonics, first(MnemonicSeq) - 1);
+            get => ref skip(MnemonicData, first(MnemonicSeq) - 1);
         }
 
         [MethodImpl(Inline), Op]
         public void Include(AsmOpCodePartitoner ocp, in MnemonicExpression src)
         {
             if(first(MnemonicSeq) > 0)
-            {
                 if(!LastMnemonic.Value.Equals(src.Value))
                     Include(src);
-            }
             else
                 Include(src);
         }
@@ -102,81 +83,70 @@ namespace Z0.Asm
         public void Include(uint seq, in MnemonicExpression src)
         {
             if(first(MnemonicSeq) > 0)
-            {
                 if(!LastMnemonic.Value.Equals(src.Value))
                     Include(src);
-            }
             else
                 Include(src);
         }
 
         [MethodImpl(Inline), Op]
         public void Include(in AsmOpCodePartitoner ocp, in CpuidExpression src)
-        {
-            seek(cpuid, (uint)ocp.Sequence) = src;
-        }
+            => seek(CpuidData, (uint)ocp.Sequence) = src;
 
         [MethodImpl(Inline), Op]
         public void Include(AsmOpCodePartitoner ocp, in OperatingMode src)
-        {
+            => Mode((uint)ocp.Sequence) = src;
 
-            Mode((uint)ocp.Sequence) = src;
-        }
-
-        public int ProcessedCount
+        public uint ProcessedCount
         {
             [MethodImpl(Inline)]
-            get => codes.Length;
+            get => (uint)OpCodeData.Length;
         }
 
-        public ReadOnlySpan<AsmSig> Instructions
+        public ReadOnlySpan<AsmSig> Signatures
         {
             [MethodImpl(Inline)]
-            get => instructions;
+            get => SigData;
         }
 
         public ReadOnlySpan<AsmOpCodeExpression> OpCodes
         {
             [MethodImpl(Inline)]
-            get => codes;
+            get => OpCodeData;
         }
 
         public ReadOnlySpan<CpuidExpression> CpuId
         {
             [MethodImpl(Inline)]
-            get => cpuid;
+            get => CpuidData;
         }
 
         public ReadOnlySpan<MnemonicExpression> Mnemonics
         {
             [MethodImpl(Inline)]
-            get => mnemonics;
+            get => MnemonicData;
         }
 
         public ReadOnlySpan<OperatingMode> Modes
         {
             [MethodImpl(Inline)]
-            get => modes;
+            get => ModeData;
         }
 
         [MethodImpl(Inline), Op]
         ref MnemonicExpression Mnemonic(uint seq)
-            => ref seek(mnemonics, seq);
+            => ref seek(MnemonicData, seq);
 
         [MethodImpl(Inline), Op]
         ref AsmOpCodeExpression OpCode(uint seq)
-            => ref seek(codes, seq);
+            => ref seek(OpCodeData, seq);
 
         [MethodImpl(Inline), Op]
         ref OperatingMode Mode(uint seq)
-            => ref seek(modes, seq);
+            => ref seek(ModeData, seq);
 
         [MethodImpl(Inline), Op]
-        ref AsmSig Instruction(uint seq)
-            => ref seek(instructions, seq);
-
-        // [MethodImpl(Inline), Op]
-        // static AsmFxGroup group(MnemonicExpression expression)
-        //     => new AsmFxGroup(expression.Value);
+        ref AsmSig Sig(uint seq)
+            => ref seek(SigData, seq);
     }
 }

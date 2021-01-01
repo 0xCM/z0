@@ -35,7 +35,7 @@ namespace Z0.Asm
             => default;
 
         [MethodImpl(Inline), Op]
-        public static AsmTokenLookup tokens(in AsmTokenIndex index)
+        public static AsmTokenLookup lookup(in AsmTokenIndex index)
             => new AsmTokenLookup(index);
 
         [MethodImpl(Inline), Op]
