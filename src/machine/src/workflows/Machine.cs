@@ -40,7 +40,6 @@ namespace Z0
                 ResDataEmitter.index(Wf);
                 ResDataEmitter.reference(Wf);
                 XedEtlWfHost.create().Run(Wf);
-                //EmitReferenceData.create().Run(Wf);
                 EmitFieldMetadata.create().Run(Wf);
                 EmitSectionHeaders.create().Run(Wf);
                 EmitImageConstants.create().Run(Wf);
@@ -52,7 +51,14 @@ namespace Z0
                 EmitEnumCatalog.create().Run(Wf);
                 EmitFieldLiterals.create().Run(Wf);
                 EmitBitMasks.create().Run(Wf);
-                ApiProcessors.create(Wf, Asm).Run();
+                var processors = ApiProcessors.create(Wf, Asm);
+                processors.EmitAsmRows();
+                processors.ProcessCalls();
+                processors.ProcessJumps();
+                processors.ProcessEnlisted();
+                processors.ProcessSemantic();
+                processors.EmitResBytes();
+
             }
             catch(Exception e)
             {

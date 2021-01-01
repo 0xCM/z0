@@ -7,10 +7,10 @@ namespace Z0
     using System;
 
     [WfService]
-    public abstract class WfService<H,C> : WfService<H>, IWfService<H,C>
-        where H : WfService<H,C>, new()
+    public abstract class WfService<H,K> : WfService<H>, IWfService<H,K>
+        where H : WfService<H,K>, new()
     {
-        public override Type ContractType => typeof(C);
+        public override Type ContractType => typeof(K);
 
         protected WfService()
         {
@@ -20,7 +20,7 @@ namespace Z0
         protected WfService(IWfShell wf)
             : base(wf)
         {
-            
+
         }
     }
 }

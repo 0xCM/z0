@@ -5,8 +5,10 @@
 namespace Z0
 {
     using System;
-
     using System.Reflection;
+    using System.Runtime.CompilerServices;
+
+    using static Part;
 
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
@@ -15,7 +17,7 @@ namespace Z0
     [ApiHost(ApiNames.AppErrorMsg, true)]
     public static class AppErrorMsg
     {
-        [Op]
+        [Op, MethodImpl(Inline)]
         static AppMsg Fail(string msg, string caller, string file, int? line)
             => AppMsg.define($"{msg}; caller:{caller}; line:{line ?? 0}; file:{file}", LogLevel.Error);
 

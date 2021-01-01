@@ -1,5 +1,3 @@
-//-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
@@ -7,12 +5,15 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
-    partial struct z
+    partial struct corefunc
     {
+        /// <summary>
+        /// Right now
+        /// </summary>
         [MethodImpl(Inline), Op]
         public static DateTime now()
-            => corefunc.now();
+            => DateTime.Now;
     }
 }

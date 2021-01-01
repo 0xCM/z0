@@ -41,40 +41,20 @@ namespace Z0
         void Init()
         {
             Index = ApiIndexService.init(Wf).CreateIndex();
-            Decoded = DecodeIndex();
+            Decoded = ApiDecoder.init(Wf,Asm).DecodeIndex(Index);
         }
 
-        public void Run()
+        public void EmitResBytes()
         {
-            try
-            {
-                EmitAsmRows();
-                ProcessCalls();
-                ProcessJumps();
-                ProcessEnlisted();
-                ProcessSemantic();
-                EmitResBytes();
-
-            }
-            catch(Exception e)
-            {
-                Wf.Error(e);
-            }
+            ResBytesEmitter.service(Wf, Index).Emit();
+            //ResBytesEmitter.create().WithIndex(Index).Run(Wf);
         }
 
-        void EmitResBytes()
-        {
-            ResBytesEmitter.create().WithIndex(Index).Run(Wf);
-        }
-
-        void ProcessCalls()
+        public void ProcessCalls()
         {
             var count = Decoded.Length;
             for(var i=0; i<count; i++)
-            {
-                var processor = PartRoutinesProcessor.service(Wf, skip(Decoded,i));
-                processor.ProcessCalls();
-            }
+                PartRoutinesProcessor.service(Wf, skip(Decoded,i)).ProcessCalls();
         }
 
         void ProcessJumps(ApiPartRoutines src)
@@ -83,14 +63,14 @@ namespace Z0
             step.Process();
         }
 
-        void ProcessJumps()
+        public void ProcessJumps()
         {
             var count = Decoded.Length;
             for(var i=0; i<count; i++)
                 ProcessJumps(skip(Decoded,i));
         }
 
-        void ProcessEnlisted()
+        public void ProcessEnlisted()
         {
             var count = Decoded.Length;
             for(var i=0; i<count; i++)
@@ -98,7 +78,7 @@ namespace Z0
         }
 
 
-        void ProcessSemantic()
+        public void ProcessSemantic()
         {
             using var service = AsmSemanticRender.create(Wf);
             var count = Decoded.Length;
@@ -106,7 +86,7 @@ namespace Z0
                 service.Render(skip(Decoded, i));
         }
 
-        void EmitAsmRows()
+        public void EmitAsmRows()
         {
             try
             {
@@ -128,63 +108,6 @@ namespace Z0
             {
                 Wf.Error(e);
             }
-        }
-
-        Span<ApiPartRoutines> DecodeIndex()
-        {
-            var decoder = Asm.RoutineDecoder;
-            var parts = Index.Parts;
-            var partCount = parts.Length;
-            var dst = alloc<ApiPartRoutines>(partCount);
-            var hostFx = list<ApiHostRoutines>();
-            var stats = ApiDecoderStats.init();
-            var svc = ApiInstructionService.create(Wf);
-
-            Wf.Status($"Decoding {partCount} parts");
-
-            for(var i=0; i<partCount; i++)
-            {
-                hostFx.Clear();
-                var part = parts[i];
-                if(part == 0)
-                    dst[i] = new ApiPartRoutines(part, sys.empty<ApiHostRoutines>());
-                else
-                {
-                    var hosts = Index.Hosts.Where(h => h.Owner == part);
-                    var hostCount = hosts.Length;
-
-                    Wf.Status($"Decoding {hostCount} {part} hosts");
-
-                    for(var j=0; j<hostCount; j++)
-                    {
-                        var host = hosts[j];
-                        Wf.Status($"Decoding {host}");
-
-                        var members = Index.HostCodeBlocks(host);
-                        if(members.IsNonEmpty)
-                        {
-                            Wf.Status($"Decoding {members.Count} {host} members");
-
-                            var fx = svc.Decode(decoder, members);
-                            hostFx.Add(fx);
-                            stats.HostCount++;
-                            stats.MemberCount += fx.RoutineCount;
-                            stats.InstructionCount += fx.InstructionCount;
-                        }
-                        else
-                            Wf.Warn($"The host {host} has no members");
-                    }
-
-                    Wf.Status(text.format(WfProgress.DecodedPart, hostFx.Count, part.Format()));
-                    dst[i] = new ApiPartRoutines(part, hostFx.ToArray());
-
-                    stats.PartCount++;
-                    Wf.Status(stats.Format());
-                }
-            }
-
-            Wf.Status(text.format(WfProgress.DecodedMachine, Index.EntryCount, Index.Parts.Length));
-            return dst;
         }
     }
 }

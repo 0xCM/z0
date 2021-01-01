@@ -7,17 +7,27 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
-
+    /// <summary>
+    /// Classifies common validiation invariants
+    /// </summary>
     public enum ClaimKind : byte
     {
+
+        /// <summary>
+        /// Asserts that two values are equal
+        /// </summary>
         Eq,
 
+        /// <summary>
+        /// Asserts that two values are approximately equal
+        /// </summary>
         Close,
 
         EqItem,
 
+        /// <summary>
+        /// Asserts that two values are not equal
+        /// </summary>
         NEq,
 
         Lt,

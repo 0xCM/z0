@@ -18,30 +18,15 @@ namespace Z0
 
     public class CodeGenerator : ICodeGenerator
     {
-        public static string property(BinaryResSpec src, int level = 2)
-            => text.concat("public static ReadOnlySpan<byte> ",
-            src.Identifier,
-            Space,
-            " => ",
-            Space,
-            $"new byte[{src.Encoded.Length}]",
-            LBrace,
-            src.Encoded.Format(HexFormatSpecs.HexArray),
-            RBrace,
-            Chars.Semicolon
-            );
-
-
-        public static string FileHeader
-            => text.lines(HeaderLine1, HeaderLine2, HeaderLine3, HeaderLine4);
-
         const string HeaderLine1 = "//-----------------------------------------------------------------------------";
 
         const string HeaderLine2 = "// Copyright   :  (c) Chris Moore, 2020";
 
         const string HeaderLine3 = "// License     :  MIT";
 
-        const string HeaderLine4 = "//-----------------------------------------------------------------------------";
+        const string HeaderLine4 = "// Generated   : {0:yyyy-MM-dd H:mm:ss zzz}";
+
+        const string HeaderLine5 = "//-----------------------------------------------------------------------------";
 
         public const string Level0 = "";
 
@@ -113,12 +98,13 @@ namespace Z0
             => dst.AppendLine(src);
 
         public static void lines(IEnumerable<string> src, StringBuilder dst)
-            => z.iter(src,l => line(l,dst));
+            => corefunc.iter(src,l => line(l,dst));
 
         public static string assign(object dst, object src)
             => text.concat(dst, Space, Chars.Eq, Space, src);
 
-        public virtual string Generate() => string.Empty;
+        public virtual string Generate()
+            => string.Empty;
 
         public static string Comment(object src, int l)
             => level(l,$"// {src}");
@@ -141,6 +127,29 @@ namespace Z0
         protected virtual string[] StaticUsings
             => DefaultTypes;
 
+        public static string bytespan(BinaryResSpec src, int level = 2)
+            => text.concat("public static ReadOnlySpan<byte> ",
+            src.Identifier,
+            Space,
+            " => ",
+            Space,
+            $"new byte[{src.Encoded.Length}]",
+            LBrace,
+            src.Encoded.Format(HexFormatSpecs.HexArray),
+            RBrace,
+            Chars.Semicolon
+            );
+
+
+        public static string FileHeader
+            => text.lines(
+                HeaderLine1,
+                HeaderLine2,
+                HeaderLine3,
+                string.Format(HeaderLine4, z.now(),
+                HeaderLine5)
+                );
+
         public static void EmitFileHeader(TextWriter dst)
         {
             dst.Write(FileHeader);
@@ -155,19 +164,16 @@ namespace Z0
         public static void CloseFileNamespace(TextWriter dst)
         {
             dst.WriteLine(RBrace);
-
         }
 
         public static void OpenStructDeclaration(TextWriter dst, string name, params string[] modifiers)
         {
-
             dst.WriteLine(level(TypeLevel, TextFormatter.concat($"{spaced(modifiers)} struct {name}")));
             dst.WriteLine(level(TypeLevel, LBrace));
         }
 
         public static void OpenClassDeclaration(TextWriter dst, string name, params string[] modifiers)
         {
-
             dst.WriteLine(level(TypeLevel, TextFormatter.concat($"{spaced(modifiers)} class {name}")));
             dst.WriteLine(level(TypeLevel, LBrace));
         }
@@ -175,7 +181,7 @@ namespace Z0
         public static void DeclareStaticClass(TextWriter dst, string name, bool @public = true)
             => OpenClassDeclaration(dst,name, @public ? "public" : EmptyString, "static");
 
-        public static void CloseTypeDeclaration( TextWriter dst, int l = TypeLevel)
+        public static void CloseTypeDeclaration(TextWriter dst, int l = TypeLevel)
         {
             dst.WriteLine(level(l, RBrace));
         }

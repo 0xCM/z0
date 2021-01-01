@@ -5,14 +5,13 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using Z0.Asm;
 
-    partial struct z
+    public interface IApiDecoder : IWfService
     {
-        [MethodImpl(Inline), Op]
-        public static DateTime now()
-            => corefunc.now();
+        ApiHostRoutines DecodeBlocks(in ApiHostCodeBlocks src);
+
+        Span<ApiPartRoutines> DecodeIndex(ApiCodeBlockIndex index);
     }
 }

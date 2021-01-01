@@ -36,10 +36,10 @@ namespace Z0
         }
 
         public void TableEmitting(Type type, FS.FilePath dst)
-            => Raise(tableEmitting(Host, type, dst, Ct));
+            => Raise(emittingTable(Host, type, dst, Ct));
 
-        public void TableEmitting<T>(FS.FilePath dst)
-            => Raise(tableEmitting<T>(Host, dst, Ct));
+        public void EmittingTable<T>(FS.FilePath dst)
+            => Raise(emittingTable<T>(Host, dst, Ct));
 
         public void Ran()
             => Raise(new RanEvent(Host, Ct));
@@ -76,5 +76,26 @@ namespace Z0
 
         public void Processed<T,M>(FS.FilePath src, T data, M metric)
             => Raise(processed(Host, src, data, metric, Ct));
+
+        public void EmittedTable<T>(WfStepId step, Count count, FS.FilePath dst)
+            where T : struct
+                => Raise(emittedTable<T>(step, count, dst, Ct));
+
+        public void EmittedTable<T>(Count count, FS.FilePath dst)
+            where T : struct
+                => Raise(emittedTable<T>(Host, count, dst, Ct));
+
+        public void EmittedTable(Type type, Count count, FS.FilePath dst)
+            => Raise(emittedTable(Host, type, count, dst, Ct));
+
+        public void EmittingFile<T>(T source, FS.FilePath dst)
+            => Raise(emittingFile<T>(Host, source, dst, Ct));
+
+        public void EmittedFile<T>(T source, Count count, FS.FilePath dst)
+            => Raise(emittedFile(Host, source, count, dst, Ct));
+
+        public void EmittedFile(Count count, FS.FilePath dst)
+            => Raise(emittedFile(Host, dst, count, Ct));
+
     }
 }

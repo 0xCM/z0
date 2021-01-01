@@ -19,32 +19,59 @@ namespace Z0
         WfExecFlow EmittingTable<T>(FS.FilePath dst)
             where T : struct
         {
-            signal(this).TableEmitting<T>(dst);
+            signal(this).EmittingTable<T>(dst);
             return Flow();
         }
 
-        void EmittedTable<T>(WfStepId step, Count count, FS.FilePath dst)
+        WfExecFlow EmittedTable<T>(WfStepId step, Count count, FS.FilePath dst)
             where T : struct
-                => Raise(tableOut<T>(step, count, dst, Ct));
+        {
+            signal(this).EmittedTable<T>(step, count, dst);
+            return Flow();
+        }
 
         void EmittedTable<T>(WfExecFlow flow, Count count, FS.FilePath dst)
             where T : struct
-                => Raise(tableOut<T>(Host, count, dst, Ct));
+        {
+            signal(this).EmittedTable<T>(count, dst);
+            Ran(flow);
+        }
 
         void EmittedTable<T>(Count count, FS.FilePath dst)
             where T : struct
-                => Raise(tableOut<T>(Host, count, dst, Ct));
+        {
+            signal(this).EmittedTable<T>(count, dst);
+
+        }
 
         void EmittedTable(Type type, Count count, FS.FilePath dst)
-            => Raise(tableOut(Host, type, count, dst, Ct));
+        {
+            signal(this).EmittedTable(type,count,dst);
+        }
 
-        void EmittingFile<T>(T source, FS.FilePath dst)
-            => Raise(fileEmitting<T>(Host, source, dst, Ct));
+        WfExecFlow EmittingFile<T>(T source, FS.FilePath dst)
+        {
+            signal(this).EmittingFile(source, dst);
+            return Flow();
+        }
 
         void EmittedFile<T>(T source, Count count, FS.FilePath dst)
-            => Raise(fileOut(Host, source, count, dst, Ct));
+            => Raise(emittedFile(Host, source, count, dst, Ct));
+
+        void EmittedFile<T>(WfExecFlow flow, T source, Count count, FS.FilePath dst)
+        {
+            signal(this).EmittedFile(source,count, dst);
+            Ran(flow);
+        }
 
         void EmittedFile(Count count, FS.FilePath dst)
-            => Raise(fileOut(Host, dst, count, Ct));
+            => Raise(emittedFile(Host, dst, count, Ct));
+
+
+        void EmittedFile(WfExecFlow flow, Count count, FS.FilePath dst)
+        {
+            signal(this).EmittedFile(count, dst);
+            Ran(flow);
+        }
     }
 }
