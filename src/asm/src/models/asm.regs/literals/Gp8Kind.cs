@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using static RegisterBitFields;
+    using static RegisterBits;
     using static RegisterIndex;
     using static RegisterClass;
     using static RegisterWidth;

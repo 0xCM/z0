@@ -140,6 +140,6 @@ namespace Z0
         /// <param name="id">Identity of the operation under test</param>
         [Op]
         public static string TestCase(Type host, OpIdentity id)
-            => $"{ApiIdentityKinds.OwningPartText(host)}{UriPathSep}{host.Name}{UriPathSep}{id}";
+            => $"{ApiIdentityKinds.OwningPartText(host)}{UriPathSep}{host.Name}{UriPathSep}{id.Identifier}";
     }
 }

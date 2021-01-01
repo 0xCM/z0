@@ -95,8 +95,8 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public string Format(BitFormat? fmt = null)
-            => format32(this, fmt);
+        public string Format()
+            => format32(this);
 
         [MethodImpl(Inline)]
         public bool Equals(in BitSpan32 rhs)
@@ -107,7 +107,6 @@ namespace Z0
 
         public override bool Equals(object rhs)
             => throw new NotSupportedException();
-
 
         [MethodImpl(Inline)]
         public static BitSpan32 operator +(in BitSpan32 head, in BitSpan32 tail)

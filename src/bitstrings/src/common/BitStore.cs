@@ -63,6 +63,11 @@ namespace Z0
         public static ReadOnlySpan<byte> select(int offset, int length)
             => BitSeqData.Slice(offset,length);
 
+        [MethodImpl(Inline)]
+        public static ReadOnlySpan<byte> bitseq<T>(T src, int count)
+            where T : unmanaged
+                => slice(bitseq(src), 0, min(bitsize<T>(), count));
+
         /// <summary>
         /// Constructs a span of bytes where each byte, ordered from lo to hi,
         /// represents a single bit in the source value
@@ -74,14 +79,9 @@ namespace Z0
             where T : unmanaged
         {
             var dst = sys.alloc(bitsize<T>());
-            bitseq(src,dst);
+            bitseq(src, dst);
             return dst;
         }
-
-        [MethodImpl(Inline)]
-        public static ReadOnlySpan<byte> bitseq<T>(T src, int count)
-            where T : unmanaged
-                => bitseq(src).Slice(0, min(bitsize<T>(), count));
 
         [MethodImpl(Inline)]
         public static void bitseq<T>(T src, Span<byte> dst, int offset = 0)

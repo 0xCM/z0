@@ -28,7 +28,7 @@ namespace Z0
             }
             finally
             {
-                ReportCaseResult(name,succeeded,count);
+                ReportCaseResult(name, succeeded, count);
             }
         }
     }

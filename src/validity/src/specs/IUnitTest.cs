@@ -8,6 +8,6 @@ namespace Z0
     {
         void SetMode(bool diagnostic);
 
-        void SetShell(IWfShell wf);
+        void InjectShell(IWfShell wf);
     }
 }

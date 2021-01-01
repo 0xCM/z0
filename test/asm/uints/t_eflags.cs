@@ -25,15 +25,15 @@ namespace Z0.Asm
 
         public void test_flag_bits()
         {
-            var bits = BitFields.create<EFlagBits>(w32);
-            bits[EFlagBits.ZF] = 1;
+            var bits = BitFields.create<EFlagKind>(w32);
+            bits[EFlagKind.ZF] = 1;
 
-            var index = bits.FieldIndex(EFlagBits.ZF);
+            var index = bits.FieldIndex(EFlagKind.ZF);
             Claim.eq((uint5)6, index);
-            Claim.yea(bits[EFlagBits.ZF]);
+            Claim.yea(bits[EFlagKind.ZF]);
 
-            bits[EFlagBits.ZF] = 0;
-            Claim.nea(bits[EFlagBits.ZF]);
+            bits[EFlagKind.ZF] = 0;
+            Claim.nea(bits[EFlagKind.ZF]);
         }
     }
 }

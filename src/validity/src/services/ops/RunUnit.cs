@@ -53,11 +53,12 @@ namespace Z0
             if(!HasTests(host, filters))
                 return;
 
+            Demands.insist(Wf != null);
             using var unit = host.Instantiate<IUnitTest>();
             if(unit.Enabled)
             {
                 unit.SetMode(DiagnosticMode);
-                unit.SetShell(Wf);
+                unit.InjectShell(Wf);
                 RunUnit(host, unit);
             }
         }

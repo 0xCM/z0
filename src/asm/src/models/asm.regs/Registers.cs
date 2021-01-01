@@ -8,7 +8,7 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static RegisterBitFields;
+    using static RegisterBits;
     using static z;
 
     using W = RegisterWidth;
@@ -16,6 +16,18 @@ namespace Z0.Asm
     [ApiHost(ApiNames.AsmRegisters)]
     public readonly struct Registers
     {
+        [MethodImpl(Inline), Op]
+        public static Register define(RegisterKind kind)
+            => kind;
+
+        [MethodImpl(Inline), Op]
+        public static Register define(RegisterIndex c, RegisterClass k, RegisterWidth w)
+            => new Register(c, k, w);
+
+        [MethodImpl(Inline), Op]
+        public static Register define(@enum<RegisterKind,uint> src)
+            => new Register(src.Literal);
+
         [Op]
         public static RegMachine512 machine(W512 w)
             => new RegMachine512(Registers.bank(w,32), Registers.bank(w64, 16));
@@ -84,36 +96,52 @@ namespace Z0.Asm
         public static RegisterKind width(RegisterWidth src, RegisterKind dst)
             => (RegisterKind)(Bits.copy((uint)src, (byte)FI.K, (byte)(FW.W), (uint)dst));
 
-        public static IndexedView<RegisterKind> SymbolKinds
-            => Enums.literals<RegisterKind>();
+        [Op]
+        public static Index<Register> All()
+            => Enums.literals<RegisterKind>().Map(k => define(k));
 
-        [MethodImpl(Inline), Op]
-        public static IndexedView<RegisterKind> Gp8()
-            => SymbolKinds.Where(r => width(r) == W.W8);
+        [Op]
+        public static Index<Register> Gp8()
+            => All().Where(r => width(r) == W.W8);
 
-        [MethodImpl(Inline), Op]
-        public static IndexedView<RegisterKind> Gp16()
-            => SymbolKinds.Where(r => width(r) == W.W16);
+        public static Index<Register> Gp8(Index<Register> src)
+            => src.Where(r => width(r) == W.W8);
 
-        [MethodImpl(Inline), Op]
-        public static IndexedView<RegisterKind> Gp32()
-            => SymbolKinds.Where(r => width(r) == W.W32);
+        public static Index<Register> Gp16()
+            => All().Where(r => width(r) == W.W16);
 
-        [MethodImpl(Inline), Op]
-        public static IndexedView<RegisterKind> Gp64()
-            => SymbolKinds.Where(r => width(r) == W.W64);
+        public static Index<Register> Gp16(Index<Register> src)
+            => src.Where(r => width(r) == W.W16);
 
-        [MethodImpl(Inline), Op]
-        public static IndexedView<RegisterKind> V128()
-            => SymbolKinds.Where(r => width(r) == W.W128);
+        public static Index<Register> Gp32()
+            => All().Where(r => width(r) == W.W32);
 
-        [MethodImpl(Inline), Op]
-        public static IndexedView<RegisterKind> V256()
-            => SymbolKinds.Where(r => width(r) == W.W256);
+        public static Index<Register> Gp32(Index<Register> src)
+            => src.Where(r => width(r) == W.W32);
 
-        [MethodImpl(Inline), Op]
-        public static IndexedView<RegisterKind> V512()
-            => SymbolKinds.Where(r => width(r) == W.W512);
+        public static Index<Register> Gp64()
+            => All().Where(r => width(r) == W.W64);
+
+        public static Index<Register> Gp64(Index<Register> src)
+            => src.Where(r => width(r) == W.W64);
+
+        public static Index<Register> V128()
+            => All().Where(r => width(r) == W.W128);
+
+        public static Index<Register> V128(Index<Register> src)
+            => src.Where(r => width(r) == W.W128);
+
+        public static Index<Register> V256()
+            => All().Where(r => width(r) == W.W256);
+
+        public static Index<Register> V256(Index<Register> src)
+            => src.Where(r => width(r) == W.W256);
+
+        public static Index<Register> V512()
+            => All().Where(r => width(r) == W.W512);
+
+        public static Index<Register> V512(Index<Register> src)
+            => src.Where(r => width(r) == W.W512);
 
         [MethodImpl(Inline)]
         public static void split(RegisterKind src, out RegisterIndex c, out RegisterClass k, out RegisterWidth w)
@@ -121,6 +149,17 @@ namespace Z0.Asm
             c = code(src);
             k = @class(src);
             w = width(src);
+        }
+
+        [Op]
+        public static string format(Register src)
+        {
+            const string Sep = " | ";
+            var seg0 = BitFields.format<RegisterIndex,byte>(src.Code);
+            var seg1 = BitFields.format<RegisterClass,byte>(src.Class);
+            var seg2 = BitFields.format<RegisterWidth,ushort>(src.Width);
+            var dst = text.bracket(text.concat(seg2, Sep, seg1, Sep, seg0));
+            return dst;
         }
 
     }

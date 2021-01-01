@@ -15,7 +15,7 @@ namespace Z0.Asm
     /// 3-16 Vol 1 of Intel Manual
     /// </remarks>
     [Flags]
-    public enum EFlagBits : uint
+    public enum EFlagKind : uint
     {
         /// <summary>
         /// Carry Flag (Status Flag): Set if an arithmetic operation generates a carry or a borrow

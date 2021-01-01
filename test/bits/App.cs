@@ -8,8 +8,5 @@ namespace Z0
     {
         static void Main(params string[] args)
             => Run(args);
-
-        public static void run(params string[] args)
-            => Run(args);
     }
 }

@@ -6,8 +6,8 @@
 
 namespace Z0.Parts
 {
-    public sealed class BitsTest : ExecutablePart<BitsTest>
+    public sealed class BitsTest : Part<BitsTest>
     {
-        public override void Execute(params string[] args) => BitsTestApp.Run(args);
+
     }
 }

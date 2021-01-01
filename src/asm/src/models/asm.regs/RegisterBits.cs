@@ -4,7 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    public readonly struct RegisterBitFields
+    using System;
+    using System.Runtime.CompilerServices;
+
+    [LiteralProvider]
+    public readonly struct RegisterBits
     {
         /// <summary>
         /// The RegisterCode segment position
@@ -40,5 +44,32 @@ namespace Z0.Asm
         /// The maximum number of register classes
         /// </summary>
         public const byte MaxClass = 31;
+
+        public enum FI : byte
+        {
+            /// <summary>
+            /// RegisterCode: [0..3]
+            /// </summary>
+            C = 0,
+
+            /// <summary>
+            /// RegisterClass: [4..15]
+            /// </summary>
+            K = 4,
+
+            /// <summary>
+            /// Register width: [16..31]
+            /// </summary>
+            W = 16,
+        }
+
+        public enum FW : byte
+        {
+            C = FI.K - FI.C,
+
+            K = FI.W - FI.K,
+
+            W = MaxClass - FI.W,
+        }
     }
 }

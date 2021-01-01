@@ -19,17 +19,6 @@ namespace Z0.Asm
         public static RexPrefixBits rex(byte src)
             => RexPrefixBits.define(src);
 
-        [Op]
-        public static string format(RegBits src)
-        {
-            const string Sep = " | ";
-            var seg0 = BitFields.format<RegisterIndex,byte>(src.Code);
-            var seg1 = BitFields.format<RegisterClass,byte>(src.Class);
-            var seg2 = BitFields.format<RegisterWidth,ushort>(src.Width);
-            var dst = text.bracket(text.concat(seg2, Sep, seg1, Sep, seg0));
-            return dst;
-        }
-
         /// <summary>
         /// Presents encoded content as a bytespan of variable length from 0 to 15 bytes
         /// </summary>

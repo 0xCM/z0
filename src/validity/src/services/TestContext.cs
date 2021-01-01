@@ -26,7 +26,7 @@ namespace Z0
         public void SetMode(bool diagnostic)
             => DiagnosticMode = diagnostic;
 
-        public void SetShell(IWfShell wf)
+        public void InjectShell(IWfShell wf)
             => Wf = wf;
 
         protected TestContext()
@@ -225,7 +225,7 @@ namespace Z0
                 => Context.ReportBenchmark<W,T>(f,ops,time);
 
         protected void CheckAction(Action f, string name)
-            => Context.CheckAction(f,name);
+            => Context.CheckAction(f, name);
 
         protected void Notify(string msg, LogLevel? severity = null)
             => Queue.Notify(msg, severity);

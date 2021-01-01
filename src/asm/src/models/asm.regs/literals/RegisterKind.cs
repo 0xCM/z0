@@ -7,7 +7,7 @@ namespace Z0.Asm
     using static RegisterIndex;
     using static RegisterClass;
     using static RegisterWidth;
-    using static RegisterBitFields;
+    using static RegisterBits;
 
     using SR = SegRegKind;
     using F = FlagRegKind;

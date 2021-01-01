@@ -25,8 +25,9 @@ namespace Z0
             var n = bitwidth<T>();
             var dst = gbits.clear(maxval<T>(), first, count);
             var bs = BitString.scalar(dst);
-            Claim.eq(bs.Length, n);
-            for(var i=0; i<bs.Length; i++)
+            var len = bs.Length;
+            Claim.eq(len, n);
+            for(var i=0; i<len; i++)
             {
                 if(i >= first && i < first + count)
                     Claim.nea(bs[i]);

@@ -10,7 +10,7 @@ namespace Z0.Asm
     /// Defines register characteristic classifiers
     /// </summary>
     [Flags]
-    public enum RegAspectKind : uint
+    public enum RegisterAspectKind : uint
     {
         None = 0,
 

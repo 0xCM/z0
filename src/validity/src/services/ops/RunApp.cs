@@ -9,8 +9,8 @@ namespace Z0
         public static void Run(params string[] args)
         {
             var app = new A();
+            app.InjectShell(WfShell.create(args));
             app.SetMode(InDiagnosticMode);
-            app.SetShell(app.Wf);
             app.RunTests();
         }
     }

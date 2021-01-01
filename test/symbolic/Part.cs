@@ -3,11 +3,10 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 [assembly: PartId(PartId.UnsignedTest)]
-
 namespace Z0.Parts
 {
-    public sealed class SymbolicTest : ExecutablePart<SymbolicTest>
+    public sealed class SymbolicTest : Part<SymbolicTest>
     {
-         public override void Execute(params string[] args) => SymbolicTestApp.Run(args);
+
     }
 }

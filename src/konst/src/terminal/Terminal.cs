@@ -118,19 +118,35 @@ namespace Z0
 
         public void WriteMessages(IEnumerable<IAppMsg> messages)
         {
-            lock(TermLock)
+            var frozen = messages.Array();
+            var count = frozen.Length;
+            if(count != 0)
             {
-                var current = Console.ForegroundColor;
-                foreach(var msg in messages)
+                lock(TermLock)
                 {
-                    Console.ForegroundColor = (ConsoleColor)msg.Flair;
-                    if(msg.IsError)
-                        Console.Error.WriteLine(msg);
-                    else
-                        Console.WriteLine(msg);
-                    Console.ForegroundColor = current;
+                    var revert = Console.ForegroundColor;
+                    for(var i=0; i<count; i++)
+                    {
+                        var msg = frozen[i];
+                        Console.ForegroundColor = (ConsoleColor)msg.Flair;
+                        if(msg.IsError)
+                            Console.Error.WriteLine(msg);
+                        else
+                            Console.WriteLine(msg);
+                        Console.ForegroundColor = revert;
+                    }
+
+                    // foreach(var msg in messages)
+                    // {
+                    //     Console.ForegroundColor = (ConsoleColor)msg.Flair;
+                    //     if(msg.IsError)
+                    //         Console.Error.WriteLine(msg);
+                    //     else
+                    //         Console.WriteLine(msg);
+                    //     Console.ForegroundColor = current;
+                    // }
+                    //Console.ForegroundColor = revert;
                 }
-                Console.ForegroundColor = current;
             }
         }
 

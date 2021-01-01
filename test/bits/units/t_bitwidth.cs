@@ -52,7 +52,6 @@ namespace Z0
                 var actual = gbits.effwidth(x);
                 var expect = bitwidth<T>() - gbits.nlz(x);
                 Claim.eq(expect, actual);
-
             }
         }
     }

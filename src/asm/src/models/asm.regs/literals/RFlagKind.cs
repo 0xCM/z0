@@ -4,17 +4,17 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using F = EFlagBits;
+    using F = EFlagKind;
 
     /// <summary>
     /// Defines literals corresponding the bits in the RFLAGS register
     /// </summary>
-    public enum RFlagBits : ulong
+    public enum RFlagKind : ulong
     {
         CF = F.CF,
 
         PF = F.PF,
-        
+
         AF = F.AF,
 
         ZF = F.ZF,

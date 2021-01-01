@@ -24,7 +24,8 @@ namespace Z0
                 Context.TestPaths.ErrorLogPath.Delete();
                 Context.TestPaths.StatusLogPath.Delete();
 
-                RunTests(false,filters);
+                RunTests(false, filters);
+                Wf.Status("Completed test execution");
 
                 EmitLogs();
             }

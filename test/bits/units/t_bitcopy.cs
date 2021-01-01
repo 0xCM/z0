@@ -26,7 +26,7 @@ namespace Z0
             var zed = zero<T>();
             var lit = ones<T>();
             var min = byte.MinValue;
-            var max = (byte)z.bitsize<T>();
+            var max = (byte)bitsize<T>();
 
             void check()
             {
@@ -40,7 +40,7 @@ namespace Z0
                     {
                         Trace("expect", BitSpans.from32(expect).Format());
                         Trace("actual", BitSpans.from32(actual).Format());
-                        Claim.eq(expect,actual);
+                        Claim.eq(expect, actual);
                     }
                 }
             }
