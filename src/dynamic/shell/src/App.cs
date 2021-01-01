@@ -222,21 +222,16 @@ namespace Z0
             return EmitAssemblyRefs.run(Wf,cmd);
         }
 
-        void EmitPeHeaders()
+        void EmitImageHeaders()
         {
-            var build = BuildArchives.create(Wf);
-            var db = Wf.Db();
-            var dllTarget = db.Table(ImageSectionHeader.TableId, "z0.dll.headers");
-            var exeTarget = db.Table(ImageSectionHeader.TableId, "z0.exe.headers");
+            var svc = Imaging.init(Wf);
+            svc.EmitHeaders(BuildArchives.create(Wf));
+            // var db = Wf.Db();
+            // var cmd = CmdBuilder.EmitImageHeaders(build.DllFiles().Array(), db.Table(ImageSectionHeader.TableId, "dll"));
+            // svc.EmitHeaders(cmd.Source, cmd.Target);
 
-            var cmd = CmdBuilder.EmitImageHeaders();
-            cmd.Source = build.DllFiles().Array();
-            cmd.Target = db.Table(ImageSectionHeader.TableId, "z0.dll.headers");
-            EmitImageHeaders.run(Wf, cmd);
-
-            cmd.Source = build.ExeFiles().Array();
-            cmd.Target = db.Table(ImageSectionHeader.TableId, "z0.exe.headers");
-            EmitImageHeaders.run(Wf, cmd);
+            // cmd = CmdBuilder.EmitImageHeaders(build.ExeFiles().Array(), db.Table(ImageSectionHeader.TableId, "exe"));
+            // svc.EmitHeaders(cmd.Source, cmd.Target);
         }
 
         void Receive(in ImageContentRecord src)
@@ -247,7 +242,7 @@ namespace Z0
         public void PipeImageData()
         {
             var dst = Records.sink<ImageContentRecord>(Receive);
-            var archive = ImageArchives.csv(Wf);
+            var archive = ImageArchives.tables(Wf);
             var path = archive.Root + FS.file("image.content.genapp", FileExtensions.Csv);
             ImageArchives.pipe(Wf, path, dst);
 
@@ -340,30 +335,6 @@ namespace Z0
             }
         }
 
-        // static void EmitCilTables(IWfShell wf, params string[] components)
-        // {
-        //     var runtime = wf.RuntimeArchive();
-        //     var srcdir = runtime.Root;
-        //     foreach(var component in components)
-        //     {
-        //         var srcpath = srcdir + FS.file(component);
-        //         if(!srcpath.Exists)
-        //             wf.Warn($"The {component} component was not found");
-        //         else
-        //         {
-        //             var cmd = new DumpCliTablesCmd();
-        //             var dstfile = FS.file($"{component}.metadata.cli");
-        //             var dstdir = wf.Db().Output(new ToolId("ztool"), cmd.Id()).Create() + dstfile;
-        //             cmd.Source = srcpath;
-        //             cmd.Target = dstdir;
-        //             (var success, var msg) = MetadataTableEmitter.emit(cmd.Source.Name, cmd.Target.Name);
-        //             if(success)
-        //                 wf.Status(msg);
-        //             else
-        //                 wf.Error(msg);
-        //         }
-        //     }
-        // }
 
         void Summarize(ApiCodeBlock src)
         {
@@ -493,7 +464,8 @@ namespace Z0
             //Jit();
             //PipeImageData();
             //LoadAsmStore();
-            EmitAmsOpCodes();
+            //EmitAmsOpCodes();
+            EmitImageHeaders();
 
             //Run(Args);
             //EmitProcessImages(Wf);

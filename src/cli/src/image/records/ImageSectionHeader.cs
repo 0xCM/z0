@@ -46,7 +46,7 @@ namespace Z0
 
         public SectionCharacteristics SectionAspects;
 
-        public Address32 RawData;
+        public Address32 RawDataAddress;
 
         public ByteSize RawDataSize;
 

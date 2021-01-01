@@ -4,7 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
+    using System.Reflection;
+    using System.Runtime.CompilerServices;
+
+    using static Part;
 
     [Cmd(CmdName)]
     public struct EmitImageHeadersCmd : ICmdSpec<EmitImageHeadersCmd>
@@ -14,5 +17,17 @@ namespace Z0
         public FS.Files Source;
 
         public FS.FilePath Target;
+    }
+
+    partial class XCmd
+    {
+        [MethodImpl(Inline), Op]
+        public static EmitImageHeadersCmd EmitImageHeaders(this CmdBuilder wf, FS.Files src, FS.FilePath dst)
+        {
+            var cmd = new EmitImageHeadersCmd();
+            cmd.Source = src;
+            cmd.Target = dst;
+            return cmd;
+        }
     }
 }

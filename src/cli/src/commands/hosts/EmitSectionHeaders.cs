@@ -50,7 +50,7 @@ namespace Z0
         {
             dst.Delimit(Fields.FileName, src.File);
             dst.Delimit(Fields.Section, src.SectionName);
-            dst.Delimit(Fields.Address, src.RawData);
+            dst.Delimit(Fields.Address, src.RawDataAddress);
             dst.Delimit(Fields.Size, src.RawDataSize);
             dst.Delimit(Fields.EntryPoint, src.EntryPoint);
             dst.Delimit(Fields.CodeBase, src.CodeBase);

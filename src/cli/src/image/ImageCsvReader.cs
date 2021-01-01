@@ -2,25 +2,18 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Images
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
     using System.IO;
+    using Z0.Images;
 
     using static Konst;
     using static corefunc;
 
-    public ref struct ImageCsvReader
+    public struct ImageCsvReader : IDisposable
     {
-        public static ImageCsvReader create(IWfShell wf, FS.FilePath src)
-        {
-            if(!src.Exists)
-                corefunc.@throw(FS.missing(src));
-
-            return new ImageCsvReader(wf, src);
-        }
-
         readonly FS.FilePath Source;
 
         readonly IWfShell Wf;

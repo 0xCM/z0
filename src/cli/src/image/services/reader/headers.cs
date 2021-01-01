@@ -22,14 +22,14 @@ namespace Z0
             foreach(var section in sections)
             {
                 var record = default(ImageSectionHeader);
-                record.File = FS.file(src.FileName.Name);
+                record.File = src.FileName;
                 record.EntryPoint = (Address32)headers.PEHeader.AddressOfEntryPoint;
                 record.CodeBase = (Address32)headers.PEHeader.BaseOfCode;
                 record.GptRva = (Address32)headers.PEHeader.GlobalPointerTableDirectory.RelativeVirtualAddress;
                 record.GptSize = (ByteSize)headers.PEHeader.GlobalPointerTableDirectory.Size;
                 record.SectionAspects = section.SectionCharacteristics;
                 record.SectionName = section.Name;
-                record.RawData = (Address32)section.PointerToRawData;
+                record.RawDataAddress = (Address32)section.PointerToRawData;
                 record.RawDataSize = section.SizeOfRawData;
                 dst.Add(record);
             }

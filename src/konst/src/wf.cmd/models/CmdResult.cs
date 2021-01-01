@@ -41,6 +41,11 @@ namespace Z0
             Message = e.ToString();
         }
 
+
+        [MethodImpl(Inline)]
+        public static CmdResult FromOutcome<T>(CmdId id, Outcome<T> result)
+            => new CmdResult(id, result.Ok, result.Message);
+
         internal static string DefaultMsg(CmdId id, bit success)
             => string.Format("{0} execution {1}", id, success ? "succeeded" : "failed");
 
@@ -53,5 +58,17 @@ namespace Z0
 
         public static CmdResult Empty
             => default;
+    }
+
+    partial class XTend
+    {
+        [MethodImpl(Inline)]
+        public static CmdResult ToCmdResult<T>(this Outcome<T> result, CmdId id)
+            => CmdResult.FromOutcome(id,result);
+
+        [MethodImpl(Inline)]
+        public static CmdResult ToCmdResult<T>(this Outcome<T> result, ICmdSpec cmd)
+            => CmdResult.FromOutcome(cmd.CmdId,result);
+
     }
 }

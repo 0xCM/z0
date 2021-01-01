@@ -12,7 +12,7 @@ namespace Z0
         {
             var db = wf.Db();
             Source = db.DevData("xed");
-            Target = db.TableRoot("xed");
+            Target = db.TableDir("xed");
         }
 
         public FS.FileName SummaryFile

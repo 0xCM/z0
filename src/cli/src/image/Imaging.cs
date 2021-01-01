@@ -10,42 +10,52 @@ namespace Z0
 
     using PEReader = System.Reflection.PortableExecutable.PEReader;
 
+    using Z0.Images;
+
     using static Konst;
     using static z;
 
-    public sealed class EmitImageHeaders : CmdHost<EmitImageHeaders, EmitImageHeadersCmd>
+
+    public sealed class Imaging : WfService<Imaging,Imaging>
     {
-        public static ReadOnlySpan<byte> RenderWidths
+        static ReadOnlySpan<byte> RenderWidths
             => new byte[9]{60,16,16,12,12,60,16,16,16};
 
-        public static CmdResult run(IWfShell wf, EmitImageHeadersCmd cmd)
+        public void EmitHeaders(IBuildArchive src)
+        {
+            var svc = Imaging.init(Wf);
+            var db = Wf.Db();
+            var dir = db.TableDir<ImageSectionHeader>();
+            var cmd = CmdBuilder.EmitImageHeaders(src.DllFiles().Array(), db.Table(ImageSectionHeader.TableId, "dll"));
+            svc.EmitHeaders(cmd.Source, cmd.Target);
+            cmd = CmdBuilder.EmitImageHeaders(src.ExeFiles().Array(), db.Table(ImageSectionHeader.TableId, "exe"));
+            svc.EmitHeaders(cmd.Source, cmd.Target);
+        }
+
+        public Outcome<Count> EmitHeaders(FS.Files src, FS.FilePath dst)
         {
             var total = Count.Zero;
             var formatter = TableFormatter.row<ImageSectionHeader>(RenderWidths);
-            using var writer = cmd.Target.Writer();
+            using var writer = dst.Writer();
             writer.WriteLine(formatter.FormatHeader());
-            foreach(var file in cmd.Source)
+            foreach(var file in src)
             {
-                var result = read(file, out Span<ImageSectionHeader> dst);
+                var result = read(file, out Span<ImageSectionHeader> headers);
                 if(result)
                 {
                     var count = result.Data;
 
                     for(var i=0u; i<count; i++)
-                        writer.WriteLine(formatter.FormatRow(skip(dst,i)));
+                        writer.WriteLine(formatter.FormatRow(skip(headers,i)));
 
                     total += count;
-
-                    wf.EmittedFile(total, cmd.Target);
                 }
             }
-            return Cmd.ok(cmd);
+
+            return total;
         }
 
-        protected override CmdResult Execute(IWfShell wf, in EmitImageHeadersCmd cmd)
-            => run(wf,cmd);
-
-        public static Outcome<uint> read(FS.FilePath path, out Span<ImageSectionHeader> target)
+        static Outcome<uint> read(FS.FilePath path, out Span<ImageSectionHeader> target)
         {
             using var stream = File.OpenRead(path.Name);
             using var reader = new PEReader(stream);
@@ -67,7 +77,7 @@ namespace Z0
                 dst.GptSize = (ByteSize)peHeaders.PEHeader.GlobalPointerTableDirectory.Size;
                 dst.SectionAspects = src.SectionCharacteristics;
                 dst.SectionName = src.Name;
-                dst.RawData = (Address32)src.PointerToRawData;
+                dst.RawDataAddress = (Address32)src.PointerToRawData;
                 dst.RawDataSize = src.SizeOfRawData;
             }
 

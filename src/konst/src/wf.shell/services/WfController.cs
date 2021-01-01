@@ -14,6 +14,10 @@ namespace Z0
     {
         public Assembly Component {get;}
 
+        public FS.FilePath ImagePath => FS.path(Component.CodeBase);
+
+        public FS.FolderPath ImageDir => ImagePath.FolderPath;
+
         [MethodImpl(Inline)]
         public WfController(Assembly src)
             => Component = src;

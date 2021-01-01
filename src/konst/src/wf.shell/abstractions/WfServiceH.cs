@@ -38,6 +38,8 @@ namespace Z0
 
         public abstract Type ContractType {get;}
 
+        protected CmdBuilder CmdBuilder => Wf.CmdBuilder();
+
         public void Init(IWfShell wf)
         {
             Host = WfShell.host(typeof(H));

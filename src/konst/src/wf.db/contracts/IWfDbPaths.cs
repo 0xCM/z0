@@ -60,9 +60,6 @@ namespace Z0
         FS.FolderPath LogRoot()
             => Root + FS.folder(DbNames.logs);
 
-        FS.FolderPath TableRoot()
-            => Root + FS.folder(DbNames.tables);
-
         /// <summary>
         /// Defines a task-specific log path
         /// </summary>
@@ -71,36 +68,42 @@ namespace Z0
             =>  LogRoot() + FS.file(subject, ext ?? Csv);
 
         /// <summary>
+        /// The root table directory
+        /// </summary>
+        FS.FolderPath TableRoot()
+            => Root + FS.folder(DbNames.tables);
+
+        /// <summary>
         /// Specifies a table root for an identified subject
         /// </summary>
         /// <param name="subject">The subject identifier</param>
-        FS.FolderPath TableRoot(string subject)
+        FS.FolderPath TableDir(string subject)
             => TableRoot() + FS.folder(subject);
 
         /// <summary>
         /// Specifies a table root for a type-identified subject
         /// </summary>
         /// <param name="t">The identifying type</param>
-        FS.FolderPath TableRoot(Type t)
-            => t.Tag<RecordAttribute>().MapValueOrElse(a => TableRoot(a.TableId), () => TableRoot(t.Name));
+        FS.FolderPath TableDir(Type t)
+            => t.Tag<RecordAttribute>().MapValueOrElse(a => TableDir(a.TableId), () => TableDir(t.Name));
 
         /// <summary>
         /// Specifies a table root for a parametrically-identified subject
         /// </summary>
         /// <param name="subject">The subject identifier</param>
         /// <typeparam name="S">The subject type</typeparam>
-        FS.FolderPath TableRoot<T>()
+        FS.FolderPath TableDir<T>()
             where T : struct
-                => TableRoot(typeof(T));
+                => TableDir(typeof(T));
 
         FS.FilePath Table(string id, PartId part)
-            => TableRoot(id) + FS.file(string.Format(RP.SlotDot2, id, part.Format()), DefaultTableExt);
+            => TableDir(id) + FS.file(string.Format(RP.SlotDot2, id, part.Format()), DefaultTableExt);
 
         FS.FilePath Table(string id)
             => TableRoot() + FS.file(id, DefaultTableExt);
 
         FS.FilePath Table(PartId part, string id, FS.FileExt ext)
-            => TableRoot(id) + FS.file(part.Format(), ext);
+            => TableDir(id) + FS.file(part.Format(), ext);
 
         FS.FilePath Table(Type t, PartId part)
             => t.Tag<RecordAttribute>().MapValueOrElse(a => Table(part,  a.TableId, DefaultTableExt), () => Table(part, t.Name, DefaultTableExt));

@@ -25,7 +25,7 @@ namespace Z0
         {
             Db = archive;
             Subject = subject;
-            Root = archive.TableRoot(subject.ToString());
+            Root = archive.TableDir(subject.ToString());
         }
 
         public void Clear()
