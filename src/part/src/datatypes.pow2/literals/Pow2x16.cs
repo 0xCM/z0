@@ -11,7 +11,7 @@ namespace Z0
     /// <summary>
     /// Defines integers of the form 2^n where n = 0,..,15
     /// </summary>
-    [Flags]
+    [Flags, LiteralSet(typeof(Pow2))]
     public enum Pow2x16 : ushort
     {
         /// <summary>
@@ -53,7 +53,7 @@ namespace Z0
         /// 2^7 = 128
         /// </summary>
         P2ᐞ07 = K.T07,
-        
+
         /// <summary>
         /// 2^8 = 256
         /// </summary>
@@ -68,12 +68,12 @@ namespace Z0
         /// 2^10 = 1024
         /// </summary>
         P2ᐞ10 = K.T10,
-        
+
         /// <summary>
         /// 2^11 = 2048
         /// </summary>
         P2ᐞ11 = K.T11,
-        
+
         /// <summary>
         /// 2^12 = 4096
         /// </summary>
@@ -88,7 +88,7 @@ namespace Z0
         /// 2^14 = 16,384
         /// </summary>
         P2ᐞ14 = K.T14,
-        
+
         /// <summary>
         /// 2^15 = 32,768
         /// </summary>

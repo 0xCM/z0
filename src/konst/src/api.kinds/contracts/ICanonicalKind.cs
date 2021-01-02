@@ -9,7 +9,7 @@ namespace Z0
     using K = CanonicalApiClass;
 
     [Free]
-    public interface ICanonicalKind : IApiKey, IOpKind<K>
+    public interface ICanonicalKind : IApiKey, IApiKind<K>
     {
         K Kind {get;}
 
@@ -18,7 +18,7 @@ namespace Z0
     }
 
     [Free]
-    public interface ICanonicalKind<F> : I, IOpKind<F,K>
+    public interface ICanonicalKind<F> : I, IApiKind<F,K>
         where F : unmanaged, I
     {
         ApiClass IApiKey.Id

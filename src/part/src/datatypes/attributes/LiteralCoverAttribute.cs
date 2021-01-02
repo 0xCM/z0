@@ -12,6 +12,11 @@ namespace Z0
     [AttributeUsage(AttributeTargets.Struct)]
     public class LiteralCoverAttribute : Attribute
     {
+        public LiteralCoverAttribute(Type literal)
+        {
+            LiteralType = literal;
+        }
 
+        public Type LiteralType {get;}
     }
 }

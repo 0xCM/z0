@@ -10,7 +10,7 @@ namespace Z0
     /// <summary>
     /// Characterizes a bitfunction classifier
     /// </summary>
-    public interface IBitFunctionApiKey : IApiKey, IOpKind<K>
+    public interface IBitFunctionApiKey : IApiKey, IApiKind<K>
     {
         BitFunctionApiClass Kind {get;}
 
@@ -22,7 +22,7 @@ namespace Z0
     /// Characterizes a reified bitfunction classifier
     /// </summary>
     /// <typeparam name="F">The reification type</typeparam>
-    public interface IBitFunctionApiKey<F> : I, IOpKind<F,K>
+    public interface IBitFunctionApiKey<F> : I, IApiKind<F,K>
         where F : unmanaged, I
     {
         ApiClass IApiKey.Id

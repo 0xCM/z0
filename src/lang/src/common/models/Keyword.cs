@@ -21,14 +21,14 @@ namespace Z0.Lang
             => Name = src;
 
         [MethodImpl(Inline)]
-        public static implicit operator Keyword(string name)
-            => new Keyword(name);
-
-        [MethodImpl(Inline)]
         public string Format()
             => Name;
 
         public override string ToString()
             => Format();
+
+        [MethodImpl(Inline)]
+        public static implicit operator Keyword(string name)
+            => new Keyword(name);
     }
 }

@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using static Pow2;
 
+    [LiteralProvider]
     public readonly struct Pow2M1
     {
         public const ulong T00m1 = T00 - 1;

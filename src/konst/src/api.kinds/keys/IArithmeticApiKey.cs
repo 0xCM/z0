@@ -10,7 +10,7 @@ namespace Z0
     /// <summary>
     /// Characterizes an arithmetic function classifier
     /// </summary>
-    public interface IArithmeticApiKey : IApiKey, IOpKind<K>
+    public interface IArithmeticApiKey : IApiKey, IApiKind<K>
     {
         /// <summary>
         /// The literal identifier that will be lifted to the type-level
@@ -28,7 +28,7 @@ namespace Z0
     /// Characterizes a reified arithmetic function classifier
     /// </summary>
     /// <typeparam name="F">The reification type</typeparam>
-    public interface IArithmeticKind<F> : I, IOpKind<F,K>
+    public interface IArithmeticKind<F> : I, IApiKind<F,K>
         where F : unmanaged, I
     {
         ApiClass IApiKey.Id

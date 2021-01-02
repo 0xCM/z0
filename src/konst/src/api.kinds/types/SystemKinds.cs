@@ -5,7 +5,7 @@
 namespace Z0
 {
     using K = SystemApiClass;
-    using I = ISystemOpKind;
+    using I = ISystemApiKind;
 
     partial class Kinds
     {
@@ -17,8 +17,8 @@ namespace Z0
         //~ Parametric
         //~ -------------------------------------------------------------------
 
-        public readonly struct Init<T> : ISystemOpKind<Init,T> {}
+        public readonly struct Init<T> : ISystemApiKind<Init,T> {}
 
-        public readonly struct Kind<T> : ISystemOpKind<Kind,T> {}
+        public readonly struct Kind<T> : ISystemApiKind<Kind,T> {}
     }
 }

@@ -22,19 +22,4 @@ namespace Z0
             Kind = kind;
         }
     }
-
-    public readonly struct Annotation<K>
-        where K : unmanaged
-    {
-        public TextBlock Content {get;}
-
-        public K Kind {get;}
-
-        [MethodImpl(Inline)]
-        public Annotation(string content, K kind)
-        {
-            Content = content;
-            Kind = kind;
-        }
-    }
 }

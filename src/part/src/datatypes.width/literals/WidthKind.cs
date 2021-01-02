@@ -17,6 +17,8 @@ namespace Z0
 
         Numeric = 4,
 
-        Vector = 8
+        Vector = 8,
+
+        Cell = 16,
     }
 }

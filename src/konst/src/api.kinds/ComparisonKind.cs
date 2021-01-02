@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z ;
     using static Pow2x32;
 
     public enum ComparisonKind : uint

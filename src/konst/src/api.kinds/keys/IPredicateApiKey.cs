@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static Konst;
 
     using K = PredicateApiClass;
     using I = IPredicateApiKey;
@@ -12,7 +11,7 @@ namespace Z0
     /// <summary>
     /// Characterizes a bitfunction classifier
     /// </summary>
-    public interface IPredicateApiKey : IApiKey, IOpKind<K>
+    public interface IPredicateApiKey : IApiKey, IApiKind<K>
     {
         K Kind {get;}
 
@@ -24,7 +23,7 @@ namespace Z0
     /// Characterizes a reified bitfunction classifier
     /// </summary>
     /// <typeparam name="F">The reification type</typeparam>
-    public interface IBooleanPredicateKind<F> : I, IOpKind<F,K>
+    public interface IBooleanPredicateKind<F> : I, IApiKind<F,K>
         where F : unmanaged, I
     {
         ApiClass IApiKey.Id

@@ -7,11 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     using BK = SegBlockKind;
 
-    public readonly struct BlockedKind<W,T> : IBlockedOp<BlockedKind<W,T>, W,T>
+    public readonly struct BlockedKind<W,T> : IBlockedOpKind<BlockedKind<W,T>, W,T>
         where T : unmanaged
         where W : unmanaged, ITypeWidth
     {

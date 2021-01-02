@@ -7,8 +7,6 @@ namespace Z0.Lang
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-
    public struct LoopHost<H,I>
         where I : unmanaged
         where H : struct

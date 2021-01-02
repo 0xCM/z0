@@ -22,7 +22,7 @@ namespace Z0
         S8 = 8
     }
 
-    [LiteralCover]
+    [LiteralCover(typeof(MemoryScaleKind))]
     public readonly struct MemoryScale : ITextual
     {
         public MemoryScaleKind Kind {get;}

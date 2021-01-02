@@ -9,16 +9,6 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public struct ComparisonResult<K,T,R>
-    {
-        public K Operator;
-
-        public T Left;
-
-        public T Right;
-
-        public R Outcome;
-    }
 
     public class t_uint3 : t_uint<t_uint3>
     {
@@ -30,7 +20,6 @@ namespace Z0
             dst.Right = rhs;
             dst.Outcome = outcome;
             return dst;
-
         }
 
         public void t_uint3_reduce()

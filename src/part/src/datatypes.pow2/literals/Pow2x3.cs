@@ -5,13 +5,13 @@
 namespace Z0
 {
     using System;
-    
+
     using K = Pow2;
 
     /// <summary>
     /// Defines integers of the form 2^n where n = 0,..,2
     /// </summary>
-    [Flags]
+    [Flags, LiteralSet(typeof(Pow2))]
     public enum Pow2x3 : byte
     {
         /// <summary>

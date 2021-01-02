@@ -18,8 +18,6 @@ public enum PartId : ulong
 
     Math = 4,
 
-    Records = 6,
-
     Refs = 8,
 
     Api = 9,
@@ -36,8 +34,6 @@ public enum PartId : ulong
 
     Polyrand = 36,
 
-    PolyrandTest = Polyrand | Test,
-
     DynoShell = 40,
 
     Tools = 41,
@@ -53,8 +49,6 @@ public enum PartId : ulong
     Dsl = 46,
 
     Gen = 47,
-
-    GenApp = Gen | Shell,
 
     // ~ 50
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -153,15 +147,15 @@ public enum PartId : ulong
 
     Run=200,
 
-    // ~ 300
+    // ~ Shells
     // ~ -------------------------------------------------------------------------------
 
-    // ~ 512
-    // ~ -------------------------------------------------------------------------------
-
+    GenApp = Gen | Shell,
 
     // ~ Test
     // ~ -------------------------------------------------------------------------------
+
+    PolyrandTest = Polyrand | Test,
 
     LogixTest = Logix | Test,
 

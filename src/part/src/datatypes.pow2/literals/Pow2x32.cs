@@ -11,7 +11,7 @@ namespace Z0
     /// <summary>
     /// Defines integers of the form 2^n where n = 0,..,31
     /// </summary>
-    [Flags]
+    [Flags, LiteralSet(typeof(Pow2))]
     public enum Pow2x32 : uint
     {
         /// <summary>
@@ -68,12 +68,12 @@ namespace Z0
         /// 2^10 = 1024
         /// </summary>
         P2ᐞ10 = K.T10,
-        
+
         /// <summary>
         /// 2^11 = 2048
         /// </summary>
         P2ᐞ11 = K.T11,
-        
+
         /// <summary>
         /// 2^12 = 4096
         /// </summary>
@@ -88,7 +88,7 @@ namespace Z0
         /// 2^14 = 16,384
         /// </summary>
         P2ᐞ14 = K.T14,
-        
+
         /// <summary>
         /// 2^15 = 32,768
         /// </summary>
@@ -98,7 +98,7 @@ namespace Z0
         /// 2^16 = 65,536
         /// </summary>
         P2ᐞ16 = K.T16,
-        
+
         /// <summary>
         /// 2^17 = 131,072
         /// </summary>
@@ -118,7 +118,7 @@ namespace Z0
         /// 2^20 = 1,048,576
         /// </summary>
         P2ᐞ20 = K.T20,
-        
+
         /// <summary>
         /// 2^21 = 2,097,152
         /// </summary>
@@ -133,7 +133,7 @@ namespace Z0
         /// 2^23 = 8,388,608
         /// </summary>
         P2ᐞ23 = K.T23,
-        
+
         /// <summary>
         /// 2^24 = 16,777,216
         /// </summary>
@@ -143,27 +143,27 @@ namespace Z0
         /// 2^25 = 33,554,432
         /// </summary>
         P2ᐞ25 = K.T25,
-        
+
         /// <summary>
         /// 2^26 = 67,108,864 = 0x4000000
         /// </summary>
         P2ᐞ26 = K.T26,
-        
+
         /// <summary>
         /// 2^27 = 134,217,728 = 0x8000000
         /// </summary>
         P2ᐞ27 = K.T27,
-        
+
         /// <summary>
         /// 2^28 = 268,435,456 = 0x10000000
         /// </summary>
         P2ᐞ28 = K.T28,
-        
+
         /// <summary>
         /// 2^29 = 536,870,912 = 0x20000000,
         /// </summary>
         P2ᐞ29 = K.T29,
-        
+
         /// <summary>
         /// 2^30 = 1,073,741,824 = 0x40000000
         /// </summary>

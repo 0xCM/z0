@@ -10,7 +10,7 @@ namespace Z0
     /// <summary>
     /// Characterizes a bitshift operation classifier
     /// </summary>
-    public interface IComparisonApiKey : IApiKey, IOpKind<K>
+    public interface IComparisonApiKey : IApiKey, IApiKind<K>
     {
         K Kind {get;}
 
@@ -22,7 +22,7 @@ namespace Z0
     /// Characterizes a reified comparison operation classifier
     /// </summary>
     /// <typeparam name="F">The reification type</typeparam>
-    public interface IComparisonKind<F> : I, IOpKind<F,K>
+    public interface IComparisonKind<F> : I, IApiKind<F,K>
         where F : unmanaged, I
     {
         ApiClass IApiKey.Id

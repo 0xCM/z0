@@ -9,7 +9,7 @@ namespace Z0
     using K = BinaryBitLogicApiClass;
     using I = IBitLogicKind;
 
-    using static Konst;
+    using static Part;
 
     [ApiHost(ApiNames.BitLogicKinds, true)]
     public readonly struct BitLogicKinds
@@ -148,28 +148,28 @@ namespace Z0
 
         public readonly struct RNot : I { K I.Kind => K.RNot; }
 
-        public readonly struct And<T> : IBitLogicMetatype<And,T> {}
+        public readonly struct And<T> : IBitLogicKind<And,T> {}
 
-        public readonly struct Nand<T> : IBitLogicMetatype<Nand,T> {}
+        public readonly struct Nand<T> : IBitLogicKind<Nand,T> {}
 
-        public readonly struct Or<T> : IBitLogicMetatype<Or,T> {}
+        public readonly struct Or<T> : IBitLogicKind<Or,T> {}
 
-        public readonly struct Nor<T> : IBitLogicMetatype<Nor,T> {}
+        public readonly struct Nor<T> : IBitLogicKind<Nor,T> {}
 
-        public readonly struct Xor<T> : IBitLogicMetatype<Xor,T> {}
+        public readonly struct Xor<T> : IBitLogicKind<Xor,T> {}
 
-        public readonly struct Xnor<T> : IBitLogicMetatype<Xnor,T> {}
+        public readonly struct Xnor<T> : IBitLogicKind<Xnor,T> {}
 
-        public readonly struct Impl<T> : IBitLogicMetatype<Impl,T> {}
+        public readonly struct Impl<T> : IBitLogicKind<Impl,T> {}
 
-        public readonly struct NonImpl<T> : IBitLogicMetatype<NonImpl,T> {}
+        public readonly struct NonImpl<T> : IBitLogicKind<NonImpl,T> {}
 
-        public readonly struct CImpl<T> : IBitLogicMetatype<CImpl,T> {}
+        public readonly struct CImpl<T> : IBitLogicKind<CImpl,T> {}
 
-        public readonly struct CNonImpl<T> : IBitLogicMetatype<CNonImpl,T> {}
+        public readonly struct CNonImpl<T> : IBitLogicKind<CNonImpl,T> {}
 
-        public readonly struct Not<T> : IBitLogicMetatype<Not,T> {}
+        public readonly struct Not<T> : IBitLogicKind<Not,T> {}
 
-        public readonly struct Select<T> : IBitLogicMetatype<Select,T> {}
+        public readonly struct Select<T> : IBitLogicKind<Select,T> {}
     }
 }

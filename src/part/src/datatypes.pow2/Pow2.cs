@@ -49,7 +49,7 @@ namespace Z0
         /// Computes floor(log(src,2))
         /// </summary>
         /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static byte log2(byte src)
             => (byte)BitOperations.Log2((uint)src);
 
@@ -57,7 +57,7 @@ namespace Z0
         /// Computes floor(log(src,2))
         /// </summary>
         /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ushort log2(ushort src)
             => (ushort)BitOperations.Log2((uint)src);
 
@@ -65,7 +65,7 @@ namespace Z0
         /// Computes floor(log(src,2))
         /// </summary>
         /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static uint log2(uint src)
             => (uint)BitOperations.Log2(src);
 
@@ -73,7 +73,7 @@ namespace Z0
         /// Computes floor(log(src,2))
         /// </summary>
         /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ulong log2(ulong src)
             => (ulong)BitOperations.Log2(src);
 
