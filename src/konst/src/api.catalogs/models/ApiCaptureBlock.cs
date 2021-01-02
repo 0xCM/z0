@@ -29,7 +29,7 @@ namespace Z0
 
         public CilMethod Cil;
 
-        public CliSig ApiSig;
+        public CliSig CliSig;
 
         public ApiMetadataUri MetaUri
             => Method;
@@ -44,7 +44,7 @@ namespace Z0
             OpUri = OpUri.hex(ApiQuery.uri(method.DeclaringType), method.Name, id);
             TermCode = term;
             Cil = ClrDynamic.cil(method);
-            ApiSig = CliSigs.resolve(method);
+            CliSig = CliSigs.resolve(method);
         }
 
         public ReadOnlySpan<byte> InputData

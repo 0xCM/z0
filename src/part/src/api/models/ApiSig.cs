@@ -5,12 +5,16 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
 
-    public interface IApiSig
+    using static Part;
+
+    public readonly struct ApiSig
     {
+        readonly Index<dynamic> Components;
 
+        [MethodImpl(Inline)]
+        public ApiSig(dynamic[] src)
+            => Components = src;
     }
-
-
-
 }

@@ -9,22 +9,6 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct EmitterOpClass : IOperatorClassHost<EmitterOpClass,ApiOperatorKind>
-    {
-        public ApiOperatorKind Kind
-            => ApiOperatorKind.Emitter;
-
-        [MethodImpl(Inline)]
-        public static implicit operator OperatorClass(EmitterOpClass src)
-            => src.Classifier;
-
-        public OperatorClass Classifier
-        {
-            [MethodImpl(Inline)]
-            get => new OperatorClass(Kind);
-        }
-    }
-
     public readonly struct UnaryOpClass : IOperatorClassHost<UnaryOpClass,ApiOperatorKind>
     {
         [MethodImpl(Inline)]
@@ -41,18 +25,26 @@ namespace Z0
         }
     }
 
-    public readonly struct TernaryOpClass : IOperatorClassHost<TernaryOpClass,ApiOperatorKind>
+    public readonly struct UnaryOpClass<T> : IOperatorClassHost<UnaryOpClass<T>, ApiOperatorKind,T>
     {
-        public static implicit operator OperatorClass(TernaryOpClass src)
-            => src.Classifier;
-
         public ApiOperatorKind Kind
-            => ApiOperatorKind.TernaryOp;
+            => ApiOperatorKind.UnaryOp;
 
-        public OperatorClass Classifier
+        public OperatorClass<T> Classifier
         {
             [MethodImpl(Inline)]
-            get => new OperatorClass(Kind);
+            get => new OperatorClass<T>(Kind);
         }
+
+        public UnaryOpClass Untyped
+            => default;
+
+        [MethodImpl(Inline)]
+        public static implicit operator OperatorClass<T>(UnaryOpClass<T> src)
+            => src.Classifier;
+
+        [MethodImpl(Inline)]
+        public static implicit operator UnaryOpClass(UnaryOpClass<T> src)
+            => src.Untyped;
     }
 }

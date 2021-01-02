@@ -35,10 +35,10 @@ namespace Z0
         /// </summary>
         public ApiCodeBlock Encoded {get;}
 
-        public CliSig ApiSig
+        public CliSig CliSig
         {
             [MethodImpl(Inline)]
-            get => Member.ApiSig;
+            get => Member.CliSig;
         }
 
         public OpUri OpUri

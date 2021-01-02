@@ -20,10 +20,10 @@ namespace Z0
 
         public ApiMember Member {get;}
 
-        public CliSig ApiSig
+        public CliSig CliSig
         {
             [MethodImpl(Inline)]
-            get => Member.ApiSig;
+            get => Member.CliSig;
         }
 
         public byte[] Data

@@ -29,7 +29,7 @@ namespace Z0
 
         public CilMethod Cil {get;}
 
-        public CliSig ApiSig {get;}
+        public CliSig CliSig {get;}
 
         public ApiMetadataUri MetaUri
             => Method;
@@ -47,7 +47,7 @@ namespace Z0
             Address = address;
             Host = OpUri.Host;
             Cil = ClrDynamic.cil(method);
-            ApiSig = sig ?? CliSig.Empty;
+            CliSig = sig ?? CliSig.Empty;
         }
 
         [MethodImpl(Inline)]

@@ -9,6 +9,22 @@ namespace Z0
 
     using static Part;
 
+    public readonly struct EmitterOpClass : IOperatorClassHost<EmitterOpClass,ApiOperatorKind>
+    {
+        public ApiOperatorKind Kind
+            => ApiOperatorKind.Emitter;
+
+        [MethodImpl(Inline)]
+        public static implicit operator OperatorClass(EmitterOpClass src)
+            => src.Classifier;
+
+        public OperatorClass Classifier
+        {
+            [MethodImpl(Inline)]
+            get => new OperatorClass(Kind);
+        }
+    }
+
     public readonly struct EmitterOpClass<T> : IOperatorClassHost<EmitterOpClass<T>,ApiOperatorKind,T>
     {
         public ApiOperatorKind Kind

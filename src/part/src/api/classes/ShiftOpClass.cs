@@ -9,6 +9,18 @@ namespace Z0
 
     using static Part;
 
+    public readonly struct ShiftOpClass : IOperatorClassHost<ShiftOpClass,ApiOperatorKind>
+    {
+        public static implicit operator OperatorClass(ShiftOpClass src)
+            => src.Classifier;
+
+        public ApiOperatorKind Kind
+            => ApiOperatorKind.ShiftOp;
+
+        public OperatorClass Classifier
+            => new OperatorClass(Kind);
+    }
+
     public readonly struct ShiftOpClass<T> : IOperatorClassHost<ShiftOpClass<T>,ApiOperatorKind,T>
     {
         [MethodImpl(Inline)]
