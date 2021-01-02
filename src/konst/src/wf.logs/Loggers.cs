@@ -7,14 +7,13 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     [ApiHost]
-    public readonly struct WfLogs
+    public readonly struct Loggers
     {
         [Op]
-        public static string format(in IWfLogConfig src)
+        public static string format(IWfLogConfig src)
            => string.Format(RP.Settings4,
                 nameof(src.LogRoot), src.LogRoot.Format(),
                 nameof(src.StatusLog), src.StatusLog.Format(),
@@ -22,8 +21,8 @@ namespace Z0
                 );
 
         [MethodImpl(Inline), Op]
-        public static IWfProcLog process(WfLogConfig config)
-            => new WfProcLog(config);
+        public static IProcessLog process(WfLogConfig config)
+            => new ProcessLog(config);
 
         [MethodImpl(Inline), Op]
         public static IWfEventLog events(WfLogConfig config)
@@ -31,11 +30,14 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static IWfEventSink term(string src)
-            => new WfTermLog(src);
+            => new TermLog(src);
 
-        [MethodImpl(Inline), Op]
-        public static FS.FolderPath area(FS.FolderPath dbRoot, string area)
-            => dbRoot + FS.folder("logs") + FS.folder(area);
+        [Op]
+        public static ICaseLog cases(FS.FilePath dst)
+            => new CaseLog(cases<TestCaseField,TestCaseRecord>(dst));
+        [Op]
+        public static IBuildLog build(FS.FilePath dst)
+            => new BuildLog(dst);
 
         [MethodImpl(Inline), Op]
         public static WfLogConfig configure(PartId part, FS.FolderPath dbRoot)
@@ -44,5 +46,11 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static WfLogConfig configure(PartId part, FS.FolderPath dbRoot, string area)
             => new WfLogConfig(part, dbRoot);
+
+        [MethodImpl(Inline)]
+        static CaseLog<F,T> cases<F,T>(FS.FilePath dst)
+            where T : struct, ITabular
+            where F : unmanaged, Enum
+                => new CaseLog<F,T>(dst);
     }
 }

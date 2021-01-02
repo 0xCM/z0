@@ -29,9 +29,9 @@ namespace Z0
         public void bb_literal_12x32()
         {
             var bv = BitBlocks.single(0b101110001110u, n12);
-            Claim.eq(bv[0], Bit32.Off);
-            Claim.eq(bv[1], Bit32.On);
-            Claim.eq(bv[11], Bit32.On);
+            Claim.eq(bv[0], bit.Off);
+            Claim.eq(bv[1], bit.On);
+            Claim.eq(bv[11], bit.On);
         }
     }
 }

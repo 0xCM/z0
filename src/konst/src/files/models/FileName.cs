@@ -129,7 +129,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public static FileName operator +(FileName a, FileExt b)
-                => file(text.format("{0}.{1}",a,b));
+                => new FileName(text.format("{0}.{1}",a.Name, b.Name));
 
             [MethodImpl(Inline)]
             public static bool operator ==(FileName a, FileName b)

@@ -226,12 +226,6 @@ namespace Z0
         {
             var svc = Imaging.init(Wf);
             svc.EmitHeaders(BuildArchives.create(Wf));
-            // var db = Wf.Db();
-            // var cmd = CmdBuilder.EmitImageHeaders(build.DllFiles().Array(), db.Table(ImageSectionHeader.TableId, "dll"));
-            // svc.EmitHeaders(cmd.Source, cmd.Target);
-
-            // cmd = CmdBuilder.EmitImageHeaders(build.ExeFiles().Array(), db.Table(ImageSectionHeader.TableId, "exe"));
-            // svc.EmitHeaders(cmd.Source, cmd.Target);
         }
 
         void Receive(in ImageContentRecord src)
@@ -369,7 +363,7 @@ namespace Z0
         void ShowPartSummary()
         {
             var api = Wf.ApiParts;
-            foreach(var c in api.Components)
+            foreach(var c in api.PartComponents)
                 Wf.Row(c.GetSimpleName());
 
             foreach(var p in api.ManagedSources)
@@ -458,6 +452,23 @@ namespace Z0
             Wf.Status($"{patterns.Length}");
         }
 
+        void ShowPartComponents()
+        {
+            var src = ClrQuery.view(Wf.Api.PartComponents);
+            for(var i=0; i<src.Length; i++)
+            {
+                ref readonly var item = ref skip(src,i);
+                var info = new {
+                    item.SimpleName,
+                    item.FilePath,
+                    item.PdbPath,
+                    item.DocPath,
+                };
+                Wf.Row(info.ToString());
+            }
+
+
+        }
         public void Run()
         {
             //ShowHandlers();
@@ -465,7 +476,10 @@ namespace Z0
             //PipeImageData();
             //LoadAsmStore();
             //EmitAmsOpCodes();
-            EmitImageHeaders();
+            // var commands = Commands.service(Wf);
+            // commands.EmitDocComments().Wait();
+            //EmitImageHeaders();
+            ShowPartComponents();
 
             //Run(Args);
             //EmitProcessImages(Wf);

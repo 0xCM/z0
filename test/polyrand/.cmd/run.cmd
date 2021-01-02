@@ -1,6 +1,6 @@
 @echo off
 
-set ProjectId=logix
+set ProjectId=polyrand
 echo ProjectId:%ProjectId%
 
 set ZCmd=%ZDev%\.cmd

@@ -15,30 +15,40 @@ namespace Z0.Test
     {
         public override bool Enabled => true;
 
-        public void check_matrix_emission()
+        public t_matrix_writer()
         {
             UnitDataDir.Clear();
-            check(Pow2.T03, n12, n14, t64i);
-            check(Pow2.T03, n19, n32, t8u);
-            check(Pow2.T03, n31, n31, t32u);
-            check(Pow2.T03, n5, n5, t32f);
-            check(Pow2.T03, n5, n5, t64f);
         }
+
+        public void check_matrix_emission_n12xn14x64i()
+            => check(Pow2.T03, n12, n14, t64i);
+
+        public void check_matrix_emission_n19xn32x8u()
+            => check(Pow2.T03, n19, n32, t8u);
+
+        public void check_matrix_emission_n5xn5x32u()
+            => check(Pow2.T03, n5, n5, t32u);
+
+        public void check_matrix_emission_n31xn31x32u()
+            => check(Pow2.T03, n31, n31, t32u);
+
+        public void check_matrix_emission_n5xn5x64f()
+            => check(Pow2.T03, n5, n5, t64f);
 
         void check(uint count, N12 m, N14 n, I64 k)
             => check_emission<N12,N14,long>(count);
 
         void check(uint count, N19 m, N32 n, U8 k)
-            => check_emission(count,m,n,z8);
+            => check_emission(count, m, n, z8);
 
         void check(uint count, N31 m, N31 n, U32 k)
-            => check_emission(count,m,n,z8);
+            => check_emission(count, m, n, z32);
 
-        void check(uint count, N5 m, N5 n, F32 k)
-            => check_emission(count,m,n,z8);
+        void check(uint count, N5 m, N5 n, U32 k)
+            => check_emission(count, m, n, z32);
 
         void check(uint count, N5 m, N5 n, F64 k)
-            => check_emission(count,m,n,z8);
+            => check_emission(count, m, n, z64);
 
         public FS.FileName filename<M,N,T>(uint i, M m = default, N n = default, T t = default)
             where M : unmanaged, ITypeNat

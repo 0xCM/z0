@@ -7,7 +7,7 @@ namespace Z0
     using System;
 
     using X = FileExtensions;
-    using api = WfLogs;
+    using api = Loggers;
 
     public interface IWfLogConfig : ITextual
     {

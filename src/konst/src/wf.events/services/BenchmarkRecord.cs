@@ -81,13 +81,13 @@ namespace Z0
         public string Format(int? labelPad = null)
             => $"{OpId}".PadRight(labelPad ?? OpNamePad) + $" | Ops = {OpCount} " + $"| Time = {Timing}";
 
-        string ITabular.DelimitedText(char delimiter)
+        public string DelimitedText(char delimiter)
             => text.concat(
-                $"{TextFormatter.format(OpId).PadRight(OpNamePad)}{delimiter}{Chars.Space}",
+                $"{OpId.Format().PadRight(OpNamePad)}{delimiter}{Chars.Space}",
                  OpCount.ToString("#,#").PadRight(OpCountPad),  $"{delimiter}{Chars.Space}",
                 $"{Timing.Ms}");
 
-        public IReadOnlyList<string> GetHeaders()
+        public static string[] GetHeaders()
             => new string[]{nameof(OpId).PadRight(OpNamePad),
                 Chars.Space + nameof(OpCount).PadRight(OpCountPad),
                 Chars.Space + nameof(Timing),

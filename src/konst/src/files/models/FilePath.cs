@@ -8,8 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.IO;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     partial struct FS
     {
@@ -119,8 +118,20 @@ namespace Z0
             public bool Is(FileExt ext)
                 => Name.Text.EndsWith(ext.Name.Text, NoCase);
 
+            public FilePath WithoutExtension
+                => FolderPath + FileName.WithoutExtension;
+
             public FilePath ChangeExtension(FileExt ext)
-                => FolderPath + FS.file(Path.ChangeExtension(Path.GetFileName(Name), ext.Name));
+                => WithoutExtension + ext; // new FileName(Path.ChangeExtension(Path.GetFileName(Name), ext.Name));
+
+
+            // public FilePath ChangeExtension(FileExt ext)
+            // {
+            //     var name = Name.Text;
+            //     var index = name.LastIndexOf(Chars.Dot);
+            //     var removed = text.segment(name, 0, index - 1);
+            //     return new FilePath(string.Format("{0}.{1}", removed, ext.Name));
+            // }
 
             public string ReadText()
                 => File.ReadAllText(Name);
@@ -167,8 +178,8 @@ namespace Z0
                 => Z0.FilePath.Define(src.Name);
 
             [MethodImpl(Inline)]
-            public static FileName operator +(FilePath a, FileExt b)
-                => file(text.format("{0}.{1}",a,b));
+            public static FilePath operator +(FilePath a, FileExt b)
+                => new FilePath(text.format("{0}.{1}",a.Name, b.Name));
 
             public static FilePath Empty
             {

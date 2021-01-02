@@ -30,7 +30,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         string ITextual.Format()
-            => DenullifiedIdentity;
+            => Identifier;
 
         int IComparable.CompareTo(object src)
             => DenullifiedIdentity.CompareTo((src as IIdentified)?.Identifier);

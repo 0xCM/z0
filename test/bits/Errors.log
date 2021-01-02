@@ -11,3 +11,12 @@ Harness execution failed: System.ArgumentException: Source array was not long en
    at Z0.corefunc.iter[T](IEnumerable`1 items, Action`1 action, Boolean pll) in j:\dev\projects\z0\src\part\src\part.corefunc\ops\iter.cs:line 26
    at Z0.TestApp`1.RunUnit(Type host, IUnitTest unit) in j:\dev\projects\z0\src\validity\src\services\ops\RunUnit.cs:line 32
 
+Failure occurred at RunUnit j:\dev\projects\z0\src\validity\src\services\ops\RunUnit.cs 43
+Harness execution failed: System.IndexOutOfRangeException: Index was outside the bounds of the array.
+   at System.Collections.Generic.List`1.Enumerator.MoveNext()
+   at Z0.XTend.WithItems[T](IList`1 dst, IEnumerable`1 src) in j:\dev\projects\z0\src\konst\src\collective.runtime\xtend\sets\Set.WithItems.cs:line 70
+   at Z0.TestApp`1.RunCase(IUnitTest unit, MethodInfo method, IList`1 cases) in j:\dev\projects\z0\src\validity\src\services\ops\RunCase.cs:line 67
+   at Z0.TestApp`1.<>c__DisplayClass36_0.<RunUnit>b__0(MethodInfo t) in j:\dev\projects\z0\src\validity\src\services\ops\RunUnit.cs:line 31
+   at Z0.corefunc.iter[T](IEnumerable`1 items, Action`1 action, Boolean pll) in j:\dev\projects\z0\src\part\src\part.corefunc\ops\iter.cs:line 26
+   at Z0.TestApp`1.RunUnit(Type host, IUnitTest unit) in j:\dev\projects\z0\src\validity\src\services\ops\RunUnit.cs:line 32
+

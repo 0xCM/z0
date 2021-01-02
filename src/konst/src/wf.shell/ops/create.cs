@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     partial class WfShell
@@ -32,7 +32,7 @@ namespace Z0
             var controlId = control.Id();
             var dbRoot = WfEnv.dbRoot();
             var partIdList = parts.Api.PartIdentities;
-            var appLogConfig = WfLogs.configure(controlId, dbRoot);
+            var appLogConfig = Loggers.configure(controlId, dbRoot);
             IWfAppPaths _paths = new WfPaths(dbRoot);
             status.PathConfigTime = clock.Elapsed;
 
@@ -103,7 +103,7 @@ namespace Z0
             var control = controller();
             var parts = WfShell.parts(control, args);
 
-            msg = $"[{clock.Elapsed}] | Created partset with {parts.Components.Length} components";
+            msg = $"[{clock.Elapsed}] | Created partset with {parts.PartComponents.Length} components";
 
             if(verbose)
                 term.inform(msg);

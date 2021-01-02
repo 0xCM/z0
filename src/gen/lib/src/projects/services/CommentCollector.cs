@@ -68,9 +68,7 @@ namespace Z0
                             var data = xmlfile.ReadText();
                             var parsed = parse(data);
                             if(parsed.Count != 0)
-                            {
                                 dst[id] = parsed;
-                            }
 
                             wf.Processed(flow, path, t, parsed.Count);
                         }

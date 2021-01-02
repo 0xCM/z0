@@ -9,7 +9,7 @@ namespace Z0
 
     using static ArchiveFolderNames;
 
-    public interface ITestRunPaths : IFileArchive
+    public interface ITestLogPaths : IFileArchive
     {
         string AppName
             => Assembly.GetEntryAssembly().GetSimpleName();
@@ -37,6 +37,9 @@ namespace Z0
 
         FS.FilePath CaseLogPath
             => TestLogRoot + FS.folder(StatusLog) + FS.file($"{AppName}.cases", FileExtensions.Csv);
+
+        FS.FilePath BenchLogPath
+            => TestLogRoot + FS.folder(StatusLog) + FS.file($"{AppName}.bench", FileExtensions.Csv);
 
         /// <summary>
         /// Defines a test-specific data folder

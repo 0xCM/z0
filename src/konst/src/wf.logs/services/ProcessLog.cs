@@ -8,10 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.IO;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
-    public struct WfProcLog : IWfProcLog
+    struct ProcessLog : IProcessLog
     {
         readonly FS.FilePath StatusPath;
 
@@ -19,7 +18,7 @@ namespace Z0
 
         readonly FileStream Status;
 
-        internal WfProcLog(WfLogConfig config)
+        internal ProcessLog(WfLogConfig config)
         {
             config.StatusLog.Delete();
             config.ErrorLog.Delete();

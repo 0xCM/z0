@@ -59,11 +59,11 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public static FolderPath operator +(FolderPath a, FolderName b)
-                => new FolderPath(text.format(FolderJoinPattern, a, b));
+                => new FolderPath(text.format(FolderJoinPattern, a.Name, b.Name));
 
             [MethodImpl(Inline)]
             public static FilePath operator +(FolderPath a, FileName b)
-                => new FilePath(text.format(FileJoinPattern, a, b));
+                => new FilePath(text.format(FileJoinPattern, a.Name, b.Name));
 
             public FilePath[] Match(string pattern = null)
                 => Directory.EnumerateFiles(Name, pattern ?? SearchAll).Array().Select(x => FS.path(x));

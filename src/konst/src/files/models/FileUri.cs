@@ -21,7 +21,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public FileUri(FilePath src)
-                => Source = src;
+                => Source = src.Replace("file:///", EmptyString);
 
             [MethodImpl(Inline)]
             public string Format()

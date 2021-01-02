@@ -37,7 +37,7 @@ namespace Z0
 
         static string TestCaseName(IExplicitTest unit)
         {
-            var owner = ApiIdentityKinds.OwningPartText(unit.GetType());
+            var owner = ApiIdentityKinds.owner(unit.GetType());
             var hostname = unit.GetType().Name;
             var opname = "explicit";
             return $"{owner}/{hostname}/{opname}";
@@ -45,7 +45,7 @@ namespace Z0
 
         static string TestActionName(Type host)
         {
-            var owner = ApiIdentityKinds.OwningPartText(host);
+            var owner = ApiIdentityKinds.owner(host);
             return $"{owner}/{host.Name}/action";
         }
 

@@ -22,7 +22,7 @@ namespace Z0
         /// </summary>
         public IPart[] Parts {get;}
 
-        public Assembly[] Components {get;}
+        public Assembly[] PartComponents {get;}
 
         public PartId[] Identifiers {get;}
 
@@ -44,7 +44,7 @@ namespace Z0
         {
             Parts = parts;
             Identifiers = Parts.Select(p => p.Id);
-            Components = Parts.Select(p => p.Owner);
+            PartComponents = Parts.Select(p => p.Owner);
             Catalogs = Parts.Select(x => ApiCatalogs.part(x) as IApiPartCatalog).Where(c => c.IsIdentified);
             ApiHosts = Catalogs.Storage.SelectMany(c => c.ApiHosts.Storage);
             OperationHosts = Catalogs.Storage.SelectMany(c => c.OperationHosts).Cast<IApiHost>().Array();
@@ -76,6 +76,6 @@ namespace Z0
         }
 
         public Option<Assembly> FindComponent(PartId id)
-            => Components.Where(c => c.Id() == id).FirstOrDefault();
+            => PartComponents.Where(c => c.Id() == id).FirstOrDefault();
     }
 }

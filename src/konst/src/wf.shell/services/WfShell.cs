@@ -64,7 +64,7 @@ namespace Z0
             Context = Init.Shell;
             Id = Init.ControlId;
             Ct = correlate(Init.ControlId);
-            WfSink = WfLogs.events(Init.LogConfig);
+            WfSink = Loggers.events(Init.LogConfig);
             Broker = new WfBroker(WfSink, Ct);
             Host = new WfHost(typeof(WfShell), typeof(WfShell), _ => throw no<WfShell>());
             PolyStream = default;

@@ -61,7 +61,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public Matrix256(in SpanBlock256<T> src)
         {
-            Demands.insist(Capacity  >= src.CellCount);
+            z.insist(Capacity >= src.CellCount, $"{nameof(Capacity)}:={Capacity} < {nameof(src.CellCount)}:={src.CellCount}");
             data = src;
         }
 

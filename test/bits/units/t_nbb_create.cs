@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static CallingMember;
     using static z;
 
     public class t_nbb_create : t_bitspans<t_nbb_create>
@@ -31,9 +30,10 @@ namespace Z0
             var rep = default(N);
             var segcount = (int)GridCalcs.mincells<T>(nat64u<N>());
             Claim.eq(BitBlock<N,T>.RequiredCells, segcount);
+
             var totalcap = BitBlock<N,T>.RequiredWidth;
             var segcap = bitwidth<T>();
-            base.Claim.eq(BitBlock<N, T>.CellWidth, (BitVector32)segcap);
+            Claim.eq(BitBlock<N,T>.CellWidth, (BitVector32)segcap);
 
             var src = Random.Span<T>(RepCount);
             for(var i=0; i<RepCount; i+= segcount)
@@ -46,7 +46,7 @@ namespace Z0
 
                 var x = src[i];
                 for(byte j = 0; j < n; j++)
-                    Claim.eq(gbits.testbit32(x,j), bc[j]);
+                    ClaimPrimal.eq(gbits.testbit32(x,j), bc[j]);
             }
         }
 

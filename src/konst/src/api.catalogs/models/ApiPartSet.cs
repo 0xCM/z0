@@ -24,7 +24,7 @@ namespace Z0
 
         public FS.Files ManagedSources {get;}
 
-        public Assembly[] Components {get;}
+        public Assembly[] PartComponents {get;}
 
         public ISystemApiCatalog Api {get;}
 
@@ -33,7 +33,7 @@ namespace Z0
             Control = control;
             Source = src;
             ManagedSources = src.Exclude("System.Private.CoreLib").Where(f => FS.managed(f));
-            Components = ApiQuery.components(ManagedSources);
+            PartComponents = ApiQuery.components(ManagedSources);
             Api = ApiCatalogs.system(ManagedSources);
         }
 
@@ -43,7 +43,7 @@ namespace Z0
             Source = FS.path(control.Location).FolderPath;
             ManagedSources = Source.Exclude("System.Private.CoreLib").Where(f => FS.managed(f));
             Api = ApiCatalogs.siblings(control, parts);
-            Components = Api.Components;
+            PartComponents = Api.PartComponents;
         }
 
         public ApiPartSet(Assembly control)
@@ -52,7 +52,7 @@ namespace Z0
             Source = FS.path(control.Location).FolderPath;
             ManagedSources = Source.Exclude("System.Private.CoreLib").Where(f => FS.managed(f));
             Api =  ApiCatalogs.system(ManagedSources);
-            Components = Api.Components;
+            PartComponents = Api.PartComponents;
         }
     }
 }

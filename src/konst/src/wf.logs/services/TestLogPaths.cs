@@ -8,18 +8,14 @@ namespace Z0
     using System.Reflection;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
-    public readonly struct TestRunPaths : ITestRunPaths
+    readonly struct TestLogPaths : ITestLogPaths
     {
-        [MethodImpl(Inline), Op]
-        public static ITestRunPaths define(FS.FolderPath root)
-            => new TestRunPaths(root);
-
         public FS.FolderPath Root {get;}
 
         [MethodImpl(Inline)]
-        public TestRunPaths(FS.FolderPath root)
+        public TestLogPaths(FS.FolderPath root)
             => Root = root;
     }
 }

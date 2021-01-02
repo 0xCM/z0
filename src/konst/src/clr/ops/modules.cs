@@ -14,7 +14,7 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<ClrModule> modules(Assembly src)
-            => view(src.Modules(), ClrViews.module);
+            => view(src.Modules());
 
         [MethodImpl(Inline), Op]
         public static ClrModule manifest(Assembly src)

@@ -73,7 +73,7 @@ namespace Z0
             => WfShell.clone(this, Host, PolyStream, level);
 
         Assembly[] Components
-            => Context.ApiParts.Components;
+            => Context.ApiParts.PartComponents;
 
         FS.FolderPath ResourceRoot
             => FS.dir(Init.ResDir.Name);

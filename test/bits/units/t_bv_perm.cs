@@ -55,7 +55,7 @@ namespace Z0
         {
             var p = Permute.natural(n64, (0,1),(1,2),(2,3),(3,4),(4,5),(5,6));
             var bv = BitVector.perm(BitVector64.One,p);
-            Claim.eq(bv[6], Bit32.On);
+            Claim.eq(bv[6], (byte)1);
 
             for(var j=0; j<RepCount; j++)
             {

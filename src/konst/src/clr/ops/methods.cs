@@ -15,6 +15,6 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<ClrMethod> methods(Type src)
-            => view(src.GetMethods(BF_All), ClrViews.method);
+            => view(src.GetMethods(BF_All));
     }
 }

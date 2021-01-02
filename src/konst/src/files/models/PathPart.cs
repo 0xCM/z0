@@ -19,30 +19,6 @@ namespace Z0
             public string Text {get;}
 
             [MethodImpl(Inline)]
-            public static bool operator ==(PathPart a, PathPart b)
-                => a.Equals(b);
-
-            [MethodImpl(Inline)]
-            public static bool operator !=(PathPart a, PathPart b)
-                => !a.Equals(b);
-
-            [MethodImpl(Inline)]
-            public static implicit operator PathPart(char[] data)
-                => new PathPart(data);
-
-            [MethodImpl(Inline)]
-            public static implicit operator PathPart(string data)
-                => new PathPart(data);
-
-            [MethodImpl(Inline)]
-            public static implicit operator string(PathPart data)
-                => data.Text;
-
-            [MethodImpl(Inline)]
-            public static PathPart from(string src)
-                => new PathPart(src);
-
-            [MethodImpl(Inline)]
             public PathPart(string name)
                 => Text = name;
 
@@ -99,7 +75,7 @@ namespace Z0
             public PathPart Replace(char src, char dst)
                 => Text.Replace(src,dst);
 
-           [MethodImpl(Inline)]
+            [MethodImpl(Inline)]
             public PathPart Replace(string src, string dst)
                 => Text.Replace(src,dst);
 
@@ -151,6 +127,30 @@ namespace Z0
 
             public int CompareTo(PathPart src)
                 => (Text == null || src.Text == null) ? 0 : Text.CompareTo(src.Text);
+
+            [MethodImpl(Inline)]
+            public static bool operator ==(PathPart a, PathPart b)
+                => a.Equals(b);
+
+            [MethodImpl(Inline)]
+            public static bool operator !=(PathPart a, PathPart b)
+                => !a.Equals(b);
+
+            [MethodImpl(Inline)]
+            public static implicit operator PathPart(char[] data)
+                => new PathPart(data);
+
+            [MethodImpl(Inline)]
+            public static implicit operator PathPart(string data)
+                => new PathPart(data);
+
+            [MethodImpl(Inline)]
+            public static implicit operator string(PathPart data)
+                => data.Text;
+
+            [MethodImpl(Inline)]
+            static PathPart from(string src)
+                => new PathPart(src);
         }
     }
 }

@@ -46,7 +46,27 @@ namespace Z0
             => src;
 
         [MethodImpl(Inline), Op]
-        internal static ReadOnlySpan<V> view<S,V>(S[] src, V v = default)
+        public static ReadOnlySpan<ClrAssembly> view(Assembly[] src)
+            => view<Assembly,ClrAssembly>(src);
+
+        [MethodImpl(Inline), Op]
+        public static ReadOnlySpan<ClrType> view(Type[] src)
+            => view<Type,ClrType>(src);
+
+        [MethodImpl(Inline), Op]
+        public static ReadOnlySpan<ClrModule> view(Module[] src)
+            => view<Module,ClrModule>(src);
+
+        [MethodImpl(Inline), Op]
+        public static ReadOnlySpan<ClrMethod> view(MethodInfo[] src)
+            => view<MethodInfo,ClrMethod>(src);
+
+        [MethodImpl(Inline), Op]
+        public static ReadOnlySpan<ClrField> view(FieldInfo[] src)
+            => view<FieldInfo,ClrField>(src);
+
+        [MethodImpl(Inline), Op]
+        internal static ReadOnlySpan<V> view<S,V>(S[] src)
             => recover<S,V>(@readonly(src));
     }
 }

@@ -24,7 +24,7 @@ namespace Z0
 
         FS.Files ManagedSources {get;}
 
-        Assembly[] Components {get;}
+        Assembly[] PartComponents {get;}
 
         ISystemApiCatalog Api {get;}
     }

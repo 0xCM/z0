@@ -38,10 +38,10 @@ namespace Z0
         public Task<CmdResult> DumpCliTables(FS.FilePath src)
             => Wf.Dispatch(CmdBuilder.DumpCliTables(src));
 
-        public Task<CmdResult> EmitDocComments(ReadOnlySpan<CmdLinePart> args)
+        public Task<CmdResult> EmitDocComments()
             => Wf.Dispatch(CmdBuilder.EmitDocComments());
 
-        public Task<CmdResult> EmitAsmOpCodes(ReadOnlySpan<CmdLinePart> args)
+        public Task<CmdResult> EmitAsmOpCodes()
             => Wf.Dispatch(CmdBuilder.EmitAsmOpCodes());
 
         public Task<CmdResult> RunStep(ReadOnlySpan<CmdLinePart> args)

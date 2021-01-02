@@ -8,8 +8,7 @@ namespace Z0
     using System.IO;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static TextFormatter;
+    using static Part;
 
     public readonly struct CmdLogger : IDisposable
     {
@@ -34,7 +33,7 @@ namespace Z0
 
         public void Log(in ErrorEvent<Exception> error)
         {
-            Log(LogLevel.Error, format(error));
+            Log(LogLevel.Error, error.Format());
         }
 
         /// <summary>

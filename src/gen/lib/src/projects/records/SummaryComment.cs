@@ -9,7 +9,7 @@ namespace Z0
     [Record(TableId)]
     public struct SummaryComment : IRecord<SummaryComment>
     {
-        public const string TableId = "comments";
+        public const string TableId = "doc.comments.summary";
 
         public CommentTargetKind Kind;
 

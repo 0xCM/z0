@@ -37,7 +37,7 @@ namespace Z0
         /// </summary>
         /// <param name="host">The source type</param>
         [MethodImpl(Inline)]
-        public static string OwningPartText(Type host)
+        public static string owner(Type host)
             => ApiIdentify.part(host).Format();
 
         static ConcurrentDictionary<NumericKind, HashSet<NumericKind>> NumericKindSets {get;}

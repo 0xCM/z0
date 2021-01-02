@@ -18,10 +18,10 @@ namespace Z0
         /// <param name="src">The source type</param>
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<ClrField> fields(Type src)
-            => view(src.GetFields(BF), ClrViews.field);
+            => view(src.GetFields(BF));
 
         [Op, Closures(Closure)]
         public static ReadOnlySpan<ClrField> fields<T>(Type src)
-            => memory.recover<FieldInfo,ClrField>(src.Fields().Where(f => f.FieldType == typeof(T)));
+            => view(src.Fields().Where(f => f.FieldType == typeof(T)));
     }
 }

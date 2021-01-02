@@ -34,7 +34,6 @@ namespace Z0
 
         public static N32 N => default;
 
-
         /// <summary>
         /// Initializes the vector with the source value it represents
         /// </summary>

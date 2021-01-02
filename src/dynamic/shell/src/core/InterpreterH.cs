@@ -16,7 +16,7 @@ namespace Z0
         where H : Interpreter<H>, new()
     {
         public IWfShell Wf {get; private set;}
-        
+
         public static H create()
             => new H();
 
@@ -30,7 +30,7 @@ namespace Z0
         protected Interpreter()
         {
             Name = typeof(H).Name;
-            TermLog = WfLogs.term(Name);
+            TermLog = Loggers.term(Name);
             Frequency = new TimeSpan(0, 0, 0, 0, 50);
             Host = WfShell.host(typeof(H));
             CommandQueue = new ConcurrentQueue<string>();
@@ -83,7 +83,7 @@ namespace Z0
         protected abstract FS.FilePath ExePath {get;}
 
 
-        IWfProcLog WorkerLog;
+        IProcessLog WorkerLog;
 
         Process Worker;
 
@@ -108,7 +108,7 @@ namespace Z0
             try
             {
                 Wf = wf.WithHost(Host);
-                WorkerLog = WfLogs.process(WfLogs.configure(wf.Controller.Id, wf.Db().Root, "processes"));
+                WorkerLog = Loggers.process(Loggers.configure(wf.Controller.Id, wf.Db().Root, "processes"));
                 Worker = new Process();
 
                 var start = new ProcessStartInfo(ExePath.Name, StartupArgs)

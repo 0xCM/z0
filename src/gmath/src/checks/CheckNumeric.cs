@@ -22,12 +22,13 @@ namespace Z0
 
         const NumericKind Closure = UnsignedInts;
 
+        public static void eq(Bit32 lhs, Bit32 rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => CheckPrimal.eq((uint)lhs, (uint)rhs, caller, file, line);
+
         public static void eq<T>(T lhs, T rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged
         {
-            if(typeof(T) == typeof(Bit32))
-                gmath.eq((uint)Bit32.specific(lhs), (uint)Bit32.specific(rhs)).OnNone(() => throw ClaimException.Define(ClaimKind.Eq, NotEqual(lhs, rhs, caller, file, line)));
-            else if(typeof(T).IsPrimalNumeric())
+            if(typeof(T).IsPrimalNumeric())
                 gmath.eq(lhs,rhs).OnNone(() => throw ClaimException.Define(ClaimKind.Eq, NotEqual(lhs, rhs, caller, file, line)));
             else
                 CheckEqual.Checker.Eq(lhs,rhs);
@@ -36,9 +37,7 @@ namespace Z0
         public static void neq<T>(T lhs, T rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged
         {
-            if(typeof(T) == typeof(Bit32))
-                gmath.neq((uint)Bit32.specific(lhs), (uint)Bit32.specific(rhs)).OnNone(() => throw exception(ClaimKind.NEq, Equal(lhs, rhs, caller, file, line)));
-            else if(typeof(T).IsPrimalNumeric())
+            if(typeof(T).IsPrimalNumeric())
                 gmath.neq(lhs,rhs).OnNone(() => throw exception(ClaimKind.NEq, Equal(lhs, rhs, caller, file, line)));
             else
                 CheckEqual.Checker.Neq(lhs,rhs);

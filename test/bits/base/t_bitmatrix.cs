@@ -17,56 +17,6 @@ namespace Z0
 
         protected override int CycleCount => Pow2.T03;
 
-        Span<T> xor<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst)
-            where T : unmanaged
-        {
-            for(var i=0; i< Claim.length(lhs,rhs); i++)
-                dst[i] = gmath.xor(lhs[i], rhs[i]);
-           return dst;
-        }
-
-        Span<T> xor<T>(Span<T> lhs, ReadOnlySpan<T> rhs)
-            where T : unmanaged
-                => xor(lhs,rhs, lhs);
-
-        protected void bm_xor_check<N,T>(N n = default, T t = default)
-            where N : unmanaged, ITypeNat
-            where T : unmanaged
-        {
-            for(var i=0; i<RepCount; i++)
-            {
-                var A = Random.BitMatrix(n,t);
-                var B = Random.BitMatrix(n,t);
-                var C1 = BitMatrixA.xor(A, B).Content;
-                var C2 = xor(A.Content, B.Content);
-                ClaimNumeric.eq((ulong)A.Order, nat64u<N>());
-                ClaimNumeric.eq((ulong)B.Order, nat64u<N>());
-                ClaimNumeric.eq(C1,C2);
-            }
-        }
-
-       protected void bm_xor_check<T>(T t = default)
-            where T : unmanaged
-        {
-            var Z = BitMatrix.alloc<T>();
-            for(var i=0; i<RepCount; i++)
-            {
-                var A = Random.BitMatrix<T>();
-                var B = Random.BitMatrix<T>();
-                BitMatrix.xor(A,B, Z);
-
-                for(var j =0; j< Z.Order; j++)
-                {
-                    var a = A[i];
-                    var b = B[i];
-                    var z = Z[i];
-
-                    var x = BitVector.xor(a,b);
-                    Demands.insist(x == z);
-                }
-            }
-        }
-
         protected void bm_extract_check<M,N,T>(BitMatrix<M,N,T> src)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
@@ -79,7 +29,7 @@ namespace Z0
                 {
                     var x = vector[col];
                     var y = src[row,col];
-                    ClaimNumeric.eq(vector[col], src[row,col]);
+                    ClaimPrimal.eq(vector[col], src[row,col]);
                 }
             }
         }

@@ -15,16 +15,26 @@ namespace Z0
         public void EmitLogs()
         {
             var basename = AppName;
+            var results = SortResults();
+
+            if(results.Any())
+            {
+                var dst = AppPaths.SortedCaseLogPath();
+                Wf.Status($"Emitting case log to {dst.ToUri()}");
+                EmitTestCaseLog(dst, results);
+            }
+
             var benchmarks = SortBenchmarks();
             if(benchmarks.Any())
-                EmitBenchmarkLog(basename.Replace(".test",".bench"),benchmarks, LogWriteMode.Overwrite);
+            {
+                Wf.Status("Emitting benchmarks");
 
-            var results = SortResults();
-            if(results.Any())
-                EmitTestCaseLog(AppPaths.SortedCaseLogPath(), results);
+                Write(benchmarks, TestPaths.BenchLogPath);
+            }
+
         }
 
-        static FilePath EmitTestCaseLog(FS.FilePath dst,  TestCaseRecord[] records)
+        static FilePath EmitTestCaseLog(FS.FilePath dst, TestCaseRecord[] records)
         {
             if(records.Length == 0)
                 return FilePath.Empty;
@@ -46,13 +56,14 @@ namespace Z0
             z.iter(records, r => writer.WriteLine(r.DelimitedText(delimiter)));
         }
 
-        static FilePath EmitBenchmarkLog<R>(string basename, R[] records, LogWriteMode mode = LogWriteMode.Create, bool header = true, char delimiter = Chars.Pipe)
-            where R : ITabular
+        FS.FilePath Write(BenchmarkRecord[] src, FS.FilePath path)
         {
-            if(records.Length == 0)
-                return FilePath.Empty;
+            using var writer = path.Writer();
+            writer.WriteLine(string.Join(Chars.Pipe, BenchmarkRecord.GetHeaders()));
+            foreach(var r in src)
+                writer.WriteLine(r.DelimitedText(Chars.Pipe));
 
-            return Z0.Log.BenchLog.Write(records, FS.FolderName.Empty, basename, mode, delimiter, header, FileExtensions.Csv);
+            return path;
         }
     }
 }

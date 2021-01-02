@@ -118,9 +118,9 @@ namespace Z0
                 for(var j=0; j<bs.Length; j++)
                 {
                     if(j != bs.Length - 1)
-                        Claim.eq(bs[j], Bit32.Off);
+                        ClaimPrimal.eq(bs[j], Bit32.Off);
                     else
-                        Claim.eq(bs[j], Bit32.On);
+                        ClaimPrimal.eq(bs[j], Bit32.On);
                 }
 
                 if(i <= 63)

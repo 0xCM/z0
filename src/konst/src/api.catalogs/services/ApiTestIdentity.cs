@@ -72,7 +72,7 @@ namespace Z0
         /// <param name="label">The root name</param>
         public static string name_alt<C>(Type host, string label)
             where C : unmanaged
-                => text.concat(ApiIdentityKinds.OwningPartText(host), UriPathSep, host.Name, UriPathSep, label, '_', ApiIdentify.numeric<C>());
+                => text.concat(ApiIdentify.part(host).Format(), UriPathSep, host.Name, UriPathSep, label, '_', ApiIdentify.numeric<C>());
 
         /// <summary>
         /// Produces a case name for an identified operation match test
@@ -85,6 +85,6 @@ namespace Z0
         public static string name<W,C>(Type host, string label, bool generic)
             where W : unmanaged, ITypeWidth
             where C : unmanaged
-                => $"{ApiIdentityKinds.OwningPartText(host)}/{host.Name}{UriPathSep}{ApiIdentify.build(label, default(W).TypeWidth, NumericKinds.kind<C>(), generic)}";
+                => $"{ApiIdentify.part(host).Format()}/{host.Name}{UriPathSep}{ApiIdentify.build(label, default(W).TypeWidth, NumericKinds.kind<C>(), generic)}";
     }
 }

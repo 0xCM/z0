@@ -10,7 +10,7 @@ namespace Z0
     {
         bool DiagnosticMode {get;}
 
-        ITestRunPaths TestPaths {get;}
+        ITestLogPaths TestPaths {get;}
     }
 
     public interface ITestContext<U> : ITestContext

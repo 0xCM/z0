@@ -9,7 +9,7 @@ namespace Z0
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface IWfProcLog : IDisposable
+    public interface IProcessLog : IDisposable
     {
         void LogStatus(string content);
 

@@ -82,7 +82,7 @@ namespace Z0
                 {
                     var col = src.Col(c);
                     for(var r=0; r<src.Order; r++)
-                        Claim.eq(col[r], src[r,c]);
+                        CheckPrimal.eq(col[r], src[r,c]);
                 }
             }
         }
@@ -96,7 +96,7 @@ namespace Z0
                 {
                     var col = src.Col(c);
                     for(var r=0; r<src.Order; r++)
-                        Claim.eq(col[r], src[r,c]);
+                        CheckPrimal.eq(col[r], src[r,c]);
                 }
             }
         }
@@ -110,7 +110,7 @@ namespace Z0
                 {
                     var col = BitMatrix.col(src,c);
                     for(var r=0; r<src.Order; r++)
-                        Claim.eq(col[r], src[r,c]);
+                        CheckPrimal.eq(col[r], src[r,c]);
                 }
             }
         }
@@ -124,7 +124,7 @@ namespace Z0
                 {
                     var col = src.Column(c);
                     for(var r=0; r<src.Order; r++)
-                        Claim.eq(col[r], src[r,c]);
+                        CheckPrimal.eq(col[r], src[r,c]);
                 }
             }
         }

@@ -100,6 +100,7 @@ namespace Z0
             where F : IUnaryOp128D<T>
         {
             var t = default(T);
+
             void run()
             {
                 var cells = CellCount(w);

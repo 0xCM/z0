@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public class CaseLog<F,R> : ICaseLog<R>
+    class CaseLog<F,R> : ICaseLog<R>
         where R : struct, ITabular
         where F : unmanaged, Enum
     {

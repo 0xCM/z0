@@ -360,7 +360,7 @@ namespace Z0
 
         public void Run999()
         {
-            var hosts = DiscoverWfHosts(Wf.ApiParts.Components).OrderBy(x => x.Assembly.FullName);
+            var hosts = DiscoverWfHosts(Wf.ApiParts.PartComponents).OrderBy(x => x.Assembly.FullName);
             var wf = Wf;
             iter(hosts, h => wf.Status(Seq.delimit(h.Assembly.GetSimpleName(),h.Name)));
         }

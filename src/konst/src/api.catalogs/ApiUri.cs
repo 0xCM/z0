@@ -92,7 +92,7 @@ namespace Z0
         /// <param name="f">The function</param>
         [Op]
         public static string TestCase(Type host, IFunc f)
-            => $"{ApiIdentityKinds.OwningPartText(host)}{UriPathSep}{host.Name}{UriPathSep}{f.Id}";
+            => $"{ApiIdentify.part(host).Format()}{UriPathSep}{host.Name}{UriPathSep}{f.Id}";
 
         [Op]
         public static string QueryText(ApiUriScheme scheme, PartId catalog, string host, string group)
@@ -116,7 +116,7 @@ namespace Z0
         /// <param name="host">The source type</param>
         [Op]
         public static string HostUri(Type host)
-            => $"{ApiIdentityKinds.OwningPartText(host)}{UriPathSep}{host.Name}";
+            => $"{ApiIdentify.part(host).Format()}{UriPathSep}{host.Name}";
 
         /// <summary>
         /// Produces the name of the test case determined by a source method
@@ -124,7 +124,7 @@ namespace Z0
         /// <param name="method">The method that implements the test</param>
         [Op]
         public static string TestCase(MethodInfo method)
-            => $"{ApiIdentityKinds.OwningPartText(method.DeclaringType)}{UriPathSep}{method.DeclaringType.Name}{UriPathSep}{method.Name}";
+            => $"{ApiIdentify.part(method.DeclaringType).Format()}{UriPathSep}{method.DeclaringType.Name}{UriPathSep}{method.Name}";
 
         /// <summary>
         /// Produces the name of the test case predicated on fully-specified name, excluding the host name
@@ -132,7 +132,7 @@ namespace Z0
         /// <param name="fullname">The full name of the test</param>
         [Op]
         public static string TestCase(Type host, string fullname)
-            => $"{ApiIdentityKinds.OwningPartText(host)}{UriPathSep}{host.Name}{UriPathSep}{fullname}";
+            => $"{ApiIdentify.part(host).Format()}{UriPathSep}{host.Name}{UriPathSep}{fullname}";
 
         /// <summary>
         /// Produces the name of the test case predicated on fully-specified name, excluding the host name
@@ -140,6 +140,6 @@ namespace Z0
         /// <param name="id">Identity of the operation under test</param>
         [Op]
         public static string TestCase(Type host, OpIdentity id)
-            => $"{ApiIdentityKinds.OwningPartText(host)}{UriPathSep}{host.Name}{UriPathSep}{id.Identifier}";
+            => $"{ApiIdentify.part(host).Format()}{UriPathSep}{host.Name}{UriPathSep}{id.Identifier}";
     }
 }

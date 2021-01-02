@@ -89,10 +89,10 @@ namespace Z0
             => Identified.Same(obj);
 
         public string Format()
-            => Identified.Format();
+            => Identifier;
 
         public override string ToString()
-            => Format();
+            => Identifier;
 
         [MethodImpl(Inline)]
         public static implicit operator string(OpIdentity src)

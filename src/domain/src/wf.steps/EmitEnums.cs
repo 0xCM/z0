@@ -26,7 +26,7 @@ namespace Z0
         public static void run(IWfShell wf)
         {
             wf.Db().Clear(ClrEnumLiteralRecord.TableId);
-            var components = wf.Api.Components;
+            var components = wf.Api.PartComponents;
             foreach(var component in components)
             {
                 if(component.Id() != PartId.AsmModels)

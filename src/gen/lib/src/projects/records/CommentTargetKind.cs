@@ -18,5 +18,4 @@ namespace Z0
 
         Property = 4,
     }
-
 }

@@ -7,17 +7,17 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Reifies a workflow event receiver that both logs received events and renders received events to the terminal
     /// </summary>
-    public readonly struct WfTermLog : IWfEventSink
+    readonly struct TermLog : IWfEventSink
     {
         public string Source {get;}
 
         [MethodImpl(Inline)]
-        public WfTermLog(string source)
+        public TermLog(string source)
         {
             Source = source ?? EmptyString;
             term.print(PartMsg.SourceLoggerCreated.Format(Source ?? EmptyString));

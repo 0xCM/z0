@@ -5,15 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
 
-    public enum LogWriteMode
+    public interface IBuildLog : ISink<BuildLogEntry>, IDisposable
     {
-        Create,
 
-        Overwrite,
-
-        Append
     }
-
 }

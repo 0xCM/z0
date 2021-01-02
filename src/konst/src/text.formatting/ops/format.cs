@@ -15,15 +15,6 @@ namespace Z0
     partial struct TextFormatter
     {
         /// <summary>
-        /// Renders a source value as text
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <typeparam name="T">The source type</typeparam>
-        [Op, Closures(Closure)]
-        public static string format<T>(T src)
-            => src is ITextual t ? t.Format() : (src?.ToString() ?? EmptyString);
-
-        /// <summary>
         /// Formats the pair of strings represented by respective character spans
         /// </summary>
         /// <param name="a">The leading content</param>

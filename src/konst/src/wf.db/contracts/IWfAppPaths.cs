@@ -25,8 +25,8 @@ namespace Z0
         FS.FolderPath DbRoot
             => WfEnv.dbRoot();
 
-        ITestRunPaths TestPaths
-            => TestRunPaths.define(Root + FS.folder("tests"));
+        ITestLogPaths TestPaths
+            => new TestLogPaths(Root + FS.folder("tests"));
 
         /// <summary>
         /// The executing application's data directory

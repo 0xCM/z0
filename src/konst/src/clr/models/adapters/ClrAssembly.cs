@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Reflection;
     using System.Runtime.CompilerServices;
+    using System.IO;
 
     using static Part;
 
@@ -34,7 +35,7 @@ namespace Z0
             get => Definition.Id() != 0;
         }
 
-        public string SimpleName
+        public Name SimpleName
         {
             [MethodImpl(Inline)]
             get => Definition.GetSimpleName();
@@ -43,8 +44,37 @@ namespace Z0
         public ClrAssemblyName Name
             => Definition;
 
-        public ClrArtifactKind ClrKind
-            => ClrArtifactKind.Assembly;
+        public FS.FilePath FilePath
+        {
+            [MethodImpl(Inline)]
+            get => FS.path(Definition.CodeBase);
+        }
+
+        ref readonly FS.FilePath GetDocPath(out FS.FilePath dst)
+        {
+            var candidate = FS.path(Path.ChangeExtension(Definition.CodeBase, FileExtensions.Xml.Name));
+            dst = candidate.Exists ? candidate : FS.FilePath.Empty;
+            return ref dst;
+        }
+
+        ref readonly FS.FilePath GetPdbPath(out FS.FilePath dst)
+        {
+            var candidate = FS.path(Path.ChangeExtension(Definition.CodeBase, FileExtensions.Pdb.Name));
+            dst = candidate.Exists ? candidate : FS.FilePath.Empty;
+            return ref dst;
+        }
+
+        /// <summary>
+        /// If found, returns a path to the associated documentation comment file; otherwise returns empty
+        /// </summary>
+        public FS.FilePath DocPath
+            => GetDocPath(out var _);
+
+        /// <summary>
+        /// If found, returns a path to the associated pdb file; otherwise returns empty
+        /// </summary>
+        public FS.FilePath PdbPath
+            => GetPdbPath(out var _);
 
         public ReadOnlySpan<ClrAssemblyName> ReferencedAssemblies
             => ClrQuery.references(Definition);

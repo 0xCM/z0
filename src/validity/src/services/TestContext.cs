@@ -153,7 +153,7 @@ namespace Z0
         protected TCheckNumeric ClaimNumeric
             => CheckNumeric.Checker;
 
-        public ITestRunPaths TestPaths
+        public ITestLogPaths TestPaths
             => AppPaths.TestPaths;
 
         protected PartId TestedPart

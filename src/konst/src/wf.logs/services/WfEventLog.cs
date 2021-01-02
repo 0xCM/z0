@@ -8,10 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.IO;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
-    public struct WfEventLog : IWfEventLog
+    struct WfEventLog : IWfEventLog
     {
         readonly FS.FilePath StatusPath;
 

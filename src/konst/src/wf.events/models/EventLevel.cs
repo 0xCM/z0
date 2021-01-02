@@ -34,9 +34,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator EventLevel(LogLevel src)
             => new EventLevel(src);
-
-        // [MethodImpl(Inline)]
-        // public static implicit operator FlairKind(EventLevel src)
-        //     => (FlairKind)src.Kind;
     }
 }

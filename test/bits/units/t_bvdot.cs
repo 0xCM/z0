@@ -268,7 +268,7 @@ namespace Z0
                 {
                     var x = Random.BitVector<N,T>();
                     var y = Random.BitVector<N,T>();
-                    Bit32 a = x % y;
+                    bit a = x % y;
                     var b = BitVector.modprod(x,y);
                     Claim.eq(a,b);
                 }

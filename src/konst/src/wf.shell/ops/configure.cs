@@ -22,7 +22,7 @@ namespace Z0
             dst.DbRoot = paths.DbRoot;
             dst.ConfigPath = paths.AppConfigPath;
             dst.RuntimeRoot = runroot;
-            dst.Components = parts(control, runroot).Components.Select(ClrAssemblyNames.from);
+            dst.Components = parts(control, runroot).PartComponents.Select(ClrAssemblyNames.from);
             return ref dst;
         }
 

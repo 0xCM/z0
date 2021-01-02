@@ -16,6 +16,9 @@ namespace Z0
 
     public interface TCheckGeneric : IValidator
     {
+        void eq(Bit32 lhs, Bit32 rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => api.eq(lhs, rhs, caller, file, line);
+
         [MethodImpl(Inline)]
         void eq<T>(T lhs, T rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged

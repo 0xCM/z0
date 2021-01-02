@@ -34,6 +34,13 @@ namespace Z0
         public static void AppendLine(this FS.FilePath dst, string src)
             => File.AppendAllLines(dst.Name, z.array(src));
 
+        /// <summary>
+        /// Opens a <see cref='FileStream'/>
+        /// </summary>
+        /// <param name="path">The target file path</param>
+        /// <param name="mode"></param>
+        /// <param name="access"></param>
+        /// <param name="share"></param>
         public static FileStream Stream(this FS.FilePath path, FileMode mode = FileMode.OpenOrCreate, FileAccess access = FileAccess.Write, FileShare share = FileShare.Read)
             => FS.stream(path,mode,access,share);
     }

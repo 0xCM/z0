@@ -7,10 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     using X = FileExtensions;
-    using api = WfLogs;
+    using api = Loggers;
 
     public readonly struct WfLogConfig : IWfLogConfig
     {
