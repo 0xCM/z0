@@ -83,6 +83,14 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
+        WfEventId(EventKind kind, WfStepId step, EventLevel level, CorrelationToken ct, Timestamp? ts = null)
+        {
+            Ts = ts ?? timestamp();
+            Ct = ct;
+            Identifier = text.format(RP.PSx5, Ts, Ct, level, step, kind);
+        }
+
+        [MethodImpl(Inline)]
         WfEventId(Type type, WfStepId step, CorrelationToken ct, Timestamp? ts = null)
         {
             Ts = ts ?? timestamp();
@@ -143,6 +151,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator WfEventId((string name, WfStepId step, EventLevel level, CorrelationToken ct) src)
             => new WfEventId(src.name, src.step, src.level, src.ct);
+
+        [MethodImpl(Inline)]
+        public static implicit operator WfEventId((EventKind kind, WfStepId step, EventLevel level, CorrelationToken ct) src)
+            => new WfEventId(src.kind, src.step, src.level, src.ct);
 
         [MethodImpl(Inline)]
         public static implicit operator WfEventId((string name, CorrelationToken ct) src)

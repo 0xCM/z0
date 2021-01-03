@@ -67,6 +67,14 @@ namespace Z0
         void EmittedFile(Count count, FS.FilePath dst)
             => Raise(emittedFile(Host, dst, count, Ct));
 
+        void EmittedFile(FS.FilePath dst)
+            => signal(this).EmittedFile(dst);
+
+        void EmittedFile(WfExecFlow flow, FS.FilePath dst)
+        {
+            signal(this).EmittedFile(dst);
+            Ran(flow);
+        }
 
         void EmittedFile(WfExecFlow flow, Count count, FS.FilePath dst)
         {

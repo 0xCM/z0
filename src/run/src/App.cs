@@ -15,10 +15,16 @@ namespace Z0
 
         readonly IWfShell Wf;
 
+        readonly CmdBuilder Builder;
+
+        readonly IWfDb Db;
+
         Runner(IWfShell wf)
         {
             Host = WfShell.host(typeof(Runner));
             Wf = wf.WithHost(Host);
+            Builder = wf.CmdBuilder();
+            Db = wf.Db();
         }
 
         public static void Main(params string[] args)
@@ -91,11 +97,19 @@ namespace Z0
                 case RunStepCmd.CmdName:
                     commands.RunStep(slice(args,1)).Wait();
                 break;
+                case BuildCmd.CmdName:
+                    Run(Builder.Build());
+                break;
                 default:
                     Wf.Error(string.Format("Processor for {0} not found", name));
                     break;
             }
 
+        }
+
+        void Run(in BuildCmd cmd)
+        {
+            cmd.Save(Db.JobQueue()).OnSuccess(data => Wf.EmittedFile(data)).OnFailure(msg => Wf.Error(msg));
         }
 
         void Run(ListFilesCmd cmd)

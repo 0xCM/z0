@@ -60,6 +60,12 @@ namespace Z0
         FS.FolderPath LogRoot()
             => Root + FS.folder(DbNames.logs);
 
+        FS.FolderPath BuildLogRoot()
+            => LogRoot() + FS.folder("build");
+
+        FS.FilePath BuildLogPath(FS.FileName src)
+            => BuildLogRoot() + src;
+
         /// <summary>
         /// Defines a task-specific log path
         /// </summary>

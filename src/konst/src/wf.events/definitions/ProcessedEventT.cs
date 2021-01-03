@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static EventLevels;
 
     [Event(Kind)]
     public readonly struct ProcessedEvent<T> : IWfEvent<ProcessedEvent<T>,T>
@@ -20,10 +21,11 @@ namespace Z0
 
         public FlairKind Flair => FlairKind.Processed;
 
+
         [MethodImpl (Inline)]
         public ProcessedEvent(WfStepId step, T payload, CorrelationToken ct)
         {
-            EventId = (Kind, step, ct);
+            EventId = (Kind, step, Status, ct);
             Payload = payload;
         }
 

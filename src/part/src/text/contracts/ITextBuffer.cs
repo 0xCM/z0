@@ -17,15 +17,17 @@ namespace Z0
             Append(Eol);
         }
 
+        void AppendSpace()
+        {
+            Append(Space);
+        }
+
+        void AppendLine()
+            => Append(Eol);
+
         void AppendFormat(string pattern, params object[] args)
         {
             Append(string.Format(pattern, args));
-        }
-
-        void Delimit<T>(T src, ushort width)
-        {
-            var pattern = " | " + text.embrace($"0,-{width}");
-            AppendFormat(pattern, src);
         }
 
         void Append(ReadOnlySpan<char> src)
@@ -48,9 +50,6 @@ namespace Z0
                 Append(Eol);
             }
         }
-
-        void AppendLine()
-            => Append(Eol);
 
         void AppendDelimited<F,T>(F field, T value, char c = FieldDelimiter)
             where F : unmanaged
@@ -77,9 +76,6 @@ namespace Z0
             }
         }
 
-        // void AppendDelimited<T>(T[] src, char c = FieldDelimiter)
-        //     => Append(Seq.delimit(src, c).Format());
-
         void AppendFormatted(string pattern, params object[] args)
             => Append(string.Format(pattern, args));
 
@@ -87,12 +83,6 @@ namespace Z0
         {
             AppendFormatted("{0}:{1}", name, value);
             AppendLine();
-        }
-
-        void AppendFormattedLine(string pattern, params object[] args)
-        {
-            AppendFormatted(pattern, args);
-            Append(Eol);
         }
     }
 

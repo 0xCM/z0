@@ -1,0 +1,29 @@
+//-----------------------------------------------------------------------------
+// Copyright   :  (c) Chris Moore, 2020
+// License     :  MIT
+//-----------------------------------------------------------------------------
+namespace Z0
+{
+    using System;
+    using System.IO;
+
+    using static Part;
+
+    partial class XFs
+    {
+        public static Outcome Save(this FS.FilePath dst, string src)
+        {
+            try
+            {
+                using var writer = dst.CreateParentIfMissing().Writer();
+                writer.WriteLine(src);
+                writer.Flush();
+                return true;
+            }
+            catch(Exception e)
+            {
+                return e;
+            }
+        }
+    }
+}

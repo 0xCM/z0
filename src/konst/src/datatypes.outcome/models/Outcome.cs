@@ -89,6 +89,12 @@ namespace Z0
         public override string ToString()
             => Format();
 
+        public void Require()
+        {
+            if(Fail)
+                throw new Exception(Message ?? "An eggregious blunder");
+        }
+
         [MethodImpl(Inline)]
         public static implicit operator Outcome(bool success)
             => new Outcome(success);

@@ -6,6 +6,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static EventLevels;
 
     [Event(Kind)]
     public readonly struct EmittedFileEvent : IWfEvent<EmittedFileEvent>
@@ -25,11 +26,22 @@ namespace Z0
         [MethodImpl(Inline)]
         public EmittedFileEvent(WfStepId step, FS.FilePath path, Count segments, CorrelationToken ct)
         {
-            EventId = (EventName, step, ct);
+            EventId = (Kind, step, Status, ct);
             SegmentCount = segments;
             Path = path;
         }
+
+        [MethodImpl(Inline)]
+        public EmittedFileEvent(WfStepId step, FS.FilePath path, CorrelationToken ct)
+        {
+            EventId = (Kind, step, Status, ct);
+            SegmentCount = 0;
+            Path = path;
+        }
+
         public string Format()
-            => TextFormatter.format(EventId, SegmentCount, Path.ToUri());
+            =>  SegmentCount != 0
+            ? TextFormatter.format(EventId, SegmentCount, Path.ToUri())
+            : TextFormatter.format(EventId, Path.ToUri());
     }
 }

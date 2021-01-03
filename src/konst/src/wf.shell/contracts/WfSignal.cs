@@ -97,5 +97,7 @@ namespace Z0
         public void EmittedFile(Count count, FS.FilePath dst)
             => Raise(emittedFile(Host, dst, count, Ct));
 
+        public void EmittedFile(FS.FilePath dst)
+            => Raise(emittedFile(Host, dst, Ct));
     }
 }

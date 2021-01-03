@@ -101,6 +101,22 @@ namespace Z0
             => text.format("{0}: {1}", Ok ? "Success" : "Fail", Ok ? (object)Data : (object) Message);
 
         [MethodImpl(Inline)]
+        public Outcome<T> OnSuccess(Action<T> f)
+        {
+            if(Ok)
+                f(Data);
+            return this;
+        }
+
+        [MethodImpl(Inline)]
+        public Outcome<T> OnFailure(Action<string> f)
+        {
+            if(!Ok)
+                f(Message ?? "An eggregious blunder");
+            return this;
+        }
+
+        [MethodImpl(Inline)]
         public static bool operator true(Outcome<T> src)
             => src.Ok == true;
 

@@ -18,6 +18,10 @@ namespace Z0
 
         const string ZLogs = nameof(ZLogs);
 
+        const string ZControl = nameof(ZControl);
+
+        const string ZToolRoot = nameof(ZToolRoot);
+
         const string Pub = "ZArchive";
 
         const string ZDb = nameof(ZDb);
@@ -28,7 +32,11 @@ namespace Z0
 
         public FS.FolderPath ArchiveRoot;
 
+        public FS.FolderPath ToolRoot;
+
         public FS.FolderPath DbRoot;
+
+        public FS.FolderPath SystemControl;
 
         [MethodImpl(Inline), Op]
         public static Env create()
@@ -38,6 +46,8 @@ namespace Z0
             dst.DevRoot = read(ZDev).Transform(FS.dir);
             dst.DbRoot = read(ZDb).Transform(FS.dir);
             dst.ArchiveRoot = read(Pub).Transform(FS.dir);
+            dst.SystemControl = read(ZControl).Transform(FS.dir);
+            dst.ToolRoot = read(ZToolRoot).Transform(FS.dir);
             return dst;
         }
 

@@ -23,6 +23,9 @@ namespace Z0
         public static EmittedFileEvent emittedFile(WfStepId step, FS.FilePath path, Count segments, CorrelationToken ct)
             => new EmittedFileEvent(step, path, segments, ct);
 
+        [MethodImpl(Inline), Op]
+        public static EmittedFileEvent emittedFile(WfStepId step, FS.FilePath path, CorrelationToken ct)
+            => new EmittedFileEvent(step, path, ct);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static EmittingTableEvent<T> emittingTable<T>(WfStepId step, FS.FilePath dst, CorrelationToken ct)
