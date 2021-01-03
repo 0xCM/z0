@@ -7,16 +7,16 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Represents the types defined by a part
     /// </summary>
     public readonly struct ApiPartTypes
     {
-        public readonly PartId Part;
+        public PartId Part {get;}
 
-        public readonly Type[] Types;
+        public Type[] Types {get;}
 
         [MethodImpl(Inline)]
         public ApiPartTypes(PartId part, Type[] types)

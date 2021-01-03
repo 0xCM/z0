@@ -5,15 +5,10 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
-    using System.Runtime.CompilerServices;
-    using System.Text;
 
-    using static Konst;
-    using static memory;
+    using static Part;
 
-
-    public readonly partial struct TextRules
+    partial struct TextRules
     {
         partial struct Format
         {

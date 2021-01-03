@@ -17,7 +17,7 @@ namespace Z0
         readonly StringBuilder Target;
 
         [MethodImpl(Inline)]
-        internal TextBuffer(StringBuilder dst)
+        public TextBuffer(StringBuilder dst)
             => Target = dst;
 
         [MethodImpl(Inline)]

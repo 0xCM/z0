@@ -11,6 +11,23 @@ namespace Z0
 
     using static Konst;
 
+    public interface ITextValueFormatter<F,T> : ITextValueFormatter<T>
+        where F : unmanaged, Enum
+        where T : struct
+    {
+        void Format(in T src, IDatasetFormatter<F> dst);
+
+        string ITextValueFormatter<T>.Format(in T src)
+        {
+            var dst = Formatters.dataset<F>();
+            Format(src, dst);
+            return dst.Render();
+        }
+
+        string ITextValueFormatter<T>.HeaderText
+            => Formatters.dataset<F>().HeaderText;
+    }
+
     public readonly struct DatasetFormatter<F> : IDatasetFormatter<F>
         where F : unmanaged, Enum
     {

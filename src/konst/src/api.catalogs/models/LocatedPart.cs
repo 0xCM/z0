@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Represents an in-memory part with a specified base address
@@ -60,11 +60,11 @@ namespace Z0
         {
             var dst = text.build();
             dst.Append(Id.Format().PadRight(16));
-            dst.Append(SpacePipe);
+            dst.Append(RP.SpacedPipe);
             dst.Append(BaseAddress.Format().PadRight(16));
-            dst.Append(SpacePipe);
+            dst.Append(RP.SpacedPipe);
             dst.Append(Size.Format().PadRight(10));
-            dst.Append(SpacePipe);
+            dst.Append(RP.SpacedPipe);
             dst.Append(Range.End.Format().PadRight(16));
             return dst.ToString();
         }

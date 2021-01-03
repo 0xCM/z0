@@ -11,7 +11,7 @@ namespace Z0
     using static Part;
 
     [ApiHost(ApiNames.TextEncoders, true)]
-    public unsafe readonly partial struct TextEncoders
+    public unsafe readonly struct TextEncoders
     {
         [MethodImpl(Inline), Op]
         public static TextEncoding service(Encoding src)

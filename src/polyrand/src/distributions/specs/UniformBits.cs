@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Characterizes a uniform distribution
@@ -16,16 +16,16 @@ namespace Z0
     /// <remarks>See https://en.wikipedia.org/wiki/Uniform_distribution</remarks>
     public readonly struct UniformBitsSpec<T> :  IDistributionSpec<T>
         where T : unmanaged
-    {           
-        
+    {
+
         [MethodImpl(Inline)]
         public static UniformBitsSpec<T> Define()
-            => new UniformBitsSpec<T>();        
+            => new UniformBitsSpec<T>();
 
         /// <summary>
         /// Classifies the distribution spec
         /// </summary>
-        public DistributionKind DistKind 
+        public DistributionKind DistKind
             => DistributionKind.UniformBits;
 
         [MethodImpl(Inline)]

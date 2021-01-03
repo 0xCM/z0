@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Specifies a part-owned file path
@@ -16,17 +16,14 @@ namespace Z0
     [StructLayout(LayoutKind.Sequential)]
     public readonly struct PartFile
     {
-        public readonly PartId Part;
+        public PartId Part {get;}
 
-        public readonly PartFileKind Kind;
-
-        public readonly FS.FilePath Path;
+        public FS.FilePath Path {get;}
 
         [MethodImpl(Inline)]
-        public PartFile(PartId part, PartFileKind kind, FS.FilePath path)
+        public PartFile(PartId part, FS.FilePath path)
         {
             Part = part;
-            Kind = kind;
             Path = path;
         }
     }

@@ -68,6 +68,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public RenderWidth Width(F f)
-            => z.@as<F,byte>(f);
+            => memory.@as<F,byte>(f);
     }
 }

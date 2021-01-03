@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <param name="fx">A function that produces text from an element value</param>
         /// <typeparam name="T">The type of element to render</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static TitleFormatter<T> title<T>(FormatFunctions.FormatTitle<T> fx)
             => new TitleFormatter<T>(fx);
     }

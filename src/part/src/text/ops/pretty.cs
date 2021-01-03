@@ -62,11 +62,27 @@ namespace Z0
             => $"{Chars.Quote}{content}{Chars.Quote}";
 
         /// <summary>
+        /// Appends a space to the source content
+        /// </summary>
+        /// <param name="content">The source content</param>
+        [MethodImpl(Inline), Op]
+        public static string rspace(object content)
+            => $"{content} ";
+
+        /// <summary>
         /// Prepends a space to the source content
         /// </summary>
         /// <param name="content">The source content</param>
         [MethodImpl(Options), Op]
         public static string lspace(object content)
             => $" {content}";
+
+        /// <summary>
+        /// Encloses text content between left and right braces
+        /// </summary>
+        /// <param name="content">The content to be embraced</param>
+        [MethodImpl(Inline), Op]
+        public static string embrace(string content)
+            => $"{Chars.LBrace}{content}{Chars.RBrace}";
     }
 }

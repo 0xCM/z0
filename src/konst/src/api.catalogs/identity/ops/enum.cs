@@ -16,6 +16,6 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline), Op]
         public static EnumIdentity @enum(Type src)
-            => EnumIdentity.Define(src);
+            => EnumIdentity.define(src);
     }
 }

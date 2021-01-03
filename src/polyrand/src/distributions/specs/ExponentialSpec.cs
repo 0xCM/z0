@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Characterizes a Exponential (normal) distribution
@@ -19,7 +19,7 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static ExponentialSpec<T> Define(T a, T b)
-            => new ExponentialSpec<T>(a,b);        
+            => new ExponentialSpec<T>(a,b);
 
         [MethodImpl(Inline)]
         public static implicit operator (T a, T b)(ExponentialSpec<T> spec)
@@ -43,7 +43,7 @@ namespace Z0
          /// <summary>
         /// Classifies the distribution spec
         /// </summary>
-        public DistributionKind DistKind 
-            => DistributionKind.Exponential; 
+        public DistributionKind DistKind
+            => DistributionKind.Exponential;
     }
 }

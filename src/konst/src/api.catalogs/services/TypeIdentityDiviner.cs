@@ -24,9 +24,9 @@ namespace Z0
             else if(arg.IsTypeNat())
                 return NatId(arg);
             else if(arg.IsSystemDefined())
-                return ApiIdentify.primal(arg).AsTypeIdentity().ToOption();
+                return primal(arg).AsTypeIdentity().ToOption();
             else if(arg.IsEnum)
-                return some(EnumIdentity.Define(arg).AsTypeIdentity());
+                return some(EnumIdentity.define(arg).AsTypeIdentity());
             else if(arg.IsSegmented())
                 return SegmentedId(arg);
             else if(arg.IsArray)
@@ -141,5 +141,18 @@ namespace Z0
                 provider = HostedProvider(t);
             return provider.ValueOrElse(() => DefaultProvider);
         }
+
+        /// <summary>
+        /// Defines a primal identity if the source type represents a recognized primitive; otherwise,
+        /// returns <see cref='PrimalIdentity.Empty'/>
+        /// </summary>
+        /// <param name="src">The source type</param>
+        [Op]
+        static PrimalIdentity primal(Type src)
+            => src.IsSystemDefined() ?
+               (NumericKinds.test(src)
+               ? new PrimalIdentity(src.NumericKind(), ApiIdentify.keyword(src))
+               : new PrimalIdentity(ApiIdentify.keyword(src))
+               ) : PrimalIdentity.Empty;
     }
 }

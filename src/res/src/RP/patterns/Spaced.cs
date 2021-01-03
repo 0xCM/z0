@@ -7,6 +7,12 @@ namespace Z0
     partial struct RP
     {
         /// <summary>
+        /// The " | " character sequence
+        /// </summary>
+        [RenderLiteral(" | ", 3)]
+        public const string SpacedPipe = " | ";
+
+        /// <summary>
         /// Defines the literal " |"
         /// </summary>
         [RenderLiteral(" |")]

@@ -8,7 +8,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Characterizes a Cauchy distribution
@@ -30,8 +30,8 @@ namespace Z0
         /// <summary>
         /// Classifies the distribution spec
         /// </summary>
-        public DistributionKind DistKind 
-            => DistributionKind.Cauchy;        
+        public DistributionKind DistKind
+            => DistributionKind.Cauchy;
 
         [MethodImpl(Inline)]
         public static CauchySpec<T> Define(T loc, T scale)
@@ -44,7 +44,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator CauchySpec<T>((T loc, T scale) x)
             => Define(x.loc,x.scale);
-            
+
         [MethodImpl(Inline)]
         public CauchySpec(T loc, T scale)
         {

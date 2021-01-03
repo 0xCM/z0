@@ -52,7 +52,6 @@ namespace Z0
             where T : unmanaged
                 => ref @as<E,T>(eVal);
 
-
         /// <summary>
         /// Envisions an E-enum value of primal i8-kind as a like-kinded scalar value
         /// </summary>

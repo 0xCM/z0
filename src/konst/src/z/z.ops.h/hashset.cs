@@ -9,20 +9,15 @@ namespace Z0
     using System.Collections.Generic;
 
     using static Konst;
-    
+
     partial struct z
     {
-        /// <summary>
-        /// Constructs an array from a parameter array
-        /// </summary>
-        /// <param name="src">The source array</param>
-        /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline)]
         public static HashSet<T> hashset<T>(params T[] src)
-            => new HashSet<T>(src);
+            => corefunc.hashset(src);
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static HashSet<T> hashset<T>(IEnumerable<T> members)
-            => new HashSet<T>(members);
+        [MethodImpl(Inline)]
+        public static HashSet<T> hashset<T>(IEnumerable<T> src)
+            => corefunc.hashset(src);
     }
 }

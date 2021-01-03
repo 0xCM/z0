@@ -9,7 +9,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
-    using static Konst;
+    using static Part;
     using static NumericCast;
 
     /// <summary>
@@ -51,9 +51,6 @@ namespace Z0
         public static T ValueOrDefault<T>(this T? x, T @default = default)
             where T : unmanaged
                 => x != null ? x.Value : @default;
-
-        // public static Span<bit> ToBits(this IEnumerable<BinaryDigit> src)
-        //     => src.Select(d => d == BinaryDigit.Zed ? bit.Off : bit.On).ToSpan();
 
         /// <summary>
         /// The total number of bytes in the embedded data
@@ -105,7 +102,6 @@ namespace Z0
             else
             {
                 throw new Exception($"bad");
-                //AppErrors.ThrowOutOfRange<int>(offset, 0, MaxOffset<T>());
             }
         }
 

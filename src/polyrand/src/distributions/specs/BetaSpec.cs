@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Characterizes a beta distribution
@@ -16,7 +16,7 @@ namespace Z0
     /// <remarks>See https://en.wikipedia.org/wiki/Beta_distribution</remarks>
     public readonly struct BetaSpec<T> :  IDistributionSpec<T>
         where T : unmanaged
-    {           
+    {
         public readonly T Alpha;
 
         public readonly T Beta;
@@ -24,7 +24,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BetaSpec<T> From(IDistributionSpec<T> src)
             => (BetaSpec<T>)src;
-        
+
         [MethodImpl(Inline)]
         public static implicit operator (T alpha, T beta)(BetaSpec<T> spec)
             => (spec.Alpha, spec.Beta);
@@ -35,7 +35,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static BetaSpec<T> Define(T alpha, T beta)
-            => new BetaSpec<T>(alpha,beta);        
+            => new BetaSpec<T>(alpha,beta);
 
         [MethodImpl(Inline)]
         public BetaSpec(T alpha, T beta)
@@ -43,11 +43,11 @@ namespace Z0
             Alpha = alpha;
             Beta = beta;
         }
-        
+
         /// <summary>
         /// Classifies the distribution spec
         /// </summary>
-        public DistributionKind DistKind 
+        public DistributionKind DistKind
             => DistributionKind.Beta;
     }
 }

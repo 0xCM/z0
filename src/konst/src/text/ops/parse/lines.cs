@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static memory;
 
     public readonly partial struct TextRules
     {
@@ -24,7 +23,8 @@ namespace Z0
                 if(count == 0)
                     return Index<TextLine>.Empty;
 
-                var dst = list<TextLine>();
+
+                var dst = corefunc.list<TextLine>();
                 var input = span(src);
                 var lastix = count - 1;
                 var len = 0;

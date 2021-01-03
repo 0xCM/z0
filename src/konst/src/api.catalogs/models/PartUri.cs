@@ -7,14 +7,14 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     using api = ApiIdentity;
 
     /// <summary>
     /// Uri for .net clr assembly
     /// </summary>
-    public readonly struct PartUri : IApiUri<PartUri>, INullary<PartUri>
+    public readonly struct PartUri : IApiUri<PartUri>
     {
         /// <summary>
         /// The assembly identifier, constrained to the defining enumeration
@@ -31,9 +31,6 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Id == PartId.None || text.empty(UriText);
         }
-
-        PartUri INullary<PartUri>.Zero
-            => Empty;
 
         [MethodImpl(Inline)]
         internal PartUri(PartId id)

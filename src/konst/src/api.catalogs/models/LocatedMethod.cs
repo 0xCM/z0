@@ -5,12 +5,10 @@
 namespace Z0
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
     using System.Reflection;
-    using System.Reflection.Emit;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     public readonly struct LocatedMethod : ITextual, IComparable<LocatedMethod>
     {

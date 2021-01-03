@@ -47,7 +47,6 @@ namespace Z0
         public void EmitResBytes()
         {
             ResBytesEmitter.service(Wf, Index).Emit();
-            //ResBytesEmitter.create().WithIndex(Index).Run(Wf);
         }
 
         public void ProcessCalls()

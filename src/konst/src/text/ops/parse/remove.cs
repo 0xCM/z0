@@ -7,10 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static memory;
 
-    public readonly partial struct TextRules
+    partial struct TextRules
     {
         partial struct Parse
         {
@@ -26,7 +26,7 @@ namespace Z0
             [Op]
             public static string remove(string src, params char[] matches)
             {
-                var index = z.hashset(matches);
+                var index = corefunc.hashset(matches);
                 if (!src.ContainsAny(index))
                     return src;
 
@@ -40,7 +40,7 @@ namespace Z0
                     if ( !index.Contains(c))
                         seek(dst,j++) = c;
                 }
-                return new string(z.slice(dst,0,j));
+                return new string(memory.slice(dst,0,j));
             }
         }
     }

@@ -8,7 +8,7 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Characterizes a binomial distribution
@@ -21,11 +21,11 @@ namespace Z0
         public readonly T Trials;
 
         public readonly double Success;
- 
+
          /// <summary>
         /// Classifies the distribution spec
         /// </summary>
-        public DistributionKind DistKind 
+        public DistributionKind DistKind
             => DistributionKind.Binomial;
 
         [MethodImpl(Inline)]
@@ -35,7 +35,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BinomialSpec<T> Define(T n, double p)
             => new BinomialSpec<T>(n,p);
-    
+
         [MethodImpl(Inline)]
         public static implicit operator (T n, double p)(BinomialSpec<T> spec)
             => (spec.Trials, spec.Success);
@@ -44,12 +44,12 @@ namespace Z0
         public static implicit operator BinomialSpec<T>((T n, double p) spec)
             => (spec.n, spec.p);
 
-        
+
         [MethodImpl(Inline)]
         public BinomialSpec(T n, double p)
         {
             Trials = n;
             Success = p;
-        }    
+        }
     }
 }

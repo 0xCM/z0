@@ -8,17 +8,13 @@ namespace Z0
     using System.Reflection;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     public readonly struct IdentifiedMethod : ITextual
     {
-        public readonly OpIdentity Id;
+        public OpIdentity Id {get;}
 
-        public readonly MethodInfo Method;
-
-        [MethodImpl(Inline)]
-        public static implicit operator IdentifiedMethod((OpIdentity id, MethodInfo method) src)
-            => new IdentifiedMethod(src.id,src.method);
+        public MethodInfo Method {get;}
 
         [MethodImpl(Inline)]
         public IdentifiedMethod(OpIdentity id, MethodInfo method)
@@ -38,5 +34,9 @@ namespace Z0
 
         public override string ToString()
             => Format();
+
+        [MethodImpl(Inline)]
+        public static implicit operator IdentifiedMethod((OpIdentity id, MethodInfo method) src)
+            => new IdentifiedMethod(src.id,src.method);
     }
 }

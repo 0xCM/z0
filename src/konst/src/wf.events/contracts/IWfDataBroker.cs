@@ -11,7 +11,7 @@ namespace Z0
     {
         ref readonly DataHandler<T> Get(K key);
 
-        ref DataHandler<T> Set(K key, in DataHandler<T> handler);
+        //ref DataHandler<T> Set(K key, in DataHandler<T> handler);
 
         void Relay(K key, T value);
 
@@ -23,7 +23,7 @@ namespace Z0
     {
         ref readonly DataHandler<C,T> Get(K key);
 
-        ref DataHandler<C,T> Set(K key, in DataHandler<C,T> handler);
+        //ref DataHandler<C,T> Set(K key, in DataHandler<C,T> handler);
 
         void Relay(K key, C context, T value);
 

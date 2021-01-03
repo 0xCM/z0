@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     public readonly struct NumericIdentity : IIdentifiedType<NumericIdentity>
     {
@@ -18,22 +18,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static NumericIdentity Define(NumericKind kind)
             => new NumericIdentity(kind);
-
-        [MethodImpl(Inline)]
-        public static implicit operator string(NumericIdentity src)
-            => src.Identifier;
-
-        [MethodImpl(Inline)]
-        public static implicit operator TypeIdentity(NumericIdentity src)
-            => src.AsTypeIdentity();
-
-        [MethodImpl(Inline)]
-        public static bool operator==(NumericIdentity a, NumericIdentity b)
-            => a.Equals(b);
-
-        [MethodImpl(Inline)]
-        public static bool operator!=(NumericIdentity a, NumericIdentity b)
-            => !a.Equals(b);
 
         [MethodImpl(Inline)]
         NumericIdentity(NumericKind kind)
@@ -56,5 +40,21 @@ namespace Z0
 
         public override string ToString()
             => Identified.Format();
+
+        [MethodImpl(Inline)]
+        public static implicit operator string(NumericIdentity src)
+            => src.Identifier;
+
+        [MethodImpl(Inline)]
+        public static implicit operator TypeIdentity(NumericIdentity src)
+            => src.AsTypeIdentity();
+
+        [MethodImpl(Inline)]
+        public static bool operator==(NumericIdentity a, NumericIdentity b)
+            => a.Equals(b);
+
+        [MethodImpl(Inline)]
+        public static bool operator!=(NumericIdentity a, NumericIdentity b)
+            => !a.Equals(b);
     }
 }

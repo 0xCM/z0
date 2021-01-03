@@ -71,7 +71,7 @@ namespace Z0
             var files = (from f in src
                         let part = f.Owner
                         where part != PartId.None && partSet.Contains(part)
-                        let pf = new PartFile(part, kind, f)
+                        let pf = new PartFile(part, f)
                         group pf by pf.Part).ToDictionary(x => x.Key, y => y.ToArray());
             return files;
         }

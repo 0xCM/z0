@@ -8,13 +8,12 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     partial class text
     {
         /// <summary>
-        /// Creates a stream of replicated characters 
+        /// Creates a stream of replicated characters
         /// </summary>
         /// <param name="src">The character to replicate</param>
         /// <param name="count">The replication count</param>

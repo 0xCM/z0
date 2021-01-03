@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Characterizes a Poisson distribution
@@ -20,7 +20,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static PoissonSpec<T> Define(double rate)
             => new PoissonSpec<T>(rate);
-        
+
         [MethodImpl(Inline)]
         public static implicit operator PoissonSpec<T>(double rate)
             => Define(rate);
@@ -34,16 +34,16 @@ namespace Z0
         {
             this.Rate = rate;
         }
-        
+
         /// <summary>
         /// Specifies the event frequency
         /// </summary>
         public readonly double Rate;
- 
+
          /// <summary>
         /// Classifies the distribution spec
         /// </summary>
-        public DistributionKind DistKind 
+        public DistributionKind DistKind
             => DistributionKind.Poisson;
    }
 }

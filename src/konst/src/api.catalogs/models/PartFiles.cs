@@ -7,17 +7,17 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     public readonly struct PartFiles : ITextual
     {
         const string FormatPattern = "{0}:{1} | {2}:{3} | {4}:{5}";
 
-        public readonly FS.Files Parsed;
+        public FS.Files Parsed {get;}
 
-        public readonly FS.Files Hex;
+        public FS.Files Hex {get;}
 
-        public readonly FS.Files Asm;
+        public FS.Files Asm {get;}
 
         [MethodImpl(Inline)]
         public PartFiles(FS.Files parsed, FS.Files hex, FS.Files asm)

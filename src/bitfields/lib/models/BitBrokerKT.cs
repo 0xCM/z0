@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     /// <summary>
@@ -27,16 +27,16 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        internal BitBroker(DataHandler<T>[] buffer)
+        internal BitBroker(DataHandler<T>[] handlers)
         {
             Bits = default;
-            _Handlers = buffer;
+            _Handlers = handlers;
             Handlers.Fill(DataHandler<T>.Empty);
         }
 
         [MethodImpl(Inline)]
-        public BitBroker(K kind, DataHandler<T>[] buffer)
-            : this(buffer)
+        public BitBroker(K kind, DataHandler<T>[] handlers)
+            : this(handlers)
         {
             Bits = BitFields.bf64(kind);
         }
@@ -48,13 +48,13 @@ namespace Z0
 
         }
 
-        [MethodImpl(Inline)]
-        public ref DataHandler<T> Set(K kind, in DataHandler<T> handler)
-        {
-            ref var dst = ref seek(Handlers, Bits.Index(kind));
-            dst = handler;
-            return ref dst;
-        }
+        // [MethodImpl(Inline)]
+        // public ref DataHandler<T> Set(K kind, in DataHandler<T> handler)
+        // {
+        //     ref var dst = ref seek(Handlers, Bits.Index(kind));
+        //     dst = handler;
+        //     return ref dst;
+        // }
 
         [MethodImpl(Inline)]
         public ref readonly DataHandler<T> Get(K kind)

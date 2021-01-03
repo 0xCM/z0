@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Security.Cryptography;
 
-    using static Konst;
+    using static Part;
 
     public static class Entropy
     {
@@ -35,7 +35,7 @@ namespace Z0
             where T : unmanaged
         {
             var typeBz = Unsafe.SizeOf<T>();
-            var bz = count * typeBz;            
+            var bz = count * typeBz;
             var src = Bytes(bz);
             return MemoryMarshal.Cast<byte,T>(src);
         }
@@ -51,6 +51,6 @@ namespace Z0
             var typeBz = Unsafe.SizeOf<T>();
             var src = Bytes(typeBz);
             return MemoryMarshal.Cast<byte,T>(src)[0];
-        }        
+        }
     }
 }

@@ -8,7 +8,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Characterizes a Laplace distribution
@@ -31,9 +31,9 @@ namespace Z0
         /// <summary>
         /// Classifies the distribution spec
         /// </summary>
-        public DistributionKind DistKind 
-            => DistributionKind.Laplace;        
-        
+        public DistributionKind DistKind
+            => DistributionKind.Laplace;
+
         [MethodImpl(Inline)]
         public static LaplaceSpec<T> Define(T loc, T scale)
             => new LaplaceSpec<T>(loc, scale);
@@ -45,7 +45,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator LaplaceSpec<T>((T loc, T scale) x)
             => Define(x.loc,x.scale);
-        
+
         [MethodImpl(Inline)]
         public LaplaceSpec(T loc, T scale)
         {

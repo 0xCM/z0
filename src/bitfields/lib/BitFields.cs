@@ -26,7 +26,7 @@ namespace Z0
                 => new BitField64<E>(state);
 
         [MethodImpl(Inline), Op]
-        public static string format(in BitField32 src)
+        public static string format(BitField32 src)
         {
             var count = BitField32.BitCount;
             Span<char> dst = stackalloc char[count];

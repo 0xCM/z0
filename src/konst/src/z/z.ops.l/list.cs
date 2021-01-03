@@ -12,31 +12,16 @@ namespace Z0
 
     partial struct z
     {
-        /// <summary>
-        /// Creates a <see cref='List<T>'/> from a parameter array
-        /// </summary>
-        /// <param name="src">The source elements</param>
-        /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline)]
         public static List<T> list<T>(params T[] src)
-            => sys.list(src);
+            => corefunc.list<T>(src);
 
-        /// <summary>
-        /// Creates a list with specified capacity
-        /// </summary>
-        /// <param name="capacity">The list capacity</param>
-        /// <typeparam name="T">The item type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline)]
         public static List<T> list<T>(int capacity)
-            => new List<T>(capacity);
+            => corefunc.list<T>(capacity);
 
-        /// <summary>
-        /// Creates a list with specified capacity
-        /// </summary>
-        /// <param name="capacity">The list capacity</param>
-        /// <typeparam name="T">The item type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline)]
         public static List<T> list<T>(uint capacity)
-            => new List<T>((int)capacity);
+            => corefunc.list<T>(capacity);
     }
 }
