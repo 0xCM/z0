@@ -4,15 +4,14 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Schemas.Ecma
 {
-    using System;
-    using System.Reflection.Metadata.Ecma335;
-
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface IRowKind : ITypedLiteral<TableIndex,byte>, ITextual
+    public interface IToken : ITypedLiteral<TableIndex,byte>, ITextual
     {
         TableIndex Index {get;}
+
+        Token A  => default;
 
         TableIndex ITypedLiteral<TableIndex>.Class
             => Index;
@@ -25,8 +24,8 @@ namespace Z0.Schemas.Ecma
     }
 
     [Free]
-    public interface IRowKind<K> : IRowKind
-        where K : unmanaged, IRowKind<K>
+    public interface IToken<K> : IToken
+        where K : unmanaged, IToken<K>
     {
 
     }

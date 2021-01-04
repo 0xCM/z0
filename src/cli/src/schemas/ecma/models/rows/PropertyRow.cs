@@ -15,6 +15,6 @@ namespace Z0.Schemas.Ecma
 
         public FK<name> Name;
 
-        public FK<bytes> Type;
+        public FK<BlobIndex> Type;
     }
 }

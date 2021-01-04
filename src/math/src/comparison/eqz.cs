@@ -6,11 +6,12 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
-    using static Konst;
+
+    using static Part;
+    using static LimitValues;
 
     partial class math
-    {    
+    {
         /// <summary>
         /// Defines the operator eqz(a,b) := a == b ? Min : Zero
         /// </summary>

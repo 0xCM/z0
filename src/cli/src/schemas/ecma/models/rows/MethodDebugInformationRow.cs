@@ -13,6 +13,6 @@ namespace Z0.Schemas.Ecma
 
         public int Document;
 
-        public FK<bytes> SequencePoints;
+        public FK<BlobIndex> SequencePoints;
     }
 }

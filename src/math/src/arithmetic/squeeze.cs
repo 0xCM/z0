@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-
     partial class math
     {
         /// <summary>
@@ -45,6 +43,6 @@ namespace Z0
         /// <param name="max">The maximum value in the target interval</param>
         [MethodImpl(Inline), Op]
         public static ulong squeeze(ulong src, ulong max)
-            => math.mulhi(src,max);
+            => mulhi(src,max);
     }
 }

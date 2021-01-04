@@ -15,6 +15,6 @@ namespace Z0.Schemas.Ecma
 
         public FK<name> FileName;
 
-        public FK<bytes> HashValue;
+        public FK<BlobIndex> HashValue;
     }
 }

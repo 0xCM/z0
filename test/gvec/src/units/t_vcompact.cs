@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
+    using static Part;
+    using static LimitValues;
     using static z;
 
     public class t_vcompact : t_inx<t_vcompact>
@@ -20,8 +21,8 @@ namespace Z0
             var c = gvec.vinc<uint>(n,8);
             var d = gvec.vinc<uint>(n,12);
             Vector512<uint> v512 = (a,b,c,d);
-            var abActual = z.vcompact16u(a,b,n128,z16);
-            var abExpect = z.vinc<ushort>(n);
+            var abActual = vcompact16u(a,b,n128,z16);
+            var abExpect = vinc<ushort>(n);
             Claim.veq(abExpect, abActual);
 
             var abcdActual = vcompact8u(a,b,c,d, n128, z8);

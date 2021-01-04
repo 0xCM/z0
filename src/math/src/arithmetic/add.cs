@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static memory;
 
     partial class math
     {
@@ -56,7 +55,7 @@ namespace Z0
         {
             c = a + b;
             var carry = a > c;
-            seek(c, 1) = skip(in a, 1) + skip(in b, 1) + z.@uint(carry);
+            seek(c, 1) = skip(in a, 1) + skip(in b, 1) + @uint(carry);
         }
     }
 }

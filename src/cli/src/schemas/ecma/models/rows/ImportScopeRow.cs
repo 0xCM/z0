@@ -9,8 +9,8 @@ namespace Z0.Schemas.Ecma
     [Record, StructLayout(LayoutKind.Sequential)]
     public struct ImportScopeRow
     {
-        public token Parent;
+        public Token Parent;
 
-        public FK<bytes> Imports;
+        public FK<BlobIndex> Imports;
     }
 }

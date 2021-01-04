@@ -20,6 +20,11 @@ namespace Z0
         public static unsafe byte @byte(bool src)
             => (*((byte*)(&src)));
 
+        /// <summary>
+        /// Presents generic reference as a <see cref='byte'/> reference
+        /// </summary>
+        /// <param name="src">The source reference</param>
+        /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref byte @byte<T>(in T src)
             where T : unmanaged

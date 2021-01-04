@@ -11,8 +11,7 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Bmi2;
     using static System.Runtime.Intrinsics.X86.Bmi2.X64;
 
-    using static Konst;        
-    using static z;
+    using static memory;
 
     partial class math
     {
@@ -64,30 +63,30 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static ref Pair<uint> mul(uint x, uint y, out Pair<uint> dst)                 
+        public static ref Pair<uint> mul(uint x, uint y, out Pair<uint> dst)
         {
             mul(x,y, out dst.Left, out dst.Right);
             return ref dst;
         }
-            
+
         [MethodImpl(Inline), Op]
-        public static unsafe ref Pair<uint> mul(in ConstPair<uint> src, ref Pair<uint> dst)                 
+        public static unsafe ref Pair<uint> mul(in ConstPair<uint> src, ref Pair<uint> dst)
         {
             dst.Right = MultiplyNoFlags(src.Left, src.Right, gptr(dst.Left));
             return ref dst;
         }
 
         [MethodImpl(Inline), Op]
-        public static unsafe ref Pair<ulong> mul(in ConstPair<ulong> src, ref Pair<ulong> dst)  
-        {               
-            dst.Right = Bmi2.X64.MultiplyNoFlags(src.Left, src.Right, z.gptr(dst.Left));
+        public static unsafe ref Pair<ulong> mul(in ConstPair<ulong> src, ref Pair<ulong> dst)
+        {
+            dst.Right = Bmi2.X64.MultiplyNoFlags(src.Left, src.Right, gptr(dst.Left));
             return ref dst;
         }
 
         [MethodImpl(Inline), Op]
-        public static ref Pair<ulong> mul(ulong x, ulong y, out Pair<ulong> dst)                 
+        public static ref Pair<ulong> mul(ulong x, ulong y, out Pair<ulong> dst)
         {
-            math.mul(x,y, out dst.Left, out dst.Right);
+            mul(x, y, out dst.Left, out dst.Right);
             return ref dst;
         }
     }

@@ -15,6 +15,7 @@ namespace Z0
         /// <param name="u"></param>
         /// <param name="v"></param>
         /// <remarks>See https://en.wikipedia.org/wiki/Binary_GCD_algorithm</remarks>
+        [Op]
         public static uint gcdbin(uint u, uint v)
         {
             // simple cases (termination)
@@ -53,6 +54,7 @@ namespace Z0
         /// <param name="u"></param>
         /// <param name="v"></param>
         /// <remarks>See https://en.wikipedia.org/wiki/Binary_GCD_algorithm</remarks>
+        [Op]
         public static ulong gcdbin(ulong u, ulong v)
         {
             // simple cases (termination)

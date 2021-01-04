@@ -13,7 +13,7 @@ namespace Z0.Schemas.Ecma
 
         public uint Flags;
 
-        public token TypeDefId;
+        public Token TypeDefId;
 
         public FK<name> TypeName;
 

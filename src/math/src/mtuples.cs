@@ -10,7 +10,7 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Bmi2;
     using static System.Runtime.Intrinsics.X86.Bmi2.X64;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     [ApiHost]
@@ -40,7 +40,7 @@ namespace Z0
         /// <param name="src">The source integers</param>
         /// <param name="dst">The multiplication result, partitioned into lo/hi parts</param>
         [MethodImpl(Inline), Op]
-        public static unsafe void mul32x64(in Pair<uint> src, ref Pair<uint> dst)                 
+        public static unsafe void mul32x64(in Pair<uint> src, ref Pair<uint> dst)
             => dst.Right = MultiplyNoFlags(src.Left, src.Right, gptr(dst.Left));
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace Z0
         /// <param name="dst">The multiplication result, partitioned into lo/hi parts</param>
         [MethodImpl(Inline), Op]
         public static Pair<uint> mul32x64(in Pair<uint> src)
-        {                         
+        {
             var dst = default(Pair<uint>);
             mul32x64(src, ref dst);
             return dst;
@@ -63,7 +63,7 @@ namespace Z0
         /// <param name="dst">The multiplication result, partitioned into lo/hi parts</param>
         [MethodImpl(Inline), Op]
         public static Pair<ulong> mul64x128(in Pair<ulong> src)
-        {                         
+        {
             var dst = default(Pair<ulong>);
             mul64x128(src, ref dst);
             return dst;
@@ -75,7 +75,7 @@ namespace Z0
         /// <param name="src">The source integers</param>
         /// <param name="dst">The multiplication result, partitioned into lo/hi parts</param>
         [MethodImpl(Inline), Op]
-        public static unsafe void mul64x128(in Pair<ulong> src, ref Pair<ulong> dst)                 
+        public static unsafe void mul64x128(in Pair<ulong> src, ref Pair<ulong> dst)
             => dst.Right = MultiplyNoFlags(src.Left, src.Right, gptr(dst.Left));
 
         /// <summary>
@@ -85,7 +85,7 @@ namespace Z0
         /// <param name="z">The multiplication result, partitioned into lo/hi parts</param>
         [MethodImpl(Inline), Op]
         public static ref Pair<ulong> mul64x128(in ulong a, in ulong b, ref Pair<ulong> z)
-        {                         
+        {
             mul64x128((a,b), ref z);
             return ref z;
         }
@@ -117,7 +117,7 @@ namespace Z0
             for(var i=0u; i<count; i++)
                 mul64x128(skip(first(xs), i), a, ref seek(first(zs), i));
         }
-        
+
         [MethodImpl(Inline), Op]
         public static ref ulong inc(ref ulong x)
         {

@@ -14,8 +14,8 @@ namespace Z0.Schemas.Ecma
 
         public DeclarativeSecurityAction Action;
 
-        public token Parent;
+        public Token Parent;
 
-        public FK<bytes> PermissionSet;
+        public FK<BlobIndex> PermissionSet;
     }
 }

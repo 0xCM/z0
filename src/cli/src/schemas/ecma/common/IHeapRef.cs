@@ -12,6 +12,6 @@ namespace Z0.Schemas.Ecma
     public interface IHeapRef<T>
         where T : unmanaged, IHeapRef<T>
     {
-        token Id {get;}
+        Token Id {get;}
     }
 }

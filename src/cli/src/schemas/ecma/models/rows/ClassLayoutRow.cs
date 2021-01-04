@@ -15,6 +15,6 @@ namespace Z0.Schemas.Ecma
 
         public uint ClassSize;
 
-        public token Parent;
+        public Token Parent;
     }
 }

@@ -8,6 +8,106 @@ namespace Z0.Schemas.Ecma
 
     class MetadataInfo
     {
+        public const string TableOverview = @"
+            22 Metadata logical format: tables
+            This clause defines the structures that describe metadata, and how they are cross-indexed. This corresponds to
+            how metadata is laid out, after being read into memory from a PE file. (For a description of metadata layout
+            inside the PE file itself, see §24)
+            Metadata is stored in two kinds of structure: tables (arrays of records) and heaps. There are four heaps in any
+            module: String, Blob, Userstring, and Guid. The first three are byte arrays (so valid indexes into these heaps
+            might be 0, 23, 25, 39, etc). The Guid heap is an array of GUIDs, each 16 bytes wide. Its first element is
+            numbered 1, its second 2, and so on.
+            Each entry in each column of each table is either a constant or an index.
+            Constants are either literal values (e.g., ALG_SID_SHA1 = 4, stored in the HashAlgId column of the Assembly
+            table), or, more commonly, bitmasks. Most bitmasks (they are almost all called Flags) are 2 bytes wide (e.g.,
+            the Flags column in the Field table), but there are a few that are 4 bytes (e.g., the Flags column in the TypeDef
+            table).
+            Each index is either 2 or 4 bytes wide. The index points into the same or another table, or into one of the four
+            heaps. The size of each index column in a table is only made 4 bytes if it needs to be for that particular
+            module. So, if a particular column indexes a table, or tables, whose highest row number fits in a 2-byte value,
+            the indexer column need only be 2 bytes wide. Conversely, for tables containing 64K or more rows, an indexer
+            of that table will be 4 bytes wide.
+            Indexes to tables begin at 1, so index 1 means the first row in any given metadata table. (An index value of
+            zero denotes that it does not index a row at all; that is, it behaves like a null reference.)
+            There are two kinds of columns that index a metadata table. (For details of the physical representation of these
+            tables, see §24.2.6):
+             Simple – such a column indexes one, and only one, table. For example, the FieldList column in
+            the TypeDef table always indexes the Field table. So all values in that column are simple
+            integers, giving the row number in the target table
+             Coded – such a column indexes any of several tables. For example, the Extends column in the
+            TypeDef table can index into the TypeDef or TypeRef table. A few bits of that index value are
+            reserved to define which table it targets. For the most part, this specification talks of index
+            values after being decoded into row numbers within the target table. However, the specification
+            includes a description of these coded indexes in the section that describes the physical layout of
+            Metadata (§24).
+            Metadata preserves name strings, as created by a compiler or code generator, unchanged. Essentially, it treats
+            each string as an opaque blob. In particular, it preserves case. The CLI imposes no limit on the length of
+            names stored in metadata and subsequently processed by the CLI.
+
+            Matching AssemblyRefs and ModuleRefs to their corresponding Assembly and Module shall be performed
+            case-blind (see Partition I). However, all other name matches (type, field, method, property, event) shall be
+            exact – so that this level of resolution is the same across all platforms, whether their OS is case-sensitive or not.
+            Tables are given both a name (e.g., 'Assembly') and a number (e.g., 0x20). The number for each table is listed
+            immediately with its title in the following subclauses. The table numbers indicate the order in which their
+            corresponding table shall appear in the PE file, and there is a set of bits (§24.2.6) saying whether a given table
+            exists or not. The number of a table is the position within that set of bits.
+
+            References to the methods or fields of a type are stored together in a metadata table called the MemberRef
+            table. However, sometimes, for clearer explanation, this standard distinguishes between these two kinds of
+            reference, calling them 'MethodRef' and 'FieldRef'.
+
+            Certain tables are required to be sorted by a primary key, as follows:
+            Table | Primary Key Column
+            ClassLayout | Parent
+            Constant | Parent
+            CustomAttribute | Parent
+            DeclSecurity | Parent
+            FieldLayout | Field
+            FieldMarshal | Parent
+            FieldRVA | Field
+            GenericParam | Owner
+            GenericParamConstraint | Owner
+            ImplMap | MemberForwarded
+            InterfaceImpl | Class
+            MethodImpl | Class
+            MethodSemantics | Association
+            NestedClass | NestedClass
+
+            Furthermore, the InterfaceImpl table is sorted using the Interface column as a secondary key, and the
+            GenericParam table is sorted using the Number column as a secondary key.
+            Finally, the TypeDef table has a special ordering constraint: the definition of an enclosing class shall precede
+            the definition of all classes it encloses.
+            Metadata items (records in the metadata tables) are addressed by metadata tokens. Uncoded metadata tokens
+            are 4-byte unsigned integers, which contain the metadata table index in the most significant byte and a 1-based
+            record index in the three least-significant bytes. Metadata tables and their respective indexes are described in
+            §22.2 and later subclauses.
+            Coded metadata tokens also contain table and record indexes, but in a different format. For details on the
+            encoding, see §24.2.6.
+        ";
+
+        public const string AssemblyTableDescription = @"
+            The Assembly table has the following columns:
+             HashAlgId (a 4-byte constant of type AssemblyHashAlgorithm, §23.1.1)
+             MajorVersion, MinorVersion, BuildNumber, RevisionNumber (each being 2-byte constants)
+             Flags (a 4-byte bitmask of type AssemblyFlags, §23.1.2)
+             PublicKey (an index into the Blob heap)
+             Name (an index into the String heap)
+             Culture (an index into the String heap)
+            The Assembly table is defined using the .assembly directive (§6.2); its columns are obtained from the
+            respective .hash algorithm, .ver, .publickey, and .culture (§6.2.1). (For an example, see §6.2.)
+
+            1. The Assembly table shall contain zero or one row [ERROR]
+            2. HashAlgId shall be one of the specified values [ERROR]
+            3. MajorVersion, MinorVersion, BuildNumber, and RevisionNumber can each have any value
+            4. Flags shall have only those values set that are specified [ERROR]
+            5. PublicKey can be null or non-null
+            6. Name shall index a non-empty string in the String heap [ERROR]
+            7. The string indexed by Name can be of unlimited length
+            8. Culture can be null or non-null
+            9. If Culture is non-null, it shall index a single string from the list specified (§23.1.3) [ERROR]
+            [Note: Name is a simple name (e.g., ―Foo‖, with no drive letter, no path, and no file extension); on POSIX-
+            compliant systems, Name contains no colon, no forward-slash, no backslash, and no period. end note]";
+
         public const string AssemblyRefTableRowDescription = @"
             The AssemblyRef table has the following columns:
              MajorVersion, MinorVersion, BuildNumber, RevisionNumber (each being 2-byte constants)
@@ -70,6 +170,7 @@ namespace Z0.Schemas.Ecma
             this generic parameter applies; more precisely, a TypeOrMethodDef (§24.2.6) coded index)
              Name (a non-null index into the String heap, giving the name for the generic parameter. This is
             purely descriptive and is used only by source language compilers and by Reflection)
+
             The GenericParam table stores the generic parameters used in generic type definitions and generic method
             definitions. These generic parameters can be constrained (i.e., generic arguments shall extend some class
             and/or implement certain interfaces) or unconstrained. (Such constraints are stored in the
@@ -168,45 +269,8 @@ namespace Z0.Schemas.Ecma
             ExportedType table should be empty [WARNING]
         ";
 
-        public const string EventDescription = @"
-            22.13 Event : 0x14
-            The Event table has the following columns:
-             EventFlags (a 2-byte bitmask of type EventAttributes, §23.1.4)
-             Name (an index into the String heap)
-             EventType (an index into a TypeDef, a TypeRef, or TypeSpec table; more precisely, a
-            TypeDefOrRef (§24.2.6) coded index) (This corresponds to the Type of the Event; it is not the
-            Type that owns this event.)
-            Note that Event information does not directly influence runtime behavior; what counts is the information stored
-            for each method that the event comprises.
-            The EventMap and Event tables result from putting the .event directive on a class (§18).
-
-            1. The Event table can contain zero or more rows
-            2. Each row shall have one, and only one, owner row in the EventMap table [ERROR]
-            3. EventFlags shall have only those values set that are specified (all combinations valid) [ERROR]
-            4. Name shall index a non-empty string in the String heap [ERROR]";
-
-        public const string EventMapDescription = @"
-            The EventMap table has the following columns:
-             Parent (an index into the TypeDef table)
-             EventList (an index into the Event table). It marks the first of a contiguous run of Events owned
-            by this Type. That run continues to the smaller of:
-            o the last row of the Event table
-            Partition II 137
-            o the next run of Events, found by inspecting the EventList of the next row in the
-            EventMap table
-            Note that EventMap info does not directly influence runtime behavior; what counts is the information stored for
-            each method that the event comprises.
-            The EventMap and Event tables result from putting the .event directive on a class (§18).
-
-            1. EventMap table can contain zero or more rows
-            2. There shall be no duplicate rows, based upon Parent (a given class has only one ‗pointer‘ to the
-            start of its event list) [ERROR]
-            3. There shall be no duplicate rows, based upon EventList (different classes cannot share rows in the
-            Event table) [ERROR]";
-
-
         public const string ClassLayoutDescription = @"
-                The ClassLayout table is used to define how the fields of a class or value type shall be laid out by the CLI.
+            The ClassLayout table is used to define how the fields of a class or value type shall be laid out by the CLI.
             (Normally, the CLI is free to reorder and/or insert gaps between the fields defined for a class or value type.)
             [Rationale: This feature is used to lay out a managed value type in exactly the same way as an unmanaged
             C struct, allowing a managed value type to be handed to unmanaged code, which then accesses the fields
@@ -221,6 +285,7 @@ namespace Z0.Schemas.Ecma
              PackingSize (a 2-byte constant)
              ClassSize (a 4-byte constant)
              Parent (an index into the TypeDef table)
+
             The rows of the ClassLayout table are defined by placing .pack and .size directives on the body of the type
             declaration in which this type is declared (§10.2). When either of these directives is omitted, its corresponding
             value is zero. (See §10.7.)
@@ -229,137 +294,32 @@ namespace Z0.Schemas.Ecma
             (default or specified) and natural alignment on the target, runtime platform.
 
             1. A ClassLayout table can contain zero or more rows
+
             2. Parent shall index a valid row in the TypeDef table, corresponding to a Class or ValueType (but
             not to an Interface) [ERROR]
-            132 Partition II
+
             3. The Class or ValueType indexed by Parent shall be SequentialLayout or ExplicitLayout
             (§23.1.15). (That is, AutoLayout types shall not own any rows in the ClassLayout table.)
             [ERROR]
+
             4. If Parent indexes a SequentialLayout type, then:
             o PackingSize shall be one of {0, 1, 2, 4, 8, 16, 32, 64, 128}. (0 means use the default
             pack size for the platform on which the application is running.) [ERROR]
             o If Parent indexes a ValueType, then ClassSize shall be less than 1 MByte (0x100000
-            bytes). [ERROR]";
+            bytes). [ERROR]
 
-        public const string ImplMapDescription = @"
-            The ImplMap table holds information about unmanaged methods that can be reached from managed code,
-            using PInvoke dispatch.
-            Each row of the ImplMap table associates a row in the MethodDef table (MemberForwarded) with the name of
-            a routine (ImportName) in some unmanaged DLL (ImportScope).
-            [Note: A typical example would be: associate the managed Method stored in row N of the Method table (so
-            MemberForwarded would have the value N) with the routine called ―GetEnvironmentVariable‖ (the string
-            indexed by ImportName) in the DLL called ―kernel32‖ (the string in the ModuleRef table indexed by
-            ImportScope). The CLI intercepts calls to managed Method number N, and instead forwards them as calls to
-            the unmanaged routine called ―GetEnvironmentVariable‖ in ―kernel32.dll‖ (including marshalling any
-            arguments, as required)
-            The CLI does not support this mechanism to access fields that are exported from a DLL, only methods. end
-            note]
-            The ImplMap table has the following columns:
-             MappingFlags (a 2-byte bitmask of type PInvokeAttributes, §23.1.7)
-             MemberForwarded (an index into the Field or MethodDef table; more precisely, a
-            MemberForwarded (§24.2.6) coded index). However, it only ever indexes the MethodDef table,
-            since Field export is not supported.
-             ImportName (an index into the String heap)
-             ImportScope (an index into the ModuleRef table)
-            A row is entered in the ImplMap table for each parent Method (§15.5) that is defined with a .pinvokeimpl
-            interoperation attribute specifying the MappingFlags, ImportName, and ImportScope.
+            5. If Parent indexes an ExplicitLayout type, then
+            o if Parent indexes a ValueType, then ClassSize shall be less than 1 MByte (0x100000
+            bytes) [ERROR] The current implementation allows 0x3F0000 bytes, but this might be reduced in the future
+            o PackingSize shall be 0. (It makes no sense to provide explicit offsets for each field, as
+            well as a packing size.) [ERROR]
 
-            1. ImplMap can contain zero or more rows
-            2. MappingFlags shall have only those values set that are specified [ERROR]
-            3. MemberForwarded shall index a valid row in the MethodDef table [ERROR]
-            4. The MappingFlags.CharSetMask (§23.1.7) in the row of the MethodDef table indexed by
-            MemberForwarded shall have at most one of the following bits set: CharSetAnsi ,
-            CharSetUnicode , or CharSetAuto (if none is set, the default is CharSetNotSpec ) [ERROR]
+            6. Note that an ExplicitLayout type might result in a verifiable type, provided the layout does not
 
-            The MappingFlags.CallConvMask in the row of the Method table indexed by MemberForwarded
-            shall have at most one of the following values: CallConvWinapi , CallConvCdecl ,
-            CallConvStdcall . It cannot have the value CallConvFastcall or CallConvThiscall . [ERROR]
-
-            ImportName shall index a non-empty string in the String heap [ERROR]
-            ImportScope shall index a valid row in the ModuleRef table [ERROR]
-
-            The row indexed in the MethodDef table by MemberForwarded shall have its Flags.PinvokeImpl
-            = 1, and Flags.Static = 1 [ERROR]";
-
-
-        public const string FileRvaDescription = @"
-            22.18 FieldRVA : 0x1D
-            The FieldRVA table has the following columns:
-             RVA (a 4-byte constant)
-             Field (an index into Field table)
-            Conceptually, each row in the FieldRVA table is an extension to exactly one row in the Field table, and records
-            the RVA (Relative Virtual Address) within the image file at which this field‘s initial value is stored.
-            A row in the FieldRVA table is created for each static parent field that has specified the optional data
-            label §16). The RVA column is the relative virtual address of the data in the PE file (§16.3).
-            1. RVA shall be non-zero [ERROR]
-            2. RVA shall point into the current module‘s data area (not its metadata area) [ERROR]
-            3. Field shall index a valid row in the Field table [ERROR]
-            4. Any field with an RVA shall be a ValueType (not a Class or an Interface). Moreover, it shall not
-            have any private fields (and likewise for any of its fields that are themselves ValueTypes). (If
-            any of these conditions were breached, code could overlay that global static and access its private
-            fields.) Moreover, no fields of that ValueType can be Object References (into the GC heap)
-            [ERROR]
-            5. So long as two RVA-based fields comply with the previous conditions, the ranges of memory
-            spanned by the two ValueTypes can overlap, with no further constraints. This is not actually an
-            additional rule; it simply clarifies the position with regard to overlapped RVA-based fields";
-
-
-        public const string MemberRefDescription = @"
-            22.25 MemberRef : 0x0A
-
-            The MemberRef table combines two sorts of references, to Methods and to Fields of a class, known as
-            ‗MethodRef‘ and ‗FieldRef‘, respectively. The MemberRef table has the following columns:
-             Class (an index into the MethodDef, ModuleRef,TypeDef, TypeRef, or TypeSpec tables; more
-            precisely, a MemberRefParent (§24.2.6) coded index)
-             Name (an index into the String heap)
-             Signature (an index into the Blob heap)
-            An entry is made into the MemberRef table whenever a reference is made in the CIL code to a method or field
-            which is defined in another module or assembly. (Also, an entry is made for a call to a method with a VARARG
-            signature, even when it is defined in the same module as the call site.)
-
-            1. Class shall be one of the following: [ERROR]
-            a. a TypeRef token, if the class that defines the member is defined in another module. (Note
-            that it is unusual, but valid, to use a TypeRef token when the member is defined in this same
-            module, in which case, its TypeDef token can be used instead.)
-            b. a ModuleRef token, if the member is defined, in another module of the same assembly, as a
-            global function or variable.
-            c. a MethodDef token, when used to supply a call-site signature for a vararg method that is
-            defined in this module. The Name shall match the Name in the corresponding MethodDef
-            row. The Signature shall match the Signature in the target method definition [ERROR]
-            d. a TypeSpec token, if the member is a member of a generic type
-            2. Class shall not be null (as this would indicate an unresolved reference to a global function or
-            variable) [ERROR]
-            3. Name shall index a non-empty string in the String heap [ERROR]
-
-            4. The Name string shall be a valid CLS identifier [CLS]
-            5. Signature shall index a valid field or method signature in the Blob heap. In particular, it shall
-            embed exactly one of the following ‗calling conventions‘: [ERROR]
-            a. DEFAULT (0x0)
-            b. VARARG (0x5)
-            c. FIELD (0x6)
-            d. GENERIC (0x10)
-            The above names are defined in the file inc\CorHdr.h as part of the SDK using the prefix
-            IMAGE_CEE_CS_CALLCONV
-
-            6. The MemberRef table shall contain no duplicates, where duplicate rows have the same Class,
-            Name, and Signature [WARNING]
-            7. Signature shall not have the VARARG (0x5) calling convention [CLS]
-            8. There shall be no duplicate rows, where Name fields are compared using CLS conflicting-
-            identifier-rules. (In particular, note that the return type and whether parameters are marked
-            ELEMENT_TYPE_BYREF (§23.1.16) are ignored in the CLS. For example, .method int32 M() and
-            .method float64 M() result in duplicate rows by CLS rules. Similarly, .method void
-            N(int32 i) and .method void N(int32& i) also result in duplicate rows by CLS rules.) [CLS]
-
-            Name shall not be of the form _VtblGapSequenceNumber<_CountOfSlots>—such methods are
-            dummies, used to pad entries in the vtable that CLI generates for COM interop. Such methods
-            cannot be called from managed or unmanaged code [ERROR]
-
-            9. If Class and Name resolve to a field, then that field shall not have a value of CompilerControlled
-            (§23.1.5) in its Flags.FieldAccessMask subfield [ERROR]
-            10. If Class and Name resolve to a method, then that method shall not have a value of
-            CompilerControlled in its Flags.MemberAccessMask (§23.1.10) subfield [ERROR]
-            11. The type containing the definition of a MemberRef shall be a TypeSpec representing an
-            instantiated type.";
+            create a type whose fields overlap.
+            7. Layout along the length of an inheritance chain shall follow the rules specified above (starting at
+            ‗highest‘ Type, with no ‗holes‘, etc.) [ERROR]
+            ";
 
         public const string ConstantRowDescription = @"
             The Constant table is used to store compile-time, constant values for fields, parameters, and properties.
@@ -554,6 +514,164 @@ namespace Z0.Schemas.Ecma
             6. PermissionSet shall index a 'blob' in the Blob heap [ERROR]
             7. The format of the 'blob' indexed by PermissionSet shall represent a valid, encoded CLI object
             graph. (The encoded form of all standardized permissions is specified in Partition IV.) [ERROR]";
+
+        public const string EventDescription = @"
+            22.13 Event : 0x14
+            The Event table has the following columns:
+             EventFlags (a 2-byte bitmask of type EventAttributes, §23.1.4)
+             Name (an index into the String heap)
+             EventType (an index into a TypeDef, a TypeRef, or TypeSpec table; more precisely, a
+            TypeDefOrRef (§24.2.6) coded index) (This corresponds to the Type of the Event; it is not the
+            Type that owns this event.)
+            Note that Event information does not directly influence runtime behavior; what counts is the information stored
+            for each method that the event comprises.
+            The EventMap and Event tables result from putting the .event directive on a class (§18).
+
+            1. The Event table can contain zero or more rows
+            2. Each row shall have one, and only one, owner row in the EventMap table [ERROR]
+            3. EventFlags shall have only those values set that are specified (all combinations valid) [ERROR]
+            4. Name shall index a non-empty string in the String heap [ERROR]";
+
+        public const string EventMapDescription = @"
+            The EventMap table has the following columns:
+             Parent (an index into the TypeDef table)
+             EventList (an index into the Event table). It marks the first of a contiguous run of Events owned
+            by this Type. That run continues to the smaller of:
+            o the last row of the Event table
+            Partition II 137
+            o the next run of Events, found by inspecting the EventList of the next row in the
+            EventMap table
+            Note that EventMap info does not directly influence runtime behavior; what counts is the information stored for
+            each method that the event comprises.
+            The EventMap and Event tables result from putting the .event directive on a class (§18).
+
+            1. EventMap table can contain zero or more rows
+            2. There shall be no duplicate rows, based upon Parent (a given class has only one ‗pointer‘ to the
+            start of its event list) [ERROR]
+            3. There shall be no duplicate rows, based upon EventList (different classes cannot share rows in the
+            Event table) [ERROR]";
+
+        public const string ImplMapDescription = @"
+            The ImplMap table holds information about unmanaged methods that can be reached from managed code,
+            using PInvoke dispatch.
+            Each row of the ImplMap table associates a row in the MethodDef table (MemberForwarded) with the name of
+            a routine (ImportName) in some unmanaged DLL (ImportScope).
+            [Note: A typical example would be: associate the managed Method stored in row N of the Method table (so
+            MemberForwarded would have the value N) with the routine called ―GetEnvironmentVariable‖ (the string
+            indexed by ImportName) in the DLL called ―kernel32‖ (the string in the ModuleRef table indexed by
+            ImportScope). The CLI intercepts calls to managed Method number N, and instead forwards them as calls to
+            the unmanaged routine called ―GetEnvironmentVariable‖ in ―kernel32.dll‖ (including marshalling any
+            arguments, as required)
+            The CLI does not support this mechanism to access fields that are exported from a DLL, only methods. end
+            note]
+            The ImplMap table has the following columns:
+             MappingFlags (a 2-byte bitmask of type PInvokeAttributes, §23.1.7)
+             MemberForwarded (an index into the Field or MethodDef table; more precisely, a
+            MemberForwarded (§24.2.6) coded index). However, it only ever indexes the MethodDef table,
+            since Field export is not supported.
+             ImportName (an index into the String heap)
+             ImportScope (an index into the ModuleRef table)
+            A row is entered in the ImplMap table for each parent Method (§15.5) that is defined with a .pinvokeimpl
+            interoperation attribute specifying the MappingFlags, ImportName, and ImportScope.
+
+            1. ImplMap can contain zero or more rows
+            2. MappingFlags shall have only those values set that are specified [ERROR]
+            3. MemberForwarded shall index a valid row in the MethodDef table [ERROR]
+            4. The MappingFlags.CharSetMask (§23.1.7) in the row of the MethodDef table indexed by
+            MemberForwarded shall have at most one of the following bits set: CharSetAnsi ,
+            CharSetUnicode , or CharSetAuto (if none is set, the default is CharSetNotSpec ) [ERROR]
+
+            The MappingFlags.CallConvMask in the row of the Method table indexed by MemberForwarded
+            shall have at most one of the following values: CallConvWinapi , CallConvCdecl ,
+            CallConvStdcall . It cannot have the value CallConvFastcall or CallConvThiscall . [ERROR]
+
+            ImportName shall index a non-empty string in the String heap [ERROR]
+            ImportScope shall index a valid row in the ModuleRef table [ERROR]
+
+            The row indexed in the MethodDef table by MemberForwarded shall have its Flags.PinvokeImpl
+            = 1, and Flags.Static = 1 [ERROR]";
+
+
+
+        public const string FileRvaDescription = @"
+            22.18 FieldRVA : 0x1D
+            The FieldRVA table has the following columns:
+             RVA (a 4-byte constant)
+             Field (an index into Field table)
+            Conceptually, each row in the FieldRVA table is an extension to exactly one row in the Field table, and records
+            the RVA (Relative Virtual Address) within the image file at which this field‘s initial value is stored.
+            A row in the FieldRVA table is created for each static parent field that has specified the optional data
+            label §16). The RVA column is the relative virtual address of the data in the PE file (§16.3).
+            1. RVA shall be non-zero [ERROR]
+            2. RVA shall point into the current module‘s data area (not its metadata area) [ERROR]
+            3. Field shall index a valid row in the Field table [ERROR]
+            4. Any field with an RVA shall be a ValueType (not a Class or an Interface). Moreover, it shall not
+            have any private fields (and likewise for any of its fields that are themselves ValueTypes). (If
+            any of these conditions were breached, code could overlay that global static and access its private
+            fields.) Moreover, no fields of that ValueType can be Object References (into the GC heap)
+            [ERROR]
+            5. So long as two RVA-based fields comply with the previous conditions, the ranges of memory
+            spanned by the two ValueTypes can overlap, with no further constraints. This is not actually an
+            additional rule; it simply clarifies the position with regard to overlapped RVA-based fields";
+
+
+        public const string MemberRefDescription = @"
+            22.25 MemberRef : 0x0A
+
+            The MemberRef table combines two sorts of references, to Methods and to Fields of a class, known as
+            ‗MethodRef‘ and ‗FieldRef‘, respectively. The MemberRef table has the following columns:
+             Class (an index into the MethodDef, ModuleRef,TypeDef, TypeRef, or TypeSpec tables; more
+            precisely, a MemberRefParent (§24.2.6) coded index)
+             Name (an index into the String heap)
+             Signature (an index into the Blob heap)
+            An entry is made into the MemberRef table whenever a reference is made in the CIL code to a method or field
+            which is defined in another module or assembly. (Also, an entry is made for a call to a method with a VARARG
+            signature, even when it is defined in the same module as the call site.)
+
+            1. Class shall be one of the following: [ERROR]
+            a. a TypeRef token, if the class that defines the member is defined in another module. (Note
+            that it is unusual, but valid, to use a TypeRef token when the member is defined in this same
+            module, in which case, its TypeDef token can be used instead.)
+            b. a ModuleRef token, if the member is defined, in another module of the same assembly, as a
+            global function or variable.
+            c. a MethodDef token, when used to supply a call-site signature for a vararg method that is
+            defined in this module. The Name shall match the Name in the corresponding MethodDef
+            row. The Signature shall match the Signature in the target method definition [ERROR]
+            d. a TypeSpec token, if the member is a member of a generic type
+            2. Class shall not be null (as this would indicate an unresolved reference to a global function or
+            variable) [ERROR]
+            3. Name shall index a non-empty string in the String heap [ERROR]
+
+            4. The Name string shall be a valid CLS identifier [CLS]
+            5. Signature shall index a valid field or method signature in the Blob heap. In particular, it shall
+            embed exactly one of the following ‗calling conventions‘: [ERROR]
+            a. DEFAULT (0x0)
+            b. VARARG (0x5)
+            c. FIELD (0x6)
+            d. GENERIC (0x10)
+            The above names are defined in the file inc\CorHdr.h as part of the SDK using the prefix
+            IMAGE_CEE_CS_CALLCONV
+
+            6. The MemberRef table shall contain no duplicates, where duplicate rows have the same Class,
+            Name, and Signature [WARNING]
+            7. Signature shall not have the VARARG (0x5) calling convention [CLS]
+            8. There shall be no duplicate rows, where Name fields are compared using CLS conflicting-
+            identifier-rules. (In particular, note that the return type and whether parameters are marked
+            ELEMENT_TYPE_BYREF (§23.1.16) are ignored in the CLS. For example, .method int32 M() and
+            .method float64 M() result in duplicate rows by CLS rules. Similarly, .method void
+            N(int32 i) and .method void N(int32& i) also result in duplicate rows by CLS rules.) [CLS]
+
+            Name shall not be of the form _VtblGapSequenceNumber<_CountOfSlots>—such methods are
+            dummies, used to pad entries in the vtable that CLI generates for COM interop. Such methods
+            cannot be called from managed or unmanaged code [ERROR]
+
+            9. If Class and Name resolve to a field, then that field shall not have a value of CompilerControlled
+            (§23.1.5) in its Flags.FieldAccessMask subfield [ERROR]
+            10. If Class and Name resolve to a method, then that method shall not have a value of
+            CompilerControlled in its Flags.MemberAccessMask (§23.1.10) subfield [ERROR]
+            11. The type containing the definition of a MemberRef shall be a TypeSpec representing an
+            instantiated type.";
+
 
         public const string FieldLayoutRowDescription = @"
             The FieldLayout table has the following columns:

@@ -20,7 +20,7 @@ namespace Z0.Schemas.Ecma
 
         public AssemblyFlags Flags;
 
-        public FK<bytes> AssemblyKey;
+        public FK<BlobIndex> AssemblyKey;
 
         public FK<name> AssemblyName;
 

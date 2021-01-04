@@ -6,11 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics.X86;
-    using static System.Runtime.Intrinsics.X86.Bmi2;
-    
-    using static Konst;        
-    using static z;
 
     partial class math
     {

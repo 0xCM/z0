@@ -11,8 +11,8 @@ namespace Z0.Schemas.Ecma
     {
         public RowKey Key;
 
-        public token Class;
+        public Token Class;
 
-        public token Interface;
+        public Token Interface;
     }
 }

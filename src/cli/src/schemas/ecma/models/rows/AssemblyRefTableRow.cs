@@ -18,7 +18,7 @@ namespace Z0.Schemas.Ecma
 
         public ClrAssemblyVersion Version;
 
-        public FK<bytes> PublicKeyToken;
+        public FK<BlobIndex> PublicKeyToken;
 
         public FK<name> Name;
 
@@ -26,6 +26,6 @@ namespace Z0.Schemas.Ecma
 
         public AssemblyFlags Flags;
 
-        public FK<bytes> HashValue;
+        public FK<BlobIndex> HashValue;
     }
 }

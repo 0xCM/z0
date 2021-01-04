@@ -12,8 +12,8 @@ namespace Z0.Schemas.Ecma
     {
         public RowKey Key;
 
-        public token MoveNextMethod;
+        public Token MoveNextMethod;
 
-        public token KickoffMethod;
+        public Token KickoffMethod;
     }
 }

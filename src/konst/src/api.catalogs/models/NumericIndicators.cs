@@ -12,8 +12,8 @@ namespace Z0
     using NI = NumericIndicator;
     using NK = NumericKinds;
 
-
-    using static Konst;
+    using static Part;
+    using static LimitValues;
 
     [LiteralProvider]
     public readonly struct NumericIndicators

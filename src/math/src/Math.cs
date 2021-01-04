@@ -5,16 +5,11 @@
 namespace Z0
 {
     using System.Runtime.CompilerServices;
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    [ApiHost]
+    [ApiHost, Free]
     public partial class math
     {
         internal const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
-    }
-
-    [ApiHost]
-    public partial class BmiMul
-    {
-
     }
 }

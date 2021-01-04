@@ -12,11 +12,11 @@ namespace Z0.Schemas.Ecma
     {
         public RowKey Key;
 
-        public FK<bytes> Name;
+        public FK<BlobIndex> Name;
 
         public FK<guid> HashAlgorithm;
 
-        public FK<bytes> Hash;
+        public FK<BlobIndex> Hash;
 
         public FK<guid> Language;
     }

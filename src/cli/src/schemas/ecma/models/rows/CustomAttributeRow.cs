@@ -13,6 +13,6 @@ namespace Z0.Schemas.Ecma
 
         public int Type;
 
-        public FK<byte> Value;
+        public FK<BlobIndex> Value;
     }
 }

@@ -14,7 +14,7 @@ namespace Z0.Schemas.Ecma
 
         public MethodSemanticsAttributes Semantic;
 
-        public token Method;
+        public Token Method;
 
         public int Association;
     }

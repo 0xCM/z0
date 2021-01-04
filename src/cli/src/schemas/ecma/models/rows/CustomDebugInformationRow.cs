@@ -12,10 +12,10 @@ namespace Z0.Schemas.Ecma
     {
         public RowKey Key;
 
-        public token Parent;
+        public Token Parent;
 
         public FK<Guid> Kind;
 
-        public FK<bytes> Value;
+        public FK<BlobIndex> Value;
     }
 }

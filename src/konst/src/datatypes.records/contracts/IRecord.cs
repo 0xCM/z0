@@ -10,15 +10,6 @@ namespace Z0
 
     using api = Records;
 
-    public readonly struct FK<T>
-    {
-        public Type ForeignType => typeof(T);
-
-        public uint Value {get;}
-
-        public FK(uint location)
-            => Value = location;
-    }
 
     [Free]
     public interface IRecord

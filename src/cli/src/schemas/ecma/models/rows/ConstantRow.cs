@@ -15,6 +15,6 @@ namespace Z0.Schemas.Ecma
 
         public int Parent;
 
-        public FK<bytes> Value;
+        public FK<BlobIndex> Value;
     }
 }

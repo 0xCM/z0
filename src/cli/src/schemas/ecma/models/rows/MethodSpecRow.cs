@@ -12,8 +12,8 @@ namespace Z0.Schemas.Ecma
     {
         public RowKey Key;
 
-        public token Method;
+        public Token Method;
 
-        public FK<bytes> Instantiation;
+        public FK<BlobIndex> Instantiation;
     }
 }

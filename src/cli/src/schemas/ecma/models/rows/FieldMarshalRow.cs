@@ -13,6 +13,6 @@ namespace Z0.Schemas.Ecma
 
         public int Parent;
 
-        public FK<byte> NativeType;
+        public FK<BlobIndex> NativeType;
     }
 }

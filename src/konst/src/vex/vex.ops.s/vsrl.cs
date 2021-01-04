@@ -11,8 +11,8 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Avx2;
     using static System.Runtime.Intrinsics.X86.Sse2;
 
-    using static z;
-    using static Konst;
+    using static Part;
+    using static LimitValues;
 
     partial struct z
     {
@@ -26,7 +26,7 @@ namespace Z0
         {
             var y = v8u(ShiftRightLogical(v64u(src), count));
             var m = vlsb(n128, n8, (byte)(8 - count),z8);
-            return z.vand(y,m);
+            return vand(y,m);
         }
 
         /// <summary>
@@ -37,9 +37,9 @@ namespace Z0
         [MethodImpl(Inline), Srl]
         public static Vector128<sbyte> vsrl(Vector128<sbyte> src, [Imm] byte count)
         {
-            var x = v16u(ShiftRightLogical(z.vinflate(src, n256, z16i),count));
-            var y = z.vand(x,v16u(z.vbroadcast(n256, byte.MaxValue)));
-            return v8i(z.vcompact8u(y,n128,z8));
+            var x = v16u(ShiftRightLogical(vinflate(src, n256, z16i),count));
+            var y = vand(x,v16u(vbroadcast(n256, byte.MaxValue)));
+            return v8i(vcompact8u(y,n128,z8));
         }
 
         /// <summary>
@@ -110,10 +110,10 @@ namespace Z0
         [MethodImpl(Inline), Srl]
         public static Vector256<sbyte> vsrl(Vector256<sbyte> src, [Imm] byte count)
         {
-            var x = v16u(ShiftRightLogical(vinflate(z.vlo(src), n256, z16i),count));
-            var y = v16u(ShiftRightLogical(vinflate(z.vhi(src), n256, z16i),count));
-            var m = v16u(z.vbroadcast(n256, byte.MaxValue));
-            return v8i(z.vcompact8u(z.vand(x,m), z.vand(y,m),n256,z8));
+            var x = v16u(ShiftRightLogical(vinflate(vlo(src), n256, z16i),count));
+            var y = v16u(ShiftRightLogical(vinflate(vhi(src), n256, z16i),count));
+            var m = v16u(vbroadcast(n256, byte.MaxValue));
+            return v8i(vcompact8u(vand(x,m), vand(y,m),n256,z8));
         }
 
         /// <summary>
@@ -126,7 +126,7 @@ namespace Z0
         {
             var y = v8u(ShiftRightLogical(v64u(src), count));
             var m = vlsb(n256, n8, (byte)(8 - count),z8);
-            return z.vand(y,m);
+            return vand(y,m);
         }
 
         /// <summary>
@@ -203,7 +203,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static Vector128<T> vlsb<T>(N128 w, N8 f, byte d, T t = default)
             where T : unmanaged
-                => generic<T>(z.vbroadcast<byte>(w, lsb8f(d)));
+                => generic<T>(vbroadcast<byte>(w, lsb8f(d)));
 
         /// <summary>
         /// The f least significant bits of each 8 bit segment are enabled
@@ -215,6 +215,6 @@ namespace Z0
         [MethodImpl(Inline)]
         static Vector256<T> vlsb<T>(N256 w, N8 f, byte d, T t = default)
             where T : unmanaged
-                => generic<T>(z.vbroadcast<byte>(w, lsb8f(d)));
+                => generic<T>(vbroadcast<byte>(w, lsb8f(d)));
     }
 }

@@ -12,8 +12,8 @@ namespace Z0.Schemas.Ecma
     {
         public RowKey Key;
 
-        public token NestedClass;
+        public Token NestedClass;
 
-        public token EnclosingClass;
+        public Token EnclosingClass;
     }
 }

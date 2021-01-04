@@ -10,39 +10,19 @@ namespace Z0.Schemas.Ecma
     using static Part;
 
     /// <summary>
-    /// Specifies a md token
-    /// </summary>
-    public struct token
-    {
-        public uint Value {get;}
-
-        [MethodImpl(Inline)]
-        public token(uint value)
-            => Value = value;
-
-        [MethodImpl(Inline)]
-        public static implicit operator token(uint src)
-            => new token(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator uint(token src)
-            => src.Value;
-    }
-
-    /// <summary>
     /// Specifies a sequence of bytes, otherwise known as a BLOB
     /// </summary>
     public struct bytes : IHeapRef<bytes>
     {
-        public token Id {get;}
+        public Token Id {get;}
 
         [MethodImpl(Inline)]
-        public bytes(token location)
+        public bytes(Token location)
             => Id = location;
 
         [MethodImpl(Inline)]
-        public static implicit operator FK<bytes>(bytes src)
-            => new FK<bytes>(src.Id);
+        public static implicit operator FK<BlobIndex>(bytes src)
+            => new FK<BlobIndex>(src.Id);
     }
 
     /// <summary>
@@ -50,9 +30,9 @@ namespace Z0.Schemas.Ecma
     /// </summary>
     public struct guid : IHeapRef<guid>
     {
-        public token Id {get;}
+        public Token Id {get;}
 
-        public guid(token location)
+        public guid(Token location)
             => Id = location;
 
         public static implicit operator FK<guid>(guid src)
@@ -64,9 +44,9 @@ namespace Z0.Schemas.Ecma
     /// </summary>
     public struct chars : IHeapRef<chars>
     {
-        public token Id {get;}
+        public Token Id {get;}
 
-        public chars(token location)
+        public chars(Token location)
             => Id = location;
 
         public static implicit operator FK<chars>(chars src)
@@ -75,9 +55,9 @@ namespace Z0.Schemas.Ecma
 
     public struct name
     {
-        public token Id {get;}
+        public Token Id {get;}
 
-        public name(token location)
+        public name(Token location)
             => Id = location;
 
         public static implicit operator FK<name>(name src)
@@ -89,9 +69,9 @@ namespace Z0.Schemas.Ecma
 
     public struct sig
     {
-        public token Id {get;}
+        public Token Id {get;}
 
-        public sig(token location)
+        public sig(Token location)
             => Id = location;
 
         public static implicit operator FK<sig>(sig src)

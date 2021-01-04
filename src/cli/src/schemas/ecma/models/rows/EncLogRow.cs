@@ -12,7 +12,7 @@ namespace Z0.Schemas.Ecma
     {
         public RowKey Key;
 
-        public token Token;
+        public Token Token;
 
         public byte FuncCode;
     }

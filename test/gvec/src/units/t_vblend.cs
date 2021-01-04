@@ -9,7 +9,8 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static HexConst;
-    using static Konst;
+    using static LimitValues;
+    using static Part;
     using static z;
 
     using M = BitMasks.Literals;
@@ -19,10 +20,10 @@ namespace Z0
         public void vblend_256x32f_outline()
         {
             var w = n256;
-            var x = z.vparts(w,0f, 1f, 2f, 3f, 4f, 5f, 6f, 7f);
-            var y = z.vparts(w,8f, 9f, 10f, 11f, 12f, 13f, 14f, 15f);
-            var spec = z.vparts(w,0f,-1,0f,-1,0f,-1,0f,-1);
-            var _z = z.vblendv(x,y,spec);
+            var a = vparts(w,0f, 1f, 2f, 3f, 4f, 5f, 6f, 7f);
+            var b = vparts(w,8f, 9f, 10f, 11f, 12f, 13f, 14f, 15f);
+            var spec = vparts(w,0f,-1,0f,-1,0f,-1,0f,-1);
+            var c = vblendv(a,b,spec);
         }
 
         public void vblend_256x8u_outline()

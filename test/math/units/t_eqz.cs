@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
 
-    using static Konst;
 
     public sealed class t_eqz : UnitTest<t_eqz>
     {
@@ -19,7 +18,7 @@ namespace Z0
                 if( i != j)
                     Claim.eq(result,0);
                 else
-                    Claim.eq(result, Max32u);
+                    Claim.eq(result, LimitValues.Max32u);
             }
         }
     }

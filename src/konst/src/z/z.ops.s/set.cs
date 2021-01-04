@@ -132,7 +132,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static sbyte set(sbyte src, byte pos, bool state)
         {
-            var c = ~@sbyte(state) + 1;
+            var c = ~memory.@sbyte(state) + 1;
             src ^= (sbyte)((c ^ src) & (1 << pos));
             return src;
         }

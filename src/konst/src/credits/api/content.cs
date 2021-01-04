@@ -94,7 +94,7 @@ namespace Z0
             var l1 = (ushort)((byte)n1 << (byte)ContentLevel.L1);
             var l2 = (ushort)((byte)n2 << (byte)ContentLevel.L2);
             var ct = (ushort)((byte)ContentType.Table << (byte)ContentLevel.Type);
-            return math.or(l0,l1,l2,ct);
+            return (ushort)(l0 | l1 | l2 | ct);
         }
 
         [MethodImpl(Inline), Op]
