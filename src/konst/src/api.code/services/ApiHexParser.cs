@@ -6,8 +6,8 @@ namespace Z0
 {
     using System;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static corefunc;
 
     public readonly struct ApiHexParser : ITextParser<ApiCodeBlock>
     {
@@ -23,11 +23,11 @@ namespace Z0
             try
             {
                 var parts = src.SplitClean(FieldDelimiter);
-                var parser = Parsers.hex(true);
+                var parser = HexParsers.bytes();
                 if(parts.Length != 3)
                     return unparsed<ApiCodeBlock>(src, $"components = {parts.Length} != 3");
 
-                var address = Parsers.hex().Parse(parts[(byte)ApiCodeField.Base]).ValueOrDefault();
+                var address = HexParsers.scalar().Parse(parts[(byte)ApiCodeField.Base]).ValueOrDefault();
                 var uri = ApiUri.parse(parts[(byte)ApiCodeField.Uri].Trim()).ValueOrDefault();
                 var bytes = parts[(byte)ApiCodeField.Encoded].SplitClean(HexFormatSpecs.DataDelimiter).Select(parser.Succeed);
                 return parsed(src, new ApiCodeBlock(address, uri, bytes));
@@ -37,6 +37,5 @@ namespace Z0
                 return unparsed<ApiCodeBlock>(src,e);
             }
         }
-
     }
 }

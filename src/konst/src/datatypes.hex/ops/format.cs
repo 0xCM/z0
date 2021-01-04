@@ -89,7 +89,6 @@ namespace Z0
              where T : unmanaged
                 => format64(uint64(src), postspec);
 
-
         [MethodImpl(Inline)]
         static string format_u<T>(T src, bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true)
             where T : unmanaged

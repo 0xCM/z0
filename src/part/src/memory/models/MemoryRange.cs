@@ -14,6 +14,10 @@ namespace Z0
     /// </summary>
     public readonly struct MemoryRange : IMemoryRange<MemoryRange>
     {
+        [MethodImpl(Inline)]
+        public static ITextParser<MemoryRange> parser()
+            => MemoryRangeParser.Service;
+
         /// <summary>
         /// The inclusive address at which the range begins
         /// </summary>

@@ -49,16 +49,16 @@ namespace Z0
             if(fields.Length != FieldCount)
                 return Empty;
 
-            var parser = Parsers.numeric<int>();
+            var parser = NumericParser.create<int>();
             var seq = parser.Parse(fields[0]).ValueOrDefault();
-            var address = z.address(Parsers.hex().Parse(fields[1]).ValueOrDefault());
+            var address = z.address(HexParsers.scalar().Parse(fields[1]).ValueOrDefault());
             var len = parser.Parse(fields[2]).ValueOrDefault();
             var term = Enums.parse<ExtractTermCode>(fields[3]).ValueOrDefault();
-            var uri = ApiUriParser.Service.Parse(fields[4]);
+            var uri = ApiUri.parse(fields[4]);
             if(uri.Failed)
                 sys.@throw($"{uri.Message}");
 
-            var data = fields[5].SplitClean(HexFormatSpecs.DataDelimiter).Select(Parsers.hex(true).Succeed);
+            var data = fields[5].SplitClean(HexFormatSpecs.DataDelimiter).Select(HexParsers.bytes().Succeed);
             var extract = new CodeBlock(address, data);
             return new R(seq, address, len, term, uri.Value, extract);
         }

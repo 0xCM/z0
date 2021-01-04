@@ -11,29 +11,16 @@ namespace Z0
 
     partial struct z
     {
-        /// <summary>
-        /// Defines a successful parse result
-        /// </summary>
-        /// <param name="source">The input vaue</param>
-        /// <param name="value">The parsed value</param>
-        /// <typeparam name="S">The source type</typeparam>
-        /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline)]
-        public static ParseResult<S,T> parsed<S,T>(S source, T value)
-            => ParseResult<S,T>.Success(source, value);
+        public static ParseResult<S,T> parsed<S,T>(S src, T value)
+            => corefunc.parsed(src, value);
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ParseResult<T> parsed<T>(char source, T value)
-            => ParseResult<T>.Success(source.ToString(), value);
+        [MethodImpl(Inline)]
+        public static ParseResult<T> parsed<T>(char src, T value)
+            => corefunc.parsed(src, value);
 
-        /// <summary>
-        /// Defines a parse success result
-        /// </summary>
-        /// <param name="src">The parsed thing</param>
-        /// <param name="value">The value that was successfully hydrated from the source/param>
-        /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline)]
         public static ParseResult<T> parsed<T>(object src, T value)
-            => ParseResult.win(src?.ToString() ?? EmptyString, value);
+            => corefunc.parsed(src, value);
     }
 }

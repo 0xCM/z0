@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     partial class BitGrid
@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="src">The source grid</param>
         /// <param name="block">The block index</param>
         /// <typeparam name="T">The storage segment type</typeparam>
-        [MethodImpl(Inline), Store, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Store, Closures(Closure)]
         public static void store<T>(Vector256<T> src, in BitGrid<T> dst, int block)
             where T : unmanaged
                 => vsave(src, ref dst.Data.BlockRef(block));

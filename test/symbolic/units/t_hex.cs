@@ -61,7 +61,7 @@ namespace Z0
 
         public void hexdigits_parse()
         {
-            var parser = Parsers.hex(true);
+            var parser = HexParsers.bytes();
             Claim.eq((byte)0, parser.Parse('0').Value);
             Claim.eq((byte)1, parser.Parse('1').Value);
             Claim.eq((byte)2, parser.Parse('2').Value);

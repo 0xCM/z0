@@ -36,7 +36,7 @@ namespace Z0
 
         [Op, Closures(Closure)]
         public static TableEmission<T> emit<T>(Index<T> src, RowFormatSpec spec, FS.FilePath dst)
-            where T : struct
+            where T : struct, IRecord<T>
         {
             var count = src.Count;
             var data = src.View;
@@ -51,7 +51,7 @@ namespace Z0
 
         [Op, Closures(Closure)]
         public static TableEmission<T> emit<T>(Index<T> src, ReadOnlySpan<byte> widths, FS.FilePath dst)
-            where T : struct
+            where T : struct, IRecord<T>
                 => emit(src, rowspec<T>(widths), dst);
     }
 }

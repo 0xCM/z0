@@ -18,16 +18,16 @@ namespace Z0
             => CliReader.AssemblyReferences.ToReadOnlySpan();
 
         [MethodImpl(Inline), Op]
-        public ReadOnlySpan<CliAssemblyRef> AssemblyDependencies()
+        public ReadOnlySpan<AssemblyRefInfo> AssemblyDependencies()
         {
             var src = AssemblyReferenceHandles();
-            var dst = alloc<CliAssemblyRef>(src.Length);
+            var dst = alloc<AssemblyRefInfo>(src.Length);
             Read(src, dst);
             return dst;
         }
 
         [MethodImpl(Inline), Op]
-        public void Read(ReadOnlySpan<AssemblyReferenceHandle> src, Span<CliAssemblyRef> dst)
+        public void Read(ReadOnlySpan<AssemblyReferenceHandle> src, Span<AssemblyRefInfo> dst)
         {
             var count = src.Length;
             for(var i=0u; i<count; i++)
@@ -38,7 +38,7 @@ namespace Z0
         }
 
         [Op]
-        public ref CliAssemblyRef Read(AssemblyReference src, ref CliAssemblyRef dst)
+        public ref AssemblyRefInfo Read(AssemblyReference src, ref AssemblyRefInfo dst)
         {
             dst.Source = CliReader.GetAssemblyDefinition().GetAssemblyName();
             dst.Target = src.GetAssemblyName();

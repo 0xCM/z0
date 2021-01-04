@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
 
     public readonly struct RecordSink<T> : IRecordSink<T>
-        where T : struct
+        where T : struct, IRecord<T>
     {
         readonly Receiver<T> Receiver;
 

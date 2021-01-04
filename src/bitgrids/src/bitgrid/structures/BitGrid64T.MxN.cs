@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     /// <summary>
@@ -145,6 +145,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool operator !=(BitGrid64<M,N,T> g1, BitGrid64<M,N,T> g2)
             => !g1.Equals(g2);
-
     }
 }

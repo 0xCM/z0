@@ -8,7 +8,6 @@ namespace Z0
 
     using static Part;
 
-    [ApiHost("api.parsers.part")]
     public readonly struct ApiPartIdParser : IPartIdParser
     {
         [Op]

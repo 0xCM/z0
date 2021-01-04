@@ -18,6 +18,31 @@ namespace Z0
             wf.EmittedTable<ApiCodeDescriptor>(count, dst);
         }
 
+        public static Outcome emit(IWfShell wf, ApiCodeBlockIndex src, FS.FilePath dst)
+        {
+            var svc = ApiIndex.service(wf);
+            Array.Sort(src.CodeBlocks.Storage);
+            var blocks = src.CodeBlocks.View;
+            var count = blocks.Length;
+            var buffer = sys.alloc<ApiHexIndexRow>(count);
+            var target = span(buffer);
+            using var emitter = Records.emitter<ApiHexIndexRow>(sys.array<byte>(10, 16, 20, 20, 20, 120), dst);
+            emitter.EmitHeader();
+            for(var i=0u; i<count; i++)
+            {
+                ref readonly var block = ref skip(blocks,i);
+                ref var record = ref seek(target, i);
+                record.Seqence = i;
+                record.Address = block.BaseAddress;
+                record.Component = block.OpUri.Part.Format();
+                record.HostName = block.OpUri.Host.Name;
+                record.MethodName = block.OpId.Name;
+                record.Uri = block.Uri;
+                emitter.Emit(record);
+            }
+            return true;
+        }
+
         [Op]
         public static uint emit(ReadOnlySpan<ApiCodeDescriptor> src, FS.FilePath dst)
         {

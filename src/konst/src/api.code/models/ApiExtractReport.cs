@@ -37,13 +37,13 @@ namespace Z0
             if(fields.Length != FieldCount)
                 return EmptyBlock;
 
-            var parser = Parsers.numeric<int>();
+            var parser = NumericParser.create<int>();
             var seq = parser.Parse(fields[0]).ValueOrDefault();
-            var address = z.address(Parsers.hex().Parse(fields[1]).ValueOrDefault());
+            var address = z.address(HexParsers.scalar().Parse(fields[1]).ValueOrDefault());
             var len = parser.Parse(fields[2]).ValueOrDefault();
-            var uri = ApiUriParser.Service.Parse(fields[3]).ValueOrDefault(OpUri.Empty);
+            var uri = ApiUri.parse(fields[3]).ValueOrDefault(OpUri.Empty);
             var sig = fields[4];
-            var data = fields[5].SplitClean(HexFormatSpecs.DataDelimiter).Select(Parsers.hex(true).Succeed).ToArray();
+            var data = fields[5].SplitClean(HexFormatSpecs.DataDelimiter).Select(HexParsers.bytes().Succeed).ToArray();
             var extract = new CodeBlock(address, data);
             return new ApiExtractBlock(seq, address, len, uri, sig, extract);
         }

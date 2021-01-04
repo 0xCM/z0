@@ -69,7 +69,7 @@ namespace Z0
             Wf.Ran(flow, EmissionCount);
         }
 
-        static string format(in CliCil src)
+        static string format(in CilRecord src)
         {
             var dst = EmptyString.Build();
             dst.Append(FieldDelimiter);
@@ -96,7 +96,7 @@ namespace Z0
 
         uint Emit(IPart part)
         {
-            var dst = Wf.Db().Table(part.Id, CliCil.TableId, FileExtensions.Csv);
+            var dst = Wf.Db().Table(part.Id, CilRecord.TableId, FileExtensions.Csv);
 
             var methods = CliFileReader.cil(part.Id, FS.path(part.Owner.Location));
             var count = (uint)methods.Length;
@@ -108,7 +108,7 @@ namespace Z0
                 for(var i=0u; i<count; i++)
                     writer.WriteLine(format(skip(methods,i)));
 
-                Wf.EmittedTable<CliCil>(count, dst);
+                Wf.EmittedTable<CilRecord>(count, dst);
             }
 
             return count;

@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     partial class BitGrid
@@ -40,12 +40,12 @@ namespace Z0
         /// <param name="n">The width selector</param>
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Ones, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Ones, Closures(Closure)]
         public static BitGrid64<T> ones<T>(N64 n)
             where T : unmanaged
                 => init64<T>(ulong.MaxValue);
 
-        [MethodImpl(Inline), Ones, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Ones, Closures(Closure)]
         public static ref readonly BitGrid<T> ones<T>(in BitGrid<T> dst)
             where T : unmanaged
         {

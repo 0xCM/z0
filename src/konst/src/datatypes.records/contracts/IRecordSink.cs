@@ -8,13 +8,21 @@ namespace Z0
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
+    public interface IRecordSink
+    {
+        void Deposit(IRecord src);
+    }
+
     [Free]
-    public interface IRecordSink<T> : ISink<T>
-        where T : struct
+    public interface IRecordSink<T> : IRecordSink, ISink<T>
+        where T : struct, IRecord<T>
     {
         void Deposit(in T src);
 
         void ISink<T>.Deposit(T src)
             => Deposit(in src);
+
+        void IRecordSink.Deposit(IRecord src)
+            => Deposit((T)src);
     }
 }

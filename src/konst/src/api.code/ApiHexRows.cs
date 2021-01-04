@@ -11,8 +11,6 @@ namespace Z0
     using static z;
 
     using F = ApiHexField;
-    using W = ApiHexFieldWidth;
-    using I = ApiHexFieldIndex;
 
     [ApiHost]
     public readonly partial struct ApiHexRows
@@ -130,8 +128,8 @@ namespace Z0
                 dst.Address = MemoryAddressParser.succeed(fields[index++]);
                 dst.Length = NumericParser.succeed<int>(fields[index++]);
                 dst.TermCode = Enums.parse(fields[index++], ExtractTermCode.None);
-                dst.Uri = ApiUriParser.Service.Parse(fields[index++]).Require();
-                dst.Data = new CodeBlock(dst.Address, Parsers.hex(true).ParseData(fields[index++], sys.empty<byte>()));
+                dst.Uri = ApiUri.parse(fields[index++]).Require();
+                dst.Data = new CodeBlock(dst.Address, HexParsers.bytes().ParseData(fields[index++], sys.empty<byte>()));
                 return ParseResult.win(src, dst);
             }
             catch(Exception e)

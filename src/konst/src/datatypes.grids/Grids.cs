@@ -13,6 +13,5 @@ namespace Z0
     public readonly partial struct Grids
     {
         const NumericKind Closure = UnsignedInts;
-
     }
 }

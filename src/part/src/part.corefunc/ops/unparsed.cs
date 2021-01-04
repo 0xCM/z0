@@ -11,7 +11,7 @@ namespace Z0
 
     partial struct corefunc
     {
-       /// <summary>
+        /// <summary>
         /// Defines a parse result that signals failure
         /// </summary>
         /// <param name="source">The input value</param>

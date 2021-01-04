@@ -18,7 +18,7 @@ namespace Z0
         /// <typeparam name="T">The record type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static RecordFormatter<T> formatter<T>(RowFormatSpec spec)
-            where T : struct
+            where T : struct, IRecord<T>
                 => new RecordFormatter<T>(spec);
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace Z0
         /// <typeparam name="T">The record type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static RecordFormatter<T> formatter<T>(ReadOnlySpan<byte> widths)
-            where T : struct
+            where T : struct, IRecord<T>
                 => formatter<T>(rowspec<T>(widths));
     }
 }

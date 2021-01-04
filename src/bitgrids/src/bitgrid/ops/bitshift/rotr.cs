@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     partial class BitGrid
     {
@@ -20,7 +20,7 @@ namespace Z0
         public static BitGrid32<T> rotr<T>(BitGrid32<T> g, byte offset)
             where T : unmanaged
                 => init32<T>(Bits.rotr(g, offset));
-        
+
         [MethodImpl(Inline), Rotr, Closures(UnsignedInts)]
         public static BitGrid64<T> rotr<T>(BitGrid64<T> g, byte offset)
             where T : unmanaged

@@ -15,12 +15,12 @@ namespace Z0
 
     partial class PeTableReader
     {
-        public ReadOnlySpan<CliField> Fields()
+        public ReadOnlySpan<ClrFieldInfo> Fields()
         {
             var reader = State.Reader;
             var handles = reader.FieldDefinitions.ToReadOnlySpan();
             var count = handles.Length;
-            var dst = Spans.alloc<CliField>(count);
+            var dst = Spans.alloc<ClrFieldInfo>(count);
 
             for(var i=0u; i<count; i++)
             {
@@ -28,7 +28,7 @@ namespace Z0
                 var entry = reader.GetFieldDefinition(handle);
                 int offset = entry.GetOffset();
 
-                seek(dst,i) = new CliField(i, name(State, entry, i), sig(State, entry, i), format(entry.Attributes));
+                seek(dst,i) = new ClrFieldInfo(i, name(State, entry, i), sig(State, entry, i), format(entry.Attributes));
             }
             return dst;
         }

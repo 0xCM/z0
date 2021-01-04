@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     partial class BitGrid
     {
@@ -17,8 +17,8 @@ namespace Z0
         /// <param name="cell">The data to replicate across all grid cells</param>
         /// <param name="dst">The target grid</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Broadcast, Closures(UnsignedInts)]
-        public static ref readonly BitGrid<T> broadcast<T>(T cell, in BitGrid<T> dst)            
+        [MethodImpl(Inline), Broadcast, Closures(Closure)]
+        public static ref readonly BitGrid<T> broadcast<T>(T cell, in BitGrid<T> dst)
             where T : unmanaged
         {
             dst.Content.Fill(cell);

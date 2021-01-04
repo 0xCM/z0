@@ -14,9 +14,9 @@ namespace Z0
     {
         public Type ForeignType => typeof(T);
 
-        public ulong Value {get;}
+        public uint Value {get;}
 
-        public FK(ulong location)
+        public FK(uint location)
             => Value = location;
     }
 

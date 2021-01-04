@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     partial class BitGrid
@@ -26,15 +26,6 @@ namespace Z0
             }
             return dst.As<T>();
         }
-
-        [MethodImpl(Inline)]
-        internal static BitGrid128<P,Q,T> resize<M,N,P,Q,T>(in BitGrid128<M,N,T> src, P p = default, Q q = default)
-            where M : unmanaged, ITypeNat
-            where N : unmanaged, ITypeNat
-            where P : unmanaged, ITypeNat
-            where Q : unmanaged, ITypeNat
-            where T : unmanaged
-                => src.Content;
 
 
         [MethodImpl(Inline), Op]

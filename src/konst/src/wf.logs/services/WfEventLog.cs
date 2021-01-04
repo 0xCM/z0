@@ -86,6 +86,14 @@ namespace Z0
         public void Deposit(IAppEvent e)
             => Emit(e);
 
+        public void Deposit(object src)
+        {
+            if(src is IWfEvent e)
+                Deposit(e);
+            else if(src is IAppMsg m)
+                Deposit(m);
+        }
+
         [MethodImpl(Inline)]
         public void Deposit(IWfEvent e)
         {

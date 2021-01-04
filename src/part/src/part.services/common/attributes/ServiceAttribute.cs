@@ -11,5 +11,17 @@ namespace Z0
     public class ServiceAttribute : Attribute
     {
 
+        public ServiceAttribute()
+        {
+            ContractType = typeof(void);
+        }
+
+        public ServiceAttribute(Type contract)
+        {
+            ContractType = contract;
+        }
+
+        public Type ContractType {get;}
     }
+
 }

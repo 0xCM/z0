@@ -9,8 +9,6 @@ namespace Z0
     using System.Reflection;
     using System.Reflection.Metadata;
 
-    using static Konst;
-    using static z;
 
     partial class PeTableReader
     {

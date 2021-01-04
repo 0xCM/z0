@@ -13,7 +13,7 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static RecordSink<T> sink<T>(Receiver<T> dst)
-            where T : struct
+            where T : struct, IRecord<T>
                 => new RecordSink<T>(dst);
     }
 }

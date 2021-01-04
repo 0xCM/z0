@@ -9,7 +9,7 @@ namespace Z0
     using System.Reflection.Metadata;
     using System.Reflection.Metadata.Ecma335;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     partial class PeTableReader

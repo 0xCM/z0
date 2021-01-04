@@ -10,7 +10,7 @@ namespace Z0
     using System.Linq;
     using System.Reflection;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Correlates operation identifiers and coded members

@@ -19,9 +19,9 @@ namespace Z0.Asm
         public const char CommentMarker = Chars.Semicolon;
 
         [Op]
-        public static bool parse(string[] lines, out AsmRoutineHeader dst)
+        public static bool parse(string[] lines, out AsmBlockHeader dst)
         {
-            var fail = ParseResult.fail<AsmRoutineHeader>(lines.Concat(Chars.NL));
+            var fail = ParseResult.fail<AsmBlockHeader>(lines.Concat(Chars.NL));
             dst = default;
 
             if(lines.Length < 4)
@@ -29,7 +29,7 @@ namespace Z0.Asm
 
             var l0 = lines[0].RightOfFirst(CommentMarker);
             var sig = l0.LeftOfFirst(LocatedMarker);
-            var uriParse = ApiUriParser.Service.Parse(text.concat(LocatedMarker,l0.RightOfFirst(LocatedMarker)));
+            var uriParse = ApiUri.parse(text.concat(LocatedMarker,l0.RightOfFirst(LocatedMarker)));
             if(uriParse.Failed)
                 return fail;
 
@@ -42,7 +42,7 @@ namespace Z0.Asm
             var tcText = l3Parts.Length == 2 ? l3Parts[1] : string.Empty;
             var tcVal = Enums.parse(tcText, ExtractTermCode.None);
 
-            dst = new AsmRoutineHeader(uri, sig, prop, @base, tcVal);
+            dst = new AsmBlockHeader(uri, sig, prop, @base, tcVal);
             return true;
         }
     }

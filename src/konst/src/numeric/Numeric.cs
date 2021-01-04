@@ -13,6 +13,7 @@ namespace Z0
     [ApiHost]
     public readonly partial struct Numeric
     {
+
         const NumericKind Closure = AllNumeric;
 
         /// <summary>

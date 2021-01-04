@@ -13,7 +13,7 @@ namespace Z0
     [ApiHost]
     public sealed class EmitAssemblyRefs : CmdHost<EmitAssemblyRefs, EmitAssemblyRefsCmd>
     {
-        public static ReadOnlySpan<byte> RenderWidths => new byte[CliAssemblyRef.FieldCount]{48, 48};
+        public static ReadOnlySpan<byte> RenderWidths => new byte[AssemblyRefInfo.FieldCount]{48, 48};
 
         [Op]
         public static EmitAssemblyRefsCmd specify(IWfShell wf, Files src, FS.FilePath dst)
@@ -30,7 +30,7 @@ namespace Z0
             var srcCount = sources.Length;
 
             using var writer = cmd.Target.Writer();
-            var formatter = TableFormatter.row<CliAssemblyRef>(RenderWidths);
+            var formatter = TableFormatter.row<AssemblyRefInfo>(RenderWidths);
             writer.WriteLine(formatter.FormatHeader());
 
             for(var k=0u; k<srcCount; k++)

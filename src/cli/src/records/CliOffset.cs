@@ -15,8 +15,6 @@ namespace Z0
     {
         public const string TableId = "cli.offsets";
 
-        public const byte FieldCount = 2;
-
         public string Name;
 
         public ulong Value;
