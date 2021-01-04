@@ -20,7 +20,15 @@ namespace Z0
     }
 
     [Free]
-    public interface ICmdResult<P> : ICmdResult
+    public interface ICmdResult<C> : ICmdResult
+        where C : struct, ICmdSpec
+    {
+        C Cmd {get;}
+    }
+
+    [Free]
+    public interface ICmdResult<C,P> : ICmdResult<C>
+        where C : struct, ICmdSpec
     {
         P Payload {get;}
     }

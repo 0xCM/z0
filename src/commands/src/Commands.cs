@@ -9,7 +9,7 @@ namespace Z0
     using System.Reflection;
     using System.Threading.Tasks;
 
-    using static Konst;
+    using static Part;
 
     public readonly struct Commands
     {

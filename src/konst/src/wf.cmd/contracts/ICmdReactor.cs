@@ -19,23 +19,22 @@ namespace Z0
     }
 
     [Free]
-    public interface ICmdReactor<S> : ICmdReactor
-        where S : struct, ICmdSpec<S>
+    public interface ICmdReactor<C> : ICmdReactor
+        where C : struct, ICmdSpec
     {
         CmdId ICmdReactor.CmdId
-            => default(S).CmdId;
+            => default(C).CmdId;
 
-        CmdResult Invoke(S src);
-
+        CmdResult<C> Invoke(C src);
     }
+
     [Free]
-    public interface ICmdReactor<S,T> : ICmdReactor
-        where S : struct, ICmdSpec<S>
-        where T : struct
+    public interface ICmdReactor<C,T> : ICmdReactor
+        where C : struct, ICmdSpec
     {
         CmdId ICmdReactor.CmdId
-            => default(S).CmdId;
+            => default(C).CmdId;
 
-        CmdResult<T> Invoke(S src);
+        CmdResult<C,T> Invoke(C Cmd);
     }
 }

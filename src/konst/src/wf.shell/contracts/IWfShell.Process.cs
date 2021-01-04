@@ -37,7 +37,7 @@ namespace Z0
 
         void Created(WfStepId id)
         {
-            if(Verbosity.Babble())
+            if(Verbosity.IsBabble())
                 Raise(created(id, Ct));
         }
 
@@ -47,7 +47,7 @@ namespace Z0
         void Created<H>(H host)
             where H : IWfHost<H>, new()
         {
-            if(Verbosity.Babble())
+            if(Verbosity.IsBabble())
                 Raise(created(host.Id, Ct));
         }
     }

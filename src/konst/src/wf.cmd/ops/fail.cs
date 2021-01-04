@@ -9,16 +9,22 @@ namespace Z0
 
     partial struct Cmd
     {
-        public static CmdResult fail<T>(T spec)
-            where T : ICmdSpec
-                => new CmdResult(spec.CmdId, false);
+        public static CmdResult fail(ICmdSpec cmd)
+            => new CmdResult(cmd.CmdId, false);
 
-        public static CmdResult fail<T>(T spec, Exception e)
-            where T : ICmdSpec
-                => new CmdResult(spec.CmdId, e);
+        public static CmdResult fail(ICmdSpec cmd, Exception e)
+            => new CmdResult(cmd.CmdId, e);
 
-        public static CmdResult fail<T>(T spec, string message)
-            where T : ICmdSpec
-                => new CmdResult(spec.CmdId, false, message);
+        public static CmdResult<C> fail<C>(C cmd)
+            where C : struct, ICmdSpec
+                => new CmdResult<C>(cmd, false);
+
+        public static CmdResult<C> fail<C>(C cmd, Exception e)
+            where C : struct, ICmdSpec
+                => new CmdResult<C>(cmd, e);
+
+        public static CmdResult<C> fail<C>(C cmd, string message)
+            where C : struct, ICmdSpec
+                => new CmdResult<C>(cmd, false, message);
     }
 }

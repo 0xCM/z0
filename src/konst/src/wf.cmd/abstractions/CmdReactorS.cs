@@ -8,7 +8,7 @@ namespace Z0
 
     [CmdReactor]
     public abstract class CmdReactor<S> : ICmdReactor<S>
-        where S : struct, ICmdSpec<S>
+        where S : struct, ICmdSpec
     {
         protected WfHost Host;
 
@@ -22,16 +22,17 @@ namespace Z0
 
         protected abstract CmdResult Run(S cmd);
 
-        public CmdResult Invoke(S cmd)
+        public CmdResult<S> Invoke(S cmd)
         {
             try
             {
-                return Run(cmd);
+                var result = Run(cmd);
+                return new CmdResult<S>(cmd, result.Succeeded, result.Message);
             }
             catch(Exception e)
             {
                 Wf.Error(e);
-                return new CmdResult(cmd.CmdId, e);
+                return new CmdResult<S>(cmd, e);
             }
         }
 

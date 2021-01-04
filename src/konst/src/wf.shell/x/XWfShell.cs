@@ -6,27 +6,45 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Threading.Tasks;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
-    [ApiHost(ApiNames.WfShellX, true)]
+    [ApiHost(ApiNames.XWfShell, true)]
     public static partial class XWFShell
     {
         [MethodImpl(Inline), Op]
-        public static bool Babble(this LogLevel src)
+        public static bool IsBabble(this LogLevel src)
             => src == LogLevel.Babble;
 
-        /// <summary>
-        /// Registers an event receiver to which brokered events will be relayed
-        /// </summary>
-        /// <param name="e">An event representative</param>
-        /// <param name="broker">The broker</param>
-        /// <param name="receiver">The handler invoked upon event occurrence</param>
-        /// <typeparam name="E">The event type</typeparam>
-        [MethodImpl(Inline)]
-        public static Outcome Subscribe<E>(this E e, IWfBroker broker, Action<E> receiver)
-            where E : IWfEvent
-                => broker.Subscribe(receiver, e);
+        [MethodImpl(Inline), Op]
+        public static bool IsStatus(this LogLevel src)
+            => src == LogLevel.Status;
+
+        [MethodImpl(Inline), Op]
+        public static bool IsWarning(this LogLevel src)
+            => src == LogLevel.Warning;
+
+        [MethodImpl(Inline), Op]
+        public static bool IsError(this LogLevel src)
+            => src == LogLevel.Error;
+
+        [Op]
+        public static Task<CmdResult> Dispatch<T>(this T cmd, IWfShell wf)
+            where T : struct, ICmdSpec
+                => wf.Dispatch(cmd);
+
+        [Op]
+        public static CmdResult Run<T>(this T cmd, IWfShell wf)
+            where T : struct, ICmdSpec
+        {
+            var task = wf.Dispatch(cmd);
+            task.Wait();
+            return task.Result;
+        }
+
+        public static Task Continue<T>(this Task<T> src, Action<T> @continue)
+            where T : struct, ICmdSpec
+                => src.ContinueWith(t => @continue(t.Result));
     }
 }

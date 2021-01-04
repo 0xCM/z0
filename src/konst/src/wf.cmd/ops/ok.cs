@@ -12,18 +12,18 @@ namespace Z0
     partial struct Cmd
     {
         [MethodImpl(Inline)]
-        public static CmdResult ok<T>(T spec)
-            where T : ICmdSpec
-                => new CmdResult(spec.CmdId, true);
+        public static CmdResult<C> ok<C>(C spec)
+            where C : struct, ICmdSpec
+                => new CmdResult<C>(spec, true);
 
         [MethodImpl(Inline)]
-        public static CmdResult ok<C>(C spec, string msg)
-            where C : ICmdSpec
-                => new CmdResult(spec.CmdId, true, msg);
+        public static CmdResult<C> ok<C>(C spec, string msg)
+            where C : struct, ICmdSpec
+                => new CmdResult<C>(spec, true, msg);
 
         [MethodImpl(Inline)]
-        public static CmdResult<T> ok<C,T>(C spec, T payload, string msg = EmptyString)
-            where C : ICmdSpec
-                => new CmdResult<T>(spec.CmdId, true, payload, msg);
+        public static CmdResult<C,P> ok<C,P>(C spec, P payload, string msg = EmptyString)
+            where C : struct, ICmdSpec
+                => new CmdResult<C,P>(spec, true, payload, msg);
     }
 }

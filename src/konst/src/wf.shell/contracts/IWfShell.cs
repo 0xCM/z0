@@ -138,13 +138,13 @@ namespace Z0
 
         void Disposed(WfStepId step)
         {
-            if(Verbosity.Babble())
+            if(Verbosity.IsBabble())
                 Raise(disposed(step, Ct));
         }
 
         void Disposed(WfHost host)
         {
-            if(Verbosity.Babble())
+            if(Verbosity.IsBabble())
                 Raise(disposed(host.Id, Ct));
         }
 

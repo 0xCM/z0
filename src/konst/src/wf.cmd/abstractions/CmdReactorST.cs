@@ -7,9 +7,8 @@ namespace Z0
     using System;
 
     [CmdReactor]
-    public abstract class CmdReactor<S,T> : ICmdReactor<S,T>
-        where S : struct, ICmdSpec<S>
-        where T : struct
+    public abstract class CmdReactor<C,T> : ICmdReactor<C,T>
+        where C : struct, ICmdSpec
     {
         protected WfHost Host;
 
@@ -17,27 +16,27 @@ namespace Z0
 
         protected IWfDb Db => Wf.Db();
 
-        public static S Spec() => new S();
+        public static C Spec() => new C();
 
         public CmdId CmdId => Spec().CmdId;
 
-        protected abstract T Run(S cmd);
+        protected abstract T Run(C cmd);
 
-        public CmdResult<T> Invoke(S cmd)
+        public CmdResult<C,T> Invoke(C cmd)
         {
             try
             {
-                return new CmdResult<T>(cmd.CmdId, true, Run(cmd));
+                return new CmdResult<C,T>(cmd, true, Run(cmd));
             }
             catch(Exception e)
             {
                 Wf.Error(e);
-                return new CmdResult<T>(cmd.CmdId, e);
+                return new CmdResult<C,T>(cmd, e);
             }
         }
 
         CmdResult ICmdReactor.Invoke(ICmdSpec src)
-            => Invoke((S)src);
+            => Invoke((C)src);
 
         public void Init(IWfShell wf)
         {

@@ -275,7 +275,7 @@ public readonly struct ApiNames
 
     public const string WfControl = workflow + dot + control;
 
-    public const string WfShellX = workflow + dot + shell + dot + extensions;
+    public const string XWfShell = workflow + dot + shell + dot + extensions;
 
     // ~~ Text
     // ~~ -----------------------------------------------------------------------------------------

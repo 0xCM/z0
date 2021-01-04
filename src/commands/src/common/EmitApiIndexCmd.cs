@@ -10,14 +10,5 @@ namespace Z0
         public const string CmdName = "emit-api-index";
     }
 
-    partial class XCmd
-    {
-        [Op]
-        public static EmitApiIndexCmd EmitApiIndex(this CmdBuilder builder)
-        {
-            var dst = new EmitApiIndexCmd();
 
-            return dst;
-        }
-    }
 }

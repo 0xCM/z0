@@ -86,13 +86,13 @@ namespace Z0
             switch(name)
             {
                 case EmitApiIndexCmd.CmdName:
-                    commands.EmitApiIndex().Wait();
+                    Builder.EmitApiIndex().Dispatch(Wf).Wait();
                 break;
                 case EmitRuntimeIndexCmd.CmdName:
-                    commands.EmitRuntimeIndex().Wait();
+                    Builder.EmitRuntimeIndex().Dispatch(Wf).Wait();
                 break;
                 case DumpCliTablesCmd.CmdName:
-                    commands.DumpCliTables(Parts.Commands.Assembly).Wait();
+                    Run(Builder.DumpCliTables(Parts.Part.Assembly));
                 break;
                 case RunStepCmd.CmdName:
                     commands.RunStep(slice(args,1)).Wait();
@@ -105,6 +105,11 @@ namespace Z0
                     break;
             }
 
+        }
+
+        void Run(in DumpCliTablesCmd cmd)
+        {
+            cmd.Dispatch(Wf).Wait();
         }
 
         void Run(in BuildCmd cmd)
