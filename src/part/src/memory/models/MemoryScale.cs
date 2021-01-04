@@ -9,63 +9,50 @@ namespace Z0
 
     using static Part;
 
-    public enum MemoryScaleKind : byte
-    {
-        None  = 0,
-
-        S1 = 1,
-
-        S2 = 2,
-
-        S4 = 4,
-
-        S8 = 8
-    }
-
-    [LiteralCover(typeof(MemoryScaleKind))]
+    [Isomorphic(typeof(MemoryScaleFactor))]
     public readonly struct MemoryScale : ITextual
     {
-        public MemoryScaleKind Kind {get;}
+        public MemoryScaleFactor Factor {get;}
 
         [MethodImpl(Inline)]
-        public MemoryScale(MemoryScaleKind kind)
-            => Kind = kind;
+        public MemoryScale(MemoryScaleFactor kind)
+            => Factor = kind;
 
         [MethodImpl(Inline)]
         public MemoryAddress Apply(MemoryAddress src)
-            =>(ulong)Kind * src;
+            =>(ulong)Factor * src;
 
         public static MemoryScale Empty
-            => new MemoryScale(MemoryScaleKind.None);
+            => new MemoryScale(MemoryScaleFactor.None);
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Kind == 0;
+            get => Factor == 0;
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => Kind != 0;
+            get => Factor != 0;
         }
 
         public bool NonUnital
         {
              [MethodImpl(Inline)]
-             get => Kind != MemoryScaleKind.S1;
+             get => Factor != MemoryScaleFactor.S1;
         }
 
         public bool NonZero
         {
             [MethodImpl(Inline)]
-            get =>  Kind != 0;
+            get =>  Factor != 0;
         }
 
         public byte Value
         {
             [MethodImpl(Inline)]
-            get => (byte) Kind;
+            get => (byte) Factor;
         }
 
         public MemoryScale Zero
@@ -76,24 +63,24 @@ namespace Z0
             => From(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator MemoryScale(MemoryScaleKind src)
+        public static implicit operator MemoryScale(MemoryScaleFactor src)
             => new MemoryScale(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator MemoryScaleKind(MemoryScale src)
-            => src.Kind;
+        public static implicit operator MemoryScaleFactor(MemoryScale src)
+            => src.Factor;
 
         [MethodImpl(Inline)]
         public static MemoryScale From(int value)
         {
             if(value == 1 || value == 2 || value == 4 || value == 8)
-                return new MemoryScale((MemoryScaleKind)value);
+                return new MemoryScale((MemoryScaleFactor)value);
             else
-                return new MemoryScale(MemoryScaleKind.None);
+                return new MemoryScale(MemoryScaleFactor.None);
         }
 
         public string Format()
-            => IsNonEmpty ? ((byte)Kind).ToString() : EmptyString;
+            => IsNonEmpty ? ((byte)Factor).ToString() : EmptyString;
 
         public override string ToString()
             => Format();

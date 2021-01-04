@@ -21,7 +21,7 @@ namespace Z0.Asm
         [Op]
         public static bool parse(string[] lines, out AsmRoutineHeader dst)
         {
-            var fail = ParseResult.Fail<AsmRoutineHeader>(lines.Concat(Chars.NL));
+            var fail = ParseResult.fail<AsmRoutineHeader>(lines.Concat(Chars.NL));
             dst = default;
 
             if(lines.Length < 4)

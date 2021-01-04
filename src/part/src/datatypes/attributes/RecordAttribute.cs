@@ -12,9 +12,20 @@ namespace Z0
     [AttributeUsage(AttributeTargets.Struct)]
     public class RecordAttribute : Attribute
     {
+        public object TableKind {get;}
+
         public string TableId {get;}
 
         public RecordAttribute(string name = "", byte fields = 0)
-            => TableId = name;
+        {
+            TableId = name;
+            TableKind = byte.MinValue;
+        }
+
+        public RecordAttribute(object kind)
+        {
+            TableKind = kind ?? byte.MinValue;
+            TableId = TableKind.ToString();
+        }
     }
 }

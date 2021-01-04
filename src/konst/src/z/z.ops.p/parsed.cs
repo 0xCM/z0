@@ -34,6 +34,6 @@ namespace Z0
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ParseResult<T> parsed<T>(object src, T value)
-            => ParseResult.Success(src?.ToString() ?? EmptyString, value);
+            => ParseResult.win(src?.ToString() ?? EmptyString, value);
     }
 }

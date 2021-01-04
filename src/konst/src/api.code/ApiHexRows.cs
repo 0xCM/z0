@@ -69,9 +69,9 @@ namespace Z0
             var failed = attempts.Where(r => !r.Succeeded);
             var success = attempts.Where(r => r.Succeeded).Select(r => r.Value);
             if(failed.Length != 0 && success.Length == 0)
-                return ParseResult.Fail<ApiHexRow[]>(src.Name, failed[0].Message);
+                return ParseResult.fail<ApiHexRow[]>(src.Name, failed[0].Message);
             else
-                return ParseResult.Success<ApiHexRow[]>(src.Name, success);
+                return ParseResult.win<ApiHexRow[]>(src.Name, success);
         }
 
         [Op]
@@ -121,7 +121,7 @@ namespace Z0
             {
                 var fields = src.SplitClean(FieldDelimiter);
                 if(fields.Length !=  (uint)ApiHexRowSpec.FieldCount)
-                    return ParseResult.Fail<ApiHexRow>(src,"No data");
+                    return ParseResult.fail<ApiHexRow>(src,"No data");
 
                 var dst = new ApiHexRow();
                 var index = 0;
@@ -132,11 +132,11 @@ namespace Z0
                 dst.TermCode = Enums.parse(fields[index++], ExtractTermCode.None);
                 dst.Uri = ApiUriParser.Service.Parse(fields[index++]).Require();
                 dst.Data = new CodeBlock(dst.Address, Parsers.hex(true).ParseData(fields[index++], sys.empty<byte>()));
-                return ParseResult.Success(src, dst);
+                return ParseResult.win(src, dst);
             }
             catch(Exception e)
             {
-                return ParseResult.Fail<ApiHexRow>(src, e);
+                return ParseResult.fail<ApiHexRow>(src, e);
             }
         }
     }

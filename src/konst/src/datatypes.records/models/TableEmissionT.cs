@@ -15,7 +15,7 @@ namespace Z0
     public readonly struct TableEmission<T> : ITextual
         where T : struct
     {
-        public IndexedSeq<T> Data {get;}
+        public Index<T> Data {get;}
 
         public FS.FilePath Target {get;}
 

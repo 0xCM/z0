@@ -9,10 +9,10 @@ namespace Z0
     /// <summary>
     /// Identifies a specialized literal cover
     /// </summary>
-    [AttributeUsage(AttributeTargets.Struct)]
-    public class LiteralCoverAttribute : Attribute
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Enum, AllowMultiple = true)]
+    public class IsomorphicAttribute : Attribute
     {
-        public LiteralCoverAttribute(Type literal)
+        public IsomorphicAttribute(Type literal)
         {
             LiteralType = literal;
         }

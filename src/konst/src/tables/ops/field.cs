@@ -17,10 +17,5 @@ namespace Z0
             where F : unmanaged
             where T : struct
                 => new TableField<F>(id, spec, width ?? (new RenderWidth<ushort>(@as<F,ushort>(id))));
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static TableField<byte> field<T>(byte id, TableField spec, ushort width)
-            where T : struct
-                => new TableField<byte>(id, spec, width);
     }
 }

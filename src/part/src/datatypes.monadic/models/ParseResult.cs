@@ -66,19 +66,19 @@ namespace Z0
         /// <param name="value">The parsed value</param>
         /// <typeparam name="T">The parsed value type</typeparam>
         [MethodImpl(Inline)]
-        public static ParseResult<T> Success<T>(string source, T value)
+        public static ParseResult<T> win<T>(string source, T value)
             => ParseResult<T>.Success(source, value);
 
         [MethodImpl(Inline)]
-        public static ParseResult<T> Fail<T>(string source, object reason = null)
+        public static ParseResult<T> fail<T>(string source, object reason = null)
             => ParseResult<T>.Fail(source, reason);
 
         [MethodImpl(Inline)]
-        public static ParseResult<T> Success<T>(char source, T value)
+        public static ParseResult<T> win<T>(char source, T value)
             => ParseResult<T>.Success(source.ToString(), value);
 
         [MethodImpl(Inline)]
-        public static ParseResult<T> Fail<T>(char source, object reason = null)
+        public static ParseResult<T> fail<T>(char source, object reason = null)
             => ParseResult<T>.Fail(source.ToString(), reason);
 
         /// <summary>
@@ -89,7 +89,7 @@ namespace Z0
         /// <typeparam name="S">The source type</typeparam>
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline)]
-        public static ParseResult<S,T> Success<S,T>(S source, T value)
+        public static ParseResult<S,T> win<S,T>(S source, T value)
             => ParseResult<S,T>.Success(source, value);
 
         /// <summary>
@@ -100,27 +100,27 @@ namespace Z0
         /// <typeparam name="S">The source type</typeparam>
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline)]
-        public static ParseResult<S,T> Fail<S,T>(S source, object reason = null)
+        public static ParseResult<S,T> fail<S,T>(S source, object reason = null)
             => ParseResult<S,T>.Fail(source, reason);
 
         [MethodImpl(Inline)]
-        public static ParseResult Success(string source, Type target, object value)
+        public static ParseResult win(string source, Type target, object value)
             => new ParseResult(source, target, true, value);
 
         [MethodImpl(Inline)]
-        public static ParseResult Fail(string source, Type target, object reason = null)
+        public static ParseResult fail(string source, Type target, object reason = null)
             => new ParseResult(source, target, false, null, reason);
 
         [MethodImpl(Inline)]
-        public static ParseResult Define(string source, Type target, bool succeeded, object value, object reason = null)
+        public static ParseResult define(string source, Type target, bool succeeded, object value, object reason = null)
             => new ParseResult(source, target, succeeded, value, reason);
 
         [MethodImpl(Inline)]
-        public static ParseResult Success(object src, Type srcType, Type dstType, object dst, object reason = null)
+        public static ParseResult win(object src, Type srcType, Type dstType, object dst, object reason = null)
             => new ParseResult(src, srcType, dstType, true, dst, reason);
 
         [MethodImpl(Inline)]
-        public static ParseResult Fail(object src, Type srcType, Type dstType, object reason = null)
+        public static ParseResult fail(object src, Type srcType, Type dstType, object reason = null)
             => new ParseResult(src, srcType, dstType, false, DBNull.Value, reason);
 
         [MethodImpl(Inline)]

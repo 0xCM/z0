@@ -31,9 +31,9 @@ namespace Z0.Asm
         public ParseResult<string, Mnemonic> Parse(string src)
         {
             if(Index.TryGetValue(src.Trim().ToLower(), out var mne))
-                return ParseResult.Success<string,Mnemonic>(src,mne);
+                return ParseResult.win<string,Mnemonic>(src,mne);
             else
-                return ParseResult.Fail<string,Mnemonic>(src);
+                return ParseResult.fail<string,Mnemonic>(src);
         }
     }
 }

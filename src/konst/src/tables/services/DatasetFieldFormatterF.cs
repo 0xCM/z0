@@ -31,7 +31,7 @@ namespace Z0
         public void Append(F f, object content)
         {
             z.insist(content != null);
-            Target.Append(Render(content).PadRight(Table.width(f)));
+            Target.Append(Render(content).PadRight(Datasets.width(f)));
         }
 
         public void Delimit(F f, object content)
@@ -39,7 +39,7 @@ namespace Z0
             z.insist(content != null);
             Target.Append(Delimiter);
             Target.Append(Space);
-            Target.Append(Render(content).PadRight(Table.width(f)));
+            Target.Append(Render(content).PadRight(Datasets.width(f)));
         }
 
         public void Delimit<T>(F f, T content)
@@ -48,7 +48,7 @@ namespace Z0
             z.insist(content != null);
             Target.Append(Delimiter);
             Target.Append(Space);
-            Target.Append(Render(content).PadRight(Table.width(f)));
+            Target.Append(Render(content).PadRight(Datasets.width(f)));
         }
 
         public DatasetFieldFormatter<F> Reset(char? delimiter = null)

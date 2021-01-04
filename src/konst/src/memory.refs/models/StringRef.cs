@@ -20,7 +20,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public StringRef(in MemorySegment src)
-            => Data = MemRefs.location(src);
+            => Data = vparts(N128.N, src.BaseAddress, (ulong)src.DataSize);
 
         [MethodImpl(Inline)]
         public StringRef(MemoryAddress address, uint length, uint user = 0)

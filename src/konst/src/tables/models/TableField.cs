@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Describes a column in a table
@@ -26,16 +26,9 @@ namespace Z0
         public ushort Index;
 
         /// <summary>
-        /// The field's metadata identifier
-        /// </summary>
-        public ClrToken Token;
-
-        /// <summary>
         /// The field datatype
         /// </summary>
         public Type DataType;
-
-        public ByteSize Size;
 
         public ushort RenderWidth;
 

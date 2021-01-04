@@ -24,10 +24,10 @@ namespace Z0
             get => Definition;
         }
 
-        public ClrStructName Name
+        public ClrTypeName Name
         {
             [MethodImpl(Inline)]
-            get => new ClrStructName(Definition.FullName);
+            get => new ClrTypeName(Definition.FullName);
         }
 
         [MethodImpl(Inline)]

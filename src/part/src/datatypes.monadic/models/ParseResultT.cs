@@ -221,7 +221,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator ParseResult(ParseResult<T> src)
-            => ParseResult.Define(src.Source, typeof(T), src.Succeeded, src.Value);
+            => ParseResult.define(src.Source, typeof(T), src.Succeeded, src.Value);
 
         [MethodImpl(Inline)]
         public static bool operator true(ParseResult<T> src)

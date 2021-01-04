@@ -107,7 +107,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator ConstRef<T>(Ref<T> src)
-            => new ConstRef<T>(src.Segment);
+            => new ConstRef<T>(src);
 
         [MethodImpl(Inline)]
         public static bool operator ==(ConstRef<T> lhs, ConstRef<T> rhs)

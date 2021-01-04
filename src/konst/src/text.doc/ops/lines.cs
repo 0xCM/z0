@@ -22,7 +22,7 @@ namespace Z0
                     lines.Add(new TextLine(++lineNumber, next));
                 }
             }
-            return ParseResult.Success(src, lines.ToArray());
+            return ParseResult.win(src, lines.ToArray());
         }
     }
 }

@@ -23,14 +23,14 @@ namespace Z0
         {
             var indices = src.RemoveAny(Chars.LParen, Chars.RParen).Trim().Split(Chars.Space);
             if(indices.Length != 2)
-                return ParseResult.Fail<Pair<T>>(src);
+                return ParseResult.fail<Pair<T>>(src);
 
             var parser = Parsers.numeric<T>();
             var result = Option.Try(() => Tuples.pair(parser.Parse(indices[0]).ValueOrDefault(), parser.Parse(indices[1]).ValueOrDefault()));
             if(result.IsSome())
-                return ParseResult.Success(src, result.Value());
+                return ParseResult.win(src, result.Value());
             else
-                return ParseResult.Fail<Pair<T>>(src);
+                return ParseResult.fail<Pair<T>>(src);
         }
 
         [MethodImpl(Inline)]
@@ -61,9 +61,9 @@ namespace Z0
             where T : unmanaged
         {
             if(parse(src, out T dst))
-                return ParseResult.Success(src,dst);
+                return ParseResult.win(src,dst);
             else
-                return ParseResult.Fail<T>(src);
+                return ParseResult.fail<T>(src);
         }
 
         [MethodImpl(Inline)]

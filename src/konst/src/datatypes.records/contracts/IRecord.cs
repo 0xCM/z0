@@ -6,6 +6,20 @@ namespace Z0
 {
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
+    using System;
+
+    using api = Records;
+
+    public readonly struct FK<T>
+    {
+        public Type ForeignType => typeof(T);
+
+        public ulong Value {get;}
+
+        public FK(ulong location)
+            => Value = location;
+    }
+
     [Free]
     public interface IRecord
     {
@@ -20,9 +34,9 @@ namespace Z0
         where T : struct, IRecord<T>
     {
         TableId IRecord.TableId
-            => Records.tableid<T>();
+            => api.tableid(typeof(T));
 
         RecordFields IRecord.Fields()
-            => Records.fields<T>();
+            => api.fields<T>();
     }
 }

@@ -15,9 +15,20 @@ namespace Z0
         /// Computes the <see cref='TableId'/> of a parametrically-identified record
         /// </summary>
         /// <typeparam name="T">The record type</typeparam>
-        public static TableId tableid<T>()
-            where T : struct
-                => tableid(typeof(T));
+        [MethodImpl(Inline)]
+        public static TableId<T> tableid<T>()
+            where T : struct, IRecord<T>
+                => default;
+
+        /// <summary>
+        /// Computes the <see cref='TableId'/> of a parametrically-identified record
+        /// </summary>
+        /// <typeparam name="T">The record type</typeparam>
+        [MethodImpl(Inline)]
+        public static TableId<I,T> tableid<I,T>(I index)
+            where T : struct, IRecord<T>
+            where I : unmanaged
+                => new TableId<I,T>(index);
 
         /// <summary>
         /// Computes the <see cref='TableId'/> of a specified record type

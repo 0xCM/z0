@@ -47,11 +47,11 @@ namespace Z0
         {
             try
             {
-                return ParseResult.Success(name, Enum.Parse<E>(text.remove(name, Chars.Dot),true));
+                return ParseResult.win(name, Enum.Parse<E>(text.remove(name, Chars.Dot),true));
             }
             catch(Exception e)
             {
-                return ParseResult.Fail<E>(name, e);
+                return ParseResult.fail<E>(name, e);
             }
         }
     }

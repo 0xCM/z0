@@ -11,7 +11,6 @@ namespace Z0
     using static Part;
     using static memory;
 
-
     public readonly struct RecordParser<T> : IRecordParser<T>
         where T : struct
     {

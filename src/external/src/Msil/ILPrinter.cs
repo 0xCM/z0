@@ -10,17 +10,33 @@ namespace Msil
     using System.Reflection.Emit;
     using System.Runtime.CompilerServices;
     using System.Linq.Expressions;
-    using Cli;
+
+    using Z0;
 
     public static class ILPrinter
     {
         static CachedTypeFactory s_typeFactory = new CachedTypeFactory(typeof(IStrongBox), typeof(StrongBox<>));
 
-        static ICilTypeFactory GetTypeFactory(Expression expression)
+        public static string GetIL(this MethodInfo method)
         {
-            s_typeFactory.AddTypesFrom(expression);
-            return s_typeFactory;
+            CultureInfo oldCulture = CultureInfo.CurrentCulture;
+            CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
+
+            try
+            {
+                var sw = new StringWriter();
+                var typeFactory = s_typeFactory;
+                AppendIL(method, sw, typeFactory);
+                return sw.ToString();
+            }
+            finally
+            {
+                CultureInfo.CurrentCulture = oldCulture;
+            }
         }
+
+        public static string GetIL(this Delegate d)
+            => d.GetMethodInfo().GetIL();
 
         public static string GetIL(this LambdaExpression expression, bool appendInnerLambdas = false)
         {
@@ -64,7 +80,13 @@ namespace Msil
             }
         }
 
-        private static void AppendIL(MethodInfo method, StringWriter sw, ICilTypeFactory typeFactory)
+        static ICilTypeFactory GetTypeFactory(Expression expression)
+        {
+            s_typeFactory.AddTypesFrom(expression);
+            return s_typeFactory;
+        }
+
+        static void AppendIL(MethodInfo method, StringWriter sw, ICilTypeFactory typeFactory)
         {
             ILReader reader = ILReaderFactory.Create(method);
             ExceptionInfo[] exceptions = reader.ILProvider.GetExceptionInfos();
@@ -101,19 +123,18 @@ namespace Msil
 
     class CachedTypeFactory : DefaultTypeFactory
     {
-        private static readonly PropertyInfo s_RuntimeTypeHandle_Value = typeof(RuntimeTypeHandle).GetProperty("Value");
+        static readonly PropertyInfo s_RuntimeTypeHandle_Value = typeof(RuntimeTypeHandle).GetProperty("Value");
 
-        private readonly Dictionary<IntPtr, Type> _cache = new Dictionary<IntPtr, Type>();
+        readonly Dictionary<IntPtr, Type> _cache = new Dictionary<IntPtr,Type>();
 
         public CachedTypeFactory(params Type[] types)
         {
-            foreach (var type in types)
-            {
+            foreach(var type in types)
                 AddType(type);
-            }
         }
 
-        public void AddTypesFrom(Expression expression) => new TypeFinder(this).Visit(expression);
+        public void AddTypesFrom(Expression expression)
+            => new TypeFinder(this).Visit(expression);
 
         public void AddType(Type type)
         {
@@ -138,7 +159,7 @@ namespace Msil
 
         class TypeFinder : ExpressionVisitor
         {
-            private readonly CachedTypeFactory _parent;
+            readonly CachedTypeFactory _parent;
 
             public TypeFinder(CachedTypeFactory factory)
             {
@@ -170,7 +191,7 @@ namespace Msil
                 return base.VisitMemberBinding(node);
             }
 
-            private void Visit(Type type)
+            void Visit(Type type)
             {
                 TypeInfo ti = type.GetTypeInfo();
 

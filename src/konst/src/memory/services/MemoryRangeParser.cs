@@ -13,8 +13,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source text</param>
         public ParseResult<MemoryRange> Parse(string src)
-             => ParseOption(src).MapValueOrElse(x => ParseResult.Success(src,x),
-                    () => ParseResult.Fail<MemoryRange>(src));
+             => ParseOption(src).MapValueOrElse(x => ParseResult.win(src,x),
+                    () => ParseResult.fail<MemoryRange>(src));
 
         /// <summary>
         /// Attempts to parse an address segment in standard form, [start,end]

@@ -17,6 +17,7 @@ namespace Msil
         }
 
         public int[] Deltas => (int[])_deltas.Clone();
+
         public int[] TargetOffsets
         {
             get

@@ -71,7 +71,7 @@ namespace Z0
             var pathText = rest.TakeBefore(UriQuery);
             var path = host(pathText);
             if(path.Failed)
-                return ParseResult.Fail<OpUri>(src, path.Message);
+                return ParseResult.fail<OpUri>(src, path.Message);
 
             var id = OpIdentityParser.parse(rest.TakeAfter(UriFragment));
             var group = rest.Between(UriQuery,UriFragment);
