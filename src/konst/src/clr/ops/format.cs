@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
 
+    using static memory;
     partial struct ClrQuery
     {
         [Op]
@@ -22,7 +23,19 @@ namespace Z0
             dst.Append(src.ReturnType.Format());
             dst.Append(Chars.Space);
             dst.Append(src.MethodName);
-            dst.Append(src.ValueParams.Format());
+            dst.Append(Chars.LParen);
+            var parameters = src.ValueParams.View;
+            var count = parameters.Length;
+            for(var i=0; i<count; i++)
+            {
+                dst.Append(skip(parameters,i).Format());
+                if(i != count - 1)
+                {
+                    dst.Append(Chars.Comma);
+                    dst.Append(Chars.Space);
+                }
+            }
+            dst.Append(Chars.RParen);
         }
     }
 }

@@ -30,7 +30,7 @@ namespace Z0.Asm
         {
             var i = z8;
             memory.seek(dst, i++) = src.Separator;
-            memory.seek(dst, i++) = AsmRender.comment($"{src.Signature}, {src.Uri}");
+            memory.seek(dst, i++) = AsmRender.comment($"{src.Signature}:: {src.Uri}");
             memory.seek(dst, i++) = ByteSpans.property(src.CodeBlock, src.Uri.OpId);
             memory.seek(dst, i++) = AsmRender.comment(text.concat(nameof(src.CodeBlock.BaseAddress), text.spaced(Chars.Eq), src.CodeBlock.BaseAddress));
             memory.seek(dst, i++) = AsmRender.comment(text.concat(nameof(src.TermCode), text.spaced(Chars.Eq), src.TermCode.ToString()));
@@ -145,8 +145,6 @@ namespace Z0.Asm
         [Op]
         public static void format(in AsmRoutine src, in AsmFormatConfig config, ITextBuffer dst)
         {
-            // if(config.EmitSectionDelimiter)
-            //     dst.AppendLine(config.SectionDelimiter);
 
             if(config.EmitFunctionHeader)
                 foreach(var line in header(src))
