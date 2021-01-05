@@ -33,6 +33,11 @@ namespace Z0
             where T : unmanaged
                 => create(src.BaseAddress.Pointer<T>(), (int)src.DataSize);
 
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static MemoryReader<T> create<T>(in MemoryRange src)
+            where T : unmanaged
+                => create(src.Start.Pointer<T>(), (int)src.Length);
+
         [MethodImpl(Inline)]
         internal MemoryReader(byte* pSrc, int length)
         {

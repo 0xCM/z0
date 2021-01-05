@@ -25,6 +25,34 @@ namespace Z0
             => db.IndexFile(id);
 
         [Op]
+        public static Outcome<FS.FilePath> EmitIndex(IWfShell wf)
+        {
+            try
+            {
+                var hosts = wf.Api.ApiHosts;
+                var kHost = (uint)hosts.Length;
+                var members  = @readonly(ApiRuntime.index(wf));
+                var target = wf.Db().IndexFile("api.members");
+                using var writer = target.Writer();
+                var count = members.Length;
+                var buffer = Buffers.text();
+                for(var i=0; i<count; i++)
+                {
+                    ApiRuntime.render(skip(members, i), buffer);
+                    writer.WriteLine(buffer.Emit());
+                }
+                return target;
+            }
+            catch(Exception e)
+            {
+                return e;
+            }
+
+            //wf.Status(Msg.EmittedRuntimeIndex.Format(kHost, target));
+
+            //return Cmd.ok(cmd);
+        }
+        [Op]
         public static void emit(ReadOnlySpan<ApiRuntimeSummary> src, FS.FilePath dst)
         {
             var count = src.Length;

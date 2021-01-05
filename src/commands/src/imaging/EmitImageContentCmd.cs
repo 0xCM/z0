@@ -27,6 +27,15 @@ namespace Z0
         public static EmitImageContentCmd EmitImageContent(this CmdBuilder builder, LocatedImage src)
             => define(builder.Wf, src);
 
+        [Op]
+        public static EmitImageContentCmd EmitImageContent(this CmdBuilder builder)
+        {
+            var dst = new EmitImageContentCmd();
+            dst.Source = ImageMaps.locate();
+            dst.Target = builder.Db.Table(ImageContent.TableId, dst.Source.ImagePath.FileName.WithoutExtension);
+            return dst;
+        }
+
         public static void EmitImageContent(this CmdBuilder builder, Process src, out Index<EmitImageContentCmd> buffer)
             => specify(builder.Wf, src, out buffer);
 

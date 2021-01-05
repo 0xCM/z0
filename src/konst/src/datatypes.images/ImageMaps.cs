@@ -36,6 +36,21 @@ namespace Z0
             => index(Process.GetCurrentProcess());
 
         /// <summary>
+        /// Creates a <see cref='LocatedImage'/> description from the main module of the executing <see cref='Process'/>
+        /// </summary>
+        /// <param name="src">The source module</param>
+        public static LocatedImage locate()
+            => locate(Process.GetCurrentProcess());
+
+        /// <summary>
+        /// Creates a <see cref='LocatedImage'/> description from the main module of a specified <see cref='Process'/>
+        /// </summary>
+        /// <param name="src">The source module</param>
+        [MethodImpl(Inline), Op]
+        public static LocatedImage locate(Process src)
+            => locate(src.MainModule);
+
+        /// <summary>
         /// Creates a <see cref='LocatedImage'/> description from a specified <see cref='ProcessModule'/>
         /// </summary>
         /// <param name="src">The source module</param>

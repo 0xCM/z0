@@ -11,7 +11,7 @@ namespace Z0
 
     using static z;
 
-    public class ApiIndexService : WfService<ApiIndexService,IApiIndexService>
+    class ApiIndexService : WfService<ApiIndexService,IApiIndex>, IApiIndex
     {
         public ApiCodeBlockIndex Product;
 

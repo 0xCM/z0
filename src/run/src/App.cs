@@ -80,26 +80,24 @@ namespace Z0
             if(args.IsEmpty)
             return;
 
-            var commands = Commands.service(Wf);
             var name =  first(args).Content;
 
             switch(name)
             {
                 case EmitApiIndexCmd.CmdName:
-                    //Builder.EmitApiIndex().Dispatch(Wf).Wait();
                     Run(Builder.EmitApiIndex());
                 break;
                 case EmitRuntimeIndexCmd.CmdName:
-                    Builder.EmitRuntimeIndex().Dispatch(Wf).Wait();
+                    Run(Builder.EmitRuntimeIndex());
                 break;
                 case DumpCliTablesCmd.CmdName:
                     Run(Builder.DumpCliTables(Parts.Part.Assembly));
                 break;
-                case RunStepCmd.CmdName:
-                    commands.RunStep(slice(args,1)).Wait();
-                break;
                 case BuildCmd.CmdName:
                     Run(Builder.Build());
+                break;
+                case EmitImageContentCmd.CmdName:
+                    Run(Builder.EmitImageContent());
                 break;
                 default:
                     Wf.Error(string.Format("Processor for {0} not found", name));
@@ -113,7 +111,17 @@ namespace Z0
             cmd.Dispatch(Wf).Wait();
         }
 
+        void Run(in EmitRuntimeIndexCmd cmd)
+        {
+            cmd.Dispatch(Wf).Wait();
+        }
+
         void Run(in DumpCliTablesCmd cmd)
+        {
+            cmd.Dispatch(Wf).Wait();
+        }
+
+        void Run(in EmitImageContentCmd cmd)
         {
             cmd.Dispatch(Wf).Wait();
         }
@@ -132,15 +140,6 @@ namespace Z0
         {
             var settings = Wf.Settings;
             Wf.Row(settings.Format());
-        }
-
-        void Run(ShowVerbsCmd cmd)
-        {
-            var verbs = AppCmdNames.index();
-            for(var i=0u; i<verbs.Count; i++)
-            {
-                Wf.Status(verbs[i]);
-            }
         }
     }
 }

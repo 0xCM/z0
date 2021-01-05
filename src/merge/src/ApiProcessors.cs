@@ -40,7 +40,7 @@ namespace Z0
 
         void Init()
         {
-            Index = ApiIndexService.init(Wf).CreateIndex();
+            Index = ApiIndex.service(Wf).CreateIndex();
             Decoded = ApiDecoder.init(Wf,Asm).DecodeIndex(Index);
         }
 

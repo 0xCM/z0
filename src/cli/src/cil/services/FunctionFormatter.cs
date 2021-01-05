@@ -22,7 +22,7 @@ namespace Z0
             static string comment(string text, string delimiter = "//", int pad = 0)
                 => pad == 0 ? $"{delimiter} {text}" : delimiter.PadRight(pad) + text;
 
-            public string Format(CilFunctionInfo f)
+            public string Format(FunctionInfo f)
             {
                 const string Margin = "    ";
 

@@ -10,7 +10,6 @@ namespace Z0
         public const string CmdName = "emit-runtime-index";
     }
 
-
     partial class XCmd
     {
         [Op]

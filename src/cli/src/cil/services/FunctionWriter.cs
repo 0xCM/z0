@@ -8,7 +8,7 @@ namespace Z0
     using System.IO;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     partial struct Cil
     {
@@ -31,7 +31,7 @@ namespace Z0
                 get =>  new FunctionFormatter();
             }
 
-            public void Write(CilFunctionInfo[] src)
+            public void Write(FunctionInfo[] src)
             {
                 try
                 {

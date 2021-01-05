@@ -7,10 +7,19 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection.Metadata;
 
+    using static Part;
     using static System.Reflection.Metadata.ILOpCode;
 
     partial struct Cil
     {
+        [MethodImpl(Inline), Op]
+        public static bool IsBranch(OpCode src)
+            => IsBranch((ILOpCode)src.Value);
+
+        [MethodImpl(Inline), Op]
+        public static bool IsBranch(OpCodeValue src)
+            => IsBranch((ILOpCode)src);
+
         /// <summary>
         /// Returns true of the specified op-code is a branch to a label.
         /// </summary>

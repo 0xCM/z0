@@ -4,12 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static Konst;
-    using static z;
-
     public readonly struct ApiIndex
     {
-        public static ApiIndexService service(IWfShell wf)
+        public static IApiIndex service(IWfShell wf)
             => ApiIndexService.init(wf);
     }
 }

@@ -32,7 +32,7 @@ namespace Z0
         public string Attribs;
 
         [MethodImpl(Inline)]
-        public ClrFieldInfo(Count seq, CliLiteral field, CliBlob sig, string attribs)
+        public ClrFieldInfo(Count seq, CliLiteralInfo field, CliBlobInfo sig, string attribs)
         {
             Sequence = seq;
             Sig = sig.Data;

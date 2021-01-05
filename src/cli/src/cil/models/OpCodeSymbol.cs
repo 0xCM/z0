@@ -8,7 +8,7 @@ namespace Z0
     using System.Reflection.Metadata;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     partial struct Cil
     {
@@ -33,7 +33,7 @@ namespace Z0
                 => new OpCodeSymbol(src);
 
             [MethodImpl(Inline)]
-            public static implicit operator OpCodeSymbol(CilOpCodeValue src)
+            public static implicit operator OpCodeSymbol(OpCodeValue src)
                 => new OpCodeSymbol((ILOpCode)src);
         }
     }

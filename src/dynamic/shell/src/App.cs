@@ -370,36 +370,6 @@ namespace Z0
                 Wf.Row(string.Format("Managed: {0}", p));
         }
 
-        public void Run(CmdLine cmd)
-        {
-            var args = cmd.Parts;
-            var count = args.Length;
-            var commands = Commands.service(Wf);
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var arg = ref skip(args,i);
-                if(arg.IsNonEmpty)
-                {
-                    switch(arg.Content)
-                    {
-                        case EmitApiIndexCmd.CmdName:
-                            commands.EmitApiIndex().Wait();
-                        break;
-                        case EmitRuntimeIndexCmd.CmdName:
-                            commands.EmitRuntimeIndex().Wait();
-                        break;
-                        case DumpCliTablesCmd.CmdName:
-                            commands.DumpCliTables(Parts.Commands.Assembly).Wait();
-                        break;
-                        default:
-                            Wf.Status(string.Format("Not processor found for {0}", arg));
-                            break;
-                    }
-                }
-
-                //Wf.Status(string.Format("({0}) {1}", i, arg.Format()));
-            }
-        }
 
         public void EmitAmsOpCodes()
         {

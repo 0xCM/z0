@@ -12,10 +12,10 @@ namespace Z0
 
     partial struct Cil
     {
-        public static CilFunctionInfo[] functions(Module module, LocatedMethod[] src)
+        public static FunctionInfo[] functions(Module module, LocatedMethod[] src)
         {
             var count = src.Length;
-            var buffer = sys.alloc<CilFunctionInfo>(count);
+            var buffer = sys.alloc<FunctionInfo>(count);
             var dst = span(buffer);
             var methods = @readonly(src);
             var formatter = Cil.formatter();

@@ -7,16 +7,14 @@ namespace Z0
     using System;
     using System.Linq;
     using System.Reflection;
-    using System.Collections.Generic;
 
-    using static Konst;
     using static z;
 
     partial struct Cil
     {
-        public static Index<CilFunctionInfo> decode(Module module, MethodInfo[] src)
+        public static Index<FunctionInfo> decode(Module module, MethodInfo[] src)
         {
-            var dst = list<CilFunctionInfo>(src.Length);
+            var dst = list<FunctionInfo>(src.Length);
             var types = @readonly(module.GetTypes());
             var lookup = src.Select(x => ((uint)x.MetadataToken, x)).ToDictionary();
             var kTypes = types.Length;
@@ -36,10 +34,7 @@ namespace Z0
                         if(length != 0)
                         {
                             if(lookup.ContainsKey(token))
-                            {
-
-                                dst.Add(new CilFunctionInfo(token, method.Name, method.MethodImplementationFlags));
-                            }
+                                dst.Add(new FunctionInfo(token, method.Name, method.MethodImplementationFlags));
                         }
                     }
                 }

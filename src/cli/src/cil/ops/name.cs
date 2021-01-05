@@ -14,7 +14,7 @@ namespace Z0
     partial struct Cil
     {
         [Op]
-        public static string keyword(CilOpCodeValue kind)
+        public static string keyword(OpCodeValue kind)
             => keyword((ILOpCode)kind);
 
         [Op]

@@ -18,6 +18,22 @@ namespace Z0
             wf.EmittedTable<ApiCodeDescriptor>(count, dst);
         }
 
+        public static Outcome<FS.FilePath> emit(IWfShell wf)
+        {
+            try
+            {
+                var svc = ApiIndex.service(wf);
+                var api = svc.CreateIndex();
+                var path = wf.Db().IndexFile(ApiHexIndexRow.TableId);
+                emit(wf, api, path);
+                return path;
+            }
+            catch(Exception e)
+            {
+                return e;
+            }
+        }
+
         public static Outcome emit(IWfShell wf, ApiCodeBlockIndex src, FS.FilePath dst)
         {
             var svc = ApiIndex.service(wf);

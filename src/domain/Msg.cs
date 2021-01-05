@@ -17,6 +17,6 @@ namespace Z0
 
         public static RenderPattern<Assembly,uint> EmittingResources => "Emitting {1} {0} resources";
 
-        public static RenderPattern<uint,FS.FilePath> EmittedRuntimeIndex => "Emitted operation index for {0} hosts to {1}";
+        public static RenderPattern<FS.FilePath> EmittedRuntimeIndex => "Emitted operation index to {0}";
     }
 }

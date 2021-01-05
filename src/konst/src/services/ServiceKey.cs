@@ -16,44 +16,36 @@ namespace Z0
     /// </summary>
     public readonly struct ServiceKey
     {
-        readonly Vector128<uint> Data;
+        public uint Host {get;}
+
+        public uint Contract {get;}
+
+        public uint KindValue {get;}
+
+        public uint KindType {get;}
 
         [MethodImpl(Inline)]
         public ServiceKey(uint host, uint contract)
-            => Data = vparts(w128, host, contract, 0u, 0u);
+        {
+            Host = host;
+            Contract = contract;
+            KindValue = 0;
+            KindType = 0;
+        }
 
         [MethodImpl(Inline)]
         public ServiceKey(uint host, uint contract, uint kind, uint tKind)
-            => Data = vparts(w128, host, contract, kind, tKind);
-
-        public uint Host
         {
-            [MethodImpl(Inline)]
-            get => vcell(Data,0);
-        }
-
-        public uint Contract
-        {
-            [MethodImpl(Inline)]
-            get => vcell(Data,1);
-        }
-
-        public uint KindValue
-        {
-            [MethodImpl(Inline)]
-            get => vcell(Data,2);
-        }
-
-        public uint KindType
-        {
-            [MethodImpl(Inline)]
-            get => vcell(Data,3);
+            Host = host;
+            Contract = contract;
+            KindValue = kind;
+            KindType = tKind;
         }
 
         public bool IsKinded
         {
             [MethodImpl(Inline)]
-            get =>KindValue != 0 && KindType != 0;
+            get => KindValue != 0 && KindType != 0;
         }
 
         public bool IsEmpty
