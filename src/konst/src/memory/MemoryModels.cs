@@ -26,7 +26,7 @@ namespace Z0
                 ref readonly var source = ref code[0];
                 ref readonly var slot = ref skip(lead, i);
                 ref var target = ref slot.BaseAddress.Ref<byte>();
-                for(var j=0u; j<slot.DataSize; j++)
+                for(var j=0u; j<slot.Length; j++)
                     seek(target,j) = skip(source,j);
             }
         }

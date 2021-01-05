@@ -11,7 +11,7 @@ namespace Z0
 
     public readonly struct ResourceSegment
     {
-        public StringRef Name {get;}
+        public string Name {get;}
 
         public MemorySegment Segment {get;}
 
@@ -24,7 +24,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => string.Format("{0}[{1}:{2}]", Name.Format(), Segment.BaseAddress, Segment.DataSize);
+            => string.Format("{0}[{1}:{2}]", Name, Segment.BaseAddress, Segment.Length);
 
         public override string ToString()
             => Format();

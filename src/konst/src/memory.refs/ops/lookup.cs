@@ -14,6 +14,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref readonly MemorySegment lookup<E>(MemorySlots<E> src, E index)
             where E : unmanaged
-                => ref src.Data[z.uint8(index)];
+                => ref src.Data[memory.uint8(index)];
     }
 }

@@ -36,7 +36,7 @@ namespace Z0
         /// <param name="src">The source reference</param>
         [MethodImpl(Inline), Op]
         public static StringRef @string(MemorySegment src)
-            => new StringRef(vparts(N128.N, src.BaseAddress, (ulong)src.DataSize));
+            => new StringRef(vparts(N128.N, src.BaseAddress, (ulong)src.Length));
 
         /// <summary>
         /// Creates a <see cref='StringRef'/> from a specified <see cref='Ref'/>
@@ -44,6 +44,6 @@ namespace Z0
         /// <param name="src">The source reference</param>
         [MethodImpl(Inline), Op]
         public static StringRef @string(Ref src)
-            => new StringRef(vparts(N128.N, src.BaseAddress, (ulong)src.DataSize));
+            => new StringRef(vparts(N128.N, src.BaseAddress, (ulong)src.Length));
     }
 }

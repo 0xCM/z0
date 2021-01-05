@@ -77,7 +77,7 @@ namespace Z0
         public uint DataSize
         {
             [MethodImpl(Inline)]
-            get => Segment.DataSize;
+            get => Segment.Length;
         }
 
         /// <summary>
@@ -86,7 +86,7 @@ namespace Z0
         public BitSize Width
         {
             [MethodImpl(Inline)]
-            get => Segment.DataSize;
+            get => Segment.Length;
         }
 
         public MemoryAddress Address

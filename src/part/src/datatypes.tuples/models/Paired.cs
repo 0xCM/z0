@@ -34,8 +34,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public void Deconstruct(out T0 a, out T1 b)
         {
-            a = this.Left;
-            b = this.Right;
+            a = Left;
+            b = Right;
         }
 
         public bool IsEmpty

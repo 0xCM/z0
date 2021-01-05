@@ -35,7 +35,7 @@ namespace Z0
         public uint DataSize
         {
             [MethodImpl(Inline)]
-            get => R.DataSize;
+            get => R.Length;
         }
 
         public uint CellSize

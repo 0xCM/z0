@@ -21,9 +21,23 @@ namespace Z0
             where T : unmanaged
                 => cover<T>(src.Ref<T>(), count);
 
+        /// <summary>
+        /// Covers a memory segment with a span
+        /// </summary>
+        /// <param name="src">The base address</param>
+        /// <param name="size">The segment size, in bytes</param>
         [MethodImpl(Inline), Op]
         public static unsafe ReadOnlySpan<byte> view(MemoryAddress src, ByteSize size)
             => cover<byte>(src.Ref<byte>(), size);
+
+        /// <summary>
+        /// Covers a <see cref='MemoryRange'/> with a readonly span
+        /// </summary>
+        /// <param name="src">The source reference</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ReadOnlySpan<T> view<T>(MemoryRange src)
+            => cover(src.BaseAddress.Ref<T>(), cells<T>(src));
 
         /// <summary>
         /// Presents a readonly S-reference as a readonly T-reference
@@ -34,15 +48,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref readonly T view<S,T>(in S src)
             => ref Unsafe.As<S,T>(ref edit(src));
-
-        /// <summary>
-        /// Interprets a readonly T-reference as a readonly float128 reference
-        /// </summary>
-        /// <param name="src">The source reference</param>
-        /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref readonly decimal view128f<T>(in T src)
-             => ref view<T,decimal>(src);
 
         /// <summary>
         /// Interprets a readonly T-reference as a readonly bool reference

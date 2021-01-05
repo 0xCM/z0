@@ -12,13 +12,6 @@ namespace Z0
 
     using api = ClrAssemblyNames;
 
-    public enum AssemblyNameKind : byte
-    {
-        Full = 0,
-
-        Simple = 1,
-    }
-
     public readonly struct ClrAssemblyName : IEquatable<ClrAssemblyName>
     {
         readonly AssemblyName Subject;

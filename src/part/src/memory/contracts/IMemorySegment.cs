@@ -14,13 +14,13 @@ namespace Z0
     {
         MemoryAddress BaseAddress {get;}
 
-        uint DataSize  {get;}
+        uint Length  {get;}
 
         bool INullity.IsEmpty
-            => DataSize == 0;
+            => Length == 0;
 
         uint CellCount
-            => DataSize * CellSize;
+            => Length * CellSize;
 
         uint CellSize
             => 1;

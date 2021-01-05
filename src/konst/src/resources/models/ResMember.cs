@@ -35,7 +35,7 @@ namespace Z0
         public uint DataSize
         {
             [MethodImpl(Inline)]
-            get => Reference.DataSize;
+            get => Reference.Length;
         }
 
         public string Format()

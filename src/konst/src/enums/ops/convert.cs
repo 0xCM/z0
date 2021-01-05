@@ -7,13 +7,13 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     partial class Enums
     {
         /// <summary>
         /// Safely, thus slowly, converts a numeric value to an enum value if and only if the numeric value
-        /// is represented by a declared literal 
+        /// is represented by a declared literal
         /// </summary>
         /// <param name="value">The numeric source value</param>
         /// <param name="default">The enum value to return if the conversion fails</param>
@@ -24,7 +24,7 @@ namespace Z0
 
         /// <summary>
         /// Safely, thus slowly, converts a numeric value to an enum value if and only if the numeric value
-        /// is represented by a declared literal 
+        /// is represented by a declared literal
         /// </summary>
         /// <param name="value">The numeric source value</param>
         /// <param name="default">The enum value to return if the conversion fails</param>
@@ -35,7 +35,7 @@ namespace Z0
 
         /// <summary>
         /// Safely, thus slowly, converts a numeric value to an enum value if and only if the numeric value
-        /// is represented by a declared literal 
+        /// is represented by a declared literal
         /// </summary>
         /// <param name="value">The numeric source value</param>
         /// <param name="default">The enum value to return if the conversion fails</param>
@@ -46,7 +46,7 @@ namespace Z0
 
         /// <summary>
         /// Safely, thus slowly, converts a numeric value to an enum value if and only if the numeric value
-        /// is represented by a declared literal 
+        /// is represented by a declared literal
         /// </summary>
         /// <param name="value">The numeric source value</param>
         /// <param name="default">The enum value to return if the conversion fails</param>
@@ -57,7 +57,7 @@ namespace Z0
 
         /// <summary>
         /// Safely, thus slowly, converts a numeric value to an enum value if and only if the numeric value
-        /// is represented by a declared literal 
+        /// is represented by a declared literal
         /// </summary>
         /// <param name="value">The numeric source value</param>
         /// <param name="default">The enum value to return if the conversion fails</param>
@@ -68,7 +68,7 @@ namespace Z0
 
         /// <summary>
         /// Safely, thus slowly, converts a numeric value to an enum value if and only if the numeric value
-        /// is represented by a declared literal 
+        /// is represented by a declared literal
         /// </summary>
         /// <param name="value">The numeric source value</param>
         /// <param name="default">The enum value to return if the conversion fails</param>
@@ -79,7 +79,7 @@ namespace Z0
 
         /// <summary>
         /// Safely, thus slowly, converts a numeric value to an enum value if and only if the numeric value
-        /// is represented by a declared literal 
+        /// is represented by a declared literal
         /// </summary>
         /// <param name="value">The numeric source value</param>
         /// <param name="default">The enum value to return if the conversion fails</param>
@@ -90,7 +90,7 @@ namespace Z0
 
         /// <summary>
         /// Safely, thus slowly, converts a numeric value to an enum value if and only if the numeric value
-        /// is represented by a declared literal 
+        /// is represented by a declared literal
         /// </summary>
         /// <param name="value">The numeric source value</param>
         /// <param name="default">The enum value to return if the conversion fails</param>

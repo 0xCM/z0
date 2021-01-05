@@ -7,10 +7,13 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
+    using static memory;
 
-    [ApiHost]
-    public readonly partial struct DataTypes
+    partial struct ClrQuery
     {
+        [MethodImpl(Inline), Op]
+        public static unsafe TypeCode typecode(in SystemTypeCodes src, byte index)
+            => (TypeCode)(*(address(src) + index).Pointer<byte>());
     }
 }

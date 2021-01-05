@@ -9,12 +9,11 @@ namespace Z0
     using System.Reflection;
 
     using static Part;
-    using static memory;
 
-    partial struct ClrQuery
+    public enum AssemblyNameKind : byte
     {
-        [MethodImpl(Inline), Op]
-        public static unsafe TypeCode lookup(in ClrTypeCodes src, byte index)
-            => (TypeCode)(*(address(src) + index).Pointer<byte>());
+        Full = 0,
+
+        Simple = 1,
     }
 }

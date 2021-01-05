@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static z;
+    using static memory;
     using static Part;
 
     /// <summary>
@@ -47,11 +47,11 @@ namespace Z0
         public uint DataSize
         {
             [MethodImpl(Inline)]
-            get => Reference.DataSize;
+            get => Reference.Length;
         }
 
         [MethodImpl(Inline)]
         public static implicit operator ResIdentity(ResIdentity<T> src)
-            => new ResIdentity(src.Name,src.Reference, ClrPrimitives.kind<T>());
+            => new ResIdentity(src.Name,src.Reference, SystemPrimitives.kind<T>());
     }
 }

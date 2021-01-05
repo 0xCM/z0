@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static z;
+    using static memory;
 
     public readonly struct Checks
     {
@@ -18,14 +18,14 @@ namespace Z0
         public static ref ulong eq<T>(T x, T y, ref byte index, ref ulong dst)
             where T : unmanaged
         {
-            dst = (ulong)@byte(ClrPrimitives.eq(x,y)) << index++;
+            dst = (ulong)@byte(SystemPrimitives.eq(x,y)) << index++;
             return ref dst;
         }
 
         [MethodImpl(Inline)]
         public static bit eq<T>(T x, T y)
             where T : unmanaged
-                => ClrPrimitives.eq(x,y);
+                => SystemPrimitives.eq(x,y);
 
         [MethodImpl(Inline)]
         public static BitVector64 bveq<T>(T x, T y, byte index)

@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static memory;
+    using static Part;
     using static PrimalBits;
 
     using NK = PrimalNumericKind;
@@ -16,7 +16,7 @@ namespace Z0
     using PK = PrimalKind;
 
     [ApiHost(ApiNames.ClrPrimitives, true)]
-    public readonly struct ClrPrimitives
+    public readonly struct SystemPrimitives
     {
         /// <summary>
         /// Determines the numeric kind, if any, of a system type

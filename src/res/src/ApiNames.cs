@@ -174,7 +174,7 @@ public readonly struct ApiNames
 
     public const string ClrRecords = ClrMetadata + dot + records;
 
-    public const string ClrTypeCodes = ClrMetadata + dot + codes + dot + types;
+    public const string SystemTypeCodes = system + dot + types + dot + codes;
 
     public const string ClrPrimitives = ClrMetadata + dot + primitives;
 

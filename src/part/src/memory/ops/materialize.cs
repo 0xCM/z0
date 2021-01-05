@@ -7,10 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
-
-    partial struct MemRefs
+    partial struct memory
     {
         [Op]
         public static void materialize(ReadOnlySpan<Ref> src, Span<byte> dst, byte? delimiter = null)

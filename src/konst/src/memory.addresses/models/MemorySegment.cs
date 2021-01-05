@@ -42,7 +42,7 @@ namespace Z0
         /// Specifies the segment byte count
         /// </summary>
         /// <typeparam name="T">The cell type</typeparam>
-        public uint DataSize
+        public uint Length
         {
             [MethodImpl(Inline)]
             get => (uint)vcell(Segment, 1);
@@ -51,13 +51,13 @@ namespace Z0
         public Span<byte> Buffer
         {
             [MethodImpl(Inline)]
-            get => cover(BaseAddress, DataSize);
+            get => cover(BaseAddress, Length);
         }
 
         public MemoryRange Range
         {
             [MethodImpl(Inline)]
-            get => new MemoryRange(BaseAddress, BaseAddress + DataSize);
+            get => new MemoryRange(BaseAddress, BaseAddress + Length);
         }
 
         public bool IsEmpty

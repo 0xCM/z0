@@ -48,15 +48,15 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public Span<T> As<T>()
-            => cover<T>(BaseAddress, DataSize/size<T>());
+            => cover<T>(BaseAddress, Length/size<T>());
 
         public Span<byte> Edit
         {
             [MethodImpl(Inline)]
-            get => cover(BaseAddress, DataSize);
+            get => cover(BaseAddress, Length);
         }
 
-        public uint DataSize
+        public uint Length
         {
             [MethodImpl(Inline)]
             get => Size;
@@ -77,7 +77,7 @@ namespace Z0
         public uint CellCount
         {
             [MethodImpl(Inline)]
-            get => DataSize;
+            get => Length;
         }
 
         [MethodImpl(Inline)]
@@ -101,7 +101,7 @@ namespace Z0
             => src.Address == Address && src.Size == Size;
 
         public string Format()
-            => string.Format("{0}:{1}", BaseAddress, DataSize);
+            => string.Format("{0}:{1}", BaseAddress, Length);
 
         public override bool Equals(object src)
             => src is Ref r && Equals(r);

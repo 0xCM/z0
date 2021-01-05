@@ -13,6 +13,28 @@ namespace Z0
     partial struct memory
     {
         /// <summary>
+        /// Covers a <see cref='MemoryRange'/> with a <see cref='Span{T}'
+        /// </summary>
+        /// <param name="src">The source reference</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Span<T> edit<T>(MemoryRange src)
+            => cover(src.BaseAddress.Ref<T>(), cells<T>(src));
+
+        /// <summary>
+        /// Covers a memory segment with a span
+        /// </summary>
+        /// <param name="src">The base address</param>
+        /// <param name="size">The segment size, in bytes</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe Span<byte> edit(MemoryAddress src, ByteSize size)
+            => cover<byte>(src.Ref<byte>(), size);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Span<T> edit<T>(Ref src)
+            => src.As<T>();
+
+        /// <summary>
         /// Transforms a readonly T-cell into an editable T-cell
         /// </summary>
         /// <param name="src">The source cell</param>

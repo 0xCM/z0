@@ -20,12 +20,11 @@ namespace Z0
             var r = memory.segref(src);
             var z = r.As<uint>();
 
-            Claim.eq(16, r.DataSize);
+            Claim.eq(16, r.Length);
             Claim.eq(4, r.CellCount);
             for(var i=0; i<src.Length; i++)
                 base.Claim.eq(r[i], (BitVector32)src[i]);
         }
-
 
         public void read_models()
         {
@@ -48,7 +47,7 @@ namespace Z0
             for(var i=0; i<refs.Length; i++)
             {
                 var r = refs[i];
-                var data = memory.view(r.BaseAddress, r.DataSize);
+                var data = memory.view(r.BaseAddress, r.Length);
                 dst.WriteLine(data.FormatHexBytes(Chars.Space));
             }
         }
@@ -64,10 +63,10 @@ namespace Z0
 
         unsafe void Process(in MemorySegment src, in MemorySegments store)
         {
-            var reader = MemoryReader.create(src.BaseAddress.Pointer<byte>(), (int)src.DataSize);
-            var dstA = Spans.alloc<byte>(src.DataSize);
+            var reader = memory.reader(src.BaseAddress.Pointer<byte>(), (int)src.Length);
+            var dstA = Spans.alloc<byte>(src.Length);
             var count = reader.ReadAll(dstA);
-            Claim.eq(count,src.DataSize);
+            Claim.eq(count,src.Length);
 
             var dstB = MemoryStore.Service.load(src);
             Claim.eq(count, dstB.Length);

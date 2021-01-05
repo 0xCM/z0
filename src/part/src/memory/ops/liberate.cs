@@ -12,6 +12,14 @@ namespace Z0
 
     partial struct memory
     {
+        [MethodImpl(Inline)]
+        public static unsafe ref readonly Ref<T> liberate<T>(in Ref<T> src)
+            where T : unmanaged
+        {
+            liberate(src.BaseAddress.Pointer<T>(), (int)src.Length);
+            return ref src;
+        }
+
         /// <summary>
         /// Enables bytespan execution
         /// </summary>
@@ -42,7 +50,7 @@ namespace Z0
         /// <param name="range">The range to liberate</param>
         [MethodImpl(Inline), Op]
         public static unsafe byte* liberate(MemoryRange range)
-            => liberate(range.Start.Pointer<byte>(), range.Length);
+            => liberate(range.BaseAddress.Pointer<byte>(), range.Length);
 
         [MethodImpl(Inline)]
         public static unsafe T* liberate<T>(T* pSrc, int length)

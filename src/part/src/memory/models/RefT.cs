@@ -44,10 +44,10 @@ namespace Z0
             get => Segment.Edit;
         }
 
-        public uint DataSize
+        public uint Length
         {
             [MethodImpl(Inline)]
-            get => Segment.DataSize;
+            get => Segment.Length;
         }
 
         public uint CellSize
@@ -59,7 +59,7 @@ namespace Z0
         public uint CellCount
         {
             [MethodImpl(Inline)]
-            get => DataSize/CellSize;
+            get => Length/CellSize;
         }
 
         public MemoryAddress BaseAddress
@@ -71,7 +71,7 @@ namespace Z0
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => BaseAddress == 0 || DataSize == 0;
+            get => BaseAddress == 0 || Length == 0;
         }
 
         [MethodImpl(Inline)]

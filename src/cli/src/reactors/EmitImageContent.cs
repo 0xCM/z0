@@ -22,9 +22,9 @@ namespace Z0.Images
             const ushort PageSize = 0x1000;
             var buffer = span<byte>(PageSize);
             var pages = (uint)(src.Length/PageSize);
-            var reader = MemoryReader.create<byte>(src);
+            var reader = memory.reader<byte>(src);
             var offset = 0ul;
-            var formatter = Formatters.data(src.Start);
+            var formatter = Formatters.data(src.BaseAddress);
             for(var i=0; i<pages; i++)
             {
                 var size = reader.Read((int)offset, PageSize, buffer);

@@ -19,25 +19,6 @@ namespace Z0
 
         MemoryReaderState State;
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static MemoryReader<T> create<T>(T* pSrc, int length)
-            where T : unmanaged
-                => new MemoryReader<T>(pSrc, length);
-
-        [MethodImpl(Inline), Op]
-        public static MemoryReader create(byte* pSrc, int length)
-            => new MemoryReader(pSrc, length);
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static MemoryReader<T> create<T>(in MemorySegment src)
-            where T : unmanaged
-                => create(src.BaseAddress.Pointer<T>(), (int)src.DataSize);
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static MemoryReader<T> create<T>(in MemoryRange src)
-            where T : unmanaged
-                => create(src.Start.Pointer<T>(), (int)src.Length);
-
         [MethodImpl(Inline)]
         internal MemoryReader(byte* pSrc, int length)
         {

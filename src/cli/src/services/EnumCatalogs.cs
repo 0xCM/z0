@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Konst;
     using static z;
     using static EnumLiteralRow;
 
@@ -20,7 +19,7 @@ namespace Z0
         {
             var fields = span(src.LiteralFields());
             var dst = span<EnumLiteralRow>(fields.Length);
-            var ecode = ClrPrimitives.ecode(src);
+            var ecode = SystemPrimitives.ecode(src);
             fill(part, src, ecode, fields, dst);
             return dst;
         }

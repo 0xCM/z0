@@ -11,6 +11,11 @@ namespace Z0
 
     partial struct memory
     {
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static unsafe void copy<T>(MemoryRange src, Span<T> dst)
+            where T : unmanaged
+                => reader<T>(src).ReadAll(dst);
+
         /// <summary>
         /// Copies a specified number of source values to the target and returns the count of copied bytes
         /// </summary>

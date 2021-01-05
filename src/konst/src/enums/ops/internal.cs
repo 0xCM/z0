@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Collections.Concurrent;
 
-    using static Konst;
-
     partial class Enums
     {
         static ConcurrentDictionary<Type,object> IndexCache {get;}

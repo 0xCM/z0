@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="src">The source classifiers</param>
         /// <typeparam name="K">The classifier type</typeparam>
         [Op, Closures(UInt8k)]
-        public static ClassifierMap<byte,K> create<K>(W8 w, K[] src)
+        public static ClassifierMap<byte,K> classify<K>(W8 w, K[] src)
             where K : unmanaged
         {
             var source = @readonly(src);
@@ -40,7 +40,7 @@ namespace Z0
         /// <param name="src">The source classifiers</param>
         /// <typeparam name="K">The classifier type</typeparam>
         [Op, Closures(UInt16k)]
-        public static ClassifierMap<ushort,K> create<K>(W16 w, K[] src)
+        public static ClassifierMap<ushort,K> classify<K>(W16 w, K[] src)
             where K : unmanaged
         {
             var source = @readonly(src);
@@ -60,7 +60,7 @@ namespace Z0
         /// <param name="src">The source classifiers</param>
         /// <typeparam name="K">The classifier type</typeparam>
         [Op, Closures(UInt32k)]
-        public static ClassifierMap<uint,K> create<K>(W32 w, K[] src)
+        public static ClassifierMap<uint,K> classify<K>(W32 w, K[] src)
             where K : unmanaged
         {
             var source = @readonly(src);
@@ -80,7 +80,7 @@ namespace Z0
         /// <param name="src">The source classifiers</param>
         /// <typeparam name="K">The classifier type</typeparam>
         [Op, Closures(UInt64k)]
-        public static ClassifierMap<ulong,K> create<K>(W64 w, K[] src)
+        public static ClassifierMap<ulong,K> classify<K>(W64 w, K[] src)
             where K : unmanaged
         {
             var source = @readonly(src);
@@ -93,7 +93,7 @@ namespace Z0
             return new ClassifierMap<ulong,K>((uint)count, iK, Ki);
         }
 
-        public static ClassifierMap<I,K> create<I,K>(Paired<I,K>[] src)
+        public static ClassifierMap<I,K> classify<I,K>(Paired<I,K>[] src)
             where I : unmanaged
             where K : unmanaged
         {

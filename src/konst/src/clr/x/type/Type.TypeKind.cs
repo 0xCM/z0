@@ -28,13 +28,5 @@ namespace Z0
             else
                 return 0;
         }
-
-        /// <summary>
-        /// Queries the source <see cref='Type'/> for the <see cref='Type'/> it wraps
-        /// </summary>
-        /// <param name="src">The source type</param>
-        [MethodImpl(Inline), Op]
-        public static Type ElementType(this Type src)
-            => src.GetElementType();
     }
 }

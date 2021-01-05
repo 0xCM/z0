@@ -21,7 +21,7 @@ namespace Z0
             for(var i=0u; i<kSources; i++)
             {
                 ref readonly var source = ref skip(sources,i);
-                var length = source.DataSize;
+                var length = source.Length;
                 var data = MemoryStore.Service.load(source);
 
                 if(data.Length == length)

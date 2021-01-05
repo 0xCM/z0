@@ -5,14 +5,19 @@
 namespace Z0
 {
     using System;
+    using System.Reflection;
     using System.Runtime.CompilerServices;
 
     using static Part;
 
-    partial struct ClrQuery
+    partial class XClrQuery
     {
+        /// <summary>
+        /// Queries the source <see cref='Type'/> for the <see cref='Type'/> it wraps
+        /// </summary>
+        /// <param name="src">The source type</param>
         [MethodImpl(Inline), Op]
-        public static SystemTypeCodes typecodes()
-            => SystemTypeCodes.cached();
+        public static Type ElementType(this Type src)
+            => src.GetElementType();
     }
 }

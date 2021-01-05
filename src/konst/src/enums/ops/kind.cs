@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     partial class Enums
     {
@@ -15,7 +15,7 @@ namespace Z0
         public static EnumLiteralKind kind(Type e)
         {
             var tc = Type.GetTypeCode(e.GetEnumUnderlyingType());
-            return (EnumLiteralKind)ClrPrimitives.kind(tc);
+            return (EnumLiteralKind)SystemPrimitives.kind(tc);
         }
 
         [MethodImpl(Inline)]

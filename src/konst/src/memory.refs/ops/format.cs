@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static z;
+    using static memory;
 
     partial struct MemRefs
     {
@@ -89,7 +89,7 @@ namespace Z0
 
             for(var i=0u; i<count; i++)
             {
-                var s = z.skip(src,i).Text;
+                var s = skip(src,i).Text;
                 dst.Append(s);
                 if(i != count - 1)
                     dst.Append(delimiter);

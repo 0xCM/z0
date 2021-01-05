@@ -165,9 +165,9 @@ namespace Z0
             var line = text.build();
             using var writer = dst.Writer();
 
-            var pSrc = src.Start.Pointer<byte>();
-            var last =  src.End.Pointer<byte>();
-            var address = src.Start;
+            var pSrc = src.BaseAddress.Pointer<byte>();
+            var last =  src.EndAddress.Pointer<byte>();
+            var address = src.BaseAddress;
             byte pos = 0;
             var offset = 0u;
 

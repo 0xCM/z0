@@ -7,16 +7,17 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
-    partial struct z
+    partial struct memory
     {
         /// <summary>
-        /// Computes the whole number of T-cells identified by a reference
+        /// Interprets a readonly T-reference as a readonly float128 reference
         /// </summary>
-        /// <typeparam name="T">The cell type</typeparam>
+        /// <param name="src">The source reference</param>
+        /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static uint count<T>(in MemorySegment src)
-            => (uint)(src.DataSize/size<T>());
+        public static ref readonly decimal view128f<T>(in T src)
+             => ref view<T,decimal>(src);
     }
 }

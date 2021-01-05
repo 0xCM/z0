@@ -40,13 +40,13 @@ namespace Z0
         public ulong Start
         {
             [MethodImpl(Inline)]
-            get => Range.Start;
+            get => Range.BaseAddress;
         }
 
         public ulong End
         {
             [MethodImpl(Inline)]
-            get => Range.End;
+            get => Range.EndAddress;
         }
 
         public int ByteCount

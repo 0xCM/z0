@@ -11,20 +11,20 @@ namespace Z0
 
     using TC = System.TypeCode;
 
-    readonly struct ClrTypeCodeCache
+    readonly struct TypeCodeCache
     {
-        static internal readonly ClrTypeCodes Data = new ClrTypeCodes(0);
+        static internal readonly SystemTypeCodes Data = new SystemTypeCodes(0);
     }
 
-    [ApiHost(ApiNames.ClrTypeCodes, true)]
-    public readonly struct ClrTypeCodes
+    [ApiHost(ApiNames.SystemTypeCodes, true)]
+    public readonly struct SystemTypeCodes
     {
         [MethodImpl(Inline), Op]
-        public static ref readonly ClrTypeCodes cached()
-            => ref ClrTypeCodeCache.Data;
+        public static ref readonly SystemTypeCodes cached()
+            => ref TypeCodeCache.Data;
 
         [MethodImpl(Inline), Op]
-        public static ref readonly Type type(in ClrTypeCodes src, TypeCode tc)
+        public static ref readonly Type type(in SystemTypeCodes src, TypeCode tc)
             => ref src[tc];
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
@@ -135,7 +135,7 @@ namespace Z0
         internal readonly Type[] Types;
 
         [MethodImpl(Inline)]
-        public ClrTypeCodes(int i)
+        public SystemTypeCodes(int i)
         {
             @null = TypeCode.Empty.ToKind();
             obj = TypeCode.Object.ToKind();
