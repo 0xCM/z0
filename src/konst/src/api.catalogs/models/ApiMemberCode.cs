@@ -47,7 +47,7 @@ namespace Z0
             get => Encoded.OpUri;
         }
 
-        public ApiMetadataUri MetaUri
+        public ApiArtifactUri MetaUri
         {
             [MethodImpl(Inline)]
             get => Member.MetaUri;

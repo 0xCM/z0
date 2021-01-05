@@ -67,7 +67,7 @@ namespace Z0
             var count = render(src.Address, dst);
 
             count += delimiter(dst);
-            count += render(src.Uri, dst);
+            count += render(src.ArtifactUri, dst);
 
             count += delimiter(dst);
             count += render(src.Genericity, dst);
@@ -114,7 +114,7 @@ namespace Z0
         }
 
         [RenderFunction]
-        public static Count render(in ApiMetadataUri src, ITextBuffer dst)
+        public static Count render(in ApiArtifactUri src, ITextBuffer dst)
         {
             var content = string.Format("{0,-64}", src.Format());
             dst.Append(content);
@@ -154,7 +154,7 @@ namespace Z0
         {
             var method = src.Method;
             dst.Address = src.Address;
-            dst.Uri = src.MetaUri;
+            dst.ArtifactUri = src.MetaUri;
             dst.Genericity = method.GenericState();
             dst.Sig = sig(method);
             dst.Metadata = method.Metadata();

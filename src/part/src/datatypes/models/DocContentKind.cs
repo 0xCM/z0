@@ -15,6 +15,7 @@ namespace Z0
 
         Type = 20,
     }
+
     /// <summary>
     /// Defines classifiers for structured content
     /// </summary>

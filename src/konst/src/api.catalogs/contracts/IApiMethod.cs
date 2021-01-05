@@ -27,7 +27,7 @@ namespace Z0
         /// <summary>
         /// The metadata uri
         /// </summary>
-        ApiMetadataUri MetaUri => Method;
+        ApiArtifactUri MetaUri => Method;
 
         /// <summary>
         /// The method's kind identifier if it exists

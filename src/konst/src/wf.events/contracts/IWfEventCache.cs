@@ -4,8 +4,15 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public readonly partial struct ResDataEmitter
-    {
+    using System;
+    using System.Collections.Generic;
 
+    public interface IWfEventCache : IWfEventSink
+    {
+        bool Take(out IWfEvent e);
+
+        uint Take(Span<IWfEvent> dst);
+
+        IEnumerable<IWfEvent> Take();
     }
 }

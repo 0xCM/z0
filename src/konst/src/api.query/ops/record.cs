@@ -14,13 +14,11 @@ namespace Z0
             var method = src.Method;
             var host = method.DeclaringType;
             var part = host.Assembly.Id();
-            var id = Identity.identify(method);
             dst.Sequence = seq;
             dst.Address = src.Address;
             dst.HostName = host.Tag<ApiHostAttribute>().MapValueOrElse(a => text.ifempty(a.HostName, host.Name), () =>  host.Name).ToLower();
             dst.PartName = part != 0 ? part.Format() : host.Assembly.GetSimpleName();
-            dst.Identifier = id.Identifier;
-            dst.Signature = method.ResolveSignature();
+            dst.Identifier = ApiIdentity.identify(method);
             return dst;
         }
     }

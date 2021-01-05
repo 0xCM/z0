@@ -10,7 +10,7 @@ namespace Z0
     using System.IO;
     using System.Linq;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     public readonly struct ResExtractor

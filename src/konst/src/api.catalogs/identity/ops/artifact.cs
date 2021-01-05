@@ -15,7 +15,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The type to identify</param>
         [Op]
-        public static TypeIdentity identify(Type src)
+        public static TypeIdentity artifact(Type src)
         {
             var component = src.Assembly;
             var id = text.format(RP.SlotDot3,
@@ -31,7 +31,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The method to identify</param>
         [Op]
-        public static OpIdentity identify(MethodInfo src)
+        public static OpIdentity artifact(MethodInfo src)
         {
             var type = src.DeclaringType;
             var component = type.Assembly;
@@ -50,7 +50,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The method to identify</param>
         [Op]
-        public static OpIdentity identify(Delegate src)
+        public static OpIdentity artifact(Delegate src)
         {
             var method =src.Method;
             var type = method.DeclaringType;

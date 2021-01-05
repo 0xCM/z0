@@ -17,8 +17,6 @@ namespace Z0
 
         public Name HostName;
 
-        public Name Identifier;
-
-        public CliSig Signature;
+        public OpIdentity Identifier;
     }
 }

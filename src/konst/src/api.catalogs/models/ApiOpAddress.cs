@@ -20,7 +20,7 @@ namespace Z0
     {
         public MemoryAddress Location {get;}
 
-        public ApiMetadataUri Uri {get;}
+        public ApiArtifactUri Uri {get;}
 
         public bool IsEmpty
         {
@@ -38,7 +38,7 @@ namespace Z0
             => Empty;
 
         [MethodImpl(Inline)]
-        public ApiOpAddress(ApiMetadataUri uri, MemoryAddress address)
+        public ApiOpAddress(ApiArtifactUri uri, MemoryAddress address)
         {
             Uri = uri;
             Location = address;
@@ -68,10 +68,10 @@ namespace Z0
             => Location == src.Location ? 0 : Location < src.Location ? -1 : 1;
 
         [MethodImpl(Inline)]
-        public static implicit operator ApiOpAddress((ApiMetadataUri uri, MemoryAddress address) src)
+        public static implicit operator ApiOpAddress((ApiArtifactUri uri, MemoryAddress address) src)
             => new ApiOpAddress(src.uri, src.address);
 
         public static ApiOpAddress Empty
-            => (ApiMetadataUri.Empty, MemoryAddress.Empty);
+            => (ApiArtifactUri.Empty, MemoryAddress.Empty);
     }
 }

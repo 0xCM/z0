@@ -30,6 +30,8 @@ namespace Z0
             return service;
         }
 
+        IWfEventCache Events {get; set;}
+
         public IWfShell Wf {get; private set;}
 
         protected WfHost Host {get; private set;}
@@ -45,6 +47,8 @@ namespace Z0
             Host = WfShell.host(typeof(H));
             Wf = wf.WithHost(Host);
             Db = wf.Db();
+            Events = EventCache.init(wf);
+
             OnInit();
         }
 

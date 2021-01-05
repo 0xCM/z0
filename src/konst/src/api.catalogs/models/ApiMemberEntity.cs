@@ -11,7 +11,7 @@ namespace Z0
     {
         public MemoryAddress Address;
 
-        public ApiMetadataUri MetaUri;
+        public ApiArtifactUri ArtifactUri;
 
         public ApiHostUri Host;
 

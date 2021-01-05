@@ -29,8 +29,8 @@ namespace Z0
         public void read_models()
         {
             var svc = Resources.stores(n256);
-            var store = svc.store();
-            var results = svc.locations(store);
+            var store = svc.Segments();
+            var results = svc.Locations(store);
             var dst = CaseWriter(FileExtensions.Csv);
             for(var i=0; i<results.Length; i++)
             {
@@ -55,7 +55,7 @@ namespace Z0
         public void run_2()
         {
             var svc = Resources.stores(n256);
-            var store = svc.store();
+            var store = svc.Segments();
             var sources = store.View;
             for(var i=0u; i<sources.Length; i++)
                 Process(skip(sources,i), store);

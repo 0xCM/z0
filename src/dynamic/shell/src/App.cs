@@ -377,44 +377,6 @@ namespace Z0
             Wf.Router.Dispatch(cmd);
         }
 
-        unsafe void Jit()
-        {
-            var catalog = Wf.ApiParts.Api;
-            var parts = catalog.Parts;
-            var outer = Wf.Running($"Jitting {parts.Length} parts");
-            var all = list<MethodAddress>();
-            var total = 0u;
-            foreach(var part in parts)
-            {
-                var members = ApiJit.jit(part);
-                if(members.Count != 0)
-                {
-                    var flow = Wf.Running(Msg.Jitting.Format(part));
-                    var addresses = members.Storage.Select(m => new MethodAddress(m.Method));
-                    all.AddRange(addresses);
-                    var memories = ApiPartMemories.load(part.Owner, addresses);
-                    var first = memories.First;
-                    var last = memories.Last;
-                    var range = memories.Range;
-                    var length = range.Length/1024;
-                    if(length == 0)
-                        length = 1;
-                    total += length;
-
-                    Wf.Ran(flow, Msg.Jitted.Format(members.Count, part, range, length));
-                }
-            }
-            Wf.Ran(outer, string.Format("Jitted {0:#,#}mb member data", total));
-
-            var sorted = Index.sort(all.ToArray());
-            var records = corefunc.mapi(sorted, (i,x) => ApiQuery.record((uint)i, x));
-            var target = Db.IndexFile(ApiAddressRecord.TableId);
-            var emission = Records.emit(records, new byte[]{12,16,16,32,80,64}, target);
-            Wf.Status(emission);
-
-            var image = ImageMaps.map();
-        }
-
         public void LoadAsmStore()
         {
             var store = AsmStore.init(Wf);
@@ -449,7 +411,14 @@ namespace Z0
             // var commands = Commands.service(Wf);
             // commands.EmitDocComments().Wait();
             //EmitImageHeaders();
-            ShowPartComponents();
+
+            Wf.CmdBuilder().JitApiCmd().Dispatch(Wf).Wait();
+
+            // var service = ApiJit.service(Wf);
+            // var records = service.JitApi(Db.IndexFile(ApiAddressRecord.TableId));
+
+            //var records = Jit(Db.IndexFile(ApiAddressRecord.TableId));
+            //ShowPartComponents();
 
             //Run(Args);
             //EmitProcessImages(Wf);

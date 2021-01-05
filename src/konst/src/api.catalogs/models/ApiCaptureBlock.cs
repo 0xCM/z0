@@ -31,7 +31,7 @@ namespace Z0
 
         public CliSig CliSig;
 
-        public ApiMetadataUri MetaUri
+        public ApiArtifactUri MetaUri
             => Method;
 
         [MethodImpl(Inline)]

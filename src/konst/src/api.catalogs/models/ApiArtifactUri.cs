@@ -15,7 +15,7 @@ namespace Z0
 
     using api = ApiIdentity;
 
-    public readonly struct ApiMetadataUri : ITextual
+    public readonly struct ApiArtifactUri : ITextual
     {
         internal const byte PartIndex = 0;
 
@@ -28,7 +28,7 @@ namespace Z0
         internal readonly Vector128<uint> Data;
 
         [MethodImpl(Inline)]
-        public ApiMetadataUri(Vector128<uint> src)
+        public ApiArtifactUri(Vector128<uint> src)
             => Data = src;
 
         public PartId Part
@@ -66,7 +66,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public bool Equals(ApiMetadataUri src)
+        public bool Equals(ApiArtifactUri src)
             => api.eq(this,src);
 
         public override string ToString()
@@ -85,9 +85,9 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator ApiMetadataUri(MethodInfo src)
-            => api.identify(src);
+        public static implicit operator ApiArtifactUri(MethodInfo src)
+            => api.artifact(src);
 
-        public static ApiMetadataUri Empty => default;
+        public static ApiArtifactUri Empty => default;
     }
 }

@@ -10,12 +10,12 @@ namespace Z0
     using System.IO;
     using System.Reflection;
 
-    using static Konst;
+    using static Part;
 
-    public readonly struct TableContentProvider
+    public readonly struct ResEntryProvider : IResEntryProvider
     {
-        public static TableContentProvider create(Assembly src)
-            => new TableContentProvider(src);
+        public static ResEntryProvider create(Assembly src)
+            => new ResEntryProvider(src);
 
         static IEnumerable<DocLibEntry> entries(Assembly src)
         {
@@ -28,19 +28,20 @@ namespace Z0
 
         readonly ResExtractor Extractor;
 
-        readonly TableSpan<DocLibEntry> _Entries;
+        readonly Index<DocLibEntry> _Entries;
 
-        internal TableContentProvider(Assembly src)
+        internal ResEntryProvider(Assembly src)
         {
             Source = src;
             Extractor = ResExtractor.Service(src);
             _Entries = entries(src).Array();
         }
 
-        public ReadOnlySpan<DocLibEntry> Entries
+
+        public Index<DocLibEntry> Entries
         {
             [MethodImpl(Inline)]
-            get => _Entries.View;
+            get => _Entries;
         }
     }
 }

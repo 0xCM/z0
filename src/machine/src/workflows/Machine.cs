@@ -36,23 +36,26 @@ namespace Z0
             Wf.Status(Seq.delimit(Wf.Api.PartIdentities));
             try
             {
-                //ApiCaptureRunner.run(Wf);
-                ResDataEmitter.index(Wf);
-                ResDataEmitter.reference(Wf);
+                var resources = ResDataService.init(Wf);
+                resources.EmitContentIndex();
+                resources.EmitReferenceData();
+
+                EmitComments.create().Run(Wf);
+
+                // ResData.EmitContentIndex(Wf);
+                // ResData.reference(Wf);
                 XedEtlWfHost.create().Run(Wf);
 
-                var emitters = ImageEmitters.init(Wf);
-                emitters.EmitSectionHeaders();
-                emitters.EmitCilRecords();
-                emitters.EmitUserStrings();
-                emitters.EmitSystemStrings();
+                var images = ImageEmitters.init(Wf);
+                images.EmitSectionHeaders();
+                images.EmitCilRecords();
+                images.EmitUserStrings();
+                images.EmitSystemStrings();
 
-                //EmitStringRecords.create().Run(Wf);
 
                 EmitFieldMetadata.create().Run(Wf);
                 EmitImageConstants.create().Run(Wf);
                 EmitLocatedParts.create().Run(Wf);
-                EmitComments.create().Run(Wf);
                 EmitImageBlobs.create().Run(Wf);
 
 

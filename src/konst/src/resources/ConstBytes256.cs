@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     [ApiHost(ApiNames.ConstBytes256, true)]
@@ -162,6 +162,5 @@ namespace Z0
 
         public ReadOnlySpan<byte> SegZ
             => new byte[1]{0};
-
     }
 }

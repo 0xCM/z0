@@ -129,7 +129,7 @@ namespace Z0.Asm
             }
         }
 
-        static AsmRoutine routine(ApiMetadataUri meta, OpUri uri, string sig, ApiBlockAsm src, bool check = false)
+        static AsmRoutine routine(ApiArtifactUri meta, OpUri uri, string sig, ApiBlockAsm src, bool check = false)
         {
             var count = src.InstructionCount;
             var info = new AsmFxSummary[count];

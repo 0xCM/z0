@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="src">The method to identify</param>
         [MethodImpl(Inline), Op]
         public static ApiGenericOpIdentity generic(MethodInfo src)
-            => new ApiGenericOpIdentity(identify(src));
+            => new ApiGenericOpIdentity(artifact(src));
 
         /// <summary>
         /// Creates a moniker directly from source text

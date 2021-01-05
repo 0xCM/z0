@@ -16,7 +16,7 @@ namespace Z0
     {
         public const string IdentifierPattern = "{0}_{1}_{2}_{3}";
 
-        public const string UriPattern = "metadata://{0}/{1}/{2}/{3}";
+        public const string ArtifactPattern = "metadata://{0}/{1}/{2}/{3}";
 
         internal const byte PartIndex = 0;
 
@@ -25,6 +25,15 @@ namespace Z0
         internal const byte KeyIndex = 2;
 
         internal const byte OpIndex = 3;
+
+        public static OpIdentity identify(MethodInfo src)
+            => MultiDiviner.Service.DivineIdentity(src);
+
+        public static OpIdentity identify(Delegate src)
+            => MultiDiviner.Service.DivineIdentity(src);
+
+        public static TypeIdentity identify(Type src)
+            => MultiDiviner.Service.DivineIdentity(src);
 
         public static FS.FileName file(ApiHostUri host, FS.FileExt ext)
             => FS.file(text.concat(host.Owner.Format(), Chars.Dot, host.Name), ext);
@@ -77,26 +86,26 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static ApiClass kind(in ApiMetadataUri src)
+        public static ApiClass kind(in ApiArtifactUri src)
             => (ApiClass)vcell(src.Data, KeyIndex);
 
         [MethodImpl(Inline), Op]
-        public static PartId part(in ApiMetadataUri src)
+        public static PartId part(in ApiArtifactUri src)
             => (PartId)vcell(src.Data, PartIndex);
 
         /// <summary>
-        /// Creates a <see cref='ApiMetadataUri'/> that identifies a specified method
+        /// Creates a <see cref='ApiArtifactUri'/> that identifies a specified method
         /// </summary>
         /// <param name="src">The source method</param>
         [MethodImpl(Inline), Op]
-        public static ApiMetadataUri identify(MethodInfo src)
+        public static ApiArtifactUri artifact(MethodInfo src)
         {
             var host = src.DeclaringType;
-            return new ApiMetadataUri(vparts(w128, (uint)host.Assembly.Id(), (uint)host.MetadataToken, (uint)src.KindId(), (uint)src.MetadataToken));
+            return new ApiArtifactUri(vparts(w128, (uint)host.Assembly.Id(), (uint)host.MetadataToken, (uint)src.KindId(), (uint)src.MetadataToken));
         }
 
         [MethodImpl(Inline), Op]
-        public static bool eq(in ApiMetadataUri a,in ApiMetadataUri b)
+        public static bool eq(in ApiArtifactUri a,in ApiArtifactUri b)
             => a.Data.Equals(b.Data);
 
         [MethodImpl(Inline), Op]
@@ -108,11 +117,11 @@ namespace Z0
             => src.Format();
 
         [Op]
-        public static string identifier(in ApiMetadataUri src)
+        public static string identifier(in ApiArtifactUri src)
             => string.Format(IdentifierPattern, identifier(src.Part), identifier(src.KindKey), src.HostId, src.OperationId);
 
         [Op]
-        public static string format(in ApiMetadataUri src)
-            => string.Format(UriPattern, identifier(src.Part), identifier(src.KindKey), src.HostId, src.OperationId);
+        public static string format(in ApiArtifactUri src)
+            => string.Format(ArtifactPattern, identifier(src.Part), identifier(src.KindKey), src.HostId, src.OperationId);
     }
 }

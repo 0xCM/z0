@@ -11,9 +11,13 @@ namespace Z0
     {
         WfEventId EventId {get;}
 
+        EventMessage Message
+            => new EventMessage(this, Format());
+
         WfStepId StepId
             => WfStepId.Empty;
     }
+
 
     /// <summary>
     /// Characterizes a reified event
