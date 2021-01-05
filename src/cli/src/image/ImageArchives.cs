@@ -10,6 +10,7 @@ namespace Z0
 
     using System.Runtime.CompilerServices;
     using Z0.Images;
+
     using static Part;
     using static z;
 
@@ -44,7 +45,7 @@ namespace Z0
         public static void EmitBuildArchiveList(IWfShell wf, FS.FolderPath src, string label)
         {
             var builder = wf.CmdBuilder();
-            var archive = BuildArchives.create(wf, src);
+            var archive = Archives.build(wf, src);
             var types = array(archive.Dll, archive.Exe, archive.Pdb, archive.Lib, archive.Xml, archive.Json);
             var cmd = builder.ListFiles(label + ".build-artifacts", archive.Root, types);
             wf.Router.Dispatch(cmd);

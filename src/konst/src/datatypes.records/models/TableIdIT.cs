@@ -9,23 +9,26 @@ namespace Z0
 
     using static Part;
 
-    using api = Records;
-
     public readonly struct TableId<I,T> : ITableId<I,T>
         where T : struct, IRecord<T>
         where I : unmanaged
     {
+        public TableId Value {get;}
+
         public I Index {get;}
 
         [MethodImpl(Inline)]
-        public TableId(I index)
-            => Index = index;
+        public TableId(TableId value, I index)
+        {
+            Value = value;
+            Index = index;
+        }
 
         public Name RecordType
-            => typeof(T).Name;
+            => Value.RecordType;
 
         public Name Identifier
-            => api.tableid(typeof(T)).Identifier;
+            => Value.Identifier;
 
         [MethodImpl(Inline)]
         public string Format()
@@ -36,10 +39,10 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator TableId(TableId<I,T> src)
-            => api.tableid(typeof(T));
+            => src.Value;
 
         [MethodImpl(Inline)]
         public static implicit operator TableId<T>(TableId<I,T> src)
-            => default;
+            => new TableId<T>(src.Value);
     }
 }

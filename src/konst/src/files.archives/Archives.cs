@@ -8,11 +8,71 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.IO;
 
-    using static Konst;
+    using static Part;
 
     [ApiHost]
-    public readonly partial struct FileArchives
+    public readonly partial struct Archives
     {
+        [MethodImpl(Inline)]
+        public static IApiHexReader hexreader<H>(H rep = default)
+            where H : struct, IArchiveReader
+        {
+            if(typeof(H) == typeof(ApiHexReader))
+                return new ApiHexReader();
+            else
+                throw no<H>();
+        }
+
+        [MethodImpl(Inline)]
+        public static ApiHexWriter hexwriter<H>(FS.FilePath dst, H rep = default)
+            where H : struct, IArchiveWriter<H>
+        {
+            if(typeof(H) == typeof(ApiHexWriter))
+                return new ApiHexWriter(dst);
+            else
+                throw no<H>();
+        }
+
+        [MethodImpl(Inline), Op]
+        public static ApiHexArchive hex(IWfShell wf)
+            => new ApiHexArchive(wf.Db().CapturedHexDir());
+
+        [MethodImpl(Inline), Op]
+        public static ApiHexArchive hex(FS.FolderPath root)
+            => new ApiHexArchive(root);
+
+        /// <summary>
+        /// Creates a <see cref='ICaptureArchive'/> rooted at a specified path
+        /// </summary>
+        /// <param name="root">The archive root</param>
+        [MethodImpl(Inline), Op]
+        public static ICaptureArchive capture(FS.FolderPath root)
+            => new CaptureArchive(root);
+
+        /// <summary>
+        /// Creates a <see cref='ICaptureArchive'/> rooted at a specified path and specialized for an identified <see cref='PartId'/>
+        /// </summary>
+        /// <param name="root">The archive root</param>
+        [MethodImpl(Inline), Op]
+        public static ICaptureArchive capture(FS.FolderPath root, PartId part)
+            => new CaptureArchive(root + FS.folder(part.Format()));
+
+        [MethodImpl(Inline), Op]
+        public static IHostCaptureArchive capture(FS.FolderPath root, ApiHostUri host)
+            => new HostCaptureArchive(root, host);
+
+        /// <summary>
+        /// Creates an archive over the output of a build
+        /// </summary>
+        /// <param name="root">The archive root</param>
+        [MethodImpl(Inline), Op]
+        public static IBuildArchive build(IWfShell wf,  FS.FolderPath root)
+            => new BuildArchive(wf, root);
+
+        [MethodImpl(Inline), Op]
+        public static IBuildArchive build(IWfShell wf)
+            => build(wf, FS.path(wf.Controller.Component.Location).FolderPath);
+
         /// <summary>
         /// Creates an archive over both managed and unmanaged modules
         /// </summary>

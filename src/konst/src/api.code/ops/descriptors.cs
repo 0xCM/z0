@@ -16,7 +16,7 @@ namespace Z0
         [Op]
         public static Index<ApiCodeDescriptor> descriptors(IWfShell wf)
         {
-            var archive = WfArchives.hex(wf);
+            var archive = Archives.hex(wf);
             var root = archive.Root;
             var files = @readonly(archive.ArchivedFiles().Array());
             var empty = Index<ApiCodeDescriptor>.Empty;
@@ -84,7 +84,7 @@ namespace Z0
         [Op]
         public static Index<ApiCodeDescriptor> descriptors(FS.FolderPath src)
         {
-            var archive = WfArchives.hex(src);
+            var archive = Archives.hex(src);
             var files = archive.List();
             var dst = list<ApiCodeDescriptor>();
             foreach(var file in files.Storage)

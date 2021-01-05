@@ -10,7 +10,7 @@ namespace Z0
 
     partial class PeTableReader
     {
-        public static ReadOnlySpan<ImageSectionHeader> headers(FS.FilePath src)
+        public static Index<ImageSectionHeader> headers(FS.FilePath src)
         {
             using var stream = File.OpenRead(src.Name);
             using var reader = new PEReader(stream);

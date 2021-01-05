@@ -41,7 +41,7 @@ namespace Z0
             Stream.Dispose();
         }
 
-        public static ReadOnlySpan<CilRecord> cil(PartId part, FS.FilePath src)
+        public static ReadOnlySpan<CilRecord> cil(FS.FilePath src)
         {
             var dst = sys.list<CilRecord>();
 

@@ -6,11 +6,16 @@ namespace Z0
 {
     using System;
     using System.IO;
+    using System.Reflection;
     using System.Runtime.CompilerServices;
 
-    class EmitImageHeaders : CmdReactor<EmitImageHeadersCmd, CmdResult>
+    using PEReader = System.Reflection.PortableExecutable.PEReader;
+
+    using static Konst;
+    using static z;
+
+    public sealed partial class ImageEmitters : WfService<ImageEmitters,ImageEmitters>
     {
-        protected override CmdResult Run(EmitImageHeadersCmd cmd)
-            => ImageEmitters.init(Wf).EmitSectionHeaders(cmd.Source, cmd.Target).ToCmdResult(cmd);
+
     }
 }

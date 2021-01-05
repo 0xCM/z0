@@ -27,7 +27,7 @@ namespace Z0.Asm
             Uri = host;
             ImmRoot = root;
             AsmFormatter = formatter;
-            HostArchive = WfArchives.capture(FS.dir(root.Name), host);
+            HostArchive = Archives.capture(FS.dir(root.Name), host);
             CilFormatter =  Cil.formatter();
         }
 

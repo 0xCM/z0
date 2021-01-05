@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     public struct BuildArchive : IBuildArchive
     {
@@ -21,8 +21,5 @@ namespace Z0
             Wf = wf;
             Root = root;
         }
-
-        public IModuleArchive Modules
-            => FileArchives.modules(Root);
     }
 }

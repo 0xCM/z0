@@ -30,13 +30,13 @@ namespace Z0
             BufferSize = buffersize;
             Context = context;
             Dispatcher = Evaluate.dispatcher(random, context, buffersize);
-            CodeArchive = WfArchives.capture(root);
+            CodeArchive = Archives.capture(root);
             ApiSet = context.Api;
         }
 
         void ExecuteHost(BufferTokens buffers, IApiHost host)
         {
-            var dst = WfArchives.capture(FS.dir(CodeArchive.Root.Name), host.Uri);
+            var dst = Archives.capture(FS.dir(CodeArchive.Root.Name), host.Uri);
             if(dst.HostX86Path.Exists)
             {
                 var code = ApiQuery.code(ApiSet, host.Uri, CodeArchive.Root).Members;

@@ -12,6 +12,9 @@ namespace Z0
     [Free]
     public interface IBuildArchive : IFileArchive
     {
+        IModuleArchive Modules
+            => Archives.modules(Root);
+
         IEnumerable<FS.FilePath> BuildFiles(FS.FileExt ext)
             => Root.EnumerateFiles(ext, true);
 

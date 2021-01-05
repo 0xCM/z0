@@ -70,8 +70,8 @@ namespace Z0
         /// Defines a task-specific log path
         /// </summary>
         /// <param name="subject">The subject identifier</param>
-        FS.FilePath TaskLogPath(string subject, FS.FileExt? ext = null)
-            =>  LogRoot() + FS.file(subject, ext ?? Csv);
+        FS.FilePath TaskLogPath(string subject, FS.FileExt ext)
+            =>  LogRoot() + FS.file(subject, ext);
 
         /// <summary>
         /// The root table directory
@@ -110,6 +110,20 @@ namespace Z0
 
         FS.FilePath Table(PartId part, string id, FS.FileExt ext)
             => TableDir(id) + FS.file(part.Format(), ext);
+
+        FS.FilePath Table<T>(Assembly component,  FS.FileExt ext)
+            where T : struct, IRecord<T>
+        {
+            var id = Records.tableid<T>().Identifier;
+            return TableDir(id) + FS.file(string.Format("{0}.{1}", id, component.GetSimpleName()), ext);
+        }
+
+        FS.FilePath Table<T>(string name, FS.FileExt ext)
+            where T : struct, IRecord<T>
+        {
+            var id = Records.tableid<T>().Identifier;
+            return TableDir(id) + FS.file(string.Format("{0}.{1}", id, name), ext);
+        }
 
         FS.FilePath Table(Type t, PartId part)
             => t.Tag<RecordAttribute>().MapValueOrElse(a => Table(part,  a.TableId, DefaultTableExt), () => Table(part, t.Name, DefaultTableExt));

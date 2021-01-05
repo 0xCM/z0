@@ -48,7 +48,7 @@ namespace Z0
         {
             Host = WfShell.host(typeof(Multiplex));
             Wf = wf.WithHost(Host);
-            BuildArchive = BuildArchives.create(wf, settings.BuildRoot);
+            BuildArchive = Archives.build(wf, settings.BuildRoot);
         }
     }
 }

@@ -163,7 +163,7 @@ namespace Z0
         [Op]
         public static FS.FilePath[] match(FS.FolderPath root, uint max, params FS.FileExt[] ext)
         {
-            var files = FileArchives.create(root, ext).ArchivedFiles().Take(max).Array();
+            var files = Archives.create(root, ext).ArchivedFiles().Take(max).Array();
             Array.Sort(files);
             return files;
         }
@@ -171,7 +171,7 @@ namespace Z0
         [Op]
         public static FS.FilePath[] match(FS.FolderPath root, params FS.FileExt[] ext)
         {
-            var files = FileArchives.create(root, ext).ArchivedFiles().Array();
+            var files = Archives.create(root, ext).ArchivedFiles().Array();
             Array.Sort(files);
             return files;
         }
@@ -179,10 +179,10 @@ namespace Z0
         [Op]
         public static CmdResult exec(ListFilesCmd cmd)
         {
-            var archive = FileArchives.create(cmd.SourceDir, cmd.Extensions);
+            var archive = Archives.create(cmd.SourceDir, cmd.Extensions);
             var id = cmd.CmdId();
             var list = cmd.EmissionLimit != 0 ? match(cmd.SourceDir, cmd.EmissionLimit, cmd.Extensions) : match(cmd.SourceDir, cmd.Extensions);
-            var outcome = FileArchives.emit(list, cmd.FileUriMode, cmd.TargetPath);
+            var outcome = Archives.emit(list, cmd.FileUriMode, cmd.TargetPath);
             return outcome ? Cmd.ok(cmd) : Cmd.fail(cmd,outcome.Format());
         }
 
@@ -224,8 +224,8 @@ namespace Z0
 
         void EmitImageHeaders()
         {
-            var svc = Imaging.init(Wf);
-            svc.EmitHeaders(BuildArchives.create(Wf));
+            var svc = ImageEmitters.init(Wf);
+            svc.EmitSectionHeaders(Archives.build(Wf));
         }
 
         void Receive(in ImageContentRecord src)
@@ -343,7 +343,7 @@ namespace Z0
 
         void ShowApiHex()
         {
-            var archive = WfArchives.hex(Wf);
+            var archive = Archives.hex(Wf);
             var listing = archive.List();
             if(listing.Count == 0)
                 Wf.Warn(Host, $"No files found in archive with root {archive.Root}");

@@ -37,7 +37,7 @@ namespace Z0.Asm
             Wf = wf.WithHost(host);
             Asm = asm;
             Formatter = formatter;
-            CodeArchive = WfArchives.capture(root);
+            CodeArchive = Archives.capture(root);
             Specializer = Capture.Services.ImmSpecializer(decoder);
             Wf.Created();
         }

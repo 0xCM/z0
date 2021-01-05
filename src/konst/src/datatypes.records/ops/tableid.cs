@@ -18,7 +18,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static TableId<T> tableid<T>()
             where T : struct, IRecord<T>
-                => default;
+                => new TableId<T>(tableid(typeof(T)));
 
         /// <summary>
         /// Computes the <see cref='TableId'/> of a parametrically-identified record
@@ -28,7 +28,7 @@ namespace Z0
         public static TableId<I,T> tableid<I,T>(I index)
             where T : struct, IRecord<T>
             where I : unmanaged
-                => new TableId<I,T>(index);
+                => new TableId<I,T>(tableid(typeof(T)), index);
 
         /// <summary>
         /// Computes the <see cref='TableId'/> of a specified record type

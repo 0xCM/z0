@@ -9,17 +9,20 @@ namespace Z0
 
     using static Part;
 
-    using api = Records;
-
-
     public readonly struct TableId<T> : ITableId<T>
         where T : struct, IRecord<T>
     {
+        public TableId Value {get;}
+
+        [MethodImpl(Inline)]
+        public TableId(TableId src)
+            => Value = src;
+
         public Name RecordType
-            => typeof(T).Name;
+            => Value.RecordType;
 
         public Name Identifier
-            => api.tableid(typeof(T)).Identifier;
+            => Value.Identifier;
 
         [MethodImpl(Inline)]
         public string Format()
@@ -30,6 +33,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator TableId(TableId<T> src)
-            => api.tableid(typeof(T));
+            => src.Value;
     }
 }

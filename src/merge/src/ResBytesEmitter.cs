@@ -37,7 +37,7 @@ namespace Z0
             Index = index;
             SourceDir = wf.Paths.AppCaptureRoot;
             TargetDir = FS.dir(@"J:\dev\projects\z0.generated\respack\content\bytes");
-            Archive = WfArchives.hex(SourceDir);
+            Archive = Archives.hex(SourceDir);
         }
 
         public void Emit()

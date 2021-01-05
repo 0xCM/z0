@@ -16,8 +16,8 @@ namespace Z0
                 return ApiHostMemberCode.Empty;
 
             var idx = index(catalog);
-            var archive =  WfArchives.capture(root);
-            var paths =  WfArchives.capture(FS.dir(root.Name), host);
+            var archive =  Archives.capture(root);
+            var paths =  Archives.capture(FS.dir(root.Name), host);
             var code = ApiHexReader.Service.Read(paths.HostX86Path);
             var opIndex =  CodeBlockIndex(code);
             return new ApiHostMemberCode(host, index(idx, opIndex));

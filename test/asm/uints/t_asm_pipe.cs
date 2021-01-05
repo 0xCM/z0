@@ -46,8 +46,8 @@ namespace Z0.Asm
             var gSrc = ApiQuery.uri(typeof(gmath));
             var id = PartId.GMath;
             var paths = AppPaths.ForApp();
-            var capture = WfArchives.capture(paths.AppCaptureRoot);
-            var archive = WfArchives.hex(FS.dir(capture.HexDir.Name));
+            var capture = Archives.capture(paths.AppCaptureRoot);
+            var archive = Archives.hex(FS.dir(capture.HexDir.Name));
             var direct = archive.Read(dSrc).ToArray();
             var generic = archive.Read(gSrc).ToArray();
             check_unary_ops(direct);

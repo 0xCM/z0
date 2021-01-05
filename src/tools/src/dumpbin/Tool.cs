@@ -8,7 +8,7 @@ namespace Z0.Tools
     using System.Runtime.CompilerServices;
     using System.Linq;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     [ApiHost]
@@ -18,7 +18,7 @@ namespace Z0.Tools
         {
             var tool = DumpBin.create(Wf);
             var path = FS.FolderPath.Empty;
-            var archive = FileArchives.modules(path);
+            var archive = Archives.modules(path);
             var exe = archive.NativeExeFiles().Array();
             var libs = archive.StaticLibs().Array();
             // var managed = archive.Files().Where(f => f.IsManaged).Array();
