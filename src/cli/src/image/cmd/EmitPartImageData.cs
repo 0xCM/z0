@@ -47,12 +47,12 @@ namespace Z0
             Part = part;
             PartId = part.Id;
             BaseAddress = ImageMaps.@base(Part);
-            TargetPath = Wf.Db().Table(ImageContentRecord.TableId, PartId);
+            TargetPath = Wf.Db().Table(ImageContent.TableId, PartId);
             Formatter = Formatters.data(BaseAddress);
             Offset = 0;
             LineCount = 0;
             LabelDelimiter = Chars.Pipe;
-            BufferSize = ImageContentRecord.RowDataSize;
+            BufferSize = ImageContent.RowDataSize;
             SourcePath = FS.path(Part.Owner.Location);
             Wf.Created();
         }
@@ -84,7 +84,7 @@ namespace Z0
                 k = Read(reader, buffer);
             }
 
-            Wf.EmittedTable<ImageContentRecord>(Host, LineCount, FS.path(TargetPath.Name));
+            Wf.EmittedTable<ImageContent>(Host, LineCount, FS.path(TargetPath.Name));
         }
 
         public MemoryAddress OffsetAddress

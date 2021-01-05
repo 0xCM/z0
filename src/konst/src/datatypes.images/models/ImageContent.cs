@@ -2,13 +2,13 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Images
+namespace Z0
 {
     using System;
     using System.Runtime.InteropServices;
 
     [StructLayout(LayoutKind.Sequential), Record(TableId)]
-    public struct ImageContentRecord : IRecord<ImageContentRecord>
+    public struct ImageContent : IRecord<ImageContent>
     {
         public const string TableId = "image.content";
 

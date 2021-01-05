@@ -25,7 +25,7 @@ namespace Z0.Images
             using var dst = cmd.Target.Writer();
             dst.WriteLine(text.concat($"Address".PadRight(12), SpacePipe, "Data"));
 
-            var buffer = span<byte>(ImageContentRecord.RowDataSize);
+            var buffer = span<byte>(ImageContent.RowDataSize);
             var k = Read(reader,buffer);
             var offset = 0u;
             var linecount = 0u;
@@ -41,7 +41,7 @@ namespace Z0.Images
                 k = Read(reader, buffer);
             }
 
-            Wf.EmittedTable<ImageContentRecord>(Host, linecount, cmd.Target);
+            Wf.EmittedTable<ImageContent>(Host, linecount, cmd.Target);
             return Cmd.ok(cmd);
         }
     }

@@ -228,14 +228,14 @@ namespace Z0
             svc.EmitSectionHeaders(Archives.build(Wf));
         }
 
-        void Receive(in ImageContentRecord src)
+        void Receive(in ImageContent src)
         {
             Wf.Row(src.Data);
         }
 
         public void PipeImageData()
         {
-            var dst = Records.sink<ImageContentRecord>(Receive);
+            var dst = Records.sink<ImageContent>(Receive);
             var archive = ImageArchives.tables(Wf);
             var path = archive.Root + FS.file("image.content.genapp", FileExtensions.Csv);
             ImageArchives.pipe(Wf, path, dst);

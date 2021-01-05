@@ -27,10 +27,10 @@ namespace Z0
         }
 
         [Op]
-        public static void pipe(IWfShell wf, FS.FilePath src, RecordSink<ImageContentRecord> dst)
+        public static void pipe(IWfShell wf, FS.FilePath src, RecordSink<ImageContent> dst)
         {
             using var reader = csvreader(wf, src);
-            var record = default(ImageContentRecord);
+            var record = default(ImageContent);
             var @continue = true;
             while(@continue)
             {
@@ -57,7 +57,7 @@ namespace Z0
         /// <param name="wf">The workflow source</param>
         [Op]
         public static IFileArchive tables(IWfShell wf)
-            => new FileArchive(wf.Db().TableDir<ImageContentRecord>());
+            => new FileArchive(wf.Db().TableDir<ImageContent>());
 
         /// <summary>
         /// Creates an archive over the runtime directory

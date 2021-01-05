@@ -41,7 +41,7 @@ namespace Z0
             ByteParser = HexByteParser.Service;
         }
 
-        public bool Read(ref ImageContentRecord data)
+        public bool Read(ref ImageContent data)
         {
             var line = Reader.ReadLine();
             if(line == null)

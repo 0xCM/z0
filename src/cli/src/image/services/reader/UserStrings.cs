@@ -9,9 +9,6 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
-    using static Konst;
-    using static z;
-
     partial class PeTableReader
     {
         public ReadOnlySpan<CliUserString> UserStrings()

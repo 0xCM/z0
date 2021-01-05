@@ -10,8 +10,7 @@ namespace Z0
     using System.Reflection.PortableExecutable;
     using System.IO;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     partial class PeTableReader
     {
