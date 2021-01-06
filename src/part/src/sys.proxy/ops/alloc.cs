@@ -30,5 +30,9 @@ namespace Z0
         [MethodImpl(Options), Opaque(Alloc), Closures(Closure)]
         public static T[] alloc<T>(long count)
             => new T[count];
+
+        [MethodImpl(Options), Opaque(Alloc), Closures(Closure)]
+        public static T[] alloc<T>(int length, T src)
+            => fill(alloc<T>(length), src);
     }
 }

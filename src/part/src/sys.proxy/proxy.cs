@@ -7,15 +7,15 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static OpacityApiClass;
+    using static Part;
 
-    partial struct proxy
+    [ApiHost("sys.proxy")]
+    readonly partial struct proxy
     {
-        [MethodImpl(Options), Opaque(ClearSpan), Closures(Closure)]
-        public static ref readonly Span<T> clear<T>(in Span<T> src)
-        {
-            src.Clear();
-            return ref src;
-        }
+        const NumericKind Closure = Integers;
+
+        const string EmptyString = "";
+
+        const MethodImplOptions Options = MethodImplOptions.NoInlining;
     }
 }

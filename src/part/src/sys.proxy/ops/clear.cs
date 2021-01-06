@@ -1,0 +1,34 @@
+//-----------------------------------------------------------------------------
+// Copyright   :  (c) Chris Moore, 2020
+// License     :  MIT
+//-----------------------------------------------------------------------------
+namespace Z0
+{
+    using System;
+    using System.Runtime.CompilerServices;
+
+    using static OpacityApiClass;
+
+    partial struct proxy
+    {
+        [MethodImpl(Options), Opaque(ClearSpan), Closures(Closure)]
+        public static Span<T> clear<T>(Span<T> src)
+        {
+            src.Clear();
+            return src;
+        }
+
+        [MethodImpl(Options), Opaque(ClearSpan), Closures(Closure)]
+        public static T[] clear<T>(T[] dst)
+            where T : struct
+        {
+            if(dst == null)
+                return empty<T>();
+            else
+            {
+                fill(dst, default(T));
+                return dst;
+            }
+        }
+    }
+}

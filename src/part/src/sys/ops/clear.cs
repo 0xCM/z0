@@ -9,26 +9,23 @@ namespace Z0
 
     partial struct sys
     {
+        /// <summary>
+        /// Fills a span with the element type's default value
+        /// </summary>
+        /// <param name="src"></param>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Options), Op, Closures(Closure)]
-        public static ref readonly Span<T> clear<T>(in Span<T> src)
-            => ref proxy.clear(src);
+        public static Span<T> clear<T>(Span<T> src)
+            => proxy.clear(src);
 
         /// <summary>
         /// Fills an array with the element type's default value
         /// </summary>
         /// <param name="dst">The source array</param>
-        /// <typeparam name="T">The array element type</typeparam>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Options), Op, Closures(Closure)]
         public static T[] clear<T>(T[] dst)
             where T : struct
-        {
-            if(dst == null)
-                return empty<T>();
-            else
-            {
-                proxy.fill(dst, default(T));
-                return dst;
-            }
-        }
+                => proxy.clear(dst);
     }
 }
