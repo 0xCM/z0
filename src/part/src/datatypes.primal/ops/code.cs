@@ -8,15 +8,12 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static PrimalBits;
 
-    partial struct MemRefs
+    partial struct SystemPrimitives
     {
         [MethodImpl(Inline), Op]
-        static unsafe Ref define(void* pSrc, ulong size)
-            => new Ref((ulong)pSrc, (uint)size);
-
-        [MethodImpl(Inline), Op]
-        static unsafe Ref define(void* pSrc, int size)
-            => new Ref((ulong)pSrc, (uint)size);
+        public static TypeCode code(PrimalKind f)
+            => (TypeCode)select(f, Field.KindId);
     }
 }

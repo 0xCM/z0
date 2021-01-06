@@ -6,18 +6,18 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Reflection;
 
+    using static memory;
     using static Part;
 
-    partial struct Resources
+    partial struct SystemPrimitives
     {
+        /// <summary>
+        /// Determines whether a specified type is a system-defined primitive
+        /// </summary>
+        /// <param name="src">The type to test</param>
         [MethodImpl(Inline), Op]
-        public static ResQuery query(Assembly src)
-            => new ResQuery(src, Resources.descriptors(src));
-
-        [MethodImpl(Inline), Op]
-        public static ResQuery query(Assembly src, utf8 match)
-            => new ResQuery(src, Resources.descriptors(src, match));
+        public static bool test(Type src)
+            => kind(src) != 0;
     }
 }

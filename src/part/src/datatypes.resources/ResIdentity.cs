@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Identifies a resource, its data type, and specifies the memory segment it occupies
@@ -17,7 +17,7 @@ namespace Z0
         /// <summary>
         /// The resource name, relative to the enclosing type
         /// </summary>
-        public asci32 Name {get;}
+        public Name Name {get;}
 
         /// <summary>
         /// The memory segment occupied by the resource
@@ -30,7 +30,7 @@ namespace Z0
         public PrimalKind DataType {get;}
 
         [MethodImpl(Inline)]
-        public ResIdentity(asci32 name, MemorySegment seg, PrimalKind type)
+        public ResIdentity(Name name, MemorySegment seg, PrimalKind type)
         {
             Name = name;
             Segment = seg;

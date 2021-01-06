@@ -42,8 +42,6 @@ namespace Z0
 
                 EmitComments.create().Run(Wf);
 
-                // ResData.EmitContentIndex(Wf);
-                // ResData.reference(Wf);
                 XedEtlWfHost.create().Run(Wf);
 
                 var images = ImageEmitters.init(Wf);
@@ -52,12 +50,10 @@ namespace Z0
                 images.EmitUserStrings();
                 images.EmitSystemStrings();
 
-
                 EmitFieldMetadata.create().Run(Wf);
                 EmitImageConstants.create().Run(Wf);
                 EmitLocatedParts.create().Run(Wf);
                 EmitImageBlobs.create().Run(Wf);
-
 
                 EmitEnumCatalog.create().Run(Wf);
                 EmitFieldLiterals.create().Run(Wf);

@@ -7,21 +7,20 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
-    [ApiType(ApiNames.ConstBytesCache, true)]
-    public readonly struct ConstBytesCache
+    public readonly struct StorageReaderCache
     {
         [MethodImpl(Inline)]
-        internal ConstBytesCache(ConstBytesReader models)
+        internal StorageReaderCache(ConstBytesReader reader)
         {
-            Refs = models.Refs;
+            Refs = reader.Refs;
             Storage = MemorySegments.create(Refs);
             Stores = MemoryStore.Service;
-            Models = models;
+            Reader = reader;
         }
 
-        readonly ConstBytesReader Models;
+        readonly ConstBytesReader Reader;
 
         readonly MemorySegment[] Refs;
 
@@ -31,7 +30,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ref readonly byte first_d(N0 n)
-            => ref Models.First(n);
+            => ref Reader.First(n);
 
         [MethodImpl(Inline)]
         public ref readonly byte first(N0 n)
@@ -39,7 +38,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ref readonly byte first_d(N1 n)
-            => ref Models.First(n);
+            => ref Reader.First(n);
 
         [MethodImpl(Inline)]
         public ref readonly byte first(N1 n)
@@ -47,7 +46,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ref readonly byte first_d(N2 n)
-            => ref Models.First(n);
+            => ref Reader.First(n);
 
         [MethodImpl(Inline)]
         public ref readonly byte first(N2 n)
@@ -55,7 +54,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ref readonly byte first_d(N3 n)
-            => ref Models.First(n);
+            => ref Reader.First(n);
 
         [MethodImpl(Inline)]
         public ref readonly byte first(N3 n)
@@ -63,7 +62,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ref readonly byte first_d(N4 n)
-            => ref Models.First(n);
+            => ref Reader.First(n);
 
         [MethodImpl(Inline)]
         public ref readonly byte first(N4 n)
@@ -71,7 +70,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ref readonly byte first_d(N5 n)
-            => ref Models.First(n);
+            => ref Reader.First(n);
 
         [MethodImpl(Inline)]
         public ref readonly byte first(N5 n)
@@ -79,7 +78,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ref readonly byte first_d(N6 n)
-            => ref Models.First(n);
+            => ref Reader.First(n);
 
         [MethodImpl(Inline)]
         public ref readonly byte first(N6 n)
@@ -87,7 +86,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ref readonly byte first_d(N7 n)
-            => ref Models.First(n);
+            => ref Reader.First(n);
 
         [MethodImpl(Inline)]
         public ref readonly byte first(N7 n)
@@ -95,7 +94,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ref readonly byte cell_d(N0 n, int i)
-            => ref Models.Cell(n, i);
+            => ref Reader.Cell(n, i);
 
         [MethodImpl(Inline)]
         public ref readonly byte cell(N0 n, int i)
@@ -103,7 +102,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ref readonly byte cell_d(N1 n, int i)
-            => ref Models.Cell(n, i);
+            => ref Reader.Cell(n, i);
 
         [MethodImpl(Inline)]
         public ref readonly byte cell(N1 n, int i)
@@ -111,7 +110,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ref readonly byte cell_d(N2 n, int i)
-            => ref Models.Cell(n, i);
+            => ref Reader.Cell(n, i);
 
         [MethodImpl(Inline)]
         public ref readonly byte cell(N2 n, int i)
@@ -119,7 +118,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ref readonly byte cell_d(N3 n, int i)
-            => ref Models.Cell(n, i);
+            => ref Reader.Cell(n, i);
 
         [MethodImpl(Inline)]
         public ref readonly byte cell(N3 n, int i)
@@ -127,7 +126,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ref readonly byte cell_d(N4 n, int i)
-            => ref Models.Cell(n, i);
+            => ref Reader.Cell(n, i);
 
         [MethodImpl(Inline)]
         public ref readonly byte cell(N4 n, int i)
@@ -135,7 +134,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ref readonly byte cell_d(N5 n, int i)
-            => ref Models.Cell(n, i);
+            => ref Reader.Cell(n, i);
 
         [MethodImpl(Inline)]
         public ref readonly byte cell(N5 n, int i)
@@ -143,7 +142,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ref readonly byte cell_d(N6 n, int i)
-            => ref Models.Cell(n, i);
+            => ref Reader.Cell(n, i);
 
         [MethodImpl(Inline)]
         public ref readonly byte cell(N6 n, int i)
@@ -151,7 +150,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ref readonly byte cell_d(N7 n, int i)
-            => ref Models.Cell(n, i);
+            => ref Reader.Cell(n, i);
 
         [MethodImpl(Inline)]
         public ref readonly byte cell(N7 n, int i)
@@ -159,7 +158,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ReadOnlySpan<byte> load_d(N0 n)
-            => Models.Span(n);
+            => Reader.Span(n);
 
         [MethodImpl(Inline)]
         public ReadOnlySpan<byte> load(N0 n)
@@ -167,7 +166,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ReadOnlySpan<byte> load_d(N1 n)
-            => Models.Span(n);
+            => Reader.Span(n);
 
         [MethodImpl(Inline)]
         public ReadOnlySpan<byte> load(N1 n)
@@ -175,7 +174,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ReadOnlySpan<byte> load_d(N2 n)
-            => Models.Span(n);
+            => Reader.Span(n);
 
         [MethodImpl(Inline)]
         public ReadOnlySpan<byte> load(N2 n)
@@ -183,7 +182,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ReadOnlySpan<byte> load_d(N3 n)
-            => Models.Span(n);
+            => Reader.Span(n);
 
         [MethodImpl(Inline)]
         public ReadOnlySpan<byte> load(N3 n)
@@ -191,7 +190,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ReadOnlySpan<byte> load_d(N4 n)
-            => Models.Span(n);
+            => Reader.Span(n);
 
         [MethodImpl(Inline)]
         public ReadOnlySpan<byte> load(N4 n)
@@ -199,7 +198,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ReadOnlySpan<byte> load_d(N5 n)
-            => Models.Span(n);
+            => Reader.Span(n);
 
         [MethodImpl(Inline)]
         public ReadOnlySpan<byte> load(N5 n)
@@ -207,7 +206,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ReadOnlySpan<byte> load_d(N6 n)
-            => Models.Span(n);
+            => Reader.Span(n);
 
         [MethodImpl(Inline)]
         public ReadOnlySpan<byte> load(N6 n)
@@ -215,7 +214,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ReadOnlySpan<byte> load_d(N7 n)
-            => Models.Span(n);
+            => Reader.Span(n);
 
         [MethodImpl(Inline)]
         public ReadOnlySpan<byte> load(N7 n)
@@ -223,7 +222,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ref readonly byte cell_d(MemorySlot n, int i)
-            => ref Models.Cell(n,i);
+            => ref Reader.Cell(n,i);
 
         [MethodImpl(Inline)]
         public ref readonly byte cell(MemorySlot n, int i)
@@ -232,7 +231,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public ulong sib_d<N>(N n, int i, byte scale, ushort offset)
             where N : unmanaged, ITypeNat
-                => ((ulong)scale)*Models.Cell(n, i) + (ulong)offset;
+                => ((ulong)scale)*Reader.Cell(n, i) + (ulong)offset;
 
         [MethodImpl(Inline)]
         public ulong sib_d(N0 n, int i, byte scale, ushort offset)
@@ -244,7 +243,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ulong sib_d(MemorySlot n, int i, byte scale, ushort offset)
-            => ((ulong)scale)*Models.Cell(n, i) + (ulong)offset;
+            => ((ulong)scale)*Reader.Cell(n, i) + (ulong)offset;
 
         [MethodImpl(Inline)]
         public ulong sib(MemorySlot n, int i, byte scale, ushort offset)

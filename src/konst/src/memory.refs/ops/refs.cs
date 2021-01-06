@@ -12,14 +12,6 @@ namespace Z0
 
     partial struct MemRefs
     {
-        [MethodImpl(Inline), Op]
-        public StringRefs<N4> refs(string s0, string s1, string s2, string s3)
-            => refs(default(N4), @string(s0), @string(s1), @string(s2), @string(s3));
-
-        [MethodImpl(Inline)]
-        public static StringRefs<N> refs<N>(N n, params StringRef[] src)
-            where N : unmanaged, ITypeNat
-                => new StringRefs<N>(src);
 
         [MethodImpl(Inline), Op]
         public static void refs(ReadOnlySpan<string> src, Span<StringRef> dst)

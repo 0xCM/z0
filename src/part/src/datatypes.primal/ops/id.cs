@@ -8,12 +8,12 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static PrimalBits;
 
-    partial struct Resources
+    partial struct SystemPrimitives
     {
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static unsafe ReadOnlySpan<T> extract<T>(in ResMember member, int i0, int i1)
-            where T : unmanaged
-                => memory.section(member.Address.Pointer<T>(), i0, i1);
+        [MethodImpl(Inline), Op]
+        public static PrimalTypeCode id(PrimalKind f)
+            => (PrimalTypeCode)select(f, Field.KindId);
     }
 }

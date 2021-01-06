@@ -15,21 +15,21 @@ namespace Z0
     /// </summary>
     public readonly struct ResIdentity<T>
     {
-        public readonly asci32 Name;
+        public Name Name {get;}
 
-        public readonly MemorySegment Reference;
+        public MemorySegment Segment {get;}
 
         [MethodImpl(Inline)]
-        public ResIdentity(in asci32 name, in MemorySegment memref)
+        public ResIdentity(Name name, MemorySegment seg)
         {
             Name = name;
-            Reference = memref;
+            Segment = seg;
         }
 
         public MemoryAddress Address
         {
             [MethodImpl(Inline)]
-            get => Reference.BaseAddress;
+            get => Segment.BaseAddress;
         }
 
         public uint CellCount
@@ -38,20 +38,20 @@ namespace Z0
             get => DataSize/CellSize;
         }
 
-        public uint CellSize
+        public ByteSize CellSize
         {
             [MethodImpl(Inline)]
-            get => (uint)size<T>();
+            get => size<T>();
         }
 
-        public uint DataSize
+        public ByteSize DataSize
         {
             [MethodImpl(Inline)]
-            get => Reference.Length;
+            get => Segment.Length;
         }
 
         [MethodImpl(Inline)]
         public static implicit operator ResIdentity(ResIdentity<T> src)
-            => new ResIdentity(src.Name,src.Reference, SystemPrimitives.kind<T>());
+            => new ResIdentity(src.Name, src.Segment, SystemPrimitives.kind<T>());
     }
 }

@@ -8,38 +8,28 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static System.Runtime.CompilerServices.Unsafe;
-    using static System.Runtime.InteropServices.MemoryMarshal;
 
     partial struct memory
     {
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public unsafe static ReadOnlySpan<T> segment<T>(ReadOnlySpan<T> src, int i0, int i1)
-            where T : unmanaged
-        {
-            var count = i1 - i0 + 1;
-            ref readonly var first = ref skip(src, (uint)i0);
-            return CreateReadOnlySpan(ref edit(first), count);
-        }
+        /// <summary>
+        /// Defines a memory <see cref='MemorySegment'/> with a specified base and size
+        /// </summary>
+        /// <param name="base">The base address</param>
+        /// <param name="bytes">The number of reference bytes</param>
+        [MethodImpl(Inline), Op]
+        public static MemorySegment segment(MemoryAddress @base, ByteSize bytes)
+            => new MemorySegment(@base,bytes);
 
-        [MethodImpl(Inline)]
-        public static ReadOnlySpan<T> segment<S,T>(ReadOnlySpan<S> src, int i0, int i1)
-            where S : unmanaged
-            where T : unmanaged
-        {
-            var count = i1 - i0 + 1;
-            ref readonly var first = ref skip(src, (uint)i0);
-            return recover<S,T>(CreateReadOnlySpan(ref edit(first), (int)count));
-        }
+        /// <summary>
+        /// Defines a memory <see cref='MemorySegment'/> over source span content
+        /// </summary>
+        /// <param name="src">The data source</param>
+        [MethodImpl(Inline), Op]
+        public unsafe static MemorySegment segment(ReadOnlySpan<byte> src)
+            => segment((ulong)gptr(src), src.Length);
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public unsafe static ReadOnlySpan<T> segment<T>(T* pSrc, int i0, int i1)
-            where T : unmanaged
-        {
-            var count = i1 - i0 + 1;
-            var pFirst = Add<T>(pSrc, count);
-            ref var first = ref AsRef<T>(pFirst);
-            return CreateReadOnlySpan<T>(ref first, count);
-        }
+        [MethodImpl(Inline), Op]
+        public static unsafe MemorySegment segment(string src)
+            => segment(address(src), src.Length*2);
     }
 }

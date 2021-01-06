@@ -19,8 +19,8 @@ namespace Z0
         /// <param name="count">The number of cells to cover</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static unsafe Span<T> cover<T>(MemoryAddress address, uint count)
-            => CreateSpan<T>(ref address.Ref<T>(), (int)count);
+        public static unsafe Span<T> cover<T>(MemoryAddress src, uint count)
+            => memory.cover<T>(src, count);
 
         /// <summary>
         /// Covers content beginning at a specified address with a bytespan
@@ -29,7 +29,7 @@ namespace Z0
         /// <param name="size">The number of bytes to cover</param>
         [MethodImpl(Inline), Op]
         public static unsafe Span<byte> cover(MemoryAddress location, uint size)
-            => cover<byte>(location, size);
+            => memory.cover<byte>(location, size);
 
         [MethodImpl(Inline)]
         public static Span<T> cover<S,T>(in S src, uint count)

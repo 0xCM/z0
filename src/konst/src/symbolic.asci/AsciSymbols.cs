@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static z;
-    using static Konst;
+    using static Part;
     using static AsciKonst;
 
     [ApiHost(ApiNames.AsciSymbols, true)]

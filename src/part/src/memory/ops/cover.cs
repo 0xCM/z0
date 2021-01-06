@@ -18,15 +18,6 @@ namespace Z0
         /// <param name="base">The segment base address</param>
         /// <param name="size">The length of the segment in byte</param>
         [MethodImpl(Inline), Op]
-        public static unsafe Span<byte> cover(MemoryAddress @base, ByteSize size)
-            => cover<byte>((void*)@base, size);
-
-        /// <summary>
-        /// Creates a span over a memory segment
-        /// </summary>
-        /// <param name="base">The segment base address</param>
-        /// <param name="size">The length of the segment in byte</param>
-        [MethodImpl(Inline), Op]
         public static unsafe Span<char> cover(string src)
             => cover<char>(pchar2(src), (uint)src.Length);
 
@@ -40,6 +31,12 @@ namespace Z0
         public static unsafe Span<T> cover<T>(MemoryAddress @base, uint count)
             => cover<T>(@base.Pointer(), count);
 
+        /// <summary>
+        /// Creates a <see cref='Span{T}'/> over a <typeparamref name='T'/> measured memory segment sourced from a pointer
+        /// </summary>
+        /// <param name="pSrc">A pointer to the leading cell</param>
+        /// <param name="count">The number of cells to cover</param>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static unsafe Span<T> cover<T>(void* pSrc, uint count)
             => cover(@as<T>(pSrc), count);

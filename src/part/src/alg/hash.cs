@@ -6,6 +6,7 @@ namespace alg
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
 
     using Z0;
 
@@ -311,6 +312,14 @@ namespace alg
         [MethodImpl(Inline)]
         public static ulong calc<S,T>()
             => (ulong)calc<S>() | (ulong)calc<T>() << 32;
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static uint calc<T>(Vector128<T> src)
+            where T : unmanaged
+        {
+            var v = src.AsUInt64();
+            return alg.hash.calc(v.GetElement(0), v.GetElement(1));
+        }
 
         /// <summary>
         /// Computes calc codes for unmanaged system primitives

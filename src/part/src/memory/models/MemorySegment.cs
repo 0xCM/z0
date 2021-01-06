@@ -8,14 +8,23 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
+    using static System.Runtime.Intrinsics.Vector128;
     using static Part;
-    using static z;
+    using static memory;
 
     /// <summary>
     /// Defines a reference to a memory segment
     /// </summary>
     public readonly struct MemorySegment : IMemorySegment, ITextual, IEquatable<MemorySegment>, IHashed
     {
+        /// <summary>
+        /// Defines a 128-bit vector by explicit component specification, from least -> most significant
+        /// </summary>
+        /// <param name="w">The vector width selector</param>
+        [MethodImpl(Inline),Op]
+        public static Vector128<ulong> vparts(ulong x0, ulong x1)
+            => Create(x0,x1);
+
         public const byte Size = 16;
 
         readonly Vector128<ulong> Segment;
@@ -35,7 +44,7 @@ namespace Z0
         public MemoryAddress BaseAddress
         {
             [MethodImpl(Inline)]
-            get => vcell(Segment, 0);
+            get => Segment.GetElement(0);
         }
 
         /// <summary>
@@ -45,13 +54,13 @@ namespace Z0
         public uint Length
         {
             [MethodImpl(Inline)]
-            get => (uint)vcell(Segment, 1);
+            get => (uint)Segment.GetElement(1);
         }
 
         public Span<byte> Buffer
         {
             [MethodImpl(Inline)]
-            get => cover(BaseAddress, Length);
+            get => memory.cover<byte>(BaseAddress, Length);
         }
 
         public MemoryRange Range
@@ -88,22 +97,22 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
         public uint CellCount<T>()
-            => Addresses.count<T>(this);
+            => count<T>(this);
 
         public string Format()
             => BaseAddress.Format();
 
         [MethodImpl(Inline)]
         public ReadOnlySpan<byte> Load()
-            => Addresses.view<byte>(this);
+            => view<byte>(this);
 
         [MethodImpl(Inline)]
         public ReadOnlySpan<T> Load<T>()
-            => Addresses.view<T>(this);
+            => view<T>(this);
 
         [MethodImpl(Inline)]
         public uint Hash()
-            => z.vhash(Segment);
+            => alg.hash.calc(Segment);
 
         [MethodImpl(Inline)]
         public bool Equals(MemorySegment src)
@@ -133,5 +142,15 @@ namespace Z0
 
         public static MemorySegment Empty
             => default;
+
+
+        [MethodImpl(Inline)]
+        static uint count<T>(in MemorySegment src)
+            => (uint)(src.Length/size<T>());
+
+        [MethodImpl(Inline)]
+        static ReadOnlySpan<T> view<T>(in MemorySegment src)
+            => cover(src.BaseAddress.Ref<T>(), count<T>(src));
+
     }
 }

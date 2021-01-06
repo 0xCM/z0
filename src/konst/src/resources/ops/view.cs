@@ -21,7 +21,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public unsafe static ReadOnlySpan<char> view(in ResIdentity<char> res, int i0, int i1)
-            => memory.segment((char*)res.Address, i0, i1);
+            => memory.section((char*)res.Address, i0, i1);
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<byte> view(in ResIdentity<byte> res, int i0, int i1)

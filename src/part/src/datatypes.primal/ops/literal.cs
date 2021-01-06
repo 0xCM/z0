@@ -6,18 +6,17 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Reflection;
 
     using static Part;
 
-    partial struct Resources
+    partial struct SystemPrimitives
     {
+        /// <summary>
+        /// Determines whether an identified <see cref='PrimalKind'/> can be a compile-time literal
+        /// </summary>
+        /// <param name="src">The kind to test</param>
         [MethodImpl(Inline), Op]
-        public static ResQuery query(Assembly src)
-            => new ResQuery(src, Resources.descriptors(src));
-
-        [MethodImpl(Inline), Op]
-        public static ResQuery query(Assembly src, utf8 match)
-            => new ResQuery(src, Resources.descriptors(src, match));
+        public static bool literal(PrimalKind src)
+            => ((byte)src > 2 && (byte)src<16) || (byte)src == 18;
     }
 }

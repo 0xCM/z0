@@ -15,7 +15,7 @@ namespace Z0
     public partial class Hex
     {
         public static MemorySegment[] HexRefs
-            => sys.array(memref(H.UpperSymData), memref(H.LowerSymData), memref(H.UpperCodes), memref(H.LowerCodes));
+            => sys.array(segment(H.UpperSymData), segment(H.LowerSymData), segment(H.UpperCodes), segment(H.LowerCodes));
 
         const NumericKind Closure = UnsignedInts;
     }

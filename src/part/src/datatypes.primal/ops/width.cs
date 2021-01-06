@@ -6,18 +6,18 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Reflection;
 
     using static Part;
+    using static PrimalBits;
 
-    partial struct Resources
+    partial struct SystemPrimitives
     {
+        /// <summary>
+        /// Computes the bit-width of the represented primitive
+        /// </summary>
+        /// <param name="f">The literal's bitfield</param>
         [MethodImpl(Inline), Op]
-        public static ResQuery query(Assembly src)
-            => new ResQuery(src, Resources.descriptors(src));
-
-        [MethodImpl(Inline), Op]
-        public static ResQuery query(Assembly src, utf8 match)
-            => new ResQuery(src, Resources.descriptors(src, match));
+        public static TypeWidth width(PrimalKind f)
+            => (TypeWidth)Pow2.pow(select(f, Field.Width));
     }
 }

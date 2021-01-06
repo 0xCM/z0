@@ -12,7 +12,24 @@ namespace Z0
     partial struct memory
     {
         /// <summary>
-        /// Presents a reference as a .. reference
+        /// Captures a sized readonly parametric reference to source span content
+        /// </summary>
+        /// <param name="src">The source reference</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static unsafe Ref<T> segref<T>(ReadOnlySpan<T> src)
+            => new Ref<T>(memory.segref(pvoid(first(src)), size<T>((uint)src.Length)));
+
+        /// <summary>
+        /// Captures a character segment over source string content
+        /// </summary>
+        /// <param name="src">The source string</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe Ref<char> segref(string src)
+            => new Ref<char>(new Ref(address(src), (uint)src.Length*2));
+
+        /// <summary>
+        /// Captures a segment reference
         /// </summary>
         /// <param name="src">The leading cell</param>
         /// <param name="count">The covered cell count</param>
@@ -21,6 +38,12 @@ namespace Z0
         public static Ref<T> segref<T>(in T src, uint count)
             => new Ref(address(src), count*size<T>());
 
+        /// <summary>
+        /// Captures a segment reference
+        /// </summary>
+        /// <param name="src">The leading cell</param>
+        /// <param name="count">The covered cell count</param>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static unsafe Ref<T> segref<T>(in T src, int count)
             => new Ref<T>(segref(pvoid(src), size<T>((uint)count)));

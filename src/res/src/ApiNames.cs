@@ -176,7 +176,7 @@ public readonly struct ApiNames
 
     public const string SystemTypeCodes = system + dot + types + dot + codes;
 
-    public const string ClrPrimitives = ClrMetadata + dot + primitives;
+    public const string SystemPrimitives = system + dot + primitives;
 
     public const string ClrEnums = ClrMetadata + dot + enums;
 
