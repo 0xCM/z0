@@ -7,9 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
-    public readonly struct ApiPartCodeBlocks
+    public readonly struct ApiPartCode
     {
         /// <summary>
         /// The owning part
@@ -19,25 +19,26 @@ namespace Z0
         /// <summary>
         /// The code in the set
         /// </summary>
-        readonly TableSpan<ApiHostCodeBlocks> Data;
+        public Index<ApiHostCode> HostCode {get;}
 
         [MethodImpl(Inline)]
-        public ApiPartCodeBlocks(PartId part, ApiHostCodeBlocks[] src)
+        public ApiPartCode(PartId part, ApiHostCode[] src)
         {
             Part = part;
-            Data = src;
+            HostCode = src;
         }
 
-        public Span<ApiHostCodeBlocks> Edit
+
+        public Span<ApiHostCode> Edit
         {
             [MethodImpl(Inline)]
-            get => Data.Edit;
+            get => HostCode.Edit;
         }
 
-        public ReadOnlySpan<ApiHostCodeBlocks> View
+        public ReadOnlySpan<ApiHostCode> View
         {
             [MethodImpl(Inline)]
-            get => Data.View;
+            get => HostCode.View;
         }
     }
 }

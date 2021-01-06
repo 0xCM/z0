@@ -53,35 +53,28 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        F pull(W8 w)
-            => Fixed(next(Values, w));
+        F pull(W8 w) => cell(next(Values, w));
 
         [MethodImpl(Inline)]
-        F pull(W16 w)
-            => Fixed(next(Values, w));
+        F pull(W16 w) => cell(next(Values, w));
 
         [MethodImpl(Inline)]
-        F pull(W32 w)
-            => Fixed(next(Values, w));
+        F pull(W32 w) => cell(next(Values, w));
 
         [MethodImpl(Inline)]
-        F pull(W64 w)
-            => Fixed(next(Values, w));
+        F pull(W64 w) => cell(next(Values, w));
 
         [MethodImpl(Inline)]
-        F pull(W128 w)
-            => Fixed(next(Values, w));
+        F pull(W128 w) => cell(next(Values, w));
 
         [MethodImpl(Inline)]
-        F pull(W256 w)
-            => Fixed(next(Values, w));
+        F pull(W256 w) => cell(next(Values, w));
 
         [MethodImpl(Inline)]
-        F pull(W512 w)
-            => Fixed(next(Values, w));
+        F pull(W512 w) => cell(next(Values, w));
 
         [MethodImpl(Inline)]
-        static F Fixed<K>(in K x)
+        static F cell<K>(in K x)
             where K : struct
                 => z.@as<K,F>(x);
     }

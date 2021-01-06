@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     public enum ApiUriScheme : ushort
     {
         None = 0,

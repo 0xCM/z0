@@ -69,7 +69,7 @@ namespace Z0
             return dst;
         }
 
-        public ApiHostRoutines DecodeBlocks(in ApiHostCodeBlocks src)
+        public ApiHostRoutines DecodeBlocks(in ApiHostCode src)
         {
             var instructions = list<ApiRoutineObsolete>();
             var ip = MemoryAddress.Empty;

@@ -12,7 +12,7 @@ namespace Z0
 
     using api = ApiIdentity;
 
-    public readonly struct OpUri : IApiUri<OpUri>, INullary<OpUri>
+    public readonly struct OpUri : IApiUri<OpUri>
     {
         /// <summary>
         /// The full uri in the form {scheme}://{hostpath}/{opid}
@@ -22,24 +22,24 @@ namespace Z0
         /// <summary>
         /// The uri scheme, constrained to the defining enumeration
         /// </summary>
-        public readonly ApiUriScheme Scheme;
+        public ApiUriScheme Scheme {get;}
 
         /// <summary>
         /// The host fragment, of the form {assembly_short_name}/{hostname}
         /// </summary>
-        public readonly ApiHostUri Host;
+        public ApiHostUri Host {get;}
 
         /// <summary>
         /// The name assigned to a group of methods; usually agrees with what is called a "method group" in clr-land
         /// The purpose of the group name is to classify/identify a related set of methods and, again, this typically
         /// corresponds to the "name" property on a method
         /// </summary>
-        public readonly string GroupName;
+        public string GroupName {get;}
 
         /// <summary>
         /// Defines host-relative identity in the form, for example, {opname}_{typewidth}X{segwidth}{u | i | f}
         /// </summary>
-        public readonly OpIdentity OpId;
+        public OpIdentity OpId {get;}
 
         /// <summary>
         /// The defining part
@@ -53,27 +53,6 @@ namespace Z0
             get => Scheme == 0 && Host.IsEmpty && text.blank(GroupName) && OpId.IsEmpty;
         }
 
-        public bool IsComplete
-        {
-            [MethodImpl(Inline)]
-            get => Scheme != 0 && !Host.IsEmpty && text.nonempty(GroupName) && !OpId.IsEmpty;
-        }
-
-        public OpUri GroupUri
-        {
-            [MethodImpl(Inline)]
-            get => new OpUri(Scheme, Host, GroupName, OpIdentity.Empty);
-        }
-
-        public OpUri Loc
-            => WithScheme(ApiUriScheme.Located);
-
-        public OpUri Hex
-            => WithScheme(ApiUriScheme.Hex);
-
-        OpUri INullary<OpUri>.Zero
-            => Empty;
-
         [MethodImpl(Inline)]
         public static bool operator==(OpUri a, OpUri b)
             => a.Equals(b);
@@ -85,10 +64,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static OpUri hex(ApiHostUri host, string group, OpIdentity opid)
             => new OpUri(ApiUriScheme.Hex, host, group, opid);
-
-        [MethodImpl(Inline)]
-        public static OpUri located(ApiHostUri host, string group, OpIdentity opid)
-            => new OpUri(ApiUriScheme.Located, host, group, opid);
 
         [MethodImpl(Inline)]
         internal OpUri(ApiUriScheme scheme, ApiHostUri host, string group, OpIdentity opid)

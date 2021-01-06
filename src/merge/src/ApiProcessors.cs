@@ -11,7 +11,7 @@ namespace Z0
 
     using static z;
 
-    public delegate ApiHostRoutines HostBlockDecoder(in ApiHostCodeBlocks blocks);
+    public delegate ApiHostRoutines HostBlockDecoder(in ApiHostCode blocks);
 
     public ref struct ApiProcessors
     {

@@ -10,7 +10,7 @@ namespace Z0
 
     public interface IApiDecoder : IWfService
     {
-        ApiHostRoutines DecodeBlocks(in ApiHostCodeBlocks src);
+        ApiHostRoutines DecodeBlocks(in ApiHostCode src);
 
         Span<ApiPartRoutines> DecodeIndex(ApiCodeBlockIndex index);
     }

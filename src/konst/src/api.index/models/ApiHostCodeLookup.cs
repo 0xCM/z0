@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    using LU = System.Collections.Generic.Dictionary<ApiHostUri,ApiHostCodeBlocks>;
+    using LU = System.Collections.Generic.Dictionary<ApiHostUri,ApiHostCode>;
 
     public sealed class ApiHostCodeLookup : LU
     {

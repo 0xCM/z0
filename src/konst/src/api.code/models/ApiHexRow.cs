@@ -6,9 +6,7 @@ namespace Z0
 {
     using System;
 
-    using F = ApiHexField;
     using W = ApiHexFieldWidth;
-    using I = ApiHexFieldIndex;
 
     public enum ApiHexField : uint
     {

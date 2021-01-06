@@ -87,16 +87,16 @@ namespace Z0
             => Memories[location];
 
         [MethodImpl(Inline)]
-        public ApiHostCodeBlocks HostCodeBlocks(ApiHostUri host)
+        public ApiHostCode HostCodeBlocks(ApiHostUri host)
         {
             if(PartIndex.HostCode(host, out var code))
                 return code;
             else
-                return ApiHostCodeBlocks.Empty;
+                return ApiHostCode.Empty;
         }
 
         [MethodImpl(Inline)]
-        public ApiPartCodeBlocks PartCodeBlocks(PartId id)
+        public ApiPartCode PartCodeBlocks(PartId id)
             => ApiCode.combine(id, Hosts.Map(HostCodeBlocks));
 
         public ApiCodeBlock this[MemoryAddress location]
@@ -105,13 +105,13 @@ namespace Z0
             get => Code(location);
         }
 
-        public ApiHostCodeBlocks this[ApiHostUri id]
+        public ApiHostCode this[ApiHostUri id]
         {
             [MethodImpl(Inline)]
             get => HostCodeBlocks(id);
         }
 
-        public ApiPartCodeBlocks this[PartId id]
+        public ApiPartCode this[PartId id]
         {
             [MethodImpl(Inline)]
             get => PartCodeBlocks(id);

@@ -14,12 +14,12 @@ namespace Z0
 
     partial struct Resources
     {
-        public static ApiHostRes from(ApiHostCodeBlocks src)
+        public static ApiHostRes from(ApiHostCode src)
         {
             var count = src.Length;
             var buffer = alloc<BinaryResSpec>(count);
             var dst = span(buffer);
-            var blocks = span(src.Storage);
+            var blocks = src.Blocks.View;
             for(var i=0u; i<count; i++)
             {
                 ref readonly var code = ref skip(blocks,i);

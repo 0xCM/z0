@@ -53,7 +53,7 @@ namespace Z0
             Wf.Ran(flow, spec);
         }
 
-        ApiHostRes Emit(in ApiHostCodeBlocks src, FS.FolderPath dst)
+        ApiHostRes Emit(in ApiHostCode src, FS.FolderPath dst)
         {
             var target = dst + ApiIdentity.file(src.Host,FileExtensions.Cs);
             Wf.EmittingFile(Host, target);
@@ -62,7 +62,7 @@ namespace Z0
             return emission;
         }
 
-        ApiHostRes Emit(in ApiHostCodeBlocks src, FS.FilePath target)
+        ApiHostRes Emit(in ApiHostCode src, FS.FilePath target)
         {
             var resources = Resources.from(src);
             var hostname = src.Host.Name.ReplaceAny(array('.'), '_');

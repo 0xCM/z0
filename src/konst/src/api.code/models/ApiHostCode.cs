@@ -7,13 +7,13 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static memory;
 
     /// <summary>
     /// Collects code derived from members declared by a specific operation host
     /// </summary>
-    public readonly struct ApiHostCodeBlocks
+    public readonly struct ApiHostCode
     {
         /// <summary>
         /// The defining host
@@ -26,7 +26,7 @@ namespace Z0
         readonly ApiCodeBlock[] Data;
 
         [MethodImpl(Inline)]
-        public ApiHostCodeBlocks(ApiHostUri host, ApiCodeBlock[] code)
+        public ApiHostCode(ApiHostUri host, ApiCodeBlock[] code)
         {
             Host = host;
             Data = code.OrderBy(x => x.BaseAddress);
@@ -71,16 +71,16 @@ namespace Z0
             get => Length == 0;
         }
 
-        public ApiCodeBlock[] Storage
+        public Index<ApiCodeBlock> Blocks
         {
             [MethodImpl(Inline)]
             get => Data;
         }
 
-        public static ApiHostCodeBlocks Empty
+        public static ApiHostCode Empty
         {
             [MethodImpl(Inline)]
-            get => new ApiHostCodeBlocks(ApiHostUri.Empty, sys.empty<ApiCodeBlock>());
+            get => new ApiHostCode(ApiHostUri.Empty, sys.empty<ApiCodeBlock>());
         }
     }
 }

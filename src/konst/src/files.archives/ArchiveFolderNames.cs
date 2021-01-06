@@ -7,7 +7,6 @@ namespace Z0
     [LiteralProvider]
     public readonly struct ArchiveFolderNames
     {
-
         public const string AppsFolder = "apps";
 
         public const string Hex = "hex";

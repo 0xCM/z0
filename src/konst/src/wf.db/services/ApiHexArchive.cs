@@ -47,8 +47,6 @@ namespace Z0
         public FS.FilePath[] Files(PartId owner)
             => Root.Files(owner, DefaultExt, true);
 
-
-
         /// <summary>
         /// Enumerates the content of all archived files
         /// </summary>
@@ -89,7 +87,7 @@ namespace Z0
             }
         }
 
-        public ApiHostCodeBlocks Index(FS.FilePath src)
+        public ApiHostCode Index(FS.FilePath src)
         {
             var uri = ApiUri.host(src.FileName);
             if(uri.Failed || uri.Value.IsEmpty)
@@ -100,7 +98,7 @@ namespace Z0
                 if(item.IsNonEmpty)
                     dst.Add(item);
 
-            return new ApiHostCodeBlocks(uri.Value, dst.Array());
+            return new ApiHostCode(uri.Value, dst.Array());
         }
 
         static FS.FilePath[] paths(FS.FolderPath root, FS.FileExt ext)

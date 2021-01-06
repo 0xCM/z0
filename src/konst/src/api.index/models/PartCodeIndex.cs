@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    using LU = System.Collections.Generic.Dictionary<ApiHostUri,ApiHostCodeBlocks>;
+    using LU = System.Collections.Generic.Dictionary<ApiHostUri,ApiHostCode>;
 
     public readonly struct PartCodeIndex
     {
@@ -36,7 +36,7 @@ namespace Z0
         public PartCodeIndexEntry[] Entries
             => entries(this);
 
-        public bool HostCode(ApiHostUri host, out ApiHostCodeBlocks code)
+        public bool HostCode(ApiHostUri host, out ApiHostCode code)
         {
             if(Data.TryGetValue(host, out code))
                 return true;
@@ -62,7 +62,7 @@ namespace Z0
         public Index<ApiCodeBlock> this[ApiHostUri src]
         {
             [MethodImpl(Inline)]
-            get => Data[src].Storage;
+            get => Data[src].Blocks;
         }
 
         public static PartCodeIndex Empty
