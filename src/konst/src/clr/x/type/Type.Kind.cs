@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    partial class XClrQuery
+    partial class ClrQuery
     {
         /// <summary>
         /// Queries the source type for its fundamental kind

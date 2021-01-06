@@ -11,6 +11,21 @@ namespace Z0
 
     partial struct memory
     {
+        [MethodImpl(Inline), Op]
+        public static Ref segref(MemoryAddress address, ByteSize size)
+            => new Ref(address, size);
+
+        /// <summary>
+        /// Captures a parametric reference to cell content beginning at a specified address
+        /// </summary>
+        /// <param name="src">The content address</param>
+        /// <param name="count">The content cell count</param>
+        /// <typeparam name="T">The content type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Ref<T> segref<T>(MemoryAddress address, Count count)
+            where T : unmanaged
+                => new Ref<T>(address, size<T>(count));
+
         /// <summary>
         /// Captures a sized readonly parametric reference to source span content
         /// </summary>
@@ -48,15 +63,10 @@ namespace Z0
         public static unsafe Ref<T> segref<T>(in T src, int count)
             => new Ref<T>(segref(pvoid(src), size<T>((uint)count)));
 
-        /// <summary>
-        /// Captures a parametric reference to cell content beginning at a specified address
-        /// </summary>
-        /// <param name="src">The content address</param>
-        /// <param name="count">The content cell count</param>
-        /// <typeparam name="T">The content type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static unsafe Ref<T> segref<T>(MemoryAddress src, uint count)
-            => new Ref<T>(segref((void*)src, size<T>(count)));
+        public static unsafe Ref<T> segref<T>(T* pSrc, ByteSize size)
+            where T : unmanaged
+                => new Ref<T>(pSrc, size);
 
         /// <summary>
         /// Captures an untyped sized reference

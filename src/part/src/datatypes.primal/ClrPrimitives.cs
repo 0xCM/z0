@@ -12,8 +12,8 @@ namespace Z0
 
     using PK = PrimalKind;
 
-    [ApiHost(ApiNames.SystemPrimitives, true)]
-    public readonly partial struct SystemPrimitives
+    [ApiHost(ApiNames.ClrPrimitives, true)]
+    public readonly partial struct ClrPrimitives
     {
         static ReadOnlySpan<PrimalKind> Kinds
         {

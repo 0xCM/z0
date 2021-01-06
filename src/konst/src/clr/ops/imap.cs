@@ -10,7 +10,7 @@ namespace Z0
 
     using static Part;
 
-    partial struct ClrQuery
+    partial struct Clr
     {
         /// <summary>
         /// Queries the host type for a <see cref='ClrInterfaceMap'/>

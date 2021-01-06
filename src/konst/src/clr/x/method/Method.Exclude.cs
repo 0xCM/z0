@@ -9,7 +9,7 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
 
-    partial class XClrQuery
+    partial class ClrQuery
     {
         /// <summary>
         /// Filters out the source methods with names that match those from a specified array

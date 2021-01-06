@@ -11,7 +11,7 @@ namespace Z0
 
     using static Part;
 
-    partial class XClrQuery
+    partial class ClrQuery
     {
         /// <summary>
         /// Gets the value of a member attribute if it exists

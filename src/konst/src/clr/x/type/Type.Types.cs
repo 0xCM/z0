@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    partial class XClrQuery
+    partial class ClrQuery
     {
         /// <summary>
         /// Selects the concrete types from a stream

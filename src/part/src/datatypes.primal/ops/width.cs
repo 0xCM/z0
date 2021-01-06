@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
     using static PrimalBits;
 
-    partial struct SystemPrimitives
+    partial struct ClrPrimitives
     {
         /// <summary>
         /// Computes the bit-width of the represented primitive

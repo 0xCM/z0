@@ -37,6 +37,11 @@ namespace Z0
 
         [MethodImpl(Options), Opaque(Alloc), Closures(Closure)]
         public static T[] alloc<T>(int length, T src)
-            => fill(alloc<T>(length), src);
+        {
+            var dst = new T[length];
+            Array.Fill(dst, src);
+            return dst;
+        }
+
     }
 }

@@ -9,8 +9,6 @@ namespace Z0
     [Record(TableId)]
     public struct ClrFieldRecord : IRecord<ClrFieldRecord>
     {
-        public const byte FieldCount = 6;
-
         public const string TableId = "clr.fields";
 
         public ClrArtifactRef Key;

@@ -19,7 +19,7 @@ namespace Z0
         {
             var fields = span(src.LiteralFields());
             var dst = span<EnumLiteralRow>(fields.Length);
-            var ecode = SystemPrimitives.ecode(src);
+            var ecode = ClrPrimitives.ecode(src);
             fill(part, src, ecode, fields, dst);
             return dst;
         }

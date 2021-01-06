@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class XClrQuery
+    partial class ClrQuery
     {
         /// <summary>
         /// Determines whether a type is a struct

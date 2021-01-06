@@ -12,7 +12,7 @@ namespace Z0
 
     using static ReflectionFlags;
 
-    partial class XClrQuery
+    partial class ClrQuery
     {
         /// <summary>
         /// Retrieves the type's properties together with applied attributes

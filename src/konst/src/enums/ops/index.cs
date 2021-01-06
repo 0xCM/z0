@@ -26,21 +26,6 @@ namespace Z0
         /// <typeparam name="E">The enum type</typeparam>
         public static EnumLiteralDetails<E> index<E>()
             where E : unmanaged, Enum
-                => (EnumLiteralDetails<E>)IndexCache.GetOrAdd(typeof(E), _ => CreateIndex<E>());
-
-        static EnumLiteralDetails<E> CreateIndex<E>()
-            where E : unmanaged, Enum
-        {
-            var type = Enums.@base<E>();
-            var fields = typeof(E).LiteralFields().ToArray();
-            var indices = new List<EnumLiteralDetail<E>>(fields.Length);
-            for(var i=0u; i< fields.Length; i++)
-            {
-                var field = fields[i];
-                var value = (E)field.GetRawConstantValue();
-                indices.Add(new EnumLiteralDetail<E>(field, type, i, field.Name, value, string.Empty));
-            }
-            return indices.ToIndex();
-        }
+                => (EnumLiteralDetails<E>)IndexCache.GetOrAdd(typeof(E), _ => details<E>());
     }
 }

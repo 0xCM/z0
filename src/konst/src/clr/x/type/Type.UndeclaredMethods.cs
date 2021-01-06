@@ -10,7 +10,7 @@ namespace Z0
     using System.Reflection;
 
 
-    partial class XClrQuery
+    partial class ClrQuery
     {
         /// <summary>
         /// Selects the methods available through the type that were not declared by the type

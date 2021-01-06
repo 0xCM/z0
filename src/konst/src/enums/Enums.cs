@@ -26,7 +26,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static EnumTypeCode typecode<E>()
             where E : unmanaged, Enum
-                => SystemPrimitives.ecode<E>();
+                => ClrPrimitives.ecode<E>();
 
         /// <summary>
         /// Reads a generic enum member from a generic value

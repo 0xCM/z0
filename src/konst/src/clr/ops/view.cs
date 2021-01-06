@@ -11,7 +11,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    partial struct ClrQuery
+    partial struct Clr
     {
        /// <summary>
         /// Defines a <see cref='ClrModule'/> over the source

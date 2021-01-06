@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    partial struct ClrQuery
+    partial struct Clr
     {
         [MethodImpl(Inline), Op]
         public readonly void enums(in ReadOnlySpan<Type> src, Span<ClrEnum> dst)

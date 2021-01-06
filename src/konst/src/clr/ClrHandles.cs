@@ -48,7 +48,6 @@ namespace Z0
             return counter;
         }
 
-
         [Op]
         public static ReadOnlySpan<ClrHandle<RuntimeTypeHandle>> types(Assembly src)
         {
@@ -119,15 +118,15 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static ClrHandle untype(in ClrHandle<RuntimeMethodHandle> src)
-            => new ClrHandle(src.Kind, src.Key, src.Handle.GetFunctionPointer());
+            => new ClrHandle(src.Kind, src.Token, src.Handle.GetFunctionPointer());
 
         [MethodImpl(Inline), Op]
         public static ClrHandle untype(in ClrHandle<RuntimeFieldHandle> src)
-            => new ClrHandle(src.Kind, src.Key, src.Handle.Value);
+            => new ClrHandle(src.Kind, src.Token, src.Handle.Value);
 
         [MethodImpl(Inline), Op]
         public static ClrHandle untype(in ClrHandle<RuntimeTypeHandle> src)
-            => new ClrHandle(src.Kind, src.Key, src.Handle.Value);
+            => new ClrHandle(src.Kind, src.Token, src.Handle.Value);
 
         [MethodImpl(Inline)]
         public static ClrHandle untype<T>(in ClrHandle<T> src)

@@ -6,11 +6,10 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Reflection;
 
     using static Part;
 
-    partial struct ClrQuery
+    partial struct Clr
     {
         /// <summary>
         /// Returns a <see cref='ClrField'/> readonly span of the fields defined by the source

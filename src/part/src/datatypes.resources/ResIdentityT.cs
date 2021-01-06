@@ -52,6 +52,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator ResIdentity(ResIdentity<T> src)
-            => new ResIdentity(src.Name, src.Segment, SystemPrimitives.kind<T>());
+            => new ResIdentity(src.Name, src.Segment, ClrPrimitives.kind<T>());
     }
 }

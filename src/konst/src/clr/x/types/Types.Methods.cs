@@ -8,7 +8,7 @@ namespace Z0
     using System.Reflection;
     using System.Linq;
 
-    partial class XClrQuery
+    partial class ClrQuery
     {
         /// <summary>
         /// Selects all methods from the source types

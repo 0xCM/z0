@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    partial class XClrQuery
+    partial class ClrQuery
     {
         /// <summary>
         /// Selects literal fields from the source

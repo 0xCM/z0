@@ -26,7 +26,7 @@ namespace Z0
                 return empty<T>();
             else
             {
-                fill(dst, default(T));
+                Array.Fill(dst, default(T));
                 return dst;
             }
         }

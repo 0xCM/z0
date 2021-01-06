@@ -12,7 +12,7 @@ namespace Z0
     using static Konst;
     using static ReflectionFlags;
 
-    partial class XClrQuery
+    partial class ClrQuery
     {
         /// <summary>
         /// Searches a type for any method that matches the supplied signature

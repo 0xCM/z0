@@ -6,17 +6,19 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
 
     using static Part;
 
-    partial class ClrQuery
+    partial struct Clr
     {
         /// <summary>
-        /// Determines whether the type is a (memory) reference
+        /// Loads an assembly + pdb
         /// </summary>
-        /// <param name="src">The type to examine</param>
-        [MethodImpl(Inline), Op]
-        public static bool IsRef(this Type src)
-            => src.UnderlyingSystemType.IsByRef;
+        /// <param name="image">The assembly path</param>
+        /// <param name="pdb">The pdb path</param>
+        [Op]
+        public static Assembly assembly(FS.FilePath image, FS.FilePath pdb)
+            => Assembly.Load(image.ReadBytes(), pdb.ReadBytes());
     }
 }

@@ -11,7 +11,7 @@ namespace Z0
     using static Part;
     using static ReflectionFlags;
 
-    partial class XClrQuery
+    partial class ClrQuery
     {
         /// <summary>
         /// Retrieves the public and non-public instance fields declared or inherited by a type

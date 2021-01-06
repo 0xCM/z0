@@ -13,7 +13,7 @@ namespace Z0
     using static Part;
     using static ReflectionFlags;
 
-    partial class XClrQuery
+    partial class ClrQuery
     {
         [MethodImpl(Inline), Op]
         public static MemberInfo[] Members(this Type src)

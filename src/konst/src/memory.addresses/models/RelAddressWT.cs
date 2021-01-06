@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     public readonly struct RelativeAddress<BW,RW,B,R>
         where BW: unmanaged, INumericWidth
@@ -40,7 +40,7 @@ namespace Z0
         public uint Hash
         {
             [MethodImpl(Inline)]
-            get => z.hash(Offset);
+            get => alg.hash.calc(Offset);
         }
 
         public bool IsNonEmpty

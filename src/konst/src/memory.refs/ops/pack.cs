@@ -14,13 +14,6 @@ namespace Z0
     partial struct MemRefs
     {
         [MethodImpl(Inline), Op]
-        public static uint user(Vector128<ulong> src)
-        {
-            unpack(vcell(src,1), out _, out var user);
-            return user;
-        }
-
-        [MethodImpl(Inline), Op]
         public static void unpack(ulong src, out uint length, out uint user)
         {
             length = (uint)src;
@@ -31,12 +24,11 @@ namespace Z0
         public static void unpack(Vector128<ulong> src, out uint length, out uint user)
             => unpack(vcell(src,1), out length, out user);
 
-
         [MethodImpl(Inline), Op]
-        public static void unpack(Vector128<ulong> src, out MemoryAddress a, out uint length, out uint user)
+        public static void unpack(Vector128<ulong> src, out MemoryAddress a, out uint length)
         {
             a = MemRefs.location(src);
-            unpack(src, out length, out user);
+            unpack(src, out length, out _);
         }
 
         [MethodImpl(Inline), Op]

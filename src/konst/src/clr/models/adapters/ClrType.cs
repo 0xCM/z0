@@ -42,7 +42,7 @@ namespace Z0
         public ReadOnlySpan<ClrType> NestedTypes
         {
             [MethodImpl(Inline)]
-            get => ClrQuery.nested(Definition);
+            get => Clr.nested(Definition);
         }
 
         string IClrArtifact.Name

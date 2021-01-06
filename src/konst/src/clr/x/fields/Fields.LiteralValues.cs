@@ -10,7 +10,7 @@ namespace Z0
     using System.Reflection;
 
 
-    partial class XClrQuery
+    partial class ClrQuery
     {
         /// <summary>
         /// Queries literal fields for their values

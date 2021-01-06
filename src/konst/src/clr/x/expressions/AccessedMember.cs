@@ -10,7 +10,7 @@ namespace Z0
 
     using static Option;
 
-    partial class XClrQuery
+    partial class ClrQuery
     {
         /// <summary>
         /// Extracts member info from an expression, if possbile; otherwise returns none

@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    partial class XClrQuery
+    partial class ClrQuery
     {
         /// <summary>
         /// Derives a signature from reflected method metadata
@@ -16,6 +16,6 @@ namespace Z0
         /// <param name="src">The source method</param>
         [Op]
         public static MethodMetadata Metadata(this MethodInfo src)
-            => ClrQuery.metadata(src);
+            => Clr.metadata(src);
     }
 }

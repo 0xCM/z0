@@ -18,13 +18,6 @@ namespace Z0
     [ApiHost]
     readonly partial struct ClrViews
     {
-        public static ClrField field => default;
-
-        public static ClrMethod method => default;
-
-        public static ClrType type => default;
-
-        public static ClrModule module => default;
 
         [MethodImpl(Inline), Op]
         public static ClrModule vManifest(Assembly src)
@@ -40,13 +33,6 @@ namespace Z0
             where A : struct, IClrArtifact<A>
                 => src;
 
-        /// <summary>
-        /// Defines an <see cref='CliArtfactRef'/> predicated on an a <see cref='ClrToken'/>
-        /// </summary>
-        /// <param name="src">The defining type</param>
-        [MethodImpl(Inline), Op]
-        public static ClrArtifactRef reference(ClrToken id, ClrArtifactKind kind, StringRef name)
-            => new ClrArtifactRef(id,kind,name);
 
         /// <summary>
         /// Defines a <see cref='ClrModule'/> over the source
@@ -63,10 +49,6 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ClrField view(FieldInfo src)
             => src;
-
-        [MethodImpl(Inline), Op]
-        public static MethodInfo[] methods(Type src)
-            => src.GetMethods(BF_All);
 
         /// <summary>
         /// Returns a filtered <see cref='Type'/> array of the nested types defined by the source

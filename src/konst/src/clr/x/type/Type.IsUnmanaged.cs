@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    partial class XClrQuery
+    partial class ClrQuery
     {
         /// <summary>
         /// Determines whether a type is unmanaged

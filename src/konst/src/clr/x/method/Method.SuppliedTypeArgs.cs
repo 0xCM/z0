@@ -10,7 +10,7 @@ namespace Z0
 
     using static Part;
 
-    partial class XClrQuery
+    partial class ClrQuery
     {
         /// <summary>
         /// For a closed generic method, returns the supplied arguments; otherwise, returns an empty array

@@ -22,7 +22,7 @@ namespace Z0
             for(var i=0u; i<count; i++)
             {
                 ref readonly var field = ref skip(view,i);
-                dst.Append(text.format(ClrQuery.value(field.Definition, tref), field.DataType, FieldDelimiter, field.RenderWidth));
+                dst.Append(text.format(Clr.value(field.Definition, tref), field.DataType, FieldDelimiter, field.RenderWidth));
             }
 
             if(eol)
@@ -40,7 +40,7 @@ namespace Z0
                 try
                 {
                     ref readonly var field = ref skip(view,i);
-                    var v = ClrQuery.value(field.Definition, tref);
+                    var v = Clr.value(field.Definition, tref);
                     dst.Append(text.format(v, field.DataType, FieldDelimiter, field.RenderWidth));
                 }
                 catch(Exception e)

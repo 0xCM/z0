@@ -11,7 +11,7 @@ namespace Z0
     using static Part;
     using static ReflectionFlags;
 
-    partial class XClrQuery
+    partial class ClrQuery
     {
         /// <summary>
         /// Selects all methods available through the type

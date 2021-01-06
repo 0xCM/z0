@@ -7,7 +7,7 @@ namespace Z0
 {
     using System;
 
-    partial class XClrQuery
+    partial class ClrQuery
     {
        /// <summary>
         /// Determines whether an attribute is applied to a type

@@ -25,7 +25,7 @@ namespace Z0
 
         public static void run(IWfShell wf)
         {
-            wf.Db().Clear(ClrEnumLiteralRecord.TableId);
+            wf.Db().Clear(ClrEnumRecord.TableId);
             var components = wf.Api.PartComponents;
             foreach(var component in components)
             {
@@ -45,9 +45,9 @@ namespace Z0
 
         readonly WfHost Host;
 
-        public ClrEnumLiteralRecord[] Records;
+        public ClrEnumRecord[] Records;
 
-        static ReadOnlySpan<byte> RenderWidths => new byte[ClrEnumLiteralRecord.FieldCount]{16, 36, 16, 24, 16, 16, 24, 16};
+        static ReadOnlySpan<byte> RenderWidths => new byte[ClrEnumRecord.FieldCount]{16, 36, 16, 24, 16, 16, 24, 16};
 
         [MethodImpl(Inline)]
         public EmitEnumsStep(IWfShell wf, WfHost host, ClrAssembly src)
@@ -55,7 +55,7 @@ namespace Z0
             Wf = wf;
             Host = host;
             Source = src;
-            Target = Wf.Db().Table(ClrEnumLiteralRecord.TableId, Source.Part);
+            Target = Wf.Db().Table(ClrEnumRecord.TableId, Source.Part);
             Records = default;
         }
 
@@ -68,19 +68,19 @@ namespace Z0
             Records = ClrEnums.literals(Source);
             if(Records.Length != 0)
             {
-                var t = default(ClrEnumLiteralRecord);
-                var formatter = TableFormatter.row<ClrEnumLiteralRecord>(RenderWidths);
-                var flow = Wf.EmittingTable<ClrEnumLiteralRecord>(Target);
+                var t = default(ClrEnumRecord);
+                var formatter = TableFormatter.row<ClrEnumRecord>(RenderWidths);
+                var flow = Wf.EmittingTable<ClrEnumRecord>(Target);
                 var counter = 0u;
                 Execute(ref counter, formatter);
-                Wf.EmittedTable<ClrEnumLiteralRecord>(Host, counter, Target);
+                Wf.EmittedTable<ClrEnumRecord>(Host, counter, Target);
             }
         }
 
-        void Execute(ref uint counter, in RowFormatter<ClrEnumLiteralRecord> formatter)
+        void Execute(ref uint counter, in RowFormatter<ClrEnumRecord> formatter)
         {
             var src = @readonly(Records);
-            var t = default(ClrEnumLiteralRecord);
+            var t = default(ClrEnumRecord);
             var count = src.Length;
             using var dst = Target.Writer();
             dst.WriteLine(formatter.FormatHeader());

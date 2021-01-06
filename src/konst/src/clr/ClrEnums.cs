@@ -11,28 +11,69 @@ namespace Z0
     using static Part;
     using static z;
 
+    using NK = NumericKind;
+    using BK = EnumLiteralKind;
+
     [ApiHost(ApiNames.ClrEnums, true)]
     public readonly struct ClrEnums
     {
+        /// <summary>
+        /// Determines the integral type refined by a parametrically-identified enum type
+        /// </summary>
+        /// <typeparam name="E">The enum type</typeparam>
+        public static EnumLiteralKind @base<E>()
+            where E : unmanaged, Enum
+             => @base(typeof(E).GetEnumUnderlyingType().NumericKind());
+
+        /// <summary>
+        /// Determines the integral type refined by a value-identified enum type
+        /// </summary>
+        /// <param name="value">The enum value</typeparam>
         [Op]
-        public static ClrEnumLiteralRecord[] literals(Assembly src)
+        public static EnumLiteralKind @base(Enum value)
+            => @base(value.GetType().GetEnumUnderlyingType().NumericKind());
+
+        /// <summary>
+        /// Determines the integral type refined by a specified enum type
+        /// </summary>
+        /// <typeparam name="E">The enum type</typeparam>
+        [Op]
+        public static EnumLiteralKind @base(Type et)
+            => @base(et.NumericKind());
+
+        [Op]
+        public static EnumLiteralKind @base(NumericKind src)
+             => src switch{
+                NK.U8 => BK.U8,
+                NK.I8 => BK.I8,
+                NK.U16 => BK.U16,
+                NK.I16 => BK.I16,
+                NK.U32 => BK.U32,
+                NK.I32 => BK.I32,
+                NK.I64 => BK.I64,
+                NK.U64 => BK.U64,
+                _ => EnumLiteralKind.None,
+            };
+
+        [Op]
+        public static ClrEnumRecord[] literals(Assembly src)
         {
             var types = src.GetTypes().Where(t => t.IsEnum);
-            var dst = list<ClrEnumLiteralRecord>();
+            var dst = list<ClrEnumRecord>();
             for(var i=0; i<types.Length; i++)
                 dst.AddRange(literals(types[i]));
             return dst.ToArray();
         }
 
         [Op]
-        public static ClrEnumLiteralRecord[] literals(Type src)
+        public static ClrEnumRecord[] literals(Type src)
         {
             var ut = src.GetEnumUnderlyingType();
             var nk = ut.NumericKind();
 
             var fields = span(src.LiteralFields());
             var count = fields.Length;
-            var buffer = sys.alloc<ClrEnumLiteralRecord>(count);
+            var buffer = sys.alloc<ClrEnumRecord>(count);
             var index = span(buffer);
             var assembly = src.Assembly;
             var part = assembly.Id();
@@ -47,7 +88,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static ref ClrEnumLiteralRecord fill(PartId part, FieldInfo field, uint index, ref ClrEnumLiteralRecord dst)
+        public static ref ClrEnumRecord fill(PartId part, FieldInfo field, uint index, ref ClrEnumRecord dst)
         {
             dst.PartId = part;
             dst.TypeId = field.DeclaringType.MetadataToken;

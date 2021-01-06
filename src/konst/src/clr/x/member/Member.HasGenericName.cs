@@ -10,7 +10,7 @@ namespace Z0
 
     using static Part;
 
-    partial class XClrQuery
+    partial class ClrQuery
     {
         /// <summary>
         /// Determines whether a member has a name that contains {'<' | '>'}

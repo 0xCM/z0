@@ -10,7 +10,7 @@ namespace Z0
 
     using static Part;
 
-    partial class XClrQuery
+    partial class ClrQuery
     {
         [Op, MethodImpl(Inline)]
         public static bool IsConcrete(this MethodInfo src)

@@ -7,7 +7,7 @@ namespace Z0
     using System;
 
     using static memory;
-    partial struct ClrQuery
+    partial struct Clr
     {
         [Op]
         public static string format(in MethodMetadata src)

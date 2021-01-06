@@ -11,7 +11,7 @@ namespace Z0
     using static Part;
     using static PrimalBits;
 
-    partial struct SystemPrimitives
+    partial struct ClrPrimitives
     {
         /// <summary>
         /// Gets the value of an identified bitfield segment

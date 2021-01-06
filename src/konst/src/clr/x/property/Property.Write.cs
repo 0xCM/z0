@@ -8,7 +8,7 @@ namespace Z0
     using System;
     using System.Reflection;
 
-    partial class XClrQuery
+    partial class ClrQuery
     {
         [Op]
         public static Option<object> Write(this PropertyInfo p, object src, object dst)

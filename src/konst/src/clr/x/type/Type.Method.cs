@@ -8,7 +8,7 @@ namespace Z0
     using System.Linq;
     using System.Reflection;
 
-    partial class XClrQuery
+    partial class ClrQuery
     {
         /// <summary>
         /// Selects the first method found on the type, if any, that has a specified name

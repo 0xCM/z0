@@ -8,7 +8,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
-    partial class XClrQuery
+    partial class ClrQuery
     {
         /// <summary>
         /// Selects the literal fields defined by a type and extracts/casts their values

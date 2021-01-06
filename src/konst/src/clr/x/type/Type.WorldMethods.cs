@@ -12,7 +12,7 @@ namespace Z0
     using static Part;
     using static ReflectionFlags;
 
-    partial class XClrQuery
+    partial class ClrQuery
     {
         /// <summary>
         /// All of the methods belong to us

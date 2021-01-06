@@ -10,7 +10,7 @@ namespace Z0
     using static memory;
     using static Part;
 
-    partial struct SystemPrimitives
+    partial struct ClrPrimitives
     {
         /// <summary>
         /// Determines equality for unmanaged primitive values

@@ -27,7 +27,7 @@ namespace Z0
             where E : unmanaged, Enum
             where T : unmanaged
         {
-            var index = CreateIndex<E>();
+            var index = details<E>();
             var dst = new EnumLiteralDetail<E,T>[index.Length];
             for(var i=0; i<index.Length; i++)
             {

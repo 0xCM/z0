@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    partial class XClrQuery
+    partial class ClrQuery
     {
         /// <summary>
         /// For a generic type or reference to a generic type, retrieves the generic type definition;

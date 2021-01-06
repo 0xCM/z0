@@ -10,7 +10,7 @@ namespace Z0
 
     using static Part;
 
-    partial struct ClrQuery
+    partial struct Clr
     {
         public static TaggedMembers<MethodInfo,A> tags<A>(Type src)
             where A : Attribute

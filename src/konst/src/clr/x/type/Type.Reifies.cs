@@ -8,7 +8,7 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    partial class XClrQuery
+    partial class ClrQuery
     {
         /// <summary>
         /// Determines whether a type implements a specified interface

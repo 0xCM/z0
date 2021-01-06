@@ -10,7 +10,7 @@ namespace Z0
 
     using static Part;
 
-    partial class XClrQuery
+    partial class ClrQuery
     {
         /// <summary>
         /// Gets the simple name of an assembly

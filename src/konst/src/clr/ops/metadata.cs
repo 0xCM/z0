@@ -7,7 +7,7 @@ namespace Z0
 
     using static Part;
 
-    partial struct ClrQuery
+    partial struct Clr
     {
         /// <summary>
         /// Returns a <see cref='Ref'/> to the cli metadata segment of the source
@@ -16,7 +16,7 @@ namespace Z0
         public static unsafe Ref<byte> metadata(Assembly src)
         {
             if(src.TryGetRawMetadata(out var ptr, out var len))
-                return MemRefs.segment(ptr,len);
+                return memory.segref(ptr, len);
             else
                 return Ref<byte>.Empty;
         }

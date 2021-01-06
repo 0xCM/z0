@@ -10,7 +10,7 @@ namespace Z0
     using static memory;
     using static Part;
 
-    partial struct SystemPrimitives
+    partial struct ClrPrimitives
     {
         /// <summary>
         /// Returns the type-code identified primal kind

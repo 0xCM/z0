@@ -10,7 +10,7 @@ namespace Z0
 
     using static Part;
 
-    partial struct ClrQuery
+    partial struct Clr
     {
         /// <summary>
         /// Selects all instance/static and public/non-public properties declared or inherited by a type

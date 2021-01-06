@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    partial class XClrQuery
+    partial class ClrQuery
     {
         /// <summary>
         /// Returns true if the source type is either non-generic or a generic type that has been closed over all parameters

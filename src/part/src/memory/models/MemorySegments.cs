@@ -24,10 +24,6 @@ namespace Z0
         public static MemorySegments create(params MemorySegment[] src)
             => new MemorySegments(src);
 
-        [MethodImpl(Inline)]
-        public static MemorySegments create(MemoryAddress src, uint size)
-            => create(new MemorySegment(src, size));
-
         public ReadOnlySpan<MemorySegment> View
         {
             [MethodImpl(Inline)]

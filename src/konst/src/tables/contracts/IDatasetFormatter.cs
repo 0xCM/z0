@@ -50,7 +50,7 @@ namespace Z0
             => header<F>().Render(Delimiter);
 
         string[] IDatasetFormatter.Labels
-            => ClrQuery.literalIndex<F>().Names;
+            => Clr.literalIndex<F>().Names;
 
         void Append(F f, object content)
         {

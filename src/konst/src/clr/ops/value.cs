@@ -10,7 +10,7 @@ namespace Z0
 
     using static Part;
 
-    partial struct ClrQuery
+    partial struct Clr
     {
         /// <summary>
         /// Extracts a value from a field using a <see cref='TypedReference'/>

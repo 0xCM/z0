@@ -386,7 +386,7 @@ namespace Z0
 
         void ShowPartComponents()
         {
-            var src = ClrQuery.view(Wf.Api.PartComponents);
+            var src = Clr.view(Wf.Api.PartComponents);
             for(var i=0; i<src.Length; i++)
             {
                 ref readonly var item = ref skip(src,i);

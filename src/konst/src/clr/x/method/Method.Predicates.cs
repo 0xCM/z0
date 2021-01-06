@@ -12,7 +12,7 @@ namespace Z0
 
     using static Part;
 
-    partial class XClrQuery
+    partial class ClrQuery
     {
         /// <summary>
         /// Returns true if the method accepts generic parameters, false otherwise

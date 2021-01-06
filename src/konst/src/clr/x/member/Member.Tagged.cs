@@ -12,7 +12,7 @@ namespace Z0
 
     using static Part;
 
-    partial class XClrQuery
+    partial class ClrQuery
     {
         /// <summary>
         /// Determines whether an attribute of specified type is attached to a member

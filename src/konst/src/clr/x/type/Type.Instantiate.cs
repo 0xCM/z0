@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    partial class XClrQuery
+    partial class ClrQuery
     {
         /// <summary>
         /// Creates an instance of a type and casts the instance value as specified by a type parameter

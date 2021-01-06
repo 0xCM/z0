@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    partial class XClrQuery
+    partial class ClrQuery
     {
         public static Type[] SuppliedTypeArgs(this Type t)
         {

@@ -67,7 +67,7 @@ namespace Z0
 
         static EnumLiteralDetails<T> Data()
         {
-            var type = Enums.@base<T>();
+            var type = ClrEnums.@base<T>();
             var fields = typeof(T).LiteralFields().ToArray();
             var indices = new List<EnumLiteralDetail<T>>(fields.Length);
             for(var i=0u; i< fields.Length; i++)

@@ -19,7 +19,7 @@ namespace Z0
             var data = sys.constant(src);
             var type = src.FieldType;
 
-            var datatype = SystemPrimitives.kind(type);
+            var datatype = ClrPrimitives.kind(type);
             if(data is string s)
             {
                 var content = z.span(s);

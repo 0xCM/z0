@@ -77,7 +77,7 @@ namespace Z0
             => GetPdbPath(out var _);
 
         public ReadOnlySpan<ClrAssemblyName> ReferencedAssemblies
-            => ClrQuery.references(Definition);
+            => Clr.references(Definition);
 
         public ClrToken Token
             => default;
@@ -85,7 +85,7 @@ namespace Z0
         public Ref<byte> RawMetadata
         {
             [MethodImpl(Inline)]
-            get => ClrQuery.metadata(Definition);
+            get => Clr.metadata(Definition);
         }
 
         string IClrArtifact.Name

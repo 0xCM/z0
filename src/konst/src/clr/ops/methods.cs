@@ -11,7 +11,7 @@ namespace Z0
     using static ReflectionFlags;
     using static Part;
 
-    partial struct ClrQuery
+    partial struct Clr
     {
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<ClrMethod> methods(Type src)

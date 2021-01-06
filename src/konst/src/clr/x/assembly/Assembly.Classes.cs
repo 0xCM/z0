@@ -9,7 +9,7 @@ namespace Z0
     using System.Diagnostics;
     using System.Linq;
 
-    partial class XClrQuery
+    partial class ClrQuery
     {
         [Op]
         public static Type[] Classes(this Assembly a)

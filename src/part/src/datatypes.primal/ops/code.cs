@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
     using static PrimalBits;
 
-    partial struct SystemPrimitives
+    partial struct ClrPrimitives
     {
         [MethodImpl(Inline), Op]
         public static TypeCode code(PrimalKind f)

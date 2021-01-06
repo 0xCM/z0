@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Reflection;
 
-    partial class XClrQuery
+    partial class ClrQuery
     {
         [Op]
         public static MethodInfo[] Getters(this PropertyInfo[] src)

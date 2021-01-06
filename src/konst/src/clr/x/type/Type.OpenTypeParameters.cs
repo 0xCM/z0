@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    partial class XClrQuery
+    partial class ClrQuery
     {
         /// <summary>
         /// For a non-constructed generic type or a generic type definition, returns an

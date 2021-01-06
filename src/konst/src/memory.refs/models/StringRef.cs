@@ -55,12 +55,6 @@ namespace Z0
             get => (uint)Length;
         }
 
-        public uint User
-        {
-            [MethodImpl(Inline)]
-            get => MemRefs.user(Data);
-        }
-
         public unsafe string Text
         {
             [MethodImpl(Inline)]

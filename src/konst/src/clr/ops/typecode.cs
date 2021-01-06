@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    partial struct ClrQuery
+    partial struct Clr
     {
         [MethodImpl(Inline), Op]
         public static unsafe TypeCode typecode(in SystemTypeCodes src, byte index)

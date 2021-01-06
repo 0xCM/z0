@@ -25,7 +25,7 @@ namespace Z0
 
         public Index<ClrTypeParamInfo> TypeParams;
         public string Format()
-            => ClrQuery.format(this);
+            => Clr.format(this);
 
         public override string ToString()
             => Format();

@@ -10,8 +10,6 @@ namespace Z0
 
     using static Part;
 
-    using api = MemRefs;
-
     /// <summary>
     /// Deefines a reference to a <see cref='FieldInfo'/>
     /// </summary>
@@ -22,14 +20,14 @@ namespace Z0
         public FieldInfo Field {get;}
 
         [MethodImpl(Inline)]
-        public FieldRef(FieldInfo field, in MemorySegment seg)
+        public FieldRef(FieldInfo field, MemorySegment seg)
         {
             Segment = seg;
             Field = field;
         }
 
         [MethodImpl(Inline)]
-        public FieldRef(in MemorySegment seg, FieldInfo field)
+        public FieldRef(MemorySegment seg, FieldInfo field)
         {
             Segment = seg;
             Field = field;
@@ -50,13 +48,13 @@ namespace Z0
         public MemoryAddress NameAddress
         {
             [MethodImpl(Inline)]
-            get => z.address(Field.Name);
+            get => memory.address(Field.Name);
         }
 
         public Ref<char> NameRef
         {
             [MethodImpl(Inline)]
-            get => api.segment<char>(NameAddress, FieldName.Length);
+            get => memory.segref<char>(NameAddress, FieldName.Length);
         }
 
         public object ReflectedValue
@@ -202,10 +200,6 @@ namespace Z0
             [MethodImpl(Inline)]
             get => ref Address.Ref<char>();
         }
-
-        [MethodImpl(Inline)]
-        public StringRef ToStringRef()
-            => new StringRef(Segment);
 
         /// <summary>
         /// Presents the leading source cell as a reference to an enum value of parametric kind

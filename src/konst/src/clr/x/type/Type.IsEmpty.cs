@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    partial class XClrQuery
+    partial class ClrQuery
     {
         /// <summary>
         /// Returns true if the source type is null or void; otherwise, returns false

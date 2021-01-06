@@ -8,7 +8,7 @@ namespace Z0
     using System.Linq;
     using System.Reflection;
 
-    partial class XClrQuery
+    partial class ClrQuery
     {
         /// <summary>
         /// If a method is non-generic, returns an empty list.

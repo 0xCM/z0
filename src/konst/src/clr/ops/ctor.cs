@@ -11,7 +11,7 @@ namespace Z0
     using static Part;
     using static ReflectionFlags;
 
-    partial struct ClrQuery
+    partial struct Clr
     {
         /// <summary>
         /// Searches a type for an instance constructor that matches a specified signature

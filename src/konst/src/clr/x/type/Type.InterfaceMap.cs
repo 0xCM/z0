@@ -10,7 +10,7 @@ namespace Z0
 
     using static Part;
 
-    partial class XClrQuery
+    partial class ClrQuery
     {
         /// <summary>
         /// Queries the host type for the <see cref='InterfaceMapping'/> of a specified contract <see cref='Type'/>

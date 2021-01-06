@@ -10,7 +10,7 @@ namespace Z0
 
     using static ReflectionFlags;
 
-    partial class XClrQuery
+    partial class ClrQuery
     {
         /// <summary>
         /// Retrieves all declared or inheraited by a type

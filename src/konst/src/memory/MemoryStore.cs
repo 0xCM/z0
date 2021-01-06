@@ -26,24 +26,24 @@ namespace Z0
                 => src.Load<T>();
 
         [MethodImpl(Inline), Op]
-        public ReadOnlySpan<byte> load(ReadOnlySpan<MemorySegment> refs, MemorySlot n)
-            => load<byte>(memref(refs,n));
+        public ReadOnlySpan<byte> load(ReadOnlySpan<MemorySegment> src, MemorySlot n)
+            => load<byte>(segment(src,n));
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public ref readonly T cell<T>(ReadOnlySpan<T> src, int offset)
             => ref memory.skip(src, (uint)offset);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public ref readonly T cell<T>(ReadOnlySpan<MemorySegment> refs, MemorySlot n, int offset)
+        public ref readonly T cell<T>(ReadOnlySpan<MemorySegment> src, MemorySlot n, int offset)
              where T : struct
-                => ref cell<T>(load<T>(memref(refs,n)), offset);
+                => ref cell<T>(load<T>(segment(src,n)), offset);
 
         [MethodImpl(Inline), Op]
-        public ref readonly byte cell(ReadOnlySpan<MemorySegment> refs, MemorySlot n, int i)
-            => ref memory.skip(load(memref(refs,n)),(uint)i);
+        public ref readonly byte cell(ReadOnlySpan<MemorySegment> src, MemorySlot n, int i)
+            => ref memory.skip(load(segment(src,n)),(uint)i);
 
         [MethodImpl(Inline), Op]
-        public ref readonly MemorySegment memref(ReadOnlySpan<MemorySegment> refs, MemorySlot n)
+        public ref readonly MemorySegment segment(ReadOnlySpan<MemorySegment> refs, MemorySlot n)
             => ref cell(refs, n);
 
         [MethodImpl(Inline), Op]
@@ -60,6 +60,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ulong sib(ReadOnlySpan<MemorySegment> refs, in MemorySlot n, int i, byte scale, ushort offset)
-            => sib(memref(refs,n), i, scale,offset);
+            => sib(segment(refs,n), i, scale,offset);
     }
 }

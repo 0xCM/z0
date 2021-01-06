@@ -8,7 +8,7 @@ namespace Z0
     using System.Reflection;
     using System.Runtime.CompilerServices;
 
-    partial class XClrQuery
+    partial class ClrQuery
     {
         /// <summary>
         /// Deterines the source assembly <see cref='Module'/> definitions

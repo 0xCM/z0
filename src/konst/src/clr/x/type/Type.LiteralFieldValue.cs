@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Linq;
 
-    partial class XClrQuery
+    partial class ClrQuery
     {
         /// <summary>
         /// Queries the source <see cref='Type'/> for the value of a name-identified literal <see cref='FieldInfo'/>

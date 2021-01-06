@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    partial class XClrQuery
+    partial class ClrQuery
     {
         /// <summary>
         /// If the source type is a pointer, returns the type to which the pointer points; otherwise, returns the empty type

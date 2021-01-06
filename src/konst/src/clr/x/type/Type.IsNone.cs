@@ -10,7 +10,7 @@ namespace Z0
 
     using static Part;
 
-    partial class XClrQuery
+    partial class ClrQuery
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static bool IsNone<T>(this T? src)

@@ -16,7 +16,7 @@ namespace Z0
         static internal readonly SystemTypeCodes Data = new SystemTypeCodes(0);
     }
 
-    [ApiHost(ApiNames.SystemTypeCodes, true)]
+    [ApiHost(ApiNames.ClrTypeCodes, true)]
     public readonly struct SystemTypeCodes
     {
         [MethodImpl(Inline), Op]

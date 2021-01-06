@@ -11,7 +11,7 @@ namespace Z0
 
     using static Part;
 
-    partial class XClrQuery
+    partial class ClrQuery
     {
         [MethodImpl(Inline), Op]
         public static PropertyInfo[] Properties(this Assembly a)

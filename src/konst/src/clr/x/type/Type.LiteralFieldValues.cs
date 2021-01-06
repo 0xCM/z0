@@ -10,7 +10,7 @@ namespace Z0
 
     using static memory;
 
-    partial class XClrQuery
+    partial class ClrQuery
     {
         /// <summary>
         /// Fetches the values of literal fields declared by a specified type that are of specified parametric type

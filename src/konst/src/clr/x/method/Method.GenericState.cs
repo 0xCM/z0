@@ -10,7 +10,7 @@ namespace Z0
 
     using static Part;
 
-    partial class XClrQuery
+    partial class ClrQuery
     {
         [MethodImpl(Inline), Op]
         public static GenericState GenericState(this MethodInfo src)

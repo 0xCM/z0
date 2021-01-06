@@ -9,7 +9,7 @@ namespace Z0
 
     using static memory;
 
-    partial struct ClrQuery
+    partial struct Clr
     {
         [Op, Closures(Closure)]
         public static LiteralIndex<T> literalIndex<T>()

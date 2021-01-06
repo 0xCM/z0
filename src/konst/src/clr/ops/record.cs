@@ -11,11 +11,11 @@ namespace Z0
     using static Part;
     using static ClrViews;
 
-    partial struct ClrQuery
+    partial struct Clr
     {
         [MethodImpl(Inline), Op]
         public static ClrPrimitiveInfo record(PrimalKind src)
-            => new ClrPrimitiveInfo(src, SystemPrimitives.width(src), SystemPrimitives.sign(src), (PrimalTypeCode)SystemPrimitives.code(src));
+            => new ClrPrimitiveInfo(src, ClrPrimitives.width(src), ClrPrimitives.sign(src), (PrimalTypeCode)ClrPrimitives.code(src));
 
         [MethodImpl(Inline), Op]
         public static ClrFieldRecord record(FieldInfo src)

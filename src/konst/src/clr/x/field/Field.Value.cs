@@ -9,7 +9,7 @@ namespace Z0
 
     using static Option;
 
-    partial class XClrQuery
+    partial class ClrQuery
     {
         /// <summary>
         /// Attempts to retrieve the value of an instance or static field

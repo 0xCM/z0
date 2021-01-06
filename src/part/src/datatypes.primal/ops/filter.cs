@@ -11,7 +11,7 @@ namespace Z0
     using static Part;
     using static PrimalBits;
 
-    partial struct SystemPrimitives
+    partial struct ClrPrimitives
     {
         [MethodImpl(Inline), Op]
         public static ref readonly SegMask filter(Field i)

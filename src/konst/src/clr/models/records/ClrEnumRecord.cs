@@ -5,7 +5,7 @@
 namespace Z0
 {
     [Record(TableId)]
-    public struct ClrEnumLiteralRecord : IRecord<ClrEnumLiteralRecord>
+    public struct ClrEnumRecord : IRecord<ClrEnumRecord>
     {
         public const byte FieldCount = 8;
 

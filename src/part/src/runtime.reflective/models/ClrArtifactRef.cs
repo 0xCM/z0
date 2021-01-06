@@ -20,7 +20,7 @@ namespace Z0
         public Name Name {get;}
 
         [MethodImpl(Inline)]
-        public ClrArtifactRef(ClrToken id, ClrArtifactKind kind, string name)
+        public ClrArtifactRef(ClrToken id, ClrArtifactKind kind, Name name)
         {
             Token = id;
             Kind = kind;

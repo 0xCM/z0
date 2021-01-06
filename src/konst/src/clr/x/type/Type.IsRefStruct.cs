@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    partial class XClrQuery
+    partial class ClrQuery
     {
         [MethodImpl(Inline), Op]
         public static bool IsRefStruct(this Type src)

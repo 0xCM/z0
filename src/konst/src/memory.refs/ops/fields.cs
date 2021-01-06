@@ -9,32 +9,32 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static z;
+    using static memory;
 
     partial struct MemRefs
     {
         [MethodImpl(Inline), Op]
         public static MemoryAddress location(Vector128<ulong> src)
-            => vcell(src,0);
+            => src.GetElement(0);
 
         [Op]
         public static FieldRef[] fields(params Type[] src)
         {
-            var dst = list<FieldRef>();
+            var dst = corefunc.list<FieldRef>();
             var count = src.Length;
             for(var i=0u; i<count; i++)
             {
                 var type = src[i];
                 var fields = Literals.search(type);
-                var @base = z.address(type);
+                var @base = address(type);
                 var offset = MemoryAddress.Empty;
                 for(var j=0u; j<fields.Length; j++)
                 {
-                    var field = fields[j];
-                    var segment = MemRefs.field(@base, offset, field);
+                    var fi = fields[j];
+                    var segment = field(@base, offset, fi);
                     if(segment.IsNonEmpty)
                     {
-                        z.append(dst,segment);
+                        corefunc.append(dst, segment);
                         offset += segment.DataSize;
                     }
                 }

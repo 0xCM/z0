@@ -10,7 +10,7 @@ namespace Z0
 
     using static Part;
 
-    partial struct ClrQuery
+    partial struct Clr
     {
         [Op]
         public static ReadOnlySpan<ClrAssemblyName> references(Assembly src)

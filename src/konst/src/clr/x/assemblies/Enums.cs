@@ -10,7 +10,7 @@ namespace Z0
 
     using static Part;
 
-    partial class XClrQuery
+    partial class ClrQuery
     {
         /// <summary>
         /// Returns the <see cref='Enum'/> types defined in a specified <see cref='Assembly'/> sequence

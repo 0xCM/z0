@@ -6,12 +6,14 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
 
     using static Part;
 
-    [ApiHost(ApiNames.XClrQuery, true)]
-    public static partial class XClrQuery
+    partial struct corefunc
     {
-        const NumericKind Closure = AllNumeric;
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static void append<T>(List<T> dst, T item)
+            => dst.Add(item);
     }
 }

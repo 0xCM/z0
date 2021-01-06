@@ -6,17 +6,20 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
 
     using static Part;
 
-    partial class ClrQuery
+    partial struct Clr
     {
         /// <summary>
-        /// Determines whether the type is a (memory) reference
+        /// Defines a <see cref='ClrArtfactRef'/>
         /// </summary>
-        /// <param name="src">The type to examine</param>
+        /// <param name="token"></param>
+        /// <param name="kind"></param>
+        /// <param name="name"></param>
         [MethodImpl(Inline), Op]
-        public static bool IsRef(this Type src)
-            => src.UnderlyingSystemType.IsByRef;
+        public static ClrArtifactRef artifact(ClrToken token, ClrArtifactKind kind, Name name)
+            => new ClrArtifactRef(token, kind, name);
     }
 }

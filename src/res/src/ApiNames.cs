@@ -141,46 +141,43 @@ public readonly struct ApiNames
 
     public const string ClrType = ClrRuntime + dot + type;
 
-    public const string ClrTypes = ClrRuntime + dot + types;
+    public const string ClrTypes = clr + dot + types;
 
-    public const string ClrEnum = ClrRuntime + dot + @enum;
+    public const string ClrEnum = clr + dot + @enum;
 
     public const string ClrEnumLiteral = ClrRuntime + dot + @enum + dot + literal;
 
-    public const string ClrStruct = ClrRuntime + dot + @struct;
+    public const string ClrStruct = clr + dot + @struct;
 
-    public const string ClrAssembly = ClrRuntime + dot + assembly;
+    public const string ClrAssembly = clr + dot + assembly;
 
-    public const string ClrField = ClrRuntime + dot + field;
+    public const string ClrField = clr + dot + field;
 
-    public const string ClrMethod = ClrRuntime + dot + method;
+    public const string ClrMethod = clr + dot + method;
 
-    public const string ClrProperty = ClrRuntime + dot + property;
+    public const string ClrProperty = clr + dot + property;
 
-    public const string ClrHandles = ClrRuntime + dot + handles;
+    public const string ClrHandles = clr + dot + handles;
 
-    public const string ClrMember = ClrRuntime + dot + member;
+    public const string ClrMember = clr + dot + member;
 
-    public const string ClrQuery = ClrRuntime + dot + query;
+    public const string Clr = clr;
 
-    public const string XClrQuery = ClrRuntime + dot + query + dot + extensions;
-
-    // ~~ Clr Metadata
-    // ~~ -----------------------------------------------------------------------------------------
+    public const string ClrQuery = clr + dot + query;
 
     const string ClrMetadata = clr + dot + metadata;
 
-    public const string ClrArtifacts = ClrMetadata + dot + artifacts;
+    public const string ClrArtifacts = clr + dot + artifacts;
 
-    public const string ClrRecords = ClrMetadata + dot + records;
+    public const string ClrRecords = clr + dot + records;
 
-    public const string SystemTypeCodes = system + dot + types + dot + codes;
+    public const string ClrTypeCodes = clr + dot + types + dot + codes;
 
-    public const string SystemPrimitives = system + dot + primitives;
+    public const string ClrPrimitives = clr + dot + primitives;
 
-    public const string ClrEnums = ClrMetadata + dot + enums;
+    public const string ClrEnums = clr + dot + enums;
 
-    public const string ClrSigs = ClrMetadata + dot + sigs;
+    public const string ClrSigs = clr + dot + sigs;
 
     // ~~ Delegates
     // ~~ -----------------------------------------------------------------------------------------

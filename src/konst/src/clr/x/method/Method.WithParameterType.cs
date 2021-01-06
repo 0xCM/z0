@@ -9,7 +9,7 @@ namespace Z0
     using System.Reflection;
     using System.Runtime.CompilerServices;
 
-    partial class XClrQuery
+    partial class ClrQuery
     {
         /// <summary>
         ///  Selects methods from a stream that declare a parameter that has a specified type

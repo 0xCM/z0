@@ -12,7 +12,7 @@ namespace Z0
     using static Part;
     using static ReflectionFlags;
 
-    partial class XClrQuery
+    partial class ClrQuery
     {
         /// <summary>
         /// Queries the source <see cref='Type'/> for the <see cref='EventInfo'/> members determined by the <see cref='BF_World'/> flags

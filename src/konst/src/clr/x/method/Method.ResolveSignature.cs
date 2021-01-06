@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    partial class XClrQuery
+    partial class ClrQuery
     {
         public static CliSig ResolveSignature(this MethodInfo src)
         {

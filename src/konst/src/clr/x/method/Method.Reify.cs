@@ -12,7 +12,7 @@ namespace Z0
 
     using static Part;
 
-    partial class XClrQuery
+    partial class ClrQuery
     {
         /// <summary>
         /// Reifies a method if it is open generic; otherwise, returns the original method

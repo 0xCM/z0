@@ -11,7 +11,7 @@ namespace Z0
     using static Part;
     using static ReflectionFlags;
 
-    partial class XClrQuery
+    partial class ClrQuery
     {
         /// <summary>
         /// Queries the source <see cref='Type'/> for <see cref='MethodInfo'/> members determined by the <see cref='BF_DeclaredStatic'/> flags

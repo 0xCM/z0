@@ -20,7 +20,6 @@ namespace Z0
             return size/scale<T>();
         }
 
-
         [MethodImpl(Inline), Op]
         static ulong hi(StringRef src)
             => z.vcell(src.Data, 1);

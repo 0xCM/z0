@@ -12,7 +12,7 @@ namespace Z0
     using NK = PrimalNumericKind;
     using TC = System.TypeCode;
 
-    partial struct SystemPrimitives
+    partial struct ClrPrimitives
     {
         /// <summary>
         /// Determines the numeric kind, if any, of a system type

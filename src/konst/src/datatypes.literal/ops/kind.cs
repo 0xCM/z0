@@ -38,7 +38,7 @@ namespace Z0
         public static EnumLiteralKind kind(Type e)
         {
             var tc = Type.GetTypeCode(e.GetEnumUnderlyingType());
-            return (EnumLiteralKind)SystemPrimitives.kind(tc);
+            return (EnumLiteralKind)ClrPrimitives.kind(tc);
         }
 
         [MethodImpl(Inline)]

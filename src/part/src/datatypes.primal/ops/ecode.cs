@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    partial struct SystemPrimitives
+    partial struct ClrPrimitives
     {
         /// <summary>
         /// Determines an enumeration's underlying kind
