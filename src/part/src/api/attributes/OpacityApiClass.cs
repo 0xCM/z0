@@ -55,7 +55,7 @@ namespace Z0
 
         ParameterArray,
 
-        InitRefBlock,
+        FillCells,
 
         FillSpan,
 
@@ -102,6 +102,10 @@ namespace Z0
       GetEntryAssembly,
 
       GetCallingAssembly,
+
+      GetCurrentProcess,
+
+      GetCurrentProcessHandle,
 
       GetFieldValue,
 

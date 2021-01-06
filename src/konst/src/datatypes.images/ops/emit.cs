@@ -12,36 +12,61 @@ namespace Z0
 
     partial struct ImageMaps
     {
-        public static Index<LocatedImageRow> emit(FS.FilePath dst)
-            => emit(current(), dst);
-
-        public static Index<LocatedImageRow> emit(LocatedImageIndex src, FS.FilePath dst)
+        public static Outcome<WfExecToken> emit(IWfShell wf, ImageMap src, FS.FilePath dst)
         {
-            var images = ImageMaps.current();
+            try
+            {
+                var flow = wf.EmittingFile(src, dst);
+                using var writer = dst.Writer();
+
+                var f1 = Records.formatter<ProcessState>(16);
+                var f2 = Records.formatter<LocatedImageRow>(16);
+
+                writer.WriteLine(string.Format("# {0}", nameof(ProcessState)));
+                writer.WriteLine(f1.FormatHeader());
+                writer.WriteLine(RP.PageBreak240);
+                writer.WriteLine(f1.Format(src.Process));
+
+                writer.WriteLine();
+
+                writer.WriteLine(string.Format("# {0}", nameof(LocatedImageRow)));
+                var images = rows(src.Images).View;
+                writer.WriteLine(f2.FormatHeader());
+                writer.WriteLine(RP.PageBreak240);
+                var icount = images.Length;
+                for(var i=0; i<icount; i++)
+                    writer.WriteLine(f2.Format(skip(images,i)));
+
+                return wf.EmittedFile(flow, src, dst);
+
+            }
+            catch(Exception e)
+            {
+                wf.Error(e);
+                return e;
+            }
+        }
+
+        public static Index<LocatedImageRow> emit(FS.FilePath dst)
+            => emit(LocatedImages.index(), dst);
+
+        public static Index<LocatedImageRow> emit(Index<LocatedImage> src, FS.FilePath dst)
+        {
+            var images = LocatedImages.index();
             var records = rows(images);
             var target = records.Edit;
 
+            var formatter = Records.formatter<LocatedImageFields,LocatedImageRow>();
             var count = records.Length;
-            var spec = Table.renderspec2<LocatedImageRow.Widths>();
             using var writer = dst.Writer();
-            writer.WriteLine(spec.FormatHeader());
+            writer.WriteLine(formatter.FormatHeader());
             for(var i=0; i<count; i++)
-            {
-                ref readonly var row = ref skip(target,i);
-                writer.Write(row.ImageName.Format().PadRight(spec[0].Width));
-                writer.Write(row.PartId.Format().PadRight(spec[1].Width));
-                writer.Write(row.EntryAddress.Format().PadRight(spec[2].Width));
-                writer.Write(row.BaseAddress.Format().PadRight(spec[3].Width));
-                writer.Write(row.EndAddress.Format().PadRight(spec[4].Width));
-                writer.Write(row.Size.Format().PadRight(spec[5].Width));
-                writer.Write(row.Gap.Format().PadRight(spec[6].Width));
-                writer.WriteLine();
-            }
+                writer.WriteLine(formatter.Format(skip(target,i)));
             return records;
         }
 
         [Op]
-        static Index<LocatedImageRow> rows(LocatedImageIndex src)
+        static Index<LocatedImageRow> rows(Index<LocatedImage> src)
         {
             var count = src.Count;
             var images = src.View;
@@ -50,31 +75,22 @@ namespace Z0
             for(var i=0u; i<count; i++)
             {
                 ref readonly var image = ref skip(images, i);
-                ref var summary = ref seek(summaries,i);
-                var name = image.Name;
-                summary.ImageName = name;
-                fill(image, ref summary);
+                ref var dst = ref seek(summaries,i);
+                dst.BaseAddress = image.BaseAddress;
+                dst.EndAddress = image.EndAddress;
+                dst.MemorySize = image.Size;
+                dst.PartId = image.PartId;
+                dst.ImageName = image.Name;
 
                 if(i != 0)
                 {
                     ref readonly var prior = ref skip(images, i - 1);
                     var gap = (ulong)(image.BaseAddress - prior.EndAddress);
-                    summary.Gap = gap;
+                    dst.Gap = gap;
                 }
             }
 
             return buffer;
-        }
-
-        [MethodImpl(Inline), Op]
-        static void fill(in LocatedImage src, ref LocatedImageRow dst)
-        {
-            dst.ImageName = src.Name;
-            dst.PartId = src.PartId;
-            dst.EntryAddress = src.EndAddress;
-            dst.BaseAddress = src.BaseAddress;
-            dst.EndAddress = src.EndAddress;
-            dst.Size = src.Size;
         }
    }
 }

@@ -10,7 +10,6 @@ namespace Z0
 
     using api = Records;
 
-
     [Free]
     public interface IRecord
     {

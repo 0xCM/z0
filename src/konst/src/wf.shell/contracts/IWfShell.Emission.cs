@@ -55,13 +55,25 @@ namespace Z0
             return Flow();
         }
 
+        WfExecFlow EmittingFile(FS.FilePath dst)
+        {
+            signal(this).EmittingFile(dst);
+            return Flow();
+        }
+
+        WfExecToken EmittedFile(WfExecFlow flow, FS.FilePath dst)
+        {
+            signal(this).EmittedFile(dst);
+            return Ran(flow);
+        }
+
         void EmittedFile<T>(T source, Count count, FS.FilePath dst)
             => Raise(emittedFile(Host, source, count, dst, Ct));
 
-        void EmittedFile<T>(WfExecFlow flow, T source, Count count, FS.FilePath dst)
+        WfExecToken EmittedFile<T>(WfExecFlow flow, T source, FS.FilePath dst)
         {
-            signal(this).EmittedFile(source,count, dst);
-            Ran(flow);
+            signal(this).EmittedFile(source, dst);
+            return Ran(flow);
         }
 
         void EmittedFile(Count count, FS.FilePath dst)
@@ -70,16 +82,11 @@ namespace Z0
         void EmittedFile(FS.FilePath dst)
             => signal(this).EmittedFile(dst);
 
-        void EmittedFile(WfExecFlow flow, FS.FilePath dst)
-        {
-            signal(this).EmittedFile(dst);
-            Ran(flow);
-        }
 
-        void EmittedFile(WfExecFlow flow, Count count, FS.FilePath dst)
+        WfExecToken EmittedFile(WfExecFlow flow, Count count, FS.FilePath dst)
         {
             signal(this).EmittedFile(count, dst);
-            Ran(flow);
+            return Ran(flow);
         }
     }
 }

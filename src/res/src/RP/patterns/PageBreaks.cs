@@ -26,5 +26,8 @@ namespace Z0
 
         [RenderLiteral(PageBreak160, 160)]
         public const string PageBreak160 = PageBreak80 + PageBreak80;
+
+        [RenderLiteral(PageBreak240, 240)]
+        public const string PageBreak240 = PageBreak120 + PageBreak120;
     }
 }

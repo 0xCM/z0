@@ -98,10 +98,10 @@ namespace Z0
             var data = code.Code;
             var bytes = data.View;
             var instructions = asm.Data;
-            Process(code.Code, instructions);
+            Process(code, instructions);
         }
 
-        void Process(in BinaryCode code, Instruction[] asm)
+        void Process(in CodeBlock code, Instruction[] asm)
         {
             var bytes = span(code.Storage);
             ushort offset = 0;
@@ -114,31 +114,45 @@ namespace Z0
                 var encoded = bytes.Slice(offset, size);
 
                 var a16 = new Address16(offset);
-                Process(a16, encoded, instruction);
+                Process(code, a16, encoded, instruction);
                 offset += size;
             }
         }
 
         [MethodImpl(Inline)]
-        void Process(Address16 offset, Span<byte> encoded, in Instruction src)
+        void Process(in CodeBlock code, Address16 offset, Span<byte> encoded, in Instruction src)
         {
             var mnemonic = src.Mnemonic;
 
             if(mnemonic != 0)
             {
-                var record = new AsmRow(
-                    Sequence: NextSequence,
-                    Address: src.IP,
-                    LocalOffset: offset,
-                    GlobalOffset: NextOffset,
-                    Mnemonic: mnemonic.ToString().ToUpper(),
-                    OpCode: src.Specifier.OpCode,
-                    Encoded: new BinaryCode(encoded.TrimEnd().ToArray()),
-                    SourceCode: src.FormattedInstruction,
-                    Instruction: src.Specifier.Sig,
-                    CpuId: text.embrace(src.CpuidFeatures.Select(x => x.ToString()).Concat(",")),
-                    Id: (OpCodeId)src.Code
-                    );
+                var record = new AsmRow();
+                record.Sequence = NextSequence;
+                record.BlockAddress = code.BaseAddress;
+                record.IP = src.IP;
+                record.LocalOffset = offset;
+                record.GlobalOffset = NextOffset;
+                record.Mnemonic = mnemonic.ToString().ToUpper();
+                record.OpCode = src.Specifier.OpCode;
+                record.Encoded = new BinaryCode(encoded.TrimEnd().ToArray());
+                record.SourceCode = src.FormattedInstruction;
+                record.Instruction = src.Specifier.Sig;
+                record.CpuId = text.embrace(src.CpuidFeatures.Select(x => x.ToString()).Concat(","));
+                record.OpCodeId = (OpCodeId)src.Code;
+
+                // var record = new AsmRow(
+                //     Sequence: NextSequence,
+                //     Address: src.IP,
+                //     LocalOffset: offset,
+                //     GlobalOffset: NextOffset,
+                //     Mnemonic: mnemonic.ToString().ToUpper(),
+                //     OpCode: src.Specifier.OpCode,
+                //     Encoded: new BinaryCode(encoded.TrimEnd().ToArray()),
+                //     SourceCode: src.FormattedInstruction,
+                //     Instruction: src.Specifier.Sig,
+                //     CpuId: text.embrace(src.CpuidFeatures.Select(x => x.ToString()).Concat(",")),
+                //     Id: (OpCodeId)src.Code
+                //     );
 
                 if(Index.TryGetValue(mnemonic, out var builder))
                     builder.Include(record);

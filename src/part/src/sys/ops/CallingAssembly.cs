@@ -5,17 +5,15 @@
 namespace Z0
 {
     using System;
-    using System.Threading.Tasks;
+    using System.Runtime.CompilerServices;
+    using System.Reflection;
 
-    public static class EmitApiIndexCmdApi
+    partial struct sys
     {
-        [Op]
-        public static EmitApiIndexCmd EmitApiIndex(this CmdBuilder builder)
+        public static Assembly CallingAssembly
         {
-            var dst = new EmitApiIndexCmd();
-
-            return dst;
+            [MethodImpl(Options), Op]
+            get => proxy.CallingAssembly;
         }
-
     }
 }

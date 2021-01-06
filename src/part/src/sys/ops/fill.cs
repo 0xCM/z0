@@ -28,5 +28,15 @@ namespace Z0
         [MethodImpl(Options), Op]
         public static ref byte fill(byte src, ref byte dst, uint length)
             => ref proxy.fill(src, ref dst, length);
+
+        /// <summary>
+        /// Fills an array, in-place, with a specified value
+        /// </summary>
+        /// <param name="dst">The target array</param>
+        /// <param name="src">The source value</param>
+        /// <typeparam name="T">The element type</typeparam>
+        [MethodImpl(Options), Op, Closures(Closure)]
+        public static T[] fill<T>(T[] dst, T src)
+            => proxy.fill(dst,src);
     }
 }

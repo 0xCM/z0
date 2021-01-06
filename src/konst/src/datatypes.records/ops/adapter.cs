@@ -18,7 +18,7 @@ namespace Z0
         /// <typeparam name="T">The record type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static RowAdapter<T> adapter<T>(in RecordFields fields)
-            where T : struct
+            where T : struct, IRecord<T>
                 => new RowAdapter<T>(fields);
 
         /// <summary>
@@ -27,7 +27,7 @@ namespace Z0
         /// <typeparam name="T">The row type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static RowAdapter<T> adapter<T>()
-            where T : struct
+            where T : struct, IRecord<T>
                 => adapter<T>(fields<T>());
     }
 }

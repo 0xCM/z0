@@ -88,16 +88,22 @@ namespace Z0
         public void EmittedTable(Type type, Count count, FS.FilePath dst)
             => Raise(emittedTable(Host, type, count, dst, Ct));
 
-        public void EmittingFile<T>(T source, FS.FilePath dst)
-            => Raise(emittingFile<T>(Host, source, dst, Ct));
+        public void EmittingFile(FS.FilePath dst)
+            => Raise(emittingFile(Host, dst, Ct));
 
-        public void EmittedFile<T>(T source, Count count, FS.FilePath dst)
-            => Raise(emittedFile(Host, source, count, dst, Ct));
+       public void EmittedFile(FS.FilePath dst)
+            => Raise(emittedFile(Host, dst, Ct));
 
         public void EmittedFile(Count count, FS.FilePath dst)
             => Raise(emittedFile(Host, dst, count, Ct));
 
-        public void EmittedFile(FS.FilePath dst)
-            => Raise(emittedFile(Host, dst, Ct));
+        public void EmittingFile<T>(T payload, FS.FilePath dst)
+            => Raise(emittingFile<T>(Host, payload, dst, Ct));
+
+        public void EmittedFile<T>(T payload, Count count, FS.FilePath dst)
+            => Raise(emittedFile(Host, payload, count, dst, Ct));
+
+        public void EmittedFile<T>(T payload, FS.FilePath dst)
+            => Raise(emittedFile(Host, payload, dst, Ct));
     }
 }

@@ -12,6 +12,11 @@ namespace Z0
 
     partial class Enums
     {
+        public static Index<T> numeric<E,T>()
+            where E : unmanaged, Enum
+            where T : unmanaged
+                => Literals.search<E>(typeof(E)).Select(f => sys.constant<T>(f));
+
         public static EnumFieldValues<E,T> values<E,T>(Type src)
             where E : unmanaged, Enum
             where T : unmanaged
@@ -26,7 +31,7 @@ namespace Z0
                 ref readonly var srcVal = ref tValues[i];
                 ref readonly var tVal = ref srcVal.Right;
                 ref readonly var srcField = ref srcVal.Left;
-                seek(dst, i) = new EnumFieldValue<E,T>(srcField, read<E,T>(tVal), tVal);
+                seek(dst, i) = new EnumFieldValue<E,T>(srcField, EnumValue.read<E,T>(tVal), tVal);
             }
 
             return index(eValueBuffer);

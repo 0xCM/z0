@@ -7,16 +7,16 @@ namespace Z0
     [Record]
     public struct ProcessModuleRow : IRecord<ProcessModuleRow>
     {
-        public MemoryAddress Base;
+        public MemoryAddress BaseAddress;
 
-        public MemoryAddress Entry;
+        public ByteSize MemorySize;
 
-        public ByteSize Size;
+        public Name ImageName;
 
-        public utf8 Name;
-
-        public FS.FilePath Path;
+        public MemoryAddress EntryAddress;
 
         public VersionId Version;
+
+        public FS.FilePath ImagePath;
     }
 }

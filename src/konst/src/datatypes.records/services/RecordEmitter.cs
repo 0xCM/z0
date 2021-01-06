@@ -12,16 +12,16 @@ namespace Z0
     using static memory;
 
     public readonly struct RecordEmitter<T> : IRecordEmitter<T>
-        where T : struct
+        where T : struct, IRecord<T>
     {
         public FS.FilePath Target {get;}
 
-        readonly RecordFormatter<T> Formatter;
+        readonly IRecordFormatter<T> Formatter;
 
         readonly StreamWriter Writer;
 
         [MethodImpl(Inline)]
-        public RecordEmitter(RecordFormatter<T> formatter, FS.FilePath dst)
+        public RecordEmitter(IRecordFormatter<T> formatter, FS.FilePath dst)
         {
             Target = dst;
             Writer = dst.Writer();

@@ -9,26 +9,26 @@ namespace Z0
     using static Part;
 
     public readonly struct RecordFormatter<T> : IRecordFormatter<T>
-        where T : struct
+        where T : struct, IRecord<T>
     {
-        readonly RowFormatSpec Spec;
+        public RowFormatSpec FormatSpec {get;}
 
         readonly RowAdapter<T> Adapter;
 
         [MethodImpl(Inline)]
         internal RecordFormatter(RowFormatSpec spec)
         {
-            Spec = spec;
+            FormatSpec = spec;
             Adapter = Records.adapter<T>();
         }
 
         public string Format(in DynamicRow<T> src)
-            => string.Format(Spec.Pattern, src.Cells);
+            => string.Format(FormatSpec.Pattern, src.Cells);
 
         public string Format(in T src)
             => Format(Adapter.Adapt(src).Adapted);
 
         public string FormatHeader()
-            => Spec.Header.Format();
+            => FormatSpec.Header.Format();
     }
 }

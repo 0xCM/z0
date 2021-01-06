@@ -6,16 +6,14 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Diagnostics;
 
-    using static Konst;
-    using static z;
-
-    partial class Enums
+    partial struct sys
     {
-        [MethodImpl(Inline)]
-        public static unsafe E read<E,T>(in T scalar, E e = default)
-            where E : unmanaged, Enum
-            where T : unmanaged
-                => Unsafe.Read<E>(gptr<T,E>(scalar));
+        public static Process CurrentProcess
+        {
+            [MethodImpl(Options), Op]
+            get => proxy.CurrentProcess;
+        }
     }
 }

@@ -30,7 +30,7 @@ namespace Z0
 
         readonly Span<IPart> Parts;
 
-        readonly LocatedImageIndex Images;
+        readonly Index<LocatedImage> Images;
 
         readonly FS.FolderPath TargetDir;
 
@@ -44,7 +44,7 @@ namespace Z0
             Parts = Wf.Api.Parts;
             Index = default;
             TargetDir = wf.ResourceRoot + FS.folder("images");
-            Images = ImageMaps.current();
+            Images = LocatedImages.index();
             wf.Created();
         }
 

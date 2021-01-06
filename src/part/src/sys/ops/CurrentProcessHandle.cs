@@ -7,12 +7,15 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static OpacityApiClass;
-
-    partial struct proxy
+    partial struct sys
     {
-        [MethodImpl(Options), Opaque(GetEmptyArray), Closures(Closure)]
-        public static T[] empty<T>()
-            => Array.Empty<T>();
+        /// <summary>
+        /// The handle for the current process
+        /// </summary>
+        public static IntPtr CurrentProcessHandle
+        {
+            [MethodImpl(Options), Op]
+            get => proxy.CurrentProcessHandle;
+        }
     }
 }

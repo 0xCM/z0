@@ -14,8 +14,8 @@ namespace Z0
 
     partial struct ImageMaps
     {
-       [Op]
-        public static ProcessModuleRow[] modules(Process src)
+        [Op]
+        public static Index<ProcessModuleRow> modules(Process src)
         {
             var modules = @readonly(src.Modules.Cast<ProcessModule>().Array());
             var count = modules.Length;

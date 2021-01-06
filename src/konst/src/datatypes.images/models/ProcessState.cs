@@ -12,14 +12,34 @@ namespace Z0
     public struct ProcessState : IRecord<ProcessState>
     {
         /// <summary>
-        /// The process identifier
+        /// The base address of the process
         /// </summary>
-        public uint ProcessId;
+        public MemoryAddress BaseAddress;
+
+        /// <summary>
+        /// The number of bytes occupied by the module
+        /// </summary>
+        public ByteSize MemorySize;
 
         /// <summary>
         /// The process name
         /// </summary>
-        public string ProcessName;
+        public Name ImageName;
+
+        /// <summary>
+        /// The minimum working set size
+        /// </summary>
+        public ByteSize MinWorkingSet;
+
+        /// <summary>
+        /// The maximum working set size
+        /// </summary>
+        public ByteSize MaxWorkingSet;
+
+        /// <summary>
+        /// The process identifier
+        /// </summary>
+        public uint ProcessId;
 
         /// <summary>
         /// The path of the process image
@@ -32,24 +52,19 @@ namespace Z0
         public VersionId ImageVersion;
 
         /// <summary>
-        /// The base address of the process
-        /// </summary>
-        public MemoryAddress BaseAddress;
-
-        /// <summary>
         /// The address of the entry point
         /// </summary>
         public MemoryAddress EntryAddress;
 
         /// <summary>
-        /// The number of bytes occupied by the main process module
+        /// The minimum working set size
         /// </summary>
-        public ByteSize MemorySize;
+        public ByteSize VirtualSize;
 
         /// <summary>
-        /// Captures the min/max working set size
+        /// The maximum working set size
         /// </summary>
-        public ClosedInterval<ulong> Capacity;
+        public ByteSize MaxVirtualSize;
 
         /// <summary>
         /// The cpu affinity provided by <see cref='Process.ProcessorAffinity'/>
@@ -70,10 +85,5 @@ namespace Z0
         /// Captures the value provided by <see cref='Process.UserProcessorTime'/>
         /// </summary>
         public Duration UserRuntime;
-
-        /// <summary>
-        /// The process main module
-        /// </summary>
-        public ProcessModuleRow Main;
     }
 }

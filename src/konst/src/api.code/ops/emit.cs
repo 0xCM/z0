@@ -18,18 +18,21 @@ namespace Z0
             wf.EmittedTable<ApiCodeDescriptor>(count, dst);
         }
 
-        public static Outcome<FS.FilePath> emit(IWfShell wf)
+        public static Outcome<FS.FilePath> EmitHexIndex(IWfShell wf)
         {
             try
             {
+                var dst = wf.Db().IndexFile(ApiHexIndexRow.TableId);
+                var flow = wf.EmittingFile(dst);
                 var svc = ApiIndex.service(wf);
                 var api = svc.CreateIndex();
-                var path = wf.Db().IndexFile(ApiHexIndexRow.TableId);
-                emit(wf, api, path);
-                return path;
+                emit(wf, api, dst);
+                wf.EmittedFile(flow, dst);
+                return dst;
             }
             catch(Exception e)
             {
+                wf.Error(e);
                 return e;
             }
         }

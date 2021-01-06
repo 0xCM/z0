@@ -4,16 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    sealed class EmitApiIndex : CmdReactor<EmitApiIndexCmd,FS.FilePath>
+    sealed class EmitApiIndex : CmdReactor<EmitHexIndexCmd,FS.FilePath>
     {
-        protected override FS.FilePath Run(EmitApiIndexCmd cmd)
-            => ApiCode.emit(Wf);
-        // {
-        //     var svc = ApiIndex.service(Wf);
-        //     var api = svc.CreateIndex();
-        //     var path = Db.IndexFile(ApiHexIndexRow.TableId);
-        //     ApiCode.emit(Wf, api, path);
-        //     return path;
-        // }
+        protected override FS.FilePath Run(EmitHexIndexCmd cmd)
+            => ApiCode.EmitHexIndex(Wf);
     }
 }

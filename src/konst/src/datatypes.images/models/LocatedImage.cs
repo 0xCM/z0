@@ -9,8 +9,6 @@ namespace Z0
 
     using static Part;
 
-    using api = ImageMaps;
-
     /// <summary>
     /// Describes a PE image from the perspective of process entry point
     /// </summary>
@@ -86,7 +84,7 @@ namespace Z0
             => BaseAddress.CompareTo(src.BaseAddress);
 
         public string Format()
-            => api.format(this);
+            => LocatedImages.format(this);
 
 
         public override string ToString()

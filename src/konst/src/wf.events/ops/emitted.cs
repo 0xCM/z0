@@ -12,12 +12,20 @@ namespace Z0
     partial struct WfEvents
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static EmittingFileEvent<T> emittingFile<T>(WfStepId step, T src, FS.FilePath dst, CorrelationToken ct)
-            => new EmittingFileEvent<T>(step, src, dst, ct);
+        public static EmittingFileEvent<T> emittingFile<T>(WfStepId step, T paylaod, FS.FilePath dst, CorrelationToken ct)
+            => new EmittingFileEvent<T>(step, paylaod, dst, ct);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static EmittedFileEvent<T> emittedFile<T>(WfStepId step, T source, Count count, FS.FilePath dst, CorrelationToken ct)
-            => new EmittedFileEvent<T>(step, source, count, dst, ct);
+        public static EmittedFileEvent<T> emittedFile<T>(WfStepId step, T payload, Count count, FS.FilePath dst, CorrelationToken ct)
+            => new EmittedFileEvent<T>(step, payload, count, dst, ct);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static EmittedFileEvent<T> emittedFile<T>(WfStepId step, T payload, FS.FilePath dst, CorrelationToken ct)
+            => new EmittedFileEvent<T>(step, payload, dst, ct);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static EmittingFileEvent emittingFile(WfStepId step, FS.FilePath dst, CorrelationToken ct)
+            => new EmittingFileEvent(step, dst, ct);
 
         [MethodImpl(Inline), Op]
         public static EmittedFileEvent emittedFile(WfStepId step, FS.FilePath path, Count segments, CorrelationToken ct)
@@ -34,7 +42,6 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static EmittingTableEvent emittingTable(WfStepId step, Type src, FS.FilePath dst, CorrelationToken ct)
             => new EmittingTableEvent(step, src, dst, ct);
-
 
         [MethodImpl(Inline), Op]
         public static EmittedTableEvent emittedTable(WfStepId step, TableId table, uint count, FS.FilePath dst, CorrelationToken ct)

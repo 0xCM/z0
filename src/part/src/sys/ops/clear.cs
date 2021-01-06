@@ -12,7 +12,7 @@ namespace Z0
         /// <summary>
         /// Fills a span with the element type's default value
         /// </summary>
-        /// <param name="src"></param>
+        /// <param name="src">The target spen</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Options), Op, Closures(Closure)]
         public static Span<T> clear<T>(Span<T> src)
@@ -21,7 +21,7 @@ namespace Z0
         /// <summary>
         /// Fills an array with the element type's default value
         /// </summary>
-        /// <param name="dst">The source array</param>
+        /// <param name="dst">The target array</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Options), Op, Closures(Closure)]
         public static T[] clear<T>(T[] dst)

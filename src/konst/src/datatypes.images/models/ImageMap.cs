@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct ImageMap
+    public readonly struct ImageMap : ITextual
     {
         public ProcessState Process {get;}
 
@@ -27,5 +27,11 @@ namespace Z0
             Locations = locations;
             Modules = modules;
         }
+
+        public string Format()
+            => Process.ImageName;
+
+        public override string ToString()
+            => Format();
     }
 }

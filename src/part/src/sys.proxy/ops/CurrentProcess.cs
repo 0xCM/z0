@@ -5,14 +5,18 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
+    using System.Reflection;
     using System.Diagnostics;
-    using System.Linq;
 
-    public class t_memory : t_symbolic<t_memory>
+    using static OpacityApiClass;
+
+    partial struct proxy
     {
-        public void trace()
+        public static Process CurrentProcess
         {
-            var located = Process.GetCurrentProcess().Modules.Cast<ProcessModule>().Map(LocatedImages.locate).OrderBy(x => x.BaseAddress);
+            [MethodImpl(Options), Opaque(GetCurrentProcess)]
+            get => Process.GetCurrentProcess();
         }
     }
 }

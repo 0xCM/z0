@@ -13,7 +13,7 @@ namespace Z0.Asm
     {
         public T Key {get;}
 
-        readonly AsmRows Rows;
+        readonly Index<AsmRow> Rows;
 
         [MethodImpl(Inline)]
         public AsmRowSet(T key, AsmRow[] data)
@@ -36,6 +36,6 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         public static implicit operator AsmRow[](AsmRowSet<T> src)
-            => src.Rows;
+            => src.Rows.Storage;
     }
 }

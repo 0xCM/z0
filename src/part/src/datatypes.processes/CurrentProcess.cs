@@ -21,12 +21,6 @@ namespace Z0
     [ApiHost]
     public readonly struct CurrentProcess
     {
-        public static Process Current
-        {
-            [MethodImpl(Inline), Op]
-            get => Process.GetCurrentProcess();
-        }
-
         /// <summary>
         /// Gets the OS thread ID - not the CRL thread id
         /// </summary>
@@ -48,7 +42,7 @@ namespace Z0
         public static int ProcessId
         {
             [MethodImpl(Inline), Op]
-            get => Current.Id;
+            get => sys.CurrentProcess.Id;
         }
 
         /// <summary>
@@ -57,7 +51,7 @@ namespace Z0
         public static IntPtr ProcessHandle
         {
             [MethodImpl(Inline), Op]
-            get => Current.Handle;
+            get => sys.CurrentProcess.Handle;
         }
 
         /// <summary>
@@ -72,11 +66,11 @@ namespace Z0
         public static string Name
         {
             [MethodImpl(Inline), Op]
-            get => Current.ProcessName;
+            get => sys.CurrentProcess.ProcessName;
         }
 
         public static IEnumerable<ProcessThread> Threads
-            => from ProcessThread pt in Current.Threads select pt;
+            => from ProcessThread pt in sys.CurrentProcess.Threads select pt;
 
         /// <summary>
         /// Searches for a thread given an OS-assigned id, not the (mostly) useless clr id

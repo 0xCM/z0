@@ -6,13 +6,16 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
 
     using static OpacityApiClass;
 
     partial struct proxy
     {
-        [MethodImpl(Options), Opaque(GetEmptyArray), Closures(Closure)]
-        public static T[] empty<T>()
-            => Array.Empty<T>();
+        public static Assembly CallingAssembly
+        {
+            [MethodImpl(Options), Opaque(GetCallingAssembly)]
+            get => Assembly.GetCallingAssembly();
+        }
     }
 }

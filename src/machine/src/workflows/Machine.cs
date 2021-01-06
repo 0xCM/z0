@@ -36,6 +36,9 @@ namespace Z0
             Wf.Status(Seq.delimit(Wf.Api.PartIdentities));
             try
             {
+
+                ApiCode.EmitHexIndex(Wf);
+
                 var resources = ResDataService.init(Wf);
                 resources.EmitContentIndex();
                 resources.EmitReferenceData();

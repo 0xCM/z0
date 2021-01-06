@@ -7,12 +7,14 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static OpacityApiClass;
-
-    partial struct proxy
+    partial struct sys
     {
-        [MethodImpl(Options), Opaque(GetEmptyArray), Closures(Closure)]
-        public static T[] empty<T>()
-            => Array.Empty<T>();
+        /// <summary>
+        /// Tests whether the source string is null or empty
+        /// </summary>
+        /// <param name="src">The string to evaluate</param>
+        [MethodImpl(Options), Op]
+        public static bool blank(string src)
+            => proxy.blank(src);
     }
 }

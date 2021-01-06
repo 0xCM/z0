@@ -84,8 +84,14 @@ namespace Z0
 
             switch(name)
             {
-                case EmitApiIndexCmd.CmdName:
-                    Run(Builder.EmitApiIndex());
+                case JitApiCmd.CmdName:
+                    Run(Builder.JitApiCmd());
+                    break;
+                case EmitImageMapsCmd.CmdName:
+                    Run(Builder.EmitImageMaps());
+                    break;
+                case EmitHexIndexCmd.CmdName:
+                    Run(Builder.EmitHexIndex());
                 break;
                 case EmitRuntimeIndexCmd.CmdName:
                     Run(Builder.EmitRuntimeIndex());
@@ -106,7 +112,7 @@ namespace Z0
 
         }
 
-        void Run(in EmitApiIndexCmd cmd)
+        void Run(in EmitHexIndexCmd cmd)
         {
             cmd.Dispatch(Wf).Wait();
         }
@@ -126,6 +132,18 @@ namespace Z0
             cmd.Dispatch(Wf).Wait();
         }
 
+        void Run(in EmitImageMapsCmd cmd)
+        {
+            //ImageMaps.emit(Wf, ImageMaps.map(), cmd.Target);
+            cmd.Dispatch(Wf).Wait();
+        }
+
+        void Run(in JitApiCmd cmd)
+        {
+            Run(Builder.EmitImageMaps("pre-jit"));
+            cmd.Dispatch(Wf).Wait();
+            Run(Builder.EmitImageMaps("post-jit"));
+        }
         void Run(in BuildCmd cmd)
         {
             cmd.Save(Db.JobQueue()).OnSuccess(data => Wf.EmittedFile(data)).OnFailure(msg => Wf.Error(msg));

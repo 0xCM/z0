@@ -17,11 +17,5 @@ namespace Z0
             [MethodImpl(Options), Opaque(GetEntryAssembly)]
             get => Assembly.GetEntryAssembly();
         }
-
-        public static Assembly ThisAssembly
-        {
-            [MethodImpl(Options), Opaque(GetCallingAssembly)]
-            get => Assembly.GetCallingAssembly();
-        }
     }
 }

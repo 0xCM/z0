@@ -30,5 +30,21 @@ namespace Z0
         public static RecordFormatter<T> formatter<T>(ReadOnlySpan<byte> widths)
             where T : struct, IRecord<T>
                 => formatter<T>(rowspec<T>(widths));
+
+        /// <summary>
+        /// Defines a <typeparamref name='T'/> record formatter
+        /// </summary>
+        /// <param name="widths">The column widths</param>
+        /// <typeparam name="T">The record type</typeparam>
+        [MethodImpl(Inline)]
+        public static IRecordFormatter<T> formatter<T>(byte fieldwidth)
+            where T : struct, IRecord<T>
+                => formatter<T>(rowspec<T>(fieldwidth));
+
+        [MethodImpl(Inline)]
+        public static IRecordFormatter<T> formatter<E,T>()
+            where E : unmanaged, Enum
+            where T : struct, IRecord<T>
+                => formatter<T>(rowspec<T>(Enums.numeric<E,byte>()));
     }
 }

@@ -5,13 +5,13 @@
 namespace Z0
 {
     using System;
-    using System.Diagnostics;
-    using System.Linq;
+    using System.Runtime.CompilerServices;
+    using System.Reflection;
 
-    partial struct ImageMaps
+    using static z;
+
+    partial class Enums
     {
-        [Op]
-        public static LocatedImageIndex index(Process src)
-            => src.Modules.Cast<ProcessModule>().Map(locate).OrderBy(x => x.BaseAddress);
+
     }
 }

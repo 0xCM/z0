@@ -28,16 +28,27 @@ namespace Z0
         public FlairKind Flair => FlairKind.Ran;
 
         [MethodImpl(Inline)]
-        public EmittedFileEvent(WfStepId step, T source, Count segments, FS.FilePath target, CorrelationToken ct)
+        public EmittedFileEvent(WfStepId step, T payload, Count segments, FS.FilePath target, CorrelationToken ct)
         {
             EventId = (Kind, step, Status, ct);
             SegmentCount = segments;
-            Payload = source;
+            Payload = payload;
+            Target = target;
+        }
+
+        [MethodImpl(Inline)]
+        public EmittedFileEvent(WfStepId step, T payload, FS.FilePath target, CorrelationToken ct)
+        {
+            EventId = (Kind, step, Status, ct);
+            SegmentCount = 0;
+            Payload = payload;
             Target = target;
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => TextFormatter.format(EventId, Payload, SegmentCount, Target.ToUri());
+            => SegmentCount != 0
+            ?  TextFormatter.format(EventId, Payload, SegmentCount, Target.ToUri())
+            : TextFormatter.format(EventId, Payload, Target.ToUri());
     }
 }

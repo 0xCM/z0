@@ -28,5 +28,23 @@ namespace Z0
                 seek(dst,i) = (T)skip(fields,i).GetRawConstantValue();
             return dst;
         }
+
+        /// <summary>
+        /// Fetches the values of literal fields declared by a specified type that are of specified parametric type
+        /// </summary>
+        /// <param name="src">The source type</param>
+        /// <param name="fields">The fields for which values are specified</param>
+        /// <typeparam name="T">The literal field type</typeparam>
+        [Op, Closures(Closure)]
+        public static Index<T> LiteralFieldValues<T>(this Type src)
+        {
+            var fields = src.LiteralFields(typeof(T));
+            var count = fields.Length;
+            var dst = alloc<T>(fields.Length);
+            ref var target = ref first(dst);
+            for(var i=0u; i<count; i++)
+                seek(target,i) = (T)skip(fields,i).GetRawConstantValue();
+            return dst;
+        }
     }
 }

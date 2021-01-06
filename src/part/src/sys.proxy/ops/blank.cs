@@ -11,8 +11,8 @@ namespace Z0
 
     partial struct proxy
     {
-        [MethodImpl(Options), Opaque(GetEmptyArray), Closures(Closure)]
-        public static T[] empty<T>()
-            => Array.Empty<T>();
+        [MethodImpl(Options), Opaque(EmptyStringTest)]
+        public static bool blank(string src)
+            => string.IsNullOrWhiteSpace(src);
     }
 }

@@ -7,14 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
-    
+
     partial struct sys
     {
-        /// <summary>
-        /// Produces an array from a parameter array
-        /// </summary>
-        /// <param name="src">The source items</param>
-        /// <typeparam name="T">The item type</typeparam>
         [MethodImpl(Options), Op, Closures(Closure)]
         public static T[] array<T>(params T[] src)
             => proxy.array(src);

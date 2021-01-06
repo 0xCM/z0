@@ -14,37 +14,39 @@ namespace Z0.Asm
     {
         Sequence = 0 | (10 << WidthOffset),
 
-        Address = 1 | (16 << WidthOffset),
+        BlockAddress = 1 | (16 << WidthOffset),
 
-        GlobalOffset = 2 | (16 << WidthOffset),
+        IP = 2 | (16 << WidthOffset),
 
-        LocalOffset = 3 | (16 << WidthOffset),
+        GlobalOffset = 3 | (16 << WidthOffset),
 
-        Mnemonic = 4 | (16 << WidthOffset),
+        LocalOffset = 4 | (16 << WidthOffset),
 
-        OpCode = 5 | (32 << WidthOffset),
+        Mnemonic = 5 | (16 << WidthOffset),
 
-        Instruction = 6 | (64 << WidthOffset),
+        OpCode = 6 | (32 << WidthOffset),
 
-        SourceCode = 7 | (64 << WidthOffset),
+        Instruction = 7 | (64 << WidthOffset),
 
-        Encoded = 8 | 32 << WidthOffset,
+        SourceCode = 8 | (64 << WidthOffset),
 
-        CpuId = 9 | (64 << WidthOffset),
+        Encoded = 9 | 32 << WidthOffset,
 
-        OpCodeId = 10 | (20 << WidthOffset),
+        CpuId = 10 | (64 << WidthOffset),
+
+        OpCodeId = 11 | (20 << WidthOffset),
     }
 
-    [StructLayout(LayoutKind.Sequential), Record(TableId, FieldCount)]
+    [StructLayout(LayoutKind.Sequential), Record(TableId)]
     public struct AsmRow : IRecord<AsmRow>, IComparable<AsmRow>
     {
         public const string TableId = "asm.rows";
 
-        public const byte FieldCount = 11;
-
         public Sequential Sequence;
 
-        public MemoryAddress Address;
+        public MemoryAddress BlockAddress;
+
+        public MemoryAddress IP;
 
         public Address32 GlobalOffset;
 
@@ -64,32 +66,32 @@ namespace Z0.Asm
 
         public OpCodeId OpCodeId;
 
-        [MethodImpl(Inline)]
-        public AsmRow(
-            Sequential Sequence,
-            MemoryAddress Address,
-            Address32 GlobalOffset,
-            Address16 LocalOffset,
-            asci16 Mnemonic,
-            AsmOpCodePattern OpCode,
-            BinaryCode Encoded,
-            AsmSig Instruction,
-            asci64 SourceCode,
-            asci16 CpuId,
-            OpCodeId Id)
-        {
-            this.Sequence = Sequence;
-            this.Address = Address;
-            this.GlobalOffset = GlobalOffset;
-            this.LocalOffset = LocalOffset;
-            this.Mnemonic = Mnemonic;
-            this.OpCode = OpCode;
-            this.Instruction = Instruction;
-            this.SourceCode = SourceCode;
-            this.Encoded = Encoded;
-            this.CpuId = CpuId;
-            this.OpCodeId = Id;
-        }
+        // [MethodImpl(Inline)]
+        // public AsmRow(
+        //     Sequential Sequence,
+        //     MemoryAddress Address,
+        //     Address32 GlobalOffset,
+        //     Address16 LocalOffset,
+        //     asci16 Mnemonic,
+        //     AsmOpCodePattern OpCode,
+        //     BinaryCode Encoded,
+        //     AsmSig Instruction,
+        //     asci64 SourceCode,
+        //     asci16 CpuId,
+        //     OpCodeId Id)
+        // {
+        //     this.Sequence = Sequence;
+        //     this.Address = Address;
+        //     this.GlobalOffset = GlobalOffset;
+        //     this.LocalOffset = LocalOffset;
+        //     this.Mnemonic = Mnemonic;
+        //     this.OpCode = OpCode;
+        //     this.Instruction = Instruction;
+        //     this.SourceCode = SourceCode;
+        //     this.Encoded = Encoded;
+        //     this.CpuId = CpuId;
+        //     this.OpCodeId = Id;
+        // }
 
         public bool IsEmpty
         {

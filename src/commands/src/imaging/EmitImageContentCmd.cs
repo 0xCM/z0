@@ -24,6 +24,7 @@ namespace Z0
 
     partial class XCmd
     {
+
         public static EmitImageContentCmd EmitImageContent(this CmdBuilder builder, LocatedImage src)
             => define(builder.Wf, src);
 
@@ -31,7 +32,7 @@ namespace Z0
         public static EmitImageContentCmd EmitImageContent(this CmdBuilder builder)
         {
             var dst = new EmitImageContentCmd();
-            dst.Source = ImageMaps.locate();
+            dst.Source = LocatedImages.main();
             dst.Target = builder.Db.Table(ImageContent.TableId, dst.Source.ImagePath.FileName.WithoutExtension);
             return dst;
         }
@@ -45,7 +46,7 @@ namespace Z0
         [Op]
         static ref EmitImageContentCmd specify(IWfShell wf, ProcessModule src, ref EmitImageContentCmd cmd)
         {
-            var located = ImageMaps.locate(src);
+            var located = LocatedImages.locate(src);
             cmd.Source = located;
             cmd.Target = wf.Db().Table(ImageContent.TableId, located.ImagePath.FileName.WithoutExtension);
             return ref cmd;

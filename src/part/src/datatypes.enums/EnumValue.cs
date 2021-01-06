@@ -26,18 +26,24 @@ namespace Z0
             return ref dst;
         }
 
+        [MethodImpl(Inline)]
+        public static unsafe E read<E,T>(in T scalar, E e = default)
+            where E : unmanaged, Enum
+            where T : unmanaged
+                => Unsafe.Read<E>(gptr<T,E>(scalar));
+
         /// <summary>
         /// Reads an E-value from an enum of primal T-kind
         /// </summary>
-        /// <param name="tVal">The integral value</param>
+        /// <param name="scalar">The integral value</param>
         /// <param name="eRep">A representative enum value, used only for type inference</param>
         /// <typeparam name="E">The enum type</typeparam>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static ref E literal<E,T>(in T tVal, E eRep = default)
+        public static ref E literal<E,T>(in T scalar, E eRep = default)
             where E : unmanaged
             where T : unmanaged
-                => ref @as<T,E>(tVal);
+                => ref @as<T,E>(scalar);
 
         /// <summary>
         /// Reads a T-value from the value of an E-enum of primal T-kind
