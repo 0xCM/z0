@@ -21,7 +21,7 @@ namespace Z0
         /// <summary>
         /// The key's primal type
         /// </summary>
-        readonly EnumLiteralKind keyKind;
+        readonly ClrEnumKind keyKind;
 
         /// <summary>
         /// The indexed data
@@ -105,7 +105,7 @@ namespace Z0
             get => keyNames;
         }
 
-        public EnumLiteralKind KeyKind
+        public ClrEnumKind KeyKind
         {
             [MethodImpl(Inline)]
             get => keyKind;

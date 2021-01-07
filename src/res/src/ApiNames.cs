@@ -12,7 +12,6 @@ public readonly struct ApiNames
 
     public const string Memory = memory;
 
-    public const string LiteralKinds = literals + dot + kinds;
 
     public const string Arrays = collective + dot + arrays;
 
@@ -137,15 +136,16 @@ public readonly struct ApiNames
     // ~~ Clr Runtime
     // ~~ -----------------------------------------------------------------------------------------
 
-    const string ClrRuntime = clr + dot + runtime;
 
-    public const string ClrType = ClrRuntime + dot + type;
+    public const string ClrLiteralKinds = clr + literals + dot + kinds;
+
+    public const string ClrType = clr + dot + type;
 
     public const string ClrTypes = clr + dot + types;
 
     public const string ClrEnum = clr + dot + @enum;
 
-    public const string ClrEnumLiteral = ClrRuntime + dot + @enum + dot + literal;
+    public const string ClrEnumLiteral = clr + dot + @enum + dot + literal;
 
     public const string ClrStruct = clr + dot + @struct;
 

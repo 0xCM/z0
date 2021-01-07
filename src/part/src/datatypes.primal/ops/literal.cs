@@ -12,11 +12,11 @@ namespace Z0
     partial struct ClrPrimitives
     {
         /// <summary>
-        /// Determines whether an identified <see cref='PrimalKind'/> can be a compile-time literal
+        /// Determines whether an identified <see cref='ClrPrimalKind'/> can be a compile-time literal
         /// </summary>
         /// <param name="src">The kind to test</param>
         [MethodImpl(Inline), Op]
-        public static bool literal(PrimalKind src)
+        public static bool literal(ClrPrimalKind src)
             => ((byte)src > 2 && (byte)src<16) || (byte)src == 18;
     }
 }

@@ -30,7 +30,7 @@ namespace Z0
             for(var i=0; i<dst.Length; i++)
             {
                 var literal = literals[i];
-                var description = Literals.tagged(typeof(E).Field(literal.ToString())).Text;
+                var description = ClrLiterals.tagged(typeof(E).Field(literal.ToString())).Text;
                 if(string.IsNullOrWhiteSpace(description) && flags)
                     description = literal.LiteralValue.ToString();
                 var bs = @base == NumericBaseKind.Base2 ? Formatters.value().FormatEnum(literal.LiteralValue, n2, bitmax) : EmptyString;

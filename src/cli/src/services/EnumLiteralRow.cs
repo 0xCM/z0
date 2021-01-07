@@ -44,7 +44,7 @@ namespace Z0
 
         public MemoryAddress NameAddress;
 
-        public EnumLiteralKind DataType;
+        public ClrEnumKind DataType;
 
         public string TypeName;
 
@@ -55,7 +55,7 @@ namespace Z0
         public ulong ScalarValue;
 
         [MethodImpl(Inline)]
-        public EnumLiteralRow(string part, Type type,  MemoryAddress address, ushort index, string name, MemoryAddress nameaddress, EnumLiteralKind primal, ulong value)
+        public EnumLiteralRow(string part, Type type,  MemoryAddress address, ushort index, string name, MemoryAddress nameaddress, ClrEnumKind primal, ulong value)
         {
             Component =  part;
             TypeId = type;

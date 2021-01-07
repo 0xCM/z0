@@ -12,7 +12,7 @@ namespace Z0
     using static z;
 
     using NK = NumericKind;
-    using BK = EnumLiteralKind;
+    using BK = ClrEnumKind;
 
     [ApiHost(ApiNames.ClrEnums, true)]
     public readonly struct ClrEnums
@@ -21,7 +21,7 @@ namespace Z0
         /// Determines the integral type refined by a parametrically-identified enum type
         /// </summary>
         /// <typeparam name="E">The enum type</typeparam>
-        public static EnumLiteralKind @base<E>()
+        public static ClrEnumKind @base<E>()
             where E : unmanaged, Enum
              => @base(typeof(E).GetEnumUnderlyingType().NumericKind());
 
@@ -30,7 +30,7 @@ namespace Z0
         /// </summary>
         /// <param name="value">The enum value</typeparam>
         [Op]
-        public static EnumLiteralKind @base(Enum value)
+        public static ClrEnumKind @base(Enum value)
             => @base(value.GetType().GetEnumUnderlyingType().NumericKind());
 
         /// <summary>
@@ -38,11 +38,11 @@ namespace Z0
         /// </summary>
         /// <typeparam name="E">The enum type</typeparam>
         [Op]
-        public static EnumLiteralKind @base(Type et)
+        public static ClrEnumKind @base(Type et)
             => @base(et.NumericKind());
 
         [Op]
-        public static EnumLiteralKind @base(NumericKind src)
+        public static ClrEnumKind @base(NumericKind src)
              => src switch{
                 NK.U8 => BK.U8,
                 NK.I8 => BK.I8,
@@ -52,7 +52,7 @@ namespace Z0
                 NK.I32 => BK.I32,
                 NK.I64 => BK.I64,
                 NK.U64 => BK.U64,
-                _ => EnumLiteralKind.None,
+                _ => ClrEnumKind.None,
             };
 
         [Op]

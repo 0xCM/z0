@@ -10,15 +10,15 @@ namespace Z0
     using static memory;
     using static Part;
 
-    using PK = PrimalKind;
+    using PK = ClrPrimalKind;
 
     [ApiHost(ApiNames.ClrPrimitives, true)]
     public readonly partial struct ClrPrimitives
     {
-        static ReadOnlySpan<PrimalKind> Kinds
+        static ReadOnlySpan<ClrPrimalKind> Kinds
         {
             [MethodImpl(Inline), Op]
-            get => recover<PrimalKind>(PrimalKindData);
+            get => recover<ClrPrimalKind>(PrimalKindData);
         }
 
         //PrimalKindId|TypeCode -> PrimalKind

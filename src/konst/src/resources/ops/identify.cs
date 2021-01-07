@@ -13,7 +13,7 @@ namespace Z0
     partial struct Resources
     {
         [MethodImpl(Inline), Op]
-        public static ResIdentity identify(Name name, MemorySegment seg, PrimalKind type)
+        public static ResIdentity identify(Name name, MemorySegment seg, ClrPrimalKind type)
             => new ResIdentity(name, seg, type);
 
         [MethodImpl(Inline), Op, Closures(Closure)]

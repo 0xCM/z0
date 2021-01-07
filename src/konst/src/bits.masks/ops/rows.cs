@@ -26,7 +26,7 @@ namespace Z0
                 var tc = Type.GetTypeCode(field.FieldType);
                 var vRaw = field.GetRawConstantValue();
                 if(LiteralAttributes.HasMultiLiteral(field))
-                    dst.AddRange(rows(Z0.Literals.multiliteral(field), vRaw));
+                    dst.AddRange(rows(Z0.ClrLiterals.multiliteral(field), vRaw));
                 else if(LiteralAttributes.HasBinaryLiteral(field))
                     dst.Add(BitMasks.row(LiteralAttributes.BinaryLiteral(field,vRaw)));
                 else

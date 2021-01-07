@@ -24,7 +24,7 @@ namespace Z0
         /// </summary>
         /// <typeparam name="E">The enum type</typeparam>
         [MethodImpl(Inline)]
-        public static EnumTypeCode typecode<E>()
+        public static ClrEnumCode typecode<E>()
             where E : unmanaged, Enum
                 => ClrPrimitives.ecode<E>();
 

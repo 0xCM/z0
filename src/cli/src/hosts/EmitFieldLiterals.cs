@@ -72,7 +72,7 @@ namespace Z0
         {
             const string Sep = "| ";
 
-            var content = Literals.format(src).PadRight(48);
+            var content = ClrLiterals.format(src).PadRight(48);
             var address = src.Address.Format().PadRight(16);
             var width = src.Width.Content.ToString().PadRight(16);
             var type = src.Field.DeclaringType.Name.PadRight(36);

@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="f">The literal's bitfield</param>
         [MethodImpl(Inline)]
-        public static SignKind sign(PrimalKind f)
+        public static SignKind sign(ClrPrimalKind f)
             => (SignKind)select(f, Field.Sign);
     }
 }

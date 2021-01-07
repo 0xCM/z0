@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    using NK = EnumTypeCode;
+    using NK = ClrEnumCode;
 
     [ApiHost("formatting.values")]
     public readonly struct ValueFormatter

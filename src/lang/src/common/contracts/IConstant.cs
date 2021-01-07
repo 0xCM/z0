@@ -14,8 +14,8 @@ namespace Z0.Lang
 
         T Value {get;}
 
-        LiteralKind Kind
-            => LiteralKinds.kind<T>();
+        ClrLiteralKind Kind
+            => ClrLiteralKinds.kind<T>();
     }
 
     /// <summary>

@@ -15,10 +15,10 @@ namespace Z0.Lang
 
         public T Value {get;}
 
-        public LiteralKind Kind {get;}
+        public ClrLiteralKind Kind {get;}
 
         [MethodImpl(Inline)]
-        public Constant(string name, T value, LiteralKind kind)
+        public Constant(string name, T value, ClrLiteralKind kind)
         {
             Name = name;
             Value = value;

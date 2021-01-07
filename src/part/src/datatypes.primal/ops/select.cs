@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="src">The source bitfield</param>
         /// <param name="i">The segment identifier</param>
         [MethodImpl(Inline), Op]
-        public static byte select(PrimalKind src, Field i)
+        public static byte select(ClrPrimalKind src, Field i)
             => (byte)view(filter(src,i), index(i));
 
         [MethodImpl(Inline), Op]
@@ -27,7 +27,7 @@ namespace Z0
             => ref skip(Positions, (byte)i);
 
         [MethodImpl(Inline), Op]
-        static PrimalKind view(PrimalKind src, SegPos offset)
-            => (PrimalKind)((byte)src >> (byte)offset);
+        static ClrPrimalKind view(ClrPrimalKind src, SegPos offset)
+            => (ClrPrimalKind)((byte)src >> (byte)offset);
     }
 }

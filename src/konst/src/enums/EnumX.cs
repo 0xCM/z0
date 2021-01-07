@@ -59,7 +59,7 @@ namespace Z0
                 => kind.IsSome() ? ifSome(kind) : ifNone();
 
         [MethodImpl(Inline)]
-        public static NumericKind NumericKind(this EnumTypeCode k)
+        public static NumericKind NumericKind(this ClrEnumCode k)
             => k.TypeCode().ToNumericKind();
 
         [MethodImpl(Inline)]
@@ -69,7 +69,7 @@ namespace Z0
                 => Z0.Enums.scalar<E,T>(src);
 
         [MethodImpl(Inline)]
-        public static TypeCode TypeCode(this EnumTypeCode k)
+        public static TypeCode TypeCode(this ClrEnumCode k)
             =>(System.TypeCode)k;
 
         public static EnumLiteralDetails<E> ToIndex<E>(this IEnumerable<EnumLiteralDetail<E>> src)
@@ -117,7 +117,7 @@ namespace Z0
                 => api.e64u(src);
 
         [MethodImpl(Inline)]
-        public static EnumLiteralKind EnumScalarKind(this Type src)
+        public static ClrEnumKind EnumScalarKind(this Type src)
             => api.kind(src);
     }
 }

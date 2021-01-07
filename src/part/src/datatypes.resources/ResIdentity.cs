@@ -27,10 +27,10 @@ namespace Z0
         /// <summary>
         /// The resource data type
         /// </summary>
-        public PrimalKind DataType {get;}
+        public ClrPrimalKind DataType {get;}
 
         [MethodImpl(Inline)]
-        public ResIdentity(Name name, MemorySegment seg, PrimalKind type)
+        public ResIdentity(Name name, MemorySegment seg, ClrPrimalKind type)
         {
             Name = name;
             Segment = seg;

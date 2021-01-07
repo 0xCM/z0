@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    using NK = PrimalNumericKind;
+    using NK = ClrNumericKind;
     using TC = System.TypeCode;
 
     partial struct ClrPrimitives

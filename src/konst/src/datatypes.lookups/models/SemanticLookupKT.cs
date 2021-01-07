@@ -24,7 +24,7 @@ namespace Z0
 
         readonly string[] keyNames;
 
-        readonly EnumLiteralKind keyKind;
+        readonly ClrEnumKind keyKind;
 
         [MethodImpl(Inline)]
         public SemanticLookup(T[] data)
@@ -92,7 +92,7 @@ namespace Z0
             get => keyNames;
         }
 
-        public EnumLiteralKind KeyKind
+        public ClrEnumKind KeyKind
         {
             [MethodImpl(Inline)]
             get => keyKind;

@@ -25,7 +25,7 @@ namespace Z0
         }
 
         [Op]
-        public static void fill(string part, Type type, EnumTypeCode ecode, ReadOnlySpan<FieldInfo> fields, Span<EnumLiteralRow> dst)
+        public static void fill(string part, Type type, ClrEnumCode ecode, ReadOnlySpan<FieldInfo> fields, Span<EnumLiteralRow> dst)
         {
             var count = fields.Length;
             var address = type.TypeHandle.Value;
@@ -33,7 +33,7 @@ namespace Z0
             {
                 ref readonly var f = ref skip(fields,i);
                 var nameAddress = z.address(f.Name);
-                seek(dst,i) = new EnumLiteralRow(part, type, address, (ushort)i, f.Name, nameAddress, (EnumLiteralKind)ecode, Enums.unbox(ecode, f.GetRawConstantValue()));
+                seek(dst,i) = new EnumLiteralRow(part, type, address, (ushort)i, f.Name, nameAddress, (ClrEnumKind)ecode, Enums.unbox(ecode, f.GetRawConstantValue()));
             }
         }
 

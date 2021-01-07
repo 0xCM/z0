@@ -12,29 +12,29 @@ namespace Z0
         public DataAttribute(string src)
         {
             Content = src;
-            Kind = PrimalKind.String;
+            Kind = ClrPrimalKind.String;
         }
 
         public DataAttribute(byte src)
         {
             Content = src;
-            Kind = PrimalKind.U8;
+            Kind = ClrPrimalKind.U8;
         }
 
         public DataAttribute(ushort src)
         {
             Content = src;
-            Kind = PrimalKind.U16;
+            Kind = ClrPrimalKind.U16;
         }
 
         public DataAttribute(uint src)
         {
             Content = src;
-            Kind = PrimalKind.U32;
+            Kind = ClrPrimalKind.U32;
         }
 
         public object Content {get;}
 
-        public PrimalKind Kind {get;}
+        public ClrPrimalKind Kind {get;}
     }
 }

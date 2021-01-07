@@ -11,7 +11,7 @@ namespace Z0
 
     public struct ClrPrimitiveInfo : ITextual
     {
-        public PrimalKind Kind;
+        public ClrPrimalKind Kind;
 
         public TypeWidth Width;
 
@@ -20,7 +20,7 @@ namespace Z0
         public PrimalTypeCode TypeCode;
 
         [MethodImpl(Inline)]
-        public ClrPrimitiveInfo(PrimalKind kind, TypeWidth width, SignKind sign, PrimalTypeCode tc)
+        public ClrPrimitiveInfo(ClrPrimalKind kind, TypeWidth width, SignKind sign, PrimalTypeCode tc)
         {
             Kind = kind;
             Width = width;

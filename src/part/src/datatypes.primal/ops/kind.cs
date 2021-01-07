@@ -17,15 +17,15 @@ namespace Z0
         /// </summary>
         /// <param name="src">The type code</param>
         [MethodImpl(Inline), Op]
-        public static PrimalKind kind(TypeCode src)
+        public static ClrPrimalKind kind(TypeCode src)
             => skip(Kinds, (uint)src);
 
         [Op]
-        public static PrimalKind kind(Type src)
+        public static ClrPrimalKind kind(Type src)
             => kind(sys.typecode(src));
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static PrimalKind kind<T>()
+        public static ClrPrimalKind kind<T>()
             => kind(sys.typecode<T>());
     }
 }

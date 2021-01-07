@@ -15,7 +15,7 @@ namespace Z0
         public static Index<T> numeric<E,T>()
             where E : unmanaged, Enum
             where T : unmanaged
-                => Literals.search<E>(typeof(E)).Select(f => sys.constant<T>(f));
+                => ClrLiterals.search<E>(typeof(E)).Select(f => sys.constant<T>(f));
 
         public static EnumFieldValues<E,T> values<E,T>(Type src)
             where E : unmanaged, Enum

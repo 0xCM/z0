@@ -19,7 +19,7 @@ namespace Z0.Lang
         /// <typeparam name="T">The constant type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Constant<T> constant<T>(Identifier name, T value)
-            => new Constant<T>(name,value, LiteralKinds.kind<T>());
+            => new Constant<T>(name,value, ClrLiteralKinds.kind<T>());
 
         /// <summary>
         /// Creates a <see cref='Constant{S,T}'/>
@@ -31,7 +31,7 @@ namespace Z0.Lang
         /// <typeparam name="T">The constant type</typeparam>
         public static Constant<S,T> constant<S,T>(Identifier name, S src, ITransformer<S,T> map)
             => map.Transform(src, out var dst)
-              ? new Constant<S,T>(name, src, dst,LiteralKinds.kind<T>())
+              ? new Constant<S,T>(name, src, dst,ClrLiteralKinds.kind<T>())
               : @throw<Constant<S,T>>(new AppException(Msg.TransformFailed<S,T>(src)));
     }
 }

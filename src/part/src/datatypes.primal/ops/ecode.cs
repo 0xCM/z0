@@ -16,15 +16,15 @@ namespace Z0
         /// </summary>
         /// <typeparam name="E">The enum type</typeparam>
         [MethodImpl(Inline)]
-        public static EnumTypeCode ecode<E>(E e = default)
+        public static ClrEnumCode ecode<E>(E e = default)
             where E : unmanaged, Enum
-                => (EnumTypeCode)default(E).GetTypeCode();
+                => (ClrEnumCode)default(E).GetTypeCode();
 
         /// <summary>
         /// Determines an enumeration's underlying kind
         /// </summary>
         [MethodImpl(Inline), Op]
-        public static EnumTypeCode ecode(Type src)
-            => (EnumTypeCode)sys.typecode(src);
+        public static ClrEnumCode ecode(Type src)
+            => (ClrEnumCode)sys.typecode(src);
     }
 }

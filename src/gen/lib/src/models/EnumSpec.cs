@@ -13,7 +13,7 @@ namespace Z0
             /// <summary>
             /// The primal type under refinement by the enum
             /// </summary>
-            public EnumLiteralKind BaseType;
+            public ClrEnumKind BaseType;
         }
 
         public struct NamedLiteral

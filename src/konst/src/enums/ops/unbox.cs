@@ -11,7 +11,7 @@ namespace Z0
     using static z;
 
     using NK = NumericKind;
-    using EC = EnumTypeCode;
+    using EC = ClrEnumCode;
 
     partial class Enums
     {
@@ -26,7 +26,7 @@ namespace Z0
                 NK.I32 => (ulong)(int)src,
                 NK.I64 => (ulong)(long)src,
                 NK.U64 => (ulong)src,
-                _ => 0ul,               
+                _ => 0ul,
             };
 
         [Op]
@@ -40,7 +40,7 @@ namespace Z0
                 EC.I32 => (ulong)(int)src,
                 EC.I64 => (ulong)(long)src,
                 EC.U64 => (ulong)src,
-                _ => 0ul,               
-            };            
+                _ => 0ul,
+            };
     }
 }

@@ -39,7 +39,7 @@ namespace Z0
         /// <summary>
         /// The kind of primitive specialized by the enum
         /// </summary>
-        public EnumLiteralKind DataType;
+        public ClrEnumKind DataType;
 
         /// <summary>
         /// The literal declaration order within the defining enum

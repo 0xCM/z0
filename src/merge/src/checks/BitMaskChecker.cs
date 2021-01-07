@@ -80,10 +80,10 @@ namespace Z0
             Cases16 = DataSource.Fill(z8, (byte)bitwidth<ushort>(), span<byte>(Reps));
             Cases32 = DataSource.Fill(z8, (byte)bitwidth<uint>(), span<byte>(Reps));
             Cases64 = DataSource.Fill(z8, (byte)bitwidth<uint>(), span<byte>(Reps));
-            Literals8 = Literals.tagged<byte>(base2, typeof(BitMasks.Literals));
-            Literals16 = Literals.tagged<ushort>(base2, typeof(BitMasks.Literals));
-            Literals32 = Literals.tagged<uint>(base2, typeof(BitMasks.Literals));
-            Literals64 = Literals.tagged<ulong>(base2, typeof(BitMasks.Literals));
+            Literals8 = ClrLiterals.tagged<byte>(base2, typeof(BitMasks.Literals));
+            Literals16 = ClrLiterals.tagged<ushort>(base2, typeof(BitMasks.Literals));
+            Literals32 = ClrLiterals.tagged<uint>(base2, typeof(BitMasks.Literals));
+            Literals64 = ClrLiterals.tagged<ulong>(base2, typeof(BitMasks.Literals));
             HiMaskResults8 = alloc<CheckHiMaskResult<byte>>(Reps);
             HiMaskResults16 = alloc<CheckHiMaskResult<ushort>>(Reps);
             HiMaskResults32 = alloc<CheckHiMaskResult<uint>>(Reps);

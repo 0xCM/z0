@@ -9,7 +9,7 @@ namespace Z0.Lang
 
     public struct LoopInfo
     {
-        public PrimalNumericKind IndexKind;
+        public ClrNumericKind IndexKind;
 
         public Cell64 LowerBound;
 
