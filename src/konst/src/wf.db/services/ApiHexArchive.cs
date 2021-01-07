@@ -38,7 +38,7 @@ namespace Z0
         public ListedFiles List()
             => FS.list(Root.Files(DefaultExt));
 
-        public Deferred<FS.FilePath> ArchivedFiles()
+        public Deferred<FS.FilePath> ArchiveFiles()
             => Root.EnumerateFiles(DefaultExt, true);
 
         /// <summary>
@@ -79,7 +79,7 @@ namespace Z0
         /// </summary>
         public IEnumerable<ApiCodeBlock> ApiCode(Func<FS.FileName,bool> predicate)
         {
-            foreach(var file in ArchivedFiles().Where(f => predicate(f.FileName)))
+            foreach(var file in ArchiveFiles().Where(f => predicate(f.FileName)))
             foreach(var item in Read(file))
             {
                 if(item.IsNonEmpty)

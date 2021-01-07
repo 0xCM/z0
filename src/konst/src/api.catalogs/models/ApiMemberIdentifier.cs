@@ -118,7 +118,7 @@ namespace Z0
                         if(char.IsLetterOrDigit(c))
                             dst[i] = c;
                         else
-                            corefunc.@throw(new Exception($"Unexpected character {c} in api text"));
+                            @throw(new Exception($"Unexpected character {c} in api text"));
                     break;
                 }
             }

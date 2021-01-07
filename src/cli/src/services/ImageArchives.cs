@@ -20,7 +20,7 @@ namespace Z0
         public static IImageReader csvreader(IWfShell wf, FS.FilePath src)
         {
             if(!src.Exists)
-                corefunc.@throw(FS.missing(src));
+                @throw(FS.missing(src));
 
             return new ImageCsvReader(wf, src);
         }

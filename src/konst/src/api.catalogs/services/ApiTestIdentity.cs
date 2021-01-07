@@ -85,6 +85,6 @@ namespace Z0
         public static string name<W,C>(Type host, string label, bool generic)
             where W : unmanaged, ITypeWidth
             where C : unmanaged
-                => $"{ApiIdentify.part(host).Format()}/{host.Name}{UriPathSep}{ApiIdentify.build(label, default(W).TypeWidth, NumericKinds.kind<C>(), generic)}";
+                => $"{ApiIdentify.part(host).Format()}/{host.Name}{UriPathSep}{ApiIdentify.build(label, default(W).TypeWidth, Numeric.kind<C>(), generic)}";
     }
 }

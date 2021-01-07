@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
     using static z;
 
     /// <summary>
@@ -28,7 +27,7 @@ namespace Z0
         BitMaskKind IMaskSpec.M => M;
 
         public string Format()
-            => text.format(RenderPattern, nat64u<N>(), NumericKinds.kind<T>().Format());
+            => text.format(RenderPattern, nat64u<N>(), Numeric.kind<T>().Format());
 
         public override string ToString()
             => Format();

@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     /// <summary>
@@ -36,7 +36,7 @@ namespace Z0
         NumericKind IMaskSpec.K
         {
             [MethodImpl(Inline)]
-            get => NumericKinds.kind<T>();
+            get => Numeric.kind<T>();
         }
 
         uint IBitFrequency.F

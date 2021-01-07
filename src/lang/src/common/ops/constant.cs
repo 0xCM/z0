@@ -7,8 +7,7 @@ namespace Z0.Lang
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     partial struct lang
     {
@@ -33,6 +32,6 @@ namespace Z0.Lang
         public static Constant<S,T> constant<S,T>(Identifier name, S src, ITransformer<S,T> map)
             => map.Transform(src, out var dst)
               ? new Constant<S,T>(name, src, dst,LiteralKinds.kind<T>())
-              : corefunc.@throw<Constant<S,T>>(new AppException(Msg.TransformFailed<S,T>(src)));
+              : @throw<Constant<S,T>>(new AppException(Msg.TransformFailed<S,T>(src)));
     }
 }

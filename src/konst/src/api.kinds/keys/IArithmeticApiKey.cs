@@ -50,7 +50,7 @@ namespace Z0
         /// The parametrically-identified numeric kind
         /// </summary>
         NumericKind IArithmeticApiKey.OperandKind
-            => NumericKinds.kind<T>();
+            => Numeric.kind<T>();
     }
 
     /// <summary>

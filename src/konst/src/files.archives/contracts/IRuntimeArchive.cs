@@ -8,31 +8,46 @@ namespace Z0
 
     public interface IRuntimeArchive : IFileArchive
     {
+        /// <summary>
+        /// All runtime-related files in the archive
+        /// </summary>
+        FS.Files Files
+             => Root.Files(false, Exe, Dll, Pdb, Json, Xml).Where(x => !x.Name.Contains("System.Private.CoreLib"));
+
+        IModuleArchive Modules
+            => Archives.modules(Root);
+
         FS.Files ManagedLibraries
-            => ArchivedFiles().Where(x => FS.managed(x) && x.Is(Dll)).Array();
+            => ArchiveFiles().Where(x => FS.managed(x) && x.Is(Dll)).Array();
 
         FS.Files ManagedExecutables
-            => ArchivedFiles().Where(x => FS.managed(x) && x.Is(Exe)).Array();
+            => ArchiveFiles().Where(x => FS.managed(x) && x.Is(Exe)).Array();
 
         FS.Files NativeLibraries
-            => ArchivedFiles().Where(x => !FS.managed(x) && x.Is(Dll)).Array();
+            => ArchiveFiles().Where(x => !FS.managed(x) && x.Is(Dll)).Array();
 
         FS.Files NativeExecutables
-            => ArchivedFiles().Where(x => !FS.managed(x) && x.Is(Exe)).Array();
+            => ArchiveFiles().Where(x => !FS.managed(x) && x.Is(Exe)).Array();
 
         FS.Files ExeFiles
-            => ArchivedFiles().Where(x => x.Is(Exe)).Array();
+            => ArchiveFiles().Where(x => x.Is(Exe)).Array();
 
         FS.Files JsonFiles
-            => ArchivedFiles().Where(x => x.Is(Json)).Array();
+            => ArchiveFiles().Where(x => x.Is(Json)).Array();
 
         FS.Files XmlFiles
-            => ArchivedFiles().Where(x => x.Is(Xml)).Array();
+            => ArchiveFiles().Where(x => x.Is(Xml)).Array();
 
         FS.Files DllFiles
-            => ArchivedFiles().Where(x => x.Is(Dll)).Array();
+            => ArchiveFiles().Where(x => x.Is(Dll)).Array();
 
         FS.Files PdbFiles
-            => ArchivedFiles().Where(x => x.Is(Pdb)).Array();
+            => ArchiveFiles().Where(x => x.Is(Pdb)).Array();
+
+        FS.Files JsonDepsFiles
+            => Root.EnumerateFiles(JsonDeps, true).Array();
+
+        FS.Files LibFiles
+            => Root.EnumerateFiles(Lib, true).Array();
     }
 }

@@ -92,6 +92,9 @@ namespace Z0
             }
         }
 
+        public T Require()
+            => Ok ? Data : @throw<T>();
+
         [MethodImpl(Inline)]
         public Either<Y,Z> Map<Y,Z>(Func<Outcome<T>,Y> success, Func<Outcome<T>,Z> failure)
             => Ok ? Either.right<Y,Z>(success(this)) : Either.right<Y,Z>(failure(this));

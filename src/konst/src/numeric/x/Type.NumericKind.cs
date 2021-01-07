@@ -18,6 +18,6 @@ namespace Z0
         /// <param name="src">The type to examine</param>
         [MethodImpl(Inline), Op]
         public static NumericKind NumericKind(this Type src)
-            => kind(src);
+            => Numeric.kind(src);
     }
 }

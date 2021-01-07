@@ -6,7 +6,8 @@ namespace Z0
 {
     using System;
 
-    using static z;
+    using static Part;
+    using static memory;
 
     partial struct Records
     {
@@ -53,7 +54,7 @@ namespace Z0
             var _fields = fields(record).View;
             var count = _fields.Length;
             if(count != widths.Length)
-                corefunc.@throw(Msg.RecordFieldWidthMismatch.Format((uint)count, (uint)widths.Length));
+                @throw(Msg.RecordFieldWidthMismatch.Format((uint)count, (uint)widths.Length));
             var buffer = alloc<HeaderCell>(count);
             var cells = span(buffer);
             for(var i=0u; i<count; i++)

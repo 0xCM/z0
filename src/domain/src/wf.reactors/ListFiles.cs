@@ -14,7 +14,7 @@ namespace Z0
         static CmdResult run(IWfShell wf, ListFilesCmd cmd)
         {
             var archive = Archives.create(cmd.SourceDir);
-            var files = archive.Enumerate(cmd.Extensions, true).Where(f => !f.Name.EndsWith(".resources.dll"));
+            var files = archive.ArchiveFiles(cmd.Extensions, true).Where(f => !f.Name.EndsWith(".resources.dll"));
             var counter = 0;
             using var writer = cmd.TargetPath.Writer();
 

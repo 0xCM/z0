@@ -10,18 +10,28 @@ namespace Z0
     using System.Xml;
     using System.IO;
 
-    partial struct DevProjects
+    [ServiceContract]
+    public interface ICommentCollector : IWfService
     {
-        public readonly struct CommentCollector
+        Dictionary<FS.FilePath, Dictionary<string,string>> Collect();
+    }
+
+    partial struct Dev
+    {
+        [Service]
+        public sealed class CommentCollector : WfService<CommentCollector, ICommentCollector>, ICommentCollector
         {
-            public static Dictionary<PartId, Dictionary<string,string>> collect(IWfShell wf)
+            public Dictionary<FS.FilePath, Dictionary<string,string>> Collect()
+                => collect(Wf);
+
+            public static Dictionary<FS.FilePath, Dictionary<string,string>> collect(IWfShell wf)
             {
-                var dir = wf.Db().TableDir<SummaryComment>();
-                var src = collect(wf, wf.ApiParts.ManagedSources);
-                var dst = new Dictionary<PartId, Dictionary<string,SummaryComment>>();
+                var src = pull(wf);
+                var dst = new Dictionary<FS.FilePath, Dictionary<string,SummaryComment>>();
                 foreach(var part in src.Keys)
                 {
-                    var path = wf.Db().Table<SummaryComment>(part);
+                    var id = part.FileName.WithoutExtension.Name;
+                    var path = wf.Db().Table<SummaryComment>(id, FileExtensions.Csv);
                     var docs = new Dictionary<string, SummaryComment>();
                     dst[part] = docs;
                     using var writer = path.Writer();
@@ -52,27 +62,21 @@ namespace Z0
             public static string format(SummaryComment src)
                 => text.concat(src.Kind.ToString().PadRight(12), Sep, src.Identifer.PadRight(70), Sep, src.Summary);
 
-            static Dictionary<PartId, Dictionary<string,string>> collect(IWfShell wf, FS.FilePath[] paths)
+            static Dictionary<FS.FilePath, Dictionary<string,string>> pull(IWfShell wf)
             {
-                var dst = new Dictionary<PartId, Dictionary<string,string>>();
+                var archive = wf.RuntimeArchive();
+                var paths = archive.XmlFiles;
+                var dst = new Dictionary<FS.FilePath, Dictionary<string,string>>();
                 var t = default(SummaryComment);
-                foreach(var path in paths)
+                foreach(var xmlfile in paths)
                 {
-                    var id = path.Owner;
-                    if(id.IsSome())
-                    {
-                        var xmlfile = path.ChangeExtension(FileExtensions.Xml);
-                        if(xmlfile.Exists)
-                        {
-                            var flow = wf.Processing(xmlfile, "Processing XML documentation comment file");
-                            var data = xmlfile.ReadText();
-                            var parsed = parse(data);
-                            if(parsed.Count != 0)
-                                dst[id] = parsed;
+                    var flow = wf.Processing(xmlfile, "Processing XML documentation comment file");
+                    var data = xmlfile.ReadText();
+                    var parsed = parse(data);
+                    if(parsed.Count != 0)
+                        dst[xmlfile] = parsed;
 
-                            wf.Processed(flow, path, t, parsed.Count);
-                        }
-                    }
+                    wf.Processed(flow, xmlfile, t, parsed.Count);
                 }
                 return dst;
             }

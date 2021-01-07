@@ -80,7 +80,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static NumericKind nk<T>(T t = default)
-            => NumericKinds.kind<T>();
+            => Numeric.kind<T>();
 
         /// <summary>
         /// Produces an identifier of the form {opname}_{bitsize(kind)}{u | i | f}

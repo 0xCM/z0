@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     public class AppException : Exception
     {
@@ -18,7 +18,7 @@ namespace Z0
             => new AppException(msg);
 
         public static AppException Define(object reason, string caller, string file, int? line)
-            => Define(AppMsg.define($"{reason?.ToString()} {caller} {file} {line}", LogLevel.Error));
+            => new AppException(reason?.ToString(), caller, file, line);
 
         public AppException() { }
 

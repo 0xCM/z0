@@ -7,7 +7,7 @@ namespace Z0
 {
     using System;
 
-    using static DevProjects;
+    using static Dev;
 
     sealed class EmitDocComments : CmdReactor<EmitDocCommentsCmd>
     {

@@ -45,6 +45,8 @@ namespace Z0
 
                 EmitComments.create().Run(Wf);
 
+
+
                 XedEtlWfHost.create().Run(Wf);
 
                 var images = ImageEmitters.init(Wf);

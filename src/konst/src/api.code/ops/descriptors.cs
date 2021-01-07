@@ -18,7 +18,7 @@ namespace Z0
         {
             var archive = Archives.hex(wf);
             var root = archive.Root;
-            var files = @readonly(archive.ArchivedFiles().Array());
+            var files = @readonly(archive.ArchiveFiles().Array());
             var empty = Index<ApiCodeDescriptor>.Empty;
             if(files.Length == 0)
             {

@@ -37,6 +37,6 @@ namespace Z0
         /// The parametrically-identified numeric kind
         /// </summary>
         NumericKind NumericKind
-            => NumericKinds.kind<T>();
+            => Numeric.kind<T>();
     }
 }

@@ -24,7 +24,7 @@ namespace Z0
             if(t == typeof(Bit32))
                 return NI.Unsigned;
             else
-                return NK.indicator(NK.kind(t));
+                return NK.indicator(Numeric.kind(t));
         }
 
         [Indicator(C.i)]

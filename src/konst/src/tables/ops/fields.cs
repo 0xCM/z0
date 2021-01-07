@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static z;
+    using static memory;
 
     partial struct Table
     {
@@ -29,7 +29,7 @@ namespace Z0
 
         public static TableFields fields(Type src, bool recurse)
         {
-            var collected = list<TableField>();
+            var collected = corefunc.list<TableField>();
             ushort j = 0;
             if(src.IsStruct() && !src.IsPrimitive)
             {
@@ -66,7 +66,7 @@ namespace Z0
             var declared = @readonly(type.DeclaredInstanceFields());
             var count = declared.Length;
             if(count != widths.Length)
-                corefunc.@throw(AppErrors.LengthMismatch(count, widths.Length));
+                @throw(AppErrors.LengthMismatch(count, widths.Length));
 
             var buffer = alloc<TableField>(count);
             var fields = span(buffer);
@@ -101,7 +101,7 @@ namespace Z0
             var lFields = literals.Fields;
 
             var specs = fields<T>();
-            var dst = list<TableField<F>>(lFields.Length);
+            var dst = corefunc.list<TableField<F>>(lFields.Length);
             for(var i=0u; i<lFields.Length; i++)
             {
                 ref readonly var literal = ref literals[i];

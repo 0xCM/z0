@@ -18,7 +18,7 @@ namespace Z0
             => (TypeWidth)(Unsafe.SizeOf<T>()*8);
 
         NumericKind ITypedLiteral<NumericKind>.Class
-            => NumericKinds.kind<T>();
+            => Numeric.kind<T>();
     }
 
     public interface INumericKind<F,T> : INumericKind<T>

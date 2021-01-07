@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static z;
+    using static Part;
 
     using NK = NumericKind;
 
@@ -20,7 +20,7 @@ namespace Z0
         public static object rebox(object src, NumericKind dst)
         {
             var type = src?.GetType() ?? typeof(void);
-            var _nk = NumericKinds.kind(type);
+            var _nk = Numeric.kind(type);
             switch(_nk)
             {
                 case NK.I8:
@@ -53,7 +53,7 @@ namespace Z0
                 case NK.F64:
                     return box((double)src, dst);
             }
-            return corefunc.@throw<object>($"The type {type} is not supported");
+            return @throw<object>($"The type {type} is not supported");
         }
     }
 }

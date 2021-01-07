@@ -10,27 +10,8 @@ namespace Z0
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface IBuildArchive : IFileArchive
+    public interface IBuildArchive : IRuntimeArchive
     {
-        IModuleArchive Modules
-            => Archives.modules(Root);
 
-        IEnumerable<FS.FilePath> BuildFiles(FS.FileExt ext)
-            => Root.EnumerateFiles(ext, true);
-
-        IEnumerable<FS.FilePath> ExeFiles()
-            => BuildFiles(Exe);
-
-        IEnumerable<FS.FilePath> JsonDepsFiles()
-            => BuildFiles(JsonDeps);
-
-        IEnumerable<FS.FilePath> DllFiles()
-            => BuildFiles(Dll);
-
-        IEnumerable<FS.FilePath> PdbFiles()
-            => BuildFiles(Pdb);
-
-        IEnumerable<FS.FilePath> LibFiles()
-            => BuildFiles(Lib);
     }
 }

@@ -22,19 +22,22 @@ namespace Z0
         FS.Files Clear(FS.FolderName id)
             => (Root + id).Clear(list<FS.FilePath>()).Array();
 
-        Deferred<FS.FilePath> ArchivedFiles()
+        Deferred<FS.FilePath> ArchiveFiles()
             => Root.EnumerateFiles(true);
+
+        Deferred<FS.FilePath> ArchivFiles(FS.FileExt ext)
+            => ArchiveFiles().Where(f => f.Is(ext));
 
         FS.Files Clear(string id)
             => Clear(FS.folder(id));
 
-        Deferred<FS.FilePath> Enumerate(FS.FileExt[] ext, bool recurse)
+        Deferred<FS.FilePath> ArchiveFiles(FS.FileExt[] ext, bool recurse)
             => Root.EnumerateFiles(ext, recurse);
 
-        Deferred<FS.FilePath> Enumerate(string pattern, bool recurse)
+        Deferred<FS.FilePath> ArchiveFiles(string pattern, bool recurse)
             => Root.EnumerateFiles(pattern, recurse);
 
         ListedFiles List()
-            => FS.list(ArchivedFiles().Array());
+            => FS.list(ArchiveFiles().Array());
     }
 }

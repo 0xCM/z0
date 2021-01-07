@@ -23,9 +23,9 @@ namespace Z0
             var svc = ImageEmitters.init(Wf);
             var db = Wf.Db();
             var dir = db.TableDir<ImageSectionHeader>();
-            var cmd = CmdBuilder.EmitImageHeaders(src.DllFiles().Array(), db.Table(ImageSectionHeader.TableId, "dll"));
+            var cmd = CmdBuilder.EmitImageHeaders(src.DllFiles, db.Table(ImageSectionHeader.TableId, "dll"));
             svc.EmitSectionHeaders(cmd.Source, cmd.Target);
-            cmd = CmdBuilder.EmitImageHeaders(src.ExeFiles().Array(), db.Table(ImageSectionHeader.TableId, "exe"));
+            cmd = CmdBuilder.EmitImageHeaders(src.ExeFiles, db.Table(ImageSectionHeader.TableId, "exe"));
             svc.EmitSectionHeaders(cmd.Source, cmd.Target);
         }
 

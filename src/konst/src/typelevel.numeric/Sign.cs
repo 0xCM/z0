@@ -11,7 +11,11 @@ namespace Z0
 
     public readonly struct Sign
     {
-        public readonly SignKind Kind;
+        public SignKind Kind {get;}
+
+        [MethodImpl(Inline)]
+        public Sign(SignKind kind)
+            => Kind = kind;
 
         [MethodImpl(Inline)]
         public static implicit operator Sign(SignKind src)
@@ -20,12 +24,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator SignKind(Sign src)
             => src.Kind;
-
-        [MethodImpl(Inline)]
-        public Sign(SignKind kind)
-        {
-            Kind = kind;
-        }
     }
 
     /// <summary>

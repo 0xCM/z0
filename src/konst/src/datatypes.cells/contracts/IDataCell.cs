@@ -40,7 +40,7 @@ namespace Z0
             => Unsafe.SizeOf<T>();
 
         NumericKind NumericKind
-            => NumericKinds.kind<T>();
+            => Numeric.kind<T>();
 
         NumericWidth NumericWidth
             => (NumericWidth)(z.size<T>()*8);

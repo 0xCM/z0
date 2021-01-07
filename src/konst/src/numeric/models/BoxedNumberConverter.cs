@@ -21,7 +21,7 @@ namespace Z0
         /// <typeparam name="T">The target numeric type</typeparam>
         [MethodImpl(Inline)]
         public T Convert<T>(BoxedNumber src)
-            => (T)NumericBox.rebox(src.Boxed, NumericKinds.kind<T>());
+            => (T)NumericBox.rebox(src.Boxed, Numeric.kind<T>());
 
         /// <summary>
         /// Puts a number in a box of kind parametric
@@ -30,7 +30,7 @@ namespace Z0
         /// <typeparam name="T">The source value type</typeparam>
         [MethodImpl(Inline)]
         public BoxedNumber Convert<T>(T src)
-            => BoxedNumber.Define(src, NumericKinds.kind<T>());
+            => BoxedNumber.Define(src, Numeric.kind<T>());
 
         public Option<object> ConvertFromTarget(object incoming, Type dst)
         {

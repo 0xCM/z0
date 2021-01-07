@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Reflection;
+    using static DbNames;
 
     public interface IWfDbPaths : IFileArchive
     {
@@ -22,7 +23,7 @@ namespace Z0
             => EnvVars.Common.DevRoot;
 
         FS.FolderPath DevDataRoot()
-            => DevRoot() +FS.folder(DbNames.data);
+            => DevRoot() +FS.folder(data);
 
         FS.FolderPath DevData<S>(S subject)
             => DevDataRoot() + SubjectFolder(subject);
@@ -31,25 +32,25 @@ namespace Z0
             => EnvVars.Common.ArchiveRoot;
 
         FS.FolderPath BuildArchiveRoot()
-            => ArchiveRoot() + FS.folder(DbNames.builds);
+            => ArchiveRoot() + FS.folder(builds);
 
         FS.FileExt DefaultTableExt
              => Csv;
 
+        FS.FolderPath DumpFileRoot()
+            => ArchiveRoot() + FS.folder(dumps);
+
+        FS.FilePath DumpFilePath(string id)
+            => DumpFileRoot() + FS.file(id, Dmp);
+
         FS.FolderPath EventRoot()
-            => Root + FS.folder(DbNames.events);
+            => Root + FS.folder(events);
 
         FS.FolderPath RefDataRoot()
-            => Root + FS.folder(DbNames.refdata);
-
-        FS.FolderPath ReflectedRoot()
-            => Root + FS.folder("reflected");
-
-        FS.FolderPath Reflected(Assembly src)
-            => ReflectedRoot() + FS.folder(src.GetSimpleName());
+            => Root + FS.folder(refdata);
 
         FS.FolderPath TmpRoot()
-            => Root + FS.folder(DbNames.tmp);
+            => Root + FS.folder(tmp);
 
         FS.FilePath TmpFile(FS.FileName file)
             => TmpRoot() + file;
@@ -58,7 +59,7 @@ namespace Z0
             => TmpRoot() + SubjectFolder(subject);
 
         FS.FolderPath LogRoot()
-            => Root + FS.folder(DbNames.logs);
+            => Root + FS.folder(logs);
 
         FS.FolderPath BuildLogRoot()
             => LogRoot() + FS.folder("build");
@@ -77,7 +78,7 @@ namespace Z0
         /// The root table directory
         /// </summary>
         FS.FolderPath TableRoot()
-            => Root + FS.folder(DbNames.tables);
+            => Root + FS.folder(tables);
 
         /// <summary>
         /// Specifies a table root for an identified subject

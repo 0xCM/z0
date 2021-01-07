@@ -15,7 +15,7 @@ namespace Z0
     {
         public static K numeric(Type t)
         {
-            var k = NumericKinds.kind(t);
+            var k = Numeric.kind(t);
             if(k != 0)
                 return (K)(uint)k;
             else

@@ -22,7 +22,7 @@ namespace Z0
 
         const string ZToolRoot = nameof(ZToolRoot);
 
-        const string Pub = "ZArchive";
+        const string ZArchive = nameof(ZArchive);
 
         const string ZDb = nameof(ZDb);
 
@@ -45,7 +45,7 @@ namespace Z0
             dst.LogRoot = read(ZLogs).Transform(FS.dir);
             dst.DevRoot = read(ZDev).Transform(FS.dir);
             dst.DbRoot = read(ZDb).Transform(FS.dir);
-            dst.ArchiveRoot = read(Pub).Transform(FS.dir);
+            dst.ArchiveRoot = read(ZArchive).Transform(FS.dir);
             dst.SystemControl = read(ZControl).Transform(FS.dir);
             dst.ToolRoot = read(ZToolRoot).Transform(FS.dir);
             return dst;

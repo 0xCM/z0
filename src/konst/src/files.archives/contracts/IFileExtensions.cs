@@ -60,5 +60,7 @@ namespace Z0
         FileExt Bat => X.Bat;
 
         FileExt Ps1 => X.Ps1;
+
+        FileExt Dmp => X.Dmp;
     }
 }

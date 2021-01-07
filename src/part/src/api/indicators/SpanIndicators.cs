@@ -14,7 +14,7 @@ namespace Z0
         /// <summary>
         /// Indicates an system-defined readonly span
         /// </summary>
-        public const string ReadOnly = "spanro";
+        public const string ReadOnly = "rspan";
 
         /// <summary>
         /// Indicates a custom span type predicated parametrically on natrural number types

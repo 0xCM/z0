@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     public readonly struct NumericFormatter<F,T> : INumericFormatter<F,T>
         where T : unmanaged
@@ -30,6 +30,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public NumericFormatter<S> As<S>()
             where S : unmanaged
-                => new NumericFormatter<T>(this).As<S>();        
+                => new NumericFormatter<T>(this).As<S>();
     }
 }

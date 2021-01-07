@@ -19,7 +19,7 @@ namespace Z0
         public NumericKind CellKind
         {
             [MethodImpl(Inline)]
-            get => NumericKinds.kind<T>();
+            get => Numeric.kind<T>();
         }
 
         [MethodImpl(Inline)]

@@ -24,13 +24,19 @@ namespace Z0
     public readonly struct NK<T> : INumericKind<T>
         where T : unmanaged
     {
+        public NumericKind Kind
+        {
+            [MethodImpl(Inline)]
+            get => Numeric.kind<T>();
+        }
+
         [MethodImpl(Inline)]
         public static implicit operator NK(NK<T> src)
-            => NumericKinds.kind<T>();
+            => Numeric.kind<T>();
 
         [MethodImpl(Inline)]
         public static implicit operator NK<T>(NK src)
-            => NumericKinds.kind<T>();
+            => Numeric.kind<T>();
 
         [MethodImpl(Inline)]
         public static implicit operator T(NK<T> src)
@@ -38,12 +44,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator NK<T>(T src)
-            => NumericKinds.kind<T>();
-
-        public NumericKind Kind
-        {
-            [MethodImpl(Inline)]
-            get => NumericKinds.kind<T>();
-        }
+            => Numeric.kind<T>();
     }
 }

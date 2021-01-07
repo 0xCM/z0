@@ -9,7 +9,6 @@ namespace Z0
     using System.Collections.Generic;
 
     using static Part;
-    using static z;
 
     partial struct ApiQuery
     {
@@ -39,7 +38,7 @@ namespace Z0
                 if(deduplicate)
                     HashTable = items.Where(i => !duplicates.Contains(i.Item1.Identifier)).ToDictionary();
                 else
-                    corefunc.@throw(DuplicateKeyException(duplicates));
+                    @throw(DuplicateKeyException(duplicates));
             }
             else
                 HashTable = src.ToDictionary();

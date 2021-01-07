@@ -14,7 +14,7 @@ namespace Z0
     {
         public Assembly Component {get;}
 
-        public FS.FilePath ImagePath => FS.path(Component.CodeBase);
+        public FS.FilePath ImagePath => FS.path(Component.Location);
 
         public FS.FolderPath ImageDir => ImagePath.FolderPath;
 

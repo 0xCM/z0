@@ -169,6 +169,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.gen.shell", "src\gen\she
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.run", "src\run\z0.run.csproj", "{0A92E0FB-8D3D-468C-AD52-384288336B9F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.reactors", "src\reactors\z0.reactors.csproj", "{39FA5D5D-674C-4ADC-9293-4F74205790C8}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		src\share\z0.share.projitems*{666886d1-8cc4-481c-a270-9166da0bc711}*SharedItemsImports = 13
@@ -454,6 +456,10 @@ Global
 		{0A92E0FB-8D3D-468C-AD52-384288336B9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0A92E0FB-8D3D-468C-AD52-384288336B9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0A92E0FB-8D3D-468C-AD52-384288336B9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39FA5D5D-674C-4ADC-9293-4F74205790C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39FA5D5D-674C-4ADC-9293-4F74205790C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39FA5D5D-674C-4ADC-9293-4F74205790C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39FA5D5D-674C-4ADC-9293-4F74205790C8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -526,6 +532,7 @@ Global
 		{1FA1104F-9D5D-4D0B-968D-5404970F50C5} = {C3380EA2-79EB-48EE-8999-FEA4D592DB02}
 		{C0748709-F7D6-452F-BE9D-2D0F64FEA496} = {C3380EA2-79EB-48EE-8999-FEA4D592DB02}
 		{0A92E0FB-8D3D-468C-AD52-384288336B9F} = {A5FA280E-F0F4-49EA-806D-D814BD4014E4}
+		{39FA5D5D-674C-4ADC-9293-4F74205790C8} = {A5FA280E-F0F4-49EA-806D-D814BD4014E4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {75DBF59A-77AC-430F-B85D-CC30D6061CCB}

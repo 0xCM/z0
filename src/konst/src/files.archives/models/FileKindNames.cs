@@ -177,5 +177,10 @@ namespace Z0
         /// Defines the 'ps1' literal
         /// </summary>
         public const string ps1 = nameof(ps1);
+
+        /// <summary>
+        /// Defines the 'dmp' literal
+        /// </summary>
+        public const string dmp = nameof(dmp);
     }
 }

@@ -27,7 +27,7 @@ namespace Z0
             => VectorWidth.W256;
 
         public NumericKind CellKind
-            => NumericKinds.kind<T>();
+            => Numeric.kind<T>();
 
         public NumericWidth CellWidth
             => (NumericWidth)Widths.bits<T>();

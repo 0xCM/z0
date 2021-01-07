@@ -17,11 +17,10 @@ namespace Z0
 
         PartId = 12,
 
-        ImageName = 60,
-
         Gap = 10,
 
-        ImageSize = 10,
+        ImageName = 60,
+
     }
 
 

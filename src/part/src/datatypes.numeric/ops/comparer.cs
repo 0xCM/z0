@@ -6,16 +6,11 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
 
     using static Part;
 
-    [ApiHost]
-    public readonly partial struct Numeric
+    partial struct Numeric
     {
-
-        const NumericKind Closure = AllNumeric;
-
         /// <summary>
         /// Creates a parametric numeric comparer
         /// </summary>
@@ -64,48 +59,34 @@ namespace Z0
                 throw no<T>();
         }
 
-        static IComparer<sbyte> Compare8i()
+        static ComparerProxy<sbyte> Compare8i()
             => new ComparerProxy<sbyte>((a,b) => a.CompareTo(b));
 
-        static IComparer<byte> Compare8u()
+        static ComparerProxy<byte> Compare8u()
             => new ComparerProxy<byte>((a,b) => a.CompareTo(b));
 
-        static IComparer<short> Compare16i()
+        static ComparerProxy<short> Compare16i()
             => new ComparerProxy<short>((a,b) => a.CompareTo(b));
 
-        static IComparer<ushort> Compare16u()
+        static ComparerProxy<ushort> Compare16u()
             => new ComparerProxy<ushort>((a,b) => a.CompareTo(b));
 
-        static IComparer<int> Compare32i()
+        static ComparerProxy<int> Compare32i()
             => new ComparerProxy<int>((a,b) => a.CompareTo(b));
 
-        static IComparer<uint> Compare32u()
+        static ComparerProxy<uint> Compare32u()
             => new ComparerProxy<uint>((a,b) => a.CompareTo(b));
 
-        static IComparer<long> Compare64i()
+        static ComparerProxy<long> Compare64i()
             => new ComparerProxy<long>((a,b) => a.CompareTo(b));
 
-        static IComparer<ulong> Compare64u()
+        static ComparerProxy<ulong> Compare64u()
             => new ComparerProxy<ulong>((a,b) => a.CompareTo(b));
 
-        static IComparer<float> Compare32f()
+        static ComparerProxy<float> Compare32f()
             => new ComparerProxy<float>((a,b) => a.CompareTo(b));
 
-        static IComparer<double> Compare64f()
+        static ComparerProxy<double> Compare64f()
             => new ComparerProxy<double>((a,b) => a.CompareTo(b));
     }
-
-     partial class XTend
-     {
-        /// <summary>
-        /// Determines whether any elements of the source match the target
-        /// </summary>
-        /// <param name="src">The source values</param>
-        /// <param name="target">The target value to match</param>
-        /// <typeparam name="T">The value type</typeparam>
-        [MethodImpl(Inline)]
-        public static bool Contains<T>(this ReadOnlySpan<T> src, T target)
-            where T : unmanaged
-                => src.BinarySearch(target, Numeric.comparer<T>()) >= 0;
-     }
 }

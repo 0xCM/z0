@@ -148,5 +148,10 @@ namespace Z0
         /// Defines the <see cref='bat'/> <see cref='FileExt'/>
         /// </summary>
         public static FileExt Bat => ext(bat);
+
+        /// <summary>
+        /// Defines the <see cref='dmp'/> <see cref='FileExt'/>
+        /// </summary>
+        public static FileExt Dmp => ext(dmp);
     }
 }

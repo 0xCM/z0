@@ -10,7 +10,8 @@
     <ProjectReference Include="$(Merge)" />
     <ProjectReference Include="$(VSvc)" />
     <ProjectReference Include="$(Logix)" />
-
+    <ProjectReference Include="$(Gen)" />
+    <ProjectReference Include="$(Reactors)" />
   </ItemGroup>
 
   <ItemGroup>

@@ -13,6 +13,9 @@ namespace Z0
     [ApiHost]
     public readonly partial struct Archives
     {
+        public static IRuntimeArchive runtime(IWfShell wf)
+            => RuntimeArchive.create(wf.Controller.ImageDir);
+
         [MethodImpl(Inline)]
         public static IApiHexReader hexreader<H>(H rep = default)
             where H : struct, IArchiveReader
@@ -84,7 +87,7 @@ namespace Z0
         [Op]
         public static FS.Files match(FS.FolderPath root, params FS.FileExt[] ext)
         {
-            var files = create(root, ext).ArchivedFiles().Array();
+            var files = create(root, ext).ArchiveFiles().Array();
             Array.Sort(files);
             return files;
         }
@@ -92,7 +95,7 @@ namespace Z0
         [Op]
         public static FS.Files match(FS.FolderPath root, uint max, params FS.FileExt[] ext)
         {
-            var files = create(root, ext).ArchivedFiles().Take(max).Array();
+            var files = create(root, ext).ArchiveFiles().Take(max).Array();
             Array.Sort(files);
             return files;
         }

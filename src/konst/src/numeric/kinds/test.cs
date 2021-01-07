@@ -17,6 +17,6 @@ namespace Z0
         /// <param name="src">The source type</param>
         [MethodImpl(Inline), Op]
         public static bool test(Type src)
-            => kind(src) != 0;
+            => Numeric.kind(src) != 0;
     }
 }

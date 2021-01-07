@@ -66,5 +66,7 @@ namespace Z0
         public const string tmp = nameof(tmp);
 
         public const string data = nameof(data);
+
+        public const string dumps = nameof(dumps);
     }
 }

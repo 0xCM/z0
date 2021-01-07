@@ -9,17 +9,9 @@ namespace Z0
 
     using static Part;
 
-    public struct BuildArchive : IBuildArchive
+    [ApiHost]
+    public static partial class XNumeric
     {
-        readonly IWfShell Wf;
 
-        public FS.FolderPath Root {get;}
-
-        [MethodImpl(Inline)]
-        public BuildArchive(IWfShell wf, FS.FolderPath root)
-        {
-            Wf = wf;
-            Root = root;
-        }
     }
 }

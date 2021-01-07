@@ -9,7 +9,6 @@ namespace Z0
     using System.IO;
 
     using static Part;
-    using static corefunc;
 
     struct ImageCsvReader : IImageReader
     {
@@ -33,7 +32,7 @@ namespace Z0
             Source = src;
             CurrentIndex = 0;
             if(!src.Exists)
-                corefunc.@throw(new FileNotFoundException(src.ToUri().Format()));
+                @throw(new FileNotFoundException(src.ToUri().Format()));
             Reader = src.Reader();
             FileSize = src.Size;
             Header = Reader.ReadLine();
@@ -52,8 +51,8 @@ namespace Z0
             if(parts.Length != 2)
                 return false;
 
-            data.Address = succeed(HexNumericParser.parse(parts[0]));
-            data.Data = succeed(ByteParser.ParseData(parts[1]));
+            data.Address = corefunc.succeed(HexNumericParser.parse(parts[0]));
+            data.Data = corefunc.succeed(ByteParser.ParseData(parts[1]));
 
             return true;
         }

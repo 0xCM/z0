@@ -15,7 +15,7 @@ namespace Z0
         where T : unmanaged
     {
         NumericKind IMaskSpec.K
-            => NumericKinds.kind<T>();
+            => Numeric.kind<T>();
 
         T t => default;
     }

@@ -23,7 +23,7 @@ namespace Z0
         public static OpIdentity sfunc<W,T>(string opname, W w = default, T t = default, bool generic = true)
             where W : unmanaged, ITypeNat
             where T : unmanaged
-                => build(opname, (TypeWidth)TypeNats.value<W>(), NumericKinds.kind<T>(), generic);
+                => build(opname, (TypeWidth)TypeNats.value<W>(), Numeric.kind<T>(), generic);
 
         /// <summary>
         /// Defines an operand identifier of the form {opname}_N{u | i | f} that identifies an operation over a primal type of bit width N := bitsize[T]

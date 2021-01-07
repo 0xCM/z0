@@ -63,6 +63,7 @@
     <Nats>$(Src)nats/z0.nats.csproj</Nats>
 
     <Polyrand>$(Src)polyrand/z0.polyrand.csproj</Polyrand>
+    <Reactors>$(Src)reactors/z0.reactors.csproj</Reactors>
 
     <Stats>$(Src)stats/z0.stats.csproj</Stats>
 
@@ -70,8 +71,8 @@
 
     <Validity>$(Src)validity/z0.validity.csproj</Validity>
     <VSvc>$(Src)vsvc/z0.vsvc.csproj</VSvc>
-
     <Xed>$(Src)xed/z0.xed.csproj</Xed>
+
   </PropertyGroup>
 
 </Project>

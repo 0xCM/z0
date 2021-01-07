@@ -64,7 +64,7 @@ namespace Z0
         void Init(ulong s0, ulong index)
         {
             if(index % 2 == 0)
-                corefunc.@throw(new ArgumentException($"Then index value {index} is not odd"));
+                @throw(new ArgumentException($"Then index value {index} is not odd"));
 
             Index = (index << 1) | 1u;
             Step();

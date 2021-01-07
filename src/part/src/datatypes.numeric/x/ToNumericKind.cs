@@ -8,9 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static NumericKinds;
 
-    partial class XNumericKind
+    partial class XNumeric
     {
         /// <summary>
         /// Determines the system type represented by a numeric kind
@@ -18,11 +17,11 @@ namespace Z0
         /// <param name="src">The source kind</param>
         [MethodImpl(Inline), Op]
         public static Type ToSystemType(this NumericKind src)
-            => type(src);
+            => Numeric.type(src);
 
         [MethodImpl(Inline), Op]
         public static NumericKind ToNumericKind(this NumericWidth width, NumericIndicator indicator)
-            => NumericKinds.kind(width, indicator);
+            => Numeric.kind(width, indicator);
 
         /// <summary>
         /// Determines the numeric kind of a type-code identified type
@@ -30,6 +29,6 @@ namespace Z0
         /// <param name="tc">The type code to evaluate</param>
         [MethodImpl(Inline), Op]
         public static NumericKind ToNumericKind(this TypeCode tc)
-            => kind(tc);
+            => Numeric.kind(tc);
     }
 }

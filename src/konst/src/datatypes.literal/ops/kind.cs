@@ -26,7 +26,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Integers8x64k)]
         public static NumericKind kind<T>(BinaryLiteral<T> src)
             where T : unmanaged
-                => NumericKinds.kind<T>();
+                => Numeric.kind<T>();
 
         [MethodImpl(Inline)]
         public static unsafe E kind<E,T>(T v)

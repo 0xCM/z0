@@ -15,7 +15,7 @@ namespace Z0
     using static ProjectModel;
 
     [ApiHost]
-    public readonly partial struct DevProjects
+    public readonly partial struct Dev
     {
         const string NetSdk = "Microsoft.NET.Sdk";
 

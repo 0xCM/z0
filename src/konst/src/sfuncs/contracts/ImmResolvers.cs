@@ -34,7 +34,7 @@ namespace Z0
         where T : unmanaged
     {
         NumericKind IImmResover.ImmKind
-            => NumericKinds.kind<T>();
+            => Numeric.kind<T>();
     }
 
     [Free, SFx]

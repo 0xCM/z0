@@ -36,7 +36,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BoxedNumber Define<T>(T src)
             where T : unmanaged
-                => new BoxedNumber(src, NumericKinds.kind<T>());
+                => new BoxedNumber(src, Numeric.kind<T>());
 
         /// <summary>
         /// Puts an enum value into a (numeric) box

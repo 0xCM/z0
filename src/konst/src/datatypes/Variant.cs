@@ -19,7 +19,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static variant from<T>(T src)
             where T : unmanaged
-                => from(store(z.force<T,ulong>(src), nk<T>()));
+                => from(store(z.force<T,ulong>(src), Numeric.kind<T>()));
 
         [MethodImpl(Inline), Op]
         public static variant define(ulong src, NumericKind dst)

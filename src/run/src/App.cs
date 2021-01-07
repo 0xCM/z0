@@ -112,6 +112,14 @@ namespace Z0
 
         }
 
+        void EmitDump()
+        {
+            Wf.Status("Emitting dump");
+            var dst = FS.path(@"k:\dumps\run\run.dmp");
+            dst.Delete();
+            DumpEmitter.emit(Processes.current(), dst.Name, DumpTypeOption.Full);
+        }
+
         void Run(in EmitHexIndexCmd cmd)
         {
             cmd.Dispatch(Wf).Wait();
@@ -143,7 +151,9 @@ namespace Z0
             Run(Builder.EmitImageMaps("pre-jit"));
             cmd.Dispatch(Wf).Wait();
             Run(Builder.EmitImageMaps("post-jit"));
+            EmitDump();
         }
+
         void Run(in BuildCmd cmd)
         {
             cmd.Save(Db.JobQueue()).OnSuccess(data => Wf.EmittedFile(data)).OnFailure(msg => Wf.Error(msg));
