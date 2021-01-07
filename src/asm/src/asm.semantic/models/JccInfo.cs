@@ -11,9 +11,9 @@ namespace Z0.Asm
     {
         public const string TableId = "asm.jcc";
 
-        public OpCodeId Code;
+        public IceOpCodeId Code;
 
-        public ConditionCode ConditionCode;
+        public IceConditionCode ConditionCode;
 
         public bool IsJccNear;
 

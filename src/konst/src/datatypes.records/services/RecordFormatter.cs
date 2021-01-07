@@ -22,7 +22,8 @@ namespace Z0
             Adapter = Records.adapter<T>();
         }
 
-        public string Format(in DynamicRow<T> src)
+        [MethodImpl(Inline)]
+        string Format(in DynamicRow<T> src)
             => string.Format(FormatSpec.Pattern, src.Cells);
 
         public string Format(in T src)

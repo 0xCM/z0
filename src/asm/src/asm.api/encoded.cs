@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
 
     using Z0.Asm;
 
@@ -19,7 +18,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The encoded data</param>
         [MethodImpl(Inline), Op]
-        public static EncodedInstruction encoded(Vector128<byte> src)
+        public static EncodedInstruction encoded(BinaryCode src)
             => new EncodedInstruction(src);
     }
 }

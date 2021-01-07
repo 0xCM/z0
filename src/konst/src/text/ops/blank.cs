@@ -12,11 +12,7 @@ namespace Z0
 
     partial class text
     {
-        /// <summary>
-        /// Tests whether the source string is either empty, null or consists only of whitespace
-        /// </summary>
-        /// <param name="src">The string to evaluate</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static bool blank(string src)
             => Test.blank(src);
     }

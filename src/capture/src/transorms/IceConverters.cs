@@ -90,64 +90,64 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The iced source value</param>
         [MethodImpl(Inline), Op]
-        public OpAccess Thaw(Iced.OpAccess src)
-            => (OpAccess)src;
+        public IceOpAccess Thaw(Iced.OpAccess src)
+            => (IceOpAccess)src;
 
         /// <summary>
         /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
         /// </summary>
         /// <param name="src">The iced source value</param>
         [MethodImpl(Inline), Op]
-        public OpCodeId Thaw(Iced.Code src)
-            => Enums.parse(src.ToString(), OpCodeId.INVALID);
+        public IceOpCodeId Thaw(Iced.Code src)
+            => Enums.parse(src.ToString(), IceOpCodeId.INVALID);
 
         /// <summary>
         /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
         /// </summary>
         /// <param name="src">The iced source value</param>
         [MethodImpl(Inline), Op]
-        public CodeSize Thaw(Iced.CodeSize src)
-            => (CodeSize)src;
+        public IceCodeSize Thaw(Iced.CodeSize src)
+            => (IceCodeSize)src;
 
         /// <summary>
         /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
         /// </summary>
         /// <param name="src">The iced source value</param>
         [MethodImpl(Inline), Op]
-        public ConditionCode Thaw(Iced.ConditionCode src)
-            => (ConditionCode)src;
+        public IceConditionCode Thaw(Iced.ConditionCode src)
+            => (IceConditionCode)src;
 
         /// <summary>
         /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
         /// </summary>
         /// <param name="src">The iced source value</param>
         [MethodImpl(Inline), Op]
-        public CpuidFeature Thaw(Iced.CpuidFeature src)
-            => (CpuidFeature)src;
+        public IceCpuidFeature Thaw(Iced.CpuidFeature src)
+            => (IceCpuidFeature)src;
 
         /// <summary>
         /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
         /// </summary>
         /// <param name="src">The iced source value</param>
         [MethodImpl(Inline), Op]
-        public EncodingKind Thaw(Iced.EncodingKind src)
-            => (EncodingKind)src;
+        public IceEncodingKind Thaw(Iced.EncodingKind src)
+            => (IceEncodingKind)src;
 
         /// <summary>
         /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
         /// </summary>
         /// <param name="src">The iced source value</param>
         [MethodImpl(Inline), Op]
-        public FlowControl Thaw(Iced.FlowControl src)
-            => (FlowControl)src;
+        public IceFlowControl Thaw(Iced.FlowControl src)
+            => (IceFlowControl)src;
 
         /// <summary>
         /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
         /// </summary>
         /// <param name="src">The iced source value</param>
         [MethodImpl(Inline), Op]
-        public MandatoryPrefix Thaw(Iced.MandatoryPrefix src)
-            => (MandatoryPrefix)src;
+        public IceMandatoryPrefix Thaw(Iced.MandatoryPrefix src)
+            => (IceMandatoryPrefix)src;
 
         /// <summary>
         /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
@@ -162,32 +162,32 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The iced source value</param>
         [MethodImpl(Inline), Op]
-        public Mnemonic Thaw(Iced.Mnemonic src)
-            => (Mnemonic)src;
+        public IceMnemonic Thaw(Iced.Mnemonic src)
+            => (IceMnemonic)src;
 
         /// <summary>
         /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
         /// </summary>
         /// <param name="src">The iced source value</param>
         [MethodImpl(Inline), Op]
-        public OpCodeOperandKind Thaw(Iced.OpCodeOperandKind src)
-            => (OpCodeOperandKind)src;
+        public IceOpCodeOperandKind Thaw(Iced.OpCodeOperandKind src)
+            => (IceOpCodeOperandKind)src;
 
         /// <summary>
         /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
         /// </summary>
         /// <param name="src">The iced source value</param>
         [MethodImpl(Inline), Op]
-        public OpCodeTableKind Thaw(Iced.OpCodeTableKind src)
-            => (OpCodeTableKind)src;
+        public IceOpCodeTableKind Thaw(Iced.OpCodeTableKind src)
+            => (IceOpCodeTableKind)src;
 
         /// <summary>
         /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
         /// </summary>
         /// <param name="src">The iced source value</param>
         [MethodImpl(Inline), Op]
-        public OpKind Thaw(Iced.OpKind src)
-            => (OpKind)src;
+        public IceOpKind Thaw(Iced.OpKind src)
+            => (IceOpKind)src;
 
         /// <summary>
         /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
@@ -202,23 +202,23 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The iced source value</param>
         [MethodImpl(Inline), Op]
-        public RflagsBits Thaw(Iced.RflagsBits src)
-            => (RflagsBits)src;
+        public IceRflagsBits Thaw(Iced.RflagsBits src)
+            => (IceRflagsBits)src;
 
         /// <summary>
         /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
         /// </summary>
         /// <param name="src">The iced source value</param>
         [MethodImpl(Inline), Op]
-        public RoundingControl Thaw(Iced.RoundingControl src)
-            => (RoundingControl)src;
+        public IceRoundingControl Thaw(Iced.RoundingControl src)
+            => (IceRoundingControl)src;
 
         /// <summary>
         /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
         /// </summary>
         /// <param name="src">The iced source value</param>
         [MethodImpl(Inline), Op]
-        public TupleType Thaw(Iced.TupleType src)
-            => (TupleType)src;
+        public IceTupleType Thaw(Iced.TupleType src)
+            => (IceTupleType)src;
     }
 }

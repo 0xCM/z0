@@ -9,12 +9,12 @@ namespace Z0.Asm
         //
         // Summary:
         //     Instruction code
-        OpCodeId Code {get;}
+        IceOpCodeId Code {get;}
 
         //
         // Summary:
         //     Gets the mnemonic
-        Mnemonic Mnemonic {get;}
+        IceMnemonic Mnemonic {get;}
 
         //
         // Summary:

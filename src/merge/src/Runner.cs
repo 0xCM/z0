@@ -253,7 +253,7 @@ namespace Z0
         {
             var flow = Wf.Running(Host);
 
-            var bitfield = Ice.IceInstructionBits.init();
+            var bitfield = Ice.IceInstructions.init();
             var indices = bitfield.Indices;
             var info = indices.Map(i => paired(i, (byte)i));
             foreach(var i in info)

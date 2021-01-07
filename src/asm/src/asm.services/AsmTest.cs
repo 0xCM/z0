@@ -6,7 +6,7 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
-    using static Asm.OpKind;
+    using static Asm.IceOpKind;
 
     using static Part;
 
@@ -19,17 +19,17 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The operand classification</param>
         [MethodImpl(Inline), Op]
-        public static bool isNearBranch(OpKind src)
-            => src == OpKind.NearBranch16
-            || src == OpKind.NearBranch32
-            || src == OpKind.NearBranch64;
+        public static bool isNearBranch(IceOpKind src)
+            => src == IceOpKind.NearBranch16
+            || src == IceOpKind.NearBranch32
+            || src == IceOpKind.NearBranch64;
 
         /// <summary>
         /// Determines whether a classified operand is associated with a branching instruction
         /// </summary>
         /// <param name="src">The operand classification</param>
         [MethodImpl(Inline), Op]
-        public static bool isBranch(OpKind src)
+        public static bool isBranch(IceOpKind src)
             => isNearBranch(src) || isFarBranch(src);
 
         /// <summary>
@@ -37,12 +37,12 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The source operand kind</param>
         [MethodImpl(Inline), Op]
-        public static bool isRegister(OpKind src)
-            => src == OpKind.Register;
+        public static bool isRegister(IceOpKind src)
+            => src == IceOpKind.Register;
 
         [MethodImpl(Inline), Op]
         public static bool isCall(Instruction src)
-            => src.Mnemonic == Mnemonic.Call;
+            => src.Mnemonic == IceMnemonic.Call;
 
         /// <summary>
         /// Determines whether the classified operand is a 32-bit or 64-bit far branch
@@ -50,9 +50,9 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The operand classification</param>
         [MethodImpl(Inline), Op]
-        public static bool isFarBranch(OpKind src)
-            => src == OpKind.FarBranch16
-            || src == OpKind.FarBranch32;
+        public static bool isFarBranch(IceOpKind src)
+            => src == IceOpKind.FarBranch16
+            || src == IceOpKind.FarBranch32;
 
         /// <summary>
         /// Determines whether the classified operand a sign-extended immediate which may include:
@@ -63,7 +63,7 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The operand classifier</param>
         [MethodImpl(Inline), Op]
-        public static bool isSignedImm(OpKind src)
+        public static bool isSignedImm(IceOpKind src)
             => src == Immediate8to16
             || src == Immediate8to32
             || src == Immediate8to64
@@ -76,7 +76,7 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The operand classifier</param>
         [MethodImpl(Inline), Op]
-        public static bool isDirectImm(OpKind src)
+        public static bool isDirectImm(IceOpKind src)
             => src == Immediate8
             || src == Immediate16
             || src == Immediate32
@@ -89,7 +89,7 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The operand classifier</param>
         [MethodImpl(Inline), Op]
-        public static bool isSpecialImm(OpKind src)
+        public static bool isSpecialImm(IceOpKind src)
             => src == Immediate8_2nd;
 
         /// <summary>
@@ -97,7 +97,7 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The operand classifier</param>
         [MethodImpl(Inline), Op]
-        public static bool isImm(OpKind src)
+        public static bool isImm(IceOpKind src)
             => isSignedImm(src) || isDirectImm(src) || isSpecialImm(src);
 
         [MethodImpl(Inline), Op]
@@ -124,7 +124,7 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The operand classifier</param>
         [MethodImpl(Inline), Op]
-        public static  bool isMem(OpKind src)
+        public static  bool isMem(IceOpKind src)
             => isMemDirect(src) || isMem64(src) || isSegEs(src) || isSegBase(src);
 
         /// <summary>
@@ -135,8 +135,8 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The operand classifier</param>
         [MethodImpl(Inline), Op]
-        public static bool isMemDirect(OpKind src)
-            => src == OpKind.Memory;
+        public static bool isMemDirect(IceOpKind src)
+            => src == IceOpKind.Memory;
 
         /// <summary>
         /// Determines whether the classified operand is a 64-bit memory offset.
@@ -145,8 +145,8 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The operand classifier</param>
         [MethodImpl(Inline), Op]
-        public static bool isMem64(OpKind src)
-            => src == OpKind.Memory64;
+        public static bool isMem64(IceOpKind src)
+            => src == IceOpKind.Memory64;
 
         /// <summary>
         /// Determines whether the classified operand is a segment of the form
@@ -155,7 +155,7 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The operand classifier</param>
         [MethodImpl(Inline), Op]
-        public static bool isSegBase(OpKind src)
+        public static bool isSegBase(IceOpKind src)
             => src == MemorySegDI
             || src == MemorySegEDI
             || src == MemorySegESI
@@ -170,10 +170,10 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The operand classifier</param>
         [MethodImpl(Inline), Op]
-        public static bool isSegEs(OpKind src)
-            => src == OpKind.MemoryESDI
-            || src == OpKind.MemoryESEDI
-            || src == OpKind.MemoryESRDI;
+        public static bool isSegEs(IceOpKind src)
+            => src == IceOpKind.MemoryESDI
+            || src == IceOpKind.MemoryESEDI
+            || src == IceOpKind.MemoryESRDI;
 
 
         [MethodImpl(Inline), Op]

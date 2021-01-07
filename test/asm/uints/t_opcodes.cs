@@ -23,7 +23,7 @@ namespace Z0.Asm
             }
         }
 
-        void emit(ReadOnlySpan<AsmOpCodePattern> src)
+        void emit(ReadOnlySpan<AsmOpCode> src)
         {
             var dstPath = CasePath($"OpCodeIdentifiers");
             using var writer = dstPath.Writer();

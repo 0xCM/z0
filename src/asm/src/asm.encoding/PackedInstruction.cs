@@ -34,19 +34,19 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         public byte Register(N1 n)
-            => vcell(Data,1);
+            => vcell(Data, 1);
 
         [MethodImpl(Inline)]
         public byte Register(N2 n)
-            => vcell(Data,2);
+            => vcell(Data, 2);
 
         [MethodImpl(Inline)]
         public byte Register(N3 n)
-            => vcell(Data,3);
+            => vcell(Data, 3);
 
         [MethodImpl(Inline)]
         public byte Register(byte index)
-            => vcell(Data,index);
+            => vcell(Data, index);
 
         public byte BaseRegister
         {

@@ -6,30 +6,30 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
 
     using static Part;
-    using static z;
 
     /// <summary>
     /// Defines an encoded instruction
     /// </summary>
-    public readonly struct EncodedInstruction
+    public readonly ref struct EncodedInstruction
     {
-        public readonly Vector128<byte> Data;
+        readonly ReadOnlySpan<byte> Code;
 
         [MethodImpl(Inline)]
-        public EncodedInstruction(Vector128<byte> src)
-            => Data = src;
+        public EncodedInstruction(ReadOnlySpan<byte> code)
+            => Code = code;
 
-        /// <summary>
-        /// Specifies the size of the command, in bytes, which is constrained to a number
-        /// between 0 (the empty command) and 15 (The maximum instruction size)
-        /// </summary>
-        public byte EncodingSize
+        public byte Size
         {
             [MethodImpl(Inline)]
-            get => vcell(Data, 15);
+            get => (byte)Code.Length;
+        }
+
+        public ReadOnlySpan<byte> Data
+        {
+            [MethodImpl(Inline)]
+            get => Code;
         }
     }
 }

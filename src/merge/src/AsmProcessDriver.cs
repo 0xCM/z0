@@ -16,7 +16,7 @@ namespace Z0
 
     public readonly struct AsmProcessDriver
     {
-        readonly Dictionary<Mnemonic, ArrayBuilder<AsmRow>> Index;
+        readonly Dictionary<IceMnemonic, ArrayBuilder<AsmRow>> Index;
 
         readonly IWfShell Wf;
 
@@ -52,12 +52,12 @@ namespace Z0
             Asm = asm;
             Encoded = encoded;
             Parser = AsmMnemonicParser.Create();
-            Index = new Dictionary<Mnemonic, ArrayBuilder<AsmRow>>();
+            Index = new Dictionary<IceMnemonic, ArrayBuilder<AsmRow>>();
             Sequence = sys.alloc<int>(1);
             Offset = sys.alloc<uint>(1);
         }
 
-        public AsmRowSets<Mnemonic> Process()
+        public AsmRowSets<IceMnemonic> Process()
         {
             using var flow = Wf.Running();
             var locations = span(Encoded.Locations);
@@ -80,11 +80,11 @@ namespace Z0
                 Process(src.Code, decoded.Value);
         }
 
-        AsmRowSets<Mnemonic> Processed()
+        AsmRowSets<IceMnemonic> Processed()
         {
             var keys = Index.Keys.ToArray();
             var count = keys.Length;
-            var sets = new AsmRowSet<Mnemonic>[count];
+            var sets = new AsmRowSet<IceMnemonic>[count];
             for(var i=0; i<count; i++)
             {
                 var key = keys[i];
@@ -138,7 +138,7 @@ namespace Z0
                 record.SourceCode = src.FormattedInstruction;
                 record.Instruction = src.Specifier.Sig;
                 record.CpuId = text.embrace(src.CpuidFeatures.Select(x => x.ToString()).Concat(","));
-                record.OpCodeId = (OpCodeId)src.Code;
+                record.OpCodeId = (IceOpCodeId)src.Code;
 
                 // var record = new AsmRow(
                 //     Sequence: NextSequence,

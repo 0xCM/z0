@@ -15,13 +15,13 @@ namespace Z0
     {
         public IWfShell Wf {get;}
 
-        public IWfDataBroker<Mnemonic,ApiInstruction> Broker {get;}
+        public IWfDataBroker<IceMnemonic,ApiInstruction> Broker {get;}
 
         [MethodImpl(Inline)]
         public WfAsmProcessor(IWfShell wf)
         {
             Wf = wf;
-            Broker = WfBrokers.create<Mnemonic,ApiInstruction>((int)Mnemonic.LAST);
+            Broker = WfBrokers.create<IceMnemonic,ApiInstruction>((int)IceMnemonic.LAST);
         }
 
         [MethodImpl(Inline)]

@@ -7,7 +7,7 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     public struct AsmOpCodePartitoner
@@ -49,33 +49,23 @@ namespace Z0.Asm
 
         [MethodImpl(Inline), Op]
         void Process(OperatingMode src, in AsmOpCodeGroup handler)
-        {
-            handler.Include(this, src);
-        }
+            => handler.Include(this, src);
 
         [MethodImpl(Inline), Op]
         void Process(in AsmSig src, in AsmOpCodeGroup handler)
-        {
-            handler.Include(this, src);
-        }
+            => handler.Include(this, src);
 
         [MethodImpl(Inline), Op]
-        void Process(in AsmOpCodeExpression src, in AsmOpCodeGroup handler)
-        {
-            handler.Include(this, src);
-        }
+        void Process(in AsmOpCode src, in AsmOpCodeGroup handler)
+            => handler.Include(this, src);
 
         [MethodImpl(Inline), Op]
         void Process(in MnemonicExpression src, in AsmOpCodeGroup handler)
-        {
-            handler.Include(this, src);
-        }
+            => handler.Include(this, src);
 
         [MethodImpl(Inline), Op]
         void Process(in CpuidExpression src, in AsmOpCodeGroup handler)
-        {
-            handler.Include(this, src);
-        }
+            => handler.Include(this, src);
 
         [MethodImpl(Inline), Op]
         static MnemonicExpression Mnemonic(in AsmOpCodeRow src)
@@ -86,8 +76,8 @@ namespace Z0.Asm
             => new CpuidExpression(src.CpuId);
 
         [MethodImpl(Inline), Op]
-        static AsmOpCodeExpression OpCode(in AsmOpCodeRow src)
-            => new AsmOpCodeExpression(src.OpCode);
+        static AsmOpCode OpCode(in AsmOpCodeRow src)
+            => new AsmOpCode(src.OpCode);
 
         [MethodImpl(Inline), Op]
         static AsmSig Instruction(in AsmOpCodeRow src)

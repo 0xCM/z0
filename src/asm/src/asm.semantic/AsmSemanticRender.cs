@@ -15,7 +15,7 @@ namespace Z0
     using static Konst;
     using static z;
     using static AsmSemanticDefaults;
-    using static Z0.Asm.OpKind;
+    using static Z0.Asm.IceOpKind;
 
     [ApiHost(ApiNames.AsmSemanticRender, true)]
     public readonly struct AsmSemanticRender : IDisposable
@@ -270,14 +270,14 @@ namespace Z0
             => format(src);
 
         [Op, MethodImpl(NotInline)]
-        static string format(OpKind src)
+        static string format(IceOpKind src)
         {
             var si = FormatSegKind(src);
             if(text.nonempty(si))
                 return si;
 
             var result = src switch{
-		    OpKind.Register => "register",
+		    IceOpKind.Register => "register",
             NearBranch16 => "branch16",
 		    NearBranch32 => "branch32",
 		    NearBranch64 => "branch64",
@@ -301,7 +301,7 @@ namespace Z0
         }
 
         [Op]
-        static string Render(OpKind src)
+        static string Render(IceOpKind src)
             => format(src);
 
         [Op]
@@ -330,7 +330,7 @@ namespace Z0
             => text.blank(symbol) ? EmptyString : text.concat("seg:", Chars.LBracket, symbol, Chars.RBracket);
 
         [Op]
-        static string FormatSegKind(OpKind src)
+        static string FormatSegKind(IceOpKind src)
             => FormatSegKind(src switch {
                 MemorySegDI => "di",
                 MemorySegEDI => "edi",

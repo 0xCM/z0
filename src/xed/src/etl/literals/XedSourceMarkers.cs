@@ -73,6 +73,6 @@ namespace Z0
 
         public const string Separator = RP.PageBreak120;
 
-        public const string PRODUCTION = " | ";
+        public const string Bar = " | ";
     }
 }

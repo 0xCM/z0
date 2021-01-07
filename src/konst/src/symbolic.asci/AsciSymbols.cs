@@ -7,9 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static z;
+    using static memory;
     using static Part;
-    using static AsciKonst;
+    using static AsciSymData;
 
     [ApiHost(ApiNames.AsciSymbols, true)]
     public readonly struct AsciSymbols
@@ -33,7 +33,7 @@ namespace Z0
         /// <param name="count">Tne number of codes to select</param>
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<AsciCharCode> codes(sbyte offset, sbyte count)
-            => recover<AsciCharCode>(AsciKonst.CodeBytes.Slice(offset,count));
+            => recover<AsciCharCode>(AsciSymData.CodeBytes.Slice(offset,count));
 
         /// <summary>
         /// Returns the asci characters corresponding to the asci codes [offset, ..., offset + count] where offset <= (2^7-1) - count

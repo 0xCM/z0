@@ -26,8 +26,7 @@ namespace Z0
         /// </summary>
         /// <param name="widths">The column widths</param>
         /// <typeparam name="T">The record type</typeparam>
-        [MethodImpl(Inline)]
-        public static RecordFormatter<T> formatter<T>(ReadOnlySpan<byte> widths)
+        public static IRecordFormatter<T> formatter<T>(ReadOnlySpan<byte> widths)
             where T : struct, IRecord<T>
                 => formatter<T>(rowspec<T>(widths));
 
@@ -36,12 +35,10 @@ namespace Z0
         /// </summary>
         /// <param name="widths">The column widths</param>
         /// <typeparam name="T">The record type</typeparam>
-        [MethodImpl(Inline)]
         public static IRecordFormatter<T> formatter<T>(byte fieldwidth)
             where T : struct, IRecord<T>
                 => formatter<T>(rowspec<T>(fieldwidth));
 
-        [MethodImpl(Inline)]
         public static IRecordFormatter<T> formatter<E,T>()
             where E : unmanaged, Enum
             where T : struct, IRecord<T>

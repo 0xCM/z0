@@ -16,9 +16,9 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The record type</typeparam>
     public struct RowAdapter<T>
-        where T : struct
+        where T : struct, IRecord<T>
     {
-        public RecordFields Fields {get;}
+        readonly RecordFields Fields;
 
         uint Index;
 
@@ -27,12 +27,12 @@ namespace Z0
         DynamicRow<T> Row;
 
         [MethodImpl(Inline)]
-        public RowAdapter(RecordFields fields, uint index = 0)
+        public RowAdapter(RecordFields fields)
         {
             Source = default;
-            Index = index;
+            Index = 0;
             Fields = fields;
-            Row = api.row<T>(fields.Count);
+            Row = api.row<T>(Fields.Count);
         }
 
         [MethodImpl(Inline)]
@@ -47,6 +47,12 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => Row;
+        }
+
+        public Count AdaptedCount
+        {
+            [MethodImpl(Inline)]
+            get => Index;
         }
     }
 }

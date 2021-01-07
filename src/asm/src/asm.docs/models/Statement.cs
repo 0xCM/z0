@@ -7,7 +7,7 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     partial struct AsmDocParts
     {
@@ -16,12 +16,12 @@ namespace Z0.Asm
         /// </summary>
         public readonly struct Statement
         {
-            public Mnemonic Mnemonic {get;}
+            public IceMnemonic Mnemonic {get;}
 
             public string[] Operands {get;}
 
             [MethodImpl(Inline)]
-            public Statement(Mnemonic mnemonic, string[] operands)
+            public Statement(IceMnemonic mnemonic, string[] operands)
             {
                 Mnemonic = mnemonic;
                 Operands = operands;

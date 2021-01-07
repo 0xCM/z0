@@ -85,9 +85,9 @@ namespace Z0
                         var fc = fx.Instruction.FlowControl;
                         switch(fc)
                         {
-                            case FlowControl.ConditionalBranch:
-                            case FlowControl.UnconditionalBranch:
-                            case FlowControl.IndirectBranch:
+                            case IceFlowControl.ConditionalBranch:
+                            case IceFlowControl.UnconditionalBranch:
+                            case IceFlowControl.IndirectBranch:
                             Dispatch(fx);
                                 break;
                         }

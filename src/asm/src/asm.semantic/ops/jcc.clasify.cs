@@ -12,64 +12,64 @@ namespace Z0.Asm
     partial struct AsmSemantic
     {
         [MethodImpl(Inline), Op]
-        public static JccKind jccKind(Mnemonic src)
+        public static JccKind jccKind(IceMnemonic src)
             => classify(src, out JccKind _);
 
         [Op]
-        public static ref JccKind classify(Mnemonic src, out JccKind kind)
+        public static ref JccKind classify(IceMnemonic src, out JccKind kind)
         {
             kind = JccKind.None;
             switch(src)
             {
-                case Mnemonic.Ja:
+                case IceMnemonic.Ja:
                     kind = JccKind.JA;
                     break;
-                case Mnemonic.Jae:
+                case IceMnemonic.Jae:
                     kind = JccKind.JAE;
                     break;
-                case Mnemonic.Jb:
+                case IceMnemonic.Jb:
                     kind = JccKind.JB;
                     break;
-                case Mnemonic.Jbe:
+                case IceMnemonic.Jbe:
                     kind = JccKind.JE;
                     break;
-                case Mnemonic.Jcxz:
+                case IceMnemonic.Jcxz:
                     kind = JccKind.JCXZ;
                     break;
-                case Mnemonic.Je:
+                case IceMnemonic.Je:
                     kind = JccKind.JE;
                     break;
-                case Mnemonic.Jg:
+                case IceMnemonic.Jg:
                     kind = JccKind.JG;
                     break;
-                case Mnemonic.Jge:
+                case IceMnemonic.Jge:
                     kind = JccKind.JGE;
                     break;
-                case Mnemonic.Jl:
+                case IceMnemonic.Jl:
                     kind = JccKind.JL;
                     break;
-                case Mnemonic.Jle:
+                case IceMnemonic.Jle:
                     kind = JccKind.JLE;
                     break;
-                case Mnemonic.Jmp:
+                case IceMnemonic.Jmp:
                     kind = JccKind.JMP;
                     break;
-                case Mnemonic.Jne:
+                case IceMnemonic.Jne:
                     kind = JccKind.JNE;
                     break;
-                case Mnemonic.Jno:
+                case IceMnemonic.Jno:
                     kind = JccKind.JNO;
                     break;
-                case Mnemonic.Jnp:
+                case IceMnemonic.Jnp:
                     kind = JccKind.JNP;
                     break;
-                case Mnemonic.Jns:
+                case IceMnemonic.Jns:
                     kind = JccKind.JNS;
                     break;
-                case Mnemonic.Jo:
+                case IceMnemonic.Jo:
                     kind = JccKind.JO;
                     break;
-                case Mnemonic.Jp:
+                case IceMnemonic.Jp:
                     kind= JccKind.JP;
                     break;
                 default:

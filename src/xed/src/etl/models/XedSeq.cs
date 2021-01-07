@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     public readonly struct XedSeq : IXedRule<XedSeq>
     {
@@ -17,6 +17,7 @@ namespace Z0
 
         public Index<string> Terms {get;}
 
+        [MethodImpl(Inline)]
         public XedSeq(string name, string[] terms)
         {
             Name = name;

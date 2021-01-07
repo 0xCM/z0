@@ -12,23 +12,23 @@ namespace Z0.Asm
         //
         // Summary:
         //     Gets operand #0's kind if the operand exists (see Iced.Intel.Instruction.OpCount)
-        OpKind Op0Kind {get; }
+        IceOpKind Op0Kind {get; }
         //
         // Summary:
         //     Gets operand #1's kind if the operand exists (see Iced.Intel.Instruction.OpCount)
-        OpKind Op1Kind {get;}
+        IceOpKind Op1Kind {get;}
         //
         // Summary:
         //     Gets operand #2's kind if the operand exists (see Iced.Intel.Instruction.OpCount)
-        OpKind Op2Kind {get;}
+        IceOpKind Op2Kind {get;}
         //
         // Summary:
         //     Gets operand #3's kind if the operand exists (see Iced.Intel.Instruction.OpCount)
-        OpKind Op3Kind {get;}
+        IceOpKind Op3Kind {get;}
 
         //
         // Summary:
         //     Gets operand #4's kind if the operand exists (see Iced.Intel.Instruction.OpCount)
-        OpKind Op4Kind {get;}
+        IceOpKind Op4Kind {get;}
     }
 }

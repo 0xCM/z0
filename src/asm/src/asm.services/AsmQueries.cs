@@ -17,7 +17,7 @@ namespace Z0.Asm
     {
         public static AsmCallRow[] calls(ApiInstructions src)
         {
-            var calls = asm.filter(src, Mnemonic.Call).View;
+            var calls = asm.filter(src, IceMnemonic.Call).View;
             var count = calls.Length;
             var buffer = alloc<AsmCallRow>(count);
             ref var row = ref first(span(buffer));
@@ -45,7 +45,7 @@ namespace Z0.Asm
         /// <param name="src">The source functions</param>
         public static MemoryAddress[] calls(AsmRoutine src)
             => (from i in src.Instructions
-                where i.FlowControl == FlowControl.Call
+                where i.FlowControl == IceFlowControl.Call
                     select (MemoryAddress)i.MemoryAddress64).Array();
 
         /// <summary>

@@ -39,18 +39,7 @@ namespace Z0.Asm
             emit(handler.Mnemonics, root + FS.file("mnemonics", FileExtensions.Csv));
         }
 
-        public static void emit(ReadOnlySpan<AsmOpCodePattern> src, FS.FilePath dst)
-        {
-            using var writer = dst.Writer();
-            writer.WriteLine("Identifier");
-            for(var i=0; i<src.Length; i++)
-            {
-                ref readonly var id = ref skip(src,i);
-                writer.WriteLine(id.Format().PadRight(id.Value.Capacity));
-            }
-        }
-
-        public static void emit(ReadOnlySpan<AsmOpCodeExpression> src, FS.FilePath dst)
+        public static void emit(ReadOnlySpan<AsmOpCode> src, FS.FilePath dst)
         {
             using var writer = dst.Writer();
             writer.WriteLine("OpCode");

@@ -83,8 +83,7 @@ namespace Z0
             for(var i = ix; i<data.RowCount; i++)
             {
                 ref readonly var row = ref data[ix];
-
-                var isHeader = Contains(row,RuleMarker);
+                var isHeader = Contains(row, RuleMarker);
                 if(isHeader)
                 {
                     if(i != first)

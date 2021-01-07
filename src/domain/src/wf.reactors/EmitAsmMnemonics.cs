@@ -25,7 +25,7 @@ namespace Z0
             var src = symbols.Mnemonics.View;
             var count = src.Length;
             var fields = Enums.literals<SymbolAspectKind>();
-            var symType = typeof(Asm.Mnemonic);
+            var symType = typeof(Asm.IceMnemonic);
             var cellType = typeof(ushort);
             var header = text.format(RenderPattern, SymbolAspectKind.SymbolValue, SymbolAspectKind.SymbolType, SymbolAspectKind.CellValue, SymbolAspectKind.CellType);
             using var writer = target.Writer();

@@ -13,17 +13,19 @@ namespace Z0
 
     partial class text
     {
-        [Op, Closures(Closure)]
+        [MethodImpl(Inline)]
         public static string delimit<T>(T[] src, char delimiter)
             => Format.delimit(src, delimiter);
 
+        [MethodImpl(Inline)]
         public static string delimit<T>(ReadOnlySpan<T> src, char delimiter)
             => Format.delimit(src, delimiter);
 
+        [MethodImpl(Inline)]
         public static string delimit<T>(IEnumerable<T> src, char delimiter)
             => Format.delimit(src, delimiter);
 
-        [Op]
+        [MethodImpl(Inline)]
         public static string nest(params object[] src)
             => Format.nest(src);
     }

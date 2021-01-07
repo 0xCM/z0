@@ -12,7 +12,7 @@ namespace Z0
     }
 
     public interface IRecordEmitter<T> : IRecordEmitter
-        where T : struct
+        where T : struct, IRecord<T>
     {
         void Emit(in T src);
 

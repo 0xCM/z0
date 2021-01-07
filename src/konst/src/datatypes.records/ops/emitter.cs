@@ -16,30 +16,30 @@ namespace Z0
         /// </summary>
         /// <param name="formatter">The record formatter</param>
         /// <typeparam name="T">The record type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static RecordEmitter<T> emitter<T>(RecordFormatter<T> formatter, FS.FilePath dst)
+        [Op, Closures(Closure)]
+        public static IRecordEmitter<T> emitter<T>(ReadOnlySpan<byte> widths, FS.FilePath dst)
             where T : struct, IRecord<T>
-                => new RecordEmitter<T>(formatter, dst);
+                => emitter<T>(formatter<T>(widths), dst);
 
         /// <summary>
         /// Defines a <typeparamref name='T'/> record emitter
         /// </summary>
         /// <param name="formatter">The record formatter</param>
         /// <typeparam name="T">The record type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static RecordEmitter<T> emitter<T>(ReadOnlySpan<byte> widths, FS.FilePath dst)
-            where T : struct, IRecord<T>
-                => new RecordEmitter<T>(formatter<T>(widths), dst);
-
-        /// <summary>
-        /// Defines a <typeparamref name='T'/> record emitter
-        /// </summary>
-        /// <param name="formatter">The record formatter</param>
-        /// <typeparam name="T">The record type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static RecordEmitter<T> emitter<E,T>(FS.FilePath dst)
+        [Op, Closures(Closure)]
+        public static IRecordEmitter<T> emitter<E,T>(FS.FilePath dst)
             where T : struct, IRecord<T>
             where E : unmanaged, Enum
-                => new RecordEmitter<T>(formatter<E,T>(), dst);
+                => emitter<T>(formatter<E,T>(), dst);
+
+        /// <summary>
+        /// Defines a <typeparamref name='T'/> record emitter
+        /// </summary>
+        /// <param name="formatter">The record formatter</param>
+        /// <typeparam name="T">The record type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static IRecordEmitter<T> emitter<T>(IRecordFormatter<T> formatter, FS.FilePath dst)
+            where T : struct, IRecord<T>
+                => new RecordEmitter<T>(formatter, dst);
     }
 }

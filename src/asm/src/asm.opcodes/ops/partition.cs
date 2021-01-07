@@ -10,8 +10,6 @@ namespace Z0.Asm
     using static Konst;
     using static z;
 
-    using F = AsmOpCodeField;
-
     partial struct AsmOpCodes
     {
         [Op]
@@ -20,7 +18,8 @@ namespace Z0.Asm
             var dataset = AsmOpCodes.dataset();
             var count = dataset.OpCodeCount;
             var handler = new AsmOpCodeGroup((uint)count);
-            AsmOpCodes.partition(partitoner(), handler, dataset.Entries.View);
+            var p = partitoner();
+            p.Partition(dataset.Entries.View, handler);
             return handler;
         }
 
@@ -30,21 +29,21 @@ namespace Z0.Asm
             var count = src.Length;
             var s0 = 0u;
             for(var i=s0; i<count; i++)
-                partition(skip(src,i), handler, ref s0);
+            {
+                ref readonly var row = ref skip(src,i);
+                process(row, handler, ref s0);
+                s0++;
+                //partition(skip(src,i), handler, ref s0);
+            }
+
             return s0;
         }
 
-        [Op]
-        public static void partition(in AsmOpCodePartitoner processor, in AsmOpCodeGroup handler, ReadOnlySpan<AsmOpCodeRow> src)
-            => processor.Partition(src, handler);
-
-        [MethodImpl(Inline), Op]
-        static void partition(in AsmOpCodeRow src, in AsmOpCodeGroup handler, ref uint s0)
-        {
-            process(src, handler, ref s0);
-            s0++;
-        }
-
-
+        // [MethodImpl(Inline), Op]
+        // static void partition(in AsmOpCodeRow src, in AsmOpCodeGroup handler, ref uint s0)
+        // {
+        //     process(src, handler, ref s0);
+        //     s0++;
+        // }
     }
 }

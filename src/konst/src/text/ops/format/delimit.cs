@@ -61,20 +61,6 @@ namespace Z0
             /// <typeparam name="T">A formattable type</typeparam>
             public static string delimit<T>(IEnumerable<T> src, char delimiter)
                 => string.Join($"{delimiter} ", src);
-
-            const char NestedLeftFence = Chars.LBrace;
-
-            const char NestedRightFence = Chars.RBrace;
-
-            [Op]
-            public static string nest(params object[] src)
-                => text.format(RP.SSx5,
-                    FieldDelimiter,
-                    NestedLeftFence,
-                    text.concat(src.Select(x => delimit(src,FieldDelimiter))),
-                    NestedRightFence,
-                    FieldDelimiter
-                    );
         }
     }
 }

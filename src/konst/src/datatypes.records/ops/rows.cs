@@ -31,7 +31,7 @@ namespace Z0
         {
             var count = (uint)src.Length;
             var buffer = rows<T>(count);
-            Records.load(fields, src, buffer);
+            load(fields, src, buffer);
             return buffer;
         }
 

@@ -29,8 +29,12 @@ namespace Z0.Asm
             => result = @enum(src, out var _, YeaOrNea.N);
 
         [MethodImpl(Inline), Op]
-        public OpCodeId Parse(string src, out OpCodeId result)
-            => result = @enum(src, out var _, OpCodeId.INVALID);
+        public bit Parse(string src, out bit result)
+            => result = bit.Parse(text.ifempty(src, "0")[0]);
+
+        [MethodImpl(Inline), Op]
+        public IceOpCodeId Parse(string src, out IceOpCodeId result)
+            => result = @enum(src, out var _, IceOpCodeId.INVALID);
 
         [MethodImpl(Inline), Op]
         public byte Parse(string src, out byte result, byte? @default = null)

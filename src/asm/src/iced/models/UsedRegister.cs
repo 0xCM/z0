@@ -17,14 +17,14 @@ namespace Z0.Asm
         /// <summary>
         /// Register access
         /// </summary>
-        public readonly OpAccess Access;
+        public readonly IceOpAccess Access;
 
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="reg">Register</param>
         /// <param name="access">Register access</param>
-        public UsedRegister(IceRegister reg, OpAccess access)
+        public UsedRegister(IceRegister reg, IceOpAccess access)
         {
             Register = reg;
             Access = access;

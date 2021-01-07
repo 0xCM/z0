@@ -95,10 +95,6 @@ namespace Z0
 
 
         [MethodImpl(Inline), Op]
-        public static RuleOperand operand(string name, string value)
-            => new RuleOperand(name, value);
-
-        [MethodImpl(Inline), Op]
         public static RuleOperand operand(string value)
             => new RuleOperand(value);
 
@@ -124,7 +120,7 @@ namespace Z0
         }
 
         [Op]
-        public static void emit(IWfShell wf, in XedWfConfig config, in XedSources xs)
+        public static void emit(IWfShell wf, in XedWfConfig config, in XedDataSource xs)
         {
             var parser = XedSourceParser.Service;
             var sources = xs.FunctionFiles.View;
@@ -176,6 +172,33 @@ namespace Z0
             }
         }
 
+        static int operands(ReadOnlySpan<char> src, out Span<string> dst)
+        {
+            var operands = corefunc.list<string>();
+            var length = src.Length;
+            var current = EmptyString;
+            for(var i=0; i<length; i++)
+            {
+                ref readonly var c = ref skip(src,i);
+                if(Char.IsWhiteSpace(c))
+                {
+                    if(text.nonempty(current))
+                    {
+                        operands.Add(current);
+                        current = EmptyString;
+                    }
+                }
+                else
+                    current += c;
+            }
+
+            if(text.nonempty(current))
+                operands.Add(current);
+
+            dst = operands.ToArray();
+            return dst.Length;
+        }
+
         [Op]
         public static void emit(in XedRuleSet ruleset, StreamWriter writer)
         {
@@ -192,29 +215,53 @@ namespace Z0
                     if(line.Contains(IMPLIES))
                     {
                         var left = line.LeftOfFirst(IMPLIES);
-                        var operands = left.SplitClean(Chars.Space);
-                        var lhs = text.parenthetical(operands.Length != 0 ? operands.Intersperse(", ").Concat() : left);
+                        var opcount = Xed.operands(left, out var _operands);
+                        var lhs = text.parenthetical(opcount != 0 ? _operands.Intersperse(", ").Concat() : left);
+
+                        // var operands = left.SplitClean(Chars.Space);
+                        // var lhs = text.parenthetical(operands.Length != 0 ? operands.Intersperse(", ").Concat() : left);
                         var rhs = line.RightOfFirst(IMPLIES);
-                        writer.WriteLine(string.Format("{0} => {1}", lhs, rhs));
+                        writer.WriteLine(string.Format("{0} -> {1}", lhs, rhs));
                     }
-                    else if(line.Contains(PRODUCTION))
+                    else if(line.Contains(Bar))
                     {
-                        var left = line.LeftOfFirst(PRODUCTION);
-                        var operands = left.SplitClean(Chars.Space);
-                        var lhs = text.parenthetical(operands.Length != 0 ? operands.Intersperse(", ").Concat() : left);
-                        var rhs = line.RightOfFirst(PRODUCTION);
-                        writer.WriteLine(string.Format("{0} => {1}", lhs, rhs));
+                        var left = line.LeftOfFirst(Bar);
+                        var opcount = Xed.operands(left, out var _operands);
+                        var lhs = text.parenthetical(opcount != 0 ? _operands.Intersperse(", ").Concat() : left);
+
+                        // var operands = left.SplitClean(Chars.Space);
+                        // var lhs = text.parenthetical(operands.Length != 0 ? operands.Intersperse(", ").Concat() : left);
+
+                        var rhs = line.RightOfFirst(Bar);
+                        writer.WriteLine(string.Format("{0} | {1}", lhs, rhs));
+                    }
+                    else if(line.Contains(SEQUENCE))
+                    {
+                        var name = line.RightOfFirst(SEQUENCE);
+                        writer.WriteLine($"{SEQUENCE}: {name}");
+                        writer.WriteLine(Separator);
+                        var i=0;
+                        while(k < kTerms - 1)
+                        {
+                            line = skip(content, ++k).Format().Trim();
+                            if(text.blank(line))
+                                break;
+
+                            writer.WriteLine(string.Format("{0,-2}: {1}", i++, line));
+                        }
+
+                        writer.WriteLine();
                     }
                     else
-                        writer.WriteLine(line + " => ?");
+                        writer.WriteLine(line + " >.<");
                 }
                 writer.WriteLine(RP.PageBreak120);
             }
         }
 
         [MethodImpl(Inline), Op]
-        public static XedSources sources(FS.FolderPath root)
-            => new XedSources(root);
+        public static XedDataSource sources(FS.FolderPath root)
+            => new XedDataSource(root);
 
         [Op]
         public static string reg(XedPattern src)

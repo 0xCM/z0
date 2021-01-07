@@ -15,28 +15,28 @@ namespace Z0
     public readonly struct DynamicRows<T> : IIndex<DynamicRow<T>>
         where T : struct
     {
-        readonly DynamicRow<T>[] Data;
+        readonly Index<DynamicRow<T>> Data;
 
         [MethodImpl(Inline)]
-        public DynamicRows(DynamicRow<T>[] src)
+        public DynamicRows(Index<DynamicRow<T>> src)
             => Data = src;
 
         public DynamicRow<T>[] Storage
         {
             [MethodImpl(Inline)]
-            get => Data;
+            get => Data.Storage;
         }
 
         public Span<DynamicRow<T>> Edit
         {
             [MethodImpl(Inline)]
-            get => Data;
+            get => Data.Edit;
         }
 
-        public ReadOnlySpan<DynamicRow<T>> Items
+        public ReadOnlySpan<DynamicRow<T>> View
         {
             [MethodImpl(Inline)]
-            get => Data;
+            get => Data.View;
         }
 
         public Rowset<DynamicRow<T>> Rowset

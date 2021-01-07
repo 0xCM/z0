@@ -47,10 +47,10 @@ namespace Z0.Asm
         /// <summary>
         /// Memory access
         /// </summary>
-        public readonly OpAccess Access;
+        public readonly IceOpAccess Access;
 
         public UsedMemory(string Formatted, IceRegister Segment, IceRegister Base, IceRegister Index,
-            int Scale, ulong Displacement, MemorySize MemorySize, OpAccess Access)
+            int Scale, ulong Displacement, MemorySize MemorySize, IceOpAccess Access)
         {
             this.Formatted = Formatted;
             this.Segment = Segment;

@@ -21,7 +21,7 @@ namespace Z0
             where T : struct, IRecord<T>
         {
             var count = src.Count;
-            var data = src.Items;
+            var data = src.View;
             using var writer = dst.Writer();
             writer.WriteLine(format(spec.Header));
             var buffer = Buffers.text();

@@ -27,8 +27,6 @@ namespace Z0
     {
         string Format(in T src);
 
-        string Format(in DynamicRow<T> src);
-
         TableId IRecordFormatter.TableId
             => default(T).TableId;
 

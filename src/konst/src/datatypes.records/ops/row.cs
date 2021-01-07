@@ -11,12 +11,16 @@ namespace Z0
         /// </summary>
         /// <param name="cells">The cell count</param>
         /// <typeparam name="T">The record type</typeparam>
-        [Op, Closures(Closure)]
         public static DynamicRow<T> row<T>(uint cells)
-            where T : struct
+            where T : struct, IRecord<T>
                 => new DynamicRow<T>(0, default(T), sys.alloc<dynamic>(cells));
 
-        [Op, Closures(Closure)]
+        /// <summary>
+        /// Creates and populates a <see cref='DynamicRow{T}'/>
+        /// </summary>
+        /// <param name="index">The row index</param>
+        /// <param name="src">The data source</param>
+        /// <typeparam name="T">The data type</typeparam>
         public static DynamicRow<T> row<T>(uint index, in T src)
             where T : struct, IRecord<T>
                 => row(fields<T>(), index, src);
@@ -28,11 +32,10 @@ namespace Z0
         /// <param name="index">The value index</param>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The record type</typeparam>
-        [Op, Closures(Closure)]
         public static DynamicRow<T> row<T>(in RecordFields fields, uint index, in T src)
-            where T : struct
+            where T : struct, IRecord<T>
         {
-            var dst = Records.row<T>(fields.Count);
+            var dst = row<T>(fields.Count);
             load(fields, index, src, ref dst);
             return dst;
         }
@@ -42,7 +45,6 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The record type</typeparam>
-        [Op, Closures(Closure)]
         public static DynamicRow<T> row<T>(in T src)
             where T : struct, IRecord<T>
                 => adapter<T>().Adapt(src).Adapted;
@@ -53,7 +55,6 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="adapter">A compatible adapter</param>
         /// <typeparam name="T">The record type</typeparam>
-        [Op, Closures(Closure)]
         public static DynamicRow<T> row<T>(in T src, in RowAdapter<T> adapter)
             where T : struct, IRecord<T>
                 => adapter.Adapt(src).Adapted;
@@ -64,7 +65,6 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="fields">The defining fields</param>
         /// <typeparam name="T">The record type</typeparam>
-        [Op, Closures(Closure)]
         public static DynamicRow<T> row<T>(in T src, in RecordFields fields)
             where T : struct, IRecord<T>
                 => adapter<T>(fields).Adapt(src).Adapted;

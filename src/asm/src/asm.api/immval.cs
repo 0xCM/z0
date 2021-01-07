@@ -9,7 +9,7 @@ namespace Z0
 
     using Z0.Asm;
 
-    using static Asm.OpKind;
+    using static Asm.IceOpKind;
 
     partial struct asm
     {

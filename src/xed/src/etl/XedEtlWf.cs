@@ -26,7 +26,7 @@ namespace Z0
 
         readonly IWfShell Wf;
 
-        readonly XedSources Source;
+        readonly XedDataSource Source;
 
         readonly ITableArchive Target;
 

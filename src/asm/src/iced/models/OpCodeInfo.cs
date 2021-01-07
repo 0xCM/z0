@@ -56,11 +56,11 @@ namespace Z0.Asm
         //
         // Summary:
         //     Gets the opcode table
-        public OpCodeTableKind Table {get; set;}
+        public IceOpCodeTableKind Table {get; set;}
         //
         // Summary:
         //     Gets the mandatory prefix
-        public MandatoryPrefix MandatoryPrefix {get; set;}
+        public IceMandatoryPrefix MandatoryPrefix {get; set;}
         //
         // Summary:
         //     Gets the opcode. 00000000xxh if it's 1-byte, 0000yyxxh if it's 2-byte (yy !=
@@ -85,15 +85,15 @@ namespace Z0.Asm
         //
         // Summary:
         //     Gets operand #0's opkind
-        public OpCodeOperandKind Op0Kind {get; set;}
+        public IceOpCodeOperandKind Op0Kind {get; set;}
         //
         // Summary:
         //     Gets operand #1's opkind
-        public OpCodeOperandKind Op1Kind {get; set;}
+        public IceOpCodeOperandKind Op1Kind {get; set;}
         //
         // Summary:
         //     Gets operand #2's opkind
-        public OpCodeOperandKind Op2Kind {get; set;}
+        public IceOpCodeOperandKind Op2Kind {get; set;}
         //
         // Summary:
         //     (EVEX) true if an opmask register can be used
@@ -101,11 +101,11 @@ namespace Z0.Asm
         //
         // Summary:
         //     Gets operand #3's opkind
-        public OpCodeOperandKind Op3Kind {get; set;}
+        public IceOpCodeOperandKind Op3Kind {get; set;}
         //
         // Summary:
         //     Gets operand #4's opkind
-        public OpCodeOperandKind Op4Kind {get; set;}
+        public IceOpCodeOperandKind Op4Kind {get; set;}
         //
         // Summary:
         //     (EVEX) true if the instruction supports broadcasting (EVEX.b bit) (if it has
@@ -114,11 +114,11 @@ namespace Z0.Asm
         //
         // Summary:
         //     Gets the code
-        public OpCodeId Code {get; set;}
+        public IceOpCodeId Code {get; set;}
         //
         // Summary:
         //     Gets the encoding
-        public EncodingKind Encoding {get; set;}
+        public IceEncodingKind Encoding {get; set;}
         //
         // Summary:
         //     true if it's an instruction, false if it's eg. Iced.Intel.Code.INVALID, db, dw,
@@ -176,7 +176,7 @@ namespace Z0.Asm
         //
         // Summary:
         //     (EVEX) Gets the tuple type
-        public TupleType TupleType {get; set;}
+        public IceTupleType TupleType {get; set;}
         //
         // Summary:
         //     (Legacy encoding) Gets the required operand size (16,32,64) or 0 if no operand

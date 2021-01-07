@@ -12,7 +12,7 @@ namespace Z0
     {
     }
 
-    public interface IApiAsmProcessor : IWfDataProcessor<Mnemonic,ApiInstruction>
+    public interface IApiAsmProcessor : IWfDataProcessor<IceMnemonic,ApiInstruction>
     {
         void OnAnd(ApiInstruction located)
         {
@@ -26,8 +26,8 @@ namespace Z0
 
         void IWfDataProcessor.Connect()
         {
-            Broker[Mnemonic.And] = WfBrokers.handler<ApiInstruction>(OnAnd);
-            Broker[Mnemonic.Or] = WfBrokers.handler<ApiInstruction>(OnOr);
+            Broker[IceMnemonic.And] = WfBrokers.handler<ApiInstruction>(OnAnd);
+            Broker[IceMnemonic.Or] = WfBrokers.handler<ApiInstruction>(OnOr);
         }
     }
 }

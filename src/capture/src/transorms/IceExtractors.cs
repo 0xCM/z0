@@ -23,18 +23,20 @@ namespace Z0.Asm
             => src.GetUsedRegisters().Map(x => Deicer.Thaw(x));
 
         [MethodImpl(Inline)]
-        public static Func<OpAccess[]> OpAccessDefer(Iced.InstructionInfo src)
+        public static Func<IceOpAccess[]> OpAccessDefer(Iced.InstructionInfo src)
             => () => access(src);
 
         [Op]
         public static AsmSpecifier specifier(Iced.Instruction src)
         {
-            var opcode = Iced.EncoderCodeExtensions.ToOpCode(src.Code);
-            return AsmOpCodes.specifier(opcode.ToInstructionString(), opcode.ToOpCodeString());
+            var iceOpCode = Iced.EncoderCodeExtensions.ToOpCode(src.Code);
+            var sig = AsmOpCodes.sig(iceOpCode.ToInstructionString());
+            var code = AsmOpCodes.opcode(iceOpCode.ToOpCodeString());
+            return AsmOpCodes.specifier(sig, code);
         }
 
         [MethodImpl(Inline), Op]
-        public static OpAccess[] access(Iced.InstructionInfo src)
+        public static IceOpAccess[] access(Iced.InstructionInfo src)
             => z.array(
                     Deicer.Thaw(src.Op0Access),
                     Deicer.Thaw(src.Op0Access),

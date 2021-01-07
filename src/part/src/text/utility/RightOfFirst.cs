@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-
     partial class XText
     {
         /// <summary>
@@ -30,7 +28,7 @@ namespace Z0
         {
             var idx = s.IndexOf(substring);
             if (idx != -1)
-                return s.RightOfIndex(idx + substring.Length);
+                return s.RightOfIndex(idx + substring.Length - 1);
             else
                 return string.Empty;
         }

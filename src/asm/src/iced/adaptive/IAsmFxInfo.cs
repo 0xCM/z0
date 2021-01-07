@@ -42,7 +42,7 @@ namespace Z0.Asm
         //     Rounding control (Iced.Intel.Instruction.SuppressAllExceptions is implied but
         //     still returns false) or Iced.Intel.RoundingControl.None if the instruction doesn't
         //     use it.
-        RoundingControl RoundingControl {get;}
+        IceRoundingControl RoundingControl {get;}
 
         //
         // Summary:

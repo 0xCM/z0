@@ -6,17 +6,17 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
-    
+
     public readonly struct AsmFxSink
     {
         readonly AsmFxHandler Receiver;
 
-        public Mnemonic Kind {get;}
+        public IceMnemonic Kind {get;}
 
         [MethodImpl(Inline)]
-        public AsmFxSink(Mnemonic kind, AsmFxHandler receiver)
+        public AsmFxSink(IceMnemonic kind, AsmFxHandler receiver)
         {
             Kind = kind;
             Receiver = receiver;

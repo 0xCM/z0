@@ -17,7 +17,7 @@ namespace Z0.Asm
         public delegate void SegmentProcessed(Vector128<byte> src);
 
         [MethodImpl(Inline), Op]
-        public static Vector128<byte> process(ReadOnlySpan<CpuidFeature> src, SegmentProcessed step)
+        public static Vector128<byte> process(ReadOnlySpan<IceCpuidFeature> src, SegmentProcessed step)
         {
             var srcCount = src.Length;
             var storage = default(Vector128<byte>);
@@ -43,7 +43,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
-        static int Capture(in CpuidFeature src, int remaining, int consumed, ref byte dst)
+        static int Capture(in IceCpuidFeature src, int remaining, int consumed, ref byte dst)
         {
             var name = src.ToString();
             ReadOnlySpan<char> rendered = name;

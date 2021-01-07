@@ -54,7 +54,7 @@ namespace Z0.Asm
 
 		public asci16 Mnemonic;
 
-		public AsmOpCodePattern OpCode;
+		public AsmOpCode OpCode;
 
         public AsmSig Instruction;
 
@@ -64,7 +64,7 @@ namespace Z0.Asm
 
 		public asci16 CpuId;
 
-        public OpCodeId OpCodeId;
+        public IceOpCodeId OpCodeId;
 
         // [MethodImpl(Inline)]
         // public AsmRow(
@@ -96,7 +96,7 @@ namespace Z0.Asm
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Sequence == 0 && OpCodeId == OpCodeId.INVALID;
+            get => Sequence == 0 && OpCodeId == IceOpCodeId.INVALID;
         }
 
         public bool IsNonEmpty

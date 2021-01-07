@@ -17,17 +17,17 @@ namespace Z0.Asm
 
         readonly int BufferLength;
 
-        readonly Dictionary<Mnemonic, AsmFxSink> Sinks;
+        readonly Dictionary<IceMnemonic, AsmFxSink> Sinks;
 
-        readonly Dictionary<Mnemonic, AsmFxCollector> Collectors;
+        readonly Dictionary<IceMnemonic, AsmFxCollector> Collectors;
 
         [MethodImpl(Inline)]
         public AsmFxHandlers()
         {
-            BufferLength = (int)Mnemonic.LAST + 1;
+            BufferLength = (int)IceMnemonic.LAST + 1;
             Activations = new uint[BufferLength];
-            Sinks = new Dictionary<Mnemonic, AsmFxSink>();
-            Collectors = new Dictionary<Mnemonic, AsmFxCollector>();
+            Sinks = new Dictionary<IceMnemonic, AsmFxSink>();
+            Collectors = new Dictionary<IceMnemonic, AsmFxCollector>();
         }
 
         [MethodImpl(Inline)]
@@ -62,7 +62,7 @@ namespace Z0.Asm
         public bool Include(AsmFxSink sink)
             => Sinks.TryAdd(sink.Kind, sink);
 
-        public Dictionary<Mnemonic,Instruction[]> Handled
+        public Dictionary<IceMnemonic,Instruction[]> Handled
         {
             get => Collectors.Select(kvp => (kvp.Key, kvp.Value.Collected())).ToDictionary();
         }

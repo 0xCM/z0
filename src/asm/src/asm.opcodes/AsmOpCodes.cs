@@ -31,13 +31,30 @@ namespace Z0.Asm
         public static CpuidExpression cpuid(in AsmOpCodeRow src)
             => new CpuidExpression(src.CpuId);
 
+        [MethodImpl(Inline), Op]
+        public static OperatingMode mode(in AsmOpCodeRow src)
+        {
+
+            return default;
+
+        }
+
+
         /// <summary>
         /// Selects the opcode expression from the source table
         /// </summary>
         /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
-        public static AsmOpCodeExpression opcode(in AsmOpCodeRow src)
-            => new AsmOpCodeExpression(src.OpCode);
+        public static AsmOpCode opcode(in AsmOpCodeRow src)
+            => new AsmOpCode(src.OpCode);
+
+        [MethodImpl(Inline), Op]
+        public static AsmSig sig(string src)
+            => new AsmSig(src);
+
+        [MethodImpl(Inline), Op]
+        public static AsmOpCode opcode(string src)
+            => new AsmOpCode(src);
 
         /// <summary>
         /// Selects the instruction pattern from the source table
@@ -48,8 +65,8 @@ namespace Z0.Asm
             => new AsmSig(src.Instruction);
 
         [MethodImpl(Inline), Op]
-        public static AsmSpecifier specifier(in AsmSig fx, in AsmOpCodePattern opcode)
-            => new AsmSpecifier(fx, opcode);
+        public static AsmSpecifier specifier(in AsmSig sig, in AsmOpCode opcode)
+            => new AsmSpecifier(sig, opcode);
 
         [Op]
         public static AsmOpCodeTokens tokens(ReadOnlySpan<FieldRef> src)
@@ -76,16 +93,16 @@ namespace Z0.Asm
 
         [Op]
         public static AsmSymbols symbols()
-            => new AsmSymbols(SymbolStore.named<Mnemonic,ushort>(), SymbolStore.named<RegisterKind,uint>(), AsmOpCodes.dataset());
+            => new AsmSymbols(SymbolStore.named<IceMnemonic,ushort>(), SymbolStore.named<RegisterKind,uint>(), AsmOpCodes.dataset());
 
         [MethodImpl(Inline), Op]
         public static AsmOpCodePart part(asci8 src)
             => new AsmOpCodePart(src);
 
-        public static EnumLiteralNames<Mnemonic> Mnemonics
+        public static EnumLiteralNames<IceMnemonic> Mnemonics
         {
             [MethodImpl(Inline), Op]
-            get => Enums.NameIndex<Mnemonic>();
+            get => Enums.NameIndex<IceMnemonic>();
         }
 
         [Op]
@@ -116,7 +133,7 @@ namespace Z0.Asm
             var count = resource.RowCount;
             var records = sys.alloc<AsmOpCodeRow>(count);
             AsmTables.parse(resource, records);
-            var identifers = sys.alloc<AsmOpCodePattern>(count);
+            var identifers = sys.alloc<AsmOpCode>(count);
             AsmOpCodes.identify(records, identifers);
             return new AsmOpCodeDataset(records,identifers);
         }
@@ -126,11 +143,11 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The source record</param>
         [MethodImpl(Inline), Op]
-        public static AsmOpCodePattern identity(in AsmOpCodeRow src)
-            => new AsmOpCodePattern(src.OpCode);
+        public static AsmOpCode identity(in AsmOpCodeRow src)
+            => new AsmOpCode(src.OpCode);
 
         [MethodImpl(Inline), Op]
-        public static void identify(ReadOnlySpan<AsmOpCodeRow> src, Span<AsmOpCodePattern> dst)
+        public static void identify(ReadOnlySpan<AsmOpCodeRow> src, Span<AsmOpCode> dst)
         {
             var count = src.Length;
             for(var i=0; i<count; i++)

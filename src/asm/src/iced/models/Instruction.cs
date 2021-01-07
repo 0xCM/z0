@@ -31,13 +31,13 @@ namespace Z0.Asm
         /// <summary>
         /// Captures the op access array as specified by the InstructionInfo type
         /// </summary>
-        public Func<OpAccess[]> Access {get;set;}
+        public Func<IceOpAccess[]> Access {get;set;}
 
         //
         // Summary:
         //     Gets the condition code if it's jcc, setcc, cmovcc else Iced.Intel.ConditionCode.None
         //     is returned
-        public ConditionCode ConditionCode {get; set;}
+        public IceConditionCode ConditionCode {get; set;}
         //
         // Summary:
         //     true if the data is broadcasted (EVEX instructions only)
@@ -168,7 +168,7 @@ namespace Z0.Asm
         //
         // Summary:
         //     Gets operand #4's kind if the operand exists (see Iced.Intel.Instruction.OpCount)
-        public OpKind Op4Kind {get; set;}
+        public IceOpKind Op4Kind {get; set;}
         //
         // Summary:
         //     32-bit IP of the instruction
@@ -193,15 +193,15 @@ namespace Z0.Asm
         // Summary:
         //     Gets the code size when the instruction was decoded. This value is informational
         //     and can be used by a formatter.
-        public CodeSize CodeSize {get; set;}
+        public IceCodeSize CodeSize {get; set;}
         //
         // Summary:
         //     Instruction code
-        public OpCodeId Code {get; set;}
+        public IceOpCodeId Code {get; set;}
         //
         // Summary:
         //     Gets the mnemonic
-        public Mnemonic Mnemonic {get; set;}
+        public IceMnemonic Mnemonic {get; set;}
         //
         // Summary:
         //     Gets the memory operand's base register or Iced.Intel.Register.None if none.
@@ -238,19 +238,19 @@ namespace Z0.Asm
         //
         // Summary:
         //     Gets operand #0's kind if the operand exists (see Iced.Intel.Instruction.OpCount)
-        public OpKind Op0Kind {get; set;}
+        public IceOpKind Op0Kind {get; set;}
         //
         // Summary:
         //     Gets operand #1's kind if the operand exists (see Iced.Intel.Instruction.OpCount)
-        public OpKind Op1Kind {get; set;}
+        public IceOpKind Op1Kind {get; set;}
         //
         // Summary:
         //     Gets operand #2's kind if the operand exists (see Iced.Intel.Instruction.OpCount)
-        public OpKind Op2Kind {get; set;}
+        public IceOpKind Op2Kind {get; set;}
         //
         // Summary:
         //     Gets operand #3's kind if the operand exists (see Iced.Intel.Instruction.OpCount)
-        public OpKind Op3Kind {get; set;}
+        public IceOpKind Op3Kind {get; set;}
         //
         // Summary:
         //     Gets the length of the instruction, 0-15 bytes. This is just informational. If
@@ -285,29 +285,29 @@ namespace Z0.Asm
         //
         // Summary:
         //     All flags that are read by the CPU when executing the instruction
-        public RflagsBits RflagsRead {get; set;}
+        public IceRflagsBits RflagsRead {get; set;}
         //
         // Summary:
         //     All flags that are written by the CPU, except those flags that are known to be
         //     undefined, always set or always cleared. See also Iced.Intel.Instruction.RflagsModified
-        public RflagsBits RflagsWritten {get; set;}
+        public IceRflagsBits RflagsWritten {get; set;}
         //
         // Summary:
         //     All flags that are always cleared by the CPU
-        public RflagsBits RflagsCleared {get; set;}
+        public IceRflagsBits RflagsCleared {get; set;}
         //
         // Summary:
         //     All flags that are always set by the CPU
-        public RflagsBits RflagsSet {get; set;}
+        public IceRflagsBits RflagsSet {get; set;}
         //
         // Summary:
         //     All flags that are undefined after executing the instruction
-        public RflagsBits RflagsUndefined {get; set;}
+        public IceRflagsBits RflagsUndefined {get; set;}
         //
         // Summary:
         //     All flags that are modified by the CPU. This is Iced.Intel.Instruction.RflagsWritten
         //     + Iced.Intel.Instruction.RflagsCleared + Iced.Intel.Instruction.RflagsSet + Iced.Intel.Instruction.RflagsUndefined
-        public RflagsBits RflagsModified {get; set;}
+        public IceRflagsBits RflagsModified {get; set;}
         //
         // Summary:
         //     true if this is a privileged instruction
@@ -403,7 +403,7 @@ namespace Z0.Asm
         //     Rounding control (Iced.Intel.Instruction.SuppressAllExceptions is implied but
         //     still returns false) or Iced.Intel.RoundingControl.None if the instruction doesn't
         //     use it.
-        public RoundingControl RoundingControl {get; set;}
+        public IceRoundingControl RoundingControl {get; set;}
         //
         // Summary:
         //     Number of elements in a db/dw/dd/dq directive. Can only be called if Iced.Intel.Instruction.Code
@@ -454,15 +454,15 @@ namespace Z0.Asm
         //
         // Summary:
         //     Instruction encoding, eg. legacy, VEX, EVEX, ...
-        public EncodingKind Encoding {get; set;}
+        public IceEncodingKind Encoding {get; set;}
         //
         // Summary:
         //     Gets the CPU or CPUID feature flags
-        public CpuidFeature[] CpuidFeatures {get; set;}
+        public IceCpuidFeature[] CpuidFeatures {get; set;}
         //
         // Summary:
         //     Flow control info
-        public FlowControl FlowControl {get; set;}
+        public IceFlowControl FlowControl {get; set;}
         //
         // Summary:
         //     VSIB instructions only (Iced.Intel.Instruction.IsVsib): true if it's using 64-bit

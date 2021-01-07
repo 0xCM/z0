@@ -18,7 +18,7 @@ namespace Z0.Asm
         /// <summary>
         /// Classifies the operand
         /// </summary>
-        public OpKind Kind;
+        public IceOpKind Kind;
 
         /// <summary>
         /// Operand immediate info, if applicable

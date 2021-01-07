@@ -21,22 +21,22 @@ namespace Z0.Asm
         //     (EVEX) true if the instruction supports zeroing masking (if one of the opmask
         //     registers k1-k7 is used)
         bool CanUseZeroingMasking {get;}
-        
+
         //
         // Summary:
         //     true if the LOCK (F0) prefix can be used
         bool CanUseLockPrefix {get;}
-        
+
         //
         // Summary:
         //     true if the XACQUIRE (F2) prefix can be used
         bool CanUseXacquirePrefix {get;}
-        
+
         //
         // Summary:
         //     true if the XRELEASE (F3) prefix can be used
         bool CanUseXreleasePrefix {get;}
-        
+
         //
         // Summary:
         //     true if the REP / REPE (F3) prefixes can be used
@@ -46,7 +46,7 @@ namespace Z0.Asm
         // Summary:
         //     true if the REPNE (F2) prefix can be used
         bool CanUseRepnePrefix {get;}
-        
+
         //
         // Summary:
         //     true if the BND (F2) prefix can be used
@@ -54,23 +54,23 @@ namespace Z0.Asm
 
         //
         // Summary:
-        //     true if the HINT-TAKEN (3E) and HINT-NOT-TAKEN (2E) prefixes can be used        
+        //     true if the HINT-TAKEN (3E) and HINT-NOT-TAKEN (2E) prefixes can be used
         bool CanUseHintTakenPrefix  {get;}
-        
+
         //
         // Summary:
         //     true if the NOTRACK (3E) prefix can be used
         bool CanUseNotrackPrefix {get;}
-        
+
         //
         // Summary:
         //     Gets the opcode table
-        OpCodeTableKind Table {get;}
+        IceOpCodeTableKind Table {get;}
 
         //
         // Summary:
         //     Gets the mandatory prefix
-        MandatoryPrefix MandatoryPrefix {get;}
+        IceMandatoryPrefix MandatoryPrefix {get;}
 
         //
         // Summary:
@@ -80,7 +80,7 @@ namespace Z0.Asm
         //     0x01D8 (Iced.Intel.Code.Vmrunw), 0x2A (Iced.Intel.Code.Sub_r8_rm8, Iced.Intel.Code.Cvtpi2ps_xmm_mmm64,
         //     etc).
         uint OpCode {get;}
-        
+
         //
         // Summary:
         //     true if it's part of a group
@@ -100,33 +100,33 @@ namespace Z0.Asm
         //
         // Summary:
         //     Gets operand #0's opkind
-        OpCodeOperandKind Op0Kind {get;}
-        
+        IceOpCodeOperandKind Op0Kind {get;}
+
         //
         // Summary:
         //     Gets operand #1's opkind
-        OpCodeOperandKind Op1Kind {get;}
-        
+        IceOpCodeOperandKind Op1Kind {get;}
+
         //
         // Summary:
         //     Gets operand #2's opkind
-        OpCodeOperandKind Op2Kind {get;}
-        
+        IceOpCodeOperandKind Op2Kind {get;}
+
         //
         // Summary:
         //     (EVEX) true if an opmask register can be used
         bool CanUseOpMaskRegister {get;}
-        
+
         //
         // Summary:
         //     Gets operand #3's opkind
-        OpCodeOperandKind Op3Kind {get;}
-        
+        IceOpCodeOperandKind Op3Kind {get;}
+
         //
         // Summary:
         //     Gets operand #4's opkind
-        OpCodeOperandKind Op4Kind {get;}
-        
+        IceOpCodeOperandKind Op4Kind {get;}
+
         //
         // Summary:
         //     (EVEX) true if the instruction supports broadcasting (EVEX.b bit) (if it has
@@ -136,39 +136,39 @@ namespace Z0.Asm
         //
         // Summary:
         //     Gets the encoding
-        EncodingKind Encoding {get;}
-        
+        IceEncodingKind Encoding {get;}
+
         //
         // Summary:
         //     true if it's an instruction, false if it's eg. Iced.Intel.Code.INVALID, db, dw,
         //     dd, dq
         bool IsInstruction {get;}
-        
+
         //
         // Summary:
         //     true if it's an instruction available in 16-bit mode
         bool Mode16 {get;}
-        
+
         //
         // Summary:
         //     true if it's an instruction available in 32-bit mode
         bool Mode32 {get;}
-        
+
         //
         // Summary:
         //     (EVEX) true if the instruction supports rounding control
         bool CanUseRoundingControl {get;}
-        
+
         //
         // Summary:
         //     true if an fwait (9B) instruction is added before the instruction
         bool Fwait {get;}
-        
+
         //
         // Summary:
         //     true if it's an instruction available in 64-bit mode
         bool Mode64 {get;}
-        
+
         //
         // Summary:
         //     (Legacy encoding) Gets the required address size (16,32,64) or 0 if no address
@@ -203,11 +203,11 @@ namespace Z0.Asm
         //
         // Summary:
         //     (EVEX) Gets the tuple type
-        TupleType TupleType {get;}
+        IceTupleType TupleType {get;}
         //
         // Summary:
         //     (Legacy encoding) Gets the required operand size (16,32,64) or 0 if no operand
         //     size prefix (66) or REX.W prefix is needed
-        int OperandSize {get;}        
+        int OperandSize {get;}
     }
 }

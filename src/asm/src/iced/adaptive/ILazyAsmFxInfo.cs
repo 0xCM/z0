@@ -11,7 +11,7 @@ namespace Z0.Asm
         //
         // Summary:
         //     Instruction encoding, eg. legacy, VEX, EVEX, ...
-        EncodingKind Encoding {get;}
+        IceEncodingKind Encoding {get;}
 
         /// <summary>
         /// Encapsulates the result of ToInstructionCodeString() and ToInstructionString()
@@ -22,17 +22,17 @@ namespace Z0.Asm
         // Summary:
         //     Gets the code size when the instruction was decoded. This value is informational
         //     and can be used by a formatter.
-        CodeSize CodeSize {get;}
+        IceCodeSize CodeSize {get;}
 
         //
         // Summary:
         //     Gets the CPU or CPUID feature flags
-        CpuidFeature[] CpuidFeatures {get; set;}
+        IceCpuidFeature[] CpuidFeatures {get; set;}
 
         /// <summary>
         /// Captures the op access array as specified by the InstructionInfo type
         /// </summary>
-        Func<OpAccess[]> Access {get;}
+        Func<IceOpAccess[]> Access {get;}
 
     }
 }

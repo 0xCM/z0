@@ -38,7 +38,7 @@ namespace Z0.Asm
         public MemoryAddress NextIp
             => Instruction.NextIP;
 
-        public Mnemonic Mnemonic
+        public IceMnemonic Mnemonic
             => Instruction.Mnemonic;
 
         /// <summary>

@@ -10,7 +10,7 @@ namespace Z0
     using Z0.Asm;
 
     using static Konst;
-    using static Asm.OpKind;
+    using static Asm.IceOpKind;
 
     using W = NumericWidth;
 
@@ -21,7 +21,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The operand classifier</param>
         [Op]
-        public static NumericWidth immwidth(OpKind src)
+        public static NumericWidth immwidth(IceOpKind src)
         {
             if(src == Immediate8 || src == Immediate8_2nd)
                 return W.W8;

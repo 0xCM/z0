@@ -33,52 +33,52 @@ namespace Z0.Asm
 		/// <summary>
 		/// Instruction encoding, eg. legacy, VEX, EVEX, ...
 		/// </summary>
-		public EncodingKind Encoding {get;set;}
+		public IceEncodingKind Encoding {get;set;}
 
         //
         // Summary:
         //     All flags that are always cleared by the CPU
-        public RflagsBits RflagsCleared { get; set;}
+        public IceRflagsBits RflagsCleared { get; set;}
         //
         // Summary:
         //     All flags that are written by the CPU, except those flags that are known to be
         //     undefined, always set or always cleared. See also Iced.Intel.InstructionInfo.RflagsModified
-        public RflagsBits RflagsWritten { get; set;}
+        public IceRflagsBits RflagsWritten { get; set;}
         //
         // Summary:
         //     All flags that are read by the CPU when executing the instruction
-        public RflagsBits RflagsRead { get; set;}
+        public IceRflagsBits RflagsRead { get; set;}
 
         //
         // Summary:
         //     All flags that are modified by the CPU. This is Iced.Intel.InstructionInfo.RflagsWritten
         //     + Iced.Intel.InstructionInfo.RflagsCleared + Iced.Intel.InstructionInfo.RflagsSet
         //     + Iced.Intel.InstructionInfo.RflagsUndefined
-        public RflagsBits RflagsModified { get; set; }
+        public IceRflagsBits RflagsModified { get; set; }
         //
         // Summary:
         //     All flags that are always set by the CPU
-        public RflagsBits RflagsSet { get; set;}
+        public IceRflagsBits RflagsSet { get; set;}
 
         //
         // Summary:
         //     All flags that are undefined after executing the instruction
-        public RflagsBits RflagsUndefined { get; set;}
+        public IceRflagsBits RflagsUndefined { get; set;}
 
 		/// <summary>
 		/// Gets the CPU or CPUID feature flags
 		/// </summary>
-		public CpuidFeature[] CpuidFeatures  {get;set;}
+		public IceCpuidFeature[] CpuidFeatures  {get;set;}
 
 		/// <summary>
 		/// Flow control info
 		/// </summary>
-		public  FlowControl FlowControl {get;set;}
+		public  IceFlowControl FlowControl {get;set;}
 
         public UsedMemory[] UsedMemory {get;set;}
 
         public UsedRegister[] UsedRegisters {get;set;}
 
-        public OpAccess[] Access {get;set;}
+        public IceOpAccess[] Access {get;set;}
 	}
 }

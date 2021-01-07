@@ -7,7 +7,7 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     public struct AsmOpCodeRow
     {
@@ -19,20 +19,20 @@ namespace Z0.Asm
 
         public asci64 Instruction;
 
-        public YeaOrNea M16;
+        public bit M16;
 
-        public YeaOrNea M32;
+        public bit M32;
 
-        public YeaOrNea M64;
+        public bit M64;
 
 		public asci64 CpuId;
 
-        public OpCodeId CodeId;
+        public IceOpCodeId CodeId;
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Sequence == 0 && CodeId == OpCodeId.INVALID;
+            get => Sequence == 0 && CodeId == IceOpCodeId.INVALID;
         }
 
         public bool IsNonEmpty

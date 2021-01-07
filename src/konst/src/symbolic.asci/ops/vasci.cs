@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     partial struct asci
@@ -28,7 +28,7 @@ namespace Z0
         /// <param name="count">Tne number of characters to select</param>
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> chars(sbyte offset, sbyte count)
-            => slice(recover<char>(AsciKonst.CharBytes), offset, count);
+            => slice(recover<char>(AsciSymData.CharBytes), offset, count);
 
         /// <summary>
         /// Loads up to 16 asci scalar symbols [offset, offset + count]

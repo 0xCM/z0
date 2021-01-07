@@ -9,31 +9,31 @@ namespace Z0.Asm
     using System.Collections.Generic;
     using System.Linq;
 
-    using static Konst;
+    using static Part;
 
-    public readonly struct AsmMnemonicParser : IParser<string,Mnemonic>
+    public readonly struct AsmMnemonicParser : IParser<string,IceMnemonic>
     {
-        readonly Dictionary<string,Mnemonic> Index;
+        readonly Dictionary<string,IceMnemonic> Index;
 
         [MethodImpl(Inline)]
         public static AsmMnemonicParser Create()
-            => new AsmMnemonicParser((int)Mnemonic.LAST);
+            => new AsmMnemonicParser((int)IceMnemonic.LAST);
 
         [MethodImpl(Inline)]
         public AsmMnemonicParser(int capacity)
         {
-            Index = new Dictionary<string, Mnemonic>(capacity);
-            var literals = Enums.literals<Mnemonic>();
+            Index = new Dictionary<string, IceMnemonic>(capacity);
+            var literals = Enums.literals<IceMnemonic>();
             foreach(var l in literals)
                 Index[l.ToString().ToLower()] = l;
         }
 
-        public ParseResult<string, Mnemonic> Parse(string src)
+        public ParseResult<string, IceMnemonic> Parse(string src)
         {
             if(Index.TryGetValue(src.Trim().ToLower(), out var mne))
-                return ParseResult.win<string,Mnemonic>(src,mne);
+                return ParseResult.win<string,IceMnemonic>(src,mne);
             else
-                return ParseResult.fail<string,Mnemonic>(src);
+                return ParseResult.fail<string,IceMnemonic>(src);
         }
     }
 }

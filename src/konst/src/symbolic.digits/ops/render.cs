@@ -64,7 +64,6 @@ namespace Z0
             }
         }
 
-
         [MethodImpl(Inline), Op]
         public static int render(ReadOnlySpan<HexCode> src, Span<char> dst)
         {

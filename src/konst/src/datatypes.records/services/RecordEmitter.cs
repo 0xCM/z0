@@ -21,7 +21,7 @@ namespace Z0
         readonly StreamWriter Writer;
 
         [MethodImpl(Inline)]
-        public RecordEmitter(IRecordFormatter<T> formatter, FS.FilePath dst)
+        internal RecordEmitter(IRecordFormatter<T> formatter, FS.FilePath dst)
         {
             Target = dst;
             Writer = dst.Writer();

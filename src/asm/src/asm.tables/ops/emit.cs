@@ -15,7 +15,7 @@ namespace Z0.Asm
 
     partial struct AsmTables
     {
-        public static uint emit(IWfShell wf, AsmRowSet<Mnemonic> src)
+        public static uint emit(IWfShell wf, AsmRowSet<IceMnemonic> src)
         {
             var count = src.Count;
             if(count != 0)

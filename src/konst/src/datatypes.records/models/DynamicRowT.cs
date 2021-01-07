@@ -9,9 +9,6 @@ namespace Z0
 
     using static Part;
 
-
-
-
     /// <summary>
     /// Defines the content of a row
     /// </summary>
