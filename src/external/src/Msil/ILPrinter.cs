@@ -53,7 +53,7 @@ namespace Msil
 
                 AppendIL(method, sw, typeFactory);
 
-                if (appendInnerLambdas)
+                if(appendInnerLambdas)
                 {
                     var closure = (Closure)d.Target;
 
@@ -80,9 +80,9 @@ namespace Msil
             }
         }
 
-        static ICilTypeFactory GetTypeFactory(Expression expression)
+        static ICilTypeFactory GetTypeFactory(Expression src)
         {
-            s_typeFactory.AddTypesFrom(expression);
+            s_typeFactory.AddTypesFrom(src);
             return s_typeFactory;
         }
 

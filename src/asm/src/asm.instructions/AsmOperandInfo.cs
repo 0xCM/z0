@@ -28,7 +28,7 @@ namespace Z0.Asm
         /// <summary>
         /// Operand memory info, if applicable
         /// </summary>
-        public MemInfo Memory;
+        public IceMemoryInfo Memory;
 
         /// <summary>
         /// Operand register info, if applicable

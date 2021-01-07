@@ -87,6 +87,9 @@ namespace Z0
                 case JitApiCmd.CmdName:
                     Run(Builder.JitApiCmd());
                     break;
+                case ShowRuntimeArchiveCmd.CmdName:
+                    Run(Builder.ShowRuntimeArchive());
+                    break;
                 case EmitImageMapsCmd.CmdName:
                     Run(Builder.EmitImageMaps());
                     break;
@@ -121,6 +124,11 @@ namespace Z0
         }
 
         void Run(in EmitHexIndexCmd cmd)
+        {
+            cmd.Dispatch(Wf).Wait();
+        }
+
+        void Run(in ShowRuntimeArchiveCmd cmd)
         {
             cmd.Dispatch(Wf).Wait();
         }

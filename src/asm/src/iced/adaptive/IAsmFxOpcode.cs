@@ -19,6 +19,6 @@ namespace Z0.Asm
         //
         // Summary:
         //     Gets the Iced.Intel.OpCodeInfo
-        OpCodeInfo OpCode {get;}
+        IceOpCodeInfo OpCode {get;}
    }
 }

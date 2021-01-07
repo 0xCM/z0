@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="fx"></param>
         /// <param name="index"></param>
         [MethodImpl(Inline), Op]
-        public static AsmOperandInfo operand(MemoryAddress @base, in Instruction fx, byte index)
+        public static AsmOperandInfo operand(MemoryAddress @base, in IceInstruction fx, byte index)
         {
             var dst = new AsmOperandInfo();
             dst.Index = index;

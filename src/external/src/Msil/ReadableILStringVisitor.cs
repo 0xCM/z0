@@ -5,7 +5,6 @@ namespace Msil
     using System;
     using System.Reflection;
 
-
     public class ReadableILStringVisitor : ILInstructionVisitor
     {
         protected readonly ICilFormatProvider formatProvider;

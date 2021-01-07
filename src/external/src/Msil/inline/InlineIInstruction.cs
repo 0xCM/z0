@@ -12,9 +12,9 @@ namespace Msil
             Value = value;
         }
 
-        public int Value { get; }
+        public int Value {get;}
 
-        public override void Accept(ILInstructionVisitor visitor) 
+        public override void Accept(ILInstructionVisitor visitor)
             => visitor.VisitInlineIInstruction(this);
     }
 }

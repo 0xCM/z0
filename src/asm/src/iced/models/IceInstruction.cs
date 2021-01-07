@@ -6,7 +6,7 @@ namespace Z0.Asm
 {
     using System;
 
-    public struct Instruction : IAsmFxInfo
+    public struct IceInstruction : IAsmFxInfo
     {
         /// <summary>
         /// Encapsulates the result of ToInstructionCodeString() and ToInstructionString()
@@ -21,12 +21,12 @@ namespace Z0.Asm
         /// <summary>
         /// Retrieves the used memory array as specified by the InstructionInfo type
         /// </summary>
-        public UsedMemory[] UsedMemory {get;set;}
+        public IceUsedMemory[] UsedMemory {get;set;}
 
         /// <summary>
         /// Captures the used register array as specified by the InstructionInfo type
         /// </summary>
-        public UsedRegister[] UsedRegisters {get; set;}
+        public IceUsedRegister[] UsedRegisters {get; set;}
 
         /// <summary>
         /// Captures the op access array as specified by the InstructionInfo type
@@ -49,7 +49,7 @@ namespace Z0.Asm
         //     Iced.Intel.OpKind.Memory, Iced.Intel.OpKind.Memory64, Iced.Intel.OpKind.MemorySegSI,
         //     Iced.Intel.OpKind.MemorySegESI, Iced.Intel.OpKind.MemorySegRSI, Iced.Intel.OpKind.MemoryESDI,
         //     Iced.Intel.OpKind.MemoryESEDI, Iced.Intel.OpKind.MemoryESRDI
-        public MemorySize MemorySize {get; set;}
+        public IceMemorySize MemorySize {get; set;}
         //
         // Summary:
         //     Gets the index register scale value, valid values are *1, *2, *4, *8. Use this
@@ -443,7 +443,7 @@ namespace Z0.Asm
         //
         // Summary:
         //     Gets the Iced.Intel.OpCodeInfo
-        public OpCodeInfo OpCode {get; set;}
+        public IceOpCodeInfo OpCode {get; set;}
         //
         // Summary:
         //     Gets the number of bytes added to SP/ESP/RSP or 0 if it's not an instruction

@@ -7,7 +7,7 @@ namespace Z0.Asm
 	/// <summary>
 	/// Memory operand
 	/// </summary>
-	public readonly struct MemoryOperand
+	public readonly struct IceMemoryOperand
     {
 		/// <summary>
 		/// Segment override or <see cref="IceRegister.None"/>
@@ -54,7 +54,7 @@ namespace Z0.Asm
 		/// <param name="displSize">0 (no displ), 1 (16/32/64-bit, but use 2/4/8 if it doesn't fit in a <see cref="sbyte"/>), 2 (16-bit), 4 (32-bit) or 8 (64-bit)</param>
 		/// <param name="isBroadcast">true if it's broadcasted memory (EVEX instructions)</param>
 		/// <param name="prefixSegment">Segment override or <see cref="IceRegister.None"/></param>
-		public MemoryOperand(IceRegister @base, IceRegister index, int scale, int displacement, int displSize, bool isBroadcast, IceRegister prefixSegment) {
+		public IceMemoryOperand(IceRegister @base, IceRegister index, int scale, int displacement, int displSize, bool isBroadcast, IceRegister prefixSegment) {
 			SegmentPrefix = prefixSegment;
 			Base = @base;
 			Index = index;
@@ -72,7 +72,7 @@ namespace Z0.Asm
 		/// <param name="scale">Index register scale (1, 2, 4, or 8)</param>
 		/// <param name="isBroadcast">true if it's broadcasted memory (EVEX instructions)</param>
 		/// <param name="prefixSegment">Segment override or <see cref="IceRegister.None"/></param>
-		public MemoryOperand(IceRegister @base, IceRegister index, int scale, bool isBroadcast, IceRegister prefixSegment) {
+		public IceMemoryOperand(IceRegister @base, IceRegister index, int scale, bool isBroadcast, IceRegister prefixSegment) {
 			SegmentPrefix = prefixSegment;
 			Base = @base;
 			Index = index;
@@ -90,7 +90,7 @@ namespace Z0.Asm
 		/// <param name="displSize">0 (no displ), 1 (16/32/64-bit, but use 2/4/8 if it doesn't fit in a <see cref="sbyte"/>), 2 (16-bit), 4 (32-bit) or 8 (64-bit)</param>
 		/// <param name="isBroadcast">true if it's broadcasted memory (EVEX instructions)</param>
 		/// <param name="prefixSegment">Segment override or <see cref="IceRegister.None"/></param>
-		public MemoryOperand(IceRegister @base, int displacement, int displSize, bool isBroadcast, IceRegister prefixSegment) {
+		public IceMemoryOperand(IceRegister @base, int displacement, int displSize, bool isBroadcast, IceRegister prefixSegment) {
 			SegmentPrefix = prefixSegment;
 			Base = @base;
 			Index = IceRegister.None;
@@ -109,7 +109,7 @@ namespace Z0.Asm
 		/// <param name="displSize">0 (no displ), 1 (16/32/64-bit, but use 2/4/8 if it doesn't fit in a <see cref="sbyte"/>), 2 (16-bit), 4 (32-bit) or 8 (64-bit)</param>
 		/// <param name="isBroadcast">true if it's broadcasted memory (EVEX instructions)</param>
 		/// <param name="prefixSegment">Segment override or <see cref="IceRegister.None"/></param>
-		public MemoryOperand(IceRegister index, int scale, int displacement, int displSize, bool isBroadcast, IceRegister prefixSegment) {
+		public IceMemoryOperand(IceRegister index, int scale, int displacement, int displSize, bool isBroadcast, IceRegister prefixSegment) {
 			SegmentPrefix = prefixSegment;
 			Base = IceRegister.None;
 			Index = index;
@@ -126,7 +126,7 @@ namespace Z0.Asm
 		/// <param name="displacement">Memory displacement</param>
 		/// <param name="isBroadcast">true if it's broadcasted memory (EVEX instructions)</param>
 		/// <param name="prefixSegment">Segment override or <see cref="IceRegister.None"/></param>
-		public MemoryOperand(IceRegister @base, int displacement, bool isBroadcast, IceRegister prefixSegment) {
+		public IceMemoryOperand(IceRegister @base, int displacement, bool isBroadcast, IceRegister prefixSegment) {
 			SegmentPrefix = prefixSegment;
 			Base = @base;
 			Index = IceRegister.None;
@@ -144,7 +144,7 @@ namespace Z0.Asm
 		/// <param name="scale">Index register scale (1, 2, 4, or 8)</param>
 		/// <param name="displacement">Memory displacement</param>
 		/// <param name="displSize">0 (no displ), 1 (16/32/64-bit, but use 2/4/8 if it doesn't fit in a <see cref="sbyte"/>), 2 (16-bit), 4 (32-bit) or 8 (64-bit)</param>
-		public MemoryOperand(IceRegister @base, IceRegister index, int scale, int displacement, int displSize) {
+		public IceMemoryOperand(IceRegister @base, IceRegister index, int scale, int displacement, int displSize) {
 			SegmentPrefix = IceRegister.None;
 			Base = @base;
 			Index = index;
@@ -160,7 +160,7 @@ namespace Z0.Asm
 		/// <param name="base">Base register or <see cref="IceRegister.None"/></param>
 		/// <param name="index">Index register or <see cref="IceRegister.None"/></param>
 		/// <param name="scale">Index register scale (1, 2, 4, or 8)</param>
-		public MemoryOperand(IceRegister @base, IceRegister index, int scale) {
+		public IceMemoryOperand(IceRegister @base, IceRegister index, int scale) {
 			SegmentPrefix = IceRegister.None;
 			Base = @base;
 			Index = index;
@@ -176,7 +176,7 @@ namespace Z0.Asm
 		/// <param name="base">Base register or <see cref="IceRegister.None"/></param>
 		/// <param name="displacement">Memory displacement</param>
 		/// <param name="displSize">0 (no displ), 1 (16/32/64-bit, but use 2/4/8 if it doesn't fit in a <see cref="sbyte"/>), 2 (16-bit), 4 (32-bit) or 8 (64-bit)</param>
-		public MemoryOperand(IceRegister @base, int displacement, int displSize) {
+		public IceMemoryOperand(IceRegister @base, int displacement, int displSize) {
 			SegmentPrefix = IceRegister.None;
 			Base = @base;
 			Index = IceRegister.None;
@@ -193,7 +193,7 @@ namespace Z0.Asm
 		/// <param name="scale">Index register scale (1, 2, 4, or 8)</param>
 		/// <param name="displacement">Memory displacement</param>
 		/// <param name="displSize">0 (no displ), 1 (16/32/64-bit, but use 2/4/8 if it doesn't fit in a <see cref="sbyte"/>), 2 (16-bit), 4 (32-bit) or 8 (64-bit)</param>
-		public MemoryOperand(IceRegister index, int scale, int displacement, int displSize) {
+		public IceMemoryOperand(IceRegister index, int scale, int displacement, int displSize) {
 			SegmentPrefix = IceRegister.None;
 			Base = IceRegister.None;
 			Index = index;
@@ -208,7 +208,7 @@ namespace Z0.Asm
 		/// </summary>
 		/// <param name="base">Base register or <see cref="IceRegister.None"/></param>
 		/// <param name="displacement">Memory displacement</param>
-		public MemoryOperand(IceRegister @base, int displacement) {
+		public IceMemoryOperand(IceRegister @base, int displacement) {
 			SegmentPrefix = IceRegister.None;
 			Base = @base;
 			Index = IceRegister.None;
@@ -222,7 +222,7 @@ namespace Z0.Asm
 		/// Constructor
 		/// </summary>
 		/// <param name="base">Base register or <see cref="IceRegister.None"/></param>
-		public MemoryOperand(IceRegister @base) {
+		public IceMemoryOperand(IceRegister @base) {
 			SegmentPrefix = IceRegister.None;
 			Base = @base;
 			Index = IceRegister.None;

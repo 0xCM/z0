@@ -13,7 +13,7 @@ namespace Z0.Asm
 
         public IceRegister MemoryIndex;
 
-        public MemorySize MemorySize;
+        public IceMemorySize MemorySize;
 
         public MemoryScale MemoryIndexScale;
 

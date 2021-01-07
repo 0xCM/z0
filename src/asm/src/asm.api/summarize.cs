@@ -15,11 +15,11 @@ namespace Z0
     partial struct asm
     {
         [Op]
-        public static AsmFxSummary summarize(MemoryAddress @base, in Instruction src, ReadOnlySpan<byte> encoded, string formatted, uint offset)
+        public static AsmFxSummary summarize(MemoryAddress @base, in IceInstruction src, ReadOnlySpan<byte> encoded, string formatted, uint offset)
             => new AsmFxSummary(@base, offset,  formatted,  src.Specifier, operands(@base, src),  encoded.Slice((int)offset, src.ByteLength).ToArray());
 
         [Op]
-        public static AsmFxSummary Summarize(MemoryAddress @base, in Instruction src, ReadOnlySpan<byte> encoded, string formatted, uint offset)
+        public static AsmFxSummary Summarize(MemoryAddress @base, in IceInstruction src, ReadOnlySpan<byte> encoded, string formatted, uint offset)
             => summarize(@base, src, encoded, formatted, offset);
 
         /// <summary>

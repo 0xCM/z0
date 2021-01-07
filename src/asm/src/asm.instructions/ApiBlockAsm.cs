@@ -22,7 +22,7 @@ namespace Z0.Asm
         /// <summary>
         /// The decoded instructions
         /// </summary>
-        public Instruction[] Decoded {get;}
+        public IceInstruction[] Decoded {get;}
 
         /// <summary>
         /// The reason capture was terminated
@@ -30,7 +30,7 @@ namespace Z0.Asm
         public ExtractTermCode TermCode {get;}
 
         [MethodImpl(Inline)]
-        public ApiBlockAsm(ApiCodeBlock encoded, Instruction[] decoded, ExtractTermCode term)
+        public ApiBlockAsm(ApiCodeBlock encoded, IceInstruction[] decoded, ExtractTermCode term)
         {
             Encoded = encoded;
             Decoded = decoded;
@@ -46,7 +46,7 @@ namespace Z0.Asm
         /// <summary>
         /// Queries/Manipulates an index-identified instruction
         /// </summary>
-        public ref Instruction this[int i]
+        public ref IceInstruction this[int i]
             => ref Decoded[i];
 
         public int InstructionCount

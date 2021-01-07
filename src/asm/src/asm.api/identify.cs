@@ -9,7 +9,7 @@ namespace Z0
 
     using NI = NumericIndicator;
     using TI = TypeIndicator;
-    using MZ = Asm.MemorySize;
+    using MZ = Asm.IceMemorySize;
     using NK = NumericKind;
     using SI = SegmentedIdentity;
     using FIX = CellWidth;
@@ -20,11 +20,11 @@ namespace Z0
     partial struct asm
     {
         /// <summary>
-        /// Assigns identity to a <see cref='MemorySize'/> specification
+        /// Assigns identity to a <see cref='IceMemorySize'/> specification
         /// </summary>
         /// <param name="src">A memory size specification</param>
         [Op]
-        public static SegmentedIdentity identify(MemorySize src)
+        public static SegmentedIdentity identify(IceMemorySize src)
             => src switch {
                     MZ.UInt8 => NK.U8,
                     MZ.UInt16 => NK.U16,

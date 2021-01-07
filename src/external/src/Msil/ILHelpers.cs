@@ -9,7 +9,7 @@ namespace Msil
 
     public static class ILHelpers
     {
-        public static string ToIL(this Type type) 
+        public static string ToIL(this Type type)
             => ToIL(type?.GetTypeInfo());
 
         public static string ToIL(this TypeInfo type)
@@ -85,9 +85,7 @@ namespace Msil
             res += method.Name;
 
             if (method.IsGenericMethod)
-            {
                 res += "<" + string.Join(",", method.GetGenericArguments().Select(ToIL)) + ">";
-            }
 
             res += "(" + string.Join(",", method.GetParameters().Select(p => ToIL(p.ParameterType))) + ")";
 

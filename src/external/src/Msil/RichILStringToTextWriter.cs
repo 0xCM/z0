@@ -63,7 +63,7 @@ namespace Msil
             int endCount = 0;
             if (_endCounts.TryGetValue(instruction.Offset, out endCount))
             {
-                for (var i = 0; i < endCount; i++)
+                for (var i = 0; i<endCount; i++)
                 {
                     Dedent();
                     _writer.WriteLine(_indent + "}");
@@ -118,11 +118,7 @@ namespace Msil
                 Indent();
             }
 
-            _writer.WriteLine(string.Format("{3}IL_{0:x4}: {1,-10} {2}",
-                instruction.Offset,
-                instruction.OpCode.Name,
-                operandString,
-                _indent));
+            _writer.WriteLine(string.Format("{3}IL_{0:x4}: {1,-10} {2}", instruction.Offset, instruction.OpCode.Name, operandString, _indent));
         }
 
         public void Indent()

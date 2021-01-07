@@ -18,7 +18,7 @@ namespace Z0
 		/// </summary>
 		/// <param name="index">Operand number, 0-4</param>
         [MethodImpl(Inline), Op]
-		public static IceOpKind kind(in Instruction src, byte index)
+		public static IceOpKind kind(in IceInstruction src, byte index)
         {
             if(index == 0)
                 return src.Op0Kind;

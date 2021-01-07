@@ -31,7 +31,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        ref readonly Instruction Collect(in Instruction src)
+        ref readonly IceInstruction Collect(in IceInstruction src)
         {
             if(Collectors.TryGetValue(src.Mnemonic, out var collector))
                 collector.Collect(src);
@@ -47,22 +47,22 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        public void OnVinserti128(in Instruction i)
+        public void OnVinserti128(in IceInstruction i)
             => Collect(i);
 
         [MethodImpl(Inline)]
-        public void OnVmovupd(in Instruction i)
+        public void OnVmovupd(in IceInstruction i)
             => Collect(i);
 
         [MethodImpl(Inline)]
-        public void OnCall(in Instruction i)
+        public void OnCall(in IceInstruction i)
             => Collect(i);
 
         [MethodImpl(Inline)]
         public bool Include(AsmFxSink sink)
             => Sinks.TryAdd(sink.Kind, sink);
 
-        public Dictionary<IceMnemonic,Instruction[]> Handled
+        public Dictionary<IceMnemonic,IceInstruction[]> Handled
         {
             get => Collectors.Select(kvp => (kvp.Key, kvp.Value.Collected())).ToDictionary();
         }

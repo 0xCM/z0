@@ -15,7 +15,7 @@ namespace Z0
     partial struct asm
     {
         [MethodImpl(Inline), Op]
-        public static MemDxSize dxsize(in Instruction src, byte index)
+        public static MemDxSize dxsize(in IceInstruction src, byte index)
             => kind(src,index) == Memory ? (MemDxSize)src.MemoryDisplSize : 0;
     }
 }

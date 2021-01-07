@@ -15,7 +15,7 @@ namespace Z0
     partial struct asm
     {
         [MethodImpl(Inline), Op]
-        public static uint dxvalue(Instruction src, byte index)
+        public static uint dxvalue(IceInstruction src, byte index)
             => kind(src, (byte)index) == Memory ? src.MemoryDisplacement : 0;
     }
 }

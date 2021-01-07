@@ -16,6 +16,30 @@ namespace Z0
     using static z;
     using static Tools.Llvm;
 
+    public readonly struct PipeChecks
+    {
+        public static void check(IWfShell wf)
+        {
+            var flow = wf.Running();
+            var pipe = Pipes.pipe<ushort>();
+            var count = 10;
+            var input = wf.PolyStream.Span<ushort>(count);
+            for(var i=0; i<count; i++)
+                pipe.Deposit(skip(input,i));
+
+            var output = hashset<ushort>();
+            while(pipe.Next(out var dst))
+                output.Add(dst);
+
+            insist(output.Count, count);
+
+            for(var i=0; i<count; i++)
+                insist(output.Contains(skip(input,i)));
+
+            wf.Ran(flow, $"Ran {count} values through pipe");
+        }
+    }
+
     class App : IDisposable
     {
         public static void Main(params string[] args)
@@ -105,16 +129,6 @@ namespace Z0
         }
 
 
-        static void ListRuntimeFiles(IWfShell wf, FS.FilePath dst)
-        {
-            var archive = wf.RuntimeArchive();
-            using var writer = dst.Writer();
-            ListFiles(wf, archive.DllFiles, writer);
-            ListFiles(wf, archive.ExeFiles, writer);
-            ListFiles(wf, archive.PdbFiles, writer);
-            ListFiles(wf, archive.JsonFiles, writer);
-            ListFiles(wf, archive.XmlFiles, writer);
-        }
 
         static void ListFiles(IWfShell wf, FS.Files src, StreamWriter dst)
         {
@@ -133,17 +147,17 @@ namespace Z0
             }
         }
 
-        public void Run(ICmdSpec spec)
+        public CmdResult Run(ICmdSpec spec)
         {
             Wf.Status(Msg.Dispatching().Format(spec.CmdId));
-            Wf.Router.Dispatch(spec);
+            return Wf.Router.Dispatch(spec);
         }
 
-        public void Run<T>(T spec)
+        public CmdResult Run<T>(T spec)
             where T : struct, ICmdSpec<T>
         {
             Wf.Status(Msg.Dispatching<T>().Format(spec));
-            Wf.Router.Dispatch(spec);
+            return Wf.Router.Dispatch(spec);
         }
 
         void RunFxWorkflows()
@@ -206,7 +220,6 @@ namespace Z0
             using var flow = Wf.Running();
             using var runner = new ToolRunner(Wf, Host);
             iter(Wf.Router.SupportedCommands.Storage, c => Wf.Status($"{c} enabled"));
-
             PipeChecks.check(Wf);
         }
 
@@ -239,16 +252,7 @@ namespace Z0
             var archive = ImageArchives.tables(Wf);
             var path = archive.Root + FS.file("image.content.genapp", FileExtensions.Csv);
             ImageArchives.pipe(Wf, path, dst);
-
-            //ImageArchives.PipeImageData(wf, path);
-
         }
-        // CmdResult EmitOpCodes()
-        // {
-        //     var spec = EmitAsmOpCodes.Spec();
-        //     spec.WithTarget(Wf.Db().RefDataPath("asm.opcodes"));
-        //     return Wf.Router.Dispatch(spec);
-        // }
 
 
         void ShowLetters()
@@ -380,7 +384,7 @@ namespace Z0
         public void LoadAsmStore()
         {
             var store = AsmStore.init(Wf);
-            var patterns = store.Patterns();
+            var patterns = store.Summaries();
             Wf.Status($"{patterns.Length}");
         }
 

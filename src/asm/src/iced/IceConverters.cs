@@ -21,8 +21,8 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The iced source value</param>
         [MethodImpl(Inline), Op]
-        public static MemoryOperand Thaw(Iced.MemoryOperand src)
-            => new MemoryOperand(
+        public static IceMemoryOperand Thaw(Iced.MemoryOperand src)
+            => new IceMemoryOperand(
                     (IceRegister)src.Base,
                     (IceRegister)src.Index,
                     src.Scale,
@@ -37,9 +37,9 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The iced source value</param>
         [Op]
-        public InstructionInfo Thaw(Iced.InstructionInfo src)
+        public IceInstructionInfo Thaw(Iced.InstructionInfo src)
         {
-            return new InstructionInfo
+            return new IceInstructionInfo
             {
                 Encoding = Thaw(src.Encoding),
                 FlowControl = Thaw(src.FlowControl),
@@ -65,8 +65,8 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The iced source value</param>
         [MethodImpl(Inline), Op]
-        public UsedMemory Thaw(Iced.UsedMemory src)
-            => new UsedMemory(
+        public IceUsedMemory Thaw(Iced.UsedMemory src)
+            => new IceUsedMemory(
                 Access : Thaw(src.Access),
                 Base  : Thaw(src.Base),
                 Displacement : src.Displacement,
@@ -82,8 +82,8 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The iced source value</param>
         [MethodImpl(Inline), Op]
-        public UsedRegister Thaw(Iced.UsedRegister src)
-            => new UsedRegister(Thaw(src.Register), Thaw(src.Access));
+        public IceUsedRegister Thaw(Iced.UsedRegister src)
+            => new IceUsedRegister(Thaw(src.Register), Thaw(src.Access));
 
         /// <summary>
         /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
@@ -154,8 +154,8 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The iced source value</param>
         [MethodImpl(Inline), Op]
-        public MemorySize Thaw(Iced.MemorySize src)
-            => (MemorySize)src;
+        public IceMemorySize Thaw(Iced.MemorySize src)
+            => (IceMemorySize)src;
 
         /// <summary>
         /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure

@@ -101,7 +101,7 @@ namespace Z0
             Process(code, instructions);
         }
 
-        void Process(in CodeBlock code, Instruction[] asm)
+        void Process(in CodeBlock code, IceInstruction[] asm)
         {
             var bytes = span(code.Storage);
             ushort offset = 0;
@@ -120,7 +120,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        void Process(in CodeBlock code, Address16 offset, Span<byte> encoded, in Instruction src)
+        void Process(in CodeBlock code, Address16 offset, Span<byte> encoded, in IceInstruction src)
         {
             var mnemonic = src.Mnemonic;
 

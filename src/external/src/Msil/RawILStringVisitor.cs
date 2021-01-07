@@ -2,8 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 namespace Msil
 {
-    using Cli;
-
     public sealed class RawILStringVisitor : ReadableILStringVisitor
     {
         public RawILStringVisitor(IILStringCollector collector)

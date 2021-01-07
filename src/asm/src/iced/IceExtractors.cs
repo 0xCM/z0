@@ -12,14 +12,14 @@ namespace Z0.Asm
     using Iced = Iced.Intel;
 
     [ApiHost]
-    struct IceExtractors
+    public struct IceExtractors
     {
         [MethodImpl(Inline), Op]
-        public static UsedMemory[] UsedMemory(Iced.InstructionInfo src)
+        public static IceUsedMemory[] UsedMemory(Iced.InstructionInfo src)
             => src.GetUsedMemory().Map(x => Deicer.Thaw(x));
 
         [MethodImpl(Inline), Op]
-        public static UsedRegister[] UsedRegisters(Iced.InstructionInfo src)
+        public static IceUsedRegister[] UsedRegisters(Iced.InstructionInfo src)
             => src.GetUsedRegisters().Map(x => Deicer.Thaw(x));
 
         [MethodImpl(Inline)]
@@ -49,10 +49,10 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The iced source value</param>
         [Op]
-        public static Instruction extract(Iced.Instruction src, string formatted)
+        public static IceInstruction extract(Iced.Instruction src, string formatted)
         {
             var info = src.GetInfo();
-            return new Instruction
+            return new IceInstruction
             {
                 UsedMemory = UsedMemory(info),
                 UsedRegisters = UsedRegisters(info),
@@ -161,8 +161,8 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The iced source value</param>
         [Op]
-        public static OpCodeInfo extract(Iced.OpCodeInfo src)
-            => new OpCodeInfo
+        public static IceOpCodeInfo extract(Iced.OpCodeInfo src)
+            => new IceOpCodeInfo
             {
                 AddressSize = src.AddressSize,
                 CanBroadcast = src.CanBroadcast,

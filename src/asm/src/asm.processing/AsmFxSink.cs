@@ -23,7 +23,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        public void Deposit(in Instruction src)
+        public void Deposit(in IceInstruction src)
             => Receiver(src);
     }
 }

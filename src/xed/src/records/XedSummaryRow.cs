@@ -7,11 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using F = XedPatternField;
-    using R = XedPatternRow;
+    using F = XedSummaryField;
+    using R = XedSummaryRow;
 
     [Record(TableId)]
-    public struct XedPatternRow : ITabular<F,R>
+    public struct XedSummaryRow : ITabular<F,R>
     {
         public const string TableId = "xed.summary";
 
@@ -34,6 +34,6 @@ namespace Z0
         public string Operands;
 
         public string DelimitedText(char sep)
-            => XedTables.format(this,sep);
+            => Xed.format(this, sep);
     }
 }

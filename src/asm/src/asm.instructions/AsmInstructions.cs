@@ -16,23 +16,23 @@ namespace Z0.Asm
     /// <summary>
     /// Defines an *unbased* sequence of instructions
     /// </summary>
-    public readonly struct AsmInstructions : IEnumerable<Instruction>, IEquatable<AsmInstructions>
+    public readonly struct AsmInstructions : IEnumerable<IceInstruction>, IEquatable<AsmInstructions>
     {
-        readonly Index<Instruction> Instructions;
+        readonly Index<IceInstruction> Instructions;
 
         public BinaryCode Data {get;}
 
         [MethodImpl(Inline)]
-        public static AsmInstructions Create(Instruction[] src, BinaryCode data)
+        public static AsmInstructions Create(IceInstruction[] src, BinaryCode data)
             => new AsmInstructions(src, data);
 
-        public ref readonly Instruction this[long index]
+        public ref readonly IceInstruction this[long index]
         {
             [MethodImpl(Inline)]
             get => ref Instructions[index];
         }
 
-        public ref readonly Instruction this[ulong index]
+        public ref readonly IceInstruction this[ulong index]
         {
             [MethodImpl(Inline)]
             get => ref Instructions[index];
@@ -62,11 +62,11 @@ namespace Z0.Asm
             get => Instructions.IsNonEmpty;
         }
 
-        public static implicit operator Instruction[](AsmInstructions src)
+        public static implicit operator IceInstruction[](AsmInstructions src)
             => src.Instructions;
 
         [MethodImpl(Inline)]
-        internal AsmInstructions(Instruction[] src, BinaryCode data)
+        internal AsmInstructions(IceInstruction[] src, BinaryCode data)
         {
             Instructions = src;
             Data = data;
@@ -80,13 +80,13 @@ namespace Z0.Asm
 
         public override string ToString()
             => Format();
-        IEnumerator<Instruction> IEnumerable<Instruction>.GetEnumerator()
+        IEnumerator<IceInstruction> IEnumerable<IceInstruction>.GetEnumerator()
             => Instructions.AsEnumerable().GetEnumerator();
 
         IEnumerator IEnumerable.GetEnumerator()
             => Instructions.AsEnumerable().GetEnumerator();
 
         public static AsmInstructions Empty
-            => Create(array<Instruction>(), BinaryCode.Empty);
+            => Create(array<IceInstruction>(), BinaryCode.Empty);
     }
 }

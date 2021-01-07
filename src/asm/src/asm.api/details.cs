@@ -12,9 +12,9 @@ namespace Z0
     partial struct asm
     {
         [Op]
-        public static InstructionInfo details(in Instruction src)
+        public static IceInstructionInfo details(in IceInstruction src)
         {
-            return new InstructionInfo
+            return new IceInstructionInfo
             {
                 Encoding = src.Encoding,
                 FlowControl = src.FlowControl,

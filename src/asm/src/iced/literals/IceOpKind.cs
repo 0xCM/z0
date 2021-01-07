@@ -11,140 +11,140 @@ namespace Z0.Asm
 	{
 		/// <summary>
 		/// A register (<see cref="Intel.Register"/>).
-		/// This operand kind uses <see cref="Instruction.Op0Register"/>, <see cref="Instruction.Op1Register"/>,
-		/// <see cref="Instruction.Op2Register"/> or <see cref="Instruction.Op3Register"/> depending on operand number.
-		/// See also <see cref="Instruction.GetOpRegister(int)"/>.
+		/// This operand kind uses <see cref="IceInstruction.Op0Register"/>, <see cref="IceInstruction.Op1Register"/>,
+		/// <see cref="IceInstruction.Op2Register"/> or <see cref="IceInstruction.Op3Register"/> depending on operand number.
+		/// See also <see cref="IceInstruction.GetOpRegister(int)"/>.
 		/// </summary>
 		Register = 0,// Code assumes this is 0
 
 		/// <summary>
-		/// Near 16-bit branch. This operand kind uses <see cref="Instruction.NearBranch16"/>
+		/// Near 16-bit branch. This operand kind uses <see cref="IceInstruction.NearBranch16"/>
 		/// </summary>
 		NearBranch16,
 
 		/// <summary>
-		/// Near 32-bit branch. This operand kind uses <see cref="Instruction.NearBranch32"/>
+		/// Near 32-bit branch. This operand kind uses <see cref="IceInstruction.NearBranch32"/>
 		/// </summary>
 		NearBranch32,
 
 		/// <summary>
-		/// Near 64-bit branch. This operand kind uses <see cref="Instruction.NearBranch64"/>
+		/// Near 64-bit branch. This operand kind uses <see cref="IceInstruction.NearBranch64"/>
 		/// </summary>
 		NearBranch64,
 
 		/// <summary>
-		/// Far 16-bit branch. This operand kind uses <see cref="Instruction.FarBranch16"/> and <see cref="Instruction.FarBranchSelector"/>
+		/// Far 16-bit branch. This operand kind uses <see cref="IceInstruction.FarBranch16"/> and <see cref="IceInstruction.FarBranchSelector"/>
 		/// </summary>
 		FarBranch16,
 
 		/// <summary>
-		/// Far 32-bit branch. This operand kind uses <see cref="Instruction.FarBranch32"/> and <see cref="Instruction.FarBranchSelector"/>
+		/// Far 32-bit branch. This operand kind uses <see cref="IceInstruction.FarBranch32"/> and <see cref="IceInstruction.FarBranchSelector"/>
 		/// </summary>
 		FarBranch32,
 
 		/// <summary>
-		/// 8-bit constant. This operand kind uses <see cref="Instruction.Immediate8"/>
+		/// 8-bit constant. This operand kind uses <see cref="IceInstruction.Immediate8"/>
 		/// </summary>
 		Immediate8,
 
 		/// <summary>
-		/// 8-bit constant used by the enter, extrq, insertq instructions. This operand kind uses <see cref="Instruction.Immediate8_2nd"/>
+		/// 8-bit constant used by the enter, extrq, insertq instructions. This operand kind uses <see cref="IceInstruction.Immediate8_2nd"/>
 		/// </summary>
 		Immediate8_2nd,
 
 		/// <summary>
-		/// 16-bit constant. This operand kind uses <see cref="Instruction.Immediate16"/>
+		/// 16-bit constant. This operand kind uses <see cref="IceInstruction.Immediate16"/>
 		/// </summary>
 		Immediate16,
 
 		/// <summary>
-		/// 32-bit constant. This operand kind uses <see cref="Instruction.Immediate32"/>
+		/// 32-bit constant. This operand kind uses <see cref="IceInstruction.Immediate32"/>
 		/// </summary>
 		Immediate32,
 
 		/// <summary>
-		/// 64-bit constant. This operand kind uses <see cref="Instruction.Immediate64"/>
+		/// 64-bit constant. This operand kind uses <see cref="IceInstruction.Immediate64"/>
 		/// </summary>
 		Immediate64,
 
 		/// <summary>
-		/// An 8-bit value sign extended to 16 bits. This operand kind uses <see cref="Instruction.Immediate8to16"/>
+		/// An 8-bit value sign extended to 16 bits. This operand kind uses <see cref="IceInstruction.Immediate8to16"/>
 		/// </summary>
 		Immediate8to16,
 
 		/// <summary>
-		/// An 8-bit value sign extended to 32 bits. This operand kind uses <see cref="Instruction.Immediate8to32"/>
+		/// An 8-bit value sign extended to 32 bits. This operand kind uses <see cref="IceInstruction.Immediate8to32"/>
 		/// </summary>
 		Immediate8to32,
 
 		/// <summary>
-		/// An 8-bit value sign extended to 64 bits. This operand kind uses <see cref="Instruction.Immediate8to64"/>
+		/// An 8-bit value sign extended to 64 bits. This operand kind uses <see cref="IceInstruction.Immediate8to64"/>
 		/// </summary>
 		Immediate8to64,
 
 		/// <summary>
-		/// A 32-bit value sign extended to 64 bits. This operand kind uses <see cref="Instruction.Immediate32to64"/>
+		/// A 32-bit value sign extended to 64 bits. This operand kind uses <see cref="IceInstruction.Immediate32to64"/>
 		/// </summary>
 		Immediate32to64,
 
 		/// <summary>
-		/// seg:[si]. This operand kind uses <see cref="Instruction.MemorySize"/>, <see cref="Instruction.MemorySegment"/>, <see cref="Instruction.SegmentPrefix"/>
+		/// seg:[si]. This operand kind uses <see cref="IceInstruction.MemorySize"/>, <see cref="IceInstruction.MemorySegment"/>, <see cref="IceInstruction.SegmentPrefix"/>
 		/// </summary>
 		MemorySegSI,
 
 		/// <summary>
-		/// seg:[esi]. This operand kind uses <see cref="Instruction.MemorySize"/>, <see cref="Instruction.MemorySegment"/>, <see cref="Instruction.SegmentPrefix"/>
+		/// seg:[esi]. This operand kind uses <see cref="IceInstruction.MemorySize"/>, <see cref="IceInstruction.MemorySegment"/>, <see cref="IceInstruction.SegmentPrefix"/>
 		/// </summary>
 		MemorySegESI,
 
 		/// <summary>
-		/// seg:[rsi]. This operand kind uses <see cref="Instruction.MemorySize"/>, <see cref="Instruction.MemorySegment"/>, <see cref="Instruction.SegmentPrefix"/>
+		/// seg:[rsi]. This operand kind uses <see cref="IceInstruction.MemorySize"/>, <see cref="IceInstruction.MemorySegment"/>, <see cref="IceInstruction.SegmentPrefix"/>
 		/// </summary>
 		MemorySegRSI,
 
 		/// <summary>
-		/// seg:[di]. This operand kind uses <see cref="Instruction.MemorySize"/>, <see cref="Instruction.MemorySegment"/>, <see cref="Instruction.SegmentPrefix"/>
+		/// seg:[di]. This operand kind uses <see cref="IceInstruction.MemorySize"/>, <see cref="IceInstruction.MemorySegment"/>, <see cref="IceInstruction.SegmentPrefix"/>
 		/// </summary>
 		MemorySegDI,
 
 		/// <summary>
-		/// seg:[edi]. This operand kind uses <see cref="Instruction.MemorySize"/>, <see cref="Instruction.MemorySegment"/>, <see cref="Instruction.SegmentPrefix"/>
+		/// seg:[edi]. This operand kind uses <see cref="IceInstruction.MemorySize"/>, <see cref="IceInstruction.MemorySegment"/>, <see cref="IceInstruction.SegmentPrefix"/>
 		/// </summary>
 		MemorySegEDI,
 
 		/// <summary>
-		/// seg:[rdi]. This operand kind uses <see cref="Instruction.MemorySize"/>, <see cref="Instruction.MemorySegment"/>, <see cref="Instruction.SegmentPrefix"/>
+		/// seg:[rdi]. This operand kind uses <see cref="IceInstruction.MemorySize"/>, <see cref="IceInstruction.MemorySegment"/>, <see cref="IceInstruction.SegmentPrefix"/>
 		/// </summary>
 		MemorySegRDI,
 
 		/// <summary>
-		/// es:[di]. This operand kind uses <see cref="Instruction.MemorySize"/>
+		/// es:[di]. This operand kind uses <see cref="IceInstruction.MemorySize"/>
 		/// </summary>
 		MemoryESDI,
 
 		/// <summary>
-		/// es:[edi]. This operand kind uses <see cref="Instruction.MemorySize"/>
+		/// es:[edi]. This operand kind uses <see cref="IceInstruction.MemorySize"/>
 		/// </summary>
 		MemoryESEDI,
 
 		/// <summary>
-		/// es:[rdi]. This operand kind uses <see cref="Instruction.MemorySize"/>
+		/// es:[rdi]. This operand kind uses <see cref="IceInstruction.MemorySize"/>
 		/// </summary>
 		MemoryESRDI,
 
 		/// <summary>
-		/// 64-bit offset [xxxxxxxxxxxxxxxx]. This operand kind uses <see cref="Instruction.MemoryAddress64"/>,
-		/// <see cref="Instruction.MemorySegment"/>, <see cref="Instruction.SegmentPrefix"/>, <see cref="Instruction.MemorySize"/>
+		/// 64-bit offset [xxxxxxxxxxxxxxxx]. This operand kind uses <see cref="IceInstruction.MemoryAddress64"/>,
+		/// <see cref="IceInstruction.MemorySegment"/>, <see cref="IceInstruction.SegmentPrefix"/>, <see cref="IceInstruction.MemorySize"/>
 		/// </summary>
 		Memory64,
 
 		/// <summary>
 		/// Memory operand.
 		///
-		/// This operand kind uses <see cref="Instruction.MemoryDisplSize"/>, <see cref="Instruction.MemorySize"/>,
-		/// <see cref="Instruction.MemoryIndexScale"/>, <see cref="Instruction.MemoryDisplacement"/>,
-		/// <see cref="Instruction.MemoryBase"/>, <see cref="Instruction.MemoryIndex"/>, <see cref="Instruction.MemorySegment"/>,
-		/// <see cref="Instruction.SegmentPrefix"/>
+		/// This operand kind uses <see cref="IceInstruction.MemoryDisplSize"/>, <see cref="IceInstruction.MemorySize"/>,
+		/// <see cref="IceInstruction.MemoryIndexScale"/>, <see cref="IceInstruction.MemoryDisplacement"/>,
+		/// <see cref="IceInstruction.MemoryBase"/>, <see cref="IceInstruction.MemoryIndex"/>, <see cref="IceInstruction.MemorySegment"/>,
+		/// <see cref="IceInstruction.SegmentPrefix"/>
 		/// </summary>
 		Memory,
 	}

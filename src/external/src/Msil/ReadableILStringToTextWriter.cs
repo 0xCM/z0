@@ -15,10 +15,7 @@ namespace Msil
 
         public virtual void Process(ILInlineInstruction ilInstruction, string operandString)
         {
-            _writer.WriteLine("IL_{0:x4}: {1,-10} {2}",
-                ilInstruction.Offset,
-                ilInstruction.OpCode.Name,
-                operandString);
+            _writer.WriteLine("IL_{0:x4}: {1,-10} {2}", ilInstruction.Offset, ilInstruction.OpCode.Name, operandString);
         }
     }
 }

@@ -12,7 +12,7 @@ namespace Msil
             Ordinal = ordinal;
         }
 
-        public ushort Ordinal { get; }
+        public ushort Ordinal {get;}
 
         public override void Accept(ILInstructionVisitor visitor)
             => visitor.VisitInlineVarInstruction(this);

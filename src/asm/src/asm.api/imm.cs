@@ -45,7 +45,7 @@ namespace Z0
             => new ImmInfo(W.W64, value, direct);
 
         [Op]
-        public static ImmInfo imminfo(in Instruction src, byte index)
+        public static ImmInfo imminfo(in IceInstruction src, byte index)
         {
 			switch (kind(src,index))
             {

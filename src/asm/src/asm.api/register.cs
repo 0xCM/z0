@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="src">The source instruction</param>
         /// <param name="index">The operand index</param>
         [MethodImpl(Inline), Op]
-		public static IceRegister register(in Instruction src, byte index)
+		public static IceRegister register(in IceInstruction src, byte index)
         {
 			switch (index)
             {

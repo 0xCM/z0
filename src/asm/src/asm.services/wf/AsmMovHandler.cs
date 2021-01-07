@@ -24,7 +24,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        public void Handle(in Instruction i)
+        public void Handle(in IceInstruction i)
         {
             if(i.Mnemonic == IceMnemonic.Mov && i.Op1Kind == IceOpKind.Immediate64 && i.Op0Kind == IceOpKind.Register)
                 Handle(i.Immediate64, i.Op0Register);

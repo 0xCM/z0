@@ -73,7 +73,7 @@ namespace Z0
         {
             var instructions = list<ApiRoutineObsolete>();
             var ip = MemoryAddress.Empty;
-            var target = list<Instruction>();
+            var target = list<IceInstruction>();
             var count = src.Length;
             var decoder = Context.RoutineDecoder;
             for(var i=0; i<count; i++)
@@ -91,10 +91,10 @@ namespace Z0
             return new ApiHostRoutines(src.Host, instructions.ToArray());
         }
 
-        ApiRoutineObsolete Load(MemoryAddress @base, ApiCodeBlock code, Instruction[] src)
+        ApiRoutineObsolete Load(MemoryAddress @base, ApiCodeBlock code, IceInstruction[] src)
             => new ApiRoutineObsolete(@base, Load(code, src));
 
-        ApiInstruction[] Load(ApiCodeBlock code, Instruction[] src)
+        ApiInstruction[] Load(ApiCodeBlock code, IceInstruction[] src)
         {
             var @base = code.BaseAddress;
             var offseq = OffsetSequence.Zero;

@@ -7,7 +7,7 @@ namespace Z0.Asm
     /// <summary>
     /// A register used by an instruction
     /// </summary>
-    public readonly struct UsedRegister
+    public readonly struct IceUsedRegister
     {
         /// <summary>
         /// Register
@@ -24,7 +24,7 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="reg">Register</param>
         /// <param name="access">Register access</param>
-        public UsedRegister(IceRegister reg, IceOpAccess access)
+        public IceUsedRegister(IceRegister reg, IceOpAccess access)
         {
             Register = reg;
             Access = access;

@@ -8,5 +8,5 @@ namespace Z0.Asm
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public delegate void AsmFxHandler(in Instruction src);
+    public delegate void AsmFxHandler(in IceInstruction src);
 }

@@ -15,7 +15,7 @@ namespace Z0
     partial struct asm
     {
         [MethodImpl(Inline), Op]
-        public static IceRegister memBase(Instruction src, byte index)
+        public static IceRegister memBase(IceInstruction src, byte index)
             => kind(src,index) == Memory ? src.MemoryBase : 0;
     }
 }

@@ -7,7 +7,7 @@ namespace Z0.Asm
     /// <summary>
     /// A memory location used by an instruction
     /// </summary>
-    public struct UsedMemory
+    public struct IceUsedMemory
     {
         /// <summary>
         /// Captures the result of the ToString() method at the time of replication
@@ -42,15 +42,15 @@ namespace Z0.Asm
         /// <summary>
         /// Size of location
         /// </summary>
-        public readonly MemorySize MemorySize;
+        public readonly IceMemorySize MemorySize;
 
         /// <summary>
         /// Memory access
         /// </summary>
         public readonly IceOpAccess Access;
 
-        public UsedMemory(string Formatted, IceRegister Segment, IceRegister Base, IceRegister Index,
-            int Scale, ulong Displacement, MemorySize MemorySize, IceOpAccess Access)
+        public IceUsedMemory(string Formatted, IceRegister Segment, IceRegister Base, IceRegister Index,
+            int Scale, ulong Displacement, IceMemorySize MemorySize, IceOpAccess Access)
         {
             this.Formatted = Formatted;
             this.Segment = Segment;

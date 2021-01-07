@@ -5,12 +5,12 @@ namespace Msil
     using System;
     using System.Reflection.Emit;
 
-    using Cli;
 
     public sealed class InlineTypeInstruction : ILInlineInstruction
     {
-        private readonly ICilTokenResolver _resolver;
-        private Type _type;
+        readonly ICilTokenResolver _resolver;
+
+        Type _type;
 
         internal InlineTypeInstruction(int offset, OpCode opCode, int token, ICilTokenResolver resolver)
             : base(offset, opCode)
@@ -20,8 +20,10 @@ namespace Msil
         }
 
         public Type Type => _type ?? (_type = _resolver.AsType(Token));
+
         public int Token { get; }
 
-        public override void Accept(ILInstructionVisitor visitor) => visitor.VisitInlineTypeInstruction(this);
+        public override void Accept(ILInstructionVisitor visitor)
+            => visitor.VisitInlineTypeInstruction(this);
     }
 }

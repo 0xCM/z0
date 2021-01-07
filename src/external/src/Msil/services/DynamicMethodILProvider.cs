@@ -74,9 +74,7 @@ namespace Msil
 
                     _exceptionInfo = new ExceptionInfo[n];
                     for (var i = 0; i < n; i++)
-                    {
                         _exceptionInfo[i] = new ExceptionInfo(exceptions.GetValue(i));
-                    }
                 }
                 else
                     _exceptionInfo = Array.Empty<ExceptionInfo>();

@@ -14,36 +14,36 @@ namespace Z0.Asm
     /// <summary>
     /// Defines a contiguous *based* instruction sequence
     /// </summary>
-    public readonly struct AsmFxList : IEnumerable<Instruction>
+    public readonly struct AsmFxList : IEnumerable<IceInstruction>
     {
-        readonly Instruction[] Source;
+        readonly IceInstruction[] Source;
 
         public CodeBlock Encoded {get;}
 
         [MethodImpl(Inline)]
-        public static implicit operator Instruction[](AsmFxList src)
+        public static implicit operator IceInstruction[](AsmFxList src)
             => src.Source;
 
         [MethodImpl(Inline)]
-        public AsmFxList(Instruction[] src, CodeBlock data)
+        public AsmFxList(IceInstruction[] src, CodeBlock data)
         {
             Source = src;
             Encoded = data;
         }
 
-        public ref readonly Instruction this[int index]
+        public ref readonly IceInstruction this[int index]
         {
             [MethodImpl(Inline)]
             get => ref Source[index];
         }
 
-        public ReadOnlySpan<Instruction> View
+        public ReadOnlySpan<IceInstruction> View
         {
             [MethodImpl(Inline)]
             get => Source;
         }
 
-        public Instruction[] Data
+        public IceInstruction[] Data
         {
             [MethodImpl(Inline)]
             get => Source;
@@ -67,12 +67,12 @@ namespace Z0.Asm
              get => Source == null || Source.Length == 0;
         }
 
-        public IEnumerator<Instruction> GetEnumerator()
-            => ((IReadOnlyList<Instruction>)Source).GetEnumerator();
+        public IEnumerator<IceInstruction> GetEnumerator()
+            => ((IReadOnlyList<IceInstruction>)Source).GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator()
             => Source.GetEnumerator();
 
         public static AsmFxList Empty
-            => new AsmFxList(z.array<Instruction>(), CodeBlock.Empty);
+            => new AsmFxList(z.array<IceInstruction>(), CodeBlock.Empty);
     }
 }

@@ -7,7 +7,7 @@ namespace Z0.Asm
 	/// <summary>
 	/// Contains information about an instruction, eg. read/written registers, read/written RFLAGS bits, CPUID feature bit, etc
 	/// </summary>
-	public struct InstructionInfo
+	public struct IceInstructionInfo
     {
 		/// true if the instruction isn't available in real mode or virtual 8086 mode
 		/// </summary>
@@ -20,7 +20,7 @@ namespace Z0.Asm
 
 		/// <summary>
 		/// true if this is an instruction that implicitly uses the stack pointer (SP/ESP/RSP), eg. call, push, pop, ret, etc.
-		/// See also <see cref="Instruction.StackPointerIncrement"/>
+		/// See also <see cref="IceInstruction.StackPointerIncrement"/>
 		/// </summary>
 		public bool IsStackInstruction {get;set;}
 
@@ -75,9 +75,9 @@ namespace Z0.Asm
 		/// </summary>
 		public  IceFlowControl FlowControl {get;set;}
 
-        public UsedMemory[] UsedMemory {get;set;}
+        public IceUsedMemory[] UsedMemory {get;set;}
 
-        public UsedRegister[] UsedRegisters {get;set;}
+        public IceUsedRegister[] UsedRegisters {get;set;}
 
         public IceOpAccess[] Access {get;set;}
 	}

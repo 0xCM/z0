@@ -12,25 +12,25 @@ namespace Z0.Asm
 
     public readonly struct AsmFxCollector
     {
-        readonly List<Instruction> items;
+        readonly List<IceInstruction> items;
 
         [MethodImpl(Inline)]
-        public AsmFxCollector(params Instruction[] fx)
+        public AsmFxCollector(params IceInstruction[] fx)
         {
-            items = new List<Instruction>();
+            items = new List<IceInstruction>();
             items.AddRange(fx);
         }
 
         [MethodImpl(Inline)]
-        public void Collect(in Instruction src)
+        public void Collect(in IceInstruction src)
             => items.Add(src);
 
         [MethodImpl(Inline)]
-        public void Collect(IEnumerable<Instruction> src)
+        public void Collect(IEnumerable<IceInstruction> src)
             => items.AddRange(src);
 
         [MethodImpl(Inline)]
-        public Instruction[] Collected()
+        public IceInstruction[] Collected()
             => items.ToArray();
     }
 }

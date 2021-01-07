@@ -139,7 +139,7 @@ namespace Z0
         }
 
         [Op]
-        string Format(MemoryAddress @base, Instruction src, byte i)
+        string Format(MemoryAddress @base, IceInstruction src, byte i)
         {
             var kind = asm.kind(src, i);
             var desc = EmptyString;
@@ -216,7 +216,7 @@ namespace Z0
         }
 
         [Op]
-        string LineLocation(Instruction src, MemoryAddress address, MemoryAddress offset, OffsetSequence seq)
+        string LineLocation(IceInstruction src, MemoryAddress address, MemoryAddress offset, OffsetSequence seq)
             => text.concat(FormatAddress(src, AddressPad),
                 Z0.TextFormatter.concat(text.spaced(offset)).PadRight(OffsetAddrPad),
                 seq.Format(InstructionCountPad));
@@ -305,7 +305,7 @@ namespace Z0
             => format(src);
 
         [Op]
-        static string format(MemDirect src)
+        static string format(IceMemDirect src)
         {
             var dst = text.build();
             if(src.Base.IsSome())
@@ -345,14 +345,14 @@ namespace Z0
             });
 
         [Op]
-        static string FormatAddress(Instruction src, int pad = 16)
+        static string FormatAddress(IceInstruction src, int pad = 16)
             => Z0.TextFormatter.concat(src.IP.FormatHex(zpad:false, prespec:false)).PadRight(pad);
 
         [Op]
-        static string format(MemorySize src)
+        static string format(IceMemorySize src)
             => asm.identify(src).Format();
 
-        static StringBuilder Render(MemInfo src, StringBuilder builder)
+        static StringBuilder Render(IceMemoryInfo src, StringBuilder builder)
         {
             var nonempty = false;
             if(!src.IsEmpty)
@@ -380,7 +380,7 @@ namespace Z0
         }
 
         [Op]
-        static string format(MemInfo src)
+        static string format(IceMemoryInfo src)
             => Render(src, text.build()).ToString();
     }
 }

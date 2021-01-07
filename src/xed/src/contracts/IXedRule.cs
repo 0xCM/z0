@@ -7,22 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    public enum XedRuleKind
-    {
-        None,
-
-        Expression,
-
-        Proposition,
-
-        Sequence,
-
-        Instruction,
-
-        Ruleset,
-
-    }
-
     public interface IXedRule
     {
         XedRuleKind RuleKind {get;}

@@ -14,9 +14,9 @@ namespace Z0.Asm
         void FireOnMatch(in S src);
     }
 
-    public interface IAsmFxTrigger : IConditionTest<Instruction>
+    public interface IAsmFxTrigger : IConditionTest<IceInstruction>
     {
-        void TryFire(in Instruction src);
+        void TryFire(in IceInstruction src);
     }
 
     public interface IAsmPipe

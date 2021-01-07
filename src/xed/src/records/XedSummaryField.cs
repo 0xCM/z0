@@ -6,9 +6,9 @@ namespace Z0
 {
     using System;
 
-    using static Konst;
+    using static Part;
 
-    public enum XedPatternField : uint
+    public enum XedSummaryField : uint
     {
         Class = 0 | 20u << WidthOffset,
 

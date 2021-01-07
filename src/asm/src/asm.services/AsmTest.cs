@@ -41,7 +41,7 @@ namespace Z0.Asm
             => src == IceOpKind.Register;
 
         [MethodImpl(Inline), Op]
-        public static bool isCall(Instruction src)
+        public static bool isCall(IceInstruction src)
             => src.Mnemonic == IceMnemonic.Call;
 
         /// <summary>
@@ -101,7 +101,7 @@ namespace Z0.Asm
             => isSignedImm(src) || isDirectImm(src) || isSpecialImm(src);
 
         [MethodImpl(Inline), Op]
-        public bool isMem(in Instruction src, byte index)
+        public bool isMem(in IceInstruction src, byte index)
         {
             switch(asm.kind(src,index))
             {

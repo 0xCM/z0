@@ -20,7 +20,7 @@ namespace Z0
         }
 
         [Op]
-        public static AsmMemory memory2(Instruction src, byte index)
+        public static AsmMemory memory2(IceInstruction src, byte index)
         {
             var dst = new AsmMemory();
             dst.MemoryBase = convert(memBase(src,index), out RegisterKind _);
@@ -43,7 +43,7 @@ namespace Z0
         /// <param name="src">The source instruction</param>
         /// <param name="index">The operand index</param>
         [MethodImpl(Inline), Op]
-        public static AsmFxMemory memory(Instruction src, byte index)
+        public static AsmFxMemory memory(IceInstruction src, byte index)
         {
             var dst = default(AsmFxMemory);
             dst.MemoryBase = memBase(src,index);

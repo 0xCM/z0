@@ -7,21 +7,20 @@ namespace Z0.Asm
     using System;
 
     using static Part;
-    using static memory;
 
     public class AsmStore : WfService<AsmStore,AsmStore>
     {
-        ITableArchive XedArchive;
+        ITableArchive Tables;
 
-        Index<XedPatternRow> Summaries;
+        Index<XedSummaryRow> Rows;
 
         protected override void OnInit()
         {
-            XedArchive = Db.TableArchive("xed");
-            Summaries = XedTables.patterns(XedArchive);
+            Tables = Db.TableArchive("xed");
+            Rows = Xed.summaries(Tables);
         }
 
-        public ReadOnlySpan<XedPatternRow> Patterns()
-            => Summaries.View;
+        public ReadOnlySpan<XedSummaryRow> Summaries()
+            => Rows.View;
     }
 }

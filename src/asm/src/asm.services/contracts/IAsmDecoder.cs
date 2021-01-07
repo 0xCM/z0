@@ -33,11 +33,11 @@ namespace Z0.Asm
 
         Option<AsmInstructions> Decode(ApiCodeBlock src);
 
-        Option<AsmRoutine> Decode(ApiCaptureBlock src, Action<Asm.Instruction> f);
+        Option<AsmRoutine> Decode(ApiCaptureBlock src, Action<Asm.IceInstruction> f);
 
-        Option<AsmFxList> Decode(ApiCodeBlock src, Action<Instruction> f);
+        Option<AsmFxList> Decode(ApiCodeBlock src, Action<IceInstruction> f);
 
-        Option<AsmFxList> Decode(CodeBlock src, Action<Instruction> f);
+        Option<AsmFxList> Decode(CodeBlock src, Action<IceInstruction> f);
 
         Option<AsmInstructions> Decode(BinaryCode code, MemoryAddress @base);
     }

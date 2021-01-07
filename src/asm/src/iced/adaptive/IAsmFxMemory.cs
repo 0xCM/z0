@@ -44,7 +44,7 @@ namespace Z0.Asm
         //     Iced.Intel.OpKind.MemorySegESI, Iced.Intel.OpKind.MemorySegRSI, Iced.Intel.OpKind.MemoryESDI,
         //     Iced.Intel.OpKind.MemoryESEDI, Iced.Intel.OpKind.MemoryESRDI
         [Label(size)]
-        MemorySize MemorySize {get;}
+        IceMemorySize MemorySize {get;}
 
         //
         // Summary:

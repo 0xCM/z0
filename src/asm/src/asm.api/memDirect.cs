@@ -14,7 +14,7 @@ namespace Z0
     partial struct asm
     {
         [MethodImpl(Inline), Op]
-        public static MemDirect memDirect(in Instruction src)
-            => new MemDirect(src.MemoryBase, src.MemoryIndexScale, dx(src.MemoryDisplacement, (MemDxSize)src.MemoryDisplSize));
+        public static IceMemDirect memDirect(in IceInstruction src)
+            => new IceMemDirect(src.MemoryBase, src.MemoryIndexScale, dx(src.MemoryDisplacement, (MemDxSize)src.MemoryDisplSize));
     }
 }

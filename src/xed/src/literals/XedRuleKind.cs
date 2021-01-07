@@ -4,7 +4,21 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System.Reflection;
+    using System;
+    using System.Runtime.CompilerServices;
 
+    public enum XedRuleKind
+    {
+        None,
 
+        Expression,
+
+        Proposition,
+
+        Sequence,
+
+        Instruction,
+
+        Ruleset,
+    }
 }

@@ -10,5 +10,5 @@ namespace Z0.Asm
     using static Konst;
 
     [SuppressUnmanagedCodeSecurity]
-    public delegate bool AsmFxTest(in Instruction src);
+    public delegate bool AsmFxTest(in IceInstruction src);
 }

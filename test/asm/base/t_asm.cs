@@ -62,7 +62,7 @@ namespace Z0.Asm
 
             var dst = z.list<AsmFxList>();
 
-            void Decoded(Instruction i)
+            void Decoded(IceInstruction i)
             {
                 hostCount++;
                 totalCount++;

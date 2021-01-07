@@ -7,7 +7,7 @@ namespace Z0.Asm
 	/// <summary>
 	/// Size of a memory reference
 	/// </summary>
-	public enum MemorySize
+	public enum IceMemorySize
     {
 		/// <summary>
 		/// Unknown size or the instruction doesn't reference the memory (eg. <c>lea</c>)

@@ -12,8 +12,8 @@ namespace Z0
 
     using static z;
 
-    using F = XedPatternField;
-    using R = XedPatternRow;
+    using F = XedSummaryField;
+    using R = XedSummaryRow;
     using api = Xed;
 
     [ApiHost]
@@ -93,51 +93,20 @@ namespace Z0
             return patterns.ToArray();
         }
 
-        public XedPatternRow[] Emit(XedPattern[] src)
+        public XedSummaryRow[] Emit(XedPattern[] src)
         {
-            var records = Xed.sort(src).Map(p => XedTables.row(p));
+            var records = Xed.sort(src).Map(p => Xed.row(p));
             Target.Deposit<F,R>(records, Config.SummaryFile);
             return records;
         }
 
-        void SaveMnemonics(XedPatternRow[] src)
+        void SaveMnemonics(XedSummaryRow[] src)
         {
             var upper = src.Select(s => s.Class).Distinct().OrderBy(x => x).ToArray();
             var dst = Target.TablePath(FS.file("mnemonics", FileExtensions.Csv));
             dst.Overwrite(upper);
         }
 
-        // [Op]
-        // void EmitRules()
-        // {
-        //     var parser = XedSourceParser.Service;
-        //     var sources = @readonly(Source.FunctionFiles);
-        //     var kSrc = sources.Length;
-
-        //     var rulepath = Config.Target + FS.file("rules", FileExtensions.Txt);
-        //     var funcpath = Config.Target + FS.file("functions", FileExtensions.Txt);
-        //     using var rulewriter = rulepath.Writer();
-        //     using var funcwriter = funcpath.Writer();
-
-        //     for(var i=0; i<kSrc; i++)
-        //     {
-        //         ref readonly var src = ref skip(sources,i);
-        //         var functions = parser.ParseFunctions(src);
-        //         var kFunc = functions.Length;
-        //         if(kFunc != 0)
-        //         {
-        //             api.emit(functions, funcwriter);
-
-        //             var view = @readonly(functions);
-        //             for(var j=0; j<kFunc; j++)
-        //             {
-        //                 ref readonly var ruleset = ref skip(view,j);
-        //                 Xed.emit(skip(view,j), rulewriter);
-        //                 Wf.Status($"Emitted ruleset {ruleset.Name}");
-        //             }
-        //         }
-        //     }
-        // }
 
         public void Run()
         {
@@ -146,7 +115,6 @@ namespace Z0
             var patterns = ExtractPatterns();
             var summaries = Emit(patterns);
             SaveMnemonics(summaries);
-            //EmitRules();
             Xed.emit(Wf, Config, Source);
 
         }

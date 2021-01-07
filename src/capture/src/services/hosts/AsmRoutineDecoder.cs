@@ -33,10 +33,10 @@ namespace Z0.Asm
         public Option<AsmInstructions> Decode(ApiCodeBlock src)
             => Decode(src.Encoded, src.BaseAddress);
 
-        public Option<AsmRoutine> Decode(ApiCaptureBlock src, Action<Asm.Instruction> f)
+        public Option<AsmRoutine> Decode(ApiCaptureBlock src, Action<Asm.IceInstruction> f)
             => Decode(src.Parsed,f).TryMap(x => routine(src,x));
 
-        public Option<AsmFxList> Decode(CodeBlock src, Action<Asm.Instruction> f)
+        public Option<AsmFxList> Decode(CodeBlock src, Action<Asm.IceInstruction> f)
         {
             try
             {
@@ -47,7 +47,7 @@ namespace Z0.Asm
                 var @base = src.BaseAddress;
                 decoder.IP = @base;
                 var stop = false;
-                var dst = new List<Asm.Instruction>(decoded.Count);
+                var dst = new List<Asm.IceInstruction>(decoded.Count);
 
                 while (reader.CanReadByte && !stop)
                 {
@@ -89,7 +89,7 @@ namespace Z0.Asm
                 }
 
                 var formatter = Capture.formatter(AsmFormat);
-                var instructions = new Asm.Instruction[decoded.Count];
+                var instructions = new Asm.IceInstruction[decoded.Count];
                 var formatted = formatter.FormatInstructions(decoded, @base);
                 for(var i=0; i<instructions.Length; i++)
                     instructions[i] = IceExtractors.extract(decoded[i], formatted[i]);
@@ -102,7 +102,7 @@ namespace Z0.Asm
             }
         }
 
-        public Option<AsmFxList> Decode(ApiCodeBlock src, Action<Instruction> f)
+        public Option<AsmFxList> Decode(ApiCodeBlock src, Action<IceInstruction> f)
             => Decode(new CodeBlock(src.BaseAddress,src.Data),f);
 
         public Option<AsmRoutine> Decode(ApiMemberCode src)

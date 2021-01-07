@@ -15,7 +15,7 @@ namespace Z0
     partial struct asm
     {
         [MethodImpl(Inline), Op]
-        public static IceRegister memSeg(in Instruction src, byte index)
+        public static IceRegister memSeg(in IceInstruction src, byte index)
         {
             switch(kind(src,index))
             {

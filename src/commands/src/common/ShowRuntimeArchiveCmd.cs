@@ -4,21 +4,20 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
     using System.Runtime.CompilerServices;
 
     using static Part;
 
-    [Cmd]
-    public struct EmitAsmMnemonicsCmd : ICmdSpec<EmitAsmMnemonicsCmd>
+    [Cmd(CmdName)]
+    public struct ShowRuntimeArchiveCmd : ICmdSpec<ShowRuntimeArchiveCmd>
     {
-
+        public const string CmdName = "show-runtime-archive";
     }
 
     partial class XCmd
     {
-        [MethodImpl(Inline), Op]
-        public static EmitAsmMnemonicsCmd EmitAsmMnemonics(this CmdBuilder builder)
-            => new EmitAsmMnemonicsCmd();
+        [MethodImpl(Inline)]
+        public static ShowRuntimeArchiveCmd ShowRuntimeArchive(this CmdBuilder wf)
+            => default;
     }
 }

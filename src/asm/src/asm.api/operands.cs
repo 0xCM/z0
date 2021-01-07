@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="fx">The source instruction</param>
         /// <param name="@base">The base address</param>
         [MethodImpl(Inline), Op]
-        public static AsmOperandInfo[] operands(MemoryAddress @base, in Instruction fx)
+        public static AsmOperandInfo[] operands(MemoryAddress @base, in IceInstruction fx)
         {
             var count = fx.OpCount;
             var buffer = alloc<AsmOperandInfo>(count);

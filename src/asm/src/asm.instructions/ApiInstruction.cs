@@ -16,7 +16,7 @@ namespace Z0.Asm
     {
         public ApiCodeBlock Encoded {get;}
 
-        public Instruction Instruction {get;}
+        public IceInstruction Instruction {get;}
 
         public MemoryAddress Base {get;}
 
@@ -48,7 +48,7 @@ namespace Z0.Asm
             => Instruction.ByteLength;
 
         [MethodImpl(Inline)]
-        public ApiInstruction(MemoryAddress @base, Instruction fx, ApiCodeBlock encoded)
+        public ApiInstruction(MemoryAddress @base, IceInstruction fx, ApiCodeBlock encoded)
         {
             Base = @base;
             Instruction = fx;

@@ -11,7 +11,7 @@ namespace Z0
 
     using Z0.Asm;
 
-    public readonly struct MemDirect
+    public readonly struct IceMemDirect
     {
         public readonly IceRegister Base;
 
@@ -20,7 +20,7 @@ namespace Z0
         public readonly MemDx Dx;
 
         [MethodImpl(Inline)]
-        public MemDirect(IceRegister register, MemoryScale scale, MemDx dx)
+        public IceMemDirect(IceRegister register, MemoryScale scale, MemDx dx)
         {
             Base = register;
             Dx = dx;
@@ -33,7 +33,7 @@ namespace Z0
             get => Base == 0 && Scale.IsEmpty && Dx.IsEmpty;
         }
 
-        public static MemDirect Empty
-            => new MemDirect(IceRegister.None, MemoryScale.Empty, MemDx.Empty);
+        public static IceMemDirect Empty
+            => new IceMemDirect(IceRegister.None, MemoryScale.Empty, MemDx.Empty);
     }
 }

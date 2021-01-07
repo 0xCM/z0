@@ -5,8 +5,6 @@ namespace Msil
     using System;
     using System.Reflection;
 
-    using Cli;
-
     public class DefaultTypeFactory : ICilTypeFactory
     {
         public static readonly ICilTypeFactory Instance = new DefaultTypeFactory();
@@ -15,22 +13,22 @@ namespace Msil
 
         static readonly MethodInfo s_GetTypeFromHandleUnsafe = typeof(Type).GetMethodAssert("GetTypeFromHandleUnsafe");
 
-        public virtual Type FromHandle(IntPtr handle) 
+        public virtual Type FromHandle(IntPtr handle)
             => (Type)s_GetTypeFromHandleUnsafe.Invoke(null, new object[] {handle});
-        
-        public Type MakeGenericType(Type definition, Type[] arguments) 
+
+        public Type MakeGenericType(Type definition, Type[] arguments)
             => definition.MakeGenericType(arguments);
-                    
-        public Type MakeArrayType(Type type) 
+
+        public Type MakeArrayType(Type type)
             => type.MakeArrayType();
-        
-        public Type MakeArrayType(Type type, int rank) 
+
+        public Type MakeArrayType(Type type, int rank)
             => type.MakeArrayType(rank);
-        
-        public Type MakeByRefType(Type type) 
+
+        public Type MakeByRefType(Type type)
             => type.MakeByRefType();
-        
-        public Type MakePointerType(Type type) 
+
+        public Type MakePointerType(Type type)
             => type.MakePointerType();
     }
 }

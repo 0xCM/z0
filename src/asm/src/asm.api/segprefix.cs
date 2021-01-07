@@ -15,7 +15,7 @@ namespace Z0
     partial struct asm
     {
         [MethodImpl(Inline), Op]
-        public static IceRegister segprefix(Instruction src, int index)
+        public static IceRegister segprefix(IceInstruction src, int index)
         {
             switch(kind(src,(byte)index))
             {

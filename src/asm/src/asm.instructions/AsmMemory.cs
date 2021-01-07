@@ -10,7 +10,7 @@ namespace Z0.Asm
 
         public RegisterKind MemoryIndex;
 
-        public MemorySize MemorySize;
+        public IceMemorySize MemorySize;
 
         public MemoryScale MemoryIndexScale;
 

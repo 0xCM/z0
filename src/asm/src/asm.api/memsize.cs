@@ -15,7 +15,7 @@ namespace Z0
     partial struct asm
     {
         [Op]
-        public static MemorySize memsize(Instruction src, byte index)
+        public static IceMemorySize memsize(IceInstruction src, byte index)
         {
             switch(asm.kind(src,(byte)index))
             {
@@ -29,7 +29,7 @@ namespace Z0
                 case MemoryESRDI:
                     return src.MemorySize;
                 default:
-                    return MemorySize.Unknown;
+                    return IceMemorySize.Unknown;
             }
         }
     }
