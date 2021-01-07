@@ -19,9 +19,9 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ClrArgRefKind RefKind(this ParameterInfo src)
             => src.IsIn
-            ? Z0.ClrArgRefKind.In  : src.IsOut
-            ? Z0.ClrArgRefKind.Out : src.ParameterType.IsByRef
-            ? Z0.ClrArgRefKind.Ref : Z0.ClrArgRefKind.None;
+            ? ClrArgRefKind.In  : src.IsOut
+            ? ClrArgRefKind.Out : src.ParameterType.IsByRef
+            ? ClrArgRefKind.Ref : ClrArgRefKind.None;
 
         [MethodImpl(Inline), Op]
         public static string Keyword(this ClrArgRefKind src)

@@ -9,7 +9,6 @@ namespace Z0
     using System.Collections.Generic;
 
     using static Part;
-    using static memory;
 
     partial struct corefunc
     {
@@ -20,7 +19,17 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static List<T> list<T>(params T[] src)
-            => sys.list(src);
+        {
+            var length = src?.Length ?? 0;
+            if(length == 0)
+                return new List<T>();
+            else
+            {
+                var dst = new List<T>(length);
+                dst.AddRange(src);
+                return dst;
+            }
+        }
 
         /// <summary>
         /// Creates a list with specified capacity

@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static Part;
+    using static root;
 
     /// <summary>
     /// Defines numeric identifiers for primal numeric types
@@ -13,24 +13,24 @@ namespace Z0
     {
         None = 0,
 
-        U8 = 1 << WidthOffset,
+        U8 = 1 << 16,
 
-        I8 = 2 << WidthOffset,
+        I8 = 2 << 16,
 
-        U16 = 4 << WidthOffset,
+        U16 = 4 << 16,
 
-        I16 = 8 << WidthOffset,
+        I16 = 8 << 16,
 
-        U32 = 16 << WidthOffset,
+        U32 = 16 << 16,
 
-        I32 = 32 << WidthOffset,
+        I32 = 32 << 16,
 
-        U64 = 64 << WidthOffset,
+        U64 = 64 << 16,
 
-        I64 = 128 << WidthOffset,
+        I64 = 128 << 16,
 
-        F32 = 512 << WidthOffset,
+        F32 = 512 << 16,
 
-        F64 = 1024 << WidthOffset,
+        F64 = 1024 << 16,
     }
 }

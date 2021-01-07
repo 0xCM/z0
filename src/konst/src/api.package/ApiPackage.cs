@@ -6,19 +6,22 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
+    using System.Runtime.Intrinsics;
 
     using static Part;
     using static memory;
 
-    partial struct MemRefs
+    public struct ApiPackage
     {
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static void store<T>(ReadOnlySpan<SegRef> src, Span<T> dst)
-            where T : struct
-        {
-            var count = src.Length;
-            for(var i=0u; i<count; i++)
-                seek(dst,i) = first(recover<T>(skip(src,i).Edit));
-        }
+        public OpUri Uri;
+
+        public ApiSig ApiSig;
+
+        public MsilCode CilCode;
+
+        public TextBlock CilText;
+
+        public CodeBlock RuntimeCode;
     }
 }

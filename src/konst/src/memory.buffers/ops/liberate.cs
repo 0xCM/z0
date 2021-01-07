@@ -11,7 +11,6 @@ namespace Z0
 
     unsafe partial struct Buffers
     {
-
         [MethodImpl(Inline)]
         public static ref readonly BinaryCode liberate(in BinaryCode src)
         {

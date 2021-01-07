@@ -8,17 +8,18 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static memory;
 
-    partial struct MemRefs
+    public readonly struct MsilCode
     {
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static void store<T>(ReadOnlySpan<SegRef> src, Span<T> dst)
-            where T : struct
+        public CliSig Sig {get;}
+
+        public Index<byte> Data {get;}
+
+        [MethodImpl(Inline)]
+        public MsilCode(CliSig sig, Index<byte> data)
         {
-            var count = src.Length;
-            for(var i=0u; i<count; i++)
-                seek(dst,i) = first(recover<T>(skip(src,i).Edit));
+            Sig = sig;
+            Data = data;
         }
     }
 }

@@ -82,7 +82,7 @@ namespace Z0
         public ClrToken Token
             => default;
 
-        public Ref<byte> RawMetadata
+        public SegRef<byte> RawMetadata
         {
             [MethodImpl(Inline)]
             get => Clr.metadata(Definition);

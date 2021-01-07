@@ -33,10 +33,10 @@ namespace Z0
         /// <summary>
         /// Returns a reference to the encoded data
         /// </summary>
-        public Ref Ref
+        public SegRef<AsciSymbol> Ref
         {
             [MethodImpl(Inline), Op]
-            get => MemRefs.define(First, Size);
+            get => memory.segref(first(Data), Data.Length);
         }
 
         public ref AsciSymbol First

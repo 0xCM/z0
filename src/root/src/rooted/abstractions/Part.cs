@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Root;
+    using static root;
 
     public abstract class Part<P> : IPart<P>
         where P : Part<P>, IPart<P>, new()

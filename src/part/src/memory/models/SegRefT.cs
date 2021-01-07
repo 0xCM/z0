@@ -6,31 +6,26 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
 
     using static Part;
 
     /// <summary>
     /// Defines a content-parametric memory reference
     /// </summary>
-    public readonly struct Ref<T> : ISegRef<Ref<T>,T>
+    public readonly struct SegRef<T> : ISegRef<SegRef<T>,T>
     {
         /// <summary>
         /// The source reference
         /// </summary>
-        internal readonly Ref Segment;
+        internal readonly SegRef Segment;
 
         [MethodImpl(Inline)]
-        public Ref(Ref src)
+        public SegRef(SegRef src)
             => Segment = src;
 
         [MethodImpl(Inline)]
-        public Ref(MemoryAddress address, ulong size)
-            => Segment = new Ref(address, size);
-
-        [MethodImpl(Inline)]
-        public Ref(Vector128<ulong> src)
-            => Segment = new Ref(src);
+        public SegRef(MemoryAddress address, ByteSize size)
+            => Segment = new SegRef(address, size);
 
         public Span<T> Data
         {
@@ -98,16 +93,16 @@ namespace Z0
             => Segment.Format();
 
         [MethodImpl(Inline)]
-        public bool Equals(Ref<T> src)
+        public bool Equals(SegRef<T> src)
             => Segment.Equals(src.Segment);
 
         public override bool Equals(object src)
-            => src is Ref<T> r && Equals(r);
+            => src is SegRef<T> r && Equals(r);
 
         public override int GetHashCode()
             => (int)Hash;
 
-        public static Ref<T> Empty
+        public static SegRef<T> Empty
             => default;
 
         /// <summary>
@@ -115,23 +110,23 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source reference</param>
         [MethodImpl(Inline)]
-        public static Span<T> operator !(Ref<T> src)
+        public static Span<T> operator !(SegRef<T> src)
             => src.Data;
 
         [MethodImpl(Inline)]
-        public static implicit operator Ref(Ref<T> src)
+        public static implicit operator SegRef(SegRef<T> src)
             => src.Segment;
 
         [MethodImpl(Inline)]
-        public static implicit operator Ref<T>(Ref src)
-            => new Ref<T>(src);
+        public static implicit operator SegRef<T>(SegRef src)
+            => new SegRef<T>(src);
 
         [MethodImpl(Inline)]
-        public static bool operator ==(Ref<T> lhs, Ref<T> rhs)
+        public static bool operator ==(SegRef<T> lhs, SegRef<T> rhs)
             => lhs.Equals(rhs);
 
         [MethodImpl(Inline)]
-        public static bool operator !=(Ref<T> lhs, Ref<T> rhs)
+        public static bool operator !=(SegRef<T> lhs, SegRef<T> rhs)
             => !lhs.Equals(rhs);
     }
 }

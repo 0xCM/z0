@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     partial struct MemRefs
@@ -39,11 +39,11 @@ namespace Z0
             => new StringRef(vparts(N128.N, src.BaseAddress, (ulong)src.Length));
 
         /// <summary>
-        /// Creates a <see cref='StringRef'/> from a specified <see cref='Ref'/>
+        /// Creates a <see cref='StringRef'/> from a specified <see cref='SegRef'/>
         /// </summary>
         /// <param name="src">The source reference</param>
         [MethodImpl(Inline), Op]
-        public static StringRef @string(Ref src)
+        public static StringRef @string(SegRef src)
             => new StringRef(vparts(N128.N, src.BaseAddress, (ulong)src.Length));
     }
 }

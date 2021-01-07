@@ -13,7 +13,7 @@ namespace Z0
     partial struct memory
     {
         [MethodImpl(Inline)]
-        public static unsafe ref readonly Ref<T> liberate<T>(in Ref<T> src)
+        public static unsafe ref readonly SegRef<T> liberate<T>(in SegRef<T> src)
             where T : unmanaged
         {
             liberate(src.BaseAddress.Pointer<T>(), (int)src.Length);

@@ -10,15 +10,28 @@ namespace Z0
     partial struct Clr
     {
         /// <summary>
-        /// Returns a <see cref='Ref'/> to the cli metadata segment of the source
+        /// Returns a <see cref='SegRef'/> to the cli metadata segment of the source
         /// </summary>
         /// <param name="src">The source assembly</param>
-        public static unsafe Ref<byte> metadata(Assembly src)
+        [Op]
+        public static unsafe SegRef<byte> metadata(Assembly src)
         {
             if(src.TryGetRawMetadata(out var ptr, out var len))
                 return memory.segref(ptr, len);
             else
-                return Ref<byte>.Empty;
+                return SegRef<byte>.Empty;
+        }
+
+        /// <summary>
+        /// Returns a reference to the cli metadata for an assembly
+        /// </summary>
+        /// <param name="src">The source assembly</param>
+        [Op]
+        public static unsafe ref SegRef<byte> metadata(Assembly src, out SegRef<byte> dst)
+        {
+            src.TryGetRawMetadata(out var ptr, out var len);
+            dst = memory.segref(ptr, len);
+            return ref dst;
         }
 
         /// <summary>

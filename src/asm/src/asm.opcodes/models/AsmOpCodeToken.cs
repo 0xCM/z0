@@ -12,14 +12,14 @@ namespace Z0.Asm
 
     public readonly struct AsmOpCodeToken
     {
-        readonly Ref<char> Source;
+        readonly SegRef<char> Source;
 
         public byte Index {get;}
 
         public AsmOpCodeTokenKind Id {get;}
 
         [MethodImpl(Inline)]
-        public AsmOpCodeToken(byte index, AsmOpCodeTokenKind id, Ref<char> src)
+        public AsmOpCodeToken(byte index, AsmOpCodeTokenKind id, SegRef<char> src)
         {
             Index = index;
             Source = src;

@@ -20,7 +20,7 @@ namespace Z0
         [Op]
         public static MethodInfo[] Unignored(this MethodInfo[] src)
         {
-            var dst = z.list<MethodInfo>();
+            var dst = corefunc.list<MethodInfo>();
             for(var i=0; i<src.Length; i++)
             {
                 ref readonly var method = ref src[i];

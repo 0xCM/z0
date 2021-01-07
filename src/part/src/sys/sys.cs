@@ -9,7 +9,6 @@ namespace Z0
 
     using static Part;
 
-
     public static partial class XTend
     {
         const NumericKind Closure = Integers;

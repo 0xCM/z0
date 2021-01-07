@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     [ApiHost]
     public readonly struct BinaryOpFactory
@@ -53,7 +53,7 @@ namespace Z0
             return OpIdentityParser.Service.Parse($"{name}_({operand},{operand})");
         }
 
-        static BinaryOp<T> emit<T>(OpIdentity id, in Ref target)
+        static BinaryOp<T> emit<T>(OpIdentity id, in SegRef target)
         {
             var tFunc = typeof(BinaryOp<T>);
             var tOperand = typeof(T);

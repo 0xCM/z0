@@ -37,7 +37,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static BinaryOp<T>  create<T>(T x, T y, string name, ReadOnlySpan<byte> f)
             where T : unmanaged
-            => BinaryOpFactory.create<T>(name, new BinaryCode(f.ToArray()));
+                => BinaryOpFactory.create<T>(name, new BinaryCode(f.ToArray()));
 
         [MethodImpl(Inline)]
         static BinaryOp<T> create<T>(T x, T y, string name, BinaryCode f)

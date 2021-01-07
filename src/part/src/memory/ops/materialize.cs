@@ -10,7 +10,7 @@ namespace Z0
     partial struct memory
     {
         [Op]
-        public static void materialize(ReadOnlySpan<Ref> src, Span<byte> dst, byte? delimiter = null)
+        public static void materialize(ReadOnlySpan<SegRef> src, Span<byte> dst, byte? delimiter = null)
         {
             var m = src.Length;
             var n = dst.Length;

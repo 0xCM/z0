@@ -16,23 +16,23 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static PartId @base(PartId src)
-            => Root.@base(src);
+            => root.@base(src);
 
         [Op]
         public static string name(Assembly src)
-            => Root.name(src);
+            => root.name(src);
 
         [Op]
         public static string format(PartId src)
-            => Root.format(src);
+            => root.format(src);
 
         [MethodImpl(Inline), Op]
         public static string format(ExternId src)
-            => Root.format(src);
+            => root.format(src);
 
         [MethodImpl(Inline), Op]
         public static uint hash(PartId src)
-            => Root.hash(src);
+            => root.hash(src);
 
         /// <summary>
         /// Retrieves the part identifier, if any, of a specified assembly
@@ -40,11 +40,11 @@ namespace Z0
         /// <param name="src">The source assembly</param>
         [Op]
         public static PartId id(Assembly src)
-            => Root.id(src);
+            => root.id(src);
 
         [Op]
         public static bool test(Assembly src)
-            => Root.test(src);
+            => root.test(src);
 
         /// <summary>
         /// Retrieves the part identifier, if any, of the entry assembly

@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static root;
+
     partial struct corefunc
     {
         /// <summary>

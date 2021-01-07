@@ -52,7 +52,7 @@ namespace Z0
         /// <summary>
         /// Returns a reference to the encoded data
         /// </summary>
-        public Ref Ref
+        public SegRef Ref
         {
             [MethodImpl(Inline)]
             get => MemRefs.define(in this[0], (uint)Length);

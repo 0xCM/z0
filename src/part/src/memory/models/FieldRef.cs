@@ -51,7 +51,7 @@ namespace Z0
             get => memory.address(Field.Name);
         }
 
-        public Ref<char> NameRef
+        public SegRef<char> NameRef
         {
             [MethodImpl(Inline)]
             get => memory.segref<char>(NameAddress, FieldName.Length);

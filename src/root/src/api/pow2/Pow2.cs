@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Numerics;
 
-    using static Part;
+    using static root;
     using static Pow2Data;
 
     using K = Pow2x64;

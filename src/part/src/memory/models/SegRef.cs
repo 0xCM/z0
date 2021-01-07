@@ -12,39 +12,32 @@ namespace Z0
     using static System.Runtime.CompilerServices.Unsafe;
     using static Part;
 
-    public readonly struct Ref : ISegRef<byte>
+    public readonly struct SegRef : ISegRef<byte>
     {
         public MemoryAddress Address {get;}
 
         public ByteSize Size {get;}
 
-        [MethodImpl(Inline)]
-        public Ref(Vector128<ulong> src)
-        {
-            Address = src.GetElement(0);
-            Size = src.GetElement(1);
-        }
+        // [MethodImpl(Inline)]
+        // public unsafe SegRef(byte* src, ulong size)
+        // {
+        //     Address = src;
+        //     Size = size;
+        // }
 
         [MethodImpl(Inline)]
-        public unsafe Ref(byte* src, ulong size)
+        public SegRef(MemoryAddress src, ByteSize size)
         {
             Address = src;
             Size = size;
         }
 
-        [MethodImpl(Inline)]
-        public Ref(MemoryAddress src, ulong size)
-        {
-            Address = src;
-            Size = size;
-        }
-
-        [MethodImpl(Inline)]
-        public Ref(ulong location, ulong size)
-        {
-            Address = location;
-            Size = size;
-        }
+        // [MethodImpl(Inline)]
+        // public SegRef(ulong location, ByteSize size)
+        // {
+        //     Address = location;
+        //     Size = size;
+        // }
 
         [MethodImpl(Inline)]
         public Span<T> As<T>()
@@ -97,14 +90,14 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public bool Equals(Ref src)
+        public bool Equals(SegRef src)
             => src.Address == Address && src.Size == Size;
 
         public string Format()
             => string.Format("{0}:{1}", BaseAddress, Length);
 
         public override bool Equals(object src)
-            => src is Ref r && Equals(r);
+            => src is SegRef r && Equals(r);
 
         public override int GetHashCode()
             => (int)Hash;
@@ -114,15 +107,15 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source reference</param>
         [MethodImpl(Inline)]
-        public static Span<byte> operator !(Ref src)
+        public static Span<byte> operator !(SegRef src)
             => src.Edit;
 
         [MethodImpl(Inline)]
-        public static bool operator ==(Ref a, Ref b)
+        public static bool operator ==(SegRef a, SegRef b)
             => a.Equals(b);
 
         [MethodImpl(Inline)]
-        public static bool operator !=(Ref a, Ref b)
+        public static bool operator !=(SegRef a, SegRef b)
             => !a.Equals(b);
 
         [MethodImpl(Inline)]

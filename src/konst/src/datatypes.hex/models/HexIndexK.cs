@@ -24,7 +24,7 @@ namespace Z0
             get => ref Data[index];
         }
 
-        public Ref<K> Ref
+        public SegRef<K> Ref
         {
             [MethodImpl(Inline)]
             get => memory.segref(memory.first(Data), Data.Length);

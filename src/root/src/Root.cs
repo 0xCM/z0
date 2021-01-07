@@ -9,8 +9,13 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     [ApiHost]
-    public readonly partial struct Root
+    public readonly partial struct root
     {
+        /// <summary>
+        /// The number of bits to shift a field specifier left/right to reveal/specify the width of an identified field
+        /// </summary>
+        public const int WidthOffset = 16;
+
         public const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
 
         [MethodImpl(Inline), Op]

@@ -31,7 +31,7 @@ namespace Z0
             => cover<byte>(src.Ref<byte>(), size);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Span<T> edit<T>(Ref src)
+        public static Span<T> edit<T>(SegRef src)
             => src.As<T>();
 
         /// <summary>

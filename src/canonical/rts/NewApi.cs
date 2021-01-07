@@ -47,8 +47,8 @@ namespace Z0
 
 
         [MethodImpl(Inline), Op]
-        public static Ref<byte> reference()
-            => MemRefs.from(Buffer_2688);
+        public static SegRef<byte> reference()
+            => memory.segref(Buffer_2688);
 
         const byte Sz = MemorySegment.Size;
 
