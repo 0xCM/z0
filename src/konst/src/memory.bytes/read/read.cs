@@ -7,10 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static z;
 
-    partial struct ByteRead
+    partial struct ByteReader
     {
         /// <summary>
         /// Reads at most size[T] bytes as determined by the length of the data source

@@ -9,27 +9,6 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct FileKind : IKinded<ulong>
-    {
-        public Type Type {get;}
-
-        public ulong Kind {get;}
-
-        [MethodImpl(Inline)]
-        public FileKind(Type type, ulong kind)
-        {
-            Type = type;
-            Kind = kind;
-        }
-
-        [MethodImpl(Inline)]
-        public FileKind(ulong kind)
-        {
-            Type = typeof(ulong);
-            Kind = kind;
-        }
-    }
-
     public readonly struct FileType
     {
         public MimeType ContentType {get;}

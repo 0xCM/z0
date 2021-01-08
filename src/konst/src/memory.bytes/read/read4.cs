@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct ByteRead
+    partial struct ByteReader
     {
         /// <summary>
         /// Reads the bytes that define a numeric value

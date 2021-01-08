@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     partial struct FS
     {
@@ -48,23 +48,23 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public static RelativePath operator +(RelativePath a, RelativePath b)
-                => relative(text.format("{0}/{1}",a.Name, b.Name));
+                => relative(Z0.text.format("{0}/{1}", a.Name, b.Name));
 
             [MethodImpl(Inline)]
             public static RelativePath operator +(RelativePath a, FolderName b)
-                => relative(text.format("{0}/{1}",a.Name, b.Name));
+                => relative(Z0.text.format("{0}/{1}", a.Name, b.Name));
 
             [MethodImpl(Inline)]
             public static RelativePath operator +(FolderName a, RelativePath b)
-                => relative(text.format("{0}/{1}",a.Name, b.Name));
+                => relative(Z0.text.format("{0}/{1}", a.Name, b.Name));
 
             [MethodImpl(Inline)]
             public static RelativePath operator +(FolderPath a, RelativePath b)
-                => relative(text.format("{0}/{1}",a.Name, b.Name));
+                => relative(Z0.text.format("{0}/{1}", a.Name, b.Name));
 
             [MethodImpl(Inline)]
             public static RelativePath operator +(RelativePath a, FileName b)
-                => relative(text.format("{0}/{1}",a.Name, b.Name));
+                => relative(Z0.text.format("{0}/{1}", a.Name, b.Name));
 
             public static RelativePath Empty
             {

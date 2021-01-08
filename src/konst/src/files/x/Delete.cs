@@ -9,8 +9,6 @@ namespace Z0
     using System.IO;
     using System.Collections.Generic;
 
-    using static Konst;
-
     partial class XFs
     {
         /// <summary>

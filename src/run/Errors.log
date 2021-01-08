@@ -1,0 +1,12 @@
+Failure trapped by Main at J:\dev\projects\z0\src\run\src\App.cs 55
+System.FormatException: Index (zero based) must be greater than or equal to zero and less than the size of the argument list.
+   at System.Text.StringBuilder.AppendFormatHelper(IFormatProvider provider, String format, ParamsArray args)
+   at System.String.FormatHelper(IFormatProvider provider, String format, ParamsArray args)
+   at System.String.Format(String format, Object[] args)
+   at Z0.Runner.format(MemoryFileInfo file) in J:\dev\projects\z0\src\run\src\App.cs:line 134
+   at Z0.Runner.<Run>b__11_0(MemoryFileInfo file) in J:\dev\projects\z0\src\run\src\App.cs:line 141
+   at Z0.corefunc.iter[T](IEnumerable`1 items, Action`1 action, Boolean pll) in j:\dev\projects\z0\src\part\src\part.corefunc\ops\iter.cs:line 26
+   at Z0.Runner.Run(CheckServiceCmd& cmd) in J:\dev\projects\z0\src\run\src\App.cs:line 141
+   at Z0.Runner.Run(CmdLine cmd) in J:\dev\projects\z0\src\run\src\App.cs:line 85
+   at Z0.Runner.Main(String[] args) in J:\dev\projects\z0\src\run\src\App.cs:line 44
+

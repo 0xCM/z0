@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.IO;
 
-    using static Konst;
-
     partial class XFs
     {
         /// <summary>
@@ -17,6 +15,6 @@ namespace Z0
         /// <param name="src">The file path</param>
         [Op]
         public static string ReadText(this FS.FilePath src)
-            => FS.filetext(src);
+            => FS.text(src);
     }
 }

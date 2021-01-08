@@ -12,6 +12,19 @@ namespace Z0
 
     public interface IMemoryFiles : IWfStateless<IMemoryFiles>
     {
+        ReadOnlySpan<T> Read<T>(in MemoryFile file, MemoryAddress src, uint count)
+            where T : struct;
+
+        ref readonly T Read<T>(MemoryAddress src)
+            where T : struct;
+
+        MemoryFileInfo Describe(in MemoryFile src);
+
+        MemoryFile Open(FS.FilePath src);
+
+        MappedFiles Map(FS.FolderPath src);
+
+        ReadOnlySpan<byte> Read(MemoryAddress src, ByteSize size);
 
     }
 }

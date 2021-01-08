@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Api for buffer manipulation

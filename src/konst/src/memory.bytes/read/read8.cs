@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    partial struct ByteRead
+    partial struct ByteReader
     {
         /// <summary>
         /// Reads the bytes that define a numeric value

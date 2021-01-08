@@ -388,7 +388,7 @@ namespace Z0
                     seek8(dst, pos++) = parser.ParseByte(part);
             }
 
-            return slice(ByteRead.read8(dst), 0, pos);
+            return slice(ByteReader.read8(dst), 0, pos);
         }
 
         [Op]

@@ -9,8 +9,6 @@ namespace Z0
     using System.Reflection;
     using System.IO;
 
-    using static Konst;
-
     partial struct FS
     {
         /// <summary>

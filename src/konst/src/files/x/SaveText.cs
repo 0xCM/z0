@@ -5,9 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.IO;
-
-    using static Part;
 
     partial class XFs
     {
@@ -15,7 +12,7 @@ namespace Z0
         {
             try
             {
-                using var writer = dst.CreateParentIfMissing().Writer();
+                using var writer = dst.EnsureParent().Writer();
                 writer.WriteLine(src);
                 writer.Flush();
                 return true;

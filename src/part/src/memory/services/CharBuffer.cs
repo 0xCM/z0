@@ -5,19 +5,19 @@
 namespace Z0
 {
     using System;
-    using System.Buffers;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
+    [ApiHost]
     public ref struct CharBuffer
     {
 		Span<char> _Buffer;
 
 		uint Index;
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static CharBuffer create(Span<char> buffer)
         {
             var dst = new CharBuffer();
@@ -26,7 +26,7 @@ namespace Z0
             return dst;
         }
 
-        [MethodImpl(Inline)]
+        [Op]
         public static CharBuffer create(uint capacity)
         {
             var dst = new CharBuffer();
@@ -47,6 +47,7 @@ namespace Z0
 			get => ref seek(_Buffer, index);
 		}
 
+        [MethodImpl(Inline), Op]
 		public uint Render(Span<char> dst)
 		{
 			var src = slice(_Buffer, 0, Index);
@@ -55,21 +56,21 @@ namespace Z0
 			return (uint)src.Length;
 		}
 
-		[MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
 		public unsafe uint Append(char src)
 		{
 			seek(_Buffer, (uint)Index) = src;
 			return ++Index;
 		}
 
-		[MethodImpl(Inline)]
+		[MethodImpl(Inline), Op]
         public uint AppendLead(string src)
         {
             seek(_Buffer,(uint)Index) = src[0];
 			return ++Index;
         }
 
-		[MethodImpl(Inline)]
+		[MethodImpl(Inline), Op]
         public uint Append(string src)
         {
 			var srclen = (uint)src.Length;
@@ -78,7 +79,7 @@ namespace Z0
             return Index;
         }
 
-		[MethodImpl(Inline)]
+		[MethodImpl(Inline), Op]
         public unsafe uint Append(char src, uint count)
 		{
 			var segment = slice(_Buffer, Index, count);
@@ -88,7 +89,7 @@ namespace Z0
             return Index;
         }
 
-		[MethodImpl(Inline)]
+		[MethodImpl(Inline), Op]
 		public unsafe uint Append(char* src, uint srclen)
 		{
 			var seg = slice(_Buffer, Index, srclen);
@@ -99,7 +100,7 @@ namespace Z0
             return Index;
         }
 
-		[MethodImpl(Inline)]
+		[MethodImpl(Inline), Op]
         public uint Append(ReadOnlySpan<char> src)
 		{
 			var pos = Index;
@@ -109,6 +110,7 @@ namespace Z0
             return Index;
 		}
 
+		[MethodImpl(Inline), Op]
         public void Reset()
         {
             _Buffer.Clear();

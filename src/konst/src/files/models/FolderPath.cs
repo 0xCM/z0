@@ -11,7 +11,7 @@ namespace Z0
     using System.Linq;
 
 
-    using static Konst;
+    using static Part;
 
     partial struct FS
     {
@@ -59,17 +59,17 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public static FolderPath operator +(FolderPath a, FolderName b)
-                => new FolderPath(text.format(FolderJoinPattern, a.Name, b.Name));
+                => new FolderPath(Z0.text.format(FolderJoinPattern, a.Name, b.Name));
 
             [MethodImpl(Inline)]
             public static FilePath operator +(FolderPath a, FileName b)
-                => new FilePath(text.format(FileJoinPattern, a.Name, b.Name));
+                => new FilePath(Z0.text.format(FileJoinPattern, a.Name, b.Name));
 
             public FilePath[] Match(string pattern = null)
                 => Directory.EnumerateFiles(Name, pattern ?? SearchAll).Array().Select(x => FS.path(x));
 
             public FilePath[] Exclude(string substring, string match = null)
-                => text.nonempty(substring) ? Match(match).Where(f => !f.Name.Contains(substring)) : Match(match);
+                => Z0.text.nonempty(substring) ? Match(match).Where(f => !f.Name.Contains(substring)) : Match(match);
 
             public FilePath[] Files(FileExt ext, bool recurse = false)
                 => Files(this, ext, recurse);

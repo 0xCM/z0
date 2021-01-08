@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     partial struct Buffers
     {
@@ -18,6 +18,6 @@ namespace Z0
         /// <param name="handle">The allocation handle</param>
         [MethodImpl(Inline), Op]
         public static void release(IntPtr handle)
-            => Marshal.FreeHGlobal(handle);       
+            => Marshal.FreeHGlobal(handle);
     }
 }

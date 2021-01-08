@@ -16,7 +16,7 @@ namespace Z0
             => FS.writer(dst, append ? FileWriteMode.Append : FileWriteMode.Overwrite);
 
         public static StreamWriter Writer(this FS.FilePath dst, FileWriteMode mode)
-            => new StreamWriter(dst.CreateParentIfMissing().Name, mode == FileWriteMode.Append);
+            => new StreamWriter(dst.EnsureParent().Name, mode == FileWriteMode.Append);
 
         /// <summary>
         /// Creates an overwriting and caller-disposed stream writer that targets a specified path
@@ -24,12 +24,6 @@ namespace Z0
         /// <param name="dst">The file path</param>
         public static StreamWriter Writer(this FS.FilePath dst)
             => FS.writer(dst);
-
-        public static FS.FilePath CreateParentIfMissing(this FS.FilePath src)
-        {
-            FileOps.CreateParent(src.Name.Format());
-            return src;
-        }
 
         public static void AppendLine(this FS.FilePath dst, string src)
             => File.AppendAllLines(dst.Name, z.array(src));

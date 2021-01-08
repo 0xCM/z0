@@ -68,15 +68,15 @@ namespace Z0
 
             [MethodImpl(Inline), TestZ]
             public static Bit32 testz(in byte a, in byte b)
-                => z.testz(read(w64,a), read(w64,b));
+                => BitLogic.testz(read(w64,a), read(w64,b));
 
             [MethodImpl(Inline), TestC]
             public static Bit32 testc(in byte a, in byte b)
-                => z.testc(read(w64,a), read(w64,b));
+                => BitLogic.testc(read(w64,a), read(w64,b));
 
             [MethodImpl(Inline), TestC]
             public static Bit32 testc(in byte a)
-                => z.testc(read(w64,a));
+                => BitLogic.testc(read(w64,a));
 
             [MethodImpl(Inline), Select]
             public static void select(in byte a, in byte b, in byte c, ref byte dst)

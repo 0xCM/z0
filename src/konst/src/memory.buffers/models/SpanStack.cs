@@ -6,10 +6,10 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
-    using static Konst;
-    using static z;
-    
+
+    using static Part;
+    using static memory;
+
     public ref struct SpanStack<T>
         where T : unmanaged
     {
@@ -32,14 +32,14 @@ namespace Z0
         {
             if(Position > MaxPos)
                 --Position;
-            
-            seek(Head, Position++) = src;             
+
+            seek(Head, Position++) = src;
         }
 
         [MethodImpl(Inline)]
         public ref T Pop()
         {
-            
+
             if(Position < 0)
                 return ref seek(Head, 0);
             else
@@ -63,7 +63,7 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Position + 1;
         }
-        
+
         [MethodImpl(Inline)]
         public S Peek<S>()
             where S : unmanaged

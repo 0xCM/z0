@@ -7,9 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.IO;
-    using System.Text;
 
-    using static Konst;
+    using static Part;
 
     partial struct FS
     {
@@ -19,10 +18,10 @@ namespace Z0
         /// <param name="dst">The file path</param>
         [MethodImpl(Inline), Op]
         public static StreamWriter writer(FS.FilePath dst)
-            => new StreamWriter(dst.CreateParentIfMissing().Name.Format(), false);
+            => new StreamWriter(dst.EnsureParent().Name.Format(), false);
 
         [MethodImpl(Inline), Op]
         public static StreamWriter writer(FS.FilePath dst, FileWriteMode mode)
-            => new StreamWriter(dst.CreateParentIfMissing().Name.Format(), mode == FileWriteMode.Append);
+            => new StreamWriter(dst.EnsureParent().Name.Format(), mode == FileWriteMode.Append);
     }
 }

@@ -8,15 +8,14 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.IO;
 
-    using static Part;
-
     partial struct FS
     {
         /// <summary>
-        /// Reads the full content of a text file
+        /// Reads the full content of a file into a byte array
         /// </summary>
         /// <param name="src">The file path</param>
-        public static string filetext(FilePath src)
-            => src.Exists ? File.ReadAllText(src.Name) : EmptyString;
+        [Op]
+        public static byte[] bytes(FS.FilePath src)
+            => src.Exists ? File.ReadAllBytes(src.Name) : sys.empty<byte>();
     }
 }

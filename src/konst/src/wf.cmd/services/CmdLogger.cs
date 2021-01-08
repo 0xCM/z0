@@ -23,7 +23,7 @@ namespace Z0
         {
             Wf = wf;
             Target = dst;
-            LogStream = new FileStream(dst.CreateParentIfMissing().Name, FileMode.OpenOrCreate, FileAccess.Write, FileShare.ReadWrite);;
+            LogStream = new FileStream(dst.EnsureParent().Name, FileMode.OpenOrCreate, FileAccess.Write, FileShare.ReadWrite);;
         }
 
         public void Dispose()

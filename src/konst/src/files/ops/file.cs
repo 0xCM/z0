@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     partial struct FS
     {
@@ -17,11 +17,11 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static FileName file(ApiHostUri host, FileExt ext)
-            => FS.file(text.concat(host.Owner.Format(), Chars.Dot, host.Name), ext);
+            => FS.file(Z0.text.concat(host.Owner.Format(), Chars.Dot, host.Name), ext);
 
         [MethodImpl(Inline), Op]
         public static FS.FileName file(ApiHostUri host, FileExt a, FileExt b)
-            => FS.file(text.concat(host.Owner.Format(), Chars.Dot, host.Name), a + b);
+            => FS.file(Z0.text.concat(host.Owner.Format(), Chars.Dot, host.Name), a + b);
 
         /// <summary>
         /// Defines a host-specialized filename
@@ -31,7 +31,7 @@ namespace Z0
         /// <param name="ext">The file extension</param>
         [MethodImpl(Inline), Op]
         public static FileName file(PartId part, string hostname, FileExt ext)
-            => file(text.concat(part.Format(), Chars.Dot, hostname), ext);
+            => file(Z0.text.concat(part.Format(), Chars.Dot, hostname), ext);
 
         [MethodImpl(Inline), Op]
         public static FileName file(PathPart name)

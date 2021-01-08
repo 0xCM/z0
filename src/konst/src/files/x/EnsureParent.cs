@@ -5,15 +5,15 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
+    using System.IO;
 
-    using static Konst;
-    using static z;
-
-    [ApiHost]
-    public readonly partial struct ByteRead
+    partial class XFs
     {
+        public static FS.FilePath EnsureParent(this FS.FilePath src)
+        {
+            FileOps.CreateParent(src.Name.Format());
+            return src;
+        }
 
     }
 }

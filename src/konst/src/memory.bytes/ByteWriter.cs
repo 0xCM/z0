@@ -7,15 +7,15 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     [ApiHost]
-    public readonly struct ByteWrite
+    public readonly struct ByteWriter
     {
         const NumericKind Closure = UnsignedInts;
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [Op, Closures(Closure)]
         public static Span<byte> write<T>(in T src)
             where T : struct
         {

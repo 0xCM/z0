@@ -47,13 +47,13 @@ namespace Z0
             public bool IsEmpty
             {
                 [MethodImpl(Inline)]
-                get => text.empty(Text);
+                get => Z0.text.empty(Text);
             }
 
             public bool IsNonEmpty
             {
                 [MethodImpl(Inline)]
-                get => text.nonempty(Text) && Text.Length > 0;
+                get => Z0.text.nonempty(Text) && Text.Length > 0;
             }
 
             public uint Length

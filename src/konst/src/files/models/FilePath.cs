@@ -179,7 +179,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public static FilePath operator +(FilePath a, FileExt b)
-                => new FilePath(text.format("{0}.{1}",a.Name, b.Name));
+                => new FilePath(Z0.text.format("{0}.{1}", a.Name, b.Name));
 
             public static FilePath Empty
             {

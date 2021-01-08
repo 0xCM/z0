@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     /// <summary>
     /// Defines a mutable circular S-cell buffer partitioned into T-cell parts
@@ -19,7 +19,7 @@ namespace Z0
         readonly Span<S> Buffer;
 
         readonly int parts;
-        
+
         readonly int partwidth;
 
         int CurrentPart;
@@ -29,9 +29,9 @@ namespace Z0
             Buffer = src;
             partwidth = (int)size<T>();
             parts = src.Length/partwidth;
-            CurrentPart = 0;            
-        }        
-        
+            CurrentPart = 0;
+        }
+
         public ref T Next
         {
             [MethodImpl(Inline)]

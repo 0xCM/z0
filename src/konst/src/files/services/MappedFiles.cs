@@ -29,7 +29,7 @@ namespace Z0
                 Addresses = alloc<MemoryAddress>(count);
                 for(var i=0; i<count; i++)
                     Addresses[i] = FileIndex[i].BaseAddress;
-                FileInfo = FileIndex.Map(api.describe);
+                FileInfo = FileIndex.Select(api.describe);
             }
             else
             {

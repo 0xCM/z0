@@ -255,18 +255,6 @@ namespace Z0
         public static bool eq(byte a, byte b)
             => a == b;
 
-        [MethodImpl(Inline), TestZ]
-        public static bool testz(in byte A, in byte B)
-            => z.testz(read8(A), read8(B));
-
-        [MethodImpl(Inline), TestC]
-        public static bool testc(in byte A, in byte B)
-            => z.testc(read8(A),read8(B));
-
-        [MethodImpl(Inline), TestC]
-        public static bool testc(in byte A)
-            => z.testc(read8(A));
-
         [MethodImpl(Inline)]
         public static ReadOnlySpan<T> cells<T>(N2 n)
             where T : unmanaged

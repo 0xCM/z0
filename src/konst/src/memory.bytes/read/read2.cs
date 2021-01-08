@@ -7,10 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
-    partial struct ByteRead
+    partial struct ByteReader
     {
         /// <summary>
         /// Reads the bytes that define a numeric value

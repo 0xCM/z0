@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.IO;
 
-    using static Konst;
+    using static Part;
 
     partial struct FS
     {
@@ -22,7 +22,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public FileName(PathPart name, FileExt ext)
-                => Name = text.format(ExtPattern, name, ext);
+                => Name = Z0.text.format(ExtPattern, name, ext);
 
             public FileExt FileExt
             {
@@ -129,7 +129,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public static FileName operator +(FileName a, FileExt b)
-                => new FileName(text.format("{0}.{1}",a.Name, b.Name));
+                => new FileName(Z0.text.format("{0}.{1}", a.Name, b.Name));
 
             [MethodImpl(Inline)]
             public static bool operator ==(FileName a, FileName b)

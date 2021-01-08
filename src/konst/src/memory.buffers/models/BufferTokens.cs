@@ -7,8 +7,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
-    using static Konst;
+
+    using static Part;
 
     public readonly struct BufferTokens : IBufferTokenSource
     {
@@ -21,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public BufferTokens(BufferToken[] src)
             => Data = src;
-    
+
         public ref readonly BufferToken this[BufferSeqId id]
         {
             [MethodImpl(Inline)]

@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Text;
 
-    using static Part;
     using static z;
 
     partial class Hex
@@ -20,7 +19,7 @@ namespace Z0
         /// <param name="config">The format configuration</param>
         /// <param name="dst">The rendered data receiver</param>
         /// <typeparam name="T">The primal numeric type</typeparam>
-        [Op, Closures(UnsignedInts)]
+        [Op, Closures(Closure)]
         public static void render<T>(ReadOnlySpan<T> src, in HexFormatOptions config, StringBuilder dst)
             where T : unmanaged
         {

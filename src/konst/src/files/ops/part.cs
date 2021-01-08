@@ -4,12 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-    using System.Reflection;
-    using System.IO;
 
-    using static Konst;
+    using static Part;
 
     partial struct FS
     {
@@ -19,7 +15,7 @@ namespace Z0
             if(i == NotFound)
                 return default;
             else
-                return ApiPartIdParser.single(text.segment(src.Name.Text,0, i - 1));
+                return ApiPartIdParser.single(Z0.text.segment(src.Name.Text,0, i - 1));
         }
     }
 }

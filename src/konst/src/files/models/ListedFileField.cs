@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-
     /// <summary>
     /// Defines the fields in a <see  cref='ListedFile'/> table
     /// </summary>

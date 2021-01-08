@@ -6,12 +6,10 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
 
     using System.Linq;
 
     using static z;
-    using static Konst;
 
     public readonly struct AsmQueries
     {
@@ -26,7 +24,7 @@ namespace Z0.Asm
                 ref readonly var call = ref skip(calls,i);
                 ref var dst = ref seek(row,i);
                 var bytes = span(call.EncodedData.Storage);
-                var offset = ByteRead.read(bytes.Slice(1));// + ((uint)bytes.Length - 1); //op code takes up one byte
+                var offset = ByteReader.read(bytes.Slice(1));// + ((uint)bytes.Length - 1); //op code takes up one byte
                 var target = call.NextIp + offset;
                 dst.Source = call.IP;
                 dst.Target = target;
@@ -37,7 +35,6 @@ namespace Z0.Asm
             }
             return buffer;
         }
-
 
         /// <summary>
         /// Selects a (non-distinct) sequence of far addresses that are target by call instructions in the source function

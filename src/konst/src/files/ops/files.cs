@@ -9,7 +9,7 @@ namespace Z0
     using System.IO;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     partial struct FS
     {

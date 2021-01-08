@@ -129,9 +129,21 @@ namespace Z0
             DumpEmitter.emit(Processes.current(), dst.Name, DumpTypeOption.Full);
         }
 
+
+        static string format(MemoryFileInfo file)
+            => string.Format("{0} | {1} | {2,-16} | {3}", file.BaseAddress, file.EndAddress, file.Size, file.Path.ToUri());
+
         void Run(in CheckServiceCmd cmd)
         {
-             cmd.Dispatch(Wf).Wait();
+            var dir = FS.dir(@"K:\cache\symbols\netsdk\shared\Microsoft.NetCore.App\3.1.9");
+            using var mapped = MemoryFiles.map(dir);
+            var info = mapped.Descriptions;
+            corefunc.iter(info, file => Wf.Row(format(file)));
+
+
+
+
+             //cmd.Dispatch(Wf).Wait();
         }
 
         void Run(in EmitHexIndexCmd cmd)

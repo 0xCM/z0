@@ -9,8 +9,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.IO;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     partial struct FS
     {

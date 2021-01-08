@@ -5,13 +5,12 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
 
-    using static FS;
-
-    public struct MemoryFileInfo
+    [ApiHost]
+    public readonly partial struct ByteReader
     {
-        public MemoryAddress BaseAddress;
 
-        public FsEntryDetail Description;
     }
 }

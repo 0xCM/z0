@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     partial struct FS
     {
@@ -35,7 +35,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public static FileExt operator + (FileExt a, FileExt b)
-                => ext(text.format("{0}.{1}", a.Name, b.Name));
+                => ext(Z0.text.format("{0}.{1}", a.Name, b.Name));
 
             [MethodImpl(Inline)]
             public static bool operator ==(FileExt a, FileExt b)
@@ -96,7 +96,7 @@ namespace Z0
             public string SearchPattern
             {
                 [MethodImpl(Inline)]
-                get => text.format("*.{0}", Name);
+                get => Z0.text.format("*.{0}", Name);
             }
 
             [MethodImpl(Inline)]

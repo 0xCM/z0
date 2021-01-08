@@ -7,22 +7,22 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static z;
 
-    partial struct ByteRead
+    partial struct ByteReader
     {
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T cell<T>(ReadOnlySpan<byte> src)
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(cell(src, n1));
+                return memory.generic<T>(cell(src, n1));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(cell(src, n2));
+                return memory.generic<T>(cell(src, n2));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(cell(src, n4));
+                return memory.generic<T>(cell(src, n4));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(cell(src, n8));
+                return memory.generic<T>(cell(src, n8));
             else
                 return default;
         }
@@ -57,19 +57,6 @@ namespace Z0
             seek32(dst, 1) = (uint)cell(src, n2);
             return dst;
         }
-
-        // [MethodImpl(Inline), Op]
-        // public static ulong cell(ReadOnlySpan<byte> src, N3 n)
-        //     => first(recover<byte,uint24>(slice(src,3)));
-
-        // [MethodImpl(Inline), Op]
-        // public static ulong cell(ReadOnlySpan<byte> src, N7 n)
-        // {
-        //     var dst = 0ul;
-        //     seek32(dst, 0) = (uint)cell(src, n4);
-        //     seek32(dst, 1) = (uint)cell(src, n3);
-        //     return dst;
-        // }
 
         [MethodImpl(Inline), Op]
         public static ulong cell(ReadOnlySpan<byte> src, N8 n)

@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Text;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     partial struct FS
@@ -16,14 +16,14 @@ namespace Z0
         [Op]
         public static string format(ListedFiles src)
         {
-            var dst = text.build();
+            var dst = Z0.text.build();
             format(src,dst);
             return dst.ToString();
         }
 
         [MethodImpl(Inline), Op]
         public static string format(ListedFile src)
-            => text.format("{0,-10} | {1}", src.Index, src.Path);
+            => Z0.text.format("{0,-10} | {1}", src.Index, src.Path);
 
         [Op]
         public static void format(ListedFiles src, StringBuilder dst)

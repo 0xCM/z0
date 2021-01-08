@@ -5,9 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.IO;
-
-    using static Konst;
 
     partial class XFs
     {
@@ -16,6 +13,6 @@ namespace Z0
         /// </summary>
         /// <param name="src">The file path</param>
         public static byte[] ReadBytes(this FS.FilePath src)
-            => FS.filebytes(src);
+            => FS.bytes(src);
     }
 }

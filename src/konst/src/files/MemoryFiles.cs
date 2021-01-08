@@ -8,8 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static z;
-
+    using static memory;
 
     [ApiHost]
     public readonly struct MemoryFiles : IMemoryFiles
@@ -26,6 +25,27 @@ namespace Z0
         MemoryFiles(IWfShell wf)
             => Wf = wf;
 
+        public ReadOnlySpan<byte> Read(MemoryAddress src, ByteSize size)
+            => read(src, size);
+
+        public ReadOnlySpan<T> Read<T>(in MemoryFile file, MemoryAddress src, uint count)
+            where T : struct
+                => read<T>(file, src, count);
+
+        public ref readonly T Read<T>(MemoryAddress src)
+            where T : struct
+                => ref read<T>(src);
+
+        public MemoryFileInfo Describe(in MemoryFile src)
+            => describe(src);
+
+        public MemoryFile Open(FS.FilePath src)
+            => open(src);
+
+        public MappedFiles Map(FS.FolderPath src)
+            =>map(src);
+
+        [MethodImpl(Inline), Op]
         public static MemoryFile open(FS.FilePath path)
             => new MemoryFile(path);
 
@@ -47,23 +67,26 @@ namespace Z0
         public static MemoryFileInfo describe(MemoryFile src)
         {
             var dst = new MemoryFileInfo();
-            dst.BaseAddress = src.BaseAddress;
             var fi = src.Path.Info;
-            var desc = new FS.FsEntryDetail();
-            desc.Path = src.Path;
-            desc.Size = (ByteSize)fi.Length;
-            desc.CreateTS = fi.CreationTime;
-            desc.UpdateTS = fi.LastWriteTime;
-            desc.Attributes = fi.Attributes;
-            dst.Description = desc;
+            dst.BaseAddress = src.BaseAddress;
+            dst.Size = src.Size;
+            dst.EndAddress = dst.BaseAddress + dst.Size;
+            dst.Path = src.Path;
+            dst.CreateTS = fi.CreationTime;
+            dst.UpdateTS = fi.LastWriteTime;
+            dst.Attributes = fi.Attributes;
             return dst;
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Span<byte> read(MemoryAddress src, ByteSize size)
-            => memory.cover<byte>(src, size);
+        public static ReadOnlySpan<byte> read(MemoryAddress src, ByteSize size)
+            => cover<byte>(src, size);
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Span<byte> edit(MemoryAddress src, ByteSize size)
+            => cover<byte>(src, size);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref readonly T read<T>(MemoryAddress src)
             where T : struct
                 => ref first(cover<T>(src, 1));

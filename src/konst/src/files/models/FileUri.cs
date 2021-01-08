@@ -25,7 +25,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public string Format()
-                => text.format("file:///{0}", Source.Format());
+                => Z0.text.format("file:///{0}", Source.Format());
 
             public override string ToString()
                 => Format();

@@ -8,7 +8,6 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
     using static z;
 
     public class t_bitstring : t_bitcore<t_bitstring>
@@ -258,7 +257,7 @@ namespace Z0
 
 
             var byx = BitConverter.GetBytes(x).ToSpan();
-            var byy = ByteWrite.write(x);
+            var byy = ByteWriter.write(x);
             ClaimNumeric.eq(byx,byy);
         }
 
@@ -308,7 +307,6 @@ namespace Z0
             }
 
             case2();
-
         }
 
         void bs_convert_check<T>()
