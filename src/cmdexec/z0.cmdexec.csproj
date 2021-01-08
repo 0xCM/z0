@@ -18,6 +18,8 @@
     <ProjectReference Include="$(Canonical)" />
     <ProjectReference Include="$(VSvc)" />
     <ProjectReference Include="$(Gen)" />
+    <ProjectReference Include="$(Validity)" />
+
   </ItemGroup>
 
 </Project>

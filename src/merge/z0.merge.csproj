@@ -16,6 +16,7 @@
     <ProjectReference Include="$(Dynamic)" />
     <ProjectReference Include="$(Canonical)" />
     <ProjectReference Include="$(Gen)" />
+    <ProjectReference Include="$(Validity)" />
   </ItemGroup>
 
 </Project>

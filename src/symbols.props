@@ -31,7 +31,14 @@
     <Check>$(Src)check/z0.check.csproj</Check>
     <Circuits>$(Src)circuits/z0.circuits.csproj</Circuits>
     <Cli>$(Src)cli/z0.cli.csproj</Cli>
-    <Commands>$(Src)commands/z0.commands.csproj</Commands>
+
+    <Commands>$(Src)cmdspec/z0.cmdspec.csproj</Commands>
+    <Reactors>$(Src)cmdexec/z0.cmdexec.csproj</Reactors>
+
+    <CmdSpec>$(Src)cmdspec/z0.cmdspec.csproj</CmdSpec>
+    <CmdExec>$(Src)cmdexec/z0.cmdexec.csproj</CmdExec>
+
+
     <Checks>$(Src)checks/z0.checks.csproj</Checks>
     <Canonical>$(Src)canonical/z0.canonical.csproj</Canonical>
 
@@ -63,7 +70,6 @@
     <Nats>$(Src)nats/z0.nats.csproj</Nats>
 
     <Polyrand>$(Src)polyrand/z0.polyrand.csproj</Polyrand>
-    <Reactors>$(Src)reactors/z0.reactors.csproj</Reactors>
 
     <Stats>$(Src)stats/z0.stats.csproj</Stats>
 

@@ -5,6 +5,41 @@ namespace Windows
 {
     using System;
 
+    // Flags that control caching and other behavior of the underlying file object.  Used only for
+    // CreateFile.
+    [Flags]
+    public enum FileFlagsAndAttributes : uint
+    {
+        NORMAL = 0x80,
+
+        OPEN_REPARSE_POINT = 0x200000,
+
+        SEQUENTIAL_SCAN = 0x8000000,
+
+        RANDOM_ACCESS = 0x10000000,
+
+        NO_BUFFERING = 0x20000000,
+
+        OVERLAPPED = 0x40000000
+    }
+
+    // A flag indicating the format of the path string that Windows returns from a call to
+    // QueryFullProcessImageName().
+    public enum ProcessQueryImageNameMode : uint
+    {
+        WIN32_FORMAT = 0,
+
+        NATIVE_SYSTEM_FORMAT = 1
+    }
+
+
+    // Determines the amount of information requested (and hence the type of structure returned)
+    // by a call to NtQueryInformationProcess.
+    public enum PROCESSINFOCLASS : int
+    {
+        PROCESS_BASIC_INFORMATION = 0
+    };
+
     [Flags]
     public enum PageProtection : uint
     {

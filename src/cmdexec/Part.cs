@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 
-[assembly: PartId(PartId.Reactors)]
+[assembly: PartId(PartId.CmdExec)]
 
 namespace Z0.Parts
 {

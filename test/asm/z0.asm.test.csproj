@@ -15,7 +15,7 @@
     <ProjectReference Include="$(Blocked)" />
     <ProjectReference Include="$(VSvc)" />
     <ProjectReference Include="$(BitSvc)" />
-    <ProjectReference Include="$(Merge)" />
+    <ProjectReference Include="$(CmdExec)" />
     <ProjectReference Include="$(Fsm)"/>
   </ItemGroup>
 

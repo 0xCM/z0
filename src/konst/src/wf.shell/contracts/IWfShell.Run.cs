@@ -41,12 +41,6 @@ namespace Z0
             return Flow();
         }
 
-        WfExecFlow Running<T>(T data, [Caller] string caller = null)
-        {
-            signal(this).Running(data);
-            return Flow();
-        }
-
         WfExecFlow Running(WfHost host, [Caller] string caller = null)
         {
             signal(this).Running(host);
@@ -81,7 +75,23 @@ namespace Z0
             return token;
         }
 
+        WfExecFlow Running<T>(ICmdSpec<T> cmd)
+            where T : struct, ICmdSpec<T>
+        {
+            signal(this).Running(cmd);
+            return Flow();
+        }
+
+
         WfExecToken Ran(WfExecFlow flow, CmdResult result)
+        {
+            var token = Ran(flow);
+            signal(this).Ran(result);
+            return token;
+        }
+
+        WfExecToken Ran<C>(WfExecFlow flow, CmdResult<C> result)
+            where C : struct, ICmdSpec<C>
         {
             var token = Ran(flow);
             signal(this).Ran(result);

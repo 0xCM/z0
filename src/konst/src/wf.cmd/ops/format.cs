@@ -13,6 +13,52 @@ namespace Z0
 
     partial struct Cmd
     {
+        public static string format<T>(ICmdSpec<T> src)
+            where T : struct, ICmdSpec<T>
+        {
+            var buffer = Buffers.text();
+            buffer.AppendFormat("{0}{1}", src.CmdName, Chars.LParen);
+
+            var fields = ClrFields.instance(typeof(T));
+            if(fields.Length != 0)
+                render(__makeref(src), fields, buffer);
+
+            buffer.Append(Chars.RParen);
+            return buffer.Emit();
+        }
+
+        [Op]
+        static void render(TypedReference src, ReadOnlySpan<ClrField> fields, ITextBuffer dst)
+        {
+            var count = fields.Length;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var field = ref skip(fields,i);
+                dst.AppendFormat(RP.Assign, field.Name, field.GetValueDirect(src));
+                if(i != count - 1)
+                    dst.Append(", ");
+            }
+        }
+
+        [Op]
+        public static string format(ICmdSpec src)
+        {
+            var count = src.Args.Count;
+            var buffer = Buffers.text();
+            buffer.AppendFormat("{0}{1}", src.CmdId.Format(), Chars.LParen);
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var arg = ref src.Args[i];
+                buffer.AppendFormat(RP.Assign, arg.Name, arg.Value);
+                if(i != count - 1)
+                    buffer.Append(", ");
+            }
+
+            buffer.Append(Chars.RParen);
+            return buffer.Emit();
+        }
+
+
         [Op]
         public static string format(CmdScriptVar src)
             => string.Format("{0}={1}",src.Symbol, src.Value);
@@ -89,23 +135,6 @@ namespace Z0
             return dst.ToString();
         }
 
-        public static string format<T>(T src)
-            where T : ICmdSpec
-        {
-            var dst = Buffers.text();
-            dst.Append(src.CmdId.Format());
-            dst.Append("[");
-            for(var i=0; i<src.Args.Count; i++)
-            {
-                ref readonly var arg = ref src.Args[i];
-                dst.Append(arg.Format());
-                dst.Append(Space);
-            }
-
-            dst.Append("]");
-            return dst.Emit();
-
-        }
 
         [MethodImpl(Inline)]
         public static string Format(in CmdArg src)
@@ -146,7 +175,7 @@ namespace Z0
         /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
         public static string format(in CmdArg src)
-            => TextFormatter.setting(src.Name, src.Value);
+            => TextFormatter.assign(src.Name, src.Value);
 
         /// <summary>
         /// Renders a specified option as text
@@ -155,7 +184,7 @@ namespace Z0
         /// <typeparam name="T">The option value type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static string format<T>(in CmdArg<T> src)
-            => TextFormatter.setting(src.Name, src.Value);
+            => TextFormatter.assign(src.Name, src.Value);
 
         /// <summary>
         /// Renders a specified option as text
@@ -166,7 +195,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static string format<K,T>(in CmdArg<K,T> src)
             where K : unmanaged
-                => TextFormatter.setting(src.Kind, src.Value);
+                => TextFormatter.assign(src.Kind.ToString(), src.Value);
         [Op]
         public static string format(CmdTypeInfo src)
         {

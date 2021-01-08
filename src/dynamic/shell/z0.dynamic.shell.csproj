@@ -12,7 +12,7 @@
     <ProjectReference Include="$(Domain)" />
     <ProjectReference Include="$(Tools)" />
     <ProjectReference Include="$(Dsl)" />
-    <ProjectReference Include="$(Commands)" />
+    <ProjectReference Include="$(CmdSpec)" />
   </ItemGroup>
 
 </Project>

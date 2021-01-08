@@ -53,6 +53,9 @@ namespace Z0
         public void Ran(CmdResult cmd)
             => Raise(new RanCmdEvent(cmd, Ct));
 
+        public void Running(CmdSpec cmd)
+            => Raise(new RunningCmdEvent(cmd.CmdId, Ct));
+
         public void Running()
             => Raise(running(Host, Ct));
 

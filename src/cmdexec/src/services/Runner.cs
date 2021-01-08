@@ -142,23 +142,6 @@ namespace Z0
             Status(format(info));
         }
 
-        // void ListCaptureFiles()
-        // {
-        //     var paths = Shells.paths();
-        //     var files = AppFilePaths.create(paths, PartId.Control);
-
-        //     Status(paths.Logs);
-        //     Status(paths.Archives);
-        //     Status(paths.BuildPub);
-        //     Status(paths.BuildStage);
-        //     Status(files.CaptureRoot);
-
-        //     foreach(var file in FS.list((FS.FolderPath)files.AsmDir))
-        //     {
-        //         Status(file);
-        //     }
-        // }
-
         unsafe static void Emit(MemoryRange src, FS.FilePath dst)
         {
             var bpl = 32;
@@ -193,61 +176,6 @@ namespace Z0
             }
         }
 
-        // void Capture()
-        // {
-        //     var component = Parts.Canonical.Assembly;
-        //     var part = Parts.Canonical.Resolved;
-        //     var id = component.Id();
-
-        //     using var step = new CapturePartStep(Wf, State.Asm, new CapturePartHost());
-        //     var captured = step.Capture(part);
-        //     var dst = Wf.Paths.AppCaptureRoot + FS.file(id.Format(), FileExtensions.Asm);
-        //     using var writer = dst.Writer();
-        //     var count = captured.Length;
-        //     if(count != 0)
-        //     {
-        //         ref readonly var f0 = ref first(captured);
-        //         ref readonly var fn = ref skip(f0, count - 1);
-
-        //         for(var i=0u; i<count; i++)
-        //         {
-        //             ref readonly var fx = ref skip(f0,i);
-        //             writer.Write(fx);
-        //         }
-
-        //         var seg = new MemoryRange(f0.Base, fn.Base + fn.Size);
-        //         Emit(seg, dst.ChangeExtension(FileExtensions.HexLine));
-        //     }
-        // }
-
-        void Run59()
-        {
-            {
-                new CheckResources().Run(Wf);
-            }
-
-
-            {
-                using var step = new CheckCredits(Wf, new CheckCreditsHost());
-                step.Run();
-            }
-
-
-            {
-                var flow = Wf.Running(Host);
-
-                using var kernel = NativeModules.kernel32();
-                Wf.Row(kernel);
-
-                var f = NativeModules.func<OS.Delegates.GetProcAddress>(kernel, nameof(OS.Delegates.GetProcAddress));
-                Wf.Row(f);
-
-                var a = (MemoryAddress)f.Invoke(kernel, "CreateDirectoryA");
-                Wf.Row(a);
-
-                Wf.Ran(flow, Host);
-            }
-        }
 
         void IceStuff()
         {
@@ -303,14 +231,6 @@ namespace Z0
         //     return dst;
         // }
 
-        void CheckBitMasks()
-        {
-            var asmWf = AsmWorkflows.create(Wf);
-            var methods = typeof(BitMaskChecker).Methods().WithNameStartingWith("CheckLoMask");
-            var dst = Wf.AppData + FS.file("bitmasks", FileExtensions.Asm);
-            var routines = asmWf.Decode(methods, dst);
-            Wf.Router.Dispatch(CheckBitMasksReactor.Spec());
-        }
 
         void ListTextResources()
         {

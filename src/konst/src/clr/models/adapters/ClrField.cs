@@ -80,6 +80,7 @@ namespace Z0
         public object GetValueDirect(TypedReference src)
             => Definition.GetValueDirect(src);
 
+
         [MethodImpl(Inline)]
         public string Format()
             => Definition.Name;

@@ -35,6 +35,16 @@ namespace Z0
             => string.Format(RP.Setting, key, value);
 
         /// <summary>
+        /// Renders a variable assignment as '<paramref name='name'/>=</paramref name='value'/>;
+        /// </summary>
+        /// <param name="name">The variable name</param>
+        /// <param name="value">The varable value</param>
+        /// <typeparam name="T">The value type</typeparam>
+        [MethodImpl(Inline), Op]
+        public static string assign<T>(Name name, T value)
+            => string.Format(RP.Assign, name, value);
+
+        /// <summary>
         /// Formats the pair of strings represented by respective character spans
         /// </summary>
         /// <param name="a">The leading content</param>

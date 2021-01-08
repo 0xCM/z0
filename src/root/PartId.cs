@@ -56,7 +56,9 @@ public enum PartId : ulong
 
     MathTest = 73,
 
-    Commands = 75,
+    CmdSpec = 75,
+
+    CmdExec = 76,
 
     BitVectors = 100,
 
@@ -130,7 +132,6 @@ public enum PartId : ulong
 
     AsmModels = 181,
 
-    Reactors = 199,
 
     // ~ 200
     // ~ -------------------------------------------------------------------------------

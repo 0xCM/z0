@@ -19,7 +19,7 @@ namespace Z0
             try
             {
                 wf = wf.WithHost(this);
-                var flow = wf.Running(this);
+                var flow = wf.Running(spec);
                 var result = Execute(wf, spec);
                 wf.Ran(flow, result);
                 return result;

@@ -36,5 +36,9 @@ namespace Windows
         /// </summary>
         [DllImport(LibName), Free]
         public static extern IntPtr GetCurrentThread();
+
+        [DllImport(LibName, SetLastError = true), Free]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool ReadProcessMemory(IntPtr hProcess, IntPtr lpBaseAddress, IntPtr lpBuffer, int dwSize, out int lpNumberOfBytesRead);
     }
 }

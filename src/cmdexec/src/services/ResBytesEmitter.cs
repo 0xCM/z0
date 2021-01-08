@@ -43,14 +43,14 @@ namespace Z0
         public void Emit()
         {
             var spec = DataFlows.flow(SourceDir, TargetDir);
-            var flow = Wf.Running(spec);
+            var flow = Wf.Running();
             TargetDir.Clear();
             foreach(var host in Index.NonemptyHosts)
             {
                 var emitted = Emit(Index.HostCodeBlocks(host), TargetDir);
                 Wf.Processed(host, emitted.Count);
             }
-            Wf.Ran(flow, spec);
+            Wf.Ran(flow);
         }
 
         ApiHostRes Emit(in ApiHostCode src, FS.FolderPath dst)

@@ -3,14 +3,13 @@
 // See the LICENSE file in the project root for more information.
 namespace Windows
 {
-    public enum HeapFlags : uint
+    // Represents the image format of a DLL or executable.
+    public enum ImageFormat : byte
     {
-        None = 0x00000000,
+        NATIVE,
 
-        NoSerialize = 0x00000001,
+        MANAGED,
 
-        GenerateExceptions = 0x00000004,
-
-        ZeroMemory = 0x00000008
+        UNKNOWN
     }
 }

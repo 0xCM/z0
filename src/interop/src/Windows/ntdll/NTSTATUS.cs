@@ -3,14 +3,11 @@
 // See the LICENSE file in the project root for more information.
 namespace Windows
 {
-    public enum HeapFlags : uint
+    using System;
+
+    public enum NTSTATUS : int
     {
-        None = 0x00000000,
-
-        NoSerialize = 0x00000001,
-
-        GenerateExceptions = 0x00000004,
-
-        ZeroMemory = 0x00000008
+        SUCCESS = 0,
     }
+
 }

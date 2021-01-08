@@ -7,11 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Merge)" />
     <ProjectReference Include="$(VSvc)" />
     <ProjectReference Include="$(Logix)" />
     <ProjectReference Include="$(Gen)" />
-    <ProjectReference Include="$(Reactors)" />
+    <ProjectReference Include="$(CmdExec)" />
   </ItemGroup>
 
   <ItemGroup>

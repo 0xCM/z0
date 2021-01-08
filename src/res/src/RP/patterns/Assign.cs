@@ -2,16 +2,14 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-using System;
-using System.Reflection;
-
-[assembly: PartId(PartId.Commands)]
-
-namespace Z0.Parts
+namespace Z0
 {
-    public sealed class Commands : Part<Commands>
+    partial struct RP
     {
-
-
+        /// <summary>
+        /// Defines the canonical setting format
+        /// </summary>
+        [RenderPattern(2, Assign)]
+        public const string Assign = "{0}={1}";
     }
 }

@@ -1,5 +1,0 @@
-Failure trapped by Main at J:\dev\projects\z0\src\run\src\App.cs 55
-System.MissingMethodException: Method not found: 'Z0.Commands Z0.Commands.service(Z0.IWfShell)'.
-   at Z0.Runner.Run(CmdLine cmd)
-   at Z0.Runner.Main(String[] args) in J:\dev\projects\z0\src\run\src\App.cs:line 44
-

@@ -78,12 +78,18 @@ namespace Z0
             ShowHandlers();
             var args = cmd.Parts;
             if(args.IsEmpty)
-            return;
+                return;
 
             var name =  first(args).Content;
+            var a0 = args.Length >= 2 ? args[1].Content : EmptyString;
+            var a1 = args.Length >= 3 ? args[2].Content : EmptyString;
+
 
             switch(name)
             {
+                case CheckServiceCmd.CmdName:
+                    Run(Builder.CheckService(a0));
+                    break;
                 case JitApiCmd.CmdName:
                     Run(Builder.JitApiCmd());
                     break;
@@ -121,6 +127,11 @@ namespace Z0
             var dst = FS.path(@"k:\dumps\run\run.dmp");
             dst.Delete();
             DumpEmitter.emit(Processes.current(), dst.Name, DumpTypeOption.Full);
+        }
+
+        void Run(in CheckServiceCmd cmd)
+        {
+             cmd.Dispatch(Wf).Wait();
         }
 
         void Run(in EmitHexIndexCmd cmd)

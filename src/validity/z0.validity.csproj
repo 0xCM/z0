@@ -10,6 +10,7 @@
     <ProjectReference Include="$(Polyrand)" />
     <ProjectReference Include="$(Dynamic)" />
     <ProjectReference Include="$(GVec)" />
+    <ProjectReference Include="$(BitVectors)" />
     <ProjectReference Include="$(Dynamic)" />
   </ItemGroup>
 
