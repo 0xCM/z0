@@ -11,9 +11,11 @@ namespace Z0
     {
         CmdId Id {get;}
 
-        string Message {get;}
-
         bool Succeeded {get;}
+
+        dynamic Payload {get;}
+
+        string Message {get;}
 
         string ITextual.Format()
             => Message;
@@ -30,6 +32,9 @@ namespace Z0
     public interface ICmdResult<C,P> : ICmdResult<C>
         where C : struct, ICmdSpec
     {
-        P Payload {get;}
+        new P Payload {get;}
+
+        dynamic ICmdResult.Payload
+            => Payload;
     }
 }

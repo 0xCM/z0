@@ -50,7 +50,7 @@ namespace Z0
         {
             using var map = MemoryFiles.open(Source);
             var @base = map.BaseAddress;
-            var sig = map.Read(@base, 2).AsUInt16();
+            var sig = map.View(0, 2).AsUInt16();
             var info = map.Description.Description;;
             Wf.Status(Host, info);
         }

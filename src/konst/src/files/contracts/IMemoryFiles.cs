@@ -2,11 +2,16 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Images
+namespace Z0
 {
-    sealed class EmitImageMaps : CmdReactor<EmitImageMapsCmd, Index<LocatedImageRow>>
+    using System;
+    using System.Runtime.CompilerServices;
+
+    using static Part;
+    using static z;
+
+    public interface IMemoryFiles : IWfStateless<IMemoryFiles>
     {
-        protected override Index<LocatedImageRow> Run(EmitImageMapsCmd cmd)
-            => ImageMaps.emit(cmd.Target);
+
     }
 }

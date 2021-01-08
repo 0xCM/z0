@@ -144,6 +144,10 @@ namespace Z0
             => new Outcome<T>(ok, default(T));
 
         [MethodImpl(Inline)]
+        public static implicit operator bool(Outcome<T> src)
+            => src.Ok;
+
+        [MethodImpl(Inline)]
         public static implicit operator Outcome<T>(Exception error)
             => new Outcome<T>(error);
 

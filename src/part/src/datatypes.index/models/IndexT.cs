@@ -89,10 +89,26 @@ namespace Z0
         public ConstIndex<T> Freeze()
             => Data;
 
+        public Index<T> Sort()
+        {
+            if(Length != 0)
+                Array.Sort(Data);
+            return this;
+        }
+
+        public Index<T> Clear()
+        {
+            if(Length !=0)
+            {
+                Array.Clear(Data,0,Length);
+            }
+            return this;
+        }
+
         public bool Equals<C>(Index<T> src, C comparer)
             where C : IEqualityComparer<T>
                 => Index.equals(View, src.View, comparer);
-       public string Format()
+        public string Format()
             => Index.delimit(Data).Format();
 
         public override string ToString()

@@ -47,11 +47,8 @@ namespace Z0
             {
                 return e;
             }
-
-            //wf.Status(Msg.EmittedRuntimeIndex.Format(kHost, target));
-
-            //return Cmd.ok(cmd);
         }
+
         [Op]
         public static void emit(ReadOnlySpan<ApiRuntimeSummary> src, FS.FilePath dst)
         {

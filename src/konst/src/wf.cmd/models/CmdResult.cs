@@ -15,6 +15,8 @@ namespace Z0
 
         public bool Succeeded {get;}
 
+        public dynamic Payload {get;}
+
         public string Message {get;}
 
         [MethodImpl(Inline)]
@@ -23,6 +25,16 @@ namespace Z0
             CmdId = id;
             Succeeded = success;
             Message = DefaultMsg(id, success);
+            Payload = Succeeded;
+        }
+
+        [MethodImpl(Inline)]
+        public CmdResult(CmdId id, bit success, dynamic payload)
+        {
+            CmdId = id;
+            Succeeded = success;
+            Message = DefaultMsg(id, success);
+            Payload = payload;
         }
 
         [MethodImpl(Inline)]
@@ -31,6 +43,7 @@ namespace Z0
             CmdId = id;
             Succeeded = success;
             Message = text.ifempty(message, DefaultMsg(id,success));
+            Payload = Succeeded;
         }
 
         [MethodImpl(Inline)]
@@ -39,6 +52,7 @@ namespace Z0
             CmdId = id;
             Succeeded = false;
             Message = e.ToString();
+            Payload = Succeeded;
         }
 
 

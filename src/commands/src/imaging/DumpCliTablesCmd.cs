@@ -12,7 +12,7 @@ namespace Z0
     [Cmd(CmdName)]
     public struct DumpCliTablesCmd : ICmdSpec<DumpCliTablesCmd>
     {
-        public const string CmdName = "emit-cli-tabledoc";
+        public const string CmdName = "dump-cli-tables";
 
         public FS.FilePath Source;
 

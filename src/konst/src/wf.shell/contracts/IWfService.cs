@@ -12,8 +12,10 @@ namespace Z0
     public interface IWfService : IService, IDisposable
     {
         IWfShell Wf {get;}
-        
+
+
         void Init(IWfShell wf);
+
 
         void IDisposable.Dispose() {}
     }
@@ -33,6 +35,8 @@ namespace Z0
     public interface IWfService<H,C> : IWfService<H>, IService<H,C>
         where H : IWfService<H,C>, new()
     {
+        Type IService.ContractType
+            => typeof(C);
 
     }
 }

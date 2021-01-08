@@ -65,8 +65,11 @@ namespace Z0
 
         protected virtual void OnInit() {}
 
-        public virtual void Dispose()
+        protected virtual void Disposing() { }
+
+        public void Dispose()
         {
+            Disposing();
             Wf.Disposed(Host);
         }
     }

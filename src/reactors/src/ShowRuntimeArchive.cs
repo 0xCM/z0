@@ -21,14 +21,6 @@ namespace Z0
             iter(archive.PdbFiles, f => Wf.Row(f.ToUri()));
             iter(archive.XmlFiles, f => Wf.Row(f.ToUri()));
             iter(archive.JsonFiles, f => Wf.Row(f.ToUri()));
-
-            // var archive = RuntimeArchive.create();
-            // var resolver = new PathAssemblyResolver(archive.ArchiveFiles().Select(x => x.Name.Text));
-            // using var context = new MetadataLoadContext(resolver);
-            // iter(archive.ManagedLibraries, path => context.LoadFromAssemblyPath(path.Name));
-            // var assemblies = context.GetAssemblies();
-            // foreach(var a in assemblies)
-            //     Wf.Status(a.GetSimpleName());
             return Cmd.ok(cmd);
         }
     }
