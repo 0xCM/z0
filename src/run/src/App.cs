@@ -56,154 +56,153 @@ namespace Z0
             }
         }
 
-        void LaunchCode(string arg)
-        {
-            var dir = FS.dir(Environment.CurrentDirectory) + FS.folder(arg);
-            var app = FS.file("code", FileExtensions.Exe);
-            var path = dir.Format(PathSeparator.BS);
-            var cmd = new CmdLine(string.Format("{0} \"{1}\"", app.Format(), path));
-            Wf.Status(string.Format("Launching {0} for {1}", app, path));
-            Wf.Status(string.Format("CmdLine: {0}", cmd.Format()));
-            var process = Cmd.process(Wf,cmd);
-            Wf.Status(string.Format("Launched process {0}", process.ProcessId));
-        }
+        // void LaunchCode(string arg)
+        // {
+        //     var dir = FS.dir(Environment.CurrentDirectory) + FS.folder(arg);
+        //     var app = FS.file("code", FileExtensions.Exe);
+        //     var path = dir.Format(PathSeparator.BS);
+        //     var cmd = new CmdLine(string.Format("{0} \"{1}\"", app.Format(), path));
+        //     Wf.Status(string.Format("Launching {0} for {1}", app, path));
+        //     Wf.Status(string.Format("CmdLine: {0}", cmd.Format()));
+        //     var process = Cmd.process(Wf,cmd);
+        //     Wf.Status(string.Format("Launched process {0}", process.ProcessId));
+        // }
 
-        void ShowHandlers()
-        {
-            corefunc.iter(Wf.Router.SupportedCommands, c => Wf.Status(c));
-        }
+        // void ShowHandlers()
+        // {
+        //     corefunc.iter(Wf.Router.SupportedCommands, c => Wf.Status(c));
+        // }
 
-        public void Run(CmdLine cmd)
-        {
-            ShowHandlers();
-            var args = cmd.Parts;
-            if(args.IsEmpty)
-                return;
+        // public void Run(CmdLine cmd)
+        // {
+        //     ShowHandlers();
+        //     var args = cmd.Parts;
+        //     if(args.IsEmpty)
+        //         return;
 
-            var name =  first(args).Content;
-            var a0 = args.Length >= 2 ? args[1].Content : EmptyString;
-            var a1 = args.Length >= 3 ? args[2].Content : EmptyString;
-
-
-            switch(name)
-            {
-                case CheckServiceCmd.CmdName:
-                    Run(Builder.CheckService(a0));
-                    break;
-                case JitApiCmd.CmdName:
-                    Run(Builder.JitApiCmd());
-                    break;
-                case ShowRuntimeArchiveCmd.CmdName:
-                    Run(Builder.ShowRuntimeArchive());
-                    break;
-                case EmitImageMapsCmd.CmdName:
-                    Run(Builder.EmitImageMaps());
-                    break;
-                case EmitHexIndexCmd.CmdName:
-                    Run(Builder.EmitHexIndex());
-                break;
-                case EmitRuntimeIndexCmd.CmdName:
-                    Run(Builder.EmitRuntimeIndex());
-                break;
-                case DumpCliTablesCmd.CmdName:
-                    Run(Builder.DumpCliTables(Parts.Part.Assembly));
-                break;
-                case BuildCmd.CmdName:
-                    Run(Builder.Build());
-                break;
-                case EmitImageContentCmd.CmdName:
-                    Run(Builder.EmitImageContent());
-                break;
-                default:
-                    Wf.Error(string.Format("Processor for {0} not found", name));
-                    break;
-            }
-
-        }
-
-        void EmitDump()
-        {
-            Wf.Status("Emitting dump");
-            var dst = FS.path(@"k:\dumps\run\run.dmp");
-            dst.Delete();
-            DumpEmitter.emit(Processes.current(), dst.Name, DumpTypeOption.Full);
-        }
+        //     var name =  first(args).Content;
+        //     var a0 = args.Length >= 2 ? args[1].Content : EmptyString;
+        //     var a1 = args.Length >= 3 ? args[2].Content : EmptyString;
 
 
-        static string format(MemoryFileInfo file)
-            => string.Format("{0} | {1} | {2,-16} | {3}", file.BaseAddress, file.EndAddress, file.Size, file.Path.ToUri());
+        //     switch(name)
+        //     {
+        //         case CheckServiceCmd.CmdName:
+        //             Run(Builder.CheckService(a0));
+        //             break;
+        //         case JitApiCmd.CmdName:
+        //             Run(Builder.JitApiCmd());
+        //             break;
+        //         case ShowRuntimeArchiveCmd.CmdName:
+        //             Run(Builder.ShowRuntimeArchive());
+        //             break;
+        //         case EmitImageMapsCmd.CmdName:
+        //             Run(Builder.EmitImageMaps());
+        //             break;
+        //         case EmitHexIndexCmd.CmdName:
+        //             Run(Builder.EmitHexIndex());
+        //         break;
+        //         case EmitRuntimeIndexCmd.CmdName:
+        //             Run(Builder.EmitRuntimeIndex());
+        //         break;
+        //         case DumpCliTablesCmd.CmdName:
+        //             Run(Builder.DumpCliTables(Parts.Part.Assembly));
+        //         break;
+        //         case BuildCmd.CmdName:
+        //             Run(Builder.Build());
+        //         break;
+        //         case EmitImageContentCmd.CmdName:
+        //             Run(Builder.EmitImageContent());
+        //         break;
+        //         default:
+        //             Wf.Error(string.Format("Processor for {0} not found", name));
+        //             break;
+        //     }
 
-        void Run(in CheckServiceCmd cmd)
-        {
-            var srcDir = FS.dir(@"K:\cache\symbols\netsdk\shared\Microsoft.NetCore.App\3.1.9");
-            var dstDir = FS.dir(@"K:\cache\symbols\netsdk\shared\Microsoft.NetCore.App\3.1.9.dumps");
-            using var mapped = MemoryFiles.map(srcDir);
-            var info = mapped.Descriptions;
-            var count = info.Count;
-            corefunc.iter(info, file => Wf.Row(format(file)));
+        // }
 
-            for(ushort i=0; i<count; i++)
-            {
-                ref readonly var file = ref mapped[i];
-                var target = dstDir + FS.file(file.Path.FileName.Name, FileExtensions.Csv);
-                var flow = Wf.EmittingFile(target);
-                var service = MemoryEmitter.create(Wf);
-                service.Emit2(file.BaseAddress, file.Size, target);
-                Wf.EmittedFile(flow, target);
-            }
+        // void EmitDump()
+        // {
+        //     Wf.Status("Emitting dump");
+        //     var dst = FS.path(@"k:\dumps\run\run.dmp");
+        //     dst.Delete();
+        //     DumpEmitter.emit(Processes.current(), dst.Name, DumpTypeOption.Full);
+        // }
 
 
-             //cmd.Dispatch(Wf).Wait();
-        }
+        // static string format(MemoryFileInfo file)
+        //     => string.Format("{0} | {1} | {2,-16} | {3}", file.BaseAddress, file.EndAddress, file.Size, file.Path.ToUri());
 
-        void Run(in EmitHexIndexCmd cmd)
-        {
-            cmd.Dispatch(Wf).Wait();
-        }
+        // void Run(in CheckServiceCmd cmd)
+        // {
+        //     var srcDir = FS.dir(@"K:\cache\symbols\netsdk\shared\Microsoft.NetCore.App\3.1.9");
+        //     var dstDir = FS.dir(@"K:\cache\symbols\netsdk\shared\Microsoft.NetCore.App\3.1.9.dumps");
+        //     using var mapped = MemoryFiles.map(srcDir);
+        //     var info = mapped.Descriptions;
+        //     var count = info.Count;
+        //     corefunc.iter(info, file => Wf.Row(format(file)));
 
-        void Run(in ShowRuntimeArchiveCmd cmd)
-        {
-            cmd.Dispatch(Wf).Wait();
-        }
+        //     for(ushort i=0; i<count; i++)
+        //     {
+        //         ref readonly var file = ref mapped[i];
+        //         var target = dstDir + FS.file(file.Path.FileName.Name, FileExtensions.Csv);
+        //         var flow = Wf.EmittingFile(target);
+        //         var service = MemoryEmitter.create(Wf);
+        //         service.Emit2(file.BaseAddress, file.Size, target);
+        //         Wf.EmittedFile(flow, target);
+        //     }
 
-        void Run(in EmitRuntimeIndexCmd cmd)
-        {
-            cmd.Dispatch(Wf).Wait();
-        }
 
-        void Run(in DumpCliTablesCmd cmd)
-        {
-            cmd.Dispatch(Wf).Wait();
-        }
+        //      //cmd.Dispatch(Wf).Wait();
+        // }
 
-        void Run(in EmitImageContentCmd cmd)
-        {
-            cmd.Dispatch(Wf).Wait();
-        }
+        // void Run(in EmitHexIndexCmd cmd)
+        // {
+        //     cmd.Dispatch(Wf).Wait();
+        // }
 
-        void Run(in EmitImageMapsCmd cmd)
-        {
-            //ImageMaps.emit(Wf, ImageMaps.map(), cmd.Target);
-            cmd.Dispatch(Wf).Wait();
-        }
+        // void Run(in ShowRuntimeArchiveCmd cmd)
+        // {
+        //     cmd.Dispatch(Wf).Wait();
+        // }
 
-        void Run(in JitApiCmd cmd)
-        {
-            Run(Builder.EmitImageMaps("pre-jit"));
-            cmd.Dispatch(Wf).Wait();
-            Run(Builder.EmitImageMaps("post-jit"));
-            EmitDump();
-        }
+        // void Run(in EmitRuntimeIndexCmd cmd)
+        // {
+        //     cmd.Dispatch(Wf).Wait();
+        // }
 
-        void Run(in BuildCmd cmd)
-        {
-            cmd.Save(Db.JobQueue()).OnSuccess(data => Wf.EmittedFile(data)).OnFailure(msg => Wf.Error(msg));
-        }
+        // void Run(in DumpCliTablesCmd cmd)
+        // {
+        //     cmd.Dispatch(Wf).Wait();
+        // }
 
-        void Run(ListFilesCmd cmd)
-        {
+        // void Run(in EmitImageContentCmd cmd)
+        // {
+        //     cmd.Dispatch(Wf).Wait();
+        // }
 
-        }
+        // void Run(in EmitImageMapsCmd cmd)
+        // {
+        //     cmd.Dispatch(Wf).Wait();
+        // }
+
+        // void Run(in JitApiCmd cmd)
+        // {
+        //     Run(Builder.EmitImageMaps("pre-jit"));
+        //     cmd.Dispatch(Wf).Wait();
+        //     Run(Builder.EmitImageMaps("post-jit"));
+        //     EmitDump();
+        // }
+
+        // void Run(in BuildCmd cmd)
+        // {
+        //     cmd.Save(Db.JobQueue()).OnSuccess(data => Wf.EmittedFile(data)).OnFailure(msg => Wf.Error(msg));
+        // }
+
+        // void Run(ListFilesCmd cmd)
+        // {
+
+        // }
 
         void Run(ShowConfigCmd cmd)
         {

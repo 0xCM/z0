@@ -13,10 +13,7 @@ namespace Z0
 
         public FS.FolderPath BuildRoot;
 
-        public static LlvmConfig create(
-            FS.FolderPath SourceRoot,
-            FS.FolderPath? BuildRoot = null
-            )
+        public static LlvmConfig create(FS.FolderPath SourceRoot, FS.FolderPath? BuildRoot = null)
         {
             var dst = new LlvmConfig();
             dst.SourceRoot = SourceRoot;
