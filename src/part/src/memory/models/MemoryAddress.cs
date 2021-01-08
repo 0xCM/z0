@@ -64,10 +64,10 @@ namespace Z0
         public string Format(NumericWidth width)
         {
             return width switch{
-                    NumericWidth.W8 => ((byte)Location).FormatAsmHex(),
-                    NumericWidth.W16 => ((ushort)Location).FormatAsmHex(),
-                    NumericWidth.W32 => ((uint)Location).FormatAsmHex(),
-                    _ => Location.FormatAsmHex(),
+                    NumericWidth.W8 => ((byte)Location).FormatAsmHex(2),
+                    NumericWidth.W16 => ((ushort)Location).FormatAsmHex(4),
+                    NumericWidth.W32 => ((uint)Location).FormatAsmHex(8),
+                    _ => Location.FormatAsmHex(12),
             };
         }
 
@@ -76,8 +76,8 @@ namespace Z0
             => Format(MinWidth);
 
         [MethodImpl(Inline)]
-        public ReadOnlySpan<char> Format(byte pad)
-            => Format().PadRight(pad);
+        public string Format(byte pad)
+            => Location.FormatAsmHex(pad);
 
         [MethodImpl(Inline)]
         public int CompareTo(MemoryAddress src)

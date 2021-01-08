@@ -37,7 +37,6 @@ namespace Z0
         public string Format()
             => Definition.Name;
 
-        [Ignore]
         PropertyInfo IClrRuntimeObject<PropertyInfo>.Definition
             => Definition;
 
@@ -61,6 +60,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator PropertyInfo(ClrProperty src)
             => src.Definition;
-
     }
 }

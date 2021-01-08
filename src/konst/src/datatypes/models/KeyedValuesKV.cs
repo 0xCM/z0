@@ -7,7 +7,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     /// <summary>
@@ -17,12 +17,9 @@ namespace Z0
     /// </summary>
     public readonly struct KeyedValues<K,V> : IIndex<KeyedValue<K,V>>
     {
-        public readonly KeyedValue<K,V>[] Pairs;
+        public Index<KeyedValue<K,V>> Pairs {get;}
 
         readonly KeyFunction<K,V> KeyFunction;
-
-        public static implicit operator KeyedValues<K,V>(KeyedValue<K,V>[] src)
-            => new KeyedValues<K,V>(src);
 
         [MethodImpl(Inline)]
         public KeyedValues(V[] src, KeyFunction<K,V> kf, KeyedValue<K,V>[] dst)
@@ -40,9 +37,6 @@ namespace Z0
                 seek(edit,i) = kvp(key,value);
             }
         }
-
-        public static KeyedValues<K,V> Empty
-            => default;
 
         [MethodImpl(Inline)]
         public KeyedValues(KeyedValue<K,V>[] dst)
@@ -181,13 +175,13 @@ namespace Z0
         public uint Count
         {
             [MethodImpl(Inline)]
-            get => (uint)(Pairs?.Length ?? 0);
+            get => Pairs.Count;
         }
 
         public int Length
         {
             [MethodImpl(Inline)]
-            get => (int)(Pairs?.Length ?? 0);
+            get => Pairs.Length;
         }
 
         public bool IsEmpty
@@ -207,5 +201,12 @@ namespace Z0
 
         public Span<KeyedValue<K,V>> Terms
             => Pairs;
+
+        public static implicit operator KeyedValues<K,V>(KeyedValue<K,V>[] src)
+            => new KeyedValues<K,V>(src);
+
+        public static KeyedValues<K,V> Empty
+            => default;
+
     }
 }

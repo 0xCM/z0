@@ -29,7 +29,7 @@ namespace Z0
             return read(doc);
         }
 
-        public static FolderName folder(FileExtension kind)
+        public static FolderName folder(FS.FileExt kind)
         {
             return FolderName.Define("algorithms");
         }

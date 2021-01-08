@@ -13,9 +13,6 @@ namespace Z0
 
     partial struct Clr
     {
-        [MethodImpl(Inline), Op]
-        public static ClrPrimitiveInfo record(ClrPrimalKind src)
-            => new ClrPrimitiveInfo(src, ClrPrimitives.width(src), ClrPrimitives.sign(src), (PrimalTypeCode)ClrPrimitives.code(src));
 
         [MethodImpl(Inline), Op]
         public static ClrFieldRecord record(FieldInfo src)

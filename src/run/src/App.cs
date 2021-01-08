@@ -135,12 +135,22 @@ namespace Z0
 
         void Run(in CheckServiceCmd cmd)
         {
-            var dir = FS.dir(@"K:\cache\symbols\netsdk\shared\Microsoft.NetCore.App\3.1.9");
-            using var mapped = MemoryFiles.map(dir);
+            var srcDir = FS.dir(@"K:\cache\symbols\netsdk\shared\Microsoft.NetCore.App\3.1.9");
+            var dstDir = FS.dir(@"K:\cache\symbols\netsdk\shared\Microsoft.NetCore.App\3.1.9.dumps");
+            using var mapped = MemoryFiles.map(srcDir);
             var info = mapped.Descriptions;
+            var count = info.Count;
             corefunc.iter(info, file => Wf.Row(format(file)));
 
-
+            for(ushort i=0; i<count; i++)
+            {
+                ref readonly var file = ref mapped[i];
+                var target = dstDir + FS.file(file.Path.FileName.Name, FileExtensions.Csv);
+                var flow = Wf.EmittingFile(target);
+                var service = MemoryEmitter.create(Wf);
+                service.Emit2(file.BaseAddress, file.Size, target);
+                Wf.EmittedFile(flow, target);
+            }
 
 
              //cmd.Dispatch(Wf).Wait();

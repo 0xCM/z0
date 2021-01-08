@@ -21,11 +21,17 @@ namespace Z0
         /// </summary>
         public bool LineLabels {get;}
 
+        /// <summary>
+        /// If offset lables are emitted, the separator between the label and the data
+        /// </summary>
+        public char Delimiter {get;}
+
         [MethodImpl(Inline)]
-        public HexLineConfig(int linebytes, bool linelabels)
+        public HexLineConfig(int linebytes, bool linelabels, char delimiter = FieldDelimiter)
         {
             BytesPerLine = linebytes;
             LineLabels = linelabels;
+            Delimiter = delimiter;
         }
     }
 }

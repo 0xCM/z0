@@ -24,7 +24,7 @@ namespace Z0
             => t.MetadataToken;
 
         [MethodImpl(Inline)]
-        public ClrTypeLookup(ReadOnlySpan<V> src)
+        public ClrTypeLookup(V[] src)
             => Data = new Storage(kf, src);
 
         [MethodImpl(Inline)]

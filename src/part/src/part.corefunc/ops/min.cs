@@ -4,15 +4,11 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Linq;
-    using System.Collections.Generic;
 
     using static Part;
-    using static memory;
 
     partial struct corefunc
     {
-
         [MethodImpl(Inline), Op]
         public static sbyte min(sbyte a, sbyte b)
             => a < b ? a : b;

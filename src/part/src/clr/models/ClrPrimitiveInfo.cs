@@ -11,13 +11,13 @@ namespace Z0
 
     public struct ClrPrimitiveInfo : ITextual
     {
-        public ClrPrimalKind Kind;
+        public ClrPrimalKind Kind {get;}
 
-        public TypeWidth Width;
+        public TypeWidth Width {get;}
 
-        public SignKind Sign;
+        public SignKind Sign {get;}
 
-        public PrimalTypeCode TypeCode;
+        public PrimalTypeCode TypeCode {get;}
 
         [MethodImpl(Inline)]
         public ClrPrimitiveInfo(ClrPrimalKind kind, TypeWidth width, SignKind sign, PrimalTypeCode tc)

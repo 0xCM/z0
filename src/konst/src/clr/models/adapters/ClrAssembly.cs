@@ -19,7 +19,6 @@ namespace Z0
         public ClrAssembly(Assembly src)
             => Definition = src;
 
-        [Ignore]
         public ClrArtifactKind Kind
             => ClrArtifactKind.Assembly;
 

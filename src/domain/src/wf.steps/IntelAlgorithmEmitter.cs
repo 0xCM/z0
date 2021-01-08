@@ -29,7 +29,7 @@ namespace Z0
         static string[] TechLables
             => new string[]{"AVX-512","AVX","AMX", "SVML", "AVX2"};
 
-        public static FS.FileName filename(M.intrinsic src, FileExtension kind)
+        public static FS.FileName filename(M.intrinsic src, FS.FileExt kind)
         {
             var identifier = src.identifier;
             if(TechLables.Contains(src.tech))
@@ -76,7 +76,7 @@ namespace Z0
         {
             var list = IntelIntrinsicsDocReader.read();
             var target = WfShell.paths().ResourceRoot + FS.folder("intrinsics") + FS.folder("algorithms");
-            var kind = FileExtension.Define("md");
+            var kind = FS.ext("md");
             var folder = IntelIntrinsicsDocReader.folder(kind);
             target.Clear();
 

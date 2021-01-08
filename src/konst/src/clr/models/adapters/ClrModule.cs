@@ -37,13 +37,6 @@ namespace Z0
             get => Subject.Name;
         }
 
-        [MethodImpl(Inline)]
-        public static implicit operator ClrModule(R.Module src)
-            => new ClrModule(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator R.Module(ClrModule src)
-            => src.Subject;
 
         public string FullName
         {
@@ -56,5 +49,13 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Subject.ScopeName;
         }
+
+        [MethodImpl(Inline)]
+        public static implicit operator ClrModule(R.Module src)
+            => new ClrModule(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator R.Module(ClrModule src)
+            => src.Subject;
     }
 }

@@ -6,19 +6,14 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
 
     using static Part;
 
     partial struct Clr
     {
-        /// <summary>
-        /// Defines a <see cref='ClrArtfactRef'/>
-        /// </summary>
-        /// <param name="token"></param>
-        /// <param name="kind"></param>
-        /// <param name="name"></param>
         [MethodImpl(Inline), Op]
-        public static ClrArtifactRef artifact(ClrToken token, ClrArtifactKind kind, Name name)
-            => new ClrArtifactRef(token, kind, name);
+        public static ClrPrimitiveInfo describe(ClrPrimalKind src)
+            => new ClrPrimitiveInfo(src, ClrPrimitives.width(src), ClrPrimitives.sign(src), (PrimalTypeCode)ClrPrimitives.code(src));
     }
 }

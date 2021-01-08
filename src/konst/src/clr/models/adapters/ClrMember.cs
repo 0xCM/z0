@@ -34,11 +34,9 @@ namespace Z0
             get => Definition;
         }
 
-        [Ignore]
         MemberInfo IClrRuntimeObject<MemberInfo>.Definition
             => Definition;
 
-        [Ignore]
         ClrArtifactKind IClrArtifact.Kind
             => throw new NotImplementedException();
 

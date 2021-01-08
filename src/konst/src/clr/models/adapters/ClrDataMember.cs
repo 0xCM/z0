@@ -29,12 +29,17 @@ namespace Z0
             => Definition = src;
 
         public bool IsField
-            => Definition is FieldInfo;
+        {
+            [MethodImpl(Inline)]
+            get => Definition is FieldInfo;
+        }
 
         public bool IsProperty
-            => Definition is PropertyInfo;
+        {
+            [MethodImpl(Inline)]
+            get => Definition is PropertyInfo;
+        }
 
-        [Ignore]
         public ClrArtifactKind Kind
         {
             [MethodImpl(Inline)]
@@ -58,9 +63,7 @@ namespace Z0
             if (IsField)
                 (Definition as FieldInfo).SetValue(o, value);
             else
-            {
                 (Definition as PropertyInfo).SetValue(o, value);
-            }
         }
 
         /// <summary>

@@ -70,13 +70,49 @@ namespace Z0
             return line.ToString();
         }
 
+
+        public void FormatLines(ReadOnlySpan<byte> data, Action<string> receiver)
+        {
+            var line = string.Empty.Build();
+            var count = data.Length;
+            var offset = MemoryAddress.Empty;
+
+            for(var i=0u; i<count; i++)
+            {
+                if(i % LineConfig.BytesPerLine == 0)
+                {
+                    if(i != 0)
+                    {
+                        receiver(line.ToString());
+                        line.Clear();
+                    }
+
+                    if(LineConfig.LineLabels)
+                    {
+                        line.Append(offset.Format(12));
+                        line.Append(LineConfig.Delimiter);
+                        line.Append(Chars.Space);
+                    }
+                }
+
+                line.Append(skip(data,i).FormatHex(DataConfig));
+                line.Append(Chars.Space);
+
+                offset += 1;
+            }
+
+            var last = line.ToString();
+            if(!string.IsNullOrWhiteSpace(last))
+                receiver(last);
+        }
+
         public ReadOnlySpan<string> FormatLines(ReadOnlySpan<byte> data)
         {
             var lines = list<string>();
             var line = string.Empty.Build();
             var count = data.Length;
 
-            for(ushort i=0; i<count; i++)
+            for(var i=0; i<count; i++)
             {
                 if(i % LineConfig.BytesPerLine == 0)
                 {

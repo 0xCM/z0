@@ -14,7 +14,7 @@ namespace Z0
         where M : MemberInfo
         where A : Attribute
     {
-        public readonly TaggedMembers<M,A>[] Data;
+        public Index<TaggedMembers<M,A>> Data {get;}
 
         [MethodImpl(Inline)]
         public TaggedMembers(params TaggedMembers<M,A>[] src)

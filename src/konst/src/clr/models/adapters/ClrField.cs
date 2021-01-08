@@ -12,10 +12,8 @@ namespace Z0
 
     using R = System.Reflection;
 
-    [ApiType(ApiNames.ClrField, true)]
     public readonly struct ClrField : IClrRuntimeMember<ClrField,FieldInfo>
     {
-        [Ignore]
         public FieldInfo Definition {get;}
 
         [MethodImpl(Inline)]

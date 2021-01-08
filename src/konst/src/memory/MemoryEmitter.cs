@@ -9,43 +9,79 @@ namespace Z0
     using System.IO;
 
     using static memory;
+    using static Part;
 
     [ApiHost]
-    public readonly struct MemoryEmitter
+    public readonly struct MemoryEmitter : IWfStateless<MemoryEmitter>
     {
+        public IWfShell Wf {get;}
+
+        [MethodImpl(Inline)]
+        public static MemoryEmitter create(IWfShell wf)
+            => new MemoryEmitter(wf);
+
+        [MethodImpl(Inline)]
+        MemoryEmitter(IWfShell wf)
+            => Wf = wf;
+
+        public void Emit2(MemoryRange src, StreamWriter dst)
+        {
+            var formatter = HexDataFormatter.create(src.BaseAddress, 40);
+            var data = memory.cover<byte>(src.BaseAddress, src.Length);
+            dst.WriteLine(text.concat($"Address".PadRight(12), RP.SpacedPipe, "Data"));
+            formatter.FormatLines(data, line => dst.WriteLine(line));
+        }
+
         [Op]
-        public static void emit(MemoryRange src, StreamWriter dst)
+        public void Emit2(MemoryRange src, FS.FilePath dst)
+        {
+            using var writer = dst.Writer();
+            Emit2(src,writer);
+        }
+
+        [Op]
+        public void Emit2(MemoryAddress @base, ByteSize size, FS.FilePath dst)
+            => Emit2((@base,  @base + size), dst);
+
+
+        [Op]
+        public void Emit(MemoryRange src, StreamWriter dst)
         {
             const ushort PageSize = 0x1000;
+
             var buffer = span<byte>(PageSize);
             var pages = (uint)(src.Length/PageSize);
             var reader = memory.reader<byte>(src);
             var offset = 0ul;
-            var formatter = HexDataFormatter.create(src.BaseAddress);
+            var @base = src.BaseAddress;
+
+            Wf.Status($"Length = {src.Length}, Pages={pages}, Base={@base}, End = {src.EndAddress}");
+
+            var formatter = HexDataFormatter.create(@base);
             dst.WriteLine(text.concat($"Address".PadRight(12), RP.SpacedPipe, "Data"));
             for(var i=0; i<pages; i++)
             {
                 var size = reader.Read((int)offset, PageSize, buffer);
-                var lines = formatter.FormatLines(slice(buffer,size));
+                var lines = formatter.FormatLines(slice(buffer, size));
                 for(var j =0; j<lines.Length; j++)
                     dst.WriteLine(skip(lines,j));
 
-                if(size < PageSize)
-                    break;
-
                 offset += PageSize;
+
+                if(size < PageSize || offset >= src.Length)
+                    break;
             }
         }
 
         [Op]
-        public static void emit(MemoryRange src, FS.FilePath dst)
+        public void Emit(MemoryRange src, FS.FilePath dst)
         {
             using var writer = dst.Writer();
-            emit(src,writer);
+            Emit(src,writer);
         }
 
         [Op]
-        public static void emit(MemoryAddress @base, ByteSize size, FS.FilePath dst)
-            => emit((@base,  @base + size), dst);
+        public void Emit(MemoryAddress @base, ByteSize size, FS.FilePath dst)
+            => Emit((@base,  @base + size), dst);
     }
 }

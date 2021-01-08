@@ -25,7 +25,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         internal static string format<T>(T src, bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true)
             where T : unmanaged
-                => format_u(src,zpad, specifier, uppercase,prespec);
+                => format_u(src,zpad, specifier, uppercase, prespec);
 
         /// <summary>
         /// Formats a sequence of primal numeric calls as data-formatted hex
