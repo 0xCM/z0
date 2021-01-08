@@ -1,0 +1,29 @@
+Failure trapped by Main at j:\dev\projects\z0\src\gen\shell\src\App.cs 46
+System.Reflection.ReflectionTypeLoadException: Unable to load one or more of the requested types.
+Could not load type 'Z0.TaggedMembers`2' from assembly 'z0.konst, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'.
+   at System.Reflection.RuntimeModule.GetTypes(RuntimeModule module)
+   at System.Reflection.RuntimeModule.GetTypes()
+   at System.Reflection.Assembly.GetTypes()
+   at Z0.ApiCatalogs.resolve(Assembly src) in j:\dev\projects\z0\src\konst\src\api.catalogs\ApiCatalogs.cs:line 106
+   at Z0.ApiCatalogs.part(FilePath src) in j:\dev\projects\z0\src\konst\src\api.catalogs\ApiCatalogs.cs:line 96
+   at Z0.ApiCatalogs.system(Files paths) in j:\dev\projects\z0\src\konst\src\api.catalogs\ApiCatalogs.cs:line 25
+   at Z0.ApiPartSet..ctor(Assembly control) in j:\dev\projects\z0\src\konst\src\api.catalogs\models\ApiPartSet.cs:line 51
+   at Z0.WfShell.parts(Assembly control, String[] args) in j:\dev\projects\z0\src\konst\src\wf.shell\ops\parts.cs:line 57
+   at Z0.WfShell.create(String[] args, Boolean verbose) in j:\dev\projects\z0\src\konst\src\wf.shell\ops\create.cs:line 106
+   at Z0.App.Main(String[] args) in j:\dev\projects\z0\src\gen\shell\src\App.cs:line 40
+System.TypeLoadException: Could not load type 'Z0.TaggedMembers`2' from assembly 'z0.konst, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'.
+
+Failure trapped by Main at j:\dev\projects\z0\src\gen\shell\src\App.cs 34
+System.Reflection.ReflectionTypeLoadException: Unable to load one or more of the requested types.
+Could not load type 'Z0.TaggedMembers`2' from assembly 'z0.konst, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'.
+   at System.Reflection.RuntimeModule.GetTypes(RuntimeModule module)
+   at System.Reflection.RuntimeModule.GetTypes()
+   at System.Reflection.Assembly.GetTypes()
+   at Z0.ApiCatalogs.resolve(Assembly src) in j:\dev\projects\z0\src\konst\src\api.catalogs\ApiCatalogs.cs:line 106
+   at Z0.ApiCatalogs.part(FilePath src) in j:\dev\projects\z0\src\konst\src\api.catalogs\ApiCatalogs.cs:line 96
+   at Z0.ApiCatalogs.system(Files paths) in j:\dev\projects\z0\src\konst\src\api.catalogs\ApiCatalogs.cs:line 25
+   at Z0.ApiPartSet..ctor(Assembly control) in j:\dev\projects\z0\src\konst\src\api.catalogs\models\ApiPartSet.cs:line 51
+   at Z0.WfShell.parts(Assembly control, Index`1 identifiers) in j:\dev\projects\z0\src\konst\src\wf.shell\ops\parts.cs:line 34
+   at Z0.App.Main(String[] args) in j:\dev\projects\z0\src\gen\shell\src\App.cs:line 29
+System.TypeLoadException: Could not load type 'Z0.TaggedMembers`2' from assembly 'z0.konst, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'.
+

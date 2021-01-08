@@ -12,7 +12,6 @@ namespace Z0
         public FS.FilePath Target;
     }
 
-
     partial class XCmd
     {
         [Op]

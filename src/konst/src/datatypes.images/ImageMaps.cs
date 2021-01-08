@@ -15,6 +15,7 @@ namespace Z0
     [ApiHost]
     public readonly partial struct ImageMaps
     {
+
         [MethodImpl(Inline), Op]
         public static MemoryAddress @base(IPart src)
         {
@@ -32,7 +33,7 @@ namespace Z0
         public static ProcessState state(Process src)
         {
             var dst = new ProcessState();
-            map(src, ref dst);
+            fill(src, ref dst);
             return dst;
         }
     }

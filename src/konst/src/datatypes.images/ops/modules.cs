@@ -22,7 +22,7 @@ namespace Z0
             var buffer = alloc<ProcessModuleRow>(count);
             var dst = span(buffer);
             for(var i=0u; i<count; i++)
-                map(skip(modules,i), ref seek(dst, i));
+                fill(skip(modules,i), ref seek(dst, i));
             return buffer;
         }
     }

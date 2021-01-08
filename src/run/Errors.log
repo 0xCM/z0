@@ -10,3 +10,11 @@ System.FormatException: Index (zero based) must be greater than or equal to zero
    at Z0.Runner.Run(CmdLine cmd) in J:\dev\projects\z0\src\run\src\App.cs:line 85
    at Z0.Runner.Main(String[] args) in J:\dev\projects\z0\src\run\src\App.cs:line 44
 
+Failure trapped by Main at J:\dev\projects\z0\src\run\src\App.cs 59
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Z0.Runner.Main(String[] args) in J:\dev\projects\z0\src\run\src\App.cs:line 46
+
+Failure trapped by Main at J:\dev\projects\z0\src\run\src\App.cs 55
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Z0.Runner.Main(String[] args) in J:\dev\projects\z0\src\run\src\App.cs:line 43
+

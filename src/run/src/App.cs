@@ -40,8 +40,8 @@ namespace Z0
                 }
                 else
                 {
-                    CmdLine cmd = args;
-                    app.Run(cmd);
+                    wf.Status("Dispatching");
+                    Reactor.init(wf).Dispatch(args);
                 }
 
                 // var cmd1 = new CmdLine("cmd /c code.exe j:\\");

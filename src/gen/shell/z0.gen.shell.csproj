@@ -3,6 +3,8 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <AssemblyName>gen</AssemblyName>
+
   </PropertyGroup>
 
   <ItemGroup>

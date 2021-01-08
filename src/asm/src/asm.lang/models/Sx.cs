@@ -14,9 +14,9 @@ namespace Z0.Asm
     /// </summary>
     public readonly struct Sx : ILiteralCover<Sx>
     {
-        public readonly NumericWidth SourceWidth;
+        public NumericWidth SourceWidth {get;}
 
-        public readonly NumericWidth TargetWidth;
+        public NumericWidth TargetWidth {get;}
 
         [MethodImpl(Inline)]
         public Sx(NumericWidth src, NumericWidth dst)

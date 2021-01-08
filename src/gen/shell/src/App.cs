@@ -6,47 +6,28 @@ namespace Z0
 {
     using System;
 
-    sealed class AppRunner : WfHost<AppRunner>
+    sealed class Generator : WfService<Generator,Generator>
     {
-        public AppRunner()
-        {
 
+        public void Generate(string[] args)
+        {
+            var flow = Wf.Running("Generating");
+            z.iter(args, arg => Wf.Row(arg));
+            Wf.Ran(flow);
         }
 
-        public void Dispose()
-        {
 
-        }
-
-        protected override void Execute(IWfShell wf)
-        {
-            using var flow = wf.Running();
-            corefunc.iter(wf.Args, arg => wf.Row(arg));
-        }
     }
 
-    class App : IDisposable
+    class App
     {
-        readonly IWfShell Wf;
-
-        App(IWfShell wf)
-            => Wf = wf;
-
-        public void Dispose()
-        {
-        }
-
-        public void Run()
-            => new AppRunner().Run(Wf);
-
 
         public static void Main(params string[] args)
         {
             try
             {
-                using var wf = WfShell.create(args);
-                using var runner = new App(wf);
-                runner.Run();
+                using var wf = WfShell.create(WfShell.parts(Index<PartId>.Empty), args);
+                Generator.init(wf).Generate(args);
             }
             catch(Exception e)
             {

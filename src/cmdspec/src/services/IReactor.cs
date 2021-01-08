@@ -2,20 +2,16 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
 
-    partial struct AsmLang
+    public interface IReactor
     {
-        public enum OperatorCode : byte
-        {
-            add = AsciMathCode.Add,
+        void Dispatch(CmdLine cmd);
 
-            sub = AsciMathCode.Sub,
+        void ShowSupported();
 
-            mul = AsciMathCode.Mul
-        }
+        IndexedView<CmdId> SupportedCommands();
     }
 }
