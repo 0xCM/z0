@@ -10,7 +10,7 @@ namespace Windows
     // the data altogether. Any tag above LastReservedStream will not be used by
     // the system and is reserved for program-specific information.
     // From minidumpapiset.h
-    public enum MINIDUMP_STREAM_TYPE : uint
+    public enum MinidumpStreamType : uint
     {
         UnusedStream = 0,
 

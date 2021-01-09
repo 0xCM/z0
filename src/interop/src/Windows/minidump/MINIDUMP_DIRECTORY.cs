@@ -9,7 +9,7 @@ namespace Windows
     [StructLayout(LayoutKind.Sequential)]
     public struct MINIDUMP_DIRECTORY
     {
-        public MINIDUMP_STREAM_TYPE StreamType;
+        public MinidumpStreamType StreamType;
 
         public MINIDUMP_LOCATION_DESCRIPTOR Location;
     }

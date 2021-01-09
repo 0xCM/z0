@@ -7,7 +7,9 @@ namespace Z0
     using System;
 
     using static Part;
-    using static memory;
+    using static z;
+
+    using W = Windows;
 
     class Runner
     {
@@ -32,7 +34,10 @@ namespace Z0
             try
             {
                 using var wf = WfShell.create(WfShell.parts(Index<PartId>.Empty), args);
+
                 var app = new Runner(wf);
+
+
                 if(args.Length == 0)
                 {
                     wf.Status("usage: run <command> [options]");
@@ -41,9 +46,13 @@ namespace Z0
                 }
                 else
                 {
-                    app.Test();
-                    wf.Status("Dispatching");
-                    Reactor.init(wf).Dispatch(args);
+                    if(args.Length == 1 && args[0] == "tests")
+                        app.RunTests();
+                    else
+                    {
+                        wf.Status("Dispatching");
+                        Reactor.init(wf).Dispatch(args);
+                    }
                 }
 
             }
@@ -53,11 +62,18 @@ namespace Z0
             }
         }
 
-        public void Test()
+        public void RunTests()
         {
             var src = FS.path(@"K:\dumps\capture.dmp");
-            using var file = MemoryFiles.map(src)
+            if(src.Exists)
+            {
+                using var file = MemoryFiles.map(src);
+                Wf.Status($"Mapped file {file.Path} to process memory based at {file.BaseAddress}");
+                ref readonly var header = ref file.One<W.MINIDUMP_HEADER>(0);
+                asci4 sig = header.Signature;
+                Wf.Row(string.Format("Sig:{0}, Version:{1}, NumerOfStreams:{2}, Flags:{3}",
+                    sig, header.Version & ushort.MaxValue, header.NumberOfStreams, header.Flags));
+            }
         }
-
     }
 }

@@ -19,31 +19,31 @@ namespace Z0
             // Open the file for writing
             using (var stream = new FileStream(outputFile, FileMode.Create, FileAccess.ReadWrite, FileShare.None))
             {
-                MINIDUMP_TYPE dumpType = MINIDUMP_TYPE.MiniDumpNormal;
+                MinidumpType dumpType = MinidumpType.MiniDumpNormal;
                 switch (type)
                 {
                     case DumpTypeOption.Full:
-                        dumpType = MINIDUMP_TYPE.MiniDumpWithFullMemory |
-                                   MINIDUMP_TYPE.MiniDumpWithDataSegs |
-                                   MINIDUMP_TYPE.MiniDumpWithHandleData |
-                                   MINIDUMP_TYPE.MiniDumpWithUnloadedModules |
-                                   MINIDUMP_TYPE.MiniDumpWithFullMemoryInfo |
-                                   MINIDUMP_TYPE.MiniDumpWithThreadInfo |
-                                    MINIDUMP_TYPE.MiniDumpWithTokenInformation |
-                                    MINIDUMP_TYPE.MiniDumpWithModuleHeaders
+                        dumpType = MinidumpType.MiniDumpWithFullMemory |
+                                   MinidumpType.MiniDumpWithDataSegs |
+                                   MinidumpType.MiniDumpWithHandleData |
+                                   MinidumpType.MiniDumpWithUnloadedModules |
+                                   MinidumpType.MiniDumpWithFullMemoryInfo |
+                                   MinidumpType.MiniDumpWithThreadInfo |
+                                    MinidumpType.MiniDumpWithTokenInformation |
+                                    MinidumpType.MiniDumpWithModuleHeaders
                                     ;
                         break;
                     case DumpTypeOption.Heap:
-                        dumpType = MINIDUMP_TYPE.MiniDumpWithPrivateReadWriteMemory |
-                                    MINIDUMP_TYPE.MiniDumpWithDataSegs |
-                                    MINIDUMP_TYPE.MiniDumpWithHandleData |
-                                    MINIDUMP_TYPE.MiniDumpWithUnloadedModules |
-                                    MINIDUMP_TYPE.MiniDumpWithFullMemoryInfo |
-                                    MINIDUMP_TYPE.MiniDumpWithThreadInfo |
-                                    MINIDUMP_TYPE.MiniDumpWithTokenInformation;
+                        dumpType = MinidumpType.MiniDumpWithPrivateReadWriteMemory |
+                                    MinidumpType.MiniDumpWithDataSegs |
+                                    MinidumpType.MiniDumpWithHandleData |
+                                    MinidumpType.MiniDumpWithUnloadedModules |
+                                    MinidumpType.MiniDumpWithFullMemoryInfo |
+                                    MinidumpType.MiniDumpWithThreadInfo |
+                                    MinidumpType.MiniDumpWithTokenInformation;
                         break;
                     case DumpTypeOption.Mini:
-                        dumpType = MINIDUMP_TYPE.MiniDumpWithThreadInfo;
+                        dumpType = MinidumpType.MiniDumpWithThreadInfo;
                         break;
                 }
 

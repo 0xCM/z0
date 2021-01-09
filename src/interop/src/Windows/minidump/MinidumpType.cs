@@ -76,59 +76,141 @@ namespace Windows
     // The exact set of what is provided depends on the auxiliary.
     // This can be quite large.
 
+    /// <summary>
+    /// https://docs.microsoft.com/en-us/windows/win32/api/minidumpapiset/ne-minidumpapiset-minidump_type
+    /// </summary>
     [Flags]
-    public enum MINIDUMP_TYPE : uint
+    public enum MinidumpType : ulong
     {
+        /// <summary>
+        ///
+        /// </summary>
         MiniDumpNormal = 0x00000000,
 
-        MiniDumpWithDataSegs    = 0x00000001,
+        /// <summary>
+        ///
+        /// </summary>
+        MiniDumpWithDataSegs = 0x00000001,
 
+        /// <summary>
+        ///
+        /// </summary>
         MiniDumpWithFullMemory  = 0x00000002,
 
+        /// <summary>
+        ///
+        /// </summary>
         MiniDumpWithHandleData  = 0x00000004,
 
-        MiniDumpFilterMemory    = 0x00000008,
+        /// <summary>
+        ///
+        /// </summary>
+        MiniDumpFilterMemory = 0x00000008,
 
-        MiniDumpScanMemory      = 0x00000010,
+        /// <summary>
+        ///
+        /// </summary>
+        MiniDumpScanMemory = 0x00000010,
 
+        /// <summary>
+        ///
+        /// </summary>
         MiniDumpWithUnloadedModules = 0x00000020,
 
+        /// <summary>
+        /// Include pages with data referenced by locals or other stack memory. This option can increase the size of the minidump file significantly
+        /// </summary>
         MiniDumpWithIndirectlyReferencedMemory = 0x00000040,
 
+        /// <summary>
+        ///
+        /// </summary>
         MiniDumpFilterModulePaths = 0x00000080,
 
+        /// <summary>
+        ///
+        /// </summary>
         MiniDumpWithProcessThreadData  = 0x00000100,
 
+        /// <summary>
+        ///
+        /// </summary>
         MiniDumpWithPrivateReadWriteMemory = 0x00000200,
 
+        /// <summary>
+        ///
+        /// </summary>
         MiniDumpWithoutOptionalData = 0x00000400,
 
+        /// <summary>
+        ///
+        /// </summary>
         MiniDumpWithFullMemoryInfo = 0x00000800,
 
+        /// <summary>
+        ///
+        /// </summary>
         MiniDumpWithThreadInfo = 0x00001000,
 
+        /// <summary>
+        /// Include all code and code-related sections from loaded modules to capture executable content. For per-module control, use the ModuleWriteCodeSegs enumeration value from MODULE_WRITE_FLAGS.
+        /// </summary>
         MiniDumpWithCodeSegs = 0x00002000,
 
+        /// <summary>
+        ///
+        /// </summary>
         MiniDumpWithoutAuxiliaryState = 0x00004000,
 
+        /// <summary>
+        ///
+        /// </summary>
         MiniDumpWithFullAuxiliaryState = 0x00008000,
 
+        /// <summary>
+        ///
+        /// </summary>
         MiniDumpWithPrivateWriteCopyMemory     = 0x00010000,
 
+        /// <summary>
+        ///
+        /// </summary>
         MiniDumpIgnoreInaccessibleMemory = 0x00020000,
 
+        /// <summary>
+        /// Adds security token related data. This will make the "!token" extension work when processing a user-mode dump.
+        /// </summary>
         MiniDumpWithTokenInformation = 0x00040000,
 
+        /// <summary>
+        /// Adds module header related data
+        /// </summary>
         MiniDumpWithModuleHeaders = 0x00080000,
 
+        /// <summary>
+        ///
+        /// </summary>
         MiniDumpFilterTriage = 0x00100000,
 
+        /// <summary>
+        ///
+        /// </summary>
         MiniDumpWithAvxXStateContext = 0x00200000,
 
+        /// <summary>
+        ///
+        /// </summary>
         MiniDumpWithIptTrace  = 0x00400000,
 
+        /// <summary>
+        ///
+        /// </summary>
         MiniDumpScanInaccessiblePartialPages = 0x00800000,
 
         MiniDumpValidTypeFlags  = 0x00ffffff,
     }
+
+    /*
+
+    */
 }

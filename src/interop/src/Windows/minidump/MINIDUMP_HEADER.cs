@@ -12,10 +12,13 @@ namespace Windows
     [StructLayout(LayoutKind.Sequential)]
     public struct MINIDUMP_HEADER
     {
+        /// <summary>
+        /// The first four bytes of the file which should correspond to the value <see cref='MINIDUMP_CONSTANTS.Signature'/?
+        /// </summary>
         public uint Signature;
 
         /// <summary>
-        /// The version of the minidump format. The low-order word is MINIDUMP_VERSION. The high-order word is an internal value that is implementation specific.
+        /// The version of the minidump format. The low-order word is <see cref='MINIDUMP_VERSION'/>. The high-order word is an internal value that is implementation specific.
         /// </summary>
         public uint Version;
 
@@ -25,7 +28,7 @@ namespace Windows
         public uint NumberOfStreams;
 
         /// <summary>
-        /// The base RVA of the minidump directory. The directory is an array of <see cref='MINIDUMP_DIRECTORY'/> structures.
+        /// The base RVA of the minidump directory which is an array of <see cref='MINIDUMP_DIRECTORY'/> structures.
         /// </summary>
         public uint StreamDirectoryRva;
 
@@ -39,11 +42,9 @@ namespace Windows
         /// </summary>
         public uint TimeDateStamp;
 
-        uint Unused;
-
         /// <summary>
         /// One or more values from the MINIDUMP_TYPE enumeration type.
         /// </summary>
-        public MINIDUMP_TYPE Flags;
+        public MinidumpType Flags;
     }
 }

@@ -72,9 +72,18 @@ namespace Z0
         /// Presents file content as a readonly sequence of <typeparamref name='T'/> cells
         /// </summary>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline)]
         public ReadOnlySpan<T> View<T>()
             => api.view<T>(this);
+
+        /// <summary>
+        /// Presents a single cell from the underlying source located at a <typeparamref name='T'/> measured offset
+        /// </summary>
+        /// <param name="tOffset">The number of cells to advance from the base address</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public ref readonly T One<T>(uint tOffset)
+            => ref memory.first(View<T>(tOffset));
 
         /// <summary>
         /// Presents file content segment as a readonly sequence of <typeparamref name='T'/> cells beginning
