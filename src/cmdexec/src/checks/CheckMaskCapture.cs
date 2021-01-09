@@ -6,11 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Text;
-    using System.Linq;
 
-    using static Konst;
     using static z;
+    using static Part;
 
     public readonly struct MaskCaptureCheck<T>
         where T : unmanaged
@@ -31,7 +29,7 @@ namespace Z0
         public void Run()
         {
             var declarer = typeof(BitMasks.Literals);
-            var src = ClrLiterals.tagged<T>(Konst.base2, declarer).Table.View;
+            var src = ClrLiterals.tagged<T>(base2, declarer).Table.View;
             var dst = alloc<CaptureCheckResult>(src.Length);
             check(src,dst);
         }

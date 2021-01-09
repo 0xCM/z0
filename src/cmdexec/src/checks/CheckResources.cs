@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     [WfHost]
     public sealed class CheckResources : WfHost<CheckResources>

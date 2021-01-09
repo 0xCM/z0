@@ -32,7 +32,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="F">The reification type</typeparam>
     [Free]
-    public interface IVectorKind<F,W> : TVectorWidth<F>, ITypedLiteral<F,VectorWidth,uint>, IDataWidth
+    public interface IVectorKind<F,W> : IVectorWidth<F>, ITypedLiteral<F,VectorWidth,uint>, IDataWidth
         where F : struct, IVectorKind<F,W>
         where W : unmanaged, ITypeWidth
     {

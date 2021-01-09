@@ -20,7 +20,7 @@ namespace Z0
             return ref z;
         }
 
-        [MethodImpl(Inline), Op]
+        [Op]
         public static BitSpan and(in BitSpan x, in BitSpan y)
             => and(x,y, alloc(y.BitCount));
     }

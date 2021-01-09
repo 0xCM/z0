@@ -11,10 +11,6 @@ namespace Z0
 
     partial struct Formatters
     {
-        [MethodImpl(Inline), Op]
-        public static NumericLiteralFormatter numeric()
-            => default(NumericLiteralFormatter);
-
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static INumericFormatter<T> numeric<T>(Func<T,string> f, Func<T,NumericBaseKind,string> g)
             where T : unmanaged

@@ -21,10 +21,4 @@ namespace Z0
         string ITypedLiteral<VectorWidth>.Name
             => VectorWidth.FormatName();
     }
-
-    public interface IVectorWidth<W> : IVectorWidth, ICellWidth<W>
-        where W : unmanaged, IVectorWidth<W>
-    {
-
-    }
 }

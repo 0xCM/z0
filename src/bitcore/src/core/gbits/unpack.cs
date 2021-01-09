@@ -7,11 +7,13 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     partial class gbits
     {
+
+        [Unpack, Closures(Closure)]
         public static Span<bit> unpack<T>(T src)
             where T : unmanaged
         {
@@ -74,6 +76,11 @@ namespace Z0
             where T : unmanaged
                 => unpack(src.ReadOnly(), dst.AsSpan());
 
+        [Unpack, Closures(Closure)]
+        public static Span<bit> unpack<T>(ReadOnlySpan<T> src)
+            where T : unmanaged
+                => unpack(src, alloc<bit>(bitsize<T>()*src.Length));
+
         /// <summary>
         /// Projects each bit from a source value into target span element at the corresponding index
         /// </summary>
@@ -91,10 +98,6 @@ namespace Z0
                 seek(dst,offset + i)  = testbit(src, (byte)i) == bit.On ? one<T>() : zero<T>();
             return dst;
         }
-
-        public static Span<bit> unpack<T>(ReadOnlySpan<T> src)
-            where T : unmanaged
-                => unpack(src, alloc<bit>(bitsize<T>()*src.Length));
 
         public static Span<T> unpack<S,T>(Span<S> src, Span<T> dst)
             where S : unmanaged

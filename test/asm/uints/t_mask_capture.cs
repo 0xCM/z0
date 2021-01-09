@@ -7,7 +7,7 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     public sealed class t_mask_capture : t_asm<t_mask_capture>
@@ -15,7 +15,7 @@ namespace Z0.Asm
         public static T[] binlits<T>(Type declarer, Action<AppMsg> msg)
             where T : unmanaged
         {
-            var literals = ClrLiterals.tagged<T>(Konst.base2, declarer).Table;
+            var literals = ClrLiterals.tagged<T>(base2, declarer).Table;
             var count = literals.Length;
             var buffer = sys.alloc<T>(count);
             var dst = span(buffer);
@@ -52,7 +52,7 @@ namespace Z0.Asm
             var bs = src.ToBitSpan();
             Claim.eq(64, bs.Length);
             var expect = bs.Format();
-            var actual = Digital.render(Konst.base2, src).Reverse().ToString();
+            var actual = Digital.render(base2, src).Reverse().ToString();
             ClaimPrimal.eq(expect,actual);
         }
 

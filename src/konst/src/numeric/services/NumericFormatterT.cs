@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     public readonly struct NumericFormatter<T> : INumericFormatter<T>
         where T : unmanaged
@@ -21,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public string Format(T src, NumericBaseKind @base)
             => Formatter.Format(src, @base);
-        
+
         [MethodImpl(Inline)]
         public NumericFormatter<F> As<F>()
             where F : unmanaged
@@ -31,13 +31,13 @@ namespace Z0
         public NumericFormatter<T> Concretize()
             => this;
     }
-    
+
     readonly struct FunctionalNumericFormatter<T> : INumericFormatter<T>
         where T : unmanaged
     {
-        readonly Func<T,string> F;        
+        readonly Func<T,string> F;
 
-        readonly Func<T,NumericBaseKind,string> G;        
+        readonly Func<T,NumericBaseKind,string> G;
 
         [MethodImpl(Inline)]
         internal FunctionalNumericFormatter(Func<T,string> f, Func<T,NumericBaseKind,string> g)

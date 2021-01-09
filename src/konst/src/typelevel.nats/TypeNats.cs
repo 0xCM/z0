@@ -15,6 +15,85 @@ namespace Z0
     {
         const NumericKind Closure = UnsignedInts;
 
+        /// <summary>
+        /// Returns the numeric value represented by a natural type
+        /// </summary>
+        /// <param name="n">The natural type representative</param>
+        /// <typeparam name="K">A natural type</typeparam>
+        [MethodImpl(Inline)]
+        public static sbyte nat8i<N>(N n = default)
+            where N : unmanaged, ITypeNat
+                => (sbyte)value(n);
+
+        /// <summary>
+        /// Returns the numeric value represented by a natural type
+        /// </summary>
+        /// <param name="n">The natural type representative</param>
+        /// <typeparam name="K">A natural type</typeparam>
+        [MethodImpl(Inline)]
+        public static byte nat8u<N>(N n = default)
+            where N : unmanaged, ITypeNat
+                => (byte)value(n);
+
+        /// <summary>
+        /// Returns the numeric value represented by a natural type
+        /// </summary>
+        /// <param name="n">The natural type representative</param>
+        /// <typeparam name="K">A natural type</typeparam>
+        [MethodImpl(Inline)]
+        public static short nat16i<N>(N n = default)
+            where N : unmanaged, ITypeNat
+                => (short)value(n);
+
+        /// <summary>
+        /// Returns the numeric value represented by a natural type
+        /// </summary>
+        /// <param name="n">The natural type representative</param>
+        /// <typeparam name="K">A natural type</typeparam>
+        [MethodImpl(Inline)]
+        public static ushort nat16u<N>(N n = default)
+            where N : unmanaged, ITypeNat
+                => (ushort)value(n);
+
+        /// <summary>
+        /// Returns the numeric value represented by a natural type
+        /// </summary>
+        /// <param name="n">The natural type representative</param>
+        /// <typeparam name="K">A natural type</typeparam>
+        [MethodImpl(Inline)]
+        public static int nat32i<N>(N n = default)
+            where N : unmanaged, ITypeNat
+                => (int)value(n);
+
+        /// <summary>
+        /// Returns the numeric value represented by a natural type
+        /// </summary>
+        /// <param name="n">The natural type representative</param>
+        /// <typeparam name="K">A natural type</typeparam>
+        [MethodImpl(Inline)]
+        public static uint nat32u<N>(N n = default)
+            where N : unmanaged, ITypeNat
+                => (uint)value(n);
+
+        /// <summary>
+        /// Returns the numeric value represented by a natural type
+        /// </summary>
+        /// <param name="n">The natural type representative</param>
+        /// <typeparam name="K">A natural type</typeparam>
+        [MethodImpl(Inline)]
+        public static ulong nat64u<N>(N n = default)
+            where N : unmanaged, ITypeNat
+                => value(n);
+
+        /// <summary>
+        /// Returns the numeric value represented by a natural type
+        /// </summary>
+        /// <param name="n">The natural type representative</param>
+        /// <typeparam name="K">A natural type</typeparam>
+        [MethodImpl(Inline)]
+        public static long nat64i<N>(N n = default)
+            where N : unmanaged, ITypeNat
+                => (long)value(n);
 
         [MethodImpl(Inline)]
         public static Next<K> next<K>(K k = default)
@@ -46,11 +125,11 @@ namespace Z0
                 => new Digit<N,T>(src);
 
         /// <summary>
-        /// Constructs a natural representative for a specified parametric type
+        /// Constructs a natural representative
         /// </summary>
-        /// <typeparam name="K">The representative type to construct</typeparam>
+        /// <typeparam name="K">The representative type</typeparam>
         [MethodImpl(Inline)]
-        public static K nat<K>(K k = default)
+        public static K natrep<K>()
             where K : unmanaged, ITypeNat
                 => default;
 
@@ -65,7 +144,6 @@ namespace Z0
         [MethodImpl(Inline)]
         internal static int bitsize<T>()
             => Unsafe.SizeOf<T>()*8;
-
 
         /// <summary>
         /// Adds a an offset of 1 byte to a reference

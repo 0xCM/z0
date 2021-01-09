@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct VectorWidthKind : IVectorWidth<VectorWidthKind>
+    public readonly struct VectorWidthKind : ICellWidth<VectorWidthKind>, IVectorWidth
     {
         public VectorWidth VectorWidth {get;}
 
