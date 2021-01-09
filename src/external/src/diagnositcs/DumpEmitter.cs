@@ -29,7 +29,9 @@ namespace Z0
                                    MINIDUMP_TYPE.MiniDumpWithUnloadedModules |
                                    MINIDUMP_TYPE.MiniDumpWithFullMemoryInfo |
                                    MINIDUMP_TYPE.MiniDumpWithThreadInfo |
-                                    MINIDUMP_TYPE.MiniDumpWithTokenInformation;
+                                    MINIDUMP_TYPE.MiniDumpWithTokenInformation |
+                                    MINIDUMP_TYPE.MiniDumpWithModuleHeaders
+                                    ;
                         break;
                     case DumpTypeOption.Heap:
                         dumpType = MINIDUMP_TYPE.MiniDumpWithPrivateReadWriteMemory |

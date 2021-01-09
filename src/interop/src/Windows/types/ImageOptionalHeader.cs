@@ -26,20 +26,6 @@ namespace Windows
     // Additionally, since we usually explicitly define the fields that we're interested in along
     // with their respective offsets, we frequently specify the exact size of the native structure.
 
-    // Win32 UNICODE_STRING structure.
-    [StructLayout(LayoutKind.Sequential)]
-    public struct UNICODE_STRING
-    {
-        // The length in bytes of the string pointed to by buffer, not including the null-terminator.
-        public ushort Length;
-
-        // The total allocated size in memory pointed to by buffer.
-        public ushort MaximumLength;
-
-        // A pointer to the buffer containing the string data.
-        public IntPtr Buffer;
-    }
-
     // Win32 RTL_USER_PROCESS_PARAMETERS structure.
     [StructLayout(LayoutKind.Explicit, Size = 72)]
     public struct RTL_USER_PROCESS_PARAMETERS
@@ -68,17 +54,6 @@ namespace Windows
         public uint SessionId;
     };
 
-    // Win32 PROCESS_BASIC_INFORMATION.  Contains a pointer to the PEB, and various other
-    // information about a process.
-    [StructLayout(LayoutKind.Explicit, Size = 24)]
-    public struct PROCESS_BASIC_INFORMATION
-    {
-        [FieldOffset(4)]
-        public IntPtr PebBaseAddress;
-
-        [FieldOffset(16)]
-        public UIntPtr UniqueProcessId;
-    }
 
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
     public struct SHFILEINFO
@@ -106,6 +81,4 @@ namespace Windows
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 80)]
         public string szTypeName;
     };
-
-
 }

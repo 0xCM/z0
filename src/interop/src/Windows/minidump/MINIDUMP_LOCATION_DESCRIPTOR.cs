@@ -2,14 +2,15 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Windows
 {
-    using System;
-    using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
 
-    [ApiHost]
-    public static partial class XCmd
+    [StructLayout(LayoutKind.Sequential)]
+    public struct MINIDUMP_LOCATION_DESCRIPTOR
     {
+        public uint DataSize;
 
+        public uint Rva;
     }
 }

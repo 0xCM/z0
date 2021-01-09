@@ -95,7 +95,7 @@ namespace Z0
                 case DumpCliTablesCmd.CmdName:
                     Run(Builder.DumpCliTables(Parts.Part.Assembly));
                 break;
-                case BuildCmd.CmdName:
+                case BuildProjectCmd.CmdName:
                     Run(Builder.Build());
                 break;
                 case EmitImageContentCmd.CmdName:
@@ -181,7 +181,7 @@ namespace Z0
             EmitProcessDump();
         }
 
-        void Run(in BuildCmd cmd)
+        void Run(in BuildProjectCmd cmd)
         {
             cmd.Save(Db.JobQueue()).OnSuccess(data => Wf.EmittedFile(data)).OnFailure(msg => Wf.Error(msg));
         }

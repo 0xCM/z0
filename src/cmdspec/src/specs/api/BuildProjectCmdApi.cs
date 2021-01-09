@@ -7,10 +7,10 @@ namespace Z0
     using System;
 
     [ApiHost]
-    public static class BuildCmdApi
+    public static class BuildProjectCmdApi
     {
         [Op]
-        static void render(in BuildCmd src, ITextBuffer dst)
+        static void render(in BuildProjectCmd src, ITextBuffer dst)
         {
             dst.Append("dotnet build");
 
@@ -49,7 +49,7 @@ namespace Z0
         }
 
         [Op]
-        public static string Format(this BuildCmd src)
+        public static string Format(this BuildProjectCmd src)
         {
             var dst = Buffers.text();
             render(src,dst);
@@ -70,13 +70,13 @@ namespace Z0
 
 
         [Op]
-        public static string Identifier(this BuildCmd src)
+        public static string Identifier(this BuildProjectCmd src)
             => string.Format("{0}_{1}",
-                BuildCmd.CmdName,
+                BuildProjectCmd.CmdName,
                 src.SolutionPath.IsNonEmpty ? src.SolutionPath.FileName.Format() : src.ProjectPath.FileName.Format());
 
         [Op]
-        public static Outcome<FS.FilePath> Save(this BuildCmd src, FS.FolderPath dst)
+        public static Outcome<FS.FilePath> Save(this BuildProjectCmd src, FS.FolderPath dst)
         {
             var path = dst + FS.file(src.Identifier(), FileExtensions.Cmd);
             var result = path.Save(src.Format());
@@ -87,9 +87,9 @@ namespace Z0
         }
 
         [Op]
-        public static BuildCmd Build(this CmdBuilder src, BuildCmdVars vars)
+        public static BuildProjectCmd Build(this CmdBuilder src, BuildCmdVars vars)
         {
-            var dst = new BuildCmd();
+            var dst = new BuildProjectCmd();
             dst.Verbosity = BuildLogVerbosity.detailed;
             dst.Platform = "Any Cpu";
             dst.Configuration = "Release";
@@ -102,7 +102,7 @@ namespace Z0
         }
 
         [Op]
-        public static BuildCmd Build(this CmdBuilder src)
+        public static BuildProjectCmd Build(this CmdBuilder src)
         {
             var vars = new BuildCmdVars();
             vars.ProjectId = PartId.Machine.Format();

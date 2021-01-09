@@ -2,13 +2,16 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Windows
 {
-    using System;
+    using System.Runtime.InteropServices;
 
-    [Cmd(CmdName)]
-    public readonly struct ShowVerbsCmd : ICmdSpec<ShowVerbsCmd>
+
+    [StructLayout(LayoutKind.Sequential)]
+    public struct MINIDUMP_LOCATION_DESCRIPTOR64
     {
-        public const string CmdName = "show-verbs";
+        public ulong DataSize;
+
+        public ulong Rva;
     }
 }
