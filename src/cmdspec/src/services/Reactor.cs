@@ -9,7 +9,6 @@ namespace Z0
     using static Part;
     using static memory;
 
-
     public sealed class Reactor : WfSingleton<Reactor, IReactor, int>, IReactor
     {
         CmdBuilder Builder;
@@ -113,7 +112,7 @@ namespace Z0
             => Wf.Router.SupportedCommands;
 
         public void ShowSupported()
-            => corefunc.iter(Wf.Router.SupportedCommands, c => Wf.Status(c));
+            => root.iter(Wf.Router.SupportedCommands, c => Wf.Status(c));
 
         static string format(MemoryFileInfo file)
             => string.Format("{0} | {1} | {2,-16} | {3}", file.BaseAddress, file.EndAddress, file.Size, file.Path.ToUri());
@@ -123,7 +122,7 @@ namespace Z0
             using var mapped = MemoryFiles.map(cmd.Source);
             var info = mapped.Descriptions;
             var count = info.Count;
-            corefunc.iter(info, file => Wf.Row(format(file)));
+            root.iter(info, file => Wf.Row(format(file)));
 
             for(ushort i=0; i<count; i++)
             {

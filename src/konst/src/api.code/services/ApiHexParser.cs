@@ -7,7 +7,7 @@ namespace Z0
     using System;
 
     using static Part;
-    using static corefunc;
+    using static root;
 
     public readonly struct ApiHexParser : ITextParser<ApiCodeBlock>
     {

@@ -11,7 +11,7 @@ namespace Z0
     using static Part;
     using static HexFormatSpecs;
     using static HexCharData;
-    using static corefunc;
+    using static root;
 
     public readonly struct HexByteParser : IHexParser<byte>
     {

@@ -29,7 +29,7 @@ namespace Z0
 
         public static TableFields fields(Type src, bool recurse)
         {
-            var collected = corefunc.list<TableField>();
+            var collected = root.list<TableField>();
             ushort j = 0;
             if(src.IsStruct() && !src.IsPrimitive)
             {
@@ -101,7 +101,7 @@ namespace Z0
             var lFields = literals.Fields;
 
             var specs = fields<T>();
-            var dst = corefunc.list<TableField<F>>(lFields.Length);
+            var dst = root.list<TableField<F>>(lFields.Length);
             for(var i=0u; i<lFields.Length; i++)
             {
                 ref readonly var literal = ref literals[i];

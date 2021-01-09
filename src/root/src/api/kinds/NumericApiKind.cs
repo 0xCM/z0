@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static root;
+    using static Root;
 
     /// <summary>
     /// Defines numeric identifiers for primal numeric types

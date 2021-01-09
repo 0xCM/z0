@@ -42,7 +42,7 @@ namespace Z0
             Wf.Ran(outer, string.Format("Jitted {0:#,#}mb member data", total));
 
             var sorted = Index.sort(all.ToArray());
-            var records = corefunc.mapi(sorted, (i,x) => ApiQuery.record((uint)i, x));
+            var records = root.mapi(sorted, (i,x) => ApiQuery.record((uint)i, x));
             var emission = Records.emit(records, new byte[]{12,16,16,32,80}, dst);
             Wf.Status(emission);
 

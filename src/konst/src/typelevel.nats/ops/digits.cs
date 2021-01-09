@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     partial class TypeNats
     {
@@ -15,6 +15,7 @@ namespace Z0
         /// Creates a sequence of primitive values from a natural value
         /// </summary>
         /// <param name="src">The source value</param>
+        [Op]
         public static byte[] digits(ulong src)
         {
             var text = src.ToString();

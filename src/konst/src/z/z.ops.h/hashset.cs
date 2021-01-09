@@ -14,10 +14,10 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static HashSet<T> hashset<T>(params T[] src)
-            => corefunc.hashset(src);
+            => root.hashset(src);
 
         [MethodImpl(Inline)]
         public static HashSet<T> hashset<T>(IEnumerable<T> src)
-            => corefunc.hashset(src);
+            => root.hashset(src);
     }
 }

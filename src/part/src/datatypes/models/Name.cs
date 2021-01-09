@@ -12,7 +12,7 @@ namespace Z0
     using api = Names;
 
     [Datatype]
-    public readonly struct Name : IName<string>, IEquatable<Name>, IComparable<Name>
+    public readonly struct Name : IName<string>, IDataTypeComparable<Name>
     {
         readonly string Data;
 
@@ -74,16 +74,9 @@ namespace Z0
         public bool Equals(Name src)
             => string.Equals(Data, src.Data);
 
-        [Ignore]
-        string IContented<string>.Content
-            => Content;
-
-        [Ignore]
-        string ITextual.Format()
-            => Content;
 
         public override string ToString()
-            => Content;
+            => Format();
 
         public override int GetHashCode()
             => (int)Hash;

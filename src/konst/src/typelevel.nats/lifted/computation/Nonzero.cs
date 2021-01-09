@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static nfunc;
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Captures evidence that k != 0
@@ -18,17 +17,15 @@ namespace Z0
         where K: unmanaged, ITypeNat
     {
         static K k => default;
-        
+
         public static string Description => $"{k} != 0";
 
         public ulong NatValue => TypeNats.value(k);
 
         [MethodImpl(Inline)]
         public Nonzero(K n)
-        {
-            demand(n.NatValue != 0);
-        }
-            
+            => root.require(n.NatValue != 0, () => Description);
+
         public override string ToString()
             => Description;
     }

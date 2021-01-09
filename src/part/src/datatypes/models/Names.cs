@@ -30,7 +30,7 @@ namespace Z0
             var result = 0;
             ref readonly var x = ref first(a);
             ref readonly var y = ref first(b);
-            var count = corefunc.min(a.Length, b.Length);
+            var count = root.min(a.Length, b.Length);
             for(var i=0u; i<count; i++)
             {
                 ref readonly var cx = ref skip(x, i);

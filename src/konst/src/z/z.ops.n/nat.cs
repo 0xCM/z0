@@ -9,11 +9,6 @@ namespace Z0
 
     using static Konst;
 
-    partial struct nfunc
-    {
-
-    }
-
     partial struct z
     {
         [MethodImpl(Inline)]
@@ -61,6 +56,5 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
                  => nfunc.nat(n,t);
-
     }
 }

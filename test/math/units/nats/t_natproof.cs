@@ -13,70 +13,70 @@ namespace Z0
     {
         public void equality()
         {
-            NatClaim.eq<N16>(16);
-            NatClaim.eq<N512>(512);
-            NatClaim.eq<NatSeq<N8, N2, N1>>(821);
+            NatClaims.eq<N16>(16);
+            NatClaims.eq<N512>(512);
+            NatClaims.eq<NatSeq<N8, N2, N1>>(821);
         }
 
         public void smaller()
         {
-            NatClaim.lt(n11, n12);
-            NatClaim.lt(n512, n1024);
+            NatClaims.lt(n11, n12);
+            NatClaims.lt(n512, n1024);
         }
 
         public void larger()
         {
-            NatClaim.gt(n12, n11);
-            NatClaim.gt(n1024, n512);
+            NatClaims.gt(n12, n11);
+            NatClaims.gt(n1024, n512);
         }
 
         public void nonzero()
         {
-            NatClaim.nonzero(n12);
-            NatClaim.nonzero(n4);
-            NatClaim.nonzero(n1);
+            NatClaims.nonzero(n12);
+            NatClaims.nonzero(n4);
+            NatClaims.nonzero(n1);
         }
 
         public void sum()
         {
-            NatClaim.sum(n5, n5, n10.NatValue);
-            NatClaim.sum(n13, n0, n13.NatValue);
-            NatClaim.sum(n512, n10, 522);
+            NatClaims.sum(n5, n5, n10.NatValue);
+            NatClaims.sum(n13, n0, n13.NatValue);
+            NatClaims.sum(n512, n10, 522);
         }
 
         public void product()
         {
-            NatClaim.mul(n5, n5, 25);
-            NatClaim.mul(n13, n10, 130);
-            NatClaim.mul(n512, n10, 5120);
+            NatClaims.mul(n5, n5, 25);
+            NatClaims.mul(n13, n10, 130);
+            NatClaims.mul(n512, n10, 5120);
         }
 
         public void next()
         {
-            NatClaim.next(n0, n1);
-            NatClaim.next(n5, n6);
-            NatClaim.next(n15, n16);
+            NatClaims.next(n0, n1);
+            NatClaims.next(n5, n6);
+            NatClaims.next(n15, n16);
 
-            var n11 = NextNat.get(n10);
-            var n12 = NextNat.get(n11);
-            var n13 = NextNat.get(n12);
-            NatClaim.next(n10, n11);
-            NatClaim.next(n11, n12);
-            NatClaim.next(n12, n13);
+            var n11 = TypeNats.next(n10);
+            var n12 = TypeNats.next(n11);
+            var n13 = TypeNats.next(n12);
+            NatClaims.next(n10, n11);
+            NatClaims.next(n11, n12);
+            NatClaims.next(n12, n13);
 
         }
 
         public void iterate()
         {
-           var n11 = NextNat.get(n10);
-           var n12 = NextNat.get(n11);
-           var n13 = NextNat.get(n12);
-           var n14 = NextNat.get(n13);
-           var n15 = NextNat.get(n14);
-           var n16 = NextNat.get(n15);
-           var n17 = NextNat.get(n16);
-           var n18 = NextNat.get(n17);
-           var n19 = NextNat.get(n18);
+           var n11 = TypeNats.next(n10);
+           var n12 = TypeNats.next(n11);
+           var n13 = TypeNats.next(n12);
+           var n14 = TypeNats.next(n13);
+           var n15 = TypeNats.next(n14);
+           var n16 = TypeNats.next(n15);
+           var n17 = TypeNats.next(n16);
+           var n18 = TypeNats.next(n17);
+           var n19 = TypeNats.next(n18);
            Claim.eq(n19.NatValue,19ul);
         }
     }

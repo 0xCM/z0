@@ -6,11 +6,11 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     /// <summary>
     /// Encodes a natural number k := k1*k2
     /// </summary>
-    public readonly struct Product<K1, K2> : INatProduct<Product<K1,K2>, K1,K2>
+    public readonly struct Product<K1,K2> : INatProduct<Product<K1,K2>, K1,K2>
         where K1 : unmanaged, ITypeNat
         where K2 : unmanaged, ITypeNat
     {
@@ -18,29 +18,33 @@ namespace Z0
 
         static K2 k2 => default;
 
-        public static Product<K1,K2> Rep => default;        
-        
-        public static ulong Value => k1.NatValue * k2.NatValue;
+        public static Product<K1,K2> Rep => default;
 
-        static string description => $"{k1} * {k2} = {Value}";
+        public static ulong Value
+            => k1.NatValue * k2.NatValue;
 
-        public static byte[] Digits  => TypeNats.digits(Value);
+        static string description
+            => $"{k1} * {k2} = {Value}";
 
-        public static INatSeq Seq => TypeNats.seq(Digits);
+        public static byte[] Digits
+            => TypeNats.digits(Value);
 
-        public ITypeNat rep 
+        public static INatSeq Seq
+            => TypeNats.seq(Digits);
+
+        public ITypeNat rep
             => Rep;
 
         public INatSeq Sequence
             => Seq;
 
-        public ulong NatValue 
+        public ulong NatValue
             => Value;
 
         public INatSeq natseq()
             => Seq;
 
-        public bool Equals(Pow<K1, K2> other)
+        public bool Equals(Product<K1,K2> other)
             => Value == other.NatValue;
 
         public bool Equals(INatSeq other)
@@ -49,7 +53,7 @@ namespace Z0
          public string format()
             => description;
 
-        public override string ToString() 
+        public override string ToString()
             => format();
 
         public override int GetHashCode()

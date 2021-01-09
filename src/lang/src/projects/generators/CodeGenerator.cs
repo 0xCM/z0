@@ -98,7 +98,7 @@ namespace Z0
             => dst.AppendLine(src);
 
         public static void lines(IEnumerable<string> src, StringBuilder dst)
-            => corefunc.iter(src,l => line(l,dst));
+            => root.iter(src,l => line(l,dst));
 
         public static string assign(object dst, object src)
             => text.concat(dst, Space, Chars.Eq, Space, src);

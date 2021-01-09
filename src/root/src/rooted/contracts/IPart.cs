@@ -18,13 +18,13 @@ namespace Z0
         /// The part name, equivalent to the simple assembly name
         /// </summary>
         string Name
-            => root.name(Owner);
+            => Root.name(Owner);
 
         /// <summary>
         /// The part identifier, known from the assembly
         /// </summary>
         PartId IPartId.Id
-            => root.id(Owner);
+            => Root.id(Owner);
     }
 
     public interface IPart<P> : IPart, IPartId<P>, IEquatable<P>

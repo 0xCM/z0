@@ -278,7 +278,7 @@ namespace Z0
             where T : struct
         {
             var size = size<T>();
-            var count = corefunc.min(size, dst.Length);
+            var count = root.min(size, dst.Length);
             if(count == 0)
                 return;
 

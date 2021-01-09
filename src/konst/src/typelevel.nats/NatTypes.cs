@@ -3,11 +3,11 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
- 
-    using static Konst;
+
+    using static Part;
 
     public static class NatTypes
     {
@@ -15,7 +15,7 @@ namespace Z0
         /// Computes the generic type definition for a natural sequence
         /// </summary>
         /// <param name="length">The sequence length</param>
-        [MethodImpl(Inline)]   
+        [MethodImpl(Inline)]
         public static Type sequence(uint length)
         {
             if(length == 2)
@@ -23,22 +23,22 @@ namespace Z0
             else if(length == 3)
                 return typedef(typedef(typeof(NatSeq<,,>)));
             else if(length == 4)
-                return typedef(typeof(NatSeq<,,,>)); 
+                return typedef(typeof(NatSeq<,,,>));
             else if(length == 5)
-                return typedef(typeof(NatSeq<,,,,>)); 
+                return typedef(typeof(NatSeq<,,,,>));
             else if(length == 6)
-                return typedef(typeof(NatSeq<,,,,,>)); 
+                return typedef(typeof(NatSeq<,,,,,>));
             else if(length == 7)
-                return typedef(typeof(NatSeq<,,,,,,>)); 
+                return typedef(typeof(NatSeq<,,,,,,>));
             else if(length == 8)
-                return typedef(typeof(NatSeq<,,,,,,,>)); 
+                return typedef(typeof(NatSeq<,,,,,,,>));
             else if(length == 9)
-                return typedef(typeof(NatSeq<,,,,,,,,>)); 
+                return typedef(typeof(NatSeq<,,,,,,,,>));
             else
                 return typeof(NatSeq0<>);
         }
 
-        [MethodImpl(Inline)]   
+        [MethodImpl(Inline)]
         static Type typedef(Type t)
             => t.GetGenericTypeDefinition();
     }

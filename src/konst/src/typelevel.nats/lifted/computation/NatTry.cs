@@ -6,18 +6,18 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
-    using static NatClaim;
+
+    using static NatClaims;
     using static nfunc;
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Defines proof attempts for type naturals
     /// </summary>
-    static class NatTry
+    partial class NatClaims
     {
         /// <summary>
-        /// Evaluates a function within a try block and returns the value of the computation if 
+        /// Evaluates a function within a try block and returns the value of the computation if
         /// successful; otherwise, returns None together with the reported exceptions
         /// </summary>
         /// <typeparam name="T">The result type</typeparam>
@@ -35,7 +35,7 @@ namespace Z0
             }
         }
 
-        /// Attempts to prove that k1:K1 & k2:K2 =>  k1 + k2 = expected 
+        /// Attempts to prove that k1:K1 & k2:K2 =>  k1 + k2 = expected
         /// Signals success by returning evidence
         /// Signals failure by raising an error
         /// </summary>
@@ -57,7 +57,7 @@ namespace Z0
         /// <typeparam name="K1">The lower inclusive bound</typeparam>
         /// <typeparam name="K2">The upper inclusive bound</typeparam>
         [MethodImpl(Inline)]
-        public static Option<NatBetween<K,K1,K2>> TryBetween<K,K1,K2>()
+        public static Option<Between<K,K1,K2>> TryBetween<K,K1,K2>()
             where K: unmanaged, ITypeNat
             where K1: unmanaged, ITypeNat
             where K2: unmanaged, ITypeNat
@@ -72,12 +72,12 @@ namespace Z0
         /// <typeparam name="K1">The lower inclusive bound</typeparam>
         /// <typeparam name="K2">The upper inclusive bound</typeparam>
         [MethodImpl(Inline)]
-        public static Option<NatBetween<K,K1,K2>> TryBetween<K,K1,K2>(K k, K1 k1, K2 k2)
+        public static Option<Between<K,K1,K2>> TryBetween<K,K1,K2>(K k, K1 k1, K2 k2)
             where K: unmanaged, ITypeNat
             where K1: unmanaged, ITypeNat
             where K2: unmanaged, ITypeNat
                 => Try(() => between<K,K1,K2>(k, k1, k2));
- 
+
         /// <summary>
         /// If possible, constructs evidence that k1:K1 & k2:K2 => k1 = k2; otherwise
         /// raises an error
@@ -99,7 +99,7 @@ namespace Z0
         public static Option<NatEq<K1,K2>> TryEqual<K1,K2>(K1 k1, K2 k2)
             where K1: unmanaged, ITypeNat
             where K2: unmanaged, ITypeNat
-                => Try(() => new NatEq<K1,K2>(k1,k2));                             
+                => Try(() => new NatEq<K1,K2>(k1,k2));
 
         /// <summary>
         /// Attempts to prove k1:K1 & k2:K2 => k1 > k2
@@ -111,7 +111,7 @@ namespace Z0
         public static Option<NatGt<K1,K2>> TryGt<K1,K2>()
             where K1: unmanaged, ITypeNat
             where K2: unmanaged, ITypeNat
-                => Try(() => new NatGt<K1,K2>(natrep<K1>(),natrep<K2>())); 
+                => Try(() => new NatGt<K1,K2>(natrep<K1>(),natrep<K2>()));
 
         /// <summary>
         /// Attempts to prove k1:K1 & k2:K2 => k1 > k2
@@ -125,7 +125,7 @@ namespace Z0
         public static Option<NatGt<K1,K2>> TryGt<K1,K2>(K1 k1, K2 k2)
             where K1: unmanaged, ITypeNat
             where K2: unmanaged, ITypeNat
-                => Try( () => new NatGt<K1,K2>(k1,k2)); 
+                => Try( () => new NatGt<K1,K2>(k1,k2));
 
         /// <summary>
         /// Attempts to prove k1:K1 & k2:K2 => k1 < k2
@@ -137,7 +137,7 @@ namespace Z0
         public static Option<NatLt<K1,K2>> TryLt<K1,K2>()
             where K1: unmanaged, ITypeNat
             where K2: unmanaged, ITypeNat
-                => Try(() => new NatLt<K1,K2>(natrep<K1>(),natrep<K2>())); 
+                => Try(() => new NatLt<K1,K2>(natrep<K1>(),natrep<K2>()));
 
         /// <summary>
         /// Attempts to prove k1:K1 & k2:K2 => k1 < k2
@@ -152,7 +152,7 @@ namespace Z0
                 => Try(() => new NatLt<K1,K2>(k1,k2));
 
         /// <summary>
-        /// Attempts to prove that k1:K1 & k2:K2 =>  k1 * k2 = expected 
+        /// Attempts to prove that k1:K1 & k2:K2 =>  k1 * k2 = expected
         /// Signals success by returning evidence
         /// Signals failure by raising an error
         /// </summary>
@@ -164,7 +164,7 @@ namespace Z0
                 => Try(() => mul<K1,K2>(expected));
 
         /// <summary>
-        /// Attempts to prove that k1:K1 & k2:K2 =>  k1 * k2 = expected 
+        /// Attempts to prove that k1:K1 & k2:K2 =>  k1 * k2 = expected
         /// Signals success by returning evidence
         /// Signals failure by raising an error
         /// </summary>
@@ -254,7 +254,7 @@ namespace Z0
         public static Option<NatNext<K1,K2>> TryNext<K1,K2>()
             where K1: unmanaged, ITypeNat
             where K2: unmanaged, ITypeNat
-                => Try(() => new NatNext<K1,K2>(natrep<K1>(),natrep<K2>()));                             
+                => Try(() => new NatNext<K1,K2>(natrep<K1>(),natrep<K2>()));
 
         /// <summary>
         /// If possible, constructs evidence that k1:K1 & k2:K2 => k1 + 1 = k2; otherwise
@@ -265,7 +265,7 @@ namespace Z0
         public static Option<NatNext<K1,K2>> TryNext<K1,K2>(K1 k1, K2 k2)
             where K1: unmanaged, ITypeNat
             where K2: unmanaged, ITypeNat
-                => Try(() => new NatNext<K1,K2>(k1,k2));                             
+                => Try(() => new NatNext<K1,K2>(k1,k2));
 
         /// <summary>
         /// Attempts to prove that k:K => k != 0
@@ -275,7 +275,7 @@ namespace Z0
         /// <typeparam name="K">A nonzero natural type</typeparam>
         public static Option<Nonzero<K>> TryNonzero<K>()
             where K: unmanaged, ITypeNat
-                => Try(() => new Nonzero<K>(natrep<K>())); 
+                => Try(() => new Nonzero<K>(natrep<K>()));
 
         /// <summary>
         /// Attempts to prove that k:K => k != 0
@@ -285,7 +285,7 @@ namespace Z0
         /// <typeparam name="K">A nonzero natural type</typeparam>
         public static Option<Nonzero<K>> TryNonzero<K>(K k)
             where K: unmanaged, ITypeNat
-                => Try( () => new Nonzero<K>(k)); 
+                => Try( () => new Nonzero<K>(k));
 
         /// <summary>
         /// If possible, constructs evidence that n:K => n prime; otherwise,
@@ -315,7 +315,7 @@ namespace Z0
         public static Option<NatPrior<K1,K2>> TryPrior<K1,K2>()
             where K1: unmanaged, ITypeNat
             where K2: unmanaged, ITypeNat
-                => Try(() => new NatPrior<K1,K2>(natrep<K1>(),natrep<K2>()));                             
+                => Try(() => new NatPrior<K1,K2>(natrep<K1>(),natrep<K2>()));
 
         /// <summary>
         /// Attempts to prove that k1:K1 & k2:K2 => k1 = k2 + 1;
@@ -327,12 +327,12 @@ namespace Z0
         public static Option<NatPrior<K1,K2>> TryPrior<K1,K2>(K1 k1, K2 k2)
             where K1: unmanaged, ITypeNat
             where K2: unmanaged, ITypeNat
-                => Try(() => new NatPrior<K1,K2>(k1,k2));  
+                => Try(() => new NatPrior<K1,K2>(k1,k2));
 
-        public static Option<NatBetween<T,K1,K2>> TryContains<T,K1,K2>()
+        public static Option<Between<T,K1,K2>> TryContains<T,K1,K2>()
             where K1: unmanaged, ITypeNat
             where K2: unmanaged, ITypeNat
-            where T : unmanaged, ITypeNat 
+            where T : unmanaged, ITypeNat
                 => TryBetween<T,K1,K2>();
     }
 }

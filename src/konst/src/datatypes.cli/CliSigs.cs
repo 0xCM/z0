@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
     using static memory;
-    using static corefunc;
+    using static root;
 
     public readonly struct CliSigs
     {
@@ -41,7 +41,7 @@ namespace Z0
 
         public static Index<CliSig> resolve(MethodInfo[] src)
         {
-            var count = corefunc.count(src);
+            var count = root.count(src);
             if(count==0)
                 return default;
 

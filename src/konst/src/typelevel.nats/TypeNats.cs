@@ -15,6 +15,12 @@ namespace Z0
     {
         const NumericKind Closure = UnsignedInts;
 
+
+        [MethodImpl(Inline)]
+        public static Next<K> next<K>(K k = default)
+            where K : unmanaged, ITypeNat
+                => default;
+
         [MethodImpl(Inline)]
         public static NatSpan<N,T> span<N,T>(T[] src, N n = default)
             where N : unmanaged, ITypeNat

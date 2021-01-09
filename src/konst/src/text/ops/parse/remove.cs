@@ -26,7 +26,7 @@ namespace Z0
             [Op]
             public static string remove(string src, params char[] matches)
             {
-                var index = corefunc.hashset(matches);
+                var index = root.hashset(matches);
                 if (!src.ContainsAny(index))
                     return src;
 

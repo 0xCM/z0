@@ -37,7 +37,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T[] numeric<T>(Type src)
             where T : unmanaged
-                => corefunc.map(search<T>(src),numeric<T>);
+                => root.map(search<T>(src),numeric<T>);
 
         public static NumericLiteral[] numeric(Type src)
         {

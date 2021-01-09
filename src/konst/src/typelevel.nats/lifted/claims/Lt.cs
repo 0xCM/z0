@@ -7,10 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static TypeNats;
 
-    partial class NatClaim
+    partial class NatClaims
     {
         /// <summary>
         /// Attempts to prove k < a

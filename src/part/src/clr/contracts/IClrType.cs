@@ -20,7 +20,7 @@ namespace Z0
         /// Models of the types nested within the subject, if any
         /// </summary>
         IEnumerable<IClrRuntimeType> NestedTypes
-            => corefunc.stream<IClrRuntimeType>();
+            => root.stream<IClrRuntimeType>();
 
         ClrToken IClrArtifact.Token
             => Definition.MetadataToken;
@@ -30,7 +30,7 @@ namespace Z0
     public interface IClrRuntimeType<T> : IClrRuntimeType
     {
         new IEnumerable<T> NestedTypes
-            => corefunc.stream<T>();
+            => root.stream<T>();
 
         IEnumerable<IClrRuntimeType> IClrRuntimeType.NestedTypes
             => NestedTypes.Cast<IClrRuntimeType>();

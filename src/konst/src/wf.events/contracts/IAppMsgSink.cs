@@ -10,7 +10,7 @@ namespace Z0
     public interface IAppMsgSink : ISink<IAppMsg>
     {
         void Deposit(IEnumerable<IAppMsg> msg)
-            => corefunc.iter(msg, Deposit);
+            => root.iter(msg, Deposit);
 
         void Notify(string msg, LogLevel? kind = null)
             => Deposit(AppMsg.define(msg, kind ?? LogLevel.Status));

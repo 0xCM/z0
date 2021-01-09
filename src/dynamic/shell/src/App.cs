@@ -96,7 +96,7 @@ namespace Z0
 
         void ShowHandlers()
         {
-            corefunc.iter(Wf.Router.SupportedCommands, c => Wf.Status(c));
+            root.iter(Wf.Router.SupportedCommands, c => Wf.Status(c));
         }
 
         public static void show(IWfShell wf, CmdLine cmd)

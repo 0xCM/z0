@@ -20,7 +20,7 @@ namespace Z0
         [Op]
         public static FieldRef[] fields(params Type[] src)
         {
-            var dst = corefunc.list<FieldRef>();
+            var dst = root.list<FieldRef>();
             var count = src.Length;
             for(var i=0u; i<count; i++)
             {
@@ -34,7 +34,7 @@ namespace Z0
                     var segment = field(@base, offset, fi);
                     if(segment.IsNonEmpty)
                     {
-                        corefunc.append(dst, segment);
+                        root.append(dst, segment);
                         offset += segment.DataSize;
                     }
                 }

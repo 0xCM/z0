@@ -277,7 +277,7 @@ namespace Z0
 
         static int operands(ReadOnlySpan<char> src, out Span<string> dst)
         {
-            var operands = corefunc.list<string>();
+            var operands = root.list<string>();
             var length = src.Length;
             var current = EmptyString;
             for(var i=0; i<length; i++)

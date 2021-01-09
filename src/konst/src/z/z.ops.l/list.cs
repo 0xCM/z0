@@ -14,14 +14,14 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static List<T> list<T>(params T[] src)
-            => corefunc.list<T>(src);
+            => root.list<T>(src);
 
         [MethodImpl(Inline)]
         public static List<T> list<T>(int capacity)
-            => corefunc.list<T>(capacity);
+            => root.list<T>(capacity);
 
         [MethodImpl(Inline)]
         public static List<T> list<T>(uint capacity)
-            => corefunc.list<T>(capacity);
+            => root.list<T>(capacity);
     }
 }

@@ -67,7 +67,7 @@ namespace Z0
                 seek(Index,i) = new LocatedPart(part, @base, (uint)(step.OffsetAddress - @base));
              }
 
-             ImageMaps.emit(Images, TargetDir + FS.file("imagemaps", FileExtension.Define("csv")));
+             ImageMaps.emit(Images, TargetDir + FS.file("imagemaps", FileExtensions.Csv));
         }
     }
 }

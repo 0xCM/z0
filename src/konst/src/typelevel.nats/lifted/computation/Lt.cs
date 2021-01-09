@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     /// <summary>
     /// Captures evidence k1 < k2
@@ -25,9 +24,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public NatLt(K1 n1, K2 n2)
-        {
-            insist(n1.NatValue < n2.NatValue, Description);
-        }
+            => root.require(n1.NatValue < n2.NatValue, () => Description);
 
         public override string ToString()
             => Description;

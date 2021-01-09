@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static root;
+    using static Root;
 
     public abstract class PartId<P> : IPartId<P>
         where P : PartId<P>, IPartId<P>,  new()
@@ -47,7 +47,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => root.format(Id);
+            => Root.format(Id);
 
         public override string ToString()
             => Format();

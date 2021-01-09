@@ -214,7 +214,7 @@ namespace Z0
         {
             Span<F> values = Enums.literals<F>();
             var widths = values.Bytes();
-            var count = corefunc.min(widths.Length, 32);
+            var count = root.min(widths.Length, 32);
             var data = default(Vector256<byte>);
             for(var i=0; i<count; i++)
                 data = data.WithElement(i,skip(widths,i));

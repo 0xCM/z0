@@ -51,8 +51,8 @@ namespace Z0
             if(parts.Length != 2)
                 return false;
 
-            data.Address = corefunc.succeed(HexNumericParser.parse(parts[0]));
-            data.Data = corefunc.succeed(ByteParser.ParseData(parts[1]));
+            data.Address = root.succeed(HexNumericParser.parse(parts[0]));
+            data.Data = root.succeed(ByteParser.ParseData(parts[1]));
 
             return true;
         }

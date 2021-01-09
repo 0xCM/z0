@@ -13,14 +13,14 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static ParseResult<S,T> parsed<S,T>(S src, T value)
-            => corefunc.parsed(src, value);
+            => root.parsed(src, value);
 
         [MethodImpl(Inline)]
         public static ParseResult<T> parsed<T>(char src, T value)
-            => corefunc.parsed(src, value);
+            => root.parsed(src, value);
 
         [MethodImpl(Inline)]
         public static ParseResult<T> parsed<T>(object src, T value)
-            => corefunc.parsed(src, value);
+            => root.parsed(src, value);
     }
 }

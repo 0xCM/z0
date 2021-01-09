@@ -6,8 +6,7 @@ namespace Z0
 {
     using System;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     /// <summary>
     /// Defines a dimension axis which may represent the dimension of a vector of length N
@@ -21,7 +20,7 @@ namespace Z0
         /// The one-dimensional axis
         /// </summary>
         public ulong I
-            => nat64u<N>();
+            => nfunc.nat64u<N>();
 
         public ulong Volume
             => I;
@@ -39,7 +38,7 @@ namespace Z0
             => Format();
 
         public Dimensions Describe()
-            => new Dimensions(1, new ulong[]{nat64u<N>()}, nat64u<N>());
+            => new Dimensions(1, new ulong[]{nfunc.nat64u<N>()}, nfunc.nat64u<N>());
 
         public static implicit operator ulong(Dim<N> x)
             => x.I;

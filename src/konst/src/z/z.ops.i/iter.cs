@@ -14,18 +14,18 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static void iter<T>(IEnumerable<T> src, Action<T> action, bool pll = false)
-            => corefunc.iter(src, action, pll);
+            => root.iter(src, action, pll);
 
         [MethodImpl(Inline)]
         public static void iter<T>(ReadOnlySpan<T> src, Action<T> action)
-            => corefunc.iter(src, action);
+            => root.iter(src, action);
 
         [MethodImpl(Inline)]
         public static void iter<S,T>(ReadOnlySpan<S> a, ReadOnlySpan<T> b, Action<S,T> f)
-            => corefunc.iter(a, b, f);
+            => root.iter(a, b, f);
 
         [MethodImpl(Inline)]
         public static void iter<S,T>(Span<S> a, Span<T> b, Action<S,T> f)
-            => corefunc.iter(a, b, f);
+            => root.iter(a, b, f);
     }
 }

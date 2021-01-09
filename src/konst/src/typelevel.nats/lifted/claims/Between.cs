@@ -7,10 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;    
+    using static Part;
     using static nfunc;
 
-    partial class NatClaim
+    partial class NatClaims
     {
         /// <summary>
         /// Attempts to prove that that n:K & n1:K1 & n2:K2 => n1 <= n <= n2
@@ -21,11 +21,11 @@ namespace Z0
         /// <typeparam name="K1">The lower inclusive bound</typeparam>
         /// <typeparam name="K2">The upper inclusive bound</typeparam>
         [MethodImpl(Inline)]
-        public static NatBetween<K, K1, K2> between<K,K1,K2>()
+        public static Between<K,K1,K2> between<K,K1,K2>()
             where K: unmanaged, ITypeNat
             where K1: unmanaged, ITypeNat
             where K2: unmanaged, ITypeNat
-                => new NatBetween<K,K1,K2>(natrep<K>(), natrep<K1>(), natrep<K2>());
+                => new Between<K,K1,K2>(natrep<K>(), natrep<K1>(), natrep<K2>());
 
         /// <summary>
         /// Attempts to prove that that n:K & n1:K1 & n2:K2 => n1 <= n <= n2
@@ -36,12 +36,11 @@ namespace Z0
         /// <typeparam name="K1">The lower inclusive bound</typeparam>
         /// <typeparam name="K2">The upper inclusive bound</typeparam>
         [MethodImpl(Inline)]
-        public static NatBetween<K, K1, K2> between<K,K1,K2>(K k, K1 k1, K2 k2)
+        public static Between<K,K1,K2> between<K,K1,K2>(K k, K1 k1, K2 k2)
             where K: unmanaged, ITypeNat
             where K1: unmanaged, ITypeNat
             where K2: unmanaged, ITypeNat
-                => new NatBetween<K,K1,K2>(k, k1, k2);
+                => new Between<K,K1,K2>(k, k1, k2);
 
     }
-
 }

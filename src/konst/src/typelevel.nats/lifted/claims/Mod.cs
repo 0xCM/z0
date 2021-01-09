@@ -8,9 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static nfunc;
-    using static Konst;
-    
-    partial class NatClaim
+    using static Part;
+
+    partial class NatClaims
     {
         /// <summary>
         /// Attempts to prove that k1:K1 & k2:K2 & k3:K3 => k1 % k2 = k3

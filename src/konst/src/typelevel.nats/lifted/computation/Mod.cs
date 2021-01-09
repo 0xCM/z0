@@ -5,9 +5,7 @@
 namespace Z0
 {
     using System;
-    
-    using static nfunc;
-    
+
     /// <summary>
     /// Captures evidence that k1:K1 & k2:K2 & k3:K3 => k1 % k2 = k3
     /// </summary>
@@ -20,19 +18,19 @@ namespace Z0
         where K3: unmanaged, ITypeNat
     {
         static readonly K1 k1 = default;
+
         static readonly K2 k2 = default;
+
         static readonly K3 k3 = default;
-        
-        static readonly string description = $"{k1} % {k2} = {k3}";
+
+        public static string Description => $"{k1} % {k2} = {k3}";
 
         public NatMod(K1 k1, K2 k2, K3 k3)
-            => valid = demand(k1.NatValue % k2.NatValue == k3.NatValue);
-        
-        public bool valid {get;}
+            => root.require(k1.NatValue % k2.NatValue == k3.NatValue, () => Description);
 
         public string format()
-            => valid ? description: $"INVALID({description})";    
-        
+            => Description;
+
         public override string ToString()
             => format();
     }

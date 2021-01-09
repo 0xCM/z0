@@ -13,6 +13,6 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static DateTime now()
-            => corefunc.now();
+            => root.now();
     }
 }

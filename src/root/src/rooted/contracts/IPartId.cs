@@ -16,14 +16,14 @@ namespace Z0
         uint Hash
             => (uint)Id.GetHashCode();
         string ITextual.Format()
-            => root.format(Id);
+            => Root.format(Id);
     }
 
     public interface IPartId<P> : IPartId, IEquatable<P>
         where P : IPartId, new()
     {
         string ITextual.Format()
-            => root.format(Id);
+            => Root.format(Id);
 
         bool IEquatable<P>.Equals(P src)
             => src.Id == Id;

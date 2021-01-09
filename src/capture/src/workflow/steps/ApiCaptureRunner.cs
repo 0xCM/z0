@@ -26,14 +26,17 @@ namespace Z0
             using var wf = Configure(WfShell.create(args));
             run(wf);
             dump(wf);
-
-
         }
 
         static void dump(IWfShell wf)
         {
             var flow = wf.Running("Emitting process dump");
-            var dst = FS.path(@"k:\dumps\run\run.dmp");
+            var process = Processes.current();
+            var name = process.ProcessName;
+            var dst = wf.Db().ProcDumpPath(name).EnsureParent();
+            // var root = FS.dir(@"k:\dumps");
+            // var dst =  root + FS.file(name.Content, FileExtensions.Dmp);
+            //var dst = FS.path(@"k:\dumps\run\run.dmp");
             dst.Delete();
             DumpEmitter.emit(Processes.current(), dst.Name, DumpTypeOption.Full);
             wf.Ran(flow, "Emitted process dump");

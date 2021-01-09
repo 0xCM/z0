@@ -8,9 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static nfunc;
-    using static Konst;    
-    
-    partial class NatClaim
+    using static Part;
+
+    partial class NatClaims
     {
         /// <summary>
         /// Attempts to prove that k:K => k != 0
@@ -21,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Nonzero<K> nonzero<K>()
             where K: unmanaged, ITypeNat
-                => new Nonzero<K>(natrep<K>());                             
+                => new Nonzero<K>(natrep<K>());
 
         /// <summary>
         /// Attempts to prove that k:K => k != 0

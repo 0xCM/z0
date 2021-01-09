@@ -55,7 +55,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public void Append(params string[] src)
-            => corefunc.iter(src, Append);
+            => root.iter(src, Append);
 
         [MethodImpl(Inline)]
         public void Append(char[] src)

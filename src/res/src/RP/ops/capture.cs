@@ -6,7 +6,7 @@ namespace Z0
 {
     using System.Runtime.CompilerServices;
 
-    using static root;
+    using static Root;
 
     partial struct RP
     {

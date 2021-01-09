@@ -24,7 +24,7 @@ namespace Z0
                     return Index<TextLine>.Empty;
 
 
-                var dst = corefunc.list<TextLine>();
+                var dst = root.list<TextLine>();
                 var input = span(src);
                 var lastix = count - 1;
                 var len = 0;

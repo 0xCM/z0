@@ -7,9 +7,8 @@ namespace Z0
     using System;
 
     using static nfunc;
-    using static Konst;    
 
-    partial class NatClaim
+    partial class NatClaims
     {
 
        /// <summary>

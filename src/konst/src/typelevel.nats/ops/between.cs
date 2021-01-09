@@ -8,7 +8,7 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
 
-    public static partial class TypeNats
+    partial class TypeNats
     {
         /// <summary>
         /// Constructs the canonical sequence representatives for the natural numbers within an inclusive range

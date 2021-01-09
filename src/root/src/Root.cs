@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     [ApiHost]
-    public readonly partial struct root
+    public readonly partial struct Root
     {
         /// <summary>
         /// The number of bits to shift a field specifier left/right to reveal/specify the width of an identified field

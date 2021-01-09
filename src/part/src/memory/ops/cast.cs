@@ -18,7 +18,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static void cast<T>(ReadOnlySpan<object> src, Span<T> dst)
         {
-            var count = corefunc.min(src.Length, dst.Length);
+            var count = root.min(src.Length, dst.Length);
             for(var i=0u; i<count; i++)
                 seek(dst, i) = (T)(skip(src,i));
         }

@@ -42,7 +42,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static int copy<T>(T[] src, T[] dst)
         {
-            var count = corefunc.min(src?.Length ?? 0, dst?.Length ?? 0);
+            var count = root.min(src?.Length ?? 0, dst?.Length ?? 0);
             if(count != 0)
             {
                 ref var target = ref first(dst);

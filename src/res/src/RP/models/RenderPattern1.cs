@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static root;
+    using static Root;
 
     public readonly struct RenderPattern<T> : IRenderPattern<RenderPattern<T>,T>
     {

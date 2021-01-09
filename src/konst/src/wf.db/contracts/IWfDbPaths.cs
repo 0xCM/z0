@@ -211,6 +211,12 @@ namespace Z0
         FS.FolderPath ToolExeRoot()
             => Root + FS.folder(DbNames.tools);
 
+        FS.FolderPath ProcDumpRoot()
+            => FS.dir(@"k:\dumps");
+
+        FS.FilePath ProcDumpPath(Name process)
+            => ProcDumpRoot() + FS.file(process.Format(), Dmp);
+
         FS.FolderPath CapturedHexRoot()
             => (CaptureRoot() + FS.folder(DbNames.hex));
 

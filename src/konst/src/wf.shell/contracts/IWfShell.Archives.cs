@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
 
-    using static WfEvents;
-
     partial interface IWfShell
     {
         IRuntimeArchive RuntimeArchive()

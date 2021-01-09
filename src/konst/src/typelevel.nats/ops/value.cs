@@ -3,14 +3,14 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
- 
-    using static Konst;
+
+    using static Part;
 
     partial class TypeNats
-    {        
+    {
         /// <summary>
         /// Reveals the natural number in bijection with a parametric type natural
         /// </summary>
@@ -159,7 +159,7 @@ namespace Z0
             else
                 return value_48(n);
         }
- 
+
         [MethodImpl(Inline)]
         static ulong value_48<K>(K n = default)
             where K : unmanaged, ITypeNat

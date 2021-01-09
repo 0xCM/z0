@@ -45,15 +45,15 @@ namespace Z0
         public static FileName file(PathPart name, string ext)
             => new FileName(name, FS.ext(ext));
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static FileName file(string name)
             => new FileName(name);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static FileName file(string name, string x)
             => new FileName(name, ext(x));
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static FileName file(string name, FileExtension x)
             => new FileName(name, ext(x.Name));
     }

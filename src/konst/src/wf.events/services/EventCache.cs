@@ -33,7 +33,7 @@ namespace Z0
 
         public uint Take(Span<IWfEvent> dst)
         {
-            var count = corefunc.min(Count, (uint)dst.Length);
+            var count = root.min(Count, (uint)dst.Length);
             var taken = 0u;
             for(var i=0; i<count; i++)
             {
