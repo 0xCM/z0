@@ -9,11 +9,12 @@ namespace Z0
 
     partial class XFs
     {
-        public static void Overwrite(this FS.FilePath dst, params string[] src)
-        {
-            using var writer = new StreamWriter(dst.EnsureParentExists().Name, false);
-            foreach(var line in src)
-                writer.WriteLine(line);
-        }
+        /// <summary>
+        /// Reads the line-partitioned content of a text file
+        /// </summary>
+        /// <param name="src">The file path</param>
+        [Op]
+        public static string[] ReadLines(this FS.FilePath src)
+            => FS.lines(src);
     }
 }

@@ -16,7 +16,7 @@ namespace Z0
             => FS.writer(dst, append ? FileWriteMode.Append : FileWriteMode.Overwrite);
 
         public static StreamWriter Writer(this FS.FilePath dst, FileWriteMode mode)
-            => new StreamWriter(dst.EnsureParent().Name, mode == FileWriteMode.Append);
+            => new StreamWriter(dst.EnsureParentExists().Name, mode == FileWriteMode.Append);
 
         /// <summary>
         /// Creates an overwriting and caller-disposed stream writer that targets a specified path

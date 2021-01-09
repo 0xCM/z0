@@ -19,7 +19,7 @@ namespace Z0
         public static EmitResult create(ToolProxySpec config)
         {
             var compile = compilation(config);
-            var dst = config.TargetPath.EnsureParent();
+            var dst = config.TargetPath.EnsureParentExists();
 
             using (var exe = new FileStream(dst.Name, FileMode.Create))
             using (var resources = compile.CreateDefaultWin32Resources(true, true, null, null))

@@ -48,7 +48,7 @@ namespace Z0
 
         void Execute()
         {
-            using var map = MemoryFiles.open(Source);
+            using var map = MemoryFiles.map(Source);
             var @base = map.BaseAddress;
             var sig = map.View(0, 2).AsUInt16();
             Wf.Status(Host, map.Description);

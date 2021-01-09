@@ -24,17 +24,18 @@ namespace Z0
             public FileName(PathPart name, FileExt ext)
                 => Name = Z0.text.format(ExtPattern, name, ext);
 
-            public FileExt FileExt
-            {
-                [MethodImpl(Inline)]
-                get => new FileExt(Path.GetExtension(Name.Text));
-            }
-
             public bool HasExtension
             {
                 [MethodImpl(Inline)]
-                get => Path.GetExtension(z.span(Name.Text)).Length != 0;
+                get => Path.HasExtension(Name);
             }
+
+            public FileExt FileExt
+            {
+                [MethodImpl(Inline)]
+                get => HasExtension ? FS.ext(Path.GetExtension(Name)) : FileExt.Empty;
+            }
+
 
             public bool IsEmpty
             {
@@ -78,8 +79,29 @@ namespace Z0
             public FileName ChangeExtension(FileExt ext)
                 => FS.file(Path.GetFileNameWithoutExtension(Name), ext);
 
-            public bool StartsWith(string src)
-                => Name.Contains(src);
+            /// <summary>
+            /// Determines whether the filename, begins with a specified substring
+            /// </summary>
+            /// <param name="substring">The substring to match</param>
+            [MethodImpl(Inline)]
+            public bool StartsWith(string substring)
+                => Name.StartsWith(substring);
+
+            /// <summary>
+            /// Determines whether the filename, including the extension, ends with a specified substring
+            /// </summary>
+            /// <param name="substring">The substring to match</param>
+            [MethodImpl(Inline)]
+            public bool EndsWith(string substring)
+                => Name.EndsWith(substring);
+
+            /// <summary>
+            /// Determines whether the filename, including the extension, contains a specified substring
+            /// </summary>
+            /// <param name="substring">The substring to match</param>
+            [MethodImpl(Inline)]
+            public bool Contains(string substring)
+                => Name.Contains(substring);
 
             [MethodImpl(Inline)]
             public bool Is(FileExt ext)
@@ -93,14 +115,6 @@ namespace Z0
 
             public override bool Equals(object src)
                 => src is FileName x && Equals(x);
-
-            /// <summary>
-            /// Determines whether the filename, including the extension, ends with a specified substring
-            /// </summary>
-            /// <param name="substring">The substring to match</param>
-            [MethodImpl(Inline)]
-            public bool EndsWith(string substring)
-                => Name.EndsWith(substring);
 
             const string ExtPattern = "{0}.{1}";
 

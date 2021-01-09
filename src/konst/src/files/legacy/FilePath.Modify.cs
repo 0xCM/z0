@@ -36,7 +36,7 @@ namespace Z0
         public static FilePath CreateParentIfMissing(this FilePath src)
             => FileOps.CreateParent(src);
 
-        public static void Append(this FilePath dst, params string[] src)
+        public static void Append(this FS.FilePath dst, params string[] src)
         {
             using var writer = new StreamWriter(reifyParent(dst).Name, true);
             foreach(var line in src)

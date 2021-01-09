@@ -4,14 +4,16 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
 
-    partial struct FS
+    partial struct MemoryFiles
     {
         [MethodImpl(Inline), Op]
-        public static bool has(FilePath src, FileExt ext)
-            => src.Ext == ext;
+        public static IMemoryFileReader service(IWfShell wf)
+            => new MemoryFiles(wf);
     }
 }

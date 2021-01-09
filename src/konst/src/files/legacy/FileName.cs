@@ -18,10 +18,6 @@ namespace Z0
     public class FileName : PathComponent<FileName>
     {
         [MethodImpl(Inline)]
-        public static FileName define(PartId owner, string hostname, FileExtension ext)
-            => define(text.concat(owner.Format(), Chars.Dot, hostname), ext);
-
-        [MethodImpl(Inline)]
         public static FileName define(string name)
             => new FileName(name);
 
@@ -73,9 +69,7 @@ namespace Z0
         /// The file's extension, if any
         /// </summary>
         public FileExtension Ext
-            => HasExtension
-            ? FileExtension.Define(Path.GetExtension(Name))
-            : FileExtension.Empty;
+            => HasExtension ? FileExtension.Define(Path.GetExtension(Name)) : FileExtension.Empty;
 
         /// <summary>
         /// Renames the file (in the model, not on disk)

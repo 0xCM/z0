@@ -23,7 +23,7 @@ namespace Z0
             config.StatusLog.Delete();
             config.ErrorLog.Delete();
             StatusPath = FS.path(config.StatusLog.Name);
-            Error = FS.path(config.ErrorLog.Name).EnsureParent();
+            Error = FS.path(config.ErrorLog.Name).EnsureParentExists();
             Status = StatusPath.Stream();
         }
 

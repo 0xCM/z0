@@ -18,10 +18,10 @@ namespace Z0
         /// <param name="dst">The file path</param>
         [MethodImpl(Inline), Op]
         public static StreamWriter writer(FS.FilePath dst)
-            => new StreamWriter(dst.EnsureParent().Name.Format(), false);
+            => new StreamWriter(dst.EnsureParentExists().Name.Format(), false);
 
         [MethodImpl(Inline), Op]
         public static StreamWriter writer(FS.FilePath dst, FileWriteMode mode)
-            => new StreamWriter(dst.EnsureParent().Name.Format(), mode == FileWriteMode.Append);
+            => new StreamWriter(dst.EnsureParentExists().Name.Format(), mode == FileWriteMode.Append);
     }
 }

@@ -13,8 +13,7 @@ namespace Z0
 
     using api = MemoryFiles;
 
-    [ApiHost]
-    public unsafe readonly struct MemoryFile : IDisposable, IComparable<MemoryFile>
+    public unsafe readonly struct MemoryFile : IMemoryFile<MemoryFile>
     {
         readonly byte* Base;
 
@@ -55,16 +54,19 @@ namespace Z0
             get => Base != null;
         }
 
-        [MethodImpl(Inline), Op]
+        public MemoryFileInfo Description
+            => api.describe(this);
+
+        [MethodImpl(Inline)]
         public ReadOnlySpan<byte> View(ulong offset, ByteSize size)
-            => memory.cover<byte>(BaseAddress + offset, size);
+            => api.view(BaseAddress, offset, size);
 
         /// <summary>
         /// Presents file content as a readonly sequence of <see cref='byte'/> cells
         /// </summary>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public ReadOnlySpan<byte> View()
-            => memory.cover<byte>(BaseAddress, Size);
+            => api.view(this);
 
         /// <summary>
         /// Presents file content as a readonly sequence of <typeparamref name='T'/> cells
@@ -72,7 +74,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public ReadOnlySpan<T> View<T>()
-            => memory.cover<T>(BaseAddress, Size/memory.size<T>());
+            => api.view<T>(this);
 
         /// <summary>
         /// Presents file content segment as a readonly sequence of <typeparamref name='T'/> cells beginning
@@ -80,30 +82,27 @@ namespace Z0
         /// </summary>
         /// <param name="tOffset">The number of cells to advance from the base address</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline)]
         public ReadOnlySpan<T> View<T>(uint tOffset)
-            => memory.slice(View<T>(), tOffset);
+            => api.view<T>(this, tOffset);
 
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline)]
         public ReadOnlySpan<T> View<T>(uint tOffset, uint tCount)
-            => memory.slice(View<T>(), tOffset, tCount);
+            => api.view<T>(this,tOffset, tCount);
 
-        public MemoryFileInfo Description
-            => api.describe(this);
+        [MethodImpl(Inline), Op]
+        MemoryMappedViewStream Stream()
+            => File.CreateViewStream();
+
+        [MethodImpl(Inline), Op]
+        MemoryMappedViewStream Stream(MemoryAddress src, ByteSize size)
+            => File.CreateViewStream(src, (int)size);
 
         public void Dispose()
         {
             Accessor?.Dispose();
             File?.Dispose();
         }
-
-        [MethodImpl(Inline), Op]
-        public MemoryMappedViewStream Stream()
-            => File.CreateViewStream();
-
-        [MethodImpl(Inline), Op]
-        public MemoryMappedViewStream Stream(MemoryAddress src, ByteSize size)
-            => File.CreateViewStream(src, (int)size);
 
         [MethodImpl(Inline)]
         public int CompareTo(MemoryFile src)

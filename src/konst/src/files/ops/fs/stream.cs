@@ -21,6 +21,6 @@ namespace Z0
         /// <param name="share">Sharing options</param>
         [MethodImpl(Inline), Op]
         public static FileStream stream(FS.FilePath path, FileMode mode = FileMode.OpenOrCreate, FileAccess access = FileAccess.Write, FileShare share = FileShare.Read)
-            => new FileStream(path.EnsureParent().Name, mode, access, share);
+            => new FileStream(path.EnsureParentExists().Name, mode, access, share);
     }
 }

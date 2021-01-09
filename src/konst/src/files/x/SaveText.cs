@@ -12,7 +12,7 @@ namespace Z0
         {
             try
             {
-                using var writer = dst.EnsureParent().Writer();
+                using var writer = dst.EnsureParentExists().Writer();
                 writer.WriteLine(src);
                 writer.Flush();
                 return true;

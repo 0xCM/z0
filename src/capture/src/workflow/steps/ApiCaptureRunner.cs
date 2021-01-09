@@ -33,7 +33,7 @@ namespace Z0
             var flow = wf.Running("Emitting process dump");
             var process = Processes.current();
             var name = process.ProcessName;
-            var dst = wf.Db().ProcDumpPath(name).EnsureParent();
+            var dst = wf.Db().ProcDumpPath(name).EnsureParentExists();
             // var root = FS.dir(@"k:\dumps");
             // var dst =  root + FS.file(name.Content, FileExtensions.Dmp);
             //var dst = FS.path(@"k:\dumps\run\run.dmp");
