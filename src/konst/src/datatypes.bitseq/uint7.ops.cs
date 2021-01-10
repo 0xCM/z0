@@ -7,16 +7,26 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
+    using static memory;
 
     using U = uint7;
     using W = W7;
 
-    partial struct BitSeq
+    partial struct UI
     {
         [MethodImpl(Inline), Op]
         public static U maxval(W w)
             => U.Max;
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref S edit<S>(in U src)
+            where S : unmanaged
+                => ref @as<U,S>(src);
+
+        [MethodImpl(Inline), Op]
+        public static U inc(U x)
+            => !x.IsMax ? new U(memory.add(x.data, 1), false) : U.Min;
 
         [MethodImpl(Inline), Op]
         public static U dec(U x)
@@ -39,7 +49,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref K refine<K>(in uint7 src)
             where K : unmanaged, Enum
-                => ref z.@as<uint7,K>(src);
+                => ref @as<uint7,K>(src);
 
         /// <summary>
         /// Converts an enum to a width-identified integer
@@ -50,14 +60,14 @@ namespace Z0
         [MethodImpl(Inline)]
         public static U scalar<K>(in K src, W w)
             where K : unmanaged, Enum
-                => new U(z.@as<K,byte>(src));
+                => new U(@as<K,byte>(src));
 
         /// <summary>
         /// Injects the source value directly into the width-identified target, bypassing bounds-checks
         /// </summary>
         /// <param name="src">The value to inject</param>
         /// <param name="w">The target bit-width</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static U inject(byte src, W w)
             => new U(src, false);
 
@@ -67,7 +77,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
         public static U uint7(bool src)
-            => new U(BitStates.bitstate(src));
+            => new U(@byte(src));
 
         /// <summary>
         /// Creates a 7-bit unsigned integer from the least 7 source bits

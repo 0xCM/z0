@@ -12,7 +12,7 @@ namespace Z0
 
     using U = uint24;
 
-    partial struct BitSeq
+    partial struct UI
     {
         [MethodImpl(Inline), Op]
         public static U maxval(W24 w)

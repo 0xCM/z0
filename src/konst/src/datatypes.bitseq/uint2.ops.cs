@@ -13,7 +13,7 @@ namespace Z0
     using U = uint2;
     using W = W2;
 
-    partial struct BitSeq
+    partial struct UI
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref S edit<S>(in U src)

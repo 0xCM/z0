@@ -395,19 +395,19 @@ public readonly struct ApiNames
 
     public const string BitSeqApi = bits + dot + seq + dot + api;
 
-    public const string BitLogicU1 = ui + dot +  bitlogic + dot + u1;
+    public const string U1 = ui + dot +  bitlogic + dot + u1;
 
-    public const string BitLogicU2 = ui + dot + bitlogic + dot + u2;
+    public const string U2 = ui + dot + bitlogic + dot + u2;
 
-    public const string BitLogicU3 = ui + dot + bitlogic + dot + u3;
+    public const string U3 = ui + dot + bitlogic + dot + u3;
 
-    public const string BitLogicU4 = ui + dot + bitlogic + dot + u4;
+    public const string U4 = ui + dot + bitlogic + dot + u4;
 
-    public const string BitLogicU5 = ui + dot + bitlogic + dot + u5;
+    public const string U5 = ui + dot + bitlogic + dot + u5;
 
-    public const string BitLogicU6 = ui + dot + bitlogic + dot + u6;
+    public const string U6 = ui + dot + bitlogic + dot + u6;
 
-    public const string BitLogicU7 = ui + dot + bitlogic + dot + u7;
+    public const string U7 = ui + dot + bitlogic + dot + u7;
 
     public const string BitLogicO8 = ui + dot + bitlogic + dot + u8;
 

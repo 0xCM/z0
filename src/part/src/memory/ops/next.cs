@@ -7,11 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
-    partial struct z
+    partial struct memory
     {
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref Sequential<T> next<T>(in Sequential<T> src)
             where T : unmanaged
         {
@@ -31,13 +31,6 @@ namespace Z0
 
             return ref dst;
         }
-
-        // public static void next<T>(in T src, ref T dst)
-        //     where T : unmanaged
-        // {
-        //     dst = add(dst, 1);
-        //     add(src, size<T>());
-        // }
 
         /// <summary>
         ///  Effects: movzx eax,byte ptr [rcx] => mov [rdx],al => eax,byte ptr [rdx+1] => mov [rdx],al => rax,[rcx+1]

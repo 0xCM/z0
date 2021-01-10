@@ -12,11 +12,19 @@ namespace Z0
     using U = uint8T;
     using W = W8;
 
-    partial struct BitSeq
+    partial struct UI
     {
         [MethodImpl(Inline), Op]
         public static U maxval(W8 w)
             => maxval<U>();
+
+        [MethodImpl(Inline), Op]
+        public static U inc(U x)
+            => !x.IsMax ? new U(memory.add(x.data, 1)) : U.Min;
+
+        [MethodImpl(Inline), Op]
+        public static U dec(U x)
+            => !x.IsMin ? new U(Bytes.sub(x.data, 1)) : U.Max;
 
         /// <summary>
         /// Reduces the source value to a width-identified integer via modular arithmetic

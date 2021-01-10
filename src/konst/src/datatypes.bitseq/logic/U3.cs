@@ -11,9 +11,9 @@ namespace Z0
 
     using U = uint3;
 
-    partial struct BitSeq
+    partial struct UI
     {
-        [ApiHost(ApiNames.BitLogicU3,true)]
+        [ApiHost(ApiNames.U3,true)]
         public readonly struct U3
         {
             [MethodImpl(Inline), Op]

@@ -7,66 +7,30 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     partial struct z
     {
-        /// <summary>
-        /// Skips a specified number of source elements and returns a readonly reference to the result
-        /// </summary>
-        /// <param name="src">The source reference</param>
-        /// <param name="count">The number of elements to skip</param>
-        /// <typeparam name="T">The source element type</typeparam>
         [MethodImpl(Inline)]
         public static ref readonly T skip<T>(in T src, byte count)
             => ref memory.skip(src,count);
 
-        /// <summary>
-        /// Skips a specified number of source elements and returns a readonly reference to the result
-        /// </summary>
-        /// <param name="src">The source reference</param>
-        /// <param name="count">The number of elements to skip</param>
-        /// <typeparam name="T">The source element type</typeparam>
         [MethodImpl(Inline)]
         public static ref readonly T skip<T>(in T src, ushort count)
             => ref memory.skip(src,count);
 
-        /// <summary>
-        /// Skips a specified number of source elements and returns a readonly reference to the result
-        /// </summary>
-        /// <param name="src">The source reference</param>
-        /// <param name="count">The number of elements to skip</param>
-        /// <typeparam name="T">The source element type</typeparam>
         [MethodImpl(Inline)]
         public static ref readonly T skip<T>(in T src, uint count)
             => ref memory.skip(src,count);
 
-        /// <summary>
-        /// Skips a specified number of source elements and returns a readonly reference to the result
-        /// </summary>
-        /// <param name="src">The source reference</param>
-        /// <param name="count">The number of elements to skip</param>
-        /// <typeparam name="T">The source element type</typeparam>
         [MethodImpl(Inline)]
         public static ref readonly T skip<T>(in T src, ulong count)
             => ref memory.skip(src,count);
 
-        /// <summary>
-        /// Skips a specified number of source elements and returns a readonly reference to the result
-        /// </summary>
-        /// <param name="src">The source reference</param>
-        /// <param name="count">The number of elements to skip</param>
-        /// <typeparam name="T">The source element type</typeparam>
         [MethodImpl(Inline)]
         public static ref readonly T skip<T>(in T src, long count)
             => ref memory.skip(src,count);
 
-        /// <summary>
-        /// Skips a specified number of source elements and returns a readonly reference to the result
-        /// </summary>
-        /// <param name="src">The source reference</param>
-        /// <param name="count">The number of elements to skip</param>
-        /// <typeparam name="T">The source element type</typeparam>
         [MethodImpl(Inline)]
         public static ref readonly T skip<T>(T[] src, double count)
             => throw no<T>();

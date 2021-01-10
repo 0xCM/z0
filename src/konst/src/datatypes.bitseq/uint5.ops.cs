@@ -13,7 +13,7 @@ namespace Z0
     using U = uint5;
     using W = W5;
 
-    partial struct BitSeq
+    partial struct UI
     {
         /// <summary>
         /// Reinterprets an input reference as a mutable <see cref='Z0.uint4'/> reference cell

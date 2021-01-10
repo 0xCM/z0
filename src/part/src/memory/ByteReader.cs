@@ -6,13 +6,13 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
 
     using static Part;
 
-    public static partial class XTend
+    [ApiHost]
+    public readonly partial struct ByteReader
     {
-        [MethodImpl(Inline), Op]
-        public static unsafe Span<byte> Bytes(this uint src)
-            => ByteReader.read4(src);
+        const NumericKind Closure = UnsignedInts;
     }
 }

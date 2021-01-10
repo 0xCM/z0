@@ -7,10 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
     using static System.Runtime.CompilerServices.Unsafe;
+    using static Part;
 
-    partial struct z
+    partial struct memory
     {
         /// <summary>
         /// Skips a specified number of 16-bit source segments and returns a reference to the located cell
@@ -31,5 +31,25 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref ushort seek16<T>(Span<T> src, uint count)
             => ref Add(ref As<T,ushort>(ref first(src)), (int)count);
+
+        /// <summary>
+        /// Adds an offset to the source reference, measured relative to 32-bit segments, and returns the reinterpreted reference
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <param name="count">The number of 32-bit segments to skip</param>
+        /// <typeparam name="T">The (arbitrary) source type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref uint seek32<T>(in T src, uint count)
+            => ref Add(ref As<T,uint>(ref edit(src)), (int)count);
+
+        /// <summary>
+        /// Adds an offset to the head of a span, measured relative to 32-bit segments, and returns the reinterpreted reference
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="count">The number of 32-bit segments to skip</param>
+        /// <typeparam name="T">The source element type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref uint seek32<T>(Span<T> src, uint count)
+            => ref Add(ref As<T,uint>(ref first(src)), (int)count);
     }
 }

@@ -9,10 +9,10 @@ namespace Z0
 
     using static Part;
 
-    public static partial class XTend
+    partial class XTend
     {
         [MethodImpl(Inline), Op]
-        public static unsafe Span<byte> Bytes(this double src)
+        public static unsafe Span<byte> Bytes(this ulong src)
             => ByteReader.read8(src);
     }
 }

@@ -8,11 +8,12 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
 
     using U = uint4;
     using W = W4;
 
-    partial struct BitSeq
+    partial struct UI
     {
         /// <summary>
         /// Reduces the source value to a width-identified integer via modular arithmetic
@@ -23,6 +24,11 @@ namespace Z0
         public static U reduce(byte src, W w)
             => new U(src);
 
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref S edit<S>(in uint4 src)
+            where S : unmanaged
+                => ref @as<uint4,S>(src);
+
         /// <summary>
         /// Reinterprets an input reference as as a mutable <see cref='Z0.uint3'/> reference cell
         /// </summary>
@@ -32,7 +38,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref U edit<S>(in S src, W dst)
             where S : unmanaged
-                => ref z.@as<S,U>(src);
+                => ref @as<S,U>(src);
 
         [MethodImpl(Inline), Op]
         public static U maxval(W w)
@@ -54,7 +60,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref K refine<K>(in U src)
             where K : unmanaged, Enum
-                => ref z.@as<uint4,K>(src);
+                => ref @as<uint4,K>(src);
 
         /// <summary>
         /// Converts an enum to a width-identified integer
@@ -65,7 +71,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static U scalar<K>(in K src, W w)
             where K : unmanaged, Enum
-                => new U(z.@as<K,byte>(src));
+                => new U(@as<K,byte>(src));
 
         /// <summary>
         /// Injects the source value directly into the width-identified target, bypassing bounds-checks
@@ -92,7 +98,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
         public static U uint4(bool src)
-            => wrap4((byte)BitStates.bitstate(src));
+            => wrap4(@byte(src));
 
         /// <summary>
         /// Creates a 4-bit unsigned integer from the least 4 bits of the source

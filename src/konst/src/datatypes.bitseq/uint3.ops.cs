@@ -8,11 +8,12 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
 
     using U = uint3;
     using W = W3;
 
-    partial struct BitSeq
+    partial struct UI
     {
         /// <summary>
         /// Reduces the source value to a width-identified integer via modular arithmetic
@@ -23,6 +24,11 @@ namespace Z0
         public static U reduce(byte src, W w)
             => new U(src);
 
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref S edit<S>(in U src)
+            where S : unmanaged
+                => ref @as<U,S>(src);
+
         /// <summary>
         /// (a:3, b:3, c:2) -> [cc bbb aaa]
         /// </summary>
@@ -31,12 +37,12 @@ namespace Z0
         /// <param name="c">Source bits 4-5</param>
         /// <param name="d">Source bits 6-7</param>
         [MethodImpl(Inline), Op]
-        public static uint8T join(uint3 a, uint3 b, uint2 c)
+        public static uint8T join(U a, U b, U c)
             => (uint8T)a | ((uint8T)b << 3) | ((uint8T)c << 6);
 
         [MethodImpl(Inline), Op]
-        public static uint3 inc(uint3 x)
-            => !x.IsMax ? new uint3(memory.add(x.data, 1), false) : U.Min;
+        public static U inc(U x)
+            => !x.IsMax ? new U(memory.add(x.data, 1), false) : U.Min;
 
         [MethodImpl(Inline), Op]
         public static U dec(U x)

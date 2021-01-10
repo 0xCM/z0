@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static BitSeq;
+    using static UI;
 
     using S = uint8T;
     using W = W8;

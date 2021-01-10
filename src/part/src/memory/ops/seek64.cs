@@ -7,10 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
     using static System.Runtime.CompilerServices.Unsafe;
+    using static Part;
 
-    partial struct z
+    partial struct memory
     {
         /// <summary>
         /// Adds an offset, measured by 32-bit segments, to a source reference and presents the cell

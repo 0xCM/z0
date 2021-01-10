@@ -8,10 +8,39 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
 
-    using static Konst;
+    using static Part;
 
     partial struct z
     {
+        [MethodImpl(Inline)]
+        public static Span<byte> span8u<T>(in T src)
+            where T : struct
+                => memory.span8u(src);
+
+        [MethodImpl(Inline)]
+        public static Span<char> span16c<T>(in T src)
+            where T : struct
+                => memory.span16c(src);
+
+        [MethodImpl(Inline)]
+        public static Span<ushort> span16u<T>(in T src)
+            where T : struct
+                => memory.span16u(src);
+
+        [MethodImpl(Inline)]
+        public static ReadOnlySpan<char> span16c(ReadOnlySpan<byte> src)
+            => memory.span16c(src);
+
+        [MethodImpl(Inline)]
+        public static Span<uint> span32u<T>(in T src)
+            where T : struct
+                => memory.span32u(src);
+
+        [MethodImpl(Inline)]
+        public static Span<ulong> span64u<T>(in T src)
+            where T : struct
+                => memory.span64u(src);
+
         [MethodImpl(Inline)]
         public static Span<T> span<S,T>(ref S src, int count)
             where T : struct

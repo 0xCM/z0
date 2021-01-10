@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static z;
+    using static memory;
 
     partial struct ByteReader
     {
@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The data source</param>
         /// <typeparam name="T">The unsigned numeric type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static T read<T>(ReadOnlySpan<byte> src)
         {
             if(typeof(T) == typeof(byte))
@@ -50,21 +50,21 @@ namespace Z0
         public static ulong read(in byte src, byte count)
         {
             if(count == 1)
-                return Read1(src, n1);
+                return read1(src);
             else if(count == 2)
-                return Read2(src, n2);
+                return read2(src);
             else if(count == 3)
-                return Read3(src, n3);
+                return read3(src);
             else if(count == 4)
-                return Read4(src, n4);
+                return read4(src);
             else if(count == 5)
-                return Read5(src, n5);
+                return read5(src);
             else if(count == 6)
-                return Read6(src, n6);
+                return read6(src);
             else if(count == 7)
-                return Read7(src, n7);
+                return read7(src);
             else if(count == 8)
-                return Read8(src, n8);
+                return read8(src);
             else
                 return 0;
         }
@@ -74,10 +74,10 @@ namespace Z0
         /// </summary>
         /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
-        public static ulong Read1(in byte src, N1 n)
+        public static ulong read1(in byte src)
         {
             var dst = 0ul;
-            seek8(dst, 0) = skip(src,0);
+            seek8(dst, 0) = skip(src, 0);
             return dst;
         }
 
@@ -86,12 +86,12 @@ namespace Z0
         /// </summary>
         /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
-        public static ulong Read2(in byte src, N2 n)
+        public static ulong read2(in byte src)
         {
             var dst = 0ul;
             var i = 0u;
-            seek8(dst, i++) = skip(src,i);
-            seek8(dst, i++) = skip(src,i);
+            seek8(dst, i++) = skip(src, i);
+            seek8(dst, i++) = skip(src, i);
             return dst;
         }
 
@@ -100,7 +100,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
-        public static ulong Read3(in byte src, N3 n)
+        public static ulong read3(in byte src)
         {
             var dst = 0ul;
             var i = 0u;
@@ -115,7 +115,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
-        public static ulong Read4(in byte src, N4 n)
+        public static ulong read4(in byte src)
         {
             var dst = 0ul;
             var i = 0u;
@@ -131,7 +131,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
-        public static ulong Read5(in byte src, N5 n)
+        public static ulong read5(in byte src)
         {
             var dst = 0ul;
             var i = 0u;
@@ -148,7 +148,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
-        public static ulong Read6(in byte src, N6 n)
+        public static ulong read6(in byte src)
         {
             var dst = 0ul;
             var i = 0u;
@@ -166,7 +166,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
-        public static ulong Read7(in byte src, N7 n)
+        public static ulong read7(in byte src)
         {
             var dst = 0ul;
             var i = 0u;
@@ -185,7 +185,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
-        public static ulong Read8(in byte src, N8 n)
+        public static ulong read8(in byte src)
         {
             var dst = 0ul;
             var i = 0u;

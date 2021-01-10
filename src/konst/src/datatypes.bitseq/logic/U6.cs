@@ -8,12 +8,13 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
 
     using U = uint6;
 
-    partial struct BitSeq
+    partial struct UI
     {
-        [ApiHost(ApiNames.BitLogicU6, true)]
+        [ApiHost(ApiNames.U6, true)]
         public readonly struct U6
         {
             [MethodImpl(Inline), Op]

@@ -11,9 +11,9 @@ namespace Z0
 
     using U = uint7;
 
-    partial struct BitSeq
+    partial struct UI
     {
-        [ApiHost(ApiNames.BitLogicU7, true)]
+        [ApiHost(ApiNames.U7, true)]
         public readonly struct U7
         {
             [MethodImpl(Inline), Op]

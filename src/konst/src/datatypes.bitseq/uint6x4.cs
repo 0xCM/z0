@@ -26,25 +26,25 @@ namespace Z0
         public uint6 this[N0 n]
         {
             [MethodImpl(Inline)]
-            get => BitSeq.uint6(Content);
+            get => UI.uint6(Content);
         }
 
         public uint6 this[N1 n]
         {
             [MethodImpl(Inline)]
-            get => BitSeq.uint6(Content >> 6);
+            get => UI.uint6(Content >> 6);
         }
 
         public uint6 this[N2 n]
         {
             [MethodImpl(Inline)]
-            get => BitSeq.uint6(Content >> 12);
+            get => UI.uint6(Content >> 12);
         }
 
         public uint6 this[N3 n]
         {
             [MethodImpl(Inline)]
-            get => BitSeq.uint6(Content >> 18);
+            get => UI.uint6(Content >> 18);
         }
     }
 }

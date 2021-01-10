@@ -11,7 +11,7 @@ namespace Z0
 
     using U = uint8T;
 
-    partial struct BitSeq
+    partial struct UI
     {
         [ApiHost(ApiNames.BitLogicO8, true)]
         public readonly struct U8T

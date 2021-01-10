@@ -7,12 +7,13 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
+    using static memory;
 
     using U = uint6;
     using W = W6;
 
-    partial struct BitSeq
+    partial struct UI
     {
         [MethodImpl(Inline), Op]
         public static U maxval(W w)
@@ -34,7 +35,12 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref K refine<K>(in uint6 src)
             where K : unmanaged, Enum
-                => ref z.@as<uint6,K>(src);
+                => ref @as<uint6,K>(src);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref S edit<S>(in U src)
+            where S : unmanaged
+                => ref @as<U,S>(src);
 
         /// <summary>
         /// Converts an enum to a width-identified integer

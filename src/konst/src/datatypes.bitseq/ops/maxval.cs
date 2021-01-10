@@ -11,7 +11,7 @@ namespace Z0
 
     using Q = Z0;
 
-    partial struct BitSeq
+    partial struct UI
     {
         [MethodImpl(Inline)]
         static S cast<S>(byte src)

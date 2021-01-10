@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    partial struct BitSeq
+    partial struct UI
     {
         /// <summary>
         /// Reinterprets an input reference as a mutable <see cref='Z0.uint6'/> reference cell
@@ -45,25 +45,6 @@ namespace Z0
             where S : unmanaged
                 => ref @as<S,uint8T>(src);
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref S edit<S>(in uint3 src)
-            where S : unmanaged
-                => ref @as<uint3,S>(src);
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref S edit<S>(in uint4 src)
-            where S : unmanaged
-                => ref @as<uint4,S>(src);
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref S edit<S>(in uint6 src)
-            where S : unmanaged
-                => ref @as<uint6,S>(src);
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref S edit<S>(in uint7 src)
-            where S : unmanaged
-                => ref @as<uint7,S>(src);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref S edit<S>(in uint8T src)

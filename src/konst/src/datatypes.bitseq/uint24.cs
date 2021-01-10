@@ -18,7 +18,7 @@ namespace Z0
     using N = N24;
     using L = Limits24u;
 
-    using api = BitSeq;
+    using api = UI;
 
     public enum BitSeq24 : uint
     {

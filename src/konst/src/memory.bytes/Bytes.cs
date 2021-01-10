@@ -12,12 +12,13 @@ namespace Z0
 
     using static Part;
     using static memory;
-    using static Buffers;
 
     [ApiHost]
-    public readonly partial struct Bytes
+    public readonly struct Bytes
     {
-         /// <summary>
+        const NumericKind Closure = UnsignedInts;
+
+        /// <summary>
         /// Joins three operands via <see cref='BitLogicKinds.Or'/>
         /// </summary>
         /// <param name="a">The first operand</param>
@@ -255,45 +256,57 @@ namespace Z0
         public static bool eq(byte a, byte b)
             => a == b;
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ReadOnlySpan<T> cells<T>(N2 n)
             where T : unmanaged
-                => recover<byte,T>(slice(Bytes.B256x8u,0,2));
+                => recover<byte,T>(slice(B256x8u,0,2));
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ReadOnlySpan<T> cells<T>(N4 n)
             where T : unmanaged
-                => recover<byte,T>(slice(Bytes.B256x8u,0,4));
+                => recover<byte,T>(slice(B256x8u,0,4));
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ReadOnlySpan<T> cells<T>(N8 n)
             where T : unmanaged
-                => recover<byte,T>(slice(Bytes.B256x8u,0,8));
+                => recover<byte,T>(slice(B256x8u,0,8));
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ReadOnlySpan<T> cells<T>(N16 n)
             where T : unmanaged
-                => recover<byte,T>(slice(Bytes.B256x8u,0,16));
+                => recover<byte,T>(slice(B256x8u,0,16));
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ReadOnlySpan<T> cells<T>(N32 n)
             where T : unmanaged
-                => recover<byte,T>(slice(Bytes.B256x8u,0,32));
+                => recover<byte,T>(slice(B256x8u,0,32));
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ReadOnlySpan<T> cells<T>(N64 n)
             where T : unmanaged
-                => recover<byte,T>(slice(Bytes.B256x8u,0,64));
+                => recover<byte,T>(slice(B256x8u,0,64));
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ReadOnlySpan<T> cells<T>(N128 n)
             where T : unmanaged
-                => recover<byte,T>(slice(Bytes.B256x8u,0,128));
+                => recover<byte,T>(slice(B256x8u,0,128));
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ReadOnlySpan<T> cells<T>(N256 n)
             where T : unmanaged
-                => recover<byte,T>(Bytes.B256x8u);
+                => recover<byte,T>(B256x8u);
+
+        [MethodImpl(Inline)]
+        static unsafe byte read8(in byte src)
+            => *(byte*)memory.gptr(in src);
+
+        [MethodImpl(Inline)]
+        static unsafe ref byte store8(byte src, ref byte dst)
+        {
+            *(memory.gptr(dst)) = src;
+            return ref dst;
+        }
+
         internal static ReadOnlySpan<byte> B256x8u => new byte[Pow2.T08]{
             0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
             0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x1f,

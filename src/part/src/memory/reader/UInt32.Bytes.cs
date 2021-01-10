@@ -9,16 +9,10 @@ namespace Z0
 
     using static Part;
 
-    using Q = Z0;
-
-    partial struct BitSeq
+    partial class XTend
     {
         [MethodImpl(Inline), Op]
-        public static uint7 inc(uint7 x)
-            => !x.IsMax ? new uint7(memory.add(x.data, 1), false) : Q.uint7.Min;
-
-        [MethodImpl(Inline), Op]
-        public static uint8T inc(uint8T x)
-            => !x.IsMax ? new uint8T(memory.add(x.data, 1)) : Q.uint8T.Min;
+        public static unsafe Span<byte> Bytes(this uint src)
+            => ByteReader.read4(src);
     }
 }

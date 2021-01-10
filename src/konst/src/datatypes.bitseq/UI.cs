@@ -5,7 +5,7 @@
 namespace Z0
 {
     [ApiHost(ApiNames.BitSeqApi)]
-    public readonly partial struct BitSeq
+    public readonly partial struct UI
     {
         public const NumericKind Closure = NumericKind.UnsignedInts;
     }

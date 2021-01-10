@@ -30,10 +30,10 @@ namespace Z0
             var result = span<ComparisonResult<ComparisonKind,uint3,bool>>(PointCount);
 
             for(var i=0; i<PointCount; i++)
-                seek(expect,i) = BitSeq.inject(math.mod(skip(source,i), uint3.Count), w3);
+                seek(expect,i) = UI.inject(math.mod(skip(source,i), uint3.Count), w3);
 
             for(var i=0; i<PointCount; i++)
-                seek(actual,i) = BitSeq.uint3(skip(source,i));
+                seek(actual,i) = UI.uint3(skip(source,i));
 
             for(var i=0; i<PointCount; i++)
             {
