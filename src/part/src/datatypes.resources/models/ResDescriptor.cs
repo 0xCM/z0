@@ -7,18 +7,18 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
-    public readonly struct ResDescriptor : IComparable<ResDescriptor>, IEquatable<ResDescriptor>, ITextual, IAddressable
+    public readonly struct ResDescriptor : IDataTypeComparable<ResDescriptor>, IAddressable
     {
-        public utf8 Name {get;}
+        public Name Name {get;}
 
         public MemoryAddress Address {get;}
 
         public ByteSize Size {get;}
 
         [MethodImpl(Inline)]
-        public ResDescriptor(utf8 name, MemoryAddress address, ByteSize size)
+        public ResDescriptor(Name name, MemoryAddress address, ByteSize size)
         {
             Name = name;
             Address = address;

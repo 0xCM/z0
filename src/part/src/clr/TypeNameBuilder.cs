@@ -127,9 +127,7 @@ namespace Z0
         }
 
         TypeNameBuilder(State state)
-        {
-            _State = state;
-        }
+            => _State = state;
 
         [Op]
         public void AddAssemblyQualifiedName(Type type, FormatKind format)
@@ -389,7 +387,7 @@ namespace Z0
         [Op]
         void Append(string pStr)
         {
-            foreach (char c in pStr)
+            foreach(char c in pStr)
             {
                 if (c == '\0')
                     break;
@@ -402,7 +400,5 @@ namespace Z0
         {
             _str.Append(c);
         }
-
-
     }
 }

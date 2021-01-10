@@ -2,17 +2,21 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Tools
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
 
-    [ApiHost]
-    public readonly partial struct Llvm
-    {
+    using static Part;
 
-        [Op]
-        public static Llvm service(IWfShell wf)
-            => new Llvm(wf);
+    [ApiHost]
+    public readonly struct WinCmd
+    {
+        [MethodImpl(Inline), Op]
+        public static CmdLine dir(FS.FolderPath src)
+        {
+            const string Pattern = "cmd /c dir {0}";
+            return string.Format(Pattern, src.Format(PathSeparator.BS));
+        }
     }
 }

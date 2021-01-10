@@ -15,7 +15,8 @@ namespace Z0
         [Op]
         public static unsafe ResDescriptor[] descriptors(Assembly src, utf8? match = null)
         {
-            var resnames = Resources.names(insist(src), match);
+            root.require(src != null, () => "Argument NULL");
+            var resnames = Resources.names(src, match);
             var count = resnames.Length;
             if(count == 0)
                 return sys.empty<ResDescriptor>();

@@ -13,14 +13,12 @@ namespace Z0.Tools
 
         readonly FS.FolderPath SrcRoot;
 
+
         internal Llvm(IWfShell wf)
         {
             Wf= wf;
             SrcRoot = FS.dir("j:/lang/tools/llvm-project");
         }
-
-        public ToolPaths Paths()
-            => new ToolPaths(SrcRoot);
 
         public CmdLine llvm_as(FS.FilePath input, FS.FilePath output)
         {

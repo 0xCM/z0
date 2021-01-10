@@ -8,15 +8,21 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
 
-    partial struct Pipes
+    public readonly struct Substitution<T>
     {
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Conduit<T> connect<T>(Pipe<T> src, Pipe<T> dst)
-            => new Conduit<T>(src,dst);
+        public T Replace {get;}
+
+        public T Replacement {get;}
 
         [MethodImpl(Inline)]
-        public static Conduit<S,T> connect<S,T>(Pipe<S,T> src, Pipe<T> dst)
-            => new Conduit<S,T>(src,dst);
+        public Substitution(T src, T dst)
+        {
+            Replace = src;
+            Replacement = dst;
+        }
     }
+
+
 }

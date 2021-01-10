@@ -8,7 +8,7 @@ namespace Z0
     using Z0;
     using Msil;
 
-    public class LocalsSigParser : CliSigParser
+    public class CliLocalSigParser : CliSigParser
     {
         readonly Stack<Type> _types = new Stack<Type>();
 
@@ -18,7 +18,7 @@ namespace Z0
 
         readonly ICilTypeFactory _typeFactory;
 
-        public LocalsSigParser(ICilTokenResolver tokenResolver, ICilTypeFactory typeFactory)
+        public CliLocalSigParser(ICilTokenResolver tokenResolver, ICilTypeFactory typeFactory)
         {
             _tokenResolver = tokenResolver;
             _typeFactory = typeFactory;
@@ -64,13 +64,13 @@ namespace Z0
 
         class TypeCreator
         {
-            readonly LocalsSigParser _parent;
+            readonly CliLocalSigParser _parent;
 
             Inner _inner;
 
             bool _byRef;
 
-            public TypeCreator(LocalsSigParser parent)
+            public TypeCreator(CliLocalSigParser parent)
             {
                 _parent = parent;
             }

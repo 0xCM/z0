@@ -5,18 +5,32 @@
 namespace Z0
 {
     using System;
+    using System.Reflection;
 
-    using static z;
+    using static memory;
 
-    public struct ToolRunner : IDisposable
+
+    public interface IToolRunner : IDisposable
     {
+        void Run();
+
+        void ShowCommands();
+    }
+
+    public sealed class ToolRunner : IToolRunner
+    {
+        public static void run(IWfShell wf, CmdLine cmd)
+        {
+            var process = Cmd.process(wf, cmd).Wait();
+            var output = process.Output;
+            wf.Status(output);
+        }
+
         readonly WfHost Host;
 
         readonly IWfShell Wf;
 
-        readonly Multiplex Mpx;
-
-        readonly string[] Args;
+        readonly Index<string> Args;
 
         readonly CmdBuilder CmdBuilder;
 
@@ -26,7 +40,6 @@ namespace Z0
         {
             Host = host;
             Wf = wf.WithHost(Host);
-            Mpx = Multiplex.create(wf, Multiplex.configure(wf.Db().Root));
             Args = wf.Args;
             CmdBuilder = wf.CmdBuilder();
             Db = Wf.Db();
@@ -43,16 +56,7 @@ namespace Z0
                 Wf.Row(Args[i]);
         }
 
-
-        void RunAll()
-        {
-            //EmitPatterns();
-            //EmitToolHelp();
-            //EmitAsmRefs();
-        }
-
-
-        public void Run()
+        public void ShowCommands()
         {
             var models = @readonly(Cmd.cmdtypes(Wf));
             var count = models.Length;
@@ -61,6 +65,11 @@ namespace Z0
                 ref readonly var model = ref skip(models,i);
                 Wf.Row(string.Format("{0,-3} {1}", i, model.DataType.Name));
             }
+        }
+
+        public void Run()
+        {
+
         }
     }
 }

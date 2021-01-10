@@ -44,14 +44,6 @@ namespace Z0
             => ref AsRef(src);
 
         /// <summary>
-        /// Are you sure you want to do this?
-        /// </summary>
-        /// <param name="src">The immutable, and possibly interned string that were are going to modify</param>
-        [MethodImpl(Inline), Op]
-        public static unsafe ref char edit(string src)
-            => ref @ref(pchar2(src));
-
-        /// <summary>
         /// Covers the content of a readonly span with an editable span
         /// </summary>
         /// <param name="src">The memory source</param>
@@ -60,7 +52,7 @@ namespace Z0
         /// <returns>Obviously, this trick could be particularly dangerous</returns>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<T> edit<T>(ReadOnlySpan<T> src)
-            =>  cover(edit(first(src)), src.Length);
+            => cover(edit(first(src)), src.Length);
 
         /// <summary>
         /// Transforms a readonly S-cell into an editable T-cell
@@ -82,9 +74,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref T edit<S,T>(in S src, ref T dst)
             => ref As<S,T>(ref AsRef(src));
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Span<T> edit<T>(T[] src)
-            => src;
     }
 }

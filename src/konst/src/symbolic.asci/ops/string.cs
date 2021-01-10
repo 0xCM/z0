@@ -24,7 +24,7 @@ namespace Z0
         public static string @string(AsciCharCode code)
         {
             const string buffer = " ";
-            edit(buffer) = (char)code;
+            edit16c(buffer) = (char)code;
             return buffer;
         }
     }

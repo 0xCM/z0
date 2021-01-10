@@ -4,8 +4,14 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public class FileArchiveAttribute : ServiceFactoryAttribute
+    using System;
+    using System.Runtime.CompilerServices;
+
+
+    [ApiHost]
+    public static partial class XApi
     {
+
 
     }
 }

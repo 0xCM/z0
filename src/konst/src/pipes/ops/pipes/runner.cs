@@ -7,16 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-
-    [ApiHost]
-    public readonly struct WinCmd
+    partial struct Pipes
     {
-        [MethodImpl(Inline), Op]
-        public static CmdLine dir(FS.FolderPath src)
-        {
-            const string Pattern = "cmd /c dir {0}";
-            return string.Format(Pattern, src.Format(PathSeparator.BS));
-        }
+        [Op]
+        public static IPipeRunner runner(IWfShell wf)
+            => PipeRunnerSvc.init(wf);
     }
 }

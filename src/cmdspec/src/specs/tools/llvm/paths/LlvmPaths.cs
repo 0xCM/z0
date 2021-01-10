@@ -7,36 +7,32 @@ namespace Z0.Tools
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
+
+    using static Llvm;
+
+    public interface ILlvmPaths : IFileArchive
+    {
+        ILlvmSourcePaths Source => new SourcePaths(Root + FS.folder("llvm"));
+
+        ILlvmTestCasePaths Test => new TestCasePaths(Root + FS.folder("llvm") + FS.folder("test"));
+
+        ILlvmBuildPaths Build => new BuildPaths(Root + FS.folder("build"));
+
+        ILlvmToolPaths Tools => new ToolPaths(Root + FS.folder("llvm"));
+    }
 
     partial struct Llvm
     {
-        public readonly struct ToolPaths
+        public ILlvmPaths Paths
+            => new LlvmPaths(SrcRoot);
+
+        internal struct LlvmPaths : ILlvmPaths
         {
             public FS.FolderPath Root {get;}
 
-            internal ToolPaths(FS.FolderPath root)
-            {
-                Root = root;
-            }
-
-            [MethodImpl(Inline)]
-            public ToolPaths Update(FS.FolderPath root)
-                => new ToolPaths(root);
-
-            FS.FolderPath LlvmSrcDir => Root + FS.folder("llvm");
-
-            FS.FolderPath BuildRootDir => Root + FS.folder("build");
-
-            FS.FolderPath LlvmTestSrcDir => LlvmSrcDir + FS.folder("test");
-
-            public SourcePaths Source => new SourcePaths(LlvmSrcDir);
-
-            public TestCasePaths Test => new TestCasePaths(LlvmTestSrcDir);
-
-            public BuildPaths Build => new BuildPaths(BuildRootDir);
-
-            public FS.FolderPath ClangSrcDir => Root + FS.folder("clang");
+            internal LlvmPaths(FS.FolderPath root)
+                => Root = root;
         }
     }
 }

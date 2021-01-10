@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Reflection.PortableExecutable;
 
-    using static Konst;
+    using static Part;
 
     [StructLayout(LayoutKind.Sequential), Record(TableId)]
     public struct ImageSectionHeader

@@ -5,17 +5,16 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
 
-    using static Konst;
-
-    public struct Accrue<I> : ILoopHost<Accrue<I>,I>
-        where I : unmanaged
+    public interface IDataStore  : IWfService
     {
-        I Total;
 
-        [MethodImpl(Inline)]
-        public void Step(I i)
-            => Total = gmath.add(Total,i);
     }
+
+    public interface IDataStore<T> : IWfService<T>
+        where T : IDataStore<T>, IWfService<T>, new()
+    {
+
+    }
+
 }

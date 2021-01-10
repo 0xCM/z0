@@ -7,20 +7,23 @@ namespace Z0.Tools
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
+
+
+    public interface ILlvmSourcePaths : IFileArchive
+    {
+        FS.FolderPath IncludeDir
+            => Root + FS.folder("include");
+    }
 
     partial struct Llvm
     {
-        public readonly struct SourcePaths
+        internal readonly struct SourcePaths : ILlvmSourcePaths
         {
             public FS.FolderPath Root {get;}
 
             public SourcePaths(FS.FolderPath root)
                 => Root = root;
-
-            [MethodImpl(Inline)]
-            public SourcePaths Update(FS.FolderPath root)
-                => new SourcePaths(root);
 
             public FS.FolderPath IncludeDir
                 => Root + FS.folder("include");

@@ -7,32 +7,32 @@ namespace Z0.Tools
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
+
+
+    public interface ILlvmTestCasePaths : IFileArchive
+    {
+        FS.FolderPath ModuleDir(string module)
+            => Root + FS.folder(module);
+
+        FS.FolderPath ModuleDir(string module, string subject)
+            => Root + FS.folder(module) + FS.folder(subject);
+
+        FS.Files ModuleCases(string module)
+            => ModuleDir(module).Files(true);
+
+        FS.Files ModuleCases(string module, string subject)
+            => ModuleDir(module, subject).Files(true);
+    }
 
     partial struct Llvm
     {
-        public readonly struct TestCasePaths
+        internal readonly struct TestCasePaths : ILlvmTestCasePaths
         {
             public FS.FolderPath Root {get;}
 
             public TestCasePaths(FS.FolderPath root)
                 => Root = root;
-
-            [MethodImpl(Inline)]
-            public TestCasePaths Update(FS.FolderPath root)
-                => new TestCasePaths(root);
-
-            public FS.FolderPath ModuleDir(string module)
-                => Root + FS.folder(module);
-
-            public FS.FolderPath ModuleDir(string module, string subject)
-                => Root + FS.folder(module) + FS.folder(subject);
-
-            public FS.Files ModuleCases(string module)
-                => ModuleDir(module).Files(true);
-
-            public FS.Files ModuleCases(string module, string subject)
-                => ModuleDir(module, subject).Files(true);
         }
     }
 }

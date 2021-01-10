@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="src">The source reference</param>
         [MethodImpl(Inline), Op]
         public static unsafe byte read8(in byte src)
-            => *(byte*)z.gptr(in src);
+            => *(byte*)memory.gptr(in src);
 
         /// <summary>
         /// Projects a source byte onto a byte reference
@@ -27,7 +27,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static unsafe ref byte store8(byte src, ref byte dst)
         {
-            *(z.gptr(dst)) = src;
+            *(memory.gptr(dst)) = src;
             return ref dst;
         }
 
@@ -45,6 +45,6 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static void write(BinaryCode src, ByteSize size, MemoryAddress dst)
-            => src.View.CopyTo(z.edit<byte>(dst, size));
+            => src.View.CopyTo(memory.edit(dst, size));
     }
 }

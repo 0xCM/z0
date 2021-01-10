@@ -16,29 +16,6 @@ namespace Z0
     using static z;
     using static Tools.Llvm;
 
-    public readonly struct PipeChecks
-    {
-        public static void check(IWfShell wf)
-        {
-            var flow = wf.Running();
-            var pipe = Pipes.pipe<ushort>();
-            var count = 10;
-            var input = wf.PolyStream.Span<ushort>(count);
-            for(var i=0; i<count; i++)
-                pipe.Deposit(skip(input,i));
-
-            var output = hashset<ushort>();
-            while(pipe.Next(out var dst))
-                output.Add(dst);
-
-            insist(output.Count, count);
-
-            for(var i=0; i<count; i++)
-                insist(output.Contains(skip(input,i)));
-
-            wf.Ran(flow, $"Ran {count} values through pipe");
-        }
-    }
 
     class App : IDisposable
     {
@@ -75,23 +52,16 @@ namespace Z0
             Args = wf.Args;
         }
 
-        public static void run(IWfShell wf, CmdLine cmd)
-        {
-            var process = Cmd.process(wf, cmd).Wait();
-            var output = process.Output;
-            wf.Status(output);
-        }
 
         static void Run32(IWfShell wf)
         {
             var llvm = Llvm.service(wf);
-            var paths = llvm.Paths();
-            var cases = paths.Test.ModuleDir(ModuleNames.Analysis, TestSubjects.AliasSet);
+            var cases = llvm.Paths.Test.ModuleDir(ModuleNames.Analysis, TestSubjects.AliasSet);
             var cmd = WinCmd.dir(cases);
             //run(wf, WinCmd.dir(FS.dir(paths.Test.Root)));
             //run(wf, new CmdLine("llvm-mc --help"));
 
-            run(wf,cmd);
+            ToolRunner.run(wf, cmd);
         }
 
         void ShowHandlers()
@@ -127,8 +97,6 @@ namespace Z0
             var output = process.Output;
             wf.Status(output);
         }
-
-
 
         static void ListFiles(IWfShell wf, FS.Files src, StreamWriter dst)
         {
@@ -215,12 +183,28 @@ namespace Z0
         CmdResult EmitFileList()
             => exec(EmitFileListCmdSample(Wf));
 
-        public void DispatchCommands()
+        public void RunPipes()
         {
             using var flow = Wf.Running();
             using var runner = new ToolRunner(Wf, Host);
             iter(Wf.Router.SupportedCommands.Storage, c => Wf.Status($"{c} enabled"));
-            PipeChecks.check(Wf);
+
+            var pipe = Pipes.pipe<ushort>();
+            var count = 10;
+            var input = Wf.PolyStream.Span<ushort>(count);
+            for(var i=0; i<count; i++)
+                pipe.Deposit(skip(input,i));
+
+            var output = root.hashset<ushort>();
+            while(pipe.Next(out var dst))
+                output.Add(dst);
+
+            z.insist(output.Count, count);
+
+            for(var i=0; i<count; i++)
+                z.insist(output.Contains(skip(input,i)));
+
+            Wf.Ran(flow, $"Ran {count} values through pipe");
         }
 
         CmdResult EmitAsmMnemonics()

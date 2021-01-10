@@ -5,9 +5,17 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
 
-    public class ServiceFactoryAttribute : Attribute
+    using static Part;
+
+    public struct Accrue<I> : ILoopHost<Accrue<I>,I>
+        where I : unmanaged
     {
+        I Total;
 
+        [MethodImpl(Inline)]
+        public void Step(I i)
+            => Total = gmath.add(Total,i);
     }
 }

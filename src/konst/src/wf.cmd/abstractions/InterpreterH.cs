@@ -9,10 +9,10 @@ namespace Z0
     using System.Collections.Concurrent;
     using System.Threading.Tasks;
 
-    using static Konst;
+    using static Part;
     using static z;
 
-    public abstract class Interpreter<H> : IWfService<H,IInterpreter>, IInterpreter,  IDisposable
+    public abstract class Interpreter<H> : IWfService<H,IInterpreter>, IInterpreter
         where H : Interpreter<H>, new()
     {
         public IWfShell Wf {get; private set;}

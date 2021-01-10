@@ -18,6 +18,14 @@ namespace Z0
     {
         internal readonly Vector128<ulong> Data;
 
+        /// <summary>
+        /// Reveals the character data identified by a string reference as a mutable span
+        /// </summary>
+        /// <param name="src">The source reference</param>
+        [MethodImpl(Inline), Op]
+        static unsafe Span<char> edit(in StringRef src)
+            => cover<char>(src.BaseAddress.Pointer<char>(), (uint)src.Length);
+
         [MethodImpl(Inline)]
         public StringRef(in MemorySegment src)
             => Data = vparts(N128.N, src.BaseAddress, (ulong)src.Length);

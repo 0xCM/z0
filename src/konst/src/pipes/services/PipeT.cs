@@ -27,6 +27,7 @@ namespace Z0
         public void Deposit(T src)
             => Buffer.Enqueue(src);
 
+        [MethodImpl(Inline)]
         public bool Next(out T dst)
         {
             if(Buffer.TryDequeue(out var src))

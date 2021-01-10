@@ -4,8 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public class ParserFactoryAttribute : ServiceFactoryAttribute
-    {
+    using System;
 
+    public interface IPipeRunner : IWfService
+    {
+        WfExecToken Flow<T>(ReadOnlySpan<T> src, Pipe<T> dst);
+
+        WfExecToken Flow<T>(Pipe<T> src, Pipe<T> dst);
     }
 }

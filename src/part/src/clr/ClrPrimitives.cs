@@ -6,6 +6,15 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using Microsoft.SymbolStore;
+    using Microsoft.SymbolStore.KeyGenerators;
+    using Microsoft.SymbolStore.SymbolStores;
+    using SOS;
+    using System.Threading;
+    using System.Threading.Tasks;
+    using System.IO;
+    using System.Collections.Generic;
+    using System.Linq;
 
     using static memory;
     using static Part;
@@ -15,16 +24,8 @@ namespace Z0
 
     partial class XTend
     {
-        public static TernaryBitLogicKind Next(this TernaryBitLogicKind src)
-            => src != TernaryBitLogicKind.XFF
-                ? (TernaryBitLogicKind)((uint)(src) + 1u)
-                : TernaryBitLogicKind.X00;
 
-        public static string Format(this TernaryBitLogicKind kind)
-            => kind.ToString();
 
-        public static string Format<T>(this TernaryBitLogicKind kind, T arg1, T arg2, T arg3)
-            => $"{kind.Format()}({arg1}, {arg2}, {arg3})";
     }
 
     [ApiHost(ApiNames.ClrPrimitives, true)]
