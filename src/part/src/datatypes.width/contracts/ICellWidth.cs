@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface ICellWidth : ITypeWidth, ITypedLiteral<CellWidth,uint>
+    public interface ICellWidth : ITypeWidth//, ITypedLiteral<CellWidth,uint>
     {
         /// <summary>
         /// Defines a class specifier synonym to facilitate disambiguation
@@ -12,14 +12,14 @@ namespace Z0
         CellWidth CellWidth
             => (CellWidth)BitWidth;
 
-        CellWidth ITypedLiteral<CellWidth>.Class
-            => CellWidth;
+        // CellWidth ITypedLiteral<CellWidth>.Class
+        //     => CellWidth;
 
-        uint ITypedLiteral<CellWidth,uint>.Value
-            => BitWidth;
+        // uint ITypedLiteral<CellWidth,uint>.Value
+        //     => BitWidth;
 
-        string ITypedLiteral<CellWidth>.Name
-            => CellWidth.FormatName();
+        // string ITypedLiteral<CellWidth>.Name
+        //     => CellWidth.FormatName();
     }
 
     public interface ICellWidth<W> : ICellWidth

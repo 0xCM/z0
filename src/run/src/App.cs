@@ -34,10 +34,7 @@ namespace Z0
             try
             {
                 using var wf = WfShell.create(WfShell.parts(Index<PartId>.Empty), args);
-
                 var app = new Runner(wf);
-
-
                 if(args.Length == 0)
                 {
                     wf.Status("usage: run <command> [options]");

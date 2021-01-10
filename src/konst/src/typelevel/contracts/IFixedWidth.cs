@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IFixedWidth<F> : ICellWidth, WType<F>, ITypedLiteral<F,CellWidth,uint>
+    public interface IFixedWidth<F> : ICellWidth, WType<F>
         where F : struct, IFixedWidth<F>
     {
         CellWidth ICellWidth.CellWidth

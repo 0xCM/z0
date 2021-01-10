@@ -10,7 +10,7 @@ namespace Z0
     using System.Reflection;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
+    using static Part;
 
     [ApiHost(ApiNames.VexReflex, true)]
     public readonly struct VexReflex
@@ -172,8 +172,8 @@ namespace Z0
         /// <param name="total">Whether all parameters and return type must be intrinsic</param>
         [Op]
         public static bool IsVectorized(MethodInfo src, int? width, bool total)
-            => total ? (VexKinds.test(src.ReturnType,width) && src.ParameterTypes().All(t => VexKinds.test(t,width)))
-                     : (VexKinds.test(src.ReturnType,width) || src.ParameterTypes().Any(t => VexKinds.test(t,width)));
+            => total ? (VKinds.test(src.ReturnType,width) && src.ParameterTypes().All(t => VKinds.test(t,width)))
+                     : (VKinds.test(src.ReturnType,width) || src.ParameterTypes().Any(t => VKinds.test(t,width)));
 
         /// <summary>
         /// Determines whether a method has intrinsic parameters or return type
@@ -181,7 +181,7 @@ namespace Z0
         /// <param name="src">The method to test</param>
         [Op]
         public static bool IsVectorized(MethodInfo src)
-            => src.ReturnType.IsVector() || src.ParameterTypes().Any(VexKinds.test);
+            => src.ReturnType.IsVector() || src.ParameterTypes().Any(VKinds.test);
 
         /// <summary>
         /// Determines whether a method has at least one 128-bit intrinsic vector parameter

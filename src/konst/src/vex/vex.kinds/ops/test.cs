@@ -13,7 +13,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class VexKinds
+    partial class VKinds
     {
         /// <summary>
         /// Determines whether a type is classified as an intrinsic vector

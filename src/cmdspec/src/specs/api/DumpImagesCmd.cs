@@ -9,7 +9,6 @@ namespace Z0
 
     using static Part;
 
-
     [Cmd(CmdName)]
     public struct DumpImagesCmd : ICmdSpec<DumpImagesCmd>
     {

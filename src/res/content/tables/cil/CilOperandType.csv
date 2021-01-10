@@ -1,4 +1,4 @@
-# CilPackingSize - https://docs.microsoft.com/en-us/dotnet/api/system.reflection.emit.packingsize?view=netcore-3.1
+# CilOperandType - https://docs.microsoft.com/en-us/dotnet/api/system.reflection.emit.operandtype?view=netcore-3.1
 ---------------------------------------------------------------------------------------------------------------------------------------------------
 | Identifier          | Value | Description                                                                                 |
 | InlineBrTarget      | 0     | The operand is a 32-bit integer branch target.                                              |

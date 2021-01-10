@@ -17,6 +17,6 @@ namespace Z0
         /// <param name="t">The type to examine</param>
         [MethodImpl(Inline), Op]
         public static int BitWidth(this VectorKind k)
-            => VexKinds.width(k);
+            => VKinds.width(k);
     }
 }

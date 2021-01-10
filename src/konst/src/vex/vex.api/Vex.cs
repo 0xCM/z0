@@ -19,6 +19,5 @@ namespace Z0
     public readonly partial struct vexg
     {
         const NumericKind Closure = UnsignedInts;
-
     }
 }

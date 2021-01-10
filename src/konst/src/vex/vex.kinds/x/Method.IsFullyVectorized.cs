@@ -16,7 +16,7 @@ namespace Z0
         /// <param name="src">The method to test</param>
         [Op]
         public static bool IsFullyVectorized(this MethodInfo src)
-            => VexKinds.test(src.ReturnType) && src.ParameterTypes().All(VexKinds.test);
+            => VKinds.test(src.ReturnType) && src.ParameterTypes().All(VKinds.test);
 
         /// <summary>
         /// Determines whether all parameters of a method are 128-bit intrinsic vectors

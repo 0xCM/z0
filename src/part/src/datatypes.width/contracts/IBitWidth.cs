@@ -12,6 +12,10 @@ namespace Z0
         uint BitWidth {get;}
     }
 
+    /// <summary>
+    /// Characterizes a structural type with an advertized bit-width
+    /// </summary>
+    /// <typeparam name="W">The defining type</typeparam>
     public interface IBitWidth<W> : IBitWidth
         where W : struct, IBitWidth<W>
     {
@@ -20,14 +24,6 @@ namespace Z0
 
     public interface IBitWidth<W,T> : IBitWidth<W>
         where W : struct, IBitWidth<W,T>
-        where T : unmanaged
-    {
-
-    }
-
-    public interface IBitWidth<W,K,T> : IBitWidth<W>
-        where W : struct, IBitWidth<W,K,T>
-        where K : unmanaged
         where T : unmanaged
     {
 

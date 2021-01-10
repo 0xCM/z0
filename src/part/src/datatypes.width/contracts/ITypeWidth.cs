@@ -4,24 +4,24 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface ITypeWidth : IDataWidth, ITypedLiteral<TypeWidth,uint>
+    public interface ITypeWidth : IDataWidth
     {
         /// <summary>
         /// Refines the specificity of the class specifier
         /// </summary>
         TypeWidth TypeWidth {get;}
 
-        TypeWidth ITypedLiteral<TypeWidth>.Class
-            => TypeWidth;
+        // TypeWidth ITypedLiteral<TypeWidth>.Class
+        //     => TypeWidth;
 
-        uint ITypedLiteral<TypeWidth,uint>.Value
-            => BitWidth;
+        // uint ITypedLiteral<TypeWidth,uint>.Value
+        //     => BitWidth;
 
-        string ITypedLiteral<TypeWidth>.Name
-            => TypeWidth.FormatName();
+        // string ITypedLiteral<TypeWidth>.Name
+        //     => TypeWidth.FormatName();
     }
 
-    public interface ITypeWidth<W> : ITypeWidth, IDataWidth<W>, ITypedLiteral<W,TypeWidth,uint>
+    public interface ITypeWidth<W> : ITypeWidth, IDataWidth<W>
         where W : struct, ITypeWidth<W>
     {
 

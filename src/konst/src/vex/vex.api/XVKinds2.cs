@@ -7,9 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
-    [ApiHost(ApiNames.VexKindX, true)]
+
+    [ApiHost]
     public static partial class XVexKinds
     {
         const NumericKind Closure = AllNumeric;

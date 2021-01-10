@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Runtime.InteropServices;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     [StructLayout(LayoutKind.Sequential, Size = 64), Vector(TypeWidth.W512)]

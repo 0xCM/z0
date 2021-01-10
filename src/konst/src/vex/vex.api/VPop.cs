@@ -13,7 +13,7 @@ namespace Z0
     using static BitMasks.Literals;
 
     [ApiHost(ApiNames.VexPop, true)]
-    public readonly struct VexPop
+    public readonly struct VPop
     {
         static Vector256<ulong> K1
         {

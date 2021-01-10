@@ -5,8 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.IO;
-    using System.Runtime.CompilerServices;
 
     class EmitImageHeaders : CmdReactor<EmitImageHeadersCmd, CmdResult>
     {

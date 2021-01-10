@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Runtime.InteropServices;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// 4x256 / 2x512
@@ -22,7 +22,7 @@ namespace Z0
         /// The lo 256 bit segment
         /// </summary>
         public readonly Vector256<T> A;
-        
+
         /// <summary>
         /// The second 256-bit segment
         /// </summary>
@@ -51,13 +51,13 @@ namespace Z0
         public static implicit operator Vector1024<T>(in (Vector256<T> a, Vector256<T> b, Vector256<T> c, Vector256<T> d) src)
             => new Vector1024<T>(src.a, src.b, src.c, src.d);
 
-         
+
         [MethodImpl(Inline)]
-        public static bool operator ==(in Vector1024<T> a, in Vector1024<T> b)        
+        public static bool operator ==(in Vector1024<T> a, in Vector1024<T> b)
             => a.Equals(b);
 
         [MethodImpl(Inline)]
-        public static bool operator !=(in Vector1024<T> a, in Vector1024<T> b)        
+        public static bool operator !=(in Vector1024<T> a, in Vector1024<T> b)
             => a.Equals(b);
 
         [MethodImpl(Inline)]
@@ -67,7 +67,7 @@ namespace Z0
             B = b;
             C = c;
             D = d;
-        }                
+        }
 
         [MethodImpl(Inline)]
         public Vector1024(Vector512<T> lo, Vector512<T> hi)
@@ -76,7 +76,7 @@ namespace Z0
             this.B = lo.Hi;
             this.C = hi.Lo;
             this.D = hi.Hi;
-        }                
+        }
 
         public T this[int i]
         {
@@ -125,10 +125,10 @@ namespace Z0
         public bool Equals(in Vector1024<T> rhs)
             => A.Equals(rhs.A) && B.Equals(rhs.B);
 
-                    
+
         public override int GetHashCode()
             => HashCode.Combine(A,B);
-        
+
         public override bool Equals(object obj)
             => obj is Vector1024<T> x && Equals(x);
     }

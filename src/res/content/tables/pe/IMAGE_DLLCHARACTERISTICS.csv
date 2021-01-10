@@ -1,8 +1,8 @@
-| Constant                                        | Value  | Description                                                                                 |
-|                                                 | 0x0001 | Reserved, must be zero.                                                                     |
-|                                                 | 0x0002 | Reserved, must be zero.                                                                     |
-|                                                 | 0x0004 | Reserved, must be zero.                                                                     |
-|                                                 | 0x0008 | Reserved, must be zero.                                                                     |
+| Name                                            | Value  | Description                                                                                 |
+| IMAGE_DLLCHARACTERISTICS_RESERVED_0             | 0x0001 | Reserved, must be zero.                                                                     |
+| IMAGE_DLLCHARACTERISTICS_RESERVED_1             | 0x0002 | Reserved, must be zero.                                                                     |
+| IMAGE_DLLCHARACTERISTICS_RESERVED_2             | 0x0004 | Reserved, must be zero.                                                                     |
+| IMAGE_DLLCHARACTERISTICS_RESERVED_3             | 0x0008 | Reserved, must be zero.                                                                     |
 | IMAGE_DLLCHARACTERISTICS_HIGH_ENTROPY_VA        | 0x0020 | Image can handle a high entropy 64-bit virtual address space.                               |
 | IMAGE_DLLCHARACTERISTICS_ DYNAMIC_BASE          | 0x0040 | DLL can be relocated at load time.                                                          |
 | IMAGE_DLLCHARACTERISTICS_ FORCE_INTEGRITY       | 0x0080 | Code Integrity checks are enforced.                                                         |

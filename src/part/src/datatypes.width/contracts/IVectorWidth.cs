@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IVectorWidth : ICellWidth, ITypedLiteral<VectorWidth,uint>
+    public interface IVectorWidth : ICellWidth
     {
         /// <summary>
         /// Defines a class specifier for use as a discriminator
@@ -12,13 +12,13 @@ namespace Z0
         VectorWidth VectorWidth
             => (VectorWidth)BitWidth;
 
-        VectorWidth ITypedLiteral<VectorWidth>.Class
-            => VectorWidth;
+        // VectorWidth ITypedLiteral<VectorWidth>.Class
+        //     => VectorWidth;
 
-        uint ITypedLiteral<VectorWidth,uint>.Value
-            => BitWidth;
+        // uint ITypedLiteral<VectorWidth,uint>.Value
+        //     => BitWidth;
 
-        string ITypedLiteral<VectorWidth>.Name
-            => VectorWidth.FormatName();
+        // string ITypedLiteral<VectorWidth>.Name
+        //     => VectorWidth.FormatName();
     }
 }

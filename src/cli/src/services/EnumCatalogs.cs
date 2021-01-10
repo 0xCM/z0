@@ -9,13 +9,12 @@ namespace Z0
     using System.Reflection;
 
     using static z;
-    using static EnumLiteralRow;
 
     [ApiHost(ApiNames.EnumCatalogs, true)]
     public readonly struct EnumCatalogs
     {
         [Op]
-        public static ReadOnlySpan<EnumLiteralRow> enums(string part, Type src)
+        public static ReadOnlySpan<EnumLiteralRow> enums(ClrAssemblyName part, Type src)
         {
             var fields = span(src.LiteralFields());
             var dst = span<EnumLiteralRow>(fields.Length);
@@ -25,15 +24,23 @@ namespace Z0
         }
 
         [Op]
-        public static void fill(string part, Type type, ClrEnumCode ecode, ReadOnlySpan<FieldInfo> fields, Span<EnumLiteralRow> dst)
+        static void fill(ClrAssemblyName part, Type type, ClrEnumCode ecode, ReadOnlySpan<FieldInfo> fields, Span<EnumLiteralRow> dst)
         {
             var count = fields.Length;
-            var address = type.TypeHandle.Value;
+            var typeAddress = type.TypeHandle.Value;
+            var asmName = part.SimpleName;
             for(var i=0u; i<count; i++)
             {
                 ref readonly var f = ref skip(fields,i);
-                var nameAddress = z.address(f.Name);
-                seek(dst,i) = new EnumLiteralRow(part, type, address, (ushort)i, f.Name, nameAddress, (ClrEnumKind)ecode, Enums.unbox(ecode, f.GetRawConstantValue()));
+                ref var row = ref seek(dst,i);
+                row.Component = asmName;
+                row.Type = type.Name;
+                row.DataType = ecode;
+                row.LiteraIndex = (ushort)i;
+                row.LiteralName = f.Name;
+                row.ScalarValue = Enums.unbox(ecode, f.GetRawConstantValue());
+                row.NameAddress = memory.address(f.Name);
+                row.TypeAddress = typeAddress;
             }
         }
 
@@ -67,37 +74,22 @@ namespace Z0
             return dst;
         }
 
-        [Op]
-        public static void format(in EnumLiteralRow src, TableFormatter<Fields> dst, bool eol = true)
+        public static WfExecToken emit(IWfShell wf, FS.FilePath target)
         {
-            dst.Delimit(Fields.Component, src.Component);
-            dst.Delimit(Fields.TypeId, src.TypeId);
-            dst.Delimit(Fields.TypeAddress, src.TypeAddress);
-            dst.Delimit(Fields.NameAddress, src.NameAddress);
-            dst.Delimit(Fields.TypeName, src.TypeName);
-            dst.Delimit(Fields.DataType, src.DataType);
-            dst.Delimit(Fields.Index, src.Index);
-            dst.Delimit(Fields.ScalarValue, src.ScalarValue);
-            dst.Delimit(Fields.Name, src.Name);
-            if(eol)
-                dst.EmitEol();
-        }
-
-        public static void emit(IWfShell wf, PartId[] selection)
-        {
-            var parts = ApiQuery.enums(wf.Api, selection);
-            var target = wf.Db().IndexTable(EnumLiteralRow.TableId);
+            var flow = wf.EmittingTable<EnumLiteralRow>(target);
+            var typesIndex = Clr.enums(wf.Components);
+            var partCount = typesIndex.Length;
             var dst = list<EnumLiteralRow>();
-            for(var i=0; i<parts.Length; i++)
+            for(var i=0; i<partCount; i++)
             {
-                var x = parts[i];
-                for(var j=0u; j<x.Length; j++)
+                var types = typesIndex[i];
+                for(var j=0u; j<types.Length; j++)
                 {
-                    var y = x[j];
-                    (var part, var type) = y;
-                    var component = part.Format();
-                    var records = enums(component,type);
-                    for(var k = 0; k<records.Length; k++)
+                    var kv = types[j];
+                    (var asm, var type) = kv;
+                    var records = enums(asm, type);
+                    var kEnums = records.Length;
+                    for(var k=0; k<kEnums; k++)
                         dst.Add(records[k]);
                 }
             }
@@ -106,20 +98,20 @@ namespace Z0
             var rc = rows.Length;
             Array.Sort(rows);
 
-            var formatter = Table.formatter<Fields>();
-            formatter.EmitHeader();
+            using var writer = target.Writer();
+            var formatter = Records.formatter<EnumLiteralRow>(16);
+            writer.WriteLine(formatter.FormatHeader());
 
             for(var i=0; i<rc; i++)
-                format(rows[i], formatter);
+                writer.WriteLine(formatter.Format(rows[i]));
 
-            using var writer = target.Writer();
-            writer.Write(formatter.Format());
-
-            wf.EmittedTable(typeof(EnumLiteralRow), rows.Length, target);
+            return wf.EmittedTable<EnumLiteralRow>(flow, rows.Length, target);
         }
 
-        [Op]
         public static void emit(IWfShell wf)
-            => emit(wf, wf.Api.PartIdentities);
+        {
+            var target = wf.Db().IndexTable(EnumLiteralRow.TableId);
+            emit(wf, target);
+        }
     }
 }

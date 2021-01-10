@@ -74,6 +74,11 @@ namespace Z0
                     Run(Builder.DumpImages(srcDir, dstDir));
 
                 break;
+
+                case EmitEnumCatalogCmd.CmdName:
+                    Run(Builder.EmitEnumCatalog());
+                    break;
+
                 case CheckServiceCmd.CmdName:
                     Run(Builder.CheckService(a0));
                     break;
@@ -104,7 +109,6 @@ namespace Z0
                 default:
                     Wf.Error(string.Format("Processor for {0} not found", name));
                     break;
-
             }
         }
 
@@ -146,6 +150,11 @@ namespace Z0
         }
 
         void Run(in EmitRuntimeIndexCmd cmd)
+        {
+            cmd.Dispatch(Wf).Wait();
+        }
+
+        void Run(in EmitEnumCatalogCmd cmd)
         {
             cmd.Dispatch(Wf).Wait();
         }

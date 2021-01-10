@@ -17,11 +17,14 @@ namespace Z0
 
         readonly IAsmContext Asm;
 
+        readonly CmdBuilder Commands;
+
         internal Machine(IWfShell wf, IAsmContext asm)
         {
             Host = WfShell.host(typeof(Machine));
             Wf = wf.WithHost(Host);
             Asm = asm;
+            Commands = Wf.CmdBuilder();
             Wf.Created();
         }
 
@@ -59,7 +62,8 @@ namespace Z0
                 EmitLocatedParts.create().Run(Wf);
                 EmitImageBlobs.create().Run(Wf);
 
-                EmitEnumCatalog.create().Run(Wf);
+                Commands.EmitEnumCatalog().Run(Wf);
+
                 EmitFieldLiterals.create().Run(Wf);
                 EmitBitMasks.create().Run(Wf);
 

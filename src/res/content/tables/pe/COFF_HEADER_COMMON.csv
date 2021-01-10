@@ -1,5 +1,3 @@
-# COFF File Header (Object and Image) - https://docs.microsoft.com/en-us/windows/win32/debug/pe-format
----------------------------------------------------------------------------------------------------------------------------------------------
 | Offset | Size | Field                | Description                                                                                                                                                                                                                       |
 | 0      | 2    | Machine              | The number that identifies the type of target machine. For more information, see Machine Types .                                                                                                                                  |
 | 2      | 2    | NumberOfSections     | The number of sections. This indicates the size of the section table, which immediately follows the headers.                                                                                                                      |

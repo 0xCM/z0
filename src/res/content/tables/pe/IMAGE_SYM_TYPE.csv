@@ -1,4 +1,4 @@
-| Constant              | Value | Description                                                                |
+| Name                  | Value | Description                                                                |
 | IMAGE_SYM_TYPE_NULL   | 0     | No type information or unknown base type. Microsoft tools use this setting |
 | IMAGE_SYM_TYPE_VOID   | 1     | No valid type; used with void pointers and functions                       |
 | IMAGE_SYM_TYPE_CHAR   | 2     | A character (signed byte)                                                  |

@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
 
-    using Z0.Asm;
-
     using static z;
 
     public sealed class CheckService : CmdReactor<CheckServiceCmd>

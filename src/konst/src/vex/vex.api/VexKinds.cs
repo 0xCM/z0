@@ -8,10 +8,10 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Linq;
 
-    using static Konst;
+    using static Part;
 
-    [ApiHost(ApiNames.VexKinds, true)]
-    public partial class VexKinds
+    [ApiHost]
+    public partial class VKinds
     {
         const NumericKind Closure = AllNumeric;
 

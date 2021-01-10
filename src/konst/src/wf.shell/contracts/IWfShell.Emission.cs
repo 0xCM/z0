@@ -23,25 +23,23 @@ namespace Z0
             return Flow();
         }
 
-        WfExecFlow EmittedTable<T>(WfStepId step, Count count, FS.FilePath dst)
+        void EmittedTable<T>(WfStepId step, Count count, FS.FilePath dst)
             where T : struct
         {
             signal(this).EmittedTable<T>(step, count, dst);
-            return Flow();
         }
 
-        void EmittedTable<T>(WfExecFlow flow, Count count, FS.FilePath dst)
+        WfExecToken EmittedTable<T>(WfExecFlow flow, Count count, FS.FilePath dst)
             where T : struct
         {
             signal(this).EmittedTable<T>(count, dst);
-            Ran(flow);
+            return Ran(flow);
         }
 
         void EmittedTable<T>(Count count, FS.FilePath dst)
             where T : struct
         {
             signal(this).EmittedTable<T>(count, dst);
-
         }
 
         void EmittedTable(Type type, Count count, FS.FilePath dst)
@@ -68,7 +66,10 @@ namespace Z0
         }
 
         void EmittedFile<T>(T source, Count count, FS.FilePath dst)
-            => Raise(emittedFile(Host, source, count, dst, Ct));
+        {
+            signal(this).EmittedFile(source, count, dst);
+
+        }
 
         WfExecToken EmittedFile<T>(WfExecFlow flow, T source, FS.FilePath dst)
         {
@@ -77,10 +78,14 @@ namespace Z0
         }
 
         void EmittedFile(Count count, FS.FilePath dst)
-            => Raise(emittedFile(Host, dst, count, Ct));
+        {
+            signal(this).EmittedFile(count, dst);
+        }
 
         void EmittedFile(FS.FilePath dst)
-            => signal(this).EmittedFile(dst);
+        {
+            signal(this).EmittedFile(dst);
+        }
 
 
         WfExecToken EmittedFile(WfExecFlow flow, Count count, FS.FilePath dst)

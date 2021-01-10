@@ -1,4 +1,4 @@
-| Constant                 | Value  | Description                                                                                                                                       |
+| Name                     | Value  | Description                                                                                                                                       |
 | IMAGE_REL_AMD64_ABSOLUTE | 0x0000 | The relocation is ignored.                                                                                                                        |
 | IMAGE_REL_AMD64_ADDR64   | 0x0001 | The 64-bit VA of the relocation target.                                                                                                           |
 | IMAGE_REL_AMD64_ADDR32   | 0x0002 | The 32-bit VA of the relocation target.                                                                                                           |

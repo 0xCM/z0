@@ -1,0 +1,3 @@
+| Offset | Size     | Field          | Description                                                |
+| 0      | 2        | Length         | The size of the string, not including length field itself. |
+| 2      | variable | Unicode String | The variable-length Unicode string data, word-aligned.     |

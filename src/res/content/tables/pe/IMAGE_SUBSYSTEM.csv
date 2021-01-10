@@ -1,4 +1,4 @@
-| Constant                                 | Value | Description                                          |
+| Name                                 | Value | Description                                          |
 | IMAGE_SUBSYSTEM_UNKNOWN                  | 0     | An unknown subsystem                                 |
 | IMAGE_SUBSYSTEM_NATIVE                   | 1     | Device drivers and native Windows processes          |
 | IMAGE_SUBSYSTEM_WINDOWS_GUI              | 2     | The Windows graphical user interface (GUI) subsystem |
