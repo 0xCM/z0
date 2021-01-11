@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static z;
     using static Buffers;
 
@@ -67,15 +67,15 @@ namespace Z0
                 => write(L.xor(read(w64,a), L.not(read(w64,b))), ref dst);
 
             [MethodImpl(Inline), TestZ]
-            public static Bit32 testz(in byte a, in byte b)
+            public static bit testz(in byte a, in byte b)
                 => BitLogic.testz(read(w64,a), read(w64,b));
 
             [MethodImpl(Inline), TestC]
-            public static Bit32 testc(in byte a, in byte b)
+            public static bit testc(in byte a, in byte b)
                 => BitLogic.testc(read(w64,a), read(w64,b));
 
             [MethodImpl(Inline), TestC]
-            public static Bit32 testc(in byte a)
+            public static bit testc(in byte a)
                 => BitLogic.testc(read(w64,a));
 
             [MethodImpl(Inline), Select]

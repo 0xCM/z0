@@ -10,7 +10,6 @@ namespace Z0
     using static Konst;
 
     using N = N4;
-    using W = W32;
     using A = asci4;
     using S = System.UInt32;
 

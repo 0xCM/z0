@@ -13,14 +13,16 @@ namespace Windows
     public struct MINIDUMP_HEADER
     {
         /// <summary>
-        /// The first four bytes of the file which should correspond to the value <see cref='MINIDUMP_CONSTANTS.Signature'/?
+        /// Identifying leading bytes
         /// </summary>
-        public uint Signature;
+        public MINIDUMP_SIGNATURE Signature;
+
+        ushort _PrivateVersion;
 
         /// <summary>
         /// The version of the minidump format. The low-order word is <see cref='MINIDUMP_VERSION'/>. The high-order word is an internal value that is implementation specific.
         /// </summary>
-        public uint Version;
+        public MINIDUMP_VERSION Version;
 
         /// <summary>
         /// The number of streams in the minidump directory.

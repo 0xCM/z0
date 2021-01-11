@@ -35,7 +35,7 @@ namespace Z0
         /// </summary>
         /// <param name="widths">The column widths</param>
         /// <typeparam name="T">The record type</typeparam>
-        public static IRecordFormatter<T> formatter<T>(byte fieldwidth)
+        public static IRecordFormatter<T> formatter<T>(byte fieldwidth = 24)
             where T : struct, IRecord<T>
                 => formatter<T>(rowspec<T>(fieldwidth));
 

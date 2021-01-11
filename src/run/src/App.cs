@@ -64,12 +64,17 @@ namespace Z0
             var src = FS.path(@"K:\dumps\capture.dmp");
             if(src.Exists)
             {
-                using var file = MemoryFiles.map(src);
-                Wf.Status($"Mapped file {file.Path} to process memory based at {file.BaseAddress}");
-                ref readonly var header = ref file.One<W.MINIDUMP_HEADER>(0);
-                asci4 sig = header.Signature;
-                Wf.Row(string.Format("Sig:{0}, Version:{1}, NumerOfStreams:{2}, Flags:{3}",
-                    sig, header.Version & ushort.MaxValue, header.NumberOfStreams, header.Flags));
+                var formatter = Records.formatter<Minidump.FileHeader>();
+                using var md = Minidump.open(Wf, src);
+                var header = formatter.Format(md.Header, RecordFormatKind.KeyValuePairs);
+                Wf.Row(header);
+
+                // using var file = MemoryFiles.map(src);
+                // Wf.Status($"Mapped file {file.Path} to process memory based at {file.BaseAddress}");
+                // ref readonly var header = ref file.One<W.MINIDUMP_HEADER>(0);
+                // asci4 sig = header.Signature;
+                // Wf.Row(string.Format("Sig:{0}, Version:{1}, NumerOfStreams:{2}, Flags:{3}",
+                //     sig, header.Version & ushort.MaxValue, header.NumberOfStreams, header.Flags));
             }
         }
     }

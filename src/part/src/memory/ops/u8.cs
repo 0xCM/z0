@@ -20,12 +20,12 @@ namespace Z0
             => ref memory.@as<bit,byte>(src);
 
         /// <summary>
-        /// Converts a <see cref='bool'/> to a <see cref='byte'/>
+        /// Presents a <see cref='bool'/> to a <see cref='byte'/>
         /// </summary>
-        /// <param name="on">The source state</param>
+        /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static unsafe byte u8(bool on)
-            => *((byte*)(&on));
+        public static unsafe byte u8(bool src)
+            => *((byte*)(&src));
 
         /// <summary>
         /// Presents a T-references as a <see cref='byte'/> reference

@@ -170,7 +170,7 @@ namespace Windows
         /// <summary>
         ///
         /// </summary>
-        MiniDumpWithPrivateWriteCopyMemory     = 0x00010000,
+        MiniDumpWithPrivateWriteCopyMemory = 0x00010000,
 
         /// <summary>
         ///
@@ -200,17 +200,13 @@ namespace Windows
         /// <summary>
         ///
         /// </summary>
-        MiniDumpWithIptTrace  = 0x00400000,
+        MiniDumpWithIptTrace = 0x00400000,
 
         /// <summary>
         ///
         /// </summary>
         MiniDumpScanInaccessiblePartialPages = 0x00800000,
 
-        MiniDumpValidTypeFlags  = 0x00ffffff,
+        MiniDumpValidTypeFlags = 0x00ffffff,
     }
-
-    /*
-
-    */
 }

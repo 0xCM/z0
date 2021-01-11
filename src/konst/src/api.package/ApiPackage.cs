@@ -22,6 +22,8 @@ namespace Z0
 
         public TextBlock CilText;
 
-        public CodeBlock RuntimeCode;
+        public TextBlock Asm;
+
+        public CodeBlock HexCode;
     }
 }

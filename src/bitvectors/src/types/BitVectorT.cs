@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     /// <summary>
@@ -18,6 +18,115 @@ namespace Z0
         where T : unmanaged
     {
         internal T Data;
+
+        [MethodImpl(Inline)]
+        internal BitVector(T src)
+            => this.Data = src;
+
+        /// <summary>
+        /// Specifies the data over which the vector is defined
+        /// </summary>
+        public readonly T Scalar
+        {
+            [MethodImpl(Inline)]
+            get => Data;
+        }
+
+        /// <summary>
+        /// Extracts the lower bits
+        /// </summary>
+        public readonly T Lo
+        {
+            [MethodImpl(Inline)]
+            get => gbits.lo(Data);
+        }
+
+        /// <summary>
+        /// Extracts the upper bits
+        /// </summary>
+        public readonly T Hi
+        {
+            [MethodImpl(Inline)]
+            get => gbits.hi(Data);
+        }
+
+        /// <summary>
+        /// The number of bits represented by the vector
+        /// </summary>
+        public readonly int Width
+        {
+            [MethodImpl(Inline)]
+            get => (int)bitwidth<T>();
+        }
+
+        /// <summary>
+        /// Converts the encapsulated data to a bytespan
+        /// </summary>
+        public readonly Span<byte> Bytes
+        {
+            [MethodImpl(Inline)]
+            get => BitVector.bytes(Data);
+        }
+
+        /// <summary>
+        /// Specifies whether all bits are disabled
+        /// </summary>
+        public bit Empty
+        {
+            [MethodImpl(Inline)]
+            get => !gmath.nonz(Data);
+        }
+
+        /// <summary>
+        /// Specifies whether at least one bit is enabled
+        /// </summary>
+        public readonly bit NonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => gmath.nonz(Data);
+        }
+
+        /// <summary>
+        /// Reads/Manipulates a single bit
+        /// </summary>
+        public bit this[int index]
+        {
+            [MethodImpl(Inline)]
+            get => gbits.testbit(Data, (byte)index);
+
+            [MethodImpl(Inline)]
+            set => Data = gbits.setbit(Data, (byte)index, value);
+        }
+
+        /// <summary>
+        /// Extracts a contiguous sequence of bits defined by an inclusive range
+        /// </summary>
+        /// <param name="first">The first bit position</param>
+        /// <param name="last">The last bit position</param>
+        public BitVector<T> this[byte first, byte last]
+        {
+            [MethodImpl(Inline)]
+            get => BitVector.segment(this, first, last);
+        }
+
+        [MethodImpl(Inline)]
+        public readonly bool Equals(BitVector<T> y)
+            => gmath.eq(Data, y.Data);
+
+        public readonly override bool Equals(object obj)
+            => obj is BitVector<T> x && Equals(x);
+
+        public readonly override int GetHashCode()
+            => Data.GetHashCode();
+
+        public string Format(BitFormat config)
+            => BitVector.format(this,config);
+
+        public string Format()
+            => BitVector.format(this);
+
+        public override string ToString()
+            => Format();
 
         [MethodImpl(Inline)]
         public static implicit operator BitVector<T>(T src)
@@ -198,114 +307,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bit operator >=(BitVector<T> x, BitVector<T> y)
             => gmath.gteq(x.Data,y.Data);
-
-        [MethodImpl(Inline)]
-        internal BitVector(T src)
-            => this.Data = src;
-
-        /// <summary>
-        /// Specifies the data over which the vector is defined
-        /// </summary>
-        public readonly T Scalar
-        {
-            [MethodImpl(Inline)]
-            get => Data;
-        }
-
-        /// <summary>
-        /// Extracts the lower bits
-        /// </summary>
-        public readonly T Lo
-        {
-            [MethodImpl(Inline)]
-            get => gbits.lo(Data);
-        }
-
-        /// <summary>
-        /// Extracts the upper bits
-        /// </summary>
-        public readonly T Hi
-        {
-            [MethodImpl(Inline)]
-            get => gbits.hi(Data);
-        }
-
-        /// <summary>
-        /// The number of bits represented by the vector
-        /// </summary>
-        public readonly int Width
-        {
-            [MethodImpl(Inline)]
-            get => (int)bitwidth<T>();
-        }
-
-        /// <summary>
-        /// Converts the encapsulated data to a bytespan
-        /// </summary>
-        public readonly Span<byte> Bytes
-        {
-            [MethodImpl(Inline)]
-            get => BitVector.bytes(Data);
-        }
-
-        /// <summary>
-        /// Specifies whether all bits are disabled
-        /// </summary>
-        public bit Empty
-        {
-            [MethodImpl(Inline)]
-            get => !gmath.nonz(Data);
-        }
-
-        /// <summary>
-        /// Specifies whether at least one bit is enabled
-        /// </summary>
-        public readonly bit NonEmpty
-        {
-            [MethodImpl(Inline)]
-            get => gmath.nonz(Data);
-        }
-
-        /// <summary>
-        /// Reads/Manipulates a single bit
-        /// </summary>
-        public bit this[int index]
-        {
-            [MethodImpl(Inline)]
-            get => gbits.testbit(Data, (byte)index);
-
-            [MethodImpl(Inline)]
-            set => Data = gbits.setbit(Data, (byte)index, value);
-        }
-
-        /// <summary>
-        /// Extracts a contiguous sequence of bits defined by an inclusive range
-        /// </summary>
-        /// <param name="first">The first bit position</param>
-        /// <param name="last">The last bit position</param>
-        public BitVector<T> this[byte first, byte last]
-        {
-            [MethodImpl(Inline)]
-            get => BitVector.segment(this, first, last);
-        }
-
-        [MethodImpl(Inline)]
-        public readonly bool Equals(BitVector<T> y)
-            => gmath.eq(Data, y.Data);
-
-        public readonly override bool Equals(object obj)
-            => obj is BitVector<T> x && Equals(x);
-
-        public readonly override int GetHashCode()
-            => Data.GetHashCode();
-
-         public string Format(BitFormat config)
-            => BitVector.format(this,config);
-
-        public string Format()
-            => BitVector.format(this);
-
-        public override string ToString()
-            => Format();
    }
 }

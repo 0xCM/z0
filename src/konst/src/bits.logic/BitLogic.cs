@@ -15,15 +15,15 @@ namespace Z0
     public readonly partial struct BitLogic
     {
         [MethodImpl(Inline), TestZ]
-        public static bool testz(ulong a, ulong b)
+        public static bit testz(ulong a, ulong b)
             => TestZ(vbroadcast(w128, a), vbroadcast(w128,b));
 
         [MethodImpl(Inline), TestZ]
-        public static bool testc(ulong a, ulong b)
+        public static bit testc(ulong a, ulong b)
             => TestC(vbroadcast(w128, a), vbroadcast(w128,b));
 
         [MethodImpl(Inline), TestZ]
-        public static bool testc(ulong a)
+        public static bit testc(ulong a)
             => TestC(vbroadcast(w128, a), vones<ulong>(w128));
     }
 }

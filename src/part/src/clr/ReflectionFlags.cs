@@ -63,14 +63,30 @@ namespace Z0
         /// All of the knowable things
         /// </summary>
         public const BindingFlags BF_World = BF_NonPublicStatic | BF_NonPublicInstance | BF_PublicInstance | BF_PublicStatic;
-        
+
         /// <summary>
         ///  All members, declared or inherited
         /// </summary>
         public const BindingFlags BF_All = BF_Public | BF_Static | BF_NonPublic | BF_Instance;
 
+        /// <summary>
+        /// All declared members
+        /// </summary>
         public const BindingFlags BF_Declared = DeclaredOnly | BF_Public | BF_Static | BF_NonPublic | BF_Instance;
 
+        /// <summary>
+        /// Declared public static members
+        /// </summary>
+        public const BindingFlags BF_DeclaredPublic = DeclaredOnly | Public | Static | Instance;
+
+        /// <summary>
+        /// Declared public instance members
+        /// </summary>
+        public const BindingFlags BF_DeclaredPublicInstance = DeclaredOnly | Public | Instance;
+
+        /// <summary>
+        /// Declared static members, both public and non-public
+        /// </summary>
         public const BindingFlags BF_DeclaredStatic = DeclaredOnly | BF_Public | BF_NonPublic | BF_Static;
     }
 }

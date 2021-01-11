@@ -12,12 +12,12 @@ namespace Z0
     partial struct memory
     {
         /// <summary>
-        /// Converts a <see cref='bool'/> to a <see cref='ulong'/>
+        /// Presents a <see cref='bool'/> as a <see cref='ulong'/>
         /// </summary>
-        /// <param name="on">The source state</param>
+        /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static unsafe ulong u64(bool on)
-            => *((byte*)(&on));
+        public static unsafe ulong u64(bool src)
+            => *((byte*)(&src));
 
         /// <summary>
         /// Presents a T-references as a <see cref='ulong'/> reference

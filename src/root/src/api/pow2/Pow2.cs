@@ -45,6 +45,38 @@ namespace Z0
             return b && !a;
         }
 
+        [MethodImpl(Inline), Op]
+        public static byte log2(Pow2x1 src)
+            => (byte)BitOperations.Log2((uint)src);
+
+        [MethodImpl(Inline), Op]
+        public static byte log2(Pow2x2 src)
+            => (byte)BitOperations.Log2((uint)src);
+
+        [MethodImpl(Inline), Op]
+        public static byte log2(Pow2x3 src)
+            => (byte)BitOperations.Log2((uint)src);
+
+        [MethodImpl(Inline), Op]
+        public static byte log2(Pow2x4 src)
+            => (byte)BitOperations.Log2((uint)src);
+
+        [MethodImpl(Inline), Op]
+        public static byte log2(Pow2x8 src)
+            => (byte)BitOperations.Log2((uint)src);
+
+        [MethodImpl(Inline), Op]
+        public static byte log2(Pow2x16 src)
+            => (byte)BitOperations.Log2((uint)src);
+
+        [MethodImpl(Inline), Op]
+        public static byte log2(Pow2x32 src)
+            => (byte)BitOperations.Log2((uint)src);
+
+        [MethodImpl(Inline), Op]
+        public static byte log2(Pow2x64 src)
+            => (byte)BitOperations.Log2((uint)src);
+
         /// <summary>
         /// Computes floor(log(src,2))
         /// </summary>

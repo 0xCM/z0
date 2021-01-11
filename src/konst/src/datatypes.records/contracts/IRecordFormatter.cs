@@ -10,6 +10,8 @@ namespace Z0
     {
         string Format(IRecord src);
 
+        string Format(IRecord src, RecordFormatKind kind);
+
         Type RecordType {get;}
 
         TableId TableId {get;}
@@ -27,6 +29,8 @@ namespace Z0
     {
         string Format(in T src);
 
+        string Format(in T src, RecordFormatKind kind);
+
         TableId IRecordFormatter.TableId
             => default(T).TableId;
 
@@ -35,6 +39,9 @@ namespace Z0
 
         string IRecordFormatter.Format(IRecord src)
             => Format((T)src);
+
+        string IRecordFormatter.Format(IRecord src, RecordFormatKind kind)
+            => Format((T)src, kind);
 
         Type IRecordFormatter.RecordType
             => typeof(T);

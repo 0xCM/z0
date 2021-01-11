@@ -12,7 +12,7 @@ namespace Z0
     partial struct memory
     {
         /// <summary>
-        /// Presents an input source byte as a bit reference
+        /// Presents a <see cref='byte'/> reference as a <see cref='bit'/> reference
         /// </summary>
         /// <param name="src">The source byte</param>
         [MethodImpl(Inline), Op]

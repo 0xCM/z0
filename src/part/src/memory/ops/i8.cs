@@ -11,12 +11,16 @@ namespace Z0
 
     partial struct memory
     {
+        /// <summary>
+        /// Presents a <see cref='bool'/> as a <see cref='sbyte'/>
+        /// </summary>
+        /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static unsafe sbyte i8(bool on)
-            => *((sbyte*)(&on));
+        public static unsafe sbyte i8(bool src)
+            => *((sbyte*)(&src));
 
         /// <summary>
-        /// Presents a T-references as a <see cref='sbyte'/> reference
+        /// Presents a <typeparamref name='T'/> reference as an <see cref='sbyte'/> reference
         /// </summary>
         /// <param name="src">The source reference</param>
         /// <typeparam name="T">The source type</typeparam>

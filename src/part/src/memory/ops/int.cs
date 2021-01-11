@@ -12,7 +12,7 @@ namespace Z0
     partial struct memory
     {
         /// <summary>
-        /// Forcefully coerces a <see cref='bool'/> to a <see cref='int'/>
+        /// Presents a <see cref='bool'/> as a <see cref='int'/>
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
@@ -20,7 +20,7 @@ namespace Z0
             => (*((byte*)(&src)));
 
         /// <summary>
-        /// Forcefully coerces a <see cref='float'/> to a <see cref='int'/>
+        /// Presents a <see cref='float'/> value as an <see cref='int'/> value
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]

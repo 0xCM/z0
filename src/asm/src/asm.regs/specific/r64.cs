@@ -109,6 +109,9 @@ namespace Z0.Asm
             public K Kind => K.RBX;
         }
 
+        /// <summary>
+        /// Register source index
+        /// </summary>
         public struct rsi : IRegister<rsi,W64,ulong>
         {
             public ulong Data;
@@ -131,6 +134,9 @@ namespace Z0.Asm
 
         }
 
+        /// <summary>
+        /// Register destination index
+        /// </summary>
         public struct rdi : IRegister<rdi,W64,ulong>
         {
             public ulong Data;
@@ -158,6 +164,9 @@ namespace Z0.Asm
                 => new R64(src.Content, src.Kind);
         }
 
+        /// <summary>
+        /// Specifies the stack location and grows downwards
+        /// </summary>
         public struct rsp : IRegister<rsp,W64,ulong>
         {
             public ulong Data;
@@ -179,6 +188,9 @@ namespace Z0.Asm
                 => new R64(src.Content, src.Kind);
         }
 
+        /// <summary>
+        /// Specifies the register base pointer - the top of the stack
+        /// </summary>
         public struct rbp : IRegister<rbp,W64,ulong>
         {
             public ulong Data;

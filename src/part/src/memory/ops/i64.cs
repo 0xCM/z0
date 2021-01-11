@@ -11,9 +11,13 @@ namespace Z0
 
     partial struct memory
     {
+        /// <summary>
+        /// Presents a <see cref='bool'/> as a <see cref='long'/>
+        /// </summary>
+        /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static unsafe long i64(bool on)
-            => *((sbyte*)(&on));
+        public static unsafe long i64(bool src)
+            => *((sbyte*)(&src));
 
         /// <summary>
         /// Presents a T-references as a <see cref='long'/> reference

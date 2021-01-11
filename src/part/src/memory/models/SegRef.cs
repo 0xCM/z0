@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
 
     using static System.Runtime.InteropServices.MemoryMarshal;
     using static System.Runtime.CompilerServices.Unsafe;
@@ -18,26 +17,12 @@ namespace Z0
 
         public ByteSize Size {get;}
 
-        // [MethodImpl(Inline)]
-        // public unsafe SegRef(byte* src, ulong size)
-        // {
-        //     Address = src;
-        //     Size = size;
-        // }
-
         [MethodImpl(Inline)]
         public SegRef(MemoryAddress src, ByteSize size)
         {
             Address = src;
             Size = size;
         }
-
-        // [MethodImpl(Inline)]
-        // public SegRef(ulong location, ByteSize size)
-        // {
-        //     Address = location;
-        //     Size = size;
-        // }
 
         [MethodImpl(Inline)]
         public Span<T> As<T>()

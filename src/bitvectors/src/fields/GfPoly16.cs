@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Represents a base-2 polynomial of degree at most N = 15. The represented polynomial is of the form
@@ -15,11 +15,12 @@ namespace Z0
     /// </summary>
     public readonly struct GfPoly16
     {
-        readonly ushort data;
+        readonly ushort Data;
 
-        readonly byte degree;
-
-        public static readonly GfPoly16 Zero = default;
+        /// <summary>
+        /// The degree (N) of the polynomial
+        /// </summary>
+        public byte Degree {get;}
 
         public static GfPoly16 FromExponents(params byte[] exponents)
             => new GfPoly16(exponents);
@@ -28,30 +29,17 @@ namespace Z0
             => new GfPoly16(data);
 
         [MethodImpl(Inline)]
-        public static implicit operator ushort(GfPoly16 src)
-            => src.data;
-
-        [MethodImpl(Inline)]
-        public static implicit operator BitVector16(GfPoly16 src)
-            => src.ToBitVector();
-
-
-        [MethodImpl(Inline)]
-        public static implicit operator GfPoly<N9,ushort>(GfPoly16 src)
-            => src.ToNatPoly();
-
-        [MethodImpl(Inline)]
         public GfPoly16(params byte[] exponents)
         {
-            data = Gf.Poly<ushort>(exponents);
-            degree = exponents.Length != 0 ? exponents[0] : (byte)0;
+            Data = Gf.Poly<ushort>(exponents);
+            Degree = exponents.Length != 0 ? exponents[0] : (byte)0;
         }
 
         [MethodImpl(Inline)]
-        public GfPoly16(ushort data)
+        public GfPoly16(ushort src)
         {
-            this.data = data;
-            this.degree = (byte)(15 - Bits.nlz(data));
+            Data = src;
+            Degree = (byte)(15 - Bits.nlz(src));
         }
 
         /// <summary>
@@ -60,7 +48,7 @@ namespace Z0
         public Bit32 this[byte i]
         {
             [MethodImpl(Inline)]
-            get => gbits.testbit32(data,i);
+            get => gbits.testbit32(Data,i);
         }
 
         /// <summary>
@@ -69,17 +57,9 @@ namespace Z0
         public ushort Scalar
         {
             [MethodImpl(Inline)]
-            get => data;
+            get => Data;
         }
 
-        /// <summary>
-        /// The degree (N) of the polynomial
-        /// </summary>
-        public byte Degree
-        {
-            [MethodImpl(Inline)]
-            get => degree;
-        }
 
         /// <summary>
         /// Specifies whether the polynomial is the zero polynomial
@@ -87,7 +67,7 @@ namespace Z0
         public bool Nonzero
         {
             [MethodImpl(Inline)]
-            get => !gmath.nonz(data);
+            get => !gmath.nonz(Data);
         }
 
         /// <summary>
@@ -95,19 +75,34 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public BitVector16 ToBitVector()
-            => data;
+            => Data;
 
         /// <summary>
         /// Converts the polynomial to a representation with natural degree
         /// </summary>
         [MethodImpl(Inline)]
         public GfPoly<N9,ushort> ToNatPoly()
-            => new GfPoly<N9, ushort>(data);
+            => new GfPoly<N9, ushort>(Data);
 
         /// <summary>
         /// Formats the polynomial
         /// </summary>
         public string Format()
             => ToNatPoly().Format();
+
+        [MethodImpl(Inline)]
+        public static implicit operator ushort(GfPoly16 src)
+            => src.Data;
+
+        [MethodImpl(Inline)]
+        public static implicit operator BitVector16(GfPoly16 src)
+            => src.ToBitVector();
+
+        [MethodImpl(Inline)]
+        public static implicit operator GfPoly<N9,ushort>(GfPoly16 src)
+            => src.ToNatPoly();
+
+        public static GfPoly16 Zero => default;
+
     }
 }

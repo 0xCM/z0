@@ -18,7 +18,7 @@ namespace Z0
     public struct RowAdapter<T>
         where T : struct, IRecord<T>
     {
-        readonly RecordFields Fields;
+        public RecordFields Fields {get;}
 
         uint Index;
 
@@ -49,10 +49,16 @@ namespace Z0
             get => Row;
         }
 
-        public Count AdaptedCount
+        public Span<dynamic> Cells
         {
             [MethodImpl(Inline)]
-            get => Index;
+            get => Row.Cells;
+        }
+
+        public uint ColumnCount
+        {
+            [MethodImpl(Inline)]
+            get => Fields.Count;
         }
     }
 }

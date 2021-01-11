@@ -12,12 +12,12 @@ namespace Z0
     partial struct memory
     {
         /// <summary>
-        /// Converts a <see cref='bool'/> to a <see cref='uint'/>
+        /// Presents a <see cref='bool'/> as a <see cref='uint'/>
         /// </summary>
-        /// <param name="on">The source state</param>
+        /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static unsafe uint u32(bool on)
-            => *((byte*)(&on));
+        public static unsafe uint u32(bool src)
+            => *((byte*)(&src));
 
         /// <summary>
         /// Presents a parametric references as a <see cref='uint'/> reference

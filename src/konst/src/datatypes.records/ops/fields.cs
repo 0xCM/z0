@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     partial struct Records
@@ -29,7 +29,7 @@ namespace Z0
         [Op]
         public static RecordFields fields(Type src)
         {
-            var fields = src.DeclaredInstanceFields();
+            var fields = src.DeclaredPublicInstanceFields();
             var count = fields.Length;
             var dst = sys.alloc<RecordField>(count);
             map(fields,dst);

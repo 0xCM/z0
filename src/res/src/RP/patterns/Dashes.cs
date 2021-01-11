@@ -6,6 +6,7 @@ namespace Z0
 {
     partial struct RP
     {
+
         [RenderLiteral(Dash1, 1)]
         public const string Dash1 = "-";
 

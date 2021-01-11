@@ -13,7 +13,6 @@ namespace Z0
 
     partial struct memory
     {
-
         /// <summary>
         /// Presents a <see cref='char'/> reference as a <typeparamref name='T'/> reference
         /// </summary>

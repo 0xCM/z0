@@ -2,15 +2,20 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Windows
+namespace Z0
 {
+    using System;
     using System.Runtime.InteropServices;
 
-    public readonly struct MINIDUMP_CONSTANTS
+    public readonly partial struct DataBlocks
     {
-        public const uint Signature = (uint)'P' << 24 | (uint)'M' << 16 | (uint)'D' << 8 | (uint)'M';
+        [StructLayout(LayoutKind.Sequential)]
+        public struct Block04<T>
+            where T : unmanaged
+        {
+            Block02<T> Cell0;
 
-        public const ushort Version = 42899;
+            Block02<T> Cell1;
+        }
     }
-
 }

@@ -7,6 +7,17 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
+
+    public enum RecordFormatKind
+    {
+        None = 0,
+
+        Tablular = 1,
+
+        KeyValuePairs = 2
+
+    }
 
     public readonly struct RecordFormatter<T> : IRecordFormatter<T>
         where T : struct, IRecord<T>
@@ -29,6 +40,30 @@ namespace Z0
         public string Format(in T src)
             => Format(Adapter.Adapt(src).Adapted);
 
+        public string Format(in T src, RecordFormatKind kind)
+        {
+            if(kind == RecordFormatKind.Tablular)
+                return Format(src);
+            else
+                return FormatKeyedValues(src);
+        }
+
+        const string KVRP = "{0,-48}: {1}" + Eol;
+
+        string FormatKeyedValues(in T src)
+        {
+            const char RowSep = Chars.Comma;
+            const char ValSep = Chars.Eq;
+            var adapter = Adapter.Adapt(src);
+            var dst = Buffers.text();
+            var cells = adapter.Cells;
+            var count = cells.Length;
+            var fields = adapter.Fields.View;
+            for(var i=0; i<count; i++)
+                dst.AppendFormat(KVRP, skip(fields,i).Name, skip(cells,i));
+
+            return dst.Emit();
+        }
         public string FormatHeader()
             => FormatSpec.Header.Format();
     }

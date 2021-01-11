@@ -30,9 +30,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<ClrField> all(Type src)
             => Clr.fields(src);
-
-        [Op, Closures(Closure)]
-        public static ReadOnlySpan<ClrField> oftype<T>(Type src)
-            => Clr.fields<T>(src);
     }
 }

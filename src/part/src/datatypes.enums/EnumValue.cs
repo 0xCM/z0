@@ -10,8 +10,6 @@ namespace Z0
     using static Part;
     using static memory;
 
-    using NK = NumericKind;
-
     [ApiHost]
     public readonly struct EnumValue
     {
@@ -134,9 +132,9 @@ namespace Z0
         /// <param name="e">The enum value</param>
         /// <typeparam name="E">The enum type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static long e64i<E>(E eVal)
+        public static ref long e64i<E>(in E eVal)
             where E : unmanaged
-                => scalar<E,long>(eVal);
+                => ref scalar<E,long>(eVal);
 
         /// <summary>
         /// Interprets an enum value as an unsigned 64-bit integer
@@ -144,9 +142,9 @@ namespace Z0
         /// <param name="e">The enum value</param>
         /// <typeparam name="E">The enum type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ulong e64u<E>(E eVal)
+        public static ref ulong e64u<E>(in E eVal)
             where E : unmanaged
-                => scalar<E,ulong>(eVal);
+                => ref scalar<E,ulong>(eVal);
 
         /// <summary>
         /// Envisions a u8 value as a value of an enum of like primal kind

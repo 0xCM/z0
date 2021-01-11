@@ -102,9 +102,6 @@ namespace Z0
         public override int GetHashCode()
             => (int)Hash;
 
-        public static SegRef<T> Empty
-            => default;
-
         /// <summary>
         /// Dereferences the reference
         /// </summary>
@@ -128,5 +125,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool operator !=(SegRef<T> lhs, SegRef<T> rhs)
             => !lhs.Equals(rhs);
+
+        public static SegRef<T> Empty
+            => default;
     }
 }

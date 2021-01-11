@@ -102,8 +102,6 @@ public readonly struct ApiNames
     // ~~ Blocks
     // ~~ -----------------------------------------------------------------------------------------
 
-    public const string DataBlocks = blocks + dot + data;
-
     public const string CharBlocks = blocks + dot + chars;
 
     public const string SpanBlocks = blocks + dot + spans;
