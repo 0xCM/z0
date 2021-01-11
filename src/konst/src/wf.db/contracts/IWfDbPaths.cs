@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Reflection;
+
     using static DbNames;
 
     public interface IWfDbPaths : IFileArchive
@@ -143,25 +144,25 @@ namespace Z0
             => t.Tag<RecordAttribute>().MapValueOrElse(a => IndexTable(a.TableId), () => IndexTable(t.Name));
 
         FS.FolderPath ListRoot()
-            => Root + FS.folder(DbNames.lists);
+            => Root + FS.folder(lists);
 
         FS.FilePath List(string name, FS.FileExt ext)
             => ListRoot() + FS.file(name, ext);
 
         FS.FolderPath Notebooks()
-            => Root + FS.folder(DbNames.notebooks);
+            => Root + FS.folder(notebooks);
 
         FS.FolderPath CaptureRoot()
-            => Root + FS.folder(DbNames.capture);
+            => Root + FS.folder(capture);
 
         FS.FolderPath ImmRoot()
-            => CaptureRoot() + FS.folder(DbNames.asm_imm);
+            => CaptureRoot() + FS.folder(asm_imm);
 
         FS.FolderPath JobRoot()
-            => Root + FS.folder(DbNames.jobs);
+            => Root + FS.folder(jobs);
 
         FS.FolderPath IndexRoot()
-            => Root + FS.folder(DbNames.indices);
+            => TableRoot() + FS.folder(indices);
 
         FS.FilePath IndexFile(string id)
             => IndexRoot() + FS.file(id, Idx);
@@ -170,19 +171,16 @@ namespace Z0
             => IndexRoot().Files(Idx);
 
         FS.FolderPath JobQueue()
-            => JobRoot() + FS.folder(DbNames.queue);
+            => JobRoot() + FS.folder(queue);
 
         FS.FilePath JobPath(FS.FileName file)
             => JobQueue() + file;
-
-        FS.FolderPath StageRoot()
-            => Root + FS.folder(DbNames.stage);
 
         FS.FolderPath Notebook(string name)
             => Notebooks() + FS.folder(name);
 
         FS.FolderPath DocRoot()
-            => Root + FS.folder(DbNames.docs);
+            => Root + FS.folder(docs);
 
         FS.FilePath Doc(string name, FS.FileExt ext)
             => DocRoot() + FS.file(name, ext);
@@ -202,23 +200,23 @@ namespace Z0
         FS.FolderPath RefData<S>(S subject)
             => RefDataRoot() + SubjectFolder(subject);
 
-        FS.FolderPath StageRoot<S>(S subject)
-            => StageRoot() + SubjectFolder(subject);
-
         FS.FolderPath ToolDbRoot()
             => Root + FS.folder("tooldb");
 
         FS.FolderPath ToolExeRoot()
-            => Root + FS.folder(DbNames.tools);
+            => Root + FS.folder(tools);
+
+        FS.FolderPath BinaryRoot()
+            => Root + FS.folder(bin);
 
         FS.FolderPath ProcDumpRoot()
-            => FS.dir(@"k:\dumps");
+            => BinaryRoot() +  FS.folder(dumps);
 
         FS.FilePath ProcDumpPath(Name process)
             => ProcDumpRoot() + FS.file(process.Format(), Dmp);
 
         FS.FolderPath CapturedHexRoot()
-            => (CaptureRoot() + FS.folder(DbNames.hex));
+            => (CaptureRoot() + FS.folder(hex));
 
         FS.FilePath CapturedHexPath(FS.FileName name)
             => CapturedHexRoot() + name;
@@ -227,25 +225,25 @@ namespace Z0
             => ToolExeRoot() + FS.folder(id.Format());
 
         FS.FolderPath Output(ToolId id)
-            => Tools(id) + FS.folder(DbNames.output);
+            => Tools(id) + FS.folder(output);
 
         FS.FolderPath Output(ToolId tool, CmdId cmd)
-            => ToolExeRoot() + FS.folder(tool.Format()) + FS.folder(cmd.Format()) + FS.folder(DbNames.output);
+            => ToolExeRoot() + FS.folder(tool.Format()) + FS.folder(cmd.Format()) + FS.folder(output);
 
         FS.FolderPath CapturedExtractDir()
-            => CaptureRoot() + FS.folder(DbNames.extracts);
+            => CaptureRoot() + FS.folder(extracts);
 
         FS.Files CapturedExtractFiles()
             => CapturedExtractDir().AllFiles;
 
         FS.FolderPath ParsedExtractDir()
-            => CaptureRoot() + FS.folder(DbNames.parsed);
+            => CaptureRoot() + FS.folder(parsed);
 
         FS.FolderPath CapturedHexDir()
-            => CaptureRoot() + FS.folder(DbNames.hex);
+            => CaptureRoot() + FS.folder(hex);
 
         FS.FolderPath CapturedAsmDir()
-            => CaptureRoot() + FS.folder(DbNames.asm);
+            => CaptureRoot() + FS.folder(asm);
 
         FS.Files CapturedAsmFiles()
             => CapturedAsmDir().Files(Asm,true);
@@ -275,16 +273,16 @@ namespace Z0
             => CapturedHexDir() + ApiFileName(part, api, Hex);
 
         FS.FilePath CapturedHexFile(ApiHostUri host)
-            => CapturedHexFile(ApiIdentity.file(host, FileExtensions.Hex));
+            => CapturedHexFile(ApiIdentity.file(host, Hex));
 
         FS.FolderPath CapturedCilDir()
-            => CaptureRoot() + FS.folder(DbNames.cil);
+            => CaptureRoot() + FS.folder(cil);
 
         FS.FilePath CapturedCilDataFile(FS.FileName name)
             => CapturedCilDir() + name;
 
         FS.FilePath CapturedCilDataFile(ApiHostUri host)
-            => CapturedCilDataFile(ApiIdentity.file(host, FileExtensions.IlData));
+            => CapturedCilDataFile(ApiIdentity.file(host, IlData));
 
         FS.Files CapturedCilDataFiles()
             => CapturedCilDir().Files(Csv);
@@ -293,7 +291,7 @@ namespace Z0
             => CapturedCilDataFiles().Where(f => f.IsOwner(part));
 
         FS.FilePath CapturedExtractFile(ApiHostUri host)
-            => CapturedExtractFile(ApiIdentity.file(host, FileExtensions.XCsv));
+            => CapturedExtractFile(ApiIdentity.file(host, XCsv));
 
         FS.FilePath CapturedExtractFile(FS.FileName name)
             => CapturedExtractDir() + name;
@@ -305,7 +303,7 @@ namespace Z0
             => ParsedExtractDir() + name;
 
         FS.FilePath ParsedExtractFile(ApiHostUri host)
-            => ParsedExtractFile(ApiIdentity.file(host, FileExtensions.PCsv));
+            => ParsedExtractFile(ApiIdentity.file(host, PCsv));
 
         FS.Files ParsedExtractFiles()
             => ParsedExtractDir().AllFiles;

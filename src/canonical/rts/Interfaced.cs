@@ -7,24 +7,19 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     public readonly struct Interfaced : IChronic<Interfaced>, ICorrelated<Interfaced>, ITextual
     {
-        [MethodImpl(NotInline)]
-        public static CorrelationToken ct()
-            => correlate(address(nameof(Interfaced)));
-
         [MethodImpl(NotInline)]
         public static string format()
             => nameof(Interfaced);
 
         public Timestamp Ts
-            => now();
+            => root.now();
 
         public CorrelationToken Ct
-            => ct();
+            => CorrelationToken.Default;
 
         public string Format()
             => format();

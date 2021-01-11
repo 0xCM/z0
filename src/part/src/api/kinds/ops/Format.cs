@@ -18,7 +18,11 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static string Format(this PartId id)
-            => Part.format(id);
+            => Root.format(id);
+
+        [MethodImpl(Inline), Op]
+        public static string Format(this PartId id, byte pad)
+            => Root.format(id, pad);
 
         [MethodImpl(Inline), Op]
         public static bool IsDefined(this ApiClass src)

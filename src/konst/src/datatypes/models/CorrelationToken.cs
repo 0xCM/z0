@@ -12,12 +12,12 @@ namespace Z0
     /// <summary>
     /// Correlates a value with a key that uniquely identifies the value within some context
     /// </summary>
-    public readonly struct CorrelationToken : ITextual, IComparable<CorrelationToken>, IEquatable<CorrelationToken>
+    public readonly struct CorrelationToken : IDataTypeComparable<CorrelationToken>
     {
-        public readonly ulong Value;
+        PartId Value {get;}
 
         [MethodImpl(Inline)]
-        public CorrelationToken(ulong value)
+        public CorrelationToken(PartId value)
             => Value = value;
 
         public bool IsEmpty
@@ -33,29 +33,25 @@ namespace Z0
         [MethodImpl(Inline)]
         public int CompareTo(CorrelationToken other)
             => Value.CompareTo(other.Value);
+        public string Format()
+            => Value.Format(10);
 
         public override string ToString()
-            => Value.ToString();
+            => Format();
 
         public override int GetHashCode()
-            => (int)alg.hash.calc(Value);
+            => (int)Value;
 
         public override bool Equals(object src)
             => src is CorrelationToken t && Equals(t);
 
-        public string Format()
-            => Value.ToString();
-
-        public static CorrelationToken Empty
-            => default;
-
         [MethodImpl(Inline)]
-        public static implicit operator ulong(CorrelationToken src)
+        public static implicit operator PartId(CorrelationToken src)
             => src.Value;
 
         [MethodImpl(Inline)]
         public static implicit operator CorrelationToken(PartId src)
-            => new CorrelationToken((ulong)src);
+            => new CorrelationToken(src);
 
         [MethodImpl(Inline)]
         public static bool operator==(CorrelationToken a, CorrelationToken b)
@@ -64,5 +60,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool operator!=(CorrelationToken a, CorrelationToken b)
             => !a.Equals(b);
+
+        public static CorrelationToken Default
+            => new CorrelationToken(Clr.EntryAssembly.Part);
     }
 }

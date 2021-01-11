@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
@@ -17,7 +17,7 @@ namespace Z0
     {
         [MethodImpl(Inline), Op, Closures(UInt64k)]
         public static ErrorEvent<T> error<T>(string cmd, T content, [Caller] string caller = null, [File] string file= null, [Line] int? line = null)
-            => new ErrorEvent<T>(cmd, content, CorrelationToken.Empty, source(caller,file,line));
+            => new ErrorEvent<T>(cmd, content, CorrelationToken.Default, source(caller,file,line));
 
         [Op, Closures(UInt64k)]
         public static ErrorEvent<T> error<T>(WfStepId step, T content, CorrelationToken ct, [Caller] string caller  = null, [File] string file = null, [Line] int? line = null)
@@ -36,6 +36,6 @@ namespace Z0
 
         [Op]
         public static ErrorEvent<string> missing(CmdId cmd, [Caller] string caller = null, [File] string file= null, [Line] int? line = null)
-            => new ErrorEvent<string>(cmd, string.Format(HandlerNotFound, cmd), CorrelationToken.Empty, source(caller,file,line));
+            => new ErrorEvent<string>(cmd, string.Format(HandlerNotFound, cmd), CorrelationToken.Default, source(caller,file,line));
     }
 }

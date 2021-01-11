@@ -33,7 +33,7 @@ namespace Z0
         {
             DataType = typeof(T);
             DataKind = kind;
-            EventId = (text.format("{0}:{1}", DataKind, DataType.Name), CorrelationToken.Empty);
+            EventId = (text.format("{0}:{1}", DataKind, DataType.Name), CorrelationToken.Default);
             Content = data;
         }
 

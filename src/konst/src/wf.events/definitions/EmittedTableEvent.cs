@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System.Runtime.CompilerServices;
-    using System;
 
     using static Part;
 

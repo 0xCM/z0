@@ -6,13 +6,16 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
 
     using static Part;
 
-    partial struct z
+    partial struct Clr
     {
-        [MethodImpl(Inline), Op]
-        public static CorrelationToken correlate(PartId src)
-            => new CorrelationToken(src);
+        public static ClrAssembly EntryAssembly
+        {
+            [MethodImpl(Inline)]
+            get => Assembly.GetEntryAssembly();
+        }
     }
 }

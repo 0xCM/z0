@@ -87,6 +87,10 @@ namespace Z0
                 return dst + BaseSuffix;
         }
 
+        [Op]
+        public static string format(PartId src, byte pad)
+            => string.Format("{0,-" + pad.ToString() + "}", format(src));
+
         [MethodImpl(Inline), Op]
         public static string format(ExternId id)
             => id.ToString().ToLower();

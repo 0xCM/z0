@@ -22,17 +22,9 @@ namespace Z0
         public static string name(Assembly src)
             => Root.name(src);
 
-        [Op]
-        public static string format(PartId src)
-            => Root.format(src);
-
         [MethodImpl(Inline), Op]
         public static string format(ExternId src)
             => Root.format(src);
-
-        [MethodImpl(Inline), Op]
-        public static uint hash(PartId src)
-            => Root.hash(src);
 
         /// <summary>
         /// Retrieves the part identifier, if any, of a specified assembly
