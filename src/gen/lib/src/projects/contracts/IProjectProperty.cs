@@ -14,4 +14,23 @@ namespace Z0
     {
 
     }
+
+    public interface IBuildProperty : ITextual
+    {
+        Name Name {get;}
+
+        dynamic Value {get;}
+
+        string ITextual.Format()
+            => string.Format("<{0}>{1}</{0}>", Name, Value);
+    }
+
+    public interface IBuildProperty<T> : IBuildProperty
+    {
+        new T Value {get;}
+
+        dynamic IBuildProperty.Value
+            => Value;
+    }
+
 }

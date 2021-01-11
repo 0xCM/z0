@@ -17,7 +17,7 @@ namespace Z0
 
             const string DefaultFormat = OpenTagFence + TagName + Delimiter + nameof(Include) + AttribSetOpen + Arg0 + AttribSetClose;
 
-            public readonly string Include;
+            public string Include {get;}
 
             [MethodImpl(Inline)]
             public EmbeddedResourceSpec(string include)
@@ -25,19 +25,16 @@ namespace Z0
                 Include = include;
             }
 
-            [MethodImpl(Inline)]
-            public string Render()
-                => string.Format(DefaultFormat, Include);
+            public Name Name
+                => TagName;
 
             [MethodImpl(Inline)]
             public string Format()
-                => Render();
+                => string.Format(DefaultFormat, Include);
 
             public override string ToString()
-                => Render();
+                => Format();
 
-            string IProjectElement.Name
-                => TagName;
         }
     }
 }

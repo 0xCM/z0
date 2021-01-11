@@ -13,17 +13,16 @@ namespace Z0
     {
         public readonly struct Project
         {
-            public readonly Sdk Sdk;
+            public Sdk Sdk {get;}
 
-            public readonly string Name;
+            public Name Name {get;}
 
-            public readonly PropertyGroup[] PropertyGroups;
+            public Index<PropertyGroup> PropertyGroups {get;}
 
-            public readonly ItemGroup[] itemGroups;
-
+            public Index<ItemGroup> itemGroups {get;}
 
             [MethodImpl(Inline)]
-            public Project(string name, Sdk sdk, PropertyGroup[] properties, ItemGroup[] items)
+            public Project(Name name, Sdk sdk, Index<PropertyGroup> properties, Index<ItemGroup> items)
             {
                 Name = name;
                 Sdk = sdk;
@@ -31,7 +30,7 @@ namespace Z0
                 itemGroups = items;
             }
 
-            public string Render()
+            public string Format()
                 => EmptyString;
         }
     }

@@ -19,12 +19,15 @@ namespace Z0
             public ProjectItem(IProjectItem src)
                 => Definition = src;
 
-            string IProjectElement.Name
+            public Name Name
                 => Definition.Name;
 
             [MethodImpl(Inline)]
-            string IProjectElement.Render()
-                => Definition.Render();
+            public string Format()
+                => Definition.Format();
+
+            public override string ToString()
+                => Format();
         }
     }
 }

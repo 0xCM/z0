@@ -29,7 +29,7 @@ namespace Z0
             seek(items,2) = resource("index/**/*.csv");
             seek(items,3) = resource("metadata/**/*.csv");
 
-            var propBuffer = sys.alloc<ProjectProperty>(4);
+            var propBuffer = sys.alloc<Property>(4);
             var props = span(propBuffer);
             seek(props,0) = library();
             seek(props,1) = netcoreapp(n3);
@@ -43,7 +43,7 @@ namespace Z0
 
         [Op]
         public static void save(in Project src, string type, FS.FolderPath dst)
-            => (dst + filename(src,type)).Overwrite(src.Render());
+            => (dst + filename(src,type)).Overwrite(src.Format());
 
         [MethodImpl(Inline), Op]
         public static Sdk sdk(string name)
@@ -66,29 +66,29 @@ namespace Z0
             => project(name, sdk, properties(props), items(_items));
 
         [MethodImpl(Inline), Op]
-        public static ProjectProperty<OutputType> library()
+        public static OutputType library()
             => new OutputType(OutputTypes.Library);
 
         [MethodImpl(Inline), Op]
-        public static ProjectProperty<OutputType> exe()
+        public static OutputType exe()
             => new OutputType(OutputTypes.Exe);
 
         [MethodImpl(Inline), Op]
-        public static ProjectProperty<TargetFramework> netcoreapp(N3 major)
+        public static TargetFramework netcoreapp(N3 major)
             => TargetFrameworks.netcoreapp3_0;
 
         [MethodImpl(Inline), Op]
-        public static ProjectProperty<TargetFramework> netcoreapp(N3 major, N1 minor)
+        public static TargetFramework netcoreapp(N3 major, N1 minor)
             => TargetFrameworks.netcoreapp3_1;
 
         [MethodImpl(Inline), Op]
-        public static PropertyGroup properties(ProjectProperty[] src)
+        public static PropertyGroup properties(Property[] src)
             => new PropertyGroup(src);
 
         [MethodImpl(Inline), Op]
         public static PropertyGroup properties<T>(T[] src)
             where T : IProjectProperty
-                => new PropertyGroup(src.Map(x => new ProjectProperty(x)));
+                => new PropertyGroup(src.Map(x => new Property(x.Name, x.Value)));
 
         [MethodImpl(Inline), Op]
         public static ItemGroup items<T>(T[] src)
@@ -107,14 +107,6 @@ namespace Z0
         public static TargetFramework framework(string value)
             => new TargetFramework(value);
 
-        [MethodImpl(Inline), Op]
-        public static string render(in EmbeddedResourceSpec src)
-            => format(src);
-
-        [MethodImpl(Inline), Op]
-        public static string render(in TargetFramework src)
-            => format(src);
-
         [MethodImpl(Inline)]
         public static ProjectItem<T> item<T>(T src)
             where T : struct, IProjectItem<T>
@@ -128,7 +120,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static string format<T>(T src)
             where T : struct, IProjectElement<T>
-                => src.Render();
+                => src.Format();
 
         public static ref Solution parse(in SlnFile src, out Solution dst)
         {

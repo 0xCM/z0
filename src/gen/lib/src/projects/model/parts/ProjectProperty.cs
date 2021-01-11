@@ -19,11 +19,14 @@ namespace Z0
             public ProjectProperty(IProjectProperty src)
                 => Definition = src;
 
-            string IProjectElement.Name
-                => Definition.Name;
+            public Name Name
+            {
+                [MethodImpl(Inline)]
+                get => Definition.Name;
+            }
 
-            string IProjectElement.Render()
-                => Definition.Render();
+            public string Format()
+                => Definition.Format();
 
             string IProjectProperty.Value
                 => Definition.Value;

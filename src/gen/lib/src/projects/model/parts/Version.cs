@@ -13,7 +13,7 @@ namespace Z0
     {
         public readonly struct Version : ITextual
         {
-            public readonly uint Data;
+            public uint Data {get;}
 
             [MethodImpl(Inline)]
             public Version(byte a, byte b = 0, byte c = 0, byte d = 0)

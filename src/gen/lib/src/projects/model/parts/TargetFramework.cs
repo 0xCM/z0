@@ -11,25 +11,31 @@ namespace Z0
 
     partial struct ProjectModel
     {
-        public readonly struct TargetFramework : IProjectProperty<TargetFramework>
+        public readonly struct TargetFramework : IBuildProperty
         {
-            public readonly string Value;
-
             public const string TagName = nameof(TargetFramework);
 
+            public dynamic Value {get;}
+
+            public Name Name
+                => TagName;
+
             [MethodImpl(Inline)]
-            public TargetFramework(string value)
+            public TargetFramework(dynamic value)
                 => Value = value;
 
             [MethodImpl(Inline)]
-            public TargetFramework(string value, Version ver)
-                => Value = value + ver.Format();
+            public TargetFramework(dynamic value, Version ver)
+                => Value = value.ToString() + ver.Format();
 
-            string IProjectElement.Name
-                => TagName;
+            public string Format()
+                => format(this);
 
-            string IProjectProperty.Value
-                => Value;
+            public override string ToString()
+                => Format();
+
+            public static implicit operator Property(TargetFramework src)
+                =>  property(src.Name, src.Value);
         }
     }
 }

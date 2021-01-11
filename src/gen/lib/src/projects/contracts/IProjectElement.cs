@@ -7,11 +7,10 @@ namespace Z0
 
     using static Part;
 
-    public interface IProjectElement
+    public interface IProjectElement : ITextual
     {
-        string Name {get;}
+        Name Name {get;}
 
-        string Render() => EmptyString;
     }
 
     public interface IProjectElement<F> : IProjectElement

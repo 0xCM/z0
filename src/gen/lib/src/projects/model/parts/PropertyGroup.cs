@@ -15,10 +15,10 @@ namespace Z0
         {
             public const string TagName = nameof(PropertyGroup);
 
-            public readonly ProjectProperty[] Properties;
+            public Index<Property> Properties {get;}
 
             [MethodImpl(Inline)]
-            public PropertyGroup(ProjectProperty[] src)
+            public PropertyGroup(Index<Property> src)
                 => Properties = src;
         }
     }

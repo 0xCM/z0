@@ -11,51 +11,26 @@ namespace Z0
 
     partial struct ProjectModel
     {
-        public readonly struct OutputType : IProjectProperty<OutputType>
+        public readonly struct OutputType : IBuildProperty
         {
-            public readonly string Value;
+            public dynamic Value {get;}
 
             [MethodImpl(Inline)]
             public OutputType(string value)
                 => Value = value;
 
-            [MethodImpl(Inline)]
-            public string Render()
-                => string.Format(TagFormat, nameof(OutputType), Value);
-
-            [MethodImpl(Inline)]
-            public bool Equals(OutputType src)
-                => text.equals(Value, src.Value);
-
-            public uint Hash
-            {
-                [MethodImpl(Inline)]
-                get => (uint)Value.GetHashCode();
-            }
-
-            [Ignore]
-            string IProjectElement.Render()
-                => Render();
-
-            [Ignore]
-            public override int GetHashCode()
-                => (int)Hash;
-
-            [Ignore]
-            public override string ToString()
-                => Render();
-
-            [Ignore]
-            public override bool Equals(object src)
-                => src is OutputType x && Equals(x);
-
-            [Ignore]
-            string IProjectElement.Name
+            public Name Name
                 => nameof(OutputType);
 
-            [Ignore]
-            string IProjectProperty.Value
-                => Value;
+            public string Format()
+                => format(this);
+
+            public override string ToString()
+                => Format();
+
+            [MethodImpl(Inline)]
+            public static implicit operator Property(OutputType src)
+                => property(src.Name, src.Value);
         }
     }
 }

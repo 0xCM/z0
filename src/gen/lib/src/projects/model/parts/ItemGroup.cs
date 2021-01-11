@@ -15,7 +15,7 @@ namespace Z0
         {
             public const string TagName = nameof(ItemGroup);
 
-            public readonly ProjectItem[] Data;
+            public Index<ProjectItem> Data {get;}
 
             [MethodImpl(Inline)]
             public ItemGroup(ProjectItem[] src)

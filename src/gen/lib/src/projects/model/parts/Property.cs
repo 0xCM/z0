@@ -9,20 +9,52 @@ namespace Z0
 
     using static Part;
 
+
     partial struct ProjectModel
     {
-        public readonly struct Property
+        public readonly struct Property : IBuildProperty
         {
-            public string Name {get;}
+            public Name Name {get;}
 
-            public string Value {get;}
+            public dynamic Value {get;}
 
             [MethodImpl(Inline)]
-            public Property(string name, string value)
+            public Property(Name name, dynamic value)
             {
                 Name = name;
                 Value = value;
             }
+
+            public string Format()
+                => string.Format("<{0}>{1}</{0}>", Name, Value);
+
+            public override string ToString()
+                => Format();
+
+        }
+
+        public readonly struct Property<T> : ITextual
+        {
+            public Name Name {get;}
+
+            public T Value {get;}
+
+            [MethodImpl(Inline)]
+            public Property(Name name, T value)
+            {
+                Name = name;
+                Value = value;
+            }
+
+            public string Format()
+                => string.Format("<{0}>{1}</{0}>", Name, Value);
+
+            public override string ToString()
+                => Format();
+
+            [MethodImpl(Inline)]
+            public static implicit operator Property(Property<T> src)
+                => new Property(src.Name, src.Value);
         }
     }
 }

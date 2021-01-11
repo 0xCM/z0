@@ -16,7 +16,11 @@ namespace Z0
         {
             readonly T Definition;
 
-            public string Name
+            [MethodImpl(Inline)]
+            public ProjectProperty(T value)
+                => Definition = value;
+
+            public Name Name
             {
                 [MethodImpl(Inline)]
                 get => Definition.Name;
@@ -27,6 +31,12 @@ namespace Z0
                 [MethodImpl(Inline)]
                 get => Definition.Value;
             }
+
+            public string Format()
+                => string.Format("<{0}>{1}</{0}>", Name, Value);
+
+            public override string ToString()
+                => Format();
 
             [MethodImpl(Inline)]
             public static implicit operator ProjectProperty(ProjectProperty<T> src)
@@ -39,16 +49,6 @@ namespace Z0
             [MethodImpl(Inline)]
             public static implicit operator T(ProjectProperty<T> src)
                 => src.Definition;
-
-            [MethodImpl(Inline)]
-            public ProjectProperty(T value)
-                => Definition = value;
-
-            string IProjectElement.Name
-                => Name;
-
-            string IProjectProperty.Value
-                => Definition.Value;
         }
     }
 }

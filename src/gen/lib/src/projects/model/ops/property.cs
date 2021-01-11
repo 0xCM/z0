@@ -11,17 +11,8 @@ namespace Z0
 
     partial struct ProjectModel
     {
-        public readonly struct Sdk
-        {
-            public Name Name {get;}
-
-            const string TagName = nameof(Sdk);
-
-            [MethodImpl(Inline)]
-            public Sdk(Name name)
-            {
-                Name = name;
-            }
-        }
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static Property<T> property<T>(Name name, T value)
+            => new Property<T>(name, value);
     }
 }

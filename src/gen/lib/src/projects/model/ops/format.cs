@@ -11,17 +11,13 @@ namespace Z0
 
     partial struct ProjectModel
     {
-        public readonly struct Sdk
-        {
-            public Name Name {get;}
+        [Op]
+        public static string format(Property src)
+            => string.Format("<{0}>{1}</{0}>", src.Name, src.Value);
 
-            const string TagName = nameof(Sdk);
 
-            [MethodImpl(Inline)]
-            public Sdk(Name name)
-            {
-                Name = name;
-            }
-        }
+        [Op, Closures(UnsignedInts)]
+        public static string format<T>(Property<T> src)
+            => string.Format("<{0}>{1}</{0}>", src.Name, src.Value);
     }
 }
