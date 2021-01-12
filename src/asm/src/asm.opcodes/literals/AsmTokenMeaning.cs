@@ -3,61 +3,61 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
-    using static Konst;
+{
+    using static Part;
 
     [LiteralProvider]
     public readonly struct AsmTokenMeaning
     {
-        public const string None =          EmptyString;
+        public const string None = EmptyString;
 
-        public const string bnd =           "A 128-bit bounds register. BND0 through BND3";
+        public const string bnd = "A 128-bit bounds register. BND0 through BND3";
 
-        public const string DST =           "The destination in an instruction; this field is encoded by reg_field";
+        public const string DST = "The destination in an instruction; this field is encoded by reg_field";
 
-        public const string ᛁerᛁ =           "Indicates support for embedded rounding control, which is only applicable to the register-register form of the instruction. This also implies support for SAE (Suppress All Exceptions)";
+        public const string ᛁerᛁ = "Indicates support for embedded rounding control, which is only applicable to the register-register form of the instruction. This also implies support for SAE (Suppress All Exceptions)";
 
-        public const string imm8 =          "An immediate 8-bit value in the inclusive range [–128, 127]. For instructions in which imm8 is combined with a word or doubleword operand, the immediate value is sign-extended to form a word or doubleword. The upper byte of the word is filled with the topmost bit of the immediate value";
+        public const string imm8 = "An immediate 8-bit value in the inclusive range [–128, 127]. For instructions in which imm8 is combined with a word or doubleword operand, the immediate value is sign-extended to form a word or doubleword. The upper byte of the word is filled with the topmost bit of the immediate value";
 
-        public const string imm16 =         "An immediate value for a 16-bit operand in the inclusive range [–32_768, 32_767]";
+        public const string imm16 = "An immediate value for a 16-bit operand in the inclusive range [–32_768, 32_767]";
 
-        public const string imm32 =         "An immediate value for a 32-bit operand in the inclusive range [–2_147_483_648, 2_147_483_647]";
+        public const string imm32 = "An immediate value for a 32-bit operand in the inclusive range [–2_147_483_648, 2_147_483_647]";
 
-        public const string imm64 =         "An immediate value for a 64-bit operand in the inclusive range [–9_223_372_036_854_775_808, 9_223_372_036_854_775_807]";
+        public const string imm64 = "An immediate value for a 64-bit operand in the inclusive range [–9_223_372_036_854_775_808, 9_223_372_036_854_775_807]";
 
-        public const string k1 =            "A mask register used as a regular operand (either destination or source). The 64-bit k registers are: k0 through k7";
+        public const string k1 = "A mask register used as a regular operand (either destination or source). The 64-bit k registers are: k0 through k7";
 
-        public const string m =             "An operand in memory of width 16, 32 or 64 bits";
+        public const string m = "An operand in memory of width 16, 32 or 64 bits";
 
-        public const string m8 =            "A byte operand in memory ( usually expressed as a variable or array name) but pointed to by the DS:(E)SI or ES:(E)DI registers. In 64-bit mode, it is pointed to by the RSI or RDI registers";
+        public const string m8 = "A byte operand in memory ( usually expressed as a variable or array name) but pointed to by the DS:(E)SI or ES:(E)DI registers. In 64-bit mode, it is pointed to by the RSI or RDI registers";
 
-        public const string m16  =          "A word operand in memory (usually expressed as a variable or array name) but pointed to by the DS:(E)SI or ES:(E)DI registers. This nomenclature is used only with the string instructions";
+        public const string m16  = "A word operand in memory (usually expressed as a variable or array name) but pointed to by the DS:(E)SI or ES:(E)DI registers. This nomenclature is used only with the string instructions";
 
-        public const string m32  =          "A doubleword operand in memory (usually expressed as a variable or array name) but pointed to by the DS:(E)SI or ES:(E)DI registers. This nomenclature is used only with the string instructions";
+        public const string m32  = "A doubleword operand in memory (usually expressed as a variable or array name) but pointed to by the DS:(E)SI or ES:(E)DI registers. This nomenclature is used only with the string instructions";
 
-        public const string m64  =          "A memory quadword operand in memory";
+        public const string m64  = "A memory quadword operand in memory";
 
-        public const string m128 =          "A memory double quadword operand in memory";
+        public const string m128 = "A memory double quadword operand in memory";
 
-        public const string m16ᙾ16 =        "A memory operand containing a far pointer composed of two numbers. The number to the left of the colon corresponds to the pointer's segment selector. The number to the right corresponds to its offset";
+        public const string m16ᙾ16 = "A memory operand containing a far pointer composed of two numbers. The number to the left of the colon corresponds to the pointer's segment selector. The number to the right corresponds to its offset";
 
-        public const string m16ᙾ32  =       "A memory operand containing a far pointer composed of two numbers. The number to the left of the colon corresponds to the pointer's segment selector. The number to the right corresponds to its offset";
+        public const string m16ᙾ32 = "A memory operand containing a far pointer composed of two numbers. The number to the left of the colon corresponds to the pointer's segment selector. The number to the right corresponds to its offset";
 
-        public const string m16ᙾ64 =        "A memory operand containing a far pointer composed of two numbers. The number to the left of the colon corresponds to the pointer's segment selector. The number to the right corresponds to its offset";
+        public const string m16ᙾ64 = "A memory operand containing a far pointer composed of two numbers. The number to the left of the colon corresponds to the pointer's segment selector. The number to the right corresponds to its offset";
 
-        public const string m16Ʌ32 =        "A memory operand consisting of data item pairs whose sizes are indicated on the left and the right side of the ampersand. All memory addressing modes are allowed. The m16&16 and m32&32 operands are used by the BOUND instruction to provide an operand containing an upper and lower bounds for array indices. The m16&32 operand is used by LIDT and LGDT to provide a word with which to load the limit field, and a doubleword with which to load the base field of the corresponding GDTR and IDTR registers. The m16&64 operand is used by LIDT and LGDT in 64-bit mode to provide a word with which to load the limit field, and a quadword with which to load the base field of the corresponding GDTR and IDTR registers";
+        public const string m16Ʌ32 = "A memory operand consisting of data item pairs whose sizes are indicated on the left and the right side of the ampersand. All memory addressing modes are allowed. The m16&16 and m32&32 operands are used by the BOUND instruction to provide an operand containing an upper and lower bounds for array indices. The m16&32 operand is used by LIDT and LGDT to provide a word with which to load the limit field, and a doubleword with which to load the base field of the corresponding GDTR and IDTR registers. The m16&64 operand is used by LIDT and LGDT in 64-bit mode to provide a word with which to load the limit field, and a quadword with which to load the base field of the corresponding GDTR and IDTR registers";
 
-        public const string m16Ʌ16 =        "A memory operand consisting of data item pairs whose sizes are indicated on the left and the right side of the ampersand. All memory addressing modes are allowed. The m16&16 and m32&32 operands are used by the BOUND instruction to provide an operand containing an upper and lower bounds for array indices. The m16&32 operand is used by LIDT and LGDT to provide a word with which to load the limit field, and a doubleword with which to load the base field of the corresponding GDTR and IDTR registers. The m16&64 operand is used by LIDT and LGDT in 64-bit mode to provide a word with which to load the limit field, and a quadword with which to load the base field of the corresponding GDTR and IDTR registers";
+        public const string m16Ʌ16 = "A memory operand consisting of data item pairs whose sizes are indicated on the left and the right side of the ampersand. All memory addressing modes are allowed. The m16&16 and m32&32 operands are used by the BOUND instruction to provide an operand containing an upper and lower bounds for array indices. The m16&32 operand is used by LIDT and LGDT to provide a word with which to load the limit field, and a doubleword with which to load the base field of the corresponding GDTR and IDTR registers. The m16&64 operand is used by LIDT and LGDT in 64-bit mode to provide a word with which to load the limit field, and a quadword with which to load the base field of the corresponding GDTR and IDTR registers";
 
-        public const string m32Ʌ32 =        "A memory operand consisting of data item pairs whose sizes are indicated on the left and the right side of the ampersand. All memory addressing modes are allowed. The m16&16 and m32&32 operands are used by the BOUND instruction to provide an operand containing an upper and lower bounds for array indices. The m16&32 operand is used by LIDT and LGDT to provide a word with which to load the limit field, and a doubleword with which to load the base field of the corresponding GDTR and IDTR registers. The m16&64 operand is used by LIDT and LGDT in 64-bit mode to provide a word with which to load the limit field, and a quadword with which to load the base field of the corresponding GDTR and IDTR registers";
+        public const string m32Ʌ32 = "A memory operand consisting of data item pairs whose sizes are indicated on the left and the right side of the ampersand. All memory addressing modes are allowed. The m16&16 and m32&32 operands are used by the BOUND instruction to provide an operand containing an upper and lower bounds for array indices. The m16&32 operand is used by LIDT and LGDT to provide a word with which to load the limit field, and a doubleword with which to load the base field of the corresponding GDTR and IDTR registers. The m16&64 operand is used by LIDT and LGDT in 64-bit mode to provide a word with which to load the limit field, and a quadword with which to load the base field of the corresponding GDTR and IDTR registers";
 
-        public const string m16Ʌ64 =        "A memory operand consisting of data item pairs whose sizes are indicated on the left and the right side of the ampersand. All memory addressing modes are allowed. The m16&16 and m32&32 operands are used by the BOUND instruction to provide an operand containing an upper and lower bounds for array indices. The m16&32 operand is used by LIDT and LGDT to provide a word with which to load the limit field, and a doubleword with which to load the base field of the corresponding GDTR and IDTR registers. The m16&64 operand is used by LIDT and LGDT in 64-bit mode to provide a word with which to load the limit field, and a quadword with which to load the base field of the corresponding GDTR and IDTR registers";
+        public const string m16Ʌ64 = "A memory operand consisting of data item pairs whose sizes are indicated on the left and the right side of the ampersand. All memory addressing modes are allowed. The m16&16 and m32&32 operands are used by the BOUND instruction to provide an operand containing an upper and lower bounds for array indices. The m16&32 operand is used by LIDT and LGDT to provide a word with which to load the limit field, and a doubleword with which to load the base field of the corresponding GDTR and IDTR registers. The m16&64 operand is used by LIDT and LGDT in 64-bit mode to provide a word with which to load the limit field, and a quadword with which to load the base field of the corresponding GDTR and IDTR registers";
 
-        public const string m32fp =         "A single-precision floating-point operand in memory. These symbols designate floating-point values that are usedas operands for x87 FPU floating-point instructions";
+        public const string m32fp = "A single-precision floating-point operand in memory. These symbols designate floating-point values that are usedas operands for x87 FPU floating-point instructions";
 
-        public const string m64fp =         "A double-precision floating-point operand in memory. These symbols designate floating-point values that are used as operands for x87 FPU floating-point instructions";
+        public const string m64fp = "A double-precision floating-point operand in memory. These symbols designate floating-point values that are used as operands for x87 FPU floating-point instructions";
 
-        public const string m80fp =         "A double extended-precision floating-point operand in memory. These symbols designate floating-point values that are used as operands for x87 FPU floating-point instructions";
+        public const string m80fp = "A double extended-precision floating-point operand in memory. These symbols designate floating-point values that are used as operands for x87 FPU floating-point instructions";
 
         public const string m16int = "A word integer operand in memory. These symbols designate integers that are used as operands for x87 FPU integer instructions";
 
@@ -85,11 +85,11 @@ namespace Z0
 
         public const string ptr16ᙾ32 = "A far pointer typically to a code segment different from that of the instruction and similar to ptr16:16 notation; in this case the ptr16:32 symbol is used when the operand-size attribute is 32 bits";
 
-        public const string r8   = "One of the byte general-purpose registers: {AL CL DL BL AH CH DH BH BPL SPL DIL SIL}; or one of the byte registers (R8L-R15L) available when using REX.R and 64-bit mode.";
+        public const string r8 = "One of the byte general-purpose registers: {AL CL DL BL AH CH DH BH BPL SPL DIL SIL}; or one of the byte registers (R8L-R15L) available when using REX.R and 64-bit mode.";
 
-        public const string r16  = "One of the word general-purpose registers: {AX CX DX BX SP BP SI DI}; or one of the word registers (R8-R15) available when using REX.R and 64-bit mode";
+        public const string r16 = "One of the word general-purpose registers: {AX CX DX BX SP BP SI DI}; or one of the word registers (R8-R15) available when using REX.R and 64-bit mode";
 
-        public const string r32  = "One of the doubleword general-purpose registers: {EAX ECX EDX EBX ESP EBP ESI EDI}; or one of the doubleword registers (R8D - R15D) available when using REX.R in 64-bit mode";
+        public const string r32 = "One of the doubleword general-purpose registers: {EAX ECX EDX EBX ESP EBP ESI EDI}; or one of the doubleword registers (R8D - R15D) available when using REX.R in 64-bit mode";
 
         public const string r64  = "One of the quadword general-purpose registers: {RAX RBX RCX RDX RDI RSI RBP RSP R8–R15}; These are available when using REX.R and 64-bit mode";
 
@@ -119,9 +119,9 @@ namespace Z0
 
         public const string SRC3 = "Denotes the third source operand in the instruction syntax of an instruction encoded with the VEX/EVEX prefix and having three source operands";
 
-        public const string ST   = "The top element of the FPU register stack; a synonym for ST(0)";
+        public const string ST = "The top element of the FPU register stack; a synonym for ST(0)";
 
-        public const string STᐸ0ᐳ= "The top element of the FPU register stack";
+        public const string STᐸ0ᐳ = "The top element of the FPU register stack";
 
         public const string xmm  = "An XMM register. The 128-bit XMM registers are: XMM0 through XMM7; XMM8 through XMM15 are available using REX.R in 64-bit mode.";
 
@@ -133,7 +133,7 @@ namespace Z0
 
         public const string ᐸXMM0ᐳ = "Indicates implied use of the XMM0 register. When there is ambiguity xmm1 indicates the first source operand using an XMM register and xmm2 the second source operand using an XMM register. Some instructions use the XMM0 register as the third source operand, indicated by <XMM0>. The use of the third XMM register operand is implicit in the instruction encoding and does not affect the ModR/M encoding";
 
-        public const string ymm  = "A YMM register. The 256-bit YMM registers are: YMM0 through YMM7; YMM8 through YMM15 are available in 64-bit mode";
+        public const string ymm = "A YMM register. The 256-bit YMM registers are: YMM0 through YMM7; YMM8 through YMM15 are available in 64-bit mode";
 
         public const string m256 = "A 32-byte operand in memory. This nomenclature is used only with AVX instructions";
 
@@ -141,7 +141,7 @@ namespace Z0
 
         public const string ᐸYMM0ᐳ = "Indicates use of the YMM0 register as an implicit argument";
 
-        public const string zmm  = "A ZMM register";
+        public const string zmm = "A ZMM register";
 
         public const string m512 = "A 64-byte operand in memory";
 

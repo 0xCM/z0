@@ -7,22 +7,22 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
-    public readonly struct ResDeclarations : IConstSpan<ResDeclarations,ApiMemberRes>
+    public readonly struct ApiResMembers
     {
-        public readonly Type DeclaringType;
+        public Type DeclaringType {get;}
 
-        public readonly ApiMemberRes[] Accessors;
+        readonly Index<ApiMemberRes> Accessors;
 
         [MethodImpl(Inline)]
-        public ResDeclarations(Type declaring, ApiMemberRes[] accessors)
+        public ApiResMembers(Type declaring, ApiMemberRes[] accessors)
         {
             DeclaringType = declaring;
             Accessors = accessors;
         }
 
-        public ReadOnlySpan<ApiMemberRes> Data
+        public ReadOnlySpan<ApiMemberRes> View
         {
             [MethodImpl(Inline)]
             get => Accessors;

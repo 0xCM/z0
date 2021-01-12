@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     partial struct Resources
     {
@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source descriptor</param>
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<byte> data(in ResDescriptor src)
+        public static ReadOnlySpan<byte> content(in ResDescriptor src)
             => memory.view(src.Address, src.Size);
     }
 }

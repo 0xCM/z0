@@ -4,10 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Reflection;
+    using System.Runtime.CompilerServices;
 
-    public struct MethodMetadata : ITextual
+    using static Part;
+
+    public struct ClrMethodMetadata : ITextual
     {
         public ClrToken Token;
 
@@ -24,8 +25,11 @@ namespace Z0
         public Index<ClrParamInfo> ValueParams;
 
         public Index<ClrTypeParamInfo> TypeParams;
+
+        public ClrDisplaySig DisplaySig
+            => ClrDisplaySig.from(this);
         public string Format()
-            => Clr.format(this);
+            => DisplaySig.Format();
 
         public override string ToString()
             => Format();

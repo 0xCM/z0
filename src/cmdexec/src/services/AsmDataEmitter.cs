@@ -14,7 +14,7 @@ namespace Z0
     using static Part;
     using static z;
 
-    public readonly struct AsmProcessDriver
+    public readonly struct AsmDataEmitter
     {
         readonly Dictionary<IceMnemonic, ArrayBuilder<AsmRow>> Index;
 
@@ -27,8 +27,6 @@ namespace Z0
         readonly int[] Sequence;
 
         readonly uint[] Offset;
-
-        readonly AsmMnemonicParser Parser;
 
         IAsmDecoder Decoder
             => Asm.RoutineDecoder;
@@ -46,18 +44,17 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public AsmProcessDriver(IWfShell wf, IAsmContext asm, in ApiCodeBlockIndex encoded)
+        public AsmDataEmitter(IWfShell wf, IAsmContext asm, in ApiCodeBlockIndex encoded)
         {
             Wf = wf;
             Asm = asm;
             Encoded = encoded;
-            Parser = AsmMnemonicParser.Create();
             Index = new Dictionary<IceMnemonic, ArrayBuilder<AsmRow>>();
             Sequence = sys.alloc<int>(1);
             Offset = sys.alloc<uint>(1);
         }
 
-        public AsmRowSets<IceMnemonic> Process()
+        public AsmRowSets<IceMnemonic> Emit()
         {
             using var flow = Wf.Running();
             var locations = span(Encoded.Locations);
@@ -66,61 +63,46 @@ namespace Z0
             for(var i=0u; i<count; i++)
             {
                 ref readonly var address = ref skip(locations,i);
-                Process(Encoded[address]);
+                CreateRecords(Encoded[address]);
             }
 
-            return Processed();
+            return Rowsets();
         }
 
-        [MethodImpl(Inline)]
-        void Process(in ApiCodeBlock src)
+        void CreateRecords(in ApiCodeBlock src)
         {
             var decoded = Decoder.Decode(src.Code);
             if(decoded)
-                Process(src.Code, decoded.Value);
+                CreateRecords(src.Code, decoded.Value);
         }
 
-        AsmRowSets<IceMnemonic> Processed()
-        {
-            var keys = Index.Keys.ToArray();
-            var count = keys.Length;
-            var sets = new AsmRowSet<IceMnemonic>[count];
-            for(var i=0; i<count; i++)
-            {
-                var key = keys[i];
-                sets[i] = asm.rowset(key, Index[key].Emit());
-            }
-            return asm.rowsets(sets);
-        }
-
-        void Process(in CodeBlock code, in IceInstructionList asm)
+        void CreateRecords(in CodeBlock code, in IceInstructionList asm)
         {
             var data = code.Code;
             var bytes = data.View;
             var instructions = asm.Data;
-            Process(code, instructions);
+            CreateRecords(code, instructions);
         }
 
-        void Process(in CodeBlock code, IceInstruction[] asm)
+        void CreateRecords(in CodeBlock code, IceInstruction[] src)
         {
             var bytes = span(code.Storage);
             ushort offset = 0;
 
-            for(var i=0; i<asm.Length; i++)
+            for(var i=0; i<src.Length; i++)
             {
-                ref readonly var instruction = ref asm[i];
+                ref readonly var instruction = ref src[i];
 
                 var size = (ushort)instruction.ByteLength;
                 var encoded = bytes.Slice(offset, size);
 
                 var a16 = new Address16(offset);
-                Process(code, a16, encoded, instruction);
+                CreateRecord(code, a16, encoded, instruction);
                 offset += size;
             }
         }
 
-        [MethodImpl(Inline)]
-        void Process(in CodeBlock code, Address16 offset, Span<byte> encoded, in IceInstruction src)
+        void CreateRecord(in CodeBlock code, Address16 offset, Span<byte> encoded, in IceInstruction src)
         {
             var mnemonic = src.Mnemonic;
 
@@ -140,25 +122,24 @@ namespace Z0
                 record.CpuId = text.embrace(src.CpuidFeatures.Select(x => x.ToString()).Concat(","));
                 record.OpCodeId = (IceOpCodeId)src.Code;
 
-                // var record = new AsmRow(
-                //     Sequence: NextSequence,
-                //     Address: src.IP,
-                //     LocalOffset: offset,
-                //     GlobalOffset: NextOffset,
-                //     Mnemonic: mnemonic.ToString().ToUpper(),
-                //     OpCode: src.Specifier.OpCode,
-                //     Encoded: new BinaryCode(encoded.TrimEnd().ToArray()),
-                //     SourceCode: src.FormattedInstruction,
-                //     Instruction: src.Specifier.Sig,
-                //     CpuId: text.embrace(src.CpuidFeatures.Select(x => x.ToString()).Concat(",")),
-                //     Id: (OpCodeId)src.Code
-                //     );
-
                 if(Index.TryGetValue(mnemonic, out var builder))
                     builder.Include(record);
                 else
                     Index.Add(mnemonic, ArrayBuilder.build(record));
             }
+        }
+
+        AsmRowSets<IceMnemonic> Rowsets()
+        {
+            var keys = Index.Keys.ToArray();
+            var count = keys.Length;
+            var sets = new AsmRowSet<IceMnemonic>[count];
+            for(var i=0; i<count; i++)
+            {
+                var key = keys[i];
+                sets[i] = asm.rowset(key, Index[key].Emit());
+            }
+            return asm.rowsets(sets);
         }
     }
 }

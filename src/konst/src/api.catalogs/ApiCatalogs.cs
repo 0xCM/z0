@@ -21,27 +21,15 @@ namespace Z0
         /// </summary>
         /// <param name="paths">The source paths</param>
         [Op]
-        public static ISystemApiCatalog system(FS.Files paths)
+        public static ISystemApiCatalog create(FS.Files paths)
             => new SystemApiCatalog(paths.Storage.Select(part).Where(x => x.IsSome()).Select(x => x.Value).OrderBy(x => x.Id));
-
-        [Op]
-        public static ISystemApiCatalog siblings(Assembly src, PartId[] parts)
-        {
-            var path = FS.path(src.Location).FolderPath;
-            var managed = path.Exclude("System.Private.CoreLib").Where(f => FS.managed(f));
-            return
-                parts.Length != 0
-                ? new SystemApiCatalog(system(managed).Parts.Where(x => parts.Contains(x.Id)))
-                : system(managed);
-
-        }
 
         /// <summary>
         /// Creates a system-level api catalog over a specified component set
         /// </summary>
         /// <param name="src">The source components</param>
         [Op]
-        public static ISystemApiCatalog system(Assembly[] src)
+        public static ISystemApiCatalog create(Assembly[] src)
         {
             var candidates = src.Where(Q.isPart);
             var parts = candidates.Select(TryGetPart).Where(x => x.IsSome()).Select(x => x.Value).OrderBy(x => x.Id);
@@ -49,26 +37,27 @@ namespace Z0
         }
 
         /// <summary>
-        /// Defines a <see cref='ApiPartCatalog'/> over a specified assembly
-        /// </summary>
-        /// <param name="src">The source assembly</param>
-        [Op]
-        public static IApiPartCatalog part(Assembly src)
-            => new ApiPartCatalog(src.Id(), src, datatypes(src), apiHosts(src), svcHostTypes(src));
-
-        /// <summary>
         /// Defines a <see cref='ApiPartCatalog'/> over a specified part
         /// </summary>
         /// <param name="src">The source assembly</param>
         [Op]
-        public static IApiPartCatalog part(IPart src)
-            => part(src.Owner);
+        public static IApiPartCatalog create(IPart src)
+            => create(src.Owner);
+
+        /// <summary>
+        /// Defines a <see cref='ApiPartCatalog'/> over a specified assembly
+        /// </summary>
+        /// <param name="src">The source assembly</param>
+        [Op]
+        public static IApiPartCatalog create(Assembly src)
+            => new ApiPartCatalog(src.Id(), src, apitypes(src), apiHosts(src), svcHostTypes(src));
 
         [Op]
-        public static ApiHostCatalog members(IApiHost src)
+        public static ISystemApiCatalog siblings(Assembly src, PartId[] parts)
         {
-            var members = ApiJit.jit(src);
-            return members.Length == 0 ? ApiHostCatalog.Empty : new ApiHostCatalog(src, members);
+            var path = FS.path(src.Location).FolderPath;
+            var managed = path.Exclude("System.Private.CoreLib").Where(f => FS.managed(f));
+            return parts.Length != 0 ? new SystemApiCatalog(create(managed).Parts.Where(x => parts.Contains(x.Id))) : create(managed);
         }
 
         /// <summary>
@@ -146,12 +135,12 @@ namespace Z0
         /// </summary>
         /// <param name="src">The assembly to search</param>
         [Op]
-        static ApiDataType[] datatypes(Assembly src)
+        static ApiTypeInfo[] apitypes(Assembly src)
         {
             var part = src.Id();
             var types = span(src.GetTypes().Where(t => t.Tagged<ApiTypeAttribute>()));
             var count = types.Length;
-            var buffer = alloc<ApiDataType>(count);
+            var buffer = alloc<ApiTypeInfo>(count);
             var dst = span(buffer);
             for(var i=0u; i<count; i++)
             {
@@ -159,7 +148,7 @@ namespace Z0
                 var attrib = type.Tag<ApiTypeAttribute>();
                 var name =  text.ifempty(attrib.MapValueOrDefault(a => a.Name, type.Name),type.Name).ToLower();
                 var uri = new ApiHostUri(part, name);
-                seek(dst,i) = new ApiDataType(type, name, part, uri);
+                seek(dst,i) = new ApiTypeInfo(type, name, part, uri);
             }
             return buffer;
         }

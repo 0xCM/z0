@@ -7,12 +7,12 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Describes an assembly instruction
     /// </summary>
-    public readonly struct AsmFxSummary
+    public readonly struct AsmInstructionSummary
     {
         /// <summary>
         /// The encoded bytes
@@ -40,7 +40,7 @@ namespace Z0.Asm
         public readonly AsmOperandInfo[] Operands;
 
         [MethodImpl(Inline)]
-        public AsmFxSummary(MemoryAddress @base, uint offset, string content, AsmSpecifier spec, AsmOperandInfo[] operands, byte[] encoded)
+        public AsmInstructionSummary(MemoryAddress @base, uint offset, string content, AsmSpecifier spec, AsmOperandInfo[] operands, byte[] encoded)
         {
             Encoded = new CodeBlock(@base, encoded);
             Offset = offset;

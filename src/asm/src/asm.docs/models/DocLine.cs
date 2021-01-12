@@ -17,9 +17,7 @@ namespace Z0.Asm
 
             [MethodImpl(Inline)]
             public DocLine(TextLine text)
-            {
-                Text = text;
-            }
+                => Text = text;
 
             [MethodImpl(Inline)]
             public string Format()

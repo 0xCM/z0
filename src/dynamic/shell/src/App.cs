@@ -303,10 +303,10 @@ namespace Z0
 
         void ShowCases()
         {
-            var query = Resources.query(Wf.Controller, CmdCases.CoreClrBuildLog);
-            if(query.ResourceCount == 1)
+            var descriptors = Resources.descriptors(Wf.Controller, CmdCases.CoreClrBuildLog);
+            if(descriptors.ResourceCount == 1)
             {
-                var data = query.Descriptor(0).Utf8();
+                var data = descriptors[0].Utf8();
                 using var reader = new StringReader(data.ToString());
                 var line = reader.ReadLine();
                 while(line != null)

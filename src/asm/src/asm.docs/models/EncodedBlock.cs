@@ -15,6 +15,9 @@ namespace Z0.Asm
         {
             public BinaryCode Content {get;}
 
+            public PartKind Kind
+                => PartKind.BlockEncoding;
+
             [MethodImpl(Inline)]
             public EncodedBlock(byte[] data)
                 => Content = data;

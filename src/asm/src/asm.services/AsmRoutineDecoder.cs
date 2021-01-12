@@ -25,7 +25,7 @@ namespace Z0.Asm
         public Option<AsmRoutine> Decode(ApiCaptureBlock src)
             => from i in Decode(src.Parsed)
                 let block = asm.block(src.CodeBlock, i, src.TermCode)
-                select routine(src.MetaUri, src.OpUri, src.Method.Metadata().Format(), block);
+                select routine(src.MetaUri, src.OpUri, src.Method.Metadata().DisplaySig, block);
 
         public Option<IceInstructionList> Decode(CodeBlock src)
             => Decode(src.Code, src.BaseAddress).TryMap(x => asm.list(x, src));
@@ -129,10 +129,10 @@ namespace Z0.Asm
             }
         }
 
-        static AsmRoutine routine(ApiArtifactUri meta, OpUri uri, string sig, ApiBlockAsm src, bool check = false)
+        static AsmRoutine routine(ApiArtifactUri meta, OpUri uri, ClrDisplaySig sig, ApiBlockAsm src, bool check = false)
         {
             var count = src.InstructionCount;
-            var info = new AsmFxSummary[count];
+            var info = new AsmInstructionSummary[count];
             var offset = 0u;
             var @base = src.BaseAddress;
 
@@ -154,15 +154,13 @@ namespace Z0.Asm
         static AsmRoutine routine(ApiCaptureBlock captured, IceInstructionList src)
         {
             var code = new ApiCodeBlock(captured.OpUri, captured.Parsed);
-            var sig = captured.Method.Metadata().Format();
-            return new AsmRoutine(captured.MetaUri, captured.OpUri, sig, code, captured.TermCode, src);
+            return new AsmRoutine(captured.MetaUri, captured.OpUri, captured.Method.Metadata().DisplaySig, code, captured.TermCode, src);
         }
 
         static AsmRoutine routine(ApiMemberCode member, AsmInstructions asm)
         {
             var code = new ApiCodeBlock(member.OpUri, member.Encoded);
-            var sig = member.Method.Metadata().Format();
-            return new AsmRoutine(member.MetaUri, member.OpUri, sig, code, member.TermCode, new IceInstructionList(asm, member.Encoded));
+            return new AsmRoutine(member.MetaUri, member.OpUri, member.Method.Metadata().DisplaySig, code, member.TermCode, new IceInstructionList(asm, member.Encoded));
         }
     }
 }

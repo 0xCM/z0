@@ -9,6 +9,9 @@ namespace Z0
 
     using static Part;
 
+    /// <summary>
+    /// Describes an embedded resource
+    /// </summary>
     public readonly struct ResDescriptor : IDataTypeComparable<ResDescriptor>, IAddressable
     {
         public Name Name {get;}

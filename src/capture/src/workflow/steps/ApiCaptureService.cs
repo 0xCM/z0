@@ -59,7 +59,7 @@ namespace Z0
             if(src.IsEmpty)
                 return;
 
-            Capture(src.ApiDataTypes);
+            Capture(src.ApiTypes);
             Capture(src.OperationHosts);
         }
 
@@ -87,7 +87,7 @@ namespace Z0
                 Capture(skip(hosts,i));
         }
 
-        void Capture(ApiDataTypes src)
+        void Capture(Index<ApiTypeInfo> src)
         {
             var extracted = @readonly(Extract(src).GroupBy(x => x.Host).Select(x => kvp(x.Key, x.Array())).Array());
             for(var i=0; i<extracted.Length; i++)
@@ -112,7 +112,7 @@ namespace Z0
             }
         }
 
-        ApiMemberExtract[] Extract(ApiDataTypes types)
+        ApiMemberExtract[] Extract(Index<ApiTypeInfo> types)
         {
             try
             {

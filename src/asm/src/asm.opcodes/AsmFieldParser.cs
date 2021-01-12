@@ -7,7 +7,7 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     [ApiHost]
     public readonly struct AsmFieldParser
@@ -23,10 +23,6 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public asci64 Parse(string src, out asci64 result)
             => result = src;
-
-        [MethodImpl(Inline), Op]
-        public YeaOrNea Parse(string src, out YeaOrNea result)
-            => result = @enum(src, out var _, YeaOrNea.N);
 
         [MethodImpl(Inline), Op]
         public bit Parse(string src, out bit result)

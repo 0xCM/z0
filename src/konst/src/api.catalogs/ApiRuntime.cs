@@ -79,7 +79,7 @@ namespace Z0
         }
 
         [RenderFunction]
-        public static Count render(in MethodMetadata src, ITextBuffer dst)
+        public static Count render(in ClrMethodMetadata src, ITextBuffer dst)
         {
             var content = string.Format("{0,-64}",src.Format());
             dst.Append(content);
@@ -173,7 +173,7 @@ namespace Z0
             for(var i=0; i<kHost; i++)
             {
                 var host = skip(hosts,i);
-                var catalog = ApiCatalogs.members(host);
+                var catalog = ApiQuery.members(host);
                 var component = host.HostType.Assembly;
                 var members = @readonly(catalog.Members.Storage);
                 var apicount = (uint)members.Length;

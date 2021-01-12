@@ -13,7 +13,7 @@ namespace Z0
     using static Part;
     using static z;
 
-    public struct AsmJmpProcessor : IDisposable
+    public struct AsmJmpRowEmitter : IDisposable
     {
         readonly BitBroker<JccKind,ApiInstruction> broker;
 
@@ -32,7 +32,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public AsmJmpProcessor(IWfShell wf, ApiPartRoutines src)
+        public AsmJmpRowEmitter(IWfShell wf, ApiPartRoutines src)
         {
             Wf = wf;
             broker = AsmBrokers.jmp();
@@ -65,7 +65,7 @@ namespace Z0
                 nameof(AsmJmpRow.Asm)
                 );
 
-        public void Process()
+        public void Emit()
         {
             var hosts = Source.View;
             uint kHost = Source.HostCount;

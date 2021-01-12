@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    public readonly partial struct TextRules
+    partial struct TextRules
     {
         partial struct Parse
         {

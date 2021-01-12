@@ -20,7 +20,7 @@ namespace Z0.Asm
 
         public bool EmitSectionDelimiter;
 
-        public int InstructionPad;
+        public byte InstructionPad;
 
         public bool EmitLineAddresses;
 
@@ -40,9 +40,6 @@ namespace Z0.Asm
         public static AsmFormatConfig WithSectionDelimiter
             => create(EmitSectionDelimiter : true);
 
-        public static AsmFormatConfig WithFunctionTimestamp
-            => create(EmitFunctionTimestamp : true);
-
         public static AsmFormatConfig DefaultStreamFormat
             => create(EmitSectionDelimiter : true, EmitBaseAddress : true);
 
@@ -54,7 +51,7 @@ namespace Z0.Asm
            bool EmitFunctionHeader = true,
            bool EmitFunctionTimestamp = false,
            bool EmitSectionDelimiter = false,
-           int InstructionPad = 40,
+           byte InstructionPad = 40,
            bool ShowLineAddresses = true,
            int SectionDelimiterWidth = 120
            ) => new AsmFormatConfig(
@@ -77,7 +74,7 @@ namespace Z0.Asm
            bool EmitFunctionHeader,
            bool EmitFunctionTimestamp,
            bool EmitSectionDelimiter,
-           int InstructionPad,
+           byte InstructionPad,
            bool ShowLineAddresses,
           int SectionDelimiterWidth
            )

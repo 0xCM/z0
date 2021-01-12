@@ -9,9 +9,6 @@ namespace Z0
     using System.Linq;
     using System.Reflection;
 
-    using static Konst;
-    using static z;
-
     ref struct TestRunner
     {
         readonly WfHost Host;

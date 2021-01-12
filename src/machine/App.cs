@@ -69,10 +69,10 @@ namespace Z0
 
                 var processors = ApiProcessors.create(Wf, Asm);
                 processors.EmitAsmRows();
-                processors.ProcessCalls();
-                processors.ProcessJumps();
+                processors.EmitCallRows();
+                processors.EmitJmpRows();
                 processors.ProcessEnlisted();
-                processors.ProcessSemantic();
+                processors.EmitSemantic();
                 processors.EmitResBytes();
 
             }

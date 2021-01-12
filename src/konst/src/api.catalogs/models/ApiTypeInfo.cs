@@ -9,10 +9,10 @@ namespace Z0
     using System.Reflection;
     using System.Collections.Generic;
 
-    using static Konst;
+    using static Part;
     using static z;
 
-    public readonly struct ApiDataType : IApiHost, IComparable<ApiDataType>
+    public readonly struct ApiTypeInfo : IApiHost, IComparable<ApiTypeInfo>
     {
         public static HashSet<string> Ignore
             => hashset("ToString","GetHashCode", "Equals", "ToString");
@@ -28,19 +28,7 @@ namespace Z0
         public bool IsDataType => true;
 
         [MethodImpl(Inline)]
-        public static implicit operator ApiHostUri(ApiDataType src)
-            => src.Uri;
-
-        [MethodImpl(Inline)]
-        public static bool operator==(ApiDataType a, ApiDataType b)
-            => a.Equals(b);
-
-        [MethodImpl(Inline)]
-        public static bool operator!=(ApiDataType a, ApiDataType b)
-            => !a.Equals(b);
-
-        [MethodImpl(Inline)]
-        public ApiDataType(Type type, string name, PartId part, ApiHostUri uri)
+        public ApiTypeInfo(Type type, string name, PartId part, ApiHostUri uri)
         {
             HostType = type;
             Name = name;
@@ -59,17 +47,30 @@ namespace Z0
             => Format();
 
         [MethodImpl(Inline)]
-        public bool Equals(ApiDataType src)
+        public bool Equals(ApiTypeInfo src)
             => src.HostType.Equals(HostType);
 
         [MethodImpl(Inline)]
-        public int CompareTo(ApiDataType src)
+        public int CompareTo(ApiTypeInfo src)
             => ((long)src.HostType.TypeHandle.Value).CompareTo((long)HostType.TypeHandle.Value);
 
         public override int GetHashCode()
             => HostType.GetHashCode();
 
         public override bool Equals(object src)
-            => src is ApiDataType t && Equals(t);
+            => src is ApiTypeInfo t && Equals(t);
+
+        [MethodImpl(Inline)]
+        public static implicit operator ApiHostUri(ApiTypeInfo src)
+            => src.Uri;
+
+        [MethodImpl(Inline)]
+        public static bool operator==(ApiTypeInfo a, ApiTypeInfo b)
+            => a.Equals(b);
+
+        [MethodImpl(Inline)]
+        public static bool operator!=(ApiTypeInfo a, ApiTypeInfo b)
+            => !a.Equals(b);
+
     }
 }

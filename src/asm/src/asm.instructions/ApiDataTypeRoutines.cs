@@ -15,10 +15,10 @@ namespace Z0
     {
         readonly TableSpan<ApiDataTypeRoutine> Members;
 
-        public ApiDataType DataType {get;}
+        public ApiTypeInfo DataType {get;}
 
         [MethodImpl(Inline)]
-        public ApiDataTypeRoutines(ApiDataType type, TableSpan<ApiDataTypeRoutine> members)
+        public ApiDataTypeRoutines(ApiTypeInfo type, TableSpan<ApiDataTypeRoutine> members)
         {
             DataType = type;
             Members = members;

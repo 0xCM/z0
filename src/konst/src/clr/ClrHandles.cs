@@ -71,8 +71,8 @@ namespace Z0
         [Op]
         public static ReadOnlySpan<ClrHandle<RuntimeMethodHandle>> methods(Assembly src)
         {
-            var catalog = ApiCatalogs.part(src);
-            var metadata = catalog.ConcreteOperations();
+            var catalog = ApiCatalogs.create(src);
+            var metadata = catalog.ConcreteOperations;
             var count = metadata.Length;
             var buffer = alloc<ClrHandle<RuntimeMethodHandle>>(count);
             methods(metadata, catalog.ManifestModule, buffer);
@@ -80,7 +80,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static void fields(in ReadOnlySpan<FieldInfo> src, Module module, Span<ClrHandle<RuntimeFieldHandle>> dst)
+        public static void fields(ReadOnlySpan<FieldInfo> src, Module module, Span<ClrHandle<RuntimeFieldHandle>> dst)
         {
             var count = src.Length;
             for(var i=0u; i<count; i++)
@@ -89,7 +89,7 @@ namespace Z0
 
 
         [MethodImpl(Inline), Op]
-        public static void types(in ReadOnlySpan<Type> src, Module module, Span<ClrHandle<RuntimeTypeHandle>> dst)
+        public static void types(ReadOnlySpan<Type> src, Module module, Span<ClrHandle<RuntimeTypeHandle>> dst)
         {
             var count = src.Length;
             for(var i=0u; i<count; i++)
@@ -97,7 +97,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static void methods(in ReadOnlySpan<MethodInfo> src, Module module, Span<ClrHandle<RuntimeMethodHandle>> dst)
+        public static void methods(ReadOnlySpan<MethodInfo> src, Module module, Span<ClrHandle<RuntimeMethodHandle>> dst)
         {
             var count = src.Length;
             for(var i=0u; i<count; i++)

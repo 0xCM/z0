@@ -25,7 +25,7 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="@base">The base address to which the instruction is relative</param>
         /// <param name="src">The source instruction</param>
-        string FormatInstruction(in MemoryAddress @base, in AsmFxSummary src);
+        string FormatInstruction(in MemoryAddress @base, in AsmInstructionSummary src);
 
         /// <summary>
         /// Renders a routine to a caller-supplied buffer

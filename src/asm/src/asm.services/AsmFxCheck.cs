@@ -8,8 +8,6 @@ namespace Z0.Asm
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;

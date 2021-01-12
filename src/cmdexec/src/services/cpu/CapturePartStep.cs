@@ -11,10 +11,10 @@ namespace Z0
 
     using Z0.Asm;
 
-    using static Konst;
+    using static Part;
     using static z;
 
-    public readonly ref struct CapturePartStep
+    public readonly struct CapturePartStep
     {
         readonly IAsmContext Asm;
 
@@ -25,8 +25,6 @@ namespace Z0
         readonly ICaptureServices Services;
 
         readonly IWfShell Wf;
-
-        readonly Span<byte> Buffer;
 
         readonly WfHost Host;
 
@@ -41,7 +39,6 @@ namespace Z0
             var format = AsmFormatConfig.DefaultStreamFormat;
             Formatter = Services.Formatter(format);
             Decoder = Services.RoutineDecoder(format);
-            Buffer = sys.alloc<byte>(Pow2.T16);
             DataTypeMemberExclusions = new string[4]{"ToString","GetHashCode", "Equals", "ToString"};
             Wf.Created(Host.Id);
         }
@@ -54,7 +51,7 @@ namespace Z0
             => MultiDiviner.Service;
 
         [MethodImpl(Inline)]
-        bool IsExcluded(in ApiDataType type, MethodInfo method)
+        bool IsExcluded(in ApiTypeInfo type, MethodInfo method)
         {
             ref var x = ref first(span(DataTypeMemberExclusions));
             var xCount = DataTypeMemberExclusions.Length;
@@ -64,7 +61,7 @@ namespace Z0
             return false;
         }
 
-        public ReadOnlySpan<IdentifiedMethod> IdentifyMembers(in ApiDataType src)
+        public ReadOnlySpan<IdentifiedMethod> IdentifyMembers(in ApiTypeInfo src)
         {
             var candidates = @readonly(src.HostType.DeclaredMethods().Unignored().NonGeneric());
             var count = candidates.Length;
@@ -79,7 +76,7 @@ namespace Z0
             return slice(dst,j);
         }
 
-        public ApiDataTypeRoutine[] Capture(in ApiDataType src, Span<byte> buffer)
+        public ApiDataTypeRoutine[] Capture(in ApiTypeInfo src, Span<byte> buffer)
         {
             var members = IdentifyMembers(src);
             var count = members.Length;
@@ -104,13 +101,13 @@ namespace Z0
         public ReadOnlySpan<ApiDataTypeRoutines> Capture(IPart src)
         {
             var buffer = span<byte>(Pow2.T14);
-            var catalog = ApiCatalogs.part(src);
-            var types = catalog.ApiDataTypes;
+            var catalog = ApiCatalogs.create(src);
+            var types = catalog.ApiTypes;
             var count = types.Count;
 
             var dst = alloc<ApiDataTypeRoutines>(count);
             var target = span(dst);
-            ref var type = ref types.LeadingCell;
+            ref var type = ref types.First;
             for(var i=0u; i<count; i++)
             {
                 var routines = Capture(skip(type,i), buffer);

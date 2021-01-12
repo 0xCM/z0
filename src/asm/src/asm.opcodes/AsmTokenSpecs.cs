@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
     using T = AsmTokenKind;
     using I = AsmTokenIdentifier;
@@ -10,7 +10,7 @@ namespace Z0
     using V = AsmTokenValues;
 
     [ApiType]
-    public readonly struct AsmTokenRecords
+    public readonly struct AsmTokenSpecs
     {
         public static TokenRecord None => Tokens.record(T.None, I.None, V.None, P.None);
 

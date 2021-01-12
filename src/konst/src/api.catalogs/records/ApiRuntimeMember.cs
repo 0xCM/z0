@@ -15,7 +15,7 @@ namespace Z0
 
         public GenericState Genericity;
 
-        public MethodMetadata Metadata;
+        public ClrMethodMetadata Metadata;
 
         public string Sig;
 

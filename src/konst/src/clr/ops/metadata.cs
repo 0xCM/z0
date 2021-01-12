@@ -39,9 +39,9 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source method</param>
         [Op]
-        public static MethodMetadata metadata(MethodInfo src)
+        public static ClrMethodMetadata metadata(MethodInfo src)
         {
-            var dst = new MethodMetadata();
+            var dst = new ClrMethodMetadata();
             dst.Token = src.MetadataToken;
             dst.MethodName = src.DisplayName();
             dst.DefiningAssembly = src.Module.Assembly;

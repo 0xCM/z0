@@ -10,18 +10,14 @@ namespace Z0
 
     using static Konst;
 
-    partial class XApiCatalogs
+    partial class XVexKinds
     {
-        [MethodImpl(Inline)]
-        public static MethodInfo[] ConcreteOperations(this IApiPartCatalog src)
-            => src.Operations.Concrete();
-
         /// <summary>
         /// Selects open generic source methods that have at least one 128-bit vector parameter
         /// </summary>
         /// <param name="src">The source methods</param>
         /// <param name="w">The vector width</param>
-        [MethodImpl(NotInline), Op]
+        [Op]
         public static MethodInfo[] VectorizedGeneric(this MethodInfo[] src, W128 w)
             => src.OpenGeneric().Where(m => m.IsVectorized(w));
 
@@ -30,7 +26,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source methods</param>
         /// <param name="w">The vector width</param>
-        [MethodImpl(NotInline), Op]
+        [Op]
         public static MethodInfo[] VectorizedGeneric(this MethodInfo[] src, W256 w)
             => src.OpenGeneric().Where(m => m.IsVectorized(w));
 
@@ -39,7 +35,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source methods</param>
         /// <param name="w">The vector width</param>
-        [MethodImpl(NotInline), Op]
+        [Op]
         public static MethodInfo[] VectorizedGeneric(this MethodInfo[] src, W512 w)
             => src.OpenGeneric().Where(m => m.IsVectorized(w));
 
@@ -48,7 +44,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source methods</param>
         /// <param name="w">The vector width</param>
-        [MethodImpl(NotInline), Op]
+        [Op]
         public static MethodInfo[] VectorizedGeneric(this MethodInfo[] src, W128 w, string name)
             => src.OpenGeneric().WithName(name).Where(m => m.IsVectorized(w));
 
@@ -57,7 +53,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source methods</param>
         /// <param name="w">The vector width</param>
-        [MethodImpl(NotInline), Op]
+        [Op]
         public static MethodInfo[] VectorizedGeneric(this MethodInfo[] src, W256 w, string name)
             => src.OpenGeneric().WithName(name).Where(m => m.IsVectorized(w));
 
@@ -66,7 +62,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source methods</param>
         /// <param name="w">The vector width</param>
-        [MethodImpl(NotInline), Op]
+        [Op]
         public static MethodInfo[] VectorizedGeneric(this MethodInfo[] src, W512 w, string name)
             => src.OpenGeneric().WithName(name).Where(m => m.IsVectorized(w));
     }

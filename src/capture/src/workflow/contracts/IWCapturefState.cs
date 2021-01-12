@@ -14,13 +14,9 @@ namespace Z0
 
         IAppContext App {get;}
 
-        IWfInit Config {get;}
-
         IAsmContext Asm {get;}
 
         IWfCaptureContext CWf {get;}
-
-        AsmFormatConfig FormatConfig {get;}
 
         AsmFormatter Formatter {get;}
 
@@ -29,8 +25,6 @@ namespace Z0
         IAsmDecoder RoutineDecoder {get;}
 
         IWfCaptureBroker CaptureBroker {get;}
-
-        PartId[] Parts {get;}
 
         IWfCaptureBroker IWfCaptureContext.Broker
             => CaptureBroker;

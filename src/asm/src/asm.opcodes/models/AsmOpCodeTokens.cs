@@ -11,7 +11,7 @@ namespace Z0.Asm
 
     public readonly struct AsmOpCodeTokens
     {
-        readonly TableSpan<AsmOpCodeToken> Data;
+        readonly Index<AsmOpCodeToken> Data;
 
         [MethodImpl(Inline)]
         public AsmOpCodeTokens(AsmOpCodeToken[] src)

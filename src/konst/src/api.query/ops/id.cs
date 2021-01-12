@@ -8,19 +8,15 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Konst;
-
-    public readonly struct ComponentResIndex
+    partial struct ApiQuery
     {
-        public readonly Assembly Owner;
-
-        public readonly ResDeclarations[] Declarations;
-
-        [MethodImpl(Inline)]
-        public ComponentResIndex(Assembly src, ResDeclarations[] declarations)
+        [Op]
+        public static PartId id(Assembly src)
         {
-            Owner = src;
-            Declarations = declarations;
+            if(isPart(src))
+                return ((PartIdAttribute)Attribute.GetCustomAttribute(src, typeof(PartIdAttribute))).Id;
+            else
+                return PartId.None;
         }
     }
 }

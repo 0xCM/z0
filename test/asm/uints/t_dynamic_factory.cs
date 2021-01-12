@@ -11,7 +11,7 @@ namespace Z0.Asm
     using System.Runtime.Intrinsics.X86;
     using System.Linq;
 
-    using static Konst;
+    using static Part;
 
     using K = Kinds;
     using M = CaseMethods;
@@ -131,8 +131,8 @@ namespace Z0.Asm
             var dId = ApiIdentify.build(name, w, kind, false);
             var gId = ApiIdentify.build(name, w, kind, true);
             var archive = Archives.hex(FS.dir(TargetArchive.HexDir.Name));
-            var dBits = archive.Read(ApiQuery.host(typeof(z)).Uri).Where(x => x.Id == dId).Single();
-            var gBits = archive.Read(ApiQuery.host<gvec>().Uri).Where(x => x.Id == gId).Single();
+            var dBits = archive.Read(ApiQuery.hostinfo(typeof(z)).Uri).Where(x => x.Id == dId).Single();
+            var gBits = archive.Read(ApiQuery.hostinfo<gvec>().Uri).Where(x => x.Id == gId).Single();
             return AsmCheck.Match(K.BinaryOp, w, dBits, gBits, dst);
         }
 

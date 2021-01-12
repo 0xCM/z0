@@ -7,10 +7,12 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    public class Db
+    using static Part;
+
+    partial struct asm
     {
-
-
+        [MethodImpl(Inline), Op]
+        public static string comment(string text)
+            =>  $"; {text}";
     }
-
 }

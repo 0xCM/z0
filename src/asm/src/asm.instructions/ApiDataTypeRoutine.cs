@@ -12,14 +12,14 @@ namespace Z0
     using static Konst;
 
     /// <summary>
-    /// Describes a <see cref='ApiDataType'/> member operation
+    /// Describes a <see cref='ApiTypeInfo'/> member operation
     /// </summary>
     public readonly struct ApiDataTypeRoutine
     {
         /// <summary>
         /// The defining type
         /// </summary>
-        public readonly ApiDataType DataType;
+        public readonly ApiTypeInfo DataType;
 
         /// <summary>
         /// The defining method
@@ -32,7 +32,7 @@ namespace Z0
         public readonly AsmMemberRoutine Routine;
 
         [MethodImpl(Inline)]
-        public ApiDataTypeRoutine(in ApiDataType type, in IdentifiedMethod member, in AsmMemberRoutine routine)
+        public ApiDataTypeRoutine(in ApiTypeInfo type, in IdentifiedMethod member, in AsmMemberRoutine routine)
         {
             DataType = type;
             Member = member;

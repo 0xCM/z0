@@ -6,14 +6,24 @@ namespace Z0
 {
     using System;
     using System.Reflection;
+    using System.Runtime.CompilerServices;
     using System.IO;
 
+    using static Part;
     using static z;
 
     partial struct Resources
     {
+        [MethodImpl(Inline), Op]
+        public static ResDescriptors descriptors(Assembly src)
+            => new ResDescriptors(src, collect(src));
+
+        [MethodImpl(Inline), Op]
+        public static ResDescriptors descriptors(Assembly src, utf8 match)
+            => new ResDescriptors(src, collect(src, match));
+
         [Op]
-        public static unsafe ResDescriptor[] descriptors(Assembly src, utf8? match = null)
+        static unsafe Index<ResDescriptor> collect(Assembly src, utf8? match = null)
         {
             root.require(src != null, () => "Argument NULL");
             var resnames = Resources.names(src, match);
@@ -27,8 +37,7 @@ namespace Z0
             {
                 ref readonly var name = ref skip(resnames, i);
                 var stream = (UnmanagedMemoryStream)src.GetManifestResourceStream(name);
-                ref var dst = ref seek(target,i);
-                dst = new ResDescriptor(name, stream.PositionPointer, (uint)stream.Length);
+                seek(target,i) = descriptor(name, stream.PositionPointer, (uint)stream.Length);
             }
             return buffer;
         }

@@ -5,18 +5,15 @@
 namespace Z0.Asm
 {
     using System;
-    using System.Reflection;
-    using System.Linq;
 
-    using static Konst;
     using static z;
 
     public class t_legal_identity : t_asm<t_legal_identity>
     {
         public void check_code_identity()
         {
-            var catalog = ApiCatalogs.part(Parts.Math.Resolved);
-            var ops = @readonly(catalog.Operations);
+            var catalog = ApiCatalogs.create(Parts.Math.Resolved);
+            var ops = catalog.Operations.View;
             var count = ops.Length;
             var path = Paths.CasePath();
             Trace(path);

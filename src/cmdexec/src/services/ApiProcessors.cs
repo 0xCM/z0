@@ -49,24 +49,22 @@ namespace Z0
             ResBytesEmitter.service(Wf, Index).Emit();
         }
 
-        public void ProcessCalls()
+        public void EmitCallRows()
         {
             var count = Decoded.Length;
             for(var i=0; i<count; i++)
-                PartRoutinesProcessor.service(Wf, skip(Decoded,i)).ProcessCalls();
+            {
+
+                ref readonly var routines = ref skip(Decoded,i);
+                EmitCallRows(routines);
+            }
         }
 
-        void ProcessJumps(ApiPartRoutines src)
-        {
-            using var step = new AsmJmpProcessor(Wf, src);
-            step.Process();
-        }
-
-        public void ProcessJumps()
+        public void EmitJmpRows()
         {
             var count = Decoded.Length;
             for(var i=0; i<count; i++)
-                ProcessJumps(skip(Decoded,i));
+                EmitJumpRows(skip(Decoded,i));
         }
 
         public void ProcessEnlisted()
@@ -76,8 +74,7 @@ namespace Z0
                 AsmProcessors.parts(Wf).Process(skip(Decoded,i));
         }
 
-
-        public void ProcessSemantic()
+        public void EmitSemantic()
         {
             using var service = AsmSemanticRender.create(Wf);
             var count = Decoded.Length;
@@ -89,8 +86,8 @@ namespace Z0
         {
             try
             {
-                var processor = new AsmProcessDriver(Wf, Asm, Index);
-                var result = processor.Process();
+                var processor = new AsmDataEmitter(Wf, Asm, Index);
+                var result = processor.Emit();
                 var records = 0u;
 
                 Wf.Processed(Seq.delimit(nameof(AsmRow), Index.Hosts.Length, result.Count));
@@ -107,6 +104,25 @@ namespace Z0
             {
                 Wf.Error(e);
             }
+        }
+
+        void EmitJumpRows(ApiPartRoutines src)
+        {
+            using var step = new AsmJmpRowEmitter(Wf, src);
+            step.Emit();
+        }
+
+        void EmitCallRows(ApiPartRoutines Source)
+        {
+            var dst = Wf.Db().Table(AsmCallRow.TableId, Source.Part);
+            Wf.EmittingTable<AsmCallRow>(dst);
+            using var writer = dst.Writer();
+            var records = @readonly(AsmQueries.calls(Source.Instructions));
+            var count = records.Length;
+            writer.WriteLine(AsmCallRow.header());
+            for(var i=0; i<count; i++)
+                writer.WriteLine(AsmTables.format(skip(records,i)));
+            Wf.EmittedTable<AsmCallRow>(count, dst);
         }
     }
 }

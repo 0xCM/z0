@@ -18,9 +18,9 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source assembly</param>
         [Op]
-        public static ResDeclarations[] declarations(Assembly src)
-            => (from a in accessors(src).Accessors
+        public static Index<ApiResMembers> apires(Assembly src)
+            => (from a in accessors(src).Storage
                 let t = a.Member.DeclaringType
-                group a by t).Map(x => new ResDeclarations(x.Key, x.ToArray()));
+                group a by t).Map(x => new ApiResMembers(x.Key, x.ToArray()));
     }
 }

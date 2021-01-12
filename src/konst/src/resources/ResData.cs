@@ -21,7 +21,7 @@ namespace Z0
         public static ResEmission[] reference(IWfShell wf)
         {
             var flow = wf.Running("Emitting reference data");
-            var descriptors = Resources.query(Parts.Res.Assembly).Descriptors();
+            var descriptors = Resources.descriptors(Parts.Res.Assembly).Descriptors();
             var count = descriptors.Length;
             var root = wf.Db().RefDataRoot();
             var emissions = sys.alloc<ResEmission>(count);
@@ -47,7 +47,7 @@ namespace Z0
         {
             var flow = wf.Running(string.Format("Emitting resources embedded in {0}", src.GetSimpleName()));
 
-            var query = match.IsEmpty ? Resources.query(src) : Resources.query(src, match);
+            var query = match.IsEmpty ? Resources.descriptors(src) : Resources.descriptors(src, match);
             var count = query.ResourceCount;
 
             if(count == 0)

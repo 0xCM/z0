@@ -7,7 +7,7 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     using F = AsmOpCodeField;
@@ -34,11 +34,15 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public static OperatingMode mode(in AsmOpCodeRow src)
         {
-
-            return default;
-
+            if(src.M16)
+                return OperatingMode.Mode16;
+            else if(src.M32)
+                return OperatingMode.Mode32;
+            else if(src.M64)
+                return OperatingMode.Mode64;
+            else
+                return OperatingMode.None;
         }
-
 
         /// <summary>
         /// Selects the opcode expression from the source table

@@ -29,14 +29,5 @@ namespace Z0
             return new ApiHostRes(src.Host, buffer);
         }
 
-        /// <summary>
-        /// Collects all resource accessors defined by a specified assembly
-        /// </summary>
-        /// <param name="src">The source assembly</param>
-        [Op]
-        public static ComponentResIndex from(Assembly owner, ApiMemberRes[] src)
-            => new ComponentResIndex(owner, (from access in src
-                let t = access.Member.DeclaringType
-                group access by t).Map(x => new ResDeclarations(x.Key, x.ToArray())));
     }
 }

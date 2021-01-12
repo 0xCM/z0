@@ -9,7 +9,7 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Defines a catalog over a <see cref='IPart'/>
@@ -29,17 +29,17 @@ namespace Z0
         /// <summary>
         /// The data types defined by the assembly
         /// </summary>
-        public ApiDataTypes ApiDataTypes {get;}
+        public Index<ApiTypeInfo> ApiTypes {get;}
 
         /// <summary>
         /// The data types defined by the assembly
         /// </summary>
-        public ApiHost[] OperationHosts {get;}
+        public Index<ApiHost> OperationHosts {get;}
 
         /// <summary>
         /// The api service types types defined by the assembly
         /// </summary>
-        public Type[] ServiceHosts {get;}
+        public Index<Type> ServiceHosts {get;}
 
         /// <summary>
         /// The api hosts known to the catalog, including both operation and data type hosts
@@ -49,23 +49,23 @@ namespace Z0
         /// <summary>
         /// The host-defined operations
         /// </summary>
-        public MethodInfo[] Operations {get;}
+        public Index<MethodInfo> Operations {get;}
+
+        public ApiPartCatalog(PartId part, Assembly component, ApiTypeInfo[] apitypes, ApiHost[] apihosts, Type[] svchosts)
+        {
+            PartId = part;
+            Owner = component;
+            ApiTypes = apitypes;
+            OperationHosts = apihosts;
+            ServiceHosts = svchosts;
+            ApiHosts = apitypes.Cast<IApiHost>().Cast<IApiHost>().Concat(apihosts.Cast<IApiHost>()).Array();
+            Operations = apihosts.SelectMany(x => x.Methods);
+        }
 
         public Module ManifestModule
         {
             [MethodImpl(Inline)]
             get => Owner.ManifestModule;
-        }
-
-        public ApiPartCatalog(PartId part, Assembly component, ApiDataType[] dtHosts, ApiHost[] opHosts, Type[] svcHostTypes)
-        {
-            PartId = part;
-            Owner = component;
-            ApiDataTypes = new ApiDataTypes(PartId, dtHosts);
-            OperationHosts = opHosts;
-            ServiceHosts = svcHostTypes;
-            ApiHosts = dtHosts.Cast<IApiHost>().Cast<IApiHost>().Concat(OperationHosts.Cast<IApiHost>()).Array();
-            Operations = ApiHosts.Storage.SelectMany(x => x.Methods);
         }
 
         /// <summary>
@@ -78,12 +78,12 @@ namespace Z0
         /// Specifies whether the catalog describes any api hosts
         /// </summary>
         public bool IsNonEmpty
-            => (OperationHosts.Length + ApiDataTypes.Count) != 0;
+            => (OperationHosts.Length + ApiTypes.Count) != 0;
 
         /// <summary>
         /// Specifies whether the catalog describes any api hosts
         /// </summary>
         public bool IsEmpty
-            => (OperationHosts.Length + ApiDataTypes.Count) == 0;
+            => (OperationHosts.Length + ApiTypes.Count) == 0;
     }
 }

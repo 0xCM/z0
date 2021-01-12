@@ -10,7 +10,7 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Defines a catalog over one or more parts
@@ -23,8 +23,6 @@ namespace Z0
         public IPart[] Parts {get;}
 
         public Assembly[] PartComponents {get;}
-
-        public PartId[] Identifiers {get;}
 
         public ApiPartCatalogs Catalogs {get;}
 
@@ -43,17 +41,16 @@ namespace Z0
         public SystemApiCatalog(params IPart[] parts)
         {
             Parts = parts;
-            Identifiers = Parts.Select(p => p.Id);
-            PartComponents = Parts.Select(p => p.Owner);
-            Catalogs = Parts.Select(x => ApiCatalogs.part(x) as IApiPartCatalog).Where(c => c.IsIdentified);
+            PartComponents = parts.Select(p => p.Owner);
+            Catalogs = parts.Select(x => ApiCatalogs.create(x) as IApiPartCatalog).Where(c => c.IsIdentified);
             ApiHosts = Catalogs.Storage.SelectMany(c => c.ApiHosts.Storage);
-            OperationHosts = Catalogs.Storage.SelectMany(c => c.OperationHosts).Cast<IApiHost>().Array();
-            PartIdentities = Identifiers;
-            Operations = Catalogs.Storage.SelectMany(x => x.Operations);
+            OperationHosts = Catalogs.Storage.SelectMany(c => c.OperationHosts.Storage).Cast<IApiHost>().Array();
+            PartIdentities = parts.Select(p => p.Id);
+            Operations = Catalogs.Storage.SelectMany(x => x.Operations.Storage);
         }
 
         public Option<IApiHost> FindHost(ApiHostUri uri)
-            => z.option(ApiHosts.Where(h => h.Uri == uri).FirstOrDefault());
+            => root.option(ApiHosts.Where(h => h.Uri == uri).FirstOrDefault());
 
         public IEnumerable<IApiPartCatalog> PartCatalogs(params PartId[] parts)
         {

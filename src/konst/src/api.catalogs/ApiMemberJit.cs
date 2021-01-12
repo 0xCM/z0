@@ -10,7 +10,7 @@ namespace Z0
     using System.Reflection;
     using System.Collections.Generic;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     [ApiHost(ApiNames.ApiJit)]
@@ -23,8 +23,8 @@ namespace Z0
         public static ApiMembers jit(IPart src)
         {
             var dst = list<ApiMember>();
-            var catalog = ApiCatalogs.part(src);
-            var types = catalog.ApiDataTypes;
+            var catalog = ApiCatalogs.create(src);
+            var types = catalog.ApiTypes;
             var hosts = catalog.ApiHosts;
 
             foreach(var t in types.Storage)
@@ -52,11 +52,11 @@ namespace Z0
         }
 
         [Op]
-        public static ApiMember[] jit(ApiDataType src)
-            => jit(src, ApiDataType.Ignore);
+        public static ApiMember[] jit(ApiTypeInfo src)
+            => jit(src, ApiTypeInfo.Ignore);
 
         [Op]
-        public static ApiMember[] jit(ApiDataType src, HashSet<string> exclusions)
+        public static ApiMember[] jit(ApiTypeInfo src, HashSet<string> exclusions)
         {
             var methods = src.HostType.DeclaredMethods().Unignored().NonGeneric().Exclude(exclusions).Select(m => new HostedMethod(src.Uri, m));
             var located = methods.Select(m => m.WithLocation(z.address(Jit(m.Method))));
@@ -65,12 +65,12 @@ namespace Z0
         }
 
         [Op]
-        public static ApiMember[] jit(ApiDataTypes src)
+        public static ApiMember[] jit(Index<ApiTypeInfo> src)
         {
-            var dst = z.list<ApiMember>();
+            var dst = root.list<ApiMember>();
             var count = src.Count;
-            var exclusions = ApiDataType.Ignore;
-            ref var lead = ref src.LeadingCell;
+            var exclusions = ApiTypeInfo.Ignore;
+            ref var lead = ref src.First;
 
             for(var i=0u; i<count; i++)
                 dst.AddRange(jit(skip(lead,i), exclusions));

@@ -11,6 +11,13 @@ namespace Z0
 
     using static z;
 
+    public interface IApiDecoder : IWfService
+    {
+        ApiHostRoutines DecodeBlocks(in ApiHostCode src);
+
+        Span<ApiPartRoutines> DecodeIndex(ApiCodeBlockIndex index);
+    }
+
     public sealed class ApiDecoder : WfService<ApiDecoder,IApiDecoder,IAsmContext>, IApiDecoder
     {
         public Span<ApiPartRoutines> DecodeIndex(ApiCodeBlockIndex index)

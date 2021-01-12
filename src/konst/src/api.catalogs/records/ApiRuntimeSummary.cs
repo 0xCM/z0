@@ -17,6 +17,6 @@ namespace Z0
 
         public string Sig;
 
-        public MethodMetadata Metadata;
+        public ClrMethodMetadata Metadata;
     }
 }

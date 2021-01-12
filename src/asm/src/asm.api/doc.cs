@@ -7,29 +7,29 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
+    using static Part;
     using static AsmDocParts;
     using static TextRules;
-    using static z;
+    using static memory;
 
-    public struct AsmDocParser
+    partial struct asm
     {
-        DocLine parse(TextLine src)
+        [Op]
+        public static AsmDoc doc(string src)
         {
-            return new DocLine(src);
-        }
-
-        public static AsmDoc parse(string src)
-        {
-            var parser = new AsmDocParser();
             var lines = Parse.lines(src);
             var count = lines.Count;
-            var dst = sys.alloc<DocLine>(count);
+            var dst = alloc<DocLine>(count);
             ref var target = ref first(dst);
             ref readonly var source = ref lines.First;
             for(var i=0; i<count; i++)
-                seek(target,i) = parser.parse(skip(source,i));
+                seek(target,i) = new DocLine(skip(source,i));
 
             return new AsmDoc(dst);
         }
+
+        [Op]
+        public static AsmDoc doc(FS.FilePath src)
+            => doc(src.ReadText());
     }
 }

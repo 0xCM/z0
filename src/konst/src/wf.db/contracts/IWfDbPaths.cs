@@ -260,6 +260,12 @@ namespace Z0
         FS.FilePath CapturedAsmFile(PartId part, string api)
             => CapturedAsmDir() + ApiFileName(part, api, Asm);
 
+        FS.FilePath CapturedAsmFile(Type host)
+            => CapturedAsmFile(ApiQuery.hosturi(host));
+
+        FS.FilePath CapturedAsmFile<T>()
+            => CapturedAsmFile(ApiQuery.hosturi<T>());
+
         FS.Files CapturedHexFiles()
             => CapturedHexDir().Files(Hex);
 

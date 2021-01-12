@@ -6,6 +6,7 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
+
     using static Asm.IceOpKind;
 
     using static Part;
@@ -20,9 +21,9 @@ namespace Z0.Asm
         /// <param name="src">The operand classification</param>
         [MethodImpl(Inline), Op]
         public static bool isNearBranch(IceOpKind src)
-            => src == IceOpKind.NearBranch16
-            || src == IceOpKind.NearBranch32
-            || src == IceOpKind.NearBranch64;
+            => src == NearBranch16
+            || src == NearBranch32
+            || src == NearBranch64;
 
         /// <summary>
         /// Determines whether a classified operand is associated with a branching instruction

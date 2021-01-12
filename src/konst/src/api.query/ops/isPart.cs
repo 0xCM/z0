@@ -5,13 +5,15 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
+    using System.Reflection;
 
-    using Z0.Asm;
+    using static Part;
 
-    public interface IApiDecoder : IWfService
+    partial struct ApiQuery
     {
-        ApiHostRoutines DecodeBlocks(in ApiHostCode src);
-
-        Span<ApiPartRoutines> DecodeIndex(ApiCodeBlockIndex index);
+        [MethodImpl(Inline), Op]
+        public static bool isPart(Assembly src)
+            => Attribute.IsDefined(src, typeof(PartIdAttribute));
     }
 }

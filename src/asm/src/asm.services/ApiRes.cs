@@ -58,16 +58,16 @@ namespace Z0
         public static CapturedApiRes[] capture(IAsmContext context, FS.FilePath src, FS.FolderPath dst)
         {
             var resdll = Assembly.LoadFrom(src.Name);
-            var indices = span(Resources.declarations(resdll));
+            var indices = Resources.apires(resdll).View;
             var count = indices.Length;
 
             var results = list<CapturedApiRes>();
             for(var i=0u; i<count; i++)
             {
-                ref readonly var index = ref skip(indices,i);
+                ref readonly var index = ref skip(indices, i);
                 var host = uri(index.DeclaringType);
                 var path = dst + ApiIdentity.file(host, FileExtensions.Asm);
-                results.AddRange(capture(context, host, index.Data, path));
+                results.AddRange(capture(context, host, index.View, path));
             }
 
             return results.ToArray();

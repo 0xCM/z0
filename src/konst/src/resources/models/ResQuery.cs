@@ -10,14 +10,14 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct ResQuery
+    public readonly struct ResDescriptors
     {
-        readonly TableSpan<ResDescriptor> Data;
+        readonly Index<ResDescriptor> Data;
 
         public Assembly Source {get;}
 
         [MethodImpl(Inline)]
-        internal ResQuery(Assembly src, ResDescriptor[] descriptors)
+        internal ResDescriptors(Assembly src, Index<ResDescriptor> descriptors)
         {
             Data = descriptors;
             Source = src;
@@ -29,6 +29,18 @@ namespace Z0
             get => Data.Count;
         }
 
+        public ReadOnlySpan<ResDescriptor> View
+        {
+            [MethodImpl(Inline)]
+            get => Data.View;
+        }
+
+        public ref readonly ResDescriptor this[uint index]
+        {
+            [MethodImpl(Inline)]
+            get => ref Data[index];
+        }
+
         [MethodImpl(Inline)]
         public ref readonly ResDescriptor Descriptor(uint index)
             => ref Data[index];
@@ -38,17 +50,11 @@ namespace Z0
             => Data.View;
 
         [MethodImpl(Inline)]
-        public ResQuery Filter(string match)
-            => new ResQuery(Source, Data.Storage.Where(x => x.NameLike(match)));
+        public ResDescriptors Filter(string match)
+            => new ResDescriptors(Source, Data.Storage.Where(x => x.NameLike(match)));
 
         [MethodImpl(Inline)]
         public ReadOnlySpan<byte> Content(uint index)
-            => Resources.data(Descriptor(index));
-    }
-
-    partial class XTend
-    {
-        public static ReadOnlySpan<char> Utf8(this ResDescriptor src)
-            => Resources.utf8(src);
+            => Resources.content(Descriptor(index));
     }
 }

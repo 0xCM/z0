@@ -18,6 +18,22 @@ namespace Z0
 
         public string UriText {get;}
 
+        [MethodImpl(Inline)]
+        public ApiHostUri(PartId owner, string name)
+        {
+            Owner = owner;
+            Name = insist(name);
+            UriText = owner != 0 ? text.format("{0}{1}{2}", Owner.Format(), ApiUriDelimiters.UriPathSep, Name) : Name;
+        }
+
+        [MethodImpl(Inline)]
+        ApiHostUri(string name)
+        {
+            Owner = PartId.None;
+            Name = EmptyString;
+            UriText = EmptyString;
+        }
+
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
@@ -41,13 +57,6 @@ namespace Z0
         public static bool operator!=(ApiHostUri a, ApiHostUri b)
             => !a.Equals(b);
 
-        [MethodImpl(Inline)]
-        public ApiHostUri(PartId owner, string name)
-        {
-            Owner = owner;
-            Name = insist(name);
-            UriText = owner != 0 ? text.format("{0}{1}{2}", Owner.Format(), ApiUriDelimiters.UriPathSep, Name) : Name;
-        }
 
         [MethodImpl(Inline)]
         public string Format()
@@ -69,14 +78,6 @@ namespace Z0
 
         public override string ToString()
             => Format();
-
-        [MethodImpl(Inline)]
-        ApiHostUri(string name)
-        {
-            Owner = PartId.None;
-            Name = EmptyString;
-            UriText = EmptyString;
-        }
 
         public static ApiHostUri Empty
             => new ApiHostUri(EmptyString);

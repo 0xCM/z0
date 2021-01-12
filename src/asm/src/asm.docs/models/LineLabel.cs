@@ -17,6 +17,9 @@ namespace Z0.Asm
 
             public DataWidth Width {get;}
 
+            public PartKind Kind
+                => PartKind.LineLabel;
+
             [MethodImpl(Inline)]
             internal LineLabel(byte offset)
             {

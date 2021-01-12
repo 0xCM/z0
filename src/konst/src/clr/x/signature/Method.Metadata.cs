@@ -15,7 +15,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source method</param>
         [Op]
-        public static MethodMetadata Metadata(this MethodInfo src)
+        public static ClrMethodMetadata Metadata(this MethodInfo src)
             => Clr.metadata(src);
     }
 }

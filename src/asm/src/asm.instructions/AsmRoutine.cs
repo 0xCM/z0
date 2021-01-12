@@ -27,7 +27,7 @@ namespace Z0.Asm
         /// <summary>
         /// The source member signature
         /// </summary>
-        public string OpSig {get;}
+        public ClrDisplaySig DisplaySig {get;}
 
         /// <summary>
         /// The function encoding
@@ -50,12 +50,12 @@ namespace Z0.Asm
         public ApiArtifactUri MetaUri {get;}
 
         [MethodImpl(Inline)]
-        public AsmRoutine(ApiArtifactUri meta, OpUri uri, string sig, ApiCodeBlock code, ExtractTermCode term, IceInstructionList instructions)
+        public AsmRoutine(ApiArtifactUri meta, OpUri uri, ClrDisplaySig sig, ApiCodeBlock code, ExtractTermCode term, IceInstructionList instructions)
         {
             MetaUri = meta;
             Uri = uri;
             OpId = uri.OpId;
-            OpSig = sig;
+            DisplaySig = sig;
             Instructions = instructions;
             Code = code;
             TermCode =term;
@@ -86,6 +86,6 @@ namespace Z0.Asm
             => InstructionCount != 0;
 
         public static AsmRoutine Empty
-            => new AsmRoutine(ApiArtifactUri.Empty, OpUri.Empty, EmptyString, ApiCodeBlock.Empty, 0, IceInstructionList.Empty);
+            => new AsmRoutine(ApiArtifactUri.Empty, OpUri.Empty, ClrDisplaySig.Empty, ApiCodeBlock.Empty, 0, IceInstructionList.Empty);
     }
 }

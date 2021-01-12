@@ -13,6 +13,6 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> utf8(in ResDescriptor src)
-            => Encoded.utf8(data(src));
+            => Encoded.utf8(content(src));
     }
 }

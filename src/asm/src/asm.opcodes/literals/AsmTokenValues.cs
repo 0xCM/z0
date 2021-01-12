@@ -3,8 +3,8 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
-    using static Konst;
+{
+    using static Part;
 
     [LiteralProvider]
     public readonly struct AsmTokenValues
@@ -84,60 +84,60 @@ namespace Z0
         public const string ptr16ᙾ16 = "ptr16:16";
 
         public const string ptr16ᙾ32 = "ptr16:32";
- 
+
         public const string r8  = "r8";
- 
+
         public const string r16 = "r16";
- 
+
         public const string r32 = "r32";
- 
+
         public const string r64 = "r64";
- 
+
         public const string rel8  = "rel8";
- 
+
         public const string rel16 = "rel16";
- 
+
         public const string rel32 = "rel32";
- 
+
         public const string rノm8 = "r/m8";
- 
+
         public const string rノm16= "r/m16";
- 
+
         public const string rノm32= "r/m32";
- 
+
         public const string rノm64= "r/m64";
- 
+
         /// <example>
         /// 017ah mov [rdi+7ff9h],gs ; MOV r32/m16, Sreg || o32 8C /r || encoded[6]{8c af f9 7f 00 00}
         /// </example>
         public const string Sreg  = "Sreg";
- 
+
         public const string ᛁsaeᛁ = "{sae}";
- 
+
         public const string SRC = "SRC";
- 
+
         public const string SRC1  = "SRC1";
- 
+
         public const string SRC2  = "SRC2";
- 
+
         public const string SRC3  = "SRC3";
- 
+
         public const string ST  = "ST";
- 
+
         public const string STᐸ0ᐳ = "ST(0)";
- 
+
         public const string xmm = "xmm";
- 
+
         public const string xmmノ32 = "xmm/m32";
- 
+
         public const string xmmノ64 = "xmm/m64";
- 
+
         public const string xmmノ128 = "xmm/m128";
- 
+
         public const string ᐸXMM0ᐳ= "<XMM0>";
- 
+
         public const string ymm = "ymm";
- 
+
         public const string m256  = "m256";
 
         /// <example>
@@ -160,25 +160,25 @@ namespace Z0
         /// 003ah ret                                     ; RET || C3 || encoded[1]{c3}
         /// </example>
         public const string ymmノm256 = "ymm/m256";
- 
+
         public const string ᐸYMM0ᐳ = "<YMM0>";
- 
+
         public const string zmm = "zmm";
- 
+
         public const string m512  = "m512";
- 
+
         public const string zmmノm512 = "zmm/m512";
- 
+
         public const string mV  = "mV";
- 
+
         public const string m32bcst = "m32bcst";
- 
+
         public const string m64bcst = "m64bcst";
- 
+
         public const string zmmノm512ノm32bcst = "zmm/m512/m32bcst";
- 
+
         public const string zmmノm512ノm64bcst = "zmm/m512/m64bcst";
- 
+
         public const string ᐸZMM0ᐳ = "<ZMM0>";
     }
 }

@@ -17,18 +17,21 @@ namespace Z0.Asm
 
             public OpUri Uri {get;}
 
-            public string Signature {get;}
+            public ClrDisplaySig DisplaySig {get;}
 
             public CodeBlock CodeBlock {get;}
 
             public ExtractTermCode TermCode {get;}
 
+            public PartKind Kind
+                => PartKind.BlockHeader;
+
             [MethodImpl(Inline)]
-            public BlockHeader(string sep, OpUri uri, string sig, CodeBlock code, ExtractTermCode term)
+            public BlockHeader(string sep, OpUri uri, ClrDisplaySig sig, CodeBlock code, ExtractTermCode term)
             {
                 Separator = sep;
                 Uri = uri;
-                Signature = sig;
+                DisplaySig = sig;
                 CodeBlock = code;
                 TermCode = term;
             }

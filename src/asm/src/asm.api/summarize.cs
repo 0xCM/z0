@@ -13,11 +13,11 @@ namespace Z0.Asm
     partial struct asm
     {
         [Op]
-        public static AsmFxSummary summarize(MemoryAddress @base, in IceInstruction src, ReadOnlySpan<byte> encoded, string formatted, uint offset)
-            => new AsmFxSummary(@base, offset,  formatted,  src.Specifier, operands(@base, src),  encoded.Slice((int)offset, src.ByteLength).ToArray());
+        public static AsmInstructionSummary summarize(MemoryAddress @base, in IceInstruction src, ReadOnlySpan<byte> encoded, string formatted, uint offset)
+            => new AsmInstructionSummary(@base, offset,  formatted,  src.Specifier, operands(@base, src),  encoded.Slice((int)offset, src.ByteLength).ToArray());
 
         [Op]
-        public static AsmFxSummary Summarize(MemoryAddress @base, in IceInstruction src, ReadOnlySpan<byte> encoded, string formatted, uint offset)
+        public static AsmInstructionSummary Summarize(MemoryAddress @base, in IceInstruction src, ReadOnlySpan<byte> encoded, string formatted, uint offset)
             => summarize(@base, src, encoded, formatted, offset);
 
         /// <summary>
@@ -25,10 +25,10 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The source instruction list</param>
         [Op]
-        public static ReadOnlySpan<AsmFxSummary> summarize(in IceInstructionList src)
+        public static ReadOnlySpan<AsmInstructionSummary> summarize(in IceInstructionList src)
         {
             var count = src.Length;
-            var buffer = new AsmFxSummary[count];
+            var buffer = new AsmInstructionSummary[count];
             var offset = 0u;
             var @base = src.Encoded.BaseAddress;
             var view = src.View;
@@ -48,10 +48,10 @@ namespace Z0.Asm
         /// Describes the instructions that comprise a function
         /// </summary>
         /// <param name="src">The source function</param>
-        public static ReadOnlySpan<AsmFxSummary> summarize(in AsmRoutine src)
+        public static ReadOnlySpan<AsmInstructionSummary> summarize(in AsmRoutine src)
         {
             var count = src.InstructionCount;
-            var buffer = new AsmFxSummary[count];
+            var buffer = new AsmInstructionSummary[count];
             var offset = 0u;
             var @base = src.BaseAddress;
             var view = src.Instructions.View;

@@ -23,6 +23,8 @@ namespace Z0
 
         protected IWfShell Wf {get; private set;}
 
+        protected IWfDb Db => Wf.Db();
+
         public void SetMode(bool diagnostic)
             => DiagnosticMode = diagnostic;
 

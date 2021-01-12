@@ -7,9 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static AsmTokenRecords;
+    using Z0.Asm;
 
-    partial class  AsmTokenIndex
+    using static Asm.AsmTokenSpecs;
+
+    partial class AsmTokenIndex
     {
         public TokenRecord[] Records
             = new TokenRecord[TokenCount]{

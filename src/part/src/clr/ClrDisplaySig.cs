@@ -5,20 +5,23 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
+    using System.Text;
 
-    using static memory;
-    partial struct Clr
+    using static Part;
+
+    public readonly struct ClrDisplaySig
     {
         [Op]
-        public static string format(in MethodMetadata src)
+        public static ClrDisplaySig from(in ClrMethodMetadata src)
         {
-            var dst = Buffers.text();
+            var dst = new TextBuffer(new StringBuilder());
             format(src, dst);
-            return dst.Emit();
+            return new ClrDisplaySig(dst.Emit());
         }
 
         [Op]
-        public static void format(in MethodMetadata src, ITextBuffer dst)
+        static void format(in ClrMethodMetadata src, ITextBuffer dst)
         {
             dst.Append(src.ReturnType.Format());
             dst.Append(Chars.Space);
@@ -28,7 +31,7 @@ namespace Z0
             var count = parameters.Length;
             for(var i=0; i<count; i++)
             {
-                dst.Append(skip(parameters,i).Format());
+                dst.Append(memory.skip(parameters,i).Format());
                 if(i != count - 1)
                 {
                     dst.Append(Chars.Comma);
@@ -36,6 +39,25 @@ namespace Z0
                 }
             }
             dst.Append(Chars.RParen);
+        }
+
+        readonly TextBlock Content;
+
+        [MethodImpl(Inline)]
+        ClrDisplaySig(TextBlock src)
+            => Content = src;
+
+        [MethodImpl(Inline)]
+        public string Format()
+            => Content.Format();
+
+        public override string ToString()
+            => Format();
+
+        public static ClrDisplaySig Empty
+        {
+            [MethodImpl(Inline)]
+            get => new ClrDisplaySig(TextBlock.Empty);
         }
     }
 }

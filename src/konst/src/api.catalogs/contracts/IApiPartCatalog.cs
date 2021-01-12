@@ -23,17 +23,17 @@ namespace Z0
         /// <summary>
         /// The operation hosts
         /// </summary>
-        ApiHost[] OperationHosts {get;}
+        Index<ApiHost> OperationHosts {get;}
 
         /// <summary>
-        /// The data type hosts
+        /// Api types
         /// </summary>
-        ApiDataTypes ApiDataTypes {get;}
+        Index<ApiTypeInfo> ApiTypes {get;}
 
         /// <summary>
         /// The known types that reify contracted operation services, potentially generic
         /// </summary>
-        Type[] ServiceHosts {get;}
+        Index<Type> ServiceHosts {get;}
 
         /// <summary>
         /// The identity of the assembly that defines and owns the catalog
@@ -48,7 +48,7 @@ namespace Z0
         /// <summary>
         /// The operations defined by <see cref='ApiHosts'/>
         /// </summary>
-        MethodInfo[] Operations {get;}
+        Index<MethodInfo> Operations {get;}
 
         /// <summary>
         /// The component's manifest module
@@ -66,12 +66,15 @@ namespace Z0
         /// Specifies whether the catalog describes any api hosts
         /// </summary>
         bool IsNonEmpty
-            => (OperationHosts.Length + ApiDataTypes.Count) != 0;
+            => (OperationHosts.Length + ApiTypes.Count) != 0;
 
         /// <summary>
         /// Specifies whether the catalog describes any api hosts
         /// </summary>
         bool IsEmpty
-            => (OperationHosts.Length + ApiDataTypes.Count) == 0;
+            => (OperationHosts.Length + ApiTypes.Count) == 0;
+
+        MethodInfo[] ConcreteOperations
+            => Operations.Storage.Concrete();
     }
 }

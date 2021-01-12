@@ -9,8 +9,8 @@ namespace Z0.Asm
 
     public readonly struct AsmStatementSyntax
     {
-        public readonly AsmMnemonic Mnemonic;
+        public AsmMnemonic Mnemonic {get;}
 
-        public readonly AsmOperandSyntax[] Operands;
+        public Index<AsmOperandSyntax> Operands {get;}
     }
 }
