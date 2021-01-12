@@ -9,8 +9,6 @@ namespace Z0.Schemas.Ecma
     [StructLayout(LayoutKind.Sequential)]
     public struct GenericParamRow : IRecord<GenericParamRow>
     {
-        public RowKey Key;
-
         public ushort Number;
 
         public ushort Flags;

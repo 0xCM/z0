@@ -10,7 +10,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
+    using static Part;
     using static Kinds;
 
     readonly struct V256UnaryOpImmInjector : IImmInjector
@@ -50,6 +50,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public DynamicDelegate<UnaryOp<Vector256<T>>> EmbedImmediate(MethodInfo src, byte imm)
-            => DynamicImmediate.EmbedVUnaryOpImm(vk256<T>(), Diviner.Identify(src), src, imm);
+            => DynamicImmediate.EmbedVUnaryOpImm(VKinds.vk256<T>(), Diviner.Identify(src), src, imm);
     }
 }

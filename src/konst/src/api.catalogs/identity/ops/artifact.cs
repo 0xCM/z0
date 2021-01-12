@@ -10,21 +10,6 @@ namespace Z0
 
     partial struct ApiIdentify
     {
-        /// <summary>
-        /// Identifies a type
-        /// </summary>
-        /// <param name="src">The type to identify</param>
-        [Op]
-        public static TypeIdentity artifact(Type src)
-        {
-            var component = src.Assembly;
-            var id = text.format(RP.SlotDot3,
-                "type",
-                ClrToken.from(component),
-                ClrToken.from(src)
-                );
-            return TypeIdentity.define(id);
-        }
 
         /// <summary>
         /// Identifies a method
@@ -42,26 +27,6 @@ namespace Z0
                 ClrToken.from(src)
                 );
 
-            return OpIdentity.define(id);
-        }
-
-        /// <summary>
-        /// Identifies a delegate
-        /// </summary>
-        /// <param name="src">The method to identify</param>
-        [Op]
-        public static OpIdentity artifact(Delegate src)
-        {
-            var method =src.Method;
-            var type = method.DeclaringType;
-            var component = type.Assembly;
-            var id = text.format(RP.SlotDot5,
-                "delegate",
-                ClrToken.from(component),
-                ClrToken.from(type),
-                ClrToken.from(method),
-                src.GetHashCode()
-                );
             return OpIdentity.define(id);
         }
     }

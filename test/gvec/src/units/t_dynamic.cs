@@ -8,7 +8,6 @@ namespace Z0
     using System.Linq;
 
     using static Konst;
-    using static Kinds;
 
     public class t_dynamic : t_inx<t_dynamic>
     {
@@ -29,8 +28,8 @@ namespace Z0
         public void vbsll_imm_handle()
         {   const byte imm8 = 9;
             var name = nameof(gvec.vbsll);
-            var src = typeof(gvec).DeclaredMethods().WithName(name).OfKind(v128).Single();
-            var op = Dynop.EmbedVUnaryOpImm(vk128<uint>(), Z0.Identity.identify(src), src, imm8);
+            var src = typeof(gvec).DeclaredMethods().WithName(name).OfKind(VKinds.v128).Single();
+            var op = Dynop.EmbedVUnaryOpImm(VKinds.vk128<uint>(), Z0.Identity.identify(src), src, imm8);
             var handle = ClrDynamic.handle(op.Target);
             var dst = ClrDynamic.method(handle);
             Claim.ClaimEq(dst.Name, name);

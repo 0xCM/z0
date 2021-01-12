@@ -9,7 +9,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     public readonly struct ApiHexArchive : IFileArchive
     {
@@ -57,7 +57,7 @@ namespace Z0
             for(var i=0; i<iCount; i++)
             {
                 var path = list[i].Path;
-                var items = Z0.ApiCode.blocks(path);
+                var items = Z0.ApiCode.extracts(path);
                 var jCount = items.Length;
                 for(var j=0; j<jCount; j++)
                     yield return items[j];            }

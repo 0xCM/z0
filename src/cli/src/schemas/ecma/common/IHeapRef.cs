@@ -9,9 +9,14 @@ namespace Z0.Schemas.Ecma
 
     using static Part;
 
-    public interface IHeapRef<T>
-        where T : unmanaged, IHeapRef<T>
+    public interface IHeapRef
     {
         Token Id {get;}
+    }
+
+    public interface IHeapRef<T> : IHeapRef
+        where T : unmanaged, IHeapRef<T>
+    {
+
     }
 }

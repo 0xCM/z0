@@ -18,6 +18,7 @@ namespace Z0.Schemas.Ecma
 
         public uint Value {get;}
 
+        [MethodImpl(Inline)]
         public FK(uint value)
             => Value = value;
     }
@@ -29,7 +30,21 @@ namespace Z0.Schemas.Ecma
     {
         public uint Value {get;}
 
+        [MethodImpl(Inline)]
         public PK(uint value)
+            => Value = value;
+    }
+
+    /// <summary>
+    /// Represents heap key
+    /// </summary>
+    public readonly struct HK<T>
+    {
+        public uint Value {get;}
+
+
+        [MethodImpl(Inline)]
+        public HK(uint value)
             => Value = value;
     }
 }

@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Reflection.Metadata.Ecma335;
     using System.Collections.Generic;
-    using System.Linq;
 
     partial class PeTableReader
     {

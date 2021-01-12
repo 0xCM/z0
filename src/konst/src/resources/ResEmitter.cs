@@ -15,7 +15,7 @@ namespace Z0
     using F = ContentLibField;
 
     [ApiHost]
-    public readonly struct ResData
+    public readonly struct ResEmitter
     {
         [Op]
         public static ResEmission[] reference(IWfShell wf)
@@ -46,9 +46,8 @@ namespace Z0
         public static Index<ResEmission> embedded(IWfShell wf, Assembly src, FS.FolderPath root, utf8 match = default,  bool clear = true)
         {
             var flow = wf.Running(string.Format("Emitting resources embedded in {0}", src.GetSimpleName()));
-
-            var query = match.IsEmpty ? Resources.descriptors(src) : Resources.descriptors(src, match);
-            var count = query.ResourceCount;
+            var descriptors = match.IsEmpty ? Resources.descriptors(src) : Resources.descriptors(src, match);
+            var count = descriptors.ResourceCount;
 
             if(count == 0)
                 wf.Warn(Msg.NoMatchingResources.Format(src, match));
@@ -62,12 +61,13 @@ namespace Z0
                 root.Clear();
 
             var invalid = Path.GetInvalidPathChars();
-            var descriptors = query.Descriptors();
+            var sources = descriptors.View;
             for(var i=0; i<count; i++)
             {
-                ref readonly var descriptor = ref skip(descriptors,i);
+                ref readonly var descriptor = ref skip(sources,i);
+                var size = descriptor.Size;
                 seek(emission,i) = emit(descriptor, root);
-                wf.EmittedFile((uint)descriptor.Size, emission.Target);
+                wf.EmittedFile((uint)size, emission.Target);
             }
 
             wf.Ran(flow);

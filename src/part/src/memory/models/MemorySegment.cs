@@ -17,29 +17,17 @@ namespace Z0
     /// </summary>
     public readonly struct MemorySegment : IMemorySegment, ITextual, IEquatable<MemorySegment>, IHashed
     {
-        /// <summary>
-        /// Defines a 128-bit vector by explicit component specification, from least -> most significant
-        /// </summary>
-        /// <param name="w">The vector width selector</param>
-        [MethodImpl(Inline),Op]
-        public static Vector128<ulong> vparts(ulong x0, ulong x1)
-            => Create(x0,x1);
-
         public const byte Size = 16;
 
         readonly Vector128<ulong> Segment;
 
         [MethodImpl(Inline)]
-        public MemorySegment(Vector128<ulong> src)
-            => Segment = src;
-
-        [MethodImpl(Inline)]
         public unsafe MemorySegment(byte* src, ByteSize length)
-            => Segment = vparts((ulong)src, (ulong)length);
+            => Segment = Create((ulong)src, (ulong)length);
 
         [MethodImpl(Inline)]
         public MemorySegment(MemoryAddress src, ByteSize size)
-            => Segment = vparts((ulong)src, (ulong)size);
+            => Segment = Create((ulong)src, (ulong)size);
 
         public MemoryAddress BaseAddress
         {

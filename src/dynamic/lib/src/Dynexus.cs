@@ -16,6 +16,7 @@ namespace Z0
 
     using K = Kinds;
     using I = Z0;
+    using VK = VKinds;
 
     using U = UnaryOpClass;
     using B = BinaryOpClass;
@@ -49,9 +50,9 @@ namespace Z0
         IImmInjector IDynamicImmediate.UnaryInjector<W>()
         {
             if(typeof(W) == typeof(W128))
-                return ImmInjector.create(Diviner, Kinds.v128, K.UnaryOp);
+                return ImmInjector.create(Diviner, VKinds.v128, K.UnaryOp);
             else if(typeof(W) == typeof(W256))
-                return ImmInjector.create(Diviner, Kinds.v256, K.UnaryOp);
+                return ImmInjector.create(Diviner, VKinds.v256, K.UnaryOp);
             else
                 throw Unsupported.define<W>();
         }
@@ -59,28 +60,28 @@ namespace Z0
         IImmInjector IDynamicImmediate.BinaryInjector<W>()
         {
             if(typeof(W) == typeof(W128))
-                return ImmInjector.create(Diviner, Kinds.v128, K.BinaryOp);
+                return ImmInjector.create(Diviner, VKinds.v128, K.BinaryOp);
             else if(typeof(W) == typeof(W256))
-                return ImmInjector.create(Diviner, Kinds.v256, K.BinaryOp);
+                return ImmInjector.create(Diviner, VKinds.v256, K.BinaryOp);
             else
-                throw Unsupported.define<W>();
+                throw no<W>();
         }
 
         [MethodImpl(Inline)]
         DynamicDelegate<UnaryOp<Vector128<T>>> IDynamicImmediate.CreateUnaryOp<T>(MethodInfo src, W128 w, byte imm)
-            => Dynop.EmbedVUnaryOpImm(K.vk128<T>(), Identify(src), src, imm);
+            => Dynop.EmbedVUnaryOpImm(VK.vk128<T>(), Identify(src), src, imm);
 
         [MethodImpl(Inline)]
         DynamicDelegate<BinaryOp<Vector128<T>>> IDynamicImmediate.CreateBinaryOp<T>(MethodInfo src, W128 w, byte imm)
-            => Dynop.EmbedVBinaryOpImm(K.vk128<T>(), Identify(src), src, imm);
+            => Dynop.EmbedVBinaryOpImm(VK.vk128<T>(), Identify(src), src, imm);
 
         [MethodImpl(Inline)]
         DynamicDelegate<UnaryOp<Vector256<T>>> IDynamicImmediate.CreateUnaryOp<T>(MethodInfo src, W256 w, byte imm)
-            => Dynop.EmbedVUnaryOpImm(K.vk256<T>(), Identify(src), src, imm);
+            => Dynop.EmbedVUnaryOpImm(VK.vk256<T>(), Identify(src), src, imm);
 
         [MethodImpl(Inline)]
         DynamicDelegate<BinaryOp<Vector256<T>>> IDynamicImmediate.CreateBinaryOp<T>(MethodInfo src, W256 w, byte imm)
-            => Dynop.EmbedImmVBinaryOpImm(K.vk256<T>(), Identify(src), src, imm);
+            => Dynop.EmbedImmVBinaryOpImm(VK.vk256<T>(), Identify(src), src, imm);
 
         [MethodImpl(Inline)]
         IEmitterOpFactory<T> IDynamicFactories.Factory<T>(EmitterOpClass<T> k)

@@ -12,7 +12,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial class ImageEmitters
+    partial class ImageDataEmitter
     {
         public uint EmitCilRecords()
             => EmitCilRecords(Wf.Components);

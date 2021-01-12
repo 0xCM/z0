@@ -8,7 +8,7 @@ namespace Z0.Schemas.Ecma
     using System.Runtime.InteropServices;
 
     [Record(TableId), StructLayout(LayoutKind.Sequential)]
-    public struct AssemblyRow  : IRecord<AssemblyRow>
+    public struct AssemblyRow : IRecord<AssemblyRow>
     {
         public const TableIndex TableId = TableIndex.Assembly;
 

@@ -10,18 +10,14 @@ namespace Z0
     using System.Reflection;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     using api = ApiIdentity;
 
     public readonly struct ApiArtifactUri : ITextual
     {
-        internal const byte PartIndex = 0;
-
         internal const byte HostIndex = 1;
-
-        internal const byte KeyIndex = 2;
 
         internal const byte OpIndex = 3;
 

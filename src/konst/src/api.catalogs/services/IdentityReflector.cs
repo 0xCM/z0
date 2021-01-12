@@ -9,7 +9,7 @@ namespace Z0
     using System.Linq;
     using System.Reflection;
 
-    using static Konst;
+    using static Part;
 
     using AC = ArityKind;
     using OC = ApiOperatorKind;

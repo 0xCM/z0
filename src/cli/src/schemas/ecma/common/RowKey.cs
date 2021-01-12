@@ -9,8 +9,6 @@ namespace Z0.Schemas.Ecma
 
     using static Part;
 
-
-
     public readonly struct RowKey
     {
         public uint Value {get;}

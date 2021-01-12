@@ -8,8 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
-    using static SFx;
+    using static Part;
+
+    using K = VKinds;
 
     partial class VServices
     {
@@ -18,7 +19,7 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             public Vector128<T> Invoke()
-                => z.vunits(Kinds.vk128<T>());
+                => z.vunits(K.vk128<T>());
         }
 
         public readonly struct Units256<T> : SFx.IEmitter256<T>
@@ -26,7 +27,7 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             public Vector256<T> Invoke()
-                => z.vunits<T>(Kinds.vk256<T>());
+                => z.vunits<T>(K.vk256<T>());
         }
     }
 }

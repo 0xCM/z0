@@ -10,7 +10,7 @@ namespace Z0
     using System.Linq;
 
     using static z;
-    using static Konst;
+    using static Part;
 
     partial struct Resources
     {

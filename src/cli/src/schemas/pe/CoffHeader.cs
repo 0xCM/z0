@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Images
+namespace Z0.Schemas.Pe
 {
     using System;
     using System.Runtime.InteropServices;
@@ -12,9 +12,11 @@ namespace Z0.Images
     /// is a standard COFF file header in the following format. Note that the Windows loader limits
     /// the number of sections to 96.
     /// </summary>
-    [Record, StructLayout(LayoutKind.Sequential)]
+    [Record(TableId), StructLayout(LayoutKind.Sequential)]
     public struct CoffHeader : IRecord<CoffHeader>
     {
+        public const string TableId = "pe.coff-header";
+
         public MachineType Machine;
 
         public short NumberOfSections;

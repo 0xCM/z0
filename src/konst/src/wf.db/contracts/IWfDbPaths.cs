@@ -101,8 +101,9 @@ namespace Z0
         /// <param name="subject">The subject identifier</param>
         /// <typeparam name="S">The subject type</typeparam>
         FS.FolderPath TableDir<T>()
-            where T : struct
+            where T : struct, IRecord<T>
                 => TableDir(typeof(T));
+
 
         FS.FilePath Table(string id, PartId part)
             => TableDir(id) + FS.file(string.Format(RP.SlotDot2, id, part.Format()), DefaultTableExt);
@@ -113,18 +114,16 @@ namespace Z0
         FS.FilePath Table(PartId part, string id, FS.FileExt ext)
             => TableDir(id) + FS.file(part.Format(), ext);
 
-        FS.FilePath Table<T>(Assembly component,  FS.FileExt ext)
+        FS.FilePath Table<T>(string name)
             where T : struct, IRecord<T>
-        {
-            var id = Records.tableid<T>().Identifier;
-            return TableDir(id) + FS.file(string.Format("{0}.{1}", id, component.GetSimpleName()), ext);
-        }
+                => Table<T>(name, Csv);
 
         FS.FilePath Table<T>(string name, FS.FileExt ext)
             where T : struct, IRecord<T>
         {
             var id = Records.tableid<T>().Identifier;
-            return TableDir(id) + FS.file(string.Format("{0}.{1}", id, name), ext);
+            var dir = TableDir(id);
+            return dir + FS.file(string.Format("{0}.{1}", id, name), ext);
         }
 
         FS.FilePath Table(Type t, PartId part)

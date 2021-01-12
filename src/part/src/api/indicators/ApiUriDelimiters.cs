@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public static class ApiUriDelimiters
+    public readonly struct ApiUriDelimiters
     {
         /// <summary>
         /// The text used to terminate a uri scheme and trailing '//'

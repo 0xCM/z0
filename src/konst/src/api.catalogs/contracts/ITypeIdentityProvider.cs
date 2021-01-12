@@ -8,7 +8,6 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
-    using api = ApiIdentify;
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
@@ -51,6 +50,6 @@ namespace Z0
         new T Identify(Type src);
 
         TypeIdentity IIdentityProvider<Type,TypeIdentity>.Identify(Type src)
-            => api.type(Identify(src).Identifier);
+            => new TypeIdentity(Identify(src).Identifier);
     }
 }

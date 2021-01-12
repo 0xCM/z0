@@ -2,7 +2,7 @@
 // Copyright   :  Licensed to the .NET Foundation under one or more agreements.
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Images
+namespace Z0.Schemas.Pe
 {
     using System;
 

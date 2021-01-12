@@ -20,9 +20,9 @@ namespace Z0.Schemas.Ecma
 
         public FK<BlobIndex> PublicKeyToken;
 
-        public FK<name> Name;
+        public HK<name> Name;
 
-        public FK<name> Culture;
+        public HK<name> Culture;
 
         public AssemblyFlags Flags;
 

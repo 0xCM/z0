@@ -10,7 +10,6 @@ namespace Z0
     using System.Reflection.Metadata;
     using System.Reflection.Metadata.Ecma335;
 
-    using static Konst;
     using static z;
 
     partial class PeTableReader
@@ -31,28 +30,6 @@ namespace Z0
                 seek(dst,i) = new ClrFieldInfo(i, name(State, entry, i), sig(State, entry, i), format(entry.Attributes));
             }
             return dst;
-        }
-
-        public static ReadOnlySpan<FieldRvaInfo> rva(in ReaderState state)
-        {
-            var reader = state.Reader;
-            var handles = reader.FieldDefinitions.ToReadOnlySpan();
-            var count = handles.Length;
-            var dst = sys.alloc<FieldRvaInfo>(count);
-
-            for(var i=0u; i<count; i++)
-            {
-                ref readonly var handle = ref z.skip(handles,i);
-                var entry = reader.GetFieldDefinition(handle);
-                var td = reader.GetTypeDefinition(entry.GetDeclaringType());
-                var tName = reader.GetString(td.Name);
-                var sig = PeTableReader.sig(state, entry, i);
-                var name = reader.GetString(entry.Name);
-                var va = entry.GetRelativeVirtualAddress();
-                dst[i] = new FieldRvaInfo((Address32)va, tName, name, sig);
-            }
-
-            return dst.OrderBy(x => x.Rva);
         }
 
         public static CliLiteralInfo literal(in ReaderState state, StringHandle handle, Count seq)

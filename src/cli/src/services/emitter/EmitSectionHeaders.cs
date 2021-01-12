@@ -8,7 +8,7 @@ namespace Z0
 
     using static z;
 
-    partial class ImageEmitters
+    partial class ImageDataEmitter
     {
         static ReadOnlySpan<byte> RenderWidths
             => new byte[9]{60,16,16,12,12,60,16,16,16};
@@ -20,7 +20,7 @@ namespace Z0
 
         public void EmitSectionHeaders(IBuildArchive src)
         {
-            var svc = ImageEmitters.init(Wf);
+            var svc = ImageDataEmitter.init(Wf);
             var db = Wf.Db();
             var dir = db.TableDir<ImageSectionHeader>();
             var cmd = CmdBuilder.EmitImageHeaders(src.DllFiles, db.Table(ImageSectionHeader.TableId, "dll"));

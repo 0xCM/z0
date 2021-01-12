@@ -11,9 +11,8 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Linq;
 
-    using static Konst;
+    using static Part;
     using static z;
-    using static Kinds;
 
     readonly struct V128BinaryOpImmInjector : IImmInjector
     {
@@ -52,6 +51,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public DynamicDelegate<BinaryOp<Vector128<T>>> EmbedImmediate(MethodInfo src, byte imm)
-            => DynamicImmediate.EmbedVBinaryOpImm(vk128<T>(), Diviner.Identify(src), src, imm);
+            => DynamicImmediate.EmbedVBinaryOpImm(VKinds.vk128<T>(), Diviner.Identify(src), src, imm);
     }
 }

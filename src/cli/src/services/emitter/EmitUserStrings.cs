@@ -8,31 +8,33 @@ namespace Z0
     using System.Reflection;
 
     using static z;
+
     using F = CliStringRecord.Fields;
     using W = CliStringRecord.RenderWidths;
 
-    partial class ImageEmitters
+
+    partial class ImageDataEmitter
     {
-        public void EmitSystemStrings()
+        public void EmitUserStrings()
         {
-            EmitSystemStrings(Wf.Components);
+            EmitUserStrings(Wf.Components);
         }
 
-        public void EmitSystemStrings(ReadOnlySpan<Assembly> src)
+        public void EmitUserStrings(ReadOnlySpan<Assembly> src)
         {
             var count = src.Length;
             for(var i=0; i<count; i++)
-                EmitSystemStrings(skip(src,i));
+                EmitUserStrings(skip(src,i));
         }
 
-        public void EmitSystemStrings(Assembly src)
+        public void EmitUserStrings(Assembly src)
         {
             var srcPath = FS.path(src.Location);
             using var reader = PeTableReader.open(srcPath);
-            var data = reader.SystemStrings();
+            var data = reader.UserStrings();
             var EmissionCount = (uint)data.Length;
 
-            var dstPath = Wf.Db().Table<CliSystemStringInfo>(src.GetSimpleName(), FileExtensions.Csv);
+            var dstPath = Wf.Db().Table<CliUserStringInfo>(src.GetSimpleName(), FileExtensions.Csv);
             var formatter = Table.formatter<F,W>();
             using var writer = dstPath.Writer();
             formatter.EmitHeader();
@@ -43,7 +45,7 @@ namespace Z0
         }
 
         [Op]
-        static ref readonly DatasetFormatter<F,W> format(in CliSystemStringInfo src, in DatasetFormatter<F,W> dst)
+        static ref readonly DatasetFormatter<F,W> format(in CliUserStringInfo src, in DatasetFormatter<F,W> dst)
         {
             dst.Delimit(F.Sequence, src.Sequence);
             dst.Delimit(F.Source, src.Source);
@@ -54,5 +56,6 @@ namespace Z0
             dst.EmitEol();
             return ref dst;
         }
+
     }
 }

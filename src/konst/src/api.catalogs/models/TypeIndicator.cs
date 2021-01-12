@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Partitions types into manageable pieces in various ways, hopefully sensible, with 16 bits
@@ -17,50 +17,66 @@ namespace Z0
         readonly char Value;
 
         [MethodImpl(Inline)]
+        internal TypeIndicator(char c)
+            => Value = c;
+
+        [MethodImpl(Inline)]
         public static TypeIndicator Define(char c)
             => new TypeIndicator(c);
 
         /// <summary>
         /// The nonindicating indicator
         /// </summary>
-        public static TypeIndicator Empty 
+        public static TypeIndicator Empty
             => new TypeIndicator(Chars.Null);
 
         /// <summary>
         /// Identifies the signed numeric partition
         /// </summary>
-        public static TypeIndicator Signed 
+        public static TypeIndicator Signed
             => IDI.Signed;
 
         /// <summary>
         /// Identifies the unsigned numeric partition
         /// </summary>
-        public static TypeIndicator Unsigned 
+        public static TypeIndicator Unsigned
             => IDI.Unsigned;
 
         /// <summary>
         /// Identifies the floating-point numeric partition
         /// </summary>
-        public static TypeIndicator Float 
+        public static TypeIndicator Float
             => IDI.Float;
-                                            
+
         /// <summary>
         /// Identifies the vectorized type partition
         /// </summary>
-        public static TypeIndicator Vector 
+        public static TypeIndicator Vector
             => IDI.Vector;
 
         /// <summary>
         /// Identifies the block type partition
         /// </summary>
-        public static TypeIndicator Block 
+        public static TypeIndicator Block
             => IDI.Block;
 
         /// <summary>
         /// Identifies the generic type partition
         /// </summary>
-        public static TypeIndicator Generic 
+        public static TypeIndicator Generic
             => IDI.Generic;
+
+        /// <summary>
+        /// Specifies whether the indicator is non-indicating
+        /// </summary>
+        public bool IsEmpty
+            => Value == Chars.Null;
+
+        public string Format()
+            => IsEmpty ? EmptyString : Value.ToString();
+
+        public override string ToString()
+            => Format();
 
         [MethodImpl(Inline)]
         public static implicit operator string(TypeIndicator src)
@@ -69,21 +85,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator TypeIndicator(char src)
             => new TypeIndicator(src);
-
-        [MethodImpl(Inline)]
-        internal TypeIndicator(char c)
-            => Value = c;
-
-        /// <summary>
-        /// Specifies whether the indicator is non-indicating
-        /// </summary>
-        public bool IsEmpty 
-            => Value == Chars.Null;
-       
-        public string Format()
-            => IsEmpty ? EmptyString : Value.ToString();        
-
-        public override string ToString()
-            => Format();
     }
 }

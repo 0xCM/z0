@@ -10,7 +10,7 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
 
-    using static Konst;
+    using static Part;
 
     partial struct ApiIdentify
     {

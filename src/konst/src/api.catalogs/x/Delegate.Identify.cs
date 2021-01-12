@@ -14,6 +14,7 @@ namespace Z0
         /// Identifies a delegate
         /// </summary>
         /// <param name="m">The method to identify</param>
+        [Op]
         public static OpIdentity Identify(this Delegate m)
             => Identity.identify(m);
     }

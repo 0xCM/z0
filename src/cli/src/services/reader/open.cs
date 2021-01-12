@@ -14,11 +14,15 @@ namespace Z0
 
     partial class PeTableReader
     {
+        [MethodImpl(Inline), Op]
+        internal static PeTableReader cover(ReaderState src)
+            => new PeTableReader(src);
+
         /// <summary>
         /// Allocates a <see cref='PeTableReader'/> for a specified file
         /// </summary>
         /// <param name="src">The source path</param>
-        [MethodImpl(Inline)]
+        [Op]
         public static PeTableReader open(FS.FilePath src)
         {
             var stream = File.OpenRead(src.Name);

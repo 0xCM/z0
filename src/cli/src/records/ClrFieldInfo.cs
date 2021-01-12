@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
+    using Z0.Schemas.Ecma;
 
     using static Part;
 
@@ -32,7 +33,7 @@ namespace Z0
         public string Attribs;
 
         [MethodImpl(Inline)]
-        public ClrFieldInfo(Count seq, CliLiteralInfo field, CliBlobInfo sig, string attribs)
+        public ClrFieldInfo(Count seq, CliLiteralInfo field, BlobRow sig, string attribs)
         {
             Sequence = seq;
             Sig = sig.Data;

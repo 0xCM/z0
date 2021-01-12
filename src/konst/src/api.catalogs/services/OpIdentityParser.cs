@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     using api = ApiUri;
 
@@ -24,7 +24,7 @@ namespace Z0
             => api.operation(text);
 
         ParseResult<string, OpIdentity> IParser<string, OpIdentity>.Parse(string src)
-            => z.parsed(src, Parse(src));
+            => root.parsed(src, Parse(src));
 
     }
 }

@@ -19,6 +19,6 @@ namespace Z0
 
         KeyGenerator KeyGenerator(SymbolStoreFile src);
 
-         IEnumerable<SymbolStoreKey> Identities(KeyGenerator src);
+        IEnumerable<SymbolStoreKey> Identities(KeyGenerator src);
     }
 }

@@ -10,7 +10,7 @@ namespace Z0
     partial struct ApiCode
     {
         [Op]
-        public static ApiCodeBlock[] blocks(FS.FilePath src)
+        public static ApiCodeBlock[] extracts(FS.FilePath src)
             => from line in src.ReadLines().Select(ApiHexParser.extracts)
                 where line.Succeeded
                 select line.Value;

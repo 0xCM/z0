@@ -9,7 +9,7 @@ namespace Z0
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
 
-    using static Konst;
+    using static Part;
     using static ApiUriDelimiters;
     using static SFx;
 

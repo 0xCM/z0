@@ -6,27 +6,11 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using Microsoft.SymbolStore;
-    using Microsoft.SymbolStore.KeyGenerators;
-    using Microsoft.SymbolStore.SymbolStores;
-    using SOS;
-    using System.Threading;
-    using System.Threading.Tasks;
-    using System.IO;
-    using System.Collections.Generic;
-    using System.Linq;
 
     using static memory;
     using static Part;
 
     using PK = ClrPrimalKind;
-
-
-    partial class XTend
-    {
-
-
-    }
 
     [ApiHost(ApiNames.ClrPrimitives, true)]
     public readonly partial struct ClrPrimitives

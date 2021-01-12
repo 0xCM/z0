@@ -11,13 +11,9 @@ namespace Z0
 
         public MemoryAddress Address;
 
-        public ApiArtifactUri ArtifactUri;
+        public OpUri Uri;
 
-        public GenericState Genericity;
-
-        public ClrMethodMetadata Metadata;
-
-        public string Sig;
+        public ClrDisplaySig Sig;
 
         public CilMethod Cil;
     }

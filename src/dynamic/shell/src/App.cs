@@ -9,13 +9,11 @@ namespace Z0
     using System.IO;
     using System.Linq;
 
-    using Z0.Images;
     using Z0.Tools;
     using Z0.Asm;
 
     using static z;
     using static Tools.Llvm;
-
 
     class App : IDisposable
     {
@@ -221,7 +219,7 @@ namespace Z0
 
         void EmitImageHeaders()
         {
-            var svc = ImageEmitters.init(Wf);
+            var svc = ImageDataEmitter.init(Wf);
             svc.EmitSectionHeaders(Archives.build(Wf));
         }
 

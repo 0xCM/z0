@@ -6,12 +6,10 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Reflection;
-    using System.Linq;
     using System.Collections.Generic;
     using System.Collections.Concurrent;
 
-    using static Konst;
+    using static Part;
 
     [ApiHost]
     public partial class ApiIdentityKinds

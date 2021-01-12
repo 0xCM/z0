@@ -11,12 +11,12 @@ namespace Z0
 
     public readonly struct ResourceSegment
     {
-        public string Name {get;}
+        public Name Name {get;}
 
         public MemorySegment Segment {get;}
 
         [MethodImpl(Inline)]
-        public ResourceSegment(string name, in MemorySegment segment)
+        public ResourceSegment(Name name, in MemorySegment segment)
         {
             Name = name;
             Segment = segment;

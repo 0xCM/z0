@@ -51,7 +51,7 @@ namespace Z0
 
                 XedEtlWfHost.create().Run(Wf);
 
-                var images = ImageEmitters.init(Wf);
+                var images = ImageDataEmitter.init(Wf);
                 images.EmitSectionHeaders();
                 images.EmitCilRecords();
                 images.EmitUserStrings();
@@ -60,7 +60,9 @@ namespace Z0
                 EmitFieldMetadata.create().Run(Wf);
                 EmitImageConstants.create().Run(Wf);
                 EmitLocatedParts.create().Run(Wf);
-                EmitImageBlobs.create().Run(Wf);
+                ImageDataEmitter.EmitApiBlobs(Wf);
+
+                //EmitImageBlobs.create().Run(Wf);
 
                 Commands.EmitEnumCatalog().Run(Wf);
 

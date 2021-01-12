@@ -10,9 +10,7 @@ namespace Z0
     using System.Linq;
     using System.Reflection;
 
-    using static Konst;
-
-    using K = Kinds;
+    using K = VKinds;
 
     public readonly struct VImm8UnaryResolver128<T> : IImm8UnaryResolver128<T>
         where T : unmanaged

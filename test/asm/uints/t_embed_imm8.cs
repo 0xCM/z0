@@ -13,7 +13,7 @@ namespace Z0.Asm
     using static Konst;
     using static z;
 
-    using K = Kinds;
+    using K = VKinds;
 
     public class t_embed_imm8 : t_asm<t_embed_imm8>
     {
