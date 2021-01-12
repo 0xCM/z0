@@ -66,11 +66,11 @@ namespace Z0
             get => Content.Length;
         }
 
-        [MethodImpl(Inline), Ignore]
+        [MethodImpl(Inline)]
         public int CompareTo(Name src)
             => api.compare(this, src);
 
-        [MethodImpl(Inline), Ignore]
+        [MethodImpl(Inline)]
         public bool Equals(Name src)
             => string.Equals(Data, src.Data);
 

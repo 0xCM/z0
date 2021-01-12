@@ -14,7 +14,7 @@ namespace Z0
     partial struct asm
     {
         [MethodImpl(Inline), Op]
-        public static AsmPipe pipe(Func<AsmFxList,AsmFxList> f)
+        public static AsmPipe pipe(Func<IceInstructionList,IceInstructionList> f)
             => new AsmPipe(f);
     }
 }

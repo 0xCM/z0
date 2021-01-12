@@ -8,7 +8,7 @@ namespace Z0.Asm
 
     using Iced = Iced.Intel;
 
-    interface IAsmCaptureFormatter
+    public interface IIceInstructionFormatter
     {
         string FormatInstruction(in Iced.Instruction src, ulong @base);
 

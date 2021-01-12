@@ -14,7 +14,7 @@ namespace Z0
     partial struct asm
     {
         [MethodImpl(Inline), Op]
-        public static AsmFlow flow(AsmFxList[] fxList, in AsmTriggerSet triggers, params AsmFxHandler[] handlers)
+        public static AsmFlow flow(IceInstructionList[] fxList, in AsmTriggerSet triggers, params AsmFxHandler[] handlers)
             => new AsmFlow(fxList, triggers, handlers);
     }
 }

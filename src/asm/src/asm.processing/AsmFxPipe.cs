@@ -11,14 +11,14 @@ namespace Z0.Asm
 
     public readonly struct AsmPipe : IAsmPipe
     {
-        readonly Func<AsmFxList,AsmFxList> F;
+        readonly Func<IceInstructionList,IceInstructionList> F;
 
         [MethodImpl(Inline)]
-        public AsmPipe(Func<AsmFxList,AsmFxList> f)
+        public AsmPipe(Func<IceInstructionList,IceInstructionList> f)
             => F = f;
 
         [MethodImpl(Inline)]
-        public AsmFxList Flow(in AsmFxList fxList)
+        public IceInstructionList Flow(in IceInstructionList fxList)
             => F(fxList);
     }
 }

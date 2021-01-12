@@ -33,7 +33,7 @@ namespace Z0.Asm
             => Empty;
 
         [MethodImpl(Inline)]
-        void FireOnMatch(IT trigger, in AsmFxList list)
+        void FireOnMatch(IT trigger, in IceInstructionList list)
         {
             var src = span(list.Data);
             for(var i=0; i<src.Length; i++)
@@ -45,7 +45,7 @@ namespace Z0.Asm
             => trigger.FireOnMatch(function);
 
         [MethodImpl(Inline)]
-        public void FireOnMatch(in AsmFxList list)
+        public void FireOnMatch(in IceInstructionList list)
         {
             var src = span(ITriggers);
             for(var i=0; i<src.Length; i++)

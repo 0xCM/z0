@@ -7,7 +7,7 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Describes the assembly encoding of a member api
@@ -37,7 +37,7 @@ namespace Z0.Asm
         /// <summary>
         /// The encoded instructions
         /// </summary>
-        public AsmFxList Instructions {get;}
+        public IceInstructionList Instructions {get;}
 
         /// <summary>
         /// Specifies the reason for capture termination
@@ -50,7 +50,7 @@ namespace Z0.Asm
         public ApiArtifactUri MetaUri {get;}
 
         [MethodImpl(Inline)]
-        public AsmRoutine(ApiArtifactUri meta, OpUri uri, string sig, ApiCodeBlock code, ExtractTermCode term, AsmFxList instructions)
+        public AsmRoutine(ApiArtifactUri meta, OpUri uri, string sig, ApiCodeBlock code, ExtractTermCode term, IceInstructionList instructions)
         {
             MetaUri = meta;
             Uri = uri;
@@ -86,6 +86,6 @@ namespace Z0.Asm
             => InstructionCount != 0;
 
         public static AsmRoutine Empty
-            => new AsmRoutine(ApiArtifactUri.Empty, OpUri.Empty, EmptyString, ApiCodeBlock.Empty, 0, AsmFxList.Empty);
+            => new AsmRoutine(ApiArtifactUri.Empty, OpUri.Empty, EmptyString, ApiCodeBlock.Empty, 0, IceInstructionList.Empty);
     }
 }

@@ -7,13 +7,13 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     public readonly struct CapturedBlock
     {
         public CapturedCodeBlock Encoded {get;}
 
-        public AsmFxList Decoded {get;}
+        public IceInstructionList Decoded {get;}
 
         public string[] Formatted {get;}
 
@@ -43,7 +43,7 @@ namespace Z0.Asm
 
 
         [MethodImpl(Inline)]
-        public CapturedBlock(CapturedCodeBlock encoded, AsmFxList fxList, string[] formatted)
+        public CapturedBlock(CapturedCodeBlock encoded, IceInstructionList fxList, string[] formatted)
         {
             Encoded = encoded;
             Decoded = fxList;

@@ -8,7 +8,7 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
     using System.Text;
 
-    using static Konst;
+    using static Part;
     using static z;
     using static AsmDocParts;
 
@@ -68,7 +68,7 @@ namespace Z0.Asm
         }
 
         [Op]
-        public static uint format(in AsmFxList src, in AsmFormatConfig config, Span<string> dst)
+        public static uint format(in IceInstructionList src, in AsmFormatConfig config, Span<string> dst)
         {
             var count = src.Count;
             if(count == 0)

@@ -13,24 +13,24 @@ namespace Z0.Asm
 
     public readonly struct AsmFlow : IAsmFlow
     {
-        readonly AsmFxList[] FxList;
+        readonly IceInstructionList[] FxList;
 
         readonly AsmTriggerSet Triggers;
 
         readonly AsmFxHandler[] FxHandlers;
 
         [MethodImpl(Inline)]
-        public AsmFlow(AsmFxList[] fxList, in AsmTriggerSet triggers, params AsmFxHandler[] handlers)
+        public AsmFlow(IceInstructionList[] fxList, in AsmTriggerSet triggers, params AsmFxHandler[] handlers)
         {
             FxList  = fxList;
             Triggers = triggers;
             FxHandlers = handlers;
         }
 
-        public AsmFxList[] Push(IAsmPipe pipe)
+        public IceInstructionList[] Push(IAsmPipe pipe)
         {
             var count = FxList.Length;
-            var buffer = alloc<AsmFxList>(count);
+            var buffer = alloc<IceInstructionList>(count);
             var dst = buffer.ToSpan();
             var src = @readonly(FxList);
 

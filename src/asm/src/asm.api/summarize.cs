@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static z;
+    using static memory;
 
     using Z0.Asm;
 
@@ -27,7 +27,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source instruction list</param>
         [Op]
-        public static ReadOnlySpan<AsmFxSummary> summarize(in AsmFxList src)
+        public static ReadOnlySpan<AsmFxSummary> summarize(in IceInstructionList src)
         {
             var count = src.Length;
             var buffer = new AsmFxSummary[count];

@@ -15,30 +15,42 @@ namespace Z0
     /// <summary>
     /// Defines the name of a member
     /// </summary>
-    public readonly struct ClrMemberName : IName<string>, IEquatable<ClrMemberName>, IComparable<ClrMemberName>
+    public readonly struct ClrMemberName : IDataTypeComparable<ClrMemberName>
     {
-        public string Content {get;}
+        internal readonly MemberInfo Source;
+
+        string NameContent
+        {
+            [MethodImpl(Inline)]
+            get => Source.Name;
+        }
+
+        public Name Name
+        {
+            [MethodImpl(Inline)]
+            get => Source.Name;
+        }
 
         [MethodImpl(Inline)]
-        public ClrMemberName(string src)
-            => Content = src ?? EmptyString;
+        public ClrMemberName(MemberInfo src)
+            => Source = src;
 
         public uint Hash
         {
             [MethodImpl(Inline)]
-            get => (uint)Content.GetHashCode();
+            get => (uint)NameContent.GetHashCode();
         }
 
         public Count Count
         {
             [MethodImpl(Inline)]
-            get => Content.Length;
+            get => NameContent.Length;
         }
 
         public int Length
         {
             [MethodImpl(Inline)]
-            get => Content.Length;
+            get => NameContent.Length;
         }
 
         public ByteSize Size
@@ -49,18 +61,18 @@ namespace Z0
 
         [MethodImpl(Inline), Ignore]
         public int CompareTo(ClrMemberName src)
-            => api.compare(Content, src.Content);
+            => api.compare(NameContent, src.NameContent);
 
         [MethodImpl(Inline), Ignore]
         public bool Equals(ClrMemberName src)
-            => string.Equals(Content, src.Content);
+            => string.Equals(NameContent, src.NameContent);
 
         [MethodImpl(Inline)]
         public string Format()
-            => Content;
+            => NameContent;
 
         public override string ToString()
-            => Content;
+            => NameContent;
 
         public override int GetHashCode()
             => (int)Hash;
@@ -70,31 +82,31 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator string(ClrMemberName src)
-            => src.Content;
+            => src.NameContent;
 
         [MethodImpl(Inline)]
         public static implicit operator ClrMemberName(FieldInfo src)
-            => new ClrMemberName(src.Name);
+            => new ClrMemberName(src);
 
         [MethodImpl(Inline)]
         public static implicit operator ClrMemberName(PropertyInfo src)
-            => new ClrMemberName(src.Name);
+            => new ClrMemberName(src);
 
         [MethodImpl(Inline)]
         public static implicit operator ClrMemberName(EventInfo src)
-            => new ClrMemberName(src.Name);
+            => new ClrMemberName(src);
 
         [MethodImpl(Inline)]
         public static implicit operator ClrMemberName(MethodInfo src)
-            => new ClrMemberName(src.Name);
+            => new ClrMemberName(src);
 
         [MethodImpl(Inline)]
         public static implicit operator ClrMemberName(MemberInfo src)
-            => new ClrMemberName(src.Name);
+            => new ClrMemberName(src);
 
         [MethodImpl(Inline)]
         public static implicit operator ReadOnlySpan<char>(ClrMemberName src)
-            => src.Content;
+            => src.NameContent;
 
         [MethodImpl(Inline)]
         public static bool operator <(ClrMemberName x, ClrMemberName y)

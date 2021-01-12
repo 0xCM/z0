@@ -9,23 +9,23 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Defines a contiguous *based* instruction sequence
     /// </summary>
-    public readonly struct AsmFxList : IEnumerable<IceInstruction>
+    public readonly struct IceInstructionList : IEnumerable<IceInstruction>
     {
         readonly IceInstruction[] Source;
 
         public CodeBlock Encoded {get;}
 
         [MethodImpl(Inline)]
-        public static implicit operator IceInstruction[](AsmFxList src)
+        public static implicit operator IceInstruction[](IceInstructionList src)
             => src.Source;
 
         [MethodImpl(Inline)]
-        public AsmFxList(IceInstruction[] src, CodeBlock data)
+        public IceInstructionList(IceInstruction[] src, CodeBlock data)
         {
             Source = src;
             Encoded = data;
@@ -72,7 +72,7 @@ namespace Z0.Asm
         IEnumerator IEnumerable.GetEnumerator()
             => Source.GetEnumerator();
 
-        public static AsmFxList Empty
-            => new AsmFxList(z.array<IceInstruction>(), CodeBlock.Empty);
+        public static IceInstructionList Empty
+            => new IceInstructionList(z.array<IceInstruction>(), CodeBlock.Empty);
     }
 }

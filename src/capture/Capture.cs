@@ -7,16 +7,12 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     public readonly struct Capture
     {
         public static ICaptureServices Services
             => default(CaptureServices);
-
-        [MethodImpl(Inline)]
-        internal static IAsmCaptureFormatter formatter(in AsmFormatConfig config)
-            => new AsmCaptureFormatter(config);
 
         [MethodImpl(Inline)]
         public static CaptureExchange exchange(IAsmContext context)

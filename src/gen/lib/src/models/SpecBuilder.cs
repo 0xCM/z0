@@ -46,12 +46,12 @@ namespace Z0
             }
 
             [MethodImpl(Inline), Op]
-            public static TypeBuilder type(ModuleBuilder mb, ClrTypeName fullName, TypeAttributes attributes, Type parent)
-                => mb.DefineType(fullName, attributes, parent);
+            public static TypeBuilder type(ModuleBuilder mb, ClrTypeName name, TypeAttributes attributes, Type parent)
+                => mb.DefineType(name.FullName, attributes, parent);
 
             [MethodImpl(Inline), Op]
-            public static TypeBuilder @struct(ModuleBuilder mb, ClrTypeName fullName, TypeAttributes attributes)
-                => mb.DefineType(fullName, attributes, typeof(ValueType));
+            public static TypeBuilder @struct(ModuleBuilder mb, ClrTypeName name, TypeAttributes attributes)
+                => mb.DefineType(name.FullName, attributes, typeof(ValueType));
 
             const TypeAttributes Default = BeforeFieldInit | Public | Sealed | AnsiClass;
 

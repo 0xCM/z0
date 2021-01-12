@@ -14,7 +14,7 @@ namespace Z0
     partial struct asm
     {
         [MethodImpl(Inline), Op]
-        public static IceInstructionList list(IceInstruction[] src, CodeBlock data)
-            => new IceInstructionList(src, data);
+        public static IAsmDecoder decoder(in AsmFormatConfig config)
+            => new AsmRoutineDecoder(config);
     }
 }

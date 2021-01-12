@@ -93,7 +93,7 @@ namespace Z0
             return asm.rowsets(sets);
         }
 
-        void Process(in CodeBlock code, in AsmFxList asm)
+        void Process(in CodeBlock code, in IceInstructionList asm)
         {
             var data = code.Code;
             var bytes = data.View;

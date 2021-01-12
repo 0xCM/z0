@@ -8,11 +8,11 @@ namespace Z0.Asm
     using System.IO;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     using Iced = Iced.Intel;
 
-    readonly struct AsmCaptureFormatter : IAsmCaptureFormatter
+    readonly struct IceInstructionFormatter : IIceInstructionFormatter
     {
         readonly AsmFormatConfig Config;
 
@@ -32,7 +32,7 @@ namespace Z0.Asm
             };
 
         [MethodImpl(Inline)]
-        internal AsmCaptureFormatter(in AsmFormatConfig config)
+        internal IceInstructionFormatter(in AsmFormatConfig config)
         {
             Config = config;
             MasmFormatter = new Iced.MasmFormatter(DefaultOptions);

@@ -21,11 +21,11 @@ namespace Z0.Asm
 
     public interface IAsmPipe
     {
-        AsmFxList Flow(in AsmFxList fxList);
+        IceInstructionList Flow(in IceInstructionList fxList);
     }
 
     public interface IAsmFlow
     {
-        AsmFxList[] Push(IAsmPipe fxPipe);
+        IceInstructionList[] Push(IAsmPipe fxPipe);
     }
 }

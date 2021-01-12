@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using Z0.Asm;
 
-    using static Konst;
+    using static Part;
 
     partial struct asm
     {
@@ -18,11 +18,6 @@ namespace Z0
         /// <param name="src">The summary over which to compute count statistics</param>
         [MethodImpl(Inline), Op]
         public static FarCallCounts counts(in AsmCallSummary src)
-            => new FarCallCounts(
-                src.FarCallTargets.Length,
-                src.HostBases.Length,
-                src.HostedReceivers.Length,
-                src.UnhostedReceivers.Length
-                    );
+            => new FarCallCounts(src.FarCallTargets.Count, src.HostBases.Count, src.HostedReceivers.Count, src.UnhostedReceivers.Count);
     }
 }

@@ -18,22 +18,22 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static ClrMemberName name(FieldInfo src)
-            => new ClrMemberName(src.Name);
+            => new ClrMemberName(src);
 
         [MethodImpl(Inline), Op]
         public static ClrMemberName name(PropertyInfo src)
-            => new ClrMemberName(src.Name);
+            => new ClrMemberName(src);
 
         [MethodImpl(Inline), Op]
         public static ClrMemberName name(MethodInfo src)
-            => new ClrMemberName(src.Name);
+            => new ClrMemberName(src);
 
         [MethodImpl(Inline), Op]
         public static ClrMemberName name(EventInfo src)
-            => new ClrMemberName(src.Name);
+            => new ClrMemberName(src);
 
         [MethodImpl(Inline), Op]
         public static ClrTypeName name(Type src)
-            => new ClrTypeName(src.AssemblyQualifiedName);
+            => new ClrTypeName(src);
     }
 }

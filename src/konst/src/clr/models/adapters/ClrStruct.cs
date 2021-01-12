@@ -27,7 +27,7 @@ namespace Z0
         public ClrTypeName Name
         {
             [MethodImpl(Inline)]
-            get => new ClrTypeName(Definition.FullName);
+            get => new ClrTypeName(Definition);
         }
 
         [MethodImpl(Inline)]

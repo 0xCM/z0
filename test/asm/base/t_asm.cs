@@ -53,14 +53,14 @@ namespace Z0.Asm
             return archive.Read(capture.HexPath(host)).ToArray();
         }
 
-        protected AsmFxList[] DecodeHostBits(ApiHostUri[] hosts)
+        protected IceInstructionList[] DecodeHostBits(ApiHostUri[] hosts)
         {
             var decoder = AsmCheck.Decoder;
 
             var totalCount = 0ul;
             var hostCount = 0ul;
 
-            var dst = z.list<AsmFxList>();
+            var dst = z.list<IceInstructionList>();
 
             void Decoded(IceInstruction i)
             {

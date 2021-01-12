@@ -9,45 +9,39 @@ namespace Z0
 
     using static Part;
 
-    using api = Names;
+    using api = ClrPrimitives;
 
     /// <summary>
-    /// Defines an assembly-qualified type name
+    /// Defines a runtime type name
     /// </summary>
-    [ApiType]
-    public readonly struct ClrTypeName : IName<string>, IEquatable<ClrTypeName>, IComparable<ClrTypeName>
+    public readonly struct ClrTypeName : IDataTypeComparable<ClrTypeName>
     {
-        [MethodImpl(Inline), Op]
-        public static ClrTypeName define(string src)
-            => new ClrTypeName(src);
-
-        [Ignore]
-        public string Content {get;}
+        internal readonly Type Source;
 
         [MethodImpl(Inline)]
-        public ClrTypeName(string src)
-            => Content = src;
+        public ClrTypeName(Type src)
+            => Source = src;
 
         [MethodImpl(Inline), Ignore]
         public string Format()
-            => Content;
+            => Source.Name;
 
         public uint Hash
         {
             [MethodImpl(Inline)]
-            get => (uint)Content.GetHashCode();
+            get => api.hash(this);
         }
 
         public Count Count
         {
             [MethodImpl(Inline)]
-            get => Content.Length;
+            get => Source.Name.Length;
         }
 
         public int Length
         {
             [MethodImpl(Inline)]
-            get => Content.Length;
+            get => Source.Name.Length;
         }
 
         public ByteSize Size
@@ -56,29 +50,40 @@ namespace Z0
             get => Length * sizeof(char);
         }
 
-        public string ShortName
+        public Name ShortName
         {
-            [MethodImpl(Inline), Ignore]
-            get => Content.LeftOfFirst(Chars.Comma);
+            [MethodImpl(Inline)]
+            get => Source.Name;
         }
 
-        [MethodImpl(Inline), Ignore]
-        public int CompareTo(ClrTypeName src)
-            => api.compare(Content, src.Content);
+        public Name FullName
+        {
+            [MethodImpl(Inline)]
+            get => Source.FullName;
+        }
 
-        [MethodImpl(Inline), Ignore]
+        public Name AssemblyQualifiedName
+        {
+            [MethodImpl(Inline)]
+            get => Source.AssemblyQualifiedName;
+        }
+
+        [MethodImpl(Inline)]
+        public int CompareTo(ClrTypeName src)
+            => AssemblyQualifiedName.CompareTo(src.AssemblyQualifiedName);
+
+        [MethodImpl(Inline)]
         public bool Equals(ClrTypeName src)
-            => string.Equals(Content, src.Content);
+            => Source.Equals(src.Source);
 
         public override string ToString()
-            => Content;
+            => ShortName;
 
         public override int GetHashCode()
             => (int)Hash;
 
         public override bool Equals(object src)
             => src is ClrTypeName n && Equals(n);
-
 
         [MethodImpl(Inline)]
         public static bool operator <(ClrTypeName x, ClrTypeName y)
@@ -105,15 +110,7 @@ namespace Z0
             => !x.Equals(y);
 
         [MethodImpl(Inline)]
-        public static implicit operator string(ClrTypeName src)
-            => src.Content;
-
-        [MethodImpl(Inline)]
         public static implicit operator ClrTypeName(Type src)
-            => new ClrTypeName(src.AssemblyQualifiedName);
-
-        [MethodImpl(Inline)]
-        public static implicit operator ReadOnlySpan<char>(ClrTypeName src)
-            => src.Content;
+            => new ClrTypeName(src);
     }
 }

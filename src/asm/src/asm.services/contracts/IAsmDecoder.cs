@@ -29,15 +29,15 @@ namespace Z0.Asm
         /// Decodes an instruction list
         /// </summary>
         /// <param name="src">The code source</param>
-        Option<AsmFxList> Decode(CodeBlock src);
+        Option<IceInstructionList> Decode(CodeBlock src);
 
         Option<AsmInstructions> Decode(ApiCodeBlock src);
 
         Option<AsmRoutine> Decode(ApiCaptureBlock src, Action<Asm.IceInstruction> f);
 
-        Option<AsmFxList> Decode(ApiCodeBlock src, Action<IceInstruction> f);
+        Option<IceInstructionList> Decode(ApiCodeBlock src, Action<IceInstruction> f);
 
-        Option<AsmFxList> Decode(CodeBlock src, Action<IceInstruction> f);
+        Option<IceInstructionList> Decode(CodeBlock src, Action<IceInstruction> f);
 
         Option<AsmInstructions> Decode(BinaryCode code, MemoryAddress @base);
     }
