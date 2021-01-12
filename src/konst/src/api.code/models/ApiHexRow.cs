@@ -25,22 +25,6 @@ namespace Z0
         Data = 7 | 1 << 16
     }
 
-    public enum ApiHexFieldIndex : byte
-    {
-        Seq = 0,
-
-        SourceSeq = 1,
-
-        Address = 2,
-
-        Length = 3,
-
-        TermCode = 4,
-
-        Uri = 5,
-
-        Data = 6
-    }
 
     public enum ApiHexFieldWidth : byte
     {

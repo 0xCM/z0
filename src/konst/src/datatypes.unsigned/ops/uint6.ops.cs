@@ -28,6 +28,17 @@ namespace Z0
             => !x.IsMin ? new U(Bytes.sub(x.data, 1), false) : U.Max;
 
         /// <summary>
+        /// Reinterprets an input reference as a mutable <see cref='U'/> reference cell
+        /// </summary>
+        /// <param name="src">The source reference</param>
+        /// <param name="dst">The target width selector</param>
+        /// <typeparam name="S">The source type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref U edit<S>(in S src, W dst)
+            where S : unmanaged
+                => ref @as<S,U>(src);
+
+        /// <summary>
         /// Converts a source integral value to an enum value
         /// </summary>
         /// <param name="src">The source value</param>

@@ -40,9 +40,9 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public static uint fill(Span<ModRmEncoding> dst)
         {
-            var rmF = BitSeqLiterals.bits(w3);
-            var regF = BitSeqLiterals.bits(w3);
-            var modF = BitSeqLiterals.bits(w2);
+            var rmF = BitSeq.bits(w3);
+            var regF = BitSeq.bits(w3);
+            var modF = BitSeq.bits(w2);
 
             var i = 0u;
             for(var a=0u; a<rmF.Length; a++)

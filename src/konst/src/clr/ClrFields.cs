@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="src">The source type</param>
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<ClrField> instance(Type src, bool declared = true)
-            => Clr.view(src.GetFields(declared ? BF_DeclaredInstance : BF_All));
+            => Clr.adapt(src.GetFields(declared ? BF_DeclaredInstance : BF_All));
 
         /// <summary>
         /// Returns a <see cref='ClrField'/> readonly span of the fields defined by the source

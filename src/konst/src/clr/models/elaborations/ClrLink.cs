@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// Defines a directed association between two data members
     /// </summary>
-    public class ClrDataLink : ILink<ClrDataMember>
+    public class ClrLink : ILink<ClrDataMember>
     {
         /// <summary>
         /// The supplier member
@@ -28,7 +28,7 @@ namespace Z0
             => text.concat(Source.Name, Colon, Source.DataType.Name, " -> ", Target.Name, Colon, Target.DataType.Name);
 
         [MethodImpl(Inline)]
-        public ClrDataLink(ClrDataMember s, ClrDataMember t)
+        public ClrLink(ClrDataMember s, ClrDataMember t)
         {
             Source = s;
             Target = t;

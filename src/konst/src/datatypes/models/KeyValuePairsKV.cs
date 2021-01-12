@@ -10,7 +10,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Collections;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Reifies a K-V parametric hashtable, along with extras

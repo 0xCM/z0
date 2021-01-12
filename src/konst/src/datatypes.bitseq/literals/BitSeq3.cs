@@ -6,7 +6,7 @@ namespace Z0
 {
     using B = BitSeq3;
 
-    partial struct BitSeqLiterals
+    partial struct BitSeq
     {
         public const B b000 = B.b000;
 

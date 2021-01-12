@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    public readonly partial struct DataBlocks
+    partial struct DataBlocks
     {
         [StructLayout(LayoutKind.Sequential)]
         public struct Block03<T>

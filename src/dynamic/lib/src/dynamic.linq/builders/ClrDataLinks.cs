@@ -13,8 +13,8 @@ namespace Z0
 
     public static class ClrDataLinks
     {
-        public static ClrDataLink define<S,T>(Expression<Func<S,object>> s, Expression<Func<T,object>> t)
-            => new ClrDataLink(s.GetDataMember(), t.GetDataMember());
+        public static ClrLink define<S,T>(Expression<Func<S,object>> s, Expression<Func<T,object>> t)
+            => new ClrLink(s.GetDataMember(), t.GetDataMember());
 
         public static ClrDataLinkBuilder<S,T> build<S,T>()
             => new ClrDataLinkBuilder<S,T>();
@@ -22,8 +22,8 @@ namespace Z0
 
     public class ClrDataLinkBuilder<S,T>
     {
-        HashSet<ClrDataLink> Arrows {get;}
-            = new HashSet<ClrDataLink>();
+        HashSet<ClrLink> Arrows {get;}
+            = new HashSet<ClrLink>();
 
         public ClrDataLinkBuilder<S,T> Include(Expression<Func<S, object>> s, Expression<Func<T,object>> t)
         {

@@ -7,11 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     [ApiHost(ApiNames.BitSeq, true)]
-    public readonly partial struct BitSeqLiterals
+    public readonly partial struct BitSeq
     {
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<uint1> bits(W1 w)
@@ -55,7 +55,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<uint3> bits(W3 w, N4 count)
-            => slice(bits(w), nat8u(count));
+            => slice(bits(w), count.NatValue);
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<uint4> bits(W4 w)

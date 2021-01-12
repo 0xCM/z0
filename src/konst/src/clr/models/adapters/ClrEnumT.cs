@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
-    using System.Reflection;
     using System.Linq;
 
     using static Part;
@@ -23,7 +22,7 @@ namespace Z0
         public static ClrEnum<T> create()
             => default;
 
-        public ClrToken Id
+        public ClrToken Token
         {
             [MethodImpl(Inline)]
             get => Definition.MetadataToken;

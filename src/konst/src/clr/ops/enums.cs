@@ -28,7 +28,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public readonly void enums(in ReadOnlySpan<Type> src, Span<ClrEnum> dst)
+        public readonly void enums(ReadOnlySpan<Type> src, Span<ClrEnum> dst)
         {
             var count = src.Length;
             for(uint i=0, j=0; i<count; i++)

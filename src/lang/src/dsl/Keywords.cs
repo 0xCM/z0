@@ -28,12 +28,32 @@ namespace Z0.Dsl
         /// <summary>
         /// Specifies a buffer
         /// </summary>
-        public static Keyword buffer() => "span";
+        public static Keyword buffer() => "buffer";
 
         /// <summary>
         /// Allocates a buffer
         /// </summary>
         public static Keyword alloc() => "alloc";
+
+        /// <summary>
+        /// Loads buffer content from a source
+        /// </summary>
+        public static Keyword load() => "load";
+
+        /// <summary>
+        /// Persists a buffer content to a target
+        /// </summary>
+        public static Keyword store() => "store";
+
+        /// <summary>
+        /// Extends a buffer over a memory segment
+        /// </summary>
+        public static Keyword cover() => "cover";
+
+        /// <summary>
+        /// Presents a buffers with cells of one type as a buffer with cells of another type
+        /// </summary>
+        public static Keyword recover() => "recover";
 
         /// <summary>
         /// Specifies an action
@@ -196,27 +216,32 @@ namespace Z0.Dsl
         public static Keyword raise() => "raise";
 
         /// <summary>
-        /// An unsigned data type that occupies an 8-bit cell
+        /// Specifies unsigned data type that occupies an 8-bit cell
         /// </summary>
         public static Keyword u8() => "u8";
 
         /// <summary>
-        /// An unsigned data type that occupies an 16-bit cell
+        /// Specifies an unsigned integer of designated width
+        /// </summary>
+        public static Keyword<uint> u => "u(n:uint)";
+
+        /// <summary>
+        /// Specifies an unsigned data type that occupies an 16-bit cell
         /// </summary>
         public static Keyword u16() => "u16";
 
         /// <summary>
-        /// An unsigned data type that occupies a 32-bit cell
+        /// Specifies an unsigned data type that occupies a 32-bit cell
         /// </summary>
         public static Keyword u32() => "u32";
 
         /// <summary>
-        /// An unsigned data type that occupies an 64-bit cell
+        /// Specifies an unsigned data type that occupies an 64-bit cell
         /// </summary>
         public static Keyword u64() => "u64";
 
         /// <summary>
-        /// An unsigned data type that occupies a 128-bit cell
+        /// Specifes an unsigned data type that occupies a 128-bit cell
         /// </summary>
         public static Keyword u128() => "u128";
 
@@ -234,5 +259,6 @@ namespace Z0.Dsl
         /// Specifies a natural number
         /// </summary>
         public static Keyword nat() => "nat";
+
     }
 }

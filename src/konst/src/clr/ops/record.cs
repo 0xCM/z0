@@ -9,15 +9,13 @@ namespace Z0
     using System.Reflection;
 
     using static Part;
-    using static ClrViews;
 
     partial struct Clr
     {
-
         [MethodImpl(Inline), Op]
         public static ClrFieldRecord record(FieldInfo src)
         {
-            var data = ClrViews.view(src);
+            var data = adapt(src);
             var dst = new ClrFieldRecord();
             dst.Key = reference(data);
             dst.DeclaringType = data.DeclaringType.Token;

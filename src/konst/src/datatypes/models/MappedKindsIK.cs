@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct ClassifierMap<I,K> : IClassifierMapHost<ClassifierMap<I,K>,I,K>
+    public readonly struct MappedKinds<I,K> : IClassifierMapHost<MappedKinds<I,K>,I,K>
         where I : unmanaged
         where K : unmanaged
     {
@@ -20,7 +20,7 @@ namespace Z0
         public uint Count {get;}
 
         [MethodImpl(Inline)]
-        internal ClassifierMap(uint count, Paired<I,K>[] index, Paired<K,I>[] kinds)
+        internal MappedKinds(uint count, Paired<I,K>[] index, Paired<K,I>[] kinds)
         {
             Count = count;
             IndexKind = index;

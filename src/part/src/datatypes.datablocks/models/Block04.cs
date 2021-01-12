@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.InteropServices;
 
-    public readonly partial struct DataBlocks
+    partial struct DataBlocks
     {
         [StructLayout(LayoutKind.Sequential)]
         public struct Block04<T>

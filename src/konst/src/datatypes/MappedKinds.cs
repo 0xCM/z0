@@ -11,7 +11,7 @@ namespace Z0
     using static memory;
 
     [ApiHost]
-    public readonly struct ClassifierMap
+    public readonly struct MappedKinds
     {
         /// <summary>
         /// Creates a 0-based classifier map with at most <see cref='Pow2.T08'/> entries with indices of type <see cref='byte'/>
@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="src">The source classifiers</param>
         /// <typeparam name="K">The classifier type</typeparam>
         [Op, Closures(UInt8k)]
-        public static ClassifierMap<byte,K> classify<K>(W8 w, K[] src)
+        public static MappedKinds<byte,K> classify<K>(W8 w, K[] src)
             where K : unmanaged
         {
             var source = @readonly(src);
@@ -30,7 +30,7 @@ namespace Z0
             var indexed = span(iK);
             var kinds = span(Ki);
             project<K>(src, iK, Ki);
-            return new ClassifierMap<byte,K>(count, iK, Ki);
+            return new MappedKinds<byte,K>(count, iK, Ki);
         }
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace Z0
         /// <param name="src">The source classifiers</param>
         /// <typeparam name="K">The classifier type</typeparam>
         [Op, Closures(UInt16k)]
-        public static ClassifierMap<ushort,K> classify<K>(W16 w, K[] src)
+        public static MappedKinds<ushort,K> classify<K>(W16 w, K[] src)
             where K : unmanaged
         {
             var source = @readonly(src);
@@ -50,7 +50,7 @@ namespace Z0
             var indexed = span(iK);
             var kinds = span(Ki);
             project<K>(src, iK, Ki);
-            return new ClassifierMap<ushort,K>(count, iK, Ki);
+            return new MappedKinds<ushort,K>(count, iK, Ki);
         }
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace Z0
         /// <param name="src">The source classifiers</param>
         /// <typeparam name="K">The classifier type</typeparam>
         [Op, Closures(UInt32k)]
-        public static ClassifierMap<uint,K> classify<K>(W32 w, K[] src)
+        public static MappedKinds<uint,K> classify<K>(W32 w, K[] src)
             where K : unmanaged
         {
             var source = @readonly(src);
@@ -70,7 +70,7 @@ namespace Z0
             var indexed = span(iK);
             var kinds = span(Ki);
             project<K>(src, iK, Ki);
-            return new ClassifierMap<uint,K>(count, iK, Ki);
+            return new MappedKinds<uint,K>(count, iK, Ki);
         }
 
         /// <summary>
@@ -80,7 +80,7 @@ namespace Z0
         /// <param name="src">The source classifiers</param>
         /// <typeparam name="K">The classifier type</typeparam>
         [Op, Closures(UInt64k)]
-        public static ClassifierMap<ulong,K> classify<K>(W64 w, K[] src)
+        public static MappedKinds<ulong,K> classify<K>(W64 w, K[] src)
             where K : unmanaged
         {
             var source = @readonly(src);
@@ -90,10 +90,10 @@ namespace Z0
             var indexed = span(iK);
             var kinds = span(Ki);
             project<K>(src, iK, Ki);
-            return new ClassifierMap<ulong,K>((uint)count, iK, Ki);
+            return new MappedKinds<ulong,K>((uint)count, iK, Ki);
         }
 
-        public static ClassifierMap<I,K> classify<I,K>(Paired<I,K>[] src)
+        public static MappedKinds<I,K> classify<I,K>(Paired<I,K>[] src)
             where I : unmanaged
             where K : unmanaged
         {
@@ -102,7 +102,7 @@ namespace Z0
             var iK = alloc<Paired<I,K>>(count);
             var Ki = alloc<Paired<K,I>>(count);
             project(source,iK,Ki);
-            return new ClassifierMap<I,K>(count, iK, Ki);
+            return new MappedKinds<I,K>(count, iK, Ki);
         }
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
@@ -180,11 +180,5 @@ namespace Z0
                 kind = (pair.Right, pair.Left);
             }
         }
-
-        [MethodImpl(Inline)]
-        public static StackedClassifierMap<I,K> stack<I,K>(ClassifierMap<I,K> src)
-            where I : unmanaged
-            where K : unmanaged
-                => src;
     }
 }

@@ -13,6 +13,7 @@ namespace Z0
 
     readonly struct TypeCodeCache
     {
+        [FixedAddressValueType]
         static internal readonly SystemTypeCodes Data = new SystemTypeCodes(0);
     }
 

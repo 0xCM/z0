@@ -14,14 +14,14 @@ namespace Z0.Lang
     /// </summary>
     public readonly struct Keyword<T>
     {
-        public T Name {get;}
+        public Name Name {get;}
 
         [MethodImpl(Inline)]
-        public Keyword(T src)
+        public Keyword(string src)
             => Name = src;
 
         [MethodImpl(Inline)]
-        public static implicit operator Keyword<T>(T name)
+        public static implicit operator Keyword<T>(string name)
             => new Keyword<T>(name);
     }
 }

@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    public readonly partial struct BitSeqLiterals
+    public readonly partial struct BitSeq
     {
         static ReadOnlySpan<byte> W1
             => new byte[2]{0b00,0b01};

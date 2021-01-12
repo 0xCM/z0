@@ -7,16 +7,16 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Defines a datatype that represents a rational number
     /// </summary>
     public struct Rational<T> : IRational<Rational<T>,T>
     {
-        public T Over;
+        public T Over {get;}
 
-        public T Under;
+        public T Under {get;}
 
         [MethodImpl(Inline)]
         public Rational(T over, T under)
@@ -45,11 +45,5 @@ namespace Z0
 
         public static Rational<T> Zero
             => (default(T), z.force<T>(1));
-
-        T IRational<T>.Over
-            => Over;
-
-        T IRational<T>.Under
-            => Under;
     }
 }

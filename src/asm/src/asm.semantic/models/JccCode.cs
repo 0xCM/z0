@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using static BitSeqLiterals;
+    using static BitSeq;
 
     /// <summary>
     /// Defines the 16 possible jcc condition codes

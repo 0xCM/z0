@@ -7,13 +7,13 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     partial struct Clr
     {
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<ClrType> nested(Type src)
-            => memory.recover<Type,ClrType>(src.GetNestedTypes());
+            => recover<Type,ClrType>(src.GetNestedTypes());
     }
 }

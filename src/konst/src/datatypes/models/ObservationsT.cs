@@ -6,11 +6,11 @@ namespace Z0
 {
     using System;
     using System.Text;
-    using System.Runtime.CompilerServices;    
-        
-    using static Konst;    
+    using System.Runtime.CompilerServices;
+
+    using static Part;
     using static z;
-    
+
     /// <summary>
     /// Defines an observation sequence
     /// </summary>
@@ -29,10 +29,9 @@ namespace Z0
         /// </summary>
         public readonly int Dim;
 
-        [MethodImpl(Inline)]
         public static Observations<T> Alloc(int dim, int count)
             => new Observations<T>(new T[count * dim], dim);
-    
+
         [MethodImpl(Inline)]
         public static Observations<T> Load(T[] src, int dim)
             => new Observations<T>(src,dim);
@@ -56,12 +55,12 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool operator != (Observations<T> lhs, Observations<T> rhs)
             => lhs.Data != rhs.Data;
-        
+
         [MethodImpl(Inline)]
         public Observations(Span<T> src, int dim)
         {
-            Dim = dim;            
-            Count = Math.DivRem(src.Length, dim, out int remainder);    
+            Dim = dim;
+            Count = Math.DivRem(src.Length, dim, out int remainder);
             insist(remainder == 0, $"The invariant k := (remainder == 0) failed");
             Data = src;
         }
@@ -69,13 +68,13 @@ namespace Z0
         [MethodImpl(Inline)]
         public Observations(T[] src, int dim)
         {
-            Dim = dim;            
-            Count = Math.DivRem(src.Length, dim, out int remainder);    
+            Dim = dim;
+            Count = Math.DivRem(src.Length, dim, out int remainder);
             insist(remainder == 0, $"The invariant k := (remainder == 0) failed");
             Data = src;
         }
-                
-        public ref T this[int ix] 
+
+        public ref T this[int ix]
         {
             [MethodImpl(Inline)]
             get => ref Data[ix];
@@ -92,7 +91,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public Observations<T> Observation(int vecix)
         {
-            var slice = Data.Slice(vecix * Dim, Dim); 
+            var slice = Data.Slice(vecix * Dim, Dim);
             return new Observations<T>(slice, Dim);
         }
 
@@ -104,11 +103,11 @@ namespace Z0
         [MethodImpl(Inline)]
         public Observations<T> Slice(int offset, int count)
             => new Observations<T>(Data.Slice(offset * Dim, count * Dim), Dim);
-            
+
         /// <summary>
         /// The data length
         /// </summary>
-        public int Length 
+        public int Length
         {
             [MethodImpl(Inline)]
             get => Data.Length;
@@ -126,25 +125,25 @@ namespace Z0
             for(var i=0; i<Count; i++)
             {
                 var v = Observation(i);
-                fmt.Append(Chars.Lt);                
+                fmt.Append(Chars.Lt);
                 for(var j = 0; j< Dim; j++)
                 {
                     fmt.Append($"{v[j]}");
                     if(j != Dim - 1)
                         fmt.Append(", ");
                 }
-                fmt.Append(Chars.Gt);                
-                
+                fmt.Append(Chars.Gt);
+
                 if(i != Count - 1)
                     fmt.AppendLine();
             }
             return fmt.ToString();
         }
 
-        public override bool Equals(object rhs) 
+        public override bool Equals(object rhs)
             => throw new NotSupportedException();
 
-        public override int GetHashCode() 
-            => throw new NotSupportedException();        
+        public override int GetHashCode()
+            => throw new NotSupportedException();
     }
 }

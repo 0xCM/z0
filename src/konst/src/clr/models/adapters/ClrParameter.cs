@@ -9,7 +9,7 @@ namespace Z0
 
     using R = System.Reflection;
 
-    using static Konst;
+    using static Part;
 
     public readonly struct ClrParameter : IClrArtifact<ClrParameter>
     {

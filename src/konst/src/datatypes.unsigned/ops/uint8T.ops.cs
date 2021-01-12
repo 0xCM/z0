@@ -27,6 +27,22 @@ namespace Z0
             => !x.IsMin ? new U(Bytes.sub(x.data, 1)) : U.Max;
 
         /// <summary>
+        /// Reinterprets an input reference as a mutable <see cref='U'/> reference cell
+        /// </summary>
+        /// <param name="src">The source reference</param>
+        /// <param name="dst">The target width selector</param>
+        /// <typeparam name="S">The source type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref U cast<S>(in S src, W8 dst)
+            where S : unmanaged
+                => ref memory.@as<S,U>(src);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref S edit<S>(in U src)
+            where S : unmanaged
+                => ref memory.@as<U,S>(src);
+
+        /// <summary>
         /// Reduces the source value to a width-identified integer via modular arithmetic
         /// </summary>
         /// <param name="src">The input value</param>

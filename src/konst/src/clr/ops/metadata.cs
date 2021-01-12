@@ -46,9 +46,9 @@ namespace Z0
             dst.MethodName = src.DisplayName();
             dst.DefiningAssembly = src.Module.Assembly;
             dst.DefiningModule = src.Module.Name;
-            dst.DeclaringType = ClrTypeSigInfo.from(src.DeclaringType);
-            dst.ReturnType = ClrTypeSigInfo.from(src.ReturnType);
-            dst.ValueParams = src.GetParameters().Select(p => new ClrParamInfo(ClrTypeSigInfo.from(p), p.RefKind(), p.Name, (ushort)p.Position));
+            dst.DeclaringType = siginfo(src.DeclaringType);
+            dst.ReturnType = siginfo(src.ReturnType);
+            dst.ValueParams = src.GetParameters().Select(p => new ClrParamInfo(siginfo(p), p.RefKind(), p.Name, (ushort)p.Position));
             dst.TypeParams = src.TypeParameters();
             return dst;
         }
