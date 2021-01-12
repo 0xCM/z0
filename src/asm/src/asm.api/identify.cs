@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
@@ -13,9 +13,6 @@ namespace Z0
     using NK = NumericKind;
     using SI = SegmentedIdentity;
     using FIX = CellWidth;
-
-
-    using Z0.Asm;
 
     partial struct asm
     {

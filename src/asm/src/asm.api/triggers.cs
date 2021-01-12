@@ -2,15 +2,13 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
 
-    using Z0.Asm;
-
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     using FT = Asm.IAsmRoutineTrigger;
     using IT = Asm.IAsmFxTrigger;

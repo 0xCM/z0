@@ -70,7 +70,7 @@ namespace Z0.Asm
         public int MemoryDisplSize {get; set;}
 
         public MemDx MemDx
-            => Z0.asm.dx(MemoryDisplacement, (MemDxSize)MemoryDisplSize);
+            => asm.dx(MemoryDisplacement, (MemDxSize)MemoryDisplSize);
 
         //
         // Summary:

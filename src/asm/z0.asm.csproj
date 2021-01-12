@@ -13,7 +13,6 @@
     <ProjectReference Include="$(Api)" />
     <ProjectReference Include="$(Cli)" />
     <ProjectReference Include="$(Xed)" />
-
   </ItemGroup>
 
 </Project>
