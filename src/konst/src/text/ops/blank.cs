@@ -14,6 +14,6 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static bool blank(string src)
-            => Test.blank(src);
+            => Query.blank(src);
     }
 }

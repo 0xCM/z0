@@ -21,7 +21,7 @@ namespace Z0.Generate
             };
 
         BitFormatter<byte> Formatter {get;}
-            = Formatters.bits<byte>();
+            = BitFormatter.create<byte>();
 
         public string Namespace {get;}
             = "Z0";

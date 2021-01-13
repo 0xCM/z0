@@ -8,12 +8,20 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static TextRules;
+    using static memory;
 
-    partial class text
+    public readonly struct TextSpan
     {
+        public TextBlock Text {get;}
+
+        public ReadOnlySpan<char> Data
+        {
+            [MethodImpl(Inline)]
+            get => Text.View;
+        }
+
         [MethodImpl(Inline)]
-        public static int length(string src)
-            => Query.length(src);
+        public TextSpan(TextBlock src)
+            => Text = src;
     }
 }

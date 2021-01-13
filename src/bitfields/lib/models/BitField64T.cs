@@ -55,7 +55,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-             => Formatters.bits<ulong>().Format(State);
+             => BitFormatter.create<ulong>().Format(State);
 
         public override string ToString()
             => Format();

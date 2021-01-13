@@ -19,10 +19,5 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Formatter<T> content<T>(FormatFunctions.Format<T> render)
             => new Formatter<T>(render);
-
-        [MethodImpl(Inline), Closures(Closure)]
-        public static BitFormatter<T> bits<T>()
-            where T : struct
-                => BitFormatter.create<T>();
     }
 }

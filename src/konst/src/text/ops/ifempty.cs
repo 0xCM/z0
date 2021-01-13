@@ -19,6 +19,6 @@ namespace Z0
         /// <param name="replace">The replacement value if blank</param>
         [MethodImpl(Inline), Op]
         public static string ifempty(string src, string replace)
-            => Test.empty(src) ? replace ?? EmptyString : src;
+            => Query.empty(src) ? replace ?? EmptyString : src;
     }
 }

@@ -8,12 +8,18 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static TextRules;
 
-    partial class text
+    public readonly struct utf<T>
+        where T : unmanaged
     {
+        readonly T[] Data;
+
         [MethodImpl(Inline)]
-        public static int length(string src)
-            => Query.length(src);
+        public utf(T[] src)
+            => Data = src;
+
+        [MethodImpl(Inline)]
+        public static implicit operator utf<T>(T[] src)
+            => new utf<T>(src);
     }
 }

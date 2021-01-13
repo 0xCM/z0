@@ -15,7 +15,7 @@ namespace Z0
         /// <summary>
         /// Represents a bijective correspondence between two sequences
         /// </summary>
-        public readonly  struct Bijection<S,T>
+        public readonly struct Bijection<S,T>
         {
             public S[] Source {get;}
 

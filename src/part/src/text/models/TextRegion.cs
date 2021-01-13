@@ -6,14 +6,17 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Text;
 
     using static Part;
-    using static TextRules;
 
-    partial class text
+    public readonly struct TextRegion
     {
-        [MethodImpl(Inline)]
-        public static int length(string src)
-            => Query.length(src);
+        public Index<TextBlock> Blocks {get;}
+
+        public TextRegion(Index<TextBlock> blocks)
+        {
+            Blocks = blocks;
+        }
     }
 }

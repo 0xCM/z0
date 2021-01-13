@@ -6,14 +6,13 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Text;
 
     using static Part;
-    using static TextRules;
 
-    partial class text
+
+    public readonly struct TextGrid
     {
-        [MethodImpl(Inline)]
-        public static int length(string src)
-            => Query.length(src);
+
     }
 }

@@ -8,12 +8,15 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static TextRules;
 
-    partial class text
+
+    partial struct TextRules
     {
-        [MethodImpl(Inline)]
-        public static int length(string src)
-            => Query.length(src);
+        partial struct Format
+        {
+            [MethodImpl(Inline), Op]
+            public static string rpad(string src, int width, char c = Space)
+                => src.PadRight(width, c);
+        }
     }
 }

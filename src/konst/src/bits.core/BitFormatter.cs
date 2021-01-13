@@ -15,6 +15,11 @@ namespace Z0
     {
         const NumericKind Closure = UnsignedInts;
 
+        [MethodImpl(Inline), Closures(Closure)]
+        public static BitFormatter<T> create<T>()
+            where T : struct
+                => default;
+
         [MethodImpl(Inline), Op]
         public static void format(byte[] src, Span<char> dst)
         {
@@ -39,10 +44,6 @@ namespace Z0
             where T : unmanaged
                 => format(src.ReadOnly(), config);
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static BitFormatter<T> create<T>()
-            where T : struct
-                => default;
 
         [MethodImpl(Inline), Op]
         public static BitFormat configure(bool tlz = false)

@@ -17,7 +17,7 @@ namespace Z0
         /// <summary>
         /// The line number of the data source from which the line was extracted
         /// </summary>
-        public uint Index {get;}
+        public uint LineNumber {get;}
 
         /// <summary>
         /// The line text, as it was found in the source
@@ -27,14 +27,14 @@ namespace Z0
         [MethodImpl(Inline)]
         public TextLine(uint number, string text)
         {
-            Index = number;
+            LineNumber = number;
             Content = text ?? EmptyString;
         }
 
         [MethodImpl(Inline)]
         public TextLine(int number, string text)
         {
-            Index = (uint)number;
+            LineNumber = (uint)number;
             Content = text ?? EmptyString;
         }
 
@@ -43,6 +43,14 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Content[charidx];
         }
+
+        [MethodImpl(Inline)]
+        public TextBlock Segment(uint i0, uint i1)
+            => text.segment(Content, i0, i1);
+
+        [MethodImpl(Inline)]
+        public TextBlock Slice(uint offset, uint length)
+            => text.slice(Content, offset, length);
 
         public bool IsNonEmpty
         {
@@ -60,7 +68,7 @@ namespace Z0
             => IsNonEmpty ? Content.SplitClean(spec.Delimiter) : sys.empty<string>();
 
         public override string ToString()
-            =>  $"{Index.ToString().PadLeft(10, '0')}:{Content}";
+            =>  $"{LineNumber.ToString().PadLeft(10, '0')}:{Content}";
 
         public string this[int startpos, int endpos]
             => Content.Substring(startpos, endpos - startpos + 1);

@@ -18,6 +18,6 @@ namespace Z0
         /// <param name="src">The string to evaluate</param>
         [MethodImpl(Inline), Op]
         public static bool nonempty(string src)
-            => Test.nonempty(src);
+            => Query.nonempty(src);
     }
 }

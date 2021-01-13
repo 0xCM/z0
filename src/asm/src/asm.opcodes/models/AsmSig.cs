@@ -86,8 +86,8 @@ namespace Z0.Asm
             => Format();
 
         [MethodImpl(Inline)]
-        public static implicit operator TextExpression(AsmSig src)
-            => new TextExpression(src.Value.Format());
+        public static implicit operator TextBlock(AsmSig src)
+            => new TextBlock(src.Value.Format());
 
         [MethodImpl(Inline)]
         public static implicit operator AsmSig(string src)

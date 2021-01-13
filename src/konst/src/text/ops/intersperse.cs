@@ -14,10 +14,10 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static string intersperse(string src, char delimiter)
-            => Format.intersperse(src, delimiter);
+            => Transform.intersperse(src, delimiter);
 
         [MethodImpl(Inline)]
         public static string intersperse(string src, string delimiter)
-            => Format.intersperse(src, delimiter);
+            => Transform.intersperse(src, delimiter);
     }
 }
