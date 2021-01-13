@@ -7,7 +7,7 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     public readonly struct R32<R> : IRegister<R32<R>,W32,uint>
         where R : unmanaged, IRegister

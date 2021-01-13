@@ -33,11 +33,11 @@ namespace Z0.Asm
             => handler.Include(seq, src);
 
         [MethodImpl(Inline), Op]
-        static void process(in MnemonicExpression src, in AsmOpCodeGroup handler, uint seq)
+        static void process(in AsmMnemonic src, in AsmOpCodeGroup handler, uint seq)
             => handler.Include(seq, src);
 
         [MethodImpl(Inline), Op]
-        static void process(in CpuidExpression src, in AsmOpCodeGroup handler, uint seq)
+        static void process(in Cpuid src, in AsmOpCodeGroup handler, uint seq)
             => handler.Include(seq, src);
     }
 }

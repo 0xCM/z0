@@ -9,19 +9,18 @@ namespace Z0.Asm
 
     using static Part;
 
-    public readonly struct R16<R> : IRegister<R16<R>,W16,ushort>
-        where R : unmanaged, IRegister
+    partial struct AsmDocParts
     {
-        public ushort Content {get;}
-
-        [MethodImpl(Inline)]
-        public R16(ushort value)
-            => Content = value;
-
-        public RegisterKind Kind
+        public static bool parse(DocLine src, out object dst)
         {
-            [MethodImpl(Inline)]
-            get => default(R).Kind;
+            dst = 0;
+            return true;
         }
+    }
+
+    public abstract class AsmDocPart<T>
+        where T : AsmDocPart<T>
+    {
+
     }
 }

@@ -16,9 +16,9 @@ namespace Z0.Asm
 
         readonly Span<AsmOpCode> OpCodeData;
 
-        readonly Span<MnemonicExpression> MnemonicData;
+        readonly Span<AsmMnemonic> MnemonicData;
 
-        readonly Span<CpuidExpression> CpuidData;
+        readonly Span<Cpuid> CpuidData;
 
         readonly Span<OperatingMode> ModeData;
 
@@ -30,8 +30,8 @@ namespace Z0.Asm
             MnemonicSeq = new uint[1];
             SigData = new AsmSig[count];
             OpCodeData = new AsmOpCode[count];
-            MnemonicData = new MnemonicExpression[count];
-            CpuidData = new CpuidExpression[count];
+            MnemonicData = new AsmMnemonic[count];
+            CpuidData = new Cpuid[count];
             ModeData = new OperatingMode[count];
         }
 
@@ -44,7 +44,7 @@ namespace Z0.Asm
             => OpCode(seq) = src;
 
         [MethodImpl(Inline), Op]
-        public void Include(uint seq, in CpuidExpression src)
+        public void Include(uint seq, in Cpuid src)
             => seek(CpuidData, seq) = src;
 
         [MethodImpl(Inline), Op]
@@ -60,37 +60,37 @@ namespace Z0.Asm
             => OpCode((uint)ocp.Sequence) = src;
 
         [MethodImpl(Inline), Op]
-        void Include(in MnemonicExpression src)
+        void Include(in AsmMnemonic src)
             => seek(MnemonicData, first(MnemonicSeq)++) = src;
 
-        ref readonly MnemonicExpression LastMnemonic
+        ref readonly AsmMnemonic LastMnemonic
         {
             [MethodImpl(Inline)]
             get => ref skip(MnemonicData, first(MnemonicSeq) - 1);
         }
 
         [MethodImpl(Inline), Op]
-        public void Include(AsmOpCodePartitoner ocp, in MnemonicExpression src)
+        public void Include(AsmOpCodePartitoner ocp, in AsmMnemonic src)
         {
             if(first(MnemonicSeq) > 0)
-                if(!LastMnemonic.Value.Equals(src.Value))
+                if(!LastMnemonic.Name.Equals(src.Name))
                     Include(src);
             else
                 Include(src);
         }
 
         [MethodImpl(Inline), Op]
-        public void Include(uint seq, in MnemonicExpression src)
+        public void Include(uint seq, in AsmMnemonic src)
         {
             if(first(MnemonicSeq) > 0)
-                if(!LastMnemonic.Value.Equals(src.Value))
+                if(!LastMnemonic.Name.Equals(src.Name))
                     Include(src);
             else
                 Include(src);
         }
 
         [MethodImpl(Inline), Op]
-        public void Include(in AsmOpCodePartitoner ocp, in CpuidExpression src)
+        public void Include(in AsmOpCodePartitoner ocp, in Cpuid src)
             => seek(CpuidData, (uint)ocp.Sequence) = src;
 
         [MethodImpl(Inline), Op]
@@ -115,13 +115,13 @@ namespace Z0.Asm
             get => OpCodeData;
         }
 
-        public ReadOnlySpan<CpuidExpression> CpuId
+        public ReadOnlySpan<Cpuid> CpuId
         {
             [MethodImpl(Inline)]
             get => CpuidData;
         }
 
-        public ReadOnlySpan<MnemonicExpression> Mnemonics
+        public ReadOnlySpan<AsmMnemonic> Mnemonics
         {
             [MethodImpl(Inline)]
             get => MnemonicData;
@@ -134,7 +134,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
-        ref MnemonicExpression Mnemonic(uint seq)
+        ref AsmMnemonic Mnemonic(uint seq)
             => ref seek(MnemonicData, seq);
 
         [MethodImpl(Inline), Op]

@@ -13,15 +13,15 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static unsafe void copy(in asci2 src, ref byte dst)
-            => z.@as<byte,ushort>(dst) = src.Storage;
+            => memory.@as<byte,ushort>(dst) = src.Storage;
 
         [MethodImpl(Inline), Op]
         public static unsafe void copy(in asci4 src, ref byte dst)
-            => z.@as<byte,uint>(dst) = src.Storage;
+            => memory.@as<byte,uint>(dst) = src.Storage;
 
         [MethodImpl(Inline), Op]
         public static unsafe void copy(in asci8 src, ref byte dst)
-            => z.@as<byte,ulong>(dst) = src.Storage;
+            => memory.@as<byte,ulong>(dst) = src.Storage;
 
         [MethodImpl(Inline), Op]
         public static unsafe void copy(in asci16 src, ref byte dst)

@@ -19,6 +19,5 @@ namespace Z0
             public bit Check(char c)
                 => @decimal(c);
         }
-
     }
 }

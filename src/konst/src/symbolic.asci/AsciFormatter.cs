@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static z;
-    using static Konst;
+    using static Part;
 
     [ApiHost]
     public unsafe readonly struct AsciFormatter

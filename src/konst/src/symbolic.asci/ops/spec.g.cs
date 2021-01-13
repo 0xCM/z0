@@ -3,11 +3,11 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     partial struct asci
     {
@@ -23,6 +23,6 @@ namespace Z0
             where S : unmanaged
             where T : unmanaged
             where W : unmanaged, IDataWidth
-                => new SymbolSpec<S,T,W>(symbols);                
+                => new SymbolSpec<S,T,W>(symbols);
     }
 }

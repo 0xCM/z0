@@ -7,12 +7,12 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     partial struct asci
     {
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static void store(ReadOnlySpan<byte> src, char fill, Span<char> dst)
         {
             var count = z.length(src,dst);
@@ -45,18 +45,18 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static void store(in asci8 src, Span<char> dst)
-            => decode(src, ref z.first(dst));
+            => decode(src, ref memory.first(dst));
 
         [MethodImpl(Inline), Op]
         public static void store(in asci16 src, Span<char> dst)
-            => decode(src, ref z.first(dst));
+            => decode(src, ref memory.first(dst));
 
         [MethodImpl(Inline), Op]
         public static void store(in asci32 src, Span<char> dst)
-            => decode(src, ref z.first(dst));
+            => decode(src, ref memory.first(dst));
 
         [MethodImpl(Inline), Op]
         public static void store(in asci64 src, Span<char> dst)
-            => decode(src, ref z.first(dst));
+            => decode(src, ref memory.first(dst));
     }
 }

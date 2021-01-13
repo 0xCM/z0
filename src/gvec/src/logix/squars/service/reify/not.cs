@@ -7,9 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static z;
     using static In;
+    using static SFx;
 
     using BL = BitLogic.Bytes;
     using LS = LogicSquare;

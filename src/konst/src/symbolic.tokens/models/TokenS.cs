@@ -17,7 +17,6 @@ namespace Z0
     public readonly struct Token<S> : IToken<S>
         where S : unmanaged, ISymbol
     {
-        /// <summary>
         readonly Index<S> Data;
 
         [MethodImpl(Inline)]

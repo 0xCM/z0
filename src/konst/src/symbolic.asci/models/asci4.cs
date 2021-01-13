@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     using N = N4;
     using A = asci4;
@@ -21,48 +21,16 @@ namespace Z0
         internal readonly S Storage;
 
         [MethodImpl(Inline)]
-        public static implicit operator A(string src)
-            => new A(src);
+        public asci4(S src)
+        {
+            Storage = src;
+        }
 
         [MethodImpl(Inline)]
-        public static implicit operator string(A src)
-            => src.Text;
-
-        [MethodImpl(Inline)]
-        public static implicit operator ReadOnlySpan<byte>(A src)
-            => src.View;
-
-        [MethodImpl(Inline)]
-        public static implicit operator ReadOnlySpan<char>(A src)
-            => src.Decoded;
-
-        [MethodImpl(Inline)]
-        public static implicit operator A(ushort src)
-            => new A(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator A(uint src)
-            => new A(src);
-
-        [MethodImpl(Inline)]
-        public static explicit operator byte(A src)
-            => (byte)src.Storage;
-
-        [MethodImpl(Inline)]
-        public static explicit operator ushort(A src)
-            => (ushort)src.Storage;
-
-        [MethodImpl(Inline)]
-        public static explicit operator uint(A src)
-            => src.Storage;
-
-        [MethodImpl(Inline)]
-        public static bool operator ==(A a, A b)
-            => a.Equals(b);
-
-        [MethodImpl(Inline)]
-        public static bool operator !=(A a, A b)
-            => !a.Equals(b);
+        public asci4(string src)
+        {
+            Storage = asci.encode(n,src).Storage;
+        }
 
         public bool IsBlank
         {
@@ -158,16 +126,49 @@ namespace Z0
         static N n => default;
 
 
-        [MethodImpl(Inline)]
-        public asci4(S src)
-        {
-            Storage = src;
-        }
 
         [MethodImpl(Inline)]
-        public asci4(string src)
-        {
-            Storage = asci.encode(n,src).Storage;
-        }
+        public static implicit operator A(string src)
+            => new A(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator string(A src)
+            => src.Text;
+
+        [MethodImpl(Inline)]
+        public static implicit operator ReadOnlySpan<byte>(A src)
+            => src.View;
+
+        [MethodImpl(Inline)]
+        public static implicit operator ReadOnlySpan<char>(A src)
+            => src.Decoded;
+
+        [MethodImpl(Inline)]
+        public static implicit operator A(ushort src)
+            => new A(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator A(uint src)
+            => new A(src);
+
+        [MethodImpl(Inline)]
+        public static explicit operator byte(A src)
+            => (byte)src.Storage;
+
+        [MethodImpl(Inline)]
+        public static explicit operator ushort(A src)
+            => (ushort)src.Storage;
+
+        [MethodImpl(Inline)]
+        public static explicit operator uint(A src)
+            => src.Storage;
+
+        [MethodImpl(Inline)]
+        public static bool operator ==(A a, A b)
+            => a.Equals(b);
+
+        [MethodImpl(Inline)]
+        public static bool operator !=(A a, A b)
+            => !a.Equals(b);
     }
 }

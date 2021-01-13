@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct Timestamp : ITextual, IComparable<Timestamp>, IEquatable<Timestamp>
+    public readonly struct Timestamp : IDataTypeComparable<Timestamp>
     {
         readonly ulong Ticks;
 

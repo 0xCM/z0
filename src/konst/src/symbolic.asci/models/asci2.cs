@@ -22,36 +22,12 @@ namespace Z0
         internal readonly S Storage;
 
         [MethodImpl(Inline)]
-        public static implicit operator ReadOnlySpan<byte>(A src)
-            => src.View;
+        public asci2(S src)
+            => Storage = src;
 
         [MethodImpl(Inline)]
-        public static implicit operator ReadOnlySpan<char>(A src)
-            => src.Decoded;
-
-        [MethodImpl(Inline)]
-        public static implicit operator string(A src)
-            => src.Text;
-
-        [MethodImpl(Inline)]
-        public static implicit operator A(string src)
-            => new A(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator A(S src)
-            => new A(src);
-
-        [MethodImpl(Inline)]
-        public static bool operator ==(A a, A b)
-            => a.Equals(b);
-
-        [MethodImpl(Inline)]
-        public static bool operator !=(A a, A b)
-            => !a.Equals(b);
-
-        [MethodImpl(Inline)]
-        public static implicit operator ushort(A src)
-            => src.Storage;
+        public asci2(string src)
+            => Storage = asci.encode(n,src).Storage;
 
         public bool IsBlank
         {
@@ -147,16 +123,37 @@ namespace Z0
 
         static W w => default;
 
-        [MethodImpl(Inline)]
-        public asci2(S src)
-        {
-            Storage = src;
-        }
 
         [MethodImpl(Inline)]
-        public asci2(string src)
-        {
-            Storage = asci.encode(n,src).Storage;
-        }
+        public static implicit operator ReadOnlySpan<byte>(A src)
+            => src.View;
+
+        [MethodImpl(Inline)]
+        public static implicit operator ReadOnlySpan<char>(A src)
+            => src.Decoded;
+
+        [MethodImpl(Inline)]
+        public static implicit operator string(A src)
+            => src.Text;
+
+        [MethodImpl(Inline)]
+        public static implicit operator A(string src)
+            => new A(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator A(S src)
+            => new A(src);
+
+        [MethodImpl(Inline)]
+        public static bool operator ==(A a, A b)
+            => a.Equals(b);
+
+        [MethodImpl(Inline)]
+        public static bool operator !=(A a, A b)
+            => !a.Equals(b);
+
+        [MethodImpl(Inline)]
+        public static implicit operator ushort(A src)
+            => src.Storage;
     }
 }

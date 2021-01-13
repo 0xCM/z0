@@ -49,7 +49,7 @@ namespace Z0.Asm
 
         }
 
-        void emit(ReadOnlySpan<MnemonicExpression> src)
+        void emit(ReadOnlySpan<AsmMnemonic> src)
         {
             var dstPath = CasePath($"Mnemonics");
             using var writer = dstPath.Writer();
@@ -57,7 +57,7 @@ namespace Z0.Asm
             for(var i=0; i<src.Length; i++)
             {
                 ref readonly var id = ref skip(src,i);
-                writer.WriteLine(id.Format().PadRight(id.Value.Capacity));
+                writer.WriteLine(id.Format().PadRight(id.Name.Capacity));
             }
         }
 

@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
 
     using static Part;
     using static z;
@@ -62,7 +61,7 @@ namespace Z0
 
         public ParseResult<ServiceKey> Parse(string src)
         {
-            var fail = unparsed<ServiceKey>(src);
+            var fail = root.unparsed<ServiceKey>(src);
             var length = text.length(src);
             if(length != 0)
             {

@@ -26,5 +26,4 @@ namespace Z0.Asm
         public static implicit operator RegOp<T>(T src)
             => new RegOp<T>(src);
     }
-
 }

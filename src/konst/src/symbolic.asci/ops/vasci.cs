@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="count">Tne number of characters to select</param>
         [MethodImpl(Inline), Op]
         static ReadOnlySpan<ushort> scalars(sbyte offset, sbyte count)
-            => recover<char,ushort>(chars(offset,count));
+            => memory.recover<char,ushort>(chars(offset,count));
 
         /// Returns the asci characters corresponding to the asci codes [offset, ..., offset + count] where offset <= (2^7-1) - count
         /// </summary>
@@ -28,7 +28,7 @@ namespace Z0
         /// <param name="count">Tne number of characters to select</param>
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> chars(sbyte offset, sbyte count)
-            => slice(recover<char>(AsciSymData.CharBytes), offset, count);
+            => slice(memory.recover<char>(AsciSymData.CharBytes), offset, count);
 
         /// <summary>
         /// Loads up to 16 asci scalar symbols [offset, offset + count]
@@ -41,7 +41,7 @@ namespace Z0
             var target = default(Vector256<ushort>);
             ref var dst = ref z.vref(ref target);
             for(byte i=0; i<(byte)count; i++)
-                seek(dst,i) = skip(src,i);
+                memory.seek(dst,i) = memory.skip(src,i);
             return target;
         }
 
@@ -56,7 +56,7 @@ namespace Z0
             var target = default(Vector512<ushort>);
             ref var dst = ref z.vref(ref target);
             for(byte i=0; i<(byte)count; i++)
-                seek(dst, i) = skip(src, i);
+                memory.seek(dst, i) = memory.skip(src, i);
             return target;
         }
     }

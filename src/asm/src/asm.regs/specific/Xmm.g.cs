@@ -7,7 +7,7 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     public struct Xmm<R> : IRegister<Xmm<R>,W128,Cell128>
         where R : unmanaged, IRegister

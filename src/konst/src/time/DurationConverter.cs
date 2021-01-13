@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Linq;
 
     using static Part;
     using static z;
@@ -18,7 +17,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public T Convert<T>(Duration src)
-            => force<T>(src.Ticks);
+            => NumericCast.force<T>(src.Ticks);
 
         [MethodImpl(Inline)]
         public Duration Convert<T>(T src)

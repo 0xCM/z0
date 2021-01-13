@@ -1,20 +1,17 @@
 //-----------------------------------------------------------------------------
-// Derivative Work
-// Copyright  : Microsoft/.Net foundation
-// Copyright  : (c) Chris Moore, 2020
-// License    :  MIT
+// Copyright   :  (c) Chris Moore, 2020
+// License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
 {
     using System;
-    using System.Runtime.InteropServices;
 
-    using static Konst;
+    using static Part;
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
     using Fp = System.Runtime.InteropServices.UnmanagedFunctionPointerAttribute;
 
-    public readonly partial struct OS
+    public readonly struct OS
     {
         public readonly struct Delegates
         {

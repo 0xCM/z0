@@ -3,15 +3,15 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
     using static z;
 
     partial struct asci
-    {        
+    {
         /// <summary>
         /// Returns the index of the first source element that matches a specified value
         /// </summary>
@@ -66,7 +66,6 @@ namespace Z0
                     return (int)i;
             return NotFound;
         }
-    
 
         [MethodImpl(Inline), Op]
         static int first(ReadOnlySpan<byte> src, byte match)
@@ -89,6 +88,6 @@ namespace Z0
                 if(skip(src,i) == match)
                     return (int)i;
             return NotFound;
-        }        
+        }
     }
 }

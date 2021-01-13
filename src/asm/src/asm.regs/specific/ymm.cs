@@ -7,13 +7,12 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     using K = RegisterKind;
 
     partial struct AsmRegs
     {
-
         public readonly struct ymm0 : IRegister<ymm0,W256,Cell256>
         {
             public Cell256 Content {get;}

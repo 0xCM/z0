@@ -7,15 +7,12 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    partial struct AsmLang
+    public enum AsmOperatorCode : byte
     {
-        public enum OperatorCode : byte
-        {
-            add = AsciMathCode.Add,
+        add = AsciMathCode.Add,
 
-            sub = AsciMathCode.Sub,
+        sub = AsciMathCode.Sub,
 
-            mul = AsciMathCode.Mul
-        }
+        mul = AsciMathCode.Mul
     }
 }

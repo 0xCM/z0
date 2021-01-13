@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static SFx;
-
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     partial struct SFx

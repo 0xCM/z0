@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     partial struct SFx
@@ -23,12 +23,12 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public ref T map<T>(ValueProjector projector, object x)
             where T : struct
-                => ref z.unbox<T>(projector.Delegate((ValueType)x));
+                => ref memory.unbox<T>(projector.Delegate((ValueType)x));
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T map<T>(ValueProjector<T> f, in T x)
             where T : struct
-                => ref z.unbox<T>(f.Actor(x));
+                => ref memory.unbox<T>(f.Actor(x));
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T map<T>(ValueProjector<T,T> f, in T x)

@@ -7,9 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static AsciSymbols;
-    using static z;
 
     partial struct asci
     {
@@ -24,6 +23,6 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static char uppercase(AsciLetterLoCode src)
-            => skip(UppercaseLetters,(uint)src - (uint)AsciLetterLoCode.First);
+            => memory.skip(UppercaseLetters,(uint)src - (uint)AsciLetterLoCode.First);
     }
 }

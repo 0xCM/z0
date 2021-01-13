@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     partial struct asci
     {
@@ -25,6 +25,6 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static ref readonly AsciSymbol symbol(in byte src)
-            => ref z.view<byte,AsciSymbol>(src);
+            => ref memory.view<byte,AsciSymbol>(src);
    }
 }

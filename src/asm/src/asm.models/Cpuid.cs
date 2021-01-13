@@ -7,22 +7,18 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
-    public readonly struct CpuidExpression
+    public readonly struct Cpuid
     {
         public readonly asci64 Value;
 
         [MethodImpl(Inline)]
-        public static implicit operator CpuidExpression(string src)
-            => new CpuidExpression(src);
-
-        [MethodImpl(Inline)]
-        public CpuidExpression(in asci64 src)
+        public Cpuid(in asci64 src)
             => Value = src;
 
         [MethodImpl(Inline)]
-        public CpuidExpression(string src)
+        public Cpuid(string src)
             => asci.encode(src, out Value);
 
         public ReadOnlySpan<byte> Encoded
@@ -37,7 +33,7 @@ namespace Z0.Asm
             get => asci.decode(Value);
         }
 
-        public CpuidExpression Zero
+        public Cpuid Zero
             => Empty;
 
         /// <summary>
@@ -62,11 +58,11 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        public bool Equals(CpuidExpression src)
+        public bool Equals(Cpuid src)
             => src.Value.Equals(Value);
 
         public override bool Equals(object src)
-            => src is CpuidExpression x && Equals(x);
+            => src is Cpuid x && Equals(x);
 
         public override int GetHashCode()
             => Value.GetHashCode();
@@ -76,7 +72,11 @@ namespace Z0.Asm
         public override string ToString()
             => Format();
 
-        public static CpuidExpression Empty
-            => new CpuidExpression(asci.Null);
+        [MethodImpl(Inline)]
+        public static implicit operator Cpuid(string src)
+            => new Cpuid(src);
+
+        public static Cpuid Empty
+            => new Cpuid(asci.Null);
     }
 }

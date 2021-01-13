@@ -9,7 +9,6 @@ namespace Z0.Asm
 
     using static Part;
     using static Cells;
-    using static z;
 
     public readonly struct RegBank512
     {

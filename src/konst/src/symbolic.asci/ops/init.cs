@@ -71,15 +71,15 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static asci2 init(N2 n, ReadOnlySpan<byte> src)
-            => view(n, z.first(recover<byte,ushort>(src)));
+            => view(n, memory.first(recover<byte,ushort>(src)));
 
         [MethodImpl(Inline), Op]
         public static asci4 init(N4 n, ReadOnlySpan<byte> src)
-            => view(n, z.first(recover<byte,uint>(src)));
+            => view(n, memory.first(recover<byte,uint>(src)));
 
         [MethodImpl(Inline), Op]
         public static asci8 init(N8 n, ReadOnlySpan<byte> src)
-            => view(n, z.first(recover<byte,uint>(src)));
+            => view(n, memory.first(recover<byte,uint>(src)));
 
         [MethodImpl(Inline), Op]
         public static asci16 init(N16 n, ulong lo, ulong hi)

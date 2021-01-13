@@ -50,14 +50,14 @@ namespace Z0.Asm
             }
         }
 
-        public static void emit(ReadOnlySpan<MnemonicExpression> src, FS.FilePath dst)
+        public static void emit(ReadOnlySpan<AsmMnemonic> src, FS.FilePath dst)
         {
             using var writer = dst.Writer();
             writer.WriteLine("Mnemonic");
             for(var i=0; i<src.Length; i++)
             {
                 ref readonly var id = ref skip(src,i);
-                writer.WriteLine(id.Format().PadRight(id.Value.Capacity));
+                writer.WriteLine(id.Format().PadRight(id.Name.Capacity));
             }
         }
 

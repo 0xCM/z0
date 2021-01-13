@@ -6,16 +6,13 @@ namespace Z0
 {
     using System;
 
-    using static SFx;
-
-
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
-
-    [Free]
-    public delegate Span<T> Imm8ShiftSpanOp<T>(ReadOnlySpan<T> src, byte imm8, Span<T> dst);
 
     partial struct SFx
     {
+        [Free]
+        public delegate Span<T> Imm8ShiftSpanOp<T>(ReadOnlySpan<T> src, byte imm8, Span<T> dst);
+
         /// <summary>
         /// Characterizes an operator that applies a bitwise shift or rotation to elements in a source span
         /// </summary>

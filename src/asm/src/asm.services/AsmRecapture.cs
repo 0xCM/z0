@@ -9,9 +9,30 @@ namespace Z0.Asm
 
     using static Part;
 
-    public readonly ref partial struct AsmRecapture
+    public readonly struct AsmRecapture
     {
         readonly IAsmContext Context;
+
+        [MethodImpl(Inline)]
+        public AsmRecapture(IAsmContext context)
+        {
+            Context = context;
+            Context.Paths.AppDataRoot.Clear();
+            ResIndexDir.Clear();
+            ResBytesDir.Clear();
+            ResBytesUncompiled.Clear();
+        }
+
+        /// <summary>
+        /// All of your resbytes belong to us
+        /// </summary>
+        public void Run()
+        {
+            var resfile = ResBytesCompiled;
+            var captured =Capture(resfile, ResBytesUncompiled);
+            var csvfile = ResIndexDir + FS.file("z0.res.bytes", FileExtensions.Csv);
+            AsmWriter.emit(captured, csvfile);
+        }
 
         public FS.FolderPath ResIndexDir
             => Context.Paths.ResIndexDir;
@@ -33,20 +54,5 @@ namespace Z0.Asm
         /// </summary>
         public FS.FolderPath ResBytesUncompiled
             => ResBytesDir + FS.folder("asm");
-
-        [MethodImpl(Inline)]
-        public AsmRecapture(IAsmContext context)
-        {
-            Context = context;
-            Context.Paths.AppDataRoot.Clear();
-            ResIndexDir.Clear();
-            ResBytesDir.Clear();
-            ResBytesUncompiled.Clear();
-        }
-
-        public void Dispose()
-        {
-
-        }
     }
 }

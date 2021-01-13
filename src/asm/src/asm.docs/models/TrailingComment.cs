@@ -11,20 +11,20 @@ namespace Z0.Asm
 
     partial struct AsmDocParts
     {
-        public readonly struct Comment
+        public readonly struct TrailingComment
         {
-            public TextLine Text {get;}
+            public TextBlock Text {get;}
 
             public PartKind Kind
                 => PartKind.BlockHeaderLine;
 
             [MethodImpl(Inline)]
-            public Comment(TextLine text)
+            public TrailingComment(TextBlock text)
                 => Text = text;
 
             [MethodImpl(Inline)]
             public string Format()
-                => Text.Content;
+                => Text;
 
             public override string ToString()
                 => Format();

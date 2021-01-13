@@ -7,38 +7,39 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
+    using static memory;
 
     partial struct asci
     {
         [MethodImpl(Inline)]
         public static ref readonly asci2 cast<A>(N2 n, in A src)
             where A : unmanaged, IByteSeq
-                => ref z.@as<A,asci2>(src);
+                => ref @as<A,asci2>(src);
 
         [MethodImpl(Inline)]
         public static ref readonly asci4 cast<A>(N4 n, in A src)
             where A : unmanaged, IByteSeq
-                => ref z.@as<A,asci4>(src);
+                => ref @as<A,asci4>(src);
 
         [MethodImpl(Inline)]
         public static ref readonly asci8 cast<A>(N8 n, in A src)
             where A : unmanaged, IByteSeq
-                => ref z.@as<A,asci8>(src);
+                => ref @as<A,asci8>(src);
 
         [MethodImpl(Inline)]
         public static ref readonly asci16 cast<A>(N16 n, in A src)
             where A : unmanaged, IByteSeq
-                => ref z.@as<A,asci16>(src);
+                => ref @as<A,asci16>(src);
 
         [MethodImpl(Inline)]
         public static ref readonly asci32 cast<A>(N32 n, in A src)
             where A : unmanaged, IByteSeq
-                => ref z.@as<A,asci32>(src);
+                => ref @as<A,asci32>(src);
 
         [MethodImpl(Inline)]
         public static ref readonly asci64 cast<A>(N64 n, in A src)
             where A : unmanaged, IByteSeq
-                => ref z.@as<A,asci64>(src);
+                => ref @as<A,asci64>(src);
     }
 }

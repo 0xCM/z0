@@ -23,6 +23,5 @@ namespace Z0.Asm
             public static implicit operator Statements(Statement[] src)
                 => new Statements(src);
         }
-
     }
 }

@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using static Konst;
+    using static Part;
 
     using W = AsmOpCodeFieldWidths;
 

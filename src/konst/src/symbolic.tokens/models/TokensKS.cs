@@ -22,6 +22,7 @@ namespace Z0
 
         public ref Token<K,S> this[I index]
         {
+            [MethodImpl(Inline)]
             get => ref Data[memory.@as<I,uint>(index)];
         }
 
@@ -50,10 +51,17 @@ namespace Z0
         }
 
         public Token<K,S>[] Storage
-            => Data.Storage;
+        {
+            [MethodImpl(Inline)]
+            get => Data.Storage;
+        }
 
         [MethodImpl(Inline)]
         public static implicit operator Tokens<I,K,S>(Token<K,S>[] src)
             => new Tokens<I,K,S>(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Token<K,S>[](Tokens<I,K,S> src)
+            => src.Storage;
     }
 }

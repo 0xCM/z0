@@ -33,20 +33,6 @@ namespace Z0.Asm
             return dst;
         }
 
-        // [Op]
-        // public static uint format(in IceInstructionList src, in AsmFormatConfig config, Span<string> dst)
-        // {
-        //     var count = src.Count;
-        //     if(count == 0)
-        //         return 0;
-
-        //     var summaries =  asm.summarize(src);
-        //     var @base = src[0].IP;
-        //     for(var i=0u; i<(uint)count; i++)
-        //         seek(dst,i) = format(@base, skip(summaries,i), config);
-
-        //     return count;
-        // }
 
         [MethodImpl(Inline), Op]
         public static string format(AsmSpecifier src, byte[] encoded, string sep)

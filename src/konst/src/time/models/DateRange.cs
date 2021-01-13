@@ -22,12 +22,12 @@ namespace Z0
         /// <summary>
         /// The inclusive lower bound
         /// </summary>
-        public readonly Date Min;
+        public Date Min {get;}
 
         /// <summary>
         /// The inclusive upper bound
         /// </summary>
-        public readonly Date Max;
+        public Date Max {get;}
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DateRange"/> type
@@ -163,7 +163,7 @@ namespace Z0
             var dates = GetDates().Intersect(src.GetDates()).ToList();
             return dates.Any()
                 ? dates.Min().To(dates.Max())
-                : Option.none<DateRange>();
+                : root.none<DateRange>();
         }
 
         /// <summary>
@@ -174,12 +174,6 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Min == Max;
         }
-
-        Date ITimeInterval<Date>.Min
-            => Min;
-
-        Date ITimeInterval<Date>.Max
-            => Max;
 
         public override string ToString()
             => $"[{Min.ToIsoString()},{Max.ToIsoString()}]";

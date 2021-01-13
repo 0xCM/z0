@@ -60,20 +60,20 @@ namespace Z0.Asm
             => handler.Include(this, src);
 
         [MethodImpl(Inline), Op]
-        void Process(in MnemonicExpression src, in AsmOpCodeGroup handler)
+        void Process(in AsmMnemonic src, in AsmOpCodeGroup handler)
             => handler.Include(this, src);
 
         [MethodImpl(Inline), Op]
-        void Process(in CpuidExpression src, in AsmOpCodeGroup handler)
+        void Process(in Cpuid src, in AsmOpCodeGroup handler)
             => handler.Include(this, src);
 
         [MethodImpl(Inline), Op]
-        static MnemonicExpression Mnemonic(in AsmOpCodeRow src)
-            => new MnemonicExpression(src.Mnemonic);
+        static AsmMnemonic Mnemonic(in AsmOpCodeRow src)
+            => new AsmMnemonic(src.Mnemonic);
 
         [MethodImpl(Inline), Op]
-        static CpuidExpression Cpuid(in AsmOpCodeRow src)
-            => new CpuidExpression(src.CpuId);
+        static Cpuid Cpuid(in AsmOpCodeRow src)
+            => new Cpuid(src.CpuId);
 
         [MethodImpl(Inline), Op]
         static AsmOpCode OpCode(in AsmOpCodeRow src)

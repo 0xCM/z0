@@ -24,5 +24,4 @@ namespace Z0.Asm
         public static implicit operator MemOp<T>(T src)
             => new MemOp<T>(src);
     }
-
 }

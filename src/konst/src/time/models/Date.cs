@@ -13,10 +13,10 @@ namespace System
     using System.Xml.Schema;
     using System.Xml.Serialization;
     using System.Runtime.CompilerServices;
-    
+
     using Z0;
 
-    using static Z0.Konst;
+    using static Z0.Part;
 
     /// <summary>
     /// Provides an enumeration of AM or PM to support 12-hour clock values in the <see cref="TimeOfDay"/> type.
@@ -29,11 +29,11 @@ namespace System
     public enum Meridiem
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         AM,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         PM
     }
@@ -170,11 +170,11 @@ namespace System
             }
         }
 
-        public static implicit operator Date(string x) 
+        public static implicit operator Date(string x)
             => Date.Parse(x);
 
         [MethodImpl(Inline)]
-        public DateTime ToDateTime() 
+        public DateTime ToDateTime()
             => new Date(Year, Month, Day);
 
         public Date FirstDayOfMonth
@@ -200,21 +200,21 @@ namespace System
             var _parsed = Date.Parse(x);
             _dayNumber = DateToDayNumber(_parsed.Year, _parsed.Month, _parsed.Day);
         }
-        
+
         private const int MinDayNumber = 0;
-        
+
         private const int MaxDayNumber = 3652058;
 
         /// <summary>
         /// Represents the smallest possible value of <see cref="Date"/>. This field is read-only.
         /// </summary>
-        public readonly Date MinValue 
+        public readonly Date MinValue
             => new Date(MinDayNumber);
 
         /// <summary>
         /// Represents the largest possible value of <see cref="Date"/>. This field is read-only.
         /// </summary>
-        public readonly Date MaxValue 
+        public readonly Date MaxValue
             => new Date(MaxDayNumber);
 
         // Number of days in a non-leap year
@@ -231,16 +231,16 @@ namespace System
 
         // The following arrays contain the starting day-of-year number of each month, for regular and leap years
         private static readonly int[] DaysToMonth365 = { 0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334, 365 };
-        
+
         private static readonly int[] DaysToMonth366 = { 0, 31, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335, 366 };
 
         // internal enum
         private const int DatePartYear = 0;
-        
+
         private const int DatePartDayOfYear = 1;
-        
+
         private const int DatePartMonth = 2;
-        
+
         private const int DatePartDay = 3;
 
         // Number of whole days since 0001-01-01 (which is day 0)
@@ -982,7 +982,7 @@ namespace System
         /// </summary>
         /// <returns>A 32-bit signed integer hash code.</returns>
         /// <remarks>
-        /// The hash code of a <see cref="Date"/> object is the day number, which is the 
+        /// The hash code of a <see cref="Date"/> object is the day number, which is the
         /// number of days since January 1, 0001 in the proleptic Gregorian calendar.
         /// </remarks>
         public override int GetHashCode()
@@ -1918,7 +1918,7 @@ namespace System
     }
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     /// <param name="dateTime"></param>
     /// <param name="timeZone"></param>
@@ -1926,12 +1926,12 @@ namespace System
     public delegate DateTimeOffset TimeZoneOffsetResolver(DateTime dateTime, TimeZoneInfo timeZone);
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public static class TimeZoneOffsetResolvers
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="dt"></param>
         /// <param name="timeZone"></param>
@@ -2004,7 +2004,7 @@ namespace System
             return TimeZoneInfo.ConvertTime(utcNow, timeZoneInfo);
         }
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="dateTime"></param>
         /// <param name="years"></param>
@@ -2015,7 +2015,7 @@ namespace System
             return AddByDate(dateTime, dt => dt.AddYears(years), timeZone, TimeZoneOffsetResolvers.Default);
         }
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="dateTime"></param>
         /// <param name="years"></param>
@@ -2027,7 +2027,7 @@ namespace System
             return AddByDate(dateTime, dt => dt.AddYears(years), timeZone, resolver);
         }
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="dateTime"></param>
         /// <param name="months"></param>
@@ -2038,7 +2038,7 @@ namespace System
             return AddByDate(dateTime, dt => dt.AddMonths(months), timeZone, TimeZoneOffsetResolvers.Default);
         }
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="dateTime"></param>
         /// <param name="months"></param>
@@ -2050,7 +2050,7 @@ namespace System
             return AddByDate(dateTime, dt => dt.AddMonths(months), timeZone, resolver);
         }
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="dateTime"></param>
         /// <param name="days"></param>
@@ -2061,7 +2061,7 @@ namespace System
             return AddByDate(dateTime, dt => dt.AddDays(days), timeZone, TimeZoneOffsetResolvers.Default);
         }
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="dateTime"></param>
         /// <param name="days"></param>
@@ -2073,7 +2073,7 @@ namespace System
             return AddByDate(dateTime, dt => dt.AddDays(days), timeZone, resolver);
         }
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="dateTime"></param>
         /// <param name="hours"></param>
@@ -2084,7 +2084,7 @@ namespace System
             return dateTime.Add(TimeSpan.FromHours(hours), timeZone, TimeZoneOffsetResolvers.Default);
         }
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="dateTime"></param>
         /// <param name="hours"></param>
@@ -2096,7 +2096,7 @@ namespace System
             return dateTime.Add(TimeSpan.FromHours(hours), timeZone, resolver);
         }
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="dateTime"></param>
         /// <param name="minutes"></param>
@@ -2107,7 +2107,7 @@ namespace System
             return dateTime.Add(TimeSpan.FromMinutes(minutes), timeZone, TimeZoneOffsetResolvers.Default);
         }
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="dateTime"></param>
         /// <param name="minutes"></param>
@@ -2120,7 +2120,7 @@ namespace System
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="dateTime"></param>
         /// <param name="seconds"></param>
@@ -2132,7 +2132,7 @@ namespace System
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="dateTime"></param>
         /// <param name="seconds"></param>
@@ -2145,7 +2145,7 @@ namespace System
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="dateTime"></param>
         /// <param name="milliseconds"></param>
@@ -2156,7 +2156,7 @@ namespace System
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="dateTime"></param>
         /// <param name="milliseconds"></param>
@@ -2168,7 +2168,7 @@ namespace System
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="dateTime"></param>
         /// <param name="ticks"></param>
@@ -2178,7 +2178,7 @@ namespace System
             return dateTime.Add(TimeSpan.FromTicks(ticks), timeZone, TimeZoneOffsetResolvers.Default);
         }
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="dateTime"></param>
         /// <param name="ticks"></param>
@@ -2191,7 +2191,7 @@ namespace System
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="dateTime"></param>
         /// <param name="timeSpan"></param>
@@ -2202,7 +2202,7 @@ namespace System
             return dateTime.Add(timeSpan, timeZone, TimeZoneOffsetResolvers.Default);
         }
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="dateTime"></param>
         /// <param name="timeSpan"></param>
@@ -2213,7 +2213,7 @@ namespace System
             return dateTime.Add(timeSpan.Negate(), timeZone, TimeZoneOffsetResolvers.Default);
         }
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="dateTime"></param>
         /// <param name="timeSpan"></param>
@@ -2225,7 +2225,7 @@ namespace System
             return dateTime.Add(timeSpan.Negate(), timeZone, resolver);
         }
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="dateTime"></param>
         /// <param name="timeSpan"></param>
@@ -2239,7 +2239,7 @@ namespace System
             return TimeZoneInfo.ConvertTime(result, timeZone);
         }
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="dateTime"></param>
         /// <param name="operation"></param>
@@ -2300,7 +2300,7 @@ namespace System
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="dateTimeOffset"></param>
         /// <param name="years"></param>
@@ -2312,7 +2312,7 @@ namespace System
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="dateTimeOffset"></param>
         /// <param name="years"></param>
@@ -2325,7 +2325,7 @@ namespace System
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="dateTimeOffset"></param>
         /// <param name="months"></param>
@@ -2336,7 +2336,7 @@ namespace System
             return AddByDate(dateTimeOffset, dt => dt.AddMonths(months), timeZone, TimeZoneOffsetResolvers.Default);
         }
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="dateTimeOffset"></param>
         /// <param name="months"></param>
@@ -2348,7 +2348,7 @@ namespace System
             return AddByDate(dateTimeOffset, dt => dt.AddMonths(months), timeZone, resolver);
         }
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="dateTimeOffset"></param>
         /// <param name="days"></param>
@@ -2359,7 +2359,7 @@ namespace System
             return AddByDate(dateTimeOffset, dt => dt.AddDays(days), timeZone, TimeZoneOffsetResolvers.Default);
         }
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="dateTimeOffset"></param>
         /// <param name="days"></param>
@@ -2371,7 +2371,7 @@ namespace System
             return AddByDate(dateTimeOffset, dt => dt.AddDays(days), timeZone, resolver);
         }
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="dateTimeOffset"></param>
         /// <param name="hours"></param>
@@ -2382,7 +2382,7 @@ namespace System
             return dateTimeOffset.Add(TimeSpan.FromHours(hours), timeZone);
         }
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="dateTimeOffset"></param>
         /// <param name="minutes"></param>
@@ -2393,7 +2393,7 @@ namespace System
             return dateTimeOffset.Add(TimeSpan.FromMinutes(minutes), timeZone);
         }
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="dateTimeOffset"></param>
         /// <param name="seconds"></param>
@@ -2404,7 +2404,7 @@ namespace System
             return dateTimeOffset.Add(TimeSpan.FromSeconds(seconds), timeZone);
         }
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="dateTimeOffset"></param>
         /// <param name="milliseconds"></param>
@@ -2415,7 +2415,7 @@ namespace System
             return dateTimeOffset.Add(TimeSpan.FromMilliseconds(milliseconds), timeZone);
         }
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="dateTimeOffset"></param>
         /// <param name="ticks"></param>
@@ -2427,7 +2427,7 @@ namespace System
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="dateTimeOffset"></param>
         /// <param name="timeSpan"></param>
@@ -2438,7 +2438,7 @@ namespace System
             return dateTimeOffset.Add(timeSpan.Negate(), timeZone);
         }
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="dateTimeOffset"></param>
         /// <param name="timeSpan"></param>
@@ -2450,7 +2450,7 @@ namespace System
             return TimeZoneInfo.ConvertTime(t, timeZone);
         }
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="dateTimeOffset"></param>
         /// <param name="operation"></param>

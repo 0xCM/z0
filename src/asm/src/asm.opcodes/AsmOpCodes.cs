@@ -24,12 +24,12 @@ namespace Z0.Asm
             => new AsmOpCodeGroup((uint)count);
 
         [MethodImpl(Inline), Op]
-        public static MnemonicExpression mnemonic(in AsmOpCodeRow src)
-            => new MnemonicExpression(src.Mnemonic);
+        public static AsmMnemonic mnemonic(in AsmOpCodeRow src)
+            => new AsmMnemonic(src.Mnemonic);
 
         [MethodImpl(Inline), Op]
-        public static CpuidExpression cpuid(in AsmOpCodeRow src)
-            => new CpuidExpression(src.CpuId);
+        public static Cpuid cpuid(in AsmOpCodeRow src)
+            => new Cpuid(src.CpuId);
 
         [MethodImpl(Inline), Op]
         public static OperatingMode mode(in AsmOpCodeRow src)
@@ -88,7 +88,7 @@ namespace Z0.Asm
                 seek(dst, i) = new AsmOpCodeToken(i, (AsmOpCodeTokenKind)(i + 1), skip(src,i).NameRef);
         }
 
-        public static TableSpan<TokenRecord> Tokens
+        public static Index<TokenRecord> Tokens
             => AsmTokenIndex.create().Records;
 
         [MethodImpl(Inline), Op]

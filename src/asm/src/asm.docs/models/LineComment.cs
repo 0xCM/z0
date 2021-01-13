@@ -9,25 +9,25 @@ namespace Z0.Asm
 
     using static Part;
 
-    public struct R64<R> : IRegister<R64<R>,W64,ulong>
-        where R : unmanaged, IRegister
+    partial struct AsmDocParts
     {
-        public ulong Data;
-
-        [MethodImpl(Inline)]
-        public R64(ulong src)
-            => Data = src;
-
-        public ulong Content
+        public readonly struct LineComment
         {
-            [MethodImpl(Inline)]
-            get => Data;
-        }
+            public TextBlock Text {get;}
 
-        public RegisterKind Kind
-        {
+            public PartKind Kind
+                => PartKind.BlockHeaderLine;
+
             [MethodImpl(Inline)]
-            get => default(R).Kind;
+            public LineComment(TextBlock text)
+                => Text = text;
+
+            [MethodImpl(Inline)]
+            public string Format()
+                => Text;
+
+            public override string ToString()
+                => Format();
         }
     }
 }
