@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-    using System.Collections.Generic;
-
     public interface IAsmTrigger<S>
     {
         bool CanFire(in S src);
@@ -24,8 +21,4 @@ namespace Z0.Asm
         IceInstructionList Flow(in IceInstructionList fxList);
     }
 
-    public interface IAsmFlow
-    {
-        IceInstructionList[] Push(IAsmPipe fxPipe);
-    }
 }

@@ -62,9 +62,7 @@ namespace Z0
         {
             try
             {
-                return parsed(src,
-                    src.SplitClean(Chars.Space)
-                       .Select(x => byte.Parse(x, NumberStyles.HexNumber)));
+                return parsed(src, src.SplitClean(Chars.Space).Select(x => byte.Parse(x, NumberStyles.HexNumber)));
             }
             catch(Exception e)
             {

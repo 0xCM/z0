@@ -12,7 +12,7 @@ namespace Z0.Asm
     partial struct asm
     {
         [MethodImpl(Inline), Op]
-        public static MemDx dx(ulong value, MemDxSize size)
-            => new MemDx(value, (MemDxSize)size);
+        public static AsmDisplacement dx(ulong value, AsmDisplacementSize size)
+            => new AsmDisplacement(value, (AsmDisplacementSize)size);
     }
 }

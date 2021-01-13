@@ -20,7 +20,7 @@ namespace Z0.Asm
             var lines = doc.Lines;
             using var target = AsmCaseWriter();
             foreach(var line in lines)
-                target.WriteLine(line.Text);
+                target.WriteLine(line.Content);
         }
 
     }

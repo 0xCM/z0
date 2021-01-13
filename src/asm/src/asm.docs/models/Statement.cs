@@ -16,12 +16,12 @@ namespace Z0.Asm
         /// </summary>
         public readonly struct Statement
         {
-            public IceMnemonic Mnemonic {get;}
+            public AsmMnemonic Mnemonic {get;}
 
             public string[] Operands {get;}
 
             [MethodImpl(Inline)]
-            public Statement(IceMnemonic mnemonic, string[] operands)
+            public Statement(AsmMnemonic mnemonic, string[] operands)
             {
                 Mnemonic = mnemonic;
                 Operands = operands;
@@ -30,7 +30,7 @@ namespace Z0.Asm
             public bool IsEmpty
             {
                 [MethodImpl(Inline)]
-                get => Mnemonic == 0 && (Operands is null || Operands.Length == 0);
+                get => Mnemonic.IsEmpty || (Operands is null || Operands.Length == 0);
             }
 
             public string Format()

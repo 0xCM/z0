@@ -9,7 +9,6 @@
     <ProjectReference Include="$(Math)" />
     <ProjectReference Include="$(Commands)" />
     <ProjectReference Include="$(Lang)" />
-
   </ItemGroup>
 
 </Project>

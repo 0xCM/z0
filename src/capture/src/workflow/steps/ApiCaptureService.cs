@@ -10,7 +10,7 @@ namespace Z0
 
     using Z0.Asm;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     public struct ApiCaptureService : IDisposable
@@ -89,7 +89,7 @@ namespace Z0
 
         void Capture(Index<ApiTypeInfo> src)
         {
-            var extracted = @readonly(Extract(src).GroupBy(x => x.Host).Select(x => kvp(x.Key, x.Array())).Array());
+            var extracted = @readonly(Extract(src).GroupBy(x => x.Host).Select(x => root.kvp(x.Key, x.Array())).Array());
             for(var i=0; i<extracted.Length; i++)
             {
                 ref readonly var x = ref skip(extracted,i);

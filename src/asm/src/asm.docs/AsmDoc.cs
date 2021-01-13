@@ -22,7 +22,7 @@ namespace Z0.Asm
         public string Format()
         {
             var dst = Buffers.text();
-            iter(Lines, line => dst.AppendLine(line.Text.Content));
+            iter(Lines, line => dst.AppendLine(line.Content));
             return dst.Emit();
         }
 

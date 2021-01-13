@@ -13,8 +13,8 @@ namespace Z0.Asm
     {
 
         [MethodImpl(Inline), Op]
-        public static ScaledOffset offset(ulong @base, ushort offset, byte scale)
-            => new ScaledOffset(@base, offset, scale);
+        public static AsmScaledOffset offset(ulong @base, ushort offset, byte scale)
+            => new AsmScaledOffset(@base, offset, scale);
 
         /// <summary>
         /// Defines an IP offset relative to a specified base address, instruction size and target address

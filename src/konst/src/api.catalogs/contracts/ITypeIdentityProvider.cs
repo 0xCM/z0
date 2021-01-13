@@ -14,7 +14,7 @@ namespace Z0
     public interface ITypeIdentityProvider : IIdentityProvider<Type,TypeIdentity>
     {
         IEnumerable<Type> Identifiable
-            => z.stream<Type>();
+            => root.stream<Type>();
 
         bool CanIdentify(Type src)
             => Identifiable.Contains(src);

@@ -8,10 +8,10 @@ namespace Z0.Asm
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static z;
 
-    public readonly struct AsmFlow : IAsmFlow
+    public readonly struct AsmFlow
     {
         readonly IceInstructionList[] FxList;
 

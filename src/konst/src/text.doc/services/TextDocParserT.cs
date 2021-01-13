@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     public readonly struct TextDocParser<T> : ITextDocParser<T>
     {
@@ -18,6 +18,6 @@ namespace Z0
             => F = f;
 
         public ParseResult<T> Parse(TextDoc src)
-            => F(src);        
+            => F(src);
     }
 }

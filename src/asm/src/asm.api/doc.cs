@@ -22,8 +22,8 @@ namespace Z0.Asm
             var dst = alloc<DocLine>(count);
             ref var target = ref first(dst);
             ref readonly var source = ref lines.First;
-            for(var i=0; i<count; i++)
-                seek(target,i) = new DocLine(skip(source,i));
+            for(var i=0u; i<count; i++)
+                seek(target,i) = new DocLine(i, skip(source, i).Content);
 
             return new AsmDoc(dst);
         }

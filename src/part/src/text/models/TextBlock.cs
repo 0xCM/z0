@@ -11,30 +11,24 @@ namespace Z0
 
     using api = TextBlocks;
 
-    public readonly struct TextBlock : IEquatable<TextBlock>, IComparable<TextBlock>
+    public readonly struct TextBlock : IDataTypeComparable<TextBlock>
     {
-        readonly string Content;
+        readonly string Data;
 
         [MethodImpl(Inline)]
         public TextBlock(string src)
-            => Content = src;
-
-        public Span<char> Edit
-        {
-            [MethodImpl(Inline)]
-            get => memory.cover(Content);
-        }
+            => Data = src;
 
         public ReadOnlySpan<char> View
         {
             [MethodImpl(Inline)]
-            get => memory.cover(Content);
+            get => memory.cover(Data);
         }
 
         public int Length
         {
             [MethodImpl(Inline)]
-            get => Content?.Length ?? 0;
+            get => Data?.Length ?? 0;
         }
 
         public bool IsEmpty
@@ -52,13 +46,13 @@ namespace Z0
         public bool IsWhitespace
         {
             [MethodImpl(Inline)]
-            get => IsNonEmpty && string.IsNullOrWhiteSpace(Content);
+            get => IsNonEmpty && string.IsNullOrWhiteSpace(Data);
         }
 
         public bool IsInterned
         {
             [MethodImpl(Inline)]
-            get => string.IsInterned(Content) != null;
+            get => string.IsInterned(Data) != null;
         }
 
         public uint Hash
@@ -69,11 +63,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => Content;
+            => Data;
 
         [MethodImpl(Inline)]
         public bool Equals(TextBlock src)
-            => string.Equals(Content, src.Content);
+            => string.Equals(Data, src.Data);
 
         public override bool Equals(object src)
             => src is TextBlock x && Equals(x);
@@ -83,7 +77,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public int CompareTo(TextBlock src)
-            => string.Compare(Content, src.Content);
+            => string.Compare(Data, src.Data);
 
         public override string ToString()
             => Format();
@@ -98,7 +92,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator string(TextBlock src)
-            => src.Content;
+            => src.Data;
 
         public static TextBlock Empty
         {

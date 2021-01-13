@@ -279,7 +279,7 @@ namespace Z0
             if(m != doc.RowCount)
                 return default;
 
-            if(n != doc.Rows[0].CellCount)
+            if(n != doc.Rows[0].BlockCount)
                 return default;
 
             var parser = NumericParser.create<T>();
@@ -287,8 +287,8 @@ namespace Z0
             for(var i = 0; i<doc.Rows.Length; i++)
             {
                 ref readonly var row = ref doc[i];
-                for(var j = 0; j<row.CellCount; j++)
-                    dst[i,j] = parser.Parse(row[j].Content).ValueOrDefault();
+                for(var j = 0; j<row.BlockCount; j++)
+                    dst[i,j] = parser.Parse(row[j].Format()).ValueOrDefault();
             }
 
             return dst;

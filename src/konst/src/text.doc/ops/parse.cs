@@ -8,15 +8,15 @@ namespace Z0
     using System.IO;
     using System.Collections.Generic;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     partial struct TextDocParser
     {
         public static ParseResult<T> parse<T>(string data, Func<TextDoc,ParseResult<T>> pfx)
         {
-            using var stream = z.stream(data);
-            using var reader = z.reader(stream);
+            using var stream = Streams.memory(data);
+            using var reader = Streams.reader(stream);
             return from doc in parse(reader)
                 from content in pfx(doc)
                 select content;

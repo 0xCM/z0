@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
     using System;
     using System.Collections.Generic;
@@ -10,9 +10,7 @@ namespace Z0
     using System.IO;
     using System.Text;
 
-    using Z0.Asm;
-
-    using static Konst;
+    using static Part;
     using static z;
     using static AsmSemanticDefaults;
     using static Z0.Asm.IceOpKind;
@@ -111,7 +109,7 @@ namespace Z0
             Buffer.Add(src.OpId);
             Buffer.Add(SectionSep);
 
-            var sequence = OffsetSequence.Zero;
+            var sequence = AsmOffsetSequence.Zero;
             var @base = src.OffsetAddress.Base;
             var address = @base;
             var instructions = src.Instructions.View;
@@ -182,7 +180,7 @@ namespace Z0
         }
 
         [Op]
-        void Render(ApiInstruction src, MemoryAddress address, MemoryAddress offset, OffsetSequence seq)
+        void Render(ApiInstruction src, MemoryAddress address, MemoryAddress offset, AsmOffsetSequence seq)
         {
             var @base = src.Base;
             var fx = src.Instruction;
@@ -216,7 +214,7 @@ namespace Z0
         }
 
         [Op]
-        string LineLocation(IceInstruction src, MemoryAddress address, MemoryAddress offset, OffsetSequence seq)
+        string LineLocation(IceInstruction src, MemoryAddress address, MemoryAddress offset, AsmOffsetSequence seq)
             => text.concat(FormatAddress(src, AddressPad),
                 Z0.TextFormatter.concat(text.spaced(offset)).PadRight(OffsetAddrPad),
                 seq.Format(InstructionCountPad));
@@ -227,7 +225,7 @@ namespace Z0
         }
 
         [Op]
-        string InstructionHeader(ApiInstruction src, MemoryAddress address, MemoryAddress offset,  OffsetSequence seq)
+        string InstructionHeader(ApiInstruction src, MemoryAddress address, MemoryAddress offset,  AsmOffsetSequence seq)
         {
             var left = LineLocation(src.Instruction, address, offset, seq);
             var right = text.concat(src.FormattedInstruction, SpecifierSep, format(src.Specifier), EncodingSep, Format(src.Encoded));
@@ -249,16 +247,16 @@ namespace Z0
         }
 
         [Op, MethodImpl(NotInline)]
-        static string format(in MemDx src)
+        static string format(in AsmDisplacement src)
             => (src.Size switch{
-                MemDxSize.y1 => ((byte)src.Value).FormatHex(HexSpec),
-                MemDxSize.y2 => ((ushort)src.Value).FormatHex(HexSpec),
-                MemDxSize.y4 => ((uint)src.Value).FormatHex(HexSpec),
+                AsmDisplacementSize.y1 => ((byte)src.Value).FormatHex(HexSpec),
+                AsmDisplacementSize.y2 => ((ushort)src.Value).FormatHex(HexSpec),
+                AsmDisplacementSize.y4 => ((uint)src.Value).FormatHex(HexSpec),
                 _ => (src.Value).FormatHex(HexSpec),
             }) + "dx";
 
         [Op, MethodImpl(NotInline)]
-        static string format(in ImmInfo src)
+        static string format(in AsmImmInfo src)
             => Z0.TextFormatter.concat(src.Value.FormatHex(zpad:false, prespec:false));
 
         [Op]
@@ -266,7 +264,7 @@ namespace Z0
             => text.format("{0}",src);
 
         [Op]
-        static string Render(MemDx src)
+        static string Render(AsmDisplacement src)
             => format(src);
 
         [Op, MethodImpl(NotInline)]

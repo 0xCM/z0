@@ -15,9 +15,9 @@ namespace Z0
         public readonly struct LuFx64<K>
             where K : unmanaged
         {
-            readonly TableSpan<ulong> KeyIndex;
+            readonly Index<ulong> KeyIndex;
 
-            readonly TableSpan<K> KeyValues;
+            readonly Index<K> KeyValues;
 
             public readonly uint EntryCount;
 

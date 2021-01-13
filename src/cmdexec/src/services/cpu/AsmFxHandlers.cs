@@ -19,7 +19,7 @@ namespace Z0.Asm
 
         readonly Dictionary<IceMnemonic, AsmFxSink> Sinks;
 
-        readonly Dictionary<IceMnemonic, AsmFxCollector> Collectors;
+        readonly Dictionary<IceMnemonic, IceInstructionCollector> Collectors;
 
         [MethodImpl(Inline)]
         public AsmFxHandlers()
@@ -27,7 +27,7 @@ namespace Z0.Asm
             BufferLength = (int)IceMnemonic.LAST + 1;
             Activations = new uint[BufferLength];
             Sinks = new Dictionary<IceMnemonic, AsmFxSink>();
-            Collectors = new Dictionary<IceMnemonic, AsmFxCollector>();
+            Collectors = new Dictionary<IceMnemonic, IceInstructionCollector>();
         }
 
         [MethodImpl(Inline)]

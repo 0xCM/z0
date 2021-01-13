@@ -17,10 +17,10 @@ namespace Z0
 
         public readonly MemoryScale Scale;
 
-        public readonly MemDx Dx;
+        public readonly AsmDisplacement Dx;
 
         [MethodImpl(Inline)]
-        public IceMemDirect(IceRegister register, MemoryScale scale, MemDx dx)
+        public IceMemDirect(IceRegister register, MemoryScale scale, AsmDisplacement dx)
         {
             Base = register;
             Dx = dx;
@@ -34,6 +34,6 @@ namespace Z0
         }
 
         public static IceMemDirect Empty
-            => new IceMemDirect(IceRegister.None, MemoryScale.Empty, MemDx.Empty);
+            => new IceMemDirect(IceRegister.None, MemoryScale.Empty, AsmDisplacement.Empty);
     }
 }

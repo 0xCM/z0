@@ -15,35 +15,35 @@ namespace Z0.Asm
     partial struct asm
     {
         [MethodImpl(Inline), Op]
-        public static ImmInfo imminfo(byte value, bool direct)
-            => new ImmInfo(W.W8, value, direct);
+        public static AsmImmInfo imminfo(byte value, bool direct)
+            => new AsmImmInfo(W.W8, value, direct);
 
         [MethodImpl(Inline), Op]
-        public static ImmInfo imminfo(short value, bool direct, Sx sek)
-            => new ImmInfo(W.W16, value, direct, sek);
+        public static AsmImmInfo imminfo(short value, bool direct, Sx sek)
+            => new AsmImmInfo(W.W16, value, direct, sek);
 
         [MethodImpl(Inline), Op]
-        public static ImmInfo imminfo(ushort value, bool direct)
-            => new ImmInfo(W.W16, value, direct);
+        public static AsmImmInfo imminfo(ushort value, bool direct)
+            => new AsmImmInfo(W.W16, value, direct);
 
         [MethodImpl(Inline), Op]
-        public static ImmInfo imminfo(int value, bool direct, Sx sek)
-            => new ImmInfo(W.W32, value, direct, sek);
+        public static AsmImmInfo imminfo(int value, bool direct, Sx sek)
+            => new AsmImmInfo(W.W32, value, direct, sek);
 
         [MethodImpl(Inline), Op]
-        public static ImmInfo imminfo(uint value, bool direct)
-            => new ImmInfo(W.W32, value, direct);
+        public static AsmImmInfo imminfo(uint value, bool direct)
+            => new AsmImmInfo(W.W32, value, direct);
 
         [MethodImpl(Inline), Op]
-        public static ImmInfo imminfo(long value, bool direct, Sx sek)
-            => new ImmInfo(W.W64, value, direct, sek);
+        public static AsmImmInfo imminfo(long value, bool direct, Sx sek)
+            => new AsmImmInfo(W.W64, value, direct, sek);
 
         [MethodImpl(Inline), Op]
-        public static ImmInfo imminfo(ulong value, bool direct)
-            => new ImmInfo(W.W64, value, direct);
+        public static AsmImmInfo imminfo(ulong value, bool direct)
+            => new AsmImmInfo(W.W64, value, direct);
 
         [Op]
-        public static ImmInfo imminfo(in IceInstruction src, byte index)
+        public static AsmImmInfo imminfo(in IceInstruction src, byte index)
         {
 			switch (kind(src,index))
             {

@@ -18,9 +18,9 @@ namespace Z0.Asm
         /// <param name="fx"></param>
         /// <param name="index"></param>
         [MethodImpl(Inline), Op]
-        public static AsmOperandInfo operand(MemoryAddress @base, in IceInstruction fx, byte index)
+        public static IceOperandInfo operand(MemoryAddress @base, in IceInstruction fx, byte index)
         {
-            var dst = new AsmOperandInfo();
+            var dst = new IceOperandInfo();
             dst.Index = index;
             dst.Kind = kind(fx, index);
             dst.Branch = AsmTest.isBranch(dst.Kind) ? branch(@base, fx, branch(fx,index)) : default;

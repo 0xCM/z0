@@ -41,7 +41,7 @@ namespace Z0
             {
                 var rows = src[i];
                 for(var j = 0; j <rows.RowCount; j++)
-                    writer.WriteLine(rows[j].Text);
+                    writer.WriteLine(rows[j].RowText);
                 if(i != src.Length - 1)
                     writer.WriteLine(HSep);
             }

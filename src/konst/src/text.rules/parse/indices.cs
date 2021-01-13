@@ -32,7 +32,7 @@ namespace Z0
             /// <param name="second">THe second character to match</param>
             [MethodImpl(Inline), Op]
             public static Pair<int> indices(string src, string first, string second)
-                => pair(src.IndexOf(first), src.IndexOf(second));
+                => root.pair(src.IndexOf(first), src.IndexOf(second));
 
             [MethodImpl(Inline), Op]
             public static int index(string src, char match)
@@ -53,7 +53,7 @@ namespace Z0
             [Op]
             public static Index<int> indices(string src, char match)
             {
-                var dst = list<int>();
+                var dst = root.list<int>();
                 var count = src.Length;
                 ref readonly var c = ref @char(src);
                 for(var i=0; i<count; i++)
@@ -71,7 +71,7 @@ namespace Z0
             [MethodImpl(Inline), Op]
             public static Span<int> indices(string src, char match, Span<int> matched)
             {
-                var dst = list<int>();
+                var dst = root.list<int>();
                 var count = src.Length;
                 var max = matched.Length;
 

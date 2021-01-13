@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     using M = XedSourceMarkers;
 
@@ -65,11 +65,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         internal bool IsProp(int index, string Name)
-            => this[index].Text.StartsWith(Name);
+            => this[index].RowText.StartsWith(Name);
 
         [MethodImpl(Inline)]
         internal string ExtractProp(TextRow src)
-            => src.Text.RightOfFirst(M.PROP_DELIMITER).Trim();
+            => src.RowText.RightOfFirst(M.PROP_DELIMITER).Trim();
 
         [MethodImpl(Inline)]
         internal string ExtractProp(int index)

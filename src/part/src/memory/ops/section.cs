@@ -13,7 +13,6 @@ namespace Z0
 
     partial struct memory
     {
-
         [MethodImpl(Inline), Op, Closures(Closure)]
         public unsafe static ReadOnlySpan<T> section<T>(ReadOnlySpan<T> src, int i0, int i1)
             where T : unmanaged

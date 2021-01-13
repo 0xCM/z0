@@ -7,12 +7,12 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
-    /// Represents a line of text in the context of a line-oriented text data source
+    /// Represents an index-delimited text segment source from a <see cref='TextLine'/>
     /// </summary>
-    public readonly struct TextLineSegment
+    public readonly struct TextSegment
     {
         public TextLine Source {get;}
 
@@ -20,7 +20,8 @@ namespace Z0
 
         public uint LastIndex {get;}
 
-        public TextLineSegment(TextLine src, uint first, uint last)
+        [MethodImpl(Inline)]
+        public TextSegment(TextLine src, uint first, uint last)
         {
             Source = src;
             FirstIndex = first;
@@ -29,7 +30,8 @@ namespace Z0
 
         public TextBlock Content
         {
-            get => default;
+            [MethodImpl(Inline)]
+            get => Source.Segment(FirstIndex, LastIndex);
         }
     }
 }

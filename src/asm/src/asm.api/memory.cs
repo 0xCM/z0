@@ -11,6 +11,10 @@ namespace Z0.Asm
 
     partial struct asm
     {
+        [MethodImpl(Inline), Op]
+        public static AsmRegMemory memory(RegisterKind @base, AsmDisplacement dx, MemoryScale scale)
+            => new AsmRegMemory(@base, dx, scale);
+
         public static RegisterKind convert(IceRegister src, out RegisterKind dst)
         {
             dst = default;
@@ -41,9 +45,9 @@ namespace Z0.Asm
         /// <param name="src">The source instruction</param>
         /// <param name="index">The operand index</param>
         [MethodImpl(Inline), Op]
-        public static AsmFxMemory memory(IceInstruction src, byte index)
+        public static IceInstructionMemoryRecord memory(IceInstruction src, byte index)
         {
-            var dst = default(AsmFxMemory);
+            var dst = default(IceInstructionMemoryRecord);
             dst.MemoryBase = memBase(src,index);
             dst.MemoryIndex = memidx(src,index);
             dst.MemorySize = memsize(src,index);

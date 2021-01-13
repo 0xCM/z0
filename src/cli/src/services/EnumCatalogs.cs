@@ -52,7 +52,7 @@ namespace Z0
             for(var i=0; i<rc; i++)
             {
                 ref readonly var row = ref src[i];
-                if(row.CellCount >= 3)
+                if(row.BlockCount >= 3)
                 {
                     var data = row[2];
                     var result = HexByteParser.Service.ParseData(data);

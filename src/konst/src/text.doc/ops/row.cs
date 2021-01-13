@@ -22,13 +22,13 @@ namespace Z0
                 if(spec.HasDataHeader)
                 {
                     var parts = src.Split(spec);
-                    var data = new TextCell[parts.Length];
+                    var data = new TextBlock[parts.Length];
                     for(var i=0u; i<parts.Length; i++)
-                        data[i] = new TextCell(src.LineNumber, i, parts[i].Trim(Chars.Space));
+                        data[i] = new TextBlock(parts[i].Trim(Chars.Space));
                     return new TextRow(data);
                 }
                 else
-                    return new TextRow(new TextCell(src.LineNumber, 0, src.Content));
+                    return new TextRow(new TextBlock(src.Content));
             }
         }
     }

@@ -19,7 +19,7 @@ namespace Z0
             {
                 var parts = src.Split(spec);
                 var count = parts.Length;
-                var dst = z.list<string>();
+                var dst = root.list<string>();
 
                 if(parts.Length != 0)
                 {
@@ -39,7 +39,7 @@ namespace Z0
                 term.error(e);
             }
 
-            return z.none<TextDocHeader>();
+            return root.none<TextDocHeader>();
         }
     }
 }

@@ -18,10 +18,10 @@ namespace Z0.Asm
         /// <param name="fx">The source instruction</param>
         /// <param name="@base">The base address</param>
         [MethodImpl(Inline), Op]
-        public static AsmOperandInfo[] operands(MemoryAddress @base, in IceInstruction fx)
+        public static IceOperandInfo[] operands(MemoryAddress @base, in IceInstruction fx)
         {
             var count = fx.OpCount;
-            var buffer = alloc<AsmOperandInfo>(count);
+            var buffer = alloc<IceOperandInfo>(count);
             var dst = span(buffer);
             for(byte j=0; j<count; j++)
                 seek(dst, j) = operand(@base, fx, j);

@@ -10,6 +10,9 @@ namespace Z0.Asm
     using static Part;
     using static Asm.IceOpKind;
 
+    using BTK = BranchTargetKind;
+    using BTW = BranchTargetWidth;
+
     partial struct asm
     {
         [MethodImpl(Inline), Op]
@@ -27,15 +30,15 @@ namespace Z0.Asm
             switch(k)
             {
                 case NearBranch16:
-                    return asm.target(BranchTargetKind.Near, src.NearBranch16, BranchTargetWidth.Branch16);
+                    return asm.target(BTK.Near, src.NearBranch16, BTW.Branch16);
                 case NearBranch32:
-                    return asm.target(BranchTargetKind.Near, src.NearBranch32, BranchTargetWidth.Branch32);
+                    return asm.target(BTK.Near, src.NearBranch32, BTW.Branch32);
                 case NearBranch64:
-                    return asm.target(BranchTargetKind.Near, src.NearBranch64, BranchTargetWidth.Branch64);
+                    return asm.target(BTK.Near, src.NearBranch64, BTW.Branch64);
                 case FarBranch16:
-                    return asm.target(BranchTargetKind.Far, src.FarBranch16, BranchTargetWidth.Branch16, (Address16)src.FarBranchSelector);
+                    return asm.target(BTK.Far, src.FarBranch16, BTW.Branch16, (Address16)src.FarBranchSelector);
                 case FarBranch32:
-                    return asm.target(BranchTargetKind.Far, src.FarBranch32, BranchTargetWidth.Branch32, (Address16)src.FarBranchSelector);
+                    return asm.target(BTK.Far, src.FarBranch32, BTW.Branch32, (Address16)src.FarBranchSelector);
             }
             return AsmBranchTarget.Empty;
         }

@@ -12,15 +12,15 @@ namespace Z0.Asm
     partial struct asm
     {
         [MethodImpl(Inline), Op]
-        public static NearBranch nearbranch(W16 w, Address16 dst)
-            => new NearBranch(dst, BranchTargetWidth.Branch16);
+        public static AsmNearBranch nearbranch(W16 w, Address16 dst)
+            => new AsmNearBranch(dst, BranchTargetWidth.Branch16);
 
         [MethodImpl(Inline), Op]
-        public static NearBranch nearbranch(W32 w, Address32 dst)
-            => new NearBranch(dst, BranchTargetWidth.Branch32);
+        public static AsmNearBranch nearbranch(W32 w, Address32 dst)
+            => new AsmNearBranch(dst, BranchTargetWidth.Branch32);
 
         [MethodImpl(Inline), Op]
-        public static NearBranch nearbranch(W64 w, Address64 dst)
-            => new NearBranch(dst, BranchTargetWidth.Branch64);
+        public static AsmNearBranch nearbranch(W64 w, Address64 dst)
+            => new AsmNearBranch(dst, BranchTargetWidth.Branch64);
     }
 }

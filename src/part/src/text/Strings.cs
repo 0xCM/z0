@@ -25,8 +25,8 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static uint index(in StringIndex src, uint key)
         {
-            var keys = @readonly(src.Keys);
-            var values = @readonly(src.Values);
+            var keys = src.Keys.View;
+            var values = src.Values.View;
             var count = keys.Length;
             for(var i=0u; i<count; i++)
                 if(skip(keys,i) == key)
@@ -36,16 +36,16 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static bool value(in StringIndex src, uint key, out string value)
+        public static bool value(in StringIndex src, uint key, out TextBlock value)
         {
-            var keys = @readonly(src.Keys);
-            var values = @readonly(src.Values);
+            var keys = src.Keys.View;
+            var values = src.Values.View;
             var count = keys.Length;
             var ix = index(src,key);
             if(ix != uint.MaxValue)
                 value = skip(values,ix);
             else
-                value = EmptyString;
+                value = TextBlock.Empty;
             return false;
         }
     }

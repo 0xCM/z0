@@ -364,7 +364,7 @@ namespace Z0
 
         public void LoadAsmStore()
         {
-            var store = AsmStore.init(Wf);
+            var store = AsmDataStore.init(Wf);
             var patterns = store.Summaries();
             Wf.Status($"{patterns.Length}");
         }

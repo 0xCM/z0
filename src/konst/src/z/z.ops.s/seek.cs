@@ -82,7 +82,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static ref T seek<T>(Span<T> src, uint count)
-            => ref memory.seek(src,count);
+            => ref memory.seek(src, count);
 
         [MethodImpl(Inline)]
         public static ref T seek<T>(Span<T> src, long count)

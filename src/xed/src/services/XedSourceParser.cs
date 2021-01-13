@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static z;
     using static XedSourceMarkers;
 
@@ -63,7 +63,7 @@ namespace Z0
             var data = LoadSource(src);
             for(var i=0; i<data.RowCount; i++)
             {
-                if(data[i].Text.ContainsAny(Instructions))
+                if(data[i].RowText.ContainsAny(Instructions))
                     return ParseInstructions(data, i);
             }
             return z.array<XedInstructionDoc>();
@@ -77,7 +77,7 @@ namespace Z0
 
         XedRuleSet ParseFunction(TextDocRows data, ref int ix)
         {
-            var title = data[ix].Text.LeftOfFirst(RuleMarker);
+            var title = data[ix].RowText.LeftOfFirst(RuleMarker);
             var body = list<string>();
             var first = ix;
             for(var i = ix; i<data.RowCount; i++)
@@ -106,7 +106,7 @@ namespace Z0
                 if(IsEmpty(row))
                     continue;
 
-                body.Add(row.Text);
+                body.Add(row.RowText);
 
             }
 
@@ -133,22 +133,22 @@ namespace Z0
         }
 
         bool IsLeftDelimiter(TextRow src)
-            => src.Text.Contains(FuncBodyBegin);
+            => src.RowText.Contains(FuncBodyBegin);
 
         bool IsRightDelimiter(TextRow src)
-            => src.Text.Contains(FuncBodyEnd);
+            => src.RowText.Contains(FuncBodyEnd);
 
         bool IsComment(TextRow src)
-            => src.Text.StartsWith("#");
+            => src.RowText.StartsWith("#");
 
         bool IsEmpty(TextRow src)
-            => text.blank(src.Text);
+            => text.blank(src.RowText);
 
         bool IsSeqHeader(TextRow src)
-            => src.Text.StartsWith(SEQUENCE);
+            => src.RowText.StartsWith(SEQUENCE);
 
         bool Contains(TextRow src, string substring)
-            => src.Text.ContainsAny(substring);
+            => src.RowText.ContainsAny(substring);
 
         bool Skip(TextRow src)
             => IsComment(src) || IsEmpty(src);

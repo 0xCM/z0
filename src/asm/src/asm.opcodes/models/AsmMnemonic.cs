@@ -17,6 +17,12 @@ namespace Z0.Asm
         public AsmMnemonic(asci32 name)
             => Name = name;
 
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Name.IsEmpty;
+        }
+
         [MethodImpl(Inline)]
         public string Format()
             => Name.Format();

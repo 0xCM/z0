@@ -71,7 +71,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static Span<T> span<T>(T[] src)
-            => src;
+            => memory.span(src);
 
         [MethodImpl(Inline)]
         public static ReadOnlySpan<char> span(string src)

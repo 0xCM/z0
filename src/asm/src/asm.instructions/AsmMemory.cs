@@ -14,7 +14,7 @@ namespace Z0.Asm
 
         public MemoryScale MemoryIndexScale;
 
-        public MemDx Displacement;
+        public AsmDisplacement Displacement;
 
         public RegisterKind MemorySegment;
 

@@ -10,7 +10,7 @@ namespace Z0
     using System.Linq;
 
     using static Part;
-    using static z;
+    using static memory;
 
     [ApiHost(ApiNames.Lookups)]
     public partial struct Lookups
@@ -27,18 +27,18 @@ namespace Z0
             => new StringLookup(src);
 
         [Op]
-        public static KeyedValues<uint,string> pairs(in StringIndex src)
-            => pairs(src,sys.alloc<KeyedValue<uint,string>>(src.Count));
+        public static KeyedValues<uint,TextBlock> pairs(in StringIndex src)
+            => pairs(src,sys.alloc<KeyedValue<uint,TextBlock>>(src.Count));
 
         [MethodImpl(Inline), Op]
-        public static KeyedValues<uint,string> pairs(in StringIndex src, KeyedValue<uint,string>[] buffer)
+        public static KeyedValues<uint,TextBlock> pairs(in StringIndex src, KeyedValue<uint,TextBlock>[] buffer)
         {
-            var keys = @readonly(src.Keys);
-            var values = @readonly(src.Values);
+            var keys = src.Keys.View;
+            var values = src.Values.View;
             var count = keys.Length;
             var dst = span(buffer);
             for(var i=0u; i<count; i++)
-                seek(dst,i) = z.kvp(skip(keys,i), skip(values,i));
+                seek(dst,i) = root.kvp(skip(keys,i), skip(values,i));
             return buffer;
         }
 

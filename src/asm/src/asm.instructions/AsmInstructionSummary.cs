@@ -17,30 +17,30 @@ namespace Z0.Asm
         /// <summary>
         /// The encoded bytes
         /// </summary>
-        public readonly CodeBlock Encoded;
+        public CodeBlock Encoded {get;}
 
         /// <summary>
         /// The zero-based offset of the function, relative to the base address
         /// </summary>
-        public readonly uint Offset;
+        public uint Offset {get;}
 
         /// <summary>
         /// The instruction content, suitable for display
         /// </summary>
-        public readonly string Formatted;
+        public string Formatted {get;}
 
         /// <summary>
         /// The instruction string paired with the op code
         /// </summary>
-        public readonly AsmSpecifier Spec;
+        public AsmSpecifier Spec {get;}
 
         /// <summary>
         /// Describes the instruction operands
         /// </summary>
-        public readonly AsmOperandInfo[] Operands;
+        public IceOperandInfo[] Operands {get;}
 
         [MethodImpl(Inline)]
-        public AsmInstructionSummary(MemoryAddress @base, uint offset, string content, AsmSpecifier spec, AsmOperandInfo[] operands, byte[] encoded)
+        public AsmInstructionSummary(MemoryAddress @base, uint offset, string content, AsmSpecifier spec, IceOperandInfo[] operands, byte[] encoded)
         {
             Encoded = new CodeBlock(@base, encoded);
             Offset = offset;

@@ -9,29 +9,23 @@ namespace Z0
 
     using static Part;
 
-    using api = Strings;
-
     public readonly struct StringIndex
     {
-        public readonly uint[] Keys;
+        public Index<uint> Keys {get;}
 
-        public readonly string[] Values;
+        public Index<TextBlock> Values {get;}
 
         [MethodImpl(Inline)]
-        public StringIndex(uint[] keys, string[] values)
+        public StringIndex(uint[] keys, TextBlock[] blocks)
         {
             Keys = keys;
-            Values = values;
+            Values = blocks;
         }
 
-        [MethodImpl(Inline)]
-        public bool Value(uint key, out string value)
-            => api.value(this, key, out value);
-
-        public string this[uint key]
+        public ref TextBlock this[uint key]
         {
             [MethodImpl(Inline)]
-            get => api.value(this, key);
+            get => ref Values[key];
         }
 
         public uint Count

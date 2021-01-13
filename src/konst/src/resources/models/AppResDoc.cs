@@ -46,14 +46,15 @@ namespace Z0
             for(var i=0; i<RowCount; i++)
             {
                 ref readonly var row = ref this[i];
-                for(var j = 0; j< row.CellCount; j++)
+                for(var j = 0; j<row.BlockCount; j++)
                 {
-                    ref readonly var cell = ref row[j];
-                    ReadOnlySpan<char> data = cell.Content;
+                    ref readonly var block = ref row[j];
+                    var data = block.View;
+                    var len = data.Length;
 
-                    for(var k=0u; k<data.Length; k++)
+                    for(var k=0u; k<len; k++)
                     {
-                        ref readonly var c = ref z.skip(data,k);
+                        ref readonly var c = ref memory.skip(data,k);
                         if(!Char.IsWhiteSpace(c))
                             count++;
                     }
@@ -66,7 +67,7 @@ namespace Z0
         public string Format()
         {
             var dst = text.build();
-            z.iter(Content.RowData, d => dst.AppendLine(d.Text));
+            z.iter(Content.RowData, d => dst.AppendLine(d.RowText));
             return dst.ToString();
         }
 

@@ -4,11 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    /// <summary>
-    /// Describes an operand in the context of an assembly instruction
-    /// </summary>
-    [Record]
-    public struct AsmOperandInfo : IRecord<AsmOperandInfo>
+
+    public struct AsmOperandInfo
     {
         /// <summary>
         /// The 0-based operand position
@@ -18,12 +15,12 @@ namespace Z0.Asm
         /// <summary>
         /// Classifies the operand
         /// </summary>
-        public IceOpKind Kind;
+        public byte Kind;
 
         /// <summary>
         /// Operand immediate info, if applicable
         /// </summary>
-        public ImmInfo ImmInfo;
+        public AsmImmInfo ImmInfo;
 
         /// <summary>
         /// Operand memory info, if applicable

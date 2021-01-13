@@ -35,7 +35,7 @@ namespace Z0
         {
             Wf = wf;
             _Parts = wf.Api.PartIdentities;
-            _PartNames = _Parts.Select(x => kvp(x,x.Format()));
+            _PartNames = _Parts.Select(x => root.kvp(x,x.Format()));
         }
     }
 }

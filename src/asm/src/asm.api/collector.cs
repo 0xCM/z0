@@ -12,7 +12,7 @@ namespace Z0.Asm
     partial struct asm
     {
         [MethodImpl(Inline), Op]
-        public static AsmFxCollector collector(params IceInstruction[] seed)
-            => new AsmFxCollector(seed);
+        public static IceInstructionCollector collector(params IceInstruction[] seed)
+            => new IceInstructionCollector(seed);
     }
 }

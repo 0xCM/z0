@@ -86,7 +86,7 @@ namespace Z0
         [Op]
         static bool load(in TextRow src, ref XedSummaryRow dst)
         {
-            if(src.CellCount == 9)
+            if(src.BlockCount == 9)
             {
                 var i=0;
                 dst.Class = src[i++];
@@ -143,7 +143,7 @@ namespace Z0
             for(var i=0; i<src.RowCount; i++)
             {
                 var row = src.Content[i];
-                var rowText = row.Text;
+                var rowText = row.RowText;
                 if(text.nonempty(rowText) && rowText.StartsWith(name))
                 {
                     var value = rowText.RightOfFirst(PROP_DELIMITER);
@@ -216,7 +216,7 @@ namespace Z0
             {
                 var rows = src[i];
                 for(var j = 0; j < rows.RowCount; j++)
-                    writer.WriteLine(rows[j].Text);
+                    writer.WriteLine(rows[j].RowText);
                 if(i != src.Length - 1)
                     writer.WriteLine(Separator);
             }

@@ -67,7 +67,7 @@ namespace Z0.Asm
         //int MemoryDisplSize {get;}
 
         [Label(dx)]
-        MemDx MemDx {get;}
+        AsmDisplacement MemDx {get;}
 
         //
         // Summary:

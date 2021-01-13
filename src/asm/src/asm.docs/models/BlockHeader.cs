@@ -11,6 +11,9 @@ namespace Z0.Asm
 
     partial struct AsmDocParts
     {
+        /// <summary>
+        /// Defines a statement block header
+        /// </summary>
         public readonly struct BlockHeader
         {
             public string Separator {get;}

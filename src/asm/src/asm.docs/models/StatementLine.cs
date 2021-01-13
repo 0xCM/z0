@@ -14,18 +14,18 @@ namespace Z0.Asm
         // 0008h movzx edx,dl                            ; MOVZX r32, r/m8                  | 0F B6 /r                         | 3   | 0f b6 d2
         public readonly struct StatementLine
         {
-            public TextLine Text {get;}
+            public DocLine Content {get;}
 
             public PartKind Kind
                 => PartKind.BlockHeaderLine;
 
             [MethodImpl(Inline)]
-            public StatementLine(TextLine text)
-                => Text = text;
+            public StatementLine(DocLine src)
+                => Content = src;
 
             [MethodImpl(Inline)]
             public string Format()
-                => Text.Content;
+                => Content.Format();
 
             public override string ToString()
                 => Format();

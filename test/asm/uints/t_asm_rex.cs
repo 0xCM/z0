@@ -35,7 +35,7 @@ namespace Z0.Asm
             var dst = RexPrefixBits.Empty;
             RexPrefixBits.BitCopy(src,ref dst);
 
-            Claim.ClaimEq(src.Render(), dst.Render());
+            Claim.ClaimEq(src.Format(), dst.Format());
         }
     }
 }

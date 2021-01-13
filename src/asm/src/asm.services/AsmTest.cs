@@ -8,7 +8,6 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Asm.IceOpKind;
-
     using static Part;
 
     [ApiHost]
@@ -175,23 +174,5 @@ namespace Z0.Asm
             => src == IceOpKind.MemoryESDI
             || src == IceOpKind.MemoryESEDI
             || src == IceOpKind.MemoryESRDI;
-
-
-        [MethodImpl(Inline), Op]
-        public static bool empty(in AsmFxMemory src)
-        {
-            var empty = true;
-            empty &= (src.MemoryBase == 0);
-            empty &= (src.MemoryIndex == 0);
-            empty &= (src.MemorySize == 0);
-            empty &= (src.MemoryIndexScale.IsEmpty);
-            empty &= (src.MemDx.IsEmpty);
-            empty &= (src.MemorySegment == 0);
-            empty &= (src.SegmentPrefix == 0);
-            empty &= (!src.IsStackInstruction);
-            empty &= (src.StackPointerIncrement == 0);
-            empty &= (!src.IsIPRelativeMemoryOperand);
-            return empty;
-        }
     }
 }

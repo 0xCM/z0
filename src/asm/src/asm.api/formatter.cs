@@ -12,6 +12,10 @@ namespace Z0.Asm
     partial struct asm
     {
         [MethodImpl(Inline), Op]
+        public static string format(in AsmCallRow src)
+            => string.Format(AsmCallRow.RenderPattern, src.Source, src.Target, src.InstructionSize, src.TargetOffset, src.Instruction, src.Encoded);
+
+        [MethodImpl(Inline), Op]
         public static IIceInstructionFormatter formatter(in AsmFormatConfig config)
             => new IceInstructionFormatter(config);
     }

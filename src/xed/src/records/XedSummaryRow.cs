@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
     using F = XedSummaryField;
     using R = XedSummaryRow;
 
@@ -15,23 +12,23 @@ namespace Z0
     {
         public const string TableId = "xed.summary";
 
-        public string Class;
+        public TextBlock Class;
 
-        public string Category;
+        public TextBlock Category;
 
-        public string Extension;
+        public TextBlock Extension;
 
-        public string IsaSet;
+        public TextBlock IsaSet;
 
         public BinaryCode BaseCode;
 
-        public string Mod;
+        public TextBlock Mod;
 
-        public string Reg;
+        public TextBlock Reg;
 
-        public string Pattern;
+        public TextBlock Pattern;
 
-        public string Operands;
+        public TextBlock Operands;
 
         public string DelimitedText(char sep)
             => Xed.format(this, sep);

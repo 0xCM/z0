@@ -13,15 +13,26 @@ namespace Z0.Asm
     {
         public readonly struct DocLine
         {
-            public TextLine Text {get;}
+            /// <summary>
+            /// The content line number
+            /// </summary>
+            public uint Number {get;}
+
+            /// <summary>
+            /// The line content
+            /// </summary>
+            public TextBlock Content {get;}
 
             [MethodImpl(Inline)]
-            public DocLine(TextLine text)
-                => Text = text;
+            public DocLine(uint number, TextBlock content)
+            {
+                Number = number;
+                Content = content;
+            }
 
             [MethodImpl(Inline)]
             public string Format()
-                => Text.Content;
+                => Content.Format();
 
             public override string ToString()
                 => Format();

@@ -5,16 +5,12 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
     using System.Linq;
-    using System.IO;
 
     using static z;
 
     using F = XedSummaryField;
     using R = XedSummaryRow;
-    using api = Xed;
 
     [ApiHost]
     public readonly ref struct XedWf
