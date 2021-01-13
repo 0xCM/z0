@@ -55,7 +55,7 @@ namespace Z0
         public SegRef Ref
         {
             [MethodImpl(Inline)]
-            get => MemRefs.define(in this[0], (uint)Length);
+            get => memory.segref(in memory.first(Data), (uint)Length);
         }
 
         public int Length

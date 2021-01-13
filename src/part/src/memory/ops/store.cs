@@ -8,9 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static memory;
 
-    partial struct MemRefs
+    partial struct memory
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static void store<T>(ReadOnlySpan<SegRef> src, Span<T> dst)

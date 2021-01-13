@@ -44,7 +44,7 @@ namespace Z0
                 var content = @string(f) ?? EmptyString;
                 seek(dst,j) = content;
                 if(!text.blank(content))
-                    offset += MemRefs.field(@base, offset, f).DataSize;
+                    offset += Clr.fieldref(@base, offset, f).DataSize;
             }
         }
 

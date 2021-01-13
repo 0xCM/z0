@@ -9,7 +9,6 @@ namespace Z0.Asm
     /// <summary>
     /// Defines register class identifiers
     /// </summary>
-    [FieldWidth(5)]
     public enum RegisterClass : byte
     {
         /// <summary>

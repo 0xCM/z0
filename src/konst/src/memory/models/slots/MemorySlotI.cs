@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    using api = MemRefs;
+    using api = MemorySlots;
 
     public struct MemorySlot<I>
         where I : unmanaged

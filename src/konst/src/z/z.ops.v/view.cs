@@ -69,14 +69,6 @@ namespace Z0
             => ref memory.view1u(src);
 
         /// <summary>
-        /// Reveals the character data identified by a string reference
-        /// </summary>
-        /// <param name="src">The source reference</param>
-        [MethodImpl(Inline), Op]
-        public static unsafe ReadOnlySpan<char> view(in StringRef src)
-            => cover<char>(src.BaseAddress.Pointer<char>(), (uint)src.Length);
-
-        /// <summary>
         /// Creates a T-span from a supplied reference
         /// </summary>
         /// <param name="src">A reference to the leading cell</param>

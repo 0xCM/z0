@@ -14,15 +14,15 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static RangeModel<StringRef,byte> seg(string id, byte min, byte max)
-            => content(MemRefs.@string(id), min, max);
+            => content(StringRef.create(id), min, max);
 
         [MethodImpl(Inline), Op]
         public static RangeModel<StringRef,uint> seg(string id, uint min, uint max)
-            => content(MemRefs.@string(id), min, max);
+            => content(StringRef.create(id), min, max);
 
         [MethodImpl(Inline), Op]
         public static RangeModel<StringRef,ulong> seg(string id, ulong min, ulong max)
-            => content(MemRefs.@string(id), min, max);
+            => content(StringRef.create(id), min, max);
 
         [MethodImpl(Inline), Op]
         public static RangeModel<char,uint> seg(char id, uint min, uint max)

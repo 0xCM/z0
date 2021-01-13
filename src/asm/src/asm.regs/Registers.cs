@@ -72,9 +72,23 @@ namespace Z0.Asm
         public static RegisterWidth width(RegisterKind src)
             => (RegisterWidth)((uint)src >> WidthIndex);
 
+        /// <summary>
+        /// Combines a <see cref='RegisterIndex'/>, a <see cref='RegisterClass'/> and a <see cref='RegisterWidth'/> to produce a <see cref='RegisterKind'/>
+        /// </summary>
+        /// <param name="i">The register index</param>
+        /// <param name="k">The register class</param>
+        /// <param name="w">The register width</param>
         [MethodImpl(Inline), Op]
-        public static RegisterKind join(RegisterIndex c, RegisterClass k, RegisterWidth w)
-            => (RegisterKind)((uint)c  << CodeIndex | (uint)k << ClassIndex | (uint)w << WidthIndex);
+        public static RegisterKind join(RegisterIndex i, RegisterClass k, RegisterWidth w)
+            => (RegisterKind)((uint)i  << CodeIndex | (uint)k << ClassIndex | (uint)w << WidthIndex);
+
+        /// <summary>
+        /// Determines whether an upper register is selected
+        /// </summary>
+        /// <param name="src">The register kind to test</param>
+        [MethodImpl(Inline), Op]
+        public static bit hi(RegisterKind src)
+            => ((uint)Pow2x32.P2ᐞ31 & (uint)src) != 0;
 
         [MethodImpl(Inline), Op]
         public static RegisterIndex code1(RegisterKind src)
@@ -98,42 +112,53 @@ namespace Z0.Asm
 
         [Op]
         public static Index<Register> All()
-            => Enums.literals<RegisterKind>().Map(k => define(k));
+            => Enums.literals<RegisterKind>().Map(define);
 
         [Op]
         public static Index<Register> Gp8()
             => All().Where(r => width(r) == W.W8);
 
+        [Op]
         public static Index<Register> Gp8(Index<Register> src)
             => src.Where(r => width(r) == W.W8);
 
+        [Op]
         public static Index<Register> Gp16()
             => All().Where(r => width(r) == W.W16);
 
+        [Op]
         public static Index<Register> Gp16(Index<Register> src)
             => src.Where(r => width(r) == W.W16);
 
+        [Op]
         public static Index<Register> Gp32()
             => All().Where(r => width(r) == W.W32);
 
+        [Op]
         public static Index<Register> Gp32(Index<Register> src)
             => src.Where(r => width(r) == W.W32);
 
+        [Op]
         public static Index<Register> Gp64()
             => All().Where(r => width(r) == W.W64);
 
+        [Op]
         public static Index<Register> Gp64(Index<Register> src)
             => src.Where(r => width(r) == W.W64);
 
+        [Op]
         public static Index<Register> V128()
             => All().Where(r => width(r) == W.W128);
 
+        [Op]
         public static Index<Register> V128(Index<Register> src)
             => src.Where(r => width(r) == W.W128);
 
+        [Op]
         public static Index<Register> V256()
             => All().Where(r => width(r) == W.W256);
 
+        [Op]
         public static Index<Register> V256(Index<Register> src)
             => src.Where(r => width(r) == W.W256);
 
@@ -161,7 +186,6 @@ namespace Z0.Asm
             var dst = text.bracket(text.concat(seg2, Sep, seg1, Sep, seg0));
             return dst;
         }
-
     }
 
     [ApiHost]

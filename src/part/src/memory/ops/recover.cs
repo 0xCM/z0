@@ -12,10 +12,6 @@ namespace Z0
 
     partial struct memory
     {
-        [MethodImpl(Inline)]
-        internal static Span<T> EmptySpan<T>()
-            => Span<T>.Empty;
-
         /// <summary>
         /// Presents a span of S-cells as a span of T-cells
         /// </summary>

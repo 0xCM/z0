@@ -188,13 +188,6 @@ namespace Z0
             return dst;
         }
 
-        [Op]
-        public static void store(in StringRef src, ref char dst, uint offset = 0)
-        {
-            var c = z.view(src);
-            var k = c.Length;
-            for(uint i=0, o = offset; i<k; i++, o++)
-                seek(dst,o) = skip(c,i);
-        }
+
     }
 }

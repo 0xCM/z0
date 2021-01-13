@@ -34,9 +34,6 @@ namespace Z0
             var process = Processes.current();
             var name = process.ProcessName;
             var dst = wf.Db().ProcDumpPath(name).EnsureParentExists();
-            // var root = FS.dir(@"k:\dumps");
-            // var dst =  root + FS.file(name.Content, FileExtensions.Dmp);
-            //var dst = FS.path(@"k:\dumps\run\run.dmp");
             dst.Delete();
             DumpEmitter.emit(Processes.current(), dst.Name, DumpTypeOption.Full);
             wf.Ran(flow, "Emitted process dump");
@@ -74,7 +71,6 @@ namespace Z0
             RunPrimary();
             RunImm();
             RunEvaluate();
-            EmitReports();
         }
 
         void RunPrimary()
@@ -87,8 +83,8 @@ namespace Z0
 
         void RunImm()
         {
-            var flow = Wf.Running(nameof(EmitImmClosures));
-            using var step = new EmitImmClosuresStep(Wf, new EmitImmClosures(), Asm, Asm.Formatter, Asm.RoutineDecoder, Wf.Db().CaptureRoot());
+            var flow = Wf.Running(nameof(ImmClosureEmitter));
+            using var step = new ImmClosureEmitter(Wf, Asm);
             step.ClearArchive(Parts);
             step.EmitRefined(Parts);
             Wf.Ran(flow);
@@ -100,13 +96,6 @@ namespace Z0
             var evaluate = Evaluate.control(App, Wf.Paths.AppCaptureRoot, Pow2.T14);
             evaluate.Execute();
             Wf.Ran(flow);
-        }
-
-        void EmitReports()
-        {
-            //var flow = Wf.Running(MethodInfo.GetCurrentMethod().Name);
-            //EmitCodeBlockReport.create().Run(Wf);
-            //Wf.Ran(flow);
         }
 
         static void run(IWfShell wf, IAsmContext asm)

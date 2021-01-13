@@ -9,19 +9,23 @@ namespace Z0
 
     using static Part;
 
-    partial struct MemRefs
+    partial struct memory
     {
-        public static SegRef<T>[] many<T>(ReadOnlySpan<T> src)
+        [MethodImpl(Inline), Op]
+        public static SegRef<T>[] segrefs<T>(ReadOnlySpan<T> src)
             where T : struct
         {
-            var dst = sys.alloc<SegRef<T>>(src.Length);
-            many(src,dst);
+            var dst = alloc<SegRef<T>>(src.Length);
+            segrefs(src, dst);
             return dst;
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static void many<T>(ReadOnlySpan<T> src, Span<SegRef<T>> dst)
+        public static void segrefs<T>(ReadOnlySpan<T> src, Span<SegRef<T>> dst)
             where T : struct
-                => refs(src, dst);
+        {
+            for(var i=0u; i<src.Length; i++)
+                seek(dst,i) = segref(skip<T>(src,i), size<T>());
+        }
     }
 }

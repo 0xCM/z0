@@ -42,7 +42,7 @@ namespace Z0
 
         void Emit(ApiPartTypes src)
         {
-            var fields = MemRefs.fields(src.Types);
+            var fields = Clr.fieldrefs(src.Types);
             if(fields.Length != 0)
                 Emit(fields, Target + FS.file(src.Part.Format(), FileExtensions.Csv));
         }

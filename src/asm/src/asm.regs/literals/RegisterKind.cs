@@ -53,11 +53,19 @@ namespace Z0.Asm
 
         AL = G8.AL,
 
+        AH = G8.AH,
+
         CL = G8.CL,
+
+        CH = G8.CH,
 
         DL = G8.DL,
 
+        DH = G8.DH,
+
         BL = G8.BL,
+
+        BH = G8.BH,
 
         SPL = G8.SPL,
 

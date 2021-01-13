@@ -43,7 +43,12 @@ namespace Z0.Asm
         /// <summary>
         /// The maximum number of register classes
         /// </summary>
-        public const byte MaxClass = 31;
+        public const byte MaxClass = 30;
+
+        /// <summary>
+        /// When present, designates the upper half of a given register
+        /// </summary>
+        public const uint Hi = MaxClass << 1;
 
         public enum FI : byte
         {
@@ -58,9 +63,14 @@ namespace Z0.Asm
             K = 4,
 
             /// <summary>
-            /// Register width: [16..31]
+            /// Register width: [16..30]
             /// </summary>
             W = 16,
+
+            /// <summary>
+            /// Upper register selection: [31]
+            /// </summary>
+            H = 31,
         }
 
         public enum FW : byte
@@ -70,6 +80,8 @@ namespace Z0.Asm
             K = FI.W - FI.K,
 
             W = MaxClass - FI.W,
+
+            H = FI.H,
         }
     }
 }

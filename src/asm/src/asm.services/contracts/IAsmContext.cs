@@ -47,7 +47,7 @@ namespace Z0.Asm
         /// The context formatter
         /// </summary>
         IAsmFormatter Formatter
-            => CaptureServices.Formatter(FormatConfig);
+            => new AsmFormatter(FormatConfig);
 
         /// <summary>
         /// The context decoder

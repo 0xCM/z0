@@ -11,10 +11,10 @@ namespace Z0
     using static Part;
     using static memory;
 
-    partial struct MemRefs
+    partial struct Clr
     {
         [Op]
-        public unsafe static FieldRef field(MemoryAddress @base, MemoryAddress offset, FieldInfo src)
+        public unsafe static FieldRef fieldref(MemoryAddress @base, MemoryAddress offset, FieldInfo src)
         {
             var data = sys.constant(src);
             var type = src.FieldType;
@@ -45,6 +45,31 @@ namespace Z0
             else if(type.IsDecimal())
                 return new FieldRef(src, segment(@base + offset, 16));
             return FieldRef.Empty;
+        }
+
+        [Op]
+        public static FieldRef[] fieldrefs(params Type[] src)
+        {
+            var dst = root.list<FieldRef>();
+            var count = src.Length;
+            for(var i=0u; i<count; i++)
+            {
+                var type = src[i];
+                var fields = ClrLiterals.search(type);
+                var @base = address(type);
+                var offset = MemoryAddress.Empty;
+                for(var j=0u; j<fields.Length; j++)
+                {
+                    var fi = fields[j];
+                    var segment = fieldref(@base, offset, fi);
+                    if(segment.IsNonEmpty)
+                    {
+                        root.append(dst, segment);
+                        offset += segment.DataSize;
+                    }
+                }
+            }
+            return dst.Array();
         }
     }
 }

@@ -12,7 +12,7 @@ namespace Z0
 
     partial struct Cil
     {
-        public static FunctionInfo[] functions(Module module, LocatedMethod[] src)
+        public static Index<FunctionInfo> functions(Module module, LocatedMethod[] src)
         {
             var count = src.Length;
             var buffer = sys.alloc<FunctionInfo>(count);

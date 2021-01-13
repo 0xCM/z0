@@ -9,6 +9,7 @@ namespace Z0.Asm
     using System.IO;
 
     using static BufferSeqId;
+
     using K = Kinds;
 
     public interface IAsmChecker : IContextual<IAsmContext>,  IBufferedChecker, ITestDynamic, ICaptureServiceProxy, ICheckDynamicVectors

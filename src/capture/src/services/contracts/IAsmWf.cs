@@ -7,8 +7,6 @@ namespace Z0.Asm
     using System;
     using System.Reflection;
 
-    using static Konst;
-
     public interface IAsmWf
     {
         IWfShell Wf {get;}

@@ -9,15 +9,7 @@ namespace Z0.Asm
     using System.Reflection;
     using System.Linq;
 
-    public sealed class EmitImmClosures : WfHost<EmitImmClosures>
-    {
-        protected override void Execute(IWfShell shell)
-        {
-            throw new NotImplementedException();
-        }
-    }
-
-    public class EmitImmClosuresStep : IImmEmitter
+    public class ImmClosureEmitter : IImmEmitter
     {
         readonly WfHost Host;
 
@@ -31,14 +23,14 @@ namespace Z0.Asm
 
         readonly IImmSpecializer Specializer;
 
-        public EmitImmClosuresStep(IWfShell wf, WfHost host, IAsmContext asm, IAsmFormatter formatter, IAsmDecoder decoder, FS.FolderPath root)
+        public ImmClosureEmitter(IWfShell wf, IAsmContext asm)
         {
-            Host = host;
-            Wf = wf.WithHost(host);
+            Host = WfShell.host(typeof(ImmClosureEmitter));
+            Wf = wf.WithHost(Host);
             Asm = asm;
-            Formatter = formatter;
-            CodeArchive = Archives.capture(root);
-            Specializer = Capture.Services.ImmSpecializer(decoder);
+            Formatter = asm.Formatter;
+            CodeArchive = Archives.capture(wf.Db().CaptureRoot());
+            Specializer = Capture.Services.ImmSpecializer(asm.RoutineDecoder);
             Wf.Created();
         }
 
@@ -83,7 +75,6 @@ namespace Z0.Asm
 
         void EmitDirectRefinements(in CaptureExchange exchange, ApiHost host, IAsmImmWriter dst)
         {
-            //var archive = Archive(host);
             var groups = ApiImmediates.direct(host,ScalarRefinementKind.Refined);
             var uri = host.Uri;
             var generic = false;

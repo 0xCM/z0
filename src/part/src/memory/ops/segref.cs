@@ -60,7 +60,7 @@ namespace Z0
         /// <param name="count">The covered cell count</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static unsafe SegRef<T> segref<T>(in T src, int count)
+        public static SegRef<T> segref<T>(in T src, int count)
             => new SegRef<T>(address(src), size<T>((uint)count));
 
         /// <summary>

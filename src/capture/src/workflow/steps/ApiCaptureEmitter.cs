@@ -168,7 +168,7 @@ namespace Z0
             service.Emit(src, out var decoded);
             if(decoded.Count != 0)
             {
-                using var match = new MatchAddressesStep(Wf, Host, Extracts, decoded.Storage, Ct);
+                using var match = new AsmAddressMatcher(Wf, Host, Extracts, decoded.Storage, Ct);
                 match.Run();
             }
             return decoded;

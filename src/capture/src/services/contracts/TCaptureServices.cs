@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    public interface TCaptureServices : IAsmServices, ICaptureServices
+    public interface TCaptureServices : ICaptureServices
     {
         IAsmContext Context {get;}
 

@@ -6,21 +6,18 @@ namespace Z0
 {
     using System;
 
-    using static z;
+    using static memory;
 
     [WfHost]
-    public sealed class EmitHostCil : WfHost<EmitHostCil,ApiMemberCodeBlocks,FS.FilePath>
+    public sealed class CilEmitter : WfService<CilEmitter, CilEmitter>
     {
-        ApiHostUri Uri;
-
-        protected override ref FS.FilePath Execute(IWfShell wf, in ApiMemberCodeBlocks src, out FS.FilePath dst)
+        public ref FS.FilePath Emit(ApiHostUri uri, in ApiMemberCodeBlocks src, out FS.FilePath dst)
         {
-            var path = wf.Db().CapturedCilDataFile(Uri);
+            var path = Wf.Db().CapturedCilDataFile(uri);
             dst = FS.FilePath.Empty;
             if(src.Count != 0)
             {
                 dst = path;
-                wf = wf.WithHost(this);
                 var count = src.Count;
                 var view = src.View;
                 using var writer = path.Writer();
@@ -31,22 +28,21 @@ namespace Z0
                     writer.WriteLine(cil.Format());
                 }
 
-                wf.EmittedFile(src, count, dst);
+                Wf.EmittedFile(src, count, dst);
             }
 
             return ref dst;
         }
 
-        ref FS.FilePath EmitDecoded(IWfShell wf, in ApiMemberCodeBlocks src, out FS.FilePath dst)
+        public ref FS.FilePath EmitDecoded(ApiHostUri uri, in ApiMemberCodeBlocks src, out FS.FilePath dst)
         {
-            dst = wf.Db().CapturedAsmFile(Uri).ChangeExtension(FileExtensions.Il);
+            dst = Wf.Db().CapturedAsmFile(uri).ChangeExtension(FileExtensions.Il);
             if(src.Count != 0)
             {
-                wf = wf.WithHost(this);
                 var module = src.First.Method.DeclaringType.Assembly.ManifestModule;
                 var count = src.Count;
                 var methods = src.Storage.Map(x => new LocatedMethod(x.OpUri.OpId, x.Method, x.Address));
-                var cilFx = @readonly(Cil.functions(module, methods));
+                var cilFx = Cil.functions(module, methods).View;
                 using var writer = dst.Writer();
                 for(var i=0u; i<count; i++)
                 {
@@ -57,7 +53,7 @@ namespace Z0
                         writer.WriteLine("!!Empty!!");
                 }
 
-                wf.EmittedFile(src, count, dst);
+                Wf.EmittedFile(src, count, dst);
             }
             return ref dst;
         }

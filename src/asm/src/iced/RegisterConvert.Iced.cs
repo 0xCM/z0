@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
     using System;
     using static Konst;
@@ -10,9 +10,9 @@ namespace Z0
 
     using R = Asm.IceRegister;
 
-    readonly partial struct RegisterConvert
+    readonly partial struct RegisterKindConverter
     {
-        static ReadOnlySpan<R> IceRegisters => new R[]{
+        static ReadOnlySpan<R> IceRegisters() => new R[]{
             None,
             AL, // 1,
             CL, // 2,
@@ -34,7 +34,6 @@ namespace Z0
             R13L, // 18,
             R14L, // 19,
             R15L, // 20,
-
             AX, // 21,
             CX, // 22,
             DX, // 23,

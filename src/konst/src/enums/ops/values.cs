@@ -23,7 +23,7 @@ namespace Z0
         {
             var tValues = LiteralFields.values<T>(src);
             var count = tValues.Length;
-            var eValueBuffer = sys.alloc<EnumFieldValue<E,T>>(count);
+            var eValueBuffer = memory.alloc<EnumFieldValue<E,T>>(count);
             var dst = span(eValueBuffer);
 
             for(var i=0u; i<count; i++)

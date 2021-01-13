@@ -33,6 +33,9 @@ namespace Z0.Asm
         public RegisterWidth Width
             => api.width(Kind);
 
+        public bit Hi
+            => api.hi(Kind);
+
         [MethodImpl(Inline)]
         public bool Equals(Register src)
             => src.Kind == Kind;

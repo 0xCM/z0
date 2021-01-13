@@ -7,7 +7,6 @@ namespace Z0.Asm
     /// <summary>
     /// Defines register codes 0 .. 31
     /// </summary>
-    [FieldWidth(5)]
     public enum RegisterIndex : byte
     {
         r0 = 0b00000,

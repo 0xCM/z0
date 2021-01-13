@@ -9,7 +9,7 @@ namespace Z0
 
     using Z0.Asm;
 
-    ref struct MatchAddressesStep
+    public struct AsmAddressMatcher : IDisposable
     {
         readonly IWfShell Wf;
 
@@ -19,7 +19,7 @@ namespace Z0
 
         readonly WfHost Host;
 
-        public MatchAddressesStep(IWfShell wf, WfHost host, ApiMemberExtract[] extracted, AsmRoutine[] decoded, CorrelationToken ct)
+        public AsmAddressMatcher(IWfShell wf, WfHost host, ApiMemberExtract[] extracted, AsmRoutine[] decoded, CorrelationToken ct)
         {
             Host = host;
             Wf = wf.WithHost(host);

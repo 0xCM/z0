@@ -73,19 +73,11 @@ namespace Z0
             return ops[I.Add](e,b);
         }
 
-        [MethodImpl(Inline), Op]
-        public static MemorySlots from(Type src)
-            => ClrDynamic.jit(src).Map(m => new MemorySegment(m.Address, m.Size));
-
-        [MethodImpl(Inline)]
-        public static MemorySlots<E> from<E>(Type src)
-            where E : unmanaged, Enum
-                => new MemorySlots<E>(from(src));
 
         [Op]
         public static void run(Span<string> dst, ref byte offset)
         {
-            var slots = from<CalcOpIndex>(typeof(CalcSlots));
+            var slots = ClrDynamic.slots<CalcOpIndex>(typeof(CalcSlots));
             ref readonly var add = ref slots[CalcOpIndex.Add];
             ref readonly var sub = ref slots[CalcOpIndex.Sub];
             ref readonly var mul = ref slots[CalcOpIndex.Mul];

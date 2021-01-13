@@ -16,11 +16,19 @@ namespace Z0.Asm
     {
         AL = r0 | GP << ClassIndex | W8 << WidthIndex,
 
+        AH = r0 | GP << ClassIndex | W8 << WidthIndex | Hi,
+
         CL = r1 | GP << ClassIndex | W8 << WidthIndex,
+
+        CH = r1 | GP << ClassIndex | W8 << WidthIndex | Hi,
 
         DL = r2 | GP << ClassIndex | W8 << WidthIndex,
 
+        DH = r2 | GP << ClassIndex | W8 << WidthIndex | Hi,
+
         BL = r3 | GP << ClassIndex | W8 << WidthIndex,
+
+        BH = r3 | GP << ClassIndex | W8 << WidthIndex | Hi,
 
         SPL = r4 | GP << ClassIndex | W8 << WidthIndex,
 

@@ -14,6 +14,7 @@
     <ProjectReference Include="$(Cli)" />
     <ProjectReference Include="$(Xed)" />
     <ProjectReference Include="$(Gen)" />
+    <ProjectReference Include="$(Dynamic)" />
 
   </ItemGroup>
 

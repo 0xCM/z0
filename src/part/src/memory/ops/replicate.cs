@@ -2,22 +2,21 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
 
     using static Part;
 
-    public readonly struct CaptureServices : TCaptureServices
+    partial struct memory
     {
-        public IAsmContext Context {get;}
-
-        [MethodImpl(Inline)]
-        public CaptureServices(IAsmContext context)
-            => Context = context;
-
-        public ICaptureCore CaptureCore
-            => Asm.CaptureCore.Service;
+        [MethodImpl(Inline), Op]
+        public static Span<byte> replicate(MemoryRange src)
+        {
+            Span<byte> dst = alloc<byte>(src.Length);
+            copy(src, dst);
+            return dst;
+        }
     }
 }

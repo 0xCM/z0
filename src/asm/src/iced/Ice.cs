@@ -2,18 +2,18 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Konst;
 
-    partial struct MemRefs
+    using Iced = Iced.Intel;
+
+    public readonly struct Ice
     {
-        [MethodImpl(Inline)]
-        public static ref readonly MemorySegment lookup<E>(MemorySlots<E> src, E index)
-            where E : unmanaged
-                => ref src.Data[memory.uint8(index)];
+        public Index<IceRegister> registers()
+            => Enums.literals<IceRegister>();
     }
 }

@@ -9,11 +9,13 @@ namespace Z0
     using System.Reflection.Emit;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     [ApiHost]
     public readonly struct ClrDynamic
     {
+        const NumericKind Closure = UnsignedInts;
+
         /// <summary>
         /// Creates a dynamic pointer from an untyped dynamic delegate
         /// </summary>
@@ -103,6 +105,20 @@ namespace Z0
         /// <param name="src">The source type</param>
         public static LocatedMethod[] jit(Type src)
             => src.DeclaredMethods().Select(m => jit(m, size(m)));
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static MemorySlots<I> slots<I>(Type src)
+            where I : unmanaged
+                => new MemorySlots<I>(slots(src));
+
+        [MethodImpl(Inline), Op]
+        public static MemorySlots slots(Type src)
+            => jit(src).Map(m => new MemorySegment(m.Address, m.Size));
+
+        [MethodImpl(Inline)]
+        public static MemorySlots<E> slots<E,T>(T src)
+            where E : unmanaged
+                => slots<E>(typeof(T));
 
         [MethodImpl(Inline), Op]
         public static IntPtr jit(Delegate src)

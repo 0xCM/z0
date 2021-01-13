@@ -9,7 +9,6 @@ namespace Z0
     using System.Runtime.InteropServices;
     using Windows;
 
-
     public readonly struct DumpEmitter
     {
         const int ERROR_PARTIAL_COPY = unchecked((int)0x8007012b);

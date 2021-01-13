@@ -9,7 +9,7 @@ namespace Z0
 
     using Z0.Asm;
 
-    using static Konst;
+    using static Part;
 
     [ApiHost]
     public readonly struct AsmWorkflows
@@ -21,9 +21,5 @@ namespace Z0
         [Op]
         public static IAsmContext context(IWfShell wf)
             => new AsmContext(Apps.context(wf), wf);
-
-        [MethodImpl(Inline), Op]
-        public static IWfCaptureBroker broker(IWfShell wf)
-            => new WfCaptureBroker(wf);
     }
 }

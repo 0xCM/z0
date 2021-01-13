@@ -7,11 +7,10 @@ namespace Z0.Asm
     using W = DataWidth;
 
     /// <summary>
-    /// Defines a <see cref='DataWidth' subset that corresponds to x86 register widths
+    /// Defines a <see cref='DataWidth' subset that corresponds to x86 register widths and
     /// </summary>
-    [FieldWidth(16)]
     public enum RegisterWidth : ushort
-    {        
+    {
         /// <summary>
         /// Specifies the register with a 0-bit register
         ///</summary>
@@ -55,6 +54,6 @@ namespace Z0.Asm
         /// <summary>
         /// Specifies the width of a 512-bit register
         ///</summary>
-        W512 = W.W512, 
+        W512 = W.W512,
     }
 }

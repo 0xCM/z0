@@ -8,6 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using Windows;
 
+    using static Part;
+
     partial struct memory
     {
         /// <summary>

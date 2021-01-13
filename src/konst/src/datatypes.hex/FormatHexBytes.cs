@@ -25,10 +25,10 @@ namespace Z0
 
         public static string FormatHexBytes(this ReadOnlySpan<byte> src, char sep, bool zpad = true, bool specifier = true,
             bool uppercase = false, bool prespec = true, int? segwidth = null)
-                => Hex.format(src,sep,zpad,specifier,uppercase,prespec,segwidth);
+                => Hex.format(src, sep, zpad, specifier, uppercase, prespec, segwidth);
 
         public static string FormatHexBytes(this Span<byte> src, char sep, bool zpad = true, bool specifier = true,
             bool uppercase = false, bool prespec = true, int? segwidth = null)
-                => Hex.format(src,sep,zpad,specifier,uppercase,prespec,segwidth);
+                => Hex.format(src, sep, zpad, specifier, uppercase, prespec, segwidth);
     }
 }

@@ -2,27 +2,27 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
     using System;
 
     using static Konst;
-    using static Asm.RegisterKind;
+    using static RegisterKind;
 
     using R = Asm.RegisterKind;
 
-    readonly partial struct RegisterConvert
+    partial struct RegisterKindConverter
     {
-        static ReadOnlySpan<R> Kinds => new R[]{
+        static ReadOnlySpan<R> Kinds() => new R[]{
             0,
             AL, // 1,
             CL, // 2,
             DL, // 3,
             BL, // 4,
-            // AH, // 5,
-            // CH, // 6,
-            // DH, // 7,
-            // BH, // 8,
+            AH, // 5,
+            CH, // 6,
+            DH, // 7,
+            BH, // 8,
             SPL, // 9,
             BPL, // 10,
             SIL, // 11,
@@ -35,7 +35,6 @@ namespace Z0
             R13L, // 18,
             R14L, // 19,
             R15L, // 20,
-
             AX, // 21,
             CX, // 22,
             DX, // 23,
@@ -188,14 +187,14 @@ namespace Z0
             ZMM29, // 170,
             ZMM30, // 171,
             ZMM31, // 172,
-            // K0, // 173,
-            // K1, // 174,
-            // K2, // 175,
-            // K3, // 176,
-            // K4, // 177,
-            // K5, // 178,
-            // K6, // 179,
-            // K7, // 180,
+            K0, // 173,
+            K1, // 174,
+            K2, // 175,
+            K3, // 176,
+            K4, // 177,
+            K5, // 178,
+            K6, // 179,
+            K7, // 180,
             // BND0, // 181,
             // BND1, // 182,
             // BND2, // 183,
