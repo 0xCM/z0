@@ -14,6 +14,6 @@ namespace Z0.Asm
     {
         [MethodImpl(Inline), Op]
         public static IceRegister memidx(IceInstruction src, byte index)
-            => kind(src, (byte)index) == Memory ? src.MemoryIndex : 0;
+            => opkind(src, (byte)index) == Memory ? src.MemoryIndex : 0;
     }
 }

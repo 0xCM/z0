@@ -24,10 +24,10 @@ namespace Z0
             get => Data;
         }
 
-        public ReadOnlySpan<CmdOptionSpec<K>> Terms
+        public ReadOnlySpan<CmdOptionSpec<K>> View
         {
             [MethodImpl(Inline)]
-            get => Data.Terms;
+            get => Data.View;
         }
 
         public string Format()

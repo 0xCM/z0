@@ -23,7 +23,7 @@ namespace Z0.Asm
         /// <summary>
         /// The base-relative address that captures the offset follows the client call instruction
         /// </summary>
-        public ushort CallSite;
+        public Address16 CallSite;
 
         /// <summary>
         /// The argument supplied to the call instruction
@@ -36,7 +36,7 @@ namespace Z0.Asm
         public AsmCallTarget ActualTarget;
 
         [MethodImpl(Inline)]
-        public AsmCall(AsmCallClient client, ushort site, AsmCallTarget called, AsmCallTarget actual = default)
+        public AsmCall(AsmCallClient client, Address16 site, AsmCallTarget called, AsmCallTarget actual = default)
         {
             Client = client;
             CallSite = site;

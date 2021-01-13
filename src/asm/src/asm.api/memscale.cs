@@ -16,6 +16,6 @@ namespace Z0.Asm
     {
         [MethodImpl(Inline), Op]
         public static MemoryScale memScale(IceInstruction src, int index)
-            => kind(src, (byte)index) == Memory ? src.MemoryIndexScale : MemoryScale.Empty;
+            => opkind(src, (byte)index) == Memory ? src.MemoryIndexScale : MemoryScale.Empty;
     }
 }

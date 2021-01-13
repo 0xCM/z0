@@ -14,7 +14,7 @@ namespace Z0.Asm
         [Op]
         public static IceMemorySize memsize(IceInstruction src, byte index)
         {
-            switch(asm.kind(src,(byte)index))
+            switch(asm.opkind(src,(byte)index))
             {
                 case Memory:
                 case Memory64:

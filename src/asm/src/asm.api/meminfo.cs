@@ -18,7 +18,7 @@ namespace Z0.Asm
         [Op]
         public static IceMemoryInfo meminfo(IceInstruction src, byte index)
         {
-            var k = kind(src, (byte)index);
+            var k = opkind(src, (byte)index);
 
             if(AsmTest.isMem(k))
             {

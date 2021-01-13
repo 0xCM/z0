@@ -19,7 +19,7 @@ namespace Z0.Asm
         [Op]
         public static ImmValue? immval(IceInstruction src, byte index)
         {
-			return kind(src, index) switch
+			return opkind(src, index) switch
             {
 			    Immediate8 => src.Immediate8,
 			    Immediate8_2nd => src.Immediate8_2nd,

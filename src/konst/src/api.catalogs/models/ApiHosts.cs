@@ -19,21 +19,13 @@ namespace Z0
         public ApiHosts(IApiHost[] src)
             => Data = src;
 
-        [MethodImpl(Inline)]
-        public static implicit operator ApiHosts(IApiHost[] src)
-            => new ApiHosts(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator IApiHost[](ApiHosts src)
-            => src.Data;
-
         public uint Count
         {
             [MethodImpl(Inline)]
             get => (uint)(Data?.Length ?? 0);
         }
 
-        public ReadOnlySpan<IApiHost> Terms
+        public ReadOnlySpan<IApiHost> View
         {
             [MethodImpl(Inline)]
             get => Data;
@@ -62,7 +54,7 @@ namespace Z0
         {   var count = Count;
             for(var i=0; i<count; i++)
             {
-                var terms = Terms;
+                var terms = @readonly(Data);
                 ref readonly var candidate = ref skip(terms,i);
                 if(candidate.GetType() == t)
                 {
@@ -79,5 +71,13 @@ namespace Z0
 
         public override string ToString()
             => Format();
+
+        [MethodImpl(Inline)]
+        public static implicit operator ApiHosts(IApiHost[] src)
+            => new ApiHosts(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator IApiHost[](ApiHosts src)
+            => src.Data;
     }
 }

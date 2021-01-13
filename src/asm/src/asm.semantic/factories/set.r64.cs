@@ -7,9 +7,8 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-
-    using static XRegisters;
+    using static Part;
+    using static AsmRegs;
 
     partial struct AsmSemantic
     {

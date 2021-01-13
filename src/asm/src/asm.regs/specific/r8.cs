@@ -11,7 +11,7 @@ namespace Z0.Asm
 
     using K = RegisterKind;
 
-    partial struct XRegisters
+    partial struct AsmRegs
     {
         public struct al : IRegister<al,W8,byte,N0>
         {

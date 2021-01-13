@@ -16,6 +16,9 @@ namespace Z0.Asm
     [ApiHost(ApiNames.AsmRegisters)]
     public readonly struct Registers
     {
+        public static RegisterLookup lookup()
+            => RegisterLookup.create();
+
         [MethodImpl(Inline), Op]
         public static Register define(RegisterKind kind)
             => kind;
@@ -147,25 +150,26 @@ namespace Z0.Asm
             => src.Where(r => width(r) == W.W64);
 
         [Op]
-        public static Index<Register> V128()
+        public static Index<Register> Xmm()
             => All().Where(r => width(r) == W.W128);
 
         [Op]
-        public static Index<Register> V128(Index<Register> src)
+        public static Index<Register> Xmm(Index<Register> src)
             => src.Where(r => width(r) == W.W128);
 
         [Op]
-        public static Index<Register> V256()
+        public static Index<Register> Ymm()
             => All().Where(r => width(r) == W.W256);
 
         [Op]
-        public static Index<Register> V256(Index<Register> src)
+        public static Index<Register> Ymm(Index<Register> src)
             => src.Where(r => width(r) == W.W256);
 
-        public static Index<Register> V512()
+        [Op]
+        public static Index<Register> Zmm()
             => All().Where(r => width(r) == W.W512);
 
-        public static Index<Register> V512(Index<Register> src)
+        public static Index<Register> Zmm(Index<Register> src)
             => src.Where(r => width(r) == W.W512);
 
         [MethodImpl(Inline)]
@@ -189,7 +193,7 @@ namespace Z0.Asm
     }
 
     [ApiHost]
-    public readonly partial struct XRegisters
+    public readonly partial struct AsmRegs
     {
 
     }

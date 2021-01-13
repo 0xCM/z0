@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using R = XRegisters;
+    using R = AsmRegs;
 
     [ApiType]
     public readonly struct RegisterList

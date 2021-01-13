@@ -17,6 +17,6 @@ namespace Z0
 
         public ByteSize StackSize;
 
-        public MemoryPageProtection Protection;
+        public PageProtection Protection;
     }
 }

@@ -8,38 +8,38 @@ namespace Z0.Asm
     {
         public readonly struct Byte
         {
-            public SizeQualifierKind Kind => SizeQualifierKind.Byte;
+            public AsmSizeQualifier Kind => AsmSizeQualifier.Byte;
         }
 
         public readonly struct Word
         {
-            public SizeQualifierKind Kind => SizeQualifierKind.Word;
+            public AsmSizeQualifier Kind => AsmSizeQualifier.Word;
         }
 
         public readonly struct DWord
         {
-            public SizeQualifierKind Kind => SizeQualifierKind.DWord;
+            public AsmSizeQualifier Kind => AsmSizeQualifier.DWord;
 
         }
 
         public readonly struct QWord
         {
-            public SizeQualifierKind Kind => SizeQualifierKind.QWord;
+            public AsmSizeQualifier Kind => AsmSizeQualifier.QWord;
         }
 
         public readonly struct XmmWord
         {
-            public SizeQualifierKind Kind => SizeQualifierKind.XmmWord;
+            public AsmSizeQualifier Kind => AsmSizeQualifier.XmmWord;
         }
 
         public readonly struct YmmWord
         {
-            public SizeQualifierKind Kind => SizeQualifierKind.YmmWord;
+            public AsmSizeQualifier Kind => AsmSizeQualifier.YmmWord;
         }
 
         public readonly struct ZmmWord
         {
-            public SizeQualifierKind Kind => SizeQualifierKind.ZmmWord;
+            public AsmSizeQualifier Kind => AsmSizeQualifier.ZmmWord;
         }
     }
 }

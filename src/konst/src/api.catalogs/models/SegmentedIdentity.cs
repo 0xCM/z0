@@ -13,16 +13,12 @@ namespace Z0
     public readonly struct SegmentedIdentity
     {
         [MethodImpl(Inline)]
-        public static SegmentedIdentity define(TypeWidth tw, CellWidth segwidth, NumericKind nk)
-            => new SegmentedIdentity(tw, segwidth, nk);
-
-        [MethodImpl(Inline)]
         public static SegmentedIdentity define(TypeIndicator indicator, TypeWidth w, NumericKind nk)
             => new SegmentedIdentity(indicator, (CellWidth)w, nk);
 
         [MethodImpl(Inline)]
-        public static SegmentedIdentity define(TypeIndicator indicator, CellWidth w, NumericKind nk)
-            => new SegmentedIdentity(indicator, w,nk);
+        public static SegmentedIdentity from(string text)
+            => new SegmentedIdentity(text);
 
         public TypeWidth TypeWidth {get;}
 
@@ -31,33 +27,6 @@ namespace Z0
         public NumericKind SegKind {get;}
 
         public string Identifier {get;}
-
-        [MethodImpl(Inline)]
-        public static SegmentedIdentity from(string text)
-            => new SegmentedIdentity(text);
-
-        [MethodImpl(Inline)]
-        public static implicit operator SegmentedIdentity(NumericKind src)
-            => new SegmentedIdentity(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator string(SegmentedIdentity src)
-            => src.Identifier;
-
-        [MethodImpl(Inline)]
-        public static implicit operator TypeIdentity(SegmentedIdentity src)
-            => src.AsTypeIdentity();
-
-        [MethodImpl(Inline)]
-        public static bool operator==(SegmentedIdentity a, SegmentedIdentity b)
-            => a.Equals(b);
-
-        [MethodImpl(Inline)]
-        public static bool operator!=(SegmentedIdentity a, SegmentedIdentity b)
-            => !a.Equals(b);
-
-        public static implicit operator SegmentedIdentity((TypeIndicator si, CellWidth w, CellWidth t, NumericIndicator i) src)
-            => new SegmentedIdentity(src.si, src.w, ((NumericWidth)src.t).ToNumericKind(src.i));
 
         [MethodImpl(Inline)]
         public SegmentedIdentity(NumericKind nk)
@@ -119,6 +88,29 @@ namespace Z0
 
         public override string ToString()
             => Identifier;
+
+        [MethodImpl(Inline)]
+        public static implicit operator SegmentedIdentity(NumericKind src)
+            => new SegmentedIdentity(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator string(SegmentedIdentity src)
+            => src.Identifier;
+
+        [MethodImpl(Inline)]
+        public static implicit operator TypeIdentity(SegmentedIdentity src)
+            => src.AsTypeIdentity();
+
+        [MethodImpl(Inline)]
+        public static bool operator==(SegmentedIdentity a, SegmentedIdentity b)
+            => a.Equals(b);
+
+        [MethodImpl(Inline)]
+        public static bool operator!=(SegmentedIdentity a, SegmentedIdentity b)
+            => !a.Equals(b);
+
+        public static implicit operator SegmentedIdentity((TypeIndicator si, CellWidth w, CellWidth t, NumericIndicator i) src)
+            => new SegmentedIdentity(src.si, src.w, ((NumericWidth)src.t).ToNumericKind(src.i));
 
         public static SegmentedIdentity Empty
             => new SegmentedIdentity(TypeIndicator.Empty, CellWidth.None, NumericKind.None);

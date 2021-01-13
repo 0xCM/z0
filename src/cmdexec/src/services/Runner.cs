@@ -288,10 +288,10 @@ namespace Z0
 
             var api = Wf.Api;
             var catalogs = api.Catalogs;
-            if(catalogs.Terms.Length == 0)
+            if(catalogs.View.Length == 0)
                 Wf.Warn("No catalogs");
 
-            foreach(var c in catalogs.Terms)
+            foreach(var c in catalogs.View)
                 Wf.Row(Seq.delimit(c.PartId, c.ApiHosts.Count));
         }
     }

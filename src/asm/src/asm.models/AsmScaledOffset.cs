@@ -14,14 +14,14 @@ namespace Z0.Asm
     /// </summary>
     public readonly struct AsmScaledOffset
     {
-        public ulong Base {get;}
+        public MemoryAddress Base {get;}
 
-        public ushort Offset {get;}
+        public Address16 Offset {get;}
 
         public byte Scale {get;}
 
         [MethodImpl(Inline)]
-        public AsmScaledOffset(ulong @base, ushort offset, byte scale)
+        public AsmScaledOffset(MemoryAddress @base, Address16 offset, byte scale)
         {
             Base = @base;
             Offset = offset;

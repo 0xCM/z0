@@ -7,26 +7,24 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
-    partial struct AsmLang
+    public readonly struct RegOp<T> : IAsmOperand<T>
+        where T : unmanaged
     {
-        public readonly struct RegOp<T> : IAsmOperand<T>
-            where T : unmanaged
+        public AsmOperandKind Kind => AsmOperandKind.R;
+
+        public T Content {get;}
+
+        [MethodImpl(Inline)]
+        public RegOp(T src)
         {
-            public AsmOperandKind Kind => AsmOperandKind.R;
-
-            public T Content {get;}
-
-            [MethodImpl(Inline)]
-            public RegOp(T src)
-            {
-                Content = src;
-            }
-
-            [MethodImpl(Inline)]
-            public static implicit operator RegOp<T>(T src)
-                => new RegOp<T>(src);
+            Content = src;
         }
+
+        [MethodImpl(Inline)]
+        public static implicit operator RegOp<T>(T src)
+            => new RegOp<T>(src);
     }
+
 }

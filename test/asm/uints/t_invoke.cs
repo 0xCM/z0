@@ -9,8 +9,6 @@ namespace Z0
 
     using Z0.Asm;
 
-    using static Konst;
-
     using static z;
 
     public class t_invoke : t_asm<t_invoke>

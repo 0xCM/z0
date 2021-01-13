@@ -9,22 +9,20 @@ namespace Z0.Asm
 
     using static Part;
 
-    partial struct AsmLang
+    public readonly struct MemOp<T> : IAsmOperand<T>
+        where T : unmanaged
     {
-        public readonly struct MemOp<T> : IAsmOperand<T>
-            where T : unmanaged
-        {
-            public AsmOperandKind Kind => AsmOperandKind.M;
+        public T Content {get;}
 
-            public T Content {get;}
+        public AsmOperandKind Kind => AsmOperandKind.M;
 
-            [MethodImpl(Inline)]
-            public MemOp(T src)
-                => Content = src;
+        [MethodImpl(Inline)]
+        public MemOp(T src)
+            => Content = src;
 
-            [MethodImpl(Inline)]
-            public static implicit operator MemOp<T>(T src)
-                => new MemOp<T>(src);
-        }
+        [MethodImpl(Inline)]
+        public static implicit operator MemOp<T>(T src)
+            => new MemOp<T>(src);
     }
+
 }

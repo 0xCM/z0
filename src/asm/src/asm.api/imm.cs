@@ -45,7 +45,7 @@ namespace Z0.Asm
         [Op]
         public static AsmImmInfo imminfo(in IceInstruction src, byte index)
         {
-			switch (kind(src,index))
+			switch (opkind(src,index))
             {
                 case Immediate8:
                     return asm.imminfo((byte)src.Immediate8, true);

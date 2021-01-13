@@ -22,7 +22,7 @@ namespace Z0.Asm
         }
 
         [Op]
-        public static AsmMemory memory2(IceInstruction src, byte index)
+        public static AsmMemory memory(IceInstruction src, byte index)
         {
             var dst = new AsmMemory();
             dst.MemoryBase = convert(memBase(src,index), out RegisterKind _);
@@ -39,27 +39,5 @@ namespace Z0.Asm
             return dst;
         }
 
-        /// <summary>
-        /// Extracts memory information, if applicable, from an instruction operand
-        /// </summary>
-        /// <param name="src">The source instruction</param>
-        /// <param name="index">The operand index</param>
-        [MethodImpl(Inline), Op]
-        public static IceInstructionMemoryRecord memory(IceInstruction src, byte index)
-        {
-            var dst = default(IceInstructionMemoryRecord);
-            dst.MemoryBase = memBase(src,index);
-            dst.MemoryIndex = memidx(src,index);
-            dst.MemorySize = memsize(src,index);
-            dst.MemoryIndexScale = memScale(src,index);
-            dst.MemDx = dx(dxvalue(src,index), dxsize(src,index));
-            dst.MemorySegment = memSeg(src,index);
-            dst.SegmentPrefix = segprefix(src,index);
-            dst.IsStackInstruction = src.IsStackInstruction;
-            dst.StackPointerIncrement = src.StackPointerIncrement;
-            dst.IsIPRelativeMemoryOperand = src.IsIPRelativeMemoryOperand;
-            dst.IPRelativeMemoryAddress = src.IPRelativeMemoryAddress;
-            return dst;
-        }
     }
 }

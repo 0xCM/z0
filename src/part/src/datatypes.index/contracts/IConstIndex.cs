@@ -22,16 +22,16 @@ namespace Z0
             => ref skip(View, Length - 1);
 
         ref readonly T this[long index]
-            => ref memory.skip(View, index);
+            => ref skip(View, index);
 
         ref readonly T this[ulong index]
-            => ref memory.skip(View, index);
+            => ref skip(View, index);
 
         ref readonly T Lookup(long index)
-            => ref memory.skip(View,index);
+            => ref skip(View,index);
 
         ref readonly T Lookup(ulong index)
-            => ref memory.skip(View,index);
+            => ref skip(View,index);
 
         int IMeasured.Length
             => View.Length;

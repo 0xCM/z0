@@ -22,7 +22,7 @@ namespace Z0.Asm
         {
             var dst = new IceOperandInfo();
             dst.Index = index;
-            dst.Kind = kind(fx, index);
+            dst.Kind = opkind(fx, index);
             dst.Branch = AsmTest.isBranch(dst.Kind) ? branch(@base, fx, branch(fx,index)) : default;
             return dst;
         }

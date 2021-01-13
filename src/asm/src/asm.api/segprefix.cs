@@ -15,7 +15,7 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public static IceRegister segprefix(IceInstruction src, int index)
         {
-            switch(kind(src,(byte)index))
+            switch(opkind(src,(byte)index))
             {
                 case Memory:
                 case Memory64:

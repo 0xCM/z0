@@ -11,9 +11,22 @@ namespace Z0.Asm
 
     partial struct asm
     {
-
+        /// <summary>
+        /// Computes the call-site offset relative to the base address of the client
+        /// </summary>
+        /// <param name="src">The invocation</param>
         [MethodImpl(Inline), Op]
-        public static AsmScaledOffset offset(ulong @base, ushort offset, byte scale)
+        public static MemoryAddress offset(in AsmCall src)
+            => src.Client.Base + src.CallSite;
+
+        /// <summary>
+        /// Defines a <see cref='AsmScaledOffset'/>
+        /// </summary>
+        /// <param name="base">The base address</param>
+        /// <param name="offset"></param>
+        /// <param name="scale"></param>
+        [MethodImpl(Inline), Op]
+        public static AsmScaledOffset offset(MemoryAddress @base, Address16 offset, byte scale)
             => new AsmScaledOffset(@base, offset, scale);
 
         /// <summary>

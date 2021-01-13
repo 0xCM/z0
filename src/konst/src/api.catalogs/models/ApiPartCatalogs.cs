@@ -23,26 +23,14 @@ namespace Z0
             get => Data.Storage;
         }
 
-        public ReadOnlySpan<IApiPartCatalog> Terms
-        {
-            [MethodImpl(Inline)]
-            get => Data.Terms;
-        }
-
         public ReadOnlySpan<IApiPartCatalog> View
         {
             [MethodImpl(Inline)]
             get => Data.Storage;
         }
 
-        public Type[] EnumTypes
-        {
-            [MethodImpl(Inline)]
-            get => Data.Storage.SelectMany(x => x.Owner.Enums());
-        }
-
         public string Format()
-            => Seq.format(Storage);
+            => Data.Format();
 
         public override string ToString()
             => Format();

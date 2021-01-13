@@ -21,7 +21,7 @@ namespace Z0
             dst.BaseAddress = src.BaseAddress;
             dst.RegionSize = src.RegionSize;
             dst.StackSize = (ulong)(dst.BaseAddress - dst.AllocationBase) + dst.RegionSize;
-            dst.Protection = (MemoryPageProtection)src.AllocationProtect;
+            dst.Protection = (PageProtection)src.AllocationProtect;
             return dst;
         }
 

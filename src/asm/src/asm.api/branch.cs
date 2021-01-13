@@ -26,7 +26,7 @@ namespace Z0.Asm
         [Op]
         public static AsmBranchTarget branch(in IceInstruction src, byte index)
         {
-            var k = asm.kind(src, index);
+            var k = asm.opkind(src, index);
             switch(k)
             {
                 case NearBranch16:

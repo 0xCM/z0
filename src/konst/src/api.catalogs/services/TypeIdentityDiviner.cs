@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Linq;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     readonly struct TypeIdentityDiviner : ITypeIdentityDiviner
@@ -78,8 +78,8 @@ namespace Z0
                 let nk = arg.NumericKind()
                 where  nk != 0
                 let nki = nk.Indicator().Format()
-                let identifer = text.concat(i, segFmt, IDI.SegSep,argFmt, nki)
-                select SegmentedIdentity.define(i,segwidth,nk).AsTypeIdentity();
+                let identifer = text.concat(i, segFmt, IDI.SegSep, argFmt, nki)
+                select SegmentedIdentity.define(i, segwidth, nk).AsTypeIdentity();
 
         static Option<TypeIdentity> NatId(Type arg)
             => from v in arg.NatValue()

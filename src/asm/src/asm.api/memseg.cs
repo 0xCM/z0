@@ -17,7 +17,7 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public static IceRegister memSeg(in IceInstruction src, byte index)
         {
-            switch(kind(src,index))
+            switch(opkind(src,index))
             {
                 case Memory:
                 case Memory64:

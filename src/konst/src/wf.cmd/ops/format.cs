@@ -238,7 +238,7 @@ namespace Z0
         public static void render(CmdTypeInfo src, ITextBuffer dst)
         {
             dst.Append(src.DataType.Name);
-            var fields = src.Fields.Terms;;
+            var fields = src.Fields.View;;
             var count = fields.Length;
             for(var i=0; i<count; i++)
             {
@@ -246,6 +246,5 @@ namespace Z0
                 dst.Append(string.Format(" | {0}:{1}", field.Name, field.FieldType.Name));
             }
         }
-
     }
 }

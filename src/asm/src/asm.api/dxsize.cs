@@ -14,6 +14,6 @@ namespace Z0.Asm
     {
         [MethodImpl(Inline), Op]
         public static AsmDisplacementSize dxsize(in IceInstruction src, byte index)
-            => kind(src,index) == Memory ? (AsmDisplacementSize)src.MemoryDisplSize : 0;
+            => opkind(src,index) == Memory ? (AsmDisplacementSize)src.MemoryDisplSize : 0;
     }
 }

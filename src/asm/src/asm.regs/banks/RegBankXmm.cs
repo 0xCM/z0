@@ -10,7 +10,7 @@ namespace Z0.Asm
     using static Konst;
     using static z;
 
-    using static XRegisters;
+    using static AsmRegs;
 
     public unsafe readonly ref struct RegBankXmm
     {

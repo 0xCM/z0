@@ -11,7 +11,7 @@ namespace Z0.Asm
 
     using K = RegisterKind;
 
-    partial struct XRegisters
+    partial struct AsmRegs
     {
 
         public readonly struct ymm0 : IRegister<ymm0,W256,Cell256>
