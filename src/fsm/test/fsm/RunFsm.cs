@@ -9,8 +9,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Threading.Tasks;
 
-    using static Konst;
-    using static z;
+    using static Part;
     using static Fsm1Spec.StateKinds;
 
     public ref struct RunFsm

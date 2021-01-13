@@ -10,7 +10,7 @@ namespace Z0
 
     using Asm;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     /// <summary>

@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static FS;
+    using static Part;
 
     public readonly struct WfFunc<C,R> : IWfFunc<C>
         where C : IWfStep<C>, new()

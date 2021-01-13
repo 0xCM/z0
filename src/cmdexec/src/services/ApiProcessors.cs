@@ -86,8 +86,8 @@ namespace Z0
         {
             try
             {
-                var processor = new AsmDataEmitter(Wf, Asm, Index);
-                var result = processor.Emit();
+                var emitter = new AsmDataEmitter(Wf, Asm, Index);
+                var result = emitter.Emit();
                 var records = 0u;
 
                 Wf.Processed(Seq.delimit(nameof(AsmRow), Index.Hosts.Length, result.Count));

@@ -5,15 +5,14 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
-    using System.Runtime.Intrinsics;    
+    using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
 
     using static System.Runtime.Intrinsics.X86.Avx;
     using static System.Runtime.Intrinsics.X86.Avx2;
     using static System.Runtime.Intrinsics.X86.Sse;
     using static System.Runtime.Intrinsics.X86.Sse2;
-
-    using static Konst;
+    using static Part;
 
     partial class dinxfp
     {
@@ -57,6 +56,6 @@ namespace Z0
             row1 = Shuffle(tmp0,tmp1, 0xDD);
             row2 = Shuffle(tmp2,tmp3, 0x88);
             row3 = Shuffle(tmp2, tmp3, 0xDD);
-        }    
+        }
     }
 }

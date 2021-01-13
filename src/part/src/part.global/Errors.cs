@@ -14,7 +14,6 @@ namespace Z0
 
     partial struct Part
     {
-
         [Op]
         public static void @throw(Exception e)
             => throw e;

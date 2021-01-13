@@ -10,8 +10,7 @@ namespace Z0
 
     using static System.Runtime.Intrinsics.X86.Avx;
     using static System.Runtime.Intrinsics.X86.Avx2;
-
-    using static Konst;
+    using static Part;
     using static z;
 
     partial class dinxfp
@@ -22,7 +21,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<float> vhi(Vector128<float> src)
-            =>  v32f(vscalar(v64i(src).GetElement(1)));
+            => v32f(vscalar(v64i(src).GetElement(1)));
 
         /// <summary>
         /// Creates a scalar vector from the upper 64 bits of the source vector
@@ -30,7 +29,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<double> vhi(Vector128<double> src)
-            =>  vscalar(src.GetElement(1));
+            => vscalar(src.GetElement(1));
 
         [MethodImpl(Inline), Op]
         public static Vector128<float> vhi(Vector256<float> src)

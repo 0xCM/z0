@@ -12,7 +12,7 @@ namespace Z0
     using System.Threading;
     using System.Threading.Tasks;
 
-    using static Konst;
+    using static Part;
 
     [ApiHost]
     public readonly struct Fsm

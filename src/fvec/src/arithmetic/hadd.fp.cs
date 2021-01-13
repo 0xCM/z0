@@ -5,14 +5,13 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    
+
     using static System.Runtime.Intrinsics.X86.Avx;
     using static System.Runtime.Intrinsics.X86.Sse3;
     using static System.Runtime.Intrinsics.X86.Ssse3;
-    
-    using static Konst;
+    using static Part;
 
     partial class dinxfp
     {
@@ -50,6 +49,6 @@ namespace Z0
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<double> vhadd(Vector256<double> x, Vector256<double> y)
-            => HorizontalAdd(x, y); 
+            => HorizontalAdd(x, y);
     }
 }

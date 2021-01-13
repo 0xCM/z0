@@ -5,16 +5,15 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
-    
+
     using static System.Runtime.Intrinsics.X86.Sse;
     using static System.Runtime.Intrinsics.X86.Sse2;
     using static System.Runtime.Intrinsics.X86.Avx;
     using static System.Runtime.Intrinsics.X86.Avx2;
-    
-    using static Konst;
+    using static Part;
 
     partial class dinxfp
     {
@@ -26,7 +25,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector128<float> vgt(Vector128<float> x, Vector128<float> y)
             => CompareGreaterThan(x, y);
-        
+
         /// <summary>
         /// __m128d _mm_cmpgt_pd (__m128d a, __m128d b) CMPPD xmm, xmm/m128, imm8(6)
         /// </summary>
@@ -53,7 +52,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector256<double> vgt(Vector256<double> x, Vector256<double> y)
             => Compare(x, y, FloatComparisonMode.OrderedGreaterThanNonSignaling);
- 
+
         /// <summary>
         /// __m128 _mm_cmpge_ps (__m128 a, __m128 b) CMPPS xmm, xmm/m128, imm8(5)
         /// </summary>
@@ -62,7 +61,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector128<float> vgteq(Vector128<float> x, Vector128<float> y)
             => CompareGreaterThanOrEqual(x, y);
-        
+
         /// <summary>
         /// __m128d _mm_cmpge_pd (__m128d a, __m128d b) CMPPD xmm, xmm/m128, imm8(5)
         /// </summary>

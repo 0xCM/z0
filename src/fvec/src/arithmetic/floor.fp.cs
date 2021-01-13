@@ -5,14 +5,13 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    using System.Runtime.Intrinsics.X86;
 
     using static System.Runtime.Intrinsics.X86.Sse41;
     using static System.Runtime.Intrinsics.X86.Avx;
-    
-    using static Konst;
+
+    using static Part;
 
     partial class dinxfp
     {
@@ -31,7 +30,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector128<double> vfloor(Vector128<double> x)
             => Floor(x);
-        
+
         /// <summary>
         /// __m256 _mm256_floor_ps (__m256 a) VROUNDPS ymm, ymm/m256, imm8(9)
         /// </summary>

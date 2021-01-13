@@ -20,7 +20,6 @@ namespace Z0
         /// <param name="fId">The identity of the first operator</param>
         /// <param name="g">The second operator</param>
         /// <param name="gId">The identity of the second operator</param>
-        [MethodImpl(Inline)]
         TestCaseRecord Match(BinaryOp8 f, OpIdentity fId, BinaryOp8 g, OpIdentity gId)
             => Test.Check(Random).Match(f, fId, g, gId);
 
@@ -31,7 +30,6 @@ namespace Z0
         /// <param name="fId">The identity of the first operator</param>
         /// <param name="g">The second operator</param>
         /// <param name="gId">The identity of the second operator</param>
-        [MethodImpl(Inline)]
         TestCaseRecord Match(BinaryOp16 f, OpIdentity fId, BinaryOp16 g, OpIdentity gId)
             => Test.Check(Random).Match(f, fId, g, gId);
 
@@ -42,7 +40,6 @@ namespace Z0
         /// <param name="fId">The identity of the first operator</param>
         /// <param name="g">The second operator</param>
         /// <param name="gId">The identity of the second operator</param>
-        [MethodImpl(Inline)]
         TestCaseRecord Match(BinaryOp32 f, OpIdentity fId, BinaryOp32 g, OpIdentity gId)
             => Test.Check(Random).Match(f, fId, g, gId);
 
@@ -53,7 +50,6 @@ namespace Z0
         /// <param name="fId">The identity of the first operator</param>
         /// <param name="g">The second operator</param>
         /// <param name="gId">The identity of the second operator</param>
-        [MethodImpl(Inline)]
         TestCaseRecord Match(BinaryOp64 f, OpIdentity fId, BinaryOp64 g, OpIdentity gId)
             => Test.Check(Random).Match(f, fId, g, gId);
 
@@ -64,7 +60,6 @@ namespace Z0
         /// <param name="fId">The identity of the first operator</param>
         /// <param name="g">The second operator</param>
         /// <param name="gId">The identity of the second operator</param>
-        [MethodImpl(Inline)]
         TestCaseRecord Match(BinaryOp128 f, OpIdentity fId, BinaryOp128 g, OpIdentity gId)
             => Test.Check(Random).Match(f, fId, g, gId);
 
@@ -75,7 +70,6 @@ namespace Z0
         /// <param name="fId">The identity of the first operator</param>
         /// <param name="g">The second operator</param>
         /// <param name="gId">The identity of the second operator</param>
-        [MethodImpl(Inline)]
         TestCaseRecord Match(BinaryOp256 f, OpIdentity fId, BinaryOp256 g, OpIdentity gId)
             => Test.Check(Random).Match(f, fId, g, gId);
     }

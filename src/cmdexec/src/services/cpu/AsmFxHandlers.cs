@@ -9,7 +9,7 @@ namespace Z0.Asm
     using System.Linq;
     using System.Collections.Generic;
 
-    using static Konst;
+    using static Part;
 
     public class AsmFxHandlers
     {

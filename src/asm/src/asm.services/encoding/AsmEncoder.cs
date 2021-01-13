@@ -8,7 +8,7 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics.X86;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     [ApiHost]
@@ -17,14 +17,6 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public static RexPrefixBits rex(byte src)
             => RexPrefixBits.define(src);
-
-        /// <summary>
-        /// Computes the length, in bytes, of the encoded content
-        /// </summary>
-        /// <param name="src">The command source</param>
-        [MethodImpl(Inline), Op]
-        public static byte size(in EncodedInstruction src)
-            => src.Size;
 
         [Op]
         public static string format(in ModRmEncoding src)
@@ -50,17 +42,5 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         static byte effsize(ulong src)
             => math.sub(math.log2((byte)hipos(src)), One8u);
-
-        [MethodImpl(Inline), Op]
-        public static EncodedInstruction encode(ulong src)
-            => new EncodedInstruction(src.Bytes());
-
-        /// <summary>
-        /// Creates a command from the data supplied in a 64-bit unsigned integer
-        /// </summary>
-        /// <param name="lo32">The data source</param>
-        [MethodImpl(Inline), Op]
-        public static EncodedInstruction encode(uint src)
-            => new EncodedInstruction(src.Bytes());
     }
 }

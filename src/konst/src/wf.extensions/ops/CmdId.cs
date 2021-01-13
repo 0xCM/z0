@@ -8,9 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
 
-    using static Konst;
-    using static z;
-
     partial class XWf
     {
         public static CmdId CmdId<T>(this T spec)

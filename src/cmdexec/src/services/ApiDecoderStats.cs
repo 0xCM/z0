@@ -19,7 +19,6 @@ namespace Z0
         public uint PartCount;
 
         public uint InstructionCount;
-
         public string Format()
             => text.format(WfProgress.DecodingMachine, PartCount, HostCount, MemberCount, InstructionCount);
     }

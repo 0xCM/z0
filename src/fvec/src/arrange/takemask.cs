@@ -5,20 +5,18 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    using System.Runtime.Intrinsics.X86;
 
     using static System.Runtime.Intrinsics.X86.Sse;
     using static System.Runtime.Intrinsics.X86.Sse2;
-    using static System.Runtime.Intrinsics.X86.Sse41;
     using static System.Runtime.Intrinsics.X86.Avx;
     using static System.Runtime.Intrinsics.X86.Avx2;
 
-    using static Konst;
+    using static Part;
 
     partial class dinxfp
-    {        
+    {
         /// <summary>
         /// int _mm_movemask_ps (__m128 a) MOVMSKPS reg, xmm<
         /// Constructs an integer from the most significant bit of each source vector component

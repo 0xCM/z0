@@ -69,6 +69,8 @@ namespace Z0
         /// </summary>
         public const NK Integers = NK.Integers;
 
+        public const NK Floats = NK.Floats;
+
         public const NK AllNumeric = NK.All;
 
         /// <summary>

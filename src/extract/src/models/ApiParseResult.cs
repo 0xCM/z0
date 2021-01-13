@@ -6,7 +6,7 @@ namespace Z0.Asm
 {
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     public readonly struct ApiParseResult
     {

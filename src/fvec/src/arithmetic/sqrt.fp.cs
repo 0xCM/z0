@@ -5,14 +5,13 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
-    using System.Runtime.Intrinsics;    
+    using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
 
     using static System.Runtime.Intrinsics.X86.Sse;
     using static System.Runtime.Intrinsics.X86.Sse2;
     using static System.Runtime.Intrinsics.X86.Avx;
-    
-    using static Konst;
+    using static Part;
 
     partial class dinxfp
     {
@@ -31,7 +30,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector128<double> sqrt(Vector128<double> src)
             => Sqrt(src);
- 
+
         /// <summary>
         /// __m256 _mm256_sqrt_ps (__m256 a) VSQRTPS ymm, ymm/m256
         /// </summary>
@@ -47,13 +46,13 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector256<double> sqrt(Vector256<double> src)
             => Sqrt(src);
- 
+
         /// <summary>
         /// __m128 _mm_rsqrt_ps (__m128 a) RSQRTPS xmm, xmm/m128
         /// </summary>
         /// <param name="src"></param>
         [MethodImpl(Inline), Op]
         public static Vector128<float> rsqrt(Vector128<float> src)
-            => ReciprocalSqrt(src);         
+            => ReciprocalSqrt(src);
     }
 }

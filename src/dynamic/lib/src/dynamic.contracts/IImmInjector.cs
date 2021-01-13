@@ -6,9 +6,6 @@ namespace Z0
 {
     using System;
     using System.Reflection;
-    using System.Runtime.CompilerServices;
-
-    using static Konst;
 
     public interface IImmInjector
     {
@@ -20,7 +17,6 @@ namespace Z0
     {
         DynamicDelegate<D> EmbedImmediate(MethodInfo src, byte imm);
 
-        [MethodImpl(Inline)]
         DynamicDelegate IImmInjector.Inject(MethodInfo src, byte imm)
             => EmbedImmediate(src, imm).Untyped;
     }

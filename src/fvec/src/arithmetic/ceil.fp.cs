@@ -5,18 +5,18 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
-    using System.Runtime.Intrinsics;    
+    using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
 
     using static System.Runtime.Intrinsics.X86.Sse41;
     using static System.Runtime.Intrinsics.X86.Avx;
-    
-    using static Konst;
+
+    using static Part;
 
     partial class dinxfp
     {
         /// <summary>
-        /// __m128d _mm_ceil_sd (__m128d a) ROUNDSD xmm, xmm/m128, imm8(10) 
+        /// __m128d _mm_ceil_sd (__m128d a) ROUNDSD xmm, xmm/m128, imm8(10)
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
@@ -45,7 +45,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<double> ceil(Vector256<double> src)
-            => Ceiling(src); 
+            => Ceiling(src);
     }
 
 }

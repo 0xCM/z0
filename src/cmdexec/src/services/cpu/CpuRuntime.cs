@@ -62,19 +62,6 @@ namespace Z0
         }
 
 
-        [Op, MethodImpl]
-        void Run(EncodedInstruction src)
-        {
-            var bytes = src.Data;
-            var buffer = Buffers.Step();
-            var count = Digital.codes(bytes, UpperCased.Case, buffer);
-            var codes = buffer.Slice(0, count);
-            Run(codes);
-            codes.CopyTo(Buffers.Run(), ProcessedCount);
-            ProcessedCount += count;
-        }
-
-
         int Run(ReadOnlySpan<HexCode> src)
         {
 

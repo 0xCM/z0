@@ -9,7 +9,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static ObserverTrace;
 
     public static class FsmX

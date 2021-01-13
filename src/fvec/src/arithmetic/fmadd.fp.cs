@@ -5,12 +5,11 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    using System.Runtime.Intrinsics.X86;
-    using static System.Runtime.Intrinsics.X86.Fma;        
-    
-    using static Konst;
+    using static System.Runtime.Intrinsics.X86.Fma;
+
+    using static Part;
 
     partial class dinxfp
     {
@@ -24,7 +23,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector128<float> fmadd(Vector128<float> x, Vector128<float> y, Vector128<float> z)
             => MultiplyAdd(x, y, z);
-                    
+
         /// <summary>
         /// dst = x*y + z
         ///  __m128d _mm_fmadd_pd (__m128d a, __m128d b, __m128d c) VFMADDPD xmm, xmm, xmm/m128

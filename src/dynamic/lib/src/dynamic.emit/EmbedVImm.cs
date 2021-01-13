@@ -8,8 +8,6 @@ namespace Z0
     using System.Reflection;
     using System.Runtime.Intrinsics;
 
-    using static Konst; 
-
     partial class Dynop
     {
         public static DynamicDelegate<BinaryOp<Vector128<T>>> EmbedVBinaryOpImm<T>(Vec128Kind<T> k, OpIdentity id, MethodInfo src, byte imm8)
@@ -18,7 +16,7 @@ namespace Z0
             var wrapped = src.Reify(typeof(T));
             var idTarget = id.WithImm8(imm8);
             var tOperand = typeof(Vector128<T>);
-            var target = DynamicSignature(wrapped.Name, wrapped.DeclaringType, tOperand, tOperand, tOperand);            
+            var target = DynamicSignature(wrapped.Name, wrapped.DeclaringType, tOperand, tOperand, tOperand);
             target.GetILGenerator().EmitImmBinaryCall(wrapped,imm8);
             return Delegates.dynamic<BinaryOp<Vector128<T>>>(idTarget, wrapped, target);
         }
@@ -28,8 +26,8 @@ namespace Z0
         {
             var wrapped = src.Reify(typeof(T));
             var idTarget = id.WithImm8(imm8);
-            var tOperand = typeof(Vector256<T>);  
-            var target = DynamicSignature(wrapped.Name, wrapped.DeclaringType, tOperand, tOperand, tOperand);            
+            var tOperand = typeof(Vector256<T>);
+            var target = DynamicSignature(wrapped.Name, wrapped.DeclaringType, tOperand, tOperand, tOperand);
             target.GetILGenerator().EmitImmBinaryCall(wrapped,imm8);
             return Delegates.dynamic<BinaryOp<Vector256<T>>>(idTarget, wrapped, target);
         }
@@ -39,8 +37,8 @@ namespace Z0
         {
             var wrapped = src.Reify(typeof(T));
             var idTarget = id.WithImm8(imm8);
-            var tOperand = typeof(Vector128<T>); 
-            var target = DynamicSignature(wrapped.Name, wrapped.DeclaringType, tOperand, tOperand);            
+            var tOperand = typeof(Vector128<T>);
+            var target = DynamicSignature(wrapped.Name, wrapped.DeclaringType, tOperand, tOperand);
             target.GetILGenerator().EmitImmUnaryCall(wrapped, imm8);
             return Delegates.dynamic<UnaryOp<Vector128<T>>>(idTarget, wrapped, target);
         }
@@ -50,8 +48,8 @@ namespace Z0
         {
             var wrapped = src.Reify(typeof(T));
             var idTarget = id.WithImm8(imm8);
-            var tOperand = typeof(Vector256<T>);                        
-            var target = DynamicSignature(wrapped.Name, wrapped.DeclaringType, tOperand, tOperand);            
+            var tOperand = typeof(Vector256<T>);
+            var target = DynamicSignature(wrapped.Name, wrapped.DeclaringType, tOperand, tOperand);
             target.GetILGenerator().EmitImmUnaryCall(wrapped, imm8);
             return Delegates.dynamic<UnaryOp<Vector256<T>>>(idTarget, wrapped, target);
         }

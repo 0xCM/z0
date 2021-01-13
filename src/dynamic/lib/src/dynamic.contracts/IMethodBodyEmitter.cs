@@ -6,9 +6,6 @@ namespace Z0
 {
     using System.Reflection.Emit;
 
-    using static Konst;
-    using static z;
-
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]

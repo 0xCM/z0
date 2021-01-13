@@ -11,7 +11,7 @@ namespace Z0
 
     using static System.Reflection.TypeAttributes;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     using static GenSpecs;
@@ -62,7 +62,7 @@ namespace Z0
                 = Default | SequentialLayout;
 
             [MethodImpl(Inline),Op]
-            public  CliBuilder(uint capacity)
+            public CliBuilder(uint capacity)
             {
                 Index = 0;
                 Fields = span<FieldSpec>(capacity);

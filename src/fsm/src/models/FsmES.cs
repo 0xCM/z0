@@ -8,8 +8,6 @@ namespace Z0
     using System.Collections.Generic;
     using System.Diagnostics;
 
-    using static z;
-
     /// <summary>
     /// Defines a state machine with minimal feature-set
     /// </summary>
@@ -104,7 +102,7 @@ namespace Z0
             CurrentState = ground;
             Random = Wf.PolyStream;
             EndState = end;
-            Error = none<Exception>();
+            Error = root.none<Exception>();
             Transition = transition;
             ReceiptCount = 0;
             TransitionCount = 0;
@@ -118,7 +116,7 @@ namespace Z0
             CurrentState = ground;
             EndState = end;
             Random = context.Random;
-            Error = none<Exception>();
+            Error = root.none<Exception>();
             Transition = transition;
             ReceiptCount = 0;
             TransitionCount = 0;

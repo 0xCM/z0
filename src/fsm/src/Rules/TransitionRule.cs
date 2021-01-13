@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Defines state transition rule of the form (input : E, source : S) -> target : S
@@ -16,15 +16,6 @@ namespace Z0
     /// <typeparam name="S">The state type</typeparam>
     public readonly struct TransitionRule<E,S> : ITransitionRule<E,S>
     {
-        [MethodImpl(Inline)]
-        public TransitionRule(E trigger, S source, S target)
-        {
-            Trigger = trigger;
-            Source = source;
-            Target = target;
-            Key = Fsm.transitionKey(Trigger,Source);
-        }
-
         /// <summary>
         /// The transition event trigger
         /// </summary>
@@ -44,6 +35,15 @@ namespace Z0
         /// The key that identifies the rule
         /// </summary>
         public IRuleKey<E,S> Key {get;}
+
+        [MethodImpl(Inline)]
+        public TransitionRule(E trigger, S source, S target)
+        {
+            Trigger = trigger;
+            Source = source;
+            Target = target;
+            Key = Fsm.transitionKey(Trigger,Source);
+        }
 
         /// <summary>
         /// The rule id as determined by the key

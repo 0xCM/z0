@@ -8,9 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
 
-    using API = Permute;
+    using api = Permute;
 
     partial class XTend
     {
@@ -19,21 +18,21 @@ namespace Z0
         /// </summary>
         /// <param name="src">The literal definition</param>
         public static string Format(this Perm4L src)
-            => API.symbols(src).ToString();
+            => api.symbols(src).ToString();
 
         /// <summary>
         /// Formats a permutation literal as one would hope
         /// </summary>
         /// <param name="src">The literal definition</param>
         public static string Format(this Perm8L src)
-            => API.symbols(src).ToString();
+            => api.symbols(src).ToString();
 
         /// <summary>
         /// Formats a permutation literal as one would hope
         /// </summary>
         /// <param name="src">The literal definition</param>
         public static string Format(this Perm16L src)
-            => API.symbols(src).ToString();
+            => api.symbols(src).ToString();
 
         public static string FormatBlock(this Perm4L src, bool bracketed = true)
         {

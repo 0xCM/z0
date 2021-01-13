@@ -50,7 +50,6 @@ namespace Z0
             Args = wf.Args;
         }
 
-
         static void Run32(IWfShell wf)
         {
             var llvm = Llvm.service(wf);

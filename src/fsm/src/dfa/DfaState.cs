@@ -7,13 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
-    public interface IDfaState<S>
-        where S : IEquatable<S>
-    {
-        S Value {get;}
-    }
 
     public readonly struct DfaState<S> : IDfaState<S>
         where S : IEquatable<S>

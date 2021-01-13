@@ -5,14 +5,13 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    using System.Runtime.Intrinsics.X86;
 
-    using static System.Runtime.Intrinsics.X86.Sse41;    
-    using static System.Runtime.Intrinsics.X86.Avx;    
-    
-    using static Konst;
+    using static System.Runtime.Intrinsics.X86.Sse41;
+    using static System.Runtime.Intrinsics.X86.Avx;
+
+    using static Part;
 
     partial class dinxfp
     {
@@ -24,7 +23,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector128<float> vdot(Vector128<float> x, Vector128<float> y, byte? control = null)
             => DotProduct(x, y, control ?? 0xFF);
-        
+
         /// <summary>
         /// __m128d _mm_dp_pd (__m128d a, __m128d b, const int imm8) DPPD xmm, xmm/m128, imm8
         /// </summary>

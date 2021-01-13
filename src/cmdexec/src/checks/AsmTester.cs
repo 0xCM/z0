@@ -7,7 +7,7 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static BufferSeqId;
 
     public readonly struct AsmTester : IAsmChecker

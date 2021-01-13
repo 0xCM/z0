@@ -9,16 +9,10 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
 
-    using static System.Runtime.Intrinsics.X86.Avx;
     using static System.Runtime.Intrinsics.X86.Sse;
     using static System.Runtime.Intrinsics.X86.Sse2;
-    using static System.Runtime.Intrinsics.X86.Sse2.X64;
-    using static System.Runtime.Intrinsics.X86.Sse41;
     using static System.Runtime.Intrinsics.X86.Fma;
-    using static System.Runtime.Intrinsics.X86.Sse.X64;
-
-    using static Konst;
-    using static z;
+    using static Part;
 
     /// <summary>
     /// Direct floating-point scalar intrinsics
@@ -26,7 +20,6 @@ namespace Z0
     [ApiHost]
     public static class dinxsfp
     {
-
         /// <summary>
         /// __m128 _mm_fmadd_ss (__m128 a, __m128 b, __m128 c) VFMADDSS xmm, xmm, xmm/m32
         /// </summary>

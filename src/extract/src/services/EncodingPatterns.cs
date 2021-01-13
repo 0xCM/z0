@@ -9,8 +9,7 @@ namespace Z0
 
     using Asm;
 
-    using static Konst;
-
+    using static Part;
     using static EncodingPatternKind;
     using static EncodingPatternTokens;
 

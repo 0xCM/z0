@@ -9,7 +9,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     /// <summary>
@@ -23,55 +23,6 @@ namespace Z0
         /// Defines the permutation (0 -> terms[0], 1 -> terms[1], ..., n - 1 -> terms[n-1]) where n is the length of the array
         /// </summary>
         readonly Span<T> terms;
-
-        /// <summary>
-        /// Defines an untyped permutation determined by values in a source span
-        /// </summary>
-        /// <param name="src">The source span</param>
-        [MethodImpl(Inline)]
-        public static Perm<T> From(ReadOnlySpan<T> src)
-            => new Perm<T>(src.ToArray());
-
-        [MethodImpl(Inline)]
-        public static implicit operator Perm<T>(Span<T> src)
-            => From(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator Perm<T>(ReadOnlySpan<T> src)
-            => From(src);
-
-        /// <summary>
-        /// Implicitly converts an integral value n into an identity permutation of length n
-        /// </summary>
-        /// <param name="n">The permutation length</param>
-        [MethodImpl(Inline)]
-        public static implicit operator Perm<T>(T n)
-            => Perm.Identity(n);
-
-        /// <summary>
-        /// Computes the composition h of f and g where f and g have common length n and h(i) = g(f(i)) for i = 0, ... n-1
-        /// </summary>
-        /// <param name="f">The left permutation</param>
-        /// <param name="g">The right permutation</param>
-        [MethodImpl(Inline)]
-        public static Perm<T> operator *(in Perm<T> f, in Perm<T> g)
-            => f.Compose(g);
-
-        [MethodImpl(Inline)]
-        public static Perm<T> operator ++(in Perm<T> lhs)
-            => lhs.Inc();
-
-        [MethodImpl(Inline)]
-        public static Perm<T> operator --(in Perm<T> lhs)
-            => lhs.Dec();
-
-        [MethodImpl(Inline)]
-        public static bool operator ==(in Perm<T> lhs, in Perm<T> rhs)
-            => lhs.Equals(rhs);
-
-        [MethodImpl(Inline)]
-        public static bool operator !=(in Perm<T> lhs, in Perm<T> rhs)
-            => !(lhs == rhs);
 
         /// <summary>
         /// Initializes permutation with the identity followed by a sequence of transpostions
@@ -130,6 +81,55 @@ namespace Z0
             for(var i=m; i< count; i++)
                 terms[i] = identity[i - m];
         }
+
+        /// <summary>
+        /// Defines an untyped permutation determined by values in a source span
+        /// </summary>
+        /// <param name="src">The source span</param>
+        [MethodImpl(Inline)]
+        public static Perm<T> From(ReadOnlySpan<T> src)
+            => new Perm<T>(src.ToArray());
+
+        [MethodImpl(Inline)]
+        public static implicit operator Perm<T>(Span<T> src)
+            => From(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Perm<T>(ReadOnlySpan<T> src)
+            => From(src);
+
+        /// <summary>
+        /// Implicitly converts an integral value n into an identity permutation of length n
+        /// </summary>
+        /// <param name="n">The permutation length</param>
+        [MethodImpl(Inline)]
+        public static implicit operator Perm<T>(T n)
+            => Perm.Identity(n);
+
+        /// <summary>
+        /// Computes the composition h of f and g where f and g have common length n and h(i) = g(f(i)) for i = 0, ... n-1
+        /// </summary>
+        /// <param name="f">The left permutation</param>
+        /// <param name="g">The right permutation</param>
+        [MethodImpl(Inline)]
+        public static Perm<T> operator *(in Perm<T> f, in Perm<T> g)
+            => f.Compose(g);
+
+        [MethodImpl(Inline)]
+        public static Perm<T> operator ++(in Perm<T> lhs)
+            => lhs.Inc();
+
+        [MethodImpl(Inline)]
+        public static Perm<T> operator --(in Perm<T> lhs)
+            => lhs.Dec();
+
+        [MethodImpl(Inline)]
+        public static bool operator ==(in Perm<T> lhs, in Perm<T> rhs)
+            => lhs.Equals(rhs);
+
+        [MethodImpl(Inline)]
+        public static bool operator !=(in Perm<T> lhs, in Perm<T> rhs)
+            => !(lhs == rhs);
 
         ref T Head
         {

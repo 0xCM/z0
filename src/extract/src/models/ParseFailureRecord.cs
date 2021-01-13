@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Linq;
 
-    using static Konst;
+    using static Part;
 
     using F = ParseFailureField;
     using R = ParseFailureRecord;
