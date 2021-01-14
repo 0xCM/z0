@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     public readonly struct AppMsgData<T> : ITextual
     {
@@ -54,11 +54,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.format(Pattern, Content);
+            => string.Format(Pattern, Content);
 
         [MethodImpl(Inline)]
         public AppMsgData<S> Cast<S>()
-            => new AppMsgData<S>(z.@as<T,S>(Content), Pattern, Kind, Flair, Origin);
+            => new AppMsgData<S>(memory.@as<T,S>(Content), Pattern, Kind, Flair, Origin);
 
 
         [MethodImpl(Inline)]

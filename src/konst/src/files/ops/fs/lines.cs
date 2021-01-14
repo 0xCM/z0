@@ -16,7 +16,7 @@ namespace Z0
         /// Reads the line-partitioned content of a text file
         /// </summary>
         /// <param name="src">The file path</param>
-        public static string[] lines(FilePath src)
+        public static Index<string> lines(FilePath src)
             => src.Exists ? File.ReadAllLines(src.Name) : sys.empty<string>();
     }
 }

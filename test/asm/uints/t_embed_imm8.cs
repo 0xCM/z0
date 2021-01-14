@@ -156,7 +156,7 @@ namespace Z0.Asm
             var x = Random.CpuVector<ushort>(w);
             var y = Random.CpuVector<ushort>(w);
             var f = injector.EmbedImmediate(src,imm);
-            var v1 = f.DynamicOp.Invoke(x,y);
+            var v1 = f.Operation.Invoke(x,y);
             var captured = AsmCheck.Capture(f.Id, f).Require();
             var asm = AsmCheck.Decoder.Decode(captured).Require();
             AsmCheck.WriteAsm(asm,dst);

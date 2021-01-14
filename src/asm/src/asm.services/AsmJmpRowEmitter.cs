@@ -13,7 +13,7 @@ namespace Z0
     using static Part;
     using static z;
 
-    public struct AsmJmpRowEmitter : IDisposable
+    public struct AsmJmpRowEmitter
     {
         readonly BitBroker<JccKind,ApiInstruction> broker;
 
@@ -24,12 +24,6 @@ namespace Z0
         public readonly FS.FilePath Target;
 
         readonly List<AsmJmpRow> Collected;
-
-
-        public void Dispose()
-        {
-
-        }
 
         [MethodImpl(Inline)]
         public AsmJmpRowEmitter(IWfShell wf, ApiPartRoutines src)
@@ -43,7 +37,7 @@ namespace Z0
 
         void Dispatch(in ApiInstruction fx)
         {
-            var kind = AsmSemantic.jccKind(fx.Mnemonic);
+            var kind = AsmInstructions.jccKind(fx.Mnemonic);
             init(fx, kind, out var dst);
             Collected.Add(dst);
             broker.Get(kind).Handle(fx);

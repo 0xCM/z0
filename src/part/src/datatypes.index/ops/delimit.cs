@@ -12,7 +12,7 @@ namespace Z0
     partial struct Index
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static DelimitedIndex<T> delimit<T>(T[] src, char delimiter = FieldDelimiter)
+        public static DelimitedIndex<T> delimit<T>(T[] src, char delimiter = Chars.Comma)
             => new DelimitedIndex<T>(src, delimiter);
     }
 }

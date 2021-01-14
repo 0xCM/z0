@@ -109,6 +109,8 @@ namespace Z0
 
       GetFieldValue,
 
-      FillArray
+      FillArray,
+
+      CreateDelegate
     }
 }

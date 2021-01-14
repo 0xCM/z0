@@ -68,7 +68,6 @@ namespace Z0
         void EmittedFile<T>(T source, Count count, FS.FilePath dst)
         {
             signal(this).EmittedFile(source, count, dst);
-
         }
 
         WfExecToken EmittedFile<T>(WfExecFlow flow, T source, FS.FilePath dst)
@@ -86,7 +85,6 @@ namespace Z0
         {
             signal(this).EmittedFile(dst);
         }
-
 
         WfExecToken EmittedFile(WfExecFlow flow, Count count, FS.FilePath dst)
         {

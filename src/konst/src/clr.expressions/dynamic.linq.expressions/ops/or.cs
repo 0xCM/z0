@@ -8,8 +8,7 @@ namespace Z0
     using System.Linq.Expressions;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static Option;
+    using static Part;
 
     using XPR = System.Linq.Expressions.Expression;
 
@@ -32,7 +31,7 @@ namespace Z0
         /// <param name="f1">The first predicate</param>
         /// <param name="f2">The second predicate</param>
         public static Option<Func<X1,X2,bool>> or<X1,X2>(Func<X1,bool> f1, Func<X2,bool> f2)
-            => from args in some(paramX<X1,X2>())
+            => from args in root.some(paramX<X1,X2>())
                 let left = invoke(func(f1),args[0])
                 let right = invoke(func(f2),args[1])
                 let body = or(left, right)

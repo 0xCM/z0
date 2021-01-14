@@ -31,7 +31,7 @@ namespace Z0.Asm
         /// <param name="src">The code source</param>
         Option<IceInstructionList> Decode(CodeBlock src);
 
-        Option<AsmInstructions> Decode(ApiCodeBlock src);
+        Option<AsmInstructionBlock> Decode(ApiCodeBlock src);
 
         Option<AsmRoutine> Decode(ApiCaptureBlock src, Action<Asm.IceInstruction> f);
 
@@ -39,6 +39,6 @@ namespace Z0.Asm
 
         Option<IceInstructionList> Decode(CodeBlock src, Action<IceInstruction> f);
 
-        Option<AsmInstructions> Decode(BinaryCode code, MemoryAddress @base);
+        Option<AsmInstructionBlock> Decode(BinaryCode code, MemoryAddress @base);
     }
 }

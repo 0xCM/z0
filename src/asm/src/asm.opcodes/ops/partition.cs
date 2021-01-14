@@ -33,17 +33,38 @@ namespace Z0.Asm
                 ref readonly var row = ref skip(src,i);
                 process(row, handler, ref s0);
                 s0++;
-                //partition(skip(src,i), handler, ref s0);
             }
 
             return s0;
         }
 
-        // [MethodImpl(Inline), Op]
-        // static void partition(in AsmOpCodeRow src, in AsmOpCodeGroup handler, ref uint s0)
-        // {
-        //     process(src, handler, ref s0);
-        //     s0++;
-        // }
+        [MethodImpl(Inline), Op]
+        static void process(in AsmOpCodeRow src, in AsmOpCodeGroup handler, ref uint s0)
+        {
+            process(opcode(src), handler, s0);
+            process(sig(src), handler, s0);
+            process(mnemonic(src), handler, s0);
+            process(cpuid(src), handler, s0);
+        }
+
+        [MethodImpl(Inline), Op]
+        static void process(OperatingMode src, in AsmOpCodeGroup handler, ref uint seq)
+            => handler.Include(seq, src);
+
+        [MethodImpl(Inline), Op]
+        static void process(in AsmSig src, in AsmOpCodeGroup handler, uint seq)
+            => handler.Include(seq, src);
+
+        [MethodImpl(Inline), Op]
+        static void process(in AsmOpCode src, in AsmOpCodeGroup handler, uint seq)
+            => handler.Include(seq, src);
+
+        [MethodImpl(Inline), Op]
+        static void process(in AsmMnemonic src, in AsmOpCodeGroup handler, uint seq)
+            => handler.Include(seq, src);
+
+        [MethodImpl(Inline), Op]
+        static void process(in Cpuid src, in AsmOpCodeGroup handler, uint seq)
+            => handler.Include(seq, src);
     }
 }

@@ -21,6 +21,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static UnaryOp<T> unary<T>(MethodInfo src, object host = null)
             where T : unmanaged
-                => from<UnaryOp<T>>(src, host);
+                => create<UnaryOp<T>>(src, host);
     }
 }

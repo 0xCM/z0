@@ -17,23 +17,40 @@ namespace Z0
             return Flow();
         }
 
-        void Processed<T>(WfExecFlow flow, FS.FilePath src, T data)
+        WfExecToken Processed<T>(WfExecFlow flow, FS.FilePath src, T data)
         {
             signal(this).Processed(src, data);
-            Ran(flow);
+            return Ran(flow);
         }
 
-        void Processed<T,M>(WfExecFlow flow, FS.FilePath src, T data, M metric)
+        WfExecToken Processed<T,M>(WfExecFlow flow, FS.FilePath src, T data, M metric)
         {
             signal(this).Processed(src, data, metric);
-            Ran(flow);
+            return Ran(flow);
         }
 
         void Processed<T>(T content)
-            => processed(Host, content, Ct);
+        {
+            signal(this).Processed(content);
+        }
 
         void Processed<T>(ApiHostUri uri, T content)
-            => processed(Host, Seq.delimit(uri,content), Ct);
+        {
+            signal(this).Processed(uri,content);
+
+        }
+
+        WfExecToken Processed<T>(WfExecFlow flow, T content)
+        {
+            signal(this).Processed(content);
+            return Ran(flow);
+        }
+
+        WfExecToken Processed<T>(WfExecFlow flow, ApiHostUri uri, T content)
+        {
+            signal(this).Processed(uri,content);
+            return Ran(flow);
+        }
 
         void Created(WfStepId id)
         {

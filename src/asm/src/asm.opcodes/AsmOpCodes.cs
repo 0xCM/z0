@@ -109,38 +109,10 @@ namespace Z0.Asm
             get => ClrEnums.names<IceMnemonic>();
         }
 
-        [Op]
-        public static void parse(in AppResDoc specs, Span<AsmOpCodeRow> dst)
-        {
-            var fields = Enums.literals<F>();
-            var src = specs.Rows.View;
-            for(var i=0u; i<src.Length; i++)
-               parse(skip(src,i), fields, ref seek(dst,i));
-        }
-
-        [Op, MethodImpl(Inline)]
-        public static Span<AsmOpCodeRow> rows(in AppResDoc specs)
-        {
-            var dst = Spans.alloc<AsmOpCodeRow>(specs.Rows.Length);
-            parse(specs, dst);
-            return dst;
-        }
-
         [MethodImpl(Inline)]
         public static DatasetFormatter<T> formatter<T>()
             where T : unmanaged, Enum
                     => Formatters.dataset<T>();
-        [Op]
-        public static AsmOpCodeDataset dataset()
-        {
-            var resource = ResExtractor.Service(typeof(Parts.Res).Assembly).MatchDocument(PartResId.OpCodeSpecs);
-            var count = resource.RowCount;
-            var records = sys.alloc<AsmOpCodeRow>(count);
-            AsmTables.parse(resource, records);
-            var identifers = sys.alloc<AsmOpCode>(count);
-            AsmOpCodes.identify(records, identifers);
-            return new AsmOpCodeDataset(records,identifers);
-        }
 
         /// <summary>
         /// Defines, in a predictable and hopefully meaningful way, a programmatic identifier that designates an op code

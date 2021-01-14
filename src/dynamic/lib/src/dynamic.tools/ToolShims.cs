@@ -16,7 +16,7 @@ namespace Z0
 
     public readonly struct ToolShims
     {
-        public static EmitResult create(ToolProxySpec config)
+        public static EmitResult create(ToolShimSpec config)
         {
             var compile = compilation(config);
             var dst = config.TargetPath.EnsureParentExists();
@@ -26,16 +26,17 @@ namespace Z0
                 return compile.Emit(exe, win32Resources: resources);
         }
 
-        public static CSharpCompilation compilation(ToolProxySpec config)
+        public static CSharpCompilation compilation(ToolShimSpec config)
         {
-            z.insist(config.Source.Exists, $"The file {config.Source}, it must exist");
+            root.require(config.Source.Exists, () => $"The file {config.Source}, it must exist");
+
             var refs = CsLang.pe(typeof(object), typeof(Enumerable), typeof(ProcessStartInfo));
             var dst = FS.create(config.OutDir) + FS.file(config.Name, FileExtensions.Exe);
-            var code = new ToolProxyCode(dst);
+            var code = new ToolShimCode(dst);
             return CsLang.compilation(config.Name, refs, CsLang.parse(code.Generate()));
         }
 
-        public static bool create(ToolProxySpec spec, out EmitResult dst, out string[] errors)
+        public static bool create(ToolShimSpec spec, out EmitResult dst, out string[] errors)
         {
             errors = sys.empty<string>();
             dst = create(spec);

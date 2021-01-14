@@ -12,28 +12,10 @@ namespace Z0
     using static Part;
 
     [ApiHost]
-    public readonly struct ClrDynamic
+    public readonly partial struct ClrDynamic
     {
         const NumericKind Closure = UnsignedInts;
 
-        /// <summary>
-        /// Creates a dynamic pointer from an untyped dynamic delegate
-        /// </summary>
-        /// <param name="src">The source delegate</param>
-        /// <param name="handle">A proxy for the unmanaged pointer</param>
-        [MethodImpl(Inline), Op]
-        public static DynamicPointer pointer(DynamicDelegate src)
-            => new DynamicPointer(src, pointer(src.TargetMethod));
-
-        /// <summary>
-        /// Creates a dynamic pointer from a generic dynamic delegate
-        /// </summary>
-        /// <param name="src">The source delegate</param>
-        /// <param name="handle">A proxy for the unmanaged pointer</param>
-        /// <typeparam name="D">The delegate type</typeparam>
-        public static DynamicPointer pointer<D>(DynamicDelegate<D> src)
-            where D : Delegate
-                => pointer(src);
 
         [MethodImpl(Inline), Op]
         public static CilMethod cil(DynamicMethod src)
@@ -41,7 +23,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static CilMethod cil(DynamicDelegate src)
-            => cil(src.TargetMethod);
+            => cil(src.Target);
 
         [MethodImpl(Inline)]
         public static CilMethod cil<D>(DynamicDelegate<D> src)
@@ -103,7 +85,7 @@ namespace Z0
         /// Jits the method declared by a specified type
         /// </summary>
         /// <param name="src">The source type</param>
-        public static LocatedMethod[] jit(Type src)
+        public static Index<LocatedMethod> jit(Type src)
             => src.DeclaredMethods().Select(m => jit(m, size(m)));
 
         [MethodImpl(Inline), Op, Closures(Closure)]
@@ -127,11 +109,12 @@ namespace Z0
             return src.Method.MethodHandle.GetFunctionPointer();
         }
 
+
         [MethodImpl(Inline), Op]
         public static DynamicPointer jit(DynamicDelegate src)
         {
-            RuntimeHelpers.PrepareDelegate(src.DynamicOp);
-            return DynamicPointer.From(src);
+            RuntimeHelpers.PrepareDelegate(src.Operation);
+            return pointer(src, pointer(src.Target));
         }
 
         [MethodImpl(Inline)]

@@ -17,7 +17,7 @@ namespace Z0
 
         public static ApiCodeBlock[] read(FS.FilePath src)
         {
-            var lines = @readonly(src.ReadLines());
+            var lines = src.ReadLines().View;
             var count = lines.Length;
             var buffer = sys.alloc<ApiCodeBlock>(count);
             var dst = span(buffer);

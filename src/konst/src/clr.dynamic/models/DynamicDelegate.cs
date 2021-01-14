@@ -14,39 +14,35 @@ namespace Z0
     /// <summary>
     /// Encloses a delegate that was manufactured dynamically
     /// </summary>
-    public readonly struct DynamicDelegate
+    public readonly struct DynamicDelegate : IDynamicDelegate<Delegate>
     {
         /// <summary>
         /// The delegate identity
         /// </summary>
-        public readonly OpIdentity Id;
+        public OpIdentity Id {get;}
 
         /// <summary>
         /// The method invoked by the dynamic operator that provides the substance of the operation
         /// </summary>
-        public readonly MethodInfo SourceMethod;
+        public MethodInfo Source {get;}
 
         /// <summary>
         /// The dynamically-generated method that backs the dynamic operator
         /// </summary>
-        public readonly DynamicMethod TargetMethod;
+        public DynamicMethod Target {get;}
 
         /// <summary>
         /// The dynamic operation
         /// </summary>
-        public readonly Delegate DynamicOp;
-
-        [MethodImpl(Inline)]
-        public static DynamicDelegate define(OpIdentity id, MethodInfo src, DynamicMethod dst, Delegate op)
-            => new DynamicDelegate(id, src, dst, op);
+        public Delegate Operation {get;}
 
         [MethodImpl(Inline)]
         public DynamicDelegate(OpIdentity id, MethodInfo src, DynamicMethod dst, Delegate op)
         {
             Id = id;
-            SourceMethod = src;
-            TargetMethod = dst;
-            DynamicOp = op;
+            Source = src;
+            Target = dst;
+            Operation = op;
         }
 
         /// <summary>
@@ -55,7 +51,7 @@ namespace Z0
         /// <param name="args">The arguments to pass to the delegate</param>
         [MethodImpl(Inline)]
         public object Invoke(params object[] args)
-            => DynamicOp.DynamicInvoke(args);
+            => Operation.DynamicInvoke(args);
 
         /// <summary>
         /// The existing delegate, parametrically
@@ -64,6 +60,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public DynamicDelegate<D> As<D>()
             where D : Delegate
-                => new DynamicDelegate<D>(Id, SourceMethod, TargetMethod, (D)DynamicOp);
+                => new DynamicDelegate<D>(Id, Source, Target, (D)Operation);
     }
 }

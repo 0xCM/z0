@@ -18,7 +18,7 @@ namespace Z0
             /// </summary>
             [MethodImpl(Inline), Op]
             public static string left(string src, int chars)
-                => text.blank(src) ? src : src.Substring(0, src.Length < chars ? src.Length : chars);
+                => Query.blank(src) ? src : src.Substring(0, src.Length < chars ? src.Length : chars);
         }
     }
 }

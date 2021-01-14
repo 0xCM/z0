@@ -80,6 +80,12 @@ namespace Z0
         public void Processed<T,M>(FS.FilePath src, T data, M metric)
             => Raise(processed(Host, src, data, metric, Ct));
 
+        public void Processed<T>(T content)
+            => Raise(processed(Host, content, Ct));
+
+        public void Processed<T>(ApiHostUri uri, T content)
+            => Raise(processed(Host, Seq.delimit(uri,content), Ct));
+
         public void EmittedTable<T>(WfStepId step, Count count, FS.FilePath dst)
             where T : struct
                 => Raise(emittedTable<T>(step, count, dst, Ct));
@@ -94,7 +100,7 @@ namespace Z0
         public void EmittingFile(FS.FilePath dst)
             => Raise(emittingFile(Host, dst, Ct));
 
-       public void EmittedFile(FS.FilePath dst)
+        public void EmittedFile(FS.FilePath dst)
             => Raise(emittedFile(Host, dst, Ct));
 
         public void EmittedFile(Count count, FS.FilePath dst)
@@ -108,5 +114,29 @@ namespace Z0
 
         public void EmittedFile<T>(T payload, FS.FilePath dst)
             => Raise(emittedFile(Host, payload, dst, Ct));
+
+        public void Status<T>(WfStepId step, T data)
+            => Raise(status(step, data, Ct));
+
+        public void Status<T>(T data)
+            => Status(Host, data);
+
+        public void Error<T>(WfStepId step, T body)
+            => Raise(error(step, body, Ct));
+
+        public void Error(WfStepId step, Exception e)
+            => Raise(error(step, e, Ct));
+
+        public void Error(Exception e)
+            => Raise(error(Host, e, Ct));
+
+        public void Error<T>(T body)
+            => Error(Host, body);
+
+        public void Warn<T>(WfStepId step, T content)
+            => Raise(warn(step, content, Ct));
+
+        public void Warn<T>(T content)
+            => Warn(Host,content);
     }
 }

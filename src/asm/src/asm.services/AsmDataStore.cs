@@ -6,8 +6,6 @@ namespace Z0.Asm
 {
     using System;
 
-    using static Part;
-
     public class AsmDataStore : WfService<AsmDataStore,AsmDataStore>
     {
         ITableArchive Tables;

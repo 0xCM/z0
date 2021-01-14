@@ -14,8 +14,7 @@ namespace Z0
     /// <summary>
     /// Encloses a generic delegate that was manufactured dynamically
     /// </summary>
-    public readonly struct DynamicDelegate<I,D> : IIdentified<I>
-        where I : struct, IIdentified<I>
+    public readonly struct DynamicDelegate<I,D> : IDynamicDelegate<D>
         where D : Delegate
     {
         /// <summary>
@@ -26,17 +25,17 @@ namespace Z0
         /// <summary>
         /// The method invoked by the dynamic operator that provides the substance of the operation
         /// </summary>
-        public readonly MethodInfo Source;
+        public MethodInfo Source {get;}
 
         /// <summary>
         /// The dynamically-generated method that backs the dynamic operator
         /// </summary>
-        public readonly DynamicMethod Target;
+        public DynamicMethod Target {get;}
 
         /// <summary>
         /// The dynamic operation
         /// </summary>
-        public readonly D DynamicOp;
+        public D Operation {get;}
 
         [MethodImpl(Inline)]
         public DynamicDelegate(I id, MethodInfo src, DynamicMethod dst, D op)
@@ -44,7 +43,7 @@ namespace Z0
             Id = id;
             Source = src;
             Target = dst;
-            DynamicOp = op;
+            Operation = op;
         }
     }
 }

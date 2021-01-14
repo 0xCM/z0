@@ -13,7 +13,7 @@ namespace Z0.Asm
 
     partial struct asm
     {
-        public static AsmCallRow[] calls(ApiInstructions src)
+        public static AsmCallRow[] calls(ApiInstructionBlock src)
         {
             var calls = asm.filter(src, IceMnemonic.Call).View;
             var count = calls.Length;

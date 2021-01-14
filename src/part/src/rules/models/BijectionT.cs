@@ -1,0 +1,36 @@
+//-----------------------------------------------------------------------------
+// Copyright   :  (c) Chris Moore, 2020
+// License     :  MIT
+//-----------------------------------------------------------------------------
+namespace Z0
+{
+    using System;
+    using System.Runtime.CompilerServices;
+
+    using static Part;
+
+    partial struct Rules
+    {
+        /// <summary>
+        /// Represents a bijective correspondence between two sequences of homogenous type
+        /// </summary>
+        public readonly struct Bijection<T>
+        {
+            public Index<T> Source {get;}
+
+            public Index<T> Target {get;}
+
+            public Bijection(Index<T> src, Index<T> dst)
+            {
+                Source = src;
+                Target = dst;
+            }
+
+            public Pair<T> this[uint i]
+            {
+                [MethodImpl(Inline)]
+                get => root.pair(Source[i], Target[i]);
+            }
+        }
+    }
+}

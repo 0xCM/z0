@@ -18,21 +18,6 @@ namespace Z0
     {
         const NumericKind Closure = UnsignedInts;
 
-        /// <summary>
-        /// Creates an action delegate from a method
-        /// </summary>
-        /// <param name="src">The source method</param>
-        [MethodImpl(Inline), Op]
-        public static Action action(MethodInfo src, object host)
-            => from<Action>(src, host);
-
-        /// <summary>
-        /// Creates an action delegate from a method
-        /// </summary>
-        /// <param name="src">The source method</param>
-        [MethodImpl(Inline), Op]
-        public static Action action(MethodInfo src)
-            => from<Action>(src);
 
         /// <summary>
         /// Infers a delegate type compatible with the signature of a specified method

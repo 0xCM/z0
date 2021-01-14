@@ -8,11 +8,22 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
 
     public readonly struct ClrEnum<T>
         where T : unmanaged, Enum
     {
         public Type Definition => TD;
+
+        [MethodImpl(Inline)]
+        public ClrEnumDetailInfo<T> Summary()
+            => new ClrEnumDetailInfo<T>(address(_Details), address(_Literals), address(_Fields), FieldCount);
+
+        public Count FieldCount
+        {
+            [MethodImpl(Inline)]
+            get => _Fields.Count;
+        }
 
         public ClrToken Token
         {
@@ -81,4 +92,6 @@ namespace Z0
         [FixedAddressValueType]
         static Index<ClrEnumField<T>> _Fields = Provider.EnumFields;
     }
+
+
 }

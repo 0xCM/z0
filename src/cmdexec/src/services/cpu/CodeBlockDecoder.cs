@@ -26,27 +26,27 @@ namespace Z0.Asm
             dst = new ApiPartRoutines(part, buffer);
         }
 
-        public static AsmInstructions[] decode(params ApiCodeBlock[] src)
+        public static AsmInstructionBlock[] decode(params ApiCodeBlock[] src)
         {
             var count = src.Length;
-            var dst = alloc<AsmInstructions>(count);
+            var dst = alloc<AsmInstructionBlock>(count);
             decode(src, dst);
             return dst;
         }
 
-        public static int decode(ReadOnlySpan<ApiCodeBlock> src, Span<AsmInstructions> dst)
+        public static int decode(ReadOnlySpan<ApiCodeBlock> src, Span<AsmInstructionBlock> dst)
         {
             var decoder = Capture.Services.RoutineDecoder();
             var count = src.Length;
             for(var i=0u; i<count; i++)
-                 seek(dst,i) = decoder.Decode(skip(src,i)).ValueOrDefault(AsmInstructions.Empty);
+                 seek(dst,i) = decoder.Decode(skip(src,i)).ValueOrDefault(AsmInstructionBlock.Empty);
             return count;
         }
 
-        public static AsmInstructions[] decode(ReadOnlySpan<ApiCodeBlock> src)
+        public static AsmInstructionBlock[] decode(ReadOnlySpan<ApiCodeBlock> src)
         {
             var count = src.Length;
-            var dst = alloc<AsmInstructions>(count);
+            var dst = alloc<AsmInstructionBlock>(count);
             decode(src, dst);
             return dst;
         }

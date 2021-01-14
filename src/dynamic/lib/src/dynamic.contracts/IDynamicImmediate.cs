@@ -9,8 +9,6 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Reflection;
 
-    using static Konst;
-
     public interface IDynamicImmediate
     {
         /// <summary>
@@ -67,7 +65,6 @@ namespace Z0
         /// <param name="w">The vector operand width</param>
         /// <param name="k">The operator kind</param>
         /// <typeparam name="T">The vector cell type</typeparam>
-        [MethodImpl(Inline)]
         IImmInjector<BinaryOp<Vector128<T>>> BinaryInjector<T>(W128 w)
             where T : unmanaged;
 
@@ -77,7 +74,6 @@ namespace Z0
         /// <param name="w">The vector operand width</param>
         /// <param name="k">The operator kind</param>
         /// <typeparam name="T">The vector cell type</typeparam>
-        [MethodImpl(Inline)]
         IImmInjector<BinaryOp<Vector256<T>>> BinaryInjector<T>(W256 w)
             where T : unmanaged;
 

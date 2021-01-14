@@ -20,6 +20,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static TernaryOp<T> ternary<T>(MethodInfo src, object host = null)
             where T : unmanaged
-                => from<TernaryOp<T>>(src, host);
+                => create<TernaryOp<T>>(src, host);
     }
 }

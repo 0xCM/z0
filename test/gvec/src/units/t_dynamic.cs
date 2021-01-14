@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Linq;
 
-    using static Konst;
-
     public class t_dynamic : t_inx<t_dynamic>
     {
         public void check_blocks()
@@ -40,7 +38,7 @@ namespace Z0
             const byte imm8 = 9;
 
             var resolver = default(VImm8UnaryResolver128<uint>);
-            var vbsll = resolver.inject(imm8, ApiClass.Bsll).DynamicOp;
+            var vbsll = resolver.inject(imm8, ApiClass.Bsll).Operation;
 
             for(var i=0; i<RepCount; i++)
             {

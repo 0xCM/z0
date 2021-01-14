@@ -23,9 +23,9 @@ namespace Z0
         [Op]
         public static void render(FileType src, ITextBuffer dst)
         {
-            var extensions = text.bracket(src.Extensions.Delimited().Format());
+            var extensions = text.bracket(src.Extensions.Delimit().Format());
             var content = src.ContentType.Format();
-            dst.Append(text.bracket(src.Extensions.Delimited().Format()));
+            dst.Append(text.bracket(src.Extensions.Delimit().Format()));
             dst.Append(" | ");
             dst.Append(src.ContentType.Format());
         }

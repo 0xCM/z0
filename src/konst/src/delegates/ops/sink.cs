@@ -21,6 +21,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Receiver<T> sink<T>(MethodInfo src, object host = null)
             where T : unmanaged
-                => from<Receiver<T>>(src, host);
+                => create<Receiver<T>>(src, host);
     }
 }

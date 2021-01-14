@@ -101,8 +101,8 @@ namespace Z0
             return new ApiHostCode(uri.Value, dst.Array());
         }
 
-        static FS.FilePath[] paths(FS.FolderPath root, FS.FileExt ext)
-            => root.Files(ext, true).Array();
+        static Index<FS.FilePath> paths(FS.FolderPath root, FS.FileExt ext)
+            => root.Files(ext, true);
 
         static ApiCodeBlock[] read(FS.FilePath src)
             => ApiHexReader.Service.Read(src).Where(x => x.IsNonEmpty);

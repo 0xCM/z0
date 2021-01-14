@@ -12,6 +12,24 @@ namespace Z0
     partial struct text
     {
         /// <summary>
+        /// Encloses text within (possibly distinct) left and right boundaries
+        /// </summary>
+        /// <param name="content">The text to be surrounded by the left and right delimiters</param>
+        /// <param name="left">The left delimiter</param>
+        /// <param name="right">The right delimiter</param>
+        [MethodImpl(Inline), Op]
+        public static string enclose(object content, char left, char right)
+            => concat(left, $"{content}", right);
+
+        /// <summary>
+        /// Encloses text between '[' and ']' characters
+        /// </summary>
+        /// <param name="content">The content to enclose</param>
+        [MethodImpl(Inline), Op]
+        public static string bracket(object content)
+            => enclose($"{content}", Chars.LBracket, Chars.RBracket);
+
+        /// <summary>
         /// Encloses the supplied text in quotation marks
         /// </summary>
         /// <param name="content">The content to be quoted</param>

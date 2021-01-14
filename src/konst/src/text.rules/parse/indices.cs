@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static z;
+    using static memory;
 
     partial struct TextRules
     {
@@ -22,7 +22,7 @@ namespace Z0
             /// <param name="second">THe second character to match</param>
             [MethodImpl(Inline), Op]
             public static Pair<int> indices(string src, char first, char second)
-                => pair(src.IndexOf(first), src.IndexOf(second));
+                => root.pair(src.IndexOf(first), src.IndexOf(second));
 
             /// <summary>
             /// Returns the indices of the first occurrences of the first and second strings in the source, if any

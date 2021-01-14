@@ -21,6 +21,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Emitter<T> source<T>(MethodInfo src, object host = null)
             where T : unmanaged
-                => from<Emitter<T>>(src, host);
+                => create<Emitter<T>>(src, host);
     }
 }

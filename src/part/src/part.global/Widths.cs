@@ -4,15 +4,19 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Reflection;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.Linq;
-    using System.IO;
 
     partial struct Part
     {
+        /// <summary>
+        /// Computes the type width of a parametrically-identified type
+        /// </summary>
+        /// <typeparam name="T">The source type</typeparam>
+        [MethodImpl(Inline)]
+        public static DataWidth width<W>(W w = default)
+            where W : unmanaged, IDataWidth<W>
+                => w.DataWidth;
+
         public static W1 w1 => default;
 
         public static W2 w2 => default;

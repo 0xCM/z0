@@ -10,8 +10,7 @@ namespace Z0
     using System.Linq.Expressions;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static Option;
+    using static Part;
 
     using XPR = System.Linq.Expressions.Expression;
     using PX = System.Linq.Expressions.ParameterExpression;
@@ -34,7 +33,7 @@ namespace Z0
         /// <typeparam name="X2">The second parameter type</typeparam>
         [MethodImpl(Inline)]
         public static PX[] paramX<X1,X2>()
-            => array(paramX<X1>("x1"), paramX<X2>("x2"));
+            => sys.array(paramX<X1>("x1"), paramX<X2>("x2"));
 
         /// <summary>
         /// Creates a parameter expression array of length 3
@@ -44,7 +43,7 @@ namespace Z0
         /// <typeparam name="X3">The third parameter type</typeparam>
         [MethodImpl(Inline)]
         public static PX[] paramX<X1,X2,X3>()
-            => array(paramX<X1>("x1"), paramX<X2>("x2"), paramX<X3>("x3"));
+            => sys.array(paramX<X1>("x1"), paramX<X2>("x2"), paramX<X3>("x3"));
 
         /// <summary>
         /// Creates a parameter expression array of length 4
@@ -54,7 +53,7 @@ namespace Z0
         /// <typeparam name="X3">The third parameter type</typeparam>
         [MethodImpl(Inline)]
         public static PX[] paramX<X1,X2,X3,X4>()
-            => array(paramX<X1>("x1"), paramX<X2>("x2"), paramX<X3>("x3"), paramX<X4>("x4"));
+            => sys.array(paramX<X1>("x1"), paramX<X2>("x2"), paramX<X3>("x3"), paramX<X4>("x4"));
 
         /// <summary>
         /// Creates a parameter expression where the parameter name is predicated on an integer value

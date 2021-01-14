@@ -23,6 +23,8 @@ namespace Z0.Asm
 
         readonly IImmSpecializer Specializer;
 
+        readonly IAsmServices Services;
+
         public ImmClosureEmitter(IWfShell wf, IAsmContext asm)
         {
             Host = WfShell.host(typeof(ImmClosureEmitter));
@@ -31,6 +33,7 @@ namespace Z0.Asm
             Formatter = asm.Formatter;
             CodeArchive = Archives.capture(wf.Db().CaptureRoot());
             Specializer = Capture.Services.ImmSpecializer(asm.RoutineDecoder);
+            Services = AsmServices.init(Wf,asm);
             Wf.Created();
         }
 
@@ -124,8 +127,9 @@ namespace Z0.Asm
                 where h is ApiHost
                 select (ApiHost)h).Array();
 
-        AsmImmWriter Archive(IApiHost host)
-            => HostArchiver(host.Uri, Formatter, Wf.Db().ImmRoot());
+        IAsmImmWriter Archive(IApiHost host)
+            => Services.ImmWriter(host.Uri);
+            //AsmServices.ImmWriter(host.Uri, Formatter, Wf.Db().ImmRoot());
 
         void EmitUnrefined(in CaptureExchange exchange, Imm8R[] imm8, params PartId[] parts)
         {

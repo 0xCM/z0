@@ -8,7 +8,7 @@ namespace Z0.Asm
     using System.IO;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static memory;
 
     public readonly struct AsmWriter : IAsmWriter
@@ -47,10 +47,9 @@ namespace Z0.Asm
         }
 
         public static void emit(ReadOnlySpan<CapturedApiRes> src, FS.FilePath dst)
-
         {
             const ulong Cut = 0x55005500550;
-            const string Sep = SpacePipe;
+            const string Sep = RP.SpacePipe;
             const string StartMsg = "Emitting captured resource disassembly";
             const string Col0 = "Addresses";
             const string Col1 = "Accessor";

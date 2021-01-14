@@ -30,7 +30,7 @@ namespace Z0.Asm
         public Option<IceInstructionList> Decode(CodeBlock src)
             => Decode(src.Code, src.BaseAddress).TryMap(x => asm.list(x, src));
 
-        public Option<AsmInstructions> Decode(ApiCodeBlock src)
+        public Option<AsmInstructionBlock> Decode(ApiCodeBlock src)
             => Decode(src.Encoded, src.BaseAddress);
 
         public Option<AsmRoutine> Decode(ApiCaptureBlock src, Action<Asm.IceInstruction> f)
@@ -68,14 +68,14 @@ namespace Z0.Asm
             }
         }
 
-        public Option<AsmInstructions> Decode(BinaryCode code, MemoryAddress @base)
+        public Option<AsmInstructionBlock> Decode(BinaryCode code, MemoryAddress @base)
         {
             try
             {
                 if(code.IsEmpty)
                 {
                     term.warn("Supplied source was empty");
-                    return Option.none<AsmInstructions>();
+                    return Option.none<AsmInstructionBlock>();
                 }
 
                 var decoded = new Iced.InstructionList();
@@ -93,12 +93,12 @@ namespace Z0.Asm
                 var formatted = formatter.FormatInstructions(decoded, @base);
                 for(var i=0; i<instructions.Length; i++)
                     instructions[i] = IceExtractors.extract(decoded[i], formatted[i]);
-                return AsmInstructions.Create(instructions, code);
+                return AsmInstructionBlock.Create(instructions, code);
             }
             catch(Exception e)
             {
                 term.error(e);
-                return none<AsmInstructions>();
+                return none<AsmInstructionBlock>();
             }
         }
 
@@ -157,7 +157,7 @@ namespace Z0.Asm
             return new AsmRoutine(captured.MetaUri, captured.OpUri, captured.Method.Metadata().DisplaySig, code, captured.TermCode, src);
         }
 
-        static AsmRoutine routine(ApiMemberCode member, AsmInstructions asm)
+        static AsmRoutine routine(ApiMemberCode member, AsmInstructionBlock asm)
         {
             var code = new ApiCodeBlock(member.OpUri, member.Encoded);
             return new AsmRoutine(member.MetaUri, member.OpUri, member.Method.Metadata().DisplaySig, code, member.TermCode, new IceInstructionList(asm, member.Encoded));

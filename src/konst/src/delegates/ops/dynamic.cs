@@ -9,7 +9,7 @@ namespace Z0
     using System.Reflection.Emit;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     partial class Delegates
     {
@@ -34,7 +34,7 @@ namespace Z0
         /// <param name="@delegate">The target delegate type</param>
         [MethodImpl(Inline), Op]
         public static DynamicDelegate dynamic(OpIdentity id, MethodInfo src, DynamicMethod dst, Type @delegate)
-            => DynamicDelegate.define(id, src, dst, dst.CreateDelegate(@delegate));
+            => new DynamicDelegate(id, src, dst, dst.CreateDelegate(@delegate));
 
         /// <summary>
         /// Creates a non-parameteric dynamic delegate
@@ -45,6 +45,6 @@ namespace Z0
         /// <param name="@delegate">The target delegate type</param>
         [MethodImpl(Inline), Op]
         public static DynamicDelegate dynamic(OpIdentity id, MethodInfo src, DynamicMethod dst, Delegate op)
-            => DynamicDelegate.define(id, src, dst, op);
+            => new DynamicDelegate(id, src, dst, op);
     }
 }

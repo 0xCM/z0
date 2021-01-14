@@ -24,7 +24,7 @@ namespace Z0
             public static bool fenced(string src, char left, char right)
             {
                 var result = false;
-                if(text.nonempty(src))
+                if(nonempty(src))
                 {
                     var x = span(src.Trim());
                     var length = x.Length;

@@ -8,8 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     partial struct z
     {
@@ -22,11 +21,6 @@ namespace Z0
         public static Span<T> vspan<T>(Vector128<T> src)
             where T : unmanaged
                 => vspan2(src);
-        // {
-        //     var dst = SpanBlocks.alloc<T>(w128);
-        //     vsave(src, ref dst.First);
-        //     return dst.Storage;
-        // }
 
         /// <summary>
         /// Allocates and deposits vector content to a span
@@ -37,11 +31,6 @@ namespace Z0
         public static Span<T> vspan<T>(Vector256<T> src)
             where T : unmanaged
                 => vspan2(src);
-        // {
-        //     var dst = SpanBlocks.alloc<T>(w256);
-        //     vsave(src, ref dst.First);
-        //     return dst.Storage;
-        // }
 
         /// <summary>
         /// Allocates and deposits vector content to a span
@@ -53,11 +42,6 @@ namespace Z0
             where T : unmanaged
                 => vspan2(src);
 
-        // {
-        //     var dst = SpanBlocks.alloc<T>(w512);
-        //     vsave(src, ref dst.First);
-        //     return dst.Storage;
-        // }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         static Span<T> vspan2<T>(Vector128<T> src)

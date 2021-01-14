@@ -7,7 +7,6 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
     using static z;
 
     using F = AsmOpCodeField;
@@ -15,9 +14,18 @@ namespace Z0.Asm
     partial struct AsmOpCodes
     {
         [Op]
-        static ref readonly AsmOpCodeRow parse(in TextRow src, ReadOnlySpan<F> fields, ref AsmOpCodeRow dst)
+        public static void parse(in AppResDoc specs, Span<AsmOpCodeRow> dst)
         {
-            ReadOnlySpan<string> cells = src.CellContent;
+            var fields = Enums.literals<F>();
+            var src = specs.Rows.View;
+            for(var i=0u; i<src.Length; i++)
+               parse(skip(src,i), fields, ref seek(dst,i));
+        }
+
+        [Op]
+        public static ref readonly AsmOpCodeRow parse(in TextRow src, ReadOnlySpan<F> fields, ref AsmOpCodeRow dst)
+        {
+            var cells = src.CellContent.View;
             var count = length(cells,fields);
 
             var parser = new AsmFieldParser();
@@ -59,6 +67,5 @@ namespace Z0.Asm
 
             return ref dst;
         }
-
     }
 }

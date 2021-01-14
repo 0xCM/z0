@@ -84,7 +84,7 @@ namespace Z0.Asm
                 var x = Random.CpuVector<T>(w);
                 var y = Random.CpuVector<T>(w);
 
-                var v1 = f.DynamicOp.Invoke(x,y);
+                var v1 = f.Operation.Invoke(x,y);
                 var v2 = g(x.ToCell(),y.ToCell()).ToVector<T>();
 
                 eq(v1,v2);
@@ -106,7 +106,7 @@ namespace Z0.Asm
                 var x = Random.CpuVector<T>(w);
                 var y = Random.CpuVector<T>(w);
 
-                var v1 = f.DynamicOp.Invoke(x,y);
+                var v1 = f.Operation.Invoke(x,y);
                 var v2 = g(x.ToCell(),y.ToCell()).ToVector<T>();
 
                 eq(v1,v2);
@@ -126,8 +126,8 @@ namespace Z0.Asm
                 var x = Random.CpuVector<T>(w);
                 var y = Random.CpuVector<T>(w);
 
-                var v1 = f.DynamicOp.Invoke(x,y);
-                var captured = CaptureService.Capture(CaptureExchange.Context, f.Id, f.DynamicOp).Require();
+                var v1 = f.Operation.Invoke(x,y);
+                var captured = CaptureService.Capture(CaptureExchange.Context, f.Id, f.Operation).Require();
                 var asm = Decoder.Decode(captured).Require();
                 var g = Dynamic.EmitFixedBinary<Cell128>(this[Main], asm.Code);
                 var v2 = g(x.ToCell(),y.ToCell()).ToVector<T>();
@@ -147,7 +147,7 @@ namespace Z0.Asm
                 var dynop = injector.EmbedImmediate(method,imm);
 
                 var x = Random.CpuVector<T>(w);
-                var v1 = dynop.DynamicOp.Invoke(x);
+                var v1 = dynop.Operation.Invoke(x);
 
                 var capture = CaptureService.Capture(CaptureExchange.Context, dynop.Id, dynop).Require();
                 var asm = Decoder.Decode(capture).Require();

@@ -92,6 +92,10 @@ namespace Z0
         public static implicit operator MemorySlots(MemorySegment[] src)
             => new MemorySlots(src);
 
+       [MethodImpl(Inline)]
+        public static implicit operator MemorySlots(Index<MemorySegment> src)
+            => new MemorySlots(src);
+
         [MethodImpl(Inline)]
         public static implicit operator MemorySegment[](MemorySlots src)
             => src.Data;

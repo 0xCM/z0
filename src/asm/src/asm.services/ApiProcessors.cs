@@ -96,7 +96,7 @@ namespace Z0
                 var count = result.Count;
                 Wf.Status($"Emitting {count} instruction tables");
                 for(var i=0; i<count; i++)
-                    records += AsmTables.emit(Wf, skip(sets,i));
+                    records += asm.emit(Wf, skip(sets,i));
                 Wf.Status($"Emitted a total of {records} records for {count} instruction tables");
 
             }
@@ -108,7 +108,7 @@ namespace Z0
 
         void EmitJumpRows(ApiPartRoutines src)
         {
-            using var step = new AsmJmpRowEmitter(Wf, src);
+            var step = new AsmJmpRowEmitter(Wf, src);
             step.Emit();
         }
 

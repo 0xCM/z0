@@ -7,17 +7,13 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Specifies application message origination details
     /// </summary>
     public readonly struct AppMsgSource : ITextual
     {
-        public const string KnownPartPattern = "{0}/{1}/{2}?line = {3} | {4}";
-
-        public const string UnknownPartPattern = "{0}/{1}?line = {2} | {3}";
-
         /// <summary>
         /// Specifies the emitting executable part
         /// </summary>
@@ -47,7 +43,6 @@ namespace Z0
             Line = (uint)(line ?? 0);
         }
 
-        [MethodImpl(Inline)]
         public string Format()
         {
             if(Part != 0)
@@ -61,5 +56,9 @@ namespace Z0
 
         public static AppMsgSource Empty
             => new AppMsgSource(0, EmptyString, EmptyString, 0);
+
+        const string KnownPartPattern = "{0}/{1}/{2}?line = {3} | {4}";
+
+        const string UnknownPartPattern = "{0}/{1}?line = {2} | {3}";
     }
 }

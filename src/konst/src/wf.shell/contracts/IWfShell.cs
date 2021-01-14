@@ -98,28 +98,24 @@ namespace Z0
         }
 
         void Status<T>(WfStepId step, T data)
-            => Raise(status(step, data, Ct));
+        {
+            signal(this).Status(step, data);
+        }
 
         void Status<T>(T data)
-            => Status(Host, data);
+        {
+            signal(this).Status(data);
+        }
 
         void Warn<T>(WfStepId step, T content)
-            => Raise(warn(step, content, Ct));
+        {
+            signal(this).Warn(step, content);
+        }
 
         void Warn<T>(T content)
-            => Warn(Host,content);
-
-        void Error<T>(WfStepId step, T body)
-            => Raise(error(step, body, Ct));
-
-        void Error(WfStepId step, Exception e)
-            => Raise(error(step, e, Ct));
-
-        void Error(Exception e)
-            => Error(Host, e);
-
-        void Error<T>(T body)
-            => Error(Host, body);
+        {
+            signal(this).Warn(content);
+        }
 
         IWfService Service(Type host)
         {

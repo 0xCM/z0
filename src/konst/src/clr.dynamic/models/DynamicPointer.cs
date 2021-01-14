@@ -9,7 +9,7 @@ namespace Z0
     using System.Reflection.Emit;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Encloses a pointer to the native definition of a dynamic delegate
@@ -18,11 +18,11 @@ namespace Z0
     {
         readonly DynamicDelegate Op;
 
-        public readonly IntPtr Handle;
+        public IntPtr Handle {get;}
 
         [MethodImpl(Inline)]
         public static DynamicPointer From(DynamicDelegate src)
-            => new DynamicPointer(src, pointer(src.TargetMethod));
+            => new DynamicPointer(src, pointer(src.Target));
 
         [MethodImpl(Inline)]
         internal DynamicPointer(DynamicDelegate op, IntPtr handle)
@@ -47,14 +47,14 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Handle.ToPointer<byte>();
         }
-        
-        public Delegate DynamicOp 
-            => Op.DynamicOp;
-        
-        public MethodInfo SourceMethod
-            => Op.SourceMethod;
 
-        public MethodInfo DynamicMethod
-            => Op.TargetMethod;
+        public Delegate Operation
+            => Op.Operation;
+
+        public MethodInfo Source
+            => Op.Source;
+
+        public MethodInfo Target
+            => Op.Target;
     }
 }

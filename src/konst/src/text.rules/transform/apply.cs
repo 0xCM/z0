@@ -17,7 +17,7 @@ namespace Z0
         {
             public static unsafe string apply(Replacement<char> rule, string src)
             {
-                var count = text.length(src);
+                var count = Query.length(src);
                 var dst = span<char>(count);
                 var input = span(src);
                 apply(rule,src,dst);

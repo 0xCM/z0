@@ -60,7 +60,7 @@ namespace Z0
             /// <param name="delimiter">The delimiter to use</param>
             public static string intersperse(ReadOnlySpan<string> fields, char delimiter = FieldDelimiter)
             {
-                var dst = text.build();
+                var dst = build();
                 var count = fields.Length;
                 for(byte i=0; i<count; i++)
                 {

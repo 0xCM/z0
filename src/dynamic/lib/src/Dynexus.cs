@@ -67,19 +67,15 @@ namespace Z0
                 throw no<W>();
         }
 
-        [MethodImpl(Inline)]
         DynamicDelegate<UnaryOp<Vector128<T>>> IDynamicImmediate.CreateUnaryOp<T>(MethodInfo src, W128 w, byte imm)
             => Dynop.EmbedVUnaryOpImm(VK.vk128<T>(), Identify(src), src, imm);
 
-        [MethodImpl(Inline)]
         DynamicDelegate<BinaryOp<Vector128<T>>> IDynamicImmediate.CreateBinaryOp<T>(MethodInfo src, W128 w, byte imm)
             => Dynop.EmbedVBinaryOpImm(VK.vk128<T>(), Identify(src), src, imm);
 
-        [MethodImpl(Inline)]
         DynamicDelegate<UnaryOp<Vector256<T>>> IDynamicImmediate.CreateUnaryOp<T>(MethodInfo src, W256 w, byte imm)
             => Dynop.EmbedVUnaryOpImm(VK.vk256<T>(), Identify(src), src, imm);
 
-        [MethodImpl(Inline)]
         DynamicDelegate<BinaryOp<Vector256<T>>> IDynamicImmediate.CreateBinaryOp<T>(MethodInfo src, W256 w, byte imm)
             => Dynop.EmbedImmVBinaryOpImm(VK.vk256<T>(), Identify(src), src, imm);
 
@@ -87,15 +83,12 @@ namespace Z0
         IEmitterOpFactory<T> IDynamicFactories.Factory<T>(EmitterOpClass<T> k)
             => FactorySource.Factory(k);
 
-        [MethodImpl(Inline)]
         IUnaryOpFactory<T> IDynamicFactories.Factory<T>(UnaryOpClass<T> k)
             => FactorySource.Factory(k);
 
-        [MethodImpl(Inline)]
         IBinaryOpFactory<T> IDynamicFactories.Factory<T>(BinaryOpClass<T> k)
             => FactorySource.Factory(k);
 
-        [MethodImpl(Inline)]
         ITernaryOpFactory<T> IDynamicFactories.Factory<T>(TernaryOpClass<T> k)
             => FactorySource.Factory(k);
 
@@ -125,7 +118,6 @@ namespace Z0
         /// <param name="w">The vector operand width</param>
         /// <param name="k">The operator kind</param>
         /// <typeparam name="T">The vector cell type</typeparam>
-        [MethodImpl(Inline)]
         public IImmInjector<UnaryOp<Vector128<T>>> UnaryInjector<T>(W128 w)
             where T : unmanaged
                 => ImmInjector.from(Diviner, I.V128UnaryOpImmInjector.Create<T>(Diviner));
@@ -158,83 +150,64 @@ namespace Z0
         /// <param name="w">The vector operand width</param>
         /// <param name="k">The operator kind</param>
         /// <typeparam name="T">The vector cell type</typeparam>
-        [MethodImpl(Inline)]
         public IImmInjector<BinaryOp<Vector256<T>>> BinaryInjector<T>(W256 w)
             where T : unmanaged
                 => ImmInjector.from(Diviner, I.V256BinaryOpImmInjector.Create<T>(Diviner));
 
-        [MethodImpl(Inline)]
         UnaryOp<F> IFixedDynamic.EmitFixedUnary<F>(BufferToken dst, ApiCodeBlock src)
             => (UnaryOp<F>)Emit(src.Id, typeof(UnaryOp<F>), typeof(F),
                     sys.array(typeof(F)), dst.Load(src.Encoded).Handle);
 
-        [MethodImpl(Inline)]
         BinaryOp<F> IFixedDynamic.EmitFixedBinary<F>(BufferToken dst, ApiCodeBlock src)
             => (BinaryOp<F>)Emit(src.Id, typeof(BinaryOp<F>), typeof(F),
                     sys.array(typeof(F),typeof(F)),dst.Load(src.Encoded).Handle);
 
-        [MethodImpl(Inline)]
         TernaryOp<F> IFixedDynamic.EmitFixedTernary<F>(BufferToken dst, ApiCodeBlock src)
             => (TernaryOp<F>)Emit(src.Id, typeof(TernaryOp<F>), typeof(F),
                     sys.array(typeof(F), typeof(F), typeof(F)), dst.Load(src.Encoded).Handle);
 
-        [MethodImpl(Inline)]
         UnaryOp8 IFixedDynamic.EmitFixedUnary(BufferToken dst, W8 w, ApiCodeBlock src)
             => Emit(src.Id, Unary, w, dst.Load(src.Encoded));
 
-        [MethodImpl(Inline)]
         UnaryOp16 IFixedDynamic.EmitFixedUnary(BufferToken dst, W16 w, ApiCodeBlock src)
             => Emit(src.Id, Unary, w, dst.Load(src.Encoded));
 
-        [MethodImpl(Inline)]
         UnaryOp32 IFixedDynamic.EmitFixedUnary(BufferToken dst, W32 w, ApiCodeBlock src)
             => Emit(src.Id, Unary, w, dst.Load(src.Encoded));
 
-        [MethodImpl(Inline)]
         UnaryOp64 IFixedDynamic.EmitFixedUnary(BufferToken dst, W64 w, ApiCodeBlock src)
             => Emit(src.Id, Unary, w, dst.Load(src.Encoded));
 
-        [MethodImpl(Inline)]
         UnaryOp128 IFixedDynamic.EmitFixedUnary(BufferToken dst, W128 w, ApiCodeBlock src)
             => Emit(dst.Load(src.Encoded), src.Id, Unary, w);
 
-        [MethodImpl(Inline)]
         UnaryOp256 IFixedDynamic.EmitFixedUnary(BufferToken dst, W256 w, ApiCodeBlock src)
             => Emit(dst.Load(src.Encoded), src.Id, Unary, w);
 
-        [MethodImpl(Inline)]
         BinaryOp8 IFixedDynamic.EmitFixedBinary(BufferToken dst, W8 w, ApiCodeBlock src)
             => Emit(dst.Load(src.Encoded), src.Id, Binary, w);
 
-        [MethodImpl(Inline)]
         BinaryOp16 IFixedDynamic.EmitFixedBinary(BufferToken dst, W16 w, ApiCodeBlock src)
             => Emit(dst.Load(src.Encoded), src.Id, Binary, w);
 
-        [MethodImpl(Inline)]
         BinaryOp32 IFixedDynamic.EmitFixedBinary(BufferToken dst, W32 w, ApiCodeBlock src)
             => Emit(dst.Load(src.Encoded), src.Id, Binary, w);
 
-        [MethodImpl(Inline)]
         BinaryOp64 IFixedDynamic.EmitFixedBinary(BufferToken dst, W64 w, ApiCodeBlock src)
             => Emit(dst.Load(src.Encoded), src.Id, Binary, w);
 
-        [MethodImpl(Inline)]
         BinaryOp128 IFixedDynamic.EmitFixedBinary(BufferToken dst, W128 w, ApiCodeBlock src)
             => Emit(src.Id, Binary, w, dst.Load(src.Encoded));
 
-        [MethodImpl(Inline)]
         BinaryOp256 IFixedDynamic.EmitFixedBinary(BufferToken dst, W256 w, ApiCodeBlock src)
             => Emit(src.Id, Binary, w, dst.Load(src.Encoded));
 
-        [MethodImpl(Inline)]
         UnaryOp<T> IDynamicNumeric.EmitUnaryOp<T>(BufferToken dst, ApiCodeBlock src)
             => EmitUnaryOp<T>(src.Id, dst.Load(src.Encoded));
 
-        [MethodImpl(Inline)]
         BinaryOp<T> IDynamicNumeric.EmitBinaryOp<T>(BufferToken dst, ApiCodeBlock src)
             => EmitBinaryOp<T>(src.Id, dst.Load(src.Encoded));
 
-        [MethodImpl(Inline)]
         TernaryOp<T> IDynamicNumeric.EmitTernaryOp<T>(BufferToken dst, ApiCodeBlock src)
             => EmitTernaryOp<T>(src.Id, dst.Load(src.Encoded));
 

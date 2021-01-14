@@ -21,7 +21,7 @@ namespace Z0
         public TextRow(params TextBlock[] cells)
             => Blocks = cells;
 
-        public readonly string[] CellContent
+        public readonly Index<string> CellContent
         {
             [MethodImpl(Inline)]
             get => Blocks.Map(x => x.Format());

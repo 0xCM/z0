@@ -5,10 +5,7 @@
 namespace Z0
 {
     using System;
-    using System.Linq.Expressions;
-    using System.Runtime.CompilerServices;
 
-    using static Konst;
     using static Option;
 
     using XPR = System.Linq.Expressions.Expression;

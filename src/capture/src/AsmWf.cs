@@ -26,7 +26,7 @@ namespace Z0.Asm
         {
             Wf = wf;
             FormatConfig = AsmFormatConfig.DefaultStreamFormat;
-            Decoder = asm.decoder(FormatConfig);
+            Decoder = AsmServices.Decoder(FormatConfig);
             Formatter = new AsmFormatter(FormatConfig);
         }
 

@@ -54,7 +54,7 @@ namespace Z0
         /// <typeparam name="X0">The first argument type</typeparam>
         [MethodImpl(Inline)]
         public static Func<X0> func<X0>(MethodInfo src, X0 x0 = default)
-            => from<Func<X0>>(src);
+            => create<Func<X0>>(src);
 
         /// <summary>
         /// Creates a function delegate of generic arity 2 from a static method
@@ -66,7 +66,7 @@ namespace Z0
         /// <typeparam name="X1">The second argument type</typeparam>
         [MethodImpl(Inline)]
         public static Func<X0,X1> func<X0,X1>(MethodInfo src, X0 x0 = default, X1 x1= default)
-            => from<Func<X0,X1>>(src);
+            => create<Func<X0,X1>>(src);
 
         /// <summary>
         /// Creates a function delegate of generic arity 3 from a static method
@@ -80,7 +80,7 @@ namespace Z0
         /// <typeparam name="X2">The third argument type</typeparam>
         [MethodImpl(Inline)]
         public static Func<X0,X1,X2> func<X0,X1,X2>(MethodInfo src, X0 x0 = default, X1 x1= default, X2 x2= default)
-            => from<Func<X0,X1,X2>>(src);
+            => create<Func<X0,X1,X2>>(src);
 
         /// <summary>
         /// Creates a function delegate of generic arity 4 from a static method
@@ -96,6 +96,6 @@ namespace Z0
         /// <typeparam name="X3">The fourth argument type</typeparam>
         [MethodImpl(Inline)]
         public static Func<X0,X1,X2,X3> func<X0,X1,X2,X3>(MethodInfo src, X0 x0 = default, X1 x1= default, X2 x2= default, X3 x3 = default)
-            => from<Func<X0,X1,X2,X3>>(src);
+            => create<Func<X0,X1,X2,X3>>(src);
     }
 }

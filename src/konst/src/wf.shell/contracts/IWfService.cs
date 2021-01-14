@@ -37,6 +37,5 @@ namespace Z0
     {
         Type IService.ContractType
             => typeof(C);
-
     }
 }

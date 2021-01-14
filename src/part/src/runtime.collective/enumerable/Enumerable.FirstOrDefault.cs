@@ -20,6 +20,7 @@ namespace Z0
         public static T FirstOrDefault<T>(this IEnumerable<T> src, T @default)
             => src.Any() ? src.First() : @default;
 
+
         /// <summary>
         /// Returns the first element if it exists; otherwise returns the value supplied
         /// by invoking the default function

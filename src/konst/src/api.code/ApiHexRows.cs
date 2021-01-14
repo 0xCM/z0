@@ -63,7 +63,7 @@ namespace Z0
         [Op]
         public static ParseResult<ApiHexRow[]> load(FS.FilePath src)
         {
-            var attempts = src.ReadLines().Skip(1).Select(row);
+            var attempts = src.ReadLines().Storage.Skip(1).Select(row);
             var failed = attempts.Where(r => !r.Succeeded);
             var success = attempts.Where(r => r.Succeeded).Select(r => r.Value);
             if(failed.Length != 0 && success.Length == 0)

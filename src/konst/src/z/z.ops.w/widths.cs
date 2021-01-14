@@ -16,10 +16,6 @@ namespace Z0
 
         public static W5 w5 => default;
 
-        public static W6 w6 => default;
-
-        public static W7 w7 => default;
-
         public static W8 w8 => default;
 
         public static W8i w8i => default;
@@ -31,8 +27,6 @@ namespace Z0
         public static W32 w32 => default;
 
         public static W32i w32i => default;
-
-        public static W40 w40 => default;
 
         public static W64 w64 => default;
 
@@ -47,8 +41,6 @@ namespace Z0
         public static W256i w256i => default;
 
         public static W512 w512 => default;
-
-        public static W512i w512i => default;
 
         public static W1024 w1024 => default;
     }

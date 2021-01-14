@@ -26,6 +26,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ProcessedFileEvent<T,M> processed<T,M>(WfStepId step, FS.FilePath src, T data, M metric, CorrelationToken ct)
             => new ProcessedFileEvent<T,M>(step, src, data, metric, ct);
-
     }
 }

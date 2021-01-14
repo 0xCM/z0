@@ -8,7 +8,7 @@ namespace Z0
     using System.Reflection;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     partial class Delegates
     {
@@ -21,6 +21,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static BinaryOp<T> binary<T>(MethodInfo src, object host = null)
             where T : unmanaged
-                => from<BinaryOp<T>>(src, host);
+                => create<BinaryOp<T>>(src, host);
     }
 }

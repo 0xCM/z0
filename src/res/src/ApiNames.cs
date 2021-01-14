@@ -449,6 +449,8 @@ public readonly struct ApiNames
 
     public const string DynamicOperators = dynamic + dot + operators;
 
+    public const string Algorithms = algorithms;
+
     public const string AlgorithmDynamic = dynamic + dot + algorithms;
 
     // ~~ LinqX

@@ -21,7 +21,7 @@ namespace Z0.Asm
         /// <param name="src">The data sourde</param>
         /// <param name="mnemonic">The mnemonic of interest</param>
         [Op]
-        public static ApiInstructions filter(ApiInstructions src, IceMnemonic mnemonic)
+        public static ApiInstructionBlock filter(ApiInstructionBlock src, IceMnemonic mnemonic)
             => from a in src.All
                 let i = a.Instruction
                 where i.Mnemonic == mnemonic

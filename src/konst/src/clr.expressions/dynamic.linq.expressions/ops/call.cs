@@ -9,8 +9,7 @@ namespace Z0
     using System.Linq.Expressions;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     using XPR = System.Linq.Expressions.Expression;
     using PX = System.Linq.Expressions.ParameterExpression;
@@ -25,7 +24,7 @@ namespace Z0
         /// <param name="args">The arguments supplied to the method when invoked</param>
         [MethodImpl(Inline), Op]
         public static MethodCallExpression call(object Host, MethodInfo m, params PX[] args)
-            => XPR.Call(ifNotNull(Host, h => constant(h)), m, args);
+            => XPR.Call(root.ifNotNull(Host, h => constant(h)), m, args);
 
         /// <summary>
         /// Creates an expression that invokes a static method

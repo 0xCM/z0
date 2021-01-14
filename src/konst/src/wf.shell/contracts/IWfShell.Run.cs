@@ -5,6 +5,7 @@
 namespace Z0
 {
     using System.Reflection;
+
     using static WfEvents;
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
@@ -55,24 +56,21 @@ namespace Z0
 
         WfExecToken Ran(WfExecFlow flow, WfStepId step)
         {
-            var token = Ran(flow);
             signal(this).Ran(step);
-            return token;
+            return Ran(flow);
         }
 
         WfExecToken Ran<H,T>(WfExecFlow flow, H host, T data)
             where H : IWfHost<H>, new()
         {
-            var token = Ran(flow);
             signal(this).Ran(data);
-            return token;
+            return Ran(flow);
         }
 
         WfExecToken Ran<T>(WfExecFlow flow, T data)
         {
-            var token = Ran(flow);
             signal(this).Ran(data);
-            return token;
+            return Ran(flow);
         }
 
         WfExecFlow Running<T>(ICmdSpec<T> cmd)
@@ -82,20 +80,17 @@ namespace Z0
             return Flow();
         }
 
-
         WfExecToken Ran(WfExecFlow flow, CmdResult result)
         {
-            var token = Ran(flow);
             signal(this).Ran(result);
-            return token;
+            return Ran(flow);
         }
 
         WfExecToken Ran<C>(WfExecFlow flow, CmdResult<C> result)
             where C : struct, ICmdSpec<C>
         {
-            var token = Ran(flow);
             signal(this).Ran(result);
-            return token;
+            return Ran(flow);
         }
     }
 }

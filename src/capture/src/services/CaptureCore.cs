@@ -70,7 +70,7 @@ namespace Z0.Asm
                 var pSrc = jit(src).Handle;
                 var summary = capture(exchange, id, pSrc);
                 var outcome =  summary.Outcome;
-                var captured = new ApiCaptureBlock(id, src.SourceMethod, summary.DataFlow.Input, summary.DataFlow.Output, outcome.TermCode);
+                var captured = new ApiCaptureBlock(id, src.Source, summary.DataFlow.Input, summary.DataFlow.Output, outcome.TermCode);
                 Demands.insist((MemoryAddress)pSrc,captured.BaseAddress);
                 return exchange.CaptureComplete(outcome.State, captured);
             }
@@ -320,8 +320,8 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         static DynamicPointer jit(DynamicDelegate src)
         {
-            RuntimeHelpers.PrepareDelegate(src.DynamicOp);
-            return DynamicPointer.From(src);
+            RuntimeHelpers.PrepareDelegate(src.Operation);
+            return ClrDynamic.pointer(src);
         }
     }
 }
