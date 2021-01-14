@@ -8,7 +8,7 @@ namespace Z0.Lang
     using System.Runtime.CompilerServices;
 
    public struct LoopHost<H,I>
-        where I : unmanaged
+        where I : unmanaged, IComparable<I>
         where H : struct
     {
         public H Host;

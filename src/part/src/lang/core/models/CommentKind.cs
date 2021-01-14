@@ -10,7 +10,7 @@ namespace Z0.Lang
     /// <summary>
     /// Defines comment classifiers
     /// </summary>
-    public enum CommentKind
+    public enum CommentKind : byte
     {
         None,
 
@@ -27,12 +27,12 @@ namespace Z0.Lang
         /// <summary>
         /// Comment occupies an enire line
         /// </summary>
-        Line,
+        FullLine,
 
         /// <summary>
         /// Comment occupies multiple lines
         /// </summary>
-        Paragraph,
+        MultiLine,
     }
 
 }

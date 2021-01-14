@@ -9,19 +9,24 @@ namespace Z0.Lang
 
     using static Part;
 
-    /// <summary>
-    /// Specifies a keyword that ranges over a type parameter
-    /// </summary>
-    public readonly struct Keyword<T>
+    public readonly struct Adjacent<T> : ISyntax<Adjacent<T>>
     {
-        public Name Name {get;}
+        public T A {get;}
+
+        public T B {get;}
 
         [MethodImpl(Inline)]
-        public Keyword(string src)
-            => Name = src;
+        public Adjacent(T a, T b)
+        {
+            A = a;
+            B = b;
+        }
 
-        [MethodImpl(Inline)]
-        public static implicit operator Keyword<T>(string name)
-            => new Keyword<T>(name);
+        public string Format()
+            => string.Format(RP.Adjacent2, A, B);
+
+
+        public override string ToString()
+            => Format();
     }
 }

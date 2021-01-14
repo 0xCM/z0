@@ -2,27 +2,26 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Lang
+namespace Z0.Meta
 {
     using System;
     using System.Runtime.CompilerServices;
 
     using static Part;
 
-    public readonly struct Constant<T> : IConstant<Constant<T>,T>
+    public readonly struct DataBlock
     {
-        public Identifier Name {get;}
+        public uint BlockIndex {get;}
 
-        public T Value {get;}
+        public ulong Partition {get;}
 
-        public ClrLiteralKind Kind {get;}
+        public Name Name => "Block" + BlockIndex.ToString();
 
         [MethodImpl(Inline)]
-        public Constant(string name, T value, ClrLiteralKind kind)
+        public DataBlock(uint index, ulong partition)
         {
-            Name = name;
-            Value = value;
-            Kind = kind;
+            BlockIndex = index;
+            Partition = partition;
         }
     }
 }

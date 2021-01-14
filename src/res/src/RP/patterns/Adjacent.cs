@@ -23,5 +23,18 @@ namespace Z0
         /// </summary>
         [RenderPattern(4, Adjacent4)]
         public const string Adjacent4 = "{0}{1}{2}{3}";
+
+        /// <summary>
+        /// Defines the literal '{0}{1}{2}{3}{4}'
+        /// </summary>
+        [RenderPattern(5, Adjacent5)]
+        public const string Adjacent5 = "{0}{1}{2}{3}{4}";
+
+        /// <summary>
+        /// Defines the literal '{0}{1}{2}{3}{4}'
+        /// </summary>
+        [RenderPattern(6, Adjacent6)]
+        public const string Adjacent6 = "{0}{1}{2}{3}{4}{5}";
+
     }
 }

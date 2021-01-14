@@ -11,7 +11,7 @@ namespace Z0.Lang
 
     public readonly struct Tests<C> : IIndex<Test<C>>
     {
-        readonly TableSpan<Test<C>> Data;
+        readonly Index<Test<C>> Data;
 
         [MethodImpl(Inline)]
         public Tests(Test<C>[] src)
@@ -54,10 +54,5 @@ namespace Z0.Lang
             [MethodImpl(Inline)]
             get => Data.Storage;
         }
-
-
-        [MethodImpl(Inline)]
-        public Tests<C> Refresh(Test<C>[] src)
-            => src;
     }
 }

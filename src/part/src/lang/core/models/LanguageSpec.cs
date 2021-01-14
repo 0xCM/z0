@@ -10,18 +10,18 @@ namespace Z0.Lang
     using static Part;
 
     /// <summary>
-    /// Specifies a keyword that ranges over a type parameter
+    /// Identifies a language
     /// </summary>
-    public readonly struct Keyword<T>
+    public readonly struct LanguageSpec
     {
-        public Name Name {get;}
+        public Name Id {get;}
 
         [MethodImpl(Inline)]
-        public Keyword(string src)
-            => Name = src;
+        public LanguageSpec(string id)
+            => Id  = id;
 
         [MethodImpl(Inline)]
-        public static implicit operator Keyword<T>(string name)
-            => new Keyword<T>(name);
+        public static implicit operator LanguageSpec(string id)
+            => new LanguageSpec(id);
     }
 }

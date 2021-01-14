@@ -27,22 +27,5 @@ namespace Z0
             }
             return dst.ToString();
         }
-
-        [Op]
-        public static string delimit(ReadOnlySpan<string> src, string delimiter)
-        {
-            var count = src.Length;
-            var buffer = sys.alloc<string>(count);
-            var dst = span(buffer);
-            var b = span(delimiter);
-            for(var i=0u; i< count; i++)
-                seek(dst,i) = string.Concat(skip(src,i), b);
-            return string.Concat(buffer);
-        }
-
-        [MethodImpl(Inline), Op]
-        public static string delimit(char delimiter, params object[] src)
-            => delimit(src,delimiter);
-
     }
 }

@@ -22,8 +22,8 @@ namespace Z0.Lang
     /// Characterizes a reified constant value
     /// </summary>
     /// <typeparam name="T">The constant type</typeparam>
-    public interface IConstant<H,T> : IConstant<T>
-        where H : struct, IConstant<H,T>
+    public interface IConstant<H,T> : IConstant<T>, ISyntax<H>
+        where H : IConstant<H,T>, new()
     {
 
     }

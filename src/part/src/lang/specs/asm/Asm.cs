@@ -2,26 +2,17 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Lang
 {
     using System;
     using System.Runtime.CompilerServices;
 
     using static Part;
 
-
-    public readonly struct Annotation<K>
-        where K : unmanaged
+    public readonly partial struct Asm : ILanguage<Asm>
     {
-        public TextBlock Content {get;}
+        public LanguageSpec Specifier => Languages.asm;
 
-        public K Kind {get;}
-
-        [MethodImpl(Inline)]
-        public Annotation(string content, K kind)
-        {
-            Content = content;
-            Kind = kind;
-        }
+        public Name Id => Specifier.Id;
     }
 }

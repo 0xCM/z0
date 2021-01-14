@@ -29,6 +29,10 @@ namespace Z0
         public static StringBuilder build()
             => EmptyString.Build();
 
+        [Op]
+        public static ITextBuffer buffer()
+            => new TextBuffer(new StringBuilder());
+
         [MethodImpl(Inline)]
         public static int width<E>(E field)
             where E : unmanaged, Enum

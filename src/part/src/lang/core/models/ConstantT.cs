@@ -9,24 +9,27 @@ namespace Z0.Lang
 
     using static Part;
 
-    /// <summary>
-    /// Represents a compile-time literal
-    /// </summary>
-    public readonly struct Literal<I,T>
+    public readonly struct Constant<T> : IConstant<Constant<T>,T>
     {
-        public Identifier<I> Identifier {get;}
+        public Identifier Name {get;}
 
         public T Value {get;}
 
-        [MethodImpl(Inline)]
-        public Literal(Identifier<I> id, T value)
-        {
-            Identifier = id;
-            Value = value;
-        }
+        public ClrLiteralKind Kind {get;}
 
         [MethodImpl(Inline)]
-        public static implicit operator Literal<I,T>(Paired<I,T> src)
-            => new Literal<I,T>(src.Left, src.Right);
+        public Constant(string name, T value, ClrLiteralKind kind)
+        {
+            Name = name;
+            Value = value;
+            Kind = kind;
+        }
+
+        public string Format()
+            => Value?.ToString() ?? EmptyString;
+
+        public override string ToString()
+            => Format();
+
     }
 }

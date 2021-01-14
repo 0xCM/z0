@@ -15,7 +15,7 @@ namespace Z0
         {
             public Name TypeName {get;}
 
-            readonly TableSpan<FieldSpec> FieldSpecs;
+            readonly Index<FieldSpec> FieldSpecs;
 
             [MethodImpl(Inline)]
             public RecordSpec(Name name, FieldSpec[] cells)

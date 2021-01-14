@@ -9,17 +9,14 @@ namespace Z0.Lang
 
     using static Part;
 
-    public readonly struct Adjacent<T>
+    public readonly struct Languages
     {
-        public T A {get;}
+        public static LanguageSpec csharp => nameof(csharp);
 
-        public T B {get;}
+        public static LanguageSpec asm => nameof(asm);
 
-        [MethodImpl(Inline)]
-        public Adjacent(T a, T b)
-        {
-            A = a;
-            B = b;
-        }
+        public static LanguageSpec cpp => nameof(cpp);
+
+        public static LanguageSpec typescript => nameof(typescript);
     }
 }

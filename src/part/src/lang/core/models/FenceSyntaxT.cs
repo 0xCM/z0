@@ -7,33 +7,31 @@ namespace Z0.Lang
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-
-    using api = SyntaxModels;
+    using static Part;
 
     public readonly struct FenceSyntax<T> : ITextual
     {
-        public T Left {get;}
+        public T FirstValue {get;}
 
-        public T Right {get;}
+        public T LastValue {get;}
 
         [MethodImpl(Inline)]
         public FenceSyntax(T left, T right)
         {
-            Left = left;
-            Right = right;
+            FirstValue = left;
+            LastValue = right;
         }
 
         [MethodImpl(Inline)]
         public FenceSyntax(Pair<T> src)
         {
-            Left = src.Left;
-            Right = src.Right;
+            FirstValue = src.Left;
+            LastValue = src.Right;
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => api.format(this);
+            => string.Format("[{0},{1}]", FirstValue, LastValue);
 
         public override string ToString()
             => Format();

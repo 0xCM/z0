@@ -2,17 +2,27 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Lang
 {
     using System;
     using System.Runtime.CompilerServices;
 
     using static Part;
 
-    partial struct TextBlocks
+    public interface IKeyword
     {
-        [MethodImpl(Inline), Op]
-        public static uint hash(TextBlock src)
-            => src.IsEmpty ? 0u : (uint)Marvin.hash(src.View.AsUInt8());
+        Name Name {get;}
+
+        ushort Index {get;}
+    }
+
+    public interface IKeyword<L,K> : IKeyword
+        where L : struct, ILanguage
+        where K : unmanaged
+    {
+        K Kind {get;}
+
+        ushort IKeyword.Index
+            => memory.w16(Kind);
     }
 }

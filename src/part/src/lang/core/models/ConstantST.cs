@@ -7,9 +7,9 @@ namespace Z0.Lang
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
-    public readonly struct Constant<S,T> : IDerivedConstant<S,T>
+    public readonly struct Constant<S,T> : IConstant<Constant<S,T>,T>
     {
         public Identifier Name {get;}
 
@@ -27,5 +27,11 @@ namespace Z0.Lang
             Value = value;
             Kind = kind;
         }
-    }
+
+        public string Format()
+            => Value?.ToString() ?? EmptyString;
+
+        public override string ToString()
+            => Format();
+   }
 }

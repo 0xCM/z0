@@ -11,14 +11,14 @@ namespace Z0.Lang
     {
         public ClrNumericKind IndexKind;
 
-        public Cell64 LowerBound;
+        public ulong LowerBound;
 
         public bit LowerInclusive;
 
-        public Cell64 UpperBound;
+        public ulong UpperBound;
 
         public bit UpperInclusive;
 
-        public Cell64 Step;
+        public ulong Step;
     }
 }

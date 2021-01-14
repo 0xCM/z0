@@ -58,7 +58,7 @@ namespace Z0
         public uint Hash
         {
             [MethodImpl(Inline)]
-            get => api.hash(this);
+            get => alg.hash.calc(Data);
         }
 
         [MethodImpl(Inline)]

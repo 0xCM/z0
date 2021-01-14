@@ -12,7 +12,8 @@ namespace Z0.Lang
     /// <summary>
     /// Represents a legal identifier
     /// </summary>
-    public readonly struct Identifier<T>
+    public readonly struct Identifier<T> : IIdentifier<Identifier<T>,T>
+        where T : IComparable<T>
     {
         public T Value {get;}
 
@@ -26,6 +27,9 @@ namespace Z0.Lang
 
         public override string ToString()
             => Format();
+
+        public int CompareTo(Identifier<T> other)
+            => Value?.CompareTo(other.Value) ?? 0;
 
         [MethodImpl(Inline)]
         public static implicit operator Identifier<T>(T src)

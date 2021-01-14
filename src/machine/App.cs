@@ -62,8 +62,6 @@ namespace Z0
                 EmitLocatedParts.create().Run(Wf);
                 ImageDataEmitter.EmitApiBlobs(Wf);
 
-                //EmitImageBlobs.create().Run(Wf);
-
                 Commands.EmitEnumCatalog().Run(Wf);
 
                 EmitFieldLiterals.create().Run(Wf);

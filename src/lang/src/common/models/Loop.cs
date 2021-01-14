@@ -8,7 +8,7 @@ namespace Z0.Lang
     using System.Runtime.CompilerServices;
 
     public struct Loop<I>
-        where I : unmanaged
+        where I : unmanaged, IComparable<I>
     {
         public I LowerBound;
 

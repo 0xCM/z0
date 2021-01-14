@@ -4,11 +4,15 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Lang
 {
-    using System;
-
-    public interface IIdentifier<H> : IName<string>, IEquatable<H>, IComparable<H>
-        where H : struct, IIdentifier<H>
+    public interface ISyntax : ITextual
     {
 
     }
+
+    public interface ISyntax<X> : ISyntax
+        where X : ISyntax<X>, new()
+    {
+
+    }
+
 }

@@ -10,7 +10,7 @@ namespace Z0.Lang
     using static Part;
 
     /// <summary>
-    /// Specifies a dsl keyword
+    /// Specifies a keyword
     /// </summary>
     public readonly struct Keyword
     {

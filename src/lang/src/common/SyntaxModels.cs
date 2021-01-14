@@ -27,7 +27,8 @@ namespace Z0.Lang
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Identifier<T> identifier<T>(T src)
-            => new Identifier<T>(src);
+            where T : IComparable<T>
+                => new Identifier<T>(src);
 
         [MethodImpl(Inline), Op]
         public static Identifier<Name> identifier(string src)
@@ -35,15 +36,17 @@ namespace Z0.Lang
 
         [MethodImpl(Inline)]
         public static Literal<I,T> literal<I,T>(I id, T value)
-            => new Literal<I,T>(id,value);
+            where I : IComparable<I>
+                => new Literal<I,T>(id,value);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Literal<Name,T> literal<T>(string id, T value)
-            => new Literal<Name,T>(identifier(id), value);
+            where T : IComparable<T>
+                => new Literal<Name,T>(identifier(id), value);
 
         [Op, Closures(Closure)]
         public static string format<T>(FenceSyntax<T> src)
-            => string.Format(FencePattern, src.Left, src.Right);
+            => string.Format(FencePattern, src.FirstValue, src.LastValue);
 
         [MethodImpl(Inline)]
         static string format<A,B>(string pattern, A a, B b)

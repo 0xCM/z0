@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Text;
 
     using static Part;
 
@@ -49,5 +50,10 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static string concat(params object[] src)
             => string.Concat(src);
+
+        [Op]
+        public static ITextBuffer buffer()
+            => new TextBuffer(new StringBuilder());
+
     }
 }

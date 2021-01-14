@@ -13,7 +13,7 @@ namespace Z0.Lang
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Loop<I> loop<I>(Interval<I> bounds, I? step = null)
-            where I : unmanaged
+            where I : unmanaged, IComparable<I>
        {
             var dst = new Loop<I>();
             dst.LowerBound = bounds.Left;

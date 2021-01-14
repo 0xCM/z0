@@ -15,73 +15,63 @@ namespace Z0.Lang
     [Datatype]
     public readonly struct Identifier : IIdentifier<Identifier>
     {
-        readonly string Data;
+        public Name Content {get;}
 
         [MethodImpl(Inline)]
         public Identifier(string src)
-            => Data = src;
+            => Content = src;
+
+        [MethodImpl(Inline)]
+        public Identifier(Name src)
+            => Content = src;
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => text.empty(Data);
+            get => Content.IsEmpty;
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => text.nonempty(Data);
+            get => Content.IsNonEmpty;
         }
 
-        public string Content
+        public ReadOnlySpan<char> View
         {
             [MethodImpl(Inline)]
-            get => Data ?? EmptyString;
+            get => Content.View;
+        }
+
+        public int Length
+        {
+            [MethodImpl(Inline)]
+            get => Content.Length;
+        }
+
+        public uint Hash
+        {
+            [MethodImpl(Inline)]
+            get => Content.Hash;
+        }
+
+        public Count Count
+        {
+            [MethodImpl(Inline)]
+            get => Content.Count;
         }
 
         [MethodImpl(Inline)]
         public string Format()
             => Content;
 
-        public ReadOnlySpan<char> View
-        {
-            [MethodImpl(Inline)]
-            get => Content;
-        }
-
-        public int Length
-        {
-            [MethodImpl(Inline)]
-            get => Content?.Length ?? 0;
-        }
-
-        public uint Hash
-        {
-            [MethodImpl(Inline)]
-            get =>  Length != 0 ? (uint)Data.GetHashCode() : 0;
-        }
-
-        public Count Count
-        {
-            [MethodImpl(Inline)]
-            get => Length;
-        }
-
-        [MethodImpl(Inline), Ignore]
+        [MethodImpl(Inline)]
         public int CompareTo(Identifier src)
-            => Names.compare(Data, src.Data);
+            => Content.CompareTo(src.Content);
 
-        [MethodImpl(Inline), Ignore]
+        [MethodImpl(Inline)]
         public bool Equals(Identifier src)
-            => string.Equals(Data, src.Data);
-
-        [Ignore]
-        string IContented<string>.Content
-            => Content;
-
-        [Ignore]
-        string ITextual.Format()
-            => Content;
+            => Content.Equals(src.Content);
 
         public override string ToString()
             => Content;
@@ -95,6 +85,14 @@ namespace Z0.Lang
         [MethodImpl(Inline)]
         public static implicit operator Identifier(string src)
             => new Identifier(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Identifier(Name src)
+            => new Identifier(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Name(Identifier src)
+            => src.Content;
 
         [MethodImpl(Inline)]
         public static implicit operator string(Identifier src)
@@ -122,16 +120,16 @@ namespace Z0.Lang
 
         [MethodImpl(Inline)]
         public static bool operator ==(Identifier x, Identifier y)
-            => x.Data == y.Data;
+            => x.Content == y.Content;
 
         [MethodImpl(Inline)]
         public static bool operator !=(Identifier x, Identifier y)
-            => x.Data != y.Data;
+            => x.Content != y.Content;
 
         public static Identifier Empty
         {
             [MethodImpl(Inline)]
-            get => new Identifier(EmptyString);
+            get => new Identifier(Name.Empty);
         }
     }
 }

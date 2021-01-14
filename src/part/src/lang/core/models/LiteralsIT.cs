@@ -9,27 +9,28 @@ namespace Z0.Lang
 
     using static Part;
 
-    public readonly struct Literals<C,T> : IIndex<Literal<C,T>>
+    public readonly struct Literals<I,T> : IIndex<Literal<I,T>>
+        where I : IComparable<I>
     {
-        readonly TableSpan<Literal<C,T>> Data;
+        readonly Index<Literal<I,T>> Data;
 
         [MethodImpl(Inline)]
-        public Literals(Literal<C,T>[] src)
+        public Literals(Literal<I,T>[] src)
             => Data = src;
 
-        public ReadOnlySpan<Literal<C,T>> View
+        public ReadOnlySpan<Literal<I,T>> View
         {
             [MethodImpl(Inline)]
             get => Data.View;
         }
 
-        public Span<Literal<C,T>> Edit
+        public Span<Literal<I,T>> Edit
         {
             [MethodImpl(Inline)]
             get => Data.Edit;
         }
 
-        public ref Literal<C,T> First
+        public ref Literal<I,T> First
         {
             [MethodImpl(Inline)]
             get => ref Data.First;
@@ -41,7 +42,7 @@ namespace Z0.Lang
             get => Data.Count;
         }
 
-        public Literal<C,T>[] Storage
+        public Literal<I,T>[] Storage
         {
             [MethodImpl(Inline)]
             get => Data.Storage;
@@ -49,11 +50,11 @@ namespace Z0.Lang
 
 
         [MethodImpl(Inline)]
-        public Literals<C,T> Refresh(Literal<C,T>[] src)
+        public Literals<I,T> Refresh(Literal<I,T>[] src)
             => src;
 
         [MethodImpl(Inline)]
-        public static implicit operator Literals<C,T>(Literal<C,T>[] src)
-            => new Literals<C,T>(src);
+        public static implicit operator Literals<I,T>(Literal<I,T>[] src)
+            => new Literals<I,T>(src);
     }
 }

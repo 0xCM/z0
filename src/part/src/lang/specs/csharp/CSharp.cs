@@ -2,20 +2,18 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Lang
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Text;
 
     using static Part;
-    using static TextRules;
 
-    partial class text
+    [ApiHost("lang.sharp")]
+    public readonly partial struct CSharp : ILanguage<CSharp>
     {
+        public LanguageSpec Specifier => Languages.csharp;
 
-        [MethodImpl(Inline)]
-        public static bool blank(string src)
-            => Query.blank(src);
-    }
+        public Name Id => Specifier.Id;
+   }
 }

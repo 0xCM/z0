@@ -7,9 +7,9 @@ namespace Z0.Lang
     using System;
     using System.Runtime.CompilerServices;
     /*
-        Represents an expression of the form <L>[F...]<D>[...L]<R>
+        Represents an expression of the form <LeftFence><FirstValue><Delimiter><LastValue><RightFence>
     */
-    public readonly struct Range<S,T>
+    public readonly struct FenceSyntax<S,T> : ISyntax<FenceSyntax<S,T>>
         where S : unmanaged
     {
         public S LeftFence {get;}
@@ -22,7 +22,7 @@ namespace Z0.Lang
 
         public S RightFence {get;}
 
-        public Range(Pair<S> fence, Pair<T> bounds, S delimiter)
+        public FenceSyntax(Pair<S> fence, Pair<T> bounds, S delimiter)
         {
             LeftFence = fence.Left;
             RightFence = fence.Right;
@@ -30,5 +30,11 @@ namespace Z0.Lang
             FirstValue = bounds.Left;
             LastValue = bounds.Right;
         }
+
+        public string Format()
+            => string.Format(RP.Adjacent6, LeftFence, FirstValue, Delimiter, LastValue, RightFence);
+
+        public override string ToString()
+            => Format();
     }
 }
