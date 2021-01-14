@@ -62,10 +62,9 @@ namespace Z0
         {
 
             var flags = Clr.@enum<Windows.MinidumpType>();
-            var provider = flags.DetailProvider;
-            var count = provider.FieldCount;
-            //var details = provider.Details.View;
-            var details = flags.Details;
+            var summary = flags.Summary();
+            var count = summary.FieldCount;
+            var details = summary.LiteralDetails;
 
             if(count == 0)
                 Wf.Error("No flags");

@@ -40,5 +40,25 @@ namespace Z0
         public static ulong? uint64<T>(T? src)
             where T : unmanaged
                 => As<T?, ulong?>(ref src);
+
+        /// <summary>
+        /// Projects a sequence of <typeparamref name='T'/> cells onto a sequence of <see cref='ulong'/> cells
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <typeparam name="T">The source type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Span<ulong> uint64<T>(Span<T> src)
+            where T : struct
+                => recover<T,ulong>(src);
+
+        /// <summary>
+        /// Projects a readonly sequence of <typeparamref name='T'/> cells onto a readonly sequence of <see cref='ulong'/> cells
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <typeparam name="T">The source type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ReadOnlySpan<ulong> uint64<T>(ReadOnlySpan<T> src)
+            where T : struct
+                => recover<T,ulong>(src);
     }
 }

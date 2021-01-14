@@ -26,6 +26,8 @@ namespace Z0
 
         readonly Index<EnumLiteralDetail<E>> _Details;
 
+        readonly Type _EnumType;
+
         public static EnumDetailProvider<E> create()
             => new EnumDetailProvider<E>();
 
@@ -53,9 +55,16 @@ namespace Z0
             get => _FieldCount;
         }
 
+        public ClrType EnumType
+        {
+            [MethodImpl(Inline)]
+            get => _EnumType;
+        }
+
         EnumDetailProvider()
         {
-            _FieldDefs = typeof(E).LiteralFields();
+            _EnumType = typeof(E);
+            _FieldDefs = _EnumType.LiteralFields();
             _FieldCount = _FieldDefs.Count;
             _EnumKind = ClrEnums.@base<E>();
             _Values = values();
@@ -99,7 +108,7 @@ namespace Z0
             for(var i=0u; i<_FieldCount; i++)
             {
                 ref readonly var field = ref skip(fields,i);
-                seek(dst,i) =new EnumLiteralDetail<E>(field, type, i, field.Name, skip(values,i));
+                seek(dst,i) = new EnumLiteralDetail<E>(field, type, i, field.Name, skip(values,i));
             }
             return buffer;
         }

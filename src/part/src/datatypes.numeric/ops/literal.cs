@@ -21,5 +21,32 @@ namespace Z0
         public static NumericLiteral<T> literal<T>(string Name, T data, string Text, NBK @base)
             where T : unmanaged
                 => new NumericLiteral<T>(Name,data, Text, @base);
+
+        [MethodImpl(Inline), Op]
+        public static NumericLiteral literal(Base2 b, string Name, object Value, string Text)
+            => new NumericLiteral(Name, Value, Text, NBK.Base2);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static NumericLiteral<T> literal<T>(Base2 b, string Name, T Value, string Text)
+            where T : unmanaged
+                => new NumericLiteral<T>(Name, Value, Text, NBK.Base2);
+
+        [MethodImpl(Inline), Op]
+        public static NumericLiteral literal(Base10 b, string Name, object Value, string Text)
+            => new NumericLiteral(Name, Value, Text, NBK.Base10);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static NumericLiteral<T> literal<T>(Base10 b, string Name, T data, string Text)
+            where T : unmanaged
+            => new NumericLiteral<T>(Name, data, Text, NBK.Base10);
+
+        [MethodImpl(Inline), Op]
+        public static NumericLiteral literal(Base16 b, string Name, object Value, string Text)
+            => new NumericLiteral(Name, Value, Text, NBK.Base16);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static NumericLiteral<T> literal<T>(Base16 b,  string Name, T data, string Text)
+            where T : unmanaged
+                => new NumericLiteral<T>(Name, data, Text, NBK.Base16);
     }
 }

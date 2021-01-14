@@ -16,11 +16,6 @@ namespace Z0
     partial class XTend
     {
         [MethodImpl(Inline)]
-        public static EnumValue<E> Value<E>(this E src)
-            where E : unmanaged, Enum
-                => src;
-
-        [MethodImpl(Inline)]
         public static bool IsDefined<E>(this E e)
             where E : unmanaged, Enum
                 => Enum.IsDefined(typeof(E), e);

@@ -10,14 +10,14 @@ namespace Z0
     using static Part;
     using static memory;
 
-    public readonly struct ClrEnum<T>
-        where T : unmanaged, Enum
+    public readonly struct ClrEnum<E>
+        where E : unmanaged, Enum
     {
         public Type Definition => TD;
 
         [MethodImpl(Inline)]
-        public ClrEnumDetailInfo<T> Summary()
-            => new ClrEnumDetailInfo<T>(address(_Details), address(_Literals), address(_Fields), FieldCount);
+        public ClrEnumDetails<E> Summary()
+            => new ClrEnumDetails<E>(address(_Details), address(_Literals), address(_Fields), FieldCount);
 
         public Count FieldCount
         {
@@ -37,25 +37,25 @@ namespace Z0
             get => new ClrEnum(Definition);
         }
 
-        public ReadOnlySpan<T> Literals
+        public ReadOnlySpan<E> Literals
         {
             [MethodImpl(Inline)]
             get => _Literals.View;
         }
 
-        public ReadOnlySpan<ClrEnumField<T>> Fields
+        public ReadOnlySpan<ClrEnumField<E>> Fields
         {
             [MethodImpl(Inline)]
             get => _Fields.View;
         }
 
-        public ReadOnlySpan<EnumLiteralDetail<T>> Details
+        public ReadOnlySpan<EnumLiteralDetail<E>> Details
         {
             [MethodImpl(Inline)]
             get => _Details.View;
         }
 
-        public EnumDetailProvider<T> DetailProvider
+        public EnumDetailProvider<E> DetailProvider
         {
             [MethodImpl(Inline)]
             get => Provider;
@@ -68,30 +68,28 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator ClrEnum(ClrEnum<T> src)
+        public static implicit operator ClrEnum(ClrEnum<E> src)
             => src.Untyped;
 
         [MethodImpl(Inline)]
-        public static implicit operator Type(ClrEnum<T> src)
+        public static implicit operator Type(ClrEnum<E> src)
             => src.Definition;
 
         [MethodImpl(Inline)]
-        public static implicit operator ClrType<T>(ClrEnum<T> src)
+        public static implicit operator ClrType<E>(ClrEnum<E> src)
             => default;
 
-        static readonly Type TD = typeof(T);
+        static readonly Type TD = typeof(E);
 
-        static readonly EnumDetailProvider<T> Provider = EnumDetailProvider<T>.create();
-
-        [FixedAddressValueType]
-        static readonly Index<EnumLiteralDetail<T>> _Details = Provider.Details;
+        static readonly EnumDetailProvider<E> Provider = EnumDetailProvider<E>.create();
 
         [FixedAddressValueType]
-        static Index<T> _Literals = Provider.LiteralValues;
+        static readonly Index<EnumLiteralDetail<E>> _Details = Provider.Details;
 
         [FixedAddressValueType]
-        static Index<ClrEnumField<T>> _Fields = Provider.EnumFields;
+        static Index<E> _Literals = Provider.LiteralValues;
+
+        [FixedAddressValueType]
+        static Index<ClrEnumField<E>> _Fields = Provider.EnumFields;
     }
-
-
 }

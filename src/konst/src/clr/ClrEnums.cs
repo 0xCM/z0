@@ -13,29 +13,29 @@ namespace Z0
     public readonly partial struct ClrEnums
     {
         [MethodImpl(Inline)]
-        public static ClrEnumDetailInfo<E> summary<E>()
+        public static ClrEnumDetails<E> summary<E>()
             where E : unmanaged, Enum
                 => default(ClrEnum<E>).Summary();
 
         [MethodImpl(Inline)]
-        public static ReadOnlySpan<E> literals<E>(ClrEnumDetailInfo<E> src)
+        public static ReadOnlySpan<E> literals<E>(ClrEnumDetails<E> src)
             where E : unmanaged, Enum
                 => src.LiteralValues;
 
         [MethodImpl(Inline), Op]
-        public static ClrEnumDetailInfo<Hex8Seq> summary(Hex8Seq rep)
+        public static ClrEnumDetails<Hex8Seq> summary(Hex8Seq rep)
             => summary<Hex8Seq>();
 
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<Hex8Seq> literals(ClrEnumDetailInfo<Hex8Seq> src)
+        public static ReadOnlySpan<Hex8Seq> literals(ClrEnumDetails<Hex8Seq> src)
             => literals<Hex8Seq>(src);
 
         [MethodImpl(Inline), Op]
-        public static ClrEnumDetailInfo<CreditTypes.ContentField> summary(CreditTypes.ContentField rep)
+        public static ClrEnumDetails<CreditTypes.ContentField> summary(CreditTypes.ContentField rep)
             => summary<CreditTypes.ContentField>();
 
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<CreditTypes.ContentField> literals(ClrEnumDetailInfo<CreditTypes.ContentField> src)
+        public static ReadOnlySpan<CreditTypes.ContentField> literals(ClrEnumDetails<CreditTypes.ContentField> src)
             => literals<CreditTypes.ContentField>(src);
 
     }

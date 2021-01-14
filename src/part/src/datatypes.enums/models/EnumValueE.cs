@@ -14,22 +14,22 @@ namespace Z0
     /// Captures an <typeparamname name='E'/> parametric enum value along with the <see cref='FieldInfo'/> that defines the corresponding enum literal
     /// </summary>
     [Datatype]
-    public readonly struct EnumFieldValue<E>
+    public readonly struct EnumValue<E>
         where E : unmanaged, Enum
     {
         public FieldInfo Field {get;}
 
-        public E EnumValue {get;}
+        public E LiteralValue {get;}
 
         [MethodImpl(Inline)]
-        public EnumFieldValue(FieldInfo field, E value)
+        public EnumValue(FieldInfo field, E value)
         {
             Field = field;
-            EnumValue = value;
+            LiteralValue = value;
         }
 
         public string Format()
-            => EnumValue.ToString();
+            => LiteralValue.ToString();
 
         public override string ToString()
             => Format();

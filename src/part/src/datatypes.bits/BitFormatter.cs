@@ -20,6 +20,11 @@ namespace Z0
             where T : struct
                 => default;
 
+        [Op, Closures(Closure)]
+        public static string format<T>(T src, int? digits = null)
+            where T : unmanaged
+                => BitFormatter.format(src, digits != null ? BitFormatter.limited((uint)digits.Value, digits.Value)  : BitFormatter.configure());
+
         public static BitFormat DefaultConfig
             => configure(false);
 

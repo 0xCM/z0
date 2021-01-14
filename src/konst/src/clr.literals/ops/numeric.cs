@@ -53,7 +53,7 @@ namespace Z0
                 else if(LiteralAttributes.HasBinaryLiteral(field))
                     dst.Add(LiteralAttributes.BinaryLiteral(field,vRaw));
                 else
-                    dst.Add(Numeric.base2(field.Name, vRaw, BitFormatter.format(vRaw, tc)));
+                    dst.Add(Numeric.literal(field.Name, vRaw, BitFormatter.format(vRaw, tc), NumericBaseKind.Base2));
             }
             return dst.ToArray();
         }

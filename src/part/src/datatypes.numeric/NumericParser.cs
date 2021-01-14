@@ -64,7 +64,7 @@ namespace Z0
                 return unparsed<T>(src);
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         static bit parse_u<T>(string src, out T dst)
             where T : unmanaged
         {
@@ -116,7 +116,7 @@ namespace Z0
                 return parse_i(src, out dst);
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(SignedInts)]
         static bit parse_i<T>(string src, out T dst)
             where T : unmanaged
         {
@@ -168,7 +168,7 @@ namespace Z0
                 return parse_f(src, out dst);
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Floats)]
         static bit parse_f<T>(string src, out T dst)
             where T : unmanaged
         {

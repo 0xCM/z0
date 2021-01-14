@@ -12,9 +12,9 @@ namespace Z0
     partial struct ClrLiterals
     {
         [MethodImpl(Inline)]
-        public static EnumFieldValues<E,T> index<E,T>(EnumFieldValue<E,T>[] src)
+        public static EnumValues<E,T> index<E,T>(EnumValue<E,T>[] src)
             where E : unmanaged, Enum
             where T : unmanaged
-                => new EnumFieldValues<E,T>(src);
+                => new EnumValues<E,T>(src);
     }
 }

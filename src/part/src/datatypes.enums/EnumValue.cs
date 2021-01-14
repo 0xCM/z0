@@ -11,7 +11,7 @@ namespace Z0
     using static memory;
 
     [ApiHost]
-    public readonly struct EnumValue
+    public readonly partial struct EnumValue
     {
         const NumericKind Closure = Integers;
 

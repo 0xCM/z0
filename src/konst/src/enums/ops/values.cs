@@ -17,13 +17,13 @@ namespace Z0
             where T : unmanaged
                 => ClrLiterals.search<E>(typeof(E)).Select(f => sys.constant<T>(f));
 
-        public static EnumFieldValues<E,T> values<E,T>(Type src)
+        public static EnumValues<E,T> values<E,T>(Type src)
             where E : unmanaged, Enum
             where T : unmanaged
         {
             var tValues = LiteralFields.values<T>(src);
             var count = tValues.Length;
-            var eValueBuffer = memory.alloc<EnumFieldValue<E,T>>(count);
+            var eValueBuffer = memory.alloc<EnumValue<E,T>>(count);
             var dst = span(eValueBuffer);
 
             for(var i=0u; i<count; i++)
@@ -31,7 +31,7 @@ namespace Z0
                 ref readonly var srcVal = ref tValues[i];
                 ref readonly var tVal = ref srcVal.Right;
                 ref readonly var srcField = ref srcVal.Left;
-                seek(dst, i) = new EnumFieldValue<E,T>(srcField, EnumValue.read<E,T>(tVal), tVal);
+                seek(dst, i) = new EnumValue<E,T>(srcField, EnumValue.read<E,T>(tVal), tVal);
             }
 
             return index(eValueBuffer);

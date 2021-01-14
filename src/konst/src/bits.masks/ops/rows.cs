@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
 
-    using static Konst;
+    using static Part;
     using static z;
     using static TextRules;
 
@@ -30,7 +30,7 @@ namespace Z0
                 else if(LiteralAttributes.HasBinaryLiteral(field))
                     dst.Add(BitMasks.row(LiteralAttributes.BinaryLiteral(field,vRaw)));
                 else
-                    dst.Add(BitMasks.row(Numeric.base2(field.Name, vRaw, BitFormatter.format(vRaw, tc))));
+                    dst.Add(BitMasks.row(Numeric.literal(base2, field.Name, vRaw, BitFormatter.format(vRaw, tc))));
             }
             return dst.ToArray();
         }

@@ -11,30 +11,30 @@ namespace Z0
     using static Part;
 
      /// <summary>
-    /// Captures an <typeparamname name='E'/> parametric enum value and the integral <typeparamref name='P'/> value along with the <see cref='FieldInfo'/>
+    /// Captures an <typeparamname name='E'/> parametric enum value and the integral <typeparamref name='E'/> value along with the <see cref='FieldInfo'/>
     /// that defines the corresponding enum literal
     /// </summary>
     [Datatype]
-    public readonly struct EnumFieldValue<E,P>
+    public readonly struct EnumValue<E,T>
         where E : unmanaged, Enum
     {
         public FieldInfo Field {get;}
 
-        public E EnumValue {get;}
+        public E LiteralValue {get;}
 
-        public P NumericValue {get;}
+        public T NumericValue {get;}
 
         [MethodImpl(Inline)]
-        public EnumFieldValue(FieldInfo field,  E eValue, P tValue)
+        public EnumValue(FieldInfo field,  E eValue, T tValue)
         {
             Field = field;
-            EnumValue = eValue;
+            LiteralValue = eValue;
             NumericValue = tValue;
         }
 
         [MethodImpl(Inline)]
         public string FormatEnum()
-            => EnumValue.ToString();
+            => LiteralValue.ToString();
 
         [MethodImpl(Inline)]
         public string FormatNumeric()
@@ -42,7 +42,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            =>$"{EnumValue}:{NumericValue}";
+            =>$"{LiteralValue}:{NumericValue}";
 
         public override string ToString()
             => Format();

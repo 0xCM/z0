@@ -40,5 +40,25 @@ namespace Z0
         public static ushort? uint16<T>(T? src)
             where T : unmanaged
                 => As<T?, ushort?>(ref src);
+
+        /// <summary>
+        /// Projects a sequence of <typeparamref name='T'/> cells onto a sequence of <see cref='ushort'/> cells
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <typeparam name="T">The source type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Span<ushort> uint16<T>(Span<T> src)
+            where T : struct
+                => recover<T,ushort>(src);
+
+        /// <summary>
+        /// Projects a readonly sequence of <typeparamref name='T'/> cells onto a readonly sequence of <see cref='ushort'/> cells
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <typeparam name="T">The source type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ReadOnlySpan<ushort> uint16<T>(ReadOnlySpan<T> src)
+            where T : struct
+                => recover<T,ushort>(src);
     }
 }

@@ -39,5 +39,25 @@ namespace Z0
         public static byte? uint8<T>(T? src)
             where T : struct
                 => As<T?, byte?>(ref src);
+
+        /// <summary>
+        /// Projects a sequence of <typeparamref name='T'/> cells onto a sequence of <see cref='byte'/> cells
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <typeparam name="T">The source type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Span<byte> uint8<T>(Span<T> src)
+            where T : struct
+                => recover<T,byte>(src);
+
+        /// <summary>
+        /// Projects a readonly sequence of <typeparamref name='T'/> cells onto a sequence of readonly <see cref='byte'/> cells
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <typeparam name="T">The source type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ReadOnlySpan<byte> uint8<T>(ReadOnlySpan<T> src)
+            where T : struct
+                => recover<T,byte>(src);
     }
 }

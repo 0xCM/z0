@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Reflection;
+    using static Part;
 
     public static class LiteralAttributes
     {
@@ -14,7 +15,7 @@ namespace Z0
         {
             if(!HasBinaryLiteral(target))
                 return NumericLiteral.Empty;
-            return Numeric.base2(target.Name, value, target.Tag<BinaryLiteralAttribute>().Value.Text);
+            return Numeric.literal(base2, target.Name, value, target.Tag<BinaryLiteralAttribute>().Value.Text);
         }
 
         public static bool HasBinaryLiteral(FieldInfo target)
