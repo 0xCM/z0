@@ -103,10 +103,10 @@ namespace Z0.Asm
         public static AsmOpCodePart part(asci8 src)
             => new AsmOpCodePart(src);
 
-        public static EnumLiteralNames<IceMnemonic> Mnemonics
+        public static Index<string> Mnemonics
         {
             [MethodImpl(Inline), Op]
-            get => Enums.NameIndex<IceMnemonic>();
+            get => ClrEnums.names<IceMnemonic>();
         }
 
         [Op]

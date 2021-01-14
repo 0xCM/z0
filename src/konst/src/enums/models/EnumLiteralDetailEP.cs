@@ -58,10 +58,10 @@ namespace Z0
             get => Spec.LiteralValue;
         }
 
-        variant IEnumLiteral.ScalarValue
+        public ulong ScalarValue
         {
             [MethodImpl(Inline)]
-            get => Variant.from(Spec.LiteralValue);
+            get => memory.w64(LiteralValue);
         }
 
         /// <summary>
@@ -76,25 +76,19 @@ namespace Z0
         public ClrToken Token
         {
             [MethodImpl(Inline)]
-            get => Spec.Id;
+            get => Spec.Token;
         }
 
         public FieldInfo Field
         {
             [MethodImpl(Inline)]
-            get => Spec.BackingField;
+            get => Spec.DefiningField;
         }
 
-        public Type DataType
+        public Type PrimalType
         {
             [MethodImpl(Inline)]
             get => typeof(P);
-        }
-
-        public string Description
-        {
-            [MethodImpl(Inline)]
-            get => Spec.Description;
         }
 
 

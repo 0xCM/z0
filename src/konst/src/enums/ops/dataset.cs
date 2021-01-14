@@ -22,7 +22,7 @@ namespace Z0
             var src = LiteralSequence<E,T>();
             var count = src.Length;
             var token = ClrToken.from<E>();
-            var datatype = kind<E>();
+            var datatype = ClrEnums.@base<E>();
             var description = string.Empty;
             var indices = sys.alloc<uint>(count);
             var names = sys.alloc<string>(count);
@@ -37,7 +37,7 @@ namespace Z0
                 names[i] = src[i].Name;
                 literals[i] = src[i].LiteralValue;
                 numeric[i] = src[i].PrimalValue;
-                descriptions[i] = src[i].Description;
+                descriptions[i] = string.Empty;
                 tokens[i] = src[i].Token;
             }
 

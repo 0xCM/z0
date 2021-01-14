@@ -16,6 +16,11 @@ namespace Z0
         const NumericKind Closure = Integers;
 
         [MethodImpl(Inline)]
+        public static E zero<E>()
+            where E : unmanaged, Enum
+                => default(E);
+
+        [MethodImpl(Inline)]
         public static ref T store<E,T>(in E e, out T dst)
             where E : unmanaged
             where T : unmanaged

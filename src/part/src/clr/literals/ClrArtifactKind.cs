@@ -47,5 +47,7 @@ namespace Z0
         TypeParam = P2ᐞ14,
 
         Type = Struct | Class | Delegate | Interface | Enum,
+
+        EnumField = Enum | Field,
     }
 }

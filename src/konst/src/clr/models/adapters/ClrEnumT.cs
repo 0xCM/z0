@@ -6,21 +6,13 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
-    using System.Linq;
 
     using static Part;
 
-    /// <summary>
-    /// Represents a parametrically-identified clr enum
-    /// </summary>
     public readonly struct ClrEnum<T>
         where T : unmanaged, Enum
     {
         public Type Definition => TD;
-
-        public static ClrEnum<T> create()
-            => default;
 
         public ClrToken Token
         {
@@ -37,7 +29,25 @@ namespace Z0
         public ReadOnlySpan<T> Literals
         {
             [MethodImpl(Inline)]
-            get => _Literals;
+            get => _Literals.View;
+        }
+
+        public ReadOnlySpan<ClrEnumField<T>> Fields
+        {
+            [MethodImpl(Inline)]
+            get => _Fields.View;
+        }
+
+        public ReadOnlySpan<EnumLiteralDetail<T>> Details
+        {
+            [MethodImpl(Inline)]
+            get => _Details.View;
+        }
+
+        public EnumDetailProvider<T> DetailProvider
+        {
+            [MethodImpl(Inline)]
+            get => Provider;
         }
 
         public ClrTypeName Name
@@ -60,35 +70,15 @@ namespace Z0
 
         static readonly Type TD = typeof(T);
 
-        static readonly EnumLiteralDetails<T> _Details = Data();
+        static readonly EnumDetailProvider<T> Provider = EnumDetailProvider<T>.create();
 
-        static T[] _Literals = LiteralValues();
+        [FixedAddressValueType]
+        static readonly Index<EnumLiteralDetail<T>> _Details = Provider.Details;
 
-        static EnumLiteralDetails<T> Data()
-        {
-            var type = ClrEnums.@base<T>();
-            var fields = typeof(T).LiteralFields().ToArray();
-            var indices = new List<EnumLiteralDetail<T>>(fields.Length);
-            for(var i=0u; i< fields.Length; i++)
-            {
-                var field = fields[i];
-                var value = (T)field.GetRawConstantValue();
-                indices.Add(new EnumLiteralDetail<T>(field, type, i, field.Name, value, string.Empty));
-            }
-            return indices.ToIndex();
-        }
+        [FixedAddressValueType]
+        static Index<T> _Literals = Provider.LiteralValues;
 
-        /// <summary>
-        /// Gets the literals defined by an enumeration
-        /// </summary>
-        /// <typeparam name="E">The enum type</typeparam>
-        static T[] LiteralValues()
-        {
-            var i = _Details;
-            var dst = new T[i.Length];
-            for(var j = 0; j<dst.Length; j++)
-                dst[j] = i[j].LiteralValue;
-            return dst;
-        }
+        [FixedAddressValueType]
+        static Index<ClrEnumField<T>> _Fields = Provider.EnumFields;
     }
 }

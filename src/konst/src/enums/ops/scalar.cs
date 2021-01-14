@@ -12,18 +12,6 @@ namespace Z0
     partial class Enums
     {
         /// <summary>
-        /// Reads a generic numeric value from a generic enum.
-        /// </summary>
-        /// <param name="e">The enum value to reinterpret</param>
-        /// <typeparam name="E">The enum source type</typeparam>
-        /// <typeparam name="V">The value type</typeparam>
-        [MethodImpl(Inline)]
-        public static unsafe T scalar<E,T>(E e)
-            where E : unmanaged, Enum
-            where T : unmanaged
-                => EnumValue.scalar<E,T>(e);
-
-        /// <summary>
         /// Reads a T-value from an E-enum value of primal T-kind.
         /// </summary>
         /// <param name="eVal">The enum value</param>

@@ -16,8 +16,6 @@ namespace Z0
 
         readonly T[] Storage;
 
-        readonly EnumLiteralNames<K> nameIndex;
-
         readonly K[] keys;
 
         readonly EnumLiteralDetail<K>[] keyIndex;
@@ -31,11 +29,10 @@ namespace Z0
         {
             Storage = data;
             Key = typeof(K);
-            nameIndex = Enums.NameIndex<K>();
             keys = Enums.literals<K>();
             keyIndex = Enums.index<K>().Content;
-            keyNames = Enums.names<K>();
-            keyKind = Enums.kind<K>();
+            keyNames = ClrEnums.names<K>();
+            keyKind = ClrEnums.@base<K>();
         }
 
         public ReadOnlySpan<T> View
@@ -66,12 +63,6 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => Key;
-        }
-
-        public EnumLiteralNames<K> KeyNameIndex
-        {
-            [MethodImpl(Inline)]
-            get => nameIndex;
         }
 
         public ReadOnlySpan<K> KeyValues

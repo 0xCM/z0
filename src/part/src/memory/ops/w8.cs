@@ -20,11 +20,11 @@ namespace Z0
         public static byte w8<T>(T src)
             where T : unmanaged
         {
-            if(size<T>() == 8)
+            if(bitwidth<T>() == 8)
                 return uint8(src);
-            else if(size<T>() == 16)
+            else if(bitwidth<T>() == 16)
                 return (byte)uint16(src);
-            else if(size<T>() == 32)
+            else if(bitwidth<T>() == 32)
                 return (byte)uint32(src);
             else
                 return (byte)uint64(src);
@@ -39,11 +39,11 @@ namespace Z0
         public static ushort w16<T>(T src)
             where T : unmanaged
         {
-            if(size<T>() == 8)
+            if(bitwidth<T>() == 8)
                 return uint8(src);
-            if(size<T>() == 16)
+            if(bitwidth<T>() == 16)
                 return uint16(src);
-            else if(size<T>() == 32)
+            else if(bitwidth<T>() == 32)
                 return (ushort)uint32(src);
             else
                 return (ushort)uint64(src);
@@ -59,11 +59,11 @@ namespace Z0
         public static uint w32<T>(T src)
             where T : unmanaged
         {
-            if(size<T>() == 8)
+            if(bitwidth<T>() == 8)
                 return uint8(src);
-            if(size<T>() == 16)
+            if(bitwidth<T>() == 16)
                 return uint16(src);
-            else if(size<T>() == 32)
+            else if(bitwidth<T>() == 32)
                 return uint32(src);
             else
                 return (uint)uint64(src);
@@ -78,11 +78,11 @@ namespace Z0
         public static ulong w64<T>(T src)
             where T : unmanaged
         {
-            if(size<T>() == 8)
+            if(bitwidth<T>() == 8)
                 return uint8(src);
-            if(size<T>() == 16)
+            if(bitwidth<T>() == 16)
                 return uint16(src);
-            else if(size<T>() == 32)
+            else if(bitwidth<T>() == 32)
                 return uint32(src);
             else
                 return uint64(src);

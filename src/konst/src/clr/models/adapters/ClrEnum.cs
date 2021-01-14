@@ -31,7 +31,7 @@ namespace Z0
             get => Definition;
         }
 
-        public ClrStruct BaseType
+        public ClrStruct RefinedType
         {
             [MethodImpl(Inline)]
             get => new ClrStruct(Definition.GetEnumUnderlyingType());
@@ -58,7 +58,7 @@ namespace Z0
             {
                 var field = fields[i];
                 var value = (E)field.GetRawConstantValue();
-                indices.Add(new EnumLiteralDetail<E>(field, type, i, field.Name, value, string.Empty));
+                indices.Add(new EnumLiteralDetail<E>(field, type, i, field.Name, value));
             }
             return indices.ToIndex();
         }

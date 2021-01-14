@@ -9,9 +9,9 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
-    using static Konst;
+    using static Part;
 
-    using api = Z0.Enums;
+    using api = EnumValue;
 
     partial class XTend
     {
@@ -51,7 +51,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool IsNone<E>(this E src)
             where E : unmanaged, Enum
-                => Z0.Enums.zero<E>().Equals(src);
+                => api.zero<E>().Equals(src);
 
         [MethodImpl(Inline)]
         public static T MapSomeOrElse<E,T>(this E kind, Func<E,T> ifSome, Func<T> ifNone)
@@ -66,7 +66,7 @@ namespace Z0
         public static T NumericValue<E,T>(this E src, T dst = default)
             where E : unmanaged, Enum
             where T : unmanaged
-                => Z0.Enums.scalar<E,T>(src);
+                => api.scalar<E,T>(src);
 
         [MethodImpl(Inline)]
         public static TypeCode TypeCode(this ClrEnumCode k)
@@ -114,10 +114,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ulong ToUInt64<E>(this E src)
             where E : unmanaged, Enum
-                => api.e64u(src);
+                => EnumValue.e64u(src);
 
         [MethodImpl(Inline)]
         public static ClrEnumKind EnumScalarKind(this Type src)
-            => api.kind(src);
+            => ClrEnums.@base(src);
     }
 }

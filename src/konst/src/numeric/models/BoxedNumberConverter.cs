@@ -21,7 +21,7 @@ namespace Z0
         /// <typeparam name="T">The target numeric type</typeparam>
         [MethodImpl(Inline)]
         public T Convert<T>(BoxedNumber src)
-            => (T)NumericBox.rebox(src.Boxed, Numeric.kind<T>());
+            => (T)Numeric.rebox(src.Boxed, Numeric.kind<T>());
 
         /// <summary>
         /// Puts a number in a box of kind parametric
@@ -37,7 +37,7 @@ namespace Z0
             try
             {
                 var src = (BoxedNumber)incoming;
-                return NumericBox.rebox(src.Boxed, dst.NumericKind());
+                return Numeric.rebox(src.Boxed, dst.NumericKind());
             }
             catch(Exception e)
             {

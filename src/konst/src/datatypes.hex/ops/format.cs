@@ -13,6 +13,26 @@ namespace Z0
 
     partial class Hex
     {
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static string format<T>(in T src)
+            where T : struct
+        {
+            var count = size<T>();
+            var dst = span<char>(count*2);
+            ref readonly var bytes = ref @as<T,byte>(src);
+            var j = count*2 - 1;
+
+            for(var i=0u; i<count; i++)
+            {
+                ref readonly var d = ref skip(bytes,i);
+                seek(dst, j--) = (char)Hex.code(LowerCase, UI.crop4(d));
+                seek(dst, j--) = (char)Hex.code(LowerCase, UI.srl(d, n4, w4));
+            }
+
+            return dst.ToString();
+        }
+
         /// <summary>
         /// Renders a primal numeric value as hex-formatted text
         /// </summary>
@@ -23,19 +43,31 @@ namespace Z0
         /// <param name="prespec">Specifies whether the hex specifier, if emitted, should be the canonical prefix or postfix specifier</param>
         /// <typeparam name="T">The primal numeric type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        internal static string format<T>(T src, bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true)
+        internal static string format<T>(T src, bool zpad, bool specifier, bool uppercase = false, bool prespec = true)
             where T : unmanaged
                 => format_u(src,zpad, specifier, uppercase, prespec);
 
         /// <summary>
-        /// Formats a sequence of primal numeric calls as data-formatted hex
+        /// Formats a span pf presumed integral values as a sequence of hex values
         /// </summary>
-        /// <param name="src">The source data</param>
-        /// <typeparam name="T">The numeric type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static string format<T>(ReadOnlySpan<T> src)
+        /// <param name="src">The source span</param>
+        /// <param name="bracket">Whether to format the result as a vector</param>
+        /// <param name="sep">The character to use when separating digits</param>
+        /// <param name="specifier">Whether to prefix each number with the canonical hex specifier, "0x"</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        public static string format<T>(ReadOnlySpan<T> src,  char sep = Chars.Space, bool specifier = false)
             where T : unmanaged
-                => formatter<T>().Format(src, HexFormatSpecs.HexData);
+        {
+            var builder = Z0.text.build();
+            for(var i = 0; i<src.Length; i++)
+            {
+                builder.Append(Hex.format(src[i], true, specifier));
+                if(i != src.Length - 1)
+                    builder.Append(sep);
+            }
+
+            return builder.ToString();
+        }
 
         [MethodImpl(Inline), Op]
         static string format64(ulong src, bool postspec = false)

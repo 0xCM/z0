@@ -9,8 +9,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
 
-    using static Konst;
-
+    using static Part;
     using static z;
 
     [ApiHost]
@@ -187,7 +186,5 @@ namespace Z0
                 z.seek(dst,i) = sys.current(e);
             return dst;
         }
-
-
     }
 }

@@ -32,7 +32,7 @@ namespace Z0
             for(var i=0; i<index.Length; i++)
             {
                 var literal = index[i];
-                dst[i] =  evalue(literal, scalar<E,T>(literal.LiteralValue));
+                dst[i] =  evalue(literal, EnumValue.scalar<E,T>(literal.LiteralValue));
             }
             return dst;
         }

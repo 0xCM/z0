@@ -9,8 +9,6 @@ namespace Z0
     using static Part;
     using static z;
 
-    using W = Windows;
-
     class Runner
     {
         readonly WfHost Host;
@@ -59,9 +57,30 @@ namespace Z0
             }
         }
 
-        public void RunTests()
+
+        void CheckFlags()
         {
-            var src = FS.path(@"K:\dumps\capture.dmp");
+
+            var flags = Clr.@enum<Windows.MinidumpType>();
+            var provider = flags.DetailProvider;
+            var count = provider.FieldCount;
+            //var details = provider.Details.View;
+            var details = flags.Details;
+
+            if(count == 0)
+                Wf.Error("No flags");
+
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var detail = ref skip(details,i);
+                var description = string.Format("{0,-12} | {1,-48} | {2}", detail.Position, detail.Name, detail.ScalarValue.FormatHex());
+                Wf.Row(description);
+            }
+        }
+
+        void SummarizeDump()
+        {
+            var src = Db.DumpFilePath("capture");
             if(src.Exists)
             {
                 var formatter = Records.formatter<Minidump.FileHeader>();
@@ -76,6 +95,13 @@ namespace Z0
                 // Wf.Row(string.Format("Sig:{0}, Version:{1}, NumerOfStreams:{2}, Flags:{3}",
                 //     sig, header.Version & ushort.MaxValue, header.NumberOfStreams, header.Flags));
             }
+            else
+                Wf.Error($"The file {src} does not exist");
+        }
+
+        public void RunTests()
+        {
+            CheckFlags();
         }
     }
 }

@@ -38,7 +38,7 @@ namespace Z0
             for(var i=0u; i<count; i++)
             {
                 ref readonly var field = ref skip(fields,i);
-                seek(dst,i) = new TableColumn((ushort)i, field.Name, (ushort)NumericBox.rebox(field.GetRawConstantValue(), NumericKind.U16));
+                seek(dst,i) = new TableColumn((ushort)i, field.Name, (ushort)Numeric.rebox(field.GetRawConstantValue(), NumericKind.U16));
             }
             return buffer;
         }

@@ -9,8 +9,37 @@ namespace Z0
 
     using static Part;
 
+    using NBK = NumericBaseKind;
+
     partial struct Numeric
     {
+        [MethodImpl(Inline), Op]
+        public static NumericLiteral base2(string Name, object Value, string Text)
+            => new NumericLiteral(Name, Value, Text, NBK.Base2);
+
+        [MethodImpl(Inline), Op]
+        public static NumericLiteral base10(string Name, object Value, string Text)
+            => new NumericLiteral(Name, Value, Text, NBK.Base10);
+
+        [MethodImpl(Inline), Op]
+        public static NumericLiteral base16(string Name, object Value, string Text)
+            => new NumericLiteral(Name, Value, Text, NBK.Base16);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static NumericLiteral<T> base2<T>(string Name, T Value, string Text)
+            where T : unmanaged
+                => new NumericLiteral<T>(Name, Value, Text, NBK.Base2);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static NumericLiteral<T> base10<T>(string Name, T data, string Text)
+            where T : unmanaged
+            => new NumericLiteral<T>(Name, data, Text, NBK.Base10);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static NumericLiteral<T> base16<T>(string Name, T data, string Text)
+            where T : unmanaged
+                => new NumericLiteral<T>(Name, data, Text, NBK.Base16);
+
         /// <summary>
         /// Creates a parametric numeric comparer
         /// </summary>

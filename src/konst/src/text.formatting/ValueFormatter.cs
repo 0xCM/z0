@@ -7,12 +7,12 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     using NK = ClrEnumCode;
 
-    [ApiHost("formatting.values")]
+    [ApiHost]
     public readonly struct ValueFormatter
     {
         [MethodImpl(Inline), Op,Closures(Integers)]
@@ -37,7 +37,7 @@ namespace Z0
 
         public string FormatEnum<E>(E src, N2 n, int? digits = null)
             where E : unmanaged, Enum
-                => Enums.typecode<E>() switch {
+                => ClrPrimitives.ecode<E>() switch {
                     NK.U8 => Format(Enums.e8u(src), n, digits),
                     NK.I8 => Format(Enums.e8i(src), n, digits),
                     NK.I16 => Format(Enums.e16i(src), n, digits),
@@ -51,7 +51,7 @@ namespace Z0
 
         public string FormatEnum<E>(E src, N8 n)
             where E : unmanaged, Enum
-                => Enums.typecode<E>() switch {
+                => ClrPrimitives.ecode<E>() switch {
                     NK.U8 => Format(Enums.e8u(src), n),
                     NK.I8 => Format(Enums.e8i(src), n),
                     NK.I16 => Format(Enums.e16i(src), n),
@@ -65,7 +65,7 @@ namespace Z0
 
         public string FormatEnum<E>(E src, N16 n, int? digits = null)
             where E : unmanaged, Enum
-                => Enums.typecode<E>() switch {
+                => ClrPrimitives.ecode<E>() switch {
                     NK.U8 => Format(Enums.e8u(src), n, digits),
                     NK.I8 => Format(Enums.e8i(src), n, digits),
                     NK.I16 => Format(Enums.e16i(src), n, digits),
@@ -79,7 +79,7 @@ namespace Z0
 
         public string FormatEnum<E>(E src, N10 n, int? digits = null)
             where E : unmanaged, Enum
-                => Enums.typecode<E>() switch {
+                => ClrPrimitives.ecode<E>() switch {
                     NK.U8 => Format(Enums.e8u(src), n, digits),
                     NK.I8 => Format(Enums.e8i(src), n, digits),
                     NK.I16 => Format(Enums.e16i(src), n, digits),
@@ -93,7 +93,7 @@ namespace Z0
 
         public string FormatEnum<E>(E src, NumericBaseKind @base, int? digits = null)
             where E : unmanaged, Enum
-                => Enums.typecode<E>() switch {
+                => ClrPrimitives.ecode<E>() switch {
                     NK.U8 => Format(Enums.e8u(src), @base, digits),
                     NK.I8 => Format(Enums.e8i(src), @base, digits),
                     NK.I16 => Format(Enums.e16i(src), @base, digits),

@@ -9,7 +9,7 @@ namespace Z0
     using System.Reflection;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     [ApiHost(ApiNames.BitFieldSpecs, true)]
@@ -230,8 +230,8 @@ namespace Z0
             where I : unmanaged, Enum
             where W : unmanaged, Enum
         {
-            var i = Enums.scalar<I,byte>(entry.FieldIndex);
-            var width = Enums.scalar<W,byte>(entry.FieldWidth);
+            var i = EnumValue.scalar<I,byte>(entry.FieldIndex);
+            var width = EnumValue.scalar<W,byte>(entry.FieldWidth);
             var end = (byte)(start + width - 1);
             var seg = segment(width, (start, end));
             start = (byte)(end + 1);

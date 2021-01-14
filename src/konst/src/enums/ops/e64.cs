@@ -30,20 +30,5 @@ namespace Z0
         public static ulong e64u<E>(E e)
             where E : unmanaged, Enum
                 => EnumValue.e64u(e);
-
-        /// <summary>
-        /// Reads an i64 value from an enum of primal i64-kind, writes the value to a u64 target, and returns the extracted i64 value
-        /// </summary>
-        /// <param name="src">The enum value</param>
-        /// <param name="dst">The storage target</param>
-        /// <typeparam name="E">The enum type</typeparam>
-        [MethodImpl(Inline)]
-        public static ref long i64<E>(in E src, ref ulong dst)
-            where E : unmanaged, Enum
-        {
-            ref var tVal = ref z.@as<E,long>(src);
-            dst = (ulong)tVal;
-            return ref tVal;
-        }
     }
 }

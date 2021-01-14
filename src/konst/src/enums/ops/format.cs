@@ -16,19 +16,7 @@ namespace Z0
         public static string format<E1,E2>(in EnumPair<E1,E2> src)
             where E1: unmanaged, Enum
             where E2: unmanaged, Enum
-                => $"{src.Name}([{Enums.scalar<E1,ulong>(src.First)}: {typeof(E1).Name}], [{Enums.scalar<E2,ulong>(src.Second)}: {typeof(E2).Name}])";
-
-
-        [MethodImpl(Inline), Op]
-        public static string format(in EnumDatasetEntry src, char delimiter = FieldDelimiter)
-        {
-            var dst = text.build();
-            dst.Delimit(D.Token, src.Id);
-            dst.Delimit(D.Index, src.Index);
-            dst.Delimit(D.Name, src.Name);
-            dst.Delimit(D.Scalar, src.ScalarValue);
-            return dst.ToString();
-        }
+                => $"{src.Name}([{EnumValue.scalar<E1,ulong>(src.First)}: {typeof(E1).Name}], [{EnumValue.scalar<E2,ulong>(src.Second)}: {typeof(E2).Name}])";
 
         [MethodImpl(Inline)]
         public static string format<E,T>(in EnumDatasetEntry<E,T> src, char delimiter = FieldDelimiter)

@@ -28,13 +28,10 @@ namespace Z0
             => typeof(K);
 
         ClrEnumKind ISemanticLookup.KeyKind
-            => Enums.kind<K>();
-
-        EnumLiteralNames<K> KeyNameIndex
-            => Enums.NameIndex<K>();
+            => ClrEnums.@base<K>();
 
         ReadOnlySpan<string> ISemanticLookup.KeyNames
-            => Enums.names<K>();
+            => ClrEnums.names<K>();
 
         ReadOnlySpan<K> KeyValues
             => Enums.literals<K>();

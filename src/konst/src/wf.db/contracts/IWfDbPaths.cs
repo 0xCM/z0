@@ -39,10 +39,13 @@ namespace Z0
              => Csv;
 
         FS.FolderPath DumpFileRoot()
-            => ArchiveRoot() + FS.folder(dumps);
+            => BinaryRoot() + FS.folder(dumps);
 
         FS.FilePath DumpFilePath(string id)
             => DumpFileRoot() + FS.file(id, Dmp);
+
+        FS.FilePath DumpFilePath(PartId id)
+            => DumpFilePath(id.Format());
 
         FS.FolderPath EventRoot()
             => Root + FS.folder(events);

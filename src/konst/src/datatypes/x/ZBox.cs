@@ -7,9 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
-    partial class XDataTypes
+    partial class XTend
     {
         /// <summary>
         /// Returns 0 in a box
@@ -17,6 +17,6 @@ namespace Z0
         /// <param name="kind">The numeric kind of 0 to be put into the box</param>
         [MethodImpl(Inline), Op]
         public static BoxedNumber ZBox(this NumericKind kind)
-            => BoxedNumber.Define(NumericBox.rebox(byte.MinValue, kind), kind);
+            => BoxedNumber.Define(Numeric.rebox(byte.MinValue, kind), kind);
    }
 }

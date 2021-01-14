@@ -46,7 +46,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BoxedNumber From<E>(E e)
             where E : unmanaged, Enum
-                => Define(System.Convert.ChangeType(e, Enums.typecode<E>().TypeCode()), Enums.typecode<E>().NumericKind());
+                => Define(System.Convert.ChangeType(e, ClrPrimitives.ecode<E>().TypeCode()), ClrPrimitives.ecode<E>().NumericKind());
 
         public static BoxedNumber From(Enum e)
         {
@@ -321,6 +321,5 @@ namespace Z0
 
         public static BoxedNumber Empty
             => new BoxedNumber(DBNull.Value, NumericKind.None);
-
     }
 }

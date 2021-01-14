@@ -14,7 +14,6 @@ namespace Z0
 
     partial class Minidump
     {
-
         [Record(TableId)]
         public unsafe struct FileHeader : IRecord<FileHeader>
         {

@@ -9,8 +9,6 @@ namespace Z0
 
     using static Part;
 
-    using api = Values;
-
     public readonly struct KindedIdentity<K,I> : IEquatable<KindedIdentity<K,I>>, ITextual
         where I : unmanaged
         where K : unmanaged
@@ -35,13 +33,13 @@ namespace Z0
         public Span<byte> Edit
         {
             [MethodImpl(Inline), Op]
-            get => api.edit(this);
+            get => DataTypes.edit(this);
         }
 
         public ReadOnlySpan<byte> View
         {
             [MethodImpl(Inline), Op]
-            get => api.view(this);
+            get => DataTypes.view(this);
         }
 
         [MethodImpl(Inline), Op]
@@ -50,11 +48,11 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public bool Equals(KindedIdentity<K,I> src)
-            => api.eq(this,src);
+            => DataTypes.eq(this,src);
 
         [MethodImpl(Inline), Op]
         public override int GetHashCode()
-            => (int)api.hash(this);
+            => (int)DataTypes.hash(this);
 
         public override bool Equals(object src)
             => src is KindedIdentity<K,I> x && Equals(x);

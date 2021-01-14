@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     [ApiHost]
@@ -27,11 +27,11 @@ namespace Z0
         public static void unpack<T>(in T src, Span<bit> dst)
             where T : struct
         {
-            var size = z.size<T>();
-            ref readonly var input = ref uint8(ref edit(src));
+            var size = memory.size<T>();
+            ref readonly var input = ref memory.uint8(ref edit(src));
             for(var i=0u; i<size; i++)
             {
-                ref readonly var b = ref skip(input,i);
+                ref readonly var b = ref memory.skip(input,i);
                 for(byte j=0; j<8; j++)
                     seek(dst,j) = BitStates.test(b,j);
             }

@@ -12,10 +12,10 @@ namespace Z0.Asm
     [ApiHost]
     public readonly partial struct AsmTables
     {
-        public static EnumLiteralNames<IceMnemonic> Mnemonics
+        public static Index<string> Mnemonics
         {
             [MethodImpl(Inline), Op]
-            get => Enums.NameIndex<IceMnemonic>();
+            get => ClrEnums.names<IceMnemonic>();
         }
     }
 }

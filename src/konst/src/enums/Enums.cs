@@ -14,20 +14,6 @@ namespace Z0
     [ApiHost]
     public partial class Enums
     {
-        [MethodImpl(Inline)]
-        public static E zero<E>()
-            where E : unmanaged, Enum
-                => default(E);
-
-        /// <summary>
-        /// Determines an enumeration's underlying kind
-        /// </summary>
-        /// <typeparam name="E">The enum type</typeparam>
-        [MethodImpl(Inline)]
-        public static ClrEnumCode typecode<E>()
-            where E : unmanaged, Enum
-                => ClrPrimitives.ecode<E>();
-
         /// <summary>
         /// Reads a generic enum member from a generic value
         /// </summary>
@@ -80,7 +66,7 @@ namespace Z0
                 => from f in typeof(E).LiteralFields().ToArray()
                    where f.Tagged<BinaryLiteralAttribute>()
                    let a = f.Tag<BinaryLiteralAttribute>().Require()
-                   select z.literal(base2, f.Name, scalar<E,T>((E)f.GetValue(null)), a.Text);
+                   select z.literal(base2, f.Name, EnumValue.scalar<E,T>((E)f.GetValue(null)), a.Text);
 
         /// <summary>
         /// Gets the literals defined by an enumeration

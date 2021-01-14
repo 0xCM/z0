@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     /// <summary>
@@ -39,7 +39,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector24 FromEnum<T>(T src)
             where T : unmanaged, Enum
-                => Enums.scalar<T,uint>(src);
+                => EnumValue.scalar<T,uint>(src);
 
         /// <summary>
         /// Initializes the vector

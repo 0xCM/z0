@@ -153,42 +153,6 @@ namespace Z0
 
         const long Ones64i = -1;
 
-        [MethodImpl(Inline), Op]
-        public static NumericLiteral define(string Name, object Value, string Text, NBK @base)
-            => new NumericLiteral(Name,Value,Text, @base);
-
-        [MethodImpl(Inline), Op]
-        public static NumericLiteral base2(string Name, object Value, string Text)
-            => new NumericLiteral(Name, Value, Text, NBK.Base2);
-
-        [MethodImpl(Inline), Op]
-        public static NumericLiteral base10(string Name, object Value, string Text)
-            => new NumericLiteral(Name, Value, Text, NBK.Base10);
-
-        [MethodImpl(Inline), Op]
-        public static NumericLiteral base16(string Name, object Value, string Text)
-            => new NumericLiteral(Name, Value, Text, NBK.Base16);
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static NumericLiteral<T> base2<T>(string Name, T Value, string Text)
-            where T : unmanaged
-                => new NumericLiteral<T>(Name, Value, Text, NBK.Base2);
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static NumericLiteral<T> base10<T>(string Name, T data, string Text)
-            where T : unmanaged
-            => new NumericLiteral<T>(Name, data, Text, NBK.Base10);
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static NumericLiteral<T> base16<T>(string Name, T data, string Text)
-            where T : unmanaged
-            => new NumericLiteral<T>(Name, data, Text, NBK.Base16);
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static NumericLiteral<T> define<T>(string Name, T data, string Text, NBK @base)
-            where T : unmanaged
-                => new NumericLiteral<T>(Name,data, Text, @base);
-
         /// <summary>
         /// Returns generic 0 for a primal source type
         /// </summary>

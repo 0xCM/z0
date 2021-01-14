@@ -7,13 +7,8 @@ namespace Z0.Meta
     using System;
     using System.Runtime.CompilerServices;
 
-    using Z0.Lang;
-
     using static Part;
     using static memory;
-
-    using Cs = Lang.CSharp;
-
 
     [ApiHost("meta.blocks")]
     public struct DataBlocks

@@ -30,6 +30,6 @@ namespace Z0
         where R : struct
     {
         string[] ITabular.HeaderNames
-            => Enums.names<F>();
+            => ClrEnums.names<F>();
     }
 }

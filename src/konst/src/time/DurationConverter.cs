@@ -24,9 +24,9 @@ namespace Z0
             => force<T,long>(src);
 
         public Option<object> ConvertFromTarget(object incoming, Type dst)
-            => Option.Try(() => NumericBox.rebox(((Duration)incoming).Ticks, dst.NumericKind()));
+            => Option.Try(() => Numeric.rebox(((Duration)incoming).Ticks, dst.NumericKind()));
 
         public Option<object> ConvertToTarget(object incoming)
-            => Option.Try(() => (Duration)(long)NumericBox.rebox(incoming, NumericKind.I64));
+            => Option.Try(() => (Duration)(long)Numeric.rebox(incoming, NumericKind.I64));
     }
 }

@@ -21,7 +21,7 @@ namespace Z0
         public static T sll<T,E>(T x, E offset)
             where T : unmanaged
             where E : unmanaged, Enum
-                => sll(x, Enums.scalar<E,byte>(offset));
+                => sll(x, EnumValue.scalar<E,byte>(offset));
 
         /// <summary>
         /// Applies a logical left-shift to an integral value

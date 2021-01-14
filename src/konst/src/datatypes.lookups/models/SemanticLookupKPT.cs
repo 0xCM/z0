@@ -43,12 +43,11 @@ namespace Z0
         {
             Data = data;
             keyType = typeof(K);
-            nameIndex = Enums.NameIndex<K>();
             keys = Enums.literals<K>();
             literals = Enums.values<K,P>();
             keyIndex = literals.Storage;
-            keyNames = Enums.names<K>();
-            keyKind = Enums.kind<K>();
+            keyNames = ClrEnums.names<K>();
+            keyKind = ClrEnums.@base<K>();
         }
 
         public ReadOnlySpan<T> View

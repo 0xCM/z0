@@ -7,17 +7,17 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     [ApiHost]
     readonly struct BitConversionOps
     {
         public static Option<object> FromTarget(object incoming, Type dst)
-            => Option.Try(() => NumericBox.rebox((uint)(Bit32)incoming, dst.NumericKind()));
+            => Option.Try(() => Numeric.rebox((uint)(Bit32)incoming, dst.NumericKind()));
 
         public static Option<object> ToTarget(object incoming)
-            => Option.Try(() => (Bit32)(byte)NumericBox.rebox(incoming, NumericKind.U8));
+            => Option.Try(() => (Bit32)(byte)Numeric.rebox(incoming, NumericKind.U8));
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Bit32 to<T>(T src)

@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     partial struct z
     {
@@ -21,7 +21,7 @@ namespace Z0
         public static T[] where<T>(ReadOnlySpan<T> src, Func<T,bool> f)
         {
             var length = src.Length;
-            var dst = sys.span<T>(length);
+            var dst = memory.span<T>(length);
             var count = 0u;
             for(var i=0u; i<length; i++)
             {
