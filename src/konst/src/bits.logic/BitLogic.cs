@@ -9,7 +9,7 @@ namespace Z0
 
     using static System.Runtime.Intrinsics.X86.Sse41;
     using static System.Runtime.Intrinsics.X86.Avx;
-    using static Part;
+    using static Konst;
     using static z;
 
     public readonly partial struct BitLogic

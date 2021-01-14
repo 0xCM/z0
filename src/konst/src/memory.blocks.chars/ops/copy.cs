@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Konst;
     using static z;
 
     partial struct CharBlocks
@@ -16,7 +16,7 @@ namespace Z0
         public static ref T copy<T>(ReadOnlySpan<char> src, ref T dst)
             where T : unmanaged, ICharBlock<T>
         {
-            var length = (uint)min(src.Length, size<T>()/2);
+            var length = (uint)root.min(src.Length, size<T>()/2);
             z.copy(first(src), ref @as<T,char>(dst), length);
             return ref dst;
         }

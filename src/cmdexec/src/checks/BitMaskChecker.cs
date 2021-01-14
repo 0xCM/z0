@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Text;
 
-    using static Part;
+    using static Konst;
     using static Checks;
     using static z;
     using static BitMasks;
@@ -80,10 +80,10 @@ namespace Z0
             Cases16 = DataSource.Fill(z8, (byte)bitwidth<ushort>(), span<byte>(Reps));
             Cases32 = DataSource.Fill(z8, (byte)bitwidth<uint>(), span<byte>(Reps));
             Cases64 = DataSource.Fill(z8, (byte)bitwidth<uint>(), span<byte>(Reps));
-            Literals8 = ClrLiterals.tagged<byte>(base2, typeof(BitMasks.Literals));
-            Literals16 = ClrLiterals.tagged<ushort>(base2, typeof(BitMasks.Literals));
-            Literals32 = ClrLiterals.tagged<uint>(base2, typeof(BitMasks.Literals));
-            Literals64 = ClrLiterals.tagged<ulong>(base2, typeof(BitMasks.Literals));
+            Literals8 = ClrLiterals.tagged<byte>(Part.base2, typeof(BitMasks.Literals));
+            Literals16 = ClrLiterals.tagged<ushort>(Part.base2, typeof(BitMasks.Literals));
+            Literals32 = ClrLiterals.tagged<uint>(Part.base2, typeof(BitMasks.Literals));
+            Literals64 = ClrLiterals.tagged<ulong>(Part.base2, typeof(BitMasks.Literals));
             HiMaskResults8 = alloc<CheckHiMaskResult<byte>>(Reps);
             HiMaskResults16 = alloc<CheckHiMaskResult<ushort>>(Reps);
             HiMaskResults32 = alloc<CheckHiMaskResult<uint>>(Reps);
@@ -128,7 +128,7 @@ namespace Z0
             var flow = Wf.Running();
             var results = 0ul;
             var index = z8;
-            Check(base2);
+            Check(Part.base2);
             CheckLoMasks(ref index, ref results);
             Himask(w8);
             Himask(w16);

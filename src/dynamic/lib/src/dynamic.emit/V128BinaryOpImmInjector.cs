@@ -11,7 +11,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Linq;
 
-    using static Part;
+    using static Konst;
     using static z;
 
     readonly struct V128BinaryOpImmInjector : IImmInjector

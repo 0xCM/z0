@@ -7,10 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     partial class Widths
-    {        
+    {
         [MethodImpl(Inline)]
         public static uint mul<A,B>(A a = default, B b = default)
             where A : unmanaged, IDataWidth
@@ -20,7 +20,7 @@ namespace Z0
                 return 1;
             else if(typeof(B) == typeof(W1))
                 return 1;
-            else 
+            else
                 return mul_lo(a,b);
         }
 
@@ -29,7 +29,7 @@ namespace Z0
             where A : unmanaged,IDataWidth
             where B : unmanaged, IDataWidth
         {
-            if(typeof(A) == typeof(W8))                
+            if(typeof(A) == typeof(W8))
                 return mul8(b);
             else if(typeof(A) == typeof(W16))
                 return mul16(b);
@@ -77,7 +77,7 @@ namespace Z0
                 return a*256;
             else if(typeof(W) == typeof(W512))
                 return a*512;
-            else 
+            else
                 return a*1024;
         }
 
@@ -100,7 +100,7 @@ namespace Z0
                 return a*256;
             else if(typeof(W) == typeof(W512))
                 return a*512;
-            else 
+            else
                 return a*1024;
         }
 
@@ -123,7 +123,7 @@ namespace Z0
                 return a*256;
             else if(typeof(W) == typeof(W512))
                 return a*512;
-            else 
+            else
                 return a*1024;
         }
 
@@ -146,7 +146,7 @@ namespace Z0
                 return a*256;
             else if(typeof(W) == typeof(W512))
                 return a*512;
-            else 
+            else
                 return a*1024;
         }
 
@@ -169,7 +169,7 @@ namespace Z0
                 return a*256;
             else if(typeof(W) == typeof(W512))
                 return a*512;
-            else 
+            else
                 return a*1024;
         }
 
@@ -192,7 +192,7 @@ namespace Z0
                 return a*256;
             else if(typeof(W) == typeof(W512))
                 return a*512;
-            else 
+            else
                 return a*1024;
         }
 
@@ -215,9 +215,9 @@ namespace Z0
                 return a*256;
             else if(typeof(W) == typeof(W512))
                 return a*512;
-            else 
+            else
                 return a*1024;
-        } 
+        }
 
         [MethodImpl(Inline)]
         static uint mul1024<W>(W w = default)
@@ -238,8 +238,8 @@ namespace Z0
                 return a*256;
             else if(typeof(W) == typeof(W512))
                 return a*512;
-            else 
+            else
                 return a*1024;
-        } 
+        }
     }
 }

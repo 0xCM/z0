@@ -28,13 +28,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(W) == typeof(W8))
-                return cells<T>(z.w8);
+                return cells<T>(w8);
             else if(typeof(W) == typeof(W16))
-                return cells<T>(z.w16);
+                return cells<T>(w16);
             else if(typeof(W) == typeof(W32))
-                return cells<T>(z.w32);
+                return cells<T>(w32);
             else if(typeof(W) == typeof(W64))
-                return cells<T>(z.w64);
+                return cells<T>(w64);
             else
                 return cells_hi<W,T>();
         }
@@ -45,13 +45,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(W) == typeof(W128))
-                return cells<T>(z.w128);
+                return cells<T>(w128);
             else if(typeof(W) == typeof(W256))
-                return cells<T>(z.w256);
+                return cells<T>(w256);
             else if(typeof(W) == typeof(W512))
-                return cells<T>(z.w512);
+                return cells<T>(w512);
             else if(typeof(W) == typeof(W1024))
-                return cells<T>(z.w1024);
+                return cells<T>(w1024);
             else
                 return 0;
         }

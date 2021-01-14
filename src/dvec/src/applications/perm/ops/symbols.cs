@@ -10,7 +10,7 @@ namespace Z0
     using System.Linq;
     using System.Runtime.Intrinsics;
 
-    using static Part;
+    using static Konst;
     using static BitMasks.Literals;
     using static z;
 
