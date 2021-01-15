@@ -8,9 +8,14 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static Asm.IceOpKind;
 
     partial struct asm
     {
+        [MethodImpl(Inline), Op]
+        public static IceRegister memBase(IceInstruction src, byte index)
+            => opkind(src,index) == Memory ? src.MemoryBase : 0;
+
         [MethodImpl(Inline), Op]
         public static AsmRegMemory memory(RegisterKind @base, AsmDisplacement dx, MemoryScale scale)
             => new AsmRegMemory(@base, dx, scale);
@@ -38,6 +43,5 @@ namespace Z0.Asm
             dst.IPRelativeMemoryAddress = src.IPRelativeMemoryAddress;
             return dst;
         }
-
     }
 }

@@ -13,16 +13,19 @@ namespace Z0
     [Free]
     public interface IPositioned
     {
-        /// <summary>
-        /// The 0-based position of the item in an enclosing container
-        /// </summary>
-        int Position {get;}
+        dynamic Position => 0u;
     }
 
     [Free]
-    public interface IPositioned<F> : IPositioned
-        where F : IPositioned<F>, new()
+    public interface IPositioned<T> : IPositioned
+        where T : unmanaged
     {
+        /// <summary>
+        /// The 0-based position of the item in an enclosing container
+        /// </summary>
+        new T Position {get;}
 
+        dynamic IPositioned.Position
+            => Position;
     }
 }

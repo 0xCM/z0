@@ -22,7 +22,7 @@ namespace Z0.Asm
         [Op]
         public static ReadOnlySpan<string> lines(in AsmRoutine src, in AsmFormatConfig config)
         {
-            var summaries = asm.summarize(src);
+            var summaries = summarize(src);
             var count = summaries.Length;
             if(count == 0)
                 return default;
@@ -33,6 +33,36 @@ namespace Z0.Asm
             return dst;
         }
 
+        /// <summary>
+        /// Describes the instructions that comprise a function
+        /// </summary>
+        /// <param name="src">The source function</param>
+        [Op]
+        public static ReadOnlySpan<AsmInstructionSummary> summarize(in AsmRoutine src)
+        {
+            var count = src.InstructionCount;
+            var buffer = new AsmInstructionSummary[count];
+            var offset = 0u;
+            var @base = src.BaseAddress;
+            var view = src.Instructions.View;
+            var dst = span(buffer);
+
+            for(var i=0u; i<count; i++)
+            {
+                ref readonly var instruction = ref skip(view,i);
+                var size = (uint)instruction.ByteLength;
+
+                if(src.Code.Length < offset + size)
+                {
+                    term.error($"Instruction size mismatch {instruction.IP} {offset} {src.Code.Length} {size}");
+                    continue;
+                }
+
+                seek(dst, i) = asm.summarize(@base, instruction, src.Code.Code, instruction.FormattedInstruction, offset);
+                offset += size;
+            }
+            return dst;
+        }
 
         [MethodImpl(Inline), Op]
         public static string format(AsmSpecifier src, byte[] encoded, string sep)

@@ -16,7 +16,7 @@ namespace Z0
     /// Defines a 16-bit immediate value
     /// </summary>
     [Datatype]
-    public readonly struct Imm16 : IImmValue<I,W16,ushort>
+    public readonly struct Imm16 : IImmediate<I,W16,ushort>
     {
         public ushort Content {get;}
 
@@ -36,7 +36,7 @@ namespace Z0
         public uint Hash
         {
             [MethodImpl(Inline)]
-            get => z.hash(Content);
+            get => alg.hash.calc(Content);
         }
 
         public override int GetHashCode()

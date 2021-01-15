@@ -16,7 +16,7 @@ namespace Z0
     /// Defines an 8-bit immediate value
     /// </summary>
     [Datatype]
-    public readonly struct Imm8 : IImmValue<I,W,byte>
+    public readonly struct Imm8 : IImmediate<I,W,byte>
     {
         public byte Content {get;}
 
@@ -24,18 +24,17 @@ namespace Z0
         public Imm8(byte src)
             => Content = src;
 
-        [MethodImpl(Inline)]
+        public uint Hash
+        {
+            [MethodImpl(Inline)]
+            get => alg.hash.calc(Content);
+        }
+
         public string Format()
             => Hex.format(Content, W);
 
         public override string ToString()
             => Format();
-
-        public uint Hash
-        {
-            [MethodImpl(Inline)]
-            get => z.hash(Content);
-        }
 
         public override int GetHashCode()
             => (int)Hash;

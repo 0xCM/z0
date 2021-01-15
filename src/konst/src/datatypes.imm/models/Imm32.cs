@@ -16,7 +16,7 @@ namespace Z0
     /// Defines a 32-bit immediate value
     /// </summary>
     [Datatype]
-    public readonly struct Imm32 : IImmValue<I,W32,uint>
+    public readonly struct Imm32 : IImmediate<I,W32,uint>
     {
         public uint Content {get;}
 
@@ -34,7 +34,7 @@ namespace Z0
         public uint Hash
         {
             [MethodImpl(Inline)]
-            get => z.hash(Content);
+            get => alg.hash.calc(Content);
         }
 
         public override int GetHashCode()

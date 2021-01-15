@@ -10,7 +10,6 @@ namespace Z0
     using static Part;
     using static memory;
     using static HexFormatSpecs;
-    using static HexCharData;
 
     partial class Hex
     {

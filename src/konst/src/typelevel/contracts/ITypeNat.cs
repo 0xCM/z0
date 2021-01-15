@@ -49,7 +49,7 @@ namespace Z0
 
     }
 
-    public interface IIndexed<F,N> : IPositioned<F>, ITypeNat<N>
+    public interface IIndexed<F,N> : IPositioned<int>, ITypeNat<N>
         where F : struct, IIndexed<F,N>
         where N : unmanaged, ITypeNat
     {

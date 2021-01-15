@@ -16,7 +16,7 @@ namespace Z0
     /// Defines a 64-bit immediate value
     /// </summary>
     [Datatype]
-    public readonly struct Imm64 : IImmValue<I,W64,ulong>
+    public readonly struct Imm64 : IImmediate<I,W64,ulong>
     {
         public ulong Content {get;}
 
@@ -26,21 +26,21 @@ namespace Z0
         public Imm64(ulong src)
             => Content = src;
 
-        [MethodImpl(Inline)]
+        public uint Hash
+        {
+            [MethodImpl(Inline)]
+            get => alg.hash.calc(Content);
+        }
+
+
+        public override int GetHashCode()
+            => (int)Hash;
+
         public string Format()
             => Hex.format(Content, W);
 
         public override string ToString()
             => Format();
-
-        public uint Hash
-        {
-            [MethodImpl(Inline)]
-            get => z.hash(Content);
-        }
-
-        public override int GetHashCode()
-            => (int)Hash;
 
         [MethodImpl(Inline)]
         public int CompareTo(I src)

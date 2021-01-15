@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
     using static z;
-    using static HexCharData;
+    using static HexFormatSpecs;
 
     partial class Hex
     {

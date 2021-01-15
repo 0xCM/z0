@@ -15,7 +15,7 @@ namespace Z0
     /// Defines a refined 64-bit immediate value
     /// </summary>
     [Datatype]
-    public readonly struct Imm64<K> : IImmValue<Imm64<K>,W,K>
+    public readonly struct Imm64<K> : IImmediate<Imm64<K>,W,K>
         where K : unmanaged
     {
         public K Content {get;}
@@ -24,7 +24,6 @@ namespace Z0
         public Imm64(K src)
             => Content = src;
 
-        [MethodImpl(Inline)]
         public string Format()
             => Hex.format(Content, W);
 

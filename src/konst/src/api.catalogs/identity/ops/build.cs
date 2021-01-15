@@ -29,7 +29,7 @@ namespace Z0
             else if(w.IsSome())
                 return OpIdentityParser.parse(text.concat(opname, IDI.PartSep, $"{g}{w.Format()}{IDI.SegSep}{k.Format()}"));
             else
-                return OpIdentityParser.parse(TextFormatter.concat($"{opname}_{g}{k.Format()}"));
+                return OpIdentityParser.parse(Strings.concat($"{opname}_{g}{k.Format()}"));
         }
 
         /// <summary>

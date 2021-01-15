@@ -9,6 +9,7 @@ namespace Z0
 
     using static Part;
     using static z;
+    using static HexFormatSpecs;
 
     partial struct SymbolStore
     {
@@ -75,7 +76,7 @@ namespace Z0
         /// <param name="case">The case selector</param>
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<HexSymUp> hex(byte src, UpperCased @case)
-            => recover<byte,HexSymUp>(HexCharData.UpperHexDigits);
+            => recover<byte,HexSymUp>(UpperHexDigits);
 
         /// <summary>
         /// Presents the source value as a sequence of hex symbols
@@ -84,6 +85,6 @@ namespace Z0
         /// <param name="case">The case selector</param>
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<HexSymLo> hex(byte src, LowerCased @case)
-            => recover<byte,HexSymLo>(HexCharData.LowerHexDigits);
+            => recover<byte,HexSymLo>(LowerHexDigits);
     }
 }

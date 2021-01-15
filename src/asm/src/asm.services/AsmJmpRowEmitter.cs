@@ -37,7 +37,7 @@ namespace Z0
 
         void Dispatch(in ApiInstruction fx)
         {
-            var kind = AsmInstructions.jccKind(fx.Mnemonic);
+            var kind = AsmBuilder.jccKind(fx.Mnemonic);
             init(fx, kind, out var dst);
             Collected.Add(dst);
             broker.Get(kind).Handle(fx);

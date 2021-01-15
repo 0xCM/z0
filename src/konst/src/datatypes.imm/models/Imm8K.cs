@@ -15,7 +15,7 @@ namespace Z0
     /// Defines a refined 8-bit immediate value
     /// </summary>
     [Datatype]
-    public readonly struct Imm8<E> : IImmValue<Imm8<E>,W,E>
+    public readonly struct Imm8<E> : IImmediate<Imm8<E>,W,E>
         where E : unmanaged
     {
         public E Content {get;}
@@ -34,7 +34,7 @@ namespace Z0
         public uint Hash
         {
             [MethodImpl(Inline)]
-            get => z.hash(Content);
+            get => alg.hash.calc(Content);
         }
 
         public override int GetHashCode()

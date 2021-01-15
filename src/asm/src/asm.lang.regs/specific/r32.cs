@@ -10,318 +10,341 @@ namespace Z0.Asm
     using static Part;
 
     using K = RegisterKind;
+    using W = W32;
+    using T = System.UInt32;
+    using G = R32;
 
     partial struct AsmRegs
     {
-        public struct eax : IRegister<eax,W32,uint>
+        /// <summary>
+        /// Defines an operand that specifies a 32-bit gp register
+        /// </summary>
+        public struct r32 : IRegister<r32,W,T>, IAsmOperand<K,T>
         {
-            public uint Content {get;}
+            public byte Position {get;}
+
+            public T Content {get;}
+
+            public K Kind {get;}
 
             [MethodImpl(Inline)]
-            public static implicit operator R32(eax src)
-                => src.Generalized;
+            public r32(byte pos, T src, K kind)
+            {
+                Position = pos;
+                Content = src;
+                Kind = kind;
+            }
+        }
+
+        public struct eax : IRegister<eax,W,T>
+        {
+            public T Content {get;}
 
             [MethodImpl(Inline)]
-            public eax(uint value)
+            public eax(T value)
                 => Content = value;
 
             public K Kind => K.EAX;
 
-            public R32 Generalized
+            public G Generalized
             {
                 [MethodImpl(Inline)]
-                get =>new R32(Content, Kind);
+                get =>new G(Content, Kind);
             }
-        }
-
-        public struct ecx : IRegister<ecx,W32,uint>
-        {
-            public uint Content {get;}
 
             [MethodImpl(Inline)]
-            public static implicit operator R32(ecx src)
+            public static implicit operator R32(eax src)
+                => src.Generalized;
+        }
+
+        public struct ecx : IRegister<ecx,W,T>
+        {
+            public T Content {get;}
+
+            [MethodImpl(Inline)]
+            public static implicit operator G(ecx src)
                 => src.Generalized;
 
             [MethodImpl(Inline)]
-            public ecx(uint value)
+            public ecx(T value)
                 => Content = value;
 
             public K Kind => K.ECX;
 
-            public R32 Generalized
+            public G Generalized
             {
                 [MethodImpl(Inline)]
-                get =>new R32(Content, Kind);
+                get => new G(Content, Kind);
             }
         }
 
-        public struct edx : IRegister<edx,W32,uint>
+        public struct edx : IRegister<edx,W,T>
         {
-            public uint Content {get;}
+            public T Content {get;}
 
 
             [MethodImpl(Inline)]
-            public static implicit operator R32(edx src)
+            public static implicit operator G(edx src)
                 => src.Generalized;
 
             [MethodImpl(Inline)]
-            public edx(uint value)
+            public edx(T value)
                 => Content = value;
 
             public K Kind => K.EDX;
 
-            public R32 Generalized
+            public G Generalized
             {
                 [MethodImpl(Inline)]
-                get =>new R32(Content, Kind);
+                get =>new G(Content, Kind);
             }
         }
 
-        public struct ebx : IRegister<ebx,W32,uint>
+        public struct ebx : IRegister<ebx,W,T>
         {
-            public uint Content {get;}
+            public T Content {get;}
 
             [MethodImpl(Inline)]
-            public static implicit operator R32(ebx src)
+            public static implicit operator G(ebx src)
                 => src.Generalized;
 
             [MethodImpl(Inline)]
-            public ebx(uint value)
+            public ebx(T value)
                 => Content = value;
 
             public K Kind => K.EBX;
 
-            public R32 Generalized
+            public G Generalized
             {
                 [MethodImpl(Inline)]
-                get =>new R32(Content, Kind);
+                get =>new G(Content, Kind);
             }
         }
 
-        public struct esi : IRegister<esi,W32,uint>
+        public struct esi : IRegister<esi,W,T>
         {
-            public uint Content {get;}
+            public T Content {get;}
 
             [MethodImpl(Inline)]
-            public static implicit operator R32(esi src)
+            public static implicit operator G(esi src)
                 => src.Generalized;
 
             [MethodImpl(Inline)]
-            public esi(uint value)
+            public esi(T value)
                 => Content = value;
 
             public K Kind => K.ESI;
 
-            public R32 Generalized
+            public G Generalized
             {
                 [MethodImpl(Inline)]
-                get =>new R32(Content, Kind);
+                get =>new G(Content, Kind);
             }
         }
 
-        public struct edi : IRegister<edi,W32,uint>
+        public struct edi : IRegister<edi,W,T>
         {
-            public uint Content {get;}
+            public T Content {get;}
 
             [MethodImpl(Inline)]
-            public static implicit operator R32(edi src)
+            public static implicit operator G(edi src)
                 => src.Generalized;
 
             [MethodImpl(Inline)]
-            public edi(uint value)
+            public edi(T value)
                 => Content = value;
 
             public K Kind => K.EDI;
 
-            public R32 Generalized
+            public G Generalized
             {
                 [MethodImpl(Inline)]
-                get =>new R32(Content, Kind);
+                get =>new G(Content, Kind);
             }
         }
 
-        public struct esp : IRegister<esp,W32,uint>
+        public struct esp : IRegister<esp,W,T>
         {
-            public uint Content {get;}
+            public T Content {get;}
 
             [MethodImpl(Inline)]
-            public static implicit operator R32(esp src)
+            public static implicit operator G(esp src)
                 => src.Generalized;
 
             [MethodImpl(Inline)]
-            public esp(uint value)
+            public esp(T value)
                 => Content = value;
 
             public K Kind => K.ESP;
 
-            public R32 Generalized
+            public G Generalized
             {
                 [MethodImpl(Inline)]
-                get =>new R32(Content, Kind);
+                get =>new G(Content, Kind);
             }
         }
 
-        public struct ebp : IRegister<ebp,W32,uint>
+        public struct ebp : IRegister<ebp,W,T>
         {
-            public uint Content {get;}
+            public T Content {get;}
 
             [MethodImpl(Inline)]
-            public static implicit operator R32(ebp src)
+            public static implicit operator G(ebp src)
                 => src.Generalized;
 
             [MethodImpl(Inline)]
-            public ebp(uint value)
+            public ebp(T value)
             {
                 Content = value;
             }
 
             public K Kind => K.EBP;
 
-            public R32 Generalized
+            public G Generalized
             {
                 [MethodImpl(Inline)]
-                get =>new R32(Content, Kind);
+                get =>new G(Content, Kind);
             }
         }
 
-        public struct r8d : IRegister<r8d,W32,uint>
+        public struct r8d : IRegister<r8d,W,T>
         {
-            public uint Content {get;}
+            public T Content {get;}
 
             [MethodImpl(Inline)]
-            public r8d(uint value)
+            public r8d(T value)
                 => Content = value;
 
             public K Kind => K.R8D;
 
-            public R32 Generalized
+            public G Generalized
             {
                 [MethodImpl(Inline)]
-                get =>new R32(Content, Kind);
+                get =>new G(Content, Kind);
             }
         }
 
-        public struct r9d : IRegister<r9d,W32,uint>
+        public struct r9d : IRegister<r9d,W,T>
         {
-            public uint Content {get;}
+            public T Content {get;}
 
             [MethodImpl(Inline)]
-            public r9d(uint value)
+            public r9d(T value)
             {
                 Content = value;
             }
 
             public K Kind => K.R9D;
 
-            public R32 Generalized
+            public G Generalized
             {
                 [MethodImpl(Inline)]
-                get =>new R32(Content, Kind);
+                get =>new G(Content, Kind);
             }
         }
 
-        public struct r10d : IRegister<r10d,W32,uint>
+        public struct r10d : IRegister<r10d,W,T>
         {
-            public uint Content {get;}
+            public T Content {get;}
 
             [MethodImpl(Inline)]
-            public r10d(uint value)
+            public r10d(T value)
                 => Content = value;
 
             public K Kind => K.R10D;
 
-            public R32 Generalized
+            public G Generalized
             {
                 [MethodImpl(Inline)]
-                get =>new R32(Content, Kind);
+                get =>new G(Content, Kind);
             }
         }
 
-        public struct r11d : IRegister<r11d,W32,uint>
+        public struct r11d : IRegister<r11d,W,T>
         {
-            public uint Content {get;}
+            public T Content {get;}
 
             [MethodImpl(Inline)]
-            public r11d(uint value)
+            public r11d(T value)
                 => Content = value;
 
             public K Kind => K.R11D;
 
-            public R32 Generalized
+            public G Generalized
             {
                 [MethodImpl(Inline)]
-                get =>new R32(Content, Kind);
+                get =>new G(Content, Kind);
             }
         }
 
-        public struct r12d : IRegister<r12d,W32,uint>
+        public struct r12d : IRegister<r12d,W,T>
         {
-            public uint Content {get;}
+            public T Content {get;}
 
             [MethodImpl(Inline)]
-            public r12d(uint value)
+            public r12d(T value)
                 => Content = value;
 
             public K Kind => K.R12D;
 
-            public R32 Generalized
+            public G Generalized
             {
                 [MethodImpl(Inline)]
-                get =>new R32(Content, Kind);
+                get =>new G(Content, Kind);
             }
         }
 
-        public struct r13d : IRegister<r13d,W32,uint>
+        public struct r13d : IRegister<r13d,W,T>
         {
-            public uint Content {get;}
+            public T Content {get;}
 
             [MethodImpl(Inline)]
-            public r13d(uint value)
+            public r13d(T value)
             {
                 Content = value;
             }
 
             public K Kind => K.R13D;
 
-            public R32 Generalized
+            public G Generalized
             {
                 [MethodImpl(Inline)]
-                get =>new R32(Content, Kind);
+                get =>new G(Content, Kind);
             }
         }
 
-        public struct r14d : IRegister<r14d,W32,uint>
+        public struct r14d : IRegister<r14d,W,T>
         {
-            public uint Content {get;}
+            public T Content {get;}
 
 
             [MethodImpl(Inline)]
-            public r14d(uint value)
+            public r14d(T value)
                 => Content = value;
 
             public K Kind => K.R14D;
 
-            public R32 Generalized
+            public G Generalized
             {
                 [MethodImpl(Inline)]
-                get =>new R32(Content, Kind);
+                get =>new G(Content, Kind);
             }
         }
 
-        public struct r15d : IRegister<r15d,W32,uint>
+        public struct r15d : IRegister<r15d,W,T>
         {
-            public uint Content {get;}
+            public T Content {get;}
 
             [MethodImpl(Inline)]
-            public r15d(uint value)
+            public r15d(T value)
                 => Content = value;
 
             public K Kind => K.R15D;
 
-            public R32 Generalized
+            public G Generalized
             {
                 [MethodImpl(Inline)]
-                get =>new R32(Content, Kind);
+                get =>new G(Content, Kind);
             }
         }
     }

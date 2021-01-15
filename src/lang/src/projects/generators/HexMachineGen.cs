@@ -48,7 +48,7 @@ namespace Z0.Generate
         void OpenTypeDeclaration(int i, TextWriter dst)
         {
             dst.WriteLine(level(i, bracket(nameof(ApiHost))));
-            dst.WriteLine(level(i, TextFormatter.concat($"public struct {TargetTypeName}")));
+            dst.WriteLine(level(i, Strings.concat($"public struct {TargetTypeName}")));
             dst.WriteLine(level(i, LBrace));
         }
 

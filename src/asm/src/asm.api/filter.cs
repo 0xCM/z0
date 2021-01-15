@@ -7,14 +7,8 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using RF = RexFieldIndex;
-
     partial struct asm
     {
-        [Op]
-        public static string format(RexPrefixBits src)
-            => $"{RF.Code}:{src.Code} | {RF.W}:{src.W} | {RF.R}:{src.R} | {RF.X}:{src.X} | {RF.B}:{src.B}";
-
         /// <summary>
         /// Filters a set of instructions predicated on s specified mnemonic
         /// </summary>

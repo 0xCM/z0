@@ -78,7 +78,7 @@ namespace Z0.Generate
             => text.concat(KindName(m), Chars.Dot, AsciLetterLo.b, TypeDigits(m,n));
 
         protected string DeclareKindProperty(byte m, byte n)
-            => TextFormatter.concat($"public {KindName(m)} => {KindValue(m,n)};");
+            => Strings.concat($"public {KindName(m)} => {KindValue(m,n)};");
 
         protected string DeclareToString
             => "public override string ToString() => ValueName;";

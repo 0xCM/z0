@@ -9,11 +9,17 @@ namespace Z0.Asm
 
     using static Part;
 
+    using RF = RexFieldIndex;
+
     partial struct asm
     {
         [MethodImpl(Inline), Op]
         public static string format(in AsmCallRow src)
             => string.Format(AsmCallRow.RenderPattern, src.Source, src.Target, src.InstructionSize, src.TargetOffset, src.Instruction, src.Encoded);
+
+        [Op]
+        public static string format(RexPrefixBits src)
+            => $"{RF.Code}:{src.Code} | {RF.W}:{src.W} | {RF.R}:{src.R} | {RF.X}:{src.X} | {RF.B}:{src.B}";
 
         /// <summary>
         /// Computes the call-site offset relative to the base address of the client

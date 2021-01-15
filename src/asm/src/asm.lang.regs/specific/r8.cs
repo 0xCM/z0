@@ -10,62 +10,78 @@ namespace Z0.Asm
     using static Part;
 
     using K = RegisterKind;
+    using W = W8;
+    using T = System.Byte;
+    using G = R8;
 
     partial struct AsmRegs
     {
-        public struct al : IRegister<al,W8,byte,N0>
+        /// <summary>
+        /// Defines an operand that specifies an 8-bit gp register
+        /// </summary>
+        public struct r8 : IRegister<r8,W,T>, IAsmOperand<K,T>
         {
-            public byte Data;
+            public byte Position {get;}
 
-            byte IContented<byte>.Content
-                => Data;
+            public T Content {get;}
+
+            public K Kind {get;}
 
             [MethodImpl(Inline)]
-            public al(byte value)
-                => Data = value;
+            public r8(byte pos, T src, K kind)
+            {
+                Position = pos;
+                Content = src;
+                Kind = kind;
+            }
+        }
 
-            public K Kind
-                => K.AL;
+        public struct al : IRegister<al,W,T,N0>
+        {
+            public T Content {get;}
+
+            [MethodImpl(Inline)]
+            public al(T value)
+                => Content = value;
+
+            public K Kind => K.AL;
 
             public RegisterClass Class
                 => RegisterClass.GP;
 
             [MethodImpl(Inline)]
-            public static implicit operator R8(al src)
-                => new R8(src.Data, src.Kind);
+            public static implicit operator G(al src)
+                => new G(src.Content, src.Kind);
         }
 
-        public struct cl : IRegister<cl,W8,byte,N1>
+        public struct cl : IRegister<cl,W,T,N1>
         {
-            public byte Data;
+            public T Data;
 
-            byte IContented<byte>.Content
+            T IContented<T>.Content
                 => Data;
 
             [MethodImpl(Inline)]
-            public cl(byte value)
+            public cl(T value)
                 => Data = value;
 
             public K Kind => K.CL;
 
-            public RegisterClass Class
-                => RegisterClass.GP;
-
             [MethodImpl(Inline)]
-            public static implicit operator R8(cl src)
-                => new R8(src.Data, src.Kind);
+            public static implicit operator G(cl src)
+                => new G(src.Data, src.Kind);
 
         }
 
-        public struct dl : IRegister<dl,W8,byte,N2>
+        public struct dl : IRegister<dl,W,T,N2>
         {
-            public byte Data;
+            public T Data;
 
-            byte IContented<byte>.Content
+            T IContented<T>.Content
                 => Data;
 
             [MethodImpl(Inline)]
-            public dl(byte value)
+            public dl(T value)
                 => Data = value;
 
             public K Kind => K.DL;
@@ -74,184 +90,169 @@ namespace Z0.Asm
                 => RegisterClass.GP;
 
             [MethodImpl(Inline)]
-            public static implicit operator R8(dl src)
-                => new R8(src.Data, src.Kind);
+            public static implicit operator G(dl src)
+                => new G(src.Data, src.Kind);
         }
 
-        public struct bl : IRegister<bl,W8,byte,N3>
+        public struct bl : IRegister<bl,W,T,N3>
         {
-            public byte Data;
+            public T Data;
 
-            byte IContented<byte>.Content
+            T IContented<T>.Content
                 => Data;
 
             [MethodImpl(Inline)]
-            public static implicit operator R8(bl src)
-                => new R8(src.Data, src.Kind);
+            public static implicit operator G(bl src)
+                => new G(src.Data, src.Kind);
 
             [MethodImpl(Inline)]
-            public bl(byte value)
+            public bl(T value)
                 => Data = value;
 
             public K Kind => K.BL;
-
-            public RegisterClass Class
-                => RegisterClass.GP;
         }
 
-        public struct sil : IRegister<sil,W8,byte>
+        public struct sil : IRegister<sil,W,T>
         {
-            public byte Data;
+            public T Data;
 
-            byte IContented<byte>.Content
+            T IContented<T>.Content
                 => Data;
 
             [MethodImpl(Inline)]
-            public sil(byte value)
+            public sil(T value)
                 => Data = value;
 
             public K Kind => K.SIL;
 
-            public RegisterClass Class
-                => RegisterClass.GP;
-
             [MethodImpl(Inline)]
-            public static implicit operator R8(sil src)
-                => new R8(src.Data, src.Kind);
+            public static implicit operator G(sil src)
+                => new G(src.Data, src.Kind);
         }
 
-        public struct dil : IRegister<dil,W8,byte>
+        public struct dil : IRegister<dil,W,T>
         {
-            public byte Data;
+            public T Data;
 
-            byte IContented<byte>.Content
+            T IContented<T>.Content
                 => Data;
 
             [MethodImpl(Inline)]
-            public dil(byte value)
+            public dil(T value)
                 => Data = value;
 
             public K Kind => K.DIL;
 
-            public RegisterClass Class
-                => RegisterClass.GP;
-
             [MethodImpl(Inline)]
-            public static implicit operator R8(dil src)
-                => new R8(src.Data, src.Kind);
-
+            public static implicit operator G(dil src)
+                => new G(src.Data, src.Kind);
         }
 
-        public struct spl : IRegister<spl,W8,byte>
+        public struct spl : IRegister<spl,W,T>
         {
-            public byte Data;
+            public T Data;
 
-            byte IContented<byte>.Content
+            T IContented<T>.Content
                 => Data;
 
             [MethodImpl(Inline)]
-            public spl(byte value)
+            public spl(T value)
                 => Data = value;
 
             public K Kind => K.SPL;
 
-            public RegisterClass Class
-                => RegisterClass.GP;
 
             [MethodImpl(Inline)]
-            public static implicit operator R8(spl src)
-                => new R8(src.Data, src.Kind);
+            public static implicit operator G(spl src)
+                => new G(src.Data, src.Kind);
         }
 
-        public struct bpl : IRegister<bpl,W8,byte>
+        public struct bpl : IRegister<bpl,W,T>
         {
-            public byte Data;
+            public T Data;
 
-            byte IContented<byte>.Content
+            T IContented<T>.Content
                 => Data;
 
             [MethodImpl(Inline)]
-            public bpl(byte value)
+            public bpl(T value)
                 => Data = value;
 
             public K Kind => K.BPL;
 
             [MethodImpl(Inline)]
-            public static implicit operator R8(bpl src)
-                => new R8(src.Data, src.Kind);
+            public static implicit operator G(bpl src)
+                => new G(src.Data, src.Kind);
         }
 
-        public struct r8b : IRegister<r8b,W8,byte>
+        public struct r8b : IRegister<r8b,W,T>
         {
-            public byte Data;
-
-            byte IContented<byte>.Content
-                => Data;
+            public T Content {get;}
 
 
             [MethodImpl(Inline)]
-            public r8b(byte value)
-                => Data = value;
+            public r8b(T value)
+                => Content = value;
 
             public K Kind => K.R8L;
 
 
             [MethodImpl(Inline)]
-            public static implicit operator R8(r8b src)
-                => new R8(src.Data, src.Kind);
+            public static implicit operator G(r8b src)
+                => new G(src.Content, src.Kind);
         }
 
-        public struct r9b : IRegister<r9b,W8,byte>
+        public struct r9b : IRegister<r9b,W,T>
         {
-            public byte Data;
+            public T Data;
 
-            byte IContented<byte>.Content
+            T IContented<T>.Content
                 => Data;
 
             [MethodImpl(Inline)]
-            public r9b(byte value)
+            public r9b(T value)
                 => Data = value;
 
             public K Kind => K.R9L;
 
             [MethodImpl(Inline)]
-            public static implicit operator R8(r9b src)
-                => new R8(src.Data, src.Kind);
+            public static implicit operator G(r9b src)
+                => new G(src.Data, src.Kind);
         }
 
-        public struct r10b : IRegister<r10b,W8,byte>
+        public struct r10b : IRegister<r10b,W,T>
         {
-            public byte Data;
+            public T Data;
 
-            byte IContented<byte>.Content
+            T IContented<T>.Content
                 => Data;
 
             [MethodImpl(Inline)]
-            public r10b(byte value)
+            public r10b(T value)
                 => Data = value;
 
             public K Kind => K.R10L;
 
             [MethodImpl(Inline)]
-            public static implicit operator R8(r10b src)
-                => new R8(src.Data, src.Kind);
+            public static implicit operator G(r10b src)
+                => new G(src.Data, src.Kind);
         }
 
-        public struct r11b : IRegister<r11b,W8,byte>
+        public struct r11b : IRegister<r11b,W,T>
         {
-            public byte Data;
+            public T Data;
 
-            byte IContented<byte>.Content
+            T IContented<T>.Content
                 => Data;
 
-            public R8 Generalized
+            public G Generalized
             {
                 [MethodImpl(Inline)]
-                get =>new R8(Data, Kind);
+                get =>new G(Data, Kind);
             }
 
             [MethodImpl(Inline)]
-            public r11b(byte value)
+            public r11b(T value)
                 => Data = value;
 
             public K Kind => K.R11L;
@@ -260,21 +261,21 @@ namespace Z0.Asm
                 => RegisterClass.GP;
         }
 
-        public struct r12b : IRegister<r12b,W8,byte>
+        public struct r12b : IRegister<r12b,W,T>
         {
-            public byte Data;
+            public T Data;
 
-            byte IContented<byte>.Content
+            T IContented<T>.Content
                 => Data;
 
-            public R8 Generalized
+            public G Generalized
             {
                 [MethodImpl(Inline)]
-                get =>new R8(Data, Kind);
+                get =>new G(Data, Kind);
             }
 
             [MethodImpl(Inline)]
-            public r12b(byte value)
+            public r12b(T value)
                 => Data = value;
 
             public K Kind => K.R12L;
@@ -283,21 +284,21 @@ namespace Z0.Asm
                 => RegisterClass.GP;
         }
 
-        public struct r13b : IRegister<r13b,W8,byte>
+        public struct r13b : IRegister<r13b,W,T>
         {
-            public byte Data;
+            public T Data;
 
-            byte IContented<byte>.Content
+            T IContented<T>.Content
                 => Data;
 
-            public R8 Generalized
+            public G Generalized
             {
                 [MethodImpl(Inline)]
-                get =>new R8(Data, Kind);
+                get =>new G(Data, Kind);
             }
 
             [MethodImpl(Inline)]
-            public r13b(byte value)
+            public r13b(T value)
                 => Data = value;
 
             public K Kind => K.R13L;
@@ -306,21 +307,21 @@ namespace Z0.Asm
                 => RegisterClass.GP;
         }
 
-        public struct r14b : IRegister<r14b,W8,byte>
+        public struct r14b : IRegister<r14b,W,T>
         {
-            public byte Data;
+            public T Data;
 
-            byte IContented<byte>.Content
+            T IContented<T>.Content
                 => Data;
 
-            public R8 Generalized
+            public G Generalized
             {
                 [MethodImpl(Inline)]
-                get =>new R8(Data, Kind);
+                get =>new G(Data, Kind);
             }
 
             [MethodImpl(Inline)]
-            public r14b(byte value)
+            public r14b(T value)
                 => Data = value;
 
             public K Kind => K.R14L;
@@ -329,21 +330,21 @@ namespace Z0.Asm
                 => RegisterClass.GP;
         }
 
-        public struct r15b : IRegister<r15b,W8,byte>
+        public struct r15b : IRegister<r15b,W,T>
         {
-            public byte Data;
+            public T Data;
 
-            byte IContented<byte>.Content
+            T IContented<T>.Content
                 => Data;
 
-            public R8 Generalized
+            public G Generalized
             {
                 [MethodImpl(Inline)]
-                get => new R8(Data, Kind);
+                get => new G(Data, Kind);
             }
 
             [MethodImpl(Inline)]
-            public r15b(byte value)
+            public r15b(T value)
                 => Data = value;
 
             public K Kind => K.R15L;

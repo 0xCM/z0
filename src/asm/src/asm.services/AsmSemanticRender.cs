@@ -129,6 +129,25 @@ namespace Z0.Asm
 
         }
 
+        /// <summary>
+        /// Extracts register information, should it exist, from an index-identified register operand
+        /// </summary>
+        /// <param name="src">The source instruction</param>
+        /// <param name="index">The operand index</param>
+        [Op]
+		static IceRegister register(in IceInstruction src, byte index)
+        {
+			switch (index)
+            {
+                case 0: return src.Op0Register;
+                case 1: return src.Op1Register;
+                case 2: return src.Op2Register;
+                case 3: return src.Op3Register;
+                case 4: return src.Op4Register;
+			}
+            return 0;
+		}
+
         static void render(ReadOnlySpan<string> src, StreamWriter dst)
         {
             var count = src.Length;
@@ -143,9 +162,9 @@ namespace Z0.Asm
             var desc = EmptyString;
 
             if(AsmTest.isRegister(kind))
-                desc = format(asm.register(src,i));
+                desc = format(register(src,i));
             else if(AsmTest.isMem(kind))
-                desc = format(asm.meminfo(src, i));
+                desc = format(meminfo(src, i));
             else if (AsmTest.isBranch(kind))
                 desc = format(asm.branch(@base, src, i));
             else if(AsmTest.isImm(kind))
@@ -216,7 +235,7 @@ namespace Z0.Asm
         [Op]
         string LineLocation(IceInstruction src, MemoryAddress address, MemoryAddress offset, AsmOffsetSequence seq)
             => text.concat(FormatAddress(src, AddressPad),
-                Z0.TextFormatter.concat(text.spaced(offset)).PadRight(OffsetAddrPad),
+                Strings.concat(text.spaced(offset)).PadRight(OffsetAddrPad),
                 seq.Format(InstructionCountPad));
 
         static string format(AsmSpecifier src)
@@ -246,7 +265,7 @@ namespace Z0.Asm
             get => HexFormatSpecs.options(zpad:false, specifier:false);
         }
 
-        [Op, MethodImpl(NotInline)]
+        [Op]
         static string format(in AsmDisplacement src)
             => (src.Size switch{
                 AsmDisplacementSize.y1 => ((byte)src.Value).FormatHex(HexSpec),
@@ -255,9 +274,9 @@ namespace Z0.Asm
                 _ => (src.Value).FormatHex(HexSpec),
             }) + "dx";
 
-        [Op, MethodImpl(NotInline)]
+        [Op]
         static string format(in AsmImmInfo src)
-            => Z0.TextFormatter.concat(src.Value.FormatHex(zpad:false, prespec:false));
+            => Strings.concat(src.Value.FormatHex(zpad:false, prespec:false));
 
         [Op]
         static string format(IceRegister src)
@@ -344,11 +363,41 @@ namespace Z0.Asm
 
         [Op]
         static string FormatAddress(IceInstruction src, int pad = 16)
-            => Z0.TextFormatter.concat(src.IP.FormatHex(zpad:false, prespec:false)).PadRight(pad);
+            => Strings.concat(src.IP.FormatHex(zpad:false, prespec:false)).PadRight(pad);
 
         [Op]
         static string format(IceMemorySize src)
             => asm.identify(src).Format();
+
+        [MethodImpl(Inline), Op]
+        public static IceMemDirect memDirect(in IceInstruction src)
+            => new IceMemDirect(src.MemoryBase, src.MemoryIndexScale, asm.dx(src.MemoryDisplacement, (AsmDisplacementSize)src.MemoryDisplSize));
+
+        [MethodImpl(Inline), Op]
+        public static IceMemoryInfo meminfo(IceRegister sReg, IceRegister prefix, IceMemDirect mem, MemoryAddress address, IceMemorySize size)
+            => new IceMemoryInfo(sReg, prefix, mem, address, size);
+
+        [Op]
+        public static IceMemoryInfo meminfo(IceInstruction src, byte index)
+        {
+            var k = asm.opkind(src, (byte)index);
+
+            if(AsmTest.isMem(k))
+            {
+                var direct = AsmTest.isMemDirect(k);
+                var segBase = AsmTest.isSegBase(k);
+                var mem64 = AsmTest.isMem64(k);
+                var info = new IceMemoryInfo();
+                var sz = src.MemorySize;
+                var memdirect = direct ? memDirect(src) : IceMemDirect.Empty;
+                var prefix = (direct || segBase) ? src.SegmentPrefix : Z0.Asm.IceRegister.None;
+                var sReg = (direct || segBase) ? src.MemorySegment : Z0.Asm.IceRegister.None;
+                var address = mem64 ? src.MemoryAddress64 : 0;
+                return new IceMemoryInfo(sReg, prefix, memdirect, address, sz);
+            }
+
+            return default;
+        }
 
         static StringBuilder Render(IceMemoryInfo src, StringBuilder builder)
         {

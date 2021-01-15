@@ -17,7 +17,6 @@ namespace Z0
 
         public readonly bool IsStatic;
 
-
         const string PropDataType = "ReadOnlySpan<byte>";
 
         const string PropLambda = " => ";

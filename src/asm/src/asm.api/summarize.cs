@@ -12,6 +12,23 @@ namespace Z0.Asm
 
     partial struct asm
     {
+
+        /// <summary>
+        /// Extracts operand instruction data
+        /// </summary>
+        /// <param name="fx">The source instruction</param>
+        /// <param name="@base">The base address</param>
+        [Op]
+        static IceOperandInfo[] operands(MemoryAddress @base, in IceInstruction fx)
+        {
+            var count = fx.OpCount;
+            var buffer = alloc<IceOperandInfo>(count);
+            var dst = span(buffer);
+            for(byte j=0; j<count; j++)
+                seek(dst, j) = operand(@base, fx, j);
+            return buffer;
+        }
+
         [Op]
         public static AsmInstructionSummary summarize(MemoryAddress @base, in IceInstruction src, ReadOnlySpan<byte> encoded, string formatted, uint offset)
             => new AsmInstructionSummary(@base, offset,  formatted,  src.Specifier, operands(@base, src),  encoded.Slice((int)offset, src.ByteLength).ToArray());
@@ -19,59 +36,5 @@ namespace Z0.Asm
         [Op]
         public static AsmInstructionSummary Summarize(MemoryAddress @base, in IceInstruction src, ReadOnlySpan<byte> encoded, string formatted, uint offset)
             => summarize(@base, src, encoded, formatted, offset);
-
-        /// <summary>
-        /// Describes the instructions that comprise an instruction list
-        /// </summary>
-        /// <param name="src">The source instruction list</param>
-        [Op]
-        public static ReadOnlySpan<AsmInstructionSummary> summarize(in IceInstructionList src)
-        {
-            var count = src.Length;
-            var buffer = new AsmInstructionSummary[count];
-            var offset = 0u;
-            var @base = src.Encoded.BaseAddress;
-            var view = src.View;
-            var dst = span(buffer);
-
-            for(var i=0u; i<count; i++)
-            {
-                ref readonly var instruction = ref skip(view,i);
-                seek(dst,i) = asm.Summarize(@base, instruction, src.Encoded, instruction.FormattedInstruction, offset);
-                var size = (uint)instruction.ByteLength;
-                offset += size;
-            }
-            return buffer;
-        }
-
-        /// <summary>
-        /// Describes the instructions that comprise a function
-        /// </summary>
-        /// <param name="src">The source function</param>
-        public static ReadOnlySpan<AsmInstructionSummary> summarize(in AsmRoutine src)
-        {
-            var count = src.InstructionCount;
-            var buffer = new AsmInstructionSummary[count];
-            var offset = 0u;
-            var @base = src.BaseAddress;
-            var view = src.Instructions.View;
-            var dst = span(buffer);
-
-            for(var i=0u; i<count; i++)
-            {
-                ref readonly var instruction = ref skip(view,i);
-                var size = (uint)instruction.ByteLength;
-
-                if(src.Code.Length < offset + size)
-                {
-                    term.error($"Instruction size mismatch {instruction.IP} {offset} {src.Code.Length} {size}");
-                    continue;
-                }
-
-                seek(dst, i) = asm.summarize(@base, instruction, src.Code.Code, instruction.FormattedInstruction, offset);
-                offset += size;
-            }
-            return dst;
-        }
     }
 }

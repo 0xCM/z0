@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static z;
+    using static memory;
 
     /// <summary>
     /// Defines a sequence of K-kinded hex chars
@@ -24,11 +24,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public unsafe ReadOnlySpan<char> Chars(K index)
-            => cover((char*)(Ref.BaseAddress + z.uint8(index)*8), 2);
+            => cover((char*)(Ref.BaseAddress + uint8(index)*8), 2);
 
         [MethodImpl(Inline)]
         public unsafe string String(K index)
-            => @as<char,string>(@ref<char>((char*)(Ref.BaseAddress + z.uint8(index)*8)));
+            => @as<char,string>(@ref<char>((char*)(Ref.BaseAddress + uint8(index)*8)));
 
         public static HexString<K> Empty
             => new HexString<K>(StringRef.Empty);

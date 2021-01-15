@@ -12,6 +12,36 @@ namespace Z0
     public static class HexFormatSpecs
     {
         /// <summary>
+        /// The asci code of the '0' digit
+        /// </summary>
+        public const byte MinScalarCode = 48;
+
+        /// <summary>
+        /// The asci code of the '9' digit
+        /// </summary>
+        public const byte MaxScalarCode = 57;
+
+        /// <summary>
+        /// The asci code of the 'A' digit
+        /// </summary>
+        public const byte MinCharCodeU = 65;
+
+        /// <summary>
+        /// The asci code of the 'F' digit
+        /// </summary>
+        public const byte MaxCharCodeU = 70;
+
+        /// <summary>
+        /// The asci code of the 'a' digit
+        /// </summary>
+        public const byte MinCharCodeL = 97;
+
+        /// <summary>
+        /// The asci code of the 'f' digit
+        /// </summary>
+        public const byte MaxCharCodeL = 102;
+
+        /// <summary>
         /// The uppercase hex format code
         /// </summary>
         public const string UC = data.tchars.X;
@@ -125,5 +155,17 @@ namespace Z0
         [MethodImpl(Inline)]
         public static HexSeqFormat seq(in HexFormatOptions hex, string delimiter = null)
             => new HexSeqFormat(hex, delimiter ?? hex.Delimiter.ToString());
+
+        /// <summary>
+        /// Defines the asci character codes for uppercase hex digits 1,2, ..., 9, A, ..., F
+        /// </summary>
+        public static ReadOnlySpan<byte> UpperHexDigits
+            => new byte[]{48,49,50,51,52,53,54,55,56,57,65,66,67,68,69,70};
+
+        /// <summary>
+        /// Defines the asci character codes for uppercase hex digits 1,2, ..., 9, a, ..., f
+        /// </summary>
+        public static ReadOnlySpan<byte> LowerHexDigits
+            => new byte[]{48,49,50,51,52,53,54,55,56,57,97,98,99,100,101,102};
     }
 }
