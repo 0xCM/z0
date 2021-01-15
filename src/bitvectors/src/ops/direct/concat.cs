@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     partial class BitVector
@@ -75,7 +75,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static BitVector64 concat(BitVector8 x0, BitVector8 x1, BitVector8 x2,  BitVector8 x3,
             BitVector8 x4, BitVector8 x5, BitVector8 x6,  BitVector8 x7)
-                => concat(concat(x0,x1,x2,x3),concat(x4,x5,x6,x7));
+                => concat(concat(x0,x1,x2,x3), concat(x4,x5,x6,x7));
 
         /// <summary>
         /// Creates a 64-bit vector by concatenating 4 16-bit vectors

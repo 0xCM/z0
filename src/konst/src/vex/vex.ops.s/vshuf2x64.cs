@@ -12,10 +12,10 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Sse2;
     using static System.Runtime.Intrinsics.X86.Ssse3;
     using static System.Runtime.Intrinsics.X86.Avx2;
-
     using static Konst;
+    using static z;
 
-    partial struct z
+    partial struct cpu
     {
         [MethodImpl(Inline), Op]
         public static Vector128<sbyte> vshuf2x64(Vector128<sbyte> src, [Imm] byte spec)

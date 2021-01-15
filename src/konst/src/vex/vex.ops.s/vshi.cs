@@ -7,12 +7,16 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    using System.Runtime.Intrinsics.X86;
- 
-   using static Konst;
+
+    using static Konst;
+
+    partial struct cpu
+    {
+
+    }
 
     partial struct z
-    {                            
+    {
         /// <summary>
         /// Creates a scalar vector from the upper 64 bits of the source vector
         /// </summary>

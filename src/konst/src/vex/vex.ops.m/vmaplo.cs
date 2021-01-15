@@ -13,6 +13,12 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Avx2;
 
     using static Konst;
+    using static z;
+
+    partial struct cpu
+    {
+
+    }
 
     partial struct z
     {
@@ -184,7 +190,6 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector256<short> vmaplo16i(Vector256<sbyte> src, N256 w, short t)
             => ConvertToVector256Int16(vlo(src));
-
 
         // ~ 256x8u -> X
         // ~ ------------------------------------------------------------------

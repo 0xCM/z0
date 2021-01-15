@@ -20,8 +20,8 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ref byte part16x2(ushort src, ref byte dst)
         {
-            part8x2((byte)src, ref dst);
-            part8x2((byte)(src >> 8), ref seek(dst, 4));
+            part4x2((byte)src, ref dst);
+            part4x2((byte)(src >> 8), ref seek(dst, 4));
             return ref dst;
         }
     }

@@ -30,6 +30,10 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static unsafe MemorySegment segment(string src)
-            => segment(address(src), src.Length*2);
+            => segment(pchar(src), (uint)src.Length);
+
+        [MethodImpl(Inline), Op]
+        public static unsafe MemorySegment segment(char* src, uint count)
+            => new MemorySegment(address(src), count*2);
     }
 }

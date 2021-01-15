@@ -24,13 +24,13 @@ namespace Z0
         public bit this[E flag]
         {
             [MethodImpl(Inline)]
-            get => (w64(Data) & w64(flag)) != 0;
+            get => (bw64(Data) & bw64(flag)) != 0;
         }
 
         public bit this[Pow2x64 flag]
         {
             [MethodImpl(Inline)]
-            get => (w64(Data) & w64(flag)) != 0;
+            get => (bw64(Data) & bw64(flag)) != 0;
         }
 
         public E Value

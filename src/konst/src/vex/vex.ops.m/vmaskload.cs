@@ -13,8 +13,9 @@ namespace Z0
 
     using static Konst;
     using static SpanBlocks;
+    using static memory;
 
-    partial struct z
+    partial struct cpu
     {
         /// <summary>
         /// __m128i _mm_maskload_epi32 (int const* mem_addr, __m128i mask) VPMASKMOVD xmm, xmm, m128

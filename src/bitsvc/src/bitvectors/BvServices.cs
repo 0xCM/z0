@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    [ApiHost("bitvectors.services")]
+    [ApiHost]
     public readonly struct BvServices
     {
         const NumericKind Closure = UnsignedInts;
@@ -72,6 +72,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public int width<T>(BitVector<T> x)
             where T : unmanaged
-                => BV.width<T>().Invoke(x);
+                => BV.effwidth<T>().Invoke(x);
     }
 }

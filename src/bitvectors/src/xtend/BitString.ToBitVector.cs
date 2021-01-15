@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     partial class XTend
     {
@@ -18,7 +18,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector<T> ToBitVector<T>(this BitString src)
             where T : unmanaged
-                => BitVector.generic<T>(src);
+                => BitVector.load<T>(src);
 
         [MethodImpl(Inline)]
         public static BitVector<N,T> ToBitVector<N,T>(this BitString src, N n = default, T t =default)

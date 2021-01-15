@@ -16,7 +16,7 @@ namespace Z0
         /// Initializes a generic bitvector with a supplied value
         /// </summary>
         /// <param name="src">The value used to initialize the bitvector</param>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static BitVector<T> init<T>(T src)
             where T : unmanaged
                 => new BitVector<T>(src);

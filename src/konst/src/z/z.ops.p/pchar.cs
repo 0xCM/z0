@@ -14,9 +14,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe char* pchar(string src)
             => memory.pchar(src);
-
-        [MethodImpl(Inline)]
-        public static unsafe char* pchar2(string src)
-            => memory.pchar2(src);
     }
 }

@@ -55,30 +55,6 @@ namespace Z0
         /// </summary>
         public const DW NumericWidths = DW.W8 | DW.W16 | DW.W32 | DW.W64;
 
-        /// <summary>
-        /// Specifies unsigned integral types of widths <see cref='NumericWidths'/>
-        /// </summary>
-         public const NK UnsignedInts = NK.UnsignedInts;
-
-        /// <summary>
-        /// Specifies signed integral types of widths <see cref='NumericWidths'/>
-        /// </summary>
-        public const NK SignedInts = NK.SignedInts;
-
-        /// <summary>
-        /// Specifies signed and unsigned integral types of widths <see cref='NumericWidths'/>
-        /// </summary>
-        public const NK Integers = NK.Integers;
-
-        /// <summary>
-        /// Specifies floating-point primitive kinds
-        /// </summary>
-        public const NK Floats = NK.Floats;
-
-        /// <summary>
-        /// Specifies all numeric primitive kinds
-        /// </summary>
-        public const NK AllNumeric = NK.All;
 
         /// <summary>
         /// The default delimiter to use when formatting structured text
@@ -116,6 +92,35 @@ namespace Z0
         /// </summary>
         public const CC ThisCall = CC.ThisCall;
 
+        /// <summary>
+        /// Specifies unsigned integral types of widths <see cref='NumericWidths'/>
+        /// </summary>
+        public const NK UnsignedInts = NK.UnsignedInts;
+
+        /// <summary>
+        /// Specifies signed integral types of widths <see cref='NumericWidths'/>
+        /// </summary>
+        public const NK SignedInts = NK.SignedInts;
+
+        /// <summary>
+        /// Specifies signed and unsigned integral types of widths <see cref='NumericWidths'/>
+        /// </summary>
+        public const NK Integers = NK.Integers;
+
+        /// <summary>
+        /// Specifies floating-point primitive kinds
+        /// </summary>
+        public const NK Floats = NK.Floats;
+
+        /// <summary>
+        /// Specifies all numeric primitive kinds
+        /// </summary>
+        public const NK AllNumeric = NK.All;
+
+        /// <summary>
+        /// Specifies numeric types of width <see cref='W8'/>
+        /// </summary>
+        public const NK Numeric8k = NK.Width8;
 
         /// <summary>
         /// Specifies numeric types of width <see cref='W64'/>

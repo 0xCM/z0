@@ -17,6 +17,6 @@ namespace Z0
         /// <param name="src">The immutable, and possibly interned string that were are going to modify</param>
         [MethodImpl(Inline), Op]
         public static unsafe ref char edit16c(string src)
-            => ref @ref(pchar2(src));
+            => ref @ref(pchar(src));
     }
 }

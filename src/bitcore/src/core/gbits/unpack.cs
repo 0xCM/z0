@@ -12,7 +12,6 @@ namespace Z0
 
     partial class gbits
     {
-
         [Unpack, Closures(Closure)]
         public static Span<bit> unpack<T>(T src)
             where T : unmanaged

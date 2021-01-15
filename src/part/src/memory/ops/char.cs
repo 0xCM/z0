@@ -26,10 +26,10 @@ namespace Z0
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static unsafe ref char @char(string src)
-            =>  ref @ref(pchar2(src));
+            =>  ref @ref(pchar(src));
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static unsafe ref char @char(string src, int index)
-            => ref seek(@ref(pchar2(src)), index);
+            => ref seek(@ref(pchar(src)), index);
     }
 }

@@ -42,7 +42,7 @@ namespace Z0
         /// <param name="user">The user data, if any</param>
         [MethodImpl(Inline), Op]
         public static unsafe StringRef create(string src, uint user = 0)
-            => new StringRef((ulong)pchar2(src), (uint)src.Length, user);
+            => new StringRef((ulong)pchar(src), (uint)src.Length, user);
 
         /// <summary>
         /// Creates a <see cref='StringRef'/> from a specified <see cref='MemoryAddress'/> and memory size

@@ -30,6 +30,6 @@ namespace Z0
         [MethodImpl(Inline), Alloc, Closures(Closure)]
         public static BitVector<T> alloc<T>(T fill = default)
             where T : unmanaged
-                => BitVector.generic(fill);
+                => load(fill);
     }
 }

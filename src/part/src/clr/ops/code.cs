@@ -14,7 +14,7 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         internal static unsafe MemoryAddress address(ClrTypeName src)
-            => memory.address(memory.pchar2(src.Source.Name));
+            => memory.address(memory.pchar(src.Source.Name));
 
         [MethodImpl(Inline), Op]
         public static TypeCode code(ClrPrimalKind f)

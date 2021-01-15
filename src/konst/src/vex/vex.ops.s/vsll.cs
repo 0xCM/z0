@@ -5,17 +5,16 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    
+
     using static System.Runtime.Intrinsics.X86.Avx2;
     using static System.Runtime.Intrinsics.X86.Sse2;
-    
+
     using static Konst;
-    using static z;    
-    
+
     partial struct z
-    {           
+    {
         /// <summary>
         /// Defines the unfortunately missing _mm_slli_epi8 that shifts each vector component leftward by a common number of bits
         /// </summary>
@@ -179,7 +178,7 @@ namespace Z0
         /// <param name="count">The number of bits to count</param>
         [MethodImpl(Inline), Sll]
         public static Vector256<ulong> vsll(Vector256<ulong> src, [Imm] byte count)
-            => ShiftLeftLogical(src, (byte)count); 
+            => ShiftLeftLogical(src, (byte)count);
 
         [MethodImpl(Inline), Op]
         static byte msb8f(byte density)

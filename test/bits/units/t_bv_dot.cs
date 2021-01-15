@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
 
     public class t_bv_dot : t_bitsvc<t_bv_dot>
     {
@@ -25,7 +25,7 @@ namespace Z0
         protected void bvdot_gcheck<T>(T t = default)
             where T : unmanaged
         {
-            var f = BV.dot(t);
+            var f = BV.dot<T>();
 
             void check()
             {

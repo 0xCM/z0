@@ -7,10 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static z;
+    using static Bits;
 
-    partial class BitPack
+    partial class gbits
     {
         /// <summary>
         /// Unpacks each primal source bit to a 32-bit target
@@ -23,13 +24,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                Bits.unpack1x32x8(uint8(src), dst);
+                unpack1x32x8(uint8(src), dst);
             else if(typeof(T) == typeof(ushort))
-                Bits.unpack1x32x16(uint16(src), dst);
+                unpack1x32x16(uint16(src), dst);
             else if(typeof(T) == typeof(uint))
-                Bits.unpack1x32x32(uint32(src), dst);
+                unpack1x32x32(uint32(src), dst);
             else if(typeof(T) == typeof(ulong))
-                Bits.unpack1x32x64(uint64(src), dst);
+                unpack1x32x64(uint64(src), dst);
             else
                 throw no<T>();
         }

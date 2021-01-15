@@ -7,10 +7,6 @@ namespace Z0.Lang
     using System;
     using Microsoft.CodeAnalysis;
     using Microsoft.CodeAnalysis.CSharp;
-    using System.Runtime.CompilerServices;
-
-    using static Konst;
-    using static z;
 
     [ApiHost(ApiNames.CsLang, true)]
     public readonly partial struct CsLang

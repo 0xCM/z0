@@ -24,7 +24,7 @@ namespace Z0
         /// <param name="src">The source string</param>
         [MethodImpl(Inline), Op]
         static unsafe MemoryAddress address(string src)
-            => z.address(memory.pchar2(src));
+            => memory.address(memory.pchar(src));
 
         [MethodImpl(Inline), Op]
         public static ref StringTable<ushort> strings(ref StringTable<ushort> dst)

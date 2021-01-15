@@ -116,7 +116,7 @@ namespace Z0
         public uint BlockLength
         {
             [MethodImpl(Inline)]
-            get => (uint)z.blocklength<W,T>();
+            get => (uint)SpanBlocks.cells<W,T>();
         }
     }
 }

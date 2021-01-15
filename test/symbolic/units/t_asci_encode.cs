@@ -36,10 +36,13 @@ namespace Z0
 
         public unsafe void string_ptr()
         {
-            const string Data = "dalkfaldjflakdjfkadjflajdflajdkfajlskdfjasjdflkajfasf";
-            var a1 = address(memory.pchar(Data));
-            var a2 = address(memory.pchar2(Data));
-            EvalPrimal.eq(a1,a2);
+            const string Src = "dalkfaldjflakdjfkadjflajdflajdkfajlskdfjasjdflkajfasf";
+            var pSrc = memory.pchar(Src);
+            var a = memory.cover(pSrc, Src.Length);
+            var b = memory.span(Src);
+            Claim.eq(a.Length, b.Length);
+            Claim.eq(a.ToString(), b.ToString());
+
         }
 
         public void test_case_02()

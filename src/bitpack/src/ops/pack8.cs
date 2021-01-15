@@ -8,10 +8,19 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static BitMasks.Literals;
+    using static BitMasks;
     using static z;
 
     partial class BitPack
     {
+        /// <summary>
+        /// Packs 8 1-bit values taken from the least significant bit of each source byte
+        /// </summary>
+        [MethodImpl(Inline), Op]
+        static byte pack8(ulong src)
+            => (byte)gather(src, Lsb64x8x1);
+
         /// <summary>
         /// Packs 8 1-bit values taken from the least significant bit of each source byte
         /// </summary>

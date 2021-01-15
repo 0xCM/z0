@@ -16,15 +16,15 @@ namespace Z0
         /// Creates a 8-bit blocked container from 1 8-bit cell
         /// </summary>
         [MethodImpl(Inline), Op]
-        public static SpanBlock8<byte> create(W8 n, byte src)
-            => new SpanBlock8<byte>(z.cover(src,1));
+        public static SpanBlock8<byte> create(W8 w, byte src)
+            => new SpanBlock8<byte>(memory.cover(src,1));
 
         /// <summary>
         /// Creates a 16-bit blocked container from 1 16-bit cell
         /// </summary>
         [MethodImpl(Inline), Op]
-        public static SpanBlock16<ushort> create(W16 n, ushort src)
-            => new SpanBlock16<ushort>(z.cover(src,1));
+        public static SpanBlock16<ushort> create(W16 w, ushort src)
+            => new SpanBlock16<ushort>(memory.cover(src,1));
 
         /// <summary>
         /// Creates a 16-bit blocked container from 1 64-bit cell

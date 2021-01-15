@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-
     public class t_bvxor : t_bitvectors<t_bvxor>
     {
         public void bvxor_n13x8u()
@@ -248,10 +246,10 @@ namespace Z0
             for(var i=0; i<RepCount; i++)
             {
                 var x = Random.BitVector<T>(width);
-                ClaimNumeric.lteq(BitVector.width(x), width);
+                ClaimNumeric.lteq(BitVector.effwidth(x), width);
 
                 var y = Random.BitVector<T>(width);
-                ClaimNumeric.lteq(BitVector.width(y),width);
+                ClaimNumeric.lteq(BitVector.effwidth(y),width);
 
                 var z = x ^ y;
                 ClaimNumeric.eq(gmath.xor(x.Scalar, y.Scalar), z.Scalar);

@@ -18,6 +18,6 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static unsafe ReadOnlySpan<char> chars(string src)
-            => cover(pchar2(src), (uint)src.Length);
+            => cover(pchar(src), (uint)src.Length);
     }
 }

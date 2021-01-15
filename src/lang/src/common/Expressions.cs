@@ -10,7 +10,7 @@ namespace Z0.Lang
     using static Konst;
     using static z;
 
-    [ApiHost("lang.expressions")]
+    [ApiHost]
     public readonly struct Expressions
     {
         const NumericKind Closure = UnsignedInts;

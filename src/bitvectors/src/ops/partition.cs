@@ -19,12 +19,6 @@ namespace Z0
             return dst;
         }
 
-        [MethodImpl(Inline), Op]
-        public static Span<BitVector8> partition(ushort src, Span<BitVector8> dst)
-        {
-            BitParts.part2x8(src, ref NatSpan.bytes(dst,n2).First);
-            return dst;
-        }
 
         [MethodImpl(Inline), Op]
         public static Span<BitVector4> partition(uint src, Span<BitVector4> dst)
@@ -53,14 +47,6 @@ namespace Z0
             BitParts.part8x8(src, ref NatSpan.bytes(dst,n8).First);
             return dst;
         }
-
-        [MethodImpl(Inline), Op]
-        public static Span<BitVector<byte>> partition(ushort src, Span<BitVector<byte>> dst)
-        {
-            BitParts.part2x8(src, ref NatSpan.bytes(dst,n2).First);
-            return dst;
-        }
-
 
         [MethodImpl(Inline), Op]
         public static byte partition(uint src, ref byte dst)

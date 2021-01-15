@@ -20,7 +20,7 @@ namespace Z0
         void bvxor_check<T>(T t = default)
             where T : unmanaged
         {
-            var f = BV.xor(t);
+            var f = BV.xor<T>();
 
             void check()
             {

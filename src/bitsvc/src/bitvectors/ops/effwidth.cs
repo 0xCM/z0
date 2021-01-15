@@ -12,12 +12,13 @@ namespace Z0
 
     partial class BV
     {
-        [Closures(UnsignedInts)]
-        public readonly struct Width<T> : IFunc<BitVector<T>,int>
+        [Closures(Closure)]
+        public readonly struct EffWidth<T> : IFunc<BitVector<T>,int>
             where T : unmanaged
         {
             [MethodImpl(Inline)]
-            public readonly int Invoke(BitVector<T> a) => BitVector.width(a);
+            public readonly int Invoke(BitVector<T> a)
+                => BitVector.effwidth(a);
         }
     }
 }

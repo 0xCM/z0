@@ -65,7 +65,7 @@ namespace Z0
         public ulong ScalarValue
         {
             [MethodImpl(Inline)]
-            get => memory.w64(LiteralValue);
+            get => memory.bw64(LiteralValue);
         }
 
         [MethodImpl(Inline)]

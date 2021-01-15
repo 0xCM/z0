@@ -28,14 +28,5 @@ namespace Z0
             seek64(dst, 2) = Bits.scatter(x >> 48, Lsb64x8x3);
             return ref dst;
         }
-
-        /// <summary>
-        /// Partitions a 16-bit source value into 2 segments of width 8 and is equivalent to <see cref='part8x2(byte, ref byte)'/>
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        /// <param name="dst">The partition target</param>
-        [MethodImpl(Inline), Op]
-        public static ref byte part(ushort src, N2 n2, N8 n8, ref byte dst)
-            => ref part8x2(src,ref dst);
     }
 }

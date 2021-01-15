@@ -9,10 +9,9 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static System.Runtime.Intrinsics.X86.Avx2;
+    using static Part;
 
-    using static Konst;
-
-    partial struct z
+    partial struct cpu
     {
         /// <summary>
         /// __m128i _mm_mask_i32gather_epi32 (__m128i src, int const* base_addr, __m128i vindex, __m128i mask, const int scale) VPGATHERDD xmm, vm32x, xmm
@@ -28,7 +27,7 @@ namespace Z0
         /// </remarks>
         [MethodImpl(Inline), Op]
         public static unsafe Vector128<uint> vmaskgather(N128 n, Vector128<uint> vSrc, ref uint mSrc, Vector128<int> vidx, Vector128<uint> mask)
-            => GatherMaskVector128(vSrc, z.refptr(ref mSrc), vidx, mask, 4);
+            => GatherMaskVector128(vSrc, memory.refptr(ref mSrc), vidx, mask, 4);
 
         /// <summary>
         /// __m128i _mm_mask_i64gather_epi64 (__m128i src, __int64 const* base_addr, __m128i vindex, __m128i mask, const int scale) VPGATHERQQ xmm, vm64x, xmm
@@ -40,7 +39,7 @@ namespace Z0
         /// <param name="mask">The vector that determines whether target vector components are loaded from the vector or memory source</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector128<ulong> vmaskgather(N128 w, Vector128<ulong> vsrc, ref ulong mSrc, Vector128<long> vidx, Vector128<ulong> mask)
-            => GatherMaskVector128(vsrc, z.refptr(ref mSrc), vidx, mask, 8);
+            => GatherMaskVector128(vsrc, memory.refptr(ref mSrc), vidx, mask, 8);
 
         /// <summary>
         /// __m128i _mm_mask_i32gather_epi64 (__m128i src, __int64 const* base_addr, __m128i vindex, __m128i mask, const int scale) VPGATHERDQ xmm, vm32x, xmm
@@ -52,7 +51,7 @@ namespace Z0
         /// <param name="mask">The vector that determines whether target vector components are loaded from the vector or memory source</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector128<ulong> vmaskgather(N128 w, Vector128<ulong> vSrc, ref ulong mSrc, Vector128<int> vidx, Vector128<ulong> mask)
-            => GatherMaskVector128(vSrc, z.refptr(ref mSrc), vidx, mask, 8);
+            => GatherMaskVector128(vSrc, memory.refptr(ref mSrc), vidx, mask, 8);
 
         /// <summary>
         /// __m128i _mm_mask_i64gather_epi32 (__m128i src, int const* base_addr, __m128i vindex, __m128i mask, const int scale) VPGATHERQD xmm, vm64x, xmm
@@ -64,7 +63,7 @@ namespace Z0
         /// <param name="mask">The vector that determines whether target vector components are loaded from the vector or memory source</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector128<uint> vmaskgather(N128 w, Vector128<uint> vsrc, ref uint mSrc, Vector128<long> vidx, Vector128<uint> mask)
-            => GatherMaskVector128(vsrc, z.refptr(ref mSrc), vidx, mask, 4);
+            => GatherMaskVector128(vsrc, memory.refptr(ref mSrc), vidx, mask, 4);
 
         /// <summary>
         /// __m128i _mm256_mask_i64gather_epi32 (__m128i src, int const* base_addr, __m256i vindex, __m128i mask, const int scale) VPGATHERQD xmm, vm32y, xmm
@@ -76,7 +75,7 @@ namespace Z0
         /// <param name="mask">The vector that determines whether target vector components are loaded from the vector or memory source</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector128<uint> vmaskgather(N128 w, Vector128<uint> vsrc, ref uint mSrc, Vector256<long> vidx, Vector128<uint> mask)
-            => GatherMaskVector128(vsrc, z.refptr(ref mSrc), vidx, mask, 4);
+            => GatherMaskVector128(vsrc, memory.refptr(ref mSrc), vidx, mask, 4);
 
         /// <summary>
         ///   __m256i _mm256_mask_i32gather_epi32 (__m256i src, int const* base_addr, __m256i vindex, __m256i mask, const int scale) VPGATHERDD ymm, vm32y, ymm
@@ -88,7 +87,7 @@ namespace Z0
         /// <param name="mask">The vector that determines whether target vector components are loaded from the vector or memory source</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector256<uint> vmaskgather(N256 w, Vector256<uint> vsrc, ref uint mSrc, Vector256<int> vidx, Vector256<uint> mask)
-            => GatherMaskVector256(vsrc, z.refptr(ref mSrc), vidx, mask, 4);
+            => GatherMaskVector256(vsrc, memory.refptr(ref mSrc), vidx, mask, 4);
 
         /// <summary>
         /// __m256i _mm256_mask_i64gather_epi64 (__m256i src, __int64 const* base_addr, __m256i vindex, __m256i mask, const int scale) VPGATHERQQ ymm, vm32y, ymm
@@ -100,7 +99,7 @@ namespace Z0
         /// <param name="mask">The vector that determines whether target vector components are loaded from the vector or memory source</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector256<ulong> vmaskgather(N256 w, Vector256<ulong> vsrc, ref ulong mSrc, Vector256<long> vidx, Vector256<ulong> mask)
-            => GatherMaskVector256(vsrc, z.refptr(ref mSrc), vidx, mask, 8);
+            => GatherMaskVector256(vsrc, memory.refptr(ref mSrc), vidx, mask, 8);
 
         /// <summary>
         ///  __m256i _mm256_mask_i32gather_epi64 (__m256i src, __int64 const* base_addr, __m128i vindex, __m256i mask, const int scale) VPGATHERDQ ymm, vm32y, ymm
@@ -112,6 +111,6 @@ namespace Z0
         /// <param name="mask">The vector that determines whether target vector components are loaded from the vector or memory source</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector256<ulong> vmaskgather(N256 w, Vector256<ulong> vsrc, ref ulong mSrc, Vector128<int> vidx, Vector256<ulong> mask)
-            => GatherMaskVector256(vsrc, z.refptr(ref mSrc), vidx, mask, 8);
+            => GatherMaskVector256(vsrc, memory.refptr(ref mSrc), vidx, mask, 8);
     }
 }

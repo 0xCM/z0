@@ -172,8 +172,10 @@ namespace Z0
                 Claim.eq(perm[i], j);
 
             var increments = z.vinc<byte>(n128);
+
+
             var spec = perm.ToShuffleSpec();
-            var dst = z.vshuf16x8(increments,spec);
+            var dst = z.vshuf16x8(increments, spec);
             var expect = z.vdec<byte>(n128);
             Claim.veq(expect, dst);
 
@@ -193,11 +195,11 @@ namespace Z0
 
             //For the first 128-bit lane
             var half = mask.CellCount/2;
-            for(byte i=0; i< half; i++)
+            for(byte i=0; i<half; i++)
                 mask[i] = i;
 
             //For the second 128-bit lane
-            for(byte i=0; i< half; i++)
+            for(byte i=0; i<half; i++)
                 mask[i + half] = i;
 
             return mask.LoadVector();

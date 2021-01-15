@@ -11,7 +11,6 @@ namespace Z0
 
     partial class BitVector
     {
-
         /// <summary>
         /// Counts the number of enabled bits in the source vector
         /// </summary>
@@ -51,6 +50,5 @@ namespace Z0
         [MethodImpl(Inline), Pop]
         public static uint pop(BitVector64 x)
             => Bits.pop(x.Data);
-
    }
 }

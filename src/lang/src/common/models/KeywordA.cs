@@ -10,18 +10,19 @@ namespace Z0.Lang
     using static Part;
 
     /// <summary>
-    /// Specifies a keyword that ranges over a type parameter
+    /// Defines a parametric keyword
     /// </summary>
-    public readonly struct Keyword<T>
+    public readonly struct Keyword<A>
     {
-        public Name Name {get;}
+        public MemoryAddress Name {get;}
+
+        public A Arg {get;}
 
         [MethodImpl(Inline)]
-        public Keyword(string src)
-            => Name = src;
-
-        [MethodImpl(Inline)]
-        public static implicit operator Keyword<T>(string name)
-            => new Keyword<T>(name);
+        public Keyword(MemoryAddress src, A arg)
+        {
+            Name = src;
+            Arg = arg;
+        }
     }
 }

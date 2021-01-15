@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     partial struct SpanBlocks
     {
@@ -23,8 +22,8 @@ namespace Z0
             where T : unmanaged
             where S : unmanaged
         {
-            var dst = alloc<T>(w256,(ulong)src.CellCount);
-            for(var i=0; i< src.CellCount; i++)
+            var dst = alloc<T>(w256, (ulong)src.CellCount);
+            for(var i=0; i<src.CellCount; i++)
                 dst[i] = z.force<S,T>(src[i]);
             return dst;
         }

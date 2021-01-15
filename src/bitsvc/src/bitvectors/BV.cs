@@ -16,32 +16,32 @@ namespace Z0
         const NumericKind Closure = UnsignedInts;
 
         [MethodImpl(Inline)]
-        public static Add<T> add<T>(T t = default)
+        public static Add<T> add<T>()
             where T : unmanaged
                 => sfunc<Add<T>>();
 
         [MethodImpl(Inline)]
-        public static Sub<T> sub<T>(T t = default)
+        public static Sub<T> sub<T>()
             where T : unmanaged
                 => sfunc<Sub<T>>();
 
         [MethodImpl(Inline)]
-        public static And<T> and<T>(T t = default)
+        public static And<T> and<T>()
             where T : unmanaged
                 => sfunc<And<T>>();
 
         [MethodImpl(Inline)]
-        public static Or<T> or<T>(T t = default)
+        public static Or<T> or<T>()
             where T : unmanaged
                 => sfunc<Or<T>>();
 
         [MethodImpl(Inline)]
-        public static Xor<T> xor<T>(T t = default)
+        public static Xor<T> xor<T>()
             where T : unmanaged
                 => sfunc<Xor<T>>();
 
         [MethodImpl(Inline)]
-        public static Nand<T> nand<T>(T t = default)
+        public static Nand<T> nand<T>()
             where T : unmanaged
                 => sfunc<Nand<T>>();
 
@@ -51,24 +51,24 @@ namespace Z0
                 => sfunc<Nor<T>>();
 
         [MethodImpl(Inline)]
-        public static Xnor<T> xnor<T>(T t = default)
+        public static Xnor<T> xnor<T>()
             where T : unmanaged
                 => sfunc<Xnor<T>>();
 
         [MethodImpl(Inline)]
-        public static Not<T> not<T>(T t = default)
+        public static Not<T> not<T>()
             where T : unmanaged
                 => sfunc<Not<T>>();
 
         [MethodImpl(Inline)]
-        public static Dot<T> dot<T>(T t = default)
+        public static Dot<T> dot<T>()
             where T : unmanaged
                 => sfunc<Dot<T>>();
 
         [MethodImpl(Inline)]
-        public static Width<T> width<T>(T t = default)
+        public static EffWidth<T> effwidth<T>()
             where T : unmanaged
-                => sfunc<Width<T>>();
+                => sfunc<EffWidth<T>>();
 
         [MethodImpl(Inline)]
         public static Gather<T> gather<T>(T t = default)

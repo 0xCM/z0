@@ -23,6 +23,6 @@ namespace Z0.Lang
         K Kind {get;}
 
         ushort IKeyword.Index
-            => memory.w16(Kind);
+            => memory.bw16(Kind);
     }
 }

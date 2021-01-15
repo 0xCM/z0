@@ -7,5 +7,5 @@ namespace Z0
     internal interface INativeNatural : ITypeNat
     {
 
-    }    
+    }
 }

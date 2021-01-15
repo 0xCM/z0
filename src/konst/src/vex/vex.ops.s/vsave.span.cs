@@ -9,6 +9,12 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
+    using static z;
+
+    partial struct cpu
+    {
+
+    }
 
     partial struct z
     {

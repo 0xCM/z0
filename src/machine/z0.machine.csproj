@@ -11,6 +11,7 @@
     <ProjectReference Include="$(Logix)" />
     <ProjectReference Include="$(Gen)" />
     <ProjectReference Include="$(CmdExec)" />
+    <ProjectReference Include="$(Lang)" />
   </ItemGroup>
 
   <ItemGroup>

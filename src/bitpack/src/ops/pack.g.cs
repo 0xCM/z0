@@ -56,7 +56,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(pack64x8x1(src, n64, n8, offset));
             else
-                return pack_i(src, mod,offset,t);
+                return pack_i(src, mod, offset,t);
         }
 
         [MethodImpl(Inline)]

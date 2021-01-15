@@ -50,7 +50,7 @@ namespace Z0
             var dst = SpanBlocks.alloc<uint>(n256,blocks);
 
             for(var block=0; block<blocks; block++)
-                BitPack.unpack1x32(packed, dst, block);
+                gbits.unpack1x32(packed, dst, block);
 
             return load32(dst.As<Bit32>());
         }

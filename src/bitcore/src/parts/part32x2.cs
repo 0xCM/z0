@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="dst">A target span of sufficient length</param>
         [MethodImpl(Inline), Op]
-        public static ref byte part32x2(uint src, ref byte dst)
+        public static ref byte part16x4(uint src, ref byte dst)
         {
             part16x2((ushort)src, ref dst);
             part16x2((ushort)(src >> 16), ref seek(dst, 8));

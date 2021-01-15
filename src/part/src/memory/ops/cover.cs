@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="size">The length of the segment in byte</param>
         [MethodImpl(Inline), Op]
         public static unsafe Span<char> cover(string src)
-            => cover<char>(pchar2(src), (uint)src.Length);
+            => cover<char>(pchar(src), (uint)src.Length);
 
         /// <summary>
         /// Creates a <see cref='Span{T}'/> over a <typeparamref name='T'/> measured memory segment
