@@ -54,8 +54,6 @@ public enum PartId : ulong
 
     Canonical = 63,
 
-    MathTest = 73,
-
     CmdSpec = 75,
 
     CmdExec = 76,
@@ -130,9 +128,6 @@ public enum PartId : ulong
 
     Xed = 165,
 
-    AsmModels = 181,
-
-
     // ~ 200
     // ~ -------------------------------------------------------------------------------
 
@@ -154,6 +149,8 @@ public enum PartId : ulong
     LibMTest = LibM | Test,
 
     MachinesTest = Machines | Test,
+
+    MathTest = Math | Test,
 
     BitsTest = BitSuite | Test,
 

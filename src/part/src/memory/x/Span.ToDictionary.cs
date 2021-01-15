@@ -9,7 +9,7 @@ namespace Z0
     using System.Collections.Generic;
 
     using static Part;
-    using static z;
+    using static memory;
 
     partial class XSpan
     {
@@ -22,7 +22,7 @@ namespace Z0
         public static IDictionary<int,T> ToDictionary<T>(this ReadOnlySpan<T> src)
         {
             var count = src.Length;
-            var dst = dict<int,T>(count);
+            var dst = root.dict<int,T>(count);
             for(var i = 0u; i<count; i++)
                 dst[(int)i] = skip(src,i);
             return dst;

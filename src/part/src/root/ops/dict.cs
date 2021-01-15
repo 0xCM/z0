@@ -8,9 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
 
-    using static Konst;
+    using static Part;
 
-    partial struct z
+    partial struct root
     {
         /// <summary>
         /// Initializes an empty dictionary
@@ -19,7 +19,7 @@ namespace Z0
         /// <typeparam name="V">The vale type</typeparam>
         [MethodImpl(Inline)]
         public static Dictionary<K,V> dict<K,V>()
-            => new Dictionary<K,V>();            
+            => new Dictionary<K,V>();
 
         /// <summary>
         /// Initializes an empty dictionary
@@ -30,7 +30,7 @@ namespace Z0
         /// <typeparam name="V">The vale type</typeparam>
         [MethodImpl(Inline)]
         public static Dictionary<K,V> dict<K,V>(K kRep, V vRep)
-            => new Dictionary<K,V>();            
+            => new Dictionary<K,V>();
 
         /// <summary>
         /// Initializes an empty dictionary with a specified capacity
@@ -42,7 +42,7 @@ namespace Z0
         /// <typeparam name="V">The vale type</typeparam>
         [MethodImpl(Inline)]
         public static Dictionary<K,V> dict<K,V>(int capacity, K kRep = default, V vRep = default)
-            => new Dictionary<K,V>(capacity);            
+            => new Dictionary<K,V>(capacity);
 
         /// <summary>
         /// Creates a dictionary, excluding any duplicates, and invokes a caller-supplied action for each encountered duplicate
@@ -54,18 +54,22 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Dictionary<K,V> dict<K,V>(Action<KeyedValue<K,V>> duplicate, params (K key,V value)[] kvp)
         {
-            var src = span(kvp);
+            var src = memory.span(kvp);
             var count = src.Length;
             var dst = dict<K,V>(count);
 
             for(var i=0u; i<count; i++)
             {
-                ref readonly var entry = ref skip(src,i);
+                ref readonly var entry = ref memory.skip(src,i);
                 if(!dst.TryAdd(entry.key, entry.value))
                     duplicate(entry);
             }
             return dst;
-        }            
+        }
+
+        [MethodImpl(Inline)]
+        static void ThrowDuplicated<K,V>(KeyedValue<K,V> kvp)
+            => sys.@throw(new Exception($"The key {kvp.Key} for {kvp.Value} is not unique"));
 
         /// <summary>
         /// Creates a dictionary, throwing an exception if a duplicate key is encountered

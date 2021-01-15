@@ -47,9 +47,18 @@ namespace Z0
         public static EmittedTableEvent emittedTable(WfStepId step, TableId table, uint count, FS.FilePath dst, CorrelationToken ct)
             => new EmittedTableEvent(step, table, count, dst, ct);
 
+        [MethodImpl(Inline), Op]
+        public static EmittedTableEvent emittedTable(WfStepId step, TableId table, FS.FilePath dst, CorrelationToken ct)
+            => new EmittedTableEvent(step, table, dst, ct);
+
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static EmittedTableEvent<T> emittedTable<T>(WfStepId step, Count count, FS.FilePath dst, CorrelationToken ct)
             where T : struct
                 => new EmittedTableEvent<T>(step, count, dst, ct);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static EmittedTableEvent<T> emittedTable<T>(WfStepId step, FS.FilePath dst, CorrelationToken ct)
+            where T : struct
+                => new EmittedTableEvent<T>(step, dst, ct);
     }
 }

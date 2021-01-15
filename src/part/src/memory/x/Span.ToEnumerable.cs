@@ -5,10 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
     using System.Collections.Generic;
 
-    partial class XTend
+    partial class XSpan
     {
         /// <summary>
         /// Lifts span content into the LINQ monad

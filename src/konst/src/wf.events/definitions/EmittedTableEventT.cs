@@ -34,8 +34,18 @@ namespace Z0
             Target = target;
         }
 
+        [MethodImpl(Inline)]
+        public EmittedTableEvent(WfStepId step, FS.FilePath target, CorrelationToken ct)
+        {
+            EventId = (EventName, step, ct);
+            RowCount = 0;
+            Target = target;
+        }
+
         public string Format()
-            => TextFormatter.format(EventId, TableId, RowCount, Target.ToUri());
+            => RowCount != 0
+            ? TextFormatter.format(EventId, TableId, RowCount, Target.ToUri())
+            : TextFormatter.format(EventId, TableId, Target.ToUri());
 
         public override string ToString()
             => Format();

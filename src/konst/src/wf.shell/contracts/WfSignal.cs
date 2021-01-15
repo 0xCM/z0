@@ -94,8 +94,15 @@ namespace Z0
             where T : struct
                 => Raise(emittedTable<T>(Host, count, dst, Ct));
 
+        public void EmittedTable<T>(FS.FilePath dst)
+            where T : struct
+                => Raise(emittedTable<T>(Host, dst, Ct));
+
         public void EmittedTable(Type type, Count count, FS.FilePath dst)
             => Raise(emittedTable(Host, type, count, dst, Ct));
+
+        public void EmittedTable(Type type, FS.FilePath dst)
+            => Raise(emittedTable(Host, type, dst, Ct));
 
         public void EmittingFile(FS.FilePath dst)
             => Raise(emittingFile(Host, dst, Ct));

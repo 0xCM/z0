@@ -22,7 +22,7 @@ namespace Z0
         static Multiparser()
         {
             _Service = new Multiparser();
-            _Service.Parsers = dict<ClrToken,IParser>();
+            _Service.Parsers = root.dict<ClrToken,IParser>();
             _Service.Include(FilePathParser.service());
         }
 

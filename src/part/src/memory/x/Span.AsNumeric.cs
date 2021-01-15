@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    partial class XTend
+    partial class XSpan
     {
         /// <summary>
         /// Presents a span of generic values as a span of signed 8-bit integers
@@ -282,6 +282,16 @@ namespace Z0
         public static ReadOnlySpan<bool> AsBool<T>(this ReadOnlySpan<T> src)
             where T : struct
                 => recover<T,bool>(src);
+
+        /// <summary>
+        /// Presents a span of generic values as a span of bit
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The source value type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ReadOnlySpan<bit> AsBit<T>(this ReadOnlySpan<T> src)
+            where T : struct
+                => recover<T,bit>(src);
 
         /// <summary>
         /// Presents a span of generic values as a span of chars

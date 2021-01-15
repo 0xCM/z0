@@ -2,17 +2,17 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
 
-    partial struct ApiCode
+    using static Part;
+
+
+    public abstract class AsmDocPart<T>
+        where T : AsmDocPart<T>
     {
-        [Op]
-        public static Index<ApiCodeBlock> extracts(FS.FilePath src)
-            => from line in src.ReadLines().Select(ApiHexParser.extracts)
-                where line.Succeeded
-                select line.Value;
+
     }
 }

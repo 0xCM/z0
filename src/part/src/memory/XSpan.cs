@@ -2,25 +2,16 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
 
     using static Part;
 
-    partial struct AsmDocParts
+    [ApiHost]
+    public static partial class XSpan
     {
-        public static bool parse(DocLine src, out object dst)
-        {
-            dst = 0;
-            return true;
-        }
-    }
-
-    public abstract class AsmDocPart<T>
-        where T : AsmDocPart<T>
-    {
-
+        const NumericKind Closure = Integers;
     }
 }

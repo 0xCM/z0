@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    partial class XTend
+    partial class XSpan
     {
         /// <summary>
         /// Presents a mutable span as a readonly span

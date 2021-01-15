@@ -8,15 +8,19 @@ namespace Z0
     using System.Linq;
     using System.IO;
 
-    using static Konst;
+    using static Part;
 
     using M = IntelIntrinsicsDoc;
 
-    public readonly struct IntelAlgorithmEmitter
+    public interface IIntelAlgorithms
     {
-        public static IntelAlgorithmEmitter create()
-            => default;
 
+    }
+
+    [ApiHost]
+    public sealed class IntelAlgorithms : WfService<IntelAlgorithms,IIntelAlgorithms>, IIntelAlgorithms
+    {
+        [Op]
         public static string fxlabel(string name)
             => name.StartsWith("_mm512") ? "_mm512"  :
             name.StartsWith("_mm256") ? "_mm256" :
@@ -29,6 +33,7 @@ namespace Z0
         static string[] TechLables
             => new string[]{"AVX-512","AVX","AMX", "SVML", "AVX2"};
 
+        [Op]
         public static FS.FileName filename(M.intrinsic src, FS.FileExt kind)
         {
             var identifier = src.identifier;
@@ -42,15 +47,16 @@ namespace Z0
                 return FS.file($"{identifier[0]}", kind);
         }
 
+        [Op]
         static string[] lines(string src, uint width)
         {
-            var dst = z.list<string>();
-            var parts = z.span(src.SplitClean(Space));
+            var dst = root.list<string>();
+            var parts = memory.span(src.SplitClean(Space));
             var count = parts.Length;
             var current = EmptyString;
             for(var i=0u; i<count; i++)
             {
-                ref readonly var part = ref z.skip(parts, i);
+                ref readonly var part = ref memory.skip(parts, i);
                 var tmp = current + part;
                 if(tmp.Length > width)
                 {
@@ -66,12 +72,14 @@ namespace Z0
             return dst.ToArray();
         }
 
+        [Op]
         static string label(M.intrinsic src)
             => text.concat("## ",
                 src.instructions.Count != 0
                 ? text.concat(src.identifier, Space, Chars.Dash, Space, src.name)
                 : src.identifier);
 
+        [Op]
         public void Emit()
         {
             var list = IntelIntrinsicsDocReader.read();
@@ -83,7 +91,7 @@ namespace Z0
             term.print($"Emitting intrinsics algorithms");
 
             var pagewidth = (uint)text.PageBreak.Length;
-            var writers = z.dict<string,StreamWriter>();
+            var writers = root.dict<string,StreamWriter>();
             for(var i=0; i<list.Length; i++)
             {
                 ref readonly var current = ref list[i];
@@ -124,10 +132,9 @@ namespace Z0
                         var x = current.instructions[mm];
                         info = info + x.xed;
                         if(mm != current.instructions.Count - 1)
-                            info = info + SpacePipe;
+                            info = info + RP.SpacePipe;
                     }
                     writer.WriteLine(info);
-
                     writer.WriteLine();
                 }
 
@@ -151,7 +158,7 @@ namespace Z0
 
             term.print($"Emitted {list.Length} intrinsics algorithms");
 
-            z.iter(writers.Values, w => w.Dispose());
+            root.iter(writers.Values, w => w.Dispose());
         }
     }
 }

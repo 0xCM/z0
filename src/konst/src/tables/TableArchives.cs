@@ -23,12 +23,6 @@ namespace Z0
         public static void clear(FS.FolderPath root, FS.FolderName folder)
             => (root + folder).Clear();
 
-        public static DatasetArchive<F,R> service<F,R>()
-            where F : unmanaged
-            where R : struct, ITabular
-                => default;
-
-
         public static Option<FS.FilePath> deposit<F,R>(FS.FolderPath root, R[] src, FS.FileName name)
             where F : unmanaged, Enum
             where R : struct, ITabular

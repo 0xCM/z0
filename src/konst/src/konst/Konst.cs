@@ -121,12 +121,6 @@ namespace Z0
         /// </summary>
         public const string SpacePipe = " | ";
 
-        public const ApiProviderKind DataStructure = ApiProviderKind.DataStructure;
-
-        public const ApiProviderKind DataSummary = ApiProviderKind.DataSummary;
-
-        public const ApiProviderKind DataIndex = ApiProviderKind.DataSummary;
-
         /// <summary>
         /// Populates a <see cref="NotSupportedException"/> complaining that a
         /// parametrically-identified type is not supported
@@ -146,13 +140,6 @@ namespace Z0
         public static T no<S,T>([Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => Unsupported.raise<S,T>(caller, file, line);
 
-        [MethodImpl(Inline), Op]
-        public static void ThrowEmptySpanError()
-            => sys.@throw($"The span, it is empty");
-
-        [MethodImpl(Inline), Op]
-        public static void ThrowDuplicated<K,V>(KeyedValue<K,V> kvp)
-            => sys.@throw(new Exception($"The key {kvp.Key} for {kvp.Value} is not unique"));
     }
 
     public static partial class XTend

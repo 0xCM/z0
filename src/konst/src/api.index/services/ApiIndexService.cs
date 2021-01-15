@@ -25,9 +25,9 @@ namespace Z0
 
         public ApiIndexService()
         {
-            CodeAddress = dict<MemoryAddress,ApiCodeBlock>();
-            UriAddress = dict<MemoryAddress,OpUri>();
-            Locations = dict<OpUri,ApiCodeBlock>();
+            CodeAddress = root.dict<MemoryAddress,ApiCodeBlock>();
+            UriAddress = root.dict<MemoryAddress,OpUri>();
+            Locations = root.dict<OpUri,ApiCodeBlock>();
             Product = ApiCodeBlockIndex.Empty;
         }
 

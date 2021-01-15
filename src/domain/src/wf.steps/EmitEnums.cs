@@ -29,8 +29,7 @@ namespace Z0
             var components = wf.Api.PartComponents;
             foreach(var component in components)
             {
-                if(component.Id() != PartId.AsmModels)
-                    EmitEnums.create().Run(wf, component);
+                EmitEnums.create().Run(wf, component);
             }
         }
     }
