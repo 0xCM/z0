@@ -7,10 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
-
-    using L = BitMasks.Literals;
+    using static Part;
+    using static memory;
     using static BitMasks.Literals;
 
     partial struct BitParts

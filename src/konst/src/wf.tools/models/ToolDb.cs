@@ -40,7 +40,7 @@ namespace Z0
 
         public void ListToolHelpFiles()
         {
-            iter(Catalog.Help(), file => term.print(file));
+            root.iter(Catalog.Help(), file => term.print(file));
         }
 
         public void PrintInfo()
@@ -62,9 +62,7 @@ namespace Z0
         public void ListCommands()
         {
             foreach(var a in Wf.Components)
-            {
-                iter(Cmd.search(a), spec => term.print(spec.CmdId));
-            }
+                root.iter(Cmd.search(a), spec => term.print(spec.CmdId));
         }
 
         [Op]

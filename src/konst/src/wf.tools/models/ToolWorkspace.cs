@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct ToolArchive<T> : IToolArchive<T>
+    public readonly struct ToolWorkspace<T> : IToolWorkspace<T>
         where T : struct, ITool<T>
     {
         /// <summary>
@@ -28,7 +28,7 @@ namespace Z0
         public ToolArchiveKind ArchiveKind {get;}
 
         [MethodImpl(Inline)]
-        public ToolArchive(ToolId tool, FS.FolderPath root, ToolArchiveKind kind)
+        public ToolWorkspace(ToolId tool, FS.FolderPath root, ToolArchiveKind kind)
         {
             ToolId = tool;
             Root = root;

@@ -50,7 +50,7 @@ namespace Z0
         /// <summary>
         /// The moniker parts, as determined by part delimiters
         /// </summary>
-        public string[] TextComponents {get;}
+        public string[] Components {get;}
 
         public OpIdentity(string text, string name, string suffix, bool generic, bool imm, string[] components)
         {
@@ -59,7 +59,7 @@ namespace Z0
             Suffix = suffix;
             IsGeneric = generic;
             HasImm = imm;
-            TextComponents = components;
+            Components = components;
         }
 
         [MethodImpl(Inline)]
@@ -70,7 +70,7 @@ namespace Z0
             Suffix = EmptyString;
             IsGeneric = false;
             HasImm = false;
-            TextComponents = sys.empty<string>();
+            Components = sys.empty<string>();
         }
 
         IIdentifiedOp<OpIdentity> Identified

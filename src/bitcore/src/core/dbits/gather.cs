@@ -11,7 +11,7 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Bmi2.X64;
     using static Part;
 
-    partial class BitMasks
+    partial class Bits
     {
         /// <summary>
         /// unsigned int _pext_u32 (unsigned int a, unsigned int mask) PEXT r32a, r32b, reg/m32

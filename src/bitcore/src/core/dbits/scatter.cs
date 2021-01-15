@@ -13,7 +13,7 @@ namespace Z0
 
     using x64 = System.Runtime.Intrinsics.X86.Bmi2.X64;
 
-    partial class BitMasks
+    partial class Bits
     {
         /// <summary>
         /// Deposits contiguous low bits from the source across a target according to a mask

@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Identifies an internal or external tool
@@ -59,7 +59,7 @@ namespace Z0
         public static implicit operator ToolId(string src)
             => new ToolId(src);
 
-       [MethodImpl(Inline)]
+        [MethodImpl(Inline)]
         public static implicit operator ToolId(utf8 src)
             => new ToolId(src);
 

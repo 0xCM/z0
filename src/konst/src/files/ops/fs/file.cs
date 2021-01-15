@@ -19,10 +19,6 @@ namespace Z0
         public static FileName file(ApiHostUri host, FileExt ext)
             => FS.file(Z0.text.concat(host.Owner.Format(), Chars.Dot, host.Name), ext);
 
-        [MethodImpl(Inline), Op]
-        public static FS.FileName file(ApiHostUri host, FileExt a, FileExt b)
-            => FS.file(Z0.text.concat(host.Owner.Format(), Chars.Dot, host.Name), a + b);
-
         /// <summary>
         /// Defines a host-specialized filename
         /// </summary>
@@ -34,27 +30,15 @@ namespace Z0
             => file(Z0.text.concat(part.Format(), Chars.Dot, hostname), ext);
 
         [MethodImpl(Inline), Op]
-        public static FileName file(PathPart name)
-            => new FileName(name);
-
-        [MethodImpl(Inline), Op]
         public static FileName file(PathPart name, FileExt ext)
             => new FileName(name, ext);
-
-        [MethodImpl(Inline), Op]
-        public static FileName file(PathPart name, string ext)
-            => new FileName(name, FS.ext(ext));
 
         [MethodImpl(Inline), Op]
         public static FileName file(string name)
             => new FileName(name);
 
         [MethodImpl(Inline), Op]
-        public static FileName file(string name, string x)
-            => new FileName(name, ext(x));
-
-        [MethodImpl(Inline), Op]
-        public static FileName file(string name, FileExtension x)
-            => new FileName(name, ext(x.Name));
+        public static FileName file(Name name, string x)
+            => new FileName(name.Format(), ext(x));
     }
 }

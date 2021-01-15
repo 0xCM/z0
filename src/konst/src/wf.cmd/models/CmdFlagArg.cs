@@ -22,13 +22,13 @@ namespace Z0
         /// <summary>
         /// Whether the flag is enabled
         /// </summary>
-        public bool Value {get;}
+        public bool Enabled {get;}
 
         [MethodImpl(Inline)]
         public CmdFlagArg(string name, bool enabled)
         {
             FlagName = name;
-            Value = enabled;
+            Enabled = enabled;
         }
 
         [MethodImpl(Inline)]
@@ -37,14 +37,14 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator bool(CmdFlagArg src)
-            => src.Value;
+            => src.Enabled;
 
         [MethodImpl(Inline)]
         public static bool operator true(CmdFlagArg src)
-            => src.Value;
+            => src.Enabled;
 
         [MethodImpl(Inline)]
         public static bool operator false(CmdFlagArg src)
-            => !src.Value;
+            => !src.Enabled;
     }
 }

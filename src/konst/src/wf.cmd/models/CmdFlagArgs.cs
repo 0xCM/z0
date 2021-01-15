@@ -11,7 +11,7 @@ namespace Z0
 
     public readonly struct CmdFlagArgs : IIndex<CmdFlagArg>
     {
-        readonly IndexedSeq<CmdFlagArg> Data;
+        readonly Index<CmdFlagArg> Data;
 
         [MethodImpl(Inline)]
         public CmdFlagArgs(CmdFlagArg[] src)

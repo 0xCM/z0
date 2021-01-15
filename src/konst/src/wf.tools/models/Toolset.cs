@@ -7,18 +7,18 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
-    public readonly struct Toolset : IIdentified<utf8>
+    public readonly struct Toolset
     {
-        public utf8 Id {get;}
+        public Name Name {get;}
 
         public FS.FolderPath Location {get;}
 
         [MethodImpl(Inline)]
-        public Toolset(string name, FS.FolderPath root)
+        public Toolset(Name name, FS.FolderPath root)
         {
-            Id = name;
+            Name = name;
             Location = root;
         }
     }

@@ -6,11 +6,11 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+
     using static System.Runtime.Intrinsics.X86.Bmi1;
     using static System.Runtime.Intrinsics.X86.Bmi1.X64;
-
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     partial class BitMasks
     {
@@ -85,7 +85,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T lo<T>(int n, T t = default)
             where T : unmanaged
-                => force<ulong,T>(lo64(n));
+                => NumericCast.force<ulong,T>(lo64(n));
 
         /// <summary>
         /// Produces a sequence of N enabled bits, starting from index 0 and extending to index n - 1
@@ -108,6 +108,6 @@ namespace Z0
         public static T lo<N,T>(N n = default, T t = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => force<ulong,T>(lo(n));
+                => NumericCast.force<ulong,T>(lo(n));
     }
 }

@@ -18,7 +18,7 @@ namespace Z0
 
         public Type DataType => typeof(T);
 
-        public IndexedView<FieldInfo> Fields
+        public Index<FieldInfo> Fields
         {
             [MethodImpl(Inline)]
             get => DataType.DeclaredInstanceFields();

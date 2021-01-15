@@ -9,9 +9,7 @@ namespace Z0
 
     using static Konst;
     using static z;
-    using static BitMasks;
-
-    using L = BitMasks.Literals;
+    using static BitMasks.Literals;
 
     partial struct BitParts
     {
@@ -24,7 +22,7 @@ namespace Z0
         public static ref byte part9x3(uint src, ref byte dst)
         {
             part6x3(src, ref dst);
-            seek(dst, 2) = (byte)(src >> 6 & L.Lsb8x8x3);
+            seek(dst, 2) = (byte)(src >> 6 & Lsb8x8x3);
             return ref dst;
         }
     }

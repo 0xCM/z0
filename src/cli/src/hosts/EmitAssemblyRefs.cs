@@ -16,7 +16,7 @@ namespace Z0
         public static ReadOnlySpan<byte> RenderWidths => new byte[AssemblyRefInfo.FieldCount]{48, 48};
 
         [Op]
-        public static EmitAssemblyRefsCmd specify(IWfShell wf, Files src, FS.FilePath dst)
+        public static EmitAssemblyRefsCmd specify(IWfShell wf, FS.Files src, FS.FilePath dst)
         {
             var cmd = new EmitAssemblyRefsCmd();
             cmd.Sources = src;

@@ -8,18 +8,18 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Konst;
+    using static Part;
     using static z;
 
-    [ApiHost("tooling", true)]
+    [ApiHost]
     public partial struct CmdTools
     {
         const NumericKind Closure = UnsignedInts;
 
         [MethodImpl(Inline)]
-        public static ToolArchive<T> archive<T>(ToolId tool, FS.FolderPath root, ToolArchiveKind kind)
+        public static ToolWorkspace<T> workspace<T>(ToolId tool, FS.FolderPath root, ToolArchiveKind kind)
             where T : struct, ITool<T>
-                => new ToolArchive<T>(tool, root, kind);
+                => new ToolWorkspace<T>(tool, root, kind);
 
         /// <summary>
         /// Creates a <see cref='ToolSpec'/>

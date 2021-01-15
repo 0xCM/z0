@@ -17,7 +17,7 @@ namespace Z0
 
         public Type DataType {get;}
 
-        public IndexedView<FieldInfo> Fields {get;}
+        public Index<FieldInfo> Fields {get;}
 
         [MethodImpl(Inline)]
         public CmdTypeInfo(Type type, FieldInfo[] fields)

@@ -9,7 +9,7 @@ namespace Z0.Tools
     /// <summary>
     /// Represents a toolset distribution
     /// </summary>
-    public readonly struct ToolsetDist : IToolsetDist<ToolsetDist>
+    public readonly struct ToolsetDist
     {
         public FS.FolderPath Root {get;}
 

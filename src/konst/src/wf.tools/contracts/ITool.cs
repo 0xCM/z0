@@ -9,7 +9,7 @@ namespace Z0
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface ITool : IIdentified<ToolId>
+    public interface ITool
     {
 
     }
@@ -18,9 +18,6 @@ namespace Z0
     public interface ITool<T> : ITool
         where T : struct, ITool<T>
     {
-        string ToolName {get;}
-
-        ToolId IIdentified<ToolId>.Id
-            => ToolName;
+        Name ToolName {get;}
     }
 }

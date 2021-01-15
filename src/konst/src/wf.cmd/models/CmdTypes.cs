@@ -11,7 +11,7 @@ namespace Z0
 
     public struct CmdTypes : IIndex<CmdTypeInfo>
     {
-        IndexedSeq<CmdTypeInfo> Data;
+        Index<CmdTypeInfo> Data;
 
         [MethodImpl(Inline)]
         public CmdTypes(CmdTypeInfo[] src)

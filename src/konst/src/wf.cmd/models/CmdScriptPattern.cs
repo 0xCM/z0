@@ -18,7 +18,7 @@ namespace Z0
 
         public ToolId CmdHost;
 
-        public string CmdArgName;
+        public Name CmdArgName;
 
         public ArgPrefix ArgPrefix;
 
@@ -26,7 +26,7 @@ namespace Z0
 
         public FS.FileName CmdName;
 
-        public string ToolArgs;
+        public TextBlock ToolArgs;
 
         public FS.FolderPath CmdOutDir;
 
@@ -38,7 +38,7 @@ namespace Z0
 
         public FS.FilePath CmdPath;
 
-        public string CmdExecSpec;
+        public TextBlock CmdExecSpec;
 
         [MethodImpl(Inline)]
         public string Format()

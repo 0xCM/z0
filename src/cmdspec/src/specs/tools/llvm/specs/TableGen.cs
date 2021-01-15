@@ -11,7 +11,7 @@ namespace Z0.Tools
         [Tool]
         public struct TblGen : ITool<TblGen>
         {
-            public string ToolName => ToolNames.tblgen;
+            public Name ToolName => ToolNames.tblgen;
         }
 
         [Cmd]

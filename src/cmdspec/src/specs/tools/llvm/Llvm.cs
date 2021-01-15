@@ -10,7 +10,6 @@ namespace Z0.Tools
     [ApiHost]
     public readonly partial struct Llvm
     {
-
         [Op]
         public static Llvm service(IWfShell wf)
             => new Llvm(wf);

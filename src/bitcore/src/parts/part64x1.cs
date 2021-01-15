@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
     using static BitMasks;
 
     partial struct BitParts
@@ -22,14 +22,14 @@ namespace Z0
         public static ref byte part64x1(ulong src, ref byte dst)
         {
             ref var target = ref seek64(dst,0);
-            seek(target, 0) = BitMasks.lsb8x1(src);
-            seek(target, 1) = BitMasks.lsb8x1(src >> 8);
-            seek(target, 2) = BitMasks.lsb8x1(src >> 16);
-            seek(target, 3) = BitMasks.lsb8x1(src >> 24);
-            seek(target, 4) = BitMasks.lsb8x1(src >> 32);
-            seek(target, 5) = BitMasks.lsb8x1(src >> 40);
-            seek(target, 6) = BitMasks.lsb8x1(src >> 48);
-            seek(target, 7) = BitMasks.lsb8x1(src >> 56);
+            seek(target, 0) = lsb8x1(src);
+            seek(target, 1) = lsb8x1(src >> 8);
+            seek(target, 2) = lsb8x1(src >> 16);
+            seek(target, 3) = lsb8x1(src >> 24);
+            seek(target, 4) = lsb8x1(src >> 32);
+            seek(target, 5) = lsb8x1(src >> 40);
+            seek(target, 6) = lsb8x1(src >> 48);
+            seek(target, 7) = lsb8x1(src >> 56);
             return ref dst;
         }
 
@@ -45,7 +45,7 @@ namespace Z0
             // thus, the target covers 32 64-bit segments where each segment covers 2 bit values
             ref var target = ref first(dst.Cast<Bit32,ulong>());
             for(byte i=0; i<32; i++)
-                seek(target, i) = BitMasks.lsb32x1(src >> i);
+                seek(target, i) = lsb32x1(src >> i);
         }
     }
 }

@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     partial class BitMasks
     {
@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <param name="i">The source integer</param>
         /// <param name="p">The parity bit</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static byte pindex(byte i, byte p)
             => ScalarCast.uint8(i*2 + p);
     }

@@ -18,7 +18,7 @@ namespace Z0
         [Op]
         public static OpIdentity WithGeneric(this OpIdentity src)
         {
-            if(src.TextComponents.Skip(1).First()[0] == IDI.Generic)
+            if(src.Components.Skip(1).First()[0] == IDI.Generic)
                 return src;
             else
                return OpIdentityParser.parse(

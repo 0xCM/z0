@@ -20,6 +20,6 @@ namespace Z0
         where T : struct, ITool<T>
     {
         ToolId ICmdSpec.ToolId
-            => default(T).Id;
+            => Cmd.toolid<C>();
     }
 }

@@ -39,9 +39,9 @@ namespace Z0
         }
 
         public static void Delete(this FS.FolderPath[] paths)
-            => z.iter(paths, path => path.Delete(true));
+            => root.iter(paths, path => path.Delete(true));
 
         public static void Delete(this IEnumerable<FS.FolderPath> paths)
-            => z.iter(paths, path => path.Delete(true));
+            => root.iter(paths, path => path.Delete(true));
     }
 }

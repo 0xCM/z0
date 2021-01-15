@@ -26,7 +26,7 @@ namespace Z0
         /// <param name="match">The kind to match</param>
         [Op]
         public static bool accepts(ApiCodeBlock src, NumericKind match)
-            => ApiIdentify.numeric(src.Id.TextComponents.Skip(1)).Contains(match);
+            => ApiIdentify.numeric(src.Id.Components.Skip(1)).Contains(match);
 
         /// <summary>
         /// Determines the arity of the encoded operation
@@ -34,7 +34,7 @@ namespace Z0
         /// <param name="src">The encoded operation</param>
         [MethodImpl(Inline), Op]
         public static int arity(ApiCodeBlock src)
-            => src.OpUri.OpId.TextComponents.Count() - 1;
+            => src.OpUri.OpId.Components.Count() - 1;
 
         /// <summary>
         /// Excludes source operations that do not accept two parameters of specified numeric kind
@@ -44,7 +44,7 @@ namespace Z0
         /// <param name="k2">The second parameter kind</param>
         public static IEnumerable<ApiCodeBlock> accepts(IEnumerable<ApiCodeBlock> src, NumericKind k1, NumericKind k2)
             => from code in src
-                let kinds = ApiIdentify.numeric(code.OpUri.OpId.TextComponents.Skip(1))
+                let kinds = ApiIdentify.numeric(code.OpUri.OpId.Components.Skip(1))
                 where kinds.Contains(k1) && kinds.Contains(k2)
                 select code;
 
@@ -75,7 +75,6 @@ namespace Z0
                         group pf by pf.Part).ToDictionary(x => x.Key, y => y.ToArray());
             return files;
         }
-
 
         public static WfExecToken emit(IWfShell wf, ReadOnlySpan<ApiCodeDescriptor> src)
         {

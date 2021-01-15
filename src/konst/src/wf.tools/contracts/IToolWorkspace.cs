@@ -10,7 +10,7 @@ namespace Z0
     /// Characterizes a tool-specific file archive
     /// </summary>
     [Free]
-    public interface IToolArchive : IIdentified<ToolId>, IFileArchive
+    public interface IToolWorkspace : IIdentified<ToolId>, IFileArchive
     {
         ToolId ToolId {get;}
 
@@ -21,7 +21,7 @@ namespace Z0
     }
 
     [Free]
-    public interface IToolArchive<T> : IToolArchive, IFileArchive
+    public interface IToolWorkspace<T> : IToolWorkspace, IFileArchive
         where T : struct, ITool<T>
     {
 

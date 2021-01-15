@@ -30,7 +30,7 @@ namespace Z0
             return path;
         }
 
-        public Files Help()
+        public FS.Files Help()
             => HelpDir.Files(FS.ext("help"));
 
         FS.FolderPath HelpDir

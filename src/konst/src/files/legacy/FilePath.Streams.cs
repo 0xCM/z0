@@ -19,9 +19,6 @@ namespace Z0
         public static StreamReader Reader(this FilePath src)
             => new StreamReader(src.Name);
 
-        public static StreamWriter Writer(this FilePath dst, FileWriteMode mode)
-            => new StreamWriter(dst.CreateParentIfMissing().Name, mode == FileWriteMode.Append);
-
         /// <summary>
         /// Creates an overwriting and caller-disposed stream writer that targets a specified path
         /// </summary>
@@ -32,10 +29,6 @@ namespace Z0
         public static BinaryWriter BinaryWriter(this FilePath dst)
             => new BinaryWriter(File.Open(dst.CreateParentIfMissing().Name, FileMode.Create));
 
-        public static BinaryReader BinaryReader(this Stream src)
-            => new BinaryReader(src);
 
-        public static BinaryReader BinaryReader(this StreamReader src)
-            => new BinaryReader(src.BaseStream);
     }
 }

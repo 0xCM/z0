@@ -7,11 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static z;
-    using static BitMasks;
+    using static BitMasks.Literals;
 
-    using L = BitMasks.Literals;
 
     partial struct BitParts
     {
@@ -24,9 +23,9 @@ namespace Z0
         public static ref byte part(ulong src, N63 count, N3 wSrc, N8 wDst, ref byte dst)
         {
             var x = BitMasks.lo(n63) & src;
-            seek64(dst, 0) = scatter(x, L.Lsb64x8x3);
-            seek64(dst, 1) = scatter(x >> 24, L.Lsb64x8x3);
-            seek64(dst, 2) = scatter(x >> 48, L.Lsb64x8x3);
+            seek64(dst, 0) = Bits.scatter(x, Lsb64x8x3);
+            seek64(dst, 1) = Bits.scatter(x >> 24, Lsb64x8x3);
+            seek64(dst, 2) = Bits.scatter(x >> 48, Lsb64x8x3);
             return ref dst;
         }
 

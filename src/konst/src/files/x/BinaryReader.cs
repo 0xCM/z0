@@ -6,17 +6,15 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.IO;
+    using System.Collections.Generic;
 
-    using static Part;
-
-    partial struct FS
+    partial class XFs
     {
-        [MethodImpl(Inline), Op]
-        public static FolderPath dir(PathPart name)
-            => new FolderPath(normalize(name));
+        public static BinaryReader BinaryReader(this Stream src)
+            => new BinaryReader(src);
 
-        [MethodImpl(Inline), Op]
-        public static FolderPath dir(string name)
-            => new FolderPath(normalize(name));
+        public static BinaryReader BinaryReader(this StreamReader src)
+            => new BinaryReader(src.BaseStream);
     }
 }

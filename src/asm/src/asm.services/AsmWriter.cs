@@ -87,14 +87,6 @@ namespace Z0.Asm
         public FS.FilePath TargetPath {get;}
 
         [MethodImpl(Inline)]
-        public AsmWriter(FilePath path, IAsmFormatter formatter)
-        {
-            TargetPath = FS.path(path.Name);
-            Formatter = formatter;
-            StreamOut = new StreamWriter(path.CreateParentIfMissing().FullPath,false);
-        }
-
-        [MethodImpl(Inline)]
         public AsmWriter(FS.FilePath path, IAsmFormatter formatter)
         {
             TargetPath = path;

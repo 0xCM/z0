@@ -26,7 +26,7 @@ namespace Z0
         public static Option<FS.FilePath> deposit<F,R>(FS.FolderPath root, R[] src, FS.FileName name)
             where F : unmanaged, Enum
             where R : struct, ITabular
-                => deposit(src, api.renderspec<F>(), root + FS.file(name.Name));
+                => deposit(src, api.renderspec<F>(), root + name);
 
         public static Option<FS.FilePath> deposit<F,R>(FS.FolderPath root, R[] src, FS.FolderName folder, FS.FileName name)
             where F : unmanaged, Enum

@@ -9,8 +9,7 @@ namespace Z0
 
     using static Konst;
     using static z;
-
-    using L = BitMasks.Literals;
+    using static BitMasks.Literals;
 
     partial struct BitParts
     {
@@ -23,9 +22,9 @@ namespace Z0
         public static void part63x3(ulong src, ref byte dst)
         {
             var x = BitMasks.lo(n63) & src;
-            seek64(dst, 0) = BitMasks.scatter(x, L.Lsb64x8x3);
-            seek64(dst, 1) = BitMasks.scatter(x >> 24, L.Lsb64x8x3);
-            seek64(dst, 2) = BitMasks.scatter(x >> 48, L.Lsb64x8x3);
+            seek64(dst, 0) = Bits.scatter(x, Lsb64x8x3);
+            seek64(dst, 1) = Bits.scatter(x >> 24, Lsb64x8x3);
+            seek64(dst, 2) = Bits.scatter(x >> 48, Lsb64x8x3);
         }
     }
 }

@@ -16,7 +16,7 @@ namespace Z0
 
         Type DataType {get;}
 
-        IndexedView<FieldInfo> Fields {get;}
+        Index<FieldInfo> Fields {get;}
     }
 
     [Free]
@@ -29,7 +29,7 @@ namespace Z0
         Type ICmdTypeInfo.DataType
             => typeof(T);
 
-        IndexedView<FieldInfo> ICmdTypeInfo.Fields
+        Index<FieldInfo> ICmdTypeInfo.Fields
             => typeof(T).DeclaredInstanceFields();
     }
 

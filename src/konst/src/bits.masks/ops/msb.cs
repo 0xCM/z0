@@ -328,7 +328,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T mask<T>(MsbMask<N8,N1,T> spec)
             where T : unmanaged
-                => msb(spec.f,spec.d,spec.t);
+                => msb(spec.f, spec.d, spec.t);
 
         /// <summary>
         /// [10000000 00000000]
