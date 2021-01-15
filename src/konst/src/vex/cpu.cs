@@ -9,14 +9,13 @@ namespace Z0
     using static Part;
 
     [ApiHost]
-    public readonly partial struct vex
+    public readonly partial struct cpu
     {
-
         const NumericKind Closure = UnsignedInts;
     }
 
     [ApiHost]
-    public readonly partial struct vexg
+    public readonly partial struct gcpu
     {
         const NumericKind Closure = UnsignedInts;
     }

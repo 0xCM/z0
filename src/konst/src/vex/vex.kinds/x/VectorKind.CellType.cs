@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class XVexKinds
+    partial class XVKinds
     {
         /// <summary>
         /// Returns the clr cell type of a vector of specified kind

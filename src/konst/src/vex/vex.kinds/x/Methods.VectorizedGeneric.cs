@@ -8,9 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Konst;
-
-    partial class XVexKinds
+    partial class XVKinds
     {
         /// <summary>
         /// Selects open generic source methods that have at least one 128-bit vector parameter

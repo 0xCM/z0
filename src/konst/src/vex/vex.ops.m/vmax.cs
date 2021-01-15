@@ -165,6 +165,6 @@ namespace Z0
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline), Max]
         public static Vector256<long> vmax(Vector256<long> x, Vector256<long> y)
-            => z.vblend(y, x, v8u(vgt(x,y)));
+            => cpu.vblend(y, x, v8u(vgt(x,y)));
     }
 }

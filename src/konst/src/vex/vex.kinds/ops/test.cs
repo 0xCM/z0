@@ -9,9 +9,8 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Reflection;
     using System.Linq;
-    using System.Collections.Generic;
 
-    using static Konst;
+    using static Part;
 
     partial class VKinds
     {

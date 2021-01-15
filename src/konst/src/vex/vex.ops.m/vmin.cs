@@ -165,6 +165,6 @@ namespace Z0
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline), Min]
         public static Vector256<long> vmin(Vector256<long> x, Vector256<long> y)
-            => z.vblend(y, x, v8u(vlt(x,y)));
+            => cpu.vblend(y, x, v8u(vlt(x,y)));
     }
 }

@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    public static partial class XVexKinds
+    public static partial class XVKinds
     {
         /// <summary>
         /// Determines whether a type is classified as an intrinsic vector

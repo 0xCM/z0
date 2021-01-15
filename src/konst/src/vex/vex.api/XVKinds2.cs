@@ -11,7 +11,7 @@ namespace Z0
 
 
     [ApiHost]
-    public static partial class XVexKinds
+    public static partial class XVKinds
     {
         const NumericKind Closure = AllNumeric;
 

@@ -7,9 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
-    partial class XVexKinds
+    partial class XVKinds
     {
         /// <summary>
         /// Specifies the bit-width of a classified cpu vector

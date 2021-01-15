@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Reflection;
 
-    partial class XVexKinds
+    partial class XVKinds
     {
         /// <summary>
         /// Determines whether a method has intrinsic parameters or return type of specified width

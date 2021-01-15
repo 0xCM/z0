@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    partial class XVexKinds
+    partial class XVKinds
     {
         /// <summary>
         /// Determines whether a vector of specified kind has a singed 8-bit cell type

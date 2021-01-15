@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
+    using static Part;
 
     public readonly struct Vec256Kind<T> : IVectorKind<Vec256Kind<T>,W256,T>
         where T : unmanaged
