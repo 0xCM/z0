@@ -7,24 +7,6 @@ namespace Z0
     using K = ComparisonApiClass;
     using I = IComparisonApiKey;
 
-
-    /// <summary>
-    /// Characterizes a kind-parametric and numeric-parametric comparison operation classifier
-    /// </summary>
-    /// <typeparam name="F">The kind classifier type</typeparam>
-    /// <typeparam name="T">The numeric type</typeparam>
-    public interface IComparisonKind<F,T> : IComparisonKind<F>
-        where F : unmanaged, I
-    {
-        K I.Kind => default(F).Kind;
-
-        /// <summary>
-        /// The parametrically-identified numeric kind
-        /// </summary>
-        NumericKind NumericKind
-            => Numeric.kind<T>();
-    }
-
     public readonly struct ComparisonKinds
     {
         public readonly struct Lt : I { K I.Kind => K.Lt; }

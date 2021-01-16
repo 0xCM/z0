@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
 
-
-
     [AttributeUsage(AttributeTargets.All)]
     public class DataAttribute : Attribute
     {

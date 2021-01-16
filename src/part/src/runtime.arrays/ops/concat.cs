@@ -14,25 +14,6 @@ namespace Z0
 
     partial struct Arrays
     {
-        // /// <summary>
-        // /// Concatenates an array sequence
-        // /// </summary>
-        // /// <param name="src">The source arrays</param>
-        // [MethodImpl(Inline), Op, Closures(Closure)]
-        // public static void concat<T>(T[][] src, T[] dst)
-        // {
-        //     ref var target = ref memory.first(span(dst));
-        //     var k = 0u;
-
-        //     var members = span(src);
-        //     var terms = members.Length;
-        //     for(uint i=0u; i<terms; i++)
-        //     {
-        //         var term = span(memory.skip(members,i));
-        //         copy(memory.first(term), (uint)term.Length, ref target, ref k);
-        //     }
-        // }
-
         /// <summary>
         /// Computes the total number of cells covered by the source
         /// </summary>

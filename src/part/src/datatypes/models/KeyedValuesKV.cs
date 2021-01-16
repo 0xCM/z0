@@ -26,7 +26,6 @@ namespace Z0
         {
             Pairs = dst;
             KeyFunction = kf;
-
             var edit = Edit;
             var values = span(src);
             var count = src.Length;
@@ -202,7 +201,12 @@ namespace Z0
         public Span<KeyedValue<K,V>> Terms
             => Pairs;
 
+        [MethodImpl(Inline)]
         public static implicit operator KeyedValues<K,V>(KeyedValue<K,V>[] src)
+            => new KeyedValues<K,V>(src);
+
+       [MethodImpl(Inline)]
+       public static implicit operator KeyedValues<K,V>(Index<KeyedValue<K,V>> src)
             => new KeyedValues<K,V>(src);
 
         public static KeyedValues<K,V> Empty

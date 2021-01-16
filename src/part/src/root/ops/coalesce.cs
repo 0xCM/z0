@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="x">The operand</param>
         /// <param name="f1">The function to potentially evaluate</param>
         [MethodImpl(Inline)]
-        public static Y ifNotNull<X,Y>(X x, Func<X,Y> f1, Y @default = default)
+        public static Y coalesce<X,Y>(X x, Func<X,Y> f1, Y @default = default)
             => x != null ? f1(x) : @default;
     }
 }
