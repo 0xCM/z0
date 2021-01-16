@@ -36,7 +36,7 @@ namespace Z0
         /// <summary>
         /// Specifies the count of unique values representable by a <see cref='U'/>
         /// </summary>
-        public const byte Count = (byte)MaxLiteral + 1;
+        public const byte Mod = (byte)MaxLiteral + 1;
 
         /// <summary>
         /// Specifies the represented data type bit-width

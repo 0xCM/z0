@@ -25,6 +25,6 @@ namespace Z0
         /// <param name="src">The operation kind id</param>
         [MethodImpl(Inline)]
         public static string vname(ApiClass src)
-            => src.FormatV();
+            => $"v{src.Format()}";
     }
 }

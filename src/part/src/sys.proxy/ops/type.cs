@@ -10,7 +10,7 @@ namespace Z0
 
     using static Part;
 
-    using O = OpacityApiClass;
+    using O = OpaqueApiClass;
 
     partial struct proxy
     {

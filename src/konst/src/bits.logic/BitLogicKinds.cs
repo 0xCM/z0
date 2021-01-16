@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    using K = BinaryBitLogicApiClass;
+    using K = BitLogicApiClass;
     using I = IBitLogicKind;
 
     using static Part;

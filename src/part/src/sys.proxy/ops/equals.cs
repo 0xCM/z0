@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using O = OpacityApiClass;
+    using O = OpaqueApiClass;
 
     partial struct proxy
     {

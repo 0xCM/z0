@@ -25,7 +25,7 @@ namespace Z0
         public static string sig(TLK kind)
             => text.concat(format(kind), Chars.Colon, nameof(bit));
 
-        public static string sig(BinaryBitLogicApiClass kind)
+        public static string sig(BitLogicApiClass kind)
             => text.concat(format(kind), Chars.Colon, nameof(bit));
 
         public static string sig<T>(ULK kind)
@@ -65,7 +65,7 @@ namespace Z0
         public static string format(BLK kind)
             => kind.ToString().ToLower();
 
-        public static string format(BinaryBitLogicApiClass kind)
+        public static string format(BitLogicApiClass kind)
             => kind.Format();
     }
 }

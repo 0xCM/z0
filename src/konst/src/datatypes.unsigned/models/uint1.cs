@@ -388,7 +388,7 @@ namespace Z0
         public static U operator >= (U x, U y)
             => @bool(x.data >= y.data);
 
-       /// <summary>
+        /// <summary>
         /// Specifies the minimum <see cref='U'/> value
         /// </summary>
         public static U Min

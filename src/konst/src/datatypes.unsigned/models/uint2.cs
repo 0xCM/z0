@@ -41,7 +41,7 @@ namespace Z0
         /// <summary>
         /// Specifies the count of unique values representable by a <see cref='U'/>
         /// </summary>
-        public const uint Count = MaxLiteral + 1;
+        public const uint Mod = MaxLiteral + 1;
 
         /// <summary>
         /// Specifies a <see cref='U'/> bitwidth <see ref='W'/> representative

@@ -111,7 +111,6 @@ namespace Z0
         public static uint8T join(U a, U b, U c, U d)
             => (uint8T)a | ((uint8T)b << 2) | ((uint8T)c << 4) | ((uint8T)d << 6);
 
-
         /// <summary>
         /// Reinterprets an input reference as a mutable <see cref='U'/> reference cell
         /// </summary>
@@ -322,14 +321,14 @@ namespace Z0
         public static U add(U x, U y)
         {
             var sum = x.data + y.data;
-            return wrap(w2, (sum >= U.Count) ? sum - (byte)U.Count: sum);
+            return wrap(w2, (sum >= U.Mod) ? sum - (byte)U.Mod: sum);
         }
 
         [MethodImpl(Inline), Op]
         public static U sub(U x, U y)
         {
             var diff = (int)x - (int)y;
-            return wrap(w2, diff < 0 ? (byte)(diff + U.Count) : (byte)diff);
+            return wrap(w2, diff < 0 ? (byte)(diff + U.Mod) : (byte)diff);
         }
 
         [MethodImpl(Inline), Op]
@@ -387,7 +386,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         internal static byte reduce2(byte x)
-            => (byte)(x % U.Count);
+            => (byte)(x % U.Mod);
 
         [MethodImpl(Inline)]
         internal static U wrap2(int src)

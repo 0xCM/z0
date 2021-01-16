@@ -184,7 +184,7 @@ namespace Z0
         public static U add(U x, U y)
         {
             var d = (byte)(x.data +y.data);
-            var result = Bytes.gteq(d, U.Count) ? Bytes.sub(d, U.Count) : d;
+            var result = Bytes.gteq(d, U.Mod) ? Bytes.sub(d, U.Mod) : d;
             return new U(result, true);
         }
 
@@ -193,7 +193,7 @@ namespace Z0
         {
             var delta = x.data - y.data;
             if(delta < 0)
-                return wrap4((byte)(delta + U.Count));
+                return wrap4((byte)(delta + U.Mod));
             else
                 return wrap4((byte)delta);
         }
@@ -229,7 +229,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         internal static byte reduce4(byte x)
-            => (byte)(x % U.Count);
+            => (byte)(x % U.Mod);
 
         [MethodImpl(Inline)]
         internal static U wrap4(byte src)

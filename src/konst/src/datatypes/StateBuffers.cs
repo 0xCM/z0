@@ -16,27 +16,27 @@ namespace Z0
 
         [Op]
         public static StateBuffer<uint2,uint2> create(W2 w)
-            => new StateBuffer<uint2,uint2>(uint2.Count);
+            => new StateBuffer<uint2,uint2>(uint2.Mod);
 
         [Op]
         public static StateBuffer<uint3,uint3> create(W3 w)
-            => new StateBuffer<uint3,uint3>(uint3.Count);
+            => new StateBuffer<uint3,uint3>(uint3.Mod);
 
         [Op]
         public static StateBuffer<uint4,uint4> create(W4 w)
-            => new StateBuffer<uint4,uint4>(uint4.Count);
+            => new StateBuffer<uint4,uint4>(uint4.Mod);
 
         [Op]
         public static StateBuffer<uint5,uint5> create(W5 w)
-            => new StateBuffer<uint5,uint5>(uint5.Count);
+            => new StateBuffer<uint5,uint5>(uint5.Mod);
 
         [Op]
         public static StateBuffer<uint6,uint6> create(W6 w)
-            => new StateBuffer<uint6,uint6>(uint6.Count);
+            => new StateBuffer<uint6,uint6>(uint6.Mod);
 
         [Op]
         public static StateBuffer<uint7,uint7> create(W7 w)
-            => new StateBuffer<uint7,uint7>(uint7.Count);
+            => new StateBuffer<uint7,uint7>(uint7.Mod);
 
         [Op]
         public static StateBuffer<uint8T,uint8T> create(W8 w)

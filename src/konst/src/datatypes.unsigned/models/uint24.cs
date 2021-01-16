@@ -57,7 +57,7 @@ namespace Z0
 
         public const byte Size = 3;
 
-        public const uint Count = (T)MaxVal + 1u;
+        public const uint Mod = (T)MaxVal + 1u;
 
         public static W W => default;
 
@@ -211,7 +211,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static U reduce(uint x)
-            => new U(x % Count);
+            => new U(x % Mod);
 
         [MethodImpl(Inline)]
         static U dec(U x)

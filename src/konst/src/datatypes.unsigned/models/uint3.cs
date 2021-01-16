@@ -41,7 +41,7 @@ namespace Z0
         /// <summary>
         /// Specifies the count of unique values representable by a <see cref='U'/>
         /// </summary>
-        public const byte Count = (byte)MaxLiteral + 1;
+        public const byte Mod = (byte)MaxLiteral + 1;
 
         /// <summary>
         /// Specifies the <see cref='Width'/> values as a type-level natural

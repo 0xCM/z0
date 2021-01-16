@@ -55,11 +55,11 @@ namespace Z0
             => $"{a} {key.Format()} {b}";
 
         [Op]
-        public static string Format(this BinaryBitLogicApiClass key)
+        public static string Format(this BitLogicApiClass key)
             => key.ToString().ToLower();
 
         [Op, Closures(Closure)]
-        public static string Format<T>(this BinaryBitLogicApiClass key, T a, T b)
+        public static string Format<T>(this BitLogicApiClass key, T a, T b)
             => text.format("{0}({1}, {2})", key.Format(), a, b);
     }
 }

@@ -44,7 +44,7 @@ namespace Z0
         /// </summary>
         public const byte Width = 8;
 
-        public const uint Count = 256;
+        public const uint Mod = 256;
 
         public static W W => default;
 

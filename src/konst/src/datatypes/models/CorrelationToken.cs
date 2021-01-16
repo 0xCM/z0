@@ -34,7 +34,7 @@ namespace Z0
         public int CompareTo(CorrelationToken other)
             => Value.CompareTo(other.Value);
         public string Format()
-            => Value.Format(10);
+            => Root.format(Value, 10);
 
         public override string ToString()
             => Format();

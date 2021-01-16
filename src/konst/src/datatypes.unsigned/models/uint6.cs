@@ -34,14 +34,14 @@ namespace Z0
         public const T MaxLiteral = 63;
 
         /// <summary>
-        /// Specifies the count of unique values representable by a <see cref='U'/>
-        /// </summary>
-        public const byte Count = MaxLiteral + 1;
-
-        /// <summary>
         /// Specifies the represented data type bit-width
         /// </summary>
         public const byte Width = 6;
+
+        /// <summary>
+        /// Specifies the count of unique values representable by a <see cref='U'/>
+        /// </summary>
+        public const byte Mod = MaxLiteral + 1;
 
         public static W W => default;
 

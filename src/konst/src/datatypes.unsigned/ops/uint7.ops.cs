@@ -169,14 +169,14 @@ namespace Z0
         public static U add(U x, U y)
         {
             var sum = (byte)(x.data + y.data);
-            return wrap7((sum >= U.Count) ? (byte)(sum - U.Count): sum);
+            return wrap7((sum >= U.Mod) ? (byte)(sum - U.Mod): sum);
         }
 
         [MethodImpl(Inline), Op]
         public static U sub(U x, U y)
         {
             var diff = (int)x - (int)y;
-            return wrap7(diff < 0 ? (uint)(diff + U.Count) : (uint)diff);
+            return wrap7(diff < 0 ? (uint)(diff + U.Mod) : (uint)diff);
         }
 
         [MethodImpl(Inline), Op]
@@ -235,7 +235,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         internal static byte reduce7(byte x)
-            => (byte)(x % U.Count);
+            => (byte)(x % U.Mod);
 
         [MethodImpl(Inline)]
         internal static U wrap7(byte src)

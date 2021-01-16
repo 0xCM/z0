@@ -394,11 +394,25 @@ public enum ApiClass : ushort
 
     MemSub,
 
+    ZeroExtend,
 
-    // ~~ Hardware intrinsics
+    SignExtend,
+
+    // ~~ Instructions/Intrinsics
     // ~~ -------------------------------------------------------------------------------------------------------------
 
-    Intrinsic = K.T11,
+    CVTSS2SI = K.T11,
+
+    CVTSD2SI,
+
+    PAVGB,
+
+    PAVGW,
+
+    VPAVGB,
+
+    VPAVGW,
+
 
     // ~~ System-level operations
     // ~~ -------------------------------------------------------------------------------------------------------------
