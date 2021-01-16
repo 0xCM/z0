@@ -13,10 +13,22 @@ namespace Z0
     [ApiHost]
     public readonly struct Substitutions
     {
+        /// <summary>
+        /// Defines a <see cref='Substitution{T}'/>
+        /// </summary>
+        /// <param name="replace">The value to replace</param>
+        /// <param name="replacement">The replacement value</param>
+        /// <typeparam name="T">The data type</typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Substitution<T> define<T>(T replace, T replacement)
             => new Substitution<T>(replace, replacement);
 
+        /// <summary>
+        /// Defines a <see cref='Substitution{T}' set
+        /// </summary>
+        /// <param name="src"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
         [Op, Closures(UnsignedInts)]
         public static Substitutions<T> define<T>(Substitution<T>[] src)
         {

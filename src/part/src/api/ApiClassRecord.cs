@@ -33,7 +33,7 @@ namespace Z0
     /// <summary>
     /// Specifies the global api equivalence class
     /// </summary>
-    public readonly struct ApiClassification
+    public readonly struct ApiKlass
     {
         /// <summary>
         /// The partition elements
@@ -41,7 +41,7 @@ namespace Z0
         public Index<ApiClassRecord> Classes {get;}
 
         [MethodImpl(Inline)]
-        public ApiClassification(ApiClassRecord[] classes)
+        public ApiKlass(ApiClassRecord[] classes)
         {
             Classes = classes;
         }
@@ -62,6 +62,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public KeyedValues<ushort,Name> KeyedNames()
             => Classes.Select(c => root.kvp(c.ClassKey, c.ClassName));
-
     }
 }

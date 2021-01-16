@@ -12,11 +12,19 @@ namespace Z0
 
     public readonly struct DelimitedIndex<T> : IIndex<T>, ITextual
     {
-        public readonly T[] Data;
+        public readonly Index<T> Data;
 
         public readonly char Delimiter;
 
         readonly FormatIndex<T> Render;
+
+        [MethodImpl(Inline)]
+        public DelimitedIndex(Index<T> src, char delimiter =  FieldDelimiter)
+        {
+            Data = src;
+            Delimiter = delimiter;
+            Render = text.delimit;
+        }
 
         [MethodImpl(Inline)]
         public DelimitedIndex(T[] src, char delimiter =  FieldDelimiter)
@@ -49,6 +57,10 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator DelimitedIndex<T>(T[] src)
+            => new DelimitedIndex<T>(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator DelimitedIndex<T>(Index<T> src)
             => new DelimitedIndex<T>(src);
     }
 }

@@ -8,11 +8,19 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
 
     partial struct Index
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static DelimitedIndex<T> delimit<T>(Index<T> src, char delimiter = Chars.Comma)
-            => new DelimitedIndex<T>(src, delimiter);
+        public static bool contains<T>(Index<T> src, T match)
+        {
+            var count = src.Count;
+            ref var source = ref src.First;
+            for(var i=0; i<count; i++)
+                if(skip(source, i).Equals(match))
+                    return true;
+            return false;
+        }
     }
 }

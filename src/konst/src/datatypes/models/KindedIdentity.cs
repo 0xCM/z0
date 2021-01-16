@@ -33,13 +33,13 @@ namespace Z0
         public Span<byte> Edit
         {
             [MethodImpl(Inline), Op]
-            get => DataTypes.edit(this);
+            get => Structs.edit(this);
         }
 
         public ReadOnlySpan<byte> View
         {
             [MethodImpl(Inline), Op]
-            get => DataTypes.view(this);
+            get => Structs.view(this);
         }
 
         [MethodImpl(Inline), Op]
@@ -48,11 +48,11 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public bool Equals(KindedIdentity<K,I> src)
-            => DataTypes.eq(this,src);
+            => Structs.eq(this,src);
 
         [MethodImpl(Inline), Op]
         public override int GetHashCode()
-            => (int)DataTypes.hash(this);
+            => (int)Structs.hash(this);
 
         public override bool Equals(object src)
             => src is KindedIdentity<K,I> x && Equals(x);

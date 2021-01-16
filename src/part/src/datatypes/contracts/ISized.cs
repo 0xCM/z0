@@ -8,6 +8,10 @@ namespace Z0
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
+    /// <summary>
+    /// Characterizes a type with specified width; this includes types of variable width,
+    /// in which case, the <see cref='ISized.StorageWidth'> is zero
+    /// </summary>
     [Free]
     public interface ISized
     {

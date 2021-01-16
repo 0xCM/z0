@@ -13,6 +13,6 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static DelimitedIndex<T> Delimit<T>(this IIndex<T> src, char delimiter = Chars.Comma)
-            => Index.delimit(src.Storage, delimiter);
+            => new DelimitedIndex<T>(src.Storage, delimiter);
     }
 }

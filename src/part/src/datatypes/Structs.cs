@@ -11,7 +11,7 @@ namespace Z0
     using static memory;
 
     [ApiHost]
-    public readonly struct DataTypes
+    public readonly struct Structs
     {
        const NumericKind Closure = Integers;
 

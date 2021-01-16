@@ -6,13 +6,24 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
+    using System.Linq;
 
     using static Part;
 
-    partial struct Index
+    public readonly struct ApiProjector<S,T>
+        where S : IDataType<S>
+        where T : IDataType<T>
     {
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static DelimitedIndex<T> delimit<T>(Index<T> src, char delimiter = Chars.Comma)
-            => new DelimitedIndex<T>(src, delimiter);
+        public ApiClass Class {get;}
     }
+
+
+    public readonly struct ApiDataType<T>
+        where T : IDataType<T>
+    {
+
+    }
+
+
 }

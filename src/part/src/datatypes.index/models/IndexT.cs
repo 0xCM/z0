@@ -109,7 +109,7 @@ namespace Z0
             where C : IEqualityComparer<T>
                 => Index.equals(View, src.View, comparer);
         public string Format()
-            => Index.delimit(Data).Format();
+            => Index.delimit(this).Format();
 
         public override string ToString()
             => Format();

@@ -68,7 +68,7 @@ namespace Z0
             => Data.Equals(rhs.Data);
 
         public string Format()
-            => Index.delimit(Storage).Format();
+            => Data.Format();
 
         /// <summary>
         /// Creates an indexed sequence from a parameter array

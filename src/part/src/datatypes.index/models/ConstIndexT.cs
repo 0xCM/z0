@@ -12,64 +12,68 @@ namespace Z0
 
     public readonly struct ConstIndex<T> : IConstIndex<T>
     {
-        readonly T[] Data;
+        readonly Index<T> Data;
 
         [MethodImpl(Inline)]
-        public ConstIndex(T[] content)
-            => Data = content;
+        public ConstIndex(T[] src)
+            => Data = src;
+
+        [MethodImpl(Inline)]
+        public ConstIndex(Index<T> src)
+            => Data = src;
 
         public int Length
         {
             [MethodImpl(Inline)]
-            get => Data?.Length ?? 0;
+            get => Data.Length;
         }
 
         public ReadOnlySpan<T> View
         {
             [MethodImpl(Inline)]
-            get => Data;
+            get => Data.View;
         }
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Length == 0;
+            get => Data.IsEmpty;
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => !IsNonEmpty;
+            get => Data.IsNonEmpty;
         }
 
         public ref readonly T this[long i]
         {
             [MethodImpl(Inline)]
-            get => ref seek(Data,i);
+            get => ref Data[i];
         }
 
         public ref readonly T this[ulong i]
         {
             [MethodImpl(Inline)]
-            get => ref seek(Data,i);
+            get => ref Data[i];
         }
 
         public uint Count
         {
             [MethodImpl(Inline)]
-            get => (uint)Length;
+            get => Data.Count;
         }
 
         public ref readonly T First
         {
             [MethodImpl(Inline)]
-            get => ref Index.first(Data);
+            get => ref Data.First;
         }
 
         public ref readonly T Last
         {
             [MethodImpl(Inline)]
-            get => ref Index.last(Data);
+            get => ref Data.Last;
         }
 
         [MethodImpl(Inline)]
@@ -81,14 +85,11 @@ namespace Z0
         public override string ToString()
             => Format();
 
-        public Index<T> Reverse()
-            => Index.reverse(Data);
-
         public bit Search(Func<T,bool> predicate, out T found)
             => Index.search(Data, predicate, out found);
 
         public ConstIndex<Y> Cast<Y>()
-            => Data.Select(x => cast<Y>(x));
+            => Data.Storage.Select(x => cast<Y>(x));
 
         public ConstIndex<Y> Select<Y>(Func<T,Y> selector)
              => Index.map(Data, selector);

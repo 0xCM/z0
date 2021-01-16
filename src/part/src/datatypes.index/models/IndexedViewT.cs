@@ -14,10 +14,14 @@ namespace Z0
 
     public readonly struct IndexedView<T> : IConstIndex<T>
     {
-        readonly T[] Data;
+        readonly Index<T> Data;
 
         [MethodImpl(Inline)]
         public IndexedView(T[] src)
+            => Data = src;
+
+        [MethodImpl(Inline)]
+        public IndexedView(Index<T> src)
             => Data = src;
 
         public T[] Storage
@@ -35,19 +39,19 @@ namespace Z0
         public ref readonly T this[uint index]
         {
             [MethodImpl(Inline)]
-            get => ref skip(Data, index);
+            get => ref Data[index];
         }
 
-        uint Length
+        public int Length
         {
             [MethodImpl(Inline)]
-            get => (uint)(Data?.Length ?? 0);
+            get => Data.Length;
         }
 
         public uint Count
         {
             [MethodImpl(Inline)]
-            get => Length;
+            get => Data.Count;
         }
 
         public bool IsEmpty
@@ -58,10 +62,10 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public bool Equals(IndexedView<T> rhs)
-            => Data?.Equals(rhs.Data) ?? false;
+            => Data.Equals(rhs.Data);
 
         public string Format()
-            => Index.delimit(Storage).Format();
+            => Index.delimit(Data).Format();
 
         public override string ToString()
             => Format();
