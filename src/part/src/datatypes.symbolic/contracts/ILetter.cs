@@ -31,7 +31,7 @@ namespace Z0
         C Code {get;}
 
         char ILetter.Character
-             => z.c16(Code);
+             => memory.c16(Code);
 
         string ITextual.Format()
             => Character.ToString();

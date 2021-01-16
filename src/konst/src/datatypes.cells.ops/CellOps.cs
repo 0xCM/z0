@@ -25,7 +25,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static void apply<T>(ReadOnlySpan<T> src, UnaryOp<T> f, Span<T> dst)
         {
-            var count = length(src,dst);
+            var count = root.length(src,dst);
             for(var i= 0u; i<count; i++)
                 seek(dst,i) = f(skip(src,i));
         }
@@ -40,7 +40,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static void apply<T>(ReadOnlySpan<T> x, ReadOnlySpan<T> y, BinaryOp<T> f, Span<T> dst)
         {
-            var count = length(x,y);
+            var count = root.length(x,y);
             for(var i= 0u; i<count; i++)
                 seek(dst,i) = f(skip(x,i), skip(y,i));
         }

@@ -10,8 +10,6 @@ namespace Z0
     using static Part;
     using static NumericCast;
 
-    using NBK = NumericBaseKind;
-
     [ApiHost]
     public readonly struct NumericLiterals
     {

@@ -10,7 +10,7 @@ namespace Z0
 
     partial class PeTableReader
     {
-        public ReadOnlySpan<CliConstantInfo> constants()
+        public ReadOnlySpan<CliConstantInfo> constants(ref uint counter)
         {
             var reader = State.Reader;
             var count = ConstantCount(State);
@@ -21,7 +21,12 @@ namespace Z0
                 var entry = reader.GetConstant(k);
                 var parent = index(State, entry.Parent);
                 var blob = reader.GetBlobBytes(entry.Value);
-                seek(dst, i - 1u) = new CliConstantInfo(i, parent ?? CliTableIndex.Empty, entry.TypeCode, blob);
+                ref var target = ref seek(dst, i - 1u);
+                target.Sequence = counter++;
+                target.ParentId = (parent ?? CliTableIndex.Empty).Key;
+                target.Source = (parent ?? CliTableIndex.Empty).Source.ToString();
+                target.DataType = entry.TypeCode;
+                target.Content = blob;
             }
             return dst;
         }

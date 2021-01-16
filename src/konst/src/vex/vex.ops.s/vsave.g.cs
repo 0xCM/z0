@@ -82,7 +82,7 @@ namespace Z0
             where T : unmanaged
         {
             vsave(src.Lo, ref dst, offset);
-            vsave(src.Hi, ref dst, offset + vcount<T>(w256));
+            vsave(src.Hi, ref dst, offset + cpu.vcount<T>(w256));
         }
 
         [MethodImpl(Inline)]

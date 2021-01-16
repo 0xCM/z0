@@ -32,7 +32,7 @@ namespace Z0
             public static string concat(ReadOnlySpan<string> src, ReadOnlySpan<byte> widths, char delimiter = FieldDelimiter)
             {
                 var dst = text.build();
-                var count = z.length(src,widths);
+                var count = root.length(src,widths);
                 for(var i=0u; i<count; i++)
                 {
                     ref readonly var field = ref skip(src,i);

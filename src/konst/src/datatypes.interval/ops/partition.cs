@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
     using static z;
 
@@ -20,12 +20,12 @@ namespace Z0
         /// <typeparam name="T">The integer type, at most 64-bits wide</typeparam>
         public static T[] partition<T>(in ClosedInterval<T> src, T width)
             where T : unmanaged
-        {            
-            var dst = list<T>();
+        {
+            var dst = root.list<T>();
             dst.Add(src.Min);
-            
+
             var next = left(src) + uint64(width);
-            
+
             while(next < right(src))
             {
                 dst.Add(generic<T>(next));

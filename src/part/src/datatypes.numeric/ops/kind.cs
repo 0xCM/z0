@@ -16,6 +16,7 @@ namespace Z0
 
     partial struct Numeric
     {
+
         /// <summary>
         /// Determines the numeric kind of a parametrically-identified type
         /// </summary>

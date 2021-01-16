@@ -51,6 +51,12 @@ namespace Z0
             get => memory.cover<byte>(BaseAddress, Length);
         }
 
+        public MemoryAddress LastAddress
+        {
+            [MethodImpl(Inline)]
+            get => BaseAddress + Length;
+        }
+
         public MemoryRange Range
         {
             [MethodImpl(Inline)]
@@ -68,6 +74,10 @@ namespace Z0
             [MethodImpl(Inline)]
             get => !Segment.Equals(default);
         }
+
+        [MethodImpl(Inline)]
+        public bool Contains(MemoryAddress src)
+            => src >= BaseAddress && src <= LastAddress;
 
         [MethodImpl(Inline)]
         public unsafe ref byte Cell(int offset)
@@ -88,7 +98,7 @@ namespace Z0
             => count<T>(this);
 
         public string Format()
-            => BaseAddress.Format();
+            => Range.Format();
 
         [MethodImpl(Inline)]
         public ReadOnlySpan<byte> Load()
@@ -110,9 +120,6 @@ namespace Z0
         public static implicit operator Vector128<ulong>(in MemorySegment src)
             => src.Segment;
 
-        string ITextual.Format()
-            => Format();
-
         uint IHashed.Hash
             => Hash();
 
@@ -131,7 +138,6 @@ namespace Z0
         public static MemorySegment Empty
             => default;
 
-
         [MethodImpl(Inline)]
         static uint count<T>(in MemorySegment src)
             => (uint)(src.Length/size<T>());
@@ -139,6 +145,5 @@ namespace Z0
         [MethodImpl(Inline)]
         static ReadOnlySpan<T> view<T>(in MemorySegment src)
             => cover(src.BaseAddress.Ref<T>(), count<T>(src));
-
     }
 }

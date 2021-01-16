@@ -8,7 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
+    using static Part;
+    using static memory;
 
     partial class XVex
     {
@@ -16,11 +17,11 @@ namespace Z0
         public static T LastCell<T>(this Vector128<T> src)
             where T : unmanaged
         {
-            if(Unsafe.SizeOf<T>() == 1)
+            if(size<T>() == 1)
                 return src.Cell(15);
-            else if(Unsafe.SizeOf<T>() == 2)
+            else if(size<T>() == 2)
                 return src.Cell(7);
-            else if(Unsafe.SizeOf<T>() == 4)
+            else if(size<T>() == 4)
                 return src.Cell(3);
             else
                 return src.Cell(1);
@@ -30,11 +31,11 @@ namespace Z0
         public static T LastCell<T>(this Vector256<T> src)
             where T : unmanaged
         {
-            if(Unsafe.SizeOf<T>() == 1)
+            if(size<T>() == 1)
                 return src.Cell(31);
-            else if(Unsafe.SizeOf<T>() == 2)
+            else if(size<T>() == 2)
                 return src.Cell(15);
-            else if(Unsafe.SizeOf<T>() == 4)
+            else if(size<T>() == 4)
                 return src.Cell(7);
             else
                 return src.Cell(3);

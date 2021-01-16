@@ -7,13 +7,12 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    using System.Runtime.Intrinsics.X86;
 
     using static System.Runtime.Intrinsics.X86.Avx2;
+    using static Part;
+    using static z;
 
-    using static Konst;
-
-    partial struct z
+    partial struct cpu
     {
         /// <summary>
         ///  __m128i _mm_i32gather_epi32 (int const* base_addr, __m128i vindex, const int scale) VPGATHERDD xmm, vm32x, xmm
@@ -24,7 +23,7 @@ namespace Z0
         /// <param name="vidx">The index vector</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector128<int> vgather(N128 w, in int src, Vector128<int> index)
-            => GatherVector128(z.gptr(src), index, 4);
+            => GatherVector128(gptr(src), index, 4);
 
         /// <summary>
         /// __m128i _mm256_i64gather_epi32 (int const* base_addr, __m256i vindex, const int scale) VPGATHERQD xmm, vm64y, xmm
@@ -35,7 +34,7 @@ namespace Z0
         /// <param name="vidx">The index vector</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector128<uint> vgather(N128 w, in uint src, Vector256<ulong> vidx)
-            => GatherVector128(z.gptr(src), z.v64i(vidx), 4);
+            => GatherVector128(gptr(src), v64i(vidx), 4);
 
         /// <summary>
         /// __m128i _mm_i64gather_epi64 (__int64 const* base_addr, __m128i vindex, const int scale) VPGATHERQQ xmm, vm64x, xmm
@@ -46,7 +45,7 @@ namespace Z0
         /// <param name="vidx">The index vector</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector128<long> vgather(N128 w, in long src, Vector128<long> vidx)
-            => GatherVector128(z.gptr(src), vidx, 8);
+            => GatherVector128(gptr(src), vidx, 8);
 
         /// <summary>
         /// __m128i _mm_i64gather_epi64 (__int64 const* base_addr, __m128i vindex, const int scale) VPGATHERQQ xmm, vm64x, xmm
@@ -57,7 +56,7 @@ namespace Z0
         /// <param name="vidx">The index vector</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector128<ulong> vgather(N128 w, in ulong src, Vector128<ulong> vidx)
-            => GatherVector128(z.gptr(src), z.v64i(vidx), 8);
+            => GatherVector128(gptr(src), v64i(vidx), 8);
 
         /// <summary>
         /// __m256i _mm256_i32gather_epi32 (int const* base_addr, __m256i vindex, const int scale) VPGATHERDD ymm, vm32y, ymm
@@ -68,7 +67,7 @@ namespace Z0
         /// <param name="vidx">The index vector</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector256<int> vgather(N256 w, in int src, Vector256<int> index)
-            => GatherVector256(z.gptr(src), index, 4);
+            => GatherVector256(gptr(src), index, 4);
 
         /// <summary>
         /// __m128i _mm_i32gather_epi32(int const* base_addr, __m128i vindex, const int scale) VPGATHERDD xmm, vm32x, xmm
@@ -79,7 +78,7 @@ namespace Z0
         /// <param name="vidx">The index vector</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector128<uint> vgather(N128 w, in uint src, Vector128<uint> vidx)
-            => GatherVector128(z.gptr(src), z.v32i(vidx), 4);
+            => GatherVector128(gptr(src), v32i(vidx), 4);
 
         /// <summary>
         /// __m256i _mm256_i32gather_epi32 (int const* base_addr, __m256i vindex, const int scale) VPGATHERDD ymm, vm32y, ymm
@@ -90,7 +89,7 @@ namespace Z0
         /// <param name="vidx">The index vector</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector256<uint> vgather(N256 w, in uint src, Vector256<uint> vidx)
-            => GatherVector256(z.gptr(src), z.v32i(vidx), 4);
+            => GatherVector256(gptr(src), v32i(vidx), 4);
 
         /// <summary>
         /// __m256i _mm256_i64gather_epi64 (__int64 const* base_addr, __m256i vindex, const int scale) VPGATHERQQ ymm, vm64y, ymm
@@ -101,7 +100,7 @@ namespace Z0
         /// <param name="vidx">The index vector</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector256<long> vgather(N256 w, in long src, Vector256<long> index)
-            => GatherVector256(z.gptr(src), index, 8);
+            => GatherVector256(gptr(src), index, 8);
 
         /// <summary>
         /// __m256i _mm256_i64gather_epi64 (__int64 const* base_addr, __m256i vindex, const int scale) VPGATHERQQ ymm, vm64y, ymm
@@ -112,7 +111,7 @@ namespace Z0
         /// <param name="vidx">The index vector</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector256<ulong> vgather(N256 w, in ulong src, Vector256<ulong> vidx)
-            => GatherVector256(z.gptr(src), z.v64i(vidx), 8);
+            => GatherVector256(gptr(src), v64i(vidx), 8);
 
         /// <summary>
         /// __m256i _mm256_i32gather_epi64 (__int64 const* base_addr, __m128i vindex, const int scale) VPGATHERDQ ymm, vm32y, ymm
@@ -123,7 +122,7 @@ namespace Z0
         /// <param name="vidx">The index vector</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector256<ulong> vgather(N256 w, in ulong src, Vector128<uint> vidx)
-            => GatherVector256(z.gptr(src), z.v32i(vidx), 8);
+            => GatherVector256(gptr(src), v32i(vidx), 8);
 
         /// <summary>
         /// Loads a 128x16u vector from index-identified source cells
@@ -133,7 +132,7 @@ namespace Z0
         /// <param name="vidx">The index vector</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector128<ushort> vgather(N128 w, in ushort src, Vector128<ushort> vidx)
-            => vcompact16u(GatherVector256(z.p32u(src), z.v32i(vinflate(vidx, n256, z32)), 2), n128, z16);
+            => vcompact16u(GatherVector256(p32u(src), v32i(vinflate(vidx, n256, z32)), 2), n128, z16);
 
         /// <summary>
         /// Loads a 128x16i vector from index-identified source cells
@@ -143,7 +142,7 @@ namespace Z0
         /// <param name="vidx">The index vector</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector128<short> vgather(N128 w, in short src, Vector128<short> vidx)
-            => v16i(vcompact16u(GatherVector256(z.p32u(src), z.v32i(vinflate(z.v16u(vidx), n256, z32)),2),n128, z16));
+            => v16i(vcompact16u(GatherVector256(p32u(src), v32i(vinflate(v16u(vidx), n256, z32)),2),n128, z16));
 
         /// <summary>
         /// Loads a 128x8u vector from index-identified source cells
@@ -155,8 +154,8 @@ namespace Z0
         public static unsafe Vector128<sbyte> vgather(N128 w, in sbyte src, Vector128<sbyte> vidx)
         {
             (var v0, var v1) = vinflate(v8u(vidx), n512, z32);
-            var x0 = GatherVector256(z.p32u(src), z.v32i(v0),1);
-            var x1 = GatherVector256(z.p32u(src), z.v32i(v1),1);
+            var x0 = GatherVector256(p32u(src), v32i(v0),1);
+            var x1 = GatherVector256(p32u(src), v32i(v1),1);
             return v8i(vcompact8u(x0,x1,n128, z8));
         }
 
@@ -170,8 +169,8 @@ namespace Z0
         public static unsafe Vector128<byte> vgather(N128 w, in byte src, Vector128<byte> vidx)
         {
             (var v0, var v1) = vinflate(vidx, n512, z32);
-            var x0 = GatherVector256(z.p32u(src), z.v32i(v0),1);
-            var x1 = GatherVector256(z.p32u(src), z.v32i(v1),1);
+            var x0 = GatherVector256(p32u(src), v32i(v0),1);
+            var x1 = GatherVector256(p32u(src), v32i(v1),1);
             return vcompact8u(x0,x1,n128, z8);
         }
 

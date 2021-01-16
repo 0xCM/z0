@@ -11,6 +11,7 @@ namespace Z0
 
     partial struct Table
     {
+
         [MethodImpl(Inline)]
         public static DatasetFormatter<F,W> formatter<F,W>(char delimiter = FieldDelimiter)
             where F : unmanaged, Enum
@@ -26,6 +27,11 @@ namespace Z0
         public static TableFormatter<F> formatter<F>(in LiteralFieldValues<F> fields, char delimiter = FieldDelimiter)
             where F : unmanaged
                 => new TableFormatter<F>(text.build(), delimiter, fields);
+
+        [MethodImpl(Inline)]
+        public static DatasetFormatter<F> dsformatter<F>()
+            where F : unmanaged, Enum
+                => new DatasetFormatter<F>(text.build());
 
         [MethodImpl(Inline)]
         public static DatasetFieldFormatter<F> formatter<F>(char delimiter, F f = default)

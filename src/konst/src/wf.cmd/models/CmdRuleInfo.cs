@@ -9,10 +9,7 @@ namespace Z0
 
     using static Part;
 
-    /// <summary>
-    /// Defines a pattern for creating a <see cref='Z0.CmdExecSpec'/>
-    /// </summary>
-    public struct CmdScriptPattern : ICmdScriptPattern<CmdScriptPattern>
+    public struct CmdRuleInfo : ITextual
     {
         public FS.FolderName CmdRootName;
 
@@ -46,8 +43,5 @@ namespace Z0
 
         public override string ToString()
             => Format();
-
-        ToolId ICmdScriptPattern.CmdHost
-            => CmdHost;
     }
 }

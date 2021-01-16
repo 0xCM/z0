@@ -19,10 +19,6 @@ namespace Z0
         public static string Format(this ComparisonApiClass kind)
             => kind.ToString().ToLower();
 
-        // [Op, Closures(Closure)]
-        // public static string Format<T>(this ComparisonApiClass kind, T arg1, T arg2)
-        //     => $"{kind.Format()}({arg1}, {arg2})";
-
         [Op]
         public static string Format(this ApiClass? id)
             => id.HasValue ? id.Value.Format() : "unkinded";

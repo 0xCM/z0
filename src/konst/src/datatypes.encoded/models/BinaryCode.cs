@@ -9,7 +9,6 @@ namespace Z0
 
     using static Part;
     using static Encoded;
-    using static z;
 
     /// <summary>
     /// Encoded x86 bytes extracted from a memory source
@@ -23,7 +22,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public BinaryCode(byte[] bytes)
-            => Data = insist(bytes);
+            => Data = bytes;
 
         public byte[] Storage
         {

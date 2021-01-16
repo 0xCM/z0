@@ -23,7 +23,7 @@ namespace Z0
         public static EmitProcessDumpCmd EmitProcessDump(this CmdBuilder builder)
         {
             var dst = new EmitProcessDumpCmd();
-            dst.Source = Processes.current();
+            dst.Source = Runtime.CurrentProcess;
             dst.Target = builder.Db.DumpFilePath(dst.Source.ProcessName);
             return dst;
         }

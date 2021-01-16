@@ -21,7 +21,7 @@ namespace Z0.Asm
             {
                 var dst = wf.Db().Table(AsmRow.TableId, src.Key.ToString());
                 var records = span(src.Sequenced);
-                var formatter = Formatters.dataset<AsmRowField>();
+                var formatter = Table.dsformatter<AsmRowField>();
                 var header = Table.header53<AsmRowField>();
 
                 wf.EmittingTable<AsmRow>(dst);

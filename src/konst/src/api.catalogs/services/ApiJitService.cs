@@ -17,7 +17,7 @@ namespace Z0
             var catalog = Wf.ApiParts.Api;
             var parts = catalog.Parts;
             var outer = Wf.Running($"Jitting {parts.Length} parts");
-            var all = list<MethodAddress>();
+            var all = root.list<MethodAddress>();
             var total = 0u;
             foreach(var part in parts)
             {

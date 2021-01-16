@@ -45,7 +45,7 @@ namespace Z0
 
                 (var x0, var x1, var x2) = src.LoadVectors(0,1,2);
 
-                var vlen = vcount(w,t);
+                var vlen = cpu.vcount(w,t);
                 var expect = 0u;
 
                 for(byte i=0; i<vlen; i++)
@@ -70,7 +70,7 @@ namespace Z0
 
                 (var x0, var x1, var x2) = src.LoadVectors(0,1,2);
 
-                var vlen = vcount(w,t);
+                var vlen = cpu.vcount(w,t);
                 var expect = 0u;
 
                 for(byte i=0; i<vlen; i++)

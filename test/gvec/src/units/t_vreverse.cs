@@ -73,7 +73,7 @@ namespace Z0
             where T : unmanaged
             where F : IUnaryOp128<T>
         {
-            var n = vcount(w,t);
+            var n = cpu.vcount(w,t);
             var emitter = Sources.vemitter<T>(w,Random);
 
             void check()
@@ -94,7 +94,7 @@ namespace Z0
             where T : unmanaged
             where F : IUnaryOp256<T>
         {
-            var n = vcount(w,t);
+            var n = cpu.vcount(w,t);
             var emitter = Sources.vemitter<T>(w,Random);
 
             void check()

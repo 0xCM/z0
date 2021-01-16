@@ -59,7 +59,7 @@ namespace Z0
 
             var buffer = Cells.alloc<Cell128>();
             ref var dst = ref Cells.first<T>(buffer);
-            var count = z.vcount<T>(w128);
+            var count = cpu.vcount<T>(w128);
 
             for(byte i=0; i< count; i++)
                 seek(dst, i) = svc.and(vcell(x,i), vcell(y,i));

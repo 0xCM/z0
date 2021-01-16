@@ -14,15 +14,13 @@ namespace Z0
 
     partial class ImageDataEmitter
     {
-        public static void EmitApiBlobs(IWfShell wf)
+        public void EmitApiBlobs()
         {
-            var flow = wf.Running();
-            var service = ImageDataEmitter.init(wf);
-            service.ClearBlobs();
-            var parts = wf.Api.Parts;
-            foreach(var part in parts)
-                service.EmitBlobs(part.Owner);
-            wf.Ran(flow);
+            var flow = Wf.Running();
+            ClearBlobs();
+            foreach(var part in Wf.Api.Parts)
+                EmitBlobs(part.Owner);
+            Wf.Ran(flow);
         }
 
         public void ClearBlobs()

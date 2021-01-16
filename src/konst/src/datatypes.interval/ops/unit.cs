@@ -6,9 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
-    using static Konst;
-    using static z;
+
+    using static Part;
 
     partial struct Intervals
     {
@@ -20,6 +19,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UInt64k)]
         public static U01<T> unit<T>(T t = default)
             where T : unmanaged
-                => default;        
+                => default;
     }
 }

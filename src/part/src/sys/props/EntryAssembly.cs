@@ -10,10 +10,6 @@ namespace Z0
 
     partial struct sys
     {
-        public static Assembly EntryAssembly
-        {
-            [MethodImpl(Options), Op]
-            get => proxy.EntryAssembly;
-        }
+
     }
 }

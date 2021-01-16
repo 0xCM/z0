@@ -26,7 +26,7 @@ namespace Z0.Asm
         public static ref readonly AsmOpCodeRow parse(in TextRow src, ReadOnlySpan<F> fields, ref AsmOpCodeRow dst)
         {
             var cells = src.CellContent.View;
-            var count = length(cells,fields);
+            var count = root.length(cells,fields);
 
             var parser = new AsmFieldParser();
             for(var i=0; i<count; i++)

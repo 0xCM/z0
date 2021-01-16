@@ -33,5 +33,4 @@ namespace Z0
         Name ITableId.Identifier
             => api.tableid(typeof(T)).Identifier;
     }
-
 }

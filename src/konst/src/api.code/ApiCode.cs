@@ -154,19 +154,19 @@ namespace Z0
         public static Index<ApiCodeDescriptor> descriptors(IWfShell wf)
         {
             var archive = Archives.hex(wf);
-            var root = archive.Root;
+            var rootdir = archive.Root;
             var files = @readonly(archive.ArchiveFiles().Array());
             var empty = Index<ApiCodeDescriptor>.Empty;
             if(files.Length == 0)
             {
-                wf.Warn($"No files found in {root}");
+                wf.Warn($"No files found in {rootdir}");
                 return empty;
             }
             var count = files.Length;
 
-            wf.Status($"Processing {count} files in {root}");
+            wf.Status($"Processing {count} files in {rootdir}");
 
-            var dst = z.list<ApiCodeDescriptor>();
+            var dst = root.list<ApiCodeDescriptor>();
             for(var i=0u; i<count; i++)
             {
                 ref readonly var file = ref skip(files,i);
@@ -187,7 +187,7 @@ namespace Z0
                 }
             }
 
-            wf.Status($"Accumulated {dst.Count} descriptors from files in {root}");
+            wf.Status($"Accumulated {dst.Count} descriptors from files in {rootdir}");
             return dst.OrderBy(x => x.Base).ToArray();
         }
 

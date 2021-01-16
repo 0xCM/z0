@@ -19,13 +19,13 @@ namespace Z0
 
         public string Format(in R src)
         {
-            var dst = Formatters.dataset<F>();
+            var dst = Table.dsformatter<F>();
             Format(src, dst);
             return dst.Render();
         }
 
         public string HeaderText
-            => Formatters.dataset<F>().HeaderText;
+            => Table.dsformatter<F>().HeaderText;
 
         void ITextValueFormatter<F,R>.Format(in R src, IDatasetFormatter<F> dst)
             => render(src,dst);

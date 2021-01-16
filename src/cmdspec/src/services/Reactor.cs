@@ -65,20 +65,19 @@ namespace Z0
             var a0 = args.Length >= 2 ? args[1].Content : EmptyString;
             var a1 = args.Length >= 3 ? args[2].Content : EmptyString;
 
-
             switch(name)
             {
                 case DumpImagesCmd.CmdName:
                     var srcDir = FS.dir(@"K:\cache\symbols\netsdk\shared\Microsoft.NetCore.App\3.1.9");
                     var dstDir = FS.dir(@"K:\cache\symbols\netsdk\shared\Microsoft.NetCore.App\3.1.9.dumps");
                     Run(Builder.DumpImages(srcDir, dstDir));
-
                 break;
-
+                case ShowProcessMemoryCmd.CmdName:
+                    Run(Builder.ShowProcessMemory());
+                    break;
                 case EmitEnumCatalogCmd.CmdName:
                     Run(Builder.EmitEnumCatalog());
                     break;
-
                 case CheckServiceCmd.CmdName:
                     Run(Builder.CheckService(a0));
                     break;
@@ -144,6 +143,11 @@ namespace Z0
             cmd.Dispatch(Wf).Wait();
         }
 
+        void Run(in ShowProcessMemoryCmd cmd)
+        {
+            cmd.Dispatch(Wf).Wait();
+        }
+
         void Run(in ShowRuntimeArchiveCmd cmd)
         {
             cmd.Dispatch(Wf).Wait();
@@ -179,7 +183,7 @@ namespace Z0
             Wf.Status("Emitting dump");
             var dst = FS.path(@"k:\dumps\run\run.dmp");
             dst.Delete();
-            DumpEmitter.emit(Processes.current(), dst.Name, DumpTypeOption.Full);
+            DumpEmitter.emit(Runtime.CurrentProcess, dst.Name, DumpTypeOption.Full);
         }
 
         void Run(in JitApiCmd cmd)

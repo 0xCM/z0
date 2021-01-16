@@ -74,7 +74,7 @@ namespace Z0
         protected void vhi_check<T>(N128 w, T t = default)
             where T : unmanaged
         {
-            var count = z.vcount(w,t);
+            var count = cpu.vcount(w,t);
             var f = VSvc.vhi(w,t);
             var r = Sources.vemitter<T>(w,Random);
             for(var rep=0; rep < RepCount; rep++)
@@ -92,7 +92,7 @@ namespace Z0
         {
             var f = VSvc.vhi(w,t);
             var r = Sources.vemitter<T>(w,Random);
-            for(var rep=0; rep < RepCount; rep++)
+            for(var rep=0; rep <RepCount; rep++)
             {
                 var x = r.Invoke();
                 var y = f.Invoke(x);

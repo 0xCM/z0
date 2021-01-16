@@ -46,7 +46,7 @@ namespace Z0
             PartId = part.Id;
             BaseAddress = ImageMaps.@base(Part);
             TargetPath = Wf.Db().Table(ImageContent.TableId, PartId);
-            Formatter = Formatters.data(BaseAddress);
+            Formatter = Hex.formatter(BaseAddress);
             Offset = 0;
             LineCount = 0;
             LabelDelimiter = Chars.Pipe;

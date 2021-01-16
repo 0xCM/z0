@@ -90,28 +90,5 @@ namespace Z0
 
             return new TableFields(buffer);
         }
-
-        public static TableFields<F> fields<F,T>()
-            where F : unmanaged, Enum
-            where T : struct, ITable<F,T>
-        {
-            var t = typeof(T);
-            var tFields = fields(t);
-            var literals = LiteralFields.values<F>();
-            var lFields = literals.Fields;
-
-            var specs = fields<T>();
-            var dst = root.list<TableField<F>>(lFields.Length);
-            for(var i=0u; i<lFields.Length; i++)
-            {
-                ref readonly var literal = ref literals[i];
-                var name = literals.Name(i);
-                var spec = specs[name];
-                if(spec.IsSome())
-                    dst.Add(Table.field<F,T>(literal, spec.Value));
-
-            }
-            return dst.ToArray();
-        }
     }
 }

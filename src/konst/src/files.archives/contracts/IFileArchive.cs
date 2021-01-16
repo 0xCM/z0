@@ -20,7 +20,7 @@ namespace Z0
             => TextDocParser.parse(src);
 
         FS.Files Clear(FS.FolderName id)
-            => (Root + id).Clear(list<FS.FilePath>()).Array();
+            => (Root + id).Clear(root.list<FS.FilePath>()).Array();
 
         Deferred<FS.FilePath> ArchiveFiles()
             => Root.EnumerateFiles(true);

@@ -18,9 +18,9 @@ namespace Z0
         {
             var count = src.Length;
             var header = (dst.Exists && append) ? false : true;
-            ref readonly var w0 = ref skip(X86TableWidths,0);
-            ref readonly var w1 = ref skip(X86TableWidths,1);
-            ref readonly var w2 = ref skip(X86TableWidths,2);
+            ref readonly var w0 = ref skip(X86TableWidths, 0);
+            ref readonly var w1 = ref skip(X86TableWidths, 1);
+            ref readonly var w2 = ref skip(X86TableWidths, 2);
             var pattern = text.embrace($"0,-{w0}") + RP.SpacedPipe + text.embrace($"1,-{w1}") + RP.SpacedPipe + text.embrace($"2,-{w2}");
 
             using var writer = dst.Writer(append);

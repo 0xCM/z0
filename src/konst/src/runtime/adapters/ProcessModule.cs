@@ -63,7 +63,7 @@ namespace Z0.Adapters
         //
         // Returns:
         //     The fully qualified path that defines the location of the module.
-        public FS.FilePath FileName
+        public FS.FilePath Path
         {
             [MethodImpl(Inline)]
             get => FS.path(Subject.FileName);

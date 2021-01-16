@@ -37,7 +37,7 @@ namespace Z0
             var vSvc = VSvc.vbitlogic<T>(w);
             var buffer = Cells.alloc(w);
             ref var dst = ref Cells.first<T>(buffer);
-            var count = vcount<T>(w);
+            var count = cpu.vcount<T>(w);
             for(byte i=0; i<count; i++)
                 seek(dst, i) = mSvc.eval(vcell(x,i), vcell(y,i), f);
             var v1 = z.vload(w, dst);
@@ -55,7 +55,7 @@ namespace Z0
             var vSvc = VSvc.vbitlogic<T>(w);
             var buffer = Cells.alloc(w);
             ref var dst = ref Cells.first<T>(buffer);
-            var count = vcount<T>(w);
+            var count = cpu.vcount<T>(w);
             for(byte i=0; i<count; i++)
                 seek(dst, i) = mSvc.eval(vcell(x,i), vcell(y,i), f);
             var v1 = z.vload(w, dst);

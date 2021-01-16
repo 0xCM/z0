@@ -61,16 +61,6 @@ namespace Z0
         public void Append(char[] src)
             => Target.Append(src);
 
-        public void AppendDelimited(char delimiter, params string[] src)
-        {
-            var count = src.Length;
-            var terms = @readonly(src);
-            var sep = string.Format("{0} ", delimiter);
-            for(var i=0; i<src.Length; i++)
-                string.Format("{0}{1}", sep, skip(terms,i));
-        }
-
-
         public override string ToString()
             => Target.ToString();
     }

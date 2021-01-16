@@ -102,7 +102,7 @@ namespace Z0
             var wt = n256;
             var s = z32;
             var t = z64;
-            var count = vcount(ws,s);
+            var count = cpu.vcount(ws,s);
 
             var a0 = gvec.vinc(ws,1u);
             var a1 = gvec.vinc(ws,a0.LastCell() + 1);
@@ -157,7 +157,7 @@ namespace Z0
 
             var zb = SpanBlocks.alloc<uint>(n512);
             var eb = SpanBlocks.alloc<uint>(n512);
-            var count = vcount(w,s);
+            var count = cpu.vcount(w,s);
 
             for(var i=0; i< RepCount; i ++)
             {

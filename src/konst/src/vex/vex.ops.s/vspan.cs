@@ -42,7 +42,6 @@ namespace Z0
             where T : unmanaged
                 => vspan2(src);
 
-
         [MethodImpl(Inline), Op, Closures(Closure)]
         static Span<T> vspan2<T>(Vector128<T> src)
             where T : unmanaged
@@ -51,7 +50,7 @@ namespace Z0
             var dst = vinit<T>(w);
             ref var storage = ref vfirst(dst);
             vsave(src, ref storage);
-            return cover(storage, vcount<T>(w));
+            return cover(storage, cpu.vcount<T>(w));
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
@@ -62,7 +61,7 @@ namespace Z0
             var dst = vinit<T>(w);
             ref var storage = ref vfirst(dst);
             vsave(src, ref storage);
-            return cover(storage, vcount<T>(w));
+            return cover(storage, cpu.vcount<T>(w));
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
@@ -73,7 +72,7 @@ namespace Z0
             var dst = vinit<T>(w);
             ref var storage = ref vfirst(dst);
             vsave(src, ref storage);
-            return cover(storage, vcount<T>(w));
+            return cover(storage, cpu.vcount<T>(w));
         }
     }
 }

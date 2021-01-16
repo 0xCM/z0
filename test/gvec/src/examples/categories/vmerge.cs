@@ -38,7 +38,7 @@ namespace Z0
 
             var w = n256;
             var t = z32;
-            var count = z.vcount(w,t);
+            var count = cpu.vcount(w,t);
             var a = gvec.vinc(w,t);
             var b = gvec.vinc(w, (a.LastCell() + 1));
             var c = vmergelo(a,b);

@@ -8,10 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static Part;
-
     [StructLayout(LayoutKind.Sequential), Record(TableId)]
-    public struct EnumLiteralRow : IComparable<EnumLiteralRow>, IRecord<EnumLiteralRow>
+    public struct EnumLiteralRow : IComparableRecord<EnumLiteralRow>
     {
         public const string TableId = "enums.literals";
 

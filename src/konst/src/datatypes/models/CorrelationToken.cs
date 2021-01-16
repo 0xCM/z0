@@ -62,6 +62,6 @@ namespace Z0
             => !a.Equals(b);
 
         public static CorrelationToken Default
-            => new CorrelationToken(Clr.EntryAssembly.Part);
+            => new CorrelationToken(Runtime.EntryAssembly.Part);
     }
 }

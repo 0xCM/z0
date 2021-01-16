@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection.Emit;
 
-    using static Konst;
+    using static Part;
 
     public readonly struct CellDelegate
     {
@@ -21,7 +21,7 @@ namespace Z0
 
         public DynamicMethod Enclosure {get;}
 
-        public Delegate DynamicOp {get;}
+        public Delegate Operation {get;}
 
         [MethodImpl(Inline)]
         public CellDelegate(OpIdentity id, MemoryAddress src, DynamicMethod enclosure, Delegate dynop)
@@ -29,11 +29,11 @@ namespace Z0
             Id = id;
             SourceAddress = src;
             Enclosure = enclosure;
-            DynamicOp = dynop;
+            Operation = dynop;
         }
 
         [MethodImpl(Inline)]
         public static implicit operator Delegate(CellDelegate src)
-            => src.DynamicOp;
+            => src.Operation;
     }
 }

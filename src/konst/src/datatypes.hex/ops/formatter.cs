@@ -11,6 +11,10 @@ namespace Z0
 
     partial class Hex
     {
+        [MethodImpl(Inline), Op]
+        public static HexDataFormatter formatter(MemoryAddress? @base = null, int bpl = 20, bool labels = true)
+            => new HexDataFormatter(new HexLineConfig(bpl, labels), @base);
+
         /// <summary>
         /// Creates a <see cref='HexFormatter<T>'/> for primitive numeric types
         /// </summary>

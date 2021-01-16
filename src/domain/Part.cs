@@ -19,7 +19,7 @@ namespace Z0.Parts
 namespace Z0
 {
     [ApiHost]
-    class Runtime
+    class DomainRuntime
     {
         [MethodImpl(Inline), Op]
         public static ref readonly PartBox box()
@@ -33,12 +33,12 @@ namespace Z0
         internal static ref T slot<T>(PartBoxSlot index)
             => ref RT.Box.Slot<T>(index);
 
-        static readonly Runtime RT = new Runtime();
+        static readonly DomainRuntime RT = new DomainRuntime();
 
         readonly PartBox Box;
 
         [MethodImpl(Inline), Op]
-        Runtime()
+        DomainRuntime()
         {
             Box = new PartBox();
         }

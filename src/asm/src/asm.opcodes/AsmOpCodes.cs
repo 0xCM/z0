@@ -112,7 +112,7 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public static DatasetFormatter<T> formatter<T>()
             where T : unmanaged, Enum
-                    => Formatters.dataset<T>();
+                    => Table.dsformatter<T>();
 
         /// <summary>
         /// Defines, in a predictable and hopefully meaningful way, a programmatic identifier that designates an op code

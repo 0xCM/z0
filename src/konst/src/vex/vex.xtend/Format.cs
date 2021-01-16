@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     partial class XVex
@@ -17,51 +17,51 @@ namespace Z0
         public static string Format<T>(SpanBlock128<T> x, SpanBlock128<T> y, Vector128<T> expect, Vector128<T> actual, Vector128<T> result)
             where T : unmanaged
         {
-            var dst = text.build();
-            dst.Label("left", LabelDelimiter, x.Format());
-            dst.Label("right", LabelDelimiter, y.Format());
-            dst.Label("expect", LabelDelimiter, expect.Format());
-            dst.Label("actual", LabelDelimiter, actual.Format());
-            dst.Label("result", LabelDelimiter, result.Format());
-            return dst.ToString();
+            var dst = text.buffer();
+            dst.Label("left", Chars.Colon, x.Format());
+            dst.Label("right", Chars.Colon, y.Format());
+            dst.Label("expect", Chars.Colon, expect.Format());
+            dst.Label("actual", Chars.Colon, actual.Format());
+            dst.Label("result", Chars.Colon, result.Format());
+            return dst.Emit();
         }
 
         [Op, Closures(Closure)]
         public static string Format<T>(SpanBlock256<T> x, SpanBlock256<T> y, Vector256<T> expect, Vector256<T> actual, Vector256<T> result)
             where T : unmanaged
         {
-            var dst = text.build();
-            dst.Label("left", LabelDelimiter, x.Format());
-            dst.Label("right", LabelDelimiter, y.Format());
-            dst.Label("expect", LabelDelimiter, expect.Format());
-            dst.Label("actual", LabelDelimiter, actual.Format());
-            dst.Label("result", LabelDelimiter, result.Format());
-            return dst.ToString();
+            var dst = text.buffer();
+            dst.Label("left", Chars.Colon, x.Format());
+            dst.Label("right", Chars.Colon, y.Format());
+            dst.Label("expect", Chars.Colon, expect.Format());
+            dst.Label("actual", Chars.Colon, actual.Format());
+            dst.Label("result", Chars.Colon, result.Format());
+            return dst.Emit();
         }
 
         [Op, Closures(Closure)]
-        public static string FormatHex<T>(this Vector128<T> src, char sep = ItemDelimiter, bool specifier = false)
+        public static string FormatHex<T>(this Vector128<T> src, char sep = Chars.Comma, bool specifier = false)
             where T : unmanaged
                 => vspan(src).FormatHex(sep, specifier);
 
 
         [Op, Closures(Closure)]
-        public static string FormatHex<T>(this Vector256<T> src, char sep = ItemDelimiter, bool specifier = false)
+        public static string FormatHex<T>(this Vector256<T> src, char sep = Chars.Comma, bool specifier = false)
              where T : unmanaged
                 => vspan(src).FormatHex(sep, specifier);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static string Format<T>(this Vector128<T> src, char sep = ItemDelimiter, int pad = 2)
+        public static string Format<T>(this Vector128<T> src, char sep = Chars.Comma, int pad = 2)
             where T : unmanaged
                 => vspan(src).Format(sep,0,pad,true);
 
         [Op, Closures(Closure)]
-        public static string Format<T>(this Vector256<T> src, char sep = ItemDelimiter, int pad = 2)
+        public static string Format<T>(this Vector256<T> src, char sep = Chars.Comma, int pad = 2)
             where T : unmanaged
                 => vspan(src).Format(sep, 0, pad, true);
 
         [Op, Closures(Closure)]
-        public static string Format<T>(this Vector512<T> src, char sep = ItemDelimiter, int pad = 2)
+        public static string Format<T>(this Vector512<T> src, char sep = Chars.Comma, int pad = 2)
             where T : unmanaged
                 => text.bracket(
                         text.concat(
@@ -72,7 +72,7 @@ namespace Z0
                     );
 
         [Op, Closures(Closure)]
-        public static string FormatLanes<T>(this Vector256<T> src, char sep = ItemDelimiter, int pad = 2)
+        public static string FormatLanes<T>(this Vector256<T> src, char sep = Chars.Comma, int pad = 2)
             where T : unmanaged
                 => text.concat(
                     src.GetLower().Format(sep, pad), Chars.Space,

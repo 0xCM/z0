@@ -9,8 +9,8 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     class CellStreamer<F,W,T> : ICellStreamer<F,W,T>
         where F : unmanaged, IDataCell

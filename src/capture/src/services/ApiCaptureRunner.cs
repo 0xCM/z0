@@ -31,11 +31,11 @@ namespace Z0
         static void dump(IWfShell wf)
         {
             var flow = wf.Running("Emitting process dump");
-            var process = Processes.current();
+            var process = Runtime.CurrentProcess;
             var name = process.ProcessName;
             var dst = wf.Db().ProcDumpPath(name).EnsureParentExists();
             dst.Delete();
-            DumpEmitter.emit(Processes.current(), dst.Name, DumpTypeOption.Full);
+            DumpEmitter.emit(Runtime.CurrentProcess, dst.Name, DumpTypeOption.Full);
             wf.Ran(flow, "Emitted process dump");
         }
 

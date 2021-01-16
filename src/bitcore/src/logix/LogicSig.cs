@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-
     using ULK = UnaryBitLogicKind;
     using BLK = BinaryBitLogicKind;
     using TLK = TernaryBitLogicKind;
@@ -30,15 +28,15 @@ namespace Z0
 
         public static string sig<T>(ULK kind)
              where T : unmanaged
-                => text.concat(format(kind), Chars.Colon, NumericKinds.keyword<T>());
+                => text.concat(format(kind), Chars.Colon, Numeric.keyword<T>());
 
         public static string sig<T>(BLK kind)
             where T : unmanaged
-                => text.concat(format(kind), Chars.Colon, NumericKinds.keyword<T>());
+                => text.concat(format(kind), Chars.Colon, Numeric.keyword<T>());
 
         public static string sig<T>(TLK kind)
             where T : unmanaged
-                => text.concat(format(kind), Chars.Colon, NumericKinds.keyword<T>());
+                => text.concat(format(kind), Chars.Colon, Numeric.keyword<T>());
 
         public static string sig<T>(BitShiftApiClass kind)
             where T : unmanaged

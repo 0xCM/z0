@@ -10,7 +10,7 @@ namespace Z0
     using K = BitFunctionApiClass;
     using I = IBitFunctionApiKey;
 
-    public readonly struct BitFunctionMetatypes
+    public readonly struct BitFunctionKinds
     {
         public readonly struct TestZ : I {  K I.Kind => K.TestZ; }
 

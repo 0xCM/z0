@@ -51,6 +51,15 @@ namespace Z0
             }
         }
 
+        void AppendDelimited(char delimiter, params string[] src)
+        {
+            var count = src.Length;
+            var terms = @readonly(src);
+            var sep = string.Format("{0} ", delimiter);
+            for(var i=0; i<src.Length; i++)
+                Append(string.Format("{0}{1}", sep, skip(terms,i)));
+        }
+
         void AppendDelimited<F,T>(F field, T value, char c = FieldDelimiter)
             where F : unmanaged
         {

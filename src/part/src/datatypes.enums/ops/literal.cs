@@ -8,9 +8,23 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
 
-    partial struct ClrEnums
+    partial struct EnumValue
     {
+        /// <summary>
+        /// Reads an E-value from an enum of primal T-kind
+        /// </summary>
+        /// <param name="scalar">The integral value</param>
+        /// <param name="eRep">A representative enum value, used only for type inference</param>
+        /// <typeparam name="E">The enum type</typeparam>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]
+        public static ref E literal<E,T>(in T scalar, E eRep = default)
+            where E : unmanaged
+            where T : unmanaged
+                => ref @as<T,E>(scalar);
+
         /// <summary>
         /// Envisions a i8 value as a value of an enum of like i8 kind
         /// </summary>
@@ -19,7 +33,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref E literal<E>(in sbyte src)
             where E : unmanaged, Enum
-                => ref EnumValue.literal<E,sbyte>(src);
+                => ref literal<E,sbyte>(src);
 
         /// <summary>
         /// Envisions a u8 value as a value of an enum of like u8 kind
@@ -29,7 +43,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref E literal<E>(in byte src)
             where E : unmanaged, Enum
-                => ref EnumValue.literal<E,byte>(src);
+                => ref literal<E,byte>(src);
 
         /// <summary>
         /// Envisions a u16 value as a value of an enum of like u16 kind
@@ -39,7 +53,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref E literal<E>(in ushort src)
             where E : unmanaged, Enum
-                => ref EnumValue.literal<E,ushort>(src);
+                => ref literal<E,ushort>(src);
 
         /// <summary>
         /// Envisions a c16 value as a value of an enum of like u16 kind
@@ -49,7 +63,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static E literal<E>(char src)
             where E : unmanaged, Enum
-                => EnumValue.literal<E,ushort>((ushort)src);
+                => literal<E,ushort>((ushort)src);
 
         /// <summary>
         /// Envisions an i32 value as a value of an enum of like primal kind
@@ -59,7 +73,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref E literal<E>(in int src)
             where E : unmanaged, Enum
-                => ref EnumValue.literal<E,int>(src);
+                => ref literal<E,int>(src);
 
         /// <summary>
         /// Envisions a u32 value as a value of an enum of like primal kind
@@ -69,7 +83,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref E literal<E>(in uint src)
             where E : unmanaged, Enum
-                => ref EnumValue.literal<E,uint>(src);
+                => ref literal<E,uint>(src);
 
         /// <summary>
         /// Envisions an i64 value as a value of an enum of like primal kind
@@ -79,7 +93,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref E literal<E>(in long src)
             where E : unmanaged, Enum
-                => ref EnumValue.literal<E,long>(src);
+                => ref literal<E,long>(src);
 
         /// <summary>
         /// Envisions a u64 value as a value of an enum of like primal kind
@@ -89,6 +103,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref E literal<E>(in ulong src)
             where E : unmanaged, Enum
-                => ref EnumValue.literal<E,ulong>(src);
+                => ref literal<E,ulong>(src);
     }
 }

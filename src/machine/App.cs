@@ -56,11 +56,11 @@ namespace Z0
                 images.EmitCilRecords();
                 images.EmitUserStrings();
                 images.EmitSystemStrings();
+                images.EmitConstants();
+                images.EmitApiBlobs();
 
                 EmitFieldMetadata.create().Run(Wf);
-                EmitImageConstants.create().Run(Wf);
                 EmitLocatedParts.create().Run(Wf);
-                ImageDataEmitter.EmitApiBlobs(Wf);
 
                 Commands.EmitEnumCatalog().Run(Wf);
 

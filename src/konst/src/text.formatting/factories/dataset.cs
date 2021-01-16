@@ -12,11 +12,6 @@ namespace Z0
     partial struct Formatters
     {
         [MethodImpl(Inline)]
-        public static DatasetFormatter<F> dataset<F>()
-            where F : unmanaged, Enum
-                => new DatasetFormatter<F>(text.build());
-
-        [MethodImpl(Inline)]
         public static DatasetFormatter<F> dataset<F>(char delimiter)
             where F : unmanaged, Enum
                 => new DatasetFormatter<F>(text.build(), delimiter);

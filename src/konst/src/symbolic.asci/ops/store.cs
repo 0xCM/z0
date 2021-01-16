@@ -15,7 +15,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static void store(ReadOnlySpan<byte> src, char fill, Span<char> dst)
         {
-            var count = z.length(src,dst);
+            var count = root.length(src,dst);
             for(var i=0u; i<count; i++)
             {
                 ref readonly var next = ref skip(src,i);

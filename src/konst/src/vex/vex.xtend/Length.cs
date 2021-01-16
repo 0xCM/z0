@@ -21,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static int Length<T>(this Vector128<T> src)
             where T : unmanaged
-                => z.vcount<T>(w128);
+                => cpu.vcount<T>(w128);
 
         /// <summary>
         /// Returns the number of source vector components
@@ -31,6 +31,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static int Length<T>(this Vector256<T> src)
             where T : unmanaged
-                => z.vcount<T>(w256);
+                => cpu.vcount<T>(w256);
     }
 }

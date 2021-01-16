@@ -20,9 +20,9 @@ namespace Z0
             => src.CopyTo(Notebook(notebook));
 
         FS.Files IFileArchive.Clear(string id)
-            => (TableRoot() + FS.folder(id)).Clear(list<FS.FilePath>()).Array();
+            => (TableRoot() + FS.folder(id)).Clear(root.list<FS.FilePath>()).Array();
 
         FS.Files IFileArchive.Clear(FS.FolderName id)
-            => (TableRoot() + id).Clear(list<FS.FilePath>()).Array();
+            => (TableRoot() + id).Clear(root.list<FS.FilePath>()).Array();
     }
 }

@@ -11,7 +11,7 @@ namespace Z0
 
     using NK = NumericKind;
 
-    partial class NumericKinds
+    partial struct Numeric
     {
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static string keyword<T>()

@@ -20,17 +20,10 @@ namespace Z0
 
         public const MethodImplOptions Suboptimal = MethodImplOptions.NoOptimization;
 
-        public const string Kernel32 = "kernel32.dll";
-
         /// <summary>
         /// The default item list delimiter
         /// </summary>
         public const char ItemDelimiter = Chars.Comma;
-
-        /// <summary>
-        /// The default label delimiter
-        /// </summary>
-        public const char LabelDelimiter = Chars.Colon;
 
         /// <summary>
         /// The default hex value delimiter

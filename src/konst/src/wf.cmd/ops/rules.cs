@@ -34,7 +34,7 @@ namespace Z0
             where K : unmanaged
                 => new CmdScriptExpr<K,T>(id,content);
         [Op]
-        public static ref CmdScriptPattern rules(IWfDb db, ref CmdScriptPattern data)
+        public static ref CmdRuleInfo rules(IWfDb db, ref CmdRuleInfo data)
         {
             data.CmdRoot = db.ToolExeRoot() +  data.CmdRootName;
             data.CmdName = FS.file(data.CmdHost.Format(), data.ScriptType);
@@ -48,7 +48,7 @@ namespace Z0
         }
 
         [Op]
-        public static ref CmdScriptPattern update(IWfDb db, ref CmdScriptPattern data,
+        public static ref CmdRuleInfo update(IWfDb db, ref CmdRuleInfo data,
             string root = null, string name = null, string arg = null, ArgPrefix? prefix = null, string type = null)
         {
             data.CmdRootName = root == null ? data.CmdRootName : FS.folder(root);

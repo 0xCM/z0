@@ -38,13 +38,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(z.vgather(w, u8(src), v8u(vidx)));
+                return generic<T>(cpu.vgather(w, u8(src), v8u(vidx)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(z.vgather(w, u16(src), v16u(vidx)));
+                return generic<T>(cpu.vgather(w, u16(src), v16u(vidx)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(z.vgather(w, u32(src), v32u(vidx)));
+                return generic<T>(cpu.vgather(w, u32(src), v32u(vidx)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(z.vgather(w, u64(src), v64u(vidx)));
+                return generic<T>(cpu.vgather(w, u64(src), v64u(vidx)));
             else
                 return vgather_i(w,src,vidx);
         }
@@ -54,13 +54,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(z.vgather(w, i8(src), v8i(vidx)));
+                return generic<T>(cpu.vgather(w, i8(src), v8i(vidx)));
             else if(typeof(T) == typeof(short))
-                return generic<T>(z.vgather(w, i16(src), v16i(vidx)));
+                return generic<T>(cpu.vgather(w, i16(src), v16i(vidx)));
             else if(typeof(T) == typeof(int))
-                return generic<T>(z.vgather(w, i32(src), v32i(vidx)));
+                return generic<T>(cpu.vgather(w, i32(src), v32i(vidx)));
             else if(typeof(T) == typeof(long))
-                return generic<T>(z.vgather(w, i64(src), v64i(vidx)));
+                return generic<T>(cpu.vgather(w, i64(src), v64i(vidx)));
             else
                 throw no<T>();
         }
@@ -70,13 +70,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(z.vgather(w, u8(src), v8u(vidx)));
+                return generic<T>(cpu.vgather(w, u8(src), v8u(vidx)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(z.vgather(w, u16(src), v16u(vidx)));
+                return generic<T>(cpu.vgather(w, u16(src), v16u(vidx)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(z.vgather(w, u32(src), v32u(vidx)));
+                return generic<T>(cpu.vgather(w, u32(src), v32u(vidx)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(z.vgather(w, u64(src), v64u(vidx)));
+                return generic<T>(cpu.vgather(w, u64(src), v64u(vidx)));
             else
                 return vgather_i(w,src,vidx);
         }
@@ -86,13 +86,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(z.vgather(w, i8(src), v8i(vidx)));
+                return generic<T>(cpu.vgather(w, i8(src), v8i(vidx)));
             else if(typeof(T) == typeof(short))
-                return generic<T>(z.vgather(w, i16(src), v16i(vidx)));
+                return generic<T>(cpu.vgather(w, i16(src), v16i(vidx)));
             else if(typeof(T) == typeof(int))
-                return generic<T>(z.vgather(w, i32(src), v32i(vidx)));
+                return generic<T>(cpu.vgather(w, i32(src), v32i(vidx)));
             else if(typeof(T) == typeof(long))
-                return generic<T>(z.vgather(w, i64(src), v64i(vidx)));
+                return generic<T>(cpu.vgather(w, i64(src), v64i(vidx)));
             else
                 throw no<T>();
         }

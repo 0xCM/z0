@@ -107,7 +107,6 @@ namespace Z0
             where T : struct, IRecord<T>
                 => TableDir(typeof(T));
 
-
         FS.FilePath Table(string id, PartId part)
             => TableDir(id) + FS.file(string.Format(RP.SlotDot2, id, part.Format()), DefaultTableExt);
 
@@ -133,17 +132,21 @@ namespace Z0
             => t.Tag<RecordAttribute>().MapValueOrElse(a => Table(part,  a.TableId, DefaultTableExt), () => Table(part, t.Name, DefaultTableExt));
 
         FS.FilePath Table<T>(PartId part)
-            where T : struct
+            where T : struct, IRecord<T>
                 => Table(typeof(T), part);
 
         FS.FilePath Table<S>(string id, S subject, FS.FileExt? ext = null)
             => TableRoot()+ FS.folder(id) + FS.file(text.format(DbNames.qualified, id, subject), ext ?? Csv);
 
         FS.FilePath IndexTable(string id)
-            => TableRoot() + FS.file(id, DefaultTableExt);
+            => IndexRoot() + FS.file(id, DefaultTableExt);
 
         FS.FilePath IndexTable(Type t)
             => t.Tag<RecordAttribute>().MapValueOrElse(a => IndexTable(a.TableId), () => IndexTable(t.Name));
+
+        FS.FilePath IndexTable<T>()
+            where T : struct, IRecord<T>
+                => IndexTable(typeof(T));
 
         FS.FolderPath ListRoot()
             => Root + FS.folder(lists);

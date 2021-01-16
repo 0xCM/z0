@@ -12,7 +12,7 @@ namespace Z0
     using NK = NumericKind;
     using TC = System.TypeCode;
 
-    partial class NumericKinds
+    partial struct Numeric
     {
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static TypeCode typecode<T>()

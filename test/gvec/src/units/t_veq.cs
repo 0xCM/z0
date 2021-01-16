@@ -74,7 +74,7 @@ namespace Z0
         {
             var name = CaseName(ApiIdentify.sfunc(nameof(veq_basecase), w.VectorKind<T>()));
             var f = VSvc.veq(w,t);
-            var x = Random.Blocks<T>(w, RepCount/z.vcount(w,t));
+            var x = Random.Blocks<T>(w, RepCount/cpu.vcount(w,t));
             var result = SpanBlocks.alloc<T>(w, x.BlockCount);
             result.Fill(z.ones(t));
             CheckSVF.CheckExplicit(f,x,x,result, name);
@@ -86,7 +86,7 @@ namespace Z0
 
             var name = CaseName(ApiIdentify.sfunc(nameof(veq_basecase), w.VectorKind<T>()));
             var f = VSvc.veq(w,t);
-            var x = Random.Blocks<T>(w, RepCount/z.vcount(w,t));
+            var x = Random.Blocks<T>(w, RepCount/cpu.vcount(w,t));
             var result = SpanBlocks.alloc<T>(w, x.BlockCount);
             result.Fill(z.ones(t));
             CheckSVF.CheckExplicit(f,x,x,result,name);

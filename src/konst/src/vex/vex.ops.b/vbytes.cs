@@ -8,9 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
+    using static Part;
 
-    partial struct z
+    partial struct cpu
     {
         [MethodImpl(Inline), Op]
         public static Vector128<byte> vbytes(W128 w, ulong lo)

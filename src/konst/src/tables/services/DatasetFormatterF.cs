@@ -19,13 +19,13 @@ namespace Z0
 
         string ITextValueFormatter<T>.Format(in T src)
         {
-            var dst = Formatters.dataset<F>();
+            var dst = Table.dsformatter<F>();
             Format(src, dst);
             return dst.Render();
         }
 
         string ITextValueFormatter<T>.HeaderText
-            => Formatters.dataset<F>().HeaderText;
+            => Table.dsformatter<F>().HeaderText;
     }
 
     public readonly struct DatasetFormatter<F> : IDatasetFormatter<F>

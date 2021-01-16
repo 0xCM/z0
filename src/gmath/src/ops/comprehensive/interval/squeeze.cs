@@ -52,7 +52,7 @@ namespace Z0
         public static Span<T> squeeze<T>(ReadOnlySpan<T> src, ReadOnlySpan<T> max)
             where T : unmanaged
         {
-            var count = (uint)z.length(src,max);
+            var count = (uint)root.length(src,max);
             var dst = Spans.alloc<T>(count);
             squeeze<T>(first(src), first(max), ref first(dst), count);
             return dst;

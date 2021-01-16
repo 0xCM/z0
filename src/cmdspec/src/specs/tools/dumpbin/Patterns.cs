@@ -7,8 +7,6 @@ namespace Z0.Tools
     using System;
     using System.Runtime.CompilerServices;
 
-    using static z;
-    using static Konst;
     using static DumpBin.Flag;
 
     using X = FileExtensions;

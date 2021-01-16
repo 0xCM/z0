@@ -8,9 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
+    using static Part;
 
-    partial struct z
+    partial struct cpu
     {
         /// <summary>
         /// Computes the vector component count for a given bit-width and component type

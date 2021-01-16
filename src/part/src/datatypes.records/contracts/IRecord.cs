@@ -4,6 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
+
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     using api = RecordUtilities;
@@ -26,5 +28,11 @@ namespace Z0
 
         RecordFields IRecord.Fields()
             => api.fields<T>();
+    }
+
+    public interface IComparableRecord<T> : IRecord<T>, IComparable<T>
+        where T : struct, IComparableRecord<T>
+    {
+
     }
 }

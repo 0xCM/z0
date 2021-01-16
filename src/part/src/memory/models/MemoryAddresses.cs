@@ -14,7 +14,7 @@ namespace Z0
     /// </summary>
     public readonly struct MemoryAddresses : ISortedIndex<MemoryAddress>
     {
-        readonly ConstIndex<MemoryAddress> Data;
+        readonly Index<MemoryAddress> Data;
 
         [MethodImpl(Inline)]
         internal MemoryAddresses(MemoryAddress[] src)

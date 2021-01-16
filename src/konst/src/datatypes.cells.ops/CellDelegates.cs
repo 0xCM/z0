@@ -10,7 +10,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Reflection.Emit;
 
-    using static Konst;
+    using static Part;
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 

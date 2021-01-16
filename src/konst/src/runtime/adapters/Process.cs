@@ -380,7 +380,9 @@ namespace Z0.Adapters
         public IndexedSeq<ProcessModule> Modules
         {
             [MethodImpl(Inline)]
-            get => Subject.Modules.Cast<D.ProcessModule>().Array().Map(ProcessModule.adapt);
+            get => Subject.Modules.Cast<D.ProcessModule>().Map(ProcessModule.adapt);
+
+            //Subject.Modules.Cast<D.ProcessModule>().Union(root.seq(Subject.MainModule)).Map(ProcessModule.adapt);
         }
 
         //

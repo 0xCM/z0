@@ -21,8 +21,6 @@ namespace Z0
             step.Run();
         }
 
-        const char XX = '\uDECC';
-
         public static void run(IWfShell wf)
         {
             wf.Db().Clear(ClrEnumRecord.TableId);

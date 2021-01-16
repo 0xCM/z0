@@ -11,6 +11,7 @@ namespace Z0
 
     partial struct root
     {
+
         /// <summary>
         /// Creates a non-homogenous pair
         /// </summary>

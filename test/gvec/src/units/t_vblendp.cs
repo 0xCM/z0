@@ -49,7 +49,7 @@ namespace Z0
             where S : unmanaged
             where T : unmanaged
         {
-            var count = vcount(w, enabled);
+            var count = cpu.vcount(w, enabled);
             var buffer = z.vzero<T>(w);
             ref var dst = ref z.vref(ref buffer);
             var length = min(count, bitsize<S>());
@@ -70,7 +70,7 @@ namespace Z0
             where S : unmanaged
             where T : unmanaged
         {
-            var count = vcount(w, enabled);
+            var count = cpu.vcount(w, enabled);
             var buffer = z.vzero<T>(w);
             ref var dst = ref z.vref(ref buffer);
             var length = min(count, bitsize<S>());

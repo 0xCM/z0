@@ -39,7 +39,7 @@ namespace Z0
         {
             var t = default(T);
             var w = w128;
-            var cells = vcount(w,t);
+            var cells = cpu.vcount(w,t);
             var succeeded = true;
             var casename = ApiTestIdentity.name(f);
             var clock = Time.counter(true);

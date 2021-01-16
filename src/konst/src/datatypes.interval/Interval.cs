@@ -6,8 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
-    using static Konst;
+
+    using static Part;
     using static IntervalKind;
 
     /// <summary>
@@ -69,6 +69,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Interval<T> define<T>(T min, T max, IntervalKind kind)
             where T : unmanaged
-                => new Interval<T>(min, max, kind); 
+                => new Interval<T>(min, max, kind);
     }
 }
