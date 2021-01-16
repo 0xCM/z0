@@ -9,10 +9,10 @@ namespace Z0
     public interface IStorageCells<T> : IDataType<Index<T>>
         where T : unmanaged
     {
-        T[] Storage {get;}
+        Index<T> Cells {get;}
 
         Count CellCount
-            => Storage.Length;
+            => Cells.Count;
 
         BitSize CellWidth
             => bitsize<T>();
@@ -24,7 +24,7 @@ namespace Z0
             => CellSize * CellCount;
 
         Index<T> IDataType<Index<T>>.Content
-            => Storage;
+            => Cells;
 
         BitSize ISized.StorageWidth
             => (ulong)CellCount*CellWidth;

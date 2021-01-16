@@ -77,6 +77,21 @@ namespace Z0
             }
         }
 
+        void SummarizeDataTypes()
+        {
+            var types = DataTypes.search(Wf.Components);
+            var count = types.Count;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var current = ref types[i];
+                var content = current.ContentType;
+                var container = current.ContainerType;
+                var width = current.StorageWidth;
+                var description = string.Format("{0,-24} | {1}", container.Name, width);
+                Wf.Row(description);
+            }
+        }
+
         void SummarizeDump()
         {
             var src = Db.DumpFilePath("capture");
@@ -100,7 +115,7 @@ namespace Z0
 
         public void RunTests()
         {
-            CheckFlags();
+            SummarizeDataTypes();
         }
     }
 }

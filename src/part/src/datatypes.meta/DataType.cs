@@ -14,7 +14,6 @@ namespace Z0
     /// <summary>
     /// Specifies a constructed data type
     /// </summary>
-    /// <typeparam name="T">The content type and reifying type</typeparam>
     public readonly struct DataType
     {
         public uint StorageWidth {get;}
@@ -36,8 +35,17 @@ namespace Z0
             Formatter = rep.Format;
         }
 
+        [MethodImpl(Inline)]
+        public DataType(uint width, Type container, Type content, Func<string> formatter = null)
+        {
+            StorageWidth = width;
+            ContainerType = container;
+            ContentType = content;
+            Formatter = formatter  ?? new Func<string>(() => container.Name);
+        }
+
         public bool IsEmpty
-            => EmptyDataType.eq(this);
+            => ContainerType == null || ContainerType == typeof(void);
 
         public bool IsNonEmpty
             => !IsEmpty;
@@ -57,14 +65,11 @@ namespace Z0
         public BitSize StorageWidth => 0;
 
         public string Format()
-            => EmptyString;
+            => "<empty>";
 
         [MethodImpl(Inline)]
         public bool Equals(IDataType other)
-        {
-            return other.ContentType == ContentType
-                && other.ContainerType == ContainerType;
-        }
+            => other.ContentType == ContentType && other.ContainerType == ContainerType;
 
         public static bool eq(DataType other)
             => Instance.Equals(other);

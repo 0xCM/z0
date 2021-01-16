@@ -13,12 +13,12 @@ namespace Z0
     partial class XTend
     {
         /// <summary>
-        /// Forces enumerable evaluation
+        /// Creates a <see cref='Index{T}'/> from an enumerable <typeparamref name='T'/> cell sequence
         /// </summary>
-        /// <param name="src">The source stream</param>
-        /// <typeparam name="T">The element type</typeparam>
+        /// <param name="src">The data source</param>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static T[] Force<T>(this IEnumerable<T> src)
-            => src.Array();
+        public static Index<T> Index<T>(this IEnumerable<T> src)
+            => sys.array(src);
     }
 }

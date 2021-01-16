@@ -7,12 +7,45 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Reflection;
+    using System.Collections.Generic;
 
     using static Part;
+    using static memory;
 
     [ApiHost]
     public readonly struct DataTypes
     {
+        [Op]
+        public static uint search(Assembly src, IList<DataType> dst)
+        {
+            var candidates = src.DefinedTypes.Span();
+            var count = candidates.Length;
+            var found = 0u;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var candidate = ref skip(candidates,i);
+                var dt = metadata(candidate);
+                if(dt.IsNonEmpty)
+                {
+                    found++;
+                    dst.Add(dt);
+                }
+            }
+            return found;
+        }
+
+        [Op]
+        public static Index<DataType> search(ReadOnlySpan<Assembly> src)
+        {
+            var count = src.Length;
+            var dst = root.list<DataType>(128);
+            var found = 0u;
+            for(var i=0; i<count; i++)
+                found += search(skip(src,i),dst);
+            return dst.ToArray();
+        }
+
+
         [MethodImpl(Inline), Op]
         public static DataType empty()
             => new DataType(new EmptyDataType());
@@ -22,8 +55,8 @@ namespace Z0
         {
             var interfaces = src.Interfaces();
             var itype = typeof(IDataType);
-            if(Index.contains(interfaces, itype))
-                return metadata((IDataType)Activator.CreateInstance(src));
+            if(metadata(src, out var datatype))
+                return datatype;
             else
                 return DataType.Empty;
         }
@@ -32,17 +65,20 @@ namespace Z0
         public static bool metadata(Type src, out DataType dst)
         {
             var interfaces = src.Interfaces();
-            var itype = typeof(IDataType);
-            if(Index.contains(interfaces, itype))
+            if(Index.contains(interfaces, typeof(IDataType)))
             {
-                dst = metadata((IDataType)Activator.CreateInstance(src));
-                return true;
+                if(src.IsStruct())
+                {
+                    if(src.IsConcrete())
+                        dst = metadata((IDataType)Activator.CreateInstance(src));
+                    else
+                        dst = new DataType(0, src, typeof(void));
+                    return true;
+                }
             }
-            else
-            {
-                dst = DataType.Empty;
-                return false;
-            }
+
+            dst = DataType.Empty;
+            return false;
         }
 
         [MethodImpl(Inline)]

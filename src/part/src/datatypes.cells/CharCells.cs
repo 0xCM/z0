@@ -7,39 +7,34 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
-    [Datatype]
-    public readonly struct StorageCells<T> : IStorageCells<T>
-        where T : unmanaged
+    public readonly struct CharCells : IStorageCells<char>
     {
-        public readonly IndexedSeq<T> Data;
+        public Index<char> Cells {get;}
 
         [MethodImpl(Inline)]
-        public StorageCells(T[] src)
-            => Data = src;
+        public CharCells(char[] src)
+            => Cells = src;
 
         public uint CellCount
         {
             [MethodImpl(Inline)]
-            get => (uint)Data.Length;
+            get => (uint)Cells.Length;
         }
 
         public ByteSize CellSize
         {
             [MethodImpl(Inline)]
-            get => z.size<T>();
+            get => 2;
         }
 
-        T[] IStorageCells<T>.Storage
-            => Data;
+        [MethodImpl(Inline)]
+        public static implicit operator CharCells(char[] src)
+            => new StorageCells<char>(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator StorageCells<T>(T[] src)
-            => new StorageCells<T>(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator T[](StorageCells<T> src)
-            => src.Data;
+        public static implicit operator CharCells(StorageCells<char> src)
+            => new CharCells(src);
     }
 }

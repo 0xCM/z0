@@ -9,6 +9,8 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
+    using static Part;
+
     partial class XTend
     {
         /// <summary>
@@ -17,9 +19,9 @@ namespace Z0
         /// <typeparam name="T">The item type</typeparam>
         /// <param name="src">The items to search</param>
         /// <param name="default">The replacement value if the sequence is empty</param>
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static T FirstOrDefault<T>(this IEnumerable<T> src, T @default)
             => src.Any() ? src.First() : @default;
-
 
         /// <summary>
         /// Returns the first element if it exists; otherwise returns the value supplied
@@ -28,6 +30,7 @@ namespace Z0
         /// <typeparam name="T">The item type</typeparam>
         /// <param name="src">The items to search</param>
         /// <param name="default">The function invoked to produce a default value</param>
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static T FirstOrDefault<T>(this IEnumerable<T> src, Func<T> @default)
             => src.Any() ? src.First() : @default();
 
@@ -40,6 +43,7 @@ namespace Z0
         /// <param name="items">The items to search</param>
         /// <param name="predicate">The predicate applied during the search</param>
         /// <param name="f">The function to apply to the identified item</param>
+        [MethodImpl(Inline)]
         public static R OnFirstOrDefault<T,R>(this IEnumerable<T> items, Predicate<T> predicate, Func<T,R> f)
             => f(items.FirstOrDefault(x => predicate(x)));
     }

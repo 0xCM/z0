@@ -9,32 +9,34 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct CharCells : IStorageCells<char>
+    [Datatype]
+    public readonly struct StorageCells<T> : IStorageCells<T>
+        where T : unmanaged
     {
-        public char[] Storage {get;}
+        public Index<T> Cells {get;}
 
         [MethodImpl(Inline)]
-        public CharCells(char[] src)
-            => Storage = src;
+        public StorageCells(T[] src)
+            => Cells  = src;
 
         public uint CellCount
         {
             [MethodImpl(Inline)]
-            get => (uint)Storage.Length;
+            get => Cells.Count;
         }
 
         public ByteSize CellSize
         {
             [MethodImpl(Inline)]
-            get => 2;
+            get => memory.size<T>();
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator CharCells(char[] src)
-            => new StorageCells<char>(src);
+        public static implicit operator StorageCells<T>(T[] src)
+            => new StorageCells<T>(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator CharCells(StorageCells<char> src)
-            => new CharCells(src);
+        public static implicit operator T[](StorageCells<T> src)
+            => src.Cells.Storage;
     }
 }

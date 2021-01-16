@@ -1,0 +1,33 @@
+Failure trapped by Main at J:\dev\projects\z0\src\run\src\App.cs 56
+System.ArgumentException: Cannot create an instance of Z0.NumericLiteral`1[T] because Type.ContainsGenericParameters is true.
+   at System.RuntimeType.CreateInstanceCheckThis()
+   at System.RuntimeType.CreateInstanceDefaultCtor(Boolean publicOnly, Boolean skipCheckThis, Boolean fillCache, Boolean wrapExceptions)
+   at System.Activator.CreateInstance(Type type, Boolean nonPublic, Boolean wrapExceptions)
+   at Z0.DataTypes.metadata(Type src) in j:\dev\projects\z0\src\part\src\datatypes.meta\DataTypes.cs:line 56
+   at Z0.DataTypes.search(Assembly src, IList`1 dst) in j:\dev\projects\z0\src\part\src\datatypes.meta\DataTypes.cs:line 26
+   at Z0.DataTypes.search(ReadOnlySpan`1 src) in j:\dev\projects\z0\src\part\src\datatypes.meta\DataTypes.cs:line 44
+   at Z0.Runner.SummarizeDataTypes() in J:\dev\projects\z0\src\run\src\App.cs:line 82
+   at Z0.Runner.Main(String[] args) in J:\dev\projects\z0\src\run\src\App.cs:line 45
+
+Failure trapped by Main at J:\dev\projects\z0\src\run\src\App.cs 56
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Z0.IStorageCells`1.get_CellCount() in j:\dev\projects\z0\src\konst\src\datatypes\contracts\IStorageCells.cs:line 15
+   at Z0.IStorageCells`1.Z0.ISized.get_StorageWidth() in j:\dev\projects\z0\src\konst\src\datatypes\contracts\IStorageCells.cs:line 30
+   at Z0.DataTypes.metadata(Type src, DataType& dst) in j:\dev\projects\z0\src\part\src\datatypes.meta\DataTypes.cs:line 70
+   at Z0.DataTypes.metadata(Type src) in j:\dev\projects\z0\src\part\src\datatypes.meta\DataTypes.cs:line 56
+   at Z0.DataTypes.search(Assembly src, IList`1 dst) in j:\dev\projects\z0\src\part\src\datatypes.meta\DataTypes.cs:line 26
+   at Z0.DataTypes.search(ReadOnlySpan`1 src) in j:\dev\projects\z0\src\part\src\datatypes.meta\DataTypes.cs:line 44
+   at Z0.Runner.SummarizeDataTypes() in J:\dev\projects\z0\src\run\src\App.cs:line 82
+   at Z0.Runner.Main(String[] args) in J:\dev\projects\z0\src\run\src\App.cs:line 45
+
+Failure trapped by Main at J:\dev\projects\z0\src\run\src\App.cs 56
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Z0.IStorageCells`1.get_CellCount() in j:\dev\projects\z0\src\konst\src\datatypes\contracts\IStorageCells.cs:line 15
+   at Z0.IStorageCells`1.Z0.ISized.get_StorageWidth() in j:\dev\projects\z0\src\konst\src\datatypes\contracts\IStorageCells.cs:line 30
+   at Z0.DataTypes.metadata(Type src, DataType& dst) in j:\dev\projects\z0\src\part\src\datatypes.meta\DataTypes.cs:line 70
+   at Z0.DataTypes.metadata(Type src) in j:\dev\projects\z0\src\part\src\datatypes.meta\DataTypes.cs:line 56
+   at Z0.DataTypes.search(Assembly src, IList`1 dst) in j:\dev\projects\z0\src\part\src\datatypes.meta\DataTypes.cs:line 26
+   at Z0.DataTypes.search(ReadOnlySpan`1 src) in j:\dev\projects\z0\src\part\src\datatypes.meta\DataTypes.cs:line 44
+   at Z0.Runner.SummarizeDataTypes() in J:\dev\projects\z0\src\run\src\App.cs:line 82
+   at Z0.Runner.Main(String[] args) in J:\dev\projects\z0\src\run\src\App.cs:line 45
+

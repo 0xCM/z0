@@ -101,9 +101,9 @@ namespace Z0
             var seeds = Entropy.Values<ulong>(machineCount);
             var indices = Algorithmic.stream(0xFFFFul, 0xFFFFFFFFul).Where(x => x % 2 != 0).Take(machineCount).ToArray();
             if(sequential)
-                return Fsm.sequential(spec, seeds, indices).Force();
+                return Fsm.sequential(spec, seeds, indices).Array();
             else
-                return concurrent(spec,seeds, indices).Force();
+                return concurrent(spec,seeds, indices).Array();
         }
 
         /// <summary>
