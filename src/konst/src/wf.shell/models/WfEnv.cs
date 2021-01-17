@@ -17,6 +17,14 @@ namespace Z0
             => EnvVars.Common.DbRoot;
 
         [MethodImpl(Inline), Op]
+        public static FS.FolderPath tools()
+            => EnvVars.Common.ToolRoot;
+
+        [MethodImpl(Inline), Op]
+        public static FS.FolderPath netsdk()
+            => EnvVars.Common.DotNetRoot;
+
+        [MethodImpl(Inline), Op]
         public static string[] args()
             => Environment.GetCommandLineArgs();
 

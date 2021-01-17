@@ -5,6 +5,7 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
 
     partial class XText
     {
@@ -17,7 +18,7 @@ namespace Z0
         public static Option<int> LastIndexOf(this string s, char match)
         {
             var idx = s.LastIndexOf(match);
-            return idx != -1 ? idx : Option.none<int>();
+            return idx != -1 ? idx : root.none<int>();
         }
 
         /// <summary>
@@ -29,31 +30,7 @@ namespace Z0
         public static Option<int> LastIndexOf(this string s, string match)
         {
             var idx = s.LastIndexOf(match);
-            return idx != -1 ? idx : Option.none<int>();
-        }
-
-        /// <summary>
-        /// Searches a string for the first occurrence of a specified character
-        /// </summary>
-        /// <param name="s">The string to search</param>
-        /// <param name="match">The character to match</param>
-        [TextUtility]
-        public static Option<int> FirstIndexOf(this string s, char match)
-        {
-            var idx = s.IndexOf(match);
-            return idx != -1 ? idx : Option.none<int>();
-        }
-
-        /// <summary>
-        /// Searches a string for the first occurrence of a specified substring
-        /// </summary>
-        /// <param name="s">The string to search</param>
-        /// <param name="match">The substring to match</param>
-        [TextUtility]
-        public static Option<int> FirstIndexOf(this string s, string match)
-        {
-            var idx = s.IndexOf(match);
-            return idx != -1 ? idx : Option.none<int>();
+            return idx != -1 ? idx : root.none<int>();
         }
     }
 }

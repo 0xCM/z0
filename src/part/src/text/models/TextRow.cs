@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static memory;
 
     /// <summary>
     /// Defines a row of text parttioned into a sequence of cells

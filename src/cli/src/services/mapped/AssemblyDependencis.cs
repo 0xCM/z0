@@ -42,12 +42,7 @@ namespace Z0
         {
             dst.Source = CliReader.GetAssemblyDefinition().GetAssemblyName();
             dst.Target = src.GetAssemblyName();
-            // dst.Culture = Read(src.Culture);
-            // dst.Flags = src.Flags;
-            // dst.HashValue = Read(src.HashValue);
-            // dst.Name = Read(src.Name);
-            // dst.PublicKeyOrToken = Read(src.PublicKeyOrToken);
-            // dst.Version = src.Version;
+            dst.Token = Read(src.PublicKeyOrToken);
             return ref dst;
         }
     }

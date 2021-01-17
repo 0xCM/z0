@@ -32,9 +32,10 @@ namespace Z0
         ByteSize Size {get;}
     }
 
-    public interface ILocatedImage<H> : ILocatedImage, IDataTypeComparable<H>, IAddressable<H, MemoryAddress>
+    public interface ILocatedImage<H> : ILocatedImage, IDataTypeComparable<H>, IAddressable<H,MemoryAddress>
         where H : struct, ILocatedImage<H>
     {
-
+        MemoryAddress IAddressable<MemoryAddress>.Address
+            => BaseAddress;
     }
 }

@@ -102,7 +102,6 @@ namespace Z0
 
         public WfExecToken Ran(WfExecFlow src)
         {
-            //WfEvents.signal(this).Ran();
             var token = CloseExecToken(src.Token);
             Tokens.TryAdd(token.Started, token);
             return token;
@@ -110,11 +109,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public WfExecToken NextExecToken()
-            => new WfExecToken((ulong)atomic(ref StartToken));
+            => new WfExecToken((ulong)root.atomic(ref StartToken));
 
         [MethodImpl(Inline)]
         public WfExecToken CloseExecToken(WfExecToken src)
-            => src.Complete((ulong)atomic(ref EndToken));
+            => src.Complete((ulong)root.atomic(ref EndToken));
 
         public void Dispose()
         {

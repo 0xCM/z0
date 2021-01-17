@@ -12,7 +12,7 @@ namespace Z0
     {
         public void trace()
         {
-            var located = Process.GetCurrentProcess().Modules.Cast<ProcessModule>().Map(LocatedImages.locate).OrderBy(x => x.BaseAddress);
+            var located = Process.GetCurrentProcess().Modules.Cast<ProcessModule>().Map(ImageMaps.locate).OrderBy(x => x.BaseAddress);
         }
     }
 }

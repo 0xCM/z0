@@ -9,6 +9,7 @@ namespace Z0
 
     using static DbNames;
 
+
     public interface IWfDbPaths : IFileArchive
     {
         FS.FolderName SubjectFolder<S>(S src)
@@ -33,7 +34,13 @@ namespace Z0
             => EnvVars.Common.ArchiveRoot;
 
         FS.FolderPath BuildArchiveRoot()
-            => ArchiveRoot() + FS.folder(builds);
+            => BinaryRoot() + FS.folder(builds);
+
+        FS.FolderPath SourceArchiveDir()
+            => BinaryRoot() + FS.folder(source);
+
+        FS.Files SourceArchives()
+            => SourceArchiveDir().Files(Zip);
 
         FS.FileExt DefaultTableExt
              => Csv;
@@ -172,7 +179,7 @@ namespace Z0
         FS.FilePath IndexFile(string id)
             => IndexRoot() + FS.file(id, Idx);
 
-        FS.FilePath[] IndexFiles()
+        FS.Files IndexFiles()
             => IndexRoot().Files(Idx);
 
         FS.FolderPath JobQueue()

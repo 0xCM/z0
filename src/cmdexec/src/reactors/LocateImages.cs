@@ -11,7 +11,7 @@ namespace Z0
 
         static FS.FilePath react(IWfShell wf, LocateImagesCmd cmd)
         {
-            ImageMaps.emit(LocatedImages.index(), cmd.Target);
+            ImageMaps.emit(ImageMaps.index(), cmd.Target);
             return cmd.Target;
         }
     }

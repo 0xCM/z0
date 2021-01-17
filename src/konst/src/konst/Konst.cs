@@ -132,10 +132,5 @@ namespace Z0
 
         public static T no<S,T>([Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => Unsupported.raise<S,T>(caller, file, line);
-
-    }
-
-    public static partial class XTend
-    {
     }
 }

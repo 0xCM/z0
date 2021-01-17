@@ -31,7 +31,7 @@ namespace Z0
 
         }
 
-        public IndexedView<CmdId> SupportedCommands
+        public ReadOnlySpan<CmdId> SupportedCommands
             => Nodes.Keys.Array();
 
         public void Enlist(Index<ICmdReactor> src)

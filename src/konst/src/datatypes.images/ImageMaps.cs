@@ -7,34 +7,25 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Diagnostics;
-    using System.Linq;
-    using System.IO;
 
     using static Part;
+    using static memory;
 
     [ApiHost]
     public readonly partial struct ImageMaps
     {
-
-        [MethodImpl(Inline), Op]
-        public static MemoryAddress @base(IPart src)
+        [Op]
+        public static string format(in LocatedImage src)
         {
-            var match =  Path.GetFileNameWithoutExtension(src.Owner.Location);
-            var modules = ImageMaps.modules(Process.GetCurrentProcess());
-            var module = modules.Where(m => Path.GetFileNameWithoutExtension(m.ImagePath.Name) == match).First();
-            return module.BaseAddress;
+            var expression = text.bracket(text.concat(src.BaseAddress, Chars.Comma, Chars.Space, src.EndAddress, Chars.Colon, src.Size));
+            return text.assign(src.Name, expression);
         }
 
         /// <summary>
-        /// Captures the current process state
+        /// Creates a <see cref='LocatedImage'/> description from the main module of the executing <see cref='Process'/>
         /// </summary>
-        /// <param name="src">The source process</param>
-        [MethodImpl(Inline), Op]
-        public static ProcessState state(Process src)
-        {
-            var dst = new ProcessState();
-            fill(src, ref dst);
-            return dst;
-        }
+        /// <param name="src">The source module</param>
+        public static LocatedImage main()
+            => locate(Process.GetCurrentProcess().MainModule);
     }
 }

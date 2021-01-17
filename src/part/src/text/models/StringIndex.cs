@@ -16,7 +16,7 @@ namespace Z0
         public Index<TextBlock> Values {get;}
 
         [MethodImpl(Inline)]
-        public StringIndex(uint[] keys, TextBlock[] blocks)
+        public StringIndex(uint[] keys, Index<TextBlock> blocks)
         {
             Keys = keys;
             Values = blocks;

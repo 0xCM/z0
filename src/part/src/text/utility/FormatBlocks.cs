@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    partial class XTend
+    partial class XText
     {
         /// <summary>
         /// Formats a span as [c0   c1 ...  cm]  where m = length - 1
@@ -16,29 +16,30 @@ namespace Z0
         /// <param name="cellpad">The width of a padded cell, if applicable</param>
         /// <param name="padchar">The character to use for cell padding, if applicable</param>
         /// <typeparam name="T">The element type</typeparam>
-        public static string BlockFormat<T>(this ReadOnlySpan<T> src, int? cellpad = null, char? padchar = null, bool padright = true)
+        [TextUtility]
+        public static string FormatBlocks<T>(this ReadOnlySpan<T> src, uint? cellpad = null, char? padchar = null, bool padright = true)
             where T : unmanaged
         {
-            static Func<string,int,string> GetPadFunc(bool padright)
+            static Func<string,uint,string> PadFunc(bool padright)
                 => padright
-                ? new Func<string,int,string>((s,n) => s.PadRight(n))
-                : new Func<string,int,string>((s,n) => s.PadLeft(n));
+                ? new Func<string,uint,string>((s,n) => s.PadRight((int)n))
+                : new Func<string,uint,string>((s,n) => s.PadLeft((int)n));
 
-            var padlen = cellpad ?? Unsafe.SizeOf<T>()*4;
+            var padlen = cellpad ?? memory.size<T>()*4;
             var filler = padchar ?? ' ';
-            var pad = GetPadFunc(padright);
-            var sb = string.Empty.Build();
-            sb.Append("[");
+            var pad = PadFunc(padright);
+            var sb = text.build();
+            sb.Append(Chars.LBracket);
             for(var i = 0; i< src.Length; i++)
             {
                 var fmt = $"{src[i]}";
                 if(i != src.Length - 1)
-                    sb.Append(pad(fmt,padlen));
+                    sb.Append(pad(fmt, padlen));
                 else
                     sb.Append(fmt);
 
             }
-            sb.Append("]");
+            sb.Append(Chars.RBracket);
             return sb.ToString();
         }
 
@@ -49,8 +50,9 @@ namespace Z0
         /// <param name="cellpad">The width of a padded cell, if applicable</param>
         /// <param name="padchar">The character to use for cell padding, if applicable</param>
         /// <typeparam name="T">The element type</typeparam>
-        public static string BlockFormat<T>(this Span<T> src, int? cellpad = null, char? padchar = null, bool padright = true)
+        [TextUtility]
+        public static string FormatBlocks<T>(this Span<T> src, uint? cellpad = null, char? padchar = null, bool padright = true)
             where T : unmanaged
-                => src.ReadOnly().BlockFormat(cellpad, padchar, padright);
+                => src.ReadOnly().FormatBlocks(cellpad, padchar, padright);
     }
 }

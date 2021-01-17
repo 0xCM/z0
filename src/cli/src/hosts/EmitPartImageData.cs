@@ -8,8 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.IO;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     public ref struct EmitPartImageData
     {
@@ -67,7 +67,7 @@ namespace Z0
             using var stream = SourcePath.Reader();
             using var reader = stream.BinaryReader();
             using var dst = TargetPath.Writer();
-            dst.WriteLine(text.concat($"Address".PadRight(12), SpacePipe, "Data"));
+            dst.WriteLine(text.concat($"Address".PadRight(12), RP.SpacedPipe, "Data"));
 
             var buffer = span<byte>(BufferSize);
             var k = Read(reader,buffer);

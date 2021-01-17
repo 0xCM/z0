@@ -11,7 +11,7 @@ namespace Z0
     [Free]
     public interface ICmdRouter : IWfService
     {
-        IndexedView<CmdId> SupportedCommands {get;}
+        ReadOnlySpan<CmdId> SupportedCommands {get;}
 
         void Enlist(Index<ICmdReactor> reactors);
 

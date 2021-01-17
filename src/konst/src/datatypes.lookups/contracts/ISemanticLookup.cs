@@ -11,7 +11,7 @@ namespace Z0
     [Free]
     public interface ISemanticLookup
     {
-        Count EntryCount {get;}
+        uint EntryCount {get;}
 
         Type KeyType {get;}
 
@@ -59,8 +59,8 @@ namespace Z0
 
         ref T this[K index]{get;}
 
-        Count ISemanticLookup.EntryCount
-            => View.Length;
+        uint ISemanticLookup.EntryCount
+            => (uint)View.Length;
     }
 
      [Free]

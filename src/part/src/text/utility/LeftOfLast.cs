@@ -11,7 +11,6 @@ namespace Z0
 
     partial class XText
     {
-
         [TextUtility]
         public static string LeftOfLast(this string s, string match)
         {

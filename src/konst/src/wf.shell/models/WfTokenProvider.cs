@@ -7,30 +7,23 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static z;
 
-    public class WfTokenizer
+    public class WfTokenProvider
     {
         long StartToken;
 
-        long EndToken;
-
         ExecTokens Tokens;
 
-        public WfTokenizer()
+        public WfTokenProvider()
         {
             StartToken = 0;
-            EndToken = 0;
             Tokens = ExecTokens.init();
         }
 
         [MethodImpl(Inline)]
-        public WfExecToken Open()
-            => new WfExecToken((ulong)atomic(ref StartToken));
-
-        [MethodImpl(Inline)]
-        public WfExecToken Close(WfExecToken src)
-            => src.Complete((ulong)atomic(ref EndToken));
+        public WfExecToken Dispense()
+            => new WfExecToken((ulong)root.atomic(ref StartToken));
     }
 }

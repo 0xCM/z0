@@ -15,10 +15,17 @@ namespace Z0
     public struct LookupTable<K,V>
         where K : unmanaged
     {
-        public LookupEntry<K,V>[] Entries;
+        public Index<LookupEntry<K,V>> Entries;
 
         [MethodImpl(Inline)]
-        public LookupTable(LookupEntry<K,V>[] src)
+        public LookupTable(Index<LookupEntry<K,V>> src)
             => Entries = src;
+
+
+        public ref LookupEntry<K,V> First
+        {
+            [MethodImpl(Inline)]
+            get => ref Entries.First;
+        }
     }
 }

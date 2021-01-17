@@ -42,7 +42,7 @@ namespace Z0
             }
         }
 
-        void check<T>(in DomainCase<T> spec, ReadOnlySpan<T> points)
+        void check<T>(in RngTestCase<T> spec, ReadOnlySpan<T> points)
             where T : unmanaged
         {
             var domain = spec.SampleDomain;

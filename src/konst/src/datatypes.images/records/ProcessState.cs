@@ -4,11 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.InteropServices;
     using System.Diagnostics;
 
-    [StructLayout(LayoutKind.Sequential), Record]
+    [Record]
     public struct ProcessState : IRecord<ProcessState>
     {
         /// <summary>

@@ -109,7 +109,7 @@ namespace Z0
         public static ref readonly Bin<T> next<T>(in Bin<T> bin)
             where T : unmanaged
         {
-            atomic(ref edit(bin.Counter));
+            root.atomic(ref edit(bin.Counter));
             return ref bin;
         }
 

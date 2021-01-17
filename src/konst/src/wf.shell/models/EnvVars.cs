@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     [ApiHost]
     public readonly struct EnvVars
@@ -28,6 +28,6 @@ namespace Z0
 
         [MethodImpl(Inline), Op, Closures(UInt64k)]
         public EnvVar<T> map<T>(EnvVar src, Func<string,T> f)
-            => define(src.Name,f(src.Value));
+            => define(src.Name, f(src.Value));
     }
 }

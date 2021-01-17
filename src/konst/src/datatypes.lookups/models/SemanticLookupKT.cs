@@ -14,37 +14,37 @@ namespace Z0
     {
         readonly Type Key;
 
-        readonly T[] Storage;
+        readonly Index<T> Storage;
 
-        readonly K[] keys;
+        readonly Index<K> Keys;
 
-        readonly EnumLiteralDetail<K>[] keyIndex;
+        readonly Index<EnumLiteralDetail<K>> _KeyIndex;
 
-        readonly string[] keyNames;
+        readonly Index<string> _KeyNames;
 
-        readonly ClrEnumKind keyKind;
+        readonly ClrEnumKind _KeyKind;
 
         [MethodImpl(Inline)]
         public SemanticLookup(T[] data)
         {
             Storage = data;
             Key = typeof(K);
-            keys = Enums.literals<K>();
-            keyIndex = Enums.index<K>().Content;
-            keyNames = ClrEnums.names<K>();
-            keyKind = ClrEnums.@base<K>();
+            Keys = Enums.literals<K>();
+            _KeyIndex = Enums.index<K>().Content;
+            _KeyNames = ClrEnums.names<K>();
+            _KeyKind = ClrEnums.@base<K>();
         }
 
         public ReadOnlySpan<T> View
         {
             [MethodImpl(Inline)]
-            get => Storage;
+            get => Storage.View;
         }
 
         public Span<T> Edit
         {
             [MethodImpl(Inline)]
-            get => Storage;
+            get => Storage.Edit;
         }
 
         public ref T this[K index]
@@ -53,10 +53,10 @@ namespace Z0
             get => ref Storage[EnumValue.scalar<K,ushort>(index)];
         }
 
-        public Count EntryCount
+        public uint EntryCount
         {
             [MethodImpl(Inline)]
-            get => Storage.Length;
+            get => Storage.Count;
         }
 
         public Type KeyType
@@ -68,25 +68,25 @@ namespace Z0
         public ReadOnlySpan<K> KeyValues
         {
             [MethodImpl(Inline)]
-            get => keys;
+            get => Keys.View;
         }
 
         public ReadOnlySpan<EnumLiteralDetail<K>> KeyIndex
         {
             [MethodImpl(Inline)]
-            get => keyIndex;
+            get => _KeyIndex.View;
         }
 
         public ReadOnlySpan<string> KeyNames
         {
             [MethodImpl(Inline)]
-            get => keyNames;
+            get => _KeyNames.View;
         }
 
         public ClrEnumKind KeyKind
         {
             [MethodImpl(Inline)]
-            get => keyKind;
+            get => _KeyKind;
         }
     }
 }

@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
 
-    using static z;
-
     partial class WfShell
     {
         [Op]
@@ -15,7 +13,7 @@ namespace Z0
         {
             var types = wf.Components.Types();
             var reactors = types.Concrete().Tagged<CmdReactorAttribute>().Select(t => (ICmdReactor)Activator.CreateInstance(t));
-            iter(reactors, r => r.Init(wf));
+            root.iter(reactors, r => r.Init(wf));
             return reactors;
         }
     }

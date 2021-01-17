@@ -70,5 +70,7 @@ namespace Z0
         public const string dumps = nameof(dumps);
 
         public const string bin = nameof(bin);
+
+        public const string source = nameof(source);
     }
 }

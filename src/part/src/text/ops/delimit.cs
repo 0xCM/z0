@@ -12,7 +12,7 @@ namespace Z0
 
     partial struct text
     {
-        [Op, Closures(UnsignedInts)]
+        [Op, Closures(Closure)]
         public static string delimit<T>(T[] items, char delimiter)
         {
             var dst = text.build();

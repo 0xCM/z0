@@ -9,6 +9,6 @@ namespace Z0
     [ApiHost]
     public static partial class XText
     {
-        const NumericKind Closure = UnsignedInts;
+        const NumericKind Closure = UInt64k;
     }
 }

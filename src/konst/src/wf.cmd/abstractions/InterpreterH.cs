@@ -53,7 +53,7 @@ namespace Z0
 
         bool Initialized;
 
-        WfTokenizer Tokenizer;
+        WfTokenProvider Tokenizer;
 
         readonly ConcurrentQueue<string> CommandQueue;
 
@@ -175,7 +175,7 @@ namespace Z0
             {
                 if(CommandQueue.TryDequeue(out var cmd))
                 {
-                    var token = Tokenizer.Open();
+                    var token = Tokenizer.Dispense();
                     ExecLog[token.StartSeq] = token;
                     Worker.StandardInput.WriteLine(cmd);
                     Dispatch();

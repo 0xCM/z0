@@ -9,27 +9,14 @@ namespace Z0
     using System.Diagnostics;
 
     using static Part;
-    using static z;
+    using static memory;
 
     partial struct ImageMaps
     {
-
-        [MethodImpl(Inline), Op]
-        public static ref ProcessModuleRow fill(ProcessModule src, ref ProcessModuleRow dst)
-        {
-            dst.ImageName = src.ModuleName;
-            dst.BaseAddress = src.BaseAddress;
-            dst.EntryAddress = src.EntryPointAddress;
-            dst.ImagePath = FS.path(src.FileName);
-            dst.MemorySize = src.ModuleMemorySize;
-            dst.Version = pair((uint)src.FileVersionInfo.FileMajorPart, (uint)src.FileVersionInfo.FileMinorPart);
-            return ref dst;
-        }
-
         [MethodImpl(Inline), Op]
         public static void fill(ProcessModule[] src, ProcessModuleRow[] dst)
         {
-            var count = min(src.Length, dst.Length);
+            var count = root.min(src.Length, dst.Length);
             ref readonly var s = ref first(span(src));
             ref var t = ref first(span(dst));
             for(var i=0u; i<count; i++)
@@ -39,7 +26,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static void fill(Process[] src, ProcessState[] dst)
         {
-            var count = min(src.Length, dst.Length);
+            var count = root.min(src.Length, dst.Length);
             ref readonly var s = ref first(span(src));
             ref var t = ref first(span(dst));
             for(var i=0u; i<count; i++)
@@ -47,6 +34,18 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
+        public static ref ProcessModuleRow fill(ProcessModule src, ref ProcessModuleRow dst)
+        {
+            dst.ImageName = src.ModuleName;
+            dst.BaseAddress = src.BaseAddress;
+            dst.EntryAddress = src.EntryPointAddress;
+            dst.ImagePath = FS.path(src.FileName);
+            dst.MemorySize = src.ModuleMemorySize;
+            dst.Version = root.pair((uint)src.FileVersionInfo.FileMajorPart, (uint)src.FileVersionInfo.FileMinorPart);
+            return ref dst;
+        }
+
+        [Op]
         public static ref ProcessState fill(Process src, ref ProcessState dst)
         {
             dst.ImageName = src.ProcessName;
@@ -60,7 +59,7 @@ namespace Z0
             dst.UserRuntime = src.UserProcessorTime;
             dst.ImagePath = FS.path(src.MainModule.FileName);
             dst.MemorySize = src.MainModule.ModuleMemorySize;
-            dst.ImageVersion = pair((uint)src.MainModule.FileVersionInfo.FileMajorPart, (uint)src.MainModule.FileVersionInfo.FileMinorPart);
+            dst.ImageVersion = root.pair((uint)src.MainModule.FileVersionInfo.FileMajorPart, (uint)src.MainModule.FileVersionInfo.FileMinorPart);
             dst.EntryAddress = src.MainModule.EntryPointAddress;
             dst.VirtualSize = src.VirtualMemorySize64;
             dst.MaxVirtualSize = src.PeakVirtualMemorySize64;

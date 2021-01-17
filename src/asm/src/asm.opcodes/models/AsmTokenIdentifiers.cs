@@ -13,19 +13,19 @@ namespace Z0
 
     public readonly struct AsmTokenIdentifiers
     {
-        public readonly string[] Storage;
+        readonly Index<string> Data;
 
         [MethodImpl(Inline)]
         public static AsmTokenIdentifiers create()
             => new AsmTokenIdentifiers(TokenCount);
 
         public SemanticLookup<AsmTokenKind,string> semantic()
-            => Lookups.semantic(Storage, AsmTokenKind.None);
+            => Lookups.semantic(Data, AsmTokenKind.None);
 
         [MethodImpl(Inline)]
         public AsmTokenIdentifiers(uint count)
         {
-            Storage = new string[TokenCount]{
+            Data = new string[TokenCount]{
                 None, bnd, DST, ᛁerᛁ,  imm8, imm16, imm32, imm64, k1, m, m8,
                 m16, m32, m64, m128, m16ᙾ16, m16ᙾ32, m16ᙾ64, m16Ʌ32, m16Ʌ16,
                 m32Ʌ32, m16Ʌ64, m32fp, m64fp, m80fp, m16int, m32int, m64int,
@@ -42,7 +42,7 @@ namespace Z0
         public ReadOnlySpan<string> View
         {
             [MethodImpl(Inline)]
-            get => Storage;
+            get => Data.View;
         }
 
         public Count Count
@@ -53,7 +53,7 @@ namespace Z0
         public ref readonly string this[AsmTokenKind index]
         {
             [MethodImpl(Inline)]
-            get => ref Storage[(int)index];
+            get => ref Data[(int)index];
         }
     }
 }

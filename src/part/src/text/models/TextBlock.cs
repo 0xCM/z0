@@ -9,8 +9,6 @@ namespace Z0
 
     using static Part;
 
-    using api = TextBlocks;
-
     public readonly struct TextBlock : IDataTypeComparable<TextBlock>
     {
         readonly string Data;

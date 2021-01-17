@@ -6,11 +6,10 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
-    using static Konst;
+    using static Part;
 
-    partial struct z
+    partial struct memory
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static unsafe decimal @decimal<T>(T src)

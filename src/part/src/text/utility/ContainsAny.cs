@@ -8,8 +8,6 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
-    using static Part;
-
     partial class XText
     {
         /// <summary>

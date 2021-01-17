@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     partial struct Konst
     {
         /// <summary>
@@ -105,7 +105,7 @@ namespace Z0
         /// Identifies term 19 of a sequence
         /// </summary>
         public const byte Pos19 = 19;
- 
+
         /// <summary>
         /// Identifies term 20 of a sequence
         /// </summary>
@@ -155,7 +155,7 @@ namespace Z0
         /// Identifies term 29 of a sequence
         /// </summary>
         public const byte Pos29 = 29;
- 
+
         /// <summary>
         /// Identifies term 30 of a sequence
         /// </summary>
@@ -204,7 +204,7 @@ namespace Z0
         /// <summary>
         /// Identifies term 39 of a sequence
         /// </summary>
-        public const byte Pos39 = 39; 
+        public const byte Pos39 = 39;
 
         /// <summary>
         /// Identifies term 40 of a sequence
@@ -254,7 +254,6 @@ namespace Z0
         /// <summary>
         /// Identifies term 49 of a sequence
         /// </summary>
-        public const byte Pos49 = 49;          
-
+        public const byte Pos49 = 49;
     }
 }

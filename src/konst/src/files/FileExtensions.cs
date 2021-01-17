@@ -153,5 +153,10 @@ namespace Z0
         /// Defines the <see cref='dmp'/> <see cref='FileExt'/>
         /// </summary>
         public static FileExt Dmp => ext(dmp);
+
+        /// <summary>
+        /// Defines the <see cref='zip'/> <see cref='FileExt'/>
+        /// </summary>
+        public static FileExt Zip => ext(zip);
     }
 }

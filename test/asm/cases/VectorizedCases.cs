@@ -8,11 +8,10 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     static class VectorizedCases
     {
-
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Vector256<T> vand<T>(Vector256<T> a, Vector256<T> b)
             where T : unmanaged

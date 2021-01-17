@@ -12,7 +12,7 @@ namespace Z0
     partial class WfShell
     {
         [MethodImpl(Inline), Op]
-        public static WfTokenizer tokenizer()
-            => new WfTokenizer();
+        public static WfTokenProvider tokenizer()
+            => new WfTokenProvider();
     }
 }

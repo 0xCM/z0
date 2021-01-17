@@ -26,14 +26,14 @@ namespace Z0
         public PartId PartId {get;}
 
         /// <summary>
-        /// The process entry point
-        /// </summary>
-        public MemoryAddress EntryAddress {get;}
-
-        /// <summary>
         /// The image's memory base
         /// </summary>
         public MemoryAddress BaseAddress {get;}
+
+        /// <summary>
+        /// The process entry point
+        /// </summary>
+        public MemoryAddress EntryAddress {get;}
 
         /// <summary>
         /// The image size
@@ -77,14 +77,11 @@ namespace Z0
             get => (BaseAddress, EndAddress);
         }
 
-        MemoryAddress IAddressable<MemoryAddress>.Address
-            => BaseAddress;
-
         public int CompareTo(LocatedImage src)
             => BaseAddress.CompareTo(src.BaseAddress);
 
         public string Format()
-            => LocatedImages.format(this);
+            => ImageMaps.format(this);
 
 
         public override string ToString()

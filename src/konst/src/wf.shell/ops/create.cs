@@ -12,16 +12,12 @@ namespace Z0
 
     partial class WfShell
     {
-        [MethodImpl(Inline), Op]
-        public static IWfContext<C> inject<C>(IWfContext src, C data)
-            => new WfContext<C>(src, data);
-
         [Op]
         public static IWfShell create(ApiPartSet parts, string[] args, bool verbose = true)
         {
 
             var status = new WfInitStatus();
-            status.StartTS = now();
+            status.StartTS = root.now();
 
             var msg = $"[{status.StartTS}] | Creating shell and associated dependencies";
             if(verbose)
@@ -69,7 +65,6 @@ namespace Z0
             if(verbose)
                 term.inform(msg);
 
-
             status.ShellCreateTime = clock.Elapsed;
             status.FinishTS = now();
             status.Args = args;
@@ -77,13 +72,6 @@ namespace Z0
             status.LogConfig = appLogConfig;
             status.Parts = partIdList;
             status.AppConfigPath = _paths.AppConfigPath;
-
-            // if(verbose)
-            // {
-            //     var dst = Buffers.text();
-            //     render(status, dst);
-            //     wf.Status(dst.Emit());
-            // }
 
             return wf;
         }

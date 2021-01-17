@@ -8,10 +8,21 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Threading;
 
-    using static Konst;
+    using static Part;
 
-    partial struct z
+    partial struct root
     {
+        /// <summary>
+        /// Applies a function to a value
+        /// </summary>
+        /// <param name="x">The source value</param>
+        /// <param name="f">The function to apply</param>
+        /// <typeparam name="X">The source value type</typeparam>
+        /// <typeparam name="Y">The output value type</typeparam>
+         [MethodImpl(Inline)]
+         public static Y apply<X,Y>(X x, Func<X,Y> f)
+            => f(x);
+
         /// <summary>
         /// Atomically increments a value in-place
         /// </summary>

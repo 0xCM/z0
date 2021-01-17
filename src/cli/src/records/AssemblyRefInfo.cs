@@ -15,10 +15,10 @@ namespace Z0
     {
         public const string TableId = "cli.assemblyref";
 
-        public const byte FieldCount = 2;
-
         public AssemblyName Source;
 
         public AssemblyName Target;
+
+        public BinaryCode Token;
     }
 }

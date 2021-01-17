@@ -30,7 +30,7 @@ namespace Z0
         /// <param name="src">The source type</param>
         /// <param name="match">The literal field type to match</param>
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<FieldInfo> LiteralFields(this Type src, Type match)
+        public static FieldInfo[] LiteralFields(this Type src, Type match)
             => src.GetFields(BF_Declared).Where(f => f.IsLiteral && f.FieldType == match);
     }
 }

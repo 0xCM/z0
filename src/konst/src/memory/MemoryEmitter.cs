@@ -36,13 +36,12 @@ namespace Z0
         public void Emit2(MemoryRange src, FS.FilePath dst)
         {
             using var writer = dst.Writer();
-            Emit2(src,writer);
+            Emit2(src, writer);
         }
 
         [Op]
         public void Emit2(MemoryAddress @base, ByteSize size, FS.FilePath dst)
             => Emit2((@base,  @base + size), dst);
-
 
         [Op]
         public void Emit(MemoryRange src, StreamWriter dst)

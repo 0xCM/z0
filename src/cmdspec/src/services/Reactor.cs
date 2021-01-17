@@ -73,13 +73,13 @@ namespace Z0
                     Run(Builder.DumpImages(srcDir, dstDir));
                 break;
                 case ShowProcessMemoryCmd.CmdName:
-                    Run(Builder.ShowProcessMemory());
+                    Builder.ShowProcessMemory().Run(Wf);
                     break;
                 case EmitEnumCatalogCmd.CmdName:
-                    Run(Builder.EmitEnumCatalog());
+                    Builder.EmitEnumCatalog().Run(Wf);
                     break;
                 case CheckServiceCmd.CmdName:
-                    Run(Builder.CheckService(a0));
+                    Builder.CheckService(a0).Run(Wf);
                     break;
                 case JitApiCmd.CmdName:
                     Run(Builder.JitApiCmd());
@@ -91,10 +91,13 @@ namespace Z0
                     Run(Builder.EmitImageMaps());
                     break;
                 case EmitHexIndexCmd.CmdName:
-                    Run(Builder.EmitHexIndex());
+                    Builder.EmitHexIndex().Run(Wf);
+                break;
+                case EmitAssemblyRefsCmd.CmdName:
+                    Builder.EmitAssemblyRefs().Run(Wf);
                 break;
                 case EmitRuntimeIndexCmd.CmdName:
-                    Run(Builder.EmitRuntimeIndex());
+                    Builder.EmitRuntimeIndex().Run(Wf);
                 break;
                 case DumpCliTablesCmd.CmdName:
                     Run(Builder.DumpCliTables(Parts.Part.Assembly));
@@ -114,7 +117,7 @@ namespace Z0
             }
         }
 
-        public IndexedView<CmdId> SupportedCommands()
+        public ReadOnlySpan<CmdId> SupportedCommands()
             => Wf.Router.SupportedCommands;
 
         public void ShowSupported()
@@ -141,11 +144,6 @@ namespace Z0
             }
         }
 
-        void Run(in EmitHexIndexCmd cmd)
-        {
-            cmd.Dispatch(Wf).Wait();
-        }
-
         void Run(in ShowProcessMemoryCmd cmd)
         {
             cmd.Dispatch(Wf).Wait();
@@ -157,11 +155,6 @@ namespace Z0
         }
 
         void Run(in EmitRuntimeIndexCmd cmd)
-        {
-            cmd.Dispatch(Wf).Wait();
-        }
-
-        void Run(in EmitEnumCatalogCmd cmd)
         {
             cmd.Dispatch(Wf).Wait();
         }

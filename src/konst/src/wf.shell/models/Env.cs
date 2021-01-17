@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Reifies an application environment service predicated on environment variables
@@ -26,6 +26,8 @@ namespace Z0
 
         const string ZDb = nameof(ZDb);
 
+        const string DOTNET_ROOT = nameof(DOTNET_ROOT);
+
         public FS.FolderPath LogRoot;
 
         public FS.FolderPath DevRoot;
@@ -38,6 +40,11 @@ namespace Z0
 
         public FS.FolderPath SystemControl;
 
+        /// <summary>
+        /// The .net core sdk installation directory
+        /// </summary>
+        public FS.FolderPath DotNetRoot;
+
         [MethodImpl(Inline), Op]
         public static Env create()
         {
@@ -48,6 +55,7 @@ namespace Z0
             dst.ArchiveRoot = read(ZArchive).Transform(FS.dir);
             dst.SystemControl = read(ZControl).Transform(FS.dir);
             dst.ToolRoot = read(ZToolRoot).Transform(FS.dir);
+            dst.DotNetRoot = read(DOTNET_ROOT).Transform(FS.dir);
             return dst;
         }
 

@@ -55,10 +55,6 @@ namespace Z0
             }
 
             return new ApiPartSet(control);
-            // if(parts.Length != 0)
-            //    return new ApiPartSet(control, parts);
-            // else
-            //     return new ApiPartSet(control);
         }
 
     }

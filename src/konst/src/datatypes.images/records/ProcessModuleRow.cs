@@ -4,9 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    [Record]
+    [Record(TableId)]
     public struct ProcessModuleRow : IRecord<ProcessModuleRow>
     {
+        public const string TableId = "process-module";
+
         public MemoryAddress BaseAddress;
 
         public ByteSize MemorySize;

@@ -5,21 +5,24 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
-    using System.Reflection;
     using System.Runtime.CompilerServices;
+    using System.Diagnostics;
 
     using static Part;
-    using static ReflectionFlags;
+    using static memory;
 
-    partial class ClrQuery
+    partial struct ImageMaps
     {
         /// <summary>
-        /// All of the methods belong to us
+        /// Captures the current process state
         /// </summary>
-        /// <param name="src">The type to examine</param>
+        /// <param name="src">The source process</param>
         [MethodImpl(Inline), Op]
-        public static MethodInfo[] WorldMethods(this Type src)
-            => src.GetMethods(BF_World);
+        public static ProcessState state(Process src)
+        {
+            var dst = new ProcessState();
+            fill(src, ref dst);
+            return dst;
+        }
     }
 }

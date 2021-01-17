@@ -184,7 +184,7 @@ namespace Z0
         {
             using var flow = Wf.Running();
             using var runner = new ToolRunner(Wf, Host);
-            iter(Wf.Router.SupportedCommands.Storage, c => Wf.Status($"{c} enabled"));
+            root.iter(Wf.Router.SupportedCommands, c => Wf.Status($"{c} enabled"));
 
             var pipe = Pipes.pipe<ushort>();
             var count = 10;
@@ -206,15 +206,6 @@ namespace Z0
 
         CmdResult EmitAsmMnemonics()
             => Wf.Router.Dispatch(CmdBuilder.EmitAsmMnemonics());
-
-        CmdResult EmitAsmRefs()
-        {
-            var srcDir = FS.dir("k:/z0/builds/nca.3.1.win-x64");
-            var sources = array(srcDir + FS.file("z0.konst.dll"), srcDir + FS.file("z0.asm.dll"));
-            var dst = Db.Doc("AssemblyReferences", FileExtensions.Csv);
-            var cmd = EmitAssemblyRefs.specify(Wf, sources, dst);
-            return EmitAssemblyRefs.run(Wf,cmd);
-        }
 
         void EmitImageHeaders()
         {

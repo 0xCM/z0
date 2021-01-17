@@ -44,7 +44,7 @@ namespace Z0
             Parts = Wf.Api.Parts;
             Index = default;
             TargetDir = wf.ResourceRoot + FS.folder("images");
-            Images = LocatedImages.index();
+            Images = ImageMaps.index();
             wf.Created();
         }
 

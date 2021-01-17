@@ -5,16 +5,17 @@
 namespace Z0
 {
     using System;
-    
+
     partial class XTend
     {
         /// <summary>
         /// Formats each source element on a new line
         /// </summary>
         /// <param name="src">The source span</param>
+        [TextUtility, Closures(Closure)]
         public static string FormatLines<T>(this ReadOnlySpan<T> src)
         {
-            var lines = string.Empty.Build();
+            var lines = text.build();
             for(var i=0; i<src.Length; i++)
                 lines.AppendLine(src[i].ToString());
             return lines.ToString();
@@ -24,6 +25,7 @@ namespace Z0
         /// Formats each source element on a new line
         /// </summary>
         /// <param name="src">The source span</param>
+        [TextUtility, Closures(Closure)]
         public static string FormatLines<T>(this Span<T> src)
             => src.ReadOnly().FormatLines();
     }

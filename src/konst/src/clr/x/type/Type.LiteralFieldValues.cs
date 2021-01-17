@@ -43,7 +43,7 @@ namespace Z0
             var dst = alloc<T>(fields.Length);
             ref var target = ref first(dst);
             for(var i=0u; i<count; i++)
-                seek(target,i) = (T)skip(fields,i).GetRawConstantValue();
+                seek(target, i) = (T)skip(fields, i).GetRawConstantValue();
             return dst;
         }
     }

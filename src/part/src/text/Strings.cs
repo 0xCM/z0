@@ -15,7 +15,7 @@ namespace Z0
     [ApiHost(ApiNames.Strings, true)]
     public readonly struct Strings
     {
-        const NumericKind Closure = UnsignedInts;
+        const NumericKind Closure = UInt64k;
 
         /// <summary>
         /// Creates a new stringbuilder

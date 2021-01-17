@@ -56,7 +56,7 @@ namespace Z0
         public static TimeSeries<T> Define<T>(Interval<T> domain, ulong[] seed)
             where T : unmanaged
         {
-            var id = atomic(ref LastSeriesId);
+            var id = root.atomic(ref LastSeriesId);
             var rng = Rng.xorShift1024(seed);
             if(!States.TryAdd(id,rng))
                 throw new Exception($"Key {id} already exists");

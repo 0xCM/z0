@@ -7,33 +7,34 @@ namespace Z0
     using System;
     using System.Runtime.InteropServices;
 
-    using static Konst;
+    [Record(TableId)]
+    public struct RngTestCase<T> : IRecord<RngTestCase<T>>
+        where T : unmanaged
+    {
+        public const string TableId = "testcase-rng";
+
+        public uint SampleSize;
+
+        public uint SampleCount;
+
+        public ClosedInterval<T> SampleDomain;
+
+        public utf8 Description;
+    }
+
 
     public readonly partial struct RngCases
     {
-        [StructLayout(DefaultLayout), Record]
-        public struct DomainCase<T> : IRecord<DomainCase<T>>
-            where T : unmanaged
-        {
-            public uint SampleSize;
-
-            public uint SampleCount;
-
-            public ClosedInterval<T> SampleDomain;
-
-            public utf8 Description;
-        }
-
         public struct DomainCase
         {
             const uint SampleSizeDefault = Pow2.T16;
 
             const uint SampleCountDefault = Pow2.T10;
 
-            public static DomainCase<T> init<T>(T min, T max)
+            public static RngTestCase<T> init<T>(T min, T max)
                 where T : unmanaged
             {
-                var dst = new DomainCase<T>();
+                var dst = new RngTestCase<T>();
                 dst.SampleDomain = (min,max);
                 dst.SampleSize = SampleSizeDefault;
                 dst.SampleCount = SampleCountDefault;

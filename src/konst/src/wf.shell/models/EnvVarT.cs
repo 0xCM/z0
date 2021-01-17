@@ -7,27 +7,16 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Defines a value-parametric environment variable
     /// </summary>
     public readonly struct EnvVar<T> : ITextual
     {
-        public readonly string Name;
+        public Name Name {get;}
 
-        public readonly T Value;
-
-        public static implicit operator EnvVar(EnvVar<T> src)
-            => EnvVars.define(src.Name, src.Value.ToString());
-
-        [MethodImpl(Inline)]
-        public static implicit operator EnvVar<T>((string name, T value) src)
-            => new EnvVar<T>(src.name, src.value);
-
-        [MethodImpl(Inline)]
-        public static implicit operator T(EnvVar<T> src)
-            => src.Value;
+        public T Value {get;}
 
         [MethodImpl(Inline)]
         public EnvVar(string name, T value)
@@ -37,7 +26,7 @@ namespace Z0
         }
 
         public string Format()
-            => $"{Name} := {Value}";
+            => $"{Name}:={Value}";
 
         public override string ToString()
             => Format();
@@ -51,5 +40,16 @@ namespace Z0
 
         public override bool Equals(object src)
             => src is EnvVar<T> v && Equals(v);
+
+        public static implicit operator EnvVar(EnvVar<T> src)
+            => EnvVars.define(src.Name, src.Value.ToString());
+
+        [MethodImpl(Inline)]
+        public static implicit operator EnvVar<T>((string name, T value) src)
+            => new EnvVar<T>(src.name, src.value);
+
+        [MethodImpl(Inline)]
+        public static implicit operator T(EnvVar<T> src)
+            => src.Value;
     }
 }

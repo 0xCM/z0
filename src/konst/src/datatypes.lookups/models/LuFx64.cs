@@ -50,53 +50,5 @@ namespace Z0
             public ref K Key(uint i)
                 => ref KeyValues[i];
         }
-
-        /// <summary>
-        /// Defines an 8-bit lookup table predicated on an explicit lookup function
-        /// </summary>
-        public readonly struct Lu8<V>
-        {
-            internal readonly LookupTable<byte,V> Entries;
-
-            [MethodImpl(Inline)]
-            public Lu8(LookupTable<byte,V> src)
-                => Entries = src;
-        }
-
-        /// <summary>
-        /// Defines a 16-bit lookup tablee
-        /// </summary>
-        public readonly struct Lu16<V>
-        {
-            readonly LookupTable<ushort,V> Entries;
-
-            [MethodImpl(Inline)]
-            public Lu16(LookupTable<ushort,V> src)
-                => Entries = src;
-        }
-
-        /// <summary>
-        /// Defines a 32-bit lookup tablee
-        /// </summary>
-        public readonly struct Lu32<V>
-        {
-            readonly LookupTable<uint,V> Entries;
-
-            [MethodImpl(Inline)]
-            public Lu32(LookupTable<uint,V> src)
-                => Entries = src;
-        }
-
-        /// <summary>
-        /// Defines a 64-bit lookup tablee
-        /// </summary>
-        public readonly struct Lu64<V>
-        {
-            readonly LookupTable<ulong,V> Entries;
-
-            [MethodImpl(Inline)]
-            public Lu64(LookupTable<ulong,V> src)
-                => Entries = src;
-        }
     }
 }

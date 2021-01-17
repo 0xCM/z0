@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-
     partial class XText
     {
        /// <summary>
@@ -18,7 +16,7 @@ namespace Z0
         /// <param name="c">The character</param>
         [TextUtility]
         public static string LeftOfFirst(this string s, char c)
-            => s.Substring(0, apply(s.IndexOf(c), idx => idx == -1 ? s.Length - 1 : idx));
+            => s.Substring(0, root.apply(s.IndexOf(c), idx => idx == -1 ? s.Length - 1 : idx));
 
         /// <summary>
         /// Gets the string to the left of, but not including, a specified substring

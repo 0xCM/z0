@@ -17,6 +17,6 @@ namespace Z0
 
         void ShowSupported();
 
-        IndexedView<CmdId> SupportedCommands();
+        ReadOnlySpan<CmdId> SupportedCommands();
     }
 }

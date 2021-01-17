@@ -7,6 +7,6 @@ namespace Z0
     sealed class EmitImageMaps : CmdReactor<EmitImageMapsCmd, Index<LocatedImageRow>>
     {
         protected override Index<LocatedImageRow> Run(EmitImageMapsCmd cmd)
-            => ImageMaps.emit(cmd.Target);
+            => ImageMaps.emit(ImageMaps.index(), cmd.Target);
     }
 }

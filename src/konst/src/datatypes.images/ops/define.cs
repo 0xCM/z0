@@ -7,26 +7,28 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Diagnostics;
+    using System.Linq;
+    using System.IO;
 
     using static Part;
-    using static z;
+    using static memory;
 
     partial struct ImageMaps
     {
-        /// <summary>
+       /// <summary>
         /// Creates a <see cref='ImageMap'/> for the current process
         /// </summary>
         [Op]
-        public static ImageMap create()
-            => create(sys.CurrentProcess);
+        public static ImageMap define()
+            => define(sys.CurrentProcess);
 
         [Op]
-        public static ImageMap create(Process src)
+        public static ImageMap define(Process src)
         {
-            var images = LocatedImages.index(src);
+            var images = index(src);
             ref readonly var image = ref images.First;
             var count = images.Count;
-            var locations = sys.alloc<MemoryAddress>(count);
+            var locations = alloc<MemoryAddress>(count);
             ref var location = ref first(locations);
             for(var i=0; i<count; i++)
                 seek(location,i) = skip(image,i).BaseAddress;

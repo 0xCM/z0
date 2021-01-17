@@ -182,5 +182,10 @@ namespace Z0
         /// Defines the 'dmp' literal
         /// </summary>
         public const string dmp = nameof(dmp);
+
+        /// <summary>
+        /// Defines the 'zip' literal
+        /// </summary>
+        public const string zip = nameof(zip);
     }
 }

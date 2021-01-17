@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The type to examine</param>
         [MethodImpl(Inline), Op]
-        public static Index<Type> Interfaces(this Type src)
-            => src.GetInterfaces() ?? Index<Type>.Empty;
+        public static Type[] Interfaces(this Type src)
+            => src.GetInterfaces();
     }
 }
