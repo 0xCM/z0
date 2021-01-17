@@ -113,9 +113,16 @@ namespace Z0
                 Wf.Error($"The file {src} does not exist");
         }
 
+        public void LoadDocs()
+        {
+            // const string TestCase = @"J:\lang\lisp\acl2\books\projects\x86isa\machine\linear-memory.lisp";
+            // var doc = LispDocs.load(FS.path(TestCase));
+            // Wf.Row(doc.Format());
+        }
+
         public void RunTests()
         {
-            SummarizeDataTypes();
+            LoadDocs();
         }
     }
 }

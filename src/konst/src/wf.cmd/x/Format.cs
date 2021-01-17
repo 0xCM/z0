@@ -7,18 +7,12 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Root;
+    using static Part;
 
-    public interface IMemoryStore : IDataStore
+    partial class XCmd
     {
-        UIntPtr StoreLocation {get;}
+        public static string Format<C>(this C src)
+            where C : struct, ICmdSpec<C>
+                => Cmd.format(src);
     }
-
-    public interface IMemoryStore<T> : IMemoryStore, IDataStore<T>
-        where T : struct
-    {
-        ref T StoredData {get;}
-    }
-
-
 }

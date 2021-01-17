@@ -6,9 +6,7 @@ namespace Z0
 {
     using System;
     using System.Reflection;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.Linq;
     using System.IO;
 
     [ApiHost]
@@ -71,11 +69,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static PartId withSvc(PartId a)
             => a | PartId.Svc;
-
-    }
-
-    public static partial class XTend
-    {
-
     }
 }

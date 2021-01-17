@@ -17,7 +17,7 @@ namespace Z0
 
         readonly int RepCount;
 
-        ExecutorContext Context;
+        EvalExecutorContext Context;
 
         [MethodImpl(Inline)]
         internal EvalExecutor(IPolyStream random)

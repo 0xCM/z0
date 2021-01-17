@@ -9,16 +9,11 @@ namespace Z0
 
     using static Root;
 
-    public interface IMemoryStore : IDataStore
-    {
-        UIntPtr StoreLocation {get;}
-    }
-
-    public interface IMemoryStore<T> : IMemoryStore, IDataStore<T>
+    public abstract class MemoryStore<H,T>
+        where H : MemoryStore<H,T>
         where T : struct
     {
-        ref T StoredData {get;}
+        [FixedAddressValueType]
+        protected static T Data;
     }
-
-
 }

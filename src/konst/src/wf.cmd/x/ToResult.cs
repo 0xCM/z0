@@ -7,18 +7,12 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Root;
+    using static Part;
 
-    public interface IMemoryStore : IDataStore
+    partial class XCmd
     {
-        UIntPtr StoreLocation {get;}
+        public static  CmdResult<C,P> ToResult<C,P>(this C spec, Outcome<P> outcome)
+            where C : struct, ICmdSpec<C>
+                => Cmd.result(spec, outcome.Ok, outcome.Data, outcome.Message);
     }
-
-    public interface IMemoryStore<T> : IMemoryStore, IDataStore<T>
-        where T : struct
-    {
-        ref T StoredData {get;}
-    }
-
-
 }

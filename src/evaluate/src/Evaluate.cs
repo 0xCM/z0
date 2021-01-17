@@ -14,8 +14,8 @@ namespace Z0
     public readonly struct Evaluate
     {
         [MethodImpl(Inline), Op]
-        public static ExecutorContext context(IPolyStream src, uint count)
-            => new ExecutorContext(src, count,0);
+        public static EvalExecutorContext context(IPolyStream src, uint count)
+            => new EvalExecutorContext(src, count,0);
 
         [MethodImpl(Inline), Op]
         public static IEvalDispatcher dispatcher(IPolyStream random, IAppMsgSink sink, uint bufferSize)

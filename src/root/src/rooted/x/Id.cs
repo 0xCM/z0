@@ -5,20 +5,15 @@
 namespace Z0
 {
     using System;
+    using System.Reflection;
     using System.Runtime.CompilerServices;
 
     using static Root;
 
-    public interface IMemoryStore : IDataStore
+    partial class XTend
     {
-        UIntPtr StoreLocation {get;}
+        [MethodImpl(Inline), Op]
+        public static PartId Id(this Assembly src)
+            => Root.id(src);
     }
-
-    public interface IMemoryStore<T> : IMemoryStore, IDataStore<T>
-        where T : struct
-    {
-        ref T StoredData {get;}
-    }
-
-
 }

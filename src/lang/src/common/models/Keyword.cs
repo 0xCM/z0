@@ -8,6 +8,7 @@ namespace Z0.Lang
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
 
     /// <summary>
     /// Specifies a keyword
@@ -26,6 +27,12 @@ namespace Z0.Lang
 
         public override string ToString()
             => Format();
+
+        public unsafe MemoryAddress Address
+        {
+            [MethodImpl(Inline)]
+            get => pchar(Name.Content);
+        }
 
         [MethodImpl(Inline)]
         public static implicit operator Keyword(string name)

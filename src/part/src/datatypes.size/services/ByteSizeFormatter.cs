@@ -7,18 +7,13 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Root;
+    using static Part;
+    using static root;
 
-    public interface IMemoryStore : IDataStore
+    [Formatter]
+    readonly struct ByteSizeFormatter : ITextFormatter<ByteSize>
     {
-        UIntPtr StoreLocation {get;}
+        public string Format(ByteSize src)
+            => src.Content == 0 ? "0" : src.Content.ToString("#,#");
     }
-
-    public interface IMemoryStore<T> : IMemoryStore, IDataStore<T>
-        where T : struct
-    {
-        ref T StoredData {get;}
-    }
-
-
 }

@@ -9,16 +9,12 @@ namespace Z0
 
     using static Root;
 
-    public interface IMemoryStore : IDataStore
+    public readonly struct ExecutorContext
     {
-        UIntPtr StoreLocation {get;}
+        public dynamic State {get;}
+
+        [MethodImpl(Inline)]
+        public ExecutorContext(dynamic state)
+            => State = state;
     }
-
-    public interface IMemoryStore<T> : IMemoryStore, IDataStore<T>
-        where T : struct
-    {
-        ref T StoredData {get;}
-    }
-
-
 }

@@ -17,6 +17,22 @@ namespace Z0
         protected PartId(PartId id)
             => Id = id;
 
+        public uint Hash
+        {
+            [MethodImpl(Inline)]
+            get => hash(Id);
+        }
+
+        public override int GetHashCode()
+            => (int)Hash;
+
+        [MethodImpl(Inline)]
+        public string Format()
+            => Root.format(Id);
+
+        public override string ToString()
+            => Format();
+
         [MethodImpl(Inline)]
         public static implicit operator PartId(PartId<P> src)
             => src.Id;
@@ -35,21 +51,5 @@ namespace Z0
 
         public override bool Equals(object src)
             => src is P x && Equals(x);
-
-        public uint Hash
-        {
-            [MethodImpl(Inline)]
-            get => hash(Id);
-        }
-
-        public override int GetHashCode()
-            => (int)Hash;
-
-        [MethodImpl(Inline)]
-        public string Format()
-            => Root.format(Id);
-
-        public override string ToString()
-            => Format();
     }
 }

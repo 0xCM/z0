@@ -7,18 +7,19 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Root;
-
-    public interface IMemoryStore : IDataStore
+    public interface IPartExecutor
     {
-        UIntPtr StoreLocation {get;}
+        Type ExecutorType {get;}
+
+        void Run();
+
+        void Run(ExecutorContext context);
     }
 
-    public interface IMemoryStore<T> : IMemoryStore, IDataStore<T>
-        where T : struct
+    public interface IPartExecutor<P> : IPartExecutor
+        where P : IPartExecutor<P>
     {
-        ref T StoredData {get;}
+        Type IPartExecutor.ExecutorType
+            => typeof(P);
     }
-
-
 }

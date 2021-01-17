@@ -7,18 +7,18 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Root;
-
-    public interface IMemoryStore : IDataStore
+    public struct LoopInfo
     {
-        UIntPtr StoreLocation {get;}
+        public ClrNumericKind IndexKind;
+
+        public ulong LowerBound;
+
+        public bit LowerInclusive;
+
+        public ulong UpperBound;
+
+        public bit UpperInclusive;
+
+        public ulong Step;
     }
-
-    public interface IMemoryStore<T> : IMemoryStore, IDataStore<T>
-        where T : struct
-    {
-        ref T StoredData {get;}
-    }
-
-
 }

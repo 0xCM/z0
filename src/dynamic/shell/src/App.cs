@@ -127,7 +127,7 @@ namespace Z0
 
         void RunFxWorkflows()
         {
-            FxWf.run(Wf);
+            FunctionWorkflows.run(Wf);
         }
 
 

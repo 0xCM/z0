@@ -2,20 +2,12 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-[assembly: PartId(PartId.Lang)]
-
-namespace Z0.Parts
+namespace Z0
 {
-    public sealed class Lang : Part<Lang>
+    using System;
+
+    public class PartExecutorAttribute : Attribute
     {
 
-    }
-
-    public sealed partial class LangExecutor : PartExecutor<LangExecutor>
-    {
-        public override void Run()
-        {
-
-        }
     }
 }

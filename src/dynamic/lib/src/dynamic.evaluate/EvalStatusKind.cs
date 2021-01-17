@@ -2,20 +2,12 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-[assembly: PartId(PartId.Lang)]
-
-namespace Z0.Parts
+namespace Z0
 {
-    public sealed class Lang : Part<Lang>
+    public enum EvalStatusKind : byte
     {
+        Failed = 0,
 
-    }
-
-    public sealed partial class LangExecutor : PartExecutor<LangExecutor>
-    {
-        public override void Run()
-        {
-
-        }
+        Passed = 1
     }
 }

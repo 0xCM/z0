@@ -5,6 +5,9 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
+
+    using static Root;
 
     public abstract class Document<D> : Universe<D>, IDocument<D>
         where D : Document<D>, new()
@@ -30,7 +33,11 @@ namespace Z0
         where D : Document<D,C>, new()
         where C : struct, ITextual
     {
-        public C Content {get;}
+        [MethodImpl(Inline)]
+        public static D load(C content)
+            => new D().WithContent(content);
+
+        public C Content {get; private set;}
 
         protected Document(C content)
             : base(Location.Empty)
@@ -44,6 +51,16 @@ namespace Z0
             Content = content;
         }
 
+        [MethodImpl(Inline)]
+        D WithContent(C content)
+        {
+            Content = content;
+            return (D)this;
+        }
+
+        public virtual D Load(C content)
+            => new D().WithContent(content);
+
         public override string Format()
             => Content.Format();
 
@@ -52,7 +69,7 @@ namespace Z0
     }
 
     public abstract class Document<D,C,L> : Document<D,C>, IDocument<D,C,L>
-        where D : Document<D,C>, new()
+        where D : Document<D,C,L>, new()
         where C : struct, ITextual
         where L : struct, ILocation
     {
