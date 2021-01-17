@@ -14,11 +14,11 @@ namespace Z0
     partial class XKinds
     {
         [MethodImpl(Inline)]
-        public static BinaryOpClass<W> Fixed<W>(this BinaryOpClass src)
+        public static BinaryClass<W> Fixed<W>(this BinaryClass src)
             where W : unmanaged, ITypeWidth => default;
 
         [MethodImpl(Inline)]
-        public static BinaryOpClass<T> As<T>(this BinaryOpClass src)
+        public static BinaryClass<T> As<T>(this BinaryClass src)
              where T : unmanaged => default;
 
         [MethodImpl(Inline)]

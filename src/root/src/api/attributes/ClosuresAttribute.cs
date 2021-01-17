@@ -25,6 +25,12 @@ namespace Z0
             Pairs = new (ulong,ulong)[]{};
         }
 
+        public ClosuresAttribute(Type provider)
+            : this()
+        {
+
+        }
+
         public ClosuresAttribute(ulong spec)
             : this()
         {

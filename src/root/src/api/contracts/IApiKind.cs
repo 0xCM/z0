@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
 
     public interface IApiKind<E> : IApiKey, ILiteralKind<E>
         where E : unmanaged, Enum

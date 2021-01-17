@@ -8,6 +8,12 @@ namespace Z0
     using System.Reflection;
 
     [ApiType]
+    partial struct Msg
+    {
+
+    }
+
+    [ApiType]
     public readonly partial struct PartMsg
     {
         public static RenderPattern<Type,Type> ContractMismatch => "The source type {0} does not reify {1}";

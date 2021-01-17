@@ -71,7 +71,7 @@ namespace Z0.Asm
             return TestAction(check, src.Id);
         }
 
-        TestCaseRecord TestImmInjection<T>(W128 w, BinaryOpClass k, MethodInfo src, byte imm)
+        TestCaseRecord TestImmInjection<T>(W128 w, BinaryClass k, MethodInfo src, byte imm)
             where T : unmanaged
         {
             void check()
@@ -93,7 +93,7 @@ namespace Z0.Asm
             return TestAction(check, CaseName<T>(src.Name));
         }
 
-        TestCaseRecord TestImmInjection<T>(W256 w, BinaryOpClass k, MethodInfo src, byte imm)
+        TestCaseRecord TestImmInjection<T>(W256 w, BinaryClass k, MethodInfo src, byte imm)
             where T : unmanaged
         {
             void check()

@@ -96,75 +96,75 @@ namespace Z0
             => () => f();
 
         [MethodImpl(NotInline), Op]
-        public static UnaryOp1 define(MethodInfo f, UnaryOpClass<bit> k)
+        public static UnaryOp1 define(MethodInfo f, UnaryClass<bit> k)
             => define(uFx(f,k));
 
         [MethodImpl(NotInline), Op]
-        public static UnaryOp8 define(MethodInfo f, UnaryOpClass<sbyte> k)
+        public static UnaryOp8 define(MethodInfo f, UnaryClass<sbyte> k)
             => define(uFx(f,k));
 
         [MethodImpl(NotInline), Op]
-        public static UnaryOp8 define(MethodInfo f, UnaryOpClass<byte> k)
+        public static UnaryOp8 define(MethodInfo f, UnaryClass<byte> k)
             => define(uFx(f,k));
 
         [MethodImpl(NotInline), Op]
-        public static UnaryOp16 define(MethodInfo f, UnaryOpClass<short> k)
+        public static UnaryOp16 define(MethodInfo f, UnaryClass<short> k)
             => define(uFx(f,k));
 
         [MethodImpl(NotInline), Op]
-        public static UnaryOp16 define(MethodInfo f, UnaryOpClass<ushort> k)
+        public static UnaryOp16 define(MethodInfo f, UnaryClass<ushort> k)
             => define(uFx(f,k));
 
         [MethodImpl(NotInline), Op]
-        public static UnaryOp32 define(MethodInfo f, UnaryOpClass<int> k)
+        public static UnaryOp32 define(MethodInfo f, UnaryClass<int> k)
             => define(uFx(f,k));
 
         [MethodImpl(NotInline), Op]
-        public static UnaryOp32 define(MethodInfo f, UnaryOpClass<uint> k)
+        public static UnaryOp32 define(MethodInfo f, UnaryClass<uint> k)
             => define(uFx(f,k));
 
         [MethodImpl(NotInline), Op]
-        public static UnaryOp64 define(MethodInfo f, UnaryOpClass<long> k )
+        public static UnaryOp64 define(MethodInfo f, UnaryClass<long> k )
             => define(uFx(f,k));
 
         [MethodImpl(NotInline), Op]
-        public static UnaryOp64 define(MethodInfo f, UnaryOpClass<ulong> k)
+        public static UnaryOp64 define(MethodInfo f, UnaryClass<ulong> k)
             => define(uFx(f,k));
 
         [MethodImpl(NotInline), Op]
-        public static BinaryOp1 define(MethodInfo f, BinaryOpClass<bit> k)
+        public static BinaryOp1 define(MethodInfo f, BinaryClass<bit> k)
             => define(bFx(f,k));
 
         [MethodImpl(NotInline), Op]
-        public static BinaryOp8 define(MethodInfo f, BinaryOpClass<sbyte> k)
+        public static BinaryOp8 define(MethodInfo f, BinaryClass<sbyte> k)
             => define(bFx(f,k));
 
         [MethodImpl(NotInline), Op]
-        public static BinaryOp8 define(MethodInfo f, BinaryOpClass<byte> k)
+        public static BinaryOp8 define(MethodInfo f, BinaryClass<byte> k)
             => define(bFx(f,k));
 
         [MethodImpl(NotInline), Op]
-        public static BinaryOp16 define(MethodInfo f, BinaryOpClass<short> k)
+        public static BinaryOp16 define(MethodInfo f, BinaryClass<short> k)
             => define(bFx(f,k));
 
         [MethodImpl(NotInline), Op]
-        public static BinaryOp16 define(MethodInfo f, BinaryOpClass<ushort> k)
+        public static BinaryOp16 define(MethodInfo f, BinaryClass<ushort> k)
             => define(bFx(f,k));
 
         [MethodImpl(NotInline), Op]
-        public static BinaryOp32 define(MethodInfo f, BinaryOpClass<uint> k)
+        public static BinaryOp32 define(MethodInfo f, BinaryClass<uint> k)
             => define(bFx(f,k));
 
         [MethodImpl(NotInline), Op]
-        public static BinaryOp32 define(MethodInfo f, BinaryOpClass<int> k)
+        public static BinaryOp32 define(MethodInfo f, BinaryClass<int> k)
             => define(bFx(f,k));
 
         [MethodImpl(NotInline), Op]
-        public static BinaryOp64 define(MethodInfo f, BinaryOpClass<ulong> k)
+        public static BinaryOp64 define(MethodInfo f, BinaryClass<ulong> k)
             => define(bFx(f,k));
 
         [MethodImpl(NotInline), Op]
-        public static BinaryOp64 define(MethodInfo f, BinaryOpClass<long> k)
+        public static BinaryOp64 define(MethodInfo f, BinaryClass<long> k)
             => define(bFx(f,k));
 
         [MethodImpl(NotInline), Op]
@@ -457,12 +457,12 @@ namespace Z0
                 => (Cell64 a, Cell64 b) => Cells.c64(f(a.As<T>(),b.As<T>()));
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        internal static UnaryOp<T> uFx<T>(MethodInfo src, UnaryOpClass<T> k)
+        internal static UnaryOp<T> uFx<T>(MethodInfo src, UnaryClass<T> k)
             where T : unmanaged
                 => Delegates.unary<T>(src);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        internal static BinaryOp<T> bFx<T>(MethodInfo src, BinaryOpClass<T> K)
+        internal static BinaryOp<T> bFx<T>(MethodInfo src, BinaryClass<T> K)
             where T : unmanaged
                 => Delegates.binary<T>(src);
 

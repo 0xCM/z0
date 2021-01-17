@@ -100,5 +100,14 @@ namespace Z0
         const string SvcSuffix = ".svc";
 
         const string BaseSuffix = "";
+
+        public const string EmptyString = "";
+    }
+
+
+    [ApiHost]
+    public static partial class XTend
+    {
+
     }
 }

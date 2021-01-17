@@ -8,27 +8,15 @@ namespace Z0
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    [Free]
-    public interface ICellOpClass : IOperationalClass
-    {
-        TypeWidth Width {get;}
-    }
+    using static OperationClasses;
 
     [Free]
-    public interface ICellOpClass<F,E> : IOperationalClass<E>, IOperationalClass
-        where F : struct, ICellOpClass<F,E>
-        where E : unmanaged, Enum
-    {
-
-    }
-
-    [Free]
-    public interface ICellOpClass<F,W,E> : ICellOpClass, IOperationalClassHost<F,E>
+    public interface ICellOpClass<F,W,E> : ICellClass, IOperationClassHost<F,E>
         where F : struct, ICellOpClass<F,W,E>
         where W : unmanaged, ITypeWidth
         where E : unmanaged, Enum
     {
-        TypeWidth ICellOpClass.Width
+        TypeWidth ICellClass.Width
             => Widths.type<W>();
     }
 }

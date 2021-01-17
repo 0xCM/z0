@@ -15,22 +15,22 @@ namespace Z0
             => default(DynamicFactories);
 
         [MethodImpl(Inline)]
-        public IEmitterOpFactory<T> Factory<T>(EmitterOpClass<T> op)
+        public IEmitterOpFactory<T> Factory<T>(EmitterClass<T> op)
             where T :  unmanaged
                 => EmitterFactory<T>.Service;
 
         [MethodImpl(Inline)]
-        public IUnaryOpFactory<T> Factory<T>(UnaryOpClass<T> op)
+        public IUnaryOpFactory<T> Factory<T>(UnaryClass<T> op)
             where T :  unmanaged
             => UnaryOpFactory<T>.Service;
 
         [MethodImpl(Inline)]
-        public IBinaryOpFactory<T> Factory<T>(BinaryOpClass<T> op)
+        public IBinaryOpFactory<T> Factory<T>(BinaryClass<T> op)
             where T :  unmanaged
             => BinaryOpFactory<T>.Service;
 
         [MethodImpl(Inline)]
-        public ITernaryOpFactory<T> Factory<T>(TernaryOpClass<T> op)
+        public ITernaryOpFactory<T> Factory<T>(TernaryClass<T> op)
             where T :  unmanaged
                 => TernaryOpFactory<T>.Service;
     }

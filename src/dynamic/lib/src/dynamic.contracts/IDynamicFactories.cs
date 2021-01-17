@@ -6,16 +6,16 @@ namespace Z0
 {
     public interface IDynamicFactories
     {
-        IEmitterOpFactory<T> Factory<T>(EmitterOpClass<T> k)
+        IEmitterOpFactory<T> Factory<T>(EmitterClass<T> k)
             where T : unmanaged;
 
-        IUnaryOpFactory<T> Factory<T>(UnaryOpClass<T> op)
+        IUnaryOpFactory<T> Factory<T>(UnaryClass<T> op)
             where T :  unmanaged;
 
-        IBinaryOpFactory<T> Factory<T>(BinaryOpClass<T> op)
+        IBinaryOpFactory<T> Factory<T>(BinaryClass<T> op)
             where T :  unmanaged;
 
-        ITernaryOpFactory<T> Factory<T>(TernaryOpClass<T> op)
+        ITernaryOpFactory<T> Factory<T>(TernaryClass<T> op)
             where T :  unmanaged;
     }
 }

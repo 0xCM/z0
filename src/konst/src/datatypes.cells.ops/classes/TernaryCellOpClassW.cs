@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
+    using static OperationClasses;
 
     public readonly struct TernaryCellOpClass<W> : ICellOpClass<TernaryCellOpClass<W>,W,ApiOperatorKind>
         where W : unmanaged, ITypeWidth
@@ -24,10 +25,10 @@ namespace Z0
             get => new OperatorClass<W>(Kind);
         }
 
-        public TernaryCellOpClass Untyped
+        public TernaryCellClass Untyped
         {
             [MethodImpl(Inline)]
-            get => new TernaryCellOpClass(Width);
+            get => new TernaryCellClass(Width);
         }
 
         [MethodImpl(Inline)]
@@ -35,11 +36,11 @@ namespace Z0
             => default;
 
         [MethodImpl(Inline)]
-        public static implicit operator TernaryOpClass(TernaryCellOpClass<W> src)
+        public static implicit operator TernaryClass(TernaryCellOpClass<W> src)
             => default;
 
         [MethodImpl(Inline)]
-        public static implicit operator TernaryCellOpClass(TernaryCellOpClass<W> src)
+        public static implicit operator TernaryCellClass(TernaryCellOpClass<W> src)
             => src.Untyped;
     }
 }

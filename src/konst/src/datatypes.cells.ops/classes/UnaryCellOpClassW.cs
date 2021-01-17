@@ -7,9 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
+    using static OperationClasses;
 
-    public readonly struct UnaryCellOpClass<W> : ICellOpClass<UnaryCellOpClass<W>,W,ApiOperatorKind>
+    public readonly struct UnaryCellClass<W> : ICellOpClass<UnaryCellClass<W>,W,ApiOperatorKind>
         where W : unmanaged, ITypeWidth
     {
         public ApiOperatorKind Kind
@@ -24,22 +25,22 @@ namespace Z0
             get => new OperatorClass<W>(Kind);
         }
 
-        public UnaryCellOpClass Untyped
+        public UnaryCellClass Untyped
         {
             [MethodImpl(Inline)]
-            get => new UnaryCellOpClass(Width);
+            get => new UnaryCellClass(Width);
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator OperatorClass<W>(UnaryCellOpClass<W> src)
+        public static implicit operator OperatorClass<W>(UnaryCellClass<W> src)
             => default;
 
         [MethodImpl(Inline)]
-        public static implicit operator UnaryOpClass(UnaryCellOpClass<W> src)
+        public static implicit operator UnaryClass(UnaryCellClass<W> src)
             => default;
 
         [MethodImpl(Inline)]
-        public static implicit operator UnaryCellOpClass(UnaryCellOpClass<W> src)
+        public static implicit operator UnaryCellClass(UnaryCellClass<W> src)
             => src.Untyped;
     }
 }

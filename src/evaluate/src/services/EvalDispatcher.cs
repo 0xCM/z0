@@ -53,7 +53,7 @@ namespace Z0
             term.error(e);
         }
 
-        UnaryEvaluations<T> eval<T>(BufferTokens buffers, in ApiMemberCode code, UnaryOpClass<T> k)
+        UnaryEvaluations<T> eval<T>(BufferTokens buffers, in ApiMemberCode code, UnaryClass<T> k)
             where T : unmanaged
         {
             var target = init<T>();
@@ -62,7 +62,7 @@ namespace Z0
             return Evaluate.compute(context, error);
         }
 
-        BinaryEvaluations<T> eval<T>(BufferTokens buffers, in ApiMemberCode code, BinaryOpClass<T> k)
+        BinaryEvaluations<T> eval<T>(BufferTokens buffers, in ApiMemberCode code, BinaryClass<T> k)
             where T : unmanaged
         {
             var target = init<T>();
@@ -71,7 +71,7 @@ namespace Z0
             return Evaluate.compute(context, error);
         }
 
-        MemberEvaluator Evaluator<E,T>(BufferTokens buffers, IOperationalClass<E,T> k)
+        MemberEvaluator Evaluator<E,T>(BufferTokens buffers, IOperationClass<E,T> k)
             where T : unmanaged
             where E : unmanaged, Enum
                 => Evaluator(buffers);
@@ -200,7 +200,7 @@ namespace Z0
             }
         }
 
-        public void Dispatch(BufferTokens buffers, in ApiMemberCode api, UnaryOpClass k)
+        public void Dispatch(BufferTokens buffers, in ApiMemberCode api, UnaryClass k)
         {
             var kid = api.Member.ApiKind;
             int count = 128;
@@ -252,7 +252,7 @@ namespace Z0
             }
         }
 
-        public void Dispatch(BufferTokens buffers, in ApiMemberCode api, BinaryOpClass k)
+        public void Dispatch(BufferTokens buffers, in ApiMemberCode api, BinaryClass k)
         {
             var kid = api.Member.ApiKind;
             int count = 128;
@@ -383,7 +383,7 @@ namespace Z0
 
         }
 
-        Triples<T> Dispatch<E,T>(BufferTokens buffers, in ApiMemberCode api, IOperationalClass<E,T> k, in Pairs<T> src)
+        Triples<T> Dispatch<E,T>(BufferTokens buffers, in ApiMemberCode api, IOperationClass<E,T> k, in Pairs<T> src)
             where E : unmanaged, Enum
             where T : unmanaged
         {

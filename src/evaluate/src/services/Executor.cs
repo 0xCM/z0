@@ -12,7 +12,7 @@ namespace Z0
 
     public readonly struct Executor
     {
-        public static EvalResult<ExecutorContext> validate(ExecutorContext context, in NativeBuffers buffers, BinaryOpClass k, N8 w, in ConstPair<ApiMemberCode> pair)
+        public static EvalResult<ExecutorContext> validate(ExecutorContext context, in NativeBuffers buffers, BinaryClass k, N8 w, in ConstPair<ApiMemberCode> pair)
         {
             var f = buffers[Left].EmitFixedBinaryOp(w, pair.Left.Encoded);
             var g = buffers[Right].EmitFixedBinaryOp(w, pair.Right.Encoded);

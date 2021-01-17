@@ -10,7 +10,6 @@ namespace Z0
 
     using static Root;
 
-
     public static partial class XTend
     {
         /// Determines whether the unsigned facet of a block classification is enabled

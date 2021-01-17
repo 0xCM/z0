@@ -11,7 +11,7 @@ namespace Z0
     using static BufferSeqId;
     using static z;
 
-    using K = BinaryOpClass;
+    using K = BinaryClass;
 
     public readonly struct TestBinaryDynamic : ITestBinaryDynamic
     {

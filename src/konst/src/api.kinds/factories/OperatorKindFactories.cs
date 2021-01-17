@@ -11,51 +11,51 @@ namespace Z0
             => default;
 
         [KindFactory]
-        public static EmitterOpClass emitter()
+        public static EmitterClass emitter()
             => default;
 
         [KindFactory]
-        public static UnaryOpClass unaryop()
+        public static UnaryClass unaryop()
             => default;
 
         [KindFactory]
-        public static BinaryOpClass binaryop()
+        public static BinaryClass binaryop()
             => default;
 
         [KindFactory]
-        public static TernaryOpClass ternaryop()
+        public static TernaryClass ternaryop()
             => default;
 
         [KindFactory]
-        public static ShiftOpClass shift()
+        public static ShiftClass shift()
             => default;
 
         [KindFactory, Closures(Closure)]
-        public static EmitterOpClass<T> emitter<T>(T t = default)
+        public static EmitterClass<T> emitter<T>(T t = default)
             where T : unmanaged => default;
 
         [KindFactory, Closures(Closure)]
-        public static UnaryOpClass<T> unaryop<T>(T t = default)
+        public static UnaryClass<T> unaryop<T>(T t = default)
             where T : unmanaged => default;
 
         [KindFactory, Closures(Closure)]
-        public static BinaryOpClass<T> binaryop<T>(T t = default)
+        public static BinaryClass<T> binaryop<T>(T t = default)
             where T : unmanaged => default;
 
         [KindFactory, Closures(Closure)]
-        public static TernaryOpClass<T> ternaryop<T>(T t = default)
+        public static TernaryClass<T> ternaryop<T>(T t = default)
             where T : unmanaged => default;
 
-        public static UnaryOpClass UnaryOp
+        public static UnaryClass UnaryOp
             => unaryop();
 
-        public static BinaryOpClass BinaryOp
+        public static BinaryClass BinaryOp
             => binaryop();
 
-        public static TernaryOpClass TernaryOp
+        public static TernaryClass TernaryOp
             => ternaryop();
 
-        public static ShiftOpClass ShiftOp
+        public static ShiftClass ShiftOp
             => shift();
     }
 }

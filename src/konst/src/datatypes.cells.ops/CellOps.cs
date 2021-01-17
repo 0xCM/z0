@@ -46,12 +46,12 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        internal static UnaryOp<T> uFx<T>(MethodInfo src, UnaryOpClass<T> k)
+        internal static UnaryOp<T> uFx<T>(MethodInfo src, UnaryClass<T> k)
             where T : unmanaged
                 => Delegates.unary<T>(src);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        internal static BinaryOp<T> bFx<T>(MethodInfo src, BinaryOpClass<T> K)
+        internal static BinaryOp<T> bFx<T>(MethodInfo src, BinaryClass<T> K)
             where T : unmanaged
                 => Delegates.binary<T>(src);
     }

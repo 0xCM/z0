@@ -4,21 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-
     using K = PredicateApiClass;
     using I = IPredicateApiKey;
 
     /// <summary>
-    /// Characterizes a bitfunction classifier
-    /// </summary>
-    public interface IPredicateApiKey : IApiKey, IApiKind<K>
-    {
-        K Kind {get;}
-
-        ApiClass IApiKey.Id
-            => (ApiClass)Kind;
-    }
-
     /// <summary>
     /// Characterizes a reified bitfunction classifier
     /// </summary>
