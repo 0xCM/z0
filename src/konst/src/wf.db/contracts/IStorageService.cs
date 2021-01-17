@@ -6,19 +6,13 @@ namespace Z0
 {
     using System;
 
-    public interface IUniversal
-    {
-
-
-    }
-
-    public interface IUniversal<U> : IUniversal
+    public interface IStorageService : IWfService
     {
 
     }
 
-    public interface IUniversal<U,S> : IUniversal<U>, IMemoryStore<S>
-        where S : struct
+    public interface IStorageService<T> : IWfService<T>
+        where T : IStorageService<T>, IWfService<T>, new()
     {
 
     }

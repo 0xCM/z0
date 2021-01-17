@@ -11,7 +11,7 @@ namespace Z0
     using SOS;
     using System.Collections.Generic;
 
-    public interface IPdbSymbolStore : IDataStore
+    public interface IPdbSymbolStore : IStorageService
     {
         DirectorySymbolStore DirectoryStore(FS.FolderPath dir);
 

@@ -7,19 +7,15 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    public readonly struct Universal : IUniversal
-    {
-
-    }
-
+    using static Root;
 
     public abstract class Universe<U> : IUniversal<U>
         where U : Universe<U>, new()
     {
-        public static U create(IUniversal context)
+        public static U create(IUniversal context = null)
         {
             var u  = new U();
-            u.Context = context;
+            u.Context = context ?? new Universal();
             u.Init();
             return u;
         }
@@ -29,16 +25,31 @@ namespace Z0
         protected virtual void Init() { }
     }
 
-    public abstract class Universe<U,S> : IUniversal<U>
+    public abstract class Universe<U,S> : IUniversal<U,S>
         where U : Universe<U,S>, new()
         where S : struct
     {
         [FixedAddressValueType]
-        protected static S DataStore = new S();
+        protected static S Storage = new S();
+
+        protected Universe()
+        {
+            StoreLocation = LocateStore();
+        }
+
+        public UIntPtr StoreLocation {get;}
+
+        public unsafe ref S StoredData
+        {
+            [MethodImpl(Inline)]
+            get => ref Unsafe.AsRef<S>(StoreLocation.ToPointer());
+        }
 
         protected IUniversal Context {get; private set;}
 
         protected virtual void Init() { }
-    }
 
+        static unsafe UIntPtr LocateStore()
+            => new UIntPtr(Unsafe.AsPointer(ref Storage));
+    }
 }

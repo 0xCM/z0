@@ -5,21 +5,14 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
 
-    public interface IUniversal
+    using static Part;
+
+    partial struct FS
     {
-
-
-    }
-
-    public interface IUniversal<U> : IUniversal
-    {
-
-    }
-
-    public interface IUniversal<U,S> : IUniversal<U>, IMemoryStore<S>
-        where S : struct
-    {
-
+        [MethodImpl(Inline), Op]
+        public static FileLocation location(FS.FilePath src)
+            => new FileLocation(src);
     }
 }

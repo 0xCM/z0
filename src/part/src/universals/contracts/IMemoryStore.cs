@@ -6,20 +6,14 @@ namespace Z0
 {
     using System;
 
-    public interface IUniversal
+    public interface IMemoryStore : IDataStore
     {
-
-
+        UIntPtr StoreLocation {get;}
     }
 
-    public interface IUniversal<U> : IUniversal
+    public interface IMemoryStore<T> : IMemoryStore, IDataStore<T>
+        where T : struct
     {
-
-    }
-
-    public interface IUniversal<U,S> : IUniversal<U>, IMemoryStore<S>
-        where S : struct
-    {
-
+        ref T StoredData {get;}
     }
 }

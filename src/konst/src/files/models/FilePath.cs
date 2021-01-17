@@ -122,16 +122,8 @@ namespace Z0
                 => FolderPath + FileName.WithoutExtension;
 
             public FilePath ChangeExtension(FileExt ext)
-                => WithoutExtension + ext; // new FileName(Path.ChangeExtension(Path.GetFileName(Name), ext.Name));
+                => WithoutExtension + ext;
 
-
-            // public FilePath ChangeExtension(FileExt ext)
-            // {
-            //     var name = Name.Text;
-            //     var index = name.LastIndexOf(Chars.Dot);
-            //     var removed = text.segment(name, 0, index - 1);
-            //     return new FilePath(string.Format("{0}.{1}", removed, ext.Name));
-            // }
 
             public string ReadText()
                 => File.ReadAllText(Name);

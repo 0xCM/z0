@@ -4,17 +4,14 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
-    public interface IDataStore  : IWfService
+    public interface IDataStore
     {
 
     }
 
-    public interface IDataStore<T> : IWfService<T>
-        where T : IDataStore<T>, IWfService<T>, new()
+    public interface IDataStore<S> : IDataStore
+        where S : struct
     {
 
     }
-
 }

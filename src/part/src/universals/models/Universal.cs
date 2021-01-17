@@ -5,21 +5,13 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
 
-    public interface IUniversal
-    {
+    using static Root;
 
-
-    }
-
-    public interface IUniversal<U> : IUniversal
+    public readonly struct Universal : IUniversal
     {
 
     }
 
-    public interface IUniversal<U,S> : IUniversal<U>, IMemoryStore<S>
-        where S : struct
-    {
-
-    }
 }
