@@ -11,22 +11,26 @@ namespace Z0
 
     partial struct Rules
     {
-        /// <summary>
-        /// Just one, neither more nor less
-        /// </summary>
-        public readonly struct One<T>
+        public readonly struct Marker<T>
         {
-            public T Value {get;}
+            public Index<T> Symbols {get;}
 
             [MethodImpl(Inline)]
-            public One(T src)
+            public Marker(Index<T> symbols)
             {
-                Value = src;
+                Symbols = symbols;
             }
+        }
+
+        public readonly struct Marker
+        {
+            public Index<dynamic> Symbols {get;}
 
             [MethodImpl(Inline)]
-            public static implicit operator One<T>(T src)
-                => new One<T>(src);
+            public Marker(Index<dynamic> symbols)
+            {
+                Symbols = symbols;
+            }
         }
     }
 }

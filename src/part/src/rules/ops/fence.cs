@@ -5,18 +5,15 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
 
-    public interface IProposition : ITerm
+    using static Part;
+    using static memory;
+
+    partial struct Rules
     {
-
-    }
-
-    public interface IProposition<A,C> : IProposition
-        where A : IAntecedant
-        where C : IConsequent
-    {
-        A Antecedant {get;}
-
-        C Consequence {get;}
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Fence<T> fence<T>(T left, T right)
+            => new Fence<T>(left, right);
     }
 }

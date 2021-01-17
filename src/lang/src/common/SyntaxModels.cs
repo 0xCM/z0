@@ -16,10 +16,6 @@ namespace Z0.Lang
 
         const NumericKind Closure = UnsignedInts;
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static FenceSyntax<T> fence<T>(T left, T right)
-            where T : unmanaged
-                => new FenceSyntax<T>(left,right);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Label<T> label<T>(T src)
@@ -43,10 +39,6 @@ namespace Z0.Lang
         public static Literal<Name,T> literal<T>(string id, T value)
             where T : IComparable<T>
                 => new Literal<Name,T>(identifier(id), value);
-
-        [Op, Closures(Closure)]
-        public static string format<T>(FenceSyntax<T> src)
-            => string.Format(FencePattern, src.FirstValue, src.LastValue);
 
         [MethodImpl(Inline)]
         static string format<A,B>(string pattern, A a, B b)

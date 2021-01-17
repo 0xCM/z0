@@ -8,12 +8,16 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
 
-    partial struct Resources
+    partial struct Rules
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static unsafe ReadOnlySpan<T> extract<T>(in ResMember member, uint i0, uint i1)
-            where T : unmanaged
-                => memory.section(member.Address.Pointer<T>(), i0, i1);
+        public static Bijection<T> bijection<T>(Index<T> src, Index<T> dst)
+            => new Bijection<T>(src, dst);
+
+        [MethodImpl(Inline)]
+        public static Bijection<S,T> bijection<S,T>(Index<S> src, Index<T> dst)
+            => new Bijection<S,T>(src, dst);
     }
 }

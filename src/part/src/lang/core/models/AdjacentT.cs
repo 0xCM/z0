@@ -9,6 +9,9 @@ namespace Z0.Lang
 
     using static Part;
 
+    /// <summary>
+    /// Represents the consecutive occurrence of two values
+    /// </summary>
     public readonly struct Adjacent<T> : ISyntax<Adjacent<T>>
     {
         public T A {get;}
@@ -28,5 +31,14 @@ namespace Z0.Lang
 
         public override string ToString()
             => Format();
+
+        [MethodImpl(Inline)]
+        public static implicit operator Adjacent<T>((T left, T right) src)
+            => new Adjacent<T>(src.left, src.right);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Adjacent<T>(Pair<T> src)
+            => new Adjacent<T>(src.Left, src.Right);
+
     }
 }

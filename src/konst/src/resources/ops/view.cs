@@ -20,11 +20,11 @@ namespace Z0
             => memory.view<char>(id.Address, id.CellCount);
 
         [MethodImpl(Inline), Op]
-        public unsafe static ReadOnlySpan<char> view(in ResIdentity<char> res, int i0, int i1)
+        public unsafe static ReadOnlySpan<char> view(in ResIdentity<char> res, uint i0, uint i1)
             => memory.section((char*)res.Address, i0, i1);
 
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<byte> view(in ResIdentity<byte> res, int i0, int i1)
+        public static ReadOnlySpan<byte> view(in ResIdentity<byte> res, uint i0, uint i1)
             => memory.view<byte>(res.Address, (i1 - i0 + 1));
 
         [MethodImpl(Inline), Op]

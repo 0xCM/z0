@@ -8,19 +8,16 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
 
-    public readonly struct Annotation<K>
-        where K : unmanaged
+    partial struct Rules
     {
-        public TextBlock Content {get;}
-
-        public K Kind {get;}
-
         [MethodImpl(Inline)]
-        public Annotation(TextBlock content, K kind)
-        {
-            Content = content;
-            Kind = kind;
-        }
+        public static Implication<I,A,C> implies<I,A,C>(I index, A @if, C then)
+            where I : unmanaged, IEquatable<I>
+            where A : IEquatable<A>
+            where C : IEquatable<C>
+                => new Implication<I,A,C>(index, @if, then);
+
     }
 }

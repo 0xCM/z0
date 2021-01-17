@@ -11,6 +11,17 @@ namespace Z0
 
     partial struct Rules
     {
+        public interface IConsequent : ITerm
+        {
+
+        }
+
+        public interface IConsequent<C> : IConsequent, ITerm<C>
+            where C : IEquatable<C>
+        {
+            C Term {get;}
+        }
+
         public readonly struct Consequent<C> : IConsequent<C>
             where C : IEquatable<C>
         {
@@ -27,12 +38,6 @@ namespace Z0
 
             public bool Equals(Consequent<C> src)
                 => equals(this, src);
-
-            public string Format()
-                => format(this);
-
-            public override string ToString()
-                => Format();
         }
     }
 }

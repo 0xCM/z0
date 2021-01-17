@@ -11,6 +11,18 @@ namespace Z0
 
     partial struct Rules
     {
+
+        public interface IRule : ITerm
+        {
+
+        }
+
+        public interface IRule<P> : IRule
+            where P : IProposition, IEquatable<P>
+        {
+            Index<P> Terms {get;}
+        }
+
         public readonly struct Rule<A,C> : IRule<Proposition<A,C>>, IEquatable<Rule<A,C>>
             where A : IEquatable<A>
             where C : IEquatable<C>

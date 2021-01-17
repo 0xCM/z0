@@ -5,15 +5,14 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
 
-    public interface IConsequent : ITerm
+    using static Part;
+
+    partial struct Rules
     {
-
-    }
-
-    public interface IConsequent<C> : IConsequent, ITerm<C>
-        where C : IEquatable<C>
-    {
-        C Term {get;}
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Alt<T> alt<T>(T a, T b)
+            => new Alt<T>(a,b);
     }
 }

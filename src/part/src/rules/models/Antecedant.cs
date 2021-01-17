@@ -11,6 +11,18 @@ namespace Z0
 
     partial struct Rules
     {
+
+        public interface IAntecedant : ITerm
+        {
+
+        }
+
+        public interface IAntecedant<A> : IAntecedant, ITerm<A>
+            where A : IEquatable<A>
+        {
+            Index<A> Terms {get;}
+        }
+
         public readonly struct Antecedant<A> : IAntecedant<A>, IEquatable<Antecedant<A>>
             where A : IEquatable<A>
         {
@@ -24,12 +36,6 @@ namespace Z0
                 Id = id;
                 Terms = terms;
             }
-
-            public string Format()
-                => Rules.format(this);
-
-            public override string ToString()
-                => Format();
 
             public bool Equals(Antecedant<A> src)
                 => Rules.equals(this,src);

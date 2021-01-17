@@ -11,6 +11,20 @@ namespace Z0
 
     partial struct Rules
     {
+        public interface IProposition : ITerm
+        {
+
+        }
+
+        public interface IProposition<A,C> : IProposition
+            where A : IAntecedant
+            where C : IConsequent
+        {
+            A Antecedant {get;}
+
+            C Consequence {get;}
+        }
+
         public readonly struct Proposition<A,C> : IProposition<Antecedant<A>,Consequent<C>>, IEquatable<Proposition<A,C>>
             where A : IEquatable<A>
             where C : IEquatable<C>

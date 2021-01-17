@@ -37,6 +37,18 @@ namespace Z0
             get => Data;
         }
 
+        [MethodImpl(Inline)]
+        public Span<T> Slice(uint offset)
+            => slice(Edit, offset);
+
+        [MethodImpl(Inline)]
+        public Span<T> Slice(uint offset, uint length)
+            => slice(Edit, offset, length);
+
+        [MethodImpl(Inline)]
+        public Span<T> Section(uint i0, uint i1)
+            => section(Edit, i0, i1);
+
         public T[] Storage
         {
             [MethodImpl(Inline)]

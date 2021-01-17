@@ -12,32 +12,31 @@ namespace Z0
     partial struct Rules
     {
         /// <summary>
-        /// Defines a sequence of potential choices
+        /// Defines two potential choices
         /// </summary>
-        public readonly struct Alternative<T>
-            where T : IEquatable<T>
+        public readonly struct Alt<T>
         {
-            public ExactlyOne<T> Left {get;}
+            public One<T> Left {get;}
 
-            public ExactlyOne<T> Right {get;}
+            public One<T> Right {get;}
 
             [MethodImpl(Inline)]
-            public Alternative(T left, T right)
+            public Alt(T left, T right)
             {
                 Left = left;
                 Right = right;
             }
 
             [MethodImpl(Inline)]
-            public Alternative(Pair<T> src)
+            public Alt(Pair<T> src)
             {
                 Left = src.Left;
                 Right = src.Right;
             }
 
             [MethodImpl(Inline)]
-            public static implicit operator Alternative<T>(Pair<T> src)
-                => new Alternative<T>(src);
+            public static implicit operator Alt<T>(Pair<T> src)
+                => new Alt<T>(src);
         }
     }
 }

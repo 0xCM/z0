@@ -8,12 +8,13 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
 
-    partial struct Resources
+    partial struct Rules
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static unsafe ReadOnlySpan<T> extract<T>(in ResMember member, uint i0, uint i1)
-            where T : unmanaged
-                => memory.section(member.Address.Pointer<T>(), i0, i1);
+        public static Antecedant<T> antecedant<T>(TermId id, Index<T> terms)
+            where T : IEquatable<T>
+                => new Antecedant<T>(id, terms);
     }
 }

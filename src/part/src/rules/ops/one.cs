@@ -5,15 +5,16 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
 
-    public interface IAntecedant : ITerm, ITextual
+    using static Part;
+    using static memory;
+
+    partial struct Rules
     {
 
-    }
-
-    public interface IAntecedant<A> : IAntecedant, ITerm<A>
-        where A : IEquatable<A>
-    {
-        Index<A> Terms {get;}
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static One<T> one<T>(T term)
+            => new One<T>(term);
     }
 }

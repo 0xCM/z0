@@ -8,12 +8,14 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
 
-    partial struct Resources
+    partial struct Rules
     {
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static unsafe ReadOnlySpan<T> extract<T>(in ResMember member, uint i0, uint i1)
-            where T : unmanaged
-                => memory.section(member.Address.Pointer<T>(), i0, i1);
+        [MethodImpl(Inline)]
+        public static Proposition<A,C> proposition<A,C>(TermId id,Antecedant<A> @if, Consequent<C> then)
+            where A : IEquatable<A>
+            where C : IEquatable<C>
+                => new Proposition<A,C>(id, @if,then);
     }
 }

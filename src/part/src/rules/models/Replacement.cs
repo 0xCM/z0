@@ -11,7 +11,6 @@ namespace Z0
 
     partial struct Rules
     {
-
         /// <summary>
         /// Defines a rule r:seq[T] -> seq[T] that requires a specified sequence element, if found, is replaced with another
         /// </summary>
