@@ -6,6 +6,7 @@ namespace Z0
 {
 
     using K = PredicateApiClass;
+    using I = IPredicateApiKey;
 
     /// Characterizes a bitfunction classifier
     /// </summary>
@@ -15,5 +16,28 @@ namespace Z0
 
         ApiClass IApiKey.Id
             => (ApiClass)Kind;
+    }
+
+    /// <summary>
+    /// <summary>
+    /// Characterizes a reified bitfunction classifier
+    /// </summary>
+    /// <typeparam name="F">The reification type</typeparam>
+    public interface IBooleanPredicateKind<F> : I, IApiKind<F,K>
+        where F : unmanaged, I
+    {
+        ApiClass IApiKey.Id
+            => default(F).Id;
+    }
+
+    /// <summary>
+    /// Characterizes a kind-parametric and numeric-parametric boolean predicate operation classifier
+    /// </summary>
+    /// <typeparam name="F">The kind classifier type</typeparam>
+    /// <typeparam name="T">The numeric type</typeparam>
+    public interface IBooleanPredicateKind<F,T> : IBooleanPredicateKind<F>
+        where F : unmanaged, I
+    {
+        K I.Kind => default(F).Kind;
     }
 }

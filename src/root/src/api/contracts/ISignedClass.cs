@@ -7,7 +7,7 @@ namespace Z0
     /// <summary>
     /// Characterizes a type-level sign classifier
     /// </summary>
-    public interface ISigned
+    public interface ISignedClass
     {
         /// <summary>
         /// Specifies the literal classifier the type-level classifier represents
@@ -19,8 +19,8 @@ namespace Z0
     /// Characterizes an F-bound polymorphic type-level sign classifier reification
     /// </summary>
     /// <typeparam name="F">The reifying type</typeparam>
-    public interface ISigned<F> : ISigned
-        where F : unmanaged, ISigned
+    public interface ISignedClass<F> : ISignedClass
+        where F : unmanaged, ISignedClass
     {
 
     }
@@ -30,9 +30,9 @@ namespace Z0
     /// </summary>
     /// <typeparam name="F">The reifying type</typeparam>
     /// <typeparam name="S">The sign classifier type</typeparam>
-    public interface ISigned<F,S> : ISigned<S>
-        where S : unmanaged, ISigned
-        where F : unmanaged, ISigned<F,S>
+    public interface ISignedClass<F,S> : ISignedClass<S>
+        where S : unmanaged, ISignedClass
+        where F : unmanaged, ISignedClass<F,S>
     {
 
     }
@@ -43,9 +43,9 @@ namespace Z0
     /// <typeparam name="F">The reifying type</typeparam>
     /// <typeparam name="S">The sign classifier type</typeparam>
     /// <typeparam name="T">The T-carrier, of any sort</typeparam>
-    public interface ISigned<F,S,T> : ISigned<F,S>
-        where S : unmanaged, ISigned
-        where F : unmanaged, ISigned<F,S,T>
+    public interface ISignedClass<F,S,T> : ISignedClass<F,S>
+        where S : unmanaged, ISignedClass
+        where F : unmanaged, ISignedClass<F,S,T>
     {
         /// <summary>
         /// Reveals the singleton instance of the T-parametric classifier
@@ -54,9 +54,9 @@ namespace Z0
             => default;
 
         /// <summary>
-        /// Default implementation of <see cref="ISigned.Kind"/>
+        /// Default implementation of <see cref="ISignedClass.Kind"/>
         /// </summary>
-        SignKind ISigned.Kind
+        SignKind ISignedClass.Kind
             => SignType.Kind;
     }
 }

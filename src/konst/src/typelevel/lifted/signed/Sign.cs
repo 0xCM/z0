@@ -29,8 +29,8 @@ namespace Z0
     /// <summary>
     /// Captures an S-parametric sign classifier via parametricity
     /// </summary>
-    public readonly struct Sign<S> : ISigned<Sign<S>,S>
-        where S : unmanaged, ISigned<S>
+    public readonly struct Sign<S> : ISignedClass<Sign<S>,S>
+        where S : unmanaged, ISignedClass<S>
     {
         /// <summary>
         /// Reveals the type-level classifier
@@ -53,8 +53,8 @@ namespace Z0
     /// <summary>
     /// Captures an S/T-parametric sign classifier via parametricity
     /// </summary>
-    public readonly struct Sign<S,T> : ISigned<Sign<S,T>,S,T>
-        where S : unmanaged, ISigned<S>
+    public readonly struct Sign<S,T> : ISignedClass<Sign<S,T>,S,T>
+        where S : unmanaged, ISignedClass<S>
     {
 
     }

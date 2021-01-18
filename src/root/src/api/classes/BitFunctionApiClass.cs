@@ -77,5 +77,11 @@ namespace Z0
         ZeroExtend = Id.ZeroExtend,
 
         SignExtend = Id.SignExtend,
+
+        Enable = Id.Enable,
+
+        Disable = Id.Disable,
+
+        Byteswap = Id.Byteswap,
     }
 }

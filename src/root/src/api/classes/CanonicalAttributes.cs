@@ -19,10 +19,6 @@ namespace Z0
 
     public sealed class SliceAttribute : A { public SliceAttribute() : base(K.Slice) {} }
 
-    public sealed class EnableAttribute : A { public EnableAttribute() : base(K.Enable) {} }
-
-    public sealed class DisableAttribute : A { public DisableAttribute() : base(K.Disable) {} }
-
     public sealed class LoAttribute : A { public LoAttribute() : base(K.Lo) {} }
 
     public sealed class HiAttribute : A { public HiAttribute() : base(K.Hi) {} }
@@ -60,4 +56,6 @@ namespace Z0
     public sealed class VZipAttribute : A { public VZipAttribute() : base(K.VZip) {} }
 
     public sealed class VMapAttribute : A { public VMapAttribute() : base(K.VMap) {} }
+
+    public sealed class BijectionAttribute : A { public BijectionAttribute() : base(K.Bijection) {} }
 }

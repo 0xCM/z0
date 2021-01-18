@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <typeparam name="T">The source vector primal component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline), Bijection, Closures(Closure)]
         public static Vector128<ushort> v16u<T>(Vector128<T> x)
             where T : unmanaged
                 => x.AsUInt16();
@@ -27,12 +27,12 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <typeparam name="T">The source vector primal component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline), Bijection, Closures(Closure)]
         public static Vector256<ushort> v16u<T>(Vector256<T> x)
             where T : unmanaged
                 => x.AsUInt16();
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline), Bijection, Closures(Closure)]
         public static ref Vector256<ushort> v16u<T>(in Vector256<T> src)
             where T : unmanaged
                 => ref @as<Vector256<T>,Vector256<ushort>>(src);

@@ -5,9 +5,5 @@
 namespace Z0
 {
 
-    [ApiHost(ApiNames.XApiIdentity, true)]
-    public static partial class XApiIdentity
-    {
 
-    }
 }

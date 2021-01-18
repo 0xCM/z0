@@ -7,7 +7,7 @@ namespace Z0
     /// <summary>
     /// Promotes the literal classifier <See cref="SignKind.Signed"/> to a type
     /// </summary>
-    public readonly struct Negative : ISigned<Negative>
+    public readonly struct Negative : ISignedClass<Negative>
     {
         /// <summary>
         /// Reveals the represented literal
@@ -19,7 +19,7 @@ namespace Z0
     /// <summary>
     /// Defines a T-parametric <See cref="SignKind.Signed"/> literal classifier promotion
     /// </summary>
-    public readonly struct Negative<T> : ISigned<Negative<T>,Negative,T>
+    public readonly struct Negative<T> : ISignedClass<Negative<T>,Negative,T>
     {
         /// <summary>
         /// Reveals the singleton instance of the nonparametric classifier

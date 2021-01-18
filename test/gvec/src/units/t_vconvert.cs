@@ -121,13 +121,13 @@ namespace Z0
             for(var sample = 0; sample < RepCount; sample++)
             {
                 var sv = Random.CpuVector(sw,st);
-                var tv = vconvert16u(sv,tw,tt);
+                var tv = cpu.vconvert16u(sv,tw,tt);
 
                 sv.StoreTo(sb);
                 tv.StoreTo(tb);
 
                 var i = 0;
-                for(var block = 0; block < tb.BlockCount; block++)
+                for(var block = 0; block<tb.BlockCount; block++)
                 for(var j = 0; j < tb.BlockLength; j++, i++)
                 {
                     var m  = tb[block,j];
@@ -153,7 +153,7 @@ namespace Z0
             for(var sample = 0; sample < RepCount; sample++)
             {
                 var sv = Random.CpuVector(sw,st);
-                var tv = vconvert16u(sv,n256,tt);
+                var tv = cpu.vconvert16u(sv,n256,tt);
                 var tvLo = vlo(tv);
                 var tvHi = vhi(tv);
 

@@ -4,7 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    partial class Kinds
+
+    public readonly struct SignClasses
     {
         /// <summary>
         /// Specifies the singleton instance of the <see cref="Z0.Negative"/> type-level classifier
@@ -22,7 +23,7 @@ namespace Z0
         /// <param name="s">The sign choice, used only for type inference</param>
         /// <typeparam name="S">The choice type: Negative, Neutral or Positive</typeparam>
         public static Sign<S> sign<S>(S s = default)
-            where S : unmanaged, ISigned<S>
+            where S : unmanaged, ISignedClass<S>
                 => default;
 
         /// <summary>
@@ -31,7 +32,7 @@ namespace Z0
         /// <param name="s">The sign classifier, used only for type inference</param>
         /// <typeparam name="S">The choice type: Negative, Neutral or Positive</typeparam>
         public static SignKind kind<S>(S s = default)
-            where S : unmanaged, ISigned
+            where S : unmanaged, ISignedClass
                 => s.Kind;
 
         /// <summary>

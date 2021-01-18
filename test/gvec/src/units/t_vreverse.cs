@@ -82,7 +82,7 @@ namespace Z0
                 var output = f.Invoke(input);
                 var expect = z.vzero(w,t);
                 for(byte j = 0; j < n; j++)
-                    expect = vcell(z.vcell(input,(byte)((n - 1) - j)),j,expect);
+                    expect = vset(z.vcell(input,(byte)((n - 1) - j)),j,expect);
 
                 Claim.veq(expect,output);
             }
@@ -103,7 +103,7 @@ namespace Z0
                 var output = f.Invoke(input);
                 var expect = z.vzero(w,t);
                 for(byte j = 0; j < n; j++)
-                    expect = vcell(z.vcell(input,(byte)((n - 1) - j)),j,expect);
+                    expect = vset(z.vcell(input,(byte)((n - 1) - j)),j,expect);
 
                 Claim.veq(expect,output);
             }

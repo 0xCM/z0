@@ -112,7 +112,7 @@ namespace Z0
             var y = v16i(count);
             var lo = vsrlr(vinflate(vlo(src),w256,z16i),y);
             var hi = vsrlr(vinflate(vhi(src),w256,z16i),y);
-            return vcompact8i(lo,hi, w256, z8i);
+            return vcompact8i(lo,hi, w256);
         }
 
         /// <summary>
@@ -126,7 +126,7 @@ namespace Z0
             var y = v16u(count);
             var lo = vsrlr(vinflate(vlo(src),w256,z16),y);
             var hi = vsrlr(vinflate(vhi(src),w256,z16),y);
-            return vcompact8u(lo,hi, w256, z8);
+            return vcompact8u(lo,hi, w256);
         }
 
         /// <summary>

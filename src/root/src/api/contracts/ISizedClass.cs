@@ -5,13 +5,14 @@
 namespace Z0
 {
     using System;
+
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     /// <summary>
     /// Characterizes an operation class that classifies width-parametric operations
     /// </summary>
     [Free]
-    public interface ISizedOp : IOperationClass
+    public interface ISizedClass : IOperationClass
     {
         TypeWidth Width {get;}
     }
@@ -21,7 +22,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="W">The width type</typeparam>
     [Free]
-    public interface ISizedOp<W> : ISizedOp
+    public interface ISizedClass<W> : ISizedClass
         where W : unmanaged, ITypeWidth
     {
 
@@ -33,7 +34,7 @@ namespace Z0
     /// <typeparam name="W">The width type</typeparam>
     /// <typeparam name="E">The class type</typeparam>
     [Free]
-    public interface ISizedOp<W,E> : ISizedOp<W>, IOperationClass<E>
+    public interface ISizedClass<W,E> : ISizedClass<W>, IOperationClass<E>
         where W : unmanaged, ITypeWidth
         where E : unmanaged, Enum
     {
@@ -47,7 +48,7 @@ namespace Z0
     /// <typeparam name="E">The class type</typeparam>
     /// <typeparam name="T">The operand type</typeparam>
     [Free]
-    public interface ISizedOp<W,E,T> : ISizedOp<W>, IOperationClass<E,T>
+    public interface ISizedClass<W,E,T> : ISizedClass<W>, IOperationClass<E,T>
         where W : unmanaged, ITypeWidth
         where E : unmanaged, Enum
     {

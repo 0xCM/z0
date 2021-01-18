@@ -8,9 +8,9 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
-    public static class IntervalOps
+    partial class XTend
     {
         /// <summary>
         /// Computes the length of the interval by finding the magnitude of the difference
@@ -22,9 +22,5 @@ namespace Z0
         public static T Length<T>(this Interval<T> src)
             where T : unmanaged
                 => gmath.length(src);
-
-        public static string Format<T>(this Span<Interval<T>> parts, char? sep = null)
-            where T : unmanaged
-                => parts.Map(x => x.Format()).Concat($" {sep ?? Chars.Plus} ");
     }
 }

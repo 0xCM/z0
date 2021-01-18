@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class XApiIdentity
+    partial class XApi
     {
         [MethodImpl(Inline), Op]
         public static NumericWidth NumericWidth(this Type t)

@@ -11,7 +11,7 @@ namespace Z0
 
     partial class Bits
     {
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Byteswap]
         public static ushort byteswap(ushort src)
         {
             var dst = src >> 8;
@@ -19,7 +19,7 @@ namespace Z0
             return (ushort)dst;
         }
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Byteswap]
         public static uint byteswap(uint src)
         {
             var dst = 0u;
@@ -30,7 +30,7 @@ namespace Z0
             return dst;
         }
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Byteswap]
         public static ulong byteswap(ulong src)
         {
             var dst = 0ul;

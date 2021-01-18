@@ -10,7 +10,7 @@ namespace Z0
 
     using static System.Runtime.Intrinsics.X86.Pclmulqdq;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     partial struct z

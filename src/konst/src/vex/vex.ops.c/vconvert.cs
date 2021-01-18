@@ -15,7 +15,7 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Sse2;
     using static System.Runtime.Intrinsics.X86.Sse2.X64;
 
-    using static Konst;
+    using static Part;
 
     partial struct z
     {
@@ -26,17 +26,17 @@ namespace Z0
         /// <param name="w">The target width</param>
         /// <param name="t">A target type representative</param>
         [MethodImpl(Inline), Op]
-        public static int convert32i(Vector128<int> src, N32 w)
+        public static int convert32i(Vector128<int> src, W32 w)
             => ConvertToInt32(src);
 
         /// <summary>
-        /// int _mm_cvtsi128_si32 (__m128i a)MOVD reg/m32, xmm
+        /// int _mm_cvtsi128_si32 (__m128i a) MOVD reg/m32, xmm
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="w">The target width</param>
         /// <param name="t">A target type representative</param>
         [MethodImpl(Inline), Op]
-        public static uint convert32u(Vector128<uint> src, N32 w)
+        public static uint convert32u(Vector128<uint> src, W32 w)
             => ConvertToUInt32(src);
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace Z0
         /// <param name="w">The target width</param>
         /// <param name="t">A target type representative</param>
         [MethodImpl(Inline), Op]
-        public static long convert64i(Vector128<long> src, N64 w)
+        public static long convert64i(Vector128<long> src, W64 w)
             => ConvertToInt64(src);
 
         /// <summary>
@@ -56,8 +56,9 @@ namespace Z0
         /// <param name="w">The target width</param>
         /// <param name="t">A target type representative</param>
         [MethodImpl(Inline), Op]
-        public static ulong convert64u(Vector128<ulong> src, N64 w)
+        public static ulong convert64u(Vector128<ulong> src, W64 w)
             => ConvertToUInt64(src);
+
         /// <summary>
         /// VPMOVZXBD ymm, m64
         /// 8x8u -> 8x32u
@@ -68,7 +69,7 @@ namespace Z0
         /// <param name="w">The target vector width</param>
         /// <param name="n">The target component width</param>
         [MethodImpl(Inline), Op]
-        public static unsafe Vector256<uint> vconvert32u(N64 n64, in byte src, N256 w)
+        public static unsafe Vector256<uint> vconvert32u(N64 n64, in byte src, W256 w)
             => v32u(ConvertToVector256Int32(gptr(src)));
 
         /// <summary>
@@ -81,7 +82,20 @@ namespace Z0
         /// <param name="w">The target vector width</param>
         /// <param name="n">The target component width</param>
         [MethodImpl(Inline), Op]
-        public static unsafe Vector256<uint> vconvert32u(N64 n64, in ushort src, N256 w, N32 n)
+        public static unsafe Vector256<uint> vconvert32u(N64 n64, in ushort src, W256 w, W32 n)
+            => v32u(ConvertToVector256Int32(gptr(u8(src))));
+
+        /// <summary>
+        /// VPMOVZXBD ymm, m64
+        /// 8x8u -> 8x32u
+        /// Evenly covers a 256-bit target vector with a 64-bit source
+        /// </summary>
+        /// <param name="w64">The number of bits covered by the source reference</param>
+        /// <param name="src">The source reference</param>
+        /// <param name="w">The target vector width</param>
+        /// <param name="n">The target component width</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe Vector256<uint> vconvert32u(W64 w64, in uint src, W256 w, W32 n)
             => v32u(ConvertToVector256Int32(gptr(u8(src))));
 
         /// <summary>
@@ -94,20 +108,7 @@ namespace Z0
         /// <param name="w">The target vector width</param>
         /// <param name="n">The target component width</param>
         [MethodImpl(Inline), Op]
-        public static unsafe Vector256<uint> vconvert32u(N64 n64, in uint src, N256 w, N32 n)
-            => v32u(ConvertToVector256Int32(gptr(u8(src))));
-
-        /// <summary>
-        /// VPMOVZXBD ymm, m64
-        /// 8x8u -> 8x32u
-        /// Evenly covers a 256-bit target vector with a 64-bit source
-        /// </summary>
-        /// <param name="n64">The number of bits covered by the source reference</param>
-        /// <param name="src">The source reference</param>
-        /// <param name="w">The target vector width</param>
-        /// <param name="n">The target component width</param>
-        [MethodImpl(Inline), Op]
-        public static unsafe Vector256<uint> vconvert32u(N64 n64, in ulong src, N256 w, N32 n)
+        public static unsafe Vector256<uint> vconvert32u(W64 n64, in ulong src, W256 w, W32 n)
             => v32u(ConvertToVector256Int32(gptr(u8(src))));
     }
 }

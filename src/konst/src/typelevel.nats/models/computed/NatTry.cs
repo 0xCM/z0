@@ -272,9 +272,9 @@ namespace Z0
         /// Signals failure by returning none
         /// </summary>
         /// <typeparam name="K">A nonzero natural type</typeparam>
-        public static Option<Nonzero<K>> TryNonzero<K>()
+        public static Option<NonzeroNat<K>> TryNonzero<K>()
             where K: unmanaged, ITypeNat
-                => Try(() => new Nonzero<K>(natrep<K>()));
+                => Try(() => new NonzeroNat<K>(natrep<K>()));
 
         /// <summary>
         /// Attempts to prove that k:K => k != 0
@@ -282,9 +282,9 @@ namespace Z0
         /// Signals failure by returning none
         /// </summary>
         /// <typeparam name="K">A nonzero natural type</typeparam>
-        public static Option<Nonzero<K>> TryNonzero<K>(K k)
+        public static Option<NonzeroNat<K>> TryNonzero<K>(K k)
             where K: unmanaged, ITypeNat
-                => Try( () => new Nonzero<K>(k));
+                => Try( () => new NonzeroNat<K>(k));
 
         /// <summary>
         /// If possible, constructs evidence that n:K => n prime; otherwise,

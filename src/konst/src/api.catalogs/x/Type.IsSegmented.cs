@@ -10,7 +10,7 @@ namespace Z0
 
     using static Part;
 
-    partial class XApiIdentity
+    partial class XApi
     {
         /// <summary>
         /// Returns true if the source type is intrinsic or blocked

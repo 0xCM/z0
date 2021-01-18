@@ -116,7 +116,7 @@ namespace Z0
         {
             (var x0, var x1) = vinflate(src, n512, z16i);
             (var s0, var s1) = vinflate(counts, n512, z16i);
-            return vcompact8i(vsrlv(x0,s0), vsrlv(x1,s1),n256,z8i);
+            return vcompact8i(vsrlv(x0,s0), vsrlv(x1,s1), w256);
         }
 
         /// <summary>
@@ -129,7 +129,7 @@ namespace Z0
         {
             (var x0, var x1) = vinflate(src, n512, z16);
             (var s0, var s1) = vinflate(counts, n512, z16);
-            return vcompact8u(vsrlv(x0,s0), vsrlv(x1,s1),n256,z8);
+            return vcompact8u(vsrlv(x0,s0), vsrlv(x1,s1), w256);
         }
 
         /// <summary>
@@ -142,7 +142,7 @@ namespace Z0
         {
             (var x0, var x1) = vinflate(src, n512, z32i);
             (var s0, var s1) = vinflate(counts, n512, z32i);
-            return vcompact16i(vsrlv(x0,s0),vsrlv(x1,s1),n256,z16i);
+            return vcompact16i(vsrlv(x0,s0),vsrlv(x1,s1),n256);
         }
 
         /// <summary>
@@ -155,7 +155,7 @@ namespace Z0
         {
             (var x0, var x1) = vinflate(src, n512, z32);
             (var s0, var s1) = vinflate(counts, n512, z32);
-            return vcompact16u(vsrlv(x0,s0), vsrlv(x1,s1),n256,z16);
+            return vcompact16u(vsrlv(x0,s0), vsrlv(x1,s1), w256);
         }
 
         /// <summary>

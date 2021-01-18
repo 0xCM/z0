@@ -39,7 +39,7 @@ namespace Z0
 
         public UIntPtr StoreLocation {get;}
 
-        public unsafe ref S StoredData
+        public unsafe ref S Deposited
         {
             [MethodImpl(Inline)]
             get => ref Unsafe.AsRef<S>(StoreLocation.ToPointer());

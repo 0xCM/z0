@@ -34,8 +34,12 @@ namespace Z0
         public static T @throw<T>(object msg)
             => sys.@throw<T>(msg);
 
-       public static NotSupportedException no<T>()
+        public static NotSupportedException no<T>()
             => new NotSupportedException($"The type {typeof(T).Name} is not supported");
+
+        public static NotSupportedException no()
+            => new NotSupportedException();
+
 
         public static T no<S,T>([Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => Unsupported.raise<S,T>(caller, file, line);

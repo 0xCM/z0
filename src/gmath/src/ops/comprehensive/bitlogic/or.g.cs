@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     using BL = BitLogic.Scalar;
@@ -87,7 +87,7 @@ namespace Z0
             else if(typeof(T) == typeof(long))
                  return generic<T>(BL.or(int64(a), int64(b)));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
         [MethodImpl(Inline)]
@@ -95,13 +95,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(MultiOr.or(uint8(a), uint8(b), uint8(c)));
+                return generic<T>(BL.or(uint8(a), uint8(b), uint8(c)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(MultiOr.or(uint16(a), uint16(b), uint16(c)));
+                return generic<T>(BL.or(uint16(a), uint16(b), uint16(c)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(MultiOr.or(uint32(a), uint32(b), uint32(c)));
+                return generic<T>(BL.or(uint32(a), uint32(b), uint32(c)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(MultiOr.or(uint64(a), uint64(b), uint64(c)));
+                return generic<T>(BL.or(uint64(a), uint64(b), uint64(c)));
             else
                 return or_i(a,b,c);
         }
@@ -111,13 +111,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                 return generic<T>(MultiOr.or(int8(a), int8(b), int8(c)));
+                 return generic<T>(BL.or(int8(a), int8(b), int8(c)));
             else if(typeof(T) == typeof(short))
-                 return generic<T>(MultiOr.or(int16(a), int16(b), int16(c)));
+                 return generic<T>(BL.or(int16(a), int16(b), int16(c)));
             else if(typeof(T) == typeof(int))
-                 return generic<T>(MultiOr.or(int32(a), int32(b), int32(c)));
+                 return generic<T>(BL.or(int32(a), int32(b), int32(c)));
             else if(typeof(T) == typeof(long))
-                 return generic<T>(MultiOr.or(int64(a), int64(b), int64(c)));
+                 return generic<T>(BL.or(int64(a), int64(b), int64(c)));
             else
                 throw no<T>();
         }

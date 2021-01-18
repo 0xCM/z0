@@ -58,7 +58,7 @@ namespace Z0
 
             Run(examples.vshuf16x16);
             Run(examples.vshuf16x8_128x8u);
-            Run(examples.vshuf16x8);
+            //Run(examples.vshuf16x8);
         }
 
         [MethodImpl(Inline),Op]

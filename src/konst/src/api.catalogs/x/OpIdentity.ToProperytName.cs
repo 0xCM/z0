@@ -11,7 +11,7 @@ namespace Z0
 
     using api = ApiIdentify;
 
-    partial class XApiIdentity
+    partial class XApi
     {
          [Op]
          public static string ToPropertyName(this OpIdentity src)

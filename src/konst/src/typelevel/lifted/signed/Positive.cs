@@ -4,14 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-
     /// <summary>
     /// Promotes the literal classifier <See cref="SignKind.Unsigned"/> to a type
     /// </summary>
-    public readonly struct Positive : ISigned<Positive>
+    public readonly struct Positive : ISignedClass<Positive>
     {
         /// <summary>
         /// Reveals the represented literal
@@ -23,7 +19,7 @@ namespace Z0
     /// <summary>
     /// Defines a T-parametric <See cref="SignKind.Signed"/> literal classifier promotion
     /// </summary>
-    public readonly struct Positive<T> : ISigned<Positive<T>,Positive,T>
+    public readonly struct Positive<T> : ISignedClass<Positive<T>,Positive,T>
     {
         /// <summary>
         /// Reveals the singleton instance of the nonparametric classifier

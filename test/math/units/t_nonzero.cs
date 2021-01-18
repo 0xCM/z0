@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Konst;
 
     public class t_nonzero : t_numeric<t_nonzero>
     {

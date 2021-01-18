@@ -55,7 +55,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> vblendp<T>(Vector128<T> x, Vector128<T> y, Vector128<T> spec)
             where T : unmanaged
-                => z.vconcat(vblendv(x,y,spec), vblendv(x,y,vnot(spec)));
+                => gcpu.vconcat(vblendv(x,y,spec), vblendv(x,y,vnot(spec)));
 
         /// <summary>
         /// Effects a "paired" or "permutation" blend that computes vectors
@@ -70,6 +70,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> vblendp<T>(Vector256<T> x, Vector128<T> spec)
             where T : unmanaged
-                => z.vconcat(vblendv(vlo(x),vhi(x),spec), vblendv(vlo(x),vhi(x),vnot(spec)));
+                => gcpu.vconcat(vblendv(vlo(x),vhi(x),spec), vblendv(vlo(x),vhi(x),vnot(spec)));
     }
 }

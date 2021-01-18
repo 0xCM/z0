@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class XApiCatalogs
+    partial class XApi
     {
         /// <summary>
         /// Selects nongeneric source methods that have at least one 128-bit vector parameter

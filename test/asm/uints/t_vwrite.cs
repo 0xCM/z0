@@ -50,7 +50,7 @@ namespace Z0
         public void check_vwrite_u8()
         {
             var src = Random.Span<byte>(16);
-            var dst = z.vcover<uint>(w128, ref first(src));
+            var dst = gcpu.vcover<uint>(w128, ref first(src));
             var a = Spans.alloc<uint>(4);
             z.vsave(dst, ref first(a));
             var b = memory.uint32(src);

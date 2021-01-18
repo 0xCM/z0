@@ -13,28 +13,6 @@ namespace Z0
     partial class gbits
     {
         /// <summary>
-        /// Disables a sequence of 8 source bits starting at a specified index
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        /// <param name="index">The index at which to begin clearing bits</param>
-        /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static T clearbyte<T>(T src, byte index)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte))
-                return default;
-            else if(typeof(T) == typeof(ushort))
-                return generic<T>(Bits.clear8(uint16(src), index));
-            else if(typeof(T) == typeof(uint))
-                return generic<T>(Bits.clear8(uint32(src), index));
-            else if(typeof(T) == typeof(ulong))
-                return generic<T>(Bits.clear8(uint64(src), index));
-            else
-                throw no<T>();
-        }
-
-        /// <summary>
         /// Disables a sequence of bits starting at a specified index
         /// </summary>
         /// <param name="src">The bit source</param>
@@ -51,13 +29,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(Bits.clear(uint8(src), index, count));
+                return generic<T>(Bits.disable(uint8(src), index, count));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(Bits.clear(uint16(src), index, count));
+                return generic<T>(Bits.disable(uint16(src), index, count));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(Bits.clear(uint32(src), index, count));
+                return generic<T>(Bits.disable(uint32(src), index, count));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(Bits.clear(uint64(src), index, count));
+                return generic<T>(Bits.disable(uint64(src), index, count));
             else
                 return clear_i(src,index,count);
         }
@@ -67,13 +45,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(Bits.clear(int8(src), index, count));
+                return generic<T>(Bits.disable(int8(src), index, count));
             else if(typeof(T) == typeof(short))
-                return generic<T>(Bits.clear(int16(src), index, count));
+                return generic<T>(Bits.disable(int16(src), index, count));
             else if(typeof(T) == typeof(int))
-                return generic<T>(Bits.clear(int32(src), index, count));
+                return generic<T>(Bits.disable(int32(src), index, count));
             else if(typeof(T) == typeof(long))
-                return generic<T>(Bits.clear(int64(src), index, count));
+                return generic<T>(Bits.disable(int64(src), index, count));
             else
                 throw no<T>();
         }

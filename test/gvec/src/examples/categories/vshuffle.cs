@@ -164,7 +164,7 @@ namespace Z0
         }
 
         [Op(ExampleGroups.Shuffles)]
-        public void vshuf16x8()
+        void vshuf16x8()
         {
             var reverse = PermSymbolic.reversed(n16);
             var perm = Permute.natural(reverse);

@@ -22,12 +22,12 @@ namespace Z0
             var x2 = vparts(w128, 4u,5,6,7);
             var y2 = vparts(w128, 4, 4, 4, 4,5,5,5,5, 6,6,6,6, 7,7,7,7);
             var z2 = z.vcover(x2, out Vector128<byte> _);
-            Claim.veq(y2,z2);
+            Claim.veq(y2, z2);
 
             var x3 = vparts(w128,4,5,6,7);
             var y3 = vparts(w128,4,4, 5,5, 6,6, 7,7);
             var z3 = z.vcover(x3, out Vector128<ushort> _);
-            Claim.veq(y3,z3);
+            Claim.veq(y3, z3);
 
             var x4 = vparts(4,5);
             var y4 = vparts(w128,4,4, 5,5);
@@ -41,7 +41,7 @@ namespace Z0
                  2, 2, 2, 2, 2, 2, 2, 2,
                  3, 3, 3, 3, 3, 3, 3, 3);
             z.vcover(x5, out Vector256<byte> z5);
-            Claim.veq(y5,z5);
+            Claim.veq(y5, z5);
 
             var x6 =vparts(1,2,3,4,5,6,7,8);
             var y6 = vparts(w256,
@@ -50,7 +50,7 @@ namespace Z0
                  5, 5, 5, 5, 6, 6, 6, 6,
                  7, 7, 7, 7, 8, 8, 8, 8);
             z.vcover(x6, out Vector256<byte> z6);
-            Claim.veq(y6,z6);
+            Claim.veq(y6, z6);
         }
     }
 }

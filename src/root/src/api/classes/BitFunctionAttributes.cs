@@ -70,4 +70,10 @@ namespace Z0
     public sealed class ZeroExtendAttribute : A { public ZeroExtendAttribute() : base(K.ZeroExtend) {} }
 
     public sealed class SignExtendAttribute : A { public SignExtendAttribute() : base(K.SignExtend) {} }
+
+    public sealed class EnableAttribute : A { public EnableAttribute() : base(K.Enable) {} }
+
+    public sealed class DisableAttribute : A { public DisableAttribute() : base(K.Disable) {} }
+
+    public sealed class ByteswapAttribute : A { public ByteswapAttribute() : base(K.Byteswap) {} }
 }

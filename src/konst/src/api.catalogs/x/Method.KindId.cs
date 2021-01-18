@@ -11,7 +11,7 @@ namespace Z0
 
     using static Part;
 
-    partial class XApiIdentity
+    partial class XApi
     {
         /// <summary>
         /// Returns the source method's kind identifier if it exists

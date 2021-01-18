@@ -17,8 +17,6 @@ namespace Z0
     public interface IMemoryStore<T> : IMemoryStore, IDataStore<T>
         where T : struct
     {
-        ref T StoredData {get;}
+        ref T Deposited {get;}
     }
-
-
 }

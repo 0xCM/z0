@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static memory;
 
     [ApiHost]
@@ -64,7 +64,7 @@ namespace Z0
             var count = src.Length;
             if(count != 0)
             {
-                var terms = new SeqTerm<T>[count];
+                var terms = alloc<SeqTerm<T>>(count);
                 var dst = span(terms);
                 for(var i=0u; i<count; i++)
                     seek(dst,i) = new SeqTerm<T>(i, skip(src,i));

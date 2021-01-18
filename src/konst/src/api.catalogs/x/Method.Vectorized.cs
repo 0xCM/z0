@@ -12,7 +12,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class XApiCatalogs
+    partial class XApi
     {
         /// <summary>
         /// selects vectorized methods from a source stream

@@ -24,10 +24,6 @@ namespace Z0
 
         Slice = Id.Slice,
 
-        Enable = Id.Enable,
-
-        Disable = Id.Disable,
-
         Lo = Id.Lo,
 
         Hi = Id.Hi,
@@ -84,5 +80,6 @@ namespace Z0
 
         VMap = Id.VMap,
 
+        Bijection = Id.Bijection
     }
 }

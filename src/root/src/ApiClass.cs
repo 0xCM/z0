@@ -398,6 +398,13 @@ public enum ApiClass : ushort
 
     SignExtend,
 
+    /// <summary>
+    /// Classifies bijective operators
+    /// </summary>
+    Bijection,
+
+    Byteswap,
+
     // ~~ Instructions/Intrinsics
     // ~~ -------------------------------------------------------------------------------------------------------------
 

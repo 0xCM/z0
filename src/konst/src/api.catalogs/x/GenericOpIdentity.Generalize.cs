@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    partial class XApiIdentity
+    partial class XApi
     {
         [MethodImpl(Inline)]
         public static OpIdentity Generalize(this ApiGenericOpIdentity src)

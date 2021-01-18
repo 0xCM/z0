@@ -8,7 +8,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class XApiIdentity
+    partial class XApi
     {
         /// <summary>
         /// Enables the assembly indicator

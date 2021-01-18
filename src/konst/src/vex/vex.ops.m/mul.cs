@@ -85,7 +85,7 @@ namespace Z0
         {
             var lo = Multiply(x, y);
             var hi = Multiply(vswaphl(x), vswaphl(y));
-            return vconcat(lo,hi);
+            return cpu.vconcat(lo,hi);
         }
 
         /// <summary>
@@ -98,7 +98,7 @@ namespace Z0
         {
             var lo = Multiply(x, y);
             var hi = Multiply(vswaphl(x), vswaphl(y));
-            return vconcat(lo,hi);
+            return cpu.vconcat(lo,hi);
         }
 
         /// <summary>

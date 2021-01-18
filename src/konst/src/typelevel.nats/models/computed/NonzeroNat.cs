@@ -13,7 +13,7 @@ namespace Z0
     /// Captures evidence that k != 0
     /// </summary>
     /// <typeparam name="K">A nonzero natural type</typeparam>
-    public readonly struct Nonzero<K> : INatNonZero<K>
+    public readonly struct NonzeroNat<K> : INatNonZero<K>
         where K: unmanaged, ITypeNat
     {
         static K k => default;
@@ -23,7 +23,7 @@ namespace Z0
         public ulong NatValue => TypeNats.value(k);
 
         [MethodImpl(Inline)]
-        public Nonzero(K n)
+        public NonzeroNat(K n)
             => root.require(n.NatValue != 0, () => Description);
 
         public override string ToString()

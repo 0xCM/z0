@@ -6,10 +6,10 @@ namespace Z0
 {
     using System;
 
-    using static Konst;
+    using static Part;
 
     [ApiHost(ApiNames.ApiCatalogExtensions, true)]
-    public static partial class XApiCatalogs
+    public static partial class XApi
     {
         const NumericKind Closure = UnsignedInts;
     }

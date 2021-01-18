@@ -11,7 +11,7 @@ namespace Z0
 
     using api = ApiIdentify;
 
-    partial class XApiIdentity
+    partial class XApi
     {
         /// <summary>
         /// Extracts an 8-bit immediate value from an identity if it contains an immediate suffix; otherwise, returns none

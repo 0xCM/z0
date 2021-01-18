@@ -20,7 +20,7 @@ namespace Z0
             var mask = Mask(dst,index);
             var conformed = gmath.and(src,mask);
             var i  = EnumValue.scalar<F,byte>(index);
-            dst.State = vcell(conformed, i, dst.State);
+            dst.State = vset(conformed, i, dst.State);
             return ref dst;
         }
     }

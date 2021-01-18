@@ -18,7 +18,7 @@ namespace Z0
         public MemoryStore(UIntPtr location)
             => StoreLocation = location;
 
-        public unsafe ref T StoredData
+        public unsafe ref T Deposited
         {
             [MethodImpl(Inline)]
             get => ref Unsafe.AsRef<T>(StoreLocation.ToPointer());

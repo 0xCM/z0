@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
      partial class Bits
      {
@@ -16,8 +16,8 @@ namespace Z0
           /// </summary>
           /// <param name="src">The bit source</param>
           /// <param name="index">The index at which to begin clearing bits</param>
-          [MethodImpl(Inline), Op]
-          public static ushort clear8(ushort src, byte index)
+          [MethodImpl(Inline), Disable]
+          public static ushort disable8(ushort src, byte index)
           {
                var mask = uint.MaxValue ^ ((uint)byte.MaxValue << index);
                return (ushort)(mask & src);
@@ -28,8 +28,8 @@ namespace Z0
           /// </summary>
           /// <param name="src">The bit source</param>
           /// <param name="index">The index at which to begin clearing bits</param>
-          [MethodImpl(Inline), Op]
-          public static uint clear8(uint src, byte index)
+          [MethodImpl(Inline), Disable]
+          public static uint disable8(uint src, byte index)
           {
                var mask = uint.MaxValue ^ ((uint)byte.MaxValue << index);
                return mask & src;
@@ -40,8 +40,8 @@ namespace Z0
           /// </summary>
           /// <param name="src">The bit source</param>
           /// <param name="index">The index at which to begin clearing bits</param>
-          [MethodImpl(Inline), Op]
-          public static ulong clear8(ulong src, byte index)
+          [MethodImpl(Inline), Disable]
+          public static ulong disable8(ulong src, byte index)
           {
                var mask = ulong.MaxValue ^ ((ulong)byte.MaxValue << index);
                return mask & src;

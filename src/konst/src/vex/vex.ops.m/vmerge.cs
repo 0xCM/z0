@@ -48,35 +48,35 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static Vector256<sbyte> vmerge(Vector128<sbyte> x, Vector128<sbyte> y)
-            => vconcat(vmergelo(x,y),vmergehi(x,y));
+            => cpu.vconcat(vmergelo(x,y),vmergehi(x,y));
 
         [MethodImpl(Inline), Op]
         public static Vector256<byte> vmerge(Vector128<byte> x, Vector128<byte> y)
-            => vconcat(vmergelo(x,y),vmergehi(x,y));
+            => cpu.vconcat(vmergelo(x,y),vmergehi(x,y));
 
         [MethodImpl(Inline), Op]
         public static Vector256<short> vmerge(Vector128<short> x, Vector128<short> y)
-            => vconcat(vmergelo(x,y),vmergehi(x,y));
+            => cpu.vconcat(vmergelo(x,y),vmergehi(x,y));
 
         [MethodImpl(Inline), Op]
         public static Vector256<ushort> vmerge(Vector128<ushort> x, Vector128<ushort> y)
-            => vconcat(vmergelo(x,y),vmergehi(x,y));
+            => cpu.vconcat(vmergelo(x,y),vmergehi(x,y));
 
         [MethodImpl(Inline), Op]
         public static Vector256<int> vmerge(Vector128<int> x, Vector128<int> y)
-            => vconcat(vmergelo(x,y),vmergehi(x,y));
+            => cpu.vconcat(vmergelo(x,y),vmergehi(x,y));
 
         [MethodImpl(Inline), Op]
         public static Vector256<uint> vmerge(Vector128<uint> x, Vector128<uint> y)
-            => vconcat(vmergelo(x,y),vmergehi(x,y));
+            => cpu.vconcat(vmergelo(x,y),vmergehi(x,y));
 
         [MethodImpl(Inline), Op]
         public static Vector256<long> vmerge(Vector128<long> x, Vector128<long> y)
-            => vconcat(vmergelo(x,y),vmergehi(x,y));
+            => cpu.vconcat(vmergelo(x,y),vmergehi(x,y));
 
         [MethodImpl(Inline), Op]
         public static Vector256<ulong> vmerge(Vector128<ulong> x, Vector128<ulong> y)
-            => vconcat(vmergelo(x,y),vmergehi(x,y));
+            => cpu.vconcat(vmergelo(x,y),vmergehi(x,y));
 
         /// <summary>
         /// [A,B,C,D] x [E,F,G,H] -> [A,E,B,F,C,G,D,H]

@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <typeparam name="T">The source vector primal component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline), Bijection, Closures(Closure)]
         public static Vector128<float> v32f<T>(Vector128<T> x)
             where T : unmanaged
                 => x.AsSingle();
@@ -27,7 +27,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <typeparam name="T">The source vector primal component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline), Bijection, Closures(Closure)]
         public static Vector256<float> v32f<T>(Vector256<T> x)
             where T : unmanaged
                 => x.AsSingle();

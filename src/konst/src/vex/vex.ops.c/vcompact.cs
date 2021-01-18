@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
+    using static Part;
 
     partial struct z
     {
@@ -84,7 +84,7 @@ namespace Z0
         /// <param name="t">A target component type representative</param>
         [MethodImpl(Inline), Op]
         public static Vector128<short> vcompact16i(Vector256<int> src, W16 w)
-            => vcompact16i(vlo(src), vhi(src),w128,z16i);
+            => vcompact16i(vlo(src), vhi(src), w128);
 
         /// <summary>
         /// 4x64w -> 4x32w
@@ -112,7 +112,7 @@ namespace Z0
         /// <param name="t">A target type representative</param>
         [MethodImpl(Inline), Op]
         public static ulong vcompact64u(Vector128<ushort> src, W64 w)
-            => vcell64(vcompact8u(src, default, n128, z8),0);
+            => vcell64(vcompact8u(src, default, w128),0);
 
         /// <summary>
         /// 8x32u -> 64u (a scalar)
@@ -122,7 +122,7 @@ namespace Z0
         /// <param name="t">A target type representative</param>
         [MethodImpl(Inline), Op]
         public static ulong vcompact64u(Vector256<uint> src, W64 w)
-            => vcompact64u(vcompact16u(src, n128,z16), w64, z64);
+            => vcompact64u(vcompact16u(src, w128), w64, z64);
 
         // ~ 16i -> X
         // ~ ------------------------------------------------------------------
@@ -161,7 +161,7 @@ namespace Z0
         /// <param name="x">The first source vector</param>
         /// <param name="y">The second source vector</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<byte> vcompact8u(Vector128<ushort> x, Vector128<ushort> y, N128 w, byte t)
+        public static Vector128<byte> vcompact8u(Vector128<ushort> x, Vector128<ushort> y, N128 w, byte t = 0)
             => vpackus(x,y);
 
         /// <summary>
@@ -246,7 +246,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<uint> vcompact32u(Vector256<ulong> x0, Vector256<ulong> x1, N256 w, uint t = 0)
-            => vconcat(vcompact32u(x0, n128,t), vcompact32u(x1, n128,t));
+            => cpu.vconcat(vcompact32u(x0, n128,t), vcompact32u(x1, n128,t));
 
         /// <summary>
         /// (4x32u,4x32u,4x32u,4x32u) -> 16x8u
@@ -270,7 +270,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<byte> vcompact8u(Vector256<uint> x0, Vector256<uint> x1, Vector256<uint> x2, Vector256<uint> x3, N256 w, byte t = 0)
-            => vcompact8u(vcompact16u(x0,x1,n256,Konst.z16), vcompact16u(x2,x3,n256,Konst.z16),w,t);
+            => vcompact8u(vcompact16u(x0,x1,n256,Konst.z16), vcompact16u(x2,x3,n256,Konst.z16),w);
 
         /// <summary>
         /// 16x32u -> 16x8u
@@ -278,8 +278,8 @@ namespace Z0
         /// <param name="src">The source vector tuple</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<byte> vcompact8u(in Vector512<uint> src, N128 w, byte t = 0)
-            => vcompact8u(src.Lo, src.Hi, w, t);
+        public static Vector128<byte> vcompact8u(in Vector512<uint> src, W128 w)
+            => vcompact8u(src.Lo, src.Hi, w);
 
         /// <summary>
         /// 4x64w -> 4x32w
@@ -287,7 +287,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<uint> vcompact32u(Vector256<ulong> src, N128 w, uint t = 0)
+        public static Vector128<uint> vcompact32u(Vector256<ulong> src, W128 w, uint t = 0)
             => vparts(n128, (uint)vcell(src, 0),(uint)vcell(src, 1),(uint)vcell(src, 2),(uint)vcell(src, 3));
 
         /// <summary>
@@ -296,7 +296,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<int> vcompact32i(Vector256<long> src, N128 w, int t = 0)
+        public static Vector128<int> vcompact32i(Vector256<long> src, W128 w, int t = 0)
             => vparts(w128i, (int)vcell(src, 0), (int)vcell(src, 1), (int)vcell(src, 2), (int)vcell(src, 3));
 
         /// <summary>
@@ -304,7 +304,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<sbyte> vcompact8i(Vector256<short> src, N128 w, sbyte t = 0)
+        public static Vector128<sbyte> vcompact8i(Vector256<short> src, W128 w, sbyte t = 0)
             => vpackss(vlo(src), vhi(src));
 
         /// <summary>
@@ -312,7 +312,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<byte> vcompact8u(Vector256<short> src, N128 w, byte t = 0)
+        public static Vector128<byte> vcompact8u(Vector256<short> src, W128 w, byte t = 0)
             => v8u(vpackss(vlo(src), vhi(src)));
 
         /// <summary>
@@ -322,7 +322,7 @@ namespace Z0
         /// <param name="w">The target vector width</param>
         /// <param name="t">A target component type representative</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<byte> vcompact8u(Vector128<ushort> x, N128 w, byte t = 0)
+        public static Vector128<byte> vcompact8u(Vector128<ushort> x, W128 w, byte t = 0)
             => vcompact8u(x, default, w, t);
 
         /// <summary>
@@ -331,7 +331,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<byte> vcompact8u(Vector256<ushort> src, N128 w, byte t = 0)
+        public static Vector128<byte> vcompact8u(Vector256<ushort> src, W128 w, byte t = 0)
             => vpackus(vlo(src), vhi(src));
 
         /// <summary>
@@ -341,7 +341,7 @@ namespace Z0
         /// <param name="w">The target width</param>
         /// <param name="t">A target type representative</param>
         [MethodImpl(Inline), Op]
-        public static ulong vcompact64u(Vector128<ushort> src, N64 w, ulong t)
+        public static ulong vcompact64u(Vector128<ushort> src, W64 w, ulong t)
             => vcell64(vcompact8u(src, default, n128, Konst.z8),0);
 
         /// <summary>
@@ -351,7 +351,7 @@ namespace Z0
         /// <param name="w">The target vector width</param>
         /// <param name="t">A target component type representative</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<ushort> vcompact16u(Vector256<uint> src, N128 w, ushort t = 0)
+        public static Vector128<ushort> vcompact16u(Vector256<uint> src, W128 w, ushort t = 0)
             => vcompact16u(vlo(src), vhi(src),w,t);
 
         /// <summary>
@@ -361,7 +361,7 @@ namespace Z0
         /// <param name="w">The target width</param>
         /// <param name="t">A target type representative</param>
         [MethodImpl(Inline), Op]
-        public static ulong vcompact64u(Vector256<uint> src, N64 w, ulong t = 0)
+        public static ulong vcompact64u(Vector256<uint> src, W64 w, ulong t = 0)
             => vcompact64u(vcompact16u(src, n128,Konst.z16),w,t);
 
         /// <summary>
@@ -371,7 +371,7 @@ namespace Z0
         /// <param name="w">The target width</param>
         /// <param name="t">A target component type representative</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<byte> vcompact8u(Vector256<uint> src, N128 w, byte t = 0)
+        public static Vector128<byte> vcompact8u(Vector256<uint> src, W128 w, byte t = 0)
             => vcompact8u(vcompact16u(src, n128,Konst.z16),w,t);
 
         /// <summary>

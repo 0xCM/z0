@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static memory;
 
     /// <summary>
@@ -19,7 +19,6 @@ namespace Z0
         public override uint CellCount
              => 256;
 
-        [Op]
         protected override void Fill(Span<T> dst)
         {
             for(var i=0u; i<256; i++)

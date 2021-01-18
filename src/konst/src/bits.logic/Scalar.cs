@@ -1311,6 +1311,38 @@ namespace Z0
             [MethodImpl(Inline), Op]
             public static ulong blend(ulong a, ulong b,ulong mask)
                 => xor(a, and(xor(a,b), mask));
+
+            [MethodImpl(Inline), Or]
+            public static sbyte or(sbyte a, sbyte b, sbyte c)
+                => (sbyte)((int)a | (int)b | (int)c);
+
+            [MethodImpl(Inline), Or]
+            public static byte or(byte a, byte b, byte c)
+                => (byte)((uint)a | (uint)b | (uint)c);
+
+            [MethodImpl(Inline), Or]
+            public static short or(short a, short b, short c)
+                => (short)((int)a | (int)b | (int)c);
+
+            [MethodImpl(Inline), Or]
+            public static ushort or(ushort a, ushort b, ushort c)
+                => (ushort)((uint)a | (uint)b | (uint)c);
+
+            [MethodImpl(Inline), Or]
+            public static int or(int a, int b, int c)
+                => a | b | c;
+
+            [MethodImpl(Inline), Or]
+            public static uint or(uint a, uint b, uint c)
+                => a | b | c;
+
+            [MethodImpl(Inline), Or]
+            public static long or(long a, long b, long c)
+                => a | b | c;
+
+            [MethodImpl(Inline), Or]
+            public static ulong or(ulong a, ulong b, ulong c)
+                => a | b | c;
         }
     }
 }

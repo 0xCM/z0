@@ -14,7 +14,7 @@ namespace Z0
     /// </summary>
     public readonly struct Seq<T>
     {
-        readonly TableSpan<SeqTerm<T>> Terms;
+        readonly Index<SeqTerm<T>> Terms;
 
         [MethodImpl(Inline)]
         public Seq(params SeqTerm<T>[] src)

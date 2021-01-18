@@ -172,7 +172,7 @@ namespace Z0
         /// <param name="w">The target component width</param>
         [MethodImpl(Inline), VZip]
         public static Vector256<uint> vzip(Vector256<ulong> x, Vector256<ulong> y, W32 w)
-            => vconcat(vcompact32u(x, n128,z32), vcompact32u(y, n128,z32));
+            => cpu.vconcat(vcompact32u(x, n128,z32), vcompact32u(y, n128,z32));
 
         /// <summary>
         /// (4x32u,4x32u,4x32u,4x32u) -> 16x8u

@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-        
+    using static Part;
+
     public static class nonzero
     {
         /// <summary>
@@ -18,32 +18,32 @@ namespace Z0
         /// <param name="value">The nonzero value</param>
         /// <typeparam name="T">The numeric type</typeparam>
         [MethodImpl(Inline)]
-        public static nonzero<T> create<T>(T value)
+        public static Nonzero<T> create<T>(T value)
             where T : unmanaged
-                => new nonzero<T>(value);
+                => new Nonzero<T>(value);
     }
 
-    public readonly struct nonzero<T>  : INonZero<nonzero<T>,T>, IEquatable<T>
+    public readonly struct Nonzero<T>  : INonZero<Nonzero<T>,T>, IEquatable<T>
         where T : unmanaged
     {
         public readonly T Value {get;}
 
         [MethodImpl(Inline)]
-        public static implicit operator nonzero<T>(T src)
-            => new nonzero<T>(src);
+        public static implicit operator Nonzero<T>(T src)
+            => new Nonzero<T>(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator T(nonzero<T> src)
+        public static implicit operator T(Nonzero<T> src)
             => src.Value;
 
         [MethodImpl(Inline)]
-        public nonzero(T value)
+        public Nonzero(T value)
         {
-            Value = gmath.zclear(value);
+            Value =  root.require(gmath.nonz(value), value, () => "Nonzero it must be");
         }
 
         [MethodImpl(Inline)]
-        public bool Equals(nonzero<T> src)
+        public bool Equals(Nonzero<T> src)
             => gmath.eq(Value, src.Value);
 
         [MethodImpl(Inline)]

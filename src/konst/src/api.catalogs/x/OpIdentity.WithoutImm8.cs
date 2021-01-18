@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    partial class XApiIdentity
+    partial class XApi
     {
         /// <summary>
         /// Clears an attached immediate suffix, if any
