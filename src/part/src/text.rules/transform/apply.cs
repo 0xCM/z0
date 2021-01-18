@@ -15,6 +15,7 @@ namespace Z0
     {
         partial struct Transform
         {
+            [Op]
             public static unsafe string apply(Replacement<char> rule, string src)
             {
                 var count = Query.length(src);
@@ -24,7 +25,7 @@ namespace Z0
                 return new string(dst);
             }
 
-            [MethodImpl(Inline), Op]
+            [Op]
             public static unsafe void apply(Replacement<char> rule, ReadOnlySpan<char> src, Span<char> dst, int offset = 0)
             {
                 var count = src.Length;

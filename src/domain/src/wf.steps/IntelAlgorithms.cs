@@ -90,7 +90,7 @@ namespace Z0
 
             term.print($"Emitting intrinsics algorithms");
 
-            var pagewidth = (uint)text.PageBreak.Length;
+            var pagewidth = (uint)RP.PageBreak120.Length;
             var writers = root.dict<string,StreamWriter>();
             for(var i=0; i<list.Length; i++)
             {
@@ -138,7 +138,7 @@ namespace Z0
                     writer.WriteLine();
                 }
 
-                writer.WriteLine(text.PageBreak);
+                writer.WriteLine(RP.PageBreak120);
                 writer.WriteLine(described);
                 writer.WriteLine();
                 if(text.nonempty(algorithm))
@@ -153,7 +153,7 @@ namespace Z0
                 }
 
                 writer.WriteLine();
-                writer.WriteLine(text.PageBreak);
+                writer.WriteLine(RP.PageBreak120);
             }
 
             term.print($"Emitted {list.Length} intrinsics algorithms");

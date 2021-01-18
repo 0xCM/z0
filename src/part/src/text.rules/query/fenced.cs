@@ -33,6 +33,17 @@ namespace Z0
 
                 return result;
             }
+
+            /// <summary>
+            /// Determines whether the source string is contained betwee specified left and right markers
+            /// </summary>
+            /// <param name="s">The subject to test</param>
+            /// <param name="left">The left marker</param>
+            /// <param name="right">The right marker</param>
+            /// <param name="compare">Th comparison type</param>
+            [Op]
+            public static bool fenced(string src, string left, string right)
+                => src.StartsWith(left, InvariantCulture) && src.EndsWith(right, InvariantCulture);
         }
     }
 }

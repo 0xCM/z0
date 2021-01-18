@@ -15,11 +15,11 @@ namespace Z0
     {
         public static XedSourceParser Service => default;
 
-        public TextDocRows LoadSource(FS.FilePath src)
+        public XedDocRows LoadSource(FS.FilePath src)
             => TextDocParser.parse(src,TextDocFormat.Unstructured)
-                    .MapValueOrDefault(c => new TextDocRows(src, c.RowData), TextDocRows.Empty);
+                    .MapValueOrDefault(c => new XedDocRows(src, c.RowData), XedDocRows.Empty);
 
-        public XedInstructionDoc ParseInstruction(TextDocRows src, in int idxStart, ref int ix)
+        public XedInstructionDoc ParseInstruction(XedDocRows src, in int idxStart, ref int ix)
         {
             var rows = list<TextRow>();
             var parsing = false;
@@ -46,7 +46,7 @@ namespace Z0
             return new XedInstructionDoc(rows.ToArray());
         }
 
-        XedInstructionDoc[] ParseInstructions(TextDocRows data, int ix)
+        XedInstructionDoc[] ParseInstructions(XedDocRows data, int ix)
         {
             var dst = list<XedInstructionDoc>();
             for(var i=0; i<data.RowCount; i++)
@@ -75,14 +75,14 @@ namespace Z0
         static void Retreat(ref int index)
             => --index;
 
-        XedRuleSet ParseFunction(TextDocRows data, ref int ix)
+        XedRuleSet ParseFunction(XedDocRows rows, ref int ix)
         {
-            var title = data[ix].RowText.LeftOfFirst(RuleMarker);
+            var title = rows[ix].RowText.LeftOfFirst(RuleMarker);
             var body = list<string>();
             var first = ix;
-            for(var i = ix; i<data.RowCount; i++)
+            for(var i = ix; i<rows.RowCount; i++)
             {
-                ref readonly var row = ref data[ix];
+                ref readonly var row = ref rows[ix];
                 var isHeader = Contains(row, RuleMarker);
                 if(isHeader)
                 {
@@ -107,13 +107,12 @@ namespace Z0
                     continue;
 
                 body.Add(row.RowText);
-
             }
 
             var parts = title.SplitClean(Chars.Space);
             var rt = parts.Length == 2 ? parts[0] : string.Empty;
             var name = parts.Length == 1 ? parts[0] : (parts.Length == 2 ? parts[1] : EmptyString);
-            var srcName = data.Source.FileName;
+            var srcName = rows.Source.FileName;
             return new XedRuleSet(srcName, name, rt, body.Map(x => new XedExpr(x)), Xed.rulefile(srcName, name));
         }
 

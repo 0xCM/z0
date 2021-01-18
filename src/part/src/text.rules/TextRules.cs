@@ -12,9 +12,14 @@ namespace Z0
     using static Part;
     using static memory;
 
+    [ApiHost("text.rules")]
     public readonly partial struct TextRules
     {
         const NumericKind Closure = UnsignedInts;
+
+        const MethodImplOptions Options = NotInline;
+
+        public const StringComparison InvariantCulture = StringComparison.InvariantCulture;
 
         /// <summary>
         /// Inserts a string into the intern pool if it is not already there and, in any case, returns the string's address
@@ -27,10 +32,11 @@ namespace Z0
         /// <summary>
         /// Creates a new stringbuilder
         /// </summary>
+        [MethodImpl(Inline)]
         static StringBuilder build()
             => EmptyString.Build();
 
-        [ApiHost("text.rules.text")]
+        [ApiHost("text.rules.query")]
         public readonly partial struct Query
         {
 
@@ -50,6 +56,12 @@ namespace Z0
 
         [ApiHost("text.rules.parse")]
         public readonly partial struct Parse
+        {
+
+        }
+
+        [ApiHost("text.rules.factory")]
+        public readonly partial struct Factory
         {
 
         }

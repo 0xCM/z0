@@ -20,13 +20,14 @@ namespace Z0
             /// Splits the source text into lines
             /// </summary>
             /// <param name="src">The source text</param>
+            [Op]
             public static Index<TextLine> lines(string src)
             {
-                var parts = @readonly(src.SplitClean(CRLF));
+                var parts = @readonly(split(src, CRLF));
                 var count = parts.Length;
                 var buffer = alloc<TextLine>(count);
                 ref var dst = ref first(buffer);
-                for(var i=0u; i < count; i++)
+                for(var i=0u; i<count; i++)
                     seek(dst,i) = new TextLine(i, skip(parts,i));
                 return buffer;
             }

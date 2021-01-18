@@ -34,7 +34,7 @@ namespace Z0
             public static Pair<int> indices(string src, string first, string second)
                 => root.pair(src.IndexOf(first), src.IndexOf(second));
 
-            [MethodImpl(Inline), Op]
+            [Op]
             public static int index(string src, char match)
             {
                 var count = src.Length;
@@ -68,7 +68,7 @@ namespace Z0
             /// <param name="src">The source text</param>
             /// <param name="match">The character to match</param>
             /// <param name="matched">The matched index buffer</param>
-            [MethodImpl(Inline), Op]
+            [Op]
             public static Span<int> indices(string src, char match, Span<int> matched)
             {
                 var dst = root.list<int>();

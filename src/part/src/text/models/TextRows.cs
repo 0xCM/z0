@@ -11,28 +11,28 @@ namespace Z0
 
     public readonly struct TextRows : IIndex<TextRow>
     {
-        readonly TextRow[] RowData;
+        readonly TextRow[] Data;
 
         [MethodImpl(Inline)]
         public TextRows(TextRow[] data)
-            => RowData = data;
+            => Data = data;
 
         public TextRow[] Storage
         {
             [MethodImpl(Inline)]
-            get => RowData;
+            get => Data;
         }
 
         public int Length
         {
             [MethodImpl(Inline)]
-            get => RowData.Length;
+            get => Data.Length;
         }
 
         public ReadOnlySpan<TextRow> Rows
         {
             [MethodImpl(Inline)]
-            get => RowData;
+            get => Data;
         }
         public ref readonly TextRow this[int index]
         {
@@ -47,6 +47,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public ReadOnlySpan<TextRow> Slice(int offset, int length)
             => Rows.Slice(offset, length);
-
     }
 }

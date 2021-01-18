@@ -31,6 +31,33 @@ namespace Z0
             [MethodImpl(Inline), Op]
             public static bool equals(string a, string b)
                 => string.Equals(a,b, NoCase);
+
+            /// <summary>
+            /// Returns true if the character spans are equal as strings, false otherwise
+            /// </summary>
+            /// <param name="lhs">The left operand</param>
+            /// <param name="rhs">The right operand</param>
+            [MethodImpl(Inline), Op]
+            public static bool equals(ReadOnlySpan<char> lhs, ReadOnlySpan<char> rhs)
+                => lhs.CompareTo(rhs, InvariantCulture) == 0;
+
+            /// <summary>
+            /// Returns true if the character spans are equal as strings, false otherwise
+            /// </summary>
+            /// <param name="lhs">The left operand</param>
+            /// <param name="rhs">The right operand</param>
+            [MethodImpl(Inline), Op]
+            public static bool equals(Span<char> lhs, ReadOnlySpan<char> rhs)
+                => equals(lhs.ReadOnly(), rhs);
+
+            /// <summary>
+            /// Returns true if the character spans are equal as strings, false otherwise
+            /// </summary>
+            /// <param name="lhs">The left operand</param>
+            /// <param name="rhs">The right operand</param>
+            [MethodImpl(Inline), Op]
+            public static bool equals(Span<char> lhs, Span<char> rhs)
+                => equals(lhs.ReadOnly(), rhs.ReadOnly());
         }
     }
 }

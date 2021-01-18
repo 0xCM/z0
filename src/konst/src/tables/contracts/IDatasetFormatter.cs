@@ -93,7 +93,7 @@ namespace Z0
 
         void DelimitSome<T>(F f, T src)
             where T : unmanaged, Enum
-                => DelimitField(f, src.IsSome()  ? src.ToString() : text.Empty, Delimiter);
+                => DelimitField(f, src.IsSome()  ? src.ToString() : EmptyString, Delimiter);
 
         void DelimitField(F f, object content, char delimiter)
         {

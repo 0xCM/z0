@@ -10,12 +10,9 @@ namespace Z0
 
     using static Part;
 
-    partial struct text
+    partial class text
     {
-        /// <summary>
-        /// Creates a new stringbuilder
-        /// </summary>
         public static StringBuilder build()
-            => EmptyString.Build();
+            => new StringBuilder();
     }
 }

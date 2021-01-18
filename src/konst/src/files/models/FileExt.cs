@@ -62,7 +62,7 @@ namespace Z0
 
                 var left = Name.View;
                 var right = src.Ext.Name.View;
-                return left.ContentEqual(right);
+                return left.Same(right);
             }
 
             [MethodImpl(Inline)]
@@ -70,7 +70,7 @@ namespace Z0
             {
                 var left = Name.View;
                 var right = src.FileExt.Name.View;
-                return left.ContentEqual(right);
+                return left.Same(right);
             }
 
             [MethodImpl(Inline)]
@@ -78,7 +78,7 @@ namespace Z0
             {
                 var left = Name.View;
                 var right = src.Name.View;
-                return left.ContentEqual(right);
+                return left.Same(right);
             }
 
             public bool IsEmpty

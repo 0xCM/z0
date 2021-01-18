@@ -8,15 +8,12 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static TextRules;
 
-    partial struct text
+    partial class text
     {
-        /// <summary>
-        /// Tests whether the source string is nonempty
-        /// </summary>
-        /// <param name="src">The string to evaluate</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static bool nonempty(string src)
-            => !string.IsNullOrEmpty(src);
+            => Query.nonempty(src);
     }
 }

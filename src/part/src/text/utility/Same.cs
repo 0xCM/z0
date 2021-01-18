@@ -1,0 +1,40 @@
+//-----------------------------------------------------------------------------
+// Copyright   :  (c) Chris Moore, 2020
+// License     :  MIT
+//-----------------------------------------------------------------------------
+namespace Z0
+{
+    using System;
+
+    using static TextRules;
+
+    partial class XText
+    {
+        /// <summary>
+        /// Returns true if the character spans are equal as strings, false otherwise
+        /// </summary>
+        /// <param name="lhs">The left operand</param>
+        /// <param name="rhs">The right operand</param>
+        [TextUtility]
+        public static bool Same(this ReadOnlySpan<char> lhs, ReadOnlySpan<char> rhs)
+             => Query.equals(lhs, rhs);
+
+        /// <summary>
+        /// Returns true if the character spans are equal as strings, false otherwise
+        /// </summary>
+        /// <param name="lhs">The left operand</param>
+        /// <param name="rhs">The right operand</param>
+        [TextUtility]
+        public static bool Same(this Span<char> lhs, ReadOnlySpan<char> rhs)
+             => Query.equals(lhs, rhs);
+
+        /// <summary>
+        /// Returns true if the character spans are equal as strings, false otherwise
+        /// </summary>
+        /// <param name="lhs">The left operand</param>
+        /// <param name="rhs">The right operand</param>
+        [TextUtility]
+        public static bool Same(this Span<char> lhs, Span<char> rhs)
+             => Query.equals(lhs, rhs);
+    }
+}

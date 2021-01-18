@@ -11,7 +11,17 @@ namespace Z0
     using static memory;
 
     [ApiHost]
-    public readonly partial struct TextBlocks
+    public readonly struct TextBlocks
     {
+        [Op]
+        public Index<TextBlock> blocks(Span<string> src)
+        {
+            var count = src.Length;
+            var buffer = alloc<TextBlock>(count);
+            var dst = span(buffer);
+            for(var i=0u; i<count; i++)
+                seek(dst,i) = skip(src,i);
+            return buffer;
+        }
     }
 }

@@ -17,7 +17,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static void lines<F>(IEnumerable<F> src, StringBuilder dst)
             where F : ITextual
-                => dst.Lines(TextFormatter.format(src));
+                => lines(TextFormatter.format(src), dst);
 
         [MethodImpl(Inline), Op]
         public static void lines(IEnumerable<string> src, StringBuilder dst)

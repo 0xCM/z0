@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
     using static TextRules;
 
-    partial struct text
+    partial class text
     {
         [MethodImpl(Inline)]
         public static string slice(string src, int offset)
