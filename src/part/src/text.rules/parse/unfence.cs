@@ -20,17 +20,17 @@ namespace Z0
             /// <param name="left">The left boundary</param>
             /// <param name="right">The right boundary</param>
             [Op]
-            public static Outcome<string> unfence(string src, char left, char right)
+            public static ParseResult<string> unfence(string src, char left, char right)
             {
                 if(text.blank(src))
-                    return false;
+                    return root.unparsed<string>(src);
 
                 if(!Query.fenced(src,left,right))
-                    return false;
+                    return root.unparsed<string>(src);
 
                 var data = src.Trim();
                 var length = data.Length;
-                return data.Substring(1, length - 2);
+                return root.parsed(src, data.Substring(1, length - 2));
             }
 
             /// <summary>

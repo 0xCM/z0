@@ -10,7 +10,7 @@ namespace Z0
 
     using static Part;
 
-    partial class XTend
+    partial class XText
     {
         /// <summary>
         /// Block-formats a string using specified block length and separator

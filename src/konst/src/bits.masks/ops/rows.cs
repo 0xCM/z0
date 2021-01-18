@@ -42,7 +42,7 @@ namespace Z0
                 var result = Parse.unbracket(src.Text);
                 if(result)
                 {
-                    var content = result.Data;
+                    var content = result.Value;
                     var components = content.SplitClean(FieldDelimiter);
                     var count = components.Length;
                     var dst = alloc<BitMaskInfo>(count);

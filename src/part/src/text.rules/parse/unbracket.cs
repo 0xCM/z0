@@ -16,7 +16,7 @@ namespace Z0
             /// </summary>
             /// <param name="src">The source text</param>
             [Op]
-            public static Outcome<string> unbracket(string src)
+            public static ParseResult<string> unbracket(string src)
                 => unfence(src, Chars.LBracket, Chars.RBracket);
         }
     }

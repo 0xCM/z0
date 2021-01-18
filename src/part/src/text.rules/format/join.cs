@@ -24,7 +24,7 @@ namespace Z0
             [MethodImpl(Inline), Op, Closures(Closure)]
             public static string join<T>(string delimiter, ReadOnlySpan<T> src)
             {
-                var dst = Buffers.text();
+                var dst = text.buffer();
                 var count = src.Length;
                 for(var i=0u; i<count; i++)
                 {
