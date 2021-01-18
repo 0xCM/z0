@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
 
     [Cmd(CmdName)]
-    public struct EmitEnumCatalogCmd : ICmdSpec<EmitEnumCatalogCmd>
+    public struct EmitEnumCatalogCmd : ICmd<EmitEnumCatalogCmd>
     {
         public const string CmdName = "emit-enum-catalog";
 

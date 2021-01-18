@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
 
     [Cmd(CmdName)]
-    public struct DumpImagesCmd : ICmdSpec<DumpImagesCmd>
+    public struct DumpImagesCmd : ICmd<DumpImagesCmd>
     {
         public const string CmdName = "dump-images";
 

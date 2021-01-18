@@ -14,7 +14,7 @@ namespace Z0
             => new CmdTypeInfo(src, src.DeclaredInstanceFields());
 
         public static CmdTypeInfo<T> cmdtype<T>()
-            where T : struct, ICmdSpec<T>
+            where T : struct, ICmd<T>
                 => default;
     }
 }

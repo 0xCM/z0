@@ -5,7 +5,7 @@
 namespace Z0
 {
     [Cmd(CmdName)]
-    public struct ListArchiveFilesCmd : ICmdSpec<ListArchiveFilesCmd>
+    public struct ListArchiveFilesCmd : ICmd<ListArchiveFilesCmd>
     {
         public const string CmdName = "list-archive-files";
 

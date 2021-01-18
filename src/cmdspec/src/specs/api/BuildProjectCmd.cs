@@ -30,7 +30,7 @@ namespace Z0
     }
 
     [Cmd(CmdName)]
-    public struct BuildProjectCmd : ICmdSpec<BuildProjectCmd>
+    public struct BuildProjectCmd : ICmd<BuildProjectCmd>
     {
         public const string CmdName = "build";
 

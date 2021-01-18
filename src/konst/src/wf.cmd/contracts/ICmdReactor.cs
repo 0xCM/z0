@@ -15,12 +15,12 @@ namespace Z0
 
         CmdId CmdId {get;}
 
-        CmdResult Invoke(ICmdSpec cmd);
+        CmdResult Invoke(ICmdExecSpec cmd);
     }
 
     [Free]
     public interface ICmdReactor<C> : ICmdReactor
-        where C : struct, ICmdSpec
+        where C : struct, ICmdExecSpec
     {
         CmdId ICmdReactor.CmdId
             => default(C).CmdId;
@@ -30,7 +30,7 @@ namespace Z0
 
     [Free]
     public interface ICmdReactor<C,T> : ICmdReactor
-        where C : struct, ICmdSpec
+        where C : struct, ICmdExecSpec
     {
         CmdId ICmdReactor.CmdId
             => default(C).CmdId;

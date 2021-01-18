@@ -13,7 +13,7 @@ namespace Z0
     partial class XWf
     {
         public static Task Continue<T>(this Task<T> src, Action<T> @continue)
-            where T : struct, ICmdSpec
+            where T : struct, ICmdExecSpec
                 => src.ContinueWith(t => @continue(t.Result));
     }
 }

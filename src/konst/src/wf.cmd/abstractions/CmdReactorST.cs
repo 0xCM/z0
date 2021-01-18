@@ -8,7 +8,7 @@ namespace Z0
 
     [CmdReactor]
     public abstract class CmdReactor<C,T> : ICmdReactor<C,T>
-        where C : struct, ICmdSpec
+        where C : struct, ICmdExecSpec
     {
         protected WfHost Host;
 
@@ -35,7 +35,7 @@ namespace Z0
             }
         }
 
-        CmdResult ICmdReactor.Invoke(ICmdSpec src)
+        CmdResult ICmdReactor.Invoke(ICmdExecSpec src)
             => Invoke((C)src);
 
         public void Init(IWfShell wf)

@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     [Cmd(CmdName)]
-    public struct ListFilesCmd : ICmdSpec<ListFilesCmd>
+    public struct ListFilesCmd : ICmd<ListFilesCmd>
     {
         public const string CmdName = "list-files";
 
@@ -16,7 +16,7 @@ namespace Z0
 
         public FS.FolderPath SourceDir;
 
-        public FS.FileExt[] Extensions;
+        public Index<FS.FileExt> Extensions;
 
         public bool FileUriMode;
 

@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
 
     [Cmd(CmdName)]
-    public struct RunPartCmd : ICmdSpec<RunPartCmd>
+    public struct RunPartCmd : ICmd<RunPartCmd>
     {
         public const string CmdName = "run-part";
 

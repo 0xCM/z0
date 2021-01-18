@@ -5,7 +5,7 @@
 namespace Z0
 {
     [Cmd(CmdName)]
-    public struct EmitRuntimeIndexCmd : ICmdSpec<EmitRuntimeIndexCmd>
+    public struct EmitRuntimeIndexCmd : ICmd<EmitRuntimeIndexCmd>
     {
         public const string CmdName = "emit-runtime-index";
     }

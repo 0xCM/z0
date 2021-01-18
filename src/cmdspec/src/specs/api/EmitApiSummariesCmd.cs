@@ -5,7 +5,7 @@
 namespace Z0
 {
     [Cmd(CmdName)]
-    public struct EmitApiSummariesCmd : ICmdSpec<EmitApiSummariesCmd>
+    public struct EmitApiSummariesCmd : ICmd<EmitApiSummariesCmd>
     {
         public const string CmdName = "emit-api-summaries";
 

@@ -14,7 +14,7 @@ namespace Z0
     {
         [Op]
         public static Task<CmdResult> Dispatch<T>(this T cmd, IWfShell wf)
-            where T : struct, ICmdSpec
+            where T : struct, ICmdExecSpec
                 => wf.Dispatch(cmd);
     }
 }

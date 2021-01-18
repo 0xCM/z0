@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
 
     [Cmd(CmdName)]
-    public struct EmitILTablesCmd : ICmdSpec<EmitILTablesCmd>
+    public struct EmitILTablesCmd : ICmd<EmitILTablesCmd>
     {
         public const string CmdName = "emit-il-tables";
 

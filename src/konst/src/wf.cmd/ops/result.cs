@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="cmd">The completed command</param>
         /// <param name="ok">Whether the command succeeded</param>
         [MethodImpl(Inline), Op]
-        public static CmdResult result(ICmdSpec cmd, bool ok)
+        public static CmdResult result(ICmdExecSpec cmd, bool ok)
             => new CmdResult(cmd.CmdId, ok);
 
         /// <summary>
@@ -26,7 +26,7 @@ namespace Z0
         /// <param name="cmd">The completed command</param>
         /// <param name="ok">Whether the command succeeded</param>
         [MethodImpl(Inline), Op]
-        public static CmdResult result(ICmdSpec cmd, bool ok, dynamic payload)
+        public static CmdResult result(ICmdExecSpec cmd, bool ok, dynamic payload)
             => new CmdResult(cmd.CmdId, ok, payload);
 
         /// <summary>
@@ -37,7 +37,7 @@ namespace Z0
         /// <typeparam name="C">The command type</typeparam>
         [MethodImpl(Inline), Op]
         public static CmdResult<C> result<C>(C cmd, bool ok)
-            where C : struct, ICmdSpec<C>
+            where C : struct, ICmd<C>
                 => new CmdResult<C>(cmd, ok);
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace Z0
         /// <typeparam name="C">The command type</typeparam>
         [MethodImpl(Inline), Op]
         public static CmdResult<C> result<C>(C cmd, bool ok, dynamic payload)
-            where C : struct, ICmdSpec<C>
+            where C : struct, ICmd<C>
                 => new CmdResult<C>(cmd, ok, payload);
 
         /// <summary>
@@ -61,7 +61,7 @@ namespace Z0
         /// <typeparam name="P">The payload type</typeparam>
         [MethodImpl(Inline), Op]
         public static CmdResult<C,P> result<C,P>(C cmd, bool ok, P payload, string msg = EmptyString)
-            where C : struct, ICmdSpec<C>
+            where C : struct, ICmd<C>
                 => new CmdResult<C,P>(cmd, ok, payload, msg);
     }
 }

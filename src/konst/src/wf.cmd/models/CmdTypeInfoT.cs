@@ -12,7 +12,7 @@ namespace Z0
 
     [Datatype]
     public readonly struct CmdTypeInfo<T> : ICmdTypeInfo<CmdTypeInfo<T>,T>
-        where T : struct, ICmdSpec<T>
+        where T : struct, ICmd<T>
     {
         public CmdId CmdId => Cmd.id<T>();
 

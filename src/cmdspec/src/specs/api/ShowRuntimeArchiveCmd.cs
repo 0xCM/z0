@@ -9,7 +9,7 @@ namespace Z0
     using static Part;
 
     [Cmd(CmdName)]
-    public struct ShowRuntimeArchiveCmd : ICmdSpec<ShowRuntimeArchiveCmd>
+    public struct ShowRuntimeArchiveCmd : ICmd<ShowRuntimeArchiveCmd>
     {
         public const string CmdName = "show-runtime-archive";
     }

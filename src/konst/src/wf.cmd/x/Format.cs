@@ -12,7 +12,7 @@ namespace Z0
     partial class XCmd
     {
         public static string Format<C>(this C src)
-            where C : struct, ICmdSpec<C>
+            where C : struct, ICmd<C>
                 => Cmd.format(src);
     }
 }

@@ -5,7 +5,7 @@
 namespace Z0
 {
     [Cmd]
-    public struct EmitFieldMetadataCmd : ICmdSpec<EmitFieldMetadataCmd>
+    public struct EmitFieldMetadataCmd : ICmd<EmitFieldMetadataCmd>
     {
 
     }

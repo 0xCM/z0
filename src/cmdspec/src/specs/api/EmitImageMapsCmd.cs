@@ -5,7 +5,7 @@
 namespace Z0
 {
     [Cmd(CmdName)]
-    public struct EmitImageMapsCmd  : ICmdSpec<EmitImageMapsCmd>
+    public struct EmitImageMapsCmd  : ICmd<EmitImageMapsCmd>
     {
         public const string CmdName ="emit-image-maps";
 

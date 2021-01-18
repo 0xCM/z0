@@ -8,7 +8,7 @@ namespace Z0
 
     public abstract class CmdHost<H,S> : WfHost<H>
         where H : CmdHost<H,S>, new()
-        where S : struct, ICmdSpec<S>
+        where S : struct, ICmd<S>
     {
         public CmdId CmdId => new S().CmdId;
 
@@ -36,7 +36,7 @@ namespace Z0
         protected override void Execute(IWfShell wf)
             => Execute(wf, Spec());
 
-        public virtual CmdResult Run(IWfShell wf, CmdSpec spec)
+        public virtual CmdResult Run(IWfShell wf, CmdExecSpec spec)
             => Execute(wf, Spec());
 
     }

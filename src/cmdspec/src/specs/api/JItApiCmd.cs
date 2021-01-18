@@ -1,7 +1,7 @@
 namespace Z0
 {
     [Cmd(CmdName)]
-    public struct JitApiCmd : ICmdSpec<JitApiCmd>
+    public struct JitApiCmd : ICmd<JitApiCmd>
     {
         public const string CmdName = "jit-api";
     }

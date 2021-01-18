@@ -5,7 +5,7 @@
 namespace Z0
 {
     [Cmd]
-    public struct EmitHostCilCmd : ICmdSpec<EmitHostCilCmd>
+    public struct EmitHostCilCmd : ICmd<EmitHostCilCmd>
     {
 
     }

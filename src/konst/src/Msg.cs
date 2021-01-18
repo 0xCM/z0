@@ -20,6 +20,6 @@ namespace Z0
         public static RenderPattern<uint> IndexingHosts => "Indexing {0} hosts";
 
         public static RenderPattern<T> Dispatching<T>()
-            where T : struct, ICmdSpec<T> => "Dispatching {0}";
+            where T : struct, ICmd<T> => "Dispatching {0}";
     }
 }

@@ -12,7 +12,7 @@ namespace Z0
 
     public struct CmdStream
     {
-        readonly TableSpan<CmdSpec> Commands;
+        readonly TableSpan<CmdExecSpec> Commands;
 
         uint Index;
 
@@ -21,7 +21,7 @@ namespace Z0
         int Last;
 
         [MethodImpl(Inline)]
-        public CmdStream(CmdSpec[] src)
+        public CmdStream(CmdExecSpec[] src)
         {
             insist(src.Length > 0, "The array, it must not be empty");
             Commands = src;
@@ -31,7 +31,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public ref readonly CmdSpec Next(out uint index)
+        public ref readonly CmdExecSpec Next(out uint index)
         {
             index = Index;
             ref readonly var next = ref Commands[Index];

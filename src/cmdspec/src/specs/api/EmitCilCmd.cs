@@ -5,7 +5,7 @@
 namespace Z0
 {
     [Cmd(CmdName)]
-    public struct EmitCilCmd : ICmdSpec<EmitCilCmd>
+    public struct EmitCilCmd : ICmd<EmitCilCmd>
     {
         public const string CmdName = "emit-cil";
 

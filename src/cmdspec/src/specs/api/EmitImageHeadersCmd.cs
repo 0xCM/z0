@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
 
     [Cmd(CmdName)]
-    public struct EmitImageHeadersCmd : ICmdSpec<EmitImageHeadersCmd>
+    public struct EmitImageHeadersCmd : ICmd<EmitImageHeadersCmd>
     {
         public const string CmdName = "emit-image-headers";
 

@@ -5,7 +5,7 @@
 namespace Z0
 {
     [Cmd(CmdName)]
-    public struct EmitAssemblyRefsCmd : ICmdSpec<EmitAssemblyRefsCmd>
+    public struct EmitAssemblyRefsCmd : ICmd<EmitAssemblyRefsCmd>
     {
         public const string CmdName = "emit-assembly-refs";
 

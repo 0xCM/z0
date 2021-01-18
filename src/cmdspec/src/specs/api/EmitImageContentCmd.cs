@@ -13,7 +13,7 @@ namespace Z0
     using static z;
 
     [Cmd(CmdName)]
-    public struct EmitImageContentCmd : ICmdSpec<EmitImageContentCmd>
+    public struct EmitImageContentCmd : ICmd<EmitImageContentCmd>
     {
         public const string CmdName ="emit-image-content";
 

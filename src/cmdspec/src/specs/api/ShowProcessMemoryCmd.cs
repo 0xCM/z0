@@ -4,9 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-
     [Cmd(CmdName)]
-    public struct ShowProcessMemoryCmd : ICmdSpec<ShowProcessMemoryCmd>
+    public struct ShowProcessMemoryCmd : ICmd<ShowProcessMemoryCmd>
     {
         public const string CmdName = "show-process-memory";
     }

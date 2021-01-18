@@ -5,7 +5,7 @@
 namespace Z0
 {
     [Cmd(CmdName)]
-    public struct EmitHexIndexCmd : ICmdSpec<EmitHexIndexCmd>
+    public struct EmitHexIndexCmd : ICmd<EmitHexIndexCmd>
     {
         public const string CmdName = "emit-hex-index";
     }

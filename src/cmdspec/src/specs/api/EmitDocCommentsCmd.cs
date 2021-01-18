@@ -11,7 +11,7 @@ namespace Z0
     using static Part;
 
     [Cmd(CmdName)]
-    public struct EmitDocCommentsCmd : ICmdSpec<EmitDocCommentsCmd>
+    public struct EmitDocCommentsCmd : ICmd<EmitDocCommentsCmd>
     {
         public const string CmdName = "emit-doc-comments";
     }

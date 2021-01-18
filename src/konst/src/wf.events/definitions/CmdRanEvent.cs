@@ -18,14 +18,14 @@ namespace Z0
 
         public WfEventId EventId {get;}
 
-        public CmdSpec Cmd {get;}
+        public CmdExecSpec Cmd {get;}
 
         public bool Ok {get;}
 
         public FlairKind Flair => Ok ? FlairKind.Ran : FlairKind.Error;
 
         [MethodImpl(Inline)]
-        public CmdRanEvent(CmdSpec cmd, bool ok, CorrelationToken ct)
+        public CmdRanEvent(CmdExecSpec cmd, bool ok, CorrelationToken ct)
         {
             EventId = (EventName, cmd.CmdId, ct);
             Ok = ok;

@@ -21,7 +21,7 @@ namespace Z0
 
     [Free]
     public interface ICmdDescriptor<T> : ICmdTypeInfo
-        where T : struct, ICmdSpec<T>
+        where T : struct, ICmd<T>
     {
         CmdId ICmdTypeInfo.CmdId
             => Cmd.id<T>();
@@ -35,7 +35,7 @@ namespace Z0
 
     [Free]
     public interface ICmdTypeInfo<H,T> : ICmdDescriptor<T>, IDataType<H>
-        where T : struct, ICmdSpec<T>
+        where T : struct, ICmd<T>
         where H : struct, ICmdTypeInfo<H,T>
     {
 

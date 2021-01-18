@@ -82,13 +82,13 @@ namespace Z0
                     Builder.CheckService(a0).Run(Wf);
                     break;
                 case JitApiCmd.CmdName:
-                    Run(Builder.JitApiCmd());
+                    Builder.JitApiCmd().Run(Wf);
                     break;
                 case ShowRuntimeArchiveCmd.CmdName:
-                    Run(Builder.ShowRuntimeArchive());
+                    Builder.ShowRuntimeArchive().Run(Wf);
                     break;
                 case EmitImageMapsCmd.CmdName:
-                    Run(Builder.EmitImageMaps());
+                    Builder.EmitImageMaps().Run(Wf);
                     break;
                 case EmitHexIndexCmd.CmdName:
                     Builder.EmitHexIndex().Run(Wf);
@@ -144,20 +144,6 @@ namespace Z0
             }
         }
 
-        void Run(in ShowProcessMemoryCmd cmd)
-        {
-            cmd.Dispatch(Wf).Wait();
-        }
-
-        void Run(in ShowRuntimeArchiveCmd cmd)
-        {
-            cmd.Dispatch(Wf).Wait();
-        }
-
-        void Run(in EmitRuntimeIndexCmd cmd)
-        {
-            cmd.Dispatch(Wf).Wait();
-        }
 
         void Run(in DumpCliTablesCmd cmd)
         {

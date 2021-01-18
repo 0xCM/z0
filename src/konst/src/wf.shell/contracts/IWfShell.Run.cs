@@ -73,8 +73,8 @@ namespace Z0
             return Ran(flow);
         }
 
-        WfExecFlow Running<T>(ICmdSpec<T> cmd)
-            where T : struct, ICmdSpec<T>
+        WfExecFlow Running<T>(ICmd<T> cmd)
+            where T : struct, ICmd<T>
         {
             signal(this).Running(cmd);
             return Flow();
@@ -87,7 +87,7 @@ namespace Z0
         }
 
         WfExecToken Ran<C>(WfExecFlow flow, CmdResult<C> result)
-            where C : struct, ICmdSpec<C>
+            where C : struct, ICmd<C>
         {
             signal(this).Ran(result);
             return Ran(flow);

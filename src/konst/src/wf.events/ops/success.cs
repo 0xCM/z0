@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     partial struct WfEvents
     {
@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="ct">The correlation token</param>
         /// <param name="flair">The flair</param>
         [MethodImpl(Inline), Op, Closures(UInt64k)]
-        public static CmdRanEvent success(CmdSpec spec, CorrelationToken ct)
+        public static CmdRanEvent success(CmdExecSpec spec, CorrelationToken ct)
             => new CmdRanEvent(spec, true, ct);
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace Z0
         /// <param name="ct">The correlation token</param>
         /// <param name="flair">The flair</param>
         [MethodImpl(Inline), Op, Closures(UInt64k)]
-        public static CmdRanEvent<T> success<T>(CmdSpec spec, T payload, CorrelationToken ct)
+        public static CmdRanEvent<T> success<T>(CmdExecSpec spec, T payload, CorrelationToken ct)
             => new CmdRanEvent<T>(spec, true, payload, ct);
     }
 }

@@ -7,7 +7,7 @@ namespace Z0
     using System;
 
     [Cmd]
-    public struct EmitRenderPatternsCmd : ICmdSpec<EmitRenderPatternsCmd>
+    public struct EmitRenderPatternsCmd : ICmd<EmitRenderPatternsCmd>
     {
         public ClrType Source;
 

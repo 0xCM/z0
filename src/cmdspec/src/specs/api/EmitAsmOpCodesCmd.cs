@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
 
     [Cmd]
-    public struct EmitAsmOpCodesCmd : ICmdSpec<EmitAsmOpCodesCmd>
+    public struct EmitAsmOpCodesCmd : ICmd<EmitAsmOpCodesCmd>
     {
         public FS.FilePath Target;
     }

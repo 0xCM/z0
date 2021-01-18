@@ -13,7 +13,7 @@ namespace Z0
     partial struct Cmd
     {
         [Op, Closures(UInt64k)]
-        public static CmdSpec untype<T>(in T spec)
+        public static CmdExecSpec untype<T>(in T spec)
             where T : struct
         {
             var t = typeof(T);
@@ -29,7 +29,7 @@ namespace Z0
                 ref readonly var fv = ref skip(source,i);
                 seek(target,i) = new CmdArg(fv.Field.Name, fv.Value?.ToString() ?? EmptyString);
             }
-            return new CmdSpec(Cmd.id(t), buffer);
+            return new CmdExecSpec(Cmd.id(t), buffer);
         }
 
         /// <summary>

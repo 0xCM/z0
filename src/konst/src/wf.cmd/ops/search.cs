@@ -13,10 +13,10 @@ namespace Z0
     partial struct Cmd
     {
         [Op]
-        public static ICmdSpec[] search(Assembly src)
+        public static ICmdExecSpec[] search(Assembly src)
         {
             var types = src.Types().Tagged<CmdAttribute>();
-            var specs = types.Select(t => (ICmdSpec)Activator.CreateInstance(t));
+            var specs = types.Select(t => (ICmdExecSpec)Activator.CreateInstance(t));
             return specs;
         }
     }

@@ -5,7 +5,7 @@
 namespace Z0
 {
     [Cmd]
-    public struct EmitToolScriptsCmd : ICmdSpec<EmitToolScriptsCmd>
+    public struct EmitToolScriptsCmd : ICmd<EmitToolScriptsCmd>
     {
         public ToolId Tool;
 

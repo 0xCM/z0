@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
 
     [Cmd]
-    public struct EmitAsmMnemonicsCmd : ICmdSpec<EmitAsmMnemonicsCmd>
+    public struct EmitAsmMnemonicsCmd : ICmd<EmitAsmMnemonicsCmd>
     {
 
     }

@@ -5,7 +5,7 @@
 namespace Z0
 {
     [Cmd]
-    public struct EmitFieldLiteralsCmd : ICmdSpec<EmitFieldLiteralsCmd>
+    public struct EmitFieldLiteralsCmd : ICmd<EmitFieldLiteralsCmd>
     {
 
     }

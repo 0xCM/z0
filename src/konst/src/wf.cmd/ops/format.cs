@@ -13,8 +13,8 @@ namespace Z0
 
     partial struct Cmd
     {
-        public static string format<T>(ICmdSpec<T> src)
-            where T : struct, ICmdSpec<T>
+        public static string format<T>(ICmd<T> src)
+            where T : struct, ICmd<T>
         {
             var buffer = Buffers.text();
             buffer.AppendFormat("{0}{1}", src.CmdName, Chars.LParen);
@@ -41,7 +41,7 @@ namespace Z0
         }
 
         [Op]
-        public static string format(ICmdSpec src)
+        public static string format(ICmdExecSpec src)
         {
             var count = src.Args.Count;
             var buffer = Buffers.text();

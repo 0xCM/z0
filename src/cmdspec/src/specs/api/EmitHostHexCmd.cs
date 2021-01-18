@@ -5,7 +5,7 @@
 namespace Z0
 {
     [Cmd]
-    public struct EmitHostHexCmd : ICmdSpec<EmitHostHexCmd>
+    public struct EmitHostHexCmd : ICmd<EmitHostHexCmd>
     {
         public ApiHostUri ApiHost;
 

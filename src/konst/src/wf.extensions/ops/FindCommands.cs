@@ -13,7 +13,7 @@ namespace Z0
 
     partial class XWf
     {
-        public static IEnumerable<ICmdSpec> FindCommands(this IWfShell wf)
+        public static IEnumerable<ICmdExecSpec> FindCommands(this IWfShell wf)
         {
             foreach(var a in wf.Components)
             {

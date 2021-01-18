@@ -5,7 +5,7 @@
 namespace Z0
 {
     [Cmd(CmdName)]
-    public struct ListApiHexFilesCmd : ICmdSpec<ListApiHexFilesCmd>
+    public struct ListApiHexFilesCmd : ICmd<ListApiHexFilesCmd>
     {
         public const string CmdName = "list-apihex-files";
 

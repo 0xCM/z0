@@ -7,7 +7,7 @@ namespace Z0
     using System;
 
     [Cmd(CmdName)]
-    public readonly struct ShowConfigCmd : ICmdSpec<ShowConfigCmd>
+    public readonly struct ShowConfigCmd : ICmd<ShowConfigCmd>
     {
         public const string CmdName = "show-config";
     }

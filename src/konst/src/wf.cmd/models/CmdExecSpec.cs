@@ -7,26 +7,31 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    public struct CmdExecSpec
+    using static Part;
+
+    public struct CmdExecSpec : ICmdExecSpec, IDataType<CmdExecSpec>
     {
-        /// <summary>
-        /// The path to the tool executable
-        /// </summary>
-        public FS.FilePath CmdPath;
+        public CmdId CmdId {get;}
 
-        /// <summary>
-        /// The arguments to pass to the tool
-        /// </summary>
-        public string Args;
+        public CmdArgs Args {get;}
 
-        /// <summary>
-        /// The working folder, if any
-        /// </summary>
-        public FS.FolderPath WorkingDir;
+        [MethodImpl(Inline)]
+        public CmdExecSpec(CmdId id, params CmdArg[] args)
+        {
+            CmdId = id;
+            Args = args;
+        }
 
-        /// <summary>
-        /// Environment variables to use, if any
-        /// </summary>
-        public NamedValues<string> Vars;
+        public string Format()
+            => Cmd.format(this);
+
+        public override string ToString()
+            => Format();
+
+        public static CmdExecSpec Empty
+        {
+            [MethodImpl(Inline)]
+            get => new CmdExecSpec(CmdId.Empty);
+        }
     }
 }

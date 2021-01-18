@@ -5,7 +5,7 @@
 namespace Z0
 {
     [Cmd(CmdName)]
-    public struct PipeImageFilesCmd : ICmdSpec<PipeImageFilesCmd>
+    public struct PipeImageFilesCmd : ICmd<PipeImageFilesCmd>
     {
         public const string CmdName = "pipe-image-files";
 

@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
 
     [Cmd(CmdName)]
-    public struct CheckServiceCmd : ICmdSpec<CheckServiceCmd>
+    public struct CheckServiceCmd : ICmd<CheckServiceCmd>
     {
         public const string CmdName = "check-service";
 

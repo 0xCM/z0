@@ -8,7 +8,7 @@ namespace Z0
 
     public interface ICmdParser : IWfService
     {
-        Outcome Parse(CmdLine src, out CmdSpec dst);
+        Outcome Parse(CmdLine src, out CmdExecSpec dst);
 
         Outcome Parse(ReadOnlySpan<char> src, out ArgPrefix dst);
     }

@@ -112,14 +112,14 @@ namespace Z0
             }
         }
 
-        public CmdResult Run(ICmdSpec spec)
+        public CmdResult Run(ICmdExecSpec spec)
         {
             Wf.Status(Msg.Dispatching().Format(spec.CmdId));
             return Wf.Router.Dispatch(spec);
         }
 
         public CmdResult Run<T>(T spec)
-            where T : struct, ICmdSpec<T>
+            where T : struct, ICmd<T>
         {
             Wf.Status(Msg.Dispatching<T>().Format(spec));
             return Wf.Router.Dispatch(spec);
@@ -427,7 +427,7 @@ namespace Z0
         public static RenderPattern<uint,IPart,MemoryRange,ByteSize> Jitted => "Jitted {0} {1} members that cover memory segment {2} of size {3}mb";
 
         public static RenderPattern<T> Dispatching<T>()
-            where T : struct, ICmdSpec<T> => "Dispatching {0}";
+            where T : struct, ICmd<T> => "Dispatching {0}";
 
         public static RenderPattern<CmdId> Dispatching() => "Dispatching {0}";
     }

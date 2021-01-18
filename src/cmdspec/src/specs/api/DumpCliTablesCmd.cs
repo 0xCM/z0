@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
 
     [Cmd(CmdName)]
-    public struct DumpCliTablesCmd : ICmdSpec<DumpCliTablesCmd>
+    public struct DumpCliTablesCmd : ICmd<DumpCliTablesCmd>
     {
         public const string CmdName = "dump-cli-tables";
 

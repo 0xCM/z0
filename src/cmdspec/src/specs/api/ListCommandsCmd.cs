@@ -4,9 +4,15 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    [Cmd]
-    public struct EmitReferenceDataCmd : ICmdSpec<EmitReferenceDataCmd>
+    using System;
+    using System.Runtime.CompilerServices;
+
+    [Cmd(CmdName)]
+    public struct ListCommands : ICmd<ListFilesCmd>
     {
+        public const string CmdName = "list-commands";
+
+        public FS.FilePath? Target;
 
     }
 }

@@ -23,14 +23,14 @@ namespace Z0
 
         }
 
-        public Outcome Parse(CmdLine src, out CmdSpec dst)
+        public Outcome Parse(CmdLine src, out CmdExecSpec dst)
             => parse(Prefixes, src, out dst);
 
         public Outcome Parse(ReadOnlySpan<char> src, out ArgPrefix dst)
             => parse(Prefixes, src, out dst);
 
         [Op]
-        static Outcome parse(ReadOnlySpan<ArgPrefix> prefixes, CmdLine src, out CmdSpec dst)
+        static Outcome parse(ReadOnlySpan<ArgPrefix> prefixes, CmdLine src, out CmdExecSpec dst)
         {
             var parts = src.Parts;
             var count = parts.Length;
@@ -43,7 +43,7 @@ namespace Z0
                     args.Add(arg);
                 }
             }
-            dst = new CmdSpec(Cmd.id(""), args.Array());
+            dst = new CmdExecSpec(Cmd.id(""), args.Array());
             return false;
         }
 

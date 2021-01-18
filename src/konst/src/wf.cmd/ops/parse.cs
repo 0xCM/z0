@@ -17,9 +17,9 @@ namespace Z0
             => CmdParser.init(wf);
 
         [Op]
-        public static ParseResult<CmdSpec> parse(string src, string delimiter = EmptyString, char qualifier = ' ')
+        public static ParseResult<CmdExecSpec> parse(string src, string delimiter = EmptyString, char qualifier = ' ')
         {
-            var fail = unparsed<CmdSpec>(src);
+            var fail = unparsed<CmdExecSpec>(src);
             var parts = @readonly(text.split(src, delimiter));
             var count = parts.Length;
             ushort pos = 0;
@@ -40,7 +40,7 @@ namespace Z0
                             return fail.WithReason(InvalidOption);
                     }
                 }
-                return parsed(src, new CmdSpec(id, options.ToArray()));
+                return parsed(src, new CmdExecSpec(id, options.ToArray()));
             }
 
             return fail;

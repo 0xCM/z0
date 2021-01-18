@@ -9,7 +9,7 @@ namespace Z0
     using static Part;
 
     [Cmd(CmdName)]
-    public struct ShowCmd : ICmdSpec<ListFilesCmd>
+    public struct ShowCmd : ICmd<ListFilesCmd>
     {
         public const string CmdName = "show";
 

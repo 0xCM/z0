@@ -14,7 +14,7 @@ namespace Z0
 
     partial struct Cmd
     {
-        public static async Task<int> start(CmdExecSpec spec, WfStatusRelay dst)
+        public static async Task<int> start(ToolExecSpec spec, WfStatusRelay dst)
         {
             var info = new ProcessStartInfo
             {

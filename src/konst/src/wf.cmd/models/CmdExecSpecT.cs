@@ -9,15 +9,15 @@ namespace Z0
 
     using static Part;
 
-    public struct CmdSpec<T> : ICmdSpec<CmdSpec<T>>, ITextual
-        where T : struct, ICmdSpec<T>
+    public struct CmdExecSpec<T> : ICmd<CmdExecSpec<T>>, ITextual
+        where T : struct, ICmd<T>
     {
         public CmdId CmdId {get;}
 
         public CmdArgs Args {get;}
 
         [MethodImpl(Inline)]
-        public CmdSpec(T spec)
+        public CmdExecSpec(T spec)
         {
             CmdId = Cmd.id<T>();
             Args = Cmd.args(spec);
@@ -29,7 +29,7 @@ namespace Z0
         public override string ToString()
             => Format();
 
-        public static CmdSpec<T> Empty
+        public static CmdExecSpec<T> Empty
             => default;
     }
 }

@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
 
     [Cmd]
-    public struct EmitResDataCmd : ICmdSpec<EmitResDataCmd>
+    public struct EmitResDataCmd : ICmd<EmitResDataCmd>
     {
         public Assembly Source;
 

@@ -5,7 +5,7 @@
 namespace Z0
 {
     [Cmd]
-    public struct EmitClrHandlesCmd : ICmdSpec<EmitClrHandlesCmd>
+    public struct EmitClrHandlesCmd : ICmd<EmitClrHandlesCmd>
     {
 
     }

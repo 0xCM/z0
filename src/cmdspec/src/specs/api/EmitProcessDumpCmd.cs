@@ -7,7 +7,7 @@ namespace Z0
     using System.Diagnostics;
 
     [Cmd(CmdName)]
-    public struct EmitProcessDumpCmd : ICmdSpec<EmitProcessDumpCmd>
+    public struct EmitProcessDumpCmd : ICmd<EmitProcessDumpCmd>
     {
         public const string CmdName = "emit-process-dump";
 

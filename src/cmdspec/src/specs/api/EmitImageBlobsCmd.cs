@@ -5,7 +5,7 @@
 namespace Z0
 {
     [Cmd]
-    public struct EmitImageBlobsCmd : ICmdSpec<EmitImageBlobsCmd>
+    public struct EmitImageBlobsCmd : ICmd<EmitImageBlobsCmd>
     {
 
     }

@@ -23,14 +23,14 @@ namespace Z0
 
     [Free]
     public interface ICmdResult<C> : ICmdResult
-        where C : struct, ICmdSpec
+        where C : struct, ICmdExecSpec
     {
         C Cmd {get;}
     }
 
     [Free]
     public interface ICmdResult<C,P> : ICmdResult<C>
-        where C : struct, ICmdSpec
+        where C : struct, ICmdExecSpec
     {
         new P Payload {get;}
 

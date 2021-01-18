@@ -5,7 +5,7 @@
 namespace Z0
 {
     [Cmd]
-    public struct EmitBitMasksCmd : ICmdSpec<EmitBitMasksCmd>
+    public struct EmitBitMasksCmd : ICmd<EmitBitMasksCmd>
     {
 
     }
