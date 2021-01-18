@@ -29,6 +29,6 @@ namespace Z0
         /// <typeparam name="D">The fourth type</typeparam>
         [MethodImpl(Inline)]
         public static Vector128<uint> vhash<A,B,C,D>()
-            => vparts(w128, hash<A>(), hash<B>(), hash<C>(), hash<D>());
+            => vparts(w128, alg.hash.calc<A>(), alg.hash.calc<B>(), alg.hash.calc<C>(), alg.hash.calc<D>());
     }
 }

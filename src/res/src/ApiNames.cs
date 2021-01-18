@@ -12,7 +12,6 @@ public readonly struct ApiNames
 
     public const string Memory = memory;
 
-
     public const string Arrays = collective + dot + arrays;
 
     public const string ArrayBuilder = collective + dot + arrays + dot + builder;
@@ -200,11 +199,9 @@ public readonly struct ApiNames
 
     public const string BitStream = bits + dot + stream;
 
-    public const string BitParser = bits + dot + parser + dot;
+    public const string BitParser = bits + dot + parser;
 
     public const string BitFormatOptions = bits + dot + formatters + dot + options;
-
-    public const string BitFieldParts = bits + dot + bitfields + dot + parts;
 
     public const string BitFieldSpecs = bits + dot + bitfields + dot + specs;
 
@@ -506,7 +503,7 @@ public readonly struct ApiNames
 
     public const string StateBuffers = buffers + dot + states;
 
-    public const string PinnedBuffers = buffers + dot + "pinned";
+    public const string StaticBuffers = buffers + dot + "static";
 
     public const string WfArchives = wf + dot + archives;
 

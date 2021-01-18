@@ -6,14 +6,13 @@ namespace Z0
 {
     using System;
 
-    using static Konst;
-    using static z;
-
     [Service(typeof(IApiJit))]
     public sealed class ApiJitService : WfService<ApiJitService,IApiJit>, IApiJit
     {
+
         public unsafe Index<ApiAddressRecord> JitApi(FS.FilePath dst)
         {
+            var @base = Runtime.CurrentProcess.BaseAddress;
             var catalog = Wf.ApiParts.Api;
             var parts = catalog.Parts;
             var outer = Wf.Running($"Jitting {parts.Length} parts");

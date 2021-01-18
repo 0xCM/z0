@@ -15,15 +15,15 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static IndexedSeq<I,T> concat<I,T>(IndexedSeq<I,T> head, IndexedSeq<I,T> tail)
             where I : unmanaged
-                => new IndexedSeq<I,T>(array(head.Storage.Concat(tail.Storage)));
+                => new IndexedSeq<I,T>(memory.array(head.Storage.Concat(tail.Storage)));
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static IndexedSeq<T> concat<T>(IndexedSeq<T> head, IndexedSeq<T> tail)
-            => new IndexedSeq<T>(array(head.Storage.Concat(tail.Storage)));
+            => new IndexedSeq<T>(memory.array(head.Storage.Concat(tail.Storage)));
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static MutableSeq<T> concat<T>(MutableSeq<T> head, MutableSeq<T> tail)
-            => new MutableSeq<T>(array(head.Storage.Concat(tail.Storage)));
+            => new MutableSeq<T>(memory.array(head.Storage.Concat(tail.Storage)));
 
         /// <summary>
         /// Concatenates the source streams to create a unified stream

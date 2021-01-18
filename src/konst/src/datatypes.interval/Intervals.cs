@@ -8,11 +8,13 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static z;
+    using static memory;
 
     [ApiHost]
     public readonly partial struct Intervals
     {
+        const NumericKind Closure = UnsignedInts;
+
         [MethodImpl(Inline)]
         static ulong left<T>(in ClosedInterval<T> src)
             where T : unmanaged

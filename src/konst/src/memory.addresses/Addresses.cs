@@ -11,8 +11,6 @@ namespace Z0
     using static Part;
     using static memory;
 
-    using DW = DataWidth;
-
     [ApiHost]
     public readonly struct Addresses
     {
@@ -24,33 +22,17 @@ namespace Z0
         /// <param name="offset">The offset</param>
         /// <typeparam name="T">The offset type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static RelativeAddress<T> relative<T>(T offset)
+        public static RelativeAddress<T> relative<T>(MemoryAddress @base, T offset)
             where T : unmanaged
-                => new RelativeAddress<T>(offset);
+                => new RelativeAddress<T>(@base, offset);
 
         /// <summary>
-        /// Defines a <see cref='RelativeAddress'/> offset with a <see cref='byte'/> valued offset
+        /// Defines a <see cref='RelativeAddress'/> offset with a specified offset
         /// </summary>
         /// <param name="offset">The offset amount</param>
         [MethodImpl(Inline), Op]
-        public static RelativeAddress relative(byte offset)
-            => new RelativeAddress(offset, DW.W8);
-
-        /// <summary>
-        /// Defines a <see cref='RelativeAddress'/> offset with a <see cref='ushort'/> valued offset
-        /// </summary>
-        /// <param name="offset">The offset amount</param>
-        [MethodImpl(Inline), Op]
-        public static RelativeAddress relative(ushort offset)
-            => new RelativeAddress(offset, DW.W16);
-
-        /// <summary>
-        /// Defines a <see cref='RelativeAddress'/> offset with a <see cref='uint'/> valued offset
-        /// </summary>
-        /// <param name="offset">The offset amount</param>
-        [MethodImpl(Inline), Op]
-        public static RelativeAddress relative(uint offset)
-            => new RelativeAddress(offset, DW.W32);
+        public static RelativeAddress relative(MemoryAddress @base, ulong offset)
+            => new RelativeAddress(@base, offset);
 
         /// <summary>
         /// Computes the <see cref='MemberAddress'/> of a specified <see cref='MethodInfo'/>
@@ -95,7 +77,6 @@ namespace Z0
             }
         }
 
-
         [Op]
         public static string format(RelativeAddress src)
             => src.Offset.FormatSmallHex(true);
@@ -105,18 +86,18 @@ namespace Z0
             where T : unmanaged
         {
             if(bitwidth<T>() == 8)
-                return @as<T,byte>(src.Offset).FormatAsmHex();
+                return string.Format("{0} + {1}", src.Base, @as<T,byte>(src.Offset).FormatAsmHex());
             else if(bitwidth<T>() == 16)
-                return @as<T,ushort>(src.Offset).FormatAsmHex();
+                return string.Format("{0} + {1}", src.Base, @as<T,ushort>(src.Offset).FormatAsmHex());
             else if(bitwidth<T>() == 32)
-                return @as<T,uint>(src.Offset).FormatAsmHex();
+                return string.Format("{0} + {1}", src.Base, @as<T,uint>(src.Offset).FormatAsmHex());
             else
-                return @as<T,ulong>(src.Offset).FormatAsmHex();
+                return string.Format("{0} + {1}", src.Base, @as<T,ulong>(src.Offset).FormatAsmHex());
         }
 
         [MethodImpl(Inline), Op]
         public static bool equals(RelativeAddress a, RelativeAddress b)
-            => a.Offset == b.Offset && a.Grain == b.Grain;
+            => a.Absolute == b.Absolute;
 
         /// <summary>
         /// Computes the whole number of T-cells identified by a reference

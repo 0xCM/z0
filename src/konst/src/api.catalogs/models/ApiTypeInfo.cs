@@ -10,12 +10,11 @@ namespace Z0
     using System.Collections.Generic;
 
     using static Part;
-    using static z;
 
     public readonly struct ApiTypeInfo : IApiHost, IComparable<ApiTypeInfo>
     {
         public static HashSet<string> Ignore
-            => hashset("ToString","GetHashCode", "Equals", "ToString");
+            => root.hashset("ToString","GetHashCode", "Equals", "ToString");
 
         public PartId PartId {get;}
 

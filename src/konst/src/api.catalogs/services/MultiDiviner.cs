@@ -26,7 +26,7 @@ namespace Z0
             => Identity.identify(src);
 
         [MethodImpl(Inline)]
-        public ApiGenericOpIdentity GenericIdentity(MethodInfo src)
+        public OpIdentityG GenericIdentity(MethodInfo src)
             => Identity.GenericIdentity(src);
     }
 }

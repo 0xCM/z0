@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     public readonly struct WfToken : ITextual, IEquatable<WfToken>, IComparable<WfToken>
     {
@@ -59,7 +58,7 @@ namespace Z0
         public uint Hash
         {
             [MethodImpl(Inline)]
-            get => hash(Id);
+            get => alg.hash.calc(Id);
         }
 
         public ulong Hash64

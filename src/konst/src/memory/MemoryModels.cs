@@ -9,8 +9,8 @@ namespace Z0
     using System.Reflection;
 
     using static System.Runtime.InteropServices.Marshal;
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     [ApiHost(ApiNames.MemoryModels, true)]
     public readonly struct MemoryModels
@@ -77,7 +77,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static int hash(in MemoryOffset src)
-            => (int)z.hash((ulong)src.Base, (ulong)src.Offset);
+            => (int)alg.hash.calc((ulong)src.Base, (ulong)src.Offset);
 
         [Op]
         public static string format(in MemoryOffset src, char delimiter)
@@ -98,7 +98,7 @@ namespace Z0
         public static Span<string> format(in MemoryOffsets offsets)
         {
             var empty = MemoryOffset.Empty;
-            var dst = sys.alloc<string>(offsets.Count);
+            var dst = memory.alloc<string>(offsets.Count);
             format(offsets,dst);
             return dst;
         }

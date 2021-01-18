@@ -83,7 +83,7 @@ namespace Z0
             var utf = Resources.utf8(src);
             using var writer = target.Writer();
             writer.Write(utf);
-            return Graphs.link(src,target);
+            return Links.link(src,target);
         }
 
         [Op]

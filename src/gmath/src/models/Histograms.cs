@@ -8,19 +8,21 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Linq;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     [ApiHost]
     public readonly struct Histograms
     {
+        const NumericKind Closure = UnsignedInts;
+
         /// <summary>
         /// Findes the number of items in an index-identified bucket
         /// </summary>
         /// <param name="src">The histogram to query</param>
         /// <param name="index">THe bucket index</param>
         /// <typeparam name="T">The point domain</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static uint count<T>(in Histogram<T> src, uint index)
             where T : unmanaged
                 => (uint)src.Counts[index-1];
@@ -31,7 +33,7 @@ namespace Z0
         /// <param name="src">The source interval</param>
         /// <param name="count">The partition count</param>
         /// <typeparam name="T">The interval domain</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Bin<T> bin<T>(in ClosedInterval<T> src, uint count)
             where T : unmanaged
                 => new Bin<T>(src, count);
@@ -41,7 +43,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The histogram to query</param>
         /// <typeparam name="T">The point domain</typeparam>
-        [Op, Closures(UnsignedInts)]
+        [Op, Closures(Closure)]
         public static Span<Bin<T>> bins<T>(in Histogram<T> src)
             where T : unmanaged
         {
@@ -56,7 +58,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The histogram to query</param>
         /// <typeparam name="T">The point domain</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<Bin<T>> bins<T>(in Histogram<T> src, Span<Bin<T>> dst)
             where T : unmanaged
         {
@@ -69,7 +71,7 @@ namespace Z0
         /// <summary>
         /// Computes the smallest/greatest bin counts
         /// </summary>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ClosedInterval<uint> bounds<T>(in Histogram<T> src)
             where T : unmanaged
                 => (src.Counts.Min(), src.Counts.Max());
@@ -80,7 +82,7 @@ namespace Z0
         /// <param name="src">The histogram to search</param>
         /// <param name="index">THe bucket index</param>
         /// <typeparam name="T">The point domain</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ClosedInterval<T> segment<T>(in Histogram<T> src, uint index)
             where T : unmanaged
                 => Intervals.closed(point(src, index-1), point(src, index));
@@ -105,7 +107,7 @@ namespace Z0
             return new Histogram<T>(src, grain, parts, counts);
         }
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref readonly Bin<T> next<T>(in Bin<T> bin)
             where T : unmanaged
         {
@@ -159,7 +161,7 @@ namespace Z0
         /// <param name="dst">The target histogram</param>
         /// <param name="undeposited">If specified, invoked whenever a bucket can't be found</param>
         /// <typeparam name="T">The point domain</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static void deposit<T>(T src, in Histogram<T> dst, Action<T> undeposited = null)
             where T : unmanaged
         {
@@ -179,17 +181,17 @@ namespace Z0
                 undeposited(src);
         }
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         internal static ref readonly T point<T>(in T src, uint ix)
             where T : unmanaged
                 => ref skip(src,ix);
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         internal static ref readonly T point<T>(in Histogram<T> src, uint ix)
             where T : unmanaged
                 => ref src.Partitions[ix];
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ulong sum<T>(ReadOnlySpan<Bin<T>> bins)
             where T : unmanaged
         {
@@ -200,7 +202,7 @@ namespace Z0
             return sum;
         }
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static T grain<T>(in ClosedInterval<T> src, ulong width = 100ul)
             where T : unmanaged
                 => generic<T>(src.Width/min(src.Width, 100ul));

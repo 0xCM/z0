@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="src">The source interval</param>
         /// <param name="x">The point to test</param>
         /// <typeparam name="T">The interval domain</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static bool contains<T>(in ClosedInterval<T> src, T x)
             where T : unmanaged
                 => between(uint64(x), left(src), right(src));

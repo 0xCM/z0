@@ -322,6 +322,16 @@ namespace alg
         }
 
         /// <summary>
+        /// Calculates a hash code for structured content and returns the content along with the calculated hash
+        /// </summary>
+        /// <param name="src">The source content</param>
+        /// <typeparam name="C">The content type</typeparam>
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        public static uint bytehash<C>(C src)
+            where C : struct
+                => calc<byte>(bytes(src));
+
+        /// <summary>
         /// Computes calc codes for unmanaged system primitives
         /// </summary>
         /// <param name="src">The primal value</param>

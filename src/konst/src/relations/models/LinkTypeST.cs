@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     using api = Graphs;
 
@@ -19,7 +18,7 @@ namespace Z0
         public Type Target {get;}
 
         [MethodImpl(Inline)]
-        internal LinkType(Type src, Type dst)
+        public LinkType(Type src, Type dst)
         {
             Source = src;
             Target = dst;
@@ -31,7 +30,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => api.format(this);
+            => Links.format(this);
 
         public uint Hashed
         {
@@ -42,7 +41,7 @@ namespace Z0
         public ulong Hash64
         {
             [MethodImpl(Inline)]
-            get => hash(Source,Target);
+            get => alg.hash.calc(Source,Target);
         }
 
         public override int GetHashCode()

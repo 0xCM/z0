@@ -9,6 +9,7 @@ namespace Z0
 
     using static Part;
 
+    [ApiType]
     public readonly struct StorageReaderCache
     {
         [MethodImpl(Inline)]

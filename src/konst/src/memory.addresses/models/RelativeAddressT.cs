@@ -11,14 +11,19 @@ namespace Z0
 
     using api = Addresses;
 
-    public readonly struct RelativeAddress<T> : INullary<RelativeAddress<T>>, ITextual, INullity
+    public readonly struct RelativeAddress<T> : ITextual, INullity
         where T : unmanaged
     {
+        public MemoryAddress Base {get;}
+
         public T Offset {get;}
 
         [MethodImpl(Inline)]
-        internal RelativeAddress(T offset)
-            => Offset = offset;
+        internal RelativeAddress(MemoryAddress @base, T offset)
+        {
+            Base = @base;
+            Offset = offset;
+        }
 
         public DataWidth Grain
         {
@@ -41,15 +46,8 @@ namespace Z0
         public uint Hash
         {
             [MethodImpl(Inline)]
-            get => z.hash(Offset);
+            get => alg.hash.calc(Offset);
         }
-
-        public RelativeAddress<T> Zero
-        {
-             [MethodImpl(Inline)]
-             get => Empty;
-        }
-
 
         [MethodImpl(Inline)]
         public string Format()

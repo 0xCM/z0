@@ -43,7 +43,6 @@ namespace Z0
         public static MutableSeq<T> mutable<T>(IEnumerable<T> src)
             => new MutableSeq<T>(src.Array());
 
-
         /// <summary>
         /// Creates a mutable sequence from a parameter array
         /// </summary>

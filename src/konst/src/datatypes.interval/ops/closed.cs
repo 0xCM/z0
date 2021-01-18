@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="min">The inclusive lower bound</param>
         /// <param name="max">The inclusive upper bound</param>
         /// <typeparam name="T">The interval domain</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ClosedInterval<T> closed<T>(T min, T max)
             where T : unmanaged
                 => new ClosedInterval<T>(min,max);

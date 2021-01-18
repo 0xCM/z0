@@ -15,13 +15,13 @@ namespace Z0
     {
         /// <summary>
         /// Assigns host-independent api member identity to a generic method; if the
-        /// source method is nongeneric, returns <see cref='ApiGenericOpIdentity.Empty' />
+        /// source method is nongeneric, returns <see cref='OpIdentityG.Empty' />
         /// </summary>
         /// <param name="src">The source method</param>
-        public static ApiGenericOpIdentity GenericIdentity(MethodInfo src)
+        public static OpIdentityG GenericIdentity(MethodInfo src)
         {
             if(!src.IsGenericMethod)
-                return ApiGenericOpIdentity.Empty;
+                return OpIdentityG.Empty;
 
             var id = ApiIdentity.name(src);
             id += IDI.PartSep;
@@ -105,7 +105,7 @@ namespace Z0
         /// Closes generic operations over the set of primal types that each operation supports
         /// </summary>
         /// <param name="generics">Metadata for generic operations</param>
-        public static IEnumerable<ClosedApiMethod> Closures(GenericApiMethod op)
+        public static IEnumerable<ClosedApiMethod> Closures(ApiMethodG op)
              => from k in op.Kinds
                 let pt = k.ToSystemType().ToOption() where pt.IsSome()
                 let id = Identity.identify(op.Method, k) where !id.IsEmpty

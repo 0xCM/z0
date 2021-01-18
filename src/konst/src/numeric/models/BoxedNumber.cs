@@ -14,11 +14,12 @@ namespace Z0
     /// </summary>
     [
         IdentityProvider(typeof(BoxedNumber)),
-        UserType(UserTypeId.BoxedNumberId),
-        ConversionProvider(typeof(BoxedNumberConverter))
+        UserType(UserTypeId.BoxedNumberId)
     ]
     public readonly struct BoxedNumber : INumeric, IEquatable<BoxedNumber>, ITypeIdentityProvider<BoxedNumber>
     {
+        public static BoxedNumberConverter Converter => default;
+
         /// <summary>
         /// In the box
         /// </summary>
@@ -30,11 +31,11 @@ namespace Z0
         public readonly NumericKind Kind;
 
         [MethodImpl(Inline)]
-        public static BoxedNumber Define(object src, NumericKind kind)
+        public static BoxedNumber define(object src, NumericKind kind)
             => new BoxedNumber(src ?? new object(), kind);
 
         [MethodImpl(Inline)]
-        public static BoxedNumber Define<T>(T src)
+        public static BoxedNumber define<T>(T src)
             where T : unmanaged
                 => new BoxedNumber(src, Numeric.kind<T>());
 
@@ -44,16 +45,16 @@ namespace Z0
         /// <param name="e">The enumeration value</param>
         /// <typeparam name="E">The enum type</typeparam>
         [MethodImpl(Inline)]
-        public static BoxedNumber From<E>(E e)
+        public static BoxedNumber from<E>(E e)
             where E : unmanaged, Enum
-                => Define(System.Convert.ChangeType(e, ClrPrimitives.ecode<E>().TypeCode()), ClrPrimitives.ecode<E>().NumericKind());
+                => define(System.Convert.ChangeType(e, ClrPrimitives.ecode<E>().TypeCode()), ClrPrimitives.ecode<E>().NumericKind());
 
-        public static BoxedNumber From(Enum e)
+        public static BoxedNumber from(Enum e)
         {
             var tc = Type.GetTypeCode(e.GetType().GetEnumUnderlyingType());
             var nk = tc.ToNumericKind();
             var box = System.Convert.ChangeType(e,tc);
-            return Define(box,nk);
+            return define(box,nk);
         }
 
         public static BoxedNumber From(object src)
@@ -61,11 +62,11 @@ namespace Z0
             if(src is null)
                 return Empty;
             else if(src is Enum e)
-                return From(e);
+                return from(e);
 
             var nk = src.GetType().NumericKind();
             if(nk != 0)
-                return Define(src,nk);
+                return define(src,nk);
 
             return Empty;
         }
@@ -96,7 +97,7 @@ namespace Z0
                 => (T)typeof(T).NumericKind().To(Boxed);
 
         public BoxedNumber Convert(NumericKind target)
-            => Define(target.To(Boxed), target);
+            => define(target.To(Boxed), target);
 
         public BoxedNumber Convert(Type target)
             => Convert(target.NumericKind());
@@ -141,43 +142,43 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator BoxedNumber(sbyte src)
-            => Define(src);
+            => define(src);
 
         [MethodImpl(Inline)]
         public static implicit operator BoxedNumber(byte src)
-            => Define(src);
+            => define(src);
 
         [MethodImpl(Inline)]
         public static implicit operator BoxedNumber(short src)
-            => Define(src);
+            => define(src);
 
         [MethodImpl(Inline)]
         public static implicit operator BoxedNumber(ushort src)
-            => Define(src);
+            => define(src);
 
         [MethodImpl(Inline)]
         public static implicit operator BoxedNumber(int src)
-            => Define(src);
+            => define(src);
 
         [MethodImpl(Inline)]
         public static implicit operator BoxedNumber(uint src)
-            => Define(src);
+            => define(src);
 
         [MethodImpl(Inline)]
         public static implicit operator BoxedNumber(long src)
-            => Define(src);
+            => define(src);
 
         [MethodImpl(Inline)]
         public static implicit operator BoxedNumber(ulong src)
-            => Define(src);
+            => define(src);
 
         [MethodImpl(Inline)]
         public static implicit operator BoxedNumber(float src)
-            => Define(src);
+            => define(src);
 
         [MethodImpl(Inline)]
         public static implicit operator BoxedNumber(double src)
-            => Define(src);
+            => define(src);
 
         [MethodImpl(Inline)]
         public static explicit operator sbyte(BoxedNumber src)

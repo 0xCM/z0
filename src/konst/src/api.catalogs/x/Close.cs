@@ -8,12 +8,12 @@ namespace Z0
     using System.Collections.Generic;
 
     partial class XTend
-    {        
+    {
         /// <summary>
         /// Closes generic operations over the set of primal types that each operation supports
         /// </summary>
         /// <param name="generics">Metadata for generic operations</param>
-        public static IEnumerable<ClosedApiMethod> Close(this GenericApiMethod op)
+        public static IEnumerable<ClosedApiMethod> Close(this ApiMethodG op)
              => Identity.Closures(op);
     }
 }

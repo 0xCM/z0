@@ -9,11 +9,8 @@ namespace Z0
 
     using static Part;
 
-    readonly struct BoxedNumberConverter : IConversionProvider<BoxedNumberConverter,BoxedNumber>, IBiconverter<BoxedNumber>
+    public readonly struct BoxedNumberConverter
     {
-        public BoxedNumberConverter Converter
-            => default;
-
         /// <summary>
         /// Pulls a number of kind parametric from a box - whose kind it matters not
         /// </summary>
@@ -30,7 +27,7 @@ namespace Z0
         /// <typeparam name="T">The source value type</typeparam>
         [MethodImpl(Inline)]
         public BoxedNumber Convert<T>(T src)
-            => BoxedNumber.Define(src, Numeric.kind<T>());
+            => BoxedNumber.define(src, Numeric.kind<T>());
 
         public Option<object> ConvertFromTarget(object incoming, Type dst)
         {
@@ -49,7 +46,7 @@ namespace Z0
         public Option<object> ConvertToTarget(object incoming)
         {
             var kind = (incoming?.GetType() ?? typeof(void)).NumericKind();
-            return kind.IsSome() ? BoxedNumber.Define(incoming, kind) : Option.none<BoxedNumber>();
+            return kind.IsSome() ? BoxedNumber.define(incoming, kind) : root.none<BoxedNumber>();
         }
     }
 }

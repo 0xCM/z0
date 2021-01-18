@@ -538,7 +538,7 @@ namespace Z0
         public static IEnumerable<BitPos<T>> BitPositions<T>(this IDomainSource random, ushort mincells, ushort maxcells)
             where T : unmanaged
         {
-            var s2 = random.Stream(Interval.closed(mincells,maxcells)).GetEnumerator();
+            var s2 = random.Stream(Interval.closed(mincells, maxcells)).GetEnumerator();
             var s3 = random.Stream<byte>(Interval.closed((byte)0, (byte)bitwidth<T>())).GetEnumerator();
             while(true && s2.MoveNext() && s3.MoveNext())
                 yield return BitPos.FromCellIndex<T>(s2.Current, s3.Current);

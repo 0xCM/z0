@@ -136,9 +136,6 @@ namespace Z0
             Wf.Disposed();
         }
 
-        CmdResult EmitPatterns()
-            => EmitRenderPatterns.run(Wf, Wf.CmdBuilder().EmitRenderPatterns(typeof(RP)));
-
         [Op]
         public static FS.FilePath[] match(FS.FolderPath root, uint max, params FS.FileExt[] ext)
         {

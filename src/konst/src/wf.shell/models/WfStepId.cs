@@ -66,7 +66,7 @@ namespace Z0
         public uint Hashed
         {
             [MethodImpl(Inline)]
-            get => z.hash(Token);
+            get => alg.hash.calc(Token);
         }
 
         public override int GetHashCode()

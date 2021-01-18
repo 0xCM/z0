@@ -11,7 +11,6 @@ namespace Z0
     using System.Text;
 
     using static Part;
-    using static NumericCast;
 
     /// <summary>
     /// Defines the primary API surface for manipulated graphs and related elements
@@ -20,18 +19,6 @@ namespace Z0
     public readonly struct Graphs
     {
         const NumericKind Closure = UnsignedInts;
-
-        /// <summary>
-        /// Defines a weighted edge from an index-identified source to an index identified target
-        /// </summary>
-        /// <param name="src">The source index</param>
-        /// <param name="dst">The target index</param>
-        /// <typeparam name="S">The vertex index type</typeparam>
-        [MethodImpl(Inline)]
-        public static Link<S,T> edge<S,T>(S src, T dst)
-            where S : unmanaged
-            where T : unmanaged
-                => (src,dst);
 
         /// <summary>
         /// Creates a graph from supplied vertices and edges and assumes the vertices are already appropriately sorted
@@ -54,127 +41,6 @@ namespace Z0
         public static Graph<V> define<V>(Span<Node<V>> vertices, IEnumerable<Link<V>> edges)
             where V : unmanaged
                 => new Graph<V>(vertices.ToArray(), edges.ToArray());
-
-        /// <summary>
-        /// Defines an edge from an index-identified source to an index identified target
-        /// </summary>
-        /// <param name="source">The source index</param>
-        /// <param name="target">The target index</param>
-        /// <typeparam name="V">The vertex index type</typeparam>
-        [MethodImpl(Inline)]
-        public static Link<V> edge<V>(V source, V target)
-            where V : unmanaged
-                => (source,target);
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Link<T> link<T>(T src, T dst)
-            => new Link<T>(src,dst);
-
-        /// <summary>
-        /// Defines a link from a source to a target
-        /// </summary>
-        /// <param name="src">The source</param>
-        /// <param name="dst">THe target</param>
-        /// <typeparam name="S">The source type</typeparam>
-        /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline)]
-        public static Link<S,T> link<S,T>(S src, T dst)
-            => new Link<S,T>(src, dst);
-
-        [MethodImpl(Inline)]
-        public static Link<S,T,K> link<S,T,K>(S src, T dst, K kind)
-            where K : unmanaged
-                => new Link<S,T,K>(src, dst, kind);
-
-        /// <summary>
-        /// Connects a source vertex to a target vertex
-        /// </summary>
-        /// <param name="src">The source vertex</param>
-        /// <param name="dst">The target vertex</param>
-        /// <typeparam name="V">The vertex index type</typeparam>
-        /// <typeparam name="T">The vertex payload type</typeparam>
-        [MethodImpl(Inline)]
-        public static Link<T> connect<T>(Node<T> src, Node<T> dst)
-            where T : unmanaged
-                => new Link<T>(src, dst);
-
-        /// <summary>
-        /// Connects a source vertex to a target vertex
-        /// </summary>
-        /// <param name="source">The source vertex</param>
-        /// <param name="target">The target vertex</param>
-        /// <typeparam name="V">The vertex index type</typeparam>
-        /// <typeparam name="T">The vertex payload type</typeparam>
-        [MethodImpl(Inline)]
-        public static Link<V> connect<V,T>(in Node<V,T> source, in Node<V,T> target)
-            where V : unmanaged
-            where T : unmanaged
-                => new Link<V>(source.Index, target.Index);
-
-        /// <summary>
-        /// Connects a source vertex to a target vertex
-        /// </summary>
-        /// <param name="source">The source vertex</param>
-        /// <param name="target">The target vertex</param>
-        /// <typeparam name="V">The vertex index type</typeparam>
-        public static Link<V> connect<V>(in Node<V> source, in Node<V> target)
-            where V : unmanaged
-                => new Link<V>(source.Content, target.Content);
-
-        /// <summary>
-        /// Creates a vertex without payload
-        /// </summary>
-        /// <param name="index">The index of the vertex that servies as a
-        /// unique identifier within the context of a graph</param>
-        /// <typeparam name="V">The index type</typeparam>
-        public static Node<V> vertex<V>(V index)
-            where V : unmanaged
-                => new Node<V>(index);
-
-        /// <summary>
-        /// Defines a vertex sequence with a specified length
-        /// </summary>
-        /// <param name="count">The number of virtices in the sequence</param>
-        /// <typeparam name="V">The index type</typeparam>
-        public static Span<Node<V>> vertices<V>(int count)
-            where V : unmanaged
-        {
-            Span<Node<V>> dst = new Node<V>[count];
-            for(var i=0; i<count; i++)
-                dst[i] = new Node<V>(force<V>(i));
-            return dst;
-        }
-
-        /// <summary>
-        /// Defines a vertex with payload for each source item
-        /// </summary>
-        /// <param name="s0">The first index assigned</param>
-        /// <param name="data">The vertex payloads</param>
-        /// <typeparam name="V">The index type</typeparam>
-        public static Span<Node<V,T>> vertices<V,T>(V s0, params T[] data)
-            where V : unmanaged
-            where T : unmanaged
-        {
-            var start = force<V,ulong>(s0);
-            Span<Node<V,T>> dst = new Node<V,T>[data.Length];
-
-            for(var i=0; i<data.Length; i++, start++)
-                dst[i] = new Node<V,T>(force<V>(start),data[i]);
-            return dst;
-        }
-
-        /// <summary>
-        /// Creates a vertex with payload
-        /// </summary>
-        /// <param name="index">The index of the vertex that servies as a
-        /// unique identifier within the context of a graph</param>
-        /// <typeparam name="V">The index type</typeparam>
-        /// <typeparam name="V">The payload type</typeparam>
-        [MethodImpl(Inline)]
-        public static Node<V,T> vertex<V,T>(V index, T data)
-            where V : unmanaged
-            where T : unmanaged
-                => new Node<V, T>(index,data);
 
         /// <summary>
         /// Finds the edges in a graph that target an identified vertex
@@ -239,17 +105,6 @@ namespace Z0
             return fmt.ToString();
         }
 
-
-        [Op, Closures(Closure)]
-        public static string format(LinkType t)
-            => Relations.RenderLink<string>().Format(t.Source.Name, t.Target.Name);
-
-        [Op, Closures(Closure)]
-        public static string format<T>(LinkType<T> src)
-            => Relations.RenderLink<string>().Format(src.Source.Name, src.Target.Name);
-
-        public static string format<S,T>(LinkType<S,T> src)
-            => Relations.RenderLink<string>().Format(src.Source.Name, src.Target.Name);
 
         [MethodImpl(Inline), Op]
         public static uint hash32(LinkType src)

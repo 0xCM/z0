@@ -55,7 +55,7 @@ namespace Z0
         public WfToken Token
         {
             [MethodImpl(Inline)]
-            get => new WfToken(hash<S,T>());
+            get => new WfToken(alg.hash.calc<S,T>());
         }
 
         [MethodImpl(Inline)]
@@ -79,7 +79,7 @@ namespace Z0
         public ulong Hash64
         {
             [MethodImpl(Inline)]
-            get => hash<S,T>();
+            get => alg.hash.calc<S,T>();
         }
 
         public override int GetHashCode()

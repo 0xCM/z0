@@ -40,7 +40,7 @@ namespace Z0
             => api.eq(this, src);
 
         public string Format()
-            => api.format(this);
+            => Links.format(this);
 
         public override string ToString()
             => Format();

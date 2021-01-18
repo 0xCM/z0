@@ -28,7 +28,6 @@ namespace Z0
         /// </summary>
         public MemoryAddress EndAddress {get;}
 
-
         [MethodImpl(Inline)]
         public MemoryRange(MemoryAddress start, MemoryAddress end)
         {

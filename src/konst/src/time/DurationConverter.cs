@@ -10,11 +10,8 @@ namespace Z0
     using static Part;
     using static z;
 
-    public readonly struct DurationConverter : IConversionProvider<Duration>, IBiconverter<Duration>
+    public readonly struct DurationConverter
     {
-        public IBiconverter<Duration> Converter
-            => this;
-
         [MethodImpl(Inline)]
         public T Convert<T>(Duration src)
             => NumericCast.force<T>(src.Ticks);

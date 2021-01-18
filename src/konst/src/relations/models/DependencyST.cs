@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static z;
+    using static memory;
 
     using api = Relations;
 
@@ -43,7 +43,7 @@ namespace Z0
         public ulong Hash64
         {
             [MethodImpl(Inline)]
-            get => hash64(Source,Target);
+            get => alg.hash.calc64(Source, Target);
         }
         public string Format()
             => api.format(this);

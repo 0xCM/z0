@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Konst;
+    using static Part;
 
     public readonly struct ApiNaturalOp : IHostedApiMethod
     {
@@ -20,7 +20,7 @@ namespace Z0
         /// <summary>
         /// The generic operation identity
         /// </summary>
-        public ApiGenericOpIdentity GenericId {get;}
+        public OpIdentityG GenericId {get;}
 
         /// <summary>
         /// The supported closures
@@ -33,7 +33,7 @@ namespace Z0
         public MethodInfo Method {get;}
 
         [MethodImpl(Inline)]
-        public ApiNaturalOp(IApiHost host, ApiGenericOpIdentity id, MethodInfo method, NaturalNumericClosure[] closures)
+        public ApiNaturalOp(IApiHost host, OpIdentityG id, MethodInfo method, NaturalNumericClosure[] closures)
         {
             Host = host;
             GenericId = id;

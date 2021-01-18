@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     using Free =System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
@@ -59,7 +58,7 @@ namespace Z0
         uint Hashed
         {
             [MethodImpl(Inline)]
-            get => (uint)hash(typeof(H));
+            get => (uint)alg.hash.calc(typeof(H));
         }
     }
 }

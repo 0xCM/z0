@@ -12,13 +12,12 @@ namespace Z0
     /// <summary>
     /// Captures a duration
     /// </summary>
-    [ConversionProvider(typeof(DurationConverter))]
     public readonly struct Duration : ITextual<Duration>, IEquatable<Duration>, IComparable<Duration>
     {
         /// <summary>
         /// The number of elapsed timer ticks that determines the period length
         /// </summary>
-        public readonly long Ticks;
+        public long Ticks {get;}
 
         [MethodImpl(Inline)]
         public static Duration init(long ticks)

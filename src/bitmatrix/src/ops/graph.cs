@@ -80,12 +80,12 @@ namespace Z0
             where T : unmanaged
         {
             var n = nat32i<N>();
-            var nodes = Graphs.vertices<T>(n);
+            var nodes = Links.nodes<T>(n);
             var edges = new List<Link<T>>();
             for(var row=0; row<n; row++)
             for(var col=0; col<n; col++)
                 if(src[row,col])
-                    edges.Add(Graphs.connect(nodes[row], nodes[col]));
+                    edges.Add(Links.connect(nodes[row], nodes[col]));
             return Graphs.define(nodes, edges);
         }
     }

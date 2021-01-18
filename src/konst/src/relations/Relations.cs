@@ -15,18 +15,6 @@ namespace Z0
     {
         const NumericKind Closure = UnsignedInts;
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Node<T> node<T>(T src)
-            => new Node<T>(src);
-
-        [MethodImpl(Inline)]
-        public static void project<S,T>(ReadOnlySpan<S> a, ReadOnlySpan<T> b, Span<Paired<S,T>> dst)
-        {
-            var count = dst.Length;
-            for(var i=0u; i<count; i++)
-                seek(dst,i) = paired(skip(a,i), skip(b,i));
-        }
-
         [MethodImpl(Inline)]
         public static Isomorphic<S,T> isomorphic<S,T>(S src, T dst)
             => default;

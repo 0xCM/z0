@@ -12,7 +12,7 @@ namespace Z0
     partial class XApi
     {
         [MethodImpl(Inline)]
-        public static OpIdentity Generalize(this ApiGenericOpIdentity src)
+        public static OpIdentity Generalize(this OpIdentityG src)
             => OpIdentityParser.parse(src.Identifier);
     }
 }

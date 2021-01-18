@@ -34,7 +34,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => api.format(this);
+            => Links.format(this);
 
         public override int GetHashCode()
             => (int)api.hash32(this);

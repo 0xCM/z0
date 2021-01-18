@@ -11,35 +11,35 @@ namespace Z0
 
     using api = Addresses;
 
-    public readonly struct RelativeAddress : IRelativeAddress<RelativeAddress>
+    public readonly struct RelativeAddress
     {
-        public readonly uint Offset {get;}
+        public MemoryAddress Base {get;}
 
-        public DataWidth Grain {get;}
+        public ulong Offset {get;}
 
         [MethodImpl(Inline)]
-        internal RelativeAddress(uint offset, DataWidth grain)
+        internal RelativeAddress(MemoryAddress @base, ulong offset)
         {
+            Base = @base;
             Offset = offset;
-            Grain = grain;
+        }
+
+        public MemoryAddress Absolute
+        {
+             [MethodImpl(Inline)]
+             get => Base + Offset;
         }
 
         public bool IsEmpty
         {
              [MethodImpl(Inline)]
-             get => Offset == 0;
+             get => Absolute == 0;
         }
 
         public bool IsNonEmpty
         {
              [MethodImpl(Inline)]
-             get => Offset != 0;
-        }
-
-        public RelativeAddress Zero
-        {
-             [MethodImpl(Inline)]
-             get => Empty;
+             get => !IsEmpty;
         }
 
         [MethodImpl(Inline)]
@@ -61,15 +61,27 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static RelativeAddress operator+(RelativeAddress x, byte y)
-            => api.relative((byte)(x.Offset + y));
+            => new RelativeAddress(x.Base, x.Offset + y);
 
         [MethodImpl(Inline)]
         public static RelativeAddress operator+(RelativeAddress x, ushort y)
-            => api.relative((ushort)(x.Offset + y));
+            => new RelativeAddress(x.Base, x.Offset + y);
 
         [MethodImpl(Inline)]
         public static RelativeAddress operator+(RelativeAddress x, uint y)
-            => api.relative(x.Offset + y);
+            => new RelativeAddress(x.Base, x.Offset + y);
+
+        [MethodImpl(Inline)]
+        public static RelativeAddress operator-(RelativeAddress x, byte y)
+            => new RelativeAddress(x.Base, x.Offset - y);
+
+        [MethodImpl(Inline)]
+        public static RelativeAddress operator-(RelativeAddress x, ushort y)
+            => new RelativeAddress(x.Base, x.Offset - y);
+
+        [MethodImpl(Inline)]
+        public static RelativeAddress operator-(RelativeAddress x, uint y)
+            => new RelativeAddress(x.Base, x.Offset - y);
 
         [MethodImpl(Inline)]
         public static bool operator==(RelativeAddress x, RelativeAddress y)
@@ -80,6 +92,6 @@ namespace Z0
             => !x.Equals(y);
 
         public static RelativeAddress Empty
-            => new RelativeAddress(0, 0);
+            => default;
     }
 }

@@ -19,7 +19,7 @@ namespace Z0
         /// <summary>
         /// The assembly identifier, constrained to the defining enumeration
         /// </summary>
-        public readonly PartId Id;
+        public PartId Id {get;}
 
         /// <summary>
         /// The uri content

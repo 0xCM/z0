@@ -40,6 +40,12 @@ namespace Z0.Adapters
         public static implicit operator S(A src)
             => src.Subject;
 
+        public MemoryAddress BaseAddress
+        {
+            [MethodImpl(Inline)]
+            get => MainModule.BaseAddress;
+        }
+
         //
         // Summary:
         //     Gets the base priority of the associated process.

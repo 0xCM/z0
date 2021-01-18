@@ -55,7 +55,7 @@ namespace Z0.Asm
 
         byte[] Immediates => new byte[]{1,2,3,4};
 
-        BoxedNumber one(Type t) => BoxedNumber.Define(1).Convert(t);
+        BoxedNumber one(Type t) => BoxedNumber.define(1).Convert(t);
 
         void check_unary_shift(MethodInfo src, W128 w, StreamWriter dst)
         {

@@ -13,10 +13,12 @@ namespace Z0
     [ApiHost]
     public readonly struct MemorySlots
     {
+        readonly MemorySegment[] Data;
+
         public static string[] format<E>(MemorySlots<E> src)
             where E : unmanaged
         {
-            var dst = sys.alloc<string>(src.Length);
+            var dst = alloc<string>(src.Length);
             format(src,dst);
             return dst;
         }
@@ -66,7 +68,6 @@ namespace Z0
             memory.sub(slot.Index, 1);
             return ref slot;
         }
-        readonly MemorySegment[] Data;
 
         [MethodImpl(Inline)]
         public MemorySlots(MemorySegment[] src)
@@ -92,7 +93,7 @@ namespace Z0
         public static implicit operator MemorySlots(MemorySegment[] src)
             => new MemorySlots(src);
 
-       [MethodImpl(Inline)]
+        [MethodImpl(Inline)]
         public static implicit operator MemorySlots(Index<MemorySegment> src)
             => new MemorySlots(src);
 

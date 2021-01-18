@@ -12,6 +12,23 @@ namespace Z0
     using static Part;
     using static memory;
 
+    [ApiType]
+    public readonly struct EnabledSynonyms
+    {
+        public static string On() => "on";
+
+        public static string One() => "1";
+
+        public static string Enabled() => "enabled";
+
+        public static string True() => "true";
+
+        public static string Yes() => "yes";
+
+        static string[] OnLabels
+            => new string[]{On(), One(), Enabled(), True(), Yes()};
+    }
+
     [ApiHost(ApiNames.BitParser,true)]
     public readonly struct BitParser
     {
@@ -25,13 +42,8 @@ namespace Z0
             => new AsciCharCode[]{LBracket, RBracket, AsciCharCode.Space, Underscore, b};
 
         [MethodImpl(Inline), Op]
-        static bool exclude(char c)
-        {
-            for(var i=0; i<Filter.Length; i++)
-                if(skip(Filter,i) == (AsciCharCode)c)
-                    return true;
-            return false;
-        }
+        static string OnLabel(byte index)
+            => memory.skip(OnLabels, index);
 
         /// <summary>
         /// Creates a bitspan from the text encoding of a binary number
@@ -39,18 +51,23 @@ namespace Z0
         /// <param name="src">The bit source</param>
         [Op]
         public static Span<bit> parse(string src)
+            => parse(src, span<bit>(src.Length));
+
+        [Op]
+        public static Span<bit> parse(string src, Span<bit> buffer)
         {
-            var data = span(src);
-            var count = data.Length;
-            var dst = span<bit>(count);
+            var chars = span(src);
+            var count = chars.Length;
             var j=0u;
             for(uint i=0u; i<count; i++)
             {
-                ref readonly var c = ref skip(data,i);
-                if(!exclude(c))
-                    seek(dst, j++) = skip(data,i) == bit.One;
+                ref readonly var c = ref skip(chars, i);
+                if(c == bit.One)
+                    seek(buffer, j++) = bit.On;
+                else if(c == bit.Zero)
+                    seek(buffer, j++) = bit.Off;
             }
-            return slice(dst,0,j);
+            return slice(buffer,0,j);
         }
     }
 }

@@ -43,7 +43,7 @@ namespace Z0
         public ulong Hash64
         {
             [MethodImpl(Inline)]
-            get => hash64(Source,Target);
+            get => alg.hash.calc64(Source,Target);
         }
 
         public string Format()

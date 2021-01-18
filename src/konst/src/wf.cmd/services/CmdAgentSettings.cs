@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
 
-    using static Konst;
-
     public enum CmdAgentKind : byte
     {
         CmdExe = 1,

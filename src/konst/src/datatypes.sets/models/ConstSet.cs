@@ -20,7 +20,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ConstSet(IEnumerable<T> src)
-            => Data = z.hashset(src);
+            => Data = root.hashset(src);
 
         [MethodImpl(Inline)]
         public ConstSet(HashSet<T> src)

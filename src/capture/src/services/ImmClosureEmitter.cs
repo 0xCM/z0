@@ -197,7 +197,7 @@ namespace Z0.Asm
             }
         }
 
-        void EmitUnrefinedGeneric(in CaptureExchange exchange, GenericApiMethod src,  Imm8R[] imm8, IAsmImmWriter dst)
+        void EmitUnrefinedGeneric(in CaptureExchange exchange, ApiMethodG src,  Imm8R[] imm8, IAsmImmWriter dst)
         {
             if(src.Method.IsVectorizedUnaryImm(ScalarRefinementKind.Unrefined))
                 EmitUnary(exchange, src, imm8, dst);
@@ -238,7 +238,7 @@ namespace Z0.Asm
             }
         }
 
-        void EmitUnary(in CaptureExchange exchange, GenericApiMethod src, Imm8R[] imm8, IAsmImmWriter dst, Type refinement = null)
+        void EmitUnary(in CaptureExchange exchange, ApiMethodG src, Imm8R[] imm8, IAsmImmWriter dst, Type refinement = null)
         {
             var gid = src.Id;
             var uri = src.Host.Uri;
@@ -254,7 +254,7 @@ namespace Z0.Asm
             }
         }
 
-        void EmitBinary(in CaptureExchange exchange, GenericApiMethod src, Imm8R[] imm8, IAsmImmWriter dst, Type refinement = null)
+        void EmitBinary(in CaptureExchange exchange, ApiMethodG src, Imm8R[] imm8, IAsmImmWriter dst, Type refinement = null)
         {
             var gid = src.Id;
             var host = src.Host.Uri;

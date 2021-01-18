@@ -13,8 +13,6 @@ namespace Z0
 
     partial struct Clr
     {
-
-
         /// <summary>
         /// Queries the source assemblies for enum types
         /// </summary>
